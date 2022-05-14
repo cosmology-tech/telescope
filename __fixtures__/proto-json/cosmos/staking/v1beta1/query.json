@@ -1,0 +1,725 @@
+{
+  "package": "cosmos.staking.v1beta1",
+  "imports": [
+    "cosmos/base/query/v1beta1/pagination.proto",
+    "gogoproto/gogo.proto",
+    "google/api/annotations.proto",
+    "cosmos/staking/v1beta1/staking.proto",
+    "cosmos_proto/cosmos.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "cosmos": {
+        "nested": {
+          "staking": {
+            "nested": {
+              "v1beta1": {
+                "options": {
+                  "go_package": "github.com/cosmos/cosmos-sdk/x/staking/types"
+                },
+                "nested": {
+                  "Query": {
+                    "methods": {
+                      "Validators": {
+                        "requestType": "QueryValidatorsRequest",
+                        "responseType": "QueryValidatorsResponse",
+                        "options": {
+                          "(google.api.http).get": "/cosmos/staking/v1beta1/validators"
+                        },
+                        "comment": "Validators queries all validators that match the given status.",
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "get": "/cosmos/staking/v1beta1/validators"
+                            }
+                          }
+                        ]
+                      },
+                      "Validator": {
+                        "requestType": "QueryValidatorRequest",
+                        "responseType": "QueryValidatorResponse",
+                        "options": {
+                          "(google.api.http).get": "/cosmos/staking/v1beta1/validators/{validator_addr}"
+                        },
+                        "comment": "Validator queries validator info for given validator address.",
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "get": "/cosmos/staking/v1beta1/validators/{validator_addr}"
+                            }
+                          }
+                        ]
+                      },
+                      "ValidatorDelegations": {
+                        "requestType": "QueryValidatorDelegationsRequest",
+                        "responseType": "QueryValidatorDelegationsResponse",
+                        "options": {
+                          "(google.api.http).get": "/cosmos/staking/v1beta1/validators/{validator_addr}/delegations"
+                        },
+                        "comment": "ValidatorDelegations queries delegate info for given validator.",
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "get": "/cosmos/staking/v1beta1/validators/{validator_addr}/delegations"
+                            }
+                          }
+                        ]
+                      },
+                      "ValidatorUnbondingDelegations": {
+                        "requestType": "QueryValidatorUnbondingDelegationsRequest",
+                        "responseType": "QueryValidatorUnbondingDelegationsResponse",
+                        "options": {
+                          "(google.api.http).get": "/cosmos/staking/v1beta1/validators/{validator_addr}/unbonding_delegations"
+                        },
+                        "comment": "ValidatorUnbondingDelegations queries unbonding delegations of a validator.",
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "get": "/cosmos/staking/v1beta1/validators/{validator_addr}/unbonding_delegations"
+                            }
+                          }
+                        ]
+                      },
+                      "Delegation": {
+                        "requestType": "QueryDelegationRequest",
+                        "responseType": "QueryDelegationResponse",
+                        "options": {
+                          "(google.api.http).get": "/cosmos/staking/v1beta1/validators/{validator_addr}/delegations/{delegator_addr}"
+                        },
+                        "comment": "Delegation queries delegate info for given validator delegator pair.",
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "get": "/cosmos/staking/v1beta1/validators/{validator_addr}/delegations/{delegator_addr}"
+                            }
+                          }
+                        ]
+                      },
+                      "UnbondingDelegation": {
+                        "requestType": "QueryUnbondingDelegationRequest",
+                        "responseType": "QueryUnbondingDelegationResponse",
+                        "options": {
+                          "(google.api.http).get": "/cosmos/staking/v1beta1/validators/{validator_addr}/delegations/{delegator_addr}/unbonding_delegation"
+                        },
+                        "comment": "UnbondingDelegation queries unbonding info for given validator delegator\npair.",
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "get": "/cosmos/staking/v1beta1/validators/{validator_addr}/delegations/{delegator_addr}/unbonding_delegation"
+                            }
+                          }
+                        ]
+                      },
+                      "DelegatorDelegations": {
+                        "requestType": "QueryDelegatorDelegationsRequest",
+                        "responseType": "QueryDelegatorDelegationsResponse",
+                        "options": {
+                          "(google.api.http).get": "/cosmos/staking/v1beta1/delegations/{delegator_addr}"
+                        },
+                        "comment": "DelegatorDelegations queries all delegations of a given delegator address.",
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "get": "/cosmos/staking/v1beta1/delegations/{delegator_addr}"
+                            }
+                          }
+                        ]
+                      },
+                      "DelegatorUnbondingDelegations": {
+                        "requestType": "QueryDelegatorUnbondingDelegationsRequest",
+                        "responseType": "QueryDelegatorUnbondingDelegationsResponse",
+                        "options": {
+                          "(google.api.http).get": "/cosmos/staking/v1beta1/delegators/{delegator_addr}/unbonding_delegations"
+                        },
+                        "comment": "DelegatorUnbondingDelegations queries all unbonding delegations of a given\ndelegator address.",
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "get": "/cosmos/staking/v1beta1/delegators/{delegator_addr}/unbonding_delegations"
+                            }
+                          }
+                        ]
+                      },
+                      "Redelegations": {
+                        "requestType": "QueryRedelegationsRequest",
+                        "responseType": "QueryRedelegationsResponse",
+                        "options": {
+                          "(google.api.http).get": "/cosmos/staking/v1beta1/delegators/{delegator_addr}/redelegations"
+                        },
+                        "comment": "Redelegations queries redelegations of given address.",
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "get": "/cosmos/staking/v1beta1/delegators/{delegator_addr}/redelegations"
+                            }
+                          }
+                        ]
+                      },
+                      "DelegatorValidators": {
+                        "requestType": "QueryDelegatorValidatorsRequest",
+                        "responseType": "QueryDelegatorValidatorsResponse",
+                        "options": {
+                          "(google.api.http).get": "/cosmos/staking/v1beta1/delegators/{delegator_addr}/validators"
+                        },
+                        "comment": "DelegatorValidators queries all validators info for given delegator\naddress.",
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "get": "/cosmos/staking/v1beta1/delegators/{delegator_addr}/validators"
+                            }
+                          }
+                        ]
+                      },
+                      "DelegatorValidator": {
+                        "requestType": "QueryDelegatorValidatorRequest",
+                        "responseType": "QueryDelegatorValidatorResponse",
+                        "options": {
+                          "(google.api.http).get": "/cosmos/staking/v1beta1/delegators/{delegator_addr}/validators/{validator_addr}"
+                        },
+                        "comment": "DelegatorValidator queries validator info for given delegator validator\npair.",
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "get": "/cosmos/staking/v1beta1/delegators/{delegator_addr}/validators/{validator_addr}"
+                            }
+                          }
+                        ]
+                      },
+                      "HistoricalInfo": {
+                        "requestType": "QueryHistoricalInfoRequest",
+                        "responseType": "QueryHistoricalInfoResponse",
+                        "options": {
+                          "(google.api.http).get": "/cosmos/staking/v1beta1/historical_info/{height}"
+                        },
+                        "comment": "HistoricalInfo queries the historical info for given height.",
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "get": "/cosmos/staking/v1beta1/historical_info/{height}"
+                            }
+                          }
+                        ]
+                      },
+                      "Pool": {
+                        "requestType": "QueryPoolRequest",
+                        "responseType": "QueryPoolResponse",
+                        "options": {
+                          "(google.api.http).get": "/cosmos/staking/v1beta1/pool"
+                        },
+                        "comment": "Pool queries the pool info.",
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "get": "/cosmos/staking/v1beta1/pool"
+                            }
+                          }
+                        ]
+                      },
+                      "Params": {
+                        "requestType": "QueryParamsRequest",
+                        "responseType": "QueryParamsResponse",
+                        "options": {
+                          "(google.api.http).get": "/cosmos/staking/v1beta1/params"
+                        },
+                        "comment": "Parameters queries the staking parameters.",
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "get": "/cosmos/staking/v1beta1/params"
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    "comment": "Query defines the gRPC querier service."
+                  },
+                  "QueryValidatorsRequest": {
+                    "fields": {
+                      "status": {
+                        "type": "string",
+                        "id": 1,
+                        "comment": "status enables to query for validators matching a given status."
+                      },
+                      "pagination": {
+                        "type": "cosmos.base.query.v1beta1.PageRequest",
+                        "id": 2,
+                        "comment": "pagination defines an optional pagination for the request."
+                      }
+                    },
+                    "comment": "QueryValidatorsRequest is request type for Query/Validators RPC method."
+                  },
+                  "QueryValidatorsResponse": {
+                    "fields": {
+                      "validators": {
+                        "rule": "repeated",
+                        "type": "Validator",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": "validators contains all the queried validators."
+                      },
+                      "pagination": {
+                        "type": "cosmos.base.query.v1beta1.PageResponse",
+                        "id": 2,
+                        "comment": "pagination defines the pagination in the response."
+                      }
+                    },
+                    "comment": "QueryValidatorsResponse is response type for the Query/Validators RPC method"
+                  },
+                  "QueryValidatorRequest": {
+                    "fields": {
+                      "validatorAddr": {
+                        "type": "string",
+                        "id": 1,
+                        "options": {
+                          "(cosmos_proto.scalar)": "cosmos.AddressString"
+                        },
+                        "comment": "validator_addr defines the validator address to query for."
+                      }
+                    },
+                    "comment": "QueryValidatorRequest is response type for the Query/Validator RPC method"
+                  },
+                  "QueryValidatorResponse": {
+                    "fields": {
+                      "validator": {
+                        "type": "Validator",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": "validator defines the the validator info."
+                      }
+                    },
+                    "comment": "QueryValidatorResponse is response type for the Query/Validator RPC method"
+                  },
+                  "QueryValidatorDelegationsRequest": {
+                    "fields": {
+                      "validatorAddr": {
+                        "type": "string",
+                        "id": 1,
+                        "options": {
+                          "(cosmos_proto.scalar)": "cosmos.AddressString"
+                        },
+                        "comment": "validator_addr defines the validator address to query for."
+                      },
+                      "pagination": {
+                        "type": "cosmos.base.query.v1beta1.PageRequest",
+                        "id": 2,
+                        "comment": "pagination defines an optional pagination for the request."
+                      }
+                    },
+                    "comment": "QueryValidatorDelegationsRequest is request type for the\nQuery/ValidatorDelegations RPC method"
+                  },
+                  "QueryValidatorDelegationsResponse": {
+                    "fields": {
+                      "delegationResponses": {
+                        "rule": "repeated",
+                        "type": "DelegationResponse",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.nullable)": false,
+                          "(gogoproto.castrepeated)": "DelegationResponses"
+                        },
+                        "comment": null
+                      },
+                      "pagination": {
+                        "type": "cosmos.base.query.v1beta1.PageResponse",
+                        "id": 2,
+                        "comment": "pagination defines the pagination in the response."
+                      }
+                    },
+                    "comment": "QueryValidatorDelegationsResponse is response type for the\nQuery/ValidatorDelegations RPC method"
+                  },
+                  "QueryValidatorUnbondingDelegationsRequest": {
+                    "fields": {
+                      "validatorAddr": {
+                        "type": "string",
+                        "id": 1,
+                        "options": {
+                          "(cosmos_proto.scalar)": "cosmos.AddressString"
+                        },
+                        "comment": "validator_addr defines the validator address to query for."
+                      },
+                      "pagination": {
+                        "type": "cosmos.base.query.v1beta1.PageRequest",
+                        "id": 2,
+                        "comment": "pagination defines an optional pagination for the request."
+                      }
+                    },
+                    "comment": "QueryValidatorUnbondingDelegationsRequest is required type for the\nQuery/ValidatorUnbondingDelegations RPC method"
+                  },
+                  "QueryValidatorUnbondingDelegationsResponse": {
+                    "fields": {
+                      "unbondingResponses": {
+                        "rule": "repeated",
+                        "type": "UnbondingDelegation",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": null
+                      },
+                      "pagination": {
+                        "type": "cosmos.base.query.v1beta1.PageResponse",
+                        "id": 2,
+                        "comment": "pagination defines the pagination in the response."
+                      }
+                    },
+                    "comment": "QueryValidatorUnbondingDelegationsResponse is response type for the\nQuery/ValidatorUnbondingDelegations RPC method."
+                  },
+                  "QueryDelegationRequest": {
+                    "options": {
+                      "(gogoproto.equal)": false,
+                      "(gogoproto.goproto_getters)": false
+                    },
+                    "fields": {
+                      "delegatorAddr": {
+                        "type": "string",
+                        "id": 1,
+                        "options": {
+                          "(cosmos_proto.scalar)": "cosmos.AddressString"
+                        },
+                        "comment": "delegator_addr defines the delegator address to query for."
+                      },
+                      "validatorAddr": {
+                        "type": "string",
+                        "id": 2,
+                        "options": {
+                          "(cosmos_proto.scalar)": "cosmos.AddressString"
+                        },
+                        "comment": "validator_addr defines the validator address to query for."
+                      }
+                    },
+                    "comment": "QueryDelegationRequest is request type for the Query/Delegation RPC method."
+                  },
+                  "QueryDelegationResponse": {
+                    "fields": {
+                      "delegationResponse": {
+                        "type": "DelegationResponse",
+                        "id": 1,
+                        "comment": "delegation_responses defines the delegation info of a delegation."
+                      }
+                    },
+                    "comment": "QueryDelegationResponse is response type for the Query/Delegation RPC method."
+                  },
+                  "QueryUnbondingDelegationRequest": {
+                    "options": {
+                      "(gogoproto.equal)": false,
+                      "(gogoproto.goproto_getters)": false
+                    },
+                    "fields": {
+                      "delegatorAddr": {
+                        "type": "string",
+                        "id": 1,
+                        "options": {
+                          "(cosmos_proto.scalar)": "cosmos.AddressString"
+                        },
+                        "comment": "delegator_addr defines the delegator address to query for."
+                      },
+                      "validatorAddr": {
+                        "type": "string",
+                        "id": 2,
+                        "options": {
+                          "(cosmos_proto.scalar)": "cosmos.AddressString"
+                        },
+                        "comment": "validator_addr defines the validator address to query for."
+                      }
+                    },
+                    "comment": "QueryUnbondingDelegationRequest is request type for the\nQuery/UnbondingDelegation RPC method."
+                  },
+                  "QueryUnbondingDelegationResponse": {
+                    "fields": {
+                      "unbond": {
+                        "type": "UnbondingDelegation",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": "unbond defines the unbonding information of a delegation."
+                      }
+                    },
+                    "comment": "QueryDelegationResponse is response type for the Query/UnbondingDelegation\nRPC method."
+                  },
+                  "QueryDelegatorDelegationsRequest": {
+                    "options": {
+                      "(gogoproto.equal)": false,
+                      "(gogoproto.goproto_getters)": false
+                    },
+                    "fields": {
+                      "delegatorAddr": {
+                        "type": "string",
+                        "id": 1,
+                        "options": {
+                          "(cosmos_proto.scalar)": "cosmos.AddressString"
+                        },
+                        "comment": "delegator_addr defines the delegator address to query for."
+                      },
+                      "pagination": {
+                        "type": "cosmos.base.query.v1beta1.PageRequest",
+                        "id": 2,
+                        "comment": "pagination defines an optional pagination for the request."
+                      }
+                    },
+                    "comment": "QueryDelegatorDelegationsRequest is request type for the\nQuery/DelegatorDelegations RPC method."
+                  },
+                  "QueryDelegatorDelegationsResponse": {
+                    "fields": {
+                      "delegationResponses": {
+                        "rule": "repeated",
+                        "type": "DelegationResponse",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": "delegation_responses defines all the delegations' info of a delegator."
+                      },
+                      "pagination": {
+                        "type": "cosmos.base.query.v1beta1.PageResponse",
+                        "id": 2,
+                        "comment": "pagination defines the pagination in the response."
+                      }
+                    },
+                    "comment": "QueryDelegatorDelegationsResponse is response type for the\nQuery/DelegatorDelegations RPC method."
+                  },
+                  "QueryDelegatorUnbondingDelegationsRequest": {
+                    "options": {
+                      "(gogoproto.equal)": false,
+                      "(gogoproto.goproto_getters)": false
+                    },
+                    "fields": {
+                      "delegatorAddr": {
+                        "type": "string",
+                        "id": 1,
+                        "options": {
+                          "(cosmos_proto.scalar)": "cosmos.AddressString"
+                        },
+                        "comment": "delegator_addr defines the delegator address to query for."
+                      },
+                      "pagination": {
+                        "type": "cosmos.base.query.v1beta1.PageRequest",
+                        "id": 2,
+                        "comment": "pagination defines an optional pagination for the request."
+                      }
+                    },
+                    "comment": "QueryDelegatorUnbondingDelegationsRequest is request type for the\nQuery/DelegatorUnbondingDelegations RPC method."
+                  },
+                  "QueryDelegatorUnbondingDelegationsResponse": {
+                    "fields": {
+                      "unbondingResponses": {
+                        "rule": "repeated",
+                        "type": "UnbondingDelegation",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": null
+                      },
+                      "pagination": {
+                        "type": "cosmos.base.query.v1beta1.PageResponse",
+                        "id": 2,
+                        "comment": "pagination defines the pagination in the response."
+                      }
+                    },
+                    "comment": "QueryUnbondingDelegatorDelegationsResponse is response type for the\nQuery/UnbondingDelegatorDelegations RPC method."
+                  },
+                  "QueryRedelegationsRequest": {
+                    "options": {
+                      "(gogoproto.equal)": false,
+                      "(gogoproto.goproto_getters)": false
+                    },
+                    "fields": {
+                      "delegatorAddr": {
+                        "type": "string",
+                        "id": 1,
+                        "options": {
+                          "(cosmos_proto.scalar)": "cosmos.AddressString"
+                        },
+                        "comment": "delegator_addr defines the delegator address to query for."
+                      },
+                      "srcValidatorAddr": {
+                        "type": "string",
+                        "id": 2,
+                        "options": {
+                          "(cosmos_proto.scalar)": "cosmos.AddressString"
+                        },
+                        "comment": "src_validator_addr defines the validator address to redelegate from."
+                      },
+                      "dstValidatorAddr": {
+                        "type": "string",
+                        "id": 3,
+                        "options": {
+                          "(cosmos_proto.scalar)": "cosmos.AddressString"
+                        },
+                        "comment": "dst_validator_addr defines the validator address to redelegate to."
+                      },
+                      "pagination": {
+                        "type": "cosmos.base.query.v1beta1.PageRequest",
+                        "id": 4,
+                        "comment": "pagination defines an optional pagination for the request."
+                      }
+                    },
+                    "comment": "QueryRedelegationsRequest is request type for the Query/Redelegations RPC\nmethod."
+                  },
+                  "QueryRedelegationsResponse": {
+                    "fields": {
+                      "redelegationResponses": {
+                        "rule": "repeated",
+                        "type": "RedelegationResponse",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": null
+                      },
+                      "pagination": {
+                        "type": "cosmos.base.query.v1beta1.PageResponse",
+                        "id": 2,
+                        "comment": "pagination defines the pagination in the response."
+                      }
+                    },
+                    "comment": "QueryRedelegationsResponse is response type for the Query/Redelegations RPC\nmethod."
+                  },
+                  "QueryDelegatorValidatorsRequest": {
+                    "options": {
+                      "(gogoproto.equal)": false,
+                      "(gogoproto.goproto_getters)": false
+                    },
+                    "fields": {
+                      "delegatorAddr": {
+                        "type": "string",
+                        "id": 1,
+                        "options": {
+                          "(cosmos_proto.scalar)": "cosmos.AddressString"
+                        },
+                        "comment": "delegator_addr defines the delegator address to query for."
+                      },
+                      "pagination": {
+                        "type": "cosmos.base.query.v1beta1.PageRequest",
+                        "id": 2,
+                        "comment": "pagination defines an optional pagination for the request."
+                      }
+                    },
+                    "comment": "QueryDelegatorValidatorsRequest is request type for the\nQuery/DelegatorValidators RPC method."
+                  },
+                  "QueryDelegatorValidatorsResponse": {
+                    "fields": {
+                      "validators": {
+                        "rule": "repeated",
+                        "type": "Validator",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": "validators defines the the validators' info of a delegator."
+                      },
+                      "pagination": {
+                        "type": "cosmos.base.query.v1beta1.PageResponse",
+                        "id": 2,
+                        "comment": "pagination defines the pagination in the response."
+                      }
+                    },
+                    "comment": "QueryDelegatorValidatorsResponse is response type for the\nQuery/DelegatorValidators RPC method."
+                  },
+                  "QueryDelegatorValidatorRequest": {
+                    "options": {
+                      "(gogoproto.equal)": false,
+                      "(gogoproto.goproto_getters)": false
+                    },
+                    "fields": {
+                      "delegatorAddr": {
+                        "type": "string",
+                        "id": 1,
+                        "options": {
+                          "(cosmos_proto.scalar)": "cosmos.AddressString"
+                        },
+                        "comment": "delegator_addr defines the delegator address to query for."
+                      },
+                      "validatorAddr": {
+                        "type": "string",
+                        "id": 2,
+                        "options": {
+                          "(cosmos_proto.scalar)": "cosmos.AddressString"
+                        },
+                        "comment": "validator_addr defines the validator address to query for."
+                      }
+                    },
+                    "comment": "QueryDelegatorValidatorRequest is request type for the\nQuery/DelegatorValidator RPC method."
+                  },
+                  "QueryDelegatorValidatorResponse": {
+                    "fields": {
+                      "validator": {
+                        "type": "Validator",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": "validator defines the the validator info."
+                      }
+                    },
+                    "comment": "QueryDelegatorValidatorResponse response type for the\nQuery/DelegatorValidator RPC method."
+                  },
+                  "QueryHistoricalInfoRequest": {
+                    "fields": {
+                      "height": {
+                        "type": "int64",
+                        "id": 1,
+                        "comment": "height defines at which height to query the historical info."
+                      }
+                    },
+                    "comment": "QueryHistoricalInfoRequest is request type for the Query/HistoricalInfo RPC\nmethod."
+                  },
+                  "QueryHistoricalInfoResponse": {
+                    "fields": {
+                      "hist": {
+                        "type": "HistoricalInfo",
+                        "id": 1,
+                        "comment": "hist defines the historical info at the given height."
+                      }
+                    },
+                    "comment": "QueryHistoricalInfoResponse is response type for the Query/HistoricalInfo RPC\nmethod."
+                  },
+                  "QueryPoolRequest": {
+                    "fields": {},
+                    "comment": "QueryPoolRequest is request type for the Query/Pool RPC method."
+                  },
+                  "QueryPoolResponse": {
+                    "fields": {
+                      "pool": {
+                        "type": "Pool",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": "pool defines the pool info."
+                      }
+                    },
+                    "comment": "QueryPoolResponse is response type for the Query/Pool RPC method."
+                  },
+                  "QueryParamsRequest": {
+                    "fields": {},
+                    "comment": "QueryParamsRequest is request type for the Query/Params RPC method."
+                  },
+                  "QueryParamsResponse": {
+                    "fields": {
+                      "params": {
+                        "type": "Params",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": "params holds all the parameters of this module."
+                      }
+                    },
+                    "comment": "QueryParamsResponse is response type for the Query/Params RPC method."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

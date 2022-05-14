@@ -1,0 +1,71 @@
+{
+  "package": "google.api.expr.v1alpha1",
+  "imports": [
+    "google/api/expr/v1alpha1/value.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "google": {
+        "nested": {
+          "api": {
+            "nested": {
+              "expr": {
+                "nested": {
+                  "v1alpha1": {
+                    "options": {
+                      "cc_enable_arenas": true,
+                      "go_package": "google.golang.org/genproto/googleapis/api/expr/v1alpha1;expr",
+                      "java_multiple_files": true,
+                      "java_outer_classname": "ExplainProto",
+                      "java_package": "com.google.api.expr.v1alpha1"
+                    },
+                    "nested": {
+                      "Explain": {
+                        "options": {
+                          "deprecated": true
+                        },
+                        "fields": {
+                          "values": {
+                            "rule": "repeated",
+                            "type": "Value",
+                            "id": 1,
+                            "comment": "All of the observed values.\n\nThe field value_index is an index in the values list.\nSeparating values from steps is needed to remove redundant values."
+                          },
+                          "exprSteps": {
+                            "rule": "repeated",
+                            "type": "ExprStep",
+                            "id": 2,
+                            "comment": "List of steps.\n\nRepeated evaluations of the same expression generate new ExprStep\ninstances. The order of such ExprStep instances matches the order of\nelements returned by Comprehension.iter_range."
+                          }
+                        },
+                        "nested": {
+                          "ExprStep": {
+                            "fields": {
+                              "id": {
+                                "type": "int64",
+                                "id": 1,
+                                "comment": "ID of corresponding Expr node."
+                              },
+                              "valueIndex": {
+                                "type": "int32",
+                                "id": 2,
+                                "comment": "Index of the value in the values list."
+                              }
+                            },
+                            "comment": "ID and value index of one step."
+                          }
+                        },
+                        "comment": "Values of intermediate expressions produced when evaluating expression.\nDeprecated, use `EvalState` instead."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

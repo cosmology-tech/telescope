@@ -1,0 +1,104 @@
+{
+  "package": "google.protobuf",
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "google": {
+        "nested": {
+          "protobuf": {
+            "options": {
+              "csharp_namespace": "Google.Protobuf.WellKnownTypes",
+              "cc_enable_arenas": true,
+              "go_package": "types",
+              "java_package": "com.google.protobuf",
+              "java_outer_classname": "StructProto",
+              "java_multiple_files": true,
+              "objc_class_prefix": "GPB"
+            },
+            "nested": {
+              "Struct": {
+                "fields": {
+                  "fields": {
+                    "keyType": "string",
+                    "type": "Value",
+                    "id": 1,
+                    "comment": "Unordered map of dynamically typed values."
+                  }
+                },
+                "comment": "`Struct` represents a structured data value, consisting of fields\nwhich map to dynamically typed values. In some languages, `Struct`\nmight be supported by a native representation. For example, in\nscripting languages like JS a struct is represented as an\nobject. The details of that representation are described together\nwith the proto support for the language.\n\nThe JSON representation for `Struct` is JSON object."
+              },
+              "Value": {
+                "oneofs": {
+                  "kind": {
+                    "oneof": [
+                      "nullValue",
+                      "numberValue",
+                      "stringValue",
+                      "boolValue",
+                      "structValue",
+                      "listValue"
+                    ],
+                    "comment": "The kind of value."
+                  }
+                },
+                "fields": {
+                  "nullValue": {
+                    "type": "NullValue",
+                    "id": 1,
+                    "comment": "Represents a null value."
+                  },
+                  "numberValue": {
+                    "type": "double",
+                    "id": 2,
+                    "comment": "Represents a double value."
+                  },
+                  "stringValue": {
+                    "type": "string",
+                    "id": 3,
+                    "comment": "Represents a string value."
+                  },
+                  "boolValue": {
+                    "type": "bool",
+                    "id": 4,
+                    "comment": "Represents a boolean value."
+                  },
+                  "structValue": {
+                    "type": "Struct",
+                    "id": 5,
+                    "comment": "Represents a structured value."
+                  },
+                  "listValue": {
+                    "type": "ListValue",
+                    "id": 6,
+                    "comment": "Represents a repeated `Value`."
+                  }
+                },
+                "comment": "`Value` represents a dynamically typed value which can be either\nnull, a number, a string, a boolean, a recursive struct value, or a\nlist of values. A producer of value is expected to set one of that\nvariants, absence of any variant indicates an error.\n\nThe JSON representation for `Value` is JSON value."
+              },
+              "NullValue": {
+                "values": {
+                  "NULL_VALUE": 0
+                },
+                "comment": "`NullValue` is a singleton enumeration to represent the null value for the\n`Value` type union.\n\nThe JSON representation for `NullValue` is JSON `null`.",
+                "comments": {
+                  "NULL_VALUE": "Null value."
+                }
+              },
+              "ListValue": {
+                "fields": {
+                  "values": {
+                    "rule": "repeated",
+                    "type": "Value",
+                    "id": 1,
+                    "comment": "Repeated field of dynamically typed values."
+                  }
+                },
+                "comment": "`ListValue` is a wrapper around a repeated field of values.\n\nThe JSON representation for `ListValue` is JSON array."
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

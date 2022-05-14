@@ -1,0 +1,56 @@
+{
+  "package": "google.api",
+  "imports": [
+    "google/protobuf/descriptor.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "google": {
+        "nested": {
+          "api": {
+            "options": {
+              "go_package": "google.golang.org/genproto/googleapis/api/annotations;annotations",
+              "java_multiple_files": true,
+              "java_outer_classname": "FieldBehaviorProto",
+              "java_package": "com.google.api",
+              "objc_class_prefix": "GAPI"
+            },
+            "nested": {
+              "fieldBehavior": {
+                "rule": "repeated",
+                "type": "google.api.FieldBehavior",
+                "id": 1052,
+                "extend": "google.protobuf.FieldOptions",
+                "comment": "A designation of a specific field behavior (required, output only, etc.)\nin protobuf messages.\n\nExamples:\n\nstring name = 1 [(google.api.field_behavior) = REQUIRED];\nState state = 1 [(google.api.field_behavior) = OUTPUT_ONLY];\ngoogle.protobuf.Duration ttl = 1\n[(google.api.field_behavior) = INPUT_ONLY];\ngoogle.protobuf.Timestamp expire_time = 1\n[(google.api.field_behavior) = OUTPUT_ONLY,\n(google.api.field_behavior) = IMMUTABLE];"
+              },
+              "FieldBehavior": {
+                "values": {
+                  "FIELD_BEHAVIOR_UNSPECIFIED": 0,
+                  "OPTIONAL": 1,
+                  "REQUIRED": 2,
+                  "OUTPUT_ONLY": 3,
+                  "INPUT_ONLY": 4,
+                  "IMMUTABLE": 5,
+                  "UNORDERED_LIST": 6,
+                  "NON_EMPTY_DEFAULT": 7
+                },
+                "comment": "An indicator of the behavior of a given field (for example, that a field\nis required in requests, or given as output but ignored as input).\nThis **does not** change the behavior in protocol buffers itself; it only\ndenotes the behavior and may affect how API tooling handles the field.\n\nNote: This enum **may** receive new values in the future.",
+                "comments": {
+                  "FIELD_BEHAVIOR_UNSPECIFIED": "Conventional default for enums. Do not use this.",
+                  "OPTIONAL": "Specifically denotes a field as optional.\nWhile all fields in protocol buffers are optional, this may be specified\nfor emphasis if appropriate.",
+                  "REQUIRED": "Denotes a field as required.\nThis indicates that the field **must** be provided as part of the request,\nand failure to do so will cause an error (usually `INVALID_ARGUMENT`).",
+                  "OUTPUT_ONLY": "Denotes a field as output only.\nThis indicates that the field is provided in responses, but including the\nfield in a request does nothing (the server *must* ignore it and\n*must not* throw an error as a result of the field's presence).",
+                  "INPUT_ONLY": "Denotes a field as input only.\nThis indicates that the field is provided in requests, and the\ncorresponding field is not included in output.",
+                  "IMMUTABLE": "Denotes a field as immutable.\nThis indicates that the field may be set once in a request to create a\nresource, but may not be changed thereafter.",
+                  "UNORDERED_LIST": "Denotes that a (repeated) field is an unordered list.\nThis indicates that the service may provide the elements of the list\nin any arbitrary  order, rather than the order the user originally\nprovided. Additionally, the list's order may or may not be stable.",
+                  "NON_EMPTY_DEFAULT": "Denotes that this field returns a non-empty default value if not set.\nThis indicates that if the user provides the empty value in a request,\na non-empty value will be returned. The user will not be aware of what\nnon-empty value to expect."
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

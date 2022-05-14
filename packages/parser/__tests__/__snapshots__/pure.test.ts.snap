@@ -1,0 +1,213 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`pure proto 1`] = `
+Object {
+  "importNames": Object {},
+  "imports": undefined,
+  "package": "cosmology.finance",
+  "parsedExports": Object {
+    "ExistenceProof": true,
+    "LeafOp": true,
+    "NonExistenceProof": true,
+  },
+  "parsedImports": Object {},
+  "root": Object {
+    "nested": Object {
+      "cosmology": Object {
+        "nested": Object {
+          "finance": Object {
+            "nested": Object {
+              "ExistenceProof": Object {
+                "comment": null,
+                "fields": Object {
+                  "key": Object {
+                    "comment": null,
+                    "id": 1,
+                    "isScalar": true,
+                    "parsedType": Object {
+                      "name": "bytes",
+                      "type": "native",
+                    },
+                    "type": "bytes",
+                    "typeNum": 14,
+                  },
+                  "leaf": Object {
+                    "comment": null,
+                    "id": 3,
+                    "parsedType": Object {
+                      "name": "LeafOp",
+                      "type": "Type",
+                    },
+                    "scope": Array [
+                      "cosmology.finance",
+                    ],
+                    "type": "LeafOp",
+                  },
+                  "path": Object {
+                    "comment": null,
+                    "id": 4,
+                    "parsedType": Object {
+                      "name": "LeafOp",
+                      "type": "Type",
+                    },
+                    "rule": "repeated",
+                    "scope": Array [
+                      "cosmology.finance",
+                    ],
+                    "type": "LeafOp",
+                  },
+                  "value": Object {
+                    "comment": null,
+                    "id": 2,
+                    "isScalar": true,
+                    "parsedType": Object {
+                      "name": "bytes",
+                      "type": "native",
+                    },
+                    "type": "bytes",
+                    "typeNum": 14,
+                  },
+                },
+                "keyTypes": Array [],
+                "name": "ExistenceProof",
+                "nested": null,
+                "oneofs": undefined,
+                "options": undefined,
+                "type": "Type",
+              },
+              "FancyEnumType": Object {
+                "comment": null,
+                "comments": Object {
+                  "BITCOIN": null,
+                  "KECCAK": null,
+                  "NO_HASH": null,
+                  "RIPEMD160": null,
+                  "SHA256": null,
+                  "SHA512": null,
+                },
+                "name": "FancyEnumType",
+                "type": "Enum",
+                "values": Object {
+                  "BITCOIN": 5,
+                  "KECCAK": 3,
+                  "NO_HASH": 0,
+                  "RIPEMD160": 4,
+                  "SHA256": 1,
+                  "SHA512": 2,
+                },
+              },
+              "LeafOp": Object {
+                "comment": null,
+                "fields": Object {
+                  "hash": Object {
+                    "comment": null,
+                    "id": 1,
+                    "parsedType": Object {
+                      "name": "FancyEnumType",
+                      "type": "Enum",
+                    },
+                    "scope": Array [
+                      "cosmology.finance",
+                    ],
+                    "type": "FancyEnumType",
+                  },
+                  "prefix": Object {
+                    "comment": null,
+                    "id": 5,
+                    "isScalar": true,
+                    "parsedType": Object {
+                      "name": "bytes",
+                      "type": "native",
+                    },
+                    "type": "bytes",
+                    "typeNum": 14,
+                  },
+                  "prehashKey": Object {
+                    "comment": null,
+                    "id": 2,
+                    "parsedType": Object {
+                      "name": "FancyEnumType",
+                      "type": "Enum",
+                    },
+                    "scope": Array [
+                      "cosmology.finance",
+                    ],
+                    "type": "FancyEnumType",
+                  },
+                  "prehashValue": Object {
+                    "comment": null,
+                    "id": 3,
+                    "parsedType": Object {
+                      "name": "FancyEnumType",
+                      "type": "Enum",
+                    },
+                    "scope": Array [
+                      "cosmology.finance",
+                    ],
+                    "type": "FancyEnumType",
+                  },
+                },
+                "keyTypes": Array [],
+                "name": "LeafOp",
+                "nested": null,
+                "oneofs": undefined,
+                "options": undefined,
+                "type": "Type",
+              },
+              "NonExistenceProof": Object {
+                "comment": null,
+                "fields": Object {
+                  "key": Object {
+                    "comment": null,
+                    "id": 1,
+                    "isScalar": true,
+                    "parsedType": Object {
+                      "name": "bytes",
+                      "type": "native",
+                    },
+                    "type": "bytes",
+                    "typeNum": 14,
+                  },
+                  "left": Object {
+                    "comment": null,
+                    "id": 2,
+                    "parsedType": Object {
+                      "name": "ExistenceProof",
+                      "type": "Type",
+                    },
+                    "scope": Array [
+                      "cosmology.finance",
+                    ],
+                    "type": "ExistenceProof",
+                  },
+                  "right": Object {
+                    "comment": null,
+                    "id": 3,
+                    "parsedType": Object {
+                      "name": "ExistenceProof",
+                      "type": "Type",
+                    },
+                    "scope": Array [
+                      "cosmology.finance",
+                    ],
+                    "type": "ExistenceProof",
+                  },
+                },
+                "keyTypes": Array [],
+                "name": "NonExistenceProof",
+                "nested": null,
+                "oneofs": undefined,
+                "options": undefined,
+                "type": "Type",
+              },
+            },
+            "type": "Namespace",
+          },
+        },
+        "type": "Namespace",
+      },
+    },
+    "type": "Root",
+  },
+}
+`;

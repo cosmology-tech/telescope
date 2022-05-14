@@ -1,0 +1,47 @@
+{
+  "package": "cosmos.auth.v1beta1",
+  "imports": [
+    "google/protobuf/any.proto",
+    "gogoproto/gogo.proto",
+    "cosmos/auth/v1beta1/auth.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "cosmos": {
+        "nested": {
+          "auth": {
+            "nested": {
+              "v1beta1": {
+                "options": {
+                  "go_package": "github.com/cosmos/cosmos-sdk/x/auth/types"
+                },
+                "nested": {
+                  "GenesisState": {
+                    "fields": {
+                      "params": {
+                        "type": "Params",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": "params defines all the paramaters of the module."
+                      },
+                      "accounts": {
+                        "rule": "repeated",
+                        "type": "google.protobuf.Any",
+                        "id": 2,
+                        "comment": "accounts are the accounts present at genesis."
+                      }
+                    },
+                    "comment": "GenesisState defines the auth module's genesis state."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

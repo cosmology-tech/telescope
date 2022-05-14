@@ -1,0 +1,58 @@
+{
+  "package": "google.api",
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "google": {
+        "nested": {
+          "api": {
+            "options": {
+              "go_package": "google.golang.org/genproto/googleapis/api/serviceconfig;serviceconfig",
+              "java_multiple_files": true,
+              "java_outer_classname": "LoggingProto",
+              "java_package": "com.google.api",
+              "objc_class_prefix": "GAPI"
+            },
+            "nested": {
+              "Logging": {
+                "fields": {
+                  "producerDestinations": {
+                    "rule": "repeated",
+                    "type": "LoggingDestination",
+                    "id": 1,
+                    "comment": "Logging configurations for sending logs to the producer project.\nThere can be multiple producer destinations, each one must have a\ndifferent monitored resource type. A log can be used in at most\none producer destination."
+                  },
+                  "consumerDestinations": {
+                    "rule": "repeated",
+                    "type": "LoggingDestination",
+                    "id": 2,
+                    "comment": "Logging configurations for sending logs to the consumer project.\nThere can be multiple consumer destinations, each one must have a\ndifferent monitored resource type. A log can be used in at most\none consumer destination."
+                  }
+                },
+                "nested": {
+                  "LoggingDestination": {
+                    "fields": {
+                      "monitoredResource": {
+                        "type": "string",
+                        "id": 3,
+                        "comment": "The monitored resource type. The type must be defined in the\n[Service.monitored_resources][google.api.Service.monitored_resources] section."
+                      },
+                      "logs": {
+                        "rule": "repeated",
+                        "type": "string",
+                        "id": 1,
+                        "comment": "Names of the logs to be sent to this destination. Each name must\nbe defined in the [Service.logs][google.api.Service.logs] section. If the log name is\nnot a domain scoped name, it will be automatically prefixed with\nthe service name followed by \"/\"."
+                      }
+                    },
+                    "comment": "Configuration of a specific logging destination (the producer project\nor the consumer project)."
+                  }
+                },
+                "comment": "Logging configuration of the service.\n\nThe following example shows how to configure logs to be sent to the\nproducer and consumer projects. In the example, the `activity_history`\nlog is sent to both the producer and consumer projects, whereas the\n`purchase_history` log is only sent to the producer project.\n\nmonitored_resources:\n- type: library.googleapis.com/branch\nlabels:\n- key: /city\ndescription: The city where the library branch is located in.\n- key: /name\ndescription: The name of the branch.\nlogs:\n- name: activity_history\nlabels:\n- key: /customer_id\n- name: purchase_history\nlogging:\nproducer_destinations:\n- monitored_resource: library.googleapis.com/branch\nlogs:\n- activity_history\n- purchase_history\nconsumer_destinations:\n- monitored_resource: library.googleapis.com/branch\nlogs:\n- activity_history"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

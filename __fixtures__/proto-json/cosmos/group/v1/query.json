@@ -1,0 +1,607 @@
+{
+  "package": "cosmos.group.v1",
+  "imports": [
+    "gogoproto/gogo.proto",
+    "google/api/annotations.proto",
+    "cosmos/group/v1/types.proto",
+    "cosmos/base/query/v1beta1/pagination.proto",
+    "cosmos_proto/cosmos.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "cosmos": {
+        "nested": {
+          "group": {
+            "nested": {
+              "v1": {
+                "options": {
+                  "go_package": "github.com/cosmos/cosmos-sdk/x/group"
+                },
+                "nested": {
+                  "Query": {
+                    "methods": {
+                      "GroupInfo": {
+                        "requestType": "QueryGroupInfoRequest",
+                        "responseType": "QueryGroupInfoResponse",
+                        "options": {
+                          "(google.api.http).get": "/cosmos/group/v1/group_info/{group_id}"
+                        },
+                        "comment": "GroupInfo queries group info based on group id.",
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "get": "/cosmos/group/v1/group_info/{group_id}"
+                            }
+                          }
+                        ]
+                      },
+                      "GroupPolicyInfo": {
+                        "requestType": "QueryGroupPolicyInfoRequest",
+                        "responseType": "QueryGroupPolicyInfoResponse",
+                        "options": {
+                          "(google.api.http).get": "/cosmos/group/v1/group_policy_info/{address}"
+                        },
+                        "comment": "GroupPolicyInfo queries group policy info based on account address of group policy.",
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "get": "/cosmos/group/v1/group_policy_info/{address}"
+                            }
+                          }
+                        ]
+                      },
+                      "GroupMembers": {
+                        "requestType": "QueryGroupMembersRequest",
+                        "responseType": "QueryGroupMembersResponse",
+                        "options": {
+                          "(google.api.http).get": "/cosmos/group/v1/group_members/{group_id}"
+                        },
+                        "comment": "GroupMembers queries members of a group",
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "get": "/cosmos/group/v1/group_members/{group_id}"
+                            }
+                          }
+                        ]
+                      },
+                      "GroupsByAdmin": {
+                        "requestType": "QueryGroupsByAdminRequest",
+                        "responseType": "QueryGroupsByAdminResponse",
+                        "options": {
+                          "(google.api.http).get": "/cosmos/group/v1/groups_by_admin/{admin}"
+                        },
+                        "comment": "GroupsByAdmin queries groups by admin address.",
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "get": "/cosmos/group/v1/groups_by_admin/{admin}"
+                            }
+                          }
+                        ]
+                      },
+                      "GroupPoliciesByGroup": {
+                        "requestType": "QueryGroupPoliciesByGroupRequest",
+                        "responseType": "QueryGroupPoliciesByGroupResponse",
+                        "options": {
+                          "(google.api.http).get": "/cosmos/group/v1/group_policies_by_group/{group_id}"
+                        },
+                        "comment": "GroupPoliciesByGroup queries group policies by group id.",
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "get": "/cosmos/group/v1/group_policies_by_group/{group_id}"
+                            }
+                          }
+                        ]
+                      },
+                      "GroupPoliciesByAdmin": {
+                        "requestType": "QueryGroupPoliciesByAdminRequest",
+                        "responseType": "QueryGroupPoliciesByAdminResponse",
+                        "options": {
+                          "(google.api.http).get": "/cosmos/group/v1/group_policies_by_admin/{admin}"
+                        },
+                        "comment": "GroupsByAdmin queries group policies by admin address.",
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "get": "/cosmos/group/v1/group_policies_by_admin/{admin}"
+                            }
+                          }
+                        ]
+                      },
+                      "Proposal": {
+                        "requestType": "QueryProposalRequest",
+                        "responseType": "QueryProposalResponse",
+                        "options": {
+                          "(google.api.http).get": "/cosmos/group/v1/proposal/{proposal_id}"
+                        },
+                        "comment": "Proposal queries a proposal based on proposal id.",
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "get": "/cosmos/group/v1/proposal/{proposal_id}"
+                            }
+                          }
+                        ]
+                      },
+                      "ProposalsByGroupPolicy": {
+                        "requestType": "QueryProposalsByGroupPolicyRequest",
+                        "responseType": "QueryProposalsByGroupPolicyResponse",
+                        "options": {
+                          "(google.api.http).get": "/cosmos/group/v1/proposals_by_group_policy/{address}"
+                        },
+                        "comment": "ProposalsByGroupPolicy queries proposals based on account address of group policy.",
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "get": "/cosmos/group/v1/proposals_by_group_policy/{address}"
+                            }
+                          }
+                        ]
+                      },
+                      "VoteByProposalVoter": {
+                        "requestType": "QueryVoteByProposalVoterRequest",
+                        "responseType": "QueryVoteByProposalVoterResponse",
+                        "options": {
+                          "(google.api.http).get": "/cosmos/group/v1/vote_by_proposal_voter/{proposal_id}/{voter}"
+                        },
+                        "comment": "VoteByProposalVoter queries a vote by proposal id and voter.",
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "get": "/cosmos/group/v1/vote_by_proposal_voter/{proposal_id}/{voter}"
+                            }
+                          }
+                        ]
+                      },
+                      "VotesByProposal": {
+                        "requestType": "QueryVotesByProposalRequest",
+                        "responseType": "QueryVotesByProposalResponse",
+                        "options": {
+                          "(google.api.http).get": "/cosmos/group/v1/votes_by_proposal/{proposal_id}"
+                        },
+                        "comment": "VotesByProposal queries a vote by proposal.",
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "get": "/cosmos/group/v1/votes_by_proposal/{proposal_id}"
+                            }
+                          }
+                        ]
+                      },
+                      "VotesByVoter": {
+                        "requestType": "QueryVotesByVoterRequest",
+                        "responseType": "QueryVotesByVoterResponse",
+                        "options": {
+                          "(google.api.http).get": "/cosmos/group/v1/votes_by_voter/{voter}"
+                        },
+                        "comment": "VotesByVoter queries a vote by voter.",
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "get": "/cosmos/group/v1/votes_by_voter/{voter}"
+                            }
+                          }
+                        ]
+                      },
+                      "GroupsByMember": {
+                        "requestType": "QueryGroupsByMemberRequest",
+                        "responseType": "QueryGroupsByMemberResponse",
+                        "options": {
+                          "(google.api.http).get": "/cosmos/group/v1/groups_by_member/{address}"
+                        },
+                        "comment": "GroupsByMember queries groups by member address.",
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "get": "/cosmos/group/v1/groups_by_member/{address}"
+                            }
+                          }
+                        ]
+                      },
+                      "TallyResult": {
+                        "requestType": "QueryTallyResultRequest",
+                        "responseType": "QueryTallyResultResponse",
+                        "options": {
+                          "(google.api.http).get": "/cosmos/group/v1/proposals/{proposal_id}/tally"
+                        },
+                        "comment": "TallyResult queries the tally of a proposal votes.",
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "get": "/cosmos/group/v1/proposals/{proposal_id}/tally"
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    "comment": "Query is the cosmos.group.v1 Query service."
+                  },
+                  "QueryGroupInfoRequest": {
+                    "fields": {
+                      "groupId": {
+                        "type": "uint64",
+                        "id": 1,
+                        "comment": "group_id is the unique ID of the group."
+                      }
+                    },
+                    "comment": "QueryGroupInfoRequest is the Query/GroupInfo request type."
+                  },
+                  "QueryGroupInfoResponse": {
+                    "fields": {
+                      "info": {
+                        "type": "GroupInfo",
+                        "id": 1,
+                        "comment": "info is the GroupInfo for the group."
+                      }
+                    },
+                    "comment": "QueryGroupInfoResponse is the Query/GroupInfo response type."
+                  },
+                  "QueryGroupPolicyInfoRequest": {
+                    "fields": {
+                      "address": {
+                        "type": "string",
+                        "id": 1,
+                        "options": {
+                          "(cosmos_proto.scalar)": "cosmos.AddressString"
+                        },
+                        "comment": "address is the account address of the group policy."
+                      }
+                    },
+                    "comment": "QueryGroupPolicyInfoRequest is the Query/GroupPolicyInfo request type."
+                  },
+                  "QueryGroupPolicyInfoResponse": {
+                    "fields": {
+                      "info": {
+                        "type": "GroupPolicyInfo",
+                        "id": 1,
+                        "comment": "info is the GroupPolicyInfo for the group policy."
+                      }
+                    },
+                    "comment": "QueryGroupPolicyInfoResponse is the Query/GroupPolicyInfo response type."
+                  },
+                  "QueryGroupMembersRequest": {
+                    "fields": {
+                      "groupId": {
+                        "type": "uint64",
+                        "id": 1,
+                        "comment": "group_id is the unique ID of the group."
+                      },
+                      "pagination": {
+                        "type": "cosmos.base.query.v1beta1.PageRequest",
+                        "id": 2,
+                        "comment": "pagination defines an optional pagination for the request."
+                      }
+                    },
+                    "comment": "QueryGroupMembersRequest is the Query/GroupMembers request type."
+                  },
+                  "QueryGroupMembersResponse": {
+                    "fields": {
+                      "members": {
+                        "rule": "repeated",
+                        "type": "GroupMember",
+                        "id": 1,
+                        "comment": "members are the members of the group with given group_id."
+                      },
+                      "pagination": {
+                        "type": "cosmos.base.query.v1beta1.PageResponse",
+                        "id": 2,
+                        "comment": "pagination defines the pagination in the response."
+                      }
+                    },
+                    "comment": "QueryGroupMembersResponse is the Query/GroupMembersResponse response type."
+                  },
+                  "QueryGroupsByAdminRequest": {
+                    "fields": {
+                      "admin": {
+                        "type": "string",
+                        "id": 1,
+                        "options": {
+                          "(cosmos_proto.scalar)": "cosmos.AddressString"
+                        },
+                        "comment": "admin is the account address of a group's admin."
+                      },
+                      "pagination": {
+                        "type": "cosmos.base.query.v1beta1.PageRequest",
+                        "id": 2,
+                        "comment": "pagination defines an optional pagination for the request."
+                      }
+                    },
+                    "comment": "QueryGroupsByAdminRequest is the Query/GroupsByAdmin request type."
+                  },
+                  "QueryGroupsByAdminResponse": {
+                    "fields": {
+                      "groups": {
+                        "rule": "repeated",
+                        "type": "GroupInfo",
+                        "id": 1,
+                        "comment": "groups are the groups info with the provided admin."
+                      },
+                      "pagination": {
+                        "type": "cosmos.base.query.v1beta1.PageResponse",
+                        "id": 2,
+                        "comment": "pagination defines the pagination in the response."
+                      }
+                    },
+                    "comment": "QueryGroupsByAdminResponse is the Query/GroupsByAdminResponse response type."
+                  },
+                  "QueryGroupPoliciesByGroupRequest": {
+                    "fields": {
+                      "groupId": {
+                        "type": "uint64",
+                        "id": 1,
+                        "comment": "group_id is the unique ID of the group policy's group."
+                      },
+                      "pagination": {
+                        "type": "cosmos.base.query.v1beta1.PageRequest",
+                        "id": 2,
+                        "comment": "pagination defines an optional pagination for the request."
+                      }
+                    },
+                    "comment": "QueryGroupPoliciesByGroupRequest is the Query/GroupPoliciesByGroup request type."
+                  },
+                  "QueryGroupPoliciesByGroupResponse": {
+                    "fields": {
+                      "groupPolicies": {
+                        "rule": "repeated",
+                        "type": "GroupPolicyInfo",
+                        "id": 1,
+                        "comment": "group_policies are the group policies info associated with the provided group."
+                      },
+                      "pagination": {
+                        "type": "cosmos.base.query.v1beta1.PageResponse",
+                        "id": 2,
+                        "comment": "pagination defines the pagination in the response."
+                      }
+                    },
+                    "comment": "QueryGroupPoliciesByGroupResponse is the Query/GroupPoliciesByGroup response type."
+                  },
+                  "QueryGroupPoliciesByAdminRequest": {
+                    "fields": {
+                      "admin": {
+                        "type": "string",
+                        "id": 1,
+                        "options": {
+                          "(cosmos_proto.scalar)": "cosmos.AddressString"
+                        },
+                        "comment": "admin is the admin address of the group policy."
+                      },
+                      "pagination": {
+                        "type": "cosmos.base.query.v1beta1.PageRequest",
+                        "id": 2,
+                        "comment": "pagination defines an optional pagination for the request."
+                      }
+                    },
+                    "comment": "QueryGroupPoliciesByAdminRequest is the Query/GroupPoliciesByAdmin request type."
+                  },
+                  "QueryGroupPoliciesByAdminResponse": {
+                    "fields": {
+                      "groupPolicies": {
+                        "rule": "repeated",
+                        "type": "GroupPolicyInfo",
+                        "id": 1,
+                        "comment": "group_policies are the group policies info with provided admin."
+                      },
+                      "pagination": {
+                        "type": "cosmos.base.query.v1beta1.PageResponse",
+                        "id": 2,
+                        "comment": "pagination defines the pagination in the response."
+                      }
+                    },
+                    "comment": "QueryGroupPoliciesByAdminResponse is the Query/GroupPoliciesByAdmin response type."
+                  },
+                  "QueryProposalRequest": {
+                    "fields": {
+                      "proposalId": {
+                        "type": "uint64",
+                        "id": 1,
+                        "comment": "proposal_id is the unique ID of a proposal."
+                      }
+                    },
+                    "comment": "QueryProposalRequest is the Query/Proposal request type."
+                  },
+                  "QueryProposalResponse": {
+                    "fields": {
+                      "proposal": {
+                        "type": "Proposal",
+                        "id": 1,
+                        "comment": "proposal is the proposal info."
+                      }
+                    },
+                    "comment": "QueryProposalResponse is the Query/Proposal response type."
+                  },
+                  "QueryProposalsByGroupPolicyRequest": {
+                    "fields": {
+                      "address": {
+                        "type": "string",
+                        "id": 1,
+                        "options": {
+                          "(cosmos_proto.scalar)": "cosmos.AddressString"
+                        },
+                        "comment": "address is the account address of the group policy related to proposals."
+                      },
+                      "pagination": {
+                        "type": "cosmos.base.query.v1beta1.PageRequest",
+                        "id": 2,
+                        "comment": "pagination defines an optional pagination for the request."
+                      }
+                    },
+                    "comment": "QueryProposalsByGroupPolicyRequest is the Query/ProposalByGroupPolicy request type."
+                  },
+                  "QueryProposalsByGroupPolicyResponse": {
+                    "fields": {
+                      "proposals": {
+                        "rule": "repeated",
+                        "type": "Proposal",
+                        "id": 1,
+                        "comment": "proposals are the proposals with given group policy."
+                      },
+                      "pagination": {
+                        "type": "cosmos.base.query.v1beta1.PageResponse",
+                        "id": 2,
+                        "comment": "pagination defines the pagination in the response."
+                      }
+                    },
+                    "comment": "QueryProposalsByGroupPolicyResponse is the Query/ProposalByGroupPolicy response type."
+                  },
+                  "QueryVoteByProposalVoterRequest": {
+                    "fields": {
+                      "proposalId": {
+                        "type": "uint64",
+                        "id": 1,
+                        "comment": "proposal_id is the unique ID of a proposal."
+                      },
+                      "voter": {
+                        "type": "string",
+                        "id": 2,
+                        "options": {
+                          "(cosmos_proto.scalar)": "cosmos.AddressString"
+                        },
+                        "comment": "voter is a proposal voter account address."
+                      }
+                    },
+                    "comment": "QueryVoteByProposalVoterRequest is the Query/VoteByProposalVoter request type."
+                  },
+                  "QueryVoteByProposalVoterResponse": {
+                    "fields": {
+                      "vote": {
+                        "type": "Vote",
+                        "id": 1,
+                        "comment": "vote is the vote with given proposal_id and voter."
+                      }
+                    },
+                    "comment": "QueryVoteByProposalVoterResponse is the Query/VoteByProposalVoter response type."
+                  },
+                  "QueryVotesByProposalRequest": {
+                    "fields": {
+                      "proposalId": {
+                        "type": "uint64",
+                        "id": 1,
+                        "comment": "proposal_id is the unique ID of a proposal."
+                      },
+                      "pagination": {
+                        "type": "cosmos.base.query.v1beta1.PageRequest",
+                        "id": 2,
+                        "comment": "pagination defines an optional pagination for the request."
+                      }
+                    },
+                    "comment": "QueryVotesByProposalRequest is the Query/VotesByProposal request type."
+                  },
+                  "QueryVotesByProposalResponse": {
+                    "fields": {
+                      "votes": {
+                        "rule": "repeated",
+                        "type": "Vote",
+                        "id": 1,
+                        "comment": "votes are the list of votes for given proposal_id."
+                      },
+                      "pagination": {
+                        "type": "cosmos.base.query.v1beta1.PageResponse",
+                        "id": 2,
+                        "comment": "pagination defines the pagination in the response."
+                      }
+                    },
+                    "comment": "QueryVotesByProposalResponse is the Query/VotesByProposal response type."
+                  },
+                  "QueryVotesByVoterRequest": {
+                    "fields": {
+                      "voter": {
+                        "type": "string",
+                        "id": 1,
+                        "options": {
+                          "(cosmos_proto.scalar)": "cosmos.AddressString"
+                        },
+                        "comment": "voter is a proposal voter account address."
+                      },
+                      "pagination": {
+                        "type": "cosmos.base.query.v1beta1.PageRequest",
+                        "id": 2,
+                        "comment": "pagination defines an optional pagination for the request."
+                      }
+                    },
+                    "comment": "QueryVotesByVoterRequest is the Query/VotesByVoter request type."
+                  },
+                  "QueryVotesByVoterResponse": {
+                    "fields": {
+                      "votes": {
+                        "rule": "repeated",
+                        "type": "Vote",
+                        "id": 1,
+                        "comment": "votes are the list of votes by given voter."
+                      },
+                      "pagination": {
+                        "type": "cosmos.base.query.v1beta1.PageResponse",
+                        "id": 2,
+                        "comment": "pagination defines the pagination in the response."
+                      }
+                    },
+                    "comment": "QueryVotesByVoterResponse is the Query/VotesByVoter response type."
+                  },
+                  "QueryGroupsByMemberRequest": {
+                    "fields": {
+                      "address": {
+                        "type": "string",
+                        "id": 1,
+                        "options": {
+                          "(cosmos_proto.scalar)": "cosmos.AddressString"
+                        },
+                        "comment": "address is the group member address."
+                      },
+                      "pagination": {
+                        "type": "cosmos.base.query.v1beta1.PageRequest",
+                        "id": 2,
+                        "comment": "pagination defines an optional pagination for the request."
+                      }
+                    },
+                    "comment": "QueryGroupsByMemberRequest is the Query/GroupsByMember request type."
+                  },
+                  "QueryGroupsByMemberResponse": {
+                    "fields": {
+                      "groups": {
+                        "rule": "repeated",
+                        "type": "GroupInfo",
+                        "id": 1,
+                        "comment": "groups are the groups info with the provided group member."
+                      },
+                      "pagination": {
+                        "type": "cosmos.base.query.v1beta1.PageResponse",
+                        "id": 2,
+                        "comment": "pagination defines the pagination in the response."
+                      }
+                    },
+                    "comment": "QueryGroupsByMemberResponse is the Query/GroupsByMember response type."
+                  },
+                  "QueryTallyResultRequest": {
+                    "fields": {
+                      "proposalId": {
+                        "type": "uint64",
+                        "id": 1,
+                        "comment": "proposal_id is the unique id of a proposal."
+                      }
+                    },
+                    "comment": "QueryTallyResultRequest is the Query/TallyResult request type."
+                  },
+                  "QueryTallyResultResponse": {
+                    "fields": {
+                      "tally": {
+                        "type": "TallyResult",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": "tally defines the requested tally."
+                      }
+                    },
+                    "comment": "QueryTallyResultResponse is the Query/TallyResult response type."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

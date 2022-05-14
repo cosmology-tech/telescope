@@ -1,5 +1,6 @@
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
+import { Duration } from "../../google/protobuf/duration";
 /**
  * Describes when the clients can retry a failed request. Clients could ignore
  * the recommendation here or retry when this information is missing from error
@@ -17,7 +18,7 @@ import * as _m0 from "protobufjs/minimal";
  */
 export interface RetryInfo {
     /** Clients should wait at least this long between retrying the same request. */
-    retryDelay: string;
+    retryDelay: Duration;
 }
 /** Describes additional debugging info. */
 export interface DebugInfo {

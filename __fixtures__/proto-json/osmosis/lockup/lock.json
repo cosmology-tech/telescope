@@ -1,0 +1,159 @@
+{
+  "package": "osmosis.lockup",
+  "imports": [
+    "gogoproto/gogo.proto",
+    "google/protobuf/duration.proto",
+    "google/protobuf/timestamp.proto",
+    "cosmos/base/v1beta1/coin.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "osmosis": {
+        "nested": {
+          "lockup": {
+            "options": {
+              "go_package": "github.com/osmosis-labs/osmosis/v7/x/lockup/types"
+            },
+            "nested": {
+              "PeriodLock": {
+                "fields": {
+                  "ID": {
+                    "type": "uint64",
+                    "id": 1,
+                    "comment": null
+                  },
+                  "owner": {
+                    "type": "string",
+                    "id": 2,
+                    "options": {
+                      "(gogoproto.moretags)": "yaml:owner"
+                    },
+                    "comment": null
+                  },
+                  "duration": {
+                    "type": "google.protobuf.Duration",
+                    "id": 3,
+                    "options": {
+                      "(gogoproto.nullable)": false,
+                      "(gogoproto.stdduration)": true,
+                      "(gogoproto.jsontag)": "duration,omitempty",
+                      "(gogoproto.moretags)": "yaml:duration"
+                    },
+                    "comment": null
+                  },
+                  "endTime": {
+                    "type": "google.protobuf.Timestamp",
+                    "id": 4,
+                    "options": {
+                      "(gogoproto.stdtime)": true,
+                      "(gogoproto.nullable)": false,
+                      "(gogoproto.moretags)": "yaml:end_time"
+                    },
+                    "comment": null
+                  },
+                  "coins": {
+                    "rule": "repeated",
+                    "type": "cosmos.base.v1beta1.Coin",
+                    "id": 5,
+                    "options": {
+                      "(gogoproto.nullable)": false,
+                      "(gogoproto.castrepeated)": "github.com/cosmos/cosmos-sdk/types.Coins"
+                    },
+                    "comment": null
+                  }
+                },
+                "comment": "PeriodLock is a single unit of lock by period. It's a record of locked coin\nat a specific time. It stores owner, duration, unlock time and the amount of\ncoins locked."
+              },
+              "LockQueryType": {
+                "options": {
+                  "(gogoproto.goproto_enum_prefix)": false
+                },
+                "values": {
+                  "ByDuration": 0,
+                  "ByTime": 1
+                },
+                "comment": null,
+                "comments": {
+                  "ByDuration": "Queries for locks that are longer than a certain duration",
+                  "ByTime": "Queries for lockups that started before a specific time"
+                }
+              },
+              "QueryCondition": {
+                "fields": {
+                  "lockQueryType": {
+                    "type": "LockQueryType",
+                    "id": 1,
+                    "comment": "type of lock query, ByLockDuration | ByLockTime"
+                  },
+                  "denom": {
+                    "type": "string",
+                    "id": 2,
+                    "comment": "What token denomination are we looking for lockups of"
+                  },
+                  "duration": {
+                    "type": "google.protobuf.Duration",
+                    "id": 3,
+                    "options": {
+                      "(gogoproto.stdduration)": true,
+                      "(gogoproto.nullable)": false,
+                      "(gogoproto.moretags)": "yaml:duration"
+                    },
+                    "comment": "valid when query condition is ByDuration"
+                  },
+                  "timestamp": {
+                    "type": "google.protobuf.Timestamp",
+                    "id": 4,
+                    "options": {
+                      "(gogoproto.stdtime)": true,
+                      "(gogoproto.nullable)": false,
+                      "(gogoproto.moretags)": "yaml:timestamp"
+                    },
+                    "comment": "valid when query condition is ByTime"
+                  }
+                },
+                "comment": null
+              },
+              "SyntheticLock": {
+                "fields": {
+                  "underlyingLockId": {
+                    "type": "uint64",
+                    "id": 1,
+                    "comment": "underlying native lockup id for this synthetic lockup"
+                  },
+                  "synthDenom": {
+                    "type": "string",
+                    "id": 2,
+                    "comment": null
+                  },
+                  "endTime": {
+                    "type": "google.protobuf.Timestamp",
+                    "id": 3,
+                    "options": {
+                      "(gogoproto.stdtime)": true,
+                      "(gogoproto.nullable)": false,
+                      "(gogoproto.moretags)": "yaml:end_time"
+                    },
+                    "comment": "used for unbonding synthetic lockups, for active synthetic lockups, this\nvalue is set to uninitialized value"
+                  },
+                  "duration": {
+                    "type": "google.protobuf.Duration",
+                    "id": 4,
+                    "options": {
+                      "(gogoproto.nullable)": false,
+                      "(gogoproto.stdduration)": true,
+                      "(gogoproto.jsontag)": "duration,omitempty",
+                      "(gogoproto.moretags)": "yaml:duration"
+                    },
+                    "comment": null
+                  }
+                },
+                "comment": "SyntheticLock is a single unit of synthetic lockup\nTODO: Change this to have\n* underlying_lock_id\n* synthetic_coin\n* end_time\n* duration\n* owner\nWe then index synthetic locks by the denom, just like we do with normal\nlocks. Ideally we even get an interface, so we can re-use that same logic.\nI currently have no idea how reward distribution is supposed to be working...\nEVENTUALLY\nwe make a \"constrained_coin\" field, which is what the current \"coins\" field\nis. Constrained coin field can be a #post-v7 feature, since we aren't\nallowing partial unlocks of synthetic lockups."
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

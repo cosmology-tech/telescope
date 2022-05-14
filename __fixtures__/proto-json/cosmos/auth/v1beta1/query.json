@@ -1,0 +1,289 @@
+{
+  "package": "cosmos.auth.v1beta1",
+  "imports": [
+    "cosmos/base/query/v1beta1/pagination.proto",
+    "gogoproto/gogo.proto",
+    "google/protobuf/any.proto",
+    "google/api/annotations.proto",
+    "cosmos/auth/v1beta1/auth.proto",
+    "cosmos_proto/cosmos.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "cosmos": {
+        "nested": {
+          "auth": {
+            "nested": {
+              "v1beta1": {
+                "options": {
+                  "go_package": "github.com/cosmos/cosmos-sdk/x/auth/types"
+                },
+                "nested": {
+                  "Query": {
+                    "methods": {
+                      "Accounts": {
+                        "requestType": "QueryAccountsRequest",
+                        "responseType": "QueryAccountsResponse",
+                        "options": {
+                          "(google.api.http).get": "/cosmos/auth/v1beta1/accounts"
+                        },
+                        "comment": "Accounts returns all the existing accounts\n\nSince: cosmos-sdk 0.43",
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "get": "/cosmos/auth/v1beta1/accounts"
+                            }
+                          }
+                        ]
+                      },
+                      "Account": {
+                        "requestType": "QueryAccountRequest",
+                        "responseType": "QueryAccountResponse",
+                        "options": {
+                          "(google.api.http).get": "/cosmos/auth/v1beta1/accounts/{address}"
+                        },
+                        "comment": "Account returns account details based on address.",
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "get": "/cosmos/auth/v1beta1/accounts/{address}"
+                            }
+                          }
+                        ]
+                      },
+                      "Params": {
+                        "requestType": "QueryParamsRequest",
+                        "responseType": "QueryParamsResponse",
+                        "options": {
+                          "(google.api.http).get": "/cosmos/auth/v1beta1/params"
+                        },
+                        "comment": "Params queries all parameters.",
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "get": "/cosmos/auth/v1beta1/params"
+                            }
+                          }
+                        ]
+                      },
+                      "ModuleAccounts": {
+                        "requestType": "QueryModuleAccountsRequest",
+                        "responseType": "QueryModuleAccountsResponse",
+                        "options": {
+                          "(google.api.http).get": "/cosmos/auth/v1beta1/module_accounts"
+                        },
+                        "comment": "ModuleAccounts returns all the existing module accounts.",
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "get": "/cosmos/auth/v1beta1/module_accounts"
+                            }
+                          }
+                        ]
+                      },
+                      "Bech32Prefix": {
+                        "requestType": "Bech32PrefixRequest",
+                        "responseType": "Bech32PrefixResponse",
+                        "options": {
+                          "(google.api.http).get": "/cosmos/auth/v1beta1/bech32"
+                        },
+                        "comment": "Bech32 queries bech32Prefix",
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "get": "/cosmos/auth/v1beta1/bech32"
+                            }
+                          }
+                        ]
+                      },
+                      "AddressBytesToString": {
+                        "requestType": "AddressBytesToStringRequest",
+                        "responseType": "AddressBytesToStringResponse",
+                        "options": {
+                          "(google.api.http).get": "/cosmos/auth/v1beta1/bech32/{address_bytes}"
+                        },
+                        "comment": "AddressBytesToString converts Account Address bytes to string",
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "get": "/cosmos/auth/v1beta1/bech32/{address_bytes}"
+                            }
+                          }
+                        ]
+                      },
+                      "AddressStringToBytes": {
+                        "requestType": "AddressStringToBytesRequest",
+                        "responseType": "AddressStringToBytesResponse",
+                        "options": {
+                          "(google.api.http).get": "/cosmos/auth/v1beta1/bech32/{address_string}"
+                        },
+                        "comment": "AddressStringToBytes converts Address string to bytes",
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "get": "/cosmos/auth/v1beta1/bech32/{address_string}"
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    "comment": "Query defines the gRPC querier service."
+                  },
+                  "QueryAccountsRequest": {
+                    "fields": {
+                      "pagination": {
+                        "type": "cosmos.base.query.v1beta1.PageRequest",
+                        "id": 1,
+                        "comment": "pagination defines an optional pagination for the request."
+                      }
+                    },
+                    "comment": "QueryAccountsRequest is the request type for the Query/Accounts RPC method.\n\nSince: cosmos-sdk 0.43"
+                  },
+                  "QueryAccountsResponse": {
+                    "fields": {
+                      "accounts": {
+                        "rule": "repeated",
+                        "type": "google.protobuf.Any",
+                        "id": 1,
+                        "options": {
+                          "(cosmos_proto.accepts_interface)": "AccountI"
+                        },
+                        "comment": "accounts are the existing accounts"
+                      },
+                      "pagination": {
+                        "type": "cosmos.base.query.v1beta1.PageResponse",
+                        "id": 2,
+                        "comment": "pagination defines the pagination in the response."
+                      }
+                    },
+                    "comment": "QueryAccountsResponse is the response type for the Query/Accounts RPC method.\n\nSince: cosmos-sdk 0.43"
+                  },
+                  "QueryAccountRequest": {
+                    "options": {
+                      "(gogoproto.equal)": false,
+                      "(gogoproto.goproto_getters)": false
+                    },
+                    "fields": {
+                      "address": {
+                        "type": "string",
+                        "id": 1,
+                        "options": {
+                          "(cosmos_proto.scalar)": "cosmos.AddressString"
+                        },
+                        "comment": "address defines the address to query for."
+                      }
+                    },
+                    "comment": "QueryAccountRequest is the request type for the Query/Account RPC method."
+                  },
+                  "QueryModuleAccountsRequest": {
+                    "fields": {},
+                    "comment": "QueryModuleAccountsRequest is the request type for the Query/ModuleAccounts RPC method."
+                  },
+                  "QueryParamsResponse": {
+                    "fields": {
+                      "params": {
+                        "type": "Params",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": "params defines the parameters of the module."
+                      }
+                    },
+                    "comment": "QueryParamsResponse is the response type for the Query/Params RPC method."
+                  },
+                  "QueryAccountResponse": {
+                    "fields": {
+                      "account": {
+                        "type": "google.protobuf.Any",
+                        "id": 1,
+                        "options": {
+                          "(cosmos_proto.accepts_interface)": "AccountI"
+                        },
+                        "comment": "account defines the account of the corresponding address."
+                      }
+                    },
+                    "comment": "QueryAccountResponse is the response type for the Query/Account RPC method."
+                  },
+                  "QueryParamsRequest": {
+                    "fields": {},
+                    "comment": "QueryParamsRequest is the request type for the Query/Params RPC method."
+                  },
+                  "QueryModuleAccountsResponse": {
+                    "fields": {
+                      "accounts": {
+                        "rule": "repeated",
+                        "type": "google.protobuf.Any",
+                        "id": 1,
+                        "options": {
+                          "(cosmos_proto.accepts_interface)": "ModuleAccountI"
+                        },
+                        "comment": null
+                      }
+                    },
+                    "comment": "QueryModuleAccountsResponse is the response type for the Query/ModuleAccounts RPC method."
+                  },
+                  "Bech32PrefixRequest": {
+                    "fields": {},
+                    "comment": "Bech32PrefixRequest is the request type for Bech32Prefix rpc method"
+                  },
+                  "Bech32PrefixResponse": {
+                    "fields": {
+                      "bech32Prefix": {
+                        "type": "string",
+                        "id": 1,
+                        "comment": null
+                      }
+                    },
+                    "comment": "Bech32PrefixResponse is the response type for Bech32Prefix rpc method"
+                  },
+                  "AddressBytesToStringRequest": {
+                    "fields": {
+                      "addressBytes": {
+                        "type": "bytes",
+                        "id": 1,
+                        "comment": null
+                      }
+                    },
+                    "comment": "AddressBytesToStringRequest is the request type for AddressString rpc method"
+                  },
+                  "AddressBytesToStringResponse": {
+                    "fields": {
+                      "addressString": {
+                        "type": "string",
+                        "id": 1,
+                        "comment": null
+                      }
+                    },
+                    "comment": "AddressBytesToStringResponse is the response type for AddressString rpc method"
+                  },
+                  "AddressStringToBytesRequest": {
+                    "fields": {
+                      "addressString": {
+                        "type": "string",
+                        "id": 1,
+                        "comment": null
+                      }
+                    },
+                    "comment": "AddressStringToBytesRequest is the request type for AccountBytes rpc method"
+                  },
+                  "AddressStringToBytesResponse": {
+                    "fields": {
+                      "addressBytes": {
+                        "type": "bytes",
+                        "id": 1,
+                        "comment": null
+                      }
+                    },
+                    "comment": "AddressStringToBytesResponse is the response type for AddressBytes rpc method"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

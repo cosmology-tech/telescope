@@ -1,0 +1,326 @@
+{
+  "package": "cosmos.distribution.v1beta1",
+  "imports": [
+    "gogoproto/gogo.proto",
+    "cosmos/base/v1beta1/coin.proto",
+    "cosmos/distribution/v1beta1/distribution.proto",
+    "cosmos_proto/cosmos.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "cosmos": {
+        "nested": {
+          "distribution": {
+            "nested": {
+              "v1beta1": {
+                "options": {
+                  "go_package": "github.com/cosmos/cosmos-sdk/x/distribution/types",
+                  "(gogoproto.equal_all)": true
+                },
+                "nested": {
+                  "DelegatorWithdrawInfo": {
+                    "options": {
+                      "(gogoproto.equal)": false,
+                      "(gogoproto.goproto_getters)": false
+                    },
+                    "fields": {
+                      "delegatorAddress": {
+                        "type": "string",
+                        "id": 1,
+                        "options": {
+                          "(cosmos_proto.scalar)": "cosmos.AddressString"
+                        },
+                        "comment": "delegator_address is the address of the delegator."
+                      },
+                      "withdrawAddress": {
+                        "type": "string",
+                        "id": 2,
+                        "options": {
+                          "(cosmos_proto.scalar)": "cosmos.AddressString"
+                        },
+                        "comment": "withdraw_address is the address to withdraw the delegation rewards to."
+                      }
+                    },
+                    "comment": "DelegatorWithdrawInfo is the address for where distributions rewards are\nwithdrawn to by default this struct is only used at genesis to feed in\ndefault withdraw addresses."
+                  },
+                  "ValidatorOutstandingRewardsRecord": {
+                    "options": {
+                      "(gogoproto.equal)": false,
+                      "(gogoproto.goproto_getters)": false
+                    },
+                    "fields": {
+                      "validatorAddress": {
+                        "type": "string",
+                        "id": 1,
+                        "options": {
+                          "(cosmos_proto.scalar)": "cosmos.AddressString"
+                        },
+                        "comment": "validator_address is the address of the validator."
+                      },
+                      "outstandingRewards": {
+                        "rule": "repeated",
+                        "type": "cosmos.base.v1beta1.DecCoin",
+                        "id": 2,
+                        "options": {
+                          "(gogoproto.castrepeated)": "github.com/cosmos/cosmos-sdk/types.DecCoins",
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": "outstanding_rewards represents the oustanding rewards of a validator."
+                      }
+                    },
+                    "comment": "ValidatorOutstandingRewardsRecord is used for import/export via genesis json."
+                  },
+                  "ValidatorAccumulatedCommissionRecord": {
+                    "options": {
+                      "(gogoproto.equal)": false,
+                      "(gogoproto.goproto_getters)": false
+                    },
+                    "fields": {
+                      "validatorAddress": {
+                        "type": "string",
+                        "id": 1,
+                        "options": {
+                          "(cosmos_proto.scalar)": "cosmos.AddressString"
+                        },
+                        "comment": "validator_address is the address of the validator."
+                      },
+                      "accumulated": {
+                        "type": "ValidatorAccumulatedCommission",
+                        "id": 2,
+                        "options": {
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": "accumulated is the accumulated commission of a validator."
+                      }
+                    },
+                    "comment": "ValidatorAccumulatedCommissionRecord is used for import / export via genesis\njson."
+                  },
+                  "ValidatorHistoricalRewardsRecord": {
+                    "options": {
+                      "(gogoproto.equal)": false,
+                      "(gogoproto.goproto_getters)": false
+                    },
+                    "fields": {
+                      "validatorAddress": {
+                        "type": "string",
+                        "id": 1,
+                        "options": {
+                          "(cosmos_proto.scalar)": "cosmos.AddressString"
+                        },
+                        "comment": "validator_address is the address of the validator."
+                      },
+                      "period": {
+                        "type": "uint64",
+                        "id": 2,
+                        "comment": "period defines the period the historical rewards apply to."
+                      },
+                      "rewards": {
+                        "type": "ValidatorHistoricalRewards",
+                        "id": 3,
+                        "options": {
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": "rewards defines the historical rewards of a validator."
+                      }
+                    },
+                    "comment": "ValidatorHistoricalRewardsRecord is used for import / export via genesis\njson."
+                  },
+                  "ValidatorCurrentRewardsRecord": {
+                    "options": {
+                      "(gogoproto.equal)": false,
+                      "(gogoproto.goproto_getters)": false
+                    },
+                    "fields": {
+                      "validatorAddress": {
+                        "type": "string",
+                        "id": 1,
+                        "options": {
+                          "(cosmos_proto.scalar)": "cosmos.AddressString"
+                        },
+                        "comment": "validator_address is the address of the validator."
+                      },
+                      "rewards": {
+                        "type": "ValidatorCurrentRewards",
+                        "id": 2,
+                        "options": {
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": "rewards defines the current rewards of a validator."
+                      }
+                    },
+                    "comment": "ValidatorCurrentRewardsRecord is used for import / export via genesis json."
+                  },
+                  "DelegatorStartingInfoRecord": {
+                    "options": {
+                      "(gogoproto.equal)": false,
+                      "(gogoproto.goproto_getters)": false
+                    },
+                    "fields": {
+                      "delegatorAddress": {
+                        "type": "string",
+                        "id": 1,
+                        "options": {
+                          "(cosmos_proto.scalar)": "cosmos.AddressString"
+                        },
+                        "comment": "delegator_address is the address of the delegator."
+                      },
+                      "validatorAddress": {
+                        "type": "string",
+                        "id": 2,
+                        "options": {
+                          "(cosmos_proto.scalar)": "cosmos.AddressString"
+                        },
+                        "comment": "validator_address is the address of the validator."
+                      },
+                      "startingInfo": {
+                        "type": "DelegatorStartingInfo",
+                        "id": 3,
+                        "options": {
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": "starting_info defines the starting info of a delegator."
+                      }
+                    },
+                    "comment": "DelegatorStartingInfoRecord used for import / export via genesis json."
+                  },
+                  "ValidatorSlashEventRecord": {
+                    "options": {
+                      "(gogoproto.equal)": false,
+                      "(gogoproto.goproto_getters)": false
+                    },
+                    "fields": {
+                      "validatorAddress": {
+                        "type": "string",
+                        "id": 1,
+                        "options": {
+                          "(cosmos_proto.scalar)": "cosmos.AddressString"
+                        },
+                        "comment": "validator_address is the address of the validator."
+                      },
+                      "height": {
+                        "type": "uint64",
+                        "id": 2,
+                        "comment": "height defines the block height at which the slash event occured."
+                      },
+                      "period": {
+                        "type": "uint64",
+                        "id": 3,
+                        "comment": "period is the period of the slash event."
+                      },
+                      "validatorSlashEvent": {
+                        "type": "ValidatorSlashEvent",
+                        "id": 4,
+                        "options": {
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": "validator_slash_event describes the slash event."
+                      }
+                    },
+                    "comment": "ValidatorSlashEventRecord is used for import / export via genesis json."
+                  },
+                  "GenesisState": {
+                    "options": {
+                      "(gogoproto.equal)": false,
+                      "(gogoproto.goproto_getters)": false
+                    },
+                    "fields": {
+                      "params": {
+                        "type": "Params",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": "params defines all the paramaters of the module."
+                      },
+                      "feePool": {
+                        "type": "FeePool",
+                        "id": 2,
+                        "options": {
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": "fee_pool defines the fee pool at genesis."
+                      },
+                      "delegatorWithdrawInfos": {
+                        "rule": "repeated",
+                        "type": "DelegatorWithdrawInfo",
+                        "id": 3,
+                        "options": {
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": "fee_pool defines the delegator withdraw infos at genesis."
+                      },
+                      "previousProposer": {
+                        "type": "string",
+                        "id": 4,
+                        "options": {
+                          "(cosmos_proto.scalar)": "cosmos.AddressString"
+                        },
+                        "comment": "fee_pool defines the previous proposer at genesis."
+                      },
+                      "outstandingRewards": {
+                        "rule": "repeated",
+                        "type": "ValidatorOutstandingRewardsRecord",
+                        "id": 5,
+                        "options": {
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": "fee_pool defines the outstanding rewards of all validators at genesis."
+                      },
+                      "validatorAccumulatedCommissions": {
+                        "rule": "repeated",
+                        "type": "ValidatorAccumulatedCommissionRecord",
+                        "id": 6,
+                        "options": {
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": "fee_pool defines the accumulated commisions of all validators at genesis."
+                      },
+                      "validatorHistoricalRewards": {
+                        "rule": "repeated",
+                        "type": "ValidatorHistoricalRewardsRecord",
+                        "id": 7,
+                        "options": {
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": "fee_pool defines the historical rewards of all validators at genesis."
+                      },
+                      "validatorCurrentRewards": {
+                        "rule": "repeated",
+                        "type": "ValidatorCurrentRewardsRecord",
+                        "id": 8,
+                        "options": {
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": "fee_pool defines the current rewards of all validators at genesis."
+                      },
+                      "delegatorStartingInfos": {
+                        "rule": "repeated",
+                        "type": "DelegatorStartingInfoRecord",
+                        "id": 9,
+                        "options": {
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": "fee_pool defines the delegator starting infos at genesis."
+                      },
+                      "validatorSlashEvents": {
+                        "rule": "repeated",
+                        "type": "ValidatorSlashEventRecord",
+                        "id": 10,
+                        "options": {
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": "fee_pool defines the validator slash events at genesis."
+                      }
+                    },
+                    "comment": "GenesisState defines the distribution module's genesis state."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

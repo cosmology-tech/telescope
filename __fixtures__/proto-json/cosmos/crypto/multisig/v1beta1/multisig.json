@@ -1,0 +1,62 @@
+{
+  "package": "cosmos.crypto.multisig.v1beta1",
+  "imports": [
+    "gogoproto/gogo.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "cosmos": {
+        "nested": {
+          "crypto": {
+            "nested": {
+              "multisig": {
+                "nested": {
+                  "v1beta1": {
+                    "options": {
+                      "go_package": "github.com/cosmos/cosmos-sdk/crypto/types"
+                    },
+                    "nested": {
+                      "MultiSignature": {
+                        "options": {
+                          "(gogoproto.goproto_unrecognized)": true
+                        },
+                        "fields": {
+                          "signatures": {
+                            "rule": "repeated",
+                            "type": "bytes",
+                            "id": 1,
+                            "comment": null
+                          }
+                        },
+                        "comment": "MultiSignature wraps the signatures from a multisig.LegacyAminoPubKey.\nSee cosmos.tx.v1betata1.ModeInfo.Multi for how to specify which signers\nsigned and with which modes."
+                      },
+                      "CompactBitArray": {
+                        "options": {
+                          "(gogoproto.goproto_stringer)": false
+                        },
+                        "fields": {
+                          "extraBitsStored": {
+                            "type": "uint32",
+                            "id": 1,
+                            "comment": null
+                          },
+                          "elems": {
+                            "type": "bytes",
+                            "id": 2,
+                            "comment": null
+                          }
+                        },
+                        "comment": "CompactBitArray is an implementation of a space efficient bit array.\nThis is used to ensure that the encoded data takes up a minimal amount of\nspace after proto encoding.\nThis is not thread safe, and is not intended for concurrent usage."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,306 @@
+{
+  "package": "ibc.core.channel.v1",
+  "imports": [
+    "gogoproto/gogo.proto",
+    "ibc/core/client/v1/client.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "ibc": {
+        "nested": {
+          "core": {
+            "nested": {
+              "channel": {
+                "nested": {
+                  "v1": {
+                    "options": {
+                      "go_package": "github.com/cosmos/ibc-go/v2/modules/core/04-channel/types"
+                    },
+                    "nested": {
+                      "Channel": {
+                        "options": {
+                          "(gogoproto.goproto_getters)": false
+                        },
+                        "fields": {
+                          "state": {
+                            "type": "State",
+                            "id": 1,
+                            "comment": "current state of the channel end"
+                          },
+                          "ordering": {
+                            "type": "Order",
+                            "id": 2,
+                            "comment": "whether the channel is ordered or unordered"
+                          },
+                          "counterparty": {
+                            "type": "Counterparty",
+                            "id": 3,
+                            "options": {
+                              "(gogoproto.nullable)": false
+                            },
+                            "comment": "counterparty channel end"
+                          },
+                          "connectionHops": {
+                            "rule": "repeated",
+                            "type": "string",
+                            "id": 4,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:connection_hops"
+                            },
+                            "comment": "list of connection identifiers, in order, along which packets sent on\nthis channel will travel"
+                          },
+                          "version": {
+                            "type": "string",
+                            "id": 5,
+                            "comment": "opaque channel version, which is agreed upon during the handshake"
+                          }
+                        },
+                        "comment": "Channel defines pipeline for exactly-once packet delivery between specific\nmodules on separate blockchains, which has at least one end capable of\nsending packets and one end capable of receiving packets."
+                      },
+                      "IdentifiedChannel": {
+                        "options": {
+                          "(gogoproto.goproto_getters)": false
+                        },
+                        "fields": {
+                          "state": {
+                            "type": "State",
+                            "id": 1,
+                            "comment": "current state of the channel end"
+                          },
+                          "ordering": {
+                            "type": "Order",
+                            "id": 2,
+                            "comment": "whether the channel is ordered or unordered"
+                          },
+                          "counterparty": {
+                            "type": "Counterparty",
+                            "id": 3,
+                            "options": {
+                              "(gogoproto.nullable)": false
+                            },
+                            "comment": "counterparty channel end"
+                          },
+                          "connectionHops": {
+                            "rule": "repeated",
+                            "type": "string",
+                            "id": 4,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:connection_hops"
+                            },
+                            "comment": "list of connection identifiers, in order, along which packets sent on\nthis channel will travel"
+                          },
+                          "version": {
+                            "type": "string",
+                            "id": 5,
+                            "comment": "opaque channel version, which is agreed upon during the handshake"
+                          },
+                          "portId": {
+                            "type": "string",
+                            "id": 6,
+                            "comment": "port identifier"
+                          },
+                          "channelId": {
+                            "type": "string",
+                            "id": 7,
+                            "comment": "channel identifier"
+                          }
+                        },
+                        "comment": "IdentifiedChannel defines a channel with additional port and channel\nidentifier fields."
+                      },
+                      "State": {
+                        "options": {
+                          "(gogoproto.goproto_enum_prefix)": false
+                        },
+                        "values": {
+                          "STATE_UNINITIALIZED_UNSPECIFIED": 0,
+                          "STATE_INIT": 1,
+                          "STATE_TRYOPEN": 2,
+                          "STATE_OPEN": 3,
+                          "STATE_CLOSED": 4
+                        },
+                        "comment": "State defines if a channel is in one of the following states:\nCLOSED, INIT, TRYOPEN, OPEN or UNINITIALIZED.",
+                        "comments": {
+                          "STATE_UNINITIALIZED_UNSPECIFIED": "Default State",
+                          "STATE_INIT": "A channel has just started the opening handshake.",
+                          "STATE_TRYOPEN": "A channel has acknowledged the handshake step on the counterparty chain.",
+                          "STATE_OPEN": "A channel has completed the handshake. Open channels are\nready to send and receive packets.",
+                          "STATE_CLOSED": "A channel has been closed and can no longer be used to send or receive\npackets."
+                        }
+                      },
+                      "Order": {
+                        "options": {
+                          "(gogoproto.goproto_enum_prefix)": false
+                        },
+                        "values": {
+                          "ORDER_NONE_UNSPECIFIED": 0,
+                          "ORDER_UNORDERED": 1,
+                          "ORDER_ORDERED": 2
+                        },
+                        "comment": "Order defines if a channel is ORDERED or UNORDERED",
+                        "comments": {
+                          "ORDER_NONE_UNSPECIFIED": "zero-value for channel ordering",
+                          "ORDER_UNORDERED": "packets can be delivered in any order, which may differ from the order in\nwhich they were sent.",
+                          "ORDER_ORDERED": "packets are delivered exactly in the order which they were sent"
+                        }
+                      },
+                      "Counterparty": {
+                        "options": {
+                          "(gogoproto.goproto_getters)": false
+                        },
+                        "fields": {
+                          "portId": {
+                            "type": "string",
+                            "id": 1,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:port_id"
+                            },
+                            "comment": "port on the counterparty chain which owns the other end of the channel."
+                          },
+                          "channelId": {
+                            "type": "string",
+                            "id": 2,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:channel_id"
+                            },
+                            "comment": "channel end on the counterparty chain"
+                          }
+                        },
+                        "comment": "Counterparty defines a channel end counterparty"
+                      },
+                      "Packet": {
+                        "options": {
+                          "(gogoproto.goproto_getters)": false
+                        },
+                        "fields": {
+                          "sequence": {
+                            "type": "uint64",
+                            "id": 1,
+                            "comment": "number corresponds to the order of sends and receives, where a Packet\nwith an earlier sequence number must be sent and received before a Packet\nwith a later sequence number."
+                          },
+                          "sourcePort": {
+                            "type": "string",
+                            "id": 2,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:source_port"
+                            },
+                            "comment": "identifies the port on the sending chain."
+                          },
+                          "sourceChannel": {
+                            "type": "string",
+                            "id": 3,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:source_channel"
+                            },
+                            "comment": "identifies the channel end on the sending chain."
+                          },
+                          "destinationPort": {
+                            "type": "string",
+                            "id": 4,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:destination_port"
+                            },
+                            "comment": "identifies the port on the receiving chain."
+                          },
+                          "destinationChannel": {
+                            "type": "string",
+                            "id": 5,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:destination_channel"
+                            },
+                            "comment": "identifies the channel end on the receiving chain."
+                          },
+                          "data": {
+                            "type": "bytes",
+                            "id": 6,
+                            "comment": "actual opaque bytes transferred directly to the application module"
+                          },
+                          "timeoutHeight": {
+                            "type": "ibc.core.client.v1.Height",
+                            "id": 7,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:timeout_height",
+                              "(gogoproto.nullable)": false
+                            },
+                            "comment": "block height after which the packet times out"
+                          },
+                          "timeoutTimestamp": {
+                            "type": "uint64",
+                            "id": 8,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:timeout_timestamp"
+                            },
+                            "comment": "block timestamp (in nanoseconds) after which the packet times out"
+                          }
+                        },
+                        "comment": "Packet defines a type that carries data across different chains through IBC"
+                      },
+                      "PacketState": {
+                        "options": {
+                          "(gogoproto.goproto_getters)": false
+                        },
+                        "fields": {
+                          "portId": {
+                            "type": "string",
+                            "id": 1,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:port_id"
+                            },
+                            "comment": "channel port identifier."
+                          },
+                          "channelId": {
+                            "type": "string",
+                            "id": 2,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:channel_id"
+                            },
+                            "comment": "channel unique identifier."
+                          },
+                          "sequence": {
+                            "type": "uint64",
+                            "id": 3,
+                            "comment": "packet sequence."
+                          },
+                          "data": {
+                            "type": "bytes",
+                            "id": 4,
+                            "comment": "embedded data that represents packet state."
+                          }
+                        },
+                        "comment": "PacketState defines the generic type necessary to retrieve and store\npacket commitments, acknowledgements, and receipts.\nCaller is responsible for knowing the context necessary to interpret this\nstate as a commitment, acknowledgement, or a receipt."
+                      },
+                      "Acknowledgement": {
+                        "oneofs": {
+                          "response": {
+                            "oneof": [
+                              "result",
+                              "error"
+                            ],
+                            "comment": "response contains either a result or an error and must be non-empty"
+                          }
+                        },
+                        "fields": {
+                          "result": {
+                            "type": "bytes",
+                            "id": 21,
+                            "comment": null
+                          },
+                          "error": {
+                            "type": "string",
+                            "id": 22,
+                            "comment": null
+                          }
+                        },
+                        "comment": "Acknowledgement is the recommended acknowledgement format to be used by\napp-specific protocols.\nNOTE: The field numbers 21 and 22 were explicitly chosen to avoid accidental\nconflicts with other protobuf message formats used for acknowledgements.\nThe first byte of any message with this format will be the non-ASCII values\n`0xaa` (result) or `0xb2` (error). Implemented as defined by ICS:\nhttps://github.com/cosmos/ibc/tree/master/spec/core/ics-004-channel-and-packet-semantics#acknowledgement-envelope"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

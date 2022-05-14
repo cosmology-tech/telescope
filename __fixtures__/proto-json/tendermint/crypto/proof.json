@@ -1,0 +1,117 @@
+{
+  "package": "tendermint.crypto",
+  "imports": [
+    "gogoproto/gogo.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "tendermint": {
+        "nested": {
+          "crypto": {
+            "options": {
+              "go_package": "github.com/tendermint/tendermint/proto/tendermint/crypto"
+            },
+            "nested": {
+              "Proof": {
+                "fields": {
+                  "total": {
+                    "type": "int64",
+                    "id": 1,
+                    "comment": null
+                  },
+                  "index": {
+                    "type": "int64",
+                    "id": 2,
+                    "comment": null
+                  },
+                  "leafHash": {
+                    "type": "bytes",
+                    "id": 3,
+                    "comment": null
+                  },
+                  "aunts": {
+                    "rule": "repeated",
+                    "type": "bytes",
+                    "id": 4,
+                    "comment": null
+                  }
+                },
+                "comment": null
+              },
+              "ValueOp": {
+                "fields": {
+                  "key": {
+                    "type": "bytes",
+                    "id": 1,
+                    "comment": "Encoded in ProofOp.Key."
+                  },
+                  "proof": {
+                    "type": "Proof",
+                    "id": 2,
+                    "comment": "To encode in ProofOp.Data"
+                  }
+                },
+                "comment": null
+              },
+              "DominoOp": {
+                "fields": {
+                  "key": {
+                    "type": "string",
+                    "id": 1,
+                    "comment": null
+                  },
+                  "input": {
+                    "type": "string",
+                    "id": 2,
+                    "comment": null
+                  },
+                  "output": {
+                    "type": "string",
+                    "id": 3,
+                    "comment": null
+                  }
+                },
+                "comment": null
+              },
+              "ProofOp": {
+                "fields": {
+                  "type": {
+                    "type": "string",
+                    "id": 1,
+                    "comment": null
+                  },
+                  "key": {
+                    "type": "bytes",
+                    "id": 2,
+                    "comment": null
+                  },
+                  "data": {
+                    "type": "bytes",
+                    "id": 3,
+                    "comment": null
+                  }
+                },
+                "comment": "ProofOp defines an operation used for calculating Merkle root\nThe data could be arbitrary format, providing nessecary data\nfor example neighbouring node hash"
+              },
+              "ProofOps": {
+                "fields": {
+                  "ops": {
+                    "rule": "repeated",
+                    "type": "ProofOp",
+                    "id": 1,
+                    "options": {
+                      "(gogoproto.nullable)": false
+                    },
+                    "comment": null
+                  }
+                },
+                "comment": "ProofOps is Merkle proof defined by the list of ProofOps"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

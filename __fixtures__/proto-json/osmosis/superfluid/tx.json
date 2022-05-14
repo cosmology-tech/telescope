@@ -1,0 +1,159 @@
+{
+  "package": "osmosis.superfluid",
+  "imports": [
+    "gogoproto/gogo.proto",
+    "google/protobuf/duration.proto",
+    "cosmos/base/v1beta1/coin.proto",
+    "osmosis/superfluid/superfluid.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "osmosis": {
+        "nested": {
+          "superfluid": {
+            "options": {
+              "go_package": "github.com/osmosis-labs/osmosis/v7/x/superfluid/types"
+            },
+            "nested": {
+              "Msg": {
+                "methods": {
+                  "SuperfluidDelegate": {
+                    "requestType": "MsgSuperfluidDelegate",
+                    "responseType": "MsgSuperfluidDelegateResponse",
+                    "comment": "Execute superfluid delegation for a lockup"
+                  },
+                  "SuperfluidUndelegate": {
+                    "requestType": "MsgSuperfluidUndelegate",
+                    "responseType": "MsgSuperfluidUndelegateResponse",
+                    "comment": "Execute superfluid undelegation for a lockup"
+                  },
+                  "SuperfluidUnbondLock": {
+                    "requestType": "MsgSuperfluidUnbondLock",
+                    "responseType": "MsgSuperfluidUnbondLockResponse",
+                    "comment": "For a given lock that is being superfluidly undelegated,\nalso unbond the underlying lock."
+                  },
+                  "LockAndSuperfluidDelegate": {
+                    "requestType": "MsgLockAndSuperfluidDelegate",
+                    "responseType": "MsgLockAndSuperfluidDelegateResponse",
+                    "comment": "Execute lockup lock and superfluid delegation in a single msg"
+                  }
+                },
+                "comment": "Msg defines the Msg service."
+              },
+              "MsgSuperfluidDelegate": {
+                "fields": {
+                  "sender": {
+                    "type": "string",
+                    "id": 1,
+                    "options": {
+                      "(gogoproto.moretags)": "yaml:sender"
+                    },
+                    "comment": null
+                  },
+                  "lockId": {
+                    "type": "uint64",
+                    "id": 2,
+                    "comment": null
+                  },
+                  "valAddr": {
+                    "type": "string",
+                    "id": 3,
+                    "comment": null
+                  }
+                },
+                "comment": null
+              },
+              "MsgSuperfluidDelegateResponse": {
+                "fields": {},
+                "comment": null
+              },
+              "MsgSuperfluidUndelegate": {
+                "fields": {
+                  "sender": {
+                    "type": "string",
+                    "id": 1,
+                    "options": {
+                      "(gogoproto.moretags)": "yaml:sender"
+                    },
+                    "comment": null
+                  },
+                  "lockId": {
+                    "type": "uint64",
+                    "id": 2,
+                    "comment": null
+                  }
+                },
+                "comment": null
+              },
+              "MsgSuperfluidUndelegateResponse": {
+                "fields": {},
+                "comment": null
+              },
+              "MsgSuperfluidUnbondLock": {
+                "fields": {
+                  "sender": {
+                    "type": "string",
+                    "id": 1,
+                    "options": {
+                      "(gogoproto.moretags)": "yaml:sender"
+                    },
+                    "comment": null
+                  },
+                  "lockId": {
+                    "type": "uint64",
+                    "id": 2,
+                    "comment": null
+                  }
+                },
+                "comment": null
+              },
+              "MsgSuperfluidUnbondLockResponse": {
+                "fields": {},
+                "comment": null
+              },
+              "MsgLockAndSuperfluidDelegate": {
+                "fields": {
+                  "sender": {
+                    "type": "string",
+                    "id": 1,
+                    "options": {
+                      "(gogoproto.moretags)": "yaml:sender"
+                    },
+                    "comment": null
+                  },
+                  "coins": {
+                    "rule": "repeated",
+                    "type": "cosmos.base.v1beta1.Coin",
+                    "id": 2,
+                    "options": {
+                      "(gogoproto.nullable)": false,
+                      "(gogoproto.castrepeated)": "github.com/cosmos/cosmos-sdk/types.Coins"
+                    },
+                    "comment": null
+                  },
+                  "valAddr": {
+                    "type": "string",
+                    "id": 3,
+                    "comment": null
+                  }
+                },
+                "comment": "MsgLockAndSuperfluidDelegate locks coins with the unbonding period duration,\nand then does a superfluid lock from the newly created lockup, to the\nspecified validator addr."
+              },
+              "MsgLockAndSuperfluidDelegateResponse": {
+                "fields": {
+                  "ID": {
+                    "type": "uint64",
+                    "id": 1,
+                    "comment": null
+                  }
+                },
+                "comment": null
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

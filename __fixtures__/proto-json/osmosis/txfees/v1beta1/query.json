@@ -1,0 +1,141 @@
+{
+  "package": "osmosis.txfees.v1beta1",
+  "imports": [
+    "gogoproto/gogo.proto",
+    "google/api/annotations.proto",
+    "google/protobuf/duration.proto",
+    "osmosis/txfees/v1beta1/feetoken.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "osmosis": {
+        "nested": {
+          "txfees": {
+            "nested": {
+              "v1beta1": {
+                "options": {
+                  "go_package": "github.com/osmosis-labs/osmosis/v7/x/txfees/types"
+                },
+                "nested": {
+                  "Query": {
+                    "methods": {
+                      "FeeTokens": {
+                        "requestType": "QueryFeeTokensRequest",
+                        "responseType": "QueryFeeTokensResponse",
+                        "options": {
+                          "(google.api.http).get": "/osmosis/txfees/v1beta1/fee_tokens"
+                        },
+                        "comment": "FeeTokens returns a list of all the whitelisted fee tokens and their\ncorresponding pools It does not include the BaseDenom, which has its own\nquery endpoint",
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "get": "/osmosis/txfees/v1beta1/fee_tokens"
+                            }
+                          }
+                        ]
+                      },
+                      "DenomPoolId": {
+                        "requestType": "QueryDenomPoolIdRequest",
+                        "responseType": "QueryDenomPoolIdResponse",
+                        "options": {
+                          "(google.api.http).get": "/osmosis/txfees/v1beta1/denom_pool_id/{denom}"
+                        },
+                        "comment": null,
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "get": "/osmosis/txfees/v1beta1/denom_pool_id/{denom}"
+                            }
+                          }
+                        ]
+                      },
+                      "BaseDenom": {
+                        "requestType": "QueryBaseDenomRequest",
+                        "responseType": "QueryBaseDenomResponse",
+                        "options": {
+                          "(google.api.http).get": "/osmosis/txfees/v1beta1/base_denom"
+                        },
+                        "comment": null,
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "get": "/osmosis/txfees/v1beta1/base_denom"
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    "comment": null
+                  },
+                  "QueryFeeTokensRequest": {
+                    "fields": {},
+                    "comment": null
+                  },
+                  "QueryFeeTokensResponse": {
+                    "fields": {
+                      "feeTokens": {
+                        "rule": "repeated",
+                        "type": "FeeToken",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.moretags)": "yaml:fee_tokens",
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": null
+                      }
+                    },
+                    "comment": null
+                  },
+                  "QueryDenomPoolIdRequest": {
+                    "fields": {
+                      "denom": {
+                        "type": "string",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.moretags)": "yaml:denom"
+                        },
+                        "comment": null
+                      }
+                    },
+                    "comment": null
+                  },
+                  "QueryDenomPoolIdResponse": {
+                    "fields": {
+                      "poolID": {
+                        "type": "uint64",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.moretags)": "yaml:pool_id"
+                        },
+                        "comment": null
+                      }
+                    },
+                    "comment": null
+                  },
+                  "QueryBaseDenomRequest": {
+                    "fields": {},
+                    "comment": null
+                  },
+                  "QueryBaseDenomResponse": {
+                    "fields": {
+                      "baseDenom": {
+                        "type": "string",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.moretags)": "yaml:base_denom"
+                        },
+                        "comment": null
+                      }
+                    },
+                    "comment": null
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

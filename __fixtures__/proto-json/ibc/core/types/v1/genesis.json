@@ -1,0 +1,65 @@
+{
+  "package": "ibc.core.types.v1",
+  "imports": [
+    "gogoproto/gogo.proto",
+    "ibc/core/client/v1/genesis.proto",
+    "ibc/core/connection/v1/genesis.proto",
+    "ibc/core/channel/v1/genesis.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "ibc": {
+        "nested": {
+          "core": {
+            "nested": {
+              "types": {
+                "nested": {
+                  "v1": {
+                    "options": {
+                      "go_package": "github.com/cosmos/ibc-go/v2/modules/core/types"
+                    },
+                    "nested": {
+                      "GenesisState": {
+                        "fields": {
+                          "clientGenesis": {
+                            "type": "ibc.core.client.v1.GenesisState",
+                            "id": 1,
+                            "options": {
+                              "(gogoproto.nullable)": false,
+                              "(gogoproto.moretags)": "yaml:client_genesis"
+                            },
+                            "comment": "ICS002 - Clients genesis state"
+                          },
+                          "connectionGenesis": {
+                            "type": "ibc.core.connection.v1.GenesisState",
+                            "id": 2,
+                            "options": {
+                              "(gogoproto.nullable)": false,
+                              "(gogoproto.moretags)": "yaml:connection_genesis"
+                            },
+                            "comment": "ICS003 - Connections genesis state"
+                          },
+                          "channelGenesis": {
+                            "type": "ibc.core.channel.v1.GenesisState",
+                            "id": 3,
+                            "options": {
+                              "(gogoproto.nullable)": false,
+                              "(gogoproto.moretags)": "yaml:channel_genesis"
+                            },
+                            "comment": "ICS004 - Channel genesis state"
+                          }
+                        },
+                        "comment": "GenesisState defines the ibc module's genesis state."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

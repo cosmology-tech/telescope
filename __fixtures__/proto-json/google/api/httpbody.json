@@ -1,0 +1,48 @@
+{
+  "package": "google.api",
+  "imports": [
+    "google/protobuf/any.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "google": {
+        "nested": {
+          "api": {
+            "options": {
+              "cc_enable_arenas": true,
+              "go_package": "google.golang.org/genproto/googleapis/api/httpbody;httpbody",
+              "java_multiple_files": true,
+              "java_outer_classname": "HttpBodyProto",
+              "java_package": "com.google.api",
+              "objc_class_prefix": "GAPI"
+            },
+            "nested": {
+              "HttpBody": {
+                "fields": {
+                  "contentType": {
+                    "type": "string",
+                    "id": 1,
+                    "comment": "The HTTP Content-Type header value specifying the content type of the body."
+                  },
+                  "data": {
+                    "type": "bytes",
+                    "id": 2,
+                    "comment": "The HTTP request/response body as raw binary."
+                  },
+                  "extensions": {
+                    "rule": "repeated",
+                    "type": "google.protobuf.Any",
+                    "id": 3,
+                    "comment": "Application specific response metadata. Must be set in the first response\nfor streaming APIs."
+                  }
+                },
+                "comment": "Message that represents an arbitrary HTTP body. It should only be used for\npayload formats that can't be represented as JSON, such as raw binary or\nan HTML page.\n\n\nThis message can be used both in streaming and non-streaming API methods in\nthe request as well as the response.\n\nIt can be used as a top-level request field, which is convenient if one\nwants to extract parameters from either the URL or HTTP template into the\nrequest fields and also want access to the raw HTTP body.\n\nExample:\n\nmessage GetResourceRequest {\n// A unique request id.\nstring request_id = 1;\n\n// The raw HTTP body is bound to this field.\ngoogle.api.HttpBody http_body = 2;\n\n}\n\nservice ResourceService {\nrpc GetResource(GetResourceRequest)\nreturns (google.api.HttpBody);\nrpc UpdateResource(google.api.HttpBody)\nreturns (google.protobuf.Empty);\n\n}\n\nExample with streaming methods:\n\nservice CaldavService {\nrpc GetCalendar(stream google.api.HttpBody)\nreturns (stream google.api.HttpBody);\nrpc UpdateCalendar(stream google.api.HttpBody)\nreturns (stream google.api.HttpBody);\n\n}\n\nUse of this type only changes how the request and response bodies are\nhandled, all other features will continue to work unchanged."
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

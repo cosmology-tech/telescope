@@ -1,0 +1,324 @@
+{
+  "package": "cosmos.staking.v1beta1",
+  "imports": [
+    "google/protobuf/any.proto",
+    "google/protobuf/timestamp.proto",
+    "gogoproto/gogo.proto",
+    "cosmos_proto/cosmos.proto",
+    "cosmos/base/v1beta1/coin.proto",
+    "cosmos/staking/v1beta1/staking.proto",
+    "cosmos/msg/v1/msg.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "cosmos": {
+        "nested": {
+          "staking": {
+            "nested": {
+              "v1beta1": {
+                "options": {
+                  "go_package": "github.com/cosmos/cosmos-sdk/x/staking/types"
+                },
+                "nested": {
+                  "Msg": {
+                    "methods": {
+                      "CreateValidator": {
+                        "requestType": "MsgCreateValidator",
+                        "responseType": "MsgCreateValidatorResponse",
+                        "comment": "CreateValidator defines a method for creating a new validator."
+                      },
+                      "EditValidator": {
+                        "requestType": "MsgEditValidator",
+                        "responseType": "MsgEditValidatorResponse",
+                        "comment": "EditValidator defines a method for editing an existing validator."
+                      },
+                      "Delegate": {
+                        "requestType": "MsgDelegate",
+                        "responseType": "MsgDelegateResponse",
+                        "comment": "Delegate defines a method for performing a delegation of coins\nfrom a delegator to a validator."
+                      },
+                      "BeginRedelegate": {
+                        "requestType": "MsgBeginRedelegate",
+                        "responseType": "MsgBeginRedelegateResponse",
+                        "comment": "BeginRedelegate defines a method for performing a redelegation\nof coins from a delegator and source validator to a destination validator."
+                      },
+                      "Undelegate": {
+                        "requestType": "MsgUndelegate",
+                        "responseType": "MsgUndelegateResponse",
+                        "comment": "Undelegate defines a method for performing an undelegation from a\ndelegate and a validator."
+                      }
+                    },
+                    "comment": "Msg defines the staking Msg service."
+                  },
+                  "MsgCreateValidator": {
+                    "options": {
+                      "(cosmos.msg.v1.signer)": "validator_address",
+                      "(gogoproto.equal)": false,
+                      "(gogoproto.goproto_getters)": false
+                    },
+                    "fields": {
+                      "description": {
+                        "type": "Description",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": null
+                      },
+                      "commission": {
+                        "type": "CommissionRates",
+                        "id": 2,
+                        "options": {
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": null
+                      },
+                      "minSelfDelegation": {
+                        "type": "string",
+                        "id": 3,
+                        "options": {
+                          "(cosmos_proto.scalar)": "cosmos.Int",
+                          "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Int",
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": null
+                      },
+                      "delegatorAddress": {
+                        "type": "string",
+                        "id": 4,
+                        "options": {
+                          "(cosmos_proto.scalar)": "cosmos.AddressString"
+                        },
+                        "comment": null
+                      },
+                      "validatorAddress": {
+                        "type": "string",
+                        "id": 5,
+                        "options": {
+                          "(cosmos_proto.scalar)": "cosmos.AddressString"
+                        },
+                        "comment": null
+                      },
+                      "pubkey": {
+                        "type": "google.protobuf.Any",
+                        "id": 6,
+                        "options": {
+                          "(cosmos_proto.accepts_interface)": "cosmos.crypto.PubKey"
+                        },
+                        "comment": null
+                      },
+                      "value": {
+                        "type": "cosmos.base.v1beta1.Coin",
+                        "id": 7,
+                        "options": {
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": null
+                      }
+                    },
+                    "comment": "MsgCreateValidator defines a SDK message for creating a new validator."
+                  },
+                  "MsgCreateValidatorResponse": {
+                    "fields": {},
+                    "comment": "MsgCreateValidatorResponse defines the Msg/CreateValidator response type."
+                  },
+                  "MsgEditValidator": {
+                    "options": {
+                      "(cosmos.msg.v1.signer)": "validator_address",
+                      "(gogoproto.equal)": false,
+                      "(gogoproto.goproto_getters)": false
+                    },
+                    "fields": {
+                      "description": {
+                        "type": "Description",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": null
+                      },
+                      "validatorAddress": {
+                        "type": "string",
+                        "id": 2,
+                        "options": {
+                          "(cosmos_proto.scalar)": "cosmos.AddressString"
+                        },
+                        "comment": null
+                      },
+                      "commissionRate": {
+                        "type": "string",
+                        "id": 3,
+                        "options": {
+                          "(cosmos_proto.scalar)": "cosmos.Dec",
+                          "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Dec"
+                        },
+                        "comment": "We pass a reference to the new commission rate and min self delegation as\nit's not mandatory to update. If not updated, the deserialized rate will be\nzero with no way to distinguish if an update was intended.\nREF: #2373"
+                      },
+                      "minSelfDelegation": {
+                        "type": "string",
+                        "id": 4,
+                        "options": {
+                          "(cosmos_proto.scalar)": "cosmos.Int",
+                          "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Int"
+                        },
+                        "comment": null
+                      }
+                    },
+                    "comment": "MsgEditValidator defines a SDK message for editing an existing validator."
+                  },
+                  "MsgEditValidatorResponse": {
+                    "fields": {},
+                    "comment": "MsgEditValidatorResponse defines the Msg/EditValidator response type."
+                  },
+                  "MsgDelegate": {
+                    "options": {
+                      "(cosmos.msg.v1.signer)": "delegator_address",
+                      "(gogoproto.equal)": false,
+                      "(gogoproto.goproto_getters)": false
+                    },
+                    "fields": {
+                      "delegatorAddress": {
+                        "type": "string",
+                        "id": 1,
+                        "options": {
+                          "(cosmos_proto.scalar)": "cosmos.AddressString"
+                        },
+                        "comment": null
+                      },
+                      "validatorAddress": {
+                        "type": "string",
+                        "id": 2,
+                        "options": {
+                          "(cosmos_proto.scalar)": "cosmos.AddressString"
+                        },
+                        "comment": null
+                      },
+                      "amount": {
+                        "type": "cosmos.base.v1beta1.Coin",
+                        "id": 3,
+                        "options": {
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": null
+                      }
+                    },
+                    "comment": "MsgDelegate defines a SDK message for performing a delegation of coins\nfrom a delegator to a validator."
+                  },
+                  "MsgDelegateResponse": {
+                    "fields": {},
+                    "comment": "MsgDelegateResponse defines the Msg/Delegate response type."
+                  },
+                  "MsgBeginRedelegate": {
+                    "options": {
+                      "(cosmos.msg.v1.signer)": "delegator_address",
+                      "(gogoproto.equal)": false,
+                      "(gogoproto.goproto_getters)": false
+                    },
+                    "fields": {
+                      "delegatorAddress": {
+                        "type": "string",
+                        "id": 1,
+                        "options": {
+                          "(cosmos_proto.scalar)": "cosmos.AddressString"
+                        },
+                        "comment": null
+                      },
+                      "validatorSrcAddress": {
+                        "type": "string",
+                        "id": 2,
+                        "options": {
+                          "(cosmos_proto.scalar)": "cosmos.AddressString"
+                        },
+                        "comment": null
+                      },
+                      "validatorDstAddress": {
+                        "type": "string",
+                        "id": 3,
+                        "options": {
+                          "(cosmos_proto.scalar)": "cosmos.AddressString"
+                        },
+                        "comment": null
+                      },
+                      "amount": {
+                        "type": "cosmos.base.v1beta1.Coin",
+                        "id": 4,
+                        "options": {
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": null
+                      }
+                    },
+                    "comment": "MsgBeginRedelegate defines a SDK message for performing a redelegation\nof coins from a delegator and source validator to a destination validator."
+                  },
+                  "MsgBeginRedelegateResponse": {
+                    "fields": {
+                      "completionTime": {
+                        "type": "google.protobuf.Timestamp",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.nullable)": false,
+                          "(gogoproto.stdtime)": true
+                        },
+                        "comment": null
+                      }
+                    },
+                    "comment": "MsgBeginRedelegateResponse defines the Msg/BeginRedelegate response type."
+                  },
+                  "MsgUndelegate": {
+                    "options": {
+                      "(cosmos.msg.v1.signer)": "delegator_address",
+                      "(gogoproto.equal)": false,
+                      "(gogoproto.goproto_getters)": false
+                    },
+                    "fields": {
+                      "delegatorAddress": {
+                        "type": "string",
+                        "id": 1,
+                        "options": {
+                          "(cosmos_proto.scalar)": "cosmos.AddressString"
+                        },
+                        "comment": null
+                      },
+                      "validatorAddress": {
+                        "type": "string",
+                        "id": 2,
+                        "options": {
+                          "(cosmos_proto.scalar)": "cosmos.AddressString"
+                        },
+                        "comment": null
+                      },
+                      "amount": {
+                        "type": "cosmos.base.v1beta1.Coin",
+                        "id": 3,
+                        "options": {
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": null
+                      }
+                    },
+                    "comment": "MsgUndelegate defines a SDK message for performing an undelegation from a\ndelegate and a validator."
+                  },
+                  "MsgUndelegateResponse": {
+                    "fields": {
+                      "completionTime": {
+                        "type": "google.protobuf.Timestamp",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.nullable)": false,
+                          "(gogoproto.stdtime)": true
+                        },
+                        "comment": null
+                      }
+                    },
+                    "comment": "MsgUndelegateResponse defines the Msg/Undelegate response type."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "package": "cosmos.authz.v1beta1",
+  "imports": [
+    "cosmos_proto/cosmos.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "cosmos": {
+        "nested": {
+          "authz": {
+            "nested": {
+              "v1beta1": {
+                "options": {
+                  "go_package": "github.com/cosmos/cosmos-sdk/x/authz"
+                },
+                "nested": {
+                  "EventGrant": {
+                    "fields": {
+                      "msgTypeUrl": {
+                        "type": "string",
+                        "id": 2,
+                        "comment": "Msg type URL for which an autorization is granted"
+                      },
+                      "granter": {
+                        "type": "string",
+                        "id": 3,
+                        "options": {
+                          "(cosmos_proto.scalar)": "cosmos.AddressString"
+                        },
+                        "comment": "Granter account address"
+                      },
+                      "grantee": {
+                        "type": "string",
+                        "id": 4,
+                        "options": {
+                          "(cosmos_proto.scalar)": "cosmos.AddressString"
+                        },
+                        "comment": "Grantee account address"
+                      }
+                    },
+                    "comment": "EventGrant is emitted on Msg/Grant"
+                  },
+                  "EventRevoke": {
+                    "fields": {
+                      "msgTypeUrl": {
+                        "type": "string",
+                        "id": 2,
+                        "comment": "Msg type URL for which an autorization is revoked"
+                      },
+                      "granter": {
+                        "type": "string",
+                        "id": 3,
+                        "options": {
+                          "(cosmos_proto.scalar)": "cosmos.AddressString"
+                        },
+                        "comment": "Granter account address"
+                      },
+                      "grantee": {
+                        "type": "string",
+                        "id": 4,
+                        "options": {
+                          "(cosmos_proto.scalar)": "cosmos.AddressString"
+                        },
+                        "comment": "Grantee account address"
+                      }
+                    },
+                    "comment": "EventRevoke is emitted on Msg/Revoke"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

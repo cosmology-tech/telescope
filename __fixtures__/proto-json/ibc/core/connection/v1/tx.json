@@ -1,0 +1,346 @@
+{
+  "package": "ibc.core.connection.v1",
+  "imports": [
+    "gogoproto/gogo.proto",
+    "google/protobuf/any.proto",
+    "ibc/core/client/v1/client.proto",
+    "ibc/core/connection/v1/connection.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "ibc": {
+        "nested": {
+          "core": {
+            "nested": {
+              "connection": {
+                "nested": {
+                  "v1": {
+                    "options": {
+                      "go_package": "github.com/cosmos/ibc-go/v2/modules/core/03-connection/types"
+                    },
+                    "nested": {
+                      "Msg": {
+                        "methods": {
+                          "ConnectionOpenInit": {
+                            "requestType": "MsgConnectionOpenInit",
+                            "responseType": "MsgConnectionOpenInitResponse",
+                            "comment": "ConnectionOpenInit defines a rpc handler method for MsgConnectionOpenInit."
+                          },
+                          "ConnectionOpenTry": {
+                            "requestType": "MsgConnectionOpenTry",
+                            "responseType": "MsgConnectionOpenTryResponse",
+                            "comment": "ConnectionOpenTry defines a rpc handler method for MsgConnectionOpenTry."
+                          },
+                          "ConnectionOpenAck": {
+                            "requestType": "MsgConnectionOpenAck",
+                            "responseType": "MsgConnectionOpenAckResponse",
+                            "comment": "ConnectionOpenAck defines a rpc handler method for MsgConnectionOpenAck."
+                          },
+                          "ConnectionOpenConfirm": {
+                            "requestType": "MsgConnectionOpenConfirm",
+                            "responseType": "MsgConnectionOpenConfirmResponse",
+                            "comment": "ConnectionOpenConfirm defines a rpc handler method for\nMsgConnectionOpenConfirm."
+                          }
+                        },
+                        "comment": "Msg defines the ibc/connection Msg service."
+                      },
+                      "MsgConnectionOpenInit": {
+                        "options": {
+                          "(gogoproto.equal)": false,
+                          "(gogoproto.goproto_getters)": false
+                        },
+                        "fields": {
+                          "clientId": {
+                            "type": "string",
+                            "id": 1,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:client_id"
+                            },
+                            "comment": null
+                          },
+                          "counterparty": {
+                            "type": "Counterparty",
+                            "id": 2,
+                            "options": {
+                              "(gogoproto.nullable)": false
+                            },
+                            "comment": null
+                          },
+                          "version": {
+                            "type": "Version",
+                            "id": 3,
+                            "comment": null
+                          },
+                          "delayPeriod": {
+                            "type": "uint64",
+                            "id": 4,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:delay_period"
+                            },
+                            "comment": null
+                          },
+                          "signer": {
+                            "type": "string",
+                            "id": 5,
+                            "comment": null
+                          }
+                        },
+                        "comment": "MsgConnectionOpenInit defines the msg sent by an account on Chain A to\ninitialize a connection with Chain B."
+                      },
+                      "MsgConnectionOpenInitResponse": {
+                        "fields": {},
+                        "comment": "MsgConnectionOpenInitResponse defines the Msg/ConnectionOpenInit response\ntype."
+                      },
+                      "MsgConnectionOpenTry": {
+                        "options": {
+                          "(gogoproto.equal)": false,
+                          "(gogoproto.goproto_getters)": false
+                        },
+                        "fields": {
+                          "clientId": {
+                            "type": "string",
+                            "id": 1,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:client_id"
+                            },
+                            "comment": null
+                          },
+                          "previousConnectionId": {
+                            "type": "string",
+                            "id": 2,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:previous_connection_id"
+                            },
+                            "comment": "in the case of crossing hello's, when both chains call OpenInit, we need\nthe connection identifier of the previous connection in state INIT"
+                          },
+                          "clientState": {
+                            "type": "google.protobuf.Any",
+                            "id": 3,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:client_state"
+                            },
+                            "comment": null
+                          },
+                          "counterparty": {
+                            "type": "Counterparty",
+                            "id": 4,
+                            "options": {
+                              "(gogoproto.nullable)": false
+                            },
+                            "comment": null
+                          },
+                          "delayPeriod": {
+                            "type": "uint64",
+                            "id": 5,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:delay_period"
+                            },
+                            "comment": null
+                          },
+                          "counterpartyVersions": {
+                            "rule": "repeated",
+                            "type": "Version",
+                            "id": 6,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:counterparty_versions"
+                            },
+                            "comment": null
+                          },
+                          "proofHeight": {
+                            "type": "ibc.core.client.v1.Height",
+                            "id": 7,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:proof_height",
+                              "(gogoproto.nullable)": false
+                            },
+                            "comment": null
+                          },
+                          "proofInit": {
+                            "type": "bytes",
+                            "id": 8,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:proof_init"
+                            },
+                            "comment": "proof of the initialization the connection on Chain A: `UNITIALIZED ->\nINIT`"
+                          },
+                          "proofClient": {
+                            "type": "bytes",
+                            "id": 9,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:proof_client"
+                            },
+                            "comment": "proof of client state included in message"
+                          },
+                          "proofConsensus": {
+                            "type": "bytes",
+                            "id": 10,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:proof_consensus"
+                            },
+                            "comment": "proof of client consensus state"
+                          },
+                          "consensusHeight": {
+                            "type": "ibc.core.client.v1.Height",
+                            "id": 11,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:consensus_height",
+                              "(gogoproto.nullable)": false
+                            },
+                            "comment": null
+                          },
+                          "signer": {
+                            "type": "string",
+                            "id": 12,
+                            "comment": null
+                          }
+                        },
+                        "comment": "MsgConnectionOpenTry defines a msg sent by a Relayer to try to open a\nconnection on Chain B."
+                      },
+                      "MsgConnectionOpenTryResponse": {
+                        "fields": {},
+                        "comment": "MsgConnectionOpenTryResponse defines the Msg/ConnectionOpenTry response type."
+                      },
+                      "MsgConnectionOpenAck": {
+                        "options": {
+                          "(gogoproto.equal)": false,
+                          "(gogoproto.goproto_getters)": false
+                        },
+                        "fields": {
+                          "connectionId": {
+                            "type": "string",
+                            "id": 1,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:connection_id"
+                            },
+                            "comment": null
+                          },
+                          "counterpartyConnectionId": {
+                            "type": "string",
+                            "id": 2,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:counterparty_connection_id"
+                            },
+                            "comment": null
+                          },
+                          "version": {
+                            "type": "Version",
+                            "id": 3,
+                            "comment": null
+                          },
+                          "clientState": {
+                            "type": "google.protobuf.Any",
+                            "id": 4,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:client_state"
+                            },
+                            "comment": null
+                          },
+                          "proofHeight": {
+                            "type": "ibc.core.client.v1.Height",
+                            "id": 5,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:proof_height",
+                              "(gogoproto.nullable)": false
+                            },
+                            "comment": null
+                          },
+                          "proofTry": {
+                            "type": "bytes",
+                            "id": 6,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:proof_try"
+                            },
+                            "comment": "proof of the initialization the connection on Chain B: `UNITIALIZED ->\nTRYOPEN`"
+                          },
+                          "proofClient": {
+                            "type": "bytes",
+                            "id": 7,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:proof_client"
+                            },
+                            "comment": "proof of client state included in message"
+                          },
+                          "proofConsensus": {
+                            "type": "bytes",
+                            "id": 8,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:proof_consensus"
+                            },
+                            "comment": "proof of client consensus state"
+                          },
+                          "consensusHeight": {
+                            "type": "ibc.core.client.v1.Height",
+                            "id": 9,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:consensus_height",
+                              "(gogoproto.nullable)": false
+                            },
+                            "comment": null
+                          },
+                          "signer": {
+                            "type": "string",
+                            "id": 10,
+                            "comment": null
+                          }
+                        },
+                        "comment": "MsgConnectionOpenAck defines a msg sent by a Relayer to Chain A to\nacknowledge the change of connection state to TRYOPEN on Chain B."
+                      },
+                      "MsgConnectionOpenAckResponse": {
+                        "fields": {},
+                        "comment": "MsgConnectionOpenAckResponse defines the Msg/ConnectionOpenAck response type."
+                      },
+                      "MsgConnectionOpenConfirm": {
+                        "options": {
+                          "(gogoproto.equal)": false,
+                          "(gogoproto.goproto_getters)": false
+                        },
+                        "fields": {
+                          "connectionId": {
+                            "type": "string",
+                            "id": 1,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:connection_id"
+                            },
+                            "comment": null
+                          },
+                          "proofAck": {
+                            "type": "bytes",
+                            "id": 2,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:proof_ack"
+                            },
+                            "comment": "proof for the change of the connection state on Chain A: `INIT -> OPEN`"
+                          },
+                          "proofHeight": {
+                            "type": "ibc.core.client.v1.Height",
+                            "id": 3,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:proof_height",
+                              "(gogoproto.nullable)": false
+                            },
+                            "comment": null
+                          },
+                          "signer": {
+                            "type": "string",
+                            "id": 4,
+                            "comment": null
+                          }
+                        },
+                        "comment": "MsgConnectionOpenConfirm defines a msg sent by a Relayer to Chain B to\nacknowledge the change of connection state to OPEN on Chain A."
+                      },
+                      "MsgConnectionOpenConfirmResponse": {
+                        "fields": {},
+                        "comment": "MsgConnectionOpenConfirmResponse defines the Msg/ConnectionOpenConfirm\nresponse type."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

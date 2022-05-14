@@ -1,0 +1,33 @@
+{
+  "package": "google.api",
+  "imports": [
+    "google/api/http.proto",
+    "google/protobuf/descriptor.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "google": {
+        "nested": {
+          "api": {
+            "options": {
+              "go_package": "google.golang.org/genproto/googleapis/api/annotations;annotations",
+              "java_multiple_files": true,
+              "java_outer_classname": "AnnotationsProto",
+              "java_package": "com.google.api",
+              "objc_class_prefix": "GAPI"
+            },
+            "nested": {
+              "http": {
+                "type": "HttpRule",
+                "id": 72295728,
+                "extend": "google.protobuf.MethodOptions",
+                "comment": "See `HttpRule`."
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

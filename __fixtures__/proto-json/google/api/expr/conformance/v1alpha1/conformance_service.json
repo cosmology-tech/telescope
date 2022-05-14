@@ -1,0 +1,236 @@
+{
+  "package": "google.api.expr.conformance.v1alpha1",
+  "imports": [
+    "google/api/expr/v1alpha1/checked.proto",
+    "google/api/expr/v1alpha1/eval.proto",
+    "google/api/expr/v1alpha1/syntax.proto",
+    "google/rpc/status.proto",
+    "google/api/client.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "google": {
+        "nested": {
+          "api": {
+            "nested": {
+              "expr": {
+                "nested": {
+                  "conformance": {
+                    "nested": {
+                      "v1alpha1": {
+                        "options": {
+                          "cc_enable_arenas": true,
+                          "go_package": "google.golang.org/genproto/googleapis/api/expr/conformance/v1alpha1;confpb",
+                          "java_multiple_files": true,
+                          "java_outer_classname": "ConformanceServiceProto",
+                          "java_package": "com.google.api.expr.conformance.v1alpha1"
+                        },
+                        "nested": {
+                          "ConformanceService": {
+                            "options": {
+                              "(google.api.default_host)": "cel.googleapis.com"
+                            },
+                            "methods": {
+                              "Parse": {
+                                "requestType": "ParseRequest",
+                                "responseType": "ParseResponse",
+                                "comment": "Transforms CEL source text into a parsed representation."
+                              },
+                              "Check": {
+                                "requestType": "CheckRequest",
+                                "responseType": "CheckResponse",
+                                "comment": "Runs static checks on a parsed CEL representation and return\nan annotated representation, or a set of issues."
+                              },
+                              "Eval": {
+                                "requestType": "EvalRequest",
+                                "responseType": "EvalResponse",
+                                "comment": "Evaluates a parsed or annotation CEL representation given\nvalues of external bindings."
+                              }
+                            },
+                            "comment": "Access a CEL implementation from another process or machine.\nA CEL implementation is decomposed as a parser, a static checker,\nand an evaluator.  Every CEL implementation is expected to provide\na server for this API.  The API will be used for conformance testing\nand other utilities."
+                          },
+                          "ParseRequest": {
+                            "fields": {
+                              "celSource": {
+                                "type": "string",
+                                "id": 1,
+                                "comment": "Required. Source text in CEL syntax."
+                              },
+                              "syntaxVersion": {
+                                "type": "string",
+                                "id": 2,
+                                "comment": "Tag for version of CEL syntax, for future use."
+                              },
+                              "sourceLocation": {
+                                "type": "string",
+                                "id": 3,
+                                "comment": "File or resource for source text, used in [SourceInfo][google.api.SourceInfo]."
+                              },
+                              "disableMacros": {
+                                "type": "bool",
+                                "id": 4,
+                                "comment": "Prevent macro expansion.  See \"Macros\" in Language Defiinition."
+                              }
+                            },
+                            "comment": "Request message for the Parse method."
+                          },
+                          "ParseResponse": {
+                            "fields": {
+                              "parsedExpr": {
+                                "type": "google.api.expr.v1alpha1.ParsedExpr",
+                                "id": 1,
+                                "comment": "The parsed representation, or unset if parsing failed."
+                              },
+                              "issues": {
+                                "rule": "repeated",
+                                "type": "google.rpc.Status",
+                                "id": 2,
+                                "comment": "Any number of issues with [StatusDetails][] as the details."
+                              }
+                            },
+                            "comment": "Response message for the Parse method."
+                          },
+                          "CheckRequest": {
+                            "fields": {
+                              "parsedExpr": {
+                                "type": "google.api.expr.v1alpha1.ParsedExpr",
+                                "id": 1,
+                                "comment": "Required. The parsed representation of the CEL program."
+                              },
+                              "typeEnv": {
+                                "rule": "repeated",
+                                "type": "google.api.expr.v1alpha1.Decl",
+                                "id": 2,
+                                "comment": "Declarations of types for external variables and functions.\nRequired if program uses external variables or functions\nnot in the default environment."
+                              },
+                              "container": {
+                                "type": "string",
+                                "id": 3,
+                                "comment": "The protocol buffer context.  See \"Name Resolution\" in the\nLanguage Definition."
+                              },
+                              "noStdEnv": {
+                                "type": "bool",
+                                "id": 4,
+                                "comment": "If true, use only the declarations in [type_env][google.api.expr.conformance.v1alpha1.CheckRequest.type_env].  If false (default),\nadd declarations for the standard definitions to the type environment.  See\n\"Standard Definitions\" in the Language Definition."
+                              }
+                            },
+                            "comment": "Request message for the Check method."
+                          },
+                          "CheckResponse": {
+                            "fields": {
+                              "checkedExpr": {
+                                "type": "google.api.expr.v1alpha1.CheckedExpr",
+                                "id": 1,
+                                "comment": "The annotated representation, or unset if checking failed."
+                              },
+                              "issues": {
+                                "rule": "repeated",
+                                "type": "google.rpc.Status",
+                                "id": 2,
+                                "comment": "Any number of issues with [StatusDetails][] as the details."
+                              }
+                            },
+                            "comment": "Response message for the Check method."
+                          },
+                          "EvalRequest": {
+                            "oneofs": {
+                              "exprKind": {
+                                "oneof": [
+                                  "parsedExpr",
+                                  "checkedExpr"
+                                ],
+                                "comment": "Required. Either the parsed or annotated representation of the CEL program."
+                              }
+                            },
+                            "fields": {
+                              "parsedExpr": {
+                                "type": "google.api.expr.v1alpha1.ParsedExpr",
+                                "id": 1,
+                                "comment": "Evaluate based on the parsed representation."
+                              },
+                              "checkedExpr": {
+                                "type": "google.api.expr.v1alpha1.CheckedExpr",
+                                "id": 2,
+                                "comment": "Evaluate based on the checked representation."
+                              },
+                              "bindings": {
+                                "keyType": "string",
+                                "type": "google.api.expr.v1alpha1.ExprValue",
+                                "id": 3,
+                                "comment": "Bindings for the external variables.  The types SHOULD be compatible\nwith the type environment in [CheckRequest][google.api.expr.conformance.v1alpha1.CheckRequest], if checked."
+                              },
+                              "container": {
+                                "type": "string",
+                                "id": 4,
+                                "comment": "SHOULD be the same container as used in [CheckRequest][google.api.expr.conformance.v1alpha1.CheckRequest], if checked."
+                              }
+                            },
+                            "comment": "Request message for the Eval method."
+                          },
+                          "EvalResponse": {
+                            "fields": {
+                              "result": {
+                                "type": "google.api.expr.v1alpha1.ExprValue",
+                                "id": 1,
+                                "comment": "The execution result, or unset if execution couldn't start."
+                              },
+                              "issues": {
+                                "rule": "repeated",
+                                "type": "google.rpc.Status",
+                                "id": 2,
+                                "comment": "Any number of issues with [StatusDetails][] as the details.\nNote that CEL execution errors are reified into [ExprValue][].\nNevertheless, we'll allow out-of-band issues to be raised,\nwhich also makes the replies more regular."
+                              }
+                            },
+                            "comment": "Response message for the Eval method."
+                          },
+                          "IssueDetails": {
+                            "fields": {
+                              "severity": {
+                                "type": "Severity",
+                                "id": 1,
+                                "comment": "The severity of the issue."
+                              },
+                              "position": {
+                                "type": "google.api.expr.v1alpha1.SourcePosition",
+                                "id": 2,
+                                "comment": "Position in the source, if known."
+                              },
+                              "id": {
+                                "type": "int64",
+                                "id": 3,
+                                "comment": "Expression ID from [Expr][], 0 if unknown."
+                              }
+                            },
+                            "nested": {
+                              "Severity": {
+                                "values": {
+                                  "SEVERITY_UNSPECIFIED": 0,
+                                  "DEPRECATION": 1,
+                                  "WARNING": 2,
+                                  "ERROR": 3
+                                },
+                                "comment": "Severities of issues.",
+                                "comments": {
+                                  "SEVERITY_UNSPECIFIED": "An unspecified severity.",
+                                  "DEPRECATION": "Deprecation issue for statements and method that may no longer be\nsupported or maintained.",
+                                  "WARNING": "Warnings such as: unused variables.",
+                                  "ERROR": "Errors such as: unmatched curly braces or variable redefinition."
+                                }
+                              }
+                            },
+                            "comment": "Warnings or errors in service execution are represented by\n[google.rpc.Status][google.rpc.Status] messages, with the following message\nin the details field."
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

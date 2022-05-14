@@ -1,0 +1,318 @@
+{
+  "package": "google.api.servicemanagement.v1",
+  "imports": [
+    "google/api/config_change.proto",
+    "google/api/field_behavior.proto",
+    "google/protobuf/timestamp.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "google": {
+        "nested": {
+          "api": {
+            "nested": {
+              "servicemanagement": {
+                "nested": {
+                  "v1": {
+                    "options": {
+                      "csharp_namespace": "Google.Cloud.ServiceManagement.V1",
+                      "go_package": "google.golang.org/genproto/googleapis/api/servicemanagement/v1;servicemanagement",
+                      "java_multiple_files": true,
+                      "java_outer_classname": "ResourcesProto",
+                      "java_package": "com.google.api.servicemanagement.v1",
+                      "objc_class_prefix": "GASM",
+                      "php_namespace": "Google\\Cloud\\ServiceManagement\\V1",
+                      "ruby_package": "Google::Cloud::ServiceManagement::V1"
+                    },
+                    "nested": {
+                      "ManagedService": {
+                        "fields": {
+                          "serviceName": {
+                            "type": "string",
+                            "id": 2,
+                            "comment": "The name of the service. See the [overview](/service-management/overview)\nfor naming requirements."
+                          },
+                          "producerProjectId": {
+                            "type": "string",
+                            "id": 3,
+                            "comment": "ID of the project that produces and owns this service."
+                          }
+                        },
+                        "comment": "The full representation of a Service that is managed by\nGoogle Service Management."
+                      },
+                      "OperationMetadata": {
+                        "fields": {
+                          "resourceNames": {
+                            "rule": "repeated",
+                            "type": "string",
+                            "id": 1,
+                            "comment": "The full name of the resources that this operation is directly\nassociated with."
+                          },
+                          "steps": {
+                            "rule": "repeated",
+                            "type": "Step",
+                            "id": 2,
+                            "comment": "Detailed status information for each step. The order is undetermined."
+                          },
+                          "progressPercentage": {
+                            "type": "int32",
+                            "id": 3,
+                            "comment": "Percentage of completion of this operation, ranging from 0 to 100."
+                          },
+                          "startTime": {
+                            "type": "google.protobuf.Timestamp",
+                            "id": 4,
+                            "comment": "The start time of the operation."
+                          }
+                        },
+                        "nested": {
+                          "Step": {
+                            "fields": {
+                              "description": {
+                                "type": "string",
+                                "id": 2,
+                                "comment": "The short description of the step."
+                              },
+                              "status": {
+                                "type": "Status",
+                                "id": 4,
+                                "comment": "The status code."
+                              }
+                            },
+                            "comment": "Represents the status of one operation step."
+                          },
+                          "Status": {
+                            "values": {
+                              "STATUS_UNSPECIFIED": 0,
+                              "DONE": 1,
+                              "NOT_STARTED": 2,
+                              "IN_PROGRESS": 3,
+                              "FAILED": 4,
+                              "CANCELLED": 5
+                            },
+                            "comment": "Code describes the status of the operation (or one of its steps).",
+                            "comments": {
+                              "STATUS_UNSPECIFIED": "Unspecifed code.",
+                              "DONE": "The operation or step has completed without errors.",
+                              "NOT_STARTED": "The operation or step has not started yet.",
+                              "IN_PROGRESS": "The operation or step is in progress.",
+                              "FAILED": "The operation or step has completed with errors. If the operation is\nrollbackable, the rollback completed with errors too.",
+                              "CANCELLED": "The operation or step has completed with cancellation."
+                            }
+                          }
+                        },
+                        "comment": "The metadata associated with a long running operation resource."
+                      },
+                      "Diagnostic": {
+                        "fields": {
+                          "location": {
+                            "type": "string",
+                            "id": 1,
+                            "comment": "File name and line number of the error or warning."
+                          },
+                          "kind": {
+                            "type": "Kind",
+                            "id": 2,
+                            "comment": "The kind of diagnostic information provided."
+                          },
+                          "message": {
+                            "type": "string",
+                            "id": 3,
+                            "comment": "Message describing the error or warning."
+                          }
+                        },
+                        "nested": {
+                          "Kind": {
+                            "values": {
+                              "WARNING": 0,
+                              "ERROR": 1
+                            },
+                            "comment": "The kind of diagnostic information possible.",
+                            "comments": {
+                              "WARNING": "Warnings and errors",
+                              "ERROR": "Only errors"
+                            }
+                          }
+                        },
+                        "comment": "Represents a diagnostic message (error or warning)"
+                      },
+                      "ConfigSource": {
+                        "fields": {
+                          "id": {
+                            "type": "string",
+                            "id": 5,
+                            "comment": "A unique ID for a specific instance of this message, typically assigned\nby the client for tracking purpose. If empty, the server may choose to\ngenerate one instead."
+                          },
+                          "files": {
+                            "rule": "repeated",
+                            "type": "ConfigFile",
+                            "id": 2,
+                            "comment": "Set of source configuration files that are used to generate a service\nconfiguration (`google.api.Service`)."
+                          }
+                        },
+                        "comment": "Represents a source file which is used to generate the service configuration\ndefined by `google.api.Service`."
+                      },
+                      "ConfigFile": {
+                        "fields": {
+                          "filePath": {
+                            "type": "string",
+                            "id": 1,
+                            "comment": "The file name of the configuration file (full or relative path)."
+                          },
+                          "fileContents": {
+                            "type": "bytes",
+                            "id": 3,
+                            "comment": "The bytes that constitute the file."
+                          },
+                          "fileType": {
+                            "type": "FileType",
+                            "id": 4,
+                            "comment": "The type of configuration file this represents."
+                          }
+                        },
+                        "nested": {
+                          "FileType": {
+                            "values": {
+                              "FILE_TYPE_UNSPECIFIED": 0,
+                              "SERVICE_CONFIG_YAML": 1,
+                              "OPEN_API_JSON": 2,
+                              "OPEN_API_YAML": 3,
+                              "FILE_DESCRIPTOR_SET_PROTO": 4,
+                              "PROTO_FILE": 6
+                            },
+                            "comment": null,
+                            "comments": {
+                              "FILE_TYPE_UNSPECIFIED": "Unknown file type.",
+                              "SERVICE_CONFIG_YAML": "YAML-specification of service.",
+                              "OPEN_API_JSON": "OpenAPI specification, serialized in JSON.",
+                              "OPEN_API_YAML": "OpenAPI specification, serialized in YAML.",
+                              "FILE_DESCRIPTOR_SET_PROTO": "FileDescriptorSet, generated by protoc.\n\nTo generate, use protoc with imports and source info included.\nFor an example test.proto file, the following command would put the value\nin a new file named out.pb.\n\n$protoc --include_imports --include_source_info test.proto -o out.pb",
+                              "PROTO_FILE": "Uncompiled Proto file. Used for storage and display purposes only,\ncurrently server-side compilation is not supported. Should match the\ninputs to 'protoc' command used to generated FILE_DESCRIPTOR_SET_PROTO. A\nfile of this type can only be included if at least one file of type\nFILE_DESCRIPTOR_SET_PROTO is included."
+                            }
+                          }
+                        },
+                        "comment": "Generic specification of a source configuration file"
+                      },
+                      "ConfigRef": {
+                        "fields": {
+                          "name": {
+                            "type": "string",
+                            "id": 1,
+                            "comment": "Resource name of a service config. It must have the following\nformat: \"services/{service name}/configs/{config id}\"."
+                          }
+                        },
+                        "comment": "Represents a service configuration with its name and id."
+                      },
+                      "ChangeReport": {
+                        "fields": {
+                          "configChanges": {
+                            "rule": "repeated",
+                            "type": "google.api.ConfigChange",
+                            "id": 1,
+                            "comment": "List of changes between two service configurations.\nThe changes will be alphabetically sorted based on the identifier\nof each change.\nA ConfigChange identifier is a dot separated path to the configuration.\nExample: visibility.rules[selector='LibraryService.CreateBook'].restriction"
+                          }
+                        },
+                        "comment": "Change report associated with a particular service configuration.\n\nIt contains a list of ConfigChanges based on the comparison between\ntwo service configurations."
+                      },
+                      "Rollout": {
+                        "oneofs": {
+                          "strategy": {
+                            "oneof": [
+                              "trafficPercentStrategy",
+                              "deleteServiceStrategy"
+                            ],
+                            "comment": "Strategy that defines which versions of service configurations should be\npushed\nand how they should be used at runtime."
+                          }
+                        },
+                        "fields": {
+                          "rolloutId": {
+                            "type": "string",
+                            "id": 1,
+                            "options": {
+                              "(google.api.field_behavior)": "OPTIONAL"
+                            },
+                            "comment": "Optional. Unique identifier of this Rollout. Must be no longer than 63 characters\nand only lower case letters, digits, '.', '_' and '-' are allowed.\n\nIf not specified by client, the server will generate one. The generated id\nwill have the form of <date><revision number>, where \"date\" is the create\ndate in ISO 8601 format.  \"revision number\" is a monotonically increasing\npositive number that is reset every day for each service.\nAn example of the generated rollout_id is '2016-02-16r1'"
+                          },
+                          "createTime": {
+                            "type": "google.protobuf.Timestamp",
+                            "id": 2,
+                            "comment": "Creation time of the rollout. Readonly."
+                          },
+                          "createdBy": {
+                            "type": "string",
+                            "id": 3,
+                            "comment": "The user who created the Rollout. Readonly."
+                          },
+                          "status": {
+                            "type": "RolloutStatus",
+                            "id": 4,
+                            "comment": "The status of this rollout. Readonly. In case of a failed rollout,\nthe system will automatically rollback to the current Rollout\nversion. Readonly."
+                          },
+                          "trafficPercentStrategy": {
+                            "type": "TrafficPercentStrategy",
+                            "id": 5,
+                            "comment": "Google Service Control selects service configurations based on\ntraffic percentage."
+                          },
+                          "deleteServiceStrategy": {
+                            "type": "DeleteServiceStrategy",
+                            "id": 200,
+                            "comment": "The strategy associated with a rollout to delete a `ManagedService`.\nReadonly."
+                          },
+                          "serviceName": {
+                            "type": "string",
+                            "id": 8,
+                            "comment": "The name of the service associated with this Rollout."
+                          }
+                        },
+                        "nested": {
+                          "TrafficPercentStrategy": {
+                            "fields": {
+                              "percentages": {
+                                "keyType": "string",
+                                "type": "double",
+                                "id": 1,
+                                "comment": "Maps service configuration IDs to their corresponding traffic percentage.\nKey is the service configuration ID, Value is the traffic percentage\nwhich must be greater than 0.0 and the sum must equal to 100.0."
+                              }
+                            },
+                            "comment": "Strategy that specifies how clients of Google Service Controller want to\nsend traffic to use different config versions. This is generally\nused by API proxy to split traffic based on your configured percentage for\neach config version.\n\nOne example of how to gradually rollout a new service configuration using\nthis\nstrategy:\nDay 1\n\nRollout {\nid: \"example.googleapis.com/rollout_20160206\"\ntraffic_percent_strategy {\npercentages: {\n\"example.googleapis.com/20160201\": 70.00\n\"example.googleapis.com/20160206\": 30.00\n}\n}\n}\n\nDay 2\n\nRollout {\nid: \"example.googleapis.com/rollout_20160207\"\ntraffic_percent_strategy: {\npercentages: {\n\"example.googleapis.com/20160206\": 100.00\n}\n}\n}"
+                          },
+                          "DeleteServiceStrategy": {
+                            "fields": {},
+                            "comment": "Strategy used to delete a service. This strategy is a placeholder only\nused by the system generated rollout to delete a service."
+                          },
+                          "RolloutStatus": {
+                            "values": {
+                              "ROLLOUT_STATUS_UNSPECIFIED": 0,
+                              "IN_PROGRESS": 1,
+                              "SUCCESS": 2,
+                              "CANCELLED": 3,
+                              "FAILED": 4,
+                              "PENDING": 5,
+                              "FAILED_ROLLED_BACK": 6
+                            },
+                            "comment": "Status of a Rollout.",
+                            "comments": {
+                              "ROLLOUT_STATUS_UNSPECIFIED": "No status specified.",
+                              "IN_PROGRESS": "The Rollout is in progress.",
+                              "SUCCESS": "The Rollout has completed successfully.",
+                              "CANCELLED": "The Rollout has been cancelled. This can happen if you have overlapping\nRollout pushes, and the previous ones will be cancelled.",
+                              "FAILED": "The Rollout has failed and the rollback attempt has failed too.",
+                              "PENDING": "The Rollout has not started yet and is pending for execution.",
+                              "FAILED_ROLLED_BACK": "The Rollout has failed and rolled back to the previous successful\nRollout."
+                            }
+                          }
+                        },
+                        "comment": "A rollout resource that defines how service configuration versions are pushed\nto control plane systems. Typically, you create a new version of the\nservice config, and then create a Rollout to push the service config."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

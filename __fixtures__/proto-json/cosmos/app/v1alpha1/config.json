@@ -1,0 +1,49 @@
+{
+  "package": "cosmos.app.v1alpha1",
+  "imports": [
+    "google/protobuf/any.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "cosmos": {
+        "nested": {
+          "app": {
+            "nested": {
+              "v1alpha1": {
+                "nested": {
+                  "Config": {
+                    "fields": {
+                      "modules": {
+                        "rule": "repeated",
+                        "type": "ModuleConfig",
+                        "id": 1,
+                        "comment": "modules are the module configurations for the app."
+                      }
+                    },
+                    "comment": "Config represents the configuration for a Cosmos SDK ABCI app.\nIt is intended that all state machine logic including the version of\nbaseapp and tx handlers (and possibly even Tendermint) that an app needs\ncan be described in a config object. For compatibility, the framework should\nallow a mixture of declarative and imperative app wiring, however, apps\nthat strive for the maximum ease of maintainability should be able to describe\ntheir state machine with a config object alone."
+                  },
+                  "ModuleConfig": {
+                    "fields": {
+                      "name": {
+                        "type": "string",
+                        "id": 1,
+                        "comment": "name is the unique name of the module within the app. It should be a name\nthat persists between different versions of a module so that modules\ncan be smoothly upgraded to new versions.\n\nFor example, for the module cosmos.bank.module.v1.Module, we may chose\nto simply name the module \"bank\" in the app. When we upgrade to\ncosmos.bank.module.v2.Module, the app-specific name \"bank\" stays the same\nand the framework knows that the v2 module should receive all the same state\nthat the v1 module had. Note: modules should provide info on which versions\nthey can migrate from in the ModuleDescriptor.can_migration_from field."
+                      },
+                      "config": {
+                        "type": "google.protobuf.Any",
+                        "id": 2,
+                        "comment": "config is the config object for the module. Module config messages should\ndefine a ModuleDescriptor using the cosmos.app.v1alpha1.is_module extension."
+                      }
+                    },
+                    "comment": "ModuleConfig is a module configuration for an app."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

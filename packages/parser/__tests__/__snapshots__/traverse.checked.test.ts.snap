@@ -1,0 +1,1404 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`google/api/expr/v1alpha1/checked 1`] = `
+Object {
+  "importNames": Object {
+    "google/api/expr/v1alpha1/syntax.proto": Object {
+      "Constant": "Constant",
+      "Expr": "Expr",
+      "SourceInfo": "SourceInfo",
+    },
+    "google/protobuf/empty.proto": Object {
+      "Empty": "Empty",
+    },
+    "google/protobuf/struct.proto": Object {
+      "NullValue": "NullValue",
+    },
+  },
+  "imports": Array [
+    "google/api/expr/v1alpha1/syntax.proto",
+    "google/protobuf/empty.proto",
+    "google/protobuf/struct.proto",
+  ],
+  "package": "google.api.expr.v1alpha1",
+  "parsedExports": Object {
+    "CheckedExpr": true,
+    "Decl": true,
+    "Reference": true,
+    "Type": true,
+  },
+  "parsedImports": Object {
+    "google/api/expr/v1alpha1/syntax.proto": Array [
+      "SourceInfo",
+      "Expr",
+      "Constant",
+    ],
+    "google/protobuf/empty.proto": Array [
+      "Empty",
+    ],
+    "google/protobuf/struct.proto": Array [
+      "NullValue",
+    ],
+  },
+  "root": Object {
+    "nested": Object {
+      "google": Object {
+        "nested": Object {
+          "api": Object {
+            "nested": Object {
+              "expr": Object {
+                "nested": Object {
+                  "v1alpha1": Object {
+                    "nested": Object {
+                      "CheckedExpr": Object {
+                        "comment": "A CEL expression which has been successfully type checked.",
+                        "fields": Object {
+                          "expr": Object {
+                            "comment": "The checked expression. Semantically equivalent to the parsed \`expr\`, but
+may have structural differences.",
+                            "id": 4,
+                            "import": "google/api/expr/v1alpha1/syntax.proto",
+                            "importedName": "Expr",
+                            "parsedType": Object {
+                              "name": "Expr",
+                              "type": "Type",
+                            },
+                            "scope": Array [
+                              Array [
+                                "google.api.expr.v1alpha1",
+                              ],
+                            ],
+                            "scopeType": "import",
+                            "type": "Expr",
+                          },
+                          "exprVersion": Object {
+                            "comment": "The expr version indicates the major / minor version number of the \`expr\`
+representation.
+
+The most common reason for a version change will be to indicate to the CEL
+runtimes that transformations have been performed on the expr during static
+analysis. In some cases, this will save the runtime the work of applying
+the same or similar transformations prior to evaluation.",
+                            "id": 6,
+                            "isScalar": true,
+                            "parsedType": Object {
+                              "name": "string",
+                              "type": "native",
+                            },
+                            "type": "string",
+                            "typeNum": 13,
+                          },
+                          "referenceMap": Object {
+                            "comment": "A map from expression ids to resolved references.
+
+The following entries are in this table:
+
+- An Ident or Select expression is represented here if it resolves to a
+declaration. For instance, if \`a.b.c\` is represented by
+\`select(select(id(a), b), c)\`, and \`a.b\` resolves to a declaration,
+while \`c\` is a field selection, then the reference is attached to the
+nested select expression (but not to the id or or the outer select).
+In turn, if \`a\` resolves to a declaration and \`b.c\` are field selections,
+the reference is attached to the ident expression.
+- Every Call expression has an entry here, identifying the function being
+called.
+- Every CreateStruct expression for a message has an entry, identifying
+the message.",
+                            "id": 2,
+                            "keyType": "int64",
+                            "parsedType": Object {
+                              "name": "Reference",
+                              "type": "Type",
+                            },
+                            "scope": Array [
+                              "google.api.expr.v1alpha1",
+                            ],
+                            "type": "Reference",
+                          },
+                          "sourceInfo": Object {
+                            "comment": "The source info derived from input that generated the parsed \`expr\` and
+any optimizations made during the type-checking pass.",
+                            "id": 5,
+                            "import": "google/api/expr/v1alpha1/syntax.proto",
+                            "importedName": "SourceInfo",
+                            "parsedType": Object {
+                              "name": "SourceInfo",
+                              "type": "Type",
+                            },
+                            "scope": Array [
+                              Array [
+                                "google.api.expr.v1alpha1",
+                              ],
+                            ],
+                            "scopeType": "import",
+                            "type": "SourceInfo",
+                          },
+                          "typeMap": Object {
+                            "comment": "A map from expression ids to types.
+
+Every expression node which has a type different than DYN has a mapping
+here. If an expression has type DYN, it is omitted from this map to save
+space.",
+                            "id": 3,
+                            "keyType": "int64",
+                            "parsedType": Object {
+                              "name": "Type",
+                              "type": "Type",
+                            },
+                            "scope": Array [
+                              "google.api.expr.v1alpha1",
+                            ],
+                            "type": "Type",
+                          },
+                        },
+                        "keyTypes": Array [
+                          Object {
+                            "comment": "A map from expression ids to resolved references.
+
+The following entries are in this table:
+
+- An Ident or Select expression is represented here if it resolves to a
+declaration. For instance, if \`a.b.c\` is represented by
+\`select(select(id(a), b), c)\`, and \`a.b\` resolves to a declaration,
+while \`c\` is a field selection, then the reference is attached to the
+nested select expression (but not to the id or or the outer select).
+In turn, if \`a\` resolves to a declaration and \`b.c\` are field selections,
+the reference is attached to the ident expression.
+- Every Call expression has an entry here, identifying the function being
+called.
+- Every CreateStruct expression for a message has an entry, identifying
+the message.",
+                            "id": 2,
+                            "keyType": "int64",
+                            "name": "referenceMap",
+                            "parsedType": Object {
+                              "name": "Reference",
+                              "type": "Type",
+                            },
+                            "scope": Array [
+                              "google.api.expr.v1alpha1",
+                            ],
+                            "type": "Reference",
+                          },
+                          Object {
+                            "comment": "A map from expression ids to types.
+
+Every expression node which has a type different than DYN has a mapping
+here. If an expression has type DYN, it is omitted from this map to save
+space.",
+                            "id": 3,
+                            "keyType": "int64",
+                            "name": "typeMap",
+                            "parsedType": Object {
+                              "name": "Type",
+                              "type": "Type",
+                            },
+                            "scope": Array [
+                              "google.api.expr.v1alpha1",
+                            ],
+                            "type": "Type",
+                          },
+                        ],
+                        "name": "CheckedExpr",
+                        "nested": null,
+                        "oneofs": undefined,
+                        "options": undefined,
+                        "type": "Type",
+                      },
+                      "Decl": Object {
+                        "comment": "Represents a declaration of a named value or function.
+
+A declaration is part of the contract between the expression, the agent
+evaluating that expression, and the caller requesting evaluation.",
+                        "fields": Object {
+                          "function": Object {
+                            "comment": "Function declaration.",
+                            "id": 3,
+                            "parsedType": Object {
+                              "name": "FunctionDecl",
+                              "type": "Type",
+                            },
+                            "scope": Array [
+                              "google.api.expr.v1alpha1",
+                              "Decl",
+                            ],
+                            "type": "FunctionDecl",
+                          },
+                          "ident": Object {
+                            "comment": "Identifier declaration.",
+                            "id": 2,
+                            "parsedType": Object {
+                              "name": "IdentDecl",
+                              "type": "Type",
+                            },
+                            "scope": Array [
+                              "google.api.expr.v1alpha1",
+                              "Decl",
+                            ],
+                            "type": "IdentDecl",
+                          },
+                          "name": Object {
+                            "comment": "The fully qualified name of the declaration.
+
+Declarations are organized in containers and this represents the full path
+to the declaration in its container, as in \`google.api.expr.Decl\`.
+
+Declarations used as [FunctionDecl.Overload][google.api.expr.v1alpha1.Decl.FunctionDecl.Overload] parameters may or may not
+have a name depending on whether the overload is function declaration or a
+function definition containing a result [Expr][google.api.expr.v1alpha1.Expr].",
+                            "id": 1,
+                            "isScalar": true,
+                            "parsedType": Object {
+                              "name": "string",
+                              "type": "native",
+                            },
+                            "type": "string",
+                            "typeNum": 13,
+                          },
+                        },
+                        "keyTypes": Array [],
+                        "name": "Decl",
+                        "nested": Object {
+                          "FunctionDecl": Object {
+                            "comment": "Function declaration specifies one or more overloads which indicate the
+function's parameter types and return type.
+
+Functions have no observable side-effects (there may be side-effects like
+logging which are not observable from CEL).",
+                            "fields": Object {
+                              "overloads": Object {
+                                "comment": "Required. List of function overloads, must contain at least one overload.",
+                                "id": 1,
+                                "parsedType": Object {
+                                  "name": "Overload",
+                                  "type": "Type",
+                                },
+                                "rule": "repeated",
+                                "scope": Array [
+                                  "google.api.expr.v1alpha1",
+                                  "Decl",
+                                  "FunctionDecl",
+                                ],
+                                "type": "Overload",
+                              },
+                            },
+                            "keyTypes": Array [],
+                            "name": "FunctionDecl",
+                            "nested": Object {
+                              "Overload": Object {
+                                "comment": "An overload indicates a function's parameter types and return type, and
+may optionally include a function body described in terms of [Expr][google.api.expr.v1alpha1.Expr]
+values.
+
+Functions overloads are declared in either a function or method
+call-style. For methods, the \`params[0]\` is the expected type of the
+target receiver.
+
+Overloads must have non-overlapping argument types after erasure of all
+parameterized type variables (similar as type erasure in Java).",
+                                "fields": Object {
+                                  "doc": Object {
+                                    "comment": "Documentation string for the overload.",
+                                    "id": 6,
+                                    "isScalar": true,
+                                    "parsedType": Object {
+                                      "name": "string",
+                                      "type": "native",
+                                    },
+                                    "type": "string",
+                                    "typeNum": 13,
+                                  },
+                                  "isInstanceFunction": Object {
+                                    "comment": "Whether the function is to be used in a method call-style \`x.f(...)\`
+of a function call-style \`f(x, ...)\`.
+
+For methods, the first parameter declaration, \`params[0]\` is the
+expected type of the target receiver.",
+                                    "id": 5,
+                                    "isScalar": true,
+                                    "parsedType": Object {
+                                      "name": "bool",
+                                      "type": "native",
+                                    },
+                                    "type": "bool",
+                                    "typeNum": 12,
+                                  },
+                                  "overloadId": Object {
+                                    "comment": "Required. Globally unique overload name of the function which reflects
+the function name and argument types.
+
+This will be used by a [Reference][google.api.expr.v1alpha1.Reference] to indicate the \`overload_id\` that
+was resolved for the function \`name\`.",
+                                    "id": 1,
+                                    "isScalar": true,
+                                    "parsedType": Object {
+                                      "name": "string",
+                                      "type": "native",
+                                    },
+                                    "type": "string",
+                                    "typeNum": 13,
+                                  },
+                                  "params": Object {
+                                    "comment": "List of function parameter [Type][google.api.expr.v1alpha1.Type] values.
+
+Param types are disjoint after generic type parameters have been
+replaced with the type \`DYN\`. Since the \`DYN\` type is compatible with
+any other type, this means that if \`A\` is a type parameter, the
+function types \`int<A>\` and \`int<int>\` are not disjoint. Likewise,
+\`map<string, string>\` is not disjoint from \`map<K, V>\`.
+
+When the \`result_type\` of a function is a generic type param, the
+type param name also appears as the \`type\` of on at least one params.",
+                                    "id": 2,
+                                    "parsedType": Object {
+                                      "name": "Type",
+                                      "type": "Type",
+                                    },
+                                    "rule": "repeated",
+                                    "scope": Array [
+                                      "google.api.expr.v1alpha1",
+                                    ],
+                                    "type": "Type",
+                                  },
+                                  "resultType": Object {
+                                    "comment": "Required. The result type of the function. For example, the operator
+\`string.isEmpty()\` would have \`result_type\` of \`kind: BOOL\`.",
+                                    "id": 4,
+                                    "parsedType": Object {
+                                      "name": "Type",
+                                      "type": "Type",
+                                    },
+                                    "scope": Array [
+                                      "google.api.expr.v1alpha1",
+                                    ],
+                                    "type": "Type",
+                                  },
+                                  "typeParams": Object {
+                                    "comment": "The type param names associated with the function declaration.
+
+For example, \`function ex<K,V>(K key, map<K, V> map) : V\` would yield
+the type params of \`K, V\`.",
+                                    "id": 3,
+                                    "isScalar": true,
+                                    "parsedType": Object {
+                                      "name": "string",
+                                      "type": "native",
+                                    },
+                                    "rule": "repeated",
+                                    "type": "string",
+                                    "typeNum": 13,
+                                  },
+                                },
+                                "keyTypes": Array [],
+                                "name": "Overload",
+                                "nested": null,
+                                "oneofs": undefined,
+                                "options": undefined,
+                                "type": "Type",
+                              },
+                            },
+                            "oneofs": undefined,
+                            "options": undefined,
+                            "type": "Type",
+                          },
+                          "IdentDecl": Object {
+                            "comment": "Identifier declaration which specifies its type and optional \`Expr\` value.
+
+An identifier without a value is a declaration that must be provided at
+evaluation time. An identifier with a value should resolve to a constant,
+but may be used in conjunction with other identifiers bound at evaluation
+time.",
+                            "fields": Object {
+                              "doc": Object {
+                                "comment": "Documentation string for the identifier.",
+                                "id": 3,
+                                "isScalar": true,
+                                "parsedType": Object {
+                                  "name": "string",
+                                  "type": "native",
+                                },
+                                "type": "string",
+                                "typeNum": 13,
+                              },
+                              "type": Object {
+                                "comment": "Required. The type of the identifier.",
+                                "id": 1,
+                                "parsedType": Object {
+                                  "name": "Type",
+                                  "type": "Type",
+                                },
+                                "scope": Array [
+                                  "google.api.expr.v1alpha1",
+                                ],
+                                "type": "Type",
+                              },
+                              "value": Object {
+                                "comment": "The constant value of the identifier. If not specified, the identifier
+must be supplied at evaluation time.",
+                                "id": 2,
+                                "import": "google/api/expr/v1alpha1/syntax.proto",
+                                "importedName": "Constant",
+                                "parsedType": Object {
+                                  "name": "Constant",
+                                  "type": "Type",
+                                },
+                                "scope": Array [
+                                  Array [
+                                    "google.api.expr.v1alpha1",
+                                  ],
+                                ],
+                                "scopeType": "import",
+                                "type": "Constant",
+                              },
+                            },
+                            "keyTypes": Array [],
+                            "name": "IdentDecl",
+                            "nested": null,
+                            "oneofs": undefined,
+                            "options": undefined,
+                            "type": "Type",
+                          },
+                        },
+                        "oneofs": Object {
+                          "declKind": Object {
+                            "oneof": Array [
+                              "ident",
+                              "function",
+                            ],
+                          },
+                        },
+                        "options": undefined,
+                        "type": "Type",
+                      },
+                      "Reference": Object {
+                        "comment": "Describes a resolved reference to a declaration.",
+                        "fields": Object {
+                          "name": Object {
+                            "comment": "The fully qualified name of the declaration.",
+                            "id": 1,
+                            "isScalar": true,
+                            "parsedType": Object {
+                              "name": "string",
+                              "type": "native",
+                            },
+                            "type": "string",
+                            "typeNum": 13,
+                          },
+                          "overloadId": Object {
+                            "comment": "For references to functions, this is a list of \`Overload.overload_id\`
+values which match according to typing rules.
+
+If the list has more than one element, overload resolution among the
+presented candidates must happen at runtime because of dynamic types. The
+type checker attempts to narrow down this list as much as possible.
+
+Empty if this is not a reference to a [Decl.FunctionDecl][google.api.expr.v1alpha1.Decl.FunctionDecl].",
+                            "id": 3,
+                            "isScalar": true,
+                            "parsedType": Object {
+                              "name": "string",
+                              "type": "native",
+                            },
+                            "rule": "repeated",
+                            "type": "string",
+                            "typeNum": 13,
+                          },
+                          "value": Object {
+                            "comment": "For references to constants, this may contain the value of the
+constant if known at compile time.",
+                            "id": 4,
+                            "import": "google/api/expr/v1alpha1/syntax.proto",
+                            "importedName": "Constant",
+                            "parsedType": Object {
+                              "name": "Constant",
+                              "type": "Type",
+                            },
+                            "scope": Array [
+                              Array [
+                                "google.api.expr.v1alpha1",
+                              ],
+                            ],
+                            "scopeType": "import",
+                            "type": "Constant",
+                          },
+                        },
+                        "keyTypes": Array [],
+                        "name": "Reference",
+                        "nested": null,
+                        "oneofs": undefined,
+                        "options": undefined,
+                        "type": "Type",
+                      },
+                      "Type": Object {
+                        "comment": "Represents a CEL type.",
+                        "fields": Object {
+                          "abstractType": Object {
+                            "comment": "Abstract, application defined type.",
+                            "id": 14,
+                            "parsedType": Object {
+                              "name": "AbstractType",
+                              "type": "Type",
+                            },
+                            "scope": Array [
+                              "google.api.expr.v1alpha1",
+                              "Type",
+                            ],
+                            "type": "AbstractType",
+                          },
+                          "dyn": Object {
+                            "comment": "Dynamic type.",
+                            "id": 1,
+                            "import": "google/protobuf/empty.proto",
+                            "importedName": "google.protobuf.Empty",
+                            "parsedType": Object {
+                              "name": "Empty",
+                              "type": "Type",
+                            },
+                            "scope": Array [
+                              "google.protobuf",
+                            ],
+                            "scopeType": "protoImport",
+                            "type": "google.protobuf.Empty",
+                          },
+                          "error": Object {
+                            "comment": "Error type.
+
+During type-checking if an expression is an error, its type is propagated
+as the \`ERROR\` type. This permits the type-checker to discover other
+errors present in the expression.",
+                            "id": 12,
+                            "import": "google/protobuf/empty.proto",
+                            "importedName": "google.protobuf.Empty",
+                            "parsedType": Object {
+                              "name": "Empty",
+                              "type": "Type",
+                            },
+                            "scope": Array [
+                              "google.protobuf",
+                            ],
+                            "scopeType": "protoImport",
+                            "type": "google.protobuf.Empty",
+                          },
+                          "function": Object {
+                            "comment": "Function type.",
+                            "id": 8,
+                            "parsedType": Object {
+                              "name": "FunctionType",
+                              "type": "Type",
+                            },
+                            "scope": Array [
+                              "google.api.expr.v1alpha1",
+                              "Type",
+                            ],
+                            "type": "FunctionType",
+                          },
+                          "listType": Object {
+                            "comment": "Parameterized list with elements of \`list_type\`, e.g. \`list<timestamp>\`.",
+                            "id": 6,
+                            "parsedType": Object {
+                              "name": "ListType",
+                              "type": "Type",
+                            },
+                            "scope": Array [
+                              "google.api.expr.v1alpha1",
+                              "Type",
+                            ],
+                            "type": "ListType",
+                          },
+                          "mapType": Object {
+                            "comment": "Parameterized map with typed keys and values.",
+                            "id": 7,
+                            "parsedType": Object {
+                              "name": "MapType",
+                              "type": "Type",
+                            },
+                            "scope": Array [
+                              "google.api.expr.v1alpha1",
+                              "Type",
+                            ],
+                            "type": "MapType",
+                          },
+                          "messageType": Object {
+                            "comment": "Protocol buffer message type.
+
+The \`message_type\` string specifies the qualified message type name. For
+example, \`google.plus.Profile\`.",
+                            "id": 9,
+                            "isScalar": true,
+                            "parsedType": Object {
+                              "name": "string",
+                              "type": "native",
+                            },
+                            "type": "string",
+                            "typeNum": 13,
+                          },
+                          "null": Object {
+                            "comment": "Null value.",
+                            "id": 2,
+                            "import": "google/protobuf/struct.proto",
+                            "importedName": "google.protobuf.NullValue",
+                            "parsedType": Object {
+                              "name": "NullValue",
+                              "type": "Enum",
+                            },
+                            "scope": Array [
+                              "google.protobuf",
+                            ],
+                            "scopeType": "protoImport",
+                            "type": "google.protobuf.NullValue",
+                          },
+                          "primitive": Object {
+                            "comment": "Primitive types: \`true\`, \`1u\`, \`-2.0\`, \`'string'\`, \`b'bytes'\`.",
+                            "id": 3,
+                            "parsedType": Object {
+                              "name": "PrimitiveType",
+                              "type": "Enum",
+                            },
+                            "scope": Array [
+                              "google.api.expr.v1alpha1",
+                              "Type",
+                            ],
+                            "type": "PrimitiveType",
+                          },
+                          "type": Object {
+                            "comment": "Type type.
+
+The \`type\` value specifies the target type. e.g. int is type with a
+target type of \`Primitive.INT\`.",
+                            "id": 11,
+                            "parsedType": Object {
+                              "name": "Type",
+                              "type": "Type",
+                            },
+                            "scope": Array [
+                              "google.api.expr.v1alpha1",
+                            ],
+                            "type": "Type",
+                          },
+                          "typeParam": Object {
+                            "comment": "Type param type.
+
+The \`type_param\` string specifies the type parameter name, e.g. \`list<E>\`
+would be a \`list_type\` whose element type was a \`type_param\` type
+named \`E\`.",
+                            "id": 10,
+                            "isScalar": true,
+                            "parsedType": Object {
+                              "name": "string",
+                              "type": "native",
+                            },
+                            "type": "string",
+                            "typeNum": 13,
+                          },
+                          "wellKnown": Object {
+                            "comment": "Well-known protobuf type such as \`google.protobuf.Timestamp\`.",
+                            "id": 5,
+                            "parsedType": Object {
+                              "name": "WellKnownType",
+                              "type": "Enum",
+                            },
+                            "scope": Array [
+                              "google.api.expr.v1alpha1",
+                              "Type",
+                            ],
+                            "type": "WellKnownType",
+                          },
+                          "wrapper": Object {
+                            "comment": "Wrapper of a primitive type, e.g. \`google.protobuf.Int64Value\`.",
+                            "id": 4,
+                            "parsedType": Object {
+                              "name": "PrimitiveType",
+                              "type": "Enum",
+                            },
+                            "scope": Array [
+                              "google.api.expr.v1alpha1",
+                              "Type",
+                            ],
+                            "type": "PrimitiveType",
+                          },
+                        },
+                        "keyTypes": Array [],
+                        "name": "Type",
+                        "nested": Object {
+                          "AbstractType": Object {
+                            "comment": "Application defined abstract type.",
+                            "fields": Object {
+                              "name": Object {
+                                "comment": "The fully qualified name of this abstract type.",
+                                "id": 1,
+                                "isScalar": true,
+                                "parsedType": Object {
+                                  "name": "string",
+                                  "type": "native",
+                                },
+                                "type": "string",
+                                "typeNum": 13,
+                              },
+                              "parameterTypes": Object {
+                                "comment": "Parameter types for this abstract type.",
+                                "id": 2,
+                                "parsedType": Object {
+                                  "name": "Type",
+                                  "type": "Type",
+                                },
+                                "rule": "repeated",
+                                "scope": Array [
+                                  "google.api.expr.v1alpha1",
+                                ],
+                                "type": "Type",
+                              },
+                            },
+                            "keyTypes": Array [],
+                            "name": "AbstractType",
+                            "nested": null,
+                            "oneofs": undefined,
+                            "options": undefined,
+                            "type": "Type",
+                          },
+                          "FunctionType": Object {
+                            "comment": "Function type with result and arg types.",
+                            "fields": Object {
+                              "argTypes": Object {
+                                "comment": "Argument types of the function.",
+                                "id": 2,
+                                "parsedType": Object {
+                                  "name": "Type",
+                                  "type": "Type",
+                                },
+                                "rule": "repeated",
+                                "scope": Array [
+                                  "google.api.expr.v1alpha1",
+                                ],
+                                "type": "Type",
+                              },
+                              "resultType": Object {
+                                "comment": "Result type of the function.",
+                                "id": 1,
+                                "parsedType": Object {
+                                  "name": "Type",
+                                  "type": "Type",
+                                },
+                                "scope": Array [
+                                  "google.api.expr.v1alpha1",
+                                ],
+                                "type": "Type",
+                              },
+                            },
+                            "keyTypes": Array [],
+                            "name": "FunctionType",
+                            "nested": null,
+                            "oneofs": undefined,
+                            "options": undefined,
+                            "type": "Type",
+                          },
+                          "ListType": Object {
+                            "comment": "List type with typed elements, e.g. \`list<example.proto.MyMessage>\`.",
+                            "fields": Object {
+                              "elemType": Object {
+                                "comment": "The element type.",
+                                "id": 1,
+                                "parsedType": Object {
+                                  "name": "Type",
+                                  "type": "Type",
+                                },
+                                "scope": Array [
+                                  "google.api.expr.v1alpha1",
+                                ],
+                                "type": "Type",
+                              },
+                            },
+                            "keyTypes": Array [],
+                            "name": "ListType",
+                            "nested": null,
+                            "oneofs": undefined,
+                            "options": undefined,
+                            "type": "Type",
+                          },
+                          "MapType": Object {
+                            "comment": "Map type with parameterized key and value types, e.g. \`map<string, int>\`.",
+                            "fields": Object {
+                              "keyType": Object {
+                                "comment": "The type of the key.",
+                                "id": 1,
+                                "parsedType": Object {
+                                  "name": "Type",
+                                  "type": "Type",
+                                },
+                                "scope": Array [
+                                  "google.api.expr.v1alpha1",
+                                ],
+                                "type": "Type",
+                              },
+                              "valueType": Object {
+                                "comment": "The type of the value.",
+                                "id": 2,
+                                "parsedType": Object {
+                                  "name": "Type",
+                                  "type": "Type",
+                                },
+                                "scope": Array [
+                                  "google.api.expr.v1alpha1",
+                                ],
+                                "type": "Type",
+                              },
+                            },
+                            "keyTypes": Array [],
+                            "name": "MapType",
+                            "nested": null,
+                            "oneofs": undefined,
+                            "options": undefined,
+                            "type": "Type",
+                          },
+                          "PrimitiveType": Object {
+                            "comment": "CEL primitive types.",
+                            "comments": Object {
+                              "BOOL": "Boolean type.",
+                              "BYTES": "Bytes type.",
+                              "DOUBLE": "Double type.
+
+Proto-based float values are widened to double values.",
+                              "INT64": "Int64 type.
+
+Proto-based integer values are widened to int64.",
+                              "PRIMITIVE_TYPE_UNSPECIFIED": "Unspecified type.",
+                              "STRING": "String type.",
+                              "UINT64": "Uint64 type.
+
+Proto-based unsigned integer values are widened to uint64.",
+                            },
+                            "name": "PrimitiveType",
+                            "type": "Enum",
+                            "values": Object {
+                              "BOOL": 1,
+                              "BYTES": 6,
+                              "DOUBLE": 4,
+                              "INT64": 2,
+                              "PRIMITIVE_TYPE_UNSPECIFIED": 0,
+                              "STRING": 5,
+                              "UINT64": 3,
+                            },
+                          },
+                          "WellKnownType": Object {
+                            "comment": "Well-known protobuf types treated with first-class support in CEL.",
+                            "comments": Object {
+                              "ANY": "Well-known protobuf.Any type.
+
+Any types are a polymorphic message type. During type-checking they are
+treated like \`DYN\` types, but at runtime they are resolved to a specific
+message type specified at evaluation time.",
+                              "DURATION": "Well-known protobuf.Duration type, internally referenced as \`duration\`.",
+                              "TIMESTAMP": "Well-known protobuf.Timestamp type, internally referenced as \`timestamp\`.",
+                              "WELL_KNOWN_TYPE_UNSPECIFIED": "Unspecified type.",
+                            },
+                            "name": "WellKnownType",
+                            "type": "Enum",
+                            "values": Object {
+                              "ANY": 1,
+                              "DURATION": 3,
+                              "TIMESTAMP": 2,
+                              "WELL_KNOWN_TYPE_UNSPECIFIED": 0,
+                            },
+                          },
+                        },
+                        "oneofs": Object {
+                          "typeKind": Object {
+                            "oneof": Array [
+                              "dyn",
+                              "null",
+                              "primitive",
+                              "wrapper",
+                              "wellKnown",
+                              "listType",
+                              "mapType",
+                              "function",
+                              "messageType",
+                              "typeParam",
+                              "type",
+                              "error",
+                              "abstractType",
+                            ],
+                          },
+                        },
+                        "options": undefined,
+                        "type": "Type",
+                      },
+                    },
+                    "type": "Namespace",
+                  },
+                },
+                "type": "Namespace",
+              },
+            },
+            "type": "Namespace",
+          },
+        },
+        "type": "Namespace",
+      },
+    },
+    "type": "Root",
+  },
+}
+`;
+
+exports[`google/api/expr/v1alpha1/checked 2`] = `
+Object {
+  "import": "google/protobuf/empty.proto",
+  "importType": "protoImport",
+  "importedName": "google.protobuf.Empty",
+  "name": "Empty",
+  "obj": Object {
+    "_ctor": null,
+    "_fieldsArray": null,
+    "_fieldsById": null,
+    "_nestedArray": Array [],
+    "_oneofsArray": null,
+    "comment": "A generic empty message that you can re-use to avoid defining duplicated
+empty messages in your APIs. A typical example is to use it as the request
+or the response type of an API method. For instance:
+
+service Foo {
+rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty);
+}
+
+The JSON representation for \`Empty\` is empty JSON object \`{}\`.",
+    "extensions": undefined,
+    "fields": Object {},
+    "filename": null,
+    "group": undefined,
+    "name": "Empty",
+    "nested": undefined,
+    "oneofs": undefined,
+    "options": undefined,
+    "parent": Object {
+      "nested": Object {
+        "Empty": Object {
+          "fields": Object {},
+        },
+      },
+      "options": Object {
+        "cc_enable_arenas": true,
+        "csharp_namespace": "Google.Protobuf.WellKnownTypes",
+        "go_package": "types",
+        "java_multiple_files": true,
+        "java_outer_classname": "EmptyProto",
+        "java_package": "com.google.protobuf",
+        "objc_class_prefix": "GPB",
+      },
+    },
+    "parsedOptions": null,
+    "reserved": undefined,
+    "resolved": false,
+    "scope": Array [
+      "google.protobuf",
+    ],
+  },
+  "package": "google.protobuf",
+}
+`;
+
+exports[`google/api/expr/v1alpha1/checked 3`] = `
+Object {
+  "import": "google/api/expr/v1alpha1/syntax.proto",
+  "importType": "import",
+  "importedName": "Constant",
+  "name": "Constant",
+  "obj": Object {
+    "_ctor": null,
+    "_fieldsArray": null,
+    "_fieldsById": null,
+    "_nestedArray": Array [],
+    "_oneofsArray": null,
+    "comment": "Represents a primitive literal.
+
+Named 'Constant' here for backwards compatibility.
+
+This is similar as the primitives supported in the well-known type
+\`google.protobuf.Value\`, but richer so it can represent CEL's full range of
+primitives.
+
+Lists and structs are not included as constants as these aggregate types may
+contain [Expr][google.api.expr.v1alpha1.Expr] elements which require evaluation and are thus not constant.
+
+Examples of literals include: \`\\"hello\\"\`, \`b'bytes'\`, \`1u\`, \`4.2\`, \`-2\`,
+\`true\`, \`null\`.",
+    "extensions": undefined,
+    "fields": Object {
+      "boolValue": Object {
+        "id": 2,
+        "type": "bool",
+      },
+      "bytesValue": Object {
+        "id": 7,
+        "type": "bytes",
+      },
+      "doubleValue": Object {
+        "id": 5,
+        "type": "double",
+      },
+      "durationValue": Object {
+        "id": 8,
+        "options": Object {
+          "deprecated": true,
+        },
+        "type": "google.protobuf.Duration",
+      },
+      "int64Value": Object {
+        "id": 3,
+        "type": "int64",
+      },
+      "nullValue": Object {
+        "id": 1,
+        "type": "google.protobuf.NullValue",
+      },
+      "stringValue": Object {
+        "id": 6,
+        "type": "string",
+      },
+      "timestampValue": Object {
+        "id": 9,
+        "options": Object {
+          "deprecated": true,
+        },
+        "type": "google.protobuf.Timestamp",
+      },
+      "uint64Value": Object {
+        "id": 4,
+        "type": "uint64",
+      },
+    },
+    "filename": null,
+    "group": undefined,
+    "name": "Constant",
+    "nested": undefined,
+    "oneofs": Object {
+      "constantKind": Object {
+        "oneof": Array [
+          "nullValue",
+          "boolValue",
+          "int64Value",
+          "uint64Value",
+          "doubleValue",
+          "stringValue",
+          "bytesValue",
+          "durationValue",
+          "timestampValue",
+        ],
+      },
+    },
+    "options": undefined,
+    "parent": Object {
+      "nested": Object {
+        "Constant": Object {
+          "fields": Object {
+            "boolValue": Object {
+              "id": 2,
+              "type": "bool",
+            },
+            "bytesValue": Object {
+              "id": 7,
+              "type": "bytes",
+            },
+            "doubleValue": Object {
+              "id": 5,
+              "type": "double",
+            },
+            "durationValue": Object {
+              "id": 8,
+              "options": Object {
+                "deprecated": true,
+              },
+              "type": "google.protobuf.Duration",
+            },
+            "int64Value": Object {
+              "id": 3,
+              "type": "int64",
+            },
+            "nullValue": Object {
+              "id": 1,
+              "type": "google.protobuf.NullValue",
+            },
+            "stringValue": Object {
+              "id": 6,
+              "type": "string",
+            },
+            "timestampValue": Object {
+              "id": 9,
+              "options": Object {
+                "deprecated": true,
+              },
+              "type": "google.protobuf.Timestamp",
+            },
+            "uint64Value": Object {
+              "id": 4,
+              "type": "uint64",
+            },
+          },
+          "oneofs": Object {
+            "constantKind": Object {
+              "oneof": Array [
+                "nullValue",
+                "boolValue",
+                "int64Value",
+                "uint64Value",
+                "doubleValue",
+                "stringValue",
+                "bytesValue",
+                "durationValue",
+                "timestampValue",
+              ],
+            },
+          },
+        },
+        "Expr": Object {
+          "fields": Object {
+            "callExpr": Object {
+              "id": 6,
+              "type": "Call",
+            },
+            "comprehensionExpr": Object {
+              "id": 9,
+              "type": "Comprehension",
+            },
+            "constExpr": Object {
+              "id": 3,
+              "type": "Constant",
+            },
+            "id": Object {
+              "id": 2,
+              "type": "int64",
+            },
+            "identExpr": Object {
+              "id": 4,
+              "type": "Ident",
+            },
+            "listExpr": Object {
+              "id": 7,
+              "type": "CreateList",
+            },
+            "selectExpr": Object {
+              "id": 5,
+              "type": "Select",
+            },
+            "structExpr": Object {
+              "id": 8,
+              "type": "CreateStruct",
+            },
+          },
+          "nested": Object {
+            "Call": Object {
+              "fields": Object {
+                "args": Object {
+                  "id": 3,
+                  "rule": "repeated",
+                  "type": "Expr",
+                },
+                "function": Object {
+                  "id": 2,
+                  "type": "string",
+                },
+                "target": Object {
+                  "id": 1,
+                  "type": "Expr",
+                },
+              },
+            },
+            "Comprehension": Object {
+              "fields": Object {
+                "accuInit": Object {
+                  "id": 4,
+                  "type": "Expr",
+                },
+                "accuVar": Object {
+                  "id": 3,
+                  "type": "string",
+                },
+                "iterRange": Object {
+                  "id": 2,
+                  "type": "Expr",
+                },
+                "iterVar": Object {
+                  "id": 1,
+                  "type": "string",
+                },
+                "loopCondition": Object {
+                  "id": 5,
+                  "type": "Expr",
+                },
+                "loopStep": Object {
+                  "id": 6,
+                  "type": "Expr",
+                },
+                "result": Object {
+                  "id": 7,
+                  "type": "Expr",
+                },
+              },
+            },
+            "CreateList": Object {
+              "fields": Object {
+                "elements": Object {
+                  "id": 1,
+                  "rule": "repeated",
+                  "type": "Expr",
+                },
+              },
+            },
+            "CreateStruct": Object {
+              "fields": Object {
+                "entries": Object {
+                  "id": 2,
+                  "rule": "repeated",
+                  "type": "Entry",
+                },
+                "messageName": Object {
+                  "id": 1,
+                  "type": "string",
+                },
+              },
+              "nested": Object {
+                "Entry": Object {
+                  "fields": Object {
+                    "fieldKey": Object {
+                      "id": 2,
+                      "type": "string",
+                    },
+                    "id": Object {
+                      "id": 1,
+                      "type": "int64",
+                    },
+                    "mapKey": Object {
+                      "id": 3,
+                      "type": "Expr",
+                    },
+                    "value": Object {
+                      "id": 4,
+                      "type": "Expr",
+                    },
+                  },
+                  "oneofs": Object {
+                    "keyKind": Object {
+                      "oneof": Array [
+                        "fieldKey",
+                        "mapKey",
+                      ],
+                    },
+                  },
+                },
+              },
+            },
+            "Ident": Object {
+              "fields": Object {
+                "name": Object {
+                  "id": 1,
+                  "type": "string",
+                },
+              },
+            },
+            "Select": Object {
+              "fields": Object {
+                "field": Object {
+                  "id": 2,
+                  "type": "string",
+                },
+                "operand": Object {
+                  "id": 1,
+                  "type": "Expr",
+                },
+                "testOnly": Object {
+                  "id": 3,
+                  "type": "bool",
+                },
+              },
+            },
+          },
+          "oneofs": Object {
+            "exprKind": Object {
+              "oneof": Array [
+                "constExpr",
+                "identExpr",
+                "selectExpr",
+                "callExpr",
+                "listExpr",
+                "structExpr",
+                "comprehensionExpr",
+              ],
+            },
+          },
+        },
+        "ParsedExpr": Object {
+          "fields": Object {
+            "expr": Object {
+              "id": 2,
+              "type": "Expr",
+            },
+            "sourceInfo": Object {
+              "id": 3,
+              "type": "SourceInfo",
+            },
+          },
+        },
+        "SourceInfo": Object {
+          "fields": Object {
+            "lineOffsets": Object {
+              "id": 3,
+              "rule": "repeated",
+              "type": "int32",
+            },
+            "location": Object {
+              "id": 2,
+              "type": "string",
+            },
+            "macroCalls": Object {
+              "id": 5,
+              "keyType": "int64",
+              "type": "Expr",
+            },
+            "positions": Object {
+              "id": 4,
+              "keyType": "int64",
+              "type": "int32",
+            },
+            "syntaxVersion": Object {
+              "id": 1,
+              "type": "string",
+            },
+          },
+        },
+        "SourcePosition": Object {
+          "fields": Object {
+            "column": Object {
+              "id": 4,
+              "type": "int32",
+            },
+            "line": Object {
+              "id": 3,
+              "type": "int32",
+            },
+            "location": Object {
+              "id": 1,
+              "type": "string",
+            },
+            "offset": Object {
+              "id": 2,
+              "type": "int32",
+            },
+          },
+        },
+      },
+      "options": Object {
+        "cc_enable_arenas": true,
+        "go_package": "google.golang.org/genproto/googleapis/api/expr/v1alpha1;expr",
+        "java_multiple_files": true,
+        "java_outer_classname": "SyntaxProto",
+        "java_package": "com.google.api.expr.v1alpha1",
+      },
+    },
+    "parsedOptions": null,
+    "reserved": undefined,
+    "resolved": false,
+    "scope": Array [
+      "google.api.expr.v1alpha1",
+    ],
+  },
+}
+`;

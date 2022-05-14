@@ -1,5 +1,6 @@
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
+import { Duration } from "../../../google/protobuf/duration";
 import { Any } from "../../../google/protobuf/any";
 import { Coin } from "../../../cosmos/base/v1beta1/coin";
 /** Since: cosmos-sdk 0.43 */
@@ -28,7 +29,7 @@ export interface PeriodicAllowance {
      * period specifies the time duration in which period_spend_limit coins can
      * be spent before that allowance is reset
      */
-    period: string;
+    period: Duration;
     /**
      * period_spend_limit specifies the maximum number of coins that can be spent
      * in the period

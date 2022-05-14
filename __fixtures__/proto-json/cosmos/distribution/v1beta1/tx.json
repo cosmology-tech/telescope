@@ -1,0 +1,191 @@
+{
+  "package": "cosmos.distribution.v1beta1",
+  "imports": [
+    "gogoproto/gogo.proto",
+    "cosmos/base/v1beta1/coin.proto",
+    "cosmos_proto/cosmos.proto",
+    "cosmos/msg/v1/msg.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "cosmos": {
+        "nested": {
+          "distribution": {
+            "nested": {
+              "v1beta1": {
+                "options": {
+                  "go_package": "github.com/cosmos/cosmos-sdk/x/distribution/types",
+                  "(gogoproto.equal_all)": true
+                },
+                "nested": {
+                  "Msg": {
+                    "methods": {
+                      "SetWithdrawAddress": {
+                        "requestType": "MsgSetWithdrawAddress",
+                        "responseType": "MsgSetWithdrawAddressResponse",
+                        "comment": "SetWithdrawAddress defines a method to change the withdraw address\nfor a delegator (or validator self-delegation)."
+                      },
+                      "WithdrawDelegatorReward": {
+                        "requestType": "MsgWithdrawDelegatorReward",
+                        "responseType": "MsgWithdrawDelegatorRewardResponse",
+                        "comment": "WithdrawDelegatorReward defines a method to withdraw rewards of delegator\nfrom a single validator."
+                      },
+                      "WithdrawValidatorCommission": {
+                        "requestType": "MsgWithdrawValidatorCommission",
+                        "responseType": "MsgWithdrawValidatorCommissionResponse",
+                        "comment": "WithdrawValidatorCommission defines a method to withdraw the\nfull commission to the validator address."
+                      },
+                      "FundCommunityPool": {
+                        "requestType": "MsgFundCommunityPool",
+                        "responseType": "MsgFundCommunityPoolResponse",
+                        "comment": "FundCommunityPool defines a method to allow an account to directly\nfund the community pool."
+                      }
+                    },
+                    "comment": "Msg defines the distribution Msg service."
+                  },
+                  "MsgSetWithdrawAddress": {
+                    "options": {
+                      "(cosmos.msg.v1.signer)": "delegator_address",
+                      "(gogoproto.equal)": false,
+                      "(gogoproto.goproto_getters)": false
+                    },
+                    "fields": {
+                      "delegatorAddress": {
+                        "type": "string",
+                        "id": 1,
+                        "options": {
+                          "(cosmos_proto.scalar)": "cosmos.AddressString"
+                        },
+                        "comment": null
+                      },
+                      "withdrawAddress": {
+                        "type": "string",
+                        "id": 2,
+                        "options": {
+                          "(cosmos_proto.scalar)": "cosmos.AddressString"
+                        },
+                        "comment": null
+                      }
+                    },
+                    "comment": "MsgSetWithdrawAddress sets the withdraw address for\na delegator (or validator self-delegation)."
+                  },
+                  "MsgSetWithdrawAddressResponse": {
+                    "fields": {},
+                    "comment": "MsgSetWithdrawAddressResponse defines the Msg/SetWithdrawAddress response type."
+                  },
+                  "MsgWithdrawDelegatorReward": {
+                    "options": {
+                      "(cosmos.msg.v1.signer)": "delegator_address",
+                      "(gogoproto.equal)": false,
+                      "(gogoproto.goproto_getters)": false
+                    },
+                    "fields": {
+                      "delegatorAddress": {
+                        "type": "string",
+                        "id": 1,
+                        "options": {
+                          "(cosmos_proto.scalar)": "cosmos.AddressString"
+                        },
+                        "comment": null
+                      },
+                      "validatorAddress": {
+                        "type": "string",
+                        "id": 2,
+                        "options": {
+                          "(cosmos_proto.scalar)": "cosmos.AddressString"
+                        },
+                        "comment": null
+                      }
+                    },
+                    "comment": "MsgWithdrawDelegatorReward represents delegation withdrawal to a delegator\nfrom a single validator."
+                  },
+                  "MsgWithdrawDelegatorRewardResponse": {
+                    "fields": {
+                      "amount": {
+                        "rule": "repeated",
+                        "type": "cosmos.base.v1beta1.Coin",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.nullable)": false,
+                          "(gogoproto.castrepeated)": "github.com/cosmos/cosmos-sdk/types.Coins"
+                        },
+                        "comment": null
+                      }
+                    },
+                    "comment": "MsgWithdrawDelegatorRewardResponse defines the Msg/WithdrawDelegatorReward response type."
+                  },
+                  "MsgWithdrawValidatorCommission": {
+                    "options": {
+                      "(cosmos.msg.v1.signer)": "validator_address",
+                      "(gogoproto.equal)": false,
+                      "(gogoproto.goproto_getters)": false
+                    },
+                    "fields": {
+                      "validatorAddress": {
+                        "type": "string",
+                        "id": 1,
+                        "options": {
+                          "(cosmos_proto.scalar)": "cosmos.AddressString"
+                        },
+                        "comment": null
+                      }
+                    },
+                    "comment": "MsgWithdrawValidatorCommission withdraws the full commission to the validator\naddress."
+                  },
+                  "MsgWithdrawValidatorCommissionResponse": {
+                    "fields": {
+                      "amount": {
+                        "rule": "repeated",
+                        "type": "cosmos.base.v1beta1.Coin",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.nullable)": false,
+                          "(gogoproto.castrepeated)": "github.com/cosmos/cosmos-sdk/types.Coins"
+                        },
+                        "comment": null
+                      }
+                    },
+                    "comment": "MsgWithdrawValidatorCommissionResponse defines the Msg/WithdrawValidatorCommission response type."
+                  },
+                  "MsgFundCommunityPool": {
+                    "options": {
+                      "(cosmos.msg.v1.signer)": "depositor",
+                      "(gogoproto.equal)": false,
+                      "(gogoproto.goproto_getters)": false
+                    },
+                    "fields": {
+                      "amount": {
+                        "rule": "repeated",
+                        "type": "cosmos.base.v1beta1.Coin",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.nullable)": false,
+                          "(gogoproto.castrepeated)": "github.com/cosmos/cosmos-sdk/types.Coins"
+                        },
+                        "comment": null
+                      },
+                      "depositor": {
+                        "type": "string",
+                        "id": 2,
+                        "options": {
+                          "(cosmos_proto.scalar)": "cosmos.AddressString"
+                        },
+                        "comment": null
+                      }
+                    },
+                    "comment": "MsgFundCommunityPool allows an account to directly\nfund the community pool."
+                  },
+                  "MsgFundCommunityPoolResponse": {
+                    "fields": {},
+                    "comment": "MsgFundCommunityPoolResponse defines the Msg/FundCommunityPool response type."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

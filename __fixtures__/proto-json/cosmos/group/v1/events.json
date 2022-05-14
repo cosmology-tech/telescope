@@ -1,0 +1,136 @@
+{
+  "package": "cosmos.group.v1",
+  "imports": [
+    "cosmos_proto/cosmos.proto",
+    "cosmos/group/v1/types.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "cosmos": {
+        "nested": {
+          "group": {
+            "nested": {
+              "v1": {
+                "options": {
+                  "go_package": "github.com/cosmos/cosmos-sdk/x/group"
+                },
+                "nested": {
+                  "EventCreateGroup": {
+                    "fields": {
+                      "groupId": {
+                        "type": "uint64",
+                        "id": 1,
+                        "comment": "group_id is the unique ID of the group."
+                      }
+                    },
+                    "comment": "EventCreateGroup is an event emitted when a group is created."
+                  },
+                  "EventUpdateGroup": {
+                    "fields": {
+                      "groupId": {
+                        "type": "uint64",
+                        "id": 1,
+                        "comment": "group_id is the unique ID of the group."
+                      }
+                    },
+                    "comment": "EventUpdateGroup is an event emitted when a group is updated."
+                  },
+                  "EventCreateGroupPolicy": {
+                    "fields": {
+                      "address": {
+                        "type": "string",
+                        "id": 1,
+                        "options": {
+                          "(cosmos_proto.scalar)": "cosmos.AddressString"
+                        },
+                        "comment": "address is the account address of the group policy."
+                      }
+                    },
+                    "comment": "EventCreateGroupPolicy is an event emitted when a group policy is created."
+                  },
+                  "EventUpdateGroupPolicy": {
+                    "fields": {
+                      "address": {
+                        "type": "string",
+                        "id": 1,
+                        "options": {
+                          "(cosmos_proto.scalar)": "cosmos.AddressString"
+                        },
+                        "comment": "address is the account address of the group policy."
+                      }
+                    },
+                    "comment": "EventUpdateGroupPolicy is an event emitted when a group policy is updated."
+                  },
+                  "EventSubmitProposal": {
+                    "fields": {
+                      "proposalId": {
+                        "type": "uint64",
+                        "id": 1,
+                        "comment": "proposal_id is the unique ID of the proposal."
+                      }
+                    },
+                    "comment": "EventSubmitProposal is an event emitted when a proposal is created."
+                  },
+                  "EventWithdrawProposal": {
+                    "fields": {
+                      "proposalId": {
+                        "type": "uint64",
+                        "id": 1,
+                        "comment": "proposal_id is the unique ID of the proposal."
+                      }
+                    },
+                    "comment": "EventWithdrawProposal is an event emitted when a proposal is withdrawn."
+                  },
+                  "EventVote": {
+                    "fields": {
+                      "proposalId": {
+                        "type": "uint64",
+                        "id": 1,
+                        "comment": "proposal_id is the unique ID of the proposal."
+                      }
+                    },
+                    "comment": "EventVote is an event emitted when a voter votes on a proposal."
+                  },
+                  "EventExec": {
+                    "fields": {
+                      "proposalId": {
+                        "type": "uint64",
+                        "id": 1,
+                        "comment": "proposal_id is the unique ID of the proposal."
+                      },
+                      "result": {
+                        "type": "ProposalExecutorResult",
+                        "id": 2,
+                        "comment": "result is the proposal execution result."
+                      }
+                    },
+                    "comment": "EventExec is an event emitted when a proposal is executed."
+                  },
+                  "EventLeaveGroup": {
+                    "fields": {
+                      "groupId": {
+                        "type": "uint64",
+                        "id": 1,
+                        "comment": "group_id is the unique ID of the group."
+                      },
+                      "address": {
+                        "type": "string",
+                        "id": 2,
+                        "options": {
+                          "(cosmos_proto.scalar)": "cosmos.AddressString"
+                        },
+                        "comment": "address is the account address of the group member."
+                      }
+                    },
+                    "comment": "EventLeaveGroup is an event emitted when group member leaves the group."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

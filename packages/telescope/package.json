@@ -1,9 +1,9 @@
 {
   "name": "@osmonauts/telescope",
-  "version": "0.2.2",
-  "description": "A TypeScript Transpiler for Comsos Protobufs",
+  "version": "0.3.1",
+  "description": "A TypeScript Transpiler for Cosmos Protobufs",
   "author": "Dan Lynch <pyramation@gmail.com>",
-  "homepage": "https://github.com/osmosis-labs/telescope/tree/master/packages/telescope#readme",
+  "homepage": "https://github.com/osmosis-labs/telescope/tree/master/packages/transpiler#readme",
   "license": "SEE LICENSE IN LICENSE",
   "main": "main/index.js",
   "module": "module/index.js",
@@ -39,11 +39,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/osmosis-labs/telescope/tree/master/packages/telescope"
+    "url": "https://github.com/osmosis-labs/telescope/tree/master/packages/transpiler"
   },
   "keywords": [],
   "bugs": {
-    "url": "https://github.com/osmosis-labs/telescope/tree/master/packages/telescope/issues"
+    "url": "https://github.com/osmosis-labs/telescope/tree/master/packages/transpiler/issues"
   },
   "devDependencies": {
     "@babel/cli": "7.17.6",
@@ -78,11 +78,8 @@
     "@babel/runtime": "^7.11.2",
     "@babel/traverse": "7.17.3",
     "@babel/types": "7.17.0",
-    "@cosmjs/amino": "0.28.4",
-    "@cosmjs/proto-signing": "0.28.4",
-    "@cosmjs/stargate": "0.28.4",
-    "@cosmjs/tendermint-rpc": "^0.28.4",
-    "@osmonauts/ast-gen": "^0.2.0",
+    "@osmonauts/ast": "0.2.1",
+    "@osmonauts/proto-parser": "0.3.0",
     "case": "1.6.3",
     "dargs": "7.0.0",
     "dotty": "0.1.2",
@@ -92,9 +89,7 @@
     "long": "^5.2.0",
     "minimist": "1.2.6",
     "mkdirp": "1.0.4",
-    "mobx": "6.5.0",
-    "protoc": "^1.0.4",
-    "shelljs": "0.8.5",
-    "ts-proto": "^1.110.2"
+    "protobufjs": "6.11.2",
+    "shelljs": "0.8.5"
   }
 }

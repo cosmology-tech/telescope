@@ -1,77 +1,47 @@
-import generate from '@babel/generator';
-import * as c from '@osmonauts/ast-gen';
+import { TelescopeBuilder } from '../src';
 import * as t from '@babel/types';
-import { tmpdir } from 'os';
-import { join, relative, dirname, extname, basename } from 'path';
-import { camel } from 'case';
-import stringify from 'ast-stringify';
-import dotty from 'dotty';
-import {
-    TSProtoStore
-} from '../src'
-import {
-    parsePackage,
-    recursiveModuleBundle,
-    parsePackageCreateClient,
-    buildClients
-} from '../src/utils'
 
-const protoPath = __dirname + '/../__fixtures__/chain1'
-const outPath = join(tmpdir(), 'chain1');
-const program = new TSProtoStore({ protoPath, outPath });
+import { ProtoStore } from '@osmonauts/proto-parser'
+import { bundlePackages, bundleRegistries, getPackagesBundled } from '../src/bundle'
+import generate from '@babel/generator';
 
-const expectCode = (ast) => {
-    expect(generate(ast).code).toMatchSnapshot();
-}
-const printCode = (ast) => {
-    console.log(generate(ast).code);
-}
+const store = new ProtoStore(__dirname + '/../../../__fixtures__/chain1');
+store.traverseAll();
 
-it('packages', async () => {
-    const allPackages = program.getPackagesBundled();
-    Object.keys(allPackages).forEach(base => {
-        const pkgs = allPackages[base];
-        const bundleVariables = {};
-        const bundleFile = join(protoPath, base, 'index.ts');
-        const importPaths = [];
-        parsePackage(pkgs, bundleFile, importPaths, bundleVariables);
-        const body = recursiveModuleBundle(bundleVariables);
-        expectCode(t.program([...importPaths, ...body]))
-    });
+const input = {
+    outPath: __dirname + '/../../../__fixtures__/output1',
+    protoDir: __dirname + '/../../../__fixtures__/chain1'
+};
+// const telescope = new TelescopeBuilder(input);
+
+it('getPackagesBundled', () => {
+    const bundle = getPackagesBundled(store);
+    expect(Object.keys(bundle)).toEqual(["ics23", "cosmos_proto", "cosmos", "cosmwasm", "gogoproto", "google", "ibc", "osmosis", "secret", "tendermint"]);
+});
+
+it('bundlePackages', () => {
+    const bundled = bundlePackages(store, input);
+    const packaged = bundled.reduce((m, bundle) => {
+        m[bundle.base] = {
+            bundle: bundle.bundleFile,
+            base: bundle.base,
+            code: generate(t.program([
+                ...bundle.importPaths,
+                ...bundle.body
+            ])).code
+        };
+        return m;
+    }, {});
+    expect(packaged).toMatchSnapshot();
 })
 
-it('root', async () => {
-    const allPackages = program.getPackagesBundled();
-    const bundleFile = join(protoPath, 'index.ts');
-    const bundleVariables = {};
-    const importPaths = [];
-
-    Object.keys(allPackages).forEach(base => {
-        const pkgs = allPackages[base];
-        parsePackage(pkgs, bundleFile, importPaths, bundleVariables);
-    });
-
-    const body = recursiveModuleBundle(bundleVariables);
-    expectCode(t.program([...importPaths, ...body]))
-})
-
-it('clients', async () => {
-    const allPackages = program.getPackagesBundled();
-    program.write();
-    Object.keys(allPackages).forEach(base => {
-
-        const bundleFilePath = join(protoPath, base, 'index.ts');
-        const clientFilePath = join(protoPath, base, 'client.ts');
-        const bundleVariables = {};
-        const importPaths = [];
-
-        const pkgs = allPackages[base];
-        parsePackageCreateClient({ obj: pkgs, bundleFilePath, clientFilePath, importPaths, bundleVariables });
-        console.log(JSON.stringify(bundleVariables, null, 2));
-
-        const body = buildClients(bundleVariables);
-        printCode(t.program([...importPaths, ...body]))
-    });
-
-
+it('bundle packages root file names', () => {
+    const bundled = bundlePackages(store, input);
+    const packaged = bundled.reduce((m, bundle) => {
+        m[bundle.base] = {
+            bundle: bundle.bundleFile,
+        };
+        return m;
+    }, {});
+    expect(packaged).toMatchSnapshot();
 })

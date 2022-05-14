@@ -1,0 +1,303 @@
+{
+  "package": "ibc.core.connection.v1",
+  "imports": [
+    "gogoproto/gogo.proto",
+    "cosmos/base/query/v1beta1/pagination.proto",
+    "ibc/core/client/v1/client.proto",
+    "ibc/core/connection/v1/connection.proto",
+    "google/api/annotations.proto",
+    "google/protobuf/any.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "ibc": {
+        "nested": {
+          "core": {
+            "nested": {
+              "connection": {
+                "nested": {
+                  "v1": {
+                    "options": {
+                      "go_package": "github.com/cosmos/ibc-go/v2/modules/core/03-connection/types"
+                    },
+                    "nested": {
+                      "Query": {
+                        "methods": {
+                          "Connection": {
+                            "requestType": "QueryConnectionRequest",
+                            "responseType": "QueryConnectionResponse",
+                            "options": {
+                              "(google.api.http).get": "/ibc/core/connection/v1/connections/{connection_id}"
+                            },
+                            "comment": "Connection queries an IBC connection end.",
+                            "parsedOptions": [
+                              {
+                                "(google.api.http)": {
+                                  "get": "/ibc/core/connection/v1/connections/{connection_id}"
+                                }
+                              }
+                            ]
+                          },
+                          "Connections": {
+                            "requestType": "QueryConnectionsRequest",
+                            "responseType": "QueryConnectionsResponse",
+                            "options": {
+                              "(google.api.http).get": "/ibc/core/connection/v1/connections"
+                            },
+                            "comment": "Connections queries all the IBC connections of a chain.",
+                            "parsedOptions": [
+                              {
+                                "(google.api.http)": {
+                                  "get": "/ibc/core/connection/v1/connections"
+                                }
+                              }
+                            ]
+                          },
+                          "ClientConnections": {
+                            "requestType": "QueryClientConnectionsRequest",
+                            "responseType": "QueryClientConnectionsResponse",
+                            "options": {
+                              "(google.api.http).get": "/ibc/core/connection/v1/client_connections/{client_id}"
+                            },
+                            "comment": "ClientConnections queries the connection paths associated with a client\nstate.",
+                            "parsedOptions": [
+                              {
+                                "(google.api.http)": {
+                                  "get": "/ibc/core/connection/v1/client_connections/{client_id}"
+                                }
+                              }
+                            ]
+                          },
+                          "ConnectionClientState": {
+                            "requestType": "QueryConnectionClientStateRequest",
+                            "responseType": "QueryConnectionClientStateResponse",
+                            "options": {
+                              "(google.api.http).get": "/ibc/core/connection/v1/connections/{connection_id}/client_state"
+                            },
+                            "comment": "ConnectionClientState queries the client state associated with the\nconnection.",
+                            "parsedOptions": [
+                              {
+                                "(google.api.http)": {
+                                  "get": "/ibc/core/connection/v1/connections/{connection_id}/client_state"
+                                }
+                              }
+                            ]
+                          },
+                          "ConnectionConsensusState": {
+                            "requestType": "QueryConnectionConsensusStateRequest",
+                            "responseType": "QueryConnectionConsensusStateResponse",
+                            "options": {
+                              "(google.api.http).get": "/ibc/core/connection/v1/connections/{connection_id}/consensus_state/revision/{revision_number}/height/{revision_height}"
+                            },
+                            "comment": "ConnectionConsensusState queries the consensus state associated with the\nconnection.",
+                            "parsedOptions": [
+                              {
+                                "(google.api.http)": {
+                                  "get": "/ibc/core/connection/v1/connections/{connection_id}/consensus_state/revision/{revision_number}/height/{revision_height}"
+                                }
+                              }
+                            ]
+                          }
+                        },
+                        "comment": "Query provides defines the gRPC querier service"
+                      },
+                      "QueryConnectionRequest": {
+                        "fields": {
+                          "connectionId": {
+                            "type": "string",
+                            "id": 1,
+                            "comment": "connection unique identifier"
+                          }
+                        },
+                        "comment": "QueryConnectionRequest is the request type for the Query/Connection RPC\nmethod"
+                      },
+                      "QueryConnectionResponse": {
+                        "fields": {
+                          "connection": {
+                            "type": "ibc.core.connection.v1.ConnectionEnd",
+                            "id": 1,
+                            "comment": "connection associated with the request identifier"
+                          },
+                          "proof": {
+                            "type": "bytes",
+                            "id": 2,
+                            "comment": "merkle proof of existence"
+                          },
+                          "proofHeight": {
+                            "type": "ibc.core.client.v1.Height",
+                            "id": 3,
+                            "options": {
+                              "(gogoproto.nullable)": false
+                            },
+                            "comment": "height at which the proof was retrieved"
+                          }
+                        },
+                        "comment": "QueryConnectionResponse is the response type for the Query/Connection RPC\nmethod. Besides the connection end, it includes a proof and the height from\nwhich the proof was retrieved."
+                      },
+                      "QueryConnectionsRequest": {
+                        "fields": {
+                          "pagination": {
+                            "type": "cosmos.base.query.v1beta1.PageRequest",
+                            "id": 1,
+                            "comment": null
+                          }
+                        },
+                        "comment": "QueryConnectionsRequest is the request type for the Query/Connections RPC\nmethod"
+                      },
+                      "QueryConnectionsResponse": {
+                        "fields": {
+                          "connections": {
+                            "rule": "repeated",
+                            "type": "ibc.core.connection.v1.IdentifiedConnection",
+                            "id": 1,
+                            "comment": "list of stored connections of the chain."
+                          },
+                          "pagination": {
+                            "type": "cosmos.base.query.v1beta1.PageResponse",
+                            "id": 2,
+                            "comment": "pagination response"
+                          },
+                          "height": {
+                            "type": "ibc.core.client.v1.Height",
+                            "id": 3,
+                            "options": {
+                              "(gogoproto.nullable)": false
+                            },
+                            "comment": "query block height"
+                          }
+                        },
+                        "comment": "QueryConnectionsResponse is the response type for the Query/Connections RPC\nmethod."
+                      },
+                      "QueryClientConnectionsRequest": {
+                        "fields": {
+                          "clientId": {
+                            "type": "string",
+                            "id": 1,
+                            "comment": "client identifier associated with a connection"
+                          }
+                        },
+                        "comment": "QueryClientConnectionsRequest is the request type for the\nQuery/ClientConnections RPC method"
+                      },
+                      "QueryClientConnectionsResponse": {
+                        "fields": {
+                          "connectionPaths": {
+                            "rule": "repeated",
+                            "type": "string",
+                            "id": 1,
+                            "comment": "slice of all the connection paths associated with a client."
+                          },
+                          "proof": {
+                            "type": "bytes",
+                            "id": 2,
+                            "comment": "merkle proof of existence"
+                          },
+                          "proofHeight": {
+                            "type": "ibc.core.client.v1.Height",
+                            "id": 3,
+                            "options": {
+                              "(gogoproto.nullable)": false
+                            },
+                            "comment": "height at which the proof was generated"
+                          }
+                        },
+                        "comment": "QueryClientConnectionsResponse is the response type for the\nQuery/ClientConnections RPC method"
+                      },
+                      "QueryConnectionClientStateRequest": {
+                        "fields": {
+                          "connectionId": {
+                            "type": "string",
+                            "id": 1,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:connection_id"
+                            },
+                            "comment": "connection identifier"
+                          }
+                        },
+                        "comment": "QueryConnectionClientStateRequest is the request type for the\nQuery/ConnectionClientState RPC method"
+                      },
+                      "QueryConnectionClientStateResponse": {
+                        "fields": {
+                          "identifiedClientState": {
+                            "type": "ibc.core.client.v1.IdentifiedClientState",
+                            "id": 1,
+                            "comment": "client state associated with the channel"
+                          },
+                          "proof": {
+                            "type": "bytes",
+                            "id": 2,
+                            "comment": "merkle proof of existence"
+                          },
+                          "proofHeight": {
+                            "type": "ibc.core.client.v1.Height",
+                            "id": 3,
+                            "options": {
+                              "(gogoproto.nullable)": false
+                            },
+                            "comment": "height at which the proof was retrieved"
+                          }
+                        },
+                        "comment": "QueryConnectionClientStateResponse is the response type for the\nQuery/ConnectionClientState RPC method"
+                      },
+                      "QueryConnectionConsensusStateRequest": {
+                        "fields": {
+                          "connectionId": {
+                            "type": "string",
+                            "id": 1,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:connection_id"
+                            },
+                            "comment": "connection identifier"
+                          },
+                          "revisionNumber": {
+                            "type": "uint64",
+                            "id": 2,
+                            "comment": null
+                          },
+                          "revisionHeight": {
+                            "type": "uint64",
+                            "id": 3,
+                            "comment": null
+                          }
+                        },
+                        "comment": "QueryConnectionConsensusStateRequest is the request type for the\nQuery/ConnectionConsensusState RPC method"
+                      },
+                      "QueryConnectionConsensusStateResponse": {
+                        "fields": {
+                          "consensusState": {
+                            "type": "google.protobuf.Any",
+                            "id": 1,
+                            "comment": "consensus state associated with the channel"
+                          },
+                          "clientId": {
+                            "type": "string",
+                            "id": 2,
+                            "comment": "client ID associated with the consensus state"
+                          },
+                          "proof": {
+                            "type": "bytes",
+                            "id": 3,
+                            "comment": "merkle proof of existence"
+                          },
+                          "proofHeight": {
+                            "type": "ibc.core.client.v1.Height",
+                            "id": 4,
+                            "options": {
+                              "(gogoproto.nullable)": false
+                            },
+                            "comment": "height at which the proof was retrieved"
+                          }
+                        },
+                        "comment": "QueryConnectionConsensusStateResponse is the response type for the\nQuery/ConnectionConsensusState RPC method"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

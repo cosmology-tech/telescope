@@ -1,0 +1,96 @@
+{
+  "package": "cosmos.nft.v1beta1",
+  "imports": [
+    "google/protobuf/any.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "cosmos": {
+        "nested": {
+          "nft": {
+            "nested": {
+              "v1beta1": {
+                "options": {
+                  "go_package": "github.com/cosmos/cosmos-sdk/x/nft"
+                },
+                "nested": {
+                  "Class": {
+                    "fields": {
+                      "id": {
+                        "type": "string",
+                        "id": 1,
+                        "comment": "id defines the unique identifier of the NFT classification, similar to the contract address of ERC721"
+                      },
+                      "name": {
+                        "type": "string",
+                        "id": 2,
+                        "comment": "name defines the human-readable name of the NFT classification. Optional"
+                      },
+                      "symbol": {
+                        "type": "string",
+                        "id": 3,
+                        "comment": "symbol is an abbreviated name for nft classification. Optional"
+                      },
+                      "description": {
+                        "type": "string",
+                        "id": 4,
+                        "comment": "description is a brief description of nft classification. Optional"
+                      },
+                      "uri": {
+                        "type": "string",
+                        "id": 5,
+                        "comment": "uri for the class metadata stored off chain. It can define schema for Class and NFT `Data` attributes. Optional"
+                      },
+                      "uriHash": {
+                        "type": "string",
+                        "id": 6,
+                        "comment": "uri_hash is a hash of the document pointed by uri. Optional"
+                      },
+                      "data": {
+                        "type": "google.protobuf.Any",
+                        "id": 7,
+                        "comment": "data is the app specific metadata of the NFT class. Optional"
+                      }
+                    },
+                    "comment": "Class defines the class of the nft type."
+                  },
+                  "NFT": {
+                    "fields": {
+                      "classId": {
+                        "type": "string",
+                        "id": 1,
+                        "comment": "class_id associated with the NFT, similar to the contract address of ERC721"
+                      },
+                      "id": {
+                        "type": "string",
+                        "id": 2,
+                        "comment": "id is a unique identifier of the NFT"
+                      },
+                      "uri": {
+                        "type": "string",
+                        "id": 3,
+                        "comment": "uri for the NFT metadata stored off chain"
+                      },
+                      "uriHash": {
+                        "type": "string",
+                        "id": 4,
+                        "comment": "uri_hash is a hash of the document pointed by uri"
+                      },
+                      "data": {
+                        "type": "google.protobuf.Any",
+                        "id": 10,
+                        "comment": "data is an app specific data of the NFT. Optional"
+                      }
+                    },
+                    "comment": "NFT defines the NFT."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

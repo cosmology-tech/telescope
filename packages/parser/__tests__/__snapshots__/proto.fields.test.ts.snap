@@ -1,0 +1,118 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Coin 1`] = `
+Object {
+  "fields": Object {
+    "amount": Object {
+      "id": 2,
+      "options": Object {
+        "(cosmos_proto.scalar)": "cosmos.Int",
+        "(gogoproto.customtype)": "Int",
+        "(gogoproto.nullable)": false,
+      },
+      "type": "string",
+    },
+    "denom": Object {
+      "id": 1,
+      "type": "string",
+    },
+  },
+  "options": Object {
+    "(gogoproto.equal)": true,
+  },
+}
+`;
+
+exports[`DecCoin 1`] = `
+Object {
+  "fields": Object {
+    "amount": Object {
+      "id": 2,
+      "options": Object {
+        "(cosmos_proto.scalar)": "cosmos.Dec",
+        "(gogoproto.customtype)": "Dec",
+        "(gogoproto.nullable)": false,
+      },
+      "type": "string",
+    },
+    "denom": Object {
+      "id": 1,
+      "type": "string",
+    },
+  },
+  "options": Object {
+    "(gogoproto.equal)": true,
+  },
+}
+`;
+
+exports[`DecProto 1`] = `
+Object {
+  "fields": Object {
+    "dec": Object {
+      "id": 1,
+      "options": Object {
+        "(cosmos_proto.scalar)": "cosmos.Dec",
+        "(gogoproto.customtype)": "Dec",
+        "(gogoproto.nullable)": false,
+      },
+      "type": "string",
+    },
+  },
+}
+`;
+
+exports[`IntProto 1`] = `
+Object {
+  "fields": Object {
+    "int": Object {
+      "id": 1,
+      "options": Object {
+        "(cosmos_proto.scalar)": "cosmos.Int",
+        "(gogoproto.customtype)": "Int",
+        "(gogoproto.nullable)": false,
+      },
+      "type": "string",
+    },
+  },
+}
+`;
+
+exports[`MsgExitPool 1`] = `
+Object {
+  "fields": Object {
+    "poolId": Object {
+      "id": 2,
+      "options": Object {
+        "(gogoproto.moretags)": "yaml:pool_id",
+      },
+      "type": "uint64",
+    },
+    "sender": Object {
+      "id": 1,
+      "options": Object {
+        "(gogoproto.moretags)": "yaml:sender",
+      },
+      "type": "string",
+    },
+    "shareInAmount": Object {
+      "id": 3,
+      "options": Object {
+        "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Int",
+        "(gogoproto.moretags)": "yaml:share_in_amount",
+        "(gogoproto.nullable)": false,
+      },
+      "type": "string",
+    },
+    "tokenOutMins": Object {
+      "id": 4,
+      "options": Object {
+        "(gogoproto.moretags)": "yaml:token_out_min_amounts",
+        "(gogoproto.nullable)": false,
+      },
+      "rule": "repeated",
+      "type": "cosmos.base.v1beta1.Coin",
+    },
+  },
+}
+`;

@@ -1,0 +1,113 @@
+{
+  "package": "cosmos.authz.v1beta1",
+  "imports": [
+    "cosmos_proto/cosmos.proto",
+    "google/protobuf/timestamp.proto",
+    "gogoproto/gogo.proto",
+    "google/protobuf/any.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "cosmos": {
+        "nested": {
+          "authz": {
+            "nested": {
+              "v1beta1": {
+                "options": {
+                  "go_package": "github.com/cosmos/cosmos-sdk/x/authz",
+                  "(gogoproto.goproto_getters_all)": false
+                },
+                "nested": {
+                  "GenericAuthorization": {
+                    "options": {
+                      "(cosmos_proto.implements_interface)": "Authorization"
+                    },
+                    "fields": {
+                      "msg": {
+                        "type": "string",
+                        "id": 1,
+                        "comment": "Msg, identified by it's type URL, to grant unrestricted permissions to execute"
+                      }
+                    },
+                    "comment": "GenericAuthorization gives the grantee unrestricted permissions to execute\nthe provided method on behalf of the granter's account."
+                  },
+                  "Grant": {
+                    "fields": {
+                      "authorization": {
+                        "type": "google.protobuf.Any",
+                        "id": 1,
+                        "options": {
+                          "(cosmos_proto.accepts_interface)": "Authorization"
+                        },
+                        "comment": null
+                      },
+                      "expiration": {
+                        "type": "google.protobuf.Timestamp",
+                        "id": 2,
+                        "options": {
+                          "(gogoproto.stdtime)": true,
+                          "(gogoproto.nullable)": true
+                        },
+                        "comment": "time when the grant will expire and will be pruned. If null, then the grant\ndoesn't have a time expiration (other conditions  in `authorization`\nmay apply to invalidate the grant)"
+                      }
+                    },
+                    "comment": "Grant gives permissions to execute\nthe provide method with expiration time."
+                  },
+                  "GrantAuthorization": {
+                    "fields": {
+                      "granter": {
+                        "type": "string",
+                        "id": 1,
+                        "options": {
+                          "(cosmos_proto.scalar)": "cosmos.AddressString"
+                        },
+                        "comment": null
+                      },
+                      "grantee": {
+                        "type": "string",
+                        "id": 2,
+                        "options": {
+                          "(cosmos_proto.scalar)": "cosmos.AddressString"
+                        },
+                        "comment": null
+                      },
+                      "authorization": {
+                        "type": "google.protobuf.Any",
+                        "id": 3,
+                        "options": {
+                          "(cosmos_proto.accepts_interface)": "Authorization"
+                        },
+                        "comment": null
+                      },
+                      "expiration": {
+                        "type": "google.protobuf.Timestamp",
+                        "id": 4,
+                        "options": {
+                          "(gogoproto.stdtime)": true
+                        },
+                        "comment": null
+                      }
+                    },
+                    "comment": "GrantAuthorization extends a grant with both the addresses of the grantee and granter.\nIt is used in genesis.proto and query.proto"
+                  },
+                  "GrantQueueItem": {
+                    "fields": {
+                      "msgTypeUrls": {
+                        "rule": "repeated",
+                        "type": "string",
+                        "id": 1,
+                        "comment": "msg_type_urls contains the list of TypeURL of a sdk.Msg."
+                      }
+                    },
+                    "comment": "GrantQueueItem contains the list of TypeURL of a sdk.Msg."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

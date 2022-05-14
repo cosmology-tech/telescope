@@ -1,0 +1,59 @@
+{
+  "package": "google.api",
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "google": {
+        "nested": {
+          "api": {
+            "options": {
+              "cc_enable_arenas": true,
+              "go_package": "google.golang.org/genproto/googleapis/api/label;label",
+              "java_multiple_files": true,
+              "java_outer_classname": "LabelProto",
+              "java_package": "com.google.api",
+              "objc_class_prefix": "GAPI"
+            },
+            "nested": {
+              "LabelDescriptor": {
+                "fields": {
+                  "key": {
+                    "type": "string",
+                    "id": 1,
+                    "comment": "The label key."
+                  },
+                  "valueType": {
+                    "type": "ValueType",
+                    "id": 2,
+                    "comment": "The type of data that can be assigned to the label."
+                  },
+                  "description": {
+                    "type": "string",
+                    "id": 3,
+                    "comment": "A human-readable description for the label."
+                  }
+                },
+                "nested": {
+                  "ValueType": {
+                    "values": {
+                      "STRING": 0,
+                      "BOOL": 1,
+                      "INT64": 2
+                    },
+                    "comment": "Value types that can be used as label values.",
+                    "comments": {
+                      "STRING": "A variable-length string. This is the default.",
+                      "BOOL": "Boolean; true or false.",
+                      "INT64": "A 64-bit signed integer."
+                    }
+                  }
+                },
+                "comment": "A description of a label."
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

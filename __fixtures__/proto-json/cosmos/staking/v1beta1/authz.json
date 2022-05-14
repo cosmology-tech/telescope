@@ -1,0 +1,99 @@
+{
+  "package": "cosmos.staking.v1beta1",
+  "imports": [
+    "gogoproto/gogo.proto",
+    "cosmos_proto/cosmos.proto",
+    "cosmos/base/v1beta1/coin.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "cosmos": {
+        "nested": {
+          "staking": {
+            "nested": {
+              "v1beta1": {
+                "options": {
+                  "go_package": "github.com/cosmos/cosmos-sdk/x/staking/types"
+                },
+                "nested": {
+                  "StakeAuthorization": {
+                    "options": {
+                      "(cosmos_proto.implements_interface)": "Authorization"
+                    },
+                    "oneofs": {
+                      "validators": {
+                        "oneof": [
+                          "allowList",
+                          "denyList"
+                        ],
+                        "comment": "validators is the oneof that represents either allow_list or deny_list"
+                      }
+                    },
+                    "fields": {
+                      "maxTokens": {
+                        "type": "cosmos.base.v1beta1.Coin",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.castrepeated)": "github.com/cosmos/cosmos-sdk/types.Coin"
+                        },
+                        "comment": "max_tokens specifies the maximum amount of tokens can be delegate to a validator. If it is\nempty, there is no spend limit and any amount of coins can be delegated."
+                      },
+                      "allowList": {
+                        "type": "Validators",
+                        "id": 2,
+                        "comment": "allow_list specifies list of validator addresses to whom grantee can delegate tokens on behalf of granter's\naccount."
+                      },
+                      "denyList": {
+                        "type": "Validators",
+                        "id": 3,
+                        "comment": "deny_list specifies list of validator addresses to whom grantee can not delegate tokens."
+                      },
+                      "authorizationType": {
+                        "type": "AuthorizationType",
+                        "id": 4,
+                        "comment": "authorization_type defines one of AuthorizationType."
+                      }
+                    },
+                    "nested": {
+                      "Validators": {
+                        "fields": {
+                          "address": {
+                            "rule": "repeated",
+                            "type": "string",
+                            "id": 1,
+                            "options": {
+                              "(cosmos_proto.scalar)": "cosmos.AddressString"
+                            },
+                            "comment": null
+                          }
+                        },
+                        "comment": "Validators defines list of validator addresses."
+                      }
+                    },
+                    "comment": "StakeAuthorization defines authorization for delegate/undelegate/redelegate.\n\nSince: cosmos-sdk 0.43"
+                  },
+                  "AuthorizationType": {
+                    "values": {
+                      "AUTHORIZATION_TYPE_UNSPECIFIED": 0,
+                      "AUTHORIZATION_TYPE_DELEGATE": 1,
+                      "AUTHORIZATION_TYPE_UNDELEGATE": 2,
+                      "AUTHORIZATION_TYPE_REDELEGATE": 3
+                    },
+                    "comment": "AuthorizationType defines the type of staking module authorization type\n\nSince: cosmos-sdk 0.43",
+                    "comments": {
+                      "AUTHORIZATION_TYPE_UNSPECIFIED": "AUTHORIZATION_TYPE_UNSPECIFIED specifies an unknown authorization type",
+                      "AUTHORIZATION_TYPE_DELEGATE": "AUTHORIZATION_TYPE_DELEGATE defines an authorization type for Msg/Delegate",
+                      "AUTHORIZATION_TYPE_UNDELEGATE": "AUTHORIZATION_TYPE_UNDELEGATE defines an authorization type for Msg/Undelegate",
+                      "AUTHORIZATION_TYPE_REDELEGATE": "AUTHORIZATION_TYPE_REDELEGATE defines an authorization type for Msg/BeginRedelegate"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

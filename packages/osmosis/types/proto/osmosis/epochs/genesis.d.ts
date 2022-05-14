@@ -1,9 +1,10 @@
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
+import { Duration } from "../../google/protobuf/duration";
 export interface EpochInfo {
     identifier: string;
     startTime: Date;
-    duration: string;
+    duration: Duration;
     currentEpoch: Long;
     currentEpochStartTime: Date;
     epochCountingStarted: boolean;

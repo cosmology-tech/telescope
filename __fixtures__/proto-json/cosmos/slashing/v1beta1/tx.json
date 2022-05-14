@@ -1,0 +1,62 @@
+{
+  "package": "cosmos.slashing.v1beta1",
+  "imports": [
+    "gogoproto/gogo.proto",
+    "cosmos_proto/cosmos.proto",
+    "cosmos/msg/v1/msg.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "cosmos": {
+        "nested": {
+          "slashing": {
+            "nested": {
+              "v1beta1": {
+                "options": {
+                  "go_package": "github.com/cosmos/cosmos-sdk/x/slashing/types",
+                  "(gogoproto.equal_all)": true
+                },
+                "nested": {
+                  "Msg": {
+                    "methods": {
+                      "Unjail": {
+                        "requestType": "MsgUnjail",
+                        "responseType": "MsgUnjailResponse",
+                        "comment": "Unjail defines a method for unjailing a jailed validator, thus returning\nthem into the bonded validator set, so they can begin receiving provisions\nand rewards again."
+                      }
+                    },
+                    "comment": "Msg defines the slashing Msg service."
+                  },
+                  "MsgUnjail": {
+                    "options": {
+                      "(cosmos.msg.v1.signer)": "validator_addr",
+                      "(gogoproto.goproto_getters)": false,
+                      "(gogoproto.goproto_stringer)": true
+                    },
+                    "fields": {
+                      "validatorAddr": {
+                        "type": "string",
+                        "id": 1,
+                        "options": {
+                          "(cosmos_proto.scalar)": "cosmos.AddressString",
+                          "(gogoproto.jsontag)": "address"
+                        },
+                        "comment": null
+                      }
+                    },
+                    "comment": "MsgUnjail defines the Msg/Unjail request type"
+                  },
+                  "MsgUnjailResponse": {
+                    "fields": {},
+                    "comment": "MsgUnjailResponse defines the Msg/Unjail response type"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,174 @@
+{
+  "package": "cosmos.vesting.v1beta1",
+  "imports": [
+    "gogoproto/gogo.proto",
+    "cosmos/base/v1beta1/coin.proto",
+    "cosmos_proto/cosmos.proto",
+    "cosmos/vesting/v1beta1/vesting.proto",
+    "cosmos/msg/v1/msg.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "cosmos": {
+        "nested": {
+          "vesting": {
+            "nested": {
+              "v1beta1": {
+                "options": {
+                  "go_package": "github.com/cosmos/cosmos-sdk/x/auth/vesting/types"
+                },
+                "nested": {
+                  "Msg": {
+                    "methods": {
+                      "CreateVestingAccount": {
+                        "requestType": "MsgCreateVestingAccount",
+                        "responseType": "MsgCreateVestingAccountResponse",
+                        "comment": "CreateVestingAccount defines a method that enables creating a vesting\naccount."
+                      },
+                      "CreatePermanentLockedAccount": {
+                        "requestType": "MsgCreatePermanentLockedAccount",
+                        "responseType": "MsgCreatePermanentLockedAccountResponse",
+                        "comment": "CreatePermanentLockedAccount defines a method that enables creating a permanent\nlocked account."
+                      },
+                      "CreatePeriodicVestingAccount": {
+                        "requestType": "MsgCreatePeriodicVestingAccount",
+                        "responseType": "MsgCreatePeriodicVestingAccountResponse",
+                        "comment": "CreatePeriodicVestingAccount defines a method that enables creating a\nperiodic vesting account."
+                      }
+                    },
+                    "comment": "Msg defines the bank Msg service."
+                  },
+                  "MsgCreateVestingAccount": {
+                    "options": {
+                      "(cosmos.msg.v1.signer)": "from_address",
+                      "(gogoproto.equal)": true
+                    },
+                    "fields": {
+                      "fromAddress": {
+                        "type": "string",
+                        "id": 1,
+                        "options": {
+                          "(cosmos_proto.scalar)": "cosmos.AddressString"
+                        },
+                        "comment": null
+                      },
+                      "toAddress": {
+                        "type": "string",
+                        "id": 2,
+                        "options": {
+                          "(cosmos_proto.scalar)": "cosmos.AddressString"
+                        },
+                        "comment": null
+                      },
+                      "amount": {
+                        "rule": "repeated",
+                        "type": "cosmos.base.v1beta1.Coin",
+                        "id": 3,
+                        "options": {
+                          "(gogoproto.nullable)": false,
+                          "(gogoproto.castrepeated)": "github.com/cosmos/cosmos-sdk/types.Coins"
+                        },
+                        "comment": null
+                      },
+                      "endTime": {
+                        "type": "int64",
+                        "id": 4,
+                        "comment": null
+                      },
+                      "delayed": {
+                        "type": "bool",
+                        "id": 5,
+                        "comment": null
+                      }
+                    },
+                    "comment": "MsgCreateVestingAccount defines a message that enables creating a vesting\naccount."
+                  },
+                  "MsgCreateVestingAccountResponse": {
+                    "fields": {},
+                    "comment": "MsgCreateVestingAccountResponse defines the Msg/CreateVestingAccount response type."
+                  },
+                  "MsgCreatePermanentLockedAccount": {
+                    "options": {
+                      "(gogoproto.equal)": true
+                    },
+                    "fields": {
+                      "fromAddress": {
+                        "type": "string",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.moretags)": "yaml:from_address"
+                        },
+                        "comment": null
+                      },
+                      "toAddress": {
+                        "type": "string",
+                        "id": 2,
+                        "options": {
+                          "(gogoproto.moretags)": "yaml:to_address"
+                        },
+                        "comment": null
+                      },
+                      "amount": {
+                        "rule": "repeated",
+                        "type": "cosmos.base.v1beta1.Coin",
+                        "id": 3,
+                        "options": {
+                          "(gogoproto.nullable)": false,
+                          "(gogoproto.castrepeated)": "github.com/cosmos/cosmos-sdk/types.Coins"
+                        },
+                        "comment": null
+                      }
+                    },
+                    "comment": "MsgCreatePermanentLockedAccount defines a message that enables creating a permanent\nlocked account."
+                  },
+                  "MsgCreatePermanentLockedAccountResponse": {
+                    "fields": {},
+                    "comment": "MsgCreatePermanentLockedAccountResponse defines the Msg/CreatePermanentLockedAccount response type."
+                  },
+                  "MsgCreatePeriodicVestingAccount": {
+                    "options": {
+                      "(cosmos.msg.v1.signer)": "from_address",
+                      "(gogoproto.equal)": false
+                    },
+                    "fields": {
+                      "fromAddress": {
+                        "type": "string",
+                        "id": 1,
+                        "comment": null
+                      },
+                      "toAddress": {
+                        "type": "string",
+                        "id": 2,
+                        "comment": null
+                      },
+                      "startTime": {
+                        "type": "int64",
+                        "id": 3,
+                        "comment": null
+                      },
+                      "vestingPeriods": {
+                        "rule": "repeated",
+                        "type": "Period",
+                        "id": 4,
+                        "options": {
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": null
+                      }
+                    },
+                    "comment": "MsgCreateVestingAccount defines a message that enables creating a vesting\naccount."
+                  },
+                  "MsgCreatePeriodicVestingAccountResponse": {
+                    "fields": {},
+                    "comment": "MsgCreateVestingAccountResponse defines the Msg/CreatePeriodicVestingAccount\nresponse type."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

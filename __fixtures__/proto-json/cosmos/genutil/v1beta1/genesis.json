@@ -1,0 +1,41 @@
+{
+  "package": "cosmos.genutil.v1beta1",
+  "imports": [
+    "gogoproto/gogo.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "cosmos": {
+        "nested": {
+          "genutil": {
+            "nested": {
+              "v1beta1": {
+                "options": {
+                  "go_package": "github.com/cosmos/cosmos-sdk/x/genutil/types"
+                },
+                "nested": {
+                  "GenesisState": {
+                    "fields": {
+                      "genTxs": {
+                        "rule": "repeated",
+                        "type": "bytes",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.casttype)": "encoding/json.RawMessage",
+                          "(gogoproto.jsontag)": "gentxs"
+                        },
+                        "comment": "gen_txs defines the genesis transactions."
+                      }
+                    },
+                    "comment": "GenesisState defines the raw genesis transaction in JSON."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

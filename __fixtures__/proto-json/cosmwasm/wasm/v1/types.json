@@ -1,0 +1,289 @@
+{
+  "package": "cosmwasm.wasm.v1",
+  "imports": [
+    "cosmos_proto/cosmos.proto",
+    "gogoproto/gogo.proto",
+    "google/protobuf/any.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "cosmwasm": {
+        "nested": {
+          "wasm": {
+            "nested": {
+              "v1": {
+                "options": {
+                  "go_package": "github.com/CosmWasm/wasmd/x/wasm/types",
+                  "(gogoproto.goproto_getters_all)": false,
+                  "(gogoproto.equal_all)": true
+                },
+                "nested": {
+                  "AccessType": {
+                    "options": {
+                      "(gogoproto.goproto_enum_prefix)": false,
+                      "(gogoproto.goproto_enum_stringer)": false
+                    },
+                    "values": {
+                      "ACCESS_TYPE_UNSPECIFIED": 0,
+                      "ACCESS_TYPE_NOBODY": 1,
+                      "ACCESS_TYPE_ONLY_ADDRESS": 2,
+                      "ACCESS_TYPE_EVERYBODY": 3
+                    },
+                    "comment": "AccessType permission types",
+                    "comments": {
+                      "ACCESS_TYPE_UNSPECIFIED": "AccessTypeUnspecified placeholder for empty value",
+                      "ACCESS_TYPE_NOBODY": "AccessTypeNobody forbidden",
+                      "ACCESS_TYPE_ONLY_ADDRESS": "AccessTypeOnlyAddress restricted to an address",
+                      "ACCESS_TYPE_EVERYBODY": "AccessTypeEverybody unrestricted"
+                    }
+                  },
+                  "AccessTypeParam": {
+                    "options": {
+                      "(gogoproto.goproto_stringer)": true
+                    },
+                    "fields": {
+                      "value": {
+                        "type": "AccessType",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.moretags)": "yaml:value"
+                        },
+                        "comment": null
+                      }
+                    },
+                    "comment": "AccessTypeParam"
+                  },
+                  "AccessConfig": {
+                    "options": {
+                      "(gogoproto.goproto_stringer)": true
+                    },
+                    "fields": {
+                      "permission": {
+                        "type": "AccessType",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.moretags)": "yaml:permission"
+                        },
+                        "comment": null
+                      },
+                      "address": {
+                        "type": "string",
+                        "id": 2,
+                        "options": {
+                          "(gogoproto.moretags)": "yaml:address"
+                        },
+                        "comment": null
+                      }
+                    },
+                    "comment": "AccessConfig access control type."
+                  },
+                  "Params": {
+                    "options": {
+                      "(gogoproto.goproto_stringer)": false
+                    },
+                    "fields": {
+                      "codeUploadAccess": {
+                        "type": "AccessConfig",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.nullable)": false,
+                          "(gogoproto.moretags)": "yaml:code_upload_access"
+                        },
+                        "comment": null
+                      },
+                      "instantiateDefaultPermission": {
+                        "type": "AccessType",
+                        "id": 2,
+                        "options": {
+                          "(gogoproto.moretags)": "yaml:instantiate_default_permission"
+                        },
+                        "comment": null
+                      },
+                      "maxWasmCodeSize": {
+                        "type": "uint64",
+                        "id": 3,
+                        "options": {
+                          "(gogoproto.moretags)": "yaml:max_wasm_code_size"
+                        },
+                        "comment": null
+                      }
+                    },
+                    "comment": "Params defines the set of wasm parameters."
+                  },
+                  "CodeInfo": {
+                    "fields": {
+                      "codeHash": {
+                        "type": "bytes",
+                        "id": 1,
+                        "comment": "CodeHash is the unique identifier created by wasmvm"
+                      },
+                      "creator": {
+                        "type": "string",
+                        "id": 2,
+                        "comment": "Creator address who initially stored the code"
+                      },
+                      "instantiateConfig": {
+                        "type": "AccessConfig",
+                        "id": 5,
+                        "options": {
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": "InstantiateConfig access control to apply on contract creation, optional"
+                      }
+                    },
+                    "reserved": [
+                      [
+                        3,
+                        3
+                      ],
+                      [
+                        4,
+                        4
+                      ]
+                    ],
+                    "comment": "CodeInfo is data for the uploaded contract WASM code"
+                  },
+                  "ContractInfo": {
+                    "options": {
+                      "(gogoproto.equal)": true
+                    },
+                    "fields": {
+                      "codeId": {
+                        "type": "uint64",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.customname)": "CodeID"
+                        },
+                        "comment": "CodeID is the reference to the stored Wasm code"
+                      },
+                      "creator": {
+                        "type": "string",
+                        "id": 2,
+                        "comment": "Creator address who initially instantiated the contract"
+                      },
+                      "admin": {
+                        "type": "string",
+                        "id": 3,
+                        "comment": "Admin is an optional address that can execute migrations"
+                      },
+                      "label": {
+                        "type": "string",
+                        "id": 4,
+                        "comment": "Label is optional metadata to be stored with a contract instance."
+                      },
+                      "created": {
+                        "type": "AbsoluteTxPosition",
+                        "id": 5,
+                        "comment": "Created Tx position when the contract was instantiated.\nThis data should kept internal and not be exposed via query results. Just\nuse for sorting"
+                      },
+                      "ibcPortId": {
+                        "type": "string",
+                        "id": 6,
+                        "options": {
+                          "(gogoproto.customname)": "IBCPortID"
+                        },
+                        "comment": null
+                      },
+                      "extension": {
+                        "type": "google.protobuf.Any",
+                        "id": 7,
+                        "options": {
+                          "(cosmos_proto.accepts_interface)": "ContractInfoExtension"
+                        },
+                        "comment": "Extension is an extension point to store custom metadata within the\npersistence model."
+                      }
+                    },
+                    "comment": "ContractInfo stores a WASM contract instance"
+                  },
+                  "ContractCodeHistoryOperationType": {
+                    "options": {
+                      "(gogoproto.goproto_enum_prefix)": false
+                    },
+                    "values": {
+                      "CONTRACT_CODE_HISTORY_OPERATION_TYPE_UNSPECIFIED": 0,
+                      "CONTRACT_CODE_HISTORY_OPERATION_TYPE_INIT": 1,
+                      "CONTRACT_CODE_HISTORY_OPERATION_TYPE_MIGRATE": 2,
+                      "CONTRACT_CODE_HISTORY_OPERATION_TYPE_GENESIS": 3
+                    },
+                    "comment": "ContractCodeHistoryOperationType actions that caused a code change",
+                    "comments": {
+                      "CONTRACT_CODE_HISTORY_OPERATION_TYPE_UNSPECIFIED": "ContractCodeHistoryOperationTypeUnspecified placeholder for empty value",
+                      "CONTRACT_CODE_HISTORY_OPERATION_TYPE_INIT": "ContractCodeHistoryOperationTypeInit on chain contract instantiation",
+                      "CONTRACT_CODE_HISTORY_OPERATION_TYPE_MIGRATE": "ContractCodeHistoryOperationTypeMigrate code migration",
+                      "CONTRACT_CODE_HISTORY_OPERATION_TYPE_GENESIS": "ContractCodeHistoryOperationTypeGenesis based on genesis data"
+                    }
+                  },
+                  "ContractCodeHistoryEntry": {
+                    "fields": {
+                      "operation": {
+                        "type": "ContractCodeHistoryOperationType",
+                        "id": 1,
+                        "comment": null
+                      },
+                      "codeId": {
+                        "type": "uint64",
+                        "id": 2,
+                        "options": {
+                          "(gogoproto.customname)": "CodeID"
+                        },
+                        "comment": "CodeID is the reference to the stored WASM code"
+                      },
+                      "updated": {
+                        "type": "AbsoluteTxPosition",
+                        "id": 3,
+                        "comment": "Updated Tx position when the operation was executed."
+                      },
+                      "msg": {
+                        "type": "bytes",
+                        "id": 4,
+                        "options": {
+                          "(gogoproto.casttype)": "RawContractMessage"
+                        },
+                        "comment": null
+                      }
+                    },
+                    "comment": "ContractCodeHistoryEntry metadata to a contract."
+                  },
+                  "AbsoluteTxPosition": {
+                    "fields": {
+                      "blockHeight": {
+                        "type": "uint64",
+                        "id": 1,
+                        "comment": "BlockHeight is the block the contract was created at"
+                      },
+                      "txIndex": {
+                        "type": "uint64",
+                        "id": 2,
+                        "comment": "TxIndex is a monotonic counter within the block (actual transaction index,\nor gas consumed)"
+                      }
+                    },
+                    "comment": "AbsoluteTxPosition is a unique transaction position that allows for global\nordering of transactions."
+                  },
+                  "Model": {
+                    "fields": {
+                      "key": {
+                        "type": "bytes",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.casttype)": "github.com/tendermint/tendermint/libs/bytes.HexBytes"
+                        },
+                        "comment": "hex-encode key to read it better (this is often ascii)"
+                      },
+                      "value": {
+                        "type": "bytes",
+                        "id": 2,
+                        "comment": "base64-encode raw value"
+                      }
+                    },
+                    "comment": "Model is a struct that holds a KV pair"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

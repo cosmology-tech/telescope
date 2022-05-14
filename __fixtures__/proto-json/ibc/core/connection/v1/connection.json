@@ -1,0 +1,237 @@
+{
+  "package": "ibc.core.connection.v1",
+  "imports": [
+    "gogoproto/gogo.proto",
+    "ibc/core/commitment/v1/commitment.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "ibc": {
+        "nested": {
+          "core": {
+            "nested": {
+              "connection": {
+                "nested": {
+                  "v1": {
+                    "options": {
+                      "go_package": "github.com/cosmos/ibc-go/v2/modules/core/03-connection/types"
+                    },
+                    "nested": {
+                      "ConnectionEnd": {
+                        "options": {
+                          "(gogoproto.goproto_getters)": false
+                        },
+                        "fields": {
+                          "clientId": {
+                            "type": "string",
+                            "id": 1,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:client_id"
+                            },
+                            "comment": "client associated with this connection."
+                          },
+                          "versions": {
+                            "rule": "repeated",
+                            "type": "Version",
+                            "id": 2,
+                            "comment": "IBC version which can be utilised to determine encodings or protocols for\nchannels or packets utilising this connection."
+                          },
+                          "state": {
+                            "type": "State",
+                            "id": 3,
+                            "comment": "current state of the connection end."
+                          },
+                          "counterparty": {
+                            "type": "Counterparty",
+                            "id": 4,
+                            "options": {
+                              "(gogoproto.nullable)": false
+                            },
+                            "comment": "counterparty chain associated with this connection."
+                          },
+                          "delayPeriod": {
+                            "type": "uint64",
+                            "id": 5,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:delay_period"
+                            },
+                            "comment": "delay period that must pass before a consensus state can be used for\npacket-verification NOTE: delay period logic is only implemented by some\nclients."
+                          }
+                        },
+                        "comment": "ConnectionEnd defines a stateful object on a chain connected to another\nseparate one.\nNOTE: there must only be 2 defined ConnectionEnds to establish\na connection between two chains."
+                      },
+                      "IdentifiedConnection": {
+                        "options": {
+                          "(gogoproto.goproto_getters)": false
+                        },
+                        "fields": {
+                          "id": {
+                            "type": "string",
+                            "id": 1,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:id"
+                            },
+                            "comment": "connection identifier."
+                          },
+                          "clientId": {
+                            "type": "string",
+                            "id": 2,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:client_id"
+                            },
+                            "comment": "client associated with this connection."
+                          },
+                          "versions": {
+                            "rule": "repeated",
+                            "type": "Version",
+                            "id": 3,
+                            "comment": "IBC version which can be utilised to determine encodings or protocols for\nchannels or packets utilising this connection"
+                          },
+                          "state": {
+                            "type": "State",
+                            "id": 4,
+                            "comment": "current state of the connection end."
+                          },
+                          "counterparty": {
+                            "type": "Counterparty",
+                            "id": 5,
+                            "options": {
+                              "(gogoproto.nullable)": false
+                            },
+                            "comment": "counterparty chain associated with this connection."
+                          },
+                          "delayPeriod": {
+                            "type": "uint64",
+                            "id": 6,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:delay_period"
+                            },
+                            "comment": "delay period associated with this connection."
+                          }
+                        },
+                        "comment": "IdentifiedConnection defines a connection with additional connection\nidentifier field."
+                      },
+                      "State": {
+                        "options": {
+                          "(gogoproto.goproto_enum_prefix)": false
+                        },
+                        "values": {
+                          "STATE_UNINITIALIZED_UNSPECIFIED": 0,
+                          "STATE_INIT": 1,
+                          "STATE_TRYOPEN": 2,
+                          "STATE_OPEN": 3
+                        },
+                        "comment": "State defines if a connection is in one of the following states:\nINIT, TRYOPEN, OPEN or UNINITIALIZED.",
+                        "comments": {
+                          "STATE_UNINITIALIZED_UNSPECIFIED": "Default State",
+                          "STATE_INIT": "A connection end has just started the opening handshake.",
+                          "STATE_TRYOPEN": "A connection end has acknowledged the handshake step on the counterparty\nchain.",
+                          "STATE_OPEN": "A connection end has completed the handshake."
+                        }
+                      },
+                      "Counterparty": {
+                        "options": {
+                          "(gogoproto.goproto_getters)": false
+                        },
+                        "fields": {
+                          "clientId": {
+                            "type": "string",
+                            "id": 1,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:client_id"
+                            },
+                            "comment": "identifies the client on the counterparty chain associated with a given\nconnection."
+                          },
+                          "connectionId": {
+                            "type": "string",
+                            "id": 2,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:connection_id"
+                            },
+                            "comment": "identifies the connection end on the counterparty chain associated with a\ngiven connection."
+                          },
+                          "prefix": {
+                            "type": "ibc.core.commitment.v1.MerklePrefix",
+                            "id": 3,
+                            "options": {
+                              "(gogoproto.nullable)": false
+                            },
+                            "comment": "commitment merkle prefix of the counterparty chain."
+                          }
+                        },
+                        "comment": "Counterparty defines the counterparty chain associated with a connection end."
+                      },
+                      "ClientPaths": {
+                        "fields": {
+                          "paths": {
+                            "rule": "repeated",
+                            "type": "string",
+                            "id": 1,
+                            "comment": "list of connection paths"
+                          }
+                        },
+                        "comment": "ClientPaths define all the connection paths for a client state."
+                      },
+                      "ConnectionPaths": {
+                        "fields": {
+                          "clientId": {
+                            "type": "string",
+                            "id": 1,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:client_id"
+                            },
+                            "comment": "client state unique identifier"
+                          },
+                          "paths": {
+                            "rule": "repeated",
+                            "type": "string",
+                            "id": 2,
+                            "comment": "list of connection paths"
+                          }
+                        },
+                        "comment": "ConnectionPaths define all the connection paths for a given client state."
+                      },
+                      "Version": {
+                        "options": {
+                          "(gogoproto.goproto_getters)": false
+                        },
+                        "fields": {
+                          "identifier": {
+                            "type": "string",
+                            "id": 1,
+                            "comment": "unique version identifier"
+                          },
+                          "features": {
+                            "rule": "repeated",
+                            "type": "string",
+                            "id": 2,
+                            "comment": "list of features compatible with the specified identifier"
+                          }
+                        },
+                        "comment": "Version defines the versioning scheme used to negotiate the IBC verison in\nthe connection handshake."
+                      },
+                      "Params": {
+                        "fields": {
+                          "maxExpectedTimePerBlock": {
+                            "type": "uint64",
+                            "id": 1,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:max_expected_time_per_block"
+                            },
+                            "comment": "maximum expected time per block (in nanoseconds), used to enforce block delay. This parameter should reflect the\nlargest amount of time that the chain might reasonably take to produce the next block under normal operating\nconditions. A safe choice is 3-5x the expected time per block."
+                          }
+                        },
+                        "comment": "Params defines the set of Connection parameters."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

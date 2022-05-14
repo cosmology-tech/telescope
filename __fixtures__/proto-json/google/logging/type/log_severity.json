@@ -1,0 +1,55 @@
+{
+  "package": "google.logging.type",
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "google": {
+        "nested": {
+          "logging": {
+            "nested": {
+              "type": {
+                "options": {
+                  "csharp_namespace": "Google.Cloud.Logging.Type",
+                  "go_package": "google.golang.org/genproto/googleapis/logging/type;ltype",
+                  "java_multiple_files": true,
+                  "java_outer_classname": "LogSeverityProto",
+                  "java_package": "com.google.logging.type",
+                  "objc_class_prefix": "GLOG",
+                  "php_namespace": "Google\\Cloud\\Logging\\Type",
+                  "ruby_package": "Google::Cloud::Logging::Type"
+                },
+                "nested": {
+                  "LogSeverity": {
+                    "values": {
+                      "DEFAULT": 0,
+                      "DEBUG": 100,
+                      "INFO": 200,
+                      "NOTICE": 300,
+                      "WARNING": 400,
+                      "ERROR": 500,
+                      "CRITICAL": 600,
+                      "ALERT": 700,
+                      "EMERGENCY": 800
+                    },
+                    "comment": "The severity of the event described in a log entry, expressed as one of the\nstandard severity levels listed below.  For your reference, the levels are\nassigned the listed numeric values. The effect of using numeric values other\nthan those listed is undefined.\n\nYou can filter for log entries by severity.  For example, the following\nfilter expression will match log entries with severities `INFO`, `NOTICE`,\nand `WARNING`:\n\nseverity > DEBUG AND severity <= WARNING\n\nIf you are writing log entries, you should map other severity encodings to\none of these standard levels. For example, you might map all of Java's FINE,\nFINER, and FINEST levels to `LogSeverity.DEBUG`. You can preserve the\noriginal severity level in the log entry payload if you wish.",
+                    "comments": {
+                      "DEFAULT": "(0) The log entry has no assigned severity level.",
+                      "DEBUG": "(100) Debug or trace information.",
+                      "INFO": "(200) Routine information, such as ongoing status or performance.",
+                      "NOTICE": "(300) Normal but significant events, such as start up, shut down, or\na configuration change.",
+                      "WARNING": "(400) Warning events might cause problems.",
+                      "ERROR": "(500) Error events are likely to cause problems.",
+                      "CRITICAL": "(600) Critical events cause more severe problems or outages.",
+                      "ALERT": "(700) A person must take an action immediately.",
+                      "EMERGENCY": "(800) One or more systems are unusable."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,1487 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`google/api/expr/v1alpha1/checked Decl 1`] = `
+Object {
+  "FunctionDecl": Object {
+    "fields": Object {
+      "overloads": Object {
+        "id": 1,
+        "rule": "repeated",
+        "type": "Overload",
+      },
+    },
+    "nested": Object {
+      "Overload": Object {
+        "fields": Object {
+          "doc": Object {
+            "id": 6,
+            "type": "string",
+          },
+          "isInstanceFunction": Object {
+            "id": 5,
+            "type": "bool",
+          },
+          "overloadId": Object {
+            "id": 1,
+            "type": "string",
+          },
+          "params": Object {
+            "id": 2,
+            "rule": "repeated",
+            "type": "Type",
+          },
+          "resultType": Object {
+            "id": 4,
+            "type": "Type",
+          },
+          "typeParams": Object {
+            "id": 3,
+            "rule": "repeated",
+            "type": "string",
+          },
+        },
+      },
+    },
+  },
+  "IdentDecl": Object {
+    "fields": Object {
+      "doc": Object {
+        "id": 3,
+        "type": "string",
+      },
+      "type": Object {
+        "id": 1,
+        "type": "Type",
+      },
+      "value": Object {
+        "id": 2,
+        "type": "Constant",
+      },
+    },
+  },
+  "_ctor": null,
+  "_fieldsArray": null,
+  "_fieldsById": null,
+  "_nestedArray": Array [
+    Object {
+      "fields": Object {
+        "doc": Object {
+          "id": 3,
+          "type": "string",
+        },
+        "type": Object {
+          "id": 1,
+          "type": "Type",
+        },
+        "value": Object {
+          "id": 2,
+          "type": "Constant",
+        },
+      },
+    },
+    Object {
+      "fields": Object {
+        "overloads": Object {
+          "id": 1,
+          "rule": "repeated",
+          "type": "Overload",
+        },
+      },
+      "nested": Object {
+        "Overload": Object {
+          "fields": Object {
+            "doc": Object {
+              "id": 6,
+              "type": "string",
+            },
+            "isInstanceFunction": Object {
+              "id": 5,
+              "type": "bool",
+            },
+            "overloadId": Object {
+              "id": 1,
+              "type": "string",
+            },
+            "params": Object {
+              "id": 2,
+              "rule": "repeated",
+              "type": "Type",
+            },
+            "resultType": Object {
+              "id": 4,
+              "type": "Type",
+            },
+            "typeParams": Object {
+              "id": 3,
+              "rule": "repeated",
+              "type": "string",
+            },
+          },
+        },
+      },
+    },
+  ],
+  "_oneofsArray": null,
+  "comment": "Represents a declaration of a named value or function.
+
+A declaration is part of the contract between the expression, the agent
+evaluating that expression, and the caller requesting evaluation.",
+  "extensions": undefined,
+  "fields": Object {
+    "function": Object {
+      "id": 3,
+      "type": "FunctionDecl",
+    },
+    "ident": Object {
+      "id": 2,
+      "type": "IdentDecl",
+    },
+    "name": Object {
+      "id": 1,
+      "type": "string",
+    },
+  },
+  "filename": null,
+  "group": undefined,
+  "name": "Decl",
+  "nested": Object {
+    "FunctionDecl": Object {
+      "fields": Object {
+        "overloads": Object {
+          "id": 1,
+          "rule": "repeated",
+          "type": "Overload",
+        },
+      },
+      "nested": Object {
+        "Overload": Object {
+          "fields": Object {
+            "doc": Object {
+              "id": 6,
+              "type": "string",
+            },
+            "isInstanceFunction": Object {
+              "id": 5,
+              "type": "bool",
+            },
+            "overloadId": Object {
+              "id": 1,
+              "type": "string",
+            },
+            "params": Object {
+              "id": 2,
+              "rule": "repeated",
+              "type": "Type",
+            },
+            "resultType": Object {
+              "id": 4,
+              "type": "Type",
+            },
+            "typeParams": Object {
+              "id": 3,
+              "rule": "repeated",
+              "type": "string",
+            },
+          },
+        },
+      },
+    },
+    "IdentDecl": Object {
+      "fields": Object {
+        "doc": Object {
+          "id": 3,
+          "type": "string",
+        },
+        "type": Object {
+          "id": 1,
+          "type": "Type",
+        },
+        "value": Object {
+          "id": 2,
+          "type": "Constant",
+        },
+      },
+    },
+  },
+  "oneofs": Object {
+    "declKind": Object {
+      "oneof": Array [
+        "ident",
+        "function",
+      ],
+    },
+  },
+  "options": undefined,
+  "parent": Object {
+    "nested": Object {
+      "CheckedExpr": Object {
+        "fields": Object {
+          "expr": Object {
+            "id": 4,
+            "type": "Expr",
+          },
+          "exprVersion": Object {
+            "id": 6,
+            "type": "string",
+          },
+          "referenceMap": Object {
+            "id": 2,
+            "keyType": "int64",
+            "type": "Reference",
+          },
+          "sourceInfo": Object {
+            "id": 5,
+            "type": "SourceInfo",
+          },
+          "typeMap": Object {
+            "id": 3,
+            "keyType": "int64",
+            "type": "Type",
+          },
+        },
+      },
+      "Decl": Object {
+        "fields": Object {
+          "function": Object {
+            "id": 3,
+            "type": "FunctionDecl",
+          },
+          "ident": Object {
+            "id": 2,
+            "type": "IdentDecl",
+          },
+          "name": Object {
+            "id": 1,
+            "type": "string",
+          },
+        },
+        "nested": Object {
+          "FunctionDecl": Object {
+            "fields": Object {
+              "overloads": Object {
+                "id": 1,
+                "rule": "repeated",
+                "type": "Overload",
+              },
+            },
+            "nested": Object {
+              "Overload": Object {
+                "fields": Object {
+                  "doc": Object {
+                    "id": 6,
+                    "type": "string",
+                  },
+                  "isInstanceFunction": Object {
+                    "id": 5,
+                    "type": "bool",
+                  },
+                  "overloadId": Object {
+                    "id": 1,
+                    "type": "string",
+                  },
+                  "params": Object {
+                    "id": 2,
+                    "rule": "repeated",
+                    "type": "Type",
+                  },
+                  "resultType": Object {
+                    "id": 4,
+                    "type": "Type",
+                  },
+                  "typeParams": Object {
+                    "id": 3,
+                    "rule": "repeated",
+                    "type": "string",
+                  },
+                },
+              },
+            },
+          },
+          "IdentDecl": Object {
+            "fields": Object {
+              "doc": Object {
+                "id": 3,
+                "type": "string",
+              },
+              "type": Object {
+                "id": 1,
+                "type": "Type",
+              },
+              "value": Object {
+                "id": 2,
+                "type": "Constant",
+              },
+            },
+          },
+        },
+        "oneofs": Object {
+          "declKind": Object {
+            "oneof": Array [
+              "ident",
+              "function",
+            ],
+          },
+        },
+      },
+      "Reference": Object {
+        "fields": Object {
+          "name": Object {
+            "id": 1,
+            "type": "string",
+          },
+          "overloadId": Object {
+            "id": 3,
+            "rule": "repeated",
+            "type": "string",
+          },
+          "value": Object {
+            "id": 4,
+            "type": "Constant",
+          },
+        },
+      },
+      "Type": Object {
+        "fields": Object {
+          "abstractType": Object {
+            "id": 14,
+            "type": "AbstractType",
+          },
+          "dyn": Object {
+            "id": 1,
+            "type": "google.protobuf.Empty",
+          },
+          "error": Object {
+            "id": 12,
+            "type": "google.protobuf.Empty",
+          },
+          "function": Object {
+            "id": 8,
+            "type": "FunctionType",
+          },
+          "listType": Object {
+            "id": 6,
+            "type": "ListType",
+          },
+          "mapType": Object {
+            "id": 7,
+            "type": "MapType",
+          },
+          "messageType": Object {
+            "id": 9,
+            "type": "string",
+          },
+          "null": Object {
+            "id": 2,
+            "type": "google.protobuf.NullValue",
+          },
+          "primitive": Object {
+            "id": 3,
+            "type": "PrimitiveType",
+          },
+          "type": Object {
+            "id": 11,
+            "type": "Type",
+          },
+          "typeParam": Object {
+            "id": 10,
+            "type": "string",
+          },
+          "wellKnown": Object {
+            "id": 5,
+            "type": "WellKnownType",
+          },
+          "wrapper": Object {
+            "id": 4,
+            "type": "PrimitiveType",
+          },
+        },
+        "nested": Object {
+          "AbstractType": Object {
+            "fields": Object {
+              "name": Object {
+                "id": 1,
+                "type": "string",
+              },
+              "parameterTypes": Object {
+                "id": 2,
+                "rule": "repeated",
+                "type": "Type",
+              },
+            },
+          },
+          "FunctionType": Object {
+            "fields": Object {
+              "argTypes": Object {
+                "id": 2,
+                "rule": "repeated",
+                "type": "Type",
+              },
+              "resultType": Object {
+                "id": 1,
+                "type": "Type",
+              },
+            },
+          },
+          "ListType": Object {
+            "fields": Object {
+              "elemType": Object {
+                "id": 1,
+                "type": "Type",
+              },
+            },
+          },
+          "MapType": Object {
+            "fields": Object {
+              "keyType": Object {
+                "id": 1,
+                "type": "Type",
+              },
+              "valueType": Object {
+                "id": 2,
+                "type": "Type",
+              },
+            },
+          },
+          "PrimitiveType": Object {
+            "values": Object {
+              "BOOL": 1,
+              "BYTES": 6,
+              "DOUBLE": 4,
+              "INT64": 2,
+              "PRIMITIVE_TYPE_UNSPECIFIED": 0,
+              "STRING": 5,
+              "UINT64": 3,
+            },
+          },
+          "WellKnownType": Object {
+            "values": Object {
+              "ANY": 1,
+              "DURATION": 3,
+              "TIMESTAMP": 2,
+              "WELL_KNOWN_TYPE_UNSPECIFIED": 0,
+            },
+          },
+        },
+        "oneofs": Object {
+          "typeKind": Object {
+            "oneof": Array [
+              "dyn",
+              "null",
+              "primitive",
+              "wrapper",
+              "wellKnown",
+              "listType",
+              "mapType",
+              "function",
+              "messageType",
+              "typeParam",
+              "type",
+              "error",
+              "abstractType",
+            ],
+          },
+        },
+      },
+    },
+    "options": Object {
+      "cc_enable_arenas": true,
+      "go_package": "google.golang.org/genproto/googleapis/api/expr/v1alpha1;expr",
+      "java_multiple_files": true,
+      "java_outer_classname": "DeclProto",
+      "java_package": "com.google.api.expr.v1alpha1",
+    },
+  },
+  "parsedOptions": null,
+  "reserved": undefined,
+  "resolved": false,
+  "scope": Array [
+    "google.api.expr.v1alpha1",
+  ],
+}
+`;
+
+exports[`google/api/expr/v1alpha1/checked IdentDecl 1`] = `
+Object {
+  "_ctor": null,
+  "_fieldsArray": Array [
+    Object {
+      "id": 1,
+      "type": "Type",
+    },
+    Object {
+      "id": 2,
+      "type": "Constant",
+    },
+    Object {
+      "id": 3,
+      "type": "string",
+    },
+  ],
+  "_fieldsById": null,
+  "_nestedArray": Array [],
+  "_oneofsArray": Array [],
+  "comment": "Identifier declaration which specifies its type and optional \`Expr\` value.
+
+An identifier without a value is a declaration that must be provided at
+evaluation time. An identifier with a value should resolve to a constant,
+but may be used in conjunction with other identifiers bound at evaluation
+time.",
+  "extensions": undefined,
+  "fields": Object {
+    "doc": Object {
+      "id": 3,
+      "type": "string",
+    },
+    "type": Object {
+      "id": 1,
+      "type": "Type",
+    },
+    "value": Object {
+      "id": 2,
+      "type": "Constant",
+    },
+  },
+  "filename": null,
+  "group": undefined,
+  "name": "IdentDecl",
+  "nested": undefined,
+  "oneofs": undefined,
+  "options": undefined,
+  "parent": Object {
+    "fields": Object {
+      "function": Object {
+        "id": 3,
+        "type": "FunctionDecl",
+      },
+      "ident": Object {
+        "id": 2,
+        "type": "IdentDecl",
+      },
+      "name": Object {
+        "id": 1,
+        "type": "string",
+      },
+    },
+    "nested": Object {
+      "FunctionDecl": Object {
+        "fields": Object {
+          "overloads": Object {
+            "id": 1,
+            "rule": "repeated",
+            "type": "Overload",
+          },
+        },
+        "nested": Object {
+          "Overload": Object {
+            "fields": Object {
+              "doc": Object {
+                "id": 6,
+                "type": "string",
+              },
+              "isInstanceFunction": Object {
+                "id": 5,
+                "type": "bool",
+              },
+              "overloadId": Object {
+                "id": 1,
+                "type": "string",
+              },
+              "params": Object {
+                "id": 2,
+                "rule": "repeated",
+                "type": "Type",
+              },
+              "resultType": Object {
+                "id": 4,
+                "type": "Type",
+              },
+              "typeParams": Object {
+                "id": 3,
+                "rule": "repeated",
+                "type": "string",
+              },
+            },
+          },
+        },
+      },
+      "IdentDecl": Object {
+        "fields": Object {
+          "doc": Object {
+            "id": 3,
+            "type": "string",
+          },
+          "type": Object {
+            "id": 1,
+            "type": "Type",
+          },
+          "value": Object {
+            "id": 2,
+            "type": "Constant",
+          },
+        },
+      },
+    },
+    "oneofs": Object {
+      "declKind": Object {
+        "oneof": Array [
+          "ident",
+          "function",
+        ],
+      },
+    },
+  },
+  "parsedOptions": null,
+  "reserved": undefined,
+  "resolved": false,
+  "scope": Array [
+    "google.api.expr.v1alpha1",
+    "Decl",
+  ],
+}
+`;
+
+exports[`google/api/expr/v1alpha1/checked Overload 1`] = `
+Object {
+  "_ctor": null,
+  "_fieldsArray": Array [
+    Object {
+      "id": 1,
+      "type": "string",
+    },
+    Object {
+      "id": 2,
+      "rule": "repeated",
+      "type": "Type",
+    },
+    Object {
+      "id": 3,
+      "rule": "repeated",
+      "type": "string",
+    },
+    Object {
+      "id": 4,
+      "type": "Type",
+    },
+    Object {
+      "id": 5,
+      "type": "bool",
+    },
+    Object {
+      "id": 6,
+      "type": "string",
+    },
+  ],
+  "_fieldsById": null,
+  "_nestedArray": Array [],
+  "_oneofsArray": Array [],
+  "comment": "An overload indicates a function's parameter types and return type, and
+may optionally include a function body described in terms of [Expr][google.api.expr.v1alpha1.Expr]
+values.
+
+Functions overloads are declared in either a function or method
+call-style. For methods, the \`params[0]\` is the expected type of the
+target receiver.
+
+Overloads must have non-overlapping argument types after erasure of all
+parameterized type variables (similar as type erasure in Java).",
+  "extensions": undefined,
+  "fields": Object {
+    "doc": Object {
+      "id": 6,
+      "type": "string",
+    },
+    "isInstanceFunction": Object {
+      "id": 5,
+      "type": "bool",
+    },
+    "overloadId": Object {
+      "id": 1,
+      "type": "string",
+    },
+    "params": Object {
+      "id": 2,
+      "rule": "repeated",
+      "type": "Type",
+    },
+    "resultType": Object {
+      "id": 4,
+      "type": "Type",
+    },
+    "typeParams": Object {
+      "id": 3,
+      "rule": "repeated",
+      "type": "string",
+    },
+  },
+  "filename": null,
+  "group": undefined,
+  "name": "Overload",
+  "nested": undefined,
+  "oneofs": undefined,
+  "options": undefined,
+  "parent": Object {
+    "fields": Object {
+      "overloads": Object {
+        "id": 1,
+        "rule": "repeated",
+        "type": "Overload",
+      },
+    },
+    "nested": Object {
+      "Overload": Object {
+        "fields": Object {
+          "doc": Object {
+            "id": 6,
+            "type": "string",
+          },
+          "isInstanceFunction": Object {
+            "id": 5,
+            "type": "bool",
+          },
+          "overloadId": Object {
+            "id": 1,
+            "type": "string",
+          },
+          "params": Object {
+            "id": 2,
+            "rule": "repeated",
+            "type": "Type",
+          },
+          "resultType": Object {
+            "id": 4,
+            "type": "Type",
+          },
+          "typeParams": Object {
+            "id": 3,
+            "rule": "repeated",
+            "type": "string",
+          },
+        },
+      },
+    },
+  },
+  "parsedOptions": null,
+  "reserved": undefined,
+  "resolved": false,
+  "scope": Array [
+    "google.api.expr.v1alpha1",
+    "Decl",
+    "FunctionDecl",
+  ],
+}
+`;
+
+exports[`nested lookup 1`] = `
+Object {
+  "comment": "Severities of issues.",
+  "comments": Object {
+    "DEPRECATION": "Deprecation issue for statements and method that may no longer be
+supported or maintained.",
+    "ERROR": "Errors such as: unmatched curly braces or variable redefinition.",
+    "SEVERITY_UNSPECIFIED": "An unspecified severity.",
+    "WARNING": "Warnings such as: unused variables.",
+  },
+  "filename": null,
+  "name": "Severity",
+  "options": undefined,
+  "parent": Object {
+    "fields": Object {
+      "id": Object {
+        "id": 3,
+        "type": "int64",
+      },
+      "position": Object {
+        "id": 2,
+        "type": "google.api.expr.v1alpha1.SourcePosition",
+      },
+      "severity": Object {
+        "id": 1,
+        "type": "Severity",
+      },
+    },
+    "nested": Object {
+      "Severity": Object {
+        "values": Object {
+          "DEPRECATION": 1,
+          "ERROR": 3,
+          "SEVERITY_UNSPECIFIED": 0,
+          "WARNING": 2,
+        },
+      },
+    },
+  },
+  "parsedOptions": null,
+  "reserved": undefined,
+  "resolved": false,
+  "scope": Array [
+    "google.api.expr.conformance.v1alpha1",
+    "IssueDetails",
+  ],
+  "values": Object {
+    "DEPRECATION": 1,
+    "ERROR": 3,
+    "SEVERITY_UNSPECIFIED": 0,
+    "WARNING": 2,
+  },
+  "valuesById": Object {
+    "0": "SEVERITY_UNSPECIFIED",
+    "1": "DEPRECATION",
+    "2": "WARNING",
+    "3": "ERROR",
+  },
+}
+`;
+
+exports[`recursive nested lookup Data 1`] = `
+Object {
+  "Multi": Object {
+    "fields": Object {
+      "bitarray": Object {
+        "id": 1,
+        "type": "cosmos.crypto.multisig.v1beta1.CompactBitArray",
+      },
+      "signatures": Object {
+        "id": 2,
+        "rule": "repeated",
+        "type": "Data",
+      },
+    },
+  },
+  "Single": Object {
+    "fields": Object {
+      "mode": Object {
+        "id": 1,
+        "type": "SignMode",
+      },
+      "signature": Object {
+        "id": 2,
+        "type": "bytes",
+      },
+    },
+  },
+  "_ctor": null,
+  "_fieldsArray": Array [
+    Object {
+      "id": 1,
+      "type": "Single",
+    },
+    Object {
+      "id": 2,
+      "type": "Multi",
+    },
+  ],
+  "_fieldsById": null,
+  "_nestedArray": Array [
+    Object {
+      "fields": Object {
+        "mode": Object {
+          "id": 1,
+          "type": "SignMode",
+        },
+        "signature": Object {
+          "id": 2,
+          "type": "bytes",
+        },
+      },
+    },
+    Object {
+      "fields": Object {
+        "bitarray": Object {
+          "id": 1,
+          "type": "cosmos.crypto.multisig.v1beta1.CompactBitArray",
+        },
+        "signatures": Object {
+          "id": 2,
+          "rule": "repeated",
+          "type": "Data",
+        },
+      },
+    },
+  ],
+  "_oneofsArray": Array [
+    Object {
+      "oneof": Array [
+        "single",
+        "multi",
+      ],
+    },
+  ],
+  "comment": "Data represents signature data",
+  "extensions": undefined,
+  "fields": Object {
+    "multi": Object {
+      "id": 2,
+      "type": "Multi",
+    },
+    "single": Object {
+      "id": 1,
+      "type": "Single",
+    },
+  },
+  "filename": null,
+  "group": undefined,
+  "name": "Data",
+  "nested": Object {
+    "Multi": Object {
+      "fields": Object {
+        "bitarray": Object {
+          "id": 1,
+          "type": "cosmos.crypto.multisig.v1beta1.CompactBitArray",
+        },
+        "signatures": Object {
+          "id": 2,
+          "rule": "repeated",
+          "type": "Data",
+        },
+      },
+    },
+    "Single": Object {
+      "fields": Object {
+        "mode": Object {
+          "id": 1,
+          "type": "SignMode",
+        },
+        "signature": Object {
+          "id": 2,
+          "type": "bytes",
+        },
+      },
+    },
+  },
+  "oneofs": Object {
+    "sum": Object {
+      "oneof": Array [
+        "single",
+        "multi",
+      ],
+    },
+  },
+  "options": undefined,
+  "parent": Object {
+    "fields": Object {
+      "data": Object {
+        "id": 2,
+        "type": "Data",
+      },
+      "publicKey": Object {
+        "id": 1,
+        "type": "google.protobuf.Any",
+      },
+      "sequence": Object {
+        "id": 3,
+        "type": "uint64",
+      },
+    },
+    "nested": Object {
+      "Data": Object {
+        "fields": Object {
+          "multi": Object {
+            "id": 2,
+            "type": "Multi",
+          },
+          "single": Object {
+            "id": 1,
+            "type": "Single",
+          },
+        },
+        "nested": Object {
+          "Multi": Object {
+            "fields": Object {
+              "bitarray": Object {
+                "id": 1,
+                "type": "cosmos.crypto.multisig.v1beta1.CompactBitArray",
+              },
+              "signatures": Object {
+                "id": 2,
+                "rule": "repeated",
+                "type": "Data",
+              },
+            },
+          },
+          "Single": Object {
+            "fields": Object {
+              "mode": Object {
+                "id": 1,
+                "type": "SignMode",
+              },
+              "signature": Object {
+                "id": 2,
+                "type": "bytes",
+              },
+            },
+          },
+        },
+        "oneofs": Object {
+          "sum": Object {
+            "oneof": Array [
+              "single",
+              "multi",
+            ],
+          },
+        },
+      },
+    },
+  },
+  "parsedOptions": null,
+  "reserved": undefined,
+  "resolved": false,
+  "scope": Array [
+    "cosmos.tx.signing.v1beta1",
+    "SignatureDescriptor",
+  ],
+}
+`;
+
+exports[`recursive nested lookup Data 2`] = `
+Array [
+  "cosmos.tx.signing.v1beta1",
+  "SignatureDescriptor",
+]
+`;
+
+exports[`recursive nested lookup Multi 1`] = `
+Object {
+  "_ctor": null,
+  "_fieldsArray": null,
+  "_fieldsById": null,
+  "_nestedArray": Array [],
+  "_oneofsArray": null,
+  "comment": "Multi is the signature data for a multisig public key",
+  "extensions": undefined,
+  "fields": Object {
+    "bitarray": Object {
+      "id": 1,
+      "type": "cosmos.crypto.multisig.v1beta1.CompactBitArray",
+    },
+    "signatures": Object {
+      "id": 2,
+      "rule": "repeated",
+      "type": "Data",
+    },
+  },
+  "filename": null,
+  "group": undefined,
+  "name": "Multi",
+  "nested": undefined,
+  "oneofs": undefined,
+  "options": undefined,
+  "parent": Object {
+    "fields": Object {
+      "multi": Object {
+        "id": 2,
+        "type": "Multi",
+      },
+      "single": Object {
+        "id": 1,
+        "type": "Single",
+      },
+    },
+    "nested": Object {
+      "Multi": Object {
+        "fields": Object {
+          "bitarray": Object {
+            "id": 1,
+            "type": "cosmos.crypto.multisig.v1beta1.CompactBitArray",
+          },
+          "signatures": Object {
+            "id": 2,
+            "rule": "repeated",
+            "type": "Data",
+          },
+        },
+      },
+      "Single": Object {
+        "fields": Object {
+          "mode": Object {
+            "id": 1,
+            "type": "SignMode",
+          },
+          "signature": Object {
+            "id": 2,
+            "type": "bytes",
+          },
+        },
+      },
+    },
+    "oneofs": Object {
+      "sum": Object {
+        "oneof": Array [
+          "single",
+          "multi",
+        ],
+      },
+    },
+  },
+  "parsedOptions": null,
+  "reserved": undefined,
+  "resolved": false,
+  "scope": Array [
+    "cosmos.tx.signing.v1beta1",
+    "SignatureDescriptor",
+    "Data",
+  ],
+}
+`;
+
+exports[`recursive nested lookup Multi 2`] = `
+Array [
+  "cosmos.tx.signing.v1beta1",
+  "SignatureDescriptor",
+  "Data",
+]
+`;
+
+exports[`top-level lookup 1`] = `
+Object {
+  "comment": "VoteOption enumerates the valid vote options for a given governance proposal.",
+  "comments": Object {
+    "VOTE_OPTION_ABSTAIN": "VOTE_OPTION_ABSTAIN defines an abstain vote option.",
+    "VOTE_OPTION_NO": "VOTE_OPTION_NO defines a no vote option.",
+    "VOTE_OPTION_NO_WITH_VETO": "VOTE_OPTION_NO_WITH_VETO defines a no with veto vote option.",
+    "VOTE_OPTION_UNSPECIFIED": "VOTE_OPTION_UNSPECIFIED defines a no-op vote option.",
+    "VOTE_OPTION_YES": "VOTE_OPTION_YES defines a yes vote option.",
+  },
+  "filename": null,
+  "name": "VoteOption",
+  "options": Object {
+    "(gogoproto.goproto_enum_prefix)": false,
+  },
+  "parent": Object {
+    "nested": Object {
+      "Deposit": Object {
+        "fields": Object {
+          "amount": Object {
+            "id": 3,
+            "options": Object {
+              "(gogoproto.castrepeated)": "github.com/cosmos/cosmos-sdk/types.Coins",
+              "(gogoproto.nullable)": false,
+            },
+            "rule": "repeated",
+            "type": "cosmos.base.v1beta1.Coin",
+          },
+          "depositor": Object {
+            "id": 2,
+            "options": Object {
+              "(cosmos_proto.scalar)": "cosmos.AddressString",
+            },
+            "type": "string",
+          },
+          "proposalId": Object {
+            "id": 1,
+            "type": "uint64",
+          },
+        },
+        "options": Object {
+          "(gogoproto.equal)": false,
+          "(gogoproto.goproto_getters)": false,
+        },
+      },
+      "DepositParams": Object {
+        "fields": Object {
+          "maxDepositPeriod": Object {
+            "id": 2,
+            "options": Object {
+              "(gogoproto.jsontag)": "max_deposit_period,omitempty",
+              "(gogoproto.nullable)": false,
+              "(gogoproto.stdduration)": true,
+            },
+            "type": "google.protobuf.Duration",
+          },
+          "minDeposit": Object {
+            "id": 1,
+            "options": Object {
+              "(gogoproto.castrepeated)": "github.com/cosmos/cosmos-sdk/types.Coins",
+              "(gogoproto.jsontag)": "min_deposit,omitempty",
+              "(gogoproto.nullable)": false,
+            },
+            "rule": "repeated",
+            "type": "cosmos.base.v1beta1.Coin",
+          },
+        },
+      },
+      "Proposal": Object {
+        "fields": Object {
+          "content": Object {
+            "id": 2,
+            "options": Object {
+              "(cosmos_proto.accepts_interface)": "Content",
+            },
+            "type": "google.protobuf.Any",
+          },
+          "depositEndTime": Object {
+            "id": 6,
+            "options": Object {
+              "(gogoproto.nullable)": false,
+              "(gogoproto.stdtime)": true,
+            },
+            "type": "google.protobuf.Timestamp",
+          },
+          "finalTallyResult": Object {
+            "id": 4,
+            "options": Object {
+              "(gogoproto.nullable)": false,
+            },
+            "type": "TallyResult",
+          },
+          "proposalId": Object {
+            "id": 1,
+            "type": "uint64",
+          },
+          "status": Object {
+            "id": 3,
+            "type": "ProposalStatus",
+          },
+          "submitTime": Object {
+            "id": 5,
+            "options": Object {
+              "(gogoproto.nullable)": false,
+              "(gogoproto.stdtime)": true,
+            },
+            "type": "google.protobuf.Timestamp",
+          },
+          "totalDeposit": Object {
+            "id": 7,
+            "options": Object {
+              "(gogoproto.castrepeated)": "github.com/cosmos/cosmos-sdk/types.Coins",
+              "(gogoproto.nullable)": false,
+            },
+            "rule": "repeated",
+            "type": "cosmos.base.v1beta1.Coin",
+          },
+          "votingEndTime": Object {
+            "id": 9,
+            "options": Object {
+              "(gogoproto.nullable)": false,
+              "(gogoproto.stdtime)": true,
+            },
+            "type": "google.protobuf.Timestamp",
+          },
+          "votingStartTime": Object {
+            "id": 8,
+            "options": Object {
+              "(gogoproto.nullable)": false,
+              "(gogoproto.stdtime)": true,
+            },
+            "type": "google.protobuf.Timestamp",
+          },
+        },
+        "options": Object {
+          "(gogoproto.equal)": true,
+        },
+      },
+      "ProposalStatus": Object {
+        "options": Object {
+          "(gogoproto.goproto_enum_prefix)": false,
+        },
+        "values": Object {
+          "PROPOSAL_STATUS_DEPOSIT_PERIOD": 1,
+          "PROPOSAL_STATUS_FAILED": 5,
+          "PROPOSAL_STATUS_PASSED": 3,
+          "PROPOSAL_STATUS_REJECTED": 4,
+          "PROPOSAL_STATUS_UNSPECIFIED": 0,
+          "PROPOSAL_STATUS_VOTING_PERIOD": 2,
+        },
+      },
+      "TallyParams": Object {
+        "fields": Object {
+          "quorum": Object {
+            "id": 1,
+            "options": Object {
+              "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Dec",
+              "(gogoproto.jsontag)": "quorum,omitempty",
+              "(gogoproto.nullable)": false,
+            },
+            "type": "bytes",
+          },
+          "threshold": Object {
+            "id": 2,
+            "options": Object {
+              "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Dec",
+              "(gogoproto.jsontag)": "threshold,omitempty",
+              "(gogoproto.nullable)": false,
+            },
+            "type": "bytes",
+          },
+          "vetoThreshold": Object {
+            "id": 3,
+            "options": Object {
+              "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Dec",
+              "(gogoproto.jsontag)": "veto_threshold,omitempty",
+              "(gogoproto.nullable)": false,
+            },
+            "type": "bytes",
+          },
+        },
+      },
+      "TallyResult": Object {
+        "fields": Object {
+          "abstain": Object {
+            "id": 2,
+            "options": Object {
+              "(cosmos_proto.scalar)": "cosmos.Int",
+              "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Int",
+              "(gogoproto.nullable)": false,
+            },
+            "type": "string",
+          },
+          "no": Object {
+            "id": 3,
+            "options": Object {
+              "(cosmos_proto.scalar)": "cosmos.Int",
+              "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Int",
+              "(gogoproto.nullable)": false,
+            },
+            "type": "string",
+          },
+          "noWithVeto": Object {
+            "id": 4,
+            "options": Object {
+              "(cosmos_proto.scalar)": "cosmos.Int",
+              "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Int",
+              "(gogoproto.nullable)": false,
+            },
+            "type": "string",
+          },
+          "yes": Object {
+            "id": 1,
+            "options": Object {
+              "(cosmos_proto.scalar)": "cosmos.Int",
+              "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Int",
+              "(gogoproto.nullable)": false,
+            },
+            "type": "string",
+          },
+        },
+        "options": Object {
+          "(gogoproto.equal)": true,
+        },
+      },
+      "TextProposal": Object {
+        "fields": Object {
+          "description": Object {
+            "id": 2,
+            "type": "string",
+          },
+          "title": Object {
+            "id": 1,
+            "type": "string",
+          },
+        },
+        "options": Object {
+          "(cosmos_proto.implements_interface)": "Content",
+          "(gogoproto.equal)": true,
+        },
+      },
+      "Vote": Object {
+        "fields": Object {
+          "option": Object {
+            "id": 3,
+            "options": Object {
+              "deprecated": true,
+            },
+            "type": "VoteOption",
+          },
+          "options": Object {
+            "id": 4,
+            "options": Object {
+              "(gogoproto.nullable)": false,
+            },
+            "rule": "repeated",
+            "type": "WeightedVoteOption",
+          },
+          "proposalId": Object {
+            "id": 1,
+            "options": Object {
+              "(gogoproto.jsontag)": "id",
+            },
+            "type": "uint64",
+          },
+          "voter": Object {
+            "id": 2,
+            "options": Object {
+              "(cosmos_proto.scalar)": "cosmos.AddressString",
+            },
+            "type": "string",
+          },
+        },
+        "options": Object {
+          "(gogoproto.equal)": false,
+          "(gogoproto.goproto_stringer)": false,
+        },
+      },
+      "VoteOption": Object {
+        "options": Object {
+          "(gogoproto.goproto_enum_prefix)": false,
+        },
+        "values": Object {
+          "VOTE_OPTION_ABSTAIN": 2,
+          "VOTE_OPTION_NO": 3,
+          "VOTE_OPTION_NO_WITH_VETO": 4,
+          "VOTE_OPTION_UNSPECIFIED": 0,
+          "VOTE_OPTION_YES": 1,
+        },
+      },
+      "VotingParams": Object {
+        "fields": Object {
+          "votingPeriod": Object {
+            "id": 1,
+            "options": Object {
+              "(gogoproto.jsontag)": "voting_period,omitempty",
+              "(gogoproto.nullable)": false,
+              "(gogoproto.stdduration)": true,
+            },
+            "type": "google.protobuf.Duration",
+          },
+        },
+      },
+      "WeightedVoteOption": Object {
+        "fields": Object {
+          "option": Object {
+            "id": 1,
+            "type": "VoteOption",
+          },
+          "weight": Object {
+            "id": 2,
+            "options": Object {
+              "(cosmos_proto.scalar)": "cosmos.Dec",
+              "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Dec",
+              "(gogoproto.nullable)": false,
+            },
+            "type": "string",
+          },
+        },
+      },
+    },
+    "options": Object {
+      "(gogoproto.goproto_getters_all)": false,
+      "(gogoproto.goproto_stringer_all)": false,
+      "(gogoproto.stringer_all)": false,
+      "go_package": "github.com/cosmos/cosmos-sdk/x/gov/types/v1beta1",
+    },
+  },
+  "parsedOptions": Array [
+    Object {
+      "(gogoproto.goproto_enum_prefix)": false,
+    },
+  ],
+  "reserved": undefined,
+  "resolved": false,
+  "scope": Array [
+    "cosmos.gov.v1beta1",
+  ],
+  "values": Object {
+    "VOTE_OPTION_ABSTAIN": 2,
+    "VOTE_OPTION_NO": 3,
+    "VOTE_OPTION_NO_WITH_VETO": 4,
+    "VOTE_OPTION_UNSPECIFIED": 0,
+    "VOTE_OPTION_YES": 1,
+  },
+  "valuesById": Object {
+    "0": "VOTE_OPTION_UNSPECIFIED",
+    "1": "VOTE_OPTION_YES",
+    "2": "VOTE_OPTION_ABSTAIN",
+    "3": "VOTE_OPTION_NO",
+    "4": "VOTE_OPTION_NO_WITH_VETO",
+  },
+}
+`;

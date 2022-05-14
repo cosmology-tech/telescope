@@ -1,0 +1,112 @@
+{
+  "package": "google.api.servicecontrol.v1",
+  "imports": [
+    "google/api/servicecontrol/v1/distribution.proto",
+    "google/protobuf/timestamp.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "google": {
+        "nested": {
+          "api": {
+            "nested": {
+              "servicecontrol": {
+                "nested": {
+                  "v1": {
+                    "options": {
+                      "cc_enable_arenas": true,
+                      "csharp_namespace": "Google.Cloud.ServiceControl.V1",
+                      "go_package": "google.golang.org/genproto/googleapis/api/servicecontrol/v1;servicecontrol",
+                      "java_multiple_files": true,
+                      "java_outer_classname": "MetricValueSetProto",
+                      "java_package": "com.google.api.servicecontrol.v1",
+                      "php_namespace": "Google\\Cloud\\ServiceControl\\V1",
+                      "ruby_package": "Google::Cloud::ServiceControl::V1"
+                    },
+                    "nested": {
+                      "MetricValue": {
+                        "oneofs": {
+                          "value": {
+                            "oneof": [
+                              "boolValue",
+                              "int64Value",
+                              "doubleValue",
+                              "stringValue",
+                              "distributionValue"
+                            ],
+                            "comment": "The value. The type of value used in the request must\nagree with the metric definition in the service configuration, otherwise\nthe MetricValue is rejected."
+                          }
+                        },
+                        "fields": {
+                          "labels": {
+                            "keyType": "string",
+                            "type": "string",
+                            "id": 1,
+                            "comment": "The labels describing the metric value.\nSee comments on [google.api.servicecontrol.v1.Operation.labels][google.api.servicecontrol.v1.Operation.labels] for\nthe overriding relationship.\nNote that this map must not contain monitored resource labels."
+                          },
+                          "startTime": {
+                            "type": "google.protobuf.Timestamp",
+                            "id": 2,
+                            "comment": "The start of the time period over which this metric value's measurement\napplies. The time period has different semantics for different metric\ntypes (cumulative, delta, and gauge). See the metric definition\ndocumentation in the service configuration for details. If not specified,\n[google.api.servicecontrol.v1.Operation.start_time][google.api.servicecontrol.v1.Operation.start_time] will be used."
+                          },
+                          "endTime": {
+                            "type": "google.protobuf.Timestamp",
+                            "id": 3,
+                            "comment": "The end of the time period over which this metric value's measurement\napplies.  If not specified,\n[google.api.servicecontrol.v1.Operation.end_time][google.api.servicecontrol.v1.Operation.end_time] will be used."
+                          },
+                          "boolValue": {
+                            "type": "bool",
+                            "id": 4,
+                            "comment": "A boolean value."
+                          },
+                          "int64Value": {
+                            "type": "int64",
+                            "id": 5,
+                            "comment": "A signed 64-bit integer value."
+                          },
+                          "doubleValue": {
+                            "type": "double",
+                            "id": 6,
+                            "comment": "A double precision floating point value."
+                          },
+                          "stringValue": {
+                            "type": "string",
+                            "id": 7,
+                            "comment": "A text string value."
+                          },
+                          "distributionValue": {
+                            "type": "Distribution",
+                            "id": 8,
+                            "comment": "A distribution value."
+                          }
+                        },
+                        "comment": "Represents a single metric value."
+                      },
+                      "MetricValueSet": {
+                        "fields": {
+                          "metricName": {
+                            "type": "string",
+                            "id": 1,
+                            "comment": "The metric name defined in the service configuration."
+                          },
+                          "metricValues": {
+                            "rule": "repeated",
+                            "type": "MetricValue",
+                            "id": 2,
+                            "comment": "The values in this metric."
+                          }
+                        },
+                        "comment": "Represents a set of metric values in the same metric.\nEach metric value in the set should have a unique combination of start time,\nend time, and label values."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

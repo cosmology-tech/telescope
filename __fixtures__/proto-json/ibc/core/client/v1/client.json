@@ -1,0 +1,206 @@
+{
+  "package": "ibc.core.client.v1",
+  "imports": [
+    "gogoproto/gogo.proto",
+    "google/protobuf/any.proto",
+    "cosmos/upgrade/v1beta1/upgrade.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "ibc": {
+        "nested": {
+          "core": {
+            "nested": {
+              "client": {
+                "nested": {
+                  "v1": {
+                    "options": {
+                      "go_package": "github.com/cosmos/ibc-go/v2/modules/core/02-client/types"
+                    },
+                    "nested": {
+                      "IdentifiedClientState": {
+                        "fields": {
+                          "clientId": {
+                            "type": "string",
+                            "id": 1,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:client_id"
+                            },
+                            "comment": "client identifier"
+                          },
+                          "clientState": {
+                            "type": "google.protobuf.Any",
+                            "id": 2,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:client_state"
+                            },
+                            "comment": "client state"
+                          }
+                        },
+                        "comment": "IdentifiedClientState defines a client state with an additional client\nidentifier field."
+                      },
+                      "ConsensusStateWithHeight": {
+                        "fields": {
+                          "height": {
+                            "type": "Height",
+                            "id": 1,
+                            "options": {
+                              "(gogoproto.nullable)": false
+                            },
+                            "comment": "consensus state height"
+                          },
+                          "consensusState": {
+                            "type": "google.protobuf.Any",
+                            "id": 2,
+                            "options": {
+                              "(gogoproto.moretags)": "yamlconsensus_state"
+                            },
+                            "comment": "consensus state"
+                          }
+                        },
+                        "comment": "ConsensusStateWithHeight defines a consensus state with an additional height\nfield."
+                      },
+                      "ClientConsensusStates": {
+                        "fields": {
+                          "clientId": {
+                            "type": "string",
+                            "id": 1,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:client_id"
+                            },
+                            "comment": "client identifier"
+                          },
+                          "consensusStates": {
+                            "rule": "repeated",
+                            "type": "ConsensusStateWithHeight",
+                            "id": 2,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:consensus_states",
+                              "(gogoproto.nullable)": false
+                            },
+                            "comment": "consensus states and their heights associated with the client"
+                          }
+                        },
+                        "comment": "ClientConsensusStates defines all the stored consensus states for a given\nclient."
+                      },
+                      "ClientUpdateProposal": {
+                        "options": {
+                          "(gogoproto.goproto_getters)": false
+                        },
+                        "fields": {
+                          "title": {
+                            "type": "string",
+                            "id": 1,
+                            "comment": "the title of the update proposal"
+                          },
+                          "description": {
+                            "type": "string",
+                            "id": 2,
+                            "comment": "the description of the proposal"
+                          },
+                          "subjectClientId": {
+                            "type": "string",
+                            "id": 3,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:subject_client_id"
+                            },
+                            "comment": "the client identifier for the client to be updated if the proposal passes"
+                          },
+                          "substituteClientId": {
+                            "type": "string",
+                            "id": 4,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:substitute_client_id"
+                            },
+                            "comment": "the substitute client identifier for the client standing in for the subject\nclient"
+                          }
+                        },
+                        "comment": "ClientUpdateProposal is a governance proposal. If it passes, the substitute\nclient's latest consensus state is copied over to the subject client. The proposal\nhandler may fail if the subject and the substitute do not match in client and\nchain parameters (with exception to latest height, frozen height, and chain-id)."
+                      },
+                      "UpgradeProposal": {
+                        "options": {
+                          "(gogoproto.goproto_getters)": false,
+                          "(gogoproto.goproto_stringer)": false,
+                          "(gogoproto.equal)": true
+                        },
+                        "fields": {
+                          "title": {
+                            "type": "string",
+                            "id": 1,
+                            "comment": null
+                          },
+                          "description": {
+                            "type": "string",
+                            "id": 2,
+                            "comment": null
+                          },
+                          "plan": {
+                            "type": "cosmos.upgrade.v1beta1.Plan",
+                            "id": 3,
+                            "options": {
+                              "(gogoproto.nullable)": false
+                            },
+                            "comment": null
+                          },
+                          "upgradedClientState": {
+                            "type": "google.protobuf.Any",
+                            "id": 4,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:upgraded_client_state"
+                            },
+                            "comment": "An UpgradedClientState must be provided to perform an IBC breaking upgrade.\nThis will make the chain commit to the correct upgraded (self) client state\nbefore the upgrade occurs, so that connecting chains can verify that the\nnew upgraded client is valid by verifying a proof on the previous version\nof the chain. This will allow IBC connections to persist smoothly across\nplanned chain upgrades"
+                          }
+                        },
+                        "comment": "UpgradeProposal is a gov Content type for initiating an IBC breaking\nupgrade."
+                      },
+                      "Height": {
+                        "options": {
+                          "(gogoproto.goproto_getters)": false,
+                          "(gogoproto.goproto_stringer)": false
+                        },
+                        "fields": {
+                          "revisionNumber": {
+                            "type": "uint64",
+                            "id": 1,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:revision_number"
+                            },
+                            "comment": "the revision that the client is currently on"
+                          },
+                          "revisionHeight": {
+                            "type": "uint64",
+                            "id": 2,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:revision_height"
+                            },
+                            "comment": "the height within the given revision"
+                          }
+                        },
+                        "comment": "Height is a monotonically increasing data type\nthat can be compared against another Height for the purposes of updating and\nfreezing clients\n\nNormally the RevisionHeight is incremented at each height while keeping\nRevisionNumber the same. However some consensus algorithms may choose to\nreset the height in certain conditions e.g. hard forks, state-machine\nbreaking changes In these cases, the RevisionNumber is incremented so that\nheight continues to be monitonically increasing even as the RevisionHeight\ngets reset"
+                      },
+                      "Params": {
+                        "fields": {
+                          "allowedClients": {
+                            "rule": "repeated",
+                            "type": "string",
+                            "id": 1,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:allowed_clients"
+                            },
+                            "comment": "allowed_clients defines the list of allowed client state types."
+                          }
+                        },
+                        "comment": "Params defines the set of IBC light client parameters."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

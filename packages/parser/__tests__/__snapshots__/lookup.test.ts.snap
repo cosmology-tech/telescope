@@ -1,0 +1,192 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`double import bug GenesisState 1`] = `
+Object {
+  "comment": "GenesisState defines the ibc module's genesis state.",
+  "fields": Object {
+    "channelGenesis": Object {
+      "comment": "ICS004 - Channel genesis state",
+      "id": 3,
+      "import": "ibc/core/channel/v1/genesis.proto",
+      "importedName": "ibc.core.channel.v1.GenesisState",
+      "options": Object {
+        "(gogoproto.moretags)": "yaml:channel_genesis",
+        "(gogoproto.nullable)": false,
+      },
+      "parsedType": Object {
+        "name": "GenesisState",
+        "type": "Type",
+      },
+      "scope": Array [
+        "ibc.core.channel.v1",
+      ],
+      "scopeType": "protoImport",
+      "type": "ibc.core.channel.v1.GenesisState",
+    },
+    "clientGenesis": Object {
+      "comment": "ICS002 - Clients genesis state",
+      "id": 1,
+      "import": "ibc/core/client/v1/genesis.proto",
+      "importedName": "ibc.core.client.v1.GenesisState",
+      "options": Object {
+        "(gogoproto.moretags)": "yaml:client_genesis",
+        "(gogoproto.nullable)": false,
+      },
+      "parsedType": Object {
+        "name": "GenesisState",
+        "type": "Type",
+      },
+      "scope": Array [
+        "ibc.core.client.v1",
+      ],
+      "scopeType": "protoImport",
+      "type": "ibc.core.client.v1.GenesisState",
+    },
+    "connectionGenesis": Object {
+      "comment": "ICS003 - Connections genesis state",
+      "id": 2,
+      "import": "ibc/core/connection/v1/genesis.proto",
+      "importedName": "ibc.core.connection.v1.GenesisState",
+      "options": Object {
+        "(gogoproto.moretags)": "yaml:connection_genesis",
+        "(gogoproto.nullable)": false,
+      },
+      "parsedType": Object {
+        "name": "GenesisState",
+        "type": "Type",
+      },
+      "scope": Array [
+        "ibc.core.connection.v1",
+      ],
+      "scopeType": "protoImport",
+      "type": "ibc.core.connection.v1.GenesisState",
+    },
+  },
+  "keyTypes": Array [],
+  "name": "GenesisState",
+  "nested": null,
+  "oneofs": undefined,
+  "options": undefined,
+  "scope": Array [
+    "ibc.core.types.v1",
+  ],
+  "type": "Type",
+}
+`;
+
+exports[`double import bug GenesisState 2`] = `
+Array [
+  "ibc.core.types.v1",
+]
+`;
+
+exports[`double import bug imports/exports 1`] = `
+Object {
+  "GenesisState": true,
+}
+`;
+
+exports[`double import bug imports/exports 2`] = `
+Object {
+  "ibc/core/channel/v1/genesis.proto": Array [
+    "GenesisState",
+  ],
+  "ibc/core/client/v1/genesis.proto": Array [
+    "GenesisState",
+  ],
+  "ibc/core/connection/v1/genesis.proto": Array [
+    "GenesisState",
+  ],
+}
+`;
+
+exports[`double import bug imports/exports 3`] = `
+Object {
+  "ibc/core/channel/v1/genesis.proto": Object {
+    "GenesisState": "GenesisState3",
+  },
+  "ibc/core/client/v1/genesis.proto": Object {
+    "GenesisState": "GenesisState1",
+  },
+  "ibc/core/connection/v1/genesis.proto": Object {
+    "GenesisState": "GenesisState2",
+  },
+}
+`;
+
+exports[`proto example imports/exports 1`] = `
+Object {
+  "CreateLogMetricRequest": true,
+  "DeleteLogMetricRequest": true,
+  "GetLogMetricRequest": true,
+  "ListLogMetricsRequest": true,
+  "ListLogMetricsResponse": true,
+  "LogMetric": true,
+  "UpdateLogMetricRequest": true,
+}
+`;
+
+exports[`proto example imports/exports 2`] = `
+Object {
+  "google/api/distribution.proto": Array [
+    "Distribution_BucketOptions",
+  ],
+  "google/api/metric.proto": Array [
+    "MetricDescriptor",
+  ],
+  "google/protobuf/timestamp.proto": Array [
+    "Timestamp",
+  ],
+}
+`;
+
+exports[`proto example imports/exports 3`] = `
+Object {
+  "google/api/distribution.proto": Object {
+    "Distribution_BucketOptions": "Distribution_BucketOptions",
+  },
+  "google/api/metric.proto": Object {
+    "MetricDescriptor": "MetricDescriptor",
+  },
+  "google/protobuf/timestamp.proto": Object {
+    "Timestamp": "Timestamp",
+  },
+}
+`;
+
+exports[`proto import self imports/exports 1`] = `
+Object {
+  "Pool": true,
+  "PoolAsset": true,
+  "PoolParams": true,
+  "SmoothWeightChangeParams": true,
+}
+`;
+
+exports[`proto import self imports/exports 2`] = `
+Object {
+  "cosmos/base/v1beta1/coin.proto": Array [
+    "Coin",
+  ],
+  "google/protobuf/duration.proto": Array [
+    "Duration",
+  ],
+  "google/protobuf/timestamp.proto": Array [
+    "Timestamp",
+  ],
+}
+`;
+
+exports[`proto import self imports/exports 3`] = `
+Object {
+  "cosmos/base/v1beta1/coin.proto": Object {
+    "Coin": "Coin",
+  },
+  "google/protobuf/duration.proto": Object {
+    "Duration": "Duration",
+  },
+  "google/protobuf/timestamp.proto": Object {
+    "Timestamp": "Timestamp",
+  },
+}
+`;

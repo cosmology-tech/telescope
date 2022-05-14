@@ -1,5 +1,6 @@
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
+import { Duration } from "../../../google/protobuf/duration";
 import { Any } from "../../../google/protobuf/any";
 /**
  * This message defines the standard attribute vocabulary for Google APIs.
@@ -274,7 +275,7 @@ export interface AttributeContext_Response {
      * request to the backend until when the destination service receives the
      * complete response from the backend.
      */
-    backendLatency: string;
+    backendLatency: Duration;
 }
 export interface AttributeContext_Response_HeadersEntry {
     key: string;

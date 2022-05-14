@@ -1,0 +1,40 @@
+{
+  "package": "cosmos.crisis.v1beta1",
+  "imports": [
+    "gogoproto/gogo.proto",
+    "cosmos/base/v1beta1/coin.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "cosmos": {
+        "nested": {
+          "crisis": {
+            "nested": {
+              "v1beta1": {
+                "options": {
+                  "go_package": "github.com/cosmos/cosmos-sdk/x/crisis/types"
+                },
+                "nested": {
+                  "GenesisState": {
+                    "fields": {
+                      "constantFee": {
+                        "type": "cosmos.base.v1beta1.Coin",
+                        "id": 3,
+                        "options": {
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": "constant_fee is the fee used to verify the invariant in the crisis\nmodule."
+                      }
+                    },
+                    "comment": "GenesisState defines the crisis module's genesis state."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

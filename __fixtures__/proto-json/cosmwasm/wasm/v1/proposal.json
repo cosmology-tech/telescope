@@ -1,0 +1,347 @@
+{
+  "package": "cosmwasm.wasm.v1",
+  "imports": [
+    "gogoproto/gogo.proto",
+    "cosmos/base/v1beta1/coin.proto",
+    "cosmwasm/wasm/v1/types.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "cosmwasm": {
+        "nested": {
+          "wasm": {
+            "nested": {
+              "v1": {
+                "options": {
+                  "go_package": "github.com/CosmWasm/wasmd/x/wasm/types",
+                  "(gogoproto.goproto_stringer_all)": false,
+                  "(gogoproto.goproto_getters_all)": false,
+                  "(gogoproto.equal_all)": true
+                },
+                "nested": {
+                  "StoreCodeProposal": {
+                    "fields": {
+                      "title": {
+                        "type": "string",
+                        "id": 1,
+                        "comment": "Title is a short summary"
+                      },
+                      "description": {
+                        "type": "string",
+                        "id": 2,
+                        "comment": "Description is a human readable text"
+                      },
+                      "runAs": {
+                        "type": "string",
+                        "id": 3,
+                        "comment": "RunAs is the address that is passed to the contract's environment as sender"
+                      },
+                      "wasmByteCode": {
+                        "type": "bytes",
+                        "id": 4,
+                        "options": {
+                          "(gogoproto.customname)": "WASMByteCode"
+                        },
+                        "comment": "WASMByteCode can be raw or gzip compressed"
+                      },
+                      "instantiatePermission": {
+                        "type": "AccessConfig",
+                        "id": 7,
+                        "comment": "InstantiatePermission to apply on contract creation, optional"
+                      }
+                    },
+                    "reserved": [
+                      [
+                        5,
+                        5
+                      ],
+                      [
+                        6,
+                        6
+                      ]
+                    ],
+                    "comment": "StoreCodeProposal gov proposal content type to submit WASM code to the system"
+                  },
+                  "InstantiateContractProposal": {
+                    "fields": {
+                      "title": {
+                        "type": "string",
+                        "id": 1,
+                        "comment": "Title is a short summary"
+                      },
+                      "description": {
+                        "type": "string",
+                        "id": 2,
+                        "comment": "Description is a human readable text"
+                      },
+                      "runAs": {
+                        "type": "string",
+                        "id": 3,
+                        "comment": "RunAs is the address that is passed to the contract's environment as sender"
+                      },
+                      "admin": {
+                        "type": "string",
+                        "id": 4,
+                        "comment": "Admin is an optional address that can execute migrations"
+                      },
+                      "codeId": {
+                        "type": "uint64",
+                        "id": 5,
+                        "options": {
+                          "(gogoproto.customname)": "CodeID"
+                        },
+                        "comment": "CodeID is the reference to the stored WASM code"
+                      },
+                      "label": {
+                        "type": "string",
+                        "id": 6,
+                        "comment": "Label is optional metadata to be stored with a constract instance."
+                      },
+                      "msg": {
+                        "type": "bytes",
+                        "id": 7,
+                        "options": {
+                          "(gogoproto.casttype)": "RawContractMessage"
+                        },
+                        "comment": "Msg json encoded message to be passed to the contract on instantiation"
+                      },
+                      "funds": {
+                        "rule": "repeated",
+                        "type": "cosmos.base.v1beta1.Coin",
+                        "id": 8,
+                        "options": {
+                          "(gogoproto.nullable)": false,
+                          "(gogoproto.castrepeated)": "github.com/cosmos/cosmos-sdk/types.Coins"
+                        },
+                        "comment": "Funds coins that are transferred to the contract on instantiation"
+                      }
+                    },
+                    "comment": "InstantiateContractProposal gov proposal content type to instantiate a\ncontract."
+                  },
+                  "MigrateContractProposal": {
+                    "fields": {
+                      "title": {
+                        "type": "string",
+                        "id": 1,
+                        "comment": "Title is a short summary"
+                      },
+                      "description": {
+                        "type": "string",
+                        "id": 2,
+                        "comment": "Description is a human readable text"
+                      },
+                      "contract": {
+                        "type": "string",
+                        "id": 4,
+                        "comment": "Contract is the address of the smart contract"
+                      },
+                      "codeId": {
+                        "type": "uint64",
+                        "id": 5,
+                        "options": {
+                          "(gogoproto.customname)": "CodeID"
+                        },
+                        "comment": "CodeID references the new WASM codesudo"
+                      },
+                      "msg": {
+                        "type": "bytes",
+                        "id": 6,
+                        "options": {
+                          "(gogoproto.casttype)": "RawContractMessage"
+                        },
+                        "comment": "Msg json encoded message to be passed to the contract on migration"
+                      }
+                    },
+                    "comment": "MigrateContractProposal gov proposal content type to migrate a contract."
+                  },
+                  "SudoContractProposal": {
+                    "fields": {
+                      "title": {
+                        "type": "string",
+                        "id": 1,
+                        "comment": "Title is a short summary"
+                      },
+                      "description": {
+                        "type": "string",
+                        "id": 2,
+                        "comment": "Description is a human readable text"
+                      },
+                      "contract": {
+                        "type": "string",
+                        "id": 3,
+                        "comment": "Contract is the address of the smart contract"
+                      },
+                      "msg": {
+                        "type": "bytes",
+                        "id": 4,
+                        "options": {
+                          "(gogoproto.casttype)": "RawContractMessage"
+                        },
+                        "comment": "Msg json encoded message to be passed to the contract as sudo"
+                      }
+                    },
+                    "comment": "SudoContractProposal gov proposal content type to call sudo on a contract."
+                  },
+                  "ExecuteContractProposal": {
+                    "fields": {
+                      "title": {
+                        "type": "string",
+                        "id": 1,
+                        "comment": "Title is a short summary"
+                      },
+                      "description": {
+                        "type": "string",
+                        "id": 2,
+                        "comment": "Description is a human readable text"
+                      },
+                      "runAs": {
+                        "type": "string",
+                        "id": 3,
+                        "comment": "RunAs is the address that is passed to the contract's environment as sender"
+                      },
+                      "contract": {
+                        "type": "string",
+                        "id": 4,
+                        "comment": "Contract is the address of the smart contract"
+                      },
+                      "msg": {
+                        "type": "bytes",
+                        "id": 5,
+                        "options": {
+                          "(gogoproto.casttype)": "RawContractMessage"
+                        },
+                        "comment": "Msg json encoded message to be passed to the contract as execute"
+                      },
+                      "funds": {
+                        "rule": "repeated",
+                        "type": "cosmos.base.v1beta1.Coin",
+                        "id": 6,
+                        "options": {
+                          "(gogoproto.nullable)": false,
+                          "(gogoproto.castrepeated)": "github.com/cosmos/cosmos-sdk/types.Coins"
+                        },
+                        "comment": "Funds coins that are transferred to the contract on instantiation"
+                      }
+                    },
+                    "comment": "ExecuteContractProposal gov proposal content type to call execute on a\ncontract."
+                  },
+                  "UpdateAdminProposal": {
+                    "fields": {
+                      "title": {
+                        "type": "string",
+                        "id": 1,
+                        "comment": "Title is a short summary"
+                      },
+                      "description": {
+                        "type": "string",
+                        "id": 2,
+                        "comment": "Description is a human readable text"
+                      },
+                      "newAdmin": {
+                        "type": "string",
+                        "id": 3,
+                        "options": {
+                          "(gogoproto.moretags)": "yaml:new_admin"
+                        },
+                        "comment": "NewAdmin address to be set"
+                      },
+                      "contract": {
+                        "type": "string",
+                        "id": 4,
+                        "comment": "Contract is the address of the smart contract"
+                      }
+                    },
+                    "comment": "UpdateAdminProposal gov proposal content type to set an admin for a contract."
+                  },
+                  "ClearAdminProposal": {
+                    "fields": {
+                      "title": {
+                        "type": "string",
+                        "id": 1,
+                        "comment": "Title is a short summary"
+                      },
+                      "description": {
+                        "type": "string",
+                        "id": 2,
+                        "comment": "Description is a human readable text"
+                      },
+                      "contract": {
+                        "type": "string",
+                        "id": 3,
+                        "comment": "Contract is the address of the smart contract"
+                      }
+                    },
+                    "comment": "ClearAdminProposal gov proposal content type to clear the admin of a\ncontract."
+                  },
+                  "PinCodesProposal": {
+                    "fields": {
+                      "title": {
+                        "type": "string",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.moretags)": "yaml:title"
+                        },
+                        "comment": "Title is a short summary"
+                      },
+                      "description": {
+                        "type": "string",
+                        "id": 2,
+                        "options": {
+                          "(gogoproto.moretags)": "yaml:description"
+                        },
+                        "comment": "Description is a human readable text"
+                      },
+                      "codeIds": {
+                        "rule": "repeated",
+                        "type": "uint64",
+                        "id": 3,
+                        "options": {
+                          "(gogoproto.customname)": "CodeIDs",
+                          "(gogoproto.moretags)": "yaml:code_ids"
+                        },
+                        "comment": "CodeIDs references the new WASM codes"
+                      }
+                    },
+                    "comment": "PinCodesProposal gov proposal content type to pin a set of code ids in the\nwasmvm cache."
+                  },
+                  "UnpinCodesProposal": {
+                    "fields": {
+                      "title": {
+                        "type": "string",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.moretags)": "yaml:title"
+                        },
+                        "comment": "Title is a short summary"
+                      },
+                      "description": {
+                        "type": "string",
+                        "id": 2,
+                        "options": {
+                          "(gogoproto.moretags)": "yaml:description"
+                        },
+                        "comment": "Description is a human readable text"
+                      },
+                      "codeIds": {
+                        "rule": "repeated",
+                        "type": "uint64",
+                        "id": 3,
+                        "options": {
+                          "(gogoproto.customname)": "CodeIDs",
+                          "(gogoproto.moretags)": "yaml:code_ids"
+                        },
+                        "comment": "CodeIDs references the WASM codes"
+                      }
+                    },
+                    "comment": "UnpinCodesProposal gov proposal content type to unpin a set of code ids in\nthe wasmvm cache."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

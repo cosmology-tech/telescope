@@ -3,6 +3,7 @@ import * as _m0 from "protobufjs/minimal";
 import { Gauge } from "../../osmosis/incentives/gauge";
 import { PageRequest, PageResponse } from "../../cosmos/base/query/v1beta1/pagination";
 import { Coin } from "../../cosmos/base/v1beta1/coin";
+import { Duration } from "../../google/protobuf/duration";
 export interface ModuleToDistributeCoinsRequest {
 }
 export interface ModuleToDistributeCoinsResponse {
@@ -67,7 +68,7 @@ export interface RewardsEstResponse {
 export interface QueryLockableDurationsRequest {
 }
 export interface QueryLockableDurationsResponse {
-    lockableDurations: string[];
+    lockableDurations: Duration[];
 }
 export declare const ModuleToDistributeCoinsRequest: {
     encode(_: ModuleToDistributeCoinsRequest, writer?: _m0.Writer): _m0.Writer;

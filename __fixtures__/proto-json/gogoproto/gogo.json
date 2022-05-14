@@ -1,0 +1,482 @@
+{
+  "package": "gogoproto",
+  "imports": [
+    "google/protobuf/descriptor.proto"
+  ],
+  "syntax": "proto2",
+  "root": {
+    "nested": {
+      "gogoproto": {
+        "options": {
+          "java_package": "com.google.protobuf",
+          "java_outer_classname": "GoGoProtos",
+          "go_package": "github.com/gogo/protobuf/gogoproto"
+        },
+        "nested": {
+          "goprotoEnumPrefix": {
+            "type": "bool",
+            "id": 62001,
+            "extend": "google.protobuf.EnumOptions",
+            "comment": null
+          },
+          "goprotoEnumStringer": {
+            "type": "bool",
+            "id": 62021,
+            "extend": "google.protobuf.EnumOptions",
+            "comment": null
+          },
+          "enumStringer": {
+            "type": "bool",
+            "id": 62022,
+            "extend": "google.protobuf.EnumOptions",
+            "comment": null
+          },
+          "enumCustomname": {
+            "type": "string",
+            "id": 62023,
+            "extend": "google.protobuf.EnumOptions",
+            "comment": null
+          },
+          "enumdecl": {
+            "type": "bool",
+            "id": 62024,
+            "extend": "google.protobuf.EnumOptions",
+            "comment": null
+          },
+          "enumvalueCustomname": {
+            "type": "string",
+            "id": 66001,
+            "extend": "google.protobuf.EnumValueOptions",
+            "comment": null
+          },
+          "goprotoGettersAll": {
+            "type": "bool",
+            "id": 63001,
+            "extend": "google.protobuf.FileOptions",
+            "comment": null
+          },
+          "goprotoEnumPrefixAll": {
+            "type": "bool",
+            "id": 63002,
+            "extend": "google.protobuf.FileOptions",
+            "comment": null
+          },
+          "goprotoStringerAll": {
+            "type": "bool",
+            "id": 63003,
+            "extend": "google.protobuf.FileOptions",
+            "comment": null
+          },
+          "verboseEqualAll": {
+            "type": "bool",
+            "id": 63004,
+            "extend": "google.protobuf.FileOptions",
+            "comment": null
+          },
+          "faceAll": {
+            "type": "bool",
+            "id": 63005,
+            "extend": "google.protobuf.FileOptions",
+            "comment": null
+          },
+          "gostringAll": {
+            "type": "bool",
+            "id": 63006,
+            "extend": "google.protobuf.FileOptions",
+            "comment": null
+          },
+          "populateAll": {
+            "type": "bool",
+            "id": 63007,
+            "extend": "google.protobuf.FileOptions",
+            "comment": null
+          },
+          "stringerAll": {
+            "type": "bool",
+            "id": 63008,
+            "extend": "google.protobuf.FileOptions",
+            "comment": null
+          },
+          "onlyoneAll": {
+            "type": "bool",
+            "id": 63009,
+            "extend": "google.protobuf.FileOptions",
+            "comment": null
+          },
+          "equalAll": {
+            "type": "bool",
+            "id": 63013,
+            "extend": "google.protobuf.FileOptions",
+            "comment": null
+          },
+          "descriptionAll": {
+            "type": "bool",
+            "id": 63014,
+            "extend": "google.protobuf.FileOptions",
+            "comment": null
+          },
+          "testgenAll": {
+            "type": "bool",
+            "id": 63015,
+            "extend": "google.protobuf.FileOptions",
+            "comment": null
+          },
+          "benchgenAll": {
+            "type": "bool",
+            "id": 63016,
+            "extend": "google.protobuf.FileOptions",
+            "comment": null
+          },
+          "marshalerAll": {
+            "type": "bool",
+            "id": 63017,
+            "extend": "google.protobuf.FileOptions",
+            "comment": null
+          },
+          "unmarshalerAll": {
+            "type": "bool",
+            "id": 63018,
+            "extend": "google.protobuf.FileOptions",
+            "comment": null
+          },
+          "stableMarshalerAll": {
+            "type": "bool",
+            "id": 63019,
+            "extend": "google.protobuf.FileOptions",
+            "comment": null
+          },
+          "sizerAll": {
+            "type": "bool",
+            "id": 63020,
+            "extend": "google.protobuf.FileOptions",
+            "comment": null
+          },
+          "goprotoEnumStringerAll": {
+            "type": "bool",
+            "id": 63021,
+            "extend": "google.protobuf.FileOptions",
+            "comment": null
+          },
+          "enumStringerAll": {
+            "type": "bool",
+            "id": 63022,
+            "extend": "google.protobuf.FileOptions",
+            "comment": null
+          },
+          "unsafeMarshalerAll": {
+            "type": "bool",
+            "id": 63023,
+            "extend": "google.protobuf.FileOptions",
+            "comment": null
+          },
+          "unsafeUnmarshalerAll": {
+            "type": "bool",
+            "id": 63024,
+            "extend": "google.protobuf.FileOptions",
+            "comment": null
+          },
+          "goprotoExtensionsMapAll": {
+            "type": "bool",
+            "id": 63025,
+            "extend": "google.protobuf.FileOptions",
+            "comment": null
+          },
+          "goprotoUnrecognizedAll": {
+            "type": "bool",
+            "id": 63026,
+            "extend": "google.protobuf.FileOptions",
+            "comment": null
+          },
+          "gogoprotoImport": {
+            "type": "bool",
+            "id": 63027,
+            "extend": "google.protobuf.FileOptions",
+            "comment": null
+          },
+          "protosizerAll": {
+            "type": "bool",
+            "id": 63028,
+            "extend": "google.protobuf.FileOptions",
+            "comment": null
+          },
+          "compareAll": {
+            "type": "bool",
+            "id": 63029,
+            "extend": "google.protobuf.FileOptions",
+            "comment": null
+          },
+          "typedeclAll": {
+            "type": "bool",
+            "id": 63030,
+            "extend": "google.protobuf.FileOptions",
+            "comment": null
+          },
+          "enumdeclAll": {
+            "type": "bool",
+            "id": 63031,
+            "extend": "google.protobuf.FileOptions",
+            "comment": null
+          },
+          "goprotoRegistration": {
+            "type": "bool",
+            "id": 63032,
+            "extend": "google.protobuf.FileOptions",
+            "comment": null
+          },
+          "messagenameAll": {
+            "type": "bool",
+            "id": 63033,
+            "extend": "google.protobuf.FileOptions",
+            "comment": null
+          },
+          "goprotoSizecacheAll": {
+            "type": "bool",
+            "id": 63034,
+            "extend": "google.protobuf.FileOptions",
+            "comment": null
+          },
+          "goprotoUnkeyedAll": {
+            "type": "bool",
+            "id": 63035,
+            "extend": "google.protobuf.FileOptions",
+            "comment": null
+          },
+          "goprotoGetters": {
+            "type": "bool",
+            "id": 64001,
+            "extend": "google.protobuf.MessageOptions",
+            "comment": null
+          },
+          "goprotoStringer": {
+            "type": "bool",
+            "id": 64003,
+            "extend": "google.protobuf.MessageOptions",
+            "comment": null
+          },
+          "verboseEqual": {
+            "type": "bool",
+            "id": 64004,
+            "extend": "google.protobuf.MessageOptions",
+            "comment": null
+          },
+          "face": {
+            "type": "bool",
+            "id": 64005,
+            "extend": "google.protobuf.MessageOptions",
+            "comment": null
+          },
+          "gostring": {
+            "type": "bool",
+            "id": 64006,
+            "extend": "google.protobuf.MessageOptions",
+            "comment": null
+          },
+          "populate": {
+            "type": "bool",
+            "id": 64007,
+            "extend": "google.protobuf.MessageOptions",
+            "comment": null
+          },
+          "stringer": {
+            "type": "bool",
+            "id": 67008,
+            "extend": "google.protobuf.MessageOptions",
+            "comment": null
+          },
+          "onlyone": {
+            "type": "bool",
+            "id": 64009,
+            "extend": "google.protobuf.MessageOptions",
+            "comment": null
+          },
+          "equal": {
+            "type": "bool",
+            "id": 64013,
+            "extend": "google.protobuf.MessageOptions",
+            "comment": null
+          },
+          "description": {
+            "type": "bool",
+            "id": 64014,
+            "extend": "google.protobuf.MessageOptions",
+            "comment": null
+          },
+          "testgen": {
+            "type": "bool",
+            "id": 64015,
+            "extend": "google.protobuf.MessageOptions",
+            "comment": null
+          },
+          "benchgen": {
+            "type": "bool",
+            "id": 64016,
+            "extend": "google.protobuf.MessageOptions",
+            "comment": null
+          },
+          "marshaler": {
+            "type": "bool",
+            "id": 64017,
+            "extend": "google.protobuf.MessageOptions",
+            "comment": null
+          },
+          "unmarshaler": {
+            "type": "bool",
+            "id": 64018,
+            "extend": "google.protobuf.MessageOptions",
+            "comment": null
+          },
+          "stableMarshaler": {
+            "type": "bool",
+            "id": 64019,
+            "extend": "google.protobuf.MessageOptions",
+            "comment": null
+          },
+          "sizer": {
+            "type": "bool",
+            "id": 64020,
+            "extend": "google.protobuf.MessageOptions",
+            "comment": null
+          },
+          "unsafeMarshaler": {
+            "type": "bool",
+            "id": 64023,
+            "extend": "google.protobuf.MessageOptions",
+            "comment": null
+          },
+          "unsafeUnmarshaler": {
+            "type": "bool",
+            "id": 64024,
+            "extend": "google.protobuf.MessageOptions",
+            "comment": null
+          },
+          "goprotoExtensionsMap": {
+            "type": "bool",
+            "id": 64025,
+            "extend": "google.protobuf.MessageOptions",
+            "comment": null
+          },
+          "goprotoUnrecognized": {
+            "type": "bool",
+            "id": 64026,
+            "extend": "google.protobuf.MessageOptions",
+            "comment": null
+          },
+          "protosizer": {
+            "type": "bool",
+            "id": 64028,
+            "extend": "google.protobuf.MessageOptions",
+            "comment": null
+          },
+          "compare": {
+            "type": "bool",
+            "id": 64029,
+            "extend": "google.protobuf.MessageOptions",
+            "comment": null
+          },
+          "typedecl": {
+            "type": "bool",
+            "id": 64030,
+            "extend": "google.protobuf.MessageOptions",
+            "comment": null
+          },
+          "messagename": {
+            "type": "bool",
+            "id": 64033,
+            "extend": "google.protobuf.MessageOptions",
+            "comment": null
+          },
+          "goprotoSizecache": {
+            "type": "bool",
+            "id": 64034,
+            "extend": "google.protobuf.MessageOptions",
+            "comment": null
+          },
+          "goprotoUnkeyed": {
+            "type": "bool",
+            "id": 64035,
+            "extend": "google.protobuf.MessageOptions",
+            "comment": null
+          },
+          "nullable": {
+            "type": "bool",
+            "id": 65001,
+            "extend": "google.protobuf.FieldOptions",
+            "comment": null
+          },
+          "embed": {
+            "type": "bool",
+            "id": 65002,
+            "extend": "google.protobuf.FieldOptions",
+            "comment": null
+          },
+          "customtype": {
+            "type": "string",
+            "id": 65003,
+            "extend": "google.protobuf.FieldOptions",
+            "comment": null
+          },
+          "customname": {
+            "type": "string",
+            "id": 65004,
+            "extend": "google.protobuf.FieldOptions",
+            "comment": null
+          },
+          "jsontag": {
+            "type": "string",
+            "id": 65005,
+            "extend": "google.protobuf.FieldOptions",
+            "comment": null
+          },
+          "moretags": {
+            "type": "string",
+            "id": 65006,
+            "extend": "google.protobuf.FieldOptions",
+            "comment": null
+          },
+          "casttype": {
+            "type": "string",
+            "id": 65007,
+            "extend": "google.protobuf.FieldOptions",
+            "comment": null
+          },
+          "castkey": {
+            "type": "string",
+            "id": 65008,
+            "extend": "google.protobuf.FieldOptions",
+            "comment": null
+          },
+          "castvalue": {
+            "type": "string",
+            "id": 65009,
+            "extend": "google.protobuf.FieldOptions",
+            "comment": null
+          },
+          "stdtime": {
+            "type": "bool",
+            "id": 65010,
+            "extend": "google.protobuf.FieldOptions",
+            "comment": null
+          },
+          "stdduration": {
+            "type": "bool",
+            "id": 65011,
+            "extend": "google.protobuf.FieldOptions",
+            "comment": null
+          },
+          "wktpointer": {
+            "type": "bool",
+            "id": 65012,
+            "extend": "google.protobuf.FieldOptions",
+            "comment": null
+          },
+          "castrepeated": {
+            "type": "string",
+            "id": 65013,
+            "extend": "google.protobuf.FieldOptions",
+            "comment": null
+          }
+        }
+      }
+    }
+  }
+}

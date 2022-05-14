@@ -1,0 +1,173 @@
+{
+  "package": "google.api.expr.v1beta1",
+  "imports": [
+    "google/protobuf/any.proto",
+    "google/protobuf/struct.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "google": {
+        "nested": {
+          "api": {
+            "nested": {
+              "expr": {
+                "nested": {
+                  "v1beta1": {
+                    "options": {
+                      "cc_enable_arenas": true,
+                      "go_package": "google.golang.org/genproto/googleapis/api/expr/v1beta1;expr",
+                      "java_multiple_files": true,
+                      "java_outer_classname": "ValueProto",
+                      "java_package": "com.google.api.expr.v1beta1"
+                    },
+                    "nested": {
+                      "Value": {
+                        "oneofs": {
+                          "kind": {
+                            "oneof": [
+                              "nullValue",
+                              "boolValue",
+                              "int64Value",
+                              "uint64Value",
+                              "doubleValue",
+                              "stringValue",
+                              "bytesValue",
+                              "enumValue",
+                              "objectValue",
+                              "mapValue",
+                              "listValue",
+                              "typeValue"
+                            ],
+                            "comment": "Required. The valid kinds of values."
+                          }
+                        },
+                        "fields": {
+                          "nullValue": {
+                            "type": "google.protobuf.NullValue",
+                            "id": 1,
+                            "comment": "Null value."
+                          },
+                          "boolValue": {
+                            "type": "bool",
+                            "id": 2,
+                            "comment": "Boolean value."
+                          },
+                          "int64Value": {
+                            "type": "int64",
+                            "id": 3,
+                            "comment": "Signed integer value."
+                          },
+                          "uint64Value": {
+                            "type": "uint64",
+                            "id": 4,
+                            "comment": "Unsigned integer value."
+                          },
+                          "doubleValue": {
+                            "type": "double",
+                            "id": 5,
+                            "comment": "Floating point value."
+                          },
+                          "stringValue": {
+                            "type": "string",
+                            "id": 6,
+                            "comment": "UTF-8 string value."
+                          },
+                          "bytesValue": {
+                            "type": "bytes",
+                            "id": 7,
+                            "comment": "Byte string value."
+                          },
+                          "enumValue": {
+                            "type": "EnumValue",
+                            "id": 9,
+                            "comment": "An enum value."
+                          },
+                          "objectValue": {
+                            "type": "google.protobuf.Any",
+                            "id": 10,
+                            "comment": "The proto message backing an object value."
+                          },
+                          "mapValue": {
+                            "type": "MapValue",
+                            "id": 11,
+                            "comment": "Map value."
+                          },
+                          "listValue": {
+                            "type": "ListValue",
+                            "id": 12,
+                            "comment": "List value."
+                          },
+                          "typeValue": {
+                            "type": "string",
+                            "id": 15,
+                            "comment": "A Type value represented by the fully qualified name of the type."
+                          }
+                        },
+                        "comment": "Represents a CEL value.\n\nThis is similar to `google.protobuf.Value`, but can represent CEL's full\nrange of values."
+                      },
+                      "EnumValue": {
+                        "fields": {
+                          "type": {
+                            "type": "string",
+                            "id": 1,
+                            "comment": "The fully qualified name of the enum type."
+                          },
+                          "value": {
+                            "type": "int32",
+                            "id": 2,
+                            "comment": "The value of the enum."
+                          }
+                        },
+                        "comment": "An enum value."
+                      },
+                      "ListValue": {
+                        "fields": {
+                          "values": {
+                            "rule": "repeated",
+                            "type": "Value",
+                            "id": 1,
+                            "comment": "The ordered values in the list."
+                          }
+                        },
+                        "comment": "A list.\n\nWrapped in a message so 'not set' and empty can be differentiated, which is\nrequired for use in a 'oneof'."
+                      },
+                      "MapValue": {
+                        "fields": {
+                          "entries": {
+                            "rule": "repeated",
+                            "type": "Entry",
+                            "id": 1,
+                            "comment": "The set of map entries.\n\nCEL has fewer restrictions on keys, so a protobuf map represenation\ncannot be used."
+                          }
+                        },
+                        "nested": {
+                          "Entry": {
+                            "fields": {
+                              "key": {
+                                "type": "Value",
+                                "id": 1,
+                                "comment": "The key.\n\nMust be unique with in the map.\nCurrently only boolean, int, uint, and string values can be keys."
+                              },
+                              "value": {
+                                "type": "Value",
+                                "id": 2,
+                                "comment": "The value."
+                              }
+                            },
+                            "comment": "An entry in the map."
+                          }
+                        },
+                        "comment": "A map.\n\nWrapped in a message so 'not set' and empty can be differentiated, which is\nrequired for use in a 'oneof'."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

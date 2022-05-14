@@ -1,0 +1,72 @@
+{
+  "package": "osmosis.gamm.v1beta1",
+  "imports": [
+    "gogoproto/gogo.proto",
+    "google/protobuf/any.proto",
+    "cosmos_proto/cosmos.proto",
+    "cosmos/base/v1beta1/coin.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "osmosis": {
+        "nested": {
+          "gamm": {
+            "nested": {
+              "v1beta1": {
+                "options": {
+                  "go_package": "github.com/osmosis-labs/osmosis/v7/x/gamm/types"
+                },
+                "nested": {
+                  "Params": {
+                    "fields": {
+                      "poolCreationFee": {
+                        "rule": "repeated",
+                        "type": "cosmos.base.v1beta1.Coin",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.castrepeated)": "github.com/cosmos/cosmos-sdk/types.Coins",
+                          "(gogoproto.moretags)": "yaml:pool_creation_fee",
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": null
+                      }
+                    },
+                    "comment": "Params holds parameters for the incentives module"
+                  },
+                  "GenesisState": {
+                    "fields": {
+                      "pools": {
+                        "rule": "repeated",
+                        "type": "google.protobuf.Any",
+                        "id": 1,
+                        "options": {
+                          "(cosmos_proto.accepts_interface)": "PoolI"
+                        },
+                        "comment": null
+                      },
+                      "nextPoolNumber": {
+                        "type": "uint64",
+                        "id": 2,
+                        "comment": null
+                      },
+                      "params": {
+                        "type": "Params",
+                        "id": 3,
+                        "options": {
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": null
+                      }
+                    },
+                    "comment": "GenesisState defines the gamm module's genesis state."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

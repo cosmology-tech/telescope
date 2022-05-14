@@ -1,5 +1,6 @@
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
+import { Duration } from "../../../google/protobuf/duration";
 import { Any } from "../../../google/protobuf/any";
 /** VoteOption enumerates the valid vote options for a given proposal. */
 export declare enum VoteOption {
@@ -103,7 +104,7 @@ export interface DecisionPolicyWindows {
      * voting_period is the duration from submission of a proposal to the end of voting period
      * Within this times votes can be submitted with MsgVote.
      */
-    votingPeriod: string;
+    votingPeriod: Duration;
     /**
      * min_execution_period is the minimum duration after the proposal submission
      * where members can start sending MsgExec. This means that the window for
@@ -117,7 +118,7 @@ export interface DecisionPolicyWindows {
      * is empty, meaning that all proposals created with this decision policy
      * won't be able to be executed.
      */
-    minExecutionPeriod: string;
+    minExecutionPeriod: Duration;
 }
 /** GroupInfo represents the high-level on-chain information for a group. */
 export interface GroupInfo {

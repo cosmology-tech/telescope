@@ -1,0 +1,74 @@
+{
+  "package": "cosmwasm.wasm.v1",
+  "imports": [
+    "gogoproto/gogo.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "cosmwasm": {
+        "nested": {
+          "wasm": {
+            "nested": {
+              "v1": {
+                "options": {
+                  "go_package": "github.com/CosmWasm/wasmd/x/wasm/types",
+                  "(gogoproto.goproto_getters_all)": false
+                },
+                "nested": {
+                  "MsgIBCSend": {
+                    "fields": {
+                      "channel": {
+                        "type": "string",
+                        "id": 2,
+                        "options": {
+                          "(gogoproto.moretags)": "yaml:source_channel"
+                        },
+                        "comment": "the channel by which the packet will be sent"
+                      },
+                      "timeoutHeight": {
+                        "type": "uint64",
+                        "id": 4,
+                        "options": {
+                          "(gogoproto.moretags)": "yaml:timeout_height"
+                        },
+                        "comment": "Timeout height relative to the current block height.\nThe timeout is disabled when set to 0."
+                      },
+                      "timeoutTimestamp": {
+                        "type": "uint64",
+                        "id": 5,
+                        "options": {
+                          "(gogoproto.moretags)": "yaml:timeout_timestamp"
+                        },
+                        "comment": "Timeout timestamp (in nanoseconds) relative to the current block timestamp.\nThe timeout is disabled when set to 0."
+                      },
+                      "data": {
+                        "type": "bytes",
+                        "id": 6,
+                        "comment": "Data is the payload to transfer. We must not make assumption what format or\ncontent is in here."
+                      }
+                    },
+                    "comment": "MsgIBCSend"
+                  },
+                  "MsgIBCCloseChannel": {
+                    "fields": {
+                      "channel": {
+                        "type": "string",
+                        "id": 2,
+                        "options": {
+                          "(gogoproto.moretags)": "yaml:source_channel"
+                        },
+                        "comment": null
+                      }
+                    },
+                    "comment": "MsgIBCCloseChannel port and channel need to be owned by the contract"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

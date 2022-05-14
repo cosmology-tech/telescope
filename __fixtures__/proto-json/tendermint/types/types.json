@@ -1,0 +1,464 @@
+{
+  "package": "tendermint.types",
+  "imports": [
+    "gogoproto/gogo.proto",
+    "google/protobuf/timestamp.proto",
+    "tendermint/crypto/proof.proto",
+    "tendermint/version/types.proto",
+    "tendermint/types/validator.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "tendermint": {
+        "nested": {
+          "types": {
+            "options": {
+              "go_package": "github.com/tendermint/tendermint/proto/tendermint/types"
+            },
+            "nested": {
+              "BlockIDFlag": {
+                "options": {
+                  "(gogoproto.goproto_enum_stringer)": true,
+                  "(gogoproto.goproto_enum_prefix)": false
+                },
+                "values": {
+                  "BLOCK_ID_FLAG_UNKNOWN": 0,
+                  "BLOCK_ID_FLAG_ABSENT": 1,
+                  "BLOCK_ID_FLAG_COMMIT": 2,
+                  "BLOCK_ID_FLAG_NIL": 3
+                },
+                "comment": "BlockIdFlag indicates which BlcokID the signature is for",
+                "comments": {
+                  "BLOCK_ID_FLAG_UNKNOWN": null,
+                  "BLOCK_ID_FLAG_ABSENT": null,
+                  "BLOCK_ID_FLAG_COMMIT": null,
+                  "BLOCK_ID_FLAG_NIL": null
+                }
+              },
+              "SignedMsgType": {
+                "options": {
+                  "(gogoproto.goproto_enum_stringer)": true,
+                  "(gogoproto.goproto_enum_prefix)": false
+                },
+                "values": {
+                  "SIGNED_MSG_TYPE_UNKNOWN": 0,
+                  "SIGNED_MSG_TYPE_PREVOTE": 1,
+                  "SIGNED_MSG_TYPE_PRECOMMIT": 2,
+                  "SIGNED_MSG_TYPE_PROPOSAL": 32
+                },
+                "comment": "SignedMsgType is a type of signed message in the consensus.",
+                "comments": {
+                  "SIGNED_MSG_TYPE_UNKNOWN": null,
+                  "SIGNED_MSG_TYPE_PREVOTE": "Votes",
+                  "SIGNED_MSG_TYPE_PRECOMMIT": null,
+                  "SIGNED_MSG_TYPE_PROPOSAL": "Proposals"
+                }
+              },
+              "PartSetHeader": {
+                "fields": {
+                  "total": {
+                    "type": "uint32",
+                    "id": 1,
+                    "comment": null
+                  },
+                  "hash": {
+                    "type": "bytes",
+                    "id": 2,
+                    "comment": null
+                  }
+                },
+                "comment": "PartsetHeader"
+              },
+              "Part": {
+                "fields": {
+                  "index": {
+                    "type": "uint32",
+                    "id": 1,
+                    "comment": null
+                  },
+                  "bytes": {
+                    "type": "bytes",
+                    "id": 2,
+                    "comment": null
+                  },
+                  "proof": {
+                    "type": "tendermint.crypto.Proof",
+                    "id": 3,
+                    "options": {
+                      "(gogoproto.nullable)": false
+                    },
+                    "comment": null
+                  }
+                },
+                "comment": null
+              },
+              "BlockID": {
+                "fields": {
+                  "hash": {
+                    "type": "bytes",
+                    "id": 1,
+                    "comment": null
+                  },
+                  "partSetHeader": {
+                    "type": "PartSetHeader",
+                    "id": 2,
+                    "options": {
+                      "(gogoproto.nullable)": false
+                    },
+                    "comment": null
+                  }
+                },
+                "comment": "BlockID"
+              },
+              "Header": {
+                "fields": {
+                  "version": {
+                    "type": "tendermint.version.Consensus",
+                    "id": 1,
+                    "options": {
+                      "(gogoproto.nullable)": false
+                    },
+                    "comment": "basic block info"
+                  },
+                  "chainId": {
+                    "type": "string",
+                    "id": 2,
+                    "options": {
+                      "(gogoproto.customname)": "ChainID"
+                    },
+                    "comment": null
+                  },
+                  "height": {
+                    "type": "int64",
+                    "id": 3,
+                    "comment": null
+                  },
+                  "time": {
+                    "type": "google.protobuf.Timestamp",
+                    "id": 4,
+                    "options": {
+                      "(gogoproto.nullable)": false,
+                      "(gogoproto.stdtime)": true
+                    },
+                    "comment": null
+                  },
+                  "lastBlockId": {
+                    "type": "BlockID",
+                    "id": 5,
+                    "options": {
+                      "(gogoproto.nullable)": false
+                    },
+                    "comment": "prev block info"
+                  },
+                  "lastCommitHash": {
+                    "type": "bytes",
+                    "id": 6,
+                    "comment": "hashes of block data"
+                  },
+                  "dataHash": {
+                    "type": "bytes",
+                    "id": 7,
+                    "comment": null
+                  },
+                  "validatorsHash": {
+                    "type": "bytes",
+                    "id": 8,
+                    "comment": "hashes from the app output from the prev block"
+                  },
+                  "nextValidatorsHash": {
+                    "type": "bytes",
+                    "id": 9,
+                    "comment": "validators for the next block"
+                  },
+                  "consensusHash": {
+                    "type": "bytes",
+                    "id": 10,
+                    "comment": "consensus params for current block"
+                  },
+                  "appHash": {
+                    "type": "bytes",
+                    "id": 11,
+                    "comment": "state after txs from the previous block"
+                  },
+                  "lastResultsHash": {
+                    "type": "bytes",
+                    "id": 12,
+                    "comment": null
+                  },
+                  "evidenceHash": {
+                    "type": "bytes",
+                    "id": 13,
+                    "comment": "consensus info"
+                  },
+                  "proposerAddress": {
+                    "type": "bytes",
+                    "id": 14,
+                    "comment": "original proposer of the block"
+                  }
+                },
+                "comment": "Header defines the structure of a Tendermint block header."
+              },
+              "Data": {
+                "fields": {
+                  "txs": {
+                    "rule": "repeated",
+                    "type": "bytes",
+                    "id": 1,
+                    "comment": "Txs that will be applied by state @ block.Height+1.\nNOTE: not all txs here are valid.  We're just agreeing on the order first.\nThis means that block.AppHash does not include these txs."
+                  }
+                },
+                "comment": "Data contains the set of transactions included in the block"
+              },
+              "Vote": {
+                "fields": {
+                  "type": {
+                    "type": "SignedMsgType",
+                    "id": 1,
+                    "comment": null
+                  },
+                  "height": {
+                    "type": "int64",
+                    "id": 2,
+                    "comment": null
+                  },
+                  "round": {
+                    "type": "int32",
+                    "id": 3,
+                    "comment": null
+                  },
+                  "blockId": {
+                    "type": "BlockID",
+                    "id": 4,
+                    "options": {
+                      "(gogoproto.nullable)": false,
+                      "(gogoproto.customname)": "BlockID"
+                    },
+                    "comment": "zero if vote is nil."
+                  },
+                  "timestamp": {
+                    "type": "google.protobuf.Timestamp",
+                    "id": 5,
+                    "options": {
+                      "(gogoproto.nullable)": false,
+                      "(gogoproto.stdtime)": true
+                    },
+                    "comment": null
+                  },
+                  "validatorAddress": {
+                    "type": "bytes",
+                    "id": 6,
+                    "comment": null
+                  },
+                  "validatorIndex": {
+                    "type": "int32",
+                    "id": 7,
+                    "comment": null
+                  },
+                  "signature": {
+                    "type": "bytes",
+                    "id": 8,
+                    "comment": null
+                  }
+                },
+                "comment": "Vote represents a prevote, precommit, or commit vote from validators for\nconsensus."
+              },
+              "Commit": {
+                "fields": {
+                  "height": {
+                    "type": "int64",
+                    "id": 1,
+                    "comment": null
+                  },
+                  "round": {
+                    "type": "int32",
+                    "id": 2,
+                    "comment": null
+                  },
+                  "blockId": {
+                    "type": "BlockID",
+                    "id": 3,
+                    "options": {
+                      "(gogoproto.nullable)": false,
+                      "(gogoproto.customname)": "BlockID"
+                    },
+                    "comment": null
+                  },
+                  "signatures": {
+                    "rule": "repeated",
+                    "type": "CommitSig",
+                    "id": 4,
+                    "options": {
+                      "(gogoproto.nullable)": false
+                    },
+                    "comment": null
+                  }
+                },
+                "comment": "Commit contains the evidence that a block was committed by a set of validators."
+              },
+              "CommitSig": {
+                "fields": {
+                  "blockIdFlag": {
+                    "type": "BlockIDFlag",
+                    "id": 1,
+                    "comment": null
+                  },
+                  "validatorAddress": {
+                    "type": "bytes",
+                    "id": 2,
+                    "comment": null
+                  },
+                  "timestamp": {
+                    "type": "google.protobuf.Timestamp",
+                    "id": 3,
+                    "options": {
+                      "(gogoproto.nullable)": false,
+                      "(gogoproto.stdtime)": true
+                    },
+                    "comment": null
+                  },
+                  "signature": {
+                    "type": "bytes",
+                    "id": 4,
+                    "comment": null
+                  }
+                },
+                "comment": "CommitSig is a part of the Vote included in a Commit."
+              },
+              "Proposal": {
+                "fields": {
+                  "type": {
+                    "type": "SignedMsgType",
+                    "id": 1,
+                    "comment": null
+                  },
+                  "height": {
+                    "type": "int64",
+                    "id": 2,
+                    "comment": null
+                  },
+                  "round": {
+                    "type": "int32",
+                    "id": 3,
+                    "comment": null
+                  },
+                  "polRound": {
+                    "type": "int32",
+                    "id": 4,
+                    "comment": null
+                  },
+                  "blockId": {
+                    "type": "BlockID",
+                    "id": 5,
+                    "options": {
+                      "(gogoproto.customname)": "BlockID",
+                      "(gogoproto.nullable)": false
+                    },
+                    "comment": null
+                  },
+                  "timestamp": {
+                    "type": "google.protobuf.Timestamp",
+                    "id": 6,
+                    "options": {
+                      "(gogoproto.nullable)": false,
+                      "(gogoproto.stdtime)": true
+                    },
+                    "comment": null
+                  },
+                  "signature": {
+                    "type": "bytes",
+                    "id": 7,
+                    "comment": null
+                  }
+                },
+                "comment": null
+              },
+              "SignedHeader": {
+                "fields": {
+                  "header": {
+                    "type": "Header",
+                    "id": 1,
+                    "comment": null
+                  },
+                  "commit": {
+                    "type": "Commit",
+                    "id": 2,
+                    "comment": null
+                  }
+                },
+                "comment": null
+              },
+              "LightBlock": {
+                "fields": {
+                  "signedHeader": {
+                    "type": "SignedHeader",
+                    "id": 1,
+                    "comment": null
+                  },
+                  "validatorSet": {
+                    "type": "tendermint.types.ValidatorSet",
+                    "id": 2,
+                    "comment": null
+                  }
+                },
+                "comment": null
+              },
+              "BlockMeta": {
+                "fields": {
+                  "blockId": {
+                    "type": "BlockID",
+                    "id": 1,
+                    "options": {
+                      "(gogoproto.customname)": "BlockID",
+                      "(gogoproto.nullable)": false
+                    },
+                    "comment": null
+                  },
+                  "blockSize": {
+                    "type": "int64",
+                    "id": 2,
+                    "comment": null
+                  },
+                  "header": {
+                    "type": "Header",
+                    "id": 3,
+                    "options": {
+                      "(gogoproto.nullable)": false
+                    },
+                    "comment": null
+                  },
+                  "numTxs": {
+                    "type": "int64",
+                    "id": 4,
+                    "comment": null
+                  }
+                },
+                "comment": null
+              },
+              "TxProof": {
+                "fields": {
+                  "rootHash": {
+                    "type": "bytes",
+                    "id": 1,
+                    "comment": null
+                  },
+                  "data": {
+                    "type": "bytes",
+                    "id": 2,
+                    "comment": null
+                  },
+                  "proof": {
+                    "type": "tendermint.crypto.Proof",
+                    "id": 3,
+                    "comment": null
+                  }
+                },
+                "comment": "TxProof represents a Merkle proof of the presence of a transaction in the Merkle tree."
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

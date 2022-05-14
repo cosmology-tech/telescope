@@ -1,11 +1,12 @@
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import { Params, DistrInfo } from "../../../osmosis/pool-incentives/v1beta1/incentives";
+import { Duration } from "../../../google/protobuf/duration";
 /** GenesisState defines the pool incentives module's genesis state. */
 export interface GenesisState {
     /** params defines all the paramaters of the module. */
     params: Params;
-    lockableDurations: string[];
+    lockableDurations: Duration[];
     distrInfo: DistrInfo;
 }
 export declare const GenesisState: {

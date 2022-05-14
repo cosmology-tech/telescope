@@ -1,0 +1,253 @@
+{
+  "package": "google.api.servicecontrol.v1",
+  "imports": [
+    "google/api/annotations.proto",
+    "google/api/client.proto",
+    "google/api/servicecontrol/v1/check_error.proto",
+    "google/api/servicecontrol/v1/operation.proto",
+    "google/protobuf/timestamp.proto",
+    "google/rpc/status.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "google": {
+        "nested": {
+          "api": {
+            "nested": {
+              "servicecontrol": {
+                "nested": {
+                  "v1": {
+                    "options": {
+                      "cc_enable_arenas": true,
+                      "csharp_namespace": "Google.Cloud.ServiceControl.V1",
+                      "go_package": "google.golang.org/genproto/googleapis/api/servicecontrol/v1;servicecontrol",
+                      "java_multiple_files": true,
+                      "java_outer_classname": "ServiceControllerProto",
+                      "java_package": "com.google.api.servicecontrol.v1",
+                      "objc_class_prefix": "GASC",
+                      "php_namespace": "Google\\Cloud\\ServiceControl\\V1",
+                      "ruby_package": "Google::Cloud::ServiceControl::V1"
+                    },
+                    "nested": {
+                      "ServiceController": {
+                        "options": {
+                          "(google.api.default_host)": "servicecontrol.googleapis.com",
+                          "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/servicecontrol"
+                        },
+                        "methods": {
+                          "Check": {
+                            "requestType": "CheckRequest",
+                            "responseType": "CheckResponse",
+                            "options": {
+                              "(google.api.http).post": "/v1/services/{service_name}:check",
+                              "(google.api.http).body": "*"
+                            },
+                            "comment": "Checks whether an operation on a service should be allowed to proceed\nbased on the configuration of the service and related policies. It must be\ncalled before the operation is executed.\n\nIf feasible, the client should cache the check results and reuse them for\n60 seconds. In case of any server errors, the client should rely on the\ncached results for much longer time to avoid outage.\nWARNING: There is general 60s delay for the configuration and policy\npropagation, therefore callers MUST NOT depend on the `Check` method having\nthe latest policy information.\n\nNOTE: the [CheckRequest][google.api.servicecontrol.v1.CheckRequest] has\nthe size limit (wire-format byte size) of 1MB.\n\nThis method requires the `servicemanagement.services.check` permission\non the specified service. For more information, see\n[Cloud IAM](https://cloud.google.com/iam).",
+                            "parsedOptions": [
+                              {
+                                "(google.api.http)": {
+                                  "post": "/v1/services/{service_name}:check",
+                                  "body": "*"
+                                }
+                              }
+                            ]
+                          },
+                          "Report": {
+                            "requestType": "ReportRequest",
+                            "responseType": "ReportResponse",
+                            "options": {
+                              "(google.api.http).post": "/v1/services/{service_name}:report",
+                              "(google.api.http).body": "*"
+                            },
+                            "comment": "Reports operation results to Google Service Control, such as logs and\nmetrics. It should be called after an operation is completed.\n\nIf feasible, the client should aggregate reporting data for up to 5\nseconds to reduce API traffic. Limiting aggregation to 5 seconds is to\nreduce data loss during client crashes. Clients should carefully choose\nthe aggregation time window to avoid data loss risk more than 0.01%\nfor business and compliance reasons.\n\nNOTE: the [ReportRequest][google.api.servicecontrol.v1.ReportRequest] has\nthe size limit (wire-format byte size) of 1MB.\n\nThis method requires the `servicemanagement.services.report` permission\non the specified service. For more information, see\n[Google Cloud IAM](https://cloud.google.com/iam).",
+                            "parsedOptions": [
+                              {
+                                "(google.api.http)": {
+                                  "post": "/v1/services/{service_name}:report",
+                                  "body": "*"
+                                }
+                              }
+                            ]
+                          }
+                        },
+                        "comment": "[Google Service Control API](/service-control/overview)\n\nLets clients check and report operations against a [managed\nservice](https://cloud.google.com/service-management/reference/rpc/google.api/servicemanagement.v1#google.api.servicemanagement.v1.ManagedService)."
+                      },
+                      "CheckRequest": {
+                        "fields": {
+                          "serviceName": {
+                            "type": "string",
+                            "id": 1,
+                            "comment": "The service name as specified in its service configuration. For example,\n`\"pubsub.googleapis.com\"`.\n\nSee\n[google.api.Service](https://cloud.google.com/service-management/reference/rpc/google.api#google.api.Service)\nfor the definition of a service name."
+                          },
+                          "operation": {
+                            "type": "Operation",
+                            "id": 2,
+                            "comment": "The operation to be checked."
+                          },
+                          "serviceConfigId": {
+                            "type": "string",
+                            "id": 4,
+                            "comment": "Specifies which version of service configuration should be used to process\nthe request.\n\nIf unspecified or no matching version can be found, the\nlatest one will be used."
+                          }
+                        },
+                        "comment": "Request message for the Check method."
+                      },
+                      "CheckResponse": {
+                        "fields": {
+                          "operationId": {
+                            "type": "string",
+                            "id": 1,
+                            "comment": "The same operation_id value used in the\n[CheckRequest][google.api.servicecontrol.v1.CheckRequest]. Used for logging\nand diagnostics purposes."
+                          },
+                          "checkErrors": {
+                            "rule": "repeated",
+                            "type": "CheckError",
+                            "id": 2,
+                            "comment": "Indicate the decision of the check.\n\nIf no check errors are present, the service should process the operation.\nOtherwise the service should use the list of errors to determine the\nappropriate action."
+                          },
+                          "serviceConfigId": {
+                            "type": "string",
+                            "id": 5,
+                            "comment": "The actual config id used to process the request."
+                          },
+                          "serviceRolloutId": {
+                            "type": "string",
+                            "id": 11,
+                            "comment": "The current service rollout id used to process the request."
+                          },
+                          "checkInfo": {
+                            "type": "CheckInfo",
+                            "id": 6,
+                            "comment": "Feedback data returned from the server during processing a Check request."
+                          }
+                        },
+                        "nested": {
+                          "CheckInfo": {
+                            "fields": {
+                              "unusedArguments": {
+                                "rule": "repeated",
+                                "type": "string",
+                                "id": 1,
+                                "comment": "A list of fields and label keys that are ignored by the server.\nThe client doesn't need to send them for following requests to improve\nperformance and allow better aggregation."
+                              },
+                              "consumerInfo": {
+                                "type": "ConsumerInfo",
+                                "id": 2,
+                                "comment": "Consumer info of this check."
+                              }
+                            },
+                            "comment": "Contains additional information about the check operation."
+                          },
+                          "ConsumerInfo": {
+                            "fields": {
+                              "projectNumber": {
+                                "type": "int64",
+                                "id": 1,
+                                "comment": "The Google cloud project number, e.g. 1234567890. A value of 0 indicates\nno project number is found.\n\nNOTE: This field is deprecated after we support flexible consumer\nid. New code should not depend on this field anymore."
+                              },
+                              "type": {
+                                "type": "ConsumerType",
+                                "id": 2,
+                                "comment": "The type of the consumer which should have been defined in\n[Google Resource Manager](https://cloud.google.com/resource-manager/)."
+                              },
+                              "consumerNumber": {
+                                "type": "int64",
+                                "id": 3,
+                                "comment": "The consumer identity number, can be Google cloud project number, folder\nnumber or organization number e.g. 1234567890. A value of 0 indicates no\nconsumer number is found."
+                              }
+                            },
+                            "nested": {
+                              "ConsumerType": {
+                                "values": {
+                                  "CONSUMER_TYPE_UNSPECIFIED": 0,
+                                  "PROJECT": 1,
+                                  "FOLDER": 2,
+                                  "ORGANIZATION": 3,
+                                  "SERVICE_SPECIFIC": 4
+                                },
+                                "comment": "The type of the consumer as defined in\n[Google Resource Manager](https://cloud.google.com/resource-manager/).",
+                                "comments": {
+                                  "CONSUMER_TYPE_UNSPECIFIED": "This is never used.",
+                                  "PROJECT": "The consumer is a Google Cloud Project.",
+                                  "FOLDER": "The consumer is a Google Cloud Folder.",
+                                  "ORGANIZATION": "The consumer is a Google Cloud Organization.",
+                                  "SERVICE_SPECIFIC": "Service-specific resource container which is defined by the service\nproducer to offer their users the ability to manage service control\nfunctionalities at a finer level of granularity than the PROJECT."
+                                }
+                              }
+                            },
+                            "comment": "`ConsumerInfo` provides information about the consumer."
+                          }
+                        },
+                        "comment": "Response message for the Check method."
+                      },
+                      "ReportRequest": {
+                        "fields": {
+                          "serviceName": {
+                            "type": "string",
+                            "id": 1,
+                            "comment": "The service name as specified in its service configuration. For example,\n`\"pubsub.googleapis.com\"`.\n\nSee\n[google.api.Service](https://cloud.google.com/service-management/reference/rpc/google.api#google.api.Service)\nfor the definition of a service name."
+                          },
+                          "operations": {
+                            "rule": "repeated",
+                            "type": "Operation",
+                            "id": 2,
+                            "comment": "Operations to be reported.\n\nTypically the service should report one operation per request.\nPutting multiple operations into a single request is allowed, but should\nbe used only when multiple operations are natually available at the time\nof the report.\n\nThere is no limit on the number of operations in the same ReportRequest,\nhowever the ReportRequest size should be no larger than 1MB. See\n[ReportResponse.report_errors][google.api.servicecontrol.v1.ReportResponse.report_errors]\nfor partial failure behavior."
+                          },
+                          "serviceConfigId": {
+                            "type": "string",
+                            "id": 3,
+                            "comment": "Specifies which version of service config should be used to process the\nrequest.\n\nIf unspecified or no matching version can be found, the\nlatest one will be used."
+                          }
+                        },
+                        "comment": "Request message for the Report method."
+                      },
+                      "ReportResponse": {
+                        "fields": {
+                          "reportErrors": {
+                            "rule": "repeated",
+                            "type": "ReportError",
+                            "id": 1,
+                            "comment": "Partial failures, one for each `Operation` in the request that failed\nprocessing. There are three possible combinations of the RPC status:\n\n1. The combination of a successful RPC status and an empty `report_errors`\nlist indicates a complete success where all `Operations` in the\nrequest are processed successfully.\n2. The combination of a successful RPC status and a non-empty\n`report_errors` list indicates a partial success where some\n`Operations` in the request succeeded. Each\n`Operation` that failed processing has a corresponding item\nin this list.\n3. A failed RPC status indicates a general non-deterministic failure.\nWhen this happens, it's impossible to know which of the\n'Operations' in the request succeeded or failed."
+                          },
+                          "serviceConfigId": {
+                            "type": "string",
+                            "id": 2,
+                            "comment": "The actual config id used to process the request."
+                          },
+                          "serviceRolloutId": {
+                            "type": "string",
+                            "id": 4,
+                            "comment": "The current service rollout id used to process the request."
+                          }
+                        },
+                        "nested": {
+                          "ReportError": {
+                            "fields": {
+                              "operationId": {
+                                "type": "string",
+                                "id": 1,
+                                "comment": "The\n[Operation.operation_id][google.api.servicecontrol.v1.Operation.operation_id]\nvalue from the request."
+                              },
+                              "status": {
+                                "type": "google.rpc.Status",
+                                "id": 2,
+                                "comment": "Details of the error when processing the\n[Operation][google.api.servicecontrol.v1.Operation]."
+                              }
+                            },
+                            "comment": "Represents the processing error of one\n[Operation][google.api.servicecontrol.v1.Operation] in the request."
+                          }
+                        },
+                        "comment": "Response message for the Report method."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

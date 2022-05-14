@@ -1,0 +1,112 @@
+{
+  "package": "google.logging.type",
+  "imports": [
+    "google/protobuf/duration.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "google": {
+        "nested": {
+          "logging": {
+            "nested": {
+              "type": {
+                "options": {
+                  "csharp_namespace": "Google.Cloud.Logging.Type",
+                  "go_package": "google.golang.org/genproto/googleapis/logging/type;ltype",
+                  "java_multiple_files": true,
+                  "java_outer_classname": "HttpRequestProto",
+                  "java_package": "com.google.logging.type",
+                  "php_namespace": "Google\\Cloud\\Logging\\Type",
+                  "ruby_package": "Google::Cloud::Logging::Type"
+                },
+                "nested": {
+                  "HttpRequest": {
+                    "fields": {
+                      "requestMethod": {
+                        "type": "string",
+                        "id": 1,
+                        "comment": "The request method. Examples: `\"GET\"`, `\"HEAD\"`, `\"PUT\"`, `\"POST\"`."
+                      },
+                      "requestUrl": {
+                        "type": "string",
+                        "id": 2,
+                        "comment": "The scheme (http, https), the host name, the path and the query\nportion of the URL that was requested.\nExample: `\"http://example.com/some/info?color=red\"`."
+                      },
+                      "requestSize": {
+                        "type": "int64",
+                        "id": 3,
+                        "comment": "The size of the HTTP request message in bytes, including the request\nheaders and the request body."
+                      },
+                      "status": {
+                        "type": "int32",
+                        "id": 4,
+                        "comment": "The response code indicating the status of response.\nExamples: 200, 404."
+                      },
+                      "responseSize": {
+                        "type": "int64",
+                        "id": 5,
+                        "comment": "The size of the HTTP response message sent back to the client, in bytes,\nincluding the response headers and the response body."
+                      },
+                      "userAgent": {
+                        "type": "string",
+                        "id": 6,
+                        "comment": "The user agent sent by the client. Example:\n`\"Mozilla/4.0 (compatible; MSIE 6.0; Windows 98; Q312461; .NET\nCLR 1.0.3705)\"`."
+                      },
+                      "remoteIp": {
+                        "type": "string",
+                        "id": 7,
+                        "comment": "The IP address (IPv4 or IPv6) of the client that issued the HTTP\nrequest. This field can include port information. Examples:\n`\"192.168.1.1\"`, `\"10.0.0.1:80\"`, `\"FE80::0202:B3FF:FE1E:8329\"`."
+                      },
+                      "serverIp": {
+                        "type": "string",
+                        "id": 13,
+                        "comment": "The IP address (IPv4 or IPv6) of the origin server that the request was\nsent to. This field can include port information. Examples:\n`\"192.168.1.1\"`, `\"10.0.0.1:80\"`, `\"FE80::0202:B3FF:FE1E:8329\"`."
+                      },
+                      "referer": {
+                        "type": "string",
+                        "id": 8,
+                        "comment": "The referer URL of the request, as defined in\n[HTTP/1.1 Header Field\nDefinitions](http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html)."
+                      },
+                      "latency": {
+                        "type": "google.protobuf.Duration",
+                        "id": 14,
+                        "comment": "The request processing latency on the server, from the time the request was\nreceived until the response was sent."
+                      },
+                      "cacheLookup": {
+                        "type": "bool",
+                        "id": 11,
+                        "comment": "Whether or not a cache lookup was attempted."
+                      },
+                      "cacheHit": {
+                        "type": "bool",
+                        "id": 9,
+                        "comment": "Whether or not an entity was served from cache\n(with or without validation)."
+                      },
+                      "cacheValidatedWithOriginServer": {
+                        "type": "bool",
+                        "id": 10,
+                        "comment": "Whether or not the response was validated with the origin server before\nbeing served from cache. This field is only meaningful if `cache_hit` is\nTrue."
+                      },
+                      "cacheFillBytes": {
+                        "type": "int64",
+                        "id": 12,
+                        "comment": "The number of HTTP response bytes inserted into cache. Set only when a\ncache fill was attempted."
+                      },
+                      "protocol": {
+                        "type": "string",
+                        "id": 15,
+                        "comment": "Protocol used for the request. Examples: \"HTTP/1.1\", \"HTTP/2\", \"websocket\""
+                      }
+                    },
+                    "comment": "A common proto for logging HTTP requests. Only contains semantics\ndefined by the HTTP specification. Product-specific logging\ninformation MUST be defined in a separate message."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

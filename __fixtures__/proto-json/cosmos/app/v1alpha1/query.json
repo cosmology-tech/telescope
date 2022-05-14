@@ -1,0 +1,47 @@
+{
+  "package": "cosmos.app.v1alpha1",
+  "imports": [
+    "cosmos/app/v1alpha1/config.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "cosmos": {
+        "nested": {
+          "app": {
+            "nested": {
+              "v1alpha1": {
+                "nested": {
+                  "Query": {
+                    "methods": {
+                      "Config": {
+                        "requestType": "QueryConfigRequest",
+                        "responseType": "QueryConfigResponse",
+                        "comment": "Config returns the current app config."
+                      }
+                    },
+                    "comment": "Query is the app module query service."
+                  },
+                  "QueryConfigRequest": {
+                    "fields": {},
+                    "comment": "QueryConfigRequest is the Query/Config request type."
+                  },
+                  "QueryConfigResponse": {
+                    "fields": {
+                      "config": {
+                        "type": "Config",
+                        "id": 1,
+                        "comment": "config is the current app config."
+                      }
+                    },
+                    "comment": "QueryConfigRequest is the Query/Config response type."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

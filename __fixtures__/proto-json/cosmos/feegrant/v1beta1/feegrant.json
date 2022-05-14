@@ -1,0 +1,163 @@
+{
+  "package": "cosmos.feegrant.v1beta1",
+  "imports": [
+    "gogoproto/gogo.proto",
+    "google/protobuf/any.proto",
+    "cosmos_proto/cosmos.proto",
+    "cosmos/base/v1beta1/coin.proto",
+    "google/protobuf/timestamp.proto",
+    "google/protobuf/duration.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "cosmos": {
+        "nested": {
+          "feegrant": {
+            "nested": {
+              "v1beta1": {
+                "options": {
+                  "go_package": "github.com/cosmos/cosmos-sdk/x/feegrant"
+                },
+                "nested": {
+                  "BasicAllowance": {
+                    "options": {
+                      "(cosmos_proto.implements_interface)": "FeeAllowanceI"
+                    },
+                    "fields": {
+                      "spendLimit": {
+                        "rule": "repeated",
+                        "type": "cosmos.base.v1beta1.Coin",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.nullable)": false,
+                          "(gogoproto.castrepeated)": "github.com/cosmos/cosmos-sdk/types.Coins"
+                        },
+                        "comment": "spend_limit specifies the maximum amount of tokens that can be spent\nby this allowance and will be updated as tokens are spent. If it is\nempty, there is no spend limit and any amount of coins can be spent."
+                      },
+                      "expiration": {
+                        "type": "google.protobuf.Timestamp",
+                        "id": 2,
+                        "options": {
+                          "(gogoproto.stdtime)": true
+                        },
+                        "comment": "expiration specifies an optional time when this allowance expires"
+                      }
+                    },
+                    "comment": "BasicAllowance implements Allowance with a one-time grant of tokens\nthat optionally expires. The grantee can use up to SpendLimit to cover fees."
+                  },
+                  "PeriodicAllowance": {
+                    "options": {
+                      "(cosmos_proto.implements_interface)": "FeeAllowanceI"
+                    },
+                    "fields": {
+                      "basic": {
+                        "type": "BasicAllowance",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": "basic specifies a struct of `BasicAllowance`"
+                      },
+                      "period": {
+                        "type": "google.protobuf.Duration",
+                        "id": 2,
+                        "options": {
+                          "(gogoproto.stdduration)": true,
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": "period specifies the time duration in which period_spend_limit coins can\nbe spent before that allowance is reset"
+                      },
+                      "periodSpendLimit": {
+                        "rule": "repeated",
+                        "type": "cosmos.base.v1beta1.Coin",
+                        "id": 3,
+                        "options": {
+                          "(gogoproto.nullable)": false,
+                          "(gogoproto.castrepeated)": "github.com/cosmos/cosmos-sdk/types.Coins"
+                        },
+                        "comment": "period_spend_limit specifies the maximum number of coins that can be spent\nin the period"
+                      },
+                      "periodCanSpend": {
+                        "rule": "repeated",
+                        "type": "cosmos.base.v1beta1.Coin",
+                        "id": 4,
+                        "options": {
+                          "(gogoproto.nullable)": false,
+                          "(gogoproto.castrepeated)": "github.com/cosmos/cosmos-sdk/types.Coins"
+                        },
+                        "comment": "period_can_spend is the number of coins left to be spent before the period_reset time"
+                      },
+                      "periodReset": {
+                        "type": "google.protobuf.Timestamp",
+                        "id": 5,
+                        "options": {
+                          "(gogoproto.stdtime)": true,
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": "period_reset is the time at which this period resets and a new one begins,\nit is calculated from the start time of the first transaction after the\nlast period ended"
+                      }
+                    },
+                    "comment": "PeriodicAllowance extends Allowance to allow for both a maximum cap,\nas well as a limit per time period."
+                  },
+                  "AllowedMsgAllowance": {
+                    "options": {
+                      "(gogoproto.goproto_getters)": false,
+                      "(cosmos_proto.implements_interface)": "FeeAllowanceI"
+                    },
+                    "fields": {
+                      "allowance": {
+                        "type": "google.protobuf.Any",
+                        "id": 1,
+                        "options": {
+                          "(cosmos_proto.accepts_interface)": "FeeAllowanceI"
+                        },
+                        "comment": "allowance can be any of basic and periodic fee allowance."
+                      },
+                      "allowedMessages": {
+                        "rule": "repeated",
+                        "type": "string",
+                        "id": 2,
+                        "comment": "allowed_messages are the messages for which the grantee has the access."
+                      }
+                    },
+                    "comment": "AllowedMsgAllowance creates allowance only for specified message types."
+                  },
+                  "Grant": {
+                    "fields": {
+                      "granter": {
+                        "type": "string",
+                        "id": 1,
+                        "options": {
+                          "(cosmos_proto.scalar)": "cosmos.AddressString"
+                        },
+                        "comment": "granter is the address of the user granting an allowance of their funds."
+                      },
+                      "grantee": {
+                        "type": "string",
+                        "id": 2,
+                        "options": {
+                          "(cosmos_proto.scalar)": "cosmos.AddressString"
+                        },
+                        "comment": "grantee is the address of the user being granted an allowance of another user's funds."
+                      },
+                      "allowance": {
+                        "type": "google.protobuf.Any",
+                        "id": 3,
+                        "options": {
+                          "(cosmos_proto.accepts_interface)": "FeeAllowanceI"
+                        },
+                        "comment": "allowance can be any of basic, periodic, allowed fee allowance."
+                      }
+                    },
+                    "comment": "Grant is stored in the KVStore to record a grant with full context"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

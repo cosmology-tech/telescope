@@ -1,0 +1,101 @@
+{
+  "package": "cosmos.base.reflection.v1beta1",
+  "imports": [
+    "google/api/annotations.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "cosmos": {
+        "nested": {
+          "base": {
+            "nested": {
+              "reflection": {
+                "nested": {
+                  "v1beta1": {
+                    "options": {
+                      "go_package": "github.com/cosmos/cosmos-sdk/client/grpc/reflection"
+                    },
+                    "nested": {
+                      "ReflectionService": {
+                        "methods": {
+                          "ListAllInterfaces": {
+                            "requestType": "ListAllInterfacesRequest",
+                            "responseType": "ListAllInterfacesResponse",
+                            "options": {
+                              "(google.api.http).get": "/cosmos/base/reflection/v1beta1/interfaces"
+                            },
+                            "comment": "ListAllInterfaces lists all the interfaces registered in the interface\nregistry.",
+                            "parsedOptions": [
+                              {
+                                "(google.api.http)": {
+                                  "get": "/cosmos/base/reflection/v1beta1/interfaces"
+                                }
+                              }
+                            ]
+                          },
+                          "ListImplementations": {
+                            "requestType": "ListImplementationsRequest",
+                            "responseType": "ListImplementationsResponse",
+                            "options": {
+                              "(google.api.http).get": "/cosmos/base/reflection/v1beta1/interfaces/{interface_name}/implementations"
+                            },
+                            "comment": "ListImplementations list all the concrete types that implement a given\ninterface.",
+                            "parsedOptions": [
+                              {
+                                "(google.api.http)": {
+                                  "get": "/cosmos/base/reflection/v1beta1/interfaces/{interface_name}/implementations"
+                                }
+                              }
+                            ]
+                          }
+                        },
+                        "comment": "ReflectionService defines a service for interface reflection."
+                      },
+                      "ListAllInterfacesRequest": {
+                        "fields": {},
+                        "comment": "ListAllInterfacesRequest is the request type of the ListAllInterfaces RPC."
+                      },
+                      "ListAllInterfacesResponse": {
+                        "fields": {
+                          "interfaceNames": {
+                            "rule": "repeated",
+                            "type": "string",
+                            "id": 1,
+                            "comment": "interface_names is an array of all the registered interfaces."
+                          }
+                        },
+                        "comment": "ListAllInterfacesResponse is the response type of the ListAllInterfaces RPC."
+                      },
+                      "ListImplementationsRequest": {
+                        "fields": {
+                          "interfaceName": {
+                            "type": "string",
+                            "id": 1,
+                            "comment": "interface_name defines the interface to query the implementations for."
+                          }
+                        },
+                        "comment": "ListImplementationsRequest is the request type of the ListImplementations\nRPC."
+                      },
+                      "ListImplementationsResponse": {
+                        "fields": {
+                          "implementationMessageNames": {
+                            "rule": "repeated",
+                            "type": "string",
+                            "id": 1,
+                            "comment": null
+                          }
+                        },
+                        "comment": "ListImplementationsResponse is the response type of the ListImplementations\nRPC."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

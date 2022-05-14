@@ -1,0 +1,274 @@
+{
+  "package": "google.logging.v2",
+  "imports": [
+    "google/api/field_behavior.proto",
+    "google/api/monitored_resource.proto",
+    "google/api/resource.proto",
+    "google/logging/type/http_request.proto",
+    "google/logging/type/log_severity.proto",
+    "google/protobuf/any.proto",
+    "google/protobuf/struct.proto",
+    "google/protobuf/timestamp.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "google": {
+        "nested": {
+          "logging": {
+            "nested": {
+              "v2": {
+                "options": {
+                  "cc_enable_arenas": true,
+                  "csharp_namespace": "Google.Cloud.Logging.V2",
+                  "go_package": "google.golang.org/genproto/googleapis/logging/v2;logging",
+                  "java_multiple_files": true,
+                  "java_outer_classname": "LogEntryProto",
+                  "java_package": "com.google.logging.v2",
+                  "php_namespace": "Google\\Cloud\\Logging\\V2",
+                  "ruby_package": "Google::Cloud::Logging::V2"
+                },
+                "nested": {
+                  "LogEntry": {
+                    "options": {
+                      "(google.api.resource).type": "logging.googleapis.com/Log",
+                      "(google.api.resource).pattern": "billingAccounts/{billing_account}/logs/{log}",
+                      "(google.api.resource).name_field": "log_name"
+                    },
+                    "oneofs": {
+                      "payload": {
+                        "oneof": [
+                          "protoPayload",
+                          "textPayload",
+                          "jsonPayload"
+                        ],
+                        "comment": "The log entry payload, which can be one of multiple types."
+                      }
+                    },
+                    "fields": {
+                      "logName": {
+                        "type": "string",
+                        "id": 12,
+                        "options": {
+                          "(google.api.field_behavior)": "REQUIRED"
+                        },
+                        "comment": "Required. The resource name of the log to which this log entry belongs:\n\n\"projects/[PROJECT_ID]/logs/[LOG_ID]\"\n\"organizations/[ORGANIZATION_ID]/logs/[LOG_ID]\"\n\"billingAccounts/[BILLING_ACCOUNT_ID]/logs/[LOG_ID]\"\n\"folders/[FOLDER_ID]/logs/[LOG_ID]\"\n\nA project number may be used in place of PROJECT_ID. The project number is\ntranslated to its corresponding PROJECT_ID internally and the `log_name`\nfield will contain PROJECT_ID in queries and exports.\n\n`[LOG_ID]` must be URL-encoded within `log_name`. Example:\n`\"organizations/1234567890/logs/cloudresourcemanager.googleapis.com%2Factivity\"`.\n\n`[LOG_ID]` must be less than 512 characters long and can only include the\nfollowing characters: upper and lower case alphanumeric characters,\nforward-slash, underscore, hyphen, and period.\n\nFor backward compatibility, if `log_name` begins with a forward-slash, such\nas `/projects/...`, then the log entry is ingested as usual, but the\nforward-slash is removed. Listing the log entry will not show the leading\nslash and filtering for a log name with a leading slash will never return\nany results."
+                      },
+                      "resource": {
+                        "type": "google.api.MonitoredResource",
+                        "id": 8,
+                        "options": {
+                          "(google.api.field_behavior)": "REQUIRED"
+                        },
+                        "comment": "Required. The monitored resource that produced this log entry.\n\nExample: a log entry that reports a database error would be associated with\nthe monitored resource designating the particular database that reported\nthe error."
+                      },
+                      "protoPayload": {
+                        "type": "google.protobuf.Any",
+                        "id": 2,
+                        "comment": "The log entry payload, represented as a protocol buffer. Some Google\nCloud Platform services use this field for their log entry payloads.\n\nThe following protocol buffer types are supported; user-defined types\nare not supported:\n\n\"type.googleapis.com/google.cloud.audit.AuditLog\"\n\"type.googleapis.com/google.appengine.logging.v1.RequestLog\""
+                      },
+                      "textPayload": {
+                        "type": "string",
+                        "id": 3,
+                        "comment": "The log entry payload, represented as a Unicode string (UTF-8)."
+                      },
+                      "jsonPayload": {
+                        "type": "google.protobuf.Struct",
+                        "id": 6,
+                        "comment": "The log entry payload, represented as a structure that is\nexpressed as a JSON object."
+                      },
+                      "timestamp": {
+                        "type": "google.protobuf.Timestamp",
+                        "id": 9,
+                        "options": {
+                          "(google.api.field_behavior)": "OPTIONAL"
+                        },
+                        "comment": "Optional. The time the event described by the log entry occurred. This time is used\nto compute the log entry's age and to enforce the logs retention period.\nIf this field is omitted in a new log entry, then Logging assigns it the\ncurrent time. Timestamps have nanosecond accuracy, but trailing zeros in\nthe fractional seconds might be omitted when the timestamp is displayed.\n\nIncoming log entries must have timestamps that don't exceed the\n[logs retention\nperiod](https://cloud.google.com/logging/quotas#logs_retention_periods) in\nthe past, and that don't exceed 24 hours in the future. Log entries outside\nthose time boundaries aren't ingested by Logging."
+                      },
+                      "receiveTimestamp": {
+                        "type": "google.protobuf.Timestamp",
+                        "id": 24,
+                        "options": {
+                          "(google.api.field_behavior)": "OUTPUT_ONLY"
+                        },
+                        "comment": "Output only. The time the log entry was received by Logging."
+                      },
+                      "severity": {
+                        "type": "google.logging.type.LogSeverity",
+                        "id": 10,
+                        "options": {
+                          "(google.api.field_behavior)": "OPTIONAL"
+                        },
+                        "comment": "Optional. The severity of the log entry. The default value is `LogSeverity.DEFAULT`."
+                      },
+                      "insertId": {
+                        "type": "string",
+                        "id": 4,
+                        "options": {
+                          "(google.api.field_behavior)": "OPTIONAL"
+                        },
+                        "comment": "Optional. A unique identifier for the log entry. If you provide a value, then\nLogging considers other log entries in the same project, with the same\n`timestamp`, and with the same `insert_id` to be duplicates which are\nremoved in a single query result. However, there are no guarantees of\nde-duplication in the export of logs.\n\nIf the `insert_id` is omitted when writing a log entry, the Logging API\nassigns its own unique identifier in this field.\n\nIn queries, the `insert_id` is also used to order log entries that have\nthe same `log_name` and `timestamp` values."
+                      },
+                      "httpRequest": {
+                        "type": "google.logging.type.HttpRequest",
+                        "id": 7,
+                        "options": {
+                          "(google.api.field_behavior)": "OPTIONAL"
+                        },
+                        "comment": "Optional. Information about the HTTP request associated with this log entry, if\napplicable."
+                      },
+                      "labels": {
+                        "keyType": "string",
+                        "type": "string",
+                        "id": 11,
+                        "options": {
+                          "(google.api.field_behavior)": "OPTIONAL"
+                        },
+                        "comment": "Optional. A map of key, value pairs that provides additional information about the\nlog entry. The labels can be user-defined or system-defined.\n\nUser-defined labels are arbitrary key, value pairs that you can use to\nclassify logs.\n\nSystem-defined labels are defined by GCP services for platform logs.\nThey have two components - a service namespace component and the\nattribute name. For example: `compute.googleapis.com/resource_name`.\n\nCloud Logging truncates label keys that exceed 512 B and label\nvalues that exceed 64 KB upon their associated log entry being\nwritten. The truncation is indicated by an ellipsis at the\nend of the character string."
+                      },
+                      "operation": {
+                        "type": "LogEntryOperation",
+                        "id": 15,
+                        "options": {
+                          "(google.api.field_behavior)": "OPTIONAL"
+                        },
+                        "comment": "Optional. Information about an operation associated with the log entry, if\napplicable."
+                      },
+                      "trace": {
+                        "type": "string",
+                        "id": 22,
+                        "options": {
+                          "(google.api.field_behavior)": "OPTIONAL"
+                        },
+                        "comment": "Optional. Resource name of the trace associated with the log entry, if any. If it\ncontains a relative resource name, the name is assumed to be relative to\n`//tracing.googleapis.com`. Example:\n`projects/my-projectid/traces/06796866738c859f2f19b7cfb3214824`"
+                      },
+                      "spanId": {
+                        "type": "string",
+                        "id": 27,
+                        "options": {
+                          "(google.api.field_behavior)": "OPTIONAL"
+                        },
+                        "comment": "Optional. The span ID within the trace associated with the log entry.\n\nFor Trace spans, this is the same format that the Trace API v2 uses: a\n16-character hexadecimal encoding of an 8-byte array, such as\n`000000000000004a`."
+                      },
+                      "traceSampled": {
+                        "type": "bool",
+                        "id": 30,
+                        "options": {
+                          "(google.api.field_behavior)": "OPTIONAL"
+                        },
+                        "comment": "Optional. The sampling decision of the trace associated with the log entry.\n\nTrue means that the trace resource name in the `trace` field was sampled\nfor storage in a trace backend. False means that the trace was not sampled\nfor storage when this log entry was written, or the sampling decision was\nunknown at the time. A non-sampled `trace` value is still useful as a\nrequest correlation identifier. The default is False."
+                      },
+                      "sourceLocation": {
+                        "type": "LogEntrySourceLocation",
+                        "id": 23,
+                        "options": {
+                          "(google.api.field_behavior)": "OPTIONAL"
+                        },
+                        "comment": "Optional. Source code location information associated with the log entry, if any."
+                      },
+                      "split": {
+                        "type": "LogSplit",
+                        "id": 35,
+                        "options": {
+                          "(google.api.field_behavior)": "OPTIONAL"
+                        },
+                        "comment": "Optional. Information indicating this LogEntry is part of a sequence of multiple log\nentries split from a single LogEntry."
+                      }
+                    },
+                    "comment": "An individual entry in a log."
+                  },
+                  "LogEntryOperation": {
+                    "fields": {
+                      "id": {
+                        "type": "string",
+                        "id": 1,
+                        "options": {
+                          "(google.api.field_behavior)": "OPTIONAL"
+                        },
+                        "comment": "Optional. An arbitrary operation identifier. Log entries with the same\nidentifier are assumed to be part of the same operation."
+                      },
+                      "producer": {
+                        "type": "string",
+                        "id": 2,
+                        "options": {
+                          "(google.api.field_behavior)": "OPTIONAL"
+                        },
+                        "comment": "Optional. An arbitrary producer identifier. The combination of `id` and\n`producer` must be globally unique. Examples for `producer`:\n`\"MyDivision.MyBigCompany.com\"`, `\"github.com/MyProject/MyApplication\"`."
+                      },
+                      "first": {
+                        "type": "bool",
+                        "id": 3,
+                        "options": {
+                          "(google.api.field_behavior)": "OPTIONAL"
+                        },
+                        "comment": "Optional. Set this to True if this is the first log entry in the operation."
+                      },
+                      "last": {
+                        "type": "bool",
+                        "id": 4,
+                        "options": {
+                          "(google.api.field_behavior)": "OPTIONAL"
+                        },
+                        "comment": "Optional. Set this to True if this is the last log entry in the operation."
+                      }
+                    },
+                    "comment": "Additional information about a potentially long-running operation with which\na log entry is associated."
+                  },
+                  "LogEntrySourceLocation": {
+                    "fields": {
+                      "file": {
+                        "type": "string",
+                        "id": 1,
+                        "options": {
+                          "(google.api.field_behavior)": "OPTIONAL"
+                        },
+                        "comment": "Optional. Source file name. Depending on the runtime environment, this\nmight be a simple name or a fully-qualified name."
+                      },
+                      "line": {
+                        "type": "int64",
+                        "id": 2,
+                        "options": {
+                          "(google.api.field_behavior)": "OPTIONAL"
+                        },
+                        "comment": "Optional. Line within the source file. 1-based; 0 indicates no line number\navailable."
+                      },
+                      "function": {
+                        "type": "string",
+                        "id": 3,
+                        "options": {
+                          "(google.api.field_behavior)": "OPTIONAL"
+                        },
+                        "comment": "Optional. Human-readable name of the function or method being invoked, with\noptional context such as the class or package name. This information may be\nused in contexts such as the logs viewer, where a file and line number are\nless meaningful. The format can vary by language. For example:\n`qual.if.ied.Class.method` (Java), `dir/package.func` (Go), `function`\n(Python)."
+                      }
+                    },
+                    "comment": "Additional information about the source code location that produced the log\nentry."
+                  },
+                  "LogSplit": {
+                    "fields": {
+                      "uid": {
+                        "type": "string",
+                        "id": 1,
+                        "comment": "A globally unique identifier for all log entries in a sequence of split log\nentries. All log entries with the same |LogSplit.uid| are assumed to be\npart of the same sequence of split log entries."
+                      },
+                      "index": {
+                        "type": "int32",
+                        "id": 2,
+                        "comment": "The index of this LogEntry in the sequence of split log entries. Log\nentries are given |index| values 0, 1, ..., n-1 for a sequence of n log\nentries."
+                      },
+                      "totalSplits": {
+                        "type": "int32",
+                        "id": 3,
+                        "comment": "The total number of log entries that the original LogEntry was split into."
+                      }
+                    },
+                    "comment": "Additional information used to correlate multiple log entries. Used when a\nsingle LogEntry would exceed the Google Cloud Logging size limit and is\nsplit across multiple log entries."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

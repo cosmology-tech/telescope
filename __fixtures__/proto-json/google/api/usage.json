@@ -1,0 +1,65 @@
+{
+  "package": "google.api",
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "google": {
+        "nested": {
+          "api": {
+            "options": {
+              "go_package": "google.golang.org/genproto/googleapis/api/serviceconfig;serviceconfig",
+              "java_multiple_files": true,
+              "java_outer_classname": "UsageProto",
+              "java_package": "com.google.api",
+              "objc_class_prefix": "GAPI"
+            },
+            "nested": {
+              "Usage": {
+                "fields": {
+                  "requirements": {
+                    "rule": "repeated",
+                    "type": "string",
+                    "id": 1,
+                    "comment": "Requirements that must be satisfied before a consumer project can use the\nservice. Each requirement is of the form <service.name>/<requirement-id>;\nfor example 'serviceusage.googleapis.com/billing-enabled'.\n\nFor Google APIs, a Terms of Service requirement must be included here.\nGoogle Cloud APIs must include \"serviceusage.googleapis.com/tos/cloud\".\nOther Google APIs should include\n\"serviceusage.googleapis.com/tos/universal\". Additional ToS can be\nincluded based on the business needs."
+                  },
+                  "rules": {
+                    "rule": "repeated",
+                    "type": "UsageRule",
+                    "id": 6,
+                    "comment": "A list of usage rules that apply to individual API methods.\n\n**NOTE:** All service configuration rules follow \"last one wins\" order."
+                  },
+                  "producerNotificationChannel": {
+                    "type": "string",
+                    "id": 7,
+                    "comment": "The full resource name of a channel used for sending notifications to the\nservice producer.\n\nGoogle Service Management currently only supports\n[Google Cloud Pub/Sub](https://cloud.google.com/pubsub) as a notification\nchannel. To use Google Cloud Pub/Sub as the channel, this must be the name\nof a Cloud Pub/Sub topic that uses the Cloud Pub/Sub topic name format\ndocumented in https://cloud.google.com/pubsub/docs/overview."
+                  }
+                },
+                "comment": "Configuration controlling usage of a service."
+              },
+              "UsageRule": {
+                "fields": {
+                  "selector": {
+                    "type": "string",
+                    "id": 1,
+                    "comment": "Selects the methods to which this rule applies. Use '*' to indicate all\nmethods in all APIs.\n\nRefer to [selector][google.api.DocumentationRule.selector] for syntax details."
+                  },
+                  "allowUnregisteredCalls": {
+                    "type": "bool",
+                    "id": 2,
+                    "comment": "If true, the selected method allows unregistered calls, e.g. calls\nthat don't identify any user or application."
+                  },
+                  "skipServiceControl": {
+                    "type": "bool",
+                    "id": 3,
+                    "comment": "If true, the selected method should skip service control and the control\nplane features, such as quota and billing, will not be available.\nThis flag is used by Google Cloud Endpoints to bypass checks for internal\nmethods, such as service health check methods."
+                  }
+                },
+                "comment": "Usage configuration rules for the service.\n\nNOTE: Under development.\n\n\nUse this rule to configure unregistered calls for the service. Unregistered\ncalls are calls that do not contain consumer project identity.\n(Example: calls that do not contain an API key).\nBy default, API methods do not allow unregistered calls, and each method call\nmust be identified by a consumer project identity. Use this rule to\nallow/disallow unregistered calls.\n\nExample of an API that wants to allow unregistered calls for entire service.\n\nusage:\nrules:\n- selector: \"*\"\nallow_unregistered_calls: true\n\nExample of a method that wants to allow unregistered calls.\n\nusage:\nrules:\n- selector: \"google.example.library.v1.LibraryService.CreateBook\"\nallow_unregistered_calls: true"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,108 @@
+{
+  "package": "osmosis.poolincentives.v1beta1",
+  "imports": [
+    "gogoproto/gogo.proto",
+    "google/protobuf/duration.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "osmosis": {
+        "nested": {
+          "poolincentives": {
+            "nested": {
+              "v1beta1": {
+                "options": {
+                  "go_package": "github.com/osmosis-labs/osmosis/v7/x/pool-incentives/types"
+                },
+                "nested": {
+                  "Params": {
+                    "options": {
+                      "(gogoproto.goproto_stringer)": false
+                    },
+                    "fields": {
+                      "mintedDenom": {
+                        "type": "string",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.moretags)": "yaml:minted_denom"
+                        },
+                        "comment": "minted_denom is the denomination of the coin expected to be minted by the\nminting module. Pool-incentives module doesn’t actually mint the coin\nitself, but rather manages the distribution of coins that matches the\ndefined minted_denom."
+                      }
+                    },
+                    "comment": null
+                  },
+                  "LockableDurationsInfo": {
+                    "fields": {
+                      "lockableDurations": {
+                        "rule": "repeated",
+                        "type": "google.protobuf.Duration",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.nullable)": false,
+                          "(gogoproto.stdduration)": true,
+                          "(gogoproto.moretags)": "yaml:lockable_durations"
+                        },
+                        "comment": null
+                      }
+                    },
+                    "comment": null
+                  },
+                  "DistrInfo": {
+                    "fields": {
+                      "totalWeight": {
+                        "type": "string",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Int",
+                          "(gogoproto.moretags)": "yaml:total_weight",
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": null
+                      },
+                      "records": {
+                        "rule": "repeated",
+                        "type": "DistrRecord",
+                        "id": 2,
+                        "options": {
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": null
+                      }
+                    },
+                    "comment": null
+                  },
+                  "DistrRecord": {
+                    "options": {
+                      "(gogoproto.equal)": true
+                    },
+                    "fields": {
+                      "gaugeId": {
+                        "type": "uint64",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.moretags)": "yaml:gauge_id"
+                        },
+                        "comment": null
+                      },
+                      "weight": {
+                        "type": "string",
+                        "id": 2,
+                        "options": {
+                          "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Int",
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": null
+                      }
+                    },
+                    "comment": null
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

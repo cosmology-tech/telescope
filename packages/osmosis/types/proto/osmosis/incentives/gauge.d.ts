@@ -2,6 +2,7 @@ import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import { QueryCondition } from "../../osmosis/lockup/lock";
 import { Coin } from "../../cosmos/base/v1beta1/coin";
+import { Duration } from "../../google/protobuf/duration";
 export interface Gauge {
     /** unique ID of a Gauge */
     id: Long;
@@ -30,7 +31,7 @@ export interface Gauge {
     distributedCoins: Coin[];
 }
 export interface LockableDurationsInfo {
-    lockableDurations: string[];
+    lockableDurations: Duration[];
 }
 export declare const Gauge: {
     encode(message: Gauge, writer?: _m0.Writer): _m0.Writer;

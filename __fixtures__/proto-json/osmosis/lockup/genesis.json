@@ -1,0 +1,51 @@
+{
+  "package": "osmosis.lockup",
+  "imports": [
+    "gogoproto/gogo.proto",
+    "osmosis/lockup/lock.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "osmosis": {
+        "nested": {
+          "lockup": {
+            "options": {
+              "go_package": "github.com/osmosis-labs/osmosis/v7/x/lockup/types"
+            },
+            "nested": {
+              "GenesisState": {
+                "fields": {
+                  "lastLockId": {
+                    "type": "uint64",
+                    "id": 1,
+                    "comment": null
+                  },
+                  "locks": {
+                    "rule": "repeated",
+                    "type": "PeriodLock",
+                    "id": 2,
+                    "options": {
+                      "(gogoproto.nullable)": false
+                    },
+                    "comment": null
+                  },
+                  "syntheticLocks": {
+                    "rule": "repeated",
+                    "type": "SyntheticLock",
+                    "id": 3,
+                    "options": {
+                      "(gogoproto.nullable)": false
+                    },
+                    "comment": null
+                  }
+                },
+                "comment": "GenesisState defines the lockup module's genesis state."
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

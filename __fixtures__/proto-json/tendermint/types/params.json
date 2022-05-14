@@ -1,0 +1,149 @@
+{
+  "package": "tendermint.types",
+  "imports": [
+    "gogoproto/gogo.proto",
+    "google/protobuf/duration.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "tendermint": {
+        "nested": {
+          "types": {
+            "options": {
+              "go_package": "github.com/tendermint/tendermint/proto/tendermint/types",
+              "(gogoproto.equal_all)": true
+            },
+            "nested": {
+              "ConsensusParams": {
+                "fields": {
+                  "block": {
+                    "type": "BlockParams",
+                    "id": 1,
+                    "options": {
+                      "(gogoproto.nullable)": false
+                    },
+                    "comment": null
+                  },
+                  "evidence": {
+                    "type": "EvidenceParams",
+                    "id": 2,
+                    "options": {
+                      "(gogoproto.nullable)": false
+                    },
+                    "comment": null
+                  },
+                  "validator": {
+                    "type": "ValidatorParams",
+                    "id": 3,
+                    "options": {
+                      "(gogoproto.nullable)": false
+                    },
+                    "comment": null
+                  },
+                  "version": {
+                    "type": "VersionParams",
+                    "id": 4,
+                    "options": {
+                      "(gogoproto.nullable)": false
+                    },
+                    "comment": null
+                  }
+                },
+                "comment": "ConsensusParams contains consensus critical parameters that determine the\nvalidity of blocks."
+              },
+              "BlockParams": {
+                "fields": {
+                  "maxBytes": {
+                    "type": "int64",
+                    "id": 1,
+                    "comment": "Max block size, in bytes.\nNote: must be greater than 0"
+                  },
+                  "maxGas": {
+                    "type": "int64",
+                    "id": 2,
+                    "comment": "Max gas per block.\nNote: must be greater or equal to -1"
+                  },
+                  "timeIotaMs": {
+                    "type": "int64",
+                    "id": 3,
+                    "comment": "Minimum time increment between consecutive blocks (in milliseconds) If the\nblock header timestamp is ahead of the system clock, decrease this value.\n\nNot exposed to the application."
+                  }
+                },
+                "comment": "BlockParams contains limits on the block size."
+              },
+              "EvidenceParams": {
+                "fields": {
+                  "maxAgeNumBlocks": {
+                    "type": "int64",
+                    "id": 1,
+                    "comment": "Max age of evidence, in blocks.\n\nThe basic formula for calculating this is: MaxAgeDuration / {average block\ntime}."
+                  },
+                  "maxAgeDuration": {
+                    "type": "google.protobuf.Duration",
+                    "id": 2,
+                    "options": {
+                      "(gogoproto.nullable)": false,
+                      "(gogoproto.stdduration)": true
+                    },
+                    "comment": "Max age of evidence, in time.\n\nIt should correspond with an app's \"unbonding period\" or other similar\nmechanism for handling [Nothing-At-Stake\nattacks](https://github.com/ethereum/wiki/wiki/Proof-of-Stake-FAQ#what-is-the-nothing-at-stake-problem-and-how-can-it-be-fixed)."
+                  },
+                  "maxBytes": {
+                    "type": "int64",
+                    "id": 3,
+                    "comment": "This sets the maximum size of total evidence in bytes that can be committed in a single block.\nand should fall comfortably under the max block bytes.\nDefault is 1048576 or 1MB"
+                  }
+                },
+                "comment": "EvidenceParams determine how we handle evidence of malfeasance."
+              },
+              "ValidatorParams": {
+                "options": {
+                  "(gogoproto.populate)": true,
+                  "(gogoproto.equal)": true
+                },
+                "fields": {
+                  "pubKeyTypes": {
+                    "rule": "repeated",
+                    "type": "string",
+                    "id": 1,
+                    "comment": null
+                  }
+                },
+                "comment": "ValidatorParams restrict the public key types validators can use.\nNOTE: uses ABCI pubkey naming, not Amino names."
+              },
+              "VersionParams": {
+                "options": {
+                  "(gogoproto.populate)": true,
+                  "(gogoproto.equal)": true
+                },
+                "fields": {
+                  "appVersion": {
+                    "type": "uint64",
+                    "id": 1,
+                    "comment": null
+                  }
+                },
+                "comment": "VersionParams contains the ABCI application version."
+              },
+              "HashedParams": {
+                "fields": {
+                  "blockMaxBytes": {
+                    "type": "int64",
+                    "id": 1,
+                    "comment": null
+                  },
+                  "blockMaxGas": {
+                    "type": "int64",
+                    "id": 2,
+                    "comment": null
+                  }
+                },
+                "comment": "HashedParams is a subset of ConsensusParams.\n\nIt is hashed into the Header.ConsensusHash."
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

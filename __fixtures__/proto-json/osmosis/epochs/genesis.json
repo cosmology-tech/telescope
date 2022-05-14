@@ -1,0 +1,104 @@
+{
+  "package": "osmosis.epochs.v1beta1",
+  "imports": [
+    "gogoproto/gogo.proto",
+    "google/protobuf/duration.proto",
+    "google/protobuf/timestamp.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "osmosis": {
+        "nested": {
+          "epochs": {
+            "nested": {
+              "v1beta1": {
+                "options": {
+                  "go_package": "github.com/osmosis-labs/osmosis/v7/x/epochs/types"
+                },
+                "nested": {
+                  "EpochInfo": {
+                    "fields": {
+                      "identifier": {
+                        "type": "string",
+                        "id": 1,
+                        "comment": null
+                      },
+                      "startTime": {
+                        "type": "google.protobuf.Timestamp",
+                        "id": 2,
+                        "options": {
+                          "(gogoproto.stdtime)": true,
+                          "(gogoproto.nullable)": false,
+                          "(gogoproto.moretags)": "yaml:start_time"
+                        },
+                        "comment": null
+                      },
+                      "duration": {
+                        "type": "google.protobuf.Duration",
+                        "id": 3,
+                        "options": {
+                          "(gogoproto.nullable)": false,
+                          "(gogoproto.stdduration)": true,
+                          "(gogoproto.jsontag)": "duration,omitempty",
+                          "(gogoproto.moretags)": "yaml:duration"
+                        },
+                        "comment": null
+                      },
+                      "currentEpoch": {
+                        "type": "int64",
+                        "id": 4,
+                        "comment": null
+                      },
+                      "currentEpochStartTime": {
+                        "type": "google.protobuf.Timestamp",
+                        "id": 5,
+                        "options": {
+                          "(gogoproto.stdtime)": true,
+                          "(gogoproto.nullable)": false,
+                          "(gogoproto.moretags)": "yaml:current_epoch_start_time"
+                        },
+                        "comment": null
+                      },
+                      "epochCountingStarted": {
+                        "type": "bool",
+                        "id": 6,
+                        "comment": null
+                      },
+                      "currentEpochStartHeight": {
+                        "type": "int64",
+                        "id": 8,
+                        "comment": null
+                      }
+                    },
+                    "reserved": [
+                      [
+                        7,
+                        7
+                      ]
+                    ],
+                    "comment": null
+                  },
+                  "GenesisState": {
+                    "fields": {
+                      "epochs": {
+                        "rule": "repeated",
+                        "type": "EpochInfo",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": null
+                      }
+                    },
+                    "comment": "GenesisState defines the epochs module's genesis state."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

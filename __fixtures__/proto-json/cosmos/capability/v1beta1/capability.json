@@ -1,0 +1,72 @@
+{
+  "package": "cosmos.capability.v1beta1",
+  "imports": [
+    "gogoproto/gogo.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "cosmos": {
+        "nested": {
+          "capability": {
+            "nested": {
+              "v1beta1": {
+                "options": {
+                  "go_package": "github.com/cosmos/cosmos-sdk/x/capability/types"
+                },
+                "nested": {
+                  "Capability": {
+                    "options": {
+                      "(gogoproto.goproto_stringer)": false
+                    },
+                    "fields": {
+                      "index": {
+                        "type": "uint64",
+                        "id": 1,
+                        "comment": null
+                      }
+                    },
+                    "comment": "Capability defines an implementation of an object capability. The index\nprovided to a Capability must be globally unique."
+                  },
+                  "Owner": {
+                    "options": {
+                      "(gogoproto.goproto_stringer)": false,
+                      "(gogoproto.goproto_getters)": false
+                    },
+                    "fields": {
+                      "module": {
+                        "type": "string",
+                        "id": 1,
+                        "comment": null
+                      },
+                      "name": {
+                        "type": "string",
+                        "id": 2,
+                        "comment": null
+                      }
+                    },
+                    "comment": "Owner defines a single capability owner. An owner is defined by the name of\ncapability and the module name."
+                  },
+                  "CapabilityOwners": {
+                    "fields": {
+                      "owners": {
+                        "rule": "repeated",
+                        "type": "Owner",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": null
+                      }
+                    },
+                    "comment": "CapabilityOwners defines a set of owners of a single Capability. The set of\nowners must be unique."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

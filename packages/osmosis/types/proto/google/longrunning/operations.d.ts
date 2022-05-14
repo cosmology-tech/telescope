@@ -1,6 +1,7 @@
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import { Any } from "../../google/protobuf/any";
+import { Duration } from "../../google/protobuf/duration";
 import { Status } from "../../google/rpc/status";
 import { Empty } from "../../google/protobuf/empty";
 /**
@@ -83,7 +84,7 @@ export interface WaitOperationRequest {
      * will be at most the time permitted by the underlying HTTP/RPC protocol.
      * If RPC context deadline is also specified, the shorter one will be used.
      */
-    timeout: string;
+    timeout: Duration;
 }
 /**
  * A message representing the message types used by a long-running operation.

@@ -1,0 +1,130 @@
+{
+  "package": "google.api.expr.v1beta1",
+  "imports": [
+    "google/api/expr/v1beta1/expr.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "google": {
+        "nested": {
+          "api": {
+            "nested": {
+              "expr": {
+                "nested": {
+                  "v1beta1": {
+                    "options": {
+                      "cc_enable_arenas": true,
+                      "go_package": "google.golang.org/genproto/googleapis/api/expr/v1beta1;expr",
+                      "java_multiple_files": true,
+                      "java_outer_classname": "DeclProto",
+                      "java_package": "com.google.api.expr.v1beta1"
+                    },
+                    "nested": {
+                      "Decl": {
+                        "oneofs": {
+                          "kind": {
+                            "oneof": [
+                              "ident",
+                              "function"
+                            ],
+                            "comment": "The kind of declaration."
+                          }
+                        },
+                        "fields": {
+                          "id": {
+                            "type": "int32",
+                            "id": 1,
+                            "comment": "The id of the declaration."
+                          },
+                          "name": {
+                            "type": "string",
+                            "id": 2,
+                            "comment": "The name of the declaration."
+                          },
+                          "doc": {
+                            "type": "string",
+                            "id": 3,
+                            "comment": "The documentation string for the declaration."
+                          },
+                          "ident": {
+                            "type": "IdentDecl",
+                            "id": 4,
+                            "comment": "An identifier declaration."
+                          },
+                          "function": {
+                            "type": "FunctionDecl",
+                            "id": 5,
+                            "comment": "A function declaration."
+                          }
+                        },
+                        "comment": "A declaration."
+                      },
+                      "DeclType": {
+                        "fields": {
+                          "id": {
+                            "type": "int32",
+                            "id": 1,
+                            "comment": "The expression id of the declared type, if applicable."
+                          },
+                          "type": {
+                            "type": "string",
+                            "id": 2,
+                            "comment": "The type name, e.g. 'int', 'my.type.Type' or 'T'"
+                          },
+                          "typeParams": {
+                            "rule": "repeated",
+                            "type": "DeclType",
+                            "id": 4,
+                            "comment": "An ordered list of type parameters, e.g. `<string, int>`.\nOnly applies to a subset of types, e.g. `map`, `list`."
+                          }
+                        },
+                        "comment": "The declared type of a variable.\n\nExtends runtime type values with extra information used for type checking\nand dispatching."
+                      },
+                      "IdentDecl": {
+                        "fields": {
+                          "type": {
+                            "type": "DeclType",
+                            "id": 3,
+                            "comment": "Optional type of the identifier."
+                          },
+                          "value": {
+                            "type": "Expr",
+                            "id": 4,
+                            "comment": "Optional value of the identifier."
+                          }
+                        },
+                        "comment": "An identifier declaration."
+                      },
+                      "FunctionDecl": {
+                        "fields": {
+                          "args": {
+                            "rule": "repeated",
+                            "type": "IdentDecl",
+                            "id": 1,
+                            "comment": "The function arguments."
+                          },
+                          "returnType": {
+                            "type": "DeclType",
+                            "id": 2,
+                            "comment": "Optional declared return type."
+                          },
+                          "receiverFunction": {
+                            "type": "bool",
+                            "id": 3,
+                            "comment": "If the first argument of the function is the receiver."
+                          }
+                        },
+                        "comment": "A function declaration."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

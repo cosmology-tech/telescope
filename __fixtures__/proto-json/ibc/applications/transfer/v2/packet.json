@@ -1,0 +1,52 @@
+{
+  "package": "ibc.applications.transfer.v2",
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "ibc": {
+        "nested": {
+          "applications": {
+            "nested": {
+              "transfer": {
+                "nested": {
+                  "v2": {
+                    "options": {
+                      "go_package": "github.com/cosmos/ibc-go/v2/modules/apps/transfer/types"
+                    },
+                    "nested": {
+                      "FungibleTokenPacketData": {
+                        "fields": {
+                          "denom": {
+                            "type": "string",
+                            "id": 1,
+                            "comment": "the token denomination to be transferred"
+                          },
+                          "amount": {
+                            "type": "string",
+                            "id": 2,
+                            "comment": "the token amount to be transferred"
+                          },
+                          "sender": {
+                            "type": "string",
+                            "id": 3,
+                            "comment": "the sender address"
+                          },
+                          "receiver": {
+                            "type": "string",
+                            "id": 4,
+                            "comment": "the recipient address on the destination chain"
+                          }
+                        },
+                        "comment": "FungibleTokenPacketData defines a struct for the packet payload\nSee FungibleTokenPacketData spec:\nhttps://github.com/cosmos/ibc/tree/master/spec/app/ics-020-fungible-token-transfer#data-structures"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

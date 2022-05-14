@@ -1,6 +1,7 @@
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import { LaunchStage } from "../../google/api/launch_stage";
+import { Duration } from "../../google/protobuf/duration";
 import { LabelDescriptor } from "../../google/api/label";
 /**
  * Defines a metric type and its schema. Once a metric descriptor is created,
@@ -231,13 +232,13 @@ export interface MetricDescriptor_MetricDescriptorMetadata {
      * excluding data loss due to errors. Metrics with a higher granularity have
      * a smaller sampling period.
      */
-    samplePeriod: string;
+    samplePeriod: Duration;
     /**
      * The delay of data points caused by ingestion. Data points older than this
      * age are guaranteed to be ingested and available to be read, excluding
      * data loss due to errors.
      */
-    ingestDelay: string;
+    ingestDelay: Duration;
 }
 /**
  * A specific metric, identified by specifying values for all of the

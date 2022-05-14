@@ -1,0 +1,37 @@
+{
+  "package": "google.api",
+  "imports": [
+    "google/protobuf/any.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "google": {
+        "nested": {
+          "api": {
+            "options": {
+              "go_package": "google.golang.org/genproto/googleapis/api/serviceconfig;serviceconfig",
+              "java_multiple_files": true,
+              "java_outer_classname": "SourceInfoProto",
+              "java_package": "com.google.api",
+              "objc_class_prefix": "GAPI"
+            },
+            "nested": {
+              "SourceInfo": {
+                "fields": {
+                  "sourceFiles": {
+                    "rule": "repeated",
+                    "type": "google.protobuf.Any",
+                    "id": 1,
+                    "comment": "All files used during config generation."
+                  }
+                },
+                "comment": "Source information used to create a Service Config"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

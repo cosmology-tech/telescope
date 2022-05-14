@@ -1,0 +1,2097 @@
+{
+  "package": "google.logging.v2",
+  "imports": [
+    "google/api/annotations.proto",
+    "google/api/client.proto",
+    "google/api/field_behavior.proto",
+    "google/api/resource.proto",
+    "google/longrunning/operations.proto",
+    "google/protobuf/empty.proto",
+    "google/protobuf/field_mask.proto",
+    "google/protobuf/timestamp.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "google": {
+        "nested": {
+          "logging": {
+            "nested": {
+              "v2": {
+                "options": {
+                  "cc_enable_arenas": true,
+                  "csharp_namespace": "Google.Cloud.Logging.V2",
+                  "go_package": "google.golang.org/genproto/googleapis/logging/v2;logging",
+                  "java_multiple_files": true,
+                  "java_outer_classname": "LoggingConfigProto",
+                  "java_package": "com.google.logging.v2",
+                  "php_namespace": "Google\\Cloud\\Logging\\V2",
+                  "ruby_package": "Google::Cloud::Logging::V2",
+                  "(google.api.resource_definition).type": "logging.googleapis.com/BillingAccountLocation",
+                  "(google.api.resource_definition).pattern": "billingAccounts/{billing_account}/locations/{location}"
+                },
+                "nested": {
+                  "ConfigServiceV2": {
+                    "options": {
+                      "(google.api.default_host)": "logging.googleapis.com",
+                      "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/cloud-platform.read-only,https://www.googleapis.com/auth/logging.admin,https://www.googleapis.com/auth/logging.read"
+                    },
+                    "methods": {
+                      "ListBuckets": {
+                        "requestType": "ListBucketsRequest",
+                        "responseType": "ListBucketsResponse",
+                        "options": {
+                          "(google.api.http).get": "/v2/{parent=*/*/locations/*}/buckets",
+                          "(google.api.http).additional_bindings.get": "/v2/{parent=billingAccounts/*/locations/*}/buckets",
+                          "(google.api.method_signature)": "parent"
+                        },
+                        "comment": "Lists log buckets.",
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "get": "/v2/{parent=*/*/locations/*}/buckets",
+                              "additional_bindings": [
+                                {
+                                  "get": "/v2/{parent=projects/*/locations/*}/buckets"
+                                },
+                                {
+                                  "get": "/v2/{parent=organizations/*/locations/*}/buckets"
+                                },
+                                {
+                                  "get": "/v2/{parent=folders/*/locations/*}/buckets"
+                                },
+                                {
+                                  "get": "/v2/{parent=billingAccounts/*/locations/*}/buckets"
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "(google.api.method_signature)": "parent"
+                          }
+                        ]
+                      },
+                      "GetBucket": {
+                        "requestType": "GetBucketRequest",
+                        "responseType": "LogBucket",
+                        "options": {
+                          "(google.api.http).get": "/v2/{name=*/*/locations/*/buckets/*}",
+                          "(google.api.http).additional_bindings.get": "/v2/{name=billingAccounts/*/buckets/*}"
+                        },
+                        "comment": "Gets a log bucket.",
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "get": "/v2/{name=*/*/locations/*/buckets/*}",
+                              "additional_bindings": [
+                                {
+                                  "get": "/v2/{name=projects/*/locations/*/buckets/*}"
+                                },
+                                {
+                                  "get": "/v2/{name=organizations/*/locations/*/buckets/*}"
+                                },
+                                {
+                                  "get": "/v2/{name=folders/*/locations/*/buckets/*}"
+                                },
+                                {
+                                  "get": "/v2/{name=billingAccounts/*/buckets/*}"
+                                }
+                              ]
+                            }
+                          }
+                        ]
+                      },
+                      "CreateBucket": {
+                        "requestType": "CreateBucketRequest",
+                        "responseType": "LogBucket",
+                        "options": {
+                          "(google.api.http).post": "/v2/{parent=*/*/locations/*}/buckets",
+                          "(google.api.http).body": "bucket",
+                          "(google.api.http).additional_bindings.post": "/v2/{parent=billingAccounts/*/locations/*}/buckets",
+                          "(google.api.http).additional_bindings.body": "bucket"
+                        },
+                        "comment": "Creates a log bucket that can be used to store log entries. After a bucket\nhas been created, the bucket's location cannot be changed.",
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "post": "/v2/{parent=*/*/locations/*}/buckets",
+                              "body": "bucket",
+                              "additional_bindings": [
+                                {
+                                  "post": "/v2/{parent=projects/*/locations/*}/buckets",
+                                  "body": "bucket"
+                                },
+                                {
+                                  "post": "/v2/{parent=organizations/*/locations/*}/buckets",
+                                  "body": "bucket"
+                                },
+                                {
+                                  "post": "/v2/{parent=folders/*/locations/*}/buckets",
+                                  "body": "bucket"
+                                },
+                                {
+                                  "post": "/v2/{parent=billingAccounts/*/locations/*}/buckets",
+                                  "body": "bucket"
+                                }
+                              ]
+                            }
+                          }
+                        ]
+                      },
+                      "UpdateBucket": {
+                        "requestType": "UpdateBucketRequest",
+                        "responseType": "LogBucket",
+                        "options": {
+                          "(google.api.http).patch": "/v2/{name=*/*/locations/*/buckets/*}",
+                          "(google.api.http).body": "bucket",
+                          "(google.api.http).additional_bindings.patch": "/v2/{name=billingAccounts/*/locations/*/buckets/*}",
+                          "(google.api.http).additional_bindings.body": "bucket"
+                        },
+                        "comment": "Updates a log bucket. This method replaces the following fields in the\nexisting bucket with values from the new bucket: `retention_period`\n\nIf the retention period is decreased and the bucket is locked,\n`FAILED_PRECONDITION` will be returned.\n\nIf the bucket has a `lifecycle_state` of `DELETE_REQUESTED`, then\n`FAILED_PRECONDITION` will be returned.\n\nAfter a bucket has been created, the bucket's location cannot be changed.",
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "patch": "/v2/{name=*/*/locations/*/buckets/*}",
+                              "body": "bucket",
+                              "additional_bindings": [
+                                {
+                                  "patch": "/v2/{name=projects/*/locations/*/buckets/*}",
+                                  "body": "bucket"
+                                },
+                                {
+                                  "patch": "/v2/{name=organizations/*/locations/*/buckets/*}",
+                                  "body": "bucket"
+                                },
+                                {
+                                  "patch": "/v2/{name=folders/*/locations/*/buckets/*}",
+                                  "body": "bucket"
+                                },
+                                {
+                                  "patch": "/v2/{name=billingAccounts/*/locations/*/buckets/*}",
+                                  "body": "bucket"
+                                }
+                              ]
+                            }
+                          }
+                        ]
+                      },
+                      "DeleteBucket": {
+                        "requestType": "DeleteBucketRequest",
+                        "responseType": "google.protobuf.Empty",
+                        "options": {
+                          "(google.api.http).delete": "/v2/{name=*/*/locations/*/buckets/*}",
+                          "(google.api.http).additional_bindings.delete": "/v2/{name=billingAccounts/*/locations/*/buckets/*}"
+                        },
+                        "comment": "Deletes a log bucket.\n\nChanges the bucket's `lifecycle_state` to the `DELETE_REQUESTED` state.\nAfter 7 days, the bucket will be purged and all log entries in the bucket\nwill be permanently deleted.",
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "delete": "/v2/{name=*/*/locations/*/buckets/*}",
+                              "additional_bindings": [
+                                {
+                                  "delete": "/v2/{name=projects/*/locations/*/buckets/*}"
+                                },
+                                {
+                                  "delete": "/v2/{name=organizations/*/locations/*/buckets/*}"
+                                },
+                                {
+                                  "delete": "/v2/{name=folders/*/locations/*/buckets/*}"
+                                },
+                                {
+                                  "delete": "/v2/{name=billingAccounts/*/locations/*/buckets/*}"
+                                }
+                              ]
+                            }
+                          }
+                        ]
+                      },
+                      "UndeleteBucket": {
+                        "requestType": "UndeleteBucketRequest",
+                        "responseType": "google.protobuf.Empty",
+                        "options": {
+                          "(google.api.http).post": "/v2/{name=*/*/locations/*/buckets/*}:undelete",
+                          "(google.api.http).body": "*",
+                          "(google.api.http).additional_bindings.post": "/v2/{name=billingAccounts/*/locations/*/buckets/*}:undelete",
+                          "(google.api.http).additional_bindings.body": "*"
+                        },
+                        "comment": "Undeletes a log bucket. A bucket that has been deleted can be undeleted\nwithin the grace period of 7 days.",
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "post": "/v2/{name=*/*/locations/*/buckets/*}:undelete",
+                              "body": "*",
+                              "additional_bindings": [
+                                {
+                                  "post": "/v2/{name=projects/*/locations/*/buckets/*}:undelete",
+                                  "body": "*"
+                                },
+                                {
+                                  "post": "/v2/{name=organizations/*/locations/*/buckets/*}:undelete",
+                                  "body": "*"
+                                },
+                                {
+                                  "post": "/v2/{name=folders/*/locations/*/buckets/*}:undelete",
+                                  "body": "*"
+                                },
+                                {
+                                  "post": "/v2/{name=billingAccounts/*/locations/*/buckets/*}:undelete",
+                                  "body": "*"
+                                }
+                              ]
+                            }
+                          }
+                        ]
+                      },
+                      "ListViews": {
+                        "requestType": "ListViewsRequest",
+                        "responseType": "ListViewsResponse",
+                        "options": {
+                          "(google.api.http).get": "/v2/{parent=*/*/locations/*/buckets/*}/views",
+                          "(google.api.http).additional_bindings.get": "/v2/{parent=billingAccounts/*/locations/*/buckets/*}/views",
+                          "(google.api.method_signature)": "parent"
+                        },
+                        "comment": "Lists views on a log bucket.",
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "get": "/v2/{parent=*/*/locations/*/buckets/*}/views",
+                              "additional_bindings": [
+                                {
+                                  "get": "/v2/{parent=projects/*/locations/*/buckets/*}/views"
+                                },
+                                {
+                                  "get": "/v2/{parent=organizations/*/locations/*/buckets/*}/views"
+                                },
+                                {
+                                  "get": "/v2/{parent=folders/*/locations/*/buckets/*}/views"
+                                },
+                                {
+                                  "get": "/v2/{parent=billingAccounts/*/locations/*/buckets/*}/views"
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "(google.api.method_signature)": "parent"
+                          }
+                        ]
+                      },
+                      "GetView": {
+                        "requestType": "GetViewRequest",
+                        "responseType": "LogView",
+                        "options": {
+                          "(google.api.http).get": "/v2/{name=*/*/locations/*/buckets/*/views/*}",
+                          "(google.api.http).additional_bindings.get": "/v2/{name=billingAccounts/*/buckets/*/views/*}"
+                        },
+                        "comment": "Gets a view on a log bucket..",
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "get": "/v2/{name=*/*/locations/*/buckets/*/views/*}",
+                              "additional_bindings": [
+                                {
+                                  "get": "/v2/{name=projects/*/locations/*/buckets/*/views/*}"
+                                },
+                                {
+                                  "get": "/v2/{name=organizations/*/locations/*/buckets/*/views/*}"
+                                },
+                                {
+                                  "get": "/v2/{name=folders/*/locations/*/buckets/*/views/*}"
+                                },
+                                {
+                                  "get": "/v2/{name=billingAccounts/*/buckets/*/views/*}"
+                                }
+                              ]
+                            }
+                          }
+                        ]
+                      },
+                      "CreateView": {
+                        "requestType": "CreateViewRequest",
+                        "responseType": "LogView",
+                        "options": {
+                          "(google.api.http).post": "/v2/{parent=*/*/locations/*/buckets/*}/views",
+                          "(google.api.http).body": "view",
+                          "(google.api.http).additional_bindings.post": "/v2/{parent=billingAccounts/*/locations/*/buckets/*}/views",
+                          "(google.api.http).additional_bindings.body": "view"
+                        },
+                        "comment": "Creates a view over log entries in a log bucket. A bucket may contain a\nmaximum of 30 views.",
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "post": "/v2/{parent=*/*/locations/*/buckets/*}/views",
+                              "body": "view",
+                              "additional_bindings": [
+                                {
+                                  "post": "/v2/{parent=projects/*/locations/*/buckets/*}/views",
+                                  "body": "view"
+                                },
+                                {
+                                  "post": "/v2/{parent=organizations/*/locations/*/buckets/*}/views",
+                                  "body": "view"
+                                },
+                                {
+                                  "post": "/v2/{parent=folders/*/locations/*/buckets/*}/views",
+                                  "body": "view"
+                                },
+                                {
+                                  "post": "/v2/{parent=billingAccounts/*/locations/*/buckets/*}/views",
+                                  "body": "view"
+                                }
+                              ]
+                            }
+                          }
+                        ]
+                      },
+                      "UpdateView": {
+                        "requestType": "UpdateViewRequest",
+                        "responseType": "LogView",
+                        "options": {
+                          "(google.api.http).patch": "/v2/{name=*/*/locations/*/buckets/*/views/*}",
+                          "(google.api.http).body": "view",
+                          "(google.api.http).additional_bindings.patch": "/v2/{name=billingAccounts/*/locations/*/buckets/*/views/*}",
+                          "(google.api.http).additional_bindings.body": "view"
+                        },
+                        "comment": "Updates a view on a log bucket. This method replaces the following fields\nin the existing view with values from the new view: `filter`.\nIf an `UNAVAILABLE` error is returned, this indicates that system is not in\na state where it can update the view. If this occurs, please try again in a\nfew minutes.",
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "patch": "/v2/{name=*/*/locations/*/buckets/*/views/*}",
+                              "body": "view",
+                              "additional_bindings": [
+                                {
+                                  "patch": "/v2/{name=projects/*/locations/*/buckets/*/views/*}",
+                                  "body": "view"
+                                },
+                                {
+                                  "patch": "/v2/{name=organizations/*/locations/*/buckets/*/views/*}",
+                                  "body": "view"
+                                },
+                                {
+                                  "patch": "/v2/{name=folders/*/locations/*/buckets/*/views/*}",
+                                  "body": "view"
+                                },
+                                {
+                                  "patch": "/v2/{name=billingAccounts/*/locations/*/buckets/*/views/*}",
+                                  "body": "view"
+                                }
+                              ]
+                            }
+                          }
+                        ]
+                      },
+                      "DeleteView": {
+                        "requestType": "DeleteViewRequest",
+                        "responseType": "google.protobuf.Empty",
+                        "options": {
+                          "(google.api.http).delete": "/v2/{name=*/*/locations/*/buckets/*/views/*}",
+                          "(google.api.http).additional_bindings.delete": "/v2/{name=billingAccounts/*/locations/*/buckets/*/views/*}"
+                        },
+                        "comment": "Deletes a view on a log bucket.\nIf an `UNAVAILABLE` error is returned, this indicates that system is not in\na state where it can delete the view. If this occurs, please try again in a\nfew minutes.",
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "delete": "/v2/{name=*/*/locations/*/buckets/*/views/*}",
+                              "additional_bindings": [
+                                {
+                                  "delete": "/v2/{name=projects/*/locations/*/buckets/*/views/*}"
+                                },
+                                {
+                                  "delete": "/v2/{name=organizations/*/locations/*/buckets/*/views/*}"
+                                },
+                                {
+                                  "delete": "/v2/{name=folders/*/locations/*/buckets/*/views/*}"
+                                },
+                                {
+                                  "delete": "/v2/{name=billingAccounts/*/locations/*/buckets/*/views/*}"
+                                }
+                              ]
+                            }
+                          }
+                        ]
+                      },
+                      "ListSinks": {
+                        "requestType": "ListSinksRequest",
+                        "responseType": "ListSinksResponse",
+                        "options": {
+                          "(google.api.http).get": "/v2/{parent=*/*}/sinks",
+                          "(google.api.http).additional_bindings.get": "/v2/{parent=billingAccounts/*}/sinks",
+                          "(google.api.method_signature)": "parent"
+                        },
+                        "comment": "Lists sinks.",
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "get": "/v2/{parent=*/*}/sinks",
+                              "additional_bindings": [
+                                {
+                                  "get": "/v2/{parent=projects/*}/sinks"
+                                },
+                                {
+                                  "get": "/v2/{parent=organizations/*}/sinks"
+                                },
+                                {
+                                  "get": "/v2/{parent=folders/*}/sinks"
+                                },
+                                {
+                                  "get": "/v2/{parent=billingAccounts/*}/sinks"
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "(google.api.method_signature)": "parent"
+                          }
+                        ]
+                      },
+                      "GetSink": {
+                        "requestType": "GetSinkRequest",
+                        "responseType": "LogSink",
+                        "options": {
+                          "(google.api.http).get": "/v2/{sink_name=*/*/sinks/*}",
+                          "(google.api.http).additional_bindings.get": "/v2/{sink_name=billingAccounts/*/sinks/*}",
+                          "(google.api.method_signature)": "sink_name"
+                        },
+                        "comment": "Gets a sink.",
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "get": "/v2/{sink_name=*/*/sinks/*}",
+                              "additional_bindings": [
+                                {
+                                  "get": "/v2/{sink_name=projects/*/sinks/*}"
+                                },
+                                {
+                                  "get": "/v2/{sink_name=organizations/*/sinks/*}"
+                                },
+                                {
+                                  "get": "/v2/{sink_name=folders/*/sinks/*}"
+                                },
+                                {
+                                  "get": "/v2/{sink_name=billingAccounts/*/sinks/*}"
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "(google.api.method_signature)": "sink_name"
+                          }
+                        ]
+                      },
+                      "CreateSink": {
+                        "requestType": "CreateSinkRequest",
+                        "responseType": "LogSink",
+                        "options": {
+                          "(google.api.http).post": "/v2/{parent=*/*}/sinks",
+                          "(google.api.http).body": "sink",
+                          "(google.api.http).additional_bindings.post": "/v2/{parent=billingAccounts/*}/sinks",
+                          "(google.api.http).additional_bindings.body": "sink",
+                          "(google.api.method_signature)": "parent,sink"
+                        },
+                        "comment": "Creates a sink that exports specified log entries to a destination. The\nexport of newly-ingested log entries begins immediately, unless the sink's\n`writer_identity` is not permitted to write to the destination. A sink can\nexport log entries only from the resource owning the sink.",
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "post": "/v2/{parent=*/*}/sinks",
+                              "body": "sink",
+                              "additional_bindings": [
+                                {
+                                  "post": "/v2/{parent=projects/*}/sinks",
+                                  "body": "sink"
+                                },
+                                {
+                                  "post": "/v2/{parent=organizations/*}/sinks",
+                                  "body": "sink"
+                                },
+                                {
+                                  "post": "/v2/{parent=folders/*}/sinks",
+                                  "body": "sink"
+                                },
+                                {
+                                  "post": "/v2/{parent=billingAccounts/*}/sinks",
+                                  "body": "sink"
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "(google.api.method_signature)": "parent,sink"
+                          }
+                        ]
+                      },
+                      "UpdateSink": {
+                        "requestType": "UpdateSinkRequest",
+                        "responseType": "LogSink",
+                        "options": {
+                          "(google.api.http).put": "/v2/{sink_name=*/*/sinks/*}",
+                          "(google.api.http).body": "sink",
+                          "(google.api.http).additional_bindings.put": "/v2/{sink_name=billingAccounts/*/sinks/*}",
+                          "(google.api.http).additional_bindings.body": "sink",
+                          "(google.api.http).additional_bindings.patch": "/v2/{sink_name=billingAccounts/*/sinks/*}",
+                          "(google.api.method_signature)": "sink_name,sink"
+                        },
+                        "comment": "Updates a sink. This method replaces the following fields in the existing\nsink with values from the new sink: `destination`, and `filter`.\n\nThe updated sink might also have a new `writer_identity`; see the\n`unique_writer_identity` field.",
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "put": "/v2/{sink_name=*/*/sinks/*}",
+                              "body": "sink",
+                              "additional_bindings": [
+                                {
+                                  "put": "/v2/{sink_name=projects/*/sinks/*}",
+                                  "body": "sink"
+                                },
+                                {
+                                  "put": "/v2/{sink_name=organizations/*/sinks/*}",
+                                  "body": "sink"
+                                },
+                                {
+                                  "put": "/v2/{sink_name=folders/*/sinks/*}",
+                                  "body": "sink"
+                                },
+                                {
+                                  "put": "/v2/{sink_name=billingAccounts/*/sinks/*}",
+                                  "body": "sink"
+                                },
+                                {
+                                  "patch": "/v2/{sink_name=projects/*/sinks/*}",
+                                  "body": "sink"
+                                },
+                                {
+                                  "patch": "/v2/{sink_name=organizations/*/sinks/*}",
+                                  "body": "sink"
+                                },
+                                {
+                                  "patch": "/v2/{sink_name=folders/*/sinks/*}",
+                                  "body": "sink"
+                                },
+                                {
+                                  "patch": "/v2/{sink_name=billingAccounts/*/sinks/*}",
+                                  "body": "sink"
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "(google.api.method_signature)": "sink_name,sink,update_mask"
+                          },
+                          {
+                            "(google.api.method_signature)": "sink_name,sink"
+                          }
+                        ]
+                      },
+                      "DeleteSink": {
+                        "requestType": "DeleteSinkRequest",
+                        "responseType": "google.protobuf.Empty",
+                        "options": {
+                          "(google.api.http).delete": "/v2/{sink_name=*/*/sinks/*}",
+                          "(google.api.http).additional_bindings.delete": "/v2/{sink_name=billingAccounts/*/sinks/*}",
+                          "(google.api.method_signature)": "sink_name"
+                        },
+                        "comment": "Deletes a sink. If the sink has a unique `writer_identity`, then that\nservice account is also deleted.",
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "delete": "/v2/{sink_name=*/*/sinks/*}",
+                              "additional_bindings": [
+                                {
+                                  "delete": "/v2/{sink_name=projects/*/sinks/*}"
+                                },
+                                {
+                                  "delete": "/v2/{sink_name=organizations/*/sinks/*}"
+                                },
+                                {
+                                  "delete": "/v2/{sink_name=folders/*/sinks/*}"
+                                },
+                                {
+                                  "delete": "/v2/{sink_name=billingAccounts/*/sinks/*}"
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "(google.api.method_signature)": "sink_name"
+                          }
+                        ]
+                      },
+                      "ListExclusions": {
+                        "requestType": "ListExclusionsRequest",
+                        "responseType": "ListExclusionsResponse",
+                        "options": {
+                          "(google.api.http).get": "/v2/{parent=*/*}/exclusions",
+                          "(google.api.http).additional_bindings.get": "/v2/{parent=billingAccounts/*}/exclusions",
+                          "(google.api.method_signature)": "parent"
+                        },
+                        "comment": "Lists all the exclusions on the _Default sink in a parent resource.",
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "get": "/v2/{parent=*/*}/exclusions",
+                              "additional_bindings": [
+                                {
+                                  "get": "/v2/{parent=projects/*}/exclusions"
+                                },
+                                {
+                                  "get": "/v2/{parent=organizations/*}/exclusions"
+                                },
+                                {
+                                  "get": "/v2/{parent=folders/*}/exclusions"
+                                },
+                                {
+                                  "get": "/v2/{parent=billingAccounts/*}/exclusions"
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "(google.api.method_signature)": "parent"
+                          }
+                        ]
+                      },
+                      "GetExclusion": {
+                        "requestType": "GetExclusionRequest",
+                        "responseType": "LogExclusion",
+                        "options": {
+                          "(google.api.http).get": "/v2/{name=*/*/exclusions/*}",
+                          "(google.api.http).additional_bindings.get": "/v2/{name=billingAccounts/*/exclusions/*}",
+                          "(google.api.method_signature)": "name"
+                        },
+                        "comment": "Gets the description of an exclusion in the _Default sink.",
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "get": "/v2/{name=*/*/exclusions/*}",
+                              "additional_bindings": [
+                                {
+                                  "get": "/v2/{name=projects/*/exclusions/*}"
+                                },
+                                {
+                                  "get": "/v2/{name=organizations/*/exclusions/*}"
+                                },
+                                {
+                                  "get": "/v2/{name=folders/*/exclusions/*}"
+                                },
+                                {
+                                  "get": "/v2/{name=billingAccounts/*/exclusions/*}"
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "(google.api.method_signature)": "name"
+                          }
+                        ]
+                      },
+                      "CreateExclusion": {
+                        "requestType": "CreateExclusionRequest",
+                        "responseType": "LogExclusion",
+                        "options": {
+                          "(google.api.http).post": "/v2/{parent=*/*}/exclusions",
+                          "(google.api.http).body": "exclusion",
+                          "(google.api.http).additional_bindings.post": "/v2/{parent=billingAccounts/*}/exclusions",
+                          "(google.api.http).additional_bindings.body": "exclusion",
+                          "(google.api.method_signature)": "parent,exclusion"
+                        },
+                        "comment": "Creates a new exclusion in the _Default sink in a specified parent\nresource. Only log entries belonging to that resource can be excluded. You\ncan have up to 10 exclusions in a resource.",
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "post": "/v2/{parent=*/*}/exclusions",
+                              "body": "exclusion",
+                              "additional_bindings": [
+                                {
+                                  "post": "/v2/{parent=projects/*}/exclusions",
+                                  "body": "exclusion"
+                                },
+                                {
+                                  "post": "/v2/{parent=organizations/*}/exclusions",
+                                  "body": "exclusion"
+                                },
+                                {
+                                  "post": "/v2/{parent=folders/*}/exclusions",
+                                  "body": "exclusion"
+                                },
+                                {
+                                  "post": "/v2/{parent=billingAccounts/*}/exclusions",
+                                  "body": "exclusion"
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "(google.api.method_signature)": "parent,exclusion"
+                          }
+                        ]
+                      },
+                      "UpdateExclusion": {
+                        "requestType": "UpdateExclusionRequest",
+                        "responseType": "LogExclusion",
+                        "options": {
+                          "(google.api.http).patch": "/v2/{name=*/*/exclusions/*}",
+                          "(google.api.http).body": "exclusion",
+                          "(google.api.http).additional_bindings.patch": "/v2/{name=billingAccounts/*/exclusions/*}",
+                          "(google.api.http).additional_bindings.body": "exclusion",
+                          "(google.api.method_signature)": "name,exclusion,update_mask"
+                        },
+                        "comment": "Changes one or more properties of an existing exclusion in the _Default\nsink.",
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "patch": "/v2/{name=*/*/exclusions/*}",
+                              "body": "exclusion",
+                              "additional_bindings": [
+                                {
+                                  "patch": "/v2/{name=projects/*/exclusions/*}",
+                                  "body": "exclusion"
+                                },
+                                {
+                                  "patch": "/v2/{name=organizations/*/exclusions/*}",
+                                  "body": "exclusion"
+                                },
+                                {
+                                  "patch": "/v2/{name=folders/*/exclusions/*}",
+                                  "body": "exclusion"
+                                },
+                                {
+                                  "patch": "/v2/{name=billingAccounts/*/exclusions/*}",
+                                  "body": "exclusion"
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "(google.api.method_signature)": "name,exclusion,update_mask"
+                          }
+                        ]
+                      },
+                      "DeleteExclusion": {
+                        "requestType": "DeleteExclusionRequest",
+                        "responseType": "google.protobuf.Empty",
+                        "options": {
+                          "(google.api.http).delete": "/v2/{name=*/*/exclusions/*}",
+                          "(google.api.http).additional_bindings.delete": "/v2/{name=billingAccounts/*/exclusions/*}",
+                          "(google.api.method_signature)": "name"
+                        },
+                        "comment": "Deletes an exclusion in the _Default sink.",
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "delete": "/v2/{name=*/*/exclusions/*}",
+                              "additional_bindings": [
+                                {
+                                  "delete": "/v2/{name=projects/*/exclusions/*}"
+                                },
+                                {
+                                  "delete": "/v2/{name=organizations/*/exclusions/*}"
+                                },
+                                {
+                                  "delete": "/v2/{name=folders/*/exclusions/*}"
+                                },
+                                {
+                                  "delete": "/v2/{name=billingAccounts/*/exclusions/*}"
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "(google.api.method_signature)": "name"
+                          }
+                        ]
+                      },
+                      "GetCmekSettings": {
+                        "requestType": "GetCmekSettingsRequest",
+                        "responseType": "CmekSettings",
+                        "options": {
+                          "(google.api.http).get": "/v2/{name=*/*}/cmekSettings",
+                          "(google.api.http).additional_bindings.get": "/v2/{name=billingAccounts/*}/cmekSettings"
+                        },
+                        "comment": "Gets the Logging CMEK settings for the given resource.\n\nNote: CMEK for the Log Router can be configured for Google Cloud projects,\nfolders, organizations and billing accounts. Once configured for an\norganization, it applies to all projects and folders in the Google Cloud\norganization.\n\nSee [Enabling CMEK for Log\nRouter](https://cloud.google.com/logging/docs/routing/managed-encryption)\nfor more information.",
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "get": "/v2/{name=*/*}/cmekSettings",
+                              "additional_bindings": [
+                                {
+                                  "get": "/v2/{name=projects/*}/cmekSettings"
+                                },
+                                {
+                                  "get": "/v2/{name=organizations/*}/cmekSettings"
+                                },
+                                {
+                                  "get": "/v2/{name=folders/*}/cmekSettings"
+                                },
+                                {
+                                  "get": "/v2/{name=billingAccounts/*}/cmekSettings"
+                                }
+                              ]
+                            }
+                          }
+                        ]
+                      },
+                      "UpdateCmekSettings": {
+                        "requestType": "UpdateCmekSettingsRequest",
+                        "responseType": "CmekSettings",
+                        "options": {
+                          "(google.api.http).patch": "/v2/{name=*/*}/cmekSettings",
+                          "(google.api.http).body": "cmek_settings",
+                          "(google.api.http).additional_bindings.patch": "/v2/{name=organizations/*}/cmekSettings",
+                          "(google.api.http).additional_bindings.body": "cmek_settings"
+                        },
+                        "comment": "Updates the Log Router CMEK settings for the given resource.\n\nNote: CMEK for the Log Router can currently only be configured for Google\nCloud organizations. Once configured, it applies to all projects and\nfolders in the Google Cloud organization.\n\n[UpdateCmekSettings][google.logging.v2.ConfigServiceV2.UpdateCmekSettings]\nwill fail if 1) `kms_key_name` is invalid, or 2) the associated service\naccount does not have the required\n`roles/cloudkms.cryptoKeyEncrypterDecrypter` role assigned for the key, or\n3) access to the key is disabled.\n\nSee [Enabling CMEK for Log\nRouter](https://cloud.google.com/logging/docs/routing/managed-encryption)\nfor more information.",
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "patch": "/v2/{name=*/*}/cmekSettings",
+                              "body": "cmek_settings",
+                              "additional_bindings": {
+                                "patch": "/v2/{name=organizations/*}/cmekSettings",
+                                "body": "cmek_settings"
+                              }
+                            }
+                          }
+                        ]
+                      },
+                      "GetSettings": {
+                        "requestType": "GetSettingsRequest",
+                        "responseType": "Settings",
+                        "options": {
+                          "(google.api.http).get": "/v2/{name=*/*}/settings",
+                          "(google.api.http).additional_bindings.get": "/v2/{name=billingAccounts/*}/settings",
+                          "(google.api.method_signature)": "name"
+                        },
+                        "comment": "Gets the Log Router settings for the given resource.\n\nNote: Settings for the Log Router can be get for Google Cloud projects,\nfolders, organizations and billing accounts. Currently it can only be\nconfigured for organizations. Once configured for an organization, it\napplies to all projects and folders in the Google Cloud organization.\n\nSee [Enabling CMEK for Log\nRouter](https://cloud.google.com/logging/docs/routing/managed-encryption)\nfor more information.",
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "get": "/v2/{name=*/*}/settings",
+                              "additional_bindings": [
+                                {
+                                  "get": "/v2/{name=projects/*}/settings"
+                                },
+                                {
+                                  "get": "/v2/{name=organizations/*}/settings"
+                                },
+                                {
+                                  "get": "/v2/{name=folders/*}/settings"
+                                },
+                                {
+                                  "get": "/v2/{name=billingAccounts/*}/settings"
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "(google.api.method_signature)": "name"
+                          }
+                        ]
+                      },
+                      "UpdateSettings": {
+                        "requestType": "UpdateSettingsRequest",
+                        "responseType": "Settings",
+                        "options": {
+                          "(google.api.http).patch": "/v2/{name=*/*}/settings",
+                          "(google.api.http).body": "settings",
+                          "(google.api.http).additional_bindings.patch": "/v2/{name=folders/*}/settings",
+                          "(google.api.http).additional_bindings.body": "settings",
+                          "(google.api.method_signature)": "settings,update_mask"
+                        },
+                        "comment": "Updates the Log Router settings for the given resource.\n\nNote: Settings for the Log Router can currently only be configured for\nGoogle Cloud organizations. Once configured, it applies to all projects and\nfolders in the Google Cloud organization.\n\n[UpdateSettings][google.logging.v2.ConfigServiceV2.UpdateSettings]\nwill fail if 1) `kms_key_name` is invalid, or 2) the associated service\naccount does not have the required\n`roles/cloudkms.cryptoKeyEncrypterDecrypter` role assigned for the key, or\n3) access to the key is disabled. 4) `location_id` is not supported by\nLogging. 5) `location_id` violate OrgPolicy.\n\nSee [Enabling CMEK for Log\nRouter](https://cloud.google.com/logging/docs/routing/managed-encryption)\nfor more information.",
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "patch": "/v2/{name=*/*}/settings",
+                              "body": "settings",
+                              "additional_bindings": [
+                                {
+                                  "patch": "/v2/{name=organizations/*}/settings",
+                                  "body": "settings"
+                                },
+                                {
+                                  "patch": "/v2/{name=folders/*}/settings",
+                                  "body": "settings"
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "(google.api.method_signature)": "settings,update_mask"
+                          }
+                        ]
+                      },
+                      "CopyLogEntries": {
+                        "requestType": "CopyLogEntriesRequest",
+                        "responseType": "google.longrunning.Operation",
+                        "options": {
+                          "(google.api.http).post": "/v2/entries:copy",
+                          "(google.api.http).body": "*",
+                          "(google.longrunning.operation_info).response_type": "CopyLogEntriesResponse",
+                          "(google.longrunning.operation_info).metadata_type": "CopyLogEntriesMetadata"
+                        },
+                        "comment": "Copies a set of log entries from a log bucket to a Cloud Storage bucket.",
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "post": "/v2/entries:copy",
+                              "body": "*"
+                            }
+                          },
+                          {
+                            "(google.longrunning.operation_info)": {
+                              "response_type": "CopyLogEntriesResponse",
+                              "metadata_type": "CopyLogEntriesMetadata"
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    "comment": "Service for configuring sinks used to route log entries."
+                  },
+                  "LogBucket": {
+                    "options": {
+                      "(google.api.resource).type": "logging.googleapis.com/LogBucket",
+                      "(google.api.resource).pattern": "billingAccounts/{billing_account}/locations/{location}/buckets/{bucket}"
+                    },
+                    "fields": {
+                      "name": {
+                        "type": "string",
+                        "id": 1,
+                        "options": {
+                          "(google.api.field_behavior)": "OUTPUT_ONLY"
+                        },
+                        "comment": "Output only. The resource name of the bucket.\n\nFor example:\n\n`projects/my-project/locations/global/buckets/my-bucket`\n\nFor a list of supported locations, see [Supported\nRegions](https://cloud.google.com/logging/docs/region-support)\n\nFor the location of `global` it is unspecified where log entries are\nactually stored.\n\nAfter a bucket has been created, the location cannot be changed."
+                      },
+                      "description": {
+                        "type": "string",
+                        "id": 3,
+                        "comment": "Describes this bucket."
+                      },
+                      "createTime": {
+                        "type": "google.protobuf.Timestamp",
+                        "id": 4,
+                        "options": {
+                          "(google.api.field_behavior)": "OUTPUT_ONLY"
+                        },
+                        "comment": "Output only. The creation timestamp of the bucket. This is not set for any of the\ndefault buckets."
+                      },
+                      "updateTime": {
+                        "type": "google.protobuf.Timestamp",
+                        "id": 5,
+                        "options": {
+                          "(google.api.field_behavior)": "OUTPUT_ONLY"
+                        },
+                        "comment": "Output only. The last update timestamp of the bucket."
+                      },
+                      "retentionDays": {
+                        "type": "int32",
+                        "id": 11,
+                        "comment": "Logs will be retained by default for this amount of time, after which they\nwill automatically be deleted. The minimum retention period is 1 day. If\nthis value is set to zero at bucket creation time, the default time of 30\ndays will be used."
+                      },
+                      "locked": {
+                        "type": "bool",
+                        "id": 9,
+                        "comment": "Whether the bucket is locked.\n\nThe retention period on a locked bucket cannot be changed. Locked buckets\nmay only be deleted if they are empty."
+                      },
+                      "lifecycleState": {
+                        "type": "LifecycleState",
+                        "id": 12,
+                        "options": {
+                          "(google.api.field_behavior)": "OUTPUT_ONLY"
+                        },
+                        "comment": "Output only. The bucket lifecycle state."
+                      },
+                      "restrictedFields": {
+                        "rule": "repeated",
+                        "type": "string",
+                        "id": 15,
+                        "comment": "Log entry field paths that are denied access in this bucket.\n\nThe following fields and their children are eligible: `textPayload`,\n`jsonPayload`, `protoPayload`, `httpRequest`, `labels`, `sourceLocation`.\n\nRestricting a repeated field will restrict all values. Adding a parent will\nblock all child fields. (e.g. `foo.bar` will block `foo.bar.baz`)"
+                      },
+                      "cmekSettings": {
+                        "type": "CmekSettings",
+                        "id": 19,
+                        "comment": "The CMEK settings of the log bucket. If present, new log entries written to\nthis log bucket are encrypted using the CMEK key provided in this\nconfiguration. If a log bucket has CMEK settings, the CMEK settings cannot\nbe disabled later by updating the log bucket. Changing the KMS key is\nallowed."
+                      }
+                    },
+                    "comment": "Describes a repository in which log entries are stored."
+                  },
+                  "LogView": {
+                    "options": {
+                      "(google.api.resource).type": "logging.googleapis.com/LogView",
+                      "(google.api.resource).pattern": "billingAccounts/{billing_account}/locations/{location}/buckets/{bucket}/views/{view}"
+                    },
+                    "fields": {
+                      "name": {
+                        "type": "string",
+                        "id": 1,
+                        "comment": "The resource name of the view.\n\nFor example:\n\n`projects/my-project/locations/global/buckets/my-bucket/views/my-view`"
+                      },
+                      "description": {
+                        "type": "string",
+                        "id": 3,
+                        "comment": "Describes this view."
+                      },
+                      "createTime": {
+                        "type": "google.protobuf.Timestamp",
+                        "id": 4,
+                        "options": {
+                          "(google.api.field_behavior)": "OUTPUT_ONLY"
+                        },
+                        "comment": "Output only. The creation timestamp of the view."
+                      },
+                      "updateTime": {
+                        "type": "google.protobuf.Timestamp",
+                        "id": 5,
+                        "options": {
+                          "(google.api.field_behavior)": "OUTPUT_ONLY"
+                        },
+                        "comment": "Output only. The last update timestamp of the view."
+                      },
+                      "filter": {
+                        "type": "string",
+                        "id": 7,
+                        "comment": "Filter that restricts which log entries in a bucket are visible in this\nview.\n\nFilters are restricted to be a logical AND of ==/!= of any of the\nfollowing:\n\n- originating project/folder/organization/billing account.\n- resource type\n- log id\n\nFor example:\n\nSOURCE(\"projects/myproject\") AND resource.type = \"gce_instance\"\nAND LOG_ID(\"stdout\")"
+                      }
+                    },
+                    "comment": "Describes a view over log entries in a bucket."
+                  },
+                  "LogSink": {
+                    "options": {
+                      "(google.api.resource).type": "logging.googleapis.com/LogSink",
+                      "(google.api.resource).pattern": "billingAccounts/{billing_account}/sinks/{sink}"
+                    },
+                    "oneofs": {
+                      "options": {
+                        "oneof": [
+                          "bigqueryOptions"
+                        ],
+                        "comment": "Destination dependent options."
+                      }
+                    },
+                    "fields": {
+                      "name": {
+                        "type": "string",
+                        "id": 1,
+                        "options": {
+                          "(google.api.field_behavior)": "REQUIRED"
+                        },
+                        "comment": "Required. The client-assigned sink identifier, unique within the project.\n\nFor example: `\"my-syslog-errors-to-pubsub\"`. Sink identifiers are limited\nto 100 characters and can include only the following characters: upper and\nlower-case alphanumeric characters, underscores, hyphens, and periods.\nFirst character has to be alphanumeric."
+                      },
+                      "destination": {
+                        "type": "string",
+                        "id": 3,
+                        "options": {
+                          "(google.api.field_behavior)": "REQUIRED",
+                          "(google.api.resource_reference).type": "*"
+                        },
+                        "comment": "Required. The export destination:\n\n\"storage.googleapis.com/[GCS_BUCKET]\"\n\"bigquery.googleapis.com/projects/[PROJECT_ID]/datasets/[DATASET]\"\n\"pubsub.googleapis.com/projects/[PROJECT_ID]/topics/[TOPIC_ID]\"\n\nThe sink's `writer_identity`, set when the sink is created, must have\npermission to write to the destination or else the log entries are not\nexported. For more information, see\n[Exporting Logs with\nSinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs)."
+                      },
+                      "filter": {
+                        "type": "string",
+                        "id": 5,
+                        "options": {
+                          "(google.api.field_behavior)": "OPTIONAL"
+                        },
+                        "comment": "Optional. An [advanced logs\nfilter](https://cloud.google.com/logging/docs/view/advanced-queries). The\nonly exported log entries are those that are in the resource owning the\nsink and that match the filter.\n\nFor example:\n\n`logName=\"projects/[PROJECT_ID]/logs/[LOG_ID]\" AND severity>=ERROR`"
+                      },
+                      "description": {
+                        "type": "string",
+                        "id": 18,
+                        "options": {
+                          "(google.api.field_behavior)": "OPTIONAL"
+                        },
+                        "comment": "Optional. A description of this sink.\n\nThe maximum length of the description is 8000 characters."
+                      },
+                      "disabled": {
+                        "type": "bool",
+                        "id": 19,
+                        "options": {
+                          "(google.api.field_behavior)": "OPTIONAL"
+                        },
+                        "comment": "Optional. If set to true, then this sink is disabled and it does not export any log\nentries."
+                      },
+                      "exclusions": {
+                        "rule": "repeated",
+                        "type": "LogExclusion",
+                        "id": 16,
+                        "options": {
+                          "(google.api.field_behavior)": "OPTIONAL"
+                        },
+                        "comment": "Optional. Log entries that match any of these exclusion filters will not be exported.\n\nIf a log entry is matched by both `filter` and one of `exclusion_filters`\nit will not be exported."
+                      },
+                      "outputVersionFormat": {
+                        "type": "VersionFormat",
+                        "id": 6,
+                        "options": {
+                          "deprecated": true
+                        },
+                        "comment": "Deprecated. This field is unused."
+                      },
+                      "writerIdentity": {
+                        "type": "string",
+                        "id": 8,
+                        "options": {
+                          "(google.api.field_behavior)": "OUTPUT_ONLY"
+                        },
+                        "comment": "Output only. An IAM identity&mdash;a service account or group&mdash;under which Cloud\nLogging writes the exported log entries to the sink's destination. This\nfield is set by\n[sinks.create][google.logging.v2.ConfigServiceV2.CreateSink] and\n[sinks.update][google.logging.v2.ConfigServiceV2.UpdateSink] based on the\nvalue of `unique_writer_identity` in those methods.\n\nUntil you grant this identity write-access to the destination, log entry\nexports from this sink will fail. For more information, see [Granting\nAccess for a\nResource](https://cloud.google.com/iam/docs/granting-roles-to-service-accounts#granting_access_to_a_service_account_for_a_resource).\nConsult the destination service's documentation to determine the\nappropriate IAM roles to assign to the identity.\n\nSinks that have a destination that is a log bucket in the same project as\nthe sink do not have a writer_identity and no additional permissions are\nrequired."
+                      },
+                      "includeChildren": {
+                        "type": "bool",
+                        "id": 9,
+                        "options": {
+                          "(google.api.field_behavior)": "OPTIONAL"
+                        },
+                        "comment": "Optional. This field applies only to sinks owned by organizations and folders. If the\nfield is false, the default, only the logs owned by the sink's parent\nresource are available for export. If the field is true, then log entries\nfrom all the projects, folders, and billing accounts contained in the\nsink's parent resource are also available for export. Whether a particular\nlog entry from the children is exported depends on the sink's filter\nexpression.\n\nFor example, if this field is true, then the filter\n`resource.type=gce_instance` would export all Compute Engine VM instance\nlog entries from all projects in the sink's parent.\n\nTo only export entries from certain child projects, filter on the project\npart of the log name:\n\nlogName:(\"projects/test-project1/\" OR \"projects/test-project2/\") AND\nresource.type=gce_instance"
+                      },
+                      "bigqueryOptions": {
+                        "type": "BigQueryOptions",
+                        "id": 12,
+                        "options": {
+                          "(google.api.field_behavior)": "OPTIONAL"
+                        },
+                        "comment": "Optional. Options that affect sinks exporting data to BigQuery."
+                      },
+                      "createTime": {
+                        "type": "google.protobuf.Timestamp",
+                        "id": 13,
+                        "options": {
+                          "(google.api.field_behavior)": "OUTPUT_ONLY"
+                        },
+                        "comment": "Output only. The creation timestamp of the sink.\n\nThis field may not be present for older sinks."
+                      },
+                      "updateTime": {
+                        "type": "google.protobuf.Timestamp",
+                        "id": 14,
+                        "options": {
+                          "(google.api.field_behavior)": "OUTPUT_ONLY"
+                        },
+                        "comment": "Output only. The last update timestamp of the sink.\n\nThis field may not be present for older sinks."
+                      }
+                    },
+                    "nested": {
+                      "VersionFormat": {
+                        "values": {
+                          "VERSION_FORMAT_UNSPECIFIED": 0,
+                          "V2": 1,
+                          "V1": 2
+                        },
+                        "comment": "Deprecated. This is unused.",
+                        "comments": {
+                          "VERSION_FORMAT_UNSPECIFIED": "An unspecified format version that will default to V2.",
+                          "V2": "`LogEntry` version 2 format.",
+                          "V1": "`LogEntry` version 1 format."
+                        }
+                      }
+                    },
+                    "comment": "Describes a sink used to export log entries to one of the following\ndestinations in any project: a Cloud Storage bucket, a BigQuery dataset, a\nPub/Sub topic or a Cloud Logging log bucket. A logs filter controls which log\nentries are exported. The sink must be created within a project,\norganization, billing account, or folder."
+                  },
+                  "BigQueryOptions": {
+                    "fields": {
+                      "usePartitionedTables": {
+                        "type": "bool",
+                        "id": 1,
+                        "options": {
+                          "(google.api.field_behavior)": "OPTIONAL"
+                        },
+                        "comment": "Optional. Whether to use [BigQuery's partition\ntables](https://cloud.google.com/bigquery/docs/partitioned-tables). By\ndefault, Cloud Logging creates dated tables based on the log entries'\ntimestamps, e.g. syslog_20170523. With partitioned tables the date suffix\nis no longer present and [special query\nsyntax](https://cloud.google.com/bigquery/docs/querying-partitioned-tables)\nhas to be used instead. In both cases, tables are sharded based on UTC\ntimezone."
+                      },
+                      "usesTimestampColumnPartitioning": {
+                        "type": "bool",
+                        "id": 3,
+                        "options": {
+                          "(google.api.field_behavior)": "OUTPUT_ONLY"
+                        },
+                        "comment": "Output only. True if new timestamp column based partitioning is in use, false if legacy\ningestion-time partitioning is in use.\n\nAll new sinks will have this field set true and will use timestamp column\nbased partitioning. If use_partitioned_tables is false, this value has no\nmeaning and will be false. Legacy sinks using partitioned tables will have\nthis field set to false."
+                      }
+                    },
+                    "comment": "Options that change functionality of a sink exporting data to BigQuery."
+                  },
+                  "ListBucketsRequest": {
+                    "fields": {
+                      "parent": {
+                        "type": "string",
+                        "id": 1,
+                        "options": {
+                          "(google.api.field_behavior)": "REQUIRED",
+                          "(google.api.resource_reference).child_type": "logging.googleapis.com/LogBucket"
+                        },
+                        "comment": "Required. The parent resource whose buckets are to be listed:\n\n\"projects/[PROJECT_ID]/locations/[LOCATION_ID]\"\n\"organizations/[ORGANIZATION_ID]/locations/[LOCATION_ID]\"\n\"billingAccounts/[BILLING_ACCOUNT_ID]/locations/[LOCATION_ID]\"\n\"folders/[FOLDER_ID]/locations/[LOCATION_ID]\"\n\nNote: The locations portion of the resource must be specified, but\nsupplying the character `-` in place of [LOCATION_ID] will return all\nbuckets."
+                      },
+                      "pageToken": {
+                        "type": "string",
+                        "id": 2,
+                        "options": {
+                          "(google.api.field_behavior)": "OPTIONAL"
+                        },
+                        "comment": "Optional. If present, then retrieve the next batch of results from the preceding call\nto this method. `pageToken` must be the value of `nextPageToken` from the\nprevious response. The values of other method parameters should be\nidentical to those in the previous call."
+                      },
+                      "pageSize": {
+                        "type": "int32",
+                        "id": 3,
+                        "options": {
+                          "(google.api.field_behavior)": "OPTIONAL"
+                        },
+                        "comment": "Optional. The maximum number of results to return from this request. Non-positive\nvalues are ignored. The presence of `nextPageToken` in the response\nindicates that more results might be available."
+                      }
+                    },
+                    "comment": "The parameters to `ListBuckets`."
+                  },
+                  "ListBucketsResponse": {
+                    "fields": {
+                      "buckets": {
+                        "rule": "repeated",
+                        "type": "LogBucket",
+                        "id": 1,
+                        "comment": "A list of buckets."
+                      },
+                      "nextPageToken": {
+                        "type": "string",
+                        "id": 2,
+                        "comment": "If there might be more results than appear in this response, then\n`nextPageToken` is included. To get the next set of results, call the same\nmethod again using the value of `nextPageToken` as `pageToken`."
+                      }
+                    },
+                    "comment": "The response from ListBuckets."
+                  },
+                  "CreateBucketRequest": {
+                    "fields": {
+                      "parent": {
+                        "type": "string",
+                        "id": 1,
+                        "options": {
+                          "(google.api.field_behavior)": "REQUIRED",
+                          "(google.api.resource_reference).child_type": "logging.googleapis.com/LogBucket"
+                        },
+                        "comment": "Required. The resource in which to create the log bucket:\n\n\"projects/[PROJECT_ID]/locations/[LOCATION_ID]\"\n\nFor example:\n\n`\"projects/my-project/locations/global\"`"
+                      },
+                      "bucketId": {
+                        "type": "string",
+                        "id": 2,
+                        "options": {
+                          "(google.api.field_behavior)": "REQUIRED"
+                        },
+                        "comment": "Required. A client-assigned identifier such as `\"my-bucket\"`. Identifiers are limited\nto 100 characters and can include only letters, digits, underscores,\nhyphens, and periods."
+                      },
+                      "bucket": {
+                        "type": "LogBucket",
+                        "id": 3,
+                        "options": {
+                          "(google.api.field_behavior)": "REQUIRED"
+                        },
+                        "comment": "Required. The new bucket. The region specified in the new bucket must be compliant\nwith any Location Restriction Org Policy. The name field in the bucket is\nignored."
+                      }
+                    },
+                    "comment": "The parameters to `CreateBucket`."
+                  },
+                  "UpdateBucketRequest": {
+                    "fields": {
+                      "name": {
+                        "type": "string",
+                        "id": 1,
+                        "options": {
+                          "(google.api.field_behavior)": "REQUIRED",
+                          "(google.api.resource_reference).type": "logging.googleapis.com/LogBucket"
+                        },
+                        "comment": "Required. The full resource name of the bucket to update.\n\n\"projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]\"\n\"organizations/[ORGANIZATION_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]\"\n\"billingAccounts/[BILLING_ACCOUNT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]\"\n\"folders/[FOLDER_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]\"\n\nFor example:\n\n`\"projects/my-project/locations/global/buckets/my-bucket\"`"
+                      },
+                      "bucket": {
+                        "type": "LogBucket",
+                        "id": 2,
+                        "options": {
+                          "(google.api.field_behavior)": "REQUIRED"
+                        },
+                        "comment": "Required. The updated bucket."
+                      },
+                      "updateMask": {
+                        "type": "google.protobuf.FieldMask",
+                        "id": 4,
+                        "options": {
+                          "(google.api.field_behavior)": "REQUIRED"
+                        },
+                        "comment": "Required. Field mask that specifies the fields in `bucket` that need an update. A\nbucket field will be overwritten if, and only if, it is in the update mask.\n`name` and output only fields cannot be updated.\n\nFor a detailed `FieldMask` definition, see:\nhttps://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask\n\nFor example: `updateMask=retention_days`"
+                      }
+                    },
+                    "comment": "The parameters to `UpdateBucket`."
+                  },
+                  "GetBucketRequest": {
+                    "fields": {
+                      "name": {
+                        "type": "string",
+                        "id": 1,
+                        "options": {
+                          "(google.api.field_behavior)": "REQUIRED",
+                          "(google.api.resource_reference).type": "logging.googleapis.com/LogBucket"
+                        },
+                        "comment": "Required. The resource name of the bucket:\n\n\"projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]\"\n\"organizations/[ORGANIZATION_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]\"\n\"billingAccounts/[BILLING_ACCOUNT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]\"\n\"folders/[FOLDER_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]\"\n\nFor example:\n\n`\"projects/my-project/locations/global/buckets/my-bucket\"`"
+                      }
+                    },
+                    "comment": "The parameters to `GetBucket`."
+                  },
+                  "DeleteBucketRequest": {
+                    "fields": {
+                      "name": {
+                        "type": "string",
+                        "id": 1,
+                        "options": {
+                          "(google.api.field_behavior)": "REQUIRED",
+                          "(google.api.resource_reference).type": "logging.googleapis.com/LogBucket"
+                        },
+                        "comment": "Required. The full resource name of the bucket to delete.\n\n\"projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]\"\n\"organizations/[ORGANIZATION_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]\"\n\"billingAccounts/[BILLING_ACCOUNT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]\"\n\"folders/[FOLDER_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]\"\n\nFor example:\n\n`\"projects/my-project/locations/global/buckets/my-bucket\"`"
+                      }
+                    },
+                    "comment": "The parameters to `DeleteBucket`."
+                  },
+                  "UndeleteBucketRequest": {
+                    "fields": {
+                      "name": {
+                        "type": "string",
+                        "id": 1,
+                        "options": {
+                          "(google.api.field_behavior)": "REQUIRED",
+                          "(google.api.resource_reference).type": "logging.googleapis.com/LogBucket"
+                        },
+                        "comment": "Required. The full resource name of the bucket to undelete.\n\n\"projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]\"\n\"organizations/[ORGANIZATION_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]\"\n\"billingAccounts/[BILLING_ACCOUNT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]\"\n\"folders/[FOLDER_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]\"\n\nFor example:\n\n`\"projects/my-project/locations/global/buckets/my-bucket\"`"
+                      }
+                    },
+                    "comment": "The parameters to `UndeleteBucket`."
+                  },
+                  "ListViewsRequest": {
+                    "fields": {
+                      "parent": {
+                        "type": "string",
+                        "id": 1,
+                        "options": {
+                          "(google.api.field_behavior)": "REQUIRED"
+                        },
+                        "comment": "Required. The bucket whose views are to be listed:\n\n\"projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]\""
+                      },
+                      "pageToken": {
+                        "type": "string",
+                        "id": 2,
+                        "options": {
+                          "(google.api.field_behavior)": "OPTIONAL"
+                        },
+                        "comment": "Optional. If present, then retrieve the next batch of results from the preceding call\nto this method. `pageToken` must be the value of `nextPageToken` from the\nprevious response. The values of other method parameters should be\nidentical to those in the previous call."
+                      },
+                      "pageSize": {
+                        "type": "int32",
+                        "id": 3,
+                        "options": {
+                          "(google.api.field_behavior)": "OPTIONAL"
+                        },
+                        "comment": "Optional. The maximum number of results to return from this request.\n\nNon-positive values are ignored. The presence of `nextPageToken` in the\nresponse indicates that more results might be available."
+                      }
+                    },
+                    "comment": "The parameters to `ListViews`."
+                  },
+                  "ListViewsResponse": {
+                    "fields": {
+                      "views": {
+                        "rule": "repeated",
+                        "type": "LogView",
+                        "id": 1,
+                        "comment": "A list of views."
+                      },
+                      "nextPageToken": {
+                        "type": "string",
+                        "id": 2,
+                        "comment": "If there might be more results than appear in this response, then\n`nextPageToken` is included. To get the next set of results, call the same\nmethod again using the value of `nextPageToken` as `pageToken`."
+                      }
+                    },
+                    "comment": "The response from ListViews."
+                  },
+                  "CreateViewRequest": {
+                    "fields": {
+                      "parent": {
+                        "type": "string",
+                        "id": 1,
+                        "options": {
+                          "(google.api.field_behavior)": "REQUIRED"
+                        },
+                        "comment": "Required. The bucket in which to create the view\n\n`\"projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]\"`\n\nFor example:\n\n`\"projects/my-project/locations/global/buckets/my-bucket\"`"
+                      },
+                      "viewId": {
+                        "type": "string",
+                        "id": 2,
+                        "options": {
+                          "(google.api.field_behavior)": "REQUIRED"
+                        },
+                        "comment": "Required. The id to use for this view."
+                      },
+                      "view": {
+                        "type": "LogView",
+                        "id": 3,
+                        "options": {
+                          "(google.api.field_behavior)": "REQUIRED"
+                        },
+                        "comment": "Required. The new view."
+                      }
+                    },
+                    "comment": "The parameters to `CreateView`."
+                  },
+                  "UpdateViewRequest": {
+                    "fields": {
+                      "name": {
+                        "type": "string",
+                        "id": 1,
+                        "options": {
+                          "(google.api.field_behavior)": "REQUIRED"
+                        },
+                        "comment": "Required. The full resource name of the view to update\n\n\"projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]\"\n\nFor example:\n\n`\"projects/my-project/locations/global/buckets/my-bucket/views/my-view\"`"
+                      },
+                      "view": {
+                        "type": "LogView",
+                        "id": 2,
+                        "options": {
+                          "(google.api.field_behavior)": "REQUIRED"
+                        },
+                        "comment": "Required. The updated view."
+                      },
+                      "updateMask": {
+                        "type": "google.protobuf.FieldMask",
+                        "id": 4,
+                        "options": {
+                          "(google.api.field_behavior)": "OPTIONAL"
+                        },
+                        "comment": "Optional. Field mask that specifies the fields in `view` that need\nan update. A field will be overwritten if, and only if, it is\nin the update mask. `name` and output only fields cannot be updated.\n\nFor a detailed `FieldMask` definition, see\nhttps://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask\n\nFor example: `updateMask=filter`"
+                      }
+                    },
+                    "comment": "The parameters to `UpdateView`."
+                  },
+                  "GetViewRequest": {
+                    "fields": {
+                      "name": {
+                        "type": "string",
+                        "id": 1,
+                        "options": {
+                          "(google.api.field_behavior)": "REQUIRED",
+                          "(google.api.resource_reference).type": "logging.googleapis.com/LogView"
+                        },
+                        "comment": "Required. The resource name of the policy:\n\n\"projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]\"\n\nFor example:\n\n`\"projects/my-project/locations/global/buckets/my-bucket/views/my-view\"`"
+                      }
+                    },
+                    "comment": "The parameters to `GetView`."
+                  },
+                  "DeleteViewRequest": {
+                    "fields": {
+                      "name": {
+                        "type": "string",
+                        "id": 1,
+                        "options": {
+                          "(google.api.field_behavior)": "REQUIRED",
+                          "(google.api.resource_reference).type": "logging.googleapis.com/LogView"
+                        },
+                        "comment": "Required. The full resource name of the view to delete:\n\n\"projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]\"\n\nFor example:\n\n`\"projects/my-project/locations/global/buckets/my-bucket/views/my-view\"`"
+                      }
+                    },
+                    "comment": "The parameters to `DeleteView`."
+                  },
+                  "ListSinksRequest": {
+                    "fields": {
+                      "parent": {
+                        "type": "string",
+                        "id": 1,
+                        "options": {
+                          "(google.api.field_behavior)": "REQUIRED",
+                          "(google.api.resource_reference).child_type": "logging.googleapis.com/LogSink"
+                        },
+                        "comment": "Required. The parent resource whose sinks are to be listed:\n\n\"projects/[PROJECT_ID]\"\n\"organizations/[ORGANIZATION_ID]\"\n\"billingAccounts/[BILLING_ACCOUNT_ID]\"\n\"folders/[FOLDER_ID]\""
+                      },
+                      "pageToken": {
+                        "type": "string",
+                        "id": 2,
+                        "options": {
+                          "(google.api.field_behavior)": "OPTIONAL"
+                        },
+                        "comment": "Optional. If present, then retrieve the next batch of results from the\npreceding call to this method. `pageToken` must be the value of\n`nextPageToken` from the previous response. The values of other method\nparameters should be identical to those in the previous call."
+                      },
+                      "pageSize": {
+                        "type": "int32",
+                        "id": 3,
+                        "options": {
+                          "(google.api.field_behavior)": "OPTIONAL"
+                        },
+                        "comment": "Optional. The maximum number of results to return from this request.\nNon-positive values are ignored. The presence of `nextPageToken` in the\nresponse indicates that more results might be available."
+                      }
+                    },
+                    "comment": "The parameters to `ListSinks`."
+                  },
+                  "ListSinksResponse": {
+                    "fields": {
+                      "sinks": {
+                        "rule": "repeated",
+                        "type": "LogSink",
+                        "id": 1,
+                        "comment": "A list of sinks."
+                      },
+                      "nextPageToken": {
+                        "type": "string",
+                        "id": 2,
+                        "comment": "If there might be more results than appear in this response, then\n`nextPageToken` is included. To get the next set of results, call the same\nmethod again using the value of `nextPageToken` as `pageToken`."
+                      }
+                    },
+                    "comment": "Result returned from `ListSinks`."
+                  },
+                  "GetSinkRequest": {
+                    "fields": {
+                      "sinkName": {
+                        "type": "string",
+                        "id": 1,
+                        "options": {
+                          "(google.api.field_behavior)": "REQUIRED",
+                          "(google.api.resource_reference).type": "logging.googleapis.com/LogSink"
+                        },
+                        "comment": "Required. The resource name of the sink:\n\n\"projects/[PROJECT_ID]/sinks/[SINK_ID]\"\n\"organizations/[ORGANIZATION_ID]/sinks/[SINK_ID]\"\n\"billingAccounts/[BILLING_ACCOUNT_ID]/sinks/[SINK_ID]\"\n\"folders/[FOLDER_ID]/sinks/[SINK_ID]\"\n\nFor example:\n\n`\"projects/my-project/sinks/my-sink\"`"
+                      }
+                    },
+                    "comment": "The parameters to `GetSink`."
+                  },
+                  "CreateSinkRequest": {
+                    "fields": {
+                      "parent": {
+                        "type": "string",
+                        "id": 1,
+                        "options": {
+                          "(google.api.field_behavior)": "REQUIRED",
+                          "(google.api.resource_reference).child_type": "logging.googleapis.com/LogSink"
+                        },
+                        "comment": "Required. The resource in which to create the sink:\n\n\"projects/[PROJECT_ID]\"\n\"organizations/[ORGANIZATION_ID]\"\n\"billingAccounts/[BILLING_ACCOUNT_ID]\"\n\"folders/[FOLDER_ID]\"\n\nFor examples:\n\n`\"projects/my-project\"`\n`\"organizations/123456789\"`"
+                      },
+                      "sink": {
+                        "type": "LogSink",
+                        "id": 2,
+                        "options": {
+                          "(google.api.field_behavior)": "REQUIRED"
+                        },
+                        "comment": "Required. The new sink, whose `name` parameter is a sink identifier that\nis not already in use."
+                      },
+                      "uniqueWriterIdentity": {
+                        "type": "bool",
+                        "id": 3,
+                        "options": {
+                          "(google.api.field_behavior)": "OPTIONAL"
+                        },
+                        "comment": "Optional. Determines the kind of IAM identity returned as `writer_identity`\nin the new sink. If this value is omitted or set to false, and if the\nsink's parent is a project, then the value returned as `writer_identity` is\nthe same group or service account used by Cloud Logging before the addition\nof writer identities to this API. The sink's destination must be in the\nsame project as the sink itself.\n\nIf this field is set to true, or if the sink is owned by a non-project\nresource such as an organization, then the value of `writer_identity` will\nbe a unique service account used only for exports from the new sink. For\nmore information, see `writer_identity` in [LogSink][google.logging.v2.LogSink]."
+                      }
+                    },
+                    "comment": "The parameters to `CreateSink`."
+                  },
+                  "UpdateSinkRequest": {
+                    "fields": {
+                      "sinkName": {
+                        "type": "string",
+                        "id": 1,
+                        "options": {
+                          "(google.api.field_behavior)": "REQUIRED",
+                          "(google.api.resource_reference).type": "logging.googleapis.com/LogSink"
+                        },
+                        "comment": "Required. The full resource name of the sink to update, including the parent\nresource and the sink identifier:\n\n\"projects/[PROJECT_ID]/sinks/[SINK_ID]\"\n\"organizations/[ORGANIZATION_ID]/sinks/[SINK_ID]\"\n\"billingAccounts/[BILLING_ACCOUNT_ID]/sinks/[SINK_ID]\"\n\"folders/[FOLDER_ID]/sinks/[SINK_ID]\"\n\nFor example:\n\n`\"projects/my-project/sinks/my-sink\"`"
+                      },
+                      "sink": {
+                        "type": "LogSink",
+                        "id": 2,
+                        "options": {
+                          "(google.api.field_behavior)": "REQUIRED"
+                        },
+                        "comment": "Required. The updated sink, whose name is the same identifier that appears as part\nof `sink_name`."
+                      },
+                      "uniqueWriterIdentity": {
+                        "type": "bool",
+                        "id": 3,
+                        "options": {
+                          "(google.api.field_behavior)": "OPTIONAL"
+                        },
+                        "comment": "Optional. See [sinks.create][google.logging.v2.ConfigServiceV2.CreateSink]\nfor a description of this field. When updating a sink, the effect of this\nfield on the value of `writer_identity` in the updated sink depends on both\nthe old and new values of this field:\n\n+   If the old and new values of this field are both false or both true,\nthen there is no change to the sink's `writer_identity`.\n+   If the old value is false and the new value is true, then\n`writer_identity` is changed to a unique service account.\n+   It is an error if the old value is true and the new value is\nset to false or defaulted to false."
+                      },
+                      "updateMask": {
+                        "type": "google.protobuf.FieldMask",
+                        "id": 4,
+                        "options": {
+                          "(google.api.field_behavior)": "OPTIONAL"
+                        },
+                        "comment": "Optional. Field mask that specifies the fields in `sink` that need\nan update. A sink field will be overwritten if, and only if, it is\nin the update mask. `name` and output only fields cannot be updated.\n\nAn empty `updateMask` is temporarily treated as using the following mask\nfor backwards compatibility purposes:\n\n`destination,filter,includeChildren`\n\nAt some point in the future, behavior will be removed and specifying an\nempty `updateMask` will be an error.\n\nFor a detailed `FieldMask` definition, see\nhttps://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask\n\nFor example: `updateMask=filter`"
+                      }
+                    },
+                    "comment": "The parameters to `UpdateSink`."
+                  },
+                  "DeleteSinkRequest": {
+                    "fields": {
+                      "sinkName": {
+                        "type": "string",
+                        "id": 1,
+                        "options": {
+                          "(google.api.field_behavior)": "REQUIRED",
+                          "(google.api.resource_reference).type": "logging.googleapis.com/LogSink"
+                        },
+                        "comment": "Required. The full resource name of the sink to delete, including the parent\nresource and the sink identifier:\n\n\"projects/[PROJECT_ID]/sinks/[SINK_ID]\"\n\"organizations/[ORGANIZATION_ID]/sinks/[SINK_ID]\"\n\"billingAccounts/[BILLING_ACCOUNT_ID]/sinks/[SINK_ID]\"\n\"folders/[FOLDER_ID]/sinks/[SINK_ID]\"\n\nFor example:\n\n`\"projects/my-project/sinks/my-sink\"`"
+                      }
+                    },
+                    "comment": "The parameters to `DeleteSink`."
+                  },
+                  "LogExclusion": {
+                    "options": {
+                      "(google.api.resource).type": "logging.googleapis.com/LogExclusion",
+                      "(google.api.resource).pattern": "billingAccounts/{billing_account}/exclusions/{exclusion}"
+                    },
+                    "fields": {
+                      "name": {
+                        "type": "string",
+                        "id": 1,
+                        "options": {
+                          "(google.api.field_behavior)": "REQUIRED"
+                        },
+                        "comment": "Required. A client-assigned identifier, such as `\"load-balancer-exclusion\"`.\nIdentifiers are limited to 100 characters and can include only letters,\ndigits, underscores, hyphens, and periods. First character has to be\nalphanumeric."
+                      },
+                      "description": {
+                        "type": "string",
+                        "id": 2,
+                        "options": {
+                          "(google.api.field_behavior)": "OPTIONAL"
+                        },
+                        "comment": "Optional. A description of this exclusion."
+                      },
+                      "filter": {
+                        "type": "string",
+                        "id": 3,
+                        "options": {
+                          "(google.api.field_behavior)": "REQUIRED"
+                        },
+                        "comment": "Required. An [advanced logs\nfilter](https://cloud.google.com/logging/docs/view/advanced-queries) that\nmatches the log entries to be excluded. By using the [sample\nfunction](https://cloud.google.com/logging/docs/view/advanced-queries#sample),\nyou can exclude less than 100% of the matching log entries.\n\nFor example, the following query matches 99% of low-severity log entries\nfrom Google Cloud Storage buckets:\n\n`resource.type=gcs_bucket severity<ERROR sample(insertId, 0.99)`"
+                      },
+                      "disabled": {
+                        "type": "bool",
+                        "id": 4,
+                        "options": {
+                          "(google.api.field_behavior)": "OPTIONAL"
+                        },
+                        "comment": "Optional. If set to True, then this exclusion is disabled and it does not\nexclude any log entries. You can [update an\nexclusion][google.logging.v2.ConfigServiceV2.UpdateExclusion] to change the\nvalue of this field."
+                      },
+                      "createTime": {
+                        "type": "google.protobuf.Timestamp",
+                        "id": 5,
+                        "options": {
+                          "(google.api.field_behavior)": "OUTPUT_ONLY"
+                        },
+                        "comment": "Output only. The creation timestamp of the exclusion.\n\nThis field may not be present for older exclusions."
+                      },
+                      "updateTime": {
+                        "type": "google.protobuf.Timestamp",
+                        "id": 6,
+                        "options": {
+                          "(google.api.field_behavior)": "OUTPUT_ONLY"
+                        },
+                        "comment": "Output only. The last update timestamp of the exclusion.\n\nThis field may not be present for older exclusions."
+                      }
+                    },
+                    "comment": "Specifies a set of log entries that are filtered out by a sink. If\nyour Google Cloud resource receives a large volume of log entries, you can\nuse exclusions to reduce your chargeable logs. Note that exclusions on\norganization-level and folder-level sinks don't apply to child resources.\nNote also that you cannot modify the _Required sink or exclude logs from it."
+                  },
+                  "ListExclusionsRequest": {
+                    "fields": {
+                      "parent": {
+                        "type": "string",
+                        "id": 1,
+                        "options": {
+                          "(google.api.field_behavior)": "REQUIRED",
+                          "(google.api.resource_reference).child_type": "logging.googleapis.com/LogExclusion"
+                        },
+                        "comment": "Required. The parent resource whose exclusions are to be listed.\n\n\"projects/[PROJECT_ID]\"\n\"organizations/[ORGANIZATION_ID]\"\n\"billingAccounts/[BILLING_ACCOUNT_ID]\"\n\"folders/[FOLDER_ID]\""
+                      },
+                      "pageToken": {
+                        "type": "string",
+                        "id": 2,
+                        "options": {
+                          "(google.api.field_behavior)": "OPTIONAL"
+                        },
+                        "comment": "Optional. If present, then retrieve the next batch of results from the\npreceding call to this method. `pageToken` must be the value of\n`nextPageToken` from the previous response. The values of other method\nparameters should be identical to those in the previous call."
+                      },
+                      "pageSize": {
+                        "type": "int32",
+                        "id": 3,
+                        "options": {
+                          "(google.api.field_behavior)": "OPTIONAL"
+                        },
+                        "comment": "Optional. The maximum number of results to return from this request.\nNon-positive values are ignored. The presence of `nextPageToken` in the\nresponse indicates that more results might be available."
+                      }
+                    },
+                    "comment": "The parameters to `ListExclusions`."
+                  },
+                  "ListExclusionsResponse": {
+                    "fields": {
+                      "exclusions": {
+                        "rule": "repeated",
+                        "type": "LogExclusion",
+                        "id": 1,
+                        "comment": "A list of exclusions."
+                      },
+                      "nextPageToken": {
+                        "type": "string",
+                        "id": 2,
+                        "comment": "If there might be more results than appear in this response, then\n`nextPageToken` is included. To get the next set of results, call the same\nmethod again using the value of `nextPageToken` as `pageToken`."
+                      }
+                    },
+                    "comment": "Result returned from `ListExclusions`."
+                  },
+                  "GetExclusionRequest": {
+                    "fields": {
+                      "name": {
+                        "type": "string",
+                        "id": 1,
+                        "options": {
+                          "(google.api.field_behavior)": "REQUIRED",
+                          "(google.api.resource_reference).type": "logging.googleapis.com/LogExclusion"
+                        },
+                        "comment": "Required. The resource name of an existing exclusion:\n\n\"projects/[PROJECT_ID]/exclusions/[EXCLUSION_ID]\"\n\"organizations/[ORGANIZATION_ID]/exclusions/[EXCLUSION_ID]\"\n\"billingAccounts/[BILLING_ACCOUNT_ID]/exclusions/[EXCLUSION_ID]\"\n\"folders/[FOLDER_ID]/exclusions/[EXCLUSION_ID]\"\n\nFor example:\n\n`\"projects/my-project/exclusions/my-exclusion\"`"
+                      }
+                    },
+                    "comment": "The parameters to `GetExclusion`."
+                  },
+                  "CreateExclusionRequest": {
+                    "fields": {
+                      "parent": {
+                        "type": "string",
+                        "id": 1,
+                        "options": {
+                          "(google.api.field_behavior)": "REQUIRED",
+                          "(google.api.resource_reference).child_type": "logging.googleapis.com/LogExclusion"
+                        },
+                        "comment": "Required. The parent resource in which to create the exclusion:\n\n\"projects/[PROJECT_ID]\"\n\"organizations/[ORGANIZATION_ID]\"\n\"billingAccounts/[BILLING_ACCOUNT_ID]\"\n\"folders/[FOLDER_ID]\"\n\nFor examples:\n\n`\"projects/my-logging-project\"`\n`\"organizations/123456789\"`"
+                      },
+                      "exclusion": {
+                        "type": "LogExclusion",
+                        "id": 2,
+                        "options": {
+                          "(google.api.field_behavior)": "REQUIRED"
+                        },
+                        "comment": "Required. The new exclusion, whose `name` parameter is an exclusion name\nthat is not already used in the parent resource."
+                      }
+                    },
+                    "comment": "The parameters to `CreateExclusion`."
+                  },
+                  "UpdateExclusionRequest": {
+                    "fields": {
+                      "name": {
+                        "type": "string",
+                        "id": 1,
+                        "options": {
+                          "(google.api.field_behavior)": "REQUIRED",
+                          "(google.api.resource_reference).type": "logging.googleapis.com/LogExclusion"
+                        },
+                        "comment": "Required. The resource name of the exclusion to update:\n\n\"projects/[PROJECT_ID]/exclusions/[EXCLUSION_ID]\"\n\"organizations/[ORGANIZATION_ID]/exclusions/[EXCLUSION_ID]\"\n\"billingAccounts/[BILLING_ACCOUNT_ID]/exclusions/[EXCLUSION_ID]\"\n\"folders/[FOLDER_ID]/exclusions/[EXCLUSION_ID]\"\n\nFor example:\n\n`\"projects/my-project/exclusions/my-exclusion\"`"
+                      },
+                      "exclusion": {
+                        "type": "LogExclusion",
+                        "id": 2,
+                        "options": {
+                          "(google.api.field_behavior)": "REQUIRED"
+                        },
+                        "comment": "Required. New values for the existing exclusion. Only the fields specified in\n`update_mask` are relevant."
+                      },
+                      "updateMask": {
+                        "type": "google.protobuf.FieldMask",
+                        "id": 3,
+                        "options": {
+                          "(google.api.field_behavior)": "REQUIRED"
+                        },
+                        "comment": "Required. A non-empty list of fields to change in the existing exclusion. New values\nfor the fields are taken from the corresponding fields in the\n[LogExclusion][google.logging.v2.LogExclusion] included in this request. Fields not mentioned in\n`update_mask` are not changed and are ignored in the request.\n\nFor example, to change the filter and description of an exclusion,\nspecify an `update_mask` of `\"filter,description\"`."
+                      }
+                    },
+                    "comment": "The parameters to `UpdateExclusion`."
+                  },
+                  "DeleteExclusionRequest": {
+                    "fields": {
+                      "name": {
+                        "type": "string",
+                        "id": 1,
+                        "options": {
+                          "(google.api.field_behavior)": "REQUIRED",
+                          "(google.api.resource_reference).type": "logging.googleapis.com/LogExclusion"
+                        },
+                        "comment": "Required. The resource name of an existing exclusion to delete:\n\n\"projects/[PROJECT_ID]/exclusions/[EXCLUSION_ID]\"\n\"organizations/[ORGANIZATION_ID]/exclusions/[EXCLUSION_ID]\"\n\"billingAccounts/[BILLING_ACCOUNT_ID]/exclusions/[EXCLUSION_ID]\"\n\"folders/[FOLDER_ID]/exclusions/[EXCLUSION_ID]\"\n\nFor example:\n\n`\"projects/my-project/exclusions/my-exclusion\"`"
+                      }
+                    },
+                    "comment": "The parameters to `DeleteExclusion`."
+                  },
+                  "GetCmekSettingsRequest": {
+                    "fields": {
+                      "name": {
+                        "type": "string",
+                        "id": 1,
+                        "options": {
+                          "(google.api.field_behavior)": "REQUIRED",
+                          "(google.api.resource_reference).type": "logging.googleapis.com/CmekSettings"
+                        },
+                        "comment": "Required. The resource for which to retrieve CMEK settings.\n\n\"projects/[PROJECT_ID]/cmekSettings\"\n\"organizations/[ORGANIZATION_ID]/cmekSettings\"\n\"billingAccounts/[BILLING_ACCOUNT_ID]/cmekSettings\"\n\"folders/[FOLDER_ID]/cmekSettings\"\n\nFor example:\n\n`\"organizations/12345/cmekSettings\"`\n\nNote: CMEK for the Log Router can be configured for Google Cloud projects,\nfolders, organizations and billing accounts. Once configured for an\norganization, it applies to all projects and folders in the Google Cloud\norganization."
+                      }
+                    },
+                    "comment": "The parameters to\n[GetCmekSettings][google.logging.v2.ConfigServiceV2.GetCmekSettings].\n\nSee [Enabling CMEK for Log\nRouter](https://cloud.google.com/logging/docs/routing/managed-encryption) for\nmore information."
+                  },
+                  "UpdateCmekSettingsRequest": {
+                    "fields": {
+                      "name": {
+                        "type": "string",
+                        "id": 1,
+                        "options": {
+                          "(google.api.field_behavior)": "REQUIRED"
+                        },
+                        "comment": "Required. The resource name for the CMEK settings to update.\n\n\"projects/[PROJECT_ID]/cmekSettings\"\n\"organizations/[ORGANIZATION_ID]/cmekSettings\"\n\"billingAccounts/[BILLING_ACCOUNT_ID]/cmekSettings\"\n\"folders/[FOLDER_ID]/cmekSettings\"\n\nFor example:\n\n`\"organizations/12345/cmekSettings\"`\n\nNote: CMEK for the Log Router can currently only be configured for Google\nCloud organizations. Once configured, it applies to all projects and\nfolders in the Google Cloud organization."
+                      },
+                      "cmekSettings": {
+                        "type": "CmekSettings",
+                        "id": 2,
+                        "options": {
+                          "(google.api.field_behavior)": "REQUIRED"
+                        },
+                        "comment": "Required. The CMEK settings to update.\n\nSee [Enabling CMEK for Log\nRouter](https://cloud.google.com/logging/docs/routing/managed-encryption)\nfor more information."
+                      },
+                      "updateMask": {
+                        "type": "google.protobuf.FieldMask",
+                        "id": 3,
+                        "options": {
+                          "(google.api.field_behavior)": "OPTIONAL"
+                        },
+                        "comment": "Optional. Field mask identifying which fields from `cmek_settings` should\nbe updated. A field will be overwritten if and only if it is in the update\nmask. Output only fields cannot be updated.\n\nSee [FieldMask][google.protobuf.FieldMask] for more information.\n\nFor example: `\"updateMask=kmsKeyName\"`"
+                      }
+                    },
+                    "comment": "The parameters to\n[UpdateCmekSettings][google.logging.v2.ConfigServiceV2.UpdateCmekSettings].\n\nSee [Enabling CMEK for Log\nRouter](https://cloud.google.com/logging/docs/routing/managed-encryption) for\nmore information."
+                  },
+                  "CmekSettings": {
+                    "options": {
+                      "(google.api.resource).type": "logging.googleapis.com/CmekSettings",
+                      "(google.api.resource).pattern": "billingAccounts/{billing_account}/cmekSettings"
+                    },
+                    "fields": {
+                      "name": {
+                        "type": "string",
+                        "id": 1,
+                        "options": {
+                          "(google.api.field_behavior)": "OUTPUT_ONLY"
+                        },
+                        "comment": "Output only. The resource name of the CMEK settings."
+                      },
+                      "kmsKeyName": {
+                        "type": "string",
+                        "id": 2,
+                        "comment": "The resource name for the configured Cloud KMS key.\n\nKMS key name format:\n\n\"projects/[PROJECT_ID]/locations/[LOCATION]/keyRings/[KEYRING]/cryptoKeys/[KEY]\"\n\nFor example:\n\n`\"projects/my-project/locations/us-central1/keyRings/my-ring/cryptoKeys/my-key\"`\n\n\n\nTo enable CMEK for the Log Router, set this field to a valid\n`kms_key_name` for which the associated service account has the required\ncloudkms.cryptoKeyEncrypterDecrypter roles assigned for the key.\n\nThe Cloud KMS key used by the Log Router can be updated by changing the\n`kms_key_name` to a new valid key name or disabled by setting the key name\nto an empty string. Encryption operations that are in progress will be\ncompleted with the key that was in use when they started. Decryption\noperations will be completed using the key that was used at the time of\nencryption unless access to that key has been revoked.\n\nTo disable CMEK for the Log Router, set this field to an empty string.\n\nSee [Enabling CMEK for Log\nRouter](https://cloud.google.com/logging/docs/routing/managed-encryption)\nfor more information."
+                      },
+                      "serviceAccountId": {
+                        "type": "string",
+                        "id": 3,
+                        "options": {
+                          "(google.api.field_behavior)": "OUTPUT_ONLY"
+                        },
+                        "comment": "Output only. The service account that will be used by the Log Router to access your\nCloud KMS key.\n\nBefore enabling CMEK for Log Router, you must first assign the\ncloudkms.cryptoKeyEncrypterDecrypter role to the service account that\nthe Log Router will use to access your Cloud KMS key. Use\n[GetCmekSettings][google.logging.v2.ConfigServiceV2.GetCmekSettings] to\nobtain the service account ID.\n\nSee [Enabling CMEK for Log\nRouter](https://cloud.google.com/logging/docs/routing/managed-encryption)\nfor more information."
+                      }
+                    },
+                    "comment": "Describes the customer-managed encryption key (CMEK) settings associated with\na project, folder, organization, billing account, or flexible resource.\n\nNote: CMEK for the Log Router can currently only be configured for Google\nCloud organizations. Once configured, it applies to all projects and folders\nin the Google Cloud organization.\n\nSee [Enabling CMEK for Log\nRouter](https://cloud.google.com/logging/docs/routing/managed-encryption) for\nmore information."
+                  },
+                  "GetSettingsRequest": {
+                    "fields": {
+                      "name": {
+                        "type": "string",
+                        "id": 1,
+                        "options": {
+                          "(google.api.field_behavior)": "REQUIRED",
+                          "(google.api.resource_reference).type": "logging.googleapis.com/Settings"
+                        },
+                        "comment": "Required. The resource for which to retrieve settings.\n\n\"projects/[PROJECT_ID]/settings\"\n\"organizations/[ORGANIZATION_ID]/settings\"\n\"billingAccounts/[BILLING_ACCOUNT_ID]/settings\"\n\"folders/[FOLDER_ID]/settings\"\n\nFor example:\n\n`\"organizations/12345/settings\"`\n\nNote: Settings for the Log Router can be get for Google Cloud projects,\nfolders, organizations and billing accounts. Currently it can only be\nconfigured for organizations. Once configured for an organization, it\napplies to all projects and folders in the Google Cloud organization."
+                      }
+                    },
+                    "comment": "The parameters to\n[GetSettings][google.logging.v2.ConfigServiceV2.GetSettings].\n\nSee [Enabling CMEK for Log\nRouter](https://cloud.google.com/logging/docs/routing/managed-encryption) for\nmore information."
+                  },
+                  "UpdateSettingsRequest": {
+                    "fields": {
+                      "name": {
+                        "type": "string",
+                        "id": 1,
+                        "options": {
+                          "(google.api.field_behavior)": "REQUIRED"
+                        },
+                        "comment": "Required. The resource name for the settings to update.\n\n\"organizations/[ORGANIZATION_ID]/settings\"\n\nFor example:\n\n`\"organizations/12345/settings\"`\n\nNote: Settings for the Log Router can currently only be configured for\nGoogle Cloud organizations. Once configured, it applies to all projects and\nfolders in the Google Cloud organization."
+                      },
+                      "settings": {
+                        "type": "Settings",
+                        "id": 2,
+                        "options": {
+                          "(google.api.field_behavior)": "REQUIRED"
+                        },
+                        "comment": "Required. The settings to update.\n\nSee [Enabling CMEK for Log\nRouter](https://cloud.google.com/logging/docs/routing/managed-encryption)\nfor more information."
+                      },
+                      "updateMask": {
+                        "type": "google.protobuf.FieldMask",
+                        "id": 3,
+                        "options": {
+                          "(google.api.field_behavior)": "OPTIONAL"
+                        },
+                        "comment": "Optional. Field mask identifying which fields from `settings` should\nbe updated. A field will be overwritten if and only if it is in the update\nmask. Output only fields cannot be updated.\n\nSee [FieldMask][google.protobuf.FieldMask] for more information.\n\nFor example: `\"updateMask=kmsKeyName\"`"
+                      }
+                    },
+                    "comment": "The parameters to\n[UpdateSettings][google.logging.v2.ConfigServiceV2.UpdateSettings].\n\nSee [Enabling CMEK for Log\nRouter](https://cloud.google.com/logging/docs/routing/managed-encryption) for\nmore information."
+                  },
+                  "Settings": {
+                    "options": {
+                      "(google.api.resource).type": "logging.googleapis.com/Settings",
+                      "(google.api.resource).pattern": "billingAccounts/{billing_account}/settings"
+                    },
+                    "fields": {
+                      "name": {
+                        "type": "string",
+                        "id": 1,
+                        "options": {
+                          "(google.api.field_behavior)": "OUTPUT_ONLY"
+                        },
+                        "comment": "Output only. The resource name of the settings."
+                      },
+                      "kmsKeyName": {
+                        "type": "string",
+                        "id": 2,
+                        "options": {
+                          "(google.api.field_behavior)": "OPTIONAL"
+                        },
+                        "comment": "Optional. The resource name for the configured Cloud KMS key.\n\nKMS key name format:\n\n\"projects/[PROJECT_ID]/locations/[LOCATION]/keyRings/[KEYRING]/cryptoKeys/[KEY]\"\n\nFor example:\n\n`\"projects/my-project/locations/us-central1/keyRings/my-ring/cryptoKeys/my-key\"`\n\n\n\nTo enable CMEK for the Log Router, set this field to a valid\n`kms_key_name` for which the associated service account has the required\n`roles/cloudkms.cryptoKeyEncrypterDecrypter` role assigned for the key.\n\nThe Cloud KMS key used by the Log Router can be updated by changing the\n`kms_key_name` to a new valid key name. Encryption operations that are in\nprogress will be completed with the key that was in use when they started.\nDecryption operations will be completed using the key that was used at the\ntime of encryption unless access to that key has been revoked.\n\nTo disable CMEK for the Log Router, set this field to an empty string.\n\nSee [Enabling CMEK for Log\nRouter](https://cloud.google.com/logging/docs/routing/managed-encryption)\nfor more information."
+                      },
+                      "kmsServiceAccountId": {
+                        "type": "string",
+                        "id": 3,
+                        "options": {
+                          "(google.api.field_behavior)": "OUTPUT_ONLY"
+                        },
+                        "comment": "Output only. The service account that will be used by the Log Router to access your\nCloud KMS key.\n\nBefore enabling CMEK for Log Router, you must first assign the role\n`roles/cloudkms.cryptoKeyEncrypterDecrypter` to the service account that\nthe Log Router will use to access your Cloud KMS key. Use\n[GetSettings][google.logging.v2.ConfigServiceV2.GetSettings] to\nobtain the service account ID.\n\nSee [Enabling CMEK for Log\nRouter](https://cloud.google.com/logging/docs/routing/managed-encryption)\nfor more information."
+                      },
+                      "storageLocation": {
+                        "type": "string",
+                        "id": 4,
+                        "options": {
+                          "(google.api.field_behavior)": "OPTIONAL"
+                        },
+                        "comment": "Optional. The Cloud region that will be used for _Default and _Required log buckets\nfor newly created projects and folders. For example `europe-west1`.\nThis setting does not affect the location of custom log buckets."
+                      },
+                      "disableDefaultSink": {
+                        "type": "bool",
+                        "id": 5,
+                        "options": {
+                          "(google.api.field_behavior)": "OPTIONAL"
+                        },
+                        "comment": "Optional. If set to true, the _Default sink in newly created projects and folders\nwill created in a disabled state. This can be used to automatically disable\nlog ingestion if there is already an aggregated sink configured in the\nhierarchy. The _Default sink can be re-enabled manually if needed."
+                      }
+                    },
+                    "comment": "Describes the settings associated with a project, folder, organization,\nbilling account, or flexible resource."
+                  },
+                  "CopyLogEntriesRequest": {
+                    "fields": {
+                      "name": {
+                        "type": "string",
+                        "id": 1,
+                        "options": {
+                          "(google.api.field_behavior)": "REQUIRED"
+                        },
+                        "comment": "Required. Log bucket from which to copy log entries.\n\nFor example:\n\n`\"projects/my-project/locations/global/buckets/my-source-bucket\"`"
+                      },
+                      "filter": {
+                        "type": "string",
+                        "id": 3,
+                        "options": {
+                          "(google.api.field_behavior)": "OPTIONAL"
+                        },
+                        "comment": "Optional. A filter specifying which log entries to copy. The filter must be no more\nthan 20k characters. An empty filter matches all log entries."
+                      },
+                      "destination": {
+                        "type": "string",
+                        "id": 4,
+                        "options": {
+                          "(google.api.field_behavior)": "REQUIRED"
+                        },
+                        "comment": "Required. Destination to which to copy log entries."
+                      }
+                    },
+                    "comment": "The parameters to CopyLogEntries."
+                  },
+                  "CopyLogEntriesMetadata": {
+                    "fields": {
+                      "startTime": {
+                        "type": "google.protobuf.Timestamp",
+                        "id": 1,
+                        "comment": "The create time of an operation."
+                      },
+                      "endTime": {
+                        "type": "google.protobuf.Timestamp",
+                        "id": 2,
+                        "comment": "The end time of an operation."
+                      },
+                      "state": {
+                        "type": "OperationState",
+                        "id": 3,
+                        "comment": "State of an operation."
+                      },
+                      "cancellationRequested": {
+                        "type": "bool",
+                        "id": 4,
+                        "comment": "Identifies whether the user has requested cancellation of the operation."
+                      },
+                      "request": {
+                        "type": "CopyLogEntriesRequest",
+                        "id": 5,
+                        "comment": "CopyLogEntries RPC request."
+                      },
+                      "progress": {
+                        "type": "int32",
+                        "id": 6,
+                        "comment": "Estimated progress of the operation (0 - 100%)."
+                      },
+                      "writerIdentity": {
+                        "type": "string",
+                        "id": 7,
+                        "comment": "The IAM identity of a service account that must be granted access to the\ndestination.\n\nIf the service account is not granted permission to the destination within\nan hour, the operation will be cancelled.\n\nFor example: `\"serviceAccount:foo@bar.com\"`"
+                      }
+                    },
+                    "comment": "Metadata for CopyLogEntries long running operations."
+                  },
+                  "CopyLogEntriesResponse": {
+                    "fields": {
+                      "logEntriesCopiedCount": {
+                        "type": "int64",
+                        "id": 1,
+                        "comment": "Number of log entries copied."
+                      }
+                    },
+                    "comment": "Response type for CopyLogEntries long running operations."
+                  },
+                  "LifecycleState": {
+                    "values": {
+                      "LIFECYCLE_STATE_UNSPECIFIED": 0,
+                      "ACTIVE": 1,
+                      "DELETE_REQUESTED": 2
+                    },
+                    "comment": "LogBucket lifecycle states.",
+                    "comments": {
+                      "LIFECYCLE_STATE_UNSPECIFIED": "Unspecified state. This is only used/useful for distinguishing unset\nvalues.",
+                      "ACTIVE": "The normal and active state.",
+                      "DELETE_REQUESTED": "The resource has been marked for deletion by the user. For some resources\n(e.g. buckets), this can be reversed by an un-delete operation."
+                    }
+                  },
+                  "OperationState": {
+                    "values": {
+                      "OPERATION_STATE_UNSPECIFIED": 0,
+                      "OPERATION_STATE_SCHEDULED": 1,
+                      "OPERATION_STATE_WAITING_FOR_PERMISSIONS": 2,
+                      "OPERATION_STATE_RUNNING": 3,
+                      "OPERATION_STATE_SUCCEEDED": 4,
+                      "OPERATION_STATE_FAILED": 5,
+                      "OPERATION_STATE_CANCELLED": 6
+                    },
+                    "comment": "List of different operation states.\nHigh level state of the operation. This is used to report the job's\ncurrent state to the user. Once a long running operation is created,\nthe current state of the operation can be queried even before the\noperation is finished and the final result is available.",
+                    "comments": {
+                      "OPERATION_STATE_UNSPECIFIED": "Should not be used.",
+                      "OPERATION_STATE_SCHEDULED": "The operation is scheduled.",
+                      "OPERATION_STATE_WAITING_FOR_PERMISSIONS": "Waiting for necessary permissions.",
+                      "OPERATION_STATE_RUNNING": "The operation is running.",
+                      "OPERATION_STATE_SUCCEEDED": "The operation was completed successfully.",
+                      "OPERATION_STATE_FAILED": "The operation failed.",
+                      "OPERATION_STATE_CANCELLED": "The operation was cancelled by the user."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

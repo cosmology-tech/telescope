@@ -1,0 +1,108 @@
+{
+  "package": "google.api",
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "google": {
+        "nested": {
+          "api": {
+            "options": {
+              "go_package": "google.golang.org/genproto/googleapis/api/serviceconfig;serviceconfig",
+              "java_multiple_files": true,
+              "java_outer_classname": "BackendProto",
+              "java_package": "com.google.api",
+              "objc_class_prefix": "GAPI"
+            },
+            "nested": {
+              "Backend": {
+                "fields": {
+                  "rules": {
+                    "rule": "repeated",
+                    "type": "BackendRule",
+                    "id": 1,
+                    "comment": "A list of API backend rules that apply to individual API methods.\n\n**NOTE:** All service configuration rules follow \"last one wins\" order."
+                  }
+                },
+                "comment": "`Backend` defines the backend configuration for a service."
+              },
+              "BackendRule": {
+                "oneofs": {
+                  "authentication": {
+                    "oneof": [
+                      "jwtAudience",
+                      "disableAuth"
+                    ],
+                    "comment": "Authentication settings used by the backend.\n\nThese are typically used to provide service management functionality to\na backend served on a publicly-routable URL. The `authentication`\ndetails should match the authentication behavior used by the backend.\n\nFor example, specifying `jwt_audience` implies that the backend expects\nauthentication via a JWT.\n\nWhen authentication is unspecified, the resulting behavior is the same\nas `disable_auth` set to `true`.\n\nRefer to https://developers.google.com/identity/protocols/OpenIDConnect for\nJWT ID token."
+                  }
+                },
+                "fields": {
+                  "selector": {
+                    "type": "string",
+                    "id": 1,
+                    "comment": "Selects the methods to which this rule applies.\n\nRefer to [selector][google.api.DocumentationRule.selector] for syntax details."
+                  },
+                  "address": {
+                    "type": "string",
+                    "id": 2,
+                    "comment": "The address of the API backend.\n\nThe scheme is used to determine the backend protocol and security.\nThe following schemes are accepted:\n\nSCHEME        PROTOCOL    SECURITY\nhttp://       HTTP        None\nhttps://      HTTP        TLS\ngrpc://       gRPC        None\ngrpcs://      gRPC        TLS\n\nIt is recommended to explicitly include a scheme. Leaving out the scheme\nmay cause constrasting behaviors across platforms.\n\nIf the port is unspecified, the default is:\n- 80 for schemes without TLS\n- 443 for schemes with TLS\n\nFor HTTP backends, use [protocol][google.api.BackendRule.protocol]\nto specify the protocol version."
+                  },
+                  "deadline": {
+                    "type": "double",
+                    "id": 3,
+                    "comment": "The number of seconds to wait for a response from a request. The default\nvaries based on the request protocol and deployment environment."
+                  },
+                  "minDeadline": {
+                    "type": "double",
+                    "id": 4,
+                    "comment": "Minimum deadline in seconds needed for this method. Calls having deadline\nvalue lower than this will be rejected."
+                  },
+                  "operationDeadline": {
+                    "type": "double",
+                    "id": 5,
+                    "comment": "The number of seconds to wait for the completion of a long running\noperation. The default is no deadline."
+                  },
+                  "pathTranslation": {
+                    "type": "PathTranslation",
+                    "id": 6,
+                    "comment": null
+                  },
+                  "jwtAudience": {
+                    "type": "string",
+                    "id": 7,
+                    "comment": "The JWT audience is used when generating a JWT ID token for the backend.\nThis ID token will be added in the HTTP \"authorization\" header, and sent\nto the backend."
+                  },
+                  "disableAuth": {
+                    "type": "bool",
+                    "id": 8,
+                    "comment": "When disable_auth is true, a JWT ID token won't be generated and the\noriginal \"Authorization\" HTTP header will be preserved. If the header is\nused to carry the original token and is expected by the backend, this\nfield must be set to true to preserve the header."
+                  },
+                  "protocol": {
+                    "type": "string",
+                    "id": 9,
+                    "comment": "The protocol used for sending a request to the backend.\nThe supported values are \"http/1.1\" and \"h2\".\n\nThe default value is inferred from the scheme in the\n[address][google.api.BackendRule.address] field:\n\nSCHEME        PROTOCOL\nhttp://       http/1.1\nhttps://      http/1.1\ngrpc://       h2\ngrpcs://      h2\n\nFor secure HTTP backends (https://) that support HTTP/2, set this field\nto \"h2\" for improved performance.\n\nConfiguring this field to non-default values is only supported for secure\nHTTP backends. This field will be ignored for all other backends.\n\nSee\nhttps://www.iana.org/assignments/tls-extensiontype-values/tls-extensiontype-values.xhtml#alpn-protocol-ids\nfor more details on the supported values."
+                  }
+                },
+                "nested": {
+                  "PathTranslation": {
+                    "values": {
+                      "PATH_TRANSLATION_UNSPECIFIED": 0,
+                      "CONSTANT_ADDRESS": 1,
+                      "APPEND_PATH_TO_ADDRESS": 2
+                    },
+                    "comment": "Path Translation specifies how to combine the backend address with the\nrequest path in order to produce the appropriate forwarding URL for the\nrequest.\n\nPath Translation is applicable only to HTTP-based backends. Backends which\ndo not accept requests over HTTP/HTTPS should leave `path_translation`\nunspecified.",
+                    "comments": {
+                      "PATH_TRANSLATION_UNSPECIFIED": null,
+                      "CONSTANT_ADDRESS": "Use the backend address as-is, with no modification to the path. If the\nURL pattern contains variables, the variable names and values will be\nappended to the query string. If a query string parameter and a URL\npattern variable have the same name, this may result in duplicate keys in\nthe query string.\n\n# Examples\n\nGiven the following operation config:\n\nMethod path:        /api/company/{cid}/user/{uid}\nBackend address:    https://example.cloudfunctions.net/getUser\n\nRequests to the following request paths will call the backend at the\ntranslated path:\n\nRequest path: /api/company/widgetworks/user/johndoe\nTranslated:\nhttps://example.cloudfunctions.net/getUser?cid=widgetworks&uid=johndoe\n\nRequest path: /api/company/widgetworks/user/johndoe?timezone=EST\nTranslated:\nhttps://example.cloudfunctions.net/getUser?timezone=EST&cid=widgetworks&uid=johndoe",
+                      "APPEND_PATH_TO_ADDRESS": "The request path will be appended to the backend address.\n\n# Examples\n\nGiven the following operation config:\n\nMethod path:        /api/company/{cid}/user/{uid}\nBackend address:    https://example.appspot.com\n\nRequests to the following request paths will call the backend at the\ntranslated path:\n\nRequest path: /api/company/widgetworks/user/johndoe\nTranslated:\nhttps://example.appspot.com/api/company/widgetworks/user/johndoe\n\nRequest path: /api/company/widgetworks/user/johndoe?timezone=EST\nTranslated:\nhttps://example.appspot.com/api/company/widgetworks/user/johndoe?timezone=EST"
+                    }
+                  }
+                },
+                "comment": "A backend rule provides configuration for an individual API element."
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

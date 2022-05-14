@@ -1,0 +1,1250 @@
+{
+  "package": "tendermint.abci",
+  "imports": [
+    "tendermint/crypto/proof.proto",
+    "tendermint/types/types.proto",
+    "tendermint/crypto/keys.proto",
+    "tendermint/types/params.proto",
+    "google/protobuf/timestamp.proto",
+    "gogoproto/gogo.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "tendermint": {
+        "nested": {
+          "abci": {
+            "options": {
+              "go_package": "github.com/tendermint/tendermint/abci/types"
+            },
+            "nested": {
+              "Request": {
+                "oneofs": {
+                  "value": {
+                    "oneof": [
+                      "echo",
+                      "flush",
+                      "info",
+                      "setOption",
+                      "initChain",
+                      "query",
+                      "beginBlock",
+                      "checkTx",
+                      "deliverTx",
+                      "endBlock",
+                      "commit",
+                      "listSnapshots",
+                      "offerSnapshot",
+                      "loadSnapshotChunk",
+                      "applySnapshotChunk"
+                    ],
+                    "comment": null
+                  }
+                },
+                "fields": {
+                  "echo": {
+                    "type": "RequestEcho",
+                    "id": 1,
+                    "comment": null
+                  },
+                  "flush": {
+                    "type": "RequestFlush",
+                    "id": 2,
+                    "comment": null
+                  },
+                  "info": {
+                    "type": "RequestInfo",
+                    "id": 3,
+                    "comment": null
+                  },
+                  "setOption": {
+                    "type": "RequestSetOption",
+                    "id": 4,
+                    "comment": null
+                  },
+                  "initChain": {
+                    "type": "RequestInitChain",
+                    "id": 5,
+                    "comment": null
+                  },
+                  "query": {
+                    "type": "RequestQuery",
+                    "id": 6,
+                    "comment": null
+                  },
+                  "beginBlock": {
+                    "type": "RequestBeginBlock",
+                    "id": 7,
+                    "comment": null
+                  },
+                  "checkTx": {
+                    "type": "RequestCheckTx",
+                    "id": 8,
+                    "comment": null
+                  },
+                  "deliverTx": {
+                    "type": "RequestDeliverTx",
+                    "id": 9,
+                    "comment": null
+                  },
+                  "endBlock": {
+                    "type": "RequestEndBlock",
+                    "id": 10,
+                    "comment": null
+                  },
+                  "commit": {
+                    "type": "RequestCommit",
+                    "id": 11,
+                    "comment": null
+                  },
+                  "listSnapshots": {
+                    "type": "RequestListSnapshots",
+                    "id": 12,
+                    "comment": null
+                  },
+                  "offerSnapshot": {
+                    "type": "RequestOfferSnapshot",
+                    "id": 13,
+                    "comment": null
+                  },
+                  "loadSnapshotChunk": {
+                    "type": "RequestLoadSnapshotChunk",
+                    "id": 14,
+                    "comment": null
+                  },
+                  "applySnapshotChunk": {
+                    "type": "RequestApplySnapshotChunk",
+                    "id": 15,
+                    "comment": null
+                  }
+                },
+                "comment": null
+              },
+              "RequestEcho": {
+                "fields": {
+                  "message": {
+                    "type": "string",
+                    "id": 1,
+                    "comment": null
+                  }
+                },
+                "comment": null
+              },
+              "RequestFlush": {
+                "fields": {},
+                "comment": null
+              },
+              "RequestInfo": {
+                "fields": {
+                  "version": {
+                    "type": "string",
+                    "id": 1,
+                    "comment": null
+                  },
+                  "blockVersion": {
+                    "type": "uint64",
+                    "id": 2,
+                    "comment": null
+                  },
+                  "p2pVersion": {
+                    "type": "uint64",
+                    "id": 3,
+                    "comment": null
+                  }
+                },
+                "comment": null
+              },
+              "RequestSetOption": {
+                "fields": {
+                  "key": {
+                    "type": "string",
+                    "id": 1,
+                    "comment": null
+                  },
+                  "value": {
+                    "type": "string",
+                    "id": 2,
+                    "comment": null
+                  }
+                },
+                "comment": "nondeterministic"
+              },
+              "RequestInitChain": {
+                "fields": {
+                  "time": {
+                    "type": "google.protobuf.Timestamp",
+                    "id": 1,
+                    "options": {
+                      "(gogoproto.nullable)": false,
+                      "(gogoproto.stdtime)": true
+                    },
+                    "comment": null
+                  },
+                  "chainId": {
+                    "type": "string",
+                    "id": 2,
+                    "comment": null
+                  },
+                  "consensusParams": {
+                    "type": "ConsensusParams",
+                    "id": 3,
+                    "comment": null
+                  },
+                  "validators": {
+                    "rule": "repeated",
+                    "type": "ValidatorUpdate",
+                    "id": 4,
+                    "options": {
+                      "(gogoproto.nullable)": false
+                    },
+                    "comment": null
+                  },
+                  "appStateBytes": {
+                    "type": "bytes",
+                    "id": 5,
+                    "comment": null
+                  },
+                  "initialHeight": {
+                    "type": "int64",
+                    "id": 6,
+                    "comment": null
+                  }
+                },
+                "comment": null
+              },
+              "RequestQuery": {
+                "fields": {
+                  "data": {
+                    "type": "bytes",
+                    "id": 1,
+                    "comment": null
+                  },
+                  "path": {
+                    "type": "string",
+                    "id": 2,
+                    "comment": null
+                  },
+                  "height": {
+                    "type": "int64",
+                    "id": 3,
+                    "comment": null
+                  },
+                  "prove": {
+                    "type": "bool",
+                    "id": 4,
+                    "comment": null
+                  }
+                },
+                "comment": null
+              },
+              "RequestBeginBlock": {
+                "fields": {
+                  "hash": {
+                    "type": "bytes",
+                    "id": 1,
+                    "comment": null
+                  },
+                  "header": {
+                    "type": "tendermint.types.Header",
+                    "id": 2,
+                    "options": {
+                      "(gogoproto.nullable)": false
+                    },
+                    "comment": null
+                  },
+                  "lastCommitInfo": {
+                    "type": "LastCommitInfo",
+                    "id": 3,
+                    "options": {
+                      "(gogoproto.nullable)": false
+                    },
+                    "comment": null
+                  },
+                  "byzantineValidators": {
+                    "rule": "repeated",
+                    "type": "Evidence",
+                    "id": 4,
+                    "options": {
+                      "(gogoproto.nullable)": false
+                    },
+                    "comment": null
+                  }
+                },
+                "comment": null
+              },
+              "CheckTxType": {
+                "values": {
+                  "NEW": 0,
+                  "RECHECK": 1
+                },
+                "comment": null,
+                "comments": {
+                  "NEW": null,
+                  "RECHECK": null
+                }
+              },
+              "RequestCheckTx": {
+                "fields": {
+                  "tx": {
+                    "type": "bytes",
+                    "id": 1,
+                    "comment": null
+                  },
+                  "type": {
+                    "type": "CheckTxType",
+                    "id": 2,
+                    "comment": null
+                  }
+                },
+                "comment": null
+              },
+              "RequestDeliverTx": {
+                "fields": {
+                  "tx": {
+                    "type": "bytes",
+                    "id": 1,
+                    "comment": null
+                  }
+                },
+                "comment": null
+              },
+              "RequestEndBlock": {
+                "fields": {
+                  "height": {
+                    "type": "int64",
+                    "id": 1,
+                    "comment": null
+                  }
+                },
+                "comment": null
+              },
+              "RequestCommit": {
+                "fields": {},
+                "comment": null
+              },
+              "RequestListSnapshots": {
+                "fields": {},
+                "comment": "lists available snapshots"
+              },
+              "RequestOfferSnapshot": {
+                "fields": {
+                  "snapshot": {
+                    "type": "Snapshot",
+                    "id": 1,
+                    "comment": "snapshot offered by peers"
+                  },
+                  "appHash": {
+                    "type": "bytes",
+                    "id": 2,
+                    "comment": "light client-verified app hash for snapshot height"
+                  }
+                },
+                "comment": "offers a snapshot to the application"
+              },
+              "RequestLoadSnapshotChunk": {
+                "fields": {
+                  "height": {
+                    "type": "uint64",
+                    "id": 1,
+                    "comment": null
+                  },
+                  "format": {
+                    "type": "uint32",
+                    "id": 2,
+                    "comment": null
+                  },
+                  "chunk": {
+                    "type": "uint32",
+                    "id": 3,
+                    "comment": null
+                  }
+                },
+                "comment": "loads a snapshot chunk"
+              },
+              "RequestApplySnapshotChunk": {
+                "fields": {
+                  "index": {
+                    "type": "uint32",
+                    "id": 1,
+                    "comment": null
+                  },
+                  "chunk": {
+                    "type": "bytes",
+                    "id": 2,
+                    "comment": null
+                  },
+                  "sender": {
+                    "type": "string",
+                    "id": 3,
+                    "comment": null
+                  }
+                },
+                "comment": "Applies a snapshot chunk"
+              },
+              "Response": {
+                "oneofs": {
+                  "value": {
+                    "oneof": [
+                      "exception",
+                      "echo",
+                      "flush",
+                      "info",
+                      "setOption",
+                      "initChain",
+                      "query",
+                      "beginBlock",
+                      "checkTx",
+                      "deliverTx",
+                      "endBlock",
+                      "commit",
+                      "listSnapshots",
+                      "offerSnapshot",
+                      "loadSnapshotChunk",
+                      "applySnapshotChunk"
+                    ],
+                    "comment": null
+                  }
+                },
+                "fields": {
+                  "exception": {
+                    "type": "ResponseException",
+                    "id": 1,
+                    "comment": null
+                  },
+                  "echo": {
+                    "type": "ResponseEcho",
+                    "id": 2,
+                    "comment": null
+                  },
+                  "flush": {
+                    "type": "ResponseFlush",
+                    "id": 3,
+                    "comment": null
+                  },
+                  "info": {
+                    "type": "ResponseInfo",
+                    "id": 4,
+                    "comment": null
+                  },
+                  "setOption": {
+                    "type": "ResponseSetOption",
+                    "id": 5,
+                    "comment": null
+                  },
+                  "initChain": {
+                    "type": "ResponseInitChain",
+                    "id": 6,
+                    "comment": null
+                  },
+                  "query": {
+                    "type": "ResponseQuery",
+                    "id": 7,
+                    "comment": null
+                  },
+                  "beginBlock": {
+                    "type": "ResponseBeginBlock",
+                    "id": 8,
+                    "comment": null
+                  },
+                  "checkTx": {
+                    "type": "ResponseCheckTx",
+                    "id": 9,
+                    "comment": null
+                  },
+                  "deliverTx": {
+                    "type": "ResponseDeliverTx",
+                    "id": 10,
+                    "comment": null
+                  },
+                  "endBlock": {
+                    "type": "ResponseEndBlock",
+                    "id": 11,
+                    "comment": null
+                  },
+                  "commit": {
+                    "type": "ResponseCommit",
+                    "id": 12,
+                    "comment": null
+                  },
+                  "listSnapshots": {
+                    "type": "ResponseListSnapshots",
+                    "id": 13,
+                    "comment": null
+                  },
+                  "offerSnapshot": {
+                    "type": "ResponseOfferSnapshot",
+                    "id": 14,
+                    "comment": null
+                  },
+                  "loadSnapshotChunk": {
+                    "type": "ResponseLoadSnapshotChunk",
+                    "id": 15,
+                    "comment": null
+                  },
+                  "applySnapshotChunk": {
+                    "type": "ResponseApplySnapshotChunk",
+                    "id": 16,
+                    "comment": null
+                  }
+                },
+                "comment": null
+              },
+              "ResponseException": {
+                "fields": {
+                  "error": {
+                    "type": "string",
+                    "id": 1,
+                    "comment": null
+                  }
+                },
+                "comment": "nondeterministic"
+              },
+              "ResponseEcho": {
+                "fields": {
+                  "message": {
+                    "type": "string",
+                    "id": 1,
+                    "comment": null
+                  }
+                },
+                "comment": null
+              },
+              "ResponseFlush": {
+                "fields": {},
+                "comment": null
+              },
+              "ResponseInfo": {
+                "fields": {
+                  "data": {
+                    "type": "string",
+                    "id": 1,
+                    "comment": null
+                  },
+                  "version": {
+                    "type": "string",
+                    "id": 2,
+                    "comment": null
+                  },
+                  "appVersion": {
+                    "type": "uint64",
+                    "id": 3,
+                    "comment": null
+                  },
+                  "lastBlockHeight": {
+                    "type": "int64",
+                    "id": 4,
+                    "comment": null
+                  },
+                  "lastBlockAppHash": {
+                    "type": "bytes",
+                    "id": 5,
+                    "comment": null
+                  }
+                },
+                "comment": null
+              },
+              "ResponseSetOption": {
+                "fields": {
+                  "code": {
+                    "type": "uint32",
+                    "id": 1,
+                    "comment": null
+                  },
+                  "log": {
+                    "type": "string",
+                    "id": 3,
+                    "comment": "bytes data = 2;"
+                  },
+                  "info": {
+                    "type": "string",
+                    "id": 4,
+                    "comment": null
+                  }
+                },
+                "comment": "nondeterministic"
+              },
+              "ResponseInitChain": {
+                "fields": {
+                  "consensusParams": {
+                    "type": "ConsensusParams",
+                    "id": 1,
+                    "comment": null
+                  },
+                  "validators": {
+                    "rule": "repeated",
+                    "type": "ValidatorUpdate",
+                    "id": 2,
+                    "options": {
+                      "(gogoproto.nullable)": false
+                    },
+                    "comment": null
+                  },
+                  "appHash": {
+                    "type": "bytes",
+                    "id": 3,
+                    "comment": null
+                  }
+                },
+                "comment": null
+              },
+              "ResponseQuery": {
+                "fields": {
+                  "code": {
+                    "type": "uint32",
+                    "id": 1,
+                    "comment": null
+                  },
+                  "log": {
+                    "type": "string",
+                    "id": 3,
+                    "comment": "bytes data = 2; // use \"value\" instead."
+                  },
+                  "info": {
+                    "type": "string",
+                    "id": 4,
+                    "comment": "nondeterministic"
+                  },
+                  "index": {
+                    "type": "int64",
+                    "id": 5,
+                    "comment": null
+                  },
+                  "key": {
+                    "type": "bytes",
+                    "id": 6,
+                    "comment": null
+                  },
+                  "value": {
+                    "type": "bytes",
+                    "id": 7,
+                    "comment": null
+                  },
+                  "proofOps": {
+                    "type": "tendermint.crypto.ProofOps",
+                    "id": 8,
+                    "comment": null
+                  },
+                  "height": {
+                    "type": "int64",
+                    "id": 9,
+                    "comment": null
+                  },
+                  "codespace": {
+                    "type": "string",
+                    "id": 10,
+                    "comment": null
+                  }
+                },
+                "comment": null
+              },
+              "ResponseBeginBlock": {
+                "fields": {
+                  "events": {
+                    "rule": "repeated",
+                    "type": "Event",
+                    "id": 1,
+                    "options": {
+                      "(gogoproto.nullable)": false,
+                      "(gogoproto.jsontag)": "events,omitempty"
+                    },
+                    "comment": null
+                  }
+                },
+                "comment": null
+              },
+              "ResponseCheckTx": {
+                "fields": {
+                  "code": {
+                    "type": "uint32",
+                    "id": 1,
+                    "comment": null
+                  },
+                  "data": {
+                    "type": "bytes",
+                    "id": 2,
+                    "comment": null
+                  },
+                  "log": {
+                    "type": "string",
+                    "id": 3,
+                    "comment": "nondeterministic"
+                  },
+                  "info": {
+                    "type": "string",
+                    "id": 4,
+                    "comment": "nondeterministic"
+                  },
+                  "gasWanted": {
+                    "type": "int64",
+                    "id": 5,
+                    "options": {
+                      "json_name": "gas_wanted"
+                    },
+                    "comment": null
+                  },
+                  "gasUsed": {
+                    "type": "int64",
+                    "id": 6,
+                    "options": {
+                      "json_name": "gas_used"
+                    },
+                    "comment": null
+                  },
+                  "events": {
+                    "rule": "repeated",
+                    "type": "Event",
+                    "id": 7,
+                    "options": {
+                      "(gogoproto.nullable)": false,
+                      "(gogoproto.jsontag)": "events,omitempty"
+                    },
+                    "comment": null
+                  },
+                  "codespace": {
+                    "type": "string",
+                    "id": 8,
+                    "comment": null
+                  }
+                },
+                "comment": null
+              },
+              "ResponseDeliverTx": {
+                "fields": {
+                  "code": {
+                    "type": "uint32",
+                    "id": 1,
+                    "comment": null
+                  },
+                  "data": {
+                    "type": "bytes",
+                    "id": 2,
+                    "comment": null
+                  },
+                  "log": {
+                    "type": "string",
+                    "id": 3,
+                    "comment": "nondeterministic"
+                  },
+                  "info": {
+                    "type": "string",
+                    "id": 4,
+                    "comment": "nondeterministic"
+                  },
+                  "gasWanted": {
+                    "type": "int64",
+                    "id": 5,
+                    "options": {
+                      "json_name": "gas_wanted"
+                    },
+                    "comment": null
+                  },
+                  "gasUsed": {
+                    "type": "int64",
+                    "id": 6,
+                    "options": {
+                      "json_name": "gas_used"
+                    },
+                    "comment": null
+                  },
+                  "events": {
+                    "rule": "repeated",
+                    "type": "Event",
+                    "id": 7,
+                    "options": {
+                      "(gogoproto.nullable)": false,
+                      "(gogoproto.jsontag)": "events,omitempty"
+                    },
+                    "comment": null
+                  },
+                  "codespace": {
+                    "type": "string",
+                    "id": 8,
+                    "comment": null
+                  }
+                },
+                "comment": null
+              },
+              "ResponseEndBlock": {
+                "fields": {
+                  "validatorUpdates": {
+                    "rule": "repeated",
+                    "type": "ValidatorUpdate",
+                    "id": 1,
+                    "options": {
+                      "(gogoproto.nullable)": false
+                    },
+                    "comment": null
+                  },
+                  "consensusParamUpdates": {
+                    "type": "ConsensusParams",
+                    "id": 2,
+                    "comment": null
+                  },
+                  "events": {
+                    "rule": "repeated",
+                    "type": "Event",
+                    "id": 3,
+                    "options": {
+                      "(gogoproto.nullable)": false,
+                      "(gogoproto.jsontag)": "events,omitempty"
+                    },
+                    "comment": null
+                  }
+                },
+                "comment": null
+              },
+              "ResponseCommit": {
+                "fields": {
+                  "data": {
+                    "type": "bytes",
+                    "id": 2,
+                    "comment": "reserve 1"
+                  },
+                  "retainHeight": {
+                    "type": "int64",
+                    "id": 3,
+                    "comment": null
+                  }
+                },
+                "comment": null
+              },
+              "ResponseListSnapshots": {
+                "fields": {
+                  "snapshots": {
+                    "rule": "repeated",
+                    "type": "Snapshot",
+                    "id": 1,
+                    "comment": null
+                  }
+                },
+                "comment": null
+              },
+              "ResponseOfferSnapshot": {
+                "fields": {
+                  "result": {
+                    "type": "Result",
+                    "id": 1,
+                    "comment": null
+                  }
+                },
+                "nested": {
+                  "Result": {
+                    "values": {
+                      "UNKNOWN": 0,
+                      "ACCEPT": 1,
+                      "ABORT": 2,
+                      "REJECT": 3,
+                      "REJECT_FORMAT": 4,
+                      "REJECT_SENDER": 5
+                    },
+                    "comment": null,
+                    "comments": {
+                      "UNKNOWN": "Unknown result, abort all snapshot restoration",
+                      "ACCEPT": "Snapshot accepted, apply chunks",
+                      "ABORT": "Abort all snapshot restoration",
+                      "REJECT": "Reject this specific snapshot, try others",
+                      "REJECT_FORMAT": "Reject all snapshots of this format, try others",
+                      "REJECT_SENDER": "Reject all snapshots from the sender(s), try others"
+                    }
+                  }
+                },
+                "comment": null
+              },
+              "ResponseLoadSnapshotChunk": {
+                "fields": {
+                  "chunk": {
+                    "type": "bytes",
+                    "id": 1,
+                    "comment": null
+                  }
+                },
+                "comment": null
+              },
+              "ResponseApplySnapshotChunk": {
+                "fields": {
+                  "result": {
+                    "type": "Result",
+                    "id": 1,
+                    "comment": null
+                  },
+                  "refetchChunks": {
+                    "rule": "repeated",
+                    "type": "uint32",
+                    "id": 2,
+                    "comment": "Chunks to refetch and reapply"
+                  },
+                  "rejectSenders": {
+                    "rule": "repeated",
+                    "type": "string",
+                    "id": 3,
+                    "comment": "Chunk senders to reject and ban"
+                  }
+                },
+                "nested": {
+                  "Result": {
+                    "values": {
+                      "UNKNOWN": 0,
+                      "ACCEPT": 1,
+                      "ABORT": 2,
+                      "RETRY": 3,
+                      "RETRY_SNAPSHOT": 4,
+                      "REJECT_SNAPSHOT": 5
+                    },
+                    "comment": null,
+                    "comments": {
+                      "UNKNOWN": "Unknown result, abort all snapshot restoration",
+                      "ACCEPT": "Chunk successfully accepted",
+                      "ABORT": "Abort all snapshot restoration",
+                      "RETRY": "Retry chunk (combine with refetch and reject)",
+                      "RETRY_SNAPSHOT": "Retry snapshot (combine with refetch and reject)",
+                      "REJECT_SNAPSHOT": "Reject this snapshot, try others"
+                    }
+                  }
+                },
+                "comment": null
+              },
+              "ConsensusParams": {
+                "fields": {
+                  "block": {
+                    "type": "BlockParams",
+                    "id": 1,
+                    "comment": null
+                  },
+                  "evidence": {
+                    "type": "tendermint.types.EvidenceParams",
+                    "id": 2,
+                    "comment": null
+                  },
+                  "validator": {
+                    "type": "tendermint.types.ValidatorParams",
+                    "id": 3,
+                    "comment": null
+                  },
+                  "version": {
+                    "type": "tendermint.types.VersionParams",
+                    "id": 4,
+                    "comment": null
+                  }
+                },
+                "comment": "ConsensusParams contains all consensus-relevant parameters\nthat can be adjusted by the abci app"
+              },
+              "BlockParams": {
+                "fields": {
+                  "maxBytes": {
+                    "type": "int64",
+                    "id": 1,
+                    "comment": "Note: must be greater than 0"
+                  },
+                  "maxGas": {
+                    "type": "int64",
+                    "id": 2,
+                    "comment": "Note: must be greater or equal to -1"
+                  }
+                },
+                "comment": "BlockParams contains limits on the block size."
+              },
+              "LastCommitInfo": {
+                "fields": {
+                  "round": {
+                    "type": "int32",
+                    "id": 1,
+                    "comment": null
+                  },
+                  "votes": {
+                    "rule": "repeated",
+                    "type": "VoteInfo",
+                    "id": 2,
+                    "options": {
+                      "(gogoproto.nullable)": false
+                    },
+                    "comment": null
+                  }
+                },
+                "comment": null
+              },
+              "Event": {
+                "fields": {
+                  "type": {
+                    "type": "string",
+                    "id": 1,
+                    "comment": null
+                  },
+                  "attributes": {
+                    "rule": "repeated",
+                    "type": "EventAttribute",
+                    "id": 2,
+                    "options": {
+                      "(gogoproto.nullable)": false,
+                      "(gogoproto.jsontag)": "attributes,omitempty"
+                    },
+                    "comment": null
+                  }
+                },
+                "comment": "Event allows application developers to attach additional information to\nResponseBeginBlock, ResponseEndBlock, ResponseCheckTx and ResponseDeliverTx.\nLater, transactions may be queried using these events."
+              },
+              "EventAttribute": {
+                "fields": {
+                  "key": {
+                    "type": "bytes",
+                    "id": 1,
+                    "comment": null
+                  },
+                  "value": {
+                    "type": "bytes",
+                    "id": 2,
+                    "comment": null
+                  },
+                  "index": {
+                    "type": "bool",
+                    "id": 3,
+                    "comment": "nondeterministic"
+                  }
+                },
+                "comment": "EventAttribute is a single key-value pair, associated with an event."
+              },
+              "TxResult": {
+                "fields": {
+                  "height": {
+                    "type": "int64",
+                    "id": 1,
+                    "comment": null
+                  },
+                  "index": {
+                    "type": "uint32",
+                    "id": 2,
+                    "comment": null
+                  },
+                  "tx": {
+                    "type": "bytes",
+                    "id": 3,
+                    "comment": null
+                  },
+                  "result": {
+                    "type": "ResponseDeliverTx",
+                    "id": 4,
+                    "options": {
+                      "(gogoproto.nullable)": false
+                    },
+                    "comment": null
+                  }
+                },
+                "comment": "TxResult contains results of executing the transaction.\n\nOne usage is indexing transaction results."
+              },
+              "Validator": {
+                "fields": {
+                  "address": {
+                    "type": "bytes",
+                    "id": 1,
+                    "comment": "The first 20 bytes of SHA256(public key)\nPubKey pub_key = 2 [(gogoproto.nullable)=false];"
+                  },
+                  "power": {
+                    "type": "int64",
+                    "id": 3,
+                    "comment": "The voting power"
+                  }
+                },
+                "comment": "Validator"
+              },
+              "ValidatorUpdate": {
+                "fields": {
+                  "pubKey": {
+                    "type": "tendermint.crypto.PublicKey",
+                    "id": 1,
+                    "options": {
+                      "(gogoproto.nullable)": false
+                    },
+                    "comment": null
+                  },
+                  "power": {
+                    "type": "int64",
+                    "id": 2,
+                    "comment": null
+                  }
+                },
+                "comment": "ValidatorUpdate"
+              },
+              "VoteInfo": {
+                "fields": {
+                  "validator": {
+                    "type": "Validator",
+                    "id": 1,
+                    "options": {
+                      "(gogoproto.nullable)": false
+                    },
+                    "comment": null
+                  },
+                  "signedLastBlock": {
+                    "type": "bool",
+                    "id": 2,
+                    "comment": null
+                  }
+                },
+                "comment": "VoteInfo"
+              },
+              "EvidenceType": {
+                "values": {
+                  "UNKNOWN": 0,
+                  "DUPLICATE_VOTE": 1,
+                  "LIGHT_CLIENT_ATTACK": 2
+                },
+                "comment": null,
+                "comments": {
+                  "UNKNOWN": null,
+                  "DUPLICATE_VOTE": null,
+                  "LIGHT_CLIENT_ATTACK": null
+                }
+              },
+              "Evidence": {
+                "fields": {
+                  "type": {
+                    "type": "EvidenceType",
+                    "id": 1,
+                    "comment": null
+                  },
+                  "validator": {
+                    "type": "Validator",
+                    "id": 2,
+                    "options": {
+                      "(gogoproto.nullable)": false
+                    },
+                    "comment": "The offending validator"
+                  },
+                  "height": {
+                    "type": "int64",
+                    "id": 3,
+                    "comment": "The height when the offense occurred"
+                  },
+                  "time": {
+                    "type": "google.protobuf.Timestamp",
+                    "id": 4,
+                    "options": {
+                      "(gogoproto.nullable)": false,
+                      "(gogoproto.stdtime)": true
+                    },
+                    "comment": "The corresponding time where the offense occurred"
+                  },
+                  "totalVotingPower": {
+                    "type": "int64",
+                    "id": 5,
+                    "comment": "Total voting power of the validator set in case the ABCI application does\nnot store historical validators.\nhttps://github.com/tendermint/tendermint/issues/4581"
+                  }
+                },
+                "comment": null
+              },
+              "Snapshot": {
+                "fields": {
+                  "height": {
+                    "type": "uint64",
+                    "id": 1,
+                    "comment": "The height at which the snapshot was taken"
+                  },
+                  "format": {
+                    "type": "uint32",
+                    "id": 2,
+                    "comment": "The application-specific snapshot format"
+                  },
+                  "chunks": {
+                    "type": "uint32",
+                    "id": 3,
+                    "comment": "Number of chunks in the snapshot"
+                  },
+                  "hash": {
+                    "type": "bytes",
+                    "id": 4,
+                    "comment": "Arbitrary snapshot hash, equal only if identical"
+                  },
+                  "metadata": {
+                    "type": "bytes",
+                    "id": 5,
+                    "comment": "Arbitrary application metadata"
+                  }
+                },
+                "comment": null
+              },
+              "ABCIApplication": {
+                "methods": {
+                  "Echo": {
+                    "requestType": "RequestEcho",
+                    "responseType": "ResponseEcho",
+                    "comment": null
+                  },
+                  "Flush": {
+                    "requestType": "RequestFlush",
+                    "responseType": "ResponseFlush",
+                    "comment": null
+                  },
+                  "Info": {
+                    "requestType": "RequestInfo",
+                    "responseType": "ResponseInfo",
+                    "comment": null
+                  },
+                  "SetOption": {
+                    "requestType": "RequestSetOption",
+                    "responseType": "ResponseSetOption",
+                    "comment": null
+                  },
+                  "DeliverTx": {
+                    "requestType": "RequestDeliverTx",
+                    "responseType": "ResponseDeliverTx",
+                    "comment": null
+                  },
+                  "CheckTx": {
+                    "requestType": "RequestCheckTx",
+                    "responseType": "ResponseCheckTx",
+                    "comment": null
+                  },
+                  "Query": {
+                    "requestType": "RequestQuery",
+                    "responseType": "ResponseQuery",
+                    "comment": null
+                  },
+                  "Commit": {
+                    "requestType": "RequestCommit",
+                    "responseType": "ResponseCommit",
+                    "comment": null
+                  },
+                  "InitChain": {
+                    "requestType": "RequestInitChain",
+                    "responseType": "ResponseInitChain",
+                    "comment": null
+                  },
+                  "BeginBlock": {
+                    "requestType": "RequestBeginBlock",
+                    "responseType": "ResponseBeginBlock",
+                    "comment": null
+                  },
+                  "EndBlock": {
+                    "requestType": "RequestEndBlock",
+                    "responseType": "ResponseEndBlock",
+                    "comment": null
+                  },
+                  "ListSnapshots": {
+                    "requestType": "RequestListSnapshots",
+                    "responseType": "ResponseListSnapshots",
+                    "comment": null
+                  },
+                  "OfferSnapshot": {
+                    "requestType": "RequestOfferSnapshot",
+                    "responseType": "ResponseOfferSnapshot",
+                    "comment": null
+                  },
+                  "LoadSnapshotChunk": {
+                    "requestType": "RequestLoadSnapshotChunk",
+                    "responseType": "ResponseLoadSnapshotChunk",
+                    "comment": null
+                  },
+                  "ApplySnapshotChunk": {
+                    "requestType": "RequestApplySnapshotChunk",
+                    "responseType": "ResponseApplySnapshotChunk",
+                    "comment": null
+                  }
+                },
+                "comment": null
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

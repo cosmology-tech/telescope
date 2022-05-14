@@ -1,0 +1,34 @@
+{
+  "package": "google.protobuf",
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "google": {
+        "nested": {
+          "protobuf": {
+            "options": {
+              "csharp_namespace": "Google.Protobuf.WellKnownTypes",
+              "java_package": "com.google.protobuf",
+              "java_outer_classname": "SourceContextProto",
+              "java_multiple_files": true,
+              "objc_class_prefix": "GPB",
+              "go_package": "types"
+            },
+            "nested": {
+              "SourceContext": {
+                "fields": {
+                  "fileName": {
+                    "type": "string",
+                    "id": 1,
+                    "comment": "The path-qualified name of the .proto file that contained the associated\nprotobuf element.  For example: `\"google/protobuf/source_context.proto\"`."
+                  }
+                },
+                "comment": "`SourceContext` represents information about the source of a\nprotobuf element, like the file in which it is defined."
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

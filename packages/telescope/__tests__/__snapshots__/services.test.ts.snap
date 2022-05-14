@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`cosmology/example/c context 1`] = `
+Array [
+  Object {
+    "comment": null,
+    "message": "MsgTypePackageC",
+    "messageImport": "cosmology/example/c.proto",
+    "methodName": "ActionFromPackageC",
+    "package": "cosmology.finance",
+    "response": "MsgTypePackageCResponse",
+    "responseImport": "cosmology/example/c.proto",
+  },
+  Object {
+    "comment": null,
+    "message": "MsgTypePackageB",
+    "messageImport": "cosmology/example/b.proto",
+    "methodName": "ActionFromPackageB",
+    "package": "cosmology.finance",
+    "response": "MsgTypePackageBResponse",
+    "responseImport": "cosmology/example/b.proto",
+  },
+]
+`;
+
+exports[`cosmology/example/c context 2`] = `
+Array [
+  Object {
+    "comment": "Config returns the current app config.",
+    "message": "QueryConfigRequest",
+    "messageImport": "cosmology/example/c.proto",
+    "methodName": "Config",
+    "package": "cosmology.finance",
+    "response": "QueryConfigResponse",
+    "responseImport": "cosmology/example/c.proto",
+  },
+]
+`;

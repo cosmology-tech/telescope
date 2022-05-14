@@ -1,0 +1,58 @@
+{
+  "package": "tendermint.types",
+  "imports": [
+    "gogoproto/gogo.proto",
+    "tendermint/types/types.proto",
+    "tendermint/types/evidence.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "tendermint": {
+        "nested": {
+          "types": {
+            "options": {
+              "go_package": "github.com/tendermint/tendermint/proto/tendermint/types"
+            },
+            "nested": {
+              "Block": {
+                "fields": {
+                  "header": {
+                    "type": "Header",
+                    "id": 1,
+                    "options": {
+                      "(gogoproto.nullable)": false
+                    },
+                    "comment": null
+                  },
+                  "data": {
+                    "type": "Data",
+                    "id": 2,
+                    "options": {
+                      "(gogoproto.nullable)": false
+                    },
+                    "comment": null
+                  },
+                  "evidence": {
+                    "type": "tendermint.types.EvidenceList",
+                    "id": 3,
+                    "options": {
+                      "(gogoproto.nullable)": false
+                    },
+                    "comment": null
+                  },
+                  "lastCommit": {
+                    "type": "Commit",
+                    "id": 4,
+                    "comment": null
+                  }
+                },
+                "comment": null
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

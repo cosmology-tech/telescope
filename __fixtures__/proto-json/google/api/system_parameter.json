@@ -1,0 +1,70 @@
+{
+  "package": "google.api",
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "google": {
+        "nested": {
+          "api": {
+            "options": {
+              "go_package": "google.golang.org/genproto/googleapis/api/serviceconfig;serviceconfig",
+              "java_multiple_files": true,
+              "java_outer_classname": "SystemParameterProto",
+              "java_package": "com.google.api",
+              "objc_class_prefix": "GAPI"
+            },
+            "nested": {
+              "SystemParameters": {
+                "fields": {
+                  "rules": {
+                    "rule": "repeated",
+                    "type": "SystemParameterRule",
+                    "id": 1,
+                    "comment": "Define system parameters.\n\nThe parameters defined here will override the default parameters\nimplemented by the system. If this field is missing from the service\nconfig, default system parameters will be used. Default system parameters\nand names is implementation-dependent.\n\nExample: define api key for all methods\n\nsystem_parameters\nrules:\n- selector: \"*\"\nparameters:\n- name: api_key\nurl_query_parameter: api_key\n\n\nExample: define 2 api key names for a specific method.\n\nsystem_parameters\nrules:\n- selector: \"/ListShelves\"\nparameters:\n- name: api_key\nhttp_header: Api-Key1\n- name: api_key\nhttp_header: Api-Key2\n\n**NOTE:** All service configuration rules follow \"last one wins\" order."
+                  }
+                },
+                "comment": "### System parameter configuration\n\nA system parameter is a special kind of parameter defined by the API\nsystem, not by an individual API. It is typically mapped to an HTTP header\nand/or a URL query parameter. This configuration specifies which methods\nchange the names of the system parameters."
+              },
+              "SystemParameterRule": {
+                "fields": {
+                  "selector": {
+                    "type": "string",
+                    "id": 1,
+                    "comment": "Selects the methods to which this rule applies. Use '*' to indicate all\nmethods in all APIs.\n\nRefer to [selector][google.api.DocumentationRule.selector] for syntax details."
+                  },
+                  "parameters": {
+                    "rule": "repeated",
+                    "type": "SystemParameter",
+                    "id": 2,
+                    "comment": "Define parameters. Multiple names may be defined for a parameter.\nFor a given method call, only one of them should be used. If multiple\nnames are used the behavior is implementation-dependent.\nIf none of the specified names are present the behavior is\nparameter-dependent."
+                  }
+                },
+                "comment": "Define a system parameter rule mapping system parameter definitions to\nmethods."
+              },
+              "SystemParameter": {
+                "fields": {
+                  "name": {
+                    "type": "string",
+                    "id": 1,
+                    "comment": "Define the name of the parameter, such as \"api_key\" . It is case sensitive."
+                  },
+                  "httpHeader": {
+                    "type": "string",
+                    "id": 2,
+                    "comment": "Define the HTTP header name to use for the parameter. It is case\ninsensitive."
+                  },
+                  "urlQueryParameter": {
+                    "type": "string",
+                    "id": 3,
+                    "comment": "Define the URL query parameter name to use for the parameter. It is case\nsensitive."
+                  }
+                },
+                "comment": "Define a parameter's name and location. The parameter may be passed as either\nan HTTP header or a URL query parameter, and if both are passed the behavior\nis implementation-dependent."
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,333 @@
+{
+  "package": "google.rpc.context",
+  "imports": [
+    "google/protobuf/any.proto",
+    "google/protobuf/duration.proto",
+    "google/protobuf/struct.proto",
+    "google/protobuf/timestamp.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "google": {
+        "nested": {
+          "rpc": {
+            "nested": {
+              "context": {
+                "options": {
+                  "cc_enable_arenas": true,
+                  "go_package": "google.golang.org/genproto/googleapis/rpc/context/attribute_context;attribute_context",
+                  "java_multiple_files": true,
+                  "java_outer_classname": "AttributeContextProto",
+                  "java_package": "com.google.rpc.context"
+                },
+                "nested": {
+                  "AttributeContext": {
+                    "fields": {
+                      "origin": {
+                        "type": "Peer",
+                        "id": 7,
+                        "comment": "The origin of a network activity. In a multi hop network activity,\nthe origin represents the sender of the first hop. For the first hop,\nthe `source` and the `origin` must have the same content."
+                      },
+                      "source": {
+                        "type": "Peer",
+                        "id": 1,
+                        "comment": "The source of a network activity, such as starting a TCP connection.\nIn a multi hop network activity, the source represents the sender of the\nlast hop."
+                      },
+                      "destination": {
+                        "type": "Peer",
+                        "id": 2,
+                        "comment": "The destination of a network activity, such as accepting a TCP connection.\nIn a multi hop network activity, the destination represents the receiver of\nthe last hop."
+                      },
+                      "request": {
+                        "type": "Request",
+                        "id": 3,
+                        "comment": "Represents a network request, such as an HTTP request."
+                      },
+                      "response": {
+                        "type": "Response",
+                        "id": 4,
+                        "comment": "Represents a network response, such as an HTTP response."
+                      },
+                      "resource": {
+                        "type": "Resource",
+                        "id": 5,
+                        "comment": "Represents a target resource that is involved with a network activity.\nIf multiple resources are involved with an activity, this must be the\nprimary one."
+                      },
+                      "api": {
+                        "type": "Api",
+                        "id": 6,
+                        "comment": "Represents an API operation that is involved to a network activity."
+                      },
+                      "extensions": {
+                        "rule": "repeated",
+                        "type": "google.protobuf.Any",
+                        "id": 8,
+                        "comment": "Supports extensions for advanced use cases, such as logs and metrics."
+                      }
+                    },
+                    "nested": {
+                      "Peer": {
+                        "fields": {
+                          "ip": {
+                            "type": "string",
+                            "id": 1,
+                            "comment": "The IP address of the peer."
+                          },
+                          "port": {
+                            "type": "int64",
+                            "id": 2,
+                            "comment": "The network port of the peer."
+                          },
+                          "labels": {
+                            "keyType": "string",
+                            "type": "string",
+                            "id": 6,
+                            "comment": "The labels associated with the peer."
+                          },
+                          "principal": {
+                            "type": "string",
+                            "id": 7,
+                            "comment": "The identity of this peer. Similar to `Request.auth.principal`, but\nrelative to the peer instead of the request. For example, the\nidenity associated with a load balancer that forwared the request."
+                          },
+                          "regionCode": {
+                            "type": "string",
+                            "id": 8,
+                            "comment": "The CLDR country/region code associated with the above IP address.\nIf the IP address is private, the `region_code` should reflect the\nphysical location where this peer is running."
+                          }
+                        },
+                        "comment": "This message defines attributes for a node that handles a network request.\nThe node can be either a service or an application that sends, forwards,\nor receives the request. Service peers should fill in\n`principal` and `labels` as appropriate."
+                      },
+                      "Api": {
+                        "fields": {
+                          "service": {
+                            "type": "string",
+                            "id": 1,
+                            "comment": "The API service name. It is a logical identifier for a networked API,\nsuch as \"pubsub.googleapis.com\". The naming syntax depends on the\nAPI management system being used for handling the request."
+                          },
+                          "operation": {
+                            "type": "string",
+                            "id": 2,
+                            "comment": "The API operation name. For gRPC requests, it is the fully qualified API\nmethod name, such as \"google.pubsub.v1.Publisher.Publish\". For OpenAPI\nrequests, it is the `operationId`, such as \"getPet\"."
+                          },
+                          "protocol": {
+                            "type": "string",
+                            "id": 3,
+                            "comment": "The API protocol used for sending the request, such as \"http\", \"https\",\n\"grpc\", or \"internal\"."
+                          },
+                          "version": {
+                            "type": "string",
+                            "id": 4,
+                            "comment": "The API version associated with the API operation above, such as \"v1\" or\n\"v1alpha1\"."
+                          }
+                        },
+                        "comment": "This message defines attributes associated with API operations, such as\na network API request. The terminology is based on the conventions used\nby Google APIs, Istio, and OpenAPI."
+                      },
+                      "Auth": {
+                        "fields": {
+                          "principal": {
+                            "type": "string",
+                            "id": 1,
+                            "comment": "The authenticated principal. Reflects the issuer (`iss`) and subject\n(`sub`) claims within a JWT. The issuer and subject should be `/`\ndelimited, with `/` percent-encoded within the subject fragment. For\nGoogle accounts, the principal format is:\n\"https://accounts.google.com/{id}\""
+                          },
+                          "audiences": {
+                            "rule": "repeated",
+                            "type": "string",
+                            "id": 2,
+                            "comment": "The intended audience(s) for this authentication information. Reflects\nthe audience (`aud`) claim within a JWT. The audience\nvalue(s) depends on the `issuer`, but typically include one or more of\nthe following pieces of information:\n\n*  The services intended to receive the credential. For example,\n[\"https://pubsub.googleapis.com/\", \"https://storage.googleapis.com/\"].\n*  A set of service-based scopes. For example,\n[\"https://www.googleapis.com/auth/cloud-platform\"].\n*  The client id of an app, such as the Firebase project id for JWTs\nfrom Firebase Auth.\n\nConsult the documentation for the credential issuer to determine the\ninformation provided."
+                          },
+                          "presenter": {
+                            "type": "string",
+                            "id": 3,
+                            "comment": "The authorized presenter of the credential. Reflects the optional\nAuthorized Presenter (`azp`) claim within a JWT or the\nOAuth client id. For example, a Google Cloud Platform client id looks\nas follows: \"123456789012.apps.googleusercontent.com\"."
+                          },
+                          "claims": {
+                            "type": "google.protobuf.Struct",
+                            "id": 4,
+                            "comment": "Structured claims presented with the credential. JWTs include\n`{key: value}` pairs for standard and private claims. The following\nis a subset of the standard required and optional claims that would\ntypically be presented for a Google-based JWT:\n\n{'iss': 'accounts.google.com',\n'sub': '113289723416554971153',\n'aud': ['123456789012', 'pubsub.googleapis.com'],\n'azp': '123456789012.apps.googleusercontent.com',\n'email': 'jsmith@example.com',\n'iat': 1353601026,\n'exp': 1353604926}\n\nSAML assertions are similarly specified, but with an identity provider\ndependent structure."
+                          },
+                          "accessLevels": {
+                            "rule": "repeated",
+                            "type": "string",
+                            "id": 5,
+                            "comment": "A list of access level resource names that allow resources to be\naccessed by authenticated requester. It is part of Secure GCP processing\nfor the incoming request. An access level string has the format:\n\"//{api_service_name}/accessPolicies/{policy_id}/accessLevels/{short_name}\"\n\nExample:\n\"//accesscontextmanager.googleapis.com/accessPolicies/MY_POLICY_ID/accessLevels/MY_LEVEL\""
+                          }
+                        },
+                        "comment": "This message defines request authentication attributes. Terminology is\nbased on the JSON Web Token (JWT) standard, but the terms also\ncorrelate to concepts in other standards."
+                      },
+                      "Request": {
+                        "fields": {
+                          "id": {
+                            "type": "string",
+                            "id": 1,
+                            "comment": "The unique ID for a request, which can be propagated to downstream\nsystems. The ID should have low probability of collision\nwithin a single day for a specific service."
+                          },
+                          "method": {
+                            "type": "string",
+                            "id": 2,
+                            "comment": "The HTTP request method, such as `GET`, `POST`."
+                          },
+                          "headers": {
+                            "keyType": "string",
+                            "type": "string",
+                            "id": 3,
+                            "comment": "The HTTP request headers. If multiple headers share the same key, they\nmust be merged according to the HTTP spec. All header keys must be\nlowercased, because HTTP header keys are case-insensitive."
+                          },
+                          "path": {
+                            "type": "string",
+                            "id": 4,
+                            "comment": "The HTTP URL path."
+                          },
+                          "host": {
+                            "type": "string",
+                            "id": 5,
+                            "comment": "The HTTP request `Host` header value."
+                          },
+                          "scheme": {
+                            "type": "string",
+                            "id": 6,
+                            "comment": "The HTTP URL scheme, such as `http` and `https`."
+                          },
+                          "query": {
+                            "type": "string",
+                            "id": 7,
+                            "comment": "The HTTP URL query in the format of `name1=value1&name2=value2`, as it\nappears in the first line of the HTTP request. No decoding is performed."
+                          },
+                          "time": {
+                            "type": "google.protobuf.Timestamp",
+                            "id": 9,
+                            "comment": "The timestamp when the `destination` service receives the last byte of\nthe request."
+                          },
+                          "size": {
+                            "type": "int64",
+                            "id": 10,
+                            "comment": "The HTTP request size in bytes. If unknown, it must be -1."
+                          },
+                          "protocol": {
+                            "type": "string",
+                            "id": 11,
+                            "comment": "The network protocol used with the request, such as \"http/1.1\",\n\"spdy/3\", \"h2\", \"h2c\", \"webrtc\", \"tcp\", \"udp\", \"quic\". See\nhttps://www.iana.org/assignments/tls-extensiontype-values/tls-extensiontype-values.xhtml#alpn-protocol-ids\nfor details."
+                          },
+                          "reason": {
+                            "type": "string",
+                            "id": 12,
+                            "comment": "A special parameter for request reason. It is used by security systems\nto associate auditing information with a request."
+                          },
+                          "auth": {
+                            "type": "Auth",
+                            "id": 13,
+                            "comment": "The request authentication. May be absent for unauthenticated requests.\nDerived from the HTTP request `Authorization` header or equivalent."
+                          }
+                        },
+                        "comment": "This message defines attributes for an HTTP request. If the actual\nrequest is not an HTTP request, the runtime system should try to map\nthe actual request to an equivalent HTTP request."
+                      },
+                      "Response": {
+                        "fields": {
+                          "code": {
+                            "type": "int64",
+                            "id": 1,
+                            "comment": "The HTTP response status code, such as `200` and `404`."
+                          },
+                          "size": {
+                            "type": "int64",
+                            "id": 2,
+                            "comment": "The HTTP response size in bytes. If unknown, it must be -1."
+                          },
+                          "headers": {
+                            "keyType": "string",
+                            "type": "string",
+                            "id": 3,
+                            "comment": "The HTTP response headers. If multiple headers share the same key, they\nmust be merged according to HTTP spec. All header keys must be\nlowercased, because HTTP header keys are case-insensitive."
+                          },
+                          "time": {
+                            "type": "google.protobuf.Timestamp",
+                            "id": 4,
+                            "comment": "The timestamp when the `destination` service sends the last byte of\nthe response."
+                          },
+                          "backendLatency": {
+                            "type": "google.protobuf.Duration",
+                            "id": 5,
+                            "comment": "The length of time it takes the backend service to fully respond to a\nrequest. Measured from when the destination service starts to send the\nrequest to the backend until when the destination service receives the\ncomplete response from the backend."
+                          }
+                        },
+                        "comment": "This message defines attributes for a typical network response. It\ngenerally models semantics of an HTTP response."
+                      },
+                      "Resource": {
+                        "fields": {
+                          "service": {
+                            "type": "string",
+                            "id": 1,
+                            "comment": "The name of the service that this resource belongs to, such as\n`pubsub.googleapis.com`. The service may be different from the DNS\nhostname that actually serves the request."
+                          },
+                          "name": {
+                            "type": "string",
+                            "id": 2,
+                            "comment": "The stable identifier (name) of a resource on the `service`. A resource\ncan be logically identified as \"//{resource.service}/{resource.name}\".\nThe differences between a resource name and a URI are:\n\n*   Resource name is a logical identifier, independent of network\nprotocol and API version. For example,\n`//pubsub.googleapis.com/projects/123/topics/news-feed`.\n*   URI often includes protocol and version information, so it can\nbe used directly by applications. For example,\n`https://pubsub.googleapis.com/v1/projects/123/topics/news-feed`.\n\nSee https://cloud.google.com/apis/design/resource_names for details."
+                          },
+                          "type": {
+                            "type": "string",
+                            "id": 3,
+                            "comment": "The type of the resource. The syntax is platform-specific because\ndifferent platforms define their resources differently.\n\nFor Google APIs, the type format must be \"{service}/{kind}\"."
+                          },
+                          "labels": {
+                            "keyType": "string",
+                            "type": "string",
+                            "id": 4,
+                            "comment": "The labels or tags on the resource, such as AWS resource tags and\nKubernetes resource labels."
+                          },
+                          "uid": {
+                            "type": "string",
+                            "id": 5,
+                            "comment": "The unique identifier of the resource. UID is unique in the time\nand space for this resource within the scope of the service. It is\ntypically generated by the server on successful creation of a resource\nand must not be changed. UID is used to uniquely identify resources\nwith resource name reuses. This should be a UUID4."
+                          },
+                          "annotations": {
+                            "keyType": "string",
+                            "type": "string",
+                            "id": 6,
+                            "comment": "Annotations is an unstructured key-value map stored with a resource that\nmay be set by external tools to store and retrieve arbitrary metadata.\nThey are not queryable and should be preserved when modifying objects.\n\nMore info: https://kubernetes.io/docs/user-guide/annotations"
+                          },
+                          "displayName": {
+                            "type": "string",
+                            "id": 7,
+                            "comment": "Mutable. The display name set by clients. Must be <= 63 characters."
+                          },
+                          "createTime": {
+                            "type": "google.protobuf.Timestamp",
+                            "id": 8,
+                            "comment": "Output only. The timestamp when the resource was created. This may\nbe either the time creation was initiated or when it was completed."
+                          },
+                          "updateTime": {
+                            "type": "google.protobuf.Timestamp",
+                            "id": 9,
+                            "comment": "Output only. The timestamp when the resource was last updated. Any\nchange to the resource made by users must refresh this value.\nChanges to a resource made by the service should refresh this value."
+                          },
+                          "deleteTime": {
+                            "type": "google.protobuf.Timestamp",
+                            "id": 10,
+                            "comment": "Output only. The timestamp when the resource was deleted.\nIf the resource is not deleted, this must be empty."
+                          },
+                          "etag": {
+                            "type": "string",
+                            "id": 11,
+                            "comment": "Output only. An opaque value that uniquely identifies a version or\ngeneration of a resource. It can be used to confirm that the client\nand server agree on the ordering of a resource being written."
+                          },
+                          "location": {
+                            "type": "string",
+                            "id": 12,
+                            "comment": "Immutable. The location of the resource. The location encoding is\nspecific to the service provider, and new encoding may be introduced\nas the service evolves.\n\nFor Google Cloud products, the encoding is what is used by Google Cloud\nAPIs, such as `us-east1`, `aws-us-east-1`, and `azure-eastus2`. The\nsemantics of `location` is identical to the\n`cloud.googleapis.com/location` label used by some Google Cloud APIs."
+                          }
+                        },
+                        "comment": "This message defines core attributes for a resource. A resource is an\naddressable (named) entity provided by the destination service. For\nexample, a file stored on a network storage service."
+                      }
+                    },
+                    "comment": "This message defines the standard attribute vocabulary for Google APIs.\n\nAn attribute is a piece of metadata that describes an activity on a network\nservice. For example, the size of an HTTP request, or the status code of\nan HTTP response.\n\nEach attribute has a type and a name, which is logically defined as\na proto message field in `AttributeContext`. The field type becomes the\nattribute type, and the field path becomes the attribute name. For example,\nthe attribute `source.ip` maps to field `AttributeContext.source.ip`.\n\nThis message definition is guaranteed not to have any wire breaking change.\nSo you can use it directly for passing attributes across different systems.\n\nNOTE: Different system may generate different subset of attributes. Please\nverify the system specification before relying on an attribute generated\na system."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "package": "cosmos.crypto.hd.v1",
+  "imports": [
+    "gogoproto/gogo.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "cosmos": {
+        "nested": {
+          "crypto": {
+            "nested": {
+              "hd": {
+                "nested": {
+                  "v1": {
+                    "options": {
+                      "go_package": "github.com/cosmos/cosmos-sdk/crypto/hd",
+                      "(gogoproto.goproto_getters_all)": false
+                    },
+                    "nested": {
+                      "BIP44Params": {
+                        "options": {
+                          "(gogoproto.goproto_stringer)": false
+                        },
+                        "fields": {
+                          "purpose": {
+                            "type": "uint32",
+                            "id": 1,
+                            "comment": "purpose is a constant set to 44' (or 0x8000002C) following the BIP43 recommendation"
+                          },
+                          "coinType": {
+                            "type": "uint32",
+                            "id": 2,
+                            "comment": "coin_type is a constant that improves privacy"
+                          },
+                          "account": {
+                            "type": "uint32",
+                            "id": 3,
+                            "comment": "account splits the key space into independent user identities"
+                          },
+                          "change": {
+                            "type": "bool",
+                            "id": 4,
+                            "comment": "change is a constant used for public derivation. Constant 0 is used for external chain and constant 1 for internal\nchain."
+                          },
+                          "addressIndex": {
+                            "type": "uint32",
+                            "id": 5,
+                            "comment": "address_index is used as child index in BIP32 derivation"
+                          }
+                        },
+                        "comment": "BIP44Params is used as path field in ledger item in Record."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "package": "google.api",
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "google": {
+        "nested": {
+          "api": {
+            "options": {
+              "go_package": "google.golang.org/genproto/googleapis/api/serviceconfig;serviceconfig",
+              "java_multiple_files": true,
+              "java_outer_classname": "MonitoringProto",
+              "java_package": "com.google.api",
+              "objc_class_prefix": "GAPI"
+            },
+            "nested": {
+              "Monitoring": {
+                "fields": {
+                  "producerDestinations": {
+                    "rule": "repeated",
+                    "type": "MonitoringDestination",
+                    "id": 1,
+                    "comment": "Monitoring configurations for sending metrics to the producer project.\nThere can be multiple producer destinations. A monitored resource type may\nappear in multiple monitoring destinations if different aggregations are\nneeded for different sets of metrics associated with that monitored\nresource type. A monitored resource and metric pair may only be used once\nin the Monitoring configuration."
+                  },
+                  "consumerDestinations": {
+                    "rule": "repeated",
+                    "type": "MonitoringDestination",
+                    "id": 2,
+                    "comment": "Monitoring configurations for sending metrics to the consumer project.\nThere can be multiple consumer destinations. A monitored resource type may\nappear in multiple monitoring destinations if different aggregations are\nneeded for different sets of metrics associated with that monitored\nresource type. A monitored resource and metric pair may only be used once\nin the Monitoring configuration."
+                  }
+                },
+                "nested": {
+                  "MonitoringDestination": {
+                    "fields": {
+                      "monitoredResource": {
+                        "type": "string",
+                        "id": 1,
+                        "comment": "The monitored resource type. The type must be defined in\n[Service.monitored_resources][google.api.Service.monitored_resources] section."
+                      },
+                      "metrics": {
+                        "rule": "repeated",
+                        "type": "string",
+                        "id": 2,
+                        "comment": "Types of the metrics to report to this monitoring destination.\nEach type must be defined in [Service.metrics][google.api.Service.metrics] section."
+                      }
+                    },
+                    "comment": "Configuration of a specific monitoring destination (the producer project\nor the consumer project)."
+                  }
+                },
+                "comment": "Monitoring configuration of the service.\n\nThe example below shows how to configure monitored resources and metrics\nfor monitoring. In the example, a monitored resource and two metrics are\ndefined. The `library.googleapis.com/book/returned_count` metric is sent\nto both producer and consumer projects, whereas the\n`library.googleapis.com/book/num_overdue` metric is only sent to the\nconsumer project.\n\nmonitored_resources:\n- type: library.googleapis.com/Branch\ndisplay_name: \"Library Branch\"\ndescription: \"A branch of a library.\"\nlaunch_stage: GA\nlabels:\n- key: resource_container\ndescription: \"The Cloud container (ie. project id) for the Branch.\"\n- key: location\ndescription: \"The location of the library branch.\"\n- key: branch_id\ndescription: \"The id of the branch.\"\nmetrics:\n- name: library.googleapis.com/book/returned_count\ndisplay_name: \"Books Returned\"\ndescription: \"The count of books that have been returned.\"\nlaunch_stage: GA\nmetric_kind: DELTA\nvalue_type: INT64\nunit: \"1\"\nlabels:\n- key: customer_id\ndescription: \"The id of the customer.\"\n- name: library.googleapis.com/book/num_overdue\ndisplay_name: \"Books Overdue\"\ndescription: \"The current number of overdue books.\"\nlaunch_stage: GA\nmetric_kind: GAUGE\nvalue_type: INT64\nunit: \"1\"\nlabels:\n- key: customer_id\ndescription: \"The id of the customer.\"\nmonitoring:\nproducer_destinations:\n- monitored_resource: library.googleapis.com/Branch\nmetrics:\n- library.googleapis.com/book/returned_count\nconsumer_destinations:\n- monitored_resource: library.googleapis.com/Branch\nmetrics:\n- library.googleapis.com/book/returned_count\n- library.googleapis.com/book/num_overdue"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "package": "osmosis.txfees.v1beta1",
+  "imports": [
+    "gogoproto/gogo.proto",
+    "osmosis/txfees/v1beta1/feetoken.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "osmosis": {
+        "nested": {
+          "txfees": {
+            "nested": {
+              "v1beta1": {
+                "options": {
+                  "go_package": "github.com/osmosis-labs/osmosis/v7/x/txfees/types"
+                },
+                "nested": {
+                  "UpdateFeeTokenProposal": {
+                    "options": {
+                      "(gogoproto.equal)": true,
+                      "(gogoproto.goproto_getters)": false,
+                      "(gogoproto.goproto_stringer)": false
+                    },
+                    "fields": {
+                      "title": {
+                        "type": "string",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.moretags)": "yaml:title"
+                        },
+                        "comment": null
+                      },
+                      "description": {
+                        "type": "string",
+                        "id": 2,
+                        "options": {
+                          "(gogoproto.moretags)": "yaml:description"
+                        },
+                        "comment": null
+                      },
+                      "feetoken": {
+                        "type": "FeeToken",
+                        "id": 3,
+                        "options": {
+                          "(gogoproto.moretags)": "yaml:fee_token",
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": null
+                      }
+                    },
+                    "comment": "UpdateFeeTokenProposal is a gov Content type for adding a new whitelisted fee\ntoken. It must specify a denom along with gamm pool ID to use as a spot price\ncalculator. It can be used to add a new denom to the whitelist It can also be\nused to update the Pool to associate with the denom. If Pool ID is set to 0,\nit will remove the denom from the whitelisted set."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

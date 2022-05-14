@@ -1,0 +1,115 @@
+{
+  "package": "google.protobuf",
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "google": {
+        "nested": {
+          "protobuf": {
+            "options": {
+              "csharp_namespace": "Google.Protobuf.WellKnownTypes",
+              "cc_enable_arenas": true,
+              "go_package": "types",
+              "java_package": "com.google.protobuf",
+              "java_outer_classname": "WrappersProto",
+              "java_multiple_files": true,
+              "objc_class_prefix": "GPB"
+            },
+            "nested": {
+              "DoubleValue": {
+                "fields": {
+                  "value": {
+                    "type": "double",
+                    "id": 1,
+                    "comment": "The double value."
+                  }
+                },
+                "comment": "Wrapper message for `double`.\n\nThe JSON representation for `DoubleValue` is JSON number."
+              },
+              "FloatValue": {
+                "fields": {
+                  "value": {
+                    "type": "float",
+                    "id": 1,
+                    "comment": "The float value."
+                  }
+                },
+                "comment": "Wrapper message for `float`.\n\nThe JSON representation for `FloatValue` is JSON number."
+              },
+              "Int64Value": {
+                "fields": {
+                  "value": {
+                    "type": "int64",
+                    "id": 1,
+                    "comment": "The int64 value."
+                  }
+                },
+                "comment": "Wrapper message for `int64`.\n\nThe JSON representation for `Int64Value` is JSON string."
+              },
+              "UInt64Value": {
+                "fields": {
+                  "value": {
+                    "type": "uint64",
+                    "id": 1,
+                    "comment": "The uint64 value."
+                  }
+                },
+                "comment": "Wrapper message for `uint64`.\n\nThe JSON representation for `UInt64Value` is JSON string."
+              },
+              "Int32Value": {
+                "fields": {
+                  "value": {
+                    "type": "int32",
+                    "id": 1,
+                    "comment": "The int32 value."
+                  }
+                },
+                "comment": "Wrapper message for `int32`.\n\nThe JSON representation for `Int32Value` is JSON number."
+              },
+              "UInt32Value": {
+                "fields": {
+                  "value": {
+                    "type": "uint32",
+                    "id": 1,
+                    "comment": "The uint32 value."
+                  }
+                },
+                "comment": "Wrapper message for `uint32`.\n\nThe JSON representation for `UInt32Value` is JSON number."
+              },
+              "BoolValue": {
+                "fields": {
+                  "value": {
+                    "type": "bool",
+                    "id": 1,
+                    "comment": "The bool value."
+                  }
+                },
+                "comment": "Wrapper message for `bool`.\n\nThe JSON representation for `BoolValue` is JSON `true` and `false`."
+              },
+              "StringValue": {
+                "fields": {
+                  "value": {
+                    "type": "string",
+                    "id": 1,
+                    "comment": "The string value."
+                  }
+                },
+                "comment": "Wrapper message for `string`.\n\nThe JSON representation for `StringValue` is JSON string."
+              },
+              "BytesValue": {
+                "fields": {
+                  "value": {
+                    "type": "bytes",
+                    "id": 1,
+                    "comment": "The bytes value."
+                  }
+                },
+                "comment": "Wrapper message for `bytes`.\n\nThe JSON representation for `BytesValue` is JSON string."
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

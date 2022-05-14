@@ -1,0 +1,55 @@
+{
+  "package": "tendermint.version",
+  "imports": [
+    "gogoproto/gogo.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "tendermint": {
+        "nested": {
+          "version": {
+            "options": {
+              "go_package": "github.com/tendermint/tendermint/proto/tendermint/version"
+            },
+            "nested": {
+              "App": {
+                "fields": {
+                  "protocol": {
+                    "type": "uint64",
+                    "id": 1,
+                    "comment": null
+                  },
+                  "software": {
+                    "type": "string",
+                    "id": 2,
+                    "comment": null
+                  }
+                },
+                "comment": "App includes the protocol and software version for the application.\nThis information is included in ResponseInfo. The App.Protocol can be\nupdated in ResponseEndBlock."
+              },
+              "Consensus": {
+                "options": {
+                  "(gogoproto.equal)": true
+                },
+                "fields": {
+                  "block": {
+                    "type": "uint64",
+                    "id": 1,
+                    "comment": null
+                  },
+                  "app": {
+                    "type": "uint64",
+                    "id": 2,
+                    "comment": null
+                  }
+                },
+                "comment": "Consensus captures the consensus rules for processing a block in the blockchain,\nincluding all blockchain data structures and the rules of the application's\nstate transition machine."
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,450 @@
+{
+  "package": "ibc.lightclients.solomachine.v1",
+  "imports": [
+    "ibc/core/connection/v1/connection.proto",
+    "ibc/core/channel/v1/channel.proto",
+    "gogoproto/gogo.proto",
+    "google/protobuf/any.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "ibc": {
+        "nested": {
+          "lightclients": {
+            "nested": {
+              "solomachine": {
+                "nested": {
+                  "v1": {
+                    "options": {
+                      "go_package": "github.com/cosmos/ibc-go/v2/modules/core/02-client/legacy/v100"
+                    },
+                    "nested": {
+                      "ClientState": {
+                        "options": {
+                          "(gogoproto.goproto_getters)": false
+                        },
+                        "fields": {
+                          "sequence": {
+                            "type": "uint64",
+                            "id": 1,
+                            "comment": "latest sequence of the client state"
+                          },
+                          "frozenSequence": {
+                            "type": "uint64",
+                            "id": 2,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:frozen_sequence"
+                            },
+                            "comment": "frozen sequence of the solo machine"
+                          },
+                          "consensusState": {
+                            "type": "ConsensusState",
+                            "id": 3,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:consensus_state"
+                            },
+                            "comment": null
+                          },
+                          "allowUpdateAfterProposal": {
+                            "type": "bool",
+                            "id": 4,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:allow_update_after_proposal"
+                            },
+                            "comment": "when set to true, will allow governance to update a solo machine client.\nThe client will be unfrozen if it is frozen."
+                          }
+                        },
+                        "comment": "ClientState defines a solo machine client that tracks the current consensus\nstate and if the client is frozen."
+                      },
+                      "ConsensusState": {
+                        "options": {
+                          "(gogoproto.goproto_getters)": false
+                        },
+                        "fields": {
+                          "publicKey": {
+                            "type": "google.protobuf.Any",
+                            "id": 1,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:public_key"
+                            },
+                            "comment": "public key of the solo machine"
+                          },
+                          "diversifier": {
+                            "type": "string",
+                            "id": 2,
+                            "comment": "diversifier allows the same public key to be re-used across different solo\nmachine clients (potentially on different chains) without being considered\nmisbehaviour."
+                          },
+                          "timestamp": {
+                            "type": "uint64",
+                            "id": 3,
+                            "comment": null
+                          }
+                        },
+                        "comment": "ConsensusState defines a solo machine consensus state. The sequence of a\nconsensus state is contained in the \"height\" key used in storing the\nconsensus state."
+                      },
+                      "Header": {
+                        "options": {
+                          "(gogoproto.goproto_getters)": false
+                        },
+                        "fields": {
+                          "sequence": {
+                            "type": "uint64",
+                            "id": 1,
+                            "comment": "sequence to update solo machine public key at"
+                          },
+                          "timestamp": {
+                            "type": "uint64",
+                            "id": 2,
+                            "comment": null
+                          },
+                          "signature": {
+                            "type": "bytes",
+                            "id": 3,
+                            "comment": null
+                          },
+                          "newPublicKey": {
+                            "type": "google.protobuf.Any",
+                            "id": 4,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:new_public_key"
+                            },
+                            "comment": null
+                          },
+                          "newDiversifier": {
+                            "type": "string",
+                            "id": 5,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:new_diversifier"
+                            },
+                            "comment": null
+                          }
+                        },
+                        "comment": "Header defines a solo machine consensus header"
+                      },
+                      "Misbehaviour": {
+                        "options": {
+                          "(gogoproto.goproto_getters)": false
+                        },
+                        "fields": {
+                          "clientId": {
+                            "type": "string",
+                            "id": 1,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:client_id"
+                            },
+                            "comment": null
+                          },
+                          "sequence": {
+                            "type": "uint64",
+                            "id": 2,
+                            "comment": null
+                          },
+                          "signatureOne": {
+                            "type": "SignatureAndData",
+                            "id": 3,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:signature_one"
+                            },
+                            "comment": null
+                          },
+                          "signatureTwo": {
+                            "type": "SignatureAndData",
+                            "id": 4,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:signature_two"
+                            },
+                            "comment": null
+                          }
+                        },
+                        "comment": "Misbehaviour defines misbehaviour for a solo machine which consists\nof a sequence and two signatures over different messages at that sequence."
+                      },
+                      "SignatureAndData": {
+                        "options": {
+                          "(gogoproto.goproto_getters)": false
+                        },
+                        "fields": {
+                          "signature": {
+                            "type": "bytes",
+                            "id": 1,
+                            "comment": null
+                          },
+                          "dataType": {
+                            "type": "DataType",
+                            "id": 2,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:data_type"
+                            },
+                            "comment": null
+                          },
+                          "data": {
+                            "type": "bytes",
+                            "id": 3,
+                            "comment": null
+                          },
+                          "timestamp": {
+                            "type": "uint64",
+                            "id": 4,
+                            "comment": null
+                          }
+                        },
+                        "comment": "SignatureAndData contains a signature and the data signed over to create that\nsignature."
+                      },
+                      "TimestampedSignatureData": {
+                        "options": {
+                          "(gogoproto.goproto_getters)": false
+                        },
+                        "fields": {
+                          "signatureData": {
+                            "type": "bytes",
+                            "id": 1,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:signature_data"
+                            },
+                            "comment": null
+                          },
+                          "timestamp": {
+                            "type": "uint64",
+                            "id": 2,
+                            "comment": null
+                          }
+                        },
+                        "comment": "TimestampedSignatureData contains the signature data and the timestamp of the\nsignature."
+                      },
+                      "SignBytes": {
+                        "options": {
+                          "(gogoproto.goproto_getters)": false
+                        },
+                        "fields": {
+                          "sequence": {
+                            "type": "uint64",
+                            "id": 1,
+                            "comment": null
+                          },
+                          "timestamp": {
+                            "type": "uint64",
+                            "id": 2,
+                            "comment": null
+                          },
+                          "diversifier": {
+                            "type": "string",
+                            "id": 3,
+                            "comment": null
+                          },
+                          "dataType": {
+                            "type": "DataType",
+                            "id": 4,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:data_type"
+                            },
+                            "comment": "type of the data used"
+                          },
+                          "data": {
+                            "type": "bytes",
+                            "id": 5,
+                            "comment": "marshaled data"
+                          }
+                        },
+                        "comment": "SignBytes defines the signed bytes used for signature verification."
+                      },
+                      "DataType": {
+                        "options": {
+                          "(gogoproto.goproto_enum_prefix)": false
+                        },
+                        "values": {
+                          "DATA_TYPE_UNINITIALIZED_UNSPECIFIED": 0,
+                          "DATA_TYPE_CLIENT_STATE": 1,
+                          "DATA_TYPE_CONSENSUS_STATE": 2,
+                          "DATA_TYPE_CONNECTION_STATE": 3,
+                          "DATA_TYPE_CHANNEL_STATE": 4,
+                          "DATA_TYPE_PACKET_COMMITMENT": 5,
+                          "DATA_TYPE_PACKET_ACKNOWLEDGEMENT": 6,
+                          "DATA_TYPE_PACKET_RECEIPT_ABSENCE": 7,
+                          "DATA_TYPE_NEXT_SEQUENCE_RECV": 8,
+                          "DATA_TYPE_HEADER": 9
+                        },
+                        "comment": "DataType defines the type of solo machine proof being created. This is done\nto preserve uniqueness of different data sign byte encodings.",
+                        "comments": {
+                          "DATA_TYPE_UNINITIALIZED_UNSPECIFIED": "Default State",
+                          "DATA_TYPE_CLIENT_STATE": "Data type for client state verification",
+                          "DATA_TYPE_CONSENSUS_STATE": "Data type for consensus state verification",
+                          "DATA_TYPE_CONNECTION_STATE": "Data type for connection state verification",
+                          "DATA_TYPE_CHANNEL_STATE": "Data type for channel state verification",
+                          "DATA_TYPE_PACKET_COMMITMENT": "Data type for packet commitment verification",
+                          "DATA_TYPE_PACKET_ACKNOWLEDGEMENT": "Data type for packet acknowledgement verification",
+                          "DATA_TYPE_PACKET_RECEIPT_ABSENCE": "Data type for packet receipt absence verification",
+                          "DATA_TYPE_NEXT_SEQUENCE_RECV": "Data type for next sequence recv verification",
+                          "DATA_TYPE_HEADER": "Data type for header verification"
+                        }
+                      },
+                      "HeaderData": {
+                        "options": {
+                          "(gogoproto.goproto_getters)": false
+                        },
+                        "fields": {
+                          "newPubKey": {
+                            "type": "google.protobuf.Any",
+                            "id": 1,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:new_pub_key"
+                            },
+                            "comment": "header public key"
+                          },
+                          "newDiversifier": {
+                            "type": "string",
+                            "id": 2,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:new_diversifier"
+                            },
+                            "comment": "header diversifier"
+                          }
+                        },
+                        "comment": "HeaderData returns the SignBytes data for update verification."
+                      },
+                      "ClientStateData": {
+                        "options": {
+                          "(gogoproto.goproto_getters)": false
+                        },
+                        "fields": {
+                          "path": {
+                            "type": "bytes",
+                            "id": 1,
+                            "comment": null
+                          },
+                          "clientState": {
+                            "type": "google.protobuf.Any",
+                            "id": 2,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:client_state"
+                            },
+                            "comment": null
+                          }
+                        },
+                        "comment": "ClientStateData returns the SignBytes data for client state verification."
+                      },
+                      "ConsensusStateData": {
+                        "options": {
+                          "(gogoproto.goproto_getters)": false
+                        },
+                        "fields": {
+                          "path": {
+                            "type": "bytes",
+                            "id": 1,
+                            "comment": null
+                          },
+                          "consensusState": {
+                            "type": "google.protobuf.Any",
+                            "id": 2,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:consensus_state"
+                            },
+                            "comment": null
+                          }
+                        },
+                        "comment": "ConsensusStateData returns the SignBytes data for consensus state\nverification."
+                      },
+                      "ConnectionStateData": {
+                        "options": {
+                          "(gogoproto.goproto_getters)": false
+                        },
+                        "fields": {
+                          "path": {
+                            "type": "bytes",
+                            "id": 1,
+                            "comment": null
+                          },
+                          "connection": {
+                            "type": "ibc.core.connection.v1.ConnectionEnd",
+                            "id": 2,
+                            "comment": null
+                          }
+                        },
+                        "comment": "ConnectionStateData returns the SignBytes data for connection state\nverification."
+                      },
+                      "ChannelStateData": {
+                        "options": {
+                          "(gogoproto.goproto_getters)": false
+                        },
+                        "fields": {
+                          "path": {
+                            "type": "bytes",
+                            "id": 1,
+                            "comment": null
+                          },
+                          "channel": {
+                            "type": "ibc.core.channel.v1.Channel",
+                            "id": 2,
+                            "comment": null
+                          }
+                        },
+                        "comment": "ChannelStateData returns the SignBytes data for channel state\nverification."
+                      },
+                      "PacketCommitmentData": {
+                        "fields": {
+                          "path": {
+                            "type": "bytes",
+                            "id": 1,
+                            "comment": null
+                          },
+                          "commitment": {
+                            "type": "bytes",
+                            "id": 2,
+                            "comment": null
+                          }
+                        },
+                        "comment": "PacketCommitmentData returns the SignBytes data for packet commitment\nverification."
+                      },
+                      "PacketAcknowledgementData": {
+                        "fields": {
+                          "path": {
+                            "type": "bytes",
+                            "id": 1,
+                            "comment": null
+                          },
+                          "acknowledgement": {
+                            "type": "bytes",
+                            "id": 2,
+                            "comment": null
+                          }
+                        },
+                        "comment": "PacketAcknowledgementData returns the SignBytes data for acknowledgement\nverification."
+                      },
+                      "PacketReceiptAbsenceData": {
+                        "fields": {
+                          "path": {
+                            "type": "bytes",
+                            "id": 1,
+                            "comment": null
+                          }
+                        },
+                        "comment": "PacketReceiptAbsenceData returns the SignBytes data for\npacket receipt absence verification."
+                      },
+                      "NextSequenceRecvData": {
+                        "fields": {
+                          "path": {
+                            "type": "bytes",
+                            "id": 1,
+                            "comment": null
+                          },
+                          "nextSeqRecv": {
+                            "type": "uint64",
+                            "id": 2,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:next_seq_recv"
+                            },
+                            "comment": null
+                          }
+                        },
+                        "comment": "NextSequenceRecvData returns the SignBytes data for verification of the next\nsequence to be received."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

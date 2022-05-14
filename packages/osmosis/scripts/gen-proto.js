@@ -2,10 +2,10 @@ import { join, resolve } from 'path';
 import telescope from '@osmonauts/telescope';
 import { camel, snake } from 'case';
 
-const protoPath = resolve(join(__dirname, '..', 'out', 'proto'));
+const protoDir = resolve(join(__dirname, '..', 'proto'));
 const outPath = resolve(__dirname, '..', 'src' ,'proto');
 
-telescope({protoPath, outPath, plugins: [
+telescope({protoDir, outPath, plugins: [
     {
         name: 'aminoCasing',
         plugin: ({protoPackage}) => {

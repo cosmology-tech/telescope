@@ -1,0 +1,361 @@
+{
+  "package": "google.api.serviceusage.v1",
+  "imports": [
+    "google/api/annotations.proto",
+    "google/api/serviceusage/v1/resources.proto",
+    "google/longrunning/operations.proto",
+    "google/api/client.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "google": {
+        "nested": {
+          "api": {
+            "nested": {
+              "serviceusage": {
+                "nested": {
+                  "v1": {
+                    "options": {
+                      "csharp_namespace": "Google.Cloud.ServiceUsage.V1",
+                      "go_package": "google.golang.org/genproto/googleapis/api/serviceusage/v1;serviceusage",
+                      "java_multiple_files": true,
+                      "java_outer_classname": "ServiceUsageProto",
+                      "java_package": "com.google.api.serviceusage.v1",
+                      "php_namespace": "Google\\Cloud\\ServiceUsage\\V1",
+                      "ruby_package": "Google::Cloud::ServiceUsage::V1"
+                    },
+                    "nested": {
+                      "ServiceUsage": {
+                        "options": {
+                          "(google.api.default_host)": "serviceusage.googleapis.com",
+                          "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/cloud-platform.read-only,https://www.googleapis.com/auth/service.management"
+                        },
+                        "methods": {
+                          "EnableService": {
+                            "requestType": "EnableServiceRequest",
+                            "responseType": "google.longrunning.Operation",
+                            "options": {
+                              "(google.api.http).post": "/v1/{name=*/*/services/*}:enable",
+                              "(google.api.http).body": "*",
+                              "(google.longrunning.operation_info).response_type": "EnableServiceResponse",
+                              "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                            },
+                            "comment": "Enable a service so that it can be used with a project.",
+                            "parsedOptions": [
+                              {
+                                "(google.api.http)": {
+                                  "post": "/v1/{name=*/*/services/*}:enable",
+                                  "body": "*"
+                                }
+                              },
+                              {
+                                "(google.longrunning.operation_info)": {
+                                  "response_type": "EnableServiceResponse",
+                                  "metadata_type": "OperationMetadata"
+                                }
+                              }
+                            ]
+                          },
+                          "DisableService": {
+                            "requestType": "DisableServiceRequest",
+                            "responseType": "google.longrunning.Operation",
+                            "options": {
+                              "(google.api.http).post": "/v1/{name=*/*/services/*}:disable",
+                              "(google.api.http).body": "*",
+                              "(google.longrunning.operation_info).response_type": "DisableServiceResponse",
+                              "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                            },
+                            "comment": "Disable a service so that it can no longer be used with a project.\nThis prevents unintended usage that may cause unexpected billing\ncharges or security leaks.\n\nIt is not valid to call the disable method on a service that is not\ncurrently enabled. Callers will receive a `FAILED_PRECONDITION` status if\nthe target service is not currently enabled.",
+                            "parsedOptions": [
+                              {
+                                "(google.api.http)": {
+                                  "post": "/v1/{name=*/*/services/*}:disable",
+                                  "body": "*"
+                                }
+                              },
+                              {
+                                "(google.longrunning.operation_info)": {
+                                  "response_type": "DisableServiceResponse",
+                                  "metadata_type": "OperationMetadata"
+                                }
+                              }
+                            ]
+                          },
+                          "GetService": {
+                            "requestType": "GetServiceRequest",
+                            "responseType": "Service",
+                            "options": {
+                              "(google.api.http).get": "/v1/{name=*/*/services/*}"
+                            },
+                            "comment": "Returns the service configuration and enabled state for a given service.",
+                            "parsedOptions": [
+                              {
+                                "(google.api.http)": {
+                                  "get": "/v1/{name=*/*/services/*}"
+                                }
+                              }
+                            ]
+                          },
+                          "ListServices": {
+                            "requestType": "ListServicesRequest",
+                            "responseType": "ListServicesResponse",
+                            "options": {
+                              "(google.api.http).get": "/v1/{parent=*/*}/services"
+                            },
+                            "comment": "List all services available to the specified project, and the current\nstate of those services with respect to the project. The list includes\nall public services, all services for which the calling user has the\n`servicemanagement.services.bind` permission, and all services that have\nalready been enabled on the project. The list can be filtered to\nonly include services in a specific state, for example to only include\nservices enabled on the project.\n\nWARNING: If you need to query enabled services frequently or across\nan organization, you should use\n[Cloud Asset Inventory\nAPI](https://cloud.google.com/asset-inventory/docs/apis), which provides\nhigher throughput and richer filtering capability.",
+                            "parsedOptions": [
+                              {
+                                "(google.api.http)": {
+                                  "get": "/v1/{parent=*/*}/services"
+                                }
+                              }
+                            ]
+                          },
+                          "BatchEnableServices": {
+                            "requestType": "BatchEnableServicesRequest",
+                            "responseType": "google.longrunning.Operation",
+                            "options": {
+                              "(google.api.http).post": "/v1/{parent=*/*}/services:batchEnable",
+                              "(google.api.http).body": "*",
+                              "(google.longrunning.operation_info).response_type": "BatchEnableServicesResponse",
+                              "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                            },
+                            "comment": "Enable multiple services on a project. The operation is atomic: if enabling\nany service fails, then the entire batch fails, and no state changes occur.\nTo enable a single service, use the `EnableService` method instead.",
+                            "parsedOptions": [
+                              {
+                                "(google.api.http)": {
+                                  "post": "/v1/{parent=*/*}/services:batchEnable",
+                                  "body": "*"
+                                }
+                              },
+                              {
+                                "(google.longrunning.operation_info)": {
+                                  "response_type": "BatchEnableServicesResponse",
+                                  "metadata_type": "OperationMetadata"
+                                }
+                              }
+                            ]
+                          },
+                          "BatchGetServices": {
+                            "requestType": "BatchGetServicesRequest",
+                            "responseType": "BatchGetServicesResponse",
+                            "options": {
+                              "(google.api.http).get": "/v1/{parent=*/*}/services:batchGet"
+                            },
+                            "comment": "Returns the service configurations and enabled states for a given list of\nservices.",
+                            "parsedOptions": [
+                              {
+                                "(google.api.http)": {
+                                  "get": "/v1/{parent=*/*}/services:batchGet"
+                                }
+                              }
+                            ]
+                          }
+                        },
+                        "comment": "Enables services that service consumers want to use on Google Cloud Platform,\nlists the available or enabled services, or disables services that service\nconsumers no longer use.\n\nSee [Service Usage API](https://cloud.google.com/service-usage/docs/overview)"
+                      },
+                      "EnableServiceRequest": {
+                        "fields": {
+                          "name": {
+                            "type": "string",
+                            "id": 1,
+                            "comment": "Name of the consumer and service to enable the service on.\n\nThe `EnableService` and `DisableService` methods currently only support\nprojects.\n\nEnabling a service requires that the service is public or is shared with\nthe user enabling the service.\n\nAn example name would be:\n`projects/123/services/serviceusage.googleapis.com` where `123` is the\nproject number."
+                          }
+                        },
+                        "comment": "Request message for the `EnableService` method."
+                      },
+                      "EnableServiceResponse": {
+                        "fields": {
+                          "service": {
+                            "type": "Service",
+                            "id": 1,
+                            "comment": "The new state of the service after enabling."
+                          }
+                        },
+                        "comment": "Response message for the `EnableService` method.\nThis response message is assigned to the `response` field of the returned\nOperation when that operation is done."
+                      },
+                      "DisableServiceRequest": {
+                        "fields": {
+                          "name": {
+                            "type": "string",
+                            "id": 1,
+                            "comment": "Name of the consumer and service to disable the service on.\n\nThe enable and disable methods currently only support projects.\n\nAn example name would be:\n`projects/123/services/serviceusage.googleapis.com` where `123` is the\nproject number."
+                          },
+                          "disableDependentServices": {
+                            "type": "bool",
+                            "id": 2,
+                            "comment": "Indicates if services that are enabled and which depend on this service\nshould also be disabled. If not set, an error will be generated if any\nenabled services depend on the service to be disabled. When set, the\nservice, and any enabled services that depend on it, will be disabled\ntogether."
+                          },
+                          "checkIfServiceHasUsage": {
+                            "type": "CheckIfServiceHasUsage",
+                            "id": 3,
+                            "comment": "Defines the behavior for checking service usage when disabling a service."
+                          }
+                        },
+                        "nested": {
+                          "CheckIfServiceHasUsage": {
+                            "values": {
+                              "CHECK_IF_SERVICE_HAS_USAGE_UNSPECIFIED": 0,
+                              "SKIP": 1,
+                              "CHECK": 2
+                            },
+                            "comment": "Enum to determine if service usage should be checked when disabling a\nservice.",
+                            "comments": {
+                              "CHECK_IF_SERVICE_HAS_USAGE_UNSPECIFIED": "When unset, the default behavior is used, which is SKIP.",
+                              "SKIP": "If set, skip checking service usage when disabling a service.",
+                              "CHECK": "If set, service usage is checked when disabling the service. If a\nservice, or its dependents, has usage in the last 30 days, the request\nreturns a FAILED_PRECONDITION error."
+                            }
+                          }
+                        },
+                        "comment": "Request message for the `DisableService` method."
+                      },
+                      "DisableServiceResponse": {
+                        "fields": {
+                          "service": {
+                            "type": "Service",
+                            "id": 1,
+                            "comment": "The new state of the service after disabling."
+                          }
+                        },
+                        "comment": "Response message for the `DisableService` method.\nThis response message is assigned to the `response` field of the returned\nOperation when that operation is done."
+                      },
+                      "GetServiceRequest": {
+                        "fields": {
+                          "name": {
+                            "type": "string",
+                            "id": 1,
+                            "comment": "Name of the consumer and service to get the `ConsumerState` for.\n\nAn example name would be:\n`projects/123/services/serviceusage.googleapis.com` where `123` is the\nproject number."
+                          }
+                        },
+                        "comment": "Request message for the `GetService` method."
+                      },
+                      "ListServicesRequest": {
+                        "fields": {
+                          "parent": {
+                            "type": "string",
+                            "id": 1,
+                            "comment": "Parent to search for services on.\n\nAn example name would be:\n`projects/123` where `123` is the project number."
+                          },
+                          "pageSize": {
+                            "type": "int32",
+                            "id": 2,
+                            "comment": "Requested size of the next page of data.\nRequested page size cannot exceed 200.\nIf not set, the default page size is 50."
+                          },
+                          "pageToken": {
+                            "type": "string",
+                            "id": 3,
+                            "comment": "Token identifying which result to start with, which is returned by a\nprevious list call."
+                          },
+                          "filter": {
+                            "type": "string",
+                            "id": 4,
+                            "comment": "Only list services that conform to the given filter.\nThe allowed filter strings are `state:ENABLED` and `state:DISABLED`."
+                          }
+                        },
+                        "comment": "Request message for the `ListServices` method."
+                      },
+                      "ListServicesResponse": {
+                        "fields": {
+                          "services": {
+                            "rule": "repeated",
+                            "type": "Service",
+                            "id": 1,
+                            "comment": "The available services for the requested project."
+                          },
+                          "nextPageToken": {
+                            "type": "string",
+                            "id": 2,
+                            "comment": "Token that can be passed to `ListServices` to resume a paginated\nquery."
+                          }
+                        },
+                        "comment": "Response message for the `ListServices` method."
+                      },
+                      "BatchEnableServicesRequest": {
+                        "fields": {
+                          "parent": {
+                            "type": "string",
+                            "id": 1,
+                            "comment": "Parent to enable services on.\n\nAn example name would be:\n`projects/123` where `123` is the project number.\n\nThe `BatchEnableServices` method currently only supports projects."
+                          },
+                          "serviceIds": {
+                            "rule": "repeated",
+                            "type": "string",
+                            "id": 2,
+                            "comment": "The identifiers of the services to enable on the project.\n\nA valid identifier would be:\nserviceusage.googleapis.com\n\nEnabling services requires that each service is public or is shared with\nthe user enabling the service.\n\nA single request can enable a maximum of 20 services at a time. If more\nthan 20 services are specified, the request will fail, and no state changes\nwill occur."
+                          }
+                        },
+                        "comment": "Request message for the `BatchEnableServices` method."
+                      },
+                      "BatchEnableServicesResponse": {
+                        "fields": {
+                          "services": {
+                            "rule": "repeated",
+                            "type": "Service",
+                            "id": 1,
+                            "comment": "The new state of the services after enabling."
+                          },
+                          "failures": {
+                            "rule": "repeated",
+                            "type": "EnableFailure",
+                            "id": 2,
+                            "comment": "If allow_partial_success is true, and one or more services could not be\nenabled, this field contains the details about each failure."
+                          }
+                        },
+                        "nested": {
+                          "EnableFailure": {
+                            "fields": {
+                              "serviceId": {
+                                "type": "string",
+                                "id": 1,
+                                "comment": "The service id of a service that could not be enabled."
+                              },
+                              "errorMessage": {
+                                "type": "string",
+                                "id": 2,
+                                "comment": "An error message describing why the service could not be enabled."
+                              }
+                            },
+                            "comment": "Provides error messages for the failing services."
+                          }
+                        },
+                        "comment": "Response message for the `BatchEnableServices` method.\nThis response message is assigned to the `response` field of the returned\nOperation when that operation is done."
+                      },
+                      "BatchGetServicesRequest": {
+                        "fields": {
+                          "parent": {
+                            "type": "string",
+                            "id": 1,
+                            "comment": "Parent to retrieve services from.\nIf this is set, the parent of all of the services specified in `names` must\nmatch this field. An example name would be: `projects/123` where `123` is\nthe project number. The `BatchGetServices` method currently only supports\nprojects."
+                          },
+                          "names": {
+                            "rule": "repeated",
+                            "type": "string",
+                            "id": 2,
+                            "comment": "Names of the services to retrieve.\n\nAn example name would be:\n`projects/123/services/serviceusage.googleapis.com` where `123` is the\nproject number.\nA single request can get a maximum of 30 services at a time."
+                          }
+                        },
+                        "comment": "Request message for the `BatchGetServices` method."
+                      },
+                      "BatchGetServicesResponse": {
+                        "fields": {
+                          "services": {
+                            "rule": "repeated",
+                            "type": "Service",
+                            "id": 1,
+                            "comment": "The requested Service states."
+                          }
+                        },
+                        "comment": "Response message for the `BatchGetServices` method."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

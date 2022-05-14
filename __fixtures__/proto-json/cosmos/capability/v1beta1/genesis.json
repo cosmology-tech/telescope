@@ -1,0 +1,64 @@
+{
+  "package": "cosmos.capability.v1beta1",
+  "imports": [
+    "gogoproto/gogo.proto",
+    "cosmos/capability/v1beta1/capability.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "cosmos": {
+        "nested": {
+          "capability": {
+            "nested": {
+              "v1beta1": {
+                "options": {
+                  "go_package": "github.com/cosmos/cosmos-sdk/x/capability/types"
+                },
+                "nested": {
+                  "GenesisOwners": {
+                    "fields": {
+                      "index": {
+                        "type": "uint64",
+                        "id": 1,
+                        "comment": "index is the index of the capability owner."
+                      },
+                      "indexOwners": {
+                        "type": "CapabilityOwners",
+                        "id": 2,
+                        "options": {
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": "index_owners are the owners at the given index."
+                      }
+                    },
+                    "comment": "GenesisOwners defines the capability owners with their corresponding index."
+                  },
+                  "GenesisState": {
+                    "fields": {
+                      "index": {
+                        "type": "uint64",
+                        "id": 1,
+                        "comment": "index is the capability global index."
+                      },
+                      "owners": {
+                        "rule": "repeated",
+                        "type": "GenesisOwners",
+                        "id": 2,
+                        "options": {
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": "owners represents a map from index to owners of the capability index\nindex key is string to allow amino marshalling."
+                      }
+                    },
+                    "comment": "GenesisState defines the capability module's genesis state."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

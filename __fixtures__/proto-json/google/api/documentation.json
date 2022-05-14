@@ -1,0 +1,101 @@
+{
+  "package": "google.api",
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "google": {
+        "nested": {
+          "api": {
+            "options": {
+              "go_package": "google.golang.org/genproto/googleapis/api/serviceconfig;serviceconfig",
+              "java_multiple_files": true,
+              "java_outer_classname": "DocumentationProto",
+              "java_package": "com.google.api",
+              "objc_class_prefix": "GAPI"
+            },
+            "nested": {
+              "Documentation": {
+                "fields": {
+                  "summary": {
+                    "type": "string",
+                    "id": 1,
+                    "comment": "A short summary of what the service does. Can only be provided by\nplain text."
+                  },
+                  "pages": {
+                    "rule": "repeated",
+                    "type": "Page",
+                    "id": 5,
+                    "comment": "The top level pages for the documentation set."
+                  },
+                  "rules": {
+                    "rule": "repeated",
+                    "type": "DocumentationRule",
+                    "id": 3,
+                    "comment": "A list of documentation rules that apply to individual API elements.\n\n**NOTE:** All service configuration rules follow \"last one wins\" order."
+                  },
+                  "documentationRootUrl": {
+                    "type": "string",
+                    "id": 4,
+                    "comment": "The URL to the root of documentation."
+                  },
+                  "serviceRootUrl": {
+                    "type": "string",
+                    "id": 6,
+                    "comment": "Specifies the service root url if the default one (the service name\nfrom the yaml file) is not suitable. This can be seen in any fully\nspecified service urls as well as sections that show a base that other\nurls are relative to."
+                  },
+                  "overview": {
+                    "type": "string",
+                    "id": 2,
+                    "comment": "Declares a single overview page. For example:\n<pre><code>documentation:\nsummary: ...\noverview: &#40;== include overview.md ==&#41;\n</code></pre>\nThis is a shortcut for the following declaration (using pages style):\n<pre><code>documentation:\nsummary: ...\npages:\n- name: Overview\ncontent: &#40;== include overview.md ==&#41;\n</code></pre>\nNote: you cannot specify both `overview` field and `pages` field."
+                  }
+                },
+                "comment": "`Documentation` provides the information for describing a service.\n\nExample:\n<pre><code>documentation:\nsummary: >\nThe Google Calendar API gives access\nto most calendar features.\npages:\n- name: Overview\ncontent: &#40;== include google/foo/overview.md ==&#41;\n- name: Tutorial\ncontent: &#40;== include google/foo/tutorial.md ==&#41;\nsubpages;\n- name: Java\ncontent: &#40;== include google/foo/tutorial_java.md ==&#41;\nrules:\n- selector: google.calendar.Calendar.Get\ndescription: >\n...\n- selector: google.calendar.Calendar.Put\ndescription: >\n...\n</code></pre>\nDocumentation is provided in markdown syntax. In addition to\nstandard markdown features, definition lists, tables and fenced\ncode blocks are supported. Section headers can be provided and are\ninterpreted relative to the section nesting of the context where\na documentation fragment is embedded.\n\nDocumentation from the IDL is merged with documentation defined\nvia the config at normalization time, where documentation provided\nby config rules overrides IDL provided.\n\nA number of constructs specific to the API platform are supported\nin documentation text.\n\nIn order to reference a proto element, the following\nnotation can be used:\n<pre><code>&#91;fully.qualified.proto.name]&#91;]</code></pre>\nTo override the display text used for the link, this can be used:\n<pre><code>&#91;display text]&#91;fully.qualified.proto.name]</code></pre>\nText can be excluded from doc using the following notation:\n<pre><code>&#40;-- internal comment --&#41;</code></pre>\n\nA few directives are available in documentation. Note that\ndirectives must appear on a single line to be properly\nidentified. The `include` directive includes a markdown file from\nan external source:\n<pre><code>&#40;== include path/to/file ==&#41;</code></pre>\nThe `resource_for` directive marks a message to be the resource of\na collection in REST view. If it is not specified, tools attempt\nto infer the resource from the operations in a collection:\n<pre><code>&#40;== resource_for v1.shelves.books ==&#41;</code></pre>\nThe directive `suppress_warning` does not directly affect documentation\nand is documented together with service config validation."
+              },
+              "DocumentationRule": {
+                "fields": {
+                  "selector": {
+                    "type": "string",
+                    "id": 1,
+                    "comment": "The selector is a comma-separated list of patterns. Each pattern is a\nqualified name of the element which may end in \"*\", indicating a wildcard.\nWildcards are only allowed at the end and for a whole component of the\nqualified name, i.e. \"foo.*\" is ok, but not \"foo.b*\" or \"foo.*.bar\". A\nwildcard will match one or more components. To specify a default for all\napplicable elements, the whole pattern \"*\" is used."
+                  },
+                  "description": {
+                    "type": "string",
+                    "id": 2,
+                    "comment": "Description of the selected API(s)."
+                  },
+                  "deprecationDescription": {
+                    "type": "string",
+                    "id": 3,
+                    "comment": "Deprecation description of the selected element(s). It can be provided if\nan element is marked as `deprecated`."
+                  }
+                },
+                "comment": "A documentation rule provides information about individual API elements."
+              },
+              "Page": {
+                "fields": {
+                  "name": {
+                    "type": "string",
+                    "id": 1,
+                    "comment": "The name of the page. It will be used as an identity of the page to\ngenerate URI of the page, text of the link to this page in navigation,\netc. The full page name (start from the root page name to this page\nconcatenated with `.`) can be used as reference to the page in your\ndocumentation. For example:\n<pre><code>pages:\n- name: Tutorial\ncontent: &#40;== include tutorial.md ==&#41;\nsubpages:\n- name: Java\ncontent: &#40;== include tutorial_java.md ==&#41;\n</code></pre>\nYou can reference `Java` page using Markdown reference link syntax:\n`[Java][Tutorial.Java]`."
+                  },
+                  "content": {
+                    "type": "string",
+                    "id": 2,
+                    "comment": "The Markdown content of the page. You can use <code>&#40;== include {path}\n==&#41;</code> to include content from a Markdown file."
+                  },
+                  "subpages": {
+                    "rule": "repeated",
+                    "type": "Page",
+                    "id": 3,
+                    "comment": "Subpages of this page. The order of subpages specified here will be\nhonored in the generated docset."
+                  }
+                },
+                "comment": "Represents a documentation page. A page can contain subpages to represent\nnested documentation set structure."
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

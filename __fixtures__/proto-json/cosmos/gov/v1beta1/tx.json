@@ -1,0 +1,224 @@
+{
+  "package": "cosmos.gov.v1beta1",
+  "imports": [
+    "cosmos/base/v1beta1/coin.proto",
+    "cosmos/gov/v1beta1/gov.proto",
+    "cosmos_proto/cosmos.proto",
+    "gogoproto/gogo.proto",
+    "google/protobuf/any.proto",
+    "cosmos/msg/v1/msg.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "cosmos": {
+        "nested": {
+          "gov": {
+            "nested": {
+              "v1beta1": {
+                "options": {
+                  "go_package": "github.com/cosmos/cosmos-sdk/x/gov/types/v1beta1"
+                },
+                "nested": {
+                  "Msg": {
+                    "methods": {
+                      "SubmitProposal": {
+                        "requestType": "MsgSubmitProposal",
+                        "responseType": "MsgSubmitProposalResponse",
+                        "comment": "SubmitProposal defines a method to create new proposal given a content."
+                      },
+                      "Vote": {
+                        "requestType": "MsgVote",
+                        "responseType": "MsgVoteResponse",
+                        "comment": "Vote defines a method to add a vote on a specific proposal."
+                      },
+                      "VoteWeighted": {
+                        "requestType": "MsgVoteWeighted",
+                        "responseType": "MsgVoteWeightedResponse",
+                        "comment": "VoteWeighted defines a method to add a weighted vote on a specific proposal.\n\nSince: cosmos-sdk 0.43"
+                      },
+                      "Deposit": {
+                        "requestType": "MsgDeposit",
+                        "responseType": "MsgDepositResponse",
+                        "comment": "Deposit defines a method to add deposit on a specific proposal."
+                      }
+                    },
+                    "comment": "Msg defines the bank Msg service."
+                  },
+                  "MsgSubmitProposal": {
+                    "options": {
+                      "(cosmos.msg.v1.signer)": "proposer",
+                      "(gogoproto.equal)": false,
+                      "(gogoproto.goproto_stringer)": false,
+                      "(gogoproto.stringer)": false,
+                      "(gogoproto.goproto_getters)": false
+                    },
+                    "fields": {
+                      "content": {
+                        "type": "google.protobuf.Any",
+                        "id": 1,
+                        "options": {
+                          "(cosmos_proto.accepts_interface)": "Content"
+                        },
+                        "comment": null
+                      },
+                      "initialDeposit": {
+                        "rule": "repeated",
+                        "type": "cosmos.base.v1beta1.Coin",
+                        "id": 2,
+                        "options": {
+                          "(gogoproto.nullable)": false,
+                          "(gogoproto.castrepeated)": "github.com/cosmos/cosmos-sdk/types.Coins"
+                        },
+                        "comment": null
+                      },
+                      "proposer": {
+                        "type": "string",
+                        "id": 3,
+                        "options": {
+                          "(cosmos_proto.scalar)": "cosmos.AddressString"
+                        },
+                        "comment": null
+                      }
+                    },
+                    "comment": "MsgSubmitProposal defines an sdk.Msg type that supports submitting arbitrary\nproposal Content."
+                  },
+                  "MsgSubmitProposalResponse": {
+                    "fields": {
+                      "proposalId": {
+                        "type": "uint64",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.jsontag)": "proposal_id"
+                        },
+                        "comment": null
+                      }
+                    },
+                    "comment": "MsgSubmitProposalResponse defines the Msg/SubmitProposal response type."
+                  },
+                  "MsgVote": {
+                    "options": {
+                      "(cosmos.msg.v1.signer)": "voter",
+                      "(gogoproto.equal)": false,
+                      "(gogoproto.goproto_stringer)": false,
+                      "(gogoproto.stringer)": false,
+                      "(gogoproto.goproto_getters)": false
+                    },
+                    "fields": {
+                      "proposalId": {
+                        "type": "uint64",
+                        "id": 1,
+                        "comment": null
+                      },
+                      "voter": {
+                        "type": "string",
+                        "id": 2,
+                        "options": {
+                          "(cosmos_proto.scalar)": "cosmos.AddressString"
+                        },
+                        "comment": null
+                      },
+                      "option": {
+                        "type": "VoteOption",
+                        "id": 3,
+                        "comment": null
+                      }
+                    },
+                    "comment": "MsgVote defines a message to cast a vote."
+                  },
+                  "MsgVoteResponse": {
+                    "fields": {},
+                    "comment": "MsgVoteResponse defines the Msg/Vote response type."
+                  },
+                  "MsgVoteWeighted": {
+                    "options": {
+                      "(cosmos.msg.v1.signer)": "voter",
+                      "(gogoproto.equal)": false,
+                      "(gogoproto.goproto_stringer)": false,
+                      "(gogoproto.stringer)": false,
+                      "(gogoproto.goproto_getters)": false
+                    },
+                    "fields": {
+                      "proposalId": {
+                        "type": "uint64",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.jsontag)": "proposal_id"
+                        },
+                        "comment": null
+                      },
+                      "voter": {
+                        "type": "string",
+                        "id": 2,
+                        "options": {
+                          "(cosmos_proto.scalar)": "cosmos.AddressString"
+                        },
+                        "comment": null
+                      },
+                      "options": {
+                        "rule": "repeated",
+                        "type": "WeightedVoteOption",
+                        "id": 3,
+                        "options": {
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": null
+                      }
+                    },
+                    "comment": "MsgVoteWeighted defines a message to cast a vote.\n\nSince: cosmos-sdk 0.43"
+                  },
+                  "MsgVoteWeightedResponse": {
+                    "fields": {},
+                    "comment": "MsgVoteWeightedResponse defines the Msg/VoteWeighted response type.\n\nSince: cosmos-sdk 0.43"
+                  },
+                  "MsgDeposit": {
+                    "options": {
+                      "(cosmos.msg.v1.signer)": "depositor",
+                      "(gogoproto.equal)": false,
+                      "(gogoproto.goproto_stringer)": false,
+                      "(gogoproto.stringer)": false,
+                      "(gogoproto.goproto_getters)": false
+                    },
+                    "fields": {
+                      "proposalId": {
+                        "type": "uint64",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.jsontag)": "proposal_id"
+                        },
+                        "comment": null
+                      },
+                      "depositor": {
+                        "type": "string",
+                        "id": 2,
+                        "options": {
+                          "(cosmos_proto.scalar)": "cosmos.AddressString"
+                        },
+                        "comment": null
+                      },
+                      "amount": {
+                        "rule": "repeated",
+                        "type": "cosmos.base.v1beta1.Coin",
+                        "id": 3,
+                        "options": {
+                          "(gogoproto.nullable)": false,
+                          "(gogoproto.castrepeated)": "github.com/cosmos/cosmos-sdk/types.Coins"
+                        },
+                        "comment": null
+                      }
+                    },
+                    "comment": "MsgDeposit defines a message to submit a deposit to an existing proposal."
+                  },
+                  "MsgDepositResponse": {
+                    "fields": {},
+                    "comment": "MsgDepositResponse defines the Msg/Deposit response type."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

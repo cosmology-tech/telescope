@@ -1,0 +1,52 @@
+{
+  "package": "google.api",
+  "imports": [
+    "google/api/label.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "google": {
+        "nested": {
+          "api": {
+            "options": {
+              "go_package": "google.golang.org/genproto/googleapis/api/serviceconfig;serviceconfig",
+              "java_multiple_files": true,
+              "java_outer_classname": "LogProto",
+              "java_package": "com.google.api",
+              "objc_class_prefix": "GAPI"
+            },
+            "nested": {
+              "LogDescriptor": {
+                "fields": {
+                  "name": {
+                    "type": "string",
+                    "id": 1,
+                    "comment": "The name of the log. It must be less than 512 characters long and can\ninclude the following characters: upper- and lower-case alphanumeric\ncharacters [A-Za-z0-9], and punctuation characters including\nslash, underscore, hyphen, period [/_-.]."
+                  },
+                  "labels": {
+                    "rule": "repeated",
+                    "type": "LabelDescriptor",
+                    "id": 2,
+                    "comment": "The set of labels that are available to describe a specific log entry.\nRuntime requests that contain labels not specified here are\nconsidered invalid."
+                  },
+                  "description": {
+                    "type": "string",
+                    "id": 3,
+                    "comment": "A human-readable description of this log. This information appears in\nthe documentation and can contain details."
+                  },
+                  "displayName": {
+                    "type": "string",
+                    "id": 4,
+                    "comment": "The human-readable name for this log. This information appears on\nthe user interface and should be concise."
+                  }
+                },
+                "comment": "A description of a log type. Example in YAML format:\n\n- name: library.googleapis.com/activity_history\ndescription: The history of borrowing and returning library items.\ndisplay_name: Activity\nlabels:\n- key: /customer_id\ndescription: Identifier of a library customer"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

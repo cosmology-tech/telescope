@@ -1,0 +1,68 @@
+{
+  "package": "google.api",
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "google": {
+        "nested": {
+          "api": {
+            "options": {
+              "go_package": "google.golang.org/genproto/googleapis/api/serviceconfig;serviceconfig",
+              "java_multiple_files": true,
+              "java_outer_classname": "ContextProto",
+              "java_package": "com.google.api",
+              "objc_class_prefix": "GAPI"
+            },
+            "nested": {
+              "Context": {
+                "fields": {
+                  "rules": {
+                    "rule": "repeated",
+                    "type": "ContextRule",
+                    "id": 1,
+                    "comment": "A list of RPC context rules that apply to individual API methods.\n\n**NOTE:** All service configuration rules follow \"last one wins\" order."
+                  }
+                },
+                "comment": "`Context` defines which contexts an API requests.\n\nExample:\n\ncontext:\nrules:\n- selector: \"*\"\nrequested:\n- google.rpc.context.ProjectContext\n- google.rpc.context.OriginContext\n\nThe above specifies that all methods in the API request\n`google.rpc.context.ProjectContext` and\n`google.rpc.context.OriginContext`.\n\nAvailable context types are defined in package\n`google.rpc.context`.\n\nThis also provides mechanism to allowlist any protobuf message extension that\ncan be sent in grpc metadata using “x-goog-ext-<extension_id>-bin” and\n“x-goog-ext-<extension_id>-jspb” format. For example, list any service\nspecific protobuf types that can appear in grpc metadata as follows in your\nyaml file:\n\nExample:\n\ncontext:\nrules:\n- selector: \"google.example.library.v1.LibraryService.CreateBook\"\nallowed_request_extensions:\n- google.foo.v1.NewExtension\nallowed_response_extensions:\n- google.foo.v1.NewExtension\n\nYou can also specify extension ID instead of fully qualified extension name\nhere."
+              },
+              "ContextRule": {
+                "fields": {
+                  "selector": {
+                    "type": "string",
+                    "id": 1,
+                    "comment": "Selects the methods to which this rule applies.\n\nRefer to [selector][google.api.DocumentationRule.selector] for syntax details."
+                  },
+                  "requested": {
+                    "rule": "repeated",
+                    "type": "string",
+                    "id": 2,
+                    "comment": "A list of full type names of requested contexts."
+                  },
+                  "provided": {
+                    "rule": "repeated",
+                    "type": "string",
+                    "id": 3,
+                    "comment": "A list of full type names of provided contexts."
+                  },
+                  "allowedRequestExtensions": {
+                    "rule": "repeated",
+                    "type": "string",
+                    "id": 4,
+                    "comment": "A list of full type names or extension IDs of extensions allowed in grpc\nside channel from client to backend."
+                  },
+                  "allowedResponseExtensions": {
+                    "rule": "repeated",
+                    "type": "string",
+                    "id": 5,
+                    "comment": "A list of full type names or extension IDs of extensions allowed in grpc\nside channel from backend to client."
+                  }
+                },
+                "comment": "A context rule provides information about the context for an individual API\nelement."
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

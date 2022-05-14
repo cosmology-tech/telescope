@@ -3,16 +3,18 @@ import { MsgSend } from "./tx";
 export interface AminoMsgSend extends AminoMsg {
     type: "cosmos-sdk/MsgSend";
     value: {
-        class_id: string;
-        id: string;
-        sender: string;
-        receiver: string;
+        from_address: string;
+        to_address: string;
+        amount: {
+            denom: string;
+            amount: string;
+        }[];
     };
 }
 export declare const AminoConverter: {
     "/cosmos.nft.v1beta1.MsgSend": {
         aminoType: string;
-        toAmino: ({ classId, id, sender, receiver }: MsgSend) => AminoMsgSend["value"];
-        fromAmino: ({ class_id, id, sender, receiver }: AminoMsgSend["value"]) => MsgSend;
+        toAmino: ({ fromAddress, toAddress, amount }: MsgSend) => AminoMsgSend["value"];
+        fromAmino: ({ from_address, to_address, amount }: AminoMsgSend["value"]) => MsgSend;
     };
 };

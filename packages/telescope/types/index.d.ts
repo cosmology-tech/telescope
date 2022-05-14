@@ -1,12 +1,19 @@
-export * from './classes';
-export * from './plugin';
-import { AminoExceptions } from '@osmonauts/ast-gen';
-import { TelescopePlugin } from './classes';
-interface TelescopeInput {
-    protoPath: string;
+import { ProtoStore } from '@osmonauts/proto-parser';
+import { TelescopeParseContext } from './build';
+export interface TelescopeInput {
+    protoDir: string;
     outPath: string;
-    exceptions?: AminoExceptions;
-    plugins?: TelescopePlugin[];
+}
+export declare class TelescopeBuilder {
+    store: ProtoStore;
+    protoDir: string;
+    outPath: string;
+    contexts: TelescopeParseContext[];
+    constructor({ protoDir, outPath, store }: TelescopeInput & {
+        store?: ProtoStore;
+    });
+    context(ref: any): TelescopeParseContext;
+    build(input: TelescopeInput): void;
 }
 declare const _default: (input: TelescopeInput) => void;
 export default _default;

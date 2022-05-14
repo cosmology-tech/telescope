@@ -1,0 +1,78 @@
+{
+  "package": "google.api.expr.v1beta1",
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "google": {
+        "nested": {
+          "api": {
+            "nested": {
+              "expr": {
+                "nested": {
+                  "v1beta1": {
+                    "options": {
+                      "cc_enable_arenas": true,
+                      "go_package": "google.golang.org/genproto/googleapis/api/expr/v1beta1;expr",
+                      "java_multiple_files": true,
+                      "java_outer_classname": "SourceProto",
+                      "java_package": "com.google.api.expr.v1beta1"
+                    },
+                    "nested": {
+                      "SourceInfo": {
+                        "fields": {
+                          "location": {
+                            "type": "string",
+                            "id": 2,
+                            "comment": "The location name. All position information attached to an expression is\nrelative to this location.\n\nThe location could be a file, UI element, or similar. For example,\n`acme/app/AnvilPolicy.cel`."
+                          },
+                          "lineOffsets": {
+                            "rule": "repeated",
+                            "type": "int32",
+                            "id": 3,
+                            "comment": "Monotonically increasing list of character offsets where newlines appear.\n\nThe line number of a given position is the index `i` where for a given\n`id` the `line_offsets[i] < id_positions[id] < line_offsets[i+1]`. The\ncolumn may be derivd from `id_positions[id] - line_offsets[i]`."
+                          },
+                          "positions": {
+                            "keyType": "int32",
+                            "type": "int32",
+                            "id": 4,
+                            "comment": "A map from the parse node id (e.g. `Expr.id`) to the character offset\nwithin source."
+                          }
+                        },
+                        "comment": "Source information collected at parse time."
+                      },
+                      "SourcePosition": {
+                        "fields": {
+                          "location": {
+                            "type": "string",
+                            "id": 1,
+                            "comment": "The soucre location name (e.g. file name)."
+                          },
+                          "offset": {
+                            "type": "int32",
+                            "id": 2,
+                            "comment": "The character offset."
+                          },
+                          "line": {
+                            "type": "int32",
+                            "id": 3,
+                            "comment": "The 1-based index of the starting line in the source text\nwhere the issue occurs, or 0 if unknown."
+                          },
+                          "column": {
+                            "type": "int32",
+                            "id": 4,
+                            "comment": "The 0-based index of the starting position within the line of source text\nwhere the issue occurs.  Only meaningful if line is nonzer.."
+                          }
+                        },
+                        "comment": "A specific position in source."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

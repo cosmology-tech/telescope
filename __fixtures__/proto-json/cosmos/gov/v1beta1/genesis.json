@@ -1,0 +1,91 @@
+{
+  "package": "cosmos.gov.v1beta1",
+  "imports": [
+    "gogoproto/gogo.proto",
+    "cosmos/gov/v1beta1/gov.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "cosmos": {
+        "nested": {
+          "gov": {
+            "nested": {
+              "v1beta1": {
+                "options": {
+                  "go_package": "github.com/cosmos/cosmos-sdk/x/gov/types/v1beta1"
+                },
+                "nested": {
+                  "GenesisState": {
+                    "fields": {
+                      "startingProposalId": {
+                        "type": "uint64",
+                        "id": 1,
+                        "comment": "starting_proposal_id is the ID of the starting proposal."
+                      },
+                      "deposits": {
+                        "rule": "repeated",
+                        "type": "Deposit",
+                        "id": 2,
+                        "options": {
+                          "(gogoproto.castrepeated)": "Deposits",
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": "deposits defines all the deposits present at genesis."
+                      },
+                      "votes": {
+                        "rule": "repeated",
+                        "type": "Vote",
+                        "id": 3,
+                        "options": {
+                          "(gogoproto.castrepeated)": "Votes",
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": "votes defines all the votes present at genesis."
+                      },
+                      "proposals": {
+                        "rule": "repeated",
+                        "type": "Proposal",
+                        "id": 4,
+                        "options": {
+                          "(gogoproto.castrepeated)": "Proposals",
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": "proposals defines all the proposals present at genesis."
+                      },
+                      "depositParams": {
+                        "type": "DepositParams",
+                        "id": 5,
+                        "options": {
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": "params defines all the paramaters of related to deposit."
+                      },
+                      "votingParams": {
+                        "type": "VotingParams",
+                        "id": 6,
+                        "options": {
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": "params defines all the paramaters of related to voting."
+                      },
+                      "tallyParams": {
+                        "type": "TallyParams",
+                        "id": 7,
+                        "options": {
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": "params defines all the paramaters of related to tally."
+                      }
+                    },
+                    "comment": "GenesisState defines the gov module's genesis state."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

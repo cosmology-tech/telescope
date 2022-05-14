@@ -1,0 +1,152 @@
+{
+  "package": "cosmos.slashing.v1beta1",
+  "imports": [
+    "cosmos/base/query/v1beta1/pagination.proto",
+    "gogoproto/gogo.proto",
+    "google/api/annotations.proto",
+    "cosmos/slashing/v1beta1/slashing.proto",
+    "cosmos_proto/cosmos.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "cosmos": {
+        "nested": {
+          "slashing": {
+            "nested": {
+              "v1beta1": {
+                "options": {
+                  "go_package": "github.com/cosmos/cosmos-sdk/x/slashing/types"
+                },
+                "nested": {
+                  "Query": {
+                    "methods": {
+                      "Params": {
+                        "requestType": "QueryParamsRequest",
+                        "responseType": "QueryParamsResponse",
+                        "options": {
+                          "(google.api.http).get": "/cosmos/slashing/v1beta1/params"
+                        },
+                        "comment": "Params queries the parameters of slashing module",
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "get": "/cosmos/slashing/v1beta1/params"
+                            }
+                          }
+                        ]
+                      },
+                      "SigningInfo": {
+                        "requestType": "QuerySigningInfoRequest",
+                        "responseType": "QuerySigningInfoResponse",
+                        "options": {
+                          "(google.api.http).get": "/cosmos/slashing/v1beta1/signing_infos/{cons_address}"
+                        },
+                        "comment": "SigningInfo queries the signing info of given cons address",
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "get": "/cosmos/slashing/v1beta1/signing_infos/{cons_address}"
+                            }
+                          }
+                        ]
+                      },
+                      "SigningInfos": {
+                        "requestType": "QuerySigningInfosRequest",
+                        "responseType": "QuerySigningInfosResponse",
+                        "options": {
+                          "(google.api.http).get": "/cosmos/slashing/v1beta1/signing_infos"
+                        },
+                        "comment": "SigningInfos queries signing info of all validators",
+                        "parsedOptions": [
+                          {
+                            "(google.api.http)": {
+                              "get": "/cosmos/slashing/v1beta1/signing_infos"
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    "comment": "Query provides defines the gRPC querier service"
+                  },
+                  "QueryParamsRequest": {
+                    "fields": {},
+                    "comment": "QueryParamsRequest is the request type for the Query/Params RPC method"
+                  },
+                  "QueryParamsResponse": {
+                    "fields": {
+                      "params": {
+                        "type": "Params",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": null
+                      }
+                    },
+                    "comment": "QueryParamsResponse is the response type for the Query/Params RPC method"
+                  },
+                  "QuerySigningInfoRequest": {
+                    "fields": {
+                      "consAddress": {
+                        "type": "string",
+                        "id": 1,
+                        "options": {
+                          "(cosmos_proto.scalar)": "cosmos.AddressString"
+                        },
+                        "comment": "cons_address is the address to query signing info of"
+                      }
+                    },
+                    "comment": "QuerySigningInfoRequest is the request type for the Query/SigningInfo RPC\nmethod"
+                  },
+                  "QuerySigningInfoResponse": {
+                    "fields": {
+                      "valSigningInfo": {
+                        "type": "ValidatorSigningInfo",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": "val_signing_info is the signing info of requested val cons address"
+                      }
+                    },
+                    "comment": "QuerySigningInfoResponse is the response type for the Query/SigningInfo RPC\nmethod"
+                  },
+                  "QuerySigningInfosRequest": {
+                    "fields": {
+                      "pagination": {
+                        "type": "cosmos.base.query.v1beta1.PageRequest",
+                        "id": 1,
+                        "comment": null
+                      }
+                    },
+                    "comment": "QuerySigningInfosRequest is the request type for the Query/SigningInfos RPC\nmethod"
+                  },
+                  "QuerySigningInfosResponse": {
+                    "fields": {
+                      "info": {
+                        "rule": "repeated",
+                        "type": "cosmos.slashing.v1beta1.ValidatorSigningInfo",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": "info is the signing info of all validators"
+                      },
+                      "pagination": {
+                        "type": "cosmos.base.query.v1beta1.PageResponse",
+                        "id": 2,
+                        "comment": null
+                      }
+                    },
+                    "comment": "QuerySigningInfosResponse is the response type for the Query/SigningInfos RPC\nmethod"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

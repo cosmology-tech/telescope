@@ -1,0 +1,122 @@
+{
+  "package": "cosmos.staking.v1beta1",
+  "imports": [
+    "gogoproto/gogo.proto",
+    "cosmos/staking/v1beta1/staking.proto",
+    "cosmos_proto/cosmos.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "cosmos": {
+        "nested": {
+          "staking": {
+            "nested": {
+              "v1beta1": {
+                "options": {
+                  "go_package": "github.com/cosmos/cosmos-sdk/x/staking/types"
+                },
+                "nested": {
+                  "GenesisState": {
+                    "fields": {
+                      "params": {
+                        "type": "Params",
+                        "id": 1,
+                        "options": {
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": "params defines all the paramaters of related to deposit."
+                      },
+                      "lastTotalPower": {
+                        "type": "bytes",
+                        "id": 2,
+                        "options": {
+                          "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Int",
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": "last_total_power tracks the total amounts of bonded tokens recorded during\nthe previous end block."
+                      },
+                      "lastValidatorPowers": {
+                        "rule": "repeated",
+                        "type": "LastValidatorPower",
+                        "id": 3,
+                        "options": {
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": "last_validator_powers is a special index that provides a historical list\nof the last-block's bonded validators."
+                      },
+                      "validators": {
+                        "rule": "repeated",
+                        "type": "Validator",
+                        "id": 4,
+                        "options": {
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": "delegations defines the validator set at genesis."
+                      },
+                      "delegations": {
+                        "rule": "repeated",
+                        "type": "Delegation",
+                        "id": 5,
+                        "options": {
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": "delegations defines the delegations active at genesis."
+                      },
+                      "unbondingDelegations": {
+                        "rule": "repeated",
+                        "type": "UnbondingDelegation",
+                        "id": 6,
+                        "options": {
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": "unbonding_delegations defines the unbonding delegations active at genesis."
+                      },
+                      "redelegations": {
+                        "rule": "repeated",
+                        "type": "Redelegation",
+                        "id": 7,
+                        "options": {
+                          "(gogoproto.nullable)": false
+                        },
+                        "comment": "redelegations defines the redelegations active at genesis."
+                      },
+                      "exported": {
+                        "type": "bool",
+                        "id": 8,
+                        "comment": null
+                      }
+                    },
+                    "comment": "GenesisState defines the staking module's genesis state."
+                  },
+                  "LastValidatorPower": {
+                    "options": {
+                      "(gogoproto.equal)": false,
+                      "(gogoproto.goproto_getters)": false
+                    },
+                    "fields": {
+                      "address": {
+                        "type": "string",
+                        "id": 1,
+                        "options": {
+                          "(cosmos_proto.scalar)": "cosmos.AddressString"
+                        },
+                        "comment": "address is the address of the validator."
+                      },
+                      "power": {
+                        "type": "int64",
+                        "id": 2,
+                        "comment": "power defines the power of the validator."
+                      }
+                    },
+                    "comment": "LastValidatorPower required for validator set update logic."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

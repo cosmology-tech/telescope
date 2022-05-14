@@ -1,0 +1,109 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`imports lookup Any 1`] = `
+Object {
+  "import": "google/protobuf/any.proto",
+  "importType": "import",
+  "importedName": "Any",
+  "name": "Any",
+}
+`;
+
+exports[`imports lookup cosmos.base.query.v1beta1.PageResponse 1`] = `
+Object {
+  "import": "cosmos/base/query/v1beta1/pagination.proto",
+  "importType": "protoImport",
+  "name": "PageResponse",
+  "package": "cosmos.base.query.v1beta1",
+}
+`;
+
+exports[`imports lookup cosmos/tx/v1beta1/service.proto .tendermint.types.Block 1`] = `
+Object {
+  "import": "tendermint/types/block.proto",
+  "importType": "protoImport",
+  "name": "Block",
+  "package": "tendermint.types",
+}
+`;
+
+exports[`imports lookup cosmos/tx/v1beta1/service.proto .tendermint.types.BlockID 1`] = `
+Object {
+  "import": "tendermint/types/types.proto",
+  "importType": "protoImport",
+  "name": "BlockID",
+  "package": "tendermint.types",
+}
+`;
+
+exports[`imports lookup google.rpc.Status 1`] = `
+Object {
+  "import": "google/rpc/status.proto",
+  "importType": "protoImport",
+  "name": "Status",
+  "package": "google.rpc",
+}
+`;
+
+exports[`imports lookup google/api/expr/v1alpha1/checked Empty 1`] = `
+Object {
+  "import": "google/protobuf/empty.proto",
+  "importType": "import",
+  "importedName": "Empty",
+  "name": "Empty",
+}
+`;
+
+exports[`imports lookup google/api/expr/v1alpha1/checked NullValue 1`] = `
+Object {
+  "import": "google/protobuf/struct.proto",
+  "importType": "import",
+  "importedName": "NullValue",
+  "name": "NullValue",
+}
+`;
+
+exports[`imports lookup google/api/expr/v1alpha1/checked google.protobuf.Empty 1`] = `
+Object {
+  "import": "google/protobuf/empty.proto",
+  "importType": "protoImport",
+  "name": "Empty",
+  "package": "google.protobuf",
+}
+`;
+
+exports[`imports lookup google/api/expr/v1alpha1/checked google.protobuf.NullValue 1`] = `
+Object {
+  "import": "google/protobuf/struct.proto",
+  "importType": "protoImport",
+  "name": "NullValue",
+  "package": "google.protobuf",
+}
+`;
+
+exports[`imports lookup ibc.core.client.v1.Height 1`] = `
+Object {
+  "import": "ibc/core/client/v1/client.proto",
+  "importType": "protoImport",
+  "name": "Height",
+  "package": "ibc.core.client.v1",
+}
+`;
+
+exports[`imports lookup osmosis/claim/v1beta1/params.proto Duration 1`] = `
+Object {
+  "import": "google/protobuf/duration.proto",
+  "importType": "import",
+  "importedName": "Duration",
+  "name": "Duration",
+}
+`;
+
+exports[`imports lookup osmosis/claim/v1beta1/params.proto google.protobuf.Duration 1`] = `
+Object {
+  "import": "google/protobuf/duration.proto",
+  "importType": "protoImport",
+  "name": "Duration",
+  "package": "google.protobuf",
+}
+`;

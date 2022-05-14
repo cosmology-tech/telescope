@@ -1,0 +1,263 @@
+{
+  "package": "ibc.lightclients.tendermint.v1",
+  "imports": [
+    "tendermint/types/validator.proto",
+    "tendermint/types/types.proto",
+    "confio/proofs.proto",
+    "google/protobuf/duration.proto",
+    "google/protobuf/timestamp.proto",
+    "ibc/core/client/v1/client.proto",
+    "ibc/core/commitment/v1/commitment.proto",
+    "gogoproto/gogo.proto"
+  ],
+  "syntax": "proto3",
+  "root": {
+    "nested": {
+      "ibc": {
+        "nested": {
+          "lightclients": {
+            "nested": {
+              "tendermint": {
+                "nested": {
+                  "v1": {
+                    "options": {
+                      "go_package": "github.com/cosmos/ibc-go/v2/modules/light-clients/07-tendermint/types"
+                    },
+                    "nested": {
+                      "ClientState": {
+                        "options": {
+                          "(gogoproto.goproto_getters)": false
+                        },
+                        "fields": {
+                          "chainId": {
+                            "type": "string",
+                            "id": 1,
+                            "comment": null
+                          },
+                          "trustLevel": {
+                            "type": "Fraction",
+                            "id": 2,
+                            "options": {
+                              "(gogoproto.nullable)": false,
+                              "(gogoproto.moretags)": "yaml:trust_level"
+                            },
+                            "comment": null
+                          },
+                          "trustingPeriod": {
+                            "type": "google.protobuf.Duration",
+                            "id": 3,
+                            "options": {
+                              "(gogoproto.nullable)": false,
+                              "(gogoproto.stdduration)": true,
+                              "(gogoproto.moretags)": "yaml:trusting_period"
+                            },
+                            "comment": "duration of the period since the LastestTimestamp during which the\nsubmitted headers are valid for upgrade"
+                          },
+                          "unbondingPeriod": {
+                            "type": "google.protobuf.Duration",
+                            "id": 4,
+                            "options": {
+                              "(gogoproto.nullable)": false,
+                              "(gogoproto.stdduration)": true,
+                              "(gogoproto.moretags)": "yaml:unbonding_period"
+                            },
+                            "comment": "duration of the staking unbonding period"
+                          },
+                          "maxClockDrift": {
+                            "type": "google.protobuf.Duration",
+                            "id": 5,
+                            "options": {
+                              "(gogoproto.nullable)": false,
+                              "(gogoproto.stdduration)": true,
+                              "(gogoproto.moretags)": "yaml:max_clock_drift"
+                            },
+                            "comment": "defines how much new (untrusted) header's Time can drift into the future."
+                          },
+                          "frozenHeight": {
+                            "type": "ibc.core.client.v1.Height",
+                            "id": 6,
+                            "options": {
+                              "(gogoproto.nullable)": false,
+                              "(gogoproto.moretags)": "yaml:frozen_height"
+                            },
+                            "comment": "Block height when the client was frozen due to a misbehaviour"
+                          },
+                          "latestHeight": {
+                            "type": "ibc.core.client.v1.Height",
+                            "id": 7,
+                            "options": {
+                              "(gogoproto.nullable)": false,
+                              "(gogoproto.moretags)": "yaml:latest_height"
+                            },
+                            "comment": "Latest height the client was updated to"
+                          },
+                          "proofSpecs": {
+                            "rule": "repeated",
+                            "type": "ics23.ProofSpec",
+                            "id": 8,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:proof_specs"
+                            },
+                            "comment": "Proof specifications used in verifying counterparty state"
+                          },
+                          "upgradePath": {
+                            "rule": "repeated",
+                            "type": "string",
+                            "id": 9,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:upgrade_path"
+                            },
+                            "comment": "Path at which next upgraded client will be committed.\nEach element corresponds to the key for a single CommitmentProof in the\nchained proof. NOTE: ClientState must stored under\n`{upgradePath}/{upgradeHeight}/clientState` ConsensusState must be stored\nunder `{upgradepath}/{upgradeHeight}/consensusState` For SDK chains using\nthe default upgrade module, upgrade_path should be []string{\"upgrade\",\n\"upgradedIBCState\"}`"
+                          },
+                          "allowUpdateAfterExpiry": {
+                            "type": "bool",
+                            "id": 10,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:allow_update_after_expiry"
+                            },
+                            "comment": "This flag, when set to true, will allow governance to recover a client\nwhich has expired"
+                          },
+                          "allowUpdateAfterMisbehaviour": {
+                            "type": "bool",
+                            "id": 11,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:allow_update_after_misbehaviour"
+                            },
+                            "comment": "This flag, when set to true, will allow governance to unfreeze a client\nwhose chain has experienced a misbehaviour event"
+                          }
+                        },
+                        "comment": "ClientState from Tendermint tracks the current validator set, latest height,\nand a possible frozen height."
+                      },
+                      "ConsensusState": {
+                        "options": {
+                          "(gogoproto.goproto_getters)": false
+                        },
+                        "fields": {
+                          "timestamp": {
+                            "type": "google.protobuf.Timestamp",
+                            "id": 1,
+                            "options": {
+                              "(gogoproto.nullable)": false,
+                              "(gogoproto.stdtime)": true
+                            },
+                            "comment": "timestamp that corresponds to the block height in which the ConsensusState\nwas stored."
+                          },
+                          "root": {
+                            "type": "ibc.core.commitment.v1.MerkleRoot",
+                            "id": 2,
+                            "options": {
+                              "(gogoproto.nullable)": false
+                            },
+                            "comment": "commitment root (i.e app hash)"
+                          },
+                          "nextValidatorsHash": {
+                            "type": "bytes",
+                            "id": 3,
+                            "options": {
+                              "(gogoproto.casttype)": "github.com/tendermint/tendermint/libs/bytes.HexBytes",
+                              "(gogoproto.moretags)": "yaml:next_validators_hash"
+                            },
+                            "comment": null
+                          }
+                        },
+                        "comment": "ConsensusState defines the consensus state from Tendermint."
+                      },
+                      "Misbehaviour": {
+                        "options": {
+                          "(gogoproto.goproto_getters)": false
+                        },
+                        "fields": {
+                          "clientId": {
+                            "type": "string",
+                            "id": 1,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:client_id"
+                            },
+                            "comment": null
+                          },
+                          "header_1": {
+                            "type": "Header",
+                            "id": 2,
+                            "options": {
+                              "(gogoproto.customname)": "Header1",
+                              "(gogoproto.moretags)": "yaml:header_1"
+                            },
+                            "comment": null
+                          },
+                          "header_2": {
+                            "type": "Header",
+                            "id": 3,
+                            "options": {
+                              "(gogoproto.customname)": "Header2",
+                              "(gogoproto.moretags)": "yaml:header_2"
+                            },
+                            "comment": null
+                          }
+                        },
+                        "comment": "Misbehaviour is a wrapper over two conflicting Headers\nthat implements Misbehaviour interface expected by ICS-02"
+                      },
+                      "Header": {
+                        "fields": {
+                          "signedHeader": {
+                            "type": ".tendermint.types.SignedHeader",
+                            "id": 1,
+                            "options": {
+                              "(gogoproto.embed)": true,
+                              "(gogoproto.moretags)": "yaml:signed_header"
+                            },
+                            "comment": null
+                          },
+                          "validatorSet": {
+                            "type": ".tendermint.types.ValidatorSet",
+                            "id": 2,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:validator_set"
+                            },
+                            "comment": null
+                          },
+                          "trustedHeight": {
+                            "type": "ibc.core.client.v1.Height",
+                            "id": 3,
+                            "options": {
+                              "(gogoproto.nullable)": false,
+                              "(gogoproto.moretags)": "yaml:trusted_height"
+                            },
+                            "comment": null
+                          },
+                          "trustedValidators": {
+                            "type": ".tendermint.types.ValidatorSet",
+                            "id": 4,
+                            "options": {
+                              "(gogoproto.moretags)": "yaml:trusted_validators"
+                            },
+                            "comment": null
+                          }
+                        },
+                        "comment": "Header defines the Tendermint client consensus Header.\nIt encapsulates all the information necessary to update from a trusted\nTendermint ConsensusState. The inclusion of TrustedHeight and\nTrustedValidators allows this update to process correctly, so long as the\nConsensusState for the TrustedHeight exists, this removes race conditions\namong relayers The SignedHeader and ValidatorSet are the new untrusted update\nfields for the client. The TrustedHeight is the height of a stored\nConsensusState on the client that will be used to verify the new untrusted\nheader. The Trusted ConsensusState must be within the unbonding period of\ncurrent time in order to correctly verify, and the TrustedValidators must\nhash to TrustedConsensusState.NextValidatorsHash since that is the last\ntrusted validator set at the TrustedHeight."
+                      },
+                      "Fraction": {
+                        "fields": {
+                          "numerator": {
+                            "type": "uint64",
+                            "id": 1,
+                            "comment": null
+                          },
+                          "denominator": {
+                            "type": "uint64",
+                            "id": 2,
+                            "comment": null
+                          }
+                        },
+                        "comment": "Fraction defines the protobuf message type for tmmath.Fraction that only\nsupports positive values."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
