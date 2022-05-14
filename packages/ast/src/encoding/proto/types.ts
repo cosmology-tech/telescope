@@ -195,18 +195,12 @@ export const getPackedWireNumber = (type) => {
 
 export const getTagNumber = (field: ProtoField) => {
     let wire = getWireNumber(field.type);
-    if (field.rule === 'repeated') {
-        wire = getPackedWireNumber(field.type);
-    }
     if (field.parsedType.type === 'Enum') {
         wire = 0;
     }
-
-    // for some reason I had to set wire = 2 for 
-    // if (field.rule === 'repeated') wire = 2;
-    // PinCodesProposal
-    // maybe it's a big in ts-proto, and we're correct?
-
+    if (field.rule === 'repeated') {
+        wire = 2;
+    }
     return ((field.id << 3) | wire) >>> 0;
 };
 
