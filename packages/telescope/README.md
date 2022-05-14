@@ -19,8 +19,7 @@ $ telescope
 Generally, you will want to run commands in this order:
 
 1. generate
-2. ts-proto
-3. transpile
+2. transpile
 ### generate
 
 Use the `generate` command to create a new repository with the default proto files. 
@@ -30,16 +29,6 @@ telescope generate
 cd ./your-new-project
 yarn 
 ```
-
-### ts-proto
-
-Next, run the `ts-proto` command
-
-```sh
-telescope ts-proto
-```
-
-You should now seem some `.ts` files generated in `./out`.
 ### transpile
 
 Finally, run the `transpile` command. This is where we add some `ts-proto` enhancements and output the final code.
@@ -57,19 +46,6 @@ import telescope from '@osmonauts/telescope';
 // specify proto path and out path
 telescope(protoPath, outPath);
 ```
-# Building with Telescope
-
-You will need the `protoc` command installed on your machine.
-
-## mac
-
-http://google.github.io/proto-lens/installing-protoc.html
-
-```
-brew install protobuf
-```
-
-
 ## Disclaimer
 
 AS DESCRIBED IN THE OSMOSIS LICENSES, THE SOFTWARE IS PROVIDED “AS IS”, AT YOUR OWN RISK, AND WITHOUT WARRANTIES OF ANY KIND.

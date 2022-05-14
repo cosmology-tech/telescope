@@ -1,17 +1,12 @@
-# Telescope 🔭
-
+# @osmonauts/telescope
 ## Babel for the Cosmos
 
 A TypeScript Transpiler for Cosmos Protobufs
-
 
 <p align="center">
   <img width="220" src="https://user-images.githubusercontent.com/545047/163644159-e5e5c22b-ad60-421e-aabd-31f06d3e3f4d.png">
 </p>
 
-```
-npm install -g @osmonauts/telescope
-```
 
 ```
 $ telescope
@@ -24,8 +19,7 @@ $ telescope
 Generally, you will want to run commands in this order:
 
 1. generate
-2. ts-proto
-3. transpile
+2. transpile
 ### generate
 
 Use the `generate` command to create a new repository with the default proto files. 
@@ -35,16 +29,6 @@ telescope generate
 cd ./your-new-project
 yarn 
 ```
-
-### ts-proto
-
-Next, run the `ts-proto` command
-
-```sh
-telescope ts-proto
-```
-
-You should now seem some `.ts` files generated in `./out`.
 ### transpile
 
 Finally, run the `transpile` command. This is where we add some `ts-proto` enhancements and output the final code.
@@ -62,19 +46,6 @@ import telescope from '@osmonauts/telescope';
 // specify proto path and out path
 telescope(protoPath, outPath);
 ```
-# Building with Telescope
-
-You will need the `protoc` command installed on your machine.
-
-## mac
-
-http://google.github.io/proto-lens/installing-protoc.html
-
-```
-brew install protobuf
-```
-
-
 ## Disclaimer
 
 AS DESCRIBED IN THE OSMOSIS LICENSES, THE SOFTWARE IS PROVIDED “AS IS”, AT YOUR OWN RISK, AND WITHOUT WARRANTIES OF ANY KIND.
