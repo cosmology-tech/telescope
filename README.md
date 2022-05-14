@@ -13,7 +13,6 @@ $ telescope
 ? [cmd] what do you want to do? (Use arrow keys or type to search)
 ❯ generate
   transpile
-  ts-proto
 ```
 
 Generally, you will want to run commands in this order:
@@ -31,7 +30,7 @@ yarn
 ```
 ### transpile
 
-Finally, run the `transpile` command. This is where we add some `ts-proto` enhancements and output the final code.
+Finally, run the `transpile` command. 
 
 ```sh
 telescope transpile
