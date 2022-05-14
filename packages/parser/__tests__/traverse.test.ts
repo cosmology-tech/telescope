@@ -58,7 +58,7 @@ it('google/api/expr/v1alpha1/checked', () => {
 });
 
 
-it.only('Record', () => {
+it('Record', () => {
   const ref = store.findProto('cosmos/crypto/keyring/v1/record.proto');
   const res = traverse(store, ref);
   const Record = getNested(res, [
@@ -68,11 +68,5 @@ it.only('Record', () => {
     'v1',
     'Record'
   ]);
-  // console.log(JSON.stringify(Record, null, 2));
-  // console.log(Record)
-  // KEY NOTICE: why no nested
-  // between Record and Ledger??? WTF
   expect(Object.keys(Record.Ledger.fields).length).toBe(1);
-
-  // expect(res).toMatchSnapshot();
 });
