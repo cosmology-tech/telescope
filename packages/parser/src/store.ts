@@ -3,7 +3,7 @@ import { parse } from 'protobufjs';
 import { readFileSync } from 'fs';
 import { join, resolve as pathResolve } from 'path';
 import { ProtoDep, ProtoRef, ProtoRoot } from './types';
-import { getNestedProto } from './utils';
+import { getNestedProto, getPackageAndNestedFromStr } from './utils';
 import { traverse } from './traverse';
 import { lookupAny } from './lookup';
 
@@ -20,6 +20,7 @@ export class ProtoStore {
     protoDir: string;
     deps: ProtoDep[];
     protos: ProtoRef[];
+    packages: string[];
 
     _traversed: boolean = false;
 
@@ -57,6 +58,26 @@ export class ProtoStore {
         });
         this.protos = protos;
         return protos;
+    }
+
+    getPackages(): string[] {
+        if (this.packages) return this.packages;
+        this.packages = this.getProtos().reduce((m, ref) => {
+            return [...new Set([...m, ref.proto.package])];
+        }, []);
+        // LONGEST strings first, for better matching
+        this.packages = this.packages.sort((a, b) => {
+            return b.length - a.length;
+        })
+        return this.packages;
+    }
+
+    parseScope(type: string) {
+        const pkgs = this.getPackages();
+        for (let pkg of pkgs) {
+            const found = getPackageAndNestedFromStr(type, pkg);
+            if (found) return found;
+        }
     }
 
     getDeps(): ProtoDep[] {

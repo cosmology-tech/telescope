@@ -12,13 +12,22 @@ export interface ImportUsage {
     type: 'typeImport' | 'toJSONEnum' | 'fromJSONEnum';
     name: string;
     import: string;
+    importedAs?: string;
 }
 export class GenericParseContext implements ParseContext {
     imports: ImportUsage[] = [];
     utils: Record<string, boolean> = {};
+    store: ProtoStore;
+    ref: ProtoRef;
 
     addUtil(util) {
         this.utils[util] = true;
+    }
+
+    addImport(imp: ImportUsage) {
+        // some local lookups don't have an import (local proto-style lookups do)
+        if (!imp.import) return;
+        this.imports.push(imp)
     }
 
 }
@@ -61,13 +70,13 @@ export class AminoParseContext extends GenericParseContext implements ParseConte
             throw new Error('Undefined Symbol: ' + field.parsedType.name);
         }
 
-        if (lookup.import) {
-            this.imports.push({
+        this.addImport(
+            {
                 type: 'typeImport',
                 name: lookup.importedName,
                 import: lookup.import
-            })
-        }
+            }
+        )
 
         return lookup.obj;
     }
@@ -76,13 +85,11 @@ export class AminoParseContext extends GenericParseContext implements ParseConte
         const lookup = this.lookupTypeFromCurrentPath(field, currentProtoPath);
         const Enum = lookup.obj;
         const name = getEnumFromJsonName(getObjectName(Enum.name, Enum.scope));
-        if (lookup.import) {
-            this.imports.push({
-                type: 'fromJSONEnum',
-                name,
-                import: lookup.import
-            });
-        }
+        this.addImport({
+            type: 'fromJSONEnum',
+            name,
+            import: lookup.import
+        });
         return name;
     }
 
@@ -90,13 +97,11 @@ export class AminoParseContext extends GenericParseContext implements ParseConte
         const lookup = this.lookupTypeFromCurrentPath(field, currentProtoPath);
         const Enum = lookup.obj;
         const name = getEnumToJsonName(getObjectName(Enum.name, Enum.scope));
-        if (lookup.import) {
-            this.imports.push({
-                type: 'toJSONEnum',
-                name,
-                import: lookup.import
-            });
-        }
+        this.addImport({
+            type: 'toJSONEnum',
+            name,
+            import: lookup.import
+        });
         return name;
     }
 
@@ -116,25 +121,21 @@ export class ProtoParseContext extends GenericParseContext implements ParseConte
 
     getToEnum(field: ProtoField) {
         const name = getEnumToJsonName(getFieldsTypeName(field));
-        if (field.import) {
-            this.imports.push({
-                type: 'toJSONEnum',
-                name,
-                import: field.import
-            })
-        }
+        this.addImport({
+            type: 'toJSONEnum',
+            name,
+            import: field.import
+        });
         return name;
     }
 
     getFromEnum(field: ProtoField) {
         const fromJSONFuncName = getEnumFromJsonName(getFieldsTypeName(field));
-        if (field.import) {
-            this.imports.push({
-                type: 'fromJSONEnum',
-                name: fromJSONFuncName,
-                import: field.import
-            })
-        }
+        this.addImport({
+            type: 'fromJSONEnum',
+            name: fromJSONFuncName,
+            import: field.import
+        });
         return fromJSONFuncName;
     }
 
@@ -150,14 +151,12 @@ export class ProtoParseContext extends GenericParseContext implements ParseConte
 
             importedAs = names[field.import][name];
         }
-        if (field.import) {
-            this.imports.push({
-                type: 'typeImport',
-                name,
-                importedAs,
-                import: field.import
-            })
-        }
+        this.addImport({
+            type: 'typeImport',
+            name,
+            importedAs,
+            import: field.import
+        })
         return importedAs;
     }
 }

@@ -1,5 +1,6 @@
 import dotty from 'dotty';
 import { Service, Type, Enum, Root, Namespace } from 'protobufjs';
+import { ProtoStore } from './store';
 import { ProtoRoot } from './types';
 
 export const getNestedProto = (root: ProtoRoot) => {
@@ -16,6 +17,30 @@ export const getNestedProtoGeneric = (root: ProtoRoot, path: string[]) => {
 export const getNested = (root: ProtoRoot, path: string[]) => {
     const nestedPath = 'root.nested.' + path.join('.nested.') + '.nested';
     return dotty.get(root, nestedPath);
+};
+
+// https://github.com/protocolbuffers/protobuf/blob/main/src/google/protobuf/descriptor.cc#L3798-L3812
+export const lookupSymbolScopes = (name: string, relativeTo: string, list?: string[]) => {
+    // fully-qualified name
+    if (name.startsWith('.')) return [name.replace(/^\./, '')];
+
+    if (!list) list = [];
+    const relativeToParts = relativeTo.split('.');
+    // This first searches siblings of relative_to (pop off relative_to)
+    relativeToParts.pop();
+    const newName = [...relativeToParts, ...name.split('.')].join('.');
+    if (newName === name) return [...list, name];
+    return lookupSymbolScopes(name, relativeToParts.join('.'), [...list, newName]);
+};
+
+export const getPackageAndNestedFromStr = (type: string, pkg: string) => {
+    if (type.startsWith(pkg) && type.length > pkg.length) {
+        const nested = type.substring(pkg.length + 1);
+        return {
+            nested,
+            package: pkg
+        };
+    }
 };
 
 export const getServices = (root: ProtoRoot) => {

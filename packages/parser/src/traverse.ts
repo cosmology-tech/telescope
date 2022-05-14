@@ -1,8 +1,8 @@
 import { Service, Type, Field, Enum, Root, Namespace } from 'protobufjs';
-import { importLookup, protoImportLookup, lookup, lookupAny, lookupNested } from './lookup';
+import { importLookup, protoImportLookup, lookup, lookupAny, lookupNested, protoScopeImportLookup } from './lookup';
 import { ProtoStore } from './store';
 import { ProtoRoot, ProtoRef } from './types';
-import { instanceType, NATIVE_TYPES } from './utils';
+import { instanceType, lookupSymbolScopes, NATIVE_TYPES } from './utils';
 
 export const traverse = (store: ProtoStore, ref: ProtoRef) => {
     const imports = {};
@@ -47,6 +47,11 @@ export const traverse = (store: ProtoStore, ref: ProtoRef) => {
         })
         return m;
     }, {});
+    // just bc devs use proto syntax for types in the same file
+    // does not mean we need to import them
+    // delete any imports related to "this" file
+    delete obj.importNames[ref.filename];
+    delete obj.parsedImports[ref.filename];
     return obj;
 };
 
@@ -113,22 +118,43 @@ const traverseFields = (store: ProtoStore, ref: ProtoRef, obj: any, imports: obj
             return m;
         }
 
-        found = protoImportLookup(store, ref, field.type);
-        if (found) {
-            imports[found.import] = imports[found.import] || [];
-            imports[found.import] = [...new Set([...imports[found.import], found.name])];
-            m[key] = {
+        // found = protoImportLookup(store, ref, field.type);
+        // if (found) {
+        //     imports[found.import] = imports[found.import] || [];
+        //     imports[found.import] = [...new Set([...imports[found.import], found.name])];
+        //     m[key] = {
 
-                parsedType: instanceType(found.obj),
-                scopeType: 'protoImport',
-                scope: [found.package],
-                ...serialize(),
-                importedName: found.importedName,
-                import: found.import,
-            };
-            return m;
+        //         parsedType: instanceType(found.obj),
+        //         scopeType: 'protoImport',
+        //         scope: [found.package],
+        //         ...serialize(),
+        //         importedName: found.importedName,
+        //         import: found.import,
+        //     };
+        //     return m;
+        // }
+
+        // new scope lookup (TODO: replace above cases)
+        const typeNames = lookupSymbolScopes(field.type, ref.proto.package + '.dummy');
+        for (let lookupType of typeNames) {
+            found = protoScopeImportLookup(store, ref, lookupType);
+            if (found) {
+                imports[found.import] = imports[found.import] || [];
+                imports[found.import] = [...new Set([...imports[found.import], found.name])];
+                m[key] = {
+
+                    parsedType: instanceType(found.obj),
+                    scopeType: 'protoImport',
+                    scope: found.obj.scope ? found.obj.scope : [found.package],
+                    ...serialize(),
+                    importedName: found.importedName,
+                    import: found.import,
+                };
+                return m;
+            }
         }
 
+        console.warn(`${field.type} NOT FOUND from ${ref.filename} in ${ref.proto.package}`);
         return m;
     }, {});
 };
@@ -154,6 +180,12 @@ const traverseType = (
         exports[obj.name] = exports[obj.name] || [];
         exports[obj.name] = true;
     }
+
+    // if (obj.name === 'Record') {
+    //     console.log(obj.nested?.Ledger?.fields?.path);
+    //     console.log(obj.nested?.Ledger?.fields?.path?.type);
+
+    // }
 
     const traversed = {
         type: 'Type',

@@ -139,5 +139,6 @@ export declare const getKeyTypeEntryName: (typeName: string, prop: string) => st
 export declare const getBaseCreateTypeFuncName: (name: any) => string;
 export declare const getOneOfs: (type: ProtoType) => string[];
 export declare const getFieldOptionality: (field: ProtoField, isOneOf: boolean) => boolean;
+export declare const getObjectNameOld: (name: string, scope?: string[]) => string;
 export declare const createProtoType: (context: ProtoParseContext, name: string, proto: ProtoType) => t.ExportNamedDeclaration;
 export declare const createCreateProtoType: (name: string, proto: ProtoType) => t.FunctionDeclaration;

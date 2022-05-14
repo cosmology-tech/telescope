@@ -1,6 +1,7 @@
 import { ProtoResolver, ProtoStore } from '../src/index'
 import { importLookup, lookup, protoImportLookup, traverse } from '../src/';
 const store = new ProtoStore(__dirname + '/../../../__fixtures__/chain1');
+import { getNested } from '../src/utils'
 
 it('osmosis/claim/v1beta1/params', () => {
   const ref = store.findProto('osmosis/claim/v1beta1/params.proto');
@@ -54,4 +55,24 @@ it('google/api/expr/v1alpha1/checked', () => {
   const ref = store.findProto('google/api/expr/v1alpha1/checked.proto');
   const res = traverse(store, ref);
   expect(res).toMatchSnapshot();
+});
+
+
+it.only('Record', () => {
+  const ref = store.findProto('cosmos/crypto/keyring/v1/record.proto');
+  const res = traverse(store, ref);
+  const Record = getNested(res, [
+    'cosmos',
+    'crypto',
+    'keyring',
+    'v1',
+    'Record'
+  ]);
+  // console.log(JSON.stringify(Record, null, 2));
+  // console.log(Record)
+  // KEY NOTICE: why no nested
+  // between Record and Ledger??? WTF
+  expect(Object.keys(Record.Ledger.fields).length).toBe(1);
+
+  // expect(res).toMatchSnapshot();
 });

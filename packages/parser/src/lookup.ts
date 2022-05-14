@@ -1,4 +1,5 @@
 import { traverse } from '@babel/core';
+import { parse } from 'protobufjs';
 import { ProtoStore } from './store';
 import { ProtoRef, ProtoRoot } from './types';
 import { getNested, getNestedProto } from './utils';
@@ -101,7 +102,10 @@ export const protoImportLookup = (
         // 1 ask all package files of package, e.g "google.protobuf"
         .filter(proto => proto.proto.package === packageName)
         // 2 cross-checking w the imports by filter()
-        .filter(proto => root.imports.includes(proto.filename))
+        .filter(proto =>
+            proto.filename === ref.filename ||
+            root.imports.includes(proto.filename)
+        )
         .map((ref: ProtoRef) => {
             return {
                 import: ref.filename,
@@ -119,6 +123,85 @@ export const protoImportLookup = (
             package: packageName
         }
     }
+};
+
+export const protoScopeImportLookup = (
+    store: ProtoStore,
+    ref: ProtoRef,
+    name: string
+): Lookup => {
+    const root = getRoot(ref);
+
+    // TODO pass in the imports and this ref
+    // e.g. only include packges of those files !!!!!
+    // this is currently looking at ALL protos 
+    const parsed = store.parseScope(name);
+    if (!parsed) {
+        return;
+    }
+
+    const packageName = parsed.package;
+    const nameAsArray = parsed.nested.split('.')
+
+    let lookupFn;
+    if (nameAsArray.length > 1) {
+        // nested!
+        const traversal = [...packageName.split('.'), ...nameAsArray];
+        const nameToLookFor = traversal.pop();
+        lookupFn = (ref: ProtoRef) => {
+            return {
+                import: ref.filename,
+                obj: lookupNested(ref, traversal, nameToLookFor, true)
+            }
+        };
+    } else {
+        // single lookup
+        lookupFn = (ref: ProtoRef) => {
+            return {
+                import: ref.filename,
+                obj: lookup(store, ref, parsed.nested, false)
+            }
+        };
+    }
+
+    const refs = store.getProtos()
+        // 1 ask all package files of package, e.g "google.protobuf"
+        .filter(proto => proto.proto.package === packageName)
+        // 2 cross-checking w the imports by filter()
+        .filter(proto =>
+            proto.filename === ref.filename ||
+            root.imports.includes(proto.filename)
+        );
+
+    for (let ref of refs) {
+        const found = lookupFn(ref);
+        if (found && found.obj) {
+            if (nameAsArray.length > 1) {
+                return {
+                    import: found.import,
+                    importType: 'protoImport',
+                    obj: found.obj,
+                    // not sure why scope doesn't handle this
+                    // so we're wrapping with underscores here
+                    // EXAMPLE: google/logging/v2/logging_metrics 
+                    // EXAMPLE: google/api/servicecontrol/v1/distribution
+                    importedName: nameAsArray.join('_'),
+                    name: nameAsArray.join('_'),
+                    package: packageName
+                }
+            } else {
+                return {
+                    import: found.import,
+                    importType: 'protoImport',
+                    obj: found.obj,
+                    importedName: name,
+                    name: parsed.nested,
+                    package: packageName
+                }
+            }
+        }
+    }
+
 };
 
 export const lookup = (

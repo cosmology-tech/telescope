@@ -1,6 +1,12 @@
 import { ProtoRoot } from './types';
 export declare const getNestedProto: (root: ProtoRoot) => any;
 export declare const getNestedProtoGeneric: (root: ProtoRoot, path: string[]) => any;
+export declare const getNested: (root: ProtoRoot, path: string[]) => any;
+export declare const lookupSymbolScopes: (name: string, relativeTo: string, list?: string[]) => any;
+export declare const getPackageAndNestedFromStr: (type: string, pkg: string) => {
+    nested: string;
+    package: string;
+};
 export declare const getServices: (root: ProtoRoot) => any[];
 export declare const getTypes: (root: ProtoRoot) => any[];
 export declare const getEnums: (root: ProtoRoot) => any[];

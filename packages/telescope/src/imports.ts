@@ -19,37 +19,52 @@ const importHashToArray = (hash: ImportHash): ImportObj[] => {
         }, [])
 };
 
-const getProtoImports = (context: TelescopeParseContext): ImportObj[] => {
+const getProtoImports = (
+    context: TelescopeParseContext,
+    filename: string
+): ImportObj[] => {
     return context.proto.imports
         .map(usage => {
-            const importPath = getRelativePath(context.ref.filename, usage.import);
+            if (filename === usage.import) return;
+            const importPath = getRelativePath(filename, usage.import);
             return {
                 type: 'import',
                 name: usage.name,
                 importAs: usage.importedAs,
                 path: importPath
             }
-        });
+        })
+        .filter(Boolean);
 };
 
-const getAminoImports = (context: TelescopeParseContext): ImportObj[] => {
+const getAminoImports = (
+    context: TelescopeParseContext,
+    filename: string
+): ImportObj[] => {
     return context.amino.imports
         .map(usage => {
-            const importPath = getRelativePath(context.ref.filename, usage.import);
+            if (filename === usage.import) return;
+            const importPath = getRelativePath(filename, usage.import);
             return {
                 type: 'import',
                 name: usage.name,
                 importAs: usage.importedAs,
                 path: importPath
             }
-        });
+        })
+        .filter(Boolean);
 };
 
-const getParsedImports = (context: TelescopeParseContext, parsedImports: ImportHash): ImportObj[] => {
+const getParsedImports = (
+    context: TelescopeParseContext,
+    parsedImports: ImportHash,
+    filename: string
+): ImportObj[] => {
     const imports = [];
     Object.entries(parsedImports ?? {})
         .forEach(([path, names]) => {
-            const importPath = getRelativePath(context.ref.filename, path);
+            if (filename === path) return;
+            const importPath = getRelativePath(filename, path);
             const aliases = context.ref?.traversed?.importNames?.[path];
             names.forEach(name => {
                 let importAs = name;
@@ -152,14 +167,11 @@ const convertUtilsToImports = (context: TelescopeParseContext): ImportObj[] => {
     return list;
 };
 
-// TODO potentially allow passing in of a custom ref/filepath
-// defaults to context ref, but allows for another path.
+export const buildAllImports = (context: TelescopeParseContext, allImports: ImportHash, filepath: string) => {
 
-export const buildAllImports = (context: TelescopeParseContext, allImports?: ImportHash) => {
-
-    const protoImports: ImportObj[] = getProtoImports(context);
-    const aminoImports: ImportObj[] = getAminoImports(context);
-    const parsedImports: ImportObj[] = getParsedImports(context, context.amino.ref.traversed.parsedImports);
+    const protoImports: ImportObj[] = getProtoImports(context, filepath);
+    const aminoImports: ImportObj[] = getAminoImports(context, filepath);
+    const parsedImports: ImportObj[] = getParsedImports(context, context.amino.ref.traversed.parsedImports, filepath);
     const additionalImports: ImportObj[] = importHashToArray(allImports);
     const utilities: ImportObj[] = convertUtilsToImports(context);
 

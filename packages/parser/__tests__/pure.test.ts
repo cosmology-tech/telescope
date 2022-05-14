@@ -42,7 +42,7 @@ message ExistenceProof {
     bytes key = 1;
     bytes value = 2;
     LeafOp leaf = 3;
-    repeated InnerOp path = 4;    
+    repeated LeafOp path = 4;    
 }
 
 message NonExistenceProof {

@@ -43,6 +43,19 @@ Object {
                     ],
                     "type": "LeafOp",
                   },
+                  "path": Object {
+                    "comment": null,
+                    "id": 4,
+                    "parsedType": Object {
+                      "name": "LeafOp",
+                      "type": "Type",
+                    },
+                    "rule": "repeated",
+                    "scope": Array [
+                      "cosmology.finance",
+                    ],
+                    "type": "LeafOp",
+                  },
                   "value": Object {
                     "comment": null,
                     "id": 2,

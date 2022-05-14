@@ -1,6 +1,5 @@
 import { ProtoStore, ProtoRef } from '@osmonauts/proto-parser';
 import {
-    importStmt,
     AminoParseContext,
     createAminoConverter,
     createCreateProtoType,
@@ -11,19 +10,13 @@ import {
     createProtoType,
     makeAminoTypeInterface,
     ProtoParseContext,
-    // client
-    createClient,
-    GenericParseContext,
     // registry 
     createTypeRegistry,
     createRegistryLoader,
     // helper
     createHelperObject,
-    ImportUsage
 } from '@osmonauts/ast';
 import { ServiceMutation, ServiceQuery } from './types';
-import { bundlePackages } from './bundle';
-import { TelescopeInput } from '.';
 
 export const getMutations = (mutations: ServiceMutation[]) => {
     return mutations.map((mutation: ServiceMutation) => {

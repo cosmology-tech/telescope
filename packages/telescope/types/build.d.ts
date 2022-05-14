@@ -8,6 +8,7 @@ export declare const getMutations: (mutations: ServiceMutation[]) => {
 }[];
 export declare const getAminoProtos: (mutations: ServiceMutation[], store: ProtoStore) => any[];
 export declare const buildBaseTypeScriptClass: (context: TelescopeParseContext, name: string, obj: any) => void;
+export declare const buildBaseTypeScriptInterface: (context: TelescopeParseContext, name: string, obj: any) => void;
 export declare const buildEnums: (context: TelescopeParseContext, name: string, obj: any) => void;
 export interface TelescopeParseContext {
     proto: ProtoParseContext;

@@ -69,7 +69,7 @@ export class TelescopeBuilder {
                 context.buildBase();
 
                 // build BASE file
-                const importStmts = buildAllImports(context);
+                const importStmts = buildAllImports(context, null, context.ref.filename);
                 const prog = []
                     .concat(importStmts)
                     .concat(context.body);
@@ -130,7 +130,7 @@ export class TelescopeBuilder {
                 // DONT RENAME THE REF! you'll need to make a new one!
                 // OR ELSE LATER the other build will use this name!
                 // ctx.ref.filename = filename;
-                const imports = buildAllImports(ctx, serviceImports);
+                const imports = buildAllImports(ctx, serviceImports, localname);
                 const prog = []
                     .concat(imports)
                     .concat(ctx.body);
@@ -172,7 +172,7 @@ export class TelescopeBuilder {
                     localname
                 );
 
-                const imports = buildAllImports(ctx, serviceImports);
+                const imports = buildAllImports(ctx, serviceImports, localname);
                 const prog = []
                     .concat(imports)
                     .concat(ctx.body);
