@@ -6,6 +6,8 @@ import { Exact, DeepPartial, Long, isSet } from "@osmonauts/helpers";
  * Values of intermediate expressions produced when evaluating expression.
  * Deprecated, use `EvalState` instead.
  */
+
+/** @deprecated */
 export interface Explain {
   /**
    * All of the observed values.

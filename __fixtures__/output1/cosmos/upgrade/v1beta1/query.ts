@@ -39,6 +39,8 @@ export interface QueryAppliedPlanResponse {
  * QueryUpgradedConsensusStateRequest is the request type for the Query/UpgradedConsensusState
  * RPC method.
  */
+
+/** @deprecated */
 export interface QueryUpgradedConsensusStateRequest {
   /**
    * last height of the current chain must be sent in request
@@ -51,6 +53,8 @@ export interface QueryUpgradedConsensusStateRequest {
  * QueryUpgradedConsensusStateResponse is the response type for the Query/UpgradedConsensusState
  * RPC method.
  */
+
+/** @deprecated */
 export interface QueryUpgradedConsensusStateResponse {
   /** Since: cosmos-sdk 0.43 */
   upgradedConsensusState: Uint8Array;

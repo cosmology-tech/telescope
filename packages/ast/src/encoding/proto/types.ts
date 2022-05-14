@@ -19,6 +19,10 @@ export interface ProtoEnum {
 export interface ProtoType {
     name?: string;
     oneofs?: { [key: string]: { oneof: string[], comment: string | undefined } },
+    options?: {
+        deprecated?: boolean;
+        "(cosmos_proto.implements_interface)"?: string;
+    },
     fields: {
         [key: string]: ProtoField;
     },
@@ -395,11 +399,20 @@ export const createProtoType = (
         )
     ));
 
+    const comments = [];
+
     if (proto.comment) {
-        declaration.leadingComments = [
-            commentBlock(proto.comment)
-        ];
+        comments.push(commentBlock(proto.comment));
     }
+
+    if (proto.options?.deprecated) {
+        comments.push(commentBlock('@deprecated'));
+    }
+
+    if (comments.length) {
+        declaration.leadingComments = comments;
+    }
+
 
     return declaration;
 };

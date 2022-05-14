@@ -49,6 +49,8 @@ export interface Plan {
  * Deprecated: This legacy proposal is deprecated in favor of Msg-based gov
  * proposals, see MsgSoftwareUpgrade.
  */
+
+/** @deprecated */
 export interface SoftwareUpgradeProposal {
   title: string;
   description: string;
@@ -61,6 +63,8 @@ export interface SoftwareUpgradeProposal {
  * Deprecated: This legacy proposal is deprecated in favor of Msg-based gov
  * proposals, see MsgCancelUpgrade.
  */
+
+/** @deprecated */
 export interface CancelSoftwareUpgradeProposal {
   title: string;
   description: string;

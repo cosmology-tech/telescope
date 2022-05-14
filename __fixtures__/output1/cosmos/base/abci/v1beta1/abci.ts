@@ -141,6 +141,8 @@ export interface SimulationResponse {
  * MsgData defines the data returned in a Result object during message
  * execution.
  */
+
+/** @deprecated */
 export interface MsgData {
   msgType: string;
   data: Uint8Array;

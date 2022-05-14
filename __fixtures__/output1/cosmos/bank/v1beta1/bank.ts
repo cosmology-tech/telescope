@@ -34,6 +34,8 @@ export interface Output {
  * amounts in the network.
  * This message is deprecated now that supply is indexed by denom.
  */
+
+/** @deprecated */
 export interface Supply {
   total: Coin[];
 }
