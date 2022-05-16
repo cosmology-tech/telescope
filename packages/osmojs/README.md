@@ -1,11 +1,11 @@
-# Osmosis Telescope 🔭
-# usage
+# OsmoJS 🔭
+## usage
 
 ```sh
 npm install osmojs
 ```
 
-## Osmosis Stargate Client
+### Osmosis Stargate Client
 
 Use `getSigningOsmosisClient` to get your `SigningStargateClient`, with the Osmosis protobuf messages full-loaded:
 
@@ -19,7 +19,7 @@ const client: SigningStargateClient = await getSigningOsmosisClient({
 });
 ```
 
-## Composing Messages
+### Composing Messages
 
 NOTE: this API is in beta, and will be changing over the coming weeks. Please send us feedback if you have ideas!
 
@@ -36,7 +36,7 @@ const msg = swapExactAmountIn({
 });
 ```
 
-## Advanced Usage
+### Advanced Usage
 
 [documentation](docs/readme.md)
 
