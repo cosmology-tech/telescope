@@ -1,4 +1,4 @@
-# @osmonauts/telescope
+# Telescope 🔭
 ## Babel for the Cosmos
 
 A TypeScript Transpiler for Cosmos Protobufs
