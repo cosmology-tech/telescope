@@ -38,7 +38,7 @@ const msg = swapExactAmountIn({
 
 ### Advanced Usage
 
-[documentation](docs/readme.md)
+[documentation](https://github.com/osmosis-labs/telescope/tree/master/packages/osmojs/docs)
 
 ## Disclaimer
 

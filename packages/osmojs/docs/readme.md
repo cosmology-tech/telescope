@@ -1,12 +1,12 @@
-# Osmosis Telescope 🔭
+# OsmoJS
 
-# usage
+## usage
 
 ```sh
-npm install @osmonauts/osmosis
+npm install osmojs
 ```
 
-## Manually registering types
+### Manually registering types
 
 ```js
 import {
@@ -16,7 +16,7 @@ import {
 import { Registry } from '@cosmjs/proto-signing';
 import { defaultRegistryTypes } from '@cosmjs/stargate';
 import { OfflineSigner } from '@cosmjs/proto-signing'
-import { osmosis } from '@osmonauts/osmosis';
+import { osmosis } from 'osmojs';
 
 export const getSigningOsmosisClient = async ({ rpcEndpoint, signer }: { rpcEndpoint: string, signer: OfflineSigner }) => {
   // registry
