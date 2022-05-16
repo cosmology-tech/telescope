@@ -1,9 +1,9 @@
 {
-  "name": "@osmonauts/osmosis",
+  "name": "osmojs",
   "version": "0.4.6",
   "description": "Typescript Protobuf Messages for Osmosis",
   "author": "Dan Lynch <pyramation@gmail.com>",
-  "homepage": "https://github.com/osmosis-labs/telescope/tree/master/packages/osmosis#readme",
+  "homepage": "https://github.com/osmosis-labs/telescope/tree/master/packages/osmojs#readme",
   "license": "SEE LICENSE IN LICENSE",
   "main": "main/index.js",
   "module": "module/index.js",
@@ -36,11 +36,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/osmosis-labs/telescope/tree/master/packages/osmosis"
+    "url": "https://github.com/osmosis-labs/telescope/tree/master/packages/osmojs"
   },
   "keywords": [],
   "bugs": {
-    "url": "https://github.com/osmosis-labs/telescope/tree/master/packages/osmosis/issues"
+    "url": "https://github.com/osmosis-labs/telescope/tree/master/packages/osmojs/issues"
   },
   "devDependencies": {
     "@babel/cli": "7.17.6",
