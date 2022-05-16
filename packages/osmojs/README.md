@@ -2,7 +2,7 @@
 # usage
 
 ```sh
-npm install @osmonauts/osmosis
+npm install osmojs
 ```
 
 ## Osmosis Stargate Client
@@ -10,7 +10,7 @@ npm install @osmonauts/osmosis
 Use `getSigningOsmosisClient` to get your `SigningStargateClient`, with the Osmosis protobuf messages full-loaded:
 
 ```js
-import { getSigningOsmosisClient } from '@osmonauts/osmosis';
+import { getSigningOsmosisClient } from 'osmojs';
 import { SigningStargateClient } from "@cosmjs/stargate";
 
 const client: SigningStargateClient = await getSigningOsmosisClient({
@@ -21,11 +21,13 @@ const client: SigningStargateClient = await getSigningOsmosisClient({
 
 ## Composing Messages
 
+NOTE: this API is in beta, and will be changing over the coming weeks. Please send us feedback if you have ideas!
+
 ```js
-import { osmosis } from '@osmonauts/osmosis';
+import * as gamm from 'osmojs/main/proto/osmosis/gamm/v1beta1/tx.registry';
 import { coin } from '@cosmjs/amino';
 
-const msg = osmosis.gamm.v1beta1.json.swapExactAmountIn({
+const msg = gamm.MessageComposer.withTypeUrl.swapExactAmountIn({
   sender,
   routes,
   tokenIn: coin(amount, denom),
@@ -35,7 +37,7 @@ const msg = osmosis.gamm.v1beta1.json.swapExactAmountIn({
 
 ## Advanced Usage
 
-[documentation](./docs/readme.md)
+[documentation](docs/readme.md)
 
 ## Disclaimer
 
