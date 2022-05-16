@@ -26,8 +26,9 @@ NOTE: this API is in beta, and will be changing over the coming weeks. Please se
 ```js
 import * as gamm from 'osmojs/main/proto/osmosis/gamm/v1beta1/tx.registry';
 import { coin } from '@cosmjs/amino';
+const { swapExactAmountIn } = gamm.MessageComposer.withTypeUrl;
 
-const msg = gamm.MessageComposer.withTypeUrl.swapExactAmountIn({
+const msg = swapExactAmountIn({
   sender,
   routes,
   tokenIn: coin(amount, denom),
