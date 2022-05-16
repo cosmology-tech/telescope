@@ -21,7 +21,7 @@ const client: SigningStargateClient = await getSigningOsmosisClient({
 
 ### Composing Messages
 
-NOTE: this API is in beta, and will be changing over the coming weeks. Please send us feedback if you have ideas!
+NOTE: this API is in alpha, and will be rapidly changing over the coming weeks. Please send us feedback!
 
 ```js
 import * as gamm from 'osmojs/main/proto/osmosis/gamm/v1beta1/tx.registry';
