@@ -25,6 +25,20 @@ telescope generate
 cd ./your-new-project
 yarn 
 ```
+### install
+
+To install chain protobufs, run the `install` command. 
+
+```sh
+telescope install
+```
+
+It's not necessary, but you may also specify specific packages, e.g.
+
+```sh
+telescope install @protobufs/cosmos @protobufs/osmosis
+```
+
 ### transpile
 
 To create the Typescript files, run the `transpile` command. 
