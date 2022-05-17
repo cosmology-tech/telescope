@@ -1172,7 +1172,7 @@ exports[`google/api/expr/v1alpha1/syntax Constant 1`] = `
     }
 
     if (message.durationValue !== undefined) {
-      Duration.encode(toDuration(message.durationValue), writer.uint32(66).fork()).ldelim();
+      Duration.encode(message.durationValue, writer.uint32(66).fork()).ldelim();
     }
 
     if (message.timestampValue !== undefined) {
@@ -1220,7 +1220,7 @@ exports[`google/api/expr/v1alpha1/syntax Constant 1`] = `
           break;
 
         case 8:
-          message.durationValue = fromDuration(Duration.decode(reader, reader.uint32()));
+          message.durationValue = Duration.decode(reader, reader.uint32());
           break;
 
         case 9:
