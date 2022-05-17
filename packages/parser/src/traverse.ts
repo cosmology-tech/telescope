@@ -181,12 +181,6 @@ const traverseType = (
         exports[obj.name] = true;
     }
 
-    // if (obj.name === 'Record') {
-    //     console.log(obj.nested?.Ledger?.fields?.path);
-    //     console.log(obj.nested?.Ledger?.fields?.path?.type);
-
-    // }
-
     const traversed = {
         type: 'Type',
         name: obj.name,

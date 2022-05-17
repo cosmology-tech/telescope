@@ -60,6 +60,9 @@ export const importLookup = (store: ProtoStore, ref: ProtoRef, name: string) => 
     const root = getRoot(ref);
     const objectsFromImports = root?.imports?.map(imp => {
         const ref = store.findProto(imp);
+        if (!ref) {
+            throw new Error(`missing proto import ${imp}`);
+        }
         return {
             name,
             importType: 'import',
