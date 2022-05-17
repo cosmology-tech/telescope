@@ -1,6 +1,5 @@
-import { ProtoResolver, ProtoStore, parseProto } from '../src/index'
-import { importLookup, lookup, protoImportLookup, traverse } from '../src/';
-
+import { ProtoStore, parseProto } from '../src/index'
+import { traverse } from '../src/';
 import { ProtoRef } from '../src/types';
 
 const store = new ProtoStore('');
