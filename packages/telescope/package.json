@@ -81,6 +81,7 @@
     "@babel/types": "7.17.0",
     "@osmonauts/ast": "^0.3.7",
     "@osmonauts/proto-parser": "^0.4.4",
+    "@types/parse-package-name": "0.1.0",
     "case": "1.6.3",
     "dargs": "7.0.0",
     "dotty": "0.1.2",
@@ -90,7 +91,9 @@
     "long": "^5.2.0",
     "minimist": "1.2.6",
     "mkdirp": "1.0.4",
+    "parse-package-name": "1.0.0",
     "protobufjs": "6.11.2",
+    "rimraf": "3.0.2",
     "shelljs": "0.8.5"
   }
 }

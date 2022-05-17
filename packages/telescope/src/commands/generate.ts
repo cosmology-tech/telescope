@@ -1,11 +1,12 @@
 import * as shell from 'shelljs';
 import { prompt } from '../prompt';
 import dargs from 'dargs';
+
 const glob = require('glob').sync;
 const fs = require('fs');
 const path = require('path');
-
 const repo = 'git@github.com:pyramation/tmpl-telescope-module.git';
+
 export default async argv => {
     if (!shell.which('git')) {
         shell.echo('Sorry, this script requires git');
