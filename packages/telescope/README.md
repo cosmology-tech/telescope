@@ -4,22 +4,18 @@
 A TypeScript Transpiler for Cosmos Protobufs
 
 <p align="center">
-  <img width="220" src="https://user-images.githubusercontent.com/545047/163644159-e5e5c22b-ad60-421e-aabd-31f06d3e3f4d.png">
+  <img width="220" src="https://user-images.githubusercontent.com/545047/168733397-8a11366d-eb06-4554-abfd-70f117fe284e.png">
 </p>
 
 
-```
-$ telescope
-? [cmd] what do you want to do? (Use arrow keys or type to search)
-❯ generate
-  transpile
-  
+## Quickstart
+
+Follow the instructions below to kick off your Telescope module.
+
+```sh
+npm install -g @osmonauts/telescope
 ```
 
-Generally, you will want to run commands in this order:
-
-1. generate
-2. transpile
 ### generate
 
 Use the `generate` command to create a new repository with the default proto files. 
@@ -31,13 +27,22 @@ yarn
 ```
 ### transpile
 
-Finally, run the `transpile` command. 
+To create the Typescript files, run the `transpile` command. 
 
 ```sh
 telescope transpile
 ```
 
 You should now seem some `.ts` files generated in `./src`. These are the real source files used in your application.
+
+### build
+
+Finally, run `buidl`.
+
+```sh
+yarn buidl
+```
+
 ## programatic usage
 
 ```js
