@@ -43,11 +43,19 @@ export default async (argv) => {
             type: 'checkbox',
             name: 'pkg',
             message:
-                'which chains do you want to support?',
+                'which packages do you want to support?',
             choices: [
+                {
+                    name: 'akash',
+                    value: '@protobufs/akash'
+                },
                 {
                     name: 'cosmos',
                     value: '@protobufs/cosmos'
+                },
+                {
+                    name: 'cosmwasm',
+                    value: '@protobufs/cosmwasm'
                 },
                 {
                     name: 'osmosis',
@@ -56,7 +64,11 @@ export default async (argv) => {
                 {
                     name: 'secret',
                     value: '@protobufs/secret'
-                }
+                },
+                {
+                    name: 'ibc',
+                    value: '@protobufs/ibc'
+                },
             ]
         }
     ], argv);
