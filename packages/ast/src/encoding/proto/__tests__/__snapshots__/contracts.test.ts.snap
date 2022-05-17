@@ -101,7 +101,7 @@ exports[`MsgExecuteContract interface 2`] = `
     const message = createBaseMsgExecuteContract();
     message.sender = object.sender ?? \\"\\";
     message.contract = object.contract ?? \\"\\";
-    message.msg = object.msg ?? new Uint8Array();
+    message.msg = toUtf8(JSON.stringify(object.msg ?? new Uint8Array()));
     message.funds = object.funds?.map(e => Coin.fromPartial(e)) || [];
     return message;
   }

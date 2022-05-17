@@ -29,6 +29,23 @@ const setNullishCoalescing = (prop: string, value: t.Expression): t.Statement =>
     ));
 };
 
+const toUtf8 = (value: t.Expression): t.Expression => {
+    return t.callExpression(
+        t.identifier('toUtf8'),
+        [
+            t.callExpression(
+                t.memberExpression(
+                    t.identifier('JSON'),
+                    t.identifier('stringify')
+                ),
+                [
+                    value
+                ]
+            )
+        ]
+    )
+};
+
 const setNotUndefinedAndNotNull = (
     prop: string,
     value: t.Expression,
@@ -178,6 +195,20 @@ export const fromPartial = {
             prop,
             getDefaultTSTypeFromProtoType(args.field, args.isOptional)
         );
+    },
+
+    // message.msg = toUtf8(JSON.stringify(object.msg ?? new Uint8Array()))
+    rawContractMessage(args: FromPartialMethod) {
+        args.context.addUtil('toUtf8');
+        const prop = args.field.name;
+        return setField(prop, toUtf8(t.logicalExpression(
+            '??',
+            t.memberExpression(
+                t.identifier('object'),
+                t.identifier(prop)
+            ),
+            getDefaultTSTypeFromProtoType(args.field, args.isOptional)
+        )));
     },
 
     // message.period = object.period ?? undefined;

@@ -65,6 +65,7 @@ export const fromPartialMethodFields = (context: ProtoParseContext, name: string
 
         }
 
+        // key types
         if (field.keyType) {
             switch (field.keyType) {
                 case 'string':
@@ -78,11 +79,17 @@ export const fromPartialMethodFields = (context: ProtoParseContext, name: string
             }
         }
 
+        // scalar types
         switch (field.type) {
             case 'string':
                 return fromPartial.string(args);
             case 'bytes':
-                return fromPartial.bytes(args);
+                switch (field.options?.['(gogoproto.casttype)']) {
+                    case 'RawContractMessage':
+                        return fromPartial.rawContractMessage(args);
+                    default:
+                        return fromPartial.bytes(args);
+                }
             case 'bool':
                 return fromPartial.bool(args);
             case 'double':
