@@ -1,4 +1,4 @@
-# @osmonauts/telescope
+# Telescope 🔭
 ## Babel for the Cosmos
 
 A TypeScript Transpiler for Cosmos Protobufs
@@ -13,6 +13,7 @@ $ telescope
 ? [cmd] what do you want to do? (Use arrow keys or type to search)
 ❯ generate
   transpile
+  
 ```
 
 Generally, you will want to run commands in this order:
