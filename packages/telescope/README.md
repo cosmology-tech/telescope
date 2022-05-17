@@ -4,7 +4,7 @@
 A TypeScript Transpiler for Cosmos Protobufs
 
 <p align="center">
-  <img width="220" src="https://user-images.githubusercontent.com/545047/168733397-8a11366d-eb06-4554-abfd-70f117fe284e.png">
+  <img width="220" src="https://user-images.githubusercontent.com/545047/168734581-3c945a1d-0efa-468c-b5de-447c894de519.png">
 </p>
 
 
