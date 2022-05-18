@@ -26,6 +26,75 @@ export declare namespace ibc {
     namespace applications {
         namespace transfer {
             const v1: {
+                registry: readonly [string, import("@cosmjs/proto-signing").GeneratedType][];
+                load: (protoRegistry: import("@cosmjs/proto-signing").Registry) => void;
+                MessageComposer: {
+                    encoded: {
+                        transfer(value: _156.MsgTransfer): {
+                            type_url: string;
+                            value: Uint8Array;
+                        };
+                    };
+                    withTypeUrl: {
+                        transfer(value: _156.MsgTransfer): {
+                            typeUrl: string;
+                            value: _156.MsgTransfer;
+                        };
+                    };
+                    toJSON: {
+                        transfer(value: _156.MsgTransfer): {
+                            typeUrl: string;
+                            value: unknown;
+                        };
+                    };
+                    fromJSON: {
+                        transfer(value: any): {
+                            typeUrl: string;
+                            value: _156.MsgTransfer;
+                        };
+                    };
+                    fromPartial: {
+                        transfer(value: _156.MsgTransfer): {
+                            typeUrl: string;
+                            value: _156.MsgTransfer;
+                        };
+                    };
+                };
+                AminoConverter: {
+                    "/ibc.applications.transfer.v1.MsgTransfer": {
+                        aminoType: string;
+                        toAmino: ({ sourcePort, sourceChannel, token, sender, receiver, timeoutHeight, timeoutTimestamp }: _156.MsgTransfer) => {
+                            source_port: string;
+                            source_channel: string;
+                            token: {
+                                denom: string;
+                                amount: string;
+                            };
+                            sender: string;
+                            receiver: string;
+                            timeout_height: {
+                                revision_number: string;
+                                revision_height: string;
+                            };
+                            timeout_timestamp: string;
+                        };
+                        fromAmino: ({ source_port, source_channel, token, sender, receiver, timeout_height, timeout_timestamp }: {
+                            source_port: string;
+                            source_channel: string;
+                            token: {
+                                denom: string;
+                                amount: string;
+                            };
+                            sender: string;
+                            receiver: string;
+                            timeout_height: {
+                                revision_number: string;
+                                revision_height: string;
+                            };
+                            timeout_timestamp: string;
+                        }) => _156.MsgTransfer;
+                    };
+                };
                 MsgTransfer: {
                     encode(message: _156.MsgTransfer, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
                     decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _156.MsgTransfer;
@@ -288,6 +357,572 @@ export declare namespace ibc {
     namespace core {
         namespace channel {
             const v1: {
+                registry: readonly [string, import("@cosmjs/proto-signing").GeneratedType][];
+                load: (protoRegistry: import("@cosmjs/proto-signing").Registry) => void;
+                MessageComposer: {
+                    encoded: {
+                        channelOpenInit(value: _161.MsgChannelOpenInit): {
+                            type_url: string;
+                            value: Uint8Array;
+                        };
+                        channelOpenTry(value: _161.MsgChannelOpenTry): {
+                            type_url: string;
+                            value: Uint8Array;
+                        };
+                        channelOpenAck(value: _161.MsgChannelOpenAck): {
+                            type_url: string;
+                            value: Uint8Array;
+                        };
+                        channelOpenConfirm(value: _161.MsgChannelOpenConfirm): {
+                            type_url: string;
+                            value: Uint8Array;
+                        };
+                        channelCloseInit(value: _161.MsgChannelCloseInit): {
+                            type_url: string;
+                            value: Uint8Array;
+                        };
+                        channelCloseConfirm(value: _161.MsgChannelCloseConfirm): {
+                            type_url: string;
+                            value: Uint8Array;
+                        };
+                        recvPacket(value: _161.MsgRecvPacket): {
+                            type_url: string;
+                            value: Uint8Array;
+                        };
+                        timeout(value: _161.MsgTimeout): {
+                            type_url: string;
+                            value: Uint8Array;
+                        };
+                        timeoutOnClose(value: _161.MsgTimeoutOnClose): {
+                            type_url: string;
+                            value: Uint8Array;
+                        };
+                        acknowledgement(value: _161.MsgAcknowledgement): {
+                            type_url: string;
+                            value: Uint8Array;
+                        };
+                    };
+                    withTypeUrl: {
+                        channelOpenInit(value: _161.MsgChannelOpenInit): {
+                            typeUrl: string;
+                            value: _161.MsgChannelOpenInit;
+                        };
+                        channelOpenTry(value: _161.MsgChannelOpenTry): {
+                            typeUrl: string;
+                            value: _161.MsgChannelOpenTry;
+                        };
+                        channelOpenAck(value: _161.MsgChannelOpenAck): {
+                            typeUrl: string;
+                            value: _161.MsgChannelOpenAck;
+                        };
+                        channelOpenConfirm(value: _161.MsgChannelOpenConfirm): {
+                            typeUrl: string;
+                            value: _161.MsgChannelOpenConfirm;
+                        };
+                        channelCloseInit(value: _161.MsgChannelCloseInit): {
+                            typeUrl: string;
+                            value: _161.MsgChannelCloseInit;
+                        };
+                        channelCloseConfirm(value: _161.MsgChannelCloseConfirm): {
+                            typeUrl: string;
+                            value: _161.MsgChannelCloseConfirm;
+                        };
+                        recvPacket(value: _161.MsgRecvPacket): {
+                            typeUrl: string;
+                            value: _161.MsgRecvPacket;
+                        };
+                        timeout(value: _161.MsgTimeout): {
+                            typeUrl: string;
+                            value: _161.MsgTimeout;
+                        };
+                        timeoutOnClose(value: _161.MsgTimeoutOnClose): {
+                            typeUrl: string;
+                            value: _161.MsgTimeoutOnClose;
+                        };
+                        acknowledgement(value: _161.MsgAcknowledgement): {
+                            typeUrl: string;
+                            value: _161.MsgAcknowledgement;
+                        };
+                    };
+                    toJSON: {
+                        channelOpenInit(value: _161.MsgChannelOpenInit): {
+                            typeUrl: string;
+                            value: unknown;
+                        };
+                        channelOpenTry(value: _161.MsgChannelOpenTry): {
+                            typeUrl: string;
+                            value: unknown;
+                        };
+                        channelOpenAck(value: _161.MsgChannelOpenAck): {
+                            typeUrl: string;
+                            value: unknown;
+                        };
+                        channelOpenConfirm(value: _161.MsgChannelOpenConfirm): {
+                            typeUrl: string;
+                            value: unknown;
+                        };
+                        channelCloseInit(value: _161.MsgChannelCloseInit): {
+                            typeUrl: string;
+                            value: unknown;
+                        };
+                        channelCloseConfirm(value: _161.MsgChannelCloseConfirm): {
+                            typeUrl: string;
+                            value: unknown;
+                        };
+                        recvPacket(value: _161.MsgRecvPacket): {
+                            typeUrl: string;
+                            value: unknown;
+                        };
+                        timeout(value: _161.MsgTimeout): {
+                            typeUrl: string;
+                            value: unknown;
+                        };
+                        timeoutOnClose(value: _161.MsgTimeoutOnClose): {
+                            typeUrl: string;
+                            value: unknown;
+                        };
+                        acknowledgement(value: _161.MsgAcknowledgement): {
+                            typeUrl: string;
+                            value: unknown;
+                        };
+                    };
+                    fromJSON: {
+                        channelOpenInit(value: any): {
+                            typeUrl: string;
+                            value: _161.MsgChannelOpenInit;
+                        };
+                        channelOpenTry(value: any): {
+                            typeUrl: string;
+                            value: _161.MsgChannelOpenTry;
+                        };
+                        channelOpenAck(value: any): {
+                            typeUrl: string;
+                            value: _161.MsgChannelOpenAck;
+                        };
+                        channelOpenConfirm(value: any): {
+                            typeUrl: string;
+                            value: _161.MsgChannelOpenConfirm;
+                        };
+                        channelCloseInit(value: any): {
+                            typeUrl: string;
+                            value: _161.MsgChannelCloseInit;
+                        };
+                        channelCloseConfirm(value: any): {
+                            typeUrl: string;
+                            value: _161.MsgChannelCloseConfirm;
+                        };
+                        recvPacket(value: any): {
+                            typeUrl: string;
+                            value: _161.MsgRecvPacket;
+                        };
+                        timeout(value: any): {
+                            typeUrl: string;
+                            value: _161.MsgTimeout;
+                        };
+                        timeoutOnClose(value: any): {
+                            typeUrl: string;
+                            value: _161.MsgTimeoutOnClose;
+                        };
+                        acknowledgement(value: any): {
+                            typeUrl: string;
+                            value: _161.MsgAcknowledgement;
+                        };
+                    };
+                    fromPartial: {
+                        channelOpenInit(value: _161.MsgChannelOpenInit): {
+                            typeUrl: string;
+                            value: _161.MsgChannelOpenInit;
+                        };
+                        channelOpenTry(value: _161.MsgChannelOpenTry): {
+                            typeUrl: string;
+                            value: _161.MsgChannelOpenTry;
+                        };
+                        channelOpenAck(value: _161.MsgChannelOpenAck): {
+                            typeUrl: string;
+                            value: _161.MsgChannelOpenAck;
+                        };
+                        channelOpenConfirm(value: _161.MsgChannelOpenConfirm): {
+                            typeUrl: string;
+                            value: _161.MsgChannelOpenConfirm;
+                        };
+                        channelCloseInit(value: _161.MsgChannelCloseInit): {
+                            typeUrl: string;
+                            value: _161.MsgChannelCloseInit;
+                        };
+                        channelCloseConfirm(value: _161.MsgChannelCloseConfirm): {
+                            typeUrl: string;
+                            value: _161.MsgChannelCloseConfirm;
+                        };
+                        recvPacket(value: _161.MsgRecvPacket): {
+                            typeUrl: string;
+                            value: _161.MsgRecvPacket;
+                        };
+                        timeout(value: _161.MsgTimeout): {
+                            typeUrl: string;
+                            value: _161.MsgTimeout;
+                        };
+                        timeoutOnClose(value: _161.MsgTimeoutOnClose): {
+                            typeUrl: string;
+                            value: _161.MsgTimeoutOnClose;
+                        };
+                        acknowledgement(value: _161.MsgAcknowledgement): {
+                            typeUrl: string;
+                            value: _161.MsgAcknowledgement;
+                        };
+                    };
+                };
+                AminoConverter: {
+                    "/ibc.core.channel.v1.MsgChannelOpenInit": {
+                        aminoType: string;
+                        toAmino: ({ portId, channel, signer }: _161.MsgChannelOpenInit) => {
+                            port_id: string;
+                            channel: {
+                                state: number;
+                                ordering: number;
+                                counterparty: {
+                                    port_id: string;
+                                    channel_id: string;
+                                };
+                                connection_hops: string[];
+                                version: string;
+                            };
+                            signer: string;
+                        };
+                        fromAmino: ({ port_id, channel, signer }: {
+                            port_id: string;
+                            channel: {
+                                state: number;
+                                ordering: number;
+                                counterparty: {
+                                    port_id: string;
+                                    channel_id: string;
+                                };
+                                connection_hops: string[];
+                                version: string;
+                            };
+                            signer: string;
+                        }) => _161.MsgChannelOpenInit;
+                    };
+                    "/ibc.core.channel.v1.MsgChannelOpenTry": {
+                        aminoType: string;
+                        toAmino: ({ portId, previousChannelId, channel, counterpartyVersion, proofInit, proofHeight, signer }: _161.MsgChannelOpenTry) => {
+                            port_id: string;
+                            previous_channel_id: string;
+                            channel: {
+                                state: number;
+                                ordering: number;
+                                counterparty: {
+                                    port_id: string;
+                                    channel_id: string;
+                                };
+                                connection_hops: string[];
+                                version: string;
+                            };
+                            counterparty_version: string;
+                            proof_init: Uint8Array;
+                            proof_height: {
+                                revision_number: string;
+                                revision_height: string;
+                            };
+                            signer: string;
+                        };
+                        fromAmino: ({ port_id, previous_channel_id, channel, counterparty_version, proof_init, proof_height, signer }: {
+                            port_id: string;
+                            previous_channel_id: string;
+                            channel: {
+                                state: number;
+                                ordering: number;
+                                counterparty: {
+                                    port_id: string;
+                                    channel_id: string;
+                                };
+                                connection_hops: string[];
+                                version: string;
+                            };
+                            counterparty_version: string;
+                            proof_init: Uint8Array;
+                            proof_height: {
+                                revision_number: string;
+                                revision_height: string;
+                            };
+                            signer: string;
+                        }) => _161.MsgChannelOpenTry;
+                    };
+                    "/ibc.core.channel.v1.MsgChannelOpenAck": {
+                        aminoType: string;
+                        toAmino: ({ portId, channelId, counterpartyChannelId, counterpartyVersion, proofTry, proofHeight, signer }: _161.MsgChannelOpenAck) => {
+                            port_id: string;
+                            channel_id: string;
+                            counterparty_channel_id: string;
+                            counterparty_version: string;
+                            proof_try: Uint8Array;
+                            proof_height: {
+                                revision_number: string;
+                                revision_height: string;
+                            };
+                            signer: string;
+                        };
+                        fromAmino: ({ port_id, channel_id, counterparty_channel_id, counterparty_version, proof_try, proof_height, signer }: {
+                            port_id: string;
+                            channel_id: string;
+                            counterparty_channel_id: string;
+                            counterparty_version: string;
+                            proof_try: Uint8Array;
+                            proof_height: {
+                                revision_number: string;
+                                revision_height: string;
+                            };
+                            signer: string;
+                        }) => _161.MsgChannelOpenAck;
+                    };
+                    "/ibc.core.channel.v1.MsgChannelOpenConfirm": {
+                        aminoType: string;
+                        toAmino: ({ portId, channelId, proofAck, proofHeight, signer }: _161.MsgChannelOpenConfirm) => {
+                            port_id: string;
+                            channel_id: string;
+                            proof_ack: Uint8Array;
+                            proof_height: {
+                                revision_number: string;
+                                revision_height: string;
+                            };
+                            signer: string;
+                        };
+                        fromAmino: ({ port_id, channel_id, proof_ack, proof_height, signer }: {
+                            port_id: string;
+                            channel_id: string;
+                            proof_ack: Uint8Array;
+                            proof_height: {
+                                revision_number: string;
+                                revision_height: string;
+                            };
+                            signer: string;
+                        }) => _161.MsgChannelOpenConfirm;
+                    };
+                    "/ibc.core.channel.v1.MsgChannelCloseInit": {
+                        aminoType: string;
+                        toAmino: ({ portId, channelId, signer }: _161.MsgChannelCloseInit) => {
+                            port_id: string;
+                            channel_id: string;
+                            signer: string;
+                        };
+                        fromAmino: ({ port_id, channel_id, signer }: {
+                            port_id: string;
+                            channel_id: string;
+                            signer: string;
+                        }) => _161.MsgChannelCloseInit;
+                    };
+                    "/ibc.core.channel.v1.MsgChannelCloseConfirm": {
+                        aminoType: string;
+                        toAmino: ({ portId, channelId, proofInit, proofHeight, signer }: _161.MsgChannelCloseConfirm) => {
+                            port_id: string;
+                            channel_id: string;
+                            proof_init: Uint8Array;
+                            proof_height: {
+                                revision_number: string;
+                                revision_height: string;
+                            };
+                            signer: string;
+                        };
+                        fromAmino: ({ port_id, channel_id, proof_init, proof_height, signer }: {
+                            port_id: string;
+                            channel_id: string;
+                            proof_init: Uint8Array;
+                            proof_height: {
+                                revision_number: string;
+                                revision_height: string;
+                            };
+                            signer: string;
+                        }) => _161.MsgChannelCloseConfirm;
+                    };
+                    "/ibc.core.channel.v1.MsgRecvPacket": {
+                        aminoType: string;
+                        toAmino: ({ packet, proofCommitment, proofHeight, signer }: _161.MsgRecvPacket) => {
+                            packet: {
+                                sequence: string;
+                                source_port: string;
+                                source_channel: string;
+                                destination_port: string;
+                                destination_channel: string;
+                                data: Uint8Array;
+                                timeout_height: {
+                                    revision_number: string;
+                                    revision_height: string;
+                                };
+                                timeout_timestamp: string;
+                            };
+                            proof_commitment: Uint8Array;
+                            proof_height: {
+                                revision_number: string;
+                                revision_height: string;
+                            };
+                            signer: string;
+                        };
+                        fromAmino: ({ packet, proof_commitment, proof_height, signer }: {
+                            packet: {
+                                sequence: string;
+                                source_port: string;
+                                source_channel: string;
+                                destination_port: string;
+                                destination_channel: string;
+                                data: Uint8Array;
+                                timeout_height: {
+                                    revision_number: string;
+                                    revision_height: string;
+                                };
+                                timeout_timestamp: string;
+                            };
+                            proof_commitment: Uint8Array;
+                            proof_height: {
+                                revision_number: string;
+                                revision_height: string;
+                            };
+                            signer: string;
+                        }) => _161.MsgRecvPacket;
+                    };
+                    "/ibc.core.channel.v1.MsgTimeout": {
+                        aminoType: string;
+                        toAmino: ({ packet, proofUnreceived, proofHeight, nextSequenceRecv, signer }: _161.MsgTimeout) => {
+                            packet: {
+                                sequence: string;
+                                source_port: string;
+                                source_channel: string;
+                                destination_port: string;
+                                destination_channel: string;
+                                data: Uint8Array;
+                                timeout_height: {
+                                    revision_number: string;
+                                    revision_height: string;
+                                };
+                                timeout_timestamp: string;
+                            };
+                            proof_unreceived: Uint8Array;
+                            proof_height: {
+                                revision_number: string;
+                                revision_height: string;
+                            };
+                            next_sequence_recv: string;
+                            signer: string;
+                        };
+                        fromAmino: ({ packet, proof_unreceived, proof_height, next_sequence_recv, signer }: {
+                            packet: {
+                                sequence: string;
+                                source_port: string;
+                                source_channel: string;
+                                destination_port: string;
+                                destination_channel: string;
+                                data: Uint8Array;
+                                timeout_height: {
+                                    revision_number: string;
+                                    revision_height: string;
+                                };
+                                timeout_timestamp: string;
+                            };
+                            proof_unreceived: Uint8Array;
+                            proof_height: {
+                                revision_number: string;
+                                revision_height: string;
+                            };
+                            next_sequence_recv: string;
+                            signer: string;
+                        }) => _161.MsgTimeout;
+                    };
+                    "/ibc.core.channel.v1.MsgTimeoutOnClose": {
+                        aminoType: string;
+                        toAmino: ({ packet, proofUnreceived, proofClose, proofHeight, nextSequenceRecv, signer }: _161.MsgTimeoutOnClose) => {
+                            packet: {
+                                sequence: string;
+                                source_port: string;
+                                source_channel: string;
+                                destination_port: string;
+                                destination_channel: string;
+                                data: Uint8Array;
+                                timeout_height: {
+                                    revision_number: string;
+                                    revision_height: string;
+                                };
+                                timeout_timestamp: string;
+                            };
+                            proof_unreceived: Uint8Array;
+                            proof_close: Uint8Array;
+                            proof_height: {
+                                revision_number: string;
+                                revision_height: string;
+                            };
+                            next_sequence_recv: string;
+                            signer: string;
+                        };
+                        fromAmino: ({ packet, proof_unreceived, proof_close, proof_height, next_sequence_recv, signer }: {
+                            packet: {
+                                sequence: string;
+                                source_port: string;
+                                source_channel: string;
+                                destination_port: string;
+                                destination_channel: string;
+                                data: Uint8Array;
+                                timeout_height: {
+                                    revision_number: string;
+                                    revision_height: string;
+                                };
+                                timeout_timestamp: string;
+                            };
+                            proof_unreceived: Uint8Array;
+                            proof_close: Uint8Array;
+                            proof_height: {
+                                revision_number: string;
+                                revision_height: string;
+                            };
+                            next_sequence_recv: string;
+                            signer: string;
+                        }) => _161.MsgTimeoutOnClose;
+                    };
+                    "/ibc.core.channel.v1.MsgAcknowledgement": {
+                        aminoType: string;
+                        toAmino: ({ packet, acknowledgement, proofAcked, proofHeight, signer }: _161.MsgAcknowledgement) => {
+                            packet: {
+                                sequence: string;
+                                source_port: string;
+                                source_channel: string;
+                                destination_port: string;
+                                destination_channel: string;
+                                data: Uint8Array;
+                                timeout_height: {
+                                    revision_number: string;
+                                    revision_height: string;
+                                };
+                                timeout_timestamp: string;
+                            };
+                            acknowledgement: Uint8Array;
+                            proof_acked: Uint8Array;
+                            proof_height: {
+                                revision_number: string;
+                                revision_height: string;
+                            };
+                            signer: string;
+                        };
+                        fromAmino: ({ packet, acknowledgement, proof_acked, proof_height, signer }: {
+                            packet: {
+                                sequence: string;
+                                source_port: string;
+                                source_channel: string;
+                                destination_port: string;
+                                destination_channel: string;
+                                data: Uint8Array;
+                                timeout_height: {
+                                    revision_number: string;
+                                    revision_height: string;
+                                };
+                                timeout_timestamp: string;
+                            };
+                            acknowledgement: Uint8Array;
+                            proof_acked: Uint8Array;
+                            proof_height: {
+                                revision_number: string;
+                                revision_height: string;
+                            };
+                            signer: string;
+                        }) => _161.MsgAcknowledgement;
+                    };
+                };
                 MsgChannelOpenInit: {
                     encode(message: _161.MsgChannelOpenInit, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
                     decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _161.MsgChannelOpenInit;
@@ -2047,6 +2682,196 @@ export declare namespace ibc {
         }
         namespace client {
             const v1: {
+                registry: readonly [string, import("@cosmjs/proto-signing").GeneratedType][];
+                load: (protoRegistry: import("@cosmjs/proto-signing").Registry) => void;
+                MessageComposer: {
+                    encoded: {
+                        createClient(value: _165.MsgCreateClient): {
+                            type_url: string;
+                            value: Uint8Array;
+                        };
+                        updateClient(value: _165.MsgUpdateClient): {
+                            type_url: string;
+                            value: Uint8Array;
+                        };
+                        upgradeClient(value: _165.MsgUpgradeClient): {
+                            type_url: string;
+                            value: Uint8Array;
+                        };
+                        submitMisbehaviour(value: _165.MsgSubmitMisbehaviour): {
+                            type_url: string;
+                            value: Uint8Array;
+                        };
+                    };
+                    withTypeUrl: {
+                        createClient(value: _165.MsgCreateClient): {
+                            typeUrl: string;
+                            value: _165.MsgCreateClient;
+                        };
+                        updateClient(value: _165.MsgUpdateClient): {
+                            typeUrl: string;
+                            value: _165.MsgUpdateClient;
+                        };
+                        upgradeClient(value: _165.MsgUpgradeClient): {
+                            typeUrl: string;
+                            value: _165.MsgUpgradeClient;
+                        };
+                        submitMisbehaviour(value: _165.MsgSubmitMisbehaviour): {
+                            typeUrl: string;
+                            value: _165.MsgSubmitMisbehaviour;
+                        };
+                    };
+                    toJSON: {
+                        createClient(value: _165.MsgCreateClient): {
+                            typeUrl: string;
+                            value: unknown;
+                        };
+                        updateClient(value: _165.MsgUpdateClient): {
+                            typeUrl: string;
+                            value: unknown;
+                        };
+                        upgradeClient(value: _165.MsgUpgradeClient): {
+                            typeUrl: string;
+                            value: unknown;
+                        };
+                        submitMisbehaviour(value: _165.MsgSubmitMisbehaviour): {
+                            typeUrl: string;
+                            value: unknown;
+                        };
+                    };
+                    fromJSON: {
+                        createClient(value: any): {
+                            typeUrl: string;
+                            value: _165.MsgCreateClient;
+                        };
+                        updateClient(value: any): {
+                            typeUrl: string;
+                            value: _165.MsgUpdateClient;
+                        };
+                        upgradeClient(value: any): {
+                            typeUrl: string;
+                            value: _165.MsgUpgradeClient;
+                        };
+                        submitMisbehaviour(value: any): {
+                            typeUrl: string;
+                            value: _165.MsgSubmitMisbehaviour;
+                        };
+                    };
+                    fromPartial: {
+                        createClient(value: _165.MsgCreateClient): {
+                            typeUrl: string;
+                            value: _165.MsgCreateClient;
+                        };
+                        updateClient(value: _165.MsgUpdateClient): {
+                            typeUrl: string;
+                            value: _165.MsgUpdateClient;
+                        };
+                        upgradeClient(value: _165.MsgUpgradeClient): {
+                            typeUrl: string;
+                            value: _165.MsgUpgradeClient;
+                        };
+                        submitMisbehaviour(value: _165.MsgSubmitMisbehaviour): {
+                            typeUrl: string;
+                            value: _165.MsgSubmitMisbehaviour;
+                        };
+                    };
+                };
+                AminoConverter: {
+                    "/ibc.core.client.v1.MsgCreateClient": {
+                        aminoType: string;
+                        toAmino: ({ clientState, consensusState, signer }: _165.MsgCreateClient) => {
+                            client_state: {
+                                type_url: string;
+                                value: Uint8Array;
+                            };
+                            consensus_state: {
+                                type_url: string;
+                                value: Uint8Array;
+                            };
+                            signer: string;
+                        };
+                        fromAmino: ({ client_state, consensus_state, signer }: {
+                            client_state: {
+                                type_url: string;
+                                value: Uint8Array;
+                            };
+                            consensus_state: {
+                                type_url: string;
+                                value: Uint8Array;
+                            };
+                            signer: string;
+                        }) => _165.MsgCreateClient;
+                    };
+                    "/ibc.core.client.v1.MsgUpdateClient": {
+                        aminoType: string;
+                        toAmino: ({ clientId, header, signer }: _165.MsgUpdateClient) => {
+                            client_id: string;
+                            header: {
+                                type_url: string;
+                                value: Uint8Array;
+                            };
+                            signer: string;
+                        };
+                        fromAmino: ({ client_id, header, signer }: {
+                            client_id: string;
+                            header: {
+                                type_url: string;
+                                value: Uint8Array;
+                            };
+                            signer: string;
+                        }) => _165.MsgUpdateClient;
+                    };
+                    "/ibc.core.client.v1.MsgUpgradeClient": {
+                        aminoType: string;
+                        toAmino: ({ clientId, clientState, consensusState, proofUpgradeClient, proofUpgradeConsensusState, signer }: _165.MsgUpgradeClient) => {
+                            client_id: string;
+                            client_state: {
+                                type_url: string;
+                                value: Uint8Array;
+                            };
+                            consensus_state: {
+                                type_url: string;
+                                value: Uint8Array;
+                            };
+                            proof_upgrade_client: Uint8Array;
+                            proof_upgrade_consensus_state: Uint8Array;
+                            signer: string;
+                        };
+                        fromAmino: ({ client_id, client_state, consensus_state, proof_upgrade_client, proof_upgrade_consensus_state, signer }: {
+                            client_id: string;
+                            client_state: {
+                                type_url: string;
+                                value: Uint8Array;
+                            };
+                            consensus_state: {
+                                type_url: string;
+                                value: Uint8Array;
+                            };
+                            proof_upgrade_client: Uint8Array;
+                            proof_upgrade_consensus_state: Uint8Array;
+                            signer: string;
+                        }) => _165.MsgUpgradeClient;
+                    };
+                    "/ibc.core.client.v1.MsgSubmitMisbehaviour": {
+                        aminoType: string;
+                        toAmino: ({ clientId, misbehaviour, signer }: _165.MsgSubmitMisbehaviour) => {
+                            client_id: string;
+                            misbehaviour: {
+                                type_url: string;
+                                value: Uint8Array;
+                            };
+                            signer: string;
+                        };
+                        fromAmino: ({ client_id, misbehaviour, signer }: {
+                            client_id: string;
+                            misbehaviour: {
+                                type_url: string;
+                                value: Uint8Array;
+                            };
+                            signer: string;
+                        }) => _165.MsgSubmitMisbehaviour;
+                    };
+                };
                 MsgCreateClient: {
                     encode(message: _165.MsgCreateClient, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
                     decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _165.MsgCreateClient;
@@ -4583,6 +5408,276 @@ export declare namespace ibc {
         }
         namespace connection {
             const v1: {
+                registry: readonly [string, import("@cosmjs/proto-signing").GeneratedType][];
+                load: (protoRegistry: import("@cosmjs/proto-signing").Registry) => void;
+                MessageComposer: {
+                    encoded: {
+                        connectionOpenInit(value: _170.MsgConnectionOpenInit): {
+                            type_url: string;
+                            value: Uint8Array;
+                        };
+                        connectionOpenTry(value: _170.MsgConnectionOpenTry): {
+                            type_url: string;
+                            value: Uint8Array;
+                        };
+                        connectionOpenAck(value: _170.MsgConnectionOpenAck): {
+                            type_url: string;
+                            value: Uint8Array;
+                        };
+                        connectionOpenConfirm(value: _170.MsgConnectionOpenConfirm): {
+                            type_url: string;
+                            value: Uint8Array;
+                        };
+                    };
+                    withTypeUrl: {
+                        connectionOpenInit(value: _170.MsgConnectionOpenInit): {
+                            typeUrl: string;
+                            value: _170.MsgConnectionOpenInit;
+                        };
+                        connectionOpenTry(value: _170.MsgConnectionOpenTry): {
+                            typeUrl: string;
+                            value: _170.MsgConnectionOpenTry;
+                        };
+                        connectionOpenAck(value: _170.MsgConnectionOpenAck): {
+                            typeUrl: string;
+                            value: _170.MsgConnectionOpenAck;
+                        };
+                        connectionOpenConfirm(value: _170.MsgConnectionOpenConfirm): {
+                            typeUrl: string;
+                            value: _170.MsgConnectionOpenConfirm;
+                        };
+                    };
+                    toJSON: {
+                        connectionOpenInit(value: _170.MsgConnectionOpenInit): {
+                            typeUrl: string;
+                            value: unknown;
+                        };
+                        connectionOpenTry(value: _170.MsgConnectionOpenTry): {
+                            typeUrl: string;
+                            value: unknown;
+                        };
+                        connectionOpenAck(value: _170.MsgConnectionOpenAck): {
+                            typeUrl: string;
+                            value: unknown;
+                        };
+                        connectionOpenConfirm(value: _170.MsgConnectionOpenConfirm): {
+                            typeUrl: string;
+                            value: unknown;
+                        };
+                    };
+                    fromJSON: {
+                        connectionOpenInit(value: any): {
+                            typeUrl: string;
+                            value: _170.MsgConnectionOpenInit;
+                        };
+                        connectionOpenTry(value: any): {
+                            typeUrl: string;
+                            value: _170.MsgConnectionOpenTry;
+                        };
+                        connectionOpenAck(value: any): {
+                            typeUrl: string;
+                            value: _170.MsgConnectionOpenAck;
+                        };
+                        connectionOpenConfirm(value: any): {
+                            typeUrl: string;
+                            value: _170.MsgConnectionOpenConfirm;
+                        };
+                    };
+                    fromPartial: {
+                        connectionOpenInit(value: _170.MsgConnectionOpenInit): {
+                            typeUrl: string;
+                            value: _170.MsgConnectionOpenInit;
+                        };
+                        connectionOpenTry(value: _170.MsgConnectionOpenTry): {
+                            typeUrl: string;
+                            value: _170.MsgConnectionOpenTry;
+                        };
+                        connectionOpenAck(value: _170.MsgConnectionOpenAck): {
+                            typeUrl: string;
+                            value: _170.MsgConnectionOpenAck;
+                        };
+                        connectionOpenConfirm(value: _170.MsgConnectionOpenConfirm): {
+                            typeUrl: string;
+                            value: _170.MsgConnectionOpenConfirm;
+                        };
+                    };
+                };
+                AminoConverter: {
+                    "/ibc.core.connection.v1.MsgConnectionOpenInit": {
+                        aminoType: string;
+                        toAmino: ({ clientId, counterparty, version, delayPeriod, signer }: _170.MsgConnectionOpenInit) => {
+                            client_id: string;
+                            counterparty: {
+                                client_id: string;
+                                connection_id: string;
+                                prefix: {
+                                    key_prefix: Uint8Array;
+                                };
+                            };
+                            version: {
+                                identifier: string;
+                                features: string[];
+                            };
+                            delay_period: string;
+                            signer: string;
+                        };
+                        fromAmino: ({ client_id, counterparty, version, delay_period, signer }: {
+                            client_id: string;
+                            counterparty: {
+                                client_id: string;
+                                connection_id: string;
+                                prefix: {
+                                    key_prefix: Uint8Array;
+                                };
+                            };
+                            version: {
+                                identifier: string;
+                                features: string[];
+                            };
+                            delay_period: string;
+                            signer: string;
+                        }) => _170.MsgConnectionOpenInit;
+                    };
+                    "/ibc.core.connection.v1.MsgConnectionOpenTry": {
+                        aminoType: string;
+                        toAmino: ({ clientId, previousConnectionId, clientState, counterparty, delayPeriod, counterpartyVersions, proofHeight, proofInit, proofClient, proofConsensus, consensusHeight, signer }: _170.MsgConnectionOpenTry) => {
+                            client_id: string;
+                            previous_connection_id: string;
+                            client_state: {
+                                type_url: string;
+                                value: Uint8Array;
+                            };
+                            counterparty: {
+                                client_id: string;
+                                connection_id: string;
+                                prefix: {
+                                    key_prefix: Uint8Array;
+                                };
+                            };
+                            delay_period: string;
+                            counterparty_versions: {
+                                identifier: string;
+                                features: string[];
+                            }[];
+                            proof_height: {
+                                revision_number: string;
+                                revision_height: string;
+                            };
+                            proof_init: Uint8Array;
+                            proof_client: Uint8Array;
+                            proof_consensus: Uint8Array;
+                            consensus_height: {
+                                revision_number: string;
+                                revision_height: string;
+                            };
+                            signer: string;
+                        };
+                        fromAmino: ({ client_id, previous_connection_id, client_state, counterparty, delay_period, counterparty_versions, proof_height, proof_init, proof_client, proof_consensus, consensus_height, signer }: {
+                            client_id: string;
+                            previous_connection_id: string;
+                            client_state: {
+                                type_url: string;
+                                value: Uint8Array;
+                            };
+                            counterparty: {
+                                client_id: string;
+                                connection_id: string;
+                                prefix: {
+                                    key_prefix: Uint8Array;
+                                };
+                            };
+                            delay_period: string;
+                            counterparty_versions: {
+                                identifier: string;
+                                features: string[];
+                            }[];
+                            proof_height: {
+                                revision_number: string;
+                                revision_height: string;
+                            };
+                            proof_init: Uint8Array;
+                            proof_client: Uint8Array;
+                            proof_consensus: Uint8Array;
+                            consensus_height: {
+                                revision_number: string;
+                                revision_height: string;
+                            };
+                            signer: string;
+                        }) => _170.MsgConnectionOpenTry;
+                    };
+                    "/ibc.core.connection.v1.MsgConnectionOpenAck": {
+                        aminoType: string;
+                        toAmino: ({ connectionId, counterpartyConnectionId, version, clientState, proofHeight, proofTry, proofClient, proofConsensus, consensusHeight, signer }: _170.MsgConnectionOpenAck) => {
+                            connection_id: string;
+                            counterparty_connection_id: string;
+                            version: {
+                                identifier: string;
+                                features: string[];
+                            };
+                            client_state: {
+                                type_url: string;
+                                value: Uint8Array;
+                            };
+                            proof_height: {
+                                revision_number: string;
+                                revision_height: string;
+                            };
+                            proof_try: Uint8Array;
+                            proof_client: Uint8Array;
+                            proof_consensus: Uint8Array;
+                            consensus_height: {
+                                revision_number: string;
+                                revision_height: string;
+                            };
+                            signer: string;
+                        };
+                        fromAmino: ({ connection_id, counterparty_connection_id, version, client_state, proof_height, proof_try, proof_client, proof_consensus, consensus_height, signer }: {
+                            connection_id: string;
+                            counterparty_connection_id: string;
+                            version: {
+                                identifier: string;
+                                features: string[];
+                            };
+                            client_state: {
+                                type_url: string;
+                                value: Uint8Array;
+                            };
+                            proof_height: {
+                                revision_number: string;
+                                revision_height: string;
+                            };
+                            proof_try: Uint8Array;
+                            proof_client: Uint8Array;
+                            proof_consensus: Uint8Array;
+                            consensus_height: {
+                                revision_number: string;
+                                revision_height: string;
+                            };
+                            signer: string;
+                        }) => _170.MsgConnectionOpenAck;
+                    };
+                    "/ibc.core.connection.v1.MsgConnectionOpenConfirm": {
+                        aminoType: string;
+                        toAmino: ({ connectionId, proofAck, proofHeight, signer }: _170.MsgConnectionOpenConfirm) => {
+                            connection_id: string;
+                            proof_ack: Uint8Array;
+                            proof_height: {
+                                revision_number: string;
+                                revision_height: string;
+                            };
+                            signer: string;
+                        };
+                        fromAmino: ({ connection_id, proof_ack, proof_height, signer }: {
+                            connection_id: string;
+                            proof_ack: Uint8Array;
+                            proof_height: {
+                                revision_number: string;
+                                revision_height: string;
+                            };
+                            signer: string;
+                        }) => _170.MsgConnectionOpenConfirm;
+                    };
+                };
                 MsgConnectionOpenInit: {
                     encode(message: _170.MsgConnectionOpenInit, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
                     decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _170.MsgConnectionOpenInit;

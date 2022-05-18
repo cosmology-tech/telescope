@@ -35,6 +35,14 @@ import * as _210 from "./txfees/v1beta1/feetoken";
 import * as _211 from "./txfees/v1beta1/genesis";
 import * as _212 from "./txfees/v1beta1/gov";
 import * as _213 from "./txfees/v1beta1/query";
+import * as _272 from "./gamm/v1beta1/tx.amino";
+import * as _273 from "./incentives/tx.amino";
+import * as _274 from "./lockup/tx.amino";
+import * as _275 from "./superfluid/tx.amino";
+import * as _276 from "./gamm/v1beta1/tx.registry";
+import * as _277 from "./incentives/tx.registry";
+import * as _278 from "./lockup/tx.registry";
+import * as _279 from "./superfluid/tx.registry";
 export namespace osmosis {
   export namespace claim {
     export const v1beta1 = { ..._177,
@@ -53,19 +61,25 @@ export namespace osmosis {
       ..._184,
       ..._185,
       ..._186,
-      ..._187
+      ..._187,
+      ..._272,
+      ..._276
     };
   }
   export const incentives = { ..._188,
     ..._189,
     ..._190,
     ..._191,
-    ..._192
+    ..._192,
+    ..._273,
+    ..._277
   };
   export const lockup = { ..._193,
     ..._194,
     ..._195,
-    ..._196
+    ..._196,
+    ..._274,
+    ..._278
   };
   export namespace mint {
     export const v1beta1 = { ..._197,
@@ -88,7 +102,9 @@ export namespace osmosis {
     ..._206,
     ..._207,
     ..._208,
-    ..._209
+    ..._209,
+    ..._275,
+    ..._279
   };
   export namespace txfees {
     export const v1beta1 = { ..._210,

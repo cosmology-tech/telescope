@@ -527,6 +527,354 @@ export declare namespace osmosis {
     }
     namespace gamm {
         const v1beta1: {
+            registry: readonly [string, import("@cosmjs/proto-signing").GeneratedType][];
+            load: (protoRegistry: import("@cosmjs/proto-signing").Registry) => void;
+            MessageComposer: {
+                encoded: {
+                    joinPool(value: _187.MsgJoinPool): {
+                        type_url: string;
+                        value: Uint8Array;
+                    };
+                    exitPool(value: _187.MsgExitPool): {
+                        type_url: string;
+                        value: Uint8Array;
+                    };
+                    swapExactAmountIn(value: _187.MsgSwapExactAmountIn): {
+                        type_url: string;
+                        value: Uint8Array;
+                    };
+                    swapExactAmountOut(value: _187.MsgSwapExactAmountOut): {
+                        type_url: string;
+                        value: Uint8Array;
+                    };
+                    joinSwapExternAmountIn(value: _187.MsgJoinSwapExternAmountIn): {
+                        type_url: string;
+                        value: Uint8Array;
+                    };
+                    joinSwapShareAmountOut(value: _187.MsgJoinSwapShareAmountOut): {
+                        type_url: string;
+                        value: Uint8Array;
+                    };
+                    exitSwapExternAmountOut(value: _187.MsgExitSwapExternAmountOut): {
+                        type_url: string;
+                        value: Uint8Array;
+                    };
+                    exitSwapShareAmountIn(value: _187.MsgExitSwapShareAmountIn): {
+                        type_url: string;
+                        value: Uint8Array;
+                    };
+                };
+                withTypeUrl: {
+                    joinPool(value: _187.MsgJoinPool): {
+                        typeUrl: string;
+                        value: _187.MsgJoinPool;
+                    };
+                    exitPool(value: _187.MsgExitPool): {
+                        typeUrl: string;
+                        value: _187.MsgExitPool;
+                    };
+                    swapExactAmountIn(value: _187.MsgSwapExactAmountIn): {
+                        typeUrl: string;
+                        value: _187.MsgSwapExactAmountIn;
+                    };
+                    swapExactAmountOut(value: _187.MsgSwapExactAmountOut): {
+                        typeUrl: string;
+                        value: _187.MsgSwapExactAmountOut;
+                    };
+                    joinSwapExternAmountIn(value: _187.MsgJoinSwapExternAmountIn): {
+                        typeUrl: string;
+                        value: _187.MsgJoinSwapExternAmountIn;
+                    };
+                    joinSwapShareAmountOut(value: _187.MsgJoinSwapShareAmountOut): {
+                        typeUrl: string;
+                        value: _187.MsgJoinSwapShareAmountOut;
+                    };
+                    exitSwapExternAmountOut(value: _187.MsgExitSwapExternAmountOut): {
+                        typeUrl: string;
+                        value: _187.MsgExitSwapExternAmountOut;
+                    };
+                    exitSwapShareAmountIn(value: _187.MsgExitSwapShareAmountIn): {
+                        typeUrl: string;
+                        value: _187.MsgExitSwapShareAmountIn;
+                    };
+                };
+                toJSON: {
+                    joinPool(value: _187.MsgJoinPool): {
+                        typeUrl: string;
+                        value: unknown;
+                    };
+                    exitPool(value: _187.MsgExitPool): {
+                        typeUrl: string;
+                        value: unknown;
+                    };
+                    swapExactAmountIn(value: _187.MsgSwapExactAmountIn): {
+                        typeUrl: string;
+                        value: unknown;
+                    };
+                    swapExactAmountOut(value: _187.MsgSwapExactAmountOut): {
+                        typeUrl: string;
+                        value: unknown;
+                    };
+                    joinSwapExternAmountIn(value: _187.MsgJoinSwapExternAmountIn): {
+                        typeUrl: string;
+                        value: unknown;
+                    };
+                    joinSwapShareAmountOut(value: _187.MsgJoinSwapShareAmountOut): {
+                        typeUrl: string;
+                        value: unknown;
+                    };
+                    exitSwapExternAmountOut(value: _187.MsgExitSwapExternAmountOut): {
+                        typeUrl: string;
+                        value: unknown;
+                    };
+                    exitSwapShareAmountIn(value: _187.MsgExitSwapShareAmountIn): {
+                        typeUrl: string;
+                        value: unknown;
+                    };
+                };
+                fromJSON: {
+                    joinPool(value: any): {
+                        typeUrl: string;
+                        value: _187.MsgJoinPool;
+                    };
+                    exitPool(value: any): {
+                        typeUrl: string;
+                        value: _187.MsgExitPool;
+                    };
+                    swapExactAmountIn(value: any): {
+                        typeUrl: string;
+                        value: _187.MsgSwapExactAmountIn;
+                    };
+                    swapExactAmountOut(value: any): {
+                        typeUrl: string;
+                        value: _187.MsgSwapExactAmountOut;
+                    };
+                    joinSwapExternAmountIn(value: any): {
+                        typeUrl: string;
+                        value: _187.MsgJoinSwapExternAmountIn;
+                    };
+                    joinSwapShareAmountOut(value: any): {
+                        typeUrl: string;
+                        value: _187.MsgJoinSwapShareAmountOut;
+                    };
+                    exitSwapExternAmountOut(value: any): {
+                        typeUrl: string;
+                        value: _187.MsgExitSwapExternAmountOut;
+                    };
+                    exitSwapShareAmountIn(value: any): {
+                        typeUrl: string;
+                        value: _187.MsgExitSwapShareAmountIn;
+                    };
+                };
+                fromPartial: {
+                    joinPool(value: _187.MsgJoinPool): {
+                        typeUrl: string;
+                        value: _187.MsgJoinPool;
+                    };
+                    exitPool(value: _187.MsgExitPool): {
+                        typeUrl: string;
+                        value: _187.MsgExitPool;
+                    };
+                    swapExactAmountIn(value: _187.MsgSwapExactAmountIn): {
+                        typeUrl: string;
+                        value: _187.MsgSwapExactAmountIn;
+                    };
+                    swapExactAmountOut(value: _187.MsgSwapExactAmountOut): {
+                        typeUrl: string;
+                        value: _187.MsgSwapExactAmountOut;
+                    };
+                    joinSwapExternAmountIn(value: _187.MsgJoinSwapExternAmountIn): {
+                        typeUrl: string;
+                        value: _187.MsgJoinSwapExternAmountIn;
+                    };
+                    joinSwapShareAmountOut(value: _187.MsgJoinSwapShareAmountOut): {
+                        typeUrl: string;
+                        value: _187.MsgJoinSwapShareAmountOut;
+                    };
+                    exitSwapExternAmountOut(value: _187.MsgExitSwapExternAmountOut): {
+                        typeUrl: string;
+                        value: _187.MsgExitSwapExternAmountOut;
+                    };
+                    exitSwapShareAmountIn(value: _187.MsgExitSwapShareAmountIn): {
+                        typeUrl: string;
+                        value: _187.MsgExitSwapShareAmountIn;
+                    };
+                };
+            };
+            AminoConverter: {
+                "/osmosis.gamm.v1beta1.MsgJoinPool": {
+                    aminoType: string;
+                    toAmino: ({ sender, poolId, shareOutAmount, tokenInMaxs }: _187.MsgJoinPool) => {
+                        sender: string;
+                        poolId: string;
+                        shareOutAmount: string;
+                        tokenInMaxs: {
+                            denom: string;
+                            amount: string;
+                        }[];
+                    };
+                    fromAmino: ({ sender, poolId, shareOutAmount, tokenInMaxs }: {
+                        sender: string;
+                        poolId: string;
+                        shareOutAmount: string;
+                        tokenInMaxs: {
+                            denom: string;
+                            amount: string;
+                        }[];
+                    }) => _187.MsgJoinPool;
+                };
+                "/osmosis.gamm.v1beta1.MsgExitPool": {
+                    aminoType: string;
+                    toAmino: ({ sender, poolId, shareInAmount, tokenOutMins }: _187.MsgExitPool) => {
+                        sender: string;
+                        poolId: string;
+                        shareInAmount: string;
+                        tokenOutMins: {
+                            denom: string;
+                            amount: string;
+                        }[];
+                    };
+                    fromAmino: ({ sender, poolId, shareInAmount, tokenOutMins }: {
+                        sender: string;
+                        poolId: string;
+                        shareInAmount: string;
+                        tokenOutMins: {
+                            denom: string;
+                            amount: string;
+                        }[];
+                    }) => _187.MsgExitPool;
+                };
+                "/osmosis.gamm.v1beta1.MsgSwapExactAmountIn": {
+                    aminoType: string;
+                    toAmino: ({ sender, routes, tokenIn, tokenOutMinAmount }: _187.MsgSwapExactAmountIn) => {
+                        sender: string;
+                        routes: {
+                            poolId: string;
+                            tokenOutDenom: string;
+                        }[];
+                        tokenIn: {
+                            denom: string;
+                            amount: string;
+                        };
+                        tokenOutMinAmount: string;
+                    };
+                    fromAmino: ({ sender, routes, tokenIn, tokenOutMinAmount }: {
+                        sender: string;
+                        routes: {
+                            poolId: string;
+                            tokenOutDenom: string;
+                        }[];
+                        tokenIn: {
+                            denom: string;
+                            amount: string;
+                        };
+                        tokenOutMinAmount: string;
+                    }) => _187.MsgSwapExactAmountIn;
+                };
+                "/osmosis.gamm.v1beta1.MsgSwapExactAmountOut": {
+                    aminoType: string;
+                    toAmino: ({ sender, routes, tokenInMaxAmount, tokenOut }: _187.MsgSwapExactAmountOut) => {
+                        sender: string;
+                        routes: {
+                            poolId: string;
+                            tokenInDenom: string;
+                        }[];
+                        tokenInMaxAmount: string;
+                        tokenOut: {
+                            denom: string;
+                            amount: string;
+                        };
+                    };
+                    fromAmino: ({ sender, routes, tokenInMaxAmount, tokenOut }: {
+                        sender: string;
+                        routes: {
+                            poolId: string;
+                            tokenInDenom: string;
+                        }[];
+                        tokenInMaxAmount: string;
+                        tokenOut: {
+                            denom: string;
+                            amount: string;
+                        };
+                    }) => _187.MsgSwapExactAmountOut;
+                };
+                "/osmosis.gamm.v1beta1.MsgJoinSwapExternAmountIn": {
+                    aminoType: string;
+                    toAmino: ({ sender, poolId, tokenIn, shareOutMinAmount }: _187.MsgJoinSwapExternAmountIn) => {
+                        sender: string;
+                        poolId: string;
+                        tokenIn: {
+                            denom: string;
+                            amount: string;
+                        };
+                        shareOutMinAmount: string;
+                    };
+                    fromAmino: ({ sender, poolId, tokenIn, shareOutMinAmount }: {
+                        sender: string;
+                        poolId: string;
+                        tokenIn: {
+                            denom: string;
+                            amount: string;
+                        };
+                        shareOutMinAmount: string;
+                    }) => _187.MsgJoinSwapExternAmountIn;
+                };
+                "/osmosis.gamm.v1beta1.MsgJoinSwapShareAmountOut": {
+                    aminoType: string;
+                    toAmino: ({ sender, poolId, tokenInDenom, shareOutAmount, tokenInMaxAmount }: _187.MsgJoinSwapShareAmountOut) => {
+                        sender: string;
+                        poolId: string;
+                        tokenInDenom: string;
+                        shareOutAmount: string;
+                        tokenInMaxAmount: string;
+                    };
+                    fromAmino: ({ sender, poolId, tokenInDenom, shareOutAmount, tokenInMaxAmount }: {
+                        sender: string;
+                        poolId: string;
+                        tokenInDenom: string;
+                        shareOutAmount: string;
+                        tokenInMaxAmount: string;
+                    }) => _187.MsgJoinSwapShareAmountOut;
+                };
+                "/osmosis.gamm.v1beta1.MsgExitSwapExternAmountOut": {
+                    aminoType: string;
+                    toAmino: ({ sender, poolId, tokenOut, shareInMaxAmount }: _187.MsgExitSwapExternAmountOut) => {
+                        sender: string;
+                        poolId: string;
+                        tokenOut: {
+                            denom: string;
+                            amount: string;
+                        };
+                        shareInMaxAmount: string;
+                    };
+                    fromAmino: ({ sender, poolId, tokenOut, shareInMaxAmount }: {
+                        sender: string;
+                        poolId: string;
+                        tokenOut: {
+                            denom: string;
+                            amount: string;
+                        };
+                        shareInMaxAmount: string;
+                    }) => _187.MsgExitSwapExternAmountOut;
+                };
+                "/osmosis.gamm.v1beta1.MsgExitSwapShareAmountIn": {
+                    aminoType: string;
+                    toAmino: ({ sender, poolId, tokenOutDenom, shareInAmount, tokenOutMinAmount }: _187.MsgExitSwapShareAmountIn) => {
+                        sender: string;
+                        poolId: string;
+                        tokenOutDenom: string;
+                        shareInAmount: string;
+                        tokenOutMinAmount: string;
+                    };
+                    fromAmino: ({ sender, poolId, tokenOutDenom, shareInAmount, tokenOutMinAmount }: {
+                        sender: string;
+                        poolId: string;
+                        tokenOutDenom: string;
+                        shareInAmount: string;
+                        tokenOutMinAmount: string;
+                    }) => _187.MsgExitSwapShareAmountIn;
+                };
+            };
             MsgJoinPool: {
                 encode(message: _187.MsgJoinPool, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
                 decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _187.MsgJoinPool;
@@ -1894,6 +2242,134 @@ export declare namespace osmosis {
         };
     }
     const incentives: {
+        registry: readonly [string, import("@cosmjs/proto-signing").GeneratedType][];
+        load: (protoRegistry: import("@cosmjs/proto-signing").Registry) => void;
+        MessageComposer: {
+            encoded: {
+                createGauge(value: _192.MsgCreateGauge): {
+                    type_url: string;
+                    value: Uint8Array;
+                };
+                addToGauge(value: _192.MsgAddToGauge): {
+                    type_url: string;
+                    value: Uint8Array;
+                };
+            };
+            withTypeUrl: {
+                createGauge(value: _192.MsgCreateGauge): {
+                    typeUrl: string;
+                    value: _192.MsgCreateGauge;
+                };
+                addToGauge(value: _192.MsgAddToGauge): {
+                    typeUrl: string;
+                    value: _192.MsgAddToGauge;
+                };
+            };
+            toJSON: {
+                createGauge(value: _192.MsgCreateGauge): {
+                    typeUrl: string;
+                    value: unknown;
+                };
+                addToGauge(value: _192.MsgAddToGauge): {
+                    typeUrl: string;
+                    value: unknown;
+                };
+            };
+            fromJSON: {
+                createGauge(value: any): {
+                    typeUrl: string;
+                    value: _192.MsgCreateGauge;
+                };
+                addToGauge(value: any): {
+                    typeUrl: string;
+                    value: _192.MsgAddToGauge;
+                };
+            };
+            fromPartial: {
+                createGauge(value: _192.MsgCreateGauge): {
+                    typeUrl: string;
+                    value: _192.MsgCreateGauge;
+                };
+                addToGauge(value: _192.MsgAddToGauge): {
+                    typeUrl: string;
+                    value: _192.MsgAddToGauge;
+                };
+            };
+        };
+        AminoConverter: {
+            "/osmosis.incentives.MsgCreateGauge": {
+                aminoType: string;
+                toAmino: ({ isPerpetual, owner, distributeTo, coins, startTime, numEpochsPaidOver }: _192.MsgCreateGauge) => {
+                    isPerpetual: boolean;
+                    owner: string;
+                    distributeTo: {
+                        lockQueryType: number;
+                        denom: string;
+                        duration: {
+                            seconds: string;
+                            nanos: number;
+                        };
+                        timestamp: {
+                            seconds: string;
+                            nanos: number;
+                        };
+                    };
+                    coins: {
+                        denom: string;
+                        amount: string;
+                    }[];
+                    startTime: {
+                        seconds: string;
+                        nanos: number;
+                    };
+                    numEpochsPaidOver: string;
+                };
+                fromAmino: ({ isPerpetual, owner, distributeTo, coins, startTime, numEpochsPaidOver }: {
+                    isPerpetual: boolean;
+                    owner: string;
+                    distributeTo: {
+                        lockQueryType: number;
+                        denom: string;
+                        duration: {
+                            seconds: string;
+                            nanos: number;
+                        };
+                        timestamp: {
+                            seconds: string;
+                            nanos: number;
+                        };
+                    };
+                    coins: {
+                        denom: string;
+                        amount: string;
+                    }[];
+                    startTime: {
+                        seconds: string;
+                        nanos: number;
+                    };
+                    numEpochsPaidOver: string;
+                }) => _192.MsgCreateGauge;
+            };
+            "/osmosis.incentives.MsgAddToGauge": {
+                aminoType: string;
+                toAmino: ({ owner, gaugeId, rewards }: _192.MsgAddToGauge) => {
+                    owner: string;
+                    gaugeId: string;
+                    rewards: {
+                        denom: string;
+                        amount: string;
+                    }[];
+                };
+                fromAmino: ({ owner, gaugeId, rewards }: {
+                    owner: string;
+                    gaugeId: string;
+                    rewards: {
+                        denom: string;
+                        amount: string;
+                    }[];
+                }) => _192.MsgAddToGauge;
+            };
+        };
         MsgCreateGauge: {
             encode(message: _192.MsgCreateGauge, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
             decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _192.MsgCreateGauge;
@@ -3157,6 +3633,135 @@ export declare namespace osmosis {
         };
     };
     const lockup: {
+        registry: readonly [string, import("@cosmjs/proto-signing").GeneratedType][];
+        load: (protoRegistry: import("@cosmjs/proto-signing").Registry) => void;
+        MessageComposer: {
+            encoded: {
+                lockTokens(value: _196.MsgLockTokens): {
+                    type_url: string;
+                    value: Uint8Array;
+                };
+                beginUnlockingAll(value: _196.MsgBeginUnlockingAll): {
+                    type_url: string;
+                    value: Uint8Array;
+                };
+                beginUnlocking(value: _196.MsgBeginUnlocking): {
+                    type_url: string;
+                    value: Uint8Array;
+                };
+            };
+            withTypeUrl: {
+                lockTokens(value: _196.MsgLockTokens): {
+                    typeUrl: string;
+                    value: _196.MsgLockTokens;
+                };
+                beginUnlockingAll(value: _196.MsgBeginUnlockingAll): {
+                    typeUrl: string;
+                    value: _196.MsgBeginUnlockingAll;
+                };
+                beginUnlocking(value: _196.MsgBeginUnlocking): {
+                    typeUrl: string;
+                    value: _196.MsgBeginUnlocking;
+                };
+            };
+            toJSON: {
+                lockTokens(value: _196.MsgLockTokens): {
+                    typeUrl: string;
+                    value: unknown;
+                };
+                beginUnlockingAll(value: _196.MsgBeginUnlockingAll): {
+                    typeUrl: string;
+                    value: unknown;
+                };
+                beginUnlocking(value: _196.MsgBeginUnlocking): {
+                    typeUrl: string;
+                    value: unknown;
+                };
+            };
+            fromJSON: {
+                lockTokens(value: any): {
+                    typeUrl: string;
+                    value: _196.MsgLockTokens;
+                };
+                beginUnlockingAll(value: any): {
+                    typeUrl: string;
+                    value: _196.MsgBeginUnlockingAll;
+                };
+                beginUnlocking(value: any): {
+                    typeUrl: string;
+                    value: _196.MsgBeginUnlocking;
+                };
+            };
+            fromPartial: {
+                lockTokens(value: _196.MsgLockTokens): {
+                    typeUrl: string;
+                    value: _196.MsgLockTokens;
+                };
+                beginUnlockingAll(value: _196.MsgBeginUnlockingAll): {
+                    typeUrl: string;
+                    value: _196.MsgBeginUnlockingAll;
+                };
+                beginUnlocking(value: _196.MsgBeginUnlocking): {
+                    typeUrl: string;
+                    value: _196.MsgBeginUnlocking;
+                };
+            };
+        };
+        AminoConverter: {
+            "/osmosis.lockup.MsgLockTokens": {
+                aminoType: string;
+                toAmino: ({ owner, duration, coins }: _196.MsgLockTokens) => {
+                    owner: string;
+                    duration: {
+                        seconds: string;
+                        nanos: number;
+                    };
+                    coins: {
+                        denom: string;
+                        amount: string;
+                    }[];
+                };
+                fromAmino: ({ owner, duration, coins }: {
+                    owner: string;
+                    duration: {
+                        seconds: string;
+                        nanos: number;
+                    };
+                    coins: {
+                        denom: string;
+                        amount: string;
+                    }[];
+                }) => _196.MsgLockTokens;
+            };
+            "/osmosis.lockup.MsgBeginUnlockingAll": {
+                aminoType: string;
+                toAmino: ({ owner }: _196.MsgBeginUnlockingAll) => {
+                    owner: string;
+                };
+                fromAmino: ({ owner }: {
+                    owner: string;
+                }) => _196.MsgBeginUnlockingAll;
+            };
+            "/osmosis.lockup.MsgBeginUnlocking": {
+                aminoType: string;
+                toAmino: ({ owner, ID, coins }: _196.MsgBeginUnlocking) => {
+                    owner: string;
+                    id: string;
+                    coins: {
+                        denom: string;
+                        amount: string;
+                    }[];
+                };
+                fromAmino: ({ owner, id, coins }: {
+                    owner: string;
+                    id: string;
+                    coins: {
+                        denom: string;
+                        amount: string;
+                    }[];
+                }) => _196.MsgBeginUnlocking;
+            };
+        };
         MsgLockTokens: {
             encode(message: _196.MsgLockTokens, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
             decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _196.MsgLockTokens;
@@ -5194,6 +5799,156 @@ export declare namespace osmosis {
         };
     }
     const superfluid: {
+        registry: readonly [string, import("@cosmjs/proto-signing").GeneratedType][];
+        load: (protoRegistry: import("@cosmjs/proto-signing").Registry) => void;
+        MessageComposer: {
+            encoded: {
+                superfluidDelegate(value: _209.MsgSuperfluidDelegate): {
+                    type_url: string;
+                    value: Uint8Array;
+                };
+                superfluidUndelegate(value: _209.MsgSuperfluidUndelegate): {
+                    type_url: string;
+                    value: Uint8Array;
+                };
+                superfluidUnbondLock(value: _209.MsgSuperfluidUnbondLock): {
+                    type_url: string;
+                    value: Uint8Array;
+                };
+                lockAndSuperfluidDelegate(value: _209.MsgLockAndSuperfluidDelegate): {
+                    type_url: string;
+                    value: Uint8Array;
+                };
+            };
+            withTypeUrl: {
+                superfluidDelegate(value: _209.MsgSuperfluidDelegate): {
+                    typeUrl: string;
+                    value: _209.MsgSuperfluidDelegate;
+                };
+                superfluidUndelegate(value: _209.MsgSuperfluidUndelegate): {
+                    typeUrl: string;
+                    value: _209.MsgSuperfluidUndelegate;
+                };
+                superfluidUnbondLock(value: _209.MsgSuperfluidUnbondLock): {
+                    typeUrl: string;
+                    value: _209.MsgSuperfluidUnbondLock;
+                };
+                lockAndSuperfluidDelegate(value: _209.MsgLockAndSuperfluidDelegate): {
+                    typeUrl: string;
+                    value: _209.MsgLockAndSuperfluidDelegate;
+                };
+            };
+            toJSON: {
+                superfluidDelegate(value: _209.MsgSuperfluidDelegate): {
+                    typeUrl: string;
+                    value: unknown;
+                };
+                superfluidUndelegate(value: _209.MsgSuperfluidUndelegate): {
+                    typeUrl: string;
+                    value: unknown;
+                };
+                superfluidUnbondLock(value: _209.MsgSuperfluidUnbondLock): {
+                    typeUrl: string;
+                    value: unknown;
+                };
+                lockAndSuperfluidDelegate(value: _209.MsgLockAndSuperfluidDelegate): {
+                    typeUrl: string;
+                    value: unknown;
+                };
+            };
+            fromJSON: {
+                superfluidDelegate(value: any): {
+                    typeUrl: string;
+                    value: _209.MsgSuperfluidDelegate;
+                };
+                superfluidUndelegate(value: any): {
+                    typeUrl: string;
+                    value: _209.MsgSuperfluidUndelegate;
+                };
+                superfluidUnbondLock(value: any): {
+                    typeUrl: string;
+                    value: _209.MsgSuperfluidUnbondLock;
+                };
+                lockAndSuperfluidDelegate(value: any): {
+                    typeUrl: string;
+                    value: _209.MsgLockAndSuperfluidDelegate;
+                };
+            };
+            fromPartial: {
+                superfluidDelegate(value: _209.MsgSuperfluidDelegate): {
+                    typeUrl: string;
+                    value: _209.MsgSuperfluidDelegate;
+                };
+                superfluidUndelegate(value: _209.MsgSuperfluidUndelegate): {
+                    typeUrl: string;
+                    value: _209.MsgSuperfluidUndelegate;
+                };
+                superfluidUnbondLock(value: _209.MsgSuperfluidUnbondLock): {
+                    typeUrl: string;
+                    value: _209.MsgSuperfluidUnbondLock;
+                };
+                lockAndSuperfluidDelegate(value: _209.MsgLockAndSuperfluidDelegate): {
+                    typeUrl: string;
+                    value: _209.MsgLockAndSuperfluidDelegate;
+                };
+            };
+        };
+        AminoConverter: {
+            "/osmosis.superfluid.MsgSuperfluidDelegate": {
+                aminoType: string;
+                toAmino: ({ sender, lockId, valAddr }: _209.MsgSuperfluidDelegate) => {
+                    sender: string;
+                    lockId: string;
+                    valAddr: string;
+                };
+                fromAmino: ({ sender, lockId, valAddr }: {
+                    sender: string;
+                    lockId: string;
+                    valAddr: string;
+                }) => _209.MsgSuperfluidDelegate;
+            };
+            "/osmosis.superfluid.MsgSuperfluidUndelegate": {
+                aminoType: string;
+                toAmino: ({ sender, lockId }: _209.MsgSuperfluidUndelegate) => {
+                    sender: string;
+                    lockId: string;
+                };
+                fromAmino: ({ sender, lockId }: {
+                    sender: string;
+                    lockId: string;
+                }) => _209.MsgSuperfluidUndelegate;
+            };
+            "/osmosis.superfluid.MsgSuperfluidUnbondLock": {
+                aminoType: string;
+                toAmino: ({ sender, lockId }: _209.MsgSuperfluidUnbondLock) => {
+                    sender: string;
+                    lockId: string;
+                };
+                fromAmino: ({ sender, lockId }: {
+                    sender: string;
+                    lockId: string;
+                }) => _209.MsgSuperfluidUnbondLock;
+            };
+            "/osmosis.superfluid.MsgLockAndSuperfluidDelegate": {
+                aminoType: string;
+                toAmino: ({ sender, coins, valAddr }: _209.MsgLockAndSuperfluidDelegate) => {
+                    sender: string;
+                    coins: {
+                        denom: string;
+                        amount: string;
+                    }[];
+                    valAddr: string;
+                };
+                fromAmino: ({ sender, coins, valAddr }: {
+                    sender: string;
+                    coins: {
+                        denom: string;
+                        amount: string;
+                    }[];
+                    valAddr: string;
+                }) => _209.MsgLockAndSuperfluidDelegate;
+            };
+        };
         MsgSuperfluidDelegate: {
             encode(message: _209.MsgSuperfluidDelegate, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
             decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _209.MsgSuperfluidDelegate;

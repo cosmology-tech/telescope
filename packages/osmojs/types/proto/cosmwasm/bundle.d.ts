@@ -7,6 +7,246 @@ import * as _99 from "./wasm/v1/types";
 export declare namespace cosmwasm {
     namespace wasm {
         const v1: {
+            registry: readonly [string, import("@cosmjs/proto-signing").GeneratedType][];
+            load: (protoRegistry: import("@cosmjs/proto-signing").Registry) => void;
+            MessageComposer: {
+                encoded: {
+                    storeCode(value: _98.MsgStoreCode): {
+                        type_url: string;
+                        value: Uint8Array;
+                    };
+                    instantiateContract(value: _98.MsgInstantiateContract): {
+                        type_url: string;
+                        value: Uint8Array;
+                    };
+                    executeContract(value: _98.MsgExecuteContract): {
+                        type_url: string;
+                        value: Uint8Array;
+                    };
+                    migrateContract(value: _98.MsgMigrateContract): {
+                        type_url: string;
+                        value: Uint8Array;
+                    };
+                    updateAdmin(value: _98.MsgUpdateAdmin): {
+                        type_url: string;
+                        value: Uint8Array;
+                    };
+                    clearAdmin(value: _98.MsgClearAdmin): {
+                        type_url: string;
+                        value: Uint8Array;
+                    };
+                };
+                withTypeUrl: {
+                    storeCode(value: _98.MsgStoreCode): {
+                        typeUrl: string;
+                        value: _98.MsgStoreCode;
+                    };
+                    instantiateContract(value: _98.MsgInstantiateContract): {
+                        typeUrl: string;
+                        value: _98.MsgInstantiateContract;
+                    };
+                    executeContract(value: _98.MsgExecuteContract): {
+                        typeUrl: string;
+                        value: _98.MsgExecuteContract;
+                    };
+                    migrateContract(value: _98.MsgMigrateContract): {
+                        typeUrl: string;
+                        value: _98.MsgMigrateContract;
+                    };
+                    updateAdmin(value: _98.MsgUpdateAdmin): {
+                        typeUrl: string;
+                        value: _98.MsgUpdateAdmin;
+                    };
+                    clearAdmin(value: _98.MsgClearAdmin): {
+                        typeUrl: string;
+                        value: _98.MsgClearAdmin;
+                    };
+                };
+                toJSON: {
+                    storeCode(value: _98.MsgStoreCode): {
+                        typeUrl: string;
+                        value: unknown;
+                    };
+                    instantiateContract(value: _98.MsgInstantiateContract): {
+                        typeUrl: string;
+                        value: unknown;
+                    };
+                    executeContract(value: _98.MsgExecuteContract): {
+                        typeUrl: string;
+                        value: unknown;
+                    };
+                    migrateContract(value: _98.MsgMigrateContract): {
+                        typeUrl: string;
+                        value: unknown;
+                    };
+                    updateAdmin(value: _98.MsgUpdateAdmin): {
+                        typeUrl: string;
+                        value: unknown;
+                    };
+                    clearAdmin(value: _98.MsgClearAdmin): {
+                        typeUrl: string;
+                        value: unknown;
+                    };
+                };
+                fromJSON: {
+                    storeCode(value: any): {
+                        typeUrl: string;
+                        value: _98.MsgStoreCode;
+                    };
+                    instantiateContract(value: any): {
+                        typeUrl: string;
+                        value: _98.MsgInstantiateContract;
+                    };
+                    executeContract(value: any): {
+                        typeUrl: string;
+                        value: _98.MsgExecuteContract;
+                    };
+                    migrateContract(value: any): {
+                        typeUrl: string;
+                        value: _98.MsgMigrateContract;
+                    };
+                    updateAdmin(value: any): {
+                        typeUrl: string;
+                        value: _98.MsgUpdateAdmin;
+                    };
+                    clearAdmin(value: any): {
+                        typeUrl: string;
+                        value: _98.MsgClearAdmin;
+                    };
+                };
+                fromPartial: {
+                    storeCode(value: _98.MsgStoreCode): {
+                        typeUrl: string;
+                        value: _98.MsgStoreCode;
+                    };
+                    instantiateContract(value: _98.MsgInstantiateContract): {
+                        typeUrl: string;
+                        value: _98.MsgInstantiateContract;
+                    };
+                    executeContract(value: _98.MsgExecuteContract): {
+                        typeUrl: string;
+                        value: _98.MsgExecuteContract;
+                    };
+                    migrateContract(value: _98.MsgMigrateContract): {
+                        typeUrl: string;
+                        value: _98.MsgMigrateContract;
+                    };
+                    updateAdmin(value: _98.MsgUpdateAdmin): {
+                        typeUrl: string;
+                        value: _98.MsgUpdateAdmin;
+                    };
+                    clearAdmin(value: _98.MsgClearAdmin): {
+                        typeUrl: string;
+                        value: _98.MsgClearAdmin;
+                    };
+                };
+            };
+            AminoConverter: {
+                "/cosmwasm.wasm.v1.MsgStoreCode": {
+                    aminoType: string;
+                    toAmino: ({ sender, wasmByteCode, instantiatePermission }: _98.MsgStoreCode) => {
+                        sender: string;
+                        wasm_byte_code: Uint8Array;
+                        instantiate_permission: {
+                            permission: number;
+                            address: string;
+                        };
+                    };
+                    fromAmino: ({ sender, wasm_byte_code, instantiate_permission }: {
+                        sender: string;
+                        wasm_byte_code: Uint8Array;
+                        instantiate_permission: {
+                            permission: number;
+                            address: string;
+                        };
+                    }) => _98.MsgStoreCode;
+                };
+                "/cosmwasm.wasm.v1.MsgInstantiateContract": {
+                    aminoType: string;
+                    toAmino: ({ sender, admin, codeId, label, msg, funds }: _98.MsgInstantiateContract) => {
+                        sender: string;
+                        admin: string;
+                        code_id: string;
+                        label: string;
+                        msg: Uint8Array;
+                        funds: {
+                            denom: string;
+                            amount: string;
+                        }[];
+                    };
+                    fromAmino: ({ sender, admin, code_id, label, msg, funds }: {
+                        sender: string;
+                        admin: string;
+                        code_id: string;
+                        label: string;
+                        msg: Uint8Array;
+                        funds: {
+                            denom: string;
+                            amount: string;
+                        }[];
+                    }) => _98.MsgInstantiateContract;
+                };
+                "/cosmwasm.wasm.v1.MsgExecuteContract": {
+                    aminoType: string;
+                    toAmino: ({ sender, contract, msg, funds }: _98.MsgExecuteContract) => {
+                        sender: string;
+                        contract: string;
+                        msg: Uint8Array;
+                        funds: {
+                            denom: string;
+                            amount: string;
+                        }[];
+                    };
+                    fromAmino: ({ sender, contract, msg, funds }: {
+                        sender: string;
+                        contract: string;
+                        msg: Uint8Array;
+                        funds: {
+                            denom: string;
+                            amount: string;
+                        }[];
+                    }) => _98.MsgExecuteContract;
+                };
+                "/cosmwasm.wasm.v1.MsgMigrateContract": {
+                    aminoType: string;
+                    toAmino: ({ sender, contract, codeId, msg }: _98.MsgMigrateContract) => {
+                        sender: string;
+                        contract: string;
+                        code_id: string;
+                        msg: Uint8Array;
+                    };
+                    fromAmino: ({ sender, contract, code_id, msg }: {
+                        sender: string;
+                        contract: string;
+                        code_id: string;
+                        msg: Uint8Array;
+                    }) => _98.MsgMigrateContract;
+                };
+                "/cosmwasm.wasm.v1.MsgUpdateAdmin": {
+                    aminoType: string;
+                    toAmino: ({ sender, newAdmin, contract }: _98.MsgUpdateAdmin) => {
+                        sender: string;
+                        new_admin: string;
+                        contract: string;
+                    };
+                    fromAmino: ({ sender, new_admin, contract }: {
+                        sender: string;
+                        new_admin: string;
+                        contract: string;
+                    }) => _98.MsgUpdateAdmin;
+                };
+                "/cosmwasm.wasm.v1.MsgClearAdmin": {
+                    aminoType: string;
+                    toAmino: ({ sender, contract }: _98.MsgClearAdmin) => {
+                        sender: string;
+                        contract: string;
+                    };
+                    fromAmino: ({ sender, contract }: {
+                        sender: string;
+                        contract: string;
+                    }) => _98.MsgClearAdmin;
+                };
+            };
             accessTypeFromJSON(object: any): _99.AccessType;
             accessTypeToJSON(object: _99.AccessType): string;
             contractCodeHistoryOperationTypeFromJSON(object: any): _99.ContractCodeHistoryOperationType;

@@ -654,6 +654,143 @@ export declare namespace cosmos {
     }
     namespace authz {
         const v1beta1: {
+            registry: readonly [string, import("@cosmjs/proto-signing").GeneratedType][];
+            load: (protoRegistry: import("@cosmjs/proto-signing").Registry) => void;
+            MessageComposer: {
+                encoded: {
+                    grant(value: _12.MsgGrant): {
+                        type_url: string;
+                        value: Uint8Array;
+                    };
+                    exec(value: _12.MsgExec): {
+                        type_url: string;
+                        value: Uint8Array;
+                    };
+                    revoke(value: _12.MsgRevoke): {
+                        type_url: string;
+                        value: Uint8Array;
+                    };
+                };
+                withTypeUrl: {
+                    grant(value: _12.MsgGrant): {
+                        typeUrl: string;
+                        value: _12.MsgGrant;
+                    };
+                    exec(value: _12.MsgExec): {
+                        typeUrl: string;
+                        value: _12.MsgExec;
+                    };
+                    revoke(value: _12.MsgRevoke): {
+                        typeUrl: string;
+                        value: _12.MsgRevoke;
+                    };
+                };
+                toJSON: {
+                    grant(value: _12.MsgGrant): {
+                        typeUrl: string;
+                        value: unknown;
+                    };
+                    exec(value: _12.MsgExec): {
+                        typeUrl: string;
+                        value: unknown;
+                    };
+                    revoke(value: _12.MsgRevoke): {
+                        typeUrl: string;
+                        value: unknown;
+                    };
+                };
+                fromJSON: {
+                    grant(value: any): {
+                        typeUrl: string;
+                        value: _12.MsgGrant;
+                    };
+                    exec(value: any): {
+                        typeUrl: string;
+                        value: _12.MsgExec;
+                    };
+                    revoke(value: any): {
+                        typeUrl: string;
+                        value: _12.MsgRevoke;
+                    };
+                };
+                fromPartial: {
+                    grant(value: _12.MsgGrant): {
+                        typeUrl: string;
+                        value: _12.MsgGrant;
+                    };
+                    exec(value: _12.MsgExec): {
+                        typeUrl: string;
+                        value: _12.MsgExec;
+                    };
+                    revoke(value: _12.MsgRevoke): {
+                        typeUrl: string;
+                        value: _12.MsgRevoke;
+                    };
+                };
+            };
+            AminoConverter: {
+                "/cosmos.authz.v1beta1.MsgGrant": {
+                    aminoType: string;
+                    toAmino: ({ granter, grantee, grant }: _12.MsgGrant) => {
+                        granter: string;
+                        grantee: string;
+                        grant: {
+                            authorization: {
+                                type_url: string;
+                                value: Uint8Array;
+                            };
+                            expiration: {
+                                seconds: string;
+                                nanos: number;
+                            };
+                        };
+                    };
+                    fromAmino: ({ granter, grantee, grant }: {
+                        granter: string;
+                        grantee: string;
+                        grant: {
+                            authorization: {
+                                type_url: string;
+                                value: Uint8Array;
+                            };
+                            expiration: {
+                                seconds: string;
+                                nanos: number;
+                            };
+                        };
+                    }) => _12.MsgGrant;
+                };
+                "/cosmos.authz.v1beta1.MsgExec": {
+                    aminoType: string;
+                    toAmino: ({ grantee, msgs }: _12.MsgExec) => {
+                        grantee: string;
+                        msgs: {
+                            type_url: string;
+                            value: Uint8Array;
+                        }[];
+                    };
+                    fromAmino: ({ grantee, msgs }: {
+                        grantee: string;
+                        msgs: {
+                            type_url: string;
+                            value: Uint8Array;
+                        }[];
+                    }) => _12.MsgExec;
+                };
+                "/cosmos.authz.v1beta1.MsgRevoke": {
+                    aminoType: string;
+                    toAmino: ({ granter, grantee, msgTypeUrl }: _12.MsgRevoke) => {
+                        granter: string;
+                        grantee: string;
+                        msg_type_url: string;
+                    };
+                    fromAmino: ({ granter, grantee, msg_type_url }: {
+                        granter: string;
+                        grantee: string;
+                        msg_type_url: string;
+                    }) => _12.MsgRevoke;
+                };
+            };
             MsgGrant: {
                 encode(message: _12.MsgGrant, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
                 decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _12.MsgGrant;
@@ -1198,6 +1335,116 @@ export declare namespace cosmos {
     }
     namespace bank {
         const v1beta1: {
+            registry: readonly [string, import("@cosmjs/proto-signing").GeneratedType][];
+            load: (protoRegistry: import("@cosmjs/proto-signing").Registry) => void;
+            MessageComposer: {
+                encoded: {
+                    send(value: _17.MsgSend): {
+                        type_url: string;
+                        value: Uint8Array;
+                    };
+                    multiSend(value: _17.MsgMultiSend): {
+                        type_url: string;
+                        value: Uint8Array;
+                    };
+                };
+                withTypeUrl: {
+                    send(value: _17.MsgSend): {
+                        typeUrl: string;
+                        value: _17.MsgSend;
+                    };
+                    multiSend(value: _17.MsgMultiSend): {
+                        typeUrl: string;
+                        value: _17.MsgMultiSend;
+                    };
+                };
+                toJSON: {
+                    send(value: _17.MsgSend): {
+                        typeUrl: string;
+                        value: unknown;
+                    };
+                    multiSend(value: _17.MsgMultiSend): {
+                        typeUrl: string;
+                        value: unknown;
+                    };
+                };
+                fromJSON: {
+                    send(value: any): {
+                        typeUrl: string;
+                        value: _17.MsgSend;
+                    };
+                    multiSend(value: any): {
+                        typeUrl: string;
+                        value: _17.MsgMultiSend;
+                    };
+                };
+                fromPartial: {
+                    send(value: _17.MsgSend): {
+                        typeUrl: string;
+                        value: _17.MsgSend;
+                    };
+                    multiSend(value: _17.MsgMultiSend): {
+                        typeUrl: string;
+                        value: _17.MsgMultiSend;
+                    };
+                };
+            };
+            AminoConverter: {
+                "/cosmos.bank.v1beta1.MsgSend": {
+                    aminoType: string;
+                    toAmino: ({ fromAddress, toAddress, amount }: _17.MsgSend) => {
+                        from_address: string;
+                        to_address: string;
+                        amount: {
+                            denom: string;
+                            amount: string;
+                        }[];
+                    };
+                    fromAmino: ({ from_address, to_address, amount }: {
+                        from_address: string;
+                        to_address: string;
+                        amount: {
+                            denom: string;
+                            amount: string;
+                        }[];
+                    }) => _17.MsgSend;
+                };
+                "/cosmos.bank.v1beta1.MsgMultiSend": {
+                    aminoType: string;
+                    toAmino: ({ inputs, outputs }: _17.MsgMultiSend) => {
+                        inputs: {
+                            address: string;
+                            coins: {
+                                denom: string;
+                                amount: string;
+                            }[];
+                        }[];
+                        outputs: {
+                            address: string;
+                            coins: {
+                                denom: string;
+                                amount: string;
+                            }[];
+                        }[];
+                    };
+                    fromAmino: ({ inputs, outputs }: {
+                        inputs: {
+                            address: string;
+                            coins: {
+                                denom: string;
+                                amount: string;
+                            }[];
+                        }[];
+                        outputs: {
+                            address: string;
+                            coins: {
+                                denom: string;
+                                amount: string;
+                            }[];
+                        }[];
+                    }) => _17.MsgMultiSend;
+                };
+            };
             MsgSend: {
                 encode(message: _17.MsgSend, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
                 decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _17.MsgSend;
@@ -8191,6 +8438,55 @@ export declare namespace cosmos {
     }
     namespace crisis {
         const v1beta1: {
+            registry: readonly [string, import("@cosmjs/proto-signing").GeneratedType][];
+            load: (protoRegistry: import("@cosmjs/proto-signing").Registry) => void;
+            MessageComposer: {
+                encoded: {
+                    verifyInvariant(value: _31.MsgVerifyInvariant): {
+                        type_url: string;
+                        value: Uint8Array;
+                    };
+                };
+                withTypeUrl: {
+                    verifyInvariant(value: _31.MsgVerifyInvariant): {
+                        typeUrl: string;
+                        value: _31.MsgVerifyInvariant;
+                    };
+                };
+                toJSON: {
+                    verifyInvariant(value: _31.MsgVerifyInvariant): {
+                        typeUrl: string;
+                        value: unknown;
+                    };
+                };
+                fromJSON: {
+                    verifyInvariant(value: any): {
+                        typeUrl: string;
+                        value: _31.MsgVerifyInvariant;
+                    };
+                };
+                fromPartial: {
+                    verifyInvariant(value: _31.MsgVerifyInvariant): {
+                        typeUrl: string;
+                        value: _31.MsgVerifyInvariant;
+                    };
+                };
+            };
+            AminoConverter: {
+                "/cosmos.crisis.v1beta1.MsgVerifyInvariant": {
+                    aminoType: string;
+                    toAmino: ({ sender, invariantModuleName, invariantRoute }: _31.MsgVerifyInvariant) => {
+                        sender: string;
+                        invariant_module_name: string;
+                        invariant_route: string;
+                    };
+                    fromAmino: ({ sender, invariant_module_name, invariant_route }: {
+                        sender: string;
+                        invariant_module_name: string;
+                        invariant_route: string;
+                    }) => _31.MsgVerifyInvariant;
+                };
+            };
             MsgVerifyInvariant: {
                 encode(message: _31.MsgVerifyInvariant, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
                 decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _31.MsgVerifyInvariant;
@@ -8514,6 +8810,150 @@ export declare namespace cosmos {
     }
     namespace distribution {
         const v1beta1: {
+            registry: readonly [string, import("@cosmjs/proto-signing").GeneratedType][];
+            load: (protoRegistry: import("@cosmjs/proto-signing").Registry) => void;
+            MessageComposer: {
+                encoded: {
+                    setWithdrawAddress(value: _41.MsgSetWithdrawAddress): {
+                        type_url: string;
+                        value: Uint8Array;
+                    };
+                    withdrawDelegatorReward(value: _41.MsgWithdrawDelegatorReward): {
+                        type_url: string;
+                        value: Uint8Array;
+                    };
+                    withdrawValidatorCommission(value: _41.MsgWithdrawValidatorCommission): {
+                        type_url: string;
+                        value: Uint8Array;
+                    };
+                    fundCommunityPool(value: _41.MsgFundCommunityPool): {
+                        type_url: string;
+                        value: Uint8Array;
+                    };
+                };
+                withTypeUrl: {
+                    setWithdrawAddress(value: _41.MsgSetWithdrawAddress): {
+                        typeUrl: string;
+                        value: _41.MsgSetWithdrawAddress;
+                    };
+                    withdrawDelegatorReward(value: _41.MsgWithdrawDelegatorReward): {
+                        typeUrl: string;
+                        value: _41.MsgWithdrawDelegatorReward;
+                    };
+                    withdrawValidatorCommission(value: _41.MsgWithdrawValidatorCommission): {
+                        typeUrl: string;
+                        value: _41.MsgWithdrawValidatorCommission;
+                    };
+                    fundCommunityPool(value: _41.MsgFundCommunityPool): {
+                        typeUrl: string;
+                        value: _41.MsgFundCommunityPool;
+                    };
+                };
+                toJSON: {
+                    setWithdrawAddress(value: _41.MsgSetWithdrawAddress): {
+                        typeUrl: string;
+                        value: unknown;
+                    };
+                    withdrawDelegatorReward(value: _41.MsgWithdrawDelegatorReward): {
+                        typeUrl: string;
+                        value: unknown;
+                    };
+                    withdrawValidatorCommission(value: _41.MsgWithdrawValidatorCommission): {
+                        typeUrl: string;
+                        value: unknown;
+                    };
+                    fundCommunityPool(value: _41.MsgFundCommunityPool): {
+                        typeUrl: string;
+                        value: unknown;
+                    };
+                };
+                fromJSON: {
+                    setWithdrawAddress(value: any): {
+                        typeUrl: string;
+                        value: _41.MsgSetWithdrawAddress;
+                    };
+                    withdrawDelegatorReward(value: any): {
+                        typeUrl: string;
+                        value: _41.MsgWithdrawDelegatorReward;
+                    };
+                    withdrawValidatorCommission(value: any): {
+                        typeUrl: string;
+                        value: _41.MsgWithdrawValidatorCommission;
+                    };
+                    fundCommunityPool(value: any): {
+                        typeUrl: string;
+                        value: _41.MsgFundCommunityPool;
+                    };
+                };
+                fromPartial: {
+                    setWithdrawAddress(value: _41.MsgSetWithdrawAddress): {
+                        typeUrl: string;
+                        value: _41.MsgSetWithdrawAddress;
+                    };
+                    withdrawDelegatorReward(value: _41.MsgWithdrawDelegatorReward): {
+                        typeUrl: string;
+                        value: _41.MsgWithdrawDelegatorReward;
+                    };
+                    withdrawValidatorCommission(value: _41.MsgWithdrawValidatorCommission): {
+                        typeUrl: string;
+                        value: _41.MsgWithdrawValidatorCommission;
+                    };
+                    fundCommunityPool(value: _41.MsgFundCommunityPool): {
+                        typeUrl: string;
+                        value: _41.MsgFundCommunityPool;
+                    };
+                };
+            };
+            AminoConverter: {
+                "/cosmos.distribution.v1beta1.MsgSetWithdrawAddress": {
+                    aminoType: string;
+                    toAmino: ({ delegatorAddress, withdrawAddress }: _41.MsgSetWithdrawAddress) => {
+                        delegator_address: string;
+                        withdraw_address: string;
+                    };
+                    fromAmino: ({ delegator_address, withdraw_address }: {
+                        delegator_address: string;
+                        withdraw_address: string;
+                    }) => _41.MsgSetWithdrawAddress;
+                };
+                "/cosmos.distribution.v1beta1.MsgWithdrawDelegatorReward": {
+                    aminoType: string;
+                    toAmino: ({ delegatorAddress, validatorAddress }: _41.MsgWithdrawDelegatorReward) => {
+                        delegator_address: string;
+                        validator_address: string;
+                    };
+                    fromAmino: ({ delegator_address, validator_address }: {
+                        delegator_address: string;
+                        validator_address: string;
+                    }) => _41.MsgWithdrawDelegatorReward;
+                };
+                "/cosmos.distribution.v1beta1.MsgWithdrawValidatorCommission": {
+                    aminoType: string;
+                    toAmino: ({ validatorAddress }: _41.MsgWithdrawValidatorCommission) => {
+                        validator_address: string;
+                    };
+                    fromAmino: ({ validator_address }: {
+                        validator_address: string;
+                    }) => _41.MsgWithdrawValidatorCommission;
+                };
+                "/cosmos.distribution.v1beta1.MsgFundCommunityPool": {
+                    aminoType: string;
+                    toAmino: ({ amount, depositor }: _41.MsgFundCommunityPool) => {
+                        amount: {
+                            denom: string;
+                            amount: string;
+                        }[];
+                        depositor: string;
+                    };
+                    fromAmino: ({ amount, depositor }: {
+                        amount: {
+                            denom: string;
+                            amount: string;
+                        }[];
+                        depositor: string;
+                    }) => _41.MsgFundCommunityPool;
+                };
+            };
             MsgSetWithdrawAddress: {
                 encode(message: _41.MsgSetWithdrawAddress, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
                 decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _41.MsgSetWithdrawAddress;
@@ -9925,6 +10365,59 @@ export declare namespace cosmos {
     }
     namespace evidence {
         const v1beta1: {
+            registry: readonly [string, import("@cosmjs/proto-signing").GeneratedType][];
+            load: (protoRegistry: import("@cosmjs/proto-signing").Registry) => void;
+            MessageComposer: {
+                encoded: {
+                    submitEvidence(value: _45.MsgSubmitEvidence): {
+                        type_url: string;
+                        value: Uint8Array;
+                    };
+                };
+                withTypeUrl: {
+                    submitEvidence(value: _45.MsgSubmitEvidence): {
+                        typeUrl: string;
+                        value: _45.MsgSubmitEvidence;
+                    };
+                };
+                toJSON: {
+                    submitEvidence(value: _45.MsgSubmitEvidence): {
+                        typeUrl: string;
+                        value: unknown;
+                    };
+                };
+                fromJSON: {
+                    submitEvidence(value: any): {
+                        typeUrl: string;
+                        value: _45.MsgSubmitEvidence;
+                    };
+                };
+                fromPartial: {
+                    submitEvidence(value: _45.MsgSubmitEvidence): {
+                        typeUrl: string;
+                        value: _45.MsgSubmitEvidence;
+                    };
+                };
+            };
+            AminoConverter: {
+                "/cosmos.evidence.v1beta1.MsgSubmitEvidence": {
+                    aminoType: string;
+                    toAmino: ({ submitter, evidence }: _45.MsgSubmitEvidence) => {
+                        submitter: string;
+                        evidence: {
+                            type_url: string;
+                            value: Uint8Array;
+                        };
+                    };
+                    fromAmino: ({ submitter, evidence }: {
+                        submitter: string;
+                        evidence: {
+                            type_url: string;
+                            value: Uint8Array;
+                        };
+                    }) => _45.MsgSubmitEvidence;
+                };
+            };
             MsgSubmitEvidence: {
                 encode(message: _45.MsgSubmitEvidence, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
                 decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _45.MsgSubmitEvidence;
@@ -10102,6 +10595,92 @@ export declare namespace cosmos {
     }
     namespace feegrant {
         const v1beta1: {
+            registry: readonly [string, import("@cosmjs/proto-signing").GeneratedType][];
+            load: (protoRegistry: import("@cosmjs/proto-signing").Registry) => void;
+            MessageComposer: {
+                encoded: {
+                    grantAllowance(value: _49.MsgGrantAllowance): {
+                        type_url: string;
+                        value: Uint8Array;
+                    };
+                    revokeAllowance(value: _49.MsgRevokeAllowance): {
+                        type_url: string;
+                        value: Uint8Array;
+                    };
+                };
+                withTypeUrl: {
+                    grantAllowance(value: _49.MsgGrantAllowance): {
+                        typeUrl: string;
+                        value: _49.MsgGrantAllowance;
+                    };
+                    revokeAllowance(value: _49.MsgRevokeAllowance): {
+                        typeUrl: string;
+                        value: _49.MsgRevokeAllowance;
+                    };
+                };
+                toJSON: {
+                    grantAllowance(value: _49.MsgGrantAllowance): {
+                        typeUrl: string;
+                        value: unknown;
+                    };
+                    revokeAllowance(value: _49.MsgRevokeAllowance): {
+                        typeUrl: string;
+                        value: unknown;
+                    };
+                };
+                fromJSON: {
+                    grantAllowance(value: any): {
+                        typeUrl: string;
+                        value: _49.MsgGrantAllowance;
+                    };
+                    revokeAllowance(value: any): {
+                        typeUrl: string;
+                        value: _49.MsgRevokeAllowance;
+                    };
+                };
+                fromPartial: {
+                    grantAllowance(value: _49.MsgGrantAllowance): {
+                        typeUrl: string;
+                        value: _49.MsgGrantAllowance;
+                    };
+                    revokeAllowance(value: _49.MsgRevokeAllowance): {
+                        typeUrl: string;
+                        value: _49.MsgRevokeAllowance;
+                    };
+                };
+            };
+            AminoConverter: {
+                "/cosmos.feegrant.v1beta1.MsgGrantAllowance": {
+                    aminoType: string;
+                    toAmino: ({ granter, grantee, allowance }: _49.MsgGrantAllowance) => {
+                        granter: string;
+                        grantee: string;
+                        allowance: {
+                            type_url: string;
+                            value: Uint8Array;
+                        };
+                    };
+                    fromAmino: ({ granter, grantee, allowance }: {
+                        granter: string;
+                        grantee: string;
+                        allowance: {
+                            type_url: string;
+                            value: Uint8Array;
+                        };
+                    }) => _49.MsgGrantAllowance;
+                };
+                "/cosmos.feegrant.v1beta1.MsgRevokeAllowance": {
+                    aminoType: string;
+                    toAmino: ({ granter, grantee }: _49.MsgRevokeAllowance) => {
+                        granter: string;
+                        grantee: string;
+                    };
+                    fromAmino: ({ granter, grantee }: {
+                        granter: string;
+                        grantee: string;
+                    }) => _49.MsgRevokeAllowance;
+                };
+            };
             MsgGrantAllowance: {
                 encode(message: _49.MsgGrantAllowance, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
                 decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _49.MsgGrantAllowance;
@@ -10601,6 +11180,221 @@ export declare namespace cosmos {
     }
     namespace gov {
         const v1: {
+            registry: readonly [string, import("@cosmjs/proto-signing").GeneratedType][];
+            load: (protoRegistry: import("@cosmjs/proto-signing").Registry) => void;
+            MessageComposer: {
+                encoded: {
+                    submitProposal(value: _54.MsgSubmitProposal): {
+                        type_url: string;
+                        value: Uint8Array;
+                    };
+                    execLegacyContent(value: _54.MsgExecLegacyContent): {
+                        type_url: string;
+                        value: Uint8Array;
+                    };
+                    vote(value: _54.MsgVote): {
+                        type_url: string;
+                        value: Uint8Array;
+                    };
+                    voteWeighted(value: _54.MsgVoteWeighted): {
+                        type_url: string;
+                        value: Uint8Array;
+                    };
+                    deposit(value: _54.MsgDeposit): {
+                        type_url: string;
+                        value: Uint8Array;
+                    };
+                };
+                withTypeUrl: {
+                    submitProposal(value: _54.MsgSubmitProposal): {
+                        typeUrl: string;
+                        value: _54.MsgSubmitProposal;
+                    };
+                    execLegacyContent(value: _54.MsgExecLegacyContent): {
+                        typeUrl: string;
+                        value: _54.MsgExecLegacyContent;
+                    };
+                    vote(value: _54.MsgVote): {
+                        typeUrl: string;
+                        value: _54.MsgVote;
+                    };
+                    voteWeighted(value: _54.MsgVoteWeighted): {
+                        typeUrl: string;
+                        value: _54.MsgVoteWeighted;
+                    };
+                    deposit(value: _54.MsgDeposit): {
+                        typeUrl: string;
+                        value: _54.MsgDeposit;
+                    };
+                };
+                toJSON: {
+                    submitProposal(value: _54.MsgSubmitProposal): {
+                        typeUrl: string;
+                        value: unknown;
+                    };
+                    execLegacyContent(value: _54.MsgExecLegacyContent): {
+                        typeUrl: string;
+                        value: unknown;
+                    };
+                    vote(value: _54.MsgVote): {
+                        typeUrl: string;
+                        value: unknown;
+                    };
+                    voteWeighted(value: _54.MsgVoteWeighted): {
+                        typeUrl: string;
+                        value: unknown;
+                    };
+                    deposit(value: _54.MsgDeposit): {
+                        typeUrl: string;
+                        value: unknown;
+                    };
+                };
+                fromJSON: {
+                    submitProposal(value: any): {
+                        typeUrl: string;
+                        value: _54.MsgSubmitProposal;
+                    };
+                    execLegacyContent(value: any): {
+                        typeUrl: string;
+                        value: _54.MsgExecLegacyContent;
+                    };
+                    vote(value: any): {
+                        typeUrl: string;
+                        value: _54.MsgVote;
+                    };
+                    voteWeighted(value: any): {
+                        typeUrl: string;
+                        value: _54.MsgVoteWeighted;
+                    };
+                    deposit(value: any): {
+                        typeUrl: string;
+                        value: _54.MsgDeposit;
+                    };
+                };
+                fromPartial: {
+                    submitProposal(value: _54.MsgSubmitProposal): {
+                        typeUrl: string;
+                        value: _54.MsgSubmitProposal;
+                    };
+                    execLegacyContent(value: _54.MsgExecLegacyContent): {
+                        typeUrl: string;
+                        value: _54.MsgExecLegacyContent;
+                    };
+                    vote(value: _54.MsgVote): {
+                        typeUrl: string;
+                        value: _54.MsgVote;
+                    };
+                    voteWeighted(value: _54.MsgVoteWeighted): {
+                        typeUrl: string;
+                        value: _54.MsgVoteWeighted;
+                    };
+                    deposit(value: _54.MsgDeposit): {
+                        typeUrl: string;
+                        value: _54.MsgDeposit;
+                    };
+                };
+            };
+            AminoConverter: {
+                "/cosmos.gov.v1.MsgSubmitProposal": {
+                    aminoType: string;
+                    toAmino: ({ messages, initialDeposit, proposer, metadata }: _54.MsgSubmitProposal) => {
+                        messages: {
+                            type_url: string;
+                            value: Uint8Array;
+                        }[];
+                        initial_deposit: {
+                            denom: string;
+                            amount: string;
+                        }[];
+                        proposer: string;
+                        metadata: string;
+                    };
+                    fromAmino: ({ messages, initial_deposit, proposer, metadata }: {
+                        messages: {
+                            type_url: string;
+                            value: Uint8Array;
+                        }[];
+                        initial_deposit: {
+                            denom: string;
+                            amount: string;
+                        }[];
+                        proposer: string;
+                        metadata: string;
+                    }) => _54.MsgSubmitProposal;
+                };
+                "/cosmos.gov.v1.MsgExecLegacyContent": {
+                    aminoType: string;
+                    toAmino: ({ content, authority }: _54.MsgExecLegacyContent) => {
+                        content: {
+                            type_url: string;
+                            value: Uint8Array;
+                        };
+                        authority: string;
+                    };
+                    fromAmino: ({ content, authority }: {
+                        content: {
+                            type_url: string;
+                            value: Uint8Array;
+                        };
+                        authority: string;
+                    }) => _54.MsgExecLegacyContent;
+                };
+                "/cosmos.gov.v1.MsgVote": {
+                    aminoType: string;
+                    toAmino: ({ proposalId, voter, option, metadata }: _54.MsgVote) => {
+                        proposal_id: string;
+                        voter: string;
+                        option: number;
+                        metadata: string;
+                    };
+                    fromAmino: ({ proposal_id, voter, option, metadata }: {
+                        proposal_id: string;
+                        voter: string;
+                        option: number;
+                        metadata: string;
+                    }) => _54.MsgVote;
+                };
+                "/cosmos.gov.v1.MsgVoteWeighted": {
+                    aminoType: string;
+                    toAmino: ({ proposalId, voter, options, metadata }: _54.MsgVoteWeighted) => {
+                        proposal_id: string;
+                        voter: string;
+                        options: {
+                            option: number;
+                            weight: string;
+                        }[];
+                        metadata: string;
+                    };
+                    fromAmino: ({ proposal_id, voter, options, metadata }: {
+                        proposal_id: string;
+                        voter: string;
+                        options: {
+                            option: number;
+                            weight: string;
+                        }[];
+                        metadata: string;
+                    }) => _54.MsgVoteWeighted;
+                };
+                "/cosmos.gov.v1.MsgDeposit": {
+                    aminoType: string;
+                    toAmino: ({ proposalId, depositor, amount }: _54.MsgDeposit) => {
+                        proposal_id: string;
+                        depositor: string;
+                        amount: {
+                            denom: string;
+                            amount: string;
+                        }[];
+                    };
+                    fromAmino: ({ proposal_id, depositor, amount }: {
+                        proposal_id: string;
+                        depositor: string;
+                        amount: {
+                            denom: string;
+                            amount: string;
+                        }[];
+                    }) => _54.MsgDeposit;
+                };
+            };
             MsgSubmitProposal: {
                 encode(message: _54.MsgSubmitProposal, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
                 decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _54.MsgSubmitProposal;
@@ -12029,6 +12823,178 @@ export declare namespace cosmos {
             };
         };
         const v1beta1: {
+            registry: readonly [string, import("@cosmjs/proto-signing").GeneratedType][];
+            load: (protoRegistry: import("@cosmjs/proto-signing").Registry) => void;
+            MessageComposer: {
+                encoded: {
+                    submitProposal(value: _58.MsgSubmitProposal): {
+                        type_url: string;
+                        value: Uint8Array;
+                    };
+                    vote(value: _58.MsgVote): {
+                        type_url: string;
+                        value: Uint8Array;
+                    };
+                    voteWeighted(value: _58.MsgVoteWeighted): {
+                        type_url: string;
+                        value: Uint8Array;
+                    };
+                    deposit(value: _58.MsgDeposit): {
+                        type_url: string;
+                        value: Uint8Array;
+                    };
+                };
+                withTypeUrl: {
+                    submitProposal(value: _58.MsgSubmitProposal): {
+                        typeUrl: string;
+                        value: _58.MsgSubmitProposal;
+                    };
+                    vote(value: _58.MsgVote): {
+                        typeUrl: string;
+                        value: _58.MsgVote;
+                    };
+                    voteWeighted(value: _58.MsgVoteWeighted): {
+                        typeUrl: string;
+                        value: _58.MsgVoteWeighted;
+                    };
+                    deposit(value: _58.MsgDeposit): {
+                        typeUrl: string;
+                        value: _58.MsgDeposit;
+                    };
+                };
+                toJSON: {
+                    submitProposal(value: _58.MsgSubmitProposal): {
+                        typeUrl: string;
+                        value: unknown;
+                    };
+                    vote(value: _58.MsgVote): {
+                        typeUrl: string;
+                        value: unknown;
+                    };
+                    voteWeighted(value: _58.MsgVoteWeighted): {
+                        typeUrl: string;
+                        value: unknown;
+                    };
+                    deposit(value: _58.MsgDeposit): {
+                        typeUrl: string;
+                        value: unknown;
+                    };
+                };
+                fromJSON: {
+                    submitProposal(value: any): {
+                        typeUrl: string;
+                        value: _58.MsgSubmitProposal;
+                    };
+                    vote(value: any): {
+                        typeUrl: string;
+                        value: _58.MsgVote;
+                    };
+                    voteWeighted(value: any): {
+                        typeUrl: string;
+                        value: _58.MsgVoteWeighted;
+                    };
+                    deposit(value: any): {
+                        typeUrl: string;
+                        value: _58.MsgDeposit;
+                    };
+                };
+                fromPartial: {
+                    submitProposal(value: _58.MsgSubmitProposal): {
+                        typeUrl: string;
+                        value: _58.MsgSubmitProposal;
+                    };
+                    vote(value: _58.MsgVote): {
+                        typeUrl: string;
+                        value: _58.MsgVote;
+                    };
+                    voteWeighted(value: _58.MsgVoteWeighted): {
+                        typeUrl: string;
+                        value: _58.MsgVoteWeighted;
+                    };
+                    deposit(value: _58.MsgDeposit): {
+                        typeUrl: string;
+                        value: _58.MsgDeposit;
+                    };
+                };
+            };
+            AminoConverter: {
+                "/cosmos.gov.v1beta1.MsgSubmitProposal": {
+                    aminoType: string;
+                    toAmino: ({ content, initialDeposit, proposer }: _58.MsgSubmitProposal) => {
+                        content: {
+                            type_url: string;
+                            value: Uint8Array;
+                        };
+                        initial_deposit: {
+                            denom: string;
+                            amount: string;
+                        }[];
+                        proposer: string;
+                    };
+                    fromAmino: ({ content, initial_deposit, proposer }: {
+                        content: {
+                            type_url: string;
+                            value: Uint8Array;
+                        };
+                        initial_deposit: {
+                            denom: string;
+                            amount: string;
+                        }[];
+                        proposer: string;
+                    }) => _58.MsgSubmitProposal;
+                };
+                "/cosmos.gov.v1beta1.MsgVote": {
+                    aminoType: string;
+                    toAmino: ({ proposalId, voter, option }: _58.MsgVote) => {
+                        proposal_id: string;
+                        voter: string;
+                        option: number;
+                    };
+                    fromAmino: ({ proposal_id, voter, option }: {
+                        proposal_id: string;
+                        voter: string;
+                        option: number;
+                    }) => _58.MsgVote;
+                };
+                "/cosmos.gov.v1beta1.MsgVoteWeighted": {
+                    aminoType: string;
+                    toAmino: ({ proposalId, voter, options }: _58.MsgVoteWeighted) => {
+                        proposal_id: string;
+                        voter: string;
+                        options: {
+                            option: number;
+                            weight: string;
+                        }[];
+                    };
+                    fromAmino: ({ proposal_id, voter, options }: {
+                        proposal_id: string;
+                        voter: string;
+                        options: {
+                            option: number;
+                            weight: string;
+                        }[];
+                    }) => _58.MsgVoteWeighted;
+                };
+                "/cosmos.gov.v1beta1.MsgDeposit": {
+                    aminoType: string;
+                    toAmino: ({ proposalId, depositor, amount }: _58.MsgDeposit) => {
+                        proposal_id: string;
+                        depositor: string;
+                        amount: {
+                            denom: string;
+                            amount: string;
+                        }[];
+                    };
+                    fromAmino: ({ proposal_id, depositor, amount }: {
+                        proposal_id: string;
+                        depositor: string;
+                        amount: {
+                            denom: string;
+                            amount: string;
+                        }[];
+                    }) => _58.MsgDeposit;
+                };
+            };
             MsgSubmitProposal: {
                 encode(message: _58.MsgSubmitProposal, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
                 decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _58.MsgSubmitProposal;
@@ -13392,6 +14358,566 @@ export declare namespace cosmos {
     }
     namespace group {
         const v1: {
+            registry: readonly [string, import("@cosmjs/proto-signing").GeneratedType][];
+            load: (protoRegistry: import("@cosmjs/proto-signing").Registry) => void;
+            MessageComposer: {
+                encoded: {
+                    createGroup(value: _62.MsgCreateGroup): {
+                        type_url: string;
+                        value: Uint8Array;
+                    };
+                    updateGroupMembers(value: _62.MsgUpdateGroupMembers): {
+                        type_url: string;
+                        value: Uint8Array;
+                    };
+                    updateGroupAdmin(value: _62.MsgUpdateGroupAdmin): {
+                        type_url: string;
+                        value: Uint8Array;
+                    };
+                    updateGroupMetadata(value: _62.MsgUpdateGroupMetadata): {
+                        type_url: string;
+                        value: Uint8Array;
+                    };
+                    createGroupPolicy(value: _62.MsgCreateGroupPolicy): {
+                        type_url: string;
+                        value: Uint8Array;
+                    };
+                    createGroupWithPolicy(value: _62.MsgCreateGroupWithPolicy): {
+                        type_url: string;
+                        value: Uint8Array;
+                    };
+                    updateGroupPolicyAdmin(value: _62.MsgUpdateGroupPolicyAdmin): {
+                        type_url: string;
+                        value: Uint8Array;
+                    };
+                    updateGroupPolicyDecisionPolicy(value: _62.MsgUpdateGroupPolicyDecisionPolicy): {
+                        type_url: string;
+                        value: Uint8Array;
+                    };
+                    updateGroupPolicyMetadata(value: _62.MsgUpdateGroupPolicyMetadata): {
+                        type_url: string;
+                        value: Uint8Array;
+                    };
+                    submitProposal(value: _62.MsgSubmitProposal): {
+                        type_url: string;
+                        value: Uint8Array;
+                    };
+                    withdrawProposal(value: _62.MsgWithdrawProposal): {
+                        type_url: string;
+                        value: Uint8Array;
+                    };
+                    vote(value: _62.MsgVote): {
+                        type_url: string;
+                        value: Uint8Array;
+                    };
+                    exec(value: _62.MsgExec): {
+                        type_url: string;
+                        value: Uint8Array;
+                    };
+                    leaveGroup(value: _62.MsgLeaveGroup): {
+                        type_url: string;
+                        value: Uint8Array;
+                    };
+                };
+                withTypeUrl: {
+                    createGroup(value: _62.MsgCreateGroup): {
+                        typeUrl: string;
+                        value: _62.MsgCreateGroup;
+                    };
+                    updateGroupMembers(value: _62.MsgUpdateGroupMembers): {
+                        typeUrl: string;
+                        value: _62.MsgUpdateGroupMembers;
+                    };
+                    updateGroupAdmin(value: _62.MsgUpdateGroupAdmin): {
+                        typeUrl: string;
+                        value: _62.MsgUpdateGroupAdmin;
+                    };
+                    updateGroupMetadata(value: _62.MsgUpdateGroupMetadata): {
+                        typeUrl: string;
+                        value: _62.MsgUpdateGroupMetadata;
+                    };
+                    createGroupPolicy(value: _62.MsgCreateGroupPolicy): {
+                        typeUrl: string;
+                        value: _62.MsgCreateGroupPolicy;
+                    };
+                    createGroupWithPolicy(value: _62.MsgCreateGroupWithPolicy): {
+                        typeUrl: string;
+                        value: _62.MsgCreateGroupWithPolicy;
+                    };
+                    updateGroupPolicyAdmin(value: _62.MsgUpdateGroupPolicyAdmin): {
+                        typeUrl: string;
+                        value: _62.MsgUpdateGroupPolicyAdmin;
+                    };
+                    updateGroupPolicyDecisionPolicy(value: _62.MsgUpdateGroupPolicyDecisionPolicy): {
+                        typeUrl: string;
+                        value: _62.MsgUpdateGroupPolicyDecisionPolicy;
+                    };
+                    updateGroupPolicyMetadata(value: _62.MsgUpdateGroupPolicyMetadata): {
+                        typeUrl: string;
+                        value: _62.MsgUpdateGroupPolicyMetadata;
+                    };
+                    submitProposal(value: _62.MsgSubmitProposal): {
+                        typeUrl: string;
+                        value: _62.MsgSubmitProposal;
+                    };
+                    withdrawProposal(value: _62.MsgWithdrawProposal): {
+                        typeUrl: string;
+                        value: _62.MsgWithdrawProposal;
+                    };
+                    vote(value: _62.MsgVote): {
+                        typeUrl: string;
+                        value: _62.MsgVote;
+                    };
+                    exec(value: _62.MsgExec): {
+                        typeUrl: string;
+                        value: _62.MsgExec;
+                    };
+                    leaveGroup(value: _62.MsgLeaveGroup): {
+                        typeUrl: string;
+                        value: _62.MsgLeaveGroup;
+                    };
+                };
+                toJSON: {
+                    createGroup(value: _62.MsgCreateGroup): {
+                        typeUrl: string;
+                        value: unknown;
+                    };
+                    updateGroupMembers(value: _62.MsgUpdateGroupMembers): {
+                        typeUrl: string;
+                        value: unknown;
+                    };
+                    updateGroupAdmin(value: _62.MsgUpdateGroupAdmin): {
+                        typeUrl: string;
+                        value: unknown;
+                    };
+                    updateGroupMetadata(value: _62.MsgUpdateGroupMetadata): {
+                        typeUrl: string;
+                        value: unknown;
+                    };
+                    createGroupPolicy(value: _62.MsgCreateGroupPolicy): {
+                        typeUrl: string;
+                        value: unknown;
+                    };
+                    createGroupWithPolicy(value: _62.MsgCreateGroupWithPolicy): {
+                        typeUrl: string;
+                        value: unknown;
+                    };
+                    updateGroupPolicyAdmin(value: _62.MsgUpdateGroupPolicyAdmin): {
+                        typeUrl: string;
+                        value: unknown;
+                    };
+                    updateGroupPolicyDecisionPolicy(value: _62.MsgUpdateGroupPolicyDecisionPolicy): {
+                        typeUrl: string;
+                        value: unknown;
+                    };
+                    updateGroupPolicyMetadata(value: _62.MsgUpdateGroupPolicyMetadata): {
+                        typeUrl: string;
+                        value: unknown;
+                    };
+                    submitProposal(value: _62.MsgSubmitProposal): {
+                        typeUrl: string;
+                        value: unknown;
+                    };
+                    withdrawProposal(value: _62.MsgWithdrawProposal): {
+                        typeUrl: string;
+                        value: unknown;
+                    };
+                    vote(value: _62.MsgVote): {
+                        typeUrl: string;
+                        value: unknown;
+                    };
+                    exec(value: _62.MsgExec): {
+                        typeUrl: string;
+                        value: unknown;
+                    };
+                    leaveGroup(value: _62.MsgLeaveGroup): {
+                        typeUrl: string;
+                        value: unknown;
+                    };
+                };
+                fromJSON: {
+                    createGroup(value: any): {
+                        typeUrl: string;
+                        value: _62.MsgCreateGroup;
+                    };
+                    updateGroupMembers(value: any): {
+                        typeUrl: string;
+                        value: _62.MsgUpdateGroupMembers;
+                    };
+                    updateGroupAdmin(value: any): {
+                        typeUrl: string;
+                        value: _62.MsgUpdateGroupAdmin;
+                    };
+                    updateGroupMetadata(value: any): {
+                        typeUrl: string;
+                        value: _62.MsgUpdateGroupMetadata;
+                    };
+                    createGroupPolicy(value: any): {
+                        typeUrl: string;
+                        value: _62.MsgCreateGroupPolicy;
+                    };
+                    createGroupWithPolicy(value: any): {
+                        typeUrl: string;
+                        value: _62.MsgCreateGroupWithPolicy;
+                    };
+                    updateGroupPolicyAdmin(value: any): {
+                        typeUrl: string;
+                        value: _62.MsgUpdateGroupPolicyAdmin;
+                    };
+                    updateGroupPolicyDecisionPolicy(value: any): {
+                        typeUrl: string;
+                        value: _62.MsgUpdateGroupPolicyDecisionPolicy;
+                    };
+                    updateGroupPolicyMetadata(value: any): {
+                        typeUrl: string;
+                        value: _62.MsgUpdateGroupPolicyMetadata;
+                    };
+                    submitProposal(value: any): {
+                        typeUrl: string;
+                        value: _62.MsgSubmitProposal;
+                    };
+                    withdrawProposal(value: any): {
+                        typeUrl: string;
+                        value: _62.MsgWithdrawProposal;
+                    };
+                    vote(value: any): {
+                        typeUrl: string;
+                        value: _62.MsgVote;
+                    };
+                    exec(value: any): {
+                        typeUrl: string;
+                        value: _62.MsgExec;
+                    };
+                    leaveGroup(value: any): {
+                        typeUrl: string;
+                        value: _62.MsgLeaveGroup;
+                    };
+                };
+                fromPartial: {
+                    createGroup(value: _62.MsgCreateGroup): {
+                        typeUrl: string;
+                        value: _62.MsgCreateGroup;
+                    };
+                    updateGroupMembers(value: _62.MsgUpdateGroupMembers): {
+                        typeUrl: string;
+                        value: _62.MsgUpdateGroupMembers;
+                    };
+                    updateGroupAdmin(value: _62.MsgUpdateGroupAdmin): {
+                        typeUrl: string;
+                        value: _62.MsgUpdateGroupAdmin;
+                    };
+                    updateGroupMetadata(value: _62.MsgUpdateGroupMetadata): {
+                        typeUrl: string;
+                        value: _62.MsgUpdateGroupMetadata;
+                    };
+                    createGroupPolicy(value: _62.MsgCreateGroupPolicy): {
+                        typeUrl: string;
+                        value: _62.MsgCreateGroupPolicy;
+                    };
+                    createGroupWithPolicy(value: _62.MsgCreateGroupWithPolicy): {
+                        typeUrl: string;
+                        value: _62.MsgCreateGroupWithPolicy;
+                    };
+                    updateGroupPolicyAdmin(value: _62.MsgUpdateGroupPolicyAdmin): {
+                        typeUrl: string;
+                        value: _62.MsgUpdateGroupPolicyAdmin;
+                    };
+                    updateGroupPolicyDecisionPolicy(value: _62.MsgUpdateGroupPolicyDecisionPolicy): {
+                        typeUrl: string;
+                        value: _62.MsgUpdateGroupPolicyDecisionPolicy;
+                    };
+                    updateGroupPolicyMetadata(value: _62.MsgUpdateGroupPolicyMetadata): {
+                        typeUrl: string;
+                        value: _62.MsgUpdateGroupPolicyMetadata;
+                    };
+                    submitProposal(value: _62.MsgSubmitProposal): {
+                        typeUrl: string;
+                        value: _62.MsgSubmitProposal;
+                    };
+                    withdrawProposal(value: _62.MsgWithdrawProposal): {
+                        typeUrl: string;
+                        value: _62.MsgWithdrawProposal;
+                    };
+                    vote(value: _62.MsgVote): {
+                        typeUrl: string;
+                        value: _62.MsgVote;
+                    };
+                    exec(value: _62.MsgExec): {
+                        typeUrl: string;
+                        value: _62.MsgExec;
+                    };
+                    leaveGroup(value: _62.MsgLeaveGroup): {
+                        typeUrl: string;
+                        value: _62.MsgLeaveGroup;
+                    };
+                };
+            };
+            AminoConverter: {
+                "/cosmos.group.v1.MsgCreateGroup": {
+                    aminoType: string;
+                    toAmino: ({ admin, members, metadata }: _62.MsgCreateGroup) => {
+                        admin: string;
+                        members: {
+                            address: string;
+                            weight: string;
+                            metadata: string;
+                            added_at: {
+                                seconds: string;
+                                nanos: number;
+                            };
+                        }[];
+                        metadata: string;
+                    };
+                    fromAmino: ({ admin, members, metadata }: {
+                        admin: string;
+                        members: {
+                            address: string;
+                            weight: string;
+                            metadata: string;
+                            added_at: {
+                                seconds: string;
+                                nanos: number;
+                            };
+                        }[];
+                        metadata: string;
+                    }) => _62.MsgCreateGroup;
+                };
+                "/cosmos.group.v1.MsgUpdateGroupMembers": {
+                    aminoType: string;
+                    toAmino: ({ admin, groupId, memberUpdates }: _62.MsgUpdateGroupMembers) => {
+                        admin: string;
+                        group_id: string;
+                        member_updates: {
+                            address: string;
+                            weight: string;
+                            metadata: string;
+                            added_at: {
+                                seconds: string;
+                                nanos: number;
+                            };
+                        }[];
+                    };
+                    fromAmino: ({ admin, group_id, member_updates }: {
+                        admin: string;
+                        group_id: string;
+                        member_updates: {
+                            address: string;
+                            weight: string;
+                            metadata: string;
+                            added_at: {
+                                seconds: string;
+                                nanos: number;
+                            };
+                        }[];
+                    }) => _62.MsgUpdateGroupMembers;
+                };
+                "/cosmos.group.v1.MsgUpdateGroupAdmin": {
+                    aminoType: string;
+                    toAmino: ({ admin, groupId, newAdmin }: _62.MsgUpdateGroupAdmin) => {
+                        admin: string;
+                        group_id: string;
+                        new_admin: string;
+                    };
+                    fromAmino: ({ admin, group_id, new_admin }: {
+                        admin: string;
+                        group_id: string;
+                        new_admin: string;
+                    }) => _62.MsgUpdateGroupAdmin;
+                };
+                "/cosmos.group.v1.MsgUpdateGroupMetadata": {
+                    aminoType: string;
+                    toAmino: ({ admin, groupId, metadata }: _62.MsgUpdateGroupMetadata) => {
+                        admin: string;
+                        group_id: string;
+                        metadata: string;
+                    };
+                    fromAmino: ({ admin, group_id, metadata }: {
+                        admin: string;
+                        group_id: string;
+                        metadata: string;
+                    }) => _62.MsgUpdateGroupMetadata;
+                };
+                "/cosmos.group.v1.MsgCreateGroupPolicy": {
+                    aminoType: string;
+                    toAmino: ({ admin, groupId, metadata, decisionPolicy }: _62.MsgCreateGroupPolicy) => {
+                        admin: string;
+                        group_id: string;
+                        metadata: string;
+                        decision_policy: {
+                            type_url: string;
+                            value: Uint8Array;
+                        };
+                    };
+                    fromAmino: ({ admin, group_id, metadata, decision_policy }: {
+                        admin: string;
+                        group_id: string;
+                        metadata: string;
+                        decision_policy: {
+                            type_url: string;
+                            value: Uint8Array;
+                        };
+                    }) => _62.MsgCreateGroupPolicy;
+                };
+                "/cosmos.group.v1.MsgCreateGroupWithPolicy": {
+                    aminoType: string;
+                    toAmino: ({ admin, members, groupMetadata, groupPolicyMetadata, groupPolicyAsAdmin, decisionPolicy }: _62.MsgCreateGroupWithPolicy) => {
+                        admin: string;
+                        members: {
+                            address: string;
+                            weight: string;
+                            metadata: string;
+                            added_at: {
+                                seconds: string;
+                                nanos: number;
+                            };
+                        }[];
+                        group_metadata: string;
+                        group_policy_metadata: string;
+                        group_policy_as_admin: boolean;
+                        decision_policy: {
+                            type_url: string;
+                            value: Uint8Array;
+                        };
+                    };
+                    fromAmino: ({ admin, members, group_metadata, group_policy_metadata, group_policy_as_admin, decision_policy }: {
+                        admin: string;
+                        members: {
+                            address: string;
+                            weight: string;
+                            metadata: string;
+                            added_at: {
+                                seconds: string;
+                                nanos: number;
+                            };
+                        }[];
+                        group_metadata: string;
+                        group_policy_metadata: string;
+                        group_policy_as_admin: boolean;
+                        decision_policy: {
+                            type_url: string;
+                            value: Uint8Array;
+                        };
+                    }) => _62.MsgCreateGroupWithPolicy;
+                };
+                "/cosmos.group.v1.MsgUpdateGroupPolicyAdmin": {
+                    aminoType: string;
+                    toAmino: ({ admin, address, newAdmin }: _62.MsgUpdateGroupPolicyAdmin) => {
+                        admin: string;
+                        address: string;
+                        new_admin: string;
+                    };
+                    fromAmino: ({ admin, address, new_admin }: {
+                        admin: string;
+                        address: string;
+                        new_admin: string;
+                    }) => _62.MsgUpdateGroupPolicyAdmin;
+                };
+                "/cosmos.group.v1.MsgUpdateGroupPolicyDecisionPolicy": {
+                    aminoType: string;
+                    toAmino: ({ admin, address, decisionPolicy }: _62.MsgUpdateGroupPolicyDecisionPolicy) => {
+                        admin: string;
+                        address: string;
+                        decision_policy: {
+                            type_url: string;
+                            value: Uint8Array;
+                        };
+                    };
+                    fromAmino: ({ admin, address, decision_policy }: {
+                        admin: string;
+                        address: string;
+                        decision_policy: {
+                            type_url: string;
+                            value: Uint8Array;
+                        };
+                    }) => _62.MsgUpdateGroupPolicyDecisionPolicy;
+                };
+                "/cosmos.group.v1.MsgUpdateGroupPolicyMetadata": {
+                    aminoType: string;
+                    toAmino: ({ admin, address, metadata }: _62.MsgUpdateGroupPolicyMetadata) => {
+                        admin: string;
+                        address: string;
+                        metadata: string;
+                    };
+                    fromAmino: ({ admin, address, metadata }: {
+                        admin: string;
+                        address: string;
+                        metadata: string;
+                    }) => _62.MsgUpdateGroupPolicyMetadata;
+                };
+                "/cosmos.group.v1.MsgSubmitProposal": {
+                    aminoType: string;
+                    toAmino: ({ address, proposers, metadata, messages, exec }: _62.MsgSubmitProposal) => {
+                        address: string;
+                        proposers: string[];
+                        metadata: string;
+                        messages: {
+                            type_url: string;
+                            value: Uint8Array;
+                        }[];
+                        exec: number;
+                    };
+                    fromAmino: ({ address, proposers, metadata, messages, exec }: {
+                        address: string;
+                        proposers: string[];
+                        metadata: string;
+                        messages: {
+                            type_url: string;
+                            value: Uint8Array;
+                        }[];
+                        exec: number;
+                    }) => _62.MsgSubmitProposal;
+                };
+                "/cosmos.group.v1.MsgWithdrawProposal": {
+                    aminoType: string;
+                    toAmino: ({ proposalId, address }: _62.MsgWithdrawProposal) => {
+                        proposal_id: string;
+                        address: string;
+                    };
+                    fromAmino: ({ proposal_id, address }: {
+                        proposal_id: string;
+                        address: string;
+                    }) => _62.MsgWithdrawProposal;
+                };
+                "/cosmos.group.v1.MsgVote": {
+                    aminoType: string;
+                    toAmino: ({ proposalId, voter, option, metadata, exec }: _62.MsgVote) => {
+                        proposal_id: string;
+                        voter: string;
+                        option: number;
+                        metadata: string;
+                        exec: number;
+                    };
+                    fromAmino: ({ proposal_id, voter, option, metadata, exec }: {
+                        proposal_id: string;
+                        voter: string;
+                        option: number;
+                        metadata: string;
+                        exec: number;
+                    }) => _62.MsgVote;
+                };
+                "/cosmos.group.v1.MsgExec": {
+                    aminoType: string;
+                    toAmino: ({ proposalId, signer }: _62.MsgExec) => {
+                        proposal_id: string;
+                        signer: string;
+                    };
+                    fromAmino: ({ proposal_id, signer }: {
+                        proposal_id: string;
+                        signer: string;
+                    }) => _62.MsgExec;
+                };
+                "/cosmos.group.v1.MsgLeaveGroup": {
+                    aminoType: string;
+                    toAmino: ({ address, groupId }: _62.MsgLeaveGroup) => {
+                        address: string;
+                        group_id: string;
+                    };
+                    fromAmino: ({ address, group_id }: {
+                        address: string;
+                        group_id: string;
+                    }) => _62.MsgLeaveGroup;
+                };
+            };
             voteOptionFromJSON(object: any): _63.VoteOption;
             voteOptionToJSON(object: _63.VoteOption): string;
             proposalStatusFromJSON(object: any): _63.ProposalStatus;
@@ -15856,6 +17382,57 @@ export declare namespace cosmos {
     }
     namespace nft {
         const v1beta1: {
+            registry: readonly [string, import("@cosmjs/proto-signing").GeneratedType][];
+            load: (protoRegistry: import("@cosmjs/proto-signing").Registry) => void;
+            MessageComposer: {
+                encoded: {
+                    send(value: _72.MsgSend): {
+                        type_url: string;
+                        value: Uint8Array;
+                    };
+                };
+                withTypeUrl: {
+                    send(value: _72.MsgSend): {
+                        typeUrl: string;
+                        value: _72.MsgSend;
+                    };
+                };
+                toJSON: {
+                    send(value: _72.MsgSend): {
+                        typeUrl: string;
+                        value: unknown;
+                    };
+                };
+                fromJSON: {
+                    send(value: any): {
+                        typeUrl: string;
+                        value: _72.MsgSend;
+                    };
+                };
+                fromPartial: {
+                    send(value: _72.MsgSend): {
+                        typeUrl: string;
+                        value: _72.MsgSend;
+                    };
+                };
+            };
+            AminoConverter: {
+                "/cosmos.nft.v1beta1.MsgSend": {
+                    aminoType: string;
+                    toAmino: ({ classId, id, sender, receiver }: _72.MsgSend) => {
+                        class_id: string;
+                        id: string;
+                        sender: string;
+                        receiver: string;
+                    };
+                    fromAmino: ({ class_id, id, sender, receiver }: {
+                        class_id: string;
+                        id: string;
+                        sender: string;
+                        receiver: string;
+                    }) => _72.MsgSend;
+                };
+            };
             MsgSend: {
                 encode(message: _72.MsgSend, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
                 decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _72.MsgSend;
@@ -16883,6 +18460,51 @@ export declare namespace cosmos {
     }
     namespace slashing {
         const v1beta1: {
+            registry: readonly [string, import("@cosmjs/proto-signing").GeneratedType][];
+            load: (protoRegistry: import("@cosmjs/proto-signing").Registry) => void;
+            MessageComposer: {
+                encoded: {
+                    unjail(value: _80.MsgUnjail): {
+                        type_url: string;
+                        value: Uint8Array;
+                    };
+                };
+                withTypeUrl: {
+                    unjail(value: _80.MsgUnjail): {
+                        typeUrl: string;
+                        value: _80.MsgUnjail;
+                    };
+                };
+                toJSON: {
+                    unjail(value: _80.MsgUnjail): {
+                        typeUrl: string;
+                        value: unknown;
+                    };
+                };
+                fromJSON: {
+                    unjail(value: any): {
+                        typeUrl: string;
+                        value: _80.MsgUnjail;
+                    };
+                };
+                fromPartial: {
+                    unjail(value: _80.MsgUnjail): {
+                        typeUrl: string;
+                        value: _80.MsgUnjail;
+                    };
+                };
+            };
+            AminoConverter: {
+                "/cosmos.slashing.v1beta1.MsgUnjail": {
+                    aminoType: string;
+                    toAmino: ({ validatorAddr }: _80.MsgUnjail) => {
+                        validator_addr: string;
+                    };
+                    fromAmino: ({ validator_addr }: {
+                        validator_addr: string;
+                    }) => _80.MsgUnjail;
+                };
+            };
             MsgUnjail: {
                 encode(message: _80.MsgUnjail, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
                 decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _80.MsgUnjail;
@@ -17314,6 +18936,261 @@ export declare namespace cosmos {
     }
     namespace staking {
         const v1beta1: {
+            registry: readonly [string, import("@cosmjs/proto-signing").GeneratedType][];
+            load: (protoRegistry: import("@cosmjs/proto-signing").Registry) => void;
+            MessageComposer: {
+                encoded: {
+                    createValidator(value: _85.MsgCreateValidator): {
+                        type_url: string;
+                        value: Uint8Array;
+                    };
+                    editValidator(value: _85.MsgEditValidator): {
+                        type_url: string;
+                        value: Uint8Array;
+                    };
+                    delegate(value: _85.MsgDelegate): {
+                        type_url: string;
+                        value: Uint8Array;
+                    };
+                    beginRedelegate(value: _85.MsgBeginRedelegate): {
+                        type_url: string;
+                        value: Uint8Array;
+                    };
+                    undelegate(value: _85.MsgUndelegate): {
+                        type_url: string;
+                        value: Uint8Array;
+                    };
+                };
+                withTypeUrl: {
+                    createValidator(value: _85.MsgCreateValidator): {
+                        typeUrl: string;
+                        value: _85.MsgCreateValidator;
+                    };
+                    editValidator(value: _85.MsgEditValidator): {
+                        typeUrl: string;
+                        value: _85.MsgEditValidator;
+                    };
+                    delegate(value: _85.MsgDelegate): {
+                        typeUrl: string;
+                        value: _85.MsgDelegate;
+                    };
+                    beginRedelegate(value: _85.MsgBeginRedelegate): {
+                        typeUrl: string;
+                        value: _85.MsgBeginRedelegate;
+                    };
+                    undelegate(value: _85.MsgUndelegate): {
+                        typeUrl: string;
+                        value: _85.MsgUndelegate;
+                    };
+                };
+                toJSON: {
+                    createValidator(value: _85.MsgCreateValidator): {
+                        typeUrl: string;
+                        value: unknown;
+                    };
+                    editValidator(value: _85.MsgEditValidator): {
+                        typeUrl: string;
+                        value: unknown;
+                    };
+                    delegate(value: _85.MsgDelegate): {
+                        typeUrl: string;
+                        value: unknown;
+                    };
+                    beginRedelegate(value: _85.MsgBeginRedelegate): {
+                        typeUrl: string;
+                        value: unknown;
+                    };
+                    undelegate(value: _85.MsgUndelegate): {
+                        typeUrl: string;
+                        value: unknown;
+                    };
+                };
+                fromJSON: {
+                    createValidator(value: any): {
+                        typeUrl: string;
+                        value: _85.MsgCreateValidator;
+                    };
+                    editValidator(value: any): {
+                        typeUrl: string;
+                        value: _85.MsgEditValidator;
+                    };
+                    delegate(value: any): {
+                        typeUrl: string;
+                        value: _85.MsgDelegate;
+                    };
+                    beginRedelegate(value: any): {
+                        typeUrl: string;
+                        value: _85.MsgBeginRedelegate;
+                    };
+                    undelegate(value: any): {
+                        typeUrl: string;
+                        value: _85.MsgUndelegate;
+                    };
+                };
+                fromPartial: {
+                    createValidator(value: _85.MsgCreateValidator): {
+                        typeUrl: string;
+                        value: _85.MsgCreateValidator;
+                    };
+                    editValidator(value: _85.MsgEditValidator): {
+                        typeUrl: string;
+                        value: _85.MsgEditValidator;
+                    };
+                    delegate(value: _85.MsgDelegate): {
+                        typeUrl: string;
+                        value: _85.MsgDelegate;
+                    };
+                    beginRedelegate(value: _85.MsgBeginRedelegate): {
+                        typeUrl: string;
+                        value: _85.MsgBeginRedelegate;
+                    };
+                    undelegate(value: _85.MsgUndelegate): {
+                        typeUrl: string;
+                        value: _85.MsgUndelegate;
+                    };
+                };
+            };
+            AminoConverter: {
+                "/cosmos.staking.v1beta1.MsgCreateValidator": {
+                    aminoType: string;
+                    toAmino: ({ description, commission, minSelfDelegation, delegatorAddress, validatorAddress, pubkey, value }: _85.MsgCreateValidator) => {
+                        description: {
+                            moniker: string;
+                            identity: string;
+                            website: string;
+                            security_contact: string;
+                            details: string;
+                        };
+                        commission: {
+                            rate: string;
+                            max_rate: string;
+                            max_change_rate: string;
+                        };
+                        min_self_delegation: string;
+                        delegator_address: string;
+                        validator_address: string;
+                        pubkey: {
+                            type_url: string;
+                            value: Uint8Array;
+                        };
+                        value: {
+                            denom: string;
+                            amount: string;
+                        };
+                    };
+                    fromAmino: ({ description, commission, min_self_delegation, delegator_address, validator_address, pubkey, value }: {
+                        description: {
+                            moniker: string;
+                            identity: string;
+                            website: string;
+                            security_contact: string;
+                            details: string;
+                        };
+                        commission: {
+                            rate: string;
+                            max_rate: string;
+                            max_change_rate: string;
+                        };
+                        min_self_delegation: string;
+                        delegator_address: string;
+                        validator_address: string;
+                        pubkey: {
+                            type_url: string;
+                            value: Uint8Array;
+                        };
+                        value: {
+                            denom: string;
+                            amount: string;
+                        };
+                    }) => _85.MsgCreateValidator;
+                };
+                "/cosmos.staking.v1beta1.MsgEditValidator": {
+                    aminoType: string;
+                    toAmino: ({ description, validatorAddress, commissionRate, minSelfDelegation }: _85.MsgEditValidator) => {
+                        description: {
+                            moniker: string;
+                            identity: string;
+                            website: string;
+                            security_contact: string;
+                            details: string;
+                        };
+                        validator_address: string;
+                        commission_rate: string;
+                        min_self_delegation: string;
+                    };
+                    fromAmino: ({ description, validator_address, commission_rate, min_self_delegation }: {
+                        description: {
+                            moniker: string;
+                            identity: string;
+                            website: string;
+                            security_contact: string;
+                            details: string;
+                        };
+                        validator_address: string;
+                        commission_rate: string;
+                        min_self_delegation: string;
+                    }) => _85.MsgEditValidator;
+                };
+                "/cosmos.staking.v1beta1.MsgDelegate": {
+                    aminoType: string;
+                    toAmino: ({ delegatorAddress, validatorAddress, amount }: _85.MsgDelegate) => {
+                        delegator_address: string;
+                        validator_address: string;
+                        amount: {
+                            denom: string;
+                            amount: string;
+                        };
+                    };
+                    fromAmino: ({ delegator_address, validator_address, amount }: {
+                        delegator_address: string;
+                        validator_address: string;
+                        amount: {
+                            denom: string;
+                            amount: string;
+                        };
+                    }) => _85.MsgDelegate;
+                };
+                "/cosmos.staking.v1beta1.MsgBeginRedelegate": {
+                    aminoType: string;
+                    toAmino: ({ delegatorAddress, validatorSrcAddress, validatorDstAddress, amount }: _85.MsgBeginRedelegate) => {
+                        delegator_address: string;
+                        validator_src_address: string;
+                        validator_dst_address: string;
+                        amount: {
+                            denom: string;
+                            amount: string;
+                        };
+                    };
+                    fromAmino: ({ delegator_address, validator_src_address, validator_dst_address, amount }: {
+                        delegator_address: string;
+                        validator_src_address: string;
+                        validator_dst_address: string;
+                        amount: {
+                            denom: string;
+                            amount: string;
+                        };
+                    }) => _85.MsgBeginRedelegate;
+                };
+                "/cosmos.staking.v1beta1.MsgUndelegate": {
+                    aminoType: string;
+                    toAmino: ({ delegatorAddress, validatorAddress, amount }: _85.MsgUndelegate) => {
+                        delegator_address: string;
+                        validator_address: string;
+                        amount: {
+                            denom: string;
+                            amount: string;
+                        };
+                    };
+                    fromAmino: ({ delegator_address, validator_address, amount }: {
+                        delegator_address: string;
+                        validator_address: string;
+                        amount: {
+                            denom: string;
+                            amount: string;
+                        };
+                    }) => _85.MsgUndelegate;
+                };
+            };
             MsgCreateValidator: {
                 encode(message: _85.MsgCreateValidator, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
                 decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _85.MsgCreateValidator;
@@ -27672,6 +29549,106 @@ export declare namespace cosmos {
     }
     namespace upgrade {
         const v1beta1: {
+            registry: readonly [string, import("@cosmjs/proto-signing").GeneratedType][];
+            load: (protoRegistry: import("@cosmjs/proto-signing").Registry) => void;
+            MessageComposer: {
+                encoded: {
+                    softwareUpgrade(value: _90.MsgSoftwareUpgrade): {
+                        type_url: string;
+                        value: Uint8Array;
+                    };
+                    cancelUpgrade(value: _90.MsgCancelUpgrade): {
+                        type_url: string;
+                        value: Uint8Array;
+                    };
+                };
+                withTypeUrl: {
+                    softwareUpgrade(value: _90.MsgSoftwareUpgrade): {
+                        typeUrl: string;
+                        value: _90.MsgSoftwareUpgrade;
+                    };
+                    cancelUpgrade(value: _90.MsgCancelUpgrade): {
+                        typeUrl: string;
+                        value: _90.MsgCancelUpgrade;
+                    };
+                };
+                toJSON: {
+                    softwareUpgrade(value: _90.MsgSoftwareUpgrade): {
+                        typeUrl: string;
+                        value: unknown;
+                    };
+                    cancelUpgrade(value: _90.MsgCancelUpgrade): {
+                        typeUrl: string;
+                        value: unknown;
+                    };
+                };
+                fromJSON: {
+                    softwareUpgrade(value: any): {
+                        typeUrl: string;
+                        value: _90.MsgSoftwareUpgrade;
+                    };
+                    cancelUpgrade(value: any): {
+                        typeUrl: string;
+                        value: _90.MsgCancelUpgrade;
+                    };
+                };
+                fromPartial: {
+                    softwareUpgrade(value: _90.MsgSoftwareUpgrade): {
+                        typeUrl: string;
+                        value: _90.MsgSoftwareUpgrade;
+                    };
+                    cancelUpgrade(value: _90.MsgCancelUpgrade): {
+                        typeUrl: string;
+                        value: _90.MsgCancelUpgrade;
+                    };
+                };
+            };
+            AminoConverter: {
+                "/cosmos.upgrade.v1beta1.MsgSoftwareUpgrade": {
+                    aminoType: string;
+                    toAmino: ({ authority, plan }: _90.MsgSoftwareUpgrade) => {
+                        authority: string;
+                        plan: {
+                            name: string;
+                            time: {
+                                seconds: string;
+                                nanos: number;
+                            };
+                            height: string;
+                            info: string;
+                            upgraded_client_state: {
+                                type_url: string;
+                                value: Uint8Array;
+                            };
+                        };
+                    };
+                    fromAmino: ({ authority, plan }: {
+                        authority: string;
+                        plan: {
+                            name: string;
+                            time: {
+                                seconds: string;
+                                nanos: number;
+                            };
+                            height: string;
+                            info: string;
+                            upgraded_client_state: {
+                                type_url: string;
+                                value: Uint8Array;
+                            };
+                        };
+                    }) => _90.MsgSoftwareUpgrade;
+                };
+                "/cosmos.upgrade.v1beta1.MsgCancelUpgrade": {
+                    aminoType: string;
+                    toAmino: ({ authority }: _90.MsgCancelUpgrade) => {
+                        authority: string;
+                    };
+                    fromAmino: ({ authority }: {
+                        authority: string;
+                    }) => _90.MsgCancelUpgrade;
+                };
+            };
             Plan: {
                 encode(message: _91.Plan, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
                 decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _91.Plan;
@@ -27990,6 +29967,151 @@ export declare namespace cosmos {
     }
     namespace vesting {
         const v1beta1: {
+            registry: readonly [string, import("@cosmjs/proto-signing").GeneratedType][];
+            load: (protoRegistry: import("@cosmjs/proto-signing").Registry) => void;
+            MessageComposer: {
+                encoded: {
+                    createVestingAccount(value: _92.MsgCreateVestingAccount): {
+                        type_url: string;
+                        value: Uint8Array;
+                    };
+                    createPermanentLockedAccount(value: _92.MsgCreatePermanentLockedAccount): {
+                        type_url: string;
+                        value: Uint8Array;
+                    };
+                    createPeriodicVestingAccount(value: _92.MsgCreatePeriodicVestingAccount): {
+                        type_url: string;
+                        value: Uint8Array;
+                    };
+                };
+                withTypeUrl: {
+                    createVestingAccount(value: _92.MsgCreateVestingAccount): {
+                        typeUrl: string;
+                        value: _92.MsgCreateVestingAccount;
+                    };
+                    createPermanentLockedAccount(value: _92.MsgCreatePermanentLockedAccount): {
+                        typeUrl: string;
+                        value: _92.MsgCreatePermanentLockedAccount;
+                    };
+                    createPeriodicVestingAccount(value: _92.MsgCreatePeriodicVestingAccount): {
+                        typeUrl: string;
+                        value: _92.MsgCreatePeriodicVestingAccount;
+                    };
+                };
+                toJSON: {
+                    createVestingAccount(value: _92.MsgCreateVestingAccount): {
+                        typeUrl: string;
+                        value: unknown;
+                    };
+                    createPermanentLockedAccount(value: _92.MsgCreatePermanentLockedAccount): {
+                        typeUrl: string;
+                        value: unknown;
+                    };
+                    createPeriodicVestingAccount(value: _92.MsgCreatePeriodicVestingAccount): {
+                        typeUrl: string;
+                        value: unknown;
+                    };
+                };
+                fromJSON: {
+                    createVestingAccount(value: any): {
+                        typeUrl: string;
+                        value: _92.MsgCreateVestingAccount;
+                    };
+                    createPermanentLockedAccount(value: any): {
+                        typeUrl: string;
+                        value: _92.MsgCreatePermanentLockedAccount;
+                    };
+                    createPeriodicVestingAccount(value: any): {
+                        typeUrl: string;
+                        value: _92.MsgCreatePeriodicVestingAccount;
+                    };
+                };
+                fromPartial: {
+                    createVestingAccount(value: _92.MsgCreateVestingAccount): {
+                        typeUrl: string;
+                        value: _92.MsgCreateVestingAccount;
+                    };
+                    createPermanentLockedAccount(value: _92.MsgCreatePermanentLockedAccount): {
+                        typeUrl: string;
+                        value: _92.MsgCreatePermanentLockedAccount;
+                    };
+                    createPeriodicVestingAccount(value: _92.MsgCreatePeriodicVestingAccount): {
+                        typeUrl: string;
+                        value: _92.MsgCreatePeriodicVestingAccount;
+                    };
+                };
+            };
+            AminoConverter: {
+                "/cosmos.vesting.v1beta1.MsgCreateVestingAccount": {
+                    aminoType: string;
+                    toAmino: ({ fromAddress, toAddress, amount, endTime, delayed }: _92.MsgCreateVestingAccount) => {
+                        from_address: string;
+                        to_address: string;
+                        amount: {
+                            denom: string;
+                            amount: string;
+                        }[];
+                        end_time: string;
+                        delayed: boolean;
+                    };
+                    fromAmino: ({ from_address, to_address, amount, end_time, delayed }: {
+                        from_address: string;
+                        to_address: string;
+                        amount: {
+                            denom: string;
+                            amount: string;
+                        }[];
+                        end_time: string;
+                        delayed: boolean;
+                    }) => _92.MsgCreateVestingAccount;
+                };
+                "/cosmos.vesting.v1beta1.MsgCreatePermanentLockedAccount": {
+                    aminoType: string;
+                    toAmino: ({ fromAddress, toAddress, amount }: _92.MsgCreatePermanentLockedAccount) => {
+                        from_address: string;
+                        to_address: string;
+                        amount: {
+                            denom: string;
+                            amount: string;
+                        }[];
+                    };
+                    fromAmino: ({ from_address, to_address, amount }: {
+                        from_address: string;
+                        to_address: string;
+                        amount: {
+                            denom: string;
+                            amount: string;
+                        }[];
+                    }) => _92.MsgCreatePermanentLockedAccount;
+                };
+                "/cosmos.vesting.v1beta1.MsgCreatePeriodicVestingAccount": {
+                    aminoType: string;
+                    toAmino: ({ fromAddress, toAddress, startTime, vestingPeriods }: _92.MsgCreatePeriodicVestingAccount) => {
+                        from_address: string;
+                        to_address: string;
+                        start_time: string;
+                        vesting_periods: {
+                            length: string;
+                            amount: {
+                                denom: string;
+                                amount: string;
+                            }[];
+                        }[];
+                    };
+                    fromAmino: ({ from_address, to_address, start_time, vesting_periods }: {
+                        from_address: string;
+                        to_address: string;
+                        start_time: string;
+                        vesting_periods: {
+                            length: string;
+                            amount: {
+                                denom: string;
+                                amount: string;
+                            }[];
+                        }[];
+                    }) => _92.MsgCreatePeriodicVestingAccount;
+                };
+            };
             BaseVestingAccount: {
                 encode(message: _93.BaseVestingAccount, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
                 decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _93.BaseVestingAccount;

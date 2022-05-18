@@ -12,5 +12,6 @@ export interface ProtoRef {
 export interface ProtoRoot {
     package: string;
     imports: string[];
+    importNames?: Record<string, Record<string, string>>;
     root: any;
 }
