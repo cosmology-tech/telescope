@@ -26,5 +26,7 @@ export default async (argv) => {
   protoDir = resolve(join(process.cwd(), protoDir));
   outPath = resolve(process.cwd(), outPath);
 
-  telescope({ protoDir, outPath })
+  telescope({ protoDir, outPath });
+
+  console.log(`✨ transpilation successful!`);
 };

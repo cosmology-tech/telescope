@@ -24,7 +24,6 @@ export default async (argv) => {
 
     // don't prompt if we got this...
     if (argv._.length) {
-        console.log(argv._)
         argv.pkg = argv._;
     }
 
