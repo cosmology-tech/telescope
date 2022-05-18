@@ -28,6 +28,11 @@ export const decode = {
         const prop = args.field.name;
         return switchOnTag(num, prop, baseTypes.int32(args));
     },
+    sint32(args: DecodeMethod) {
+        const num = args.field.id;
+        const prop = args.field.name;
+        return switchOnTag(num, prop, baseTypes.sint32(args));
+    },
     uint32(args: DecodeMethod) {
         const num = args.field.id;
         const prop = args.field.name;
@@ -37,6 +42,11 @@ export const decode = {
         const num = args.field.id;
         const prop = args.field.name;
         return switchOnTag(num, prop, baseTypes.int64(args));
+    },
+    sint64(args: DecodeMethod) {
+        const num = args.field.id;
+        const prop = args.field.name;
+        return switchOnTag(num, prop, baseTypes.sint64(args));
     },
     uint64(args: DecodeMethod) {
         const num = args.field.id;

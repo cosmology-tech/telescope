@@ -80,10 +80,14 @@ export const decodeMethodFields = (context: ProtoParseContext, name: string, pro
                 return decode.string(args);
             case 'int32':
                 return decode.int32(args);
+            case 'sint32':
+                return decode.sint32(args);
             case 'uint32':
                 return decode.uint32(args);
             case 'int64':
                 return decode.int64(args);
+            case 'sint64':
+                return decode.sint64(args);
             case 'uint64':
                 return decode.uint64(args);
             case 'double':
