@@ -45,6 +45,10 @@ export default async (argv) => {
                 'which packages do you want to support?',
             choices: [
                 {
+                    name: 'akash',
+                    value: '@protobufs/akash'
+                },
+                {
                     name: 'cosmos',
                     value: '@protobufs/cosmos'
                 },
