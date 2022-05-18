@@ -978,6 +978,19 @@ export const arrayTypes = {
             )
         );
     },
+    sint32() {
+        return t.expressionStatement(
+            t.callExpression(
+                t.memberExpression(
+                    t.identifier('writer'),
+                    t.identifier('sint32')
+                ),
+                [
+                    t.identifier('v')
+                ]
+            )
+        );
+    },
     uint32() {
         return t.expressionStatement(
             t.callExpression(
@@ -997,6 +1010,19 @@ export const arrayTypes = {
                 t.memberExpression(
                     t.identifier('writer'),
                     t.identifier('int64')
+                ),
+                [
+                    t.identifier('v')
+                ]
+            )
+        );
+    },
+    sint64() {
+        return t.expressionStatement(
+            t.callExpression(
+                t.memberExpression(
+                    t.identifier('writer'),
+                    t.identifier('sint64')
                 ),
                 [
                     t.identifier('v')

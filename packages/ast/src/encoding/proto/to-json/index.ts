@@ -45,10 +45,12 @@ export const toJSONMethodFields = (context: ProtoParseContext, name: string, pro
                 case 'float':
                     return [...m, toJSON.array(args, arrayTypes.float())];
                 case 'int32':
+                case 'sint32':
                     return [...m, toJSON.array(args, arrayTypes.int32())];
                 case 'uint32':
                     return [...m, toJSON.array(args, arrayTypes.uint32())];
                 case 'int64':
+                case 'sint64':
                     return [...m, toJSON.array(args, arrayTypes.int64(args))];
                 case 'uint64':
                     return [...m, toJSON.array(args, arrayTypes.uint64(args))];
@@ -68,8 +70,10 @@ export const toJSONMethodFields = (context: ProtoParseContext, name: string, pro
             switch (field.keyType) {
                 case 'string':
                 case 'int64':
+                case 'sint64':
                 case 'uint64':
                 case 'int32':
+                case 'sint32':
                 case 'uint32':
                     return [...m, ...toJSON.keyHash(args)];
                 default:
@@ -89,10 +93,12 @@ export const toJSONMethodFields = (context: ProtoParseContext, name: string, pro
             case 'bool':
                 return [...m, toJSON.bool(args)];
             case 'int32':
+            case 'sint32':
                 return [...m, toJSON.int32(args)];
             case 'uint32':
                 return [...m, toJSON.uint32(args)];
             case 'int64':
+            case 'sint64':
                 return [...m, toJSON.int64(args)];
             case 'uint64':
                 return [...m, toJSON.uint64(args)];

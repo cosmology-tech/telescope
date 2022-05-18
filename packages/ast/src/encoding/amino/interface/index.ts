@@ -50,12 +50,15 @@ export const renderAminoField = ({
         case 'string':
             return aminoInterface.defaultType(args);
         case 'int64':
+        case 'sint64':
         case 'uint64':
             return aminoInterface.long(args);
         case 'double':
-        case 'int64':
         case 'bool':
         case 'bytes':
+        case 'int32':
+        case 'sint32':
+        case 'uint32':
         case 'Timestamp':
         case 'google.protobuf.Timestamp':
             return aminoInterface.defaultType(args);

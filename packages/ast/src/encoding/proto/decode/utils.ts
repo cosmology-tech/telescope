@@ -158,6 +158,17 @@ export const baseTypes = {
         );
     },
 
+    // reader.sint32();
+    sint32(args: DecodeMethod) {
+        return t.callExpression(
+            t.memberExpression(
+                t.identifier('reader'),
+                t.identifier('sint32')
+            ),
+            []
+        );
+    },
+
     // reader.uint32();
     uint32(args: DecodeMethod) {
         return t.callExpression(
@@ -178,6 +189,24 @@ export const baseTypes = {
                 t.memberExpression(
                     t.identifier('reader'),
                     t.identifier('int64')
+                ),
+                []
+            ),
+            t.tsTypeReference(
+                t.identifier('Long')
+            )
+        );
+    },
+
+    // (reader.sint64() as Long);
+    sint64(args: DecodeMethod) {
+        args.context.addUtil('Long');
+
+        return t.tsAsExpression(
+            t.callExpression(
+                t.memberExpression(
+                    t.identifier('reader'),
+                    t.identifier('sint64')
                 ),
                 []
             ),

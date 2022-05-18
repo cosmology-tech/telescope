@@ -90,10 +90,14 @@ export const fromAminoParseField = ({
         case 'string':
             return fromAmino.string(args);
         case 'int64':
+        case 'sint64':
         case 'uint64':
             return fromAmino.long(args);
         case 'double':
-        case 'int64':
+        case 'float':
+        case 'int32':
+        case 'sint32':
+        case 'uint32':
         case 'bool':
         case 'bytes':
             return fromAmino.defaultType(args)

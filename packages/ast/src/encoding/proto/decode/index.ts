@@ -47,10 +47,14 @@ export const decodeMethodFields = (context: ProtoParseContext, name: string, pro
                     return decode.tagDelimArray(args, baseTypes.float(args));
                 case 'int32':
                     return decode.tagDelimArray(args, baseTypes.int32(args));
+                case 'sint32':
+                    return decode.tagDelimArray(args, baseTypes.sint32(args));
                 case 'uint32':
                     return decode.tagDelimArray(args, baseTypes.uint32(args));
                 case 'int64':
                     return decode.tagDelimArray(args, baseTypes.int64(args));
+                case 'sint64':
+                    return decode.tagDelimArray(args, baseTypes.sint64(args));
                 case 'uint64':
                     return decode.tagDelimArray(args, baseTypes.uint64(args));
                 default:

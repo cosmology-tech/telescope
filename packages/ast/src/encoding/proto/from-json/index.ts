@@ -44,10 +44,12 @@ export const fromJSONMethodFields = (context: ProtoParseContext, name: string, p
                 case 'double':
                     return fromJSON.array(args, arrayTypes.double());
                 case 'int32':
+                case 'sint32':
                     return fromJSON.array(args, arrayTypes.int32());
                 case 'uint32':
                     return fromJSON.array(args, arrayTypes.uint32());
                 case 'int64':
+                case 'sint64':
                     return fromJSON.array(args, arrayTypes.int64());
                 case 'uint64':
                     return fromJSON.array(args, arrayTypes.uint64());
@@ -66,8 +68,10 @@ export const fromJSONMethodFields = (context: ProtoParseContext, name: string, p
             switch (field.keyType) {
                 case 'string':
                 case 'int64':
+                case 'sint64':
                 case 'uint64':
                 case 'int32':
+                case 'sint32':
                 case 'uint32':
                     return fromJSON.keyHash(args);
                 default:
@@ -87,10 +91,12 @@ export const fromJSONMethodFields = (context: ProtoParseContext, name: string, p
             case 'float':
                 return fromJSON.float(args);
             case 'int32':
+            case 'sint32':
                 return fromJSON.int32(args);
             case 'uint32':
                 return fromJSON.uint32(args);
             case 'int64':
+            case 'sint64':
                 return fromJSON.int64(args);
             case 'uint64':
                 return fromJSON.uint64(args);

@@ -41,15 +41,15 @@ export const fromPartialMethodFields = (context: ProtoParseContext, name: string
                     return fromPartial.array(args, arrayTypes.bytes());
                 case 'float':
                     return fromPartial.array(args, arrayTypes.float());
-                case 'float':
-                    return fromPartial.array(args, arrayTypes.float());
                 case 'double':
                     return fromPartial.array(args, arrayTypes.double());
                 case 'int32':
+                case 'sint32':
                     return fromPartial.array(args, arrayTypes.int32());
                 case 'uint32':
                     return fromPartial.array(args, arrayTypes.uint32());
                 case 'int64':
+                case 'sint64':
                     return fromPartial.array(args, arrayTypes.int64());
                 case 'uint64':
                     return fromPartial.array(args, arrayTypes.uint64());
@@ -69,8 +69,10 @@ export const fromPartialMethodFields = (context: ProtoParseContext, name: string
             switch (field.keyType) {
                 case 'string':
                 case 'int64':
+                case 'sint64':
                 case 'uint64':
                 case 'int32':
+                case 'sint32':
                 case 'uint32':
                     return fromPartial.keyHash(args);
                 default:
@@ -90,10 +92,12 @@ export const fromPartialMethodFields = (context: ProtoParseContext, name: string
             case 'float':
                 return fromPartial.float(args);
             case 'int32':
+            case 'sint32':
                 return fromPartial.int32(args);
             case 'uint32':
                 return fromPartial.uint32(args);
             case 'int64':
+            case 'sint64':
                 return fromPartial.int64(args);
             case 'uint64':
                 return fromPartial.uint64(args);

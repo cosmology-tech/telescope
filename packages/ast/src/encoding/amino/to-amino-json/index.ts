@@ -103,11 +103,13 @@ export const toAminoParseField = ({
         case 'string':
             return toAmino.string(args);
         case 'int64':
+        case 'sint64':
         case 'uint64':
             return toAmino.long(args);
         case 'double':
         case 'float':
         case 'int32':
+        case 'sint32':
         case 'uint32':
         case 'bool':
         case 'bytes':

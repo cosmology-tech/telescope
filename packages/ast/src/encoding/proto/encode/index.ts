@@ -50,10 +50,14 @@ export const encodeMethodFields = (context: ProtoParseContext, name: string, pro
                     return [...m, ...encode.forkDelimArray(args, arrayTypes.float())];
                 case 'int32':
                     return [...m, ...encode.forkDelimArray(args, arrayTypes.int32())];
+                case 'sint32':
+                    return [...m, ...encode.forkDelimArray(args, arrayTypes.sint32())];
                 case 'uint32':
                     return [...m, ...encode.forkDelimArray(args, arrayTypes.uint32())];
                 case 'int64':
                     return [...m, ...encode.forkDelimArray(args, arrayTypes.int64())];
+                case 'sint64':
+                    return [...m, ...encode.forkDelimArray(args, arrayTypes.sint64())];
                 case 'uint64':
                     return [...m, ...encode.forkDelimArray(args, arrayTypes.uint64())];
                 default:
