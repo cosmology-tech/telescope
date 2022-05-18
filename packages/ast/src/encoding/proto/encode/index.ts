@@ -81,10 +81,14 @@ export const encodeMethodFields = (context: ProtoParseContext, name: string, pro
                 return [...m, encode.string(args)];
             case 'int32':
                 return [...m, encode.int32(args)];
+            case 'sint32':
+                return [...m, encode.sint32(args)];
             case 'uint32':
                 return [...m, encode.uint32(args)];
             case 'int64':
                 return [...m, encode.int64(args)];
+            case 'sint64':
+                return [...m, encode.sint64(args)];
             case 'uint64':
                 return [...m, encode.uint64(args)];
             case 'double':

@@ -228,6 +228,40 @@ export const types = {
         );
     },
 
+    //   if (message.sint32Value !== 0) {
+    //     writer.uint32(24).sint32(message.sint32Value);
+    //   }
+
+    sint32(num: number, prop: string, isOptional: boolean) {
+        return t.ifStatement(
+            wrapOptional(prop, notZero(prop), isOptional),
+            t.blockStatement([
+                t.expressionStatement(
+                    t.callExpression(
+                        t.memberExpression(
+                            t.callExpression(
+                                t.memberExpression(
+                                    t.identifier('writer'),
+                                    t.identifier('uint32')
+                                ),
+                                [
+                                    t.numericLiteral(num)
+                                ]
+                            ),
+                            t.identifier('sint32')
+                        ),
+                        [
+                            t.memberExpression(
+                                t.identifier('message'),
+                                t.identifier(prop)
+                            )
+                        ]
+                    )
+                )
+            ])
+        );
+    },
+
     //   if (message.int32Value !== 0) {
     //     writer.uint32(24).uint32(message.int32Value);
     //   }
@@ -284,6 +318,40 @@ export const types = {
                                 ]
                             ),
                             t.identifier('int64')
+                        ),
+                        [
+                            t.memberExpression(
+                                t.identifier('message'),
+                                t.identifier(prop)
+                            )
+                        ]
+                    )
+                )
+            ])
+        )
+    },
+
+    //   if (!message.sint64Value.isZero()) {
+    //     writer.uint32(24).sint64(message.sint64Value);
+    //   }
+
+    sint64(num: number, prop: string, isOptional: boolean) {
+        return t.ifStatement(
+            wrapOptional(prop, longNotZero(prop), isOptional),
+            t.blockStatement([
+                t.expressionStatement(
+                    t.callExpression(
+                        t.memberExpression(
+                            t.callExpression(
+                                t.memberExpression(
+                                    t.identifier('writer'),
+                                    t.identifier('uint32')
+                                ),
+                                [
+                                    t.numericLiteral(num)
+                                ]
+                            ),
+                            t.identifier('sint64')
                         ),
                         [
                             t.memberExpression(
@@ -841,6 +909,12 @@ export const encode = {
         return types.int32(num, prop, args.isOptional);
     },
 
+    sint32(args: EncodeMethod) {
+        const prop = args.field.name;
+        const num = getTagNumber(args.field);
+        return types.sint32(num, prop, args.isOptional);
+    },
+
     uint32(args: EncodeMethod) {
         const prop = args.field.name;
         const num = getTagNumber(args.field);
@@ -851,6 +925,12 @@ export const encode = {
         const prop = args.field.name;
         const num = getTagNumber(args.field);
         return types.int64(num, prop, args.isOptional);
+    },
+
+    sint64(args: EncodeMethod) {
+        const prop = args.field.name;
+        const num = getTagNumber(args.field);
+        return types.sint64(num, prop, args.isOptional);
     },
 
     uint64(args: EncodeMethod) {
