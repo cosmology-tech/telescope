@@ -17,11 +17,12 @@ export declare const protoFieldsToArray: (proto: ProtoType) => {
     options: {
         [key: string]: any;
         deprecated?: boolean;
-        "(gogoproto.nullable)"?: boolean;
+        "(cosmos_proto.accepts_interface)"?: string;
         "(cosmos_proto.scalar)"?: string;
+        "(gogoproto.casttype)"?: string;
         "(gogoproto.customtype)"?: string;
         "(gogoproto.moretags)"?: string;
-        "(cosmos_proto.accepts_interface)"?: string;
+        "(gogoproto.nullable)"?: boolean;
     };
     comment?: string;
     import?: string;
