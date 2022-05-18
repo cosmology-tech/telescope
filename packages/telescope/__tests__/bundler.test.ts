@@ -4,6 +4,7 @@ import * as t from '@babel/types';
 import { ProtoStore } from '@osmonauts/proto-parser'
 import { bundlePackages, bundleRegistries, getPackagesBundled } from '../src/bundle'
 import generate from '@babel/generator';
+import { recursiveModuleBundle } from '@osmonauts/ast';
 
 const store = new ProtoStore(__dirname + '/../../../__fixtures__/chain1');
 store.traverseAll();
@@ -20,14 +21,15 @@ it('getPackagesBundled', () => {
 });
 
 it('bundlePackages', () => {
-    const bundled = bundlePackages(store, input);
+    const bundled = bundlePackages(store);
     const packaged = bundled.reduce((m, bundle) => {
+        const body = recursiveModuleBundle(bundle.bundleVariables);
         m[bundle.base] = {
             bundle: bundle.bundleFile,
             base: bundle.base,
             code: generate(t.program([
                 ...bundle.importPaths,
-                ...bundle.body
+                ...body
             ])).code
         };
         return m;
@@ -36,7 +38,7 @@ it('bundlePackages', () => {
 })
 
 it('bundle packages root file names', () => {
-    const bundled = bundlePackages(store, input);
+    const bundled = bundlePackages(store);
     const packaged = bundled.reduce((m, bundle) => {
         m[bundle.base] = {
             bundle: bundle.bundleFile,

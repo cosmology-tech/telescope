@@ -51,13 +51,33 @@ import * as _49 from "./provider/v1beta1/provider";
 import * as _50 from "./provider/v1beta2/genesis";
 import * as _51 from "./provider/v1beta2/provider";
 import * as _52 from "./provider/v1beta2/query";
+import * as _287 from "./audit/v1beta1/audit.amino";
+import * as _288 from "./audit/v1beta2/audit.amino";
+import * as _289 from "./cert/v1beta2/cert.amino";
+import * as _290 from "./deployment/v1beta1/deployment.amino";
+import * as _291 from "./deployment/v1beta2/service.amino";
+import * as _292 from "./market/v1beta2/service.amino";
+import * as _293 from "./provider/v1beta1/provider.amino";
+import * as _294 from "./provider/v1beta2/provider.amino";
+import * as _295 from "./audit/v1beta1/audit.registry";
+import * as _296 from "./audit/v1beta2/audit.registry";
+import * as _297 from "./cert/v1beta2/cert.registry";
+import * as _298 from "./deployment/v1beta1/deployment.registry";
+import * as _299 from "./deployment/v1beta2/service.registry";
+import * as _300 from "./market/v1beta2/service.registry";
+import * as _301 from "./provider/v1beta1/provider.registry";
+import * as _302 from "./provider/v1beta2/provider.registry";
 export namespace akash {
   export namespace audit {
-    export const v1beta1 = { ..._0
+    export const v1beta1 = { ..._0,
+      ..._287,
+      ..._295
     };
     export const v1beta2 = { ..._1,
       ..._2,
-      ..._3
+      ..._3,
+      ..._288,
+      ..._296
     };
   }
   export namespace base {
@@ -76,7 +96,9 @@ export namespace akash {
   export namespace cert {
     export const v1beta2 = { ..._13,
       ..._14,
-      ..._15
+      ..._15,
+      ..._289,
+      ..._297
     };
   }
   export namespace deployment {
@@ -85,7 +107,9 @@ export namespace akash {
       ..._18,
       ..._19,
       ..._20,
-      ..._21
+      ..._21,
+      ..._290,
+      ..._298
     };
     export const v1beta2 = { ..._22,
       ..._23,
@@ -98,7 +122,9 @@ export namespace akash {
       ..._30,
       ..._31,
       ..._32,
-      ..._33
+      ..._33,
+      ..._291,
+      ..._299
     };
   }
   export namespace escrow {
@@ -123,15 +149,21 @@ export namespace akash {
       ..._45,
       ..._46,
       ..._47,
-      ..._48
+      ..._48,
+      ..._292,
+      ..._300
     };
   }
   export namespace provider {
-    export const v1beta1 = { ..._49
+    export const v1beta1 = { ..._49,
+      ..._293,
+      ..._301
     };
     export const v1beta2 = { ..._50,
       ..._51,
-      ..._52
+      ..._52,
+      ..._294,
+      ..._302
     };
   }
 }

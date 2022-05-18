@@ -4,6 +4,8 @@ import * as _149 from "./wasm/v1/proposal";
 import * as _150 from "./wasm/v1/query";
 import * as _151 from "./wasm/v1/tx";
 import * as _152 from "./wasm/v1/types";
+import * as _331 from "./wasm/v1/tx.amino";
+import * as _332 from "./wasm/v1/tx.registry";
 export namespace cosmwasm {
   export namespace wasm {
     export const v1 = { ..._147,
@@ -11,7 +13,9 @@ export namespace cosmwasm {
       ..._149,
       ..._150,
       ..._151,
-      ..._152
+      ..._152,
+      ..._331,
+      ..._332
     };
   }
 }

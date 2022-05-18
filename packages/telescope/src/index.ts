@@ -6,12 +6,13 @@ import { TelescopeParseContext } from './build';
 import { importNamespace, importStmt } from '@osmonauts/ast';
 import { getRelativePath, variableSlug } from './utils';
 import { parse } from './parse';
-import { bundlePackages } from './bundle';
+import { bundlePackages, createFileBundle } from './bundle';
 import { writeFileSync } from 'fs';
 import { join, dirname, resolve, relative } from 'path';
 import { sync as mkdirp } from 'mkdirp';
-import { GenericParseContext, createClient, AminoParseContext } from '@osmonauts/ast';
+import { recursiveModuleBundle, GenericParseContext, createClient, AminoParseContext } from '@osmonauts/ast';
 import { camel, pascal } from 'case';
+
 export interface TelescopeInput {
     protoDir: string;
     outPath: string;
@@ -46,16 +47,8 @@ export class TelescopeBuilder {
         const allFiles = [];
 
         // 1 get bundle of all packages
-        const bundled = bundlePackages(this.store, input);
+        const bundled = bundlePackages(this.store);
         bundled.forEach(bundle => {
-            const prog = []
-                .concat(bundle.importPaths)
-                .concat(bundle.body);
-            const ast = t.program(prog);
-            const content = generate(ast).code;
-            const out = resolve(join(input.outPath, bundle.bundleFile));
-            mkdirp(dirname(out));
-            writeFileSync(out, content);
 
             // 2 search for all files that live in package
             const baseProtos = this.store.getProtos().filter(ref => {
@@ -139,6 +132,15 @@ export class TelescopeBuilder {
                 mkdirp(dirname(filename));
                 writeFileSync(filename, content);
 
+                // add to bundle
+                createFileBundle(
+                    c.ref.proto.package,
+                    localname,
+                    bundle.bundleFile,
+                    bundle.importPaths,
+                    bundle.bundleVariables
+                );
+
                 return {
                     localname,
                     filename
@@ -180,6 +182,15 @@ export class TelescopeBuilder {
                 const content = generate(ast).code;
                 mkdirp(dirname(filename));
                 writeFileSync(filename, content);
+
+                // add to bundle
+                createFileBundle(
+                    c.ref.proto.package,
+                    localname,
+                    bundle.bundleFile,
+                    bundle.importPaths,
+                    bundle.bundleVariables
+                );
 
                 return {
                     localname,
@@ -242,6 +253,18 @@ export class TelescopeBuilder {
                 mkdirp(dirname(clientOutFile));
                 writeFileSync(clientOutFile, cContent);
             }
+
+            // 7.5 bundle
+
+            const body = recursiveModuleBundle(bundle.bundleVariables);
+            const prog = []
+                .concat(bundle.importPaths)
+                .concat(body);
+            const ast = t.program(prog);
+            const content = generate(ast).code;
+            const out = resolve(join(input.outPath, bundle.bundleFile));
+            mkdirp(dirname(out));
+            writeFileSync(out, content);
 
             // 8 write an index file for each base
             // console.log(filesToInclude)

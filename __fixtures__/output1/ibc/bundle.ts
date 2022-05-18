@@ -22,13 +22,23 @@ import * as _226 from "./lightclients/localhost/v1/localhost";
 import * as _227 from "./lightclients/solomachine/v1/solomachine";
 import * as _228 from "./lightclients/solomachine/v2/solomachine";
 import * as _229 from "./lightclients/tendermint/v1/tendermint";
+import * as _333 from "./applications/transfer/v1/tx.amino";
+import * as _334 from "./core/channel/v1/tx.amino";
+import * as _335 from "./core/client/v1/tx.amino";
+import * as _336 from "./core/connection/v1/tx.amino";
+import * as _337 from "./applications/transfer/v1/tx.registry";
+import * as _338 from "./core/channel/v1/tx.registry";
+import * as _339 from "./core/client/v1/tx.registry";
+import * as _340 from "./core/connection/v1/tx.registry";
 export namespace ibc {
   export namespace applications {
     export namespace transfer {
       export const v1 = { ..._206,
         ..._207,
         ..._208,
-        ..._209
+        ..._209,
+        ..._333,
+        ..._337
       };
       export const v2 = { ..._210
       };
@@ -39,14 +49,18 @@ export namespace ibc {
       export const v1 = { ..._211,
         ..._212,
         ..._213,
-        ..._214
+        ..._214,
+        ..._334,
+        ..._338
       };
     }
     export namespace client {
       export const v1 = { ..._215,
         ..._216,
         ..._217,
-        ..._218
+        ..._218,
+        ..._335,
+        ..._339
       };
     }
     export namespace commitment {
@@ -57,7 +71,9 @@ export namespace ibc {
       export const v1 = { ..._220,
         ..._221,
         ..._222,
-        ..._223
+        ..._223,
+        ..._336,
+        ..._340
       };
     }
     export namespace port {
