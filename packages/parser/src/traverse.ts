@@ -55,9 +55,15 @@ export const traverse = (store: ProtoStore, ref: ProtoRef) => {
     return obj;
 };
 
+const getAllRefs = (store: ProtoStore, ref: ProtoRef) => {
+    const importRefs = ref.proto.imports?.map(imp => store.findProto(imp)) ?? [];
+    return importRefs.reduce((m, v) => {
+        return [...m, ...getAllRefs(store, v)]
+    }, importRefs);
+};
+
 const traverseFields = (store: ProtoStore, ref: ProtoRef, obj: any, imports: object, traversal: string[]) => {
     return Object.keys(obj.fields).reduce((m, key) => {
-
         const field = obj.fields[key];
 
         const serialize = () => {
@@ -154,10 +160,40 @@ const traverseFields = (store: ProtoStore, ref: ProtoRef, obj: any, imports: obj
             }
         }
 
-        console.warn(`${field.type} NOT FOUND from ${ref.filename} in ${ref.proto.package}`);
+        // e.g. akash/deployment/v1beta2/service.proto
+        // referencing messages in another file, and so we need access through our imports
+        // if we get this issue again, this should be recursive and not just one level...
+        const importRefs = ref.proto.imports.map(imp => store.findProto(imp));
+        // const importRefs = getAllRefs(store, ref);
+        for (let importRef of importRefs) {
+            const typeNames = lookupSymbolScopes(field.type, importRef.proto.package + '.dummy');
+            for (let lookupType of typeNames) {
+                found = protoScopeImportLookup(store, importRef, lookupType);
+                if (found) {
+                    imports[found.import] = imports[found.import] || [];
+                    imports[found.import] = [...new Set([...imports[found.import], found.name])];
+                    m[key] = {
+                        parsedType: instanceType(found.obj),
+                        scopeType: 'protoImport',
+                        scope: found.obj.scope ? found.obj.scope : [found.package],
+                        ...serialize(),
+                        importedName: found.importedName,
+                        import: found.import,
+                    };
+                    return m;
+                }
+            }
+
+        }
+
+        console.warn(`
+${obj.name}.${field.name}: ${field.type} NOT FOUND from ${ref.filename} in ${ref.proto.package}
+you should contact the maintainers.
+`);
         return m;
     }, {});
 };
+
 
 const traverseType = (
     store: ProtoStore,

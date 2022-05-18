@@ -56,18 +56,42 @@ export class AminoParseContext extends GenericParseContext implements ParseConte
 
     private lookupTypeFromCurrentPath(field: ProtoField, currentProtoPath: string) {
         const ref = this.store.findProto(currentProtoPath);
-        const lookup = this.store.get(ref, field.parsedType.name);
+        let lookup = this.store.get(ref, field.parsedType.name);
         if (!lookup) {
-            throw new Error('Undefined Symbol: ' + field.parsedType.name);
+
+            // if we can't find it, use field import
+            if (field.import) {
+                const importRef = this.store.findProto(field.import);
+                if (!importRef) {
+                    throw new Error(`bad import ${field.import}`);
+                }
+                lookup = this.store.get(importRef, field.parsedType.name);
+            }
+
+            if (!lookup) {
+                throw new Error('Undefined Symbol: ' + field.parsedType.name);
+            }
         }
         return lookup;
     }
 
     getTypeFromCurrentPath(field: ProtoField, currentProtoPath: string) {
         const ref = this.store.findProto(currentProtoPath);
-        const lookup = this.store.get(ref, field.parsedType.name);
+        let lookup = this.store.get(ref, field.parsedType.name);
         if (!lookup) {
-            throw new Error('Undefined Symbol: ' + field.parsedType.name);
+
+            // if we can't find it, use field import
+            if (field.import) {
+                const importRef = this.store.findProto(field.import);
+                if (!importRef) {
+                    throw new Error(`bad import ${field.import}`);
+                }
+                lookup = this.store.get(importRef, field.parsedType.name);
+            }
+
+            if (!lookup) {
+                throw new Error('Undefined Symbol: ' + field.parsedType.name);
+            }
         }
 
         this.addImport(
