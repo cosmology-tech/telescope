@@ -148,5 +148,15 @@ describe('name resolution', () => {
                 }
             );
         })
+        it('parseScope akash', () => {
+            expect(store.parseScope(
+                'cosmos.base.v1beta1.Coin'
+            )).toEqual(
+                {
+                    nested: "Coin",
+                    package: "cosmos.base.v1beta1"
+                }
+            );
+        })
     })
 })

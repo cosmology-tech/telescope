@@ -77,8 +77,6 @@ message QueryConfigRequest {}
 // QueryConfigRequest is the Query/Config response type.
 message QueryConfigResponse {
 
-// config is the current app config.
-Config config = 1;
 }
   
 

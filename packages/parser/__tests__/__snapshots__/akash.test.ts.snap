@@ -1,0 +1,368 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Akash 1`] = `
+Object {
+  "Msg": Object {
+    "comment": "Msg defines the deployment Msg service.",
+    "methods": Object {
+      "CloseDeployment": Object {
+        "comment": "CloseDeployment defines a method to close a deployment given proper inputs.",
+        "requestType": "MsgCloseDeployment",
+        "responseType": "MsgCloseDeploymentResponse",
+      },
+      "CloseGroup": Object {
+        "comment": "CloseGroup defines a method to close a group of a deployment given proper inputs.",
+        "requestType": "MsgCloseGroup",
+        "responseType": "MsgCloseGroupResponse",
+      },
+      "CreateDeployment": Object {
+        "comment": "CreateDeployment defines a method to create new deployment given proper inputs.",
+        "requestType": "MsgCreateDeployment",
+        "responseType": "MsgCreateDeploymentResponse",
+      },
+      "DepositDeployment": Object {
+        "comment": "DepositDeployment deposits more funds into the deployment account",
+        "requestType": "MsgDepositDeployment",
+        "responseType": "MsgDepositDeploymentResponse",
+      },
+      "PauseGroup": Object {
+        "comment": "PauseGroup defines a method to close a group of a deployment given proper inputs.",
+        "requestType": "MsgPauseGroup",
+        "responseType": "MsgPauseGroupResponse",
+      },
+      "StartGroup": Object {
+        "comment": "StartGroup defines a method to close a group of a deployment given proper inputs.",
+        "requestType": "MsgStartGroup",
+        "responseType": "MsgStartGroupResponse",
+      },
+      "UpdateDeployment": Object {
+        "comment": "UpdateDeployment defines a method to update a deployment given proper inputs.",
+        "requestType": "MsgUpdateDeployment",
+        "responseType": "MsgUpdateDeploymentResponse",
+      },
+    },
+    "name": "Msg",
+    "parsedMethods": Object {
+      "CloseDeployment": Object {
+        "fields": Object {
+          "id": Object {
+            "comment": null,
+            "id": 1,
+            "import": "akash/deployment/v1beta2/deployment.proto",
+            "importedName": "akash.deployment.v1beta2.DeploymentID",
+            "options": Object {
+              "(gogoproto.customname)": "ID",
+              "(gogoproto.jsontag)": "id",
+              "(gogoproto.moretags)": "yaml:id",
+              "(gogoproto.nullable)": false,
+            },
+            "parsedType": Object {
+              "name": "DeploymentID",
+              "type": "Type",
+            },
+            "scope": Array [
+              "akash.deployment.v1beta2",
+            ],
+            "scopeType": "protoImport",
+            "type": "DeploymentID",
+          },
+        },
+        "name": "CloseDeployment",
+        "requestType": "MsgCloseDeployment",
+        "type": "ServiceMethod",
+      },
+      "CloseGroup": Object {
+        "fields": Object {
+          "id": Object {
+            "comment": null,
+            "id": 1,
+            "import": "akash/deployment/v1beta2/groupid.proto",
+            "importedName": "akash.deployment.v1beta2.GroupID",
+            "options": Object {
+              "(gogoproto.customname)": "ID",
+              "(gogoproto.jsontag)": "id",
+              "(gogoproto.moretags)": "yaml:id",
+              "(gogoproto.nullable)": false,
+            },
+            "parsedType": Object {
+              "name": "GroupID",
+              "type": "Type",
+            },
+            "scope": Array [
+              "akash.deployment.v1beta2",
+            ],
+            "scopeType": "protoImport",
+            "type": "GroupID",
+          },
+        },
+        "name": "CloseGroup",
+        "requestType": "MsgCloseGroup",
+        "type": "ServiceMethod",
+      },
+      "CreateDeployment": Object {
+        "fields": Object {
+          "deposit": Object {
+            "comment": null,
+            "id": 4,
+            "import": "cosmos/base/v1beta1/coin.proto",
+            "importedName": "cosmos.base.v1beta1.Coin",
+            "options": Object {
+              "(gogoproto.jsontag)": "deposit",
+              "(gogoproto.moretags)": "yaml:deposit",
+              "(gogoproto.nullable)": false,
+            },
+            "parsedType": Object {
+              "name": "Coin",
+              "type": "Type",
+            },
+            "scope": Array [
+              "cosmos.base.v1beta1",
+            ],
+            "scopeType": "protoImport",
+            "type": "cosmos.base.v1beta1.Coin",
+          },
+          "depositor": Object {
+            "comment": "Depositor pays for the deposit",
+            "id": 5,
+            "isScalar": true,
+            "options": Object {
+              "(gogoproto.jsontag)": "depositor",
+              "(gogoproto.moretags)": "yaml:depositor",
+            },
+            "parsedType": Object {
+              "name": "string",
+              "type": "native",
+            },
+            "type": "string",
+            "typeNum": 13,
+          },
+          "groups": Object {
+            "comment": null,
+            "id": 2,
+            "import": "akash/deployment/v1beta2/groupspec.proto",
+            "importedName": "akash.deployment.v1beta2.GroupSpec",
+            "options": Object {
+              "(gogoproto.jsontag)": "groups",
+              "(gogoproto.moretags)": "yaml:groups",
+              "(gogoproto.nullable)": false,
+            },
+            "parsedType": Object {
+              "name": "GroupSpec",
+              "type": "Type",
+            },
+            "rule": "repeated",
+            "scope": Array [
+              "akash.deployment.v1beta2",
+            ],
+            "scopeType": "protoImport",
+            "type": "GroupSpec",
+          },
+          "id": Object {
+            "comment": null,
+            "id": 1,
+            "import": "akash/deployment/v1beta2/deployment.proto",
+            "importedName": "akash.deployment.v1beta2.DeploymentID",
+            "options": Object {
+              "(gogoproto.customname)": "ID",
+              "(gogoproto.jsontag)": "id",
+              "(gogoproto.moretags)": "yaml:id",
+              "(gogoproto.nullable)": false,
+            },
+            "parsedType": Object {
+              "name": "DeploymentID",
+              "type": "Type",
+            },
+            "scope": Array [
+              "akash.deployment.v1beta2",
+            ],
+            "scopeType": "protoImport",
+            "type": "DeploymentID",
+          },
+          "version": Object {
+            "comment": null,
+            "id": 3,
+            "isScalar": true,
+            "options": Object {
+              "(gogoproto.jsontag)": "version",
+              "(gogoproto.moretags)": "yaml:version",
+            },
+            "parsedType": Object {
+              "name": "bytes",
+              "type": "native",
+            },
+            "type": "bytes",
+            "typeNum": 14,
+          },
+        },
+        "name": "CreateDeployment",
+        "requestType": "MsgCreateDeployment",
+        "type": "ServiceMethod",
+      },
+      "DepositDeployment": Object {
+        "fields": Object {
+          "amount": Object {
+            "comment": null,
+            "id": 2,
+            "import": "cosmos/base/v1beta1/coin.proto",
+            "importedName": "cosmos.base.v1beta1.Coin",
+            "options": Object {
+              "(gogoproto.jsontag)": "amount",
+              "(gogoproto.moretags)": "yaml:amount",
+              "(gogoproto.nullable)": false,
+            },
+            "parsedType": Object {
+              "name": "Coin",
+              "type": "Type",
+            },
+            "scope": Array [
+              "cosmos.base.v1beta1",
+            ],
+            "scopeType": "protoImport",
+            "type": "cosmos.base.v1beta1.Coin",
+          },
+          "depositor": Object {
+            "comment": "Depositor pays for the deposit",
+            "id": 3,
+            "isScalar": true,
+            "options": Object {
+              "(gogoproto.jsontag)": "depositor",
+              "(gogoproto.moretags)": "yaml:depositor",
+            },
+            "parsedType": Object {
+              "name": "string",
+              "type": "native",
+            },
+            "type": "string",
+            "typeNum": 13,
+          },
+          "id": Object {
+            "comment": null,
+            "id": 1,
+            "import": "akash/deployment/v1beta2/deployment.proto",
+            "importedName": "akash.deployment.v1beta2.DeploymentID",
+            "options": Object {
+              "(gogoproto.customname)": "ID",
+              "(gogoproto.jsontag)": "id",
+              "(gogoproto.moretags)": "yaml:id",
+              "(gogoproto.nullable)": false,
+            },
+            "parsedType": Object {
+              "name": "DeploymentID",
+              "type": "Type",
+            },
+            "scope": Array [
+              "akash.deployment.v1beta2",
+            ],
+            "scopeType": "protoImport",
+            "type": "DeploymentID",
+          },
+        },
+        "name": "DepositDeployment",
+        "requestType": "MsgDepositDeployment",
+        "type": "ServiceMethod",
+      },
+      "PauseGroup": Object {
+        "fields": Object {
+          "id": Object {
+            "comment": null,
+            "id": 1,
+            "import": "akash/deployment/v1beta2/groupid.proto",
+            "importedName": "akash.deployment.v1beta2.GroupID",
+            "options": Object {
+              "(gogoproto.customname)": "ID",
+              "(gogoproto.jsontag)": "id",
+              "(gogoproto.moretags)": "yaml:id",
+              "(gogoproto.nullable)": false,
+            },
+            "parsedType": Object {
+              "name": "GroupID",
+              "type": "Type",
+            },
+            "scope": Array [
+              "akash.deployment.v1beta2",
+            ],
+            "scopeType": "protoImport",
+            "type": "GroupID",
+          },
+        },
+        "name": "PauseGroup",
+        "requestType": "MsgPauseGroup",
+        "type": "ServiceMethod",
+      },
+      "StartGroup": Object {
+        "fields": Object {
+          "id": Object {
+            "comment": null,
+            "id": 1,
+            "import": "akash/deployment/v1beta2/groupid.proto",
+            "importedName": "akash.deployment.v1beta2.GroupID",
+            "options": Object {
+              "(gogoproto.customname)": "ID",
+              "(gogoproto.jsontag)": "id",
+              "(gogoproto.moretags)": "yaml:id",
+              "(gogoproto.nullable)": false,
+            },
+            "parsedType": Object {
+              "name": "GroupID",
+              "type": "Type",
+            },
+            "scope": Array [
+              "akash.deployment.v1beta2",
+            ],
+            "scopeType": "protoImport",
+            "type": "GroupID",
+          },
+        },
+        "name": "StartGroup",
+        "requestType": "MsgStartGroup",
+        "type": "ServiceMethod",
+      },
+      "UpdateDeployment": Object {
+        "fields": Object {
+          "id": Object {
+            "comment": null,
+            "id": 1,
+            "import": "akash/deployment/v1beta2/deployment.proto",
+            "importedName": "akash.deployment.v1beta2.DeploymentID",
+            "options": Object {
+              "(gogoproto.customname)": "ID",
+              "(gogoproto.jsontag)": "id",
+              "(gogoproto.moretags)": "yaml:id",
+              "(gogoproto.nullable)": false,
+            },
+            "parsedType": Object {
+              "name": "DeploymentID",
+              "type": "Type",
+            },
+            "scope": Array [
+              "akash.deployment.v1beta2",
+            ],
+            "scopeType": "protoImport",
+            "type": "DeploymentID",
+          },
+          "version": Object {
+            "comment": null,
+            "id": 3,
+            "isScalar": true,
+            "options": Object {
+              "(gogoproto.jsontag)": "version",
+              "(gogoproto.moretags)": "yaml:version",
+            },
+            "parsedType": Object {
+              "name": "bytes",
+              "type": "native",
+            },
+            "type": "bytes",
+            "typeNum": 14,
+          },
+        },
+        "name": "UpdateDeployment",
+        "requestType": "MsgUpdateDeployment",
+        "type": "ServiceMethod",
+      },
+    },
+    "serviceType": "Mutation",
+    "type": "Service",
+  },
+}
+`;
