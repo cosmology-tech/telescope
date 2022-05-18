@@ -1,3 +1,5 @@
+export * from "./akash/bundle";
+export * from "./akash/client";
 export * from "./ics23/bundle";
 export * from "./cosmos_proto/bundle";
 export * from "./cosmos/bundle";
