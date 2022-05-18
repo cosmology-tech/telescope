@@ -1,5 +1,4 @@
 import { createProtoType, createCreateProtoType } from './types';
-import struct from '../../../../../__fixtures__/proto-json/google/protobuf/struct.json';
 import authz from '../../../../../__fixtures__/proto-json/cosmos/authz/v1beta1/authz.json';
 import gamm from '../../../../../__fixtures__/proto-json/osmosis/gamm/v1beta1/tx.json';
 import generate from '@babel/generator';
@@ -23,20 +22,20 @@ store.traverseAll();
 it('ListValue', async () => {
     const ref = store.findProto('google/protobuf/struct.proto');
     const context = new ProtoParseContext(ref, store);
-    expectCode(createProtoType(context, 'ListValue', getNestedProto(struct).ListValue));
+    expectCode(createProtoType(context, 'ListValue', getNestedProto(ref.traversed).ListValue));
 });
 
 it('Struct', async () => {
     const ref = store.findProto('google/protobuf/struct.proto');
     const context = new ProtoParseContext(ref, store);
-    expectCode(createProtoType(context, 'Struct', getNestedProto(struct).Struct));
+    expectCode(createProtoType(context, 'Struct', getNestedProto(ref.traversed).Struct));
 });
 
 describe('oneofs', () => {
     it('Value', async () => {
         const ref = store.findProto('google/protobuf/struct.proto');
         const context = new ProtoParseContext(ref, store);
-        expectCode(createProtoType(context, 'Value', getNestedProto(struct).Value));
+        expectCode(createProtoType(context, 'Value', getNestedProto(ref.traversed).Value));
     });
 });
 
