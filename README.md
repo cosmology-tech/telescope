@@ -51,7 +51,7 @@ You should now seem some `.ts` files generated in `./src`. These are the real so
 
 ### Build
 
-Finally, run `buidl`.
+Finally, run `buidl` to generate the JS and types for publishing your module to npm.
 
 ```sh
 yarn buidl
