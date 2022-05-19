@@ -16,7 +16,7 @@ Follow the instructions below to kick off your Telescope module.
 npm install -g @osmonauts/telescope
 ```
 
-### generate
+### Generate
 
 Use the `generate` command to create a new repository with the default proto files. 
 
@@ -25,7 +25,7 @@ telescope generate
 cd ./your-new-project
 yarn 
 ```
-### install
+### Install
 
 To install chain protobufs, run the `install` command. 
 
@@ -36,10 +36,10 @@ telescope install
 It's not necessary, but you may also specify specific packages, e.g.
 
 ```sh
-telescope install @protobufs/cosmos @protobufs/osmosis
+telescope install @protobufs/osmosis
 ```
 
-### transpile
+### Transpile
 
 To create the Typescript files, run the `transpile` command. 
 
@@ -49,7 +49,7 @@ telescope transpile
 
 You should now seem some `.ts` files generated in `./src`. These are the real source files used in your application.
 
-### build
+### Build
 
 Finally, run `buidl`.
 
@@ -57,14 +57,9 @@ Finally, run `buidl`.
 yarn buidl
 ```
 
-## programatic usage
+## Advanced Usage
 
-```js
-import telescope from '@osmonauts/telescope';
-
-// specify proto path and out path
-telescope(protoPath, outPath);
-```
+See our [advanced usage documentation](https://github.com/osmosis-labs/telescope/blob/master/packages/telescope/docs/readme.md).
 ## Disclaimer
 
 AS DESCRIBED IN THE OSMOSIS LICENSES, THE SOFTWARE IS PROVIDED “AS IS”, AT YOUR OWN RISK, AND WITHOUT WARRANTIES OF ANY KIND.
