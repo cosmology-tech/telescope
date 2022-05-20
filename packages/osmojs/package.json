@@ -34,11 +34,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/osmosis-labs/telescope/tree/master/packages/osmojs"
+    "url": "https://github.com/osmosis-labs/telescope"
   },
   "keywords": [],
   "bugs": {
-    "url": "https://github.com/osmosis-labs/telescope/tree/master/packages/osmojs/issues"
+    "url": "https://github.com/osmosis-labs/telescope/issues"
   },
   "devDependencies": {
     "@babel/cli": "7.17.6",

@@ -3,7 +3,7 @@
   "version": "0.3.2",
   "description": "Telescope helpers",
   "author": "Dan Lynch <pyramation@gmail.com>",
-  "homepage": "https://github.com/osmosis-labs/telescope/tree/master/packages/ast#readme",
+  "homepage": "https://github.com/osmosis-labs/telescope/tree/master/packages/helpers#readme",
   "license": "SEE LICENSE IN LICENSE",
   "main": "main/index.js",
   "module": "module/index.js",
@@ -44,11 +44,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/osmosis-labs/telescope/tree/master/packages/ast"
+    "url": "https://github.com/osmosis-labs/telescope/tree/master/packages/helpers"
   },
   "keywords": [],
   "bugs": {
-    "url": "https://github.com/osmosis-labs/telescope/tree/master/packages/ast/issues"
+    "url": "https://github.com/osmosis-labs/telescope/tree/master/packages/helpers/issues"
   },
   "devDependencies": {
     "@babel/cli": "7.17.6",
