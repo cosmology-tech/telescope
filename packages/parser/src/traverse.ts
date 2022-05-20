@@ -268,16 +268,6 @@ const traverseField = (store: ProtoStore, ref: ProtoRef, obj: any, imports: obje
     }
 };
 
-interface ServiceOptions {
-    "(google.api.http).get": string;
-}
-const parseServiceOption = (
-    options: ServiceOptions
-) => {
-
-    return options['(google.api.http).get'];
-};
-
 const traverseServiceMethod = (store: ProtoStore, ref: ProtoRef, obj: any, imports: object, name: string, traversal: string[]) => {
     const service = obj.methods[name];
     const { requestType, responseType, options, comment } = service;
