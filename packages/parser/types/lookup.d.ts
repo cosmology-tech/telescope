@@ -1,5 +1,5 @@
 import { ProtoStore } from './store';
-import { ProtoRef } from './types';
+import { ProtoRef } from '@osmonauts/types';
 export interface Lookup {
     obj: any;
     name: string;

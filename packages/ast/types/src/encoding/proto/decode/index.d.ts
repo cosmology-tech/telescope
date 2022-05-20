@@ -1,6 +1,6 @@
 import * as t from '@babel/types';
 import { ProtoParseContext } from '../../context';
-import { ProtoType, ProtoField } from '../types';
+import { ProtoType, ProtoField } from '@osmonauts/types';
 export interface DecodeMethod {
     typeName: string;
     context: ProtoParseContext;

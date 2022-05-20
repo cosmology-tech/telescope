@@ -1,4 +1,4 @@
-import { ProtoStore, ProtoRoot, ProtoRef, getObjectName } from '@osmonauts/proto-parser';
+import { ProtoRoot, ProtoRef } from '@osmonauts/types';
 import { camel } from 'case';
 import { relative, dirname, extname } from 'path';
 
@@ -30,6 +30,7 @@ export const UTILS = {
     Registry: '@cosmjs/proto-signing',
     SigningStargateClient: '@cosmjs/stargate',
     toBase64: '@cosmjs/encoding',
+    toUtf8: '@cosmjs/encoding',
     toDuration: '@osmonauts/helpers',
     toTimestamp: '@osmonauts/helpers',
     bytesFromBase64: '@osmonauts/helpers',

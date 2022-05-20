@@ -1,4 +1,3 @@
-import { ProtoRoot, ProtoRef } from '@osmonauts/proto-parser';
 export declare const getRoot: (ref: ProtoRef) => ProtoRoot;
 export declare const UTILS: {
     AminoHeight: string;
@@ -22,6 +21,7 @@ export declare const UTILS: {
     Registry: string;
     SigningStargateClient: string;
     toBase64: string;
+    toUtf8: string;
     toDuration: string;
     toTimestamp: string;
     bytesFromBase64: string;

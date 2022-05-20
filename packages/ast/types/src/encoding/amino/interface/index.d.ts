@@ -1,6 +1,6 @@
 import * as t from '@babel/types';
+import { ProtoField, ProtoType } from '@osmonauts/types';
 import { AminoParseContext } from '../../context';
-import { ProtoField, ProtoType } from '../../proto/types';
 export interface RenderAminoField {
     context: AminoParseContext;
     field: ProtoField;

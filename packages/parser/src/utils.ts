@@ -1,7 +1,6 @@
 import dotty from 'dotty';
 import { Service, Type, Enum, Root, Namespace } from 'protobufjs';
-import { ProtoStore } from './store';
-import { ProtoRoot } from './types';
+import { ProtoRoot } from '@osmonauts/types';
 
 export const getNestedProto = (root: ProtoRoot) => {
     const nestedPath = 'root.nested.' + root.package.split('.').join('.nested.') + '.nested';

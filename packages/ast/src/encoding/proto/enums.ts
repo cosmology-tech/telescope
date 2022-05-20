@@ -1,8 +1,7 @@
 import * as t from '@babel/types';
 import { getEnumFromJsonName, getEnumToJsonName } from './types';
 import { identifier, tsEnumMember, functionDeclaration, commentBlock, cleanComment } from '../../utils';
-
-import { ProtoEnum } from './types';
+import { ProtoEnum } from '@osmonauts/types';
 
 const getEnumValues = (proto: ProtoEnum) => {
     const enums = Object.keys(proto.values).map(key => {

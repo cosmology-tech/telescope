@@ -5,8 +5,10 @@ export declare const types: {
     double(num: number, prop: string, isOptional: boolean): t.IfStatement;
     float(num: number, prop: string, isOptional: boolean): t.IfStatement;
     int32(num: number, prop: string, isOptional: boolean): t.IfStatement;
+    sint32(num: number, prop: string, isOptional: boolean): t.IfStatement;
     uint32(num: number, prop: string, isOptional: boolean): t.IfStatement;
     int64(num: number, prop: string, isOptional: boolean): t.IfStatement;
+    sint64(num: number, prop: string, isOptional: boolean): t.IfStatement;
     uint64(num: number, prop: string, isOptional: boolean): t.IfStatement;
     bool(num: number, prop: string, isOptional: boolean): t.IfStatement;
     type(num: number, prop: string, name: string): t.IfStatement;
@@ -24,8 +26,10 @@ export declare const encode: {
     double(args: EncodeMethod): t.IfStatement;
     float(args: EncodeMethod): t.IfStatement;
     int32(args: EncodeMethod): t.IfStatement;
+    sint32(args: EncodeMethod): t.IfStatement;
     uint32(args: EncodeMethod): t.IfStatement;
     int64(args: EncodeMethod): t.IfStatement;
+    sint64(args: EncodeMethod): t.IfStatement;
     uint64(args: EncodeMethod): t.IfStatement;
     bool(args: EncodeMethod): t.IfStatement;
     type(args: EncodeMethod): t.IfStatement;
@@ -43,8 +47,10 @@ export declare const arrayTypes: {
     bool(): t.ExpressionStatement;
     float(): t.ExpressionStatement;
     int32(): t.ExpressionStatement;
+    sint32(): t.ExpressionStatement;
     uint32(): t.ExpressionStatement;
     int64(): t.ExpressionStatement;
+    sint64(): t.ExpressionStatement;
     uint64(): t.ExpressionStatement;
     string(args: EncodeMethod): t.ExpressionStatement;
     bytes(args: EncodeMethod): t.ExpressionStatement;

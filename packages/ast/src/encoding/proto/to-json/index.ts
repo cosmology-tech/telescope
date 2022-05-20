@@ -2,7 +2,7 @@ import * as t from '@babel/types';
 import { getFieldOptionality, getOneOfs } from '..';
 import { identifier, objectMethod } from '../../../utils';
 import { ProtoParseContext } from '../../context';
-import { ProtoField, ProtoType } from '../types';
+import { ProtoField, ProtoType } from '@osmonauts/types';
 import { arrayTypes, toJSON } from './utils';
 
 const needsImplementation = (name: string, field: ProtoField) => {

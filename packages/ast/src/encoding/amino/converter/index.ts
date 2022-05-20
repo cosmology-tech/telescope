@@ -1,6 +1,5 @@
 import * as t from '@babel/types';
-import { ProtoType } from '../../proto/types';
-import { ProtoRoot } from '@osmonauts/proto-parser';
+import { ProtoType, ProtoRoot } from '@osmonauts/types';
 import { toAminoJsonMethod } from '../to-amino-json';
 import { fromAminoJsonMethod } from '../from-amino-json';
 import { getTypeUrl, typeUrlToAmino } from '../utils';

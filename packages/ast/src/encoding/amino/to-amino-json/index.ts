@@ -1,7 +1,7 @@
 import * as t from '@babel/types';
 import { arrowFunctionExpression } from '../../../utils';
 import { AminoParseContext } from '../../context';
-import { ProtoType, ProtoField } from '../../proto/types';
+import { ProtoType, ProtoField } from '@osmonauts/types';
 import { protoFieldsToArray } from '../utils';
 import { toAmino } from './utils';
 import { getFieldOptionality, getOneOfs } from '../../proto';

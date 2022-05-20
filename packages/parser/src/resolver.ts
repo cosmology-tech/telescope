@@ -1,4 +1,4 @@
-import { ProtoDep } from './types';
+import { ProtoDep } from '@osmonauts/types';
 
 function depResolve(deps: ProtoDep[], protofile: string, resolved: string[], unresolved: string[]) {
     unresolved.push(protofile);

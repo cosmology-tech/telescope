@@ -1,7 +1,7 @@
-import { ProtoStore, ProtoRef, getObjectName } from '@osmonauts/proto-parser';
+import { AminoOptions, ProtoField, ProtoRef } from '@osmonauts/types';
+import { ProtoStore, getObjectName } from '@osmonauts/proto-parser';
 import { snake } from 'case';
-import { AminoOptions } from './amino';
-import { getEnumFromJsonName, getEnumToJsonName, getFieldsTypeName, ProtoField } from './proto';
+import { getEnumFromJsonName, getEnumToJsonName, getFieldsTypeName } from './proto';
 export interface ParseContext {
     imports: ImportUsage[];
     utils: Record<string, boolean>;

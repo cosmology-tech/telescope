@@ -86,6 +86,7 @@
     "@babel/runtime": "^7.11.2",
     "@babel/types": "7.17.0",
     "@osmonauts/proto-parser": "^0.4.7",
+    "@osmonauts/types": "0.3.3",
     "case": "1.6.3"
   }
 }

@@ -1,7 +1,9 @@
 import { ProtoStore } from '../src/index'
 import { traverse } from '../src/';
-const store = new ProtoStore(__dirname + '/../../../__fixtures__/chain1');
 import { getNested } from '../src/utils'
+import { ProtoField } from '@osmonauts/types';
+
+const store = new ProtoStore(__dirname + '/../../../__fixtures__/chain1');
 
 it('queries', () => {
     const ref = store.findProto('osmosis/gamm/v1beta1/query.proto');
@@ -28,20 +30,6 @@ const parseServiceUrl = (
         pathParams: match?.length ? match.map(el => el.replace('{', '').replace('}', '')) : []
     };
 };
-
-// TODO make types package
-interface ProtoField {
-    comment?: string,
-    id: number,
-    isScalar: boolean,
-    options: Record<string, string>,
-    parsedType: {
-        name: string,
-        type: string,
-    },
-    type: string,
-    typeNum: number,
-}
 
 const parseService = (
     obj: any

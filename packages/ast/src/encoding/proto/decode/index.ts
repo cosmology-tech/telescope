@@ -2,7 +2,8 @@ import * as t from '@babel/types';
 import { getFieldOptionality, getOneOfs } from '..';
 import { identifier, objectMethod } from '../../../utils';
 import { ProtoParseContext } from '../../context';
-import { ProtoType, ProtoField, getBaseCreateTypeFuncName } from '../types';
+import { getBaseCreateTypeFuncName } from '../types';
+import { ProtoType, ProtoField } from '@osmonauts/types';
 import { baseTypes, decode } from './utils';
 
 const needsImplementation = (name: string, field: ProtoField) => {

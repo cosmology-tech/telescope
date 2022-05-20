@@ -1,4 +1,3 @@
-import { ProtoStore, ProtoRef } from '@osmonauts/proto-parser';
 export interface AminoOptions {
     aminoCasingFn: Function,
     exceptions?: AminoExceptions

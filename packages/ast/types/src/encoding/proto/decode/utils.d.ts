@@ -6,8 +6,10 @@ export declare const decode: {
     double(args: DecodeMethod): t.SwitchCase;
     float(args: DecodeMethod): t.SwitchCase;
     int32(args: DecodeMethod): t.SwitchCase;
+    sint32(args: DecodeMethod): t.SwitchCase;
     uint32(args: DecodeMethod): t.SwitchCase;
     int64(args: DecodeMethod): t.SwitchCase;
+    sint64(args: DecodeMethod): t.SwitchCase;
     uint64(args: DecodeMethod): t.SwitchCase;
     duration(args: DecodeMethod): t.SwitchCase;
     timestamp(args: DecodeMethod): t.SwitchCase;
@@ -25,8 +27,10 @@ export declare const baseTypes: {
     double(args: DecodeMethod): t.CallExpression;
     float(args: DecodeMethod): t.CallExpression;
     int32(args: DecodeMethod): t.CallExpression;
+    sint32(args: DecodeMethod): t.CallExpression;
     uint32(args: DecodeMethod): t.CallExpression;
     int64(args: DecodeMethod): t.TSAsExpression;
+    sint64(args: DecodeMethod): t.TSAsExpression;
     uint64(args: DecodeMethod): t.TSAsExpression;
     type(args: DecodeMethod): t.CallExpression;
     enum(args: DecodeMethod): t.TSAsExpression;

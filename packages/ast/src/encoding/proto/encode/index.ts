@@ -1,8 +1,8 @@
 import * as t from '@babel/types';
+import { ProtoType, ProtoField } from '@osmonauts/types';
 import { getFieldOptionality, getOneOfs } from '..';
 import { identifier, objectMethod } from '../../../utils';
 import { ProtoParseContext } from '../../context';
-import { ProtoType, ProtoField } from '../types';
 import { encode, arrayTypes } from './utils';
 
 const needsImplementation = (name: string, field: ProtoField) => {

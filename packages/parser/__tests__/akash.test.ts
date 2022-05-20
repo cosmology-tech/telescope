@@ -1,7 +1,8 @@
+import { ProtoRef } from '@osmonauts/types';
 import { ProtoStore } from '../src/index'
 import { traverse } from '../src/';
 import { getNested } from '../src/utils'
-import { ProtoRef } from '../types';
+
 const store = new ProtoStore(__dirname + '/../../../__fixtures__/chain1');
 
 const getAllRefs = (store: ProtoStore, ref: ProtoRef) => {

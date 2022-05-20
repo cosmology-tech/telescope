@@ -1,7 +1,7 @@
+import { ProtoRoot, ProtoRef } from '@osmonauts/types';
 import { Service, Type, Field, Enum, Root, Namespace } from 'protobufjs';
 import { importLookup, lookup, lookupAny, lookupNested, protoScopeImportLookup } from './lookup';
 import { ProtoStore } from './store';
-import { ProtoRoot, ProtoRef } from './types';
 import { instanceType, lookupSymbolScopes, NATIVE_TYPES } from './utils';
 
 export const traverse = (store: ProtoStore, ref: ProtoRef) => {

@@ -2,7 +2,7 @@ import { sync as glob } from 'glob';
 import { parse } from 'protobufjs';
 import { readFileSync } from 'fs';
 import { join, resolve as pathResolve } from 'path';
-import { ProtoDep, ProtoRef } from './types';
+import { ProtoDep, ProtoRef } from '@osmonauts/types';
 import { getNestedProto, getPackageAndNestedFromStr } from './utils';
 import { traverse } from './traverse';
 import { lookupAny } from './lookup';

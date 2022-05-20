@@ -1,6 +1,6 @@
+import { ProtoRef } from '@osmonauts/types';
 import { ProtoStore, parseProto } from '../src/index'
 import { traverse } from '../src/';
-import { ProtoRef } from '../src/types';
 
 const store = new ProtoStore('');
 

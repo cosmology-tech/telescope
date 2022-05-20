@@ -1,4 +1,4 @@
-import { ProtoDep, ProtoRef } from './types';
+import { ProtoDep, ProtoRef } from '@osmonauts/types';
 export declare const parseProto: (content: any) => import("protobufjs").IParserResult;
 export declare class ProtoStore {
     files: string[];

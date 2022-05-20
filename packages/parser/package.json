@@ -71,6 +71,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.11.2",
+    "@osmonauts/types": "0.3.3",
     "dotty": "0.1.2",
     "glob": "8.0.1",
     "mkdirp": "1.0.4",

@@ -1,5 +1,5 @@
+import { ProtoRoot, ProtoRef } from '@osmonauts/types';
 import { ProtoStore } from './store';
-import { ProtoRoot, ProtoRef } from './types';
 export declare const traverse: (store: ProtoStore, ref: ProtoRef) => ProtoRoot & {
     parsedImports: Record<string, string[]>;
     parsedExports: Record<string, any>;

@@ -1,6 +1,6 @@
 import generate from '@babel/generator';
+import { ProtoType } from '@osmonauts/types';
 import { ProtoStore, getNestedProto } from '@osmonauts/proto-parser'
-import { ProtoType } from '../src/encoding/proto/types';
 import { AminoParseContext } from '../src/encoding/context';
 
 export const expectCode = (ast) => {

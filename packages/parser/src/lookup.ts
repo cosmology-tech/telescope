@@ -1,9 +1,6 @@
-import { traverse } from '@babel/core';
-import { parse } from 'protobufjs';
 import { ProtoStore } from './store';
-import { ProtoRef, ProtoRoot } from './types';
+import { ProtoRef } from '@osmonauts/types';
 import { getNested, getNestedProto } from './utils';
-
 export interface Lookup {
     obj: any;
     name: string;

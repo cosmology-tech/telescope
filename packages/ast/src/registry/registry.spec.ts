@@ -1,10 +1,7 @@
+import generate from '@babel/generator';
 import {
   createTypeRegistry,
-  createRegistryLoader
-} from './registry';
-import generate from '@babel/generator';
-
-import {
+  createRegistryLoader,
   ServiceMethod
 } from './registry';
 

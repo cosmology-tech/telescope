@@ -1,4 +1,3 @@
-import { ProtoRef } from '@osmonauts/proto-parser';
 import { TelescopeParseContext } from './build';
 export declare const parse: (context: TelescopeParseContext) => void;
 export declare const getParsedObjectName: (ref: ProtoRef, obj: any, scope: string[]) => string;

@@ -1,9 +1,6 @@
 import * as t from '@babel/types';
+import { DEFAULT_AMINO_EXCEPTIONS, ProtoAny, ProtoRoot, ProtoType } from '@osmonauts/types';
 import { kebab } from "case";
-import { ProtoType, ProtoAny, ProtoField } from '../proto/types';
-import { ProtoRoot } from '@osmonauts/proto-parser'
-import { DEFAULT_AMINO_EXCEPTIONS } from './types';
-import { AminoParseContext } from '../context';
 
 export const getTypeUrl = (root: ProtoRoot, proto: ProtoAny | ProtoType) => {
     return `/${root.package}.${proto.name}`;

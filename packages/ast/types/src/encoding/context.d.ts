@@ -1,6 +1,5 @@
-import { ProtoStore, ProtoRef } from '@osmonauts/proto-parser';
-import { AminoOptions } from './amino';
-import { ProtoField } from './proto';
+import { AminoOptions, ProtoField, ProtoRef } from '@osmonauts/types';
+import { ProtoStore } from '@osmonauts/proto-parser';
 export interface ParseContext {
     imports: ImportUsage[];
     utils: Record<string, boolean>;

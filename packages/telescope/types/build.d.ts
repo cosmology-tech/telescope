@@ -1,4 +1,5 @@
-import { ProtoStore, ProtoRef } from '@osmonauts/proto-parser';
+import { ProtoRef } from '@osmonauts/types';
+import { ProtoStore } from '@osmonauts/proto-parser';
 import { AminoParseContext, ProtoParseContext } from '@osmonauts/ast';
 import { ServiceMutation, ServiceQuery } from './types';
 export declare const getMutations: (mutations: ServiceMutation[]) => {
