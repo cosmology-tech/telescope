@@ -1,12 +1,12 @@
 import { Service, Type, Field, Enum, Root, Namespace } from 'protobufjs';
-import { importLookup, protoImportLookup, lookup, lookupAny, lookupNested, protoScopeImportLookup } from './lookup';
+import { importLookup, lookup, lookupAny, lookupNested, protoScopeImportLookup } from './lookup';
 import { ProtoStore } from './store';
 import { ProtoRoot, ProtoRef } from './types';
 import { instanceType, lookupSymbolScopes, NATIVE_TYPES } from './utils';
 
 export const traverse = (store: ProtoStore, ref: ProtoRef) => {
-    const imports = {};
-    const exports = {};
+    const imports: Record<string, string[]> = {};
+    const exports: Record<string, any> = {};
 
     const obj: ProtoRoot & {
         parsedImports: Record<string, string[]>;
@@ -268,19 +268,30 @@ const traverseField = (store: ProtoStore, ref: ProtoRef, obj: any, imports: obje
     }
 };
 
+interface ServiceOptions {
+    "(google.api.http).get": string;
+}
+const parseServiceOption = (
+    options: ServiceOptions
+) => {
+
+    return options['(google.api.http).get'];
+};
+
 const traverseServiceMethod = (store: ProtoStore, ref: ProtoRef, obj: any, imports: object, name: string, traversal: string[]) => {
     const service = obj.methods[name];
-    const { requestType } = service;
+    const { requestType, responseType, options, comment } = service;
     let refObject = lookupAny(store, ref, requestType);
-
     if (!refObject) {
         throw new Error('Symbol not found ' + requestType);
     }
-
     return {
         type: 'ServiceMethod',
         name,
+        comment,
         requestType,
+        responseType,
+        options,
         fields: traverseFields(store, ref, refObject.obj, imports, traversal)
     };
 };
@@ -292,19 +303,19 @@ const getServiceType = (obj) => {
 }
 
 const traverseService = (store: ProtoStore, ref: ProtoRef, obj: any, imports: object, traversal: string[]) => {
-    const methods = Object.keys(obj.methods).reduce((m, key) => {
+    const json = obj.toJSON({ keepComments: true });
+    const methods = Object.keys(json.methods).reduce((m, key) => {
         m[key] = traverseServiceMethod(
-            store, ref, obj, imports, key, traversal
+            store, ref, json, imports, key, traversal
         );
         return m;
     }, {})
-
     return {
         type: 'Service',
         name: obj.name,
         serviceType: getServiceType(obj),
         ...obj.toJSON({ keepComments: true }),
-        parsedMethods: methods
+        methods
     }
 };
 

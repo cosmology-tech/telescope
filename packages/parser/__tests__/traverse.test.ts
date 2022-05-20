@@ -70,3 +70,4 @@ it('Record', () => {
   ]);
   expect(Object.keys(Record.Ledger.fields).length).toBe(1);
 });
+

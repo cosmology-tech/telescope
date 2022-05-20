@@ -7,43 +7,6 @@ Object {
     "methods": Object {
       "CloseDeployment": Object {
         "comment": "CloseDeployment defines a method to close a deployment given proper inputs.",
-        "requestType": "MsgCloseDeployment",
-        "responseType": "MsgCloseDeploymentResponse",
-      },
-      "CloseGroup": Object {
-        "comment": "CloseGroup defines a method to close a group of a deployment given proper inputs.",
-        "requestType": "MsgCloseGroup",
-        "responseType": "MsgCloseGroupResponse",
-      },
-      "CreateDeployment": Object {
-        "comment": "CreateDeployment defines a method to create new deployment given proper inputs.",
-        "requestType": "MsgCreateDeployment",
-        "responseType": "MsgCreateDeploymentResponse",
-      },
-      "DepositDeployment": Object {
-        "comment": "DepositDeployment deposits more funds into the deployment account",
-        "requestType": "MsgDepositDeployment",
-        "responseType": "MsgDepositDeploymentResponse",
-      },
-      "PauseGroup": Object {
-        "comment": "PauseGroup defines a method to close a group of a deployment given proper inputs.",
-        "requestType": "MsgPauseGroup",
-        "responseType": "MsgPauseGroupResponse",
-      },
-      "StartGroup": Object {
-        "comment": "StartGroup defines a method to close a group of a deployment given proper inputs.",
-        "requestType": "MsgStartGroup",
-        "responseType": "MsgStartGroupResponse",
-      },
-      "UpdateDeployment": Object {
-        "comment": "UpdateDeployment defines a method to update a deployment given proper inputs.",
-        "requestType": "MsgUpdateDeployment",
-        "responseType": "MsgUpdateDeploymentResponse",
-      },
-    },
-    "name": "Msg",
-    "parsedMethods": Object {
-      "CloseDeployment": Object {
         "fields": Object {
           "id": Object {
             "comment": null,
@@ -68,10 +31,13 @@ Object {
           },
         },
         "name": "CloseDeployment",
+        "options": undefined,
         "requestType": "MsgCloseDeployment",
+        "responseType": "MsgCloseDeploymentResponse",
         "type": "ServiceMethod",
       },
       "CloseGroup": Object {
+        "comment": "CloseGroup defines a method to close a group of a deployment given proper inputs.",
         "fields": Object {
           "id": Object {
             "comment": null,
@@ -96,10 +62,13 @@ Object {
           },
         },
         "name": "CloseGroup",
+        "options": undefined,
         "requestType": "MsgCloseGroup",
+        "responseType": "MsgCloseGroupResponse",
         "type": "ServiceMethod",
       },
       "CreateDeployment": Object {
+        "comment": "CreateDeployment defines a method to create new deployment given proper inputs.",
         "fields": Object {
           "deposit": Object {
             "comment": null,
@@ -195,10 +164,13 @@ Object {
           },
         },
         "name": "CreateDeployment",
+        "options": undefined,
         "requestType": "MsgCreateDeployment",
+        "responseType": "MsgCreateDeploymentResponse",
         "type": "ServiceMethod",
       },
       "DepositDeployment": Object {
+        "comment": "DepositDeployment deposits more funds into the deployment account",
         "fields": Object {
           "amount": Object {
             "comment": null,
@@ -258,10 +230,13 @@ Object {
           },
         },
         "name": "DepositDeployment",
+        "options": undefined,
         "requestType": "MsgDepositDeployment",
+        "responseType": "MsgDepositDeploymentResponse",
         "type": "ServiceMethod",
       },
       "PauseGroup": Object {
+        "comment": "PauseGroup defines a method to close a group of a deployment given proper inputs.",
         "fields": Object {
           "id": Object {
             "comment": null,
@@ -286,10 +261,13 @@ Object {
           },
         },
         "name": "PauseGroup",
+        "options": undefined,
         "requestType": "MsgPauseGroup",
+        "responseType": "MsgPauseGroupResponse",
         "type": "ServiceMethod",
       },
       "StartGroup": Object {
+        "comment": "StartGroup defines a method to close a group of a deployment given proper inputs.",
         "fields": Object {
           "id": Object {
             "comment": null,
@@ -314,10 +292,13 @@ Object {
           },
         },
         "name": "StartGroup",
+        "options": undefined,
         "requestType": "MsgStartGroup",
+        "responseType": "MsgStartGroupResponse",
         "type": "ServiceMethod",
       },
       "UpdateDeployment": Object {
+        "comment": "UpdateDeployment defines a method to update a deployment given proper inputs.",
         "fields": Object {
           "id": Object {
             "comment": null,
@@ -357,10 +338,13 @@ Object {
           },
         },
         "name": "UpdateDeployment",
+        "options": undefined,
         "requestType": "MsgUpdateDeployment",
+        "responseType": "MsgUpdateDeploymentResponse",
         "type": "ServiceMethod",
       },
     },
+    "name": "Msg",
     "serviceType": "Mutation",
     "type": "Service",
   },

@@ -2163,143 +2163,6 @@ Object {
                     "methods": Object {
                       "AllContractState": Object {
                         "comment": "AllContractState gets all raw store data for a single contract",
-                        "options": Object {
-                          "(google.api.http).get": "/cosmwasm/wasm/v1/contract/{address}/state",
-                        },
-                        "parsedOptions": Array [
-                          Object {
-                            "(google.api.http)": Object {
-                              "get": "/cosmwasm/wasm/v1/contract/{address}/state",
-                            },
-                          },
-                        ],
-                        "requestType": "QueryAllContractStateRequest",
-                        "responseType": "QueryAllContractStateResponse",
-                      },
-                      "Code": Object {
-                        "comment": "Code gets the binary code and metadata for a singe wasm code",
-                        "options": Object {
-                          "(google.api.http).get": "/cosmwasm/wasm/v1/code/{code_id}",
-                        },
-                        "parsedOptions": Array [
-                          Object {
-                            "(google.api.http)": Object {
-                              "get": "/cosmwasm/wasm/v1/code/{code_id}",
-                            },
-                          },
-                        ],
-                        "requestType": "QueryCodeRequest",
-                        "responseType": "QueryCodeResponse",
-                      },
-                      "Codes": Object {
-                        "comment": "Codes gets the metadata for all stored wasm codes",
-                        "options": Object {
-                          "(google.api.http).get": "/cosmwasm/wasm/v1/code",
-                        },
-                        "parsedOptions": Array [
-                          Object {
-                            "(google.api.http)": Object {
-                              "get": "/cosmwasm/wasm/v1/code",
-                            },
-                          },
-                        ],
-                        "requestType": "QueryCodesRequest",
-                        "responseType": "QueryCodesResponse",
-                      },
-                      "ContractHistory": Object {
-                        "comment": "ContractHistory gets the contract code history",
-                        "options": Object {
-                          "(google.api.http).get": "/cosmwasm/wasm/v1/contract/{address}/history",
-                        },
-                        "parsedOptions": Array [
-                          Object {
-                            "(google.api.http)": Object {
-                              "get": "/cosmwasm/wasm/v1/contract/{address}/history",
-                            },
-                          },
-                        ],
-                        "requestType": "QueryContractHistoryRequest",
-                        "responseType": "QueryContractHistoryResponse",
-                      },
-                      "ContractInfo": Object {
-                        "comment": "ContractInfo gets the contract meta data",
-                        "options": Object {
-                          "(google.api.http).get": "/cosmwasm/wasm/v1/contract/{address}",
-                        },
-                        "parsedOptions": Array [
-                          Object {
-                            "(google.api.http)": Object {
-                              "get": "/cosmwasm/wasm/v1/contract/{address}",
-                            },
-                          },
-                        ],
-                        "requestType": "QueryContractInfoRequest",
-                        "responseType": "QueryContractInfoResponse",
-                      },
-                      "ContractsByCode": Object {
-                        "comment": "ContractsByCode lists all smart contracts for a code id",
-                        "options": Object {
-                          "(google.api.http).get": "/cosmwasm/wasm/v1/code/{code_id}/contracts",
-                        },
-                        "parsedOptions": Array [
-                          Object {
-                            "(google.api.http)": Object {
-                              "get": "/cosmwasm/wasm/v1/code/{code_id}/contracts",
-                            },
-                          },
-                        ],
-                        "requestType": "QueryContractsByCodeRequest",
-                        "responseType": "QueryContractsByCodeResponse",
-                      },
-                      "PinnedCodes": Object {
-                        "comment": "PinnedCodes gets the pinned code ids",
-                        "options": Object {
-                          "(google.api.http).get": "/cosmwasm/wasm/v1/codes/pinned",
-                        },
-                        "parsedOptions": Array [
-                          Object {
-                            "(google.api.http)": Object {
-                              "get": "/cosmwasm/wasm/v1/codes/pinned",
-                            },
-                          },
-                        ],
-                        "requestType": "QueryPinnedCodesRequest",
-                        "responseType": "QueryPinnedCodesResponse",
-                      },
-                      "RawContractState": Object {
-                        "comment": "RawContractState gets single key from the raw store data of a contract",
-                        "options": Object {
-                          "(google.api.http).get": "/wasm/v1/contract/{address}/raw/{query_data}",
-                        },
-                        "parsedOptions": Array [
-                          Object {
-                            "(google.api.http)": Object {
-                              "get": "/wasm/v1/contract/{address}/raw/{query_data}",
-                            },
-                          },
-                        ],
-                        "requestType": "QueryRawContractStateRequest",
-                        "responseType": "QueryRawContractStateResponse",
-                      },
-                      "SmartContractState": Object {
-                        "comment": "SmartContractState get smart query result from the contract",
-                        "options": Object {
-                          "(google.api.http).get": "/wasm/v1/contract/{address}/smart/{query_data}",
-                        },
-                        "parsedOptions": Array [
-                          Object {
-                            "(google.api.http)": Object {
-                              "get": "/wasm/v1/contract/{address}/smart/{query_data}",
-                            },
-                          },
-                        ],
-                        "requestType": "QuerySmartContractStateRequest",
-                        "responseType": "QuerySmartContractStateResponse",
-                      },
-                    },
-                    "name": "Query",
-                    "parsedMethods": Object {
-                      "AllContractState": Object {
                         "fields": Object {
                           "address": Object {
                             "comment": "address is the address of the contract",
@@ -2329,10 +2192,15 @@ Object {
                           },
                         },
                         "name": "AllContractState",
+                        "options": Object {
+                          "(google.api.http).get": "/cosmwasm/wasm/v1/contract/{address}/state",
+                        },
                         "requestType": "QueryAllContractStateRequest",
+                        "responseType": "QueryAllContractStateResponse",
                         "type": "ServiceMethod",
                       },
                       "Code": Object {
+                        "comment": "Code gets the binary code and metadata for a singe wasm code",
                         "fields": Object {
                           "codeId": Object {
                             "comment": "grpc-gateway_out does not support Go style CodID",
@@ -2347,10 +2215,15 @@ Object {
                           },
                         },
                         "name": "Code",
+                        "options": Object {
+                          "(google.api.http).get": "/cosmwasm/wasm/v1/code/{code_id}",
+                        },
                         "requestType": "QueryCodeRequest",
+                        "responseType": "QueryCodeResponse",
                         "type": "ServiceMethod",
                       },
                       "Codes": Object {
+                        "comment": "Codes gets the metadata for all stored wasm codes",
                         "fields": Object {
                           "pagination": Object {
                             "comment": "pagination defines an optional pagination for the request.",
@@ -2369,10 +2242,15 @@ Object {
                           },
                         },
                         "name": "Codes",
+                        "options": Object {
+                          "(google.api.http).get": "/cosmwasm/wasm/v1/code",
+                        },
                         "requestType": "QueryCodesRequest",
+                        "responseType": "QueryCodesResponse",
                         "type": "ServiceMethod",
                       },
                       "ContractHistory": Object {
+                        "comment": "ContractHistory gets the contract code history",
                         "fields": Object {
                           "address": Object {
                             "comment": "address is the address of the contract to query",
@@ -2402,10 +2280,15 @@ Object {
                           },
                         },
                         "name": "ContractHistory",
+                        "options": Object {
+                          "(google.api.http).get": "/cosmwasm/wasm/v1/contract/{address}/history",
+                        },
                         "requestType": "QueryContractHistoryRequest",
+                        "responseType": "QueryContractHistoryResponse",
                         "type": "ServiceMethod",
                       },
                       "ContractInfo": Object {
+                        "comment": "ContractInfo gets the contract meta data",
                         "fields": Object {
                           "address": Object {
                             "comment": "address is the address of the contract to query",
@@ -2420,10 +2303,15 @@ Object {
                           },
                         },
                         "name": "ContractInfo",
+                        "options": Object {
+                          "(google.api.http).get": "/cosmwasm/wasm/v1/contract/{address}",
+                        },
                         "requestType": "QueryContractInfoRequest",
+                        "responseType": "QueryContractInfoResponse",
                         "type": "ServiceMethod",
                       },
                       "ContractsByCode": Object {
+                        "comment": "ContractsByCode lists all smart contracts for a code id",
                         "fields": Object {
                           "codeId": Object {
                             "comment": "grpc-gateway_out does not support Go style CodID
@@ -2454,10 +2342,15 @@ pagination defines an optional pagination for the request.",
                           },
                         },
                         "name": "ContractsByCode",
+                        "options": Object {
+                          "(google.api.http).get": "/cosmwasm/wasm/v1/code/{code_id}/contracts",
+                        },
                         "requestType": "QueryContractsByCodeRequest",
+                        "responseType": "QueryContractsByCodeResponse",
                         "type": "ServiceMethod",
                       },
                       "PinnedCodes": Object {
+                        "comment": "PinnedCodes gets the pinned code ids",
                         "fields": Object {
                           "pagination": Object {
                             "comment": "pagination defines an optional pagination for the request.",
@@ -2476,10 +2369,15 @@ pagination defines an optional pagination for the request.",
                           },
                         },
                         "name": "PinnedCodes",
+                        "options": Object {
+                          "(google.api.http).get": "/cosmwasm/wasm/v1/codes/pinned",
+                        },
                         "requestType": "QueryPinnedCodesRequest",
+                        "responseType": "QueryPinnedCodesResponse",
                         "type": "ServiceMethod",
                       },
                       "RawContractState": Object {
+                        "comment": "RawContractState gets single key from the raw store data of a contract",
                         "fields": Object {
                           "address": Object {
                             "comment": "address is the address of the contract",
@@ -2505,10 +2403,15 @@ pagination defines an optional pagination for the request.",
                           },
                         },
                         "name": "RawContractState",
+                        "options": Object {
+                          "(google.api.http).get": "/wasm/v1/contract/{address}/raw/{query_data}",
+                        },
                         "requestType": "QueryRawContractStateRequest",
+                        "responseType": "QueryRawContractStateResponse",
                         "type": "ServiceMethod",
                       },
                       "SmartContractState": Object {
+                        "comment": "SmartContractState get smart query result from the contract",
                         "fields": Object {
                           "address": Object {
                             "comment": "address is the address of the contract",
@@ -2537,10 +2440,15 @@ pagination defines an optional pagination for the request.",
                           },
                         },
                         "name": "SmartContractState",
+                        "options": Object {
+                          "(google.api.http).get": "/wasm/v1/contract/{address}/smart/{query_data}",
+                        },
                         "requestType": "QuerySmartContractStateRequest",
+                        "responseType": "QuerySmartContractStateResponse",
                         "type": "ServiceMethod",
                       },
                     },
+                    "name": "Query",
                     "serviceType": "Query",
                     "type": "Service",
                   },
@@ -4326,48 +4234,6 @@ Object {
                     "methods": Object {
                       "ExitPool": Object {
                         "comment": null,
-                        "requestType": "MsgExitPool",
-                        "responseType": "MsgExitPoolResponse",
-                      },
-                      "ExitSwapExternAmountOut": Object {
-                        "comment": null,
-                        "requestType": "MsgExitSwapExternAmountOut",
-                        "responseType": "MsgExitSwapExternAmountOutResponse",
-                      },
-                      "ExitSwapShareAmountIn": Object {
-                        "comment": null,
-                        "requestType": "MsgExitSwapShareAmountIn",
-                        "responseType": "MsgExitSwapShareAmountInResponse",
-                      },
-                      "JoinPool": Object {
-                        "comment": null,
-                        "requestType": "MsgJoinPool",
-                        "responseType": "MsgJoinPoolResponse",
-                      },
-                      "JoinSwapExternAmountIn": Object {
-                        "comment": null,
-                        "requestType": "MsgJoinSwapExternAmountIn",
-                        "responseType": "MsgJoinSwapExternAmountInResponse",
-                      },
-                      "JoinSwapShareAmountOut": Object {
-                        "comment": null,
-                        "requestType": "MsgJoinSwapShareAmountOut",
-                        "responseType": "MsgJoinSwapShareAmountOutResponse",
-                      },
-                      "SwapExactAmountIn": Object {
-                        "comment": null,
-                        "requestType": "MsgSwapExactAmountIn",
-                        "responseType": "MsgSwapExactAmountInResponse",
-                      },
-                      "SwapExactAmountOut": Object {
-                        "comment": null,
-                        "requestType": "MsgSwapExactAmountOut",
-                        "responseType": "MsgSwapExactAmountOutResponse",
-                      },
-                    },
-                    "name": "Msg",
-                    "parsedMethods": Object {
-                      "ExitPool": Object {
                         "fields": Object {
                           "poolId": Object {
                             "comment": null,
@@ -4435,10 +4301,13 @@ Object {
                           },
                         },
                         "name": "ExitPool",
+                        "options": undefined,
                         "requestType": "MsgExitPool",
+                        "responseType": "MsgExitPoolResponse",
                         "type": "ServiceMethod",
                       },
                       "ExitSwapExternAmountOut": Object {
+                        "comment": null,
                         "fields": Object {
                           "poolId": Object {
                             "comment": null,
@@ -4505,10 +4374,13 @@ Object {
                           },
                         },
                         "name": "ExitSwapExternAmountOut",
+                        "options": undefined,
                         "requestType": "MsgExitSwapExternAmountOut",
+                        "responseType": "MsgExitSwapExternAmountOutResponse",
                         "type": "ServiceMethod",
                       },
                       "ExitSwapShareAmountIn": Object {
+                        "comment": null,
                         "fields": Object {
                           "poolId": Object {
                             "comment": null,
@@ -4586,10 +4458,13 @@ Object {
                           },
                         },
                         "name": "ExitSwapShareAmountIn",
+                        "options": undefined,
                         "requestType": "MsgExitSwapShareAmountIn",
+                        "responseType": "MsgExitSwapShareAmountInResponse",
                         "type": "ServiceMethod",
                       },
                       "JoinPool": Object {
+                        "comment": null,
                         "fields": Object {
                           "poolId": Object {
                             "comment": null,
@@ -4657,10 +4532,13 @@ Object {
                           },
                         },
                         "name": "JoinPool",
+                        "options": undefined,
                         "requestType": "MsgJoinPool",
+                        "responseType": "MsgJoinPoolResponse",
                         "type": "ServiceMethod",
                       },
                       "JoinSwapExternAmountIn": Object {
+                        "comment": null,
                         "fields": Object {
                           "poolId": Object {
                             "comment": null,
@@ -4728,10 +4606,13 @@ reserved \\"token_in\\";",
                           },
                         },
                         "name": "JoinSwapExternAmountIn",
+                        "options": undefined,
                         "requestType": "MsgJoinSwapExternAmountIn",
+                        "responseType": "MsgJoinSwapExternAmountInResponse",
                         "type": "ServiceMethod",
                       },
                       "JoinSwapShareAmountOut": Object {
+                        "comment": null,
                         "fields": Object {
                           "poolId": Object {
                             "comment": null,
@@ -4809,10 +4690,13 @@ reserved \\"token_in\\";",
                           },
                         },
                         "name": "JoinSwapShareAmountOut",
+                        "options": undefined,
                         "requestType": "MsgJoinSwapShareAmountOut",
+                        "responseType": "MsgJoinSwapShareAmountOutResponse",
                         "type": "ServiceMethod",
                       },
                       "SwapExactAmountIn": Object {
+                        "comment": null,
                         "fields": Object {
                           "routes": Object {
                             "comment": null,
@@ -4881,10 +4765,13 @@ reserved \\"token_in\\";",
                           },
                         },
                         "name": "SwapExactAmountIn",
+                        "options": undefined,
                         "requestType": "MsgSwapExactAmountIn",
+                        "responseType": "MsgSwapExactAmountInResponse",
                         "type": "ServiceMethod",
                       },
                       "SwapExactAmountOut": Object {
+                        "comment": null,
                         "fields": Object {
                           "routes": Object {
                             "comment": null,
@@ -4953,10 +4840,13 @@ reserved \\"token_in\\";",
                           },
                         },
                         "name": "SwapExactAmountOut",
+                        "options": undefined,
                         "requestType": "MsgSwapExactAmountOut",
+                        "responseType": "MsgSwapExactAmountOutResponse",
                         "type": "ServiceMethod",
                       },
                     },
+                    "name": "Msg",
                     "serviceType": "Mutation",
                     "type": "Service",
                   },
