@@ -27,6 +27,7 @@ export interface ProtoType {
     comment: string | undefined;
 }
 export interface ProtoField {
+    type: string;
     name?: string;
     scope?: string[];
     parsedType?: {
@@ -35,7 +36,6 @@ export interface ProtoField {
     };
     keyType?: string;
     rule?: string;
-    type: string;
     id: number;
     options: {
         [key: string]: any;
@@ -51,6 +51,24 @@ export interface ProtoField {
     import?: string;
     importedName?: string;
     scopeType?: string;
+}
+export interface ProtoServiceMethod {
+    type: 'ServiceMethod';
+    name: string;
+    options: {
+        [key: string]: any;
+        "(google.api.http).get"?: string;
+    };
+    comment?: string;
+    requestType: string;
+    responseType: string;
+    fields: Record<string, ProtoField>;
+}
+export interface ProtoService {
+    type: 'Service';
+    name: string;
+    serviceType: 'Msg' | 'Query' | string;
+    methods: Record<string, ProtoServiceMethod>;
 }
 export interface ProtoAny {
     type: string;

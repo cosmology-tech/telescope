@@ -1,3 +1,4 @@
+import { ProtoRoot, ProtoRef } from '@osmonauts/types';
 export declare const getRoot: (ref: ProtoRef) => ProtoRoot;
 export declare const UTILS: {
     AminoHeight: string;

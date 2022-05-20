@@ -1,4 +1,4 @@
-import { ProtoRoot, ProtoRef } from '@osmonauts/types';
+import { ProtoRoot, ProtoRef, ProtoType, ProtoService, ProtoField } from '@osmonauts/types';
 import { Service, Type, Field, Enum, Root, Namespace } from 'protobufjs';
 import { importLookup, lookup, lookupAny, lookupNested, protoScopeImportLookup } from './lookup';
 import { ProtoStore } from './store';
@@ -62,7 +62,13 @@ const getAllRefs = (store: ProtoStore, ref: ProtoRef) => {
     }, importRefs);
 };
 
-const traverseFields = (store: ProtoStore, ref: ProtoRef, obj: any, imports: object, traversal: string[]) => {
+const traverseFields = (
+    store: ProtoStore,
+    ref: ProtoRef,
+    obj: any,
+    imports: object,
+    traversal: string[]
+): Record<string, ProtoField> => {
     return Object.keys(obj.fields).reduce((m, key) => {
         const field = obj.fields[key];
 
@@ -203,7 +209,7 @@ const traverseType = (
     exports: object,
     traversal: string[],
     isNested: boolean
-) => {
+): ProtoType => {
     let nested = null;
     if (obj.nested) {
         nested = Object.keys(obj.nested).reduce((m, key) => {
@@ -292,7 +298,13 @@ const getServiceType = (obj) => {
     return 'Unknown';
 }
 
-const traverseService = (store: ProtoStore, ref: ProtoRef, obj: any, imports: object, traversal: string[]) => {
+const traverseService = (
+    store: ProtoStore,
+    ref: ProtoRef,
+    obj: any,
+    imports: object,
+    traversal: string[]
+): ProtoService => {
     const json = obj.toJSON({ keepComments: true });
     const methods = Object.keys(json.methods).reduce((m, key) => {
         m[key] = traverseServiceMethod(

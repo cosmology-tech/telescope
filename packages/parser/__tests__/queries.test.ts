@@ -1,7 +1,7 @@
 import { ProtoStore } from '../src/index'
 import { traverse } from '../src/';
 import { getNested } from '../src/utils'
-import { ProtoField } from '@osmonauts/types';
+import { parseService, parseServiceUrl } from '../src/services'
 
 const store = new ProtoStore(__dirname + '/../../../__fixtures__/chain1');
 
@@ -15,35 +15,6 @@ it('queries', () => {
     ]);
     expect(v1beta1).toMatchSnapshot();
 });
-
-interface ServiceOptions {
-    "(google.api.http).get": string;
-}
-const parseServiceUrl = (
-    options: ServiceOptions
-) => {
-    const url = options['(google.api.http).get'];
-    if (!url) return;
-    const match = url.match(/\{([^\}]*)\}/g);
-    return {
-        url,
-        pathParams: match?.length ? match.map(el => el.replace('{', '').replace('}', '')) : []
-    };
-};
-
-const parseService = (
-    obj: any
-) => {
-    const fields: Record<string, ProtoField> = obj.fields;
-    const options: ServiceOptions = obj.options;
-    const pathInfo = parseServiceUrl(options);
-    const allParams = Object.keys(fields);
-    const queryParams = allParams.filter(param => !pathInfo.pathParams.includes(param));
-    return {
-        ...pathInfo,
-        queryParams
-    };
-};
 
 it('parsing options', () => {
     const opts = {

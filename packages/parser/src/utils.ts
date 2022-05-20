@@ -158,7 +158,7 @@ export const instanceType = (obj: any) => {
         throw new Error('instanceType() cannot find protobufjs Type')
     }
     // duck typing... 
-    // TODO why did we loose instance tyeps/names?
+    // TODO why did we lose instance types/names?
     if (obj.fields) {
         return {
             name: obj.name,
@@ -173,3 +173,4 @@ export const instanceType = (obj: any) => {
     }
     throw new Error('instanceType() cannot find protobufjs Type')
 };
+
