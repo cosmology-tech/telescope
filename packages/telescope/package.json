@@ -81,6 +81,7 @@
     "@babel/types": "7.17.0",
     "@osmonauts/ast": "^0.3.14",
     "@osmonauts/proto-parser": "^0.4.8",
+    "@osmonauts/types": "0.3.4",
     "@types/parse-package-name": "0.1.0",
     "case": "1.6.3",
     "dargs": "7.0.0",
