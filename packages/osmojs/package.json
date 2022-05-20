@@ -1,6 +1,6 @@
 {
   "name": "osmojs",
-  "version": "0.4.29",
+  "version": "0.4.30",
   "description": "Typescript Protobuf Messages for Osmosis",
   "author": "Dan Lynch <pyramation@gmail.com>",
   "homepage": "https://github.com/osmosis-labs/telescope/tree/master/packages/osmojs#readme",
@@ -55,7 +55,7 @@
     "@babel/preset-typescript": "^7.16.7",
     "@babel/traverse": "7.17.3",
     "@babel/types": "7.17.0",
-    "@osmonauts/telescope": "^0.4.22",
+    "@osmonauts/telescope": "^0.4.23",
     "@types/jest": "^27.4.1",
     "ast-stringify": "0.1.0",
     "axios": "^0.26.1",
@@ -82,7 +82,7 @@
     "@cosmjs/proto-signing": "0.28.4",
     "@cosmjs/stargate": "0.28.4",
     "@cosmjs/tendermint-rpc": "^0.28.4",
-    "@osmonauts/helpers": "^0.3.2",
+    "@osmonauts/helpers": "^0.3.3",
     "long": "^5.2.0",
     "protobufjs": "^6.11.2"
   }
