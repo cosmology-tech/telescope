@@ -116,9 +116,16 @@ const getImportStatments = (list: ImportObj[]) => {
     const imports = list.reduce((m, obj) => {
         m[obj.path] = m[obj.path] || [];
         const exists = m[obj.path].find(el => el.type === obj.type && el.path === obj.path && el.name === obj.name);
+
+        // TODO some have google.protobuf.Any shows up... figure out the better way to handle this
+        if (/\./.test(obj.name)) {
+            obj.name = obj.name.split('.')[obj.name.split('.').length - 1]
+        }
+
         if (!exists) m[obj.path].push(obj);
         return m;
-    }, {});
+    }, {})
+
 
     return Object.entries(imports)
         .reduce((m, [importPath, imports]: [string, ImportObj[]]) => {

@@ -35,25 +35,36 @@ import * as _210 from "./txfees/v1beta1/feetoken";
 import * as _211 from "./txfees/v1beta1/genesis";
 import * as _212 from "./txfees/v1beta1/gov";
 import * as _213 from "./txfees/v1beta1/query";
-import * as _272 from "./gamm/v1beta1/tx.amino";
-import * as _273 from "./incentives/tx.amino";
-import * as _274 from "./lockup/tx.amino";
-import * as _275 from "./superfluid/tx.amino";
-import * as _276 from "./gamm/v1beta1/tx.registry";
-import * as _277 from "./incentives/tx.registry";
-import * as _278 from "./lockup/tx.registry";
-import * as _279 from "./superfluid/tx.registry";
+import * as _292 from "./gamm/v1beta1/tx.amino";
+import * as _293 from "./incentives/tx.amino";
+import * as _294 from "./lockup/tx.amino";
+import * as _295 from "./superfluid/tx.amino";
+import * as _296 from "./gamm/v1beta1/tx.registry";
+import * as _297 from "./incentives/tx.registry";
+import * as _298 from "./lockup/tx.registry";
+import * as _299 from "./superfluid/tx.registry";
+import * as _300 from "./claim/v1beta1/query.lcd";
+import * as _301 from "./epochs/query.lcd";
+import * as _302 from "./gamm/v1beta1/query.lcd";
+import * as _303 from "./incentives/query.lcd";
+import * as _304 from "./lockup/query.lcd";
+import * as _305 from "./mint/v1beta1/query.lcd";
+import * as _306 from "./pool-incentives/v1beta1/query.lcd";
+import * as _307 from "./superfluid/query.lcd";
+import * as _308 from "./txfees/v1beta1/query.lcd";
 export namespace osmosis {
   export namespace claim {
     export const v1beta1 = { ..._177,
       ..._178,
       ..._179,
-      ..._180
+      ..._180,
+      ..._300
     };
   }
   export namespace epochs {
     export const v1beta1 = { ..._181,
-      ..._182
+      ..._182,
+      ..._301
     };
   }
   export namespace gamm {
@@ -62,8 +73,9 @@ export namespace osmosis {
       ..._185,
       ..._186,
       ..._187,
-      ..._272,
-      ..._276
+      ..._292,
+      ..._296,
+      ..._302
     };
   }
   export const incentives = { ..._188,
@@ -71,27 +83,31 @@ export namespace osmosis {
     ..._190,
     ..._191,
     ..._192,
-    ..._273,
-    ..._277
+    ..._293,
+    ..._297,
+    ..._303
   };
   export const lockup = { ..._193,
     ..._194,
     ..._195,
     ..._196,
-    ..._274,
-    ..._278
+    ..._294,
+    ..._298,
+    ..._304
   };
   export namespace mint {
     export const v1beta1 = { ..._197,
       ..._198,
-      ..._199
+      ..._199,
+      ..._305
     };
   }
   export namespace poolincentives {
     export const v1beta1 = { ..._200,
       ..._201,
       ..._202,
-      ..._203
+      ..._203,
+      ..._306
     };
   }
   export namespace store {
@@ -103,14 +119,16 @@ export namespace osmosis {
     ..._207,
     ..._208,
     ..._209,
-    ..._275,
-    ..._279
+    ..._295,
+    ..._299,
+    ..._307
   };
   export namespace txfees {
     export const v1beta1 = { ..._210,
       ..._211,
       ..._212,
-      ..._213
+      ..._213,
+      ..._308
     };
   }
 }
