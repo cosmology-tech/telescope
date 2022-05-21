@@ -20,6 +20,7 @@ const returnReponseType = (ResponseType: string) => {
 };
 
 const firstLower = (s: string) => s = s.charAt(0).toLowerCase() + s.slice(1);
+const firstUpper = (s: string) => s = s.charAt(0).toUpperCase() + s.slice(1);
 
 const returnAwaitRequest = (hasOptions: boolean = false) => {
     const args = [
@@ -161,6 +162,10 @@ const makeTemplateTag = (info: ProtoServiceMethodInfo) => {
         templateElts,
         pathParams
     );
+};
+
+const makeComment = (comment: string) => {
+    return [{ type: 'CommentBlock', value: ` ${comment} ` }]
 }
 
 const requestMethod = (
@@ -226,25 +231,16 @@ const requestMethod = (
             returnAwaitRequest(serviceMethod.info.queryParams.length > 0)
         ]),
         returnReponseType(serviceMethod.responseType),
-        [{ type: 'CommentLine', value: ` ${comment}` }]
+        makeComment(comment)
 
     );
 }
 
-export const makeLCDClient = (
-    context: GenericParseContext,
-    service: ProtoService
-) => {
-
-    const methods = Object.keys(service.methods).map(key => {
-        const method: ProtoServiceMethod = service.methods[key];
-        return requestMethod(context, method);
-    });
-
+const makeLCDClientClassBody = (clientName: string, methods: t.ClassMethod[]) => {
     return t.exportNamedDeclaration(
         t.classDeclaration(
-            t.identifier('CosmosApiClient'),
-            t.identifier('RestClient'),
+            t.identifier(clientName),
+            t.identifier('LCDClient'),
             t.classBody([
                 // constructor
                 t.classMethod(
@@ -280,9 +276,37 @@ export const makeLCDClient = (
                         )
                     ])
                 ),
-
                 ...methods
             ])
         )
     )
+};
+
+export const makeLCDClient = (
+    context: GenericParseContext,
+    service: ProtoService
+) => {
+    context.addUtil('LCDClient');
+    const methods = Object.keys(service.methods).map(key => {
+        const method: ProtoServiceMethod = service.methods[key];
+        return requestMethod(context, method);
+    });
+    const clientName = firstUpper(service.name) + 'Client'
+    return makeLCDClientClassBody(clientName, methods);
+};
+
+export const makeAggregatedLCDClient = (
+    context: GenericParseContext,
+    services: ProtoService[],
+    clientName: string
+) => {
+    context.addUtil('LCDClient');
+    const methods = services.reduce((m, service) => {
+        const innerMethods = Object.keys(service.methods).map(key => {
+            const method: ProtoServiceMethod = service.methods[key];
+            return requestMethod(context, method);
+        });
+        return [...m, ...innerMethods];
+    }, []);
+    return makeLCDClientClassBody(clientName, methods);
 };

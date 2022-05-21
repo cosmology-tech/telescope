@@ -1,5 +1,494 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`AggregatedLCDClient 1`] = `
+"export class QueryClient extends LCDClient {
+  constructor({
+    restEndpoint
+  }) {
+    super({
+      restEndpoint
+    });
+  }
+
+  /* Balance queries the balance of a single coin for a single account. */
+  balance(params: QueryBalanceRequest): Promise<QueryBalanceResponse> {
+    const options = {
+      params: {}
+    };
+
+    if (typeof params?.denom !== \\"undefined\\") {
+      options.params.denom = params.denom;
+    }
+
+    const endpoint = \`cosmos/bank/v1beta1/balances/\${params.address}/by_denom\`;
+    return await this.request(endpoint, options);
+  }
+
+  /* AllBalances queries the balance of all coins for a single account. */
+  allBalances(params: QueryAllBalancesRequest): Promise<QueryAllBalancesResponse> {
+    const options = {
+      params: {}
+    };
+
+    if (typeof params?.pagination !== \\"undefined\\") {
+      options.params.pagination = params.pagination;
+    }
+
+    const endpoint = \`cosmos/bank/v1beta1/balances/\${params.address}\`;
+    return await this.request(endpoint, options);
+  }
+
+  /* SpendableBalances queries the spenable balance of all coins for a single
+  account. */
+  spendableBalances(params: QuerySpendableBalancesRequest): Promise<QuerySpendableBalancesResponse> {
+    const options = {
+      params: {}
+    };
+
+    if (typeof params?.pagination !== \\"undefined\\") {
+      options.params.pagination = params.pagination;
+    }
+
+    const endpoint = \`cosmos/bank/v1beta1/spendable_balances/\${params.address}\`;
+    return await this.request(endpoint, options);
+  }
+
+  /* TotalSupply queries the total supply of all coins. */
+  totalSupply(params: QueryTotalSupplyRequest): Promise<QueryTotalSupplyResponse> {
+    const options = {
+      params: {}
+    };
+
+    if (typeof params?.pagination !== \\"undefined\\") {
+      options.params.pagination = params.pagination;
+    }
+
+    const endpoint = \`cosmos/bank/v1beta1/supply/\`;
+    return await this.request(endpoint, options);
+  }
+
+  /* SupplyOf queries the supply of a single coin. */
+  supplyOf(params: QuerySupplyOfRequest): Promise<QuerySupplyOfResponse> {
+    const options = {
+      params: {}
+    };
+
+    if (typeof params?.denom !== \\"undefined\\") {
+      options.params.denom = params.denom;
+    }
+
+    const endpoint = \`cosmos/bank/v1beta1/supply/by_denom/\`;
+    return await this.request(endpoint, options);
+  }
+
+  /* Params queries the parameters of x/bank module. */
+  params(params: QueryParamsRequest): Promise<QueryParamsResponse> {
+    const endpoint = \`cosmos/bank/v1beta1/params/\`;
+    return await this.request(endpoint);
+  }
+
+  /* DenomsMetadata queries the client metadata of a given coin denomination. */
+  denomMetadata(params: QueryDenomMetadataRequest): Promise<QueryDenomMetadataResponse> {
+    const endpoint = \`cosmos/bank/v1beta1/denoms_metadata/\${params.denom}\`;
+    return await this.request(endpoint);
+  }
+
+  /* DenomsMetadata queries the client metadata for all registered coin
+  denominations. */
+  denomsMetadata(params: QueryDenomsMetadataRequest): Promise<QueryDenomsMetadataResponse> {
+    const options = {
+      params: {}
+    };
+
+    if (typeof params?.pagination !== \\"undefined\\") {
+      options.params.pagination = params.pagination;
+    }
+
+    const endpoint = \`cosmos/bank/v1beta1/denoms_metadata/\`;
+    return await this.request(endpoint, options);
+  }
+
+  /* DenomOwners queries for all account addresses that own a particular token
+  denomination. */
+  denomOwners(params: QueryDenomOwnersRequest): Promise<QueryDenomOwnersResponse> {
+    const options = {
+      params: {}
+    };
+
+    if (typeof params?.pagination !== \\"undefined\\") {
+      options.params.pagination = params.pagination;
+    }
+
+    const endpoint = \`cosmos/bank/v1beta1/denom_owners/\${params.denom}\`;
+    return await this.request(endpoint, options);
+  }
+
+  /* Pools */
+  pools(params: QueryPoolsRequest): Promise<QueryPoolsResponse> {
+    const options = {
+      params: {}
+    };
+
+    if (typeof params?.pagination !== \\"undefined\\") {
+      options.params.pagination = params.pagination;
+    }
+
+    const endpoint = \`osmosis/gamm/v1beta1/pools/\`;
+    return await this.request(endpoint, options);
+  }
+
+  /* NumPools */
+  numPools(params: QueryNumPoolsRequest): Promise<QueryNumPoolsResponse> {
+    const endpoint = \`osmosis/gamm/v1beta1/num_pools/\`;
+    return await this.request(endpoint);
+  }
+
+  /* TotalLiquidity */
+  totalLiquidity(params: QueryTotalLiquidityRequest): Promise<QueryTotalLiquidityResponse> {
+    const endpoint = \`osmosis/gamm/v1beta1/total_liquidity/\`;
+    return await this.request(endpoint);
+  }
+
+  /* Per Pool gRPC Endpoints */
+  pool(params: QueryPoolRequest): Promise<QueryPoolResponse> {
+    const endpoint = \`osmosis/gamm/v1beta1/pools/\${params.poolId}\`;
+    return await this.request(endpoint);
+  }
+
+  /* PoolParams */
+  poolParams(params: QueryPoolParamsRequest): Promise<QueryPoolParamsResponse> {
+    const endpoint = \`osmosis/gamm/v1beta1/pools/\${params.poolId}/params\`;
+    return await this.request(endpoint);
+  }
+
+  /* TotalPoolLiquidity */
+  totalPoolLiquidity(params: QueryTotalPoolLiquidityRequest): Promise<QueryTotalPoolLiquidityResponse> {
+    const endpoint = \`osmosis/gamm/v1beta1/pools/\${params.poolId}/total_pool_liquidity\`;
+    return await this.request(endpoint);
+  }
+
+  /* TotalShares */
+  totalShares(params: QueryTotalSharesRequest): Promise<QueryTotalSharesResponse> {
+    const endpoint = \`osmosis/gamm/v1beta1/pools/\${params.poolId}/total_shares\`;
+    return await this.request(endpoint);
+  }
+
+  /* SpotPrice */
+  spotPrice(params: QuerySpotPriceRequest): Promise<QuerySpotPriceResponse> {
+    const options = {
+      params: {}
+    };
+
+    if (typeof params?.tokenInDenom !== \\"undefined\\") {
+      options.params.token_in_denom = params.tokenInDenom;
+    }
+
+    if (typeof params?.tokenOutDenom !== \\"undefined\\") {
+      options.params.token_out_denom = params.tokenOutDenom;
+    }
+
+    const endpoint = \`osmosis/gamm/v1beta1/pools/\${params.poolId}/prices\`;
+    return await this.request(endpoint, options);
+  }
+
+  /* Estimate the swap. */
+  estimateSwapExactAmountIn(params: QuerySwapExactAmountInRequest): Promise<QuerySwapExactAmountInResponse> {
+    const options = {
+      params: {}
+    };
+
+    if (typeof params?.sender !== \\"undefined\\") {
+      options.params.sender = params.sender;
+    }
+
+    if (typeof params?.tokenIn !== \\"undefined\\") {
+      options.params.token_in = params.tokenIn;
+    }
+
+    if (typeof params?.routes !== \\"undefined\\") {
+      options.params.routes = params.routes;
+    }
+
+    const endpoint = \`osmosis/gamm/v1beta1/\${params.poolId}/estimate/swap_exact_amount_in\`;
+    return await this.request(endpoint, options);
+  }
+
+  /* EstimateSwapExactAmountOut */
+  estimateSwapExactAmountOut(params: QuerySwapExactAmountOutRequest): Promise<QuerySwapExactAmountOutResponse> {
+    const options = {
+      params: {}
+    };
+
+    if (typeof params?.sender !== \\"undefined\\") {
+      options.params.sender = params.sender;
+    }
+
+    if (typeof params?.routes !== \\"undefined\\") {
+      options.params.routes = params.routes;
+    }
+
+    if (typeof params?.tokenOut !== \\"undefined\\") {
+      options.params.token_out = params.tokenOut;
+    }
+
+    const endpoint = \`osmosis/gamm/v1beta1/\${params.poolId}/estimate/swap_exact_amount_out\`;
+    return await this.request(endpoint, options);
+  }
+
+}"
+`;
+
+exports[`cosmos LCDClient 1`] = `
+"export class QueryClient extends LCDClient {
+  constructor({
+    restEndpoint
+  }) {
+    super({
+      restEndpoint
+    });
+  }
+
+  /* Balance queries the balance of a single coin for a single account. */
+  balance(params: QueryBalanceRequest): Promise<QueryBalanceResponse> {
+    const options = {
+      params: {}
+    };
+
+    if (typeof params?.denom !== \\"undefined\\") {
+      options.params.denom = params.denom;
+    }
+
+    const endpoint = \`cosmos/bank/v1beta1/balances/\${params.address}/by_denom\`;
+    return await this.request(endpoint, options);
+  }
+
+  /* AllBalances queries the balance of all coins for a single account. */
+  allBalances(params: QueryAllBalancesRequest): Promise<QueryAllBalancesResponse> {
+    const options = {
+      params: {}
+    };
+
+    if (typeof params?.pagination !== \\"undefined\\") {
+      options.params.pagination = params.pagination;
+    }
+
+    const endpoint = \`cosmos/bank/v1beta1/balances/\${params.address}\`;
+    return await this.request(endpoint, options);
+  }
+
+  /* SpendableBalances queries the spenable balance of all coins for a single
+  account. */
+  spendableBalances(params: QuerySpendableBalancesRequest): Promise<QuerySpendableBalancesResponse> {
+    const options = {
+      params: {}
+    };
+
+    if (typeof params?.pagination !== \\"undefined\\") {
+      options.params.pagination = params.pagination;
+    }
+
+    const endpoint = \`cosmos/bank/v1beta1/spendable_balances/\${params.address}\`;
+    return await this.request(endpoint, options);
+  }
+
+  /* TotalSupply queries the total supply of all coins. */
+  totalSupply(params: QueryTotalSupplyRequest): Promise<QueryTotalSupplyResponse> {
+    const options = {
+      params: {}
+    };
+
+    if (typeof params?.pagination !== \\"undefined\\") {
+      options.params.pagination = params.pagination;
+    }
+
+    const endpoint = \`cosmos/bank/v1beta1/supply/\`;
+    return await this.request(endpoint, options);
+  }
+
+  /* SupplyOf queries the supply of a single coin. */
+  supplyOf(params: QuerySupplyOfRequest): Promise<QuerySupplyOfResponse> {
+    const options = {
+      params: {}
+    };
+
+    if (typeof params?.denom !== \\"undefined\\") {
+      options.params.denom = params.denom;
+    }
+
+    const endpoint = \`cosmos/bank/v1beta1/supply/by_denom/\`;
+    return await this.request(endpoint, options);
+  }
+
+  /* Params queries the parameters of x/bank module. */
+  params(params: QueryParamsRequest): Promise<QueryParamsResponse> {
+    const endpoint = \`cosmos/bank/v1beta1/params/\`;
+    return await this.request(endpoint);
+  }
+
+  /* DenomsMetadata queries the client metadata of a given coin denomination. */
+  denomMetadata(params: QueryDenomMetadataRequest): Promise<QueryDenomMetadataResponse> {
+    const endpoint = \`cosmos/bank/v1beta1/denoms_metadata/\${params.denom}\`;
+    return await this.request(endpoint);
+  }
+
+  /* DenomsMetadata queries the client metadata for all registered coin
+  denominations. */
+  denomsMetadata(params: QueryDenomsMetadataRequest): Promise<QueryDenomsMetadataResponse> {
+    const options = {
+      params: {}
+    };
+
+    if (typeof params?.pagination !== \\"undefined\\") {
+      options.params.pagination = params.pagination;
+    }
+
+    const endpoint = \`cosmos/bank/v1beta1/denoms_metadata/\`;
+    return await this.request(endpoint, options);
+  }
+
+  /* DenomOwners queries for all account addresses that own a particular token
+  denomination. */
+  denomOwners(params: QueryDenomOwnersRequest): Promise<QueryDenomOwnersResponse> {
+    const options = {
+      params: {}
+    };
+
+    if (typeof params?.pagination !== \\"undefined\\") {
+      options.params.pagination = params.pagination;
+    }
+
+    const endpoint = \`cosmos/bank/v1beta1/denom_owners/\${params.denom}\`;
+    return await this.request(endpoint, options);
+  }
+
+}"
+`;
+
+exports[`osmosis LCDClient 1`] = `
+"export class QueryClient extends LCDClient {
+  constructor({
+    restEndpoint
+  }) {
+    super({
+      restEndpoint
+    });
+  }
+
+  /* Pools */
+  pools(params: QueryPoolsRequest): Promise<QueryPoolsResponse> {
+    const options = {
+      params: {}
+    };
+
+    if (typeof params?.pagination !== \\"undefined\\") {
+      options.params.pagination = params.pagination;
+    }
+
+    const endpoint = \`osmosis/gamm/v1beta1/pools/\`;
+    return await this.request(endpoint, options);
+  }
+
+  /* NumPools */
+  numPools(params: QueryNumPoolsRequest): Promise<QueryNumPoolsResponse> {
+    const endpoint = \`osmosis/gamm/v1beta1/num_pools/\`;
+    return await this.request(endpoint);
+  }
+
+  /* TotalLiquidity */
+  totalLiquidity(params: QueryTotalLiquidityRequest): Promise<QueryTotalLiquidityResponse> {
+    const endpoint = \`osmosis/gamm/v1beta1/total_liquidity/\`;
+    return await this.request(endpoint);
+  }
+
+  /* Per Pool gRPC Endpoints */
+  pool(params: QueryPoolRequest): Promise<QueryPoolResponse> {
+    const endpoint = \`osmosis/gamm/v1beta1/pools/\${params.poolId}\`;
+    return await this.request(endpoint);
+  }
+
+  /* PoolParams */
+  poolParams(params: QueryPoolParamsRequest): Promise<QueryPoolParamsResponse> {
+    const endpoint = \`osmosis/gamm/v1beta1/pools/\${params.poolId}/params\`;
+    return await this.request(endpoint);
+  }
+
+  /* TotalPoolLiquidity */
+  totalPoolLiquidity(params: QueryTotalPoolLiquidityRequest): Promise<QueryTotalPoolLiquidityResponse> {
+    const endpoint = \`osmosis/gamm/v1beta1/pools/\${params.poolId}/total_pool_liquidity\`;
+    return await this.request(endpoint);
+  }
+
+  /* TotalShares */
+  totalShares(params: QueryTotalSharesRequest): Promise<QueryTotalSharesResponse> {
+    const endpoint = \`osmosis/gamm/v1beta1/pools/\${params.poolId}/total_shares\`;
+    return await this.request(endpoint);
+  }
+
+  /* SpotPrice */
+  spotPrice(params: QuerySpotPriceRequest): Promise<QuerySpotPriceResponse> {
+    const options = {
+      params: {}
+    };
+
+    if (typeof params?.tokenInDenom !== \\"undefined\\") {
+      options.params.token_in_denom = params.tokenInDenom;
+    }
+
+    if (typeof params?.tokenOutDenom !== \\"undefined\\") {
+      options.params.token_out_denom = params.tokenOutDenom;
+    }
+
+    const endpoint = \`osmosis/gamm/v1beta1/pools/\${params.poolId}/prices\`;
+    return await this.request(endpoint, options);
+  }
+
+  /* Estimate the swap. */
+  estimateSwapExactAmountIn(params: QuerySwapExactAmountInRequest): Promise<QuerySwapExactAmountInResponse> {
+    const options = {
+      params: {}
+    };
+
+    if (typeof params?.sender !== \\"undefined\\") {
+      options.params.sender = params.sender;
+    }
+
+    if (typeof params?.tokenIn !== \\"undefined\\") {
+      options.params.token_in = params.tokenIn;
+    }
+
+    if (typeof params?.routes !== \\"undefined\\") {
+      options.params.routes = params.routes;
+    }
+
+    const endpoint = \`osmosis/gamm/v1beta1/\${params.poolId}/estimate/swap_exact_amount_in\`;
+    return await this.request(endpoint, options);
+  }
+
+  /* EstimateSwapExactAmountOut */
+  estimateSwapExactAmountOut(params: QuerySwapExactAmountOutRequest): Promise<QuerySwapExactAmountOutResponse> {
+    const options = {
+      params: {}
+    };
+
+    if (typeof params?.sender !== \\"undefined\\") {
+      options.params.sender = params.sender;
+    }
+
+    if (typeof params?.routes !== \\"undefined\\") {
+      options.params.routes = params.routes;
+    }
+
+    if (typeof params?.tokenOut !== \\"undefined\\") {
+      options.params.token_out = params.tokenOut;
+    }
+
+    const endpoint = \`osmosis/gamm/v1beta1/\${params.poolId}/estimate/swap_exact_amount_out\`;
+    return await this.request(endpoint, options);
+  }
+
+}"
+`;
+
 exports[`service info template 1`] = `
 Object {
   "atEnd": false,
