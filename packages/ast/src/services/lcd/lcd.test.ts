@@ -2,7 +2,8 @@ import {
     getUrlParts,
     getUrlTemplateString,
     makeAggregatedLCDClient,
-    makeLCDClient
+    makeLCDClient,
+    makeTemplateTag
 } from './lcd';
 import { ProtoStore, traverse, getNestedProto } from '@osmonauts/proto-parser'
 import { ProtoService } from '@osmonauts/types';
@@ -27,7 +28,21 @@ it('service info template', () => {
     expect(getUrlTemplateString('/osmosis/{gamm}/v1beta1/{estimate}/swap_exact_amount_in')).toMatchSnapshot();
     expect(getUrlTemplateString('/osmosis/{gamm}/{v1beta1}/{estimate}/{swap_exact_amount_in}')).toMatchSnapshot();
     expect(getUrlTemplateString('/osmosis/gamm/v1beta1/estimate/{swap_exact_amount_in}')).toMatchSnapshot();
+    expect(getUrlTemplateString('/cosmos/feegrant/v1beta1/allowance/{granter}/{grantee}')).toMatchSnapshot();
 });
+
+it('template tags', () => {
+    const info = {
+        url: '/{cosmos}/feegrant/v1beta1/{allowance}/{granter}/{grantee}',
+        pathParams: [
+            'cosmos',
+            'allowance',
+            'granter',
+            'grantee'
+        ]
+    };
+    expectCode(makeTemplateTag(info));
+})
 
 it('osmosis LCDClient', () => {
     const ref = store.findProto('osmosis/gamm/v1beta1/query.proto');
@@ -39,6 +54,22 @@ it('osmosis LCDClient', () => {
 });
 it('cosmos LCDClient', () => {
     const ref = store.findProto('cosmos/bank/v1beta1/query.proto');
+    const res = traverse(store, ref);
+    const service: ProtoService = getNestedProto(res).Query;
+    const context = new GenericParseContext(ref, store);
+    const ast = makeLCDClient(context, service);
+    expectCode(ast);
+});
+it('cosmos fee LCDClient', () => {
+    const ref = store.findProto('cosmos/feegrant/v1beta1/query.proto');
+    const res = traverse(store, ref);
+    const service: ProtoService = getNestedProto(res).Query;
+    const context = new GenericParseContext(ref, store);
+    const ast = makeLCDClient(context, service);
+    expectCode(ast);
+});
+it('cosmos/app/v1alpha1/query.proto', () => {
+    const ref = store.findProto('cosmos/app/v1alpha1/query.proto');
     const res = traverse(store, ref);
     const service: ProtoService = getNestedProto(res).Query;
     const context = new GenericParseContext(ref, store);

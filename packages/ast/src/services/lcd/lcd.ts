@@ -47,7 +47,12 @@ const makeOptionsObject = () => {
         'const',
         [
             t.variableDeclarator(
-                t.identifier('options'),
+                identifier(
+                    'options',
+                    t.tsTypeAnnotation(
+                        t.tsAnyKeyword()
+                    )
+                ),
                 t.objectExpression(
                     [
                         t.objectProperty(
@@ -108,7 +113,12 @@ export const getUrlTemplateString = (url: string) => {
         const part = parts[p];
         if (/[{}]+/.test(part)) {
             if (p === parts.length - 1) atEnd = true;
-            strs.push(cur.join('/'));
+            if (cur.length) {
+                const vals = cur.join('/');
+                strs.push(vals);
+            } else {
+                strs.push('/')
+            }
             cur = [];
         } else {
             cur.push(part);
@@ -144,19 +154,30 @@ export const getUrlTemplateString = (url: string) => {
 
 // do we need to set end prop in ast?
 // we may want to t.templateElement!!!
-const makeTemplateTag = (info: ProtoServiceMethodInfo) => {
+export const makeTemplateTag = (info: ProtoServiceMethodInfo) => {
     if (!info.url) throw new Error('no URL on service method');
     const parts = getUrlTemplateString(info.url);
     const templateElts = parts.strs.map(raw => t.templateElement({ raw }))
-    if (parts.atEnd) {
-        templateElts.push(t.templateElement({ raw: '' }));
-    }
+
+
+    // Number of TemplateLiteral quasis should be exactly one more than the number of expressions
+
     const pathParams = info.pathParams.map(param => {
         return t.memberExpression(
             t.identifier('params'),
             t.identifier(param)
         );
     });
+
+    if (parts.atEnd) {
+        templateElts.push(t.templateElement({ raw: '' }));
+    }
+
+    // THIS MEANS WE PROBABLY HAVE A BUG
+    if (templateElts.length !== pathParams.length + 1) {
+        templateElts.push(t.templateElement({ raw: '' }));
+    }
+
 
     return t.templateLiteral(
         templateElts,
@@ -174,6 +195,11 @@ const requestMethod = (
 ) => {
     const methodName = firstLower(serviceMethod.name);
     const comment = serviceMethod.comment ?? serviceMethod.name;
+
+    if (!serviceMethod.info) {
+        throw new Error('No Service URL!');
+    }
+
     const queryParams = serviceMethod.info.queryParams.map(param => {
         return setParamOption(param);
     });
@@ -231,8 +257,11 @@ const requestMethod = (
             returnAwaitRequest(serviceMethod.info.queryParams.length > 0)
         ]),
         returnReponseType(serviceMethod.responseType),
-        makeComment(comment)
-
+        makeComment(comment),
+        false,
+        false,
+        false,
+        true // async
     );
 }
 
@@ -289,10 +318,13 @@ export const makeLCDClient = (
     context.addUtil('LCDClient');
     const methods = Object.keys(service.methods).map(key => {
         const method: ProtoServiceMethod = service.methods[key];
-        return requestMethod(context, method);
-    });
-    const clientName = firstUpper(service.name) + 'Client'
-    return makeLCDClientClassBody(clientName, methods);
+        if (method.info)
+            return requestMethod(context, method);
+    }).filter(Boolean);
+    if (methods.length) {
+        const clientName = firstUpper(service.name) + 'Client'
+        return makeLCDClientClassBody(clientName, methods);
+    }
 };
 
 export const makeAggregatedLCDClient = (

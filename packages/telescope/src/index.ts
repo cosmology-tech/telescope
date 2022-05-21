@@ -1,8 +1,8 @@
 import * as t from '@babel/types';
 import pkg from '../package.json';
 import generate from '@babel/generator';
-import { ProtoStore } from '@osmonauts/proto-parser';
-import { buildAllImports, getServiceDependencies } from './imports';
+import { getNestedProto, ProtoStore } from '@osmonauts/proto-parser';
+import { buildAllImports, getDepsFromMutations, getDepsFromQueries } from './imports';
 import { TelescopeParseContext } from './build';
 import { importNamespace, importStmt } from '@osmonauts/ast';
 import { getRelativePath, variableSlug } from './utils';
@@ -11,8 +11,17 @@ import { bundlePackages, createFileBundle } from './bundle';
 import { writeFileSync } from 'fs';
 import { join, dirname, resolve, relative } from 'path';
 import { sync as mkdirp } from 'mkdirp';
-import { recursiveModuleBundle, GenericParseContext, createClient, AminoParseContext } from '@osmonauts/ast';
-import { camel, pascal } from 'case';
+import {
+    makeLCDClient,
+    recursiveModuleBundle,
+    GenericParseContext,
+    createClient,
+    AminoParseContext
+} from '@osmonauts/ast';
+import {
+    camel,
+    pascal
+} from 'case';
 
 export interface TelescopeInput {
     protoDir: string;
@@ -84,10 +93,11 @@ export class TelescopeBuilder {
             });
 
             // 4 find services w/mutations
-            const serviceContexts = packageContexts.filter(context => context.mutations.length > 0);
+            const mutationContexts = packageContexts.filter(context => context.mutations.length > 0);
+            const queryContexts = packageContexts.filter(context => context.queries.length > 0);
 
             // 5 write out one amino helper for all contexts w/mutations
-            const aminoConverters = serviceContexts.map(c => {
+            const aminoConverters = mutationContexts.map(c => {
                 const localname = c.ref.filename.replace(/\.proto$/, '.amino.ts');
                 const filename = resolve(join(input.outPath, localname));
                 // FRESH new context
@@ -115,7 +125,7 @@ export class TelescopeBuilder {
                 ctx.buildAminoInterfaces();
                 ctx.buildAminoConverter();
 
-                const serviceImports = getServiceDependencies(
+                const serviceImports = getDepsFromMutations(
                     ctx.mutations,
                     localname
                 );
@@ -150,7 +160,7 @@ export class TelescopeBuilder {
             });
 
             // 6 write out one registry helper for all contexts w/mutations
-            const registries = serviceContexts.map(c => {
+            const registries = mutationContexts.map(c => {
 
                 const localname = c.ref.filename.replace(/\.proto$/, '.registry.ts')
                 const filename = resolve(join(input.outPath, localname));
@@ -170,7 +180,7 @@ export class TelescopeBuilder {
                 // SEE ABOVE - DONT RENAME THESE DIRECTLY
                 // ctx.ref.filename = filename;
 
-                const serviceImports = getServiceDependencies(
+                const serviceImports = getDepsFromMutations(
                     ctx.mutations,
                     localname
                 );
@@ -198,7 +208,65 @@ export class TelescopeBuilder {
                     filename
                 };
 
-            })
+            });
+
+            // 6.5 write out one registry helper for all contexts w/mutations
+            const lcdClients = queryContexts.map(c => {
+
+                const localname = c.ref.filename.replace(/\.proto$/, '.lcd.ts')
+                const filename = resolve(join(input.outPath, localname));
+                // FRESH new context
+
+                const ctx = new TelescopeParseContext(
+                    c.ref,
+                    c.store
+                );
+
+                // get mutations, services
+                parse(ctx);
+
+                const proto = getNestedProto(c.ref.traversed);
+                // hard-coding, for now, only Query service
+                if (!proto?.Query || proto.Query?.type !== 'Service') {
+                    return;
+                }
+
+                const lcdAst = makeLCDClient(ctx.generic, proto.Query);
+
+                if (!lcdAst) {
+                    return;
+                }
+
+                const serviceImports = getDepsFromQueries(
+                    ctx.queries,
+                    localname
+                );
+
+                const imports = buildAllImports(ctx, serviceImports, localname);
+                const prog = []
+                    .concat(imports)
+                    .concat(ctx.body)
+                    .concat(lcdAst);
+                const ast = t.program(prog);
+                const content = generate(ast).code;
+                mkdirp(dirname(filename));
+                writeFileSync(filename, content);
+
+                // add to bundle
+                createFileBundle(
+                    c.ref.proto.package,
+                    localname,
+                    bundle.bundleFile,
+                    bundle.importPaths,
+                    bundle.bundleVariables
+                );
+
+                return {
+                    localname,
+                    filename
+                };
+
+            }).filter(Boolean);
 
             // 7 write out one client for each base package, referencing the last two steps
             const filesToInclude = [
@@ -208,6 +276,7 @@ export class TelescopeBuilder {
             if (registries.length) {
                 const registryImports = [];
                 const converterImports = [];
+
                 const clientFile = join(`${bundle.base}`, 'client.ts');
                 filesToInclude.push(clientFile);
                 const ctx = new GenericParseContext();
