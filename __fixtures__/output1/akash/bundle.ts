@@ -67,6 +67,14 @@ import * as _299 from "./deployment/v1beta2/service.registry";
 import * as _300 from "./market/v1beta2/service.registry";
 import * as _301 from "./provider/v1beta1/provider.registry";
 import * as _302 from "./provider/v1beta2/provider.registry";
+import * as _303 from "./audit/v1beta2/query.lcd";
+import * as _304 from "./cert/v1beta2/query.lcd";
+import * as _305 from "./deployment/v1beta1/query.lcd";
+import * as _306 from "./deployment/v1beta2/query.lcd";
+import * as _307 from "./escrow/v1beta1/query.lcd";
+import * as _308 from "./escrow/v1beta2/query.lcd";
+import * as _309 from "./market/v1beta2/query.lcd";
+import * as _310 from "./provider/v1beta2/query.lcd";
 export namespace akash {
   export namespace audit {
     export const v1beta1 = { ..._0,
@@ -77,7 +85,8 @@ export namespace akash {
       ..._2,
       ..._3,
       ..._288,
-      ..._296
+      ..._296,
+      ..._303
     };
   }
   export namespace base {
@@ -98,7 +107,8 @@ export namespace akash {
       ..._14,
       ..._15,
       ..._289,
-      ..._297
+      ..._297,
+      ..._304
     };
   }
   export namespace deployment {
@@ -109,7 +119,8 @@ export namespace akash {
       ..._20,
       ..._21,
       ..._290,
-      ..._298
+      ..._298,
+      ..._305
     };
     export const v1beta2 = { ..._22,
       ..._23,
@@ -124,17 +135,20 @@ export namespace akash {
       ..._32,
       ..._33,
       ..._291,
-      ..._299
+      ..._299,
+      ..._306
     };
   }
   export namespace escrow {
     export const v1beta1 = { ..._34,
       ..._35,
-      ..._36
+      ..._36,
+      ..._307
     };
     export const v1beta2 = { ..._37,
       ..._38,
-      ..._39
+      ..._39,
+      ..._308
     };
   }
   export namespace inflation {
@@ -151,7 +165,8 @@ export namespace akash {
       ..._47,
       ..._48,
       ..._292,
-      ..._300
+      ..._300,
+      ..._309
     };
   }
   export namespace provider {
@@ -163,7 +178,8 @@ export namespace akash {
       ..._51,
       ..._52,
       ..._294,
-      ..._302
+      ..._302,
+      ..._310
     };
   }
 }

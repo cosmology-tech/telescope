@@ -11,8 +11,8 @@ exports[`AggregatedLCDClient 1`] = `
   }
 
   /* Balance queries the balance of a single coin for a single account. */
-  balance(params: QueryBalanceRequest): Promise<QueryBalanceResponse> {
-    const options = {
+  async balance(params: QueryBalanceRequest): Promise<QueryBalanceResponse> {
+    const options: any = {
       params: {}
     };
 
@@ -25,8 +25,8 @@ exports[`AggregatedLCDClient 1`] = `
   }
 
   /* AllBalances queries the balance of all coins for a single account. */
-  allBalances(params: QueryAllBalancesRequest): Promise<QueryAllBalancesResponse> {
-    const options = {
+  async allBalances(params: QueryAllBalancesRequest): Promise<QueryAllBalancesResponse> {
+    const options: any = {
       params: {}
     };
 
@@ -40,8 +40,8 @@ exports[`AggregatedLCDClient 1`] = `
 
   /* SpendableBalances queries the spenable balance of all coins for a single
   account. */
-  spendableBalances(params: QuerySpendableBalancesRequest): Promise<QuerySpendableBalancesResponse> {
-    const options = {
+  async spendableBalances(params: QuerySpendableBalancesRequest): Promise<QuerySpendableBalancesResponse> {
+    const options: any = {
       params: {}
     };
 
@@ -54,8 +54,8 @@ exports[`AggregatedLCDClient 1`] = `
   }
 
   /* TotalSupply queries the total supply of all coins. */
-  totalSupply(params: QueryTotalSupplyRequest): Promise<QueryTotalSupplyResponse> {
-    const options = {
+  async totalSupply(params: QueryTotalSupplyRequest): Promise<QueryTotalSupplyResponse> {
+    const options: any = {
       params: {}
     };
 
@@ -68,8 +68,8 @@ exports[`AggregatedLCDClient 1`] = `
   }
 
   /* SupplyOf queries the supply of a single coin. */
-  supplyOf(params: QuerySupplyOfRequest): Promise<QuerySupplyOfResponse> {
-    const options = {
+  async supplyOf(params: QuerySupplyOfRequest): Promise<QuerySupplyOfResponse> {
+    const options: any = {
       params: {}
     };
 
@@ -82,21 +82,21 @@ exports[`AggregatedLCDClient 1`] = `
   }
 
   /* Params queries the parameters of x/bank module. */
-  params(params: QueryParamsRequest): Promise<QueryParamsResponse> {
+  async params(params: QueryParamsRequest): Promise<QueryParamsResponse> {
     const endpoint = \`cosmos/bank/v1beta1/params/\`;
     return await this.request(endpoint);
   }
 
   /* DenomsMetadata queries the client metadata of a given coin denomination. */
-  denomMetadata(params: QueryDenomMetadataRequest): Promise<QueryDenomMetadataResponse> {
+  async denomMetadata(params: QueryDenomMetadataRequest): Promise<QueryDenomMetadataResponse> {
     const endpoint = \`cosmos/bank/v1beta1/denoms_metadata/\${params.denom}\`;
     return await this.request(endpoint);
   }
 
   /* DenomsMetadata queries the client metadata for all registered coin
   denominations. */
-  denomsMetadata(params: QueryDenomsMetadataRequest): Promise<QueryDenomsMetadataResponse> {
-    const options = {
+  async denomsMetadata(params: QueryDenomsMetadataRequest): Promise<QueryDenomsMetadataResponse> {
+    const options: any = {
       params: {}
     };
 
@@ -110,8 +110,8 @@ exports[`AggregatedLCDClient 1`] = `
 
   /* DenomOwners queries for all account addresses that own a particular token
   denomination. */
-  denomOwners(params: QueryDenomOwnersRequest): Promise<QueryDenomOwnersResponse> {
-    const options = {
+  async denomOwners(params: QueryDenomOwnersRequest): Promise<QueryDenomOwnersResponse> {
+    const options: any = {
       params: {}
     };
 
@@ -124,8 +124,8 @@ exports[`AggregatedLCDClient 1`] = `
   }
 
   /* Pools */
-  pools(params: QueryPoolsRequest): Promise<QueryPoolsResponse> {
-    const options = {
+  async pools(params: QueryPoolsRequest): Promise<QueryPoolsResponse> {
+    const options: any = {
       params: {}
     };
 
@@ -138,44 +138,44 @@ exports[`AggregatedLCDClient 1`] = `
   }
 
   /* NumPools */
-  numPools(params: QueryNumPoolsRequest): Promise<QueryNumPoolsResponse> {
+  async numPools(params: QueryNumPoolsRequest): Promise<QueryNumPoolsResponse> {
     const endpoint = \`osmosis/gamm/v1beta1/num_pools/\`;
     return await this.request(endpoint);
   }
 
   /* TotalLiquidity */
-  totalLiquidity(params: QueryTotalLiquidityRequest): Promise<QueryTotalLiquidityResponse> {
+  async totalLiquidity(params: QueryTotalLiquidityRequest): Promise<QueryTotalLiquidityResponse> {
     const endpoint = \`osmosis/gamm/v1beta1/total_liquidity/\`;
     return await this.request(endpoint);
   }
 
   /* Per Pool gRPC Endpoints */
-  pool(params: QueryPoolRequest): Promise<QueryPoolResponse> {
+  async pool(params: QueryPoolRequest): Promise<QueryPoolResponse> {
     const endpoint = \`osmosis/gamm/v1beta1/pools/\${params.poolId}\`;
     return await this.request(endpoint);
   }
 
   /* PoolParams */
-  poolParams(params: QueryPoolParamsRequest): Promise<QueryPoolParamsResponse> {
+  async poolParams(params: QueryPoolParamsRequest): Promise<QueryPoolParamsResponse> {
     const endpoint = \`osmosis/gamm/v1beta1/pools/\${params.poolId}/params\`;
     return await this.request(endpoint);
   }
 
   /* TotalPoolLiquidity */
-  totalPoolLiquidity(params: QueryTotalPoolLiquidityRequest): Promise<QueryTotalPoolLiquidityResponse> {
+  async totalPoolLiquidity(params: QueryTotalPoolLiquidityRequest): Promise<QueryTotalPoolLiquidityResponse> {
     const endpoint = \`osmosis/gamm/v1beta1/pools/\${params.poolId}/total_pool_liquidity\`;
     return await this.request(endpoint);
   }
 
   /* TotalShares */
-  totalShares(params: QueryTotalSharesRequest): Promise<QueryTotalSharesResponse> {
+  async totalShares(params: QueryTotalSharesRequest): Promise<QueryTotalSharesResponse> {
     const endpoint = \`osmosis/gamm/v1beta1/pools/\${params.poolId}/total_shares\`;
     return await this.request(endpoint);
   }
 
   /* SpotPrice */
-  spotPrice(params: QuerySpotPriceRequest): Promise<QuerySpotPriceResponse> {
-    const options = {
+  async spotPrice(params: QuerySpotPriceRequest): Promise<QuerySpotPriceResponse> {
+    const options: any = {
       params: {}
     };
 
@@ -192,8 +192,8 @@ exports[`AggregatedLCDClient 1`] = `
   }
 
   /* Estimate the swap. */
-  estimateSwapExactAmountIn(params: QuerySwapExactAmountInRequest): Promise<QuerySwapExactAmountInResponse> {
-    const options = {
+  async estimateSwapExactAmountIn(params: QuerySwapExactAmountInRequest): Promise<QuerySwapExactAmountInResponse> {
+    const options: any = {
       params: {}
     };
 
@@ -214,8 +214,8 @@ exports[`AggregatedLCDClient 1`] = `
   }
 
   /* EstimateSwapExactAmountOut */
-  estimateSwapExactAmountOut(params: QuerySwapExactAmountOutRequest): Promise<QuerySwapExactAmountOutResponse> {
-    const options = {
+  async estimateSwapExactAmountOut(params: QuerySwapExactAmountOutRequest): Promise<QuerySwapExactAmountOutResponse> {
+    const options: any = {
       params: {}
     };
 
@@ -249,8 +249,8 @@ exports[`cosmos LCDClient 1`] = `
   }
 
   /* Balance queries the balance of a single coin for a single account. */
-  balance(params: QueryBalanceRequest): Promise<QueryBalanceResponse> {
-    const options = {
+  async balance(params: QueryBalanceRequest): Promise<QueryBalanceResponse> {
+    const options: any = {
       params: {}
     };
 
@@ -263,8 +263,8 @@ exports[`cosmos LCDClient 1`] = `
   }
 
   /* AllBalances queries the balance of all coins for a single account. */
-  allBalances(params: QueryAllBalancesRequest): Promise<QueryAllBalancesResponse> {
-    const options = {
+  async allBalances(params: QueryAllBalancesRequest): Promise<QueryAllBalancesResponse> {
+    const options: any = {
       params: {}
     };
 
@@ -278,8 +278,8 @@ exports[`cosmos LCDClient 1`] = `
 
   /* SpendableBalances queries the spenable balance of all coins for a single
   account. */
-  spendableBalances(params: QuerySpendableBalancesRequest): Promise<QuerySpendableBalancesResponse> {
-    const options = {
+  async spendableBalances(params: QuerySpendableBalancesRequest): Promise<QuerySpendableBalancesResponse> {
+    const options: any = {
       params: {}
     };
 
@@ -292,8 +292,8 @@ exports[`cosmos LCDClient 1`] = `
   }
 
   /* TotalSupply queries the total supply of all coins. */
-  totalSupply(params: QueryTotalSupplyRequest): Promise<QueryTotalSupplyResponse> {
-    const options = {
+  async totalSupply(params: QueryTotalSupplyRequest): Promise<QueryTotalSupplyResponse> {
+    const options: any = {
       params: {}
     };
 
@@ -306,8 +306,8 @@ exports[`cosmos LCDClient 1`] = `
   }
 
   /* SupplyOf queries the supply of a single coin. */
-  supplyOf(params: QuerySupplyOfRequest): Promise<QuerySupplyOfResponse> {
-    const options = {
+  async supplyOf(params: QuerySupplyOfRequest): Promise<QuerySupplyOfResponse> {
+    const options: any = {
       params: {}
     };
 
@@ -320,21 +320,21 @@ exports[`cosmos LCDClient 1`] = `
   }
 
   /* Params queries the parameters of x/bank module. */
-  params(params: QueryParamsRequest): Promise<QueryParamsResponse> {
+  async params(params: QueryParamsRequest): Promise<QueryParamsResponse> {
     const endpoint = \`cosmos/bank/v1beta1/params/\`;
     return await this.request(endpoint);
   }
 
   /* DenomsMetadata queries the client metadata of a given coin denomination. */
-  denomMetadata(params: QueryDenomMetadataRequest): Promise<QueryDenomMetadataResponse> {
+  async denomMetadata(params: QueryDenomMetadataRequest): Promise<QueryDenomMetadataResponse> {
     const endpoint = \`cosmos/bank/v1beta1/denoms_metadata/\${params.denom}\`;
     return await this.request(endpoint);
   }
 
   /* DenomsMetadata queries the client metadata for all registered coin
   denominations. */
-  denomsMetadata(params: QueryDenomsMetadataRequest): Promise<QueryDenomsMetadataResponse> {
-    const options = {
+  async denomsMetadata(params: QueryDenomsMetadataRequest): Promise<QueryDenomsMetadataResponse> {
+    const options: any = {
       params: {}
     };
 
@@ -348,8 +348,8 @@ exports[`cosmos LCDClient 1`] = `
 
   /* DenomOwners queries for all account addresses that own a particular token
   denomination. */
-  denomOwners(params: QueryDenomOwnersRequest): Promise<QueryDenomOwnersResponse> {
-    const options = {
+  async denomOwners(params: QueryDenomOwnersRequest): Promise<QueryDenomOwnersResponse> {
+    const options: any = {
       params: {}
     };
 
@@ -364,6 +364,56 @@ exports[`cosmos LCDClient 1`] = `
 }"
 `;
 
+exports[`cosmos fee LCDClient 1`] = `
+"export class QueryClient extends LCDClient {
+  constructor({
+    restEndpoint
+  }) {
+    super({
+      restEndpoint
+    });
+  }
+
+  /* Allowance returns fee granted to the grantee by the granter. */
+  async allowance(params: QueryAllowanceRequest): Promise<QueryAllowanceResponse> {
+    const endpoint = \`cosmos/feegrant/v1beta1/allowance/\${params.granter}/\${params.grantee}\`;
+    return await this.request(endpoint);
+  }
+
+  /* Allowances returns all the grants for address. */
+  async allowances(params: QueryAllowancesRequest): Promise<QueryAllowancesResponse> {
+    const options: any = {
+      params: {}
+    };
+
+    if (typeof params?.pagination !== \\"undefined\\") {
+      options.params.pagination = params.pagination;
+    }
+
+    const endpoint = \`cosmos/feegrant/v1beta1/allowances/\${params.grantee}\`;
+    return await this.request(endpoint, options);
+  }
+
+  /* AllowancesByGranter returns all the grants given by an address
+  Since v0.46 */
+  async allowancesByGranter(params: QueryAllowancesByGranterRequest): Promise<QueryAllowancesByGranterResponse> {
+    const options: any = {
+      params: {}
+    };
+
+    if (typeof params?.pagination !== \\"undefined\\") {
+      options.params.pagination = params.pagination;
+    }
+
+    const endpoint = \`cosmos/feegrant/v1beta1/issued/\${params.granter}\`;
+    return await this.request(endpoint, options);
+  }
+
+}"
+`;
+
+exports[`cosmos/app/v1alpha1/query.proto 1`] = `""`;
+
 exports[`osmosis LCDClient 1`] = `
 "export class QueryClient extends LCDClient {
   constructor({
@@ -375,8 +425,8 @@ exports[`osmosis LCDClient 1`] = `
   }
 
   /* Pools */
-  pools(params: QueryPoolsRequest): Promise<QueryPoolsResponse> {
-    const options = {
+  async pools(params: QueryPoolsRequest): Promise<QueryPoolsResponse> {
+    const options: any = {
       params: {}
     };
 
@@ -389,44 +439,44 @@ exports[`osmosis LCDClient 1`] = `
   }
 
   /* NumPools */
-  numPools(params: QueryNumPoolsRequest): Promise<QueryNumPoolsResponse> {
+  async numPools(params: QueryNumPoolsRequest): Promise<QueryNumPoolsResponse> {
     const endpoint = \`osmosis/gamm/v1beta1/num_pools/\`;
     return await this.request(endpoint);
   }
 
   /* TotalLiquidity */
-  totalLiquidity(params: QueryTotalLiquidityRequest): Promise<QueryTotalLiquidityResponse> {
+  async totalLiquidity(params: QueryTotalLiquidityRequest): Promise<QueryTotalLiquidityResponse> {
     const endpoint = \`osmosis/gamm/v1beta1/total_liquidity/\`;
     return await this.request(endpoint);
   }
 
   /* Per Pool gRPC Endpoints */
-  pool(params: QueryPoolRequest): Promise<QueryPoolResponse> {
+  async pool(params: QueryPoolRequest): Promise<QueryPoolResponse> {
     const endpoint = \`osmosis/gamm/v1beta1/pools/\${params.poolId}\`;
     return await this.request(endpoint);
   }
 
   /* PoolParams */
-  poolParams(params: QueryPoolParamsRequest): Promise<QueryPoolParamsResponse> {
+  async poolParams(params: QueryPoolParamsRequest): Promise<QueryPoolParamsResponse> {
     const endpoint = \`osmosis/gamm/v1beta1/pools/\${params.poolId}/params\`;
     return await this.request(endpoint);
   }
 
   /* TotalPoolLiquidity */
-  totalPoolLiquidity(params: QueryTotalPoolLiquidityRequest): Promise<QueryTotalPoolLiquidityResponse> {
+  async totalPoolLiquidity(params: QueryTotalPoolLiquidityRequest): Promise<QueryTotalPoolLiquidityResponse> {
     const endpoint = \`osmosis/gamm/v1beta1/pools/\${params.poolId}/total_pool_liquidity\`;
     return await this.request(endpoint);
   }
 
   /* TotalShares */
-  totalShares(params: QueryTotalSharesRequest): Promise<QueryTotalSharesResponse> {
+  async totalShares(params: QueryTotalSharesRequest): Promise<QueryTotalSharesResponse> {
     const endpoint = \`osmosis/gamm/v1beta1/pools/\${params.poolId}/total_shares\`;
     return await this.request(endpoint);
   }
 
   /* SpotPrice */
-  spotPrice(params: QuerySpotPriceRequest): Promise<QuerySpotPriceResponse> {
-    const options = {
+  async spotPrice(params: QuerySpotPriceRequest): Promise<QuerySpotPriceResponse> {
+    const options: any = {
       params: {}
     };
 
@@ -443,8 +493,8 @@ exports[`osmosis LCDClient 1`] = `
   }
 
   /* Estimate the swap. */
-  estimateSwapExactAmountIn(params: QuerySwapExactAmountInRequest): Promise<QuerySwapExactAmountInResponse> {
-    const options = {
+  async estimateSwapExactAmountIn(params: QuerySwapExactAmountInRequest): Promise<QuerySwapExactAmountInResponse> {
+    const options: any = {
       params: {}
     };
 
@@ -465,8 +515,8 @@ exports[`osmosis LCDClient 1`] = `
   }
 
   /* EstimateSwapExactAmountOut */
-  estimateSwapExactAmountOut(params: QuerySwapExactAmountOutRequest): Promise<QuerySwapExactAmountOutResponse> {
-    const options = {
+  async estimateSwapExactAmountOut(params: QuerySwapExactAmountOutRequest): Promise<QuerySwapExactAmountOutResponse> {
+    const options: any = {
       params: {}
     };
 
@@ -515,6 +565,9 @@ Object {
   "atEnd": true,
   "strs": Array [
     "osmosis/",
+    "/",
+    "/",
+    "/",
   ],
 }
 `;
@@ -527,3 +580,15 @@ Object {
   ],
 }
 `;
+
+exports[`service info template 5`] = `
+Object {
+  "atEnd": true,
+  "strs": Array [
+    "cosmos/feegrant/v1beta1/allowance/",
+    "/",
+  ],
+}
+`;
+
+exports[`template tags 1`] = `"\`/\${params.cosmos}/feegrant/v1beta1/\${params.allowance}/\${params.granter}/\${params.grantee}\`"`;
