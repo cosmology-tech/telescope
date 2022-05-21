@@ -1,7 +1,7 @@
 import { Action, ClaimRecord } from "./claim";
 import { Coin } from "../../../cosmos/base/v1beta1/coin";
 import { Params } from "./params";
-import { LCDClient } from "@osmonauts/helpers";
+import { LCDClient } from "@osmonauts/lcd";
 import { QueryModuleAccountBalanceRequest, QueryModuleAccountBalanceResponse, QueryParamsRequest, QueryParamsResponse, QueryClaimRecordRequest, QueryClaimRecordResponse, QueryClaimableForActionRequest, QueryClaimableForActionResponse, QueryTotalClaimableRequest, QueryTotalClaimableResponse } from "./query";
 export class QueryClient extends LCDClient {
   constructor({

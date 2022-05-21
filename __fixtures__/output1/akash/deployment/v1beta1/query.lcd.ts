@@ -2,7 +2,7 @@ import { DeploymentFilters, DeploymentID, Deployment } from "./deployment";
 import { PageRequest, PageResponse } from "../../../cosmos/base/query/v1beta1/pagination";
 import { GroupID, Group } from "./group";
 import { Account } from "../../escrow/v1beta1/types";
-import { LCDClient } from "@osmonauts/helpers";
+import { LCDClient } from "@osmonauts/lcd";
 import { QueryDeploymentsRequest, QueryDeploymentsResponse, QueryDeploymentRequest, QueryDeploymentResponse, QueryGroupRequest, QueryGroupResponse } from "./query";
 export class QueryClient extends LCDClient {
   constructor({

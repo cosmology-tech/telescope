@@ -1,6 +1,6 @@
 import { ProposalStatus, Proposal, Vote, VotingParams, DepositParams, TallyParams, Deposit, TallyResult } from "./gov";
 import { PageRequest, PageResponse } from "../../base/query/v1beta1/pagination";
-import { LCDClient } from "@osmonauts/helpers";
+import { LCDClient } from "@osmonauts/lcd";
 import { QueryProposalRequest, QueryProposalResponse, QueryProposalsRequest, QueryProposalsResponse, QueryVoteRequest, QueryVoteResponse, QueryVotesRequest, QueryVotesResponse, QueryParamsRequest, QueryParamsResponse, QueryDepositRequest, QueryDepositResponse, QueryDepositsRequest, QueryDepositsResponse, QueryTallyResultRequest, QueryTallyResultResponse } from "./query";
 export class QueryClient extends LCDClient {
   constructor({

@@ -1,5 +1,5 @@
 import { Params } from "./mint";
-import { LCDClient } from "@osmonauts/helpers";
+import { LCDClient } from "@osmonauts/lcd";
 import { QueryParamsRequest, QueryParamsResponse, QueryEpochProvisionsRequest, QueryEpochProvisionsResponse } from "./query";
 export class QueryClient extends LCDClient {
   constructor({

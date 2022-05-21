@@ -1,5 +1,5 @@
 import { ParamChange } from "./params";
-import { LCDClient } from "@osmonauts/helpers";
+import { LCDClient } from "@osmonauts/lcd";
 import { QueryParamsRequest, QueryParamsResponse, QuerySubspacesRequest, QuerySubspacesResponse } from "./query";
 export class QueryClient extends LCDClient {
   constructor({

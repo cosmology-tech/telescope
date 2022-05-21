@@ -1,4 +1,4 @@
-import { LCDClient } from "@osmonauts/helpers";
+import { LCDClient } from "@osmonauts/lcd";
 import { google.protobuf.Empty } from "../../../google/protobuf/empty";
 import { Key } from "./msg";
 import { QueryEncryptedSeedRequest, QueryEncryptedSeedResponse } from "./query";

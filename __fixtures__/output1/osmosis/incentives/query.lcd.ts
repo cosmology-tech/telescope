@@ -2,7 +2,7 @@ import { PageRequest, PageResponse } from "../../cosmos/base/query/v1beta1/pagin
 import { Coin } from "../../cosmos/base/v1beta1/coin";
 import { Gauge } from "./gauge";
 import { Duration } from "../../google/protobuf/duration";
-import { LCDClient } from "@osmonauts/helpers";
+import { LCDClient } from "@osmonauts/lcd";
 import { ModuleToDistributeCoinsRequest, ModuleToDistributeCoinsResponse, ModuleDistributedCoinsRequest, ModuleDistributedCoinsResponse, GaugeByIDRequest, GaugeByIDResponse, GaugesRequest, GaugesResponse, ActiveGaugesRequest, ActiveGaugesResponse, ActiveGaugesPerDenomRequest, ActiveGaugesPerDenomResponse, UpcomingGaugesRequest, UpcomingGaugesResponse, RewardsEstRequest, RewardsEstResponse, QueryLockableDurationsRequest, QueryLockableDurationsResponse } from "./query";
 export class QueryClient extends LCDClient {
   constructor({

@@ -3,7 +3,7 @@ import { PageRequest, PageResponse } from "../../../cosmos/base/query/v1beta1/pa
 import { BidFilters, BidID, Bid } from "./bid";
 import { LeaseFilters, LeaseID, Lease } from "./lease";
 import { Account, FractionalPayment } from "../../escrow/v1beta2/types";
-import { LCDClient } from "@osmonauts/helpers";
+import { LCDClient } from "@osmonauts/lcd";
 import { QueryOrdersRequest, QueryOrdersResponse, QueryOrderRequest, QueryOrderResponse, QueryBidsRequest, QueryBidsResponse, QueryBidRequest, QueryBidResponse, QueryLeasesRequest, QueryLeasesResponse, QueryLeaseRequest, QueryLeaseResponse } from "./query";
 export class QueryClient extends LCDClient {
   constructor({
