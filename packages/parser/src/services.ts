@@ -1,4 +1,4 @@
-import { ProtoField, ProtoService } from '@osmonauts/types';
+import { ProtoField } from '@osmonauts/types';
 
 interface ServiceOptions {
     "(google.api.http).get": string;
@@ -6,7 +6,7 @@ interface ServiceOptions {
 export const parseServiceUrl = (
     options: ServiceOptions
 ) => {
-    const url = options['(google.api.http).get'];
+    const url = options?.['(google.api.http).get'];
     if (!url) return;
     const match = url.match(/\{([^\}]*)\}/g);
     return {
@@ -18,9 +18,10 @@ export const parseServiceUrl = (
 export const parseService = (
     obj: any
 ) => {
-    const fields: Record<string, ProtoField> = obj.fields;
-    const options: ServiceOptions = obj.options;
+    const fields: Record<string, ProtoField> = obj.fields ?? {};
+    const options: ServiceOptions = obj.options ?? {};
     const pathInfo = parseServiceUrl(options);
+    if (!pathInfo) return;
     const allParams = Object.keys(fields);
     const queryParams = allParams.filter(param => !pathInfo.pathParams.includes(param));
     return {

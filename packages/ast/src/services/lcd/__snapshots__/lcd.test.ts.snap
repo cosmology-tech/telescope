@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`service info template 1`] = `
+Object {
+  "atEnd": false,
+  "strs": Array [
+    "osmosis/",
+    "/v1beta1/estimate/swap_exact_amount_in",
+  ],
+}
+`;
+
+exports[`service info template 2`] = `
+Object {
+  "atEnd": false,
+  "strs": Array [
+    "osmosis/",
+    "/v1beta1/",
+    "/swap_exact_amount_in",
+  ],
+}
+`;
+
+exports[`service info template 3`] = `
+Object {
+  "atEnd": true,
+  "strs": Array [
+    "osmosis/",
+  ],
+}
+`;
+
+exports[`service info template 4`] = `
+Object {
+  "atEnd": true,
+  "strs": Array [
+    "osmosis/gamm/v1beta1/estimate/",
+  ],
+}
+`;

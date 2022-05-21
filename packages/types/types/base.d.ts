@@ -1,4 +1,5 @@
 export interface ProtoEnum {
+    type?: 'Enum';
     name?: string;
     values: {
         [key: string]: number;
@@ -9,6 +10,7 @@ export interface ProtoEnum {
     };
 }
 export interface ProtoType {
+    type?: 'Type';
     name?: string;
     oneofs?: {
         [key: string]: {
@@ -27,7 +29,7 @@ export interface ProtoType {
     comment: string | undefined;
 }
 export interface ProtoField {
-    type: string;
+    type?: 'Field';
     name?: string;
     scope?: string[];
     parsedType?: {
@@ -54,6 +56,11 @@ export interface ProtoField {
 }
 export interface ProtoServiceMethod {
     type: 'ServiceMethod';
+    info?: {
+        url: string;
+        pathParams: string[];
+        queryParams: string[];
+    };
     name: string;
     options: {
         [key: string]: any;
