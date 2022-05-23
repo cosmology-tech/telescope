@@ -11,7 +11,6 @@ import { bundlePackages, createFileBundle } from './bundle';
 import { writeFileSync } from 'fs';
 import { join, dirname, resolve, relative } from 'path';
 import { sync as mkdirp } from 'mkdirp';
-import { sync as rimraf } from 'rimraf';
 import deepmerge from 'deepmerge';
 
 import {
@@ -69,9 +68,6 @@ export class TelescopeBuilder {
 
 
     build() {
-
-        // remove old code if any
-        rimraf(this.outPath);
 
         const allFiles = [];
 
