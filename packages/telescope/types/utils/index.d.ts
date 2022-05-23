@@ -33,6 +33,7 @@ export declare const UTILS: {
         name: string;
     };
     Exact: string;
+    LCDClient: string;
     DeepPartial: string;
 };
 export declare const getRelativePath: (f1: string, f2: string) => string;

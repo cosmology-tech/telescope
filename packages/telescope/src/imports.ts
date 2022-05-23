@@ -119,7 +119,7 @@ const getImportStatments = (list: ImportObj[]) => {
 
         // TODO some have google.protobuf.Any shows up... figure out the better way to handle this
         if (/\./.test(obj.name)) {
-            obj.name = obj.name.split('.')[obj.name.split('.').length - 1]
+            obj.name = obj.name.split('.')[obj.name.split('.').length - 1];
         }
 
         if (!exists) m[obj.path].push(obj);
