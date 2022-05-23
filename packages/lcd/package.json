@@ -81,7 +81,6 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.11.2",
-    "axios": "0.26.1",
-    "retry": "0.13.1"
+    "axios": "0.26.1"
   }
 }
