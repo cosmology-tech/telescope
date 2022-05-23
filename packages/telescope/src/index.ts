@@ -11,6 +11,7 @@ import { bundlePackages, createFileBundle } from './bundle';
 import { writeFileSync } from 'fs';
 import { join, dirname, resolve, relative } from 'path';
 import { sync as mkdirp } from 'mkdirp';
+import { sync as rimraf } from 'rimraf';
 import deepmerge from 'deepmerge';
 
 import {
@@ -67,7 +68,10 @@ export class TelescopeBuilder {
     }
 
 
-    build(input: TelescopeInput) {
+    build() {
+
+        // remove old code if any
+        rimraf(this.outPath);
 
         const allFiles = [];
 
@@ -98,7 +102,7 @@ export class TelescopeBuilder {
                     .concat(context.body);
 
                 const filename = ref.filename.replace(/\.proto/, '.ts');
-                const out = join(input.outPath, filename);
+                const out = join(this.outPath, filename);
                 mkdirp(dirname(out));
                 if (context.body.length > 0) {
                     const ast = t.program(prog);
@@ -124,7 +128,7 @@ export class TelescopeBuilder {
                 }
 
                 const localname = c.ref.filename.replace(/\.proto$/, '.amino.ts');
-                const filename = resolve(join(input.outPath, localname));
+                const filename = resolve(join(this.outPath, localname));
                 // FRESH new context
                 const ctx = new TelescopeParseContext(
                     c.ref,
@@ -192,7 +196,7 @@ export class TelescopeBuilder {
                 }
 
                 const localname = c.ref.filename.replace(/\.proto$/, '.registry.ts')
-                const filename = resolve(join(input.outPath, localname));
+                const filename = resolve(join(this.outPath, localname));
                 // FRESH new context
                 const ctx = new TelescopeParseContext(
                     c.ref,
@@ -247,7 +251,7 @@ export class TelescopeBuilder {
                 }
 
                 const localname = c.ref.filename.replace(/\.proto$/, '.lcd.ts')
-                const filename = resolve(join(input.outPath, localname));
+                const filename = resolve(join(this.outPath, localname));
                 // FRESH new context
 
                 const ctx = new TelescopeParseContext(
@@ -349,7 +353,7 @@ export class TelescopeBuilder {
                 const cAst = t.program(cProg);
                 const cContent = generate(cAst).code;
 
-                const clientOutFile = join(input.outPath, clientFile);
+                const clientOutFile = join(this.outPath, clientFile);
                 mkdirp(dirname(clientOutFile));
                 writeFileSync(clientOutFile, cContent);
             }
@@ -362,7 +366,7 @@ export class TelescopeBuilder {
                 .concat(body);
             const ast = t.program(prog);
             const content = generate(ast).code;
-            const out = resolve(join(input.outPath, bundle.bundleFile));
+            const out = resolve(join(this.outPath, bundle.bundleFile));
             mkdirp(dirname(out));
             writeFileSync(out, content);
 
@@ -373,7 +377,7 @@ export class TelescopeBuilder {
 
         // finally, write one index file with all files, exported
         const indexFile = 'index.ts';
-        const indexOutFile = join(input.outPath, indexFile);
+        const indexOutFile = join(this.outPath, indexFile);
         const stmts = allFiles.map(
             file => t.exportAllDeclaration(
                 t.stringLiteral(getRelativePath(indexFile, file))
@@ -397,7 +401,6 @@ export class TelescopeBuilder {
 
 export default (input: TelescopeInput) => {
     const builder = new TelescopeBuilder(input);
-    // TODO remove need for arguments
-    builder.build(input);
+    builder.build();
 };
 

@@ -19,7 +19,7 @@ export declare class TelescopeBuilder {
         store?: ProtoStore;
     });
     context(ref: any): TelescopeParseContext;
-    build(input: TelescopeInput): void;
+    build(): void;
 }
 declare const _default: (input: TelescopeInput) => void;
 export default _default;
