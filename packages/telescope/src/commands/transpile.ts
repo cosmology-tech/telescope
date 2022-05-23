@@ -1,6 +1,5 @@
 import { prompt } from '../prompt';
 import telescope from '../index';
-import { resolve, join } from 'path';
 
 export default async (argv) => {
 
@@ -8,7 +7,7 @@ export default async (argv) => {
     {
       _: true,
       type: 'path',
-      name: 'protoDir',
+      name: 'protoDirs',
       message: 'where is the proto directory?',
       default: './proto'
     },
@@ -18,15 +17,28 @@ export default async (argv) => {
       name: 'outPath',
       message: 'where is the output directory?',
       default: './src/proto'
+    },
+    {
+      type: 'confirm',
+      name: 'includeAminos',
+      message: 'output amino messages?',
+      default: true
+    },
+    {
+      type: 'confirm',
+      name: 'includeLCDClient',
+      message: 'output LCD Clients?',
+      default: false
     }
   ];
 
-  let { protoDir, outPath } = await prompt(questions, argv);
+  let { protoDirs, outPath, includeAminos, includeLCDClient } = await prompt(questions, argv);
 
-  protoDir = resolve(join(process.cwd(), protoDir));
-  outPath = resolve(process.cwd(), outPath);
+  if (!Array.isArray(protoDirs)) {
+    protoDirs = [protoDirs];
+  }
 
-  telescope({ protoDir, outPath });
+  telescope({ protoDirs, outPath, options: { includeAminos, includeLCDClient } });
 
   console.log(`✨ transpilation successful!`);
 };
