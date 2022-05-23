@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.4.27](https://github.com/osmosis-labs/telescope/compare/@osmonauts/telescope@0.4.26...@osmonauts/telescope@0.4.27) (2022-05-23)
+
+**Note:** Version bump only for package @osmonauts/telescope
+
+
+
+
+
 ## [0.4.26](https://github.com/osmosis-labs/telescope/compare/@osmonauts/telescope@0.4.25...@osmonauts/telescope@0.4.26) (2022-05-20)
 
 **Note:** Version bump only for package @osmonauts/telescope
