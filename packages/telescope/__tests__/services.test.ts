@@ -2,7 +2,7 @@ import { ProtoStore, parseProto } from '@osmonauts/proto-parser';
 import { parse } from '../src/parse';
 import { TelescopeParseContext } from '../src/build';
 
-const store = new ProtoStore('');
+const store = new ProtoStore();
 store.protos = [];
 const addRef = ({ filename, content }) => {
     const ref = {

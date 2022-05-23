@@ -1,18 +1,28 @@
-import { join, resolve } from 'path';
+import { join } from 'path';
 import telescope from '@osmonauts/telescope';
 import { camel, snake } from 'case';
 
-const protoDir = resolve(join(__dirname, '..', 'proto'));
-const outPath = resolve(__dirname, '..', 'src' ,'proto');
+const protoDirs = [
+    join(__dirname, '/../proto')
+];
+const outPath = join(__dirname, '/../src/proto');
 
-telescope({protoDir, outPath, plugins: [
-    {
-        name: 'aminoCasing',
-        plugin: ({protoPackage}) => {
-            if (protoPackage.startsWith('osmosis')) {
-                return camel;
+telescope({
+    protoDirs,
+    outPath,
+    options: {
+        includeAminos: true,
+        includeLCDClient: false
+    },
+    plugins: [
+        {
+            name: 'aminoCasing',
+            plugin: ({protoPackage}) => {
+                if (protoPackage.startsWith('osmosis')) {
+                    return camel;
+                }
+                return snake;
             }
-            return snake;
         }
-    }
-]});
+    ]
+});

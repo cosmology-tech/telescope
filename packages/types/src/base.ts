@@ -20,7 +20,24 @@ export interface ProtoType {
     comment: string | undefined;
 };
 export interface ProtoField {
-    type?: 'Field';
+    type?:
+    'string' |
+    'double' |
+    'float' |
+    'int32' |
+    'uint32' |
+    'sint32' |
+    'fixed32' |
+    'sfixed32' |
+    'uint64' |
+    'int64' |
+    'sint64' |
+    'fixed64' |
+    'sfixed64' |
+    'bytes' |
+    'bool' |
+    string;
+
     name?: string;
     scope?: string[];
     parsedType?: {

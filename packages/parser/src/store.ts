@@ -17,15 +17,15 @@ export const parseProto = (content) => {
 
 export class ProtoStore {
     files: string[];
-    protoDir: string;
+    protoDirs: string[];
     deps: ProtoDep[];
     protos: ProtoRef[];
     packages: string[];
 
     _traversed: boolean = false;
 
-    constructor(protoDir) {
-        this.protoDir = pathResolve(protoDir);
+    constructor(protoDirs: string[] = []) {
+        this.protoDirs = protoDirs.map(protoDir => pathResolve(protoDir));
     }
 
     findProto(filename): ProtoRef {
@@ -41,13 +41,16 @@ export class ProtoStore {
 
     getProtos(): ProtoRef[] {
         if (this.protos) return this.protos;
-        const protoSplat = join(this.protoDir, '/**/*.proto');
-        const protoFiles = glob(protoSplat);
-        const contents = protoFiles.map(filename => ({
-            absolute: filename,
-            filename: filename.split(this.protoDir)[1].replace(/^\//, ''),
-            content: readFileSync(filename, 'utf-8')
-        }))
+        const contents = this.protoDirs.reduce((m, protoDir) => {
+            const protoSplat = join(protoDir, '/**/*.proto');
+            const protoFiles = glob(protoSplat);
+            const contents = protoFiles.map(filename => ({
+                absolute: filename,
+                filename: filename.split(protoDir)[1].replace(/^\//, ''),
+                content: readFileSync(filename, 'utf-8')
+            }));
+            return [...m, ...contents];
+        }, []);
         const protos = contents.map(({ absolute, filename, content }) => {
             const proto = parseProto(content);
             return {

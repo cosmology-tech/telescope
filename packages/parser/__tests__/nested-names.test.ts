@@ -1,8 +1,8 @@
-import { ProtoResolver, ProtoStore } from '../src/index'
-import { importLookup, lookup, protoImportLookup, traverse } from '../src/';
+import { ProtoStore } from '../src/index'
+import { traverse } from '../src/';
 import * as dotty from 'dotty';
 
-const store = new ProtoStore(__dirname + '/../../../__fixtures__/chain1');
+const store = new ProtoStore([__dirname + '/../../../__fixtures__/chain1']);
 
 it('google/rpc/error_details', () => {
     const ref = store.findProto('google/rpc/error_details.proto');

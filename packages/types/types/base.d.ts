@@ -29,7 +29,7 @@ export interface ProtoType {
     comment: string | undefined;
 }
 export interface ProtoField {
-    type?: 'Field';
+    type?: 'string' | 'double' | 'float' | 'int32' | 'uint32' | 'sint32' | 'fixed32' | 'sfixed32' | 'uint64' | 'int64' | 'sint64' | 'fixed64' | 'sfixed64' | 'bytes' | 'bool' | string;
     name?: string;
     scope?: string[];
     parsedType?: {
@@ -54,13 +54,14 @@ export interface ProtoField {
     importedName?: string;
     scopeType?: string;
 }
+export interface ProtoServiceMethodInfo {
+    url: string;
+    pathParams: string[];
+    queryParams: string[];
+}
 export interface ProtoServiceMethod {
     type: 'ServiceMethod';
-    info?: {
-        url: string;
-        pathParams: string[];
-        queryParams: string[];
-    };
+    info?: ProtoServiceMethodInfo;
     name: string;
     options: {
         [key: string]: any;

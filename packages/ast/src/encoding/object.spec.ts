@@ -4,7 +4,7 @@ import { ProtoStore, traverse, getNestedProto } from '@osmonauts/proto-parser'
 import { ProtoParseContext } from './context';
 import { createProtoType } from './proto';
 
-const store = new ProtoStore(__dirname + '/../../../../__fixtures__/chain1');
+const store = new ProtoStore([__dirname + '/../../../../__fixtures__/chain1']);
 
 const expectCode = (ast) => {
     expect(

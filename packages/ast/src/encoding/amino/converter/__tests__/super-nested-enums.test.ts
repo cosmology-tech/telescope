@@ -3,7 +3,7 @@ import { ProtoStore, parseProto } from '@osmonauts/proto-parser'
 import { camel } from 'case';
 import { prepareContext, expectCode } from '../../../../../test-utils';
 
-const store = new ProtoStore('');
+const store = new ProtoStore([]);
 store.protos = [];
 const addRef = ({ filename, content }) => {
     const ref = {

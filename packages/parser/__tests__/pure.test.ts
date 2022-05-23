@@ -2,7 +2,7 @@ import { ProtoRef } from '@osmonauts/types';
 import { ProtoStore, parseProto } from '../src/index'
 import { traverse } from '../src/';
 
-const store = new ProtoStore('');
+const store = new ProtoStore();
 
 // TESTING ONLY
 const createProtoRef = ({ filename, content }): ProtoRef => {

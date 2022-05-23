@@ -269,7 +269,7 @@ const traverseEnum = (store: ProtoStore, ref: ProtoRef, obj: any, imports: objec
 
 const traverseField = (store: ProtoStore, ref: ProtoRef, obj: any, imports: object) => {
     return {
-        type: 'Field',
+        // type is already a property on field
         name: obj.name,
         ...obj.toJSON({ keepComments: true })
     }

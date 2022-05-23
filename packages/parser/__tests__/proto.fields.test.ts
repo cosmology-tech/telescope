@@ -1,5 +1,5 @@
 import { ProtoStore } from '../src/index'
-const store = new ProtoStore(__dirname + '/../../../__fixtures__/chain1');
+const store = new ProtoStore([__dirname + '/../../../__fixtures__/chain1']);
 
 it('Coin', () => {
     const Coin = store.findProtoObject('cosmos/base/v1beta1/coin.proto', 'Coin');

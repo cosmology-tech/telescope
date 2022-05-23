@@ -5,7 +5,7 @@ import { ProtoParseContext } from '../../context';
 import { createProtoType } from '..';
 import { createObjectWithMethods } from '../../object';
 
-const store = new ProtoStore(__dirname + '/../../../../../../__fixtures__/chain1');
+const store = new ProtoStore([__dirname + '/../../../../../../__fixtures__/chain1']);
 store.traverseAll();
 
 describe('MsgExecuteContract', () => {

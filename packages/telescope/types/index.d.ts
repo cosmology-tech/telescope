@@ -5,17 +5,17 @@ export interface TelescopeOptions {
     includeLCDClient: boolean;
 }
 export interface TelescopeInput {
-    protoDir: string;
+    protoDirs: string[];
     outPath: string;
     options: TelescopeOptions;
 }
 export declare class TelescopeBuilder {
     store: ProtoStore;
-    protoDir: string;
+    protoDirs: string[];
     outPath: string;
     options: TelescopeOptions;
     contexts: TelescopeParseContext[];
-    constructor({ protoDir, outPath, store, options }: TelescopeInput & {
+    constructor({ protoDirs, outPath, store, options }: TelescopeInput & {
         store?: ProtoStore;
     });
     context(ref: any): TelescopeParseContext;

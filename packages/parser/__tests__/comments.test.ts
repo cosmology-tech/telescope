@@ -1,6 +1,6 @@
-import { ProtoResolver, ProtoStore } from '../src/index'
-import { importLookup, lookup, protoImportLookup, traverse } from '../src/';
-const store = new ProtoStore(__dirname + '/../../../__fixtures__/chain1');
+import { ProtoStore } from '../src/index'
+import { traverse } from '../src/';
+const store = new ProtoStore([__dirname + '/../../../__fixtures__/chain1']);
 
 it('cosmos/base/query/v1beta1/pagination', () => {
     const ref = store.findProto('cosmos/base/query/v1beta1/pagination.proto');

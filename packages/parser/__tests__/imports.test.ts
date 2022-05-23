@@ -1,6 +1,6 @@
-import { ProtoResolver, ProtoStore } from '../src/index'
-import { importLookup, lookup, protoImportLookup } from '../src/';
-const store = new ProtoStore(__dirname + '/../../../__fixtures__/chain1');
+import { ProtoStore } from '../src/index'
+import { importLookup, protoImportLookup } from '../src/';
+const store = new ProtoStore([__dirname + '/../../../__fixtures__/chain1']);
 
 describe('imports lookup', () => {
     it('Any', () => {

@@ -6,7 +6,7 @@ import generate from '@babel/generator';
 import { ProtoStore, traverse, getNestedProto } from '@osmonauts/proto-parser'
 import { ProtoParseContext } from '../context';
 
-const store = new ProtoStore(__dirname + '/../../../../../__fixtures__/chain1');
+const store = new ProtoStore([__dirname + '/../../../../../__fixtures__/chain1']);
 
 const expectCode = (ast) => {
     expect(

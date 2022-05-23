@@ -2,12 +2,12 @@ import { ProtoDep, ProtoRef } from '@osmonauts/types';
 export declare const parseProto: (content: any) => import("protobufjs").IParserResult;
 export declare class ProtoStore {
     files: string[];
-    protoDir: string;
+    protoDirs: string[];
     deps: ProtoDep[];
     protos: ProtoRef[];
     packages: string[];
     _traversed: boolean;
-    constructor(protoDir: any);
+    constructor(protoDirs?: string[]);
     findProto(filename: any): ProtoRef;
     findProtoObject(filename: any, name: any): any;
     getProtos(): ProtoRef[];

@@ -13,7 +13,7 @@ around. Leaving this here in case it needs to be picked back up.
 
 */
 
-const store = new ProtoStore('');
+const store = new ProtoStore();
 store.protos = [];
 const addRef = ({ filename, content }) => {
   const ref = {

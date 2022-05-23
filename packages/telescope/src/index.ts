@@ -37,24 +37,24 @@ const defaultTelescopeOptions = {
 }
 
 export interface TelescopeInput {
-    protoDir: string;
+    protoDirs: string[];
     outPath: string;
     options: TelescopeOptions;
 }
 
 export class TelescopeBuilder {
     store: ProtoStore;
-    protoDir: string;
+    protoDirs: string[];
     outPath: string;
     options: TelescopeOptions;
     contexts: TelescopeParseContext[] = [];
 
-    constructor({ protoDir, outPath, store, options }: TelescopeInput & { store?: ProtoStore }) {
-        this.protoDir = protoDir;
+    constructor({ protoDirs, outPath, store, options }: TelescopeInput & { store?: ProtoStore }) {
+        this.protoDirs = protoDirs;
         this.outPath = outPath;
         this.options = deepmerge(defaultTelescopeOptions, options ?? {});
 
-        this.store = store ?? new ProtoStore(protoDir);
+        this.store = store ?? new ProtoStore(protoDirs);
         this.store.traverseAll();
     }
 
