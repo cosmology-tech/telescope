@@ -90,34 +90,49 @@ import * as _143 from "./upgrade/v1beta1/tx";
 import * as _144 from "./upgrade/v1beta1/upgrade";
 import * as _145 from "./vesting/v1beta1/tx";
 import * as _146 from "./vesting/v1beta1/vesting";
-import * as _303 from "./authz/v1beta1/tx.amino";
-import * as _304 from "./bank/v1beta1/tx.amino";
-import * as _305 from "./crisis/v1beta1/tx.amino";
-import * as _306 from "./distribution/v1beta1/tx.amino";
-import * as _307 from "./evidence/v1beta1/tx.amino";
-import * as _308 from "./feegrant/v1beta1/tx.amino";
-import * as _309 from "./gov/v1/tx.amino";
-import * as _310 from "./gov/v1beta1/tx.amino";
-import * as _311 from "./group/v1/tx.amino";
-import * as _312 from "./nft/v1beta1/tx.amino";
-import * as _313 from "./slashing/v1beta1/tx.amino";
-import * as _314 from "./staking/v1beta1/tx.amino";
-import * as _315 from "./upgrade/v1beta1/tx.amino";
-import * as _316 from "./vesting/v1beta1/tx.amino";
-import * as _317 from "./authz/v1beta1/tx.registry";
-import * as _318 from "./bank/v1beta1/tx.registry";
-import * as _319 from "./crisis/v1beta1/tx.registry";
-import * as _320 from "./distribution/v1beta1/tx.registry";
-import * as _321 from "./evidence/v1beta1/tx.registry";
-import * as _322 from "./feegrant/v1beta1/tx.registry";
-import * as _323 from "./gov/v1/tx.registry";
-import * as _324 from "./gov/v1beta1/tx.registry";
-import * as _325 from "./group/v1/tx.registry";
-import * as _326 from "./nft/v1beta1/tx.registry";
-import * as _327 from "./slashing/v1beta1/tx.registry";
-import * as _328 from "./staking/v1beta1/tx.registry";
-import * as _329 from "./upgrade/v1beta1/tx.registry";
-import * as _330 from "./vesting/v1beta1/tx.registry";
+import * as _311 from "./authz/v1beta1/tx.amino";
+import * as _312 from "./bank/v1beta1/tx.amino";
+import * as _313 from "./crisis/v1beta1/tx.amino";
+import * as _314 from "./distribution/v1beta1/tx.amino";
+import * as _315 from "./evidence/v1beta1/tx.amino";
+import * as _316 from "./feegrant/v1beta1/tx.amino";
+import * as _317 from "./gov/v1/tx.amino";
+import * as _318 from "./gov/v1beta1/tx.amino";
+import * as _319 from "./group/v1/tx.amino";
+import * as _320 from "./nft/v1beta1/tx.amino";
+import * as _321 from "./slashing/v1beta1/tx.amino";
+import * as _322 from "./staking/v1beta1/tx.amino";
+import * as _323 from "./upgrade/v1beta1/tx.amino";
+import * as _324 from "./vesting/v1beta1/tx.amino";
+import * as _325 from "./authz/v1beta1/tx.registry";
+import * as _326 from "./bank/v1beta1/tx.registry";
+import * as _327 from "./crisis/v1beta1/tx.registry";
+import * as _328 from "./distribution/v1beta1/tx.registry";
+import * as _329 from "./evidence/v1beta1/tx.registry";
+import * as _330 from "./feegrant/v1beta1/tx.registry";
+import * as _331 from "./gov/v1/tx.registry";
+import * as _332 from "./gov/v1beta1/tx.registry";
+import * as _333 from "./group/v1/tx.registry";
+import * as _334 from "./nft/v1beta1/tx.registry";
+import * as _335 from "./slashing/v1beta1/tx.registry";
+import * as _336 from "./staking/v1beta1/tx.registry";
+import * as _337 from "./upgrade/v1beta1/tx.registry";
+import * as _338 from "./vesting/v1beta1/tx.registry";
+import * as _339 from "./auth/v1beta1/query.lcd";
+import * as _340 from "./authz/v1beta1/query.lcd";
+import * as _341 from "./bank/v1beta1/query.lcd";
+import * as _342 from "./distribution/v1beta1/query.lcd";
+import * as _343 from "./evidence/v1beta1/query.lcd";
+import * as _344 from "./feegrant/v1beta1/query.lcd";
+import * as _345 from "./gov/v1/query.lcd";
+import * as _346 from "./gov/v1beta1/query.lcd";
+import * as _347 from "./group/v1/query.lcd";
+import * as _348 from "./mint/v1beta1/query.lcd";
+import * as _349 from "./nft/v1beta1/query.lcd";
+import * as _350 from "./params/v1beta1/query.lcd";
+import * as _351 from "./slashing/v1beta1/query.lcd";
+import * as _352 from "./staking/v1beta1/query.lcd";
+import * as _353 from "./upgrade/v1beta1/query.lcd";
 export namespace cosmos {
   export namespace app {
     export const v1alpha1 = { ..._55,
@@ -128,7 +143,8 @@ export namespace cosmos {
   export namespace auth {
     export const v1beta1 = { ..._58,
       ..._59,
-      ..._60
+      ..._60,
+      ..._339
     };
   }
   export namespace authz {
@@ -137,8 +153,9 @@ export namespace cosmos {
       ..._63,
       ..._64,
       ..._65,
-      ..._303,
-      ..._317
+      ..._311,
+      ..._325,
+      ..._340
     };
   }
   export namespace bank {
@@ -147,8 +164,9 @@ export namespace cosmos {
       ..._68,
       ..._69,
       ..._70,
-      ..._304,
-      ..._318
+      ..._312,
+      ..._326,
+      ..._341
     };
   }
   export namespace base {
@@ -194,8 +212,8 @@ export namespace cosmos {
   export namespace crisis {
     export const v1beta1 = { ..._83,
       ..._84,
-      ..._305,
-      ..._319
+      ..._313,
+      ..._327
     };
   }
   export namespace crypto {
@@ -221,8 +239,9 @@ export namespace cosmos {
       ..._92,
       ..._93,
       ..._94,
-      ..._306,
-      ..._320
+      ..._314,
+      ..._328,
+      ..._342
     };
   }
   export namespace evidence {
@@ -230,8 +249,9 @@ export namespace cosmos {
       ..._96,
       ..._97,
       ..._98,
-      ..._307,
-      ..._321
+      ..._315,
+      ..._329,
+      ..._343
     };
   }
   export namespace feegrant {
@@ -239,8 +259,9 @@ export namespace cosmos {
       ..._100,
       ..._101,
       ..._102,
-      ..._308,
-      ..._322
+      ..._316,
+      ..._330,
+      ..._344
     };
   }
   export namespace genutil {
@@ -252,15 +273,17 @@ export namespace cosmos {
       ..._105,
       ..._106,
       ..._107,
-      ..._309,
-      ..._323
+      ..._317,
+      ..._331,
+      ..._345
     };
     export const v1beta1 = { ..._108,
       ..._109,
       ..._110,
       ..._111,
-      ..._310,
-      ..._324
+      ..._318,
+      ..._332,
+      ..._346
     };
   }
   export namespace group {
@@ -269,14 +292,16 @@ export namespace cosmos {
       ..._114,
       ..._115,
       ..._116,
-      ..._311,
-      ..._325
+      ..._319,
+      ..._333,
+      ..._347
     };
   }
   export namespace mint {
     export const v1beta1 = { ..._117,
       ..._118,
-      ..._119
+      ..._119,
+      ..._348
     };
   }
   export namespace msg {
@@ -289,8 +314,9 @@ export namespace cosmos {
       ..._123,
       ..._124,
       ..._125,
-      ..._312,
-      ..._326
+      ..._320,
+      ..._334,
+      ..._349
     };
   }
   export namespace orm {
@@ -301,7 +327,8 @@ export namespace cosmos {
   }
   export namespace params {
     export const v1beta1 = { ..._128,
-      ..._129
+      ..._129,
+      ..._350
     };
   }
   export namespace slashing {
@@ -309,8 +336,9 @@ export namespace cosmos {
       ..._131,
       ..._132,
       ..._133,
-      ..._313,
-      ..._327
+      ..._321,
+      ..._335,
+      ..._351
     };
   }
   export namespace staking {
@@ -319,8 +347,9 @@ export namespace cosmos {
       ..._136,
       ..._137,
       ..._138,
-      ..._314,
-      ..._328
+      ..._322,
+      ..._336,
+      ..._352
     };
   }
   export namespace tx {
@@ -336,15 +365,16 @@ export namespace cosmos {
     export const v1beta1 = { ..._142,
       ..._143,
       ..._144,
-      ..._315,
-      ..._329
+      ..._323,
+      ..._337,
+      ..._353
     };
   }
   export namespace vesting {
     export const v1beta1 = { ..._145,
       ..._146,
-      ..._316,
-      ..._330
+      ..._324,
+      ..._338
     };
   }
 }

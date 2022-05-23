@@ -73,6 +73,17 @@ Object {
             "typeNum": 13,
           },
         },
+        "info": Object {
+          "pathParams": Array [
+            "poolId",
+          ],
+          "queryParams": Array [
+            "sender",
+            "tokenIn",
+            "routes",
+          ],
+          "url": "/osmosis/gamm/v1beta1/{poolId}/estimate/swap_exact_amount_in",
+        },
         "name": "EstimateSwapExactAmountIn",
         "options": Object {
           "(google.api.http).get": "/osmosis/gamm/v1beta1/{poolId}/estimate/swap_exact_amount_in",
@@ -149,6 +160,17 @@ Object {
             "typeNum": 13,
           },
         },
+        "info": Object {
+          "pathParams": Array [
+            "poolId",
+          ],
+          "queryParams": Array [
+            "sender",
+            "routes",
+            "tokenOut",
+          ],
+          "url": "/osmosis/gamm/v1beta1/{poolId}/estimate/swap_exact_amount_out",
+        },
         "name": "EstimateSwapExactAmountOut",
         "options": Object {
           "(google.api.http).get": "/osmosis/gamm/v1beta1/{poolId}/estimate/swap_exact_amount_out",
@@ -160,6 +182,11 @@ Object {
       "NumPools": Object {
         "comment": null,
         "fields": Object {},
+        "info": Object {
+          "pathParams": Array [],
+          "queryParams": Array [],
+          "url": "/osmosis/gamm/v1beta1/num_pools",
+        },
         "name": "NumPools",
         "options": Object {
           "(google.api.http).get": "/osmosis/gamm/v1beta1/num_pools",
@@ -185,6 +212,13 @@ Object {
             "type": "uint64",
             "typeNum": 8,
           },
+        },
+        "info": Object {
+          "pathParams": Array [
+            "poolId",
+          ],
+          "queryParams": Array [],
+          "url": "/osmosis/gamm/v1beta1/pools/{poolId}",
         },
         "name": "Pool",
         "options": Object {
@@ -212,6 +246,13 @@ Object {
             "typeNum": 8,
           },
         },
+        "info": Object {
+          "pathParams": Array [
+            "poolId",
+          ],
+          "queryParams": Array [],
+          "url": "/osmosis/gamm/v1beta1/pools/{poolId}/params",
+        },
         "name": "PoolParams",
         "options": Object {
           "(google.api.http).get": "/osmosis/gamm/v1beta1/pools/{poolId}/params",
@@ -238,6 +279,13 @@ Object {
             "scopeType": "protoImport",
             "type": "cosmos.base.query.v1beta1.PageRequest",
           },
+        },
+        "info": Object {
+          "pathParams": Array [],
+          "queryParams": Array [
+            "pagination",
+          ],
+          "url": "/osmosis/gamm/v1beta1/pools",
         },
         "name": "Pools",
         "options": Object {
@@ -293,6 +341,16 @@ Object {
             "typeNum": 13,
           },
         },
+        "info": Object {
+          "pathParams": Array [
+            "poolId",
+          ],
+          "queryParams": Array [
+            "tokenInDenom",
+            "tokenOutDenom",
+          ],
+          "url": "/osmosis/gamm/v1beta1/pools/{poolId}/prices",
+        },
         "name": "SpotPrice",
         "options": Object {
           "(google.api.http).get": "/osmosis/gamm/v1beta1/pools/{poolId}/prices",
@@ -304,6 +362,11 @@ Object {
       "TotalLiquidity": Object {
         "comment": null,
         "fields": Object {},
+        "info": Object {
+          "pathParams": Array [],
+          "queryParams": Array [],
+          "url": "/osmosis/gamm/v1beta1/total_liquidity",
+        },
         "name": "TotalLiquidity",
         "options": Object {
           "(google.api.http).get": "/osmosis/gamm/v1beta1/total_liquidity",
@@ -330,6 +393,13 @@ Object {
             "typeNum": 8,
           },
         },
+        "info": Object {
+          "pathParams": Array [
+            "poolId",
+          ],
+          "queryParams": Array [],
+          "url": "/osmosis/gamm/v1beta1/pools/{poolId}/total_pool_liquidity",
+        },
         "name": "TotalPoolLiquidity",
         "options": Object {
           "(google.api.http).get": "/osmosis/gamm/v1beta1/pools/{poolId}/total_pool_liquidity",
@@ -355,6 +425,13 @@ Object {
             "type": "uint64",
             "typeNum": 8,
           },
+        },
+        "info": Object {
+          "pathParams": Array [
+            "poolId",
+          ],
+          "queryParams": Array [],
+          "url": "/osmosis/gamm/v1beta1/pools/{poolId}/total_shares",
         },
         "name": "TotalShares",
         "options": Object {

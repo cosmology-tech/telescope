@@ -55,6 +55,24 @@ const getAminoImports = (
         .filter(Boolean);
 };
 
+const getGenericImports = (
+    context: TelescopeParseContext,
+    filename: string
+): ImportObj[] => {
+    return context.generic.imports
+        .map(usage => {
+            if (filename === usage.import) return;
+            const importPath = getRelativePath(filename, usage.import);
+            return {
+                type: 'import',
+                name: usage.name,
+                importAs: usage.importedAs,
+                path: importPath
+            }
+        })
+        .filter(Boolean);
+};
+
 const getParsedImports = (
     context: TelescopeParseContext,
     parsedImports: ImportHash,
@@ -98,9 +116,16 @@ const getImportStatments = (list: ImportObj[]) => {
     const imports = list.reduce((m, obj) => {
         m[obj.path] = m[obj.path] || [];
         const exists = m[obj.path].find(el => el.type === obj.type && el.path === obj.path && el.name === obj.name);
+
+        // TODO some have google.protobuf.Any shows up... figure out the better way to handle this
+        if (/\./.test(obj.name)) {
+            obj.name = obj.name.split('.')[obj.name.split('.').length - 1];
+        }
+
         if (!exists) m[obj.path].push(obj);
         return m;
-    }, {});
+    }, {})
+
 
     return Object.entries(imports)
         .reduce((m, [importPath, imports]: [string, ImportObj[]]) => {
@@ -149,7 +174,8 @@ const convertUtilsToImports = (context: TelescopeParseContext): ImportObj[] => {
     const list = [];
     const utils = Object.keys({
         ...context.amino.utils,
-        ...context.proto.utils
+        ...context.proto.utils,
+        ...context.generic.utils
     });
 
     utils.forEach(util => {
@@ -171,6 +197,7 @@ export const buildAllImports = (context: TelescopeParseContext, allImports: Impo
 
     const protoImports: ImportObj[] = getProtoImports(context, filepath);
     const aminoImports: ImportObj[] = getAminoImports(context, filepath);
+    const genericImports: ImportObj[] = getGenericImports(context, filepath);
     const parsedImports: ImportObj[] = getParsedImports(context, context.amino.ref.traversed.parsedImports, filepath);
     const additionalImports: ImportObj[] = importHashToArray(allImports);
     const utilities: ImportObj[] = convertUtilsToImports(context);
@@ -180,6 +207,7 @@ export const buildAllImports = (context: TelescopeParseContext, allImports: Impo
         .concat(utilities)
         .concat(protoImports)
         .concat(aminoImports)
+        .concat(genericImports)
         .concat(additionalImports);
 
     const importStmts = getImportStatments(list);
@@ -188,7 +216,7 @@ export const buildAllImports = (context: TelescopeParseContext, allImports: Impo
 }
 
 
-export const getAminoImportsFromMutations = (mutations: ServiceMutation[]) => {
+export const getImportsFromMutations = (mutations: ServiceMutation[]) => {
     return mutations.map(mutation => {
         return {
             import: mutation.messageImport,
@@ -197,11 +225,53 @@ export const getAminoImportsFromMutations = (mutations: ServiceMutation[]) => {
     });
 };
 
-export const getServiceDependencies = (
+// TODO implement ServiceQuery type (it is the same)
+export const getImportsFromQueries = (queries: ServiceMutation[]) => {
+    return queries.reduce((m, query) => {
+        const req = {
+            import: query.messageImport,
+            name: query.message
+        };
+        const res = {
+            import: query.responseImport,
+            name: query.response
+        };
+        return [...m, req, res];
+    }, []);
+};
+
+export const getDepsFromMutations = (
     mutations: ServiceMutation[],
     filename: string
 ) => {
-    return getAminoImportsFromMutations(mutations)
+    return getImportsFromMutations(mutations)
+        .map(imp => {
+            const f = filename;
+            const f2 = imp.import;
+            if (f === f2) return;
+            const rel = relative(dirname(f), f2);
+            let importPath = rel.replace(extname(rel), '');
+            if (!/\//.test(importPath)) importPath = `./${importPath}`;
+            return {
+                ...imp,
+                importPath
+            };
+        })
+        .filter(Boolean)
+        .reduce((m, v) => {
+            m[v.importPath] = m[v.importPath] ?? [];
+            if (!m[v.importPath].includes(v.name)) {
+                m[v.importPath].push(v.name);
+            }
+            return m;
+        }, {});
+};
+
+export const getDepsFromQueries = (
+    queries: any[],
+    filename: string
+) => {
+    return getImportsFromQueries(queries)
         .map(imp => {
             const f = filename;
             const f2 = imp.import;

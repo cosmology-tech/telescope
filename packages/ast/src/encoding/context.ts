@@ -20,6 +20,15 @@ export class GenericParseContext implements ParseContext {
     store: ProtoStore;
     ref: ProtoRef;
 
+
+    constructor(
+        ref: ProtoRef,
+        store: ProtoStore
+    ) {
+        this.ref = ref;
+        this.store = store;
+    }
+
     addUtil(util) {
         this.utils[util] = true;
     }
@@ -28,6 +37,26 @@ export class GenericParseContext implements ParseContext {
         // some local lookups don't have an import (local proto-style lookups do)
         if (!imp.import) return;
         this.imports.push(imp)
+    }
+
+    getTypeName(field: ProtoField) {
+        let name = getFieldsTypeName(field);
+        let importedAs = name;
+        const names = this.ref.traversed?.importNames;
+        if (names
+            && names.hasOwnProperty(field.import)
+            && names[field.import].hasOwnProperty(name)
+        ) {
+
+            importedAs = names[field.import][name];
+        }
+        this.addImport({
+            type: 'typeImport',
+            name,
+            importedAs,
+            import: field.import
+        })
+        return importedAs;
     }
 
 }
@@ -47,7 +76,7 @@ export class AminoParseContext extends GenericParseContext implements ParseConte
         store: ProtoStore,
         options?: AminoOptions
     ) {
-        super();
+        super(ref, store);
         this.ref = ref;
         this.store = store;
         if (options) this.options = options;
@@ -138,7 +167,7 @@ export class ProtoParseContext extends GenericParseContext implements ParseConte
         ref: ProtoRef,
         store: ProtoStore,
     ) {
-        super();
+        super(ref, store);
         this.ref = ref;
         this.store = store;
     }
@@ -163,25 +192,5 @@ export class ProtoParseContext extends GenericParseContext implements ParseConte
         return fromJSONFuncName;
     }
 
-
-    getTypeName(field: ProtoField) {
-        let name = getFieldsTypeName(field);
-        let importedAs = name;
-        const names = this.ref.traversed?.importNames;
-        if (names
-            && names.hasOwnProperty(field.import)
-            && names[field.import].hasOwnProperty(name)
-        ) {
-
-            importedAs = names[field.import][name];
-        }
-        this.addImport({
-            type: 'typeImport',
-            name,
-            importedAs,
-            import: field.import
-        })
-        return importedAs;
-    }
 }
 

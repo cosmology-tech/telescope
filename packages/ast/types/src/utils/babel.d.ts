@@ -1,4 +1,5 @@
 import * as t from '@babel/types';
+export declare const classMethod: (kind: "get" | "set" | "method" | "constructor" | undefined, key: t.Identifier | t.StringLiteral | t.NumericLiteral | t.Expression, params: Array<t.Identifier | t.Pattern | t.RestElement | t.TSParameterProperty>, body: t.BlockStatement, returnType?: t.TSTypeAnnotation, leadingComments?: t.CommentLine[], computed?: boolean, _static?: boolean, generator?: boolean, async?: boolean) => t.ClassMethod;
 export declare const tsEnumMember: (id: t.Identifier | t.StringLiteral, initializer?: t.Expression, leadingComments?: any[]) => t.TSEnumMember;
 export declare const tsPropertySignature: (key: t.Expression, typeAnnotation: t.TSTypeAnnotation, optional: boolean) => t.TSPropertySignature;
 export declare const functionDeclaration: (id: t.Identifier, params: (t.Identifier | t.Pattern | t.RestElement)[], body: t.BlockStatement, generator?: boolean, async?: boolean, returnType?: t.TSTypeAnnotation) => t.FunctionDeclaration;

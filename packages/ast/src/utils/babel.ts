@@ -2,6 +2,28 @@ import * as t from '@babel/types';
 
 // TODO move to @osmonauts/utils package
 
+export const classMethod = (
+    kind: "get" | "set" | "method" | "constructor" | undefined,
+    key: t.Identifier | t.StringLiteral | t.NumericLiteral | t.Expression,
+    params: Array<t.Identifier | t.Pattern | t.RestElement | t.TSParameterProperty>,
+    body: t.BlockStatement,
+    returnType?: t.TSTypeAnnotation,
+    leadingComments: t.CommentLine[] = [],
+    computed: boolean = false,
+    _static: boolean = false,
+    generator: boolean = false,
+    async: boolean = false,
+) => {
+    const obj = t.classMethod(kind, key, params, body, computed, _static, generator, async)
+    if (returnType) {
+        obj.returnType = returnType;
+    }
+    if (leadingComments) {
+        obj.leadingComments = leadingComments;
+    }
+    return obj;
+};
+
 export const tsEnumMember = (
     id: t.Identifier | t.StringLiteral,
     initializer?: t.Expression,

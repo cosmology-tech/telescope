@@ -46,8 +46,16 @@ export interface ProtoField {
     importedName?: string;
     scopeType?: string;
 };
+
+export interface ProtoServiceMethodInfo {
+    url: string;
+    pathParams: string[];
+    queryParams: string[];
+};
+
 export interface ProtoServiceMethod {
     type: 'ServiceMethod';
+    info?: ProtoServiceMethodInfo;
     name: string;
     options: {
         [key: string]: any;

@@ -3,7 +3,7 @@ export declare const getTypeUrl: (root: ProtoRoot, proto: ProtoAny | ProtoType) 
 export declare const arrayTypeNDim: (body: any, n: any) => any;
 export declare const typeUrlToAmino: (typeUrl: any, exceptions?: {}) => any;
 export declare const protoFieldsToArray: (proto: ProtoType) => {
-    type: string;
+    type?: "Field";
     name: string;
     scope?: string[];
     parsedType?: {

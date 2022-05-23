@@ -1,8 +1,8 @@
 import * as t from '@babel/types';
 import pkg from '../package.json';
 import generate from '@babel/generator';
-import { ProtoStore } from '@osmonauts/proto-parser';
-import { buildAllImports, getServiceDependencies } from './imports';
+import { getNestedProto, ProtoStore } from '@osmonauts/proto-parser';
+import { buildAllImports, getDepsFromMutations, getDepsFromQueries } from './imports';
 import { TelescopeParseContext } from './build';
 import { importNamespace, importStmt } from '@osmonauts/ast';
 import { getRelativePath, variableSlug } from './utils';
@@ -11,24 +11,48 @@ import { bundlePackages, createFileBundle } from './bundle';
 import { writeFileSync } from 'fs';
 import { join, dirname, resolve, relative } from 'path';
 import { sync as mkdirp } from 'mkdirp';
-import { recursiveModuleBundle, GenericParseContext, createClient, AminoParseContext } from '@osmonauts/ast';
-import { camel, pascal } from 'case';
+import deepmerge from 'deepmerge';
+
+import {
+    makeLCDClient,
+    recursiveModuleBundle,
+    GenericParseContext,
+    createClient,
+    AminoParseContext
+} from '@osmonauts/ast';
+import {
+    camel,
+    pascal
+} from 'case';
+
+export interface TelescopeOptions {
+    includeAminos: boolean;
+    includeLCDClient: boolean;
+}
+
+const defaultTelescopeOptions = {
+    // global options (can be overridden through plugins)
+    includeAminos: true,
+    includeLCDClient: false
+}
 
 export interface TelescopeInput {
     protoDir: string;
     outPath: string;
+    options: TelescopeOptions;
 }
 
 export class TelescopeBuilder {
     store: ProtoStore;
     protoDir: string;
     outPath: string;
-
+    options: TelescopeOptions;
     contexts: TelescopeParseContext[] = [];
 
-    constructor({ protoDir, outPath, store }: TelescopeInput & { store?: ProtoStore }) {
+    constructor({ protoDir, outPath, store, options }: TelescopeInput & { store?: ProtoStore }) {
         this.protoDir = protoDir;
         this.outPath = outPath;
+        this.options = deepmerge(defaultTelescopeOptions, options ?? {});
 
         this.store = store ?? new ProtoStore(protoDir);
         this.store.traverseAll();
@@ -47,16 +71,21 @@ export class TelescopeBuilder {
 
         const allFiles = [];
 
-        // 1 get bundle of all packages
+        // [x] get bundle of all packages
         const bundled = bundlePackages(this.store);
-        bundled.forEach(bundle => {
 
-            // 2 search for all files that live in package
+        bundled.forEach(bundle => {
+            // store bundleFile in filesToInclude
+            const filesToInclude = [
+                bundle.bundleFile
+            ];
+
+            // [x] search for all files that live in package
             const baseProtos = this.store.getProtos().filter(ref => {
                 return ref.proto.package.split('.')[0] === bundle.base
             });
 
-            // 3 write out all TS files for package
+            // [x] write out all TS files for package
             const packageContexts = baseProtos.map(ref => {
                 const context = this.context(ref);
                 parse(context);
@@ -83,11 +112,17 @@ export class TelescopeBuilder {
                 return context;
             });
 
-            // 4 find services w/mutations
-            const serviceContexts = packageContexts.filter(context => context.mutations.length > 0);
+            // [x] find services w/mutations
+            const mutationContexts = packageContexts.filter(context => context.mutations.length > 0);
+            const queryContexts = packageContexts.filter(context => context.queries.length > 0);
 
-            // 5 write out one amino helper for all contexts w/mutations
-            const aminoConverters = serviceContexts.map(c => {
+            // [x] write out one amino helper for all contexts w/mutations
+            const aminoConverters = mutationContexts.map(c => {
+
+                if (!this.options.includeAminos) {
+                    return;
+                }
+
                 const localname = c.ref.filename.replace(/\.proto$/, '.amino.ts');
                 const filename = resolve(join(input.outPath, localname));
                 // FRESH new context
@@ -115,7 +150,7 @@ export class TelescopeBuilder {
                 ctx.buildAminoInterfaces();
                 ctx.buildAminoConverter();
 
-                const serviceImports = getServiceDependencies(
+                const serviceImports = getDepsFromMutations(
                     ctx.mutations,
                     localname
                 );
@@ -147,10 +182,14 @@ export class TelescopeBuilder {
                     filename
                 };
 
-            });
+            }).filter(Boolean);
 
-            // 6 write out one registry helper for all contexts w/mutations
-            const registries = serviceContexts.map(c => {
+            // [x] write out one registry helper for all contexts w/mutations
+            const registries = mutationContexts.map(c => {
+
+                if (!this.options.includeAminos) {
+                    return;
+                }
 
                 const localname = c.ref.filename.replace(/\.proto$/, '.registry.ts')
                 const filename = resolve(join(input.outPath, localname));
@@ -170,7 +209,7 @@ export class TelescopeBuilder {
                 // SEE ABOVE - DONT RENAME THESE DIRECTLY
                 // ctx.ref.filename = filename;
 
-                const serviceImports = getServiceDependencies(
+                const serviceImports = getDepsFromMutations(
                     ctx.mutations,
                     localname
                 );
@@ -198,16 +237,76 @@ export class TelescopeBuilder {
                     filename
                 };
 
-            })
+            }).filter(Boolean);
 
-            // 7 write out one client for each base package, referencing the last two steps
-            const filesToInclude = [
-                bundle.bundleFile
-            ];
+            // [x] write out one registry helper for all contexts w/mutations
+            const lcdClients = queryContexts.map(c => {
+
+                if (!this.options.includeLCDClient) {
+                    return;
+                }
+
+                const localname = c.ref.filename.replace(/\.proto$/, '.lcd.ts')
+                const filename = resolve(join(input.outPath, localname));
+                // FRESH new context
+
+                const ctx = new TelescopeParseContext(
+                    c.ref,
+                    c.store
+                );
+
+                // get mutations, services
+                parse(ctx);
+
+                const proto = getNestedProto(c.ref.traversed);
+                // hard-coding, for now, only Query service
+                if (!proto?.Query || proto.Query?.type !== 'Service') {
+                    return;
+                }
+
+                const lcdAst = makeLCDClient(ctx.generic, proto.Query);
+
+                if (!lcdAst) {
+                    return;
+                }
+
+                const serviceImports = getDepsFromQueries(
+                    ctx.queries,
+                    localname
+                );
+
+                const imports = buildAllImports(ctx, serviceImports, localname);
+                const prog = []
+                    .concat(imports)
+                    .concat(ctx.body)
+                    .concat(lcdAst);
+                const ast = t.program(prog);
+                const content = generate(ast).code;
+                mkdirp(dirname(filename));
+                writeFileSync(filename, content);
+
+                // add to bundle
+                createFileBundle(
+                    c.ref.proto.package,
+                    localname,
+                    bundle.bundleFile,
+                    bundle.importPaths,
+                    bundle.bundleVariables
+                );
+
+                return {
+                    localname,
+                    filename
+                };
+
+            }).filter(Boolean);
+
+            // [x] write out one client for each base package, referencing the last two steps
 
             if (registries.length) {
                 const registryImports = [];
                 const converterImports = [];
+
                 const clientFile = join(`${bundle.base}`, 'client.ts');
                 filesToInclude.push(clientFile);
                 const ctx = new GenericParseContext();
@@ -255,7 +354,7 @@ export class TelescopeBuilder {
                 writeFileSync(clientOutFile, cContent);
             }
 
-            // 7.5 bundle
+            // [x] bundle
 
             const body = recursiveModuleBundle(bundle.bundleVariables);
             const prog = []
@@ -267,10 +366,8 @@ export class TelescopeBuilder {
             mkdirp(dirname(out));
             writeFileSync(out, content);
 
-            // 8 write an index file for each base
+            // [x] write an index file for each base
             // console.log(filesToInclude)
-
-
             filesToInclude.forEach(file => allFiles.push(file));
         });
 

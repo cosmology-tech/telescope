@@ -1,6 +1,7 @@
 import { ProtoRoot, ProtoRef, ProtoType, ProtoService, ProtoField } from '@osmonauts/types';
 import { Service, Type, Field, Enum, Root, Namespace } from 'protobufjs';
 import { importLookup, lookup, lookupAny, lookupNested, protoScopeImportLookup } from './lookup';
+import { parseService } from './services';
 import { ProtoStore } from './store';
 import { instanceType, lookupSymbolScopes, NATIVE_TYPES } from './utils';
 
@@ -281,8 +282,9 @@ const traverseServiceMethod = (store: ProtoStore, ref: ProtoRef, obj: any, impor
     if (!refObject) {
         throw new Error('Symbol not found ' + requestType);
     }
-    return {
+    const svc = {
         type: 'ServiceMethod',
+        info: null,
         name,
         comment,
         requestType,
@@ -290,6 +292,13 @@ const traverseServiceMethod = (store: ProtoStore, ref: ProtoRef, obj: any, impor
         options,
         fields: traverseFields(store, ref, refObject.obj, imports, traversal)
     };
+    const info = parseService({
+        options,
+        fields: svc.fields
+    });
+    svc.info = info;
+
+    return svc;
 };
 
 const getServiceType = (obj) => {

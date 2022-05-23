@@ -2191,6 +2191,15 @@ Object {
                             "type": "cosmos.base.query.v1beta1.PageRequest",
                           },
                         },
+                        "info": Object {
+                          "pathParams": Array [
+                            "address",
+                          ],
+                          "queryParams": Array [
+                            "pagination",
+                          ],
+                          "url": "/cosmwasm/wasm/v1/contract/{address}/state",
+                        },
                         "name": "AllContractState",
                         "options": Object {
                           "(google.api.http).get": "/cosmwasm/wasm/v1/contract/{address}/state",
@@ -2213,6 +2222,15 @@ Object {
                             "type": "uint64",
                             "typeNum": 8,
                           },
+                        },
+                        "info": Object {
+                          "pathParams": Array [
+                            "code_id",
+                          ],
+                          "queryParams": Array [
+                            "codeId",
+                          ],
+                          "url": "/cosmwasm/wasm/v1/code/{code_id}",
                         },
                         "name": "Code",
                         "options": Object {
@@ -2240,6 +2258,13 @@ Object {
                             "scopeType": "protoImport",
                             "type": "cosmos.base.query.v1beta1.PageRequest",
                           },
+                        },
+                        "info": Object {
+                          "pathParams": Array [],
+                          "queryParams": Array [
+                            "pagination",
+                          ],
+                          "url": "/cosmwasm/wasm/v1/code",
                         },
                         "name": "Codes",
                         "options": Object {
@@ -2279,6 +2304,15 @@ Object {
                             "type": "cosmos.base.query.v1beta1.PageRequest",
                           },
                         },
+                        "info": Object {
+                          "pathParams": Array [
+                            "address",
+                          ],
+                          "queryParams": Array [
+                            "pagination",
+                          ],
+                          "url": "/cosmwasm/wasm/v1/contract/{address}/history",
+                        },
                         "name": "ContractHistory",
                         "options": Object {
                           "(google.api.http).get": "/cosmwasm/wasm/v1/contract/{address}/history",
@@ -2301,6 +2335,13 @@ Object {
                             "type": "string",
                             "typeNum": 13,
                           },
+                        },
+                        "info": Object {
+                          "pathParams": Array [
+                            "address",
+                          ],
+                          "queryParams": Array [],
+                          "url": "/cosmwasm/wasm/v1/contract/{address}",
                         },
                         "name": "ContractInfo",
                         "options": Object {
@@ -2341,6 +2382,16 @@ pagination defines an optional pagination for the request.",
                             "type": "cosmos.base.query.v1beta1.PageRequest",
                           },
                         },
+                        "info": Object {
+                          "pathParams": Array [
+                            "code_id",
+                          ],
+                          "queryParams": Array [
+                            "codeId",
+                            "pagination",
+                          ],
+                          "url": "/cosmwasm/wasm/v1/code/{code_id}/contracts",
+                        },
                         "name": "ContractsByCode",
                         "options": Object {
                           "(google.api.http).get": "/cosmwasm/wasm/v1/code/{code_id}/contracts",
@@ -2367,6 +2418,13 @@ pagination defines an optional pagination for the request.",
                             "scopeType": "protoImport",
                             "type": "cosmos.base.query.v1beta1.PageRequest",
                           },
+                        },
+                        "info": Object {
+                          "pathParams": Array [],
+                          "queryParams": Array [
+                            "pagination",
+                          ],
+                          "url": "/cosmwasm/wasm/v1/codes/pinned",
                         },
                         "name": "PinnedCodes",
                         "options": Object {
@@ -2401,6 +2459,16 @@ pagination defines an optional pagination for the request.",
                             "type": "bytes",
                             "typeNum": 14,
                           },
+                        },
+                        "info": Object {
+                          "pathParams": Array [
+                            "address",
+                            "query_data",
+                          ],
+                          "queryParams": Array [
+                            "queryData",
+                          ],
+                          "url": "/wasm/v1/contract/{address}/raw/{query_data}",
                         },
                         "name": "RawContractState",
                         "options": Object {
@@ -2438,6 +2506,16 @@ pagination defines an optional pagination for the request.",
                             "type": "bytes",
                             "typeNum": 14,
                           },
+                        },
+                        "info": Object {
+                          "pathParams": Array [
+                            "address",
+                            "query_data",
+                          ],
+                          "queryParams": Array [
+                            "queryData",
+                          ],
+                          "url": "/wasm/v1/contract/{address}/smart/{query_data}",
                         },
                         "name": "SmartContractState",
                         "options": Object {
@@ -4300,6 +4378,7 @@ Object {
                             "type": "cosmos.base.v1beta1.Coin",
                           },
                         },
+                        "info": undefined,
                         "name": "ExitPool",
                         "options": undefined,
                         "requestType": "MsgExitPool",
@@ -4373,6 +4452,7 @@ Object {
                             "type": "cosmos.base.v1beta1.Coin",
                           },
                         },
+                        "info": undefined,
                         "name": "ExitSwapExternAmountOut",
                         "options": undefined,
                         "requestType": "MsgExitSwapExternAmountOut",
@@ -4457,6 +4537,7 @@ Object {
                             "typeNum": 13,
                           },
                         },
+                        "info": undefined,
                         "name": "ExitSwapShareAmountIn",
                         "options": undefined,
                         "requestType": "MsgExitSwapShareAmountIn",
@@ -4531,6 +4612,7 @@ Object {
                             "type": "cosmos.base.v1beta1.Coin",
                           },
                         },
+                        "info": undefined,
                         "name": "JoinPool",
                         "options": undefined,
                         "requestType": "MsgJoinPool",
@@ -4605,6 +4687,7 @@ reserved \\"token_in\\";",
                             "type": "cosmos.base.v1beta1.Coin",
                           },
                         },
+                        "info": undefined,
                         "name": "JoinSwapExternAmountIn",
                         "options": undefined,
                         "requestType": "MsgJoinSwapExternAmountIn",
@@ -4689,6 +4772,7 @@ reserved \\"token_in\\";",
                             "typeNum": 13,
                           },
                         },
+                        "info": undefined,
                         "name": "JoinSwapShareAmountOut",
                         "options": undefined,
                         "requestType": "MsgJoinSwapShareAmountOut",
@@ -4764,6 +4848,7 @@ reserved \\"token_in\\";",
                             "typeNum": 13,
                           },
                         },
+                        "info": undefined,
                         "name": "SwapExactAmountIn",
                         "options": undefined,
                         "requestType": "MsgSwapExactAmountIn",
@@ -4839,6 +4924,7 @@ reserved \\"token_in\\";",
                             "type": "cosmos.base.v1beta1.Coin",
                           },
                         },
+                        "info": undefined,
                         "name": "SwapExactAmountOut",
                         "options": undefined,
                         "requestType": "MsgSwapExactAmountOut",

@@ -16,8 +16,10 @@ export declare class GenericParseContext implements ParseContext {
     utils: Record<string, boolean>;
     store: ProtoStore;
     ref: ProtoRef;
+    constructor(ref: ProtoRef, store: ProtoStore);
     addUtil(util: any): void;
     addImport(imp: ImportUsage): void;
+    getTypeName(field: ProtoField): string;
 }
 export declare class AminoParseContext extends GenericParseContext implements ParseContext {
     store: ProtoStore;
@@ -35,5 +37,4 @@ export declare class ProtoParseContext extends GenericParseContext implements Pa
     constructor(ref: ProtoRef, store: ProtoStore);
     getToEnum(field: ProtoField): string;
     getFromEnum(field: ProtoField): string;
-    getTypeName(field: ProtoField): string;
 }
