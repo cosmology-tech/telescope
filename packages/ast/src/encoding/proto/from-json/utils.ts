@@ -75,7 +75,16 @@ export const fromJSON = {
     int32(args: FromJSONMethod) {
         return fromJSON.number(args);
     },
+    sint32(args: FromJSONMethod) {
+        return fromJSON.number(args);
+    },
     uint32(args: FromJSONMethod) {
+        return fromJSON.number(args);
+    },
+    fixed32(args: FromJSONMethod) {
+        return fromJSON.number(args);
+    },
+    sfixed32(args: FromJSONMethod) {
         return fromJSON.number(args);
     },
 
@@ -151,6 +160,16 @@ export const fromJSON = {
 
     // uint64Value: isSet(object.uint64Value) ? Long.fromString(object.uint64Value) : Long.ZERO,
     uint64(args: FromJSONMethod) {
+        return fromJSON.long(args);
+    },
+
+    sint64(args: FromJSONMethod) {
+        return fromJSON.long(args);
+    },
+    fixed64(args: FromJSONMethod) {
+        return fromJSON.long(args);
+    },
+    sfixed64(args: FromJSONMethod) {
         return fromJSON.long(args);
     },
 
@@ -609,6 +628,15 @@ export const arrayTypes = {
     int64() {
         return arrayTypes.long();
     },
+    sint64() {
+        return arrayTypes.long();
+    },
+    fixed64() {
+        return arrayTypes.long();
+    },
+    sfixed64() {
+        return arrayTypes.long();
+    },
     // myUint32Array: Array.isArray(object?.myUint32Array) ? object.myUint32Array.map((e: any) => Number(e)) : [],
     number() {
         return t.callExpression(
@@ -624,6 +652,15 @@ export const arrayTypes = {
         return arrayTypes.number();
     },
     int32() {
+        return arrayTypes.number();
+    },
+    sint32() {
+        return arrayTypes.number();
+    },
+    fixed32() {
+        return arrayTypes.number();
+    },
+    sfixed32() {
         return arrayTypes.number();
     },
     double() {

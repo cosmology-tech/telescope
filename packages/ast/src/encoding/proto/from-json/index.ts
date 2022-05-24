@@ -44,15 +44,25 @@ export const fromJSONMethodFields = (context: ProtoParseContext, name: string, p
                 case 'double':
                     return fromJSON.array(args, arrayTypes.double());
                 case 'int32':
-                case 'sint32':
                     return fromJSON.array(args, arrayTypes.int32());
+                case 'sint32':
+                    return fromJSON.array(args, arrayTypes.sint32());
                 case 'uint32':
                     return fromJSON.array(args, arrayTypes.uint32());
+                case 'fixed32':
+                    return fromJSON.array(args, arrayTypes.fixed32());
+                case 'sfixed32':
+                    return fromJSON.array(args, arrayTypes.sfixed32());
                 case 'int64':
-                case 'sint64':
                     return fromJSON.array(args, arrayTypes.int64());
+                case 'sint64':
+                    return fromJSON.array(args, arrayTypes.sint64());
                 case 'uint64':
                     return fromJSON.array(args, arrayTypes.uint64());
+                case 'fixed64':
+                    return fromJSON.array(args, arrayTypes.fixed64());
+                case 'sfixed64':
+                    return fromJSON.array(args, arrayTypes.sfixed64());
                 default:
                     switch (field.parsedType.type) {
                         case 'Enum':
@@ -70,9 +80,13 @@ export const fromJSONMethodFields = (context: ProtoParseContext, name: string, p
                 case 'int64':
                 case 'sint64':
                 case 'uint64':
+                case 'fixed64':
+                case 'sfixed64':
                 case 'int32':
                 case 'sint32':
                 case 'uint32':
+                case 'fixed32':
+                case 'sfixed32':
                     return fromJSON.keyHash(args);
                 default:
                     return needsImplementation(fieldName, field);
@@ -91,15 +105,25 @@ export const fromJSONMethodFields = (context: ProtoParseContext, name: string, p
             case 'float':
                 return fromJSON.float(args);
             case 'int32':
-            case 'sint32':
                 return fromJSON.int32(args);
+            case 'sint32':
+                return fromJSON.sint32(args);
             case 'uint32':
                 return fromJSON.uint32(args);
+            case 'fixed32':
+                return fromJSON.fixed32(args);
+            case 'sfixed32':
+                return fromJSON.sfixed32(args);
             case 'int64':
-            case 'sint64':
                 return fromJSON.int64(args);
+            case 'sint64':
+                return fromJSON.sint64(args);
             case 'uint64':
                 return fromJSON.uint64(args);
+            case 'fixed64':
+                return fromJSON.fixed64(args);
+            case 'sfixed64':
+                return fromJSON.sfixed64(args);
             case 'Duration':
             case 'google.protobuf.Duration':
                 return fromJSON.duration(args);

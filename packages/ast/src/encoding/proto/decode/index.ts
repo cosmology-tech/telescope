@@ -52,12 +52,20 @@ export const decodeMethodFields = (context: ProtoParseContext, name: string, pro
                     return decode.tagDelimArray(args, baseTypes.sint32(args));
                 case 'uint32':
                     return decode.tagDelimArray(args, baseTypes.uint32(args));
+                case 'fixed32':
+                    return decode.tagDelimArray(args, baseTypes.fixed32(args));
+                case 'sfixed32':
+                    return decode.tagDelimArray(args, baseTypes.sfixed32(args));
                 case 'int64':
                     return decode.tagDelimArray(args, baseTypes.int64(args));
                 case 'sint64':
                     return decode.tagDelimArray(args, baseTypes.sint64(args));
                 case 'uint64':
                     return decode.tagDelimArray(args, baseTypes.uint64(args));
+                case 'fixed64':
+                    return decode.tagDelimArray(args, baseTypes.fixed64(args));
+                case 'sfixed64':
+                    return decode.tagDelimArray(args, baseTypes.sfixed64(args));
                 default:
                     switch (field.parsedType.type) {
                         case 'Enum':
@@ -85,12 +93,20 @@ export const decodeMethodFields = (context: ProtoParseContext, name: string, pro
                 return decode.sint32(args);
             case 'uint32':
                 return decode.uint32(args);
+            case 'fixed32':
+                return decode.fixed32(args);
+            case 'sfixed32':
+                return decode.sfixed32(args);
             case 'int64':
                 return decode.int64(args);
             case 'sint64':
                 return decode.sint64(args);
             case 'uint64':
                 return decode.uint64(args);
+            case 'fixed64':
+                return decode.fixed64(args);
+            case 'sfixed64':
+                return decode.sfixed64(args);
             case 'double':
                 return decode.double(args);
             case 'float':

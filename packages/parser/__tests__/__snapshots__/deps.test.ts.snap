@@ -146,6 +146,7 @@ Array [
   "cosmos/nft/v1beta1/genesis.proto",
   "cosmos/nft/v1beta1/query.proto",
   "cosmos/nft/v1beta1/tx.proto",
+  "cosmos/orm/module/v1alpha1/module.proto",
   "cosmos/orm/v1/orm.proto",
   "cosmos/orm/v1alpha1/schema.proto",
   "cosmos/params/v1beta1/params.proto",

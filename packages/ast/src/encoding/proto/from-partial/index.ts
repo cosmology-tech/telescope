@@ -45,15 +45,25 @@ export const fromPartialMethodFields = (context: ProtoParseContext, name: string
                 case 'double':
                     return fromPartial.array(args, arrayTypes.double());
                 case 'int32':
-                case 'sint32':
                     return fromPartial.array(args, arrayTypes.int32());
+                case 'sint32':
+                    return fromPartial.array(args, arrayTypes.sint32());
                 case 'uint32':
                     return fromPartial.array(args, arrayTypes.uint32());
+                case 'fixed32':
+                    return fromPartial.array(args, arrayTypes.fixed32());
+                case 'sfixed32':
+                    return fromPartial.array(args, arrayTypes.sfixed32());
                 case 'int64':
-                case 'sint64':
                     return fromPartial.array(args, arrayTypes.int64());
+                case 'sint64':
+                    return fromPartial.array(args, arrayTypes.sint64());
                 case 'uint64':
                     return fromPartial.array(args, arrayTypes.uint64());
+                case 'fixed64':
+                    return fromPartial.array(args, arrayTypes.fixed64());
+                case 'sfixed64':
+                    return fromPartial.array(args, arrayTypes.sfixed64());
                 default:
                     switch (field.parsedType.type) {
                         case 'Enum':
@@ -69,12 +79,16 @@ export const fromPartialMethodFields = (context: ProtoParseContext, name: string
         if (field.keyType) {
             switch (field.keyType) {
                 case 'string':
-                case 'int64':
-                case 'sint64':
-                case 'uint64':
                 case 'int32':
                 case 'sint32':
                 case 'uint32':
+                case 'fixed32':
+                case 'sfixed32':
+                case 'int64':
+                case 'sint64':
+                case 'uint64':
+                case 'fixed64':
+                case 'sfixed64':
                     return fromPartial.keyHash(args);
                 default:
                     return needsImplementation(fieldName, field);
@@ -93,15 +107,25 @@ export const fromPartialMethodFields = (context: ProtoParseContext, name: string
             case 'float':
                 return fromPartial.float(args);
             case 'int32':
-            case 'sint32':
                 return fromPartial.int32(args);
+            case 'sint32':
+                return fromPartial.sint32(args);
             case 'uint32':
                 return fromPartial.uint32(args);
+            case 'fixed32':
+                return fromPartial.fixed32(args);
+            case 'sfixed32':
+                return fromPartial.sfixed32(args);
             case 'int64':
-            case 'sint64':
                 return fromPartial.int64(args);
+            case 'sint64':
+                return fromPartial.sint64(args);
             case 'uint64':
                 return fromPartial.uint64(args);
+            case 'fixed64':
+                return fromPartial.fixed64(args);
+            case 'sfixed64':
+                return fromPartial.sfixed64(args);
             case 'google.protobuf.Duration':
             case 'Duration':
                 return fromPartial.duration(args);

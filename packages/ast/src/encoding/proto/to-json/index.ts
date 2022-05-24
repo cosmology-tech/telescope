@@ -45,15 +45,25 @@ export const toJSONMethodFields = (context: ProtoParseContext, name: string, pro
                 case 'float':
                     return [...m, toJSON.array(args, arrayTypes.float())];
                 case 'int32':
-                case 'sint32':
                     return [...m, toJSON.array(args, arrayTypes.int32())];
+                case 'sint32':
+                    return [...m, toJSON.array(args, arrayTypes.sint32())];
                 case 'uint32':
                     return [...m, toJSON.array(args, arrayTypes.uint32())];
+                case 'fixed32':
+                    return [...m, toJSON.array(args, arrayTypes.fixed32())];
+                case 'sfixed32':
+                    return [...m, toJSON.array(args, arrayTypes.sfixed32())];
                 case 'int64':
-                case 'sint64':
                     return [...m, toJSON.array(args, arrayTypes.int64(args))];
+                case 'sint64':
+                    return [...m, toJSON.array(args, arrayTypes.sint64(args))];
                 case 'uint64':
                     return [...m, toJSON.array(args, arrayTypes.uint64(args))];
+                case 'fixed64':
+                    return [...m, toJSON.array(args, arrayTypes.fixed64(args))];
+                case 'sfixed64':
+                    return [...m, toJSON.array(args, arrayTypes.sfixed64(args))];
                 default:
                     switch (field.parsedType.type) {
                         case 'Enum':
@@ -69,12 +79,16 @@ export const toJSONMethodFields = (context: ProtoParseContext, name: string, pro
         if (field.keyType) {
             switch (field.keyType) {
                 case 'string':
-                case 'int64':
-                case 'sint64':
-                case 'uint64':
                 case 'int32':
                 case 'sint32':
                 case 'uint32':
+                case 'fixed32':
+                case 'sfixed32':
+                case 'int64':
+                case 'sint64':
+                case 'uint64':
+                case 'fixed64':
+                case 'sfixed64':
                     return [...m, ...toJSON.keyHash(args)];
                 default:
                     return needsImplementation(fieldName, field);
@@ -93,15 +107,25 @@ export const toJSONMethodFields = (context: ProtoParseContext, name: string, pro
             case 'bool':
                 return [...m, toJSON.bool(args)];
             case 'int32':
-            case 'sint32':
                 return [...m, toJSON.int32(args)];
+            case 'sint32':
+                return [...m, toJSON.sint32(args)];
             case 'uint32':
                 return [...m, toJSON.uint32(args)];
+            case 'fixed32':
+                return [...m, toJSON.fixed32(args)];
+            case 'sfixed32':
+                return [...m, toJSON.sfixed32(args)];
             case 'int64':
-            case 'sint64':
                 return [...m, toJSON.int64(args)];
+            case 'sint64':
+                return [...m, toJSON.sint64(args)];
             case 'uint64':
                 return [...m, toJSON.uint64(args)];
+            case 'fixed64':
+                return [...m, toJSON.fixed64(args)];
+            case 'sfixed64':
+                return [...m, toJSON.sfixed64(args)];
             case 'google.protobuf.Duration':
             case 'Duration':
                 return [...m, toJSON.duration(args)];

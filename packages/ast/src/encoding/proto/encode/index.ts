@@ -54,12 +54,20 @@ export const encodeMethodFields = (context: ProtoParseContext, name: string, pro
                     return [...m, ...encode.forkDelimArray(args, arrayTypes.sint32())];
                 case 'uint32':
                     return [...m, ...encode.forkDelimArray(args, arrayTypes.uint32())];
+                case 'fixed32':
+                    return [...m, ...encode.forkDelimArray(args, arrayTypes.fixed32())];
+                case 'sfixed32':
+                    return [...m, ...encode.forkDelimArray(args, arrayTypes.sfixed32())];
                 case 'int64':
                     return [...m, ...encode.forkDelimArray(args, arrayTypes.int64())];
                 case 'sint64':
                     return [...m, ...encode.forkDelimArray(args, arrayTypes.sint64())];
                 case 'uint64':
                     return [...m, ...encode.forkDelimArray(args, arrayTypes.uint64())];
+                case 'fixed64':
+                    return [...m, ...encode.forkDelimArray(args, arrayTypes.fixed64())];
+                case 'sfixed64':
+                    return [...m, ...encode.forkDelimArray(args, arrayTypes.sfixed64())];
                 default:
                     switch (field.parsedType.type) {
                         case 'Enum':
@@ -85,12 +93,20 @@ export const encodeMethodFields = (context: ProtoParseContext, name: string, pro
                 return [...m, encode.sint32(args)];
             case 'uint32':
                 return [...m, encode.uint32(args)];
+            case 'fixed32':
+                return [...m, encode.fixed32(args)];
+            case 'sfixed32':
+                return [...m, encode.sfixed32(args)];
             case 'int64':
                 return [...m, encode.int64(args)];
             case 'sint64':
                 return [...m, encode.sint64(args)];
             case 'uint64':
                 return [...m, encode.uint64(args)];
+            case 'fixed64':
+                return [...m, encode.fixed64(args)];
+            case 'sfixed64':
+                return [...m, encode.sfixed64(args)];
             case 'double':
                 return [...m, encode.double(args)];
             case 'float':
