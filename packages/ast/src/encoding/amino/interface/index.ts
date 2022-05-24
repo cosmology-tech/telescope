@@ -52,6 +52,8 @@ export const renderAminoField = ({
         case 'int64':
         case 'sint64':
         case 'uint64':
+        case 'fixed64':
+        case 'sfixed64':
             return aminoInterface.long(args);
         case 'double':
         case 'bool':
@@ -59,6 +61,8 @@ export const renderAminoField = ({
         case 'int32':
         case 'sint32':
         case 'uint32':
+        case 'fixed32':
+        case 'sfixed32':
         case 'Timestamp':
         case 'google.protobuf.Timestamp':
             return aminoInterface.defaultType(args);
