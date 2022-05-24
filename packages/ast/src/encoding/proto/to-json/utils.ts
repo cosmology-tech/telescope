@@ -78,6 +78,16 @@ export const toJSON = {
         return toJSON.number(args);
     },
 
+    sint32(args: ToJSONMethod) {
+        return toJSON.number(args);
+    },
+    fixed32(args: ToJSONMethod) {
+        return toJSON.number(args);
+    },
+    sfixed32(args: ToJSONMethod) {
+        return toJSON.number(args);
+    },
+
     // message.poolId !== undefined && (obj.poolId = (message.poolId || Long.UZERO).toString());
     // message.poolId !== undefined && (obj.poolId = (message.poolId || undefined).toString());
     long(args: ToJSONMethod) {
@@ -105,8 +115,16 @@ export const toJSON = {
     int64(args: ToJSONMethod) {
         return toJSON.long(args);
     },
-
     uint64(args: ToJSONMethod) {
+        return toJSON.long(args);
+    },
+    sint64(args: ToJSONMethod) {
+        return toJSON.long(args);
+    },
+    fixed64(args: ToJSONMethod) {
+        return toJSON.long(args);
+    },
+    sfixed64(args: ToJSONMethod) {
         return toJSON.long(args);
     },
 
@@ -465,13 +483,22 @@ export const arrayTypes = {
         )
     },
 
-    uint32() {
-        return arrayTypes.number();
-    },
-
     int32() {
         return arrayTypes.number();
     },
+    uint32() {
+        return arrayTypes.number();
+    },
+    sint32() {
+        return arrayTypes.number();
+    },
+    fixed32() {
+        return arrayTypes.number();
+    },
+    sfixed32() {
+        return arrayTypes.number();
+    },
+
 
     // if (message.codeIds) {
     //     obj.codeIds = message.codeIds.map(e => (e || Long.UZERO).toString());
@@ -496,11 +523,19 @@ export const arrayTypes = {
         )
     },
 
+    int64(args: ToJSONMethod) {
+        return arrayTypes.long(args);
+    },
     uint64(args: ToJSONMethod) {
         return arrayTypes.long(args);
     },
-
-    int64(args: ToJSONMethod) {
+    sint64(args: ToJSONMethod) {
+        return arrayTypes.long(args);
+    },
+    fixed64(args: ToJSONMethod) {
+        return arrayTypes.long(args);
+    },
+    sfixed64(args: ToJSONMethod) {
         return arrayTypes.long(args);
     },
 

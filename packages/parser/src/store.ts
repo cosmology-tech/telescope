@@ -52,12 +52,17 @@ export class ProtoStore {
             return [...m, ...contents];
         }, []);
         const protos = contents.map(({ absolute, filename, content }) => {
-            const proto = parseProto(content);
-            return {
-                absolute,
-                filename,
-                proto,
-            };
+            try {
+                const proto = parseProto(content);
+                return {
+                    absolute,
+                    filename,
+                    proto,
+                };
+            } catch (e) {
+                console.error(`${filename} has a proto syntax error`)
+                throw e;
+            }
         });
         this.protos = protos;
         return protos;

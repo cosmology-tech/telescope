@@ -104,6 +104,15 @@ export const fromPartial = {
     uint32(args: FromPartialMethod) {
         return fromPartial.number(args);
     },
+    sint32(args: FromPartialMethod) {
+        return fromPartial.number(args);
+    },
+    fixed32(args: FromPartialMethod) {
+        return fromPartial.number(args);
+    },
+    sfixed32(args: FromPartialMethod) {
+        return fromPartial.number(args);
+    },
     double(args: FromPartialMethod) {
         return fromPartial.number(args);
     },
@@ -137,6 +146,15 @@ export const fromPartial = {
         return fromPartial.long(args);
     },
     uint64(args: FromPartialMethod) {
+        return fromPartial.long(args);
+    },
+    sint64(args: FromPartialMethod) {
+        return fromPartial.long(args);
+    },
+    fixed64(args: FromPartialMethod) {
+        return fromPartial.long(args);
+    },
+    sfixed64(args: FromPartialMethod) {
         return fromPartial.long(args);
     },
 
@@ -445,6 +463,15 @@ export const arrayTypes = {
     uint32() {
         return arrayTypes.identity();
     },
+    sint32() {
+        return arrayTypes.identity();
+    },
+    fixed32() {
+        return arrayTypes.identity();
+    },
+    sfixed32() {
+        return arrayTypes.identity();
+    },
     enum() {
         return arrayTypes.identity();
     },
@@ -465,6 +492,15 @@ export const arrayTypes = {
         return arrayTypes.long();
     },
     uint64() {
+        return arrayTypes.long();
+    },
+    sint64() {
+        return arrayTypes.long();
+    },
+    fixed64() {
+        return arrayTypes.long();
+    },
+    sfixed64() {
         return arrayTypes.long();
     },
 

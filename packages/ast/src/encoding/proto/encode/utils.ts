@@ -82,6 +82,32 @@ const wrapOptional = (prop: string, test: t.Expression, isOptional: boolean) => 
     return test;
 }
 
+const scalarType = (num: number, prop: string, type: string) => {
+    return t.blockStatement([
+        t.expressionStatement(
+            t.callExpression(
+                t.memberExpression(
+                    t.callExpression(
+                        t.memberExpression(
+                            t.identifier('writer'),
+                            t.identifier('uint32')
+                        ),
+                        [
+                            t.numericLiteral(num)
+                        ]
+                    ),
+                    t.identifier(type)
+                ),
+                [
+                    t.memberExpression(
+                        t.identifier('message'),
+                        t.identifier(prop)
+                    )
+                ]
+            )
+        )
+    ]);
+}
 
 export const types = {
 
@@ -94,30 +120,7 @@ export const types = {
 
         return t.ifStatement(
             wrapOptional(prop, notEmptyString(prop), isOptional),
-            t.blockStatement([
-                t.expressionStatement(
-                    t.callExpression(
-                        t.memberExpression(
-                            t.callExpression(
-                                t.memberExpression(
-                                    t.identifier('writer'),
-                                    t.identifier('uint32')
-                                ),
-                                [
-                                    t.numericLiteral(num)
-                                ]
-                            ),
-                            t.identifier('string')
-                        ),
-                        [
-                            t.memberExpression(
-                                t.identifier('message'),
-                                t.identifier(prop)
-                            )
-                        ]
-                    )
-                )
-            ])
+            scalarType(num, prop, 'string')
         )
     },
 
@@ -130,30 +133,7 @@ export const types = {
     double(num: number, prop: string, isOptional: boolean) {
         return t.ifStatement(
             wrapOptional(prop, notZero(prop), isOptional),
-            t.blockStatement([
-                t.expressionStatement(
-                    t.callExpression(
-                        t.memberExpression(
-                            t.callExpression(
-                                t.memberExpression(
-                                    t.identifier('writer'),
-                                    t.identifier('uint32')
-                                ),
-                                [
-                                    t.numericLiteral(num)
-                                ]
-                            ),
-                            t.identifier('double')
-                        ),
-                        [
-                            t.memberExpression(
-                                t.identifier('message'),
-                                t.identifier(prop)
-                            )
-                        ]
-                    )
-                )
-            ])
+            scalarType(num, prop, 'double')
         )
     },
 
@@ -166,30 +146,7 @@ export const types = {
     float(num: number, prop: string, isOptional: boolean) {
         return t.ifStatement(
             wrapOptional(prop, notZero(prop), isOptional),
-            t.blockStatement([
-                t.expressionStatement(
-                    t.callExpression(
-                        t.memberExpression(
-                            t.callExpression(
-                                t.memberExpression(
-                                    t.identifier('writer'),
-                                    t.identifier('uint32')
-                                ),
-                                [
-                                    t.numericLiteral(num)
-                                ]
-                            ),
-                            t.identifier('float')
-                        ),
-                        [
-                            t.memberExpression(
-                                t.identifier('message'),
-                                t.identifier(prop)
-                            )
-                        ]
-                    )
-                )
-            ])
+            scalarType(num, prop, 'float')
         )
     },
 
@@ -201,30 +158,7 @@ export const types = {
     int32(num: number, prop: string, isOptional: boolean) {
         return t.ifStatement(
             wrapOptional(prop, notZero(prop), isOptional),
-            t.blockStatement([
-                t.expressionStatement(
-                    t.callExpression(
-                        t.memberExpression(
-                            t.callExpression(
-                                t.memberExpression(
-                                    t.identifier('writer'),
-                                    t.identifier('uint32')
-                                ),
-                                [
-                                    t.numericLiteral(num)
-                                ]
-                            ),
-                            t.identifier('int32')
-                        ),
-                        [
-                            t.memberExpression(
-                                t.identifier('message'),
-                                t.identifier(prop)
-                            )
-                        ]
-                    )
-                )
-            ])
+            scalarType(num, prop, 'int32')
         );
     },
 
@@ -235,30 +169,7 @@ export const types = {
     sint32(num: number, prop: string, isOptional: boolean) {
         return t.ifStatement(
             wrapOptional(prop, notZero(prop), isOptional),
-            t.blockStatement([
-                t.expressionStatement(
-                    t.callExpression(
-                        t.memberExpression(
-                            t.callExpression(
-                                t.memberExpression(
-                                    t.identifier('writer'),
-                                    t.identifier('uint32')
-                                ),
-                                [
-                                    t.numericLiteral(num)
-                                ]
-                            ),
-                            t.identifier('sint32')
-                        ),
-                        [
-                            t.memberExpression(
-                                t.identifier('message'),
-                                t.identifier(prop)
-                            )
-                        ]
-                    )
-                )
-            ])
+            scalarType(num, prop, 'sint32')
         );
     },
 
@@ -269,30 +180,21 @@ export const types = {
     uint32(num: number, prop: string, isOptional: boolean) {
         return t.ifStatement(
             wrapOptional(prop, notZero(prop), isOptional),
-            t.blockStatement([
-                t.expressionStatement(
-                    t.callExpression(
-                        t.memberExpression(
-                            t.callExpression(
-                                t.memberExpression(
-                                    t.identifier('writer'),
-                                    t.identifier('uint32')
-                                ),
-                                [
-                                    t.numericLiteral(num)
-                                ]
-                            ),
-                            t.identifier('uint32')
-                        ),
-                        [
-                            t.memberExpression(
-                                t.identifier('message'),
-                                t.identifier(prop)
-                            )
-                        ]
-                    )
-                )
-            ])
+            scalarType(num, prop, 'uint32')
+        );
+    },
+
+    fixed32(num: number, prop: string, isOptional: boolean) {
+        return t.ifStatement(
+            wrapOptional(prop, notZero(prop), isOptional),
+            scalarType(num, prop, 'fixed32')
+        );
+    },
+
+    sfixed32(num: number, prop: string, isOptional: boolean) {
+        return t.ifStatement(
+            wrapOptional(prop, notZero(prop), isOptional),
+            scalarType(num, prop, 'sfixed32')
         );
     },
 
@@ -304,30 +206,7 @@ export const types = {
     int64(num: number, prop: string, isOptional: boolean) {
         return t.ifStatement(
             wrapOptional(prop, longNotZero(prop), isOptional),
-            t.blockStatement([
-                t.expressionStatement(
-                    t.callExpression(
-                        t.memberExpression(
-                            t.callExpression(
-                                t.memberExpression(
-                                    t.identifier('writer'),
-                                    t.identifier('uint32')
-                                ),
-                                [
-                                    t.numericLiteral(num)
-                                ]
-                            ),
-                            t.identifier('int64')
-                        ),
-                        [
-                            t.memberExpression(
-                                t.identifier('message'),
-                                t.identifier(prop)
-                            )
-                        ]
-                    )
-                )
-            ])
+            scalarType(num, prop, 'int64')
         )
     },
 
@@ -338,30 +217,7 @@ export const types = {
     sint64(num: number, prop: string, isOptional: boolean) {
         return t.ifStatement(
             wrapOptional(prop, longNotZero(prop), isOptional),
-            t.blockStatement([
-                t.expressionStatement(
-                    t.callExpression(
-                        t.memberExpression(
-                            t.callExpression(
-                                t.memberExpression(
-                                    t.identifier('writer'),
-                                    t.identifier('uint32')
-                                ),
-                                [
-                                    t.numericLiteral(num)
-                                ]
-                            ),
-                            t.identifier('sint64')
-                        ),
-                        [
-                            t.memberExpression(
-                                t.identifier('message'),
-                                t.identifier(prop)
-                            )
-                        ]
-                    )
-                )
-            ])
+            scalarType(num, prop, 'sint64')
         )
     },
 
@@ -372,30 +228,21 @@ export const types = {
     uint64(num: number, prop: string, isOptional: boolean) {
         return t.ifStatement(
             wrapOptional(prop, longNotZero(prop), isOptional),
-            t.blockStatement([
-                t.expressionStatement(
-                    t.callExpression(
-                        t.memberExpression(
-                            t.callExpression(
-                                t.memberExpression(
-                                    t.identifier('writer'),
-                                    t.identifier('uint32')
-                                ),
-                                [
-                                    t.numericLiteral(num)
-                                ]
-                            ),
-                            t.identifier('uint64')
-                        ),
-                        [
-                            t.memberExpression(
-                                t.identifier('message'),
-                                t.identifier(prop)
-                            )
-                        ]
-                    )
-                )
-            ])
+            scalarType(num, prop, 'uint64')
+        )
+    },
+
+    fixed64(num: number, prop: string, isOptional: boolean) {
+        return t.ifStatement(
+            wrapOptional(prop, longNotZero(prop), isOptional),
+            scalarType(num, prop, 'fixed64')
+        )
+    },
+
+    sfixed64(num: number, prop: string, isOptional: boolean) {
+        return t.ifStatement(
+            wrapOptional(prop, longNotZero(prop), isOptional),
+            scalarType(num, prop, 'sfixed64')
         )
     },
 
@@ -407,30 +254,7 @@ export const types = {
 
         return t.ifStatement(
             wrapOptional(prop, ifTrue(prop), isOptional),
-            t.blockStatement([
-                t.expressionStatement(
-                    t.callExpression(
-                        t.memberExpression(
-                            t.callExpression(
-                                t.memberExpression(
-                                    t.identifier('writer'),
-                                    t.identifier('uint32')
-                                ),
-                                [
-                                    t.numericLiteral(num)
-                                ]
-                            ),
-                            t.identifier('bool')
-                        ),
-                        [
-                            t.memberExpression(
-                                t.identifier('message'),
-                                t.identifier(prop)
-                            )
-                        ]
-                    )
-                )
-            ])
+            scalarType(num, prop, 'bool')
         )
     },
 
@@ -485,30 +309,7 @@ export const types = {
     enum(num: number, prop: string, isOptional: boolean) {
         return t.ifStatement(
             wrapOptional(prop, notZero(prop), isOptional),
-            t.blockStatement([
-                t.expressionStatement(
-                    t.callExpression(
-                        t.memberExpression(
-                            t.callExpression(
-                                t.memberExpression(
-                                    t.identifier('writer'),
-                                    t.identifier('uint32')
-                                ),
-                                [
-                                    t.numericLiteral(num)
-                                ]
-                            ),
-                            t.identifier('int32')
-                        ),
-                        [
-                            t.memberExpression(
-                                t.identifier('message'),
-                                t.identifier(prop)
-                            )
-                        ]
-                    )
-                )
-            ])
+            scalarType(num, prop, 'int32')
         )
     },
 
@@ -522,30 +323,7 @@ export const types = {
     bytes(num: number, prop: string, isOptional: boolean) {
         return t.ifStatement(
             wrapOptional(prop, lengthNotZero(prop), isOptional),
-            t.blockStatement([
-                t.expressionStatement(
-                    t.callExpression(
-                        t.memberExpression(
-                            t.callExpression(
-                                t.memberExpression(
-                                    t.identifier('writer'),
-                                    t.identifier('uint32')
-                                ),
-                                [
-                                    t.numericLiteral(num)
-                                ]
-                            ),
-                            t.identifier('bytes')
-                        ),
-                        [
-                            t.memberExpression(
-                                t.identifier('message'),
-                                t.identifier(prop)
-                            )
-                        ]
-                    )
-                )
-            ])
+            scalarType(num, prop, 'bytes')
         );
     },
 
@@ -921,6 +699,18 @@ export const encode = {
         return types.uint32(num, prop, args.isOptional);
     },
 
+    fixed32(args: EncodeMethod) {
+        const prop = args.field.name;
+        const num = getTagNumber(args.field);
+        return types.fixed32(num, prop, args.isOptional);
+    },
+
+    sfixed32(args: EncodeMethod) {
+        const prop = args.field.name;
+        const num = getTagNumber(args.field);
+        return types.sfixed32(num, prop, args.isOptional);
+    },
+
     int64(args: EncodeMethod) {
         const prop = args.field.name;
         const num = getTagNumber(args.field);
@@ -937,6 +727,18 @@ export const encode = {
         const prop = args.field.name;
         const num = getTagNumber(args.field);
         return types.uint64(num, prop, args.isOptional);
+    },
+
+    fixed64(args: EncodeMethod) {
+        const prop = args.field.name;
+        const num = getTagNumber(args.field);
+        return types.fixed64(num, prop, args.isOptional);
+    },
+
+    sfixed64(args: EncodeMethod) {
+        const prop = args.field.name;
+        const num = getTagNumber(args.field);
+        return types.sfixed64(num, prop, args.isOptional);
     },
 
     bool(args: EncodeMethod) {
@@ -1084,6 +886,32 @@ export const arrayTypes = {
             )
         );
     },
+    fixed32() {
+        return t.expressionStatement(
+            t.callExpression(
+                t.memberExpression(
+                    t.identifier('writer'),
+                    t.identifier('fixed32')
+                ),
+                [
+                    t.identifier('v')
+                ]
+            )
+        );
+    },
+    sfixed32() {
+        return t.expressionStatement(
+            t.callExpression(
+                t.memberExpression(
+                    t.identifier('writer'),
+                    t.identifier('sfixed32')
+                ),
+                [
+                    t.identifier('v')
+                ]
+            )
+        );
+    },
     int64() {
         return t.expressionStatement(
             t.callExpression(
@@ -1116,6 +944,32 @@ export const arrayTypes = {
                 t.memberExpression(
                     t.identifier('writer'),
                     t.identifier('uint64')
+                ),
+                [
+                    t.identifier('v')
+                ]
+            )
+        );
+    },
+    fixed64() {
+        return t.expressionStatement(
+            t.callExpression(
+                t.memberExpression(
+                    t.identifier('writer'),
+                    t.identifier('fixed64')
+                ),
+                [
+                    t.identifier('v')
+                ]
+            )
+        );
+    },
+    sfixed64() {
+        return t.expressionStatement(
+            t.callExpression(
+                t.memberExpression(
+                    t.identifier('writer'),
+                    t.identifier('sfixed64')
                 ),
                 [
                     t.identifier('v')

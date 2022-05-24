@@ -38,6 +38,16 @@ export const decode = {
         const prop = args.field.name;
         return switchOnTag(num, prop, baseTypes.uint32(args));
     },
+    fixed32(args: DecodeMethod) {
+        const num = args.field.id;
+        const prop = args.field.name;
+        return switchOnTag(num, prop, baseTypes.fixed32(args));
+    },
+    sfixed32(args: DecodeMethod) {
+        const num = args.field.id;
+        const prop = args.field.name;
+        return switchOnTag(num, prop, baseTypes.sfixed32(args));
+    },
     int64(args: DecodeMethod) {
         const num = args.field.id;
         const prop = args.field.name;
@@ -52,6 +62,16 @@ export const decode = {
         const num = args.field.id;
         const prop = args.field.name;
         return switchOnTag(num, prop, baseTypes.uint64(args));
+    },
+    fixed64(args: DecodeMethod) {
+        const num = args.field.id;
+        const prop = args.field.name;
+        return switchOnTag(num, prop, baseTypes.fixed64(args));
+    },
+    sfixed64(args: DecodeMethod) {
+        const num = args.field.id;
+        const prop = args.field.name;
+        return switchOnTag(num, prop, baseTypes.sfixed64(args));
     },
     duration(args: DecodeMethod) {
         const num = args.field.id;
@@ -190,6 +210,28 @@ export const baseTypes = {
         );
     },
 
+    // reader.fixed32();
+    fixed32(args: DecodeMethod) {
+        return t.callExpression(
+            t.memberExpression(
+                t.identifier('reader'),
+                t.identifier('fixed32')
+            ),
+            []
+        );
+    },
+
+    // reader.sfixed32();
+    sfixed32(args: DecodeMethod) {
+        return t.callExpression(
+            t.memberExpression(
+                t.identifier('reader'),
+                t.identifier('sfixed32')
+            ),
+            []
+        );
+    },
+
     // (reader.int64() as Long);
     int64(args: DecodeMethod) {
         args.context.addUtil('Long');
@@ -235,6 +277,42 @@ export const baseTypes = {
                 t.memberExpression(
                     t.identifier('reader'),
                     t.identifier('uint64')
+                ),
+                []
+            ),
+            t.tsTypeReference(
+                t.identifier('Long')
+            )
+        );
+    },
+
+    // (reader.fixed64() as Long);
+    fixed64(args: DecodeMethod) {
+        args.context.addUtil('Long');
+
+        return t.tsAsExpression(
+            t.callExpression(
+                t.memberExpression(
+                    t.identifier('reader'),
+                    t.identifier('fixed64')
+                ),
+                []
+            ),
+            t.tsTypeReference(
+                t.identifier('Long')
+            )
+        );
+    },
+
+    // (reader.sfixed64() as Long);
+    sfixed64(args: DecodeMethod) {
+        args.context.addUtil('Long');
+
+        return t.tsAsExpression(
+            t.callExpression(
+                t.memberExpression(
+                    t.identifier('reader'),
+                    t.identifier('sfixed64')
                 ),
                 []
             ),

@@ -8,7 +8,6 @@ import { instanceType, lookupSymbolScopes, NATIVE_TYPES } from './utils';
 export const traverse = (store: ProtoStore, ref: ProtoRef) => {
     const imports: Record<string, string[]> = {};
     const exports: Record<string, any> = {};
-
     const obj: ProtoRoot & {
         parsedImports: Record<string, string[]>;
         parsedExports: Record<string, any>;
