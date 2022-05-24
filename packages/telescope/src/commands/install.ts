@@ -44,31 +44,22 @@ export default async (argv) => {
             message:
                 'which packages do you want to support?',
             choices: [
-                {
-                    name: 'akash',
-                    value: '@protobufs/akash'
-                },
-                {
-                    name: 'cosmos',
-                    value: '@protobufs/cosmos'
-                },
-                {
-                    name: 'cosmwasm',
-                    value: '@protobufs/cosmwasm'
-                },
-                {
-                    name: 'osmosis',
-                    value: '@protobufs/osmosis'
-                },
-                {
-                    name: 'secret',
-                    value: '@protobufs/secret'
-                },
-                {
-                    name: 'ibc',
-                    value: '@protobufs/ibc'
-                },
-            ]
+                'akash',
+                'bcna',
+                'cosmos',
+                'cosmwasm',
+                'ibc',
+                'juno',
+                'osmosis',
+                'regen',
+                'secret',
+                'stargaze',
+            ].map(name => {
+                return {
+                    name,
+                    value: `@protobufs/${name}`
+                }
+            })
         }
     ], argv);
 
