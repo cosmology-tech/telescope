@@ -1,12 +1,27 @@
 
-import _generate from './commands/generate';
-import _install from './commands/install';
-import _transpile from './commands/transpile';
-const Commands = {};
-Commands['generate'] = _generate;
-Commands['install'] = _install;
-Commands['transpile'] = _transpile;
-
-  export { Commands }; 
-
+  import _commands_generate from './commands/generate';
+import _commands_install from './commands/install';
+import _commands_transpile from './commands/transpile';
+  const Commands = {};
+  Commands['generate'] = _commands_generate;
+Commands['install'] = _commands_install;
+Commands['transpile'] = _commands_transpile;
   
+    export { Commands }; 
+  
+    
+  import _contracts_from_partial from './contracts/from-partial';
+import _contracts_generate from './contracts/generate';
+import _contracts_install from './contracts/install';
+import _contracts_react_query from './contracts/react-query';
+import _contracts_recoil from './contracts/recoil';
+  const Contracts = {};
+  Contracts['from-partial'] = _contracts_from_partial;
+Contracts['generate'] = _contracts_generate;
+Contracts['install'] = _contracts_install;
+Contracts['react-query'] = _contracts_react_query;
+Contracts['recoil'] = _contracts_recoil;
+  
+    export { Contracts }; 
+  
+    

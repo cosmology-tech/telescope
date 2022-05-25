@@ -84,6 +84,7 @@
     "@osmonauts/types": "^0.3.6",
     "@types/parse-package-name": "0.1.0",
     "case": "1.6.3",
+    "cosmwasm-typescript-gen": "0.2.12",
     "dargs": "7.0.0",
     "deepmerge": "4.2.2",
     "dotty": "0.1.2",

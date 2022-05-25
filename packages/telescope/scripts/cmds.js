@@ -2,38 +2,53 @@ const fs = require('fs');
 const path = require('path');
 const glob = require('glob').sync;
 const Case = require('case');
-const srcDir = path.resolve(`${__dirname}/../src/commands`);
+const { pascal } = require('case');
 
-const paths = glob(`${srcDir}/**.[j|t]s`).map((file) => {
-  const [, name] = file.match(/\/(.*)\.[j|t]s$/);
-  return {
-    name: path.basename(name),
-    param: Case.kebab(path.basename(name)),
-    safe: Case.snake(path.basename(name)),
-    path: file
-      .replace(srcDir, './commands')
-      .replace(/\.js$/, '')
-      .replace(/\.ts$/, '')
-  };
-});
+const makeCommands = (folder) => {
+  const SuperName = pascal(folder);
+  const srcDir = path.resolve(`${__dirname}/../src/${folder}`);
+  
+  const cmds = path.resolve(`${__dirname}/../src/cmds.js`);
 
-const imports = paths
-  .map((f) => {
-    return [`import _${f.safe} from '${f.path}';`];
-  })
-  .join('\n');
+  const paths = glob(`${srcDir}/**.[j|t]s`).map((file) => {
+    const [, name] = file.match(/\/(.*)\.[j|t]s$/);
 
-const out = `
-${imports}
-const Commands = {};
-${paths
-  .map((a) => {
-    return `Commands['${a.param}'] = _${a.safe};`;
-  })
-  .join('\n')}
+    let str = path.relative(path.dirname(cmds), file)
+    .replace(/\.js$/, '')
+    .replace(/\.ts$/, '');
+    if (!str.startsWith('.')) str = `./${str}`;
 
-  export { Commands }; 
+    return {
+      name: path.basename(name),
+      param: Case.kebab(path.basename(name)),
+      safe: Case.snake(folder + '_' + path.basename(name)),
+      path: str
+    };
+  });
+  
+  const imports = paths
+    .map((f) => {
+      return [`import _${f.safe} from '${f.path}';`];
+    })
+    .join('\n');
+  
+  const out = `
+  ${imports}
+  const ${SuperName} = {};
+  ${paths
+    .map((a) => {
+      return `${SuperName}['${a.param}'] = _${a.safe};`;
+    })
+    .join('\n')}
+  
+    export { ${SuperName} }; 
+  
+    `;
 
-  `;
+    return out;
+};
 
-fs.writeFileSync(`${__dirname}/../src/cmds.js`, out);
+fs.writeFileSync(`${__dirname}/../src/cmds.js`, 
+makeCommands('commands') + 
+makeCommands('contracts')
+);
