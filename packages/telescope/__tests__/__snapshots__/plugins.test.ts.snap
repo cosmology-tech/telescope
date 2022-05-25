@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`includeAminos cosmos 1`] = `false`;
+
+exports[`includeAminos cosmos.v1beta1 1`] = `true`;
+
+exports[`includeAminos cosmos.v1beta1.other 1`] = `true`;
+
+exports[`includeAminos cosmos.v1beta1.tx 1`] = `false`;
+
+exports[`useDate cosmos 1`] = `true`;
+
+exports[`useDate cosmos.v1beta1 1`] = `true`;
+
+exports[`useDate cosmos.v1beta1.other 1`] = `true`;
+
+exports[`useDate cosmos.v1beta1.tx 1`] = `false`;
