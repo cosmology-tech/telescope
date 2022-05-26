@@ -44,7 +44,8 @@ export default async (argv) => {
             message:
                 'which chain contracts do you want to support?',
             choices: [
-                'stargaze',
+                'stargaze-minter',
+                'stargaze-sg721',
             ].map(name => {
                 return {
                     name,

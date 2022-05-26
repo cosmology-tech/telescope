@@ -1,7 +1,7 @@
 import { readSchemas } from 'cosmwasm-typescript-gen';
 import { pascal } from 'case';
 import { basename, dirname, join } from 'path';
-import { readdirSync } from 'fs';
+import { readFileSync, readdirSync } from 'fs';
 
 export const getDirectories = source =>
     readdirSync(source, { withFileTypes: true })
@@ -9,25 +9,22 @@ export const getDirectories = source =>
         .map(dirent => dirent.name);
 
 export const getContracts = () => {
-    const chains = getDirectories('./contracts');
-    const contracts = chains.reduce((m, v) => {
-        const els = getDirectories(`./contracts/${v}`)
-            .map(contractDirname => {
-                return {
-                    name: `${v}/${contractDirname}`,
-                    value: `./contracts/${v}/${contractDirname}`
-                }
-            });
-        return [...m, ...els];
-    }, []);
+    const contracts = getDirectories('./contracts')
+        .map(contractDirname => {
+            return {
+                name: `${contractDirname}`,
+                value: `./contracts/${contractDirname}`
+            }
+        });
     return contracts;
 };
 
 export const getContractSchemata = (schemata: any[], out: string, argv) => {
     return schemata.map(path => {
+        const pkg = JSON.parse(readFileSync(join(path, 'package.json'), 'utf-8'));
         const name = basename(path);
         const folder = basename(dirname(path));
-        const contractName = pascal(name);
+        const contractName = pascal(pkg.contract) || pascal(name);
         const schemas = readSchemas({ schemaDir: path, argv });
         const outPath = join(out, folder);
         return {
