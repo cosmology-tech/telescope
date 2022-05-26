@@ -46,6 +46,7 @@ export default async (argv) => {
             choices: [
                 'akash',
                 'bcna',
+                'comdex',
                 'cosmos',
                 'cosmwasm',
                 'ibc',
