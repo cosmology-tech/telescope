@@ -44,8 +44,12 @@ export default async (argv) => {
             message:
                 'which chain contracts do you want to support?',
             choices: [
+                'stargaze-claim',
+                'stargaze-ics721',
                 'stargaze-minter',
+                'stargaze-royalty-group',
                 'stargaze-sg721',
+                'stargaze-whitelist',
             ].map(name => {
                 return {
                     name,
