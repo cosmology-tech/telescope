@@ -1486,11 +1486,6 @@
   resolved "https://registry.npmjs.org/@cosmjs/utils/-/utils-0.28.4.tgz#ecbc72458cdaffa6eeef572bc691502b3151330f"
   integrity sha512-lb3TU6833arPoPZF8HTeG9V418CpurvqH5Aa/ls0I0wYdPDEMO6622+PQNQhQ8Vw8Az2MXoSyc8jsqrgawT84Q==
 
-"@cosmjson/stargaze@0.0.2":
-  version "0.0.2"
-  resolved "https://registry.npmjs.org/@cosmjson/stargaze/-/stargaze-0.0.2.tgz#3bfbd91057d4c63deceb7ad42dea116c52021a6a"
-  integrity sha512-/2LYH1O2hRTPwiYuax7+vcxCKKap5N6VYVi/CkxSYfXxZvsi2B7oHlNFRNDeXE4aPlgmjI0rui6h7Q3OxTIpqw==
-
 "@eslint/eslintrc@^1.2.1":
   version "1.2.1"
   resolved "https://registry.npmjs.org/@eslint/eslintrc/-/eslintrc-1.2.1.tgz#8b5e1c49f4077235516bc9ec7d41378c0f69b8c6"
@@ -3860,10 +3855,10 @@ cosmjs-types@^0.4.0:
     long "^4.0.0"
     protobufjs "~6.11.2"
 
-cosmwasm-typescript-gen@0.2.12:
-  version "0.2.12"
-  resolved "https://registry.npmjs.org/cosmwasm-typescript-gen/-/cosmwasm-typescript-gen-0.2.12.tgz#33f833a32c1acbc3702e722bc48f79f03e426ed4"
-  integrity sha512-c6qkVtJ7bX0D8VYLIZmcWSVGMulhn72nBlVR/U3qhQ2xCerNFQw4GhKiumWPFeKVBDxTzzwutYvtoapAf1ZyKg==
+cosmwasm-typescript-gen@0.2.14:
+  version "0.2.14"
+  resolved "https://registry.npmjs.org/cosmwasm-typescript-gen/-/cosmwasm-typescript-gen-0.2.14.tgz#50cd6ee60b714ce4ea829bb9ff049604b90e1027"
+  integrity sha512-yztCd4ZkV0kl/OMp6wQMWHwFo5OdiPd8nC5wEAZAJxk44RvA3TrvYULC2wF0CST7BzuHoPvn3I3y1D3ormbQUw==
   dependencies:
     "@babel/core" "7.17.8"
     "@babel/generator" "7.17.7"
@@ -3892,7 +3887,7 @@ cosmwasm-typescript-gen@0.2.12:
     minimist "1.2.6"
     mkdirp "1.0.4"
     shelljs "0.8.5"
-    wasm-ast-types "^0.2.4"
+    wasm-ast-types "^0.2.5"
 
 create-hash@^1.1.0, create-hash@^1.1.2:
   version "1.2.0"
@@ -8778,10 +8773,10 @@ walker@^1.0.7:
   dependencies:
     makeerror "1.0.12"
 
-wasm-ast-types@^0.2.4:
-  version "0.2.4"
-  resolved "https://registry.npmjs.org/wasm-ast-types/-/wasm-ast-types-0.2.4.tgz#5d0efee709105c6094d313d748423a0ae65c17ed"
-  integrity sha512-yWueMfKh+yUUCmRl5PL5L4c+x3T4PbVD0C/Y8IOQaPgH5wkqB0T+MpKjIzheUFGHUcbFXSmIUS0hxeIEOpEbVQ==
+wasm-ast-types@^0.2.5:
+  version "0.2.5"
+  resolved "https://registry.npmjs.org/wasm-ast-types/-/wasm-ast-types-0.2.5.tgz#04f26747628c8c30c245c840e4f9400119712626"
+  integrity sha512-em1RyhGGbh5PBzGWfVIpKSqN8XmBg2GjOW4m089/Ok+fA1KVF4t6rp9DVNEEoSPcC7SJH/HYXLhlMfOIQf3WQQ==
   dependencies:
     "@babel/runtime" "^7.11.2"
     "@babel/types" "7.17.0"
