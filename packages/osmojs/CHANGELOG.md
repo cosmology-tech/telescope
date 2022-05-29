@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.4.45](https://github.com/osmosis-labs/telescope/compare/osmojs@0.4.44...osmojs@0.4.45) (2022-05-29)
+
+**Note:** Version bump only for package osmojs
+
+
+
+
+
 ## [0.4.44](https://github.com/osmosis-labs/telescope/compare/osmojs@0.4.43...osmojs@0.4.44) (2022-05-27)
 
 **Note:** Version bump only for package osmojs
