@@ -255,27 +255,28 @@ import * as _122 from \\"./nft/v1beta1/genesis\\";
 import * as _123 from \\"./nft/v1beta1/nft\\";
 import * as _124 from \\"./nft/v1beta1/query\\";
 import * as _125 from \\"./nft/v1beta1/tx\\";
-import * as _126 from \\"./orm/v1/orm\\";
-import * as _127 from \\"./orm/v1alpha1/schema\\";
-import * as _128 from \\"./params/v1beta1/params\\";
-import * as _129 from \\"./params/v1beta1/query\\";
-import * as _130 from \\"./slashing/v1beta1/genesis\\";
-import * as _131 from \\"./slashing/v1beta1/query\\";
-import * as _132 from \\"./slashing/v1beta1/slashing\\";
-import * as _133 from \\"./slashing/v1beta1/tx\\";
-import * as _134 from \\"./staking/v1beta1/authz\\";
-import * as _135 from \\"./staking/v1beta1/genesis\\";
-import * as _136 from \\"./staking/v1beta1/query\\";
-import * as _137 from \\"./staking/v1beta1/staking\\";
-import * as _138 from \\"./staking/v1beta1/tx\\";
-import * as _139 from \\"./tx/signing/v1beta1/signing\\";
-import * as _140 from \\"./tx/v1beta1/service\\";
-import * as _141 from \\"./tx/v1beta1/tx\\";
-import * as _142 from \\"./upgrade/v1beta1/query\\";
-import * as _143 from \\"./upgrade/v1beta1/tx\\";
-import * as _144 from \\"./upgrade/v1beta1/upgrade\\";
-import * as _145 from \\"./vesting/v1beta1/tx\\";
-import * as _146 from \\"./vesting/v1beta1/vesting\\";
+import * as _126 from \\"./orm/module/v1alpha1/module\\";
+import * as _127 from \\"./orm/v1/orm\\";
+import * as _128 from \\"./orm/v1alpha1/schema\\";
+import * as _129 from \\"./params/v1beta1/params\\";
+import * as _130 from \\"./params/v1beta1/query\\";
+import * as _131 from \\"./slashing/v1beta1/genesis\\";
+import * as _132 from \\"./slashing/v1beta1/query\\";
+import * as _133 from \\"./slashing/v1beta1/slashing\\";
+import * as _134 from \\"./slashing/v1beta1/tx\\";
+import * as _135 from \\"./staking/v1beta1/authz\\";
+import * as _136 from \\"./staking/v1beta1/genesis\\";
+import * as _137 from \\"./staking/v1beta1/query\\";
+import * as _138 from \\"./staking/v1beta1/staking\\";
+import * as _139 from \\"./staking/v1beta1/tx\\";
+import * as _140 from \\"./tx/signing/v1beta1/signing\\";
+import * as _141 from \\"./tx/v1beta1/service\\";
+import * as _142 from \\"./tx/v1beta1/tx\\";
+import * as _143 from \\"./upgrade/v1beta1/query\\";
+import * as _144 from \\"./upgrade/v1beta1/tx\\";
+import * as _145 from \\"./upgrade/v1beta1/upgrade\\";
+import * as _146 from \\"./vesting/v1beta1/tx\\";
+import * as _147 from \\"./vesting/v1beta1/vesting\\";
 export namespace cosmos {
   export namespace app {
     export const v1alpha1 = { ..._55,
@@ -432,49 +433,53 @@ export namespace cosmos {
     };
   }
   export namespace orm {
-    export const v1 = { ..._126
+    export namespace module {
+      export const v1alpha1 = { ..._126
+      };
+    }
+    export const v1 = { ..._127
     };
-    export const v1alpha1 = { ..._127
+    export const v1alpha1 = { ..._128
     };
   }
   export namespace params {
-    export const v1beta1 = { ..._128,
-      ..._129
+    export const v1beta1 = { ..._129,
+      ..._130
     };
   }
   export namespace slashing {
-    export const v1beta1 = { ..._130,
-      ..._131,
+    export const v1beta1 = { ..._131,
       ..._132,
-      ..._133
+      ..._133,
+      ..._134
     };
   }
   export namespace staking {
-    export const v1beta1 = { ..._134,
-      ..._135,
+    export const v1beta1 = { ..._135,
       ..._136,
       ..._137,
-      ..._138
+      ..._138,
+      ..._139
     };
   }
   export namespace tx {
     export namespace signing {
-      export const v1beta1 = { ..._139
+      export const v1beta1 = { ..._140
       };
     }
-    export const v1beta1 = { ..._140,
-      ..._141
+    export const v1beta1 = { ..._141,
+      ..._142
     };
   }
   export namespace upgrade {
-    export const v1beta1 = { ..._142,
-      ..._143,
-      ..._144
+    export const v1beta1 = { ..._143,
+      ..._144,
+      ..._145
     };
   }
   export namespace vesting {
-    export const v1beta1 = { ..._145,
-      ..._146
+    export const v1beta1 = { ..._146,
+      ..._147
     };
   }
 }",
@@ -489,20 +494,20 @@ export const cosmos_proto = { ..._54
   "cosmwasm": Object {
     "base": "cosmwasm",
     "bundle": "cosmwasm/bundle.ts",
-    "code": "import * as _147 from \\"./wasm/v1/genesis\\";
-import * as _148 from \\"./wasm/v1/ibc\\";
-import * as _149 from \\"./wasm/v1/proposal\\";
-import * as _150 from \\"./wasm/v1/query\\";
-import * as _151 from \\"./wasm/v1/tx\\";
-import * as _152 from \\"./wasm/v1/types\\";
+    "code": "import * as _148 from \\"./wasm/v1/genesis\\";
+import * as _149 from \\"./wasm/v1/ibc\\";
+import * as _150 from \\"./wasm/v1/proposal\\";
+import * as _151 from \\"./wasm/v1/query\\";
+import * as _152 from \\"./wasm/v1/tx\\";
+import * as _153 from \\"./wasm/v1/types\\";
 export namespace cosmwasm {
   export namespace wasm {
-    export const v1 = { ..._147,
-      ..._148,
+    export const v1 = { ..._148,
       ..._149,
       ..._150,
       ..._151,
-      ..._152
+      ..._152,
+      ..._153
     };
   }
 }",
@@ -510,68 +515,67 @@ export namespace cosmwasm {
   "gogoproto": Object {
     "base": "gogoproto",
     "bundle": "gogoproto/bundle.ts",
-    "code": "import * as _153 from \\"./gogo\\";
-export const gogoproto = { ..._153
+    "code": "import * as _154 from \\"./gogo\\";
+export const gogoproto = { ..._154
 };",
   },
   "google": Object {
     "base": "google",
     "bundle": "google/bundle.ts",
-    "code": "import * as _154 from \\"./api/annotations\\";
-import * as _155 from \\"./api/auth\\";
-import * as _156 from \\"./api/backend\\";
-import * as _157 from \\"./api/billing\\";
-import * as _158 from \\"./api/client\\";
-import * as _159 from \\"./api/config_change\\";
-import * as _160 from \\"./api/consumer\\";
-import * as _161 from \\"./api/context\\";
-import * as _162 from \\"./api/control\\";
-import * as _163 from \\"./api/distribution\\";
-import * as _164 from \\"./api/documentation\\";
-import * as _165 from \\"./api/endpoint\\";
-import * as _166 from \\"./api/error_reason\\";
-import * as _167 from \\"./api/field_behavior\\";
-import * as _168 from \\"./api/http\\";
-import * as _169 from \\"./api/httpbody\\";
-import * as _170 from \\"./api/label\\";
-import * as _171 from \\"./api/launch_stage\\";
-import * as _172 from \\"./api/log\\";
-import * as _173 from \\"./api/logging\\";
-import * as _174 from \\"./api/metric\\";
-import * as _175 from \\"./api/monitored_resource\\";
-import * as _176 from \\"./api/monitoring\\";
-import * as _177 from \\"./api/quota\\";
-import * as _178 from \\"./api/resource\\";
-import * as _179 from \\"./api/routing\\";
-import * as _180 from \\"./api/service\\";
-import * as _181 from \\"./api/source_info\\";
-import * as _182 from \\"./api/system_parameter\\";
-import * as _183 from \\"./api/usage\\";
-import * as _184 from \\"./api/visibility\\";
-import * as _185 from \\"./logging/type/http_request\\";
-import * as _186 from \\"./logging/type/log_severity\\";
-import * as _187 from \\"./logging/v2/log_entry\\";
-import * as _188 from \\"./logging/v2/logging_config\\";
-import * as _189 from \\"./logging/v2/logging_metrics\\";
-import * as _190 from \\"./logging/v2/logging\\";
-import * as _191 from \\"./longrunning/operations\\";
-import * as _192 from \\"./protobuf/any\\";
-import * as _193 from \\"./protobuf/api\\";
-import * as _194 from \\"./protobuf/descriptor\\";
-import * as _195 from \\"./protobuf/duration\\";
-import * as _196 from \\"./protobuf/empty\\";
-import * as _197 from \\"./protobuf/field_mask\\";
-import * as _198 from \\"./protobuf/source_context\\";
-import * as _199 from \\"./protobuf/struct\\";
-import * as _200 from \\"./protobuf/timestamp\\";
-import * as _201 from \\"./protobuf/type\\";
-import * as _202 from \\"./protobuf/wrappers\\";
-import * as _203 from \\"./rpc/code\\";
-import * as _204 from \\"./rpc/error_details\\";
-import * as _205 from \\"./rpc/status\\";
+    "code": "import * as _155 from \\"./api/annotations\\";
+import * as _156 from \\"./api/auth\\";
+import * as _157 from \\"./api/backend\\";
+import * as _158 from \\"./api/billing\\";
+import * as _159 from \\"./api/client\\";
+import * as _160 from \\"./api/config_change\\";
+import * as _161 from \\"./api/consumer\\";
+import * as _162 from \\"./api/context\\";
+import * as _163 from \\"./api/control\\";
+import * as _164 from \\"./api/distribution\\";
+import * as _165 from \\"./api/documentation\\";
+import * as _166 from \\"./api/endpoint\\";
+import * as _167 from \\"./api/error_reason\\";
+import * as _168 from \\"./api/field_behavior\\";
+import * as _169 from \\"./api/http\\";
+import * as _170 from \\"./api/httpbody\\";
+import * as _171 from \\"./api/label\\";
+import * as _172 from \\"./api/launch_stage\\";
+import * as _173 from \\"./api/log\\";
+import * as _174 from \\"./api/logging\\";
+import * as _175 from \\"./api/metric\\";
+import * as _176 from \\"./api/monitored_resource\\";
+import * as _177 from \\"./api/monitoring\\";
+import * as _178 from \\"./api/quota\\";
+import * as _179 from \\"./api/resource\\";
+import * as _180 from \\"./api/routing\\";
+import * as _181 from \\"./api/service\\";
+import * as _182 from \\"./api/source_info\\";
+import * as _183 from \\"./api/system_parameter\\";
+import * as _184 from \\"./api/usage\\";
+import * as _185 from \\"./api/visibility\\";
+import * as _186 from \\"./logging/type/http_request\\";
+import * as _187 from \\"./logging/type/log_severity\\";
+import * as _188 from \\"./logging/v2/log_entry\\";
+import * as _189 from \\"./logging/v2/logging_config\\";
+import * as _190 from \\"./logging/v2/logging_metrics\\";
+import * as _191 from \\"./logging/v2/logging\\";
+import * as _192 from \\"./longrunning/operations\\";
+import * as _193 from \\"./protobuf/any\\";
+import * as _194 from \\"./protobuf/api\\";
+import * as _195 from \\"./protobuf/descriptor\\";
+import * as _196 from \\"./protobuf/duration\\";
+import * as _197 from \\"./protobuf/empty\\";
+import * as _198 from \\"./protobuf/field_mask\\";
+import * as _199 from \\"./protobuf/source_context\\";
+import * as _200 from \\"./protobuf/struct\\";
+import * as _201 from \\"./protobuf/timestamp\\";
+import * as _202 from \\"./protobuf/type\\";
+import * as _203 from \\"./protobuf/wrappers\\";
+import * as _204 from \\"./rpc/code\\";
+import * as _205 from \\"./rpc/error_details\\";
+import * as _206 from \\"./rpc/status\\";
 export namespace google {
-  export const api = { ..._154,
-    ..._155,
+  export const api = { ..._155,
     ..._156,
     ..._157,
     ..._158,
@@ -600,22 +604,22 @@ export namespace google {
     ..._181,
     ..._182,
     ..._183,
-    ..._184
+    ..._184,
+    ..._185
   };
   export namespace logging {
-    export const type = { ..._185,
-      ..._186
+    export const type = { ..._186,
+      ..._187
     };
-    export const v2 = { ..._187,
-      ..._188,
+    export const v2 = { ..._188,
       ..._189,
-      ..._190
+      ..._190,
+      ..._191
     };
   }
-  export const longrunning = { ..._191
+  export const longrunning = { ..._192
   };
-  export const protobuf = { ..._192,
-    ..._193,
+  export const protobuf = { ..._193,
     ..._194,
     ..._195,
     ..._196,
@@ -624,101 +628,102 @@ export namespace google {
     ..._199,
     ..._200,
     ..._201,
-    ..._202
+    ..._202,
+    ..._203
   };
-  export const rpc = { ..._203,
-    ..._204,
-    ..._205
+  export const rpc = { ..._204,
+    ..._205,
+    ..._206
   };
 }",
   },
   "ibc": Object {
     "base": "ibc",
     "bundle": "ibc/bundle.ts",
-    "code": "import * as _206 from \\"./applications/transfer/v1/genesis\\";
-import * as _207 from \\"./applications/transfer/v1/query\\";
-import * as _208 from \\"./applications/transfer/v1/transfer\\";
-import * as _209 from \\"./applications/transfer/v1/tx\\";
-import * as _210 from \\"./applications/transfer/v2/packet\\";
-import * as _211 from \\"./core/channel/v1/channel\\";
-import * as _212 from \\"./core/channel/v1/genesis\\";
-import * as _213 from \\"./core/channel/v1/query\\";
-import * as _214 from \\"./core/channel/v1/tx\\";
-import * as _215 from \\"./core/client/v1/client\\";
-import * as _216 from \\"./core/client/v1/genesis\\";
-import * as _217 from \\"./core/client/v1/query\\";
-import * as _218 from \\"./core/client/v1/tx\\";
-import * as _219 from \\"./core/commitment/v1/commitment\\";
-import * as _220 from \\"./core/connection/v1/connection\\";
-import * as _221 from \\"./core/connection/v1/genesis\\";
-import * as _222 from \\"./core/connection/v1/query\\";
-import * as _223 from \\"./core/connection/v1/tx\\";
-import * as _224 from \\"./core/port/v1/query\\";
-import * as _225 from \\"./core/types/v1/genesis\\";
-import * as _226 from \\"./lightclients/localhost/v1/localhost\\";
-import * as _227 from \\"./lightclients/solomachine/v1/solomachine\\";
-import * as _228 from \\"./lightclients/solomachine/v2/solomachine\\";
-import * as _229 from \\"./lightclients/tendermint/v1/tendermint\\";
+    "code": "import * as _207 from \\"./applications/transfer/v1/genesis\\";
+import * as _208 from \\"./applications/transfer/v1/query\\";
+import * as _209 from \\"./applications/transfer/v1/transfer\\";
+import * as _210 from \\"./applications/transfer/v1/tx\\";
+import * as _211 from \\"./applications/transfer/v2/packet\\";
+import * as _212 from \\"./core/channel/v1/channel\\";
+import * as _213 from \\"./core/channel/v1/genesis\\";
+import * as _214 from \\"./core/channel/v1/query\\";
+import * as _215 from \\"./core/channel/v1/tx\\";
+import * as _216 from \\"./core/client/v1/client\\";
+import * as _217 from \\"./core/client/v1/genesis\\";
+import * as _218 from \\"./core/client/v1/query\\";
+import * as _219 from \\"./core/client/v1/tx\\";
+import * as _220 from \\"./core/commitment/v1/commitment\\";
+import * as _221 from \\"./core/connection/v1/connection\\";
+import * as _222 from \\"./core/connection/v1/genesis\\";
+import * as _223 from \\"./core/connection/v1/query\\";
+import * as _224 from \\"./core/connection/v1/tx\\";
+import * as _225 from \\"./core/port/v1/query\\";
+import * as _226 from \\"./core/types/v1/genesis\\";
+import * as _227 from \\"./lightclients/localhost/v1/localhost\\";
+import * as _228 from \\"./lightclients/solomachine/v1/solomachine\\";
+import * as _229 from \\"./lightclients/solomachine/v2/solomachine\\";
+import * as _230 from \\"./lightclients/tendermint/v1/tendermint\\";
 export namespace ibc {
   export namespace applications {
     export namespace transfer {
-      export const v1 = { ..._206,
-        ..._207,
+      export const v1 = { ..._207,
         ..._208,
-        ..._209
+        ..._209,
+        ..._210
       };
-      export const v2 = { ..._210
+      export const v2 = { ..._211
       };
     }
   }
   export namespace core {
     export namespace channel {
-      export const v1 = { ..._211,
-        ..._212,
+      export const v1 = { ..._212,
         ..._213,
-        ..._214
+        ..._214,
+        ..._215
       };
     }
     export namespace client {
-      export const v1 = { ..._215,
-        ..._216,
+      export const v1 = { ..._216,
         ..._217,
-        ..._218
+        ..._218,
+        ..._219
       };
     }
     export namespace commitment {
-      export const v1 = { ..._219
+      export const v1 = { ..._220
       };
     }
     export namespace connection {
-      export const v1 = { ..._220,
-        ..._221,
+      export const v1 = { ..._221,
         ..._222,
-        ..._223
+        ..._223,
+        ..._224
       };
     }
     export namespace port {
-      export const v1 = { ..._224
+      export const v1 = { ..._225
       };
     }
     export namespace types {
-      export const v1 = { ..._225
+      export const v1 = { ..._226
       };
     }
   }
   export namespace lightclients {
     export namespace localhost {
-      export const v1 = { ..._226
+      export const v1 = { ..._227
       };
     }
     export namespace solomachine {
-      export const v1 = { ..._227
+      export const v1 = { ..._228
       };
-      export const v2 = { ..._228
+      export const v2 = { ..._229
       };
     }
     export namespace tendermint {
-      export const v1 = { ..._229
+      export const v1 = { ..._230
       };
     }
   }
@@ -734,103 +739,103 @@ export const ics23 = { ..._53
   "osmosis": Object {
     "base": "osmosis",
     "bundle": "osmosis/bundle.ts",
-    "code": "import * as _230 from \\"./claim/v1beta1/claim\\";
-import * as _231 from \\"./claim/v1beta1/genesis\\";
-import * as _232 from \\"./claim/v1beta1/params\\";
-import * as _233 from \\"./claim/v1beta1/query\\";
-import * as _234 from \\"./epochs/genesis\\";
-import * as _235 from \\"./epochs/query\\";
-import * as _236 from \\"./gamm/pool-models/balancer/balancerPool\\";
-import * as _237 from \\"./gamm/pool-models/balancer/tx\\";
-import * as _238 from \\"./gamm/v1beta1/genesis\\";
-import * as _239 from \\"./gamm/v1beta1/query\\";
-import * as _240 from \\"./gamm/v1beta1/tx\\";
-import * as _241 from \\"./incentives/gauge\\";
-import * as _242 from \\"./incentives/genesis\\";
-import * as _243 from \\"./incentives/params\\";
-import * as _244 from \\"./incentives/query\\";
-import * as _245 from \\"./incentives/tx\\";
-import * as _246 from \\"./lockup/genesis\\";
-import * as _247 from \\"./lockup/lock\\";
-import * as _248 from \\"./lockup/query\\";
-import * as _249 from \\"./lockup/tx\\";
-import * as _250 from \\"./mint/v1beta1/genesis\\";
-import * as _251 from \\"./mint/v1beta1/mint\\";
-import * as _252 from \\"./mint/v1beta1/query\\";
-import * as _253 from \\"./pool-incentives/v1beta1/genesis\\";
-import * as _254 from \\"./pool-incentives/v1beta1/gov\\";
-import * as _255 from \\"./pool-incentives/v1beta1/incentives\\";
-import * as _256 from \\"./pool-incentives/v1beta1/query\\";
-import * as _257 from \\"./store/v1beta1/tree\\";
-import * as _258 from \\"./superfluid/genesis\\";
-import * as _259 from \\"./superfluid/params\\";
-import * as _260 from \\"./superfluid/query\\";
-import * as _261 from \\"./superfluid/superfluid\\";
-import * as _262 from \\"./superfluid/tx\\";
-import * as _263 from \\"./txfees/v1beta1/feetoken\\";
-import * as _264 from \\"./txfees/v1beta1/genesis\\";
-import * as _265 from \\"./txfees/v1beta1/gov\\";
-import * as _266 from \\"./txfees/v1beta1/query\\";
+    "code": "import * as _231 from \\"./claim/v1beta1/claim\\";
+import * as _232 from \\"./claim/v1beta1/genesis\\";
+import * as _233 from \\"./claim/v1beta1/params\\";
+import * as _234 from \\"./claim/v1beta1/query\\";
+import * as _235 from \\"./epochs/genesis\\";
+import * as _236 from \\"./epochs/query\\";
+import * as _237 from \\"./gamm/pool-models/balancer/balancerPool\\";
+import * as _238 from \\"./gamm/pool-models/balancer/tx\\";
+import * as _239 from \\"./gamm/v1beta1/genesis\\";
+import * as _240 from \\"./gamm/v1beta1/query\\";
+import * as _241 from \\"./gamm/v1beta1/tx\\";
+import * as _242 from \\"./incentives/gauge\\";
+import * as _243 from \\"./incentives/genesis\\";
+import * as _244 from \\"./incentives/params\\";
+import * as _245 from \\"./incentives/query\\";
+import * as _246 from \\"./incentives/tx\\";
+import * as _247 from \\"./lockup/genesis\\";
+import * as _248 from \\"./lockup/lock\\";
+import * as _249 from \\"./lockup/query\\";
+import * as _250 from \\"./lockup/tx\\";
+import * as _251 from \\"./mint/v1beta1/genesis\\";
+import * as _252 from \\"./mint/v1beta1/mint\\";
+import * as _253 from \\"./mint/v1beta1/query\\";
+import * as _254 from \\"./pool-incentives/v1beta1/genesis\\";
+import * as _255 from \\"./pool-incentives/v1beta1/gov\\";
+import * as _256 from \\"./pool-incentives/v1beta1/incentives\\";
+import * as _257 from \\"./pool-incentives/v1beta1/query\\";
+import * as _258 from \\"./store/v1beta1/tree\\";
+import * as _259 from \\"./superfluid/genesis\\";
+import * as _260 from \\"./superfluid/params\\";
+import * as _261 from \\"./superfluid/query\\";
+import * as _262 from \\"./superfluid/superfluid\\";
+import * as _263 from \\"./superfluid/tx\\";
+import * as _264 from \\"./txfees/v1beta1/feetoken\\";
+import * as _265 from \\"./txfees/v1beta1/genesis\\";
+import * as _266 from \\"./txfees/v1beta1/gov\\";
+import * as _267 from \\"./txfees/v1beta1/query\\";
 export namespace osmosis {
   export namespace claim {
-    export const v1beta1 = { ..._230,
-      ..._231,
+    export const v1beta1 = { ..._231,
       ..._232,
-      ..._233
+      ..._233,
+      ..._234
     };
   }
   export namespace epochs {
-    export const v1beta1 = { ..._234,
-      ..._235
+    export const v1beta1 = { ..._235,
+      ..._236
     };
   }
   export namespace gamm {
-    export const v1beta1 = { ..._236,
-      ..._237,
+    export const v1beta1 = { ..._237,
       ..._238,
       ..._239,
-      ..._240
+      ..._240,
+      ..._241
     };
   }
-  export const incentives = { ..._241,
-    ..._242,
+  export const incentives = { ..._242,
     ..._243,
     ..._244,
-    ..._245
+    ..._245,
+    ..._246
   };
-  export const lockup = { ..._246,
-    ..._247,
+  export const lockup = { ..._247,
     ..._248,
-    ..._249
+    ..._249,
+    ..._250
   };
   export namespace mint {
-    export const v1beta1 = { ..._250,
-      ..._251,
-      ..._252
+    export const v1beta1 = { ..._251,
+      ..._252,
+      ..._253
     };
   }
   export namespace poolincentives {
-    export const v1beta1 = { ..._253,
-      ..._254,
+    export const v1beta1 = { ..._254,
       ..._255,
-      ..._256
+      ..._256,
+      ..._257
     };
   }
   export namespace store {
-    export const v1beta1 = { ..._257
+    export const v1beta1 = { ..._258
     };
   }
-  export const superfluid = { ..._258,
-    ..._259,
+  export const superfluid = { ..._259,
     ..._260,
     ..._261,
-    ..._262
+    ..._262,
+    ..._263
   };
   export namespace txfees {
-    export const v1beta1 = { ..._263,
-      ..._264,
+    export const v1beta1 = { ..._264,
       ..._265,
-      ..._266
+      ..._266,
+      ..._267
     };
   }
 }",
@@ -838,31 +843,31 @@ export namespace osmosis {
   "secret": Object {
     "base": "secret",
     "bundle": "secret/bundle.ts",
-    "code": "import * as _267 from \\"./compute/v1beta1/genesis\\";
-import * as _268 from \\"./compute/v1beta1/msg\\";
-import * as _269 from \\"./compute/v1beta1/query\\";
-import * as _270 from \\"./compute/v1beta1/types\\";
-import * as _271 from \\"./registration/v1beta1/genesis\\";
-import * as _272 from \\"./registration/v1beta1/msg\\";
-import * as _273 from \\"./registration/v1beta1/query\\";
-import * as _274 from \\"./registration/v1beta1/types\\";
-import * as _275 from \\"./registration/v1beta1/remote_attestation/types\\";
+    "code": "import * as _268 from \\"./compute/v1beta1/genesis\\";
+import * as _269 from \\"./compute/v1beta1/msg\\";
+import * as _270 from \\"./compute/v1beta1/query\\";
+import * as _271 from \\"./compute/v1beta1/types\\";
+import * as _272 from \\"./registration/v1beta1/genesis\\";
+import * as _273 from \\"./registration/v1beta1/msg\\";
+import * as _274 from \\"./registration/v1beta1/query\\";
+import * as _275 from \\"./registration/v1beta1/types\\";
+import * as _276 from \\"./registration/v1beta1/remote_attestation/types\\";
 export namespace secret {
   export namespace compute {
-    export const v1beta1 = { ..._267,
-      ..._268,
+    export const v1beta1 = { ..._268,
       ..._269,
-      ..._270
+      ..._270,
+      ..._271
     };
   }
   export namespace registration {
-    export const v1beta1 = { ..._271,
-      ..._272,
+    export const v1beta1 = { ..._272,
       ..._273,
-      ..._274
+      ..._274,
+      ..._275
     };
     export namespace remote_attestation {
-      export const v1beta1 = { ..._275
+      export const v1beta1 = { ..._276
       };
     }
   }
@@ -871,36 +876,36 @@ export namespace secret {
   "tendermint": Object {
     "base": "tendermint",
     "bundle": "tendermint/bundle.ts",
-    "code": "import * as _276 from \\"./abci/types\\";
-import * as _277 from \\"./crypto/keys\\";
-import * as _278 from \\"./crypto/proof\\";
-import * as _279 from \\"./libs/bits/types\\";
-import * as _280 from \\"./p2p/types\\";
-import * as _281 from \\"./types/block\\";
-import * as _282 from \\"./types/evidence\\";
-import * as _283 from \\"./types/params\\";
-import * as _284 from \\"./types/types\\";
-import * as _285 from \\"./types/validator\\";
-import * as _286 from \\"./version/types\\";
+    "code": "import * as _277 from \\"./abci/types\\";
+import * as _278 from \\"./crypto/keys\\";
+import * as _279 from \\"./crypto/proof\\";
+import * as _280 from \\"./libs/bits/types\\";
+import * as _281 from \\"./p2p/types\\";
+import * as _282 from \\"./types/block\\";
+import * as _283 from \\"./types/evidence\\";
+import * as _284 from \\"./types/params\\";
+import * as _285 from \\"./types/types\\";
+import * as _286 from \\"./types/validator\\";
+import * as _287 from \\"./version/types\\";
 export namespace tendermint {
-  export const abci = { ..._276
+  export const abci = { ..._277
   };
-  export const crypto = { ..._277,
-    ..._278
+  export const crypto = { ..._278,
+    ..._279
   };
   export namespace libs {
-    export const bits = { ..._279
+    export const bits = { ..._280
     };
   }
-  export const p2p = { ..._280
+  export const p2p = { ..._281
   };
-  export const types = { ..._281,
-    ..._282,
+  export const types = { ..._282,
     ..._283,
     ..._284,
-    ..._285
+    ..._285,
+    ..._286
   };
-  export const version = { ..._286
+  export const version = { ..._287
   };
 }",
   },

@@ -1,27 +1,27 @@
-import * as _153 from "./applications/transfer/v1/genesis";
-import * as _154 from "./applications/transfer/v1/query";
-import * as _155 from "./applications/transfer/v1/transfer";
-import * as _156 from "./applications/transfer/v1/tx";
-import * as _157 from "./applications/transfer/v2/packet";
-import * as _158 from "./core/channel/v1/channel";
-import * as _159 from "./core/channel/v1/genesis";
-import * as _160 from "./core/channel/v1/query";
-import * as _161 from "./core/channel/v1/tx";
-import * as _162 from "./core/client/v1/client";
-import * as _163 from "./core/client/v1/genesis";
-import * as _164 from "./core/client/v1/query";
-import * as _165 from "./core/client/v1/tx";
-import * as _166 from "./core/commitment/v1/commitment";
-import * as _167 from "./core/connection/v1/connection";
-import * as _168 from "./core/connection/v1/genesis";
-import * as _169 from "./core/connection/v1/query";
-import * as _170 from "./core/connection/v1/tx";
-import * as _171 from "./core/port/v1/query";
-import * as _172 from "./core/types/v1/genesis";
-import * as _173 from "./lightclients/localhost/v1/localhost";
-import * as _174 from "./lightclients/solomachine/v1/solomachine";
-import * as _175 from "./lightclients/solomachine/v2/solomachine";
-import * as _176 from "./lightclients/tendermint/v1/tendermint";
+import * as _108 from "./applications/transfer/v1/genesis";
+import * as _109 from "./applications/transfer/v1/query";
+import * as _110 from "./applications/transfer/v1/transfer";
+import * as _111 from "./applications/transfer/v1/tx";
+import * as _112 from "./applications/transfer/v2/packet";
+import * as _113 from "./core/channel/v1/channel";
+import * as _114 from "./core/channel/v1/genesis";
+import * as _115 from "./core/channel/v1/query";
+import * as _116 from "./core/channel/v1/tx";
+import * as _117 from "./core/client/v1/client";
+import * as _118 from "./core/client/v1/genesis";
+import * as _119 from "./core/client/v1/query";
+import * as _120 from "./core/client/v1/tx";
+import * as _121 from "./core/commitment/v1/commitment";
+import * as _122 from "./core/connection/v1/connection";
+import * as _123 from "./core/connection/v1/genesis";
+import * as _124 from "./core/connection/v1/query";
+import * as _125 from "./core/connection/v1/tx";
+import * as _126 from "./core/port/v1/query";
+import * as _127 from "./core/types/v1/genesis";
+import * as _128 from "./lightclients/localhost/v1/localhost";
+import * as _129 from "./lightclients/solomachine/v1/solomachine";
+import * as _130 from "./lightclients/solomachine/v2/solomachine";
+import * as _131 from "./lightclients/tendermint/v1/tendermint";
 export declare namespace ibc {
     namespace applications {
         namespace transfer {
@@ -30,19 +30,19 @@ export declare namespace ibc {
                 load: (protoRegistry: import("@cosmjs/proto-signing").Registry) => void;
                 MessageComposer: {
                     encoded: {
-                        transfer(value: _156.MsgTransfer): {
+                        transfer(value: _111.MsgTransfer): {
                             type_url: string;
                             value: Uint8Array;
                         };
                     };
                     withTypeUrl: {
-                        transfer(value: _156.MsgTransfer): {
+                        transfer(value: _111.MsgTransfer): {
                             typeUrl: string;
-                            value: _156.MsgTransfer;
+                            value: _111.MsgTransfer;
                         };
                     };
                     toJSON: {
-                        transfer(value: _156.MsgTransfer): {
+                        transfer(value: _111.MsgTransfer): {
                             typeUrl: string;
                             value: unknown;
                         };
@@ -50,20 +50,20 @@ export declare namespace ibc {
                     fromJSON: {
                         transfer(value: any): {
                             typeUrl: string;
-                            value: _156.MsgTransfer;
+                            value: _111.MsgTransfer;
                         };
                     };
                     fromPartial: {
-                        transfer(value: _156.MsgTransfer): {
+                        transfer(value: _111.MsgTransfer): {
                             typeUrl: string;
-                            value: _156.MsgTransfer;
+                            value: _111.MsgTransfer;
                         };
                     };
                 };
                 AminoConverter: {
                     "/ibc.applications.transfer.v1.MsgTransfer": {
                         aminoType: string;
-                        toAmino: ({ sourcePort, sourceChannel, token, sender, receiver, timeoutHeight, timeoutTimestamp }: _156.MsgTransfer) => {
+                        toAmino: ({ sourcePort, sourceChannel, token, sender, receiver, timeoutHeight, timeoutTimestamp }: _111.MsgTransfer) => {
                             source_port: string;
                             source_channel: string;
                             token: {
@@ -92,14 +92,14 @@ export declare namespace ibc {
                                 revision_height: string;
                             };
                             timeout_timestamp: string;
-                        }) => _156.MsgTransfer;
+                        }) => _111.MsgTransfer;
                     };
                 };
                 MsgTransfer: {
-                    encode(message: _156.MsgTransfer, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _156.MsgTransfer;
-                    fromJSON(object: any): _156.MsgTransfer;
-                    toJSON(message: _156.MsgTransfer): unknown;
+                    encode(message: _111.MsgTransfer, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _111.MsgTransfer;
+                    fromJSON(object: any): _111.MsgTransfer;
+                    toJSON(message: _111.MsgTransfer): unknown;
                     fromPartial<I extends {
                         sourcePort?: string;
                         sourceChannel?: string;
@@ -132,59 +132,59 @@ export declare namespace ibc {
                         } & {
                             revisionNumber?: any;
                             revisionHeight?: any;
-                        } & Record<Exclude<keyof I["timeoutHeight"], keyof _162.Height>, never>;
+                        } & Record<Exclude<keyof I["timeoutHeight"], keyof _117.Height>, never>;
                         timeoutTimestamp?: any;
-                    } & Record<Exclude<keyof I, keyof _156.MsgTransfer>, never>>(object: I): _156.MsgTransfer;
+                    } & Record<Exclude<keyof I, keyof _111.MsgTransfer>, never>>(object: I): _111.MsgTransfer;
                 };
                 MsgTransferResponse: {
-                    encode(_: _156.MsgTransferResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _156.MsgTransferResponse;
-                    fromJSON(_: any): _156.MsgTransferResponse;
-                    toJSON(_: _156.MsgTransferResponse): unknown;
-                    fromPartial<I_1 extends {} & {} & Record<Exclude<keyof I_1, never>, never>>(_: I_1): _156.MsgTransferResponse;
+                    encode(_: _111.MsgTransferResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _111.MsgTransferResponse;
+                    fromJSON(_: any): _111.MsgTransferResponse;
+                    toJSON(_: _111.MsgTransferResponse): unknown;
+                    fromPartial<I_1 extends {} & {} & Record<Exclude<keyof I_1, never>, never>>(_: I_1): _111.MsgTransferResponse;
                 };
                 DenomTrace: {
-                    encode(message: _155.DenomTrace, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _155.DenomTrace;
-                    fromJSON(object: any): _155.DenomTrace;
-                    toJSON(message: _155.DenomTrace): unknown;
+                    encode(message: _110.DenomTrace, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _110.DenomTrace;
+                    fromJSON(object: any): _110.DenomTrace;
+                    toJSON(message: _110.DenomTrace): unknown;
                     fromPartial<I_2 extends {
                         path?: string;
                         baseDenom?: string;
                     } & {
                         path?: string;
                         baseDenom?: string;
-                    } & Record<Exclude<keyof I_2, keyof _155.DenomTrace>, never>>(object: I_2): _155.DenomTrace;
+                    } & Record<Exclude<keyof I_2, keyof _110.DenomTrace>, never>>(object: I_2): _110.DenomTrace;
                 };
                 Params: {
-                    encode(message: _155.Params, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _155.Params;
-                    fromJSON(object: any): _155.Params;
-                    toJSON(message: _155.Params): unknown;
+                    encode(message: _110.Params, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _110.Params;
+                    fromJSON(object: any): _110.Params;
+                    toJSON(message: _110.Params): unknown;
                     fromPartial<I_3 extends {
                         sendEnabled?: boolean;
                         receiveEnabled?: boolean;
                     } & {
                         sendEnabled?: boolean;
                         receiveEnabled?: boolean;
-                    } & Record<Exclude<keyof I_3, keyof _155.Params>, never>>(object: I_3): _155.Params;
+                    } & Record<Exclude<keyof I_3, keyof _110.Params>, never>>(object: I_3): _110.Params;
                 };
                 QueryDenomTraceRequest: {
-                    encode(message: _154.QueryDenomTraceRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _154.QueryDenomTraceRequest;
-                    fromJSON(object: any): _154.QueryDenomTraceRequest;
-                    toJSON(message: _154.QueryDenomTraceRequest): unknown;
+                    encode(message: _109.QueryDenomTraceRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _109.QueryDenomTraceRequest;
+                    fromJSON(object: any): _109.QueryDenomTraceRequest;
+                    toJSON(message: _109.QueryDenomTraceRequest): unknown;
                     fromPartial<I_4 extends {
                         hash?: string;
                     } & {
                         hash?: string;
-                    } & Record<Exclude<keyof I_4, "hash">, never>>(object: I_4): _154.QueryDenomTraceRequest;
+                    } & Record<Exclude<keyof I_4, "hash">, never>>(object: I_4): _109.QueryDenomTraceRequest;
                 };
                 QueryDenomTraceResponse: {
-                    encode(message: _154.QueryDenomTraceResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _154.QueryDenomTraceResponse;
-                    fromJSON(object: any): _154.QueryDenomTraceResponse;
-                    toJSON(message: _154.QueryDenomTraceResponse): unknown;
+                    encode(message: _109.QueryDenomTraceResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _109.QueryDenomTraceResponse;
+                    fromJSON(object: any): _109.QueryDenomTraceResponse;
+                    toJSON(message: _109.QueryDenomTraceResponse): unknown;
                     fromPartial<I_5 extends {
                         denomTrace?: {
                             path?: string;
@@ -197,14 +197,14 @@ export declare namespace ibc {
                         } & {
                             path?: string;
                             baseDenom?: string;
-                        } & Record<Exclude<keyof I_5["denomTrace"], keyof _155.DenomTrace>, never>;
-                    } & Record<Exclude<keyof I_5, "denomTrace">, never>>(object: I_5): _154.QueryDenomTraceResponse;
+                        } & Record<Exclude<keyof I_5["denomTrace"], keyof _110.DenomTrace>, never>;
+                    } & Record<Exclude<keyof I_5, "denomTrace">, never>>(object: I_5): _109.QueryDenomTraceResponse;
                 };
                 QueryDenomTracesRequest: {
-                    encode(message: _154.QueryDenomTracesRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _154.QueryDenomTracesRequest;
-                    fromJSON(object: any): _154.QueryDenomTracesRequest;
-                    toJSON(message: _154.QueryDenomTracesRequest): unknown;
+                    encode(message: _109.QueryDenomTracesRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _109.QueryDenomTracesRequest;
+                    fromJSON(object: any): _109.QueryDenomTracesRequest;
+                    toJSON(message: _109.QueryDenomTracesRequest): unknown;
                     fromPartial<I_6 extends {
                         pagination?: {
                             key?: Uint8Array;
@@ -227,13 +227,13 @@ export declare namespace ibc {
                             countTotal?: boolean;
                             reverse?: boolean;
                         } & Record<Exclude<keyof I_6["pagination"], keyof import("../cosmos/base/query/v1beta1/pagination").PageRequest>, never>;
-                    } & Record<Exclude<keyof I_6, "pagination">, never>>(object: I_6): _154.QueryDenomTracesRequest;
+                    } & Record<Exclude<keyof I_6, "pagination">, never>>(object: I_6): _109.QueryDenomTracesRequest;
                 };
                 QueryDenomTracesResponse: {
-                    encode(message: _154.QueryDenomTracesResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _154.QueryDenomTracesResponse;
-                    fromJSON(object: any): _154.QueryDenomTracesResponse;
-                    toJSON(message: _154.QueryDenomTracesResponse): unknown;
+                    encode(message: _109.QueryDenomTracesResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _109.QueryDenomTracesResponse;
+                    fromJSON(object: any): _109.QueryDenomTracesResponse;
+                    toJSON(message: _109.QueryDenomTracesResponse): unknown;
                     fromPartial<I_7 extends {
                         denomTraces?: {
                             path?: string;
@@ -253,7 +253,7 @@ export declare namespace ibc {
                         } & {
                             path?: string;
                             baseDenom?: string;
-                        } & Record<Exclude<keyof I_7["denomTraces"][number], keyof _155.DenomTrace>, never>)[] & Record<Exclude<keyof I_7["denomTraces"], keyof {
+                        } & Record<Exclude<keyof I_7["denomTraces"][number], keyof _110.DenomTrace>, never>)[] & Record<Exclude<keyof I_7["denomTraces"], keyof {
                             path?: string;
                             baseDenom?: string;
                         }[]>, never>;
@@ -264,20 +264,20 @@ export declare namespace ibc {
                             nextKey?: Uint8Array;
                             total?: any;
                         } & Record<Exclude<keyof I_7["pagination"], keyof import("../cosmos/base/query/v1beta1/pagination").PageResponse>, never>;
-                    } & Record<Exclude<keyof I_7, keyof _154.QueryDenomTracesResponse>, never>>(object: I_7): _154.QueryDenomTracesResponse;
+                    } & Record<Exclude<keyof I_7, keyof _109.QueryDenomTracesResponse>, never>>(object: I_7): _109.QueryDenomTracesResponse;
                 };
                 QueryParamsRequest: {
-                    encode(_: _154.QueryParamsRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _154.QueryParamsRequest;
-                    fromJSON(_: any): _154.QueryParamsRequest;
-                    toJSON(_: _154.QueryParamsRequest): unknown;
-                    fromPartial<I_8 extends {} & {} & Record<Exclude<keyof I_8, never>, never>>(_: I_8): _154.QueryParamsRequest;
+                    encode(_: _109.QueryParamsRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _109.QueryParamsRequest;
+                    fromJSON(_: any): _109.QueryParamsRequest;
+                    toJSON(_: _109.QueryParamsRequest): unknown;
+                    fromPartial<I_8 extends {} & {} & Record<Exclude<keyof I_8, never>, never>>(_: I_8): _109.QueryParamsRequest;
                 };
                 QueryParamsResponse: {
-                    encode(message: _154.QueryParamsResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _154.QueryParamsResponse;
-                    fromJSON(object: any): _154.QueryParamsResponse;
-                    toJSON(message: _154.QueryParamsResponse): unknown;
+                    encode(message: _109.QueryParamsResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _109.QueryParamsResponse;
+                    fromJSON(object: any): _109.QueryParamsResponse;
+                    toJSON(message: _109.QueryParamsResponse): unknown;
                     fromPartial<I_9 extends {
                         params?: {
                             sendEnabled?: boolean;
@@ -290,14 +290,14 @@ export declare namespace ibc {
                         } & {
                             sendEnabled?: boolean;
                             receiveEnabled?: boolean;
-                        } & Record<Exclude<keyof I_9["params"], keyof _155.Params>, never>;
-                    } & Record<Exclude<keyof I_9, "params">, never>>(object: I_9): _154.QueryParamsResponse;
+                        } & Record<Exclude<keyof I_9["params"], keyof _110.Params>, never>;
+                    } & Record<Exclude<keyof I_9, "params">, never>>(object: I_9): _109.QueryParamsResponse;
                 };
                 GenesisState: {
-                    encode(message: _153.GenesisState, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _153.GenesisState;
-                    fromJSON(object: any): _153.GenesisState;
-                    toJSON(message: _153.GenesisState): unknown;
+                    encode(message: _108.GenesisState, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _108.GenesisState;
+                    fromJSON(object: any): _108.GenesisState;
+                    toJSON(message: _108.GenesisState): unknown;
                     fromPartial<I_10 extends {
                         portId?: string;
                         denomTraces?: {
@@ -319,7 +319,7 @@ export declare namespace ibc {
                         } & {
                             path?: string;
                             baseDenom?: string;
-                        } & Record<Exclude<keyof I_10["denomTraces"][number], keyof _155.DenomTrace>, never>)[] & Record<Exclude<keyof I_10["denomTraces"], keyof {
+                        } & Record<Exclude<keyof I_10["denomTraces"][number], keyof _110.DenomTrace>, never>)[] & Record<Exclude<keyof I_10["denomTraces"], keyof {
                             path?: string;
                             baseDenom?: string;
                         }[]>, never>;
@@ -329,16 +329,16 @@ export declare namespace ibc {
                         } & {
                             sendEnabled?: boolean;
                             receiveEnabled?: boolean;
-                        } & Record<Exclude<keyof I_10["params"], keyof _155.Params>, never>;
-                    } & Record<Exclude<keyof I_10, keyof _153.GenesisState>, never>>(object: I_10): _153.GenesisState;
+                        } & Record<Exclude<keyof I_10["params"], keyof _110.Params>, never>;
+                    } & Record<Exclude<keyof I_10, keyof _108.GenesisState>, never>>(object: I_10): _108.GenesisState;
                 };
             };
             const v2: {
                 FungibleTokenPacketData: {
-                    encode(message: _157.FungibleTokenPacketData, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _157.FungibleTokenPacketData;
-                    fromJSON(object: any): _157.FungibleTokenPacketData;
-                    toJSON(message: _157.FungibleTokenPacketData): unknown;
+                    encode(message: _112.FungibleTokenPacketData, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _112.FungibleTokenPacketData;
+                    fromJSON(object: any): _112.FungibleTokenPacketData;
+                    toJSON(message: _112.FungibleTokenPacketData): unknown;
                     fromPartial<I extends {
                         denom?: string;
                         amount?: string;
@@ -349,7 +349,7 @@ export declare namespace ibc {
                         amount?: string;
                         sender?: string;
                         receiver?: string;
-                    } & Record<Exclude<keyof I, keyof _157.FungibleTokenPacketData>, never>>(object: I): _157.FungibleTokenPacketData;
+                    } & Record<Exclude<keyof I, keyof _112.FungibleTokenPacketData>, never>>(object: I): _112.FungibleTokenPacketData;
                 };
             };
         }
@@ -361,127 +361,127 @@ export declare namespace ibc {
                 load: (protoRegistry: import("@cosmjs/proto-signing").Registry) => void;
                 MessageComposer: {
                     encoded: {
-                        channelOpenInit(value: _161.MsgChannelOpenInit): {
+                        channelOpenInit(value: _116.MsgChannelOpenInit): {
                             type_url: string;
                             value: Uint8Array;
                         };
-                        channelOpenTry(value: _161.MsgChannelOpenTry): {
+                        channelOpenTry(value: _116.MsgChannelOpenTry): {
                             type_url: string;
                             value: Uint8Array;
                         };
-                        channelOpenAck(value: _161.MsgChannelOpenAck): {
+                        channelOpenAck(value: _116.MsgChannelOpenAck): {
                             type_url: string;
                             value: Uint8Array;
                         };
-                        channelOpenConfirm(value: _161.MsgChannelOpenConfirm): {
+                        channelOpenConfirm(value: _116.MsgChannelOpenConfirm): {
                             type_url: string;
                             value: Uint8Array;
                         };
-                        channelCloseInit(value: _161.MsgChannelCloseInit): {
+                        channelCloseInit(value: _116.MsgChannelCloseInit): {
                             type_url: string;
                             value: Uint8Array;
                         };
-                        channelCloseConfirm(value: _161.MsgChannelCloseConfirm): {
+                        channelCloseConfirm(value: _116.MsgChannelCloseConfirm): {
                             type_url: string;
                             value: Uint8Array;
                         };
-                        recvPacket(value: _161.MsgRecvPacket): {
+                        recvPacket(value: _116.MsgRecvPacket): {
                             type_url: string;
                             value: Uint8Array;
                         };
-                        timeout(value: _161.MsgTimeout): {
+                        timeout(value: _116.MsgTimeout): {
                             type_url: string;
                             value: Uint8Array;
                         };
-                        timeoutOnClose(value: _161.MsgTimeoutOnClose): {
+                        timeoutOnClose(value: _116.MsgTimeoutOnClose): {
                             type_url: string;
                             value: Uint8Array;
                         };
-                        acknowledgement(value: _161.MsgAcknowledgement): {
+                        acknowledgement(value: _116.MsgAcknowledgement): {
                             type_url: string;
                             value: Uint8Array;
                         };
                     };
                     withTypeUrl: {
-                        channelOpenInit(value: _161.MsgChannelOpenInit): {
+                        channelOpenInit(value: _116.MsgChannelOpenInit): {
                             typeUrl: string;
-                            value: _161.MsgChannelOpenInit;
+                            value: _116.MsgChannelOpenInit;
                         };
-                        channelOpenTry(value: _161.MsgChannelOpenTry): {
+                        channelOpenTry(value: _116.MsgChannelOpenTry): {
                             typeUrl: string;
-                            value: _161.MsgChannelOpenTry;
+                            value: _116.MsgChannelOpenTry;
                         };
-                        channelOpenAck(value: _161.MsgChannelOpenAck): {
+                        channelOpenAck(value: _116.MsgChannelOpenAck): {
                             typeUrl: string;
-                            value: _161.MsgChannelOpenAck;
+                            value: _116.MsgChannelOpenAck;
                         };
-                        channelOpenConfirm(value: _161.MsgChannelOpenConfirm): {
+                        channelOpenConfirm(value: _116.MsgChannelOpenConfirm): {
                             typeUrl: string;
-                            value: _161.MsgChannelOpenConfirm;
+                            value: _116.MsgChannelOpenConfirm;
                         };
-                        channelCloseInit(value: _161.MsgChannelCloseInit): {
+                        channelCloseInit(value: _116.MsgChannelCloseInit): {
                             typeUrl: string;
-                            value: _161.MsgChannelCloseInit;
+                            value: _116.MsgChannelCloseInit;
                         };
-                        channelCloseConfirm(value: _161.MsgChannelCloseConfirm): {
+                        channelCloseConfirm(value: _116.MsgChannelCloseConfirm): {
                             typeUrl: string;
-                            value: _161.MsgChannelCloseConfirm;
+                            value: _116.MsgChannelCloseConfirm;
                         };
-                        recvPacket(value: _161.MsgRecvPacket): {
+                        recvPacket(value: _116.MsgRecvPacket): {
                             typeUrl: string;
-                            value: _161.MsgRecvPacket;
+                            value: _116.MsgRecvPacket;
                         };
-                        timeout(value: _161.MsgTimeout): {
+                        timeout(value: _116.MsgTimeout): {
                             typeUrl: string;
-                            value: _161.MsgTimeout;
+                            value: _116.MsgTimeout;
                         };
-                        timeoutOnClose(value: _161.MsgTimeoutOnClose): {
+                        timeoutOnClose(value: _116.MsgTimeoutOnClose): {
                             typeUrl: string;
-                            value: _161.MsgTimeoutOnClose;
+                            value: _116.MsgTimeoutOnClose;
                         };
-                        acknowledgement(value: _161.MsgAcknowledgement): {
+                        acknowledgement(value: _116.MsgAcknowledgement): {
                             typeUrl: string;
-                            value: _161.MsgAcknowledgement;
+                            value: _116.MsgAcknowledgement;
                         };
                     };
                     toJSON: {
-                        channelOpenInit(value: _161.MsgChannelOpenInit): {
+                        channelOpenInit(value: _116.MsgChannelOpenInit): {
                             typeUrl: string;
                             value: unknown;
                         };
-                        channelOpenTry(value: _161.MsgChannelOpenTry): {
+                        channelOpenTry(value: _116.MsgChannelOpenTry): {
                             typeUrl: string;
                             value: unknown;
                         };
-                        channelOpenAck(value: _161.MsgChannelOpenAck): {
+                        channelOpenAck(value: _116.MsgChannelOpenAck): {
                             typeUrl: string;
                             value: unknown;
                         };
-                        channelOpenConfirm(value: _161.MsgChannelOpenConfirm): {
+                        channelOpenConfirm(value: _116.MsgChannelOpenConfirm): {
                             typeUrl: string;
                             value: unknown;
                         };
-                        channelCloseInit(value: _161.MsgChannelCloseInit): {
+                        channelCloseInit(value: _116.MsgChannelCloseInit): {
                             typeUrl: string;
                             value: unknown;
                         };
-                        channelCloseConfirm(value: _161.MsgChannelCloseConfirm): {
+                        channelCloseConfirm(value: _116.MsgChannelCloseConfirm): {
                             typeUrl: string;
                             value: unknown;
                         };
-                        recvPacket(value: _161.MsgRecvPacket): {
+                        recvPacket(value: _116.MsgRecvPacket): {
                             typeUrl: string;
                             value: unknown;
                         };
-                        timeout(value: _161.MsgTimeout): {
+                        timeout(value: _116.MsgTimeout): {
                             typeUrl: string;
                             value: unknown;
                         };
-                        timeoutOnClose(value: _161.MsgTimeoutOnClose): {
+                        timeoutOnClose(value: _116.MsgTimeoutOnClose): {
                             typeUrl: string;
                             value: unknown;
                         };
-                        acknowledgement(value: _161.MsgAcknowledgement): {
+                        acknowledgement(value: _116.MsgAcknowledgement): {
                             typeUrl: string;
                             value: unknown;
                         };
@@ -489,92 +489,92 @@ export declare namespace ibc {
                     fromJSON: {
                         channelOpenInit(value: any): {
                             typeUrl: string;
-                            value: _161.MsgChannelOpenInit;
+                            value: _116.MsgChannelOpenInit;
                         };
                         channelOpenTry(value: any): {
                             typeUrl: string;
-                            value: _161.MsgChannelOpenTry;
+                            value: _116.MsgChannelOpenTry;
                         };
                         channelOpenAck(value: any): {
                             typeUrl: string;
-                            value: _161.MsgChannelOpenAck;
+                            value: _116.MsgChannelOpenAck;
                         };
                         channelOpenConfirm(value: any): {
                             typeUrl: string;
-                            value: _161.MsgChannelOpenConfirm;
+                            value: _116.MsgChannelOpenConfirm;
                         };
                         channelCloseInit(value: any): {
                             typeUrl: string;
-                            value: _161.MsgChannelCloseInit;
+                            value: _116.MsgChannelCloseInit;
                         };
                         channelCloseConfirm(value: any): {
                             typeUrl: string;
-                            value: _161.MsgChannelCloseConfirm;
+                            value: _116.MsgChannelCloseConfirm;
                         };
                         recvPacket(value: any): {
                             typeUrl: string;
-                            value: _161.MsgRecvPacket;
+                            value: _116.MsgRecvPacket;
                         };
                         timeout(value: any): {
                             typeUrl: string;
-                            value: _161.MsgTimeout;
+                            value: _116.MsgTimeout;
                         };
                         timeoutOnClose(value: any): {
                             typeUrl: string;
-                            value: _161.MsgTimeoutOnClose;
+                            value: _116.MsgTimeoutOnClose;
                         };
                         acknowledgement(value: any): {
                             typeUrl: string;
-                            value: _161.MsgAcknowledgement;
+                            value: _116.MsgAcknowledgement;
                         };
                     };
                     fromPartial: {
-                        channelOpenInit(value: _161.MsgChannelOpenInit): {
+                        channelOpenInit(value: _116.MsgChannelOpenInit): {
                             typeUrl: string;
-                            value: _161.MsgChannelOpenInit;
+                            value: _116.MsgChannelOpenInit;
                         };
-                        channelOpenTry(value: _161.MsgChannelOpenTry): {
+                        channelOpenTry(value: _116.MsgChannelOpenTry): {
                             typeUrl: string;
-                            value: _161.MsgChannelOpenTry;
+                            value: _116.MsgChannelOpenTry;
                         };
-                        channelOpenAck(value: _161.MsgChannelOpenAck): {
+                        channelOpenAck(value: _116.MsgChannelOpenAck): {
                             typeUrl: string;
-                            value: _161.MsgChannelOpenAck;
+                            value: _116.MsgChannelOpenAck;
                         };
-                        channelOpenConfirm(value: _161.MsgChannelOpenConfirm): {
+                        channelOpenConfirm(value: _116.MsgChannelOpenConfirm): {
                             typeUrl: string;
-                            value: _161.MsgChannelOpenConfirm;
+                            value: _116.MsgChannelOpenConfirm;
                         };
-                        channelCloseInit(value: _161.MsgChannelCloseInit): {
+                        channelCloseInit(value: _116.MsgChannelCloseInit): {
                             typeUrl: string;
-                            value: _161.MsgChannelCloseInit;
+                            value: _116.MsgChannelCloseInit;
                         };
-                        channelCloseConfirm(value: _161.MsgChannelCloseConfirm): {
+                        channelCloseConfirm(value: _116.MsgChannelCloseConfirm): {
                             typeUrl: string;
-                            value: _161.MsgChannelCloseConfirm;
+                            value: _116.MsgChannelCloseConfirm;
                         };
-                        recvPacket(value: _161.MsgRecvPacket): {
+                        recvPacket(value: _116.MsgRecvPacket): {
                             typeUrl: string;
-                            value: _161.MsgRecvPacket;
+                            value: _116.MsgRecvPacket;
                         };
-                        timeout(value: _161.MsgTimeout): {
+                        timeout(value: _116.MsgTimeout): {
                             typeUrl: string;
-                            value: _161.MsgTimeout;
+                            value: _116.MsgTimeout;
                         };
-                        timeoutOnClose(value: _161.MsgTimeoutOnClose): {
+                        timeoutOnClose(value: _116.MsgTimeoutOnClose): {
                             typeUrl: string;
-                            value: _161.MsgTimeoutOnClose;
+                            value: _116.MsgTimeoutOnClose;
                         };
-                        acknowledgement(value: _161.MsgAcknowledgement): {
+                        acknowledgement(value: _116.MsgAcknowledgement): {
                             typeUrl: string;
-                            value: _161.MsgAcknowledgement;
+                            value: _116.MsgAcknowledgement;
                         };
                     };
                 };
                 AminoConverter: {
                     "/ibc.core.channel.v1.MsgChannelOpenInit": {
                         aminoType: string;
-                        toAmino: ({ portId, channel, signer }: _161.MsgChannelOpenInit) => {
+                        toAmino: ({ portId, channel, signer }: _116.MsgChannelOpenInit) => {
                             port_id: string;
                             channel: {
                                 state: number;
@@ -601,11 +601,11 @@ export declare namespace ibc {
                                 version: string;
                             };
                             signer: string;
-                        }) => _161.MsgChannelOpenInit;
+                        }) => _116.MsgChannelOpenInit;
                     };
                     "/ibc.core.channel.v1.MsgChannelOpenTry": {
                         aminoType: string;
-                        toAmino: ({ portId, previousChannelId, channel, counterpartyVersion, proofInit, proofHeight, signer }: _161.MsgChannelOpenTry) => {
+                        toAmino: ({ portId, previousChannelId, channel, counterpartyVersion, proofInit, proofHeight, signer }: _116.MsgChannelOpenTry) => {
                             port_id: string;
                             previous_channel_id: string;
                             channel: {
@@ -646,11 +646,11 @@ export declare namespace ibc {
                                 revision_height: string;
                             };
                             signer: string;
-                        }) => _161.MsgChannelOpenTry;
+                        }) => _116.MsgChannelOpenTry;
                     };
                     "/ibc.core.channel.v1.MsgChannelOpenAck": {
                         aminoType: string;
-                        toAmino: ({ portId, channelId, counterpartyChannelId, counterpartyVersion, proofTry, proofHeight, signer }: _161.MsgChannelOpenAck) => {
+                        toAmino: ({ portId, channelId, counterpartyChannelId, counterpartyVersion, proofTry, proofHeight, signer }: _116.MsgChannelOpenAck) => {
                             port_id: string;
                             channel_id: string;
                             counterparty_channel_id: string;
@@ -673,11 +673,11 @@ export declare namespace ibc {
                                 revision_height: string;
                             };
                             signer: string;
-                        }) => _161.MsgChannelOpenAck;
+                        }) => _116.MsgChannelOpenAck;
                     };
                     "/ibc.core.channel.v1.MsgChannelOpenConfirm": {
                         aminoType: string;
-                        toAmino: ({ portId, channelId, proofAck, proofHeight, signer }: _161.MsgChannelOpenConfirm) => {
+                        toAmino: ({ portId, channelId, proofAck, proofHeight, signer }: _116.MsgChannelOpenConfirm) => {
                             port_id: string;
                             channel_id: string;
                             proof_ack: Uint8Array;
@@ -696,11 +696,11 @@ export declare namespace ibc {
                                 revision_height: string;
                             };
                             signer: string;
-                        }) => _161.MsgChannelOpenConfirm;
+                        }) => _116.MsgChannelOpenConfirm;
                     };
                     "/ibc.core.channel.v1.MsgChannelCloseInit": {
                         aminoType: string;
-                        toAmino: ({ portId, channelId, signer }: _161.MsgChannelCloseInit) => {
+                        toAmino: ({ portId, channelId, signer }: _116.MsgChannelCloseInit) => {
                             port_id: string;
                             channel_id: string;
                             signer: string;
@@ -709,11 +709,11 @@ export declare namespace ibc {
                             port_id: string;
                             channel_id: string;
                             signer: string;
-                        }) => _161.MsgChannelCloseInit;
+                        }) => _116.MsgChannelCloseInit;
                     };
                     "/ibc.core.channel.v1.MsgChannelCloseConfirm": {
                         aminoType: string;
-                        toAmino: ({ portId, channelId, proofInit, proofHeight, signer }: _161.MsgChannelCloseConfirm) => {
+                        toAmino: ({ portId, channelId, proofInit, proofHeight, signer }: _116.MsgChannelCloseConfirm) => {
                             port_id: string;
                             channel_id: string;
                             proof_init: Uint8Array;
@@ -732,11 +732,11 @@ export declare namespace ibc {
                                 revision_height: string;
                             };
                             signer: string;
-                        }) => _161.MsgChannelCloseConfirm;
+                        }) => _116.MsgChannelCloseConfirm;
                     };
                     "/ibc.core.channel.v1.MsgRecvPacket": {
                         aminoType: string;
-                        toAmino: ({ packet, proofCommitment, proofHeight, signer }: _161.MsgRecvPacket) => {
+                        toAmino: ({ packet, proofCommitment, proofHeight, signer }: _116.MsgRecvPacket) => {
                             packet: {
                                 sequence: string;
                                 source_port: string;
@@ -777,11 +777,11 @@ export declare namespace ibc {
                                 revision_height: string;
                             };
                             signer: string;
-                        }) => _161.MsgRecvPacket;
+                        }) => _116.MsgRecvPacket;
                     };
                     "/ibc.core.channel.v1.MsgTimeout": {
                         aminoType: string;
-                        toAmino: ({ packet, proofUnreceived, proofHeight, nextSequenceRecv, signer }: _161.MsgTimeout) => {
+                        toAmino: ({ packet, proofUnreceived, proofHeight, nextSequenceRecv, signer }: _116.MsgTimeout) => {
                             packet: {
                                 sequence: string;
                                 source_port: string;
@@ -824,11 +824,11 @@ export declare namespace ibc {
                             };
                             next_sequence_recv: string;
                             signer: string;
-                        }) => _161.MsgTimeout;
+                        }) => _116.MsgTimeout;
                     };
                     "/ibc.core.channel.v1.MsgTimeoutOnClose": {
                         aminoType: string;
-                        toAmino: ({ packet, proofUnreceived, proofClose, proofHeight, nextSequenceRecv, signer }: _161.MsgTimeoutOnClose) => {
+                        toAmino: ({ packet, proofUnreceived, proofClose, proofHeight, nextSequenceRecv, signer }: _116.MsgTimeoutOnClose) => {
                             packet: {
                                 sequence: string;
                                 source_port: string;
@@ -873,11 +873,11 @@ export declare namespace ibc {
                             };
                             next_sequence_recv: string;
                             signer: string;
-                        }) => _161.MsgTimeoutOnClose;
+                        }) => _116.MsgTimeoutOnClose;
                     };
                     "/ibc.core.channel.v1.MsgAcknowledgement": {
                         aminoType: string;
-                        toAmino: ({ packet, acknowledgement, proofAcked, proofHeight, signer }: _161.MsgAcknowledgement) => {
+                        toAmino: ({ packet, acknowledgement, proofAcked, proofHeight, signer }: _116.MsgAcknowledgement) => {
                             packet: {
                                 sequence: string;
                                 source_port: string;
@@ -920,19 +920,19 @@ export declare namespace ibc {
                                 revision_height: string;
                             };
                             signer: string;
-                        }) => _161.MsgAcknowledgement;
+                        }) => _116.MsgAcknowledgement;
                     };
                 };
                 MsgChannelOpenInit: {
-                    encode(message: _161.MsgChannelOpenInit, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _161.MsgChannelOpenInit;
-                    fromJSON(object: any): _161.MsgChannelOpenInit;
-                    toJSON(message: _161.MsgChannelOpenInit): unknown;
+                    encode(message: _116.MsgChannelOpenInit, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _116.MsgChannelOpenInit;
+                    fromJSON(object: any): _116.MsgChannelOpenInit;
+                    toJSON(message: _116.MsgChannelOpenInit): unknown;
                     fromPartial<I extends {
                         portId?: string;
                         channel?: {
-                            state?: _158.State;
-                            ordering?: _158.Order;
+                            state?: _113.State;
+                            ordering?: _113.Order;
                             counterparty?: {
                                 portId?: string;
                                 channelId?: string;
@@ -944,8 +944,8 @@ export declare namespace ibc {
                     } & {
                         portId?: string;
                         channel?: {
-                            state?: _158.State;
-                            ordering?: _158.Order;
+                            state?: _113.State;
+                            ordering?: _113.Order;
                             counterparty?: {
                                 portId?: string;
                                 channelId?: string;
@@ -953,39 +953,39 @@ export declare namespace ibc {
                             connectionHops?: string[];
                             version?: string;
                         } & {
-                            state?: _158.State;
-                            ordering?: _158.Order;
+                            state?: _113.State;
+                            ordering?: _113.Order;
                             counterparty?: {
                                 portId?: string;
                                 channelId?: string;
                             } & {
                                 portId?: string;
                                 channelId?: string;
-                            } & Record<Exclude<keyof I["channel"]["counterparty"], keyof _158.Counterparty>, never>;
+                            } & Record<Exclude<keyof I["channel"]["counterparty"], keyof _113.Counterparty>, never>;
                             connectionHops?: string[] & string[] & Record<Exclude<keyof I["channel"]["connectionHops"], keyof string[]>, never>;
                             version?: string;
-                        } & Record<Exclude<keyof I["channel"], keyof _158.Channel>, never>;
+                        } & Record<Exclude<keyof I["channel"], keyof _113.Channel>, never>;
                         signer?: string;
-                    } & Record<Exclude<keyof I, keyof _161.MsgChannelOpenInit>, never>>(object: I): _161.MsgChannelOpenInit;
+                    } & Record<Exclude<keyof I, keyof _116.MsgChannelOpenInit>, never>>(object: I): _116.MsgChannelOpenInit;
                 };
                 MsgChannelOpenInitResponse: {
-                    encode(_: _161.MsgChannelOpenInitResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _161.MsgChannelOpenInitResponse;
-                    fromJSON(_: any): _161.MsgChannelOpenInitResponse;
-                    toJSON(_: _161.MsgChannelOpenInitResponse): unknown;
-                    fromPartial<I_1 extends {} & {} & Record<Exclude<keyof I_1, never>, never>>(_: I_1): _161.MsgChannelOpenInitResponse;
+                    encode(_: _116.MsgChannelOpenInitResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _116.MsgChannelOpenInitResponse;
+                    fromJSON(_: any): _116.MsgChannelOpenInitResponse;
+                    toJSON(_: _116.MsgChannelOpenInitResponse): unknown;
+                    fromPartial<I_1 extends {} & {} & Record<Exclude<keyof I_1, never>, never>>(_: I_1): _116.MsgChannelOpenInitResponse;
                 };
                 MsgChannelOpenTry: {
-                    encode(message: _161.MsgChannelOpenTry, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _161.MsgChannelOpenTry;
-                    fromJSON(object: any): _161.MsgChannelOpenTry;
-                    toJSON(message: _161.MsgChannelOpenTry): unknown;
+                    encode(message: _116.MsgChannelOpenTry, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _116.MsgChannelOpenTry;
+                    fromJSON(object: any): _116.MsgChannelOpenTry;
+                    toJSON(message: _116.MsgChannelOpenTry): unknown;
                     fromPartial<I_2 extends {
                         portId?: string;
                         previousChannelId?: string;
                         channel?: {
-                            state?: _158.State;
-                            ordering?: _158.Order;
+                            state?: _113.State;
+                            ordering?: _113.Order;
                             counterparty?: {
                                 portId?: string;
                                 channelId?: string;
@@ -1004,8 +1004,8 @@ export declare namespace ibc {
                         portId?: string;
                         previousChannelId?: string;
                         channel?: {
-                            state?: _158.State;
-                            ordering?: _158.Order;
+                            state?: _113.State;
+                            ordering?: _113.Order;
                             counterparty?: {
                                 portId?: string;
                                 channelId?: string;
@@ -1013,18 +1013,18 @@ export declare namespace ibc {
                             connectionHops?: string[];
                             version?: string;
                         } & {
-                            state?: _158.State;
-                            ordering?: _158.Order;
+                            state?: _113.State;
+                            ordering?: _113.Order;
                             counterparty?: {
                                 portId?: string;
                                 channelId?: string;
                             } & {
                                 portId?: string;
                                 channelId?: string;
-                            } & Record<Exclude<keyof I_2["channel"]["counterparty"], keyof _158.Counterparty>, never>;
+                            } & Record<Exclude<keyof I_2["channel"]["counterparty"], keyof _113.Counterparty>, never>;
                             connectionHops?: string[] & string[] & Record<Exclude<keyof I_2["channel"]["connectionHops"], keyof string[]>, never>;
                             version?: string;
-                        } & Record<Exclude<keyof I_2["channel"], keyof _158.Channel>, never>;
+                        } & Record<Exclude<keyof I_2["channel"], keyof _113.Channel>, never>;
                         counterpartyVersion?: string;
                         proofInit?: Uint8Array;
                         proofHeight?: {
@@ -1033,22 +1033,22 @@ export declare namespace ibc {
                         } & {
                             revisionNumber?: any;
                             revisionHeight?: any;
-                        } & Record<Exclude<keyof I_2["proofHeight"], keyof _162.Height>, never>;
+                        } & Record<Exclude<keyof I_2["proofHeight"], keyof _117.Height>, never>;
                         signer?: string;
-                    } & Record<Exclude<keyof I_2, keyof _161.MsgChannelOpenTry>, never>>(object: I_2): _161.MsgChannelOpenTry;
+                    } & Record<Exclude<keyof I_2, keyof _116.MsgChannelOpenTry>, never>>(object: I_2): _116.MsgChannelOpenTry;
                 };
                 MsgChannelOpenTryResponse: {
-                    encode(_: _161.MsgChannelOpenTryResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _161.MsgChannelOpenTryResponse;
-                    fromJSON(_: any): _161.MsgChannelOpenTryResponse;
-                    toJSON(_: _161.MsgChannelOpenTryResponse): unknown;
-                    fromPartial<I_3 extends {} & {} & Record<Exclude<keyof I_3, never>, never>>(_: I_3): _161.MsgChannelOpenTryResponse;
+                    encode(_: _116.MsgChannelOpenTryResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _116.MsgChannelOpenTryResponse;
+                    fromJSON(_: any): _116.MsgChannelOpenTryResponse;
+                    toJSON(_: _116.MsgChannelOpenTryResponse): unknown;
+                    fromPartial<I_3 extends {} & {} & Record<Exclude<keyof I_3, never>, never>>(_: I_3): _116.MsgChannelOpenTryResponse;
                 };
                 MsgChannelOpenAck: {
-                    encode(message: _161.MsgChannelOpenAck, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _161.MsgChannelOpenAck;
-                    fromJSON(object: any): _161.MsgChannelOpenAck;
-                    toJSON(message: _161.MsgChannelOpenAck): unknown;
+                    encode(message: _116.MsgChannelOpenAck, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _116.MsgChannelOpenAck;
+                    fromJSON(object: any): _116.MsgChannelOpenAck;
+                    toJSON(message: _116.MsgChannelOpenAck): unknown;
                     fromPartial<I_4 extends {
                         portId?: string;
                         channelId?: string;
@@ -1072,22 +1072,22 @@ export declare namespace ibc {
                         } & {
                             revisionNumber?: any;
                             revisionHeight?: any;
-                        } & Record<Exclude<keyof I_4["proofHeight"], keyof _162.Height>, never>;
+                        } & Record<Exclude<keyof I_4["proofHeight"], keyof _117.Height>, never>;
                         signer?: string;
-                    } & Record<Exclude<keyof I_4, keyof _161.MsgChannelOpenAck>, never>>(object: I_4): _161.MsgChannelOpenAck;
+                    } & Record<Exclude<keyof I_4, keyof _116.MsgChannelOpenAck>, never>>(object: I_4): _116.MsgChannelOpenAck;
                 };
                 MsgChannelOpenAckResponse: {
-                    encode(_: _161.MsgChannelOpenAckResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _161.MsgChannelOpenAckResponse;
-                    fromJSON(_: any): _161.MsgChannelOpenAckResponse;
-                    toJSON(_: _161.MsgChannelOpenAckResponse): unknown;
-                    fromPartial<I_5 extends {} & {} & Record<Exclude<keyof I_5, never>, never>>(_: I_5): _161.MsgChannelOpenAckResponse;
+                    encode(_: _116.MsgChannelOpenAckResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _116.MsgChannelOpenAckResponse;
+                    fromJSON(_: any): _116.MsgChannelOpenAckResponse;
+                    toJSON(_: _116.MsgChannelOpenAckResponse): unknown;
+                    fromPartial<I_5 extends {} & {} & Record<Exclude<keyof I_5, never>, never>>(_: I_5): _116.MsgChannelOpenAckResponse;
                 };
                 MsgChannelOpenConfirm: {
-                    encode(message: _161.MsgChannelOpenConfirm, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _161.MsgChannelOpenConfirm;
-                    fromJSON(object: any): _161.MsgChannelOpenConfirm;
-                    toJSON(message: _161.MsgChannelOpenConfirm): unknown;
+                    encode(message: _116.MsgChannelOpenConfirm, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _116.MsgChannelOpenConfirm;
+                    fromJSON(object: any): _116.MsgChannelOpenConfirm;
+                    toJSON(message: _116.MsgChannelOpenConfirm): unknown;
                     fromPartial<I_6 extends {
                         portId?: string;
                         channelId?: string;
@@ -1107,22 +1107,22 @@ export declare namespace ibc {
                         } & {
                             revisionNumber?: any;
                             revisionHeight?: any;
-                        } & Record<Exclude<keyof I_6["proofHeight"], keyof _162.Height>, never>;
+                        } & Record<Exclude<keyof I_6["proofHeight"], keyof _117.Height>, never>;
                         signer?: string;
-                    } & Record<Exclude<keyof I_6, keyof _161.MsgChannelOpenConfirm>, never>>(object: I_6): _161.MsgChannelOpenConfirm;
+                    } & Record<Exclude<keyof I_6, keyof _116.MsgChannelOpenConfirm>, never>>(object: I_6): _116.MsgChannelOpenConfirm;
                 };
                 MsgChannelOpenConfirmResponse: {
-                    encode(_: _161.MsgChannelOpenConfirmResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _161.MsgChannelOpenConfirmResponse;
-                    fromJSON(_: any): _161.MsgChannelOpenConfirmResponse;
-                    toJSON(_: _161.MsgChannelOpenConfirmResponse): unknown;
-                    fromPartial<I_7 extends {} & {} & Record<Exclude<keyof I_7, never>, never>>(_: I_7): _161.MsgChannelOpenConfirmResponse;
+                    encode(_: _116.MsgChannelOpenConfirmResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _116.MsgChannelOpenConfirmResponse;
+                    fromJSON(_: any): _116.MsgChannelOpenConfirmResponse;
+                    toJSON(_: _116.MsgChannelOpenConfirmResponse): unknown;
+                    fromPartial<I_7 extends {} & {} & Record<Exclude<keyof I_7, never>, never>>(_: I_7): _116.MsgChannelOpenConfirmResponse;
                 };
                 MsgChannelCloseInit: {
-                    encode(message: _161.MsgChannelCloseInit, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _161.MsgChannelCloseInit;
-                    fromJSON(object: any): _161.MsgChannelCloseInit;
-                    toJSON(message: _161.MsgChannelCloseInit): unknown;
+                    encode(message: _116.MsgChannelCloseInit, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _116.MsgChannelCloseInit;
+                    fromJSON(object: any): _116.MsgChannelCloseInit;
+                    toJSON(message: _116.MsgChannelCloseInit): unknown;
                     fromPartial<I_8 extends {
                         portId?: string;
                         channelId?: string;
@@ -1131,20 +1131,20 @@ export declare namespace ibc {
                         portId?: string;
                         channelId?: string;
                         signer?: string;
-                    } & Record<Exclude<keyof I_8, keyof _161.MsgChannelCloseInit>, never>>(object: I_8): _161.MsgChannelCloseInit;
+                    } & Record<Exclude<keyof I_8, keyof _116.MsgChannelCloseInit>, never>>(object: I_8): _116.MsgChannelCloseInit;
                 };
                 MsgChannelCloseInitResponse: {
-                    encode(_: _161.MsgChannelCloseInitResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _161.MsgChannelCloseInitResponse;
-                    fromJSON(_: any): _161.MsgChannelCloseInitResponse;
-                    toJSON(_: _161.MsgChannelCloseInitResponse): unknown;
-                    fromPartial<I_9 extends {} & {} & Record<Exclude<keyof I_9, never>, never>>(_: I_9): _161.MsgChannelCloseInitResponse;
+                    encode(_: _116.MsgChannelCloseInitResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _116.MsgChannelCloseInitResponse;
+                    fromJSON(_: any): _116.MsgChannelCloseInitResponse;
+                    toJSON(_: _116.MsgChannelCloseInitResponse): unknown;
+                    fromPartial<I_9 extends {} & {} & Record<Exclude<keyof I_9, never>, never>>(_: I_9): _116.MsgChannelCloseInitResponse;
                 };
                 MsgChannelCloseConfirm: {
-                    encode(message: _161.MsgChannelCloseConfirm, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _161.MsgChannelCloseConfirm;
-                    fromJSON(object: any): _161.MsgChannelCloseConfirm;
-                    toJSON(message: _161.MsgChannelCloseConfirm): unknown;
+                    encode(message: _116.MsgChannelCloseConfirm, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _116.MsgChannelCloseConfirm;
+                    fromJSON(object: any): _116.MsgChannelCloseConfirm;
+                    toJSON(message: _116.MsgChannelCloseConfirm): unknown;
                     fromPartial<I_10 extends {
                         portId?: string;
                         channelId?: string;
@@ -1164,22 +1164,22 @@ export declare namespace ibc {
                         } & {
                             revisionNumber?: any;
                             revisionHeight?: any;
-                        } & Record<Exclude<keyof I_10["proofHeight"], keyof _162.Height>, never>;
+                        } & Record<Exclude<keyof I_10["proofHeight"], keyof _117.Height>, never>;
                         signer?: string;
-                    } & Record<Exclude<keyof I_10, keyof _161.MsgChannelCloseConfirm>, never>>(object: I_10): _161.MsgChannelCloseConfirm;
+                    } & Record<Exclude<keyof I_10, keyof _116.MsgChannelCloseConfirm>, never>>(object: I_10): _116.MsgChannelCloseConfirm;
                 };
                 MsgChannelCloseConfirmResponse: {
-                    encode(_: _161.MsgChannelCloseConfirmResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _161.MsgChannelCloseConfirmResponse;
-                    fromJSON(_: any): _161.MsgChannelCloseConfirmResponse;
-                    toJSON(_: _161.MsgChannelCloseConfirmResponse): unknown;
-                    fromPartial<I_11 extends {} & {} & Record<Exclude<keyof I_11, never>, never>>(_: I_11): _161.MsgChannelCloseConfirmResponse;
+                    encode(_: _116.MsgChannelCloseConfirmResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _116.MsgChannelCloseConfirmResponse;
+                    fromJSON(_: any): _116.MsgChannelCloseConfirmResponse;
+                    toJSON(_: _116.MsgChannelCloseConfirmResponse): unknown;
+                    fromPartial<I_11 extends {} & {} & Record<Exclude<keyof I_11, never>, never>>(_: I_11): _116.MsgChannelCloseConfirmResponse;
                 };
                 MsgRecvPacket: {
-                    encode(message: _161.MsgRecvPacket, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _161.MsgRecvPacket;
-                    fromJSON(object: any): _161.MsgRecvPacket;
-                    toJSON(message: _161.MsgRecvPacket): unknown;
+                    encode(message: _116.MsgRecvPacket, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _116.MsgRecvPacket;
+                    fromJSON(object: any): _116.MsgRecvPacket;
+                    toJSON(message: _116.MsgRecvPacket): unknown;
                     fromPartial<I_12 extends {
                         packet?: {
                             sequence?: any;
@@ -1226,9 +1226,9 @@ export declare namespace ibc {
                             } & {
                                 revisionNumber?: any;
                                 revisionHeight?: any;
-                            } & Record<Exclude<keyof I_12["packet"]["timeoutHeight"], keyof _162.Height>, never>;
+                            } & Record<Exclude<keyof I_12["packet"]["timeoutHeight"], keyof _117.Height>, never>;
                             timeoutTimestamp?: any;
-                        } & Record<Exclude<keyof I_12["packet"], keyof _158.Packet>, never>;
+                        } & Record<Exclude<keyof I_12["packet"], keyof _113.Packet>, never>;
                         proofCommitment?: Uint8Array;
                         proofHeight?: {
                             revisionNumber?: any;
@@ -1236,22 +1236,22 @@ export declare namespace ibc {
                         } & {
                             revisionNumber?: any;
                             revisionHeight?: any;
-                        } & Record<Exclude<keyof I_12["proofHeight"], keyof _162.Height>, never>;
+                        } & Record<Exclude<keyof I_12["proofHeight"], keyof _117.Height>, never>;
                         signer?: string;
-                    } & Record<Exclude<keyof I_12, keyof _161.MsgRecvPacket>, never>>(object: I_12): _161.MsgRecvPacket;
+                    } & Record<Exclude<keyof I_12, keyof _116.MsgRecvPacket>, never>>(object: I_12): _116.MsgRecvPacket;
                 };
                 MsgRecvPacketResponse: {
-                    encode(_: _161.MsgRecvPacketResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _161.MsgRecvPacketResponse;
-                    fromJSON(_: any): _161.MsgRecvPacketResponse;
-                    toJSON(_: _161.MsgRecvPacketResponse): unknown;
-                    fromPartial<I_13 extends {} & {} & Record<Exclude<keyof I_13, never>, never>>(_: I_13): _161.MsgRecvPacketResponse;
+                    encode(_: _116.MsgRecvPacketResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _116.MsgRecvPacketResponse;
+                    fromJSON(_: any): _116.MsgRecvPacketResponse;
+                    toJSON(_: _116.MsgRecvPacketResponse): unknown;
+                    fromPartial<I_13 extends {} & {} & Record<Exclude<keyof I_13, never>, never>>(_: I_13): _116.MsgRecvPacketResponse;
                 };
                 MsgTimeout: {
-                    encode(message: _161.MsgTimeout, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _161.MsgTimeout;
-                    fromJSON(object: any): _161.MsgTimeout;
-                    toJSON(message: _161.MsgTimeout): unknown;
+                    encode(message: _116.MsgTimeout, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _116.MsgTimeout;
+                    fromJSON(object: any): _116.MsgTimeout;
+                    toJSON(message: _116.MsgTimeout): unknown;
                     fromPartial<I_14 extends {
                         packet?: {
                             sequence?: any;
@@ -1299,9 +1299,9 @@ export declare namespace ibc {
                             } & {
                                 revisionNumber?: any;
                                 revisionHeight?: any;
-                            } & Record<Exclude<keyof I_14["packet"]["timeoutHeight"], keyof _162.Height>, never>;
+                            } & Record<Exclude<keyof I_14["packet"]["timeoutHeight"], keyof _117.Height>, never>;
                             timeoutTimestamp?: any;
-                        } & Record<Exclude<keyof I_14["packet"], keyof _158.Packet>, never>;
+                        } & Record<Exclude<keyof I_14["packet"], keyof _113.Packet>, never>;
                         proofUnreceived?: Uint8Array;
                         proofHeight?: {
                             revisionNumber?: any;
@@ -1309,23 +1309,23 @@ export declare namespace ibc {
                         } & {
                             revisionNumber?: any;
                             revisionHeight?: any;
-                        } & Record<Exclude<keyof I_14["proofHeight"], keyof _162.Height>, never>;
+                        } & Record<Exclude<keyof I_14["proofHeight"], keyof _117.Height>, never>;
                         nextSequenceRecv?: any;
                         signer?: string;
-                    } & Record<Exclude<keyof I_14, keyof _161.MsgTimeout>, never>>(object: I_14): _161.MsgTimeout;
+                    } & Record<Exclude<keyof I_14, keyof _116.MsgTimeout>, never>>(object: I_14): _116.MsgTimeout;
                 };
                 MsgTimeoutResponse: {
-                    encode(_: _161.MsgTimeoutResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _161.MsgTimeoutResponse;
-                    fromJSON(_: any): _161.MsgTimeoutResponse;
-                    toJSON(_: _161.MsgTimeoutResponse): unknown;
-                    fromPartial<I_15 extends {} & {} & Record<Exclude<keyof I_15, never>, never>>(_: I_15): _161.MsgTimeoutResponse;
+                    encode(_: _116.MsgTimeoutResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _116.MsgTimeoutResponse;
+                    fromJSON(_: any): _116.MsgTimeoutResponse;
+                    toJSON(_: _116.MsgTimeoutResponse): unknown;
+                    fromPartial<I_15 extends {} & {} & Record<Exclude<keyof I_15, never>, never>>(_: I_15): _116.MsgTimeoutResponse;
                 };
                 MsgTimeoutOnClose: {
-                    encode(message: _161.MsgTimeoutOnClose, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _161.MsgTimeoutOnClose;
-                    fromJSON(object: any): _161.MsgTimeoutOnClose;
-                    toJSON(message: _161.MsgTimeoutOnClose): unknown;
+                    encode(message: _116.MsgTimeoutOnClose, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _116.MsgTimeoutOnClose;
+                    fromJSON(object: any): _116.MsgTimeoutOnClose;
+                    toJSON(message: _116.MsgTimeoutOnClose): unknown;
                     fromPartial<I_16 extends {
                         packet?: {
                             sequence?: any;
@@ -1374,9 +1374,9 @@ export declare namespace ibc {
                             } & {
                                 revisionNumber?: any;
                                 revisionHeight?: any;
-                            } & Record<Exclude<keyof I_16["packet"]["timeoutHeight"], keyof _162.Height>, never>;
+                            } & Record<Exclude<keyof I_16["packet"]["timeoutHeight"], keyof _117.Height>, never>;
                             timeoutTimestamp?: any;
-                        } & Record<Exclude<keyof I_16["packet"], keyof _158.Packet>, never>;
+                        } & Record<Exclude<keyof I_16["packet"], keyof _113.Packet>, never>;
                         proofUnreceived?: Uint8Array;
                         proofClose?: Uint8Array;
                         proofHeight?: {
@@ -1385,23 +1385,23 @@ export declare namespace ibc {
                         } & {
                             revisionNumber?: any;
                             revisionHeight?: any;
-                        } & Record<Exclude<keyof I_16["proofHeight"], keyof _162.Height>, never>;
+                        } & Record<Exclude<keyof I_16["proofHeight"], keyof _117.Height>, never>;
                         nextSequenceRecv?: any;
                         signer?: string;
-                    } & Record<Exclude<keyof I_16, keyof _161.MsgTimeoutOnClose>, never>>(object: I_16): _161.MsgTimeoutOnClose;
+                    } & Record<Exclude<keyof I_16, keyof _116.MsgTimeoutOnClose>, never>>(object: I_16): _116.MsgTimeoutOnClose;
                 };
                 MsgTimeoutOnCloseResponse: {
-                    encode(_: _161.MsgTimeoutOnCloseResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _161.MsgTimeoutOnCloseResponse;
-                    fromJSON(_: any): _161.MsgTimeoutOnCloseResponse;
-                    toJSON(_: _161.MsgTimeoutOnCloseResponse): unknown;
-                    fromPartial<I_17 extends {} & {} & Record<Exclude<keyof I_17, never>, never>>(_: I_17): _161.MsgTimeoutOnCloseResponse;
+                    encode(_: _116.MsgTimeoutOnCloseResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _116.MsgTimeoutOnCloseResponse;
+                    fromJSON(_: any): _116.MsgTimeoutOnCloseResponse;
+                    toJSON(_: _116.MsgTimeoutOnCloseResponse): unknown;
+                    fromPartial<I_17 extends {} & {} & Record<Exclude<keyof I_17, never>, never>>(_: I_17): _116.MsgTimeoutOnCloseResponse;
                 };
                 MsgAcknowledgement: {
-                    encode(message: _161.MsgAcknowledgement, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _161.MsgAcknowledgement;
-                    fromJSON(object: any): _161.MsgAcknowledgement;
-                    toJSON(message: _161.MsgAcknowledgement): unknown;
+                    encode(message: _116.MsgAcknowledgement, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _116.MsgAcknowledgement;
+                    fromJSON(object: any): _116.MsgAcknowledgement;
+                    toJSON(message: _116.MsgAcknowledgement): unknown;
                     fromPartial<I_18 extends {
                         packet?: {
                             sequence?: any;
@@ -1449,9 +1449,9 @@ export declare namespace ibc {
                             } & {
                                 revisionNumber?: any;
                                 revisionHeight?: any;
-                            } & Record<Exclude<keyof I_18["packet"]["timeoutHeight"], keyof _162.Height>, never>;
+                            } & Record<Exclude<keyof I_18["packet"]["timeoutHeight"], keyof _117.Height>, never>;
                             timeoutTimestamp?: any;
-                        } & Record<Exclude<keyof I_18["packet"], keyof _158.Packet>, never>;
+                        } & Record<Exclude<keyof I_18["packet"], keyof _113.Packet>, never>;
                         acknowledgement?: Uint8Array;
                         proofAcked?: Uint8Array;
                         proofHeight?: {
@@ -1460,39 +1460,39 @@ export declare namespace ibc {
                         } & {
                             revisionNumber?: any;
                             revisionHeight?: any;
-                        } & Record<Exclude<keyof I_18["proofHeight"], keyof _162.Height>, never>;
+                        } & Record<Exclude<keyof I_18["proofHeight"], keyof _117.Height>, never>;
                         signer?: string;
-                    } & Record<Exclude<keyof I_18, keyof _161.MsgAcknowledgement>, never>>(object: I_18): _161.MsgAcknowledgement;
+                    } & Record<Exclude<keyof I_18, keyof _116.MsgAcknowledgement>, never>>(object: I_18): _116.MsgAcknowledgement;
                 };
                 MsgAcknowledgementResponse: {
-                    encode(_: _161.MsgAcknowledgementResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _161.MsgAcknowledgementResponse;
-                    fromJSON(_: any): _161.MsgAcknowledgementResponse;
-                    toJSON(_: _161.MsgAcknowledgementResponse): unknown;
-                    fromPartial<I_19 extends {} & {} & Record<Exclude<keyof I_19, never>, never>>(_: I_19): _161.MsgAcknowledgementResponse;
+                    encode(_: _116.MsgAcknowledgementResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _116.MsgAcknowledgementResponse;
+                    fromJSON(_: any): _116.MsgAcknowledgementResponse;
+                    toJSON(_: _116.MsgAcknowledgementResponse): unknown;
+                    fromPartial<I_19 extends {} & {} & Record<Exclude<keyof I_19, never>, never>>(_: I_19): _116.MsgAcknowledgementResponse;
                 };
                 QueryChannelRequest: {
-                    encode(message: _160.QueryChannelRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _160.QueryChannelRequest;
-                    fromJSON(object: any): _160.QueryChannelRequest;
-                    toJSON(message: _160.QueryChannelRequest): unknown;
+                    encode(message: _115.QueryChannelRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _115.QueryChannelRequest;
+                    fromJSON(object: any): _115.QueryChannelRequest;
+                    toJSON(message: _115.QueryChannelRequest): unknown;
                     fromPartial<I_20 extends {
                         portId?: string;
                         channelId?: string;
                     } & {
                         portId?: string;
                         channelId?: string;
-                    } & Record<Exclude<keyof I_20, keyof _160.QueryChannelRequest>, never>>(object: I_20): _160.QueryChannelRequest;
+                    } & Record<Exclude<keyof I_20, keyof _115.QueryChannelRequest>, never>>(object: I_20): _115.QueryChannelRequest;
                 };
                 QueryChannelResponse: {
-                    encode(message: _160.QueryChannelResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _160.QueryChannelResponse;
-                    fromJSON(object: any): _160.QueryChannelResponse;
-                    toJSON(message: _160.QueryChannelResponse): unknown;
+                    encode(message: _115.QueryChannelResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _115.QueryChannelResponse;
+                    fromJSON(object: any): _115.QueryChannelResponse;
+                    toJSON(message: _115.QueryChannelResponse): unknown;
                     fromPartial<I_21 extends {
                         channel?: {
-                            state?: _158.State;
-                            ordering?: _158.Order;
+                            state?: _113.State;
+                            ordering?: _113.Order;
                             counterparty?: {
                                 portId?: string;
                                 channelId?: string;
@@ -1507,8 +1507,8 @@ export declare namespace ibc {
                         };
                     } & {
                         channel?: {
-                            state?: _158.State;
-                            ordering?: _158.Order;
+                            state?: _113.State;
+                            ordering?: _113.Order;
                             counterparty?: {
                                 portId?: string;
                                 channelId?: string;
@@ -1516,18 +1516,18 @@ export declare namespace ibc {
                             connectionHops?: string[];
                             version?: string;
                         } & {
-                            state?: _158.State;
-                            ordering?: _158.Order;
+                            state?: _113.State;
+                            ordering?: _113.Order;
                             counterparty?: {
                                 portId?: string;
                                 channelId?: string;
                             } & {
                                 portId?: string;
                                 channelId?: string;
-                            } & Record<Exclude<keyof I_21["channel"]["counterparty"], keyof _158.Counterparty>, never>;
+                            } & Record<Exclude<keyof I_21["channel"]["counterparty"], keyof _113.Counterparty>, never>;
                             connectionHops?: string[] & string[] & Record<Exclude<keyof I_21["channel"]["connectionHops"], keyof string[]>, never>;
                             version?: string;
-                        } & Record<Exclude<keyof I_21["channel"], keyof _158.Channel>, never>;
+                        } & Record<Exclude<keyof I_21["channel"], keyof _113.Channel>, never>;
                         proof?: Uint8Array;
                         proofHeight?: {
                             revisionNumber?: any;
@@ -1535,14 +1535,14 @@ export declare namespace ibc {
                         } & {
                             revisionNumber?: any;
                             revisionHeight?: any;
-                        } & Record<Exclude<keyof I_21["proofHeight"], keyof _162.Height>, never>;
-                    } & Record<Exclude<keyof I_21, keyof _160.QueryChannelResponse>, never>>(object: I_21): _160.QueryChannelResponse;
+                        } & Record<Exclude<keyof I_21["proofHeight"], keyof _117.Height>, never>;
+                    } & Record<Exclude<keyof I_21, keyof _115.QueryChannelResponse>, never>>(object: I_21): _115.QueryChannelResponse;
                 };
                 QueryChannelsRequest: {
-                    encode(message: _160.QueryChannelsRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _160.QueryChannelsRequest;
-                    fromJSON(object: any): _160.QueryChannelsRequest;
-                    toJSON(message: _160.QueryChannelsRequest): unknown;
+                    encode(message: _115.QueryChannelsRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _115.QueryChannelsRequest;
+                    fromJSON(object: any): _115.QueryChannelsRequest;
+                    toJSON(message: _115.QueryChannelsRequest): unknown;
                     fromPartial<I_22 extends {
                         pagination?: {
                             key?: Uint8Array;
@@ -1565,17 +1565,17 @@ export declare namespace ibc {
                             countTotal?: boolean;
                             reverse?: boolean;
                         } & Record<Exclude<keyof I_22["pagination"], keyof import("../cosmos/base/query/v1beta1/pagination").PageRequest>, never>;
-                    } & Record<Exclude<keyof I_22, "pagination">, never>>(object: I_22): _160.QueryChannelsRequest;
+                    } & Record<Exclude<keyof I_22, "pagination">, never>>(object: I_22): _115.QueryChannelsRequest;
                 };
                 QueryChannelsResponse: {
-                    encode(message: _160.QueryChannelsResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _160.QueryChannelsResponse;
-                    fromJSON(object: any): _160.QueryChannelsResponse;
-                    toJSON(message: _160.QueryChannelsResponse): unknown;
+                    encode(message: _115.QueryChannelsResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _115.QueryChannelsResponse;
+                    fromJSON(object: any): _115.QueryChannelsResponse;
+                    toJSON(message: _115.QueryChannelsResponse): unknown;
                     fromPartial<I_23 extends {
                         channels?: {
-                            state?: _158.State;
-                            ordering?: _158.Order;
+                            state?: _113.State;
+                            ordering?: _113.Order;
                             counterparty?: {
                                 portId?: string;
                                 channelId?: string;
@@ -1595,8 +1595,8 @@ export declare namespace ibc {
                         };
                     } & {
                         channels?: {
-                            state?: _158.State;
-                            ordering?: _158.Order;
+                            state?: _113.State;
+                            ordering?: _113.Order;
                             counterparty?: {
                                 portId?: string;
                                 channelId?: string;
@@ -1606,8 +1606,8 @@ export declare namespace ibc {
                             portId?: string;
                             channelId?: string;
                         }[] & ({
-                            state?: _158.State;
-                            ordering?: _158.Order;
+                            state?: _113.State;
+                            ordering?: _113.Order;
                             counterparty?: {
                                 portId?: string;
                                 channelId?: string;
@@ -1617,22 +1617,22 @@ export declare namespace ibc {
                             portId?: string;
                             channelId?: string;
                         } & {
-                            state?: _158.State;
-                            ordering?: _158.Order;
+                            state?: _113.State;
+                            ordering?: _113.Order;
                             counterparty?: {
                                 portId?: string;
                                 channelId?: string;
                             } & {
                                 portId?: string;
                                 channelId?: string;
-                            } & Record<Exclude<keyof I_23["channels"][number]["counterparty"], keyof _158.Counterparty>, never>;
+                            } & Record<Exclude<keyof I_23["channels"][number]["counterparty"], keyof _113.Counterparty>, never>;
                             connectionHops?: string[] & string[] & Record<Exclude<keyof I_23["channels"][number]["connectionHops"], keyof string[]>, never>;
                             version?: string;
                             portId?: string;
                             channelId?: string;
-                        } & Record<Exclude<keyof I_23["channels"][number], keyof _158.IdentifiedChannel>, never>)[] & Record<Exclude<keyof I_23["channels"], keyof {
-                            state?: _158.State;
-                            ordering?: _158.Order;
+                        } & Record<Exclude<keyof I_23["channels"][number], keyof _113.IdentifiedChannel>, never>)[] & Record<Exclude<keyof I_23["channels"], keyof {
+                            state?: _113.State;
+                            ordering?: _113.Order;
                             counterparty?: {
                                 portId?: string;
                                 channelId?: string;
@@ -1655,14 +1655,14 @@ export declare namespace ibc {
                         } & {
                             revisionNumber?: any;
                             revisionHeight?: any;
-                        } & Record<Exclude<keyof I_23["height"], keyof _162.Height>, never>;
-                    } & Record<Exclude<keyof I_23, keyof _160.QueryChannelsResponse>, never>>(object: I_23): _160.QueryChannelsResponse;
+                        } & Record<Exclude<keyof I_23["height"], keyof _117.Height>, never>;
+                    } & Record<Exclude<keyof I_23, keyof _115.QueryChannelsResponse>, never>>(object: I_23): _115.QueryChannelsResponse;
                 };
                 QueryConnectionChannelsRequest: {
-                    encode(message: _160.QueryConnectionChannelsRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _160.QueryConnectionChannelsRequest;
-                    fromJSON(object: any): _160.QueryConnectionChannelsRequest;
-                    toJSON(message: _160.QueryConnectionChannelsRequest): unknown;
+                    encode(message: _115.QueryConnectionChannelsRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _115.QueryConnectionChannelsRequest;
+                    fromJSON(object: any): _115.QueryConnectionChannelsRequest;
+                    toJSON(message: _115.QueryConnectionChannelsRequest): unknown;
                     fromPartial<I_24 extends {
                         connection?: string;
                         pagination?: {
@@ -1687,17 +1687,17 @@ export declare namespace ibc {
                             countTotal?: boolean;
                             reverse?: boolean;
                         } & Record<Exclude<keyof I_24["pagination"], keyof import("../cosmos/base/query/v1beta1/pagination").PageRequest>, never>;
-                    } & Record<Exclude<keyof I_24, keyof _160.QueryConnectionChannelsRequest>, never>>(object: I_24): _160.QueryConnectionChannelsRequest;
+                    } & Record<Exclude<keyof I_24, keyof _115.QueryConnectionChannelsRequest>, never>>(object: I_24): _115.QueryConnectionChannelsRequest;
                 };
                 QueryConnectionChannelsResponse: {
-                    encode(message: _160.QueryConnectionChannelsResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _160.QueryConnectionChannelsResponse;
-                    fromJSON(object: any): _160.QueryConnectionChannelsResponse;
-                    toJSON(message: _160.QueryConnectionChannelsResponse): unknown;
+                    encode(message: _115.QueryConnectionChannelsResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _115.QueryConnectionChannelsResponse;
+                    fromJSON(object: any): _115.QueryConnectionChannelsResponse;
+                    toJSON(message: _115.QueryConnectionChannelsResponse): unknown;
                     fromPartial<I_25 extends {
                         channels?: {
-                            state?: _158.State;
-                            ordering?: _158.Order;
+                            state?: _113.State;
+                            ordering?: _113.Order;
                             counterparty?: {
                                 portId?: string;
                                 channelId?: string;
@@ -1717,8 +1717,8 @@ export declare namespace ibc {
                         };
                     } & {
                         channels?: {
-                            state?: _158.State;
-                            ordering?: _158.Order;
+                            state?: _113.State;
+                            ordering?: _113.Order;
                             counterparty?: {
                                 portId?: string;
                                 channelId?: string;
@@ -1728,8 +1728,8 @@ export declare namespace ibc {
                             portId?: string;
                             channelId?: string;
                         }[] & ({
-                            state?: _158.State;
-                            ordering?: _158.Order;
+                            state?: _113.State;
+                            ordering?: _113.Order;
                             counterparty?: {
                                 portId?: string;
                                 channelId?: string;
@@ -1739,22 +1739,22 @@ export declare namespace ibc {
                             portId?: string;
                             channelId?: string;
                         } & {
-                            state?: _158.State;
-                            ordering?: _158.Order;
+                            state?: _113.State;
+                            ordering?: _113.Order;
                             counterparty?: {
                                 portId?: string;
                                 channelId?: string;
                             } & {
                                 portId?: string;
                                 channelId?: string;
-                            } & Record<Exclude<keyof I_25["channels"][number]["counterparty"], keyof _158.Counterparty>, never>;
+                            } & Record<Exclude<keyof I_25["channels"][number]["counterparty"], keyof _113.Counterparty>, never>;
                             connectionHops?: string[] & string[] & Record<Exclude<keyof I_25["channels"][number]["connectionHops"], keyof string[]>, never>;
                             version?: string;
                             portId?: string;
                             channelId?: string;
-                        } & Record<Exclude<keyof I_25["channels"][number], keyof _158.IdentifiedChannel>, never>)[] & Record<Exclude<keyof I_25["channels"], keyof {
-                            state?: _158.State;
-                            ordering?: _158.Order;
+                        } & Record<Exclude<keyof I_25["channels"][number], keyof _113.IdentifiedChannel>, never>)[] & Record<Exclude<keyof I_25["channels"], keyof {
+                            state?: _113.State;
+                            ordering?: _113.Order;
                             counterparty?: {
                                 portId?: string;
                                 channelId?: string;
@@ -1777,27 +1777,27 @@ export declare namespace ibc {
                         } & {
                             revisionNumber?: any;
                             revisionHeight?: any;
-                        } & Record<Exclude<keyof I_25["height"], keyof _162.Height>, never>;
-                    } & Record<Exclude<keyof I_25, keyof _160.QueryConnectionChannelsResponse>, never>>(object: I_25): _160.QueryConnectionChannelsResponse;
+                        } & Record<Exclude<keyof I_25["height"], keyof _117.Height>, never>;
+                    } & Record<Exclude<keyof I_25, keyof _115.QueryConnectionChannelsResponse>, never>>(object: I_25): _115.QueryConnectionChannelsResponse;
                 };
                 QueryChannelClientStateRequest: {
-                    encode(message: _160.QueryChannelClientStateRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _160.QueryChannelClientStateRequest;
-                    fromJSON(object: any): _160.QueryChannelClientStateRequest;
-                    toJSON(message: _160.QueryChannelClientStateRequest): unknown;
+                    encode(message: _115.QueryChannelClientStateRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _115.QueryChannelClientStateRequest;
+                    fromJSON(object: any): _115.QueryChannelClientStateRequest;
+                    toJSON(message: _115.QueryChannelClientStateRequest): unknown;
                     fromPartial<I_26 extends {
                         portId?: string;
                         channelId?: string;
                     } & {
                         portId?: string;
                         channelId?: string;
-                    } & Record<Exclude<keyof I_26, keyof _160.QueryChannelClientStateRequest>, never>>(object: I_26): _160.QueryChannelClientStateRequest;
+                    } & Record<Exclude<keyof I_26, keyof _115.QueryChannelClientStateRequest>, never>>(object: I_26): _115.QueryChannelClientStateRequest;
                 };
                 QueryChannelClientStateResponse: {
-                    encode(message: _160.QueryChannelClientStateResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _160.QueryChannelClientStateResponse;
-                    fromJSON(object: any): _160.QueryChannelClientStateResponse;
-                    toJSON(message: _160.QueryChannelClientStateResponse): unknown;
+                    encode(message: _115.QueryChannelClientStateResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _115.QueryChannelClientStateResponse;
+                    fromJSON(object: any): _115.QueryChannelClientStateResponse;
+                    toJSON(message: _115.QueryChannelClientStateResponse): unknown;
                     fromPartial<I_27 extends {
                         identifiedClientState?: {
                             clientId?: string;
@@ -1827,7 +1827,7 @@ export declare namespace ibc {
                                 typeUrl?: string;
                                 value?: Uint8Array;
                             } & Record<Exclude<keyof I_27["identifiedClientState"]["clientState"], keyof import("../google/protobuf/any").Any>, never>;
-                        } & Record<Exclude<keyof I_27["identifiedClientState"], keyof _162.IdentifiedClientState>, never>;
+                        } & Record<Exclude<keyof I_27["identifiedClientState"], keyof _117.IdentifiedClientState>, never>;
                         proof?: Uint8Array;
                         proofHeight?: {
                             revisionNumber?: any;
@@ -1835,14 +1835,14 @@ export declare namespace ibc {
                         } & {
                             revisionNumber?: any;
                             revisionHeight?: any;
-                        } & Record<Exclude<keyof I_27["proofHeight"], keyof _162.Height>, never>;
-                    } & Record<Exclude<keyof I_27, keyof _160.QueryChannelClientStateResponse>, never>>(object: I_27): _160.QueryChannelClientStateResponse;
+                        } & Record<Exclude<keyof I_27["proofHeight"], keyof _117.Height>, never>;
+                    } & Record<Exclude<keyof I_27, keyof _115.QueryChannelClientStateResponse>, never>>(object: I_27): _115.QueryChannelClientStateResponse;
                 };
                 QueryChannelConsensusStateRequest: {
-                    encode(message: _160.QueryChannelConsensusStateRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _160.QueryChannelConsensusStateRequest;
-                    fromJSON(object: any): _160.QueryChannelConsensusStateRequest;
-                    toJSON(message: _160.QueryChannelConsensusStateRequest): unknown;
+                    encode(message: _115.QueryChannelConsensusStateRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _115.QueryChannelConsensusStateRequest;
+                    fromJSON(object: any): _115.QueryChannelConsensusStateRequest;
+                    toJSON(message: _115.QueryChannelConsensusStateRequest): unknown;
                     fromPartial<I_28 extends {
                         portId?: string;
                         channelId?: string;
@@ -1853,13 +1853,13 @@ export declare namespace ibc {
                         channelId?: string;
                         revisionNumber?: any;
                         revisionHeight?: any;
-                    } & Record<Exclude<keyof I_28, keyof _160.QueryChannelConsensusStateRequest>, never>>(object: I_28): _160.QueryChannelConsensusStateRequest;
+                    } & Record<Exclude<keyof I_28, keyof _115.QueryChannelConsensusStateRequest>, never>>(object: I_28): _115.QueryChannelConsensusStateRequest;
                 };
                 QueryChannelConsensusStateResponse: {
-                    encode(message: _160.QueryChannelConsensusStateResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _160.QueryChannelConsensusStateResponse;
-                    fromJSON(object: any): _160.QueryChannelConsensusStateResponse;
-                    toJSON(message: _160.QueryChannelConsensusStateResponse): unknown;
+                    encode(message: _115.QueryChannelConsensusStateResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _115.QueryChannelConsensusStateResponse;
+                    fromJSON(object: any): _115.QueryChannelConsensusStateResponse;
+                    toJSON(message: _115.QueryChannelConsensusStateResponse): unknown;
                     fromPartial<I_29 extends {
                         consensusState?: {
                             typeUrl?: string;
@@ -1887,14 +1887,14 @@ export declare namespace ibc {
                         } & {
                             revisionNumber?: any;
                             revisionHeight?: any;
-                        } & Record<Exclude<keyof I_29["proofHeight"], keyof _162.Height>, never>;
-                    } & Record<Exclude<keyof I_29, keyof _160.QueryChannelConsensusStateResponse>, never>>(object: I_29): _160.QueryChannelConsensusStateResponse;
+                        } & Record<Exclude<keyof I_29["proofHeight"], keyof _117.Height>, never>;
+                    } & Record<Exclude<keyof I_29, keyof _115.QueryChannelConsensusStateResponse>, never>>(object: I_29): _115.QueryChannelConsensusStateResponse;
                 };
                 QueryPacketCommitmentRequest: {
-                    encode(message: _160.QueryPacketCommitmentRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _160.QueryPacketCommitmentRequest;
-                    fromJSON(object: any): _160.QueryPacketCommitmentRequest;
-                    toJSON(message: _160.QueryPacketCommitmentRequest): unknown;
+                    encode(message: _115.QueryPacketCommitmentRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _115.QueryPacketCommitmentRequest;
+                    fromJSON(object: any): _115.QueryPacketCommitmentRequest;
+                    toJSON(message: _115.QueryPacketCommitmentRequest): unknown;
                     fromPartial<I_30 extends {
                         portId?: string;
                         channelId?: string;
@@ -1903,13 +1903,13 @@ export declare namespace ibc {
                         portId?: string;
                         channelId?: string;
                         sequence?: any;
-                    } & Record<Exclude<keyof I_30, keyof _160.QueryPacketCommitmentRequest>, never>>(object: I_30): _160.QueryPacketCommitmentRequest;
+                    } & Record<Exclude<keyof I_30, keyof _115.QueryPacketCommitmentRequest>, never>>(object: I_30): _115.QueryPacketCommitmentRequest;
                 };
                 QueryPacketCommitmentResponse: {
-                    encode(message: _160.QueryPacketCommitmentResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _160.QueryPacketCommitmentResponse;
-                    fromJSON(object: any): _160.QueryPacketCommitmentResponse;
-                    toJSON(message: _160.QueryPacketCommitmentResponse): unknown;
+                    encode(message: _115.QueryPacketCommitmentResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _115.QueryPacketCommitmentResponse;
+                    fromJSON(object: any): _115.QueryPacketCommitmentResponse;
+                    toJSON(message: _115.QueryPacketCommitmentResponse): unknown;
                     fromPartial<I_31 extends {
                         commitment?: Uint8Array;
                         proof?: Uint8Array;
@@ -1926,14 +1926,14 @@ export declare namespace ibc {
                         } & {
                             revisionNumber?: any;
                             revisionHeight?: any;
-                        } & Record<Exclude<keyof I_31["proofHeight"], keyof _162.Height>, never>;
-                    } & Record<Exclude<keyof I_31, keyof _160.QueryPacketCommitmentResponse>, never>>(object: I_31): _160.QueryPacketCommitmentResponse;
+                        } & Record<Exclude<keyof I_31["proofHeight"], keyof _117.Height>, never>;
+                    } & Record<Exclude<keyof I_31, keyof _115.QueryPacketCommitmentResponse>, never>>(object: I_31): _115.QueryPacketCommitmentResponse;
                 };
                 QueryPacketCommitmentsRequest: {
-                    encode(message: _160.QueryPacketCommitmentsRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _160.QueryPacketCommitmentsRequest;
-                    fromJSON(object: any): _160.QueryPacketCommitmentsRequest;
-                    toJSON(message: _160.QueryPacketCommitmentsRequest): unknown;
+                    encode(message: _115.QueryPacketCommitmentsRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _115.QueryPacketCommitmentsRequest;
+                    fromJSON(object: any): _115.QueryPacketCommitmentsRequest;
+                    toJSON(message: _115.QueryPacketCommitmentsRequest): unknown;
                     fromPartial<I_32 extends {
                         portId?: string;
                         channelId?: string;
@@ -1960,13 +1960,13 @@ export declare namespace ibc {
                             countTotal?: boolean;
                             reverse?: boolean;
                         } & Record<Exclude<keyof I_32["pagination"], keyof import("../cosmos/base/query/v1beta1/pagination").PageRequest>, never>;
-                    } & Record<Exclude<keyof I_32, keyof _160.QueryPacketCommitmentsRequest>, never>>(object: I_32): _160.QueryPacketCommitmentsRequest;
+                    } & Record<Exclude<keyof I_32, keyof _115.QueryPacketCommitmentsRequest>, never>>(object: I_32): _115.QueryPacketCommitmentsRequest;
                 };
                 QueryPacketCommitmentsResponse: {
-                    encode(message: _160.QueryPacketCommitmentsResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _160.QueryPacketCommitmentsResponse;
-                    fromJSON(object: any): _160.QueryPacketCommitmentsResponse;
-                    toJSON(message: _160.QueryPacketCommitmentsResponse): unknown;
+                    encode(message: _115.QueryPacketCommitmentsResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _115.QueryPacketCommitmentsResponse;
+                    fromJSON(object: any): _115.QueryPacketCommitmentsResponse;
+                    toJSON(message: _115.QueryPacketCommitmentsResponse): unknown;
                     fromPartial<I_33 extends {
                         commitments?: {
                             portId?: string;
@@ -1998,7 +1998,7 @@ export declare namespace ibc {
                             channelId?: string;
                             sequence?: any;
                             data?: Uint8Array;
-                        } & Record<Exclude<keyof I_33["commitments"][number], keyof _158.PacketState>, never>)[] & Record<Exclude<keyof I_33["commitments"], keyof {
+                        } & Record<Exclude<keyof I_33["commitments"][number], keyof _113.PacketState>, never>)[] & Record<Exclude<keyof I_33["commitments"], keyof {
                             portId?: string;
                             channelId?: string;
                             sequence?: any;
@@ -2017,14 +2017,14 @@ export declare namespace ibc {
                         } & {
                             revisionNumber?: any;
                             revisionHeight?: any;
-                        } & Record<Exclude<keyof I_33["height"], keyof _162.Height>, never>;
-                    } & Record<Exclude<keyof I_33, keyof _160.QueryPacketCommitmentsResponse>, never>>(object: I_33): _160.QueryPacketCommitmentsResponse;
+                        } & Record<Exclude<keyof I_33["height"], keyof _117.Height>, never>;
+                    } & Record<Exclude<keyof I_33, keyof _115.QueryPacketCommitmentsResponse>, never>>(object: I_33): _115.QueryPacketCommitmentsResponse;
                 };
                 QueryPacketReceiptRequest: {
-                    encode(message: _160.QueryPacketReceiptRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _160.QueryPacketReceiptRequest;
-                    fromJSON(object: any): _160.QueryPacketReceiptRequest;
-                    toJSON(message: _160.QueryPacketReceiptRequest): unknown;
+                    encode(message: _115.QueryPacketReceiptRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _115.QueryPacketReceiptRequest;
+                    fromJSON(object: any): _115.QueryPacketReceiptRequest;
+                    toJSON(message: _115.QueryPacketReceiptRequest): unknown;
                     fromPartial<I_34 extends {
                         portId?: string;
                         channelId?: string;
@@ -2033,13 +2033,13 @@ export declare namespace ibc {
                         portId?: string;
                         channelId?: string;
                         sequence?: any;
-                    } & Record<Exclude<keyof I_34, keyof _160.QueryPacketReceiptRequest>, never>>(object: I_34): _160.QueryPacketReceiptRequest;
+                    } & Record<Exclude<keyof I_34, keyof _115.QueryPacketReceiptRequest>, never>>(object: I_34): _115.QueryPacketReceiptRequest;
                 };
                 QueryPacketReceiptResponse: {
-                    encode(message: _160.QueryPacketReceiptResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _160.QueryPacketReceiptResponse;
-                    fromJSON(object: any): _160.QueryPacketReceiptResponse;
-                    toJSON(message: _160.QueryPacketReceiptResponse): unknown;
+                    encode(message: _115.QueryPacketReceiptResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _115.QueryPacketReceiptResponse;
+                    fromJSON(object: any): _115.QueryPacketReceiptResponse;
+                    toJSON(message: _115.QueryPacketReceiptResponse): unknown;
                     fromPartial<I_35 extends {
                         received?: boolean;
                         proof?: Uint8Array;
@@ -2056,14 +2056,14 @@ export declare namespace ibc {
                         } & {
                             revisionNumber?: any;
                             revisionHeight?: any;
-                        } & Record<Exclude<keyof I_35["proofHeight"], keyof _162.Height>, never>;
-                    } & Record<Exclude<keyof I_35, keyof _160.QueryPacketReceiptResponse>, never>>(object: I_35): _160.QueryPacketReceiptResponse;
+                        } & Record<Exclude<keyof I_35["proofHeight"], keyof _117.Height>, never>;
+                    } & Record<Exclude<keyof I_35, keyof _115.QueryPacketReceiptResponse>, never>>(object: I_35): _115.QueryPacketReceiptResponse;
                 };
                 QueryPacketAcknowledgementRequest: {
-                    encode(message: _160.QueryPacketAcknowledgementRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _160.QueryPacketAcknowledgementRequest;
-                    fromJSON(object: any): _160.QueryPacketAcknowledgementRequest;
-                    toJSON(message: _160.QueryPacketAcknowledgementRequest): unknown;
+                    encode(message: _115.QueryPacketAcknowledgementRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _115.QueryPacketAcknowledgementRequest;
+                    fromJSON(object: any): _115.QueryPacketAcknowledgementRequest;
+                    toJSON(message: _115.QueryPacketAcknowledgementRequest): unknown;
                     fromPartial<I_36 extends {
                         portId?: string;
                         channelId?: string;
@@ -2072,13 +2072,13 @@ export declare namespace ibc {
                         portId?: string;
                         channelId?: string;
                         sequence?: any;
-                    } & Record<Exclude<keyof I_36, keyof _160.QueryPacketAcknowledgementRequest>, never>>(object: I_36): _160.QueryPacketAcknowledgementRequest;
+                    } & Record<Exclude<keyof I_36, keyof _115.QueryPacketAcknowledgementRequest>, never>>(object: I_36): _115.QueryPacketAcknowledgementRequest;
                 };
                 QueryPacketAcknowledgementResponse: {
-                    encode(message: _160.QueryPacketAcknowledgementResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _160.QueryPacketAcknowledgementResponse;
-                    fromJSON(object: any): _160.QueryPacketAcknowledgementResponse;
-                    toJSON(message: _160.QueryPacketAcknowledgementResponse): unknown;
+                    encode(message: _115.QueryPacketAcknowledgementResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _115.QueryPacketAcknowledgementResponse;
+                    fromJSON(object: any): _115.QueryPacketAcknowledgementResponse;
+                    toJSON(message: _115.QueryPacketAcknowledgementResponse): unknown;
                     fromPartial<I_37 extends {
                         acknowledgement?: Uint8Array;
                         proof?: Uint8Array;
@@ -2095,14 +2095,14 @@ export declare namespace ibc {
                         } & {
                             revisionNumber?: any;
                             revisionHeight?: any;
-                        } & Record<Exclude<keyof I_37["proofHeight"], keyof _162.Height>, never>;
-                    } & Record<Exclude<keyof I_37, keyof _160.QueryPacketAcknowledgementResponse>, never>>(object: I_37): _160.QueryPacketAcknowledgementResponse;
+                        } & Record<Exclude<keyof I_37["proofHeight"], keyof _117.Height>, never>;
+                    } & Record<Exclude<keyof I_37, keyof _115.QueryPacketAcknowledgementResponse>, never>>(object: I_37): _115.QueryPacketAcknowledgementResponse;
                 };
                 QueryPacketAcknowledgementsRequest: {
-                    encode(message: _160.QueryPacketAcknowledgementsRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _160.QueryPacketAcknowledgementsRequest;
-                    fromJSON(object: any): _160.QueryPacketAcknowledgementsRequest;
-                    toJSON(message: _160.QueryPacketAcknowledgementsRequest): unknown;
+                    encode(message: _115.QueryPacketAcknowledgementsRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _115.QueryPacketAcknowledgementsRequest;
+                    fromJSON(object: any): _115.QueryPacketAcknowledgementsRequest;
+                    toJSON(message: _115.QueryPacketAcknowledgementsRequest): unknown;
                     fromPartial<I_38 extends {
                         portId?: string;
                         channelId?: string;
@@ -2131,13 +2131,13 @@ export declare namespace ibc {
                             reverse?: boolean;
                         } & Record<Exclude<keyof I_38["pagination"], keyof import("../cosmos/base/query/v1beta1/pagination").PageRequest>, never>;
                         packetCommitmentSequences?: any[] & any[] & Record<Exclude<keyof I_38["packetCommitmentSequences"], keyof any[]>, never>;
-                    } & Record<Exclude<keyof I_38, keyof _160.QueryPacketAcknowledgementsRequest>, never>>(object: I_38): _160.QueryPacketAcknowledgementsRequest;
+                    } & Record<Exclude<keyof I_38, keyof _115.QueryPacketAcknowledgementsRequest>, never>>(object: I_38): _115.QueryPacketAcknowledgementsRequest;
                 };
                 QueryPacketAcknowledgementsResponse: {
-                    encode(message: _160.QueryPacketAcknowledgementsResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _160.QueryPacketAcknowledgementsResponse;
-                    fromJSON(object: any): _160.QueryPacketAcknowledgementsResponse;
-                    toJSON(message: _160.QueryPacketAcknowledgementsResponse): unknown;
+                    encode(message: _115.QueryPacketAcknowledgementsResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _115.QueryPacketAcknowledgementsResponse;
+                    fromJSON(object: any): _115.QueryPacketAcknowledgementsResponse;
+                    toJSON(message: _115.QueryPacketAcknowledgementsResponse): unknown;
                     fromPartial<I_39 extends {
                         acknowledgements?: {
                             portId?: string;
@@ -2169,7 +2169,7 @@ export declare namespace ibc {
                             channelId?: string;
                             sequence?: any;
                             data?: Uint8Array;
-                        } & Record<Exclude<keyof I_39["acknowledgements"][number], keyof _158.PacketState>, never>)[] & Record<Exclude<keyof I_39["acknowledgements"], keyof {
+                        } & Record<Exclude<keyof I_39["acknowledgements"][number], keyof _113.PacketState>, never>)[] & Record<Exclude<keyof I_39["acknowledgements"], keyof {
                             portId?: string;
                             channelId?: string;
                             sequence?: any;
@@ -2188,14 +2188,14 @@ export declare namespace ibc {
                         } & {
                             revisionNumber?: any;
                             revisionHeight?: any;
-                        } & Record<Exclude<keyof I_39["height"], keyof _162.Height>, never>;
-                    } & Record<Exclude<keyof I_39, keyof _160.QueryPacketAcknowledgementsResponse>, never>>(object: I_39): _160.QueryPacketAcknowledgementsResponse;
+                        } & Record<Exclude<keyof I_39["height"], keyof _117.Height>, never>;
+                    } & Record<Exclude<keyof I_39, keyof _115.QueryPacketAcknowledgementsResponse>, never>>(object: I_39): _115.QueryPacketAcknowledgementsResponse;
                 };
                 QueryUnreceivedPacketsRequest: {
-                    encode(message: _160.QueryUnreceivedPacketsRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _160.QueryUnreceivedPacketsRequest;
-                    fromJSON(object: any): _160.QueryUnreceivedPacketsRequest;
-                    toJSON(message: _160.QueryUnreceivedPacketsRequest): unknown;
+                    encode(message: _115.QueryUnreceivedPacketsRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _115.QueryUnreceivedPacketsRequest;
+                    fromJSON(object: any): _115.QueryUnreceivedPacketsRequest;
+                    toJSON(message: _115.QueryUnreceivedPacketsRequest): unknown;
                     fromPartial<I_40 extends {
                         portId?: string;
                         channelId?: string;
@@ -2204,13 +2204,13 @@ export declare namespace ibc {
                         portId?: string;
                         channelId?: string;
                         packetCommitmentSequences?: any[] & any[] & Record<Exclude<keyof I_40["packetCommitmentSequences"], keyof any[]>, never>;
-                    } & Record<Exclude<keyof I_40, keyof _160.QueryUnreceivedPacketsRequest>, never>>(object: I_40): _160.QueryUnreceivedPacketsRequest;
+                    } & Record<Exclude<keyof I_40, keyof _115.QueryUnreceivedPacketsRequest>, never>>(object: I_40): _115.QueryUnreceivedPacketsRequest;
                 };
                 QueryUnreceivedPacketsResponse: {
-                    encode(message: _160.QueryUnreceivedPacketsResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _160.QueryUnreceivedPacketsResponse;
-                    fromJSON(object: any): _160.QueryUnreceivedPacketsResponse;
-                    toJSON(message: _160.QueryUnreceivedPacketsResponse): unknown;
+                    encode(message: _115.QueryUnreceivedPacketsResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _115.QueryUnreceivedPacketsResponse;
+                    fromJSON(object: any): _115.QueryUnreceivedPacketsResponse;
+                    toJSON(message: _115.QueryUnreceivedPacketsResponse): unknown;
                     fromPartial<I_41 extends {
                         sequences?: any[];
                         height?: {
@@ -2225,14 +2225,14 @@ export declare namespace ibc {
                         } & {
                             revisionNumber?: any;
                             revisionHeight?: any;
-                        } & Record<Exclude<keyof I_41["height"], keyof _162.Height>, never>;
-                    } & Record<Exclude<keyof I_41, keyof _160.QueryUnreceivedPacketsResponse>, never>>(object: I_41): _160.QueryUnreceivedPacketsResponse;
+                        } & Record<Exclude<keyof I_41["height"], keyof _117.Height>, never>;
+                    } & Record<Exclude<keyof I_41, keyof _115.QueryUnreceivedPacketsResponse>, never>>(object: I_41): _115.QueryUnreceivedPacketsResponse;
                 };
                 QueryUnreceivedAcksRequest: {
-                    encode(message: _160.QueryUnreceivedAcksRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _160.QueryUnreceivedAcksRequest;
-                    fromJSON(object: any): _160.QueryUnreceivedAcksRequest;
-                    toJSON(message: _160.QueryUnreceivedAcksRequest): unknown;
+                    encode(message: _115.QueryUnreceivedAcksRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _115.QueryUnreceivedAcksRequest;
+                    fromJSON(object: any): _115.QueryUnreceivedAcksRequest;
+                    toJSON(message: _115.QueryUnreceivedAcksRequest): unknown;
                     fromPartial<I_42 extends {
                         portId?: string;
                         channelId?: string;
@@ -2241,13 +2241,13 @@ export declare namespace ibc {
                         portId?: string;
                         channelId?: string;
                         packetAckSequences?: any[] & any[] & Record<Exclude<keyof I_42["packetAckSequences"], keyof any[]>, never>;
-                    } & Record<Exclude<keyof I_42, keyof _160.QueryUnreceivedAcksRequest>, never>>(object: I_42): _160.QueryUnreceivedAcksRequest;
+                    } & Record<Exclude<keyof I_42, keyof _115.QueryUnreceivedAcksRequest>, never>>(object: I_42): _115.QueryUnreceivedAcksRequest;
                 };
                 QueryUnreceivedAcksResponse: {
-                    encode(message: _160.QueryUnreceivedAcksResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _160.QueryUnreceivedAcksResponse;
-                    fromJSON(object: any): _160.QueryUnreceivedAcksResponse;
-                    toJSON(message: _160.QueryUnreceivedAcksResponse): unknown;
+                    encode(message: _115.QueryUnreceivedAcksResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _115.QueryUnreceivedAcksResponse;
+                    fromJSON(object: any): _115.QueryUnreceivedAcksResponse;
+                    toJSON(message: _115.QueryUnreceivedAcksResponse): unknown;
                     fromPartial<I_43 extends {
                         sequences?: any[];
                         height?: {
@@ -2262,27 +2262,27 @@ export declare namespace ibc {
                         } & {
                             revisionNumber?: any;
                             revisionHeight?: any;
-                        } & Record<Exclude<keyof I_43["height"], keyof _162.Height>, never>;
-                    } & Record<Exclude<keyof I_43, keyof _160.QueryUnreceivedAcksResponse>, never>>(object: I_43): _160.QueryUnreceivedAcksResponse;
+                        } & Record<Exclude<keyof I_43["height"], keyof _117.Height>, never>;
+                    } & Record<Exclude<keyof I_43, keyof _115.QueryUnreceivedAcksResponse>, never>>(object: I_43): _115.QueryUnreceivedAcksResponse;
                 };
                 QueryNextSequenceReceiveRequest: {
-                    encode(message: _160.QueryNextSequenceReceiveRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _160.QueryNextSequenceReceiveRequest;
-                    fromJSON(object: any): _160.QueryNextSequenceReceiveRequest;
-                    toJSON(message: _160.QueryNextSequenceReceiveRequest): unknown;
+                    encode(message: _115.QueryNextSequenceReceiveRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _115.QueryNextSequenceReceiveRequest;
+                    fromJSON(object: any): _115.QueryNextSequenceReceiveRequest;
+                    toJSON(message: _115.QueryNextSequenceReceiveRequest): unknown;
                     fromPartial<I_44 extends {
                         portId?: string;
                         channelId?: string;
                     } & {
                         portId?: string;
                         channelId?: string;
-                    } & Record<Exclude<keyof I_44, keyof _160.QueryNextSequenceReceiveRequest>, never>>(object: I_44): _160.QueryNextSequenceReceiveRequest;
+                    } & Record<Exclude<keyof I_44, keyof _115.QueryNextSequenceReceiveRequest>, never>>(object: I_44): _115.QueryNextSequenceReceiveRequest;
                 };
                 QueryNextSequenceReceiveResponse: {
-                    encode(message: _160.QueryNextSequenceReceiveResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _160.QueryNextSequenceReceiveResponse;
-                    fromJSON(object: any): _160.QueryNextSequenceReceiveResponse;
-                    toJSON(message: _160.QueryNextSequenceReceiveResponse): unknown;
+                    encode(message: _115.QueryNextSequenceReceiveResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _115.QueryNextSequenceReceiveResponse;
+                    fromJSON(object: any): _115.QueryNextSequenceReceiveResponse;
+                    toJSON(message: _115.QueryNextSequenceReceiveResponse): unknown;
                     fromPartial<I_45 extends {
                         nextSequenceReceive?: any;
                         proof?: Uint8Array;
@@ -2299,18 +2299,18 @@ export declare namespace ibc {
                         } & {
                             revisionNumber?: any;
                             revisionHeight?: any;
-                        } & Record<Exclude<keyof I_45["proofHeight"], keyof _162.Height>, never>;
-                    } & Record<Exclude<keyof I_45, keyof _160.QueryNextSequenceReceiveResponse>, never>>(object: I_45): _160.QueryNextSequenceReceiveResponse;
+                        } & Record<Exclude<keyof I_45["proofHeight"], keyof _117.Height>, never>;
+                    } & Record<Exclude<keyof I_45, keyof _115.QueryNextSequenceReceiveResponse>, never>>(object: I_45): _115.QueryNextSequenceReceiveResponse;
                 };
                 GenesisState: {
-                    encode(message: _159.GenesisState, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _159.GenesisState;
-                    fromJSON(object: any): _159.GenesisState;
-                    toJSON(message: _159.GenesisState): unknown;
+                    encode(message: _114.GenesisState, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _114.GenesisState;
+                    fromJSON(object: any): _114.GenesisState;
+                    toJSON(message: _114.GenesisState): unknown;
                     fromPartial<I_46 extends {
                         channels?: {
-                            state?: _158.State;
-                            ordering?: _158.Order;
+                            state?: _113.State;
+                            ordering?: _113.Order;
                             counterparty?: {
                                 portId?: string;
                                 channelId?: string;
@@ -2356,8 +2356,8 @@ export declare namespace ibc {
                         nextChannelSequence?: any;
                     } & {
                         channels?: {
-                            state?: _158.State;
-                            ordering?: _158.Order;
+                            state?: _113.State;
+                            ordering?: _113.Order;
                             counterparty?: {
                                 portId?: string;
                                 channelId?: string;
@@ -2367,8 +2367,8 @@ export declare namespace ibc {
                             portId?: string;
                             channelId?: string;
                         }[] & ({
-                            state?: _158.State;
-                            ordering?: _158.Order;
+                            state?: _113.State;
+                            ordering?: _113.Order;
                             counterparty?: {
                                 portId?: string;
                                 channelId?: string;
@@ -2378,22 +2378,22 @@ export declare namespace ibc {
                             portId?: string;
                             channelId?: string;
                         } & {
-                            state?: _158.State;
-                            ordering?: _158.Order;
+                            state?: _113.State;
+                            ordering?: _113.Order;
                             counterparty?: {
                                 portId?: string;
                                 channelId?: string;
                             } & {
                                 portId?: string;
                                 channelId?: string;
-                            } & Record<Exclude<keyof I_46["channels"][number]["counterparty"], keyof _158.Counterparty>, never>;
+                            } & Record<Exclude<keyof I_46["channels"][number]["counterparty"], keyof _113.Counterparty>, never>;
                             connectionHops?: string[] & string[] & Record<Exclude<keyof I_46["channels"][number]["connectionHops"], keyof string[]>, never>;
                             version?: string;
                             portId?: string;
                             channelId?: string;
-                        } & Record<Exclude<keyof I_46["channels"][number], keyof _158.IdentifiedChannel>, never>)[] & Record<Exclude<keyof I_46["channels"], keyof {
-                            state?: _158.State;
-                            ordering?: _158.Order;
+                        } & Record<Exclude<keyof I_46["channels"][number], keyof _113.IdentifiedChannel>, never>)[] & Record<Exclude<keyof I_46["channels"], keyof {
+                            state?: _113.State;
+                            ordering?: _113.Order;
                             counterparty?: {
                                 portId?: string;
                                 channelId?: string;
@@ -2418,7 +2418,7 @@ export declare namespace ibc {
                             channelId?: string;
                             sequence?: any;
                             data?: Uint8Array;
-                        } & Record<Exclude<keyof I_46["acknowledgements"][number], keyof _158.PacketState>, never>)[] & Record<Exclude<keyof I_46["acknowledgements"], keyof {
+                        } & Record<Exclude<keyof I_46["acknowledgements"][number], keyof _113.PacketState>, never>)[] & Record<Exclude<keyof I_46["acknowledgements"], keyof {
                             portId?: string;
                             channelId?: string;
                             sequence?: any;
@@ -2439,7 +2439,7 @@ export declare namespace ibc {
                             channelId?: string;
                             sequence?: any;
                             data?: Uint8Array;
-                        } & Record<Exclude<keyof I_46["commitments"][number], keyof _158.PacketState>, never>)[] & Record<Exclude<keyof I_46["commitments"], keyof {
+                        } & Record<Exclude<keyof I_46["commitments"][number], keyof _113.PacketState>, never>)[] & Record<Exclude<keyof I_46["commitments"], keyof {
                             portId?: string;
                             channelId?: string;
                             sequence?: any;
@@ -2460,7 +2460,7 @@ export declare namespace ibc {
                             channelId?: string;
                             sequence?: any;
                             data?: Uint8Array;
-                        } & Record<Exclude<keyof I_46["receipts"][number], keyof _158.PacketState>, never>)[] & Record<Exclude<keyof I_46["receipts"], keyof {
+                        } & Record<Exclude<keyof I_46["receipts"][number], keyof _113.PacketState>, never>)[] & Record<Exclude<keyof I_46["receipts"], keyof {
                             portId?: string;
                             channelId?: string;
                             sequence?: any;
@@ -2478,7 +2478,7 @@ export declare namespace ibc {
                             portId?: string;
                             channelId?: string;
                             sequence?: any;
-                        } & Record<Exclude<keyof I_46["sendSequences"][number], keyof _159.PacketSequence>, never>)[] & Record<Exclude<keyof I_46["sendSequences"], keyof {
+                        } & Record<Exclude<keyof I_46["sendSequences"][number], keyof _114.PacketSequence>, never>)[] & Record<Exclude<keyof I_46["sendSequences"], keyof {
                             portId?: string;
                             channelId?: string;
                             sequence?: any;
@@ -2495,7 +2495,7 @@ export declare namespace ibc {
                             portId?: string;
                             channelId?: string;
                             sequence?: any;
-                        } & Record<Exclude<keyof I_46["recvSequences"][number], keyof _159.PacketSequence>, never>)[] & Record<Exclude<keyof I_46["recvSequences"], keyof {
+                        } & Record<Exclude<keyof I_46["recvSequences"][number], keyof _114.PacketSequence>, never>)[] & Record<Exclude<keyof I_46["recvSequences"], keyof {
                             portId?: string;
                             channelId?: string;
                             sequence?: any;
@@ -2512,19 +2512,19 @@ export declare namespace ibc {
                             portId?: string;
                             channelId?: string;
                             sequence?: any;
-                        } & Record<Exclude<keyof I_46["ackSequences"][number], keyof _159.PacketSequence>, never>)[] & Record<Exclude<keyof I_46["ackSequences"], keyof {
+                        } & Record<Exclude<keyof I_46["ackSequences"][number], keyof _114.PacketSequence>, never>)[] & Record<Exclude<keyof I_46["ackSequences"], keyof {
                             portId?: string;
                             channelId?: string;
                             sequence?: any;
                         }[]>, never>;
                         nextChannelSequence?: any;
-                    } & Record<Exclude<keyof I_46, keyof _159.GenesisState>, never>>(object: I_46): _159.GenesisState;
+                    } & Record<Exclude<keyof I_46, keyof _114.GenesisState>, never>>(object: I_46): _114.GenesisState;
                 };
                 PacketSequence: {
-                    encode(message: _159.PacketSequence, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _159.PacketSequence;
-                    fromJSON(object: any): _159.PacketSequence;
-                    toJSON(message: _159.PacketSequence): unknown;
+                    encode(message: _114.PacketSequence, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _114.PacketSequence;
+                    fromJSON(object: any): _114.PacketSequence;
+                    toJSON(message: _114.PacketSequence): unknown;
                     fromPartial<I_47 extends {
                         portId?: string;
                         channelId?: string;
@@ -2533,22 +2533,22 @@ export declare namespace ibc {
                         portId?: string;
                         channelId?: string;
                         sequence?: any;
-                    } & Record<Exclude<keyof I_47, keyof _159.PacketSequence>, never>>(object: I_47): _159.PacketSequence;
+                    } & Record<Exclude<keyof I_47, keyof _114.PacketSequence>, never>>(object: I_47): _114.PacketSequence;
                 };
-                stateFromJSON(object: any): _158.State;
-                stateToJSON(object: _158.State): string;
-                orderFromJSON(object: any): _158.Order;
-                orderToJSON(object: _158.Order): string;
-                State: typeof _158.State;
-                Order: typeof _158.Order;
+                stateFromJSON(object: any): _113.State;
+                stateToJSON(object: _113.State): string;
+                orderFromJSON(object: any): _113.Order;
+                orderToJSON(object: _113.Order): string;
+                State: typeof _113.State;
+                Order: typeof _113.Order;
                 Channel: {
-                    encode(message: _158.Channel, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _158.Channel;
-                    fromJSON(object: any): _158.Channel;
-                    toJSON(message: _158.Channel): unknown;
+                    encode(message: _113.Channel, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _113.Channel;
+                    fromJSON(object: any): _113.Channel;
+                    toJSON(message: _113.Channel): unknown;
                     fromPartial<I_48 extends {
-                        state?: _158.State;
-                        ordering?: _158.Order;
+                        state?: _113.State;
+                        ordering?: _113.Order;
                         counterparty?: {
                             portId?: string;
                             channelId?: string;
@@ -2556,27 +2556,27 @@ export declare namespace ibc {
                         connectionHops?: string[];
                         version?: string;
                     } & {
-                        state?: _158.State;
-                        ordering?: _158.Order;
+                        state?: _113.State;
+                        ordering?: _113.Order;
                         counterparty?: {
                             portId?: string;
                             channelId?: string;
                         } & {
                             portId?: string;
                             channelId?: string;
-                        } & Record<Exclude<keyof I_48["counterparty"], keyof _158.Counterparty>, never>;
+                        } & Record<Exclude<keyof I_48["counterparty"], keyof _113.Counterparty>, never>;
                         connectionHops?: string[] & string[] & Record<Exclude<keyof I_48["connectionHops"], keyof string[]>, never>;
                         version?: string;
-                    } & Record<Exclude<keyof I_48, keyof _158.Channel>, never>>(object: I_48): _158.Channel;
+                    } & Record<Exclude<keyof I_48, keyof _113.Channel>, never>>(object: I_48): _113.Channel;
                 };
                 IdentifiedChannel: {
-                    encode(message: _158.IdentifiedChannel, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _158.IdentifiedChannel;
-                    fromJSON(object: any): _158.IdentifiedChannel;
-                    toJSON(message: _158.IdentifiedChannel): unknown;
+                    encode(message: _113.IdentifiedChannel, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _113.IdentifiedChannel;
+                    fromJSON(object: any): _113.IdentifiedChannel;
+                    toJSON(message: _113.IdentifiedChannel): unknown;
                     fromPartial<I_49 extends {
-                        state?: _158.State;
-                        ordering?: _158.Order;
+                        state?: _113.State;
+                        ordering?: _113.Order;
                         counterparty?: {
                             portId?: string;
                             channelId?: string;
@@ -2586,39 +2586,39 @@ export declare namespace ibc {
                         portId?: string;
                         channelId?: string;
                     } & {
-                        state?: _158.State;
-                        ordering?: _158.Order;
+                        state?: _113.State;
+                        ordering?: _113.Order;
                         counterparty?: {
                             portId?: string;
                             channelId?: string;
                         } & {
                             portId?: string;
                             channelId?: string;
-                        } & Record<Exclude<keyof I_49["counterparty"], keyof _158.Counterparty>, never>;
+                        } & Record<Exclude<keyof I_49["counterparty"], keyof _113.Counterparty>, never>;
                         connectionHops?: string[] & string[] & Record<Exclude<keyof I_49["connectionHops"], keyof string[]>, never>;
                         version?: string;
                         portId?: string;
                         channelId?: string;
-                    } & Record<Exclude<keyof I_49, keyof _158.IdentifiedChannel>, never>>(object: I_49): _158.IdentifiedChannel;
+                    } & Record<Exclude<keyof I_49, keyof _113.IdentifiedChannel>, never>>(object: I_49): _113.IdentifiedChannel;
                 };
                 Counterparty: {
-                    encode(message: _158.Counterparty, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _158.Counterparty;
-                    fromJSON(object: any): _158.Counterparty;
-                    toJSON(message: _158.Counterparty): unknown;
+                    encode(message: _113.Counterparty, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _113.Counterparty;
+                    fromJSON(object: any): _113.Counterparty;
+                    toJSON(message: _113.Counterparty): unknown;
                     fromPartial<I_50 extends {
                         portId?: string;
                         channelId?: string;
                     } & {
                         portId?: string;
                         channelId?: string;
-                    } & Record<Exclude<keyof I_50, keyof _158.Counterparty>, never>>(object: I_50): _158.Counterparty;
+                    } & Record<Exclude<keyof I_50, keyof _113.Counterparty>, never>>(object: I_50): _113.Counterparty;
                 };
                 Packet: {
-                    encode(message: _158.Packet, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _158.Packet;
-                    fromJSON(object: any): _158.Packet;
-                    toJSON(message: _158.Packet): unknown;
+                    encode(message: _113.Packet, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _113.Packet;
+                    fromJSON(object: any): _113.Packet;
+                    toJSON(message: _113.Packet): unknown;
                     fromPartial<I_51 extends {
                         sequence?: any;
                         sourcePort?: string;
@@ -2644,15 +2644,15 @@ export declare namespace ibc {
                         } & {
                             revisionNumber?: any;
                             revisionHeight?: any;
-                        } & Record<Exclude<keyof I_51["timeoutHeight"], keyof _162.Height>, never>;
+                        } & Record<Exclude<keyof I_51["timeoutHeight"], keyof _117.Height>, never>;
                         timeoutTimestamp?: any;
-                    } & Record<Exclude<keyof I_51, keyof _158.Packet>, never>>(object: I_51): _158.Packet;
+                    } & Record<Exclude<keyof I_51, keyof _113.Packet>, never>>(object: I_51): _113.Packet;
                 };
                 PacketState: {
-                    encode(message: _158.PacketState, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _158.PacketState;
-                    fromJSON(object: any): _158.PacketState;
-                    toJSON(message: _158.PacketState): unknown;
+                    encode(message: _113.PacketState, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _113.PacketState;
+                    fromJSON(object: any): _113.PacketState;
+                    toJSON(message: _113.PacketState): unknown;
                     fromPartial<I_52 extends {
                         portId?: string;
                         channelId?: string;
@@ -2663,20 +2663,20 @@ export declare namespace ibc {
                         channelId?: string;
                         sequence?: any;
                         data?: Uint8Array;
-                    } & Record<Exclude<keyof I_52, keyof _158.PacketState>, never>>(object: I_52): _158.PacketState;
+                    } & Record<Exclude<keyof I_52, keyof _113.PacketState>, never>>(object: I_52): _113.PacketState;
                 };
                 Acknowledgement: {
-                    encode(message: _158.Acknowledgement, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _158.Acknowledgement;
-                    fromJSON(object: any): _158.Acknowledgement;
-                    toJSON(message: _158.Acknowledgement): unknown;
+                    encode(message: _113.Acknowledgement, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _113.Acknowledgement;
+                    fromJSON(object: any): _113.Acknowledgement;
+                    toJSON(message: _113.Acknowledgement): unknown;
                     fromPartial<I_53 extends {
                         result?: Uint8Array;
                         error?: string;
                     } & {
                         result?: Uint8Array;
                         error?: string;
-                    } & Record<Exclude<keyof I_53, keyof _158.Acknowledgement>, never>>(object: I_53): _158.Acknowledgement;
+                    } & Record<Exclude<keyof I_53, keyof _113.Acknowledgement>, never>>(object: I_53): _113.Acknowledgement;
                 };
             };
         }
@@ -2686,55 +2686,55 @@ export declare namespace ibc {
                 load: (protoRegistry: import("@cosmjs/proto-signing").Registry) => void;
                 MessageComposer: {
                     encoded: {
-                        createClient(value: _165.MsgCreateClient): {
+                        createClient(value: _120.MsgCreateClient): {
                             type_url: string;
                             value: Uint8Array;
                         };
-                        updateClient(value: _165.MsgUpdateClient): {
+                        updateClient(value: _120.MsgUpdateClient): {
                             type_url: string;
                             value: Uint8Array;
                         };
-                        upgradeClient(value: _165.MsgUpgradeClient): {
+                        upgradeClient(value: _120.MsgUpgradeClient): {
                             type_url: string;
                             value: Uint8Array;
                         };
-                        submitMisbehaviour(value: _165.MsgSubmitMisbehaviour): {
+                        submitMisbehaviour(value: _120.MsgSubmitMisbehaviour): {
                             type_url: string;
                             value: Uint8Array;
                         };
                     };
                     withTypeUrl: {
-                        createClient(value: _165.MsgCreateClient): {
+                        createClient(value: _120.MsgCreateClient): {
                             typeUrl: string;
-                            value: _165.MsgCreateClient;
+                            value: _120.MsgCreateClient;
                         };
-                        updateClient(value: _165.MsgUpdateClient): {
+                        updateClient(value: _120.MsgUpdateClient): {
                             typeUrl: string;
-                            value: _165.MsgUpdateClient;
+                            value: _120.MsgUpdateClient;
                         };
-                        upgradeClient(value: _165.MsgUpgradeClient): {
+                        upgradeClient(value: _120.MsgUpgradeClient): {
                             typeUrl: string;
-                            value: _165.MsgUpgradeClient;
+                            value: _120.MsgUpgradeClient;
                         };
-                        submitMisbehaviour(value: _165.MsgSubmitMisbehaviour): {
+                        submitMisbehaviour(value: _120.MsgSubmitMisbehaviour): {
                             typeUrl: string;
-                            value: _165.MsgSubmitMisbehaviour;
+                            value: _120.MsgSubmitMisbehaviour;
                         };
                     };
                     toJSON: {
-                        createClient(value: _165.MsgCreateClient): {
+                        createClient(value: _120.MsgCreateClient): {
                             typeUrl: string;
                             value: unknown;
                         };
-                        updateClient(value: _165.MsgUpdateClient): {
+                        updateClient(value: _120.MsgUpdateClient): {
                             typeUrl: string;
                             value: unknown;
                         };
-                        upgradeClient(value: _165.MsgUpgradeClient): {
+                        upgradeClient(value: _120.MsgUpgradeClient): {
                             typeUrl: string;
                             value: unknown;
                         };
-                        submitMisbehaviour(value: _165.MsgSubmitMisbehaviour): {
+                        submitMisbehaviour(value: _120.MsgSubmitMisbehaviour): {
                             typeUrl: string;
                             value: unknown;
                         };
@@ -2742,44 +2742,44 @@ export declare namespace ibc {
                     fromJSON: {
                         createClient(value: any): {
                             typeUrl: string;
-                            value: _165.MsgCreateClient;
+                            value: _120.MsgCreateClient;
                         };
                         updateClient(value: any): {
                             typeUrl: string;
-                            value: _165.MsgUpdateClient;
+                            value: _120.MsgUpdateClient;
                         };
                         upgradeClient(value: any): {
                             typeUrl: string;
-                            value: _165.MsgUpgradeClient;
+                            value: _120.MsgUpgradeClient;
                         };
                         submitMisbehaviour(value: any): {
                             typeUrl: string;
-                            value: _165.MsgSubmitMisbehaviour;
+                            value: _120.MsgSubmitMisbehaviour;
                         };
                     };
                     fromPartial: {
-                        createClient(value: _165.MsgCreateClient): {
+                        createClient(value: _120.MsgCreateClient): {
                             typeUrl: string;
-                            value: _165.MsgCreateClient;
+                            value: _120.MsgCreateClient;
                         };
-                        updateClient(value: _165.MsgUpdateClient): {
+                        updateClient(value: _120.MsgUpdateClient): {
                             typeUrl: string;
-                            value: _165.MsgUpdateClient;
+                            value: _120.MsgUpdateClient;
                         };
-                        upgradeClient(value: _165.MsgUpgradeClient): {
+                        upgradeClient(value: _120.MsgUpgradeClient): {
                             typeUrl: string;
-                            value: _165.MsgUpgradeClient;
+                            value: _120.MsgUpgradeClient;
                         };
-                        submitMisbehaviour(value: _165.MsgSubmitMisbehaviour): {
+                        submitMisbehaviour(value: _120.MsgSubmitMisbehaviour): {
                             typeUrl: string;
-                            value: _165.MsgSubmitMisbehaviour;
+                            value: _120.MsgSubmitMisbehaviour;
                         };
                     };
                 };
                 AminoConverter: {
                     "/ibc.core.client.v1.MsgCreateClient": {
                         aminoType: string;
-                        toAmino: ({ clientState, consensusState, signer }: _165.MsgCreateClient) => {
+                        toAmino: ({ clientState, consensusState, signer }: _120.MsgCreateClient) => {
                             client_state: {
                                 type_url: string;
                                 value: Uint8Array;
@@ -2800,11 +2800,11 @@ export declare namespace ibc {
                                 value: Uint8Array;
                             };
                             signer: string;
-                        }) => _165.MsgCreateClient;
+                        }) => _120.MsgCreateClient;
                     };
                     "/ibc.core.client.v1.MsgUpdateClient": {
                         aminoType: string;
-                        toAmino: ({ clientId, header, signer }: _165.MsgUpdateClient) => {
+                        toAmino: ({ clientId, header, signer }: _120.MsgUpdateClient) => {
                             client_id: string;
                             header: {
                                 type_url: string;
@@ -2819,11 +2819,11 @@ export declare namespace ibc {
                                 value: Uint8Array;
                             };
                             signer: string;
-                        }) => _165.MsgUpdateClient;
+                        }) => _120.MsgUpdateClient;
                     };
                     "/ibc.core.client.v1.MsgUpgradeClient": {
                         aminoType: string;
-                        toAmino: ({ clientId, clientState, consensusState, proofUpgradeClient, proofUpgradeConsensusState, signer }: _165.MsgUpgradeClient) => {
+                        toAmino: ({ clientId, clientState, consensusState, proofUpgradeClient, proofUpgradeConsensusState, signer }: _120.MsgUpgradeClient) => {
                             client_id: string;
                             client_state: {
                                 type_url: string;
@@ -2850,11 +2850,11 @@ export declare namespace ibc {
                             proof_upgrade_client: Uint8Array;
                             proof_upgrade_consensus_state: Uint8Array;
                             signer: string;
-                        }) => _165.MsgUpgradeClient;
+                        }) => _120.MsgUpgradeClient;
                     };
                     "/ibc.core.client.v1.MsgSubmitMisbehaviour": {
                         aminoType: string;
-                        toAmino: ({ clientId, misbehaviour, signer }: _165.MsgSubmitMisbehaviour) => {
+                        toAmino: ({ clientId, misbehaviour, signer }: _120.MsgSubmitMisbehaviour) => {
                             client_id: string;
                             misbehaviour: {
                                 type_url: string;
@@ -2869,14 +2869,14 @@ export declare namespace ibc {
                                 value: Uint8Array;
                             };
                             signer: string;
-                        }) => _165.MsgSubmitMisbehaviour;
+                        }) => _120.MsgSubmitMisbehaviour;
                     };
                 };
                 MsgCreateClient: {
-                    encode(message: _165.MsgCreateClient, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _165.MsgCreateClient;
-                    fromJSON(object: any): _165.MsgCreateClient;
-                    toJSON(message: _165.MsgCreateClient): unknown;
+                    encode(message: _120.MsgCreateClient, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _120.MsgCreateClient;
+                    fromJSON(object: any): _120.MsgCreateClient;
+                    toJSON(message: _120.MsgCreateClient): unknown;
                     fromPartial<I extends {
                         clientState?: {
                             typeUrl?: string;
@@ -2903,20 +2903,20 @@ export declare namespace ibc {
                             value?: Uint8Array;
                         } & Record<Exclude<keyof I["consensusState"], keyof import("../google/protobuf/any").Any>, never>;
                         signer?: string;
-                    } & Record<Exclude<keyof I, keyof _165.MsgCreateClient>, never>>(object: I): _165.MsgCreateClient;
+                    } & Record<Exclude<keyof I, keyof _120.MsgCreateClient>, never>>(object: I): _120.MsgCreateClient;
                 };
                 MsgCreateClientResponse: {
-                    encode(_: _165.MsgCreateClientResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _165.MsgCreateClientResponse;
-                    fromJSON(_: any): _165.MsgCreateClientResponse;
-                    toJSON(_: _165.MsgCreateClientResponse): unknown;
-                    fromPartial<I_1 extends {} & {} & Record<Exclude<keyof I_1, never>, never>>(_: I_1): _165.MsgCreateClientResponse;
+                    encode(_: _120.MsgCreateClientResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _120.MsgCreateClientResponse;
+                    fromJSON(_: any): _120.MsgCreateClientResponse;
+                    toJSON(_: _120.MsgCreateClientResponse): unknown;
+                    fromPartial<I_1 extends {} & {} & Record<Exclude<keyof I_1, never>, never>>(_: I_1): _120.MsgCreateClientResponse;
                 };
                 MsgUpdateClient: {
-                    encode(message: _165.MsgUpdateClient, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _165.MsgUpdateClient;
-                    fromJSON(object: any): _165.MsgUpdateClient;
-                    toJSON(message: _165.MsgUpdateClient): unknown;
+                    encode(message: _120.MsgUpdateClient, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _120.MsgUpdateClient;
+                    fromJSON(object: any): _120.MsgUpdateClient;
+                    toJSON(message: _120.MsgUpdateClient): unknown;
                     fromPartial<I_2 extends {
                         clientId?: string;
                         header?: {
@@ -2934,20 +2934,20 @@ export declare namespace ibc {
                             value?: Uint8Array;
                         } & Record<Exclude<keyof I_2["header"], keyof import("../google/protobuf/any").Any>, never>;
                         signer?: string;
-                    } & Record<Exclude<keyof I_2, keyof _165.MsgUpdateClient>, never>>(object: I_2): _165.MsgUpdateClient;
+                    } & Record<Exclude<keyof I_2, keyof _120.MsgUpdateClient>, never>>(object: I_2): _120.MsgUpdateClient;
                 };
                 MsgUpdateClientResponse: {
-                    encode(_: _165.MsgUpdateClientResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _165.MsgUpdateClientResponse;
-                    fromJSON(_: any): _165.MsgUpdateClientResponse;
-                    toJSON(_: _165.MsgUpdateClientResponse): unknown;
-                    fromPartial<I_3 extends {} & {} & Record<Exclude<keyof I_3, never>, never>>(_: I_3): _165.MsgUpdateClientResponse;
+                    encode(_: _120.MsgUpdateClientResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _120.MsgUpdateClientResponse;
+                    fromJSON(_: any): _120.MsgUpdateClientResponse;
+                    toJSON(_: _120.MsgUpdateClientResponse): unknown;
+                    fromPartial<I_3 extends {} & {} & Record<Exclude<keyof I_3, never>, never>>(_: I_3): _120.MsgUpdateClientResponse;
                 };
                 MsgUpgradeClient: {
-                    encode(message: _165.MsgUpgradeClient, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _165.MsgUpgradeClient;
-                    fromJSON(object: any): _165.MsgUpgradeClient;
-                    toJSON(message: _165.MsgUpgradeClient): unknown;
+                    encode(message: _120.MsgUpgradeClient, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _120.MsgUpgradeClient;
+                    fromJSON(object: any): _120.MsgUpgradeClient;
+                    toJSON(message: _120.MsgUpgradeClient): unknown;
                     fromPartial<I_4 extends {
                         clientId?: string;
                         clientState?: {
@@ -2980,20 +2980,20 @@ export declare namespace ibc {
                         proofUpgradeClient?: Uint8Array;
                         proofUpgradeConsensusState?: Uint8Array;
                         signer?: string;
-                    } & Record<Exclude<keyof I_4, keyof _165.MsgUpgradeClient>, never>>(object: I_4): _165.MsgUpgradeClient;
+                    } & Record<Exclude<keyof I_4, keyof _120.MsgUpgradeClient>, never>>(object: I_4): _120.MsgUpgradeClient;
                 };
                 MsgUpgradeClientResponse: {
-                    encode(_: _165.MsgUpgradeClientResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _165.MsgUpgradeClientResponse;
-                    fromJSON(_: any): _165.MsgUpgradeClientResponse;
-                    toJSON(_: _165.MsgUpgradeClientResponse): unknown;
-                    fromPartial<I_5 extends {} & {} & Record<Exclude<keyof I_5, never>, never>>(_: I_5): _165.MsgUpgradeClientResponse;
+                    encode(_: _120.MsgUpgradeClientResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _120.MsgUpgradeClientResponse;
+                    fromJSON(_: any): _120.MsgUpgradeClientResponse;
+                    toJSON(_: _120.MsgUpgradeClientResponse): unknown;
+                    fromPartial<I_5 extends {} & {} & Record<Exclude<keyof I_5, never>, never>>(_: I_5): _120.MsgUpgradeClientResponse;
                 };
                 MsgSubmitMisbehaviour: {
-                    encode(message: _165.MsgSubmitMisbehaviour, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _165.MsgSubmitMisbehaviour;
-                    fromJSON(object: any): _165.MsgSubmitMisbehaviour;
-                    toJSON(message: _165.MsgSubmitMisbehaviour): unknown;
+                    encode(message: _120.MsgSubmitMisbehaviour, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _120.MsgSubmitMisbehaviour;
+                    fromJSON(object: any): _120.MsgSubmitMisbehaviour;
+                    toJSON(message: _120.MsgSubmitMisbehaviour): unknown;
                     fromPartial<I_6 extends {
                         clientId?: string;
                         misbehaviour?: {
@@ -3011,31 +3011,31 @@ export declare namespace ibc {
                             value?: Uint8Array;
                         } & Record<Exclude<keyof I_6["misbehaviour"], keyof import("../google/protobuf/any").Any>, never>;
                         signer?: string;
-                    } & Record<Exclude<keyof I_6, keyof _165.MsgSubmitMisbehaviour>, never>>(object: I_6): _165.MsgSubmitMisbehaviour;
+                    } & Record<Exclude<keyof I_6, keyof _120.MsgSubmitMisbehaviour>, never>>(object: I_6): _120.MsgSubmitMisbehaviour;
                 };
                 MsgSubmitMisbehaviourResponse: {
-                    encode(_: _165.MsgSubmitMisbehaviourResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _165.MsgSubmitMisbehaviourResponse;
-                    fromJSON(_: any): _165.MsgSubmitMisbehaviourResponse;
-                    toJSON(_: _165.MsgSubmitMisbehaviourResponse): unknown;
-                    fromPartial<I_7 extends {} & {} & Record<Exclude<keyof I_7, never>, never>>(_: I_7): _165.MsgSubmitMisbehaviourResponse;
+                    encode(_: _120.MsgSubmitMisbehaviourResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _120.MsgSubmitMisbehaviourResponse;
+                    fromJSON(_: any): _120.MsgSubmitMisbehaviourResponse;
+                    toJSON(_: _120.MsgSubmitMisbehaviourResponse): unknown;
+                    fromPartial<I_7 extends {} & {} & Record<Exclude<keyof I_7, never>, never>>(_: I_7): _120.MsgSubmitMisbehaviourResponse;
                 };
                 QueryClientStateRequest: {
-                    encode(message: _164.QueryClientStateRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _164.QueryClientStateRequest;
-                    fromJSON(object: any): _164.QueryClientStateRequest;
-                    toJSON(message: _164.QueryClientStateRequest): unknown;
+                    encode(message: _119.QueryClientStateRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _119.QueryClientStateRequest;
+                    fromJSON(object: any): _119.QueryClientStateRequest;
+                    toJSON(message: _119.QueryClientStateRequest): unknown;
                     fromPartial<I_8 extends {
                         clientId?: string;
                     } & {
                         clientId?: string;
-                    } & Record<Exclude<keyof I_8, "clientId">, never>>(object: I_8): _164.QueryClientStateRequest;
+                    } & Record<Exclude<keyof I_8, "clientId">, never>>(object: I_8): _119.QueryClientStateRequest;
                 };
                 QueryClientStateResponse: {
-                    encode(message: _164.QueryClientStateResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _164.QueryClientStateResponse;
-                    fromJSON(object: any): _164.QueryClientStateResponse;
-                    toJSON(message: _164.QueryClientStateResponse): unknown;
+                    encode(message: _119.QueryClientStateResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _119.QueryClientStateResponse;
+                    fromJSON(object: any): _119.QueryClientStateResponse;
+                    toJSON(message: _119.QueryClientStateResponse): unknown;
                     fromPartial<I_9 extends {
                         clientState?: {
                             typeUrl?: string;
@@ -3061,14 +3061,14 @@ export declare namespace ibc {
                         } & {
                             revisionNumber?: any;
                             revisionHeight?: any;
-                        } & Record<Exclude<keyof I_9["proofHeight"], keyof _162.Height>, never>;
-                    } & Record<Exclude<keyof I_9, keyof _164.QueryClientStateResponse>, never>>(object: I_9): _164.QueryClientStateResponse;
+                        } & Record<Exclude<keyof I_9["proofHeight"], keyof _117.Height>, never>;
+                    } & Record<Exclude<keyof I_9, keyof _119.QueryClientStateResponse>, never>>(object: I_9): _119.QueryClientStateResponse;
                 };
                 QueryClientStatesRequest: {
-                    encode(message: _164.QueryClientStatesRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _164.QueryClientStatesRequest;
-                    fromJSON(object: any): _164.QueryClientStatesRequest;
-                    toJSON(message: _164.QueryClientStatesRequest): unknown;
+                    encode(message: _119.QueryClientStatesRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _119.QueryClientStatesRequest;
+                    fromJSON(object: any): _119.QueryClientStatesRequest;
+                    toJSON(message: _119.QueryClientStatesRequest): unknown;
                     fromPartial<I_10 extends {
                         pagination?: {
                             key?: Uint8Array;
@@ -3091,13 +3091,13 @@ export declare namespace ibc {
                             countTotal?: boolean;
                             reverse?: boolean;
                         } & Record<Exclude<keyof I_10["pagination"], keyof import("../cosmos/base/query/v1beta1/pagination").PageRequest>, never>;
-                    } & Record<Exclude<keyof I_10, "pagination">, never>>(object: I_10): _164.QueryClientStatesRequest;
+                    } & Record<Exclude<keyof I_10, "pagination">, never>>(object: I_10): _119.QueryClientStatesRequest;
                 };
                 QueryClientStatesResponse: {
-                    encode(message: _164.QueryClientStatesResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _164.QueryClientStatesResponse;
-                    fromJSON(object: any): _164.QueryClientStatesResponse;
-                    toJSON(message: _164.QueryClientStatesResponse): unknown;
+                    encode(message: _119.QueryClientStatesResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _119.QueryClientStatesResponse;
+                    fromJSON(object: any): _119.QueryClientStatesResponse;
+                    toJSON(message: _119.QueryClientStatesResponse): unknown;
                     fromPartial<I_11 extends {
                         clientStates?: {
                             clientId?: string;
@@ -3132,7 +3132,7 @@ export declare namespace ibc {
                                 typeUrl?: string;
                                 value?: Uint8Array;
                             } & Record<Exclude<keyof I_11["clientStates"][number]["clientState"], keyof import("../google/protobuf/any").Any>, never>;
-                        } & Record<Exclude<keyof I_11["clientStates"][number], keyof _162.IdentifiedClientState>, never>)[] & Record<Exclude<keyof I_11["clientStates"], keyof {
+                        } & Record<Exclude<keyof I_11["clientStates"][number], keyof _117.IdentifiedClientState>, never>)[] & Record<Exclude<keyof I_11["clientStates"], keyof {
                             clientId?: string;
                             clientState?: {
                                 typeUrl?: string;
@@ -3146,13 +3146,13 @@ export declare namespace ibc {
                             nextKey?: Uint8Array;
                             total?: any;
                         } & Record<Exclude<keyof I_11["pagination"], keyof import("../cosmos/base/query/v1beta1/pagination").PageResponse>, never>;
-                    } & Record<Exclude<keyof I_11, keyof _164.QueryClientStatesResponse>, never>>(object: I_11): _164.QueryClientStatesResponse;
+                    } & Record<Exclude<keyof I_11, keyof _119.QueryClientStatesResponse>, never>>(object: I_11): _119.QueryClientStatesResponse;
                 };
                 QueryConsensusStateRequest: {
-                    encode(message: _164.QueryConsensusStateRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _164.QueryConsensusStateRequest;
-                    fromJSON(object: any): _164.QueryConsensusStateRequest;
-                    toJSON(message: _164.QueryConsensusStateRequest): unknown;
+                    encode(message: _119.QueryConsensusStateRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _119.QueryConsensusStateRequest;
+                    fromJSON(object: any): _119.QueryConsensusStateRequest;
+                    toJSON(message: _119.QueryConsensusStateRequest): unknown;
                     fromPartial<I_12 extends {
                         clientId?: string;
                         revisionNumber?: any;
@@ -3163,13 +3163,13 @@ export declare namespace ibc {
                         revisionNumber?: any;
                         revisionHeight?: any;
                         latestHeight?: boolean;
-                    } & Record<Exclude<keyof I_12, keyof _164.QueryConsensusStateRequest>, never>>(object: I_12): _164.QueryConsensusStateRequest;
+                    } & Record<Exclude<keyof I_12, keyof _119.QueryConsensusStateRequest>, never>>(object: I_12): _119.QueryConsensusStateRequest;
                 };
                 QueryConsensusStateResponse: {
-                    encode(message: _164.QueryConsensusStateResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _164.QueryConsensusStateResponse;
-                    fromJSON(object: any): _164.QueryConsensusStateResponse;
-                    toJSON(message: _164.QueryConsensusStateResponse): unknown;
+                    encode(message: _119.QueryConsensusStateResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _119.QueryConsensusStateResponse;
+                    fromJSON(object: any): _119.QueryConsensusStateResponse;
+                    toJSON(message: _119.QueryConsensusStateResponse): unknown;
                     fromPartial<I_13 extends {
                         consensusState?: {
                             typeUrl?: string;
@@ -3195,14 +3195,14 @@ export declare namespace ibc {
                         } & {
                             revisionNumber?: any;
                             revisionHeight?: any;
-                        } & Record<Exclude<keyof I_13["proofHeight"], keyof _162.Height>, never>;
-                    } & Record<Exclude<keyof I_13, keyof _164.QueryConsensusStateResponse>, never>>(object: I_13): _164.QueryConsensusStateResponse;
+                        } & Record<Exclude<keyof I_13["proofHeight"], keyof _117.Height>, never>;
+                    } & Record<Exclude<keyof I_13, keyof _119.QueryConsensusStateResponse>, never>>(object: I_13): _119.QueryConsensusStateResponse;
                 };
                 QueryConsensusStatesRequest: {
-                    encode(message: _164.QueryConsensusStatesRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _164.QueryConsensusStatesRequest;
-                    fromJSON(object: any): _164.QueryConsensusStatesRequest;
-                    toJSON(message: _164.QueryConsensusStatesRequest): unknown;
+                    encode(message: _119.QueryConsensusStatesRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _119.QueryConsensusStatesRequest;
+                    fromJSON(object: any): _119.QueryConsensusStatesRequest;
+                    toJSON(message: _119.QueryConsensusStatesRequest): unknown;
                     fromPartial<I_14 extends {
                         clientId?: string;
                         pagination?: {
@@ -3227,13 +3227,13 @@ export declare namespace ibc {
                             countTotal?: boolean;
                             reverse?: boolean;
                         } & Record<Exclude<keyof I_14["pagination"], keyof import("../cosmos/base/query/v1beta1/pagination").PageRequest>, never>;
-                    } & Record<Exclude<keyof I_14, keyof _164.QueryConsensusStatesRequest>, never>>(object: I_14): _164.QueryConsensusStatesRequest;
+                    } & Record<Exclude<keyof I_14, keyof _119.QueryConsensusStatesRequest>, never>>(object: I_14): _119.QueryConsensusStatesRequest;
                 };
                 QueryConsensusStatesResponse: {
-                    encode(message: _164.QueryConsensusStatesResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _164.QueryConsensusStatesResponse;
-                    fromJSON(object: any): _164.QueryConsensusStatesResponse;
-                    toJSON(message: _164.QueryConsensusStatesResponse): unknown;
+                    encode(message: _119.QueryConsensusStatesResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _119.QueryConsensusStatesResponse;
+                    fromJSON(object: any): _119.QueryConsensusStatesResponse;
+                    toJSON(message: _119.QueryConsensusStatesResponse): unknown;
                     fromPartial<I_15 extends {
                         consensusStates?: {
                             height?: {
@@ -3275,7 +3275,7 @@ export declare namespace ibc {
                             } & {
                                 revisionNumber?: any;
                                 revisionHeight?: any;
-                            } & Record<Exclude<keyof I_15["consensusStates"][number]["height"], keyof _162.Height>, never>;
+                            } & Record<Exclude<keyof I_15["consensusStates"][number]["height"], keyof _117.Height>, never>;
                             consensusState?: {
                                 typeUrl?: string;
                                 value?: Uint8Array;
@@ -3283,7 +3283,7 @@ export declare namespace ibc {
                                 typeUrl?: string;
                                 value?: Uint8Array;
                             } & Record<Exclude<keyof I_15["consensusStates"][number]["consensusState"], keyof import("../google/protobuf/any").Any>, never>;
-                        } & Record<Exclude<keyof I_15["consensusStates"][number], keyof _162.ConsensusStateWithHeight>, never>)[] & Record<Exclude<keyof I_15["consensusStates"], keyof {
+                        } & Record<Exclude<keyof I_15["consensusStates"][number], keyof _117.ConsensusStateWithHeight>, never>)[] & Record<Exclude<keyof I_15["consensusStates"], keyof {
                             height?: {
                                 revisionNumber?: any;
                                 revisionHeight?: any;
@@ -3300,42 +3300,42 @@ export declare namespace ibc {
                             nextKey?: Uint8Array;
                             total?: any;
                         } & Record<Exclude<keyof I_15["pagination"], keyof import("../cosmos/base/query/v1beta1/pagination").PageResponse>, never>;
-                    } & Record<Exclude<keyof I_15, keyof _164.QueryConsensusStatesResponse>, never>>(object: I_15): _164.QueryConsensusStatesResponse;
+                    } & Record<Exclude<keyof I_15, keyof _119.QueryConsensusStatesResponse>, never>>(object: I_15): _119.QueryConsensusStatesResponse;
                 };
                 QueryClientStatusRequest: {
-                    encode(message: _164.QueryClientStatusRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _164.QueryClientStatusRequest;
-                    fromJSON(object: any): _164.QueryClientStatusRequest;
-                    toJSON(message: _164.QueryClientStatusRequest): unknown;
+                    encode(message: _119.QueryClientStatusRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _119.QueryClientStatusRequest;
+                    fromJSON(object: any): _119.QueryClientStatusRequest;
+                    toJSON(message: _119.QueryClientStatusRequest): unknown;
                     fromPartial<I_16 extends {
                         clientId?: string;
                     } & {
                         clientId?: string;
-                    } & Record<Exclude<keyof I_16, "clientId">, never>>(object: I_16): _164.QueryClientStatusRequest;
+                    } & Record<Exclude<keyof I_16, "clientId">, never>>(object: I_16): _119.QueryClientStatusRequest;
                 };
                 QueryClientStatusResponse: {
-                    encode(message: _164.QueryClientStatusResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _164.QueryClientStatusResponse;
-                    fromJSON(object: any): _164.QueryClientStatusResponse;
-                    toJSON(message: _164.QueryClientStatusResponse): unknown;
+                    encode(message: _119.QueryClientStatusResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _119.QueryClientStatusResponse;
+                    fromJSON(object: any): _119.QueryClientStatusResponse;
+                    toJSON(message: _119.QueryClientStatusResponse): unknown;
                     fromPartial<I_17 extends {
                         status?: string;
                     } & {
                         status?: string;
-                    } & Record<Exclude<keyof I_17, "status">, never>>(object: I_17): _164.QueryClientStatusResponse;
+                    } & Record<Exclude<keyof I_17, "status">, never>>(object: I_17): _119.QueryClientStatusResponse;
                 };
                 QueryClientParamsRequest: {
-                    encode(_: _164.QueryClientParamsRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _164.QueryClientParamsRequest;
-                    fromJSON(_: any): _164.QueryClientParamsRequest;
-                    toJSON(_: _164.QueryClientParamsRequest): unknown;
-                    fromPartial<I_18 extends {} & {} & Record<Exclude<keyof I_18, never>, never>>(_: I_18): _164.QueryClientParamsRequest;
+                    encode(_: _119.QueryClientParamsRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _119.QueryClientParamsRequest;
+                    fromJSON(_: any): _119.QueryClientParamsRequest;
+                    toJSON(_: _119.QueryClientParamsRequest): unknown;
+                    fromPartial<I_18 extends {} & {} & Record<Exclude<keyof I_18, never>, never>>(_: I_18): _119.QueryClientParamsRequest;
                 };
                 QueryClientParamsResponse: {
-                    encode(message: _164.QueryClientParamsResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _164.QueryClientParamsResponse;
-                    fromJSON(object: any): _164.QueryClientParamsResponse;
-                    toJSON(message: _164.QueryClientParamsResponse): unknown;
+                    encode(message: _119.QueryClientParamsResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _119.QueryClientParamsResponse;
+                    fromJSON(object: any): _119.QueryClientParamsResponse;
+                    toJSON(message: _119.QueryClientParamsResponse): unknown;
                     fromPartial<I_19 extends {
                         params?: {
                             allowedClients?: string[];
@@ -3346,20 +3346,20 @@ export declare namespace ibc {
                         } & {
                             allowedClients?: string[] & string[] & Record<Exclude<keyof I_19["params"]["allowedClients"], keyof string[]>, never>;
                         } & Record<Exclude<keyof I_19["params"], "allowedClients">, never>;
-                    } & Record<Exclude<keyof I_19, "params">, never>>(object: I_19): _164.QueryClientParamsResponse;
+                    } & Record<Exclude<keyof I_19, "params">, never>>(object: I_19): _119.QueryClientParamsResponse;
                 };
                 QueryUpgradedClientStateRequest: {
-                    encode(_: _164.QueryUpgradedClientStateRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _164.QueryUpgradedClientStateRequest;
-                    fromJSON(_: any): _164.QueryUpgradedClientStateRequest;
-                    toJSON(_: _164.QueryUpgradedClientStateRequest): unknown;
-                    fromPartial<I_20 extends {} & {} & Record<Exclude<keyof I_20, never>, never>>(_: I_20): _164.QueryUpgradedClientStateRequest;
+                    encode(_: _119.QueryUpgradedClientStateRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _119.QueryUpgradedClientStateRequest;
+                    fromJSON(_: any): _119.QueryUpgradedClientStateRequest;
+                    toJSON(_: _119.QueryUpgradedClientStateRequest): unknown;
+                    fromPartial<I_20 extends {} & {} & Record<Exclude<keyof I_20, never>, never>>(_: I_20): _119.QueryUpgradedClientStateRequest;
                 };
                 QueryUpgradedClientStateResponse: {
-                    encode(message: _164.QueryUpgradedClientStateResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _164.QueryUpgradedClientStateResponse;
-                    fromJSON(object: any): _164.QueryUpgradedClientStateResponse;
-                    toJSON(message: _164.QueryUpgradedClientStateResponse): unknown;
+                    encode(message: _119.QueryUpgradedClientStateResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _119.QueryUpgradedClientStateResponse;
+                    fromJSON(object: any): _119.QueryUpgradedClientStateResponse;
+                    toJSON(message: _119.QueryUpgradedClientStateResponse): unknown;
                     fromPartial<I_21 extends {
                         upgradedClientState?: {
                             typeUrl?: string;
@@ -3373,20 +3373,20 @@ export declare namespace ibc {
                             typeUrl?: string;
                             value?: Uint8Array;
                         } & Record<Exclude<keyof I_21["upgradedClientState"], keyof import("../google/protobuf/any").Any>, never>;
-                    } & Record<Exclude<keyof I_21, "upgradedClientState">, never>>(object: I_21): _164.QueryUpgradedClientStateResponse;
+                    } & Record<Exclude<keyof I_21, "upgradedClientState">, never>>(object: I_21): _119.QueryUpgradedClientStateResponse;
                 };
                 QueryUpgradedConsensusStateRequest: {
-                    encode(_: _164.QueryUpgradedConsensusStateRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _164.QueryUpgradedConsensusStateRequest;
-                    fromJSON(_: any): _164.QueryUpgradedConsensusStateRequest;
-                    toJSON(_: _164.QueryUpgradedConsensusStateRequest): unknown;
-                    fromPartial<I_22 extends {} & {} & Record<Exclude<keyof I_22, never>, never>>(_: I_22): _164.QueryUpgradedConsensusStateRequest;
+                    encode(_: _119.QueryUpgradedConsensusStateRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _119.QueryUpgradedConsensusStateRequest;
+                    fromJSON(_: any): _119.QueryUpgradedConsensusStateRequest;
+                    toJSON(_: _119.QueryUpgradedConsensusStateRequest): unknown;
+                    fromPartial<I_22 extends {} & {} & Record<Exclude<keyof I_22, never>, never>>(_: I_22): _119.QueryUpgradedConsensusStateRequest;
                 };
                 QueryUpgradedConsensusStateResponse: {
-                    encode(message: _164.QueryUpgradedConsensusStateResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _164.QueryUpgradedConsensusStateResponse;
-                    fromJSON(object: any): _164.QueryUpgradedConsensusStateResponse;
-                    toJSON(message: _164.QueryUpgradedConsensusStateResponse): unknown;
+                    encode(message: _119.QueryUpgradedConsensusStateResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _119.QueryUpgradedConsensusStateResponse;
+                    fromJSON(object: any): _119.QueryUpgradedConsensusStateResponse;
+                    toJSON(message: _119.QueryUpgradedConsensusStateResponse): unknown;
                     fromPartial<I_23 extends {
                         upgradedConsensusState?: {
                             typeUrl?: string;
@@ -3400,13 +3400,13 @@ export declare namespace ibc {
                             typeUrl?: string;
                             value?: Uint8Array;
                         } & Record<Exclude<keyof I_23["upgradedConsensusState"], keyof import("../google/protobuf/any").Any>, never>;
-                    } & Record<Exclude<keyof I_23, "upgradedConsensusState">, never>>(object: I_23): _164.QueryUpgradedConsensusStateResponse;
+                    } & Record<Exclude<keyof I_23, "upgradedConsensusState">, never>>(object: I_23): _119.QueryUpgradedConsensusStateResponse;
                 };
                 GenesisState: {
-                    encode(message: _163.GenesisState, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _163.GenesisState;
-                    fromJSON(object: any): _163.GenesisState;
-                    toJSON(message: _163.GenesisState): unknown;
+                    encode(message: _118.GenesisState, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _118.GenesisState;
+                    fromJSON(object: any): _118.GenesisState;
+                    toJSON(message: _118.GenesisState): unknown;
                     fromPartial<I_24 extends {
                         clients?: {
                             clientId?: string;
@@ -3462,7 +3462,7 @@ export declare namespace ibc {
                                 typeUrl?: string;
                                 value?: Uint8Array;
                             } & Record<Exclude<keyof I_24["clients"][number]["clientState"], keyof import("../google/protobuf/any").Any>, never>;
-                        } & Record<Exclude<keyof I_24["clients"][number], keyof _162.IdentifiedClientState>, never>)[] & Record<Exclude<keyof I_24["clients"], keyof {
+                        } & Record<Exclude<keyof I_24["clients"][number], keyof _117.IdentifiedClientState>, never>)[] & Record<Exclude<keyof I_24["clients"], keyof {
                             clientId?: string;
                             clientState?: {
                                 typeUrl?: string;
@@ -3520,7 +3520,7 @@ export declare namespace ibc {
                                 } & {
                                     revisionNumber?: any;
                                     revisionHeight?: any;
-                                } & Record<Exclude<keyof I_24["clientsConsensus"][number]["consensusStates"][number]["height"], keyof _162.Height>, never>;
+                                } & Record<Exclude<keyof I_24["clientsConsensus"][number]["consensusStates"][number]["height"], keyof _117.Height>, never>;
                                 consensusState?: {
                                     typeUrl?: string;
                                     value?: Uint8Array;
@@ -3528,7 +3528,7 @@ export declare namespace ibc {
                                     typeUrl?: string;
                                     value?: Uint8Array;
                                 } & Record<Exclude<keyof I_24["clientsConsensus"][number]["consensusStates"][number]["consensusState"], keyof import("../google/protobuf/any").Any>, never>;
-                            } & Record<Exclude<keyof I_24["clientsConsensus"][number]["consensusStates"][number], keyof _162.ConsensusStateWithHeight>, never>)[] & Record<Exclude<keyof I_24["clientsConsensus"][number]["consensusStates"], keyof {
+                            } & Record<Exclude<keyof I_24["clientsConsensus"][number]["consensusStates"][number], keyof _117.ConsensusStateWithHeight>, never>)[] & Record<Exclude<keyof I_24["clientsConsensus"][number]["consensusStates"], keyof {
                                 height?: {
                                     revisionNumber?: any;
                                     revisionHeight?: any;
@@ -3538,7 +3538,7 @@ export declare namespace ibc {
                                     value?: Uint8Array;
                                 };
                             }[]>, never>;
-                        } & Record<Exclude<keyof I_24["clientsConsensus"][number], keyof _162.ClientConsensusStates>, never>)[] & Record<Exclude<keyof I_24["clientsConsensus"], keyof {
+                        } & Record<Exclude<keyof I_24["clientsConsensus"][number], keyof _117.ClientConsensusStates>, never>)[] & Record<Exclude<keyof I_24["clientsConsensus"], keyof {
                             clientId?: string;
                             consensusStates?: {
                                 height?: {
@@ -3574,11 +3574,11 @@ export declare namespace ibc {
                             } & {
                                 key?: Uint8Array;
                                 value?: Uint8Array;
-                            } & Record<Exclude<keyof I_24["clientsMetadata"][number]["clientMetadata"][number], keyof _163.GenesisMetadata>, never>)[] & Record<Exclude<keyof I_24["clientsMetadata"][number]["clientMetadata"], keyof {
+                            } & Record<Exclude<keyof I_24["clientsMetadata"][number]["clientMetadata"][number], keyof _118.GenesisMetadata>, never>)[] & Record<Exclude<keyof I_24["clientsMetadata"][number]["clientMetadata"], keyof {
                                 key?: Uint8Array;
                                 value?: Uint8Array;
                             }[]>, never>;
-                        } & Record<Exclude<keyof I_24["clientsMetadata"][number], keyof _163.IdentifiedGenesisMetadata>, never>)[] & Record<Exclude<keyof I_24["clientsMetadata"], keyof {
+                        } & Record<Exclude<keyof I_24["clientsMetadata"][number], keyof _118.IdentifiedGenesisMetadata>, never>)[] & Record<Exclude<keyof I_24["clientsMetadata"], keyof {
                             clientId?: string;
                             clientMetadata?: {
                                 key?: Uint8Array;
@@ -3592,26 +3592,26 @@ export declare namespace ibc {
                         } & Record<Exclude<keyof I_24["params"], "allowedClients">, never>;
                         createLocalhost?: boolean;
                         nextClientSequence?: any;
-                    } & Record<Exclude<keyof I_24, keyof _163.GenesisState>, never>>(object: I_24): _163.GenesisState;
+                    } & Record<Exclude<keyof I_24, keyof _118.GenesisState>, never>>(object: I_24): _118.GenesisState;
                 };
                 GenesisMetadata: {
-                    encode(message: _163.GenesisMetadata, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _163.GenesisMetadata;
-                    fromJSON(object: any): _163.GenesisMetadata;
-                    toJSON(message: _163.GenesisMetadata): unknown;
+                    encode(message: _118.GenesisMetadata, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _118.GenesisMetadata;
+                    fromJSON(object: any): _118.GenesisMetadata;
+                    toJSON(message: _118.GenesisMetadata): unknown;
                     fromPartial<I_25 extends {
                         key?: Uint8Array;
                         value?: Uint8Array;
                     } & {
                         key?: Uint8Array;
                         value?: Uint8Array;
-                    } & Record<Exclude<keyof I_25, keyof _163.GenesisMetadata>, never>>(object: I_25): _163.GenesisMetadata;
+                    } & Record<Exclude<keyof I_25, keyof _118.GenesisMetadata>, never>>(object: I_25): _118.GenesisMetadata;
                 };
                 IdentifiedGenesisMetadata: {
-                    encode(message: _163.IdentifiedGenesisMetadata, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _163.IdentifiedGenesisMetadata;
-                    fromJSON(object: any): _163.IdentifiedGenesisMetadata;
-                    toJSON(message: _163.IdentifiedGenesisMetadata): unknown;
+                    encode(message: _118.IdentifiedGenesisMetadata, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _118.IdentifiedGenesisMetadata;
+                    fromJSON(object: any): _118.IdentifiedGenesisMetadata;
+                    toJSON(message: _118.IdentifiedGenesisMetadata): unknown;
                     fromPartial<I_26 extends {
                         clientId?: string;
                         clientMetadata?: {
@@ -3629,17 +3629,17 @@ export declare namespace ibc {
                         } & {
                             key?: Uint8Array;
                             value?: Uint8Array;
-                        } & Record<Exclude<keyof I_26["clientMetadata"][number], keyof _163.GenesisMetadata>, never>)[] & Record<Exclude<keyof I_26["clientMetadata"], keyof {
+                        } & Record<Exclude<keyof I_26["clientMetadata"][number], keyof _118.GenesisMetadata>, never>)[] & Record<Exclude<keyof I_26["clientMetadata"], keyof {
                             key?: Uint8Array;
                             value?: Uint8Array;
                         }[]>, never>;
-                    } & Record<Exclude<keyof I_26, keyof _163.IdentifiedGenesisMetadata>, never>>(object: I_26): _163.IdentifiedGenesisMetadata;
+                    } & Record<Exclude<keyof I_26, keyof _118.IdentifiedGenesisMetadata>, never>>(object: I_26): _118.IdentifiedGenesisMetadata;
                 };
                 IdentifiedClientState: {
-                    encode(message: _162.IdentifiedClientState, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _162.IdentifiedClientState;
-                    fromJSON(object: any): _162.IdentifiedClientState;
-                    toJSON(message: _162.IdentifiedClientState): unknown;
+                    encode(message: _117.IdentifiedClientState, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _117.IdentifiedClientState;
+                    fromJSON(object: any): _117.IdentifiedClientState;
+                    toJSON(message: _117.IdentifiedClientState): unknown;
                     fromPartial<I_27 extends {
                         clientId?: string;
                         clientState?: {
@@ -3655,13 +3655,13 @@ export declare namespace ibc {
                             typeUrl?: string;
                             value?: Uint8Array;
                         } & Record<Exclude<keyof I_27["clientState"], keyof import("../google/protobuf/any").Any>, never>;
-                    } & Record<Exclude<keyof I_27, keyof _162.IdentifiedClientState>, never>>(object: I_27): _162.IdentifiedClientState;
+                    } & Record<Exclude<keyof I_27, keyof _117.IdentifiedClientState>, never>>(object: I_27): _117.IdentifiedClientState;
                 };
                 ConsensusStateWithHeight: {
-                    encode(message: _162.ConsensusStateWithHeight, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _162.ConsensusStateWithHeight;
-                    fromJSON(object: any): _162.ConsensusStateWithHeight;
-                    toJSON(message: _162.ConsensusStateWithHeight): unknown;
+                    encode(message: _117.ConsensusStateWithHeight, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _117.ConsensusStateWithHeight;
+                    fromJSON(object: any): _117.ConsensusStateWithHeight;
+                    toJSON(message: _117.ConsensusStateWithHeight): unknown;
                     fromPartial<I_28 extends {
                         height?: {
                             revisionNumber?: any;
@@ -3678,7 +3678,7 @@ export declare namespace ibc {
                         } & {
                             revisionNumber?: any;
                             revisionHeight?: any;
-                        } & Record<Exclude<keyof I_28["height"], keyof _162.Height>, never>;
+                        } & Record<Exclude<keyof I_28["height"], keyof _117.Height>, never>;
                         consensusState?: {
                             typeUrl?: string;
                             value?: Uint8Array;
@@ -3686,13 +3686,13 @@ export declare namespace ibc {
                             typeUrl?: string;
                             value?: Uint8Array;
                         } & Record<Exclude<keyof I_28["consensusState"], keyof import("../google/protobuf/any").Any>, never>;
-                    } & Record<Exclude<keyof I_28, keyof _162.ConsensusStateWithHeight>, never>>(object: I_28): _162.ConsensusStateWithHeight;
+                    } & Record<Exclude<keyof I_28, keyof _117.ConsensusStateWithHeight>, never>>(object: I_28): _117.ConsensusStateWithHeight;
                 };
                 ClientConsensusStates: {
-                    encode(message: _162.ClientConsensusStates, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _162.ClientConsensusStates;
-                    fromJSON(object: any): _162.ClientConsensusStates;
-                    toJSON(message: _162.ClientConsensusStates): unknown;
+                    encode(message: _117.ClientConsensusStates, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _117.ClientConsensusStates;
+                    fromJSON(object: any): _117.ClientConsensusStates;
+                    toJSON(message: _117.ClientConsensusStates): unknown;
                     fromPartial<I_29 extends {
                         clientId?: string;
                         consensusStates?: {
@@ -3732,7 +3732,7 @@ export declare namespace ibc {
                             } & {
                                 revisionNumber?: any;
                                 revisionHeight?: any;
-                            } & Record<Exclude<keyof I_29["consensusStates"][number]["height"], keyof _162.Height>, never>;
+                            } & Record<Exclude<keyof I_29["consensusStates"][number]["height"], keyof _117.Height>, never>;
                             consensusState?: {
                                 typeUrl?: string;
                                 value?: Uint8Array;
@@ -3740,7 +3740,7 @@ export declare namespace ibc {
                                 typeUrl?: string;
                                 value?: Uint8Array;
                             } & Record<Exclude<keyof I_29["consensusStates"][number]["consensusState"], keyof import("../google/protobuf/any").Any>, never>;
-                        } & Record<Exclude<keyof I_29["consensusStates"][number], keyof _162.ConsensusStateWithHeight>, never>)[] & Record<Exclude<keyof I_29["consensusStates"], keyof {
+                        } & Record<Exclude<keyof I_29["consensusStates"][number], keyof _117.ConsensusStateWithHeight>, never>)[] & Record<Exclude<keyof I_29["consensusStates"], keyof {
                             height?: {
                                 revisionNumber?: any;
                                 revisionHeight?: any;
@@ -3750,13 +3750,13 @@ export declare namespace ibc {
                                 value?: Uint8Array;
                             };
                         }[]>, never>;
-                    } & Record<Exclude<keyof I_29, keyof _162.ClientConsensusStates>, never>>(object: I_29): _162.ClientConsensusStates;
+                    } & Record<Exclude<keyof I_29, keyof _117.ClientConsensusStates>, never>>(object: I_29): _117.ClientConsensusStates;
                 };
                 ClientUpdateProposal: {
-                    encode(message: _162.ClientUpdateProposal, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _162.ClientUpdateProposal;
-                    fromJSON(object: any): _162.ClientUpdateProposal;
-                    toJSON(message: _162.ClientUpdateProposal): unknown;
+                    encode(message: _117.ClientUpdateProposal, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _117.ClientUpdateProposal;
+                    fromJSON(object: any): _117.ClientUpdateProposal;
+                    toJSON(message: _117.ClientUpdateProposal): unknown;
                     fromPartial<I_30 extends {
                         title?: string;
                         description?: string;
@@ -3767,13 +3767,13 @@ export declare namespace ibc {
                         description?: string;
                         subjectClientId?: string;
                         substituteClientId?: string;
-                    } & Record<Exclude<keyof I_30, keyof _162.ClientUpdateProposal>, never>>(object: I_30): _162.ClientUpdateProposal;
+                    } & Record<Exclude<keyof I_30, keyof _117.ClientUpdateProposal>, never>>(object: I_30): _117.ClientUpdateProposal;
                 };
                 UpgradeProposal: {
-                    encode(message: _162.UpgradeProposal, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _162.UpgradeProposal;
-                    fromJSON(object: any): _162.UpgradeProposal;
-                    toJSON(message: _162.UpgradeProposal): unknown;
+                    encode(message: _117.UpgradeProposal, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _117.UpgradeProposal;
+                    fromJSON(object: any): _117.UpgradeProposal;
+                    toJSON(message: _117.UpgradeProposal): unknown;
                     fromPartial<I_31 extends {
                         title?: string;
                         description?: string;
@@ -3823,74 +3823,74 @@ export declare namespace ibc {
                             typeUrl?: string;
                             value?: Uint8Array;
                         } & Record<Exclude<keyof I_31["upgradedClientState"], keyof import("../google/protobuf/any").Any>, never>;
-                    } & Record<Exclude<keyof I_31, keyof _162.UpgradeProposal>, never>>(object: I_31): _162.UpgradeProposal;
+                    } & Record<Exclude<keyof I_31, keyof _117.UpgradeProposal>, never>>(object: I_31): _117.UpgradeProposal;
                 };
                 Height: {
-                    encode(message: _162.Height, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _162.Height;
-                    fromJSON(object: any): _162.Height;
-                    toJSON(message: _162.Height): unknown;
+                    encode(message: _117.Height, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _117.Height;
+                    fromJSON(object: any): _117.Height;
+                    toJSON(message: _117.Height): unknown;
                     fromPartial<I_32 extends {
                         revisionNumber?: any;
                         revisionHeight?: any;
                     } & {
                         revisionNumber?: any;
                         revisionHeight?: any;
-                    } & Record<Exclude<keyof I_32, keyof _162.Height>, never>>(object: I_32): _162.Height;
+                    } & Record<Exclude<keyof I_32, keyof _117.Height>, never>>(object: I_32): _117.Height;
                 };
                 Params: {
-                    encode(message: _162.Params, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _162.Params;
-                    fromJSON(object: any): _162.Params;
-                    toJSON(message: _162.Params): unknown;
+                    encode(message: _117.Params, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _117.Params;
+                    fromJSON(object: any): _117.Params;
+                    toJSON(message: _117.Params): unknown;
                     fromPartial<I_33 extends {
                         allowedClients?: string[];
                     } & {
                         allowedClients?: string[] & string[] & Record<Exclude<keyof I_33["allowedClients"], keyof string[]>, never>;
-                    } & Record<Exclude<keyof I_33, "allowedClients">, never>>(object: I_33): _162.Params;
+                    } & Record<Exclude<keyof I_33, "allowedClients">, never>>(object: I_33): _117.Params;
                 };
             };
         }
         namespace commitment {
             const v1: {
                 MerkleRoot: {
-                    encode(message: _166.MerkleRoot, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _166.MerkleRoot;
-                    fromJSON(object: any): _166.MerkleRoot;
-                    toJSON(message: _166.MerkleRoot): unknown;
+                    encode(message: _121.MerkleRoot, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _121.MerkleRoot;
+                    fromJSON(object: any): _121.MerkleRoot;
+                    toJSON(message: _121.MerkleRoot): unknown;
                     fromPartial<I extends {
                         hash?: Uint8Array;
                     } & {
                         hash?: Uint8Array;
-                    } & Record<Exclude<keyof I, "hash">, never>>(object: I): _166.MerkleRoot;
+                    } & Record<Exclude<keyof I, "hash">, never>>(object: I): _121.MerkleRoot;
                 };
                 MerklePrefix: {
-                    encode(message: _166.MerklePrefix, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _166.MerklePrefix;
-                    fromJSON(object: any): _166.MerklePrefix;
-                    toJSON(message: _166.MerklePrefix): unknown;
+                    encode(message: _121.MerklePrefix, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _121.MerklePrefix;
+                    fromJSON(object: any): _121.MerklePrefix;
+                    toJSON(message: _121.MerklePrefix): unknown;
                     fromPartial<I_1 extends {
                         keyPrefix?: Uint8Array;
                     } & {
                         keyPrefix?: Uint8Array;
-                    } & Record<Exclude<keyof I_1, "keyPrefix">, never>>(object: I_1): _166.MerklePrefix;
+                    } & Record<Exclude<keyof I_1, "keyPrefix">, never>>(object: I_1): _121.MerklePrefix;
                 };
                 MerklePath: {
-                    encode(message: _166.MerklePath, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _166.MerklePath;
-                    fromJSON(object: any): _166.MerklePath;
-                    toJSON(message: _166.MerklePath): unknown;
+                    encode(message: _121.MerklePath, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _121.MerklePath;
+                    fromJSON(object: any): _121.MerklePath;
+                    toJSON(message: _121.MerklePath): unknown;
                     fromPartial<I_2 extends {
                         keyPath?: string[];
                     } & {
                         keyPath?: string[] & string[] & Record<Exclude<keyof I_2["keyPath"], keyof string[]>, never>;
-                    } & Record<Exclude<keyof I_2, "keyPath">, never>>(object: I_2): _166.MerklePath;
+                    } & Record<Exclude<keyof I_2, "keyPath">, never>>(object: I_2): _121.MerklePath;
                 };
                 MerkleProof: {
-                    encode(message: _166.MerkleProof, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _166.MerkleProof;
-                    fromJSON(object: any): _166.MerkleProof;
-                    toJSON(message: _166.MerkleProof): unknown;
+                    encode(message: _121.MerkleProof, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _121.MerkleProof;
+                    fromJSON(object: any): _121.MerkleProof;
+                    toJSON(message: _121.MerkleProof): unknown;
                     fromPartial<I_3 extends {
                         proofs?: {
                             exist?: {
@@ -5402,7 +5402,7 @@ export declare namespace ibc {
                                 }[];
                             };
                         }[]>, never>;
-                    } & Record<Exclude<keyof I_3, "proofs">, never>>(object: I_3): _166.MerkleProof;
+                    } & Record<Exclude<keyof I_3, "proofs">, never>>(object: I_3): _121.MerkleProof;
                 };
             };
         }
@@ -5412,55 +5412,55 @@ export declare namespace ibc {
                 load: (protoRegistry: import("@cosmjs/proto-signing").Registry) => void;
                 MessageComposer: {
                     encoded: {
-                        connectionOpenInit(value: _170.MsgConnectionOpenInit): {
+                        connectionOpenInit(value: _125.MsgConnectionOpenInit): {
                             type_url: string;
                             value: Uint8Array;
                         };
-                        connectionOpenTry(value: _170.MsgConnectionOpenTry): {
+                        connectionOpenTry(value: _125.MsgConnectionOpenTry): {
                             type_url: string;
                             value: Uint8Array;
                         };
-                        connectionOpenAck(value: _170.MsgConnectionOpenAck): {
+                        connectionOpenAck(value: _125.MsgConnectionOpenAck): {
                             type_url: string;
                             value: Uint8Array;
                         };
-                        connectionOpenConfirm(value: _170.MsgConnectionOpenConfirm): {
+                        connectionOpenConfirm(value: _125.MsgConnectionOpenConfirm): {
                             type_url: string;
                             value: Uint8Array;
                         };
                     };
                     withTypeUrl: {
-                        connectionOpenInit(value: _170.MsgConnectionOpenInit): {
+                        connectionOpenInit(value: _125.MsgConnectionOpenInit): {
                             typeUrl: string;
-                            value: _170.MsgConnectionOpenInit;
+                            value: _125.MsgConnectionOpenInit;
                         };
-                        connectionOpenTry(value: _170.MsgConnectionOpenTry): {
+                        connectionOpenTry(value: _125.MsgConnectionOpenTry): {
                             typeUrl: string;
-                            value: _170.MsgConnectionOpenTry;
+                            value: _125.MsgConnectionOpenTry;
                         };
-                        connectionOpenAck(value: _170.MsgConnectionOpenAck): {
+                        connectionOpenAck(value: _125.MsgConnectionOpenAck): {
                             typeUrl: string;
-                            value: _170.MsgConnectionOpenAck;
+                            value: _125.MsgConnectionOpenAck;
                         };
-                        connectionOpenConfirm(value: _170.MsgConnectionOpenConfirm): {
+                        connectionOpenConfirm(value: _125.MsgConnectionOpenConfirm): {
                             typeUrl: string;
-                            value: _170.MsgConnectionOpenConfirm;
+                            value: _125.MsgConnectionOpenConfirm;
                         };
                     };
                     toJSON: {
-                        connectionOpenInit(value: _170.MsgConnectionOpenInit): {
+                        connectionOpenInit(value: _125.MsgConnectionOpenInit): {
                             typeUrl: string;
                             value: unknown;
                         };
-                        connectionOpenTry(value: _170.MsgConnectionOpenTry): {
+                        connectionOpenTry(value: _125.MsgConnectionOpenTry): {
                             typeUrl: string;
                             value: unknown;
                         };
-                        connectionOpenAck(value: _170.MsgConnectionOpenAck): {
+                        connectionOpenAck(value: _125.MsgConnectionOpenAck): {
                             typeUrl: string;
                             value: unknown;
                         };
-                        connectionOpenConfirm(value: _170.MsgConnectionOpenConfirm): {
+                        connectionOpenConfirm(value: _125.MsgConnectionOpenConfirm): {
                             typeUrl: string;
                             value: unknown;
                         };
@@ -5468,44 +5468,44 @@ export declare namespace ibc {
                     fromJSON: {
                         connectionOpenInit(value: any): {
                             typeUrl: string;
-                            value: _170.MsgConnectionOpenInit;
+                            value: _125.MsgConnectionOpenInit;
                         };
                         connectionOpenTry(value: any): {
                             typeUrl: string;
-                            value: _170.MsgConnectionOpenTry;
+                            value: _125.MsgConnectionOpenTry;
                         };
                         connectionOpenAck(value: any): {
                             typeUrl: string;
-                            value: _170.MsgConnectionOpenAck;
+                            value: _125.MsgConnectionOpenAck;
                         };
                         connectionOpenConfirm(value: any): {
                             typeUrl: string;
-                            value: _170.MsgConnectionOpenConfirm;
+                            value: _125.MsgConnectionOpenConfirm;
                         };
                     };
                     fromPartial: {
-                        connectionOpenInit(value: _170.MsgConnectionOpenInit): {
+                        connectionOpenInit(value: _125.MsgConnectionOpenInit): {
                             typeUrl: string;
-                            value: _170.MsgConnectionOpenInit;
+                            value: _125.MsgConnectionOpenInit;
                         };
-                        connectionOpenTry(value: _170.MsgConnectionOpenTry): {
+                        connectionOpenTry(value: _125.MsgConnectionOpenTry): {
                             typeUrl: string;
-                            value: _170.MsgConnectionOpenTry;
+                            value: _125.MsgConnectionOpenTry;
                         };
-                        connectionOpenAck(value: _170.MsgConnectionOpenAck): {
+                        connectionOpenAck(value: _125.MsgConnectionOpenAck): {
                             typeUrl: string;
-                            value: _170.MsgConnectionOpenAck;
+                            value: _125.MsgConnectionOpenAck;
                         };
-                        connectionOpenConfirm(value: _170.MsgConnectionOpenConfirm): {
+                        connectionOpenConfirm(value: _125.MsgConnectionOpenConfirm): {
                             typeUrl: string;
-                            value: _170.MsgConnectionOpenConfirm;
+                            value: _125.MsgConnectionOpenConfirm;
                         };
                     };
                 };
                 AminoConverter: {
                     "/ibc.core.connection.v1.MsgConnectionOpenInit": {
                         aminoType: string;
-                        toAmino: ({ clientId, counterparty, version, delayPeriod, signer }: _170.MsgConnectionOpenInit) => {
+                        toAmino: ({ clientId, counterparty, version, delayPeriod, signer }: _125.MsgConnectionOpenInit) => {
                             client_id: string;
                             counterparty: {
                                 client_id: string;
@@ -5536,11 +5536,11 @@ export declare namespace ibc {
                             };
                             delay_period: string;
                             signer: string;
-                        }) => _170.MsgConnectionOpenInit;
+                        }) => _125.MsgConnectionOpenInit;
                     };
                     "/ibc.core.connection.v1.MsgConnectionOpenTry": {
                         aminoType: string;
-                        toAmino: ({ clientId, previousConnectionId, clientState, counterparty, delayPeriod, counterpartyVersions, proofHeight, proofInit, proofClient, proofConsensus, consensusHeight, signer }: _170.MsgConnectionOpenTry) => {
+                        toAmino: ({ clientId, previousConnectionId, clientState, counterparty, delayPeriod, counterpartyVersions, proofHeight, proofInit, proofClient, proofConsensus, consensusHeight, signer }: _125.MsgConnectionOpenTry) => {
                             client_id: string;
                             previous_connection_id: string;
                             client_state: {
@@ -5603,11 +5603,11 @@ export declare namespace ibc {
                                 revision_height: string;
                             };
                             signer: string;
-                        }) => _170.MsgConnectionOpenTry;
+                        }) => _125.MsgConnectionOpenTry;
                     };
                     "/ibc.core.connection.v1.MsgConnectionOpenAck": {
                         aminoType: string;
-                        toAmino: ({ connectionId, counterpartyConnectionId, version, clientState, proofHeight, proofTry, proofClient, proofConsensus, consensusHeight, signer }: _170.MsgConnectionOpenAck) => {
+                        toAmino: ({ connectionId, counterpartyConnectionId, version, clientState, proofHeight, proofTry, proofClient, proofConsensus, consensusHeight, signer }: _125.MsgConnectionOpenAck) => {
                             connection_id: string;
                             counterparty_connection_id: string;
                             version: {
@@ -5654,11 +5654,11 @@ export declare namespace ibc {
                                 revision_height: string;
                             };
                             signer: string;
-                        }) => _170.MsgConnectionOpenAck;
+                        }) => _125.MsgConnectionOpenAck;
                     };
                     "/ibc.core.connection.v1.MsgConnectionOpenConfirm": {
                         aminoType: string;
-                        toAmino: ({ connectionId, proofAck, proofHeight, signer }: _170.MsgConnectionOpenConfirm) => {
+                        toAmino: ({ connectionId, proofAck, proofHeight, signer }: _125.MsgConnectionOpenConfirm) => {
                             connection_id: string;
                             proof_ack: Uint8Array;
                             proof_height: {
@@ -5675,14 +5675,14 @@ export declare namespace ibc {
                                 revision_height: string;
                             };
                             signer: string;
-                        }) => _170.MsgConnectionOpenConfirm;
+                        }) => _125.MsgConnectionOpenConfirm;
                     };
                 };
                 MsgConnectionOpenInit: {
-                    encode(message: _170.MsgConnectionOpenInit, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _170.MsgConnectionOpenInit;
-                    fromJSON(object: any): _170.MsgConnectionOpenInit;
-                    toJSON(message: _170.MsgConnectionOpenInit): unknown;
+                    encode(message: _125.MsgConnectionOpenInit, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _125.MsgConnectionOpenInit;
+                    fromJSON(object: any): _125.MsgConnectionOpenInit;
+                    toJSON(message: _125.MsgConnectionOpenInit): unknown;
                     fromPartial<I extends {
                         clientId?: string;
                         counterparty?: {
@@ -5714,30 +5714,30 @@ export declare namespace ibc {
                             } & {
                                 keyPrefix?: Uint8Array;
                             } & Record<Exclude<keyof I["counterparty"]["prefix"], "keyPrefix">, never>;
-                        } & Record<Exclude<keyof I["counterparty"], keyof _167.Counterparty>, never>;
+                        } & Record<Exclude<keyof I["counterparty"], keyof _122.Counterparty>, never>;
                         version?: {
                             identifier?: string;
                             features?: string[];
                         } & {
                             identifier?: string;
                             features?: string[] & string[] & Record<Exclude<keyof I["version"]["features"], keyof string[]>, never>;
-                        } & Record<Exclude<keyof I["version"], keyof _167.Version>, never>;
+                        } & Record<Exclude<keyof I["version"], keyof _122.Version>, never>;
                         delayPeriod?: any;
                         signer?: string;
-                    } & Record<Exclude<keyof I, keyof _170.MsgConnectionOpenInit>, never>>(object: I): _170.MsgConnectionOpenInit;
+                    } & Record<Exclude<keyof I, keyof _125.MsgConnectionOpenInit>, never>>(object: I): _125.MsgConnectionOpenInit;
                 };
                 MsgConnectionOpenInitResponse: {
-                    encode(_: _170.MsgConnectionOpenInitResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _170.MsgConnectionOpenInitResponse;
-                    fromJSON(_: any): _170.MsgConnectionOpenInitResponse;
-                    toJSON(_: _170.MsgConnectionOpenInitResponse): unknown;
-                    fromPartial<I_1 extends {} & {} & Record<Exclude<keyof I_1, never>, never>>(_: I_1): _170.MsgConnectionOpenInitResponse;
+                    encode(_: _125.MsgConnectionOpenInitResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _125.MsgConnectionOpenInitResponse;
+                    fromJSON(_: any): _125.MsgConnectionOpenInitResponse;
+                    toJSON(_: _125.MsgConnectionOpenInitResponse): unknown;
+                    fromPartial<I_1 extends {} & {} & Record<Exclude<keyof I_1, never>, never>>(_: I_1): _125.MsgConnectionOpenInitResponse;
                 };
                 MsgConnectionOpenTry: {
-                    encode(message: _170.MsgConnectionOpenTry, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _170.MsgConnectionOpenTry;
-                    fromJSON(object: any): _170.MsgConnectionOpenTry;
-                    toJSON(message: _170.MsgConnectionOpenTry): unknown;
+                    encode(message: _125.MsgConnectionOpenTry, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _125.MsgConnectionOpenTry;
+                    fromJSON(object: any): _125.MsgConnectionOpenTry;
+                    toJSON(message: _125.MsgConnectionOpenTry): unknown;
                     fromPartial<I_2 extends {
                         clientId?: string;
                         previousConnectionId?: string;
@@ -5793,7 +5793,7 @@ export declare namespace ibc {
                             } & {
                                 keyPrefix?: Uint8Array;
                             } & Record<Exclude<keyof I_2["counterparty"]["prefix"], "keyPrefix">, never>;
-                        } & Record<Exclude<keyof I_2["counterparty"], keyof _167.Counterparty>, never>;
+                        } & Record<Exclude<keyof I_2["counterparty"], keyof _122.Counterparty>, never>;
                         delayPeriod?: any;
                         counterpartyVersions?: {
                             identifier?: string;
@@ -5804,7 +5804,7 @@ export declare namespace ibc {
                         } & {
                             identifier?: string;
                             features?: string[] & string[] & Record<Exclude<keyof I_2["counterpartyVersions"][number]["features"], keyof string[]>, never>;
-                        } & Record<Exclude<keyof I_2["counterpartyVersions"][number], keyof _167.Version>, never>)[] & Record<Exclude<keyof I_2["counterpartyVersions"], keyof {
+                        } & Record<Exclude<keyof I_2["counterpartyVersions"][number], keyof _122.Version>, never>)[] & Record<Exclude<keyof I_2["counterpartyVersions"], keyof {
                             identifier?: string;
                             features?: string[];
                         }[]>, never>;
@@ -5814,7 +5814,7 @@ export declare namespace ibc {
                         } & {
                             revisionNumber?: any;
                             revisionHeight?: any;
-                        } & Record<Exclude<keyof I_2["proofHeight"], keyof _162.Height>, never>;
+                        } & Record<Exclude<keyof I_2["proofHeight"], keyof _117.Height>, never>;
                         proofInit?: Uint8Array;
                         proofClient?: Uint8Array;
                         proofConsensus?: Uint8Array;
@@ -5824,22 +5824,22 @@ export declare namespace ibc {
                         } & {
                             revisionNumber?: any;
                             revisionHeight?: any;
-                        } & Record<Exclude<keyof I_2["consensusHeight"], keyof _162.Height>, never>;
+                        } & Record<Exclude<keyof I_2["consensusHeight"], keyof _117.Height>, never>;
                         signer?: string;
-                    } & Record<Exclude<keyof I_2, keyof _170.MsgConnectionOpenTry>, never>>(object: I_2): _170.MsgConnectionOpenTry;
+                    } & Record<Exclude<keyof I_2, keyof _125.MsgConnectionOpenTry>, never>>(object: I_2): _125.MsgConnectionOpenTry;
                 };
                 MsgConnectionOpenTryResponse: {
-                    encode(_: _170.MsgConnectionOpenTryResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _170.MsgConnectionOpenTryResponse;
-                    fromJSON(_: any): _170.MsgConnectionOpenTryResponse;
-                    toJSON(_: _170.MsgConnectionOpenTryResponse): unknown;
-                    fromPartial<I_3 extends {} & {} & Record<Exclude<keyof I_3, never>, never>>(_: I_3): _170.MsgConnectionOpenTryResponse;
+                    encode(_: _125.MsgConnectionOpenTryResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _125.MsgConnectionOpenTryResponse;
+                    fromJSON(_: any): _125.MsgConnectionOpenTryResponse;
+                    toJSON(_: _125.MsgConnectionOpenTryResponse): unknown;
+                    fromPartial<I_3 extends {} & {} & Record<Exclude<keyof I_3, never>, never>>(_: I_3): _125.MsgConnectionOpenTryResponse;
                 };
                 MsgConnectionOpenAck: {
-                    encode(message: _170.MsgConnectionOpenAck, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _170.MsgConnectionOpenAck;
-                    fromJSON(object: any): _170.MsgConnectionOpenAck;
-                    toJSON(message: _170.MsgConnectionOpenAck): unknown;
+                    encode(message: _125.MsgConnectionOpenAck, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _125.MsgConnectionOpenAck;
+                    fromJSON(object: any): _125.MsgConnectionOpenAck;
+                    toJSON(message: _125.MsgConnectionOpenAck): unknown;
                     fromPartial<I_4 extends {
                         connectionId?: string;
                         counterpartyConnectionId?: string;
@@ -5872,7 +5872,7 @@ export declare namespace ibc {
                         } & {
                             identifier?: string;
                             features?: string[] & string[] & Record<Exclude<keyof I_4["version"]["features"], keyof string[]>, never>;
-                        } & Record<Exclude<keyof I_4["version"], keyof _167.Version>, never>;
+                        } & Record<Exclude<keyof I_4["version"], keyof _122.Version>, never>;
                         clientState?: {
                             typeUrl?: string;
                             value?: Uint8Array;
@@ -5886,7 +5886,7 @@ export declare namespace ibc {
                         } & {
                             revisionNumber?: any;
                             revisionHeight?: any;
-                        } & Record<Exclude<keyof I_4["proofHeight"], keyof _162.Height>, never>;
+                        } & Record<Exclude<keyof I_4["proofHeight"], keyof _117.Height>, never>;
                         proofTry?: Uint8Array;
                         proofClient?: Uint8Array;
                         proofConsensus?: Uint8Array;
@@ -5896,22 +5896,22 @@ export declare namespace ibc {
                         } & {
                             revisionNumber?: any;
                             revisionHeight?: any;
-                        } & Record<Exclude<keyof I_4["consensusHeight"], keyof _162.Height>, never>;
+                        } & Record<Exclude<keyof I_4["consensusHeight"], keyof _117.Height>, never>;
                         signer?: string;
-                    } & Record<Exclude<keyof I_4, keyof _170.MsgConnectionOpenAck>, never>>(object: I_4): _170.MsgConnectionOpenAck;
+                    } & Record<Exclude<keyof I_4, keyof _125.MsgConnectionOpenAck>, never>>(object: I_4): _125.MsgConnectionOpenAck;
                 };
                 MsgConnectionOpenAckResponse: {
-                    encode(_: _170.MsgConnectionOpenAckResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _170.MsgConnectionOpenAckResponse;
-                    fromJSON(_: any): _170.MsgConnectionOpenAckResponse;
-                    toJSON(_: _170.MsgConnectionOpenAckResponse): unknown;
-                    fromPartial<I_5 extends {} & {} & Record<Exclude<keyof I_5, never>, never>>(_: I_5): _170.MsgConnectionOpenAckResponse;
+                    encode(_: _125.MsgConnectionOpenAckResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _125.MsgConnectionOpenAckResponse;
+                    fromJSON(_: any): _125.MsgConnectionOpenAckResponse;
+                    toJSON(_: _125.MsgConnectionOpenAckResponse): unknown;
+                    fromPartial<I_5 extends {} & {} & Record<Exclude<keyof I_5, never>, never>>(_: I_5): _125.MsgConnectionOpenAckResponse;
                 };
                 MsgConnectionOpenConfirm: {
-                    encode(message: _170.MsgConnectionOpenConfirm, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _170.MsgConnectionOpenConfirm;
-                    fromJSON(object: any): _170.MsgConnectionOpenConfirm;
-                    toJSON(message: _170.MsgConnectionOpenConfirm): unknown;
+                    encode(message: _125.MsgConnectionOpenConfirm, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _125.MsgConnectionOpenConfirm;
+                    fromJSON(object: any): _125.MsgConnectionOpenConfirm;
+                    toJSON(message: _125.MsgConnectionOpenConfirm): unknown;
                     fromPartial<I_6 extends {
                         connectionId?: string;
                         proofAck?: Uint8Array;
@@ -5929,33 +5929,33 @@ export declare namespace ibc {
                         } & {
                             revisionNumber?: any;
                             revisionHeight?: any;
-                        } & Record<Exclude<keyof I_6["proofHeight"], keyof _162.Height>, never>;
+                        } & Record<Exclude<keyof I_6["proofHeight"], keyof _117.Height>, never>;
                         signer?: string;
-                    } & Record<Exclude<keyof I_6, keyof _170.MsgConnectionOpenConfirm>, never>>(object: I_6): _170.MsgConnectionOpenConfirm;
+                    } & Record<Exclude<keyof I_6, keyof _125.MsgConnectionOpenConfirm>, never>>(object: I_6): _125.MsgConnectionOpenConfirm;
                 };
                 MsgConnectionOpenConfirmResponse: {
-                    encode(_: _170.MsgConnectionOpenConfirmResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _170.MsgConnectionOpenConfirmResponse;
-                    fromJSON(_: any): _170.MsgConnectionOpenConfirmResponse;
-                    toJSON(_: _170.MsgConnectionOpenConfirmResponse): unknown;
-                    fromPartial<I_7 extends {} & {} & Record<Exclude<keyof I_7, never>, never>>(_: I_7): _170.MsgConnectionOpenConfirmResponse;
+                    encode(_: _125.MsgConnectionOpenConfirmResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _125.MsgConnectionOpenConfirmResponse;
+                    fromJSON(_: any): _125.MsgConnectionOpenConfirmResponse;
+                    toJSON(_: _125.MsgConnectionOpenConfirmResponse): unknown;
+                    fromPartial<I_7 extends {} & {} & Record<Exclude<keyof I_7, never>, never>>(_: I_7): _125.MsgConnectionOpenConfirmResponse;
                 };
                 QueryConnectionRequest: {
-                    encode(message: _169.QueryConnectionRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _169.QueryConnectionRequest;
-                    fromJSON(object: any): _169.QueryConnectionRequest;
-                    toJSON(message: _169.QueryConnectionRequest): unknown;
+                    encode(message: _124.QueryConnectionRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _124.QueryConnectionRequest;
+                    fromJSON(object: any): _124.QueryConnectionRequest;
+                    toJSON(message: _124.QueryConnectionRequest): unknown;
                     fromPartial<I_8 extends {
                         connectionId?: string;
                     } & {
                         connectionId?: string;
-                    } & Record<Exclude<keyof I_8, "connectionId">, never>>(object: I_8): _169.QueryConnectionRequest;
+                    } & Record<Exclude<keyof I_8, "connectionId">, never>>(object: I_8): _124.QueryConnectionRequest;
                 };
                 QueryConnectionResponse: {
-                    encode(message: _169.QueryConnectionResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _169.QueryConnectionResponse;
-                    fromJSON(object: any): _169.QueryConnectionResponse;
-                    toJSON(message: _169.QueryConnectionResponse): unknown;
+                    encode(message: _124.QueryConnectionResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _124.QueryConnectionResponse;
+                    fromJSON(object: any): _124.QueryConnectionResponse;
+                    toJSON(message: _124.QueryConnectionResponse): unknown;
                     fromPartial<I_9 extends {
                         connection?: {
                             clientId?: string;
@@ -5963,7 +5963,7 @@ export declare namespace ibc {
                                 identifier?: string;
                                 features?: string[];
                             }[];
-                            state?: _167.State;
+                            state?: _122.State;
                             counterparty?: {
                                 clientId?: string;
                                 connectionId?: string;
@@ -5985,7 +5985,7 @@ export declare namespace ibc {
                                 identifier?: string;
                                 features?: string[];
                             }[];
-                            state?: _167.State;
+                            state?: _122.State;
                             counterparty?: {
                                 clientId?: string;
                                 connectionId?: string;
@@ -6005,11 +6005,11 @@ export declare namespace ibc {
                             } & {
                                 identifier?: string;
                                 features?: string[] & string[] & Record<Exclude<keyof I_9["connection"]["versions"][number]["features"], keyof string[]>, never>;
-                            } & Record<Exclude<keyof I_9["connection"]["versions"][number], keyof _167.Version>, never>)[] & Record<Exclude<keyof I_9["connection"]["versions"], keyof {
+                            } & Record<Exclude<keyof I_9["connection"]["versions"][number], keyof _122.Version>, never>)[] & Record<Exclude<keyof I_9["connection"]["versions"], keyof {
                                 identifier?: string;
                                 features?: string[];
                             }[]>, never>;
-                            state?: _167.State;
+                            state?: _122.State;
                             counterparty?: {
                                 clientId?: string;
                                 connectionId?: string;
@@ -6024,9 +6024,9 @@ export declare namespace ibc {
                                 } & {
                                     keyPrefix?: Uint8Array;
                                 } & Record<Exclude<keyof I_9["connection"]["counterparty"]["prefix"], "keyPrefix">, never>;
-                            } & Record<Exclude<keyof I_9["connection"]["counterparty"], keyof _167.Counterparty>, never>;
+                            } & Record<Exclude<keyof I_9["connection"]["counterparty"], keyof _122.Counterparty>, never>;
                             delayPeriod?: any;
-                        } & Record<Exclude<keyof I_9["connection"], keyof _167.ConnectionEnd>, never>;
+                        } & Record<Exclude<keyof I_9["connection"], keyof _122.ConnectionEnd>, never>;
                         proof?: Uint8Array;
                         proofHeight?: {
                             revisionNumber?: any;
@@ -6034,14 +6034,14 @@ export declare namespace ibc {
                         } & {
                             revisionNumber?: any;
                             revisionHeight?: any;
-                        } & Record<Exclude<keyof I_9["proofHeight"], keyof _162.Height>, never>;
-                    } & Record<Exclude<keyof I_9, keyof _169.QueryConnectionResponse>, never>>(object: I_9): _169.QueryConnectionResponse;
+                        } & Record<Exclude<keyof I_9["proofHeight"], keyof _117.Height>, never>;
+                    } & Record<Exclude<keyof I_9, keyof _124.QueryConnectionResponse>, never>>(object: I_9): _124.QueryConnectionResponse;
                 };
                 QueryConnectionsRequest: {
-                    encode(message: _169.QueryConnectionsRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _169.QueryConnectionsRequest;
-                    fromJSON(object: any): _169.QueryConnectionsRequest;
-                    toJSON(message: _169.QueryConnectionsRequest): unknown;
+                    encode(message: _124.QueryConnectionsRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _124.QueryConnectionsRequest;
+                    fromJSON(object: any): _124.QueryConnectionsRequest;
+                    toJSON(message: _124.QueryConnectionsRequest): unknown;
                     fromPartial<I_10 extends {
                         pagination?: {
                             key?: Uint8Array;
@@ -6064,13 +6064,13 @@ export declare namespace ibc {
                             countTotal?: boolean;
                             reverse?: boolean;
                         } & Record<Exclude<keyof I_10["pagination"], keyof import("../cosmos/base/query/v1beta1/pagination").PageRequest>, never>;
-                    } & Record<Exclude<keyof I_10, "pagination">, never>>(object: I_10): _169.QueryConnectionsRequest;
+                    } & Record<Exclude<keyof I_10, "pagination">, never>>(object: I_10): _124.QueryConnectionsRequest;
                 };
                 QueryConnectionsResponse: {
-                    encode(message: _169.QueryConnectionsResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _169.QueryConnectionsResponse;
-                    fromJSON(object: any): _169.QueryConnectionsResponse;
-                    toJSON(message: _169.QueryConnectionsResponse): unknown;
+                    encode(message: _124.QueryConnectionsResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _124.QueryConnectionsResponse;
+                    fromJSON(object: any): _124.QueryConnectionsResponse;
+                    toJSON(message: _124.QueryConnectionsResponse): unknown;
                     fromPartial<I_11 extends {
                         connections?: {
                             id?: string;
@@ -6079,7 +6079,7 @@ export declare namespace ibc {
                                 identifier?: string;
                                 features?: string[];
                             }[];
-                            state?: _167.State;
+                            state?: _122.State;
                             counterparty?: {
                                 clientId?: string;
                                 connectionId?: string;
@@ -6105,7 +6105,7 @@ export declare namespace ibc {
                                 identifier?: string;
                                 features?: string[];
                             }[];
-                            state?: _167.State;
+                            state?: _122.State;
                             counterparty?: {
                                 clientId?: string;
                                 connectionId?: string;
@@ -6121,7 +6121,7 @@ export declare namespace ibc {
                                 identifier?: string;
                                 features?: string[];
                             }[];
-                            state?: _167.State;
+                            state?: _122.State;
                             counterparty?: {
                                 clientId?: string;
                                 connectionId?: string;
@@ -6142,11 +6142,11 @@ export declare namespace ibc {
                             } & {
                                 identifier?: string;
                                 features?: string[] & string[] & Record<Exclude<keyof I_11["connections"][number]["versions"][number]["features"], keyof string[]>, never>;
-                            } & Record<Exclude<keyof I_11["connections"][number]["versions"][number], keyof _167.Version>, never>)[] & Record<Exclude<keyof I_11["connections"][number]["versions"], keyof {
+                            } & Record<Exclude<keyof I_11["connections"][number]["versions"][number], keyof _122.Version>, never>)[] & Record<Exclude<keyof I_11["connections"][number]["versions"], keyof {
                                 identifier?: string;
                                 features?: string[];
                             }[]>, never>;
-                            state?: _167.State;
+                            state?: _122.State;
                             counterparty?: {
                                 clientId?: string;
                                 connectionId?: string;
@@ -6161,16 +6161,16 @@ export declare namespace ibc {
                                 } & {
                                     keyPrefix?: Uint8Array;
                                 } & Record<Exclude<keyof I_11["connections"][number]["counterparty"]["prefix"], "keyPrefix">, never>;
-                            } & Record<Exclude<keyof I_11["connections"][number]["counterparty"], keyof _167.Counterparty>, never>;
+                            } & Record<Exclude<keyof I_11["connections"][number]["counterparty"], keyof _122.Counterparty>, never>;
                             delayPeriod?: any;
-                        } & Record<Exclude<keyof I_11["connections"][number], keyof _167.IdentifiedConnection>, never>)[] & Record<Exclude<keyof I_11["connections"], keyof {
+                        } & Record<Exclude<keyof I_11["connections"][number], keyof _122.IdentifiedConnection>, never>)[] & Record<Exclude<keyof I_11["connections"], keyof {
                             id?: string;
                             clientId?: string;
                             versions?: {
                                 identifier?: string;
                                 features?: string[];
                             }[];
-                            state?: _167.State;
+                            state?: _122.State;
                             counterparty?: {
                                 clientId?: string;
                                 connectionId?: string;
@@ -6193,25 +6193,25 @@ export declare namespace ibc {
                         } & {
                             revisionNumber?: any;
                             revisionHeight?: any;
-                        } & Record<Exclude<keyof I_11["height"], keyof _162.Height>, never>;
-                    } & Record<Exclude<keyof I_11, keyof _169.QueryConnectionsResponse>, never>>(object: I_11): _169.QueryConnectionsResponse;
+                        } & Record<Exclude<keyof I_11["height"], keyof _117.Height>, never>;
+                    } & Record<Exclude<keyof I_11, keyof _124.QueryConnectionsResponse>, never>>(object: I_11): _124.QueryConnectionsResponse;
                 };
                 QueryClientConnectionsRequest: {
-                    encode(message: _169.QueryClientConnectionsRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _169.QueryClientConnectionsRequest;
-                    fromJSON(object: any): _169.QueryClientConnectionsRequest;
-                    toJSON(message: _169.QueryClientConnectionsRequest): unknown;
+                    encode(message: _124.QueryClientConnectionsRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _124.QueryClientConnectionsRequest;
+                    fromJSON(object: any): _124.QueryClientConnectionsRequest;
+                    toJSON(message: _124.QueryClientConnectionsRequest): unknown;
                     fromPartial<I_12 extends {
                         clientId?: string;
                     } & {
                         clientId?: string;
-                    } & Record<Exclude<keyof I_12, "clientId">, never>>(object: I_12): _169.QueryClientConnectionsRequest;
+                    } & Record<Exclude<keyof I_12, "clientId">, never>>(object: I_12): _124.QueryClientConnectionsRequest;
                 };
                 QueryClientConnectionsResponse: {
-                    encode(message: _169.QueryClientConnectionsResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _169.QueryClientConnectionsResponse;
-                    fromJSON(object: any): _169.QueryClientConnectionsResponse;
-                    toJSON(message: _169.QueryClientConnectionsResponse): unknown;
+                    encode(message: _124.QueryClientConnectionsResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _124.QueryClientConnectionsResponse;
+                    fromJSON(object: any): _124.QueryClientConnectionsResponse;
+                    toJSON(message: _124.QueryClientConnectionsResponse): unknown;
                     fromPartial<I_13 extends {
                         connectionPaths?: string[];
                         proof?: Uint8Array;
@@ -6228,25 +6228,25 @@ export declare namespace ibc {
                         } & {
                             revisionNumber?: any;
                             revisionHeight?: any;
-                        } & Record<Exclude<keyof I_13["proofHeight"], keyof _162.Height>, never>;
-                    } & Record<Exclude<keyof I_13, keyof _169.QueryClientConnectionsResponse>, never>>(object: I_13): _169.QueryClientConnectionsResponse;
+                        } & Record<Exclude<keyof I_13["proofHeight"], keyof _117.Height>, never>;
+                    } & Record<Exclude<keyof I_13, keyof _124.QueryClientConnectionsResponse>, never>>(object: I_13): _124.QueryClientConnectionsResponse;
                 };
                 QueryConnectionClientStateRequest: {
-                    encode(message: _169.QueryConnectionClientStateRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _169.QueryConnectionClientStateRequest;
-                    fromJSON(object: any): _169.QueryConnectionClientStateRequest;
-                    toJSON(message: _169.QueryConnectionClientStateRequest): unknown;
+                    encode(message: _124.QueryConnectionClientStateRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _124.QueryConnectionClientStateRequest;
+                    fromJSON(object: any): _124.QueryConnectionClientStateRequest;
+                    toJSON(message: _124.QueryConnectionClientStateRequest): unknown;
                     fromPartial<I_14 extends {
                         connectionId?: string;
                     } & {
                         connectionId?: string;
-                    } & Record<Exclude<keyof I_14, "connectionId">, never>>(object: I_14): _169.QueryConnectionClientStateRequest;
+                    } & Record<Exclude<keyof I_14, "connectionId">, never>>(object: I_14): _124.QueryConnectionClientStateRequest;
                 };
                 QueryConnectionClientStateResponse: {
-                    encode(message: _169.QueryConnectionClientStateResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _169.QueryConnectionClientStateResponse;
-                    fromJSON(object: any): _169.QueryConnectionClientStateResponse;
-                    toJSON(message: _169.QueryConnectionClientStateResponse): unknown;
+                    encode(message: _124.QueryConnectionClientStateResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _124.QueryConnectionClientStateResponse;
+                    fromJSON(object: any): _124.QueryConnectionClientStateResponse;
+                    toJSON(message: _124.QueryConnectionClientStateResponse): unknown;
                     fromPartial<I_15 extends {
                         identifiedClientState?: {
                             clientId?: string;
@@ -6276,7 +6276,7 @@ export declare namespace ibc {
                                 typeUrl?: string;
                                 value?: Uint8Array;
                             } & Record<Exclude<keyof I_15["identifiedClientState"]["clientState"], keyof import("../google/protobuf/any").Any>, never>;
-                        } & Record<Exclude<keyof I_15["identifiedClientState"], keyof _162.IdentifiedClientState>, never>;
+                        } & Record<Exclude<keyof I_15["identifiedClientState"], keyof _117.IdentifiedClientState>, never>;
                         proof?: Uint8Array;
                         proofHeight?: {
                             revisionNumber?: any;
@@ -6284,14 +6284,14 @@ export declare namespace ibc {
                         } & {
                             revisionNumber?: any;
                             revisionHeight?: any;
-                        } & Record<Exclude<keyof I_15["proofHeight"], keyof _162.Height>, never>;
-                    } & Record<Exclude<keyof I_15, keyof _169.QueryConnectionClientStateResponse>, never>>(object: I_15): _169.QueryConnectionClientStateResponse;
+                        } & Record<Exclude<keyof I_15["proofHeight"], keyof _117.Height>, never>;
+                    } & Record<Exclude<keyof I_15, keyof _124.QueryConnectionClientStateResponse>, never>>(object: I_15): _124.QueryConnectionClientStateResponse;
                 };
                 QueryConnectionConsensusStateRequest: {
-                    encode(message: _169.QueryConnectionConsensusStateRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _169.QueryConnectionConsensusStateRequest;
-                    fromJSON(object: any): _169.QueryConnectionConsensusStateRequest;
-                    toJSON(message: _169.QueryConnectionConsensusStateRequest): unknown;
+                    encode(message: _124.QueryConnectionConsensusStateRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _124.QueryConnectionConsensusStateRequest;
+                    fromJSON(object: any): _124.QueryConnectionConsensusStateRequest;
+                    toJSON(message: _124.QueryConnectionConsensusStateRequest): unknown;
                     fromPartial<I_16 extends {
                         connectionId?: string;
                         revisionNumber?: any;
@@ -6300,13 +6300,13 @@ export declare namespace ibc {
                         connectionId?: string;
                         revisionNumber?: any;
                         revisionHeight?: any;
-                    } & Record<Exclude<keyof I_16, keyof _169.QueryConnectionConsensusStateRequest>, never>>(object: I_16): _169.QueryConnectionConsensusStateRequest;
+                    } & Record<Exclude<keyof I_16, keyof _124.QueryConnectionConsensusStateRequest>, never>>(object: I_16): _124.QueryConnectionConsensusStateRequest;
                 };
                 QueryConnectionConsensusStateResponse: {
-                    encode(message: _169.QueryConnectionConsensusStateResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _169.QueryConnectionConsensusStateResponse;
-                    fromJSON(object: any): _169.QueryConnectionConsensusStateResponse;
-                    toJSON(message: _169.QueryConnectionConsensusStateResponse): unknown;
+                    encode(message: _124.QueryConnectionConsensusStateResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _124.QueryConnectionConsensusStateResponse;
+                    fromJSON(object: any): _124.QueryConnectionConsensusStateResponse;
+                    toJSON(message: _124.QueryConnectionConsensusStateResponse): unknown;
                     fromPartial<I_17 extends {
                         consensusState?: {
                             typeUrl?: string;
@@ -6334,14 +6334,14 @@ export declare namespace ibc {
                         } & {
                             revisionNumber?: any;
                             revisionHeight?: any;
-                        } & Record<Exclude<keyof I_17["proofHeight"], keyof _162.Height>, never>;
-                    } & Record<Exclude<keyof I_17, keyof _169.QueryConnectionConsensusStateResponse>, never>>(object: I_17): _169.QueryConnectionConsensusStateResponse;
+                        } & Record<Exclude<keyof I_17["proofHeight"], keyof _117.Height>, never>;
+                    } & Record<Exclude<keyof I_17, keyof _124.QueryConnectionConsensusStateResponse>, never>>(object: I_17): _124.QueryConnectionConsensusStateResponse;
                 };
                 GenesisState: {
-                    encode(message: _168.GenesisState, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _168.GenesisState;
-                    fromJSON(object: any): _168.GenesisState;
-                    toJSON(message: _168.GenesisState): unknown;
+                    encode(message: _123.GenesisState, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _123.GenesisState;
+                    fromJSON(object: any): _123.GenesisState;
+                    toJSON(message: _123.GenesisState): unknown;
                     fromPartial<I_18 extends {
                         connections?: {
                             id?: string;
@@ -6350,7 +6350,7 @@ export declare namespace ibc {
                                 identifier?: string;
                                 features?: string[];
                             }[];
-                            state?: _167.State;
+                            state?: _122.State;
                             counterparty?: {
                                 clientId?: string;
                                 connectionId?: string;
@@ -6376,7 +6376,7 @@ export declare namespace ibc {
                                 identifier?: string;
                                 features?: string[];
                             }[];
-                            state?: _167.State;
+                            state?: _122.State;
                             counterparty?: {
                                 clientId?: string;
                                 connectionId?: string;
@@ -6392,7 +6392,7 @@ export declare namespace ibc {
                                 identifier?: string;
                                 features?: string[];
                             }[];
-                            state?: _167.State;
+                            state?: _122.State;
                             counterparty?: {
                                 clientId?: string;
                                 connectionId?: string;
@@ -6413,11 +6413,11 @@ export declare namespace ibc {
                             } & {
                                 identifier?: string;
                                 features?: string[] & string[] & Record<Exclude<keyof I_18["connections"][number]["versions"][number]["features"], keyof string[]>, never>;
-                            } & Record<Exclude<keyof I_18["connections"][number]["versions"][number], keyof _167.Version>, never>)[] & Record<Exclude<keyof I_18["connections"][number]["versions"], keyof {
+                            } & Record<Exclude<keyof I_18["connections"][number]["versions"][number], keyof _122.Version>, never>)[] & Record<Exclude<keyof I_18["connections"][number]["versions"], keyof {
                                 identifier?: string;
                                 features?: string[];
                             }[]>, never>;
-                            state?: _167.State;
+                            state?: _122.State;
                             counterparty?: {
                                 clientId?: string;
                                 connectionId?: string;
@@ -6432,16 +6432,16 @@ export declare namespace ibc {
                                 } & {
                                     keyPrefix?: Uint8Array;
                                 } & Record<Exclude<keyof I_18["connections"][number]["counterparty"]["prefix"], "keyPrefix">, never>;
-                            } & Record<Exclude<keyof I_18["connections"][number]["counterparty"], keyof _167.Counterparty>, never>;
+                            } & Record<Exclude<keyof I_18["connections"][number]["counterparty"], keyof _122.Counterparty>, never>;
                             delayPeriod?: any;
-                        } & Record<Exclude<keyof I_18["connections"][number], keyof _167.IdentifiedConnection>, never>)[] & Record<Exclude<keyof I_18["connections"], keyof {
+                        } & Record<Exclude<keyof I_18["connections"][number], keyof _122.IdentifiedConnection>, never>)[] & Record<Exclude<keyof I_18["connections"], keyof {
                             id?: string;
                             clientId?: string;
                             versions?: {
                                 identifier?: string;
                                 features?: string[];
                             }[];
-                            state?: _167.State;
+                            state?: _122.State;
                             counterparty?: {
                                 clientId?: string;
                                 connectionId?: string;
@@ -6460,7 +6460,7 @@ export declare namespace ibc {
                         } & {
                             clientId?: string;
                             paths?: string[] & string[] & Record<Exclude<keyof I_18["clientConnectionPaths"][number]["paths"], keyof string[]>, never>;
-                        } & Record<Exclude<keyof I_18["clientConnectionPaths"][number], keyof _167.ConnectionPaths>, never>)[] & Record<Exclude<keyof I_18["clientConnectionPaths"], keyof {
+                        } & Record<Exclude<keyof I_18["clientConnectionPaths"][number], keyof _122.ConnectionPaths>, never>)[] & Record<Exclude<keyof I_18["clientConnectionPaths"], keyof {
                             clientId?: string;
                             paths?: string[];
                         }[]>, never>;
@@ -6470,23 +6470,23 @@ export declare namespace ibc {
                         } & {
                             maxExpectedTimePerBlock?: any;
                         } & Record<Exclude<keyof I_18["params"], "maxExpectedTimePerBlock">, never>;
-                    } & Record<Exclude<keyof I_18, keyof _168.GenesisState>, never>>(object: I_18): _168.GenesisState;
+                    } & Record<Exclude<keyof I_18, keyof _123.GenesisState>, never>>(object: I_18): _123.GenesisState;
                 };
-                stateFromJSON(object: any): _167.State;
-                stateToJSON(object: _167.State): string;
-                State: typeof _167.State;
+                stateFromJSON(object: any): _122.State;
+                stateToJSON(object: _122.State): string;
+                State: typeof _122.State;
                 ConnectionEnd: {
-                    encode(message: _167.ConnectionEnd, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _167.ConnectionEnd;
-                    fromJSON(object: any): _167.ConnectionEnd;
-                    toJSON(message: _167.ConnectionEnd): unknown;
+                    encode(message: _122.ConnectionEnd, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _122.ConnectionEnd;
+                    fromJSON(object: any): _122.ConnectionEnd;
+                    toJSON(message: _122.ConnectionEnd): unknown;
                     fromPartial<I_19 extends {
                         clientId?: string;
                         versions?: {
                             identifier?: string;
                             features?: string[];
                         }[];
-                        state?: _167.State;
+                        state?: _122.State;
                         counterparty?: {
                             clientId?: string;
                             connectionId?: string;
@@ -6506,11 +6506,11 @@ export declare namespace ibc {
                         } & {
                             identifier?: string;
                             features?: string[] & string[] & Record<Exclude<keyof I_19["versions"][number]["features"], keyof string[]>, never>;
-                        } & Record<Exclude<keyof I_19["versions"][number], keyof _167.Version>, never>)[] & Record<Exclude<keyof I_19["versions"], keyof {
+                        } & Record<Exclude<keyof I_19["versions"][number], keyof _122.Version>, never>)[] & Record<Exclude<keyof I_19["versions"], keyof {
                             identifier?: string;
                             features?: string[];
                         }[]>, never>;
-                        state?: _167.State;
+                        state?: _122.State;
                         counterparty?: {
                             clientId?: string;
                             connectionId?: string;
@@ -6525,15 +6525,15 @@ export declare namespace ibc {
                             } & {
                                 keyPrefix?: Uint8Array;
                             } & Record<Exclude<keyof I_19["counterparty"]["prefix"], "keyPrefix">, never>;
-                        } & Record<Exclude<keyof I_19["counterparty"], keyof _167.Counterparty>, never>;
+                        } & Record<Exclude<keyof I_19["counterparty"], keyof _122.Counterparty>, never>;
                         delayPeriod?: any;
-                    } & Record<Exclude<keyof I_19, keyof _167.ConnectionEnd>, never>>(object: I_19): _167.ConnectionEnd;
+                    } & Record<Exclude<keyof I_19, keyof _122.ConnectionEnd>, never>>(object: I_19): _122.ConnectionEnd;
                 };
                 IdentifiedConnection: {
-                    encode(message: _167.IdentifiedConnection, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _167.IdentifiedConnection;
-                    fromJSON(object: any): _167.IdentifiedConnection;
-                    toJSON(message: _167.IdentifiedConnection): unknown;
+                    encode(message: _122.IdentifiedConnection, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _122.IdentifiedConnection;
+                    fromJSON(object: any): _122.IdentifiedConnection;
+                    toJSON(message: _122.IdentifiedConnection): unknown;
                     fromPartial<I_20 extends {
                         id?: string;
                         clientId?: string;
@@ -6541,7 +6541,7 @@ export declare namespace ibc {
                             identifier?: string;
                             features?: string[];
                         }[];
-                        state?: _167.State;
+                        state?: _122.State;
                         counterparty?: {
                             clientId?: string;
                             connectionId?: string;
@@ -6562,11 +6562,11 @@ export declare namespace ibc {
                         } & {
                             identifier?: string;
                             features?: string[] & string[] & Record<Exclude<keyof I_20["versions"][number]["features"], keyof string[]>, never>;
-                        } & Record<Exclude<keyof I_20["versions"][number], keyof _167.Version>, never>)[] & Record<Exclude<keyof I_20["versions"], keyof {
+                        } & Record<Exclude<keyof I_20["versions"][number], keyof _122.Version>, never>)[] & Record<Exclude<keyof I_20["versions"], keyof {
                             identifier?: string;
                             features?: string[];
                         }[]>, never>;
-                        state?: _167.State;
+                        state?: _122.State;
                         counterparty?: {
                             clientId?: string;
                             connectionId?: string;
@@ -6581,15 +6581,15 @@ export declare namespace ibc {
                             } & {
                                 keyPrefix?: Uint8Array;
                             } & Record<Exclude<keyof I_20["counterparty"]["prefix"], "keyPrefix">, never>;
-                        } & Record<Exclude<keyof I_20["counterparty"], keyof _167.Counterparty>, never>;
+                        } & Record<Exclude<keyof I_20["counterparty"], keyof _122.Counterparty>, never>;
                         delayPeriod?: any;
-                    } & Record<Exclude<keyof I_20, keyof _167.IdentifiedConnection>, never>>(object: I_20): _167.IdentifiedConnection;
+                    } & Record<Exclude<keyof I_20, keyof _122.IdentifiedConnection>, never>>(object: I_20): _122.IdentifiedConnection;
                 };
                 Counterparty: {
-                    encode(message: _167.Counterparty, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _167.Counterparty;
-                    fromJSON(object: any): _167.Counterparty;
-                    toJSON(message: _167.Counterparty): unknown;
+                    encode(message: _122.Counterparty, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _122.Counterparty;
+                    fromJSON(object: any): _122.Counterparty;
+                    toJSON(message: _122.Counterparty): unknown;
                     fromPartial<I_21 extends {
                         clientId?: string;
                         connectionId?: string;
@@ -6604,69 +6604,69 @@ export declare namespace ibc {
                         } & {
                             keyPrefix?: Uint8Array;
                         } & Record<Exclude<keyof I_21["prefix"], "keyPrefix">, never>;
-                    } & Record<Exclude<keyof I_21, keyof _167.Counterparty>, never>>(object: I_21): _167.Counterparty;
+                    } & Record<Exclude<keyof I_21, keyof _122.Counterparty>, never>>(object: I_21): _122.Counterparty;
                 };
                 ClientPaths: {
-                    encode(message: _167.ClientPaths, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _167.ClientPaths;
-                    fromJSON(object: any): _167.ClientPaths;
-                    toJSON(message: _167.ClientPaths): unknown;
+                    encode(message: _122.ClientPaths, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _122.ClientPaths;
+                    fromJSON(object: any): _122.ClientPaths;
+                    toJSON(message: _122.ClientPaths): unknown;
                     fromPartial<I_22 extends {
                         paths?: string[];
                     } & {
                         paths?: string[] & string[] & Record<Exclude<keyof I_22["paths"], keyof string[]>, never>;
-                    } & Record<Exclude<keyof I_22, "paths">, never>>(object: I_22): _167.ClientPaths;
+                    } & Record<Exclude<keyof I_22, "paths">, never>>(object: I_22): _122.ClientPaths;
                 };
                 ConnectionPaths: {
-                    encode(message: _167.ConnectionPaths, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _167.ConnectionPaths;
-                    fromJSON(object: any): _167.ConnectionPaths;
-                    toJSON(message: _167.ConnectionPaths): unknown;
+                    encode(message: _122.ConnectionPaths, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _122.ConnectionPaths;
+                    fromJSON(object: any): _122.ConnectionPaths;
+                    toJSON(message: _122.ConnectionPaths): unknown;
                     fromPartial<I_23 extends {
                         clientId?: string;
                         paths?: string[];
                     } & {
                         clientId?: string;
                         paths?: string[] & string[] & Record<Exclude<keyof I_23["paths"], keyof string[]>, never>;
-                    } & Record<Exclude<keyof I_23, keyof _167.ConnectionPaths>, never>>(object: I_23): _167.ConnectionPaths;
+                    } & Record<Exclude<keyof I_23, keyof _122.ConnectionPaths>, never>>(object: I_23): _122.ConnectionPaths;
                 };
                 Version: {
-                    encode(message: _167.Version, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _167.Version;
-                    fromJSON(object: any): _167.Version;
-                    toJSON(message: _167.Version): unknown;
+                    encode(message: _122.Version, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _122.Version;
+                    fromJSON(object: any): _122.Version;
+                    toJSON(message: _122.Version): unknown;
                     fromPartial<I_24 extends {
                         identifier?: string;
                         features?: string[];
                     } & {
                         identifier?: string;
                         features?: string[] & string[] & Record<Exclude<keyof I_24["features"], keyof string[]>, never>;
-                    } & Record<Exclude<keyof I_24, keyof _167.Version>, never>>(object: I_24): _167.Version;
+                    } & Record<Exclude<keyof I_24, keyof _122.Version>, never>>(object: I_24): _122.Version;
                 };
                 Params: {
-                    encode(message: _167.Params, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _167.Params;
-                    fromJSON(object: any): _167.Params;
-                    toJSON(message: _167.Params): unknown;
+                    encode(message: _122.Params, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _122.Params;
+                    fromJSON(object: any): _122.Params;
+                    toJSON(message: _122.Params): unknown;
                     fromPartial<I_25 extends {
                         maxExpectedTimePerBlock?: any;
                     } & {
                         maxExpectedTimePerBlock?: any;
-                    } & Record<Exclude<keyof I_25, "maxExpectedTimePerBlock">, never>>(object: I_25): _167.Params;
+                    } & Record<Exclude<keyof I_25, "maxExpectedTimePerBlock">, never>>(object: I_25): _122.Params;
                 };
             };
         }
         namespace port {
             const v1: {
                 QueryAppVersionRequest: {
-                    encode(message: _171.QueryAppVersionRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _171.QueryAppVersionRequest;
-                    fromJSON(object: any): _171.QueryAppVersionRequest;
-                    toJSON(message: _171.QueryAppVersionRequest): unknown;
+                    encode(message: _126.QueryAppVersionRequest, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _126.QueryAppVersionRequest;
+                    fromJSON(object: any): _126.QueryAppVersionRequest;
+                    toJSON(message: _126.QueryAppVersionRequest): unknown;
                     fromPartial<I extends {
                         portId?: string;
                         connectionId?: string;
-                        ordering?: _158.Order;
+                        ordering?: _113.Order;
                         counterparty?: {
                             portId?: string;
                             channelId?: string;
@@ -6675,39 +6675,39 @@ export declare namespace ibc {
                     } & {
                         portId?: string;
                         connectionId?: string;
-                        ordering?: _158.Order;
+                        ordering?: _113.Order;
                         counterparty?: {
                             portId?: string;
                             channelId?: string;
                         } & {
                             portId?: string;
                             channelId?: string;
-                        } & Record<Exclude<keyof I["counterparty"], keyof _158.Counterparty>, never>;
+                        } & Record<Exclude<keyof I["counterparty"], keyof _113.Counterparty>, never>;
                         proposedVersion?: string;
-                    } & Record<Exclude<keyof I, keyof _171.QueryAppVersionRequest>, never>>(object: I): _171.QueryAppVersionRequest;
+                    } & Record<Exclude<keyof I, keyof _126.QueryAppVersionRequest>, never>>(object: I): _126.QueryAppVersionRequest;
                 };
                 QueryAppVersionResponse: {
-                    encode(message: _171.QueryAppVersionResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _171.QueryAppVersionResponse;
-                    fromJSON(object: any): _171.QueryAppVersionResponse;
-                    toJSON(message: _171.QueryAppVersionResponse): unknown;
+                    encode(message: _126.QueryAppVersionResponse, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _126.QueryAppVersionResponse;
+                    fromJSON(object: any): _126.QueryAppVersionResponse;
+                    toJSON(message: _126.QueryAppVersionResponse): unknown;
                     fromPartial<I_1 extends {
                         portId?: string;
                         version?: string;
                     } & {
                         portId?: string;
                         version?: string;
-                    } & Record<Exclude<keyof I_1, keyof _171.QueryAppVersionResponse>, never>>(object: I_1): _171.QueryAppVersionResponse;
+                    } & Record<Exclude<keyof I_1, keyof _126.QueryAppVersionResponse>, never>>(object: I_1): _126.QueryAppVersionResponse;
                 };
             };
         }
         namespace types {
             const v1: {
                 GenesisState: {
-                    encode(message: _172.GenesisState, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _172.GenesisState;
-                    fromJSON(object: any): _172.GenesisState;
-                    toJSON(message: _172.GenesisState): unknown;
+                    encode(message: _127.GenesisState, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _127.GenesisState;
+                    fromJSON(object: any): _127.GenesisState;
+                    toJSON(message: _127.GenesisState): unknown;
                     fromPartial<I extends {
                         clientGenesis?: {
                             clients?: {
@@ -6751,7 +6751,7 @@ export declare namespace ibc {
                                     identifier?: string;
                                     features?: string[];
                                 }[];
-                                state?: _167.State;
+                                state?: _122.State;
                                 counterparty?: {
                                     clientId?: string;
                                     connectionId?: string;
@@ -6772,8 +6772,8 @@ export declare namespace ibc {
                         };
                         channelGenesis?: {
                             channels?: {
-                                state?: _158.State;
-                                ordering?: _158.Order;
+                                state?: _113.State;
+                                ordering?: _113.Order;
                                 counterparty?: {
                                     portId?: string;
                                     channelId?: string;
@@ -6874,7 +6874,7 @@ export declare namespace ibc {
                                     typeUrl?: string;
                                     value?: Uint8Array;
                                 } & Record<Exclude<keyof I["clientGenesis"]["clients"][number]["clientState"], keyof import("../google/protobuf/any").Any>, never>;
-                            } & Record<Exclude<keyof I["clientGenesis"]["clients"][number], keyof _162.IdentifiedClientState>, never>)[] & Record<Exclude<keyof I["clientGenesis"]["clients"], keyof {
+                            } & Record<Exclude<keyof I["clientGenesis"]["clients"][number], keyof _117.IdentifiedClientState>, never>)[] & Record<Exclude<keyof I["clientGenesis"]["clients"], keyof {
                                 clientId?: string;
                                 clientState?: {
                                     typeUrl?: string;
@@ -6932,7 +6932,7 @@ export declare namespace ibc {
                                     } & {
                                         revisionNumber?: any;
                                         revisionHeight?: any;
-                                    } & Record<Exclude<keyof I["clientGenesis"]["clientsConsensus"][number]["consensusStates"][number]["height"], keyof _162.Height>, never>;
+                                    } & Record<Exclude<keyof I["clientGenesis"]["clientsConsensus"][number]["consensusStates"][number]["height"], keyof _117.Height>, never>;
                                     consensusState?: {
                                         typeUrl?: string;
                                         value?: Uint8Array;
@@ -6940,7 +6940,7 @@ export declare namespace ibc {
                                         typeUrl?: string;
                                         value?: Uint8Array;
                                     } & Record<Exclude<keyof I["clientGenesis"]["clientsConsensus"][number]["consensusStates"][number]["consensusState"], keyof import("../google/protobuf/any").Any>, never>;
-                                } & Record<Exclude<keyof I["clientGenesis"]["clientsConsensus"][number]["consensusStates"][number], keyof _162.ConsensusStateWithHeight>, never>)[] & Record<Exclude<keyof I["clientGenesis"]["clientsConsensus"][number]["consensusStates"], keyof {
+                                } & Record<Exclude<keyof I["clientGenesis"]["clientsConsensus"][number]["consensusStates"][number], keyof _117.ConsensusStateWithHeight>, never>)[] & Record<Exclude<keyof I["clientGenesis"]["clientsConsensus"][number]["consensusStates"], keyof {
                                     height?: {
                                         revisionNumber?: any;
                                         revisionHeight?: any;
@@ -6950,7 +6950,7 @@ export declare namespace ibc {
                                         value?: Uint8Array;
                                     };
                                 }[]>, never>;
-                            } & Record<Exclude<keyof I["clientGenesis"]["clientsConsensus"][number], keyof _162.ClientConsensusStates>, never>)[] & Record<Exclude<keyof I["clientGenesis"]["clientsConsensus"], keyof {
+                            } & Record<Exclude<keyof I["clientGenesis"]["clientsConsensus"][number], keyof _117.ClientConsensusStates>, never>)[] & Record<Exclude<keyof I["clientGenesis"]["clientsConsensus"], keyof {
                                 clientId?: string;
                                 consensusStates?: {
                                     height?: {
@@ -6986,11 +6986,11 @@ export declare namespace ibc {
                                 } & {
                                     key?: Uint8Array;
                                     value?: Uint8Array;
-                                } & Record<Exclude<keyof I["clientGenesis"]["clientsMetadata"][number]["clientMetadata"][number], keyof _163.GenesisMetadata>, never>)[] & Record<Exclude<keyof I["clientGenesis"]["clientsMetadata"][number]["clientMetadata"], keyof {
+                                } & Record<Exclude<keyof I["clientGenesis"]["clientsMetadata"][number]["clientMetadata"][number], keyof _118.GenesisMetadata>, never>)[] & Record<Exclude<keyof I["clientGenesis"]["clientsMetadata"][number]["clientMetadata"], keyof {
                                     key?: Uint8Array;
                                     value?: Uint8Array;
                                 }[]>, never>;
-                            } & Record<Exclude<keyof I["clientGenesis"]["clientsMetadata"][number], keyof _163.IdentifiedGenesisMetadata>, never>)[] & Record<Exclude<keyof I["clientGenesis"]["clientsMetadata"], keyof {
+                            } & Record<Exclude<keyof I["clientGenesis"]["clientsMetadata"][number], keyof _118.IdentifiedGenesisMetadata>, never>)[] & Record<Exclude<keyof I["clientGenesis"]["clientsMetadata"], keyof {
                                 clientId?: string;
                                 clientMetadata?: {
                                     key?: Uint8Array;
@@ -7004,7 +7004,7 @@ export declare namespace ibc {
                             } & Record<Exclude<keyof I["clientGenesis"]["params"], "allowedClients">, never>;
                             createLocalhost?: boolean;
                             nextClientSequence?: any;
-                        } & Record<Exclude<keyof I["clientGenesis"], keyof _163.GenesisState>, never>;
+                        } & Record<Exclude<keyof I["clientGenesis"], keyof _118.GenesisState>, never>;
                         connectionGenesis?: {
                             connections?: {
                                 id?: string;
@@ -7013,7 +7013,7 @@ export declare namespace ibc {
                                     identifier?: string;
                                     features?: string[];
                                 }[];
-                                state?: _167.State;
+                                state?: _122.State;
                                 counterparty?: {
                                     clientId?: string;
                                     connectionId?: string;
@@ -7039,7 +7039,7 @@ export declare namespace ibc {
                                     identifier?: string;
                                     features?: string[];
                                 }[];
-                                state?: _167.State;
+                                state?: _122.State;
                                 counterparty?: {
                                     clientId?: string;
                                     connectionId?: string;
@@ -7055,7 +7055,7 @@ export declare namespace ibc {
                                     identifier?: string;
                                     features?: string[];
                                 }[];
-                                state?: _167.State;
+                                state?: _122.State;
                                 counterparty?: {
                                     clientId?: string;
                                     connectionId?: string;
@@ -7076,11 +7076,11 @@ export declare namespace ibc {
                                 } & {
                                     identifier?: string;
                                     features?: string[] & string[] & Record<Exclude<keyof I["connectionGenesis"]["connections"][number]["versions"][number]["features"], keyof string[]>, never>;
-                                } & Record<Exclude<keyof I["connectionGenesis"]["connections"][number]["versions"][number], keyof _167.Version>, never>)[] & Record<Exclude<keyof I["connectionGenesis"]["connections"][number]["versions"], keyof {
+                                } & Record<Exclude<keyof I["connectionGenesis"]["connections"][number]["versions"][number], keyof _122.Version>, never>)[] & Record<Exclude<keyof I["connectionGenesis"]["connections"][number]["versions"], keyof {
                                     identifier?: string;
                                     features?: string[];
                                 }[]>, never>;
-                                state?: _167.State;
+                                state?: _122.State;
                                 counterparty?: {
                                     clientId?: string;
                                     connectionId?: string;
@@ -7095,16 +7095,16 @@ export declare namespace ibc {
                                     } & {
                                         keyPrefix?: Uint8Array;
                                     } & Record<Exclude<keyof I["connectionGenesis"]["connections"][number]["counterparty"]["prefix"], "keyPrefix">, never>;
-                                } & Record<Exclude<keyof I["connectionGenesis"]["connections"][number]["counterparty"], keyof _167.Counterparty>, never>;
+                                } & Record<Exclude<keyof I["connectionGenesis"]["connections"][number]["counterparty"], keyof _122.Counterparty>, never>;
                                 delayPeriod?: any;
-                            } & Record<Exclude<keyof I["connectionGenesis"]["connections"][number], keyof _167.IdentifiedConnection>, never>)[] & Record<Exclude<keyof I["connectionGenesis"]["connections"], keyof {
+                            } & Record<Exclude<keyof I["connectionGenesis"]["connections"][number], keyof _122.IdentifiedConnection>, never>)[] & Record<Exclude<keyof I["connectionGenesis"]["connections"], keyof {
                                 id?: string;
                                 clientId?: string;
                                 versions?: {
                                     identifier?: string;
                                     features?: string[];
                                 }[];
-                                state?: _167.State;
+                                state?: _122.State;
                                 counterparty?: {
                                     clientId?: string;
                                     connectionId?: string;
@@ -7123,7 +7123,7 @@ export declare namespace ibc {
                             } & {
                                 clientId?: string;
                                 paths?: string[] & string[] & Record<Exclude<keyof I["connectionGenesis"]["clientConnectionPaths"][number]["paths"], keyof string[]>, never>;
-                            } & Record<Exclude<keyof I["connectionGenesis"]["clientConnectionPaths"][number], keyof _167.ConnectionPaths>, never>)[] & Record<Exclude<keyof I["connectionGenesis"]["clientConnectionPaths"], keyof {
+                            } & Record<Exclude<keyof I["connectionGenesis"]["clientConnectionPaths"][number], keyof _122.ConnectionPaths>, never>)[] & Record<Exclude<keyof I["connectionGenesis"]["clientConnectionPaths"], keyof {
                                 clientId?: string;
                                 paths?: string[];
                             }[]>, never>;
@@ -7133,11 +7133,11 @@ export declare namespace ibc {
                             } & {
                                 maxExpectedTimePerBlock?: any;
                             } & Record<Exclude<keyof I["connectionGenesis"]["params"], "maxExpectedTimePerBlock">, never>;
-                        } & Record<Exclude<keyof I["connectionGenesis"], keyof _168.GenesisState>, never>;
+                        } & Record<Exclude<keyof I["connectionGenesis"], keyof _123.GenesisState>, never>;
                         channelGenesis?: {
                             channels?: {
-                                state?: _158.State;
-                                ordering?: _158.Order;
+                                state?: _113.State;
+                                ordering?: _113.Order;
                                 counterparty?: {
                                     portId?: string;
                                     channelId?: string;
@@ -7183,8 +7183,8 @@ export declare namespace ibc {
                             nextChannelSequence?: any;
                         } & {
                             channels?: {
-                                state?: _158.State;
-                                ordering?: _158.Order;
+                                state?: _113.State;
+                                ordering?: _113.Order;
                                 counterparty?: {
                                     portId?: string;
                                     channelId?: string;
@@ -7194,8 +7194,8 @@ export declare namespace ibc {
                                 portId?: string;
                                 channelId?: string;
                             }[] & ({
-                                state?: _158.State;
-                                ordering?: _158.Order;
+                                state?: _113.State;
+                                ordering?: _113.Order;
                                 counterparty?: {
                                     portId?: string;
                                     channelId?: string;
@@ -7205,22 +7205,22 @@ export declare namespace ibc {
                                 portId?: string;
                                 channelId?: string;
                             } & {
-                                state?: _158.State;
-                                ordering?: _158.Order;
+                                state?: _113.State;
+                                ordering?: _113.Order;
                                 counterparty?: {
                                     portId?: string;
                                     channelId?: string;
                                 } & {
                                     portId?: string;
                                     channelId?: string;
-                                } & Record<Exclude<keyof I["channelGenesis"]["channels"][number]["counterparty"], keyof _158.Counterparty>, never>;
+                                } & Record<Exclude<keyof I["channelGenesis"]["channels"][number]["counterparty"], keyof _113.Counterparty>, never>;
                                 connectionHops?: string[] & string[] & Record<Exclude<keyof I["channelGenesis"]["channels"][number]["connectionHops"], keyof string[]>, never>;
                                 version?: string;
                                 portId?: string;
                                 channelId?: string;
-                            } & Record<Exclude<keyof I["channelGenesis"]["channels"][number], keyof _158.IdentifiedChannel>, never>)[] & Record<Exclude<keyof I["channelGenesis"]["channels"], keyof {
-                                state?: _158.State;
-                                ordering?: _158.Order;
+                            } & Record<Exclude<keyof I["channelGenesis"]["channels"][number], keyof _113.IdentifiedChannel>, never>)[] & Record<Exclude<keyof I["channelGenesis"]["channels"], keyof {
+                                state?: _113.State;
+                                ordering?: _113.Order;
                                 counterparty?: {
                                     portId?: string;
                                     channelId?: string;
@@ -7245,7 +7245,7 @@ export declare namespace ibc {
                                 channelId?: string;
                                 sequence?: any;
                                 data?: Uint8Array;
-                            } & Record<Exclude<keyof I["channelGenesis"]["acknowledgements"][number], keyof _158.PacketState>, never>)[] & Record<Exclude<keyof I["channelGenesis"]["acknowledgements"], keyof {
+                            } & Record<Exclude<keyof I["channelGenesis"]["acknowledgements"][number], keyof _113.PacketState>, never>)[] & Record<Exclude<keyof I["channelGenesis"]["acknowledgements"], keyof {
                                 portId?: string;
                                 channelId?: string;
                                 sequence?: any;
@@ -7266,7 +7266,7 @@ export declare namespace ibc {
                                 channelId?: string;
                                 sequence?: any;
                                 data?: Uint8Array;
-                            } & Record<Exclude<keyof I["channelGenesis"]["commitments"][number], keyof _158.PacketState>, never>)[] & Record<Exclude<keyof I["channelGenesis"]["commitments"], keyof {
+                            } & Record<Exclude<keyof I["channelGenesis"]["commitments"][number], keyof _113.PacketState>, never>)[] & Record<Exclude<keyof I["channelGenesis"]["commitments"], keyof {
                                 portId?: string;
                                 channelId?: string;
                                 sequence?: any;
@@ -7287,7 +7287,7 @@ export declare namespace ibc {
                                 channelId?: string;
                                 sequence?: any;
                                 data?: Uint8Array;
-                            } & Record<Exclude<keyof I["channelGenesis"]["receipts"][number], keyof _158.PacketState>, never>)[] & Record<Exclude<keyof I["channelGenesis"]["receipts"], keyof {
+                            } & Record<Exclude<keyof I["channelGenesis"]["receipts"][number], keyof _113.PacketState>, never>)[] & Record<Exclude<keyof I["channelGenesis"]["receipts"], keyof {
                                 portId?: string;
                                 channelId?: string;
                                 sequence?: any;
@@ -7305,7 +7305,7 @@ export declare namespace ibc {
                                 portId?: string;
                                 channelId?: string;
                                 sequence?: any;
-                            } & Record<Exclude<keyof I["channelGenesis"]["sendSequences"][number], keyof _159.PacketSequence>, never>)[] & Record<Exclude<keyof I["channelGenesis"]["sendSequences"], keyof {
+                            } & Record<Exclude<keyof I["channelGenesis"]["sendSequences"][number], keyof _114.PacketSequence>, never>)[] & Record<Exclude<keyof I["channelGenesis"]["sendSequences"], keyof {
                                 portId?: string;
                                 channelId?: string;
                                 sequence?: any;
@@ -7322,7 +7322,7 @@ export declare namespace ibc {
                                 portId?: string;
                                 channelId?: string;
                                 sequence?: any;
-                            } & Record<Exclude<keyof I["channelGenesis"]["recvSequences"][number], keyof _159.PacketSequence>, never>)[] & Record<Exclude<keyof I["channelGenesis"]["recvSequences"], keyof {
+                            } & Record<Exclude<keyof I["channelGenesis"]["recvSequences"][number], keyof _114.PacketSequence>, never>)[] & Record<Exclude<keyof I["channelGenesis"]["recvSequences"], keyof {
                                 portId?: string;
                                 channelId?: string;
                                 sequence?: any;
@@ -7339,14 +7339,14 @@ export declare namespace ibc {
                                 portId?: string;
                                 channelId?: string;
                                 sequence?: any;
-                            } & Record<Exclude<keyof I["channelGenesis"]["ackSequences"][number], keyof _159.PacketSequence>, never>)[] & Record<Exclude<keyof I["channelGenesis"]["ackSequences"], keyof {
+                            } & Record<Exclude<keyof I["channelGenesis"]["ackSequences"][number], keyof _114.PacketSequence>, never>)[] & Record<Exclude<keyof I["channelGenesis"]["ackSequences"], keyof {
                                 portId?: string;
                                 channelId?: string;
                                 sequence?: any;
                             }[]>, never>;
                             nextChannelSequence?: any;
-                        } & Record<Exclude<keyof I["channelGenesis"], keyof _159.GenesisState>, never>;
-                    } & Record<Exclude<keyof I, keyof _172.GenesisState>, never>>(object: I): _172.GenesisState;
+                        } & Record<Exclude<keyof I["channelGenesis"], keyof _114.GenesisState>, never>;
+                    } & Record<Exclude<keyof I, keyof _127.GenesisState>, never>>(object: I): _127.GenesisState;
                 };
             };
         }
@@ -7355,10 +7355,10 @@ export declare namespace ibc {
         namespace localhost {
             const v1: {
                 ClientState: {
-                    encode(message: _173.ClientState, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _173.ClientState;
-                    fromJSON(object: any): _173.ClientState;
-                    toJSON(message: _173.ClientState): unknown;
+                    encode(message: _128.ClientState, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _128.ClientState;
+                    fromJSON(object: any): _128.ClientState;
+                    toJSON(message: _128.ClientState): unknown;
                     fromPartial<I extends {
                         chainId?: string;
                         height?: {
@@ -7373,21 +7373,21 @@ export declare namespace ibc {
                         } & {
                             revisionNumber?: any;
                             revisionHeight?: any;
-                        } & Record<Exclude<keyof I["height"], keyof _162.Height>, never>;
-                    } & Record<Exclude<keyof I, keyof _173.ClientState>, never>>(object: I): _173.ClientState;
+                        } & Record<Exclude<keyof I["height"], keyof _117.Height>, never>;
+                    } & Record<Exclude<keyof I, keyof _128.ClientState>, never>>(object: I): _128.ClientState;
                 };
             };
         }
         namespace solomachine {
             const v1: {
-                dataTypeFromJSON(object: any): _174.DataType;
-                dataTypeToJSON(object: _174.DataType): string;
-                DataType: typeof _174.DataType;
+                dataTypeFromJSON(object: any): _129.DataType;
+                dataTypeToJSON(object: _129.DataType): string;
+                DataType: typeof _129.DataType;
                 ClientState: {
-                    encode(message: _174.ClientState, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _174.ClientState;
-                    fromJSON(object: any): _174.ClientState;
-                    toJSON(message: _174.ClientState): unknown;
+                    encode(message: _129.ClientState, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _129.ClientState;
+                    fromJSON(object: any): _129.ClientState;
+                    toJSON(message: _129.ClientState): unknown;
                     fromPartial<I extends {
                         sequence?: any;
                         frozenSequence?: any;
@@ -7420,15 +7420,15 @@ export declare namespace ibc {
                             } & Record<Exclude<keyof I["consensusState"]["publicKey"], keyof import("../google/protobuf/any").Any>, never>;
                             diversifier?: string;
                             timestamp?: any;
-                        } & Record<Exclude<keyof I["consensusState"], keyof _174.ConsensusState>, never>;
+                        } & Record<Exclude<keyof I["consensusState"], keyof _129.ConsensusState>, never>;
                         allowUpdateAfterProposal?: boolean;
-                    } & Record<Exclude<keyof I, keyof _174.ClientState>, never>>(object: I): _174.ClientState;
+                    } & Record<Exclude<keyof I, keyof _129.ClientState>, never>>(object: I): _129.ClientState;
                 };
                 ConsensusState: {
-                    encode(message: _174.ConsensusState, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _174.ConsensusState;
-                    fromJSON(object: any): _174.ConsensusState;
-                    toJSON(message: _174.ConsensusState): unknown;
+                    encode(message: _129.ConsensusState, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _129.ConsensusState;
+                    fromJSON(object: any): _129.ConsensusState;
+                    toJSON(message: _129.ConsensusState): unknown;
                     fromPartial<I_1 extends {
                         publicKey?: {
                             typeUrl?: string;
@@ -7446,13 +7446,13 @@ export declare namespace ibc {
                         } & Record<Exclude<keyof I_1["publicKey"], keyof import("../google/protobuf/any").Any>, never>;
                         diversifier?: string;
                         timestamp?: any;
-                    } & Record<Exclude<keyof I_1, keyof _174.ConsensusState>, never>>(object: I_1): _174.ConsensusState;
+                    } & Record<Exclude<keyof I_1, keyof _129.ConsensusState>, never>>(object: I_1): _129.ConsensusState;
                 };
                 Header: {
-                    encode(message: _174.Header, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _174.Header;
-                    fromJSON(object: any): _174.Header;
-                    toJSON(message: _174.Header): unknown;
+                    encode(message: _129.Header, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _129.Header;
+                    fromJSON(object: any): _129.Header;
+                    toJSON(message: _129.Header): unknown;
                     fromPartial<I_2 extends {
                         sequence?: any;
                         timestamp?: any;
@@ -7474,25 +7474,25 @@ export declare namespace ibc {
                             value?: Uint8Array;
                         } & Record<Exclude<keyof I_2["newPublicKey"], keyof import("../google/protobuf/any").Any>, never>;
                         newDiversifier?: string;
-                    } & Record<Exclude<keyof I_2, keyof _174.Header>, never>>(object: I_2): _174.Header;
+                    } & Record<Exclude<keyof I_2, keyof _129.Header>, never>>(object: I_2): _129.Header;
                 };
                 Misbehaviour: {
-                    encode(message: _174.Misbehaviour, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _174.Misbehaviour;
-                    fromJSON(object: any): _174.Misbehaviour;
-                    toJSON(message: _174.Misbehaviour): unknown;
+                    encode(message: _129.Misbehaviour, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _129.Misbehaviour;
+                    fromJSON(object: any): _129.Misbehaviour;
+                    toJSON(message: _129.Misbehaviour): unknown;
                     fromPartial<I_3 extends {
                         clientId?: string;
                         sequence?: any;
                         signatureOne?: {
                             signature?: Uint8Array;
-                            dataType?: _174.DataType;
+                            dataType?: _129.DataType;
                             data?: Uint8Array;
                             timestamp?: any;
                         };
                         signatureTwo?: {
                             signature?: Uint8Array;
-                            dataType?: _174.DataType;
+                            dataType?: _129.DataType;
                             data?: Uint8Array;
                             timestamp?: any;
                         };
@@ -7501,82 +7501,82 @@ export declare namespace ibc {
                         sequence?: any;
                         signatureOne?: {
                             signature?: Uint8Array;
-                            dataType?: _174.DataType;
+                            dataType?: _129.DataType;
                             data?: Uint8Array;
                             timestamp?: any;
                         } & {
                             signature?: Uint8Array;
-                            dataType?: _174.DataType;
+                            dataType?: _129.DataType;
                             data?: Uint8Array;
                             timestamp?: any;
-                        } & Record<Exclude<keyof I_3["signatureOne"], keyof _174.SignatureAndData>, never>;
+                        } & Record<Exclude<keyof I_3["signatureOne"], keyof _129.SignatureAndData>, never>;
                         signatureTwo?: {
                             signature?: Uint8Array;
-                            dataType?: _174.DataType;
+                            dataType?: _129.DataType;
                             data?: Uint8Array;
                             timestamp?: any;
                         } & {
                             signature?: Uint8Array;
-                            dataType?: _174.DataType;
+                            dataType?: _129.DataType;
                             data?: Uint8Array;
                             timestamp?: any;
-                        } & Record<Exclude<keyof I_3["signatureTwo"], keyof _174.SignatureAndData>, never>;
-                    } & Record<Exclude<keyof I_3, keyof _174.Misbehaviour>, never>>(object: I_3): _174.Misbehaviour;
+                        } & Record<Exclude<keyof I_3["signatureTwo"], keyof _129.SignatureAndData>, never>;
+                    } & Record<Exclude<keyof I_3, keyof _129.Misbehaviour>, never>>(object: I_3): _129.Misbehaviour;
                 };
                 SignatureAndData: {
-                    encode(message: _174.SignatureAndData, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _174.SignatureAndData;
-                    fromJSON(object: any): _174.SignatureAndData;
-                    toJSON(message: _174.SignatureAndData): unknown;
+                    encode(message: _129.SignatureAndData, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _129.SignatureAndData;
+                    fromJSON(object: any): _129.SignatureAndData;
+                    toJSON(message: _129.SignatureAndData): unknown;
                     fromPartial<I_4 extends {
                         signature?: Uint8Array;
-                        dataType?: _174.DataType;
+                        dataType?: _129.DataType;
                         data?: Uint8Array;
                         timestamp?: any;
                     } & {
                         signature?: Uint8Array;
-                        dataType?: _174.DataType;
+                        dataType?: _129.DataType;
                         data?: Uint8Array;
                         timestamp?: any;
-                    } & Record<Exclude<keyof I_4, keyof _174.SignatureAndData>, never>>(object: I_4): _174.SignatureAndData;
+                    } & Record<Exclude<keyof I_4, keyof _129.SignatureAndData>, never>>(object: I_4): _129.SignatureAndData;
                 };
                 TimestampedSignatureData: {
-                    encode(message: _174.TimestampedSignatureData, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _174.TimestampedSignatureData;
-                    fromJSON(object: any): _174.TimestampedSignatureData;
-                    toJSON(message: _174.TimestampedSignatureData): unknown;
+                    encode(message: _129.TimestampedSignatureData, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _129.TimestampedSignatureData;
+                    fromJSON(object: any): _129.TimestampedSignatureData;
+                    toJSON(message: _129.TimestampedSignatureData): unknown;
                     fromPartial<I_5 extends {
                         signatureData?: Uint8Array;
                         timestamp?: any;
                     } & {
                         signatureData?: Uint8Array;
                         timestamp?: any;
-                    } & Record<Exclude<keyof I_5, keyof _174.TimestampedSignatureData>, never>>(object: I_5): _174.TimestampedSignatureData;
+                    } & Record<Exclude<keyof I_5, keyof _129.TimestampedSignatureData>, never>>(object: I_5): _129.TimestampedSignatureData;
                 };
                 SignBytes: {
-                    encode(message: _174.SignBytes, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _174.SignBytes;
-                    fromJSON(object: any): _174.SignBytes;
-                    toJSON(message: _174.SignBytes): unknown;
+                    encode(message: _129.SignBytes, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _129.SignBytes;
+                    fromJSON(object: any): _129.SignBytes;
+                    toJSON(message: _129.SignBytes): unknown;
                     fromPartial<I_6 extends {
                         sequence?: any;
                         timestamp?: any;
                         diversifier?: string;
-                        dataType?: _174.DataType;
+                        dataType?: _129.DataType;
                         data?: Uint8Array;
                     } & {
                         sequence?: any;
                         timestamp?: any;
                         diversifier?: string;
-                        dataType?: _174.DataType;
+                        dataType?: _129.DataType;
                         data?: Uint8Array;
-                    } & Record<Exclude<keyof I_6, keyof _174.SignBytes>, never>>(object: I_6): _174.SignBytes;
+                    } & Record<Exclude<keyof I_6, keyof _129.SignBytes>, never>>(object: I_6): _129.SignBytes;
                 };
                 HeaderData: {
-                    encode(message: _174.HeaderData, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _174.HeaderData;
-                    fromJSON(object: any): _174.HeaderData;
-                    toJSON(message: _174.HeaderData): unknown;
+                    encode(message: _129.HeaderData, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _129.HeaderData;
+                    fromJSON(object: any): _129.HeaderData;
+                    toJSON(message: _129.HeaderData): unknown;
                     fromPartial<I_7 extends {
                         newPubKey?: {
                             typeUrl?: string;
@@ -7592,13 +7592,13 @@ export declare namespace ibc {
                             value?: Uint8Array;
                         } & Record<Exclude<keyof I_7["newPubKey"], keyof import("../google/protobuf/any").Any>, never>;
                         newDiversifier?: string;
-                    } & Record<Exclude<keyof I_7, keyof _174.HeaderData>, never>>(object: I_7): _174.HeaderData;
+                    } & Record<Exclude<keyof I_7, keyof _129.HeaderData>, never>>(object: I_7): _129.HeaderData;
                 };
                 ClientStateData: {
-                    encode(message: _174.ClientStateData, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _174.ClientStateData;
-                    fromJSON(object: any): _174.ClientStateData;
-                    toJSON(message: _174.ClientStateData): unknown;
+                    encode(message: _129.ClientStateData, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _129.ClientStateData;
+                    fromJSON(object: any): _129.ClientStateData;
+                    toJSON(message: _129.ClientStateData): unknown;
                     fromPartial<I_8 extends {
                         path?: Uint8Array;
                         clientState?: {
@@ -7614,13 +7614,13 @@ export declare namespace ibc {
                             typeUrl?: string;
                             value?: Uint8Array;
                         } & Record<Exclude<keyof I_8["clientState"], keyof import("../google/protobuf/any").Any>, never>;
-                    } & Record<Exclude<keyof I_8, keyof _174.ClientStateData>, never>>(object: I_8): _174.ClientStateData;
+                    } & Record<Exclude<keyof I_8, keyof _129.ClientStateData>, never>>(object: I_8): _129.ClientStateData;
                 };
                 ConsensusStateData: {
-                    encode(message: _174.ConsensusStateData, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _174.ConsensusStateData;
-                    fromJSON(object: any): _174.ConsensusStateData;
-                    toJSON(message: _174.ConsensusStateData): unknown;
+                    encode(message: _129.ConsensusStateData, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _129.ConsensusStateData;
+                    fromJSON(object: any): _129.ConsensusStateData;
+                    toJSON(message: _129.ConsensusStateData): unknown;
                     fromPartial<I_9 extends {
                         path?: Uint8Array;
                         consensusState?: {
@@ -7636,13 +7636,13 @@ export declare namespace ibc {
                             typeUrl?: string;
                             value?: Uint8Array;
                         } & Record<Exclude<keyof I_9["consensusState"], keyof import("../google/protobuf/any").Any>, never>;
-                    } & Record<Exclude<keyof I_9, keyof _174.ConsensusStateData>, never>>(object: I_9): _174.ConsensusStateData;
+                    } & Record<Exclude<keyof I_9, keyof _129.ConsensusStateData>, never>>(object: I_9): _129.ConsensusStateData;
                 };
                 ConnectionStateData: {
-                    encode(message: _174.ConnectionStateData, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _174.ConnectionStateData;
-                    fromJSON(object: any): _174.ConnectionStateData;
-                    toJSON(message: _174.ConnectionStateData): unknown;
+                    encode(message: _129.ConnectionStateData, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _129.ConnectionStateData;
+                    fromJSON(object: any): _129.ConnectionStateData;
+                    toJSON(message: _129.ConnectionStateData): unknown;
                     fromPartial<I_10 extends {
                         path?: Uint8Array;
                         connection?: {
@@ -7651,7 +7651,7 @@ export declare namespace ibc {
                                 identifier?: string;
                                 features?: string[];
                             }[];
-                            state?: _167.State;
+                            state?: _122.State;
                             counterparty?: {
                                 clientId?: string;
                                 connectionId?: string;
@@ -7669,7 +7669,7 @@ export declare namespace ibc {
                                 identifier?: string;
                                 features?: string[];
                             }[];
-                            state?: _167.State;
+                            state?: _122.State;
                             counterparty?: {
                                 clientId?: string;
                                 connectionId?: string;
@@ -7689,11 +7689,11 @@ export declare namespace ibc {
                             } & {
                                 identifier?: string;
                                 features?: string[] & string[] & Record<Exclude<keyof I_10["connection"]["versions"][number]["features"], keyof string[]>, never>;
-                            } & Record<Exclude<keyof I_10["connection"]["versions"][number], keyof _167.Version>, never>)[] & Record<Exclude<keyof I_10["connection"]["versions"], keyof {
+                            } & Record<Exclude<keyof I_10["connection"]["versions"][number], keyof _122.Version>, never>)[] & Record<Exclude<keyof I_10["connection"]["versions"], keyof {
                                 identifier?: string;
                                 features?: string[];
                             }[]>, never>;
-                            state?: _167.State;
+                            state?: _122.State;
                             counterparty?: {
                                 clientId?: string;
                                 connectionId?: string;
@@ -7708,21 +7708,21 @@ export declare namespace ibc {
                                 } & {
                                     keyPrefix?: Uint8Array;
                                 } & Record<Exclude<keyof I_10["connection"]["counterparty"]["prefix"], "keyPrefix">, never>;
-                            } & Record<Exclude<keyof I_10["connection"]["counterparty"], keyof _167.Counterparty>, never>;
+                            } & Record<Exclude<keyof I_10["connection"]["counterparty"], keyof _122.Counterparty>, never>;
                             delayPeriod?: any;
-                        } & Record<Exclude<keyof I_10["connection"], keyof _167.ConnectionEnd>, never>;
-                    } & Record<Exclude<keyof I_10, keyof _174.ConnectionStateData>, never>>(object: I_10): _174.ConnectionStateData;
+                        } & Record<Exclude<keyof I_10["connection"], keyof _122.ConnectionEnd>, never>;
+                    } & Record<Exclude<keyof I_10, keyof _129.ConnectionStateData>, never>>(object: I_10): _129.ConnectionStateData;
                 };
                 ChannelStateData: {
-                    encode(message: _174.ChannelStateData, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _174.ChannelStateData;
-                    fromJSON(object: any): _174.ChannelStateData;
-                    toJSON(message: _174.ChannelStateData): unknown;
+                    encode(message: _129.ChannelStateData, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _129.ChannelStateData;
+                    fromJSON(object: any): _129.ChannelStateData;
+                    toJSON(message: _129.ChannelStateData): unknown;
                     fromPartial<I_11 extends {
                         path?: Uint8Array;
                         channel?: {
-                            state?: _158.State;
-                            ordering?: _158.Order;
+                            state?: _113.State;
+                            ordering?: _113.Order;
                             counterparty?: {
                                 portId?: string;
                                 channelId?: string;
@@ -7733,8 +7733,8 @@ export declare namespace ibc {
                     } & {
                         path?: Uint8Array;
                         channel?: {
-                            state?: _158.State;
-                            ordering?: _158.Order;
+                            state?: _113.State;
+                            ordering?: _113.Order;
                             counterparty?: {
                                 portId?: string;
                                 channelId?: string;
@@ -7742,80 +7742,80 @@ export declare namespace ibc {
                             connectionHops?: string[];
                             version?: string;
                         } & {
-                            state?: _158.State;
-                            ordering?: _158.Order;
+                            state?: _113.State;
+                            ordering?: _113.Order;
                             counterparty?: {
                                 portId?: string;
                                 channelId?: string;
                             } & {
                                 portId?: string;
                                 channelId?: string;
-                            } & Record<Exclude<keyof I_11["channel"]["counterparty"], keyof _158.Counterparty>, never>;
+                            } & Record<Exclude<keyof I_11["channel"]["counterparty"], keyof _113.Counterparty>, never>;
                             connectionHops?: string[] & string[] & Record<Exclude<keyof I_11["channel"]["connectionHops"], keyof string[]>, never>;
                             version?: string;
-                        } & Record<Exclude<keyof I_11["channel"], keyof _158.Channel>, never>;
-                    } & Record<Exclude<keyof I_11, keyof _174.ChannelStateData>, never>>(object: I_11): _174.ChannelStateData;
+                        } & Record<Exclude<keyof I_11["channel"], keyof _113.Channel>, never>;
+                    } & Record<Exclude<keyof I_11, keyof _129.ChannelStateData>, never>>(object: I_11): _129.ChannelStateData;
                 };
                 PacketCommitmentData: {
-                    encode(message: _174.PacketCommitmentData, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _174.PacketCommitmentData;
-                    fromJSON(object: any): _174.PacketCommitmentData;
-                    toJSON(message: _174.PacketCommitmentData): unknown;
+                    encode(message: _129.PacketCommitmentData, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _129.PacketCommitmentData;
+                    fromJSON(object: any): _129.PacketCommitmentData;
+                    toJSON(message: _129.PacketCommitmentData): unknown;
                     fromPartial<I_12 extends {
                         path?: Uint8Array;
                         commitment?: Uint8Array;
                     } & {
                         path?: Uint8Array;
                         commitment?: Uint8Array;
-                    } & Record<Exclude<keyof I_12, keyof _174.PacketCommitmentData>, never>>(object: I_12): _174.PacketCommitmentData;
+                    } & Record<Exclude<keyof I_12, keyof _129.PacketCommitmentData>, never>>(object: I_12): _129.PacketCommitmentData;
                 };
                 PacketAcknowledgementData: {
-                    encode(message: _174.PacketAcknowledgementData, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _174.PacketAcknowledgementData;
-                    fromJSON(object: any): _174.PacketAcknowledgementData;
-                    toJSON(message: _174.PacketAcknowledgementData): unknown;
+                    encode(message: _129.PacketAcknowledgementData, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _129.PacketAcknowledgementData;
+                    fromJSON(object: any): _129.PacketAcknowledgementData;
+                    toJSON(message: _129.PacketAcknowledgementData): unknown;
                     fromPartial<I_13 extends {
                         path?: Uint8Array;
                         acknowledgement?: Uint8Array;
                     } & {
                         path?: Uint8Array;
                         acknowledgement?: Uint8Array;
-                    } & Record<Exclude<keyof I_13, keyof _174.PacketAcknowledgementData>, never>>(object: I_13): _174.PacketAcknowledgementData;
+                    } & Record<Exclude<keyof I_13, keyof _129.PacketAcknowledgementData>, never>>(object: I_13): _129.PacketAcknowledgementData;
                 };
                 PacketReceiptAbsenceData: {
-                    encode(message: _174.PacketReceiptAbsenceData, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _174.PacketReceiptAbsenceData;
-                    fromJSON(object: any): _174.PacketReceiptAbsenceData;
-                    toJSON(message: _174.PacketReceiptAbsenceData): unknown;
+                    encode(message: _129.PacketReceiptAbsenceData, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _129.PacketReceiptAbsenceData;
+                    fromJSON(object: any): _129.PacketReceiptAbsenceData;
+                    toJSON(message: _129.PacketReceiptAbsenceData): unknown;
                     fromPartial<I_14 extends {
                         path?: Uint8Array;
                     } & {
                         path?: Uint8Array;
-                    } & Record<Exclude<keyof I_14, "path">, never>>(object: I_14): _174.PacketReceiptAbsenceData;
+                    } & Record<Exclude<keyof I_14, "path">, never>>(object: I_14): _129.PacketReceiptAbsenceData;
                 };
                 NextSequenceRecvData: {
-                    encode(message: _174.NextSequenceRecvData, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _174.NextSequenceRecvData;
-                    fromJSON(object: any): _174.NextSequenceRecvData;
-                    toJSON(message: _174.NextSequenceRecvData): unknown;
+                    encode(message: _129.NextSequenceRecvData, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _129.NextSequenceRecvData;
+                    fromJSON(object: any): _129.NextSequenceRecvData;
+                    toJSON(message: _129.NextSequenceRecvData): unknown;
                     fromPartial<I_15 extends {
                         path?: Uint8Array;
                         nextSeqRecv?: any;
                     } & {
                         path?: Uint8Array;
                         nextSeqRecv?: any;
-                    } & Record<Exclude<keyof I_15, keyof _174.NextSequenceRecvData>, never>>(object: I_15): _174.NextSequenceRecvData;
+                    } & Record<Exclude<keyof I_15, keyof _129.NextSequenceRecvData>, never>>(object: I_15): _129.NextSequenceRecvData;
                 };
             };
             const v2: {
-                dataTypeFromJSON(object: any): _175.DataType;
-                dataTypeToJSON(object: _175.DataType): string;
-                DataType: typeof _175.DataType;
+                dataTypeFromJSON(object: any): _130.DataType;
+                dataTypeToJSON(object: _130.DataType): string;
+                DataType: typeof _130.DataType;
                 ClientState: {
-                    encode(message: _175.ClientState, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _175.ClientState;
-                    fromJSON(object: any): _175.ClientState;
-                    toJSON(message: _175.ClientState): unknown;
+                    encode(message: _130.ClientState, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _130.ClientState;
+                    fromJSON(object: any): _130.ClientState;
+                    toJSON(message: _130.ClientState): unknown;
                     fromPartial<I extends {
                         sequence?: any;
                         isFrozen?: boolean;
@@ -7848,15 +7848,15 @@ export declare namespace ibc {
                             } & Record<Exclude<keyof I["consensusState"]["publicKey"], keyof import("../google/protobuf/any").Any>, never>;
                             diversifier?: string;
                             timestamp?: any;
-                        } & Record<Exclude<keyof I["consensusState"], keyof _175.ConsensusState>, never>;
+                        } & Record<Exclude<keyof I["consensusState"], keyof _130.ConsensusState>, never>;
                         allowUpdateAfterProposal?: boolean;
-                    } & Record<Exclude<keyof I, keyof _175.ClientState>, never>>(object: I): _175.ClientState;
+                    } & Record<Exclude<keyof I, keyof _130.ClientState>, never>>(object: I): _130.ClientState;
                 };
                 ConsensusState: {
-                    encode(message: _175.ConsensusState, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _175.ConsensusState;
-                    fromJSON(object: any): _175.ConsensusState;
-                    toJSON(message: _175.ConsensusState): unknown;
+                    encode(message: _130.ConsensusState, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _130.ConsensusState;
+                    fromJSON(object: any): _130.ConsensusState;
+                    toJSON(message: _130.ConsensusState): unknown;
                     fromPartial<I_1 extends {
                         publicKey?: {
                             typeUrl?: string;
@@ -7874,13 +7874,13 @@ export declare namespace ibc {
                         } & Record<Exclude<keyof I_1["publicKey"], keyof import("../google/protobuf/any").Any>, never>;
                         diversifier?: string;
                         timestamp?: any;
-                    } & Record<Exclude<keyof I_1, keyof _175.ConsensusState>, never>>(object: I_1): _175.ConsensusState;
+                    } & Record<Exclude<keyof I_1, keyof _130.ConsensusState>, never>>(object: I_1): _130.ConsensusState;
                 };
                 Header: {
-                    encode(message: _175.Header, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _175.Header;
-                    fromJSON(object: any): _175.Header;
-                    toJSON(message: _175.Header): unknown;
+                    encode(message: _130.Header, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _130.Header;
+                    fromJSON(object: any): _130.Header;
+                    toJSON(message: _130.Header): unknown;
                     fromPartial<I_2 extends {
                         sequence?: any;
                         timestamp?: any;
@@ -7902,25 +7902,25 @@ export declare namespace ibc {
                             value?: Uint8Array;
                         } & Record<Exclude<keyof I_2["newPublicKey"], keyof import("../google/protobuf/any").Any>, never>;
                         newDiversifier?: string;
-                    } & Record<Exclude<keyof I_2, keyof _175.Header>, never>>(object: I_2): _175.Header;
+                    } & Record<Exclude<keyof I_2, keyof _130.Header>, never>>(object: I_2): _130.Header;
                 };
                 Misbehaviour: {
-                    encode(message: _175.Misbehaviour, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _175.Misbehaviour;
-                    fromJSON(object: any): _175.Misbehaviour;
-                    toJSON(message: _175.Misbehaviour): unknown;
+                    encode(message: _130.Misbehaviour, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _130.Misbehaviour;
+                    fromJSON(object: any): _130.Misbehaviour;
+                    toJSON(message: _130.Misbehaviour): unknown;
                     fromPartial<I_3 extends {
                         clientId?: string;
                         sequence?: any;
                         signatureOne?: {
                             signature?: Uint8Array;
-                            dataType?: _175.DataType;
+                            dataType?: _130.DataType;
                             data?: Uint8Array;
                             timestamp?: any;
                         };
                         signatureTwo?: {
                             signature?: Uint8Array;
-                            dataType?: _175.DataType;
+                            dataType?: _130.DataType;
                             data?: Uint8Array;
                             timestamp?: any;
                         };
@@ -7929,82 +7929,82 @@ export declare namespace ibc {
                         sequence?: any;
                         signatureOne?: {
                             signature?: Uint8Array;
-                            dataType?: _175.DataType;
+                            dataType?: _130.DataType;
                             data?: Uint8Array;
                             timestamp?: any;
                         } & {
                             signature?: Uint8Array;
-                            dataType?: _175.DataType;
+                            dataType?: _130.DataType;
                             data?: Uint8Array;
                             timestamp?: any;
-                        } & Record<Exclude<keyof I_3["signatureOne"], keyof _175.SignatureAndData>, never>;
+                        } & Record<Exclude<keyof I_3["signatureOne"], keyof _130.SignatureAndData>, never>;
                         signatureTwo?: {
                             signature?: Uint8Array;
-                            dataType?: _175.DataType;
+                            dataType?: _130.DataType;
                             data?: Uint8Array;
                             timestamp?: any;
                         } & {
                             signature?: Uint8Array;
-                            dataType?: _175.DataType;
+                            dataType?: _130.DataType;
                             data?: Uint8Array;
                             timestamp?: any;
-                        } & Record<Exclude<keyof I_3["signatureTwo"], keyof _175.SignatureAndData>, never>;
-                    } & Record<Exclude<keyof I_3, keyof _175.Misbehaviour>, never>>(object: I_3): _175.Misbehaviour;
+                        } & Record<Exclude<keyof I_3["signatureTwo"], keyof _130.SignatureAndData>, never>;
+                    } & Record<Exclude<keyof I_3, keyof _130.Misbehaviour>, never>>(object: I_3): _130.Misbehaviour;
                 };
                 SignatureAndData: {
-                    encode(message: _175.SignatureAndData, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _175.SignatureAndData;
-                    fromJSON(object: any): _175.SignatureAndData;
-                    toJSON(message: _175.SignatureAndData): unknown;
+                    encode(message: _130.SignatureAndData, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _130.SignatureAndData;
+                    fromJSON(object: any): _130.SignatureAndData;
+                    toJSON(message: _130.SignatureAndData): unknown;
                     fromPartial<I_4 extends {
                         signature?: Uint8Array;
-                        dataType?: _175.DataType;
+                        dataType?: _130.DataType;
                         data?: Uint8Array;
                         timestamp?: any;
                     } & {
                         signature?: Uint8Array;
-                        dataType?: _175.DataType;
+                        dataType?: _130.DataType;
                         data?: Uint8Array;
                         timestamp?: any;
-                    } & Record<Exclude<keyof I_4, keyof _175.SignatureAndData>, never>>(object: I_4): _175.SignatureAndData;
+                    } & Record<Exclude<keyof I_4, keyof _130.SignatureAndData>, never>>(object: I_4): _130.SignatureAndData;
                 };
                 TimestampedSignatureData: {
-                    encode(message: _175.TimestampedSignatureData, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _175.TimestampedSignatureData;
-                    fromJSON(object: any): _175.TimestampedSignatureData;
-                    toJSON(message: _175.TimestampedSignatureData): unknown;
+                    encode(message: _130.TimestampedSignatureData, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _130.TimestampedSignatureData;
+                    fromJSON(object: any): _130.TimestampedSignatureData;
+                    toJSON(message: _130.TimestampedSignatureData): unknown;
                     fromPartial<I_5 extends {
                         signatureData?: Uint8Array;
                         timestamp?: any;
                     } & {
                         signatureData?: Uint8Array;
                         timestamp?: any;
-                    } & Record<Exclude<keyof I_5, keyof _175.TimestampedSignatureData>, never>>(object: I_5): _175.TimestampedSignatureData;
+                    } & Record<Exclude<keyof I_5, keyof _130.TimestampedSignatureData>, never>>(object: I_5): _130.TimestampedSignatureData;
                 };
                 SignBytes: {
-                    encode(message: _175.SignBytes, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _175.SignBytes;
-                    fromJSON(object: any): _175.SignBytes;
-                    toJSON(message: _175.SignBytes): unknown;
+                    encode(message: _130.SignBytes, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _130.SignBytes;
+                    fromJSON(object: any): _130.SignBytes;
+                    toJSON(message: _130.SignBytes): unknown;
                     fromPartial<I_6 extends {
                         sequence?: any;
                         timestamp?: any;
                         diversifier?: string;
-                        dataType?: _175.DataType;
+                        dataType?: _130.DataType;
                         data?: Uint8Array;
                     } & {
                         sequence?: any;
                         timestamp?: any;
                         diversifier?: string;
-                        dataType?: _175.DataType;
+                        dataType?: _130.DataType;
                         data?: Uint8Array;
-                    } & Record<Exclude<keyof I_6, keyof _175.SignBytes>, never>>(object: I_6): _175.SignBytes;
+                    } & Record<Exclude<keyof I_6, keyof _130.SignBytes>, never>>(object: I_6): _130.SignBytes;
                 };
                 HeaderData: {
-                    encode(message: _175.HeaderData, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _175.HeaderData;
-                    fromJSON(object: any): _175.HeaderData;
-                    toJSON(message: _175.HeaderData): unknown;
+                    encode(message: _130.HeaderData, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _130.HeaderData;
+                    fromJSON(object: any): _130.HeaderData;
+                    toJSON(message: _130.HeaderData): unknown;
                     fromPartial<I_7 extends {
                         newPubKey?: {
                             typeUrl?: string;
@@ -8020,13 +8020,13 @@ export declare namespace ibc {
                             value?: Uint8Array;
                         } & Record<Exclude<keyof I_7["newPubKey"], keyof import("../google/protobuf/any").Any>, never>;
                         newDiversifier?: string;
-                    } & Record<Exclude<keyof I_7, keyof _175.HeaderData>, never>>(object: I_7): _175.HeaderData;
+                    } & Record<Exclude<keyof I_7, keyof _130.HeaderData>, never>>(object: I_7): _130.HeaderData;
                 };
                 ClientStateData: {
-                    encode(message: _175.ClientStateData, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _175.ClientStateData;
-                    fromJSON(object: any): _175.ClientStateData;
-                    toJSON(message: _175.ClientStateData): unknown;
+                    encode(message: _130.ClientStateData, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _130.ClientStateData;
+                    fromJSON(object: any): _130.ClientStateData;
+                    toJSON(message: _130.ClientStateData): unknown;
                     fromPartial<I_8 extends {
                         path?: Uint8Array;
                         clientState?: {
@@ -8042,13 +8042,13 @@ export declare namespace ibc {
                             typeUrl?: string;
                             value?: Uint8Array;
                         } & Record<Exclude<keyof I_8["clientState"], keyof import("../google/protobuf/any").Any>, never>;
-                    } & Record<Exclude<keyof I_8, keyof _175.ClientStateData>, never>>(object: I_8): _175.ClientStateData;
+                    } & Record<Exclude<keyof I_8, keyof _130.ClientStateData>, never>>(object: I_8): _130.ClientStateData;
                 };
                 ConsensusStateData: {
-                    encode(message: _175.ConsensusStateData, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _175.ConsensusStateData;
-                    fromJSON(object: any): _175.ConsensusStateData;
-                    toJSON(message: _175.ConsensusStateData): unknown;
+                    encode(message: _130.ConsensusStateData, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _130.ConsensusStateData;
+                    fromJSON(object: any): _130.ConsensusStateData;
+                    toJSON(message: _130.ConsensusStateData): unknown;
                     fromPartial<I_9 extends {
                         path?: Uint8Array;
                         consensusState?: {
@@ -8064,13 +8064,13 @@ export declare namespace ibc {
                             typeUrl?: string;
                             value?: Uint8Array;
                         } & Record<Exclude<keyof I_9["consensusState"], keyof import("../google/protobuf/any").Any>, never>;
-                    } & Record<Exclude<keyof I_9, keyof _175.ConsensusStateData>, never>>(object: I_9): _175.ConsensusStateData;
+                    } & Record<Exclude<keyof I_9, keyof _130.ConsensusStateData>, never>>(object: I_9): _130.ConsensusStateData;
                 };
                 ConnectionStateData: {
-                    encode(message: _175.ConnectionStateData, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _175.ConnectionStateData;
-                    fromJSON(object: any): _175.ConnectionStateData;
-                    toJSON(message: _175.ConnectionStateData): unknown;
+                    encode(message: _130.ConnectionStateData, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _130.ConnectionStateData;
+                    fromJSON(object: any): _130.ConnectionStateData;
+                    toJSON(message: _130.ConnectionStateData): unknown;
                     fromPartial<I_10 extends {
                         path?: Uint8Array;
                         connection?: {
@@ -8079,7 +8079,7 @@ export declare namespace ibc {
                                 identifier?: string;
                                 features?: string[];
                             }[];
-                            state?: _167.State;
+                            state?: _122.State;
                             counterparty?: {
                                 clientId?: string;
                                 connectionId?: string;
@@ -8097,7 +8097,7 @@ export declare namespace ibc {
                                 identifier?: string;
                                 features?: string[];
                             }[];
-                            state?: _167.State;
+                            state?: _122.State;
                             counterparty?: {
                                 clientId?: string;
                                 connectionId?: string;
@@ -8117,11 +8117,11 @@ export declare namespace ibc {
                             } & {
                                 identifier?: string;
                                 features?: string[] & string[] & Record<Exclude<keyof I_10["connection"]["versions"][number]["features"], keyof string[]>, never>;
-                            } & Record<Exclude<keyof I_10["connection"]["versions"][number], keyof _167.Version>, never>)[] & Record<Exclude<keyof I_10["connection"]["versions"], keyof {
+                            } & Record<Exclude<keyof I_10["connection"]["versions"][number], keyof _122.Version>, never>)[] & Record<Exclude<keyof I_10["connection"]["versions"], keyof {
                                 identifier?: string;
                                 features?: string[];
                             }[]>, never>;
-                            state?: _167.State;
+                            state?: _122.State;
                             counterparty?: {
                                 clientId?: string;
                                 connectionId?: string;
@@ -8136,21 +8136,21 @@ export declare namespace ibc {
                                 } & {
                                     keyPrefix?: Uint8Array;
                                 } & Record<Exclude<keyof I_10["connection"]["counterparty"]["prefix"], "keyPrefix">, never>;
-                            } & Record<Exclude<keyof I_10["connection"]["counterparty"], keyof _167.Counterparty>, never>;
+                            } & Record<Exclude<keyof I_10["connection"]["counterparty"], keyof _122.Counterparty>, never>;
                             delayPeriod?: any;
-                        } & Record<Exclude<keyof I_10["connection"], keyof _167.ConnectionEnd>, never>;
-                    } & Record<Exclude<keyof I_10, keyof _175.ConnectionStateData>, never>>(object: I_10): _175.ConnectionStateData;
+                        } & Record<Exclude<keyof I_10["connection"], keyof _122.ConnectionEnd>, never>;
+                    } & Record<Exclude<keyof I_10, keyof _130.ConnectionStateData>, never>>(object: I_10): _130.ConnectionStateData;
                 };
                 ChannelStateData: {
-                    encode(message: _175.ChannelStateData, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _175.ChannelStateData;
-                    fromJSON(object: any): _175.ChannelStateData;
-                    toJSON(message: _175.ChannelStateData): unknown;
+                    encode(message: _130.ChannelStateData, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _130.ChannelStateData;
+                    fromJSON(object: any): _130.ChannelStateData;
+                    toJSON(message: _130.ChannelStateData): unknown;
                     fromPartial<I_11 extends {
                         path?: Uint8Array;
                         channel?: {
-                            state?: _158.State;
-                            ordering?: _158.Order;
+                            state?: _113.State;
+                            ordering?: _113.Order;
                             counterparty?: {
                                 portId?: string;
                                 channelId?: string;
@@ -8161,8 +8161,8 @@ export declare namespace ibc {
                     } & {
                         path?: Uint8Array;
                         channel?: {
-                            state?: _158.State;
-                            ordering?: _158.Order;
+                            state?: _113.State;
+                            ordering?: _113.Order;
                             counterparty?: {
                                 portId?: string;
                                 channelId?: string;
@@ -8170,79 +8170,79 @@ export declare namespace ibc {
                             connectionHops?: string[];
                             version?: string;
                         } & {
-                            state?: _158.State;
-                            ordering?: _158.Order;
+                            state?: _113.State;
+                            ordering?: _113.Order;
                             counterparty?: {
                                 portId?: string;
                                 channelId?: string;
                             } & {
                                 portId?: string;
                                 channelId?: string;
-                            } & Record<Exclude<keyof I_11["channel"]["counterparty"], keyof _158.Counterparty>, never>;
+                            } & Record<Exclude<keyof I_11["channel"]["counterparty"], keyof _113.Counterparty>, never>;
                             connectionHops?: string[] & string[] & Record<Exclude<keyof I_11["channel"]["connectionHops"], keyof string[]>, never>;
                             version?: string;
-                        } & Record<Exclude<keyof I_11["channel"], keyof _158.Channel>, never>;
-                    } & Record<Exclude<keyof I_11, keyof _175.ChannelStateData>, never>>(object: I_11): _175.ChannelStateData;
+                        } & Record<Exclude<keyof I_11["channel"], keyof _113.Channel>, never>;
+                    } & Record<Exclude<keyof I_11, keyof _130.ChannelStateData>, never>>(object: I_11): _130.ChannelStateData;
                 };
                 PacketCommitmentData: {
-                    encode(message: _175.PacketCommitmentData, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _175.PacketCommitmentData;
-                    fromJSON(object: any): _175.PacketCommitmentData;
-                    toJSON(message: _175.PacketCommitmentData): unknown;
+                    encode(message: _130.PacketCommitmentData, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _130.PacketCommitmentData;
+                    fromJSON(object: any): _130.PacketCommitmentData;
+                    toJSON(message: _130.PacketCommitmentData): unknown;
                     fromPartial<I_12 extends {
                         path?: Uint8Array;
                         commitment?: Uint8Array;
                     } & {
                         path?: Uint8Array;
                         commitment?: Uint8Array;
-                    } & Record<Exclude<keyof I_12, keyof _175.PacketCommitmentData>, never>>(object: I_12): _175.PacketCommitmentData;
+                    } & Record<Exclude<keyof I_12, keyof _130.PacketCommitmentData>, never>>(object: I_12): _130.PacketCommitmentData;
                 };
                 PacketAcknowledgementData: {
-                    encode(message: _175.PacketAcknowledgementData, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _175.PacketAcknowledgementData;
-                    fromJSON(object: any): _175.PacketAcknowledgementData;
-                    toJSON(message: _175.PacketAcknowledgementData): unknown;
+                    encode(message: _130.PacketAcknowledgementData, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _130.PacketAcknowledgementData;
+                    fromJSON(object: any): _130.PacketAcknowledgementData;
+                    toJSON(message: _130.PacketAcknowledgementData): unknown;
                     fromPartial<I_13 extends {
                         path?: Uint8Array;
                         acknowledgement?: Uint8Array;
                     } & {
                         path?: Uint8Array;
                         acknowledgement?: Uint8Array;
-                    } & Record<Exclude<keyof I_13, keyof _175.PacketAcknowledgementData>, never>>(object: I_13): _175.PacketAcknowledgementData;
+                    } & Record<Exclude<keyof I_13, keyof _130.PacketAcknowledgementData>, never>>(object: I_13): _130.PacketAcknowledgementData;
                 };
                 PacketReceiptAbsenceData: {
-                    encode(message: _175.PacketReceiptAbsenceData, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _175.PacketReceiptAbsenceData;
-                    fromJSON(object: any): _175.PacketReceiptAbsenceData;
-                    toJSON(message: _175.PacketReceiptAbsenceData): unknown;
+                    encode(message: _130.PacketReceiptAbsenceData, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _130.PacketReceiptAbsenceData;
+                    fromJSON(object: any): _130.PacketReceiptAbsenceData;
+                    toJSON(message: _130.PacketReceiptAbsenceData): unknown;
                     fromPartial<I_14 extends {
                         path?: Uint8Array;
                     } & {
                         path?: Uint8Array;
-                    } & Record<Exclude<keyof I_14, "path">, never>>(object: I_14): _175.PacketReceiptAbsenceData;
+                    } & Record<Exclude<keyof I_14, "path">, never>>(object: I_14): _130.PacketReceiptAbsenceData;
                 };
                 NextSequenceRecvData: {
-                    encode(message: _175.NextSequenceRecvData, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _175.NextSequenceRecvData;
-                    fromJSON(object: any): _175.NextSequenceRecvData;
-                    toJSON(message: _175.NextSequenceRecvData): unknown;
+                    encode(message: _130.NextSequenceRecvData, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _130.NextSequenceRecvData;
+                    fromJSON(object: any): _130.NextSequenceRecvData;
+                    toJSON(message: _130.NextSequenceRecvData): unknown;
                     fromPartial<I_15 extends {
                         path?: Uint8Array;
                         nextSeqRecv?: any;
                     } & {
                         path?: Uint8Array;
                         nextSeqRecv?: any;
-                    } & Record<Exclude<keyof I_15, keyof _175.NextSequenceRecvData>, never>>(object: I_15): _175.NextSequenceRecvData;
+                    } & Record<Exclude<keyof I_15, keyof _130.NextSequenceRecvData>, never>>(object: I_15): _130.NextSequenceRecvData;
                 };
             };
         }
         namespace tendermint {
             const v1: {
                 ClientState: {
-                    encode(message: _176.ClientState, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _176.ClientState;
-                    fromJSON(object: any): _176.ClientState;
-                    toJSON(message: _176.ClientState): unknown;
+                    encode(message: _131.ClientState, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _131.ClientState;
+                    fromJSON(object: any): _131.ClientState;
+                    toJSON(message: _131.ClientState): unknown;
                     fromPartial<I extends {
                         chainId?: string;
                         trustLevel?: {
@@ -8290,7 +8290,7 @@ export declare namespace ibc {
                         } & {
                             numerator?: any;
                             denominator?: any;
-                        } & Record<Exclude<keyof I["trustLevel"], keyof _176.Fraction>, never>;
+                        } & Record<Exclude<keyof I["trustLevel"], keyof _131.Fraction>, never>;
                         trustingPeriod?: string;
                         unbondingPeriod?: string;
                         maxClockDrift?: string;
@@ -8300,14 +8300,14 @@ export declare namespace ibc {
                         } & {
                             revisionNumber?: any;
                             revisionHeight?: any;
-                        } & Record<Exclude<keyof I["frozenHeight"], keyof _162.Height>, never>;
+                        } & Record<Exclude<keyof I["frozenHeight"], keyof _117.Height>, never>;
                         latestHeight?: {
                             revisionNumber?: any;
                             revisionHeight?: any;
                         } & {
                             revisionNumber?: any;
                             revisionHeight?: any;
-                        } & Record<Exclude<keyof I["latestHeight"], keyof _162.Height>, never>;
+                        } & Record<Exclude<keyof I["latestHeight"], keyof _117.Height>, never>;
                         proofSpecs?: {
                             leafSpec?: {
                                 hash?: import("../confio/proofs").HashOp;
@@ -8397,13 +8397,13 @@ export declare namespace ibc {
                         upgradePath?: string[] & string[] & Record<Exclude<keyof I["upgradePath"], keyof string[]>, never>;
                         allowUpdateAfterExpiry?: boolean;
                         allowUpdateAfterMisbehaviour?: boolean;
-                    } & Record<Exclude<keyof I, keyof _176.ClientState>, never>>(object: I): _176.ClientState;
+                    } & Record<Exclude<keyof I, keyof _131.ClientState>, never>>(object: I): _131.ClientState;
                 };
                 ConsensusState: {
-                    encode(message: _176.ConsensusState, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _176.ConsensusState;
-                    fromJSON(object: any): _176.ConsensusState;
-                    toJSON(message: _176.ConsensusState): unknown;
+                    encode(message: _131.ConsensusState, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _131.ConsensusState;
+                    fromJSON(object: any): _131.ConsensusState;
+                    toJSON(message: _131.ConsensusState): unknown;
                     fromPartial<I_1 extends {
                         timestamp?: Date;
                         root?: {
@@ -8418,13 +8418,13 @@ export declare namespace ibc {
                             hash?: Uint8Array;
                         } & Record<Exclude<keyof I_1["root"], "hash">, never>;
                         nextValidatorsHash?: Uint8Array;
-                    } & Record<Exclude<keyof I_1, keyof _176.ConsensusState>, never>>(object: I_1): _176.ConsensusState;
+                    } & Record<Exclude<keyof I_1, keyof _131.ConsensusState>, never>>(object: I_1): _131.ConsensusState;
                 };
                 Misbehaviour: {
-                    encode(message: _176.Misbehaviour, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _176.Misbehaviour;
-                    fromJSON(object: any): _176.Misbehaviour;
-                    toJSON(message: _176.Misbehaviour): unknown;
+                    encode(message: _131.Misbehaviour, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _131.Misbehaviour;
+                    fromJSON(object: any): _131.Misbehaviour;
+                    toJSON(message: _131.Misbehaviour): unknown;
                     fromPartial<I_2 extends {
                         clientId?: string;
                         header_1?: {
@@ -8953,7 +8953,7 @@ export declare namespace ibc {
                             } & {
                                 revisionNumber?: any;
                                 revisionHeight?: any;
-                            } & Record<Exclude<keyof I_2["header_1"]["trustedHeight"], keyof _162.Height>, never>;
+                            } & Record<Exclude<keyof I_2["header_1"]["trustedHeight"], keyof _117.Height>, never>;
                             trustedValidators?: {
                                 validators?: {
                                     address?: Uint8Array;
@@ -9033,7 +9033,7 @@ export declare namespace ibc {
                                 } & Record<Exclude<keyof I_2["header_1"]["trustedValidators"]["proposer"], keyof import("../tendermint/types/validator").Validator>, never>;
                                 totalVotingPower?: any;
                             } & Record<Exclude<keyof I_2["header_1"]["trustedValidators"], keyof import("../tendermint/types/validator").ValidatorSet>, never>;
-                        } & Record<Exclude<keyof I_2["header_1"], keyof _176.Header>, never>;
+                        } & Record<Exclude<keyof I_2["header_1"], keyof _131.Header>, never>;
                         header_2?: {
                             signedHeader?: {
                                 header?: {
@@ -9374,7 +9374,7 @@ export declare namespace ibc {
                             } & {
                                 revisionNumber?: any;
                                 revisionHeight?: any;
-                            } & Record<Exclude<keyof I_2["header_2"]["trustedHeight"], keyof _162.Height>, never>;
+                            } & Record<Exclude<keyof I_2["header_2"]["trustedHeight"], keyof _117.Height>, never>;
                             trustedValidators?: {
                                 validators?: {
                                     address?: Uint8Array;
@@ -9454,14 +9454,14 @@ export declare namespace ibc {
                                 } & Record<Exclude<keyof I_2["header_2"]["trustedValidators"]["proposer"], keyof import("../tendermint/types/validator").Validator>, never>;
                                 totalVotingPower?: any;
                             } & Record<Exclude<keyof I_2["header_2"]["trustedValidators"], keyof import("../tendermint/types/validator").ValidatorSet>, never>;
-                        } & Record<Exclude<keyof I_2["header_2"], keyof _176.Header>, never>;
-                    } & Record<Exclude<keyof I_2, keyof _176.Misbehaviour>, never>>(object: I_2): _176.Misbehaviour;
+                        } & Record<Exclude<keyof I_2["header_2"], keyof _131.Header>, never>;
+                    } & Record<Exclude<keyof I_2, keyof _131.Misbehaviour>, never>>(object: I_2): _131.Misbehaviour;
                 };
                 Header: {
-                    encode(message: _176.Header, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _176.Header;
-                    fromJSON(object: any): _176.Header;
-                    toJSON(message: _176.Header): unknown;
+                    encode(message: _131.Header, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _131.Header;
+                    fromJSON(object: any): _131.Header;
+                    toJSON(message: _131.Header): unknown;
                     fromPartial<I_3 extends {
                         signedHeader?: {
                             header?: {
@@ -9802,7 +9802,7 @@ export declare namespace ibc {
                         } & {
                             revisionNumber?: any;
                             revisionHeight?: any;
-                        } & Record<Exclude<keyof I_3["trustedHeight"], keyof _162.Height>, never>;
+                        } & Record<Exclude<keyof I_3["trustedHeight"], keyof _117.Height>, never>;
                         trustedValidators?: {
                             validators?: {
                                 address?: Uint8Array;
@@ -9882,20 +9882,20 @@ export declare namespace ibc {
                             } & Record<Exclude<keyof I_3["trustedValidators"]["proposer"], keyof import("../tendermint/types/validator").Validator>, never>;
                             totalVotingPower?: any;
                         } & Record<Exclude<keyof I_3["trustedValidators"], keyof import("../tendermint/types/validator").ValidatorSet>, never>;
-                    } & Record<Exclude<keyof I_3, keyof _176.Header>, never>>(object: I_3): _176.Header;
+                    } & Record<Exclude<keyof I_3, keyof _131.Header>, never>>(object: I_3): _131.Header;
                 };
                 Fraction: {
-                    encode(message: _176.Fraction, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _176.Fraction;
-                    fromJSON(object: any): _176.Fraction;
-                    toJSON(message: _176.Fraction): unknown;
+                    encode(message: _131.Fraction, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
+                    decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _131.Fraction;
+                    fromJSON(object: any): _131.Fraction;
+                    toJSON(message: _131.Fraction): unknown;
                     fromPartial<I_4 extends {
                         numerator?: any;
                         denominator?: any;
                     } & {
                         numerator?: any;
                         denominator?: any;
-                    } & Record<Exclude<keyof I_4, keyof _176.Fraction>, never>>(object: I_4): _176.Fraction;
+                    } & Record<Exclude<keyof I_4, keyof _131.Fraction>, never>>(object: I_4): _131.Fraction;
                 };
             };
         }
