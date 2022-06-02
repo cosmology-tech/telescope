@@ -1,5 +1,5 @@
 import * as _m0 from "protobufjs/minimal";
-import { Long } from "@osmonauts/helpers";
+import { Long, DeepPartial } from "@osmonauts/helpers";
 /**
  * A Duration represents a signed, fixed-length span of time represented
  * as a count of seconds and fractions of seconds at nanosecond
@@ -82,11 +82,5 @@ export declare const Duration: {
     decode(input: _m0.Reader | Uint8Array, length?: number): Duration;
     fromJSON(object: any): Duration;
     toJSON(message: Duration): unknown;
-    fromPartial<I extends {
-        seconds?: any;
-        nanos?: number;
-    } & {
-        seconds?: any;
-        nanos?: number;
-    } & Record<Exclude<keyof I, keyof Duration>, never>>(object: I): Duration;
+    fromPartial(object: DeepPartial<Duration>): Duration;
 };

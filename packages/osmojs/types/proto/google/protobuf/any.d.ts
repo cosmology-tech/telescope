@@ -1,4 +1,5 @@
 import * as _m0 from "protobufjs/minimal";
+import { DeepPartial } from "@osmonauts/helpers";
 /**
  * `Any` contains an arbitrary serialized protocol buffer message along with a
  * URL that describes the type of the serialized message.
@@ -119,11 +120,5 @@ export declare const Any: {
     decode(input: _m0.Reader | Uint8Array, length?: number): Any;
     fromJSON(object: any): Any;
     toJSON(message: Any): unknown;
-    fromPartial<I extends {
-        typeUrl?: string;
-        value?: Uint8Array;
-    } & {
-        typeUrl?: string;
-        value?: Uint8Array;
-    } & Record<Exclude<keyof I, keyof Any>, never>>(object: I): Any;
+    fromPartial(object: DeepPartial<Any>): Any;
 };

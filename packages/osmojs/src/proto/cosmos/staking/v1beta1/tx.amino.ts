@@ -2,7 +2,7 @@ import { Description, CommissionRates } from "./staking";
 import { Any } from "../../../google/protobuf/any";
 import { Coin } from "../../base/v1beta1/coin";
 import { Timestamp } from "../../../google/protobuf/timestamp";
-import { AminoMsg, decodeBech32Pubkey, encodeBech32PubKey } from "@cosmjs/amino";
+import { AminoMsg, decodeBech32Pubkey, encodeBech32Pubkey } from "@cosmjs/amino";
 import { fromBase64, toBase64 } from "@cosmjs/encoding";
 import { MsgCreateValidator, MsgEditValidator, MsgDelegate, MsgBeginRedelegate, MsgUndelegate } from "./tx";
 export interface AminoMsgCreateValidator extends AminoMsg {
@@ -145,7 +145,7 @@ export const AminoConverter = {
         minSelfDelegation: min_self_delegation,
         delegatorAddress: delegator_address,
         validatorAddress: validator_address,
-        pubkey: encodeBech32PubKey({
+        pubkey: encodeBech32Pubkey({
           type: "tendermint/PubKeySecp256k1",
           value: toBase64(pubkey.value)
         }, "cosmos"),

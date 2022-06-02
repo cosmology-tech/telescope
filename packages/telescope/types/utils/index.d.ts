@@ -6,7 +6,7 @@ export declare const UTILS: {
     AminoTypes: string;
     decodeBech32Pubkey: string;
     defaultRegistryTypes: string;
-    encodeBech32PubKey: string;
+    encodeBech32Pubkey: string;
     fromBase64: string;
     fromBech32: string;
     fromDuration: string;

@@ -238,12 +238,12 @@ export const fromAmino = {
 
     pubkey(args: FromAminoParseField) {
         args.context.addUtil('toBase64');
-        args.context.addUtil('encodeBech32PubKey');
+        args.context.addUtil('encodeBech32Pubkey');
 
         return t.objectProperty(
             t.identifier(args.field.name),
             t.callExpression(
-                t.identifier('encodeBech32PubKey'),
+                t.identifier('encodeBech32Pubkey'),
                 [
                     t.objectExpression([
                         t.objectProperty(

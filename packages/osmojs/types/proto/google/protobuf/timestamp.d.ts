@@ -1,5 +1,5 @@
 import * as _m0 from "protobufjs/minimal";
-import { Long } from "@osmonauts/helpers";
+import { Long, DeepPartial } from "@osmonauts/helpers";
 /**
  * A Timestamp represents a point in time independent of any time zone or local
  * calendar, encoded as a count of seconds and fractions of seconds at
@@ -104,11 +104,5 @@ export declare const Timestamp: {
     decode(input: _m0.Reader | Uint8Array, length?: number): Timestamp;
     fromJSON(object: any): Timestamp;
     toJSON(message: Timestamp): unknown;
-    fromPartial<I extends {
-        seconds?: any;
-        nanos?: number;
-    } & {
-        seconds?: any;
-        nanos?: number;
-    } & Record<Exclude<keyof I, keyof Timestamp>, never>>(object: I): Timestamp;
+    fromPartial(object: DeepPartial<Timestamp>): Timestamp;
 };

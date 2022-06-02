@@ -13,7 +13,7 @@ export const UTILS = {
     AminoTypes: '@cosmjs/stargate',
     decodeBech32Pubkey: '@cosmjs/amino',
     defaultRegistryTypes: '@cosmjs/stargate',
-    encodeBech32PubKey: '@cosmjs/amino',
+    encodeBech32Pubkey: '@cosmjs/amino',
     fromBase64: '@cosmjs/encoding',
     fromBech32: '@cosmjs/encoding',
     fromDuration: '@osmonauts/helpers',
