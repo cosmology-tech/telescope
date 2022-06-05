@@ -97,7 +97,7 @@ exports[`MsgExecuteContract interface 2`] = `
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgExecuteContract>, I>>(object: I): MsgExecuteContract {
+  fromPartial(object: DeepPartial<MsgExecuteContract>): MsgExecuteContract {
     const message = createBaseMsgExecuteContract();
     message.sender = object.sender ?? \\"\\";
     message.contract = object.contract ?? \\"\\";

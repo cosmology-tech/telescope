@@ -144,8 +144,8 @@ export const fromPartialMethodFields = (context: ProtoParseContext, name: string
     });
     return fields;
 };
+
 export const fromPartialMethod = (context: ProtoParseContext, name: string, proto: ProtoType) => {
-    context.addUtil('Exact');
     context.addUtil('DeepPartial');
 
     const fields = fromPartialMethodFields(context, name, proto);
@@ -154,18 +154,71 @@ export const fromPartialMethod = (context: ProtoParseContext, name: string, prot
         varName = '_';
     }
 
+
+    let useExact = false;
+    let typeParameters = undefined;
+    let param = null;
+
+    if (context.useExact === true) {
+        context.addUtil('Exact');
+
+        useExact = true;
+        // type params
+        typeParameters = t.tsTypeParameterDeclaration([
+            t.tsTypeParameter(
+                t.tsTypeReference(
+                    t.identifier('Exact'),
+                    t.tsTypeParameterInstantiation([
+                        t.tsTypeReference(
+                            t.identifier('DeepPartial'),
+                            t.tsTypeParameterInstantiation([
+                                t.tsTypeReference(
+                                    t.identifier(name)
+                                )
+                            ])
+                        ),
+                        t.tsTypeReference(
+                            t.identifier('I')
+                        )
+                    ])
+                ),
+                null,
+                'I'
+            )
+        ]);
+        // param
+        param = identifier(
+            varName,
+            t.tsTypeAnnotation(
+                t.tsTypeReference(
+                    t.identifier('I')
+                )
+            )
+        );
+    } else {
+        // param
+        param = identifier(
+            varName,
+            t.tsTypeAnnotation(
+                t.tsTypeReference(
+                    t.identifier('DeepPartial'),
+                    t.tsTypeParameterInstantiation(
+                        [
+                            t.tsTypeReference(
+                                t.identifier(name)
+                            )
+                        ]
+                    )
+                )
+            )
+        );
+    }
+
     return objectMethod(
         'method',
         t.identifier('fromPartial'),
         [
-            identifier(
-                varName,
-                t.tsTypeAnnotation(
-                    t.tsTypeReference(
-                        t.identifier('I')
-                    )
-                )
-            )
+            param
         ],
         t.blockStatement([
 
@@ -199,28 +252,7 @@ export const fromPartialMethod = (context: ProtoParseContext, name: string, prot
                 t.identifier(name)
             )
         ),
-        t.tsTypeParameterDeclaration([
-            t.tsTypeParameter(
-                t.tsTypeReference(
-                    t.identifier('Exact'),
-                    t.tsTypeParameterInstantiation([
-                        t.tsTypeReference(
-                            t.identifier('DeepPartial'),
-                            t.tsTypeParameterInstantiation([
-                                t.tsTypeReference(
-                                    t.identifier(name)
-                                )
-                            ])
-                        ),
-                        t.tsTypeReference(
-                            t.identifier('I')
-                        )
-                    ])
-                ),
-                null,
-                'I'
-            )
-        ])
+        typeParameters
     )
 };
 
