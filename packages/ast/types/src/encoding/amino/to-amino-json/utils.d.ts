@@ -9,5 +9,9 @@ export declare const toAmino: {
     coin(args: ToAminoParseField): t.ObjectProperty;
     type({ context, field, currentProtoPath, scope, nested, isOptional }: ToAminoParseField): any;
     typeArray({ context, field, currentProtoPath, scope, nested, isOptional }: ToAminoParseField): t.ObjectProperty;
+    scalarArray({ context, field, currentProtoPath, scope, nested, isOptional }: ToAminoParseField, arrayTypeAstFunc: Function): t.ObjectProperty;
     pubkey(args: ToAminoParseField): t.ObjectProperty;
+};
+export declare const arrayTypes: {
+    long(varname: string): t.CallExpression;
 };

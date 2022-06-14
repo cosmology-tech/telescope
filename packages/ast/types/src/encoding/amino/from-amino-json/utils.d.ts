@@ -9,7 +9,11 @@ export declare const fromAmino: {
     enum({ context, field, currentProtoPath, scope, nested, isOptional }: FromAminoParseField): t.ObjectProperty;
     enumArray({ context, field, currentProtoPath, scope, nested, isOptional }: FromAminoParseField): t.ObjectProperty;
     type({ context, field, currentProtoPath, scope, nested, isOptional }: FromAminoParseField): any;
-    typeArray({ context, field, currentProtoPath, scope, nested, isOptional }: FromAminoParseField): t.ObjectProperty;
     arrayFrom(args: FromAminoParseField): t.ObjectProperty;
+    typeArray({ context, field, currentProtoPath, scope, nested, isOptional }: FromAminoParseField): t.ObjectProperty;
+    scalarArray({ context, field, currentProtoPath, scope, nested, isOptional }: FromAminoParseField, arrayTypeAstFunc: Function): t.ObjectProperty;
     pubkey(args: FromAminoParseField): t.ObjectProperty;
+};
+export declare const arrayTypes: {
+    long(varname: string): t.CallExpression;
 };
