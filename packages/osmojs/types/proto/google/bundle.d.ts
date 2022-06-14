@@ -11,7 +11,7 @@ export declare namespace google {
             decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _102.Http;
             fromJSON(object: any): _102.Http;
             toJSON(message: _102.Http): unknown;
-            fromPartial<I extends {
+            fromPartial(object: {
                 rules?: {
                     selector?: string;
                     get?: string;
@@ -28,646 +28,14 @@ export declare namespace google {
                     additionalBindings?: any[];
                 }[];
                 fullyDecodeReservedExpansion?: boolean;
-            } & {
-                rules?: {
-                    selector?: string;
-                    get?: string;
-                    put?: string;
-                    post?: string;
-                    delete?: string;
-                    patch?: string;
-                    custom?: {
-                        kind?: string;
-                        path?: string;
-                    };
-                    body?: string;
-                    responseBody?: string;
-                    additionalBindings?: any[];
-                }[] & ({
-                    selector?: string;
-                    get?: string;
-                    put?: string;
-                    post?: string;
-                    delete?: string;
-                    patch?: string;
-                    custom?: {
-                        kind?: string;
-                        path?: string;
-                    };
-                    body?: string;
-                    responseBody?: string;
-                    additionalBindings?: any[];
-                } & {
-                    selector?: string;
-                    get?: string;
-                    put?: string;
-                    post?: string;
-                    delete?: string;
-                    patch?: string;
-                    custom?: {
-                        kind?: string;
-                        path?: string;
-                    } & {
-                        kind?: string;
-                        path?: string;
-                    } & Record<Exclude<keyof I["rules"][number]["custom"], keyof _102.CustomHttpPattern>, never>;
-                    body?: string;
-                    responseBody?: string;
-                    additionalBindings?: {
-                        selector?: string;
-                        get?: string;
-                        put?: string;
-                        post?: string;
-                        delete?: string;
-                        patch?: string;
-                        custom?: {
-                            kind?: string;
-                            path?: string;
-                        };
-                        body?: string;
-                        responseBody?: string;
-                        additionalBindings?: any[];
-                    }[] & ({
-                        selector?: string;
-                        get?: string;
-                        put?: string;
-                        post?: string;
-                        delete?: string;
-                        patch?: string;
-                        custom?: {
-                            kind?: string;
-                            path?: string;
-                        };
-                        body?: string;
-                        responseBody?: string;
-                        additionalBindings?: any[];
-                    } & {
-                        selector?: string;
-                        get?: string;
-                        put?: string;
-                        post?: string;
-                        delete?: string;
-                        patch?: string;
-                        custom?: {
-                            kind?: string;
-                            path?: string;
-                        } & {
-                            kind?: string;
-                            path?: string;
-                        } & Record<Exclude<keyof I["rules"][number]["additionalBindings"][number]["custom"], keyof _102.CustomHttpPattern>, never>;
-                        body?: string;
-                        responseBody?: string;
-                        additionalBindings?: {
-                            selector?: string;
-                            get?: string;
-                            put?: string;
-                            post?: string;
-                            delete?: string;
-                            patch?: string;
-                            custom?: {
-                                kind?: string;
-                                path?: string;
-                            };
-                            body?: string;
-                            responseBody?: string;
-                            additionalBindings?: any[];
-                        }[] & ({
-                            selector?: string;
-                            get?: string;
-                            put?: string;
-                            post?: string;
-                            delete?: string;
-                            patch?: string;
-                            custom?: {
-                                kind?: string;
-                                path?: string;
-                            };
-                            body?: string;
-                            responseBody?: string;
-                            additionalBindings?: any[];
-                        } & {
-                            selector?: string;
-                            get?: string;
-                            put?: string;
-                            post?: string;
-                            delete?: string;
-                            patch?: string;
-                            custom?: {
-                                kind?: string;
-                                path?: string;
-                            } & {
-                                kind?: string;
-                                path?: string;
-                            } & Record<Exclude<keyof I["rules"][number]["additionalBindings"][number]["additionalBindings"][number]["custom"], keyof _102.CustomHttpPattern>, never>;
-                            body?: string;
-                            responseBody?: string;
-                            additionalBindings?: {
-                                selector?: string;
-                                get?: string;
-                                put?: string;
-                                post?: string;
-                                delete?: string;
-                                patch?: string;
-                                custom?: {
-                                    kind?: string;
-                                    path?: string;
-                                };
-                                body?: string;
-                                responseBody?: string;
-                                additionalBindings?: any[];
-                            }[] & ({
-                                selector?: string;
-                                get?: string;
-                                put?: string;
-                                post?: string;
-                                delete?: string;
-                                patch?: string;
-                                custom?: {
-                                    kind?: string;
-                                    path?: string;
-                                };
-                                body?: string;
-                                responseBody?: string;
-                                additionalBindings?: any[];
-                            } & {
-                                selector?: string;
-                                get?: string;
-                                put?: string;
-                                post?: string;
-                                delete?: string;
-                                patch?: string;
-                                custom?: {
-                                    kind?: string;
-                                    path?: string;
-                                } & {
-                                    kind?: string;
-                                    path?: string;
-                                } & Record<Exclude<keyof I["rules"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["custom"], keyof _102.CustomHttpPattern>, never>;
-                                body?: string;
-                                responseBody?: string;
-                                additionalBindings?: {
-                                    selector?: string;
-                                    get?: string;
-                                    put?: string;
-                                    post?: string;
-                                    delete?: string;
-                                    patch?: string;
-                                    custom?: {
-                                        kind?: string;
-                                        path?: string;
-                                    };
-                                    body?: string;
-                                    responseBody?: string;
-                                    additionalBindings?: any[];
-                                }[] & ({
-                                    selector?: string;
-                                    get?: string;
-                                    put?: string;
-                                    post?: string;
-                                    delete?: string;
-                                    patch?: string;
-                                    custom?: {
-                                        kind?: string;
-                                        path?: string;
-                                    };
-                                    body?: string;
-                                    responseBody?: string;
-                                    additionalBindings?: any[];
-                                } & {
-                                    selector?: string;
-                                    get?: string;
-                                    put?: string;
-                                    post?: string;
-                                    delete?: string;
-                                    patch?: string;
-                                    custom?: {
-                                        kind?: string;
-                                        path?: string;
-                                    } & {
-                                        kind?: string;
-                                        path?: string;
-                                    } & Record<Exclude<keyof I["rules"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["custom"], keyof _102.CustomHttpPattern>, never>;
-                                    body?: string;
-                                    responseBody?: string;
-                                    additionalBindings?: {
-                                        selector?: string;
-                                        get?: string;
-                                        put?: string;
-                                        post?: string;
-                                        delete?: string;
-                                        patch?: string;
-                                        custom?: {
-                                            kind?: string;
-                                            path?: string;
-                                        };
-                                        body?: string;
-                                        responseBody?: string;
-                                        additionalBindings?: any[];
-                                    }[] & ({
-                                        selector?: string;
-                                        get?: string;
-                                        put?: string;
-                                        post?: string;
-                                        delete?: string;
-                                        patch?: string;
-                                        custom?: {
-                                            kind?: string;
-                                            path?: string;
-                                        };
-                                        body?: string;
-                                        responseBody?: string;
-                                        additionalBindings?: any[];
-                                    } & {
-                                        selector?: string;
-                                        get?: string;
-                                        put?: string;
-                                        post?: string;
-                                        delete?: string;
-                                        patch?: string;
-                                        custom?: {
-                                            kind?: string;
-                                            path?: string;
-                                        } & {
-                                            kind?: string;
-                                            path?: string;
-                                        } & Record<Exclude<keyof I["rules"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["custom"], keyof _102.CustomHttpPattern>, never>;
-                                        body?: string;
-                                        responseBody?: string;
-                                        additionalBindings?: {
-                                            selector?: string;
-                                            get?: string;
-                                            put?: string;
-                                            post?: string;
-                                            delete?: string;
-                                            patch?: string;
-                                            custom?: {
-                                                kind?: string;
-                                                path?: string;
-                                            };
-                                            body?: string;
-                                            responseBody?: string;
-                                            additionalBindings?: any[];
-                                        }[] & ({
-                                            selector?: string;
-                                            get?: string;
-                                            put?: string;
-                                            post?: string;
-                                            delete?: string;
-                                            patch?: string;
-                                            custom?: {
-                                                kind?: string;
-                                                path?: string;
-                                            };
-                                            body?: string;
-                                            responseBody?: string;
-                                            additionalBindings?: any[];
-                                        } & {
-                                            selector?: string;
-                                            get?: string;
-                                            put?: string;
-                                            post?: string;
-                                            delete?: string;
-                                            patch?: string;
-                                            custom?: {
-                                                kind?: string;
-                                                path?: string;
-                                            } & {
-                                                kind?: string;
-                                                path?: string;
-                                            } & Record<Exclude<keyof I["rules"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["custom"], keyof _102.CustomHttpPattern>, never>;
-                                            body?: string;
-                                            responseBody?: string;
-                                            additionalBindings?: {
-                                                selector?: string;
-                                                get?: string;
-                                                put?: string;
-                                                post?: string;
-                                                delete?: string;
-                                                patch?: string;
-                                                custom?: {
-                                                    kind?: string;
-                                                    path?: string;
-                                                };
-                                                body?: string;
-                                                responseBody?: string;
-                                                additionalBindings?: any[];
-                                            }[] & ({
-                                                selector?: string;
-                                                get?: string;
-                                                put?: string;
-                                                post?: string;
-                                                delete?: string;
-                                                patch?: string;
-                                                custom?: {
-                                                    kind?: string;
-                                                    path?: string;
-                                                };
-                                                body?: string;
-                                                responseBody?: string;
-                                                additionalBindings?: any[];
-                                            } & {
-                                                selector?: string;
-                                                get?: string;
-                                                put?: string;
-                                                post?: string;
-                                                delete?: string;
-                                                patch?: string;
-                                                custom?: {
-                                                    kind?: string;
-                                                    path?: string;
-                                                } & {
-                                                    kind?: string;
-                                                    path?: string;
-                                                } & Record<Exclude<keyof I["rules"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["custom"], keyof _102.CustomHttpPattern>, never>;
-                                                body?: string;
-                                                responseBody?: string;
-                                                additionalBindings?: {
-                                                    selector?: string;
-                                                    get?: string;
-                                                    put?: string;
-                                                    post?: string;
-                                                    delete?: string;
-                                                    patch?: string;
-                                                    custom?: {
-                                                        kind?: string;
-                                                        path?: string;
-                                                    };
-                                                    body?: string;
-                                                    responseBody?: string;
-                                                    additionalBindings?: any[];
-                                                }[] & ({
-                                                    selector?: string;
-                                                    get?: string;
-                                                    put?: string;
-                                                    post?: string;
-                                                    delete?: string;
-                                                    patch?: string;
-                                                    custom?: {
-                                                        kind?: string;
-                                                        path?: string;
-                                                    };
-                                                    body?: string;
-                                                    responseBody?: string;
-                                                    additionalBindings?: any[];
-                                                } & {
-                                                    selector?: string;
-                                                    get?: string;
-                                                    put?: string;
-                                                    post?: string;
-                                                    delete?: string;
-                                                    patch?: string;
-                                                    custom?: {
-                                                        kind?: string;
-                                                        path?: string;
-                                                    } & {
-                                                        kind?: string;
-                                                        path?: string;
-                                                    } & Record<Exclude<keyof I["rules"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["custom"], keyof _102.CustomHttpPattern>, never>;
-                                                    body?: string;
-                                                    responseBody?: string;
-                                                    additionalBindings?: {
-                                                        selector?: string;
-                                                        get?: string;
-                                                        put?: string;
-                                                        post?: string;
-                                                        delete?: string;
-                                                        patch?: string;
-                                                        custom?: {
-                                                            kind?: string;
-                                                            path?: string;
-                                                        };
-                                                        body?: string;
-                                                        responseBody?: string;
-                                                        additionalBindings?: any[];
-                                                    }[] & ({
-                                                        selector?: string;
-                                                        get?: string;
-                                                        put?: string;
-                                                        post?: string;
-                                                        delete?: string;
-                                                        patch?: string;
-                                                        custom?: {
-                                                            kind?: string;
-                                                            path?: string;
-                                                        };
-                                                        body?: string;
-                                                        responseBody?: string;
-                                                        additionalBindings?: any[];
-                                                    } & {
-                                                        selector?: string;
-                                                        get?: string;
-                                                        put?: string;
-                                                        post?: string;
-                                                        delete?: string;
-                                                        patch?: string;
-                                                        custom?: {
-                                                            kind?: string;
-                                                            path?: string;
-                                                        } & any & Record<Exclude<keyof I["rules"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["custom"], keyof _102.CustomHttpPattern>, never>;
-                                                        body?: string;
-                                                        responseBody?: string;
-                                                        additionalBindings?: {
-                                                            selector?: string;
-                                                            get?: string;
-                                                            put?: string;
-                                                            post?: string;
-                                                            delete?: string;
-                                                            patch?: string;
-                                                            custom?: {
-                                                                kind?: string;
-                                                                path?: string;
-                                                            };
-                                                            body?: string;
-                                                            responseBody?: string;
-                                                            additionalBindings?: any[];
-                                                        }[] & ({
-                                                            selector?: string;
-                                                            get?: string;
-                                                            put?: string;
-                                                            post?: string;
-                                                            delete?: string;
-                                                            patch?: string;
-                                                            custom?: {
-                                                                kind?: string;
-                                                                path?: string;
-                                                            };
-                                                            body?: string;
-                                                            responseBody?: string;
-                                                            additionalBindings?: any[];
-                                                        } & any & Record<Exclude<keyof I["rules"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number], keyof _102.HttpRule>, never>)[] & Record<Exclude<keyof I["rules"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"], keyof {
-                                                            selector?: string;
-                                                            get?: string;
-                                                            put?: string;
-                                                            post?: string;
-                                                            delete?: string;
-                                                            patch?: string;
-                                                            custom?: {
-                                                                kind?: string;
-                                                                path?: string;
-                                                            };
-                                                            body?: string;
-                                                            responseBody?: string;
-                                                            additionalBindings?: any[];
-                                                        }[]>, never>;
-                                                    } & Record<Exclude<keyof I["rules"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number], keyof _102.HttpRule>, never>)[] & Record<Exclude<keyof I["rules"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"], keyof {
-                                                        selector?: string;
-                                                        get?: string;
-                                                        put?: string;
-                                                        post?: string;
-                                                        delete?: string;
-                                                        patch?: string;
-                                                        custom?: {
-                                                            kind?: string;
-                                                            path?: string;
-                                                        };
-                                                        body?: string;
-                                                        responseBody?: string;
-                                                        additionalBindings?: any[];
-                                                    }[]>, never>;
-                                                } & Record<Exclude<keyof I["rules"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number], keyof _102.HttpRule>, never>)[] & Record<Exclude<keyof I["rules"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"], keyof {
-                                                    selector?: string;
-                                                    get?: string;
-                                                    put?: string;
-                                                    post?: string;
-                                                    delete?: string;
-                                                    patch?: string;
-                                                    custom?: {
-                                                        kind?: string;
-                                                        path?: string;
-                                                    };
-                                                    body?: string;
-                                                    responseBody?: string;
-                                                    additionalBindings?: any[];
-                                                }[]>, never>;
-                                            } & Record<Exclude<keyof I["rules"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number], keyof _102.HttpRule>, never>)[] & Record<Exclude<keyof I["rules"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"], keyof {
-                                                selector?: string;
-                                                get?: string;
-                                                put?: string;
-                                                post?: string;
-                                                delete?: string;
-                                                patch?: string;
-                                                custom?: {
-                                                    kind?: string;
-                                                    path?: string;
-                                                };
-                                                body?: string;
-                                                responseBody?: string;
-                                                additionalBindings?: any[];
-                                            }[]>, never>;
-                                        } & Record<Exclude<keyof I["rules"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number], keyof _102.HttpRule>, never>)[] & Record<Exclude<keyof I["rules"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"], keyof {
-                                            selector?: string;
-                                            get?: string;
-                                            put?: string;
-                                            post?: string;
-                                            delete?: string;
-                                            patch?: string;
-                                            custom?: {
-                                                kind?: string;
-                                                path?: string;
-                                            };
-                                            body?: string;
-                                            responseBody?: string;
-                                            additionalBindings?: any[];
-                                        }[]>, never>;
-                                    } & Record<Exclude<keyof I["rules"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number], keyof _102.HttpRule>, never>)[] & Record<Exclude<keyof I["rules"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"], keyof {
-                                        selector?: string;
-                                        get?: string;
-                                        put?: string;
-                                        post?: string;
-                                        delete?: string;
-                                        patch?: string;
-                                        custom?: {
-                                            kind?: string;
-                                            path?: string;
-                                        };
-                                        body?: string;
-                                        responseBody?: string;
-                                        additionalBindings?: any[];
-                                    }[]>, never>;
-                                } & Record<Exclude<keyof I["rules"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number], keyof _102.HttpRule>, never>)[] & Record<Exclude<keyof I["rules"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"], keyof {
-                                    selector?: string;
-                                    get?: string;
-                                    put?: string;
-                                    post?: string;
-                                    delete?: string;
-                                    patch?: string;
-                                    custom?: {
-                                        kind?: string;
-                                        path?: string;
-                                    };
-                                    body?: string;
-                                    responseBody?: string;
-                                    additionalBindings?: any[];
-                                }[]>, never>;
-                            } & Record<Exclude<keyof I["rules"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number], keyof _102.HttpRule>, never>)[] & Record<Exclude<keyof I["rules"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"], keyof {
-                                selector?: string;
-                                get?: string;
-                                put?: string;
-                                post?: string;
-                                delete?: string;
-                                patch?: string;
-                                custom?: {
-                                    kind?: string;
-                                    path?: string;
-                                };
-                                body?: string;
-                                responseBody?: string;
-                                additionalBindings?: any[];
-                            }[]>, never>;
-                        } & Record<Exclude<keyof I["rules"][number]["additionalBindings"][number]["additionalBindings"][number], keyof _102.HttpRule>, never>)[] & Record<Exclude<keyof I["rules"][number]["additionalBindings"][number]["additionalBindings"], keyof {
-                            selector?: string;
-                            get?: string;
-                            put?: string;
-                            post?: string;
-                            delete?: string;
-                            patch?: string;
-                            custom?: {
-                                kind?: string;
-                                path?: string;
-                            };
-                            body?: string;
-                            responseBody?: string;
-                            additionalBindings?: any[];
-                        }[]>, never>;
-                    } & Record<Exclude<keyof I["rules"][number]["additionalBindings"][number], keyof _102.HttpRule>, never>)[] & Record<Exclude<keyof I["rules"][number]["additionalBindings"], keyof {
-                        selector?: string;
-                        get?: string;
-                        put?: string;
-                        post?: string;
-                        delete?: string;
-                        patch?: string;
-                        custom?: {
-                            kind?: string;
-                            path?: string;
-                        };
-                        body?: string;
-                        responseBody?: string;
-                        additionalBindings?: any[];
-                    }[]>, never>;
-                } & Record<Exclude<keyof I["rules"][number], keyof _102.HttpRule>, never>)[] & Record<Exclude<keyof I["rules"], keyof {
-                    selector?: string;
-                    get?: string;
-                    put?: string;
-                    post?: string;
-                    delete?: string;
-                    patch?: string;
-                    custom?: {
-                        kind?: string;
-                        path?: string;
-                    };
-                    body?: string;
-                    responseBody?: string;
-                    additionalBindings?: any[];
-                }[]>, never>;
-                fullyDecodeReservedExpansion?: boolean;
-            } & Record<Exclude<keyof I, keyof _102.Http>, never>>(object: I): _102.Http;
+            }): _102.Http;
         };
         HttpRule: {
             encode(message: _102.HttpRule, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
             decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _102.HttpRule;
             fromJSON(object: any): _102.HttpRule;
             toJSON(message: _102.HttpRule): unknown;
-            fromPartial<I_1 extends {
+            fromPartial(object: {
                 selector?: string;
                 get?: string;
                 put?: string;
@@ -681,666 +49,17 @@ export declare namespace google {
                 body?: string;
                 responseBody?: string;
                 additionalBindings?: any[];
-            } & {
-                selector?: string;
-                get?: string;
-                put?: string;
-                post?: string;
-                delete?: string;
-                patch?: string;
-                custom?: {
-                    kind?: string;
-                    path?: string;
-                } & {
-                    kind?: string;
-                    path?: string;
-                } & Record<Exclude<keyof I_1["custom"], keyof _102.CustomHttpPattern>, never>;
-                body?: string;
-                responseBody?: string;
-                additionalBindings?: {
-                    selector?: string;
-                    get?: string;
-                    put?: string;
-                    post?: string;
-                    delete?: string;
-                    patch?: string;
-                    custom?: {
-                        kind?: string;
-                        path?: string;
-                    };
-                    body?: string;
-                    responseBody?: string;
-                    additionalBindings?: any[];
-                }[] & ({
-                    selector?: string;
-                    get?: string;
-                    put?: string;
-                    post?: string;
-                    delete?: string;
-                    patch?: string;
-                    custom?: {
-                        kind?: string;
-                        path?: string;
-                    };
-                    body?: string;
-                    responseBody?: string;
-                    additionalBindings?: any[];
-                } & {
-                    selector?: string;
-                    get?: string;
-                    put?: string;
-                    post?: string;
-                    delete?: string;
-                    patch?: string;
-                    custom?: {
-                        kind?: string;
-                        path?: string;
-                    } & {
-                        kind?: string;
-                        path?: string;
-                    } & Record<Exclude<keyof I_1["additionalBindings"][number]["custom"], keyof _102.CustomHttpPattern>, never>;
-                    body?: string;
-                    responseBody?: string;
-                    additionalBindings?: {
-                        selector?: string;
-                        get?: string;
-                        put?: string;
-                        post?: string;
-                        delete?: string;
-                        patch?: string;
-                        custom?: {
-                            kind?: string;
-                            path?: string;
-                        };
-                        body?: string;
-                        responseBody?: string;
-                        additionalBindings?: any[];
-                    }[] & ({
-                        selector?: string;
-                        get?: string;
-                        put?: string;
-                        post?: string;
-                        delete?: string;
-                        patch?: string;
-                        custom?: {
-                            kind?: string;
-                            path?: string;
-                        };
-                        body?: string;
-                        responseBody?: string;
-                        additionalBindings?: any[];
-                    } & {
-                        selector?: string;
-                        get?: string;
-                        put?: string;
-                        post?: string;
-                        delete?: string;
-                        patch?: string;
-                        custom?: {
-                            kind?: string;
-                            path?: string;
-                        } & {
-                            kind?: string;
-                            path?: string;
-                        } & Record<Exclude<keyof I_1["additionalBindings"][number]["additionalBindings"][number]["custom"], keyof _102.CustomHttpPattern>, never>;
-                        body?: string;
-                        responseBody?: string;
-                        additionalBindings?: {
-                            selector?: string;
-                            get?: string;
-                            put?: string;
-                            post?: string;
-                            delete?: string;
-                            patch?: string;
-                            custom?: {
-                                kind?: string;
-                                path?: string;
-                            };
-                            body?: string;
-                            responseBody?: string;
-                            additionalBindings?: any[];
-                        }[] & ({
-                            selector?: string;
-                            get?: string;
-                            put?: string;
-                            post?: string;
-                            delete?: string;
-                            patch?: string;
-                            custom?: {
-                                kind?: string;
-                                path?: string;
-                            };
-                            body?: string;
-                            responseBody?: string;
-                            additionalBindings?: any[];
-                        } & {
-                            selector?: string;
-                            get?: string;
-                            put?: string;
-                            post?: string;
-                            delete?: string;
-                            patch?: string;
-                            custom?: {
-                                kind?: string;
-                                path?: string;
-                            } & {
-                                kind?: string;
-                                path?: string;
-                            } & Record<Exclude<keyof I_1["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["custom"], keyof _102.CustomHttpPattern>, never>;
-                            body?: string;
-                            responseBody?: string;
-                            additionalBindings?: {
-                                selector?: string;
-                                get?: string;
-                                put?: string;
-                                post?: string;
-                                delete?: string;
-                                patch?: string;
-                                custom?: {
-                                    kind?: string;
-                                    path?: string;
-                                };
-                                body?: string;
-                                responseBody?: string;
-                                additionalBindings?: any[];
-                            }[] & ({
-                                selector?: string;
-                                get?: string;
-                                put?: string;
-                                post?: string;
-                                delete?: string;
-                                patch?: string;
-                                custom?: {
-                                    kind?: string;
-                                    path?: string;
-                                };
-                                body?: string;
-                                responseBody?: string;
-                                additionalBindings?: any[];
-                            } & {
-                                selector?: string;
-                                get?: string;
-                                put?: string;
-                                post?: string;
-                                delete?: string;
-                                patch?: string;
-                                custom?: {
-                                    kind?: string;
-                                    path?: string;
-                                } & {
-                                    kind?: string;
-                                    path?: string;
-                                } & Record<Exclude<keyof I_1["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["custom"], keyof _102.CustomHttpPattern>, never>;
-                                body?: string;
-                                responseBody?: string;
-                                additionalBindings?: {
-                                    selector?: string;
-                                    get?: string;
-                                    put?: string;
-                                    post?: string;
-                                    delete?: string;
-                                    patch?: string;
-                                    custom?: {
-                                        kind?: string;
-                                        path?: string;
-                                    };
-                                    body?: string;
-                                    responseBody?: string;
-                                    additionalBindings?: any[];
-                                }[] & ({
-                                    selector?: string;
-                                    get?: string;
-                                    put?: string;
-                                    post?: string;
-                                    delete?: string;
-                                    patch?: string;
-                                    custom?: {
-                                        kind?: string;
-                                        path?: string;
-                                    };
-                                    body?: string;
-                                    responseBody?: string;
-                                    additionalBindings?: any[];
-                                } & {
-                                    selector?: string;
-                                    get?: string;
-                                    put?: string;
-                                    post?: string;
-                                    delete?: string;
-                                    patch?: string;
-                                    custom?: {
-                                        kind?: string;
-                                        path?: string;
-                                    } & {
-                                        kind?: string;
-                                        path?: string;
-                                    } & Record<Exclude<keyof I_1["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["custom"], keyof _102.CustomHttpPattern>, never>;
-                                    body?: string;
-                                    responseBody?: string;
-                                    additionalBindings?: {
-                                        selector?: string;
-                                        get?: string;
-                                        put?: string;
-                                        post?: string;
-                                        delete?: string;
-                                        patch?: string;
-                                        custom?: {
-                                            kind?: string;
-                                            path?: string;
-                                        };
-                                        body?: string;
-                                        responseBody?: string;
-                                        additionalBindings?: any[];
-                                    }[] & ({
-                                        selector?: string;
-                                        get?: string;
-                                        put?: string;
-                                        post?: string;
-                                        delete?: string;
-                                        patch?: string;
-                                        custom?: {
-                                            kind?: string;
-                                            path?: string;
-                                        };
-                                        body?: string;
-                                        responseBody?: string;
-                                        additionalBindings?: any[];
-                                    } & {
-                                        selector?: string;
-                                        get?: string;
-                                        put?: string;
-                                        post?: string;
-                                        delete?: string;
-                                        patch?: string;
-                                        custom?: {
-                                            kind?: string;
-                                            path?: string;
-                                        } & {
-                                            kind?: string;
-                                            path?: string;
-                                        } & Record<Exclude<keyof I_1["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["custom"], keyof _102.CustomHttpPattern>, never>;
-                                        body?: string;
-                                        responseBody?: string;
-                                        additionalBindings?: {
-                                            selector?: string;
-                                            get?: string;
-                                            put?: string;
-                                            post?: string;
-                                            delete?: string;
-                                            patch?: string;
-                                            custom?: {
-                                                kind?: string;
-                                                path?: string;
-                                            };
-                                            body?: string;
-                                            responseBody?: string;
-                                            additionalBindings?: any[];
-                                        }[] & ({
-                                            selector?: string;
-                                            get?: string;
-                                            put?: string;
-                                            post?: string;
-                                            delete?: string;
-                                            patch?: string;
-                                            custom?: {
-                                                kind?: string;
-                                                path?: string;
-                                            };
-                                            body?: string;
-                                            responseBody?: string;
-                                            additionalBindings?: any[];
-                                        } & {
-                                            selector?: string;
-                                            get?: string;
-                                            put?: string;
-                                            post?: string;
-                                            delete?: string;
-                                            patch?: string;
-                                            custom?: {
-                                                kind?: string;
-                                                path?: string;
-                                            } & {
-                                                kind?: string;
-                                                path?: string;
-                                            } & Record<Exclude<keyof I_1["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["custom"], keyof _102.CustomHttpPattern>, never>;
-                                            body?: string;
-                                            responseBody?: string;
-                                            additionalBindings?: {
-                                                selector?: string;
-                                                get?: string;
-                                                put?: string;
-                                                post?: string;
-                                                delete?: string;
-                                                patch?: string;
-                                                custom?: {
-                                                    kind?: string;
-                                                    path?: string;
-                                                };
-                                                body?: string;
-                                                responseBody?: string;
-                                                additionalBindings?: any[];
-                                            }[] & ({
-                                                selector?: string;
-                                                get?: string;
-                                                put?: string;
-                                                post?: string;
-                                                delete?: string;
-                                                patch?: string;
-                                                custom?: {
-                                                    kind?: string;
-                                                    path?: string;
-                                                };
-                                                body?: string;
-                                                responseBody?: string;
-                                                additionalBindings?: any[];
-                                            } & {
-                                                selector?: string;
-                                                get?: string;
-                                                put?: string;
-                                                post?: string;
-                                                delete?: string;
-                                                patch?: string;
-                                                custom?: {
-                                                    kind?: string;
-                                                    path?: string;
-                                                } & {
-                                                    kind?: string;
-                                                    path?: string;
-                                                } & Record<Exclude<keyof I_1["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["custom"], keyof _102.CustomHttpPattern>, never>;
-                                                body?: string;
-                                                responseBody?: string;
-                                                additionalBindings?: {
-                                                    selector?: string;
-                                                    get?: string;
-                                                    put?: string;
-                                                    post?: string;
-                                                    delete?: string;
-                                                    patch?: string;
-                                                    custom?: {
-                                                        kind?: string;
-                                                        path?: string;
-                                                    };
-                                                    body?: string;
-                                                    responseBody?: string;
-                                                    additionalBindings?: any[];
-                                                }[] & ({
-                                                    selector?: string;
-                                                    get?: string;
-                                                    put?: string;
-                                                    post?: string;
-                                                    delete?: string;
-                                                    patch?: string;
-                                                    custom?: {
-                                                        kind?: string;
-                                                        path?: string;
-                                                    };
-                                                    body?: string;
-                                                    responseBody?: string;
-                                                    additionalBindings?: any[];
-                                                } & {
-                                                    selector?: string;
-                                                    get?: string;
-                                                    put?: string;
-                                                    post?: string;
-                                                    delete?: string;
-                                                    patch?: string;
-                                                    custom?: {
-                                                        kind?: string;
-                                                        path?: string;
-                                                    } & {
-                                                        kind?: string;
-                                                        path?: string;
-                                                    } & Record<Exclude<keyof I_1["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["custom"], keyof _102.CustomHttpPattern>, never>;
-                                                    body?: string;
-                                                    responseBody?: string;
-                                                    additionalBindings?: {
-                                                        selector?: string;
-                                                        get?: string;
-                                                        put?: string;
-                                                        post?: string;
-                                                        delete?: string;
-                                                        patch?: string;
-                                                        custom?: {
-                                                            kind?: string;
-                                                            path?: string;
-                                                        };
-                                                        body?: string;
-                                                        responseBody?: string;
-                                                        additionalBindings?: any[];
-                                                    }[] & ({
-                                                        selector?: string;
-                                                        get?: string;
-                                                        put?: string;
-                                                        post?: string;
-                                                        delete?: string;
-                                                        patch?: string;
-                                                        custom?: {
-                                                            kind?: string;
-                                                            path?: string;
-                                                        };
-                                                        body?: string;
-                                                        responseBody?: string;
-                                                        additionalBindings?: any[];
-                                                    } & {
-                                                        selector?: string;
-                                                        get?: string;
-                                                        put?: string;
-                                                        post?: string;
-                                                        delete?: string;
-                                                        patch?: string;
-                                                        custom?: {
-                                                            kind?: string;
-                                                            path?: string;
-                                                        } & any & Record<Exclude<keyof I_1["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["custom"], keyof _102.CustomHttpPattern>, never>;
-                                                        body?: string;
-                                                        responseBody?: string;
-                                                        additionalBindings?: {
-                                                            selector?: string;
-                                                            get?: string;
-                                                            put?: string;
-                                                            post?: string;
-                                                            delete?: string;
-                                                            patch?: string;
-                                                            custom?: {
-                                                                kind?: string;
-                                                                path?: string;
-                                                            };
-                                                            body?: string;
-                                                            responseBody?: string;
-                                                            additionalBindings?: any[];
-                                                        }[] & ({
-                                                            selector?: string;
-                                                            get?: string;
-                                                            put?: string;
-                                                            post?: string;
-                                                            delete?: string;
-                                                            patch?: string;
-                                                            custom?: {
-                                                                kind?: string;
-                                                                path?: string;
-                                                            };
-                                                            body?: string;
-                                                            responseBody?: string;
-                                                            additionalBindings?: any[];
-                                                        } & any & Record<Exclude<keyof I_1["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number], keyof _102.HttpRule>, never>)[] & Record<Exclude<keyof I_1["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"], keyof {
-                                                            selector?: string;
-                                                            get?: string;
-                                                            put?: string;
-                                                            post?: string;
-                                                            delete?: string;
-                                                            patch?: string;
-                                                            custom?: {
-                                                                kind?: string;
-                                                                path?: string;
-                                                            };
-                                                            body?: string;
-                                                            responseBody?: string;
-                                                            additionalBindings?: any[];
-                                                        }[]>, never>;
-                                                    } & Record<Exclude<keyof I_1["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number], keyof _102.HttpRule>, never>)[] & Record<Exclude<keyof I_1["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"], keyof {
-                                                        selector?: string;
-                                                        get?: string;
-                                                        put?: string;
-                                                        post?: string;
-                                                        delete?: string;
-                                                        patch?: string;
-                                                        custom?: {
-                                                            kind?: string;
-                                                            path?: string;
-                                                        };
-                                                        body?: string;
-                                                        responseBody?: string;
-                                                        additionalBindings?: any[];
-                                                    }[]>, never>;
-                                                } & Record<Exclude<keyof I_1["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number], keyof _102.HttpRule>, never>)[] & Record<Exclude<keyof I_1["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"], keyof {
-                                                    selector?: string;
-                                                    get?: string;
-                                                    put?: string;
-                                                    post?: string;
-                                                    delete?: string;
-                                                    patch?: string;
-                                                    custom?: {
-                                                        kind?: string;
-                                                        path?: string;
-                                                    };
-                                                    body?: string;
-                                                    responseBody?: string;
-                                                    additionalBindings?: any[];
-                                                }[]>, never>;
-                                            } & Record<Exclude<keyof I_1["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number], keyof _102.HttpRule>, never>)[] & Record<Exclude<keyof I_1["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"], keyof {
-                                                selector?: string;
-                                                get?: string;
-                                                put?: string;
-                                                post?: string;
-                                                delete?: string;
-                                                patch?: string;
-                                                custom?: {
-                                                    kind?: string;
-                                                    path?: string;
-                                                };
-                                                body?: string;
-                                                responseBody?: string;
-                                                additionalBindings?: any[];
-                                            }[]>, never>;
-                                        } & Record<Exclude<keyof I_1["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number], keyof _102.HttpRule>, never>)[] & Record<Exclude<keyof I_1["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"], keyof {
-                                            selector?: string;
-                                            get?: string;
-                                            put?: string;
-                                            post?: string;
-                                            delete?: string;
-                                            patch?: string;
-                                            custom?: {
-                                                kind?: string;
-                                                path?: string;
-                                            };
-                                            body?: string;
-                                            responseBody?: string;
-                                            additionalBindings?: any[];
-                                        }[]>, never>;
-                                    } & Record<Exclude<keyof I_1["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number], keyof _102.HttpRule>, never>)[] & Record<Exclude<keyof I_1["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"], keyof {
-                                        selector?: string;
-                                        get?: string;
-                                        put?: string;
-                                        post?: string;
-                                        delete?: string;
-                                        patch?: string;
-                                        custom?: {
-                                            kind?: string;
-                                            path?: string;
-                                        };
-                                        body?: string;
-                                        responseBody?: string;
-                                        additionalBindings?: any[];
-                                    }[]>, never>;
-                                } & Record<Exclude<keyof I_1["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number], keyof _102.HttpRule>, never>)[] & Record<Exclude<keyof I_1["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"], keyof {
-                                    selector?: string;
-                                    get?: string;
-                                    put?: string;
-                                    post?: string;
-                                    delete?: string;
-                                    patch?: string;
-                                    custom?: {
-                                        kind?: string;
-                                        path?: string;
-                                    };
-                                    body?: string;
-                                    responseBody?: string;
-                                    additionalBindings?: any[];
-                                }[]>, never>;
-                            } & Record<Exclude<keyof I_1["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number], keyof _102.HttpRule>, never>)[] & Record<Exclude<keyof I_1["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"], keyof {
-                                selector?: string;
-                                get?: string;
-                                put?: string;
-                                post?: string;
-                                delete?: string;
-                                patch?: string;
-                                custom?: {
-                                    kind?: string;
-                                    path?: string;
-                                };
-                                body?: string;
-                                responseBody?: string;
-                                additionalBindings?: any[];
-                            }[]>, never>;
-                        } & Record<Exclude<keyof I_1["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"][number], keyof _102.HttpRule>, never>)[] & Record<Exclude<keyof I_1["additionalBindings"][number]["additionalBindings"][number]["additionalBindings"], keyof {
-                            selector?: string;
-                            get?: string;
-                            put?: string;
-                            post?: string;
-                            delete?: string;
-                            patch?: string;
-                            custom?: {
-                                kind?: string;
-                                path?: string;
-                            };
-                            body?: string;
-                            responseBody?: string;
-                            additionalBindings?: any[];
-                        }[]>, never>;
-                    } & Record<Exclude<keyof I_1["additionalBindings"][number]["additionalBindings"][number], keyof _102.HttpRule>, never>)[] & Record<Exclude<keyof I_1["additionalBindings"][number]["additionalBindings"], keyof {
-                        selector?: string;
-                        get?: string;
-                        put?: string;
-                        post?: string;
-                        delete?: string;
-                        patch?: string;
-                        custom?: {
-                            kind?: string;
-                            path?: string;
-                        };
-                        body?: string;
-                        responseBody?: string;
-                        additionalBindings?: any[];
-                    }[]>, never>;
-                } & Record<Exclude<keyof I_1["additionalBindings"][number], keyof _102.HttpRule>, never>)[] & Record<Exclude<keyof I_1["additionalBindings"], keyof {
-                    selector?: string;
-                    get?: string;
-                    put?: string;
-                    post?: string;
-                    delete?: string;
-                    patch?: string;
-                    custom?: {
-                        kind?: string;
-                        path?: string;
-                    };
-                    body?: string;
-                    responseBody?: string;
-                    additionalBindings?: any[];
-                }[]>, never>;
-            } & Record<Exclude<keyof I_1, keyof _102.HttpRule>, never>>(object: I_1): _102.HttpRule;
+            }): _102.HttpRule;
         };
         CustomHttpPattern: {
             encode(message: _102.CustomHttpPattern, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
             decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _102.CustomHttpPattern;
             fromJSON(object: any): _102.CustomHttpPattern;
             toJSON(message: _102.CustomHttpPattern): unknown;
-            fromPartial<I_2 extends {
+            fromPartial(object: {
                 kind?: string;
                 path?: string;
-            } & {
-                kind?: string;
-                path?: string;
-            } & Record<Exclude<keyof I_2, keyof _102.CustomHttpPattern>, never>>(object: I_2): _102.CustomHttpPattern;
+            }): _102.CustomHttpPattern;
         };
     };
     const protobuf: {
@@ -1394,14 +113,680 @@ export declare namespace google {
             decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _104.FileDescriptorSet;
             fromJSON(object: any): _104.FileDescriptorSet;
             toJSON(message: _104.FileDescriptorSet): unknown;
-            fromPartial(object: _104.FileDescriptorSet): _104.FileDescriptorSet;
+            fromPartial(object: {
+                file?: {
+                    name?: string;
+                    package?: string;
+                    dependency?: string[];
+                    publicDependency?: number[];
+                    weakDependency?: number[];
+                    messageType?: {
+                        name?: string;
+                        field?: {
+                            name?: string;
+                            number?: number;
+                            label?: _104.FieldDescriptorProto_Label;
+                            type?: _104.FieldDescriptorProto_Type;
+                            typeName?: string;
+                            extendee?: string;
+                            defaultValue?: string;
+                            oneofIndex?: number;
+                            jsonName?: string;
+                            options?: {
+                                ctype?: _104.FieldOptions_CType;
+                                packed?: boolean;
+                                jstype?: _104.FieldOptions_JSType;
+                                lazy?: boolean;
+                                deprecated?: boolean;
+                                weak?: boolean;
+                                uninterpretedOption?: {
+                                    name?: {
+                                        namePart?: string;
+                                        isExtension?: boolean;
+                                    }[];
+                                    identifierValue?: string;
+                                    positiveIntValue?: any;
+                                    negativeIntValue?: any;
+                                    doubleValue?: number;
+                                    stringValue?: Uint8Array;
+                                    aggregateValue?: string;
+                                }[];
+                            };
+                        }[];
+                        extension?: {
+                            name?: string;
+                            number?: number;
+                            label?: _104.FieldDescriptorProto_Label;
+                            type?: _104.FieldDescriptorProto_Type;
+                            typeName?: string;
+                            extendee?: string;
+                            defaultValue?: string;
+                            oneofIndex?: number;
+                            jsonName?: string;
+                            options?: {
+                                ctype?: _104.FieldOptions_CType;
+                                packed?: boolean;
+                                jstype?: _104.FieldOptions_JSType;
+                                lazy?: boolean;
+                                deprecated?: boolean;
+                                weak?: boolean;
+                                uninterpretedOption?: {
+                                    name?: {
+                                        namePart?: string;
+                                        isExtension?: boolean;
+                                    }[];
+                                    identifierValue?: string;
+                                    positiveIntValue?: any;
+                                    negativeIntValue?: any;
+                                    doubleValue?: number;
+                                    stringValue?: Uint8Array;
+                                    aggregateValue?: string;
+                                }[];
+                            };
+                        }[];
+                        nestedType?: any[];
+                        enumType?: {
+                            name?: string;
+                            value?: {
+                                name?: string;
+                                number?: number;
+                                options?: {
+                                    deprecated?: boolean;
+                                    uninterpretedOption?: {
+                                        name?: {
+                                            namePart?: string;
+                                            isExtension?: boolean;
+                                        }[];
+                                        identifierValue?: string;
+                                        positiveIntValue?: any;
+                                        negativeIntValue?: any;
+                                        doubleValue?: number;
+                                        stringValue?: Uint8Array;
+                                        aggregateValue?: string;
+                                    }[];
+                                };
+                            }[];
+                            options?: {
+                                allowAlias?: boolean;
+                                deprecated?: boolean;
+                                uninterpretedOption?: {
+                                    name?: {
+                                        namePart?: string;
+                                        isExtension?: boolean;
+                                    }[];
+                                    identifierValue?: string;
+                                    positiveIntValue?: any;
+                                    negativeIntValue?: any;
+                                    doubleValue?: number;
+                                    stringValue?: Uint8Array;
+                                    aggregateValue?: string;
+                                }[];
+                            };
+                            reservedRange?: {
+                                start?: number;
+                                end?: number;
+                            }[];
+                            reservedName?: string[];
+                        }[];
+                        extensionRange?: {
+                            start?: number;
+                            end?: number;
+                            options?: {
+                                uninterpretedOption?: {
+                                    name?: {
+                                        namePart?: string;
+                                        isExtension?: boolean;
+                                    }[];
+                                    identifierValue?: string;
+                                    positiveIntValue?: any;
+                                    negativeIntValue?: any;
+                                    doubleValue?: number;
+                                    stringValue?: Uint8Array;
+                                    aggregateValue?: string;
+                                }[];
+                            };
+                        }[];
+                        oneofDecl?: {
+                            name?: string;
+                            options?: {
+                                uninterpretedOption?: {
+                                    name?: {
+                                        namePart?: string;
+                                        isExtension?: boolean;
+                                    }[];
+                                    identifierValue?: string;
+                                    positiveIntValue?: any;
+                                    negativeIntValue?: any;
+                                    doubleValue?: number;
+                                    stringValue?: Uint8Array;
+                                    aggregateValue?: string;
+                                }[];
+                            };
+                        }[];
+                        options?: {
+                            messageSetWireFormat?: boolean;
+                            noStandardDescriptorAccessor?: boolean;
+                            deprecated?: boolean;
+                            mapEntry?: boolean;
+                            uninterpretedOption?: {
+                                name?: {
+                                    namePart?: string;
+                                    isExtension?: boolean;
+                                }[];
+                                identifierValue?: string;
+                                positiveIntValue?: any;
+                                negativeIntValue?: any;
+                                doubleValue?: number;
+                                stringValue?: Uint8Array;
+                                aggregateValue?: string;
+                            }[];
+                        };
+                        reservedRange?: {
+                            start?: number;
+                            end?: number;
+                        }[];
+                        reservedName?: string[];
+                    }[];
+                    enumType?: {
+                        name?: string;
+                        value?: {
+                            name?: string;
+                            number?: number;
+                            options?: {
+                                deprecated?: boolean;
+                                uninterpretedOption?: {
+                                    name?: {
+                                        namePart?: string;
+                                        isExtension?: boolean;
+                                    }[];
+                                    identifierValue?: string;
+                                    positiveIntValue?: any;
+                                    negativeIntValue?: any;
+                                    doubleValue?: number;
+                                    stringValue?: Uint8Array;
+                                    aggregateValue?: string;
+                                }[];
+                            };
+                        }[];
+                        options?: {
+                            allowAlias?: boolean;
+                            deprecated?: boolean;
+                            uninterpretedOption?: {
+                                name?: {
+                                    namePart?: string;
+                                    isExtension?: boolean;
+                                }[];
+                                identifierValue?: string;
+                                positiveIntValue?: any;
+                                negativeIntValue?: any;
+                                doubleValue?: number;
+                                stringValue?: Uint8Array;
+                                aggregateValue?: string;
+                            }[];
+                        };
+                        reservedRange?: {
+                            start?: number;
+                            end?: number;
+                        }[];
+                        reservedName?: string[];
+                    }[];
+                    service?: {
+                        name?: string;
+                        method?: {
+                            name?: string;
+                            inputType?: string;
+                            outputType?: string;
+                            options?: {
+                                deprecated?: boolean;
+                                idempotencyLevel?: _104.MethodOptions_IdempotencyLevel;
+                                uninterpretedOption?: {
+                                    name?: {
+                                        namePart?: string;
+                                        isExtension?: boolean;
+                                    }[];
+                                    identifierValue?: string;
+                                    positiveIntValue?: any;
+                                    negativeIntValue?: any;
+                                    doubleValue?: number;
+                                    stringValue?: Uint8Array;
+                                    aggregateValue?: string;
+                                }[];
+                            };
+                            clientStreaming?: boolean;
+                            serverStreaming?: boolean;
+                        }[];
+                        options?: {
+                            deprecated?: boolean;
+                            uninterpretedOption?: {
+                                name?: {
+                                    namePart?: string;
+                                    isExtension?: boolean;
+                                }[];
+                                identifierValue?: string;
+                                positiveIntValue?: any;
+                                negativeIntValue?: any;
+                                doubleValue?: number;
+                                stringValue?: Uint8Array;
+                                aggregateValue?: string;
+                            }[];
+                        };
+                    }[];
+                    extension?: {
+                        name?: string;
+                        number?: number;
+                        label?: _104.FieldDescriptorProto_Label;
+                        type?: _104.FieldDescriptorProto_Type;
+                        typeName?: string;
+                        extendee?: string;
+                        defaultValue?: string;
+                        oneofIndex?: number;
+                        jsonName?: string;
+                        options?: {
+                            ctype?: _104.FieldOptions_CType;
+                            packed?: boolean;
+                            jstype?: _104.FieldOptions_JSType;
+                            lazy?: boolean;
+                            deprecated?: boolean;
+                            weak?: boolean;
+                            uninterpretedOption?: {
+                                name?: {
+                                    namePart?: string;
+                                    isExtension?: boolean;
+                                }[];
+                                identifierValue?: string;
+                                positiveIntValue?: any;
+                                negativeIntValue?: any;
+                                doubleValue?: number;
+                                stringValue?: Uint8Array;
+                                aggregateValue?: string;
+                            }[];
+                        };
+                    }[];
+                    options?: {
+                        javaPackage?: string;
+                        javaOuterClassname?: string;
+                        javaMultipleFiles?: boolean;
+                        javaGenerateEqualsAndHash?: boolean;
+                        javaStringCheckUtf8?: boolean;
+                        optimizeFor?: _104.FileOptions_OptimizeMode;
+                        goPackage?: string;
+                        ccGenericServices?: boolean;
+                        javaGenericServices?: boolean;
+                        pyGenericServices?: boolean;
+                        phpGenericServices?: boolean;
+                        deprecated?: boolean;
+                        ccEnableArenas?: boolean;
+                        objcClassPrefix?: string;
+                        csharpNamespace?: string;
+                        swiftPrefix?: string;
+                        phpClassPrefix?: string;
+                        phpNamespace?: string;
+                        phpMetadataNamespace?: string;
+                        rubyPackage?: string;
+                        uninterpretedOption?: {
+                            name?: {
+                                namePart?: string;
+                                isExtension?: boolean;
+                            }[];
+                            identifierValue?: string;
+                            positiveIntValue?: any;
+                            negativeIntValue?: any;
+                            doubleValue?: number;
+                            stringValue?: Uint8Array;
+                            aggregateValue?: string;
+                        }[];
+                    };
+                    sourceCodeInfo?: {
+                        location?: {
+                            path?: number[];
+                            span?: number[];
+                            leadingComments?: string;
+                            trailingComments?: string;
+                            leadingDetachedComments?: string[];
+                        }[];
+                    };
+                    syntax?: string;
+                }[];
+            }): _104.FileDescriptorSet;
         };
         FileDescriptorProto: {
             encode(message: _104.FileDescriptorProto, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
             decode(input: Uint8Array | import("protobufjs").Reader, length?: number): _104.FileDescriptorProto;
             fromJSON(object: any): _104.FileDescriptorProto;
             toJSON(message: _104.FileDescriptorProto): unknown;
-            fromPartial(object: _104.FileDescriptorProto): _104.FileDescriptorProto;
+            fromPartial(object: {
+                name?: string;
+                package?: string;
+                dependency?: string[];
+                publicDependency?: number[];
+                weakDependency?: number[];
+                messageType?: {
+                    name?: string;
+                    field?: {
+                        name?: string;
+                        number?: number;
+                        label?: _104.FieldDescriptorProto_Label;
+                        type?: _104.FieldDescriptorProto_Type;
+                        typeName?: string;
+                        extendee?: string;
+                        defaultValue?: string;
+                        oneofIndex?: number;
+                        jsonName?: string;
+                        options?: {
+                            ctype?: _104.FieldOptions_CType;
+                            packed?: boolean;
+                            jstype?: _104.FieldOptions_JSType;
+                            lazy?: boolean;
+                            deprecated?: boolean;
+                            weak?: boolean;
+                            uninterpretedOption?: {
+                                name?: {
+                                    namePart?: string;
+                                    isExtension?: boolean;
+                                }[];
+                                identifierValue?: string;
+                                positiveIntValue?: any;
+                                negativeIntValue?: any;
+                                doubleValue?: number;
+                                stringValue?: Uint8Array;
+                                aggregateValue?: string;
+                            }[];
+                        };
+                    }[];
+                    extension?: {
+                        name?: string;
+                        number?: number;
+                        label?: _104.FieldDescriptorProto_Label;
+                        type?: _104.FieldDescriptorProto_Type;
+                        typeName?: string;
+                        extendee?: string;
+                        defaultValue?: string;
+                        oneofIndex?: number;
+                        jsonName?: string;
+                        options?: {
+                            ctype?: _104.FieldOptions_CType;
+                            packed?: boolean;
+                            jstype?: _104.FieldOptions_JSType;
+                            lazy?: boolean;
+                            deprecated?: boolean;
+                            weak?: boolean;
+                            uninterpretedOption?: {
+                                name?: {
+                                    namePart?: string;
+                                    isExtension?: boolean;
+                                }[];
+                                identifierValue?: string;
+                                positiveIntValue?: any;
+                                negativeIntValue?: any;
+                                doubleValue?: number;
+                                stringValue?: Uint8Array;
+                                aggregateValue?: string;
+                            }[];
+                        };
+                    }[];
+                    nestedType?: any[];
+                    enumType?: {
+                        name?: string;
+                        value?: {
+                            name?: string;
+                            number?: number;
+                            options?: {
+                                deprecated?: boolean;
+                                uninterpretedOption?: {
+                                    name?: {
+                                        namePart?: string;
+                                        isExtension?: boolean;
+                                    }[];
+                                    identifierValue?: string;
+                                    positiveIntValue?: any;
+                                    negativeIntValue?: any;
+                                    doubleValue?: number;
+                                    stringValue?: Uint8Array;
+                                    aggregateValue?: string;
+                                }[];
+                            };
+                        }[];
+                        options?: {
+                            allowAlias?: boolean;
+                            deprecated?: boolean;
+                            uninterpretedOption?: {
+                                name?: {
+                                    namePart?: string;
+                                    isExtension?: boolean;
+                                }[];
+                                identifierValue?: string;
+                                positiveIntValue?: any;
+                                negativeIntValue?: any;
+                                doubleValue?: number;
+                                stringValue?: Uint8Array;
+                                aggregateValue?: string;
+                            }[];
+                        };
+                        reservedRange?: {
+                            start?: number;
+                            end?: number;
+                        }[];
+                        reservedName?: string[];
+                    }[];
+                    extensionRange?: {
+                        start?: number;
+                        end?: number;
+                        options?: {
+                            uninterpretedOption?: {
+                                name?: {
+                                    namePart?: string;
+                                    isExtension?: boolean;
+                                }[];
+                                identifierValue?: string;
+                                positiveIntValue?: any;
+                                negativeIntValue?: any;
+                                doubleValue?: number;
+                                stringValue?: Uint8Array;
+                                aggregateValue?: string;
+                            }[];
+                        };
+                    }[];
+                    oneofDecl?: {
+                        name?: string;
+                        options?: {
+                            uninterpretedOption?: {
+                                name?: {
+                                    namePart?: string;
+                                    isExtension?: boolean;
+                                }[];
+                                identifierValue?: string;
+                                positiveIntValue?: any;
+                                negativeIntValue?: any;
+                                doubleValue?: number;
+                                stringValue?: Uint8Array;
+                                aggregateValue?: string;
+                            }[];
+                        };
+                    }[];
+                    options?: {
+                        messageSetWireFormat?: boolean;
+                        noStandardDescriptorAccessor?: boolean;
+                        deprecated?: boolean;
+                        mapEntry?: boolean;
+                        uninterpretedOption?: {
+                            name?: {
+                                namePart?: string;
+                                isExtension?: boolean;
+                            }[];
+                            identifierValue?: string;
+                            positiveIntValue?: any;
+                            negativeIntValue?: any;
+                            doubleValue?: number;
+                            stringValue?: Uint8Array;
+                            aggregateValue?: string;
+                        }[];
+                    };
+                    reservedRange?: {
+                        start?: number;
+                        end?: number;
+                    }[];
+                    reservedName?: string[];
+                }[];
+                enumType?: {
+                    name?: string;
+                    value?: {
+                        name?: string;
+                        number?: number;
+                        options?: {
+                            deprecated?: boolean;
+                            uninterpretedOption?: {
+                                name?: {
+                                    namePart?: string;
+                                    isExtension?: boolean;
+                                }[];
+                                identifierValue?: string;
+                                positiveIntValue?: any;
+                                negativeIntValue?: any;
+                                doubleValue?: number;
+                                stringValue?: Uint8Array;
+                                aggregateValue?: string;
+                            }[];
+                        };
+                    }[];
+                    options?: {
+                        allowAlias?: boolean;
+                        deprecated?: boolean;
+                        uninterpretedOption?: {
+                            name?: {
+                                namePart?: string;
+                                isExtension?: boolean;
+                            }[];
+                            identifierValue?: string;
+                            positiveIntValue?: any;
+                            negativeIntValue?: any;
+                            doubleValue?: number;
+                            stringValue?: Uint8Array;
+                            aggregateValue?: string;
+                        }[];
+                    };
+                    reservedRange?: {
+                        start?: number;
+                        end?: number;
+                    }[];
+                    reservedName?: string[];
+                }[];
+                service?: {
+                    name?: string;
+                    method?: {
+                        name?: string;
+                        inputType?: string;
+                        outputType?: string;
+                        options?: {
+                            deprecated?: boolean;
+                            idempotencyLevel?: _104.MethodOptions_IdempotencyLevel;
+                            uninterpretedOption?: {
+                                name?: {
+                                    namePart?: string;
+                                    isExtension?: boolean;
+                                }[];
+                                identifierValue?: string;
+                                positiveIntValue?: any;
+                                negativeIntValue?: any;
+                                doubleValue?: number;
+                                stringValue?: Uint8Array;
+                                aggregateValue?: string;
+                            }[];
+                        };
+                        clientStreaming?: boolean;
+                        serverStreaming?: boolean;
+                    }[];
+                    options?: {
+                        deprecated?: boolean;
+                        uninterpretedOption?: {
+                            name?: {
+                                namePart?: string;
+                                isExtension?: boolean;
+                            }[];
+                            identifierValue?: string;
+                            positiveIntValue?: any;
+                            negativeIntValue?: any;
+                            doubleValue?: number;
+                            stringValue?: Uint8Array;
+                            aggregateValue?: string;
+                        }[];
+                    };
+                }[];
+                extension?: {
+                    name?: string;
+                    number?: number;
+                    label?: _104.FieldDescriptorProto_Label;
+                    type?: _104.FieldDescriptorProto_Type;
+                    typeName?: string;
+                    extendee?: string;
+                    defaultValue?: string;
+                    oneofIndex?: number;
+                    jsonName?: string;
+                    options?: {
+                        ctype?: _104.FieldOptions_CType;
+                        packed?: boolean;
+                        jstype?: _104.FieldOptions_JSType;
+                        lazy?: boolean;
+                        deprecated?: boolean;
+                        weak?: boolean;
+                        uninterpretedOption?: {
+                            name?: {
+                                namePart?: string;
+                                isExtension?: boolean;
+                            }[];
+                            identifierValue?: string;
+                            positiveIntValue?: any;
+                            negativeIntValue?: any;
+                            doubleValue?: number;
+                            stringValue?: Uint8Array;
+                            aggregateValue?: string;
+                        }[];
+                    };
+                }[];
+                options?: {
+                    javaPackage?: string;
+                    javaOuterClassname?: string;
+                    javaMultipleFiles?: boolean;
+                    javaGenerateEqualsAndHash?: boolean;
+                    javaStringCheckUtf8?: boolean;
+                    optimizeFor?: _104.FileOptions_OptimizeMode;
+                    goPackage?: string;
+                    ccGenericServices?: boolean;
+                    javaGenericServices?: boolean;
+                    pyGenericServices?: boolean;
+                    phpGenericServices?: boolean;
+                    deprecated?: boolean;
+                    ccEnableArenas?: boolean;
+                    objcClassPrefix?: string;
+                    csharpNamespace?: string;
+                    swiftPrefix?: string;
+                    phpClassPrefix?: string;
+                    phpNamespace?: string;
+                    phpMetadataNamespace?: string;
+                    rubyPackage?: string;
+                    uninterpretedOption?: {
+                        name?: {
+                            namePart?: string;
+                            isExtension?: boolean;
+                        }[];
+                        identifierValue?: string;
+                        positiveIntValue?: any;
+                        negativeIntValue?: any;
+                        doubleValue?: number;
+                        stringValue?: Uint8Array;
+                        aggregateValue?: string;
+                    }[];
+                };
+                sourceCodeInfo?: {
+                    location?: {
+                        path?: number[];
+                        span?: number[];
+                        leadingComments?: string;
+                        trailingComments?: string;
+                        leadingDetachedComments?: string[];
+                    }[];
+                };
+                syntax?: string;
+            }): _104.FileDescriptorProto;
         };
         DescriptorProto: {
             encode(message: _104.DescriptorProto, writer?: import("protobufjs").Writer): import("protobufjs").Writer;

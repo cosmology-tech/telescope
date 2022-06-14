@@ -1,6 +1,6 @@
 import { ProposalExecutorResult } from "./types";
 import * as _m0 from "protobufjs/minimal";
-import { Long } from "@osmonauts/helpers";
+import { Long, DeepPartial } from "@osmonauts/helpers";
 /** EventCreateGroup is an event emitted when a group is created. */
 export interface EventCreateGroup {
     /** group_id is the unique ID of the group. */
@@ -55,101 +55,61 @@ export declare const EventCreateGroup: {
     decode(input: _m0.Reader | Uint8Array, length?: number): EventCreateGroup;
     fromJSON(object: any): EventCreateGroup;
     toJSON(message: EventCreateGroup): unknown;
-    fromPartial<I extends {
-        groupId?: any;
-    } & {
-        groupId?: any;
-    } & Record<Exclude<keyof I, "groupId">, never>>(object: I): EventCreateGroup;
+    fromPartial(object: DeepPartial<EventCreateGroup>): EventCreateGroup;
 };
 export declare const EventUpdateGroup: {
     encode(message: EventUpdateGroup, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): EventUpdateGroup;
     fromJSON(object: any): EventUpdateGroup;
     toJSON(message: EventUpdateGroup): unknown;
-    fromPartial<I extends {
-        groupId?: any;
-    } & {
-        groupId?: any;
-    } & Record<Exclude<keyof I, "groupId">, never>>(object: I): EventUpdateGroup;
+    fromPartial(object: DeepPartial<EventUpdateGroup>): EventUpdateGroup;
 };
 export declare const EventCreateGroupPolicy: {
     encode(message: EventCreateGroupPolicy, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): EventCreateGroupPolicy;
     fromJSON(object: any): EventCreateGroupPolicy;
     toJSON(message: EventCreateGroupPolicy): unknown;
-    fromPartial<I extends {
-        address?: string;
-    } & {
-        address?: string;
-    } & Record<Exclude<keyof I, "address">, never>>(object: I): EventCreateGroupPolicy;
+    fromPartial(object: DeepPartial<EventCreateGroupPolicy>): EventCreateGroupPolicy;
 };
 export declare const EventUpdateGroupPolicy: {
     encode(message: EventUpdateGroupPolicy, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): EventUpdateGroupPolicy;
     fromJSON(object: any): EventUpdateGroupPolicy;
     toJSON(message: EventUpdateGroupPolicy): unknown;
-    fromPartial<I extends {
-        address?: string;
-    } & {
-        address?: string;
-    } & Record<Exclude<keyof I, "address">, never>>(object: I): EventUpdateGroupPolicy;
+    fromPartial(object: DeepPartial<EventUpdateGroupPolicy>): EventUpdateGroupPolicy;
 };
 export declare const EventSubmitProposal: {
     encode(message: EventSubmitProposal, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): EventSubmitProposal;
     fromJSON(object: any): EventSubmitProposal;
     toJSON(message: EventSubmitProposal): unknown;
-    fromPartial<I extends {
-        proposalId?: any;
-    } & {
-        proposalId?: any;
-    } & Record<Exclude<keyof I, "proposalId">, never>>(object: I): EventSubmitProposal;
+    fromPartial(object: DeepPartial<EventSubmitProposal>): EventSubmitProposal;
 };
 export declare const EventWithdrawProposal: {
     encode(message: EventWithdrawProposal, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): EventWithdrawProposal;
     fromJSON(object: any): EventWithdrawProposal;
     toJSON(message: EventWithdrawProposal): unknown;
-    fromPartial<I extends {
-        proposalId?: any;
-    } & {
-        proposalId?: any;
-    } & Record<Exclude<keyof I, "proposalId">, never>>(object: I): EventWithdrawProposal;
+    fromPartial(object: DeepPartial<EventWithdrawProposal>): EventWithdrawProposal;
 };
 export declare const EventVote: {
     encode(message: EventVote, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): EventVote;
     fromJSON(object: any): EventVote;
     toJSON(message: EventVote): unknown;
-    fromPartial<I extends {
-        proposalId?: any;
-    } & {
-        proposalId?: any;
-    } & Record<Exclude<keyof I, "proposalId">, never>>(object: I): EventVote;
+    fromPartial(object: DeepPartial<EventVote>): EventVote;
 };
 export declare const EventExec: {
     encode(message: EventExec, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): EventExec;
     fromJSON(object: any): EventExec;
     toJSON(message: EventExec): unknown;
-    fromPartial<I extends {
-        proposalId?: any;
-        result?: ProposalExecutorResult;
-    } & {
-        proposalId?: any;
-        result?: ProposalExecutorResult;
-    } & Record<Exclude<keyof I, keyof EventExec>, never>>(object: I): EventExec;
+    fromPartial(object: DeepPartial<EventExec>): EventExec;
 };
 export declare const EventLeaveGroup: {
     encode(message: EventLeaveGroup, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): EventLeaveGroup;
     fromJSON(object: any): EventLeaveGroup;
     toJSON(message: EventLeaveGroup): unknown;
-    fromPartial<I extends {
-        groupId?: any;
-        address?: string;
-    } & {
-        groupId?: any;
-        address?: string;
-    } & Record<Exclude<keyof I, keyof EventLeaveGroup>, never>>(object: I): EventLeaveGroup;
+    fromPartial(object: DeepPartial<EventLeaveGroup>): EventLeaveGroup;
 };

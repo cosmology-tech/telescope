@@ -1,5 +1,6 @@
 import { Height } from "../../../core/client/v1/client";
 import * as _m0 from "protobufjs/minimal";
+import { DeepPartial } from "@osmonauts/helpers";
 /**
  * ClientState defines a loopback (localhost) client. It requires (read-only)
  * access to keys outside the client prefix.
@@ -15,20 +16,5 @@ export declare const ClientState: {
     decode(input: _m0.Reader | Uint8Array, length?: number): ClientState;
     fromJSON(object: any): ClientState;
     toJSON(message: ClientState): unknown;
-    fromPartial<I extends {
-        chainId?: string;
-        height?: {
-            revisionNumber?: any;
-            revisionHeight?: any;
-        };
-    } & {
-        chainId?: string;
-        height?: {
-            revisionNumber?: any;
-            revisionHeight?: any;
-        } & {
-            revisionNumber?: any;
-            revisionHeight?: any;
-        } & Record<Exclude<keyof I["height"], keyof Height>, never>;
-    } & Record<Exclude<keyof I, keyof ClientState>, never>>(object: I): ClientState;
+    fromPartial(object: DeepPartial<ClientState>): ClientState;
 };

@@ -1,5 +1,6 @@
 import { ParamChange } from "./params";
 import * as _m0 from "protobufjs/minimal";
+import { DeepPartial } from "@osmonauts/helpers";
 /** QueryParamsRequest is request type for the Query/Params RPC method. */
 export interface QueryParamsRequest {
     /** subspace defines the module to query the parameter for. */
@@ -38,80 +39,33 @@ export declare const QueryParamsRequest: {
     decode(input: _m0.Reader | Uint8Array, length?: number): QueryParamsRequest;
     fromJSON(object: any): QueryParamsRequest;
     toJSON(message: QueryParamsRequest): unknown;
-    fromPartial<I extends {
-        subspace?: string;
-        key?: string;
-    } & {
-        subspace?: string;
-        key?: string;
-    } & Record<Exclude<keyof I, keyof QueryParamsRequest>, never>>(object: I): QueryParamsRequest;
+    fromPartial(object: DeepPartial<QueryParamsRequest>): QueryParamsRequest;
 };
 export declare const QueryParamsResponse: {
     encode(message: QueryParamsResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): QueryParamsResponse;
     fromJSON(object: any): QueryParamsResponse;
     toJSON(message: QueryParamsResponse): unknown;
-    fromPartial<I extends {
-        param?: {
-            subspace?: string;
-            key?: string;
-            value?: string;
-        };
-    } & {
-        param?: {
-            subspace?: string;
-            key?: string;
-            value?: string;
-        } & {
-            subspace?: string;
-            key?: string;
-            value?: string;
-        } & Record<Exclude<keyof I["param"], keyof ParamChange>, never>;
-    } & Record<Exclude<keyof I, "param">, never>>(object: I): QueryParamsResponse;
+    fromPartial(object: DeepPartial<QueryParamsResponse>): QueryParamsResponse;
 };
 export declare const QuerySubspacesRequest: {
     encode(_: QuerySubspacesRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): QuerySubspacesRequest;
     fromJSON(_: any): QuerySubspacesRequest;
     toJSON(_: QuerySubspacesRequest): unknown;
-    fromPartial<I extends {} & {} & Record<Exclude<keyof I, never>, never>>(_: I): QuerySubspacesRequest;
+    fromPartial(_: DeepPartial<QuerySubspacesRequest>): QuerySubspacesRequest;
 };
 export declare const QuerySubspacesResponse: {
     encode(message: QuerySubspacesResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): QuerySubspacesResponse;
     fromJSON(object: any): QuerySubspacesResponse;
     toJSON(message: QuerySubspacesResponse): unknown;
-    fromPartial<I extends {
-        subspaces?: {
-            subspace?: string;
-            keys?: string[];
-        }[];
-    } & {
-        subspaces?: {
-            subspace?: string;
-            keys?: string[];
-        }[] & ({
-            subspace?: string;
-            keys?: string[];
-        } & {
-            subspace?: string;
-            keys?: string[] & string[] & Record<Exclude<keyof I["subspaces"][number]["keys"], keyof string[]>, never>;
-        } & Record<Exclude<keyof I["subspaces"][number], keyof Subspace>, never>)[] & Record<Exclude<keyof I["subspaces"], keyof {
-            subspace?: string;
-            keys?: string[];
-        }[]>, never>;
-    } & Record<Exclude<keyof I, "subspaces">, never>>(object: I): QuerySubspacesResponse;
+    fromPartial(object: DeepPartial<QuerySubspacesResponse>): QuerySubspacesResponse;
 };
 export declare const Subspace: {
     encode(message: Subspace, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): Subspace;
     fromJSON(object: any): Subspace;
     toJSON(message: Subspace): unknown;
-    fromPartial<I extends {
-        subspace?: string;
-        keys?: string[];
-    } & {
-        subspace?: string;
-        keys?: string[] & string[] & Record<Exclude<keyof I["keys"], keyof string[]>, never>;
-    } & Record<Exclude<keyof I, keyof Subspace>, never>>(object: I): Subspace;
+    fromPartial(object: DeepPartial<Subspace>): Subspace;
 };

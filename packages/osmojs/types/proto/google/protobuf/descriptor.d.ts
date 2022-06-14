@@ -805,14 +805,14 @@ export declare const FileDescriptorSet: {
     decode(input: _m0.Reader | Uint8Array, length?: number): FileDescriptorSet;
     fromJSON(object: any): FileDescriptorSet;
     toJSON(message: FileDescriptorSet): unknown;
-    fromPartial(object: FileDescriptorSet): FileDescriptorSet;
+    fromPartial(object: DeepPartial<FileDescriptorSet>): FileDescriptorSet;
 };
 export declare const FileDescriptorProto: {
     encode(message: FileDescriptorProto, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): FileDescriptorProto;
     fromJSON(object: any): FileDescriptorProto;
     toJSON(message: FileDescriptorProto): unknown;
-    fromPartial(object: FileDescriptorProto): FileDescriptorProto;
+    fromPartial(object: DeepPartial<FileDescriptorProto>): FileDescriptorProto;
 };
 export declare const DescriptorProto: {
     encode(message: DescriptorProto, writer?: _m0.Writer): _m0.Writer;

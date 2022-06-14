@@ -1,5 +1,5 @@
 import * as _m0 from "protobufjs/minimal";
-import { Long } from "@osmonauts/helpers";
+import { DeepPartial, Long } from "@osmonauts/helpers";
 /**
  * ConsensusParams contains consensus critical parameters that determine the
  * validity of blocks.
@@ -79,116 +79,40 @@ export declare const ConsensusParams: {
     decode(input: _m0.Reader | Uint8Array, length?: number): ConsensusParams;
     fromJSON(object: any): ConsensusParams;
     toJSON(message: ConsensusParams): unknown;
-    fromPartial<I extends {
-        block?: {
-            maxBytes?: any;
-            maxGas?: any;
-            timeIotaMs?: any;
-        };
-        evidence?: {
-            maxAgeNumBlocks?: any;
-            maxAgeDuration?: string;
-            maxBytes?: any;
-        };
-        validator?: {
-            pubKeyTypes?: string[];
-        };
-        version?: {
-            appVersion?: any;
-        };
-    } & {
-        block?: {
-            maxBytes?: any;
-            maxGas?: any;
-            timeIotaMs?: any;
-        } & {
-            maxBytes?: any;
-            maxGas?: any;
-            timeIotaMs?: any;
-        } & Record<Exclude<keyof I["block"], keyof BlockParams>, never>;
-        evidence?: {
-            maxAgeNumBlocks?: any;
-            maxAgeDuration?: string;
-            maxBytes?: any;
-        } & {
-            maxAgeNumBlocks?: any;
-            maxAgeDuration?: string;
-            maxBytes?: any;
-        } & Record<Exclude<keyof I["evidence"], keyof EvidenceParams>, never>;
-        validator?: {
-            pubKeyTypes?: string[];
-        } & {
-            pubKeyTypes?: string[] & string[] & Record<Exclude<keyof I["validator"]["pubKeyTypes"], keyof string[]>, never>;
-        } & Record<Exclude<keyof I["validator"], "pubKeyTypes">, never>;
-        version?: {
-            appVersion?: any;
-        } & {
-            appVersion?: any;
-        } & Record<Exclude<keyof I["version"], "appVersion">, never>;
-    } & Record<Exclude<keyof I, keyof ConsensusParams>, never>>(object: I): ConsensusParams;
+    fromPartial(object: DeepPartial<ConsensusParams>): ConsensusParams;
 };
 export declare const BlockParams: {
     encode(message: BlockParams, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): BlockParams;
     fromJSON(object: any): BlockParams;
     toJSON(message: BlockParams): unknown;
-    fromPartial<I extends {
-        maxBytes?: any;
-        maxGas?: any;
-        timeIotaMs?: any;
-    } & {
-        maxBytes?: any;
-        maxGas?: any;
-        timeIotaMs?: any;
-    } & Record<Exclude<keyof I, keyof BlockParams>, never>>(object: I): BlockParams;
+    fromPartial(object: DeepPartial<BlockParams>): BlockParams;
 };
 export declare const EvidenceParams: {
     encode(message: EvidenceParams, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): EvidenceParams;
     fromJSON(object: any): EvidenceParams;
     toJSON(message: EvidenceParams): unknown;
-    fromPartial<I extends {
-        maxAgeNumBlocks?: any;
-        maxAgeDuration?: string;
-        maxBytes?: any;
-    } & {
-        maxAgeNumBlocks?: any;
-        maxAgeDuration?: string;
-        maxBytes?: any;
-    } & Record<Exclude<keyof I, keyof EvidenceParams>, never>>(object: I): EvidenceParams;
+    fromPartial(object: DeepPartial<EvidenceParams>): EvidenceParams;
 };
 export declare const ValidatorParams: {
     encode(message: ValidatorParams, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): ValidatorParams;
     fromJSON(object: any): ValidatorParams;
     toJSON(message: ValidatorParams): unknown;
-    fromPartial<I extends {
-        pubKeyTypes?: string[];
-    } & {
-        pubKeyTypes?: string[] & string[] & Record<Exclude<keyof I["pubKeyTypes"], keyof string[]>, never>;
-    } & Record<Exclude<keyof I, "pubKeyTypes">, never>>(object: I): ValidatorParams;
+    fromPartial(object: DeepPartial<ValidatorParams>): ValidatorParams;
 };
 export declare const VersionParams: {
     encode(message: VersionParams, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): VersionParams;
     fromJSON(object: any): VersionParams;
     toJSON(message: VersionParams): unknown;
-    fromPartial<I extends {
-        appVersion?: any;
-    } & {
-        appVersion?: any;
-    } & Record<Exclude<keyof I, "appVersion">, never>>(object: I): VersionParams;
+    fromPartial(object: DeepPartial<VersionParams>): VersionParams;
 };
 export declare const HashedParams: {
     encode(message: HashedParams, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): HashedParams;
     fromJSON(object: any): HashedParams;
     toJSON(message: HashedParams): unknown;
-    fromPartial<I extends {
-        blockMaxBytes?: any;
-        blockMaxGas?: any;
-    } & {
-        blockMaxBytes?: any;
-        blockMaxGas?: any;
-    } & Record<Exclude<keyof I, keyof HashedParams>, never>>(object: I): HashedParams;
+    fromPartial(object: DeepPartial<HashedParams>): HashedParams;
 };

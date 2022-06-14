@@ -1,5 +1,6 @@
 import { Any } from "../../../google/protobuf/any";
 import * as _m0 from "protobufjs/minimal";
+import { DeepPartial } from "@osmonauts/helpers";
 /** Class defines the class of the nft type. */
 export interface Class {
     /** id defines the unique identifier of the NFT classification, similar to the contract address of ERC721 */
@@ -35,58 +36,12 @@ export declare const Class: {
     decode(input: _m0.Reader | Uint8Array, length?: number): Class;
     fromJSON(object: any): Class;
     toJSON(message: Class): unknown;
-    fromPartial<I extends {
-        id?: string;
-        name?: string;
-        symbol?: string;
-        description?: string;
-        uri?: string;
-        uriHash?: string;
-        data?: {
-            typeUrl?: string;
-            value?: Uint8Array;
-        };
-    } & {
-        id?: string;
-        name?: string;
-        symbol?: string;
-        description?: string;
-        uri?: string;
-        uriHash?: string;
-        data?: {
-            typeUrl?: string;
-            value?: Uint8Array;
-        } & {
-            typeUrl?: string;
-            value?: Uint8Array;
-        } & Record<Exclude<keyof I["data"], keyof Any>, never>;
-    } & Record<Exclude<keyof I, keyof Class>, never>>(object: I): Class;
+    fromPartial(object: DeepPartial<Class>): Class;
 };
 export declare const NFT: {
     encode(message: NFT, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): NFT;
     fromJSON(object: any): NFT;
     toJSON(message: NFT): unknown;
-    fromPartial<I extends {
-        classId?: string;
-        id?: string;
-        uri?: string;
-        uriHash?: string;
-        data?: {
-            typeUrl?: string;
-            value?: Uint8Array;
-        };
-    } & {
-        classId?: string;
-        id?: string;
-        uri?: string;
-        uriHash?: string;
-        data?: {
-            typeUrl?: string;
-            value?: Uint8Array;
-        } & {
-            typeUrl?: string;
-            value?: Uint8Array;
-        } & Record<Exclude<keyof I["data"], keyof Any>, never>;
-    } & Record<Exclude<keyof I, keyof NFT>, never>>(object: I): NFT;
+    fromPartial(object: DeepPartial<NFT>): NFT;
 };

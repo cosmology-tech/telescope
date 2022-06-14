@@ -1,5 +1,5 @@
 import * as _m0 from "protobufjs/minimal";
-import { Long } from "@osmonauts/helpers";
+import { Long, DeepPartial } from "@osmonauts/helpers";
 /** Snapshot contains Tendermint state sync snapshot info. */
 export interface Snapshot {
     height: Long;
@@ -58,182 +58,61 @@ export declare const Snapshot: {
     decode(input: _m0.Reader | Uint8Array, length?: number): Snapshot;
     fromJSON(object: any): Snapshot;
     toJSON(message: Snapshot): unknown;
-    fromPartial<I extends {
-        height?: any;
-        format?: number;
-        chunks?: number;
-        hash?: Uint8Array;
-        metadata?: {
-            chunkHashes?: Uint8Array[];
-        };
-    } & {
-        height?: any;
-        format?: number;
-        chunks?: number;
-        hash?: Uint8Array;
-        metadata?: {
-            chunkHashes?: Uint8Array[];
-        } & {
-            chunkHashes?: Uint8Array[] & Uint8Array[] & Record<Exclude<keyof I["metadata"]["chunkHashes"], keyof Uint8Array[]>, never>;
-        } & Record<Exclude<keyof I["metadata"], "chunkHashes">, never>;
-    } & Record<Exclude<keyof I, keyof Snapshot>, never>>(object: I): Snapshot;
+    fromPartial(object: DeepPartial<Snapshot>): Snapshot;
 };
 export declare const Metadata: {
     encode(message: Metadata, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): Metadata;
     fromJSON(object: any): Metadata;
     toJSON(message: Metadata): unknown;
-    fromPartial<I extends {
-        chunkHashes?: Uint8Array[];
-    } & {
-        chunkHashes?: Uint8Array[] & Uint8Array[] & Record<Exclude<keyof I["chunkHashes"], keyof Uint8Array[]>, never>;
-    } & Record<Exclude<keyof I, "chunkHashes">, never>>(object: I): Metadata;
+    fromPartial(object: DeepPartial<Metadata>): Metadata;
 };
 export declare const SnapshotItem: {
     encode(message: SnapshotItem, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): SnapshotItem;
     fromJSON(object: any): SnapshotItem;
     toJSON(message: SnapshotItem): unknown;
-    fromPartial<I extends {
-        store?: {
-            name?: string;
-        };
-        iavl?: {
-            key?: Uint8Array;
-            value?: Uint8Array;
-            version?: any;
-            height?: number;
-        };
-        extension?: {
-            name?: string;
-            format?: number;
-        };
-        extensionPayload?: {
-            payload?: Uint8Array;
-        };
-        kv?: {
-            key?: Uint8Array;
-            value?: Uint8Array;
-        };
-        schema?: {
-            keys?: Uint8Array[];
-        };
-    } & {
-        store?: {
-            name?: string;
-        } & {
-            name?: string;
-        } & Record<Exclude<keyof I["store"], "name">, never>;
-        iavl?: {
-            key?: Uint8Array;
-            value?: Uint8Array;
-            version?: any;
-            height?: number;
-        } & {
-            key?: Uint8Array;
-            value?: Uint8Array;
-            version?: any;
-            height?: number;
-        } & Record<Exclude<keyof I["iavl"], keyof SnapshotIAVLItem>, never>;
-        extension?: {
-            name?: string;
-            format?: number;
-        } & {
-            name?: string;
-            format?: number;
-        } & Record<Exclude<keyof I["extension"], keyof SnapshotExtensionMeta>, never>;
-        extensionPayload?: {
-            payload?: Uint8Array;
-        } & {
-            payload?: Uint8Array;
-        } & Record<Exclude<keyof I["extensionPayload"], "payload">, never>;
-        kv?: {
-            key?: Uint8Array;
-            value?: Uint8Array;
-        } & {
-            key?: Uint8Array;
-            value?: Uint8Array;
-        } & Record<Exclude<keyof I["kv"], keyof SnapshotKVItem>, never>;
-        schema?: {
-            keys?: Uint8Array[];
-        } & {
-            keys?: Uint8Array[] & Uint8Array[] & Record<Exclude<keyof I["schema"]["keys"], keyof Uint8Array[]>, never>;
-        } & Record<Exclude<keyof I["schema"], "keys">, never>;
-    } & Record<Exclude<keyof I, keyof SnapshotItem>, never>>(object: I): SnapshotItem;
+    fromPartial(object: DeepPartial<SnapshotItem>): SnapshotItem;
 };
 export declare const SnapshotStoreItem: {
     encode(message: SnapshotStoreItem, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): SnapshotStoreItem;
     fromJSON(object: any): SnapshotStoreItem;
     toJSON(message: SnapshotStoreItem): unknown;
-    fromPartial<I extends {
-        name?: string;
-    } & {
-        name?: string;
-    } & Record<Exclude<keyof I, "name">, never>>(object: I): SnapshotStoreItem;
+    fromPartial(object: DeepPartial<SnapshotStoreItem>): SnapshotStoreItem;
 };
 export declare const SnapshotIAVLItem: {
     encode(message: SnapshotIAVLItem, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): SnapshotIAVLItem;
     fromJSON(object: any): SnapshotIAVLItem;
     toJSON(message: SnapshotIAVLItem): unknown;
-    fromPartial<I extends {
-        key?: Uint8Array;
-        value?: Uint8Array;
-        version?: any;
-        height?: number;
-    } & {
-        key?: Uint8Array;
-        value?: Uint8Array;
-        version?: any;
-        height?: number;
-    } & Record<Exclude<keyof I, keyof SnapshotIAVLItem>, never>>(object: I): SnapshotIAVLItem;
+    fromPartial(object: DeepPartial<SnapshotIAVLItem>): SnapshotIAVLItem;
 };
 export declare const SnapshotExtensionMeta: {
     encode(message: SnapshotExtensionMeta, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): SnapshotExtensionMeta;
     fromJSON(object: any): SnapshotExtensionMeta;
     toJSON(message: SnapshotExtensionMeta): unknown;
-    fromPartial<I extends {
-        name?: string;
-        format?: number;
-    } & {
-        name?: string;
-        format?: number;
-    } & Record<Exclude<keyof I, keyof SnapshotExtensionMeta>, never>>(object: I): SnapshotExtensionMeta;
+    fromPartial(object: DeepPartial<SnapshotExtensionMeta>): SnapshotExtensionMeta;
 };
 export declare const SnapshotExtensionPayload: {
     encode(message: SnapshotExtensionPayload, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): SnapshotExtensionPayload;
     fromJSON(object: any): SnapshotExtensionPayload;
     toJSON(message: SnapshotExtensionPayload): unknown;
-    fromPartial<I extends {
-        payload?: Uint8Array;
-    } & {
-        payload?: Uint8Array;
-    } & Record<Exclude<keyof I, "payload">, never>>(object: I): SnapshotExtensionPayload;
+    fromPartial(object: DeepPartial<SnapshotExtensionPayload>): SnapshotExtensionPayload;
 };
 export declare const SnapshotKVItem: {
     encode(message: SnapshotKVItem, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): SnapshotKVItem;
     fromJSON(object: any): SnapshotKVItem;
     toJSON(message: SnapshotKVItem): unknown;
-    fromPartial<I extends {
-        key?: Uint8Array;
-        value?: Uint8Array;
-    } & {
-        key?: Uint8Array;
-        value?: Uint8Array;
-    } & Record<Exclude<keyof I, keyof SnapshotKVItem>, never>>(object: I): SnapshotKVItem;
+    fromPartial(object: DeepPartial<SnapshotKVItem>): SnapshotKVItem;
 };
 export declare const SnapshotSchema: {
     encode(message: SnapshotSchema, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): SnapshotSchema;
     fromJSON(object: any): SnapshotSchema;
     toJSON(message: SnapshotSchema): unknown;
-    fromPartial<I extends {
-        keys?: Uint8Array[];
-    } & {
-        keys?: Uint8Array[] & Uint8Array[] & Record<Exclude<keyof I["keys"], keyof Uint8Array[]>, never>;
-    } & Record<Exclude<keyof I, "keys">, never>>(object: I): SnapshotSchema;
+    fromPartial(object: DeepPartial<SnapshotSchema>): SnapshotSchema;
 };

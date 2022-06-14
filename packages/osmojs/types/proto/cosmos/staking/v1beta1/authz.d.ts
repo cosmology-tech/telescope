@@ -1,5 +1,6 @@
 import { Coin } from "../../base/v1beta1/coin";
 import * as _m0 from "protobufjs/minimal";
+import { DeepPartial } from "@osmonauts/helpers";
 /**
  * AuthorizationType defines the type of staking module authorization type
  *
@@ -48,47 +49,12 @@ export declare const StakeAuthorization: {
     decode(input: _m0.Reader | Uint8Array, length?: number): StakeAuthorization;
     fromJSON(object: any): StakeAuthorization;
     toJSON(message: StakeAuthorization): unknown;
-    fromPartial<I extends {
-        maxTokens?: {
-            denom?: string;
-            amount?: string;
-        };
-        allowList?: {
-            address?: string[];
-        };
-        denyList?: {
-            address?: string[];
-        };
-        authorizationType?: AuthorizationType;
-    } & {
-        maxTokens?: {
-            denom?: string;
-            amount?: string;
-        } & {
-            denom?: string;
-            amount?: string;
-        } & Record<Exclude<keyof I["maxTokens"], keyof Coin>, never>;
-        allowList?: {
-            address?: string[];
-        } & {
-            address?: string[] & string[] & Record<Exclude<keyof I["allowList"]["address"], keyof string[]>, never>;
-        } & Record<Exclude<keyof I["allowList"], "address">, never>;
-        denyList?: {
-            address?: string[];
-        } & {
-            address?: string[] & string[] & Record<Exclude<keyof I["denyList"]["address"], keyof string[]>, never>;
-        } & Record<Exclude<keyof I["denyList"], "address">, never>;
-        authorizationType?: AuthorizationType;
-    } & Record<Exclude<keyof I, keyof StakeAuthorization>, never>>(object: I): StakeAuthorization;
+    fromPartial(object: DeepPartial<StakeAuthorization>): StakeAuthorization;
 };
 export declare const StakeAuthorization_Validators: {
     encode(message: StakeAuthorization_Validators, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): StakeAuthorization_Validators;
     fromJSON(object: any): StakeAuthorization_Validators;
     toJSON(message: StakeAuthorization_Validators): unknown;
-    fromPartial<I extends {
-        address?: string[];
-    } & {
-        address?: string[] & string[] & Record<Exclude<keyof I["address"], keyof string[]>, never>;
-    } & Record<Exclude<keyof I, "address">, never>>(object: I): StakeAuthorization_Validators;
+    fromPartial(object: DeepPartial<StakeAuthorization_Validators>): StakeAuthorization_Validators;
 };

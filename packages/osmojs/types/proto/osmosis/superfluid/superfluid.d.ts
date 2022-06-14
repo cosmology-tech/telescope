@@ -1,6 +1,6 @@
 import { Coin } from "../../cosmos/base/v1beta1/coin";
 import * as _m0 from "protobufjs/minimal";
-import { Long } from "@osmonauts/helpers";
+import { DeepPartial, Long } from "@osmonauts/helpers";
 export declare enum SuperfluidAssetType {
     SuperfluidAssetTypeNative = 0,
     SuperfluidAssetTypeLPShare = 1,
@@ -56,78 +56,33 @@ export declare const SuperfluidAsset: {
     decode(input: _m0.Reader | Uint8Array, length?: number): SuperfluidAsset;
     fromJSON(object: any): SuperfluidAsset;
     toJSON(message: SuperfluidAsset): unknown;
-    fromPartial<I extends {
-        denom?: string;
-        assetType?: SuperfluidAssetType;
-    } & {
-        denom?: string;
-        assetType?: SuperfluidAssetType;
-    } & Record<Exclude<keyof I, keyof SuperfluidAsset>, never>>(object: I): SuperfluidAsset;
+    fromPartial(object: DeepPartial<SuperfluidAsset>): SuperfluidAsset;
 };
 export declare const SuperfluidIntermediaryAccount: {
     encode(message: SuperfluidIntermediaryAccount, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): SuperfluidIntermediaryAccount;
     fromJSON(object: any): SuperfluidIntermediaryAccount;
     toJSON(message: SuperfluidIntermediaryAccount): unknown;
-    fromPartial<I extends {
-        denom?: string;
-        valAddr?: string;
-        gaugeId?: any;
-    } & {
-        denom?: string;
-        valAddr?: string;
-        gaugeId?: any;
-    } & Record<Exclude<keyof I, keyof SuperfluidIntermediaryAccount>, never>>(object: I): SuperfluidIntermediaryAccount;
+    fromPartial(object: DeepPartial<SuperfluidIntermediaryAccount>): SuperfluidIntermediaryAccount;
 };
 export declare const OsmoEquivalentMultiplierRecord: {
     encode(message: OsmoEquivalentMultiplierRecord, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): OsmoEquivalentMultiplierRecord;
     fromJSON(object: any): OsmoEquivalentMultiplierRecord;
     toJSON(message: OsmoEquivalentMultiplierRecord): unknown;
-    fromPartial<I extends {
-        epochNumber?: any;
-        denom?: string;
-        multiplier?: string;
-    } & {
-        epochNumber?: any;
-        denom?: string;
-        multiplier?: string;
-    } & Record<Exclude<keyof I, keyof OsmoEquivalentMultiplierRecord>, never>>(object: I): OsmoEquivalentMultiplierRecord;
+    fromPartial(object: DeepPartial<OsmoEquivalentMultiplierRecord>): OsmoEquivalentMultiplierRecord;
 };
 export declare const SuperfluidDelegationRecord: {
     encode(message: SuperfluidDelegationRecord, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): SuperfluidDelegationRecord;
     fromJSON(object: any): SuperfluidDelegationRecord;
     toJSON(message: SuperfluidDelegationRecord): unknown;
-    fromPartial<I extends {
-        delegatorAddress?: string;
-        validatorAddress?: string;
-        delegationAmount?: {
-            denom?: string;
-            amount?: string;
-        };
-    } & {
-        delegatorAddress?: string;
-        validatorAddress?: string;
-        delegationAmount?: {
-            denom?: string;
-            amount?: string;
-        } & {
-            denom?: string;
-            amount?: string;
-        } & Record<Exclude<keyof I["delegationAmount"], keyof Coin>, never>;
-    } & Record<Exclude<keyof I, keyof SuperfluidDelegationRecord>, never>>(object: I): SuperfluidDelegationRecord;
+    fromPartial(object: DeepPartial<SuperfluidDelegationRecord>): SuperfluidDelegationRecord;
 };
 export declare const LockIdIntermediaryAccountConnection: {
     encode(message: LockIdIntermediaryAccountConnection, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): LockIdIntermediaryAccountConnection;
     fromJSON(object: any): LockIdIntermediaryAccountConnection;
     toJSON(message: LockIdIntermediaryAccountConnection): unknown;
-    fromPartial<I extends {
-        lockId?: any;
-        intermediaryAccount?: string;
-    } & {
-        lockId?: any;
-        intermediaryAccount?: string;
-    } & Record<Exclude<keyof I, keyof LockIdIntermediaryAccountConnection>, never>>(object: I): LockIdIntermediaryAccountConnection;
+    fromPartial(object: DeepPartial<LockIdIntermediaryAccountConnection>): LockIdIntermediaryAccountConnection;
 };

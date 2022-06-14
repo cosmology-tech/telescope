@@ -1,7 +1,7 @@
 import { PageRequest, PageResponse } from "../../base/query/v1beta1/pagination";
 import { NFT, Class } from "./nft";
 import * as _m0 from "protobufjs/minimal";
-import { Long } from "@osmonauts/helpers";
+import { DeepPartial, Long } from "@osmonauts/helpers";
 /** QueryBalanceRequest is the request type for the Query/Balance RPC method */
 export interface QueryBalanceRequest {
     classId: string;
@@ -71,392 +71,96 @@ export declare const QueryBalanceRequest: {
     decode(input: _m0.Reader | Uint8Array, length?: number): QueryBalanceRequest;
     fromJSON(object: any): QueryBalanceRequest;
     toJSON(message: QueryBalanceRequest): unknown;
-    fromPartial<I extends {
-        classId?: string;
-        owner?: string;
-    } & {
-        classId?: string;
-        owner?: string;
-    } & Record<Exclude<keyof I, keyof QueryBalanceRequest>, never>>(object: I): QueryBalanceRequest;
+    fromPartial(object: DeepPartial<QueryBalanceRequest>): QueryBalanceRequest;
 };
 export declare const QueryBalanceResponse: {
     encode(message: QueryBalanceResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): QueryBalanceResponse;
     fromJSON(object: any): QueryBalanceResponse;
     toJSON(message: QueryBalanceResponse): unknown;
-    fromPartial<I extends {
-        amount?: any;
-    } & {
-        amount?: any;
-    } & Record<Exclude<keyof I, "amount">, never>>(object: I): QueryBalanceResponse;
+    fromPartial(object: DeepPartial<QueryBalanceResponse>): QueryBalanceResponse;
 };
 export declare const QueryOwnerRequest: {
     encode(message: QueryOwnerRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): QueryOwnerRequest;
     fromJSON(object: any): QueryOwnerRequest;
     toJSON(message: QueryOwnerRequest): unknown;
-    fromPartial<I extends {
-        classId?: string;
-        id?: string;
-    } & {
-        classId?: string;
-        id?: string;
-    } & Record<Exclude<keyof I, keyof QueryOwnerRequest>, never>>(object: I): QueryOwnerRequest;
+    fromPartial(object: DeepPartial<QueryOwnerRequest>): QueryOwnerRequest;
 };
 export declare const QueryOwnerResponse: {
     encode(message: QueryOwnerResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): QueryOwnerResponse;
     fromJSON(object: any): QueryOwnerResponse;
     toJSON(message: QueryOwnerResponse): unknown;
-    fromPartial<I extends {
-        owner?: string;
-    } & {
-        owner?: string;
-    } & Record<Exclude<keyof I, "owner">, never>>(object: I): QueryOwnerResponse;
+    fromPartial(object: DeepPartial<QueryOwnerResponse>): QueryOwnerResponse;
 };
 export declare const QuerySupplyRequest: {
     encode(message: QuerySupplyRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): QuerySupplyRequest;
     fromJSON(object: any): QuerySupplyRequest;
     toJSON(message: QuerySupplyRequest): unknown;
-    fromPartial<I extends {
-        classId?: string;
-    } & {
-        classId?: string;
-    } & Record<Exclude<keyof I, "classId">, never>>(object: I): QuerySupplyRequest;
+    fromPartial(object: DeepPartial<QuerySupplyRequest>): QuerySupplyRequest;
 };
 export declare const QuerySupplyResponse: {
     encode(message: QuerySupplyResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): QuerySupplyResponse;
     fromJSON(object: any): QuerySupplyResponse;
     toJSON(message: QuerySupplyResponse): unknown;
-    fromPartial<I extends {
-        amount?: any;
-    } & {
-        amount?: any;
-    } & Record<Exclude<keyof I, "amount">, never>>(object: I): QuerySupplyResponse;
+    fromPartial(object: DeepPartial<QuerySupplyResponse>): QuerySupplyResponse;
 };
 export declare const QueryNFTsRequest: {
     encode(message: QueryNFTsRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): QueryNFTsRequest;
     fromJSON(object: any): QueryNFTsRequest;
     toJSON(message: QueryNFTsRequest): unknown;
-    fromPartial<I extends {
-        classId?: string;
-        owner?: string;
-        pagination?: {
-            key?: Uint8Array;
-            offset?: any;
-            limit?: any;
-            countTotal?: boolean;
-            reverse?: boolean;
-        };
-    } & {
-        classId?: string;
-        owner?: string;
-        pagination?: {
-            key?: Uint8Array;
-            offset?: any;
-            limit?: any;
-            countTotal?: boolean;
-            reverse?: boolean;
-        } & {
-            key?: Uint8Array;
-            offset?: any;
-            limit?: any;
-            countTotal?: boolean;
-            reverse?: boolean;
-        } & Record<Exclude<keyof I["pagination"], keyof PageRequest>, never>;
-    } & Record<Exclude<keyof I, keyof QueryNFTsRequest>, never>>(object: I): QueryNFTsRequest;
+    fromPartial(object: DeepPartial<QueryNFTsRequest>): QueryNFTsRequest;
 };
 export declare const QueryNFTsResponse: {
     encode(message: QueryNFTsResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): QueryNFTsResponse;
     fromJSON(object: any): QueryNFTsResponse;
     toJSON(message: QueryNFTsResponse): unknown;
-    fromPartial<I extends {
-        nfts?: {
-            classId?: string;
-            id?: string;
-            uri?: string;
-            uriHash?: string;
-            data?: {
-                typeUrl?: string;
-                value?: Uint8Array;
-            };
-        }[];
-        pagination?: {
-            nextKey?: Uint8Array;
-            total?: any;
-        };
-    } & {
-        nfts?: {
-            classId?: string;
-            id?: string;
-            uri?: string;
-            uriHash?: string;
-            data?: {
-                typeUrl?: string;
-                value?: Uint8Array;
-            };
-        }[] & ({
-            classId?: string;
-            id?: string;
-            uri?: string;
-            uriHash?: string;
-            data?: {
-                typeUrl?: string;
-                value?: Uint8Array;
-            };
-        } & {
-            classId?: string;
-            id?: string;
-            uri?: string;
-            uriHash?: string;
-            data?: {
-                typeUrl?: string;
-                value?: Uint8Array;
-            } & {
-                typeUrl?: string;
-                value?: Uint8Array;
-            } & Record<Exclude<keyof I["nfts"][number]["data"], keyof import("../../../google/protobuf/any").Any>, never>;
-        } & Record<Exclude<keyof I["nfts"][number], keyof NFT>, never>)[] & Record<Exclude<keyof I["nfts"], keyof {
-            classId?: string;
-            id?: string;
-            uri?: string;
-            uriHash?: string;
-            data?: {
-                typeUrl?: string;
-                value?: Uint8Array;
-            };
-        }[]>, never>;
-        pagination?: {
-            nextKey?: Uint8Array;
-            total?: any;
-        } & {
-            nextKey?: Uint8Array;
-            total?: any;
-        } & Record<Exclude<keyof I["pagination"], keyof PageResponse>, never>;
-    } & Record<Exclude<keyof I, keyof QueryNFTsResponse>, never>>(object: I): QueryNFTsResponse;
+    fromPartial(object: DeepPartial<QueryNFTsResponse>): QueryNFTsResponse;
 };
 export declare const QueryNFTRequest: {
     encode(message: QueryNFTRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): QueryNFTRequest;
     fromJSON(object: any): QueryNFTRequest;
     toJSON(message: QueryNFTRequest): unknown;
-    fromPartial<I extends {
-        classId?: string;
-        id?: string;
-    } & {
-        classId?: string;
-        id?: string;
-    } & Record<Exclude<keyof I, keyof QueryNFTRequest>, never>>(object: I): QueryNFTRequest;
+    fromPartial(object: DeepPartial<QueryNFTRequest>): QueryNFTRequest;
 };
 export declare const QueryNFTResponse: {
     encode(message: QueryNFTResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): QueryNFTResponse;
     fromJSON(object: any): QueryNFTResponse;
     toJSON(message: QueryNFTResponse): unknown;
-    fromPartial<I extends {
-        nft?: {
-            classId?: string;
-            id?: string;
-            uri?: string;
-            uriHash?: string;
-            data?: {
-                typeUrl?: string;
-                value?: Uint8Array;
-            };
-        };
-    } & {
-        nft?: {
-            classId?: string;
-            id?: string;
-            uri?: string;
-            uriHash?: string;
-            data?: {
-                typeUrl?: string;
-                value?: Uint8Array;
-            };
-        } & {
-            classId?: string;
-            id?: string;
-            uri?: string;
-            uriHash?: string;
-            data?: {
-                typeUrl?: string;
-                value?: Uint8Array;
-            } & {
-                typeUrl?: string;
-                value?: Uint8Array;
-            } & Record<Exclude<keyof I["nft"]["data"], keyof import("../../../google/protobuf/any").Any>, never>;
-        } & Record<Exclude<keyof I["nft"], keyof NFT>, never>;
-    } & Record<Exclude<keyof I, "nft">, never>>(object: I): QueryNFTResponse;
+    fromPartial(object: DeepPartial<QueryNFTResponse>): QueryNFTResponse;
 };
 export declare const QueryClassRequest: {
     encode(message: QueryClassRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): QueryClassRequest;
     fromJSON(object: any): QueryClassRequest;
     toJSON(message: QueryClassRequest): unknown;
-    fromPartial<I extends {
-        classId?: string;
-    } & {
-        classId?: string;
-    } & Record<Exclude<keyof I, "classId">, never>>(object: I): QueryClassRequest;
+    fromPartial(object: DeepPartial<QueryClassRequest>): QueryClassRequest;
 };
 export declare const QueryClassResponse: {
     encode(message: QueryClassResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): QueryClassResponse;
     fromJSON(object: any): QueryClassResponse;
     toJSON(message: QueryClassResponse): unknown;
-    fromPartial<I extends {
-        class?: {
-            id?: string;
-            name?: string;
-            symbol?: string;
-            description?: string;
-            uri?: string;
-            uriHash?: string;
-            data?: {
-                typeUrl?: string;
-                value?: Uint8Array;
-            };
-        };
-    } & {
-        class?: {
-            id?: string;
-            name?: string;
-            symbol?: string;
-            description?: string;
-            uri?: string;
-            uriHash?: string;
-            data?: {
-                typeUrl?: string;
-                value?: Uint8Array;
-            };
-        } & {
-            id?: string;
-            name?: string;
-            symbol?: string;
-            description?: string;
-            uri?: string;
-            uriHash?: string;
-            data?: {
-                typeUrl?: string;
-                value?: Uint8Array;
-            } & {
-                typeUrl?: string;
-                value?: Uint8Array;
-            } & Record<Exclude<keyof I["class"]["data"], keyof import("../../../google/protobuf/any").Any>, never>;
-        } & Record<Exclude<keyof I["class"], keyof Class>, never>;
-    } & Record<Exclude<keyof I, "class">, never>>(object: I): QueryClassResponse;
+    fromPartial(object: DeepPartial<QueryClassResponse>): QueryClassResponse;
 };
 export declare const QueryClassesRequest: {
     encode(message: QueryClassesRequest, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): QueryClassesRequest;
     fromJSON(object: any): QueryClassesRequest;
     toJSON(message: QueryClassesRequest): unknown;
-    fromPartial<I extends {
-        pagination?: {
-            key?: Uint8Array;
-            offset?: any;
-            limit?: any;
-            countTotal?: boolean;
-            reverse?: boolean;
-        };
-    } & {
-        pagination?: {
-            key?: Uint8Array;
-            offset?: any;
-            limit?: any;
-            countTotal?: boolean;
-            reverse?: boolean;
-        } & {
-            key?: Uint8Array;
-            offset?: any;
-            limit?: any;
-            countTotal?: boolean;
-            reverse?: boolean;
-        } & Record<Exclude<keyof I["pagination"], keyof PageRequest>, never>;
-    } & Record<Exclude<keyof I, "pagination">, never>>(object: I): QueryClassesRequest;
+    fromPartial(object: DeepPartial<QueryClassesRequest>): QueryClassesRequest;
 };
 export declare const QueryClassesResponse: {
     encode(message: QueryClassesResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): QueryClassesResponse;
     fromJSON(object: any): QueryClassesResponse;
     toJSON(message: QueryClassesResponse): unknown;
-    fromPartial<I extends {
-        classes?: {
-            id?: string;
-            name?: string;
-            symbol?: string;
-            description?: string;
-            uri?: string;
-            uriHash?: string;
-            data?: {
-                typeUrl?: string;
-                value?: Uint8Array;
-            };
-        }[];
-        pagination?: {
-            nextKey?: Uint8Array;
-            total?: any;
-        };
-    } & {
-        classes?: {
-            id?: string;
-            name?: string;
-            symbol?: string;
-            description?: string;
-            uri?: string;
-            uriHash?: string;
-            data?: {
-                typeUrl?: string;
-                value?: Uint8Array;
-            };
-        }[] & ({
-            id?: string;
-            name?: string;
-            symbol?: string;
-            description?: string;
-            uri?: string;
-            uriHash?: string;
-            data?: {
-                typeUrl?: string;
-                value?: Uint8Array;
-            };
-        } & {
-            id?: string;
-            name?: string;
-            symbol?: string;
-            description?: string;
-            uri?: string;
-            uriHash?: string;
-            data?: {
-                typeUrl?: string;
-                value?: Uint8Array;
-            } & {
-                typeUrl?: string;
-                value?: Uint8Array;
-            } & Record<Exclude<keyof I["classes"][number]["data"], keyof import("../../../google/protobuf/any").Any>, never>;
-        } & Record<Exclude<keyof I["classes"][number], keyof Class>, never>)[] & Record<Exclude<keyof I["classes"], keyof {
-            id?: string;
-            name?: string;
-            symbol?: string;
-            description?: string;
-            uri?: string;
-            uriHash?: string;
-            data?: {
-                typeUrl?: string;
-                value?: Uint8Array;
-            };
-        }[]>, never>;
-        pagination?: {
-            nextKey?: Uint8Array;
-            total?: any;
-        } & {
-            nextKey?: Uint8Array;
-            total?: any;
-        } & Record<Exclude<keyof I["pagination"], keyof PageResponse>, never>;
-    } & Record<Exclude<keyof I, keyof QueryClassesResponse>, never>>(object: I): QueryClassesResponse;
+    fromPartial(object: DeepPartial<QueryClassesResponse>): QueryClassesResponse;
 };

@@ -1,5 +1,6 @@
 import { Coin } from "../../base/v1beta1/coin";
 import * as _m0 from "protobufjs/minimal";
+import { DeepPartial } from "@osmonauts/helpers";
 /** GenesisState defines the crisis module's genesis state. */
 export interface GenesisState {
     /**
@@ -13,18 +14,5 @@ export declare const GenesisState: {
     decode(input: _m0.Reader | Uint8Array, length?: number): GenesisState;
     fromJSON(object: any): GenesisState;
     toJSON(message: GenesisState): unknown;
-    fromPartial<I extends {
-        constantFee?: {
-            denom?: string;
-            amount?: string;
-        };
-    } & {
-        constantFee?: {
-            denom?: string;
-            amount?: string;
-        } & {
-            denom?: string;
-            amount?: string;
-        } & Record<Exclude<keyof I["constantFee"], keyof Coin>, never>;
-    } & Record<Exclude<keyof I, "constantFee">, never>>(object: I): GenesisState;
+    fromPartial(object: DeepPartial<GenesisState>): GenesisState;
 };

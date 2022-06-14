@@ -1,5 +1,6 @@
 import { Coin } from "../../../cosmos/base/v1beta1/coin";
 import * as _m0 from "protobufjs/minimal";
+import { DeepPartial } from "@osmonauts/helpers";
 export declare enum Action {
     ActionAddLiquidity = 0,
     ActionSwap = 1,
@@ -26,28 +27,5 @@ export declare const ClaimRecord: {
     decode(input: _m0.Reader | Uint8Array, length?: number): ClaimRecord;
     fromJSON(object: any): ClaimRecord;
     toJSON(message: ClaimRecord): unknown;
-    fromPartial<I extends {
-        address?: string;
-        initialClaimableAmount?: {
-            denom?: string;
-            amount?: string;
-        }[];
-        actionCompleted?: boolean[];
-    } & {
-        address?: string;
-        initialClaimableAmount?: {
-            denom?: string;
-            amount?: string;
-        }[] & ({
-            denom?: string;
-            amount?: string;
-        } & {
-            denom?: string;
-            amount?: string;
-        } & Record<Exclude<keyof I["initialClaimableAmount"][number], keyof Coin>, never>)[] & Record<Exclude<keyof I["initialClaimableAmount"], keyof {
-            denom?: string;
-            amount?: string;
-        }[]>, never>;
-        actionCompleted?: boolean[] & boolean[] & Record<Exclude<keyof I["actionCompleted"], keyof boolean[]>, never>;
-    } & Record<Exclude<keyof I, keyof ClaimRecord>, never>>(object: I): ClaimRecord;
+    fromPartial(object: DeepPartial<ClaimRecord>): ClaimRecord;
 };

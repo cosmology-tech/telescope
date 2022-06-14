@@ -1,4 +1,5 @@
 import * as _m0 from "protobufjs/minimal";
+import { DeepPartial } from "@osmonauts/helpers";
 /**
  * DenomTrace contains the base denomination for ICS20 fungible tokens and the
  * source tracing information path.
@@ -35,24 +36,12 @@ export declare const DenomTrace: {
     decode(input: _m0.Reader | Uint8Array, length?: number): DenomTrace;
     fromJSON(object: any): DenomTrace;
     toJSON(message: DenomTrace): unknown;
-    fromPartial<I extends {
-        path?: string;
-        baseDenom?: string;
-    } & {
-        path?: string;
-        baseDenom?: string;
-    } & Record<Exclude<keyof I, keyof DenomTrace>, never>>(object: I): DenomTrace;
+    fromPartial(object: DeepPartial<DenomTrace>): DenomTrace;
 };
 export declare const Params: {
     encode(message: Params, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): Params;
     fromJSON(object: any): Params;
     toJSON(message: Params): unknown;
-    fromPartial<I extends {
-        sendEnabled?: boolean;
-        receiveEnabled?: boolean;
-    } & {
-        sendEnabled?: boolean;
-        receiveEnabled?: boolean;
-    } & Record<Exclude<keyof I, keyof Params>, never>>(object: I): Params;
+    fromPartial(object: DeepPartial<Params>): Params;
 };

@@ -1,5 +1,6 @@
 import { Any } from "../../../google/protobuf/any";
 import * as _m0 from "protobufjs/minimal";
+import { DeepPartial } from "@osmonauts/helpers";
 /**
  * GenericAuthorization gives the grantee unrestricted permissions to execute
  * the provided method on behalf of the granter's account.
@@ -41,68 +42,26 @@ export declare const GenericAuthorization: {
     decode(input: _m0.Reader | Uint8Array, length?: number): GenericAuthorization;
     fromJSON(object: any): GenericAuthorization;
     toJSON(message: GenericAuthorization): unknown;
-    fromPartial<I extends {
-        msg?: string;
-    } & {
-        msg?: string;
-    } & Record<Exclude<keyof I, "msg">, never>>(object: I): GenericAuthorization;
+    fromPartial(object: DeepPartial<GenericAuthorization>): GenericAuthorization;
 };
 export declare const Grant: {
     encode(message: Grant, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): Grant;
     fromJSON(object: any): Grant;
     toJSON(message: Grant): unknown;
-    fromPartial<I extends {
-        authorization?: {
-            typeUrl?: string;
-            value?: Uint8Array;
-        };
-        expiration?: Date;
-    } & {
-        authorization?: {
-            typeUrl?: string;
-            value?: Uint8Array;
-        } & {
-            typeUrl?: string;
-            value?: Uint8Array;
-        } & Record<Exclude<keyof I["authorization"], keyof Any>, never>;
-        expiration?: Date;
-    } & Record<Exclude<keyof I, keyof Grant>, never>>(object: I): Grant;
+    fromPartial(object: DeepPartial<Grant>): Grant;
 };
 export declare const GrantAuthorization: {
     encode(message: GrantAuthorization, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): GrantAuthorization;
     fromJSON(object: any): GrantAuthorization;
     toJSON(message: GrantAuthorization): unknown;
-    fromPartial<I extends {
-        granter?: string;
-        grantee?: string;
-        authorization?: {
-            typeUrl?: string;
-            value?: Uint8Array;
-        };
-        expiration?: Date;
-    } & {
-        granter?: string;
-        grantee?: string;
-        authorization?: {
-            typeUrl?: string;
-            value?: Uint8Array;
-        } & {
-            typeUrl?: string;
-            value?: Uint8Array;
-        } & Record<Exclude<keyof I["authorization"], keyof Any>, never>;
-        expiration?: Date;
-    } & Record<Exclude<keyof I, keyof GrantAuthorization>, never>>(object: I): GrantAuthorization;
+    fromPartial(object: DeepPartial<GrantAuthorization>): GrantAuthorization;
 };
 export declare const GrantQueueItem: {
     encode(message: GrantQueueItem, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): GrantQueueItem;
     fromJSON(object: any): GrantQueueItem;
     toJSON(message: GrantQueueItem): unknown;
-    fromPartial<I extends {
-        msgTypeUrls?: string[];
-    } & {
-        msgTypeUrls?: string[] & string[] & Record<Exclude<keyof I["msgTypeUrls"], keyof string[]>, never>;
-    } & Record<Exclude<keyof I, "msgTypeUrls">, never>>(object: I): GrantQueueItem;
+    fromPartial(object: DeepPartial<GrantQueueItem>): GrantQueueItem;
 };

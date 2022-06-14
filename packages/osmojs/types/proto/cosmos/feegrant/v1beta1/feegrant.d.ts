@@ -1,6 +1,7 @@
 import { Coin } from "../../base/v1beta1/coin";
 import { Any } from "../../../google/protobuf/any";
 import * as _m0 from "protobufjs/minimal";
+import { DeepPartial } from "@osmonauts/helpers";
 /**
  * BasicAllowance implements Allowance with a one-time grant of tokens
  * that optionally expires. The grantee can use up to SpendLimit to cover fees.
@@ -62,148 +63,26 @@ export declare const BasicAllowance: {
     decode(input: _m0.Reader | Uint8Array, length?: number): BasicAllowance;
     fromJSON(object: any): BasicAllowance;
     toJSON(message: BasicAllowance): unknown;
-    fromPartial<I extends {
-        spendLimit?: {
-            denom?: string;
-            amount?: string;
-        }[];
-        expiration?: Date;
-    } & {
-        spendLimit?: {
-            denom?: string;
-            amount?: string;
-        }[] & ({
-            denom?: string;
-            amount?: string;
-        } & {
-            denom?: string;
-            amount?: string;
-        } & Record<Exclude<keyof I["spendLimit"][number], keyof Coin>, never>)[] & Record<Exclude<keyof I["spendLimit"], keyof {
-            denom?: string;
-            amount?: string;
-        }[]>, never>;
-        expiration?: Date;
-    } & Record<Exclude<keyof I, keyof BasicAllowance>, never>>(object: I): BasicAllowance;
+    fromPartial(object: DeepPartial<BasicAllowance>): BasicAllowance;
 };
 export declare const PeriodicAllowance: {
     encode(message: PeriodicAllowance, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): PeriodicAllowance;
     fromJSON(object: any): PeriodicAllowance;
     toJSON(message: PeriodicAllowance): unknown;
-    fromPartial<I extends {
-        basic?: {
-            spendLimit?: {
-                denom?: string;
-                amount?: string;
-            }[];
-            expiration?: Date;
-        };
-        period?: string;
-        periodSpendLimit?: {
-            denom?: string;
-            amount?: string;
-        }[];
-        periodCanSpend?: {
-            denom?: string;
-            amount?: string;
-        }[];
-        periodReset?: Date;
-    } & {
-        basic?: {
-            spendLimit?: {
-                denom?: string;
-                amount?: string;
-            }[];
-            expiration?: Date;
-        } & {
-            spendLimit?: {
-                denom?: string;
-                amount?: string;
-            }[] & ({
-                denom?: string;
-                amount?: string;
-            } & {
-                denom?: string;
-                amount?: string;
-            } & Record<Exclude<keyof I["basic"]["spendLimit"][number], keyof Coin>, never>)[] & Record<Exclude<keyof I["basic"]["spendLimit"], keyof {
-                denom?: string;
-                amount?: string;
-            }[]>, never>;
-            expiration?: Date;
-        } & Record<Exclude<keyof I["basic"], keyof BasicAllowance>, never>;
-        period?: string;
-        periodSpendLimit?: {
-            denom?: string;
-            amount?: string;
-        }[] & ({
-            denom?: string;
-            amount?: string;
-        } & {
-            denom?: string;
-            amount?: string;
-        } & Record<Exclude<keyof I["periodSpendLimit"][number], keyof Coin>, never>)[] & Record<Exclude<keyof I["periodSpendLimit"], keyof {
-            denom?: string;
-            amount?: string;
-        }[]>, never>;
-        periodCanSpend?: {
-            denom?: string;
-            amount?: string;
-        }[] & ({
-            denom?: string;
-            amount?: string;
-        } & {
-            denom?: string;
-            amount?: string;
-        } & Record<Exclude<keyof I["periodCanSpend"][number], keyof Coin>, never>)[] & Record<Exclude<keyof I["periodCanSpend"], keyof {
-            denom?: string;
-            amount?: string;
-        }[]>, never>;
-        periodReset?: Date;
-    } & Record<Exclude<keyof I, keyof PeriodicAllowance>, never>>(object: I): PeriodicAllowance;
+    fromPartial(object: DeepPartial<PeriodicAllowance>): PeriodicAllowance;
 };
 export declare const AllowedMsgAllowance: {
     encode(message: AllowedMsgAllowance, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): AllowedMsgAllowance;
     fromJSON(object: any): AllowedMsgAllowance;
     toJSON(message: AllowedMsgAllowance): unknown;
-    fromPartial<I extends {
-        allowance?: {
-            typeUrl?: string;
-            value?: Uint8Array;
-        };
-        allowedMessages?: string[];
-    } & {
-        allowance?: {
-            typeUrl?: string;
-            value?: Uint8Array;
-        } & {
-            typeUrl?: string;
-            value?: Uint8Array;
-        } & Record<Exclude<keyof I["allowance"], keyof Any>, never>;
-        allowedMessages?: string[] & string[] & Record<Exclude<keyof I["allowedMessages"], keyof string[]>, never>;
-    } & Record<Exclude<keyof I, keyof AllowedMsgAllowance>, never>>(object: I): AllowedMsgAllowance;
+    fromPartial(object: DeepPartial<AllowedMsgAllowance>): AllowedMsgAllowance;
 };
 export declare const Grant: {
     encode(message: Grant, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): Grant;
     fromJSON(object: any): Grant;
     toJSON(message: Grant): unknown;
-    fromPartial<I extends {
-        granter?: string;
-        grantee?: string;
-        allowance?: {
-            typeUrl?: string;
-            value?: Uint8Array;
-        };
-    } & {
-        granter?: string;
-        grantee?: string;
-        allowance?: {
-            typeUrl?: string;
-            value?: Uint8Array;
-        } & {
-            typeUrl?: string;
-            value?: Uint8Array;
-        } & Record<Exclude<keyof I["allowance"], keyof Any>, never>;
-    } & Record<Exclude<keyof I, keyof Grant>, never>>(object: I): Grant;
+    fromPartial(object: DeepPartial<Grant>): Grant;
 };

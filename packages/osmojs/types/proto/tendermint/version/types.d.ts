@@ -1,5 +1,5 @@
 import * as _m0 from "protobufjs/minimal";
-import { Long } from "@osmonauts/helpers";
+import { Long, DeepPartial } from "@osmonauts/helpers";
 /**
  * App includes the protocol and software version for the application.
  * This information is included in ResponseInfo. The App.Protocol can be
@@ -23,24 +23,12 @@ export declare const App: {
     decode(input: _m0.Reader | Uint8Array, length?: number): App;
     fromJSON(object: any): App;
     toJSON(message: App): unknown;
-    fromPartial<I extends {
-        protocol?: any;
-        software?: string;
-    } & {
-        protocol?: any;
-        software?: string;
-    } & Record<Exclude<keyof I, keyof App>, never>>(object: I): App;
+    fromPartial(object: DeepPartial<App>): App;
 };
 export declare const Consensus: {
     encode(message: Consensus, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): Consensus;
     fromJSON(object: any): Consensus;
     toJSON(message: Consensus): unknown;
-    fromPartial<I extends {
-        block?: any;
-        app?: any;
-    } & {
-        block?: any;
-        app?: any;
-    } & Record<Exclude<keyof I, keyof Consensus>, never>>(object: I): Consensus;
+    fromPartial(object: DeepPartial<Consensus>): Consensus;
 };

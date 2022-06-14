@@ -1,4 +1,5 @@
 import * as _m0 from "protobufjs/minimal";
+import { DeepPartial } from "@osmonauts/helpers";
 /** Params holds parameters for the incentives module */
 export interface Params {
     /** distribution epoch identifier */
@@ -9,9 +10,5 @@ export declare const Params: {
     decode(input: _m0.Reader | Uint8Array, length?: number): Params;
     fromJSON(object: any): Params;
     toJSON(message: Params): unknown;
-    fromPartial<I extends {
-        distrEpochIdentifier?: string;
-    } & {
-        distrEpochIdentifier?: string;
-    } & Record<Exclude<keyof I, "distrEpochIdentifier">, never>>(object: I): Params;
+    fromPartial(object: DeepPartial<Params>): Params;
 };

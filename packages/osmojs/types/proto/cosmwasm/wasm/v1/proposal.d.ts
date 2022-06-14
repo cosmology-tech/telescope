@@ -1,7 +1,7 @@
 import { AccessConfig } from "./types";
 import { Coin } from "../../../cosmos/base/v1beta1/coin";
 import * as _m0 from "protobufjs/minimal";
-import { Long } from "@osmonauts/helpers";
+import { DeepPartial, Long } from "@osmonauts/helpers";
 /** StoreCodeProposal gov proposal content type to submit WASM code to the system */
 export interface StoreCodeProposal {
     /** Title is a short summary */
@@ -131,200 +131,61 @@ export declare const StoreCodeProposal: {
     decode(input: _m0.Reader | Uint8Array, length?: number): StoreCodeProposal;
     fromJSON(object: any): StoreCodeProposal;
     toJSON(message: StoreCodeProposal): unknown;
-    fromPartial<I extends {
-        title?: string;
-        description?: string;
-        runAs?: string;
-        wasmByteCode?: Uint8Array;
-        instantiatePermission?: {
-            permission?: import("./types").AccessType;
-            address?: string;
-        };
-    } & {
-        title?: string;
-        description?: string;
-        runAs?: string;
-        wasmByteCode?: Uint8Array;
-        instantiatePermission?: {
-            permission?: import("./types").AccessType;
-            address?: string;
-        } & {
-            permission?: import("./types").AccessType;
-            address?: string;
-        } & Record<Exclude<keyof I["instantiatePermission"], keyof AccessConfig>, never>;
-    } & Record<Exclude<keyof I, keyof StoreCodeProposal>, never>>(object: I): StoreCodeProposal;
+    fromPartial(object: DeepPartial<StoreCodeProposal>): StoreCodeProposal;
 };
 export declare const InstantiateContractProposal: {
     encode(message: InstantiateContractProposal, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): InstantiateContractProposal;
     fromJSON(object: any): InstantiateContractProposal;
     toJSON(message: InstantiateContractProposal): unknown;
-    fromPartial<I extends {
-        title?: string;
-        description?: string;
-        runAs?: string;
-        admin?: string;
-        codeId?: any;
-        label?: string;
-        msg?: Uint8Array;
-        funds?: {
-            denom?: string;
-            amount?: string;
-        }[];
-    } & {
-        title?: string;
-        description?: string;
-        runAs?: string;
-        admin?: string;
-        codeId?: any;
-        label?: string;
-        msg?: Uint8Array;
-        funds?: {
-            denom?: string;
-            amount?: string;
-        }[] & ({
-            denom?: string;
-            amount?: string;
-        } & {
-            denom?: string;
-            amount?: string;
-        } & Record<Exclude<keyof I["funds"][number], keyof Coin>, never>)[] & Record<Exclude<keyof I["funds"], keyof {
-            denom?: string;
-            amount?: string;
-        }[]>, never>;
-    } & Record<Exclude<keyof I, keyof InstantiateContractProposal>, never>>(object: I): InstantiateContractProposal;
+    fromPartial(object: DeepPartial<InstantiateContractProposal>): InstantiateContractProposal;
 };
 export declare const MigrateContractProposal: {
     encode(message: MigrateContractProposal, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): MigrateContractProposal;
     fromJSON(object: any): MigrateContractProposal;
     toJSON(message: MigrateContractProposal): unknown;
-    fromPartial<I extends {
-        title?: string;
-        description?: string;
-        contract?: string;
-        codeId?: any;
-        msg?: Uint8Array;
-    } & {
-        title?: string;
-        description?: string;
-        contract?: string;
-        codeId?: any;
-        msg?: Uint8Array;
-    } & Record<Exclude<keyof I, keyof MigrateContractProposal>, never>>(object: I): MigrateContractProposal;
+    fromPartial(object: DeepPartial<MigrateContractProposal>): MigrateContractProposal;
 };
 export declare const SudoContractProposal: {
     encode(message: SudoContractProposal, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): SudoContractProposal;
     fromJSON(object: any): SudoContractProposal;
     toJSON(message: SudoContractProposal): unknown;
-    fromPartial<I extends {
-        title?: string;
-        description?: string;
-        contract?: string;
-        msg?: Uint8Array;
-    } & {
-        title?: string;
-        description?: string;
-        contract?: string;
-        msg?: Uint8Array;
-    } & Record<Exclude<keyof I, keyof SudoContractProposal>, never>>(object: I): SudoContractProposal;
+    fromPartial(object: DeepPartial<SudoContractProposal>): SudoContractProposal;
 };
 export declare const ExecuteContractProposal: {
     encode(message: ExecuteContractProposal, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): ExecuteContractProposal;
     fromJSON(object: any): ExecuteContractProposal;
     toJSON(message: ExecuteContractProposal): unknown;
-    fromPartial<I extends {
-        title?: string;
-        description?: string;
-        runAs?: string;
-        contract?: string;
-        msg?: Uint8Array;
-        funds?: {
-            denom?: string;
-            amount?: string;
-        }[];
-    } & {
-        title?: string;
-        description?: string;
-        runAs?: string;
-        contract?: string;
-        msg?: Uint8Array;
-        funds?: {
-            denom?: string;
-            amount?: string;
-        }[] & ({
-            denom?: string;
-            amount?: string;
-        } & {
-            denom?: string;
-            amount?: string;
-        } & Record<Exclude<keyof I["funds"][number], keyof Coin>, never>)[] & Record<Exclude<keyof I["funds"], keyof {
-            denom?: string;
-            amount?: string;
-        }[]>, never>;
-    } & Record<Exclude<keyof I, keyof ExecuteContractProposal>, never>>(object: I): ExecuteContractProposal;
+    fromPartial(object: DeepPartial<ExecuteContractProposal>): ExecuteContractProposal;
 };
 export declare const UpdateAdminProposal: {
     encode(message: UpdateAdminProposal, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): UpdateAdminProposal;
     fromJSON(object: any): UpdateAdminProposal;
     toJSON(message: UpdateAdminProposal): unknown;
-    fromPartial<I extends {
-        title?: string;
-        description?: string;
-        newAdmin?: string;
-        contract?: string;
-    } & {
-        title?: string;
-        description?: string;
-        newAdmin?: string;
-        contract?: string;
-    } & Record<Exclude<keyof I, keyof UpdateAdminProposal>, never>>(object: I): UpdateAdminProposal;
+    fromPartial(object: DeepPartial<UpdateAdminProposal>): UpdateAdminProposal;
 };
 export declare const ClearAdminProposal: {
     encode(message: ClearAdminProposal, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): ClearAdminProposal;
     fromJSON(object: any): ClearAdminProposal;
     toJSON(message: ClearAdminProposal): unknown;
-    fromPartial<I extends {
-        title?: string;
-        description?: string;
-        contract?: string;
-    } & {
-        title?: string;
-        description?: string;
-        contract?: string;
-    } & Record<Exclude<keyof I, keyof ClearAdminProposal>, never>>(object: I): ClearAdminProposal;
+    fromPartial(object: DeepPartial<ClearAdminProposal>): ClearAdminProposal;
 };
 export declare const PinCodesProposal: {
     encode(message: PinCodesProposal, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): PinCodesProposal;
     fromJSON(object: any): PinCodesProposal;
     toJSON(message: PinCodesProposal): unknown;
-    fromPartial<I extends {
-        title?: string;
-        description?: string;
-        codeIds?: any[];
-    } & {
-        title?: string;
-        description?: string;
-        codeIds?: any[] & any[] & Record<Exclude<keyof I["codeIds"], keyof any[]>, never>;
-    } & Record<Exclude<keyof I, keyof PinCodesProposal>, never>>(object: I): PinCodesProposal;
+    fromPartial(object: DeepPartial<PinCodesProposal>): PinCodesProposal;
 };
 export declare const UnpinCodesProposal: {
     encode(message: UnpinCodesProposal, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): UnpinCodesProposal;
     fromJSON(object: any): UnpinCodesProposal;
     toJSON(message: UnpinCodesProposal): unknown;
-    fromPartial<I extends {
-        title?: string;
-        description?: string;
-        codeIds?: any[];
-    } & {
-        title?: string;
-        description?: string;
-        codeIds?: any[] & any[] & Record<Exclude<keyof I["codeIds"], keyof any[]>, never>;
-    } & Record<Exclude<keyof I, keyof UnpinCodesProposal>, never>>(object: I): UnpinCodesProposal;
+    fromPartial(object: DeepPartial<UnpinCodesProposal>): UnpinCodesProposal;
 };

@@ -1,4 +1,5 @@
 import * as _m0 from "protobufjs/minimal";
+import { DeepPartial } from "@osmonauts/helpers";
 /** TableDescriptor describes an ORM table. */
 export interface TableDescriptor {
     /** primary_key defines the primary key for the table. */
@@ -91,81 +92,26 @@ export declare const TableDescriptor: {
     decode(input: _m0.Reader | Uint8Array, length?: number): TableDescriptor;
     fromJSON(object: any): TableDescriptor;
     toJSON(message: TableDescriptor): unknown;
-    fromPartial<I extends {
-        primaryKey?: {
-            fields?: string;
-            autoIncrement?: boolean;
-        };
-        index?: {
-            fields?: string;
-            id?: number;
-            unique?: boolean;
-        }[];
-        id?: number;
-    } & {
-        primaryKey?: {
-            fields?: string;
-            autoIncrement?: boolean;
-        } & {
-            fields?: string;
-            autoIncrement?: boolean;
-        } & Record<Exclude<keyof I["primaryKey"], keyof PrimaryKeyDescriptor>, never>;
-        index?: {
-            fields?: string;
-            id?: number;
-            unique?: boolean;
-        }[] & ({
-            fields?: string;
-            id?: number;
-            unique?: boolean;
-        } & {
-            fields?: string;
-            id?: number;
-            unique?: boolean;
-        } & Record<Exclude<keyof I["index"][number], keyof SecondaryIndexDescriptor>, never>)[] & Record<Exclude<keyof I["index"], keyof {
-            fields?: string;
-            id?: number;
-            unique?: boolean;
-        }[]>, never>;
-        id?: number;
-    } & Record<Exclude<keyof I, keyof TableDescriptor>, never>>(object: I): TableDescriptor;
+    fromPartial(object: DeepPartial<TableDescriptor>): TableDescriptor;
 };
 export declare const PrimaryKeyDescriptor: {
     encode(message: PrimaryKeyDescriptor, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): PrimaryKeyDescriptor;
     fromJSON(object: any): PrimaryKeyDescriptor;
     toJSON(message: PrimaryKeyDescriptor): unknown;
-    fromPartial<I extends {
-        fields?: string;
-        autoIncrement?: boolean;
-    } & {
-        fields?: string;
-        autoIncrement?: boolean;
-    } & Record<Exclude<keyof I, keyof PrimaryKeyDescriptor>, never>>(object: I): PrimaryKeyDescriptor;
+    fromPartial(object: DeepPartial<PrimaryKeyDescriptor>): PrimaryKeyDescriptor;
 };
 export declare const SecondaryIndexDescriptor: {
     encode(message: SecondaryIndexDescriptor, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): SecondaryIndexDescriptor;
     fromJSON(object: any): SecondaryIndexDescriptor;
     toJSON(message: SecondaryIndexDescriptor): unknown;
-    fromPartial<I extends {
-        fields?: string;
-        id?: number;
-        unique?: boolean;
-    } & {
-        fields?: string;
-        id?: number;
-        unique?: boolean;
-    } & Record<Exclude<keyof I, keyof SecondaryIndexDescriptor>, never>>(object: I): SecondaryIndexDescriptor;
+    fromPartial(object: DeepPartial<SecondaryIndexDescriptor>): SecondaryIndexDescriptor;
 };
 export declare const SingletonDescriptor: {
     encode(message: SingletonDescriptor, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): SingletonDescriptor;
     fromJSON(object: any): SingletonDescriptor;
     toJSON(message: SingletonDescriptor): unknown;
-    fromPartial<I extends {
-        id?: number;
-    } & {
-        id?: number;
-    } & Record<Exclude<keyof I, "id">, never>>(object: I): SingletonDescriptor;
+    fromPartial(object: DeepPartial<SingletonDescriptor>): SingletonDescriptor;
 };

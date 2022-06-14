@@ -1,4 +1,5 @@
 import * as _m0 from "protobufjs/minimal";
+import { DeepPartial } from "@osmonauts/helpers";
 /** StorageType */
 export declare enum StorageType {
     /**
@@ -78,46 +79,12 @@ export declare const ModuleSchemaDescriptor: {
     decode(input: _m0.Reader | Uint8Array, length?: number): ModuleSchemaDescriptor;
     fromJSON(object: any): ModuleSchemaDescriptor;
     toJSON(message: ModuleSchemaDescriptor): unknown;
-    fromPartial<I extends {
-        schemaFile?: {
-            id?: number;
-            protoFileName?: string;
-            storageType?: StorageType;
-        }[];
-        prefix?: Uint8Array;
-    } & {
-        schemaFile?: {
-            id?: number;
-            protoFileName?: string;
-            storageType?: StorageType;
-        }[] & ({
-            id?: number;
-            protoFileName?: string;
-            storageType?: StorageType;
-        } & {
-            id?: number;
-            protoFileName?: string;
-            storageType?: StorageType;
-        } & Record<Exclude<keyof I["schemaFile"][number], keyof ModuleSchemaDescriptor_FileEntry>, never>)[] & Record<Exclude<keyof I["schemaFile"], keyof {
-            id?: number;
-            protoFileName?: string;
-            storageType?: StorageType;
-        }[]>, never>;
-        prefix?: Uint8Array;
-    } & Record<Exclude<keyof I, keyof ModuleSchemaDescriptor>, never>>(object: I): ModuleSchemaDescriptor;
+    fromPartial(object: DeepPartial<ModuleSchemaDescriptor>): ModuleSchemaDescriptor;
 };
 export declare const ModuleSchemaDescriptor_FileEntry: {
     encode(message: ModuleSchemaDescriptor_FileEntry, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): ModuleSchemaDescriptor_FileEntry;
     fromJSON(object: any): ModuleSchemaDescriptor_FileEntry;
     toJSON(message: ModuleSchemaDescriptor_FileEntry): unknown;
-    fromPartial<I extends {
-        id?: number;
-        protoFileName?: string;
-        storageType?: StorageType;
-    } & {
-        id?: number;
-        protoFileName?: string;
-        storageType?: StorageType;
-    } & Record<Exclude<keyof I, keyof ModuleSchemaDescriptor_FileEntry>, never>>(object: I): ModuleSchemaDescriptor_FileEntry;
+    fromPartial(object: DeepPartial<ModuleSchemaDescriptor_FileEntry>): ModuleSchemaDescriptor_FileEntry;
 };

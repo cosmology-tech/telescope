@@ -2,7 +2,7 @@ import { Header } from "../../../tendermint/types/types";
 import { Any } from "../../../google/protobuf/any";
 import { Coin } from "../../base/v1beta1/coin";
 import * as _m0 from "protobufjs/minimal";
-import { Long } from "@osmonauts/helpers";
+import { DeepPartial, Long } from "@osmonauts/helpers";
 /** BondStatus is the status of a validator. */
 export declare enum BondStatus {
     /** BOND_STATUS_UNSPECIFIED - UNSPECIFIED defines an invalid validator status. */
@@ -240,823 +240,138 @@ export declare const HistoricalInfo: {
     decode(input: _m0.Reader | Uint8Array, length?: number): HistoricalInfo;
     fromJSON(object: any): HistoricalInfo;
     toJSON(message: HistoricalInfo): unknown;
-    fromPartial<I extends {
-        header?: {
-            version?: {
-                block?: any;
-                app?: any;
-            };
-            chainId?: string;
-            height?: any;
-            time?: Date;
-            lastBlockId?: {
-                hash?: Uint8Array;
-                partSetHeader?: {
-                    total?: number;
-                    hash?: Uint8Array;
-                };
-            };
-            lastCommitHash?: Uint8Array;
-            dataHash?: Uint8Array;
-            validatorsHash?: Uint8Array;
-            nextValidatorsHash?: Uint8Array;
-            consensusHash?: Uint8Array;
-            appHash?: Uint8Array;
-            lastResultsHash?: Uint8Array;
-            evidenceHash?: Uint8Array;
-            proposerAddress?: Uint8Array;
-        };
-        valset?: {
-            operatorAddress?: string;
-            consensusPubkey?: {
-                typeUrl?: string;
-                value?: Uint8Array;
-            };
-            jailed?: boolean;
-            status?: BondStatus;
-            tokens?: string;
-            delegatorShares?: string;
-            description?: {
-                moniker?: string;
-                identity?: string;
-                website?: string;
-                securityContact?: string;
-                details?: string;
-            };
-            unbondingHeight?: any;
-            unbondingTime?: Date;
-            commission?: {
-                commissionRates?: {
-                    rate?: string;
-                    maxRate?: string;
-                    maxChangeRate?: string;
-                };
-                updateTime?: Date;
-            };
-            minSelfDelegation?: string;
-        }[];
-    } & {
-        header?: {
-            version?: {
-                block?: any;
-                app?: any;
-            };
-            chainId?: string;
-            height?: any;
-            time?: Date;
-            lastBlockId?: {
-                hash?: Uint8Array;
-                partSetHeader?: {
-                    total?: number;
-                    hash?: Uint8Array;
-                };
-            };
-            lastCommitHash?: Uint8Array;
-            dataHash?: Uint8Array;
-            validatorsHash?: Uint8Array;
-            nextValidatorsHash?: Uint8Array;
-            consensusHash?: Uint8Array;
-            appHash?: Uint8Array;
-            lastResultsHash?: Uint8Array;
-            evidenceHash?: Uint8Array;
-            proposerAddress?: Uint8Array;
-        } & {
-            version?: {
-                block?: any;
-                app?: any;
-            } & {
-                block?: any;
-                app?: any;
-            } & Record<Exclude<keyof I["header"]["version"], keyof import("../../../tendermint/version/types").Consensus>, never>;
-            chainId?: string;
-            height?: any;
-            time?: Date;
-            lastBlockId?: {
-                hash?: Uint8Array;
-                partSetHeader?: {
-                    total?: number;
-                    hash?: Uint8Array;
-                };
-            } & {
-                hash?: Uint8Array;
-                partSetHeader?: {
-                    total?: number;
-                    hash?: Uint8Array;
-                } & {
-                    total?: number;
-                    hash?: Uint8Array;
-                } & Record<Exclude<keyof I["header"]["lastBlockId"]["partSetHeader"], keyof import("../../../tendermint/types/types").PartSetHeader>, never>;
-            } & Record<Exclude<keyof I["header"]["lastBlockId"], keyof import("../../../tendermint/types/types").BlockID>, never>;
-            lastCommitHash?: Uint8Array;
-            dataHash?: Uint8Array;
-            validatorsHash?: Uint8Array;
-            nextValidatorsHash?: Uint8Array;
-            consensusHash?: Uint8Array;
-            appHash?: Uint8Array;
-            lastResultsHash?: Uint8Array;
-            evidenceHash?: Uint8Array;
-            proposerAddress?: Uint8Array;
-        } & Record<Exclude<keyof I["header"], keyof Header>, never>;
-        valset?: {
-            operatorAddress?: string;
-            consensusPubkey?: {
-                typeUrl?: string;
-                value?: Uint8Array;
-            };
-            jailed?: boolean;
-            status?: BondStatus;
-            tokens?: string;
-            delegatorShares?: string;
-            description?: {
-                moniker?: string;
-                identity?: string;
-                website?: string;
-                securityContact?: string;
-                details?: string;
-            };
-            unbondingHeight?: any;
-            unbondingTime?: Date;
-            commission?: {
-                commissionRates?: {
-                    rate?: string;
-                    maxRate?: string;
-                    maxChangeRate?: string;
-                };
-                updateTime?: Date;
-            };
-            minSelfDelegation?: string;
-        }[] & ({
-            operatorAddress?: string;
-            consensusPubkey?: {
-                typeUrl?: string;
-                value?: Uint8Array;
-            };
-            jailed?: boolean;
-            status?: BondStatus;
-            tokens?: string;
-            delegatorShares?: string;
-            description?: {
-                moniker?: string;
-                identity?: string;
-                website?: string;
-                securityContact?: string;
-                details?: string;
-            };
-            unbondingHeight?: any;
-            unbondingTime?: Date;
-            commission?: {
-                commissionRates?: {
-                    rate?: string;
-                    maxRate?: string;
-                    maxChangeRate?: string;
-                };
-                updateTime?: Date;
-            };
-            minSelfDelegation?: string;
-        } & {
-            operatorAddress?: string;
-            consensusPubkey?: {
-                typeUrl?: string;
-                value?: Uint8Array;
-            } & {
-                typeUrl?: string;
-                value?: Uint8Array;
-            } & Record<Exclude<keyof I["valset"][number]["consensusPubkey"], keyof Any>, never>;
-            jailed?: boolean;
-            status?: BondStatus;
-            tokens?: string;
-            delegatorShares?: string;
-            description?: {
-                moniker?: string;
-                identity?: string;
-                website?: string;
-                securityContact?: string;
-                details?: string;
-            } & {
-                moniker?: string;
-                identity?: string;
-                website?: string;
-                securityContact?: string;
-                details?: string;
-            } & Record<Exclude<keyof I["valset"][number]["description"], keyof Description>, never>;
-            unbondingHeight?: any;
-            unbondingTime?: Date;
-            commission?: {
-                commissionRates?: {
-                    rate?: string;
-                    maxRate?: string;
-                    maxChangeRate?: string;
-                };
-                updateTime?: Date;
-            } & {
-                commissionRates?: {
-                    rate?: string;
-                    maxRate?: string;
-                    maxChangeRate?: string;
-                } & {
-                    rate?: string;
-                    maxRate?: string;
-                    maxChangeRate?: string;
-                } & Record<Exclude<keyof I["valset"][number]["commission"]["commissionRates"], keyof CommissionRates>, never>;
-                updateTime?: Date;
-            } & Record<Exclude<keyof I["valset"][number]["commission"], keyof Commission>, never>;
-            minSelfDelegation?: string;
-        } & Record<Exclude<keyof I["valset"][number], keyof Validator>, never>)[] & Record<Exclude<keyof I["valset"], keyof {
-            operatorAddress?: string;
-            consensusPubkey?: {
-                typeUrl?: string;
-                value?: Uint8Array;
-            };
-            jailed?: boolean;
-            status?: BondStatus;
-            tokens?: string;
-            delegatorShares?: string;
-            description?: {
-                moniker?: string;
-                identity?: string;
-                website?: string;
-                securityContact?: string;
-                details?: string;
-            };
-            unbondingHeight?: any;
-            unbondingTime?: Date;
-            commission?: {
-                commissionRates?: {
-                    rate?: string;
-                    maxRate?: string;
-                    maxChangeRate?: string;
-                };
-                updateTime?: Date;
-            };
-            minSelfDelegation?: string;
-        }[]>, never>;
-    } & Record<Exclude<keyof I, keyof HistoricalInfo>, never>>(object: I): HistoricalInfo;
+    fromPartial(object: DeepPartial<HistoricalInfo>): HistoricalInfo;
 };
 export declare const CommissionRates: {
     encode(message: CommissionRates, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): CommissionRates;
     fromJSON(object: any): CommissionRates;
     toJSON(message: CommissionRates): unknown;
-    fromPartial<I extends {
-        rate?: string;
-        maxRate?: string;
-        maxChangeRate?: string;
-    } & {
-        rate?: string;
-        maxRate?: string;
-        maxChangeRate?: string;
-    } & Record<Exclude<keyof I, keyof CommissionRates>, never>>(object: I): CommissionRates;
+    fromPartial(object: DeepPartial<CommissionRates>): CommissionRates;
 };
 export declare const Commission: {
     encode(message: Commission, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): Commission;
     fromJSON(object: any): Commission;
     toJSON(message: Commission): unknown;
-    fromPartial<I extends {
-        commissionRates?: {
-            rate?: string;
-            maxRate?: string;
-            maxChangeRate?: string;
-        };
-        updateTime?: Date;
-    } & {
-        commissionRates?: {
-            rate?: string;
-            maxRate?: string;
-            maxChangeRate?: string;
-        } & {
-            rate?: string;
-            maxRate?: string;
-            maxChangeRate?: string;
-        } & Record<Exclude<keyof I["commissionRates"], keyof CommissionRates>, never>;
-        updateTime?: Date;
-    } & Record<Exclude<keyof I, keyof Commission>, never>>(object: I): Commission;
+    fromPartial(object: DeepPartial<Commission>): Commission;
 };
 export declare const Description: {
     encode(message: Description, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): Description;
     fromJSON(object: any): Description;
     toJSON(message: Description): unknown;
-    fromPartial<I extends {
-        moniker?: string;
-        identity?: string;
-        website?: string;
-        securityContact?: string;
-        details?: string;
-    } & {
-        moniker?: string;
-        identity?: string;
-        website?: string;
-        securityContact?: string;
-        details?: string;
-    } & Record<Exclude<keyof I, keyof Description>, never>>(object: I): Description;
+    fromPartial(object: DeepPartial<Description>): Description;
 };
 export declare const Validator: {
     encode(message: Validator, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): Validator;
     fromJSON(object: any): Validator;
     toJSON(message: Validator): unknown;
-    fromPartial<I extends {
-        operatorAddress?: string;
-        consensusPubkey?: {
-            typeUrl?: string;
-            value?: Uint8Array;
-        };
-        jailed?: boolean;
-        status?: BondStatus;
-        tokens?: string;
-        delegatorShares?: string;
-        description?: {
-            moniker?: string;
-            identity?: string;
-            website?: string;
-            securityContact?: string;
-            details?: string;
-        };
-        unbondingHeight?: any;
-        unbondingTime?: Date;
-        commission?: {
-            commissionRates?: {
-                rate?: string;
-                maxRate?: string;
-                maxChangeRate?: string;
-            };
-            updateTime?: Date;
-        };
-        minSelfDelegation?: string;
-    } & {
-        operatorAddress?: string;
-        consensusPubkey?: {
-            typeUrl?: string;
-            value?: Uint8Array;
-        } & {
-            typeUrl?: string;
-            value?: Uint8Array;
-        } & Record<Exclude<keyof I["consensusPubkey"], keyof Any>, never>;
-        jailed?: boolean;
-        status?: BondStatus;
-        tokens?: string;
-        delegatorShares?: string;
-        description?: {
-            moniker?: string;
-            identity?: string;
-            website?: string;
-            securityContact?: string;
-            details?: string;
-        } & {
-            moniker?: string;
-            identity?: string;
-            website?: string;
-            securityContact?: string;
-            details?: string;
-        } & Record<Exclude<keyof I["description"], keyof Description>, never>;
-        unbondingHeight?: any;
-        unbondingTime?: Date;
-        commission?: {
-            commissionRates?: {
-                rate?: string;
-                maxRate?: string;
-                maxChangeRate?: string;
-            };
-            updateTime?: Date;
-        } & {
-            commissionRates?: {
-                rate?: string;
-                maxRate?: string;
-                maxChangeRate?: string;
-            } & {
-                rate?: string;
-                maxRate?: string;
-                maxChangeRate?: string;
-            } & Record<Exclude<keyof I["commission"]["commissionRates"], keyof CommissionRates>, never>;
-            updateTime?: Date;
-        } & Record<Exclude<keyof I["commission"], keyof Commission>, never>;
-        minSelfDelegation?: string;
-    } & Record<Exclude<keyof I, keyof Validator>, never>>(object: I): Validator;
+    fromPartial(object: DeepPartial<Validator>): Validator;
 };
 export declare const ValAddresses: {
     encode(message: ValAddresses, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): ValAddresses;
     fromJSON(object: any): ValAddresses;
     toJSON(message: ValAddresses): unknown;
-    fromPartial<I extends {
-        addresses?: string[];
-    } & {
-        addresses?: string[] & string[] & Record<Exclude<keyof I["addresses"], keyof string[]>, never>;
-    } & Record<Exclude<keyof I, "addresses">, never>>(object: I): ValAddresses;
+    fromPartial(object: DeepPartial<ValAddresses>): ValAddresses;
 };
 export declare const DVPair: {
     encode(message: DVPair, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): DVPair;
     fromJSON(object: any): DVPair;
     toJSON(message: DVPair): unknown;
-    fromPartial<I extends {
-        delegatorAddress?: string;
-        validatorAddress?: string;
-    } & {
-        delegatorAddress?: string;
-        validatorAddress?: string;
-    } & Record<Exclude<keyof I, keyof DVPair>, never>>(object: I): DVPair;
+    fromPartial(object: DeepPartial<DVPair>): DVPair;
 };
 export declare const DVPairs: {
     encode(message: DVPairs, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): DVPairs;
     fromJSON(object: any): DVPairs;
     toJSON(message: DVPairs): unknown;
-    fromPartial<I extends {
-        pairs?: {
-            delegatorAddress?: string;
-            validatorAddress?: string;
-        }[];
-    } & {
-        pairs?: {
-            delegatorAddress?: string;
-            validatorAddress?: string;
-        }[] & ({
-            delegatorAddress?: string;
-            validatorAddress?: string;
-        } & {
-            delegatorAddress?: string;
-            validatorAddress?: string;
-        } & Record<Exclude<keyof I["pairs"][number], keyof DVPair>, never>)[] & Record<Exclude<keyof I["pairs"], keyof {
-            delegatorAddress?: string;
-            validatorAddress?: string;
-        }[]>, never>;
-    } & Record<Exclude<keyof I, "pairs">, never>>(object: I): DVPairs;
+    fromPartial(object: DeepPartial<DVPairs>): DVPairs;
 };
 export declare const DVVTriplet: {
     encode(message: DVVTriplet, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): DVVTriplet;
     fromJSON(object: any): DVVTriplet;
     toJSON(message: DVVTriplet): unknown;
-    fromPartial<I extends {
-        delegatorAddress?: string;
-        validatorSrcAddress?: string;
-        validatorDstAddress?: string;
-    } & {
-        delegatorAddress?: string;
-        validatorSrcAddress?: string;
-        validatorDstAddress?: string;
-    } & Record<Exclude<keyof I, keyof DVVTriplet>, never>>(object: I): DVVTriplet;
+    fromPartial(object: DeepPartial<DVVTriplet>): DVVTriplet;
 };
 export declare const DVVTriplets: {
     encode(message: DVVTriplets, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): DVVTriplets;
     fromJSON(object: any): DVVTriplets;
     toJSON(message: DVVTriplets): unknown;
-    fromPartial<I extends {
-        triplets?: {
-            delegatorAddress?: string;
-            validatorSrcAddress?: string;
-            validatorDstAddress?: string;
-        }[];
-    } & {
-        triplets?: {
-            delegatorAddress?: string;
-            validatorSrcAddress?: string;
-            validatorDstAddress?: string;
-        }[] & ({
-            delegatorAddress?: string;
-            validatorSrcAddress?: string;
-            validatorDstAddress?: string;
-        } & {
-            delegatorAddress?: string;
-            validatorSrcAddress?: string;
-            validatorDstAddress?: string;
-        } & Record<Exclude<keyof I["triplets"][number], keyof DVVTriplet>, never>)[] & Record<Exclude<keyof I["triplets"], keyof {
-            delegatorAddress?: string;
-            validatorSrcAddress?: string;
-            validatorDstAddress?: string;
-        }[]>, never>;
-    } & Record<Exclude<keyof I, "triplets">, never>>(object: I): DVVTriplets;
+    fromPartial(object: DeepPartial<DVVTriplets>): DVVTriplets;
 };
 export declare const Delegation: {
     encode(message: Delegation, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): Delegation;
     fromJSON(object: any): Delegation;
     toJSON(message: Delegation): unknown;
-    fromPartial<I extends {
-        delegatorAddress?: string;
-        validatorAddress?: string;
-        shares?: string;
-    } & {
-        delegatorAddress?: string;
-        validatorAddress?: string;
-        shares?: string;
-    } & Record<Exclude<keyof I, keyof Delegation>, never>>(object: I): Delegation;
+    fromPartial(object: DeepPartial<Delegation>): Delegation;
 };
 export declare const UnbondingDelegation: {
     encode(message: UnbondingDelegation, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): UnbondingDelegation;
     fromJSON(object: any): UnbondingDelegation;
     toJSON(message: UnbondingDelegation): unknown;
-    fromPartial<I extends {
-        delegatorAddress?: string;
-        validatorAddress?: string;
-        entries?: {
-            creationHeight?: any;
-            completionTime?: Date;
-            initialBalance?: string;
-            balance?: string;
-        }[];
-    } & {
-        delegatorAddress?: string;
-        validatorAddress?: string;
-        entries?: {
-            creationHeight?: any;
-            completionTime?: Date;
-            initialBalance?: string;
-            balance?: string;
-        }[] & ({
-            creationHeight?: any;
-            completionTime?: Date;
-            initialBalance?: string;
-            balance?: string;
-        } & {
-            creationHeight?: any;
-            completionTime?: Date;
-            initialBalance?: string;
-            balance?: string;
-        } & Record<Exclude<keyof I["entries"][number], keyof UnbondingDelegationEntry>, never>)[] & Record<Exclude<keyof I["entries"], keyof {
-            creationHeight?: any;
-            completionTime?: Date;
-            initialBalance?: string;
-            balance?: string;
-        }[]>, never>;
-    } & Record<Exclude<keyof I, keyof UnbondingDelegation>, never>>(object: I): UnbondingDelegation;
+    fromPartial(object: DeepPartial<UnbondingDelegation>): UnbondingDelegation;
 };
 export declare const UnbondingDelegationEntry: {
     encode(message: UnbondingDelegationEntry, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): UnbondingDelegationEntry;
     fromJSON(object: any): UnbondingDelegationEntry;
     toJSON(message: UnbondingDelegationEntry): unknown;
-    fromPartial<I extends {
-        creationHeight?: any;
-        completionTime?: Date;
-        initialBalance?: string;
-        balance?: string;
-    } & {
-        creationHeight?: any;
-        completionTime?: Date;
-        initialBalance?: string;
-        balance?: string;
-    } & Record<Exclude<keyof I, keyof UnbondingDelegationEntry>, never>>(object: I): UnbondingDelegationEntry;
+    fromPartial(object: DeepPartial<UnbondingDelegationEntry>): UnbondingDelegationEntry;
 };
 export declare const RedelegationEntry: {
     encode(message: RedelegationEntry, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): RedelegationEntry;
     fromJSON(object: any): RedelegationEntry;
     toJSON(message: RedelegationEntry): unknown;
-    fromPartial<I extends {
-        creationHeight?: any;
-        completionTime?: Date;
-        initialBalance?: string;
-        sharesDst?: string;
-    } & {
-        creationHeight?: any;
-        completionTime?: Date;
-        initialBalance?: string;
-        sharesDst?: string;
-    } & Record<Exclude<keyof I, keyof RedelegationEntry>, never>>(object: I): RedelegationEntry;
+    fromPartial(object: DeepPartial<RedelegationEntry>): RedelegationEntry;
 };
 export declare const Redelegation: {
     encode(message: Redelegation, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): Redelegation;
     fromJSON(object: any): Redelegation;
     toJSON(message: Redelegation): unknown;
-    fromPartial<I extends {
-        delegatorAddress?: string;
-        validatorSrcAddress?: string;
-        validatorDstAddress?: string;
-        entries?: {
-            creationHeight?: any;
-            completionTime?: Date;
-            initialBalance?: string;
-            sharesDst?: string;
-        }[];
-    } & {
-        delegatorAddress?: string;
-        validatorSrcAddress?: string;
-        validatorDstAddress?: string;
-        entries?: {
-            creationHeight?: any;
-            completionTime?: Date;
-            initialBalance?: string;
-            sharesDst?: string;
-        }[] & ({
-            creationHeight?: any;
-            completionTime?: Date;
-            initialBalance?: string;
-            sharesDst?: string;
-        } & {
-            creationHeight?: any;
-            completionTime?: Date;
-            initialBalance?: string;
-            sharesDst?: string;
-        } & Record<Exclude<keyof I["entries"][number], keyof RedelegationEntry>, never>)[] & Record<Exclude<keyof I["entries"], keyof {
-            creationHeight?: any;
-            completionTime?: Date;
-            initialBalance?: string;
-            sharesDst?: string;
-        }[]>, never>;
-    } & Record<Exclude<keyof I, keyof Redelegation>, never>>(object: I): Redelegation;
+    fromPartial(object: DeepPartial<Redelegation>): Redelegation;
 };
 export declare const Params: {
     encode(message: Params, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): Params;
     fromJSON(object: any): Params;
     toJSON(message: Params): unknown;
-    fromPartial<I extends {
-        unbondingTime?: string;
-        maxValidators?: number;
-        maxEntries?: number;
-        historicalEntries?: number;
-        bondDenom?: string;
-        minCommissionRate?: string;
-    } & {
-        unbondingTime?: string;
-        maxValidators?: number;
-        maxEntries?: number;
-        historicalEntries?: number;
-        bondDenom?: string;
-        minCommissionRate?: string;
-    } & Record<Exclude<keyof I, keyof Params>, never>>(object: I): Params;
+    fromPartial(object: DeepPartial<Params>): Params;
 };
 export declare const DelegationResponse: {
     encode(message: DelegationResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): DelegationResponse;
     fromJSON(object: any): DelegationResponse;
     toJSON(message: DelegationResponse): unknown;
-    fromPartial<I extends {
-        delegation?: {
-            delegatorAddress?: string;
-            validatorAddress?: string;
-            shares?: string;
-        };
-        balance?: {
-            denom?: string;
-            amount?: string;
-        };
-    } & {
-        delegation?: {
-            delegatorAddress?: string;
-            validatorAddress?: string;
-            shares?: string;
-        } & {
-            delegatorAddress?: string;
-            validatorAddress?: string;
-            shares?: string;
-        } & Record<Exclude<keyof I["delegation"], keyof Delegation>, never>;
-        balance?: {
-            denom?: string;
-            amount?: string;
-        } & {
-            denom?: string;
-            amount?: string;
-        } & Record<Exclude<keyof I["balance"], keyof Coin>, never>;
-    } & Record<Exclude<keyof I, keyof DelegationResponse>, never>>(object: I): DelegationResponse;
+    fromPartial(object: DeepPartial<DelegationResponse>): DelegationResponse;
 };
 export declare const RedelegationEntryResponse: {
     encode(message: RedelegationEntryResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): RedelegationEntryResponse;
     fromJSON(object: any): RedelegationEntryResponse;
     toJSON(message: RedelegationEntryResponse): unknown;
-    fromPartial<I extends {
-        redelegationEntry?: {
-            creationHeight?: any;
-            completionTime?: Date;
-            initialBalance?: string;
-            sharesDst?: string;
-        };
-        balance?: string;
-    } & {
-        redelegationEntry?: {
-            creationHeight?: any;
-            completionTime?: Date;
-            initialBalance?: string;
-            sharesDst?: string;
-        } & {
-            creationHeight?: any;
-            completionTime?: Date;
-            initialBalance?: string;
-            sharesDst?: string;
-        } & Record<Exclude<keyof I["redelegationEntry"], keyof RedelegationEntry>, never>;
-        balance?: string;
-    } & Record<Exclude<keyof I, keyof RedelegationEntryResponse>, never>>(object: I): RedelegationEntryResponse;
+    fromPartial(object: DeepPartial<RedelegationEntryResponse>): RedelegationEntryResponse;
 };
 export declare const RedelegationResponse: {
     encode(message: RedelegationResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): RedelegationResponse;
     fromJSON(object: any): RedelegationResponse;
     toJSON(message: RedelegationResponse): unknown;
-    fromPartial<I extends {
-        redelegation?: {
-            delegatorAddress?: string;
-            validatorSrcAddress?: string;
-            validatorDstAddress?: string;
-            entries?: {
-                creationHeight?: any;
-                completionTime?: Date;
-                initialBalance?: string;
-                sharesDst?: string;
-            }[];
-        };
-        entries?: {
-            redelegationEntry?: {
-                creationHeight?: any;
-                completionTime?: Date;
-                initialBalance?: string;
-                sharesDst?: string;
-            };
-            balance?: string;
-        }[];
-    } & {
-        redelegation?: {
-            delegatorAddress?: string;
-            validatorSrcAddress?: string;
-            validatorDstAddress?: string;
-            entries?: {
-                creationHeight?: any;
-                completionTime?: Date;
-                initialBalance?: string;
-                sharesDst?: string;
-            }[];
-        } & {
-            delegatorAddress?: string;
-            validatorSrcAddress?: string;
-            validatorDstAddress?: string;
-            entries?: {
-                creationHeight?: any;
-                completionTime?: Date;
-                initialBalance?: string;
-                sharesDst?: string;
-            }[] & ({
-                creationHeight?: any;
-                completionTime?: Date;
-                initialBalance?: string;
-                sharesDst?: string;
-            } & {
-                creationHeight?: any;
-                completionTime?: Date;
-                initialBalance?: string;
-                sharesDst?: string;
-            } & Record<Exclude<keyof I["redelegation"]["entries"][number], keyof RedelegationEntry>, never>)[] & Record<Exclude<keyof I["redelegation"]["entries"], keyof {
-                creationHeight?: any;
-                completionTime?: Date;
-                initialBalance?: string;
-                sharesDst?: string;
-            }[]>, never>;
-        } & Record<Exclude<keyof I["redelegation"], keyof Redelegation>, never>;
-        entries?: {
-            redelegationEntry?: {
-                creationHeight?: any;
-                completionTime?: Date;
-                initialBalance?: string;
-                sharesDst?: string;
-            };
-            balance?: string;
-        }[] & ({
-            redelegationEntry?: {
-                creationHeight?: any;
-                completionTime?: Date;
-                initialBalance?: string;
-                sharesDst?: string;
-            };
-            balance?: string;
-        } & {
-            redelegationEntry?: {
-                creationHeight?: any;
-                completionTime?: Date;
-                initialBalance?: string;
-                sharesDst?: string;
-            } & {
-                creationHeight?: any;
-                completionTime?: Date;
-                initialBalance?: string;
-                sharesDst?: string;
-            } & Record<Exclude<keyof I["entries"][number]["redelegationEntry"], keyof RedelegationEntry>, never>;
-            balance?: string;
-        } & Record<Exclude<keyof I["entries"][number], keyof RedelegationEntryResponse>, never>)[] & Record<Exclude<keyof I["entries"], keyof {
-            redelegationEntry?: {
-                creationHeight?: any;
-                completionTime?: Date;
-                initialBalance?: string;
-                sharesDst?: string;
-            };
-            balance?: string;
-        }[]>, never>;
-    } & Record<Exclude<keyof I, keyof RedelegationResponse>, never>>(object: I): RedelegationResponse;
+    fromPartial(object: DeepPartial<RedelegationResponse>): RedelegationResponse;
 };
 export declare const Pool: {
     encode(message: Pool, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): Pool;
     fromJSON(object: any): Pool;
     toJSON(message: Pool): unknown;
-    fromPartial<I extends {
-        notBondedTokens?: string;
-        bondedTokens?: string;
-    } & {
-        notBondedTokens?: string;
-        bondedTokens?: string;
-    } & Record<Exclude<keyof I, keyof Pool>, never>>(object: I): Pool;
+    fromPartial(object: DeepPartial<Pool>): Pool;
 };

@@ -1,5 +1,5 @@
 import * as _m0 from "protobufjs/minimal";
-import { Long } from "@osmonauts/helpers";
+import { DeepPartial, Long } from "@osmonauts/helpers";
 /** Minter represents the minting state. */
 export interface Minter {
     /** current epoch provisions */
@@ -55,94 +55,26 @@ export declare const Minter: {
     decode(input: _m0.Reader | Uint8Array, length?: number): Minter;
     fromJSON(object: any): Minter;
     toJSON(message: Minter): unknown;
-    fromPartial<I extends {
-        epochProvisions?: string;
-    } & {
-        epochProvisions?: string;
-    } & Record<Exclude<keyof I, "epochProvisions">, never>>(object: I): Minter;
+    fromPartial(object: DeepPartial<Minter>): Minter;
 };
 export declare const WeightedAddress: {
     encode(message: WeightedAddress, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): WeightedAddress;
     fromJSON(object: any): WeightedAddress;
     toJSON(message: WeightedAddress): unknown;
-    fromPartial<I extends {
-        address?: string;
-        weight?: string;
-    } & {
-        address?: string;
-        weight?: string;
-    } & Record<Exclude<keyof I, keyof WeightedAddress>, never>>(object: I): WeightedAddress;
+    fromPartial(object: DeepPartial<WeightedAddress>): WeightedAddress;
 };
 export declare const DistributionProportions: {
     encode(message: DistributionProportions, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): DistributionProportions;
     fromJSON(object: any): DistributionProportions;
     toJSON(message: DistributionProportions): unknown;
-    fromPartial<I extends {
-        staking?: string;
-        poolIncentives?: string;
-        developerRewards?: string;
-        communityPool?: string;
-    } & {
-        staking?: string;
-        poolIncentives?: string;
-        developerRewards?: string;
-        communityPool?: string;
-    } & Record<Exclude<keyof I, keyof DistributionProportions>, never>>(object: I): DistributionProportions;
+    fromPartial(object: DeepPartial<DistributionProportions>): DistributionProportions;
 };
 export declare const Params: {
     encode(message: Params, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): Params;
     fromJSON(object: any): Params;
     toJSON(message: Params): unknown;
-    fromPartial<I extends {
-        mintDenom?: string;
-        genesisEpochProvisions?: string;
-        epochIdentifier?: string;
-        reductionPeriodInEpochs?: any;
-        reductionFactor?: string;
-        distributionProportions?: {
-            staking?: string;
-            poolIncentives?: string;
-            developerRewards?: string;
-            communityPool?: string;
-        };
-        weightedDeveloperRewardsReceivers?: {
-            address?: string;
-            weight?: string;
-        }[];
-        mintingRewardsDistributionStartEpoch?: any;
-    } & {
-        mintDenom?: string;
-        genesisEpochProvisions?: string;
-        epochIdentifier?: string;
-        reductionPeriodInEpochs?: any;
-        reductionFactor?: string;
-        distributionProportions?: {
-            staking?: string;
-            poolIncentives?: string;
-            developerRewards?: string;
-            communityPool?: string;
-        } & {
-            staking?: string;
-            poolIncentives?: string;
-            developerRewards?: string;
-            communityPool?: string;
-        } & Record<Exclude<keyof I["distributionProportions"], keyof DistributionProportions>, never>;
-        weightedDeveloperRewardsReceivers?: {
-            address?: string;
-            weight?: string;
-        }[] & ({
-            address?: string;
-            weight?: string;
-        } & {
-            address?: string;
-            weight?: string;
-        } & Record<Exclude<keyof I["weightedDeveloperRewardsReceivers"][number], keyof WeightedAddress>, never>)[] & Record<Exclude<keyof I["weightedDeveloperRewardsReceivers"], keyof {
-            address?: string;
-            weight?: string;
-        }[]>, never>;
-        mintingRewardsDistributionStartEpoch?: any;
-    } & Record<Exclude<keyof I, keyof Params>, never>>(object: I): Params;
+    fromPartial(object: DeepPartial<Params>): Params;
 };

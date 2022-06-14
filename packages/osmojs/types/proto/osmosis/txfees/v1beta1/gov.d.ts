@@ -1,5 +1,6 @@
 import { FeeToken } from "./feetoken";
 import * as _m0 from "protobufjs/minimal";
+import { DeepPartial } from "@osmonauts/helpers";
 /**
  * UpdateFeeTokenProposal is a gov Content type for adding a new whitelisted fee
  * token. It must specify a denom along with gamm pool ID to use as a spot price
@@ -17,22 +18,5 @@ export declare const UpdateFeeTokenProposal: {
     decode(input: _m0.Reader | Uint8Array, length?: number): UpdateFeeTokenProposal;
     fromJSON(object: any): UpdateFeeTokenProposal;
     toJSON(message: UpdateFeeTokenProposal): unknown;
-    fromPartial<I extends {
-        title?: string;
-        description?: string;
-        feetoken?: {
-            denom?: string;
-            poolID?: any;
-        };
-    } & {
-        title?: string;
-        description?: string;
-        feetoken?: {
-            denom?: string;
-            poolID?: any;
-        } & {
-            denom?: string;
-            poolID?: any;
-        } & Record<Exclude<keyof I["feetoken"], keyof FeeToken>, never>;
-    } & Record<Exclude<keyof I, keyof UpdateFeeTokenProposal>, never>>(object: I): UpdateFeeTokenProposal;
+    fromPartial(object: DeepPartial<UpdateFeeTokenProposal>): UpdateFeeTokenProposal;
 };

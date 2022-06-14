@@ -1,5 +1,5 @@
 import * as _m0 from "protobufjs/minimal";
-import { Long } from "@osmonauts/helpers";
+import { Long, DeepPartial } from "@osmonauts/helpers";
 /**
  * CommitInfo defines commit information used by the multi-store when committing
  * a version/height.
@@ -29,79 +29,19 @@ export declare const CommitInfo: {
     decode(input: _m0.Reader | Uint8Array, length?: number): CommitInfo;
     fromJSON(object: any): CommitInfo;
     toJSON(message: CommitInfo): unknown;
-    fromPartial<I extends {
-        version?: any;
-        storeInfos?: {
-            name?: string;
-            commitId?: {
-                version?: any;
-                hash?: Uint8Array;
-            };
-        }[];
-    } & {
-        version?: any;
-        storeInfos?: {
-            name?: string;
-            commitId?: {
-                version?: any;
-                hash?: Uint8Array;
-            };
-        }[] & ({
-            name?: string;
-            commitId?: {
-                version?: any;
-                hash?: Uint8Array;
-            };
-        } & {
-            name?: string;
-            commitId?: {
-                version?: any;
-                hash?: Uint8Array;
-            } & {
-                version?: any;
-                hash?: Uint8Array;
-            } & Record<Exclude<keyof I["storeInfos"][number]["commitId"], keyof CommitID>, never>;
-        } & Record<Exclude<keyof I["storeInfos"][number], keyof StoreInfo>, never>)[] & Record<Exclude<keyof I["storeInfos"], keyof {
-            name?: string;
-            commitId?: {
-                version?: any;
-                hash?: Uint8Array;
-            };
-        }[]>, never>;
-    } & Record<Exclude<keyof I, keyof CommitInfo>, never>>(object: I): CommitInfo;
+    fromPartial(object: DeepPartial<CommitInfo>): CommitInfo;
 };
 export declare const StoreInfo: {
     encode(message: StoreInfo, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): StoreInfo;
     fromJSON(object: any): StoreInfo;
     toJSON(message: StoreInfo): unknown;
-    fromPartial<I extends {
-        name?: string;
-        commitId?: {
-            version?: any;
-            hash?: Uint8Array;
-        };
-    } & {
-        name?: string;
-        commitId?: {
-            version?: any;
-            hash?: Uint8Array;
-        } & {
-            version?: any;
-            hash?: Uint8Array;
-        } & Record<Exclude<keyof I["commitId"], keyof CommitID>, never>;
-    } & Record<Exclude<keyof I, keyof StoreInfo>, never>>(object: I): StoreInfo;
+    fromPartial(object: DeepPartial<StoreInfo>): StoreInfo;
 };
 export declare const CommitID: {
     encode(message: CommitID, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): CommitID;
     fromJSON(object: any): CommitID;
     toJSON(message: CommitID): unknown;
-    fromPartial<I extends {
-        version?: any;
-        hash?: Uint8Array;
-    } & {
-        version?: any;
-        hash?: Uint8Array;
-    } & Record<Exclude<keyof I, keyof CommitID>, never>>(object: I): CommitID;
+    fromPartial(object: DeepPartial<CommitID>): CommitID;
 };

@@ -2,7 +2,7 @@ import { Counterparty, Version } from "./connection";
 import { Any } from "../../../../google/protobuf/any";
 import { Height } from "../../client/v1/client";
 import * as _m0 from "protobufjs/minimal";
-import { Long } from "@osmonauts/helpers";
+import { Long, DeepPartial } from "@osmonauts/helpers";
 /**
  * MsgConnectionOpenInit defines the msg sent by an account on Chain A to
  * initialize a connection with Chain B.
@@ -98,260 +98,54 @@ export declare const MsgConnectionOpenInit: {
     decode(input: _m0.Reader | Uint8Array, length?: number): MsgConnectionOpenInit;
     fromJSON(object: any): MsgConnectionOpenInit;
     toJSON(message: MsgConnectionOpenInit): unknown;
-    fromPartial<I extends {
-        clientId?: string;
-        counterparty?: {
-            clientId?: string;
-            connectionId?: string;
-            prefix?: {
-                keyPrefix?: Uint8Array;
-            };
-        };
-        version?: {
-            identifier?: string;
-            features?: string[];
-        };
-        delayPeriod?: any;
-        signer?: string;
-    } & {
-        clientId?: string;
-        counterparty?: {
-            clientId?: string;
-            connectionId?: string;
-            prefix?: {
-                keyPrefix?: Uint8Array;
-            };
-        } & {
-            clientId?: string;
-            connectionId?: string;
-            prefix?: {
-                keyPrefix?: Uint8Array;
-            } & {
-                keyPrefix?: Uint8Array;
-            } & Record<Exclude<keyof I["counterparty"]["prefix"], "keyPrefix">, never>;
-        } & Record<Exclude<keyof I["counterparty"], keyof Counterparty>, never>;
-        version?: {
-            identifier?: string;
-            features?: string[];
-        } & {
-            identifier?: string;
-            features?: string[] & string[] & Record<Exclude<keyof I["version"]["features"], keyof string[]>, never>;
-        } & Record<Exclude<keyof I["version"], keyof Version>, never>;
-        delayPeriod?: any;
-        signer?: string;
-    } & Record<Exclude<keyof I, keyof MsgConnectionOpenInit>, never>>(object: I): MsgConnectionOpenInit;
+    fromPartial(object: DeepPartial<MsgConnectionOpenInit>): MsgConnectionOpenInit;
 };
 export declare const MsgConnectionOpenInitResponse: {
     encode(_: MsgConnectionOpenInitResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): MsgConnectionOpenInitResponse;
     fromJSON(_: any): MsgConnectionOpenInitResponse;
     toJSON(_: MsgConnectionOpenInitResponse): unknown;
-    fromPartial<I extends {} & {} & Record<Exclude<keyof I, never>, never>>(_: I): MsgConnectionOpenInitResponse;
+    fromPartial(_: DeepPartial<MsgConnectionOpenInitResponse>): MsgConnectionOpenInitResponse;
 };
 export declare const MsgConnectionOpenTry: {
     encode(message: MsgConnectionOpenTry, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): MsgConnectionOpenTry;
     fromJSON(object: any): MsgConnectionOpenTry;
     toJSON(message: MsgConnectionOpenTry): unknown;
-    fromPartial<I extends {
-        clientId?: string;
-        previousConnectionId?: string;
-        clientState?: {
-            typeUrl?: string;
-            value?: Uint8Array;
-        };
-        counterparty?: {
-            clientId?: string;
-            connectionId?: string;
-            prefix?: {
-                keyPrefix?: Uint8Array;
-            };
-        };
-        delayPeriod?: any;
-        counterpartyVersions?: {
-            identifier?: string;
-            features?: string[];
-        }[];
-        proofHeight?: {
-            revisionNumber?: any;
-            revisionHeight?: any;
-        };
-        proofInit?: Uint8Array;
-        proofClient?: Uint8Array;
-        proofConsensus?: Uint8Array;
-        consensusHeight?: {
-            revisionNumber?: any;
-            revisionHeight?: any;
-        };
-        signer?: string;
-    } & {
-        clientId?: string;
-        previousConnectionId?: string;
-        clientState?: {
-            typeUrl?: string;
-            value?: Uint8Array;
-        } & {
-            typeUrl?: string;
-            value?: Uint8Array;
-        } & Record<Exclude<keyof I["clientState"], keyof Any>, never>;
-        counterparty?: {
-            clientId?: string;
-            connectionId?: string;
-            prefix?: {
-                keyPrefix?: Uint8Array;
-            };
-        } & {
-            clientId?: string;
-            connectionId?: string;
-            prefix?: {
-                keyPrefix?: Uint8Array;
-            } & {
-                keyPrefix?: Uint8Array;
-            } & Record<Exclude<keyof I["counterparty"]["prefix"], "keyPrefix">, never>;
-        } & Record<Exclude<keyof I["counterparty"], keyof Counterparty>, never>;
-        delayPeriod?: any;
-        counterpartyVersions?: {
-            identifier?: string;
-            features?: string[];
-        }[] & ({
-            identifier?: string;
-            features?: string[];
-        } & {
-            identifier?: string;
-            features?: string[] & string[] & Record<Exclude<keyof I["counterpartyVersions"][number]["features"], keyof string[]>, never>;
-        } & Record<Exclude<keyof I["counterpartyVersions"][number], keyof Version>, never>)[] & Record<Exclude<keyof I["counterpartyVersions"], keyof {
-            identifier?: string;
-            features?: string[];
-        }[]>, never>;
-        proofHeight?: {
-            revisionNumber?: any;
-            revisionHeight?: any;
-        } & {
-            revisionNumber?: any;
-            revisionHeight?: any;
-        } & Record<Exclude<keyof I["proofHeight"], keyof Height>, never>;
-        proofInit?: Uint8Array;
-        proofClient?: Uint8Array;
-        proofConsensus?: Uint8Array;
-        consensusHeight?: {
-            revisionNumber?: any;
-            revisionHeight?: any;
-        } & {
-            revisionNumber?: any;
-            revisionHeight?: any;
-        } & Record<Exclude<keyof I["consensusHeight"], keyof Height>, never>;
-        signer?: string;
-    } & Record<Exclude<keyof I, keyof MsgConnectionOpenTry>, never>>(object: I): MsgConnectionOpenTry;
+    fromPartial(object: DeepPartial<MsgConnectionOpenTry>): MsgConnectionOpenTry;
 };
 export declare const MsgConnectionOpenTryResponse: {
     encode(_: MsgConnectionOpenTryResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): MsgConnectionOpenTryResponse;
     fromJSON(_: any): MsgConnectionOpenTryResponse;
     toJSON(_: MsgConnectionOpenTryResponse): unknown;
-    fromPartial<I extends {} & {} & Record<Exclude<keyof I, never>, never>>(_: I): MsgConnectionOpenTryResponse;
+    fromPartial(_: DeepPartial<MsgConnectionOpenTryResponse>): MsgConnectionOpenTryResponse;
 };
 export declare const MsgConnectionOpenAck: {
     encode(message: MsgConnectionOpenAck, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): MsgConnectionOpenAck;
     fromJSON(object: any): MsgConnectionOpenAck;
     toJSON(message: MsgConnectionOpenAck): unknown;
-    fromPartial<I extends {
-        connectionId?: string;
-        counterpartyConnectionId?: string;
-        version?: {
-            identifier?: string;
-            features?: string[];
-        };
-        clientState?: {
-            typeUrl?: string;
-            value?: Uint8Array;
-        };
-        proofHeight?: {
-            revisionNumber?: any;
-            revisionHeight?: any;
-        };
-        proofTry?: Uint8Array;
-        proofClient?: Uint8Array;
-        proofConsensus?: Uint8Array;
-        consensusHeight?: {
-            revisionNumber?: any;
-            revisionHeight?: any;
-        };
-        signer?: string;
-    } & {
-        connectionId?: string;
-        counterpartyConnectionId?: string;
-        version?: {
-            identifier?: string;
-            features?: string[];
-        } & {
-            identifier?: string;
-            features?: string[] & string[] & Record<Exclude<keyof I["version"]["features"], keyof string[]>, never>;
-        } & Record<Exclude<keyof I["version"], keyof Version>, never>;
-        clientState?: {
-            typeUrl?: string;
-            value?: Uint8Array;
-        } & {
-            typeUrl?: string;
-            value?: Uint8Array;
-        } & Record<Exclude<keyof I["clientState"], keyof Any>, never>;
-        proofHeight?: {
-            revisionNumber?: any;
-            revisionHeight?: any;
-        } & {
-            revisionNumber?: any;
-            revisionHeight?: any;
-        } & Record<Exclude<keyof I["proofHeight"], keyof Height>, never>;
-        proofTry?: Uint8Array;
-        proofClient?: Uint8Array;
-        proofConsensus?: Uint8Array;
-        consensusHeight?: {
-            revisionNumber?: any;
-            revisionHeight?: any;
-        } & {
-            revisionNumber?: any;
-            revisionHeight?: any;
-        } & Record<Exclude<keyof I["consensusHeight"], keyof Height>, never>;
-        signer?: string;
-    } & Record<Exclude<keyof I, keyof MsgConnectionOpenAck>, never>>(object: I): MsgConnectionOpenAck;
+    fromPartial(object: DeepPartial<MsgConnectionOpenAck>): MsgConnectionOpenAck;
 };
 export declare const MsgConnectionOpenAckResponse: {
     encode(_: MsgConnectionOpenAckResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): MsgConnectionOpenAckResponse;
     fromJSON(_: any): MsgConnectionOpenAckResponse;
     toJSON(_: MsgConnectionOpenAckResponse): unknown;
-    fromPartial<I extends {} & {} & Record<Exclude<keyof I, never>, never>>(_: I): MsgConnectionOpenAckResponse;
+    fromPartial(_: DeepPartial<MsgConnectionOpenAckResponse>): MsgConnectionOpenAckResponse;
 };
 export declare const MsgConnectionOpenConfirm: {
     encode(message: MsgConnectionOpenConfirm, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): MsgConnectionOpenConfirm;
     fromJSON(object: any): MsgConnectionOpenConfirm;
     toJSON(message: MsgConnectionOpenConfirm): unknown;
-    fromPartial<I extends {
-        connectionId?: string;
-        proofAck?: Uint8Array;
-        proofHeight?: {
-            revisionNumber?: any;
-            revisionHeight?: any;
-        };
-        signer?: string;
-    } & {
-        connectionId?: string;
-        proofAck?: Uint8Array;
-        proofHeight?: {
-            revisionNumber?: any;
-            revisionHeight?: any;
-        } & {
-            revisionNumber?: any;
-            revisionHeight?: any;
-        } & Record<Exclude<keyof I["proofHeight"], keyof Height>, never>;
-        signer?: string;
-    } & Record<Exclude<keyof I, keyof MsgConnectionOpenConfirm>, never>>(object: I): MsgConnectionOpenConfirm;
+    fromPartial(object: DeepPartial<MsgConnectionOpenConfirm>): MsgConnectionOpenConfirm;
 };
 export declare const MsgConnectionOpenConfirmResponse: {
     encode(_: MsgConnectionOpenConfirmResponse, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): MsgConnectionOpenConfirmResponse;
     fromJSON(_: any): MsgConnectionOpenConfirmResponse;
     toJSON(_: MsgConnectionOpenConfirmResponse): unknown;
-    fromPartial<I extends {} & {} & Record<Exclude<keyof I, never>, never>>(_: I): MsgConnectionOpenConfirmResponse;
+    fromPartial(_: DeepPartial<MsgConnectionOpenConfirmResponse>): MsgConnectionOpenConfirmResponse;
 };

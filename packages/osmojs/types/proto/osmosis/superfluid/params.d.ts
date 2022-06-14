@@ -1,4 +1,5 @@
 import * as _m0 from "protobufjs/minimal";
+import { DeepPartial } from "@osmonauts/helpers";
 /** Params holds parameters for the superfluid module */
 export interface Params {
     /**
@@ -12,9 +13,5 @@ export declare const Params: {
     decode(input: _m0.Reader | Uint8Array, length?: number): Params;
     fromJSON(object: any): Params;
     toJSON(message: Params): unknown;
-    fromPartial<I extends {
-        minimumRiskFactor?: string;
-    } & {
-        minimumRiskFactor?: string;
-    } & Record<Exclude<keyof I, "minimumRiskFactor">, never>>(object: I): Params;
+    fromPartial(object: DeepPartial<Params>): Params;
 };

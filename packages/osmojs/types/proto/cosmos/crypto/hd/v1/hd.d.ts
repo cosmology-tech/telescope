@@ -1,4 +1,5 @@
 import * as _m0 from "protobufjs/minimal";
+import { DeepPartial } from "@osmonauts/helpers";
 /** BIP44Params is used as path field in ledger item in Record. */
 export interface BIP44Params {
     /** purpose is a constant set to 44' (or 0x8000002C) following the BIP43 recommendation */
@@ -20,17 +21,5 @@ export declare const BIP44Params: {
     decode(input: _m0.Reader | Uint8Array, length?: number): BIP44Params;
     fromJSON(object: any): BIP44Params;
     toJSON(message: BIP44Params): unknown;
-    fromPartial<I extends {
-        purpose?: number;
-        coinType?: number;
-        account?: number;
-        change?: boolean;
-        addressIndex?: number;
-    } & {
-        purpose?: number;
-        coinType?: number;
-        account?: number;
-        change?: boolean;
-        addressIndex?: number;
-    } & Record<Exclude<keyof I, keyof BIP44Params>, never>>(object: I): BIP44Params;
+    fromPartial(object: DeepPartial<BIP44Params>): BIP44Params;
 };

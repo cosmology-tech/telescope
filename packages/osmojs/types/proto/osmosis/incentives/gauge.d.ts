@@ -1,7 +1,7 @@
 import { QueryCondition } from "../lockup/lock";
 import { Coin } from "../../cosmos/base/v1beta1/coin";
 import * as _m0 from "protobufjs/minimal";
-import { Long } from "@osmonauts/helpers";
+import { Long, DeepPartial } from "@osmonauts/helpers";
 export interface Gauge {
     /** unique ID of a Gauge */
     id: Long;
@@ -37,79 +37,12 @@ export declare const Gauge: {
     decode(input: _m0.Reader | Uint8Array, length?: number): Gauge;
     fromJSON(object: any): Gauge;
     toJSON(message: Gauge): unknown;
-    fromPartial<I extends {
-        id?: any;
-        isPerpetual?: boolean;
-        distributeTo?: {
-            lockQueryType?: import("../lockup/lock").LockQueryType;
-            denom?: string;
-            duration?: string;
-            timestamp?: Date;
-        };
-        coins?: {
-            denom?: string;
-            amount?: string;
-        }[];
-        startTime?: Date;
-        numEpochsPaidOver?: any;
-        filledEpochs?: any;
-        distributedCoins?: {
-            denom?: string;
-            amount?: string;
-        }[];
-    } & {
-        id?: any;
-        isPerpetual?: boolean;
-        distributeTo?: {
-            lockQueryType?: import("../lockup/lock").LockQueryType;
-            denom?: string;
-            duration?: string;
-            timestamp?: Date;
-        } & {
-            lockQueryType?: import("../lockup/lock").LockQueryType;
-            denom?: string;
-            duration?: string;
-            timestamp?: Date;
-        } & Record<Exclude<keyof I["distributeTo"], keyof QueryCondition>, never>;
-        coins?: {
-            denom?: string;
-            amount?: string;
-        }[] & ({
-            denom?: string;
-            amount?: string;
-        } & {
-            denom?: string;
-            amount?: string;
-        } & Record<Exclude<keyof I["coins"][number], keyof Coin>, never>)[] & Record<Exclude<keyof I["coins"], keyof {
-            denom?: string;
-            amount?: string;
-        }[]>, never>;
-        startTime?: Date;
-        numEpochsPaidOver?: any;
-        filledEpochs?: any;
-        distributedCoins?: {
-            denom?: string;
-            amount?: string;
-        }[] & ({
-            denom?: string;
-            amount?: string;
-        } & {
-            denom?: string;
-            amount?: string;
-        } & Record<Exclude<keyof I["distributedCoins"][number], keyof Coin>, never>)[] & Record<Exclude<keyof I["distributedCoins"], keyof {
-            denom?: string;
-            amount?: string;
-        }[]>, never>;
-    } & Record<Exclude<keyof I, keyof Gauge>, never>>(object: I): Gauge;
+    fromPartial(object: DeepPartial<Gauge>): Gauge;
 };
 export declare const LockableDurationsInfo: {
     encode(message: LockableDurationsInfo, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): LockableDurationsInfo;
     fromJSON(object: any): LockableDurationsInfo;
     toJSON(message: LockableDurationsInfo): unknown;
-    fromPartial<I extends {
-        lockableDurations?: string[];
-    } & {
-        lockableDurations?: string[] & string[] & Record<Exclude<keyof I["lockableDurations"], keyof string[]>, never>;
-    } & Record<Exclude<keyof I, "lockableDurations">, never>>(object: I): LockableDurationsInfo;
+    fromPartial(object: DeepPartial<LockableDurationsInfo>): LockableDurationsInfo;
 };

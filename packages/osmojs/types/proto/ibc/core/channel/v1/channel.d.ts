@@ -1,6 +1,6 @@
 import { Height } from "../../client/v1/client";
 import * as _m0 from "protobufjs/minimal";
-import { Long } from "@osmonauts/helpers";
+import { DeepPartial, Long } from "@osmonauts/helpers";
 /**
  * State defines if a channel is in one of the following states:
  * CLOSED, INIT, TRYOPEN, OPEN or UNINITIALIZED.
@@ -148,135 +148,40 @@ export declare const Channel: {
     decode(input: _m0.Reader | Uint8Array, length?: number): Channel;
     fromJSON(object: any): Channel;
     toJSON(message: Channel): unknown;
-    fromPartial<I extends {
-        state?: State;
-        ordering?: Order;
-        counterparty?: {
-            portId?: string;
-            channelId?: string;
-        };
-        connectionHops?: string[];
-        version?: string;
-    } & {
-        state?: State;
-        ordering?: Order;
-        counterparty?: {
-            portId?: string;
-            channelId?: string;
-        } & {
-            portId?: string;
-            channelId?: string;
-        } & Record<Exclude<keyof I["counterparty"], keyof Counterparty>, never>;
-        connectionHops?: string[] & string[] & Record<Exclude<keyof I["connectionHops"], keyof string[]>, never>;
-        version?: string;
-    } & Record<Exclude<keyof I, keyof Channel>, never>>(object: I): Channel;
+    fromPartial(object: DeepPartial<Channel>): Channel;
 };
 export declare const IdentifiedChannel: {
     encode(message: IdentifiedChannel, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): IdentifiedChannel;
     fromJSON(object: any): IdentifiedChannel;
     toJSON(message: IdentifiedChannel): unknown;
-    fromPartial<I extends {
-        state?: State;
-        ordering?: Order;
-        counterparty?: {
-            portId?: string;
-            channelId?: string;
-        };
-        connectionHops?: string[];
-        version?: string;
-        portId?: string;
-        channelId?: string;
-    } & {
-        state?: State;
-        ordering?: Order;
-        counterparty?: {
-            portId?: string;
-            channelId?: string;
-        } & {
-            portId?: string;
-            channelId?: string;
-        } & Record<Exclude<keyof I["counterparty"], keyof Counterparty>, never>;
-        connectionHops?: string[] & string[] & Record<Exclude<keyof I["connectionHops"], keyof string[]>, never>;
-        version?: string;
-        portId?: string;
-        channelId?: string;
-    } & Record<Exclude<keyof I, keyof IdentifiedChannel>, never>>(object: I): IdentifiedChannel;
+    fromPartial(object: DeepPartial<IdentifiedChannel>): IdentifiedChannel;
 };
 export declare const Counterparty: {
     encode(message: Counterparty, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): Counterparty;
     fromJSON(object: any): Counterparty;
     toJSON(message: Counterparty): unknown;
-    fromPartial<I extends {
-        portId?: string;
-        channelId?: string;
-    } & {
-        portId?: string;
-        channelId?: string;
-    } & Record<Exclude<keyof I, keyof Counterparty>, never>>(object: I): Counterparty;
+    fromPartial(object: DeepPartial<Counterparty>): Counterparty;
 };
 export declare const Packet: {
     encode(message: Packet, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): Packet;
     fromJSON(object: any): Packet;
     toJSON(message: Packet): unknown;
-    fromPartial<I extends {
-        sequence?: any;
-        sourcePort?: string;
-        sourceChannel?: string;
-        destinationPort?: string;
-        destinationChannel?: string;
-        data?: Uint8Array;
-        timeoutHeight?: {
-            revisionNumber?: any;
-            revisionHeight?: any;
-        };
-        timeoutTimestamp?: any;
-    } & {
-        sequence?: any;
-        sourcePort?: string;
-        sourceChannel?: string;
-        destinationPort?: string;
-        destinationChannel?: string;
-        data?: Uint8Array;
-        timeoutHeight?: {
-            revisionNumber?: any;
-            revisionHeight?: any;
-        } & {
-            revisionNumber?: any;
-            revisionHeight?: any;
-        } & Record<Exclude<keyof I["timeoutHeight"], keyof Height>, never>;
-        timeoutTimestamp?: any;
-    } & Record<Exclude<keyof I, keyof Packet>, never>>(object: I): Packet;
+    fromPartial(object: DeepPartial<Packet>): Packet;
 };
 export declare const PacketState: {
     encode(message: PacketState, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): PacketState;
     fromJSON(object: any): PacketState;
     toJSON(message: PacketState): unknown;
-    fromPartial<I extends {
-        portId?: string;
-        channelId?: string;
-        sequence?: any;
-        data?: Uint8Array;
-    } & {
-        portId?: string;
-        channelId?: string;
-        sequence?: any;
-        data?: Uint8Array;
-    } & Record<Exclude<keyof I, keyof PacketState>, never>>(object: I): PacketState;
+    fromPartial(object: DeepPartial<PacketState>): PacketState;
 };
 export declare const Acknowledgement: {
     encode(message: Acknowledgement, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): Acknowledgement;
     fromJSON(object: any): Acknowledgement;
     toJSON(message: Acknowledgement): unknown;
-    fromPartial<I extends {
-        result?: Uint8Array;
-        error?: string;
-    } & {
-        result?: Uint8Array;
-        error?: string;
-    } & Record<Exclude<keyof I, keyof Acknowledgement>, never>>(object: I): Acknowledgement;
+    fromPartial(object: DeepPartial<Acknowledgement>): Acknowledgement;
 };

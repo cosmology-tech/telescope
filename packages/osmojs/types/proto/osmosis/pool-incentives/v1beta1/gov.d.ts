@@ -1,5 +1,6 @@
 import { DistrRecord } from "./incentives";
 import * as _m0 from "protobufjs/minimal";
+import { DeepPartial } from "@osmonauts/helpers";
 /**
  * ReplacePoolIncentivesProposal is a gov Content type for updating the pool
  * incentives. If a ReplacePoolIncentivesProposal passes, the proposal’s records
@@ -33,58 +34,12 @@ export declare const ReplacePoolIncentivesProposal: {
     decode(input: _m0.Reader | Uint8Array, length?: number): ReplacePoolIncentivesProposal;
     fromJSON(object: any): ReplacePoolIncentivesProposal;
     toJSON(message: ReplacePoolIncentivesProposal): unknown;
-    fromPartial<I extends {
-        title?: string;
-        description?: string;
-        records?: {
-            gaugeId?: any;
-            weight?: string;
-        }[];
-    } & {
-        title?: string;
-        description?: string;
-        records?: {
-            gaugeId?: any;
-            weight?: string;
-        }[] & ({
-            gaugeId?: any;
-            weight?: string;
-        } & {
-            gaugeId?: any;
-            weight?: string;
-        } & Record<Exclude<keyof I["records"][number], keyof DistrRecord>, never>)[] & Record<Exclude<keyof I["records"], keyof {
-            gaugeId?: any;
-            weight?: string;
-        }[]>, never>;
-    } & Record<Exclude<keyof I, keyof ReplacePoolIncentivesProposal>, never>>(object: I): ReplacePoolIncentivesProposal;
+    fromPartial(object: DeepPartial<ReplacePoolIncentivesProposal>): ReplacePoolIncentivesProposal;
 };
 export declare const UpdatePoolIncentivesProposal: {
     encode(message: UpdatePoolIncentivesProposal, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): UpdatePoolIncentivesProposal;
     fromJSON(object: any): UpdatePoolIncentivesProposal;
     toJSON(message: UpdatePoolIncentivesProposal): unknown;
-    fromPartial<I extends {
-        title?: string;
-        description?: string;
-        records?: {
-            gaugeId?: any;
-            weight?: string;
-        }[];
-    } & {
-        title?: string;
-        description?: string;
-        records?: {
-            gaugeId?: any;
-            weight?: string;
-        }[] & ({
-            gaugeId?: any;
-            weight?: string;
-        } & {
-            gaugeId?: any;
-            weight?: string;
-        } & Record<Exclude<keyof I["records"][number], keyof DistrRecord>, never>)[] & Record<Exclude<keyof I["records"], keyof {
-            gaugeId?: any;
-            weight?: string;
-        }[]>, never>;
-    } & Record<Exclude<keyof I, keyof UpdatePoolIncentivesProposal>, never>>(object: I): UpdatePoolIncentivesProposal;
+    fromPartial(object: DeepPartial<UpdatePoolIncentivesProposal>): UpdatePoolIncentivesProposal;
 };

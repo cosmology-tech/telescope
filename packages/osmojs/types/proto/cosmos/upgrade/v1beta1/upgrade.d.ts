@@ -1,6 +1,6 @@
 import { Any } from "../../../google/protobuf/any";
 import * as _m0 from "protobufjs/minimal";
-import { Long } from "@osmonauts/helpers";
+import { Long, DeepPartial } from "@osmonauts/helpers";
 /** Plan specifies information about a planned upgrade and when it should occur. */
 export interface Plan {
     /**
@@ -77,97 +77,26 @@ export declare const Plan: {
     decode(input: _m0.Reader | Uint8Array, length?: number): Plan;
     fromJSON(object: any): Plan;
     toJSON(message: Plan): unknown;
-    fromPartial<I extends {
-        name?: string;
-        time?: Date;
-        height?: any;
-        info?: string;
-        upgradedClientState?: {
-            typeUrl?: string;
-            value?: Uint8Array;
-        };
-    } & {
-        name?: string;
-        time?: Date;
-        height?: any;
-        info?: string;
-        upgradedClientState?: {
-            typeUrl?: string;
-            value?: Uint8Array;
-        } & {
-            typeUrl?: string;
-            value?: Uint8Array;
-        } & Record<Exclude<keyof I["upgradedClientState"], keyof Any>, never>;
-    } & Record<Exclude<keyof I, keyof Plan>, never>>(object: I): Plan;
+    fromPartial(object: DeepPartial<Plan>): Plan;
 };
 export declare const SoftwareUpgradeProposal: {
     encode(message: SoftwareUpgradeProposal, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): SoftwareUpgradeProposal;
     fromJSON(object: any): SoftwareUpgradeProposal;
     toJSON(message: SoftwareUpgradeProposal): unknown;
-    fromPartial<I extends {
-        title?: string;
-        description?: string;
-        plan?: {
-            name?: string;
-            time?: Date;
-            height?: any;
-            info?: string;
-            upgradedClientState?: {
-                typeUrl?: string;
-                value?: Uint8Array;
-            };
-        };
-    } & {
-        title?: string;
-        description?: string;
-        plan?: {
-            name?: string;
-            time?: Date;
-            height?: any;
-            info?: string;
-            upgradedClientState?: {
-                typeUrl?: string;
-                value?: Uint8Array;
-            };
-        } & {
-            name?: string;
-            time?: Date;
-            height?: any;
-            info?: string;
-            upgradedClientState?: {
-                typeUrl?: string;
-                value?: Uint8Array;
-            } & {
-                typeUrl?: string;
-                value?: Uint8Array;
-            } & Record<Exclude<keyof I["plan"]["upgradedClientState"], keyof Any>, never>;
-        } & Record<Exclude<keyof I["plan"], keyof Plan>, never>;
-    } & Record<Exclude<keyof I, keyof SoftwareUpgradeProposal>, never>>(object: I): SoftwareUpgradeProposal;
+    fromPartial(object: DeepPartial<SoftwareUpgradeProposal>): SoftwareUpgradeProposal;
 };
 export declare const CancelSoftwareUpgradeProposal: {
     encode(message: CancelSoftwareUpgradeProposal, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): CancelSoftwareUpgradeProposal;
     fromJSON(object: any): CancelSoftwareUpgradeProposal;
     toJSON(message: CancelSoftwareUpgradeProposal): unknown;
-    fromPartial<I extends {
-        title?: string;
-        description?: string;
-    } & {
-        title?: string;
-        description?: string;
-    } & Record<Exclude<keyof I, keyof CancelSoftwareUpgradeProposal>, never>>(object: I): CancelSoftwareUpgradeProposal;
+    fromPartial(object: DeepPartial<CancelSoftwareUpgradeProposal>): CancelSoftwareUpgradeProposal;
 };
 export declare const ModuleVersion: {
     encode(message: ModuleVersion, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): ModuleVersion;
     fromJSON(object: any): ModuleVersion;
     toJSON(message: ModuleVersion): unknown;
-    fromPartial<I extends {
-        name?: string;
-        version?: any;
-    } & {
-        name?: string;
-        version?: any;
-    } & Record<Exclude<keyof I, keyof ModuleVersion>, never>>(object: I): ModuleVersion;
+    fromPartial(object: DeepPartial<ModuleVersion>): ModuleVersion;
 };
