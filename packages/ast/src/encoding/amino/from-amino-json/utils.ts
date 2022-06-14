@@ -255,7 +255,7 @@ export const fromAmino = {
             ]
         );
 
-        return t.objectProperty(t.identifier(context.options.aminoCasingFn(field.name)),
+        return t.objectProperty(t.identifier(field.name),
             expr
         );
     },
