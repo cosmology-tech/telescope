@@ -9,7 +9,19 @@ store.traverseAll();
 
 it('getPackagesBundled', () => {
     const bundle = getPackagesBundled(store);
-    expect(Object.keys(bundle)).toEqual(["akash", "ics23", "cosmos_proto", "cosmos", "cosmwasm", "gogoproto", "google", "ibc", "osmosis", "secret", "tendermint"]);
+    expect(Object.keys(bundle)).toEqual(
+        ["akash",
+            "ics23",
+            "cosmos_proto",
+            "cosmos",
+            "cosmwasm",
+            "evmos",
+            "gogoproto",
+            "google",
+            "ibc",
+            "osmosis",
+            "secret",
+            "tendermint"]);
 });
 
 it('bundlePackages', () => {
