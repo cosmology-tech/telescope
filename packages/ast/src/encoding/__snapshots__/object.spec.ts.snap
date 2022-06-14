@@ -534,6 +534,110 @@ exports[`cosmwasm/wasm/v1/query 1`] = `
 };"
 `;
 
+exports[`evmos/fees/v1/tx 1`] = `
+"export const MsgRegisterDevFeeInfo = {
+  encode(message: MsgRegisterDevFeeInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.contractAddress !== \\"\\") {
+      writer.uint32(10).string(message.contractAddress);
+    }
+
+    if (message.deployerAddress !== \\"\\") {
+      writer.uint32(18).string(message.deployerAddress);
+    }
+
+    if (message.withdrawAddress !== \\"\\") {
+      writer.uint32(26).string(message.withdrawAddress);
+    }
+
+    writer.uint32(34).fork();
+
+    for (const v of message.nonces) {
+      writer.uint64(v);
+    }
+
+    writer.ldelim();
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgRegisterDevFeeInfo {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgRegisterDevFeeInfo();
+
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        case 1:
+          message.contractAddress = reader.string();
+          break;
+
+        case 2:
+          message.deployerAddress = reader.string();
+          break;
+
+        case 3:
+          message.withdrawAddress = reader.string();
+          break;
+
+        case 4:
+          if ((tag & 7) === 2) {
+            const end2 = reader.uint32() + reader.pos;
+
+            while (reader.pos < end2) {
+              message.nonces.push((reader.uint64() as Long));
+            }
+          } else {
+            message.nonces.push((reader.uint64() as Long));
+          }
+
+          break;
+
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+
+  fromJSON(object: any): MsgRegisterDevFeeInfo {
+    return {
+      contractAddress: isSet(object.contractAddress) ? String(object.contractAddress) : \\"\\",
+      deployerAddress: isSet(object.deployerAddress) ? String(object.deployerAddress) : \\"\\",
+      withdrawAddress: isSet(object.withdrawAddress) ? String(object.withdrawAddress) : \\"\\",
+      nonces: Array.isArray(object?.nonces) ? object.nonces.map((e: any) => Long.fromString(e)) : []
+    };
+  },
+
+  toJSON(message: MsgRegisterDevFeeInfo): unknown {
+    const obj: any = {};
+    message.contractAddress !== undefined && (obj.contractAddress = message.contractAddress);
+    message.deployerAddress !== undefined && (obj.deployerAddress = message.deployerAddress);
+    message.withdrawAddress !== undefined && (obj.withdrawAddress = message.withdrawAddress);
+
+    if (message.nonces) {
+      obj.nonces = message.nonces.map(e => (e || Long.UZERO).toString());
+    } else {
+      obj.nonces = [];
+    }
+
+    return obj;
+  },
+
+  fromPartial(object: DeepPartial<MsgRegisterDevFeeInfo>): MsgRegisterDevFeeInfo {
+    const message = createBaseMsgRegisterDevFeeInfo();
+    message.contractAddress = object.contractAddress ?? \\"\\";
+    message.deployerAddress = object.deployerAddress ?? \\"\\";
+    message.withdrawAddress = object.withdrawAddress ?? \\"\\";
+    message.nonces = object.nonces?.map(e => Long.fromValue(e)) || [];
+    return message;
+  }
+
+};"
+`;
+
 exports[`google/api/expr/conformance/v1alpha1/conformance_service ParseRequest 1`] = `
 "export const ParseRequest = {
   encode(message: ParseRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
