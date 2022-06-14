@@ -6,6 +6,10 @@ import { protoFieldsToArray } from '../utils';
 import { fromAmino } from './utils';
 import { getFieldOptionality, getOneOfs } from '../../proto';
 
+const needsImplementation = (name: string, field: ProtoField) => {
+    throw new Error(`need to implement fromAmino (${field.type} rules[${field.rule}] name[${name}])`);
+}
+
 export interface FromAminoParseField {
     context: AminoParseContext;
     field: ProtoField;
@@ -45,8 +49,10 @@ export const fromAminoParseField = ({
                 return fromAmino.enumArray(args);
             case 'cosmos.base.v1beta1.Coin':
                 return fromAmino.arrayFrom(args);
-
         }
+        // TODO test case
+        return needsImplementation(field.name, field);
+
     }
 
     // casting special types
