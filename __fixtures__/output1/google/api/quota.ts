@@ -1,5 +1,5 @@
 import * as _m0 from "protobufjs/minimal";
-import { Exact, DeepPartial, Long, isSet, isObject } from "@osmonauts/helpers";
+import { DeepPartial, Long, isSet, isObject } from "@osmonauts/helpers";
 
 /**
  * Quota configuration helps to achieve fairness and budgeting in service
@@ -274,7 +274,7 @@ export const Quota = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Quota>, I>>(object: I): Quota {
+  fromPartial(object: DeepPartial<Quota>): Quota {
     const message = createBaseQuota();
     message.limits = object.limits?.map(e => QuotaLimit.fromPartial(e)) || [];
     message.metricRules = object.metricRules?.map(e => MetricRule.fromPartial(e)) || [];
@@ -343,7 +343,7 @@ export const MetricRule_MetricCostsEntry = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MetricRule_MetricCostsEntry>, I>>(object: I): MetricRule_MetricCostsEntry {
+  fromPartial(object: DeepPartial<MetricRule_MetricCostsEntry>): MetricRule_MetricCostsEntry {
     const message = createBaseMetricRule_MetricCostsEntry();
     message.key = object.key ?? "";
     message.value = object.value !== undefined && object.value !== null ? Long.fromValue(object.value) : Long.ZERO;
@@ -431,7 +431,7 @@ export const MetricRule = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MetricRule>, I>>(object: I): MetricRule {
+  fromPartial(object: DeepPartial<MetricRule>): MetricRule {
     const message = createBaseMetricRule();
     message.selector = object.selector ?? "";
     message.metricCosts = Object.entries(object.metricCosts ?? {}).reduce<{
@@ -508,7 +508,7 @@ export const QuotaLimit_ValuesEntry = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QuotaLimit_ValuesEntry>, I>>(object: I): QuotaLimit_ValuesEntry {
+  fromPartial(object: DeepPartial<QuotaLimit_ValuesEntry>): QuotaLimit_ValuesEntry {
     const message = createBaseQuotaLimit_ValuesEntry();
     message.key = object.key ?? "";
     message.value = object.value !== undefined && object.value !== null ? Long.fromValue(object.value) : Long.ZERO;
@@ -685,7 +685,7 @@ export const QuotaLimit = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QuotaLimit>, I>>(object: I): QuotaLimit {
+  fromPartial(object: DeepPartial<QuotaLimit>): QuotaLimit {
     const message = createBaseQuotaLimit();
     message.name = object.name ?? "";
     message.description = object.description ?? "";

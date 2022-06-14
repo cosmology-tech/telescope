@@ -1,5 +1,5 @@
 import * as _m0 from "protobufjs/minimal";
-import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
+import { isSet, DeepPartial } from "@osmonauts/helpers";
 
 /**
  * `Documentation` provides the information for describing a service.
@@ -277,7 +277,7 @@ export const Documentation = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Documentation>, I>>(object: I): Documentation {
+  fromPartial(object: DeepPartial<Documentation>): Documentation {
     const message = createBaseDocumentation();
     message.summary = object.summary ?? "";
     message.pages = object.pages?.map(e => Page.fromPartial(e)) || [];
@@ -361,7 +361,7 @@ export const DocumentationRule = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<DocumentationRule>, I>>(object: I): DocumentationRule {
+  fromPartial(object: DeepPartial<DocumentationRule>): DocumentationRule {
     const message = createBaseDocumentationRule();
     message.selector = object.selector ?? "";
     message.description = object.description ?? "";
@@ -448,7 +448,7 @@ export const Page = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Page>, I>>(object: I): Page {
+  fromPartial(object: DeepPartial<Page>): Page {
     const message = createBasePage();
     message.name = object.name ?? "";
     message.content = object.content ?? "";

@@ -3,7 +3,7 @@ import { Coin } from "../../cosmos/base/v1beta1/coin";
 import { Gauge } from "./gauge";
 import { Duration } from "../../google/protobuf/duration";
 import * as _m0 from "protobufjs/minimal";
-import { Exact, DeepPartial, Long, isSet } from "@osmonauts/helpers";
+import { DeepPartial, Long, isSet } from "@osmonauts/helpers";
 export interface ModuleToDistributeCoinsRequest {}
 export interface ModuleToDistributeCoinsResponse {
   coins: Coin[];
@@ -109,7 +109,7 @@ export const ModuleToDistributeCoinsRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<ModuleToDistributeCoinsRequest>, I>>(_: I): ModuleToDistributeCoinsRequest {
+  fromPartial(_: DeepPartial<ModuleToDistributeCoinsRequest>): ModuleToDistributeCoinsRequest {
     const message = createBaseModuleToDistributeCoinsRequest();
     return message;
   }
@@ -171,7 +171,7 @@ export const ModuleToDistributeCoinsResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<ModuleToDistributeCoinsResponse>, I>>(object: I): ModuleToDistributeCoinsResponse {
+  fromPartial(object: DeepPartial<ModuleToDistributeCoinsResponse>): ModuleToDistributeCoinsResponse {
     const message = createBaseModuleToDistributeCoinsResponse();
     message.coins = object.coins?.map(e => Coin.fromPartial(e)) || [];
     return message;
@@ -215,7 +215,7 @@ export const ModuleDistributedCoinsRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<ModuleDistributedCoinsRequest>, I>>(_: I): ModuleDistributedCoinsRequest {
+  fromPartial(_: DeepPartial<ModuleDistributedCoinsRequest>): ModuleDistributedCoinsRequest {
     const message = createBaseModuleDistributedCoinsRequest();
     return message;
   }
@@ -277,7 +277,7 @@ export const ModuleDistributedCoinsResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<ModuleDistributedCoinsResponse>, I>>(object: I): ModuleDistributedCoinsResponse {
+  fromPartial(object: DeepPartial<ModuleDistributedCoinsResponse>): ModuleDistributedCoinsResponse {
     const message = createBaseModuleDistributedCoinsResponse();
     message.coins = object.coins?.map(e => Coin.fromPartial(e)) || [];
     return message;
@@ -334,7 +334,7 @@ export const GaugeByIDRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<GaugeByIDRequest>, I>>(object: I): GaugeByIDRequest {
+  fromPartial(object: DeepPartial<GaugeByIDRequest>): GaugeByIDRequest {
     const message = createBaseGaugeByIDRequest();
     message.id = object.id !== undefined && object.id !== null ? Long.fromValue(object.id) : Long.UZERO;
     return message;
@@ -391,7 +391,7 @@ export const GaugeByIDResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<GaugeByIDResponse>, I>>(object: I): GaugeByIDResponse {
+  fromPartial(object: DeepPartial<GaugeByIDResponse>): GaugeByIDResponse {
     const message = createBaseGaugeByIDResponse();
     message.gauge = object.gauge !== undefined && object.gauge !== null ? Gauge.fromPartial(object.gauge) : undefined;
     return message;
@@ -448,7 +448,7 @@ export const GaugesRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<GaugesRequest>, I>>(object: I): GaugesRequest {
+  fromPartial(object: DeepPartial<GaugesRequest>): GaugesRequest {
     const message = createBaseGaugesRequest();
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
@@ -522,7 +522,7 @@ export const GaugesResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<GaugesResponse>, I>>(object: I): GaugesResponse {
+  fromPartial(object: DeepPartial<GaugesResponse>): GaugesResponse {
     const message = createBaseGaugesResponse();
     message.data = object.data?.map(e => Gauge.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
@@ -580,7 +580,7 @@ export const ActiveGaugesRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<ActiveGaugesRequest>, I>>(object: I): ActiveGaugesRequest {
+  fromPartial(object: DeepPartial<ActiveGaugesRequest>): ActiveGaugesRequest {
     const message = createBaseActiveGaugesRequest();
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
@@ -654,7 +654,7 @@ export const ActiveGaugesResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<ActiveGaugesResponse>, I>>(object: I): ActiveGaugesResponse {
+  fromPartial(object: DeepPartial<ActiveGaugesResponse>): ActiveGaugesResponse {
     const message = createBaseActiveGaugesResponse();
     message.data = object.data?.map(e => Gauge.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
@@ -723,7 +723,7 @@ export const ActiveGaugesPerDenomRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<ActiveGaugesPerDenomRequest>, I>>(object: I): ActiveGaugesPerDenomRequest {
+  fromPartial(object: DeepPartial<ActiveGaugesPerDenomRequest>): ActiveGaugesPerDenomRequest {
     const message = createBaseActiveGaugesPerDenomRequest();
     message.denom = object.denom ?? "";
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
@@ -798,7 +798,7 @@ export const ActiveGaugesPerDenomResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<ActiveGaugesPerDenomResponse>, I>>(object: I): ActiveGaugesPerDenomResponse {
+  fromPartial(object: DeepPartial<ActiveGaugesPerDenomResponse>): ActiveGaugesPerDenomResponse {
     const message = createBaseActiveGaugesPerDenomResponse();
     message.data = object.data?.map(e => Gauge.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
@@ -856,7 +856,7 @@ export const UpcomingGaugesRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<UpcomingGaugesRequest>, I>>(object: I): UpcomingGaugesRequest {
+  fromPartial(object: DeepPartial<UpcomingGaugesRequest>): UpcomingGaugesRequest {
     const message = createBaseUpcomingGaugesRequest();
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
@@ -930,7 +930,7 @@ export const UpcomingGaugesResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<UpcomingGaugesResponse>, I>>(object: I): UpcomingGaugesResponse {
+  fromPartial(object: DeepPartial<UpcomingGaugesResponse>): UpcomingGaugesResponse {
     const message = createBaseUpcomingGaugesResponse();
     message.data = object.data?.map(e => Gauge.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
@@ -1029,7 +1029,7 @@ export const RewardsEstRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<RewardsEstRequest>, I>>(object: I): RewardsEstRequest {
+  fromPartial(object: DeepPartial<RewardsEstRequest>): RewardsEstRequest {
     const message = createBaseRewardsEstRequest();
     message.owner = object.owner ?? "";
     message.lockIds = object.lockIds?.map(e => Long.fromValue(e)) || [];
@@ -1094,7 +1094,7 @@ export const RewardsEstResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<RewardsEstResponse>, I>>(object: I): RewardsEstResponse {
+  fromPartial(object: DeepPartial<RewardsEstResponse>): RewardsEstResponse {
     const message = createBaseRewardsEstResponse();
     message.coins = object.coins?.map(e => Coin.fromPartial(e)) || [];
     return message;
@@ -1138,7 +1138,7 @@ export const QueryLockableDurationsRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryLockableDurationsRequest>, I>>(_: I): QueryLockableDurationsRequest {
+  fromPartial(_: DeepPartial<QueryLockableDurationsRequest>): QueryLockableDurationsRequest {
     const message = createBaseQueryLockableDurationsRequest();
     return message;
   }
@@ -1200,7 +1200,7 @@ export const QueryLockableDurationsResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryLockableDurationsResponse>, I>>(object: I): QueryLockableDurationsResponse {
+  fromPartial(object: DeepPartial<QueryLockableDurationsResponse>): QueryLockableDurationsResponse {
     const message = createBaseQueryLockableDurationsResponse();
     message.lockableDurations = object.lockableDurations?.map(e => Duration.fromPartial(e)) || [];
     return message;

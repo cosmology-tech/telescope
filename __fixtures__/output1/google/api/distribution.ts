@@ -1,7 +1,7 @@
 import { Timestamp } from "../protobuf/timestamp";
 import { Any } from "../protobuf/any";
 import * as _m0 from "protobufjs/minimal";
-import { Long, isSet, Exact, DeepPartial, toTimestamp, fromTimestamp, fromJsonTimestamp } from "@osmonauts/helpers";
+import { Long, isSet, DeepPartial, toTimestamp, fromTimestamp, fromJsonTimestamp } from "@osmonauts/helpers";
 
 /**
  * `Distribution` contains summary statistics for a population of values. It
@@ -352,7 +352,7 @@ export const Distribution = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Distribution>, I>>(object: I): Distribution {
+  fromPartial(object: DeepPartial<Distribution>): Distribution {
     const message = createBaseDistribution();
     message.count = object.count !== undefined && object.count !== null ? Long.fromValue(object.count) : Long.ZERO;
     message.mean = object.mean ?? 0;
@@ -426,7 +426,7 @@ export const Distribution_Range = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Distribution_Range>, I>>(object: I): Distribution_Range {
+  fromPartial(object: DeepPartial<Distribution_Range>): Distribution_Range {
     const message = createBaseDistribution_Range();
     message.min = object.min ?? 0;
     message.max = object.max ?? 0;
@@ -506,7 +506,7 @@ export const Distribution_BucketOptions = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Distribution_BucketOptions>, I>>(object: I): Distribution_BucketOptions {
+  fromPartial(object: DeepPartial<Distribution_BucketOptions>): Distribution_BucketOptions {
     const message = createBaseDistribution_BucketOptions();
     message.linearBuckets = object.linearBuckets !== undefined && object.linearBuckets !== null ? Distribution_BucketOptions_Linear.fromPartial(object.linearBuckets) : undefined;
     message.exponentialBuckets = object.exponentialBuckets !== undefined && object.exponentialBuckets !== null ? Distribution_BucketOptions_Exponential.fromPartial(object.exponentialBuckets) : undefined;
@@ -587,7 +587,7 @@ export const Distribution_BucketOptions_Linear = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Distribution_BucketOptions_Linear>, I>>(object: I): Distribution_BucketOptions_Linear {
+  fromPartial(object: DeepPartial<Distribution_BucketOptions_Linear>): Distribution_BucketOptions_Linear {
     const message = createBaseDistribution_BucketOptions_Linear();
     message.numFiniteBuckets = object.numFiniteBuckets ?? 0;
     message.width = object.width ?? 0;
@@ -668,7 +668,7 @@ export const Distribution_BucketOptions_Exponential = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Distribution_BucketOptions_Exponential>, I>>(object: I): Distribution_BucketOptions_Exponential {
+  fromPartial(object: DeepPartial<Distribution_BucketOptions_Exponential>): Distribution_BucketOptions_Exponential {
     const message = createBaseDistribution_BucketOptions_Exponential();
     message.numFiniteBuckets = object.numFiniteBuckets ?? 0;
     message.growthFactor = object.growthFactor ?? 0;
@@ -745,7 +745,7 @@ export const Distribution_BucketOptions_Explicit = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Distribution_BucketOptions_Explicit>, I>>(object: I): Distribution_BucketOptions_Explicit {
+  fromPartial(object: DeepPartial<Distribution_BucketOptions_Explicit>): Distribution_BucketOptions_Explicit {
     const message = createBaseDistribution_BucketOptions_Explicit();
     message.bounds = object.bounds?.map(e => e) || [];
     return message;
@@ -830,7 +830,7 @@ export const Distribution_Exemplar = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Distribution_Exemplar>, I>>(object: I): Distribution_Exemplar {
+  fromPartial(object: DeepPartial<Distribution_Exemplar>): Distribution_Exemplar {
     const message = createBaseDistribution_Exemplar();
     message.value = object.value ?? 0;
     message.timestamp = object.timestamp ?? undefined;

@@ -1,5 +1,5 @@
 import * as _m0 from "protobufjs/minimal";
-import { Exact, DeepPartial, isSet } from "@osmonauts/helpers";
+import { DeepPartial, isSet } from "@osmonauts/helpers";
 
 /**
  * `Authentication` defines the authentication configuration for API methods
@@ -315,7 +315,7 @@ export const Authentication = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Authentication>, I>>(object: I): Authentication {
+  fromPartial(object: DeepPartial<Authentication>): Authentication {
     const message = createBaseAuthentication();
     message.rules = object.rules?.map(e => AuthenticationRule.fromPartial(e)) || [];
     message.providers = object.providers?.map(e => AuthProvider.fromPartial(e)) || [];
@@ -412,7 +412,7 @@ export const AuthenticationRule = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<AuthenticationRule>, I>>(object: I): AuthenticationRule {
+  fromPartial(object: DeepPartial<AuthenticationRule>): AuthenticationRule {
     const message = createBaseAuthenticationRule();
     message.selector = object.selector ?? "";
     message.oauth = object.oauth !== undefined && object.oauth !== null ? OAuthRequirements.fromPartial(object.oauth) : undefined;
@@ -494,7 +494,7 @@ export const JwtLocation = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<JwtLocation>, I>>(object: I): JwtLocation {
+  fromPartial(object: DeepPartial<JwtLocation>): JwtLocation {
     const message = createBaseJwtLocation();
     message.header = object.header ?? undefined;
     message.query = object.query ?? undefined;
@@ -614,7 +614,7 @@ export const AuthProvider = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<AuthProvider>, I>>(object: I): AuthProvider {
+  fromPartial(object: DeepPartial<AuthProvider>): AuthProvider {
     const message = createBaseAuthProvider();
     message.id = object.id ?? "";
     message.issuer = object.issuer ?? "";
@@ -676,7 +676,7 @@ export const OAuthRequirements = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<OAuthRequirements>, I>>(object: I): OAuthRequirements {
+  fromPartial(object: DeepPartial<OAuthRequirements>): OAuthRequirements {
     const message = createBaseOAuthRequirements();
     message.canonicalScopes = object.canonicalScopes ?? "";
     return message;
@@ -744,7 +744,7 @@ export const AuthRequirement = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<AuthRequirement>, I>>(object: I): AuthRequirement {
+  fromPartial(object: DeepPartial<AuthRequirement>): AuthRequirement {
     const message = createBaseAuthRequirement();
     message.providerId = object.providerId ?? "";
     message.audiences = object.audiences ?? "";

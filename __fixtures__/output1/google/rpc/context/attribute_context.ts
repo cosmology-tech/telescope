@@ -3,7 +3,7 @@ import { Timestamp } from "../../protobuf/timestamp";
 import { Duration } from "../../protobuf/duration";
 import { Any } from "../../protobuf/any";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, Exact, DeepPartial, Long, isObject, toTimestamp, fromTimestamp, fromJsonTimestamp } from "@osmonauts/helpers";
+import { isSet, DeepPartial, Long, isObject, toTimestamp, fromTimestamp, fromJsonTimestamp } from "@osmonauts/helpers";
 
 /**
  * This message defines the standard attribute vocabulary for Google APIs.
@@ -568,7 +568,7 @@ export const AttributeContext = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<AttributeContext>, I>>(object: I): AttributeContext {
+  fromPartial(object: DeepPartial<AttributeContext>): AttributeContext {
     const message = createBaseAttributeContext();
     message.origin = object.origin !== undefined && object.origin !== null ? AttributeContext_Peer.fromPartial(object.origin) : undefined;
     message.source = object.source !== undefined && object.source !== null ? AttributeContext_Peer.fromPartial(object.source) : undefined;
@@ -643,7 +643,7 @@ export const AttributeContext_Peer_LabelsEntry = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<AttributeContext_Peer_LabelsEntry>, I>>(object: I): AttributeContext_Peer_LabelsEntry {
+  fromPartial(object: DeepPartial<AttributeContext_Peer_LabelsEntry>): AttributeContext_Peer_LabelsEntry {
     const message = createBaseAttributeContext_Peer_LabelsEntry();
     message.key = object.key ?? "";
     message.value = object.value ?? "";
@@ -765,7 +765,7 @@ export const AttributeContext_Peer = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<AttributeContext_Peer>, I>>(object: I): AttributeContext_Peer {
+  fromPartial(object: DeepPartial<AttributeContext_Peer>): AttributeContext_Peer {
     const message = createBaseAttributeContext_Peer();
     message.ip = object.ip ?? "";
     message.port = object.port !== undefined && object.port !== null ? Long.fromValue(object.port) : Long.ZERO;
@@ -867,7 +867,7 @@ export const AttributeContext_Api = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<AttributeContext_Api>, I>>(object: I): AttributeContext_Api {
+  fromPartial(object: DeepPartial<AttributeContext_Api>): AttributeContext_Api {
     const message = createBaseAttributeContext_Api();
     message.service = object.service ?? "";
     message.operation = object.operation ?? "";
@@ -983,7 +983,7 @@ export const AttributeContext_Auth = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<AttributeContext_Auth>, I>>(object: I): AttributeContext_Auth {
+  fromPartial(object: DeepPartial<AttributeContext_Auth>): AttributeContext_Auth {
     const message = createBaseAttributeContext_Auth();
     message.principal = object.principal ?? "";
     message.audiences = object.audiences?.map(e => e) || [];
@@ -1055,7 +1055,7 @@ export const AttributeContext_Request_HeadersEntry = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<AttributeContext_Request_HeadersEntry>, I>>(object: I): AttributeContext_Request_HeadersEntry {
+  fromPartial(object: DeepPartial<AttributeContext_Request_HeadersEntry>): AttributeContext_Request_HeadersEntry {
     const message = createBaseAttributeContext_Request_HeadersEntry();
     message.key = object.key ?? "";
     message.value = object.value ?? "";
@@ -1254,7 +1254,7 @@ export const AttributeContext_Request = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<AttributeContext_Request>, I>>(object: I): AttributeContext_Request {
+  fromPartial(object: DeepPartial<AttributeContext_Request>): AttributeContext_Request {
     const message = createBaseAttributeContext_Request();
     message.id = object.id ?? "";
     message.method = object.method ?? "";
@@ -1341,7 +1341,7 @@ export const AttributeContext_Response_HeadersEntry = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<AttributeContext_Response_HeadersEntry>, I>>(object: I): AttributeContext_Response_HeadersEntry {
+  fromPartial(object: DeepPartial<AttributeContext_Response_HeadersEntry>): AttributeContext_Response_HeadersEntry {
     const message = createBaseAttributeContext_Response_HeadersEntry();
     message.key = object.key ?? "";
     message.value = object.value ?? "";
@@ -1463,7 +1463,7 @@ export const AttributeContext_Response = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<AttributeContext_Response>, I>>(object: I): AttributeContext_Response {
+  fromPartial(object: DeepPartial<AttributeContext_Response>): AttributeContext_Response {
     const message = createBaseAttributeContext_Response();
     message.code = object.code !== undefined && object.code !== null ? Long.fromValue(object.code) : Long.ZERO;
     message.size = object.size !== undefined && object.size !== null ? Long.fromValue(object.size) : Long.ZERO;
@@ -1543,7 +1543,7 @@ export const AttributeContext_Resource_LabelsEntry = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<AttributeContext_Resource_LabelsEntry>, I>>(object: I): AttributeContext_Resource_LabelsEntry {
+  fromPartial(object: DeepPartial<AttributeContext_Resource_LabelsEntry>): AttributeContext_Resource_LabelsEntry {
     const message = createBaseAttributeContext_Resource_LabelsEntry();
     message.key = object.key ?? "";
     message.value = object.value ?? "";
@@ -1612,7 +1612,7 @@ export const AttributeContext_Resource_AnnotationsEntry = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<AttributeContext_Resource_AnnotationsEntry>, I>>(object: I): AttributeContext_Resource_AnnotationsEntry {
+  fromPartial(object: DeepPartial<AttributeContext_Resource_AnnotationsEntry>): AttributeContext_Resource_AnnotationsEntry {
     const message = createBaseAttributeContext_Resource_AnnotationsEntry();
     message.key = object.key ?? "";
     message.value = object.value ?? "";
@@ -1831,7 +1831,7 @@ export const AttributeContext_Resource = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<AttributeContext_Resource>, I>>(object: I): AttributeContext_Resource {
+  fromPartial(object: DeepPartial<AttributeContext_Resource>): AttributeContext_Resource {
     const message = createBaseAttributeContext_Resource();
     message.service = object.service ?? "";
     message.name = object.name ?? "";

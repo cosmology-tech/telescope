@@ -1,7 +1,7 @@
 import { MetricValueSet } from "./metric_value";
 import { Status } from "../../../rpc/status";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, Exact, DeepPartial, isObject } from "@osmonauts/helpers";
+import { isSet, DeepPartial, isObject } from "@osmonauts/helpers";
 
 /** Supported quota modes. */
 export enum QuotaOperation_QuotaMode {
@@ -415,7 +415,7 @@ export const AllocateQuotaRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<AllocateQuotaRequest>, I>>(object: I): AllocateQuotaRequest {
+  fromPartial(object: DeepPartial<AllocateQuotaRequest>): AllocateQuotaRequest {
     const message = createBaseAllocateQuotaRequest();
     message.serviceName = object.serviceName ?? "";
     message.allocateOperation = object.allocateOperation !== undefined && object.allocateOperation !== null ? QuotaOperation.fromPartial(object.allocateOperation) : undefined;
@@ -485,7 +485,7 @@ export const QuotaOperation_LabelsEntry = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QuotaOperation_LabelsEntry>, I>>(object: I): QuotaOperation_LabelsEntry {
+  fromPartial(object: DeepPartial<QuotaOperation_LabelsEntry>): QuotaOperation_LabelsEntry {
     const message = createBaseQuotaOperation_LabelsEntry();
     message.key = object.key ?? "";
     message.value = object.value ?? "";
@@ -623,7 +623,7 @@ export const QuotaOperation = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QuotaOperation>, I>>(object: I): QuotaOperation {
+  fromPartial(object: DeepPartial<QuotaOperation>): QuotaOperation {
     const message = createBaseQuotaOperation();
     message.operationId = object.operationId ?? "";
     message.methodName = object.methodName ?? "";
@@ -737,7 +737,7 @@ export const AllocateQuotaResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<AllocateQuotaResponse>, I>>(object: I): AllocateQuotaResponse {
+  fromPartial(object: DeepPartial<AllocateQuotaResponse>): AllocateQuotaResponse {
     const message = createBaseAllocateQuotaResponse();
     message.operationId = object.operationId ?? "";
     message.allocateErrors = object.allocateErrors?.map(e => QuotaError.fromPartial(e)) || [];
@@ -830,7 +830,7 @@ export const QuotaError = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QuotaError>, I>>(object: I): QuotaError {
+  fromPartial(object: DeepPartial<QuotaError>): QuotaError {
     const message = createBaseQuotaError();
     message.code = object.code ?? 0;
     message.subject = object.subject ?? "";

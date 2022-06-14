@@ -1,6 +1,6 @@
 import { Coin } from "../../../cosmos/base/v1beta1/coin";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, bytesFromBase64, base64FromBytes, Exact, DeepPartial, Long } from "@osmonauts/helpers";
+import { isSet, bytesFromBase64, base64FromBytes, DeepPartial, Long } from "@osmonauts/helpers";
 export interface MsgStoreCode {
   sender: Uint8Array;
 
@@ -118,7 +118,7 @@ export const MsgStoreCode = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgStoreCode>, I>>(object: I): MsgStoreCode {
+  fromPartial(object: DeepPartial<MsgStoreCode>): MsgStoreCode {
     const message = createBaseMsgStoreCode();
     message.sender = object.sender ?? new Uint8Array();
     message.wasmByteCode = object.wasmByteCode ?? new Uint8Array();
@@ -250,7 +250,7 @@ export const MsgInstantiateContract = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgInstantiateContract>, I>>(object: I): MsgInstantiateContract {
+  fromPartial(object: DeepPartial<MsgInstantiateContract>): MsgInstantiateContract {
     const message = createBaseMsgInstantiateContract();
     message.sender = object.sender ?? new Uint8Array();
     message.callbackCodeHash = object.callbackCodeHash ?? "";
@@ -374,7 +374,7 @@ export const MsgExecuteContract = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgExecuteContract>, I>>(object: I): MsgExecuteContract {
+  fromPartial(object: DeepPartial<MsgExecuteContract>): MsgExecuteContract {
     const message = createBaseMsgExecuteContract();
     message.sender = object.sender ?? new Uint8Array();
     message.contract = object.contract ?? new Uint8Array();

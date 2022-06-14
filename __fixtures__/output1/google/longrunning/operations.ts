@@ -2,7 +2,7 @@ import { Duration } from "../protobuf/duration";
 import { Any } from "../protobuf/any";
 import { Status } from "../rpc/status";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
+import { isSet, DeepPartial } from "@osmonauts/helpers";
 
 /**
  * This resource represents a long-running operation that is the result of a
@@ -233,7 +233,7 @@ export const Operation = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Operation>, I>>(object: I): Operation {
+  fromPartial(object: DeepPartial<Operation>): Operation {
     const message = createBaseOperation();
     message.name = object.name ?? "";
     message.metadata = object.metadata !== undefined && object.metadata !== null ? Any.fromPartial(object.metadata) : undefined;
@@ -294,7 +294,7 @@ export const GetOperationRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<GetOperationRequest>, I>>(object: I): GetOperationRequest {
+  fromPartial(object: DeepPartial<GetOperationRequest>): GetOperationRequest {
     const message = createBaseGetOperationRequest();
     message.name = object.name ?? "";
     return message;
@@ -384,7 +384,7 @@ export const ListOperationsRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<ListOperationsRequest>, I>>(object: I): ListOperationsRequest {
+  fromPartial(object: DeepPartial<ListOperationsRequest>): ListOperationsRequest {
     const message = createBaseListOperationsRequest();
     message.name = object.name ?? "";
     message.filter = object.filter ?? "";
@@ -461,7 +461,7 @@ export const ListOperationsResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<ListOperationsResponse>, I>>(object: I): ListOperationsResponse {
+  fromPartial(object: DeepPartial<ListOperationsResponse>): ListOperationsResponse {
     const message = createBaseListOperationsResponse();
     message.operations = object.operations?.map(e => Operation.fromPartial(e)) || [];
     message.nextPageToken = object.nextPageToken ?? "";
@@ -519,7 +519,7 @@ export const CancelOperationRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<CancelOperationRequest>, I>>(object: I): CancelOperationRequest {
+  fromPartial(object: DeepPartial<CancelOperationRequest>): CancelOperationRequest {
     const message = createBaseCancelOperationRequest();
     message.name = object.name ?? "";
     return message;
@@ -576,7 +576,7 @@ export const DeleteOperationRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<DeleteOperationRequest>, I>>(object: I): DeleteOperationRequest {
+  fromPartial(object: DeepPartial<DeleteOperationRequest>): DeleteOperationRequest {
     const message = createBaseDeleteOperationRequest();
     message.name = object.name ?? "";
     return message;
@@ -644,7 +644,7 @@ export const WaitOperationRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<WaitOperationRequest>, I>>(object: I): WaitOperationRequest {
+  fromPartial(object: DeepPartial<WaitOperationRequest>): WaitOperationRequest {
     const message = createBaseWaitOperationRequest();
     message.name = object.name ?? "";
     message.timeout = object.timeout ?? undefined;
@@ -713,7 +713,7 @@ export const OperationInfo = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<OperationInfo>, I>>(object: I): OperationInfo {
+  fromPartial(object: DeepPartial<OperationInfo>): OperationInfo {
     const message = createBaseOperationInfo();
     message.responseType = object.responseType ?? "";
     message.metadataType = object.metadataType ?? "";

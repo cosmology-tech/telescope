@@ -1,5 +1,5 @@
 import * as _m0 from "protobufjs/minimal";
-import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
+import { isSet, DeepPartial } from "@osmonauts/helpers";
 
 /** This describes how the endpoint is implemented when the lease is deployed */
 export enum Endpoint_Kind {
@@ -93,7 +93,7 @@ export const Endpoint = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Endpoint>, I>>(object: I): Endpoint {
+  fromPartial(object: DeepPartial<Endpoint>): Endpoint {
     const message = createBaseEndpoint();
     message.kind = object.kind ?? 0;
     return message;

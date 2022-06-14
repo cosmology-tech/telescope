@@ -1,6 +1,6 @@
 import { FileDescriptorProto } from "../descriptor";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
+import { isSet, DeepPartial } from "@osmonauts/helpers";
 
 /** The version number of protocol compiler. */
 export interface Version {
@@ -209,7 +209,7 @@ export const Version = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Version>, I>>(object: I): Version {
+  fromPartial(object: DeepPartial<Version>): Version {
     const message = createBaseVersion();
     message.major = object.major ?? 0;
     message.minor = object.minor ?? 0;
@@ -314,7 +314,7 @@ export const CodeGeneratorRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<CodeGeneratorRequest>, I>>(object: I): CodeGeneratorRequest {
+  fromPartial(object: DeepPartial<CodeGeneratorRequest>): CodeGeneratorRequest {
     const message = createBaseCodeGeneratorRequest();
     message.fileToGenerate = object.fileToGenerate?.map(e => e) || [];
     message.parameter = object.parameter ?? "";
@@ -391,7 +391,7 @@ export const CodeGeneratorResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<CodeGeneratorResponse>, I>>(object: I): CodeGeneratorResponse {
+  fromPartial(object: DeepPartial<CodeGeneratorResponse>): CodeGeneratorResponse {
     const message = createBaseCodeGeneratorResponse();
     message.error = object.error ?? "";
     message.file = object.file?.map(e => CodeGeneratorResponse_File.fromPartial(e)) || [];
@@ -471,7 +471,7 @@ export const CodeGeneratorResponse_File = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<CodeGeneratorResponse_File>, I>>(object: I): CodeGeneratorResponse_File {
+  fromPartial(object: DeepPartial<CodeGeneratorResponse_File>): CodeGeneratorResponse_File {
     const message = createBaseCodeGeneratorResponse_File();
     message.name = object.name ?? "";
     message.insertionPoint = object.insertionPoint ?? "";

@@ -1,5 +1,5 @@
 import * as _m0 from "protobufjs/minimal";
-import { Exact, DeepPartial, isSet, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
+import { DeepPartial, isSet, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
 
 /** Pairs defines a repeated slice of Pair objects. */
 export interface Pairs {
@@ -67,7 +67,7 @@ export const Pairs = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Pairs>, I>>(object: I): Pairs {
+  fromPartial(object: DeepPartial<Pairs>): Pairs {
     const message = createBasePairs();
     message.pairs = object.pairs?.map(e => Pair.fromPartial(e)) || [];
     return message;
@@ -135,7 +135,7 @@ export const Pair = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Pair>, I>>(object: I): Pair {
+  fromPartial(object: DeepPartial<Pair>): Pair {
     const message = createBasePair();
     message.key = object.key ?? new Uint8Array();
     message.value = object.value ?? new Uint8Array();

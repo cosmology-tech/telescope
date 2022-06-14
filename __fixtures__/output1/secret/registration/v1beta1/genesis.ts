@@ -1,7 +1,7 @@
 import { RegistrationNodeInfo } from "./types";
 import { MasterCertificate } from "./msg";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
+import { isSet, DeepPartial } from "@osmonauts/helpers";
 export interface GenesisState {
   registration: RegistrationNodeInfo[];
   nodeExchMasterCertificate: MasterCertificate;
@@ -85,7 +85,7 @@ export const GenesisState = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<GenesisState>, I>>(object: I): GenesisState {
+  fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
     message.registration = object.registration?.map(e => RegistrationNodeInfo.fromPartial(e)) || [];
     message.nodeExchMasterCertificate = object.nodeExchMasterCertificate !== undefined && object.nodeExchMasterCertificate !== null ? MasterCertificate.fromPartial(object.nodeExchMasterCertificate) : undefined;

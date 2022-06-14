@@ -1,6 +1,6 @@
 import { LabelDescriptor } from "./label";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
+import { isSet, DeepPartial } from "@osmonauts/helpers";
 
 /**
  * A description of a log type. Example in YAML format:
@@ -129,7 +129,7 @@ export const LogDescriptor = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<LogDescriptor>, I>>(object: I): LogDescriptor {
+  fromPartial(object: DeepPartial<LogDescriptor>): LogDescriptor {
     const message = createBaseLogDescriptor();
     message.name = object.name ?? "";
     message.labels = object.labels?.map(e => LabelDescriptor.fromPartial(e)) || [];

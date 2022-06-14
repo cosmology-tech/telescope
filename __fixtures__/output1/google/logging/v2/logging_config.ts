@@ -1,7 +1,7 @@
 import { FieldMask } from "../../protobuf/field_mask";
 import { Timestamp } from "../../protobuf/timestamp";
 import * as _m0 from "protobufjs/minimal";
-import { toTimestamp, fromTimestamp, isSet, fromJsonTimestamp, Exact, DeepPartial, Long } from "@osmonauts/helpers";
+import { toTimestamp, fromTimestamp, isSet, fromJsonTimestamp, DeepPartial, Long } from "@osmonauts/helpers";
 
 /** Deprecated. This is unused. */
 export enum LogSink_VersionFormat {
@@ -1590,7 +1590,7 @@ export const LogBucket = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<LogBucket>, I>>(object: I): LogBucket {
+  fromPartial(object: DeepPartial<LogBucket>): LogBucket {
     const message = createBaseLogBucket();
     message.name = object.name ?? "";
     message.description = object.description ?? "";
@@ -1699,7 +1699,7 @@ export const LogView = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<LogView>, I>>(object: I): LogView {
+  fromPartial(object: DeepPartial<LogView>): LogView {
     const message = createBaseLogView();
     message.name = object.name ?? "";
     message.description = object.description ?? "";
@@ -1887,7 +1887,7 @@ export const LogSink = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<LogSink>, I>>(object: I): LogSink {
+  fromPartial(object: DeepPartial<LogSink>): LogSink {
     const message = createBaseLogSink();
     message.name = object.name ?? "";
     message.destination = object.destination ?? "";
@@ -1966,7 +1966,7 @@ export const BigQueryOptions = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<BigQueryOptions>, I>>(object: I): BigQueryOptions {
+  fromPartial(object: DeepPartial<BigQueryOptions>): BigQueryOptions {
     const message = createBaseBigQueryOptions();
     message.usePartitionedTables = object.usePartitionedTables ?? false;
     message.usesTimestampColumnPartitioning = object.usesTimestampColumnPartitioning ?? false;
@@ -2046,7 +2046,7 @@ export const ListBucketsRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<ListBucketsRequest>, I>>(object: I): ListBucketsRequest {
+  fromPartial(object: DeepPartial<ListBucketsRequest>): ListBucketsRequest {
     const message = createBaseListBucketsRequest();
     message.parent = object.parent ?? "";
     message.pageToken = object.pageToken ?? "";
@@ -2122,7 +2122,7 @@ export const ListBucketsResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<ListBucketsResponse>, I>>(object: I): ListBucketsResponse {
+  fromPartial(object: DeepPartial<ListBucketsResponse>): ListBucketsResponse {
     const message = createBaseListBucketsResponse();
     message.buckets = object.buckets?.map(e => LogBucket.fromPartial(e)) || [];
     message.nextPageToken = object.nextPageToken ?? "";
@@ -2202,7 +2202,7 @@ export const CreateBucketRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<CreateBucketRequest>, I>>(object: I): CreateBucketRequest {
+  fromPartial(object: DeepPartial<CreateBucketRequest>): CreateBucketRequest {
     const message = createBaseCreateBucketRequest();
     message.parent = object.parent ?? "";
     message.bucketId = object.bucketId ?? "";
@@ -2283,7 +2283,7 @@ export const UpdateBucketRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<UpdateBucketRequest>, I>>(object: I): UpdateBucketRequest {
+  fromPartial(object: DeepPartial<UpdateBucketRequest>): UpdateBucketRequest {
     const message = createBaseUpdateBucketRequest();
     message.name = object.name ?? "";
     message.bucket = object.bucket !== undefined && object.bucket !== null ? LogBucket.fromPartial(object.bucket) : undefined;
@@ -2342,7 +2342,7 @@ export const GetBucketRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<GetBucketRequest>, I>>(object: I): GetBucketRequest {
+  fromPartial(object: DeepPartial<GetBucketRequest>): GetBucketRequest {
     const message = createBaseGetBucketRequest();
     message.name = object.name ?? "";
     return message;
@@ -2399,7 +2399,7 @@ export const DeleteBucketRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<DeleteBucketRequest>, I>>(object: I): DeleteBucketRequest {
+  fromPartial(object: DeepPartial<DeleteBucketRequest>): DeleteBucketRequest {
     const message = createBaseDeleteBucketRequest();
     message.name = object.name ?? "";
     return message;
@@ -2456,7 +2456,7 @@ export const UndeleteBucketRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<UndeleteBucketRequest>, I>>(object: I): UndeleteBucketRequest {
+  fromPartial(object: DeepPartial<UndeleteBucketRequest>): UndeleteBucketRequest {
     const message = createBaseUndeleteBucketRequest();
     message.name = object.name ?? "";
     return message;
@@ -2535,7 +2535,7 @@ export const ListViewsRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<ListViewsRequest>, I>>(object: I): ListViewsRequest {
+  fromPartial(object: DeepPartial<ListViewsRequest>): ListViewsRequest {
     const message = createBaseListViewsRequest();
     message.parent = object.parent ?? "";
     message.pageToken = object.pageToken ?? "";
@@ -2611,7 +2611,7 @@ export const ListViewsResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<ListViewsResponse>, I>>(object: I): ListViewsResponse {
+  fromPartial(object: DeepPartial<ListViewsResponse>): ListViewsResponse {
     const message = createBaseListViewsResponse();
     message.views = object.views?.map(e => LogView.fromPartial(e)) || [];
     message.nextPageToken = object.nextPageToken ?? "";
@@ -2691,7 +2691,7 @@ export const CreateViewRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<CreateViewRequest>, I>>(object: I): CreateViewRequest {
+  fromPartial(object: DeepPartial<CreateViewRequest>): CreateViewRequest {
     const message = createBaseCreateViewRequest();
     message.parent = object.parent ?? "";
     message.viewId = object.viewId ?? "";
@@ -2772,7 +2772,7 @@ export const UpdateViewRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<UpdateViewRequest>, I>>(object: I): UpdateViewRequest {
+  fromPartial(object: DeepPartial<UpdateViewRequest>): UpdateViewRequest {
     const message = createBaseUpdateViewRequest();
     message.name = object.name ?? "";
     message.view = object.view !== undefined && object.view !== null ? LogView.fromPartial(object.view) : undefined;
@@ -2831,7 +2831,7 @@ export const GetViewRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<GetViewRequest>, I>>(object: I): GetViewRequest {
+  fromPartial(object: DeepPartial<GetViewRequest>): GetViewRequest {
     const message = createBaseGetViewRequest();
     message.name = object.name ?? "";
     return message;
@@ -2888,7 +2888,7 @@ export const DeleteViewRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<DeleteViewRequest>, I>>(object: I): DeleteViewRequest {
+  fromPartial(object: DeepPartial<DeleteViewRequest>): DeleteViewRequest {
     const message = createBaseDeleteViewRequest();
     message.name = object.name ?? "";
     return message;
@@ -2967,7 +2967,7 @@ export const ListSinksRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<ListSinksRequest>, I>>(object: I): ListSinksRequest {
+  fromPartial(object: DeepPartial<ListSinksRequest>): ListSinksRequest {
     const message = createBaseListSinksRequest();
     message.parent = object.parent ?? "";
     message.pageToken = object.pageToken ?? "";
@@ -3043,7 +3043,7 @@ export const ListSinksResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<ListSinksResponse>, I>>(object: I): ListSinksResponse {
+  fromPartial(object: DeepPartial<ListSinksResponse>): ListSinksResponse {
     const message = createBaseListSinksResponse();
     message.sinks = object.sinks?.map(e => LogSink.fromPartial(e)) || [];
     message.nextPageToken = object.nextPageToken ?? "";
@@ -3101,7 +3101,7 @@ export const GetSinkRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<GetSinkRequest>, I>>(object: I): GetSinkRequest {
+  fromPartial(object: DeepPartial<GetSinkRequest>): GetSinkRequest {
     const message = createBaseGetSinkRequest();
     message.sinkName = object.sinkName ?? "";
     return message;
@@ -3180,7 +3180,7 @@ export const CreateSinkRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<CreateSinkRequest>, I>>(object: I): CreateSinkRequest {
+  fromPartial(object: DeepPartial<CreateSinkRequest>): CreateSinkRequest {
     const message = createBaseCreateSinkRequest();
     message.parent = object.parent ?? "";
     message.sink = object.sink !== undefined && object.sink !== null ? LogSink.fromPartial(object.sink) : undefined;
@@ -3272,7 +3272,7 @@ export const UpdateSinkRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<UpdateSinkRequest>, I>>(object: I): UpdateSinkRequest {
+  fromPartial(object: DeepPartial<UpdateSinkRequest>): UpdateSinkRequest {
     const message = createBaseUpdateSinkRequest();
     message.sinkName = object.sinkName ?? "";
     message.sink = object.sink !== undefined && object.sink !== null ? LogSink.fromPartial(object.sink) : undefined;
@@ -3332,7 +3332,7 @@ export const DeleteSinkRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<DeleteSinkRequest>, I>>(object: I): DeleteSinkRequest {
+  fromPartial(object: DeepPartial<DeleteSinkRequest>): DeleteSinkRequest {
     const message = createBaseDeleteSinkRequest();
     message.sinkName = object.sinkName ?? "";
     return message;
@@ -3444,7 +3444,7 @@ export const LogExclusion = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<LogExclusion>, I>>(object: I): LogExclusion {
+  fromPartial(object: DeepPartial<LogExclusion>): LogExclusion {
     const message = createBaseLogExclusion();
     message.name = object.name ?? "";
     message.description = object.description ?? "";
@@ -3528,7 +3528,7 @@ export const ListExclusionsRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<ListExclusionsRequest>, I>>(object: I): ListExclusionsRequest {
+  fromPartial(object: DeepPartial<ListExclusionsRequest>): ListExclusionsRequest {
     const message = createBaseListExclusionsRequest();
     message.parent = object.parent ?? "";
     message.pageToken = object.pageToken ?? "";
@@ -3604,7 +3604,7 @@ export const ListExclusionsResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<ListExclusionsResponse>, I>>(object: I): ListExclusionsResponse {
+  fromPartial(object: DeepPartial<ListExclusionsResponse>): ListExclusionsResponse {
     const message = createBaseListExclusionsResponse();
     message.exclusions = object.exclusions?.map(e => LogExclusion.fromPartial(e)) || [];
     message.nextPageToken = object.nextPageToken ?? "";
@@ -3662,7 +3662,7 @@ export const GetExclusionRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<GetExclusionRequest>, I>>(object: I): GetExclusionRequest {
+  fromPartial(object: DeepPartial<GetExclusionRequest>): GetExclusionRequest {
     const message = createBaseGetExclusionRequest();
     message.name = object.name ?? "";
     return message;
@@ -3730,7 +3730,7 @@ export const CreateExclusionRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<CreateExclusionRequest>, I>>(object: I): CreateExclusionRequest {
+  fromPartial(object: DeepPartial<CreateExclusionRequest>): CreateExclusionRequest {
     const message = createBaseCreateExclusionRequest();
     message.parent = object.parent ?? "";
     message.exclusion = object.exclusion !== undefined && object.exclusion !== null ? LogExclusion.fromPartial(object.exclusion) : undefined;
@@ -3810,7 +3810,7 @@ export const UpdateExclusionRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<UpdateExclusionRequest>, I>>(object: I): UpdateExclusionRequest {
+  fromPartial(object: DeepPartial<UpdateExclusionRequest>): UpdateExclusionRequest {
     const message = createBaseUpdateExclusionRequest();
     message.name = object.name ?? "";
     message.exclusion = object.exclusion !== undefined && object.exclusion !== null ? LogExclusion.fromPartial(object.exclusion) : undefined;
@@ -3869,7 +3869,7 @@ export const DeleteExclusionRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<DeleteExclusionRequest>, I>>(object: I): DeleteExclusionRequest {
+  fromPartial(object: DeepPartial<DeleteExclusionRequest>): DeleteExclusionRequest {
     const message = createBaseDeleteExclusionRequest();
     message.name = object.name ?? "";
     return message;
@@ -3926,7 +3926,7 @@ export const GetCmekSettingsRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<GetCmekSettingsRequest>, I>>(object: I): GetCmekSettingsRequest {
+  fromPartial(object: DeepPartial<GetCmekSettingsRequest>): GetCmekSettingsRequest {
     const message = createBaseGetCmekSettingsRequest();
     message.name = object.name ?? "";
     return message;
@@ -4005,7 +4005,7 @@ export const UpdateCmekSettingsRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<UpdateCmekSettingsRequest>, I>>(object: I): UpdateCmekSettingsRequest {
+  fromPartial(object: DeepPartial<UpdateCmekSettingsRequest>): UpdateCmekSettingsRequest {
     const message = createBaseUpdateCmekSettingsRequest();
     message.name = object.name ?? "";
     message.cmekSettings = object.cmekSettings !== undefined && object.cmekSettings !== null ? CmekSettings.fromPartial(object.cmekSettings) : undefined;
@@ -4086,7 +4086,7 @@ export const CmekSettings = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<CmekSettings>, I>>(object: I): CmekSettings {
+  fromPartial(object: DeepPartial<CmekSettings>): CmekSettings {
     const message = createBaseCmekSettings();
     message.name = object.name ?? "";
     message.kmsKeyName = object.kmsKeyName ?? "";
@@ -4145,7 +4145,7 @@ export const GetSettingsRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<GetSettingsRequest>, I>>(object: I): GetSettingsRequest {
+  fromPartial(object: DeepPartial<GetSettingsRequest>): GetSettingsRequest {
     const message = createBaseGetSettingsRequest();
     message.name = object.name ?? "";
     return message;
@@ -4224,7 +4224,7 @@ export const UpdateSettingsRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<UpdateSettingsRequest>, I>>(object: I): UpdateSettingsRequest {
+  fromPartial(object: DeepPartial<UpdateSettingsRequest>): UpdateSettingsRequest {
     const message = createBaseUpdateSettingsRequest();
     message.name = object.name ?? "";
     message.settings = object.settings !== undefined && object.settings !== null ? Settings.fromPartial(object.settings) : undefined;
@@ -4327,7 +4327,7 @@ export const Settings = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Settings>, I>>(object: I): Settings {
+  fromPartial(object: DeepPartial<Settings>): Settings {
     const message = createBaseSettings();
     message.name = object.name ?? "";
     message.kmsKeyName = object.kmsKeyName ?? "";
@@ -4410,7 +4410,7 @@ export const CopyLogEntriesRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<CopyLogEntriesRequest>, I>>(object: I): CopyLogEntriesRequest {
+  fromPartial(object: DeepPartial<CopyLogEntriesRequest>): CopyLogEntriesRequest {
     const message = createBaseCopyLogEntriesRequest();
     message.name = object.name ?? "";
     message.filter = object.filter ?? "";
@@ -4535,7 +4535,7 @@ export const CopyLogEntriesMetadata = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<CopyLogEntriesMetadata>, I>>(object: I): CopyLogEntriesMetadata {
+  fromPartial(object: DeepPartial<CopyLogEntriesMetadata>): CopyLogEntriesMetadata {
     const message = createBaseCopyLogEntriesMetadata();
     message.startTime = object.startTime ?? undefined;
     message.endTime = object.endTime ?? undefined;
@@ -4598,7 +4598,7 @@ export const CopyLogEntriesResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<CopyLogEntriesResponse>, I>>(object: I): CopyLogEntriesResponse {
+  fromPartial(object: DeepPartial<CopyLogEntriesResponse>): CopyLogEntriesResponse {
     const message = createBaseCopyLogEntriesResponse();
     message.logEntriesCopiedCount = object.logEntriesCopiedCount !== undefined && object.logEntriesCopiedCount !== null ? Long.fromValue(object.logEntriesCopiedCount) : Long.ZERO;
     return message;

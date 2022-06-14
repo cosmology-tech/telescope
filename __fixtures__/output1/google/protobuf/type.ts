@@ -1,7 +1,7 @@
 import { SourceContext } from "./source_context";
 import { Any } from "./any";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
+import { isSet, DeepPartial } from "@osmonauts/helpers";
 
 /** Basic field types. */
 export enum Field_Kind {
@@ -539,7 +539,7 @@ export const Type = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Type>, I>>(object: I): Type {
+  fromPartial(object: DeepPartial<Type>): Type {
     const message = createBaseType();
     message.name = object.name ?? "";
     message.fields = object.fields?.map(e => Field.fromPartial(e)) || [];
@@ -706,7 +706,7 @@ export const Field = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Field>, I>>(object: I): Field {
+  fromPartial(object: DeepPartial<Field>): Field {
     const message = createBaseField();
     message.kind = object.kind ?? 0;
     message.cardinality = object.cardinality ?? 0;
@@ -827,7 +827,7 @@ export const Enum = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Enum>, I>>(object: I): Enum {
+  fromPartial(object: DeepPartial<Enum>): Enum {
     const message = createBaseEnum();
     message.name = object.name ?? "";
     message.enumvalue = object.enumvalue?.map(e => EnumValue.fromPartial(e)) || [];
@@ -916,7 +916,7 @@ export const EnumValue = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<EnumValue>, I>>(object: I): EnumValue {
+  fromPartial(object: DeepPartial<EnumValue>): EnumValue {
     const message = createBaseEnumValue();
     message.name = object.name ?? "";
     message.number = object.number ?? 0;
@@ -986,7 +986,7 @@ export const Option = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Option>, I>>(object: I): Option {
+  fromPartial(object: DeepPartial<Option>): Option {
     const message = createBaseOption();
     message.name = object.name ?? "";
     message.value = object.value !== undefined && object.value !== null ? Any.fromPartial(object.value) : undefined;

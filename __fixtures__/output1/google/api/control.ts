@@ -1,5 +1,5 @@
 import * as _m0 from "protobufjs/minimal";
-import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
+import { isSet, DeepPartial } from "@osmonauts/helpers";
 
 /**
  * Selects and configures the service controller used by the service.  The
@@ -63,7 +63,7 @@ export const Control = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Control>, I>>(object: I): Control {
+  fromPartial(object: DeepPartial<Control>): Control {
     const message = createBaseControl();
     message.environment = object.environment ?? "";
     return message;

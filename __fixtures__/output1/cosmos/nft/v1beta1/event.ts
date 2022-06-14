@@ -1,5 +1,5 @@
 import * as _m0 from "protobufjs/minimal";
-import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
+import { isSet, DeepPartial } from "@osmonauts/helpers";
 
 /** EventSend is emitted on Msg/Send */
 export interface EventSend {
@@ -105,7 +105,7 @@ export const EventSend = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<EventSend>, I>>(object: I): EventSend {
+  fromPartial(object: DeepPartial<EventSend>): EventSend {
     const message = createBaseEventSend();
     message.classId = object.classId ?? "";
     message.id = object.id ?? "";
@@ -187,7 +187,7 @@ export const EventMint = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<EventMint>, I>>(object: I): EventMint {
+  fromPartial(object: DeepPartial<EventMint>): EventMint {
     const message = createBaseEventMint();
     message.classId = object.classId ?? "";
     message.id = object.id ?? "";
@@ -268,7 +268,7 @@ export const EventBurn = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<EventBurn>, I>>(object: I): EventBurn {
+  fromPartial(object: DeepPartial<EventBurn>): EventBurn {
     const message = createBaseEventBurn();
     message.classId = object.classId ?? "";
     message.id = object.id ?? "";

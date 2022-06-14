@@ -1,6 +1,6 @@
 import { Distribution_Exemplar } from "../../distribution";
 import * as _m0 from "protobufjs/minimal";
-import { Long, isSet, Exact, DeepPartial } from "@osmonauts/helpers";
+import { Long, isSet, DeepPartial } from "@osmonauts/helpers";
 
 /**
  * Distribution represents a frequency distribution of double-valued sample
@@ -310,7 +310,7 @@ export const Distribution = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Distribution>, I>>(object: I): Distribution {
+  fromPartial(object: DeepPartial<Distribution>): Distribution {
     const message = createBaseDistribution();
     message.count = object.count !== undefined && object.count !== null ? Long.fromValue(object.count) : Long.ZERO;
     message.mean = object.mean ?? 0;
@@ -398,7 +398,7 @@ export const Distribution_LinearBuckets = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Distribution_LinearBuckets>, I>>(object: I): Distribution_LinearBuckets {
+  fromPartial(object: DeepPartial<Distribution_LinearBuckets>): Distribution_LinearBuckets {
     const message = createBaseDistribution_LinearBuckets();
     message.numFiniteBuckets = object.numFiniteBuckets ?? 0;
     message.width = object.width ?? 0;
@@ -479,7 +479,7 @@ export const Distribution_ExponentialBuckets = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Distribution_ExponentialBuckets>, I>>(object: I): Distribution_ExponentialBuckets {
+  fromPartial(object: DeepPartial<Distribution_ExponentialBuckets>): Distribution_ExponentialBuckets {
     const message = createBaseDistribution_ExponentialBuckets();
     message.numFiniteBuckets = object.numFiniteBuckets ?? 0;
     message.growthFactor = object.growthFactor ?? 0;
@@ -556,7 +556,7 @@ export const Distribution_ExplicitBuckets = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Distribution_ExplicitBuckets>, I>>(object: I): Distribution_ExplicitBuckets {
+  fromPartial(object: DeepPartial<Distribution_ExplicitBuckets>): Distribution_ExplicitBuckets {
     const message = createBaseDistribution_ExplicitBuckets();
     message.bounds = object.bounds?.map(e => e) || [];
     return message;

@@ -1,7 +1,7 @@
 import { AttributeContext } from "../../../rpc/context/attribute_context";
 import { Status } from "../../../rpc/status";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, Exact, DeepPartial, isObject } from "@osmonauts/helpers";
+import { isSet, DeepPartial, isObject } from "@osmonauts/helpers";
 
 /** Request message for the Check method. */
 export interface CheckRequest {
@@ -217,7 +217,7 @@ export const CheckRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<CheckRequest>, I>>(object: I): CheckRequest {
+  fromPartial(object: DeepPartial<CheckRequest>): CheckRequest {
     const message = createBaseCheckRequest();
     message.serviceName = object.serviceName ?? "";
     message.serviceConfigId = object.serviceConfigId ?? "";
@@ -322,7 +322,7 @@ export const ResourceInfo = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<ResourceInfo>, I>>(object: I): ResourceInfo {
+  fromPartial(object: DeepPartial<ResourceInfo>): ResourceInfo {
     const message = createBaseResourceInfo();
     message.name = object.name ?? "";
     message.type = object.type ?? "";
@@ -394,7 +394,7 @@ export const CheckResponse_HeadersEntry = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<CheckResponse_HeadersEntry>, I>>(object: I): CheckResponse_HeadersEntry {
+  fromPartial(object: DeepPartial<CheckResponse_HeadersEntry>): CheckResponse_HeadersEntry {
     const message = createBaseCheckResponse_HeadersEntry();
     message.key = object.key ?? "";
     message.value = object.value ?? "";
@@ -482,7 +482,7 @@ export const CheckResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<CheckResponse>, I>>(object: I): CheckResponse {
+  fromPartial(object: DeepPartial<CheckResponse>): CheckResponse {
     const message = createBaseCheckResponse();
     message.status = object.status !== undefined && object.status !== null ? Status.fromPartial(object.status) : undefined;
     message.headers = Object.entries(object.headers ?? {}).reduce<{
@@ -576,7 +576,7 @@ export const ReportRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<ReportRequest>, I>>(object: I): ReportRequest {
+  fromPartial(object: DeepPartial<ReportRequest>): ReportRequest {
     const message = createBaseReportRequest();
     message.serviceName = object.serviceName ?? "";
     message.serviceConfigId = object.serviceConfigId ?? "";
@@ -622,7 +622,7 @@ export const ReportResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<ReportResponse>, I>>(_: I): ReportResponse {
+  fromPartial(_: DeepPartial<ReportResponse>): ReportResponse {
     const message = createBaseReportResponse();
     return message;
   }

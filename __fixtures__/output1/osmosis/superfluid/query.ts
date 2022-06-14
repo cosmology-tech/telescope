@@ -4,7 +4,7 @@ import { SuperfluidAssetType, SuperfluidAsset, OsmoEquivalentMultiplierRecord, S
 import { Coin } from "../../cosmos/base/v1beta1/coin";
 import { SyntheticLock } from "../lockup/lock";
 import * as _m0 from "protobufjs/minimal";
-import { Exact, DeepPartial, isSet, Long } from "@osmonauts/helpers";
+import { DeepPartial, isSet, Long } from "@osmonauts/helpers";
 export interface QueryParamsRequest {}
 export interface QueryParamsResponse {
   /** params defines the parameters of the module. */
@@ -124,7 +124,7 @@ export const QueryParamsRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryParamsRequest>, I>>(_: I): QueryParamsRequest {
+  fromPartial(_: DeepPartial<QueryParamsRequest>): QueryParamsRequest {
     const message = createBaseQueryParamsRequest();
     return message;
   }
@@ -180,7 +180,7 @@ export const QueryParamsResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryParamsResponse>, I>>(object: I): QueryParamsResponse {
+  fromPartial(object: DeepPartial<QueryParamsResponse>): QueryParamsResponse {
     const message = createBaseQueryParamsResponse();
     message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     return message;
@@ -237,7 +237,7 @@ export const AssetTypeRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<AssetTypeRequest>, I>>(object: I): AssetTypeRequest {
+  fromPartial(object: DeepPartial<AssetTypeRequest>): AssetTypeRequest {
     const message = createBaseAssetTypeRequest();
     message.denom = object.denom ?? "";
     return message;
@@ -294,7 +294,7 @@ export const AssetTypeResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<AssetTypeResponse>, I>>(object: I): AssetTypeResponse {
+  fromPartial(object: DeepPartial<AssetTypeResponse>): AssetTypeResponse {
     const message = createBaseAssetTypeResponse();
     message.assetType = object.assetType ?? 0;
     return message;
@@ -338,7 +338,7 @@ export const AllAssetsRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<AllAssetsRequest>, I>>(_: I): AllAssetsRequest {
+  fromPartial(_: DeepPartial<AllAssetsRequest>): AllAssetsRequest {
     const message = createBaseAllAssetsRequest();
     return message;
   }
@@ -400,7 +400,7 @@ export const AllAssetsResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<AllAssetsResponse>, I>>(object: I): AllAssetsResponse {
+  fromPartial(object: DeepPartial<AllAssetsResponse>): AllAssetsResponse {
     const message = createBaseAllAssetsResponse();
     message.assets = object.assets?.map(e => SuperfluidAsset.fromPartial(e)) || [];
     return message;
@@ -457,7 +457,7 @@ export const AssetMultiplierRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<AssetMultiplierRequest>, I>>(object: I): AssetMultiplierRequest {
+  fromPartial(object: DeepPartial<AssetMultiplierRequest>): AssetMultiplierRequest {
     const message = createBaseAssetMultiplierRequest();
     message.denom = object.denom ?? "";
     return message;
@@ -514,7 +514,7 @@ export const AssetMultiplierResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<AssetMultiplierResponse>, I>>(object: I): AssetMultiplierResponse {
+  fromPartial(object: DeepPartial<AssetMultiplierResponse>): AssetMultiplierResponse {
     const message = createBaseAssetMultiplierResponse();
     message.osmoEquivalentMultiplier = object.osmoEquivalentMultiplier !== undefined && object.osmoEquivalentMultiplier !== null ? OsmoEquivalentMultiplierRecord.fromPartial(object.osmoEquivalentMultiplier) : undefined;
     return message;
@@ -604,7 +604,7 @@ export const SuperfluidIntermediaryAccountInfo = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<SuperfluidIntermediaryAccountInfo>, I>>(object: I): SuperfluidIntermediaryAccountInfo {
+  fromPartial(object: DeepPartial<SuperfluidIntermediaryAccountInfo>): SuperfluidIntermediaryAccountInfo {
     const message = createBaseSuperfluidIntermediaryAccountInfo();
     message.denom = object.denom ?? "";
     message.valAddr = object.valAddr ?? "";
@@ -664,7 +664,7 @@ export const AllIntermediaryAccountsRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<AllIntermediaryAccountsRequest>, I>>(object: I): AllIntermediaryAccountsRequest {
+  fromPartial(object: DeepPartial<AllIntermediaryAccountsRequest>): AllIntermediaryAccountsRequest {
     const message = createBaseAllIntermediaryAccountsRequest();
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
@@ -738,7 +738,7 @@ export const AllIntermediaryAccountsResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<AllIntermediaryAccountsResponse>, I>>(object: I): AllIntermediaryAccountsResponse {
+  fromPartial(object: DeepPartial<AllIntermediaryAccountsResponse>): AllIntermediaryAccountsResponse {
     const message = createBaseAllIntermediaryAccountsResponse();
     message.accounts = object.accounts?.map(e => SuperfluidIntermediaryAccountInfo.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
@@ -796,7 +796,7 @@ export const ConnectedIntermediaryAccountRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<ConnectedIntermediaryAccountRequest>, I>>(object: I): ConnectedIntermediaryAccountRequest {
+  fromPartial(object: DeepPartial<ConnectedIntermediaryAccountRequest>): ConnectedIntermediaryAccountRequest {
     const message = createBaseConnectedIntermediaryAccountRequest();
     message.lockId = object.lockId !== undefined && object.lockId !== null ? Long.fromValue(object.lockId) : Long.UZERO;
     return message;
@@ -853,7 +853,7 @@ export const ConnectedIntermediaryAccountResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<ConnectedIntermediaryAccountResponse>, I>>(object: I): ConnectedIntermediaryAccountResponse {
+  fromPartial(object: DeepPartial<ConnectedIntermediaryAccountResponse>): ConnectedIntermediaryAccountResponse {
     const message = createBaseConnectedIntermediaryAccountResponse();
     message.account = object.account !== undefined && object.account !== null ? SuperfluidIntermediaryAccountInfo.fromPartial(object.account) : undefined;
     return message;
@@ -897,7 +897,7 @@ export const TotalSuperfluidDelegationsRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<TotalSuperfluidDelegationsRequest>, I>>(_: I): TotalSuperfluidDelegationsRequest {
+  fromPartial(_: DeepPartial<TotalSuperfluidDelegationsRequest>): TotalSuperfluidDelegationsRequest {
     const message = createBaseTotalSuperfluidDelegationsRequest();
     return message;
   }
@@ -953,7 +953,7 @@ export const TotalSuperfluidDelegationsResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<TotalSuperfluidDelegationsResponse>, I>>(object: I): TotalSuperfluidDelegationsResponse {
+  fromPartial(object: DeepPartial<TotalSuperfluidDelegationsResponse>): TotalSuperfluidDelegationsResponse {
     const message = createBaseTotalSuperfluidDelegationsResponse();
     message.totalDelegations = object.totalDelegations ?? "";
     return message;
@@ -1032,7 +1032,7 @@ export const SuperfluidDelegationAmountRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<SuperfluidDelegationAmountRequest>, I>>(object: I): SuperfluidDelegationAmountRequest {
+  fromPartial(object: DeepPartial<SuperfluidDelegationAmountRequest>): SuperfluidDelegationAmountRequest {
     const message = createBaseSuperfluidDelegationAmountRequest();
     message.delegatorAddress = object.delegatorAddress ?? "";
     message.validatorAddress = object.validatorAddress ?? "";
@@ -1097,7 +1097,7 @@ export const SuperfluidDelegationAmountResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<SuperfluidDelegationAmountResponse>, I>>(object: I): SuperfluidDelegationAmountResponse {
+  fromPartial(object: DeepPartial<SuperfluidDelegationAmountResponse>): SuperfluidDelegationAmountResponse {
     const message = createBaseSuperfluidDelegationAmountResponse();
     message.amount = object.amount?.map(e => Coin.fromPartial(e)) || [];
     return message;
@@ -1154,7 +1154,7 @@ export const SuperfluidDelegationsByDelegatorRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<SuperfluidDelegationsByDelegatorRequest>, I>>(object: I): SuperfluidDelegationsByDelegatorRequest {
+  fromPartial(object: DeepPartial<SuperfluidDelegationsByDelegatorRequest>): SuperfluidDelegationsByDelegatorRequest {
     const message = createBaseSuperfluidDelegationsByDelegatorRequest();
     message.delegatorAddress = object.delegatorAddress ?? "";
     return message;
@@ -1233,7 +1233,7 @@ export const SuperfluidDelegationsByDelegatorResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<SuperfluidDelegationsByDelegatorResponse>, I>>(object: I): SuperfluidDelegationsByDelegatorResponse {
+  fromPartial(object: DeepPartial<SuperfluidDelegationsByDelegatorResponse>): SuperfluidDelegationsByDelegatorResponse {
     const message = createBaseSuperfluidDelegationsByDelegatorResponse();
     message.superfluidDelegationRecords = object.superfluidDelegationRecords?.map(e => SuperfluidDelegationRecord.fromPartial(e)) || [];
     message.totalDelegatedCoins = object.totalDelegatedCoins?.map(e => Coin.fromPartial(e)) || [];
@@ -1302,7 +1302,7 @@ export const SuperfluidUndelegationsByDelegatorRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<SuperfluidUndelegationsByDelegatorRequest>, I>>(object: I): SuperfluidUndelegationsByDelegatorRequest {
+  fromPartial(object: DeepPartial<SuperfluidUndelegationsByDelegatorRequest>): SuperfluidUndelegationsByDelegatorRequest {
     const message = createBaseSuperfluidUndelegationsByDelegatorRequest();
     message.delegatorAddress = object.delegatorAddress ?? "";
     message.denom = object.denom ?? "";
@@ -1398,7 +1398,7 @@ export const SuperfluidUndelegationsByDelegatorResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<SuperfluidUndelegationsByDelegatorResponse>, I>>(object: I): SuperfluidUndelegationsByDelegatorResponse {
+  fromPartial(object: DeepPartial<SuperfluidUndelegationsByDelegatorResponse>): SuperfluidUndelegationsByDelegatorResponse {
     const message = createBaseSuperfluidUndelegationsByDelegatorResponse();
     message.superfluidDelegationRecords = object.superfluidDelegationRecords?.map(e => SuperfluidDelegationRecord.fromPartial(e)) || [];
     message.totalUndelegatedCoins = object.totalUndelegatedCoins?.map(e => Coin.fromPartial(e)) || [];
@@ -1468,7 +1468,7 @@ export const SuperfluidDelegationsByValidatorDenomRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<SuperfluidDelegationsByValidatorDenomRequest>, I>>(object: I): SuperfluidDelegationsByValidatorDenomRequest {
+  fromPartial(object: DeepPartial<SuperfluidDelegationsByValidatorDenomRequest>): SuperfluidDelegationsByValidatorDenomRequest {
     const message = createBaseSuperfluidDelegationsByValidatorDenomRequest();
     message.validatorAddress = object.validatorAddress ?? "";
     message.denom = object.denom ?? "";
@@ -1532,7 +1532,7 @@ export const SuperfluidDelegationsByValidatorDenomResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<SuperfluidDelegationsByValidatorDenomResponse>, I>>(object: I): SuperfluidDelegationsByValidatorDenomResponse {
+  fromPartial(object: DeepPartial<SuperfluidDelegationsByValidatorDenomResponse>): SuperfluidDelegationsByValidatorDenomResponse {
     const message = createBaseSuperfluidDelegationsByValidatorDenomResponse();
     message.superfluidDelegationRecords = object.superfluidDelegationRecords?.map(e => SuperfluidDelegationRecord.fromPartial(e)) || [];
     return message;
@@ -1600,7 +1600,7 @@ export const EstimateSuperfluidDelegatedAmountByValidatorDenomRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<EstimateSuperfluidDelegatedAmountByValidatorDenomRequest>, I>>(object: I): EstimateSuperfluidDelegatedAmountByValidatorDenomRequest {
+  fromPartial(object: DeepPartial<EstimateSuperfluidDelegatedAmountByValidatorDenomRequest>): EstimateSuperfluidDelegatedAmountByValidatorDenomRequest {
     const message = createBaseEstimateSuperfluidDelegatedAmountByValidatorDenomRequest();
     message.validatorAddress = object.validatorAddress ?? "";
     message.denom = object.denom ?? "";
@@ -1664,7 +1664,7 @@ export const EstimateSuperfluidDelegatedAmountByValidatorDenomResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<EstimateSuperfluidDelegatedAmountByValidatorDenomResponse>, I>>(object: I): EstimateSuperfluidDelegatedAmountByValidatorDenomResponse {
+  fromPartial(object: DeepPartial<EstimateSuperfluidDelegatedAmountByValidatorDenomResponse>): EstimateSuperfluidDelegatedAmountByValidatorDenomResponse {
     const message = createBaseEstimateSuperfluidDelegatedAmountByValidatorDenomResponse();
     message.totalDelegatedCoins = object.totalDelegatedCoins?.map(e => Coin.fromPartial(e)) || [];
     return message;

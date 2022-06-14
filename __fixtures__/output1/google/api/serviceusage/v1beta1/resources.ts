@@ -7,7 +7,7 @@ import { Endpoint } from "../../endpoint";
 import { MonitoredResourceDescriptor } from "../../monitored_resource";
 import { Monitoring } from "../../monitoring";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, Exact, DeepPartial, Long, isObject } from "@osmonauts/helpers";
+import { isSet, DeepPartial, Long, isObject } from "@osmonauts/helpers";
 
 /** Whether or not a service has been enabled for use by a consumer. */
 export enum State {
@@ -664,7 +664,7 @@ export const Service = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Service>, I>>(object: I): Service {
+  fromPartial(object: DeepPartial<Service>): Service {
     const message = createBaseService();
     message.name = object.name ?? "";
     message.parent = object.parent ?? "";
@@ -840,7 +840,7 @@ export const ServiceConfig = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<ServiceConfig>, I>>(object: I): ServiceConfig {
+  fromPartial(object: DeepPartial<ServiceConfig>): ServiceConfig {
     const message = createBaseServiceConfig();
     message.name = object.name ?? "";
     message.title = object.title ?? "";
@@ -912,7 +912,7 @@ export const OperationMetadata = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<OperationMetadata>, I>>(object: I): OperationMetadata {
+  fromPartial(object: DeepPartial<OperationMetadata>): OperationMetadata {
     const message = createBaseOperationMetadata();
     message.resourceNames = object.resourceNames?.map(e => e) || [];
     return message;
@@ -1035,7 +1035,7 @@ export const ConsumerQuotaMetric = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<ConsumerQuotaMetric>, I>>(object: I): ConsumerQuotaMetric {
+  fromPartial(object: DeepPartial<ConsumerQuotaMetric>): ConsumerQuotaMetric {
     const message = createBaseConsumerQuotaMetric();
     message.name = object.name ?? "";
     message.metric = object.metric ?? "";
@@ -1158,7 +1158,7 @@ export const ConsumerQuotaLimit = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<ConsumerQuotaLimit>, I>>(object: I): ConsumerQuotaLimit {
+  fromPartial(object: DeepPartial<ConsumerQuotaLimit>): ConsumerQuotaLimit {
     const message = createBaseConsumerQuotaLimit();
     message.name = object.name ?? "";
     message.metric = object.metric ?? "";
@@ -1231,7 +1231,7 @@ export const QuotaBucket_DimensionsEntry = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QuotaBucket_DimensionsEntry>, I>>(object: I): QuotaBucket_DimensionsEntry {
+  fromPartial(object: DeepPartial<QuotaBucket_DimensionsEntry>): QuotaBucket_DimensionsEntry {
     const message = createBaseQuotaBucket_DimensionsEntry();
     message.key = object.key ?? "";
     message.value = object.value ?? "";
@@ -1363,7 +1363,7 @@ export const QuotaBucket = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QuotaBucket>, I>>(object: I): QuotaBucket {
+  fromPartial(object: DeepPartial<QuotaBucket>): QuotaBucket {
     const message = createBaseQuotaBucket();
     message.effectiveLimit = object.effectiveLimit !== undefined && object.effectiveLimit !== null ? Long.fromValue(object.effectiveLimit) : Long.ZERO;
     message.defaultLimit = object.defaultLimit !== undefined && object.defaultLimit !== null ? Long.fromValue(object.defaultLimit) : Long.ZERO;
@@ -1444,7 +1444,7 @@ export const QuotaOverride_DimensionsEntry = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QuotaOverride_DimensionsEntry>, I>>(object: I): QuotaOverride_DimensionsEntry {
+  fromPartial(object: DeepPartial<QuotaOverride_DimensionsEntry>): QuotaOverride_DimensionsEntry {
     const message = createBaseQuotaOverride_DimensionsEntry();
     message.key = object.key ?? "";
     message.value = object.value ?? "";
@@ -1577,7 +1577,7 @@ export const QuotaOverride = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QuotaOverride>, I>>(object: I): QuotaOverride {
+  fromPartial(object: DeepPartial<QuotaOverride>): QuotaOverride {
     const message = createBaseQuotaOverride();
     message.name = object.name ?? "";
     message.overrideValue = object.overrideValue !== undefined && object.overrideValue !== null ? Long.fromValue(object.overrideValue) : Long.ZERO;
@@ -1653,7 +1653,7 @@ export const OverrideInlineSource = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<OverrideInlineSource>, I>>(object: I): OverrideInlineSource {
+  fromPartial(object: DeepPartial<OverrideInlineSource>): OverrideInlineSource {
     const message = createBaseOverrideInlineSource();
     message.overrides = object.overrides?.map(e => QuotaOverride.fromPartial(e)) || [];
     return message;
@@ -1721,7 +1721,7 @@ export const AdminQuotaPolicy_DimensionsEntry = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<AdminQuotaPolicy_DimensionsEntry>, I>>(object: I): AdminQuotaPolicy_DimensionsEntry {
+  fromPartial(object: DeepPartial<AdminQuotaPolicy_DimensionsEntry>): AdminQuotaPolicy_DimensionsEntry {
     const message = createBaseAdminQuotaPolicy_DimensionsEntry();
     message.key = object.key ?? "";
     message.value = object.value ?? "";
@@ -1854,7 +1854,7 @@ export const AdminQuotaPolicy = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<AdminQuotaPolicy>, I>>(object: I): AdminQuotaPolicy {
+  fromPartial(object: DeepPartial<AdminQuotaPolicy>): AdminQuotaPolicy {
     const message = createBaseAdminQuotaPolicy();
     message.name = object.name ?? "";
     message.policyValue = object.policyValue !== undefined && object.policyValue !== null ? Long.fromValue(object.policyValue) : Long.ZERO;
@@ -1935,7 +1935,7 @@ export const ServiceIdentity = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<ServiceIdentity>, I>>(object: I): ServiceIdentity {
+  fromPartial(object: DeepPartial<ServiceIdentity>): ServiceIdentity {
     const message = createBaseServiceIdentity();
     message.email = object.email ?? "";
     message.uniqueId = object.uniqueId ?? "";

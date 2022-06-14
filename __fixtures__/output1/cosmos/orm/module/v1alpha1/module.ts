@@ -1,5 +1,5 @@
 import * as _m0 from "protobufjs/minimal";
-import { Exact, DeepPartial } from "@osmonauts/helpers";
+import { DeepPartial } from "@osmonauts/helpers";
 
 /**
  * Module defines the ORM module which adds providers to the app container for
@@ -44,7 +44,7 @@ export const Module = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Module>, I>>(_: I): Module {
+  fromPartial(_: DeepPartial<Module>): Module {
     const message = createBaseModule();
     return message;
   }

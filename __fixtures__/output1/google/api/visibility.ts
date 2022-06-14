@@ -1,5 +1,5 @@
 import * as _m0 from "protobufjs/minimal";
-import { Exact, DeepPartial, isSet } from "@osmonauts/helpers";
+import { DeepPartial, isSet } from "@osmonauts/helpers";
 
 /**
  * `Visibility` defines restrictions for the visibility of service
@@ -121,7 +121,7 @@ export const Visibility = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Visibility>, I>>(object: I): Visibility {
+  fromPartial(object: DeepPartial<Visibility>): Visibility {
     const message = createBaseVisibility();
     message.rules = object.rules?.map(e => VisibilityRule.fromPartial(e)) || [];
     return message;
@@ -189,7 +189,7 @@ export const VisibilityRule = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<VisibilityRule>, I>>(object: I): VisibilityRule {
+  fromPartial(object: DeepPartial<VisibilityRule>): VisibilityRule {
     const message = createBaseVisibilityRule();
     message.selector = object.selector ?? "";
     message.restriction = object.restriction ?? "";

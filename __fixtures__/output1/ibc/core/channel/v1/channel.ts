@@ -1,6 +1,6 @@
 import { Height } from "../../client/v1/client";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, Exact, DeepPartial, Long, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
+import { isSet, DeepPartial, Long, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
 
 /**
  * State defines if a channel is in one of the following states:
@@ -358,7 +358,7 @@ export const Channel = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Channel>, I>>(object: I): Channel {
+  fromPartial(object: DeepPartial<Channel>): Channel {
     const message = createBaseChannel();
     message.state = object.state ?? 0;
     message.ordering = object.ordering ?? 0;
@@ -491,7 +491,7 @@ export const IdentifiedChannel = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<IdentifiedChannel>, I>>(object: I): IdentifiedChannel {
+  fromPartial(object: DeepPartial<IdentifiedChannel>): IdentifiedChannel {
     const message = createBaseIdentifiedChannel();
     message.state = object.state ?? 0;
     message.ordering = object.ordering ?? 0;
@@ -565,7 +565,7 @@ export const Counterparty = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Counterparty>, I>>(object: I): Counterparty {
+  fromPartial(object: DeepPartial<Counterparty>): Counterparty {
     const message = createBaseCounterparty();
     message.portId = object.portId ?? "";
     message.channelId = object.channelId ?? "";
@@ -700,7 +700,7 @@ export const Packet = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Packet>, I>>(object: I): Packet {
+  fromPartial(object: DeepPartial<Packet>): Packet {
     const message = createBasePacket();
     message.sequence = object.sequence !== undefined && object.sequence !== null ? Long.fromValue(object.sequence) : Long.UZERO;
     message.sourcePort = object.sourcePort ?? "";
@@ -797,7 +797,7 @@ export const PacketState = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<PacketState>, I>>(object: I): PacketState {
+  fromPartial(object: DeepPartial<PacketState>): PacketState {
     const message = createBasePacketState();
     message.portId = object.portId ?? "";
     message.channelId = object.channelId ?? "";
@@ -868,7 +868,7 @@ export const Acknowledgement = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Acknowledgement>, I>>(object: I): Acknowledgement {
+  fromPartial(object: DeepPartial<Acknowledgement>): Acknowledgement {
     const message = createBaseAcknowledgement();
     message.result = object.result ?? undefined;
     message.error = object.error ?? undefined;

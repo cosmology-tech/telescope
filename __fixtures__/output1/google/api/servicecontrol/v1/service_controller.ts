@@ -2,7 +2,7 @@ import { Operation } from "./operation";
 import { CheckError } from "./check_error";
 import { Status } from "../../../rpc/status";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, Exact, DeepPartial, Long } from "@osmonauts/helpers";
+import { isSet, DeepPartial, Long } from "@osmonauts/helpers";
 
 /**
  * The type of the consumer as defined in
@@ -324,7 +324,7 @@ export const CheckRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<CheckRequest>, I>>(object: I): CheckRequest {
+  fromPartial(object: DeepPartial<CheckRequest>): CheckRequest {
     const message = createBaseCheckRequest();
     message.serviceName = object.serviceName ?? "";
     message.operation = object.operation !== undefined && object.operation !== null ? Operation.fromPartial(object.operation) : undefined;
@@ -433,7 +433,7 @@ export const CheckResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<CheckResponse>, I>>(object: I): CheckResponse {
+  fromPartial(object: DeepPartial<CheckResponse>): CheckResponse {
     const message = createBaseCheckResponse();
     message.operationId = object.operationId ?? "";
     message.checkErrors = object.checkErrors?.map(e => CheckError.fromPartial(e)) || [];
@@ -511,7 +511,7 @@ export const CheckResponse_CheckInfo = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<CheckResponse_CheckInfo>, I>>(object: I): CheckResponse_CheckInfo {
+  fromPartial(object: DeepPartial<CheckResponse_CheckInfo>): CheckResponse_CheckInfo {
     const message = createBaseCheckResponse_CheckInfo();
     message.unusedArguments = object.unusedArguments?.map(e => e) || [];
     message.consumerInfo = object.consumerInfo !== undefined && object.consumerInfo !== null ? CheckResponse_ConsumerInfo.fromPartial(object.consumerInfo) : undefined;
@@ -591,7 +591,7 @@ export const CheckResponse_ConsumerInfo = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<CheckResponse_ConsumerInfo>, I>>(object: I): CheckResponse_ConsumerInfo {
+  fromPartial(object: DeepPartial<CheckResponse_ConsumerInfo>): CheckResponse_ConsumerInfo {
     const message = createBaseCheckResponse_ConsumerInfo();
     message.projectNumber = object.projectNumber !== undefined && object.projectNumber !== null ? Long.fromValue(object.projectNumber) : Long.ZERO;
     message.type = object.type ?? 0;
@@ -678,7 +678,7 @@ export const ReportRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<ReportRequest>, I>>(object: I): ReportRequest {
+  fromPartial(object: DeepPartial<ReportRequest>): ReportRequest {
     const message = createBaseReportRequest();
     message.serviceName = object.serviceName ?? "";
     message.operations = object.operations?.map(e => Operation.fromPartial(e)) || [];
@@ -765,7 +765,7 @@ export const ReportResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<ReportResponse>, I>>(object: I): ReportResponse {
+  fromPartial(object: DeepPartial<ReportResponse>): ReportResponse {
     const message = createBaseReportResponse();
     message.reportErrors = object.reportErrors?.map(e => ReportResponse_ReportError.fromPartial(e)) || [];
     message.serviceConfigId = object.serviceConfigId ?? "";
@@ -835,7 +835,7 @@ export const ReportResponse_ReportError = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<ReportResponse_ReportError>, I>>(object: I): ReportResponse_ReportError {
+  fromPartial(object: DeepPartial<ReportResponse_ReportError>): ReportResponse_ReportError {
     const message = createBaseReportResponse_ReportError();
     message.operationId = object.operationId ?? "";
     message.status = object.status !== undefined && object.status !== null ? Status.fromPartial(object.status) : undefined;

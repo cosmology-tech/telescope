@@ -1,6 +1,6 @@
 import { FeeToken } from "./feetoken";
 import * as _m0 from "protobufjs/minimal";
-import { Exact, DeepPartial, isSet, Long } from "@osmonauts/helpers";
+import { DeepPartial, isSet, Long } from "@osmonauts/helpers";
 export interface QueryFeeTokensRequest {}
 export interface QueryFeeTokensResponse {
   feeTokens: FeeToken[];
@@ -52,7 +52,7 @@ export const QueryFeeTokensRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryFeeTokensRequest>, I>>(_: I): QueryFeeTokensRequest {
+  fromPartial(_: DeepPartial<QueryFeeTokensRequest>): QueryFeeTokensRequest {
     const message = createBaseQueryFeeTokensRequest();
     return message;
   }
@@ -114,7 +114,7 @@ export const QueryFeeTokensResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryFeeTokensResponse>, I>>(object: I): QueryFeeTokensResponse {
+  fromPartial(object: DeepPartial<QueryFeeTokensResponse>): QueryFeeTokensResponse {
     const message = createBaseQueryFeeTokensResponse();
     message.feeTokens = object.feeTokens?.map(e => FeeToken.fromPartial(e)) || [];
     return message;
@@ -171,7 +171,7 @@ export const QueryDenomPoolIdRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryDenomPoolIdRequest>, I>>(object: I): QueryDenomPoolIdRequest {
+  fromPartial(object: DeepPartial<QueryDenomPoolIdRequest>): QueryDenomPoolIdRequest {
     const message = createBaseQueryDenomPoolIdRequest();
     message.denom = object.denom ?? "";
     return message;
@@ -228,7 +228,7 @@ export const QueryDenomPoolIdResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryDenomPoolIdResponse>, I>>(object: I): QueryDenomPoolIdResponse {
+  fromPartial(object: DeepPartial<QueryDenomPoolIdResponse>): QueryDenomPoolIdResponse {
     const message = createBaseQueryDenomPoolIdResponse();
     message.poolID = object.poolID !== undefined && object.poolID !== null ? Long.fromValue(object.poolID) : Long.UZERO;
     return message;
@@ -272,7 +272,7 @@ export const QueryBaseDenomRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryBaseDenomRequest>, I>>(_: I): QueryBaseDenomRequest {
+  fromPartial(_: DeepPartial<QueryBaseDenomRequest>): QueryBaseDenomRequest {
     const message = createBaseQueryBaseDenomRequest();
     return message;
   }
@@ -328,7 +328,7 @@ export const QueryBaseDenomResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryBaseDenomResponse>, I>>(object: I): QueryBaseDenomResponse {
+  fromPartial(object: DeepPartial<QueryBaseDenomResponse>): QueryBaseDenomResponse {
     const message = createBaseQueryBaseDenomResponse();
     message.baseDenom = object.baseDenom ?? "";
     return message;

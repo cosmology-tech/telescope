@@ -1,6 +1,6 @@
 import { Expr } from "./expr";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
+import { isSet, DeepPartial } from "@osmonauts/helpers";
 
 /** A declaration. */
 export interface Decl {
@@ -154,7 +154,7 @@ export const Decl = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Decl>, I>>(object: I): Decl {
+  fromPartial(object: DeepPartial<Decl>): Decl {
     const message = createBaseDecl();
     message.id = object.id ?? 0;
     message.name = object.name ?? "";
@@ -243,7 +243,7 @@ export const DeclType = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<DeclType>, I>>(object: I): DeclType {
+  fromPartial(object: DeepPartial<DeclType>): DeclType {
     const message = createBaseDeclType();
     message.id = object.id ?? 0;
     message.type = object.type ?? "";
@@ -313,7 +313,7 @@ export const IdentDecl = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<IdentDecl>, I>>(object: I): IdentDecl {
+  fromPartial(object: DeepPartial<IdentDecl>): IdentDecl {
     const message = createBaseIdentDecl();
     message.type = object.type !== undefined && object.type !== null ? DeclType.fromPartial(object.type) : undefined;
     message.value = object.value !== undefined && object.value !== null ? Expr.fromPartial(object.value) : undefined;
@@ -399,7 +399,7 @@ export const FunctionDecl = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<FunctionDecl>, I>>(object: I): FunctionDecl {
+  fromPartial(object: DeepPartial<FunctionDecl>): FunctionDecl {
     const message = createBaseFunctionDecl();
     message.args = object.args?.map(e => IdentDecl.fromPartial(e)) || [];
     message.returnType = object.returnType !== undefined && object.returnType !== null ? DeclType.fromPartial(object.returnType) : undefined;

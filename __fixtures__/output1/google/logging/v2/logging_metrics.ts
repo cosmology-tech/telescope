@@ -2,7 +2,7 @@ import { MetricDescriptor } from "../../api/metric";
 import { Distribution_BucketOptions } from "../../api/distribution";
 import { Timestamp } from "../../protobuf/timestamp";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, Exact, DeepPartial, toTimestamp, fromTimestamp, isObject, fromJsonTimestamp } from "@osmonauts/helpers";
+import { isSet, DeepPartial, toTimestamp, fromTimestamp, isObject, fromJsonTimestamp } from "@osmonauts/helpers";
 
 /** Logging API version. */
 export enum LogMetric_ApiVersion {
@@ -347,7 +347,7 @@ export const LogMetric_LabelExtractorsEntry = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<LogMetric_LabelExtractorsEntry>, I>>(object: I): LogMetric_LabelExtractorsEntry {
+  fromPartial(object: DeepPartial<LogMetric_LabelExtractorsEntry>): LogMetric_LabelExtractorsEntry {
     const message = createBaseLogMetric_LabelExtractorsEntry();
     message.key = object.key ?? "";
     message.value = object.value ?? "";
@@ -535,7 +535,7 @@ export const LogMetric = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<LogMetric>, I>>(object: I): LogMetric {
+  fromPartial(object: DeepPartial<LogMetric>): LogMetric {
     const message = createBaseLogMetric();
     message.name = object.name ?? "";
     message.description = object.description ?? "";
@@ -632,7 +632,7 @@ export const ListLogMetricsRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<ListLogMetricsRequest>, I>>(object: I): ListLogMetricsRequest {
+  fromPartial(object: DeepPartial<ListLogMetricsRequest>): ListLogMetricsRequest {
     const message = createBaseListLogMetricsRequest();
     message.parent = object.parent ?? "";
     message.pageToken = object.pageToken ?? "";
@@ -708,7 +708,7 @@ export const ListLogMetricsResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<ListLogMetricsResponse>, I>>(object: I): ListLogMetricsResponse {
+  fromPartial(object: DeepPartial<ListLogMetricsResponse>): ListLogMetricsResponse {
     const message = createBaseListLogMetricsResponse();
     message.metrics = object.metrics?.map(e => LogMetric.fromPartial(e)) || [];
     message.nextPageToken = object.nextPageToken ?? "";
@@ -766,7 +766,7 @@ export const GetLogMetricRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<GetLogMetricRequest>, I>>(object: I): GetLogMetricRequest {
+  fromPartial(object: DeepPartial<GetLogMetricRequest>): GetLogMetricRequest {
     const message = createBaseGetLogMetricRequest();
     message.metricName = object.metricName ?? "";
     return message;
@@ -834,7 +834,7 @@ export const CreateLogMetricRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<CreateLogMetricRequest>, I>>(object: I): CreateLogMetricRequest {
+  fromPartial(object: DeepPartial<CreateLogMetricRequest>): CreateLogMetricRequest {
     const message = createBaseCreateLogMetricRequest();
     message.parent = object.parent ?? "";
     message.metric = object.metric !== undefined && object.metric !== null ? LogMetric.fromPartial(object.metric) : undefined;
@@ -903,7 +903,7 @@ export const UpdateLogMetricRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<UpdateLogMetricRequest>, I>>(object: I): UpdateLogMetricRequest {
+  fromPartial(object: DeepPartial<UpdateLogMetricRequest>): UpdateLogMetricRequest {
     const message = createBaseUpdateLogMetricRequest();
     message.metricName = object.metricName ?? "";
     message.metric = object.metric !== undefined && object.metric !== null ? LogMetric.fromPartial(object.metric) : undefined;
@@ -961,7 +961,7 @@ export const DeleteLogMetricRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<DeleteLogMetricRequest>, I>>(object: I): DeleteLogMetricRequest {
+  fromPartial(object: DeepPartial<DeleteLogMetricRequest>): DeleteLogMetricRequest {
     const message = createBaseDeleteLogMetricRequest();
     message.metricName = object.metricName ?? "";
     return message;

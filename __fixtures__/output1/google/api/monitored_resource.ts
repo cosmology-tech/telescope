@@ -2,7 +2,7 @@ import { LabelDescriptor } from "./label";
 import { LaunchStage, launchStageFromJSON, launchStageToJSON } from "./launch_stage";
 import { Struct } from "../protobuf/struct";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, Exact, DeepPartial, isObject } from "@osmonauts/helpers";
+import { isSet, DeepPartial, isObject } from "@osmonauts/helpers";
 
 /**
  * An object that describes the schema of a [MonitoredResource][google.api.MonitoredResource] object using a
@@ -237,7 +237,7 @@ export const MonitoredResourceDescriptor = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MonitoredResourceDescriptor>, I>>(object: I): MonitoredResourceDescriptor {
+  fromPartial(object: DeepPartial<MonitoredResourceDescriptor>): MonitoredResourceDescriptor {
     const message = createBaseMonitoredResourceDescriptor();
     message.name = object.name ?? "";
     message.type = object.type ?? "";
@@ -310,7 +310,7 @@ export const MonitoredResource_LabelsEntry = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MonitoredResource_LabelsEntry>, I>>(object: I): MonitoredResource_LabelsEntry {
+  fromPartial(object: DeepPartial<MonitoredResource_LabelsEntry>): MonitoredResource_LabelsEntry {
     const message = createBaseMonitoredResource_LabelsEntry();
     message.key = object.key ?? "";
     message.value = object.value ?? "";
@@ -398,7 +398,7 @@ export const MonitoredResource = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MonitoredResource>, I>>(object: I): MonitoredResource {
+  fromPartial(object: DeepPartial<MonitoredResource>): MonitoredResource {
     const message = createBaseMonitoredResource();
     message.type = object.type ?? "";
     message.labels = Object.entries(object.labels ?? {}).reduce<{
@@ -475,7 +475,7 @@ export const MonitoredResourceMetadata_UserLabelsEntry = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MonitoredResourceMetadata_UserLabelsEntry>, I>>(object: I): MonitoredResourceMetadata_UserLabelsEntry {
+  fromPartial(object: DeepPartial<MonitoredResourceMetadata_UserLabelsEntry>): MonitoredResourceMetadata_UserLabelsEntry {
     const message = createBaseMonitoredResourceMetadata_UserLabelsEntry();
     message.key = object.key ?? "";
     message.value = object.value ?? "";
@@ -563,7 +563,7 @@ export const MonitoredResourceMetadata = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MonitoredResourceMetadata>, I>>(object: I): MonitoredResourceMetadata {
+  fromPartial(object: DeepPartial<MonitoredResourceMetadata>): MonitoredResourceMetadata {
     const message = createBaseMonitoredResourceMetadata();
     message.systemLabels = object.systemLabels !== undefined && object.systemLabels !== null ? Struct.fromPartial(object.systemLabels) : undefined;
     message.userLabels = Object.entries(object.userLabels ?? {}).reduce<{

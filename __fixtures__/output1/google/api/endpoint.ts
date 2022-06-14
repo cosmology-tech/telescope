@@ -1,5 +1,5 @@
 import * as _m0 from "protobufjs/minimal";
-import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
+import { isSet, DeepPartial } from "@osmonauts/helpers";
 
 /**
  * `Endpoint` describes a network endpoint of a service that serves a set of
@@ -144,7 +144,7 @@ export const Endpoint = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Endpoint>, I>>(object: I): Endpoint {
+  fromPartial(object: DeepPartial<Endpoint>): Endpoint {
     const message = createBaseEndpoint();
     message.name = object.name ?? "";
     message.aliases = object.aliases?.map(e => e) || [];

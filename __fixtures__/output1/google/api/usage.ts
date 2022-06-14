@@ -1,5 +1,5 @@
 import * as _m0 from "protobufjs/minimal";
-import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
+import { isSet, DeepPartial } from "@osmonauts/helpers";
 
 /** Configuration controlling usage of a service. */
 export interface Usage {
@@ -169,7 +169,7 @@ export const Usage = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Usage>, I>>(object: I): Usage {
+  fromPartial(object: DeepPartial<Usage>): Usage {
     const message = createBaseUsage();
     message.requirements = object.requirements?.map(e => e) || [];
     message.rules = object.rules?.map(e => UsageRule.fromPartial(e)) || [];
@@ -250,7 +250,7 @@ export const UsageRule = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<UsageRule>, I>>(object: I): UsageRule {
+  fromPartial(object: DeepPartial<UsageRule>): UsageRule {
     const message = createBaseUsageRule();
     message.selector = object.selector ?? "";
     message.allowUnregisteredCalls = object.allowUnregisteredCalls ?? false;

@@ -1,6 +1,6 @@
 import { CodeInfo, ContractInfo, Model, ContractCustomInfo } from "./types";
 import * as _m0 from "protobufjs/minimal";
-import { Exact, DeepPartial, Long, isSet, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
+import { DeepPartial, Long, isSet, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
 
 /** GenesisState - genesis state of x/wasm */
 export interface GenesisState {
@@ -118,7 +118,7 @@ export const GenesisState = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<GenesisState>, I>>(object: I): GenesisState {
+  fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
     message.codes = object.codes?.map(e => Code.fromPartial(e)) || [];
     message.contracts = object.contracts?.map(e => Contract.fromPartial(e)) || [];
@@ -199,7 +199,7 @@ export const Code = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Code>, I>>(object: I): Code {
+  fromPartial(object: DeepPartial<Code>): Code {
     const message = createBaseCode();
     message.codeId = object.codeId !== undefined && object.codeId !== null ? Long.fromValue(object.codeId) : Long.UZERO;
     message.codeInfo = object.codeInfo !== undefined && object.codeInfo !== null ? CodeInfo.fromPartial(object.codeInfo) : undefined;
@@ -297,7 +297,7 @@ export const Contract = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Contract>, I>>(object: I): Contract {
+  fromPartial(object: DeepPartial<Contract>): Contract {
     const message = createBaseContract();
     message.contractAddress = object.contractAddress ?? new Uint8Array();
     message.contractInfo = object.contractInfo !== undefined && object.contractInfo !== null ? ContractInfo.fromPartial(object.contractInfo) : undefined;
@@ -368,7 +368,7 @@ export const Sequence = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Sequence>, I>>(object: I): Sequence {
+  fromPartial(object: DeepPartial<Sequence>): Sequence {
     const message = createBaseSequence();
     message.idKey = object.idKey ?? new Uint8Array();
     message.value = object.value !== undefined && object.value !== null ? Long.fromValue(object.value) : Long.UZERO;

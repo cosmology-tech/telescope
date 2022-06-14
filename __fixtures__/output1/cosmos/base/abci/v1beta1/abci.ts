@@ -1,7 +1,7 @@
 import { Any } from "../../../../google/protobuf/any";
 import { Event } from "../../../../tendermint/abci/types";
 import * as _m0 from "protobufjs/minimal";
-import { Long, isSet, Exact, DeepPartial, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
+import { Long, isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
 
 /**
  * TxResponse defines a structure containing relevant tx data and metadata. The
@@ -382,7 +382,7 @@ export const TxResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<TxResponse>, I>>(object: I): TxResponse {
+  fromPartial(object: DeepPartial<TxResponse>): TxResponse {
     const message = createBaseTxResponse();
     message.height = object.height !== undefined && object.height !== null ? Long.fromValue(object.height) : Long.ZERO;
     message.txhash = object.txhash ?? "";
@@ -479,7 +479,7 @@ export const ABCIMessageLog = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<ABCIMessageLog>, I>>(object: I): ABCIMessageLog {
+  fromPartial(object: DeepPartial<ABCIMessageLog>): ABCIMessageLog {
     const message = createBaseABCIMessageLog();
     message.msgIndex = object.msgIndex ?? 0;
     message.log = object.log ?? "";
@@ -555,7 +555,7 @@ export const StringEvent = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<StringEvent>, I>>(object: I): StringEvent {
+  fromPartial(object: DeepPartial<StringEvent>): StringEvent {
     const message = createBaseStringEvent();
     message.type = object.type ?? "";
     message.attributes = object.attributes?.map(e => Attribute.fromPartial(e)) || [];
@@ -624,7 +624,7 @@ export const Attribute = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Attribute>, I>>(object: I): Attribute {
+  fromPartial(object: DeepPartial<Attribute>): Attribute {
     const message = createBaseAttribute();
     message.key = object.key ?? "";
     message.value = object.value ?? "";
@@ -693,7 +693,7 @@ export const GasInfo = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<GasInfo>, I>>(object: I): GasInfo {
+  fromPartial(object: DeepPartial<GasInfo>): GasInfo {
     const message = createBaseGasInfo();
     message.gasWanted = object.gasWanted !== undefined && object.gasWanted !== null ? Long.fromValue(object.gasWanted) : Long.UZERO;
     message.gasUsed = object.gasUsed !== undefined && object.gasUsed !== null ? Long.fromValue(object.gasUsed) : Long.UZERO;
@@ -795,7 +795,7 @@ export const Result = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Result>, I>>(object: I): Result {
+  fromPartial(object: DeepPartial<Result>): Result {
     const message = createBaseResult();
     message.data = object.data ?? new Uint8Array();
     message.log = object.log ?? "";
@@ -866,7 +866,7 @@ export const SimulationResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<SimulationResponse>, I>>(object: I): SimulationResponse {
+  fromPartial(object: DeepPartial<SimulationResponse>): SimulationResponse {
     const message = createBaseSimulationResponse();
     message.gasInfo = object.gasInfo !== undefined && object.gasInfo !== null ? GasInfo.fromPartial(object.gasInfo) : undefined;
     message.result = object.result !== undefined && object.result !== null ? Result.fromPartial(object.result) : undefined;
@@ -935,7 +935,7 @@ export const MsgData = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgData>, I>>(object: I): MsgData {
+  fromPartial(object: DeepPartial<MsgData>): MsgData {
     const message = createBaseMsgData();
     message.msgType = object.msgType ?? "";
     message.data = object.data ?? new Uint8Array();
@@ -1015,7 +1015,7 @@ export const TxMsgData = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<TxMsgData>, I>>(object: I): TxMsgData {
+  fromPartial(object: DeepPartial<TxMsgData>): TxMsgData {
     const message = createBaseTxMsgData();
     message.data = object.data?.map(e => MsgData.fromPartial(e)) || [];
     message.msgResponses = object.msgResponses?.map(e => Any.fromPartial(e)) || [];
@@ -1134,7 +1134,7 @@ export const SearchTxsResult = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<SearchTxsResult>, I>>(object: I): SearchTxsResult {
+  fromPartial(object: DeepPartial<SearchTxsResult>): SearchTxsResult {
     const message = createBaseSearchTxsResult();
     message.totalCount = object.totalCount !== undefined && object.totalCount !== null ? Long.fromValue(object.totalCount) : Long.UZERO;
     message.count = object.count !== undefined && object.count !== null ? Long.fromValue(object.count) : Long.UZERO;

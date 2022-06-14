@@ -1,5 +1,5 @@
 import * as _m0 from "protobufjs/minimal";
-import { Exact, DeepPartial, isSet } from "@osmonauts/helpers";
+import { DeepPartial, isSet } from "@osmonauts/helpers";
 
 /**
  * Specifies the routing information that should be sent along with the request
@@ -493,7 +493,7 @@ export const RoutingRule = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<RoutingRule>, I>>(object: I): RoutingRule {
+  fromPartial(object: DeepPartial<RoutingRule>): RoutingRule {
     const message = createBaseRoutingRule();
     message.routingParameters = object.routingParameters?.map(e => RoutingParameter.fromPartial(e)) || [];
     return message;
@@ -561,7 +561,7 @@ export const RoutingParameter = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<RoutingParameter>, I>>(object: I): RoutingParameter {
+  fromPartial(object: DeepPartial<RoutingParameter>): RoutingParameter {
     const message = createBaseRoutingParameter();
     message.field = object.field ?? "";
     message.pathTemplate = object.pathTemplate ?? "";

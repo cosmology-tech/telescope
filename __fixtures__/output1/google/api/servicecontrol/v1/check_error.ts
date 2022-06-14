@@ -1,6 +1,6 @@
 import { Status } from "../../../rpc/status";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
+import { isSet, DeepPartial } from "@osmonauts/helpers";
 
 /** Error codes for Check responses. */
 export enum CheckError_Code {
@@ -362,7 +362,7 @@ export const CheckError = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<CheckError>, I>>(object: I): CheckError {
+  fromPartial(object: DeepPartial<CheckError>): CheckError {
     const message = createBaseCheckError();
     message.code = object.code ?? 0;
     message.subject = object.subject ?? "";

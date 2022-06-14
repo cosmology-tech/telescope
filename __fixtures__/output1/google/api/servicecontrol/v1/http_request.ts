@@ -1,6 +1,6 @@
 import { Duration } from "../../../protobuf/duration";
 import * as _m0 from "protobufjs/minimal";
-import { Long, isSet, Exact, DeepPartial } from "@osmonauts/helpers";
+import { Long, isSet, DeepPartial } from "@osmonauts/helpers";
 
 /**
  * A common proto for logging HTTP requests. Only contains semantics
@@ -297,7 +297,7 @@ export const HttpRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<HttpRequest>, I>>(object: I): HttpRequest {
+  fromPartial(object: DeepPartial<HttpRequest>): HttpRequest {
     const message = createBaseHttpRequest();
     message.requestMethod = object.requestMethod ?? "";
     message.requestUrl = object.requestUrl ?? "";

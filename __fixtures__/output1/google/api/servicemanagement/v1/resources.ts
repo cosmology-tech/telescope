@@ -1,7 +1,7 @@
 import { Timestamp } from "../../../protobuf/timestamp";
 import { ConfigChange } from "../../config_change";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, Exact, DeepPartial, toTimestamp, fromTimestamp, fromJsonTimestamp, bytesFromBase64, base64FromBytes, isObject } from "@osmonauts/helpers";
+import { isSet, DeepPartial, toTimestamp, fromTimestamp, fromJsonTimestamp, bytesFromBase64, base64FromBytes, isObject } from "@osmonauts/helpers";
 
 /** Code describes the status of the operation (or one of its steps). */
 export enum OperationMetadata_Status {
@@ -577,7 +577,7 @@ export const ManagedService = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<ManagedService>, I>>(object: I): ManagedService {
+  fromPartial(object: DeepPartial<ManagedService>): ManagedService {
     const message = createBaseManagedService();
     message.serviceName = object.serviceName ?? "";
     message.producerProjectId = object.producerProjectId ?? "";
@@ -679,7 +679,7 @@ export const OperationMetadata = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<OperationMetadata>, I>>(object: I): OperationMetadata {
+  fromPartial(object: DeepPartial<OperationMetadata>): OperationMetadata {
     const message = createBaseOperationMetadata();
     message.resourceNames = object.resourceNames?.map(e => e) || [];
     message.steps = object.steps?.map(e => OperationMetadata_Step.fromPartial(e)) || [];
@@ -750,7 +750,7 @@ export const OperationMetadata_Step = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<OperationMetadata_Step>, I>>(object: I): OperationMetadata_Step {
+  fromPartial(object: DeepPartial<OperationMetadata_Step>): OperationMetadata_Step {
     const message = createBaseOperationMetadata_Step();
     message.description = object.description ?? "";
     message.status = object.status ?? 0;
@@ -830,7 +830,7 @@ export const Diagnostic = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Diagnostic>, I>>(object: I): Diagnostic {
+  fromPartial(object: DeepPartial<Diagnostic>): Diagnostic {
     const message = createBaseDiagnostic();
     message.location = object.location ?? "";
     message.kind = object.kind ?? 0;
@@ -906,7 +906,7 @@ export const ConfigSource = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<ConfigSource>, I>>(object: I): ConfigSource {
+  fromPartial(object: DeepPartial<ConfigSource>): ConfigSource {
     const message = createBaseConfigSource();
     message.id = object.id ?? "";
     message.files = object.files?.map(e => ConfigFile.fromPartial(e)) || [];
@@ -986,7 +986,7 @@ export const ConfigFile = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<ConfigFile>, I>>(object: I): ConfigFile {
+  fromPartial(object: DeepPartial<ConfigFile>): ConfigFile {
     const message = createBaseConfigFile();
     message.filePath = object.filePath ?? "";
     message.fileContents = object.fileContents ?? new Uint8Array();
@@ -1045,7 +1045,7 @@ export const ConfigRef = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<ConfigRef>, I>>(object: I): ConfigRef {
+  fromPartial(object: DeepPartial<ConfigRef>): ConfigRef {
     const message = createBaseConfigRef();
     message.name = object.name ?? "";
     return message;
@@ -1108,7 +1108,7 @@ export const ChangeReport = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<ChangeReport>, I>>(object: I): ChangeReport {
+  fromPartial(object: DeepPartial<ChangeReport>): ChangeReport {
     const message = createBaseChangeReport();
     message.configChanges = object.configChanges?.map(e => ConfigChange.fromPartial(e)) || [];
     return message;
@@ -1231,7 +1231,7 @@ export const Rollout = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Rollout>, I>>(object: I): Rollout {
+  fromPartial(object: DeepPartial<Rollout>): Rollout {
     const message = createBaseRollout();
     message.rolloutId = object.rolloutId ?? "";
     message.createTime = object.createTime ?? undefined;
@@ -1305,7 +1305,7 @@ export const Rollout_TrafficPercentStrategy_PercentagesEntry = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Rollout_TrafficPercentStrategy_PercentagesEntry>, I>>(object: I): Rollout_TrafficPercentStrategy_PercentagesEntry {
+  fromPartial(object: DeepPartial<Rollout_TrafficPercentStrategy_PercentagesEntry>): Rollout_TrafficPercentStrategy_PercentagesEntry {
     const message = createBaseRollout_TrafficPercentStrategy_PercentagesEntry();
     message.key = object.key ?? "";
     message.value = object.value ?? 0;
@@ -1382,7 +1382,7 @@ export const Rollout_TrafficPercentStrategy = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Rollout_TrafficPercentStrategy>, I>>(object: I): Rollout_TrafficPercentStrategy {
+  fromPartial(object: DeepPartial<Rollout_TrafficPercentStrategy>): Rollout_TrafficPercentStrategy {
     const message = createBaseRollout_TrafficPercentStrategy();
     message.percentages = Object.entries(object.percentages ?? {}).reduce<{
       [key: string]: double;
@@ -1434,7 +1434,7 @@ export const Rollout_DeleteServiceStrategy = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Rollout_DeleteServiceStrategy>, I>>(_: I): Rollout_DeleteServiceStrategy {
+  fromPartial(_: DeepPartial<Rollout_DeleteServiceStrategy>): Rollout_DeleteServiceStrategy {
     const message = createBaseRollout_DeleteServiceStrategy();
     return message;
   }

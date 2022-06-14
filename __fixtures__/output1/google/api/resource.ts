@@ -1,5 +1,5 @@
 import * as _m0 from "protobufjs/minimal";
-import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
+import { isSet, DeepPartial } from "@osmonauts/helpers";
 
 /**
  * A description of the historical or future-looking state of the
@@ -429,7 +429,7 @@ export const ResourceDescriptor = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<ResourceDescriptor>, I>>(object: I): ResourceDescriptor {
+  fromPartial(object: DeepPartial<ResourceDescriptor>): ResourceDescriptor {
     const message = createBaseResourceDescriptor();
     message.type = object.type ?? "";
     message.pattern = object.pattern?.map(e => e) || [];
@@ -503,7 +503,7 @@ export const ResourceReference = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<ResourceReference>, I>>(object: I): ResourceReference {
+  fromPartial(object: DeepPartial<ResourceReference>): ResourceReference {
     const message = createBaseResourceReference();
     message.type = object.type ?? "";
     message.childType = object.childType ?? "";

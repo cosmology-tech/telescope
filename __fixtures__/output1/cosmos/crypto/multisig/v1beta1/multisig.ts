@@ -1,5 +1,5 @@
 import * as _m0 from "protobufjs/minimal";
-import { bytesFromBase64, base64FromBytes, Exact, DeepPartial, isSet } from "@osmonauts/helpers";
+import { bytesFromBase64, base64FromBytes, DeepPartial, isSet } from "@osmonauts/helpers";
 
 /**
  * MultiSignature wraps the signatures from a multisig.LegacyAminoPubKey.
@@ -76,7 +76,7 @@ export const MultiSignature = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MultiSignature>, I>>(object: I): MultiSignature {
+  fromPartial(object: DeepPartial<MultiSignature>): MultiSignature {
     const message = createBaseMultiSignature();
     message.signatures = object.signatures?.map(e => e) || [];
     return message;
@@ -144,7 +144,7 @@ export const CompactBitArray = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<CompactBitArray>, I>>(object: I): CompactBitArray {
+  fromPartial(object: DeepPartial<CompactBitArray>): CompactBitArray {
     const message = createBaseCompactBitArray();
     message.extraBitsStored = object.extraBitsStored ?? 0;
     message.elems = object.elems ?? new Uint8Array();

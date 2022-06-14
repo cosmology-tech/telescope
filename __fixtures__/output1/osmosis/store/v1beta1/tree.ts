@@ -1,5 +1,5 @@
 import * as _m0 from "protobufjs/minimal";
-import { Exact, DeepPartial, isSet, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
+import { DeepPartial, isSet, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
 export interface Node {
   children: Child[];
 }
@@ -66,7 +66,7 @@ export const Node = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Node>, I>>(object: I): Node {
+  fromPartial(object: DeepPartial<Node>): Node {
     const message = createBaseNode();
     message.children = object.children?.map(e => Child.fromPartial(e)) || [];
     return message;
@@ -134,7 +134,7 @@ export const Child = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Child>, I>>(object: I): Child {
+  fromPartial(object: DeepPartial<Child>): Child {
     const message = createBaseChild();
     message.index = object.index ?? new Uint8Array();
     message.accumulation = object.accumulation ?? "";
@@ -192,7 +192,7 @@ export const Leaf = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Leaf>, I>>(object: I): Leaf {
+  fromPartial(object: DeepPartial<Leaf>): Leaf {
     const message = createBaseLeaf();
     message.leaf = object.leaf !== undefined && object.leaf !== null ? Child.fromPartial(object.leaf) : undefined;
     return message;

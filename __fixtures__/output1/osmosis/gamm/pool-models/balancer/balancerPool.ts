@@ -2,7 +2,7 @@ import { Timestamp } from "../../../../google/protobuf/timestamp";
 import { Duration } from "../../../../google/protobuf/duration";
 import { Coin } from "../../../../cosmos/base/v1beta1/coin";
 import * as _m0 from "protobufjs/minimal";
-import { toTimestamp, fromTimestamp, isSet, fromJsonTimestamp, Exact, DeepPartial, Long } from "@osmonauts/helpers";
+import { toTimestamp, fromTimestamp, isSet, fromJsonTimestamp, DeepPartial, Long } from "@osmonauts/helpers";
 
 /**
  * Parameters for changing the weights in a balancer pool smoothly from
@@ -198,7 +198,7 @@ export const SmoothWeightChangeParams = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<SmoothWeightChangeParams>, I>>(object: I): SmoothWeightChangeParams {
+  fromPartial(object: DeepPartial<SmoothWeightChangeParams>): SmoothWeightChangeParams {
     const message = createBaseSmoothWeightChangeParams();
     message.startTime = object.startTime ?? undefined;
     message.duration = object.duration ?? undefined;
@@ -280,7 +280,7 @@ export const PoolParams = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<PoolParams>, I>>(object: I): PoolParams {
+  fromPartial(object: DeepPartial<PoolParams>): PoolParams {
     const message = createBasePoolParams();
     message.swapFee = object.swapFee ?? "";
     message.exitFee = object.exitFee ?? "";
@@ -350,7 +350,7 @@ export const PoolAsset = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<PoolAsset>, I>>(object: I): PoolAsset {
+  fromPartial(object: DeepPartial<PoolAsset>): PoolAsset {
     const message = createBasePoolAsset();
     message.token = object.token !== undefined && object.token !== null ? Coin.fromPartial(object.token) : undefined;
     message.weight = object.weight ?? "";
@@ -480,7 +480,7 @@ export const Pool = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Pool>, I>>(object: I): Pool {
+  fromPartial(object: DeepPartial<Pool>): Pool {
     const message = createBasePool();
     message.address = object.address ?? "";
     message.id = object.id !== undefined && object.id !== null ? Long.fromValue(object.id) : Long.UZERO;

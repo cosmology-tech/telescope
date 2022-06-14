@@ -1,134 +1,134 @@
-import * as _231 from "./claim/v1beta1/claim";
-import * as _232 from "./claim/v1beta1/genesis";
-import * as _233 from "./claim/v1beta1/params";
-import * as _234 from "./claim/v1beta1/query";
-import * as _235 from "./epochs/genesis";
-import * as _236 from "./epochs/query";
-import * as _237 from "./gamm/pool-models/balancer/balancerPool";
-import * as _238 from "./gamm/pool-models/balancer/tx";
-import * as _239 from "./gamm/v1beta1/genesis";
-import * as _240 from "./gamm/v1beta1/query";
-import * as _241 from "./gamm/v1beta1/tx";
-import * as _242 from "./incentives/gauge";
-import * as _243 from "./incentives/genesis";
-import * as _244 from "./incentives/params";
-import * as _245 from "./incentives/query";
-import * as _246 from "./incentives/tx";
-import * as _247 from "./lockup/genesis";
-import * as _248 from "./lockup/lock";
-import * as _249 from "./lockup/query";
-import * as _250 from "./lockup/tx";
-import * as _251 from "./mint/v1beta1/genesis";
-import * as _252 from "./mint/v1beta1/mint";
-import * as _253 from "./mint/v1beta1/query";
-import * as _254 from "./pool-incentives/v1beta1/genesis";
-import * as _255 from "./pool-incentives/v1beta1/gov";
-import * as _256 from "./pool-incentives/v1beta1/incentives";
-import * as _257 from "./pool-incentives/v1beta1/query";
-import * as _258 from "./store/v1beta1/tree";
-import * as _259 from "./superfluid/genesis";
-import * as _260 from "./superfluid/params";
-import * as _261 from "./superfluid/query";
-import * as _262 from "./superfluid/superfluid";
-import * as _263 from "./superfluid/tx";
-import * as _264 from "./txfees/v1beta1/feetoken";
-import * as _265 from "./txfees/v1beta1/genesis";
-import * as _266 from "./txfees/v1beta1/gov";
-import * as _267 from "./txfees/v1beta1/query";
-import * as _370 from "./gamm/v1beta1/tx.amino";
-import * as _371 from "./incentives/tx.amino";
-import * as _372 from "./lockup/tx.amino";
-import * as _373 from "./superfluid/tx.amino";
-import * as _374 from "./gamm/v1beta1/tx.registry";
-import * as _375 from "./incentives/tx.registry";
-import * as _376 from "./lockup/tx.registry";
-import * as _377 from "./superfluid/tx.registry";
-import * as _378 from "./claim/v1beta1/query.lcd";
-import * as _379 from "./epochs/query.lcd";
-import * as _380 from "./gamm/v1beta1/query.lcd";
-import * as _381 from "./incentives/query.lcd";
-import * as _382 from "./lockup/query.lcd";
-import * as _383 from "./mint/v1beta1/query.lcd";
-import * as _384 from "./pool-incentives/v1beta1/query.lcd";
-import * as _385 from "./superfluid/query.lcd";
-import * as _386 from "./txfees/v1beta1/query.lcd";
+import * as _255 from "./claim/v1beta1/claim";
+import * as _256 from "./claim/v1beta1/genesis";
+import * as _257 from "./claim/v1beta1/params";
+import * as _258 from "./claim/v1beta1/query";
+import * as _259 from "./epochs/genesis";
+import * as _260 from "./epochs/query";
+import * as _261 from "./gamm/pool-models/balancer/balancerPool";
+import * as _262 from "./gamm/pool-models/balancer/tx";
+import * as _263 from "./gamm/v1beta1/genesis";
+import * as _264 from "./gamm/v1beta1/query";
+import * as _265 from "./gamm/v1beta1/tx";
+import * as _266 from "./incentives/gauge";
+import * as _267 from "./incentives/genesis";
+import * as _268 from "./incentives/params";
+import * as _269 from "./incentives/query";
+import * as _270 from "./incentives/tx";
+import * as _271 from "./lockup/genesis";
+import * as _272 from "./lockup/lock";
+import * as _273 from "./lockup/query";
+import * as _274 from "./lockup/tx";
+import * as _275 from "./mint/v1beta1/genesis";
+import * as _276 from "./mint/v1beta1/mint";
+import * as _277 from "./mint/v1beta1/query";
+import * as _278 from "./pool-incentives/v1beta1/genesis";
+import * as _279 from "./pool-incentives/v1beta1/gov";
+import * as _280 from "./pool-incentives/v1beta1/incentives";
+import * as _281 from "./pool-incentives/v1beta1/query";
+import * as _282 from "./store/v1beta1/tree";
+import * as _283 from "./superfluid/genesis";
+import * as _284 from "./superfluid/params";
+import * as _285 from "./superfluid/query";
+import * as _286 from "./superfluid/superfluid";
+import * as _287 from "./superfluid/tx";
+import * as _288 from "./txfees/v1beta1/feetoken";
+import * as _289 from "./txfees/v1beta1/genesis";
+import * as _290 from "./txfees/v1beta1/gov";
+import * as _291 from "./txfees/v1beta1/query";
+import * as _408 from "./gamm/v1beta1/tx.amino";
+import * as _409 from "./incentives/tx.amino";
+import * as _410 from "./lockup/tx.amino";
+import * as _411 from "./superfluid/tx.amino";
+import * as _412 from "./gamm/v1beta1/tx.registry";
+import * as _413 from "./incentives/tx.registry";
+import * as _414 from "./lockup/tx.registry";
+import * as _415 from "./superfluid/tx.registry";
+import * as _416 from "./claim/v1beta1/query.lcd";
+import * as _417 from "./epochs/query.lcd";
+import * as _418 from "./gamm/v1beta1/query.lcd";
+import * as _419 from "./incentives/query.lcd";
+import * as _420 from "./lockup/query.lcd";
+import * as _421 from "./mint/v1beta1/query.lcd";
+import * as _422 from "./pool-incentives/v1beta1/query.lcd";
+import * as _423 from "./superfluid/query.lcd";
+import * as _424 from "./txfees/v1beta1/query.lcd";
 export namespace osmosis {
   export namespace claim {
-    export const v1beta1 = { ..._231,
-      ..._232,
-      ..._233,
-      ..._234,
-      ..._378
+    export const v1beta1 = { ..._255,
+      ..._256,
+      ..._257,
+      ..._258,
+      ..._416
     };
   }
   export namespace epochs {
-    export const v1beta1 = { ..._235,
-      ..._236,
-      ..._379
+    export const v1beta1 = { ..._259,
+      ..._260,
+      ..._417
     };
   }
   export namespace gamm {
-    export const v1beta1 = { ..._237,
-      ..._238,
-      ..._239,
-      ..._240,
-      ..._241,
-      ..._370,
-      ..._374,
-      ..._380
+    export const v1beta1 = { ..._261,
+      ..._262,
+      ..._263,
+      ..._264,
+      ..._265,
+      ..._408,
+      ..._412,
+      ..._418
     };
   }
-  export const incentives = { ..._242,
-    ..._243,
-    ..._244,
-    ..._245,
-    ..._246,
-    ..._371,
-    ..._375,
-    ..._381
+  export const incentives = { ..._266,
+    ..._267,
+    ..._268,
+    ..._269,
+    ..._270,
+    ..._409,
+    ..._413,
+    ..._419
   };
-  export const lockup = { ..._247,
-    ..._248,
-    ..._249,
-    ..._250,
-    ..._372,
-    ..._376,
-    ..._382
+  export const lockup = { ..._271,
+    ..._272,
+    ..._273,
+    ..._274,
+    ..._410,
+    ..._414,
+    ..._420
   };
   export namespace mint {
-    export const v1beta1 = { ..._251,
-      ..._252,
-      ..._253,
-      ..._383
+    export const v1beta1 = { ..._275,
+      ..._276,
+      ..._277,
+      ..._421
     };
   }
   export namespace poolincentives {
-    export const v1beta1 = { ..._254,
-      ..._255,
-      ..._256,
-      ..._257,
-      ..._384
+    export const v1beta1 = { ..._278,
+      ..._279,
+      ..._280,
+      ..._281,
+      ..._422
     };
   }
   export namespace store {
-    export const v1beta1 = { ..._258
+    export const v1beta1 = { ..._282
     };
   }
-  export const superfluid = { ..._259,
-    ..._260,
-    ..._261,
-    ..._262,
-    ..._263,
-    ..._373,
-    ..._377,
-    ..._385
+  export const superfluid = { ..._283,
+    ..._284,
+    ..._285,
+    ..._286,
+    ..._287,
+    ..._411,
+    ..._415,
+    ..._423
   };
   export namespace txfees {
-    export const v1beta1 = { ..._264,
-      ..._265,
-      ..._266,
-      ..._267,
-      ..._386
+    export const v1beta1 = { ..._288,
+      ..._289,
+      ..._290,
+      ..._291,
+      ..._424
     };
   }
 }

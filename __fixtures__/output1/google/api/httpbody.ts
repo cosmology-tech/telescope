@@ -1,6 +1,6 @@
 import { Any } from "../protobuf/any";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, bytesFromBase64, base64FromBytes, Exact, DeepPartial } from "@osmonauts/helpers";
+import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "@osmonauts/helpers";
 
 /**
  * Message that represents an arbitrary HTTP body. It should only be used for
@@ -138,7 +138,7 @@ export const HttpBody = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<HttpBody>, I>>(object: I): HttpBody {
+  fromPartial(object: DeepPartial<HttpBody>): HttpBody {
     const message = createBaseHttpBody();
     message.contentType = object.contentType ?? "";
     message.data = object.data ?? new Uint8Array();

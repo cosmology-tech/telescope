@@ -1,6 +1,6 @@
 import { Order, Counterparty, orderFromJSON, orderToJSON } from "../../channel/v1/channel";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
+import { isSet, DeepPartial } from "@osmonauts/helpers";
 
 /** QueryAppVersionRequest is the request type for the Query/AppVersion RPC method */
 export interface QueryAppVersionRequest {
@@ -122,7 +122,7 @@ export const QueryAppVersionRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryAppVersionRequest>, I>>(object: I): QueryAppVersionRequest {
+  fromPartial(object: DeepPartial<QueryAppVersionRequest>): QueryAppVersionRequest {
     const message = createBaseQueryAppVersionRequest();
     message.portId = object.portId ?? "";
     message.connectionId = object.connectionId ?? "";
@@ -194,7 +194,7 @@ export const QueryAppVersionResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryAppVersionResponse>, I>>(object: I): QueryAppVersionResponse {
+  fromPartial(object: DeepPartial<QueryAppVersionResponse>): QueryAppVersionResponse {
     const message = createBaseQueryAppVersionResponse();
     message.portId = object.portId ?? "";
     message.version = object.version ?? "";

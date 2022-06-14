@@ -1,5 +1,5 @@
 import * as _m0 from "protobufjs/minimal";
-import { Long, isSet, Exact, DeepPartial } from "@osmonauts/helpers";
+import { Long, isSet, DeepPartial } from "@osmonauts/helpers";
 
 /** GroupID stores owner, deployment sequence number and group sequence number */
 export interface GroupID {
@@ -79,7 +79,7 @@ export const GroupID = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<GroupID>, I>>(object: I): GroupID {
+  fromPartial(object: DeepPartial<GroupID>): GroupID {
     const message = createBaseGroupID();
     message.owner = object.owner ?? "";
     message.dseq = object.dseq !== undefined && object.dseq !== null ? Long.fromValue(object.dseq) : Long.UZERO;
