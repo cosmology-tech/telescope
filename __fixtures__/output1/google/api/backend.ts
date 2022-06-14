@@ -1,5 +1,5 @@
 import * as _m0 from "protobufjs/minimal";
-import { Exact, DeepPartial, isSet } from "@osmonauts/helpers";
+import { DeepPartial, isSet } from "@osmonauts/helpers";
 
 /**
  * Path Translation specifies how to combine the backend address with the
@@ -258,7 +258,7 @@ export const Backend = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Backend>, I>>(object: I): Backend {
+  fromPartial(object: DeepPartial<Backend>): Backend {
     const message = createBaseBackend();
     message.rules = object.rules?.map(e => BackendRule.fromPartial(e)) || [];
     return message;
@@ -403,7 +403,7 @@ export const BackendRule = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<BackendRule>, I>>(object: I): BackendRule {
+  fromPartial(object: DeepPartial<BackendRule>): BackendRule {
     const message = createBaseBackendRule();
     message.selector = object.selector ?? "";
     message.address = object.address ?? "";

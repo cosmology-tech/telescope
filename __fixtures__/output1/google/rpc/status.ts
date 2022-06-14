@@ -1,6 +1,6 @@
 import { Any } from "../protobuf/any";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
+import { isSet, DeepPartial } from "@osmonauts/helpers";
 
 /**
  * The `Status` type defines a logical error model that is suitable for
@@ -106,7 +106,7 @@ export const Status = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Status>, I>>(object: I): Status {
+  fromPartial(object: DeepPartial<Status>): Status {
     const message = createBaseStatus();
     message.code = object.code ?? 0;
     message.message = object.message ?? "";

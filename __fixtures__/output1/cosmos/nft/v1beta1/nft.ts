@@ -1,6 +1,6 @@
 import { Any } from "../../../google/protobuf/any";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
+import { isSet, DeepPartial } from "@osmonauts/helpers";
 
 /** Class defines the class of the nft type. */
 export interface Class {
@@ -159,7 +159,7 @@ export const Class = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Class>, I>>(object: I): Class {
+  fromPartial(object: DeepPartial<Class>): Class {
     const message = createBaseClass();
     message.id = object.id ?? "";
     message.name = object.name ?? "";
@@ -266,7 +266,7 @@ export const NFT = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<NFT>, I>>(object: I): NFT {
+  fromPartial(object: DeepPartial<NFT>): NFT {
     const message = createBaseNFT();
     message.classId = object.classId ?? "";
     message.id = object.id ?? "";

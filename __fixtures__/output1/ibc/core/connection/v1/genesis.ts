@@ -1,6 +1,6 @@
 import { IdentifiedConnection, ConnectionPaths, Params } from "./connection";
 import * as _m0 from "protobufjs/minimal";
-import { Long, isSet, Exact, DeepPartial } from "@osmonauts/helpers";
+import { Long, isSet, DeepPartial } from "@osmonauts/helpers";
 
 /** GenesisState defines the ibc connection submodule's genesis state. */
 export interface GenesisState {
@@ -105,7 +105,7 @@ export const GenesisState = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<GenesisState>, I>>(object: I): GenesisState {
+  fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
     message.connections = object.connections?.map(e => IdentifiedConnection.fromPartial(e)) || [];
     message.clientConnectionPaths = object.clientConnectionPaths?.map(e => ConnectionPaths.fromPartial(e)) || [];

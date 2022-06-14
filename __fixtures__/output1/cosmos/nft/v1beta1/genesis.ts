@@ -1,6 +1,6 @@
 import { Class, NFT } from "./nft";
 import * as _m0 from "protobufjs/minimal";
-import { Exact, DeepPartial, isSet } from "@osmonauts/helpers";
+import { DeepPartial, isSet } from "@osmonauts/helpers";
 
 /** GenesisState defines the nft module's genesis state. */
 export interface GenesisState {
@@ -89,7 +89,7 @@ export const GenesisState = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<GenesisState>, I>>(object: I): GenesisState {
+  fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
     message.classes = object.classes?.map(e => Class.fromPartial(e)) || [];
     message.entries = object.entries?.map(e => Entry.fromPartial(e)) || [];
@@ -164,7 +164,7 @@ export const Entry = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Entry>, I>>(object: I): Entry {
+  fromPartial(object: DeepPartial<Entry>): Entry {
     const message = createBaseEntry();
     message.owner = object.owner ?? "";
     message.nfts = object.nfts?.map(e => NFT.fromPartial(e)) || [];

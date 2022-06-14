@@ -1,6 +1,6 @@
 import { DistrRecord } from "./incentives";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
+import { isSet, DeepPartial } from "@osmonauts/helpers";
 
 /**
  * ReplacePoolIncentivesProposal is a gov Content type for updating the pool
@@ -109,7 +109,7 @@ export const ReplacePoolIncentivesProposal = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<ReplacePoolIncentivesProposal>, I>>(object: I): ReplacePoolIncentivesProposal {
+  fromPartial(object: DeepPartial<ReplacePoolIncentivesProposal>): ReplacePoolIncentivesProposal {
     const message = createBaseReplacePoolIncentivesProposal();
     message.title = object.title ?? "";
     message.description = object.description ?? "";
@@ -196,7 +196,7 @@ export const UpdatePoolIncentivesProposal = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<UpdatePoolIncentivesProposal>, I>>(object: I): UpdatePoolIncentivesProposal {
+  fromPartial(object: DeepPartial<UpdatePoolIncentivesProposal>): UpdatePoolIncentivesProposal {
     const message = createBaseUpdatePoolIncentivesProposal();
     message.title = object.title ?? "";
     message.description = object.description ?? "";

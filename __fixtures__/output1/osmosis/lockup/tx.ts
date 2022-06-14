@@ -2,7 +2,7 @@ import { Duration } from "../../google/protobuf/duration";
 import { Coin } from "../../cosmos/base/v1beta1/coin";
 import { PeriodLock } from "./lock";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, Exact, DeepPartial, Long } from "@osmonauts/helpers";
+import { isSet, DeepPartial, Long } from "@osmonauts/helpers";
 export interface MsgLockTokens {
   owner: string;
   duration: string;
@@ -105,7 +105,7 @@ export const MsgLockTokens = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgLockTokens>, I>>(object: I): MsgLockTokens {
+  fromPartial(object: DeepPartial<MsgLockTokens>): MsgLockTokens {
     const message = createBaseMsgLockTokens();
     message.owner = object.owner ?? "";
     message.duration = object.duration ?? undefined;
@@ -164,7 +164,7 @@ export const MsgLockTokensResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgLockTokensResponse>, I>>(object: I): MsgLockTokensResponse {
+  fromPartial(object: DeepPartial<MsgLockTokensResponse>): MsgLockTokensResponse {
     const message = createBaseMsgLockTokensResponse();
     message.ID = object.ID !== undefined && object.ID !== null ? Long.fromValue(object.ID) : Long.UZERO;
     return message;
@@ -221,7 +221,7 @@ export const MsgBeginUnlockingAll = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgBeginUnlockingAll>, I>>(object: I): MsgBeginUnlockingAll {
+  fromPartial(object: DeepPartial<MsgBeginUnlockingAll>): MsgBeginUnlockingAll {
     const message = createBaseMsgBeginUnlockingAll();
     message.owner = object.owner ?? "";
     return message;
@@ -284,7 +284,7 @@ export const MsgBeginUnlockingAllResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgBeginUnlockingAllResponse>, I>>(object: I): MsgBeginUnlockingAllResponse {
+  fromPartial(object: DeepPartial<MsgBeginUnlockingAllResponse>): MsgBeginUnlockingAllResponse {
     const message = createBaseMsgBeginUnlockingAllResponse();
     message.unlocks = object.unlocks?.map(e => PeriodLock.fromPartial(e)) || [];
     return message;
@@ -369,7 +369,7 @@ export const MsgBeginUnlocking = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgBeginUnlocking>, I>>(object: I): MsgBeginUnlocking {
+  fromPartial(object: DeepPartial<MsgBeginUnlocking>): MsgBeginUnlocking {
     const message = createBaseMsgBeginUnlocking();
     message.owner = object.owner ?? "";
     message.ID = object.ID !== undefined && object.ID !== null ? Long.fromValue(object.ID) : Long.UZERO;
@@ -428,7 +428,7 @@ export const MsgBeginUnlockingResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgBeginUnlockingResponse>, I>>(object: I): MsgBeginUnlockingResponse {
+  fromPartial(object: DeepPartial<MsgBeginUnlockingResponse>): MsgBeginUnlockingResponse {
     const message = createBaseMsgBeginUnlockingResponse();
     message.success = object.success ?? false;
     return message;

@@ -1,6 +1,6 @@
 import { CommitmentProof } from "../../../../confio/proofs";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, bytesFromBase64, base64FromBytes, Exact, DeepPartial } from "@osmonauts/helpers";
+import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "@osmonauts/helpers";
 
 /**
  * MerkleRoot defines a merkle root hash.
@@ -88,7 +88,7 @@ export const MerkleRoot = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MerkleRoot>, I>>(object: I): MerkleRoot {
+  fromPartial(object: DeepPartial<MerkleRoot>): MerkleRoot {
     const message = createBaseMerkleRoot();
     message.hash = object.hash ?? new Uint8Array();
     return message;
@@ -145,7 +145,7 @@ export const MerklePrefix = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MerklePrefix>, I>>(object: I): MerklePrefix {
+  fromPartial(object: DeepPartial<MerklePrefix>): MerklePrefix {
     const message = createBaseMerklePrefix();
     message.keyPrefix = object.keyPrefix ?? new Uint8Array();
     return message;
@@ -208,7 +208,7 @@ export const MerklePath = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MerklePath>, I>>(object: I): MerklePath {
+  fromPartial(object: DeepPartial<MerklePath>): MerklePath {
     const message = createBaseMerklePath();
     message.keyPath = object.keyPath?.map(e => e) || [];
     return message;
@@ -271,7 +271,7 @@ export const MerkleProof = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MerkleProof>, I>>(object: I): MerkleProof {
+  fromPartial(object: DeepPartial<MerkleProof>): MerkleProof {
     const message = createBaseMerkleProof();
     message.proofs = object.proofs?.map(e => CommitmentProof.fromPartial(e)) || [];
     return message;

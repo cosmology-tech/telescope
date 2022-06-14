@@ -1,5 +1,5 @@
 import * as _m0 from "protobufjs/minimal";
-import { Exact, DeepPartial, isSet } from "@osmonauts/helpers";
+import { DeepPartial, isSet } from "@osmonauts/helpers";
 
 /**
  * ### System parameter configuration
@@ -144,7 +144,7 @@ export const SystemParameters = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<SystemParameters>, I>>(object: I): SystemParameters {
+  fromPartial(object: DeepPartial<SystemParameters>): SystemParameters {
     const message = createBaseSystemParameters();
     message.rules = object.rules?.map(e => SystemParameterRule.fromPartial(e)) || [];
     return message;
@@ -218,7 +218,7 @@ export const SystemParameterRule = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<SystemParameterRule>, I>>(object: I): SystemParameterRule {
+  fromPartial(object: DeepPartial<SystemParameterRule>): SystemParameterRule {
     const message = createBaseSystemParameterRule();
     message.selector = object.selector ?? "";
     message.parameters = object.parameters?.map(e => SystemParameter.fromPartial(e)) || [];
@@ -298,7 +298,7 @@ export const SystemParameter = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<SystemParameter>, I>>(object: I): SystemParameter {
+  fromPartial(object: DeepPartial<SystemParameter>): SystemParameter {
     const message = createBaseSystemParameter();
     message.name = object.name ?? "";
     message.httpHeader = object.httpHeader ?? "";

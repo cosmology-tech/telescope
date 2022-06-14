@@ -1,6 +1,6 @@
 import { GroupID } from "./groupid";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
+import { isSet, DeepPartial } from "@osmonauts/helpers";
 
 /** MsgCloseGroup defines SDK message to close a single Group within a Deployment. */
 export interface MsgCloseGroup {
@@ -75,7 +75,7 @@ export const MsgCloseGroup = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgCloseGroup>, I>>(object: I): MsgCloseGroup {
+  fromPartial(object: DeepPartial<MsgCloseGroup>): MsgCloseGroup {
     const message = createBaseMsgCloseGroup();
     message.id = object.id !== undefined && object.id !== null ? GroupID.fromPartial(object.id) : undefined;
     return message;
@@ -119,7 +119,7 @@ export const MsgCloseGroupResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgCloseGroupResponse>, I>>(_: I): MsgCloseGroupResponse {
+  fromPartial(_: DeepPartial<MsgCloseGroupResponse>): MsgCloseGroupResponse {
     const message = createBaseMsgCloseGroupResponse();
     return message;
   }
@@ -175,7 +175,7 @@ export const MsgPauseGroup = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgPauseGroup>, I>>(object: I): MsgPauseGroup {
+  fromPartial(object: DeepPartial<MsgPauseGroup>): MsgPauseGroup {
     const message = createBaseMsgPauseGroup();
     message.id = object.id !== undefined && object.id !== null ? GroupID.fromPartial(object.id) : undefined;
     return message;
@@ -219,7 +219,7 @@ export const MsgPauseGroupResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgPauseGroupResponse>, I>>(_: I): MsgPauseGroupResponse {
+  fromPartial(_: DeepPartial<MsgPauseGroupResponse>): MsgPauseGroupResponse {
     const message = createBaseMsgPauseGroupResponse();
     return message;
   }
@@ -275,7 +275,7 @@ export const MsgStartGroup = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgStartGroup>, I>>(object: I): MsgStartGroup {
+  fromPartial(object: DeepPartial<MsgStartGroup>): MsgStartGroup {
     const message = createBaseMsgStartGroup();
     message.id = object.id !== undefined && object.id !== null ? GroupID.fromPartial(object.id) : undefined;
     return message;
@@ -319,7 +319,7 @@ export const MsgStartGroupResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgStartGroupResponse>, I>>(_: I): MsgStartGroupResponse {
+  fromPartial(_: DeepPartial<MsgStartGroupResponse>): MsgStartGroupResponse {
     const message = createBaseMsgStartGroupResponse();
     return message;
   }

@@ -1,6 +1,6 @@
 import { GroupSpec } from "../../deployment/v1beta2/groupspec";
 import * as _m0 from "protobufjs/minimal";
-import { Long, isSet, Exact, DeepPartial } from "@osmonauts/helpers";
+import { Long, isSet, DeepPartial } from "@osmonauts/helpers";
 
 /** State is an enum which refers to state of order */
 export enum Order_State {
@@ -167,7 +167,7 @@ export const OrderID = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<OrderID>, I>>(object: I): OrderID {
+  fromPartial(object: DeepPartial<OrderID>): OrderID {
     const message = createBaseOrderID();
     message.owner = object.owner ?? "";
     message.dseq = object.dseq !== undefined && object.dseq !== null ? Long.fromValue(object.dseq) : Long.UZERO;
@@ -260,7 +260,7 @@ export const Order = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Order>, I>>(object: I): Order {
+  fromPartial(object: DeepPartial<Order>): Order {
     const message = createBaseOrder();
     message.orderId = object.orderId !== undefined && object.orderId !== null ? OrderID.fromPartial(object.orderId) : undefined;
     message.state = object.state ?? 0;
@@ -364,7 +364,7 @@ export const OrderFilters = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<OrderFilters>, I>>(object: I): OrderFilters {
+  fromPartial(object: DeepPartial<OrderFilters>): OrderFilters {
     const message = createBaseOrderFilters();
     message.owner = object.owner ?? "";
     message.dseq = object.dseq !== undefined && object.dseq !== null ? Long.fromValue(object.dseq) : Long.UZERO;

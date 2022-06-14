@@ -13,6 +13,7 @@ interface TelescopeOpts {
     includeLCDClient?: boolean;
     aminoCasing: string;
     useDate?: boolean;
+    useExact?: boolean;
 }
 
 interface TelescopePackageOpts {

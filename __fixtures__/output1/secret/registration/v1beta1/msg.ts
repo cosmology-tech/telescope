@@ -1,5 +1,5 @@
 import * as _m0 from "protobufjs/minimal";
-import { isSet, bytesFromBase64, base64FromBytes, Exact, DeepPartial } from "@osmonauts/helpers";
+import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "@osmonauts/helpers";
 export interface RaAuthenticate {
   sender: Uint8Array;
   certificate: Uint8Array;
@@ -71,7 +71,7 @@ export const RaAuthenticate = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<RaAuthenticate>, I>>(object: I): RaAuthenticate {
+  fromPartial(object: DeepPartial<RaAuthenticate>): RaAuthenticate {
     const message = createBaseRaAuthenticate();
     message.sender = object.sender ?? new Uint8Array();
     message.certificate = object.certificate ?? new Uint8Array();
@@ -129,7 +129,7 @@ export const MasterCertificate = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MasterCertificate>, I>>(object: I): MasterCertificate {
+  fromPartial(object: DeepPartial<MasterCertificate>): MasterCertificate {
     const message = createBaseMasterCertificate();
     message.bytes = object.bytes ?? new Uint8Array();
     return message;
@@ -186,7 +186,7 @@ export const Key = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Key>, I>>(object: I): Key {
+  fromPartial(object: DeepPartial<Key>): Key {
     const message = createBaseKey();
     message.key = object.key ?? new Uint8Array();
     return message;

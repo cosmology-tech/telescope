@@ -1,6 +1,6 @@
 import { Coin } from "../../base/v1beta1/coin";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
+import { isSet, DeepPartial } from "@osmonauts/helpers";
 
 /**
  * AuthorizationType defines the type of staking module authorization type
@@ -176,7 +176,7 @@ export const StakeAuthorization = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<StakeAuthorization>, I>>(object: I): StakeAuthorization {
+  fromPartial(object: DeepPartial<StakeAuthorization>): StakeAuthorization {
     const message = createBaseStakeAuthorization();
     message.maxTokens = object.maxTokens !== undefined && object.maxTokens !== null ? Coin.fromPartial(object.maxTokens) : undefined;
     message.allowList = object.allowList !== undefined && object.allowList !== null ? StakeAuthorization_Validators.fromPartial(object.allowList) : undefined;
@@ -242,7 +242,7 @@ export const StakeAuthorization_Validators = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<StakeAuthorization_Validators>, I>>(object: I): StakeAuthorization_Validators {
+  fromPartial(object: DeepPartial<StakeAuthorization_Validators>): StakeAuthorization_Validators {
     const message = createBaseStakeAuthorization_Validators();
     message.address = object.address?.map(e => e) || [];
     return message;

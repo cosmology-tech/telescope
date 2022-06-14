@@ -1,5 +1,5 @@
 import * as _m0 from "protobufjs/minimal";
-import { isSet, bytesFromBase64, base64FromBytes, Exact, DeepPartial } from "@osmonauts/helpers";
+import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "@osmonauts/helpers";
 
 /** PubKey defines a secp256r1 ECDSA public key. */
 export interface PubKey {
@@ -65,7 +65,7 @@ export const PubKey = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<PubKey>, I>>(object: I): PubKey {
+  fromPartial(object: DeepPartial<PubKey>): PubKey {
     const message = createBasePubKey();
     message.key = object.key ?? new Uint8Array();
     return message;
@@ -122,7 +122,7 @@ export const PrivKey = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<PrivKey>, I>>(object: I): PrivKey {
+  fromPartial(object: DeepPartial<PrivKey>): PrivKey {
     const message = createBasePrivKey();
     message.secret = object.secret ?? new Uint8Array();
     return message;

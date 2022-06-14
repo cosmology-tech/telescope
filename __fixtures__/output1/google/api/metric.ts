@@ -2,7 +2,7 @@ import { LaunchStage, launchStageFromJSON, launchStageToJSON } from "./launch_st
 import { Duration } from "../protobuf/duration";
 import { LabelDescriptor } from "./label";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, Exact, DeepPartial, isObject } from "@osmonauts/helpers";
+import { isSet, DeepPartial, isObject } from "@osmonauts/helpers";
 
 /**
  * The kind of measurement. It describes how the data is reported.
@@ -560,7 +560,7 @@ export const MetricDescriptor = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MetricDescriptor>, I>>(object: I): MetricDescriptor {
+  fromPartial(object: DeepPartial<MetricDescriptor>): MetricDescriptor {
     const message = createBaseMetricDescriptor();
     message.name = object.name ?? "";
     message.type = object.type ?? "";
@@ -649,7 +649,7 @@ export const MetricDescriptor_MetricDescriptorMetadata = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MetricDescriptor_MetricDescriptorMetadata>, I>>(object: I): MetricDescriptor_MetricDescriptorMetadata {
+  fromPartial(object: DeepPartial<MetricDescriptor_MetricDescriptorMetadata>): MetricDescriptor_MetricDescriptorMetadata {
     const message = createBaseMetricDescriptor_MetricDescriptorMetadata();
     message.launchStage = object.launchStage ?? 0;
     message.samplePeriod = object.samplePeriod ?? undefined;
@@ -719,7 +719,7 @@ export const Metric_LabelsEntry = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Metric_LabelsEntry>, I>>(object: I): Metric_LabelsEntry {
+  fromPartial(object: DeepPartial<Metric_LabelsEntry>): Metric_LabelsEntry {
     const message = createBaseMetric_LabelsEntry();
     message.key = object.key ?? "";
     message.value = object.value ?? "";
@@ -807,7 +807,7 @@ export const Metric = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Metric>, I>>(object: I): Metric {
+  fromPartial(object: DeepPartial<Metric>): Metric {
     const message = createBaseMetric();
     message.type = object.type ?? "";
     message.labels = Object.entries(object.labels ?? {}).reduce<{

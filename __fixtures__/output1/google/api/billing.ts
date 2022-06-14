@@ -1,5 +1,5 @@
 import * as _m0 from "protobufjs/minimal";
-import { Exact, DeepPartial, isSet } from "@osmonauts/helpers";
+import { DeepPartial, isSet } from "@osmonauts/helpers";
 
 /**
  * Billing related configuration of the service.
@@ -118,7 +118,7 @@ export const Billing = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Billing>, I>>(object: I): Billing {
+  fromPartial(object: DeepPartial<Billing>): Billing {
     const message = createBaseBilling();
     message.consumerDestinations = object.consumerDestinations?.map(e => Billing_BillingDestination.fromPartial(e)) || [];
     return message;
@@ -192,7 +192,7 @@ export const Billing_BillingDestination = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Billing_BillingDestination>, I>>(object: I): Billing_BillingDestination {
+  fromPartial(object: DeepPartial<Billing_BillingDestination>): Billing_BillingDestination {
     const message = createBaseBilling_BillingDestination();
     message.monitoredResource = object.monitoredResource ?? "";
     message.metrics = object.metrics?.map(e => e) || [];

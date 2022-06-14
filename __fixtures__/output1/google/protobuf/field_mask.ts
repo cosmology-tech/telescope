@@ -1,5 +1,5 @@
 import * as _m0 from "protobufjs/minimal";
-import { Exact, DeepPartial } from "@osmonauts/helpers";
+import { DeepPartial } from "@osmonauts/helpers";
 
 /**
  * `FieldMask` represents a set of symbolic field paths, for example:
@@ -262,7 +262,7 @@ export const FieldMask = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<FieldMask>, I>>(object: I): FieldMask {
+  fromPartial(object: DeepPartial<FieldMask>): FieldMask {
     const message = createBaseFieldMask();
     message.paths = object.paths?.map(e => e) || [];
     return message;

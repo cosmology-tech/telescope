@@ -1,6 +1,6 @@
 import { Duration } from "../protobuf/duration";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, Exact, DeepPartial, isObject } from "@osmonauts/helpers";
+import { isSet, DeepPartial, isObject } from "@osmonauts/helpers";
 
 /**
  * Describes when the clients can retry a failed request. Clients could ignore
@@ -331,7 +331,7 @@ export const RetryInfo = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<RetryInfo>, I>>(object: I): RetryInfo {
+  fromPartial(object: DeepPartial<RetryInfo>): RetryInfo {
     const message = createBaseRetryInfo();
     message.retryDelay = object.retryDelay ?? undefined;
     return message;
@@ -405,7 +405,7 @@ export const DebugInfo = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<DebugInfo>, I>>(object: I): DebugInfo {
+  fromPartial(object: DeepPartial<DebugInfo>): DebugInfo {
     const message = createBaseDebugInfo();
     message.stackEntries = object.stackEntries?.map(e => e) || [];
     message.detail = object.detail ?? "";
@@ -469,7 +469,7 @@ export const QuotaFailure = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QuotaFailure>, I>>(object: I): QuotaFailure {
+  fromPartial(object: DeepPartial<QuotaFailure>): QuotaFailure {
     const message = createBaseQuotaFailure();
     message.violations = object.violations?.map(e => QuotaFailure_Violation.fromPartial(e)) || [];
     return message;
@@ -537,7 +537,7 @@ export const QuotaFailure_Violation = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QuotaFailure_Violation>, I>>(object: I): QuotaFailure_Violation {
+  fromPartial(object: DeepPartial<QuotaFailure_Violation>): QuotaFailure_Violation {
     const message = createBaseQuotaFailure_Violation();
     message.subject = object.subject ?? "";
     message.description = object.description ?? "";
@@ -606,7 +606,7 @@ export const ErrorInfo_MetadataEntry = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<ErrorInfo_MetadataEntry>, I>>(object: I): ErrorInfo_MetadataEntry {
+  fromPartial(object: DeepPartial<ErrorInfo_MetadataEntry>): ErrorInfo_MetadataEntry {
     const message = createBaseErrorInfo_MetadataEntry();
     message.key = object.key ?? "";
     message.value = object.value ?? "";
@@ -705,7 +705,7 @@ export const ErrorInfo = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<ErrorInfo>, I>>(object: I): ErrorInfo {
+  fromPartial(object: DeepPartial<ErrorInfo>): ErrorInfo {
     const message = createBaseErrorInfo();
     message.reason = object.reason ?? "";
     message.domain = object.domain ?? "";
@@ -778,7 +778,7 @@ export const PreconditionFailure = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<PreconditionFailure>, I>>(object: I): PreconditionFailure {
+  fromPartial(object: DeepPartial<PreconditionFailure>): PreconditionFailure {
     const message = createBasePreconditionFailure();
     message.violations = object.violations?.map(e => PreconditionFailure_Violation.fromPartial(e)) || [];
     return message;
@@ -857,7 +857,7 @@ export const PreconditionFailure_Violation = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<PreconditionFailure_Violation>, I>>(object: I): PreconditionFailure_Violation {
+  fromPartial(object: DeepPartial<PreconditionFailure_Violation>): PreconditionFailure_Violation {
     const message = createBasePreconditionFailure_Violation();
     message.type = object.type ?? "";
     message.subject = object.subject ?? "";
@@ -922,7 +922,7 @@ export const BadRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<BadRequest>, I>>(object: I): BadRequest {
+  fromPartial(object: DeepPartial<BadRequest>): BadRequest {
     const message = createBaseBadRequest();
     message.fieldViolations = object.fieldViolations?.map(e => BadRequest_FieldViolation.fromPartial(e)) || [];
     return message;
@@ -990,7 +990,7 @@ export const BadRequest_FieldViolation = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<BadRequest_FieldViolation>, I>>(object: I): BadRequest_FieldViolation {
+  fromPartial(object: DeepPartial<BadRequest_FieldViolation>): BadRequest_FieldViolation {
     const message = createBaseBadRequest_FieldViolation();
     message.field = object.field ?? "";
     message.description = object.description ?? "";
@@ -1059,7 +1059,7 @@ export const RequestInfo = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<RequestInfo>, I>>(object: I): RequestInfo {
+  fromPartial(object: DeepPartial<RequestInfo>): RequestInfo {
     const message = createBaseRequestInfo();
     message.requestId = object.requestId ?? "";
     message.servingData = object.servingData ?? "";
@@ -1150,7 +1150,7 @@ export const ResourceInfo = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<ResourceInfo>, I>>(object: I): ResourceInfo {
+  fromPartial(object: DeepPartial<ResourceInfo>): ResourceInfo {
     const message = createBaseResourceInfo();
     message.resourceType = object.resourceType ?? "";
     message.resourceName = object.resourceName ?? "";
@@ -1216,7 +1216,7 @@ export const Help = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Help>, I>>(object: I): Help {
+  fromPartial(object: DeepPartial<Help>): Help {
     const message = createBaseHelp();
     message.links = object.links?.map(e => Help_Link.fromPartial(e)) || [];
     return message;
@@ -1284,7 +1284,7 @@ export const Help_Link = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Help_Link>, I>>(object: I): Help_Link {
+  fromPartial(object: DeepPartial<Help_Link>): Help_Link {
     const message = createBaseHelp_Link();
     message.description = object.description ?? "";
     message.url = object.url ?? "";
@@ -1353,7 +1353,7 @@ export const LocalizedMessage = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<LocalizedMessage>, I>>(object: I): LocalizedMessage {
+  fromPartial(object: DeepPartial<LocalizedMessage>): LocalizedMessage {
     const message = createBaseLocalizedMessage();
     message.locale = object.locale ?? "";
     message.message = object.message ?? "";

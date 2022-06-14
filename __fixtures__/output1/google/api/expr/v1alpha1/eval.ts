@@ -1,7 +1,7 @@
 import { Value } from "./value";
 import { Status } from "../../../rpc/status";
 import * as _m0 from "protobufjs/minimal";
-import { Exact, DeepPartial, Long, isSet } from "@osmonauts/helpers";
+import { DeepPartial, Long, isSet } from "@osmonauts/helpers";
 
 /**
  * The state of an evaluation.
@@ -175,7 +175,7 @@ export const EvalState = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<EvalState>, I>>(object: I): EvalState {
+  fromPartial(object: DeepPartial<EvalState>): EvalState {
     const message = createBaseEvalState();
     message.values = object.values?.map(e => ExprValue.fromPartial(e)) || [];
     message.results = object.results?.map(e => EvalState_Result.fromPartial(e)) || [];
@@ -244,7 +244,7 @@ export const EvalState_Result = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<EvalState_Result>, I>>(object: I): EvalState_Result {
+  fromPartial(object: DeepPartial<EvalState_Result>): EvalState_Result {
     const message = createBaseEvalState_Result();
     message.expr = object.expr !== undefined && object.expr !== null ? Long.fromValue(object.expr) : Long.ZERO;
     message.value = object.value !== undefined && object.value !== null ? Long.fromValue(object.value) : Long.ZERO;
@@ -324,7 +324,7 @@ export const ExprValue = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<ExprValue>, I>>(object: I): ExprValue {
+  fromPartial(object: DeepPartial<ExprValue>): ExprValue {
     const message = createBaseExprValue();
     message.value = object.value !== undefined && object.value !== null ? Value.fromPartial(object.value) : undefined;
     message.error = object.error !== undefined && object.error !== null ? ErrorSet.fromPartial(object.error) : undefined;
@@ -389,7 +389,7 @@ export const ErrorSet = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<ErrorSet>, I>>(object: I): ErrorSet {
+  fromPartial(object: DeepPartial<ErrorSet>): ErrorSet {
     const message = createBaseErrorSet();
     message.errors = object.errors?.map(e => Status.fromPartial(e)) || [];
     return message;
@@ -464,7 +464,7 @@ export const UnknownSet = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<UnknownSet>, I>>(object: I): UnknownSet {
+  fromPartial(object: DeepPartial<UnknownSet>): UnknownSet {
     const message = createBaseUnknownSet();
     message.exprs = object.exprs?.map(e => Long.fromValue(e)) || [];
     return message;

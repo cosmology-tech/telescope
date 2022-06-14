@@ -1,6 +1,6 @@
 import { Any } from "../protobuf/any";
 import * as _m0 from "protobufjs/minimal";
-import { Exact, DeepPartial } from "@osmonauts/helpers";
+import { DeepPartial } from "@osmonauts/helpers";
 
 /** Source information used to create a Service Config */
 export interface SourceInfo {
@@ -63,7 +63,7 @@ export const SourceInfo = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<SourceInfo>, I>>(object: I): SourceInfo {
+  fromPartial(object: DeepPartial<SourceInfo>): SourceInfo {
     const message = createBaseSourceInfo();
     message.sourceFiles = object.sourceFiles?.map(e => Any.fromPartial(e)) || [];
     return message;

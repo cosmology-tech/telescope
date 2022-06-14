@@ -43,3 +43,23 @@ describe('cosmos/staking/v1beta1/tx', () => {
     })
 });
 
+
+describe('evmos/fees/v1/tx', () => {
+    const {
+        context, protos, root
+    } = prepareContext(store, 'evmos/fees/v1/tx.proto')
+
+    it('AminoConverter', () => {
+        context.options = {
+            aminoCasingFn: snake
+        };
+
+        expectCode(createAminoConverter({
+            context,
+            root,
+            name: 'AminoConverter',
+            protos
+        }))
+    })
+});
+

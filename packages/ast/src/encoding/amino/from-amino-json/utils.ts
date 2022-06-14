@@ -1,5 +1,5 @@
 import * as t from '@babel/types';
-import { BILLION, memberExpressionOrIdentifierAminoCasing, shorthandProperty } from '../../../utils';
+import { BILLION, memberExpressionOrIdentifier, memberExpressionOrIdentifierAminoCasing, shorthandProperty } from '../../../utils';
 import { FromAminoParseField, fromAminoParseField } from './index'
 import { protoFieldsToArray } from '../utils';
 import { getOneOfs, getFieldOptionality } from '../../proto';
@@ -180,6 +180,19 @@ export const fromAmino = {
         );
     },
 
+    arrayFrom(args: FromAminoParseField) {
+        return t.objectProperty(t.identifier(args.field.name),
+            t.callExpression(
+                t.memberExpression(
+                    t.identifier('Array'),
+                    t.identifier('from')
+                ),
+                [
+                    memberExpressionOrIdentifierAminoCasing(args.scope, args.context.options.aminoCasingFn)
+                ]
+            ));
+    },
+
     typeArray({ context, field, currentProtoPath, scope, nested, isOptional }: FromAminoParseField) {
         const variable = 'el' + nested;
         const parentField = field;
@@ -223,17 +236,28 @@ export const fromAmino = {
         );
     },
 
-    arrayFrom(args: FromAminoParseField) {
-        return t.objectProperty(t.identifier(args.field.name),
-            t.callExpression(
-                t.memberExpression(
-                    t.identifier('Array'),
-                    t.identifier('from')
-                ),
-                [
-                    memberExpressionOrIdentifierAminoCasing(args.scope, args.context.options.aminoCasingFn)
-                ]
-            ));
+
+    scalarArray({ context, field, currentProtoPath, scope, nested, isOptional }: FromAminoParseField, arrayTypeAstFunc: Function) {
+        const variable = 'el' + nested;
+
+        const expr = t.callExpression(
+            t.memberExpression(
+                memberExpressionOrIdentifierAminoCasing(scope, context.options.aminoCasingFn),
+                t.identifier('map')
+            ),
+            [
+                t.arrowFunctionExpression(
+                    [
+                        t.identifier(variable)
+                    ],
+                    arrayTypeAstFunc(variable)
+                )
+            ]
+        );
+
+        return t.objectProperty(t.identifier(field.name),
+            expr
+        );
     },
 
     pubkey(args: FromAminoParseField) {
@@ -272,5 +296,16 @@ export const fromAmino = {
             )
         )
     }
-
 };
+
+
+export const arrayTypes = {
+    long(varname: string) {
+        return t.callExpression(
+            t.memberExpression(t.identifier('Long'), t.identifier('fromString')),
+            [
+                t.identifier(varname)
+            ]
+        )
+    }
+}

@@ -1,7 +1,7 @@
 import { Coin } from "../../base/v1beta1/coin";
 import { Period } from "./vesting";
 import * as _m0 from "protobufjs/minimal";
-import { Long, isSet, Exact, DeepPartial } from "@osmonauts/helpers";
+import { Long, isSet, DeepPartial } from "@osmonauts/helpers";
 
 /**
  * MsgCreateVestingAccount defines a message that enables creating a vesting
@@ -147,7 +147,7 @@ export const MsgCreateVestingAccount = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgCreateVestingAccount>, I>>(object: I): MsgCreateVestingAccount {
+  fromPartial(object: DeepPartial<MsgCreateVestingAccount>): MsgCreateVestingAccount {
     const message = createBaseMsgCreateVestingAccount();
     message.fromAddress = object.fromAddress ?? "";
     message.toAddress = object.toAddress ?? "";
@@ -195,7 +195,7 @@ export const MsgCreateVestingAccountResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgCreateVestingAccountResponse>, I>>(_: I): MsgCreateVestingAccountResponse {
+  fromPartial(_: DeepPartial<MsgCreateVestingAccountResponse>): MsgCreateVestingAccountResponse {
     const message = createBaseMsgCreateVestingAccountResponse();
     return message;
   }
@@ -279,7 +279,7 @@ export const MsgCreatePermanentLockedAccount = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgCreatePermanentLockedAccount>, I>>(object: I): MsgCreatePermanentLockedAccount {
+  fromPartial(object: DeepPartial<MsgCreatePermanentLockedAccount>): MsgCreatePermanentLockedAccount {
     const message = createBaseMsgCreatePermanentLockedAccount();
     message.fromAddress = object.fromAddress ?? "";
     message.toAddress = object.toAddress ?? "";
@@ -325,7 +325,7 @@ export const MsgCreatePermanentLockedAccountResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgCreatePermanentLockedAccountResponse>, I>>(_: I): MsgCreatePermanentLockedAccountResponse {
+  fromPartial(_: DeepPartial<MsgCreatePermanentLockedAccountResponse>): MsgCreatePermanentLockedAccountResponse {
     const message = createBaseMsgCreatePermanentLockedAccountResponse();
     return message;
   }
@@ -420,7 +420,7 @@ export const MsgCreatePeriodicVestingAccount = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgCreatePeriodicVestingAccount>, I>>(object: I): MsgCreatePeriodicVestingAccount {
+  fromPartial(object: DeepPartial<MsgCreatePeriodicVestingAccount>): MsgCreatePeriodicVestingAccount {
     const message = createBaseMsgCreatePeriodicVestingAccount();
     message.fromAddress = object.fromAddress ?? "";
     message.toAddress = object.toAddress ?? "";
@@ -467,7 +467,7 @@ export const MsgCreatePeriodicVestingAccountResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgCreatePeriodicVestingAccountResponse>, I>>(_: I): MsgCreatePeriodicVestingAccountResponse {
+  fromPartial(_: DeepPartial<MsgCreatePeriodicVestingAccountResponse>): MsgCreatePeriodicVestingAccountResponse {
     const message = createBaseMsgCreatePeriodicVestingAccountResponse();
     return message;
   }

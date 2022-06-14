@@ -1,5 +1,5 @@
 import * as _m0 from "protobufjs/minimal";
-import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
+import { isSet, DeepPartial } from "@osmonauts/helpers";
 
 /** Value types that can be used as label values. */
 export enum LabelDescriptor_ValueType {
@@ -132,7 +132,7 @@ export const LabelDescriptor = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<LabelDescriptor>, I>>(object: I): LabelDescriptor {
+  fromPartial(object: DeepPartial<LabelDescriptor>): LabelDescriptor {
     const message = createBaseLabelDescriptor();
     message.key = object.key ?? "";
     message.valueType = object.valueType ?? 0;

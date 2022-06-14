@@ -1,5 +1,5 @@
 import * as _m0 from "protobufjs/minimal";
-import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
+import { isSet, DeepPartial } from "@osmonauts/helpers";
 
 /**
  * FungibleTokenPacketData defines a struct for the packet payload
@@ -102,7 +102,7 @@ export const FungibleTokenPacketData = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<FungibleTokenPacketData>, I>>(object: I): FungibleTokenPacketData {
+  fromPartial(object: DeepPartial<FungibleTokenPacketData>): FungibleTokenPacketData {
     const message = createBaseFungibleTokenPacketData();
     message.denom = object.denom ?? "";
     message.amount = object.amount ?? "";

@@ -1,7 +1,7 @@
 import { SourceInfo } from "./source";
 import { NullValue, nullValueFromJSON, nullValueToJSON } from "../../../protobuf/struct";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, Exact, DeepPartial, Long, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
+import { isSet, DeepPartial, Long, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
 
 /** An expression together with source information as returned by the parser. */
 export interface ParsedExpr {
@@ -337,7 +337,7 @@ export const ParsedExpr = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<ParsedExpr>, I>>(object: I): ParsedExpr {
+  fromPartial(object: DeepPartial<ParsedExpr>): ParsedExpr {
     const message = createBaseParsedExpr();
     message.expr = object.expr !== undefined && object.expr !== null ? Expr.fromPartial(object.expr) : undefined;
     message.sourceInfo = object.sourceInfo !== undefined && object.sourceInfo !== null ? SourceInfo.fromPartial(object.sourceInfo) : undefined;
@@ -473,7 +473,7 @@ export const Expr = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Expr>, I>>(object: I): Expr {
+  fromPartial(object: DeepPartial<Expr>): Expr {
     const message = createBaseExpr();
     message.id = object.id ?? 0;
     message.literalExpr = object.literalExpr !== undefined && object.literalExpr !== null ? Literal.fromPartial(object.literalExpr) : undefined;
@@ -537,7 +537,7 @@ export const Expr_Ident = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Expr_Ident>, I>>(object: I): Expr_Ident {
+  fromPartial(object: DeepPartial<Expr_Ident>): Expr_Ident {
     const message = createBaseExpr_Ident();
     message.name = object.name ?? "";
     return message;
@@ -616,7 +616,7 @@ export const Expr_Select = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Expr_Select>, I>>(object: I): Expr_Select {
+  fromPartial(object: DeepPartial<Expr_Select>): Expr_Select {
     const message = createBaseExpr_Select();
     message.operand = object.operand !== undefined && object.operand !== null ? Expr.fromPartial(object.operand) : undefined;
     message.field = object.field ?? "";
@@ -703,7 +703,7 @@ export const Expr_Call = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Expr_Call>, I>>(object: I): Expr_Call {
+  fromPartial(object: DeepPartial<Expr_Call>): Expr_Call {
     const message = createBaseExpr_Call();
     message.target = object.target !== undefined && object.target !== null ? Expr.fromPartial(object.target) : undefined;
     message.function = object.function ?? "";
@@ -768,7 +768,7 @@ export const Expr_CreateList = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Expr_CreateList>, I>>(object: I): Expr_CreateList {
+  fromPartial(object: DeepPartial<Expr_CreateList>): Expr_CreateList {
     const message = createBaseExpr_CreateList();
     message.elements = object.elements?.map(e => Expr.fromPartial(e)) || [];
     return message;
@@ -842,7 +842,7 @@ export const Expr_CreateStruct = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Expr_CreateStruct>, I>>(object: I): Expr_CreateStruct {
+  fromPartial(object: DeepPartial<Expr_CreateStruct>): Expr_CreateStruct {
     const message = createBaseExpr_CreateStruct();
     message.type = object.type ?? "";
     message.entries = object.entries?.map(e => Expr_CreateStruct_Entry.fromPartial(e)) || [];
@@ -933,7 +933,7 @@ export const Expr_CreateStruct_Entry = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Expr_CreateStruct_Entry>, I>>(object: I): Expr_CreateStruct_Entry {
+  fromPartial(object: DeepPartial<Expr_CreateStruct_Entry>): Expr_CreateStruct_Entry {
     const message = createBaseExpr_CreateStruct_Entry();
     message.id = object.id ?? 0;
     message.fieldKey = object.fieldKey ?? undefined;
@@ -1059,7 +1059,7 @@ export const Expr_Comprehension = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Expr_Comprehension>, I>>(object: I): Expr_Comprehension {
+  fromPartial(object: DeepPartial<Expr_Comprehension>): Expr_Comprehension {
     const message = createBaseExpr_Comprehension();
     message.iterVar = object.iterVar ?? "";
     message.iterRange = object.iterRange !== undefined && object.iterRange !== null ? Expr.fromPartial(object.iterRange) : undefined;
@@ -1188,7 +1188,7 @@ export const Literal = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Literal>, I>>(object: I): Literal {
+  fromPartial(object: DeepPartial<Literal>): Literal {
     const message = createBaseLiteral();
     message.nullValue = object.nullValue ?? undefined;
     message.boolValue = object.boolValue ?? undefined;

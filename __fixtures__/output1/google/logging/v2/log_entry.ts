@@ -5,7 +5,7 @@ import { Timestamp } from "../../protobuf/timestamp";
 import { LogSeverity, logSeverityFromJSON, logSeverityToJSON } from "../type/log_severity";
 import { HttpRequest } from "../type/http_request";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, Exact, DeepPartial, toTimestamp, fromTimestamp, fromJsonTimestamp, isObject, Long } from "@osmonauts/helpers";
+import { isSet, DeepPartial, toTimestamp, fromTimestamp, fromJsonTimestamp, isObject, Long } from "@osmonauts/helpers";
 export interface LogEntry_LabelsEntry {
   key: string;
   value: string;
@@ -313,7 +313,7 @@ export const LogEntry_LabelsEntry = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<LogEntry_LabelsEntry>, I>>(object: I): LogEntry_LabelsEntry {
+  fromPartial(object: DeepPartial<LogEntry_LabelsEntry>): LogEntry_LabelsEntry {
     const message = createBaseLogEntry_LabelsEntry();
     message.key = object.key ?? "";
     message.value = object.value ?? "";
@@ -567,7 +567,7 @@ export const LogEntry = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<LogEntry>, I>>(object: I): LogEntry {
+  fromPartial(object: DeepPartial<LogEntry>): LogEntry {
     const message = createBaseLogEntry();
     message.logName = object.logName ?? "";
     message.resource = object.resource !== undefined && object.resource !== null ? MonitoredResource.fromPartial(object.resource) : undefined;
@@ -681,7 +681,7 @@ export const LogEntryOperation = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<LogEntryOperation>, I>>(object: I): LogEntryOperation {
+  fromPartial(object: DeepPartial<LogEntryOperation>): LogEntryOperation {
     const message = createBaseLogEntryOperation();
     message.id = object.id ?? "";
     message.producer = object.producer ?? "";
@@ -763,7 +763,7 @@ export const LogEntrySourceLocation = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<LogEntrySourceLocation>, I>>(object: I): LogEntrySourceLocation {
+  fromPartial(object: DeepPartial<LogEntrySourceLocation>): LogEntrySourceLocation {
     const message = createBaseLogEntrySourceLocation();
     message.file = object.file ?? "";
     message.line = object.line !== undefined && object.line !== null ? Long.fromValue(object.line) : Long.ZERO;
@@ -844,7 +844,7 @@ export const LogSplit = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<LogSplit>, I>>(object: I): LogSplit {
+  fromPartial(object: DeepPartial<LogSplit>): LogSplit {
     const message = createBaseLogSplit();
     message.uid = object.uid ?? "";
     message.index = object.index ?? 0;

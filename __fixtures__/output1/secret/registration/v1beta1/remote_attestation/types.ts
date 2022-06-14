@@ -1,5 +1,5 @@
 import * as _m0 from "protobufjs/minimal";
-import { Long, isSet, Exact, DeepPartial, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
+import { Long, isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
 export interface QuoteReport {
   id: string;
   timestamp: string;
@@ -161,7 +161,7 @@ export const QuoteReport = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QuoteReport>, I>>(object: I): QuoteReport {
+  fromPartial(object: DeepPartial<QuoteReport>): QuoteReport {
     const message = createBaseQuoteReport();
     message.id = object.id ?? "";
     message.timestamp = object.timestamp ?? "";
@@ -246,7 +246,7 @@ export const QuoteReportBody = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QuoteReportBody>, I>>(object: I): QuoteReportBody {
+  fromPartial(object: DeepPartial<QuoteReportBody>): QuoteReportBody {
     const message = createBaseQuoteReportBody();
     message.mrEnclave = object.mrEnclave ?? "";
     message.mrSigner = object.mrSigner ?? "";
@@ -327,7 +327,7 @@ export const QuoteReportData = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QuoteReportData>, I>>(object: I): QuoteReportData {
+  fromPartial(object: DeepPartial<QuoteReportData>): QuoteReportData {
     const message = createBaseQuoteReportData();
     message.version = object.version !== undefined && object.version !== null ? Long.fromValue(object.version) : Long.UZERO;
     message.signType = object.signType !== undefined && object.signType !== null ? Long.fromValue(object.signType) : Long.UZERO;
@@ -408,7 +408,7 @@ export const EndorsedAttestationReport = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<EndorsedAttestationReport>, I>>(object: I): EndorsedAttestationReport {
+  fromPartial(object: DeepPartial<EndorsedAttestationReport>): EndorsedAttestationReport {
     const message = createBaseEndorsedAttestationReport();
     message.report = object.report ?? new Uint8Array();
     message.signature = object.signature ?? new Uint8Array();
@@ -478,7 +478,7 @@ export const SGXEC256Signature = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<SGXEC256Signature>, I>>(object: I): SGXEC256Signature {
+  fromPartial(object: DeepPartial<SGXEC256Signature>): SGXEC256Signature {
     const message = createBaseSGXEC256Signature();
     message.gx = object.gx ?? "";
     message.gy = object.gy ?? "";
@@ -624,7 +624,7 @@ export const PlatformInfoBlob = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<PlatformInfoBlob>, I>>(object: I): PlatformInfoBlob {
+  fromPartial(object: DeepPartial<PlatformInfoBlob>): PlatformInfoBlob {
     const message = createBasePlatformInfoBlob();
     message.sgxEpidGroupFlags = object.sgxEpidGroupFlags ?? 0;
     message.sgxTcbEvaluationFlags = object.sgxTcbEvaluationFlags ?? 0;

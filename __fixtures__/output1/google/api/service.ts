@@ -19,7 +19,7 @@ import { SystemParameters } from "./system_parameter";
 import { SourceInfo } from "./source_info";
 import { UInt32Value } from "../protobuf/wrappers";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
+import { isSet, DeepPartial } from "@osmonauts/helpers";
 
 /**
  * `Service` is the root object of Google service configuration schema. It
@@ -520,7 +520,7 @@ export const Service = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Service>, I>>(object: I): Service {
+  fromPartial(object: DeepPartial<Service>): Service {
     const message = createBaseService();
     message.name = object.name ?? "";
     message.title = object.title ?? "";

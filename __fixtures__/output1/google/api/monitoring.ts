@@ -1,5 +1,5 @@
 import * as _m0 from "protobufjs/minimal";
-import { Exact, DeepPartial, isSet } from "@osmonauts/helpers";
+import { DeepPartial, isSet } from "@osmonauts/helpers";
 
 /**
  * Monitoring configuration of the service.
@@ -166,7 +166,7 @@ export const Monitoring = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Monitoring>, I>>(object: I): Monitoring {
+  fromPartial(object: DeepPartial<Monitoring>): Monitoring {
     const message = createBaseMonitoring();
     message.producerDestinations = object.producerDestinations?.map(e => Monitoring_MonitoringDestination.fromPartial(e)) || [];
     message.consumerDestinations = object.consumerDestinations?.map(e => Monitoring_MonitoringDestination.fromPartial(e)) || [];
@@ -241,7 +241,7 @@ export const Monitoring_MonitoringDestination = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Monitoring_MonitoringDestination>, I>>(object: I): Monitoring_MonitoringDestination {
+  fromPartial(object: DeepPartial<Monitoring_MonitoringDestination>): Monitoring_MonitoringDestination {
     const message = createBaseMonitoring_MonitoringDestination();
     message.monitoredResource = object.monitoredResource ?? "";
     message.metrics = object.metrics?.map(e => e) || [];

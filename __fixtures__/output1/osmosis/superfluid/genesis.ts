@@ -1,7 +1,7 @@
 import { Params } from "./params";
 import { SuperfluidAsset, OsmoEquivalentMultiplierRecord, SuperfluidIntermediaryAccount, LockIdIntermediaryAccountConnection } from "./superfluid";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
+import { isSet, DeepPartial } from "@osmonauts/helpers";
 
 /** GenesisState defines the module's genesis state. */
 export interface GenesisState {
@@ -126,7 +126,7 @@ export const GenesisState = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<GenesisState>, I>>(object: I): GenesisState {
+  fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
     message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     message.superfluidAssets = object.superfluidAssets?.map(e => SuperfluidAsset.fromPartial(e)) || [];

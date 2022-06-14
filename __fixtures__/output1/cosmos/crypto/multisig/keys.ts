@@ -1,6 +1,6 @@
 import { Any } from "../../../google/protobuf/any";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
+import { isSet, DeepPartial } from "@osmonauts/helpers";
 
 /**
  * LegacyAminoPubKey specifies a public key type
@@ -78,7 +78,7 @@ export const LegacyAminoPubKey = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<LegacyAminoPubKey>, I>>(object: I): LegacyAminoPubKey {
+  fromPartial(object: DeepPartial<LegacyAminoPubKey>): LegacyAminoPubKey {
     const message = createBaseLegacyAminoPubKey();
     message.threshold = object.threshold ?? 0;
     message.publicKeys = object.publicKeys?.map(e => Any.fromPartial(e)) || [];

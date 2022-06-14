@@ -1,6 +1,6 @@
 import { Coin } from "../../../cosmos/base/v1beta1/coin";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
+import { isSet, DeepPartial } from "@osmonauts/helpers";
 
 /**
  * DepositDeploymentAuthorization allows the grantee to deposit up to spend_limit coins from
@@ -63,7 +63,7 @@ export const DepositDeploymentAuthorization = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<DepositDeploymentAuthorization>, I>>(object: I): DepositDeploymentAuthorization {
+  fromPartial(object: DeepPartial<DepositDeploymentAuthorization>): DepositDeploymentAuthorization {
     const message = createBaseDepositDeploymentAuthorization();
     message.spendLimit = object.spendLimit !== undefined && object.spendLimit !== null ? Coin.fromPartial(object.spendLimit) : undefined;
     return message;

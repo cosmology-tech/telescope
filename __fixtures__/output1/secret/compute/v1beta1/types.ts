@@ -1,5 +1,5 @@
 import * as _m0 from "protobufjs/minimal";
-import { isSet, Exact, DeepPartial, bytesFromBase64, base64FromBytes, Long } from "@osmonauts/helpers";
+import { isSet, DeepPartial, bytesFromBase64, base64FromBytes, Long } from "@osmonauts/helpers";
 export enum AccessType {
   UNDEFINED = 0,
   NOBODY = 1,
@@ -147,7 +147,7 @@ export const AccessTypeParam = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<AccessTypeParam>, I>>(object: I): AccessTypeParam {
+  fromPartial(object: DeepPartial<AccessTypeParam>): AccessTypeParam {
     const message = createBaseAccessTypeParam();
     message.value = object.value ?? 0;
     return message;
@@ -237,7 +237,7 @@ export const CodeInfo = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<CodeInfo>, I>>(object: I): CodeInfo {
+  fromPartial(object: DeepPartial<CodeInfo>): CodeInfo {
     const message = createBaseCodeInfo();
     message.codeHash = object.codeHash ?? new Uint8Array();
     message.creator = object.creator ?? new Uint8Array();
@@ -308,7 +308,7 @@ export const ContractCustomInfo = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<ContractCustomInfo>, I>>(object: I): ContractCustomInfo {
+  fromPartial(object: DeepPartial<ContractCustomInfo>): ContractCustomInfo {
     const message = createBaseContractCustomInfo();
     message.enclaveKey = object.enclaveKey ?? new Uint8Array();
     message.label = object.label ?? "";
@@ -399,7 +399,7 @@ export const ContractInfo = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<ContractInfo>, I>>(object: I): ContractInfo {
+  fromPartial(object: DeepPartial<ContractInfo>): ContractInfo {
     const message = createBaseContractInfo();
     message.codeId = object.codeId !== undefined && object.codeId !== null ? Long.fromValue(object.codeId) : Long.UZERO;
     message.creator = object.creator ?? new Uint8Array();
@@ -470,7 +470,7 @@ export const AbsoluteTxPosition = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<AbsoluteTxPosition>, I>>(object: I): AbsoluteTxPosition {
+  fromPartial(object: DeepPartial<AbsoluteTxPosition>): AbsoluteTxPosition {
     const message = createBaseAbsoluteTxPosition();
     message.blockHeight = object.blockHeight !== undefined && object.blockHeight !== null ? Long.fromValue(object.blockHeight) : Long.ZERO;
     message.txIndex = object.txIndex !== undefined && object.txIndex !== null ? Long.fromValue(object.txIndex) : Long.UZERO;
@@ -539,7 +539,7 @@ export const Model = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Model>, I>>(object: I): Model {
+  fromPartial(object: DeepPartial<Model>): Model {
     const message = createBaseModel();
     message.Key = object.Key ?? new Uint8Array();
     message.Value = object.Value ?? new Uint8Array();

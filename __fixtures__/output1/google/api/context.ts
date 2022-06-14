@@ -1,5 +1,5 @@
 import * as _m0 from "protobufjs/minimal";
-import { Exact, DeepPartial, isSet } from "@osmonauts/helpers";
+import { DeepPartial, isSet } from "@osmonauts/helpers";
 
 /**
  * `Context` defines which contexts an API requests.
@@ -134,7 +134,7 @@ export const Context = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Context>, I>>(object: I): Context {
+  fromPartial(object: DeepPartial<Context>): Context {
     const message = createBaseContext();
     message.rules = object.rules?.map(e => ContextRule.fromPartial(e)) || [];
     return message;
@@ -256,7 +256,7 @@ export const ContextRule = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<ContextRule>, I>>(object: I): ContextRule {
+  fromPartial(object: DeepPartial<ContextRule>): ContextRule {
     const message = createBaseContextRule();
     message.selector = object.selector ?? "";
     message.requested = object.requested?.map(e => e) || [];

@@ -7,7 +7,7 @@ import { Endpoint } from "../../endpoint";
 import { MonitoredResourceDescriptor } from "../../monitored_resource";
 import { Monitoring } from "../../monitoring";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
+import { isSet, DeepPartial } from "@osmonauts/helpers";
 
 /** Whether or not a service has been enabled for use by a consumer. */
 export enum State {
@@ -238,7 +238,7 @@ export const Service = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Service>, I>>(object: I): Service {
+  fromPartial(object: DeepPartial<Service>): Service {
     const message = createBaseService();
     message.name = object.name ?? "";
     message.parent = object.parent ?? "";
@@ -414,7 +414,7 @@ export const ServiceConfig = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<ServiceConfig>, I>>(object: I): ServiceConfig {
+  fromPartial(object: DeepPartial<ServiceConfig>): ServiceConfig {
     const message = createBaseServiceConfig();
     message.name = object.name ?? "";
     message.title = object.title ?? "";
@@ -486,7 +486,7 @@ export const OperationMetadata = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<OperationMetadata>, I>>(object: I): OperationMetadata {
+  fromPartial(object: DeepPartial<OperationMetadata>): OperationMetadata {
     const message = createBaseOperationMetadata();
     message.resourceNames = object.resourceNames?.map(e => e) || [];
     return message;

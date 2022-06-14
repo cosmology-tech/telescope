@@ -3,7 +3,7 @@ import { LogEntry } from "./log_entry";
 import { Duration } from "../../protobuf/duration";
 import { Status } from "../../rpc/status";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, Exact, DeepPartial, isObject } from "@osmonauts/helpers";
+import { isSet, DeepPartial, isObject } from "@osmonauts/helpers";
 
 /** An indicator of why entries were omitted. */
 export enum TailLogEntriesResponse_SuppressionInfo_Reason {
@@ -490,7 +490,7 @@ export const DeleteLogRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<DeleteLogRequest>, I>>(object: I): DeleteLogRequest {
+  fromPartial(object: DeepPartial<DeleteLogRequest>): DeleteLogRequest {
     const message = createBaseDeleteLogRequest();
     message.logName = object.logName ?? "";
     return message;
@@ -558,7 +558,7 @@ export const WriteLogEntriesRequest_LabelsEntry = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<WriteLogEntriesRequest_LabelsEntry>, I>>(object: I): WriteLogEntriesRequest_LabelsEntry {
+  fromPartial(object: DeepPartial<WriteLogEntriesRequest_LabelsEntry>): WriteLogEntriesRequest_LabelsEntry {
     const message = createBaseWriteLogEntriesRequest_LabelsEntry();
     message.key = object.key ?? "";
     message.value = object.value ?? "";
@@ -696,7 +696,7 @@ export const WriteLogEntriesRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<WriteLogEntriesRequest>, I>>(object: I): WriteLogEntriesRequest {
+  fromPartial(object: DeepPartial<WriteLogEntriesRequest>): WriteLogEntriesRequest {
     const message = createBaseWriteLogEntriesRequest();
     message.logName = object.logName ?? "";
     message.resource = object.resource !== undefined && object.resource !== null ? MonitoredResource.fromPartial(object.resource) : undefined;
@@ -753,7 +753,7 @@ export const WriteLogEntriesResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<WriteLogEntriesResponse>, I>>(_: I): WriteLogEntriesResponse {
+  fromPartial(_: DeepPartial<WriteLogEntriesResponse>): WriteLogEntriesResponse {
     const message = createBaseWriteLogEntriesResponse();
     return message;
   }
@@ -820,7 +820,7 @@ export const WriteLogEntriesPartialErrors_LogEntryErrorsEntry = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<WriteLogEntriesPartialErrors_LogEntryErrorsEntry>, I>>(object: I): WriteLogEntriesPartialErrors_LogEntryErrorsEntry {
+  fromPartial(object: DeepPartial<WriteLogEntriesPartialErrors_LogEntryErrorsEntry>): WriteLogEntriesPartialErrors_LogEntryErrorsEntry {
     const message = createBaseWriteLogEntriesPartialErrors_LogEntryErrorsEntry();
     message.key = object.key ?? 0;
     message.value = object.value !== undefined && object.value !== null ? google.rpc.Status.fromPartial(object.value) : undefined;
@@ -897,7 +897,7 @@ export const WriteLogEntriesPartialErrors = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<WriteLogEntriesPartialErrors>, I>>(object: I): WriteLogEntriesPartialErrors {
+  fromPartial(object: DeepPartial<WriteLogEntriesPartialErrors>): WriteLogEntriesPartialErrors {
     const message = createBaseWriteLogEntriesPartialErrors();
     message.logEntryErrors = Object.entries(object.logEntryErrors ?? {}).reduce<{
       [key: number]: Status;
@@ -1012,7 +1012,7 @@ export const ListLogEntriesRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<ListLogEntriesRequest>, I>>(object: I): ListLogEntriesRequest {
+  fromPartial(object: DeepPartial<ListLogEntriesRequest>): ListLogEntriesRequest {
     const message = createBaseListLogEntriesRequest();
     message.resourceNames = object.resourceNames?.map(e => e) || [];
     message.filter = object.filter ?? "";
@@ -1090,7 +1090,7 @@ export const ListLogEntriesResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<ListLogEntriesResponse>, I>>(object: I): ListLogEntriesResponse {
+  fromPartial(object: DeepPartial<ListLogEntriesResponse>): ListLogEntriesResponse {
     const message = createBaseListLogEntriesResponse();
     message.entries = object.entries?.map(e => LogEntry.fromPartial(e)) || [];
     message.nextPageToken = object.nextPageToken ?? "";
@@ -1159,7 +1159,7 @@ export const ListMonitoredResourceDescriptorsRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<ListMonitoredResourceDescriptorsRequest>, I>>(object: I): ListMonitoredResourceDescriptorsRequest {
+  fromPartial(object: DeepPartial<ListMonitoredResourceDescriptorsRequest>): ListMonitoredResourceDescriptorsRequest {
     const message = createBaseListMonitoredResourceDescriptorsRequest();
     message.pageSize = object.pageSize ?? 0;
     message.pageToken = object.pageToken ?? "";
@@ -1234,7 +1234,7 @@ export const ListMonitoredResourceDescriptorsResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<ListMonitoredResourceDescriptorsResponse>, I>>(object: I): ListMonitoredResourceDescriptorsResponse {
+  fromPartial(object: DeepPartial<ListMonitoredResourceDescriptorsResponse>): ListMonitoredResourceDescriptorsResponse {
     const message = createBaseListMonitoredResourceDescriptorsResponse();
     message.resourceDescriptors = object.resourceDescriptors?.map(e => MonitoredResourceDescriptor.fromPartial(e)) || [];
     message.nextPageToken = object.nextPageToken ?? "";
@@ -1331,7 +1331,7 @@ export const ListLogsRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<ListLogsRequest>, I>>(object: I): ListLogsRequest {
+  fromPartial(object: DeepPartial<ListLogsRequest>): ListLogsRequest {
     const message = createBaseListLogsRequest();
     message.parent = object.parent ?? "";
     message.pageSize = object.pageSize ?? 0;
@@ -1408,7 +1408,7 @@ export const ListLogsResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<ListLogsResponse>, I>>(object: I): ListLogsResponse {
+  fromPartial(object: DeepPartial<ListLogsResponse>): ListLogsResponse {
     const message = createBaseListLogsResponse();
     message.logNames = object.logNames?.map(e => e) || [];
     message.nextPageToken = object.nextPageToken ?? "";
@@ -1494,7 +1494,7 @@ export const TailLogEntriesRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<TailLogEntriesRequest>, I>>(object: I): TailLogEntriesRequest {
+  fromPartial(object: DeepPartial<TailLogEntriesRequest>): TailLogEntriesRequest {
     const message = createBaseTailLogEntriesRequest();
     message.resourceNames = object.resourceNames?.map(e => e) || [];
     message.filter = object.filter ?? "";
@@ -1575,7 +1575,7 @@ export const TailLogEntriesResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<TailLogEntriesResponse>, I>>(object: I): TailLogEntriesResponse {
+  fromPartial(object: DeepPartial<TailLogEntriesResponse>): TailLogEntriesResponse {
     const message = createBaseTailLogEntriesResponse();
     message.entries = object.entries?.map(e => LogEntry.fromPartial(e)) || [];
     message.suppressionInfo = object.suppressionInfo?.map(e => TailLogEntriesResponse_SuppressionInfo.fromPartial(e)) || [];
@@ -1644,7 +1644,7 @@ export const TailLogEntriesResponse_SuppressionInfo = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<TailLogEntriesResponse_SuppressionInfo>, I>>(object: I): TailLogEntriesResponse_SuppressionInfo {
+  fromPartial(object: DeepPartial<TailLogEntriesResponse_SuppressionInfo>): TailLogEntriesResponse_SuppressionInfo {
     const message = createBaseTailLogEntriesResponse_SuppressionInfo();
     message.reason = object.reason ?? 0;
     message.suppressedCount = object.suppressedCount ?? 0;

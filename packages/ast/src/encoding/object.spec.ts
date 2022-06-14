@@ -292,3 +292,14 @@ describe('google/rpc/error_details', () => {
         ))
     });
 });
+
+it('evmos/fees/v1/tx', () => {
+    const ref = store.findProto('evmos/fees/v1/tx.proto');
+    const res = traverse(store, ref);
+    const context = new ProtoParseContext(ref, store);
+
+    expectCode(createObjectWithMethods(
+        context,
+        'MsgRegisterDevFeeInfo', getNestedProto(res).MsgRegisterDevFeeInfo
+    ))
+});

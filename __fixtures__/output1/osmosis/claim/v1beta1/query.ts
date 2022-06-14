@@ -2,7 +2,7 @@ import { Action, ClaimRecord, actionFromJSON, actionToJSON } from "./claim";
 import { Coin } from "../../../cosmos/base/v1beta1/coin";
 import { Params } from "./params";
 import * as _m0 from "protobufjs/minimal";
-import { Exact, DeepPartial, isSet } from "@osmonauts/helpers";
+import { DeepPartial, isSet } from "@osmonauts/helpers";
 
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryModuleAccountBalanceRequest {}
@@ -77,7 +77,7 @@ export const QueryModuleAccountBalanceRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryModuleAccountBalanceRequest>, I>>(_: I): QueryModuleAccountBalanceRequest {
+  fromPartial(_: DeepPartial<QueryModuleAccountBalanceRequest>): QueryModuleAccountBalanceRequest {
     const message = createBaseQueryModuleAccountBalanceRequest();
     return message;
   }
@@ -139,7 +139,7 @@ export const QueryModuleAccountBalanceResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryModuleAccountBalanceResponse>, I>>(object: I): QueryModuleAccountBalanceResponse {
+  fromPartial(object: DeepPartial<QueryModuleAccountBalanceResponse>): QueryModuleAccountBalanceResponse {
     const message = createBaseQueryModuleAccountBalanceResponse();
     message.moduleAccountBalance = object.moduleAccountBalance?.map(e => Coin.fromPartial(e)) || [];
     return message;
@@ -183,7 +183,7 @@ export const QueryParamsRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryParamsRequest>, I>>(_: I): QueryParamsRequest {
+  fromPartial(_: DeepPartial<QueryParamsRequest>): QueryParamsRequest {
     const message = createBaseQueryParamsRequest();
     return message;
   }
@@ -239,7 +239,7 @@ export const QueryParamsResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryParamsResponse>, I>>(object: I): QueryParamsResponse {
+  fromPartial(object: DeepPartial<QueryParamsResponse>): QueryParamsResponse {
     const message = createBaseQueryParamsResponse();
     message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     return message;
@@ -296,7 +296,7 @@ export const QueryClaimRecordRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryClaimRecordRequest>, I>>(object: I): QueryClaimRecordRequest {
+  fromPartial(object: DeepPartial<QueryClaimRecordRequest>): QueryClaimRecordRequest {
     const message = createBaseQueryClaimRecordRequest();
     message.address = object.address ?? "";
     return message;
@@ -353,7 +353,7 @@ export const QueryClaimRecordResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryClaimRecordResponse>, I>>(object: I): QueryClaimRecordResponse {
+  fromPartial(object: DeepPartial<QueryClaimRecordResponse>): QueryClaimRecordResponse {
     const message = createBaseQueryClaimRecordResponse();
     message.claimRecord = object.claimRecord !== undefined && object.claimRecord !== null ? ClaimRecord.fromPartial(object.claimRecord) : undefined;
     return message;
@@ -421,7 +421,7 @@ export const QueryClaimableForActionRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryClaimableForActionRequest>, I>>(object: I): QueryClaimableForActionRequest {
+  fromPartial(object: DeepPartial<QueryClaimableForActionRequest>): QueryClaimableForActionRequest {
     const message = createBaseQueryClaimableForActionRequest();
     message.address = object.address ?? "";
     message.action = object.action ?? 0;
@@ -485,7 +485,7 @@ export const QueryClaimableForActionResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryClaimableForActionResponse>, I>>(object: I): QueryClaimableForActionResponse {
+  fromPartial(object: DeepPartial<QueryClaimableForActionResponse>): QueryClaimableForActionResponse {
     const message = createBaseQueryClaimableForActionResponse();
     message.coins = object.coins?.map(e => Coin.fromPartial(e)) || [];
     return message;
@@ -542,7 +542,7 @@ export const QueryTotalClaimableRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryTotalClaimableRequest>, I>>(object: I): QueryTotalClaimableRequest {
+  fromPartial(object: DeepPartial<QueryTotalClaimableRequest>): QueryTotalClaimableRequest {
     const message = createBaseQueryTotalClaimableRequest();
     message.address = object.address ?? "";
     return message;
@@ -605,7 +605,7 @@ export const QueryTotalClaimableResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryTotalClaimableResponse>, I>>(object: I): QueryTotalClaimableResponse {
+  fromPartial(object: DeepPartial<QueryTotalClaimableResponse>): QueryTotalClaimableResponse {
     const message = createBaseQueryTotalClaimableResponse();
     message.coins = object.coins?.map(e => Coin.fromPartial(e)) || [];
     return message;

@@ -2,7 +2,7 @@ import { Timestamp } from "../../../google/protobuf/timestamp";
 import { Duration } from "../../../google/protobuf/duration";
 import { Any } from "../../../google/protobuf/any";
 import * as _m0 from "protobufjs/minimal";
-import { toTimestamp, fromTimestamp, isSet, fromJsonTimestamp, Exact, DeepPartial, Long } from "@osmonauts/helpers";
+import { toTimestamp, fromTimestamp, isSet, fromJsonTimestamp, DeepPartial, Long } from "@osmonauts/helpers";
 
 /** VoteOption enumerates the valid vote options for a given proposal. */
 export enum VoteOption {
@@ -569,7 +569,7 @@ export const Member = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Member>, I>>(object: I): Member {
+  fromPartial(object: DeepPartial<Member>): Member {
     const message = createBaseMember();
     message.address = object.address ?? "";
     message.weight = object.weight ?? "";
@@ -635,7 +635,7 @@ export const Members = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Members>, I>>(object: I): Members {
+  fromPartial(object: DeepPartial<Members>): Members {
     const message = createBaseMembers();
     message.members = object.members?.map(e => Member.fromPartial(e)) || [];
     return message;
@@ -703,7 +703,7 @@ export const ThresholdDecisionPolicy = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<ThresholdDecisionPolicy>, I>>(object: I): ThresholdDecisionPolicy {
+  fromPartial(object: DeepPartial<ThresholdDecisionPolicy>): ThresholdDecisionPolicy {
     const message = createBaseThresholdDecisionPolicy();
     message.threshold = object.threshold ?? "";
     message.windows = object.windows !== undefined && object.windows !== null ? DecisionPolicyWindows.fromPartial(object.windows) : undefined;
@@ -772,7 +772,7 @@ export const PercentageDecisionPolicy = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<PercentageDecisionPolicy>, I>>(object: I): PercentageDecisionPolicy {
+  fromPartial(object: DeepPartial<PercentageDecisionPolicy>): PercentageDecisionPolicy {
     const message = createBasePercentageDecisionPolicy();
     message.percentage = object.percentage ?? "";
     message.windows = object.windows !== undefined && object.windows !== null ? DecisionPolicyWindows.fromPartial(object.windows) : undefined;
@@ -841,7 +841,7 @@ export const DecisionPolicyWindows = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<DecisionPolicyWindows>, I>>(object: I): DecisionPolicyWindows {
+  fromPartial(object: DeepPartial<DecisionPolicyWindows>): DecisionPolicyWindows {
     const message = createBaseDecisionPolicyWindows();
     message.votingPeriod = object.votingPeriod ?? undefined;
     message.minExecutionPeriod = object.minExecutionPeriod ?? undefined;
@@ -954,7 +954,7 @@ export const GroupInfo = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<GroupInfo>, I>>(object: I): GroupInfo {
+  fromPartial(object: DeepPartial<GroupInfo>): GroupInfo {
     const message = createBaseGroupInfo();
     message.id = object.id !== undefined && object.id !== null ? Long.fromValue(object.id) : Long.UZERO;
     message.admin = object.admin ?? "";
@@ -1027,7 +1027,7 @@ export const GroupMember = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<GroupMember>, I>>(object: I): GroupMember {
+  fromPartial(object: DeepPartial<GroupMember>): GroupMember {
     const message = createBaseGroupMember();
     message.groupId = object.groupId !== undefined && object.groupId !== null ? Long.fromValue(object.groupId) : Long.UZERO;
     message.member = object.member !== undefined && object.member !== null ? Member.fromPartial(object.member) : undefined;
@@ -1151,7 +1151,7 @@ export const GroupPolicyInfo = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<GroupPolicyInfo>, I>>(object: I): GroupPolicyInfo {
+  fromPartial(object: DeepPartial<GroupPolicyInfo>): GroupPolicyInfo {
     const message = createBaseGroupPolicyInfo();
     message.address = object.address ?? "";
     message.groupId = object.groupId !== undefined && object.groupId !== null ? Long.fromValue(object.groupId) : Long.UZERO;
@@ -1358,7 +1358,7 @@ export const Proposal = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Proposal>, I>>(object: I): Proposal {
+  fromPartial(object: DeepPartial<Proposal>): Proposal {
     const message = createBaseProposal();
     message.id = object.id !== undefined && object.id !== null ? Long.fromValue(object.id) : Long.UZERO;
     message.address = object.address ?? "";
@@ -1460,7 +1460,7 @@ export const TallyResult = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<TallyResult>, I>>(object: I): TallyResult {
+  fromPartial(object: DeepPartial<TallyResult>): TallyResult {
     const message = createBaseTallyResult();
     message.yesCount = object.yesCount ?? "";
     message.abstainCount = object.abstainCount ?? "";
@@ -1564,7 +1564,7 @@ export const Vote = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Vote>, I>>(object: I): Vote {
+  fromPartial(object: DeepPartial<Vote>): Vote {
     const message = createBaseVote();
     message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? Long.fromValue(object.proposalId) : Long.UZERO;
     message.voter = object.voter ?? "";

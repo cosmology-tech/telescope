@@ -2,7 +2,7 @@ import { Duration } from "../../google/protobuf/duration";
 import { Timestamp } from "../../google/protobuf/timestamp";
 import { Coin } from "../../cosmos/base/v1beta1/coin";
 import * as _m0 from "protobufjs/minimal";
-import { toTimestamp, Long, fromTimestamp, isSet, fromJsonTimestamp, Exact, DeepPartial } from "@osmonauts/helpers";
+import { toTimestamp, Long, fromTimestamp, isSet, fromJsonTimestamp, DeepPartial } from "@osmonauts/helpers";
 export enum LockQueryType {
   /** ByDuration - Queries for locks that are longer than a certain duration */
   ByDuration = 0,
@@ -194,7 +194,7 @@ export const PeriodLock = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<PeriodLock>, I>>(object: I): PeriodLock {
+  fromPartial(object: DeepPartial<PeriodLock>): PeriodLock {
     const message = createBasePeriodLock();
     message.ID = object.ID !== undefined && object.ID !== null ? Long.fromValue(object.ID) : Long.UZERO;
     message.owner = object.owner ?? "";
@@ -288,7 +288,7 @@ export const QueryCondition = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryCondition>, I>>(object: I): QueryCondition {
+  fromPartial(object: DeepPartial<QueryCondition>): QueryCondition {
     const message = createBaseQueryCondition();
     message.lockQueryType = object.lockQueryType ?? 0;
     message.denom = object.denom ?? "";
@@ -381,7 +381,7 @@ export const SyntheticLock = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<SyntheticLock>, I>>(object: I): SyntheticLock {
+  fromPartial(object: DeepPartial<SyntheticLock>): SyntheticLock {
     const message = createBaseSyntheticLock();
     message.underlyingLockId = object.underlyingLockId !== undefined && object.underlyingLockId !== null ? Long.fromValue(object.underlyingLockId) : Long.UZERO;
     message.synthDenom = object.synthDenom ?? "";

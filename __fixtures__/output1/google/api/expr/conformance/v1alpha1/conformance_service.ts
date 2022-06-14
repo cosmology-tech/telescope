@@ -3,7 +3,7 @@ import { Decl, CheckedExpr } from "../../v1alpha1/checked";
 import { ExprValue } from "../../v1alpha1/eval";
 import { Status } from "../../../../rpc/status";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, Exact, DeepPartial, isObject, Long } from "@osmonauts/helpers";
+import { isSet, DeepPartial, isObject, Long } from "@osmonauts/helpers";
 
 /** Severities of issues. */
 export enum IssueDetails_Severity {
@@ -261,7 +261,7 @@ export const ParseRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<ParseRequest>, I>>(object: I): ParseRequest {
+  fromPartial(object: DeepPartial<ParseRequest>): ParseRequest {
     const message = createBaseParseRequest();
     message.celSource = object.celSource ?? "";
     message.syntaxVersion = object.syntaxVersion ?? "";
@@ -338,7 +338,7 @@ export const ParseResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<ParseResponse>, I>>(object: I): ParseResponse {
+  fromPartial(object: DeepPartial<ParseResponse>): ParseResponse {
     const message = createBaseParseResponse();
     message.parsedExpr = object.parsedExpr !== undefined && object.parsedExpr !== null ? ParsedExpr.fromPartial(object.parsedExpr) : undefined;
     message.issues = object.issues?.map(e => Status.fromPartial(e)) || [];
@@ -435,7 +435,7 @@ export const CheckRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<CheckRequest>, I>>(object: I): CheckRequest {
+  fromPartial(object: DeepPartial<CheckRequest>): CheckRequest {
     const message = createBaseCheckRequest();
     message.parsedExpr = object.parsedExpr !== undefined && object.parsedExpr !== null ? ParsedExpr.fromPartial(object.parsedExpr) : undefined;
     message.typeEnv = object.typeEnv?.map(e => Decl.fromPartial(e)) || [];
@@ -512,7 +512,7 @@ export const CheckResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<CheckResponse>, I>>(object: I): CheckResponse {
+  fromPartial(object: DeepPartial<CheckResponse>): CheckResponse {
     const message = createBaseCheckResponse();
     message.checkedExpr = object.checkedExpr !== undefined && object.checkedExpr !== null ? CheckedExpr.fromPartial(object.checkedExpr) : undefined;
     message.issues = object.issues?.map(e => Status.fromPartial(e)) || [];
@@ -581,7 +581,7 @@ export const EvalRequest_BindingsEntry = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<EvalRequest_BindingsEntry>, I>>(object: I): EvalRequest_BindingsEntry {
+  fromPartial(object: DeepPartial<EvalRequest_BindingsEntry>): EvalRequest_BindingsEntry {
     const message = createBaseEvalRequest_BindingsEntry();
     message.key = object.key ?? "";
     message.value = object.value !== undefined && object.value !== null ? google.api.expr.v1alpha1.ExprValue.fromPartial(object.value) : undefined;
@@ -692,7 +692,7 @@ export const EvalRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<EvalRequest>, I>>(object: I): EvalRequest {
+  fromPartial(object: DeepPartial<EvalRequest>): EvalRequest {
     const message = createBaseEvalRequest();
     message.parsedExpr = object.parsedExpr !== undefined && object.parsedExpr !== null ? ParsedExpr.fromPartial(object.parsedExpr) : undefined;
     message.checkedExpr = object.checkedExpr !== undefined && object.checkedExpr !== null ? CheckedExpr.fromPartial(object.checkedExpr) : undefined;
@@ -777,7 +777,7 @@ export const EvalResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<EvalResponse>, I>>(object: I): EvalResponse {
+  fromPartial(object: DeepPartial<EvalResponse>): EvalResponse {
     const message = createBaseEvalResponse();
     message.result = object.result !== undefined && object.result !== null ? ExprValue.fromPartial(object.result) : undefined;
     message.issues = object.issues?.map(e => Status.fromPartial(e)) || [];
@@ -857,7 +857,7 @@ export const IssueDetails = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<IssueDetails>, I>>(object: I): IssueDetails {
+  fromPartial(object: DeepPartial<IssueDetails>): IssueDetails {
     const message = createBaseIssueDetails();
     message.severity = object.severity ?? 0;
     message.position = object.position !== undefined && object.position !== null ? SourcePosition.fromPartial(object.position) : undefined;

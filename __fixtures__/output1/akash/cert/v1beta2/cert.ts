@@ -1,5 +1,5 @@
 import * as _m0 from "protobufjs/minimal";
-import { isSet, Exact, DeepPartial, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
+import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
 
 /** State is an enum which refers to state of deployment */
 export enum Certificate_State {
@@ -147,7 +147,7 @@ export const CertificateID = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<CertificateID>, I>>(object: I): CertificateID {
+  fromPartial(object: DeepPartial<CertificateID>): CertificateID {
     const message = createBaseCertificateID();
     message.owner = object.owner ?? "";
     message.serial = object.serial ?? "";
@@ -227,7 +227,7 @@ export const Certificate = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Certificate>, I>>(object: I): Certificate {
+  fromPartial(object: DeepPartial<Certificate>): Certificate {
     const message = createBaseCertificate();
     message.state = object.state ?? 0;
     message.cert = object.cert ?? new Uint8Array();
@@ -308,7 +308,7 @@ export const CertificateFilter = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<CertificateFilter>, I>>(object: I): CertificateFilter {
+  fromPartial(object: DeepPartial<CertificateFilter>): CertificateFilter {
     const message = createBaseCertificateFilter();
     message.owner = object.owner ?? "";
     message.serial = object.serial ?? "";
@@ -389,7 +389,7 @@ export const MsgCreateCertificate = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgCreateCertificate>, I>>(object: I): MsgCreateCertificate {
+  fromPartial(object: DeepPartial<MsgCreateCertificate>): MsgCreateCertificate {
     const message = createBaseMsgCreateCertificate();
     message.owner = object.owner ?? "";
     message.cert = object.cert ?? new Uint8Array();
@@ -435,7 +435,7 @@ export const MsgCreateCertificateResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgCreateCertificateResponse>, I>>(_: I): MsgCreateCertificateResponse {
+  fromPartial(_: DeepPartial<MsgCreateCertificateResponse>): MsgCreateCertificateResponse {
     const message = createBaseMsgCreateCertificateResponse();
     return message;
   }
@@ -491,7 +491,7 @@ export const MsgRevokeCertificate = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgRevokeCertificate>, I>>(object: I): MsgRevokeCertificate {
+  fromPartial(object: DeepPartial<MsgRevokeCertificate>): MsgRevokeCertificate {
     const message = createBaseMsgRevokeCertificate();
     message.id = object.id !== undefined && object.id !== null ? CertificateID.fromPartial(object.id) : undefined;
     return message;
@@ -535,7 +535,7 @@ export const MsgRevokeCertificateResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgRevokeCertificateResponse>, I>>(_: I): MsgRevokeCertificateResponse {
+  fromPartial(_: DeepPartial<MsgRevokeCertificateResponse>): MsgRevokeCertificateResponse {
     const message = createBaseMsgRevokeCertificateResponse();
     return message;
   }

@@ -1,6 +1,6 @@
 import { Service } from "./resources";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
+import { isSet, DeepPartial } from "@osmonauts/helpers";
 
 /**
  * Enum to determine if service usage should be checked when disabling a
@@ -305,7 +305,7 @@ export const EnableServiceRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<EnableServiceRequest>, I>>(object: I): EnableServiceRequest {
+  fromPartial(object: DeepPartial<EnableServiceRequest>): EnableServiceRequest {
     const message = createBaseEnableServiceRequest();
     message.name = object.name ?? "";
     return message;
@@ -362,7 +362,7 @@ export const EnableServiceResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<EnableServiceResponse>, I>>(object: I): EnableServiceResponse {
+  fromPartial(object: DeepPartial<EnableServiceResponse>): EnableServiceResponse {
     const message = createBaseEnableServiceResponse();
     message.service = object.service !== undefined && object.service !== null ? Service.fromPartial(object.service) : undefined;
     return message;
@@ -441,7 +441,7 @@ export const DisableServiceRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<DisableServiceRequest>, I>>(object: I): DisableServiceRequest {
+  fromPartial(object: DeepPartial<DisableServiceRequest>): DisableServiceRequest {
     const message = createBaseDisableServiceRequest();
     message.name = object.name ?? "";
     message.disableDependentServices = object.disableDependentServices ?? false;
@@ -500,7 +500,7 @@ export const DisableServiceResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<DisableServiceResponse>, I>>(object: I): DisableServiceResponse {
+  fromPartial(object: DeepPartial<DisableServiceResponse>): DisableServiceResponse {
     const message = createBaseDisableServiceResponse();
     message.service = object.service !== undefined && object.service !== null ? Service.fromPartial(object.service) : undefined;
     return message;
@@ -557,7 +557,7 @@ export const GetServiceRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<GetServiceRequest>, I>>(object: I): GetServiceRequest {
+  fromPartial(object: DeepPartial<GetServiceRequest>): GetServiceRequest {
     const message = createBaseGetServiceRequest();
     message.name = object.name ?? "";
     return message;
@@ -647,7 +647,7 @@ export const ListServicesRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<ListServicesRequest>, I>>(object: I): ListServicesRequest {
+  fromPartial(object: DeepPartial<ListServicesRequest>): ListServicesRequest {
     const message = createBaseListServicesRequest();
     message.parent = object.parent ?? "";
     message.pageSize = object.pageSize ?? 0;
@@ -724,7 +724,7 @@ export const ListServicesResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<ListServicesResponse>, I>>(object: I): ListServicesResponse {
+  fromPartial(object: DeepPartial<ListServicesResponse>): ListServicesResponse {
     const message = createBaseListServicesResponse();
     message.services = object.services?.map(e => Service.fromPartial(e)) || [];
     message.nextPageToken = object.nextPageToken ?? "";
@@ -799,7 +799,7 @@ export const BatchEnableServicesRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<BatchEnableServicesRequest>, I>>(object: I): BatchEnableServicesRequest {
+  fromPartial(object: DeepPartial<BatchEnableServicesRequest>): BatchEnableServicesRequest {
     const message = createBaseBatchEnableServicesRequest();
     message.parent = object.parent ?? "";
     message.serviceIds = object.serviceIds?.map(e => e) || [];
@@ -879,7 +879,7 @@ export const BatchEnableServicesResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<BatchEnableServicesResponse>, I>>(object: I): BatchEnableServicesResponse {
+  fromPartial(object: DeepPartial<BatchEnableServicesResponse>): BatchEnableServicesResponse {
     const message = createBaseBatchEnableServicesResponse();
     message.services = object.services?.map(e => Service.fromPartial(e)) || [];
     message.failures = object.failures?.map(e => BatchEnableServicesResponse_EnableFailure.fromPartial(e)) || [];
@@ -948,7 +948,7 @@ export const BatchEnableServicesResponse_EnableFailure = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<BatchEnableServicesResponse_EnableFailure>, I>>(object: I): BatchEnableServicesResponse_EnableFailure {
+  fromPartial(object: DeepPartial<BatchEnableServicesResponse_EnableFailure>): BatchEnableServicesResponse_EnableFailure {
     const message = createBaseBatchEnableServicesResponse_EnableFailure();
     message.serviceId = object.serviceId ?? "";
     message.errorMessage = object.errorMessage ?? "";
@@ -1023,7 +1023,7 @@ export const BatchGetServicesRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<BatchGetServicesRequest>, I>>(object: I): BatchGetServicesRequest {
+  fromPartial(object: DeepPartial<BatchGetServicesRequest>): BatchGetServicesRequest {
     const message = createBaseBatchGetServicesRequest();
     message.parent = object.parent ?? "";
     message.names = object.names?.map(e => e) || [];
@@ -1087,7 +1087,7 @@ export const BatchGetServicesResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<BatchGetServicesResponse>, I>>(object: I): BatchGetServicesResponse {
+  fromPartial(object: DeepPartial<BatchGetServicesResponse>): BatchGetServicesResponse {
     const message = createBaseBatchGetServicesResponse();
     message.services = object.services?.map(e => Service.fromPartial(e)) || [];
     return message;

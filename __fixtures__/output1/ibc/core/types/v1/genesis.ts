@@ -2,7 +2,7 @@ import { GenesisState as GenesisState1 } from "../../client/v1/genesis";
 import { GenesisState as GenesisState2 } from "../../connection/v1/genesis";
 import { GenesisState as GenesisState3 } from "../../channel/v1/genesis";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
+import { isSet, DeepPartial } from "@osmonauts/helpers";
 
 /** GenesisState defines the ibc module's genesis state. */
 export interface GenesisState {
@@ -87,7 +87,7 @@ export const GenesisState = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<GenesisState>, I>>(object: I): GenesisState {
+  fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
     message.clientGenesis = object.clientGenesis !== undefined && object.clientGenesis !== null ? GenesisState.fromPartial(object.clientGenesis) : undefined;
     message.connectionGenesis = object.connectionGenesis !== undefined && object.connectionGenesis !== null ? GenesisState.fromPartial(object.connectionGenesis) : undefined;

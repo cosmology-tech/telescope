@@ -214,6 +214,29 @@ export const toAmino = {
         );
     },
 
+    scalarArray({ context, field, currentProtoPath, scope, nested, isOptional }: ToAminoParseField, arrayTypeAstFunc: Function) {
+        const variable = 'el' + nested;
+
+        const expr = t.callExpression(
+            t.memberExpression(
+                memberExpressionOrIdentifier(scope),
+                t.identifier('map')
+            ),
+            [
+                t.arrowFunctionExpression(
+                    [
+                        t.identifier(variable)
+                    ],
+                    arrayTypeAstFunc(variable)
+                )
+            ]
+        );
+
+        return t.objectProperty(t.identifier(context.options.aminoCasingFn(field.name)),
+            expr
+        );
+    },
+
     pubkey(args: ToAminoParseField) {
         args.context.addUtil('fromBase64');
         args.context.addUtil('decodeBech32Pubkey');
@@ -247,6 +270,13 @@ export const toAmino = {
         )
 
     }
-
-
 };
+
+export const arrayTypes = {
+    long(varname: string) {
+        return t.callExpression(
+            t.memberExpression(memberExpressionOrIdentifier([varname]), t.identifier('toString')),
+            []
+        )
+    }
+}

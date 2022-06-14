@@ -1,5 +1,5 @@
 import * as _m0 from "protobufjs/minimal";
-import { Exact, DeepPartial } from "@osmonauts/helpers";
+import { DeepPartial } from "@osmonauts/helpers";
 
 /**
  * A generic empty message that you can re-use to avoid defining duplicated
@@ -50,7 +50,7 @@ export const Empty = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Empty>, I>>(_: I): Empty {
+  fromPartial(_: DeepPartial<Empty>): Empty {
     const message = createBaseEmpty();
     return message;
   }

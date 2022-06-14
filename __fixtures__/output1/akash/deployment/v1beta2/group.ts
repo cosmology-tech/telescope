@@ -1,7 +1,7 @@
 import { GroupID } from "./groupid";
 import { GroupSpec } from "./groupspec";
 import * as _m0 from "protobufjs/minimal";
-import { Long, isSet, Exact, DeepPartial } from "@osmonauts/helpers";
+import { Long, isSet, DeepPartial } from "@osmonauts/helpers";
 
 /** State is an enum which refers to state of group */
 export enum Group_State {
@@ -161,7 +161,7 @@ export const Group = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Group>, I>>(object: I): Group {
+  fromPartial(object: DeepPartial<Group>): Group {
     const message = createBaseGroup();
     message.groupId = object.groupId !== undefined && object.groupId !== null ? GroupID.fromPartial(object.groupId) : undefined;
     message.state = object.state ?? 0;

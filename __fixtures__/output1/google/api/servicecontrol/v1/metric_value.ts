@@ -1,7 +1,7 @@
 import { Timestamp } from "../../../protobuf/timestamp";
 import { Distribution } from "./distribution";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, Exact, DeepPartial, toTimestamp, fromTimestamp, Long, isObject, fromJsonTimestamp } from "@osmonauts/helpers";
+import { isSet, DeepPartial, toTimestamp, fromTimestamp, Long, isObject, fromJsonTimestamp } from "@osmonauts/helpers";
 export interface MetricValue_LabelsEntry {
   key: string;
   value: string;
@@ -124,7 +124,7 @@ export const MetricValue_LabelsEntry = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MetricValue_LabelsEntry>, I>>(object: I): MetricValue_LabelsEntry {
+  fromPartial(object: DeepPartial<MetricValue_LabelsEntry>): MetricValue_LabelsEntry {
     const message = createBaseMetricValue_LabelsEntry();
     message.key = object.key ?? "";
     message.value = object.value ?? "";
@@ -279,7 +279,7 @@ export const MetricValue = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MetricValue>, I>>(object: I): MetricValue {
+  fromPartial(object: DeepPartial<MetricValue>): MetricValue {
     const message = createBaseMetricValue();
     message.labels = Object.entries(object.labels ?? {}).reduce<{
       [key: string]: string;
@@ -368,7 +368,7 @@ export const MetricValueSet = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MetricValueSet>, I>>(object: I): MetricValueSet {
+  fromPartial(object: DeepPartial<MetricValueSet>): MetricValueSet {
     const message = createBaseMetricValueSet();
     message.metricName = object.metricName ?? "";
     message.metricValues = object.metricValues?.map(e => MetricValue.fromPartial(e)) || [];

@@ -1,6 +1,6 @@
 import { Config } from "./config";
 import * as _m0 from "protobufjs/minimal";
-import { Exact, DeepPartial, isSet } from "@osmonauts/helpers";
+import { DeepPartial, isSet } from "@osmonauts/helpers";
 
 /** QueryConfigRequest is the Query/Config request type. */
 export interface QueryConfigRequest {}
@@ -47,7 +47,7 @@ export const QueryConfigRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryConfigRequest>, I>>(_: I): QueryConfigRequest {
+  fromPartial(_: DeepPartial<QueryConfigRequest>): QueryConfigRequest {
     const message = createBaseQueryConfigRequest();
     return message;
   }
@@ -103,7 +103,7 @@ export const QueryConfigResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryConfigResponse>, I>>(object: I): QueryConfigResponse {
+  fromPartial(object: DeepPartial<QueryConfigResponse>): QueryConfigResponse {
     const message = createBaseQueryConfigResponse();
     message.config = object.config !== undefined && object.config !== null ? Config.fromPartial(object.config) : undefined;
     return message;

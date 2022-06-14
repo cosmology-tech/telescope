@@ -3,8 +3,12 @@ import { ProtoType, ProtoField } from '@osmonauts/types';
 import { arrowFunctionExpression } from '../../../utils';
 import { AminoParseContext } from '../../context';
 import { protoFieldsToArray } from '../utils';
-import { fromAmino } from './utils';
+import { arrayTypes, fromAmino } from './utils';
 import { getFieldOptionality, getOneOfs } from '../../proto';
+
+const needsImplementation = (name: string, field: ProtoField) => {
+    throw new Error(`need to implement fromAmino (${field.type} rules[${field.rule}] name[${name}])`);
+}
 
 export interface FromAminoParseField {
     context: AminoParseContext;
@@ -38,6 +42,29 @@ export const fromAminoParseField = ({
 
     // arrays
     if (field.rule === 'repeated') {
+        switch (field.type) {
+            case 'string':
+                return fromAmino.string(args);
+
+            case 'int64':
+            case 'sint64':
+            case 'uint64':
+            case 'fixed64':
+            case 'sfixed64':
+                return fromAmino.scalarArray(args, arrayTypes.long);
+
+            case 'double':
+            case 'float':
+            case 'int32':
+            case 'sint32':
+            case 'uint32':
+            case 'fixed32':
+            case 'sfixed32':
+            case 'bool':
+            case 'bytes':
+                return fromAmino.defaultType(args);
+        }
+
         switch (field.parsedType.type) {
             case 'Type':
                 return fromAmino.typeArray(args);
@@ -45,9 +72,11 @@ export const fromAminoParseField = ({
                 return fromAmino.enumArray(args);
             case 'cosmos.base.v1beta1.Coin':
                 return fromAmino.arrayFrom(args);
-
         }
+
+        return needsImplementation(field.name, field);
     }
+
 
     // casting special types
     if (field.type === 'google.protobuf.Any') {

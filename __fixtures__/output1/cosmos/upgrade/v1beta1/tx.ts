@@ -1,6 +1,6 @@
 import { Plan } from "./upgrade";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
+import { isSet, DeepPartial } from "@osmonauts/helpers";
 
 /**
  * MsgSoftwareUpgrade is the Msg/SoftwareUpgrade request type.
@@ -99,7 +99,7 @@ export const MsgSoftwareUpgrade = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgSoftwareUpgrade>, I>>(object: I): MsgSoftwareUpgrade {
+  fromPartial(object: DeepPartial<MsgSoftwareUpgrade>): MsgSoftwareUpgrade {
     const message = createBaseMsgSoftwareUpgrade();
     message.authority = object.authority ?? "";
     message.plan = object.plan !== undefined && object.plan !== null ? Plan.fromPartial(object.plan) : undefined;
@@ -144,7 +144,7 @@ export const MsgSoftwareUpgradeResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgSoftwareUpgradeResponse>, I>>(_: I): MsgSoftwareUpgradeResponse {
+  fromPartial(_: DeepPartial<MsgSoftwareUpgradeResponse>): MsgSoftwareUpgradeResponse {
     const message = createBaseMsgSoftwareUpgradeResponse();
     return message;
   }
@@ -200,7 +200,7 @@ export const MsgCancelUpgrade = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgCancelUpgrade>, I>>(object: I): MsgCancelUpgrade {
+  fromPartial(object: DeepPartial<MsgCancelUpgrade>): MsgCancelUpgrade {
     const message = createBaseMsgCancelUpgrade();
     message.authority = object.authority ?? "";
     return message;
@@ -244,7 +244,7 @@ export const MsgCancelUpgradeResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgCancelUpgradeResponse>, I>>(_: I): MsgCancelUpgradeResponse {
+  fromPartial(_: DeepPartial<MsgCancelUpgradeResponse>): MsgCancelUpgradeResponse {
     const message = createBaseMsgCancelUpgradeResponse();
     return message;
   }

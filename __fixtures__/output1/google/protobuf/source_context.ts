@@ -1,5 +1,5 @@
 import * as _m0 from "protobufjs/minimal";
-import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
+import { isSet, DeepPartial } from "@osmonauts/helpers";
 
 /**
  * `SourceContext` represents information about the source of a
@@ -62,7 +62,7 @@ export const SourceContext = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<SourceContext>, I>>(object: I): SourceContext {
+  fromPartial(object: DeepPartial<SourceContext>): SourceContext {
     const message = createBaseSourceContext();
     message.fileName = object.fileName ?? "";
     return message;

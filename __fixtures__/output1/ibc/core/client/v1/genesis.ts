@@ -1,6 +1,6 @@
 import { IdentifiedClientState, ClientConsensusStates, Params } from "./client";
 import * as _m0 from "protobufjs/minimal";
-import { Long, isSet, Exact, DeepPartial, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
+import { Long, isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
 
 /** GenesisState defines the ibc client submodule's genesis state. */
 export interface GenesisState {
@@ -162,7 +162,7 @@ export const GenesisState = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<GenesisState>, I>>(object: I): GenesisState {
+  fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
     message.clients = object.clients?.map(e => IdentifiedClientState.fromPartial(e)) || [];
     message.clientsConsensus = object.clientsConsensus?.map(e => ClientConsensusStates.fromPartial(e)) || [];
@@ -235,7 +235,7 @@ export const GenesisMetadata = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<GenesisMetadata>, I>>(object: I): GenesisMetadata {
+  fromPartial(object: DeepPartial<GenesisMetadata>): GenesisMetadata {
     const message = createBaseGenesisMetadata();
     message.key = object.key ?? new Uint8Array();
     message.value = object.value ?? new Uint8Array();
@@ -310,7 +310,7 @@ export const IdentifiedGenesisMetadata = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<IdentifiedGenesisMetadata>, I>>(object: I): IdentifiedGenesisMetadata {
+  fromPartial(object: DeepPartial<IdentifiedGenesisMetadata>): IdentifiedGenesisMetadata {
     const message = createBaseIdentifiedGenesisMetadata();
     message.clientId = object.clientId ?? "";
     message.clientMetadata = object.clientMetadata?.map(e => GenesisMetadata.fromPartial(e)) || [];

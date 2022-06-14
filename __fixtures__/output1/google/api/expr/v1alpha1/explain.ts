@@ -1,6 +1,6 @@
 import { Value } from "./value";
 import * as _m0 from "protobufjs/minimal";
-import { Exact, DeepPartial, Long, isSet } from "@osmonauts/helpers";
+import { DeepPartial, Long, isSet } from "@osmonauts/helpers";
 
 /**
  * Values of intermediate expressions produced when evaluating expression.
@@ -107,7 +107,7 @@ export const Explain = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Explain>, I>>(object: I): Explain {
+  fromPartial(object: DeepPartial<Explain>): Explain {
     const message = createBaseExplain();
     message.values = object.values?.map(e => Value.fromPartial(e)) || [];
     message.exprSteps = object.exprSteps?.map(e => Explain_ExprStep.fromPartial(e)) || [];
@@ -176,7 +176,7 @@ export const Explain_ExprStep = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Explain_ExprStep>, I>>(object: I): Explain_ExprStep {
+  fromPartial(object: DeepPartial<Explain_ExprStep>): Explain_ExprStep {
     const message = createBaseExplain_ExprStep();
     message.id = object.id !== undefined && object.id !== null ? Long.fromValue(object.id) : Long.ZERO;
     message.valueIndex = object.valueIndex ?? 0;

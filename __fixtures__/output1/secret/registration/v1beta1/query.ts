@@ -1,5 +1,5 @@
 import * as _m0 from "protobufjs/minimal";
-import { isSet, bytesFromBase64, base64FromBytes, Exact, DeepPartial } from "@osmonauts/helpers";
+import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "@osmonauts/helpers";
 export interface QueryEncryptedSeedRequest {
   pubKey: Uint8Array;
 }
@@ -57,7 +57,7 @@ export const QueryEncryptedSeedRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryEncryptedSeedRequest>, I>>(object: I): QueryEncryptedSeedRequest {
+  fromPartial(object: DeepPartial<QueryEncryptedSeedRequest>): QueryEncryptedSeedRequest {
     const message = createBaseQueryEncryptedSeedRequest();
     message.pubKey = object.pubKey ?? new Uint8Array();
     return message;
@@ -114,7 +114,7 @@ export const QueryEncryptedSeedResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryEncryptedSeedResponse>, I>>(object: I): QueryEncryptedSeedResponse {
+  fromPartial(object: DeepPartial<QueryEncryptedSeedResponse>): QueryEncryptedSeedResponse {
     const message = createBaseQueryEncryptedSeedResponse();
     message.encryptedSeed = object.encryptedSeed ?? new Uint8Array();
     return message;

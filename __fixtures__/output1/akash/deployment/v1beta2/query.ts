@@ -4,7 +4,7 @@ import { GroupID } from "./groupid";
 import { Group } from "./group";
 import { Account } from "../../escrow/v1beta2/types";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
+import { isSet, DeepPartial } from "@osmonauts/helpers";
 
 /** QueryDeploymentsRequest is request type for the Query/Deployments RPC method */
 export interface QueryDeploymentsRequest {
@@ -100,7 +100,7 @@ export const QueryDeploymentsRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryDeploymentsRequest>, I>>(object: I): QueryDeploymentsRequest {
+  fromPartial(object: DeepPartial<QueryDeploymentsRequest>): QueryDeploymentsRequest {
     const message = createBaseQueryDeploymentsRequest();
     message.filters = object.filters !== undefined && object.filters !== null ? DeploymentFilters.fromPartial(object.filters) : undefined;
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
@@ -175,7 +175,7 @@ export const QueryDeploymentsResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryDeploymentsResponse>, I>>(object: I): QueryDeploymentsResponse {
+  fromPartial(object: DeepPartial<QueryDeploymentsResponse>): QueryDeploymentsResponse {
     const message = createBaseQueryDeploymentsResponse();
     message.deployments = object.deployments?.map(e => QueryDeploymentResponse.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
@@ -233,7 +233,7 @@ export const QueryDeploymentRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryDeploymentRequest>, I>>(object: I): QueryDeploymentRequest {
+  fromPartial(object: DeepPartial<QueryDeploymentRequest>): QueryDeploymentRequest {
     const message = createBaseQueryDeploymentRequest();
     message.id = object.id !== undefined && object.id !== null ? DeploymentID.fromPartial(object.id) : undefined;
     return message;
@@ -318,7 +318,7 @@ export const QueryDeploymentResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryDeploymentResponse>, I>>(object: I): QueryDeploymentResponse {
+  fromPartial(object: DeepPartial<QueryDeploymentResponse>): QueryDeploymentResponse {
     const message = createBaseQueryDeploymentResponse();
     message.deployment = object.deployment !== undefined && object.deployment !== null ? Deployment.fromPartial(object.deployment) : undefined;
     message.groups = object.groups?.map(e => Group.fromPartial(e)) || [];
@@ -377,7 +377,7 @@ export const QueryGroupRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryGroupRequest>, I>>(object: I): QueryGroupRequest {
+  fromPartial(object: DeepPartial<QueryGroupRequest>): QueryGroupRequest {
     const message = createBaseQueryGroupRequest();
     message.id = object.id !== undefined && object.id !== null ? GroupID.fromPartial(object.id) : undefined;
     return message;
@@ -434,7 +434,7 @@ export const QueryGroupResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryGroupResponse>, I>>(object: I): QueryGroupResponse {
+  fromPartial(object: DeepPartial<QueryGroupResponse>): QueryGroupResponse {
     const message = createBaseQueryGroupResponse();
     message.group = object.group !== undefined && object.group !== null ? Group.fromPartial(object.group) : undefined;
     return message;

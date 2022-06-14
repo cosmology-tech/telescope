@@ -1,111 +1,111 @@
-import * as _207 from "./applications/transfer/v1/genesis";
-import * as _208 from "./applications/transfer/v1/query";
-import * as _209 from "./applications/transfer/v1/transfer";
-import * as _210 from "./applications/transfer/v1/tx";
-import * as _211 from "./applications/transfer/v2/packet";
-import * as _212 from "./core/channel/v1/channel";
-import * as _213 from "./core/channel/v1/genesis";
-import * as _214 from "./core/channel/v1/query";
-import * as _215 from "./core/channel/v1/tx";
-import * as _216 from "./core/client/v1/client";
-import * as _217 from "./core/client/v1/genesis";
-import * as _218 from "./core/client/v1/query";
-import * as _219 from "./core/client/v1/tx";
-import * as _220 from "./core/commitment/v1/commitment";
-import * as _221 from "./core/connection/v1/connection";
-import * as _222 from "./core/connection/v1/genesis";
-import * as _223 from "./core/connection/v1/query";
-import * as _224 from "./core/connection/v1/tx";
-import * as _225 from "./core/port/v1/query";
-import * as _226 from "./core/types/v1/genesis";
-import * as _227 from "./lightclients/localhost/v1/localhost";
-import * as _228 from "./lightclients/solomachine/v1/solomachine";
-import * as _229 from "./lightclients/solomachine/v2/solomachine";
-import * as _230 from "./lightclients/tendermint/v1/tendermint";
-import * as _358 from "./applications/transfer/v1/tx.amino";
-import * as _359 from "./core/channel/v1/tx.amino";
-import * as _360 from "./core/client/v1/tx.amino";
-import * as _361 from "./core/connection/v1/tx.amino";
-import * as _362 from "./applications/transfer/v1/tx.registry";
-import * as _363 from "./core/channel/v1/tx.registry";
-import * as _364 from "./core/client/v1/tx.registry";
-import * as _365 from "./core/connection/v1/tx.registry";
-import * as _366 from "./applications/transfer/v1/query.lcd";
-import * as _367 from "./core/channel/v1/query.lcd";
-import * as _368 from "./core/client/v1/query.lcd";
-import * as _369 from "./core/connection/v1/query.lcd";
+import * as _231 from "./applications/transfer/v1/genesis";
+import * as _232 from "./applications/transfer/v1/query";
+import * as _233 from "./applications/transfer/v1/transfer";
+import * as _234 from "./applications/transfer/v1/tx";
+import * as _235 from "./applications/transfer/v2/packet";
+import * as _236 from "./core/channel/v1/channel";
+import * as _237 from "./core/channel/v1/genesis";
+import * as _238 from "./core/channel/v1/query";
+import * as _239 from "./core/channel/v1/tx";
+import * as _240 from "./core/client/v1/client";
+import * as _241 from "./core/client/v1/genesis";
+import * as _242 from "./core/client/v1/query";
+import * as _243 from "./core/client/v1/tx";
+import * as _244 from "./core/commitment/v1/commitment";
+import * as _245 from "./core/connection/v1/connection";
+import * as _246 from "./core/connection/v1/genesis";
+import * as _247 from "./core/connection/v1/query";
+import * as _248 from "./core/connection/v1/tx";
+import * as _249 from "./core/port/v1/query";
+import * as _250 from "./core/types/v1/genesis";
+import * as _251 from "./lightclients/localhost/v1/localhost";
+import * as _252 from "./lightclients/solomachine/v1/solomachine";
+import * as _253 from "./lightclients/solomachine/v2/solomachine";
+import * as _254 from "./lightclients/tendermint/v1/tendermint";
+import * as _396 from "./applications/transfer/v1/tx.amino";
+import * as _397 from "./core/channel/v1/tx.amino";
+import * as _398 from "./core/client/v1/tx.amino";
+import * as _399 from "./core/connection/v1/tx.amino";
+import * as _400 from "./applications/transfer/v1/tx.registry";
+import * as _401 from "./core/channel/v1/tx.registry";
+import * as _402 from "./core/client/v1/tx.registry";
+import * as _403 from "./core/connection/v1/tx.registry";
+import * as _404 from "./applications/transfer/v1/query.lcd";
+import * as _405 from "./core/channel/v1/query.lcd";
+import * as _406 from "./core/client/v1/query.lcd";
+import * as _407 from "./core/connection/v1/query.lcd";
 export namespace ibc {
   export namespace applications {
     export namespace transfer {
-      export const v1 = { ..._207,
-        ..._208,
-        ..._209,
-        ..._210,
-        ..._358,
-        ..._362,
-        ..._366
+      export const v1 = { ..._231,
+        ..._232,
+        ..._233,
+        ..._234,
+        ..._396,
+        ..._400,
+        ..._404
       };
-      export const v2 = { ..._211
+      export const v2 = { ..._235
       };
     }
   }
   export namespace core {
     export namespace channel {
-      export const v1 = { ..._212,
-        ..._213,
-        ..._214,
-        ..._215,
-        ..._359,
-        ..._363,
-        ..._367
+      export const v1 = { ..._236,
+        ..._237,
+        ..._238,
+        ..._239,
+        ..._397,
+        ..._401,
+        ..._405
       };
     }
     export namespace client {
-      export const v1 = { ..._216,
-        ..._217,
-        ..._218,
-        ..._219,
-        ..._360,
-        ..._364,
-        ..._368
+      export const v1 = { ..._240,
+        ..._241,
+        ..._242,
+        ..._243,
+        ..._398,
+        ..._402,
+        ..._406
       };
     }
     export namespace commitment {
-      export const v1 = { ..._220
+      export const v1 = { ..._244
       };
     }
     export namespace connection {
-      export const v1 = { ..._221,
-        ..._222,
-        ..._223,
-        ..._224,
-        ..._361,
-        ..._365,
-        ..._369
+      export const v1 = { ..._245,
+        ..._246,
+        ..._247,
+        ..._248,
+        ..._399,
+        ..._403,
+        ..._407
       };
     }
     export namespace port {
-      export const v1 = { ..._225
+      export const v1 = { ..._249
       };
     }
     export namespace types {
-      export const v1 = { ..._226
+      export const v1 = { ..._250
       };
     }
   }
   export namespace lightclients {
     export namespace localhost {
-      export const v1 = { ..._227
+      export const v1 = { ..._251
       };
     }
     export namespace solomachine {
-      export const v1 = { ..._228
+      export const v1 = { ..._252
       };
-      export const v2 = { ..._229
+      export const v2 = { ..._253
       };
     }
     export namespace tendermint {
-      export const v1 = { ..._230
+      export const v1 = { ..._254
       };
     }
   }

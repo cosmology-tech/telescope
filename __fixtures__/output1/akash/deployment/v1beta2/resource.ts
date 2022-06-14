@@ -1,7 +1,7 @@
 import { ResourceUnits } from "../../base/v1beta2/resourceunits";
 import { DecCoin } from "../../../cosmos/base/v1beta1/coin";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
+import { isSet, DeepPartial } from "@osmonauts/helpers";
 
 /** Resource stores unit, total count and price of resource */
 export interface Resource {
@@ -81,7 +81,7 @@ export const Resource = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Resource>, I>>(object: I): Resource {
+  fromPartial(object: DeepPartial<Resource>): Resource {
     const message = createBaseResource();
     message.resources = object.resources !== undefined && object.resources !== null ? ResourceUnits.fromPartial(object.resources) : undefined;
     message.count = object.count ?? 0;

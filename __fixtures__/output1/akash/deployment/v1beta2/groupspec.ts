@@ -1,7 +1,7 @@
 import { PlacementRequirements } from "../../base/v1beta2/attribute";
 import { Resource } from "./resource";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
+import { isSet, DeepPartial } from "@osmonauts/helpers";
 
 /** GroupSpec stores group specifications */
 export interface GroupSpec {
@@ -87,7 +87,7 @@ export const GroupSpec = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<GroupSpec>, I>>(object: I): GroupSpec {
+  fromPartial(object: DeepPartial<GroupSpec>): GroupSpec {
     const message = createBaseGroupSpec();
     message.name = object.name ?? "";
     message.requirements = object.requirements !== undefined && object.requirements !== null ? PlacementRequirements.fromPartial(object.requirements) : undefined;

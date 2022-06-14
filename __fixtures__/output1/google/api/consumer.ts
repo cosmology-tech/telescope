@@ -1,5 +1,5 @@
 import * as _m0 from "protobufjs/minimal";
-import { Exact, DeepPartial, isSet } from "@osmonauts/helpers";
+import { DeepPartial, isSet } from "@osmonauts/helpers";
 
 /** Supported data type of the property values */
 export enum Property_PropertyType {
@@ -170,7 +170,7 @@ export const ProjectProperties = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<ProjectProperties>, I>>(object: I): ProjectProperties {
+  fromPartial(object: DeepPartial<ProjectProperties>): ProjectProperties {
     const message = createBaseProjectProperties();
     message.properties = object.properties?.map(e => Property.fromPartial(e)) || [];
     return message;
@@ -249,7 +249,7 @@ export const Property = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Property>, I>>(object: I): Property {
+  fromPartial(object: DeepPartial<Property>): Property {
     const message = createBaseProperty();
     message.name = object.name ?? "";
     message.type = object.type ?? 0;

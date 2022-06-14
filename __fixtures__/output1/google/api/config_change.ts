@@ -1,5 +1,5 @@
 import * as _m0 from "protobufjs/minimal";
-import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
+import { isSet, DeepPartial } from "@osmonauts/helpers";
 
 /**
  * Classifies set of possible modifications to an object in the service
@@ -226,7 +226,7 @@ export const ConfigChange = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<ConfigChange>, I>>(object: I): ConfigChange {
+  fromPartial(object: DeepPartial<ConfigChange>): ConfigChange {
     const message = createBaseConfigChange();
     message.element = object.element ?? "";
     message.oldValue = object.oldValue ?? "";
@@ -287,7 +287,7 @@ export const Advice = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Advice>, I>>(object: I): Advice {
+  fromPartial(object: DeepPartial<Advice>): Advice {
     const message = createBaseAdvice();
     message.description = object.description ?? "";
     return message;

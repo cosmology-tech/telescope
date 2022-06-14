@@ -1,5 +1,5 @@
 import * as _m0 from "protobufjs/minimal";
-import { isSet, bytesFromBase64, base64FromBytes, Exact, DeepPartial } from "@osmonauts/helpers";
+import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "@osmonauts/helpers";
 
 /**
  * `Any` contains an arbitrary serialized protocol buffer message along with a
@@ -178,7 +178,7 @@ export const Any = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Any>, I>>(object: I): Any {
+  fromPartial(object: DeepPartial<Any>): Any {
     const message = createBaseAny();
     message.typeUrl = object.typeUrl ?? "";
     message.value = object.value ?? new Uint8Array();

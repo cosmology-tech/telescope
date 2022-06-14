@@ -3,7 +3,7 @@ import { MetricValueSet } from "./metric_value";
 import { LogEntry } from "./log_entry";
 import { Any } from "../../../protobuf/any";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, Exact, DeepPartial, toTimestamp, fromTimestamp, fromJsonTimestamp, isObject } from "@osmonauts/helpers";
+import { isSet, DeepPartial, toTimestamp, fromTimestamp, fromJsonTimestamp, isObject } from "@osmonauts/helpers";
 
 /** Defines the importance of the data contained in the operation. */
 export enum Operation_Importance {
@@ -206,7 +206,7 @@ export const Operation_LabelsEntry = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Operation_LabelsEntry>, I>>(object: I): Operation_LabelsEntry {
+  fromPartial(object: DeepPartial<Operation_LabelsEntry>): Operation_LabelsEntry {
     const message = createBaseOperation_LabelsEntry();
     message.key = object.key ?? "";
     message.value = object.value ?? "";
@@ -399,7 +399,7 @@ export const Operation = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Operation>, I>>(object: I): Operation {
+  fromPartial(object: DeepPartial<Operation>): Operation {
     const message = createBaseOperation();
     message.operationId = object.operationId ?? "";
     message.operationName = object.operationName ?? "";

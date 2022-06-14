@@ -1,5 +1,5 @@
 import * as _m0 from "protobufjs/minimal";
-import { isSet, Exact, DeepPartial, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
+import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
 export interface SeedConfig {
   masterCert: string;
   encryptedKey: string;
@@ -69,7 +69,7 @@ export const SeedConfig = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<SeedConfig>, I>>(object: I): SeedConfig {
+  fromPartial(object: DeepPartial<SeedConfig>): SeedConfig {
     const message = createBaseSeedConfig();
     message.masterCert = object.masterCert ?? "";
     message.encryptedKey = object.encryptedKey ?? "";
@@ -138,7 +138,7 @@ export const RegistrationNodeInfo = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<RegistrationNodeInfo>, I>>(object: I): RegistrationNodeInfo {
+  fromPartial(object: DeepPartial<RegistrationNodeInfo>): RegistrationNodeInfo {
     const message = createBaseRegistrationNodeInfo();
     message.certificate = object.certificate ?? new Uint8Array();
     message.encryptedSeed = object.encryptedSeed ?? new Uint8Array();

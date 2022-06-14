@@ -1,6 +1,6 @@
 import { PoolParams, PoolAsset } from "./balancerPool";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, Exact, DeepPartial, Long } from "@osmonauts/helpers";
+import { isSet, DeepPartial, Long } from "@osmonauts/helpers";
 
 /** ===================== MsgCreatePool */
 export interface MsgCreateBalancerPool {
@@ -101,7 +101,7 @@ export const MsgCreateBalancerPool = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgCreateBalancerPool>, I>>(object: I): MsgCreateBalancerPool {
+  fromPartial(object: DeepPartial<MsgCreateBalancerPool>): MsgCreateBalancerPool {
     const message = createBaseMsgCreateBalancerPool();
     message.sender = object.sender ?? "";
     message.poolParams = object.poolParams !== undefined && object.poolParams !== null ? PoolParams.fromPartial(object.poolParams) : undefined;
@@ -161,7 +161,7 @@ export const MsgCreateBalancerPoolResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgCreateBalancerPoolResponse>, I>>(object: I): MsgCreateBalancerPoolResponse {
+  fromPartial(object: DeepPartial<MsgCreateBalancerPoolResponse>): MsgCreateBalancerPoolResponse {
     const message = createBaseMsgCreateBalancerPoolResponse();
     message.poolId = object.poolId !== undefined && object.poolId !== null ? Long.fromValue(object.poolId) : Long.UZERO;
     return message;

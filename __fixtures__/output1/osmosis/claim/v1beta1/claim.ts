@@ -1,6 +1,6 @@
 import { Coin } from "../../../cosmos/base/v1beta1/coin";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
+import { isSet, DeepPartial } from "@osmonauts/helpers";
 export enum Action {
   ActionAddLiquidity = 0,
   ActionSwap = 1,
@@ -160,7 +160,7 @@ export const ClaimRecord = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<ClaimRecord>, I>>(object: I): ClaimRecord {
+  fromPartial(object: DeepPartial<ClaimRecord>): ClaimRecord {
     const message = createBaseClaimRecord();
     message.address = object.address ?? "";
     message.initialClaimableAmount = object.initialClaimableAmount?.map(e => Coin.fromPartial(e)) || [];

@@ -2,7 +2,7 @@ import { PlacementRequirements } from "../../base/v1beta1/attribute";
 import { ResourceUnits } from "../../base/v1beta1/resource";
 import { Coin } from "../../../cosmos/base/v1beta1/coin";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, Exact, DeepPartial, Long } from "@osmonauts/helpers";
+import { isSet, DeepPartial, Long } from "@osmonauts/helpers";
 
 /** State is an enum which refers to state of group */
 export enum Group_State {
@@ -174,7 +174,7 @@ export const MsgCloseGroup = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgCloseGroup>, I>>(object: I): MsgCloseGroup {
+  fromPartial(object: DeepPartial<MsgCloseGroup>): MsgCloseGroup {
     const message = createBaseMsgCloseGroup();
     message.id = object.id !== undefined && object.id !== null ? GroupID.fromPartial(object.id) : undefined;
     return message;
@@ -218,7 +218,7 @@ export const MsgCloseGroupResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgCloseGroupResponse>, I>>(_: I): MsgCloseGroupResponse {
+  fromPartial(_: DeepPartial<MsgCloseGroupResponse>): MsgCloseGroupResponse {
     const message = createBaseMsgCloseGroupResponse();
     return message;
   }
@@ -274,7 +274,7 @@ export const MsgPauseGroup = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgPauseGroup>, I>>(object: I): MsgPauseGroup {
+  fromPartial(object: DeepPartial<MsgPauseGroup>): MsgPauseGroup {
     const message = createBaseMsgPauseGroup();
     message.id = object.id !== undefined && object.id !== null ? GroupID.fromPartial(object.id) : undefined;
     return message;
@@ -318,7 +318,7 @@ export const MsgPauseGroupResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgPauseGroupResponse>, I>>(_: I): MsgPauseGroupResponse {
+  fromPartial(_: DeepPartial<MsgPauseGroupResponse>): MsgPauseGroupResponse {
     const message = createBaseMsgPauseGroupResponse();
     return message;
   }
@@ -374,7 +374,7 @@ export const MsgStartGroup = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgStartGroup>, I>>(object: I): MsgStartGroup {
+  fromPartial(object: DeepPartial<MsgStartGroup>): MsgStartGroup {
     const message = createBaseMsgStartGroup();
     message.id = object.id !== undefined && object.id !== null ? GroupID.fromPartial(object.id) : undefined;
     return message;
@@ -418,7 +418,7 @@ export const MsgStartGroupResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgStartGroupResponse>, I>>(_: I): MsgStartGroupResponse {
+  fromPartial(_: DeepPartial<MsgStartGroupResponse>): MsgStartGroupResponse {
     const message = createBaseMsgStartGroupResponse();
     return message;
   }
@@ -496,7 +496,7 @@ export const GroupID = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<GroupID>, I>>(object: I): GroupID {
+  fromPartial(object: DeepPartial<GroupID>): GroupID {
     const message = createBaseGroupID();
     message.owner = object.owner ?? "";
     message.dseq = object.dseq !== undefined && object.dseq !== null ? Long.fromValue(object.dseq) : Long.UZERO;
@@ -583,7 +583,7 @@ export const GroupSpec = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<GroupSpec>, I>>(object: I): GroupSpec {
+  fromPartial(object: DeepPartial<GroupSpec>): GroupSpec {
     const message = createBaseGroupSpec();
     message.name = object.name ?? "";
     message.requirements = object.requirements !== undefined && object.requirements !== null ? PlacementRequirements.fromPartial(object.requirements) : undefined;
@@ -675,7 +675,7 @@ export const Group = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Group>, I>>(object: I): Group {
+  fromPartial(object: DeepPartial<Group>): Group {
     const message = createBaseGroup();
     message.groupId = object.groupId !== undefined && object.groupId !== null ? GroupID.fromPartial(object.groupId) : undefined;
     message.state = object.state ?? 0;
@@ -757,7 +757,7 @@ export const Resource = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Resource>, I>>(object: I): Resource {
+  fromPartial(object: DeepPartial<Resource>): Resource {
     const message = createBaseResource();
     message.resources = object.resources !== undefined && object.resources !== null ? ResourceUnits.fromPartial(object.resources) : undefined;
     message.count = object.count ?? 0;

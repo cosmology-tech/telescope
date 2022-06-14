@@ -64,7 +64,7 @@ exports[`cosmos/tx/signing/v1beta1/signing SignatureDescriptor 1`] = `
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<SignatureDescriptor>, I>>(object: I): SignatureDescriptor {
+  fromPartial(object: DeepPartial<SignatureDescriptor>): SignatureDescriptor {
     const message = createBaseSignatureDescriptor();
     message.publicKey = object.publicKey !== undefined && object.publicKey !== null ? Any.fromPartial(object.publicKey) : undefined;
     message.data = object.data !== undefined && object.data !== null ? SignatureDescriptor_Data.fromPartial(object.data) : undefined;
@@ -125,7 +125,7 @@ exports[`cosmos/tx/signing/v1beta1/signing SignatureDescriptors 1`] = `
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<SignatureDescriptors>, I>>(object: I): SignatureDescriptors {
+  fromPartial(object: DeepPartial<SignatureDescriptors>): SignatureDescriptors {
     const message = createBaseSignatureDescriptors();
     message.signatures = object.signatures?.map(e => SignatureDescriptor.fromPartial(e)) || [];
     return message;
@@ -208,7 +208,7 @@ exports[`cosmos/tx/v1beta1/tx AuxSignerData 1`] = `
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<AuxSignerData>, I>>(object: I): AuxSignerData {
+  fromPartial(object: DeepPartial<AuxSignerData>): AuxSignerData {
     const message = createBaseAuxSignerData();
     message.address = object.address ?? \\"\\";
     message.signDoc = object.signDoc !== undefined && object.signDoc !== null ? SignDocDirectAux.fromPartial(object.signDoc) : undefined;
@@ -274,7 +274,7 @@ exports[`cosmos/tx/v1beta1/tx ModeInfo_Multi 1`] = `
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<ModeInfo_Multi>, I>>(object: I): ModeInfo_Multi {
+  fromPartial(object: DeepPartial<ModeInfo_Multi>): ModeInfo_Multi {
     const message = createBaseModeInfo_Multi();
     message.single = object.single !== undefined && object.single !== null ? ModeInfo_Single.fromPartial(object.single) : undefined;
     message.multi = object.multi !== undefined && object.multi !== null ? ModeInfo_Multi.fromPartial(object.multi) : undefined;
@@ -366,7 +366,7 @@ exports[`cosmwasm/wasm/v1/proposal 1`] = `
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<PinCodesProposal>, I>>(object: I): PinCodesProposal {
+  fromPartial(object: DeepPartial<PinCodesProposal>): PinCodesProposal {
     const message = createBasePinCodesProposal();
     message.title = object.title ?? \\"\\";
     message.description = object.description ?? \\"\\";
@@ -459,7 +459,7 @@ exports[`cosmwasm/wasm/v1/proposal 2`] = `
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<UnpinCodesProposal>, I>>(object: I): UnpinCodesProposal {
+  fromPartial(object: DeepPartial<UnpinCodesProposal>): UnpinCodesProposal {
     const message = createBaseUnpinCodesProposal();
     message.title = object.title ?? \\"\\";
     message.description = object.description ?? \\"\\";
@@ -524,10 +524,114 @@ exports[`cosmwasm/wasm/v1/query 1`] = `
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryRawContractStateRequest>, I>>(object: I): QueryRawContractStateRequest {
+  fromPartial(object: DeepPartial<QueryRawContractStateRequest>): QueryRawContractStateRequest {
     const message = createBaseQueryRawContractStateRequest();
     message.address = object.address ?? \\"\\";
     message.queryData = object.queryData ?? new Uint8Array();
+    return message;
+  }
+
+};"
+`;
+
+exports[`evmos/fees/v1/tx 1`] = `
+"export const MsgRegisterDevFeeInfo = {
+  encode(message: MsgRegisterDevFeeInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.contractAddress !== \\"\\") {
+      writer.uint32(10).string(message.contractAddress);
+    }
+
+    if (message.deployerAddress !== \\"\\") {
+      writer.uint32(18).string(message.deployerAddress);
+    }
+
+    if (message.withdrawAddress !== \\"\\") {
+      writer.uint32(26).string(message.withdrawAddress);
+    }
+
+    writer.uint32(34).fork();
+
+    for (const v of message.nonces) {
+      writer.uint64(v);
+    }
+
+    writer.ldelim();
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgRegisterDevFeeInfo {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgRegisterDevFeeInfo();
+
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        case 1:
+          message.contractAddress = reader.string();
+          break;
+
+        case 2:
+          message.deployerAddress = reader.string();
+          break;
+
+        case 3:
+          message.withdrawAddress = reader.string();
+          break;
+
+        case 4:
+          if ((tag & 7) === 2) {
+            const end2 = reader.uint32() + reader.pos;
+
+            while (reader.pos < end2) {
+              message.nonces.push((reader.uint64() as Long));
+            }
+          } else {
+            message.nonces.push((reader.uint64() as Long));
+          }
+
+          break;
+
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+
+  fromJSON(object: any): MsgRegisterDevFeeInfo {
+    return {
+      contractAddress: isSet(object.contractAddress) ? String(object.contractAddress) : \\"\\",
+      deployerAddress: isSet(object.deployerAddress) ? String(object.deployerAddress) : \\"\\",
+      withdrawAddress: isSet(object.withdrawAddress) ? String(object.withdrawAddress) : \\"\\",
+      nonces: Array.isArray(object?.nonces) ? object.nonces.map((e: any) => Long.fromString(e)) : []
+    };
+  },
+
+  toJSON(message: MsgRegisterDevFeeInfo): unknown {
+    const obj: any = {};
+    message.contractAddress !== undefined && (obj.contractAddress = message.contractAddress);
+    message.deployerAddress !== undefined && (obj.deployerAddress = message.deployerAddress);
+    message.withdrawAddress !== undefined && (obj.withdrawAddress = message.withdrawAddress);
+
+    if (message.nonces) {
+      obj.nonces = message.nonces.map(e => (e || Long.UZERO).toString());
+    } else {
+      obj.nonces = [];
+    }
+
+    return obj;
+  },
+
+  fromPartial(object: DeepPartial<MsgRegisterDevFeeInfo>): MsgRegisterDevFeeInfo {
+    const message = createBaseMsgRegisterDevFeeInfo();
+    message.contractAddress = object.contractAddress ?? \\"\\";
+    message.deployerAddress = object.deployerAddress ?? \\"\\";
+    message.withdrawAddress = object.withdrawAddress ?? \\"\\";
+    message.nonces = object.nonces?.map(e => Long.fromValue(e)) || [];
     return message;
   }
 
@@ -608,7 +712,7 @@ exports[`google/api/expr/conformance/v1alpha1/conformance_service ParseRequest 1
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<ParseRequest>, I>>(object: I): ParseRequest {
+  fromPartial(object: DeepPartial<ParseRequest>): ParseRequest {
     const message = createBaseParseRequest();
     message.celSource = object.celSource ?? \\"\\";
     message.syntaxVersion = object.syntaxVersion ?? \\"\\";
@@ -725,7 +829,7 @@ exports[`google/api/expr/v1alpha1/checked Decl_FunctionDecl_Overload MapType 1`]
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Decl_FunctionDecl_Overload>, I>>(object: I): Decl_FunctionDecl_Overload {
+  fromPartial(object: DeepPartial<Decl_FunctionDecl_Overload>): Decl_FunctionDecl_Overload {
     const message = createBaseDecl_FunctionDecl_Overload();
     message.overloadId = object.overloadId ?? \\"\\";
     message.params = object.params?.map(e => Type.fromPartial(e)) || [];
@@ -903,7 +1007,7 @@ exports[`google/api/expr/v1alpha1/checked Type 1`] = `
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Type>, I>>(object: I): Type {
+  fromPartial(object: DeepPartial<Type>): Type {
     const message = createBaseType();
     message.dyn = object.dyn !== undefined && object.dyn !== null ? Empty.fromPartial(object.dyn) : undefined;
     message.null = object.null ?? undefined;
@@ -978,7 +1082,7 @@ exports[`google/api/expr/v1alpha1/checked nested MapType 1`] = `
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Type_MapType>, I>>(object: I): Type_MapType {
+  fromPartial(object: DeepPartial<Type_MapType>): Type_MapType {
     const message = createBaseType_MapType();
     message.keyType = object.keyType !== undefined && object.keyType !== null ? Type.fromPartial(object.keyType) : undefined;
     message.valueType = object.valueType !== undefined && object.valueType !== null ? Type.fromPartial(object.valueType) : undefined;
@@ -1111,7 +1215,7 @@ exports[`google/api/expr/v1alpha1/checked typeHash (Long) CheckedExpr 1`] = `
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<CheckedExpr>, I>>(object: I): CheckedExpr {
+  fromPartial(object: DeepPartial<CheckedExpr>): CheckedExpr {
     const message = createBaseCheckedExpr();
     message.referenceMap = Object.entries(object.referenceMap ?? {}).reduce<{
       [key: Long]: Reference;
@@ -1264,7 +1368,7 @@ exports[`google/api/expr/v1alpha1/syntax Constant 1`] = `
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Constant>, I>>(object: I): Constant {
+  fromPartial(object: DeepPartial<Constant>): Constant {
     const message = createBaseConstant();
     message.nullValue = object.nullValue ?? undefined;
     message.boolValue = object.boolValue ?? undefined;
@@ -1335,7 +1439,7 @@ exports[`google/api/expr/v1alpha1/value Entry 1`] = `
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Entry>, I>>(object: I): Entry {
+  fromPartial(object: DeepPartial<Entry>): Entry {
     const message = createBaseEntry();
     message.key = object.key !== undefined && object.key !== null ? Value.fromPartial(object.key) : undefined;
     message.value = object.value !== undefined && object.value !== null ? Value.fromPartial(object.value) : undefined;
@@ -1397,7 +1501,7 @@ exports[`google/api/expr/v1alpha1/value MapValue 1`] = `
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MapValue>, I>>(object: I): MapValue {
+  fromPartial(object: DeepPartial<MapValue>): MapValue {
     const message = createBaseMapValue();
     message.entries = object.entries?.map(e => MapValue_Entry.fromPartial(e)) || [];
     return message;
@@ -1509,7 +1613,7 @@ exports[`google/api/expr/v1beta1/source 1`] = `
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<SourceInfo>, I>>(object: I): SourceInfo {
+  fromPartial(object: DeepPartial<SourceInfo>): SourceInfo {
     const message = createBaseSourceInfo();
     message.location = object.location ?? \\"\\";
     message.lineOffsets = object.lineOffsets?.map(e => e) || [];
@@ -1601,7 +1705,7 @@ exports[`google/api/quota keyType 1`] = `
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MetricRule>, I>>(object: I): MetricRule {
+  fromPartial(object: DeepPartial<MetricRule>): MetricRule {
     const message = createBaseMetricRule();
     message.selector = object.selector ?? \\"\\";
     message.metricCosts = Object.entries(object.metricCosts ?? {}).reduce<{
@@ -1795,7 +1899,7 @@ exports[`google/api/servicecontrol/v1/log_entry LogEntry 1`] = `
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<LogEntry>, I>>(object: I): LogEntry {
+  fromPartial(object: DeepPartial<LogEntry>): LogEntry {
     const message = createBaseLogEntry();
     message.name = object.name ?? \\"\\";
     message.timestamp = object.timestamp ?? undefined;
@@ -1887,7 +1991,7 @@ exports[`google/rpc/error_details name collisions 2`] = `
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<PreconditionFailure>, I>>(object: I): PreconditionFailure {
+  fromPartial(object: DeepPartial<PreconditionFailure>): PreconditionFailure {
     const message = createBasePreconditionFailure();
     message.violations = object.violations?.map(e => PreconditionFailure_Violation.fromPartial(e)) || [];
     return message;
@@ -1980,7 +2084,7 @@ exports[`ibc/core/port/v1/query 1`] = `
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryAppVersionRequest>, I>>(object: I): QueryAppVersionRequest {
+  fromPartial(object: DeepPartial<QueryAppVersionRequest>): QueryAppVersionRequest {
     const message = createBaseQueryAppVersionRequest();
     message.portId = object.portId ?? \\"\\";
     message.connectionId = object.connectionId ?? \\"\\";
@@ -2110,7 +2214,7 @@ exports[`ibc/core/types/v1/genesis name collisions 2`] = `
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<GenesisState>, I>>(object: I): GenesisState {
+  fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
     message.clientGenesis = object.clientGenesis !== undefined && object.clientGenesis !== null ? GenesisState.fromPartial(object.clientGenesis) : undefined;
     message.connectionGenesis = object.connectionGenesis !== undefined && object.connectionGenesis !== null ? GenesisState.fromPartial(object.connectionGenesis) : undefined;
@@ -2296,7 +2400,7 @@ exports[`osmosis/gamm/v1beta1/tx MsgJoinPool 1`] = `
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgJoinPool>, I>>(object: I): MsgJoinPool {
+  fromPartial(object: DeepPartial<MsgJoinPool>): MsgJoinPool {
     const message = createBaseMsgJoinPool();
     message.sender = object.sender ?? \\"\\";
     message.poolId = object.poolId !== undefined && object.poolId !== null ? Long.fromValue(object.poolId) : Long.UZERO;
@@ -2388,7 +2492,7 @@ exports[`osmosis/gamm/v1beta1/tx MsgSwapExactAmountIn 1`] = `
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgSwapExactAmountIn>, I>>(object: I): MsgSwapExactAmountIn {
+  fromPartial(object: DeepPartial<MsgSwapExactAmountIn>): MsgSwapExactAmountIn {
     const message = createBaseMsgSwapExactAmountIn();
     message.sender = object.sender ?? \\"\\";
     message.routes = object.routes?.map(e => SwapAmountInRoute.fromPartial(e)) || [];
@@ -2480,7 +2584,7 @@ exports[`osmosis/gamm/v1beta1/tx MsgSwapExactAmountOut 1`] = `
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgSwapExactAmountOut>, I>>(object: I): MsgSwapExactAmountOut {
+  fromPartial(object: DeepPartial<MsgSwapExactAmountOut>): MsgSwapExactAmountOut {
     const message = createBaseMsgSwapExactAmountOut();
     message.sender = object.sender ?? \\"\\";
     message.routes = object.routes?.map(e => SwapAmountOutRoute.fromPartial(e)) || [];

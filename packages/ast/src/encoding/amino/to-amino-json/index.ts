@@ -3,7 +3,7 @@ import { arrowFunctionExpression } from '../../../utils';
 import { AminoParseContext } from '../../context';
 import { ProtoType, ProtoField } from '@osmonauts/types';
 import { protoFieldsToArray } from '../utils';
-import { toAmino } from './utils';
+import { arrayTypes, toAmino } from './utils';
 import { getFieldOptionality, getOneOfs } from '../../proto';
 
 const needsImplementation = (name: string, field: ProtoField) => {
@@ -49,14 +49,34 @@ export const toAminoParseField = ({
         switch (field.type) {
             case 'string':
                 return toAmino.string(args);
-            default:
-                switch (field.parsedType.type) {
-                    case 'Type':
-                        return toAmino.typeArray(args);
-                }
+
+            case 'int64':
+            case 'sint64':
+            case 'uint64':
+            case 'fixed64':
+            case 'sfixed64':
+                return toAmino.scalarArray(args, arrayTypes.long);
+
+            case 'double':
+            case 'float':
+            case 'int32':
+            case 'sint32':
+            case 'uint32':
+            case 'fixed32':
+            case 'sfixed32':
+            case 'bool':
+            case 'bytes':
+                return toAmino.defaultType(args);
+
+            case 'string':
+                return toAmino.string(args);
         }
 
-        // TODO test case
+        switch (field.parsedType.type) {
+            case 'Type':
+                return toAmino.typeArray(args);
+        }
+
         return needsImplementation(field.name, field);
     }
 

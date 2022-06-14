@@ -1,5 +1,5 @@
 import * as _m0 from "protobufjs/minimal";
-import { Exact, DeepPartial, isSet } from "@osmonauts/helpers";
+import { DeepPartial, isSet } from "@osmonauts/helpers";
 
 /** ListAllInterfacesRequest is the request type of the ListAllInterfaces RPC. */
 export interface ListAllInterfacesRequest {}
@@ -63,7 +63,7 @@ export const ListAllInterfacesRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<ListAllInterfacesRequest>, I>>(_: I): ListAllInterfacesRequest {
+  fromPartial(_: DeepPartial<ListAllInterfacesRequest>): ListAllInterfacesRequest {
     const message = createBaseListAllInterfacesRequest();
     return message;
   }
@@ -125,7 +125,7 @@ export const ListAllInterfacesResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<ListAllInterfacesResponse>, I>>(object: I): ListAllInterfacesResponse {
+  fromPartial(object: DeepPartial<ListAllInterfacesResponse>): ListAllInterfacesResponse {
     const message = createBaseListAllInterfacesResponse();
     message.interfaceNames = object.interfaceNames?.map(e => e) || [];
     return message;
@@ -182,7 +182,7 @@ export const ListImplementationsRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<ListImplementationsRequest>, I>>(object: I): ListImplementationsRequest {
+  fromPartial(object: DeepPartial<ListImplementationsRequest>): ListImplementationsRequest {
     const message = createBaseListImplementationsRequest();
     message.interfaceName = object.interfaceName ?? "";
     return message;
@@ -245,7 +245,7 @@ export const ListImplementationsResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<ListImplementationsResponse>, I>>(object: I): ListImplementationsResponse {
+  fromPartial(object: DeepPartial<ListImplementationsResponse>): ListImplementationsResponse {
     const message = createBaseListImplementationsResponse();
     message.implementationMessageNames = object.implementationMessageNames?.map(e => e) || [];
     return message;

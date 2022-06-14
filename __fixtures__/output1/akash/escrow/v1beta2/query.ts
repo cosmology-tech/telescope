@@ -1,7 +1,7 @@
 import { PageRequest, PageResponse } from "../../../cosmos/base/query/v1beta1/pagination";
 import { Account, FractionalPayment } from "./types";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
+import { isSet, DeepPartial } from "@osmonauts/helpers";
 
 /** QueryAccountRequest is request type for the Query/Account RPC method */
 export interface QueryAccountsRequest {
@@ -127,7 +127,7 @@ export const QueryAccountsRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryAccountsRequest>, I>>(object: I): QueryAccountsRequest {
+  fromPartial(object: DeepPartial<QueryAccountsRequest>): QueryAccountsRequest {
     const message = createBaseQueryAccountsRequest();
     message.scope = object.scope ?? "";
     message.xid = object.xid ?? "";
@@ -205,7 +205,7 @@ export const QueryAccountsResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryAccountsResponse>, I>>(object: I): QueryAccountsResponse {
+  fromPartial(object: DeepPartial<QueryAccountsResponse>): QueryAccountsResponse {
     const message = createBaseQueryAccountsResponse();
     message.accounts = object.accounts?.map(e => Account.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
@@ -318,7 +318,7 @@ export const QueryPaymentsRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryPaymentsRequest>, I>>(object: I): QueryPaymentsRequest {
+  fromPartial(object: DeepPartial<QueryPaymentsRequest>): QueryPaymentsRequest {
     const message = createBaseQueryPaymentsRequest();
     message.scope = object.scope ?? "";
     message.xid = object.xid ?? "";
@@ -397,7 +397,7 @@ export const QueryPaymentsResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryPaymentsResponse>, I>>(object: I): QueryPaymentsResponse {
+  fromPartial(object: DeepPartial<QueryPaymentsResponse>): QueryPaymentsResponse {
     const message = createBaseQueryPaymentsResponse();
     message.payments = object.payments?.map(e => FractionalPayment.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;

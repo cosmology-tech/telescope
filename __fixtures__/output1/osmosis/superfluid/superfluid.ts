@@ -1,6 +1,6 @@
 import { Coin } from "../../cosmos/base/v1beta1/coin";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, Exact, DeepPartial, Long } from "@osmonauts/helpers";
+import { isSet, DeepPartial, Long } from "@osmonauts/helpers";
 export enum SuperfluidAssetType {
   SuperfluidAssetTypeNative = 0,
   SuperfluidAssetTypeLPShare = 1,
@@ -144,7 +144,7 @@ export const SuperfluidAsset = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<SuperfluidAsset>, I>>(object: I): SuperfluidAsset {
+  fromPartial(object: DeepPartial<SuperfluidAsset>): SuperfluidAsset {
     const message = createBaseSuperfluidAsset();
     message.denom = object.denom ?? "";
     message.assetType = object.assetType ?? 0;
@@ -224,7 +224,7 @@ export const SuperfluidIntermediaryAccount = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<SuperfluidIntermediaryAccount>, I>>(object: I): SuperfluidIntermediaryAccount {
+  fromPartial(object: DeepPartial<SuperfluidIntermediaryAccount>): SuperfluidIntermediaryAccount {
     const message = createBaseSuperfluidIntermediaryAccount();
     message.denom = object.denom ?? "";
     message.valAddr = object.valAddr ?? "";
@@ -305,7 +305,7 @@ export const OsmoEquivalentMultiplierRecord = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<OsmoEquivalentMultiplierRecord>, I>>(object: I): OsmoEquivalentMultiplierRecord {
+  fromPartial(object: DeepPartial<OsmoEquivalentMultiplierRecord>): OsmoEquivalentMultiplierRecord {
     const message = createBaseOsmoEquivalentMultiplierRecord();
     message.epochNumber = object.epochNumber !== undefined && object.epochNumber !== null ? Long.fromValue(object.epochNumber) : Long.ZERO;
     message.denom = object.denom ?? "";
@@ -386,7 +386,7 @@ export const SuperfluidDelegationRecord = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<SuperfluidDelegationRecord>, I>>(object: I): SuperfluidDelegationRecord {
+  fromPartial(object: DeepPartial<SuperfluidDelegationRecord>): SuperfluidDelegationRecord {
     const message = createBaseSuperfluidDelegationRecord();
     message.delegatorAddress = object.delegatorAddress ?? "";
     message.validatorAddress = object.validatorAddress ?? "";
@@ -456,7 +456,7 @@ export const LockIdIntermediaryAccountConnection = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<LockIdIntermediaryAccountConnection>, I>>(object: I): LockIdIntermediaryAccountConnection {
+  fromPartial(object: DeepPartial<LockIdIntermediaryAccountConnection>): LockIdIntermediaryAccountConnection {
     const message = createBaseLockIdIntermediaryAccountConnection();
     message.lockId = object.lockId !== undefined && object.lockId !== null ? Long.fromValue(object.lockId) : Long.UZERO;
     message.intermediaryAccount = object.intermediaryAccount ?? "";
