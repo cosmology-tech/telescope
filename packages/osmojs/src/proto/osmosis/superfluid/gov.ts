@@ -1,6 +1,6 @@
 import { SuperfluidAsset } from "./superfluid";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
+import { isSet, DeepPartial } from "@osmonauts/helpers";
 
 /**
  * SetSuperfluidAssetsProposal is a gov Content type to update the superfluid
@@ -99,7 +99,7 @@ export const SetSuperfluidAssetsProposal = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<SetSuperfluidAssetsProposal>, I>>(object: I): SetSuperfluidAssetsProposal {
+  fromPartial(object: DeepPartial<SetSuperfluidAssetsProposal>): SetSuperfluidAssetsProposal {
     const message = createBaseSetSuperfluidAssetsProposal();
     message.title = object.title ?? "";
     message.description = object.description ?? "";
@@ -186,7 +186,7 @@ export const RemoveSuperfluidAssetsProposal = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<RemoveSuperfluidAssetsProposal>, I>>(object: I): RemoveSuperfluidAssetsProposal {
+  fromPartial(object: DeepPartial<RemoveSuperfluidAssetsProposal>): RemoveSuperfluidAssetsProposal {
     const message = createBaseRemoveSuperfluidAssetsProposal();
     message.title = object.title ?? "";
     message.description = object.description ?? "";

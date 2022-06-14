@@ -1,5 +1,5 @@
 import * as _m0 from "protobufjs/minimal";
-import { isSet, Exact, DeepPartial, Long } from "@osmonauts/helpers";
+import { isSet, DeepPartial, Long } from "@osmonauts/helpers";
 
 /** Minter represents the minting state. */
 export interface Minter {
@@ -112,7 +112,7 @@ export const Minter = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Minter>, I>>(object: I): Minter {
+  fromPartial(object: DeepPartial<Minter>): Minter {
     const message = createBaseMinter();
     message.epochProvisions = object.epochProvisions ?? "";
     return message;
@@ -180,7 +180,7 @@ export const WeightedAddress = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<WeightedAddress>, I>>(object: I): WeightedAddress {
+  fromPartial(object: DeepPartial<WeightedAddress>): WeightedAddress {
     const message = createBaseWeightedAddress();
     message.address = object.address ?? "";
     message.weight = object.weight ?? "";
@@ -271,7 +271,7 @@ export const DistributionProportions = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<DistributionProportions>, I>>(object: I): DistributionProportions {
+  fromPartial(object: DeepPartial<DistributionProportions>): DistributionProportions {
     const message = createBaseDistributionProportions();
     message.staking = object.staking ?? "";
     message.poolIncentives = object.poolIncentives ?? "";
@@ -414,7 +414,7 @@ export const Params = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Params>, I>>(object: I): Params {
+  fromPartial(object: DeepPartial<Params>): Params {
     const message = createBaseParams();
     message.mintDenom = object.mintDenom ?? "";
     message.genesisEpochProvisions = object.genesisEpochProvisions ?? "";

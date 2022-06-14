@@ -1,5 +1,5 @@
 import * as _m0 from "protobufjs/minimal";
-import { Long, isSet, Exact, DeepPartial } from "@osmonauts/helpers";
+import { Long, isSet, DeepPartial } from "@osmonauts/helpers";
 
 /**
  * FeeToken is a struct that specifies a coin denom, and pool ID pair.
@@ -72,7 +72,7 @@ export const FeeToken = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<FeeToken>, I>>(object: I): FeeToken {
+  fromPartial(object: DeepPartial<FeeToken>): FeeToken {
     const message = createBaseFeeToken();
     message.denom = object.denom ?? "";
     message.poolID = object.poolID !== undefined && object.poolID !== null ? Long.fromValue(object.poolID) : Long.UZERO;

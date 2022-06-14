@@ -3,7 +3,7 @@ import { Duration } from "../../google/protobuf/duration";
 import { Coin } from "../../cosmos/base/v1beta1/coin";
 import { PeriodLock, SyntheticLock } from "./lock";
 import * as _m0 from "protobufjs/minimal";
-import { Exact, DeepPartial, isSet, toTimestamp, fromTimestamp, fromJsonTimestamp, Long } from "@osmonauts/helpers";
+import { DeepPartial, isSet, toTimestamp, fromTimestamp, fromJsonTimestamp, Long } from "@osmonauts/helpers";
 export interface ModuleBalanceRequest {}
 export interface ModuleBalanceResponse {
   coins: Coin[];
@@ -137,7 +137,7 @@ export const ModuleBalanceRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<ModuleBalanceRequest>, I>>(_: I): ModuleBalanceRequest {
+  fromPartial(_: DeepPartial<ModuleBalanceRequest>): ModuleBalanceRequest {
     const message = createBaseModuleBalanceRequest();
     return message;
   }
@@ -199,7 +199,7 @@ export const ModuleBalanceResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<ModuleBalanceResponse>, I>>(object: I): ModuleBalanceResponse {
+  fromPartial(object: DeepPartial<ModuleBalanceResponse>): ModuleBalanceResponse {
     const message = createBaseModuleBalanceResponse();
     message.coins = object.coins?.map(e => Coin.fromPartial(e)) || [];
     return message;
@@ -243,7 +243,7 @@ export const ModuleLockedAmountRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<ModuleLockedAmountRequest>, I>>(_: I): ModuleLockedAmountRequest {
+  fromPartial(_: DeepPartial<ModuleLockedAmountRequest>): ModuleLockedAmountRequest {
     const message = createBaseModuleLockedAmountRequest();
     return message;
   }
@@ -305,7 +305,7 @@ export const ModuleLockedAmountResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<ModuleLockedAmountResponse>, I>>(object: I): ModuleLockedAmountResponse {
+  fromPartial(object: DeepPartial<ModuleLockedAmountResponse>): ModuleLockedAmountResponse {
     const message = createBaseModuleLockedAmountResponse();
     message.coins = object.coins?.map(e => Coin.fromPartial(e)) || [];
     return message;
@@ -362,7 +362,7 @@ export const AccountUnlockableCoinsRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<AccountUnlockableCoinsRequest>, I>>(object: I): AccountUnlockableCoinsRequest {
+  fromPartial(object: DeepPartial<AccountUnlockableCoinsRequest>): AccountUnlockableCoinsRequest {
     const message = createBaseAccountUnlockableCoinsRequest();
     message.owner = object.owner ?? "";
     return message;
@@ -425,7 +425,7 @@ export const AccountUnlockableCoinsResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<AccountUnlockableCoinsResponse>, I>>(object: I): AccountUnlockableCoinsResponse {
+  fromPartial(object: DeepPartial<AccountUnlockableCoinsResponse>): AccountUnlockableCoinsResponse {
     const message = createBaseAccountUnlockableCoinsResponse();
     message.coins = object.coins?.map(e => Coin.fromPartial(e)) || [];
     return message;
@@ -482,7 +482,7 @@ export const AccountUnlockingCoinsRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<AccountUnlockingCoinsRequest>, I>>(object: I): AccountUnlockingCoinsRequest {
+  fromPartial(object: DeepPartial<AccountUnlockingCoinsRequest>): AccountUnlockingCoinsRequest {
     const message = createBaseAccountUnlockingCoinsRequest();
     message.owner = object.owner ?? "";
     return message;
@@ -545,7 +545,7 @@ export const AccountUnlockingCoinsResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<AccountUnlockingCoinsResponse>, I>>(object: I): AccountUnlockingCoinsResponse {
+  fromPartial(object: DeepPartial<AccountUnlockingCoinsResponse>): AccountUnlockingCoinsResponse {
     const message = createBaseAccountUnlockingCoinsResponse();
     message.coins = object.coins?.map(e => Coin.fromPartial(e)) || [];
     return message;
@@ -602,7 +602,7 @@ export const AccountLockedCoinsRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<AccountLockedCoinsRequest>, I>>(object: I): AccountLockedCoinsRequest {
+  fromPartial(object: DeepPartial<AccountLockedCoinsRequest>): AccountLockedCoinsRequest {
     const message = createBaseAccountLockedCoinsRequest();
     message.owner = object.owner ?? "";
     return message;
@@ -665,7 +665,7 @@ export const AccountLockedCoinsResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<AccountLockedCoinsResponse>, I>>(object: I): AccountLockedCoinsResponse {
+  fromPartial(object: DeepPartial<AccountLockedCoinsResponse>): AccountLockedCoinsResponse {
     const message = createBaseAccountLockedCoinsResponse();
     message.coins = object.coins?.map(e => Coin.fromPartial(e)) || [];
     return message;
@@ -733,7 +733,7 @@ export const AccountLockedPastTimeRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<AccountLockedPastTimeRequest>, I>>(object: I): AccountLockedPastTimeRequest {
+  fromPartial(object: DeepPartial<AccountLockedPastTimeRequest>): AccountLockedPastTimeRequest {
     const message = createBaseAccountLockedPastTimeRequest();
     message.owner = object.owner ?? "";
     message.timestamp = object.timestamp ?? undefined;
@@ -797,7 +797,7 @@ export const AccountLockedPastTimeResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<AccountLockedPastTimeResponse>, I>>(object: I): AccountLockedPastTimeResponse {
+  fromPartial(object: DeepPartial<AccountLockedPastTimeResponse>): AccountLockedPastTimeResponse {
     const message = createBaseAccountLockedPastTimeResponse();
     message.locks = object.locks?.map(e => PeriodLock.fromPartial(e)) || [];
     return message;
@@ -865,7 +865,7 @@ export const AccountLockedPastTimeNotUnlockingOnlyRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<AccountLockedPastTimeNotUnlockingOnlyRequest>, I>>(object: I): AccountLockedPastTimeNotUnlockingOnlyRequest {
+  fromPartial(object: DeepPartial<AccountLockedPastTimeNotUnlockingOnlyRequest>): AccountLockedPastTimeNotUnlockingOnlyRequest {
     const message = createBaseAccountLockedPastTimeNotUnlockingOnlyRequest();
     message.owner = object.owner ?? "";
     message.timestamp = object.timestamp ?? undefined;
@@ -929,7 +929,7 @@ export const AccountLockedPastTimeNotUnlockingOnlyResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<AccountLockedPastTimeNotUnlockingOnlyResponse>, I>>(object: I): AccountLockedPastTimeNotUnlockingOnlyResponse {
+  fromPartial(object: DeepPartial<AccountLockedPastTimeNotUnlockingOnlyResponse>): AccountLockedPastTimeNotUnlockingOnlyResponse {
     const message = createBaseAccountLockedPastTimeNotUnlockingOnlyResponse();
     message.locks = object.locks?.map(e => PeriodLock.fromPartial(e)) || [];
     return message;
@@ -997,7 +997,7 @@ export const AccountUnlockedBeforeTimeRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<AccountUnlockedBeforeTimeRequest>, I>>(object: I): AccountUnlockedBeforeTimeRequest {
+  fromPartial(object: DeepPartial<AccountUnlockedBeforeTimeRequest>): AccountUnlockedBeforeTimeRequest {
     const message = createBaseAccountUnlockedBeforeTimeRequest();
     message.owner = object.owner ?? "";
     message.timestamp = object.timestamp ?? undefined;
@@ -1061,7 +1061,7 @@ export const AccountUnlockedBeforeTimeResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<AccountUnlockedBeforeTimeResponse>, I>>(object: I): AccountUnlockedBeforeTimeResponse {
+  fromPartial(object: DeepPartial<AccountUnlockedBeforeTimeResponse>): AccountUnlockedBeforeTimeResponse {
     const message = createBaseAccountUnlockedBeforeTimeResponse();
     message.locks = object.locks?.map(e => PeriodLock.fromPartial(e)) || [];
     return message;
@@ -1140,7 +1140,7 @@ export const AccountLockedPastTimeDenomRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<AccountLockedPastTimeDenomRequest>, I>>(object: I): AccountLockedPastTimeDenomRequest {
+  fromPartial(object: DeepPartial<AccountLockedPastTimeDenomRequest>): AccountLockedPastTimeDenomRequest {
     const message = createBaseAccountLockedPastTimeDenomRequest();
     message.owner = object.owner ?? "";
     message.timestamp = object.timestamp ?? undefined;
@@ -1205,7 +1205,7 @@ export const AccountLockedPastTimeDenomResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<AccountLockedPastTimeDenomResponse>, I>>(object: I): AccountLockedPastTimeDenomResponse {
+  fromPartial(object: DeepPartial<AccountLockedPastTimeDenomResponse>): AccountLockedPastTimeDenomResponse {
     const message = createBaseAccountLockedPastTimeDenomResponse();
     message.locks = object.locks?.map(e => PeriodLock.fromPartial(e)) || [];
     return message;
@@ -1273,7 +1273,7 @@ export const LockedDenomRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<LockedDenomRequest>, I>>(object: I): LockedDenomRequest {
+  fromPartial(object: DeepPartial<LockedDenomRequest>): LockedDenomRequest {
     const message = createBaseLockedDenomRequest();
     message.denom = object.denom ?? "";
     message.duration = object.duration ?? undefined;
@@ -1331,7 +1331,7 @@ export const LockedDenomResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<LockedDenomResponse>, I>>(object: I): LockedDenomResponse {
+  fromPartial(object: DeepPartial<LockedDenomResponse>): LockedDenomResponse {
     const message = createBaseLockedDenomResponse();
     message.amount = object.amount ?? "";
     return message;
@@ -1388,7 +1388,7 @@ export const LockedRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<LockedRequest>, I>>(object: I): LockedRequest {
+  fromPartial(object: DeepPartial<LockedRequest>): LockedRequest {
     const message = createBaseLockedRequest();
     message.lockId = object.lockId !== undefined && object.lockId !== null ? Long.fromValue(object.lockId) : Long.UZERO;
     return message;
@@ -1445,7 +1445,7 @@ export const LockedResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<LockedResponse>, I>>(object: I): LockedResponse {
+  fromPartial(object: DeepPartial<LockedResponse>): LockedResponse {
     const message = createBaseLockedResponse();
     message.lock = object.lock !== undefined && object.lock !== null ? PeriodLock.fromPartial(object.lock) : undefined;
     return message;
@@ -1502,7 +1502,7 @@ export const SyntheticLockupsByLockupIDRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<SyntheticLockupsByLockupIDRequest>, I>>(object: I): SyntheticLockupsByLockupIDRequest {
+  fromPartial(object: DeepPartial<SyntheticLockupsByLockupIDRequest>): SyntheticLockupsByLockupIDRequest {
     const message = createBaseSyntheticLockupsByLockupIDRequest();
     message.lockId = object.lockId !== undefined && object.lockId !== null ? Long.fromValue(object.lockId) : Long.UZERO;
     return message;
@@ -1565,7 +1565,7 @@ export const SyntheticLockupsByLockupIDResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<SyntheticLockupsByLockupIDResponse>, I>>(object: I): SyntheticLockupsByLockupIDResponse {
+  fromPartial(object: DeepPartial<SyntheticLockupsByLockupIDResponse>): SyntheticLockupsByLockupIDResponse {
     const message = createBaseSyntheticLockupsByLockupIDResponse();
     message.syntheticLocks = object.syntheticLocks?.map(e => SyntheticLock.fromPartial(e)) || [];
     return message;
@@ -1633,7 +1633,7 @@ export const AccountLockedLongerDurationRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<AccountLockedLongerDurationRequest>, I>>(object: I): AccountLockedLongerDurationRequest {
+  fromPartial(object: DeepPartial<AccountLockedLongerDurationRequest>): AccountLockedLongerDurationRequest {
     const message = createBaseAccountLockedLongerDurationRequest();
     message.owner = object.owner ?? "";
     message.duration = object.duration ?? undefined;
@@ -1697,7 +1697,7 @@ export const AccountLockedLongerDurationResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<AccountLockedLongerDurationResponse>, I>>(object: I): AccountLockedLongerDurationResponse {
+  fromPartial(object: DeepPartial<AccountLockedLongerDurationResponse>): AccountLockedLongerDurationResponse {
     const message = createBaseAccountLockedLongerDurationResponse();
     message.locks = object.locks?.map(e => PeriodLock.fromPartial(e)) || [];
     return message;
@@ -1765,7 +1765,7 @@ export const AccountLockedLongerDurationNotUnlockingOnlyRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<AccountLockedLongerDurationNotUnlockingOnlyRequest>, I>>(object: I): AccountLockedLongerDurationNotUnlockingOnlyRequest {
+  fromPartial(object: DeepPartial<AccountLockedLongerDurationNotUnlockingOnlyRequest>): AccountLockedLongerDurationNotUnlockingOnlyRequest {
     const message = createBaseAccountLockedLongerDurationNotUnlockingOnlyRequest();
     message.owner = object.owner ?? "";
     message.duration = object.duration ?? undefined;
@@ -1829,7 +1829,7 @@ export const AccountLockedLongerDurationNotUnlockingOnlyResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<AccountLockedLongerDurationNotUnlockingOnlyResponse>, I>>(object: I): AccountLockedLongerDurationNotUnlockingOnlyResponse {
+  fromPartial(object: DeepPartial<AccountLockedLongerDurationNotUnlockingOnlyResponse>): AccountLockedLongerDurationNotUnlockingOnlyResponse {
     const message = createBaseAccountLockedLongerDurationNotUnlockingOnlyResponse();
     message.locks = object.locks?.map(e => PeriodLock.fromPartial(e)) || [];
     return message;
@@ -1908,7 +1908,7 @@ export const AccountLockedLongerDurationDenomRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<AccountLockedLongerDurationDenomRequest>, I>>(object: I): AccountLockedLongerDurationDenomRequest {
+  fromPartial(object: DeepPartial<AccountLockedLongerDurationDenomRequest>): AccountLockedLongerDurationDenomRequest {
     const message = createBaseAccountLockedLongerDurationDenomRequest();
     message.owner = object.owner ?? "";
     message.duration = object.duration ?? undefined;
@@ -1973,7 +1973,7 @@ export const AccountLockedLongerDurationDenomResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<AccountLockedLongerDurationDenomResponse>, I>>(object: I): AccountLockedLongerDurationDenomResponse {
+  fromPartial(object: DeepPartial<AccountLockedLongerDurationDenomResponse>): AccountLockedLongerDurationDenomResponse {
     const message = createBaseAccountLockedLongerDurationDenomResponse();
     message.locks = object.locks?.map(e => PeriodLock.fromPartial(e)) || [];
     return message;

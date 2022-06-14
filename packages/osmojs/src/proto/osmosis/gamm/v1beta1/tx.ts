@@ -1,6 +1,6 @@
 import { Coin } from "../../../cosmos/base/v1beta1/coin";
 import * as _m0 from "protobufjs/minimal";
-import { Long, isSet, Exact, DeepPartial } from "@osmonauts/helpers";
+import { Long, isSet, DeepPartial } from "@osmonauts/helpers";
 
 /**
  * ===================== MsgJoinPool
@@ -195,7 +195,7 @@ export const MsgJoinPool = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgJoinPool>, I>>(object: I): MsgJoinPool {
+  fromPartial(object: DeepPartial<MsgJoinPool>): MsgJoinPool {
     const message = createBaseMsgJoinPool();
     message.sender = object.sender ?? "";
     message.poolId = object.poolId !== undefined && object.poolId !== null ? Long.fromValue(object.poolId) : Long.UZERO;
@@ -242,7 +242,7 @@ export const MsgJoinPoolResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgJoinPoolResponse>, I>>(_: I): MsgJoinPoolResponse {
+  fromPartial(_: DeepPartial<MsgJoinPoolResponse>): MsgJoinPoolResponse {
     const message = createBaseMsgJoinPoolResponse();
     return message;
   }
@@ -337,7 +337,7 @@ export const MsgExitPool = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgExitPool>, I>>(object: I): MsgExitPool {
+  fromPartial(object: DeepPartial<MsgExitPool>): MsgExitPool {
     const message = createBaseMsgExitPool();
     message.sender = object.sender ?? "";
     message.poolId = object.poolId !== undefined && object.poolId !== null ? Long.fromValue(object.poolId) : Long.UZERO;
@@ -384,7 +384,7 @@ export const MsgExitPoolResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgExitPoolResponse>, I>>(_: I): MsgExitPoolResponse {
+  fromPartial(_: DeepPartial<MsgExitPoolResponse>): MsgExitPoolResponse {
     const message = createBaseMsgExitPoolResponse();
     return message;
   }
@@ -451,7 +451,7 @@ export const SwapAmountInRoute = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<SwapAmountInRoute>, I>>(object: I): SwapAmountInRoute {
+  fromPartial(object: DeepPartial<SwapAmountInRoute>): SwapAmountInRoute {
     const message = createBaseSwapAmountInRoute();
     message.poolId = object.poolId !== undefined && object.poolId !== null ? Long.fromValue(object.poolId) : Long.UZERO;
     message.tokenOutDenom = object.tokenOutDenom ?? "";
@@ -548,7 +548,7 @@ export const MsgSwapExactAmountIn = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgSwapExactAmountIn>, I>>(object: I): MsgSwapExactAmountIn {
+  fromPartial(object: DeepPartial<MsgSwapExactAmountIn>): MsgSwapExactAmountIn {
     const message = createBaseMsgSwapExactAmountIn();
     message.sender = object.sender ?? "";
     message.routes = object.routes?.map(e => SwapAmountInRoute.fromPartial(e)) || [];
@@ -608,7 +608,7 @@ export const MsgSwapExactAmountInResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgSwapExactAmountInResponse>, I>>(object: I): MsgSwapExactAmountInResponse {
+  fromPartial(object: DeepPartial<MsgSwapExactAmountInResponse>): MsgSwapExactAmountInResponse {
     const message = createBaseMsgSwapExactAmountInResponse();
     message.tokenOutAmount = object.tokenOutAmount ?? "";
     return message;
@@ -676,7 +676,7 @@ export const SwapAmountOutRoute = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<SwapAmountOutRoute>, I>>(object: I): SwapAmountOutRoute {
+  fromPartial(object: DeepPartial<SwapAmountOutRoute>): SwapAmountOutRoute {
     const message = createBaseSwapAmountOutRoute();
     message.poolId = object.poolId !== undefined && object.poolId !== null ? Long.fromValue(object.poolId) : Long.UZERO;
     message.tokenInDenom = object.tokenInDenom ?? "";
@@ -773,7 +773,7 @@ export const MsgSwapExactAmountOut = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgSwapExactAmountOut>, I>>(object: I): MsgSwapExactAmountOut {
+  fromPartial(object: DeepPartial<MsgSwapExactAmountOut>): MsgSwapExactAmountOut {
     const message = createBaseMsgSwapExactAmountOut();
     message.sender = object.sender ?? "";
     message.routes = object.routes?.map(e => SwapAmountOutRoute.fromPartial(e)) || [];
@@ -833,7 +833,7 @@ export const MsgSwapExactAmountOutResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgSwapExactAmountOutResponse>, I>>(object: I): MsgSwapExactAmountOutResponse {
+  fromPartial(object: DeepPartial<MsgSwapExactAmountOutResponse>): MsgSwapExactAmountOutResponse {
     const message = createBaseMsgSwapExactAmountOutResponse();
     message.tokenInAmount = object.tokenInAmount ?? "";
     return message;
@@ -923,7 +923,7 @@ export const MsgJoinSwapExternAmountIn = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgJoinSwapExternAmountIn>, I>>(object: I): MsgJoinSwapExternAmountIn {
+  fromPartial(object: DeepPartial<MsgJoinSwapExternAmountIn>): MsgJoinSwapExternAmountIn {
     const message = createBaseMsgJoinSwapExternAmountIn();
     message.sender = object.sender ?? "";
     message.poolId = object.poolId !== undefined && object.poolId !== null ? Long.fromValue(object.poolId) : Long.UZERO;
@@ -983,7 +983,7 @@ export const MsgJoinSwapExternAmountInResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgJoinSwapExternAmountInResponse>, I>>(object: I): MsgJoinSwapExternAmountInResponse {
+  fromPartial(object: DeepPartial<MsgJoinSwapExternAmountInResponse>): MsgJoinSwapExternAmountInResponse {
     const message = createBaseMsgJoinSwapExternAmountInResponse();
     message.shareOutAmount = object.shareOutAmount ?? "";
     return message;
@@ -1084,7 +1084,7 @@ export const MsgJoinSwapShareAmountOut = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgJoinSwapShareAmountOut>, I>>(object: I): MsgJoinSwapShareAmountOut {
+  fromPartial(object: DeepPartial<MsgJoinSwapShareAmountOut>): MsgJoinSwapShareAmountOut {
     const message = createBaseMsgJoinSwapShareAmountOut();
     message.sender = object.sender ?? "";
     message.poolId = object.poolId !== undefined && object.poolId !== null ? Long.fromValue(object.poolId) : Long.UZERO;
@@ -1145,7 +1145,7 @@ export const MsgJoinSwapShareAmountOutResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgJoinSwapShareAmountOutResponse>, I>>(object: I): MsgJoinSwapShareAmountOutResponse {
+  fromPartial(object: DeepPartial<MsgJoinSwapShareAmountOutResponse>): MsgJoinSwapShareAmountOutResponse {
     const message = createBaseMsgJoinSwapShareAmountOutResponse();
     message.tokenInAmount = object.tokenInAmount ?? "";
     return message;
@@ -1246,7 +1246,7 @@ export const MsgExitSwapShareAmountIn = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgExitSwapShareAmountIn>, I>>(object: I): MsgExitSwapShareAmountIn {
+  fromPartial(object: DeepPartial<MsgExitSwapShareAmountIn>): MsgExitSwapShareAmountIn {
     const message = createBaseMsgExitSwapShareAmountIn();
     message.sender = object.sender ?? "";
     message.poolId = object.poolId !== undefined && object.poolId !== null ? Long.fromValue(object.poolId) : Long.UZERO;
@@ -1307,7 +1307,7 @@ export const MsgExitSwapShareAmountInResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgExitSwapShareAmountInResponse>, I>>(object: I): MsgExitSwapShareAmountInResponse {
+  fromPartial(object: DeepPartial<MsgExitSwapShareAmountInResponse>): MsgExitSwapShareAmountInResponse {
     const message = createBaseMsgExitSwapShareAmountInResponse();
     message.tokenOutAmount = object.tokenOutAmount ?? "";
     return message;
@@ -1397,7 +1397,7 @@ export const MsgExitSwapExternAmountOut = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgExitSwapExternAmountOut>, I>>(object: I): MsgExitSwapExternAmountOut {
+  fromPartial(object: DeepPartial<MsgExitSwapExternAmountOut>): MsgExitSwapExternAmountOut {
     const message = createBaseMsgExitSwapExternAmountOut();
     message.sender = object.sender ?? "";
     message.poolId = object.poolId !== undefined && object.poolId !== null ? Long.fromValue(object.poolId) : Long.UZERO;
@@ -1457,7 +1457,7 @@ export const MsgExitSwapExternAmountOutResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgExitSwapExternAmountOutResponse>, I>>(object: I): MsgExitSwapExternAmountOutResponse {
+  fromPartial(object: DeepPartial<MsgExitSwapExternAmountOutResponse>): MsgExitSwapExternAmountOutResponse {
     const message = createBaseMsgExitSwapExternAmountOutResponse();
     message.shareInAmount = object.shareInAmount ?? "";
     return message;

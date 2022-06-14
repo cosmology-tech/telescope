@@ -1,6 +1,6 @@
 import { EpochInfo } from "./genesis";
 import * as _m0 from "protobufjs/minimal";
-import { Exact, DeepPartial, isSet, Long } from "@osmonauts/helpers";
+import { DeepPartial, isSet, Long } from "@osmonauts/helpers";
 export interface QueryEpochsInfoRequest {}
 export interface QueryEpochsInfoResponse {
   epochs: EpochInfo[];
@@ -48,7 +48,7 @@ export const QueryEpochsInfoRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryEpochsInfoRequest>, I>>(_: I): QueryEpochsInfoRequest {
+  fromPartial(_: DeepPartial<QueryEpochsInfoRequest>): QueryEpochsInfoRequest {
     const message = createBaseQueryEpochsInfoRequest();
     return message;
   }
@@ -110,7 +110,7 @@ export const QueryEpochsInfoResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryEpochsInfoResponse>, I>>(object: I): QueryEpochsInfoResponse {
+  fromPartial(object: DeepPartial<QueryEpochsInfoResponse>): QueryEpochsInfoResponse {
     const message = createBaseQueryEpochsInfoResponse();
     message.epochs = object.epochs?.map(e => EpochInfo.fromPartial(e)) || [];
     return message;
@@ -167,7 +167,7 @@ export const QueryCurrentEpochRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryCurrentEpochRequest>, I>>(object: I): QueryCurrentEpochRequest {
+  fromPartial(object: DeepPartial<QueryCurrentEpochRequest>): QueryCurrentEpochRequest {
     const message = createBaseQueryCurrentEpochRequest();
     message.identifier = object.identifier ?? "";
     return message;
@@ -224,7 +224,7 @@ export const QueryCurrentEpochResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryCurrentEpochResponse>, I>>(object: I): QueryCurrentEpochResponse {
+  fromPartial(object: DeepPartial<QueryCurrentEpochResponse>): QueryCurrentEpochResponse {
     const message = createBaseQueryCurrentEpochResponse();
     message.currentEpoch = object.currentEpoch !== undefined && object.currentEpoch !== null ? Long.fromValue(object.currentEpoch) : Long.ZERO;
     return message;

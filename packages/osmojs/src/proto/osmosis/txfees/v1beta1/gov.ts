@@ -1,6 +1,6 @@
 import { FeeToken } from "./feetoken";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
+import { isSet, DeepPartial } from "@osmonauts/helpers";
 
 /**
  * UpdateFeeTokenProposal is a gov Content type for adding a new whitelisted fee
@@ -86,7 +86,7 @@ export const UpdateFeeTokenProposal = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<UpdateFeeTokenProposal>, I>>(object: I): UpdateFeeTokenProposal {
+  fromPartial(object: DeepPartial<UpdateFeeTokenProposal>): UpdateFeeTokenProposal {
     const message = createBaseUpdateFeeTokenProposal();
     message.title = object.title ?? "";
     message.description = object.description ?? "";

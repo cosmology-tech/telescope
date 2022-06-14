@@ -1,5 +1,5 @@
 import * as _m0 from "protobufjs/minimal";
-import { isSet, Exact, DeepPartial } from "@osmonauts/helpers";
+import { isSet, DeepPartial } from "@osmonauts/helpers";
 
 /**
  * Coin defines a token with a denomination and an amount.
@@ -93,7 +93,7 @@ export const Coin = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Coin>, I>>(object: I): Coin {
+  fromPartial(object: DeepPartial<Coin>): Coin {
     const message = createBaseCoin();
     message.denom = object.denom ?? "";
     message.amount = object.amount ?? "";
@@ -162,7 +162,7 @@ export const DecCoin = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<DecCoin>, I>>(object: I): DecCoin {
+  fromPartial(object: DeepPartial<DecCoin>): DecCoin {
     const message = createBaseDecCoin();
     message.denom = object.denom ?? "";
     message.amount = object.amount ?? "";
@@ -220,7 +220,7 @@ export const IntProto = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<IntProto>, I>>(object: I): IntProto {
+  fromPartial(object: DeepPartial<IntProto>): IntProto {
     const message = createBaseIntProto();
     message.int = object.int ?? "";
     return message;
@@ -277,7 +277,7 @@ export const DecProto = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<DecProto>, I>>(object: I): DecProto {
+  fromPartial(object: DeepPartial<DecProto>): DecProto {
     const message = createBaseDecProto();
     message.dec = object.dec ?? "";
     return message;

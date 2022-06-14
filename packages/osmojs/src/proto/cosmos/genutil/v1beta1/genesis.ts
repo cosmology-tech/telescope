@@ -1,5 +1,5 @@
 import * as _m0 from "protobufjs/minimal";
-import { bytesFromBase64, base64FromBytes, Exact, DeepPartial } from "@osmonauts/helpers";
+import { bytesFromBase64, base64FromBytes, DeepPartial } from "@osmonauts/helpers";
 
 /** GenesisState defines the raw genesis transaction in JSON. */
 export interface GenesisState {
@@ -62,7 +62,7 @@ export const GenesisState = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<GenesisState>, I>>(object: I): GenesisState {
+  fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
     message.genTxs = object.genTxs?.map(e => e) || [];
     return message;
