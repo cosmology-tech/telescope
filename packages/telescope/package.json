@@ -95,7 +95,7 @@
     "minimist": "1.2.6",
     "mkdirp": "1.0.4",
     "parse-package-name": "1.0.0",
-    "protobufjs": "6.11.2",
+    "protobufjs": "6.11.3",
     "rimraf": "3.0.2",
     "shelljs": "0.8.5"
   }

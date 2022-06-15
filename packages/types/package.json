@@ -82,6 +82,6 @@
   "dependencies": {
     "@babel/runtime": "^7.11.2",
     "long": "^5.2.0",
-    "protobufjs": "^6.11.2"
+    "protobufjs": "^6.11.3"
   }
 }

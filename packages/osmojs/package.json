@@ -92,6 +92,6 @@
     "@osmonauts/helpers": "^0.3.4",
     "@osmonauts/lcd": "^0.3.4",
     "long": "^5.2.0",
-    "protobufjs": "^6.11.2"
+    "protobufjs": "^6.11.3"
   }
 }

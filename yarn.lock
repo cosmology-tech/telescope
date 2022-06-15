@@ -2659,6 +2659,78 @@
   resolved "https://registry.npmjs.org/@protobufjs/utf8/-/utf8-1.1.0.tgz#a777360b5b39a1a2e5106f8e858f2fd2d060c570"
   integrity sha1-p3c2C1s5oaLlEG+OhY8v0tBgxXA=
 
+"@protobufs/confio@^0.0.5":
+  version "0.0.5"
+  resolved "https://registry.npmjs.org/@protobufs/confio/-/confio-0.0.5.tgz#8518f6713e6c676db3f2766611cdf6ab47dd1843"
+  integrity sha512-gnhMTs/IRut/sBuhXHPUJtABhmZkK4GNvAgFg9/Rx1VpMHgr1uh8bKiA/sAYhyvONVKK9DM/MH3A5X2TCSmiIg==
+
+"@protobufs/cosmos@^0.0.9":
+  version "0.0.9"
+  resolved "https://registry.npmjs.org/@protobufs/cosmos/-/cosmos-0.0.9.tgz#af9bf950534e666395fce4e155e5ba4e9ae89176"
+  integrity sha512-nge92JbU4v1W5P34JX8G1Fr3jLLe6HGT6CDdVbwR90mlRQkAimElk0RLwoRNr5pQAKtjzAhz4Ss90SH17Thh9g==
+  dependencies:
+    "@protobufs/cosmos_proto" "^0.0.9"
+    "@protobufs/gogoproto" "^0.0.9"
+    "@protobufs/google" "^0.0.9"
+    "@protobufs/tendermint" "^0.0.9"
+
+"@protobufs/cosmos_proto@^0.0.9":
+  version "0.0.9"
+  resolved "https://registry.npmjs.org/@protobufs/cosmos_proto/-/cosmos_proto-0.0.9.tgz#3a6247a6fb4a4006927fa728453662709a1df8e1"
+  integrity sha512-N9SFLTudgNd5CEHAeluGgZ4GYChLD2grDatw7dpl96lL59v3zWKaSPC3yg7yQmNHU7RteyMoPvugEHwPeoMATg==
+  dependencies:
+    "@protobufs/google" "^0.0.9"
+
+"@protobufs/cosmwasm@^0.0.9":
+  version "0.0.9"
+  resolved "https://registry.npmjs.org/@protobufs/cosmwasm/-/cosmwasm-0.0.9.tgz#5b93d706854d8c8f2f9b3e79f8ce5eaad1bbbe66"
+  integrity sha512-X39wRCNFxqNTqLVPvzidBbR7mUOyk8RDCmPAaAYc3un57wXpHGorUsgwANH2Bq4TX3zUoJ7wEx/UBqhWB26zvQ==
+  dependencies:
+    "@protobufs/cosmos" "^0.0.9"
+    "@protobufs/cosmos_proto" "^0.0.9"
+    "@protobufs/gogoproto" "^0.0.9"
+    "@protobufs/google" "^0.0.9"
+
+"@protobufs/gogoproto@^0.0.9":
+  version "0.0.9"
+  resolved "https://registry.npmjs.org/@protobufs/gogoproto/-/gogoproto-0.0.9.tgz#408e7bdefd5a9ba983467ae3303dd6f9fefa4b58"
+  integrity sha512-HGDZFSUOH4jNQ5f1KKGImyj0OafxZvsN7NCsiCiJ0lc9xyVy+bqoFtP+qd/4lybmbdr8XfO06Sm/IPEWL9gFOA==
+  dependencies:
+    "@protobufs/google" "^0.0.9"
+
+"@protobufs/google@^0.0.9":
+  version "0.0.9"
+  resolved "https://registry.npmjs.org/@protobufs/google/-/google-0.0.9.tgz#4370c2314806c7b8696432a548b3c5c3e7c4cb57"
+  integrity sha512-u92EzAL5DPhKgOPocprdjXTNXNEzAMxzN28exaybb3fve2s/3Aa2rgydOjnM6rqEUa8K3+X3Kh/6HZiCv3ZwZQ==
+
+"@protobufs/ibc@^0.0.9":
+  version "0.0.9"
+  resolved "https://registry.npmjs.org/@protobufs/ibc/-/ibc-0.0.9.tgz#2d136c43f61233df513f3de8ca526dc7229dd884"
+  integrity sha512-LdlGfNq4UY/jxgMGgzDAUovhdERoO3mNyrATlGAgSd9LCaHhfUMR6BHf7PieF1VAE+EfDMEZq9zxNqHcumzj4Q==
+  dependencies:
+    "@protobufs/confio" "^0.0.5"
+    "@protobufs/cosmos" "^0.0.9"
+    "@protobufs/gogoproto" "^0.0.9"
+    "@protobufs/google" "^0.0.9"
+    "@protobufs/tendermint" "^0.0.9"
+
+"@protobufs/osmosis@^0.0.9":
+  version "0.0.9"
+  resolved "https://registry.npmjs.org/@protobufs/osmosis/-/osmosis-0.0.9.tgz#c9216bd6a59aef7c159de65665bc023a250a65df"
+  integrity sha512-zygBdaF6td66kP8OwHa9eC2zb9MFQtxXcsuUH8XpTB2itLuTwVe7gkRzVpSXJ12ZybaMMZuUlgO5yqcxOT0u1w==
+  dependencies:
+    "@protobufs/cosmos" "^0.0.9"
+    "@protobufs/gogoproto" "^0.0.9"
+    "@protobufs/google" "^0.0.9"
+
+"@protobufs/tendermint@^0.0.9":
+  version "0.0.9"
+  resolved "https://registry.npmjs.org/@protobufs/tendermint/-/tendermint-0.0.9.tgz#a5417dd4843f895b614573679ea1573d347b5a1b"
+  integrity sha512-L6BsnzGHGGizW3dumxDUEtwDEJOgMVk1F8MBmQijx/0xDsocQ6AU7pT46dA5ODO7p2xKd7tq7CM/Rzq+05iAXg==
+  dependencies:
+    "@protobufs/gogoproto" "^0.0.9"
+    "@protobufs/google" "^0.0.9"
+
 "@pyramation/babel-preset-env@0.1.0":
   version "0.1.0"
   resolved "https://registry.npmjs.org/@pyramation/babel-preset-env/-/babel-preset-env-0.1.0.tgz#cb9bf3a507d79b9ceb8b7e83815ed1a672209952"
@@ -7411,7 +7483,26 @@ proto-list@~1.2.1:
   resolved "https://registry.npmjs.org/proto-list/-/proto-list-1.2.4.tgz#212d5bfe1318306a420f6402b8e26ff39647a849"
   integrity sha1-IS1b/hMYMGpCD2QCuOJv85ZHqEk=
 
-protobufjs@6.11.2, protobufjs@^6.11.2, protobufjs@^6.8.8, protobufjs@~6.11.2:
+protobufjs@6.11.3, protobufjs@^6.11.3:
+  version "6.11.3"
+  resolved "https://registry.npmjs.org/protobufjs/-/protobufjs-6.11.3.tgz#637a527205a35caa4f3e2a9a4a13ddffe0e7af74"
+  integrity sha512-xL96WDdCZYdU7Slin569tFX712BxsxslWwAfAhCYjQKGTq7dAU91Lomy6nLLhh/dyGhk/YH4TwTSRxTzhuHyZg==
+  dependencies:
+    "@protobufjs/aspromise" "^1.1.2"
+    "@protobufjs/base64" "^1.1.2"
+    "@protobufjs/codegen" "^2.0.4"
+    "@protobufjs/eventemitter" "^1.1.0"
+    "@protobufjs/fetch" "^1.1.0"
+    "@protobufjs/float" "^1.0.2"
+    "@protobufjs/inquire" "^1.1.0"
+    "@protobufjs/path" "^1.1.2"
+    "@protobufjs/pool" "^1.1.0"
+    "@protobufjs/utf8" "^1.1.0"
+    "@types/long" "^4.0.1"
+    "@types/node" ">=13.7.0"
+    long "^4.0.0"
+
+protobufjs@^6.8.8, protobufjs@~6.11.2:
   version "6.11.2"
   resolved "https://registry.npmjs.org/protobufjs/-/protobufjs-6.11.2.tgz#de39fabd4ed32beaa08e9bb1e30d08544c1edf8b"
   integrity sha512-4BQJoPooKJl2G9j3XftkIXjoC9C0Av2NOrWmbLWT1vH32GcSUHjM0Arra6UfTsVyfMAuFzaLucXn1sadxJydAw==

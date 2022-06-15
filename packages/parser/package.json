@@ -75,6 +75,6 @@
     "dotty": "0.1.2",
     "glob": "8.0.1",
     "mkdirp": "1.0.4",
-    "protobufjs": "6.11.2"
+    "protobufjs": "6.11.3"
   }
 }
