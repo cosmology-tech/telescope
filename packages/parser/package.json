@@ -70,10 +70,10 @@
     "typescript": "^4.6.2"
   },
   "dependencies": {
-    "@babel/runtime": "^7.11.2",
+    "@babel/runtime": "^7.18.3",
     "@osmonauts/types": "^0.3.6",
     "dotty": "0.1.2",
-    "glob": "8.0.1",
+    "glob": "8.0.3",
     "mkdirp": "1.0.4",
     "protobufjs": "6.11.3"
   }
