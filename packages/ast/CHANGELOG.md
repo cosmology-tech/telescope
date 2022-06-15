@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.3.20](https://github.com/osmosis-labs/telescope/compare/@osmonauts/ast@0.3.19...@osmonauts/ast@0.3.20) (2022-06-15)
+
+**Note:** Version bump only for package @osmonauts/ast
+
+
+
+
+
 ## [0.3.19](https://github.com/osmosis-labs/telescope/compare/@osmonauts/ast@0.3.18...@osmonauts/ast@0.3.19) (2022-06-14)
 
 **Note:** Version bump only for package @osmonauts/ast
