@@ -47,9 +47,9 @@
     "url": "https://github.com/osmosis-labs/telescope/issues"
   },
   "devDependencies": {
-    "@babel/cli": "7.17.6",
-    "@babel/eslint-parser": "^7.5.4",
-    "@babel/node": "^7.10.5",
+    "@babel/cli": "7.17.10",
+    "@babel/eslint-parser": "^7.18.2",
+    "@babel/node": "^7.18.5",
     "@types/jest": "^27.4.1",
     "ast-stringify": "0.1.0",
     "babel-core": "7.0.0-bridge.0",
