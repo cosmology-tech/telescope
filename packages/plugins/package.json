@@ -1,9 +1,9 @@
 {
-  "name": "@osmonauts/lcd",
-  "version": "0.3.5",
-  "description": "Telescope LCDClient helpers",
+  "name": "@osmonauts/plugins",
+  "version": "0.3.7",
+  "description": "Telescope plugins",
   "author": "Dan Lynch <pyramation@gmail.com>",
-  "homepage": "https://github.com/osmosis-labs/telescope/tree/master/packages/helpers#readme",
+  "homepage": "https://github.com/osmosis-labs/telescope/tree/master/packages/plugins#readme",
   "license": "SEE LICENSE IN LICENSE",
   "main": "main/index.js",
   "module": "module/index.js",
@@ -43,11 +43,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/osmosis-labs/telescope/tree/master/packages/helpers"
+    "url": "https://github.com/osmosis-labs/telescope"
   },
   "keywords": [],
   "bugs": {
-    "url": "https://github.com/osmosis-labs/telescope/tree/master/packages/helpers/issues"
+    "url": "https://github.com/osmosis-labs/telescope/issues"
   },
   "devDependencies": {
     "@babel/cli": "7.17.10",
@@ -80,6 +80,6 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.18.3",
-    "axios": "0.27.2"
+    "dotty": "0.1.2"
   }
 }

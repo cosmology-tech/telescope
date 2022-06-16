@@ -1,12 +1,7 @@
-// TODO move to separate package
-
 import dotty from 'dotty';
 const cases = require('jest-in-case');
 
-
-
 type OptionName = 'includeAminos' | 'includeLCDClient' | 'useDate';
-
 
 interface TelescopeOpts {
     includeAminos?: boolean;
@@ -35,8 +30,7 @@ const getAllPackageParts = (name: string, list?: string[]) => {
     if (!newParts.length) return [...list];
     const newName = newParts.join('.');
     return getAllPackageParts(newName, [...list, newName]);
-
-}
+};
 
 const getPluginValue = (optionName: OptionName, currentPkg: string, options: TelescopeOpts & TelescopePackageOpts) => {
     const pkgOpts = options.packages;
