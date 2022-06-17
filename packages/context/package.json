@@ -1,9 +1,9 @@
 {
-  "name": "@osmonauts/plugins",
+  "name": "@osmonauts/context",
   "version": "0.3.7",
-  "description": "Telescope plugins",
+  "description": "Telescope context",
   "author": "Dan Lynch <pyramation@gmail.com>",
-  "homepage": "https://github.com/osmosis-labs/telescope/tree/master/packages/plugins#readme",
+  "homepage": "https://github.com/osmosis-labs/telescope/tree/master/packages/context#readme",
   "license": "SEE LICENSE IN LICENSE",
   "main": "main/index.js",
   "module": "module/index.js",
