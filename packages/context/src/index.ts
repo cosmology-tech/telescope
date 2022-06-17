@@ -1,1 +1,1 @@
-export const name = 1;
+export * from './context';
