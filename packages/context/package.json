@@ -80,6 +80,9 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.18.3",
+    "@osmonauts/proto-parser": "^0.4.13",
+    "@osmonauts/types": "^0.3.7",
+    "case": "^1.6.3",
     "dotty": "0.1.2"
   }
 }
