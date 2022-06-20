@@ -13,6 +13,7 @@ export const fromAmino = {
     },
 
     string(args: FromAminoParseField) {
+
         if (args.field.name === args.context.options.aminoCasingFn(args.field.name) && args.scope.length === 1) {
             return shorthandProperty(args.field.name);
         }
@@ -155,7 +156,7 @@ export const fromAmino = {
         return t.objectProperty(t.identifier(field.name), value);
     },
 
-    type({ context, field, currentProtoPath, scope, nested, isOptional }: FromAminoParseField) {
+    type({ context, field, currentProtoPath, scope, fieldPath, nested, isOptional }: FromAminoParseField) {
         const parentField = field;
         const Type = context.getTypeFromCurrentPath(field, currentProtoPath);
         const oneOfs = getOneOfs(Type);
@@ -169,6 +170,7 @@ export const fromAmino = {
                 field,
                 currentProtoPath,
                 scope: [...scope],
+                fieldPath: [...fieldPath],
                 nested: nested + 1,
                 isOptional // TODO how to handle nested optionality?
             })
@@ -193,7 +195,7 @@ export const fromAmino = {
             ));
     },
 
-    typeArray({ context, field, currentProtoPath, scope, nested, isOptional }: FromAminoParseField) {
+    typeArray({ context, field, currentProtoPath, scope, fieldPath, nested, isOptional }: FromAminoParseField) {
         const variable = 'el' + nested;
         const parentField = field;
         const Type = context.getTypeFromCurrentPath(field, currentProtoPath);
@@ -209,6 +211,7 @@ export const fromAmino = {
                 field,
                 currentProtoPath,
                 scope: [variable],
+                fieldPath: [...fieldPath],
                 nested: nested + 1,
                 isOptional // TODO how to handle nested optionality?
             })

@@ -135,7 +135,7 @@ export const toAmino = {
         return t.objectProperty(t.identifier(args.context.options.aminoCasingFn(args.field.name)), value);
     },
 
-    type({ context, field, currentProtoPath, scope, nested, isOptional }: ToAminoParseField) {
+    type({ context, field, currentProtoPath, scope, fieldPath, nested, isOptional }: ToAminoParseField) {
         /// TODO (can this be refactored out? e.g. no recursive calls in this file?)
         /// BEGIN
         const Type = context.getTypeFromCurrentPath(field, currentProtoPath);
@@ -151,6 +151,7 @@ export const toAmino = {
                 field,
                 currentProtoPath,
                 scope: [...scope],
+                fieldPath: [...fieldPath],
                 nested,
                 isOptional // TODO how to handle nested optionality
             })
@@ -164,7 +165,7 @@ export const toAmino = {
     },
 
 
-    typeArray({ context, field, currentProtoPath, scope, nested, isOptional }: ToAminoParseField) {
+    typeArray({ context, field, currentProtoPath, scope, fieldPath, nested, isOptional }: ToAminoParseField) {
         const variable = 'el' + nested;
 
         if (field.parsedType.type !== 'Type') {
@@ -186,6 +187,7 @@ export const toAmino = {
                 field,
                 currentProtoPath,
                 scope: [variable],
+                fieldPath: [...fieldPath],
                 nested: nested + 1,
                 isOptional // TODO how to handle nested optionality
             });

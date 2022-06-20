@@ -1,5 +1,5 @@
 import { ProtoRoot, ProtoRef, ProtoType, ProtoService, ProtoField } from '@osmonauts/types';
-import { Service, Type, Field, Enum, Root, Namespace } from 'protobufjs';
+import { Service, Type, Field, Enum, Root, Namespace } from '@pyramation/protobufjs';
 import { importLookup, lookup, lookupAny, lookupNested, protoScopeImportLookup } from './lookup';
 import { parseService } from './services';
 import { ProtoStore } from './store';
@@ -360,7 +360,7 @@ export const recursiveTraversal = (
                 nested: {}
             });
         } else {
-            throw new Error('recursiveTraversal() cannot find protobufjs Type')
+            throw new Error('recursiveTraversal() [Root] cannot find protobufjs Type')
         }
     }
     if (obj instanceof Namespace) {
@@ -373,7 +373,7 @@ export const recursiveTraversal = (
                 nested: {}
             });
         } else {
-            throw new Error('recursiveTraversal() cannot find protobufjs Type')
+            throw new Error('recursiveTraversal() [Namespace] cannot find protobufjs Type')
         }
     }
     throw new Error('recursiveTraversal() cannot find protobufjs Type')

@@ -1,5 +1,5 @@
 import dotty from 'dotty';
-import { Service, Type, Enum, Root, Namespace } from 'protobufjs';
+import { Service, Type, Enum, Root, Namespace } from '@pyramation/protobufjs';
 import { ProtoRoot } from '@osmonauts/types';
 
 export const getNestedProto = (root: ProtoRoot) => {
