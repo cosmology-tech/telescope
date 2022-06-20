@@ -3,17 +3,18 @@ import { BILLION, memberExpressionOrIdentifier, shorthandProperty } from "../../
 import { protoFieldsToArray } from '../utils';
 import { ToAminoParseField, toAminoParseField } from './index'
 import { getOneOfs, getFieldOptionality } from '../../proto';
+import { ProtoField } from '@osmonauts/types';
 
 export const toAmino = {
     defaultType(args: ToAminoParseField) {
-        if (args.field.name === args.context.options.aminoCasingFn(args.field.name) && args.scope.length === 1) {
+        if (args.field.name === args.context.aminoCaseField(args.field) && args.scope.length === 1) {
             return shorthandProperty(args.field.name);
         }
-        return t.objectProperty(t.identifier(args.context.options.aminoCasingFn(args.field.name)), memberExpressionOrIdentifier(args.scope))
+        return t.objectProperty(t.identifier(args.context.aminoCaseField(args.field)), memberExpressionOrIdentifier(args.scope))
     },
 
     long(args: ToAminoParseField) {
-        return t.objectProperty(t.identifier(args.context.options.aminoCasingFn(args.field.name)),
+        return t.objectProperty(t.identifier(args.context.aminoCaseField(args.field)),
             t.callExpression(
                 t.memberExpression(memberExpressionOrIdentifier(args.scope), t.identifier('toString')),
                 [])
@@ -21,10 +22,10 @@ export const toAmino = {
     },
 
     string(args: ToAminoParseField) {
-        if (args.field.name === args.context.options.aminoCasingFn(args.field.name) && args.scope.length === 1) {
+        if (args.field.name === args.context.aminoCaseField(args.field) && args.scope.length === 1) {
             return shorthandProperty(args.field.name);
         }
-        return t.objectProperty(t.identifier(args.context.options.aminoCasingFn(args.field.name)), memberExpressionOrIdentifier(args.scope))
+        return t.objectProperty(t.identifier(args.context.aminoCaseField(args.field)), memberExpressionOrIdentifier(args.scope))
     },
 
     duration(args: ToAminoParseField) {
@@ -41,7 +42,7 @@ export const toAmino = {
             ),
             []
         )
-        return t.objectProperty(t.identifier(args.context.options.aminoCasingFn(args.field.name)), value);
+        return t.objectProperty(t.identifier(args.context.aminoCaseField(args.field)), value);
     },
 
     height(args: ToAminoParseField) {
@@ -50,7 +51,7 @@ export const toAmino = {
         const value = t.objectExpression(
             [
                 t.objectProperty(
-                    t.identifier(args.context.options.aminoCasingFn('revision_height')),
+                    t.identifier(args.context.aminoCasingFn('revision_height')),
                     t.optionalCallExpression(
                         t.optionalMemberExpression(
                             t.callExpression(
@@ -72,7 +73,7 @@ export const toAmino = {
                 ),
                 //
                 t.objectProperty(
-                    t.identifier(args.context.options.aminoCasingFn('revision_number')),
+                    t.identifier(args.context.aminoCasingFn('revision_number')),
                     t.optionalCallExpression(
                         t.optionalMemberExpression(
                             t.callExpression(
@@ -101,7 +102,7 @@ export const toAmino = {
             t.objectExpression([])
         );
 
-        return t.objectProperty(t.identifier(args.context.options.aminoCasingFn(args.field.name)), cond);
+        return t.objectProperty(t.identifier(args.context.aminoCaseField(args.field)), cond);
     },
 
     coin(args: ToAminoParseField) {
@@ -132,7 +133,7 @@ export const toAmino = {
                 )
             )
         ]);
-        return t.objectProperty(t.identifier(args.context.options.aminoCasingFn(args.field.name)), value);
+        return t.objectProperty(t.identifier(args.context.aminoCaseField(args.field)), value);
     },
 
     type({ context, field, currentProtoPath, scope, fieldPath, nested, isOptional }: ToAminoParseField) {
@@ -157,7 +158,7 @@ export const toAmino = {
             })
         });
         /// END 
-        return t.objectProperty(t.identifier(context.options.aminoCasingFn(field.name)),
+        return t.objectProperty(t.identifier(context.aminoCaseField(field)),
             t.objectExpression(
                 properties
             )
@@ -166,7 +167,17 @@ export const toAmino = {
 
 
     typeArray({ context, field, currentProtoPath, scope, fieldPath, nested, isOptional }: ToAminoParseField) {
+        //////
         const variable = 'el' + nested;
+        const f = JSON.parse(JSON.stringify(field)); // clone
+        const varProto: ProtoField = {
+            ...f
+        };
+        varProto.name = variable;
+        varProto.options['(telescope:orig)'] = variable;
+        varProto.options['(telescope:name)'] = variable;
+        varProto.options['(telescope:camel)'] = variable;
+        //////
 
         if (field.parsedType.type !== 'Type') {
             throw new Error('Arrays only support types[Type] right now.');
@@ -187,7 +198,7 @@ export const toAmino = {
                 field,
                 currentProtoPath,
                 scope: [variable],
-                fieldPath: [...fieldPath],
+                fieldPath: [varProto],
                 nested: nested + 1,
                 isOptional // TODO how to handle nested optionality
             });
@@ -211,7 +222,7 @@ export const toAmino = {
             ]
         );
 
-        return t.objectProperty(t.identifier(context.options.aminoCasingFn(field.name)),
+        return t.objectProperty(t.identifier(context.aminoCaseField(field)),
             expr
         );
     },
@@ -234,7 +245,7 @@ export const toAmino = {
             ]
         );
 
-        return t.objectProperty(t.identifier(context.options.aminoCasingFn(field.name)),
+        return t.objectProperty(t.identifier(context.aminoCaseField(field)),
             expr
         );
     },

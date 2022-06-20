@@ -154,8 +154,8 @@ export const fromAminoJsonMethod = ({
 
     const fromAminoParams = t.objectPattern(
         Object.keys(proto.fields).map((field) => t.objectProperty(
-            t.identifier(context.options.aminoCasingFn(field)),
-            t.identifier(context.options.aminoCasingFn(field)),
+            t.identifier(context.aminoCaseField(proto.fields[field])),
+            t.identifier(context.aminoCaseField(proto.fields[field])),
             false,
             true)
         )

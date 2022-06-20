@@ -90,12 +90,21 @@ export class AminoParseContext extends GenericParseContext implements ParseConte
         if (!this.aminoCasingFn) {
             throw new Error('missing aminoCasingFn!')
         }
+        this.aminoCaseField = this.aminoCaseField.bind(this);
     }
 
     setAminoCasingFn() {
         if (this.aminoCasingFn) return this.aminoCasingFn;
         this.aminoCasingFn = getPluginValue('aminoCasingFn', this.ref.proto.package, this.options);
         return this.aminoCasingFn;
+    }
+
+    aminoCaseField(field: ProtoField) {
+        const orig = field.options['(telescope:orig)'];
+        // const name = field.options['(telescope:name)'];
+        // const camel = field.options['(telescope:camel)'];
+        // return this.aminoCasingFn(field.name);
+        return orig;
     }
 
     private lookupTypeFromCurrentPath(field: ProtoField, currentProtoPath: string) {
