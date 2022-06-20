@@ -3,6 +3,11 @@ import { defaultTelescopeOptions } from '@osmonauts/types';
 import { parse } from '../src/parse';
 import { TelescopeParseContext } from '../src/build';
 
+const options = {
+    ...defaultTelescopeOptions,
+    includeLCDClient: true
+};
+
 const store = new ProtoStore();
 store.protos = [];
 const addRef = ({ filename, content }) => {
@@ -88,7 +93,8 @@ store.traverseAll();
 describe('cosmology/example/c', () => {
 
     const ref = store.findProto('cosmology/example/c.proto');
-    const context = new TelescopeParseContext(ref, store, defaultTelescopeOptions);
+
+    const context = new TelescopeParseContext(ref, store, options);
 
     // aggregate service information
     // - [ ] get dependent objects of service and their paths

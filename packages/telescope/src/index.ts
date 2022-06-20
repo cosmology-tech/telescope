@@ -127,7 +127,7 @@ export class TelescopeBuilder {
 
                 // BEGIN PLUGIN CODE HERE
                 const amino = new AminoParseContext(
-                    c.ref, c.store
+                    c.ref, c.store, this.options
                 );
                 if (bundle.base === 'osmosis') {
                     amino.options = {

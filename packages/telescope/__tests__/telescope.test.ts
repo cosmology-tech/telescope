@@ -9,7 +9,10 @@ store.traverseAll();
 const input = {
     outPath: __dirname + '/../../../__fixtures__/output1',
     protoDirs: [__dirname + '/../../../__fixtures__/chain1'],
-    options: defaultTelescopeOptions
+    options: {
+        ...defaultTelescopeOptions,
+        includeLCDClient: true
+    }
 };
 
 const telescope = new TelescopeBuilder(input);
