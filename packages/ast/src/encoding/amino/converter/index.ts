@@ -24,7 +24,7 @@ export const createAminoConverterItem = (
         t.stringLiteral(typeUrl),
         t.objectExpression(
             [
-                t.objectProperty(t.identifier('aminoType'), t.stringLiteral(typeUrlToAmino(typeUrl, context.options.exceptions))),
+                t.objectProperty(t.identifier('aminoType'), t.stringLiteral(typeUrlToAmino(typeUrl, context.options.aminoExceptions))),
                 t.objectProperty(
                     t.identifier('toAmino'),
                     toAminoJsonMethod({

@@ -2,6 +2,8 @@ import generate from '@babel/generator';
 import { ProtoType } from '@osmonauts/types';
 import { ProtoStore, getNestedProto } from '@osmonauts/proto-parser'
 import { AminoParseContext } from '../src/encoding/context';
+import { GenericParseContext } from '../src/encoding';
+import { defaultTelescopeOptions } from '@osmonauts/types';
 
 export const expectCode = (ast) => {
     expect(
@@ -29,11 +31,16 @@ export const prepareContext = (store: ProtoStore, protoFile: string) => {
             proto.name !== 'Msg'
     );
 
-    const context = new AminoParseContext(ref, store);
+    const context = new AminoParseContext(ref, store, defaultTelescopeOptions);
 
     return {
         context,
         root: traversed,
         protos
     };
+};
+
+export const getGenericParseContext = () => {
+    const context = new GenericParseContext(null, null, defaultTelescopeOptions);
+    return context;
 };

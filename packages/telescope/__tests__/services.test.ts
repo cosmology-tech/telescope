@@ -1,4 +1,5 @@
 import { ProtoStore, parseProto } from '@osmonauts/proto-parser';
+import { defaultTelescopeOptions } from '@osmonauts/types';
 import { parse } from '../src/parse';
 import { TelescopeParseContext } from '../src/build';
 
@@ -87,7 +88,7 @@ store.traverseAll();
 describe('cosmology/example/c', () => {
 
     const ref = store.findProto('cosmology/example/c.proto');
-    const context = new TelescopeParseContext(ref, store);
+    const context = new TelescopeParseContext(ref, store, defaultTelescopeOptions);
 
     // aggregate service information
     // - [ ] get dependent objects of service and their paths

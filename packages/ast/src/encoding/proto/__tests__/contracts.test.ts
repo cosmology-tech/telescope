@@ -1,4 +1,5 @@
-import { getNestedProto, traverse } from '@osmonauts/proto-parser';
+import { getNestedProto } from '@osmonauts/proto-parser';
+import { defaultTelescopeOptions } from '@osmonauts/types';
 import { ProtoStore } from '@osmonauts/proto-parser'
 import { expectCode } from '../../../../test-utils/'
 import { ProtoParseContext } from '../../context';
@@ -10,7 +11,7 @@ store.traverseAll();
 
 describe('MsgExecuteContract', () => {
     const ref = store.findProto('cosmwasm/wasm/v1/tx.proto');
-    const context = new ProtoParseContext(ref, store);
+    const context = new ProtoParseContext(ref, store, defaultTelescopeOptions);
     it('interface', () => {
         expectCode(createProtoType(context, 'MsgExecuteContract',
             getNestedProto(ref.traversed).MsgExecuteContract

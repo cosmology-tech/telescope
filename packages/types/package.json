@@ -80,6 +80,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.18.3",
+    "case": "1.6.3",
     "long": "^5.2.0",
     "protobufjs": "^6.11.3"
   }

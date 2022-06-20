@@ -5,6 +5,7 @@ import { getNestedProto, ProtoStore } from '@osmonauts/proto-parser';
 import { buildAllImports, getDepsFromMutations, getDepsFromQueries } from './imports';
 import { TelescopeParseContext } from './build';
 import { importNamespace, importStmt } from '@osmonauts/ast';
+import { TelescopeOptions, defaultTelescopeOptions } from '@osmonauts/types';
 import { getRelativePath, variableSlug } from './utils';
 import { parse } from './parse';
 import { bundlePackages, createFileBundle } from './bundle';
@@ -20,22 +21,14 @@ import {
     createClient,
     AminoParseContext
 } from '@osmonauts/ast';
+
 import {
     camel,
-    pascal
+    pascal,
+    snake
 } from 'case';
 
 const version = process.env.NODE_ENV === 'test' ? 'latest' : pkg.version;
-export interface TelescopeOptions {
-    includeAminos: boolean;
-    includeLCDClient: boolean;
-}
-
-const defaultTelescopeOptions = {
-    // global options (can be overridden through plugins)
-    includeAminos: true,
-    includeLCDClient: false
-}
 
 export interface TelescopeInput {
     protoDirs: string[];
@@ -54,14 +47,13 @@ export class TelescopeBuilder {
         this.protoDirs = protoDirs;
         this.outPath = outPath;
         this.options = deepmerge(defaultTelescopeOptions, options ?? {});
-
         this.store = store ?? new ProtoStore(protoDirs);
         this.store.traverseAll();
     }
 
     context(ref) {
         const ctx = new TelescopeParseContext(
-            ref, this.store
+            ref, this.store, this.options
         );
         this.contexts.push(ctx);
         return ctx;
@@ -129,7 +121,8 @@ export class TelescopeBuilder {
                 // FRESH new context
                 const ctx = new TelescopeParseContext(
                     c.ref,
-                    c.store
+                    c.store,
+                    this.options
                 );
 
                 // BEGIN PLUGIN CODE HERE
@@ -197,7 +190,8 @@ export class TelescopeBuilder {
                 // FRESH new context
                 const ctx = new TelescopeParseContext(
                     c.ref,
-                    c.store
+                    c.store,
+                    this.options
                 );
 
                 // get mutations, services
@@ -253,7 +247,8 @@ export class TelescopeBuilder {
 
                 const ctx = new TelescopeParseContext(
                     c.ref,
-                    c.store
+                    c.store,
+                    this.options
                 );
 
                 // get mutations, services
@@ -310,7 +305,7 @@ export class TelescopeBuilder {
 
                 const clientFile = join(`${bundle.base}`, 'client.ts');
                 filesToInclude.push(clientFile);
-                const ctx = new GenericParseContext();
+                const ctx = new GenericParseContext(null, null, this.options);
 
                 const registryVariables = [];
                 const converterVariables = [];

@@ -1,5 +1,5 @@
-import { ProtoRef } from '@osmonauts/types';
-import { getNestedProto, ProtoStore } from '@osmonauts/proto-parser';
+import { ProtoRef, TelescopeOptions } from '@osmonauts/types';
+import { ProtoStore } from '@osmonauts/proto-parser';
 import {
     AminoParseContext,
     createAminoConverter,
@@ -64,6 +64,7 @@ export const buildEnums = (
     context.body.push(createProtoEnumToJSON(name, obj));
 };
 export interface TelescopeParseContext {
+    options: TelescopeOptions;
     generic: GenericParseContext;
     proto: ProtoParseContext;
     amino: AminoParseContext;
@@ -74,19 +75,19 @@ export interface TelescopeParseContext {
     mutations: ServiceMutation[];
     queries: any[];
     types: any[];
-    options: any;
 }
 export class TelescopeParseContext implements TelescopeParseContext {
-    constructor(ref: ProtoRef, store: ProtoStore) {
+    constructor(ref: ProtoRef, store: ProtoStore, options: TelescopeOptions) {
         this.generic = new GenericParseContext(
-            ref, store
+            ref, store, options
         );
         this.proto = new ProtoParseContext(
-            ref, store
+            ref, store, options
         );
         this.amino = new AminoParseContext(
-            ref, store
+            ref, store, options
         );
+        this.options = options;
         this.ref = ref;
         this.store = store;
         this.parsedImports = {};

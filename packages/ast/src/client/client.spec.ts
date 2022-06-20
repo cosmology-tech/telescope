@@ -1,6 +1,7 @@
+import { getGenericParseContext } from '../../test-utils'
 import { createClient } from './client';
 import generate from '@babel/generator';
-import { GenericParseContext } from '../encoding';
+
 
 const expectCode = (ast) => {
     expect(
@@ -14,7 +15,7 @@ const printCode = (ast) => {
 }
 
 it('createClient', async () => {
-    const context = new GenericParseContext();
+    const context = getGenericParseContext();
     expectCode(createClient({
         context,
         name: 'getSigningOsmosisClient',
