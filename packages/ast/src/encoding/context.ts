@@ -86,6 +86,10 @@ export class AminoParseContext extends GenericParseContext implements ParseConte
         this.options = options;
 
         this.setAminoCasingFn();
+
+        if (!this.aminoCasingFn) {
+            throw new Error('missing aminoCasingFn!')
+        }
     }
 
     setAminoCasingFn() {
