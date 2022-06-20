@@ -59,6 +59,11 @@ may have structural differences.",
                             "id": 4,
                             "import": "google/api/expr/v1alpha1/syntax.proto",
                             "importedName": "Expr",
+                            "options": Object {
+                              "(telescope:camel)": "expr",
+                              "(telescope:name)": "expr",
+                              "(telescope:orig)": "expr",
+                            },
                             "parsedType": Object {
                               "name": "Expr",
                               "type": "Type",
@@ -81,6 +86,11 @@ analysis. In some cases, this will save the runtime the work of applying
 the same or similar transformations prior to evaluation.",
                             "id": 6,
                             "isScalar": true,
+                            "options": Object {
+                              "(telescope:camel)": "exprVersion",
+                              "(telescope:name)": "exprVersion",
+                              "(telescope:orig)": "expr_version",
+                            },
                             "parsedType": Object {
                               "name": "string",
                               "type": "native",
@@ -121,6 +131,11 @@ any optimizations made during the type-checking pass.",
                             "id": 5,
                             "import": "google/api/expr/v1alpha1/syntax.proto",
                             "importedName": "SourceInfo",
+                            "options": Object {
+                              "(telescope:camel)": "sourceInfo",
+                              "(telescope:name)": "sourceInfo",
+                              "(telescope:orig)": "source_info",
+                            },
                             "parsedType": Object {
                               "name": "SourceInfo",
                               "type": "Type",
@@ -214,6 +229,11 @@ evaluating that expression, and the caller requesting evaluation.",
                           "function": Object {
                             "comment": "Function declaration.",
                             "id": 3,
+                            "options": Object {
+                              "(telescope:camel)": "function",
+                              "(telescope:name)": "function",
+                              "(telescope:orig)": "function",
+                            },
                             "parsedType": Object {
                               "name": "FunctionDecl",
                               "type": "Type",
@@ -227,6 +247,11 @@ evaluating that expression, and the caller requesting evaluation.",
                           "ident": Object {
                             "comment": "Identifier declaration.",
                             "id": 2,
+                            "options": Object {
+                              "(telescope:camel)": "ident",
+                              "(telescope:name)": "ident",
+                              "(telescope:orig)": "ident",
+                            },
                             "parsedType": Object {
                               "name": "IdentDecl",
                               "type": "Type",
@@ -248,6 +273,11 @@ have a name depending on whether the overload is function declaration or a
 function definition containing a result [Expr][google.api.expr.v1alpha1.Expr].",
                             "id": 1,
                             "isScalar": true,
+                            "options": Object {
+                              "(telescope:camel)": "name",
+                              "(telescope:name)": "name",
+                              "(telescope:orig)": "name",
+                            },
                             "parsedType": Object {
                               "name": "string",
                               "type": "native",
@@ -269,6 +299,11 @@ logging which are not observable from CEL).",
                               "overloads": Object {
                                 "comment": "Required. List of function overloads, must contain at least one overload.",
                                 "id": 1,
+                                "options": Object {
+                                  "(telescope:camel)": "overloads",
+                                  "(telescope:name)": "overloads",
+                                  "(telescope:orig)": "overloads",
+                                },
                                 "parsedType": Object {
                                   "name": "Overload",
                                   "type": "Type",
@@ -301,6 +336,11 @@ parameterized type variables (similar as type erasure in Java).",
                                     "comment": "Documentation string for the overload.",
                                     "id": 6,
                                     "isScalar": true,
+                                    "options": Object {
+                                      "(telescope:camel)": "doc",
+                                      "(telescope:name)": "doc",
+                                      "(telescope:orig)": "doc",
+                                    },
                                     "parsedType": Object {
                                       "name": "string",
                                       "type": "native",
@@ -316,6 +356,11 @@ For methods, the first parameter declaration, \`params[0]\` is the
 expected type of the target receiver.",
                                     "id": 5,
                                     "isScalar": true,
+                                    "options": Object {
+                                      "(telescope:camel)": "isInstanceFunction",
+                                      "(telescope:name)": "isInstanceFunction",
+                                      "(telescope:orig)": "is_instance_function",
+                                    },
                                     "parsedType": Object {
                                       "name": "bool",
                                       "type": "native",
@@ -331,6 +376,11 @@ This will be used by a [Reference][google.api.expr.v1alpha1.Reference] to indica
 was resolved for the function \`name\`.",
                                     "id": 1,
                                     "isScalar": true,
+                                    "options": Object {
+                                      "(telescope:camel)": "overloadId",
+                                      "(telescope:name)": "overloadId",
+                                      "(telescope:orig)": "overload_id",
+                                    },
                                     "parsedType": Object {
                                       "name": "string",
                                       "type": "native",
@@ -350,6 +400,11 @@ function types \`int<A>\` and \`int<int>\` are not disjoint. Likewise,
 When the \`result_type\` of a function is a generic type param, the
 type param name also appears as the \`type\` of on at least one params.",
                                     "id": 2,
+                                    "options": Object {
+                                      "(telescope:camel)": "params",
+                                      "(telescope:name)": "params",
+                                      "(telescope:orig)": "params",
+                                    },
                                     "parsedType": Object {
                                       "name": "Type",
                                       "type": "Type",
@@ -364,6 +419,11 @@ type param name also appears as the \`type\` of on at least one params.",
                                     "comment": "Required. The result type of the function. For example, the operator
 \`string.isEmpty()\` would have \`result_type\` of \`kind: BOOL\`.",
                                     "id": 4,
+                                    "options": Object {
+                                      "(telescope:camel)": "resultType",
+                                      "(telescope:name)": "resultType",
+                                      "(telescope:orig)": "result_type",
+                                    },
                                     "parsedType": Object {
                                       "name": "Type",
                                       "type": "Type",
@@ -380,6 +440,11 @@ For example, \`function ex<K,V>(K key, map<K, V> map) : V\` would yield
 the type params of \`K, V\`.",
                                     "id": 3,
                                     "isScalar": true,
+                                    "options": Object {
+                                      "(telescope:camel)": "typeParams",
+                                      "(telescope:name)": "typeParams",
+                                      "(telescope:orig)": "type_params",
+                                    },
                                     "parsedType": Object {
                                       "name": "string",
                                       "type": "native",
@@ -413,6 +478,11 @@ time.",
                                 "comment": "Documentation string for the identifier.",
                                 "id": 3,
                                 "isScalar": true,
+                                "options": Object {
+                                  "(telescope:camel)": "doc",
+                                  "(telescope:name)": "doc",
+                                  "(telescope:orig)": "doc",
+                                },
                                 "parsedType": Object {
                                   "name": "string",
                                   "type": "native",
@@ -423,6 +493,11 @@ time.",
                               "type": Object {
                                 "comment": "Required. The type of the identifier.",
                                 "id": 1,
+                                "options": Object {
+                                  "(telescope:camel)": "type",
+                                  "(telescope:name)": "type",
+                                  "(telescope:orig)": "type",
+                                },
                                 "parsedType": Object {
                                   "name": "Type",
                                   "type": "Type",
@@ -438,6 +513,11 @@ must be supplied at evaluation time.",
                                 "id": 2,
                                 "import": "google/api/expr/v1alpha1/syntax.proto",
                                 "importedName": "Constant",
+                                "options": Object {
+                                  "(telescope:camel)": "value",
+                                  "(telescope:name)": "value",
+                                  "(telescope:orig)": "value",
+                                },
                                 "parsedType": Object {
                                   "name": "Constant",
                                   "type": "Type",
@@ -477,6 +557,11 @@ must be supplied at evaluation time.",
                             "comment": "The fully qualified name of the declaration.",
                             "id": 1,
                             "isScalar": true,
+                            "options": Object {
+                              "(telescope:camel)": "name",
+                              "(telescope:name)": "name",
+                              "(telescope:orig)": "name",
+                            },
                             "parsedType": Object {
                               "name": "string",
                               "type": "native",
@@ -495,6 +580,11 @@ type checker attempts to narrow down this list as much as possible.
 Empty if this is not a reference to a [Decl.FunctionDecl][google.api.expr.v1alpha1.Decl.FunctionDecl].",
                             "id": 3,
                             "isScalar": true,
+                            "options": Object {
+                              "(telescope:camel)": "overloadId",
+                              "(telescope:name)": "overloadId",
+                              "(telescope:orig)": "overload_id",
+                            },
                             "parsedType": Object {
                               "name": "string",
                               "type": "native",
@@ -509,6 +599,11 @@ constant if known at compile time.",
                             "id": 4,
                             "import": "google/api/expr/v1alpha1/syntax.proto",
                             "importedName": "Constant",
+                            "options": Object {
+                              "(telescope:camel)": "value",
+                              "(telescope:name)": "value",
+                              "(telescope:orig)": "value",
+                            },
                             "parsedType": Object {
                               "name": "Constant",
                               "type": "Type",
@@ -535,6 +630,11 @@ constant if known at compile time.",
                           "abstractType": Object {
                             "comment": "Abstract, application defined type.",
                             "id": 14,
+                            "options": Object {
+                              "(telescope:camel)": "abstractType",
+                              "(telescope:name)": "abstractType",
+                              "(telescope:orig)": "abstract_type",
+                            },
                             "parsedType": Object {
                               "name": "AbstractType",
                               "type": "Type",
@@ -550,6 +650,11 @@ constant if known at compile time.",
                             "id": 1,
                             "import": "google/protobuf/empty.proto",
                             "importedName": "google.protobuf.Empty",
+                            "options": Object {
+                              "(telescope:camel)": "dyn",
+                              "(telescope:name)": "dyn",
+                              "(telescope:orig)": "dyn",
+                            },
                             "parsedType": Object {
                               "name": "Empty",
                               "type": "Type",
@@ -569,6 +674,11 @@ errors present in the expression.",
                             "id": 12,
                             "import": "google/protobuf/empty.proto",
                             "importedName": "google.protobuf.Empty",
+                            "options": Object {
+                              "(telescope:camel)": "error",
+                              "(telescope:name)": "error",
+                              "(telescope:orig)": "error",
+                            },
                             "parsedType": Object {
                               "name": "Empty",
                               "type": "Type",
@@ -582,6 +692,11 @@ errors present in the expression.",
                           "function": Object {
                             "comment": "Function type.",
                             "id": 8,
+                            "options": Object {
+                              "(telescope:camel)": "function",
+                              "(telescope:name)": "function",
+                              "(telescope:orig)": "function",
+                            },
                             "parsedType": Object {
                               "name": "FunctionType",
                               "type": "Type",
@@ -595,6 +710,11 @@ errors present in the expression.",
                           "listType": Object {
                             "comment": "Parameterized list with elements of \`list_type\`, e.g. \`list<timestamp>\`.",
                             "id": 6,
+                            "options": Object {
+                              "(telescope:camel)": "listType",
+                              "(telescope:name)": "listType",
+                              "(telescope:orig)": "list_type",
+                            },
                             "parsedType": Object {
                               "name": "ListType",
                               "type": "Type",
@@ -608,6 +728,11 @@ errors present in the expression.",
                           "mapType": Object {
                             "comment": "Parameterized map with typed keys and values.",
                             "id": 7,
+                            "options": Object {
+                              "(telescope:camel)": "mapType",
+                              "(telescope:name)": "mapType",
+                              "(telescope:orig)": "map_type",
+                            },
                             "parsedType": Object {
                               "name": "MapType",
                               "type": "Type",
@@ -625,6 +750,11 @@ The \`message_type\` string specifies the qualified message type name. For
 example, \`google.plus.Profile\`.",
                             "id": 9,
                             "isScalar": true,
+                            "options": Object {
+                              "(telescope:camel)": "messageType",
+                              "(telescope:name)": "messageType",
+                              "(telescope:orig)": "message_type",
+                            },
                             "parsedType": Object {
                               "name": "string",
                               "type": "native",
@@ -637,6 +767,11 @@ example, \`google.plus.Profile\`.",
                             "id": 2,
                             "import": "google/protobuf/struct.proto",
                             "importedName": "google.protobuf.NullValue",
+                            "options": Object {
+                              "(telescope:camel)": "null",
+                              "(telescope:name)": "null",
+                              "(telescope:orig)": "null",
+                            },
                             "parsedType": Object {
                               "name": "NullValue",
                               "type": "Enum",
@@ -650,6 +785,11 @@ example, \`google.plus.Profile\`.",
                           "primitive": Object {
                             "comment": "Primitive types: \`true\`, \`1u\`, \`-2.0\`, \`'string'\`, \`b'bytes'\`.",
                             "id": 3,
+                            "options": Object {
+                              "(telescope:camel)": "primitive",
+                              "(telescope:name)": "primitive",
+                              "(telescope:orig)": "primitive",
+                            },
                             "parsedType": Object {
                               "name": "PrimitiveType",
                               "type": "Enum",
@@ -666,6 +806,11 @@ example, \`google.plus.Profile\`.",
 The \`type\` value specifies the target type. e.g. int is type with a
 target type of \`Primitive.INT\`.",
                             "id": 11,
+                            "options": Object {
+                              "(telescope:camel)": "type",
+                              "(telescope:name)": "type",
+                              "(telescope:orig)": "type",
+                            },
                             "parsedType": Object {
                               "name": "Type",
                               "type": "Type",
@@ -683,6 +828,11 @@ would be a \`list_type\` whose element type was a \`type_param\` type
 named \`E\`.",
                             "id": 10,
                             "isScalar": true,
+                            "options": Object {
+                              "(telescope:camel)": "typeParam",
+                              "(telescope:name)": "typeParam",
+                              "(telescope:orig)": "type_param",
+                            },
                             "parsedType": Object {
                               "name": "string",
                               "type": "native",
@@ -693,6 +843,11 @@ named \`E\`.",
                           "wellKnown": Object {
                             "comment": "Well-known protobuf type such as \`google.protobuf.Timestamp\`.",
                             "id": 5,
+                            "options": Object {
+                              "(telescope:camel)": "wellKnown",
+                              "(telescope:name)": "wellKnown",
+                              "(telescope:orig)": "well_known",
+                            },
                             "parsedType": Object {
                               "name": "WellKnownType",
                               "type": "Enum",
@@ -706,6 +861,11 @@ named \`E\`.",
                           "wrapper": Object {
                             "comment": "Wrapper of a primitive type, e.g. \`google.protobuf.Int64Value\`.",
                             "id": 4,
+                            "options": Object {
+                              "(telescope:camel)": "wrapper",
+                              "(telescope:name)": "wrapper",
+                              "(telescope:orig)": "wrapper",
+                            },
                             "parsedType": Object {
                               "name": "PrimitiveType",
                               "type": "Enum",
@@ -727,6 +887,11 @@ named \`E\`.",
                                 "comment": "The fully qualified name of this abstract type.",
                                 "id": 1,
                                 "isScalar": true,
+                                "options": Object {
+                                  "(telescope:camel)": "name",
+                                  "(telescope:name)": "name",
+                                  "(telescope:orig)": "name",
+                                },
                                 "parsedType": Object {
                                   "name": "string",
                                   "type": "native",
@@ -737,6 +902,11 @@ named \`E\`.",
                               "parameterTypes": Object {
                                 "comment": "Parameter types for this abstract type.",
                                 "id": 2,
+                                "options": Object {
+                                  "(telescope:camel)": "parameterTypes",
+                                  "(telescope:name)": "parameterTypes",
+                                  "(telescope:orig)": "parameter_types",
+                                },
                                 "parsedType": Object {
                                   "name": "Type",
                                   "type": "Type",
@@ -761,6 +931,11 @@ named \`E\`.",
                               "argTypes": Object {
                                 "comment": "Argument types of the function.",
                                 "id": 2,
+                                "options": Object {
+                                  "(telescope:camel)": "argTypes",
+                                  "(telescope:name)": "argTypes",
+                                  "(telescope:orig)": "arg_types",
+                                },
                                 "parsedType": Object {
                                   "name": "Type",
                                   "type": "Type",
@@ -774,6 +949,11 @@ named \`E\`.",
                               "resultType": Object {
                                 "comment": "Result type of the function.",
                                 "id": 1,
+                                "options": Object {
+                                  "(telescope:camel)": "resultType",
+                                  "(telescope:name)": "resultType",
+                                  "(telescope:orig)": "result_type",
+                                },
                                 "parsedType": Object {
                                   "name": "Type",
                                   "type": "Type",
@@ -797,6 +977,11 @@ named \`E\`.",
                               "elemType": Object {
                                 "comment": "The element type.",
                                 "id": 1,
+                                "options": Object {
+                                  "(telescope:camel)": "elemType",
+                                  "(telescope:name)": "elemType",
+                                  "(telescope:orig)": "elem_type",
+                                },
                                 "parsedType": Object {
                                   "name": "Type",
                                   "type": "Type",
@@ -820,6 +1005,11 @@ named \`E\`.",
                               "keyType": Object {
                                 "comment": "The type of the key.",
                                 "id": 1,
+                                "options": Object {
+                                  "(telescope:camel)": "keyType",
+                                  "(telescope:name)": "keyType",
+                                  "(telescope:orig)": "key_type",
+                                },
                                 "parsedType": Object {
                                   "name": "Type",
                                   "type": "Type",
@@ -832,6 +1022,11 @@ named \`E\`.",
                               "valueType": Object {
                                 "comment": "The type of the value.",
                                 "id": 2,
+                                "options": Object {
+                                  "(telescope:camel)": "valueType",
+                                  "(telescope:name)": "valueType",
+                                  "(telescope:orig)": "value_type",
+                                },
                                 "parsedType": Object {
                                   "name": "Type",
                                   "type": "Type",
@@ -1025,44 +1220,85 @@ Examples of literals include: \`\\"hello\\"\`, \`b'bytes'\`, \`1u\`, \`4.2\`, \`
     "fields": Object {
       "boolValue": Object {
         "id": 2,
+        "options": Object {
+          "(telescope:camel)": "boolValue",
+          "(telescope:name)": "boolValue",
+          "(telescope:orig)": "bool_value",
+        },
         "type": "bool",
       },
       "bytesValue": Object {
         "id": 7,
+        "options": Object {
+          "(telescope:camel)": "bytesValue",
+          "(telescope:name)": "bytesValue",
+          "(telescope:orig)": "bytes_value",
+        },
         "type": "bytes",
       },
       "doubleValue": Object {
         "id": 5,
+        "options": Object {
+          "(telescope:camel)": "doubleValue",
+          "(telescope:name)": "doubleValue",
+          "(telescope:orig)": "double_value",
+        },
         "type": "double",
       },
       "durationValue": Object {
         "id": 8,
         "options": Object {
+          "(telescope:camel)": "durationValue",
+          "(telescope:name)": "durationValue",
+          "(telescope:orig)": "duration_value",
           "deprecated": true,
         },
         "type": "google.protobuf.Duration",
       },
       "int64Value": Object {
         "id": 3,
+        "options": Object {
+          "(telescope:camel)": "int64Value",
+          "(telescope:name)": "int64Value",
+          "(telescope:orig)": "int64_value",
+        },
         "type": "int64",
       },
       "nullValue": Object {
         "id": 1,
+        "options": Object {
+          "(telescope:camel)": "nullValue",
+          "(telescope:name)": "nullValue",
+          "(telescope:orig)": "null_value",
+        },
         "type": "google.protobuf.NullValue",
       },
       "stringValue": Object {
         "id": 6,
+        "options": Object {
+          "(telescope:camel)": "stringValue",
+          "(telescope:name)": "stringValue",
+          "(telescope:orig)": "string_value",
+        },
         "type": "string",
       },
       "timestampValue": Object {
         "id": 9,
         "options": Object {
+          "(telescope:camel)": "timestampValue",
+          "(telescope:name)": "timestampValue",
+          "(telescope:orig)": "timestamp_value",
           "deprecated": true,
         },
         "type": "google.protobuf.Timestamp",
       },
       "uint64Value": Object {
         "id": 4,
+        "options": Object {
+          "(telescope:camel)": "uint64Value",
+          "(telescope:name)": "uint64Value",
+          "(telescope:orig)": "uint64_value",
+        },
         "type": "uint64",
       },
     },
@@ -1092,44 +1328,85 @@ Examples of literals include: \`\\"hello\\"\`, \`b'bytes'\`, \`1u\`, \`4.2\`, \`
           "fields": Object {
             "boolValue": Object {
               "id": 2,
+              "options": Object {
+                "(telescope:camel)": "boolValue",
+                "(telescope:name)": "boolValue",
+                "(telescope:orig)": "bool_value",
+              },
               "type": "bool",
             },
             "bytesValue": Object {
               "id": 7,
+              "options": Object {
+                "(telescope:camel)": "bytesValue",
+                "(telescope:name)": "bytesValue",
+                "(telescope:orig)": "bytes_value",
+              },
               "type": "bytes",
             },
             "doubleValue": Object {
               "id": 5,
+              "options": Object {
+                "(telescope:camel)": "doubleValue",
+                "(telescope:name)": "doubleValue",
+                "(telescope:orig)": "double_value",
+              },
               "type": "double",
             },
             "durationValue": Object {
               "id": 8,
               "options": Object {
+                "(telescope:camel)": "durationValue",
+                "(telescope:name)": "durationValue",
+                "(telescope:orig)": "duration_value",
                 "deprecated": true,
               },
               "type": "google.protobuf.Duration",
             },
             "int64Value": Object {
               "id": 3,
+              "options": Object {
+                "(telescope:camel)": "int64Value",
+                "(telescope:name)": "int64Value",
+                "(telescope:orig)": "int64_value",
+              },
               "type": "int64",
             },
             "nullValue": Object {
               "id": 1,
+              "options": Object {
+                "(telescope:camel)": "nullValue",
+                "(telescope:name)": "nullValue",
+                "(telescope:orig)": "null_value",
+              },
               "type": "google.protobuf.NullValue",
             },
             "stringValue": Object {
               "id": 6,
+              "options": Object {
+                "(telescope:camel)": "stringValue",
+                "(telescope:name)": "stringValue",
+                "(telescope:orig)": "string_value",
+              },
               "type": "string",
             },
             "timestampValue": Object {
               "id": 9,
               "options": Object {
+                "(telescope:camel)": "timestampValue",
+                "(telescope:name)": "timestampValue",
+                "(telescope:orig)": "timestamp_value",
                 "deprecated": true,
               },
               "type": "google.protobuf.Timestamp",
             },
             "uint64Value": Object {
               "id": 4,
+              "options": Object {
+                "(telescope:camel)": "uint64Value",
+                "(telescope:name)": "uint64Value",
+                "(telescope:orig)": "uint64_value",
+              },
               "type": "uint64",
             },
           },
@@ -1153,34 +1430,74 @@ Examples of literals include: \`\\"hello\\"\`, \`b'bytes'\`, \`1u\`, \`4.2\`, \`
           "fields": Object {
             "callExpr": Object {
               "id": 6,
+              "options": Object {
+                "(telescope:camel)": "callExpr",
+                "(telescope:name)": "callExpr",
+                "(telescope:orig)": "call_expr",
+              },
               "type": "Call",
             },
             "comprehensionExpr": Object {
               "id": 9,
+              "options": Object {
+                "(telescope:camel)": "comprehensionExpr",
+                "(telescope:name)": "comprehensionExpr",
+                "(telescope:orig)": "comprehension_expr",
+              },
               "type": "Comprehension",
             },
             "constExpr": Object {
               "id": 3,
+              "options": Object {
+                "(telescope:camel)": "constExpr",
+                "(telescope:name)": "constExpr",
+                "(telescope:orig)": "const_expr",
+              },
               "type": "Constant",
             },
             "id": Object {
               "id": 2,
+              "options": Object {
+                "(telescope:camel)": "id",
+                "(telescope:name)": "id",
+                "(telescope:orig)": "id",
+              },
               "type": "int64",
             },
             "identExpr": Object {
               "id": 4,
+              "options": Object {
+                "(telescope:camel)": "identExpr",
+                "(telescope:name)": "identExpr",
+                "(telescope:orig)": "ident_expr",
+              },
               "type": "Ident",
             },
             "listExpr": Object {
               "id": 7,
+              "options": Object {
+                "(telescope:camel)": "listExpr",
+                "(telescope:name)": "listExpr",
+                "(telescope:orig)": "list_expr",
+              },
               "type": "CreateList",
             },
             "selectExpr": Object {
               "id": 5,
+              "options": Object {
+                "(telescope:camel)": "selectExpr",
+                "(telescope:name)": "selectExpr",
+                "(telescope:orig)": "select_expr",
+              },
               "type": "Select",
             },
             "structExpr": Object {
               "id": 8,
+              "options": Object {
+                "(telescope:camel)": "structExpr",
+                "(telescope:name)": "structExpr",
+                "(telescope:orig)": "struct_expr",
+              },
               "type": "CreateStruct",
             },
           },
@@ -1189,15 +1506,30 @@ Examples of literals include: \`\\"hello\\"\`, \`b'bytes'\`, \`1u\`, \`4.2\`, \`
               "fields": Object {
                 "args": Object {
                   "id": 3,
+                  "options": Object {
+                    "(telescope:camel)": "args",
+                    "(telescope:name)": "args",
+                    "(telescope:orig)": "args",
+                  },
                   "rule": "repeated",
                   "type": "Expr",
                 },
                 "function": Object {
                   "id": 2,
+                  "options": Object {
+                    "(telescope:camel)": "function",
+                    "(telescope:name)": "function",
+                    "(telescope:orig)": "function",
+                  },
                   "type": "string",
                 },
                 "target": Object {
                   "id": 1,
+                  "options": Object {
+                    "(telescope:camel)": "target",
+                    "(telescope:name)": "target",
+                    "(telescope:orig)": "target",
+                  },
                   "type": "Expr",
                 },
               },
@@ -1206,30 +1538,65 @@ Examples of literals include: \`\\"hello\\"\`, \`b'bytes'\`, \`1u\`, \`4.2\`, \`
               "fields": Object {
                 "accuInit": Object {
                   "id": 4,
+                  "options": Object {
+                    "(telescope:camel)": "accuInit",
+                    "(telescope:name)": "accuInit",
+                    "(telescope:orig)": "accu_init",
+                  },
                   "type": "Expr",
                 },
                 "accuVar": Object {
                   "id": 3,
+                  "options": Object {
+                    "(telescope:camel)": "accuVar",
+                    "(telescope:name)": "accuVar",
+                    "(telescope:orig)": "accu_var",
+                  },
                   "type": "string",
                 },
                 "iterRange": Object {
                   "id": 2,
+                  "options": Object {
+                    "(telescope:camel)": "iterRange",
+                    "(telescope:name)": "iterRange",
+                    "(telescope:orig)": "iter_range",
+                  },
                   "type": "Expr",
                 },
                 "iterVar": Object {
                   "id": 1,
+                  "options": Object {
+                    "(telescope:camel)": "iterVar",
+                    "(telescope:name)": "iterVar",
+                    "(telescope:orig)": "iter_var",
+                  },
                   "type": "string",
                 },
                 "loopCondition": Object {
                   "id": 5,
+                  "options": Object {
+                    "(telescope:camel)": "loopCondition",
+                    "(telescope:name)": "loopCondition",
+                    "(telescope:orig)": "loop_condition",
+                  },
                   "type": "Expr",
                 },
                 "loopStep": Object {
                   "id": 6,
+                  "options": Object {
+                    "(telescope:camel)": "loopStep",
+                    "(telescope:name)": "loopStep",
+                    "(telescope:orig)": "loop_step",
+                  },
                   "type": "Expr",
                 },
                 "result": Object {
                   "id": 7,
+                  "options": Object {
+                    "(telescope:camel)": "result",
+                    "(telescope:name)": "result",
+                    "(telescope:orig)": "result",
+                  },
                   "type": "Expr",
                 },
               },
@@ -1238,6 +1605,11 @@ Examples of literals include: \`\\"hello\\"\`, \`b'bytes'\`, \`1u\`, \`4.2\`, \`
               "fields": Object {
                 "elements": Object {
                   "id": 1,
+                  "options": Object {
+                    "(telescope:camel)": "elements",
+                    "(telescope:name)": "elements",
+                    "(telescope:orig)": "elements",
+                  },
                   "rule": "repeated",
                   "type": "Expr",
                 },
@@ -1247,11 +1619,21 @@ Examples of literals include: \`\\"hello\\"\`, \`b'bytes'\`, \`1u\`, \`4.2\`, \`
               "fields": Object {
                 "entries": Object {
                   "id": 2,
+                  "options": Object {
+                    "(telescope:camel)": "entries",
+                    "(telescope:name)": "entries",
+                    "(telescope:orig)": "entries",
+                  },
                   "rule": "repeated",
                   "type": "Entry",
                 },
                 "messageName": Object {
                   "id": 1,
+                  "options": Object {
+                    "(telescope:camel)": "messageName",
+                    "(telescope:name)": "messageName",
+                    "(telescope:orig)": "message_name",
+                  },
                   "type": "string",
                 },
               },
@@ -1260,18 +1642,38 @@ Examples of literals include: \`\\"hello\\"\`, \`b'bytes'\`, \`1u\`, \`4.2\`, \`
                   "fields": Object {
                     "fieldKey": Object {
                       "id": 2,
+                      "options": Object {
+                        "(telescope:camel)": "fieldKey",
+                        "(telescope:name)": "fieldKey",
+                        "(telescope:orig)": "field_key",
+                      },
                       "type": "string",
                     },
                     "id": Object {
                       "id": 1,
+                      "options": Object {
+                        "(telescope:camel)": "id",
+                        "(telescope:name)": "id",
+                        "(telescope:orig)": "id",
+                      },
                       "type": "int64",
                     },
                     "mapKey": Object {
                       "id": 3,
+                      "options": Object {
+                        "(telescope:camel)": "mapKey",
+                        "(telescope:name)": "mapKey",
+                        "(telescope:orig)": "map_key",
+                      },
                       "type": "Expr",
                     },
                     "value": Object {
                       "id": 4,
+                      "options": Object {
+                        "(telescope:camel)": "value",
+                        "(telescope:name)": "value",
+                        "(telescope:orig)": "value",
+                      },
                       "type": "Expr",
                     },
                   },
@@ -1290,6 +1692,11 @@ Examples of literals include: \`\\"hello\\"\`, \`b'bytes'\`, \`1u\`, \`4.2\`, \`
               "fields": Object {
                 "name": Object {
                   "id": 1,
+                  "options": Object {
+                    "(telescope:camel)": "name",
+                    "(telescope:name)": "name",
+                    "(telescope:orig)": "name",
+                  },
                   "type": "string",
                 },
               },
@@ -1298,14 +1705,29 @@ Examples of literals include: \`\\"hello\\"\`, \`b'bytes'\`, \`1u\`, \`4.2\`, \`
               "fields": Object {
                 "field": Object {
                   "id": 2,
+                  "options": Object {
+                    "(telescope:camel)": "field",
+                    "(telescope:name)": "field",
+                    "(telescope:orig)": "field",
+                  },
                   "type": "string",
                 },
                 "operand": Object {
                   "id": 1,
+                  "options": Object {
+                    "(telescope:camel)": "operand",
+                    "(telescope:name)": "operand",
+                    "(telescope:orig)": "operand",
+                  },
                   "type": "Expr",
                 },
                 "testOnly": Object {
                   "id": 3,
+                  "options": Object {
+                    "(telescope:camel)": "testOnly",
+                    "(telescope:name)": "testOnly",
+                    "(telescope:orig)": "test_only",
+                  },
                   "type": "bool",
                 },
               },
@@ -1329,10 +1751,20 @@ Examples of literals include: \`\\"hello\\"\`, \`b'bytes'\`, \`1u\`, \`4.2\`, \`
           "fields": Object {
             "expr": Object {
               "id": 2,
+              "options": Object {
+                "(telescope:camel)": "expr",
+                "(telescope:name)": "expr",
+                "(telescope:orig)": "expr",
+              },
               "type": "Expr",
             },
             "sourceInfo": Object {
               "id": 3,
+              "options": Object {
+                "(telescope:camel)": "sourceInfo",
+                "(telescope:name)": "sourceInfo",
+                "(telescope:orig)": "source_info",
+              },
               "type": "SourceInfo",
             },
           },
@@ -1341,11 +1773,21 @@ Examples of literals include: \`\\"hello\\"\`, \`b'bytes'\`, \`1u\`, \`4.2\`, \`
           "fields": Object {
             "lineOffsets": Object {
               "id": 3,
+              "options": Object {
+                "(telescope:camel)": "lineOffsets",
+                "(telescope:name)": "lineOffsets",
+                "(telescope:orig)": "line_offsets",
+              },
               "rule": "repeated",
               "type": "int32",
             },
             "location": Object {
               "id": 2,
+              "options": Object {
+                "(telescope:camel)": "location",
+                "(telescope:name)": "location",
+                "(telescope:orig)": "location",
+              },
               "type": "string",
             },
             "macroCalls": Object {
@@ -1360,6 +1802,11 @@ Examples of literals include: \`\\"hello\\"\`, \`b'bytes'\`, \`1u\`, \`4.2\`, \`
             },
             "syntaxVersion": Object {
               "id": 1,
+              "options": Object {
+                "(telescope:camel)": "syntaxVersion",
+                "(telescope:name)": "syntaxVersion",
+                "(telescope:orig)": "syntax_version",
+              },
               "type": "string",
             },
           },
@@ -1368,18 +1815,38 @@ Examples of literals include: \`\\"hello\\"\`, \`b'bytes'\`, \`1u\`, \`4.2\`, \`
           "fields": Object {
             "column": Object {
               "id": 4,
+              "options": Object {
+                "(telescope:camel)": "column",
+                "(telescope:name)": "column",
+                "(telescope:orig)": "column",
+              },
               "type": "int32",
             },
             "line": Object {
               "id": 3,
+              "options": Object {
+                "(telescope:camel)": "line",
+                "(telescope:name)": "line",
+                "(telescope:orig)": "line",
+              },
               "type": "int32",
             },
             "location": Object {
               "id": 1,
+              "options": Object {
+                "(telescope:camel)": "location",
+                "(telescope:name)": "location",
+                "(telescope:orig)": "location",
+              },
               "type": "string",
             },
             "offset": Object {
               "id": 2,
+              "options": Object {
+                "(telescope:camel)": "offset",
+                "(telescope:name)": "offset",
+                "(telescope:orig)": "offset",
+              },
               "type": "int32",
             },
           },

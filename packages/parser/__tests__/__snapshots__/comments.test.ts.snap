@@ -36,6 +36,11 @@ count_total is only respected when offset is used. It is ignored when key
 is set.",
                             "id": 4,
                             "isScalar": true,
+                            "options": Object {
+                              "(telescope:camel)": "countTotal",
+                              "(telescope:name)": "countTotal",
+                              "(telescope:orig)": "count_total",
+                            },
                             "parsedType": Object {
                               "name": "bool",
                               "type": "native",
@@ -49,6 +54,11 @@ querying the next page most efficiently. Only one of offset or key
 should be set.",
                             "id": 1,
                             "isScalar": true,
+                            "options": Object {
+                              "(telescope:camel)": "key",
+                              "(telescope:name)": "key",
+                              "(telescope:orig)": "key",
+                            },
                             "parsedType": Object {
                               "name": "bytes",
                               "type": "native",
@@ -61,6 +71,11 @@ should be set.",
 If left empty it will default to a value to be set by each app.",
                             "id": 3,
                             "isScalar": true,
+                            "options": Object {
+                              "(telescope:camel)": "limit",
+                              "(telescope:name)": "limit",
+                              "(telescope:orig)": "limit",
+                            },
                             "parsedType": Object {
                               "name": "uint64",
                               "type": "native",
@@ -74,6 +89,11 @@ It is less efficient than using key. Only one of offset or key should
 be set.",
                             "id": 2,
                             "isScalar": true,
+                            "options": Object {
+                              "(telescope:camel)": "offset",
+                              "(telescope:name)": "offset",
+                              "(telescope:orig)": "offset",
+                            },
                             "parsedType": Object {
                               "name": "uint64",
                               "type": "native",
@@ -87,6 +107,11 @@ be set.",
 Since: cosmos-sdk 0.43",
                             "id": 5,
                             "isScalar": true,
+                            "options": Object {
+                              "(telescope:camel)": "reverse",
+                              "(telescope:name)": "reverse",
+                              "(telescope:orig)": "reverse",
+                            },
                             "parsedType": Object {
                               "name": "bool",
                               "type": "native",
@@ -117,6 +142,11 @@ query the next page most efficiently. It will be empty if
 there are no more results.",
                             "id": 1,
                             "isScalar": true,
+                            "options": Object {
+                              "(telescope:camel)": "nextKey",
+                              "(telescope:name)": "nextKey",
+                              "(telescope:orig)": "next_key",
+                            },
                             "parsedType": Object {
                               "name": "bytes",
                               "type": "native",
@@ -129,6 +159,11 @@ there are no more results.",
 was set, its value is undefined otherwise",
                             "id": 2,
                             "isScalar": true,
+                            "options": Object {
+                              "(telescope:camel)": "total",
+                              "(telescope:name)": "total",
+                              "(telescope:orig)": "total",
+                            },
                             "parsedType": Object {
                               "name": "uint64",
                               "type": "native",

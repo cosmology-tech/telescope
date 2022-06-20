@@ -24,6 +24,11 @@ Object {
                     "comment": null,
                     "id": 1,
                     "isScalar": true,
+                    "options": Object {
+                      "(telescope:camel)": "key",
+                      "(telescope:name)": "key",
+                      "(telescope:orig)": "key",
+                    },
                     "parsedType": Object {
                       "name": "bytes",
                       "type": "native",
@@ -34,6 +39,11 @@ Object {
                   "leaf": Object {
                     "comment": null,
                     "id": 3,
+                    "options": Object {
+                      "(telescope:camel)": "leaf",
+                      "(telescope:name)": "leaf",
+                      "(telescope:orig)": "leaf",
+                    },
                     "parsedType": Object {
                       "name": "LeafOp",
                       "type": "Type",
@@ -46,6 +56,11 @@ Object {
                   "path": Object {
                     "comment": null,
                     "id": 4,
+                    "options": Object {
+                      "(telescope:camel)": "path",
+                      "(telescope:name)": "path",
+                      "(telescope:orig)": "path",
+                    },
                     "parsedType": Object {
                       "name": "LeafOp",
                       "type": "Type",
@@ -60,6 +75,11 @@ Object {
                     "comment": null,
                     "id": 2,
                     "isScalar": true,
+                    "options": Object {
+                      "(telescope:camel)": "value",
+                      "(telescope:name)": "value",
+                      "(telescope:orig)": "value",
+                    },
                     "parsedType": Object {
                       "name": "bytes",
                       "type": "native",
@@ -102,6 +122,11 @@ Object {
                   "hash": Object {
                     "comment": null,
                     "id": 1,
+                    "options": Object {
+                      "(telescope:camel)": "hash",
+                      "(telescope:name)": "hash",
+                      "(telescope:orig)": "hash",
+                    },
                     "parsedType": Object {
                       "name": "FancyEnumType",
                       "type": "Enum",
@@ -115,6 +140,11 @@ Object {
                     "comment": null,
                     "id": 5,
                     "isScalar": true,
+                    "options": Object {
+                      "(telescope:camel)": "prefix",
+                      "(telescope:name)": "prefix",
+                      "(telescope:orig)": "prefix",
+                    },
                     "parsedType": Object {
                       "name": "bytes",
                       "type": "native",
@@ -125,6 +155,11 @@ Object {
                   "prehashKey": Object {
                     "comment": null,
                     "id": 2,
+                    "options": Object {
+                      "(telescope:camel)": "prehashKey",
+                      "(telescope:name)": "prehashKey",
+                      "(telescope:orig)": "prehash_key",
+                    },
                     "parsedType": Object {
                       "name": "FancyEnumType",
                       "type": "Enum",
@@ -137,6 +172,11 @@ Object {
                   "prehashValue": Object {
                     "comment": null,
                     "id": 3,
+                    "options": Object {
+                      "(telescope:camel)": "prehashValue",
+                      "(telescope:name)": "prehashValue",
+                      "(telescope:orig)": "prehash_value",
+                    },
                     "parsedType": Object {
                       "name": "FancyEnumType",
                       "type": "Enum",
@@ -161,6 +201,11 @@ Object {
                     "comment": null,
                     "id": 1,
                     "isScalar": true,
+                    "options": Object {
+                      "(telescope:camel)": "key",
+                      "(telescope:name)": "key",
+                      "(telescope:orig)": "key",
+                    },
                     "parsedType": Object {
                       "name": "bytes",
                       "type": "native",
@@ -171,6 +216,11 @@ Object {
                   "left": Object {
                     "comment": null,
                     "id": 2,
+                    "options": Object {
+                      "(telescope:camel)": "left",
+                      "(telescope:name)": "left",
+                      "(telescope:orig)": "left",
+                    },
                     "parsedType": Object {
                       "name": "ExistenceProof",
                       "type": "Type",
@@ -183,6 +233,11 @@ Object {
                   "right": Object {
                     "comment": null,
                     "id": 3,
+                    "options": Object {
+                      "(telescope:camel)": "right",
+                      "(telescope:name)": "right",
+                      "(telescope:orig)": "right",
+                    },
                     "parsedType": Object {
                       "name": "ExistenceProof",
                       "type": "Type",

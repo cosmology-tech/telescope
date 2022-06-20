@@ -47,6 +47,11 @@ the provided method on behalf of the granter's account.",
                         "comment": "Msg, identified by it's type URL, to grant unrestricted permissions to execute",
                         "id": 1,
                         "isScalar": true,
+                        "options": Object {
+                          "(telescope:camel)": "msg",
+                          "(telescope:name)": "msg",
+                          "(telescope:orig)": "msg",
+                        },
                         "parsedType": Object {
                           "name": "string",
                           "type": "native",
@@ -75,6 +80,9 @@ the provide method with expiration time.",
                         "importedName": "google.protobuf.Any",
                         "options": Object {
                           "(cosmos_proto.accepts_interface)": "Authorization",
+                          "(telescope:camel)": "authorization",
+                          "(telescope:name)": "authorization",
+                          "(telescope:orig)": "authorization",
                         },
                         "parsedType": Object {
                           "name": "Any",
@@ -96,6 +104,9 @@ may apply to invalidate the grant)",
                         "options": Object {
                           "(gogoproto.nullable)": true,
                           "(gogoproto.stdtime)": true,
+                          "(telescope:camel)": "expiration",
+                          "(telescope:name)": "expiration",
+                          "(telescope:orig)": "expiration",
                         },
                         "parsedType": Object {
                           "name": "Timestamp",
@@ -126,6 +137,9 @@ It is used in genesis.proto and query.proto",
                         "importedName": "google.protobuf.Any",
                         "options": Object {
                           "(cosmos_proto.accepts_interface)": "Authorization",
+                          "(telescope:camel)": "authorization",
+                          "(telescope:name)": "authorization",
+                          "(telescope:orig)": "authorization",
                         },
                         "parsedType": Object {
                           "name": "Any",
@@ -144,6 +158,9 @@ It is used in genesis.proto and query.proto",
                         "importedName": "google.protobuf.Timestamp",
                         "options": Object {
                           "(gogoproto.stdtime)": true,
+                          "(telescope:camel)": "expiration",
+                          "(telescope:name)": "expiration",
+                          "(telescope:orig)": "expiration",
                         },
                         "parsedType": Object {
                           "name": "Timestamp",
@@ -161,6 +178,9 @@ It is used in genesis.proto and query.proto",
                         "isScalar": true,
                         "options": Object {
                           "(cosmos_proto.scalar)": "cosmos.AddressString",
+                          "(telescope:camel)": "grantee",
+                          "(telescope:name)": "grantee",
+                          "(telescope:orig)": "grantee",
                         },
                         "parsedType": Object {
                           "name": "string",
@@ -175,6 +195,9 @@ It is used in genesis.proto and query.proto",
                         "isScalar": true,
                         "options": Object {
                           "(cosmos_proto.scalar)": "cosmos.AddressString",
+                          "(telescope:camel)": "granter",
+                          "(telescope:name)": "granter",
+                          "(telescope:orig)": "granter",
                         },
                         "parsedType": Object {
                           "name": "string",
@@ -198,6 +221,11 @@ It is used in genesis.proto and query.proto",
                         "comment": "msg_type_urls contains the list of TypeURL of a sdk.Msg.",
                         "id": 1,
                         "isScalar": true,
+                        "options": Object {
+                          "(telescope:camel)": "msgTypeUrls",
+                          "(telescope:name)": "msgTypeUrls",
+                          "(telescope:orig)": "msg_type_urls",
+                        },
                         "parsedType": Object {
                           "name": "string",
                           "type": "native",
@@ -311,6 +339,11 @@ clients.",
                           "data": Object {
                             "comment": null,
                             "id": 2,
+                            "options": Object {
+                              "(telescope:camel)": "data",
+                              "(telescope:name)": "data",
+                              "(telescope:orig)": "data",
+                            },
                             "parsedType": Object {
                               "name": "Data",
                               "type": "Type",
@@ -326,6 +359,11 @@ clients.",
                             "id": 1,
                             "import": "google/protobuf/any.proto",
                             "importedName": "google.protobuf.Any",
+                            "options": Object {
+                              "(telescope:camel)": "publicKey",
+                              "(telescope:name)": "publicKey",
+                              "(telescope:orig)": "public_key",
+                            },
                             "parsedType": Object {
                               "name": "Any",
                               "type": "Type",
@@ -342,6 +380,11 @@ number of committed transactions signed by a given address. It is used to preven
 replay attacks.",
                             "id": 3,
                             "isScalar": true,
+                            "options": Object {
+                              "(telescope:camel)": "sequence",
+                              "(telescope:name)": "sequence",
+                              "(telescope:orig)": "sequence",
+                            },
                             "parsedType": Object {
                               "name": "uint64",
                               "type": "native",
@@ -359,6 +402,11 @@ replay attacks.",
                               "multi": Object {
                                 "comment": "multi represents a multisig signer",
                                 "id": 2,
+                                "options": Object {
+                                  "(telescope:camel)": "multi",
+                                  "(telescope:name)": "multi",
+                                  "(telescope:orig)": "multi",
+                                },
                                 "parsedType": Object {
                                   "name": "Multi",
                                   "type": "Type",
@@ -373,6 +421,11 @@ replay attacks.",
                               "single": Object {
                                 "comment": "single represents a single signer",
                                 "id": 1,
+                                "options": Object {
+                                  "(telescope:camel)": "single",
+                                  "(telescope:name)": "single",
+                                  "(telescope:orig)": "single",
+                                },
                                 "parsedType": Object {
                                   "name": "Single",
                                   "type": "Type",
@@ -396,6 +449,11 @@ replay attacks.",
                                     "id": 1,
                                     "import": "cosmos/crypto/multisig/v1beta1/multisig.proto",
                                     "importedName": "cosmos.crypto.multisig.v1beta1.CompactBitArray",
+                                    "options": Object {
+                                      "(telescope:camel)": "bitarray",
+                                      "(telescope:name)": "bitarray",
+                                      "(telescope:orig)": "bitarray",
+                                    },
                                     "parsedType": Object {
                                       "name": "CompactBitArray",
                                       "type": "Type",
@@ -409,6 +467,11 @@ replay attacks.",
                                   "signatures": Object {
                                     "comment": "signatures is the signatures of the multi-signature",
                                     "id": 2,
+                                    "options": Object {
+                                      "(telescope:camel)": "signatures",
+                                      "(telescope:name)": "signatures",
+                                      "(telescope:orig)": "signatures",
+                                    },
                                     "parsedType": Object {
                                       "name": "Data",
                                       "type": "Type",
@@ -434,6 +497,11 @@ replay attacks.",
                                   "mode": Object {
                                     "comment": "mode is the signing mode of the single signer",
                                     "id": 1,
+                                    "options": Object {
+                                      "(telescope:camel)": "mode",
+                                      "(telescope:name)": "mode",
+                                      "(telescope:orig)": "mode",
+                                    },
                                     "parsedType": Object {
                                       "name": "SignMode",
                                       "type": "Enum",
@@ -447,6 +515,11 @@ replay attacks.",
                                     "comment": "signature is the raw signature bytes",
                                     "id": 2,
                                     "isScalar": true,
+                                    "options": Object {
+                                      "(telescope:camel)": "signature",
+                                      "(telescope:name)": "signature",
+                                      "(telescope:orig)": "signature",
+                                    },
                                     "parsedType": Object {
                                       "name": "bytes",
                                       "type": "native",
@@ -485,6 +558,11 @@ replay attacks.",
                           "signatures": Object {
                             "comment": "signatures are the signature descriptors",
                             "id": 1,
+                            "options": Object {
+                              "(telescope:camel)": "signatures",
+                              "(telescope:name)": "signatures",
+                              "(telescope:orig)": "signatures",
+                            },
                             "parsedType": Object {
                               "name": "SignatureDescriptor",
                               "type": "Type",
@@ -591,6 +669,11 @@ primary signer and the one which pays the fee. The fee can be calculated
 based on the cost of evaluating the body and doing signature verification
 of the signers. This can be estimated via simulation.",
                         "id": 2,
+                        "options": Object {
+                          "(telescope:camel)": "fee",
+                          "(telescope:name)": "fee",
+                          "(telescope:orig)": "fee",
+                        },
                         "parsedType": Object {
                           "name": "Fee",
                           "type": "Type",
@@ -606,6 +689,11 @@ and order of elements must match the required signers from TxBody's
 messages. The first element is the primary signer and the one which pays
 the fee.",
                         "id": 1,
+                        "options": Object {
+                          "(telescope:camel)": "signerInfos",
+                          "(telescope:name)": "signerInfos",
+                          "(telescope:orig)": "signer_infos",
+                        },
                         "parsedType": Object {
                           "name": "SignerInfo",
                           "type": "Type",
@@ -621,6 +709,11 @@ the fee.",
 
 Since: cosmos-sdk 0.46",
                         "id": 3,
+                        "options": Object {
+                          "(telescope:camel)": "tip",
+                          "(telescope:name)": "tip",
+                          "(telescope:orig)": "tip",
+                        },
                         "parsedType": Object {
                           "name": "Tip",
                           "type": "Type",
@@ -654,6 +747,9 @@ chain (where the final transaction is broadcasted) should be used.",
                         "isScalar": true,
                         "options": Object {
                           "(cosmos_proto.scalar)": "cosmos.AddressString",
+                          "(telescope:camel)": "address",
+                          "(telescope:name)": "address",
+                          "(telescope:orig)": "address",
                         },
                         "parsedType": Object {
                           "name": "string",
@@ -667,6 +763,11 @@ chain (where the final transaction is broadcasted) should be used.",
                         "id": 3,
                         "import": "cosmos/tx/signing/v1beta1/signing.proto",
                         "importedName": "cosmos.tx.signing.v1beta1.SignMode",
+                        "options": Object {
+                          "(telescope:camel)": "mode",
+                          "(telescope:name)": "mode",
+                          "(telescope:orig)": "mode",
+                        },
                         "parsedType": Object {
                           "name": "SignMode",
                           "type": "Enum",
@@ -681,6 +782,11 @@ chain (where the final transaction is broadcasted) should be used.",
                         "comment": "sig is the signature of the sign doc.",
                         "id": 4,
                         "isScalar": true,
+                        "options": Object {
+                          "(telescope:camel)": "sig",
+                          "(telescope:name)": "sig",
+                          "(telescope:orig)": "sig",
+                        },
                         "parsedType": Object {
                           "name": "bytes",
                           "type": "native",
@@ -693,6 +799,11 @@ chain (where the final transaction is broadcasted) should be used.",
 signs. Note: we use the same sign doc even if we're signing with
 LEGACY_AMINO_JSON.",
                         "id": 2,
+                        "options": Object {
+                          "(telescope:camel)": "signDoc",
+                          "(telescope:name)": "signDoc",
+                          "(telescope:orig)": "sign_doc",
+                        },
                         "parsedType": Object {
                           "name": "SignDocDirectAux",
                           "type": "Type",
@@ -723,6 +834,9 @@ which must be above some miminum to be accepted into the mempool.",
                         "options": Object {
                           "(gogoproto.castrepeated)": "github.com/cosmos/cosmos-sdk/types.Coins",
                           "(gogoproto.nullable)": false,
+                          "(telescope:camel)": "amount",
+                          "(telescope:name)": "amount",
+                          "(telescope:orig)": "amount",
                         },
                         "parsedType": Object {
                           "name": "Coin",
@@ -740,6 +854,11 @@ which must be above some miminum to be accepted into the mempool.",
 before an out of gas error occurs",
                         "id": 2,
                         "isScalar": true,
+                        "options": Object {
+                          "(telescope:camel)": "gasLimit",
+                          "(telescope:name)": "gasLimit",
+                          "(telescope:orig)": "gas_limit",
+                        },
                         "parsedType": Object {
                           "name": "uint64",
                           "type": "native",
@@ -755,6 +874,9 @@ not support fee grants, this will fail",
                         "isScalar": true,
                         "options": Object {
                           "(cosmos_proto.scalar)": "cosmos.AddressString",
+                          "(telescope:camel)": "granter",
+                          "(telescope:name)": "granter",
+                          "(telescope:orig)": "granter",
                         },
                         "parsedType": Object {
                           "name": "string",
@@ -771,6 +893,9 @@ setting this field does *not* change the ordering of required signers for the tr
                         "isScalar": true,
                         "options": Object {
                           "(cosmos_proto.scalar)": "cosmos.AddressString",
+                          "(telescope:camel)": "payer",
+                          "(telescope:name)": "payer",
+                          "(telescope:orig)": "payer",
                         },
                         "parsedType": Object {
                           "name": "string",
@@ -793,6 +918,11 @@ setting this field does *not* change the ordering of required signers for the tr
                       "multi": Object {
                         "comment": "multi represents a nested multisig signer",
                         "id": 2,
+                        "options": Object {
+                          "(telescope:camel)": "multi",
+                          "(telescope:name)": "multi",
+                          "(telescope:orig)": "multi",
+                        },
                         "parsedType": Object {
                           "name": "Multi",
                           "type": "Type",
@@ -806,6 +936,11 @@ setting this field does *not* change the ordering of required signers for the tr
                       "single": Object {
                         "comment": "single represents a single signer",
                         "id": 1,
+                        "options": Object {
+                          "(telescope:camel)": "single",
+                          "(telescope:name)": "single",
+                          "(telescope:orig)": "single",
+                        },
                         "parsedType": Object {
                           "name": "Single",
                           "type": "Type",
@@ -828,6 +963,11 @@ setting this field does *not* change the ordering of required signers for the tr
                             "id": 1,
                             "import": "cosmos/crypto/multisig/v1beta1/multisig.proto",
                             "importedName": "cosmos.crypto.multisig.v1beta1.CompactBitArray",
+                            "options": Object {
+                              "(telescope:camel)": "bitarray",
+                              "(telescope:name)": "bitarray",
+                              "(telescope:orig)": "bitarray",
+                            },
                             "parsedType": Object {
                               "name": "CompactBitArray",
                               "type": "Type",
@@ -842,6 +982,11 @@ setting this field does *not* change the ordering of required signers for the tr
                             "comment": "mode_infos is the corresponding modes of the signers of the multisig
 which could include nested multisig public keys",
                             "id": 2,
+                            "options": Object {
+                              "(telescope:camel)": "modeInfos",
+                              "(telescope:name)": "modeInfos",
+                              "(telescope:orig)": "mode_infos",
+                            },
                             "parsedType": Object {
                               "name": "ModeInfo",
                               "type": "Type",
@@ -870,6 +1015,11 @@ future",
                             "id": 1,
                             "import": "cosmos/tx/signing/v1beta1/signing.proto",
                             "importedName": "cosmos.tx.signing.v1beta1.SignMode",
+                            "options": Object {
+                              "(telescope:camel)": "mode",
+                              "(telescope:name)": "mode",
+                              "(telescope:orig)": "mode",
+                            },
                             "parsedType": Object {
                               "name": "SignMode",
                               "type": "Enum",
@@ -907,6 +1057,11 @@ future",
                         "comment": "account_number is the account number of the account in state",
                         "id": 4,
                         "isScalar": true,
+                        "options": Object {
+                          "(telescope:camel)": "accountNumber",
+                          "(telescope:name)": "accountNumber",
+                          "(telescope:orig)": "account_number",
+                        },
                         "parsedType": Object {
                           "name": "uint64",
                           "type": "native",
@@ -919,6 +1074,11 @@ future",
 representation in TxRaw.",
                         "id": 2,
                         "isScalar": true,
+                        "options": Object {
+                          "(telescope:camel)": "authInfoBytes",
+                          "(telescope:name)": "authInfoBytes",
+                          "(telescope:orig)": "auth_info_bytes",
+                        },
                         "parsedType": Object {
                           "name": "bytes",
                           "type": "native",
@@ -931,6 +1091,11 @@ representation in TxRaw.",
 representation in TxRaw.",
                         "id": 1,
                         "isScalar": true,
+                        "options": Object {
+                          "(telescope:camel)": "bodyBytes",
+                          "(telescope:name)": "bodyBytes",
+                          "(telescope:orig)": "body_bytes",
+                        },
                         "parsedType": Object {
                           "name": "bytes",
                           "type": "native",
@@ -944,6 +1109,11 @@ It prevents signed transactions from being used on another chain by an
 attacker",
                         "id": 3,
                         "isScalar": true,
+                        "options": Object {
+                          "(telescope:camel)": "chainId",
+                          "(telescope:name)": "chainId",
+                          "(telescope:orig)": "chain_id",
+                        },
                         "parsedType": Object {
                           "name": "string",
                           "type": "native",
@@ -969,6 +1139,11 @@ Since: cosmos-sdk 0.46",
                         "comment": "account_number is the account number of the account in state.",
                         "id": 4,
                         "isScalar": true,
+                        "options": Object {
+                          "(telescope:camel)": "accountNumber",
+                          "(telescope:name)": "accountNumber",
+                          "(telescope:orig)": "account_number",
+                        },
                         "parsedType": Object {
                           "name": "uint64",
                           "type": "native",
@@ -981,6 +1156,11 @@ Since: cosmos-sdk 0.46",
 representation in TxRaw.",
                         "id": 1,
                         "isScalar": true,
+                        "options": Object {
+                          "(telescope:camel)": "bodyBytes",
+                          "(telescope:name)": "bodyBytes",
+                          "(telescope:orig)": "body_bytes",
+                        },
                         "parsedType": Object {
                           "name": "bytes",
                           "type": "native",
@@ -994,6 +1174,11 @@ It prevents signed transactions from being used on another chain by an
 attacker.",
                         "id": 3,
                         "isScalar": true,
+                        "options": Object {
+                          "(telescope:camel)": "chainId",
+                          "(telescope:name)": "chainId",
+                          "(telescope:orig)": "chain_id",
+                        },
                         "parsedType": Object {
                           "name": "string",
                           "type": "native",
@@ -1006,6 +1191,11 @@ attacker.",
                         "id": 2,
                         "import": "google/protobuf/any.proto",
                         "importedName": "google.protobuf.Any",
+                        "options": Object {
+                          "(telescope:camel)": "publicKey",
+                          "(telescope:name)": "publicKey",
+                          "(telescope:orig)": "public_key",
+                        },
                         "parsedType": Object {
                           "name": "Any",
                           "type": "Type",
@@ -1020,6 +1210,11 @@ attacker.",
                         "comment": "sequence is the sequence number of the signing account.",
                         "id": 5,
                         "isScalar": true,
+                        "options": Object {
+                          "(telescope:camel)": "sequence",
+                          "(telescope:name)": "sequence",
+                          "(telescope:orig)": "sequence",
+                        },
                         "parsedType": Object {
                           "name": "uint64",
                           "type": "native",
@@ -1031,6 +1226,11 @@ attacker.",
                         "comment": "Tip is the optional tip used for meta-transactions. It should be left
 empty if the signer is not the tipper for this transaction.",
                         "id": 6,
+                        "options": Object {
+                          "(telescope:camel)": "tip",
+                          "(telescope:name)": "tip",
+                          "(telescope:orig)": "tip",
+                        },
                         "parsedType": Object {
                           "name": "Tip",
                           "type": "Type",
@@ -1056,6 +1256,11 @@ signer.",
                         "comment": "mode_info describes the signing mode of the signer and is a nested
 structure to support nested multisig pubkey's",
                         "id": 2,
+                        "options": Object {
+                          "(telescope:camel)": "modeInfo",
+                          "(telescope:name)": "modeInfo",
+                          "(telescope:orig)": "mode_info",
+                        },
                         "parsedType": Object {
                           "name": "ModeInfo",
                           "type": "Type",
@@ -1072,6 +1277,11 @@ signer address for this position and lookup the public key.",
                         "id": 1,
                         "import": "google/protobuf/any.proto",
                         "importedName": "google.protobuf.Any",
+                        "options": Object {
+                          "(telescope:camel)": "publicKey",
+                          "(telescope:name)": "publicKey",
+                          "(telescope:orig)": "public_key",
+                        },
                         "parsedType": Object {
                           "name": "Any",
                           "type": "Type",
@@ -1088,6 +1298,11 @@ number of committed transactions signed by a given address. It is used to
 prevent replay attacks.",
                         "id": 3,
                         "isScalar": true,
+                        "options": Object {
+                          "(telescope:camel)": "sequence",
+                          "(telescope:name)": "sequence",
+                          "(telescope:orig)": "sequence",
+                        },
                         "parsedType": Object {
                           "name": "uint64",
                           "type": "native",
@@ -1116,6 +1331,9 @@ Since: cosmos-sdk 0.46",
                         "options": Object {
                           "(gogoproto.castrepeated)": "github.com/cosmos/cosmos-sdk/types.Coins",
                           "(gogoproto.nullable)": false,
+                          "(telescope:camel)": "amount",
+                          "(telescope:name)": "amount",
+                          "(telescope:orig)": "amount",
                         },
                         "parsedType": Object {
                           "name": "Coin",
@@ -1134,6 +1352,9 @@ Since: cosmos-sdk 0.46",
                         "isScalar": true,
                         "options": Object {
                           "(cosmos_proto.scalar)": "cosmos.AddressString",
+                          "(telescope:camel)": "tipper",
+                          "(telescope:name)": "tipper",
+                          "(telescope:orig)": "tipper",
                         },
                         "parsedType": Object {
                           "name": "string",
@@ -1157,6 +1378,11 @@ Since: cosmos-sdk 0.46",
                         "comment": "auth_info is the authorization related content of the transaction,
 specifically signers, signer modes and fee",
                         "id": 2,
+                        "options": Object {
+                          "(telescope:camel)": "authInfo",
+                          "(telescope:name)": "authInfo",
+                          "(telescope:orig)": "auth_info",
+                        },
                         "parsedType": Object {
                           "name": "AuthInfo",
                           "type": "Type",
@@ -1169,6 +1395,11 @@ specifically signers, signer modes and fee",
                       "body": Object {
                         "comment": "body is the processable content of the transaction",
                         "id": 1,
+                        "options": Object {
+                          "(telescope:camel)": "body",
+                          "(telescope:name)": "body",
+                          "(telescope:orig)": "body",
+                        },
                         "parsedType": Object {
                           "name": "TxBody",
                           "type": "Type",
@@ -1184,6 +1415,11 @@ AuthInfo's signer_infos to allow connecting signature meta information like
 public key and signing mode by position.",
                         "id": 3,
                         "isScalar": true,
+                        "options": Object {
+                          "(telescope:camel)": "signatures",
+                          "(telescope:name)": "signatures",
+                          "(telescope:orig)": "signatures",
+                        },
                         "parsedType": Object {
                           "name": "bytes",
                           "type": "native",
@@ -1210,6 +1446,11 @@ and can't be handled, the transaction will be rejected",
                         "id": 1023,
                         "import": "google/protobuf/any.proto",
                         "importedName": "google.protobuf.Any",
+                        "options": Object {
+                          "(telescope:camel)": "extensionOptions",
+                          "(telescope:name)": "extensionOptions",
+                          "(telescope:orig)": "extension_options",
+                        },
                         "parsedType": Object {
                           "name": "Any",
                           "type": "Type",
@@ -1227,6 +1468,11 @@ WARNING: in clients, any publicly exposed text should not be called memo,
 but should be called \`note\` instead (see https://github.com/cosmos/cosmos-sdk/issues/9122).",
                         "id": 2,
                         "isScalar": true,
+                        "options": Object {
+                          "(telescope:camel)": "memo",
+                          "(telescope:name)": "memo",
+                          "(telescope:orig)": "memo",
+                        },
                         "parsedType": Object {
                           "name": "string",
                           "type": "native",
@@ -1245,6 +1491,11 @@ transaction.",
                         "id": 1,
                         "import": "google/protobuf/any.proto",
                         "importedName": "google.protobuf.Any",
+                        "options": Object {
+                          "(telescope:camel)": "messages",
+                          "(telescope:name)": "messages",
+                          "(telescope:orig)": "messages",
+                        },
                         "parsedType": Object {
                           "name": "Any",
                           "type": "Type",
@@ -1263,6 +1514,11 @@ and can't be handled, they will be ignored",
                         "id": 2047,
                         "import": "google/protobuf/any.proto",
                         "importedName": "google.protobuf.Any",
+                        "options": Object {
+                          "(telescope:camel)": "nonCriticalExtensionOptions",
+                          "(telescope:name)": "nonCriticalExtensionOptions",
+                          "(telescope:orig)": "non_critical_extension_options",
+                        },
                         "parsedType": Object {
                           "name": "Any",
                           "type": "Type",
@@ -1279,6 +1535,11 @@ and can't be handled, they will be ignored",
 be processed by the chain",
                         "id": 3,
                         "isScalar": true,
+                        "options": Object {
+                          "(telescope:camel)": "timeoutHeight",
+                          "(telescope:name)": "timeoutHeight",
+                          "(telescope:orig)": "timeout_height",
+                        },
                         "parsedType": Object {
                           "name": "uint64",
                           "type": "native",
@@ -1306,6 +1567,11 @@ as the transaction ID.",
 representation in SignDoc.",
                         "id": 2,
                         "isScalar": true,
+                        "options": Object {
+                          "(telescope:camel)": "authInfoBytes",
+                          "(telescope:name)": "authInfoBytes",
+                          "(telescope:orig)": "auth_info_bytes",
+                        },
                         "parsedType": Object {
                           "name": "bytes",
                           "type": "native",
@@ -1318,6 +1584,11 @@ representation in SignDoc.",
 representation in SignDoc.",
                         "id": 1,
                         "isScalar": true,
+                        "options": Object {
+                          "(telescope:camel)": "bodyBytes",
+                          "(telescope:name)": "bodyBytes",
+                          "(telescope:orig)": "body_bytes",
+                        },
                         "parsedType": Object {
                           "name": "bytes",
                           "type": "native",
@@ -1331,6 +1602,11 @@ AuthInfo's signer_infos to allow connecting signature meta information like
 public key and signing mode by position.",
                         "id": 3,
                         "isScalar": true,
+                        "options": Object {
+                          "(telescope:camel)": "signatures",
+                          "(telescope:name)": "signatures",
+                          "(telescope:orig)": "signatures",
+                        },
                         "parsedType": Object {
                           "name": "bytes",
                           "type": "native",
@@ -1413,6 +1689,11 @@ contract.",
                         "comment": "Contract is the address of the smart contract",
                         "id": 3,
                         "isScalar": true,
+                        "options": Object {
+                          "(telescope:camel)": "contract",
+                          "(telescope:name)": "contract",
+                          "(telescope:orig)": "contract",
+                        },
                         "parsedType": Object {
                           "name": "string",
                           "type": "native",
@@ -1424,6 +1705,11 @@ contract.",
                         "comment": "Description is a human readable text",
                         "id": 2,
                         "isScalar": true,
+                        "options": Object {
+                          "(telescope:camel)": "description",
+                          "(telescope:name)": "description",
+                          "(telescope:orig)": "description",
+                        },
                         "parsedType": Object {
                           "name": "string",
                           "type": "native",
@@ -1435,6 +1721,11 @@ contract.",
                         "comment": "Title is a short summary",
                         "id": 1,
                         "isScalar": true,
+                        "options": Object {
+                          "(telescope:camel)": "title",
+                          "(telescope:name)": "title",
+                          "(telescope:orig)": "title",
+                        },
                         "parsedType": Object {
                           "name": "string",
                           "type": "native",
@@ -1458,6 +1749,11 @@ contract.",
                         "comment": "Contract is the address of the smart contract",
                         "id": 4,
                         "isScalar": true,
+                        "options": Object {
+                          "(telescope:camel)": "contract",
+                          "(telescope:name)": "contract",
+                          "(telescope:orig)": "contract",
+                        },
                         "parsedType": Object {
                           "name": "string",
                           "type": "native",
@@ -1469,6 +1765,11 @@ contract.",
                         "comment": "Description is a human readable text",
                         "id": 2,
                         "isScalar": true,
+                        "options": Object {
+                          "(telescope:camel)": "description",
+                          "(telescope:name)": "description",
+                          "(telescope:orig)": "description",
+                        },
                         "parsedType": Object {
                           "name": "string",
                           "type": "native",
@@ -1484,6 +1785,9 @@ contract.",
                         "options": Object {
                           "(gogoproto.castrepeated)": "github.com/cosmos/cosmos-sdk/types.Coins",
                           "(gogoproto.nullable)": false,
+                          "(telescope:camel)": "funds",
+                          "(telescope:name)": "funds",
+                          "(telescope:orig)": "funds",
                         },
                         "parsedType": Object {
                           "name": "Coin",
@@ -1502,6 +1806,9 @@ contract.",
                         "isScalar": true,
                         "options": Object {
                           "(gogoproto.casttype)": "RawContractMessage",
+                          "(telescope:camel)": "msg",
+                          "(telescope:name)": "msg",
+                          "(telescope:orig)": "msg",
                         },
                         "parsedType": Object {
                           "name": "bytes",
@@ -1514,6 +1821,11 @@ contract.",
                         "comment": "RunAs is the address that is passed to the contract's environment as sender",
                         "id": 3,
                         "isScalar": true,
+                        "options": Object {
+                          "(telescope:camel)": "runAs",
+                          "(telescope:name)": "runAs",
+                          "(telescope:orig)": "run_as",
+                        },
                         "parsedType": Object {
                           "name": "string",
                           "type": "native",
@@ -1525,6 +1837,11 @@ contract.",
                         "comment": "Title is a short summary",
                         "id": 1,
                         "isScalar": true,
+                        "options": Object {
+                          "(telescope:camel)": "title",
+                          "(telescope:name)": "title",
+                          "(telescope:orig)": "title",
+                        },
                         "parsedType": Object {
                           "name": "string",
                           "type": "native",
@@ -1548,6 +1865,11 @@ contract.",
                         "comment": "Admin is an optional address that can execute migrations",
                         "id": 4,
                         "isScalar": true,
+                        "options": Object {
+                          "(telescope:camel)": "admin",
+                          "(telescope:name)": "admin",
+                          "(telescope:orig)": "admin",
+                        },
                         "parsedType": Object {
                           "name": "string",
                           "type": "native",
@@ -1561,6 +1883,9 @@ contract.",
                         "isScalar": true,
                         "options": Object {
                           "(gogoproto.customname)": "CodeID",
+                          "(telescope:camel)": "codeId",
+                          "(telescope:name)": "codeId",
+                          "(telescope:orig)": "code_id",
                         },
                         "parsedType": Object {
                           "name": "uint64",
@@ -1573,6 +1898,11 @@ contract.",
                         "comment": "Description is a human readable text",
                         "id": 2,
                         "isScalar": true,
+                        "options": Object {
+                          "(telescope:camel)": "description",
+                          "(telescope:name)": "description",
+                          "(telescope:orig)": "description",
+                        },
                         "parsedType": Object {
                           "name": "string",
                           "type": "native",
@@ -1588,6 +1918,9 @@ contract.",
                         "options": Object {
                           "(gogoproto.castrepeated)": "github.com/cosmos/cosmos-sdk/types.Coins",
                           "(gogoproto.nullable)": false,
+                          "(telescope:camel)": "funds",
+                          "(telescope:name)": "funds",
+                          "(telescope:orig)": "funds",
                         },
                         "parsedType": Object {
                           "name": "Coin",
@@ -1604,6 +1937,11 @@ contract.",
                         "comment": "Label is optional metadata to be stored with a constract instance.",
                         "id": 6,
                         "isScalar": true,
+                        "options": Object {
+                          "(telescope:camel)": "label",
+                          "(telescope:name)": "label",
+                          "(telescope:orig)": "label",
+                        },
                         "parsedType": Object {
                           "name": "string",
                           "type": "native",
@@ -1617,6 +1955,9 @@ contract.",
                         "isScalar": true,
                         "options": Object {
                           "(gogoproto.casttype)": "RawContractMessage",
+                          "(telescope:camel)": "msg",
+                          "(telescope:name)": "msg",
+                          "(telescope:orig)": "msg",
                         },
                         "parsedType": Object {
                           "name": "bytes",
@@ -1629,6 +1970,11 @@ contract.",
                         "comment": "RunAs is the address that is passed to the contract's environment as sender",
                         "id": 3,
                         "isScalar": true,
+                        "options": Object {
+                          "(telescope:camel)": "runAs",
+                          "(telescope:name)": "runAs",
+                          "(telescope:orig)": "run_as",
+                        },
                         "parsedType": Object {
                           "name": "string",
                           "type": "native",
@@ -1640,6 +1986,11 @@ contract.",
                         "comment": "Title is a short summary",
                         "id": 1,
                         "isScalar": true,
+                        "options": Object {
+                          "(telescope:camel)": "title",
+                          "(telescope:name)": "title",
+                          "(telescope:orig)": "title",
+                        },
                         "parsedType": Object {
                           "name": "string",
                           "type": "native",
@@ -1664,6 +2015,9 @@ contract.",
                         "isScalar": true,
                         "options": Object {
                           "(gogoproto.customname)": "CodeID",
+                          "(telescope:camel)": "codeId",
+                          "(telescope:name)": "codeId",
+                          "(telescope:orig)": "code_id",
                         },
                         "parsedType": Object {
                           "name": "uint64",
@@ -1676,6 +2030,11 @@ contract.",
                         "comment": "Contract is the address of the smart contract",
                         "id": 4,
                         "isScalar": true,
+                        "options": Object {
+                          "(telescope:camel)": "contract",
+                          "(telescope:name)": "contract",
+                          "(telescope:orig)": "contract",
+                        },
                         "parsedType": Object {
                           "name": "string",
                           "type": "native",
@@ -1687,6 +2046,11 @@ contract.",
                         "comment": "Description is a human readable text",
                         "id": 2,
                         "isScalar": true,
+                        "options": Object {
+                          "(telescope:camel)": "description",
+                          "(telescope:name)": "description",
+                          "(telescope:orig)": "description",
+                        },
                         "parsedType": Object {
                           "name": "string",
                           "type": "native",
@@ -1700,6 +2064,9 @@ contract.",
                         "isScalar": true,
                         "options": Object {
                           "(gogoproto.casttype)": "RawContractMessage",
+                          "(telescope:camel)": "msg",
+                          "(telescope:name)": "msg",
+                          "(telescope:orig)": "msg",
                         },
                         "parsedType": Object {
                           "name": "bytes",
@@ -1712,6 +2079,11 @@ contract.",
                         "comment": "Title is a short summary",
                         "id": 1,
                         "isScalar": true,
+                        "options": Object {
+                          "(telescope:camel)": "title",
+                          "(telescope:name)": "title",
+                          "(telescope:orig)": "title",
+                        },
                         "parsedType": Object {
                           "name": "string",
                           "type": "native",
@@ -1738,6 +2110,9 @@ wasmvm cache.",
                         "options": Object {
                           "(gogoproto.customname)": "CodeIDs",
                           "(gogoproto.moretags)": "yaml:code_ids",
+                          "(telescope:camel)": "codeIds",
+                          "(telescope:name)": "codeIds",
+                          "(telescope:orig)": "code_ids",
                         },
                         "parsedType": Object {
                           "name": "uint64",
@@ -1753,6 +2128,9 @@ wasmvm cache.",
                         "isScalar": true,
                         "options": Object {
                           "(gogoproto.moretags)": "yaml:description",
+                          "(telescope:camel)": "description",
+                          "(telescope:name)": "description",
+                          "(telescope:orig)": "description",
                         },
                         "parsedType": Object {
                           "name": "string",
@@ -1767,6 +2145,9 @@ wasmvm cache.",
                         "isScalar": true,
                         "options": Object {
                           "(gogoproto.moretags)": "yaml:title",
+                          "(telescope:camel)": "title",
+                          "(telescope:name)": "title",
+                          "(telescope:orig)": "title",
                         },
                         "parsedType": Object {
                           "name": "string",
@@ -1790,6 +2171,11 @@ wasmvm cache.",
                         "comment": "Description is a human readable text",
                         "id": 2,
                         "isScalar": true,
+                        "options": Object {
+                          "(telescope:camel)": "description",
+                          "(telescope:name)": "description",
+                          "(telescope:orig)": "description",
+                        },
                         "parsedType": Object {
                           "name": "string",
                           "type": "native",
@@ -1802,6 +2188,11 @@ wasmvm cache.",
                         "id": 7,
                         "import": "cosmwasm/wasm/v1/types.proto",
                         "importedName": "AccessConfig",
+                        "options": Object {
+                          "(telescope:camel)": "instantiatePermission",
+                          "(telescope:name)": "instantiatePermission",
+                          "(telescope:orig)": "instantiate_permission",
+                        },
                         "parsedType": Object {
                           "name": "AccessConfig",
                           "type": "Type",
@@ -1818,6 +2209,11 @@ wasmvm cache.",
                         "comment": "RunAs is the address that is passed to the contract's environment as sender",
                         "id": 3,
                         "isScalar": true,
+                        "options": Object {
+                          "(telescope:camel)": "runAs",
+                          "(telescope:name)": "runAs",
+                          "(telescope:orig)": "run_as",
+                        },
                         "parsedType": Object {
                           "name": "string",
                           "type": "native",
@@ -1829,6 +2225,11 @@ wasmvm cache.",
                         "comment": "Title is a short summary",
                         "id": 1,
                         "isScalar": true,
+                        "options": Object {
+                          "(telescope:camel)": "title",
+                          "(telescope:name)": "title",
+                          "(telescope:orig)": "title",
+                        },
                         "parsedType": Object {
                           "name": "string",
                           "type": "native",
@@ -1842,6 +2243,9 @@ wasmvm cache.",
                         "isScalar": true,
                         "options": Object {
                           "(gogoproto.customname)": "WASMByteCode",
+                          "(telescope:camel)": "wasmByteCode",
+                          "(telescope:name)": "wasmByteCode",
+                          "(telescope:orig)": "wasm_byte_code",
                         },
                         "parsedType": Object {
                           "name": "bytes",
@@ -1865,6 +2269,11 @@ wasmvm cache.",
                         "comment": "Contract is the address of the smart contract",
                         "id": 3,
                         "isScalar": true,
+                        "options": Object {
+                          "(telescope:camel)": "contract",
+                          "(telescope:name)": "contract",
+                          "(telescope:orig)": "contract",
+                        },
                         "parsedType": Object {
                           "name": "string",
                           "type": "native",
@@ -1876,6 +2285,11 @@ wasmvm cache.",
                         "comment": "Description is a human readable text",
                         "id": 2,
                         "isScalar": true,
+                        "options": Object {
+                          "(telescope:camel)": "description",
+                          "(telescope:name)": "description",
+                          "(telescope:orig)": "description",
+                        },
                         "parsedType": Object {
                           "name": "string",
                           "type": "native",
@@ -1889,6 +2303,9 @@ wasmvm cache.",
                         "isScalar": true,
                         "options": Object {
                           "(gogoproto.casttype)": "RawContractMessage",
+                          "(telescope:camel)": "msg",
+                          "(telescope:name)": "msg",
+                          "(telescope:orig)": "msg",
                         },
                         "parsedType": Object {
                           "name": "bytes",
@@ -1901,6 +2318,11 @@ wasmvm cache.",
                         "comment": "Title is a short summary",
                         "id": 1,
                         "isScalar": true,
+                        "options": Object {
+                          "(telescope:camel)": "title",
+                          "(telescope:name)": "title",
+                          "(telescope:orig)": "title",
+                        },
                         "parsedType": Object {
                           "name": "string",
                           "type": "native",
@@ -1927,6 +2349,9 @@ the wasmvm cache.",
                         "options": Object {
                           "(gogoproto.customname)": "CodeIDs",
                           "(gogoproto.moretags)": "yaml:code_ids",
+                          "(telescope:camel)": "codeIds",
+                          "(telescope:name)": "codeIds",
+                          "(telescope:orig)": "code_ids",
                         },
                         "parsedType": Object {
                           "name": "uint64",
@@ -1942,6 +2367,9 @@ the wasmvm cache.",
                         "isScalar": true,
                         "options": Object {
                           "(gogoproto.moretags)": "yaml:description",
+                          "(telescope:camel)": "description",
+                          "(telescope:name)": "description",
+                          "(telescope:orig)": "description",
                         },
                         "parsedType": Object {
                           "name": "string",
@@ -1956,6 +2384,9 @@ the wasmvm cache.",
                         "isScalar": true,
                         "options": Object {
                           "(gogoproto.moretags)": "yaml:title",
+                          "(telescope:camel)": "title",
+                          "(telescope:name)": "title",
+                          "(telescope:orig)": "title",
                         },
                         "parsedType": Object {
                           "name": "string",
@@ -1979,6 +2410,11 @@ the wasmvm cache.",
                         "comment": "Contract is the address of the smart contract",
                         "id": 4,
                         "isScalar": true,
+                        "options": Object {
+                          "(telescope:camel)": "contract",
+                          "(telescope:name)": "contract",
+                          "(telescope:orig)": "contract",
+                        },
                         "parsedType": Object {
                           "name": "string",
                           "type": "native",
@@ -1990,6 +2426,11 @@ the wasmvm cache.",
                         "comment": "Description is a human readable text",
                         "id": 2,
                         "isScalar": true,
+                        "options": Object {
+                          "(telescope:camel)": "description",
+                          "(telescope:name)": "description",
+                          "(telescope:orig)": "description",
+                        },
                         "parsedType": Object {
                           "name": "string",
                           "type": "native",
@@ -2003,6 +2444,9 @@ the wasmvm cache.",
                         "isScalar": true,
                         "options": Object {
                           "(gogoproto.moretags)": "yaml:new_admin",
+                          "(telescope:camel)": "newAdmin",
+                          "(telescope:name)": "newAdmin",
+                          "(telescope:orig)": "new_admin",
                         },
                         "parsedType": Object {
                           "name": "string",
@@ -2015,6 +2459,11 @@ the wasmvm cache.",
                         "comment": "Title is a short summary",
                         "id": 1,
                         "isScalar": true,
+                        "options": Object {
+                          "(telescope:camel)": "title",
+                          "(telescope:name)": "title",
+                          "(telescope:orig)": "title",
+                        },
                         "parsedType": Object {
                           "name": "string",
                           "type": "native",
@@ -2115,6 +2564,9 @@ Object {
                         "options": Object {
                           "(gogoproto.customname)": "CodeID",
                           "(gogoproto.jsontag)": "id",
+                          "(telescope:camel)": "codeId",
+                          "(telescope:name)": "codeId",
+                          "(telescope:orig)": "code_id",
                         },
                         "parsedType": Object {
                           "name": "uint64",
@@ -2127,6 +2579,11 @@ Object {
                         "comment": null,
                         "id": 2,
                         "isScalar": true,
+                        "options": Object {
+                          "(telescope:camel)": "creator",
+                          "(telescope:name)": "creator",
+                          "(telescope:orig)": "creator",
+                        },
                         "parsedType": Object {
                           "name": "string",
                           "type": "native",
@@ -2140,6 +2597,9 @@ Object {
                         "isScalar": true,
                         "options": Object {
                           "(gogoproto.casttype)": "github.com/tendermint/tendermint/libs/bytes.HexBytes",
+                          "(telescope:camel)": "dataHash",
+                          "(telescope:name)": "dataHash",
+                          "(telescope:orig)": "data_hash",
                         },
                         "parsedType": Object {
                           "name": "bytes",
@@ -2168,6 +2628,11 @@ Object {
                             "comment": "address is the address of the contract",
                             "id": 1,
                             "isScalar": true,
+                            "options": Object {
+                              "(telescope:camel)": "address",
+                              "(telescope:name)": "address",
+                              "(telescope:orig)": "address",
+                            },
                             "parsedType": Object {
                               "name": "string",
                               "type": "native",
@@ -2180,6 +2645,11 @@ Object {
                             "id": 2,
                             "import": "cosmos/base/query/v1beta1/pagination.proto",
                             "importedName": "cosmos.base.query.v1beta1.PageRequest",
+                            "options": Object {
+                              "(telescope:camel)": "pagination",
+                              "(telescope:name)": "pagination",
+                              "(telescope:orig)": "pagination",
+                            },
                             "parsedType": Object {
                               "name": "PageRequest",
                               "type": "Type",
@@ -2215,6 +2685,11 @@ Object {
                             "comment": "grpc-gateway_out does not support Go style CodID",
                             "id": 1,
                             "isScalar": true,
+                            "options": Object {
+                              "(telescope:camel)": "codeId",
+                              "(telescope:name)": "codeId",
+                              "(telescope:orig)": "code_id",
+                            },
                             "parsedType": Object {
                               "name": "uint64",
                               "type": "native",
@@ -2248,6 +2723,11 @@ Object {
                             "id": 1,
                             "import": "cosmos/base/query/v1beta1/pagination.proto",
                             "importedName": "cosmos.base.query.v1beta1.PageRequest",
+                            "options": Object {
+                              "(telescope:camel)": "pagination",
+                              "(telescope:name)": "pagination",
+                              "(telescope:orig)": "pagination",
+                            },
                             "parsedType": Object {
                               "name": "PageRequest",
                               "type": "Type",
@@ -2281,6 +2761,11 @@ Object {
                             "comment": "address is the address of the contract to query",
                             "id": 1,
                             "isScalar": true,
+                            "options": Object {
+                              "(telescope:camel)": "address",
+                              "(telescope:name)": "address",
+                              "(telescope:orig)": "address",
+                            },
                             "parsedType": Object {
                               "name": "string",
                               "type": "native",
@@ -2293,6 +2778,11 @@ Object {
                             "id": 2,
                             "import": "cosmos/base/query/v1beta1/pagination.proto",
                             "importedName": "cosmos.base.query.v1beta1.PageRequest",
+                            "options": Object {
+                              "(telescope:camel)": "pagination",
+                              "(telescope:name)": "pagination",
+                              "(telescope:orig)": "pagination",
+                            },
                             "parsedType": Object {
                               "name": "PageRequest",
                               "type": "Type",
@@ -2328,6 +2818,11 @@ Object {
                             "comment": "address is the address of the contract to query",
                             "id": 1,
                             "isScalar": true,
+                            "options": Object {
+                              "(telescope:camel)": "address",
+                              "(telescope:name)": "address",
+                              "(telescope:orig)": "address",
+                            },
                             "parsedType": Object {
                               "name": "string",
                               "type": "native",
@@ -2359,6 +2854,11 @@ Object {
 pagination defines an optional pagination for the request.",
                             "id": 1,
                             "isScalar": true,
+                            "options": Object {
+                              "(telescope:camel)": "codeId",
+                              "(telescope:name)": "codeId",
+                              "(telescope:orig)": "code_id",
+                            },
                             "parsedType": Object {
                               "name": "uint64",
                               "type": "native",
@@ -2371,6 +2871,11 @@ pagination defines an optional pagination for the request.",
                             "id": 2,
                             "import": "cosmos/base/query/v1beta1/pagination.proto",
                             "importedName": "cosmos.base.query.v1beta1.PageRequest",
+                            "options": Object {
+                              "(telescope:camel)": "pagination",
+                              "(telescope:name)": "pagination",
+                              "(telescope:orig)": "pagination",
+                            },
                             "parsedType": Object {
                               "name": "PageRequest",
                               "type": "Type",
@@ -2408,6 +2913,11 @@ pagination defines an optional pagination for the request.",
                             "id": 2,
                             "import": "cosmos/base/query/v1beta1/pagination.proto",
                             "importedName": "cosmos.base.query.v1beta1.PageRequest",
+                            "options": Object {
+                              "(telescope:camel)": "pagination",
+                              "(telescope:name)": "pagination",
+                              "(telescope:orig)": "pagination",
+                            },
                             "parsedType": Object {
                               "name": "PageRequest",
                               "type": "Type",
@@ -2441,6 +2951,11 @@ pagination defines an optional pagination for the request.",
                             "comment": "address is the address of the contract",
                             "id": 1,
                             "isScalar": true,
+                            "options": Object {
+                              "(telescope:camel)": "address",
+                              "(telescope:name)": "address",
+                              "(telescope:orig)": "address",
+                            },
                             "parsedType": Object {
                               "name": "string",
                               "type": "native",
@@ -2452,6 +2967,11 @@ pagination defines an optional pagination for the request.",
                             "comment": null,
                             "id": 2,
                             "isScalar": true,
+                            "options": Object {
+                              "(telescope:camel)": "queryData",
+                              "(telescope:name)": "queryData",
+                              "(telescope:orig)": "query_data",
+                            },
                             "parsedType": Object {
                               "name": "bytes",
                               "type": "native",
@@ -2485,6 +3005,11 @@ pagination defines an optional pagination for the request.",
                             "comment": "address is the address of the contract",
                             "id": 1,
                             "isScalar": true,
+                            "options": Object {
+                              "(telescope:camel)": "address",
+                              "(telescope:name)": "address",
+                              "(telescope:orig)": "address",
+                            },
                             "parsedType": Object {
                               "name": "string",
                               "type": "native",
@@ -2498,6 +3023,9 @@ pagination defines an optional pagination for the request.",
                             "isScalar": true,
                             "options": Object {
                               "(gogoproto.casttype)": "RawContractMessage",
+                              "(telescope:camel)": "queryData",
+                              "(telescope:name)": "queryData",
+                              "(telescope:orig)": "query_data",
                             },
                             "parsedType": Object {
                               "name": "bytes",
@@ -2538,6 +3066,11 @@ Query/AllContractState RPC method",
                         "comment": "address is the address of the contract",
                         "id": 1,
                         "isScalar": true,
+                        "options": Object {
+                          "(telescope:camel)": "address",
+                          "(telescope:name)": "address",
+                          "(telescope:orig)": "address",
+                        },
                         "parsedType": Object {
                           "name": "string",
                           "type": "native",
@@ -2550,6 +3083,11 @@ Query/AllContractState RPC method",
                         "id": 2,
                         "import": "cosmos/base/query/v1beta1/pagination.proto",
                         "importedName": "cosmos.base.query.v1beta1.PageRequest",
+                        "options": Object {
+                          "(telescope:camel)": "pagination",
+                          "(telescope:name)": "pagination",
+                          "(telescope:orig)": "pagination",
+                        },
                         "parsedType": Object {
                           "name": "PageRequest",
                           "type": "Type",
@@ -2579,6 +3117,9 @@ Query/AllContractState RPC method",
                         "importedName": "Model",
                         "options": Object {
                           "(gogoproto.nullable)": false,
+                          "(telescope:camel)": "models",
+                          "(telescope:name)": "models",
+                          "(telescope:orig)": "models",
                         },
                         "parsedType": Object {
                           "name": "Model",
@@ -2598,6 +3139,11 @@ Query/AllContractState RPC method",
                         "id": 2,
                         "import": "cosmos/base/query/v1beta1/pagination.proto",
                         "importedName": "cosmos.base.query.v1beta1.PageResponse",
+                        "options": Object {
+                          "(telescope:camel)": "pagination",
+                          "(telescope:name)": "pagination",
+                          "(telescope:orig)": "pagination",
+                        },
                         "parsedType": Object {
                           "name": "PageResponse",
                           "type": "Type",
@@ -2623,6 +3169,11 @@ Query/AllContractState RPC method",
                         "comment": "grpc-gateway_out does not support Go style CodID",
                         "id": 1,
                         "isScalar": true,
+                        "options": Object {
+                          "(telescope:camel)": "codeId",
+                          "(telescope:name)": "codeId",
+                          "(telescope:orig)": "code_id",
+                        },
                         "parsedType": Object {
                           "name": "uint64",
                           "type": "native",
@@ -2647,6 +3198,9 @@ Query/AllContractState RPC method",
                         "options": Object {
                           "(gogoproto.embed)": true,
                           "(gogoproto.jsontag)": "",
+                          "(telescope:camel)": "codeInfo",
+                          "(telescope:name)": "codeInfo",
+                          "(telescope:orig)": "code_info",
                         },
                         "parsedType": Object {
                           "name": "CodeInfoResponse",
@@ -2663,6 +3217,9 @@ Query/AllContractState RPC method",
                         "isScalar": true,
                         "options": Object {
                           "(gogoproto.jsontag)": "data",
+                          "(telescope:camel)": "data",
+                          "(telescope:name)": "data",
+                          "(telescope:orig)": "data",
                         },
                         "parsedType": Object {
                           "name": "bytes",
@@ -2689,6 +3246,11 @@ Query/AllContractState RPC method",
                         "id": 1,
                         "import": "cosmos/base/query/v1beta1/pagination.proto",
                         "importedName": "cosmos.base.query.v1beta1.PageRequest",
+                        "options": Object {
+                          "(telescope:camel)": "pagination",
+                          "(telescope:name)": "pagination",
+                          "(telescope:orig)": "pagination",
+                        },
                         "parsedType": Object {
                           "name": "PageRequest",
                           "type": "Type",
@@ -2715,6 +3277,9 @@ Query/AllContractState RPC method",
                         "id": 1,
                         "options": Object {
                           "(gogoproto.nullable)": false,
+                          "(telescope:camel)": "codeInfos",
+                          "(telescope:name)": "codeInfos",
+                          "(telescope:orig)": "code_infos",
                         },
                         "parsedType": Object {
                           "name": "CodeInfoResponse",
@@ -2731,6 +3296,11 @@ Query/AllContractState RPC method",
                         "id": 2,
                         "import": "cosmos/base/query/v1beta1/pagination.proto",
                         "importedName": "cosmos.base.query.v1beta1.PageResponse",
+                        "options": Object {
+                          "(telescope:camel)": "pagination",
+                          "(telescope:name)": "pagination",
+                          "(telescope:orig)": "pagination",
+                        },
                         "parsedType": Object {
                           "name": "PageResponse",
                           "type": "Type",
@@ -2757,6 +3327,11 @@ RPC method",
                         "comment": "address is the address of the contract to query",
                         "id": 1,
                         "isScalar": true,
+                        "options": Object {
+                          "(telescope:camel)": "address",
+                          "(telescope:name)": "address",
+                          "(telescope:orig)": "address",
+                        },
                         "parsedType": Object {
                           "name": "string",
                           "type": "native",
@@ -2769,6 +3344,11 @@ RPC method",
                         "id": 2,
                         "import": "cosmos/base/query/v1beta1/pagination.proto",
                         "importedName": "cosmos.base.query.v1beta1.PageRequest",
+                        "options": Object {
+                          "(telescope:camel)": "pagination",
+                          "(telescope:name)": "pagination",
+                          "(telescope:orig)": "pagination",
+                        },
                         "parsedType": Object {
                           "name": "PageRequest",
                           "type": "Type",
@@ -2798,6 +3378,9 @@ Query/ContractHistory RPC method",
                         "importedName": "ContractCodeHistoryEntry",
                         "options": Object {
                           "(gogoproto.nullable)": false,
+                          "(telescope:camel)": "entries",
+                          "(telescope:name)": "entries",
+                          "(telescope:orig)": "entries",
                         },
                         "parsedType": Object {
                           "name": "ContractCodeHistoryEntry",
@@ -2817,6 +3400,11 @@ Query/ContractHistory RPC method",
                         "id": 2,
                         "import": "cosmos/base/query/v1beta1/pagination.proto",
                         "importedName": "cosmos.base.query.v1beta1.PageResponse",
+                        "options": Object {
+                          "(telescope:camel)": "pagination",
+                          "(telescope:name)": "pagination",
+                          "(telescope:orig)": "pagination",
+                        },
                         "parsedType": Object {
                           "name": "PageResponse",
                           "type": "Type",
@@ -2843,6 +3431,11 @@ method",
                         "comment": "address is the address of the contract to query",
                         "id": 1,
                         "isScalar": true,
+                        "options": Object {
+                          "(telescope:camel)": "address",
+                          "(telescope:name)": "address",
+                          "(telescope:orig)": "address",
+                        },
                         "parsedType": Object {
                           "name": "string",
                           "type": "native",
@@ -2866,6 +3459,11 @@ method",
                         "comment": "address is the address of the contract",
                         "id": 1,
                         "isScalar": true,
+                        "options": Object {
+                          "(telescope:camel)": "address",
+                          "(telescope:name)": "address",
+                          "(telescope:orig)": "address",
+                        },
                         "parsedType": Object {
                           "name": "string",
                           "type": "native",
@@ -2882,6 +3480,9 @@ method",
                           "(gogoproto.embed)": true,
                           "(gogoproto.jsontag)": "",
                           "(gogoproto.nullable)": false,
+                          "(telescope:camel)": "contractInfo",
+                          "(telescope:name)": "contractInfo",
+                          "(telescope:orig)": "contract_info",
                         },
                         "parsedType": Object {
                           "name": "ContractInfo",
@@ -2914,6 +3515,11 @@ RPC method",
 pagination defines an optional pagination for the request.",
                         "id": 1,
                         "isScalar": true,
+                        "options": Object {
+                          "(telescope:camel)": "codeId",
+                          "(telescope:name)": "codeId",
+                          "(telescope:orig)": "code_id",
+                        },
                         "parsedType": Object {
                           "name": "uint64",
                           "type": "native",
@@ -2926,6 +3532,11 @@ pagination defines an optional pagination for the request.",
                         "id": 2,
                         "import": "cosmos/base/query/v1beta1/pagination.proto",
                         "importedName": "cosmos.base.query.v1beta1.PageRequest",
+                        "options": Object {
+                          "(telescope:camel)": "pagination",
+                          "(telescope:name)": "pagination",
+                          "(telescope:orig)": "pagination",
+                        },
                         "parsedType": Object {
                           "name": "PageRequest",
                           "type": "Type",
@@ -2952,6 +3563,11 @@ Query/ContractsByCode RPC method",
                         "comment": "contracts are a set of contract addresses",
                         "id": 1,
                         "isScalar": true,
+                        "options": Object {
+                          "(telescope:camel)": "contracts",
+                          "(telescope:name)": "contracts",
+                          "(telescope:orig)": "contracts",
+                        },
                         "parsedType": Object {
                           "name": "string",
                           "type": "native",
@@ -2965,6 +3581,11 @@ Query/ContractsByCode RPC method",
                         "id": 2,
                         "import": "cosmos/base/query/v1beta1/pagination.proto",
                         "importedName": "cosmos.base.query.v1beta1.PageResponse",
+                        "options": Object {
+                          "(telescope:camel)": "pagination",
+                          "(telescope:name)": "pagination",
+                          "(telescope:orig)": "pagination",
+                        },
                         "parsedType": Object {
                           "name": "PageResponse",
                           "type": "Type",
@@ -2992,6 +3613,11 @@ RPC method",
                         "id": 2,
                         "import": "cosmos/base/query/v1beta1/pagination.proto",
                         "importedName": "cosmos.base.query.v1beta1.PageRequest",
+                        "options": Object {
+                          "(telescope:camel)": "pagination",
+                          "(telescope:name)": "pagination",
+                          "(telescope:orig)": "pagination",
+                        },
                         "parsedType": Object {
                           "name": "PageRequest",
                           "type": "Type",
@@ -3021,6 +3647,9 @@ Query/PinnedCodes RPC method",
                         "options": Object {
                           "(gogoproto.customname)": "CodeIDs",
                           "(gogoproto.nullable)": false,
+                          "(telescope:camel)": "codeIds",
+                          "(telescope:name)": "codeIds",
+                          "(telescope:orig)": "code_ids",
                         },
                         "parsedType": Object {
                           "name": "uint64",
@@ -3035,6 +3664,11 @@ Query/PinnedCodes RPC method",
                         "id": 2,
                         "import": "cosmos/base/query/v1beta1/pagination.proto",
                         "importedName": "cosmos.base.query.v1beta1.PageResponse",
+                        "options": Object {
+                          "(telescope:camel)": "pagination",
+                          "(telescope:name)": "pagination",
+                          "(telescope:orig)": "pagination",
+                        },
                         "parsedType": Object {
                           "name": "PageResponse",
                           "type": "Type",
@@ -3061,6 +3695,11 @@ Query/RawContractState RPC method",
                         "comment": "address is the address of the contract",
                         "id": 1,
                         "isScalar": true,
+                        "options": Object {
+                          "(telescope:camel)": "address",
+                          "(telescope:name)": "address",
+                          "(telescope:orig)": "address",
+                        },
                         "parsedType": Object {
                           "name": "string",
                           "type": "native",
@@ -3072,6 +3711,11 @@ Query/RawContractState RPC method",
                         "comment": null,
                         "id": 2,
                         "isScalar": true,
+                        "options": Object {
+                          "(telescope:camel)": "queryData",
+                          "(telescope:name)": "queryData",
+                          "(telescope:orig)": "query_data",
+                        },
                         "parsedType": Object {
                           "name": "bytes",
                           "type": "native",
@@ -3095,6 +3739,11 @@ Query/RawContractState RPC method",
                         "comment": "Data contains the raw store data",
                         "id": 1,
                         "isScalar": true,
+                        "options": Object {
+                          "(telescope:camel)": "data",
+                          "(telescope:name)": "data",
+                          "(telescope:orig)": "data",
+                        },
                         "parsedType": Object {
                           "name": "bytes",
                           "type": "native",
@@ -3118,6 +3767,11 @@ Query/SmartContractState RPC method",
                         "comment": "address is the address of the contract",
                         "id": 1,
                         "isScalar": true,
+                        "options": Object {
+                          "(telescope:camel)": "address",
+                          "(telescope:name)": "address",
+                          "(telescope:orig)": "address",
+                        },
                         "parsedType": Object {
                           "name": "string",
                           "type": "native",
@@ -3131,6 +3785,9 @@ Query/SmartContractState RPC method",
                         "isScalar": true,
                         "options": Object {
                           "(gogoproto.casttype)": "RawContractMessage",
+                          "(telescope:camel)": "queryData",
+                          "(telescope:name)": "queryData",
+                          "(telescope:orig)": "query_data",
                         },
                         "parsedType": Object {
                           "name": "bytes",
@@ -3157,6 +3814,9 @@ Query/SmartContractState RPC method",
                         "isScalar": true,
                         "options": Object {
                           "(gogoproto.casttype)": "RawContractMessage",
+                          "(telescope:camel)": "data",
+                          "(telescope:name)": "data",
+                          "(telescope:orig)": "data",
                         },
                         "parsedType": Object {
                           "name": "bytes",
@@ -3247,6 +3907,11 @@ may have structural differences.",
                             "id": 4,
                             "import": "google/api/expr/v1alpha1/syntax.proto",
                             "importedName": "Expr",
+                            "options": Object {
+                              "(telescope:camel)": "expr",
+                              "(telescope:name)": "expr",
+                              "(telescope:orig)": "expr",
+                            },
                             "parsedType": Object {
                               "name": "Expr",
                               "type": "Type",
@@ -3269,6 +3934,11 @@ analysis. In some cases, this will save the runtime the work of applying
 the same or similar transformations prior to evaluation.",
                             "id": 6,
                             "isScalar": true,
+                            "options": Object {
+                              "(telescope:camel)": "exprVersion",
+                              "(telescope:name)": "exprVersion",
+                              "(telescope:orig)": "expr_version",
+                            },
                             "parsedType": Object {
                               "name": "string",
                               "type": "native",
@@ -3309,6 +3979,11 @@ any optimizations made during the type-checking pass.",
                             "id": 5,
                             "import": "google/api/expr/v1alpha1/syntax.proto",
                             "importedName": "SourceInfo",
+                            "options": Object {
+                              "(telescope:camel)": "sourceInfo",
+                              "(telescope:name)": "sourceInfo",
+                              "(telescope:orig)": "source_info",
+                            },
                             "parsedType": Object {
                               "name": "SourceInfo",
                               "type": "Type",
@@ -3402,6 +4077,11 @@ evaluating that expression, and the caller requesting evaluation.",
                           "function": Object {
                             "comment": "Function declaration.",
                             "id": 3,
+                            "options": Object {
+                              "(telescope:camel)": "function",
+                              "(telescope:name)": "function",
+                              "(telescope:orig)": "function",
+                            },
                             "parsedType": Object {
                               "name": "FunctionDecl",
                               "type": "Type",
@@ -3415,6 +4095,11 @@ evaluating that expression, and the caller requesting evaluation.",
                           "ident": Object {
                             "comment": "Identifier declaration.",
                             "id": 2,
+                            "options": Object {
+                              "(telescope:camel)": "ident",
+                              "(telescope:name)": "ident",
+                              "(telescope:orig)": "ident",
+                            },
                             "parsedType": Object {
                               "name": "IdentDecl",
                               "type": "Type",
@@ -3436,6 +4121,11 @@ have a name depending on whether the overload is function declaration or a
 function definition containing a result [Expr][google.api.expr.v1alpha1.Expr].",
                             "id": 1,
                             "isScalar": true,
+                            "options": Object {
+                              "(telescope:camel)": "name",
+                              "(telescope:name)": "name",
+                              "(telescope:orig)": "name",
+                            },
                             "parsedType": Object {
                               "name": "string",
                               "type": "native",
@@ -3457,6 +4147,11 @@ logging which are not observable from CEL).",
                               "overloads": Object {
                                 "comment": "Required. List of function overloads, must contain at least one overload.",
                                 "id": 1,
+                                "options": Object {
+                                  "(telescope:camel)": "overloads",
+                                  "(telescope:name)": "overloads",
+                                  "(telescope:orig)": "overloads",
+                                },
                                 "parsedType": Object {
                                   "name": "Overload",
                                   "type": "Type",
@@ -3489,6 +4184,11 @@ parameterized type variables (similar as type erasure in Java).",
                                     "comment": "Documentation string for the overload.",
                                     "id": 6,
                                     "isScalar": true,
+                                    "options": Object {
+                                      "(telescope:camel)": "doc",
+                                      "(telescope:name)": "doc",
+                                      "(telescope:orig)": "doc",
+                                    },
                                     "parsedType": Object {
                                       "name": "string",
                                       "type": "native",
@@ -3504,6 +4204,11 @@ For methods, the first parameter declaration, \`params[0]\` is the
 expected type of the target receiver.",
                                     "id": 5,
                                     "isScalar": true,
+                                    "options": Object {
+                                      "(telescope:camel)": "isInstanceFunction",
+                                      "(telescope:name)": "isInstanceFunction",
+                                      "(telescope:orig)": "is_instance_function",
+                                    },
                                     "parsedType": Object {
                                       "name": "bool",
                                       "type": "native",
@@ -3519,6 +4224,11 @@ This will be used by a [Reference][google.api.expr.v1alpha1.Reference] to indica
 was resolved for the function \`name\`.",
                                     "id": 1,
                                     "isScalar": true,
+                                    "options": Object {
+                                      "(telescope:camel)": "overloadId",
+                                      "(telescope:name)": "overloadId",
+                                      "(telescope:orig)": "overload_id",
+                                    },
                                     "parsedType": Object {
                                       "name": "string",
                                       "type": "native",
@@ -3538,6 +4248,11 @@ function types \`int<A>\` and \`int<int>\` are not disjoint. Likewise,
 When the \`result_type\` of a function is a generic type param, the
 type param name also appears as the \`type\` of on at least one params.",
                                     "id": 2,
+                                    "options": Object {
+                                      "(telescope:camel)": "params",
+                                      "(telescope:name)": "params",
+                                      "(telescope:orig)": "params",
+                                    },
                                     "parsedType": Object {
                                       "name": "Type",
                                       "type": "Type",
@@ -3552,6 +4267,11 @@ type param name also appears as the \`type\` of on at least one params.",
                                     "comment": "Required. The result type of the function. For example, the operator
 \`string.isEmpty()\` would have \`result_type\` of \`kind: BOOL\`.",
                                     "id": 4,
+                                    "options": Object {
+                                      "(telescope:camel)": "resultType",
+                                      "(telescope:name)": "resultType",
+                                      "(telescope:orig)": "result_type",
+                                    },
                                     "parsedType": Object {
                                       "name": "Type",
                                       "type": "Type",
@@ -3568,6 +4288,11 @@ For example, \`function ex<K,V>(K key, map<K, V> map) : V\` would yield
 the type params of \`K, V\`.",
                                     "id": 3,
                                     "isScalar": true,
+                                    "options": Object {
+                                      "(telescope:camel)": "typeParams",
+                                      "(telescope:name)": "typeParams",
+                                      "(telescope:orig)": "type_params",
+                                    },
                                     "parsedType": Object {
                                       "name": "string",
                                       "type": "native",
@@ -3601,6 +4326,11 @@ time.",
                                 "comment": "Documentation string for the identifier.",
                                 "id": 3,
                                 "isScalar": true,
+                                "options": Object {
+                                  "(telescope:camel)": "doc",
+                                  "(telescope:name)": "doc",
+                                  "(telescope:orig)": "doc",
+                                },
                                 "parsedType": Object {
                                   "name": "string",
                                   "type": "native",
@@ -3611,6 +4341,11 @@ time.",
                               "type": Object {
                                 "comment": "Required. The type of the identifier.",
                                 "id": 1,
+                                "options": Object {
+                                  "(telescope:camel)": "type",
+                                  "(telescope:name)": "type",
+                                  "(telescope:orig)": "type",
+                                },
                                 "parsedType": Object {
                                   "name": "Type",
                                   "type": "Type",
@@ -3626,6 +4361,11 @@ must be supplied at evaluation time.",
                                 "id": 2,
                                 "import": "google/api/expr/v1alpha1/syntax.proto",
                                 "importedName": "Constant",
+                                "options": Object {
+                                  "(telescope:camel)": "value",
+                                  "(telescope:name)": "value",
+                                  "(telescope:orig)": "value",
+                                },
                                 "parsedType": Object {
                                   "name": "Constant",
                                   "type": "Type",
@@ -3665,6 +4405,11 @@ must be supplied at evaluation time.",
                             "comment": "The fully qualified name of the declaration.",
                             "id": 1,
                             "isScalar": true,
+                            "options": Object {
+                              "(telescope:camel)": "name",
+                              "(telescope:name)": "name",
+                              "(telescope:orig)": "name",
+                            },
                             "parsedType": Object {
                               "name": "string",
                               "type": "native",
@@ -3683,6 +4428,11 @@ type checker attempts to narrow down this list as much as possible.
 Empty if this is not a reference to a [Decl.FunctionDecl][google.api.expr.v1alpha1.Decl.FunctionDecl].",
                             "id": 3,
                             "isScalar": true,
+                            "options": Object {
+                              "(telescope:camel)": "overloadId",
+                              "(telescope:name)": "overloadId",
+                              "(telescope:orig)": "overload_id",
+                            },
                             "parsedType": Object {
                               "name": "string",
                               "type": "native",
@@ -3697,6 +4447,11 @@ constant if known at compile time.",
                             "id": 4,
                             "import": "google/api/expr/v1alpha1/syntax.proto",
                             "importedName": "Constant",
+                            "options": Object {
+                              "(telescope:camel)": "value",
+                              "(telescope:name)": "value",
+                              "(telescope:orig)": "value",
+                            },
                             "parsedType": Object {
                               "name": "Constant",
                               "type": "Type",
@@ -3723,6 +4478,11 @@ constant if known at compile time.",
                           "abstractType": Object {
                             "comment": "Abstract, application defined type.",
                             "id": 14,
+                            "options": Object {
+                              "(telescope:camel)": "abstractType",
+                              "(telescope:name)": "abstractType",
+                              "(telescope:orig)": "abstract_type",
+                            },
                             "parsedType": Object {
                               "name": "AbstractType",
                               "type": "Type",
@@ -3738,6 +4498,11 @@ constant if known at compile time.",
                             "id": 1,
                             "import": "google/protobuf/empty.proto",
                             "importedName": "google.protobuf.Empty",
+                            "options": Object {
+                              "(telescope:camel)": "dyn",
+                              "(telescope:name)": "dyn",
+                              "(telescope:orig)": "dyn",
+                            },
                             "parsedType": Object {
                               "name": "Empty",
                               "type": "Type",
@@ -3757,6 +4522,11 @@ errors present in the expression.",
                             "id": 12,
                             "import": "google/protobuf/empty.proto",
                             "importedName": "google.protobuf.Empty",
+                            "options": Object {
+                              "(telescope:camel)": "error",
+                              "(telescope:name)": "error",
+                              "(telescope:orig)": "error",
+                            },
                             "parsedType": Object {
                               "name": "Empty",
                               "type": "Type",
@@ -3770,6 +4540,11 @@ errors present in the expression.",
                           "function": Object {
                             "comment": "Function type.",
                             "id": 8,
+                            "options": Object {
+                              "(telescope:camel)": "function",
+                              "(telescope:name)": "function",
+                              "(telescope:orig)": "function",
+                            },
                             "parsedType": Object {
                               "name": "FunctionType",
                               "type": "Type",
@@ -3783,6 +4558,11 @@ errors present in the expression.",
                           "listType": Object {
                             "comment": "Parameterized list with elements of \`list_type\`, e.g. \`list<timestamp>\`.",
                             "id": 6,
+                            "options": Object {
+                              "(telescope:camel)": "listType",
+                              "(telescope:name)": "listType",
+                              "(telescope:orig)": "list_type",
+                            },
                             "parsedType": Object {
                               "name": "ListType",
                               "type": "Type",
@@ -3796,6 +4576,11 @@ errors present in the expression.",
                           "mapType": Object {
                             "comment": "Parameterized map with typed keys and values.",
                             "id": 7,
+                            "options": Object {
+                              "(telescope:camel)": "mapType",
+                              "(telescope:name)": "mapType",
+                              "(telescope:orig)": "map_type",
+                            },
                             "parsedType": Object {
                               "name": "MapType",
                               "type": "Type",
@@ -3813,6 +4598,11 @@ The \`message_type\` string specifies the qualified message type name. For
 example, \`google.plus.Profile\`.",
                             "id": 9,
                             "isScalar": true,
+                            "options": Object {
+                              "(telescope:camel)": "messageType",
+                              "(telescope:name)": "messageType",
+                              "(telescope:orig)": "message_type",
+                            },
                             "parsedType": Object {
                               "name": "string",
                               "type": "native",
@@ -3825,6 +4615,11 @@ example, \`google.plus.Profile\`.",
                             "id": 2,
                             "import": "google/protobuf/struct.proto",
                             "importedName": "google.protobuf.NullValue",
+                            "options": Object {
+                              "(telescope:camel)": "null",
+                              "(telescope:name)": "null",
+                              "(telescope:orig)": "null",
+                            },
                             "parsedType": Object {
                               "name": "NullValue",
                               "type": "Enum",
@@ -3838,6 +4633,11 @@ example, \`google.plus.Profile\`.",
                           "primitive": Object {
                             "comment": "Primitive types: \`true\`, \`1u\`, \`-2.0\`, \`'string'\`, \`b'bytes'\`.",
                             "id": 3,
+                            "options": Object {
+                              "(telescope:camel)": "primitive",
+                              "(telescope:name)": "primitive",
+                              "(telescope:orig)": "primitive",
+                            },
                             "parsedType": Object {
                               "name": "PrimitiveType",
                               "type": "Enum",
@@ -3854,6 +4654,11 @@ example, \`google.plus.Profile\`.",
 The \`type\` value specifies the target type. e.g. int is type with a
 target type of \`Primitive.INT\`.",
                             "id": 11,
+                            "options": Object {
+                              "(telescope:camel)": "type",
+                              "(telescope:name)": "type",
+                              "(telescope:orig)": "type",
+                            },
                             "parsedType": Object {
                               "name": "Type",
                               "type": "Type",
@@ -3871,6 +4676,11 @@ would be a \`list_type\` whose element type was a \`type_param\` type
 named \`E\`.",
                             "id": 10,
                             "isScalar": true,
+                            "options": Object {
+                              "(telescope:camel)": "typeParam",
+                              "(telescope:name)": "typeParam",
+                              "(telescope:orig)": "type_param",
+                            },
                             "parsedType": Object {
                               "name": "string",
                               "type": "native",
@@ -3881,6 +4691,11 @@ named \`E\`.",
                           "wellKnown": Object {
                             "comment": "Well-known protobuf type such as \`google.protobuf.Timestamp\`.",
                             "id": 5,
+                            "options": Object {
+                              "(telescope:camel)": "wellKnown",
+                              "(telescope:name)": "wellKnown",
+                              "(telescope:orig)": "well_known",
+                            },
                             "parsedType": Object {
                               "name": "WellKnownType",
                               "type": "Enum",
@@ -3894,6 +4709,11 @@ named \`E\`.",
                           "wrapper": Object {
                             "comment": "Wrapper of a primitive type, e.g. \`google.protobuf.Int64Value\`.",
                             "id": 4,
+                            "options": Object {
+                              "(telescope:camel)": "wrapper",
+                              "(telescope:name)": "wrapper",
+                              "(telescope:orig)": "wrapper",
+                            },
                             "parsedType": Object {
                               "name": "PrimitiveType",
                               "type": "Enum",
@@ -3915,6 +4735,11 @@ named \`E\`.",
                                 "comment": "The fully qualified name of this abstract type.",
                                 "id": 1,
                                 "isScalar": true,
+                                "options": Object {
+                                  "(telescope:camel)": "name",
+                                  "(telescope:name)": "name",
+                                  "(telescope:orig)": "name",
+                                },
                                 "parsedType": Object {
                                   "name": "string",
                                   "type": "native",
@@ -3925,6 +4750,11 @@ named \`E\`.",
                               "parameterTypes": Object {
                                 "comment": "Parameter types for this abstract type.",
                                 "id": 2,
+                                "options": Object {
+                                  "(telescope:camel)": "parameterTypes",
+                                  "(telescope:name)": "parameterTypes",
+                                  "(telescope:orig)": "parameter_types",
+                                },
                                 "parsedType": Object {
                                   "name": "Type",
                                   "type": "Type",
@@ -3949,6 +4779,11 @@ named \`E\`.",
                               "argTypes": Object {
                                 "comment": "Argument types of the function.",
                                 "id": 2,
+                                "options": Object {
+                                  "(telescope:camel)": "argTypes",
+                                  "(telescope:name)": "argTypes",
+                                  "(telescope:orig)": "arg_types",
+                                },
                                 "parsedType": Object {
                                   "name": "Type",
                                   "type": "Type",
@@ -3962,6 +4797,11 @@ named \`E\`.",
                               "resultType": Object {
                                 "comment": "Result type of the function.",
                                 "id": 1,
+                                "options": Object {
+                                  "(telescope:camel)": "resultType",
+                                  "(telescope:name)": "resultType",
+                                  "(telescope:orig)": "result_type",
+                                },
                                 "parsedType": Object {
                                   "name": "Type",
                                   "type": "Type",
@@ -3985,6 +4825,11 @@ named \`E\`.",
                               "elemType": Object {
                                 "comment": "The element type.",
                                 "id": 1,
+                                "options": Object {
+                                  "(telescope:camel)": "elemType",
+                                  "(telescope:name)": "elemType",
+                                  "(telescope:orig)": "elem_type",
+                                },
                                 "parsedType": Object {
                                   "name": "Type",
                                   "type": "Type",
@@ -4008,6 +4853,11 @@ named \`E\`.",
                               "keyType": Object {
                                 "comment": "The type of the key.",
                                 "id": 1,
+                                "options": Object {
+                                  "(telescope:camel)": "keyType",
+                                  "(telescope:name)": "keyType",
+                                  "(telescope:orig)": "key_type",
+                                },
                                 "parsedType": Object {
                                   "name": "Type",
                                   "type": "Type",
@@ -4020,6 +4870,11 @@ named \`E\`.",
                               "valueType": Object {
                                 "comment": "The type of the value.",
                                 "id": 2,
+                                "options": Object {
+                                  "(telescope:camel)": "valueType",
+                                  "(telescope:name)": "valueType",
+                                  "(telescope:orig)": "value_type",
+                                },
                                 "parsedType": Object {
                                   "name": "Type",
                                   "type": "Type",
@@ -4175,6 +5030,9 @@ Object {
                           "(gogoproto.moretags)": "yaml:airdrop_start_time",
                           "(gogoproto.nullable)": false,
                           "(gogoproto.stdtime)": true,
+                          "(telescope:camel)": "airdropStartTime",
+                          "(telescope:name)": "airdropStartTime",
+                          "(telescope:orig)": "airdrop_start_time",
                         },
                         "parsedType": Object {
                           "name": "Timestamp",
@@ -4190,6 +5048,11 @@ Object {
                         "comment": "denom of claimable asset",
                         "id": 4,
                         "isScalar": true,
+                        "options": Object {
+                          "(telescope:camel)": "claimDenom",
+                          "(telescope:name)": "claimDenom",
+                          "(telescope:orig)": "claim_denom",
+                        },
                         "parsedType": Object {
                           "name": "string",
                           "type": "native",
@@ -4207,6 +5070,9 @@ Object {
                           "(gogoproto.moretags)": "yaml:duration_of_decay",
                           "(gogoproto.nullable)": false,
                           "(gogoproto.stdduration)": true,
+                          "(telescope:camel)": "durationOfDecay",
+                          "(telescope:name)": "durationOfDecay",
+                          "(telescope:orig)": "duration_of_decay",
                         },
                         "parsedType": Object {
                           "name": "Duration",
@@ -4228,6 +5094,9 @@ Object {
                           "(gogoproto.moretags)": "yaml:duration_until_decay",
                           "(gogoproto.nullable)": false,
                           "(gogoproto.stdduration)": true,
+                          "(telescope:camel)": "durationUntilDecay",
+                          "(telescope:name)": "durationUntilDecay",
+                          "(telescope:orig)": "duration_until_decay",
                         },
                         "parsedType": Object {
                           "name": "Duration",
@@ -4319,6 +5188,9 @@ Object {
                             "isScalar": true,
                             "options": Object {
                               "(gogoproto.moretags)": "yaml:pool_id",
+                              "(telescope:camel)": "poolId",
+                              "(telescope:name)": "poolId",
+                              "(telescope:orig)": "poolId",
                             },
                             "parsedType": Object {
                               "name": "uint64",
@@ -4333,6 +5205,9 @@ Object {
                             "isScalar": true,
                             "options": Object {
                               "(gogoproto.moretags)": "yaml:sender",
+                              "(telescope:camel)": "sender",
+                              "(telescope:name)": "sender",
+                              "(telescope:orig)": "sender",
                             },
                             "parsedType": Object {
                               "name": "string",
@@ -4349,6 +5224,9 @@ Object {
                               "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Int",
                               "(gogoproto.moretags)": "yaml:share_in_amount",
                               "(gogoproto.nullable)": false,
+                              "(telescope:camel)": "shareInAmount",
+                              "(telescope:name)": "shareInAmount",
+                              "(telescope:orig)": "shareInAmount",
                             },
                             "parsedType": Object {
                               "name": "string",
@@ -4365,6 +5243,9 @@ Object {
                             "options": Object {
                               "(gogoproto.moretags)": "yaml:token_out_min_amounts",
                               "(gogoproto.nullable)": false,
+                              "(telescope:camel)": "tokenOutMins",
+                              "(telescope:name)": "tokenOutMins",
+                              "(telescope:orig)": "tokenOutMins",
                             },
                             "parsedType": Object {
                               "name": "Coin",
@@ -4394,6 +5275,9 @@ Object {
                             "isScalar": true,
                             "options": Object {
                               "(gogoproto.moretags)": "yaml:pool_id",
+                              "(telescope:camel)": "poolId",
+                              "(telescope:name)": "poolId",
+                              "(telescope:orig)": "poolId",
                             },
                             "parsedType": Object {
                               "name": "uint64",
@@ -4408,6 +5292,9 @@ Object {
                             "isScalar": true,
                             "options": Object {
                               "(gogoproto.moretags)": "yaml:sender",
+                              "(telescope:camel)": "sender",
+                              "(telescope:name)": "sender",
+                              "(telescope:orig)": "sender",
                             },
                             "parsedType": Object {
                               "name": "string",
@@ -4424,6 +5311,9 @@ Object {
                               "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Int",
                               "(gogoproto.moretags)": "yaml:share_in_max_amount",
                               "(gogoproto.nullable)": false,
+                              "(telescope:camel)": "shareInMaxAmount",
+                              "(telescope:name)": "shareInMaxAmount",
+                              "(telescope:orig)": "shareInMaxAmount",
                             },
                             "parsedType": Object {
                               "name": "string",
@@ -4440,6 +5330,9 @@ Object {
                             "options": Object {
                               "(gogoproto.moretags)": "yaml:token_out",
                               "(gogoproto.nullable)": false,
+                              "(telescope:camel)": "tokenOut",
+                              "(telescope:name)": "tokenOut",
+                              "(telescope:orig)": "tokenOut",
                             },
                             "parsedType": Object {
                               "name": "Coin",
@@ -4468,6 +5361,9 @@ Object {
                             "isScalar": true,
                             "options": Object {
                               "(gogoproto.moretags)": "yaml:pool_id",
+                              "(telescope:camel)": "poolId",
+                              "(telescope:name)": "poolId",
+                              "(telescope:orig)": "poolId",
                             },
                             "parsedType": Object {
                               "name": "uint64",
@@ -4482,6 +5378,9 @@ Object {
                             "isScalar": true,
                             "options": Object {
                               "(gogoproto.moretags)": "yaml:sender",
+                              "(telescope:camel)": "sender",
+                              "(telescope:name)": "sender",
+                              "(telescope:orig)": "sender",
                             },
                             "parsedType": Object {
                               "name": "string",
@@ -4498,6 +5397,9 @@ Object {
                               "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Int",
                               "(gogoproto.moretags)": "yaml:share_in_amount",
                               "(gogoproto.nullable)": false,
+                              "(telescope:camel)": "shareInAmount",
+                              "(telescope:name)": "shareInAmount",
+                              "(telescope:orig)": "shareInAmount",
                             },
                             "parsedType": Object {
                               "name": "string",
@@ -4512,6 +5414,9 @@ Object {
                             "isScalar": true,
                             "options": Object {
                               "(gogoproto.moretags)": "yaml:token_out_denom",
+                              "(telescope:camel)": "tokenOutDenom",
+                              "(telescope:name)": "tokenOutDenom",
+                              "(telescope:orig)": "tokenOutDenom",
                             },
                             "parsedType": Object {
                               "name": "string",
@@ -4528,6 +5433,9 @@ Object {
                               "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Int",
                               "(gogoproto.moretags)": "yaml:token_out_min_amount",
                               "(gogoproto.nullable)": false,
+                              "(telescope:camel)": "tokenOutMinAmount",
+                              "(telescope:name)": "tokenOutMinAmount",
+                              "(telescope:orig)": "tokenOutMinAmount",
                             },
                             "parsedType": Object {
                               "name": "string",
@@ -4553,6 +5461,9 @@ Object {
                             "isScalar": true,
                             "options": Object {
                               "(gogoproto.moretags)": "yaml:pool_id",
+                              "(telescope:camel)": "poolId",
+                              "(telescope:name)": "poolId",
+                              "(telescope:orig)": "poolId",
                             },
                             "parsedType": Object {
                               "name": "uint64",
@@ -4567,6 +5478,9 @@ Object {
                             "isScalar": true,
                             "options": Object {
                               "(gogoproto.moretags)": "yaml:sender",
+                              "(telescope:camel)": "sender",
+                              "(telescope:name)": "sender",
+                              "(telescope:orig)": "sender",
                             },
                             "parsedType": Object {
                               "name": "string",
@@ -4583,6 +5497,9 @@ Object {
                               "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Int",
                               "(gogoproto.moretags)": "yaml:pool_amount_out",
                               "(gogoproto.nullable)": false,
+                              "(telescope:camel)": "shareOutAmount",
+                              "(telescope:name)": "shareOutAmount",
+                              "(telescope:orig)": "shareOutAmount",
                             },
                             "parsedType": Object {
                               "name": "string",
@@ -4599,6 +5516,9 @@ Object {
                             "options": Object {
                               "(gogoproto.moretags)": "yaml:token_in_max_amounts",
                               "(gogoproto.nullable)": false,
+                              "(telescope:camel)": "tokenInMaxs",
+                              "(telescope:name)": "tokenInMaxs",
+                              "(telescope:orig)": "tokenInMaxs",
                             },
                             "parsedType": Object {
                               "name": "Coin",
@@ -4628,6 +5548,9 @@ Object {
                             "isScalar": true,
                             "options": Object {
                               "(gogoproto.moretags)": "yaml:pool_id",
+                              "(telescope:camel)": "poolId",
+                              "(telescope:name)": "poolId",
+                              "(telescope:orig)": "poolId",
                             },
                             "parsedType": Object {
                               "name": "uint64",
@@ -4642,6 +5565,9 @@ Object {
                             "isScalar": true,
                             "options": Object {
                               "(gogoproto.moretags)": "yaml:sender",
+                              "(telescope:camel)": "sender",
+                              "(telescope:name)": "sender",
+                              "(telescope:orig)": "sender",
                             },
                             "parsedType": Object {
                               "name": "string",
@@ -4659,6 +5585,9 @@ reserved \\"token_in\\";",
                               "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Int",
                               "(gogoproto.moretags)": "yaml:share_out_min_amount",
                               "(gogoproto.nullable)": false,
+                              "(telescope:camel)": "shareOutMinAmount",
+                              "(telescope:name)": "shareOutMinAmount",
+                              "(telescope:orig)": "shareOutMinAmount",
                             },
                             "parsedType": Object {
                               "name": "string",
@@ -4675,6 +5604,9 @@ reserved \\"token_in\\";",
                             "options": Object {
                               "(gogoproto.moretags)": "yaml:token_in",
                               "(gogoproto.nullable)": false,
+                              "(telescope:camel)": "tokenIn",
+                              "(telescope:name)": "tokenIn",
+                              "(telescope:orig)": "tokenIn",
                             },
                             "parsedType": Object {
                               "name": "Coin",
@@ -4703,6 +5635,9 @@ reserved \\"token_in\\";",
                             "isScalar": true,
                             "options": Object {
                               "(gogoproto.moretags)": "yaml:pool_id",
+                              "(telescope:camel)": "poolId",
+                              "(telescope:name)": "poolId",
+                              "(telescope:orig)": "poolId",
                             },
                             "parsedType": Object {
                               "name": "uint64",
@@ -4717,6 +5652,9 @@ reserved \\"token_in\\";",
                             "isScalar": true,
                             "options": Object {
                               "(gogoproto.moretags)": "yaml:sender",
+                              "(telescope:camel)": "sender",
+                              "(telescope:name)": "sender",
+                              "(telescope:orig)": "sender",
                             },
                             "parsedType": Object {
                               "name": "string",
@@ -4733,6 +5671,9 @@ reserved \\"token_in\\";",
                               "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Int",
                               "(gogoproto.moretags)": "yaml:share_out_amount",
                               "(gogoproto.nullable)": false,
+                              "(telescope:camel)": "shareOutAmount",
+                              "(telescope:name)": "shareOutAmount",
+                              "(telescope:orig)": "shareOutAmount",
                             },
                             "parsedType": Object {
                               "name": "string",
@@ -4747,6 +5688,9 @@ reserved \\"token_in\\";",
                             "isScalar": true,
                             "options": Object {
                               "(gogoproto.moretags)": "yaml:token_in_denom",
+                              "(telescope:camel)": "tokenInDenom",
+                              "(telescope:name)": "tokenInDenom",
+                              "(telescope:orig)": "tokenInDenom",
                             },
                             "parsedType": Object {
                               "name": "string",
@@ -4763,6 +5707,9 @@ reserved \\"token_in\\";",
                               "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Int",
                               "(gogoproto.moretags)": "yaml:token_in_max_amount",
                               "(gogoproto.nullable)": false,
+                              "(telescope:camel)": "tokenInMaxAmount",
+                              "(telescope:name)": "tokenInMaxAmount",
+                              "(telescope:orig)": "tokenInMaxAmount",
                             },
                             "parsedType": Object {
                               "name": "string",
@@ -4787,6 +5734,9 @@ reserved \\"token_in\\";",
                             "id": 2,
                             "options": Object {
                               "(gogoproto.nullable)": false,
+                              "(telescope:camel)": "routes",
+                              "(telescope:name)": "routes",
+                              "(telescope:orig)": "routes",
                             },
                             "parsedType": Object {
                               "name": "SwapAmountInRoute",
@@ -4804,6 +5754,9 @@ reserved \\"token_in\\";",
                             "isScalar": true,
                             "options": Object {
                               "(gogoproto.moretags)": "yaml:sender",
+                              "(telescope:camel)": "sender",
+                              "(telescope:name)": "sender",
+                              "(telescope:orig)": "sender",
                             },
                             "parsedType": Object {
                               "name": "string",
@@ -4820,6 +5773,9 @@ reserved \\"token_in\\";",
                             "options": Object {
                               "(gogoproto.moretags)": "yaml:token_in",
                               "(gogoproto.nullable)": false,
+                              "(telescope:camel)": "tokenIn",
+                              "(telescope:name)": "tokenIn",
+                              "(telescope:orig)": "tokenIn",
                             },
                             "parsedType": Object {
                               "name": "Coin",
@@ -4839,6 +5795,9 @@ reserved \\"token_in\\";",
                               "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Int",
                               "(gogoproto.moretags)": "yaml:token_out_min_amount",
                               "(gogoproto.nullable)": false,
+                              "(telescope:camel)": "tokenOutMinAmount",
+                              "(telescope:name)": "tokenOutMinAmount",
+                              "(telescope:orig)": "tokenOutMinAmount",
                             },
                             "parsedType": Object {
                               "name": "string",
@@ -4863,6 +5822,9 @@ reserved \\"token_in\\";",
                             "id": 2,
                             "options": Object {
                               "(gogoproto.nullable)": false,
+                              "(telescope:camel)": "routes",
+                              "(telescope:name)": "routes",
+                              "(telescope:orig)": "routes",
                             },
                             "parsedType": Object {
                               "name": "SwapAmountOutRoute",
@@ -4880,6 +5842,9 @@ reserved \\"token_in\\";",
                             "isScalar": true,
                             "options": Object {
                               "(gogoproto.moretags)": "yaml:sender",
+                              "(telescope:camel)": "sender",
+                              "(telescope:name)": "sender",
+                              "(telescope:orig)": "sender",
                             },
                             "parsedType": Object {
                               "name": "string",
@@ -4896,6 +5861,9 @@ reserved \\"token_in\\";",
                               "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Int",
                               "(gogoproto.moretags)": "yaml:token_in_max_amount",
                               "(gogoproto.nullable)": false,
+                              "(telescope:camel)": "tokenInMaxAmount",
+                              "(telescope:name)": "tokenInMaxAmount",
+                              "(telescope:orig)": "tokenInMaxAmount",
                             },
                             "parsedType": Object {
                               "name": "string",
@@ -4912,6 +5880,9 @@ reserved \\"token_in\\";",
                             "options": Object {
                               "(gogoproto.moretags)": "yaml:token_out",
                               "(gogoproto.nullable)": false,
+                              "(telescope:camel)": "tokenOut",
+                              "(telescope:name)": "tokenOut",
+                              "(telescope:orig)": "tokenOut",
                             },
                             "parsedType": Object {
                               "name": "Coin",
@@ -4945,6 +5916,9 @@ reserved \\"token_in\\";",
                         "isScalar": true,
                         "options": Object {
                           "(gogoproto.moretags)": "yaml:pool_id",
+                          "(telescope:camel)": "poolId",
+                          "(telescope:name)": "poolId",
+                          "(telescope:orig)": "poolId",
                         },
                         "parsedType": Object {
                           "name": "uint64",
@@ -4959,6 +5933,9 @@ reserved \\"token_in\\";",
                         "isScalar": true,
                         "options": Object {
                           "(gogoproto.moretags)": "yaml:sender",
+                          "(telescope:camel)": "sender",
+                          "(telescope:name)": "sender",
+                          "(telescope:orig)": "sender",
                         },
                         "parsedType": Object {
                           "name": "string",
@@ -4975,6 +5952,9 @@ reserved \\"token_in\\";",
                           "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Int",
                           "(gogoproto.moretags)": "yaml:share_in_amount",
                           "(gogoproto.nullable)": false,
+                          "(telescope:camel)": "shareInAmount",
+                          "(telescope:name)": "shareInAmount",
+                          "(telescope:orig)": "shareInAmount",
                         },
                         "parsedType": Object {
                           "name": "string",
@@ -4991,6 +5971,9 @@ reserved \\"token_in\\";",
                         "options": Object {
                           "(gogoproto.moretags)": "yaml:token_out_min_amounts",
                           "(gogoproto.nullable)": false,
+                          "(telescope:camel)": "tokenOutMins",
+                          "(telescope:name)": "tokenOutMins",
+                          "(telescope:orig)": "tokenOutMins",
                         },
                         "parsedType": Object {
                           "name": "Coin",
@@ -5030,6 +6013,9 @@ reserved \\"token_in\\";",
                         "isScalar": true,
                         "options": Object {
                           "(gogoproto.moretags)": "yaml:pool_id",
+                          "(telescope:camel)": "poolId",
+                          "(telescope:name)": "poolId",
+                          "(telescope:orig)": "poolId",
                         },
                         "parsedType": Object {
                           "name": "uint64",
@@ -5044,6 +6030,9 @@ reserved \\"token_in\\";",
                         "isScalar": true,
                         "options": Object {
                           "(gogoproto.moretags)": "yaml:sender",
+                          "(telescope:camel)": "sender",
+                          "(telescope:name)": "sender",
+                          "(telescope:orig)": "sender",
                         },
                         "parsedType": Object {
                           "name": "string",
@@ -5060,6 +6049,9 @@ reserved \\"token_in\\";",
                           "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Int",
                           "(gogoproto.moretags)": "yaml:share_in_max_amount",
                           "(gogoproto.nullable)": false,
+                          "(telescope:camel)": "shareInMaxAmount",
+                          "(telescope:name)": "shareInMaxAmount",
+                          "(telescope:orig)": "shareInMaxAmount",
                         },
                         "parsedType": Object {
                           "name": "string",
@@ -5076,6 +6068,9 @@ reserved \\"token_in\\";",
                         "options": Object {
                           "(gogoproto.moretags)": "yaml:token_out",
                           "(gogoproto.nullable)": false,
+                          "(telescope:camel)": "tokenOut",
+                          "(telescope:name)": "tokenOut",
+                          "(telescope:orig)": "tokenOut",
                         },
                         "parsedType": Object {
                           "name": "Coin",
@@ -5106,6 +6101,9 @@ reserved \\"token_in\\";",
                           "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Int",
                           "(gogoproto.moretags)": "yaml:share_in_amount",
                           "(gogoproto.nullable)": false,
+                          "(telescope:camel)": "shareInAmount",
+                          "(telescope:name)": "shareInAmount",
+                          "(telescope:orig)": "shareInAmount",
                         },
                         "parsedType": Object {
                           "name": "string",
@@ -5131,6 +6129,9 @@ reserved \\"token_in\\";",
                         "isScalar": true,
                         "options": Object {
                           "(gogoproto.moretags)": "yaml:pool_id",
+                          "(telescope:camel)": "poolId",
+                          "(telescope:name)": "poolId",
+                          "(telescope:orig)": "poolId",
                         },
                         "parsedType": Object {
                           "name": "uint64",
@@ -5145,6 +6146,9 @@ reserved \\"token_in\\";",
                         "isScalar": true,
                         "options": Object {
                           "(gogoproto.moretags)": "yaml:sender",
+                          "(telescope:camel)": "sender",
+                          "(telescope:name)": "sender",
+                          "(telescope:orig)": "sender",
                         },
                         "parsedType": Object {
                           "name": "string",
@@ -5161,6 +6165,9 @@ reserved \\"token_in\\";",
                           "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Int",
                           "(gogoproto.moretags)": "yaml:share_in_amount",
                           "(gogoproto.nullable)": false,
+                          "(telescope:camel)": "shareInAmount",
+                          "(telescope:name)": "shareInAmount",
+                          "(telescope:orig)": "shareInAmount",
                         },
                         "parsedType": Object {
                           "name": "string",
@@ -5175,6 +6182,9 @@ reserved \\"token_in\\";",
                         "isScalar": true,
                         "options": Object {
                           "(gogoproto.moretags)": "yaml:token_out_denom",
+                          "(telescope:camel)": "tokenOutDenom",
+                          "(telescope:name)": "tokenOutDenom",
+                          "(telescope:orig)": "tokenOutDenom",
                         },
                         "parsedType": Object {
                           "name": "string",
@@ -5191,6 +6201,9 @@ reserved \\"token_in\\";",
                           "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Int",
                           "(gogoproto.moretags)": "yaml:token_out_min_amount",
                           "(gogoproto.nullable)": false,
+                          "(telescope:camel)": "tokenOutMinAmount",
+                          "(telescope:name)": "tokenOutMinAmount",
+                          "(telescope:orig)": "tokenOutMinAmount",
                         },
                         "parsedType": Object {
                           "name": "string",
@@ -5218,6 +6231,9 @@ reserved \\"token_in\\";",
                           "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Int",
                           "(gogoproto.moretags)": "yaml:token_out_amount",
                           "(gogoproto.nullable)": false,
+                          "(telescope:camel)": "tokenOutAmount",
+                          "(telescope:name)": "tokenOutAmount",
+                          "(telescope:orig)": "tokenOutAmount",
                         },
                         "parsedType": Object {
                           "name": "string",
@@ -5244,6 +6260,9 @@ This is really MsgJoinPoolNoSwap",
                         "isScalar": true,
                         "options": Object {
                           "(gogoproto.moretags)": "yaml:pool_id",
+                          "(telescope:camel)": "poolId",
+                          "(telescope:name)": "poolId",
+                          "(telescope:orig)": "poolId",
                         },
                         "parsedType": Object {
                           "name": "uint64",
@@ -5258,6 +6277,9 @@ This is really MsgJoinPoolNoSwap",
                         "isScalar": true,
                         "options": Object {
                           "(gogoproto.moretags)": "yaml:sender",
+                          "(telescope:camel)": "sender",
+                          "(telescope:name)": "sender",
+                          "(telescope:orig)": "sender",
                         },
                         "parsedType": Object {
                           "name": "string",
@@ -5274,6 +6296,9 @@ This is really MsgJoinPoolNoSwap",
                           "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Int",
                           "(gogoproto.moretags)": "yaml:pool_amount_out",
                           "(gogoproto.nullable)": false,
+                          "(telescope:camel)": "shareOutAmount",
+                          "(telescope:name)": "shareOutAmount",
+                          "(telescope:orig)": "shareOutAmount",
                         },
                         "parsedType": Object {
                           "name": "string",
@@ -5290,6 +6315,9 @@ This is really MsgJoinPoolNoSwap",
                         "options": Object {
                           "(gogoproto.moretags)": "yaml:token_in_max_amounts",
                           "(gogoproto.nullable)": false,
+                          "(telescope:camel)": "tokenInMaxs",
+                          "(telescope:name)": "tokenInMaxs",
+                          "(telescope:orig)": "tokenInMaxs",
                         },
                         "parsedType": Object {
                           "name": "Coin",
@@ -5330,6 +6358,9 @@ TODO: Rename to MsgJoinSwapExactAmountIn",
                         "isScalar": true,
                         "options": Object {
                           "(gogoproto.moretags)": "yaml:pool_id",
+                          "(telescope:camel)": "poolId",
+                          "(telescope:name)": "poolId",
+                          "(telescope:orig)": "poolId",
                         },
                         "parsedType": Object {
                           "name": "uint64",
@@ -5344,6 +6375,9 @@ TODO: Rename to MsgJoinSwapExactAmountIn",
                         "isScalar": true,
                         "options": Object {
                           "(gogoproto.moretags)": "yaml:sender",
+                          "(telescope:camel)": "sender",
+                          "(telescope:name)": "sender",
+                          "(telescope:orig)": "sender",
                         },
                         "parsedType": Object {
                           "name": "string",
@@ -5361,6 +6395,9 @@ reserved \\"token_in\\";",
                           "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Int",
                           "(gogoproto.moretags)": "yaml:share_out_min_amount",
                           "(gogoproto.nullable)": false,
+                          "(telescope:camel)": "shareOutMinAmount",
+                          "(telescope:name)": "shareOutMinAmount",
+                          "(telescope:orig)": "shareOutMinAmount",
                         },
                         "parsedType": Object {
                           "name": "string",
@@ -5377,6 +6414,9 @@ reserved \\"token_in\\";",
                         "options": Object {
                           "(gogoproto.moretags)": "yaml:token_in",
                           "(gogoproto.nullable)": false,
+                          "(telescope:camel)": "tokenIn",
+                          "(telescope:name)": "tokenIn",
+                          "(telescope:orig)": "tokenIn",
                         },
                         "parsedType": Object {
                           "name": "Coin",
@@ -5407,6 +6447,9 @@ reserved \\"token_in\\";",
                           "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Int",
                           "(gogoproto.moretags)": "yaml:share_out_amount",
                           "(gogoproto.nullable)": false,
+                          "(telescope:camel)": "shareOutAmount",
+                          "(telescope:name)": "shareOutAmount",
+                          "(telescope:orig)": "shareOutAmount",
                         },
                         "parsedType": Object {
                           "name": "string",
@@ -5432,6 +6475,9 @@ reserved \\"token_in\\";",
                         "isScalar": true,
                         "options": Object {
                           "(gogoproto.moretags)": "yaml:pool_id",
+                          "(telescope:camel)": "poolId",
+                          "(telescope:name)": "poolId",
+                          "(telescope:orig)": "poolId",
                         },
                         "parsedType": Object {
                           "name": "uint64",
@@ -5446,6 +6492,9 @@ reserved \\"token_in\\";",
                         "isScalar": true,
                         "options": Object {
                           "(gogoproto.moretags)": "yaml:sender",
+                          "(telescope:camel)": "sender",
+                          "(telescope:name)": "sender",
+                          "(telescope:orig)": "sender",
                         },
                         "parsedType": Object {
                           "name": "string",
@@ -5462,6 +6511,9 @@ reserved \\"token_in\\";",
                           "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Int",
                           "(gogoproto.moretags)": "yaml:share_out_amount",
                           "(gogoproto.nullable)": false,
+                          "(telescope:camel)": "shareOutAmount",
+                          "(telescope:name)": "shareOutAmount",
+                          "(telescope:orig)": "shareOutAmount",
                         },
                         "parsedType": Object {
                           "name": "string",
@@ -5476,6 +6528,9 @@ reserved \\"token_in\\";",
                         "isScalar": true,
                         "options": Object {
                           "(gogoproto.moretags)": "yaml:token_in_denom",
+                          "(telescope:camel)": "tokenInDenom",
+                          "(telescope:name)": "tokenInDenom",
+                          "(telescope:orig)": "tokenInDenom",
                         },
                         "parsedType": Object {
                           "name": "string",
@@ -5492,6 +6547,9 @@ reserved \\"token_in\\";",
                           "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Int",
                           "(gogoproto.moretags)": "yaml:token_in_max_amount",
                           "(gogoproto.nullable)": false,
+                          "(telescope:camel)": "tokenInMaxAmount",
+                          "(telescope:name)": "tokenInMaxAmount",
+                          "(telescope:orig)": "tokenInMaxAmount",
                         },
                         "parsedType": Object {
                           "name": "string",
@@ -5519,6 +6577,9 @@ reserved \\"token_in\\";",
                           "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Int",
                           "(gogoproto.moretags)": "yaml:token_in_amount",
                           "(gogoproto.nullable)": false,
+                          "(telescope:camel)": "tokenInAmount",
+                          "(telescope:name)": "tokenInAmount",
+                          "(telescope:orig)": "tokenInAmount",
                         },
                         "parsedType": Object {
                           "name": "string",
@@ -5543,6 +6604,9 @@ reserved \\"token_in\\";",
                         "id": 2,
                         "options": Object {
                           "(gogoproto.nullable)": false,
+                          "(telescope:camel)": "routes",
+                          "(telescope:name)": "routes",
+                          "(telescope:orig)": "routes",
                         },
                         "parsedType": Object {
                           "name": "SwapAmountInRoute",
@@ -5560,6 +6624,9 @@ reserved \\"token_in\\";",
                         "isScalar": true,
                         "options": Object {
                           "(gogoproto.moretags)": "yaml:sender",
+                          "(telescope:camel)": "sender",
+                          "(telescope:name)": "sender",
+                          "(telescope:orig)": "sender",
                         },
                         "parsedType": Object {
                           "name": "string",
@@ -5576,6 +6643,9 @@ reserved \\"token_in\\";",
                         "options": Object {
                           "(gogoproto.moretags)": "yaml:token_in",
                           "(gogoproto.nullable)": false,
+                          "(telescope:camel)": "tokenIn",
+                          "(telescope:name)": "tokenIn",
+                          "(telescope:orig)": "tokenIn",
                         },
                         "parsedType": Object {
                           "name": "Coin",
@@ -5595,6 +6665,9 @@ reserved \\"token_in\\";",
                           "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Int",
                           "(gogoproto.moretags)": "yaml:token_out_min_amount",
                           "(gogoproto.nullable)": false,
+                          "(telescope:camel)": "tokenOutMinAmount",
+                          "(telescope:name)": "tokenOutMinAmount",
+                          "(telescope:orig)": "tokenOutMinAmount",
                         },
                         "parsedType": Object {
                           "name": "string",
@@ -5622,6 +6695,9 @@ reserved \\"token_in\\";",
                           "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Int",
                           "(gogoproto.moretags)": "yaml:token_out_amount",
                           "(gogoproto.nullable)": false,
+                          "(telescope:camel)": "tokenOutAmount",
+                          "(telescope:name)": "tokenOutAmount",
+                          "(telescope:orig)": "tokenOutAmount",
                         },
                         "parsedType": Object {
                           "name": "string",
@@ -5646,6 +6722,9 @@ reserved \\"token_in\\";",
                         "id": 2,
                         "options": Object {
                           "(gogoproto.nullable)": false,
+                          "(telescope:camel)": "routes",
+                          "(telescope:name)": "routes",
+                          "(telescope:orig)": "routes",
                         },
                         "parsedType": Object {
                           "name": "SwapAmountOutRoute",
@@ -5663,6 +6742,9 @@ reserved \\"token_in\\";",
                         "isScalar": true,
                         "options": Object {
                           "(gogoproto.moretags)": "yaml:sender",
+                          "(telescope:camel)": "sender",
+                          "(telescope:name)": "sender",
+                          "(telescope:orig)": "sender",
                         },
                         "parsedType": Object {
                           "name": "string",
@@ -5679,6 +6761,9 @@ reserved \\"token_in\\";",
                           "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Int",
                           "(gogoproto.moretags)": "yaml:token_in_max_amount",
                           "(gogoproto.nullable)": false,
+                          "(telescope:camel)": "tokenInMaxAmount",
+                          "(telescope:name)": "tokenInMaxAmount",
+                          "(telescope:orig)": "tokenInMaxAmount",
                         },
                         "parsedType": Object {
                           "name": "string",
@@ -5695,6 +6780,9 @@ reserved \\"token_in\\";",
                         "options": Object {
                           "(gogoproto.moretags)": "yaml:token_out",
                           "(gogoproto.nullable)": false,
+                          "(telescope:camel)": "tokenOut",
+                          "(telescope:name)": "tokenOut",
+                          "(telescope:orig)": "tokenOut",
                         },
                         "parsedType": Object {
                           "name": "Coin",
@@ -5725,6 +6813,9 @@ reserved \\"token_in\\";",
                           "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Int",
                           "(gogoproto.moretags)": "yaml:token_in_amount",
                           "(gogoproto.nullable)": false,
+                          "(telescope:camel)": "tokenInAmount",
+                          "(telescope:name)": "tokenInAmount",
+                          "(telescope:orig)": "tokenInAmount",
                         },
                         "parsedType": Object {
                           "name": "string",
@@ -5750,6 +6841,9 @@ reserved \\"token_in\\";",
                         "isScalar": true,
                         "options": Object {
                           "(gogoproto.moretags)": "yaml:pool_id",
+                          "(telescope:camel)": "poolId",
+                          "(telescope:name)": "poolId",
+                          "(telescope:orig)": "poolId",
                         },
                         "parsedType": Object {
                           "name": "uint64",
@@ -5764,6 +6858,9 @@ reserved \\"token_in\\";",
                         "isScalar": true,
                         "options": Object {
                           "(gogoproto.moretags)": "yaml:token_out_denom",
+                          "(telescope:camel)": "tokenOutDenom",
+                          "(telescope:name)": "tokenOutDenom",
+                          "(telescope:orig)": "tokenOutDenom",
                         },
                         "parsedType": Object {
                           "name": "string",
@@ -5789,6 +6886,9 @@ reserved \\"token_in\\";",
                         "isScalar": true,
                         "options": Object {
                           "(gogoproto.moretags)": "yaml:pool_id",
+                          "(telescope:camel)": "poolId",
+                          "(telescope:name)": "poolId",
+                          "(telescope:orig)": "poolId",
                         },
                         "parsedType": Object {
                           "name": "uint64",
@@ -5803,6 +6903,9 @@ reserved \\"token_in\\";",
                         "isScalar": true,
                         "options": Object {
                           "(gogoproto.moretags)": "yaml:token_out_denom",
+                          "(telescope:camel)": "tokenInDenom",
+                          "(telescope:name)": "tokenInDenom",
+                          "(telescope:orig)": "tokenInDenom",
                         },
                         "parsedType": Object {
                           "name": "string",

@@ -17,14 +17,29 @@ supported or maintained.",
     "fields": Object {
       "id": Object {
         "id": 3,
+        "options": Object {
+          "(telescope:camel)": "id",
+          "(telescope:name)": "id",
+          "(telescope:orig)": "id",
+        },
         "type": "int64",
       },
       "position": Object {
         "id": 2,
+        "options": Object {
+          "(telescope:camel)": "position",
+          "(telescope:name)": "position",
+          "(telescope:orig)": "position",
+        },
         "type": "google.api.expr.v1alpha1.SourcePosition",
       },
       "severity": Object {
         "id": 1,
+        "options": Object {
+          "(telescope:camel)": "severity",
+          "(telescope:name)": "severity",
+          "(telescope:orig)": "severity",
+        },
         "type": "Severity",
       },
     },

@@ -6,6 +6,11 @@ Object {
     "fields": Object {
       "overloads": Object {
         "id": 1,
+        "options": Object {
+          "(telescope:camel)": "overloads",
+          "(telescope:name)": "overloads",
+          "(telescope:orig)": "overloads",
+        },
         "rule": "repeated",
         "type": "Overload",
       },
@@ -15,27 +20,57 @@ Object {
         "fields": Object {
           "doc": Object {
             "id": 6,
+            "options": Object {
+              "(telescope:camel)": "doc",
+              "(telescope:name)": "doc",
+              "(telescope:orig)": "doc",
+            },
             "type": "string",
           },
           "isInstanceFunction": Object {
             "id": 5,
+            "options": Object {
+              "(telescope:camel)": "isInstanceFunction",
+              "(telescope:name)": "isInstanceFunction",
+              "(telescope:orig)": "is_instance_function",
+            },
             "type": "bool",
           },
           "overloadId": Object {
             "id": 1,
+            "options": Object {
+              "(telescope:camel)": "overloadId",
+              "(telescope:name)": "overloadId",
+              "(telescope:orig)": "overload_id",
+            },
             "type": "string",
           },
           "params": Object {
             "id": 2,
+            "options": Object {
+              "(telescope:camel)": "params",
+              "(telescope:name)": "params",
+              "(telescope:orig)": "params",
+            },
             "rule": "repeated",
             "type": "Type",
           },
           "resultType": Object {
             "id": 4,
+            "options": Object {
+              "(telescope:camel)": "resultType",
+              "(telescope:name)": "resultType",
+              "(telescope:orig)": "result_type",
+            },
             "type": "Type",
           },
           "typeParams": Object {
             "id": 3,
+            "options": Object {
+              "(telescope:camel)": "typeParams",
+              "(telescope:name)": "typeParams",
+              "(telescope:orig)": "type_params",
+            },
             "rule": "repeated",
             "type": "string",
           },
@@ -47,14 +82,29 @@ Object {
     "fields": Object {
       "doc": Object {
         "id": 3,
+        "options": Object {
+          "(telescope:camel)": "doc",
+          "(telescope:name)": "doc",
+          "(telescope:orig)": "doc",
+        },
         "type": "string",
       },
       "type": Object {
         "id": 1,
+        "options": Object {
+          "(telescope:camel)": "type",
+          "(telescope:name)": "type",
+          "(telescope:orig)": "type",
+        },
         "type": "Type",
       },
       "value": Object {
         "id": 2,
+        "options": Object {
+          "(telescope:camel)": "value",
+          "(telescope:name)": "value",
+          "(telescope:orig)": "value",
+        },
         "type": "Constant",
       },
     },
@@ -67,14 +117,29 @@ Object {
       "fields": Object {
         "doc": Object {
           "id": 3,
+          "options": Object {
+            "(telescope:camel)": "doc",
+            "(telescope:name)": "doc",
+            "(telescope:orig)": "doc",
+          },
           "type": "string",
         },
         "type": Object {
           "id": 1,
+          "options": Object {
+            "(telescope:camel)": "type",
+            "(telescope:name)": "type",
+            "(telescope:orig)": "type",
+          },
           "type": "Type",
         },
         "value": Object {
           "id": 2,
+          "options": Object {
+            "(telescope:camel)": "value",
+            "(telescope:name)": "value",
+            "(telescope:orig)": "value",
+          },
           "type": "Constant",
         },
       },
@@ -83,6 +148,11 @@ Object {
       "fields": Object {
         "overloads": Object {
           "id": 1,
+          "options": Object {
+            "(telescope:camel)": "overloads",
+            "(telescope:name)": "overloads",
+            "(telescope:orig)": "overloads",
+          },
           "rule": "repeated",
           "type": "Overload",
         },
@@ -92,27 +162,57 @@ Object {
           "fields": Object {
             "doc": Object {
               "id": 6,
+              "options": Object {
+                "(telescope:camel)": "doc",
+                "(telescope:name)": "doc",
+                "(telescope:orig)": "doc",
+              },
               "type": "string",
             },
             "isInstanceFunction": Object {
               "id": 5,
+              "options": Object {
+                "(telescope:camel)": "isInstanceFunction",
+                "(telescope:name)": "isInstanceFunction",
+                "(telescope:orig)": "is_instance_function",
+              },
               "type": "bool",
             },
             "overloadId": Object {
               "id": 1,
+              "options": Object {
+                "(telescope:camel)": "overloadId",
+                "(telescope:name)": "overloadId",
+                "(telescope:orig)": "overload_id",
+              },
               "type": "string",
             },
             "params": Object {
               "id": 2,
+              "options": Object {
+                "(telescope:camel)": "params",
+                "(telescope:name)": "params",
+                "(telescope:orig)": "params",
+              },
               "rule": "repeated",
               "type": "Type",
             },
             "resultType": Object {
               "id": 4,
+              "options": Object {
+                "(telescope:camel)": "resultType",
+                "(telescope:name)": "resultType",
+                "(telescope:orig)": "result_type",
+              },
               "type": "Type",
             },
             "typeParams": Object {
               "id": 3,
+              "options": Object {
+                "(telescope:camel)": "typeParams",
+                "(telescope:name)": "typeParams",
+                "(telescope:orig)": "type_params",
+              },
               "rule": "repeated",
               "type": "string",
             },
@@ -130,14 +230,29 @@ evaluating that expression, and the caller requesting evaluation.",
   "fields": Object {
     "function": Object {
       "id": 3,
+      "options": Object {
+        "(telescope:camel)": "function",
+        "(telescope:name)": "function",
+        "(telescope:orig)": "function",
+      },
       "type": "FunctionDecl",
     },
     "ident": Object {
       "id": 2,
+      "options": Object {
+        "(telescope:camel)": "ident",
+        "(telescope:name)": "ident",
+        "(telescope:orig)": "ident",
+      },
       "type": "IdentDecl",
     },
     "name": Object {
       "id": 1,
+      "options": Object {
+        "(telescope:camel)": "name",
+        "(telescope:name)": "name",
+        "(telescope:orig)": "name",
+      },
       "type": "string",
     },
   },
@@ -149,6 +264,11 @@ evaluating that expression, and the caller requesting evaluation.",
       "fields": Object {
         "overloads": Object {
           "id": 1,
+          "options": Object {
+            "(telescope:camel)": "overloads",
+            "(telescope:name)": "overloads",
+            "(telescope:orig)": "overloads",
+          },
           "rule": "repeated",
           "type": "Overload",
         },
@@ -158,27 +278,57 @@ evaluating that expression, and the caller requesting evaluation.",
           "fields": Object {
             "doc": Object {
               "id": 6,
+              "options": Object {
+                "(telescope:camel)": "doc",
+                "(telescope:name)": "doc",
+                "(telescope:orig)": "doc",
+              },
               "type": "string",
             },
             "isInstanceFunction": Object {
               "id": 5,
+              "options": Object {
+                "(telescope:camel)": "isInstanceFunction",
+                "(telescope:name)": "isInstanceFunction",
+                "(telescope:orig)": "is_instance_function",
+              },
               "type": "bool",
             },
             "overloadId": Object {
               "id": 1,
+              "options": Object {
+                "(telescope:camel)": "overloadId",
+                "(telescope:name)": "overloadId",
+                "(telescope:orig)": "overload_id",
+              },
               "type": "string",
             },
             "params": Object {
               "id": 2,
+              "options": Object {
+                "(telescope:camel)": "params",
+                "(telescope:name)": "params",
+                "(telescope:orig)": "params",
+              },
               "rule": "repeated",
               "type": "Type",
             },
             "resultType": Object {
               "id": 4,
+              "options": Object {
+                "(telescope:camel)": "resultType",
+                "(telescope:name)": "resultType",
+                "(telescope:orig)": "result_type",
+              },
               "type": "Type",
             },
             "typeParams": Object {
               "id": 3,
+              "options": Object {
+                "(telescope:camel)": "typeParams",
+                "(telescope:name)": "typeParams",
+                "(telescope:orig)": "type_params",
+              },
               "rule": "repeated",
               "type": "string",
             },
@@ -190,14 +340,29 @@ evaluating that expression, and the caller requesting evaluation.",
       "fields": Object {
         "doc": Object {
           "id": 3,
+          "options": Object {
+            "(telescope:camel)": "doc",
+            "(telescope:name)": "doc",
+            "(telescope:orig)": "doc",
+          },
           "type": "string",
         },
         "type": Object {
           "id": 1,
+          "options": Object {
+            "(telescope:camel)": "type",
+            "(telescope:name)": "type",
+            "(telescope:orig)": "type",
+          },
           "type": "Type",
         },
         "value": Object {
           "id": 2,
+          "options": Object {
+            "(telescope:camel)": "value",
+            "(telescope:name)": "value",
+            "(telescope:orig)": "value",
+          },
           "type": "Constant",
         },
       },
@@ -218,10 +383,20 @@ evaluating that expression, and the caller requesting evaluation.",
         "fields": Object {
           "expr": Object {
             "id": 4,
+            "options": Object {
+              "(telescope:camel)": "expr",
+              "(telescope:name)": "expr",
+              "(telescope:orig)": "expr",
+            },
             "type": "Expr",
           },
           "exprVersion": Object {
             "id": 6,
+            "options": Object {
+              "(telescope:camel)": "exprVersion",
+              "(telescope:name)": "exprVersion",
+              "(telescope:orig)": "expr_version",
+            },
             "type": "string",
           },
           "referenceMap": Object {
@@ -231,6 +406,11 @@ evaluating that expression, and the caller requesting evaluation.",
           },
           "sourceInfo": Object {
             "id": 5,
+            "options": Object {
+              "(telescope:camel)": "sourceInfo",
+              "(telescope:name)": "sourceInfo",
+              "(telescope:orig)": "source_info",
+            },
             "type": "SourceInfo",
           },
           "typeMap": Object {
@@ -244,14 +424,29 @@ evaluating that expression, and the caller requesting evaluation.",
         "fields": Object {
           "function": Object {
             "id": 3,
+            "options": Object {
+              "(telescope:camel)": "function",
+              "(telescope:name)": "function",
+              "(telescope:orig)": "function",
+            },
             "type": "FunctionDecl",
           },
           "ident": Object {
             "id": 2,
+            "options": Object {
+              "(telescope:camel)": "ident",
+              "(telescope:name)": "ident",
+              "(telescope:orig)": "ident",
+            },
             "type": "IdentDecl",
           },
           "name": Object {
             "id": 1,
+            "options": Object {
+              "(telescope:camel)": "name",
+              "(telescope:name)": "name",
+              "(telescope:orig)": "name",
+            },
             "type": "string",
           },
         },
@@ -260,6 +455,11 @@ evaluating that expression, and the caller requesting evaluation.",
             "fields": Object {
               "overloads": Object {
                 "id": 1,
+                "options": Object {
+                  "(telescope:camel)": "overloads",
+                  "(telescope:name)": "overloads",
+                  "(telescope:orig)": "overloads",
+                },
                 "rule": "repeated",
                 "type": "Overload",
               },
@@ -269,27 +469,57 @@ evaluating that expression, and the caller requesting evaluation.",
                 "fields": Object {
                   "doc": Object {
                     "id": 6,
+                    "options": Object {
+                      "(telescope:camel)": "doc",
+                      "(telescope:name)": "doc",
+                      "(telescope:orig)": "doc",
+                    },
                     "type": "string",
                   },
                   "isInstanceFunction": Object {
                     "id": 5,
+                    "options": Object {
+                      "(telescope:camel)": "isInstanceFunction",
+                      "(telescope:name)": "isInstanceFunction",
+                      "(telescope:orig)": "is_instance_function",
+                    },
                     "type": "bool",
                   },
                   "overloadId": Object {
                     "id": 1,
+                    "options": Object {
+                      "(telescope:camel)": "overloadId",
+                      "(telescope:name)": "overloadId",
+                      "(telescope:orig)": "overload_id",
+                    },
                     "type": "string",
                   },
                   "params": Object {
                     "id": 2,
+                    "options": Object {
+                      "(telescope:camel)": "params",
+                      "(telescope:name)": "params",
+                      "(telescope:orig)": "params",
+                    },
                     "rule": "repeated",
                     "type": "Type",
                   },
                   "resultType": Object {
                     "id": 4,
+                    "options": Object {
+                      "(telescope:camel)": "resultType",
+                      "(telescope:name)": "resultType",
+                      "(telescope:orig)": "result_type",
+                    },
                     "type": "Type",
                   },
                   "typeParams": Object {
                     "id": 3,
+                    "options": Object {
+                      "(telescope:camel)": "typeParams",
+                      "(telescope:name)": "typeParams",
+                      "(telescope:orig)": "type_params",
+                    },
                     "rule": "repeated",
                     "type": "string",
                   },
@@ -301,14 +531,29 @@ evaluating that expression, and the caller requesting evaluation.",
             "fields": Object {
               "doc": Object {
                 "id": 3,
+                "options": Object {
+                  "(telescope:camel)": "doc",
+                  "(telescope:name)": "doc",
+                  "(telescope:orig)": "doc",
+                },
                 "type": "string",
               },
               "type": Object {
                 "id": 1,
+                "options": Object {
+                  "(telescope:camel)": "type",
+                  "(telescope:name)": "type",
+                  "(telescope:orig)": "type",
+                },
                 "type": "Type",
               },
               "value": Object {
                 "id": 2,
+                "options": Object {
+                  "(telescope:camel)": "value",
+                  "(telescope:name)": "value",
+                  "(telescope:orig)": "value",
+                },
                 "type": "Constant",
               },
             },
@@ -327,15 +572,30 @@ evaluating that expression, and the caller requesting evaluation.",
         "fields": Object {
           "name": Object {
             "id": 1,
+            "options": Object {
+              "(telescope:camel)": "name",
+              "(telescope:name)": "name",
+              "(telescope:orig)": "name",
+            },
             "type": "string",
           },
           "overloadId": Object {
             "id": 3,
+            "options": Object {
+              "(telescope:camel)": "overloadId",
+              "(telescope:name)": "overloadId",
+              "(telescope:orig)": "overload_id",
+            },
             "rule": "repeated",
             "type": "string",
           },
           "value": Object {
             "id": 4,
+            "options": Object {
+              "(telescope:camel)": "value",
+              "(telescope:name)": "value",
+              "(telescope:orig)": "value",
+            },
             "type": "Constant",
           },
         },
@@ -344,54 +604,119 @@ evaluating that expression, and the caller requesting evaluation.",
         "fields": Object {
           "abstractType": Object {
             "id": 14,
+            "options": Object {
+              "(telescope:camel)": "abstractType",
+              "(telescope:name)": "abstractType",
+              "(telescope:orig)": "abstract_type",
+            },
             "type": "AbstractType",
           },
           "dyn": Object {
             "id": 1,
+            "options": Object {
+              "(telescope:camel)": "dyn",
+              "(telescope:name)": "dyn",
+              "(telescope:orig)": "dyn",
+            },
             "type": "google.protobuf.Empty",
           },
           "error": Object {
             "id": 12,
+            "options": Object {
+              "(telescope:camel)": "error",
+              "(telescope:name)": "error",
+              "(telescope:orig)": "error",
+            },
             "type": "google.protobuf.Empty",
           },
           "function": Object {
             "id": 8,
+            "options": Object {
+              "(telescope:camel)": "function",
+              "(telescope:name)": "function",
+              "(telescope:orig)": "function",
+            },
             "type": "FunctionType",
           },
           "listType": Object {
             "id": 6,
+            "options": Object {
+              "(telescope:camel)": "listType",
+              "(telescope:name)": "listType",
+              "(telescope:orig)": "list_type",
+            },
             "type": "ListType",
           },
           "mapType": Object {
             "id": 7,
+            "options": Object {
+              "(telescope:camel)": "mapType",
+              "(telescope:name)": "mapType",
+              "(telescope:orig)": "map_type",
+            },
             "type": "MapType",
           },
           "messageType": Object {
             "id": 9,
+            "options": Object {
+              "(telescope:camel)": "messageType",
+              "(telescope:name)": "messageType",
+              "(telescope:orig)": "message_type",
+            },
             "type": "string",
           },
           "null": Object {
             "id": 2,
+            "options": Object {
+              "(telescope:camel)": "null",
+              "(telescope:name)": "null",
+              "(telescope:orig)": "null",
+            },
             "type": "google.protobuf.NullValue",
           },
           "primitive": Object {
             "id": 3,
+            "options": Object {
+              "(telescope:camel)": "primitive",
+              "(telescope:name)": "primitive",
+              "(telescope:orig)": "primitive",
+            },
             "type": "PrimitiveType",
           },
           "type": Object {
             "id": 11,
+            "options": Object {
+              "(telescope:camel)": "type",
+              "(telescope:name)": "type",
+              "(telescope:orig)": "type",
+            },
             "type": "Type",
           },
           "typeParam": Object {
             "id": 10,
+            "options": Object {
+              "(telescope:camel)": "typeParam",
+              "(telescope:name)": "typeParam",
+              "(telescope:orig)": "type_param",
+            },
             "type": "string",
           },
           "wellKnown": Object {
             "id": 5,
+            "options": Object {
+              "(telescope:camel)": "wellKnown",
+              "(telescope:name)": "wellKnown",
+              "(telescope:orig)": "well_known",
+            },
             "type": "WellKnownType",
           },
           "wrapper": Object {
             "id": 4,
+            "options": Object {
+              "(telescope:camel)": "wrapper",
+              "(telescope:name)": "wrapper",
+              "(telescope:orig)": "wrapper",
+            },
             "type": "PrimitiveType",
           },
         },
@@ -400,10 +725,20 @@ evaluating that expression, and the caller requesting evaluation.",
             "fields": Object {
               "name": Object {
                 "id": 1,
+                "options": Object {
+                  "(telescope:camel)": "name",
+                  "(telescope:name)": "name",
+                  "(telescope:orig)": "name",
+                },
                 "type": "string",
               },
               "parameterTypes": Object {
                 "id": 2,
+                "options": Object {
+                  "(telescope:camel)": "parameterTypes",
+                  "(telescope:name)": "parameterTypes",
+                  "(telescope:orig)": "parameter_types",
+                },
                 "rule": "repeated",
                 "type": "Type",
               },
@@ -413,11 +748,21 @@ evaluating that expression, and the caller requesting evaluation.",
             "fields": Object {
               "argTypes": Object {
                 "id": 2,
+                "options": Object {
+                  "(telescope:camel)": "argTypes",
+                  "(telescope:name)": "argTypes",
+                  "(telescope:orig)": "arg_types",
+                },
                 "rule": "repeated",
                 "type": "Type",
               },
               "resultType": Object {
                 "id": 1,
+                "options": Object {
+                  "(telescope:camel)": "resultType",
+                  "(telescope:name)": "resultType",
+                  "(telescope:orig)": "result_type",
+                },
                 "type": "Type",
               },
             },
@@ -426,6 +771,11 @@ evaluating that expression, and the caller requesting evaluation.",
             "fields": Object {
               "elemType": Object {
                 "id": 1,
+                "options": Object {
+                  "(telescope:camel)": "elemType",
+                  "(telescope:name)": "elemType",
+                  "(telescope:orig)": "elem_type",
+                },
                 "type": "Type",
               },
             },
@@ -434,10 +784,20 @@ evaluating that expression, and the caller requesting evaluation.",
             "fields": Object {
               "keyType": Object {
                 "id": 1,
+                "options": Object {
+                  "(telescope:camel)": "keyType",
+                  "(telescope:name)": "keyType",
+                  "(telescope:orig)": "key_type",
+                },
                 "type": "Type",
               },
               "valueType": Object {
                 "id": 2,
+                "options": Object {
+                  "(telescope:camel)": "valueType",
+                  "(telescope:name)": "valueType",
+                  "(telescope:orig)": "value_type",
+                },
                 "type": "Type",
               },
             },
@@ -506,14 +866,29 @@ Object {
   "_fieldsArray": Array [
     Object {
       "id": 1,
+      "options": Object {
+        "(telescope:camel)": "type",
+        "(telescope:name)": "type",
+        "(telescope:orig)": "type",
+      },
       "type": "Type",
     },
     Object {
       "id": 2,
+      "options": Object {
+        "(telescope:camel)": "value",
+        "(telescope:name)": "value",
+        "(telescope:orig)": "value",
+      },
       "type": "Constant",
     },
     Object {
       "id": 3,
+      "options": Object {
+        "(telescope:camel)": "doc",
+        "(telescope:name)": "doc",
+        "(telescope:orig)": "doc",
+      },
       "type": "string",
     },
   ],
@@ -530,14 +905,29 @@ time.",
   "fields": Object {
     "doc": Object {
       "id": 3,
+      "options": Object {
+        "(telescope:camel)": "doc",
+        "(telescope:name)": "doc",
+        "(telescope:orig)": "doc",
+      },
       "type": "string",
     },
     "type": Object {
       "id": 1,
+      "options": Object {
+        "(telescope:camel)": "type",
+        "(telescope:name)": "type",
+        "(telescope:orig)": "type",
+      },
       "type": "Type",
     },
     "value": Object {
       "id": 2,
+      "options": Object {
+        "(telescope:camel)": "value",
+        "(telescope:name)": "value",
+        "(telescope:orig)": "value",
+      },
       "type": "Constant",
     },
   },
@@ -551,14 +941,29 @@ time.",
     "fields": Object {
       "function": Object {
         "id": 3,
+        "options": Object {
+          "(telescope:camel)": "function",
+          "(telescope:name)": "function",
+          "(telescope:orig)": "function",
+        },
         "type": "FunctionDecl",
       },
       "ident": Object {
         "id": 2,
+        "options": Object {
+          "(telescope:camel)": "ident",
+          "(telescope:name)": "ident",
+          "(telescope:orig)": "ident",
+        },
         "type": "IdentDecl",
       },
       "name": Object {
         "id": 1,
+        "options": Object {
+          "(telescope:camel)": "name",
+          "(telescope:name)": "name",
+          "(telescope:orig)": "name",
+        },
         "type": "string",
       },
     },
@@ -567,6 +972,11 @@ time.",
         "fields": Object {
           "overloads": Object {
             "id": 1,
+            "options": Object {
+              "(telescope:camel)": "overloads",
+              "(telescope:name)": "overloads",
+              "(telescope:orig)": "overloads",
+            },
             "rule": "repeated",
             "type": "Overload",
           },
@@ -576,27 +986,57 @@ time.",
             "fields": Object {
               "doc": Object {
                 "id": 6,
+                "options": Object {
+                  "(telescope:camel)": "doc",
+                  "(telescope:name)": "doc",
+                  "(telescope:orig)": "doc",
+                },
                 "type": "string",
               },
               "isInstanceFunction": Object {
                 "id": 5,
+                "options": Object {
+                  "(telescope:camel)": "isInstanceFunction",
+                  "(telescope:name)": "isInstanceFunction",
+                  "(telescope:orig)": "is_instance_function",
+                },
                 "type": "bool",
               },
               "overloadId": Object {
                 "id": 1,
+                "options": Object {
+                  "(telescope:camel)": "overloadId",
+                  "(telescope:name)": "overloadId",
+                  "(telescope:orig)": "overload_id",
+                },
                 "type": "string",
               },
               "params": Object {
                 "id": 2,
+                "options": Object {
+                  "(telescope:camel)": "params",
+                  "(telescope:name)": "params",
+                  "(telescope:orig)": "params",
+                },
                 "rule": "repeated",
                 "type": "Type",
               },
               "resultType": Object {
                 "id": 4,
+                "options": Object {
+                  "(telescope:camel)": "resultType",
+                  "(telescope:name)": "resultType",
+                  "(telescope:orig)": "result_type",
+                },
                 "type": "Type",
               },
               "typeParams": Object {
                 "id": 3,
+                "options": Object {
+                  "(telescope:camel)": "typeParams",
+                  "(telescope:name)": "typeParams",
+                  "(telescope:orig)": "type_params",
+                },
                 "rule": "repeated",
                 "type": "string",
               },
@@ -608,14 +1048,29 @@ time.",
         "fields": Object {
           "doc": Object {
             "id": 3,
+            "options": Object {
+              "(telescope:camel)": "doc",
+              "(telescope:name)": "doc",
+              "(telescope:orig)": "doc",
+            },
             "type": "string",
           },
           "type": Object {
             "id": 1,
+            "options": Object {
+              "(telescope:camel)": "type",
+              "(telescope:name)": "type",
+              "(telescope:orig)": "type",
+            },
             "type": "Type",
           },
           "value": Object {
             "id": 2,
+            "options": Object {
+              "(telescope:camel)": "value",
+              "(telescope:name)": "value",
+              "(telescope:orig)": "value",
+            },
             "type": "Constant",
           },
         },
@@ -646,28 +1101,58 @@ Object {
   "_fieldsArray": Array [
     Object {
       "id": 1,
+      "options": Object {
+        "(telescope:camel)": "overloadId",
+        "(telescope:name)": "overloadId",
+        "(telescope:orig)": "overload_id",
+      },
       "type": "string",
     },
     Object {
       "id": 2,
+      "options": Object {
+        "(telescope:camel)": "params",
+        "(telescope:name)": "params",
+        "(telescope:orig)": "params",
+      },
       "rule": "repeated",
       "type": "Type",
     },
     Object {
       "id": 3,
+      "options": Object {
+        "(telescope:camel)": "typeParams",
+        "(telescope:name)": "typeParams",
+        "(telescope:orig)": "type_params",
+      },
       "rule": "repeated",
       "type": "string",
     },
     Object {
       "id": 4,
+      "options": Object {
+        "(telescope:camel)": "resultType",
+        "(telescope:name)": "resultType",
+        "(telescope:orig)": "result_type",
+      },
       "type": "Type",
     },
     Object {
       "id": 5,
+      "options": Object {
+        "(telescope:camel)": "isInstanceFunction",
+        "(telescope:name)": "isInstanceFunction",
+        "(telescope:orig)": "is_instance_function",
+      },
       "type": "bool",
     },
     Object {
       "id": 6,
+      "options": Object {
+        "(telescope:camel)": "doc",
+        "(telescope:name)": "doc",
+        "(telescope:orig)": "doc",
+      },
       "type": "string",
     },
   ],
@@ -688,27 +1173,57 @@ parameterized type variables (similar as type erasure in Java).",
   "fields": Object {
     "doc": Object {
       "id": 6,
+      "options": Object {
+        "(telescope:camel)": "doc",
+        "(telescope:name)": "doc",
+        "(telescope:orig)": "doc",
+      },
       "type": "string",
     },
     "isInstanceFunction": Object {
       "id": 5,
+      "options": Object {
+        "(telescope:camel)": "isInstanceFunction",
+        "(telescope:name)": "isInstanceFunction",
+        "(telescope:orig)": "is_instance_function",
+      },
       "type": "bool",
     },
     "overloadId": Object {
       "id": 1,
+      "options": Object {
+        "(telescope:camel)": "overloadId",
+        "(telescope:name)": "overloadId",
+        "(telescope:orig)": "overload_id",
+      },
       "type": "string",
     },
     "params": Object {
       "id": 2,
+      "options": Object {
+        "(telescope:camel)": "params",
+        "(telescope:name)": "params",
+        "(telescope:orig)": "params",
+      },
       "rule": "repeated",
       "type": "Type",
     },
     "resultType": Object {
       "id": 4,
+      "options": Object {
+        "(telescope:camel)": "resultType",
+        "(telescope:name)": "resultType",
+        "(telescope:orig)": "result_type",
+      },
       "type": "Type",
     },
     "typeParams": Object {
       "id": 3,
+      "options": Object {
+        "(telescope:camel)": "typeParams",
+        "(telescope:name)": "typeParams",
+        "(telescope:orig)": "type_params",
+      },
       "rule": "repeated",
       "type": "string",
     },
@@ -723,6 +1238,11 @@ parameterized type variables (similar as type erasure in Java).",
     "fields": Object {
       "overloads": Object {
         "id": 1,
+        "options": Object {
+          "(telescope:camel)": "overloads",
+          "(telescope:name)": "overloads",
+          "(telescope:orig)": "overloads",
+        },
         "rule": "repeated",
         "type": "Overload",
       },
@@ -732,27 +1252,57 @@ parameterized type variables (similar as type erasure in Java).",
         "fields": Object {
           "doc": Object {
             "id": 6,
+            "options": Object {
+              "(telescope:camel)": "doc",
+              "(telescope:name)": "doc",
+              "(telescope:orig)": "doc",
+            },
             "type": "string",
           },
           "isInstanceFunction": Object {
             "id": 5,
+            "options": Object {
+              "(telescope:camel)": "isInstanceFunction",
+              "(telescope:name)": "isInstanceFunction",
+              "(telescope:orig)": "is_instance_function",
+            },
             "type": "bool",
           },
           "overloadId": Object {
             "id": 1,
+            "options": Object {
+              "(telescope:camel)": "overloadId",
+              "(telescope:name)": "overloadId",
+              "(telescope:orig)": "overload_id",
+            },
             "type": "string",
           },
           "params": Object {
             "id": 2,
+            "options": Object {
+              "(telescope:camel)": "params",
+              "(telescope:name)": "params",
+              "(telescope:orig)": "params",
+            },
             "rule": "repeated",
             "type": "Type",
           },
           "resultType": Object {
             "id": 4,
+            "options": Object {
+              "(telescope:camel)": "resultType",
+              "(telescope:name)": "resultType",
+              "(telescope:orig)": "result_type",
+            },
             "type": "Type",
           },
           "typeParams": Object {
             "id": 3,
+            "options": Object {
+              "(telescope:camel)": "typeParams",
+              "(telescope:name)": "typeParams",
+              "(telescope:orig)": "type_params",
+            },
             "rule": "repeated",
             "type": "string",
           },
@@ -788,14 +1338,29 @@ supported or maintained.",
     "fields": Object {
       "id": Object {
         "id": 3,
+        "options": Object {
+          "(telescope:camel)": "id",
+          "(telescope:name)": "id",
+          "(telescope:orig)": "id",
+        },
         "type": "int64",
       },
       "position": Object {
         "id": 2,
+        "options": Object {
+          "(telescope:camel)": "position",
+          "(telescope:name)": "position",
+          "(telescope:orig)": "position",
+        },
         "type": "google.api.expr.v1alpha1.SourcePosition",
       },
       "severity": Object {
         "id": 1,
+        "options": Object {
+          "(telescope:camel)": "severity",
+          "(telescope:name)": "severity",
+          "(telescope:orig)": "severity",
+        },
         "type": "Severity",
       },
     },
@@ -838,10 +1403,20 @@ Object {
     "fields": Object {
       "bitarray": Object {
         "id": 1,
+        "options": Object {
+          "(telescope:camel)": "bitarray",
+          "(telescope:name)": "bitarray",
+          "(telescope:orig)": "bitarray",
+        },
         "type": "cosmos.crypto.multisig.v1beta1.CompactBitArray",
       },
       "signatures": Object {
         "id": 2,
+        "options": Object {
+          "(telescope:camel)": "signatures",
+          "(telescope:name)": "signatures",
+          "(telescope:orig)": "signatures",
+        },
         "rule": "repeated",
         "type": "Data",
       },
@@ -851,10 +1426,20 @@ Object {
     "fields": Object {
       "mode": Object {
         "id": 1,
+        "options": Object {
+          "(telescope:camel)": "mode",
+          "(telescope:name)": "mode",
+          "(telescope:orig)": "mode",
+        },
         "type": "SignMode",
       },
       "signature": Object {
         "id": 2,
+        "options": Object {
+          "(telescope:camel)": "signature",
+          "(telescope:name)": "signature",
+          "(telescope:orig)": "signature",
+        },
         "type": "bytes",
       },
     },
@@ -863,10 +1448,20 @@ Object {
   "_fieldsArray": Array [
     Object {
       "id": 1,
+      "options": Object {
+        "(telescope:camel)": "single",
+        "(telescope:name)": "single",
+        "(telescope:orig)": "single",
+      },
       "type": "Single",
     },
     Object {
       "id": 2,
+      "options": Object {
+        "(telescope:camel)": "multi",
+        "(telescope:name)": "multi",
+        "(telescope:orig)": "multi",
+      },
       "type": "Multi",
     },
   ],
@@ -876,10 +1471,20 @@ Object {
       "fields": Object {
         "mode": Object {
           "id": 1,
+          "options": Object {
+            "(telescope:camel)": "mode",
+            "(telescope:name)": "mode",
+            "(telescope:orig)": "mode",
+          },
           "type": "SignMode",
         },
         "signature": Object {
           "id": 2,
+          "options": Object {
+            "(telescope:camel)": "signature",
+            "(telescope:name)": "signature",
+            "(telescope:orig)": "signature",
+          },
           "type": "bytes",
         },
       },
@@ -888,10 +1493,20 @@ Object {
       "fields": Object {
         "bitarray": Object {
           "id": 1,
+          "options": Object {
+            "(telescope:camel)": "bitarray",
+            "(telescope:name)": "bitarray",
+            "(telescope:orig)": "bitarray",
+          },
           "type": "cosmos.crypto.multisig.v1beta1.CompactBitArray",
         },
         "signatures": Object {
           "id": 2,
+          "options": Object {
+            "(telescope:camel)": "signatures",
+            "(telescope:name)": "signatures",
+            "(telescope:orig)": "signatures",
+          },
           "rule": "repeated",
           "type": "Data",
         },
@@ -911,10 +1526,20 @@ Object {
   "fields": Object {
     "multi": Object {
       "id": 2,
+      "options": Object {
+        "(telescope:camel)": "multi",
+        "(telescope:name)": "multi",
+        "(telescope:orig)": "multi",
+      },
       "type": "Multi",
     },
     "single": Object {
       "id": 1,
+      "options": Object {
+        "(telescope:camel)": "single",
+        "(telescope:name)": "single",
+        "(telescope:orig)": "single",
+      },
       "type": "Single",
     },
   },
@@ -926,10 +1551,20 @@ Object {
       "fields": Object {
         "bitarray": Object {
           "id": 1,
+          "options": Object {
+            "(telescope:camel)": "bitarray",
+            "(telescope:name)": "bitarray",
+            "(telescope:orig)": "bitarray",
+          },
           "type": "cosmos.crypto.multisig.v1beta1.CompactBitArray",
         },
         "signatures": Object {
           "id": 2,
+          "options": Object {
+            "(telescope:camel)": "signatures",
+            "(telescope:name)": "signatures",
+            "(telescope:orig)": "signatures",
+          },
           "rule": "repeated",
           "type": "Data",
         },
@@ -939,10 +1574,20 @@ Object {
       "fields": Object {
         "mode": Object {
           "id": 1,
+          "options": Object {
+            "(telescope:camel)": "mode",
+            "(telescope:name)": "mode",
+            "(telescope:orig)": "mode",
+          },
           "type": "SignMode",
         },
         "signature": Object {
           "id": 2,
+          "options": Object {
+            "(telescope:camel)": "signature",
+            "(telescope:name)": "signature",
+            "(telescope:orig)": "signature",
+          },
           "type": "bytes",
         },
       },
@@ -961,14 +1606,29 @@ Object {
     "fields": Object {
       "data": Object {
         "id": 2,
+        "options": Object {
+          "(telescope:camel)": "data",
+          "(telescope:name)": "data",
+          "(telescope:orig)": "data",
+        },
         "type": "Data",
       },
       "publicKey": Object {
         "id": 1,
+        "options": Object {
+          "(telescope:camel)": "publicKey",
+          "(telescope:name)": "publicKey",
+          "(telescope:orig)": "public_key",
+        },
         "type": "google.protobuf.Any",
       },
       "sequence": Object {
         "id": 3,
+        "options": Object {
+          "(telescope:camel)": "sequence",
+          "(telescope:name)": "sequence",
+          "(telescope:orig)": "sequence",
+        },
         "type": "uint64",
       },
     },
@@ -977,10 +1637,20 @@ Object {
         "fields": Object {
           "multi": Object {
             "id": 2,
+            "options": Object {
+              "(telescope:camel)": "multi",
+              "(telescope:name)": "multi",
+              "(telescope:orig)": "multi",
+            },
             "type": "Multi",
           },
           "single": Object {
             "id": 1,
+            "options": Object {
+              "(telescope:camel)": "single",
+              "(telescope:name)": "single",
+              "(telescope:orig)": "single",
+            },
             "type": "Single",
           },
         },
@@ -989,10 +1659,20 @@ Object {
             "fields": Object {
               "bitarray": Object {
                 "id": 1,
+                "options": Object {
+                  "(telescope:camel)": "bitarray",
+                  "(telescope:name)": "bitarray",
+                  "(telescope:orig)": "bitarray",
+                },
                 "type": "cosmos.crypto.multisig.v1beta1.CompactBitArray",
               },
               "signatures": Object {
                 "id": 2,
+                "options": Object {
+                  "(telescope:camel)": "signatures",
+                  "(telescope:name)": "signatures",
+                  "(telescope:orig)": "signatures",
+                },
                 "rule": "repeated",
                 "type": "Data",
               },
@@ -1002,10 +1682,20 @@ Object {
             "fields": Object {
               "mode": Object {
                 "id": 1,
+                "options": Object {
+                  "(telescope:camel)": "mode",
+                  "(telescope:name)": "mode",
+                  "(telescope:orig)": "mode",
+                },
                 "type": "SignMode",
               },
               "signature": Object {
                 "id": 2,
+                "options": Object {
+                  "(telescope:camel)": "signature",
+                  "(telescope:name)": "signature",
+                  "(telescope:orig)": "signature",
+                },
                 "type": "bytes",
               },
             },
@@ -1051,10 +1741,20 @@ Object {
   "fields": Object {
     "bitarray": Object {
       "id": 1,
+      "options": Object {
+        "(telescope:camel)": "bitarray",
+        "(telescope:name)": "bitarray",
+        "(telescope:orig)": "bitarray",
+      },
       "type": "cosmos.crypto.multisig.v1beta1.CompactBitArray",
     },
     "signatures": Object {
       "id": 2,
+      "options": Object {
+        "(telescope:camel)": "signatures",
+        "(telescope:name)": "signatures",
+        "(telescope:orig)": "signatures",
+      },
       "rule": "repeated",
       "type": "Data",
     },
@@ -1069,10 +1769,20 @@ Object {
     "fields": Object {
       "multi": Object {
         "id": 2,
+        "options": Object {
+          "(telescope:camel)": "multi",
+          "(telescope:name)": "multi",
+          "(telescope:orig)": "multi",
+        },
         "type": "Multi",
       },
       "single": Object {
         "id": 1,
+        "options": Object {
+          "(telescope:camel)": "single",
+          "(telescope:name)": "single",
+          "(telescope:orig)": "single",
+        },
         "type": "Single",
       },
     },
@@ -1081,10 +1791,20 @@ Object {
         "fields": Object {
           "bitarray": Object {
             "id": 1,
+            "options": Object {
+              "(telescope:camel)": "bitarray",
+              "(telescope:name)": "bitarray",
+              "(telescope:orig)": "bitarray",
+            },
             "type": "cosmos.crypto.multisig.v1beta1.CompactBitArray",
           },
           "signatures": Object {
             "id": 2,
+            "options": Object {
+              "(telescope:camel)": "signatures",
+              "(telescope:name)": "signatures",
+              "(telescope:orig)": "signatures",
+            },
             "rule": "repeated",
             "type": "Data",
           },
@@ -1094,10 +1814,20 @@ Object {
         "fields": Object {
           "mode": Object {
             "id": 1,
+            "options": Object {
+              "(telescope:camel)": "mode",
+              "(telescope:name)": "mode",
+              "(telescope:orig)": "mode",
+            },
             "type": "SignMode",
           },
           "signature": Object {
             "id": 2,
+            "options": Object {
+              "(telescope:camel)": "signature",
+              "(telescope:name)": "signature",
+              "(telescope:orig)": "signature",
+            },
             "type": "bytes",
           },
         },
@@ -1155,6 +1885,9 @@ Object {
             "options": Object {
               "(gogoproto.castrepeated)": "github.com/cosmos/cosmos-sdk/types.Coins",
               "(gogoproto.nullable)": false,
+              "(telescope:camel)": "amount",
+              "(telescope:name)": "amount",
+              "(telescope:orig)": "amount",
             },
             "rule": "repeated",
             "type": "cosmos.base.v1beta1.Coin",
@@ -1163,11 +1896,19 @@ Object {
             "id": 2,
             "options": Object {
               "(cosmos_proto.scalar)": "cosmos.AddressString",
+              "(telescope:camel)": "depositor",
+              "(telescope:name)": "depositor",
+              "(telescope:orig)": "depositor",
             },
             "type": "string",
           },
           "proposalId": Object {
             "id": 1,
+            "options": Object {
+              "(telescope:camel)": "proposalId",
+              "(telescope:name)": "proposalId",
+              "(telescope:orig)": "proposal_id",
+            },
             "type": "uint64",
           },
         },
@@ -1184,6 +1925,9 @@ Object {
               "(gogoproto.jsontag)": "max_deposit_period,omitempty",
               "(gogoproto.nullable)": false,
               "(gogoproto.stdduration)": true,
+              "(telescope:camel)": "maxDepositPeriod",
+              "(telescope:name)": "maxDepositPeriod",
+              "(telescope:orig)": "max_deposit_period",
             },
             "type": "google.protobuf.Duration",
           },
@@ -1193,6 +1937,9 @@ Object {
               "(gogoproto.castrepeated)": "github.com/cosmos/cosmos-sdk/types.Coins",
               "(gogoproto.jsontag)": "min_deposit,omitempty",
               "(gogoproto.nullable)": false,
+              "(telescope:camel)": "minDeposit",
+              "(telescope:name)": "minDeposit",
+              "(telescope:orig)": "min_deposit",
             },
             "rule": "repeated",
             "type": "cosmos.base.v1beta1.Coin",
@@ -1205,6 +1952,9 @@ Object {
             "id": 2,
             "options": Object {
               "(cosmos_proto.accepts_interface)": "Content",
+              "(telescope:camel)": "content",
+              "(telescope:name)": "content",
+              "(telescope:orig)": "content",
             },
             "type": "google.protobuf.Any",
           },
@@ -1213,6 +1963,9 @@ Object {
             "options": Object {
               "(gogoproto.nullable)": false,
               "(gogoproto.stdtime)": true,
+              "(telescope:camel)": "depositEndTime",
+              "(telescope:name)": "depositEndTime",
+              "(telescope:orig)": "deposit_end_time",
             },
             "type": "google.protobuf.Timestamp",
           },
@@ -1220,15 +1973,28 @@ Object {
             "id": 4,
             "options": Object {
               "(gogoproto.nullable)": false,
+              "(telescope:camel)": "finalTallyResult",
+              "(telescope:name)": "finalTallyResult",
+              "(telescope:orig)": "final_tally_result",
             },
             "type": "TallyResult",
           },
           "proposalId": Object {
             "id": 1,
+            "options": Object {
+              "(telescope:camel)": "proposalId",
+              "(telescope:name)": "proposalId",
+              "(telescope:orig)": "proposal_id",
+            },
             "type": "uint64",
           },
           "status": Object {
             "id": 3,
+            "options": Object {
+              "(telescope:camel)": "status",
+              "(telescope:name)": "status",
+              "(telescope:orig)": "status",
+            },
             "type": "ProposalStatus",
           },
           "submitTime": Object {
@@ -1236,6 +2002,9 @@ Object {
             "options": Object {
               "(gogoproto.nullable)": false,
               "(gogoproto.stdtime)": true,
+              "(telescope:camel)": "submitTime",
+              "(telescope:name)": "submitTime",
+              "(telescope:orig)": "submit_time",
             },
             "type": "google.protobuf.Timestamp",
           },
@@ -1244,6 +2013,9 @@ Object {
             "options": Object {
               "(gogoproto.castrepeated)": "github.com/cosmos/cosmos-sdk/types.Coins",
               "(gogoproto.nullable)": false,
+              "(telescope:camel)": "totalDeposit",
+              "(telescope:name)": "totalDeposit",
+              "(telescope:orig)": "total_deposit",
             },
             "rule": "repeated",
             "type": "cosmos.base.v1beta1.Coin",
@@ -1253,6 +2025,9 @@ Object {
             "options": Object {
               "(gogoproto.nullable)": false,
               "(gogoproto.stdtime)": true,
+              "(telescope:camel)": "votingEndTime",
+              "(telescope:name)": "votingEndTime",
+              "(telescope:orig)": "voting_end_time",
             },
             "type": "google.protobuf.Timestamp",
           },
@@ -1261,6 +2036,9 @@ Object {
             "options": Object {
               "(gogoproto.nullable)": false,
               "(gogoproto.stdtime)": true,
+              "(telescope:camel)": "votingStartTime",
+              "(telescope:name)": "votingStartTime",
+              "(telescope:orig)": "voting_start_time",
             },
             "type": "google.protobuf.Timestamp",
           },
@@ -1290,6 +2068,9 @@ Object {
               "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Dec",
               "(gogoproto.jsontag)": "quorum,omitempty",
               "(gogoproto.nullable)": false,
+              "(telescope:camel)": "quorum",
+              "(telescope:name)": "quorum",
+              "(telescope:orig)": "quorum",
             },
             "type": "bytes",
           },
@@ -1299,6 +2080,9 @@ Object {
               "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Dec",
               "(gogoproto.jsontag)": "threshold,omitempty",
               "(gogoproto.nullable)": false,
+              "(telescope:camel)": "threshold",
+              "(telescope:name)": "threshold",
+              "(telescope:orig)": "threshold",
             },
             "type": "bytes",
           },
@@ -1308,6 +2092,9 @@ Object {
               "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Dec",
               "(gogoproto.jsontag)": "veto_threshold,omitempty",
               "(gogoproto.nullable)": false,
+              "(telescope:camel)": "vetoThreshold",
+              "(telescope:name)": "vetoThreshold",
+              "(telescope:orig)": "veto_threshold",
             },
             "type": "bytes",
           },
@@ -1321,6 +2108,9 @@ Object {
               "(cosmos_proto.scalar)": "cosmos.Int",
               "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Int",
               "(gogoproto.nullable)": false,
+              "(telescope:camel)": "abstain",
+              "(telescope:name)": "abstain",
+              "(telescope:orig)": "abstain",
             },
             "type": "string",
           },
@@ -1330,6 +2120,9 @@ Object {
               "(cosmos_proto.scalar)": "cosmos.Int",
               "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Int",
               "(gogoproto.nullable)": false,
+              "(telescope:camel)": "no",
+              "(telescope:name)": "no",
+              "(telescope:orig)": "no",
             },
             "type": "string",
           },
@@ -1339,6 +2132,9 @@ Object {
               "(cosmos_proto.scalar)": "cosmos.Int",
               "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Int",
               "(gogoproto.nullable)": false,
+              "(telescope:camel)": "noWithVeto",
+              "(telescope:name)": "noWithVeto",
+              "(telescope:orig)": "no_with_veto",
             },
             "type": "string",
           },
@@ -1348,6 +2144,9 @@ Object {
               "(cosmos_proto.scalar)": "cosmos.Int",
               "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Int",
               "(gogoproto.nullable)": false,
+              "(telescope:camel)": "yes",
+              "(telescope:name)": "yes",
+              "(telescope:orig)": "yes",
             },
             "type": "string",
           },
@@ -1360,10 +2159,20 @@ Object {
         "fields": Object {
           "description": Object {
             "id": 2,
+            "options": Object {
+              "(telescope:camel)": "description",
+              "(telescope:name)": "description",
+              "(telescope:orig)": "description",
+            },
             "type": "string",
           },
           "title": Object {
             "id": 1,
+            "options": Object {
+              "(telescope:camel)": "title",
+              "(telescope:name)": "title",
+              "(telescope:orig)": "title",
+            },
             "type": "string",
           },
         },
@@ -1377,6 +2186,9 @@ Object {
           "option": Object {
             "id": 3,
             "options": Object {
+              "(telescope:camel)": "option",
+              "(telescope:name)": "option",
+              "(telescope:orig)": "option",
               "deprecated": true,
             },
             "type": "VoteOption",
@@ -1385,6 +2197,9 @@ Object {
             "id": 4,
             "options": Object {
               "(gogoproto.nullable)": false,
+              "(telescope:camel)": "options",
+              "(telescope:name)": "options",
+              "(telescope:orig)": "options",
             },
             "rule": "repeated",
             "type": "WeightedVoteOption",
@@ -1393,6 +2208,9 @@ Object {
             "id": 1,
             "options": Object {
               "(gogoproto.jsontag)": "id",
+              "(telescope:camel)": "proposalId",
+              "(telescope:name)": "proposalId",
+              "(telescope:orig)": "proposal_id",
             },
             "type": "uint64",
           },
@@ -1400,6 +2218,9 @@ Object {
             "id": 2,
             "options": Object {
               "(cosmos_proto.scalar)": "cosmos.AddressString",
+              "(telescope:camel)": "voter",
+              "(telescope:name)": "voter",
+              "(telescope:orig)": "voter",
             },
             "type": "string",
           },
@@ -1429,6 +2250,9 @@ Object {
               "(gogoproto.jsontag)": "voting_period,omitempty",
               "(gogoproto.nullable)": false,
               "(gogoproto.stdduration)": true,
+              "(telescope:camel)": "votingPeriod",
+              "(telescope:name)": "votingPeriod",
+              "(telescope:orig)": "voting_period",
             },
             "type": "google.protobuf.Duration",
           },
@@ -1438,6 +2262,11 @@ Object {
         "fields": Object {
           "option": Object {
             "id": 1,
+            "options": Object {
+              "(telescope:camel)": "option",
+              "(telescope:name)": "option",
+              "(telescope:orig)": "option",
+            },
             "type": "VoteOption",
           },
           "weight": Object {
@@ -1446,6 +2275,9 @@ Object {
               "(cosmos_proto.scalar)": "cosmos.Dec",
               "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Dec",
               "(gogoproto.nullable)": false,
+              "(telescope:camel)": "weight",
+              "(telescope:name)": "weight",
+              "(telescope:orig)": "weight",
             },
             "type": "string",
           },

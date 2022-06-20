@@ -18,6 +18,9 @@ Object {
               "(gogoproto.jsontag)": "id",
               "(gogoproto.moretags)": "yaml:id",
               "(gogoproto.nullable)": false,
+              "(telescope:camel)": "id",
+              "(telescope:name)": "id",
+              "(telescope:orig)": "id",
             },
             "parsedType": Object {
               "name": "DeploymentID",
@@ -50,6 +53,9 @@ Object {
               "(gogoproto.jsontag)": "id",
               "(gogoproto.moretags)": "yaml:id",
               "(gogoproto.nullable)": false,
+              "(telescope:camel)": "id",
+              "(telescope:name)": "id",
+              "(telescope:orig)": "id",
             },
             "parsedType": Object {
               "name": "GroupID",
@@ -81,6 +87,9 @@ Object {
               "(gogoproto.jsontag)": "deposit",
               "(gogoproto.moretags)": "yaml:deposit",
               "(gogoproto.nullable)": false,
+              "(telescope:camel)": "deposit",
+              "(telescope:name)": "deposit",
+              "(telescope:orig)": "deposit",
             },
             "parsedType": Object {
               "name": "Coin",
@@ -99,6 +108,9 @@ Object {
             "options": Object {
               "(gogoproto.jsontag)": "depositor",
               "(gogoproto.moretags)": "yaml:depositor",
+              "(telescope:camel)": "depositor",
+              "(telescope:name)": "depositor",
+              "(telescope:orig)": "depositor",
             },
             "parsedType": Object {
               "name": "string",
@@ -116,6 +128,9 @@ Object {
               "(gogoproto.jsontag)": "groups",
               "(gogoproto.moretags)": "yaml:groups",
               "(gogoproto.nullable)": false,
+              "(telescope:camel)": "groups",
+              "(telescope:name)": "groups",
+              "(telescope:orig)": "groups",
             },
             "parsedType": Object {
               "name": "GroupSpec",
@@ -138,6 +153,9 @@ Object {
               "(gogoproto.jsontag)": "id",
               "(gogoproto.moretags)": "yaml:id",
               "(gogoproto.nullable)": false,
+              "(telescope:camel)": "id",
+              "(telescope:name)": "id",
+              "(telescope:orig)": "id",
             },
             "parsedType": Object {
               "name": "DeploymentID",
@@ -156,6 +174,9 @@ Object {
             "options": Object {
               "(gogoproto.jsontag)": "version",
               "(gogoproto.moretags)": "yaml:version",
+              "(telescope:camel)": "version",
+              "(telescope:name)": "version",
+              "(telescope:orig)": "version",
             },
             "parsedType": Object {
               "name": "bytes",
@@ -184,6 +205,9 @@ Object {
               "(gogoproto.jsontag)": "amount",
               "(gogoproto.moretags)": "yaml:amount",
               "(gogoproto.nullable)": false,
+              "(telescope:camel)": "amount",
+              "(telescope:name)": "amount",
+              "(telescope:orig)": "amount",
             },
             "parsedType": Object {
               "name": "Coin",
@@ -202,6 +226,9 @@ Object {
             "options": Object {
               "(gogoproto.jsontag)": "depositor",
               "(gogoproto.moretags)": "yaml:depositor",
+              "(telescope:camel)": "depositor",
+              "(telescope:name)": "depositor",
+              "(telescope:orig)": "depositor",
             },
             "parsedType": Object {
               "name": "string",
@@ -220,6 +247,9 @@ Object {
               "(gogoproto.jsontag)": "id",
               "(gogoproto.moretags)": "yaml:id",
               "(gogoproto.nullable)": false,
+              "(telescope:camel)": "id",
+              "(telescope:name)": "id",
+              "(telescope:orig)": "id",
             },
             "parsedType": Object {
               "name": "DeploymentID",
@@ -252,6 +282,9 @@ Object {
               "(gogoproto.jsontag)": "id",
               "(gogoproto.moretags)": "yaml:id",
               "(gogoproto.nullable)": false,
+              "(telescope:camel)": "id",
+              "(telescope:name)": "id",
+              "(telescope:orig)": "id",
             },
             "parsedType": Object {
               "name": "GroupID",
@@ -284,6 +317,9 @@ Object {
               "(gogoproto.jsontag)": "id",
               "(gogoproto.moretags)": "yaml:id",
               "(gogoproto.nullable)": false,
+              "(telescope:camel)": "id",
+              "(telescope:name)": "id",
+              "(telescope:orig)": "id",
             },
             "parsedType": Object {
               "name": "GroupID",
@@ -316,6 +352,9 @@ Object {
               "(gogoproto.jsontag)": "id",
               "(gogoproto.moretags)": "yaml:id",
               "(gogoproto.nullable)": false,
+              "(telescope:camel)": "id",
+              "(telescope:name)": "id",
+              "(telescope:orig)": "id",
             },
             "parsedType": Object {
               "name": "DeploymentID",
@@ -334,6 +373,9 @@ Object {
             "options": Object {
               "(gogoproto.jsontag)": "version",
               "(gogoproto.moretags)": "yaml:version",
+              "(telescope:camel)": "version",
+              "(telescope:name)": "version",
+              "(telescope:orig)": "version",
             },
             "parsedType": Object {
               "name": "bytes",

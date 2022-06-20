@@ -14,6 +14,9 @@ Object {
             "isScalar": true,
             "options": Object {
               "(gogoproto.moretags)": "yaml:pool_id",
+              "(telescope:camel)": "poolId",
+              "(telescope:name)": "poolId",
+              "(telescope:orig)": "poolId",
             },
             "parsedType": Object {
               "name": "uint64",
@@ -30,6 +33,9 @@ Object {
             "options": Object {
               "(gogoproto.moretags)": "yaml:routes",
               "(gogoproto.nullable)": false,
+              "(telescope:camel)": "routes",
+              "(telescope:name)": "routes",
+              "(telescope:orig)": "routes",
             },
             "parsedType": Object {
               "name": "SwapAmountInRoute",
@@ -50,6 +56,9 @@ Object {
             "isScalar": true,
             "options": Object {
               "(gogoproto.moretags)": "yaml:sender",
+              "(telescope:camel)": "sender",
+              "(telescope:name)": "sender",
+              "(telescope:orig)": "sender",
             },
             "parsedType": Object {
               "name": "string",
@@ -64,6 +73,9 @@ Object {
             "isScalar": true,
             "options": Object {
               "(gogoproto.moretags)": "yaml:token_in",
+              "(telescope:camel)": "tokenIn",
+              "(telescope:name)": "tokenIn",
+              "(telescope:orig)": "tokenIn",
             },
             "parsedType": Object {
               "name": "string",
@@ -101,6 +113,9 @@ Object {
             "isScalar": true,
             "options": Object {
               "(gogoproto.moretags)": "yaml:pool_id",
+              "(telescope:camel)": "poolId",
+              "(telescope:name)": "poolId",
+              "(telescope:orig)": "poolId",
             },
             "parsedType": Object {
               "name": "uint64",
@@ -117,6 +132,9 @@ Object {
             "options": Object {
               "(gogoproto.moretags)": "yaml:routes",
               "(gogoproto.nullable)": false,
+              "(telescope:camel)": "routes",
+              "(telescope:name)": "routes",
+              "(telescope:orig)": "routes",
             },
             "parsedType": Object {
               "name": "SwapAmountOutRoute",
@@ -137,6 +155,9 @@ Object {
             "isScalar": true,
             "options": Object {
               "(gogoproto.moretags)": "yaml:sender",
+              "(telescope:camel)": "sender",
+              "(telescope:name)": "sender",
+              "(telescope:orig)": "sender",
             },
             "parsedType": Object {
               "name": "string",
@@ -151,6 +172,9 @@ Object {
             "isScalar": true,
             "options": Object {
               "(gogoproto.moretags)": "yaml:token_out",
+              "(telescope:camel)": "tokenOut",
+              "(telescope:name)": "tokenOut",
+              "(telescope:orig)": "tokenOut",
             },
             "parsedType": Object {
               "name": "string",
@@ -204,6 +228,9 @@ Object {
             "isScalar": true,
             "options": Object {
               "(gogoproto.moretags)": "yaml:pool_id",
+              "(telescope:camel)": "poolId",
+              "(telescope:name)": "poolId",
+              "(telescope:orig)": "poolId",
             },
             "parsedType": Object {
               "name": "uint64",
@@ -237,6 +264,9 @@ Object {
             "isScalar": true,
             "options": Object {
               "(gogoproto.moretags)": "yaml:pool_id",
+              "(telescope:camel)": "poolId",
+              "(telescope:name)": "poolId",
+              "(telescope:orig)": "poolId",
             },
             "parsedType": Object {
               "name": "uint64",
@@ -269,6 +299,11 @@ Object {
             "id": 2,
             "import": "cosmos/base/query/v1beta1/pagination.proto",
             "importedName": "cosmos.base.query.v1beta1.PageRequest",
+            "options": Object {
+              "(telescope:camel)": "pagination",
+              "(telescope:name)": "pagination",
+              "(telescope:orig)": "pagination",
+            },
             "parsedType": Object {
               "name": "PageRequest",
               "type": "Type",
@@ -304,6 +339,9 @@ Object {
             "isScalar": true,
             "options": Object {
               "(gogoproto.moretags)": "yaml:pool_id",
+              "(telescope:camel)": "poolId",
+              "(telescope:name)": "poolId",
+              "(telescope:orig)": "poolId",
             },
             "parsedType": Object {
               "name": "uint64",
@@ -318,6 +356,9 @@ Object {
             "isScalar": true,
             "options": Object {
               "(gogoproto.moretags)": "yaml:token_in_denom",
+              "(telescope:camel)": "tokenInDenom",
+              "(telescope:name)": "tokenInDenom",
+              "(telescope:orig)": "tokenInDenom",
             },
             "parsedType": Object {
               "name": "string",
@@ -332,6 +373,9 @@ Object {
             "isScalar": true,
             "options": Object {
               "(gogoproto.moretags)": "yaml:token_out_denom",
+              "(telescope:camel)": "tokenOutDenom",
+              "(telescope:name)": "tokenOutDenom",
+              "(telescope:orig)": "tokenOutDenom",
             },
             "parsedType": Object {
               "name": "string",
@@ -384,6 +428,9 @@ Object {
             "isScalar": true,
             "options": Object {
               "(gogoproto.moretags)": "yaml:pool_id",
+              "(telescope:camel)": "poolId",
+              "(telescope:name)": "poolId",
+              "(telescope:orig)": "poolId",
             },
             "parsedType": Object {
               "name": "uint64",
@@ -417,6 +464,9 @@ Object {
             "isScalar": true,
             "options": Object {
               "(gogoproto.moretags)": "yaml:pool_id",
+              "(telescope:camel)": "poolId",
+              "(telescope:name)": "poolId",
+              "(telescope:orig)": "poolId",
             },
             "parsedType": Object {
               "name": "uint64",
@@ -465,6 +515,9 @@ Object {
         "isScalar": true,
         "options": Object {
           "(gogoproto.moretags)": "yaml:num_pools",
+          "(telescope:camel)": "numPools",
+          "(telescope:name)": "numPools",
+          "(telescope:orig)": "numPools",
         },
         "parsedType": Object {
           "name": "uint64",
@@ -490,6 +543,9 @@ Object {
         "isScalar": true,
         "options": Object {
           "(gogoproto.moretags)": "yaml:pool_id",
+          "(telescope:camel)": "poolId",
+          "(telescope:name)": "poolId",
+          "(telescope:orig)": "poolId",
         },
         "parsedType": Object {
           "name": "uint64",
@@ -514,6 +570,11 @@ Object {
         "id": 1,
         "import": "google/protobuf/any.proto",
         "importedName": "google.protobuf.Any",
+        "options": Object {
+          "(telescope:camel)": "params",
+          "(telescope:name)": "params",
+          "(telescope:orig)": "params",
+        },
         "parsedType": Object {
           "name": "Any",
           "type": "Type",
@@ -541,6 +602,9 @@ Object {
         "isScalar": true,
         "options": Object {
           "(gogoproto.moretags)": "yaml:pool_id",
+          "(telescope:camel)": "poolId",
+          "(telescope:name)": "poolId",
+          "(telescope:orig)": "poolId",
         },
         "parsedType": Object {
           "name": "uint64",
@@ -567,6 +631,9 @@ Object {
         "importedName": "google.protobuf.Any",
         "options": Object {
           "(cosmos_proto.accepts_interface)": "PoolI",
+          "(telescope:camel)": "pool",
+          "(telescope:name)": "pool",
+          "(telescope:orig)": "pool",
         },
         "parsedType": Object {
           "name": "Any",
@@ -594,6 +661,11 @@ Object {
         "id": 2,
         "import": "cosmos/base/query/v1beta1/pagination.proto",
         "importedName": "cosmos.base.query.v1beta1.PageRequest",
+        "options": Object {
+          "(telescope:camel)": "pagination",
+          "(telescope:name)": "pagination",
+          "(telescope:orig)": "pagination",
+        },
         "parsedType": Object {
           "name": "PageRequest",
           "type": "Type",
@@ -620,6 +692,11 @@ Object {
         "id": 2,
         "import": "cosmos/base/query/v1beta1/pagination.proto",
         "importedName": "cosmos.base.query.v1beta1.PageResponse",
+        "options": Object {
+          "(telescope:camel)": "pagination",
+          "(telescope:name)": "pagination",
+          "(telescope:orig)": "pagination",
+        },
         "parsedType": Object {
           "name": "PageResponse",
           "type": "Type",
@@ -637,6 +714,9 @@ Object {
         "importedName": "google.protobuf.Any",
         "options": Object {
           "(cosmos_proto.accepts_interface)": "PoolI",
+          "(telescope:camel)": "pools",
+          "(telescope:name)": "pools",
+          "(telescope:orig)": "pools",
         },
         "parsedType": Object {
           "name": "Any",
@@ -666,6 +746,9 @@ Object {
         "isScalar": true,
         "options": Object {
           "(gogoproto.moretags)": "yaml:pool_id",
+          "(telescope:camel)": "poolId",
+          "(telescope:name)": "poolId",
+          "(telescope:orig)": "poolId",
         },
         "parsedType": Object {
           "name": "uint64",
@@ -680,6 +763,9 @@ Object {
         "isScalar": true,
         "options": Object {
           "(gogoproto.moretags)": "yaml:token_in_denom",
+          "(telescope:camel)": "tokenInDenom",
+          "(telescope:name)": "tokenInDenom",
+          "(telescope:orig)": "tokenInDenom",
         },
         "parsedType": Object {
           "name": "string",
@@ -694,6 +780,9 @@ Object {
         "isScalar": true,
         "options": Object {
           "(gogoproto.moretags)": "yaml:token_out_denom",
+          "(telescope:camel)": "tokenOutDenom",
+          "(telescope:name)": "tokenOutDenom",
+          "(telescope:orig)": "tokenOutDenom",
         },
         "parsedType": Object {
           "name": "string",
@@ -719,6 +808,9 @@ Object {
         "isScalar": true,
         "options": Object {
           "(gogoproto.moretags)": "yaml:spot_price",
+          "(telescope:camel)": "spotPrice",
+          "(telescope:name)": "spotPrice",
+          "(telescope:orig)": "spotPrice",
         },
         "parsedType": Object {
           "name": "string",
@@ -744,6 +836,9 @@ Object {
         "isScalar": true,
         "options": Object {
           "(gogoproto.moretags)": "yaml:pool_id",
+          "(telescope:camel)": "poolId",
+          "(telescope:name)": "poolId",
+          "(telescope:orig)": "poolId",
         },
         "parsedType": Object {
           "name": "uint64",
@@ -760,6 +855,9 @@ Object {
         "options": Object {
           "(gogoproto.moretags)": "yaml:routes",
           "(gogoproto.nullable)": false,
+          "(telescope:camel)": "routes",
+          "(telescope:name)": "routes",
+          "(telescope:orig)": "routes",
         },
         "parsedType": Object {
           "name": "SwapAmountInRoute",
@@ -780,6 +878,9 @@ Object {
         "isScalar": true,
         "options": Object {
           "(gogoproto.moretags)": "yaml:sender",
+          "(telescope:camel)": "sender",
+          "(telescope:name)": "sender",
+          "(telescope:orig)": "sender",
         },
         "parsedType": Object {
           "name": "string",
@@ -794,6 +895,9 @@ Object {
         "isScalar": true,
         "options": Object {
           "(gogoproto.moretags)": "yaml:token_in",
+          "(telescope:camel)": "tokenIn",
+          "(telescope:name)": "tokenIn",
+          "(telescope:orig)": "tokenIn",
         },
         "parsedType": Object {
           "name": "string",
@@ -821,6 +925,9 @@ Object {
           "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Int",
           "(gogoproto.moretags)": "yaml:token_out_amount",
           "(gogoproto.nullable)": false,
+          "(telescope:camel)": "tokenOutAmount",
+          "(telescope:name)": "tokenOutAmount",
+          "(telescope:orig)": "tokenOutAmount",
         },
         "parsedType": Object {
           "name": "string",
@@ -846,6 +953,9 @@ Object {
         "isScalar": true,
         "options": Object {
           "(gogoproto.moretags)": "yaml:pool_id",
+          "(telescope:camel)": "poolId",
+          "(telescope:name)": "poolId",
+          "(telescope:orig)": "poolId",
         },
         "parsedType": Object {
           "name": "uint64",
@@ -862,6 +972,9 @@ Object {
         "options": Object {
           "(gogoproto.moretags)": "yaml:routes",
           "(gogoproto.nullable)": false,
+          "(telescope:camel)": "routes",
+          "(telescope:name)": "routes",
+          "(telescope:orig)": "routes",
         },
         "parsedType": Object {
           "name": "SwapAmountOutRoute",
@@ -882,6 +995,9 @@ Object {
         "isScalar": true,
         "options": Object {
           "(gogoproto.moretags)": "yaml:sender",
+          "(telescope:camel)": "sender",
+          "(telescope:name)": "sender",
+          "(telescope:orig)": "sender",
         },
         "parsedType": Object {
           "name": "string",
@@ -896,6 +1012,9 @@ Object {
         "isScalar": true,
         "options": Object {
           "(gogoproto.moretags)": "yaml:token_out",
+          "(telescope:camel)": "tokenOut",
+          "(telescope:name)": "tokenOut",
+          "(telescope:orig)": "tokenOut",
         },
         "parsedType": Object {
           "name": "string",
@@ -923,6 +1042,9 @@ Object {
           "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Int",
           "(gogoproto.moretags)": "yaml:token_in_amount",
           "(gogoproto.nullable)": false,
+          "(telescope:camel)": "tokenInAmount",
+          "(telescope:name)": "tokenInAmount",
+          "(telescope:orig)": "tokenInAmount",
         },
         "parsedType": Object {
           "name": "string",
@@ -961,6 +1083,9 @@ Object {
           "(gogoproto.castrepeated)": "github.com/cosmos/cosmos-sdk/types.Coins",
           "(gogoproto.moretags)": "yaml:liquidity",
           "(gogoproto.nullable)": false,
+          "(telescope:camel)": "liquidity",
+          "(telescope:name)": "liquidity",
+          "(telescope:orig)": "liquidity",
         },
         "parsedType": Object {
           "name": "Coin",
@@ -990,6 +1115,9 @@ Object {
         "isScalar": true,
         "options": Object {
           "(gogoproto.moretags)": "yaml:pool_id",
+          "(telescope:camel)": "poolId",
+          "(telescope:name)": "poolId",
+          "(telescope:orig)": "poolId",
         },
         "parsedType": Object {
           "name": "uint64",
@@ -1018,6 +1146,9 @@ Object {
           "(gogoproto.castrepeated)": "github.com/cosmos/cosmos-sdk/types.Coins",
           "(gogoproto.moretags)": "yaml:liquidity",
           "(gogoproto.nullable)": false,
+          "(telescope:camel)": "liquidity",
+          "(telescope:name)": "liquidity",
+          "(telescope:orig)": "liquidity",
         },
         "parsedType": Object {
           "name": "Coin",
@@ -1047,6 +1178,9 @@ Object {
         "isScalar": true,
         "options": Object {
           "(gogoproto.moretags)": "yaml:pool_id",
+          "(telescope:camel)": "poolId",
+          "(telescope:name)": "poolId",
+          "(telescope:orig)": "poolId",
         },
         "parsedType": Object {
           "name": "uint64",
@@ -1074,6 +1208,9 @@ Object {
         "options": Object {
           "(gogoproto.moretags)": "yaml:total_shares",
           "(gogoproto.nullable)": false,
+          "(telescope:camel)": "totalShares",
+          "(telescope:name)": "totalShares",
+          "(telescope:orig)": "totalShares",
         },
         "parsedType": Object {
           "name": "Coin",
