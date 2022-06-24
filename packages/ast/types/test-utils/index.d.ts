@@ -1,6 +1,7 @@
 import { ProtoType } from '@osmonauts/types';
 import { ProtoStore } from '@osmonauts/proto-parser';
 import { AminoParseContext } from '../src/encoding/context';
+import { GenericParseContext } from '../src/encoding';
 export declare const expectCode: (ast: any) => void;
 export declare const printCode: (ast: any) => void;
 export declare const prepareContext: (store: ProtoStore, protoFile: string) => {
@@ -8,3 +9,4 @@ export declare const prepareContext: (store: ProtoStore, protoFile: string) => {
     root: import("@osmonauts/types").ProtoRoot;
     protos: ProtoType[];
 };
+export declare const getGenericParseContext: () => GenericParseContext;

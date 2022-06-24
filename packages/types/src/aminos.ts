@@ -1,14 +1,7 @@
-export interface AminoOptions {
-    aminoCasingFn: Function,
-    exceptions?: AminoExceptions
-}
-
 export interface AminoException {
     aminoType?: string;
-    toAmino?: object;
-    fromAmino?: object;
-    AminoMsg?: object;
-    Msg?: object;
+    toAmino?: any;
+    fromAmino?: any;
 }
 export interface AminoExceptions {
     [key: string]: AminoException;

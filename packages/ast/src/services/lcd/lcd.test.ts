@@ -5,7 +5,7 @@ import {
     makeTemplateTag
 } from './lcd';
 import { ProtoStore, traverse, getNestedProto } from '@osmonauts/proto-parser'
-import { ProtoService } from '@osmonauts/types';
+import { defaultTelescopeOptions, ProtoService } from '@osmonauts/types';
 import generate from '@babel/generator';
 import { GenericParseContext } from '../../encoding';
 const store = new ProtoStore([__dirname + '/../../../../../__fixtures__/chain1']);
@@ -47,7 +47,7 @@ it('osmosis LCDClient', () => {
     const ref = store.findProto('osmosis/gamm/v1beta1/query.proto');
     const res = traverse(store, ref);
     const service: ProtoService = getNestedProto(res).Query;
-    const context = new GenericParseContext(ref, store);
+    const context = new GenericParseContext(ref, store, defaultTelescopeOptions);
     const ast = makeLCDClient(context, service);
     expectCode(ast);
 });
@@ -55,7 +55,7 @@ it('cosmos LCDClient', () => {
     const ref = store.findProto('cosmos/bank/v1beta1/query.proto');
     const res = traverse(store, ref);
     const service: ProtoService = getNestedProto(res).Query;
-    const context = new GenericParseContext(ref, store);
+    const context = new GenericParseContext(ref, store, defaultTelescopeOptions);
     const ast = makeLCDClient(context, service);
     expectCode(ast);
 });
@@ -63,7 +63,7 @@ it('cosmos fee LCDClient', () => {
     const ref = store.findProto('cosmos/feegrant/v1beta1/query.proto');
     const res = traverse(store, ref);
     const service: ProtoService = getNestedProto(res).Query;
-    const context = new GenericParseContext(ref, store);
+    const context = new GenericParseContext(ref, store, defaultTelescopeOptions);
     const ast = makeLCDClient(context, service);
     expectCode(ast);
 });
@@ -71,7 +71,7 @@ it('cosmos/app/v1alpha1/query.proto', () => {
     const ref = store.findProto('cosmos/app/v1alpha1/query.proto');
     const res = traverse(store, ref);
     const service: ProtoService = getNestedProto(res).Query;
-    const context = new GenericParseContext(ref, store);
+    const context = new GenericParseContext(ref, store, defaultTelescopeOptions);
     const ast = makeLCDClient(context, service);
     expectCode(ast);
 });
@@ -82,7 +82,7 @@ it('AggregatedLCDClient', () => {
     const res2 = traverse(store, ref2);
     const service1: ProtoService = getNestedProto(res1).Query;
     const service2: ProtoService = getNestedProto(res2).Query;
-    const context = new GenericParseContext(ref1, store);
+    const context = new GenericParseContext(ref1, store, defaultTelescopeOptions);
     const ast = makeAggregatedLCDClient(context, [service1, service2], 'QueryClient');
     expectCode(ast);
 });

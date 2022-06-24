@@ -1,5 +1,6 @@
 import { TelescopeBuilder } from '../src';
-import { ProtoStore } from '@osmonauts/proto-parser'
+import { ProtoStore } from '@osmonauts/proto-parser';
+import { defaultTelescopeOptions } from '@osmonauts/types';
 import { bundleBaseRegistries, bundleRegistries, parseContextsForRegistry } from '../src/bundle'
 
 const store = new ProtoStore([__dirname + '/../../../__fixtures__/chain1']);
@@ -9,13 +10,13 @@ const input = {
     outPath: __dirname + '/../../../__fixtures__/output1',
     protoDirs: [__dirname + '/../../../__fixtures__/chain1'],
     options: {
-        includeAminos: true,
+        ...defaultTelescopeOptions,
         includeLCDClient: true
     }
 };
 
 const telescope = new TelescopeBuilder(input);
-telescope.build(input);
+telescope.build();
 
 describe('bundle package registries and root file names', () => {
     it('bundleRegistries', () => {

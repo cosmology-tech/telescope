@@ -28,7 +28,7 @@ export interface AminoMsgBeginUnlocking extends AminoMsg {
   type: "osmosis/lockup/begin-unlocking";
   value: {
     owner: string;
-    id: string;
+    ID: string;
     coins: {
       denom: string;
       amount: string;
@@ -96,7 +96,7 @@ export const AminoConverter = {
     }: MsgBeginUnlocking): AminoMsgBeginUnlocking["value"] => {
       return {
         owner,
-        id: ID.toString(),
+        ID: ID.toString(),
         coins: coins.map(el0 => ({
           denom: el0.denom,
           amount: el0.amount
@@ -105,12 +105,12 @@ export const AminoConverter = {
     },
     fromAmino: ({
       owner,
-      id,
+      ID,
       coins
     }: AminoMsgBeginUnlocking["value"]): MsgBeginUnlocking => {
       return {
         owner,
-        ID: Long.fromString(id),
+        ID: Long.fromString(ID),
         coins: coins.map(el0 => ({
           denom: el0.denom,
           amount: el0.amount

@@ -11,6 +11,11 @@ PreconditionFailure message.",
     "violations": Object {
       "comment": "Describes all precondition violations.",
       "id": 1,
+      "options": Object {
+        "(telescope:camel)": "violations",
+        "(telescope:name)": "violations",
+        "(telescope:orig)": "violations",
+      },
       "parsedType": Object {
         "name": "Violation",
         "type": "Type",
@@ -36,6 +41,11 @@ description to understand how to fix the failure.
 For example: \\"Terms of service not accepted\\".",
           "id": 3,
           "isScalar": true,
+          "options": Object {
+            "(telescope:camel)": "description",
+            "(telescope:name)": "description",
+            "(telescope:orig)": "description",
+          },
           "parsedType": Object {
             "name": "string",
             "type": "native",
@@ -49,6 +59,11 @@ For example, \\"google.com/cloud\\" relative to the \\"TOS\\" type would indicat
 which terms of service is being referenced.",
           "id": 2,
           "isScalar": true,
+          "options": Object {
+            "(telescope:camel)": "subject",
+            "(telescope:name)": "subject",
+            "(telescope:orig)": "subject",
+          },
           "parsedType": Object {
             "name": "string",
             "type": "native",
@@ -62,6 +77,11 @@ enum type to define the supported precondition violation subjects. For
 example, \\"TOS\\" for \\"Terms of Service violation\\".",
           "id": 1,
           "isScalar": true,
+          "options": Object {
+            "(telescope:camel)": "type",
+            "(telescope:name)": "type",
+            "(telescope:orig)": "type",
+          },
           "parsedType": Object {
             "name": "string",
             "type": "native",

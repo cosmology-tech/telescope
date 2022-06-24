@@ -1,4 +1,5 @@
 import * as t from '@babel/types';
+import { ProtoField } from '@osmonauts/types';
 
 const BILLION = t.numericLiteral(1_000_000_000);
 BILLION.extra = { raw: "1_000_000_000", rawValue: 1000000000 };
@@ -120,6 +121,25 @@ export const memberExpressionOrIdentifierAminoCasing = (names, aminoCasingFn: Fu
     return t.memberExpression(
         memberExpressionOrIdentifierAminoCasing(rest, aminoCasingFn),
         t.identifier(aminoCasingFn(name))
+    )
+};
+
+export const memberExpressionOrIdentifierAminoCaseField = (fields: ProtoField[], aminoCaseFunc: Function) => {
+    if (fields.length === 1) {
+        return t.identifier(aminoCaseFunc(fields[0]))
+    }
+    if (fields.length === 2) {
+        const [b, a] = fields;
+        return t.memberExpression(
+            t.identifier(aminoCaseFunc(a)),
+            t.identifier(aminoCaseFunc(b))
+        );
+    }
+    const [field, ...rest] = fields;
+
+    return t.memberExpression(
+        memberExpressionOrIdentifierAminoCaseField(rest, aminoCaseFunc),
+        t.identifier(aminoCaseFunc(field))
     )
 };
 

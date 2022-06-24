@@ -1,0 +1,85 @@
+{
+  "name": "@osmonauts/babel",
+  "version": "0.3.7",
+  "description": "Telescope babel helpers",
+  "author": "Dan Lynch <pyramation@gmail.com>",
+  "homepage": "https://github.com/osmosis-labs/telescope/tree/master/packages/babel#readme",
+  "license": "SEE LICENSE IN LICENSE",
+  "main": "main/index.js",
+  "module": "module/index.js",
+  "typings": "types/index.d.ts",
+  "directories": {
+    "lib": "src",
+    "test": "__tests__"
+  },
+  "files": [
+    "types",
+    "main",
+    "module"
+  ],
+  "scripts": {
+    "build:main": "cross-env BABEL_ENV=production babel src --out-dir main --delete-dir-on-start --extensions \".tsx,.ts,.js\"",
+    "build:module": "cross-env MODULE=true babel src --out-dir module --delete-dir-on-start  --extensions \".tsx,.ts,.js\"",
+    "build": "npm run build:module && npm run build:main",
+    "buidl": "npm run build && npm run build:ts",
+    "build:ts": "tsc --project ./tsconfig.json",
+    "prepare": "npm run build",
+    "dev": "cross-env NODE_ENV=development babel-node src/index",
+    "watch": "cross-env NODE_ENV=development babel-watch src/index",
+    "lint": "eslint src --fix",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:debug": "node --inspect node_modules/.bin/jest --runInBand"
+  },
+  "jest": {
+    "testPathIgnorePatterns": [
+      "main/",
+      "module/",
+      "types/"
+    ]
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/osmosis-labs/telescope"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/osmosis-labs/telescope/issues"
+  },
+  "devDependencies": {
+    "@babel/cli": "7.17.10",
+    "@babel/core": "7.18.5",
+    "@babel/eslint-parser": "^7.18.2",
+    "@babel/generator": "7.18.2",
+    "@babel/node": "^7.18.5",
+    "@babel/parser": "^7.18.5",
+    "@babel/plugin-proposal-class-properties": "7.17.12",
+    "@babel/plugin-proposal-export-default-from": "7.17.12",
+    "@babel/plugin-proposal-object-rest-spread": "7.18.0",
+    "@babel/plugin-transform-runtime": "7.18.5",
+    "@babel/preset-env": "7.18.2",
+    "@babel/preset-typescript": "^7.17.12",
+    "@babel/traverse": "7.18.5",
+    "@types/jest": "^28.1.1",
+    "babel-core": "7.0.0-bridge.0",
+    "babel-jest": "28.1.1",
+    "babel-watch": "^7.0.0",
+    "cross-env": "^7.0.2",
+    "eslint": "8.17.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "jest": "^28.1.1",
+    "jest-in-case": "^1.0.2",
+    "prettier": "^2.7.0",
+    "regenerator-runtime": "^0.13.7",
+    "ts-jest": "^28.0.5",
+    "typescript": "^4.7.3"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.18.3",
+    "long": "^5.2.0"
+  }
+}

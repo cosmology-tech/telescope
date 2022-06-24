@@ -15,9 +15,9 @@ export interface FromAminoParseField {
     field: ProtoField;
     currentProtoPath: string;
     scope: string[];
+    fieldPath: ProtoField[];
     nested: number;
     isOptional: boolean;
-
 };
 
 export const fromAminoParseField = ({
@@ -25,17 +25,20 @@ export const fromAminoParseField = ({
     field,
     currentProtoPath,
     scope: previousScope,
+    fieldPath: previousFieldPath,
     nested,
     isOptional
 }: FromAminoParseField) => {
 
     const scope = [field.name, ...previousScope];
+    const fieldPath = [field, ...previousFieldPath];
 
     const args = {
         context,
         field,
         currentProtoPath,
         scope,
+        fieldPath,
         nested,
         isOptional
     };
@@ -151,8 +154,8 @@ export const fromAminoJsonMethod = ({
 
     const fromAminoParams = t.objectPattern(
         Object.keys(proto.fields).map((field) => t.objectProperty(
-            t.identifier(context.options.aminoCasingFn(field)),
-            t.identifier(context.options.aminoCasingFn(field)),
+            t.identifier(context.aminoCaseField(proto.fields[field])),
+            t.identifier(context.aminoCaseField(proto.fields[field])),
             false,
             true)
         )
@@ -172,6 +175,7 @@ export const fromAminoJsonMethod = ({
             field,
             currentProtoPath: context.ref.filename,
             scope: [],
+            fieldPath: [],
             nested: 0,
             isOptional
         });
@@ -199,8 +203,5 @@ export const fromAminoJsonMethod = ({
         ]),
         t.tsTypeAnnotation(t.tsTypeReference(t.identifier(proto.name)))
     );
-
 };
-
-
 

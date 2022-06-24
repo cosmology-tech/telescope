@@ -1,6 +1,7 @@
 import { createObjectWithMethods } from './object';
 import generate from '@babel/generator';
-import { ProtoStore, traverse, getNestedProto } from '@osmonauts/proto-parser'
+import { ProtoStore, traverse, getNestedProto } from '@osmonauts/proto-parser';
+import { defaultTelescopeOptions } from '@osmonauts/types';
 import { ProtoParseContext } from './context';
 import { createProtoType } from './proto';
 
@@ -21,21 +22,21 @@ describe('osmosis/gamm/v1beta1/tx', () => {
     const ref = store.findProto('osmosis/gamm/v1beta1/tx.proto');
     const res = traverse(store, ref);
     it('MsgJoinPool', () => {
-        const context = new ProtoParseContext(ref, store);
+        const context = new ProtoParseContext(ref, store, defaultTelescopeOptions);
         expectCode(createObjectWithMethods(
             context,
             'MsgJoinPool', getNestedProto(res).MsgJoinPool
         ))
     })
     it('MsgSwapExactAmountOut', () => {
-        const context = new ProtoParseContext(ref, store);
+        const context = new ProtoParseContext(ref, store, defaultTelescopeOptions);
         expectCode(createObjectWithMethods(
             context,
             'MsgSwapExactAmountOut', getNestedProto(res).MsgSwapExactAmountOut
         ))
     })
     it('MsgSwapExactAmountIn', () => {
-        const context = new ProtoParseContext(ref, store);
+        const context = new ProtoParseContext(ref, store, defaultTelescopeOptions);
         expectCode(createObjectWithMethods(
             context,
             'MsgSwapExactAmountIn', getNestedProto(res).MsgSwapExactAmountIn
@@ -48,7 +49,7 @@ describe('google/api/expr/conformance/v1alpha1/conformance_service', () => {
     const ref = store.findProto('google/api/expr/conformance/v1alpha1/conformance_service.proto');
     const res = traverse(store, ref);
     it('ParseRequest', () => {
-        const context = new ProtoParseContext(ref, store);
+        const context = new ProtoParseContext(ref, store, defaultTelescopeOptions);
         expectCode(createObjectWithMethods(
             context,
             'ParseRequest', getNestedProto(res).ParseRequest
@@ -60,7 +61,7 @@ describe('google/api/servicecontrol/v1/log_entry', () => {
     const ref = store.findProto('google/api/servicecontrol/v1/log_entry.proto');
     const res = traverse(store, ref);
     it('LogEntry', () => {
-        const context = new ProtoParseContext(ref, store);
+        const context = new ProtoParseContext(ref, store, defaultTelescopeOptions);
         expectCode(createObjectWithMethods(
             context,
             'LogEntry', getNestedProto(res).LogEntry
@@ -72,7 +73,7 @@ describe('google/api/expr/v1alpha1/syntax', () => {
     const ref = store.findProto('google/api/expr/v1alpha1/syntax.proto');
     const res = traverse(store, ref);
     it('Constant', () => {
-        const context = new ProtoParseContext(ref, store);
+        const context = new ProtoParseContext(ref, store, defaultTelescopeOptions);
         expectCode(createObjectWithMethods(
             context,
             'Constant', getNestedProto(res).Constant
@@ -84,7 +85,7 @@ describe('google/api/expr/v1alpha1/value', () => {
     const ref = store.findProto('google/api/expr/v1alpha1/value.proto');
     const res = traverse(store, ref);
     it('MapValue', () => {
-        const context = new ProtoParseContext(ref, store);
+        const context = new ProtoParseContext(ref, store, defaultTelescopeOptions);
         expectCode(createObjectWithMethods(
             context,
             'MapValue',
@@ -93,7 +94,7 @@ describe('google/api/expr/v1alpha1/value', () => {
         expect(context.imports).toMatchSnapshot();
     })
     it('Entry', () => {
-        const context = new ProtoParseContext(ref, store);
+        const context = new ProtoParseContext(ref, store, defaultTelescopeOptions);
         expectCode(createObjectWithMethods(
             context,
             'Entry',
@@ -108,14 +109,14 @@ describe('cosmos/tx/signing/v1beta1/signing', () => {
     const ref = store.findProto('cosmos/tx/signing/v1beta1/signing.proto');
     const res = traverse(store, ref);
     it('SignatureDescriptors', () => {
-        const context = new ProtoParseContext(ref, store);
+        const context = new ProtoParseContext(ref, store, defaultTelescopeOptions);
         expectCode(createObjectWithMethods(
             context,
             'SignatureDescriptors', getNestedProto(res).SignatureDescriptors
         ))
     })
     it('SignatureDescriptor', () => {
-        const context = new ProtoParseContext(ref, store);
+        const context = new ProtoParseContext(ref, store, defaultTelescopeOptions);
         expectCode(createObjectWithMethods(
             context,
             'SignatureDescriptor', getNestedProto(res).SignatureDescriptor
@@ -127,14 +128,14 @@ describe('cosmos/tx/v1beta1/tx', () => {
     const ref = store.findProto('cosmos/tx/v1beta1/tx.proto');
     const res = traverse(store, ref);
     it('AuxSignerData', () => {
-        const context = new ProtoParseContext(ref, store);
+        const context = new ProtoParseContext(ref, store, defaultTelescopeOptions);
         expectCode(createObjectWithMethods(
             context,
             'AuxSignerData', getNestedProto(res).AuxSignerData
         ))
     })
     it('ModeInfo_Multi', () => {
-        const context = new ProtoParseContext(ref, store);
+        const context = new ProtoParseContext(ref, store, defaultTelescopeOptions);
         expectCode(createObjectWithMethods(
             context,
             'ModeInfo_Multi', getNestedProto(res).ModeInfo
@@ -146,7 +147,7 @@ describe('google/api/expr/v1alpha1/checked', () => {
     const ref = store.findProto('google/api/expr/v1alpha1/checked.proto');
     const res = traverse(store, ref);
     it('Type', () => {
-        const context = new ProtoParseContext(ref, store);
+        const context = new ProtoParseContext(ref, store, defaultTelescopeOptions);
         expectCode(createObjectWithMethods(
             context,
             'Type', getNestedProto(res).Type
@@ -154,7 +155,7 @@ describe('google/api/expr/v1alpha1/checked', () => {
     })
     describe('nested', () => {
         it('MapType', () => {
-            const context = new ProtoParseContext(ref, store);
+            const context = new ProtoParseContext(ref, store, defaultTelescopeOptions);
             expectCode(createObjectWithMethods(
                 context,
                 'Type_MapType', getNestedProto(res).Type.nested.MapType
@@ -163,7 +164,7 @@ describe('google/api/expr/v1alpha1/checked', () => {
     })
     describe('Decl_FunctionDecl_Overload', () => {
         it('MapType', () => {
-            const context = new ProtoParseContext(ref, store);
+            const context = new ProtoParseContext(ref, store, defaultTelescopeOptions);
             expectCode(createObjectWithMethods(
                 context,
                 'Decl_FunctionDecl_Overload', getNestedProto(res).Decl.nested.FunctionDecl.nested.Overload
@@ -172,7 +173,7 @@ describe('google/api/expr/v1alpha1/checked', () => {
     })
     describe('typeHash (Long)', () => {
         it('CheckedExpr', () => {
-            const context = new ProtoParseContext(ref, store);
+            const context = new ProtoParseContext(ref, store, defaultTelescopeOptions);
             expectCode(createObjectWithMethods(
                 context,
                 'CheckedExpr', getNestedProto(res).CheckedExpr
@@ -184,7 +185,7 @@ describe('google/api/expr/v1alpha1/checked', () => {
 it('google/api/expr/v1beta1/source', () => {
     const ref = store.findProto('google/api/expr/v1beta1/source.proto');
     const res = traverse(store, ref);
-    const context = new ProtoParseContext(ref, store);
+    const context = new ProtoParseContext(ref, store, defaultTelescopeOptions);
 
     expectCode(createObjectWithMethods(
         context,
@@ -195,7 +196,7 @@ it('google/api/expr/v1beta1/source', () => {
 it('cosmwasm/wasm/v1/proposal', () => {
     const ref = store.findProto('cosmwasm/wasm/v1/proposal.proto');
     const res = traverse(store, ref);
-    const context = new ProtoParseContext(ref, store);
+    const context = new ProtoParseContext(ref, store, defaultTelescopeOptions);
 
     expectCode(createObjectWithMethods(
         context,
@@ -206,7 +207,7 @@ it('cosmwasm/wasm/v1/proposal', () => {
 it('cosmwasm/wasm/v1/proposal', () => {
     const ref = store.findProto('cosmwasm/wasm/v1/proposal.proto');
     const res = traverse(store, ref);
-    const context = new ProtoParseContext(ref, store);
+    const context = new ProtoParseContext(ref, store, defaultTelescopeOptions);
 
     expectCode(createObjectWithMethods(
         context,
@@ -217,7 +218,7 @@ it('cosmwasm/wasm/v1/proposal', () => {
 it('cosmwasm/wasm/v1/query', () => {
     const ref = store.findProto('cosmwasm/wasm/v1/query.proto');
     const res = traverse(store, ref);
-    const context = new ProtoParseContext(ref, store);
+    const context = new ProtoParseContext(ref, store, defaultTelescopeOptions);
     expectCode(createObjectWithMethods(
         context,
         'QueryRawContractStateRequest', getNestedProto(res).QueryRawContractStateRequest
@@ -227,7 +228,7 @@ it('cosmwasm/wasm/v1/query', () => {
 it('ibc/core/port/v1/query', () => {
     const ref = store.findProto('ibc/core/port/v1/query.proto');
     const res = traverse(store, ref);
-    const context = new ProtoParseContext(ref, store);
+    const context = new ProtoParseContext(ref, store, defaultTelescopeOptions);
     expectCode(createObjectWithMethods(
         context,
         'QueryAppVersionRequest',
@@ -241,7 +242,7 @@ describe('google/api/quota', () => {
     it('keyType', () => {
         const ref = store.findProto('google/api/quota.proto');
         const res = traverse(store, ref);
-        const context = new ProtoParseContext(ref, store);
+        const context = new ProtoParseContext(ref, store, defaultTelescopeOptions);
         expectCode(createObjectWithMethods(
             context,
             'MetricRule',
@@ -257,7 +258,7 @@ describe('ibc/core/types/v1/genesis', () => {
         store.traverseAll();
         const ref = store.findProto('ibc/core/types/v1/genesis.proto');
         const res = traverse(store, ref);
-        const context = new ProtoParseContext(ref, store);
+        const context = new ProtoParseContext(ref, store, defaultTelescopeOptions);
         const ast = createProtoType(
             context,
             'GenesisState',
@@ -278,7 +279,7 @@ describe('google/rpc/error_details', () => {
         store.traverseAll();
         const ref = store.findProto('google/rpc/error_details.proto');
         const res = traverse(store, ref);
-        const context = new ProtoParseContext(ref, store);
+        const context = new ProtoParseContext(ref, store, defaultTelescopeOptions);
         const ast = createProtoType(
             context,
             'PreconditionFailure',
@@ -296,7 +297,7 @@ describe('google/rpc/error_details', () => {
 it('evmos/fees/v1/tx', () => {
     const ref = store.findProto('evmos/fees/v1/tx.proto');
     const res = traverse(store, ref);
-    const context = new ProtoParseContext(ref, store);
+    const context = new ProtoParseContext(ref, store, defaultTelescopeOptions);
 
     expectCode(createObjectWithMethods(
         context,

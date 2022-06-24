@@ -28,7 +28,6 @@
     "watch": "cross-env NODE_ENV=development babel-watch src/index",
     "lint": "eslint src --fix",
     "test": "jest",
-    "test:ast": "cross-env NODE_ENV=development babel-node scripts/test-ast.js",
     "test:watch": "jest --watch",
     "test:debug": "node --inspect node_modules/.bin/jest --runInBand"
   },
@@ -81,7 +80,6 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.18.3",
-    "long": "^5.2.0",
-    "protobufjs": "^6.11.3"
+    "case": "1.6.3"
   }
 }

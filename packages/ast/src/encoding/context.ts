@@ -1,8 +1,9 @@
-import { AminoOptions, ProtoField, ProtoRef } from '@osmonauts/types';
+import { TelescopeOptions, ProtoField, ProtoRef } from '@osmonauts/types';
 import { ProtoStore, getObjectName } from '@osmonauts/proto-parser';
-import { snake } from 'case';
 import { getEnumFromJsonName, getEnumToJsonName, getFieldsTypeName } from './proto';
+import { getPluginValue } from '../plugins';
 export interface ParseContext {
+    options: TelescopeOptions;
     imports: ImportUsage[];
     utils: Record<string, boolean>;
     addUtil: Function;
@@ -15,6 +16,7 @@ export interface ImportUsage {
     importedAs?: string;
 }
 export class GenericParseContext implements ParseContext {
+    options: TelescopeOptions;
     imports: ImportUsage[] = [];
     utils: Record<string, boolean> = {};
     store: ProtoStore;
@@ -23,10 +25,15 @@ export class GenericParseContext implements ParseContext {
 
     constructor(
         ref: ProtoRef,
-        store: ProtoStore
+        store: ProtoStore,
+        options: TelescopeOptions
     ) {
         this.ref = ref;
         this.store = store;
+        this.options = options;
+        if (!this.options) {
+            throw new Error('ParseContext requires options!');
+        }
     }
 
     addUtil(util) {
@@ -61,26 +68,43 @@ export class GenericParseContext implements ParseContext {
 
 }
 
-const createDefaultAminoOptions = () => {
-    return {
-        aminoCasingFn: snake
-    };
-};
 export class AminoParseContext extends GenericParseContext implements ParseContext {
+    options: TelescopeOptions;
     store: ProtoStore;
     ref: ProtoRef;
-    options: AminoOptions;
+
+    aminoCasingFn: Function;
 
     constructor(
         ref: ProtoRef,
         store: ProtoStore,
-        options?: AminoOptions
+        options: TelescopeOptions
     ) {
-        super(ref, store);
+        super(ref, store, options);
         this.ref = ref;
         this.store = store;
-        if (options) this.options = options;
-        else this.options = createDefaultAminoOptions()
+        this.options = options;
+
+        this.setAminoCasingFn();
+
+        if (!this.aminoCasingFn) {
+            throw new Error('missing aminoCasingFn!')
+        }
+        this.aminoCaseField = this.aminoCaseField.bind(this);
+    }
+
+    setAminoCasingFn() {
+        if (this.aminoCasingFn) return this.aminoCasingFn;
+        this.aminoCasingFn = getPluginValue('aminoCasingFn', this.ref.proto.package, this.options);
+        return this.aminoCasingFn;
+    }
+
+    aminoCaseField(field: ProtoField) {
+        const orig = field.options['(telescope:orig)'];
+        // const name = field.options['(telescope:name)'];
+        // const camel = field.options['(telescope:camel)'];
+        // return this.aminoCasingFn(field.name);
+        return orig;
     }
 
     private lookupTypeFromCurrentPath(field: ProtoField, currentProtoPath: string) {
@@ -162,14 +186,17 @@ export class AminoParseContext extends GenericParseContext implements ParseConte
 export class ProtoParseContext extends GenericParseContext implements ParseContext {
     store: ProtoStore;
     ref: ProtoRef;
+    options: TelescopeOptions;
 
     constructor(
         ref: ProtoRef,
         store: ProtoStore,
+        options: TelescopeOptions
     ) {
-        super(ref, store);
+        super(ref, store, options);
         this.ref = ref;
         this.store = store;
+        this.options = options;
     }
 
     getToEnum(field: ProtoField) {

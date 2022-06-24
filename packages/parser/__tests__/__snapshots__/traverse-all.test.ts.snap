@@ -7,6 +7,11 @@ Object {
 Language Definition.",
     "id": 3,
     "isScalar": true,
+    "options": Object {
+      "(telescope:camel)": "container",
+      "(telescope:name)": "container",
+      "(telescope:orig)": "container",
+    },
     "parsedType": Object {
       "name": "string",
       "type": "native",
@@ -20,6 +25,11 @@ add declarations for the standard definitions to the type environment.  See
 \\"Standard Definitions\\" in the Language Definition.",
     "id": 4,
     "isScalar": true,
+    "options": Object {
+      "(telescope:camel)": "noStdEnv",
+      "(telescope:name)": "noStdEnv",
+      "(telescope:orig)": "no_std_env",
+    },
     "parsedType": Object {
       "name": "bool",
       "type": "native",
@@ -32,6 +42,11 @@ add declarations for the standard definitions to the type environment.  See
     "id": 1,
     "import": "google/api/expr/v1alpha1/syntax.proto",
     "importedName": "google.api.expr.v1alpha1.ParsedExpr",
+    "options": Object {
+      "(telescope:camel)": "parsedExpr",
+      "(telescope:name)": "parsedExpr",
+      "(telescope:orig)": "parsed_expr",
+    },
     "parsedType": Object {
       "name": "ParsedExpr",
       "type": "Type",
@@ -49,6 +64,11 @@ not in the default environment.",
     "id": 2,
     "import": "google/api/expr/v1alpha1/checked.proto",
     "importedName": "google.api.expr.v1alpha1.Decl",
+    "options": Object {
+      "(telescope:camel)": "typeEnv",
+      "(telescope:name)": "typeEnv",
+      "(telescope:orig)": "type_env",
+    },
     "parsedType": Object {
       "name": "Decl",
       "type": "Type",
@@ -68,6 +88,11 @@ Object {
   "function": Object {
     "comment": "Function declaration.",
     "id": 3,
+    "options": Object {
+      "(telescope:camel)": "function",
+      "(telescope:name)": "function",
+      "(telescope:orig)": "function",
+    },
     "parsedType": Object {
       "name": "FunctionDecl",
       "type": "Type",
@@ -81,6 +106,11 @@ Object {
   "ident": Object {
     "comment": "Identifier declaration.",
     "id": 2,
+    "options": Object {
+      "(telescope:camel)": "ident",
+      "(telescope:name)": "ident",
+      "(telescope:orig)": "ident",
+    },
     "parsedType": Object {
       "name": "IdentDecl",
       "type": "Type",
@@ -102,6 +132,11 @@ have a name depending on whether the overload is function declaration or a
 function definition containing a result [Expr][google.api.expr.v1alpha1.Expr].",
     "id": 1,
     "isScalar": true,
+    "options": Object {
+      "(telescope:camel)": "name",
+      "(telescope:name)": "name",
+      "(telescope:orig)": "name",
+    },
     "parsedType": Object {
       "name": "string",
       "type": "native",
@@ -118,6 +153,11 @@ Object {
     "comment": "Documentation string for the identifier.",
     "id": 3,
     "isScalar": true,
+    "options": Object {
+      "(telescope:camel)": "doc",
+      "(telescope:name)": "doc",
+      "(telescope:orig)": "doc",
+    },
     "parsedType": Object {
       "name": "string",
       "type": "native",
@@ -128,6 +168,11 @@ Object {
   "type": Object {
     "comment": "Required. The type of the identifier.",
     "id": 1,
+    "options": Object {
+      "(telescope:camel)": "type",
+      "(telescope:name)": "type",
+      "(telescope:orig)": "type",
+    },
     "parsedType": Object {
       "name": "Type",
       "type": "Type",
@@ -143,6 +188,11 @@ must be supplied at evaluation time.",
     "id": 2,
     "import": "google/api/expr/v1alpha1/syntax.proto",
     "importedName": "Constant",
+    "options": Object {
+      "(telescope:camel)": "value",
+      "(telescope:name)": "value",
+      "(telescope:orig)": "value",
+    },
     "parsedType": Object {
       "name": "Constant",
       "type": "Type",
@@ -163,6 +213,11 @@ Object {
   "expr": Object {
     "comment": "The parsed expression.",
     "id": 2,
+    "options": Object {
+      "(telescope:camel)": "expr",
+      "(telescope:name)": "expr",
+      "(telescope:orig)": "expr",
+    },
     "parsedType": Object {
       "name": "Expr",
       "type": "Type",
@@ -175,6 +230,11 @@ Object {
   "sourceInfo": Object {
     "comment": "The source info derived from input that generated the parsed \`expr\`.",
     "id": 3,
+    "options": Object {
+      "(telescope:camel)": "sourceInfo",
+      "(telescope:name)": "sourceInfo",
+      "(telescope:orig)": "source_info",
+    },
     "parsedType": Object {
       "name": "SourceInfo",
       "type": "Type",
@@ -197,6 +257,9 @@ Object {
       "(cosmos_proto.scalar)": "cosmos.Int",
       "(gogoproto.customtype)": "Int",
       "(gogoproto.nullable)": false,
+      "(telescope:camel)": "amount",
+      "(telescope:name)": "amount",
+      "(telescope:orig)": "amount",
     },
     "parsedType": Object {
       "name": "string",
@@ -209,6 +272,11 @@ Object {
     "comment": null,
     "id": 1,
     "isScalar": true,
+    "options": Object {
+      "(telescope:camel)": "denom",
+      "(telescope:name)": "denom",
+      "(telescope:orig)": "denom",
+    },
     "parsedType": Object {
       "name": "string",
       "type": "native",
@@ -227,6 +295,9 @@ Object {
     "isScalar": true,
     "options": Object {
       "(gogoproto.moretags)": "yaml:pool_id",
+      "(telescope:camel)": "poolId",
+      "(telescope:name)": "poolId",
+      "(telescope:orig)": "poolId",
     },
     "parsedType": Object {
       "name": "uint64",
@@ -241,6 +312,9 @@ Object {
     "isScalar": true,
     "options": Object {
       "(gogoproto.moretags)": "yaml:token_out_denom",
+      "(telescope:camel)": "tokenOutDenom",
+      "(telescope:name)": "tokenOutDenom",
+      "(telescope:orig)": "tokenOutDenom",
     },
     "parsedType": Object {
       "name": "string",

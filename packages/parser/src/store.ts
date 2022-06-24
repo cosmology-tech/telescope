@@ -1,5 +1,5 @@
 import { sync as glob } from 'glob';
-import { parse } from 'protobufjs';
+import { parse } from '@pyramation/protobufjs';
 import { readFileSync } from 'fs';
 import { join, resolve as pathResolve } from 'path';
 import { ProtoDep, ProtoRef } from '@osmonauts/types';
@@ -9,6 +9,7 @@ import { lookupAny } from './lookup';
 
 export const parseProto = (content) => {
     return parse(content, {
+        // we need to update this
         keepCase: false,
         alternateCommentMode: true,
         preferTrailingComment: false

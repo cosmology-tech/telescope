@@ -8,20 +8,20 @@ import { RenderAminoField, renderAminoField } from '.';
 export const aminoInterface = {
     defaultType(args: RenderAminoField) {
         return t.tsPropertySignature(
-            t.identifier(args.context.options.aminoCasingFn(args.field.name)),
+            t.identifier(args.context.aminoCaseField(args.field)),
             t.tsTypeAnnotation(getTSTypeFromProtoType(args.field.type))
         );
     },
     string(args: RenderAminoField) {
         return t.tsPropertySignature(
-            t.identifier(args.context.options.aminoCasingFn(args.field.name)),
+            t.identifier(args.context.aminoCaseField(args.field)),
             t.tsTypeAnnotation(t.tsStringKeyword())
         );
     },
     long(args: RenderAminoField) {
         // longs become strings...
         return t.tsPropertySignature(
-            t.identifier(args.context.options.aminoCasingFn(args.field.name)),
+            t.identifier(args.context.aminoCaseField(args.field)),
             t.tsTypeAnnotation(t.tSStringKeyword())
         )
     },
@@ -29,7 +29,7 @@ export const aminoInterface = {
         args.context.addUtil('AminoHeight');
 
         return t.tsPropertySignature(
-            t.identifier(args.context.options.aminoCasingFn(args.field.name)),
+            t.identifier(args.context.aminoCaseField(args.field)),
             t.tsTypeAnnotation(
                 t.tsTypeReference(t.identifier('AminoHeight'))
             )
@@ -38,19 +38,19 @@ export const aminoInterface = {
     // durations are strings
     duration(args: RenderAminoField) {
         return t.tsPropertySignature(
-            t.identifier(args.context.options.aminoCasingFn(args.field.name)),
+            t.identifier(args.context.aminoCaseField(args.field)),
             t.tsTypeAnnotation(t.tsStringKeyword())
         );
     },
     enum(args: RenderAminoField) {
         return t.tsPropertySignature(
-            t.identifier(args.context.options.aminoCasingFn(args.field.name)),
+            t.identifier(args.context.aminoCaseField(args.field)),
             t.tsTypeAnnotation(t.tSNumberKeyword())
         );
     },
     enumArray(args: RenderAminoField) {
         return t.tsPropertySignature(
-            t.identifier(args.context.options.aminoCasingFn(args.field.name)),
+            t.identifier(args.context.aminoCaseField(args.field)),
             t.tsTypeAnnotation(arrayTypeNDim(t.tSNumberKeyword(), 1))
         );
     },
@@ -74,7 +74,7 @@ export const aminoInterface = {
 
         // 
         return t.tsPropertySignature(
-            t.identifier(context.options.aminoCasingFn(field.name)),
+            t.identifier(context.aminoCaseField(field)),
             t.tsTypeAnnotation(
                 t.tsTypeLiteral(
                     properties
@@ -98,12 +98,12 @@ export const aminoInterface = {
                 field,
                 currentProtoPath,
                 isOptional // TODO how to handle nested optionality
-            })
+            });
         });
 
         // 
         return t.tsPropertySignature(
-            t.identifier(context.options.aminoCasingFn(field.name)),
+            t.identifier(context.aminoCaseField(field)),
             t.tsTypeAnnotation(
                 arrayTypeNDim(t.tsTypeLiteral(
                     properties
@@ -124,7 +124,7 @@ export const aminoInterface = {
         //     )
         // );
         return t.tsPropertySignature(
-            t.identifier(args.context.options.aminoCasingFn(args.field.name)),
+            t.identifier(args.context.aminoCaseField(args.field)),
             t.tsTypeAnnotation(
                 arrayTypeNDim(
                     getTSTypeFromProtoType(args.field.type),

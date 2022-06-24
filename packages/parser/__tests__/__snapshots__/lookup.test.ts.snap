@@ -12,6 +12,9 @@ Object {
       "options": Object {
         "(gogoproto.moretags)": "yaml:channel_genesis",
         "(gogoproto.nullable)": false,
+        "(telescope:camel)": "channelGenesis",
+        "(telescope:name)": "channelGenesis",
+        "(telescope:orig)": "channel_genesis",
       },
       "parsedType": Object {
         "name": "GenesisState",
@@ -31,6 +34,9 @@ Object {
       "options": Object {
         "(gogoproto.moretags)": "yaml:client_genesis",
         "(gogoproto.nullable)": false,
+        "(telescope:camel)": "clientGenesis",
+        "(telescope:name)": "clientGenesis",
+        "(telescope:orig)": "client_genesis",
       },
       "parsedType": Object {
         "name": "GenesisState",
@@ -50,6 +56,9 @@ Object {
       "options": Object {
         "(gogoproto.moretags)": "yaml:connection_genesis",
         "(gogoproto.nullable)": false,
+        "(telescope:camel)": "connectionGenesis",
+        "(telescope:name)": "connectionGenesis",
+        "(telescope:orig)": "connection_genesis",
       },
       "parsedType": Object {
         "name": "GenesisState",
