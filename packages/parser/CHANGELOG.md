@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.4.14](https://github.com/osmosis-labs/telescope/compare/@osmonauts/proto-parser@0.4.13...@osmonauts/proto-parser@0.4.14) (2022-06-24)
+
+**Note:** Version bump only for package @osmonauts/proto-parser
+
+
+
+
+
 ## [0.4.13](https://github.com/osmosis-labs/telescope/compare/@osmonauts/proto-parser@0.4.12...@osmonauts/proto-parser@0.4.13) (2022-06-15)
 
 **Note:** Version bump only for package @osmonauts/proto-parser
