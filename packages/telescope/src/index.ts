@@ -24,8 +24,7 @@ import {
 
 import {
     camel,
-    pascal,
-    snake
+    pascal
 } from 'case';
 
 const version = process.env.NODE_ENV === 'test' ? 'latest' : pkg.version;

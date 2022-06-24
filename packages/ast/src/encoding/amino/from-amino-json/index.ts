@@ -203,8 +203,5 @@ export const fromAminoJsonMethod = ({
         ]),
         t.tsTypeAnnotation(t.tsTypeReference(t.identifier(proto.name)))
     );
-
 };
-
-
 
