@@ -42,3 +42,62 @@ export const getSigningOsmosisClient = async ({ rpcEndpoint, signer }: { rpcEndp
   return client;
 };
 ```
+
+### working with messages
+
+```js
+import { osmosis, cosmos } from 'osmojs';
+
+export const messages = {
+  // osmosis use withTypeUrl
+  ...osmosis.gamm.v1beta1.MessageComposer.withTypeUrl,
+  ...osmosis.superfluid.MessageComposer.withTypeUrl,
+  ...osmosis.lockup.MessageComposer.withTypeUrl,
+
+  // cosmos messages use fromPartial
+  ...cosmos.distribution.v1beta1.MessageComposer.fromPartial,
+  ...cosmos.bank.v1beta1.MessageComposer.fromPartial,
+  ...cosmos.staking.v1beta1.MessageComposer.fromPartial,
+  ...cosmos.gov.v1beta1.MessageComposer.fromPartial
+};
+
+const stargateClient = await SigningStargateClient.connectWithSigner(
+  rpcEndpoint,
+  signer // keplr or cosmjs
+);
+
+const withdrawMsg = messages.withdrawDelegatorReward({
+  delegatorAddress,
+  validatorAddress
+});
+
+const delegateMsg = messages.delegate({
+  delegatorAddress,
+  validatorAddress,
+  amount: {
+    amount,
+    denom
+  }
+});
+
+const voteMsg = messages.vote({
+  voter,
+  proposalId,
+  option
+});
+
+// now broadcast your messages
+stargateClient.signAndBroadcast(address, [withdrawMsg], fee, '').then(
+  (result) => {
+    try {
+      assertIsDeliverTxSuccess(result);
+      stargateClient.disconnect();
+    } catch (error) {
+      console.log(error);
+    }
+  },
+  (error) => {
+    console.log(error);
+  }
+);
+```
