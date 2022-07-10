@@ -18,13 +18,15 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 16.14.0
-      - name: Install Deps
+      - name: install Deps
         run: yarn
-      - name: Bootstrap
+      - name: bootstrap
         run: yarn bootstrap
-      - name: build parser
-        run: cd ./packages/parser && yarn && yarn build
-      - name: build types
-        run: cd ./packages/types && yarn && yarn build
+      - name: build
+        run: yarn build
+      # - name: build parser
+      #   run: cd ./packages/parser && yarn && yarn build
+      # - name: build types
+      #   run: cd ./packages/types && yarn && yarn build
       - name: test ast
         run: cd ./packages/ast && yarn test
