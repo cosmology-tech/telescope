@@ -24,9 +24,9 @@ jobs:
         run: yarn bootstrap
       - name: build
         run: yarn build
-      # - name: build parser
-      #   run: cd ./packages/parser && yarn && yarn build
-      # - name: build types
-      #   run: cd ./packages/types && yarn && yarn build
-      - name: test ast
+      - name: ast
         run: cd ./packages/ast && yarn test
+      - name: parser
+        run: cd ./packages/parser && yarn test
+      - name: telescope
+        run: cd ./packages/telescope && yarn test
