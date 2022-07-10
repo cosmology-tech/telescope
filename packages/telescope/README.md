@@ -4,6 +4,13 @@
   <img width="280" src="https://user-images.githubusercontent.com/545047/175660665-5cbde84b-0928-4e59-ab56-be6adb2f3a7e.png">
 </p>
 
+<p align="center" width="100%">
+  <a href="https://github.com/osmosis-labs/telescope/actions/workflows/run-tests.yaml">
+    <img height="20" src="https://github.com/osmosis-labs/telescope/actions/workflows/run-tests.yaml/badge.svg" />
+  </a>
+   <a href="https://github.com/osmosis-labs/telescope/blob/main/LICENSE"><img height="20" src="https://img.shields.io/badge/license-MIT-blue.svg"></a>
+</p>
+
 <p align="center">
   <img src="https://user-images.githubusercontent.com/545047/178129981-5a7d18ed-d2b5-4d85-b828-ca084d38501e.png">
 </p>
