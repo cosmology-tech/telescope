@@ -1,6 +1,7 @@
 
 import * as t from '@babel/types';
 import { GenericParseContext } from '../encoding';
+import { getPluginValue } from '../plugins';
 import { memberExpressionOrIdentifier, objectPattern } from '../utils';
 
 interface CreateClient {
@@ -14,7 +15,7 @@ interface CreateClient {
 
 export const createClient = ({ name, registries, aminos, context }: CreateClient) => {
 
-  const includeDefaults = context.options.signingClientDefaults;
+  const includeDefaults = getPluginValue('signingClientDefaults', context.ref.proto.package, context.options);
 
   if (includeDefaults) {
     context.addUtil('defaultRegistryTypes')

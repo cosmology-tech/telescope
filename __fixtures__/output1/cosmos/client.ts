@@ -30,14 +30,12 @@ import * as cosmosUpgradeV1beta1TxAmino from "./upgrade/v1beta1/tx.amino";
 import * as cosmosVestingV1beta1TxAmino from "./vesting/v1beta1/tx.amino";
 export const getSigningCosmosClient = async ({
   rpcEndpoint,
-  signer,
-  defaultTypes = defaultRegistryTypes
+  signer
 }: {
   rpcEndpoint: string;
   signer: OfflineSigner;
-  defaultTypes?: ReadonlyArray<[string, GeneratedType]>;
 }) => {
-  const registry = new Registry([...defaultTypes, ...cosmosAuthzV1beta1TxRegistry.registry, ...cosmosBankV1beta1TxRegistry.registry, ...cosmosCrisisV1beta1TxRegistry.registry, ...cosmosDistributionV1beta1TxRegistry.registry, ...cosmosEvidenceV1beta1TxRegistry.registry, ...cosmosFeegrantV1beta1TxRegistry.registry, ...cosmosGovV1TxRegistry.registry, ...cosmosGovV1beta1TxRegistry.registry, ...cosmosGroupV1TxRegistry.registry, ...cosmosNftV1beta1TxRegistry.registry, ...cosmosSlashingV1beta1TxRegistry.registry, ...cosmosStakingV1beta1TxRegistry.registry, ...cosmosUpgradeV1beta1TxRegistry.registry, ...cosmosVestingV1beta1TxRegistry.registry]);
+  const registry = new Registry([...cosmosAuthzV1beta1TxRegistry.registry, ...cosmosBankV1beta1TxRegistry.registry, ...cosmosCrisisV1beta1TxRegistry.registry, ...cosmosDistributionV1beta1TxRegistry.registry, ...cosmosEvidenceV1beta1TxRegistry.registry, ...cosmosFeegrantV1beta1TxRegistry.registry, ...cosmosGovV1TxRegistry.registry, ...cosmosGovV1beta1TxRegistry.registry, ...cosmosGroupV1TxRegistry.registry, ...cosmosNftV1beta1TxRegistry.registry, ...cosmosSlashingV1beta1TxRegistry.registry, ...cosmosStakingV1beta1TxRegistry.registry, ...cosmosUpgradeV1beta1TxRegistry.registry, ...cosmosVestingV1beta1TxRegistry.registry]);
   const aminoTypes = new AminoTypes({ ...cosmosAuthzV1beta1TxAmino.AminoConverter,
     ...cosmosBankV1beta1TxAmino.AminoConverter,
     ...cosmosCrisisV1beta1TxAmino.AminoConverter,

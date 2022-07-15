@@ -1,6 +1,7 @@
-import { getGenericParseContext } from '../../test-utils'
+import { getGenericParseContext, getGenericParseContextWithRef } from '../../test-utils'
 import { createClient } from './client';
 import generate from '@babel/generator';
+import { ProtoRef } from '@osmonauts/types';
 
 
 const expectCode = (ast) => {
@@ -15,7 +16,16 @@ const printCode = (ast) => {
 }
 
 it('createClient', async () => {
-    const context = getGenericParseContext();
+    const ref: ProtoRef = {
+        absolute: '/',
+        filename: '/',
+        proto: {
+            imports: [],
+            package: 'osmosis.gamm.yolo',
+            root: {},
+        }
+    }
+    const context = getGenericParseContextWithRef(ref);
     expectCode(createClient({
         context,
         name: 'getSigningOsmosisClient',
@@ -34,8 +44,16 @@ it('createClient', async () => {
 });
 
 it('createClient w/o defaults', async () => {
-    const context = getGenericParseContext();
-    context.options.signingClientDefaults = false;
+    const ref: ProtoRef = {
+        absolute: '/',
+        filename: '/',
+        proto: {
+            imports: [],
+            package: 'cosmos.gamm.yolo',
+            root: {},
+        }
+    }
+    const context = getGenericParseContextWithRef(ref);
     expectCode(createClient({
         context,
         name: 'getSigningOsmosisClient',

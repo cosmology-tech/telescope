@@ -22,7 +22,6 @@ export class GenericParseContext implements ParseContext {
     store: ProtoStore;
     ref: ProtoRef;
 
-
     constructor(
         ref: ProtoRef,
         store: ProtoStore,
@@ -34,6 +33,7 @@ export class GenericParseContext implements ParseContext {
         if (!this.options) {
             throw new Error('ParseContext requires options!');
         }
+
     }
 
     addUtil(util) {
@@ -93,7 +93,7 @@ export class AminoParseContext extends GenericParseContext implements ParseConte
         this.aminoCaseField = this.aminoCaseField.bind(this);
     }
 
-    setAminoCasingFn() {
+    private setAminoCasingFn() {
         if (this.aminoCasingFn) return this.aminoCasingFn;
         this.aminoCasingFn = getPluginValue('aminoCasingFn', this.ref.proto.package, this.options);
         return this.aminoCasingFn;
