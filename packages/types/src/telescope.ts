@@ -7,6 +7,9 @@ interface TelescopeOpts {
     aminoCasingFn?: Function;
     aminoExceptions?: AminoExceptions;
 
+    // should the signing client include defaults
+    signingClientDefaults?: boolean;
+
     useDate?: boolean;
     useExact?: boolean;
 }
@@ -22,6 +25,7 @@ export const defaultTelescopeOptions: TelescopeOptions = {
     // global options (can be overridden through plugins)
     includeAminos: true,
     includeLCDClient: false,
+    signingClientDefaults: true,
     useDate: false,
     useExact: false,
     aminoCasingFn: snake,
@@ -30,6 +34,9 @@ export const defaultTelescopeOptions: TelescopeOptions = {
     },
 
     packages: {
+        cosmos: {
+            signingClientDefaults: false
+        },
         osmosis: {
             aminoCasingFn: camel
         }

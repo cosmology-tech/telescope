@@ -32,3 +32,23 @@ it('createClient', async () => {
     }));
     expect(context.utils).toMatchSnapshot();
 });
+
+it('createClient w/o defaults', async () => {
+    const context = getGenericParseContext();
+    context.options.signingClientDefaults = false;
+    expectCode(createClient({
+        context,
+        name: 'getSigningOsmosisClient',
+        registries: [
+            'osmosis.gamm.v1beta1',
+            'osmosis.superfluid.v1beta1',
+            'osmosis.lockup'
+        ],
+        aminos: [
+            'osmosis.gamm.v1beta1',
+            'osmosis.superfluid.v1beta1',
+            'osmosis.lockup'
+        ]
+    }));
+    expect(context.utils).toMatchSnapshot();
+});
