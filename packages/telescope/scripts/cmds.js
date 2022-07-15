@@ -7,15 +7,16 @@ const { pascal } = require('case');
 const makeCommands = (folder) => {
   const SuperName = pascal(folder);
   const srcDir = path.resolve(`${__dirname}/../src/${folder}`);
-  
+
   const cmds = path.resolve(`${__dirname}/../src/cmds.js`);
 
   const paths = glob(`${srcDir}/**.[j|t]s`).map((file) => {
     const [, name] = file.match(/\/(.*)\.[j|t]s$/);
 
-    let str = path.relative(path.dirname(cmds), file)
-    .replace(/\.js$/, '')
-    .replace(/\.ts$/, '');
+    let str = path
+      .relative(path.dirname(cmds), file)
+      .replace(/\.js$/, '')
+      .replace(/\.ts$/, '');
     if (!str.startsWith('.')) str = `./${str}`;
 
     return {
@@ -25,13 +26,13 @@ const makeCommands = (folder) => {
       path: str
     };
   });
-  
+
   const imports = paths
     .map((f) => {
       return [`import _${f.safe} from '${f.path}';`];
     })
     .join('\n');
-  
+
   const out = `
   ${imports}
   const ${SuperName} = {};
@@ -45,10 +46,10 @@ const makeCommands = (folder) => {
   
     `;
 
-    return out;
+  return out;
 };
 
-fs.writeFileSync(`${__dirname}/../src/cmds.js`, 
-makeCommands('commands') + 
-makeCommands('contracts')
+fs.writeFileSync(
+  `${__dirname}/../src/cmds.js`,
+  makeCommands('commands') + makeCommands('contracts')
 );

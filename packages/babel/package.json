@@ -24,10 +24,8 @@
     "buidl": "npm run build && npm run build:ts",
     "build:ts": "tsc --project ./tsconfig.json",
     "prepare": "npm run build",
-    "dev": "cross-env NODE_ENV=development babel-node src/index",
-    "watch": "cross-env NODE_ENV=development babel-watch src/index",
-    "lint": "eslint src --fix",
-    "test": "jest",
+    "lint": "eslint .",
+    "format": "eslint . --fix",
     "test:watch": "jest --watch",
     "test:debug": "node --inspect node_modules/.bin/jest --runInBand"
   },
