@@ -22,4 +22,4 @@ describe('MsgExecuteContract', () => {
             getNestedProto(ref.traversed).MsgExecuteContract
         ));
     });
-})
+});
