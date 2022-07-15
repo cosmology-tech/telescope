@@ -25,10 +25,7 @@
     "build:ts": "tsc --project ./tsconfig.json",
     "prepare": "npm run build",
     "lint": "eslint .",
-    "format": "eslint . --fix",
-    "test": "jest",
-    "test:watch": "jest --watch",
-    "test:debug": "node --inspect node_modules/.bin/jest --runInBand"
+    "format": "eslint . --fix"
   },
   "jest": {
     "testPathIgnorePatterns": [

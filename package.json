@@ -11,7 +11,7 @@
     "bootstrap": "lerna bootstrap --use-workspaces",
     "lint": "lerna run lint",
     "format": "lerna run format",
-    "test": "lerna run test"
+    "test": "lerna run test --stream"
   },
   "devDependencies": {
     "@babel/cli": "7.17.10",
