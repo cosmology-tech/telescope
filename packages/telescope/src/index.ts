@@ -5,7 +5,7 @@ import { getNestedProto, ProtoStore } from '@osmonauts/proto-parser';
 import { buildAllImports, getDepsFromMutations, getDepsFromQueries } from './imports';
 import { TelescopeParseContext } from './build';
 import { importNamespace, importStmt } from '@osmonauts/ast';
-import { TelescopeOptions, defaultTelescopeOptions } from '@osmonauts/types';
+import { TelescopeOptions, defaultTelescopeOptions, ProtoRef } from '@osmonauts/types';
 import { getRelativePath, variableSlug } from './utils';
 import { parse } from './parse';
 import { bundlePackages, createFileBundle } from './bundle';
@@ -304,7 +304,17 @@ export class TelescopeBuilder {
 
                 const clientFile = join(`${bundle.base}`, 'client.ts');
                 filesToInclude.push(clientFile);
-                const ctx = new GenericParseContext(null, null, this.options);
+
+                const ctxRef: ProtoRef = {
+                    absolute: '/',
+                    filename: '/',
+                    proto: {
+                        imports: [],
+                        package: bundle.base, // for package options
+                        root: {},
+                    }
+                };
+                const ctx = new GenericParseContext(ctxRef, null, this.options);
 
                 const registryVariables = [];
                 const converterVariables = [];

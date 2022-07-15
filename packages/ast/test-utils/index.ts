@@ -44,3 +44,8 @@ export const getGenericParseContext = () => {
     const context = new GenericParseContext(null, null, defaultTelescopeOptions);
     return context;
 };
+
+export const getGenericParseContextWithRef = (ref) => {
+    const context = new GenericParseContext(ref, null, defaultTelescopeOptions)
+    return context;
+};

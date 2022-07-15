@@ -44,6 +44,9 @@ export interface ProtoField {
         deprecated?: boolean;
         "(cosmos_proto.accepts_interface)"?: string;
         "(cosmos_proto.scalar)"?: string;
+        "(telescope:name)"?: string;
+        "(telescope:orig)"?: string;
+        "(telescope:camel)"?: string;
         "(gogoproto.casttype)"?: string;
         "(gogoproto.customtype)"?: string;
         "(gogoproto.moretags)"?: string;

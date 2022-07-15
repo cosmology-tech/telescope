@@ -1,6 +1,7 @@
 
 import * as t from '@babel/types';
 import { GenericParseContext } from '../encoding';
+import { getPluginValue } from '../plugins';
 import { memberExpressionOrIdentifier, objectPattern } from '../utils';
 
 interface CreateClient {
@@ -14,8 +15,13 @@ interface CreateClient {
 
 export const createClient = ({ name, registries, aminos, context }: CreateClient) => {
 
+  const includeDefaults = getPluginValue('signingClientDefaults', context.ref.proto.package, context.options);
+
+  if (includeDefaults) {
+    context.addUtil('defaultRegistryTypes')
+  }
+
   context.addUtil('GeneratedType')
-  context.addUtil('defaultRegistryTypes')
   context.addUtil('OfflineSigner')
   context.addUtil('Registry')
   context.addUtil('AminoTypes')
@@ -61,7 +67,7 @@ export const createClient = ({ name, registries, aminos, context }: CreateClient
                     false,
                     true
                   ),
-                  t.objectProperty(
+                  includeDefaults && t.objectProperty(
                     t.identifier('defaultTypes'),
                     t.assignmentPattern(
                       t.identifier('defaultTypes'),
@@ -70,7 +76,7 @@ export const createClient = ({ name, registries, aminos, context }: CreateClient
                     false,
                     true
                   )
-                ],
+                ].filter(Boolean),
                 t.tsTypeAnnotation(
                   t.tsTypeLiteral(
                     [
@@ -84,9 +90,8 @@ export const createClient = ({ name, registries, aminos, context }: CreateClient
                           t.identifier('OfflineSigner')
                         ))
                       ),
-                      prop
-
-                    ]
+                      includeDefaults && prop
+                    ].filter(Boolean)
                   )
                 )
               )
@@ -103,7 +108,7 @@ export const createClient = ({ name, registries, aminos, context }: CreateClient
                         [
                           t.arrayExpression(
                             [
-                              t.spreadElement(
+                              includeDefaults && t.spreadElement(
                                 t.identifier('defaultTypes')
                               ),
                               ...registries.map(pkg =>
@@ -113,7 +118,7 @@ export const createClient = ({ name, registries, aminos, context }: CreateClient
                                   )
                                 )
                               )
-                            ]
+                            ].filter(Boolean)
                           )
                         ]
                       )

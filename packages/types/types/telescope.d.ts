@@ -4,6 +4,7 @@ interface TelescopeOpts {
     includeLCDClient?: boolean;
     aminoCasingFn?: Function;
     aminoExceptions?: AminoExceptions;
+    signingClientDefaults?: boolean;
     useDate?: boolean;
     useExact?: boolean;
 }

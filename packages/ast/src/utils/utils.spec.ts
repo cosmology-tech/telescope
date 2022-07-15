@@ -1,7 +1,8 @@
 import { recursiveNamespace, renderNameSafely } from './utils';
 import { createClient } from '../client/client';
 import generate from '@babel/generator';
-import { getGenericParseContext } from '../../test-utils';
+import { getGenericParseContext, getGenericParseContextWithRef } from '../../test-utils';
+import { ProtoRef } from '@osmonauts/types';
 
 const expectCode = (ast) => {
     expect(
@@ -10,11 +11,20 @@ const expectCode = (ast) => {
 }
 
 it('recursiveNamespace', async () => {
+    const ref: ProtoRef = {
+        absolute: '/',
+        filename: '/',
+        proto: {
+            imports: [],
+            package: 'osmosis.gamm.yolo',
+            root: {},
+        }
+    }
     expectCode(
         recursiveNamespace(['osmosis', 'gamm', 'v1beta', 'pools'].reverse(), [
 
             createClient({
-                context: getGenericParseContext(),
+                context: getGenericParseContextWithRef(ref),
                 name: 'getSigningOsmosisClient',
                 registries: [
                     'osmosis.gamm.v1beta1',

@@ -1,4 +1,3 @@
-import dotty from 'dotty';
 import { TelescopeOptions, TelescopeOption } from '@osmonauts/types';
 
 const getAllPackageParts = (name: string, list?: string[]) => {
