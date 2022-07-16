@@ -45,6 +45,7 @@ export declare const baseTypes: {
     bytes(args: DecodeMethod): t.CallExpression;
     duration(args: DecodeMethod): t.CallExpression;
     timestamp(args: DecodeMethod): t.CallExpression;
+    timestampDate(args: DecodeMethod): t.CallExpression;
     keyHash(args: DecodeMethod): (t.IfStatement | t.VariableDeclaration)[];
 };
 export declare const switchOnTag: (num: number, prop: string, expr: t.Expression) => t.SwitchCase;

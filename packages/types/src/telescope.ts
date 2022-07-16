@@ -10,7 +10,7 @@ interface TelescopeOpts {
     // should the signing client include defaults
     signingClientDefaults?: boolean;
 
-    useDate?: string;
+    useDate?: 'date' | 'timestamp';
     useExact?: boolean;
 }
 interface TelescopePackageOpts {
