@@ -1,6 +1,7 @@
 import { Provider } from "./provider";
 import * as _m0 from "protobufjs/minimal";
 import { DeepPartial } from "@osmonauts/helpers";
+export const protobufPackage = "akash.provider.v1beta2";
 
 /** GenesisState defines the basic genesis state used by provider module */
 export interface GenesisState {

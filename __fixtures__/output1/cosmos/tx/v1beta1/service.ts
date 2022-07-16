@@ -5,6 +5,7 @@ import { BlockID } from "../../../tendermint/types/types";
 import { Block } from "../../../tendermint/types/block";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, bytesFromBase64, base64FromBytes, Long } from "@osmonauts/helpers";
+export const protobufPackage = "cosmos.tx.v1beta1";
 
 /** OrderBy defines the sorting order */
 export enum OrderBy {

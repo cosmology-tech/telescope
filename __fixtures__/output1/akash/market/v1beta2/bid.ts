@@ -2,6 +2,7 @@ import { OrderID } from "./order";
 import { DecCoin, Coin } from "../../../cosmos/base/v1beta1/coin";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, Long } from "@osmonauts/helpers";
+export const protobufPackage = "akash.market.v1beta2";
 
 /** State is an enum which refers to state of bid */
 export enum Bid_State {

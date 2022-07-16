@@ -3,6 +3,7 @@ import { TokenPair } from "./erc20";
 import { Params } from "./genesis";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "@osmonauts/helpers";
+export const protobufPackage = "evmos.erc20.v1";
 
 /**
  * QueryTokenPairsRequest is the request type for the Query/TokenPairs RPC

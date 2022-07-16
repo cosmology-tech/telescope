@@ -1,6 +1,7 @@
 import { Incentive, GasMeter } from "./incentives";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "@osmonauts/helpers";
+export const protobufPackage = "evmos.incentives.v1";
 
 /** GenesisState defines the module's genesis state. */
 export interface GenesisState {

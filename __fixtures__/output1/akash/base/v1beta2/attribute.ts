@@ -1,5 +1,6 @@
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "@osmonauts/helpers";
+export const protobufPackage = "akash.base.v1beta2";
 
 /** Attribute represents key value pair */
 export interface Attribute {

@@ -1,6 +1,7 @@
 import { GrantAuthorization } from "./authz";
 import * as _m0 from "protobufjs/minimal";
 import { DeepPartial } from "@osmonauts/helpers";
+export const protobufPackage = "cosmos.authz.v1beta1";
 
 /** GenesisState defines the authz module's genesis state. */
 export interface GenesisState {

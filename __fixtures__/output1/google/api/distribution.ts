@@ -2,6 +2,7 @@ import { Timestamp } from "../protobuf/timestamp";
 import { Any } from "../protobuf/any";
 import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, DeepPartial, toTimestamp, fromTimestamp, fromJsonTimestamp } from "@osmonauts/helpers";
+export const protobufPackage = "google.api";
 
 /**
  * `Distribution` contains summary statistics for a population of values. It

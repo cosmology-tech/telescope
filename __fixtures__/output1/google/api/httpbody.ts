@@ -1,6 +1,7 @@
 import { Any } from "../protobuf/any";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "@osmonauts/helpers";
+export const protobufPackage = "google.api";
 
 /**
  * Message that represents an arbitrary HTTP body. It should only be used for

@@ -1,5 +1,6 @@
 import * as _m0 from "protobufjs/minimal";
 import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "@osmonauts/helpers";
+export const protobufPackage = "cosmos.crypto.secp256r1";
 
 /** PubKey defines a secp256r1 ECDSA public key. */
 export interface PubKey {

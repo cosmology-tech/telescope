@@ -1,5 +1,6 @@
 import * as _m0 from "protobufjs/minimal";
 import { DeepPartial } from "@osmonauts/helpers";
+export const protobufPackage = "cosmos.orm.module.v1alpha1";
 
 /**
  * Module defines the ORM module which adds providers to the app container for

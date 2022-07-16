@@ -3,6 +3,7 @@ import { Any } from "../protobuf/any";
 import { Status } from "../rpc/status";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "@osmonauts/helpers";
+export const protobufPackage = "google.longrunning";
 
 /**
  * This resource represents a long-running operation that is the result of a

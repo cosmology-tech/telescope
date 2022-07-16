@@ -1,6 +1,7 @@
 import { Distribution_Exemplar } from "../../distribution";
 import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, DeepPartial } from "@osmonauts/helpers";
+export const protobufPackage = "google.api.servicecontrol.v1";
 
 /**
  * Distribution represents a frequency distribution of double-valued sample

@@ -3,6 +3,7 @@ import { DistrInfo, Params } from "./incentives";
 import { Gauge } from "../../incentives/gauge";
 import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, DeepPartial } from "@osmonauts/helpers";
+export const protobufPackage = "osmosis.poolincentives.v1beta1";
 export interface QueryGaugeIdsRequest {
   poolId: Long;
 }

@@ -1,6 +1,7 @@
 import { GroupSpec } from "../../deployment/v1beta2/groupspec";
 import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, DeepPartial } from "@osmonauts/helpers";
+export const protobufPackage = "akash.market.v1beta2";
 
 /** State is an enum which refers to state of order */
 export enum Order_State {

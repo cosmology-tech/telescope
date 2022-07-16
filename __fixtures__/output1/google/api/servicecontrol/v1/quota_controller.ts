@@ -2,6 +2,7 @@ import { MetricValueSet } from "./metric_value";
 import { Status } from "../../../rpc/status";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, isObject } from "@osmonauts/helpers";
+export const protobufPackage = "google.api.servicecontrol.v1";
 
 /** Supported quota modes. */
 export enum QuotaOperation_QuotaMode {

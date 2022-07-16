@@ -1,6 +1,7 @@
 import { PoolParams, PoolAsset } from "./balancerPool";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, Long } from "@osmonauts/helpers";
+export const protobufPackage = "osmosis.gamm.v1beta1";
 
 /** ===================== MsgCreatePool */
 export interface MsgCreateBalancerPool {

@@ -1,5 +1,6 @@
 import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "@osmonauts/helpers";
+export const protobufPackage = "cosmos.base.query.v1beta1";
 
 /**
  * PageRequest is to be embedded in gRPC request messages for efficient

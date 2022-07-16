@@ -4,6 +4,7 @@ import { Duration } from "../../protobuf/duration";
 import { Any } from "../../protobuf/any";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, Long, isObject, toTimestamp, fromTimestamp, fromJsonTimestamp } from "@osmonauts/helpers";
+export const protobufPackage = "google.rpc.context";
 
 /**
  * This message defines the standard attribute vocabulary for Google APIs.

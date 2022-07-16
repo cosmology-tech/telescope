@@ -1,6 +1,7 @@
 import { Params } from "./params";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "@osmonauts/helpers";
+export const protobufPackage = "akash.inflation.v1beta2";
 
 /** GenesisState stores slice of genesis deployment instance */
 export interface GenesisState {

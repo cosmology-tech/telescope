@@ -1,5 +1,6 @@
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "@osmonauts/helpers";
+export const protobufPackage = "evmos.inflation.v1";
 
 /**
  * InflationDistribution defines the distribution in which inflation is
