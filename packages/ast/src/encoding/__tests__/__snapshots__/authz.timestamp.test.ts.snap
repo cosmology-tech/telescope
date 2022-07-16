@@ -1,6 +1,55 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Authz timestamp encoder 1`] = `
+exports[`Authz timestamp amino 1`] = `
+"export const AminoConverter = {
+  \\"/cosmos.authz.v1beta1.Grant\\": {
+    aminoType: \\"cosmos-sdk/Grant\\",
+    toAmino: ({
+      authorization,
+      expiration
+    }: Grant): AminoGrant[\\"value\\"] => {
+      return {
+        authorization: {
+          type_url: authorization.typeUrl,
+          value: authorization.value
+        },
+        expiration
+      };
+    },
+    fromAmino: ({
+      authorization,
+      expiration
+    }: AminoGrant[\\"value\\"]): Grant => {
+      return {
+        authorization: {
+          typeUrl: authorization.type_url,
+          value: authorization.value
+        },
+        expiration
+      };
+    }
+  }
+};"
+`;
+
+exports[`Authz timestamp interface 1`] = `
+"/**
+ * Grant gives permissions to execute
+ * the provide method with expiration time.
+ */
+export interface Grant {
+  authorization: Any;
+
+  /**
+   * time when the grant will expire and will be pruned. If null, then the grant
+   * doesn't have a time expiration (other conditions  in \`authorization\`
+   * may apply to invalidate the grant)
+   */
+  expiration?: Date;
+}"
+`;
+
+exports[`Authz timestamp proto 1`] = `
 "export const Grant = {
   encode(message: Grant, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.authorization !== undefined) {
@@ -62,21 +111,4 @@ exports[`Authz timestamp encoder 1`] = `
   }
 
 };"
-`;
-
-exports[`Authz timestamp interface 1`] = `
-"/**
- * Grant gives permissions to execute
- * the provide method with expiration time.
- */
-export interface Grant {
-  authorization: Any;
-
-  /**
-   * time when the grant will expire and will be pruned. If null, then the grant
-   * doesn't have a time expiration (other conditions  in \`authorization\`
-   * may apply to invalidate the grant)
-   */
-  expiration?: Date;
-}"
 `;
