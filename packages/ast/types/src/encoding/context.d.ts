@@ -27,7 +27,10 @@ export declare class AminoParseContext extends GenericParseContext implements Pa
     options: TelescopeOptions;
     store: ProtoStore;
     ref: ProtoRef;
+    aminoCasingFn: Function;
     constructor(ref: ProtoRef, store: ProtoStore, options: TelescopeOptions);
+    private setAminoCasingFn;
+    aminoCaseField(field: ProtoField): string;
     private lookupTypeFromCurrentPath;
     getTypeFromCurrentPath(field: ProtoField, currentProtoPath: string): any;
     lookupEnumFromJson(field: ProtoField, currentProtoPath: string): string;

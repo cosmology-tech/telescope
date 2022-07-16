@@ -1,4 +1,5 @@
 import * as t from '@babel/types';
+import { ProtoField } from '@osmonauts/types';
 declare const BILLION: t.NumericLiteral;
 export { BILLION };
 export declare const cleanComment: (str: any) => any;
@@ -10,4 +11,5 @@ export declare const shorthandProperty: (prop: string) => t.ObjectProperty;
 export declare const importStmt: (names: string[], path: string) => t.ImportDeclaration;
 export declare const memberExpressionOrIdentifier: (names: any) => any;
 export declare const memberExpressionOrIdentifierAminoCasing: (names: any, aminoCasingFn: Function) => any;
+export declare const memberExpressionOrIdentifierAminoCaseField: (fields: ProtoField[], aminoCaseFunc: Function) => any;
 export declare const promiseTypeAnnotation: (name: any) => t.TSTypeAnnotation;

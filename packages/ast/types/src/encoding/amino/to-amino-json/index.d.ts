@@ -6,10 +6,11 @@ export interface ToAminoParseField {
     field: ProtoField;
     currentProtoPath: string;
     scope: string[];
+    fieldPath: ProtoField[];
     nested: number;
     isOptional: boolean;
 }
-export declare const toAminoParseField: ({ context, field, currentProtoPath, scope: previousScope, nested, isOptional }: ToAminoParseField) => any;
+export declare const toAminoParseField: ({ context, field, currentProtoPath, scope: previousScope, fieldPath: previousFieldPath, nested, isOptional }: ToAminoParseField) => any;
 interface toAminoJSON {
     context: AminoParseContext;
     proto: ProtoType;

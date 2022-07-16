@@ -81,7 +81,14 @@ export const decode = {
     timestamp(args: DecodeMethod) {
         const num = args.field.id;
         const prop = args.field.name;
-        return switchOnTag(num, prop, baseTypes.timestamp(args));
+        if (args.context.options.useDate === 'timestamp') {
+            return switchOnTag(num, prop, baseTypes.timestamp(args));
+        }
+        if (args.context.options.useDate === 'date') {
+            return switchOnTag(num, prop, baseTypes.timestampDate(args));
+        }
+        return switchOnTag(num, prop, baseTypes.timestampDate(args));
+
     },
     type(args: DecodeMethod) {
         const num = args.field.id;
@@ -396,9 +403,30 @@ export const baseTypes = {
         )
     },
 
-    // message.periodReset = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
+    // message.periodReset = Timestamp.decode(reader, reader.uint32());
 
     timestamp(args: DecodeMethod) {
+
+        return t.callExpression(
+            t.memberExpression(
+                t.identifier('Timestamp'),
+                t.identifier('decode')
+            ),
+            [
+                t.identifier('reader'),
+                t.callExpression(
+                    t.memberExpression(
+                        t.identifier('reader'),
+                        t.identifier('uint32')
+                    ),
+                    []
+                )
+            ]
+        )
+    },
+
+    timestampDate(args: DecodeMethod) {
+
         args.context.addUtil('fromTimestamp');
 
         return t.callExpression(

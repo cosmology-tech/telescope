@@ -1,9 +1,6 @@
 import { ProtoStore } from '@osmonauts/proto-parser';
 import { TelescopeParseContext } from './build';
-export interface TelescopeOptions {
-    includeAminos: boolean;
-    includeLCDClient: boolean;
-}
+import { TelescopeOptions } from '@osmonauts/types';
 export interface TelescopeInput {
     protoDirs: string[];
     outPath: string;
