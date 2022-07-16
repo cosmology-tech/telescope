@@ -9,7 +9,7 @@ export const aminoInterface = {
     defaultType(args: RenderAminoField) {
         return t.tsPropertySignature(
             t.identifier(args.context.aminoCaseField(args.field)),
-            t.tsTypeAnnotation(getTSTypeFromProtoType(args.field.type))
+            t.tsTypeAnnotation(getTSTypeFromProtoType(args.context, args.field.type))
         );
     },
     string(args: RenderAminoField) {
@@ -127,7 +127,7 @@ export const aminoInterface = {
             t.identifier(args.context.aminoCaseField(args.field)),
             t.tsTypeAnnotation(
                 arrayTypeNDim(
-                    getTSTypeFromProtoType(args.field.type),
+                    getTSTypeFromProtoType(args.context, args.field.type),
                     1
                 )
             )

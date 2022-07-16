@@ -158,7 +158,7 @@ export interface Grant {
    * doesn't have a time expiration (other conditions  in \`authorization\`
    * may apply to invalidate the grant)
    */
-  expiration?: Date;
+  expiration?: Timestamp;
 }"
 `;
 
@@ -212,14 +212,14 @@ exports[`cosmos/authz/v1beta1/authz timestamp proto 1`] = `
   toJSON(message: Grant): unknown {
     const obj: any = {};
     message.authorization !== undefined && (obj.authorization = message.authorization ? Any.toJSON(message.authorization) : undefined);
-    message.expiration !== undefined && (obj.expiration = message.expiration.toISOString());
+    message.expiration !== undefined && (obj.expiration = fromTimestamp(message.expiration).toISOString());
     return obj;
   },
 
   fromPartial(object: DeepPartial<Grant>): Grant {
     const message = createBaseGrant();
     message.authorization = object.authorization !== undefined && object.authorization !== null ? Any.fromPartial(object.authorization) : undefined;
-    message.expiration = object.expiration ?? undefined;
+    message.expiration = object.expiration !== undefined && object.expiration !== null ? Timestamp.fromPartial(object.expiration) : undefined;
     return message;
   }
 
