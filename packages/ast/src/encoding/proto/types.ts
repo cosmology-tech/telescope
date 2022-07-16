@@ -288,6 +288,22 @@ const getProtoField = (context: ProtoParseContext, field: ProtoField) => {
     let ast: any = null;
     let optional = false;
 
+    if (
+        field.parsedType.name === 'Any' &&
+        field.options?.['(cosmos_proto.accepts_interface)']) {
+        // look for implements_interface where
+        // (cosmos_proto.implements_interface) === (cosmos_proto.accepts_interface)
+        console.log(field);
+        /*
+
+        normally you would lookup from the current ref however, there is no actual type of this referenced Union type name so you need to iterate through all of the types in the ref and any imports
+
+        Q: should we create a type that is the Union so we can reference it? or should we just always look for this and explode the definition in place wherever we use it?
+
+        IDEA: maybe in parser, we should add meta info when we find `cosmos_proto.implements_interface` and `cosmos_proto.accepts_interface` so it's easy to query when needed, inline on this field
+        */
+    }
+
     if (field.options?.['(gogoproto.nullable)']) {
         optional = true;
     }
