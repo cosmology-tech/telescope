@@ -11,56 +11,56 @@ export const MessageComposer = {
   encoded: {
     joinPool(value: MsgJoinPool) {
       return {
-        type_url: "/osmosis.gamm.v1beta1.MsgJoinPool",
+        typeUrl: "/osmosis.gamm.v1beta1.MsgJoinPool",
         value: MsgJoinPool.encode(value).finish()
       };
     },
 
     exitPool(value: MsgExitPool) {
       return {
-        type_url: "/osmosis.gamm.v1beta1.MsgExitPool",
+        typeUrl: "/osmosis.gamm.v1beta1.MsgExitPool",
         value: MsgExitPool.encode(value).finish()
       };
     },
 
     swapExactAmountIn(value: MsgSwapExactAmountIn) {
       return {
-        type_url: "/osmosis.gamm.v1beta1.MsgSwapExactAmountIn",
+        typeUrl: "/osmosis.gamm.v1beta1.MsgSwapExactAmountIn",
         value: MsgSwapExactAmountIn.encode(value).finish()
       };
     },
 
     swapExactAmountOut(value: MsgSwapExactAmountOut) {
       return {
-        type_url: "/osmosis.gamm.v1beta1.MsgSwapExactAmountOut",
+        typeUrl: "/osmosis.gamm.v1beta1.MsgSwapExactAmountOut",
         value: MsgSwapExactAmountOut.encode(value).finish()
       };
     },
 
     joinSwapExternAmountIn(value: MsgJoinSwapExternAmountIn) {
       return {
-        type_url: "/osmosis.gamm.v1beta1.MsgJoinSwapExternAmountIn",
+        typeUrl: "/osmosis.gamm.v1beta1.MsgJoinSwapExternAmountIn",
         value: MsgJoinSwapExternAmountIn.encode(value).finish()
       };
     },
 
     joinSwapShareAmountOut(value: MsgJoinSwapShareAmountOut) {
       return {
-        type_url: "/osmosis.gamm.v1beta1.MsgJoinSwapShareAmountOut",
+        typeUrl: "/osmosis.gamm.v1beta1.MsgJoinSwapShareAmountOut",
         value: MsgJoinSwapShareAmountOut.encode(value).finish()
       };
     },
 
     exitSwapExternAmountOut(value: MsgExitSwapExternAmountOut) {
       return {
-        type_url: "/osmosis.gamm.v1beta1.MsgExitSwapExternAmountOut",
+        typeUrl: "/osmosis.gamm.v1beta1.MsgExitSwapExternAmountOut",
         value: MsgExitSwapExternAmountOut.encode(value).finish()
       };
     },
 
     exitSwapShareAmountIn(value: MsgExitSwapShareAmountIn) {
       return {
-        type_url: "/osmosis.gamm.v1beta1.MsgExitSwapShareAmountIn",
+        typeUrl: "/osmosis.gamm.v1beta1.MsgExitSwapShareAmountIn",
         value: MsgExitSwapShareAmountIn.encode(value).finish()
       };
     }

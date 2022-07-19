@@ -11,14 +11,14 @@ export const MessageComposer = {
   encoded: {
     signProviderAttributes(value: MsgSignProviderAttributes) {
       return {
-        type_url: "/akash.audit.v1beta1.MsgSignProviderAttributes",
+        typeUrl: "/akash.audit.v1beta1.MsgSignProviderAttributes",
         value: MsgSignProviderAttributes.encode(value).finish()
       };
     },
 
     deleteProviderAttributes(value: MsgDeleteProviderAttributes) {
       return {
-        type_url: "/akash.audit.v1beta1.MsgDeleteProviderAttributes",
+        typeUrl: "/akash.audit.v1beta1.MsgDeleteProviderAttributes",
         value: MsgDeleteProviderAttributes.encode(value).finish()
       };
     }

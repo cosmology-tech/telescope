@@ -10,7 +10,7 @@ export const MessageComposer = {
   encoded: {
     send(value: MsgSend) {
       return {
-        type_url: "/cosmos.nft.v1beta1.MsgSend",
+        typeUrl: "/cosmos.nft.v1beta1.MsgSend",
         value: MsgSend.encode(value).finish()
       };
     }

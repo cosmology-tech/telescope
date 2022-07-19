@@ -11,21 +11,21 @@ export const MessageComposer = {
   encoded: {
     createProvider(value: MsgCreateProvider) {
       return {
-        type_url: "/akash.provider.v1beta1.MsgCreateProvider",
+        typeUrl: "/akash.provider.v1beta1.MsgCreateProvider",
         value: MsgCreateProvider.encode(value).finish()
       };
     },
 
     updateProvider(value: MsgUpdateProvider) {
       return {
-        type_url: "/akash.provider.v1beta1.MsgUpdateProvider",
+        typeUrl: "/akash.provider.v1beta1.MsgUpdateProvider",
         value: MsgUpdateProvider.encode(value).finish()
       };
     },
 
     deleteProvider(value: MsgDeleteProvider) {
       return {
-        type_url: "/akash.provider.v1beta1.MsgDeleteProvider",
+        typeUrl: "/akash.provider.v1beta1.MsgDeleteProvider",
         value: MsgDeleteProvider.encode(value).finish()
       };
     }

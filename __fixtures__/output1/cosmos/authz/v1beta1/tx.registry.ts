@@ -12,21 +12,21 @@ export const MessageComposer = {
   encoded: {
     grant(value: MsgGrant) {
       return {
-        type_url: "/cosmos.authz.v1beta1.MsgGrant",
+        typeUrl: "/cosmos.authz.v1beta1.MsgGrant",
         value: MsgGrant.encode(value).finish()
       };
     },
 
     exec(value: MsgExec) {
       return {
-        type_url: "/cosmos.authz.v1beta1.MsgExec",
+        typeUrl: "/cosmos.authz.v1beta1.MsgExec",
         value: MsgExec.encode(value).finish()
       };
     },
 
     revoke(value: MsgRevoke) {
       return {
-        type_url: "/cosmos.authz.v1beta1.MsgRevoke",
+        typeUrl: "/cosmos.authz.v1beta1.MsgRevoke",
         value: MsgRevoke.encode(value).finish()
       };
     }

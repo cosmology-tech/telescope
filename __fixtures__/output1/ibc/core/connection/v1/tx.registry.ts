@@ -13,28 +13,28 @@ export const MessageComposer = {
   encoded: {
     connectionOpenInit(value: MsgConnectionOpenInit) {
       return {
-        type_url: "/ibc.core.connection.v1.MsgConnectionOpenInit",
+        typeUrl: "/ibc.core.connection.v1.MsgConnectionOpenInit",
         value: MsgConnectionOpenInit.encode(value).finish()
       };
     },
 
     connectionOpenTry(value: MsgConnectionOpenTry) {
       return {
-        type_url: "/ibc.core.connection.v1.MsgConnectionOpenTry",
+        typeUrl: "/ibc.core.connection.v1.MsgConnectionOpenTry",
         value: MsgConnectionOpenTry.encode(value).finish()
       };
     },
 
     connectionOpenAck(value: MsgConnectionOpenAck) {
       return {
-        type_url: "/ibc.core.connection.v1.MsgConnectionOpenAck",
+        typeUrl: "/ibc.core.connection.v1.MsgConnectionOpenAck",
         value: MsgConnectionOpenAck.encode(value).finish()
       };
     },
 
     connectionOpenConfirm(value: MsgConnectionOpenConfirm) {
       return {
-        type_url: "/ibc.core.connection.v1.MsgConnectionOpenConfirm",
+        typeUrl: "/ibc.core.connection.v1.MsgConnectionOpenConfirm",
         value: MsgConnectionOpenConfirm.encode(value).finish()
       };
     }

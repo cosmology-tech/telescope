@@ -11,28 +11,28 @@ export const MessageComposer = {
   encoded: {
     superfluidDelegate(value: MsgSuperfluidDelegate) {
       return {
-        type_url: "/osmosis.superfluid.MsgSuperfluidDelegate",
+        typeUrl: "/osmosis.superfluid.MsgSuperfluidDelegate",
         value: MsgSuperfluidDelegate.encode(value).finish()
       };
     },
 
     superfluidUndelegate(value: MsgSuperfluidUndelegate) {
       return {
-        type_url: "/osmosis.superfluid.MsgSuperfluidUndelegate",
+        typeUrl: "/osmosis.superfluid.MsgSuperfluidUndelegate",
         value: MsgSuperfluidUndelegate.encode(value).finish()
       };
     },
 
     superfluidUnbondLock(value: MsgSuperfluidUnbondLock) {
       return {
-        type_url: "/osmosis.superfluid.MsgSuperfluidUnbondLock",
+        typeUrl: "/osmosis.superfluid.MsgSuperfluidUnbondLock",
         value: MsgSuperfluidUnbondLock.encode(value).finish()
       };
     },
 
     lockAndSuperfluidDelegate(value: MsgLockAndSuperfluidDelegate) {
       return {
-        type_url: "/osmosis.superfluid.MsgLockAndSuperfluidDelegate",
+        typeUrl: "/osmosis.superfluid.MsgLockAndSuperfluidDelegate",
         value: MsgLockAndSuperfluidDelegate.encode(value).finish()
       };
     }

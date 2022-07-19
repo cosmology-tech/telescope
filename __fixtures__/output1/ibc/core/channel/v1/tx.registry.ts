@@ -12,70 +12,70 @@ export const MessageComposer = {
   encoded: {
     channelOpenInit(value: MsgChannelOpenInit) {
       return {
-        type_url: "/ibc.core.channel.v1.MsgChannelOpenInit",
+        typeUrl: "/ibc.core.channel.v1.MsgChannelOpenInit",
         value: MsgChannelOpenInit.encode(value).finish()
       };
     },
 
     channelOpenTry(value: MsgChannelOpenTry) {
       return {
-        type_url: "/ibc.core.channel.v1.MsgChannelOpenTry",
+        typeUrl: "/ibc.core.channel.v1.MsgChannelOpenTry",
         value: MsgChannelOpenTry.encode(value).finish()
       };
     },
 
     channelOpenAck(value: MsgChannelOpenAck) {
       return {
-        type_url: "/ibc.core.channel.v1.MsgChannelOpenAck",
+        typeUrl: "/ibc.core.channel.v1.MsgChannelOpenAck",
         value: MsgChannelOpenAck.encode(value).finish()
       };
     },
 
     channelOpenConfirm(value: MsgChannelOpenConfirm) {
       return {
-        type_url: "/ibc.core.channel.v1.MsgChannelOpenConfirm",
+        typeUrl: "/ibc.core.channel.v1.MsgChannelOpenConfirm",
         value: MsgChannelOpenConfirm.encode(value).finish()
       };
     },
 
     channelCloseInit(value: MsgChannelCloseInit) {
       return {
-        type_url: "/ibc.core.channel.v1.MsgChannelCloseInit",
+        typeUrl: "/ibc.core.channel.v1.MsgChannelCloseInit",
         value: MsgChannelCloseInit.encode(value).finish()
       };
     },
 
     channelCloseConfirm(value: MsgChannelCloseConfirm) {
       return {
-        type_url: "/ibc.core.channel.v1.MsgChannelCloseConfirm",
+        typeUrl: "/ibc.core.channel.v1.MsgChannelCloseConfirm",
         value: MsgChannelCloseConfirm.encode(value).finish()
       };
     },
 
     recvPacket(value: MsgRecvPacket) {
       return {
-        type_url: "/ibc.core.channel.v1.MsgRecvPacket",
+        typeUrl: "/ibc.core.channel.v1.MsgRecvPacket",
         value: MsgRecvPacket.encode(value).finish()
       };
     },
 
     timeout(value: MsgTimeout) {
       return {
-        type_url: "/ibc.core.channel.v1.MsgTimeout",
+        typeUrl: "/ibc.core.channel.v1.MsgTimeout",
         value: MsgTimeout.encode(value).finish()
       };
     },
 
     timeoutOnClose(value: MsgTimeoutOnClose) {
       return {
-        type_url: "/ibc.core.channel.v1.MsgTimeoutOnClose",
+        typeUrl: "/ibc.core.channel.v1.MsgTimeoutOnClose",
         value: MsgTimeoutOnClose.encode(value).finish()
       };
     },
 
     acknowledgement(value: MsgAcknowledgement) {
       return {
-        type_url: "/ibc.core.channel.v1.MsgAcknowledgement",
+        typeUrl: "/ibc.core.channel.v1.MsgAcknowledgement",
         value: MsgAcknowledgement.encode(value).finish()
       };
     }

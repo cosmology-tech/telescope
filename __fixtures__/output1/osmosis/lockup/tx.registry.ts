@@ -13,21 +13,21 @@ export const MessageComposer = {
   encoded: {
     lockTokens(value: MsgLockTokens) {
       return {
-        type_url: "/osmosis.lockup.MsgLockTokens",
+        typeUrl: "/osmosis.lockup.MsgLockTokens",
         value: MsgLockTokens.encode(value).finish()
       };
     },
 
     beginUnlockingAll(value: MsgBeginUnlockingAll) {
       return {
-        type_url: "/osmosis.lockup.MsgBeginUnlockingAll",
+        typeUrl: "/osmosis.lockup.MsgBeginUnlockingAll",
         value: MsgBeginUnlockingAll.encode(value).finish()
       };
     },
 
     beginUnlocking(value: MsgBeginUnlocking) {
       return {
-        type_url: "/osmosis.lockup.MsgBeginUnlocking",
+        typeUrl: "/osmosis.lockup.MsgBeginUnlocking",
         value: MsgBeginUnlocking.encode(value).finish()
       };
     }

@@ -13,35 +13,35 @@ export const MessageComposer = {
   encoded: {
     createBid(value: MsgCreateBid) {
       return {
-        type_url: "/akash.market.v1beta2.MsgCreateBid",
+        typeUrl: "/akash.market.v1beta2.MsgCreateBid",
         value: MsgCreateBid.encode(value).finish()
       };
     },
 
     closeBid(value: MsgCloseBid) {
       return {
-        type_url: "/akash.market.v1beta2.MsgCloseBid",
+        typeUrl: "/akash.market.v1beta2.MsgCloseBid",
         value: MsgCloseBid.encode(value).finish()
       };
     },
 
     withdrawLease(value: MsgWithdrawLease) {
       return {
-        type_url: "/akash.market.v1beta2.MsgWithdrawLease",
+        typeUrl: "/akash.market.v1beta2.MsgWithdrawLease",
         value: MsgWithdrawLease.encode(value).finish()
       };
     },
 
     createLease(value: MsgCreateLease) {
       return {
-        type_url: "/akash.market.v1beta2.MsgCreateLease",
+        typeUrl: "/akash.market.v1beta2.MsgCreateLease",
         value: MsgCreateLease.encode(value).finish()
       };
     },
 
     closeLease(value: MsgCloseLease) {
       return {
-        type_url: "/akash.market.v1beta2.MsgCloseLease",
+        typeUrl: "/akash.market.v1beta2.MsgCloseLease",
         value: MsgCloseLease.encode(value).finish()
       };
     }
