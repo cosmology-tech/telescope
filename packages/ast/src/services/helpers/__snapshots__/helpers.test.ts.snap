@@ -3,7 +3,7 @@
 exports[`addEncodedMethod 1`] = `
 "joinPool(value: MsgJoinPool) {
   return {
-    type_url: \\"/cosmos.pools.transfer.v1.MsgJoinPool\\",
+    typeUrl: \\"/cosmos.pools.transfer.v1.MsgJoinPool\\",
     value: MsgJoinPool.encode(value).finish()
   };
 }"
@@ -50,14 +50,14 @@ exports[`createHelperObject 1`] = `
   encoded: {
     joinPool(value: MsgJoinPool) {
       return {
-        type_url: \\"/cosmos.pools.transfer.v1.MsgJoinPool\\",
+        typeUrl: \\"/cosmos.pools.transfer.v1.MsgJoinPool\\",
         value: MsgJoinPool.encode(value).finish()
       };
     },
 
     exitPool(value: MsgExitPool) {
       return {
-        type_url: \\"/cosmos.pools.transfer.v1.MsgExitPool\\",
+        typeUrl: \\"/cosmos.pools.transfer.v1.MsgExitPool\\",
         value: MsgExitPool.encode(value).finish()
       };
     }

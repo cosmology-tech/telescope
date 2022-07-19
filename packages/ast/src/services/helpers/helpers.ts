@@ -104,7 +104,7 @@ export const addEncodedMethod = ({ methodName, typeUrl, TypeName }) => {
             t.objectExpression([
 
                 t.objectProperty(
-                    t.identifier('type_url'),
+                    t.identifier('typeUrl'),
                     t.stringLiteral(typeUrl)
                 ),
 
