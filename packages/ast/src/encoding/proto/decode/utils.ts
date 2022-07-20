@@ -76,7 +76,11 @@ export const decode = {
     duration(args: DecodeMethod) {
         const num = args.field.id;
         const prop = args.field.name;
-        return switchOnTag(num, prop, baseTypes.duration(args));
+        if (args.context.options.useDuration === 'string') {
+            return switchOnTag(num, prop, baseTypes.duration(args));
+        }
+        // defaults to Type (Duration)
+        return switchOnTag(num, prop, baseTypes.type(args));
     },
     timestamp(args: DecodeMethod) {
         const num = args.field.id;
