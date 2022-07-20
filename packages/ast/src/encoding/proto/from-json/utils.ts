@@ -273,10 +273,17 @@ export const fromJSON = {
     },
 
     // period: isSet(object.period) ? String(object.period) : undefined,
+
+    // period: isSet(object.period) ? Duration.fromJSON(object.period) : undefined,
+
     duration(args: FromJSONMethod) {
         const prop = args.field.name;
-        args.context.addUtil('isSet');
 
+        if (args.context.options.useDuration !== 'string') {
+            return fromJSON.type(args);
+        }
+
+        args.context.addUtil('isSet');
         return t.objectProperty(
             t.identifier(prop),
             t.conditionalExpression(
