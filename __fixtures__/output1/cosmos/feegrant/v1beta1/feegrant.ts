@@ -34,7 +34,7 @@ export interface PeriodicAllowance {
    * period specifies the time duration in which period_spend_limit coins can
    * be spent before that allowance is reset
    */
-  period: string;
+  period: Duration;
 
   /**
    * period_spend_limit specifies the maximum number of coins that can be spent

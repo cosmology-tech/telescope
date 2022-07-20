@@ -41,7 +41,7 @@ export interface ValidatorSigningInfo {
 export interface Params {
   signedBlocksWindow: Long;
   minSignedPerWindow: Uint8Array;
-  downtimeJailDuration: string;
+  downtimeJailDuration: Duration;
   slashFractionDoubleSign: Uint8Array;
   slashFractionDowntime: Uint8Array;
 }

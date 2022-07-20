@@ -67,7 +67,7 @@ export interface HttpRequest {
    * The request processing latency on the server, from the time the request was
    * received until the response was sent.
    */
-  latency: string;
+  latency: Duration;
 
   /** Whether or not a cache lookup was attempted. */
   cacheLookup: boolean;

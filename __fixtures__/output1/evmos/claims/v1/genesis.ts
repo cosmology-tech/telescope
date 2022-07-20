@@ -23,10 +23,10 @@ export interface Params {
   airdropStartTime: Date;
 
   /** duration until decay of claimable tokens begin */
-  durationUntilDecay: string;
+  durationUntilDecay: Duration;
 
   /** duration of the token claim decay period */
-  durationOfDecay: string;
+  durationOfDecay: Duration;
 
   /** denom of claimable coin */
   claimsDenom: string;

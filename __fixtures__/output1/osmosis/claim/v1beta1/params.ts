@@ -7,8 +7,8 @@ export const protobufPackage = "osmosis.claim.v1beta1";
 /** Params defines the claim module's parameters. */
 export interface Params {
   airdropStartTime: Date;
-  durationUntilDecay: string;
-  durationOfDecay: string;
+  durationUntilDecay: Duration;
+  durationOfDecay: Duration;
 
   /** denom of claimable asset */
   claimDenom: string;

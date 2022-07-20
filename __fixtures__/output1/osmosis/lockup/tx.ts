@@ -6,7 +6,7 @@ import { isSet, DeepPartial, Long } from "@osmonauts/helpers";
 export const protobufPackage = "osmosis.lockup";
 export interface MsgLockTokens {
   owner: string;
-  duration: string;
+  duration: Duration;
   coins: Coin[];
 }
 export interface MsgLockTokensResponse {

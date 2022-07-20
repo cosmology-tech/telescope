@@ -282,7 +282,7 @@ export interface Redelegation {
 /** Params defines the parameters for the staking module. */
 export interface Params {
   /** unbonding_time is the time duration of unbonding. */
-  unbondingTime: string;
+  unbondingTime: Duration;
 
   /** max_validators is the maximum number of validators. */
   maxValidators: number;

@@ -253,13 +253,13 @@ export interface DepositParams {
    * Maximum period for Atom holders to deposit on a proposal. Initial value: 2
    * months.
    */
-  maxDepositPeriod: string;
+  maxDepositPeriod: Duration;
 }
 
 /** VotingParams defines the params for voting on governance proposals. */
 export interface VotingParams {
   /** Length of the voting period. */
-  votingPeriod: string;
+  votingPeriod: Duration;
 }
 
 /** TallyParams defines the params for tallying votes on governance proposals. */

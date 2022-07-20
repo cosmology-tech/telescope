@@ -411,7 +411,7 @@ export interface TailLogEntriesRequest {
    * entries. Valid values are between 0-60000 milliseconds. Defaults to 2000
    * milliseconds.
    */
-  bufferWindow: string;
+  bufferWindow: Duration;
 }
 
 /** Result returned from `TailLogEntries`. */

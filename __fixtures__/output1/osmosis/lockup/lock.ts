@@ -49,7 +49,7 @@ export function lockQueryTypeToJSON(object: LockQueryType): string {
 export interface PeriodLock {
   ID: Long;
   owner: string;
-  duration: string;
+  duration: Duration;
   endTime: Date;
   coins: Coin[];
 }
@@ -61,7 +61,7 @@ export interface QueryCondition {
   denom: string;
 
   /** valid when query condition is ByDuration */
-  duration: string;
+  duration: Duration;
 
   /** valid when query condition is ByTime */
   timestamp: Date;
@@ -93,7 +93,7 @@ export interface SyntheticLock {
    * value is set to uninitialized value
    */
   endTime: Date;
-  duration: string;
+  duration: Duration;
 }
 
 function createBasePeriodLock(): PeriodLock {

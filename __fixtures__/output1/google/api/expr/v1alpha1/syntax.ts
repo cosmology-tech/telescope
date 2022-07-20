@@ -273,7 +273,7 @@ export interface Constant {
    */
 
   /** @deprecated */
-  durationValue?: string;
+  durationValue?: Duration;
 
   /**
    * protobuf.Timestamp value.

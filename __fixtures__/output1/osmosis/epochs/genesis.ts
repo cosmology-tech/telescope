@@ -6,7 +6,7 @@ export const protobufPackage = "osmosis.epochs.v1beta1";
 export interface EpochInfo {
   identifier: string;
   startTime: Date;
-  duration: string;
+  duration: Duration;
   currentEpoch: Long;
   currentEpochStartTime: Date;
   epochCountingStarted: boolean;

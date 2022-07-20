@@ -319,7 +319,7 @@ export interface AttributeContext_Response {
    * request to the backend until when the destination service receives the
    * complete response from the backend.
    */
-  backendLatency: string;
+  backendLatency: Duration;
 }
 export interface AttributeContext_Resource_LabelsEntry {
   key: string;

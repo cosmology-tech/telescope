@@ -21,13 +21,13 @@ export interface ClientState {
    * duration of the period since the LastestTimestamp during which the
    * submitted headers are valid for upgrade
    */
-  trustingPeriod: string;
+  trustingPeriod: Duration;
 
   /** duration of the staking unbonding period */
-  unbondingPeriod: string;
+  unbondingPeriod: Duration;
 
   /** defines how much new (untrusted) header's Time can drift into the future. */
-  maxClockDrift: string;
+  maxClockDrift: Duration;
 
   /** Block height when the client was frozen due to a misbehaviour */
   frozenHeight: Height;

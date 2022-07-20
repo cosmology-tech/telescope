@@ -308,7 +308,7 @@ export interface DecisionPolicyWindows {
    * voting_period is the duration from submission of a proposal to the end of voting period
    * Within this times votes can be submitted with MsgVote.
    */
-  votingPeriod: string;
+  votingPeriod: Duration;
 
   /**
    * min_execution_period is the minimum duration after the proposal submission
@@ -323,7 +323,7 @@ export interface DecisionPolicyWindows {
    * is empty, meaning that all proposals created with this decision policy
    * won't be able to be executed.
    */
-  minExecutionPeriod: string;
+  minExecutionPeriod: Duration;
 }
 
 /** GroupInfo represents the high-level on-chain information for a group. */
