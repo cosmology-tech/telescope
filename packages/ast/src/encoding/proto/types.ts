@@ -54,13 +54,13 @@ export const getTSTypeFromProtoType = (context: GenericParseContext, type: strin
         case 'bool':
             return t.tsBooleanKeyword();
         case 'google.protobuf.Timestamp':
-            if (context.options.useDate === 'timestamp') {
-                return t.tsTypeReference(t.identifier('Timestamp'));
+            switch (context.options.useDate) {
+                case 'timestamp':
+                    return t.tsTypeReference(t.identifier('Timestamp'));
+                case 'date':
+                default:
+                    return t.tsTypeReference(t.identifier('Date'));
             }
-            if (context.options.useDate === 'date') {
-                return t.tsTypeReference(t.identifier('Date'));
-            }
-            return t.tsTypeReference(t.identifier('Date'));
         case 'google.protobuf.Duration':
             return t.tsStringKeyword();
         case 'google.protobuf.Any':
@@ -164,7 +164,11 @@ export const getTagNumber = (field: ProtoField) => {
 };
 
 
-export const getDefaultTSTypeFromProtoType = (field: ProtoField, isOptional: boolean) => {
+export const getDefaultTSTypeFromProtoType = (
+    context: ProtoParseContext, // here for future forceLong=string
+    field: ProtoField,
+    isOptional: boolean
+) => {
 
     if (isOptional) {
         return t.identifier('undefined');
@@ -319,101 +323,5 @@ const getProtoField = (context: ProtoParseContext, field: ProtoField) => {
     }
 
     return ast;
-};
-
-export const createProtoType = (
-    context: ProtoParseContext,
-    name: string,
-    proto: ProtoType
-) => {
-    const oneOfs = getOneOfs(proto);
-
-    const declaration = t.exportNamedDeclaration(t.tsInterfaceDeclaration(
-        t.identifier(name),
-        null,
-        [],
-        t.tsInterfaceBody(
-            Object.keys(proto.fields).reduce((m, fieldName) => {
-                const isOneOf = oneOfs.includes(fieldName);
-                const field = proto.fields[fieldName];
-                const propSig = tsPropertySignature(
-                    t.identifier(fieldName),
-                    t.tsTypeAnnotation(
-                        getProtoField(context, field)
-                    ),
-                    getFieldOptionality(field, isOneOf)
-                );
-
-                const comments = [];
-                if (field.comment) {
-                    comments.push(
-                        commentBlock(field.comment)
-                    );
-                }
-                if (field.options?.deprecated) {
-                    comments.push(
-                        commentBlock('@deprecated')
-                    );
-                }
-                if (comments.length) {
-                    propSig.leadingComments = comments;
-                }
-
-                m.push(propSig)
-                return m;
-            }, [])
-        )
-    ));
-
-    const comments = [];
-
-    if (proto.comment) {
-        comments.push(commentBlock(proto.comment));
-    }
-
-    if (proto.options?.deprecated) {
-        comments.push(commentBlock('@deprecated'));
-    }
-
-    if (comments.length) {
-        declaration.leadingComments = comments;
-    }
-
-
-    return declaration;
-};
-
-
-export const createCreateProtoType = (name: string, proto: ProtoType) => {
-    const oneOfs = getOneOfs(proto);
-
-    const fields = Object.keys(proto.fields).map(key => {
-        const isOneOf = oneOfs.includes(key);
-        const isOptional = getFieldOptionality(proto.fields[key], isOneOf)
-        return {
-            name: key,
-            ...proto.fields[key],
-            isOptional
-        };
-    })
-        .map(field => {
-            return t.objectProperty(
-                t.identifier(field.name),
-                getDefaultTSTypeFromProtoType(field, field.isOptional)
-            )
-        })
-
-
-    return functionDeclaration(t.identifier(getBaseCreateTypeFuncName(name)),
-        [],
-        t.blockStatement([
-            t.returnStatement(t.objectExpression(
-                [
-                    ...fields,
-                ]
-            ))
-        ]), false, false, t.tsTypeAnnotation(
-            t.tsTypeReference(t.identifier(name))
-        ))
 };
 

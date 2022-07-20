@@ -21,6 +21,7 @@ export declare const fromJSON: {
     enum(args: FromJSONMethod): t.ObjectProperty;
     bytes(args: FromJSONMethod): t.ObjectProperty;
     duration(args: FromJSONMethod): t.ObjectProperty;
+    durationString(args: FromJSONMethod): t.ObjectProperty;
     timestamp(args: FromJSONMethod): t.ObjectProperty;
     keyHash(args: FromJSONMethod): t.ObjectProperty;
     array(args: FromJSONMethod, expr: t.Expression): t.ObjectProperty;

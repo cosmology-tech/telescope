@@ -75,7 +75,7 @@ export const fromPartial = {
         const prop = args.field.name;
         return setNullishCoalescing(
             prop,
-            getDefaultTSTypeFromProtoType(args.field, args.isOptional)
+            getDefaultTSTypeFromProtoType(args.context, args.field, args.isOptional)
         );
     },
 
@@ -84,7 +84,7 @@ export const fromPartial = {
         const prop = args.field.name;
         return setNullishCoalescing(
             prop,
-            getDefaultTSTypeFromProtoType(args.field, args.isOptional)
+            getDefaultTSTypeFromProtoType(args.context, args.field, args.isOptional)
         );
     },
 
@@ -94,7 +94,7 @@ export const fromPartial = {
         const prop = args.field.name;
         return setNullishCoalescing(
             prop,
-            getDefaultTSTypeFromProtoType(args.field, args.isOptional)
+            getDefaultTSTypeFromProtoType(args.context, args.field, args.isOptional)
         );
     },
 
@@ -138,7 +138,7 @@ export const fromPartial = {
                     )
                 ]
             ),
-            getDefaultTSTypeFromProtoType(args.field, args.isOptional)
+            getDefaultTSTypeFromProtoType(args.context, args.field, args.isOptional)
         );
     },
 
@@ -185,7 +185,7 @@ export const fromPartial = {
         const prop = args.field.name;
         return setNullishCoalescing(
             prop,
-            getDefaultTSTypeFromProtoType(args.field, args.isOptional)
+            getDefaultTSTypeFromProtoType(args.context, args.field, args.isOptional)
         );
     },
 
@@ -194,7 +194,7 @@ export const fromPartial = {
         const prop = args.field.name;
         return setNullishCoalescing(
             prop,
-            getDefaultTSTypeFromProtoType(args.field, args.isOptional)
+            getDefaultTSTypeFromProtoType(args.context, args.field, args.isOptional)
         );
     },
 

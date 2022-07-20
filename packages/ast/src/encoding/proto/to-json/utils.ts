@@ -103,7 +103,7 @@ export const toJSON = {
                             t.identifier('message'),
                             t.identifier(prop)
                         ),
-                        getDefaultTSTypeFromProtoType(args.field, args.isOptional)
+                        getDefaultTSTypeFromProtoType(args.context, args.field, args.isOptional)
                     ),
                     t.identifier('toString')
                 ),
@@ -219,7 +219,7 @@ export const toJSON = {
                             t.identifier('message'),
                             t.identifier(args.field.name)
                         ),
-                        getDefaultTSTypeFromProtoType(args.field, args.isOptional)
+                        getDefaultTSTypeFromProtoType(args.context, args.field, args.isOptional)
                     )
                 ]
             )
@@ -542,7 +542,7 @@ export const arrayTypes = {
                 t.logicalExpression(
                     '||',
                     t.identifier('e'),
-                    getDefaultTSTypeFromProtoType({
+                    getDefaultTSTypeFromProtoType(args.context, {
                         ...args.field,
                         rule: undefined, // so it's treated as type not an array...
                     }, args.isOptional)
@@ -587,7 +587,7 @@ export const arrayTypes = {
                         t.identifier('undefined')
                     ),
                     t.identifier('e'),
-                    getDefaultTSTypeFromProtoType({
+                    getDefaultTSTypeFromProtoType(args.context, {
                         ...args.field,
                         rule: undefined, // so it's treated as type not an array...
                     }, args.isOptional)

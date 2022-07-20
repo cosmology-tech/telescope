@@ -1,4 +1,4 @@
-import { createProtoType, createCreateProtoType } from './types';
+import { createProtoType, createCreateProtoType } from './interface';
 import authz from '../../../../../__fixtures__/proto-json/cosmos/authz/v1beta1/authz.json';
 import gamm from '../../../../../__fixtures__/proto-json/osmosis/gamm/v1beta1/tx.json';
 import generate from '@babel/generator';
@@ -50,13 +50,20 @@ it('authz', async () => {
 });
 
 describe('createCreateProtoType', () => {
+    const ref = store.findProto('cosmos/authz/v1beta1/authz.proto');
+    const context = new ProtoParseContext(ref, store, defaultTelescopeOptions);
+
     it('Grant', () => {
-        expectCode(createCreateProtoType('Grant',
+        expectCode(createCreateProtoType(
+            context,
+            'Grant',
             getNestedProto(authz).Grant
         ));
     });
     it('MsgJoinPool', () => {
-        expectCode(createCreateProtoType('MsgJoinPool',
+        expectCode(createCreateProtoType(
+            context,
+            'MsgJoinPool',
             getNestedProto(gamm).MsgJoinPool
         ));
     });
