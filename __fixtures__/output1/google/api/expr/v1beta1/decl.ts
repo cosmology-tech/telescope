@@ -1,6 +1,7 @@
 import { Expr } from "./expr";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "@osmonauts/helpers";
+export const protobufPackage = "google.api.expr.v1beta1";
 
 /** A declaration. */
 export interface Decl {

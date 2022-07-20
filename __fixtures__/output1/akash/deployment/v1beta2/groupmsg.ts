@@ -1,6 +1,7 @@
 import { GroupID } from "./groupid";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "@osmonauts/helpers";
+export const protobufPackage = "akash.deployment.v1beta2";
 
 /** MsgCloseGroup defines SDK message to close a single Group within a Deployment. */
 export interface MsgCloseGroup {

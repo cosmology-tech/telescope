@@ -2,6 +2,7 @@ import { Option, Syntax, syntaxFromJSON, syntaxToJSON } from "./type";
 import { SourceContext } from "./source_context";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "@osmonauts/helpers";
+export const protobufPackage = "google.protobuf";
 
 /**
  * Api is a light-weight descriptor for an API Interface.

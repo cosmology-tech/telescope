@@ -3,6 +3,7 @@ import { CheckError } from "./check_error";
 import { Status } from "../../../rpc/status";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, Long } from "@osmonauts/helpers";
+export const protobufPackage = "google.api.servicecontrol.v1";
 
 /**
  * The type of the consumer as defined in

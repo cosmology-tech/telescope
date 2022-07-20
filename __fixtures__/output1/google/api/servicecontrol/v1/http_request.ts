@@ -1,6 +1,7 @@
 import { Duration } from "../../../protobuf/duration";
 import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, DeepPartial } from "@osmonauts/helpers";
+export const protobufPackage = "google.api.servicecontrol.v1";
 
 /**
  * A common proto for logging HTTP requests. Only contains semantics

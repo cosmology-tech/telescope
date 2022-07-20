@@ -1,5 +1,6 @@
 import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, DeepPartial } from "@osmonauts/helpers";
+export const protobufPackage = "tendermint.version";
 
 /**
  * App includes the protocol and software version for the application.

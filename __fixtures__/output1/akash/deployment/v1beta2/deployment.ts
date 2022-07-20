@@ -1,5 +1,6 @@
 import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
+export const protobufPackage = "akash.deployment.v1beta2";
 
 /** State is an enum which refers to state of deployment */
 export enum Deployment_State {

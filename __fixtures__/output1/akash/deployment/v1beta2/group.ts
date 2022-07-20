@@ -2,6 +2,7 @@ import { GroupID } from "./groupid";
 import { GroupSpec } from "./groupspec";
 import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, DeepPartial } from "@osmonauts/helpers";
+export const protobufPackage = "akash.deployment.v1beta2";
 
 /** State is an enum which refers to state of group */
 export enum Group_State {

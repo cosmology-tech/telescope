@@ -3,6 +3,7 @@ import { Any } from "../../../../google/protobuf/any";
 import { Height } from "../../client/v1/client";
 import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
+export const protobufPackage = "ibc.core.connection.v1";
 
 /**
  * MsgConnectionOpenInit defines the msg sent by an account on Chain A to

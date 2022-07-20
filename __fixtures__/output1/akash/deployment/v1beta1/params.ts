@@ -1,6 +1,7 @@
 import { Coin } from "../../../cosmos/base/v1beta1/coin";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "@osmonauts/helpers";
+export const protobufPackage = "akash.deployment.v1beta1";
 
 /** Params defines the parameters for the x/deployment package */
 export interface Params {

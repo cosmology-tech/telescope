@@ -1,6 +1,7 @@
 import { LabelDescriptor } from "./label";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "@osmonauts/helpers";
+export const protobufPackage = "google.api";
 
 /**
  * A description of a log type. Example in YAML format:

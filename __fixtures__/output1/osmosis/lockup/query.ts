@@ -4,6 +4,7 @@ import { Coin } from "../../cosmos/base/v1beta1/coin";
 import { PeriodLock, SyntheticLock } from "./lock";
 import * as _m0 from "protobufjs/minimal";
 import { DeepPartial, isSet, toTimestamp, fromTimestamp, fromJsonTimestamp, Long } from "@osmonauts/helpers";
+export const protobufPackage = "osmosis.lockup";
 export interface ModuleBalanceRequest {}
 export interface ModuleBalanceResponse {
   coins: Coin[];

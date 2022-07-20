@@ -2,6 +2,7 @@ import { Coin } from "../../../../cosmos/base/v1beta1/coin";
 import { Height } from "../../../core/client/v1/client";
 import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, DeepPartial } from "@osmonauts/helpers";
+export const protobufPackage = "ibc.applications.transfer.v1";
 
 /**
  * MsgTransfer defines a msg to transfer fungible tokens (i.e Coins) between

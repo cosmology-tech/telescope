@@ -1,6 +1,7 @@
 import { SuperfluidAsset } from "./superfluid";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "@osmonauts/helpers";
+export const protobufPackage = "osmosis.superfluid.v1beta1";
 
 /**
  * SetSuperfluidAssetsProposal is a gov Content type to update the superfluid

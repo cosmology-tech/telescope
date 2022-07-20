@@ -1,6 +1,7 @@
 import { Plan } from "./upgrade";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "@osmonauts/helpers";
+export const protobufPackage = "cosmos.upgrade.v1beta1";
 
 /**
  * MsgSoftwareUpgrade is the Msg/SoftwareUpgrade request type.

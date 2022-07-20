@@ -1,6 +1,7 @@
 import { Order, Counterparty, orderFromJSON, orderToJSON } from "../../channel/v1/channel";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "@osmonauts/helpers";
+export const protobufPackage = "ibc.core.port.v1";
 
 /** QueryAppVersionRequest is the request type for the Query/AppVersion RPC method */
 export interface QueryAppVersionRequest {

@@ -1,6 +1,7 @@
 import { Height } from "../../client/v1/client";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, Long, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
+export const protobufPackage = "ibc.core.channel.v1";
 
 /**
  * State defines if a channel is in one of the following states:

@@ -4,6 +4,7 @@ import { DecCoin } from "../../../cosmos/base/v1beta1/coin";
 import { Params } from "./genesis";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, Long } from "@osmonauts/helpers";
+export const protobufPackage = "evmos.incentives.v1";
 
 /**
  * QueryIncentivesRequest is the request type for the Query/Incentives RPC

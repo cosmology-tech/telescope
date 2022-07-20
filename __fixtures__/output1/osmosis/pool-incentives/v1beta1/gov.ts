@@ -1,6 +1,7 @@
 import { DistrRecord } from "./incentives";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "@osmonauts/helpers";
+export const protobufPackage = "osmosis.poolincentives.v1beta1";
 
 /**
  * ReplacePoolIncentivesProposal is a gov Content type for updating the pool

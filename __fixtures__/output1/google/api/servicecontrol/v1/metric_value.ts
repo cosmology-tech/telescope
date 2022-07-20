@@ -2,6 +2,7 @@ import { Timestamp } from "../../../protobuf/timestamp";
 import { Distribution } from "./distribution";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, toTimestamp, fromTimestamp, Long, isObject, fromJsonTimestamp } from "@osmonauts/helpers";
+export const protobufPackage = "google.api.servicecontrol.v1";
 export interface MetricValue_LabelsEntry {
   key: string;
   value: string;

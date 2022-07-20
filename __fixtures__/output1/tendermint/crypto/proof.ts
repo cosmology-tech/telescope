@@ -1,5 +1,6 @@
 import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "@osmonauts/helpers";
+export const protobufPackage = "tendermint.crypto";
 export interface Proof {
   total: Long;
   index: Long;

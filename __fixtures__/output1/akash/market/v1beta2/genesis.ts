@@ -3,6 +3,7 @@ import { Lease } from "./lease";
 import { Params } from "./params";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "@osmonauts/helpers";
+export const protobufPackage = "akash.market.v1beta2";
 
 /** GenesisState defines the basic genesis state used by market module */
 export interface GenesisState {

@@ -3,6 +3,7 @@ import { Coin } from "../../cosmos/base/v1beta1/coin";
 import { PeriodLock } from "./lock";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, Long } from "@osmonauts/helpers";
+export const protobufPackage = "osmosis.lockup";
 export interface MsgLockTokens {
   owner: string;
   duration: string;

@@ -1,5 +1,6 @@
 import * as _m0 from "protobufjs/minimal";
 import { DeepPartial, isSet } from "@osmonauts/helpers";
+export const protobufPackage = "google.api";
 
 /**
  * `Authentication` defines the authentication configuration for API methods

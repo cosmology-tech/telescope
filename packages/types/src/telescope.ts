@@ -10,6 +10,8 @@ interface TelescopeOpts {
     // should the signing client include defaults
     signingClientDefaults?: boolean;
 
+    includePackageVar?: boolean;
+
     useDate?: 'date' | 'timestamp';
     useExact?: boolean;
 }
@@ -26,6 +28,7 @@ export const defaultTelescopeOptions: TelescopeOptions = {
     includeAminos: true,
     includeLCDClient: false,
     signingClientDefaults: true,
+    includePackageVar: false,
     useDate: 'date',
     useExact: false,
     aminoCasingFn: snake,

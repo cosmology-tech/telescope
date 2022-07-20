@@ -1,6 +1,7 @@
 import { Account, FractionalPayment } from "./types";
 import * as _m0 from "protobufjs/minimal";
 import { DeepPartial } from "@osmonauts/helpers";
+export const protobufPackage = "akash.escrow.v1beta2";
 
 /** GenesisState defines the basic genesis state used by escrow module */
 export interface GenesisState {

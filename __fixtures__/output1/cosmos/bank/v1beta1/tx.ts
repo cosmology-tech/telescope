@@ -2,6 +2,7 @@ import { Coin } from "../../base/v1beta1/coin";
 import { Input, Output } from "./bank";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "@osmonauts/helpers";
+export const protobufPackage = "cosmos.bank.v1beta1";
 
 /** MsgSend represents a message to send coins from one account to another. */
 export interface MsgSend {

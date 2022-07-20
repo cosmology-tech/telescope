@@ -2,6 +2,7 @@ import { QuotaView, QuotaOverride, QuotaSafetyCheck, OverrideInlineSource, Servi
 import { FieldMask } from "../../../protobuf/field_mask";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "@osmonauts/helpers";
+export const protobufPackage = "google.api.serviceusage.v1beta1";
 
 /** Enum for service identity state. */
 export enum GetServiceIdentityResponse_IdentityState {

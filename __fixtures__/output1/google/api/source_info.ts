@@ -1,6 +1,7 @@
 import { Any } from "../protobuf/any";
 import * as _m0 from "protobufjs/minimal";
 import { DeepPartial } from "@osmonauts/helpers";
+export const protobufPackage = "google.api";
 
 /** Source information used to create a Service Config */
 export interface SourceInfo {

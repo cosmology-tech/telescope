@@ -1,6 +1,7 @@
 import { Coin } from "../../../cosmos/base/v1beta1/coin";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, bytesFromBase64, base64FromBytes, DeepPartial, Long } from "@osmonauts/helpers";
+export const protobufPackage = "secret.compute.v1beta1";
 export interface MsgStoreCode {
   sender: Uint8Array;
 

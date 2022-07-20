@@ -1,6 +1,7 @@
 import { Value } from "./value";
 import * as _m0 from "protobufjs/minimal";
 import { DeepPartial, Long, isSet } from "@osmonauts/helpers";
+export const protobufPackage = "google.api.expr.v1alpha1";
 
 /**
  * Values of intermediate expressions produced when evaluating expression.

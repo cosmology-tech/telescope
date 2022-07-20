@@ -3,6 +3,7 @@ import { Duration } from "../protobuf/duration";
 import { LabelDescriptor } from "./label";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, isObject } from "@osmonauts/helpers";
+export const protobufPackage = "google.api";
 
 /**
  * The kind of measurement. It describes how the data is reported.

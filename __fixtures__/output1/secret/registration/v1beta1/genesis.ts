@@ -2,6 +2,7 @@ import { RegistrationNodeInfo } from "./types";
 import { MasterCertificate } from "./msg";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "@osmonauts/helpers";
+export const protobufPackage = "secret.registration.v1beta1";
 export interface GenesisState {
   registration: RegistrationNodeInfo[];
   nodeExchMasterCertificate: MasterCertificate;

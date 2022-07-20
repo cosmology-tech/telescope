@@ -1,5 +1,6 @@
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "@osmonauts/helpers";
+export const protobufPackage = "akash.inflation.v1beta2";
 
 /** Params defines the parameters for the x/deployment package */
 export interface Params {
