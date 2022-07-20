@@ -3,6 +3,7 @@ import { Group } from "./group";
 import { Params } from "./params";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "@osmonauts/helpers";
+export const protobufPackage = "akash.deployment.v1beta1";
 
 /** GenesisDeployment defines the basic genesis state used by deployment module */
 export interface GenesisDeployment {

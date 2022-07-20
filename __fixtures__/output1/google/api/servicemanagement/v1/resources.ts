@@ -2,6 +2,7 @@ import { Timestamp } from "../../../protobuf/timestamp";
 import { ConfigChange } from "../../config_change";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, toTimestamp, fromTimestamp, fromJsonTimestamp, bytesFromBase64, base64FromBytes, isObject } from "@osmonauts/helpers";
+export const protobufPackage = "google.api.servicemanagement.v1";
 
 /** Code describes the status of the operation (or one of its steps). */
 export enum OperationMetadata_Status {

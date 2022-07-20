@@ -2,6 +2,7 @@ import { CertificateFilter, Certificate } from "./cert";
 import { PageRequest, PageResponse } from "../../../cosmos/base/query/v1beta1/pagination";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "@osmonauts/helpers";
+export const protobufPackage = "akash.cert.v1beta2";
 
 /** CertificateResponse contains a single X509 certificate and its serial number */
 export interface CertificateResponse {

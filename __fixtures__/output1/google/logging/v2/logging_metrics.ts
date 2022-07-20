@@ -3,6 +3,7 @@ import { Distribution_BucketOptions } from "../../api/distribution";
 import { Timestamp } from "../../protobuf/timestamp";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, toTimestamp, fromTimestamp, isObject, fromJsonTimestamp } from "@osmonauts/helpers";
+export const protobufPackage = "google.logging.v2";
 
 /** Logging API version. */
 export enum LogMetric_ApiVersion {

@@ -2,6 +2,7 @@ import { Value } from "./value";
 import { Status } from "../../../rpc/status";
 import * as _m0 from "protobufjs/minimal";
 import { DeepPartial, Long, isSet } from "@osmonauts/helpers";
+export const protobufPackage = "google.api.expr.v1alpha1";
 
 /**
  * The state of an evaluation.

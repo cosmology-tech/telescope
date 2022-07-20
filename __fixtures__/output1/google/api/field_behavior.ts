@@ -1,3 +1,5 @@
+export const protobufPackage = "google.api";
+
 /**
  * An indicator of the behavior of a given field (for example, that a field
  * is required in requests, or given as output but ignored as input).

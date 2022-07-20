@@ -2,6 +2,7 @@ import { ResourceValue } from "./resourcevalue";
 import { Attribute } from "./attribute";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "@osmonauts/helpers";
+export const protobufPackage = "akash.base.v1beta2";
 
 /** CPU stores resource units and cpu config attributes */
 export interface CPU {

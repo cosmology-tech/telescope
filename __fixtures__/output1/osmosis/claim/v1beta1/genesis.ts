@@ -3,6 +3,7 @@ import { Params } from "./params";
 import { ClaimRecord } from "./claim";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "@osmonauts/helpers";
+export const protobufPackage = "osmosis.claim.v1beta1";
 
 /** GenesisState defines the claim module's genesis state. */
 export interface GenesisState {

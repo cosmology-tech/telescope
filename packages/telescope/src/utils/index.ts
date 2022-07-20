@@ -18,6 +18,7 @@ export const UTILS = {
     fromBech32: '@cosmjs/encoding',
     fromDuration: '@osmonauts/helpers',
     fromHex: '@cosmjs/encoding',
+    fromUtf8: '@cosmjs/encoding',
     fromJsonTimestamp: '@osmonauts/helpers',
     fromTimestamp: '@osmonauts/helpers',
     GeneratedType: '@cosmjs/proto-signing',

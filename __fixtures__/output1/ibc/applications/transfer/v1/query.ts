@@ -2,6 +2,7 @@ import { PageRequest, PageResponse } from "../../../../cosmos/base/query/v1beta1
 import { DenomTrace, Params } from "./transfer";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "@osmonauts/helpers";
+export const protobufPackage = "ibc.applications.transfer.v1";
 
 /**
  * QueryDenomTraceRequest is the request type for the Query/DenomTrace RPC

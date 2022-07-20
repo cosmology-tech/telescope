@@ -2,6 +2,7 @@ import { PageRequest, PageResponse } from "../../../cosmos/base/query/v1beta1/pa
 import { ContractInfo, ContractCodeHistoryEntry, Model } from "./types";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, Long, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
+export const protobufPackage = "cosmwasm.wasm.v1";
 
 /**
  * QueryContractInfoRequest is the request type for the Query/ContractInfo RPC

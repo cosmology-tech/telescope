@@ -2,6 +2,7 @@ import { Params, DistrInfo } from "./incentives";
 import { Duration } from "../../../google/protobuf/duration";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "@osmonauts/helpers";
+export const protobufPackage = "osmosis.poolincentives.v1beta1";
 
 /** GenesisState defines the pool incentives module's genesis state. */
 export interface GenesisState {

@@ -1,5 +1,6 @@
 import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
+export const protobufPackage = "cosmos.base.store.v1beta1";
 
 /**
  * CommitInfo defines commit information used by the multi-store when committing

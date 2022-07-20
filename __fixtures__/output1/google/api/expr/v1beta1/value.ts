@@ -2,6 +2,7 @@ import { NullValue, nullValueFromJSON, nullValueToJSON } from "../../../protobuf
 import { Any } from "../../../protobuf/any";
 import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "@osmonauts/helpers";
+export const protobufPackage = "google.api.expr.v1beta1";
 
 /**
  * Represents a CEL value.

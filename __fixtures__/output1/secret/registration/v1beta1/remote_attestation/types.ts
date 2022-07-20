@@ -1,5 +1,6 @@
 import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
+export const protobufPackage = "secret.registration.remote_attestation.v1beta1";
 export interface QuoteReport {
   id: string;
   timestamp: string;

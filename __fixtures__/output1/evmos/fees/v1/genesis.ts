@@ -1,6 +1,7 @@
 import { DevFeeInfo } from "./fees";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, Long } from "@osmonauts/helpers";
+export const protobufPackage = "evmos.fees.v1";
 
 /** GenesisState defines the module's genesis state. */
 export interface GenesisState {

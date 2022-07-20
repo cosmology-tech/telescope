@@ -2,6 +2,7 @@ import { DecCoin } from "../../../cosmos/base/v1beta1/coin";
 import { Timestamp } from "../../../google/protobuf/timestamp";
 import * as _m0 from "protobufjs/minimal";
 import { toTimestamp, fromTimestamp, Long, isSet, fromJsonTimestamp, DeepPartial } from "@osmonauts/helpers";
+export const protobufPackage = "evmos.incentives.v1";
 
 /**
  * Incentive defines an instance that organizes distribution conditions for a

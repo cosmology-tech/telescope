@@ -20,6 +20,7 @@ import { SourceInfo } from "./source_info";
 import { UInt32Value } from "../protobuf/wrappers";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "@osmonauts/helpers";
+export const protobufPackage = "google.api";
 
 /**
  * `Service` is the root object of Google service configuration schema. It

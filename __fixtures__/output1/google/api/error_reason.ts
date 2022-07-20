@@ -1,3 +1,5 @@
+export const protobufPackage = "google.api";
+
 /**
  * Defines the supported values for `google.rpc.ErrorInfo.reason` for the
  * `googleapis.com` error domain. This error domain is reserved for [Service

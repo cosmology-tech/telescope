@@ -1,6 +1,7 @@
 import { Metadata } from "../../../cosmos/bank/v1beta1/bank";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "@osmonauts/helpers";
+export const protobufPackage = "evmos.erc20.v1";
 
 /** Owner enumerates the ownership of a ERC20 contract. */
 export enum Owner {

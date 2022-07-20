@@ -2,6 +2,7 @@ import { Coin } from "../../base/v1beta1/coin";
 import { Period } from "./vesting";
 import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, DeepPartial } from "@osmonauts/helpers";
+export const protobufPackage = "cosmos.vesting.v1beta1";
 
 /**
  * MsgCreateVestingAccount defines a message that enables creating a vesting

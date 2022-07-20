@@ -3,6 +3,7 @@ import { Attribute } from "./attribute";
 import { Endpoint } from "./endpoint";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "@osmonauts/helpers";
+export const protobufPackage = "akash.base.v1beta1";
 
 /** CPU stores resource units and cpu config attributes */
 export interface CPU {

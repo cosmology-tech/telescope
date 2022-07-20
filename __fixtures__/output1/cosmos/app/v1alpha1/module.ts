@@ -1,5 +1,6 @@
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "@osmonauts/helpers";
+export const protobufPackage = "cosmos.app.v1alpha1";
 
 /** ModuleDescriptor describes an app module. */
 export interface ModuleDescriptor {

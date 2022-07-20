@@ -1,5 +1,6 @@
 import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, DeepPartial } from "@osmonauts/helpers";
+export const protobufPackage = "google.protobuf";
 
 /**
  * A Duration represents a signed, fixed-length span of time represented

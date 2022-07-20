@@ -2,6 +2,7 @@ import { Coin } from "../../../cosmos/base/v1beta1/coin";
 import { Any } from "../../../google/protobuf/any";
 import * as _m0 from "protobufjs/minimal";
 import { DeepPartial, Long, isSet } from "@osmonauts/helpers";
+export const protobufPackage = "osmosis.gamm.v1beta1";
 
 /** Params holds parameters for the incentives module */
 export interface Params {

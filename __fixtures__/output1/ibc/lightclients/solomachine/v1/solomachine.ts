@@ -3,6 +3,7 @@ import { ConnectionEnd } from "../../../core/connection/v1/connection";
 import { Channel } from "../../../core/channel/v1/channel";
 import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
+export const protobufPackage = "ibc.lightclients.solomachine.v1";
 
 /**
  * DataType defines the type of solo machine proof being created. This is done

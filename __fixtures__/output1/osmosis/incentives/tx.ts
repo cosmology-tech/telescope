@@ -3,6 +3,7 @@ import { Coin } from "../../cosmos/base/v1beta1/coin";
 import { Timestamp } from "../../google/protobuf/timestamp";
 import * as _m0 from "protobufjs/minimal";
 import { toTimestamp, fromTimestamp, Long, isSet, fromJsonTimestamp, DeepPartial } from "@osmonauts/helpers";
+export const protobufPackage = "osmosis.incentives";
 export interface MsgCreateGauge {
   /**
    * flag to show if it's perpetual or multi-epoch

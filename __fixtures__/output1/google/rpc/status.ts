@@ -1,6 +1,7 @@
 import { Any } from "../protobuf/any";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "@osmonauts/helpers";
+export const protobufPackage = "google.rpc";
 
 /**
  * The `Status` type defines a logical error model that is suitable for

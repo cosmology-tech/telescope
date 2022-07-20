@@ -4,6 +4,7 @@ import { ExprValue } from "../../v1alpha1/eval";
 import { Status } from "../../../../rpc/status";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, isObject, Long } from "@osmonauts/helpers";
+export const protobufPackage = "google.api.expr.conformance.v1alpha1";
 
 /** Severities of issues. */
 export enum IssueDetails_Severity {

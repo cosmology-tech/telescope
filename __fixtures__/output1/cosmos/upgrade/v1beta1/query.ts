@@ -1,6 +1,7 @@
 import { Plan, ModuleVersion } from "./upgrade";
 import * as _m0 from "protobufjs/minimal";
 import { DeepPartial, isSet, Long, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
+export const protobufPackage = "cosmos.upgrade.v1beta1";
 
 /**
  * QueryCurrentPlanRequest is the request type for the Query/CurrentPlan RPC

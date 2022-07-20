@@ -2,6 +2,7 @@ import { Any } from "../../../../google/protobuf/any";
 import { BIP44Params } from "../../hd/v1/hd";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "@osmonauts/helpers";
+export const protobufPackage = "cosmos.crypto.keyring.v1";
 
 /** Record is used for representing a key in the keyring. */
 export interface Record {

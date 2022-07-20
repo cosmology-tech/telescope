@@ -1,3 +1,5 @@
+export const protobufPackage = "google.api";
+
 /**
  * The launch stage as defined by [Google Cloud Platform
  * Launch Stages](http://cloud.google.com/terms/launch-stages).

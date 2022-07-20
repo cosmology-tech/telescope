@@ -1,6 +1,7 @@
 import { DecCoin, Coin } from "../../../cosmos/base/v1beta1/coin";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, Long } from "@osmonauts/helpers";
+export const protobufPackage = "akash.escrow.v1beta2";
 
 /** State stores state for an escrow account */
 export enum Account_State {

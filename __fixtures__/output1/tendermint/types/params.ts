@@ -1,6 +1,7 @@
 import { Duration } from "../../google/protobuf/duration";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, Long } from "@osmonauts/helpers";
+export const protobufPackage = "tendermint.types";
 
 /**
  * ConsensusParams contains consensus critical parameters that determine the

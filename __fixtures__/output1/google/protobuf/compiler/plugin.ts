@@ -1,6 +1,7 @@
 import { FileDescriptorProto } from "../descriptor";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "@osmonauts/helpers";
+export const protobufPackage = "google.protobuf.compiler";
 
 /** The version number of protocol compiler. */
 export interface Version {

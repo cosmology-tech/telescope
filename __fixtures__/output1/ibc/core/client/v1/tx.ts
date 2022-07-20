@@ -1,6 +1,7 @@
 import { Any } from "../../../../google/protobuf/any";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
+export const protobufPackage = "ibc.core.client.v1";
 
 /** MsgCreateClient defines a message to create an IBC client */
 export interface MsgCreateClient {

@@ -2,6 +2,7 @@ import { Member, VoteOption, voteOptionFromJSON, voteOptionToJSON } from "./type
 import { Any } from "../../../google/protobuf/any";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, Long } from "@osmonauts/helpers";
+export const protobufPackage = "cosmos.group.v1";
 
 /** Exec defines modes of execution of a proposal on creation or on new vote. */
 export enum Exec {

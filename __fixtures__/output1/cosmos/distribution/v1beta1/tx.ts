@@ -1,6 +1,7 @@
 import { Coin } from "../../base/v1beta1/coin";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "@osmonauts/helpers";
+export const protobufPackage = "cosmos.distribution.v1beta1";
 
 /**
  * MsgSetWithdrawAddress sets the withdraw address for

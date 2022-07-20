@@ -3,6 +3,7 @@ import { Duration } from "../../../protobuf/duration";
 import { Timestamp } from "../../../protobuf/timestamp";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, Long, toTimestamp, fromTimestamp, bytesFromBase64, fromJsonTimestamp, base64FromBytes, isObject } from "@osmonauts/helpers";
+export const protobufPackage = "google.api.expr.v1alpha1";
 
 /** An expression together with source information as returned by the parser. */
 export interface ParsedExpr {

@@ -8,6 +8,7 @@ import { MonitoredResourceDescriptor } from "../../monitored_resource";
 import { Monitoring } from "../../monitoring";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, Long, isObject } from "@osmonauts/helpers";
+export const protobufPackage = "google.api.serviceusage.v1beta1";
 
 /** Whether or not a service has been enabled for use by a consumer. */
 export enum State {

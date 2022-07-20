@@ -1,6 +1,7 @@
 import { FeeToken } from "./feetoken";
 import * as _m0 from "protobufjs/minimal";
 import { DeepPartial, isSet, Long } from "@osmonauts/helpers";
+export const protobufPackage = "osmosis.txfees.v1beta1";
 export interface QueryFeeTokensRequest {}
 export interface QueryFeeTokensResponse {
   feeTokens: FeeToken[];

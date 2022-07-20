@@ -1,6 +1,7 @@
 import { Grant } from "./feegrant";
 import * as _m0 from "protobufjs/minimal";
 import { DeepPartial } from "@osmonauts/helpers";
+export const protobufPackage = "cosmos.feegrant.v1beta1";
 
 /** GenesisState contains a set of fee allowances, persisted from the store */
 export interface GenesisState {
