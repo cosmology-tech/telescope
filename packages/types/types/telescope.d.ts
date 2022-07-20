@@ -7,6 +7,7 @@ interface TelescopeOpts {
     signingClientDefaults?: boolean;
     includePackageVar?: boolean;
     useDate?: 'date' | 'timestamp';
+    useDuration?: 'duration' | 'string';
     useExact?: boolean;
 }
 interface TelescopePackageOpts {

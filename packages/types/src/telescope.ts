@@ -13,6 +13,7 @@ interface TelescopeOpts {
     includePackageVar?: boolean;
 
     useDate?: 'date' | 'timestamp';
+    useDuration?: 'duration' | 'string';
     useExact?: boolean;
 }
 interface TelescopePackageOpts {
@@ -30,6 +31,7 @@ export const defaultTelescopeOptions: TelescopeOptions = {
     signingClientDefaults: true,
     includePackageVar: false,
     useDate: 'date',
+    useDuration: 'duration',
     useExact: false,
     aminoCasingFn: snake,
     aminoExceptions: {
