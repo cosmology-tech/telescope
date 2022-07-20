@@ -28,6 +28,8 @@ export const typeUrlToAmino = (typeUrl, exceptions = {}) => {
         case 'cosmos':
         case 'ibc':
             return `cosmos-sdk/${elements[elements.length - 1]}`;
+        case 'cosmwasm':
+            return `wasm/${elements[elements.length - 1]}`;
         case 'osmosis': {
             const n = elements.filter(a => !a.match(/v1beta1/));
             n[n.length - 1] = kebab(n[n.length - 1]);
