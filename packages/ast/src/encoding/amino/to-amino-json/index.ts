@@ -47,7 +47,6 @@ export const toAminoParseField = ({
         isOptional
     };
 
-
     // arrays
     if (field.rule === 'repeated') {
         switch (field.type) {
@@ -84,7 +83,6 @@ export const toAminoParseField = ({
         return needsImplementation(field.name, field);
     }
 
-
     // casting Any types
     if (field.type === 'google.protobuf.Any') {
         switch (field.options?.['(cosmos_proto.accepts_interface)']) {
@@ -120,6 +118,12 @@ export const toAminoParseField = ({
             return toAmino.defaultType(args);
         case 'Type':
             return toAmino.type(args);
+    }
+
+    // bytes [RawContractMessage]
+    if (field.type === 'bytes' &&
+        field.options?.['(gogoproto.casttype)'] === 'RawContractMessage') {
+        return toAmino.rawBytes(args);
     }
 
     // scalar types...

@@ -80,7 +80,6 @@ export const fromAminoParseField = ({
         return needsImplementation(field.name, field);
     }
 
-
     // casting special types
     if (field.type === 'google.protobuf.Any') {
         switch (field.options?.['(cosmos_proto.accepts_interface)']) {
@@ -115,6 +114,12 @@ export const fromAminoParseField = ({
 
         case 'Enum':
             return fromAmino.enum(args);
+    }
+
+    // bytes [RawContractMessage]
+    if (field.type === 'bytes' &&
+        field.options?.['(gogoproto.casttype)'] === 'RawContractMessage') {
+        return fromAmino.rawBytes(args);
     }
 
     // scalar types...
