@@ -1443,7 +1443,7 @@ export const AttributeContext_Response = {
         return acc;
       }, {}) : {},
       time: isSet(object.time) ? fromJsonTimestamp(object.time) : undefined,
-      backendLatency: isSet(object.backendLatency) ? String(object.backendLatency) : undefined
+      backendLatency: isSet(object.backendLatency) ? Duration.fromJSON(object.backendLatency) : undefined
     };
   },
 

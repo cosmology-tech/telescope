@@ -637,8 +637,8 @@ export const MetricDescriptor_MetricDescriptorMetadata = {
   fromJSON(object: any): MetricDescriptor_MetricDescriptorMetadata {
     return {
       launchStage: isSet(object.launchStage) ? launchStageFromJSON(object.launchStage) : 0,
-      samplePeriod: isSet(object.samplePeriod) ? String(object.samplePeriod) : undefined,
-      ingestDelay: isSet(object.ingestDelay) ? String(object.ingestDelay) : undefined
+      samplePeriod: isSet(object.samplePeriod) ? Duration.fromJSON(object.samplePeriod) : undefined,
+      ingestDelay: isSet(object.ingestDelay) ? Duration.fromJSON(object.ingestDelay) : undefined
     };
   },
 

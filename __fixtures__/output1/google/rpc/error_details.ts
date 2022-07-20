@@ -322,7 +322,7 @@ export const RetryInfo = {
 
   fromJSON(object: any): RetryInfo {
     return {
-      retryDelay: isSet(object.retryDelay) ? String(object.retryDelay) : undefined
+      retryDelay: isSet(object.retryDelay) ? Duration.fromJSON(object.retryDelay) : undefined
     };
   },
 

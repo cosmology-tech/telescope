@@ -22,7 +22,6 @@ export declare const fromPartial: {
     bytes(args: FromPartialMethod): t.Statement;
     duration(args: FromPartialMethod): t.Statement;
     timestamp(args: FromPartialMethod): t.Statement;
-    timestampTimestamp(args: FromPartialMethod): t.Statement;
     timestampDate(args: FromPartialMethod): t.Statement;
     keyHash(args: FromPartialMethod): t.ExpressionStatement;
     array(args: FromPartialMethod, expr: t.Expression): t.ExpressionStatement;

@@ -1263,7 +1263,7 @@ export const LockedDenomRequest = {
   fromJSON(object: any): LockedDenomRequest {
     return {
       denom: isSet(object.denom) ? String(object.denom) : "",
-      duration: isSet(object.duration) ? String(object.duration) : undefined
+      duration: isSet(object.duration) ? Duration.fromJSON(object.duration) : undefined
     };
   },
 
@@ -1623,7 +1623,7 @@ export const AccountLockedLongerDurationRequest = {
   fromJSON(object: any): AccountLockedLongerDurationRequest {
     return {
       owner: isSet(object.owner) ? String(object.owner) : "",
-      duration: isSet(object.duration) ? String(object.duration) : undefined
+      duration: isSet(object.duration) ? Duration.fromJSON(object.duration) : undefined
     };
   },
 
@@ -1755,7 +1755,7 @@ export const AccountLockedLongerDurationNotUnlockingOnlyRequest = {
   fromJSON(object: any): AccountLockedLongerDurationNotUnlockingOnlyRequest {
     return {
       owner: isSet(object.owner) ? String(object.owner) : "",
-      duration: isSet(object.duration) ? String(object.duration) : undefined
+      duration: isSet(object.duration) ? Duration.fromJSON(object.duration) : undefined
     };
   },
 
@@ -1896,7 +1896,7 @@ export const AccountLockedLongerDurationDenomRequest = {
   fromJSON(object: any): AccountLockedLongerDurationDenomRequest {
     return {
       owner: isSet(object.owner) ? String(object.owner) : "",
-      duration: isSet(object.duration) ? String(object.duration) : undefined,
+      duration: isSet(object.duration) ? Duration.fromJSON(object.duration) : undefined,
       denom: isSet(object.denom) ? String(object.denom) : ""
     };
   },

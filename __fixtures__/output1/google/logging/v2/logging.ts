@@ -1477,7 +1477,7 @@ export const TailLogEntriesRequest = {
     return {
       resourceNames: Array.isArray(object?.resourceNames) ? object.resourceNames.map((e: any) => String(e)) : [],
       filter: isSet(object.filter) ? String(object.filter) : "",
-      bufferWindow: isSet(object.bufferWindow) ? String(object.bufferWindow) : undefined
+      bufferWindow: isSet(object.bufferWindow) ? Duration.fromJSON(object.bufferWindow) : undefined
     };
   },
 

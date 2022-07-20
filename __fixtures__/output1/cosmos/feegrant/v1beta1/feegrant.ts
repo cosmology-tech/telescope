@@ -225,7 +225,7 @@ export const PeriodicAllowance = {
   fromJSON(object: any): PeriodicAllowance {
     return {
       basic: isSet(object.basic) ? BasicAllowance.fromJSON(object.basic) : undefined,
-      period: isSet(object.period) ? String(object.period) : undefined,
+      period: isSet(object.period) ? Duration.fromJSON(object.period) : undefined,
       periodSpendLimit: Array.isArray(object?.periodSpendLimit) ? object.periodSpendLimit.map((e: any) => Coin.fromJSON(e)) : [],
       periodCanSpend: Array.isArray(object?.periodCanSpend) ? object.periodCanSpend.map((e: any) => Coin.fromJSON(e)) : [],
       periodReset: isSet(object.periodReset) ? fromJsonTimestamp(object.periodReset) : undefined

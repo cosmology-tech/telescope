@@ -634,7 +634,7 @@ export const WaitOperationRequest = {
   fromJSON(object: any): WaitOperationRequest {
     return {
       name: isSet(object.name) ? String(object.name) : "",
-      timeout: isSet(object.timeout) ? String(object.timeout) : undefined
+      timeout: isSet(object.timeout) ? Duration.fromJSON(object.timeout) : undefined
     };
   },
 

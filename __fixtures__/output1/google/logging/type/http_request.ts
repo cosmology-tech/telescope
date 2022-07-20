@@ -271,7 +271,7 @@ export const HttpRequest = {
       remoteIp: isSet(object.remoteIp) ? String(object.remoteIp) : "",
       serverIp: isSet(object.serverIp) ? String(object.serverIp) : "",
       referer: isSet(object.referer) ? String(object.referer) : "",
-      latency: isSet(object.latency) ? String(object.latency) : undefined,
+      latency: isSet(object.latency) ? Duration.fromJSON(object.latency) : undefined,
       cacheLookup: isSet(object.cacheLookup) ? Boolean(object.cacheLookup) : false,
       cacheHit: isSet(object.cacheHit) ? Boolean(object.cacheHit) : false,
       cacheValidatedWithOriginServer: isSet(object.cacheValidatedWithOriginServer) ? Boolean(object.cacheValidatedWithOriginServer) : false,

@@ -208,41 +208,14 @@ export const fromPartial = {
         );
     },
 
-
     timestamp(args: FromPartialMethod) {
-
-        const prop = args.field.name;
         if (args.context.options.useDate === 'timestamp') {
-            args.context.addUtil('fromTimestamp');
-            return fromPartial.timestampTimestamp(args);
+            return fromPartial.type(args);
         }
         if (args.context.options.useDate === 'date') {
             return fromPartial.timestampDate(args);
         }
         return fromPartial.timestampDate(args);
-    },
-
-    // message.periodReset = object.periodReset !== undefined && object.periodReset !== null ? Timestamp.fromPartial(object.periodReset) : undefined;
-
-    timestampTimestamp(args: FromPartialMethod) {
-        const prop = args.field.name;
-        return setNotUndefinedAndNotNull(
-            prop,
-            t.callExpression(
-                t.memberExpression(
-                    t.identifier('Timestamp'),
-                    t.identifier('fromPartial')
-                ),
-                [
-                    t.memberExpression(
-                        t.identifier('object'),
-                        t.identifier(prop)
-                    )
-                ]
-            ),
-            t.identifier('undefined')
-        );
-
     },
 
     // message.periodReset = object.periodReset ?? undefined;

@@ -11,6 +11,7 @@ export declare const UTILS: {
     fromBech32: string;
     fromDuration: string;
     fromHex: string;
+    fromUtf8: string;
     fromJsonTimestamp: string;
     fromTimestamp: string;
     GeneratedType: string;
