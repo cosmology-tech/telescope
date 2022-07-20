@@ -50,6 +50,20 @@ export const toAmino = {
         );
     },
 
+    wasmByteCode(args: ToAminoParseField) {
+        args.context.addUtil('toBase64');
+        return t.objectProperty(
+            t.identifier(args.context.aminoCaseField(args.field)),
+            t.callExpression(
+                t.identifier('toBase64'),
+                [
+                    memberExpressionOrIdentifier(args.scope)
+                ]
+            )
+
+        );
+    },
+
     duration(args: ToAminoParseField) {
         const exp = t.binaryExpression(
             '*',

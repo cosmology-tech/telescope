@@ -116,10 +116,16 @@ export const fromAminoParseField = ({
             return fromAmino.enum(args);
     }
 
-    // bytes [RawContractMessage]
-    if (field.type === 'bytes' &&
-        field.options?.['(gogoproto.casttype)'] === 'RawContractMessage') {
-        return fromAmino.rawBytes(args);
+    if (field.type === 'bytes') {
+        // bytes [RawContractMessage]
+        if (field.options?.['(gogoproto.casttype)'] === 'RawContractMessage') {
+            return fromAmino.rawBytes(args);
+        }
+        // bytes [WASMByteCode]
+        // TODO use a better option for this in proto source
+        if (field.options?.['(gogoproto.customname)'] === 'WASMByteCode') {
+            return fromAmino.wasmByteCode(args);
+        }
     }
 
     // scalar types...

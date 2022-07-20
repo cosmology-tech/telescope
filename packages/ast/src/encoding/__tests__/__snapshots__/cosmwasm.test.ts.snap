@@ -133,7 +133,7 @@ exports[`cosmwasm/wasm/v1/tx MsgStoreCode 1`] = `
     }: MsgStoreCode): AminoMsgStoreCode[\\"value\\"] => {
       return {
         sender,
-        wasm_byte_code: wasmByteCode,
+        wasm_byte_code: toBase64(wasmByteCode),
         instantiate_permission: {
           permission: instantiatePermission.permission,
           address: instantiatePermission.address
@@ -147,7 +147,7 @@ exports[`cosmwasm/wasm/v1/tx MsgStoreCode 1`] = `
     }: AminoMsgStoreCode[\\"value\\"]): MsgStoreCode => {
       return {
         sender,
-        wasmByteCode: wasm_byte_code,
+        wasmByteCode: fromBase64(wasm_byte_code),
         instantiatePermission: {
           permission: accessTypeFromJSON(instantiate_permission.permission),
           address: instantiate_permission.address

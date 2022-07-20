@@ -52,6 +52,19 @@ export const fromAmino = {
         );
     },
 
+    wasmByteCode(args: FromAminoParseField) {
+        args.context.addUtil('fromBase64');
+        return t.objectProperty(
+            t.identifier(args.field.name),
+            t.callExpression(
+                t.identifier('fromBase64'),
+                [
+                    memberExpressionOrIdentifierAminoCaseField(args.fieldPath, args.context.aminoCaseField)
+                ]
+            )
+        );
+    },
+
     long(args: FromAminoParseField) {
         args.context.addUtil('Long');
 
