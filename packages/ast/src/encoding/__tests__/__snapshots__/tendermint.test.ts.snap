@@ -1,0 +1,459 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ibc/lightclients/tendermint/v1/tendermint duration interface 1`] = `
+"/**
+ * ClientState from Tendermint tracks the current validator set, latest height,
+ * and a possible frozen height.
+ */
+export interface ClientState {
+  chainId: string;
+  trustLevel: Fraction;
+
+  /**
+   * duration of the period since the LastestTimestamp during which the
+   * submitted headers are valid for upgrade
+   */
+  trustingPeriod: string;
+
+  /** duration of the staking unbonding period */
+  unbondingPeriod: string;
+
+  /** defines how much new (untrusted) header's Time can drift into the future. */
+  maxClockDrift: string;
+
+  /** Block height when the client was frozen due to a misbehaviour */
+  frozenHeight: Height;
+
+  /** Latest height the client was updated to */
+  latestHeight: Height;
+
+  /** Proof specifications used in verifying counterparty state */
+  proofSpecs: ProofSpec[];
+
+  /**
+   * Path at which next upgraded client will be committed.
+   * Each element corresponds to the key for a single CommitmentProof in the
+   * chained proof. NOTE: ClientState must stored under
+   * \`{upgradePath}/{upgradeHeight}/clientState\` ConsensusState must be stored
+   * under \`{upgradepath}/{upgradeHeight}/consensusState\` For SDK chains using
+   * the default upgrade module, upgrade_path should be []string{\\"upgrade\\",
+   * \\"upgradedIBCState\\"}\`
+   */
+  upgradePath: string[];
+
+  /**
+   * This flag, when set to true, will allow governance to recover a client
+   * which has expired
+   */
+  allowUpdateAfterExpiry: boolean;
+
+  /**
+   * This flag, when set to true, will allow governance to unfreeze a client
+   * whose chain has experienced a misbehaviour event
+   */
+  allowUpdateAfterMisbehaviour: boolean;
+}"
+`;
+
+exports[`ibc/lightclients/tendermint/v1/tendermint duration proto 1`] = `
+"export const ClientState = {
+  encode(message: ClientState, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.chainId !== \\"\\") {
+      writer.uint32(10).string(message.chainId);
+    }
+
+    if (message.trustLevel !== undefined) {
+      Fraction.encode(message.trustLevel, writer.uint32(18).fork()).ldelim();
+    }
+
+    if (message.trustingPeriod !== undefined) {
+      Duration.encode(message.trustingPeriod, writer.uint32(26).fork()).ldelim();
+    }
+
+    if (message.unbondingPeriod !== undefined) {
+      Duration.encode(message.unbondingPeriod, writer.uint32(34).fork()).ldelim();
+    }
+
+    if (message.maxClockDrift !== undefined) {
+      Duration.encode(message.maxClockDrift, writer.uint32(42).fork()).ldelim();
+    }
+
+    if (message.frozenHeight !== undefined) {
+      Height.encode(message.frozenHeight, writer.uint32(50).fork()).ldelim();
+    }
+
+    if (message.latestHeight !== undefined) {
+      Height.encode(message.latestHeight, writer.uint32(58).fork()).ldelim();
+    }
+
+    for (const v of message.proofSpecs) {
+      ProofSpec.encode(v!, writer.uint32(66).fork()).ldelim();
+    }
+
+    for (const v of message.upgradePath) {
+      writer.uint32(74).string(v!);
+    }
+
+    if (message.allowUpdateAfterExpiry === true) {
+      writer.uint32(80).bool(message.allowUpdateAfterExpiry);
+    }
+
+    if (message.allowUpdateAfterMisbehaviour === true) {
+      writer.uint32(88).bool(message.allowUpdateAfterMisbehaviour);
+    }
+
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): ClientState {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseClientState();
+
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        case 1:
+          message.chainId = reader.string();
+          break;
+
+        case 2:
+          message.trustLevel = Fraction.decode(reader, reader.uint32());
+          break;
+
+        case 3:
+          message.trustingPeriod = Duration.decode(reader, reader.uint32());
+          break;
+
+        case 4:
+          message.unbondingPeriod = Duration.decode(reader, reader.uint32());
+          break;
+
+        case 5:
+          message.maxClockDrift = Duration.decode(reader, reader.uint32());
+          break;
+
+        case 6:
+          message.frozenHeight = Height.decode(reader, reader.uint32());
+          break;
+
+        case 7:
+          message.latestHeight = Height.decode(reader, reader.uint32());
+          break;
+
+        case 8:
+          message.proofSpecs.push(ProofSpec.decode(reader, reader.uint32()));
+          break;
+
+        case 9:
+          message.upgradePath.push(reader.string());
+          break;
+
+        case 10:
+          message.allowUpdateAfterExpiry = reader.bool();
+          break;
+
+        case 11:
+          message.allowUpdateAfterMisbehaviour = reader.bool();
+          break;
+
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+
+  fromJSON(object: any): ClientState {
+    return {
+      chainId: isSet(object.chainId) ? String(object.chainId) : \\"\\",
+      trustLevel: isSet(object.trustLevel) ? Fraction.fromJSON(object.trustLevel) : undefined,
+      trustingPeriod: isSet(object.trustingPeriod) ? String(object.trustingPeriod) : undefined,
+      unbondingPeriod: isSet(object.unbondingPeriod) ? String(object.unbondingPeriod) : undefined,
+      maxClockDrift: isSet(object.maxClockDrift) ? String(object.maxClockDrift) : undefined,
+      frozenHeight: isSet(object.frozenHeight) ? Height.fromJSON(object.frozenHeight) : undefined,
+      latestHeight: isSet(object.latestHeight) ? Height.fromJSON(object.latestHeight) : undefined,
+      proofSpecs: Array.isArray(object?.proofSpecs) ? object.proofSpecs.map((e: any) => ProofSpec.fromJSON(e)) : [],
+      upgradePath: Array.isArray(object?.upgradePath) ? object.upgradePath.map((e: any) => String(e)) : [],
+      allowUpdateAfterExpiry: isSet(object.allowUpdateAfterExpiry) ? Boolean(object.allowUpdateAfterExpiry) : false,
+      allowUpdateAfterMisbehaviour: isSet(object.allowUpdateAfterMisbehaviour) ? Boolean(object.allowUpdateAfterMisbehaviour) : false
+    };
+  },
+
+  toJSON(message: ClientState): unknown {
+    const obj: any = {};
+    message.chainId !== undefined && (obj.chainId = message.chainId);
+    message.trustLevel !== undefined && (obj.trustLevel = message.trustLevel ? Fraction.toJSON(message.trustLevel) : undefined);
+    message.trustingPeriod !== undefined && (obj.trustingPeriod = message.trustingPeriod);
+    message.unbondingPeriod !== undefined && (obj.unbondingPeriod = message.unbondingPeriod);
+    message.maxClockDrift !== undefined && (obj.maxClockDrift = message.maxClockDrift);
+    message.frozenHeight !== undefined && (obj.frozenHeight = message.frozenHeight ? Height.toJSON(message.frozenHeight) : undefined);
+    message.latestHeight !== undefined && (obj.latestHeight = message.latestHeight ? Height.toJSON(message.latestHeight) : undefined);
+
+    if (message.proofSpecs) {
+      obj.proofSpecs = message.proofSpecs.map(e => e ? ProofSpec.toJSON(e) : undefined);
+    } else {
+      obj.proofSpecs = [];
+    }
+
+    if (message.upgradePath) {
+      obj.upgradePath = message.upgradePath.map(e => e);
+    } else {
+      obj.upgradePath = [];
+    }
+
+    message.allowUpdateAfterExpiry !== undefined && (obj.allowUpdateAfterExpiry = message.allowUpdateAfterExpiry);
+    message.allowUpdateAfterMisbehaviour !== undefined && (obj.allowUpdateAfterMisbehaviour = message.allowUpdateAfterMisbehaviour);
+    return obj;
+  },
+
+  fromPartial(object: DeepPartial<ClientState>): ClientState {
+    const message = createBaseClientState();
+    message.chainId = object.chainId ?? \\"\\";
+    message.trustLevel = object.trustLevel !== undefined && object.trustLevel !== null ? Fraction.fromPartial(object.trustLevel) : undefined;
+    message.trustingPeriod = object.trustingPeriod ?? undefined;
+    message.unbondingPeriod = object.unbondingPeriod ?? undefined;
+    message.maxClockDrift = object.maxClockDrift ?? undefined;
+    message.frozenHeight = object.frozenHeight !== undefined && object.frozenHeight !== null ? Height.fromPartial(object.frozenHeight) : undefined;
+    message.latestHeight = object.latestHeight !== undefined && object.latestHeight !== null ? Height.fromPartial(object.latestHeight) : undefined;
+    message.proofSpecs = object.proofSpecs?.map(e => ProofSpec.fromPartial(e)) || [];
+    message.upgradePath = object.upgradePath?.map(e => e) || [];
+    message.allowUpdateAfterExpiry = object.allowUpdateAfterExpiry ?? false;
+    message.allowUpdateAfterMisbehaviour = object.allowUpdateAfterMisbehaviour ?? false;
+    return message;
+  }
+
+};"
+`;
+
+exports[`ibc/lightclients/tendermint/v1/tendermint string interface 1`] = `
+"/**
+ * ClientState from Tendermint tracks the current validator set, latest height,
+ * and a possible frozen height.
+ */
+export interface ClientState {
+  chainId: string;
+  trustLevel: Fraction;
+
+  /**
+   * duration of the period since the LastestTimestamp during which the
+   * submitted headers are valid for upgrade
+   */
+  trustingPeriod: string;
+
+  /** duration of the staking unbonding period */
+  unbondingPeriod: string;
+
+  /** defines how much new (untrusted) header's Time can drift into the future. */
+  maxClockDrift: string;
+
+  /** Block height when the client was frozen due to a misbehaviour */
+  frozenHeight: Height;
+
+  /** Latest height the client was updated to */
+  latestHeight: Height;
+
+  /** Proof specifications used in verifying counterparty state */
+  proofSpecs: ProofSpec[];
+
+  /**
+   * Path at which next upgraded client will be committed.
+   * Each element corresponds to the key for a single CommitmentProof in the
+   * chained proof. NOTE: ClientState must stored under
+   * \`{upgradePath}/{upgradeHeight}/clientState\` ConsensusState must be stored
+   * under \`{upgradepath}/{upgradeHeight}/consensusState\` For SDK chains using
+   * the default upgrade module, upgrade_path should be []string{\\"upgrade\\",
+   * \\"upgradedIBCState\\"}\`
+   */
+  upgradePath: string[];
+
+  /**
+   * This flag, when set to true, will allow governance to recover a client
+   * which has expired
+   */
+  allowUpdateAfterExpiry: boolean;
+
+  /**
+   * This flag, when set to true, will allow governance to unfreeze a client
+   * whose chain has experienced a misbehaviour event
+   */
+  allowUpdateAfterMisbehaviour: boolean;
+}"
+`;
+
+exports[`ibc/lightclients/tendermint/v1/tendermint string proto 1`] = `
+"export const ClientState = {
+  encode(message: ClientState, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.chainId !== \\"\\") {
+      writer.uint32(10).string(message.chainId);
+    }
+
+    if (message.trustLevel !== undefined) {
+      Fraction.encode(message.trustLevel, writer.uint32(18).fork()).ldelim();
+    }
+
+    if (message.trustingPeriod !== undefined) {
+      Duration.encode(message.trustingPeriod, writer.uint32(26).fork()).ldelim();
+    }
+
+    if (message.unbondingPeriod !== undefined) {
+      Duration.encode(message.unbondingPeriod, writer.uint32(34).fork()).ldelim();
+    }
+
+    if (message.maxClockDrift !== undefined) {
+      Duration.encode(message.maxClockDrift, writer.uint32(42).fork()).ldelim();
+    }
+
+    if (message.frozenHeight !== undefined) {
+      Height.encode(message.frozenHeight, writer.uint32(50).fork()).ldelim();
+    }
+
+    if (message.latestHeight !== undefined) {
+      Height.encode(message.latestHeight, writer.uint32(58).fork()).ldelim();
+    }
+
+    for (const v of message.proofSpecs) {
+      ProofSpec.encode(v!, writer.uint32(66).fork()).ldelim();
+    }
+
+    for (const v of message.upgradePath) {
+      writer.uint32(74).string(v!);
+    }
+
+    if (message.allowUpdateAfterExpiry === true) {
+      writer.uint32(80).bool(message.allowUpdateAfterExpiry);
+    }
+
+    if (message.allowUpdateAfterMisbehaviour === true) {
+      writer.uint32(88).bool(message.allowUpdateAfterMisbehaviour);
+    }
+
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): ClientState {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseClientState();
+
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        case 1:
+          message.chainId = reader.string();
+          break;
+
+        case 2:
+          message.trustLevel = Fraction.decode(reader, reader.uint32());
+          break;
+
+        case 3:
+          message.trustingPeriod = fromDuration(Duration.decode(reader, reader.uint32()));
+          break;
+
+        case 4:
+          message.unbondingPeriod = fromDuration(Duration.decode(reader, reader.uint32()));
+          break;
+
+        case 5:
+          message.maxClockDrift = fromDuration(Duration.decode(reader, reader.uint32()));
+          break;
+
+        case 6:
+          message.frozenHeight = Height.decode(reader, reader.uint32());
+          break;
+
+        case 7:
+          message.latestHeight = Height.decode(reader, reader.uint32());
+          break;
+
+        case 8:
+          message.proofSpecs.push(ProofSpec.decode(reader, reader.uint32()));
+          break;
+
+        case 9:
+          message.upgradePath.push(reader.string());
+          break;
+
+        case 10:
+          message.allowUpdateAfterExpiry = reader.bool();
+          break;
+
+        case 11:
+          message.allowUpdateAfterMisbehaviour = reader.bool();
+          break;
+
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+
+  fromJSON(object: any): ClientState {
+    return {
+      chainId: isSet(object.chainId) ? String(object.chainId) : \\"\\",
+      trustLevel: isSet(object.trustLevel) ? Fraction.fromJSON(object.trustLevel) : undefined,
+      trustingPeriod: isSet(object.trustingPeriod) ? String(object.trustingPeriod) : undefined,
+      unbondingPeriod: isSet(object.unbondingPeriod) ? String(object.unbondingPeriod) : undefined,
+      maxClockDrift: isSet(object.maxClockDrift) ? String(object.maxClockDrift) : undefined,
+      frozenHeight: isSet(object.frozenHeight) ? Height.fromJSON(object.frozenHeight) : undefined,
+      latestHeight: isSet(object.latestHeight) ? Height.fromJSON(object.latestHeight) : undefined,
+      proofSpecs: Array.isArray(object?.proofSpecs) ? object.proofSpecs.map((e: any) => ProofSpec.fromJSON(e)) : [],
+      upgradePath: Array.isArray(object?.upgradePath) ? object.upgradePath.map((e: any) => String(e)) : [],
+      allowUpdateAfterExpiry: isSet(object.allowUpdateAfterExpiry) ? Boolean(object.allowUpdateAfterExpiry) : false,
+      allowUpdateAfterMisbehaviour: isSet(object.allowUpdateAfterMisbehaviour) ? Boolean(object.allowUpdateAfterMisbehaviour) : false
+    };
+  },
+
+  toJSON(message: ClientState): unknown {
+    const obj: any = {};
+    message.chainId !== undefined && (obj.chainId = message.chainId);
+    message.trustLevel !== undefined && (obj.trustLevel = message.trustLevel ? Fraction.toJSON(message.trustLevel) : undefined);
+    message.trustingPeriod !== undefined && (obj.trustingPeriod = message.trustingPeriod);
+    message.unbondingPeriod !== undefined && (obj.unbondingPeriod = message.unbondingPeriod);
+    message.maxClockDrift !== undefined && (obj.maxClockDrift = message.maxClockDrift);
+    message.frozenHeight !== undefined && (obj.frozenHeight = message.frozenHeight ? Height.toJSON(message.frozenHeight) : undefined);
+    message.latestHeight !== undefined && (obj.latestHeight = message.latestHeight ? Height.toJSON(message.latestHeight) : undefined);
+
+    if (message.proofSpecs) {
+      obj.proofSpecs = message.proofSpecs.map(e => e ? ProofSpec.toJSON(e) : undefined);
+    } else {
+      obj.proofSpecs = [];
+    }
+
+    if (message.upgradePath) {
+      obj.upgradePath = message.upgradePath.map(e => e);
+    } else {
+      obj.upgradePath = [];
+    }
+
+    message.allowUpdateAfterExpiry !== undefined && (obj.allowUpdateAfterExpiry = message.allowUpdateAfterExpiry);
+    message.allowUpdateAfterMisbehaviour !== undefined && (obj.allowUpdateAfterMisbehaviour = message.allowUpdateAfterMisbehaviour);
+    return obj;
+  },
+
+  fromPartial(object: DeepPartial<ClientState>): ClientState {
+    const message = createBaseClientState();
+    message.chainId = object.chainId ?? \\"\\";
+    message.trustLevel = object.trustLevel !== undefined && object.trustLevel !== null ? Fraction.fromPartial(object.trustLevel) : undefined;
+    message.trustingPeriod = object.trustingPeriod ?? undefined;
+    message.unbondingPeriod = object.unbondingPeriod ?? undefined;
+    message.maxClockDrift = object.maxClockDrift ?? undefined;
+    message.frozenHeight = object.frozenHeight !== undefined && object.frozenHeight !== null ? Height.fromPartial(object.frozenHeight) : undefined;
+    message.latestHeight = object.latestHeight !== undefined && object.latestHeight !== null ? Height.fromPartial(object.latestHeight) : undefined;
+    message.proofSpecs = object.proofSpecs?.map(e => ProofSpec.fromPartial(e)) || [];
+    message.upgradePath = object.upgradePath?.map(e => e) || [];
+    message.allowUpdateAfterExpiry = object.allowUpdateAfterExpiry ?? false;
+    message.allowUpdateAfterMisbehaviour = object.allowUpdateAfterMisbehaviour ?? false;
+    return message;
+  }
+
+};"
+`;
