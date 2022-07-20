@@ -209,13 +209,14 @@ export const fromPartial = {
     },
 
     timestamp(args: FromPartialMethod) {
-        if (args.context.options.useDate === 'timestamp') {
-            return fromPartial.type(args);
+        const { useDate } = args.context.options;
+        switch (useDate) {
+            case 'timestamp':
+                return fromPartial.type(args);
+            case 'date':
+            default:
+                return fromPartial.timestampDate(args);
         }
-        if (args.context.options.useDate === 'date') {
-            return fromPartial.timestampDate(args);
-        }
-        return fromPartial.timestampDate(args);
     },
 
     // message.periodReset = object.periodReset ?? undefined;

@@ -272,17 +272,24 @@ export const fromJSON = {
         );
     },
 
-    // period: isSet(object.period) ? String(object.period) : undefined,
 
     // period: isSet(object.period) ? Duration.fromJSON(object.period) : undefined,
 
     duration(args: FromJSONMethod) {
-        const prop = args.field.name;
-
-        if (args.context.options.useDuration !== 'string') {
-            return fromJSON.type(args);
+        const { useDuration } = args.context.options;
+        switch (useDuration) {
+            case 'string':
+                return fromJSON.durationString(args);
+            case 'duration':
+            default:
+                return fromJSON.type(args);
         }
+    },
 
+    // period: isSet(object.period) ? String(object.period) : undefined,
+
+    durationString(args: FromJSONMethod) {
+        const prop = args.field.name;
         args.context.addUtil('isSet');
         return t.objectProperty(
             t.identifier(prop),

@@ -76,22 +76,28 @@ export const decode = {
     duration(args: DecodeMethod) {
         const num = args.field.id;
         const prop = args.field.name;
-        if (args.context.options.useDuration === 'string') {
-            return switchOnTag(num, prop, baseTypes.duration(args));
+        const { useDuration } = args.context.options;
+
+        switch (useDuration) {
+            case 'string':
+                return switchOnTag(num, prop, baseTypes.duration(args));
+            case 'duration':
+            default:
+                return switchOnTag(num, prop, baseTypes.type(args));
         }
-        // defaults to Type (Duration)
-        return switchOnTag(num, prop, baseTypes.type(args));
     },
     timestamp(args: DecodeMethod) {
         const num = args.field.id;
         const prop = args.field.name;
-        if (args.context.options.useDate === 'timestamp') {
-            return switchOnTag(num, prop, baseTypes.timestamp(args));
+        const { useDate } = args.context.options;
+
+        switch (useDate) {
+            case 'timestamp':
+                return switchOnTag(num, prop, baseTypes.timestamp(args));
+            case 'date':
+            default:
+                return switchOnTag(num, prop, baseTypes.timestampDate(args));
         }
-        if (args.context.options.useDate === 'date') {
-            return switchOnTag(num, prop, baseTypes.timestampDate(args));
-        }
-        return switchOnTag(num, prop, baseTypes.timestampDate(args));
 
     },
     type(args: DecodeMethod) {

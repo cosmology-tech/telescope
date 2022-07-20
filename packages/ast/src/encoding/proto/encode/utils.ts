@@ -226,26 +226,29 @@ export const encode = {
     timestamp(args: EncodeMethod) {
         const prop = args.field.name;
         const num = getTagNumber(args.field);
-
-        if (args.context.options.useDate === 'timestamp') {
-            return types.timestamp(num, prop);
+        const { useDate } = args.context.options;
+        switch (useDate) {
+            case 'timestamp':
+                return types.timestamp(num, prop);
+            case 'date':
+            default:
+                args.context.addUtil('toTimestamp');
+                return types.timestampDate(num, prop);
         }
-        if (args.context.options.useDate === 'date') {
-            args.context.addUtil('toTimestamp');
-            return types.timestampDate(num, prop);
-        }
-        args.context.addUtil('toTimestamp');
-        return types.timestampDate(num, prop);
     },
 
     duration(args: EncodeMethod) {
         const prop = args.field.name;
         const num = getTagNumber(args.field);
-        if (args.context.options.useDuration === 'string') {
-            args.context.addUtil('toDuration');
-            return types.duration(num, prop);
+        const { useDuration } = args.context.options;
+        switch (useDuration) {
+            case 'string':
+                args.context.addUtil('toDuration');
+                return types.duration(num, prop);
+            case 'duration':
+            default:
+                return encode.type(args);
         }
-        return encode.type(args);
     },
 
     forkDelimArray(args: EncodeMethod, expr: t.Statement) {

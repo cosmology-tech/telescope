@@ -233,15 +233,15 @@ export const toJSON = {
         return toJSON.identity(args);
     },
 
-
     timestamp(args: ToJSONMethod) {
-        if (args.context.options.useDate === 'timestamp') {
-            return toJSON.timestampTimestamp(args);
+        const { useDate } = args.context.options;
+        switch (useDate) {
+            case 'timestamp':
+                return toJSON.timestampTimestamp(args);
+            case 'date':
+            default:
+                return toJSON.timestampDate(args);
         }
-        if (args.context.options.useDate === 'date') {
-            return toJSON.timestampDate(args);
-        }
-        return toJSON.timestampDate(args);
     },
 
     // message.periodReset !== undefined && (obj.periodReset = fromTimestamp(message.periodReset).toISOString());
