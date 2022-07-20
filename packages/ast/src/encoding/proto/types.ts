@@ -25,10 +25,10 @@ export const SCALAR_TYPES = [
 export const NATIVE_TYPES = [
     ...SCALAR_TYPES,
 
-    // TODO move these out
+    // yes, they're not "native", but in many ways, they are...
     'google.protobuf.Timestamp',
     'google.protobuf.Duration',
-    'google.protobuf.Any',
+    'google.protobuf.Any'
 ]
 
 export const getTSTypeFromProtoType = (context: GenericParseContext, type: string) => {
@@ -62,7 +62,13 @@ export const getTSTypeFromProtoType = (context: GenericParseContext, type: strin
                     return t.tsTypeReference(t.identifier('Date'));
             }
         case 'google.protobuf.Duration':
-            return t.tsStringKeyword();
+            switch (context.options.useDuration) {
+                case 'duration':
+                    return t.tsTypeReference(t.identifier('Duration'));
+                case 'string':
+                default:
+                    return t.tsStringKeyword();
+            }
         case 'google.protobuf.Any':
             return t.tsTypeReference(t.identifier('Any'));
         default:
@@ -281,47 +287,5 @@ export const getObjectNameOld = (name: string, scope: string[] = []) => {
     if (!scope.length || scope.length === 1) return name;
     const [_pkg, ...scopes] = scope;
     return [...scopes, name].join('_')
-};
-
-const getProtoFieldTypeName = (context: ProtoParseContext, field: ProtoField) => {
-    let name = context.getTypeName(field)
-    return renderNameSafely(name);
-};
-
-const getProtoField = (context: ProtoParseContext, field: ProtoField) => {
-    let ast: any = null;
-    let optional = false;
-
-    if (field.options?.['(gogoproto.nullable)']) {
-        optional = true;
-    }
-
-    if (NATIVE_TYPES.includes(field.type)) {
-        ast = getTSTypeFromProtoType(context, field.type);
-    } else {
-        ast = t.tsTypeReference(t.identifier(getProtoFieldTypeName(context, field)));
-    }
-
-    if (field.rule === 'repeated') {
-        ast = t.tsArrayType(ast);
-    }
-
-    if (field.keyType) {
-        ast = t.tsUnionType([
-            t.tsTypeLiteral([
-                t.tsIndexSignature([
-                    identifier('key',
-                        t.tsTypeAnnotation(
-                            getTSTypeFromProtoType(context, field.keyType)
-                        )
-                    )
-                ],
-                    t.tsTypeAnnotation(ast)
-                )
-            ])
-        ]);
-    }
-
-    return ast;
 };
 
