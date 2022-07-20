@@ -241,8 +241,11 @@ export const encode = {
     duration(args: EncodeMethod) {
         const prop = args.field.name;
         const num = getTagNumber(args.field);
-        args.context.addUtil('toDuration');
-        return types.duration(num, prop);
+        if (args.context.options.useDuration === 'string') {
+            args.context.addUtil('toDuration');
+            return types.duration(num, prop);
+        }
+        return encode.type(args);
     },
 
     forkDelimArray(args: EncodeMethod, expr: t.Statement) {
