@@ -14,6 +14,15 @@ const notUndefined = (prop: string): t.Expression => {
     );
 };
 
+const ifNotUndefined = (prop: string, stmt: t.Statement): t.Statement => {
+    return t.ifStatement(
+        notUndefined(prop),
+        t.blockStatement([
+            stmt
+        ])
+    );
+};
+
 const notEmptyString = (prop: string): t.Expression => {
     return t.binaryExpression('!==',
         t.memberExpression(
@@ -107,7 +116,161 @@ const scalarType = (num: number, prop: string, type: string) => {
             )
         )
     ]);
-}
+};
+
+export const encode = {
+
+    string(args: EncodeMethod) {
+        const prop = args.field.name;
+        const num = getTagNumber(args.field);
+        return types.string(num, prop, args.isOptional);
+    },
+
+    double(args: EncodeMethod) {
+        const prop = args.field.name;
+        const num = getTagNumber(args.field);
+        return types.double(num, prop, args.isOptional);
+    },
+
+    float(args: EncodeMethod) {
+        const prop = args.field.name;
+        const num = getTagNumber(args.field);
+        return types.float(num, prop, args.isOptional);
+    },
+
+    int32(args: EncodeMethod) {
+        const prop = args.field.name;
+        const num = getTagNumber(args.field);
+        return types.int32(num, prop, args.isOptional);
+    },
+
+    sint32(args: EncodeMethod) {
+        const prop = args.field.name;
+        const num = getTagNumber(args.field);
+        return types.sint32(num, prop, args.isOptional);
+    },
+
+    uint32(args: EncodeMethod) {
+        const prop = args.field.name;
+        const num = getTagNumber(args.field);
+        return types.uint32(num, prop, args.isOptional);
+    },
+
+    fixed32(args: EncodeMethod) {
+        const prop = args.field.name;
+        const num = getTagNumber(args.field);
+        return types.fixed32(num, prop, args.isOptional);
+    },
+
+    sfixed32(args: EncodeMethod) {
+        const prop = args.field.name;
+        const num = getTagNumber(args.field);
+        return types.sfixed32(num, prop, args.isOptional);
+    },
+
+    int64(args: EncodeMethod) {
+        const prop = args.field.name;
+        const num = getTagNumber(args.field);
+        return types.int64(num, prop, args.isOptional);
+    },
+
+    sint64(args: EncodeMethod) {
+        const prop = args.field.name;
+        const num = getTagNumber(args.field);
+        return types.sint64(num, prop, args.isOptional);
+    },
+
+    uint64(args: EncodeMethod) {
+        const prop = args.field.name;
+        const num = getTagNumber(args.field);
+        return types.uint64(num, prop, args.isOptional);
+    },
+
+    fixed64(args: EncodeMethod) {
+        const prop = args.field.name;
+        const num = getTagNumber(args.field);
+        return types.fixed64(num, prop, args.isOptional);
+    },
+
+    sfixed64(args: EncodeMethod) {
+        const prop = args.field.name;
+        const num = getTagNumber(args.field);
+        return types.sfixed64(num, prop, args.isOptional);
+    },
+
+    bool(args: EncodeMethod) {
+        const prop = args.field.name;
+        const num = getTagNumber(args.field);
+        return types.bool(num, prop, args.isOptional);
+    },
+
+    type(args: EncodeMethod) {
+        const prop = args.field.name;
+        const name = args.context.getTypeName(args.field);
+        const num = getTagNumber(args.field);
+        return types.type(num, prop, name);
+    },
+
+    enum(args: EncodeMethod) {
+        const prop = args.field.name;
+        const num = getTagNumber(args.field);
+        return types.enum(num, prop, args.isOptional);
+    },
+
+    bytes(args: EncodeMethod) {
+        const prop = args.field.name;
+        const num = getTagNumber(args.field);
+        return types.bytes(num, prop, args.isOptional);
+    },
+
+    timestamp(args: EncodeMethod) {
+        const prop = args.field.name;
+        const num = getTagNumber(args.field);
+
+        if (args.context.options.useDate === 'timestamp') {
+            return types.timestamp(num, prop);
+        }
+        if (args.context.options.useDate === 'date') {
+            args.context.addUtil('toTimestamp');
+            return types.timestampDate(num, prop);
+        }
+        args.context.addUtil('toTimestamp');
+        return types.timestampDate(num, prop);
+    },
+
+    duration(args: EncodeMethod) {
+        const prop = args.field.name;
+        const num = getTagNumber(args.field);
+        args.context.addUtil('toDuration');
+        return types.duration(num, prop);
+    },
+
+    forkDelimArray(args: EncodeMethod, expr: t.Statement) {
+        const prop = args.field.name;
+        const num = getTagNumber(args.field);
+        return types.forkDelimArray(num, prop, expr);
+    },
+
+    array(args: EncodeMethod, expr: t.Statement) {
+        const prop = args.field.name;
+        const num = getTagNumber(args.field);
+        return types.array(num, prop, expr);
+    },
+
+    typeArray(args: EncodeMethod) {
+        const prop = args.field.name;
+        const name = args.context.getTypeName(args.field);
+        const num = getTagNumber(args.field);
+        return types.typeArray(num, prop, name);
+    },
+
+    keyHash(args: EncodeMethod) {
+        const prop = args.field.name;
+        const name = args.typeName;
+        const num = getTagNumber(args.field);
+        return types.keyHash(num, prop, name);
+    }
+};
 
 export const types = {
 
@@ -332,51 +495,87 @@ export const types = {
     //   }  
 
     timestamp(num: number, prop: string) {
-        return t.ifStatement(
-            notUndefined(prop),
-            t.blockStatement([
-                t.expressionStatement(
+        return ifNotUndefined(
+            prop,
+            t.expressionStatement(
+                t.callExpression(
+                    t.memberExpression(
+                        t.callExpression(
+                            t.memberExpression(
+                                t.identifier('Timestamp'),
+                                t.identifier('encode')
+                            ),
+                            [
+                                t.memberExpression(
+                                    t.identifier('message'),
+                                    t.identifier(prop)
+                                ),
+                                t.callExpression(
+                                    t.memberExpression(
+                                        t.callExpression(
+                                            t.memberExpression(
+                                                t.identifier('writer'),
+                                                t.identifier('uint32')
+                                            ),
+                                            [
+                                                t.numericLiteral(num)
+                                            ]
+                                        ),
+                                        t.identifier('fork')
+                                    ),
+                                    []
+                                )
+                            ]
+                        ),
+                        t.identifier('ldelim')
+                    ),
+                    []
+                )
+            )
+        );
+    },
+
+    timestampDate(num: number, prop: string) {
+        return ifNotUndefined(prop, t.expressionStatement(
+            t.callExpression(
+                t.memberExpression(
                     t.callExpression(
                         t.memberExpression(
+                            t.identifier('Timestamp'),
+                            t.identifier('encode')
+                        ),
+                        [
                             t.callExpression(
-                                t.memberExpression(
-                                    t.identifier('Timestamp'),
-                                    t.identifier('encode')
-                                ),
+                                t.identifier('toTimestamp'),
                                 [
-                                    t.callExpression(
-                                        t.identifier('toTimestamp'),
-                                        [
-                                            t.memberExpression(
-                                                t.identifier('message'),
-                                                t.identifier(prop)
-                                            )
-                                        ]
-                                    ),
-                                    t.callExpression(
-                                        t.memberExpression(
-                                            t.callExpression(
-                                                t.memberExpression(
-                                                    t.identifier('writer'),
-                                                    t.identifier('uint32')
-                                                ),
-                                                [
-                                                    t.numericLiteral(num)
-                                                ]
-                                            ),
-                                            t.identifier('fork')
-                                        ),
-                                        []
+                                    t.memberExpression(
+                                        t.identifier('message'),
+                                        t.identifier(prop)
                                     )
                                 ]
                             ),
-                            t.identifier('ldelim')
-                        ),
-                        []
-                    )
-                )
-            ])
-        );
+                            t.callExpression(
+                                t.memberExpression(
+                                    t.callExpression(
+                                        t.memberExpression(
+                                            t.identifier('writer'),
+                                            t.identifier('uint32')
+                                        ),
+                                        [
+                                            t.numericLiteral(num)
+                                        ]
+                                    ),
+                                    t.identifier('fork')
+                                ),
+                                []
+                            )
+                        ]
+                    ),
+                    t.identifier('ldelim')
+                ),
+                []
+            )
+        ));
     },
 
     // if (message.period !== undefined) {
@@ -658,152 +857,6 @@ export const types = {
                 ]
             )
         )
-    }
-};
-
-export const encode = {
-
-    string(args: EncodeMethod) {
-        const prop = args.field.name;
-        const num = getTagNumber(args.field);
-        return types.string(num, prop, args.isOptional);
-    },
-
-    double(args: EncodeMethod) {
-        const prop = args.field.name;
-        const num = getTagNumber(args.field);
-        return types.double(num, prop, args.isOptional);
-    },
-
-    float(args: EncodeMethod) {
-        const prop = args.field.name;
-        const num = getTagNumber(args.field);
-        return types.float(num, prop, args.isOptional);
-    },
-
-    int32(args: EncodeMethod) {
-        const prop = args.field.name;
-        const num = getTagNumber(args.field);
-        return types.int32(num, prop, args.isOptional);
-    },
-
-    sint32(args: EncodeMethod) {
-        const prop = args.field.name;
-        const num = getTagNumber(args.field);
-        return types.sint32(num, prop, args.isOptional);
-    },
-
-    uint32(args: EncodeMethod) {
-        const prop = args.field.name;
-        const num = getTagNumber(args.field);
-        return types.uint32(num, prop, args.isOptional);
-    },
-
-    fixed32(args: EncodeMethod) {
-        const prop = args.field.name;
-        const num = getTagNumber(args.field);
-        return types.fixed32(num, prop, args.isOptional);
-    },
-
-    sfixed32(args: EncodeMethod) {
-        const prop = args.field.name;
-        const num = getTagNumber(args.field);
-        return types.sfixed32(num, prop, args.isOptional);
-    },
-
-    int64(args: EncodeMethod) {
-        const prop = args.field.name;
-        const num = getTagNumber(args.field);
-        return types.int64(num, prop, args.isOptional);
-    },
-
-    sint64(args: EncodeMethod) {
-        const prop = args.field.name;
-        const num = getTagNumber(args.field);
-        return types.sint64(num, prop, args.isOptional);
-    },
-
-    uint64(args: EncodeMethod) {
-        const prop = args.field.name;
-        const num = getTagNumber(args.field);
-        return types.uint64(num, prop, args.isOptional);
-    },
-
-    fixed64(args: EncodeMethod) {
-        const prop = args.field.name;
-        const num = getTagNumber(args.field);
-        return types.fixed64(num, prop, args.isOptional);
-    },
-
-    sfixed64(args: EncodeMethod) {
-        const prop = args.field.name;
-        const num = getTagNumber(args.field);
-        return types.sfixed64(num, prop, args.isOptional);
-    },
-
-    bool(args: EncodeMethod) {
-        const prop = args.field.name;
-        const num = getTagNumber(args.field);
-        return types.bool(num, prop, args.isOptional);
-    },
-
-    type(args: EncodeMethod) {
-        const prop = args.field.name;
-        const name = args.context.getTypeName(args.field);
-        const num = getTagNumber(args.field);
-        return types.type(num, prop, name);
-    },
-
-    enum(args: EncodeMethod) {
-        const prop = args.field.name;
-        const num = getTagNumber(args.field);
-        return types.enum(num, prop, args.isOptional);
-    },
-
-    bytes(args: EncodeMethod) {
-        const prop = args.field.name;
-        const num = getTagNumber(args.field);
-        return types.bytes(num, prop, args.isOptional);
-    },
-
-    timestamp(args: EncodeMethod) {
-        const prop = args.field.name;
-        const num = getTagNumber(args.field);
-        args.context.addUtil('toTimestamp');
-        return types.timestamp(num, prop);
-    },
-
-    duration(args: EncodeMethod) {
-        const prop = args.field.name;
-        const num = getTagNumber(args.field);
-        args.context.addUtil('toDuration');
-        return types.duration(num, prop);
-    },
-
-    forkDelimArray(args: EncodeMethod, expr: t.Statement) {
-        const prop = args.field.name;
-        const num = getTagNumber(args.field);
-        return types.forkDelimArray(num, prop, expr);
-    },
-
-    array(args: EncodeMethod, expr: t.Statement) {
-        const prop = args.field.name;
-        const num = getTagNumber(args.field);
-        return types.array(num, prop, expr);
-    },
-
-    typeArray(args: EncodeMethod) {
-        const prop = args.field.name;
-        const name = args.context.getTypeName(args.field);
-        const num = getTagNumber(args.field);
-        return types.typeArray(num, prop, name);
-    },
-
-    keyHash(args: EncodeMethod) {
-        const prop = args.field.name;
-        const name = args.typeName;
-        const num = getTagNumber(args.field);
-        return types.keyHash(num, prop, name);
     }
 };
 

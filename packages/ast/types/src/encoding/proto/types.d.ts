@@ -1,9 +1,9 @@
 import * as t from '@babel/types';
 import { ProtoType, ProtoField } from '@osmonauts/types';
-import { ProtoParseContext } from '../context';
+import { GenericParseContext, ProtoParseContext } from '../context';
 export declare const SCALAR_TYPES: string[];
 export declare const NATIVE_TYPES: string[];
-export declare const getTSTypeFromProtoType: (type: any) => t.TSBooleanKeyword | t.TSNumberKeyword | t.TSStringKeyword | t.TSTypeReference;
+export declare const getTSTypeFromProtoType: (context: GenericParseContext, type: string) => t.TSBooleanKeyword | t.TSNumberKeyword | t.TSStringKeyword | t.TSTypeReference;
 export declare const types: {
     basic: {
         double: number;

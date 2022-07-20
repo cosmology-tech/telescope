@@ -1,6 +1,7 @@
 import { PublicKey } from "../crypto/keys";
 import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
+export const protobufPackage = "tendermint.types";
 export interface ValidatorSet {
   validators: Validator[];
   proposer: Validator;

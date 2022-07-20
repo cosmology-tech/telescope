@@ -1,5 +1,6 @@
 import * as _m0 from "protobufjs/minimal";
 import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "@osmonauts/helpers";
+export const protobufPackage = "secret.registration.v1beta1";
 export interface RaAuthenticate {
   sender: Uint8Array;
   certificate: Uint8Array;

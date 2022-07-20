@@ -1,6 +1,7 @@
 import { Certificate } from "./cert";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "@osmonauts/helpers";
+export const protobufPackage = "akash.cert.v1beta2";
 
 /** GenesisCertificate defines certificate entry at genesis */
 export interface GenesisCertificate {

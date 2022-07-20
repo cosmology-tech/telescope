@@ -28,6 +28,42 @@ export const toAmino = {
         return t.objectProperty(t.identifier(args.context.aminoCaseField(args.field)), memberExpressionOrIdentifier(args.scope))
     },
 
+    rawBytes(args: ToAminoParseField) {
+        args.context.addUtil('fromUtf8');
+        return t.objectProperty(
+            t.identifier(args.context.aminoCaseField(args.field)),
+            t.callExpression(
+                t.memberExpression(
+                    t.identifier('JSON'),
+                    t.identifier('parse')
+                ),
+                [
+                    t.callExpression(
+                        t.identifier('fromUtf8'),
+                        [
+                            memberExpressionOrIdentifier(args.scope)
+                        ]
+                    )
+                ]
+            )
+
+        );
+    },
+
+    wasmByteCode(args: ToAminoParseField) {
+        args.context.addUtil('toBase64');
+        return t.objectProperty(
+            t.identifier(args.context.aminoCaseField(args.field)),
+            t.callExpression(
+                t.identifier('toBase64'),
+                [
+                    memberExpressionOrIdentifier(args.scope)
+                ]
+            )
+
+        );
+    },
+
     duration(args: ToAminoParseField) {
         const exp = t.binaryExpression(
             '*',
@@ -164,7 +200,6 @@ export const toAmino = {
             )
         );
     },
-
 
     typeArray({ context, field, currentProtoPath, scope, fieldPath, nested, isOptional }: ToAminoParseField) {
         //////

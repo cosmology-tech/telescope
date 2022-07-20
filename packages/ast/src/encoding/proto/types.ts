@@ -2,7 +2,7 @@ import * as t from '@babel/types';
 import { ProtoType, ProtoField } from '@osmonauts/types';
 import { pascal } from 'case';
 import { identifier, tsPropertySignature, functionDeclaration, commentBlock, renderNameSafely } from '../../utils';
-import { ProtoParseContext } from '../context';
+import { GenericParseContext, ProtoParseContext } from '../context';
 
 export const SCALAR_TYPES = [
     'string',
@@ -31,7 +31,7 @@ export const NATIVE_TYPES = [
     'google.protobuf.Any',
 ]
 
-export const getTSTypeFromProtoType = (type) => {
+export const getTSTypeFromProtoType = (context: GenericParseContext, type: string) => {
     switch (type) {
         case 'string':
             return t.tsStringKeyword();
@@ -54,6 +54,12 @@ export const getTSTypeFromProtoType = (type) => {
         case 'bool':
             return t.tsBooleanKeyword();
         case 'google.protobuf.Timestamp':
+            if (context.options.useDate === 'timestamp') {
+                return t.tsTypeReference(t.identifier('Timestamp'));
+            }
+            if (context.options.useDate === 'date') {
+                return t.tsTypeReference(t.identifier('Date'));
+            }
             return t.tsTypeReference(t.identifier('Date'));
         case 'google.protobuf.Duration':
             return t.tsStringKeyword();
@@ -287,7 +293,7 @@ const getProtoField = (context: ProtoParseContext, field: ProtoField) => {
     }
 
     if (NATIVE_TYPES.includes(field.type)) {
-        ast = getTSTypeFromProtoType(field.type);
+        ast = getTSTypeFromProtoType(context, field.type);
     } else {
         ast = t.tsTypeReference(t.identifier(getProtoFieldTypeName(context, field)));
     }
@@ -302,7 +308,7 @@ const getProtoField = (context: ProtoParseContext, field: ProtoField) => {
                 t.tsIndexSignature([
                     identifier('key',
                         t.tsTypeAnnotation(
-                            getTSTypeFromProtoType(field.keyType)
+                            getTSTypeFromProtoType(context, field.keyType)
                         )
                     )
                 ],

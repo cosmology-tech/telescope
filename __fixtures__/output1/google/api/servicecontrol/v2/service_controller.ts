@@ -2,6 +2,7 @@ import { AttributeContext } from "../../../rpc/context/attribute_context";
 import { Status } from "../../../rpc/status";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, isObject } from "@osmonauts/helpers";
+export const protobufPackage = "google.api.servicecontrol.v2";
 
 /** Request message for the Check method. */
 export interface CheckRequest {

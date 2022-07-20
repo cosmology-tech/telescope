@@ -1,6 +1,7 @@
 import { CodeInfo, ContractInfo, Model, ContractCustomInfo } from "./types";
 import * as _m0 from "protobufjs/minimal";
 import { DeepPartial, Long, isSet, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
+export const protobufPackage = "secret.compute.v1beta1";
 
 /** GenesisState - genesis state of x/wasm */
 export interface GenesisState {

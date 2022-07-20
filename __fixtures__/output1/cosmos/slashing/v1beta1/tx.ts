@@ -1,5 +1,6 @@
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "@osmonauts/helpers";
+export const protobufPackage = "cosmos.slashing.v1beta1";
 
 /** MsgUnjail defines the Msg/Unjail request type */
 export interface MsgUnjail {

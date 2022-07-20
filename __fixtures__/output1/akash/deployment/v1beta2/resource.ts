@@ -2,6 +2,7 @@ import { ResourceUnits } from "../../base/v1beta2/resourceunits";
 import { DecCoin } from "../../../cosmos/base/v1beta1/coin";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "@osmonauts/helpers";
+export const protobufPackage = "akash.deployment.v1beta2";
 
 /** Resource stores unit, total count and price of resource */
 export interface Resource {

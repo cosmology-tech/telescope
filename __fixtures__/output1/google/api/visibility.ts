@@ -1,5 +1,6 @@
 import * as _m0 from "protobufjs/minimal";
 import { DeepPartial, isSet } from "@osmonauts/helpers";
+export const protobufPackage = "google.api";
 
 /**
  * `Visibility` defines restrictions for the visibility of service

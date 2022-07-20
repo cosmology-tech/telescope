@@ -2,6 +2,7 @@ import { ContractInfo } from "./types";
 import { StringEvent } from "../../../cosmos/base/abci/v1beta1/abci";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, bytesFromBase64, base64FromBytes, DeepPartial, Long } from "@osmonauts/helpers";
+export const protobufPackage = "secret.compute.v1beta1";
 
 /** QueryContractInfoRequest is the request type for the Query/ContractInfo RPC method */
 export interface QueryContractInfoRequest {

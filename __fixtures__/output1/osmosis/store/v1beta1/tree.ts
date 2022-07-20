@@ -1,5 +1,6 @@
 import * as _m0 from "protobufjs/minimal";
 import { DeepPartial, isSet, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
+export const protobufPackage = "osmosis.store.v1beta1";
 export interface Node {
   children: Child[];
 }

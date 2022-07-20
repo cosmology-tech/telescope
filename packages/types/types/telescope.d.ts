@@ -5,7 +5,8 @@ interface TelescopeOpts {
     aminoCasingFn?: Function;
     aminoExceptions?: AminoExceptions;
     signingClientDefaults?: boolean;
-    useDate?: boolean;
+    includePackageVar?: boolean;
+    useDate?: 'date' | 'timestamp';
     useExact?: boolean;
 }
 interface TelescopePackageOpts {

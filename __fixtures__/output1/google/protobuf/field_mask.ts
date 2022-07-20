@@ -1,5 +1,6 @@
 import * as _m0 from "protobufjs/minimal";
 import { DeepPartial } from "@osmonauts/helpers";
+export const protobufPackage = "google.protobuf";
 
 /**
  * `FieldMask` represents a set of symbolic field paths, for example:

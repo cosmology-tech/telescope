@@ -23,6 +23,8 @@ export declare const toJSON: {
     bytes(args: ToJSONMethod): t.ExpressionStatement;
     duration(args: ToJSONMethod): t.ExpressionStatement;
     timestamp(args: ToJSONMethod): t.ExpressionStatement;
+    timestampTimestamp(args: ToJSONMethod): t.ExpressionStatement;
+    timestampDate(args: ToJSONMethod): t.ExpressionStatement;
     keyHash(args: ToJSONMethod): (t.ExpressionStatement | t.IfStatement)[];
     array(args: ToJSONMethod, expr: t.Expression): t.IfStatement;
 };

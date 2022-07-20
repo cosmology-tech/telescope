@@ -1,6 +1,7 @@
 import { Params, Validator, Delegation, UnbondingDelegation, Redelegation } from "./staking";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, bytesFromBase64, base64FromBytes, DeepPartial, Long } from "@osmonauts/helpers";
+export const protobufPackage = "cosmos.staking.v1beta1";
 
 /** GenesisState defines the staking module's genesis state. */
 export interface GenesisState {

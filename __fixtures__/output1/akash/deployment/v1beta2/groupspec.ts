@@ -2,6 +2,7 @@ import { PlacementRequirements } from "../../base/v1beta2/attribute";
 import { Resource } from "./resource";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "@osmonauts/helpers";
+export const protobufPackage = "akash.deployment.v1beta2";
 
 /** GroupSpec stores group specifications */
 export interface GroupSpec {

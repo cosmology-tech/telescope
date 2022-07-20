@@ -2,6 +2,7 @@ import { Channel, Packet } from "./channel";
 import { Height } from "../../client/v1/client";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, bytesFromBase64, base64FromBytes, Long } from "@osmonauts/helpers";
+export const protobufPackage = "ibc.core.channel.v1";
 
 /**
  * MsgChannelOpenInit defines an sdk.Msg to initialize a channel handshake. It

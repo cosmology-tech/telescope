@@ -4,6 +4,7 @@ import { Timestamp } from "../../../google/protobuf/timestamp";
 import { Duration } from "../../../google/protobuf/duration";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, Long, toTimestamp, fromTimestamp, fromJsonTimestamp } from "@osmonauts/helpers";
+export const protobufPackage = "cosmos.gov.v1";
 
 /** VoteOption enumerates the valid vote options for a given governance proposal. */
 export enum VoteOption {

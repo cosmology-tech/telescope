@@ -1,5 +1,6 @@
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "@osmonauts/helpers";
+export const protobufPackage = "ibc.applications.transfer.v1";
 
 /**
  * DenomTrace contains the base denomination for ICS20 fungible tokens and the

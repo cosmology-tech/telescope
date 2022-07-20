@@ -2,6 +2,7 @@ import { BaseVestingAccount, Period } from "../../../cosmos/vesting/v1beta1/vest
 import { Timestamp } from "../../../google/protobuf/timestamp";
 import * as _m0 from "protobufjs/minimal";
 import { toTimestamp, fromTimestamp, isSet, fromJsonTimestamp, DeepPartial } from "@osmonauts/helpers";
+export const protobufPackage = "evmos.vesting.v1";
 
 /**
  * ClawbackVestingAccount implements the VestingAccount interface. It provides

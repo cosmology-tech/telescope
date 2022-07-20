@@ -2,6 +2,7 @@ import { SourceInfo } from "./source";
 import { NullValue, nullValueFromJSON, nullValueToJSON } from "../../../protobuf/struct";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, Long, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
+export const protobufPackage = "google.api.expr.v1beta1";
 
 /** An expression together with source information as returned by the parser. */
 export interface ParsedExpr {

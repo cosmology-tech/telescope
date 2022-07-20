@@ -1,5 +1,6 @@
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
+export const protobufPackage = "secret.registration.v1beta1";
 export interface SeedConfig {
   masterCert: string;
   encryptedKey: string;

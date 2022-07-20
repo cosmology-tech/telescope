@@ -1,6 +1,7 @@
 import { Height } from "../../../core/client/v1/client";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "@osmonauts/helpers";
+export const protobufPackage = "ibc.lightclients.localhost.v1";
 
 /**
  * ClientState defines a loopback (localhost) client. It requires (read-only)

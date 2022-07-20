@@ -1,5 +1,6 @@
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "@osmonauts/helpers";
+export const protobufPackage = "cosmos.base.v1beta1";
 
 /**
  * Coin defines a token with a denomination and an amount.

@@ -1,6 +1,7 @@
 import { PeriodLock, SyntheticLock } from "./lock";
 import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, DeepPartial } from "@osmonauts/helpers";
+export const protobufPackage = "osmosis.lockup";
 
 /** GenesisState defines the lockup module's genesis state. */
 export interface GenesisState {

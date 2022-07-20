@@ -2,6 +2,7 @@ import { ProposalStatus, Proposal, Vote, VotingParams, DepositParams, TallyParam
 import { PageRequest, PageResponse } from "../../base/query/v1beta1/pagination";
 import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, DeepPartial } from "@osmonauts/helpers";
+export const protobufPackage = "cosmos.gov.v1beta1";
 
 /** QueryProposalRequest is the request type for the Query/Proposal RPC method. */
 export interface QueryProposalRequest {

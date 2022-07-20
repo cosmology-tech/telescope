@@ -2,6 +2,7 @@ import { Params } from "./auth";
 import { Any } from "../../../google/protobuf/any";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "@osmonauts/helpers";
+export const protobufPackage = "cosmos.auth.v1beta1";
 
 /** GenesisState defines the auth module's genesis state. */
 export interface GenesisState {

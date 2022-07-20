@@ -87,7 +87,18 @@ export class TelescopeBuilder {
                 const importStmts = buildAllImports(context, null, context.ref.filename);
                 const prog = []
                     .concat(importStmts)
-                    .concat(context.body);
+                    ;
+
+                if (context.options.includePackageVar) {
+                    prog.push(t.exportNamedDeclaration(t.variableDeclaration('const', [
+                        t.variableDeclarator(
+                            t.identifier('protobufPackage'),
+                            t.stringLiteral(context.ref.proto.package)
+                        )
+                    ])))
+                }
+
+                prog.push.apply(prog, context.body);
 
                 const filename = ref.filename.replace(/\.proto/, '.ts');
                 const out = join(this.outPath, filename);

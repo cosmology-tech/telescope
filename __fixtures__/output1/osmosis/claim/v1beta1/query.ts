@@ -3,6 +3,7 @@ import { Coin } from "../../../cosmos/base/v1beta1/coin";
 import { Params } from "./params";
 import * as _m0 from "protobufjs/minimal";
 import { DeepPartial, isSet } from "@osmonauts/helpers";
+export const protobufPackage = "osmosis.claim.v1beta1";
 
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryModuleAccountBalanceRequest {}

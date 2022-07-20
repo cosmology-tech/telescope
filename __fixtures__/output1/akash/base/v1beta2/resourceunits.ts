@@ -2,6 +2,7 @@ import { CPU, Memory, Storage } from "./resource";
 import { Endpoint } from "./endpoint";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "@osmonauts/helpers";
+export const protobufPackage = "akash.base.v1beta2";
 
 /**
  * ResourceUnits describes all available resources types for deployment/node etc

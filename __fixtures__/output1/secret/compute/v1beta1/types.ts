@@ -1,5 +1,6 @@
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, bytesFromBase64, base64FromBytes, Long } from "@osmonauts/helpers";
+export const protobufPackage = "secret.compute.v1beta1";
 export enum AccessType {
   UNDEFINED = 0,
   NOBODY = 1,

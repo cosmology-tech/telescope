@@ -1,5 +1,6 @@
 import * as _m0 from "protobufjs/minimal";
 import { DeepPartial, Long, isSet, isObject } from "@osmonauts/helpers";
+export const protobufPackage = "google.api";
 
 /**
  * Quota configuration helps to achieve fairness and budgeting in service

@@ -3,6 +3,7 @@ import { Empty } from "../../../protobuf/empty";
 import { NullValue, nullValueFromJSON, nullValueToJSON } from "../../../protobuf/struct";
 import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, DeepPartial, isObject } from "@osmonauts/helpers";
+export const protobufPackage = "google.api.expr.v1alpha1";
 
 /** CEL primitive types. */
 export enum Type_PrimitiveType {

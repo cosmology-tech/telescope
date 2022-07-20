@@ -1,6 +1,7 @@
 import { MerklePrefix } from "../../commitment/v1/commitment";
 import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, DeepPartial } from "@osmonauts/helpers";
+export const protobufPackage = "ibc.core.connection.v1";
 
 /**
  * State defines if a connection is in one of the following states:

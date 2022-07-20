@@ -1,6 +1,7 @@
 import { Class, NFT } from "./nft";
 import * as _m0 from "protobufjs/minimal";
 import { DeepPartial, isSet } from "@osmonauts/helpers";
+export const protobufPackage = "cosmos.nft.v1beta1";
 
 /** GenesisState defines the nft module's genesis state. */
 export interface GenesisState {

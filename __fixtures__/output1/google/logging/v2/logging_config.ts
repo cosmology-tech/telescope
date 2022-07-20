@@ -2,6 +2,7 @@ import { FieldMask } from "../../protobuf/field_mask";
 import { Timestamp } from "../../protobuf/timestamp";
 import * as _m0 from "protobufjs/minimal";
 import { toTimestamp, fromTimestamp, isSet, fromJsonTimestamp, DeepPartial, Long } from "@osmonauts/helpers";
+export const protobufPackage = "google.logging.v2";
 
 /** Deprecated. This is unused. */
 export enum LogSink_VersionFormat {

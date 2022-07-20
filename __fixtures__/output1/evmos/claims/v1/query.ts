@@ -4,6 +4,7 @@ import { Params } from "./genesis";
 import { ClaimsRecordAddress, Claim } from "./claims";
 import * as _m0 from "protobufjs/minimal";
 import { DeepPartial, isSet } from "@osmonauts/helpers";
+export const protobufPackage = "evmos.claims.v1";
 
 /**
  * QueryTotalUnclaimedRequest is the request type for the Query/TotalUnclaimed

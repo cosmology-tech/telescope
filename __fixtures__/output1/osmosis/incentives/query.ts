@@ -4,6 +4,7 @@ import { Gauge } from "./gauge";
 import { Duration } from "../../google/protobuf/duration";
 import * as _m0 from "protobufjs/minimal";
 import { DeepPartial, Long, isSet } from "@osmonauts/helpers";
+export const protobufPackage = "osmosis.incentives";
 export interface ModuleToDistributeCoinsRequest {}
 export interface ModuleToDistributeCoinsResponse {
   coins: Coin[];

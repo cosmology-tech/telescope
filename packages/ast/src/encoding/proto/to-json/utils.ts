@@ -233,9 +233,39 @@ export const toJSON = {
         return toJSON.identity(args);
     },
 
-    // message.periodReset !== undefined && (obj.periodReset = message.periodReset.toISOString());
 
     timestamp(args: ToJSONMethod) {
+        if (args.context.options.useDate === 'timestamp') {
+            return toJSON.timestampTimestamp(args);
+        }
+        if (args.context.options.useDate === 'date') {
+            return toJSON.timestampDate(args);
+        }
+        return toJSON.timestampDate(args);
+    },
+
+    // message.periodReset !== undefined && (obj.periodReset = fromTimestamp(message.periodReset).toISOString());
+
+    timestampTimestamp(args: ToJSONMethod) {
+        args.context.addUtil('fromTimestamp');
+        return notUndefinedSetValue(args.field.name, t.callExpression(
+            t.memberExpression(
+                t.callExpression(
+                    t.identifier('fromTimestamp'), [
+                    t.memberExpression(
+                        t.identifier('message'),
+                        t.identifier(args.field.name)
+                    )
+                ]),
+                t.identifier('toISOString')
+            ),
+            []
+        ));
+    },
+
+    // message.periodReset !== undefined && (obj.periodReset = message.periodReset.toISOString());
+
+    timestampDate(args: ToJSONMethod) {
         return notUndefinedSetValue(args.field.name, t.callExpression(
             t.memberExpression(
                 t.memberExpression(

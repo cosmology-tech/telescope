@@ -3,6 +3,7 @@ import { LaunchStage, launchStageFromJSON, launchStageToJSON } from "./launch_st
 import { Struct } from "../protobuf/struct";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, isObject } from "@osmonauts/helpers";
+export const protobufPackage = "google.api";
 
 /**
  * An object that describes the schema of a [MonitoredResource][google.api.MonitoredResource] object using a

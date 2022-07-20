@@ -3,6 +3,7 @@ import { Any } from "../../../google/protobuf/any";
 import { Params } from "./auth";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
+export const protobufPackage = "cosmos.auth.v1beta1";
 
 /**
  * QueryAccountsRequest is the request type for the Query/Accounts RPC method.

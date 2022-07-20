@@ -1,6 +1,7 @@
 import { Minter, Params } from "./mint";
 import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, DeepPartial } from "@osmonauts/helpers";
+export const protobufPackage = "osmosis.mint.v1beta1";
 
 /** GenesisState defines the mint module's genesis state. */
 export interface GenesisState {

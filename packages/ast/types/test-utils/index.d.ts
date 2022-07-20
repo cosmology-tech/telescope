@@ -10,3 +10,4 @@ export declare const prepareContext: (store: ProtoStore, protoFile: string) => {
     protos: ProtoType[];
 };
 export declare const getGenericParseContext: () => GenericParseContext;
+export declare const getGenericParseContextWithRef: (ref: any) => GenericParseContext;

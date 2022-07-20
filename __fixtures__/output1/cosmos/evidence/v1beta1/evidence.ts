@@ -1,6 +1,7 @@
 import { Timestamp } from "../../../google/protobuf/timestamp";
 import * as _m0 from "protobufjs/minimal";
 import { toTimestamp, Long, fromTimestamp, isSet, fromJsonTimestamp, DeepPartial } from "@osmonauts/helpers";
+export const protobufPackage = "cosmos.evidence.v1beta1";
 
 /**
  * Equivocation implements the Evidence interface and defines evidence of double

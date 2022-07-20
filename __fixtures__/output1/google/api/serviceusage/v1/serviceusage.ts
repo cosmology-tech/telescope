@@ -1,6 +1,7 @@
 import { Service } from "./resources";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "@osmonauts/helpers";
+export const protobufPackage = "google.api.serviceusage.v1";
 
 /**
  * Enum to determine if service usage should be checked when disabling a

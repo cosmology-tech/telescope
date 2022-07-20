@@ -1,5 +1,6 @@
 import * as _m0 from "protobufjs/minimal";
 import { DeepPartial, isSet, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
+export const protobufPackage = "cosmos.base.kv.v1beta1";
 
 /** Pairs defines a repeated slice of Pair objects. */
 export interface Pairs {

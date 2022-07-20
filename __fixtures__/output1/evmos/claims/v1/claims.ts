@@ -1,5 +1,6 @@
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "@osmonauts/helpers";
+export const protobufPackage = "evmos.claims.v1";
 
 /** Action defines the list of available actions to claim the airdrop tokens. */
 export enum Action {

@@ -1,6 +1,7 @@
 import { FeeToken } from "./feetoken";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "@osmonauts/helpers";
+export const protobufPackage = "osmosis.txfees.v1beta1";
 
 /** GenesisState defines the txfees module's genesis state. */
 export interface GenesisState {
