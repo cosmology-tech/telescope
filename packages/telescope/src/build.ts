@@ -162,6 +162,7 @@ export class TelescopeParseContext implements TelescopeParseContext {
     buildHelperObject() {
         // add methods
         this.body.push(createHelperObject({
+            context: this.amino,
             name: 'MessageComposer',
             mutations: getMutations(this.mutations)
         }));

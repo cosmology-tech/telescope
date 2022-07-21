@@ -2,6 +2,7 @@ import * as t from '@babel/types';
 import { identifier } from '../../utils';
 import { Mutation } from '../../types';
 import { camel } from 'case';
+import { GenericParseContext } from '../../encoding';
 
 export const addMsgMethod = ({ methodName, typeUrl, TypeName, methodToCall }) => {
     return t.objectMethod('method', t.identifier(methodName), [
@@ -130,10 +131,17 @@ export const addEncodedMethod = ({ methodName, typeUrl, TypeName }) => {
         )]));
 };
 
+interface HelperObject {
+    context: GenericParseContext;
+    name: string;
+    mutations: Mutation[];
+}
+
 export const createHelperObject = ({
+    context, // for future plugins
     name,
     mutations
-}: { name: string, mutations: Mutation[] }) => {
+}: HelperObject) => {
 
     mutations = mutations.map(mutation => {
         return {
