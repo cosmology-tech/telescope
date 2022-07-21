@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ibc/lightclients/tendermint/v1/tendermint duration interface 1`] = `
+exports[`ibc/lightclients/tendermint/v1/tendermint duration 1`] = `
 "/**
  * ClientState from Tendermint tracks the current validator set, latest height,
  * and a possible frozen height.
@@ -55,7 +55,7 @@ export interface ClientState {
 }"
 `;
 
-exports[`ibc/lightclients/tendermint/v1/tendermint duration proto 1`] = `
+exports[`ibc/lightclients/tendermint/v1/tendermint duration 2`] = `
 "export const ClientState = {
   encode(message: ClientState, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.chainId !== \\"\\") {
@@ -229,7 +229,181 @@ exports[`ibc/lightclients/tendermint/v1/tendermint duration proto 1`] = `
 };"
 `;
 
-exports[`ibc/lightclients/tendermint/v1/tendermint string interface 1`] = `
+exports[`ibc/lightclients/tendermint/v1/tendermint duration 3`] = `
+"export interface AminoClientState extends AminoMsg {
+  type: \\"cosmos-sdk/ClientState\\";
+  value: {
+    chain_id: string;
+    trust_level: {
+      numerator: string;
+      denominator: string;
+    };
+    trusting_period: {
+      seconds: string;
+      nanos: number;
+    };
+    unbonding_period: {
+      seconds: string;
+      nanos: number;
+    };
+    max_clock_drift: {
+      seconds: string;
+      nanos: number;
+    };
+    frozen_height: AminoHeight;
+    latest_height: AminoHeight;
+    proof_specs: {
+      leaf_spec: {
+        hash: number;
+        prehash_key: number;
+        prehash_value: number;
+        length: number;
+        prefix: Uint8Array;
+      };
+      inner_spec: {
+        child_order: number[];
+        child_size: number;
+        min_prefix_length: number;
+        max_prefix_length: number;
+        empty_child: Uint8Array;
+        hash: number;
+      };
+      max_depth: number;
+      min_depth: number;
+    }[];
+    upgrade_path: string[];
+    allow_update_after_expiry: boolean;
+    allow_update_after_misbehaviour: boolean;
+  };
+}"
+`;
+
+exports[`ibc/lightclients/tendermint/v1/tendermint duration 4`] = `
+"export const AminoConverter = {
+  \\"/ibc.lightclients.tendermint.v1.ClientState\\": {
+    aminoType: \\"cosmos-sdk/ClientState\\",
+    toAmino: ({
+      chainId,
+      trustLevel,
+      trustingPeriod,
+      unbondingPeriod,
+      maxClockDrift,
+      frozenHeight,
+      latestHeight,
+      proofSpecs,
+      upgradePath,
+      allowUpdateAfterExpiry,
+      allowUpdateAfterMisbehaviour
+    }: ClientState): AminoClientState[\\"value\\"] => {
+      return {
+        chain_id: chainId,
+        trust_level: {
+          numerator: trustLevel.numerator.toString(),
+          denominator: trustLevel.denominator.toString()
+        },
+        trusting_period: (trustingPeriod * 1_000_000_000).toString(),
+        unbonding_period: (unbondingPeriod * 1_000_000_000).toString(),
+        max_clock_drift: (maxClockDrift * 1_000_000_000).toString(),
+        frozen_height: frozenHeight ? {
+          revision_height: omitDefault(frozenHeight.revisionHeight)?.toString(),
+          revision_number: omitDefault(frozenHeight.revisionNumber)?.toString()
+        } : {},
+        latest_height: latestHeight ? {
+          revision_height: omitDefault(latestHeight.revisionHeight)?.toString(),
+          revision_number: omitDefault(latestHeight.revisionNumber)?.toString()
+        } : {},
+        proof_specs: proofSpecs.map(el0 => ({
+          leaf_spec: {
+            hash: el0.leafSpec.hash,
+            prehash_key: el0.leafSpec.prehashKey,
+            prehash_value: el0.leafSpec.prehashValue,
+            length: el0.leafSpec.length,
+            prefix: el0.leafSpec.prefix
+          },
+          inner_spec: {
+            child_order: el0.innerSpec.childOrder,
+            child_size: el0.innerSpec.childSize,
+            min_prefix_length: el0.innerSpec.minPrefixLength,
+            max_prefix_length: el0.innerSpec.maxPrefixLength,
+            empty_child: el0.innerSpec.emptyChild,
+            hash: el0.innerSpec.hash
+          },
+          max_depth: el0.maxDepth,
+          min_depth: el0.minDepth
+        })),
+        upgrade_path: upgradePath,
+        allow_update_after_expiry: allowUpdateAfterExpiry,
+        allow_update_after_misbehaviour: allowUpdateAfterMisbehaviour
+      };
+    },
+    fromAmino: ({
+      chain_id,
+      trust_level,
+      trusting_period,
+      unbonding_period,
+      max_clock_drift,
+      frozen_height,
+      latest_height,
+      proof_specs,
+      upgrade_path,
+      allow_update_after_expiry,
+      allow_update_after_misbehaviour
+    }: AminoClientState[\\"value\\"]): ClientState => {
+      return {
+        chainId: chain_id,
+        trustLevel: {
+          numerator: Long.fromString(trust_level.numerator),
+          denominator: Long.fromString(trust_level.denominator)
+        },
+        trustingPeriod: {
+          seconds: Long.fromNumber(Math.floor(parseInt(trusting_period) / 1_000_000_000)),
+          nanos: parseInt(trusting_period) % 1_000_000_000
+        },
+        unbondingPeriod: {
+          seconds: Long.fromNumber(Math.floor(parseInt(unbonding_period) / 1_000_000_000)),
+          nanos: parseInt(unbonding_period) % 1_000_000_000
+        },
+        maxClockDrift: {
+          seconds: Long.fromNumber(Math.floor(parseInt(max_clock_drift) / 1_000_000_000)),
+          nanos: parseInt(max_clock_drift) % 1_000_000_000
+        },
+        frozenHeight: frozen_height ? {
+          revisionHeight: Long.fromString(frozen_height.revision_height || \\"0\\", true),
+          revisionNumber: Long.fromString(frozen_height.revision_number || \\"0\\", true)
+        } : undefined,
+        latestHeight: latest_height ? {
+          revisionHeight: Long.fromString(latest_height.revision_height || \\"0\\", true),
+          revisionNumber: Long.fromString(latest_height.revision_number || \\"0\\", true)
+        } : undefined,
+        proofSpecs: proof_specs.map(el0 => ({
+          leafSpec: {
+            hash: hashOpFromJSON(el0.leaf_spec.hash),
+            prehashKey: hashOpFromJSON(el0.leaf_spec.prehash_key),
+            prehashValue: hashOpFromJSON(el0.leaf_spec.prehash_value),
+            length: lengthOpFromJSON(el0.leaf_spec.length),
+            prefix: el0.leaf_spec.prefix
+          },
+          innerSpec: {
+            childOrder: el0.inner_spec.child_order,
+            childSize: el0.inner_spec.child_size,
+            minPrefixLength: el0.inner_spec.min_prefix_length,
+            maxPrefixLength: el0.inner_spec.max_prefix_length,
+            emptyChild: el0.inner_spec.empty_child,
+            hash: hashOpFromJSON(el0.inner_spec.hash)
+          },
+          maxDepth: el0.max_depth,
+          minDepth: el0.min_depth
+        })),
+        upgradePath: upgrade_path,
+        allowUpdateAfterExpiry: allow_update_after_expiry,
+        allowUpdateAfterMisbehaviour: allow_update_after_misbehaviour
+      };
+    }
+  }
+};"
+`;
+
+exports[`ibc/lightclients/tendermint/v1/tendermint string 1`] = `
 "/**
  * ClientState from Tendermint tracks the current validator set, latest height,
  * and a possible frozen height.
@@ -284,7 +458,7 @@ export interface ClientState {
 }"
 `;
 
-exports[`ibc/lightclients/tendermint/v1/tendermint string proto 1`] = `
+exports[`ibc/lightclients/tendermint/v1/tendermint string 2`] = `
 "export const ClientState = {
   encode(message: ClientState, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.chainId !== \\"\\") {
@@ -455,5 +629,170 @@ exports[`ibc/lightclients/tendermint/v1/tendermint string proto 1`] = `
     return message;
   }
 
+};"
+`;
+
+exports[`ibc/lightclients/tendermint/v1/tendermint string 3`] = `
+"export interface AminoClientState extends AminoMsg {
+  type: \\"cosmos-sdk/ClientState\\";
+  value: {
+    chain_id: string;
+    trust_level: {
+      numerator: string;
+      denominator: string;
+    };
+    trusting_period: string;
+    unbonding_period: string;
+    max_clock_drift: string;
+    frozen_height: AminoHeight;
+    latest_height: AminoHeight;
+    proof_specs: {
+      leaf_spec: {
+        hash: number;
+        prehash_key: number;
+        prehash_value: number;
+        length: number;
+        prefix: Uint8Array;
+      };
+      inner_spec: {
+        child_order: number[];
+        child_size: number;
+        min_prefix_length: number;
+        max_prefix_length: number;
+        empty_child: Uint8Array;
+        hash: number;
+      };
+      max_depth: number;
+      min_depth: number;
+    }[];
+    upgrade_path: string[];
+    allow_update_after_expiry: boolean;
+    allow_update_after_misbehaviour: boolean;
+  };
+}"
+`;
+
+exports[`ibc/lightclients/tendermint/v1/tendermint string 4`] = `
+"export const AminoConverter = {
+  \\"/ibc.lightclients.tendermint.v1.ClientState\\": {
+    aminoType: \\"cosmos-sdk/ClientState\\",
+    toAmino: ({
+      chainId,
+      trustLevel,
+      trustingPeriod,
+      unbondingPeriod,
+      maxClockDrift,
+      frozenHeight,
+      latestHeight,
+      proofSpecs,
+      upgradePath,
+      allowUpdateAfterExpiry,
+      allowUpdateAfterMisbehaviour
+    }: ClientState): AminoClientState[\\"value\\"] => {
+      return {
+        chain_id: chainId,
+        trust_level: {
+          numerator: trustLevel.numerator.toString(),
+          denominator: trustLevel.denominator.toString()
+        },
+        trusting_period: (trustingPeriod * 1_000_000_000).toString(),
+        unbonding_period: (unbondingPeriod * 1_000_000_000).toString(),
+        max_clock_drift: (maxClockDrift * 1_000_000_000).toString(),
+        frozen_height: frozenHeight ? {
+          revision_height: omitDefault(frozenHeight.revisionHeight)?.toString(),
+          revision_number: omitDefault(frozenHeight.revisionNumber)?.toString()
+        } : {},
+        latest_height: latestHeight ? {
+          revision_height: omitDefault(latestHeight.revisionHeight)?.toString(),
+          revision_number: omitDefault(latestHeight.revisionNumber)?.toString()
+        } : {},
+        proof_specs: proofSpecs.map(el0 => ({
+          leaf_spec: {
+            hash: el0.leafSpec.hash,
+            prehash_key: el0.leafSpec.prehashKey,
+            prehash_value: el0.leafSpec.prehashValue,
+            length: el0.leafSpec.length,
+            prefix: el0.leafSpec.prefix
+          },
+          inner_spec: {
+            child_order: el0.innerSpec.childOrder,
+            child_size: el0.innerSpec.childSize,
+            min_prefix_length: el0.innerSpec.minPrefixLength,
+            max_prefix_length: el0.innerSpec.maxPrefixLength,
+            empty_child: el0.innerSpec.emptyChild,
+            hash: el0.innerSpec.hash
+          },
+          max_depth: el0.maxDepth,
+          min_depth: el0.minDepth
+        })),
+        upgrade_path: upgradePath,
+        allow_update_after_expiry: allowUpdateAfterExpiry,
+        allow_update_after_misbehaviour: allowUpdateAfterMisbehaviour
+      };
+    },
+    fromAmino: ({
+      chain_id,
+      trust_level,
+      trusting_period,
+      unbonding_period,
+      max_clock_drift,
+      frozen_height,
+      latest_height,
+      proof_specs,
+      upgrade_path,
+      allow_update_after_expiry,
+      allow_update_after_misbehaviour
+    }: AminoClientState[\\"value\\"]): ClientState => {
+      return {
+        chainId: chain_id,
+        trustLevel: {
+          numerator: Long.fromString(trust_level.numerator),
+          denominator: Long.fromString(trust_level.denominator)
+        },
+        trustingPeriod: {
+          seconds: Long.fromNumber(Math.floor(parseInt(trusting_period) / 1_000_000_000)),
+          nanos: parseInt(trusting_period) % 1_000_000_000
+        },
+        unbondingPeriod: {
+          seconds: Long.fromNumber(Math.floor(parseInt(unbonding_period) / 1_000_000_000)),
+          nanos: parseInt(unbonding_period) % 1_000_000_000
+        },
+        maxClockDrift: {
+          seconds: Long.fromNumber(Math.floor(parseInt(max_clock_drift) / 1_000_000_000)),
+          nanos: parseInt(max_clock_drift) % 1_000_000_000
+        },
+        frozenHeight: frozen_height ? {
+          revisionHeight: Long.fromString(frozen_height.revision_height || \\"0\\", true),
+          revisionNumber: Long.fromString(frozen_height.revision_number || \\"0\\", true)
+        } : undefined,
+        latestHeight: latest_height ? {
+          revisionHeight: Long.fromString(latest_height.revision_height || \\"0\\", true),
+          revisionNumber: Long.fromString(latest_height.revision_number || \\"0\\", true)
+        } : undefined,
+        proofSpecs: proof_specs.map(el0 => ({
+          leafSpec: {
+            hash: hashOpFromJSON(el0.leaf_spec.hash),
+            prehashKey: hashOpFromJSON(el0.leaf_spec.prehash_key),
+            prehashValue: hashOpFromJSON(el0.leaf_spec.prehash_value),
+            length: lengthOpFromJSON(el0.leaf_spec.length),
+            prefix: el0.leaf_spec.prefix
+          },
+          innerSpec: {
+            childOrder: el0.inner_spec.child_order,
+            childSize: el0.inner_spec.child_size,
+            minPrefixLength: el0.inner_spec.min_prefix_length,
+            maxPrefixLength: el0.inner_spec.max_prefix_length,
+            emptyChild: el0.inner_spec.empty_child,
+            hash: hashOpFromJSON(el0.inner_spec.hash)
+          },
+          maxDepth: el0.max_depth,
+          minDepth: el0.min_depth
+        })),
+        upgradePath: upgrade_path,
+        allowUpdateAfterExpiry: allow_update_after_expiry,
+        allowUpdateAfterMisbehaviour: allow_update_after_misbehaviour
+      };
+    }
+  }
 };"
 `;
