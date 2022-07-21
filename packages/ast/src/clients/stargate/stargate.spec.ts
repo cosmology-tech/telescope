@@ -1,4 +1,4 @@
-import { getGenericParseContextWithRef, expectCode } from '../../test-utils'
+import { getGenericParseContextWithRef, expectCode } from '../../../test-utils'
 import { createStargateClient } from './stargate';
 import { ProtoRef } from '@osmonauts/types';
 

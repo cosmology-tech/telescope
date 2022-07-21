@@ -1,7 +1,7 @@
 import * as t from '@babel/types';
-import { GenericParseContext } from '../encoding';
-import { getPluginValue } from '../plugins';
-import { memberExpressionOrIdentifier, objectPattern } from '../utils';
+import { GenericParseContext } from '../../encoding';
+import { getPluginValue } from '../../plugins';
+import { memberExpressionOrIdentifier, objectPattern } from '../../utils';
 
 interface CreateStargateClient {
   name: string;
