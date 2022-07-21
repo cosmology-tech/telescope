@@ -2,7 +2,7 @@ import { Counterparty, Version } from "./connection";
 import { Any } from "../../../../google/protobuf/any";
 import { Height } from "../../client/v1/client";
 import { AminoMsg } from "@cosmjs/amino";
-import { Long, omitDefault } from "@osmonauts/helpers";
+import { AminoHeight, Long, omitDefault } from "@osmonauts/helpers";
 import { MerklePrefix } from "../../commitment/v1/commitment";
 import { MsgConnectionOpenInit, MsgConnectionOpenTry, MsgConnectionOpenAck, MsgConnectionOpenConfirm } from "./tx";
 export interface AminoMsgConnectionOpenInit extends AminoMsg {
@@ -45,17 +45,11 @@ export interface AminoMsgConnectionOpenTry extends AminoMsg {
       identifier: string;
       features: string[];
     }[];
-    proof_height: {
-      revision_number: string;
-      revision_height: string;
-    };
+    proof_height: AminoHeight;
     proof_init: Uint8Array;
     proof_client: Uint8Array;
     proof_consensus: Uint8Array;
-    consensus_height: {
-      revision_number: string;
-      revision_height: string;
-    };
+    consensus_height: AminoHeight;
     signer: string;
   };
 }
@@ -72,17 +66,11 @@ export interface AminoMsgConnectionOpenAck extends AminoMsg {
       type_url: string;
       value: Uint8Array;
     };
-    proof_height: {
-      revision_number: string;
-      revision_height: string;
-    };
+    proof_height: AminoHeight;
     proof_try: Uint8Array;
     proof_client: Uint8Array;
     proof_consensus: Uint8Array;
-    consensus_height: {
-      revision_number: string;
-      revision_height: string;
-    };
+    consensus_height: AminoHeight;
     signer: string;
   };
 }
@@ -91,10 +79,7 @@ export interface AminoMsgConnectionOpenConfirm extends AminoMsg {
   value: {
     connection_id: string;
     proof_ack: Uint8Array;
-    proof_height: {
-      revision_number: string;
-      revision_height: string;
-    };
+    proof_height: AminoHeight;
     signer: string;
   };
 }

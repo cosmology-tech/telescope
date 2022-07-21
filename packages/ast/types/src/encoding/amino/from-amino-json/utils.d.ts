@@ -7,6 +7,7 @@ export declare const fromAmino: {
     wasmByteCode(args: FromAminoParseField): t.ObjectProperty;
     long(args: FromAminoParseField): t.ObjectProperty;
     duration(args: FromAminoParseField): t.ObjectProperty;
+    durationString(args: FromAminoParseField): t.ObjectProperty;
     height(args: FromAminoParseField): t.ObjectProperty;
     enum({ context, field, currentProtoPath, scope, fieldPath, nested, isOptional }: FromAminoParseField): t.ObjectProperty;
     enumArray({ context, field, currentProtoPath, scope, fieldPath, nested, isOptional }: FromAminoParseField): t.ObjectProperty;

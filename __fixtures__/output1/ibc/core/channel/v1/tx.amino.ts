@@ -1,7 +1,7 @@
 import { Channel, Packet, Counterparty, stateFromJSON, orderFromJSON } from "./channel";
 import { Height } from "../../client/v1/client";
 import { AminoMsg } from "@cosmjs/amino";
-import { omitDefault, Long } from "@osmonauts/helpers";
+import { AminoHeight, omitDefault, Long } from "@osmonauts/helpers";
 import { MsgChannelOpenInit, MsgChannelOpenTry, MsgChannelOpenAck, MsgChannelOpenConfirm, MsgChannelCloseInit, MsgChannelCloseConfirm, MsgRecvPacket, MsgTimeout, MsgTimeoutOnClose, MsgAcknowledgement } from "./tx";
 export interface AminoMsgChannelOpenInit extends AminoMsg {
   type: "cosmos-sdk/MsgChannelOpenInit";
@@ -37,10 +37,7 @@ export interface AminoMsgChannelOpenTry extends AminoMsg {
     };
     counterparty_version: string;
     proof_init: Uint8Array;
-    proof_height: {
-      revision_number: string;
-      revision_height: string;
-    };
+    proof_height: AminoHeight;
     signer: string;
   };
 }
@@ -52,10 +49,7 @@ export interface AminoMsgChannelOpenAck extends AminoMsg {
     counterparty_channel_id: string;
     counterparty_version: string;
     proof_try: Uint8Array;
-    proof_height: {
-      revision_number: string;
-      revision_height: string;
-    };
+    proof_height: AminoHeight;
     signer: string;
   };
 }
@@ -65,10 +59,7 @@ export interface AminoMsgChannelOpenConfirm extends AminoMsg {
     port_id: string;
     channel_id: string;
     proof_ack: Uint8Array;
-    proof_height: {
-      revision_number: string;
-      revision_height: string;
-    };
+    proof_height: AminoHeight;
     signer: string;
   };
 }
@@ -86,10 +77,7 @@ export interface AminoMsgChannelCloseConfirm extends AminoMsg {
     port_id: string;
     channel_id: string;
     proof_init: Uint8Array;
-    proof_height: {
-      revision_number: string;
-      revision_height: string;
-    };
+    proof_height: AminoHeight;
     signer: string;
   };
 }
@@ -103,17 +91,11 @@ export interface AminoMsgRecvPacket extends AminoMsg {
       destination_port: string;
       destination_channel: string;
       data: Uint8Array;
-      timeout_height: {
-        revision_number: string;
-        revision_height: string;
-      };
+      timeout_height: AminoHeight;
       timeout_timestamp: string;
     };
     proof_commitment: Uint8Array;
-    proof_height: {
-      revision_number: string;
-      revision_height: string;
-    };
+    proof_height: AminoHeight;
     signer: string;
   };
 }
@@ -127,17 +109,11 @@ export interface AminoMsgTimeout extends AminoMsg {
       destination_port: string;
       destination_channel: string;
       data: Uint8Array;
-      timeout_height: {
-        revision_number: string;
-        revision_height: string;
-      };
+      timeout_height: AminoHeight;
       timeout_timestamp: string;
     };
     proof_unreceived: Uint8Array;
-    proof_height: {
-      revision_number: string;
-      revision_height: string;
-    };
+    proof_height: AminoHeight;
     next_sequence_recv: string;
     signer: string;
   };
@@ -152,18 +128,12 @@ export interface AminoMsgTimeoutOnClose extends AminoMsg {
       destination_port: string;
       destination_channel: string;
       data: Uint8Array;
-      timeout_height: {
-        revision_number: string;
-        revision_height: string;
-      };
+      timeout_height: AminoHeight;
       timeout_timestamp: string;
     };
     proof_unreceived: Uint8Array;
     proof_close: Uint8Array;
-    proof_height: {
-      revision_number: string;
-      revision_height: string;
-    };
+    proof_height: AminoHeight;
     next_sequence_recv: string;
     signer: string;
   };
@@ -178,18 +148,12 @@ export interface AminoMsgAcknowledgement extends AminoMsg {
       destination_port: string;
       destination_channel: string;
       data: Uint8Array;
-      timeout_height: {
-        revision_number: string;
-        revision_height: string;
-      };
+      timeout_height: AminoHeight;
       timeout_timestamp: string;
     };
     acknowledgement: Uint8Array;
     proof_acked: Uint8Array;
-    proof_height: {
-      revision_number: string;
-      revision_height: string;
-    };
+    proof_height: AminoHeight;
     signer: string;
   };
 }
