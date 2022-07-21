@@ -27,7 +27,7 @@ export interface SmoothWeightChangeParams {
   startTime: Date;
 
   /** Duration for the weights to change over */
-  duration: string;
+  duration: Duration;
 
   /**
    * The initial pool weights. These are copied from the pool's settings
@@ -173,7 +173,7 @@ export const SmoothWeightChangeParams = {
   fromJSON(object: any): SmoothWeightChangeParams {
     return {
       startTime: isSet(object.startTime) ? fromJsonTimestamp(object.startTime) : undefined,
-      duration: isSet(object.duration) ? String(object.duration) : undefined,
+      duration: isSet(object.duration) ? Duration.fromJSON(object.duration) : undefined,
       initialPoolWeights: Array.isArray(object?.initialPoolWeights) ? object.initialPoolWeights.map((e: any) => PoolAsset.fromJSON(e)) : [],
       targetPoolWeights: Array.isArray(object?.targetPoolWeights) ? object.targetPoolWeights.map((e: any) => PoolAsset.fromJSON(e)) : []
     };

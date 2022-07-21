@@ -15,7 +15,7 @@ export interface Params {
   enableRecovery: boolean;
 
   /** duration added to timeout timestamp for balances recovered via IBC packets */
-  packetTimeoutDuration: string;
+  packetTimeoutDuration: Duration;
 }
 
 function createBaseGenesisState(): GenesisState {
@@ -124,7 +124,7 @@ export const Params = {
   fromJSON(object: any): Params {
     return {
       enableRecovery: isSet(object.enableRecovery) ? Boolean(object.enableRecovery) : false,
-      packetTimeoutDuration: isSet(object.packetTimeoutDuration) ? String(object.packetTimeoutDuration) : undefined
+      packetTimeoutDuration: isSet(object.packetTimeoutDuration) ? Duration.fromJSON(object.packetTimeoutDuration) : undefined
     };
   },
 

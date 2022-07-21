@@ -12,7 +12,7 @@ export interface QueryGaugeIdsResponse {
 }
 export interface QueryGaugeIdsResponse_GaugeIdWithDuration {
   gaugeId: Long;
-  duration: string;
+  duration: Duration;
 }
 export interface QueryDistrInfoRequest {}
 export interface QueryDistrInfoResponse {
@@ -24,12 +24,12 @@ export interface QueryParamsResponse {
 }
 export interface QueryLockableDurationsRequest {}
 export interface QueryLockableDurationsResponse {
-  lockableDurations: string[];
+  lockableDurations: Duration[];
 }
 export interface QueryIncentivizedPoolsRequest {}
 export interface IncentivizedPool {
   poolId: Long;
-  lockableDuration: string;
+  lockableDuration: Duration;
   gaugeId: Long;
 }
 export interface QueryIncentivizedPoolsResponse {
@@ -209,7 +209,7 @@ export const QueryGaugeIdsResponse_GaugeIdWithDuration = {
   fromJSON(object: any): QueryGaugeIdsResponse_GaugeIdWithDuration {
     return {
       gaugeId: isSet(object.gaugeId) ? Long.fromString(object.gaugeId) : Long.UZERO,
-      duration: isSet(object.duration) ? String(object.duration) : undefined
+      duration: isSet(object.duration) ? Duration.fromJSON(object.duration) : undefined
     };
   },
 
@@ -636,7 +636,7 @@ export const IncentivizedPool = {
   fromJSON(object: any): IncentivizedPool {
     return {
       poolId: isSet(object.poolId) ? Long.fromString(object.poolId) : Long.UZERO,
-      lockableDuration: isSet(object.lockableDuration) ? String(object.lockableDuration) : undefined,
+      lockableDuration: isSet(object.lockableDuration) ? Duration.fromJSON(object.lockableDuration) : undefined,
       gaugeId: isSet(object.gaugeId) ? Long.fromString(object.gaugeId) : Long.UZERO
     };
   },

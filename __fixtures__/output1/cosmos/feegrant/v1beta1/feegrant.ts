@@ -34,7 +34,7 @@ export interface PeriodicAllowance {
    * period specifies the time duration in which period_spend_limit coins can
    * be spent before that allowance is reset
    */
-  period: string;
+  period: Duration;
 
   /**
    * period_spend_limit specifies the maximum number of coins that can be spent
@@ -225,7 +225,7 @@ export const PeriodicAllowance = {
   fromJSON(object: any): PeriodicAllowance {
     return {
       basic: isSet(object.basic) ? BasicAllowance.fromJSON(object.basic) : undefined,
-      period: isSet(object.period) ? String(object.period) : undefined,
+      period: isSet(object.period) ? Duration.fromJSON(object.period) : undefined,
       periodSpendLimit: Array.isArray(object?.periodSpendLimit) ? object.periodSpendLimit.map((e: any) => Coin.fromJSON(e)) : [],
       periodCanSpend: Array.isArray(object?.periodCanSpend) ? object.periodCanSpend.map((e: any) => Coin.fromJSON(e)) : [],
       periodReset: isSet(object.periodReset) ? fromJsonTimestamp(object.periodReset) : undefined

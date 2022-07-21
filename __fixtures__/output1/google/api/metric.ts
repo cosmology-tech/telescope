@@ -356,14 +356,14 @@ export interface MetricDescriptor_MetricDescriptorMetadata {
    * excluding data loss due to errors. Metrics with a higher granularity have
    * a smaller sampling period.
    */
-  samplePeriod: string;
+  samplePeriod: Duration;
 
   /**
    * The delay of data points caused by ingestion. Data points older than this
    * age are guaranteed to be ingested and available to be read, excluding
    * data loss due to errors.
    */
-  ingestDelay: string;
+  ingestDelay: Duration;
 }
 export interface Metric_LabelsEntry {
   key: string;
@@ -637,8 +637,8 @@ export const MetricDescriptor_MetricDescriptorMetadata = {
   fromJSON(object: any): MetricDescriptor_MetricDescriptorMetadata {
     return {
       launchStage: isSet(object.launchStage) ? launchStageFromJSON(object.launchStage) : 0,
-      samplePeriod: isSet(object.samplePeriod) ? String(object.samplePeriod) : undefined,
-      ingestDelay: isSet(object.ingestDelay) ? String(object.ingestDelay) : undefined
+      samplePeriod: isSet(object.samplePeriod) ? Duration.fromJSON(object.samplePeriod) : undefined,
+      ingestDelay: isSet(object.ingestDelay) ? Duration.fromJSON(object.ingestDelay) : undefined
     };
   },
 

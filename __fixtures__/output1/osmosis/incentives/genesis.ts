@@ -10,7 +10,7 @@ export interface GenesisState {
   /** params defines all the parameters of the module */
   params: Params;
   gauges: Gauge[];
-  lockableDurations: string[];
+  lockableDurations: Duration[];
   lastGaugeId: Long;
 }
 

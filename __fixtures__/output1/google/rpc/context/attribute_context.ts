@@ -319,7 +319,7 @@ export interface AttributeContext_Response {
    * request to the backend until when the destination service receives the
    * complete response from the backend.
    */
-  backendLatency: string;
+  backendLatency: Duration;
 }
 export interface AttributeContext_Resource_LabelsEntry {
   key: string;
@@ -1443,7 +1443,7 @@ export const AttributeContext_Response = {
         return acc;
       }, {}) : {},
       time: isSet(object.time) ? fromJsonTimestamp(object.time) : undefined,
-      backendLatency: isSet(object.backendLatency) ? String(object.backendLatency) : undefined
+      backendLatency: isSet(object.backendLatency) ? Duration.fromJSON(object.backendLatency) : undefined
     };
   },
 

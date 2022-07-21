@@ -11,29 +11,29 @@ import cases from 'jest-in-case';
 const store = new ProtoStore([__dirname + '/../../../../../__fixtures__/chain1']);
 store.traverseAll();
 
-cases('cosmos/authz/v1beta1/authz', opts => {
-    const ref = store.findProto('cosmos/authz/v1beta1/authz.proto');
+cases('ibc/lightclients/tendermint/v1/tendermint', opts => {
+    const ref = store.findProto('ibc/lightclients/tendermint/v1/tendermint.proto');
     const context = new ProtoParseContext(ref, store, defaultTelescopeOptions);
     const aminoCtx = new AminoParseContext(ref, store, defaultTelescopeOptions);
-    context.options.useDate = opts.name;
-    aminoCtx.options.useDate = opts.name;
-    expectCode(createProtoType(context, 'Grant',
-        getNestedProto(ref.traversed).Grant
+    context.options.useDuration = opts.name;
+    aminoCtx.options.useDuration = opts.name;
+    expectCode(createProtoType(context, 'ClientState',
+        getNestedProto(ref.traversed).ClientState
     ));
-    expectCode(createObjectWithMethods(context, 'Grant',
-        getNestedProto(ref.traversed).Grant
+    expectCode(createObjectWithMethods(context, 'ClientState',
+        getNestedProto(ref.traversed).ClientState
     ));
     expectCode(makeAminoTypeInterface({
         context: aminoCtx,
-        proto: getNestedProto(ref.traversed).Grant
+        proto: getNestedProto(ref.traversed).ClientState
     }));
     expectCode(createAminoConverter({
         context: aminoCtx,
         root: ref.proto,
         name: 'AminoConverter',
-        protos: [getNestedProto(ref.traversed).Grant]
+        protos: [getNestedProto(ref.traversed).ClientState]
     }));
 }, [
-    { name: 'date' },
-    { name: 'timestamp' }
+    { name: 'duration' },
+    { name: 'string' }
 ]);

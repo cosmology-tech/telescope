@@ -65,6 +65,17 @@ export const toAmino = {
     },
 
     duration(args: ToAminoParseField) {
+        const { useDuration } = args.context.options;
+        switch (useDuration) {
+            case 'duration':
+            // TODO duration amino type
+            case 'string':
+            default:
+                return toAmino.durationString(args);
+        }
+    },
+
+    durationString(args: ToAminoParseField) {
         const exp = t.binaryExpression(
             '*',
             memberExpressionOrIdentifier(args.scope),

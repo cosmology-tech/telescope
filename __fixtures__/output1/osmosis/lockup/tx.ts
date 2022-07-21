@@ -6,7 +6,7 @@ import { isSet, DeepPartial, Long } from "@osmonauts/helpers";
 export const protobufPackage = "osmosis.lockup";
 export interface MsgLockTokens {
   owner: string;
-  duration: string;
+  duration: Duration;
   coins: Coin[];
 }
 export interface MsgLockTokensResponse {
@@ -87,7 +87,7 @@ export const MsgLockTokens = {
   fromJSON(object: any): MsgLockTokens {
     return {
       owner: isSet(object.owner) ? String(object.owner) : "",
-      duration: isSet(object.duration) ? String(object.duration) : undefined,
+      duration: isSet(object.duration) ? Duration.fromJSON(object.duration) : undefined,
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromJSON(e)) : []
     };
   },

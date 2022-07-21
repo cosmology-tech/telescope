@@ -115,9 +115,9 @@ export const encodeMethodFields = (context: ProtoParseContext, name: string, pro
                 return [...m, encode.bool(args)];
             case 'bytes':
                 return [...m, encode.bytes(args)];
-            // case 'Duration':
-            // case 'google.protobuf.Duration':
-            //     return [...m, encode.duration(args)];
+            case 'Duration':
+            case 'google.protobuf.Duration':
+                return [...m, encode.duration(args)];
             case 'Timestamp':
             case 'google.protobuf.Timestamp':
                 return [...m, encode.timestamp(args)];

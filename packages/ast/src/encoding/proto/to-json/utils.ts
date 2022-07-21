@@ -103,7 +103,7 @@ export const toJSON = {
                             t.identifier('message'),
                             t.identifier(prop)
                         ),
-                        getDefaultTSTypeFromProtoType(args.field, args.isOptional)
+                        getDefaultTSTypeFromProtoType(args.context, args.field, args.isOptional)
                     ),
                     t.identifier('toString')
                 ),
@@ -219,7 +219,7 @@ export const toJSON = {
                             t.identifier('message'),
                             t.identifier(args.field.name)
                         ),
-                        getDefaultTSTypeFromProtoType(args.field, args.isOptional)
+                        getDefaultTSTypeFromProtoType(args.context, args.field, args.isOptional)
                     )
                 ]
             )
@@ -233,15 +233,15 @@ export const toJSON = {
         return toJSON.identity(args);
     },
 
-
     timestamp(args: ToJSONMethod) {
-        if (args.context.options.useDate === 'timestamp') {
-            return toJSON.timestampTimestamp(args);
+        const { useDate } = args.context.options;
+        switch (useDate) {
+            case 'timestamp':
+                return toJSON.timestampTimestamp(args);
+            case 'date':
+            default:
+                return toJSON.timestampDate(args);
         }
-        if (args.context.options.useDate === 'date') {
-            return toJSON.timestampDate(args);
-        }
-        return toJSON.timestampDate(args);
     },
 
     // message.periodReset !== undefined && (obj.periodReset = fromTimestamp(message.periodReset).toISOString());
@@ -542,7 +542,7 @@ export const arrayTypes = {
                 t.logicalExpression(
                     '||',
                     t.identifier('e'),
-                    getDefaultTSTypeFromProtoType({
+                    getDefaultTSTypeFromProtoType(args.context, {
                         ...args.field,
                         rule: undefined, // so it's treated as type not an array...
                     }, args.isOptional)
@@ -587,7 +587,7 @@ export const arrayTypes = {
                         t.identifier('undefined')
                     ),
                     t.identifier('e'),
-                    getDefaultTSTypeFromProtoType({
+                    getDefaultTSTypeFromProtoType(args.context, {
                         ...args.field,
                         rule: undefined, // so it's treated as type not an array...
                     }, args.isOptional)

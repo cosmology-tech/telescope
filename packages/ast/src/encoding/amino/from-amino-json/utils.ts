@@ -81,6 +81,17 @@ export const fromAmino = {
     },
 
     duration(args: FromAminoParseField) {
+        const { useDuration } = args.context.options;
+        switch (useDuration) {
+            case 'duration':
+            // TODO duration amino type
+            case 'string':
+            default:
+                return fromAmino.durationString(args);
+        }
+    },
+
+    durationString(args: FromAminoParseField) {
         args.context.addUtil('Long');
 
         const value = t.objectExpression(

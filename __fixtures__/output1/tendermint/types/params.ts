@@ -54,7 +54,7 @@ export interface EvidenceParams {
    * mechanism for handling [Nothing-At-Stake
    * attacks](https://github.com/ethereum/wiki/wiki/Proof-of-Stake-FAQ#what-is-the-nothing-at-stake-problem-and-how-can-it-be-fixed).
    */
-  maxAgeDuration: string;
+  maxAgeDuration: Duration;
 
   /**
    * This sets the maximum size of total evidence in bytes that can be committed in a single block.
@@ -319,7 +319,7 @@ export const EvidenceParams = {
   fromJSON(object: any): EvidenceParams {
     return {
       maxAgeNumBlocks: isSet(object.maxAgeNumBlocks) ? Long.fromString(object.maxAgeNumBlocks) : Long.ZERO,
-      maxAgeDuration: isSet(object.maxAgeDuration) ? String(object.maxAgeDuration) : undefined,
+      maxAgeDuration: isSet(object.maxAgeDuration) ? Duration.fromJSON(object.maxAgeDuration) : undefined,
       maxBytes: isSet(object.maxBytes) ? Long.fromString(object.maxBytes) : Long.ZERO
     };
   },

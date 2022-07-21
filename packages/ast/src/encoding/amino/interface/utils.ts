@@ -35,12 +35,34 @@ export const aminoInterface = {
             )
         );
     },
-    // durations are strings
     duration(args: RenderAminoField) {
-        return t.tsPropertySignature(
-            t.identifier(args.context.aminoCaseField(args.field)),
-            t.tsTypeAnnotation(t.tsStringKeyword())
-        );
+        const { useDuration } = args.context.options;
+        switch (useDuration) {
+            case 'string':
+                return t.tsPropertySignature(
+                    t.identifier(args.context.aminoCaseField(args.field)),
+                    t.tsTypeAnnotation(t.tsStringKeyword())
+                );
+            case 'duration':
+            default:
+                return aminoInterface.type(args);
+        }
+    },
+    timestamp(args: RenderAminoField) {
+        const { useDate } = args.context.options;
+        switch (useDate) {
+            case 'date':
+            // TODO check is date is Date for amino?
+            // return t.tsPropertySignature(
+            //     t.identifier(args.context.aminoCaseField(args.field)),
+            //     t.tsTypeAnnotation(
+            //         t.tsTypeReference(t.identifier('Date'))
+            //     )
+            // );
+            case 'timestamp':
+            default:
+                return aminoInterface.type(args);
+        }
     },
     enum(args: RenderAminoField) {
         return t.tsPropertySignature(
