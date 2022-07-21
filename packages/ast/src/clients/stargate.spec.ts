@@ -1,21 +1,8 @@
-import { getGenericParseContext, getGenericParseContextWithRef } from '../../test-utils'
-import { createClient } from './client';
-import generate from '@babel/generator';
+import { getGenericParseContextWithRef, expectCode } from '../../test-utils'
+import { createStargateClient } from './stargate';
 import { ProtoRef } from '@osmonauts/types';
 
-
-const expectCode = (ast) => {
-    expect(
-        generate(ast).code
-    ).toMatchSnapshot();
-}
-const printCode = (ast) => {
-    console.log(
-        generate(ast).code
-    );
-}
-
-it('createClient', async () => {
+it('createStargateClient', async () => {
     const ref: ProtoRef = {
         absolute: '/',
         filename: '/',
@@ -26,7 +13,7 @@ it('createClient', async () => {
         }
     }
     const context = getGenericParseContextWithRef(ref);
-    expectCode(createClient({
+    expectCode(createStargateClient({
         context,
         name: 'getSigningOsmosisClient',
         registries: [
@@ -43,7 +30,7 @@ it('createClient', async () => {
     expect(context.utils).toMatchSnapshot();
 });
 
-it('createClient w/o defaults', async () => {
+it('createStargateClient w/o defaults', async () => {
     const ref: ProtoRef = {
         absolute: '/',
         filename: '/',
@@ -54,7 +41,7 @@ it('createClient w/o defaults', async () => {
         }
     }
     const context = getGenericParseContextWithRef(ref);
-    expectCode(createClient({
+    expectCode(createStargateClient({
         context,
         name: 'getSigningOsmosisClient',
         registries: [

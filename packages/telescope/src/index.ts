@@ -18,7 +18,7 @@ import {
     makeLCDClient,
     recursiveModuleBundle,
     GenericParseContext,
-    createClient,
+    createStargateClient,
     AminoParseContext
 } from '@osmonauts/ast';
 
@@ -347,7 +347,7 @@ export class TelescopeBuilder {
                 });
 
                 const name = 'getSigning' + pascal(bundle.base + 'Client');
-                const clientBody = createClient({
+                const clientBody = createStargateClient({
                     context: ctx,
                     name,
                     registries: registryVariables,

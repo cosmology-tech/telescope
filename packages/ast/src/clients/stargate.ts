@@ -1,19 +1,16 @@
-
 import * as t from '@babel/types';
 import { GenericParseContext } from '../encoding';
 import { getPluginValue } from '../plugins';
 import { memberExpressionOrIdentifier, objectPattern } from '../utils';
 
-interface CreateClient {
+interface CreateStargateClient {
   name: string;
   registries: string[];
   aminos: string[];
   context: GenericParseContext;
 }
 
-
-
-export const createClient = ({ name, registries, aminos, context }: CreateClient) => {
+export const createStargateClient = ({ name, registries, aminos, context }: CreateStargateClient) => {
 
   const includeDefaults = getPluginValue('signingClientDefaults', context.ref.proto.package, context.options);
 

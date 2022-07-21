@@ -1,5 +1,5 @@
 export * from './encoding';
-export * from './client';
+export * from './clients';
 export * from './registry';
 export * from './services';
 export * from './utils';

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`createClient 1`] = `
+exports[`createStargateClient 1`] = `
 "export const getSigningOsmosisClient = async ({
   rpcEndpoint,
   signer,
@@ -23,7 +23,7 @@ exports[`createClient 1`] = `
 };"
 `;
 
-exports[`createClient 2`] = `
+exports[`createStargateClient 2`] = `
 Object {
   "AminoTypes": true,
   "GeneratedType": true,
@@ -35,7 +35,7 @@ Object {
 }
 `;
 
-exports[`createClient w/o defaults 1`] = `
+exports[`createStargateClient w/o defaults 1`] = `
 "export const getSigningOsmosisClient = async ({
   rpcEndpoint,
   signer
@@ -56,7 +56,7 @@ exports[`createClient w/o defaults 1`] = `
 };"
 `;
 
-exports[`createClient w/o defaults 2`] = `
+exports[`createStargateClient w/o defaults 2`] = `
 Object {
   "AminoTypes": true,
   "GeneratedType": true,
