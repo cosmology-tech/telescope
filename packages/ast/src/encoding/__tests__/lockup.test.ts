@@ -6,32 +6,32 @@ import { AminoParseContext, ProtoParseContext } from '../context';
 import { createProtoType } from '..';
 import { createObjectWithMethods } from '../object';
 import { createAminoConverter, makeAminoTypeInterface } from '../amino/index';
-import cases from 'jest-in-case';
+import cases from 'jest-in-case'
 
 const store = new ProtoStore([__dirname + '/../../../../../__fixtures__/chain1']);
 store.traverseAll();
 
-cases('ibc/lightclients/tendermint/v1/tendermint', opts => {
-    const ref = store.findProto('ibc/lightclients/tendermint/v1/tendermint.proto');
+cases('osmosis/lockup/tx', opts => {
+    const ref = store.findProto('osmosis/lockup/tx.proto');
     const context = new ProtoParseContext(ref, store, defaultTelescopeOptions);
     const aminoCtx = new AminoParseContext(ref, store, defaultTelescopeOptions);
     context.options.useDuration = opts.name;
     aminoCtx.options.useDuration = opts.name;
-    expectCode(createProtoType(context, 'ClientState',
-        getNestedProto(ref.traversed).ClientState
+    expectCode(createProtoType(context, 'MsgLockTokens',
+        getNestedProto(ref.traversed).MsgLockTokens
     ));
-    expectCode(createObjectWithMethods(context, 'ClientState',
-        getNestedProto(ref.traversed).ClientState
+    expectCode(createObjectWithMethods(context, 'MsgLockTokens',
+        getNestedProto(ref.traversed).MsgLockTokens
     ));
     expectCode(makeAminoTypeInterface({
         context: aminoCtx,
-        proto: getNestedProto(ref.traversed).ClientState
+        proto: getNestedProto(ref.traversed).MsgLockTokens
     }));
     expectCode(createAminoConverter({
         context: aminoCtx,
         root: ref.proto,
         name: 'AminoConverter',
-        protos: [getNestedProto(ref.traversed).ClientState]
+        protos: [getNestedProto(ref.traversed).MsgLockTokens]
     }));
 }, [
     { name: 'duration' },
