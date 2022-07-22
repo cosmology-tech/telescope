@@ -48,6 +48,18 @@ export default async (argv) => {
       default: false
     },
     {
+      type: 'confirm',
+      name: 'camelRpcMethods',
+      message: 'camelcase RpcMethods?',
+      default: true
+    },
+    {
+      type: 'confirm',
+      name: 'includeRpcClients',
+      message: 'output RPC clients?',
+      default: false
+    },
+    {
       type: 'list',
       name: 'useDate',
       message: 'treat timestamps as Date or Timestamp?',
@@ -69,6 +81,8 @@ export default async (argv) => {
     includeAminos,
     includeLCDClient,
     includePackageVar,
+    camelRpcMethods,
+    includeRpcClients,
     useDate,
     useDuration
   } = await prompt(questions, argv);
@@ -81,6 +95,8 @@ export default async (argv) => {
     includeAminos,
     includeLCDClient,
     includePackageVar,
+    camelRpcMethods,
+    includeRpcClients,
     useDate,
     useDuration,
     useExact: false

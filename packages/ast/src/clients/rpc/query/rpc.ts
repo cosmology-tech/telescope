@@ -2,6 +2,7 @@ import * as t from '@babel/types';
 import { classDeclaration, classMethod, classProperty, commentBlock, identifier, tsMethodSignature } from '../../../utils';
 import { ProtoService, ProtoServiceMethod } from '@osmonauts/types';
 import { GenericParseContext } from '../../../encoding';
+import { camel } from '@osmonauts/utils';
 
 const rpcMethod = (
     name: string,
@@ -157,6 +158,7 @@ const returnPromise = (name: string) => {
 
 const rpcClassMethod = (
     name: string,
+    msg: string,
     request: string,
     response: string,
     packageImport: string
@@ -181,7 +183,7 @@ const rpcClassMethod = (
             encodeData(request),
 
             // const promise = this.rpc.request("cosmos.auth.v1beta1.Query", "Accounts", data);
-            promiseRequest(name, packageImport),
+            promiseRequest(msg, packageImport),
 
             // return promise.then((data) => QueryAccountsResponse.decode(new _m0.Reader(data)));                        
             returnPromise(response)
@@ -233,12 +235,17 @@ const rpcClassConstructor = (methods: string[]) => {
     );
 };
 
-export const createRpcClientInterface = (context: GenericParseContext, service: ProtoService) => {
+export const createRpcClientInterface = (
+    context: GenericParseContext,
+    service: ProtoService
+) => {
+    const { camelRpcMethods } = context.options;
     const methods = Object.keys(service.methods ?? {})
         .map(key => {
             const method = service.methods[key];
+            const name = camelRpcMethods ? camel(key) : key;
             return rpcMethod(
-                key,
+                name,
                 method.requestType,
                 method.responseType,
                 [commentBlock('')],
@@ -276,13 +283,19 @@ export const createRpcClientClass = (
     context.addUtil('Rpc');
     context.addUtil('_m0');
 
+    const { camelRpcMethods } = context.options;
     const name = service.name + 'ClientImpl';
     const implementsName = service.name;
-    const methodNames = Object.keys(service.methods ?? {});
+    const methodNames = Object.keys(service.methods ?? {})
+        .map(key => {
+            return camelRpcMethods ? camel(key) : key
+        });
     const methods = Object.keys(service.methods ?? {})
         .map(key => {
             const method = service.methods[key];
+            const name = camelRpcMethods ? camel(key) : key;
             return rpcClassMethod(
+                name,
                 key,
                 method.requestType,
                 method.responseType,
