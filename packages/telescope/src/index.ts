@@ -129,6 +129,7 @@ export class TelescopeBuilder {
 
                 const localname = c.ref.filename.replace(/\.proto$/, '.amino.ts');
                 const filename = resolve(join(this.outPath, localname));
+
                 // FRESH new context
                 const ctx = new TelescopeParseContext(
                     c.ref,
@@ -308,14 +309,101 @@ export class TelescopeBuilder {
 
             }).filter(Boolean);
 
-            // [x] write out one registry helper for all contexts w/mutations
-            const rpcContexts = queryContexts.map(c => {
+            const rpcQueryContexts = packageContexts.map(c => {
 
                 if (!this.options.includeRpcClients) {
                     return;
                 }
 
-                const localname = c.ref.filename.replace(/\.proto$/, '.rpc.query.ts')
+                // FRESH new context
+
+                const ctx = new TelescopeParseContext(
+                    c.ref,
+                    c.store,
+                    this.options
+                );
+
+                // get mutations, services
+                parse(ctx);
+
+                const proto = getNestedProto(c.ref.traversed);
+
+                let name, serviceType, getImportsFrom;
+                if (
+                    (!proto?.Query ||
+                        proto.Query?.type !== 'Service') &&
+                    (!proto?.Service ||
+                        proto.Service?.type !== 'Service')
+                ) {
+                    return;
+                }
+
+
+                if (proto.Query) {
+                    name = 'query';
+                    serviceType = 'Query';
+                    getImportsFrom = ctx.queries;
+                } else if (proto.Service) {
+                    serviceType = 'Service';
+                    name = 'svc';
+                    getImportsFrom = ctx.services;
+                }
+
+
+                const localname = c.ref.filename.replace(/\.proto$/, `.rpc.${name}.ts`)
+                const filename = resolve(join(this.outPath, localname));
+
+                const asts = [];
+                if (proto.Query) {
+                    asts.push(createRpcClientInterface(ctx.generic, proto.Query))
+                    asts.push(createRpcClientClass(ctx.generic, proto.Query))
+                }
+                if (proto.Service) {
+                    asts.push(createRpcClientInterface(ctx.generic, proto.Service))
+                    asts.push(createRpcClientClass(ctx.generic, proto.Service))
+                }
+                ////////
+
+                const serviceImports = getDepsFromQueries(
+                    getImportsFrom,
+                    localname
+                );
+
+                // TODO we do NOT need all imports...
+                const imports = buildAllImports(ctx, serviceImports, localname);
+                const prog = []
+                    .concat(imports)
+                    .concat(ctx.body)
+                    .concat(asts);
+
+                const ast = t.program(prog);
+                const content = generate(ast).code;
+                mkdirp(dirname(filename));
+                writeFileSync(filename, content);
+
+                // add to bundle
+                createFileBundle(
+                    c.ref.proto.package,
+                    localname,
+                    bundle.bundleFile,
+                    bundle.importPaths,
+                    bundle.bundleVariables
+                );
+
+                return {
+                    localname,
+                    filename
+                };
+
+            }).filter(Boolean);
+
+            const rpcMsgContexts = mutationContexts.map(c => {
+
+                if (!this.options.includeRpcClients) {
+                    return;
+                }
+
+                const localname = c.ref.filename.replace(/\.proto$/, '.rpc.msg.ts')
                 const filename = resolve(join(this.outPath, localname));
                 // FRESH new context
 
@@ -329,20 +417,19 @@ export class TelescopeBuilder {
                 parse(ctx);
 
                 const proto = getNestedProto(c.ref.traversed);
-                // hard-coding, for now, only Query service
-                if (!proto?.Query || proto.Query?.type !== 'Service') {
+                // hard-coding, for now, only Msg service
+                if (!proto?.Msg || proto.Msg?.type !== 'Service') {
                     return;
                 }
 
-
                 ////////
                 const asts = [];
-                asts.push(createRpcClientInterface(ctx.generic, proto.Query))
-                asts.push(createRpcClientClass(ctx.generic, proto.Query))
+                asts.push(createRpcClientInterface(ctx.generic, proto.Msg))
+                asts.push(createRpcClientClass(ctx.generic, proto.Msg))
                 ////////
 
                 const serviceImports = getDepsFromQueries(
-                    ctx.queries,
+                    ctx.mutations,
                     localname
                 );
 

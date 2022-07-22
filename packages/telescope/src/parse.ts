@@ -131,11 +131,10 @@ export const parseService = (
         comment?: string;
     }> = obj.methods;
 
-    if (!['Msg', 'Query'].includes(obj.name)) {
+    if (!['Msg', 'Query', 'Service'].includes(obj.name)) {
         return;
     }
 
-    const isMutation = obj.name === 'Msg';
     Object.entries(methodHash)
         .forEach(([key, value]) => {
             const lookup = context.store.get(context.ref, value.requestType);
@@ -157,10 +156,18 @@ export const parseService = (
                 responseImport: lookupResponse.import ?? context.ref.filename,
                 comment: value.comment
             };
-            if (isMutation) {
-                context.addMutation(serviceInfo);
-            } else {
-                context.addQuery(serviceInfo);
+            switch (obj.name) {
+                case 'Msg':
+                    context.addMutation(serviceInfo);
+                    break;
+                case 'Service':
+                    context.addService(serviceInfo);
+                    break;
+                case 'Query':
+                    context.addQuery(serviceInfo);
+                    break;
+                default:
+                    throw new Error('Service type not yet supported: ' + obj.name);
             }
         });
 };

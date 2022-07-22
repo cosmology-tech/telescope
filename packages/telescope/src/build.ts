@@ -74,6 +74,7 @@ export interface TelescopeParseContext {
     body: any[];
     mutations: ServiceMutation[];
     queries: any[];
+    services: any[];
     types: any[];
 }
 export class TelescopeParseContext implements TelescopeParseContext {
@@ -93,6 +94,7 @@ export class TelescopeParseContext implements TelescopeParseContext {
         this.parsedImports = {};
         this.body = [];
         this.queries = [];
+        this.services = [];
         this.mutations = [];
         this.types = [];
     }
@@ -113,6 +115,9 @@ export class TelescopeParseContext implements TelescopeParseContext {
     }
     addQuery(query: ServiceQuery) {
         this.queries.push(query);
+    }
+    addService(query: any) {
+        this.services.push(query);
     }
     // build main Class with methods
     buildBase() {
