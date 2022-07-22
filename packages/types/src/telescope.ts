@@ -1,5 +1,6 @@
 import { AminoExceptions, DEFAULT_AMINO_EXCEPTIONS } from "./aminos";
-import { camel, snake } from 'case';
+import { snake } from 'case';
+import { camel } from '@osmonauts/utils';
 interface TelescopeOpts {
     includeAminos?: boolean;
     includeLCDClient?: boolean;

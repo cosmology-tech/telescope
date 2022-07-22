@@ -25,11 +25,8 @@ import {
     createStargateClient,
     AminoParseContext
 } from '@osmonauts/ast';
-
-import {
-    camel,
-    pascal
-} from 'case';
+import { camel } from '@osmonauts/utils';
+import { pascal } from 'case';
 
 const version = process.env.NODE_ENV === 'test' ? 'latest' : pkg.version;
 

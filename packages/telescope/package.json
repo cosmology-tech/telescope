@@ -83,6 +83,7 @@
     "@osmonauts/ast": "^0.5.0",
     "@osmonauts/proto-parser": "^0.6.0",
     "@osmonauts/types": "^0.5.0",
+    "@osmonauts/utils": "0.3.10",
     "@types/parse-package-name": "0.1.0",
     "case": "1.6.3",
     "cosmwasm-typescript-gen": "0.2.15",

@@ -76,6 +76,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.18.3",
+    "@osmonauts/utils": "0.3.10",
     "case": "1.6.3"
   }
 }

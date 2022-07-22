@@ -1,5 +1,5 @@
 import { ProtoRoot, ProtoRef } from '@osmonauts/types';
-import { camel } from 'case';
+import { camel } from '@osmonauts/utils';
 import { relative, dirname, extname } from 'path';
 
 export const getRoot = (ref: ProtoRef): ProtoRoot => {
