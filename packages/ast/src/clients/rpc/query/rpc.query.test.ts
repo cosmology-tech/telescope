@@ -11,8 +11,7 @@ it('RPC Query Client', () => {
     const res = traverse(store, ref);
     const service: ProtoService = getNestedProto(res).Query;
     const context = new GenericParseContext(ref, store, defaultTelescopeOptions);
-    // console.log(JSON.stringify(service, null, 2));
-    expectCode(createRpcClientInterface('Query'))
-    expectCode(createRpcClientClass('QueryClientImpl', 'Query'))
-    expectCode(createRpcInterface())
+    expectCode(createRpcClientInterface(context, service))
+    expectCode(createRpcClientClass(context, service))
+    expectCode(createRpcInterface(context, service))
 });

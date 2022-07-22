@@ -1,10 +1,31 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`RPC Query Client 1`] = `
-"/** Query defines the RPC querier service. */
+"/** Query defines the RPC service */
 export export interface Query {
+  Accounts(request: QueryAccountsRequest): Promise<QueryAccountsResponse>;
+  /*Accounts returns all the existing accounts
+  
+  Since: cosmos-sdk 0.43*/
+
   Account(request: QueryAccountRequest): Promise<QueryAccountResponse>;
-  Yolo(request: QueryAccountRequest): Promise<QueryAccountResponse>;
+  /*Account returns account details based on address.*/
+
+  Params(request: QueryParamsRequest): Promise<QueryParamsResponse>;
+  /*Params queries all parameters.*/
+
+  ModuleAccounts(request: QueryModuleAccountsRequest): Promise<QueryModuleAccountsResponse>;
+  /*ModuleAccounts returns all the existing module accounts.*/
+
+  Bech32Prefix(request: Bech32PrefixRequest): Promise<Bech32PrefixResponse>;
+  /*Bech32 queries bech32Prefix*/
+
+  AddressBytesToString(request: AddressBytesToStringRequest): Promise<AddressBytesToStringResponse>;
+  /*AddressBytesToString converts Account Address bytes to string*/
+
+  AddressStringToBytes(request: AddressStringToBytesRequest): Promise<AddressStringToBytesResponse>;
+  /*AddressStringToBytes converts Address string to bytes*/
+
 }"
 `;
 
@@ -15,7 +36,12 @@ exports[`RPC Query Client 2`] = `
   constructor(rpc: Rpc) {
     this.rpc = rpc;
     this.Accounts = this.Accounts.bind(this);
-    this.Other = this.Other.bind(this);
+    this.Account = this.Account.bind(this);
+    this.Params = this.Params.bind(this);
+    this.ModuleAccounts = this.ModuleAccounts.bind(this);
+    this.Bech32Prefix = this.Bech32Prefix.bind(this);
+    this.AddressBytesToString = this.AddressBytesToString.bind(this);
+    this.AddressStringToBytes = this.AddressStringToBytes.bind(this);
   }
 
   Accounts(request: QueryAccountsRequest): Promise<QueryAccountsResponse> {
@@ -24,10 +50,40 @@ exports[`RPC Query Client 2`] = `
     return promise.then(data => QueryAccountsResponse.decode(new _m0.Reader(data)));
   }
 
-  Other(request: QueryOtherRequest): Promise<QueryOtherResponse> {
-    const data = QueryOtherRequest.encode(request).finish();
-    const promise = this.rpc.request(\\"cosmos.auth.v1beta1.Query\\", \\"Other\\", data);
-    return promise.then(data => QueryOtherResponse.decode(new _m0.Reader(data)));
+  Account(request: QueryAccountRequest): Promise<QueryAccountResponse> {
+    const data = QueryAccountRequest.encode(request).finish();
+    const promise = this.rpc.request(\\"cosmos.auth.v1beta1.Query\\", \\"Account\\", data);
+    return promise.then(data => QueryAccountResponse.decode(new _m0.Reader(data)));
+  }
+
+  Params(request: QueryParamsRequest): Promise<QueryParamsResponse> {
+    const data = QueryParamsRequest.encode(request).finish();
+    const promise = this.rpc.request(\\"cosmos.auth.v1beta1.Query\\", \\"Params\\", data);
+    return promise.then(data => QueryParamsResponse.decode(new _m0.Reader(data)));
+  }
+
+  ModuleAccounts(request: QueryModuleAccountsRequest): Promise<QueryModuleAccountsResponse> {
+    const data = QueryModuleAccountsRequest.encode(request).finish();
+    const promise = this.rpc.request(\\"cosmos.auth.v1beta1.Query\\", \\"ModuleAccounts\\", data);
+    return promise.then(data => QueryModuleAccountsResponse.decode(new _m0.Reader(data)));
+  }
+
+  Bech32Prefix(request: Bech32PrefixRequest): Promise<Bech32PrefixResponse> {
+    const data = Bech32PrefixRequest.encode(request).finish();
+    const promise = this.rpc.request(\\"cosmos.auth.v1beta1.Query\\", \\"Bech32Prefix\\", data);
+    return promise.then(data => Bech32PrefixResponse.decode(new _m0.Reader(data)));
+  }
+
+  AddressBytesToString(request: AddressBytesToStringRequest): Promise<AddressBytesToStringResponse> {
+    const data = AddressBytesToStringRequest.encode(request).finish();
+    const promise = this.rpc.request(\\"cosmos.auth.v1beta1.Query\\", \\"AddressBytesToString\\", data);
+    return promise.then(data => AddressBytesToStringResponse.decode(new _m0.Reader(data)));
+  }
+
+  AddressStringToBytes(request: AddressStringToBytesRequest): Promise<AddressStringToBytesResponse> {
+    const data = AddressStringToBytesRequest.encode(request).finish();
+    const promise = this.rpc.request(\\"cosmos.auth.v1beta1.Query\\", \\"AddressStringToBytes\\", data);
+    return promise.then(data => AddressStringToBytesResponse.decode(new _m0.Reader(data)));
   }
 
 }"
