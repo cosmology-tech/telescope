@@ -1,5 +1,7 @@
 import * as t from '@babel/types';
 import { classDeclaration, classMethod, classProperty, commentBlock, identifier, tsMethodSignature } from '../../../utils';
+import { ProtoService, ProtoServiceMethod } from '@osmonauts/types';
+import { GenericParseContext } from '../../../encoding';
 
 const rpcMethod = (
     name: string,
@@ -38,41 +40,6 @@ const rpcMethod = (
         leadingComments
     );
 }
-
-export const createRpcClientInterface = (name: string) => {
-    const obj = t.exportNamedDeclaration(
-        t.exportNamedDeclaration(
-            t.tsInterfaceDeclaration(
-                t.identifier(name),
-                null,
-                [],
-                t.tsInterfaceBody(
-                    [
-                        rpcMethod(
-                            'Account',
-                            'QueryAccountRequest',
-                            'QueryAccountResponse',
-                            // [commentBlock('* account returns account details based on address. ')],
-                            // [commentBlock('* ACCOUNT returns account details based on address. ')],
-                        ),
-                        rpcMethod(
-                            'Yolo',
-                            'QueryAccountRequest',
-                            'QueryAccountResponse',
-                            // [commentBlock('* account returns account details based on address. ')],
-                            // [commentBlock('* ACCOUNT returns account details based on address. ')],
-                        )
-                    ]
-                )
-            )
-        )
-    );
-
-    obj.leadingComments = [commentBlock('* Query defines the RPC querier service. ')];
-
-    return obj;
-
-};
 
 // this.Accounts = this.Accounts.bind(this);
 const bindThis = (name: string) => {
@@ -265,7 +232,62 @@ const rpcClassConstructor = (methods: string[]) => {
     );
 };
 
-export const createRpcClientClass = (name: string, implementsClass: string) => {
+export const createRpcClientInterface = (context: GenericParseContext, service: ProtoService) => {
+    const methods = Object.keys(service.methods ?? {})
+        .map(key => {
+            const method = service.methods[key];
+            return rpcMethod(
+                key,
+                method.requestType,
+                method.responseType,
+                [commentBlock('')],
+                [commentBlock(method.comment)]
+                // trailingComments
+                // leadingComments
+            )
+        });
+
+
+    const obj = t.exportNamedDeclaration(
+        t.exportNamedDeclaration(
+            t.tsInterfaceDeclaration(
+                t.identifier(service.name),
+                null,
+                [],
+                t.tsInterfaceBody(
+                    [
+                        ...methods
+                    ]
+                )
+            )
+        )
+    );
+
+    obj.leadingComments = [commentBlock(`* ${service.name} defines the RPC service `)];
+
+    return obj;
+
+};
+
+export const createRpcClientClass = (
+    context: GenericParseContext,
+    service: ProtoService
+) => {
+
+    const name = service.name + 'ClientImpl';
+    const implementsName = service.name;
+    const methodNames = Object.keys(service.methods ?? {});
+    const methods = Object.keys(service.methods ?? {})
+        .map(key => {
+            const method = service.methods[key];
+            return rpcClassMethod(
+                key,
+                method.requestType,
+                method.responseType,
+                context.ref.proto.package + '.' + service.name
+            )
+        });
+
     return t.exportNamedDeclaration(
         classDeclaration(
             t.identifier(name),
@@ -287,32 +309,15 @@ export const createRpcClientClass = (name: string, implementsClass: string) => {
                 ),
 
                 // CONSTRUCTOR
-
-                rpcClassConstructor([
-                    'Accounts',
-                    'Other'
-                ]),
+                rpcClassConstructor(methodNames),
 
                 // METHODS
-                rpcClassMethod(
-                    'Accounts',
-                    'QueryAccountsRequest',
-                    'QueryAccountsResponse',
-                    'cosmos.auth.v1beta1.Query'
-                ),
-
-                rpcClassMethod(
-                    'Other',
-                    'QueryOtherRequest',
-                    'QueryOtherResponse',
-                    'cosmos.auth.v1beta1.Query'
-                )
-
+                ...methods
             ]),
             null,
             [
                 t.tsExpressionWithTypeArguments(
-                    t.identifier(implementsClass)
+                    t.identifier(implementsName)
                 )
             ]
         )
@@ -320,7 +325,7 @@ export const createRpcClientClass = (name: string, implementsClass: string) => {
 };
 
 
-export const createRpcInterface = () => {
+export const createRpcInterface = (context: GenericParseContext, service: ProtoService) => {
     return t.tsInterfaceDeclaration(
         t.identifier('Rpc'),
         null,
