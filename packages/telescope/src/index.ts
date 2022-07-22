@@ -328,7 +328,7 @@ export class TelescopeBuilder {
 
                 const proto = getNestedProto(c.ref.traversed);
 
-                let name, serviceType, getImportsFrom;
+                let name, getImportsFrom;
                 if (
                     (!proto?.Query ||
                         proto.Query?.type !== 'Service') &&
@@ -341,10 +341,8 @@ export class TelescopeBuilder {
 
                 if (proto.Query) {
                     name = 'query';
-                    serviceType = 'Query';
                     getImportsFrom = ctx.queries;
                 } else if (proto.Service) {
-                    serviceType = 'Service';
                     name = 'svc';
                     getImportsFrom = ctx.services;
                 }
