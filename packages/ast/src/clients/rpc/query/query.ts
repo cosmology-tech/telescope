@@ -293,7 +293,6 @@ export const createRpcQueryClientClass = () => {
                     'Other'
                 ]),
 
-
                 // METHODS
                 grpcQueryClassMethod(
                     'Accounts',
@@ -319,3 +318,51 @@ export const createRpcQueryClientClass = () => {
         )
     );
 };
+
+
+export const createRpcInterface = () => {
+    return t.tsInterfaceDeclaration(
+        t.identifier('Rpc'),
+        null,
+        [],
+        t.tsInterfaceBody(
+            [
+                t.tsMethodSignature(
+                    t.identifier('request'),
+                    null,
+                    [
+                        identifier('service',
+                            t.tsTypeAnnotation(
+                                t.tsStringKeyword()
+                            )
+                        ),
+                        identifier('method',
+                            t.tsTypeAnnotation(
+                                t.tsStringKeyword()
+                            )
+                        ),
+                        identifier('data',
+                            t.tsTypeAnnotation(
+                                t.tsTypeReference(
+                                    t.identifier('Uint8Array')
+                                )
+                            )
+                        )
+                    ],
+                    t.tsTypeAnnotation(
+                        t.tsTypeReference(
+                            t.identifier('Promise'),
+                            t.tsTypeParameterInstantiation(
+                                [
+                                    t.tsTypeReference(
+                                        t.identifier('Uint8Array')
+                                    )
+                                ]
+                            )
+                        )
+                    )
+                )
+            ]
+        )
+    )
+}
