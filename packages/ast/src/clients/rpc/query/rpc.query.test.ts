@@ -13,6 +13,6 @@ it('RPC Query Client', () => {
     const context = new GenericParseContext(ref, store, defaultTelescopeOptions);
     // console.log(JSON.stringify(service, null, 2));
     expectCode(createRpcClientInterface('Query'))
-    expectCode(createRpcClientClass('QueryClientImpl'))
+    expectCode(createRpcClientClass('QueryClientImpl', 'Query'))
     expectCode(createRpcInterface())
 });

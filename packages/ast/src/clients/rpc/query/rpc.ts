@@ -265,7 +265,7 @@ const rpcClassConstructor = (methods: string[]) => {
     );
 };
 
-export const createRpcClientClass = (name: string) => {
+export const createRpcClientClass = (name: string, implementsClass: string) => {
     return t.exportNamedDeclaration(
         classDeclaration(
             t.identifier(name),
@@ -312,7 +312,7 @@ export const createRpcClientClass = (name: string) => {
             null,
             [
                 t.tsExpressionWithTypeArguments(
-                    t.identifier('Query')
+                    t.identifier(implementsClass)
                 )
             ]
         )
