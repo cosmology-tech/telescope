@@ -161,6 +161,7 @@ const rpcClassMethod = (
     response: string,
     packageImport: string
 ) => {
+
     return classMethod(
         'method',
         t.identifier(name),
@@ -249,16 +250,14 @@ export const createRpcClientInterface = (context: GenericParseContext, service: 
 
 
     const obj = t.exportNamedDeclaration(
-        t.exportNamedDeclaration(
-            t.tsInterfaceDeclaration(
-                t.identifier(service.name),
-                null,
-                [],
-                t.tsInterfaceBody(
-                    [
-                        ...methods
-                    ]
-                )
+        t.tsInterfaceDeclaration(
+            t.identifier(service.name),
+            null,
+            [],
+            t.tsInterfaceBody(
+                [
+                    ...methods
+                ]
             )
         )
     );
@@ -273,6 +272,9 @@ export const createRpcClientClass = (
     context: GenericParseContext,
     service: ProtoService
 ) => {
+
+    context.addUtil('Rpc');
+    context.addUtil('_m0');
 
     const name = service.name + 'ClientImpl';
     const implementsName = service.name;

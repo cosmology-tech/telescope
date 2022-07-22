@@ -2,7 +2,7 @@
 
 exports[`RPC Msg Client 1`] = `
 "/** Msg defines the RPC service */
-export export interface Msg {
+export interface Msg {
   Send(request: MsgSend): Promise<MsgSendResponse>;
   /*Send defines a method for sending coins from one account to another account.*/
 

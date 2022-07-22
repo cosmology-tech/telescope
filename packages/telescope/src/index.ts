@@ -315,7 +315,7 @@ export class TelescopeBuilder {
             // [x] write out one registry helper for all contexts w/mutations
             const rpcContexts = queryContexts.map(c => {
 
-                if (!this.options.includeLCDClient) {
+                if (!this.options.includeRpcClients) {
                     return;
                 }
 

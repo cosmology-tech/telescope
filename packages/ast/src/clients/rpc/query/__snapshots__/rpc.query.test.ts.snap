@@ -2,7 +2,7 @@
 
 exports[`RPC Query Client 1`] = `
 "/** Query defines the RPC service */
-export export interface Query {
+export interface Query {
   Accounts(request: QueryAccountsRequest): Promise<QueryAccountsResponse>;
   /*Accounts returns all the existing accounts
   

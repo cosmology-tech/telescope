@@ -2,7 +2,7 @@
 
 exports[`RPC Service Client 1`] = `
 "/** Service defines the RPC service */
-export export interface Service {
+export interface Service {
   GetNodeInfo(request: GetNodeInfoRequest): Promise<GetNodeInfoResponse>;
   /*GetNodeInfo queries the current node info.*/
 
