@@ -38,6 +38,7 @@ export const UTILS = {
     base64FromBytes: '@osmonauts/helpers',
     _m0: { type: 'namespace', path: 'protobufjs/minimal', name: '_m0' },
     Exact: '@osmonauts/helpers',
+    Rpc: '@osmonauts/helpers',
     LCDClient: '@osmonauts/lcd',
     DeepPartial: '@osmonauts/helpers'
 };

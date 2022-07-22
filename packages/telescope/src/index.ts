@@ -4,7 +4,6 @@ import generate from '@babel/generator';
 import { getNestedProto, ProtoStore } from '@osmonauts/proto-parser';
 import { buildAllImports, getDepsFromMutations, getDepsFromQueries } from './imports';
 import { TelescopeParseContext } from './build';
-import { importNamespace, importStmt } from '@osmonauts/ast';
 import { TelescopeOptions, defaultTelescopeOptions, ProtoRef } from '@osmonauts/types';
 import { getRelativePath, variableSlug } from './utils';
 import { parse } from './parse';
@@ -15,7 +14,12 @@ import { sync as mkdirp } from 'mkdirp';
 import deepmerge from 'deepmerge';
 
 import {
+    importNamespace,
+    importStmt,
     makeLCDClient,
+    createRpcInterface,
+    createRpcClientClass,
+    createRpcClientInterface,
     recursiveModuleBundle,
     GenericParseContext,
     createStargateClient,
@@ -89,6 +93,7 @@ export class TelescopeBuilder {
                     .concat(importStmts)
                     ;
 
+                // package var
                 if (context.options.includePackageVar) {
                     prog.push(t.exportNamedDeclaration(t.variableDeclaration('const', [
                         t.variableDeclarator(
@@ -98,6 +103,7 @@ export class TelescopeBuilder {
                     ])))
                 }
 
+                // body
                 prog.push.apply(prog, context.body);
 
                 const filename = ref.filename.replace(/\.proto/, '.ts');
@@ -110,7 +116,6 @@ export class TelescopeBuilder {
                 } else {
                     writeFileSync(out, `export {}`);
                 }
-
 
                 return context;
             });
@@ -286,6 +291,72 @@ export class TelescopeBuilder {
                     .concat(imports)
                     .concat(ctx.body)
                     .concat(lcdAst);
+                const ast = t.program(prog);
+                const content = generate(ast).code;
+                mkdirp(dirname(filename));
+                writeFileSync(filename, content);
+
+                // add to bundle
+                createFileBundle(
+                    c.ref.proto.package,
+                    localname,
+                    bundle.bundleFile,
+                    bundle.importPaths,
+                    bundle.bundleVariables
+                );
+
+                return {
+                    localname,
+                    filename
+                };
+
+            }).filter(Boolean);
+
+            // [x] write out one registry helper for all contexts w/mutations
+            const rpcContexts = queryContexts.map(c => {
+
+                if (!this.options.includeLCDClient) {
+                    return;
+                }
+
+                const localname = c.ref.filename.replace(/\.proto$/, '.rpc.query.ts')
+                const filename = resolve(join(this.outPath, localname));
+                // FRESH new context
+
+                const ctx = new TelescopeParseContext(
+                    c.ref,
+                    c.store,
+                    this.options
+                );
+
+                // get mutations, services
+                parse(ctx);
+
+                const proto = getNestedProto(c.ref.traversed);
+                // hard-coding, for now, only Query service
+                if (!proto?.Query || proto.Query?.type !== 'Service') {
+                    return;
+                }
+
+
+                ////////
+                const asts = [];
+                asts.push(createRpcClientInterface(ctx.generic, proto.Query))
+                asts.push(createRpcClientClass(ctx.generic, proto.Query))
+                ////////
+
+                const serviceImports = getDepsFromQueries(
+                    ctx.queries,
+                    localname
+                );
+
+                // TODO we do NOT need all imports...
+                const imports = buildAllImports(ctx, serviceImports, localname);
+                const prog = []
+                    .concat(imports)
+                    .concat(ctx.body)
+                    .concat(asts);
+
                 const ast = t.program(prog);
                 const content = generate(ast).code;
                 mkdirp(dirname(filename));
