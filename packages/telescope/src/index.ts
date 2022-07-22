@@ -17,7 +17,6 @@ import {
     importNamespace,
     importStmt,
     makeLCDClient,
-    createRpcInterface,
     createRpcClientClass,
     createRpcClientInterface,
     recursiveModuleBundle,
