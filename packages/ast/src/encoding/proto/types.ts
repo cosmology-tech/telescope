@@ -1,7 +1,6 @@
 import * as t from '@babel/types';
 import { ProtoType, ProtoField } from '@osmonauts/types';
 import { pascal } from 'case';
-import { identifier, tsPropertySignature, functionDeclaration, commentBlock, renderNameSafely } from '../../utils';
 import { GenericParseContext, ProtoParseContext } from '../context';
 
 export const SCALAR_TYPES = [
