@@ -39,11 +39,11 @@ const rpcMethod = (
     );
 }
 
-export const createRpcQueryClientInterface = () => {
+export const createRpcClientInterface = (name: string) => {
     const obj = t.exportNamedDeclaration(
         t.exportNamedDeclaration(
             t.tsInterfaceDeclaration(
-                t.identifier('Query'),
+                t.identifier(name),
                 null,
                 [],
                 t.tsInterfaceBody(
@@ -68,7 +68,7 @@ export const createRpcQueryClientInterface = () => {
         )
     );
 
-    obj.leadingComments = [commentBlock('* Query defines the gRPC querier service. ')];
+    obj.leadingComments = [commentBlock('* Query defines the RPC querier service. ')];
 
     return obj;
 
@@ -188,7 +188,7 @@ const returnPromise = (name: string) => {
     )
 };
 
-const grpcQueryClassMethod = (
+const rpcClassMethod = (
     name: string,
     request: string,
     response: string,
@@ -234,7 +234,7 @@ const grpcQueryClassMethod = (
     );
 };
 
-const grpcQueryClassConstructor = (methods: string[]) => {
+const rpcClassConstructor = (methods: string[]) => {
     return classMethod(
         'constructor',
         t.identifier('constructor'),
@@ -265,10 +265,10 @@ const grpcQueryClassConstructor = (methods: string[]) => {
     );
 };
 
-export const createRpcQueryClientClass = () => {
+export const createRpcClientClass = (name: string) => {
     return t.exportNamedDeclaration(
         classDeclaration(
-            t.identifier('QueryClientImpl'),
+            t.identifier(name),
             null,
             t.classBody([
                 classProperty(
@@ -288,20 +288,20 @@ export const createRpcQueryClientClass = () => {
 
                 // CONSTRUCTOR
 
-                grpcQueryClassConstructor([
+                rpcClassConstructor([
                     'Accounts',
                     'Other'
                 ]),
 
                 // METHODS
-                grpcQueryClassMethod(
+                rpcClassMethod(
                     'Accounts',
                     'QueryAccountsRequest',
                     'QueryAccountsResponse',
                     'cosmos.auth.v1beta1.Query'
                 ),
 
-                grpcQueryClassMethod(
+                rpcClassMethod(
                     'Other',
                     'QueryOtherRequest',
                     'QueryOtherResponse',

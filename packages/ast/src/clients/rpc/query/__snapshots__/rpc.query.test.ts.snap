@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RPC Query Client 1`] = `
+"/** Query defines the RPC querier service. */
+export export interface Query {
+  Account(request: QueryAccountRequest): Promise<QueryAccountResponse>;
+  Yolo(request: QueryAccountRequest): Promise<QueryAccountResponse>;
+}"
+`;
+
+exports[`RPC Query Client 2`] = `
+"export class QueryClientImpl implements Query {
+  private readonly rpc: Rpc;
+
+  constructor(rpc: Rpc) {
+    this.rpc = rpc;
+    this.Accounts = this.Accounts.bind(this);
+    this.Other = this.Other.bind(this);
+  }
+
+  Accounts(request: QueryAccountsRequest): Promise<QueryAccountsResponse> {
+    const data = QueryAccountsRequest.encode(request).finish();
+    const promise = this.rpc.request(\\"cosmos.auth.v1beta1.Query\\", \\"Accounts\\", data);
+    return promise.then(data => QueryAccountsResponse.decode(new _m0.Reader(data)));
+  }
+
+  Other(request: QueryOtherRequest): Promise<QueryOtherResponse> {
+    const data = QueryOtherRequest.encode(request).finish();
+    const promise = this.rpc.request(\\"cosmos.auth.v1beta1.Query\\", \\"Other\\", data);
+    return promise.then(data => QueryOtherResponse.decode(new _m0.Reader(data)));
+  }
+
+}"
+`;
+
+exports[`RPC Query Client 3`] = `
+"interface Rpc {
+  request(service: string, method: string, data: Uint8Array): Promise<Uint8Array>;
+}"
+`;
