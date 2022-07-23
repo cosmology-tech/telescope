@@ -64,6 +64,7 @@ export interface SuperfluidDelegationsByDelegatorRequest {
 export interface SuperfluidDelegationsByDelegatorResponse {
   superfluidDelegationRecords: SuperfluidDelegationRecord[];
   totalDelegatedCoins: Coin[];
+  totalEquivalentStakedAmount: Coin;
 }
 export interface SuperfluidUndelegationsByDelegatorRequest {
   delegatorAddress: string;
@@ -1166,7 +1167,8 @@ export const SuperfluidDelegationsByDelegatorRequest = {
 function createBaseSuperfluidDelegationsByDelegatorResponse(): SuperfluidDelegationsByDelegatorResponse {
   return {
     superfluidDelegationRecords: [],
-    totalDelegatedCoins: []
+    totalDelegatedCoins: [],
+    totalEquivalentStakedAmount: undefined
   };
 }
 
@@ -1178,6 +1180,10 @@ export const SuperfluidDelegationsByDelegatorResponse = {
 
     for (const v of message.totalDelegatedCoins) {
       Coin.encode(v!, writer.uint32(18).fork()).ldelim();
+    }
+
+    if (message.totalEquivalentStakedAmount !== undefined) {
+      Coin.encode(message.totalEquivalentStakedAmount, writer.uint32(26).fork()).ldelim();
     }
 
     return writer;
@@ -1200,6 +1206,10 @@ export const SuperfluidDelegationsByDelegatorResponse = {
           message.totalDelegatedCoins.push(Coin.decode(reader, reader.uint32()));
           break;
 
+        case 3:
+          message.totalEquivalentStakedAmount = Coin.decode(reader, reader.uint32());
+          break;
+
         default:
           reader.skipType(tag & 7);
           break;
@@ -1212,7 +1222,8 @@ export const SuperfluidDelegationsByDelegatorResponse = {
   fromJSON(object: any): SuperfluidDelegationsByDelegatorResponse {
     return {
       superfluidDelegationRecords: Array.isArray(object?.superfluidDelegationRecords) ? object.superfluidDelegationRecords.map((e: any) => SuperfluidDelegationRecord.fromJSON(e)) : [],
-      totalDelegatedCoins: Array.isArray(object?.totalDelegatedCoins) ? object.totalDelegatedCoins.map((e: any) => Coin.fromJSON(e)) : []
+      totalDelegatedCoins: Array.isArray(object?.totalDelegatedCoins) ? object.totalDelegatedCoins.map((e: any) => Coin.fromJSON(e)) : [],
+      totalEquivalentStakedAmount: isSet(object.totalEquivalentStakedAmount) ? Coin.fromJSON(object.totalEquivalentStakedAmount) : undefined
     };
   },
 
@@ -1231,6 +1242,7 @@ export const SuperfluidDelegationsByDelegatorResponse = {
       obj.totalDelegatedCoins = [];
     }
 
+    message.totalEquivalentStakedAmount !== undefined && (obj.totalEquivalentStakedAmount = message.totalEquivalentStakedAmount ? Coin.toJSON(message.totalEquivalentStakedAmount) : undefined);
     return obj;
   },
 
@@ -1238,6 +1250,7 @@ export const SuperfluidDelegationsByDelegatorResponse = {
     const message = createBaseSuperfluidDelegationsByDelegatorResponse();
     message.superfluidDelegationRecords = object.superfluidDelegationRecords?.map(e => SuperfluidDelegationRecord.fromPartial(e)) || [];
     message.totalDelegatedCoins = object.totalDelegatedCoins?.map(e => Coin.fromPartial(e)) || [];
+    message.totalEquivalentStakedAmount = object.totalEquivalentStakedAmount !== undefined && object.totalEquivalentStakedAmount !== null ? Coin.fromPartial(object.totalEquivalentStakedAmount) : undefined;
     return message;
   }
 

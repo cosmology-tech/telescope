@@ -86,6 +86,13 @@ export interface AccountLockedLongerDurationRequest {
 export interface AccountLockedLongerDurationResponse {
   locks: PeriodLock[];
 }
+export interface AccountLockedDurationRequest {
+  owner: string;
+  duration: Duration;
+}
+export interface AccountLockedDurationResponse {
+  locks: PeriodLock[];
+}
 export interface AccountLockedLongerDurationNotUnlockingOnlyRequest {
   owner: string;
   duration: Duration;
@@ -1700,6 +1707,138 @@ export const AccountLockedLongerDurationResponse = {
 
   fromPartial(object: DeepPartial<AccountLockedLongerDurationResponse>): AccountLockedLongerDurationResponse {
     const message = createBaseAccountLockedLongerDurationResponse();
+    message.locks = object.locks?.map(e => PeriodLock.fromPartial(e)) || [];
+    return message;
+  }
+
+};
+
+function createBaseAccountLockedDurationRequest(): AccountLockedDurationRequest {
+  return {
+    owner: "",
+    duration: undefined
+  };
+}
+
+export const AccountLockedDurationRequest = {
+  encode(message: AccountLockedDurationRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.owner !== "") {
+      writer.uint32(10).string(message.owner);
+    }
+
+    if (message.duration !== undefined) {
+      Duration.encode(message.duration, writer.uint32(18).fork()).ldelim();
+    }
+
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): AccountLockedDurationRequest {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseAccountLockedDurationRequest();
+
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        case 1:
+          message.owner = reader.string();
+          break;
+
+        case 2:
+          message.duration = Duration.decode(reader, reader.uint32());
+          break;
+
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+
+  fromJSON(object: any): AccountLockedDurationRequest {
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      duration: isSet(object.duration) ? Duration.fromJSON(object.duration) : undefined
+    };
+  },
+
+  toJSON(message: AccountLockedDurationRequest): unknown {
+    const obj: any = {};
+    message.owner !== undefined && (obj.owner = message.owner);
+    message.duration !== undefined && (obj.duration = message.duration);
+    return obj;
+  },
+
+  fromPartial(object: DeepPartial<AccountLockedDurationRequest>): AccountLockedDurationRequest {
+    const message = createBaseAccountLockedDurationRequest();
+    message.owner = object.owner ?? "";
+    message.duration = object.duration ?? undefined;
+    return message;
+  }
+
+};
+
+function createBaseAccountLockedDurationResponse(): AccountLockedDurationResponse {
+  return {
+    locks: []
+  };
+}
+
+export const AccountLockedDurationResponse = {
+  encode(message: AccountLockedDurationResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    for (const v of message.locks) {
+      PeriodLock.encode(v!, writer.uint32(10).fork()).ldelim();
+    }
+
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): AccountLockedDurationResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseAccountLockedDurationResponse();
+
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        case 1:
+          message.locks.push(PeriodLock.decode(reader, reader.uint32()));
+          break;
+
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+
+  fromJSON(object: any): AccountLockedDurationResponse {
+    return {
+      locks: Array.isArray(object?.locks) ? object.locks.map((e: any) => PeriodLock.fromJSON(e)) : []
+    };
+  },
+
+  toJSON(message: AccountLockedDurationResponse): unknown {
+    const obj: any = {};
+
+    if (message.locks) {
+      obj.locks = message.locks.map(e => e ? PeriodLock.toJSON(e) : undefined);
+    } else {
+      obj.locks = [];
+    }
+
+    return obj;
+  },
+
+  fromPartial(object: DeepPartial<AccountLockedDurationResponse>): AccountLockedDurationResponse {
+    const message = createBaseAccountLockedDurationResponse();
     message.locks = object.locks?.map(e => PeriodLock.fromPartial(e)) || [];
     return message;
   }

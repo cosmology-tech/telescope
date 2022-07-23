@@ -1,6 +1,6 @@
 import { FeeToken } from "./feetoken";
 import { LCDClient } from "@osmonauts/lcd";
-import { QueryFeeTokensRequest, QueryFeeTokensResponse, QueryDenomPoolIdRequest, QueryDenomPoolIdResponse, QueryBaseDenomRequest, QueryBaseDenomResponse } from "./query";
+import { QueryFeeTokensRequest, QueryFeeTokensResponse, QueryDenomSpotPriceRequest, QueryDenomSpotPriceResponse, QueryDenomPoolIdRequest, QueryDenomPoolIdResponse, QueryBaseDenomRequest, QueryBaseDenomResponse } from "./query";
 export class LCDQueryClient extends LCDClient {
   constructor({
     restEndpoint
@@ -16,6 +16,20 @@ export class LCDQueryClient extends LCDClient {
   async feeTokens(params: QueryFeeTokensRequest): Promise<QueryFeeTokensResponse> {
     const endpoint = `osmosis/txfees/v1beta1/fee_tokens/`;
     return await this.request(endpoint);
+  }
+
+  /* DenomSpotPrice */
+  async denomSpotPrice(params: QueryDenomSpotPriceRequest): Promise<QueryDenomSpotPriceResponse> {
+    const options: any = {
+      params: {}
+    };
+
+    if (typeof params?.denom !== "undefined") {
+      options.params.denom = params.denom;
+    }
+
+    const endpoint = `osmosis/txfees/v1beta1/spot_price_by_denom/`;
+    return await this.request(endpoint, options);
   }
 
   /* DenomPoolId */

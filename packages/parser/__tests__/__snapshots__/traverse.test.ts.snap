@@ -5577,8 +5577,7 @@ Object {
                             "typeNum": 13,
                           },
                           "shareOutMinAmount": Object {
-                            "comment": "reserved 3;
-reserved \\"token_in\\";",
+                            "comment": null,
                             "id": 4,
                             "isScalar": true,
                             "options": Object {
@@ -6387,8 +6386,7 @@ TODO: Rename to MsgJoinSwapExactAmountIn",
                         "typeNum": 13,
                       },
                       "shareOutMinAmount": Object {
-                        "comment": "reserved 3;
-reserved \\"token_in\\";",
+                        "comment": null,
                         "id": 4,
                         "isScalar": true,
                         "options": Object {

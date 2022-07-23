@@ -4,9 +4,9 @@ import * as _150 from "./wasm/v1/proposal";
 import * as _151 from "./wasm/v1/query";
 import * as _152 from "./wasm/v1/tx";
 import * as _153 from "./wasm/v1/types";
-import * as _379 from "./wasm/v1/tx.amino";
-import * as _380 from "./wasm/v1/tx.registry";
-import * as _381 from "./wasm/v1/query.lcd";
+import * as _386 from "./wasm/v1/tx.amino";
+import * as _387 from "./wasm/v1/tx.registry";
+import * as _388 from "./wasm/v1/query.lcd";
 export namespace cosmwasm {
   export namespace wasm {
     export const v1 = { ..._148,
@@ -15,9 +15,9 @@ export namespace cosmwasm {
       ..._151,
       ..._152,
       ..._153,
-      ..._379,
-      ..._380,
-      ..._381
+      ..._386,
+      ..._387,
+      ..._388
     };
   }
 }
