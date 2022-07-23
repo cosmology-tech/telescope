@@ -3,7 +3,7 @@ import { getPluginValue } from './plugins';
 
 const options = {
     includeAminos: false,
-    includeLCDClient: false,
+    includeLCDClients: false,
     useDate: false,
 
     packages: {

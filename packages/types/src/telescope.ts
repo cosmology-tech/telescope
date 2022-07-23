@@ -6,7 +6,7 @@ interface TelescopeOpts {
     aminoExceptions?: AminoExceptions;
     camelRpcMethods?: boolean;
     includeAminos?: boolean;
-    includeLCDClient?: boolean;
+    includeLCDClients?: boolean;
     includePackageVar?: boolean;
     includeRpcClients?: boolean;
     signingClientDefaults?: boolean;
@@ -25,7 +25,7 @@ export type TelescopeOption = keyof TelescopeOpts;
 export const defaultTelescopeOptions: TelescopeOptions = {
     // global options (can be overridden through plugins)
     includeAminos: true,
-    includeLCDClient: false,
+    includeLCDClients: false,
     signingClientDefaults: true,
     includePackageVar: false,
     includeRpcClients: false,

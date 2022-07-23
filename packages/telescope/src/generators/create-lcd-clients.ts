@@ -18,7 +18,7 @@ export const plugin = (
     bundler: Bundler
 ) => {
 
-    if (!builder.options.includeLCDClient) {
+    if (!builder.options.includeLCDClients) {
         return;
     }
 

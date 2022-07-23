@@ -4,7 +4,7 @@ interface TelescopeOpts {
     aminoExceptions?: AminoExceptions;
     camelRpcMethods?: boolean;
     includeAminos?: boolean;
-    includeLCDClient?: boolean;
+    includeLCDClients?: boolean;
     includePackageVar?: boolean;
     includeRpcClients?: boolean;
     signingClientDefaults?: boolean;

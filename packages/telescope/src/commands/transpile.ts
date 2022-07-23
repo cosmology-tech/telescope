@@ -37,7 +37,7 @@ export default async (argv) => {
     },
     {
       type: 'confirm',
-      name: 'includeLCDClient',
+      name: 'includeLCDClients',
       message: 'output LCD Clients?',
       default: false
     },
@@ -79,7 +79,7 @@ export default async (argv) => {
     protoDirs,
     outPath,
     includeAminos,
-    includeLCDClient,
+    includeLCDClients,
     includePackageVar,
     camelRpcMethods,
     includeRpcClients,
@@ -93,7 +93,7 @@ export default async (argv) => {
 
   const options = {
     includeAminos,
-    includeLCDClient,
+    includeLCDClients,
     includePackageVar,
     camelRpcMethods,
     includeRpcClients,

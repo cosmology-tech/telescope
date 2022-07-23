@@ -5,7 +5,7 @@ import { TelescopeParseContext } from '../src/build';
 
 const options = {
     ...defaultTelescopeOptions,
-    includeLCDClient: true
+    includeLCDClients: true
 };
 
 const store = new ProtoStore();

@@ -11,7 +11,7 @@ const input = {
     protoDirs: [__dirname + '/../../../__fixtures__/chain1'],
     options: {
         ...defaultTelescopeOptions,
-        includeLCDClient: true,
+        includeLCDClients: true,
         includePackageVar: true
     }
 };
