@@ -62,9 +62,7 @@ export const variableSlug = (str) => {
     str = str
         .replace(/[^a-z0-9_ -]/g, "") // remove invalid chars
         .replace(/\s+/g, "-") // collapse whitespace and replace by -
-        .replace(/-+/g, "-") // collapse dashes
-        .replace(/^-+/, "") // trim - from start of text
-        .replace(/-+$/, "");
+        .replace(/-/g, "");
 
     return camel(str);
 }
