@@ -1,7 +1,7 @@
 import { EpochInfo } from "./genesis";
 import { LCDClient } from "@osmonauts/lcd";
 import { QueryEpochsInfoRequest, QueryEpochsInfoResponse, QueryCurrentEpochRequest, QueryCurrentEpochResponse } from "./query";
-export class QueryClient extends LCDClient {
+export class LCDQueryClient extends LCDClient {
   constructor({
     restEndpoint
   }) {

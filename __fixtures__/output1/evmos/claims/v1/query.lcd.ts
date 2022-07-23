@@ -4,7 +4,7 @@ import { Params } from "./genesis";
 import { ClaimsRecordAddress, Claim } from "./claims";
 import { LCDClient } from "@osmonauts/lcd";
 import { QueryTotalUnclaimedRequest, QueryTotalUnclaimedResponse, QueryParamsRequest, QueryParamsResponse, QueryClaimsRecordsRequest, QueryClaimsRecordsResponse, QueryClaimsRecordRequest, QueryClaimsRecordResponse } from "./query";
-export class QueryClient extends LCDClient {
+export class LCDQueryClient extends LCDClient {
   constructor({
     restEndpoint
   }) {

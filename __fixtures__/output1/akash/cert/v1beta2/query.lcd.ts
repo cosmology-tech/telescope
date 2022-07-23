@@ -2,7 +2,7 @@ import { CertificateFilter, Certificate } from "./cert";
 import { PageRequest, PageResponse } from "../../../cosmos/base/query/v1beta1/pagination";
 import { LCDClient } from "@osmonauts/lcd";
 import { QueryCertificatesRequest, QueryCertificatesResponse } from "./query";
-export class QueryClient extends LCDClient {
+export class LCDQueryClient extends LCDClient {
   constructor({
     restEndpoint
   }) {

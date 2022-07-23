@@ -3,7 +3,7 @@ import { TokenPair } from "./erc20";
 import { Params } from "./genesis";
 import { LCDClient } from "@osmonauts/lcd";
 import { QueryTokenPairsRequest, QueryTokenPairsResponse, QueryTokenPairRequest, QueryTokenPairResponse, QueryParamsRequest, QueryParamsResponse } from "./query";
-export class QueryClient extends LCDClient {
+export class LCDQueryClient extends LCDClient {
   constructor({
     restEndpoint
   }) {

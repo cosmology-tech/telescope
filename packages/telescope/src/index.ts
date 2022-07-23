@@ -16,7 +16,7 @@ import deepmerge from 'deepmerge';
 import {
     importNamespace,
     importStmt,
-    makeLCDClient,
+    createLCDClient,
     createRpcClientClass,
     createRpcClientInterface,
     recursiveModuleBundle,
@@ -272,7 +272,7 @@ export class TelescopeBuilder {
                     return;
                 }
 
-                const lcdAst = makeLCDClient(ctx.generic, proto.Query);
+                const lcdAst = createLCDClient(ctx.generic, proto.Query);
 
                 if (!lcdAst) {
                     return;

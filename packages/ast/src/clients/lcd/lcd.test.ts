@@ -1,7 +1,7 @@
 import {
     getUrlTemplateString,
     makeAggregatedLCDClient,
-    makeLCDClient,
+    createLCDClient,
     makeTemplateTag
 } from './lcd';
 import { ProtoStore, traverse, getNestedProto } from '@osmonauts/proto-parser'
@@ -48,7 +48,7 @@ it('osmosis LCDClient', () => {
     const res = traverse(store, ref);
     const service: ProtoService = getNestedProto(res).Query;
     const context = new GenericParseContext(ref, store, defaultTelescopeOptions);
-    const ast = makeLCDClient(context, service);
+    const ast = createLCDClient(context, service);
     expectCode(ast);
 });
 it('cosmos LCDClient', () => {
@@ -56,7 +56,7 @@ it('cosmos LCDClient', () => {
     const res = traverse(store, ref);
     const service: ProtoService = getNestedProto(res).Query;
     const context = new GenericParseContext(ref, store, defaultTelescopeOptions);
-    const ast = makeLCDClient(context, service);
+    const ast = createLCDClient(context, service);
     expectCode(ast);
 });
 it('cosmos fee LCDClient', () => {
@@ -64,7 +64,7 @@ it('cosmos fee LCDClient', () => {
     const res = traverse(store, ref);
     const service: ProtoService = getNestedProto(res).Query;
     const context = new GenericParseContext(ref, store, defaultTelescopeOptions);
-    const ast = makeLCDClient(context, service);
+    const ast = createLCDClient(context, service);
     expectCode(ast);
 });
 it('cosmos/app/v1alpha1/query.proto', () => {
@@ -72,7 +72,7 @@ it('cosmos/app/v1alpha1/query.proto', () => {
     const res = traverse(store, ref);
     const service: ProtoService = getNestedProto(res).Query;
     const context = new GenericParseContext(ref, store, defaultTelescopeOptions);
-    const ast = makeLCDClient(context, service);
+    const ast = createLCDClient(context, service);
     expectCode(ast);
 });
 it('AggregatedLCDClient', () => {

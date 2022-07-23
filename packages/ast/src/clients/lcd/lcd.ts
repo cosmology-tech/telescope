@@ -265,7 +265,7 @@ const requestMethod = (
     );
 }
 
-const makeLCDClientClassBody = (clientName: string, methods: t.ClassMethod[]) => {
+const createLCDClientClassBody = (clientName: string, methods: t.ClassMethod[]) => {
     return t.exportNamedDeclaration(
         t.classDeclaration(
             t.identifier(clientName),
@@ -311,7 +311,7 @@ const makeLCDClientClassBody = (clientName: string, methods: t.ClassMethod[]) =>
     )
 };
 
-export const makeLCDClient = (
+export const createLCDClient = (
     context: GenericParseContext,
     service: ProtoService
 ) => {
@@ -322,8 +322,8 @@ export const makeLCDClient = (
             return requestMethod(context, method);
     }).filter(Boolean);
     if (methods.length) {
-        const clientName = firstUpper(service.name) + 'Client'
-        return makeLCDClientClassBody(clientName, methods);
+        const clientName = 'LCD' + firstUpper(service.name) + 'Client'
+        return createLCDClientClassBody(clientName, methods);
     }
 };
 
@@ -340,5 +340,5 @@ export const makeAggregatedLCDClient = (
         });
         return [...m, ...innerMethods];
     }, []);
-    return makeLCDClientClassBody(clientName, methods);
+    return createLCDClientClassBody(clientName, methods);
 };

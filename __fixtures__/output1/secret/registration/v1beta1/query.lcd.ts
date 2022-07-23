@@ -2,7 +2,7 @@ import { LCDClient } from "@osmonauts/lcd";
 import { Empty } from "../../../google/protobuf/empty";
 import { Key } from "./msg";
 import { QueryEncryptedSeedRequest, QueryEncryptedSeedResponse } from "./query";
-export class QueryClient extends LCDClient {
+export class LCDQueryClient extends LCDClient {
   constructor({
     restEndpoint
   }) {

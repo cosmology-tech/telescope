@@ -239,7 +239,7 @@ exports[`AggregatedLCDClient 1`] = `
 `;
 
 exports[`cosmos LCDClient 1`] = `
-"export class QueryClient extends LCDClient {
+"export class LCDQueryClient extends LCDClient {
   constructor({
     restEndpoint
   }) {
@@ -365,7 +365,7 @@ exports[`cosmos LCDClient 1`] = `
 `;
 
 exports[`cosmos fee LCDClient 1`] = `
-"export class QueryClient extends LCDClient {
+"export class LCDQueryClient extends LCDClient {
   constructor({
     restEndpoint
   }) {
@@ -415,7 +415,7 @@ exports[`cosmos fee LCDClient 1`] = `
 exports[`cosmos/app/v1alpha1/query.proto 1`] = `""`;
 
 exports[`osmosis LCDClient 1`] = `
-"export class QueryClient extends LCDClient {
+"export class LCDQueryClient extends LCDClient {
   constructor({
     restEndpoint
   }) {

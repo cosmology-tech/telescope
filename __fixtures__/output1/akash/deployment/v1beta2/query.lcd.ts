@@ -5,7 +5,7 @@ import { Group } from "./group";
 import { Account } from "../../escrow/v1beta2/types";
 import { LCDClient } from "@osmonauts/lcd";
 import { QueryDeploymentsRequest, QueryDeploymentsResponse, QueryDeploymentRequest, QueryDeploymentResponse, QueryGroupRequest, QueryGroupResponse } from "./query";
-export class QueryClient extends LCDClient {
+export class LCDQueryClient extends LCDClient {
   constructor({
     restEndpoint
   }) {

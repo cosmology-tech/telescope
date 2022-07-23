@@ -3,7 +3,7 @@ import { StringEvent } from "../../../cosmos/base/abci/v1beta1/abci";
 import { LCDClient } from "@osmonauts/lcd";
 import { QueryContractInfoRequest, QueryContractInfoResponse, QueryContractsByCodeRequest, QueryContractsByCodeResponse, QuerySmartContractStateRequest, QuerySmartContractStateResponse, QueryCodeRequest, QueryCodeResponse, QueryCodesResponse } from "./query";
 import { Empty } from "../../../google/protobuf/empty";
-export class QueryClient extends LCDClient {
+export class LCDQueryClient extends LCDClient {
   constructor({
     restEndpoint
   }) {
