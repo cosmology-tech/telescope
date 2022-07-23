@@ -3,7 +3,7 @@ import { Coin } from "../../cosmos/base/v1beta1/coin";
 import { PeriodLock } from "./lock";
 import { AminoMsg } from "@cosmjs/amino";
 import { Long } from "@osmonauts/helpers";
-import { MsgLockTokens, MsgBeginUnlockingAll, MsgBeginUnlocking } from "./tx";
+import { MsgLockTokens, MsgBeginUnlockingAll, MsgBeginUnlocking, MsgExtendLockup } from "./tx";
 export interface AminoMsgLockTokens extends AminoMsg {
   type: "osmosis/lockup/lock-tokens";
   value: {
@@ -33,6 +33,17 @@ export interface AminoMsgBeginUnlocking extends AminoMsg {
       denom: string;
       amount: string;
     }[];
+  };
+}
+export interface AminoMsgExtendLockup extends AminoMsg {
+  type: "osmosis/lockup/extend-lockup";
+  value: {
+    owner: string;
+    ID: string;
+    duration: {
+      seconds: string;
+      nanos: number;
+    };
   };
 }
 export const AminoConverter = {
@@ -115,6 +126,34 @@ export const AminoConverter = {
           denom: el0.denom,
           amount: el0.amount
         }))
+      };
+    }
+  },
+  "/osmosis.lockup.MsgExtendLockup": {
+    aminoType: "osmosis/lockup/extend-lockup",
+    toAmino: ({
+      owner,
+      ID,
+      duration
+    }: MsgExtendLockup): AminoMsgExtendLockup["value"] => {
+      return {
+        owner,
+        ID: ID.toString(),
+        duration: (duration * 1_000_000_000).toString()
+      };
+    },
+    fromAmino: ({
+      owner,
+      ID,
+      duration
+    }: AminoMsgExtendLockup["value"]): MsgExtendLockup => {
+      return {
+        owner,
+        ID: Long.fromString(ID),
+        duration: {
+          seconds: Long.fromNumber(Math.floor(parseInt(duration) / 1_000_000_000)),
+          nanos: parseInt(duration) % 1_000_000_000
+        }
       };
     }
   }

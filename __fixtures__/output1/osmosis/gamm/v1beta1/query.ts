@@ -56,12 +56,20 @@ export interface QueryTotalSharesResponse {
   totalShares: Coin;
 }
 
-/** =============================== SpotPrice */
+/**
+ * QuerySpotPriceRequest defines the gRPC request structure for a SpotPrice
+ * query.
+ */
 export interface QuerySpotPriceRequest {
   poolId: Long;
-  tokenInDenom: string;
-  tokenOutDenom: string;
+  baseAssetDenom: string;
+  quoteAssetDenom: string;
 }
+
+/**
+ * QuerySpotPriceResponse defines the gRPC response structure for a SpotPrice
+ * query.
+ */
 export interface QuerySpotPriceResponse {
   /** String of the Dec. Ex) 10.203uatom */
   spotPrice: string;
@@ -790,8 +798,8 @@ export const QueryTotalSharesResponse = {
 function createBaseQuerySpotPriceRequest(): QuerySpotPriceRequest {
   return {
     poolId: Long.UZERO,
-    tokenInDenom: "",
-    tokenOutDenom: ""
+    baseAssetDenom: "",
+    quoteAssetDenom: ""
   };
 }
 
@@ -801,12 +809,12 @@ export const QuerySpotPriceRequest = {
       writer.uint32(8).uint64(message.poolId);
     }
 
-    if (message.tokenInDenom !== "") {
-      writer.uint32(18).string(message.tokenInDenom);
+    if (message.baseAssetDenom !== "") {
+      writer.uint32(18).string(message.baseAssetDenom);
     }
 
-    if (message.tokenOutDenom !== "") {
-      writer.uint32(26).string(message.tokenOutDenom);
+    if (message.quoteAssetDenom !== "") {
+      writer.uint32(26).string(message.quoteAssetDenom);
     }
 
     return writer;
@@ -826,11 +834,11 @@ export const QuerySpotPriceRequest = {
           break;
 
         case 2:
-          message.tokenInDenom = reader.string();
+          message.baseAssetDenom = reader.string();
           break;
 
         case 3:
-          message.tokenOutDenom = reader.string();
+          message.quoteAssetDenom = reader.string();
           break;
 
         default:
@@ -845,24 +853,24 @@ export const QuerySpotPriceRequest = {
   fromJSON(object: any): QuerySpotPriceRequest {
     return {
       poolId: isSet(object.poolId) ? Long.fromString(object.poolId) : Long.UZERO,
-      tokenInDenom: isSet(object.tokenInDenom) ? String(object.tokenInDenom) : "",
-      tokenOutDenom: isSet(object.tokenOutDenom) ? String(object.tokenOutDenom) : ""
+      baseAssetDenom: isSet(object.baseAssetDenom) ? String(object.baseAssetDenom) : "",
+      quoteAssetDenom: isSet(object.quoteAssetDenom) ? String(object.quoteAssetDenom) : ""
     };
   },
 
   toJSON(message: QuerySpotPriceRequest): unknown {
     const obj: any = {};
     message.poolId !== undefined && (obj.poolId = (message.poolId || Long.UZERO).toString());
-    message.tokenInDenom !== undefined && (obj.tokenInDenom = message.tokenInDenom);
-    message.tokenOutDenom !== undefined && (obj.tokenOutDenom = message.tokenOutDenom);
+    message.baseAssetDenom !== undefined && (obj.baseAssetDenom = message.baseAssetDenom);
+    message.quoteAssetDenom !== undefined && (obj.quoteAssetDenom = message.quoteAssetDenom);
     return obj;
   },
 
   fromPartial(object: DeepPartial<QuerySpotPriceRequest>): QuerySpotPriceRequest {
     const message = createBaseQuerySpotPriceRequest();
     message.poolId = object.poolId !== undefined && object.poolId !== null ? Long.fromValue(object.poolId) : Long.UZERO;
-    message.tokenInDenom = object.tokenInDenom ?? "";
-    message.tokenOutDenom = object.tokenOutDenom ?? "";
+    message.baseAssetDenom = object.baseAssetDenom ?? "";
+    message.quoteAssetDenom = object.quoteAssetDenom ?? "";
     return message;
   }
 

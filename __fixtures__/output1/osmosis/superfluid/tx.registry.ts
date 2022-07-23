@@ -1,7 +1,7 @@
 import { Coin } from "../../cosmos/base/v1beta1/coin";
 import { GeneratedType, Registry } from "@cosmjs/proto-signing";
-import { MsgSuperfluidDelegate, MsgSuperfluidUndelegate, MsgSuperfluidUnbondLock, MsgLockAndSuperfluidDelegate } from "./tx";
-export const registry: ReadonlyArray<[string, GeneratedType]> = [["/osmosis.superfluid.MsgSuperfluidDelegate", MsgSuperfluidDelegate], ["/osmosis.superfluid.MsgSuperfluidUndelegate", MsgSuperfluidUndelegate], ["/osmosis.superfluid.MsgSuperfluidUnbondLock", MsgSuperfluidUnbondLock], ["/osmosis.superfluid.MsgLockAndSuperfluidDelegate", MsgLockAndSuperfluidDelegate]];
+import { MsgSuperfluidDelegate, MsgSuperfluidUndelegate, MsgSuperfluidUnbondLock, MsgLockAndSuperfluidDelegate, MsgUnPoolWhitelistedPool } from "./tx";
+export const registry: ReadonlyArray<[string, GeneratedType]> = [["/osmosis.superfluid.MsgSuperfluidDelegate", MsgSuperfluidDelegate], ["/osmosis.superfluid.MsgSuperfluidUndelegate", MsgSuperfluidUndelegate], ["/osmosis.superfluid.MsgSuperfluidUnbondLock", MsgSuperfluidUnbondLock], ["/osmosis.superfluid.MsgLockAndSuperfluidDelegate", MsgLockAndSuperfluidDelegate], ["/osmosis.superfluid.MsgUnPoolWhitelistedPool", MsgUnPoolWhitelistedPool]];
 export const load = (protoRegistry: Registry) => {
   registry.forEach(([typeUrl, mod]) => {
     protoRegistry.register(typeUrl, mod);
@@ -35,6 +35,13 @@ export const MessageComposer = {
         typeUrl: "/osmosis.superfluid.MsgLockAndSuperfluidDelegate",
         value: MsgLockAndSuperfluidDelegate.encode(value).finish()
       };
+    },
+
+    unPoolWhitelistedPool(value: MsgUnPoolWhitelistedPool) {
+      return {
+        typeUrl: "/osmosis.superfluid.MsgUnPoolWhitelistedPool",
+        value: MsgUnPoolWhitelistedPool.encode(value).finish()
+      };
     }
 
   },
@@ -63,6 +70,13 @@ export const MessageComposer = {
     lockAndSuperfluidDelegate(value: MsgLockAndSuperfluidDelegate) {
       return {
         typeUrl: "/osmosis.superfluid.MsgLockAndSuperfluidDelegate",
+        value
+      };
+    },
+
+    unPoolWhitelistedPool(value: MsgUnPoolWhitelistedPool) {
+      return {
+        typeUrl: "/osmosis.superfluid.MsgUnPoolWhitelistedPool",
         value
       };
     }
@@ -95,6 +109,13 @@ export const MessageComposer = {
         typeUrl: "/osmosis.superfluid.MsgLockAndSuperfluidDelegate",
         value: MsgLockAndSuperfluidDelegate.toJSON(value)
       };
+    },
+
+    unPoolWhitelistedPool(value: MsgUnPoolWhitelistedPool) {
+      return {
+        typeUrl: "/osmosis.superfluid.MsgUnPoolWhitelistedPool",
+        value: MsgUnPoolWhitelistedPool.toJSON(value)
+      };
     }
 
   },
@@ -125,6 +146,13 @@ export const MessageComposer = {
         typeUrl: "/osmosis.superfluid.MsgLockAndSuperfluidDelegate",
         value: MsgLockAndSuperfluidDelegate.fromJSON(value)
       };
+    },
+
+    unPoolWhitelistedPool(value: any) {
+      return {
+        typeUrl: "/osmosis.superfluid.MsgUnPoolWhitelistedPool",
+        value: MsgUnPoolWhitelistedPool.fromJSON(value)
+      };
     }
 
   },
@@ -154,6 +182,13 @@ export const MessageComposer = {
       return {
         typeUrl: "/osmosis.superfluid.MsgLockAndSuperfluidDelegate",
         value: MsgLockAndSuperfluidDelegate.fromPartial(value)
+      };
+    },
+
+    unPoolWhitelistedPool(value: MsgUnPoolWhitelistedPool) {
+      return {
+        typeUrl: "/osmosis.superfluid.MsgUnPoolWhitelistedPool",
+        value: MsgUnPoolWhitelistedPool.fromPartial(value)
       };
     }
 

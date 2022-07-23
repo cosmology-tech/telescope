@@ -79,10 +79,14 @@ export interface SuperfluidDelegationRecord {
   delegatorAddress: string;
   validatorAddress: string;
   delegationAmount: Coin;
+  equivalentStakedAmount: Coin;
 }
 export interface LockIdIntermediaryAccountConnection {
   lockId: Long;
   intermediaryAccount: string;
+}
+export interface UnpoolWhitelistedPools {
+  ids: Long[];
 }
 
 function createBaseSuperfluidAsset(): SuperfluidAsset {
@@ -320,7 +324,8 @@ function createBaseSuperfluidDelegationRecord(): SuperfluidDelegationRecord {
   return {
     delegatorAddress: "",
     validatorAddress: "",
-    delegationAmount: undefined
+    delegationAmount: undefined,
+    equivalentStakedAmount: undefined
   };
 }
 
@@ -336,6 +341,10 @@ export const SuperfluidDelegationRecord = {
 
     if (message.delegationAmount !== undefined) {
       Coin.encode(message.delegationAmount, writer.uint32(26).fork()).ldelim();
+    }
+
+    if (message.equivalentStakedAmount !== undefined) {
+      Coin.encode(message.equivalentStakedAmount, writer.uint32(34).fork()).ldelim();
     }
 
     return writer;
@@ -362,6 +371,10 @@ export const SuperfluidDelegationRecord = {
           message.delegationAmount = Coin.decode(reader, reader.uint32());
           break;
 
+        case 4:
+          message.equivalentStakedAmount = Coin.decode(reader, reader.uint32());
+          break;
+
         default:
           reader.skipType(tag & 7);
           break;
@@ -375,7 +388,8 @@ export const SuperfluidDelegationRecord = {
     return {
       delegatorAddress: isSet(object.delegatorAddress) ? String(object.delegatorAddress) : "",
       validatorAddress: isSet(object.validatorAddress) ? String(object.validatorAddress) : "",
-      delegationAmount: isSet(object.delegationAmount) ? Coin.fromJSON(object.delegationAmount) : undefined
+      delegationAmount: isSet(object.delegationAmount) ? Coin.fromJSON(object.delegationAmount) : undefined,
+      equivalentStakedAmount: isSet(object.equivalentStakedAmount) ? Coin.fromJSON(object.equivalentStakedAmount) : undefined
     };
   },
 
@@ -384,6 +398,7 @@ export const SuperfluidDelegationRecord = {
     message.delegatorAddress !== undefined && (obj.delegatorAddress = message.delegatorAddress);
     message.validatorAddress !== undefined && (obj.validatorAddress = message.validatorAddress);
     message.delegationAmount !== undefined && (obj.delegationAmount = message.delegationAmount ? Coin.toJSON(message.delegationAmount) : undefined);
+    message.equivalentStakedAmount !== undefined && (obj.equivalentStakedAmount = message.equivalentStakedAmount ? Coin.toJSON(message.equivalentStakedAmount) : undefined);
     return obj;
   },
 
@@ -392,6 +407,7 @@ export const SuperfluidDelegationRecord = {
     message.delegatorAddress = object.delegatorAddress ?? "";
     message.validatorAddress = object.validatorAddress ?? "";
     message.delegationAmount = object.delegationAmount !== undefined && object.delegationAmount !== null ? Coin.fromPartial(object.delegationAmount) : undefined;
+    message.equivalentStakedAmount = object.equivalentStakedAmount !== undefined && object.equivalentStakedAmount !== null ? Coin.fromPartial(object.equivalentStakedAmount) : undefined;
     return message;
   }
 
@@ -461,6 +477,81 @@ export const LockIdIntermediaryAccountConnection = {
     const message = createBaseLockIdIntermediaryAccountConnection();
     message.lockId = object.lockId !== undefined && object.lockId !== null ? Long.fromValue(object.lockId) : Long.UZERO;
     message.intermediaryAccount = object.intermediaryAccount ?? "";
+    return message;
+  }
+
+};
+
+function createBaseUnpoolWhitelistedPools(): UnpoolWhitelistedPools {
+  return {
+    ids: []
+  };
+}
+
+export const UnpoolWhitelistedPools = {
+  encode(message: UnpoolWhitelistedPools, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    writer.uint32(10).fork();
+
+    for (const v of message.ids) {
+      writer.uint64(v);
+    }
+
+    writer.ldelim();
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): UnpoolWhitelistedPools {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseUnpoolWhitelistedPools();
+
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        case 1:
+          if ((tag & 7) === 2) {
+            const end2 = reader.uint32() + reader.pos;
+
+            while (reader.pos < end2) {
+              message.ids.push((reader.uint64() as Long));
+            }
+          } else {
+            message.ids.push((reader.uint64() as Long));
+          }
+
+          break;
+
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+
+  fromJSON(object: any): UnpoolWhitelistedPools {
+    return {
+      ids: Array.isArray(object?.ids) ? object.ids.map((e: any) => Long.fromString(e)) : []
+    };
+  },
+
+  toJSON(message: UnpoolWhitelistedPools): unknown {
+    const obj: any = {};
+
+    if (message.ids) {
+      obj.ids = message.ids.map(e => (e || Long.UZERO).toString());
+    } else {
+      obj.ids = [];
+    }
+
+    return obj;
+  },
+
+  fromPartial(object: DeepPartial<UnpoolWhitelistedPools>): UnpoolWhitelistedPools {
+    const message = createBaseUnpoolWhitelistedPools();
+    message.ids = object.ids?.map(e => Long.fromValue(e)) || [];
     return message;
   }
 

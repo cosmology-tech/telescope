@@ -62,11 +62,6 @@ export interface MsgJoinSwapExternAmountIn {
   sender: string;
   poolId: Long;
   tokenIn: Coin;
-
-  /**
-   * reserved 3;
-   * reserved "token_in";
-   */
   shareOutMinAmount: string;
 }
 export interface MsgJoinSwapExternAmountInResponse {
