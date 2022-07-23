@@ -4,7 +4,6 @@ import generate from '@babel/generator';
 import { getNestedProto, ProtoStore } from '@osmonauts/proto-parser';
 import { buildAllImports, getDepsFromMutations, getDepsFromQueries } from './imports';
 import { TelescopeParseContext } from './build';
-import { importNamespace, importStmt } from '@osmonauts/ast';
 import { TelescopeOptions, defaultTelescopeOptions, ProtoRef } from '@osmonauts/types';
 import { getRelativePath, variableSlug } from './utils';
 import { parse } from './parse';
@@ -15,17 +14,18 @@ import { sync as mkdirp } from 'mkdirp';
 import deepmerge from 'deepmerge';
 
 import {
+    importNamespace,
+    importStmt,
     makeLCDClient,
+    createRpcClientClass,
+    createRpcClientInterface,
     recursiveModuleBundle,
     GenericParseContext,
-    createClient,
+    createStargateClient,
     AminoParseContext
 } from '@osmonauts/ast';
-
-import {
-    camel,
-    pascal
-} from 'case';
+import { camel } from '@osmonauts/utils';
+import { pascal } from 'case';
 
 const version = process.env.NODE_ENV === 'test' ? 'latest' : pkg.version;
 
@@ -89,6 +89,7 @@ export class TelescopeBuilder {
                     .concat(importStmts)
                     ;
 
+                // package var
                 if (context.options.includePackageVar) {
                     prog.push(t.exportNamedDeclaration(t.variableDeclaration('const', [
                         t.variableDeclarator(
@@ -98,6 +99,7 @@ export class TelescopeBuilder {
                     ])))
                 }
 
+                // body
                 prog.push.apply(prog, context.body);
 
                 const filename = ref.filename.replace(/\.proto/, '.ts');
@@ -110,7 +112,6 @@ export class TelescopeBuilder {
                 } else {
                     writeFileSync(out, `export {}`);
                 }
-
 
                 return context;
             });
@@ -128,6 +129,7 @@ export class TelescopeBuilder {
 
                 const localname = c.ref.filename.replace(/\.proto$/, '.amino.ts');
                 const filename = resolve(join(this.outPath, localname));
+
                 // FRESH new context
                 const ctx = new TelescopeParseContext(
                     c.ref,
@@ -307,6 +309,156 @@ export class TelescopeBuilder {
 
             }).filter(Boolean);
 
+            const rpcQueryContexts = packageContexts.map(c => {
+
+                if (!this.options.includeRpcClients) {
+                    return;
+                }
+
+                // FRESH new context
+
+                const ctx = new TelescopeParseContext(
+                    c.ref,
+                    c.store,
+                    this.options
+                );
+
+                // get mutations, services
+                parse(ctx);
+
+                const proto = getNestedProto(c.ref.traversed);
+
+                let name, getImportsFrom;
+                if (
+                    (!proto?.Query ||
+                        proto.Query?.type !== 'Service') &&
+                    (!proto?.Service ||
+                        proto.Service?.type !== 'Service')
+                ) {
+                    return;
+                }
+
+
+                if (proto.Query) {
+                    name = 'query';
+                    getImportsFrom = ctx.queries;
+                } else if (proto.Service) {
+                    name = 'svc';
+                    getImportsFrom = ctx.services;
+                }
+
+
+                const localname = c.ref.filename.replace(/\.proto$/, `.rpc.${name}.ts`)
+                const filename = resolve(join(this.outPath, localname));
+
+                const asts = [];
+                if (proto.Query) {
+                    asts.push(createRpcClientInterface(ctx.generic, proto.Query))
+                    asts.push(createRpcClientClass(ctx.generic, proto.Query))
+                }
+                if (proto.Service) {
+                    asts.push(createRpcClientInterface(ctx.generic, proto.Service))
+                    asts.push(createRpcClientClass(ctx.generic, proto.Service))
+                }
+                ////////
+
+                const serviceImports = getDepsFromQueries(
+                    getImportsFrom,
+                    localname
+                );
+
+                // TODO we do NOT need all imports...
+                const imports = buildAllImports(ctx, serviceImports, localname);
+                const prog = []
+                    .concat(imports)
+                    .concat(ctx.body)
+                    .concat(asts);
+
+                const ast = t.program(prog);
+                const content = generate(ast).code;
+                mkdirp(dirname(filename));
+                writeFileSync(filename, content);
+
+                // add to bundle
+                createFileBundle(
+                    c.ref.proto.package,
+                    localname,
+                    bundle.bundleFile,
+                    bundle.importPaths,
+                    bundle.bundleVariables
+                );
+
+                return {
+                    localname,
+                    filename
+                };
+
+            }).filter(Boolean);
+
+            const rpcMsgContexts = mutationContexts.map(c => {
+
+                if (!this.options.includeRpcClients) {
+                    return;
+                }
+
+                const localname = c.ref.filename.replace(/\.proto$/, '.rpc.msg.ts')
+                const filename = resolve(join(this.outPath, localname));
+                // FRESH new context
+
+                const ctx = new TelescopeParseContext(
+                    c.ref,
+                    c.store,
+                    this.options
+                );
+
+                // get mutations, services
+                parse(ctx);
+
+                const proto = getNestedProto(c.ref.traversed);
+                // hard-coding, for now, only Msg service
+                if (!proto?.Msg || proto.Msg?.type !== 'Service') {
+                    return;
+                }
+
+                ////////
+                const asts = [];
+                asts.push(createRpcClientInterface(ctx.generic, proto.Msg))
+                asts.push(createRpcClientClass(ctx.generic, proto.Msg))
+                ////////
+
+                const serviceImports = getDepsFromQueries(
+                    ctx.mutations,
+                    localname
+                );
+
+                // TODO we do NOT need all imports...
+                const imports = buildAllImports(ctx, serviceImports, localname);
+                const prog = []
+                    .concat(imports)
+                    .concat(ctx.body)
+                    .concat(asts);
+
+                const ast = t.program(prog);
+                const content = generate(ast).code;
+                mkdirp(dirname(filename));
+                writeFileSync(filename, content);
+
+                // add to bundle
+                createFileBundle(
+                    c.ref.proto.package,
+                    localname,
+                    bundle.bundleFile,
+                    bundle.importPaths,
+                    bundle.bundleVariables
+                );
+
+                return {
+                    localname,
+                    filename
+                };
+
+            }).filter(Boolean);
+
             // [x] write out one client for each base package, referencing the last two steps
 
             if (registries.length) {
@@ -347,7 +499,7 @@ export class TelescopeBuilder {
                 });
 
                 const name = 'getSigning' + pascal(bundle.base + 'Client');
-                const clientBody = createClient({
+                const clientBody = createStargateClient({
                     context: ctx,
                     name,
                     registries: registryVariables,

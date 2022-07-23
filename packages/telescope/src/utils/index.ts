@@ -1,5 +1,5 @@
 import { ProtoRoot, ProtoRef } from '@osmonauts/types';
-import { camel } from 'case';
+import { camel } from '@osmonauts/utils';
 import { relative, dirname, extname } from 'path';
 
 export const getRoot = (ref: ProtoRef): ProtoRoot => {
@@ -38,6 +38,7 @@ export const UTILS = {
     base64FromBytes: '@osmonauts/helpers',
     _m0: { type: 'namespace', path: 'protobufjs/minimal', name: '_m0' },
     Exact: '@osmonauts/helpers',
+    Rpc: '@osmonauts/helpers',
     LCDClient: '@osmonauts/lcd',
     DeepPartial: '@osmonauts/helpers'
 };

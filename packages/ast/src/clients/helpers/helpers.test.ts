@@ -1,3 +1,5 @@
+import { getGenericParseContext, expectCode } from '../../../test-utils'
+
 import {
     addEncodedMethod,
     addFromPartialMethod,
@@ -6,7 +8,6 @@ import {
     addToJSONMethod,
     createHelperObject,
 } from './helpers';
-import generate from '@babel/generator';
 
 import { Mutation } from '../../types'
 
@@ -22,18 +23,6 @@ export const mutations: Mutation[] = [
         TypeName: 'MsgExitPool'
     }
 ];
-
-
-const expectCode = (ast) => {
-    expect(
-        generate(ast).code
-    ).toMatchSnapshot();
-}
-const printCode = (ast) => {
-    console.log(
-        generate(ast).code
-    );
-}
 
 it('addEncodedMethod', async () => {
     expectCode(addEncodedMethod(mutations[0]));
@@ -56,5 +45,6 @@ it('addJsonMethod', async () => {
 });
 
 it('createHelperObject', async () => {
-    expectCode(createHelperObject({ name: 'MessageComposer', mutations }));
+    const context = getGenericParseContext()
+    expectCode(createHelperObject({ context, name: 'MessageComposer', mutations }));
 });

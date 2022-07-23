@@ -1,6 +1,6 @@
 import * as t from '@babel/types';
 import { ProtoType, ProtoField } from '@osmonauts/types';
-import { identifier, tsPropertySignature, functionDeclaration, commentBlock, renderNameSafely } from '../../utils';
+import { identifier, tsPropertySignature, functionDeclaration, makeCommentBlock, renderNameSafely } from '../../utils';
 import { ProtoParseContext } from '../context';
 
 import {
@@ -82,12 +82,12 @@ export const createProtoType = (
                 const comments = [];
                 if (field.comment) {
                     comments.push(
-                        commentBlock(field.comment)
+                        makeCommentBlock(field.comment)
                     );
                 }
                 if (field.options?.deprecated) {
                     comments.push(
-                        commentBlock('@deprecated')
+                        makeCommentBlock('@deprecated')
                     );
                 }
                 if (comments.length) {
@@ -103,11 +103,11 @@ export const createProtoType = (
     const comments = [];
 
     if (proto.comment) {
-        comments.push(commentBlock(proto.comment));
+        comments.push(makeCommentBlock(proto.comment));
     }
 
     if (proto.options?.deprecated) {
-        comments.push(commentBlock('@deprecated'));
+        comments.push(makeCommentBlock('@deprecated'));
     }
 
     if (comments.length) {

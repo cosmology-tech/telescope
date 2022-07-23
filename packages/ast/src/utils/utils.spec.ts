@@ -1,14 +1,7 @@
 import { recursiveNamespace, renderNameSafely } from './utils';
-import { createClient } from '../client/client';
-import generate from '@babel/generator';
-import { getGenericParseContext, getGenericParseContextWithRef } from '../../test-utils';
+import { createStargateClient } from '../clients/stargate';
+import { getGenericParseContextWithRef, expectCode } from '../../test-utils';
 import { ProtoRef } from '@osmonauts/types';
-
-const expectCode = (ast) => {
-    expect(
-        generate(ast).code
-    ).toMatchSnapshot();
-}
 
 it('recursiveNamespace', async () => {
     const ref: ProtoRef = {
@@ -22,8 +15,7 @@ it('recursiveNamespace', async () => {
     }
     expectCode(
         recursiveNamespace(['osmosis', 'gamm', 'v1beta', 'pools'].reverse(), [
-
-            createClient({
+            createStargateClient({
                 context: getGenericParseContextWithRef(ref),
                 name: 'getSigningOsmosisClient',
                 registries: [

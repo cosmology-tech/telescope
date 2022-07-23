@@ -1,17 +1,15 @@
 import { AminoExceptions, DEFAULT_AMINO_EXCEPTIONS } from "./aminos";
-import { camel, snake } from 'case';
+import { snake } from 'case';
+import { camel } from '@osmonauts/utils';
 interface TelescopeOpts {
-    includeAminos?: boolean;
-    includeLCDClient?: boolean;
-
     aminoCasingFn?: Function;
     aminoExceptions?: AminoExceptions;
-
-    // should the signing client include defaults
-    signingClientDefaults?: boolean;
-
+    camelRpcMethods?: boolean;
+    includeAminos?: boolean;
+    includeLCDClient?: boolean;
     includePackageVar?: boolean;
-
+    includeRpcClients?: boolean;
+    signingClientDefaults?: boolean;
     useDate?: 'date' | 'timestamp';
     useDuration?: 'duration' | 'string';
     useExact?: boolean;
@@ -30,6 +28,8 @@ export const defaultTelescopeOptions: TelescopeOptions = {
     includeLCDClient: false,
     signingClientDefaults: true,
     includePackageVar: false,
+    includeRpcClients: false,
+    camelRpcMethods: true,
     useDate: 'date',
     useDuration: 'duration',
     useExact: false,
