@@ -22,6 +22,7 @@ export interface TelescopeParseContext {
     body: any[];
     mutations: ServiceMutation[];
     queries: any[];
+    services: any[];
     types: any[];
 }
 export declare class TelescopeParseContext implements TelescopeParseContext {
@@ -30,6 +31,7 @@ export declare class TelescopeParseContext implements TelescopeParseContext {
     addType(name: string, obj: any, isNested: boolean): void;
     addMutation(mutation: ServiceMutation): void;
     addQuery(query: ServiceQuery): void;
+    addService(query: any): void;
     buildBase(): void;
     buildRegistry(): void;
     buildRegistryLoader(): void;
