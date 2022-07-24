@@ -13,7 +13,7 @@ export class LCDQueryClient extends LCDClient {
 
   /* Params queries the parameters of slashing module */
   async params(params: QueryParamsRequest): Promise<QueryParamsResponse> {
-    const endpoint = `cosmos/slashing/v1beta1/params/`;
+    const endpoint = `cosmos/slashing/v1beta1/params`;
     return await this.request(endpoint);
   }
 
@@ -41,7 +41,7 @@ export class LCDQueryClient extends LCDClient {
       options.params.pagination = params.pagination;
     }
 
-    const endpoint = `cosmos/slashing/v1beta1/signing_infos/`;
+    const endpoint = `cosmos/slashing/v1beta1/signing_infos`;
     return await this.request(endpoint, options);
   }
 

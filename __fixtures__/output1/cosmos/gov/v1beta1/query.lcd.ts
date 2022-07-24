@@ -47,7 +47,7 @@ export class LCDQueryClient extends LCDClient {
       options.params.pagination = params.pagination;
     }
 
-    const endpoint = `cosmos/gov/v1beta1/proposals/`;
+    const endpoint = `cosmos/gov/v1beta1/proposals`;
     return await this.request(endpoint, options);
   }
 

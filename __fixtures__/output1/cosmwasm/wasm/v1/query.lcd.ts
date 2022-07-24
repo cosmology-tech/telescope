@@ -115,7 +115,7 @@ export class LCDQueryClient extends LCDClient {
       options.params.pagination = params.pagination;
     }
 
-    const endpoint = `cosmwasm/wasm/v1/code/`;
+    const endpoint = `cosmwasm/wasm/v1/code`;
     return await this.request(endpoint, options);
   }
 
@@ -129,7 +129,7 @@ export class LCDQueryClient extends LCDClient {
       options.params.pagination = params.pagination;
     }
 
-    const endpoint = `cosmwasm/wasm/v1/codes/pinned/`;
+    const endpoint = `cosmwasm/wasm/v1/codes/pinned`;
     return await this.request(endpoint, options);
   }
 

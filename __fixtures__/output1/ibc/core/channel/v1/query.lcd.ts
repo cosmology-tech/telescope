@@ -41,7 +41,7 @@ export class LCDQueryClient extends LCDClient {
       options.params.pagination = params.pagination;
     }
 
-    const endpoint = `ibc/core/channel/v1/channels/`;
+    const endpoint = `ibc/core/channel/v1/channels`;
     return await this.request(endpoint, options);
   }
 

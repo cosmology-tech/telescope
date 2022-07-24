@@ -25,7 +25,7 @@ export class LCDQueryClient extends LCDClient {
       options.params.pagination = params.pagination;
     }
 
-    const endpoint = `cosmos/staking/v1beta1/validators/`;
+    const endpoint = `cosmos/staking/v1beta1/validators`;
     return await this.request(endpoint, options);
   }
 
@@ -225,13 +225,13 @@ export class LCDQueryClient extends LCDClient {
 
   /* Pool queries the pool info. */
   async pool(params: QueryPoolRequest): Promise<QueryPoolResponse> {
-    const endpoint = `cosmos/staking/v1beta1/pool/`;
+    const endpoint = `cosmos/staking/v1beta1/pool`;
     return await this.request(endpoint);
   }
 
   /* Parameters queries the staking parameters. */
   async params(params: QueryParamsRequest): Promise<QueryParamsResponse> {
-    const endpoint = `cosmos/staking/v1beta1/params/`;
+    const endpoint = `cosmos/staking/v1beta1/params`;
     return await this.request(endpoint);
   }
 

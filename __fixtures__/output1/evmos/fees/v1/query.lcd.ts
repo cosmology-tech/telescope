@@ -22,7 +22,7 @@ export class LCDQueryClient extends LCDClient {
       options.params.pagination = params.pagination;
     }
 
-    const endpoint = `evmos/fees/v1/fees/`;
+    const endpoint = `evmos/fees/v1/fees`;
     return await this.request(endpoint, options);
   }
 
@@ -42,7 +42,7 @@ export class LCDQueryClient extends LCDClient {
 
   /* Params retrieves the fees module params */
   async params(params: QueryParamsRequest): Promise<QueryParamsResponse> {
-    const endpoint = `evmos/fees/v1/params/`;
+    const endpoint = `evmos/fees/v1/params`;
     return await this.request(endpoint);
   }
 

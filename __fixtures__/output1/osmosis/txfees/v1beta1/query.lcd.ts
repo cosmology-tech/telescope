@@ -14,7 +14,7 @@ export class LCDQueryClient extends LCDClient {
   corresponding pools It does not include the BaseDenom, which has its own
   query endpoint */
   async feeTokens(params: QueryFeeTokensRequest): Promise<QueryFeeTokensResponse> {
-    const endpoint = `osmosis/txfees/v1beta1/fee_tokens/`;
+    const endpoint = `osmosis/txfees/v1beta1/fee_tokens`;
     return await this.request(endpoint);
   }
 
@@ -28,7 +28,7 @@ export class LCDQueryClient extends LCDClient {
       options.params.denom = params.denom;
     }
 
-    const endpoint = `osmosis/txfees/v1beta1/spot_price_by_denom/`;
+    const endpoint = `osmosis/txfees/v1beta1/spot_price_by_denom`;
     return await this.request(endpoint, options);
   }
 
@@ -40,7 +40,7 @@ export class LCDQueryClient extends LCDClient {
 
   /* BaseDenom */
   async baseDenom(params: QueryBaseDenomRequest): Promise<QueryBaseDenomResponse> {
-    const endpoint = `osmosis/txfees/v1beta1/base_denom/`;
+    const endpoint = `osmosis/txfees/v1beta1/base_denom`;
     return await this.request(endpoint);
   }
 

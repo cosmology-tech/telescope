@@ -23,7 +23,7 @@ export class LCDQueryClient extends LCDClient {
       options.params.pagination = params.pagination;
     }
 
-    const endpoint = `evmos/incentives/v1/incentives/`;
+    const endpoint = `evmos/incentives/v1/incentives`;
     return await this.request(endpoint, options);
   }
 
@@ -64,7 +64,7 @@ export class LCDQueryClient extends LCDClient {
       options.params.pagination = params.pagination;
     }
 
-    const endpoint = `evmos/incentives/v1/allocation_meters/`;
+    const endpoint = `evmos/incentives/v1/allocation_meters`;
     return await this.request(endpoint, options);
   }
 
@@ -76,7 +76,7 @@ export class LCDQueryClient extends LCDClient {
 
   /* Params retrieves the incentives module params */
   async params(params: QueryParamsRequest): Promise<QueryParamsResponse> {
-    const endpoint = `evmos/incentives/v1/params/`;
+    const endpoint = `evmos/incentives/v1/params`;
     return await this.request(endpoint);
   }
 

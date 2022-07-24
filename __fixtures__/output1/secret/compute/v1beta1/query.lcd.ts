@@ -62,7 +62,7 @@ export class LCDQueryClient extends LCDClient {
 
   /* Query all contract codes on-chain */
   async codes(params: google.protobuf.Empty): Promise<QueryCodesResponse> {
-    const endpoint = `compute/v1beta1/code/`;
+    const endpoint = `compute/v1beta1/code`;
     return await this.request(endpoint);
   }
 

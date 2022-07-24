@@ -63,7 +63,7 @@ exports[`AggregatedLCDClient 1`] = `
       options.params.pagination = params.pagination;
     }
 
-    const endpoint = \`cosmos/bank/v1beta1/supply/\`;
+    const endpoint = \`cosmos/bank/v1beta1/supply\`;
     return await this.request(endpoint, options);
   }
 
@@ -77,13 +77,13 @@ exports[`AggregatedLCDClient 1`] = `
       options.params.denom = params.denom;
     }
 
-    const endpoint = \`cosmos/bank/v1beta1/supply/by_denom/\`;
+    const endpoint = \`cosmos/bank/v1beta1/supply/by_denom\`;
     return await this.request(endpoint, options);
   }
 
   /* Params queries the parameters of x/bank module. */
   async params(params: QueryParamsRequest): Promise<QueryParamsResponse> {
-    const endpoint = \`cosmos/bank/v1beta1/params/\`;
+    const endpoint = \`cosmos/bank/v1beta1/params\`;
     return await this.request(endpoint);
   }
 
@@ -104,7 +104,7 @@ exports[`AggregatedLCDClient 1`] = `
       options.params.pagination = params.pagination;
     }
 
-    const endpoint = \`cosmos/bank/v1beta1/denoms_metadata/\`;
+    const endpoint = \`cosmos/bank/v1beta1/denoms_metadata\`;
     return await this.request(endpoint, options);
   }
 
@@ -133,19 +133,19 @@ exports[`AggregatedLCDClient 1`] = `
       options.params.pagination = params.pagination;
     }
 
-    const endpoint = \`osmosis/gamm/v1beta1/pools/\`;
+    const endpoint = \`osmosis/gamm/v1beta1/pools\`;
     return await this.request(endpoint, options);
   }
 
   /* NumPools */
   async numPools(params: QueryNumPoolsRequest): Promise<QueryNumPoolsResponse> {
-    const endpoint = \`osmosis/gamm/v1beta1/num_pools/\`;
+    const endpoint = \`osmosis/gamm/v1beta1/num_pools\`;
     return await this.request(endpoint);
   }
 
   /* TotalLiquidity */
   async totalLiquidity(params: QueryTotalLiquidityRequest): Promise<QueryTotalLiquidityResponse> {
-    const endpoint = \`osmosis/gamm/v1beta1/total_liquidity/\`;
+    const endpoint = \`osmosis/gamm/v1beta1/total_liquidity\`;
     return await this.request(endpoint);
   }
 
@@ -302,7 +302,7 @@ exports[`cosmos LCDClient 1`] = `
       options.params.pagination = params.pagination;
     }
 
-    const endpoint = \`cosmos/bank/v1beta1/supply/\`;
+    const endpoint = \`cosmos/bank/v1beta1/supply\`;
     return await this.request(endpoint, options);
   }
 
@@ -316,13 +316,13 @@ exports[`cosmos LCDClient 1`] = `
       options.params.denom = params.denom;
     }
 
-    const endpoint = \`cosmos/bank/v1beta1/supply/by_denom/\`;
+    const endpoint = \`cosmos/bank/v1beta1/supply/by_denom\`;
     return await this.request(endpoint, options);
   }
 
   /* Params queries the parameters of x/bank module. */
   async params(params: QueryParamsRequest): Promise<QueryParamsResponse> {
-    const endpoint = \`cosmos/bank/v1beta1/params/\`;
+    const endpoint = \`cosmos/bank/v1beta1/params\`;
     return await this.request(endpoint);
   }
 
@@ -343,7 +343,7 @@ exports[`cosmos LCDClient 1`] = `
       options.params.pagination = params.pagination;
     }
 
-    const endpoint = \`cosmos/bank/v1beta1/denoms_metadata/\`;
+    const endpoint = \`cosmos/bank/v1beta1/denoms_metadata\`;
     return await this.request(endpoint, options);
   }
 
@@ -435,19 +435,19 @@ exports[`osmosis LCDClient 1`] = `
       options.params.pagination = params.pagination;
     }
 
-    const endpoint = \`osmosis/gamm/v1beta1/pools/\`;
+    const endpoint = \`osmosis/gamm/v1beta1/pools\`;
     return await this.request(endpoint, options);
   }
 
   /* NumPools */
   async numPools(params: QueryNumPoolsRequest): Promise<QueryNumPoolsResponse> {
-    const endpoint = \`osmosis/gamm/v1beta1/num_pools/\`;
+    const endpoint = \`osmosis/gamm/v1beta1/num_pools\`;
     return await this.request(endpoint);
   }
 
   /* TotalLiquidity */
   async totalLiquidity(params: QueryTotalLiquidityRequest): Promise<QueryTotalLiquidityResponse> {
-    const endpoint = \`osmosis/gamm/v1beta1/total_liquidity/\`;
+    const endpoint = \`osmosis/gamm/v1beta1/total_liquidity\`;
     return await this.request(endpoint);
   }
 

@@ -13,7 +13,7 @@ export class LCDQueryClient extends LCDClient {
 
   /* Params returns the total set of minting parameters. */
   async params(params: QueryParamsRequest): Promise<QueryParamsResponse> {
-    const endpoint = `osmosis/tokenfactory/v1beta1/params/`;
+    const endpoint = `osmosis/tokenfactory/v1beta1/params`;
     return await this.request(endpoint);
   }
 

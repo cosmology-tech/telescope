@@ -13,13 +13,13 @@ export class LCDQueryClient extends LCDClient {
 
   /* Returns the key used for transactions */
   async txKey(params: google.protobuf.Empty): Promise<Key> {
-    const endpoint = `registration/v1beta1/tx-key/`;
+    const endpoint = `registration/v1beta1/tx-key`;
     return await this.request(endpoint);
   }
 
   /* Returns the key used for registration */
   async registrationKey(params: google.protobuf.Empty): Promise<Key> {
-    const endpoint = `registration/v1beta1/registration-key/`;
+    const endpoint = `registration/v1beta1/registration-key`;
     return await this.request(endpoint);
   }
 
