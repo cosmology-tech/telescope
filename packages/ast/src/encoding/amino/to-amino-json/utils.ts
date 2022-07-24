@@ -153,6 +153,7 @@ export const toAmino = {
     },
 
     coin(args: ToAminoParseField) {
+        args.context.addUtil('Long');
         const value = t.objectExpression([
             t.objectProperty(t.identifier('denom'), t.memberExpression(
                 memberExpressionOrIdentifier(args.scope),
