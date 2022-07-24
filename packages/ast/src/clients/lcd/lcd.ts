@@ -159,7 +159,6 @@ export const makeTemplateTag = (info: ProtoServiceMethodInfo) => {
     const parts = getUrlTemplateString(info.url);
     const templateElts = parts.strs.map(raw => t.templateElement({ raw }))
 
-
     // Number of TemplateLiteral quasis should be exactly one more than the number of expressions
 
     const pathParams = info.pathParams.map(param => {
@@ -178,6 +177,12 @@ export const makeTemplateTag = (info: ProtoServiceMethodInfo) => {
         templateElts.push(t.templateElement({ raw: '' }));
     }
 
+    templateElts.forEach((el, n) => {
+        if (n === templateElts.length - 1) {
+            // remove trailing slash...
+            el.value.raw = el.value.raw.replace(/\/$/, '');
+        }
+    });
 
     return t.templateLiteral(
         templateElts,
