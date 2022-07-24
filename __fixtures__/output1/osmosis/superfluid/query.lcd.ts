@@ -16,7 +16,7 @@ export class LCDQueryClient extends LCDClient {
 
   /* Params returns the total set of minting parameters. */
   async params(params: QueryParamsRequest): Promise<QueryParamsResponse> {
-    const endpoint = `osmosis/superfluid/v1beta1/params/`;
+    const endpoint = `osmosis/superfluid/v1beta1/params`;
     return await this.request(endpoint);
   }
 
@@ -30,13 +30,13 @@ export class LCDQueryClient extends LCDClient {
       options.params.denom = params.denom;
     }
 
-    const endpoint = `osmosis/superfluid/v1beta1/asset_type/`;
+    const endpoint = `osmosis/superfluid/v1beta1/asset_type`;
     return await this.request(endpoint, options);
   }
 
   /* Returns all superfluid asset types */
   async allAssets(params: AllAssetsRequest): Promise<AllAssetsResponse> {
-    const endpoint = `osmosis/superfluid/v1beta1/all_assets/`;
+    const endpoint = `osmosis/superfluid/v1beta1/all_assets`;
     return await this.request(endpoint);
   }
 
@@ -50,7 +50,7 @@ export class LCDQueryClient extends LCDClient {
       options.params.denom = params.denom;
     }
 
-    const endpoint = `osmosis/superfluid/v1beta1/asset_multiplier/`;
+    const endpoint = `osmosis/superfluid/v1beta1/asset_multiplier`;
     return await this.request(endpoint, options);
   }
 
@@ -64,7 +64,7 @@ export class LCDQueryClient extends LCDClient {
       options.params.pagination = params.pagination;
     }
 
-    const endpoint = `osmosis/superfluid/v1beta1/all_intermediary_accounts/`;
+    const endpoint = `osmosis/superfluid/v1beta1/all_intermediary_accounts`;
     return await this.request(endpoint, options);
   }
 
@@ -85,7 +85,7 @@ export class LCDQueryClient extends LCDClient {
   /* Returns the total amount of osmo superfluidly staked
   response denominated in uosmo */
   async totalSuperfluidDelegations(params: TotalSuperfluidDelegationsRequest): Promise<TotalSuperfluidDelegationsResponse> {
-    const endpoint = `osmosis/superfluid/v1beta1/all_superfluid_delegations/`;
+    const endpoint = `osmosis/superfluid/v1beta1/all_superfluid_delegations`;
     return await this.request(endpoint);
   }
 
@@ -108,7 +108,7 @@ export class LCDQueryClient extends LCDClient {
       options.params.denom = params.denom;
     }
 
-    const endpoint = `osmosis/superfluid/v1beta1/superfluid_delegation_amount/`;
+    const endpoint = `osmosis/superfluid/v1beta1/superfluid_delegation_amount`;
     return await this.request(endpoint, options);
   }
 
@@ -159,7 +159,7 @@ export class LCDQueryClient extends LCDClient {
       options.params.denom = params.denom;
     }
 
-    const endpoint = `osmosis/superfluid/v1beta1/superfluid_delegations_by_validator_denom/`;
+    const endpoint = `osmosis/superfluid/v1beta1/superfluid_delegations_by_validator_denom`;
     return await this.request(endpoint, options);
   }
 
@@ -179,7 +179,7 @@ export class LCDQueryClient extends LCDClient {
       options.params.denom = params.denom;
     }
 
-    const endpoint = `osmosis/superfluid/v1beta1/estimate_superfluid_delegation_amount_by_validator_denom/`;
+    const endpoint = `osmosis/superfluid/v1beta1/estimate_superfluid_delegation_amount_by_validator_denom`;
     return await this.request(endpoint, options);
   }
 

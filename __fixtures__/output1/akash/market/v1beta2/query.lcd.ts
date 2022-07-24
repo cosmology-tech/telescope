@@ -28,7 +28,7 @@ export class LCDQueryClient extends LCDClient {
       options.params.pagination = params.pagination;
     }
 
-    const endpoint = `akash/market/v1beta2/orders/list/`;
+    const endpoint = `akash/market/v1beta2/orders/list`;
     return await this.request(endpoint, options);
   }
 
@@ -42,7 +42,7 @@ export class LCDQueryClient extends LCDClient {
       options.params.id = params.id;
     }
 
-    const endpoint = `akash/market/v1beta2/orders/info/`;
+    const endpoint = `akash/market/v1beta2/orders/info`;
     return await this.request(endpoint, options);
   }
 
@@ -60,7 +60,7 @@ export class LCDQueryClient extends LCDClient {
       options.params.pagination = params.pagination;
     }
 
-    const endpoint = `akash/market/v1beta2/bids/list/`;
+    const endpoint = `akash/market/v1beta2/bids/list`;
     return await this.request(endpoint, options);
   }
 
@@ -74,7 +74,7 @@ export class LCDQueryClient extends LCDClient {
       options.params.id = params.id;
     }
 
-    const endpoint = `akash/market/v1beta2/bids/info/`;
+    const endpoint = `akash/market/v1beta2/bids/info`;
     return await this.request(endpoint, options);
   }
 
@@ -92,7 +92,7 @@ export class LCDQueryClient extends LCDClient {
       options.params.pagination = params.pagination;
     }
 
-    const endpoint = `akash/market/v1beta2/leases/list/`;
+    const endpoint = `akash/market/v1beta2/leases/list`;
     return await this.request(endpoint, options);
   }
 
@@ -106,7 +106,7 @@ export class LCDQueryClient extends LCDClient {
       options.params.id = params.id;
     }
 
-    const endpoint = `akash/market/v1beta2/leases/info/`;
+    const endpoint = `akash/market/v1beta2/leases/info`;
     return await this.request(endpoint, options);
   }
 

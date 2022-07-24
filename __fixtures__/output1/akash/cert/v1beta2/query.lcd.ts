@@ -25,7 +25,7 @@ export class LCDQueryClient extends LCDClient {
       options.params.pagination = params.pagination;
     }
 
-    const endpoint = `akash/cert/v1beta2/certificates/list/`;
+    const endpoint = `akash/cert/v1beta2/certificates/list`;
     return await this.request(endpoint, options);
   }
 

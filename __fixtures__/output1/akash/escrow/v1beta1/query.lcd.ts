@@ -39,7 +39,7 @@ export class LCDQueryClient extends LCDClient {
       options.params.pagination = params.pagination;
     }
 
-    const endpoint = `akash/escrow/v1beta1/types/accounts/list/`;
+    const endpoint = `akash/escrow/v1beta1/types/accounts/list`;
     return await this.request(endpoint, options);
   }
 
@@ -75,7 +75,7 @@ export class LCDQueryClient extends LCDClient {
       options.params.pagination = params.pagination;
     }
 
-    const endpoint = `akash/escrow/v1beta1/types/payments/list/`;
+    const endpoint = `akash/escrow/v1beta1/types/payments/list`;
     return await this.request(endpoint, options);
   }
 

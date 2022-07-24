@@ -23,19 +23,19 @@ export class LCDQueryClient extends LCDClient {
       options.params.pagination = params.pagination;
     }
 
-    const endpoint = `osmosis/gamm/v1beta1/pools/`;
+    const endpoint = `osmosis/gamm/v1beta1/pools`;
     return await this.request(endpoint, options);
   }
 
   /* NumPools */
   async numPools(params: QueryNumPoolsRequest): Promise<QueryNumPoolsResponse> {
-    const endpoint = `osmosis/gamm/v1beta1/num_pools/`;
+    const endpoint = `osmosis/gamm/v1beta1/num_pools`;
     return await this.request(endpoint);
   }
 
   /* TotalLiquidity */
   async totalLiquidity(params: QueryTotalLiquidityRequest): Promise<QueryTotalLiquidityResponse> {
-    const endpoint = `osmosis/gamm/v1beta1/total_liquidity/`;
+    const endpoint = `osmosis/gamm/v1beta1/total_liquidity`;
     return await this.request(endpoint);
   }
 

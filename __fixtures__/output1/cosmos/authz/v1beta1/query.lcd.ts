@@ -33,7 +33,7 @@ export class LCDQueryClient extends LCDClient {
       options.params.pagination = params.pagination;
     }
 
-    const endpoint = `cosmos/authz/v1beta1/grants/`;
+    const endpoint = `cosmos/authz/v1beta1/grants`;
     return await this.request(endpoint, options);
   }
 

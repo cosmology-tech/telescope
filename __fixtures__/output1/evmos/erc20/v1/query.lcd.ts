@@ -22,7 +22,7 @@ export class LCDQueryClient extends LCDClient {
       options.params.pagination = params.pagination;
     }
 
-    const endpoint = `evmos/erc20/v1/token_pairs/`;
+    const endpoint = `evmos/erc20/v1/token_pairs`;
     return await this.request(endpoint, options);
   }
 
@@ -34,7 +34,7 @@ export class LCDQueryClient extends LCDClient {
 
   /* Params retrieves the erc20 module params */
   async params(params: QueryParamsRequest): Promise<QueryParamsResponse> {
-    const endpoint = `evmos/erc20/v1/params/`;
+    const endpoint = `evmos/erc20/v1/params`;
     return await this.request(endpoint);
   }
 

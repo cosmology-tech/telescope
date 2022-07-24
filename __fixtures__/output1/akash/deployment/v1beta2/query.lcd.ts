@@ -28,7 +28,7 @@ export class LCDQueryClient extends LCDClient {
       options.params.pagination = params.pagination;
     }
 
-    const endpoint = `akash/deployment/v1beta2/deployments/list/`;
+    const endpoint = `akash/deployment/v1beta2/deployments/list`;
     return await this.request(endpoint, options);
   }
 
@@ -42,7 +42,7 @@ export class LCDQueryClient extends LCDClient {
       options.params.id = params.id;
     }
 
-    const endpoint = `akash/deployment/v1beta2/deployments/info/`;
+    const endpoint = `akash/deployment/v1beta2/deployments/info`;
     return await this.request(endpoint, options);
   }
 
@@ -56,7 +56,7 @@ export class LCDQueryClient extends LCDClient {
       options.params.id = params.id;
     }
 
-    const endpoint = `akash/deployment/v1beta2/groups/info/`;
+    const endpoint = `akash/deployment/v1beta2/groups/info`;
     return await this.request(endpoint, options);
   }
 

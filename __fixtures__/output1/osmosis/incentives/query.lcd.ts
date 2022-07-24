@@ -15,13 +15,13 @@ export class LCDQueryClient extends LCDClient {
 
   /* returns coins that is going to be distributed */
   async moduleToDistributeCoins(params: ModuleToDistributeCoinsRequest): Promise<ModuleToDistributeCoinsResponse> {
-    const endpoint = `osmosis/incentives/v1beta1/module_to_distribute_coins/`;
+    const endpoint = `osmosis/incentives/v1beta1/module_to_distribute_coins`;
     return await this.request(endpoint);
   }
 
   /* returns coins that are distributed by module so far */
   async moduleDistributedCoins(params: ModuleDistributedCoinsRequest): Promise<ModuleDistributedCoinsResponse> {
-    const endpoint = `osmosis/incentives/v1beta1/module_distributed_coins/`;
+    const endpoint = `osmosis/incentives/v1beta1/module_distributed_coins`;
     return await this.request(endpoint);
   }
 
@@ -41,7 +41,7 @@ export class LCDQueryClient extends LCDClient {
       options.params.pagination = params.pagination;
     }
 
-    const endpoint = `osmosis/incentives/v1beta1/gauges/`;
+    const endpoint = `osmosis/incentives/v1beta1/gauges`;
     return await this.request(endpoint, options);
   }
 
@@ -55,7 +55,7 @@ export class LCDQueryClient extends LCDClient {
       options.params.pagination = params.pagination;
     }
 
-    const endpoint = `osmosis/incentives/v1beta1/active_gauges/`;
+    const endpoint = `osmosis/incentives/v1beta1/active_gauges`;
     return await this.request(endpoint, options);
   }
 
@@ -73,7 +73,7 @@ export class LCDQueryClient extends LCDClient {
       options.params.pagination = params.pagination;
     }
 
-    const endpoint = `osmosis/incentives/v1beta1/active_gauges_per_denom/`;
+    const endpoint = `osmosis/incentives/v1beta1/active_gauges_per_denom`;
     return await this.request(endpoint, options);
   }
 
@@ -87,7 +87,7 @@ export class LCDQueryClient extends LCDClient {
       options.params.pagination = params.pagination;
     }
 
-    const endpoint = `osmosis/incentives/v1beta1/upcoming_gauges/`;
+    const endpoint = `osmosis/incentives/v1beta1/upcoming_gauges`;
     return await this.request(endpoint, options);
   }
 
@@ -105,7 +105,7 @@ export class LCDQueryClient extends LCDClient {
       options.params.pagination = params.pagination;
     }
 
-    const endpoint = `osmosis/incentives/v1beta1/upcoming_gauges_per_denom/`;
+    const endpoint = `osmosis/incentives/v1beta1/upcoming_gauges_per_denom`;
     return await this.request(endpoint, options);
   }
 
@@ -131,7 +131,7 @@ export class LCDQueryClient extends LCDClient {
 
   /* returns lockable durations that are valid to give incentives */
   async lockableDurations(params: QueryLockableDurationsRequest): Promise<QueryLockableDurationsResponse> {
-    const endpoint = `osmosis/incentives/v1beta1/lockable_durations/`;
+    const endpoint = `osmosis/incentives/v1beta1/lockable_durations`;
     return await this.request(endpoint);
   }
 

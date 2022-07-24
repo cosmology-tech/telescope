@@ -14,7 +14,7 @@ export class LCDQueryClient extends LCDClient {
 
   /* Params queries params of the distribution module. */
   async params(params: QueryParamsRequest): Promise<QueryParamsResponse> {
-    const endpoint = `cosmos/distribution/v1beta1/params/`;
+    const endpoint = `cosmos/distribution/v1beta1/params`;
     return await this.request(endpoint);
   }
 
@@ -135,7 +135,7 @@ export class LCDQueryClient extends LCDClient {
 
   /* CommunityPool queries the community pool coins. */
   async communityPool(params: QueryCommunityPoolRequest): Promise<QueryCommunityPoolResponse> {
-    const endpoint = `cosmos/distribution/v1beta1/community_pool/`;
+    const endpoint = `cosmos/distribution/v1beta1/community_pool`;
     return await this.request(endpoint);
   }
 

@@ -27,13 +27,13 @@ export class LCDQueryClient extends LCDClient {
       options.params.pagination = params.pagination;
     }
 
-    const endpoint = `ibc/apps/transfer/v1/denom_traces/`;
+    const endpoint = `ibc/apps/transfer/v1/denom_traces`;
     return await this.request(endpoint, options);
   }
 
   /* Params queries all parameters of the ibc-transfer module. */
   async params(params: QueryParamsRequest): Promise<QueryParamsResponse> {
-    const endpoint = `ibc/apps/transfer/v1/params/`;
+    const endpoint = `ibc/apps/transfer/v1/params`;
     return await this.request(endpoint);
   }
 

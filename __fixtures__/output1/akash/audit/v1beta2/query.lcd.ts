@@ -23,7 +23,7 @@ export class LCDQueryClient extends LCDClient {
       options.params.pagination = params.pagination;
     }
 
-    const endpoint = `akash/audit/v1beta2/audit/attributes/list/`;
+    const endpoint = `akash/audit/v1beta2/audit/attributes/list`;
     return await this.request(endpoint, options);
   }
 

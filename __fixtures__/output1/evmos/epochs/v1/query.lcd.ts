@@ -21,7 +21,7 @@ export class LCDQueryClient extends LCDClient {
       options.params.pagination = params.pagination;
     }
 
-    const endpoint = `evmos/epochs/v1/epochs/`;
+    const endpoint = `evmos/epochs/v1/epochs`;
     return await this.request(endpoint, options);
   }
 
@@ -35,7 +35,7 @@ export class LCDQueryClient extends LCDClient {
       options.params.identifier = params.identifier;
     }
 
-    const endpoint = `evmos/epochs/v1/current_epoch/`;
+    const endpoint = `evmos/epochs/v1/current_epoch`;
     return await this.request(endpoint, options);
   }
 

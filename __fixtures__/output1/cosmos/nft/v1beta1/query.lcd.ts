@@ -72,7 +72,7 @@ export class LCDQueryClient extends LCDClient {
       options.params.pagination = params.pagination;
     }
 
-    const endpoint = `cosmos/nft/v1beta1/nfts/`;
+    const endpoint = `cosmos/nft/v1beta1/nfts`;
     return await this.request(endpoint, options);
   }
 
@@ -114,7 +114,7 @@ export class LCDQueryClient extends LCDClient {
       options.params.pagination = params.pagination;
     }
 
-    const endpoint = `cosmos/nft/v1beta1/classes/`;
+    const endpoint = `cosmos/nft/v1beta1/classes`;
     return await this.request(endpoint, options);
   }
 

@@ -35,7 +35,7 @@ export class LCDQueryClient extends LCDClient {
       options.params.pagination = params.pagination;
     }
 
-    const endpoint = `cosmos/evidence/v1beta1/evidence/`;
+    const endpoint = `cosmos/evidence/v1beta1/evidence`;
     return await this.request(endpoint, options);
   }
 
