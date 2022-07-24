@@ -72,9 +72,3 @@ export class TelescopeBuilder {
         createIndex(this);
     }
 }
-
-export default (input: TelescopeInput) => {
-    const builder = new TelescopeBuilder(input);
-    builder.build();
-};
-
