@@ -1,5 +1,6 @@
 import { Coin } from "../../../cosmos/base/v1beta1/coin";
 import { AminoMsg } from "@cosmjs/amino";
+import { Long } from "@osmonauts/helpers";
 import { MsgCreateDenom, MsgMint, MsgBurn, MsgChangeAdmin } from "./tx";
 export interface AminoMsgCreateDenom extends AminoMsg {
   type: "osmosis/tokenfactory/create-denom";
