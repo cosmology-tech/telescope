@@ -116,7 +116,7 @@ export const makeAminoTypeInterface = ({
 
     const TypeName = proto.name;
     const typeUrl = getTypeUrl(context.ref.proto, proto);
-    const aminoType = typeUrlToAmino(typeUrl, context.options.exceptions);
+    const aminoType = typeUrlToAmino(context, typeUrl);
 
     const oneOfs = getOneOfs(proto);
     const fields = protoFieldsToArray(proto).map((field) => {

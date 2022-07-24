@@ -1,5 +1,6 @@
 import { Coin } from "../../../cosmos/base/v1beta1/coin";
 import { AminoMsg } from "@cosmjs/amino";
+import { Long } from "@osmonauts/helpers";
 import { MsgConvertCoin, MsgConvertERC20 } from "./tx";
 export interface AminoMsgConvertCoin extends AminoMsg {
   type: "/evmos.erc20.v1.MsgConvertCoin";

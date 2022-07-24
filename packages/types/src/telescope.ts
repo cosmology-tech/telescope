@@ -4,6 +4,7 @@ import { camel } from '@osmonauts/utils';
 interface TelescopeOpts {
     aminoCasingFn?: Function;
     aminoExceptions?: AminoExceptions;
+    aminoTypeUrl?: (typeUrl: string) => string | undefined;
     camelRpcMethods?: boolean;
     includeAminos?: boolean;
     includeLCDClients?: boolean;

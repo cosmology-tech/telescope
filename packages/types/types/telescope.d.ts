@@ -2,6 +2,7 @@ import { AminoExceptions } from "./aminos";
 interface TelescopeOpts {
     aminoCasingFn?: Function;
     aminoExceptions?: AminoExceptions;
+    aminoTypeUrl?: (typeUrl: string) => string | undefined;
     camelRpcMethods?: boolean;
     includeAminos?: boolean;
     includeLCDClients?: boolean;
