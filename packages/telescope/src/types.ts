@@ -1,3 +1,4 @@
+import { TelescopeOptions } from '@osmonauts/types';
 
 export interface ServiceInfo {
     methodName: string;
@@ -21,4 +22,10 @@ export interface ImportObj {
 }
 export interface ImportHash {
     [key: string]: string[];
+}
+
+export interface TelescopeInput {
+    protoDirs: string[];
+    outPath: string;
+    options: TelescopeOptions;
 }

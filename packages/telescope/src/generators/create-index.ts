@@ -1,11 +1,11 @@
-import * as t from '@babel/types';
-import pkg from '../../package.json';
-import { TelescopeBuilder } from '..';
-import generate from '@babel/generator';
-import { writeFileSync } from 'fs';
+import { getRelativePath } from '../utils';
 import { join, dirname } from 'path';
 import { sync as mkdirp } from 'mkdirp';
-import { getRelativePath } from '../utils';
+import { TelescopeBuilder } from '../builder';
+import { writeFileSync } from 'fs';
+import * as t from '@babel/types';
+import generate from '@babel/generator';
+import pkg from '../../package.json';
 
 const version = process.env.NODE_ENV === 'test' ? 'latest' : pkg.version;
 

@@ -1,4 +1,4 @@
-import { TelescopeBuilder } from '../src';
+import { TelescopeBuilder } from '../src/builder';
 import { ProtoStore } from '@osmonauts/proto-parser';
 import { defaultTelescopeOptions } from '@osmonauts/types';
 import { bundleBaseRegistries, bundleRegistries, parseContextsForRegistry } from '../src/bundle'

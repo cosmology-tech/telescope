@@ -1,9 +1,6 @@
-import * as t from '@babel/types';
-import { Bundler, TelescopeBuilder } from '..';
-import generate from '@babel/generator';
-import { writeFileSync } from 'fs';
+import { Bundler } from '../bundler';
+import { TelescopeBuilder } from '../builder';
 import { join, dirname, relative } from 'path';
-import { sync as mkdirp } from 'mkdirp';
 import {
     importNamespace,
     importStmt,
@@ -75,11 +72,7 @@ export const plugin = (
         .concat(converterImports)
         .concat(clientBody);
 
-    const cAst = t.program(cProg);
-    const cContent = generate(cAst).code;
-
     const clientOutFile = join(builder.outPath, clientFile);
-    mkdirp(dirname(clientOutFile));
-    writeFileSync(clientOutFile, cContent);
+    bundler.writeAst(cProg, clientOutFile);
 
 };

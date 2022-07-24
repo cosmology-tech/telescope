@@ -1,12 +1,11 @@
-import { Bundler, TelescopeBuilder } from '..';
 import * as t from '@babel/types';
+import { Bundler } from '../bundler';
+import { TelescopeBuilder } from '../builder';
 import { buildAllImports } from '../imports';
 import { parse } from '../parse';
-import generate from '@babel/generator';
 import { writeFileSync } from 'fs';
-import { join, dirname, resolve, relative } from 'path';
+import { dirname } from 'path';
 import { sync as mkdirp } from 'mkdirp';
-
 
 export const plugin = (
     builder: TelescopeBuilder,
@@ -42,15 +41,14 @@ export const plugin = (
         // body
         prog.push.apply(prog, context.body);
 
-        const filename = ref.filename.replace(/\.proto/, '.ts');
-        const out = join(builder.outPath, filename);
-        mkdirp(dirname(out));
+        const localname = bundler.getLocalFilename(ref);
+        const filename = bundler.getFilename(localname);
+
         if (context.body.length > 0) {
-            const ast = t.program(prog);
-            const gen = generate(ast);
-            writeFileSync(out, gen.code);
+            bundler.writeAst(prog, filename);
         } else {
-            writeFileSync(out, `export {}`);
+            mkdirp(dirname(filename));
+            writeFileSync(filename, `export {}`);
         }
 
         return context;

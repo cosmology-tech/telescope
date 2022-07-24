@@ -1,18 +1,9 @@
-import { Bundler, TelescopeBuilder } from '..';
-import * as t from '@babel/types';
 import { buildAllImports, getDepsFromQueries } from '../imports';
-import { parse } from '../parse';
-import generate from '@babel/generator';
-import { writeFileSync } from 'fs';
-import { join, dirname, resolve } from 'path';
-import { sync as mkdirp } from 'mkdirp';
-import { createFileBundle } from '../bundle';
-import { TelescopeParseContext } from '../build';
+import { Bundler } from '../bundler';
+import { createRpcClientClass, createRpcClientInterface } from '@osmonauts/ast';
 import { getNestedProto } from '@osmonauts/proto-parser';
-import {
-    createRpcClientClass,
-    createRpcClientInterface,
-} from '@osmonauts/ast';
+import { parse } from '../parse';
+import { TelescopeBuilder } from '../builder';
 
 export const plugin = (
     builder: TelescopeBuilder,
@@ -25,12 +16,7 @@ export const plugin = (
 
     bundler.contexts.map(c => {
 
-        // FRESH new context
-        const ctx = new TelescopeParseContext(
-            c.ref,
-            c.store,
-            builder.options
-        );
+        const ctx = bundler.getFreshContext(c);
 
         // get mutations, services
         parse(ctx);
@@ -47,7 +33,6 @@ export const plugin = (
             return;
         }
 
-
         if (proto.Query) {
             name = 'query';
             getImportsFrom = ctx.queries;
@@ -56,9 +41,8 @@ export const plugin = (
             getImportsFrom = ctx.services;
         }
 
-
-        const localname = c.ref.filename.replace(/\.proto$/, `.rpc.${name}.ts`)
-        const filename = resolve(join(builder.outPath, localname));
+        const localname = bundler.getLocalFilename(c.ref, `rpc.${name}`);
+        const filename = bundler.getFilename(localname);
 
         const asts = [];
         if (proto.Query) {
@@ -83,19 +67,8 @@ export const plugin = (
             .concat(ctx.body)
             .concat(asts);
 
-        const ast = t.program(prog);
-        const content = generate(ast).code;
-        mkdirp(dirname(filename));
-        writeFileSync(filename, content);
-
-        // add to bundle
-        createFileBundle(
-            c.ref.proto.package,
-            localname,
-            bundler.bundle.bundleFile,
-            bundler.bundle.importPaths,
-            bundler.bundle.bundleVariables
-        );
+        bundler.writeAst(prog, filename);
+        bundler.addToBundle(c, localname);
 
         return {
             localname,
