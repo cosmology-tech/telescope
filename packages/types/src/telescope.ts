@@ -14,6 +14,10 @@ interface TelescopeOpts {
     useDate?: 'date' | 'timestamp';
     useDuration?: 'duration' | 'string';
     useExact?: boolean;
+    lcd?: {
+        dir: string;
+        packages: string[]
+    }
 }
 interface TelescopePackageOpts {
     packages?: Record<string, any>;

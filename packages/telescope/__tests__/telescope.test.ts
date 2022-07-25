@@ -20,7 +20,6 @@ const input: TelescopeInput = {
             dir: 'osmosis',
             packages: [
                 'cosmos.bank.v1beta1',
-                'cosmos.gov.v1beta1',
                 'osmosis.gamm.v1beta1'
             ]
         },

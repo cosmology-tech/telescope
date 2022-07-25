@@ -1,13 +1,14 @@
-import { buildAllImports, getDepsFromQueries } from '../imports';
-import { Bundler } from '../bundler';
+import { aggregateImports, getDepsFromQueries, getImportStatments } from '../imports';
 import { getNestedProto } from '@osmonauts/proto-parser';
 import { parse } from '../parse';
-import { join } from 'path';
+import { dirname, join } from 'path';
+import { sync as mkdirp } from 'mkdirp';
+import { writeFileSync } from 'fs';
 import { TelescopeBuilder } from '../builder';
 import { createAggregatedLCDClient, GenericParseContext } from '@osmonauts/ast';
 import { ProtoRef, ProtoService } from '@osmonauts/types';
 import { TelescopeParseContext } from '../build';
-import { ImportHash } from '../types';
+import * as t from '@babel/types';
 import generate from '@babel/generator';
 
 export const plugin = (
@@ -35,53 +36,74 @@ export const plugin = (
         return proto.Query;
     }).filter(Boolean);
 
-    const refsToTraverse = refs.map(ref => {
-        const proto = getNestedProto(ref.traversed);
-        if (!proto?.Query || proto.Query?.type !== 'Service') {
-            return;
+    const tc = new TelescopeParseContext(refs[0], builder.store, builder.options);
+    const context = tc.proto;
+    const lcdast = createAggregatedLCDClient(context, services, 'QueryClient');
+
+    const importsForAggregator = aggregateImports(tc, {}, localname);
+
+    /////////
+    /////////
+    /////////
+    /////////
+
+    const queryContexts = builder
+        .contexts
+        .filter(context => context.queries.length > 0);
+
+
+    const progImports = queryContexts.reduce((m, c) => {
+
+        if (!builder.options.lcd.packages.includes(c.ref.proto.package)) {
+            return m;
         }
-        return ref;
-    }).filter(Boolean);
-
-    const context = new GenericParseContext(refs[0], builder.store, builder.options);
-    const ast = createAggregatedLCDClient(context, services, 'QueryClient');
-
-    /////////
-    /////////
-    /////////
-    /////////
-
-    const progImports = refsToTraverse.reduce((m, ref) => {
 
         const ctx = new TelescopeParseContext(
-            context.ref,
-            context.store,
+            c.ref,
+            c.store,
             builder.options
         );
 
         // get mutations, services
         parse(ctx);
 
-        const proto = getNestedProto(ref.traversed);
+        const proto = getNestedProto(c.ref.traversed);
+        // hard-coding, for now, only Query service
+        if (!proto?.Query || proto.Query?.type !== 'Service') {
+            return;
+        }
 
         const serviceImports = getDepsFromQueries(
             ctx.queries,
             localname
         );
 
-        console.log(serviceImports);
+        const imports = aggregateImports(ctx, serviceImports, localname);
 
-        return { ...m, ...serviceImports }
+        const fixlocalpaths = imports.map(imp => {
+            return {
+                ...imp,
+                path: imp.path.startsWith('.') ?
+                    imp.path : `./${imp.path}`
+            };
+        });
 
-    }, {});
+        return [...m, ...fixlocalpaths]
+    }, []);
 
-    console.log(progImports);
+    const importStmts = getImportStatments(
+        [...importsForAggregator, ...progImports]
+    );
 
-    // const imports = buildAllImports(context, progImports, localname);
-    // const prog = []
-    //     .concat(imports)
-    //     .concat(ast);
+    const prog = []
+        .concat(importStmts)
+        .concat(lcdast);
 
-    // console.log(generate(prog).code)
+    const ast = t.program(prog);
+    const content = generate(ast).code;
+
+    const filename = join(builder.outPath, localname);
+    mkdirp(dirname(filename));
+    writeFileSync(filename, content);
 
 };

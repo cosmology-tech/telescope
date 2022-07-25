@@ -46,6 +46,7 @@ export class TelescopeBuilder {
         // [x] get bundle of all packages
         bundlePackages(this.store)
             .forEach(bundle => {
+
                 // store bundleFile in filesToInclude
                 const bundler = new Bundler(this, bundle);
 
