@@ -9,7 +9,6 @@ export const plugin = (
 ) => {
 
     if (!builder.options.includeAminos) {
-        bundler.converters = [];
         return;
     }
 
@@ -17,7 +16,7 @@ export const plugin = (
         .contexts
         .filter(context => context.mutations.length > 0);
 
-    bundler.converters = mutationContexts.map(c => {
+    const converters = mutationContexts.map(c => {
 
         const localname = bundler.getLocalFilename(c.ref, 'amino');
         const filename = bundler.getFilename(localname);
@@ -45,9 +44,12 @@ export const plugin = (
         bundler.addToBundle(c, localname);
 
         return {
+            package: c.ref.proto.package,
             localname,
             filename
         };
 
     }).filter(Boolean);
+
+    bundler.addConverters(converters);
 };

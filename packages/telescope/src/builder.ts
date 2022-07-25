@@ -2,7 +2,7 @@ import { ProtoStore } from '@osmonauts/proto-parser';
 import { TelescopeParseContext } from './build';
 import { TelescopeOptions, defaultTelescopeOptions } from '@osmonauts/types';
 import { bundlePackages } from './bundle';
-import { TelescopeInput } from './types';
+import { BundlerFile, TelescopeInput } from './types';
 import { Bundler } from './bundler';
 import deepmerge from 'deepmerge';
 
@@ -25,6 +25,10 @@ export class TelescopeBuilder {
     contexts: TelescopeParseContext[] = [];
     files: string[] = [];
 
+    readonly converters: BundlerFile[] = [];
+    readonly lcdClients: BundlerFile[] = [];
+    readonly registries: BundlerFile[] = [];
+
     constructor({ protoDirs, outPath, store, options }: TelescopeInput & { store?: ProtoStore }) {
         this.protoDirs = protoDirs;
         this.outPath = outPath;
@@ -41,6 +45,17 @@ export class TelescopeBuilder {
         return ctx;
     }
 
+    addLCDClients(files: BundlerFile[]) {
+        [].push.apply(this.lcdClients, files);
+    }
+
+    addRegistries(files: BundlerFile[]) {
+        [].push.apply(this.registries, files);
+    }
+
+    addConverters(files: BundlerFile[]) {
+        [].push.apply(this.converters, files);
+    }
 
     build() {
         // [x] get bundle of all packages

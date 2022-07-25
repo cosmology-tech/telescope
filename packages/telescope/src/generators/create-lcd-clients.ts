@@ -21,7 +21,7 @@ export const plugin = (
         .filter(context => context.queries.length > 0);
 
     // [x] write out one registry helper for all contexts w/mutations
-    queryContexts.map(c => {
+    const lcdClients = queryContexts.map(c => {
 
         const localname = bundler.getLocalFilename(c.ref, 'lcd');
         const filename = bundler.getFilename(localname);
@@ -57,10 +57,14 @@ export const plugin = (
         bundler.addToBundle(c, localname);
 
         return {
+            // TODO use this to build LCD aggregators with scopes
+            package: c.ref.proto.package,
             localname,
             filename
         };
 
     }).filter(Boolean);
+
+    bundler.addLCDClients(lcdClients);
 
 };

@@ -7,13 +7,7 @@ import generate from '@babel/generator';
 import { createFileBundle } from './bundle';
 import { TelescopeBuilder } from './builder';
 import { ProtoRef } from '@osmonauts/types';
-
-export interface Bundle {
-    bundleVariables: {};
-    bundleFile: string;
-    importPaths: any[];
-    base: string;
-}
+import { Bundle, BundlerFile } from './types';
 
 export class Bundler {
     builder: TelescopeBuilder;
@@ -21,8 +15,10 @@ export class Bundler {
     contexts: TelescopeParseContext[] = [];
     bundle: Bundle;
     files: string[];
-    converters: any[];
-    registries: any[];
+
+    readonly converters: BundlerFile[] = [];
+    readonly lcdClients: BundlerFile[] = [];
+    readonly registries: BundlerFile[] = [];
 
     constructor(
         builder: TelescopeBuilder,
@@ -33,6 +29,21 @@ export class Bundler {
         this.files = [
             bundle.bundleFile
         ]
+    }
+
+    addLCDClients(files: BundlerFile[]) {
+        [].push.apply(this.lcdClients, files);
+        this.builder.addLCDClients(files);
+    }
+
+    addRegistries(files: BundlerFile[]) {
+        [].push.apply(this.registries, files);
+        this.builder.addRegistries(files);
+    }
+
+    addConverters(files: BundlerFile[]) {
+        [].push.apply(this.converters, files);
+        this.builder.addConverters(files);
     }
 
     getFreshContext(

@@ -9,7 +9,6 @@ export const plugin = (
 ) => {
 
     if (!builder.options.includeAminos) {
-        bundler.registries = [];
         return;
     }
 
@@ -18,7 +17,7 @@ export const plugin = (
         .filter(context => context.mutations.length > 0);
 
     // [x] write out one registry helper for all contexts w/mutations
-    bundler.registries = mutationContexts.map(c => {
+    const registries = mutationContexts.map(c => {
 
         const localname = bundler.getLocalFilename(c.ref, 'registry');
         const filename = bundler.getFilename(localname);
@@ -45,10 +44,13 @@ export const plugin = (
         bundler.addToBundle(c, localname);
 
         return {
+            package: c.ref.proto.package,
             localname,
             filename
         };
 
     }).filter(Boolean);
+
+    bundler.addRegistries(registries);
 
 };
