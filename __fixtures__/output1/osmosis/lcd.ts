@@ -1,7 +1,12 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`cosmos LCDClient 1`] = `
-"export class LCDQueryClient extends LCDClient {
+import { Coin } from "../cosmos/base/v1beta1/coin";
+import { LCDClient } from "@osmonauts/lcd";
+import { PageRequest, PageResponse } from "../cosmos/base/query/v1beta1/pagination";
+import { SwapAmountInRoute, SwapAmountOutRoute } from "./gamm/v1beta1/tx";
+import { Params, Metadata } from "../cosmos/bank/v1beta1/bank";
+import { QueryBalanceRequest, QueryBalanceResponse, QueryAllBalancesRequest, QueryAllBalancesResponse, QuerySpendableBalancesRequest, QuerySpendableBalancesResponse, QueryTotalSupplyRequest, QueryTotalSupplyResponse, QuerySupplyOfRequest, QuerySupplyOfResponse, QueryParamsRequest, QueryParamsResponse, QueryDenomMetadataRequest, QueryDenomMetadataResponse, QueryDenomsMetadataRequest, QueryDenomsMetadataResponse, QueryDenomOwnersRequest, QueryDenomOwnersResponse } from "../cosmos/bank/v1beta1/query";
+import { Any } from "../google/protobuf/any";
+import { QueryPoolsRequest, QueryPoolsResponse, QueryNumPoolsRequest, QueryNumPoolsResponse, QueryTotalLiquidityRequest, QueryTotalLiquidityResponse, QueryPoolRequest, QueryPoolResponse, QueryPoolParamsRequest, QueryPoolParamsResponse, QueryTotalPoolLiquidityRequest, QueryTotalPoolLiquidityResponse, QueryTotalSharesRequest, QueryTotalSharesResponse, QuerySpotPriceRequest, QuerySpotPriceResponse, QuerySwapExactAmountInRequest, QuerySwapExactAmountInResponse, QuerySwapExactAmountOutRequest, QuerySwapExactAmountOutResponse } from "./gamm/v1beta1/query";
+export class QueryClient extends LCDClient {
   constructor({
     restEndpoint
   }) {
@@ -16,11 +21,11 @@ exports[`cosmos LCDClient 1`] = `
       params: {}
     };
 
-    if (typeof params?.denom !== \\"undefined\\") {
+    if (typeof params?.denom !== "undefined") {
       options.params.denom = params.denom;
     }
 
-    const endpoint = \`cosmos/bank/v1beta1/balances/\${params.address}/by_denom\`;
+    const endpoint = `cosmos/bank/v1beta1/balances/${params.address}/by_denom`;
     return await this.request(endpoint, options);
   }
 
@@ -30,11 +35,11 @@ exports[`cosmos LCDClient 1`] = `
       params: {}
     };
 
-    if (typeof params?.pagination !== \\"undefined\\") {
+    if (typeof params?.pagination !== "undefined") {
       options.params.pagination = params.pagination;
     }
 
-    const endpoint = \`cosmos/bank/v1beta1/balances/\${params.address}\`;
+    const endpoint = `cosmos/bank/v1beta1/balances/${params.address}`;
     return await this.request(endpoint, options);
   }
 
@@ -45,11 +50,11 @@ exports[`cosmos LCDClient 1`] = `
       params: {}
     };
 
-    if (typeof params?.pagination !== \\"undefined\\") {
+    if (typeof params?.pagination !== "undefined") {
       options.params.pagination = params.pagination;
     }
 
-    const endpoint = \`cosmos/bank/v1beta1/spendable_balances/\${params.address}\`;
+    const endpoint = `cosmos/bank/v1beta1/spendable_balances/${params.address}`;
     return await this.request(endpoint, options);
   }
 
@@ -59,11 +64,11 @@ exports[`cosmos LCDClient 1`] = `
       params: {}
     };
 
-    if (typeof params?.pagination !== \\"undefined\\") {
+    if (typeof params?.pagination !== "undefined") {
       options.params.pagination = params.pagination;
     }
 
-    const endpoint = \`cosmos/bank/v1beta1/supply\`;
+    const endpoint = `cosmos/bank/v1beta1/supply`;
     return await this.request(endpoint, options);
   }
 
@@ -73,23 +78,23 @@ exports[`cosmos LCDClient 1`] = `
       params: {}
     };
 
-    if (typeof params?.denom !== \\"undefined\\") {
+    if (typeof params?.denom !== "undefined") {
       options.params.denom = params.denom;
     }
 
-    const endpoint = \`cosmos/bank/v1beta1/supply/by_denom\`;
+    const endpoint = `cosmos/bank/v1beta1/supply/by_denom`;
     return await this.request(endpoint, options);
   }
 
   /* Params queries the parameters of x/bank module. */
   async params(params: QueryParamsRequest): Promise<QueryParamsResponse> {
-    const endpoint = \`cosmos/bank/v1beta1/params\`;
+    const endpoint = `cosmos/bank/v1beta1/params`;
     return await this.request(endpoint);
   }
 
   /* DenomsMetadata queries the client metadata of a given coin denomination. */
   async denomMetadata(params: QueryDenomMetadataRequest): Promise<QueryDenomMetadataResponse> {
-    const endpoint = \`cosmos/bank/v1beta1/denoms_metadata/\${params.denom}\`;
+    const endpoint = `cosmos/bank/v1beta1/denoms_metadata/${params.denom}`;
     return await this.request(endpoint);
   }
 
@@ -100,11 +105,11 @@ exports[`cosmos LCDClient 1`] = `
       params: {}
     };
 
-    if (typeof params?.pagination !== \\"undefined\\") {
+    if (typeof params?.pagination !== "undefined") {
       options.params.pagination = params.pagination;
     }
 
-    const endpoint = \`cosmos/bank/v1beta1/denoms_metadata\`;
+    const endpoint = `cosmos/bank/v1beta1/denoms_metadata`;
     return await this.request(endpoint, options);
   }
 
@@ -115,75 +120,12 @@ exports[`cosmos LCDClient 1`] = `
       params: {}
     };
 
-    if (typeof params?.pagination !== \\"undefined\\") {
+    if (typeof params?.pagination !== "undefined") {
       options.params.pagination = params.pagination;
     }
 
-    const endpoint = \`cosmos/bank/v1beta1/denom_owners/\${params.denom}\`;
+    const endpoint = `cosmos/bank/v1beta1/denom_owners/${params.denom}`;
     return await this.request(endpoint, options);
-  }
-
-}"
-`;
-
-exports[`cosmos fee LCDClient 1`] = `
-"export class LCDQueryClient extends LCDClient {
-  constructor({
-    restEndpoint
-  }) {
-    super({
-      restEndpoint
-    });
-  }
-
-  /* Allowance returns fee granted to the grantee by the granter. */
-  async allowance(params: QueryAllowanceRequest): Promise<QueryAllowanceResponse> {
-    const endpoint = \`cosmos/feegrant/v1beta1/allowance/\${params.granter}/\${params.grantee}\`;
-    return await this.request(endpoint);
-  }
-
-  /* Allowances returns all the grants for address. */
-  async allowances(params: QueryAllowancesRequest): Promise<QueryAllowancesResponse> {
-    const options: any = {
-      params: {}
-    };
-
-    if (typeof params?.pagination !== \\"undefined\\") {
-      options.params.pagination = params.pagination;
-    }
-
-    const endpoint = \`cosmos/feegrant/v1beta1/allowances/\${params.grantee}\`;
-    return await this.request(endpoint, options);
-  }
-
-  /* AllowancesByGranter returns all the grants given by an address
-  Since v0.46 */
-  async allowancesByGranter(params: QueryAllowancesByGranterRequest): Promise<QueryAllowancesByGranterResponse> {
-    const options: any = {
-      params: {}
-    };
-
-    if (typeof params?.pagination !== \\"undefined\\") {
-      options.params.pagination = params.pagination;
-    }
-
-    const endpoint = \`cosmos/feegrant/v1beta1/issued/\${params.granter}\`;
-    return await this.request(endpoint, options);
-  }
-
-}"
-`;
-
-exports[`cosmos/app/v1alpha1/query.proto 1`] = `""`;
-
-exports[`osmosis LCDClient 1`] = `
-"export class LCDQueryClient extends LCDClient {
-  constructor({
-    restEndpoint
-  }) {
-    super({
-      restEndpoint
-    });
   }
 
   /* Pools */
@@ -192,47 +134,47 @@ exports[`osmosis LCDClient 1`] = `
       params: {}
     };
 
-    if (typeof params?.pagination !== \\"undefined\\") {
+    if (typeof params?.pagination !== "undefined") {
       options.params.pagination = params.pagination;
     }
 
-    const endpoint = \`osmosis/gamm/v1beta1/pools\`;
+    const endpoint = `osmosis/gamm/v1beta1/pools`;
     return await this.request(endpoint, options);
   }
 
   /* NumPools */
   async numPools(params: QueryNumPoolsRequest): Promise<QueryNumPoolsResponse> {
-    const endpoint = \`osmosis/gamm/v1beta1/num_pools\`;
+    const endpoint = `osmosis/gamm/v1beta1/num_pools`;
     return await this.request(endpoint);
   }
 
   /* TotalLiquidity */
   async totalLiquidity(params: QueryTotalLiquidityRequest): Promise<QueryTotalLiquidityResponse> {
-    const endpoint = \`osmosis/gamm/v1beta1/total_liquidity\`;
+    const endpoint = `osmosis/gamm/v1beta1/total_liquidity`;
     return await this.request(endpoint);
   }
 
   /* Per Pool gRPC Endpoints */
   async pool(params: QueryPoolRequest): Promise<QueryPoolResponse> {
-    const endpoint = \`osmosis/gamm/v1beta1/pools/\${params.poolId}\`;
+    const endpoint = `osmosis/gamm/v1beta1/pools/${params.poolId}`;
     return await this.request(endpoint);
   }
 
   /* PoolParams */
   async poolParams(params: QueryPoolParamsRequest): Promise<QueryPoolParamsResponse> {
-    const endpoint = \`osmosis/gamm/v1beta1/pools/\${params.poolId}/params\`;
+    const endpoint = `osmosis/gamm/v1beta1/pools/${params.poolId}/params`;
     return await this.request(endpoint);
   }
 
   /* TotalPoolLiquidity */
   async totalPoolLiquidity(params: QueryTotalPoolLiquidityRequest): Promise<QueryTotalPoolLiquidityResponse> {
-    const endpoint = \`osmosis/gamm/v1beta1/pools/\${params.poolId}/total_pool_liquidity\`;
+    const endpoint = `osmosis/gamm/v1beta1/pools/${params.poolId}/total_pool_liquidity`;
     return await this.request(endpoint);
   }
 
   /* TotalShares */
   async totalShares(params: QueryTotalSharesRequest): Promise<QueryTotalSharesResponse> {
-    const endpoint = \`osmosis/gamm/v1beta1/pools/\${params.poolId}/total_shares\`;
+    const endpoint = `osmosis/gamm/v1beta1/pools/${params.poolId}/total_shares`;
     return await this.request(endpoint);
   }
 
@@ -243,15 +185,15 @@ exports[`osmosis LCDClient 1`] = `
       params: {}
     };
 
-    if (typeof params?.baseAssetDenom !== \\"undefined\\") {
+    if (typeof params?.baseAssetDenom !== "undefined") {
       options.params.base_asset_denom = params.baseAssetDenom;
     }
 
-    if (typeof params?.quoteAssetDenom !== \\"undefined\\") {
+    if (typeof params?.quoteAssetDenom !== "undefined") {
       options.params.quote_asset_denom = params.quoteAssetDenom;
     }
 
-    const endpoint = \`osmosis/gamm/v1beta1/pools/\${params.poolId}/prices\`;
+    const endpoint = `osmosis/gamm/v1beta1/pools/${params.poolId}/prices`;
     return await this.request(endpoint, options);
   }
 
@@ -261,19 +203,19 @@ exports[`osmosis LCDClient 1`] = `
       params: {}
     };
 
-    if (typeof params?.sender !== \\"undefined\\") {
+    if (typeof params?.sender !== "undefined") {
       options.params.sender = params.sender;
     }
 
-    if (typeof params?.tokenIn !== \\"undefined\\") {
+    if (typeof params?.tokenIn !== "undefined") {
       options.params.token_in = params.tokenIn;
     }
 
-    if (typeof params?.routes !== \\"undefined\\") {
+    if (typeof params?.routes !== "undefined") {
       options.params.routes = params.routes;
     }
 
-    const endpoint = \`osmosis/gamm/v1beta1/\${params.poolId}/estimate/swap_exact_amount_in\`;
+    const endpoint = `osmosis/gamm/v1beta1/${params.poolId}/estimate/swap_exact_amount_in`;
     return await this.request(endpoint, options);
   }
 
@@ -283,75 +225,20 @@ exports[`osmosis LCDClient 1`] = `
       params: {}
     };
 
-    if (typeof params?.sender !== \\"undefined\\") {
+    if (typeof params?.sender !== "undefined") {
       options.params.sender = params.sender;
     }
 
-    if (typeof params?.routes !== \\"undefined\\") {
+    if (typeof params?.routes !== "undefined") {
       options.params.routes = params.routes;
     }
 
-    if (typeof params?.tokenOut !== \\"undefined\\") {
+    if (typeof params?.tokenOut !== "undefined") {
       options.params.token_out = params.tokenOut;
     }
 
-    const endpoint = \`osmosis/gamm/v1beta1/\${params.poolId}/estimate/swap_exact_amount_out\`;
+    const endpoint = `osmosis/gamm/v1beta1/${params.poolId}/estimate/swap_exact_amount_out`;
     return await this.request(endpoint, options);
   }
 
-}"
-`;
-
-exports[`service info template 1`] = `
-Object {
-  "atEnd": false,
-  "strs": Array [
-    "osmosis/",
-    "/v1beta1/estimate/swap_exact_amount_in",
-  ],
 }
-`;
-
-exports[`service info template 2`] = `
-Object {
-  "atEnd": false,
-  "strs": Array [
-    "osmosis/",
-    "/v1beta1/",
-    "/swap_exact_amount_in",
-  ],
-}
-`;
-
-exports[`service info template 3`] = `
-Object {
-  "atEnd": true,
-  "strs": Array [
-    "osmosis/",
-    "/",
-    "/",
-    "/",
-  ],
-}
-`;
-
-exports[`service info template 4`] = `
-Object {
-  "atEnd": true,
-  "strs": Array [
-    "osmosis/gamm/v1beta1/estimate/",
-  ],
-}
-`;
-
-exports[`service info template 5`] = `
-Object {
-  "atEnd": true,
-  "strs": Array [
-    "cosmos/feegrant/v1beta1/allowance/",
-    "/",
-  ],
-}
-`;
-
-exports[`template tags 1`] = `"\`/\${params.cosmos}/feegrant/v1beta1/\${params.allowance}/\${params.granter}/\${params.grantee}\`"`;

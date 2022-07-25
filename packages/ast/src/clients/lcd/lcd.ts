@@ -332,7 +332,7 @@ export const createLCDClient = (
     }
 };
 
-export const makeAggregatedLCDClient = (
+export const createAggregatedLCDClient = (
     context: GenericParseContext,
     services: ProtoService[],
     clientName: string

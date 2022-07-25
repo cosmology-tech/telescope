@@ -71,6 +71,7 @@ export const plugin = (
         bundler.addToBundle(c, localname);
 
         return {
+            package: c.ref.proto.package,
             localname,
             filename
         };

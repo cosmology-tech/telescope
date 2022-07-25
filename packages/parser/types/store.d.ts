@@ -9,6 +9,8 @@ export declare class ProtoStore {
     _traversed: boolean;
     constructor(protoDirs?: string[]);
     findProto(filename: any): ProtoRef;
+    findProtoWhere(fn: (ref: ProtoRef) => boolean): ProtoRef;
+    filterProtoWhere(fn: (ref: ProtoRef) => boolean): ProtoRef[];
     findProtoObject(filename: any, name: any): any;
     getProtos(): ProtoRef[];
     getPackages(): string[];
