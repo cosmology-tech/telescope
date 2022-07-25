@@ -10,6 +10,7 @@ import { plugin as createTypes } from './generators/create-types';
 import { plugin as createAminoConverters } from './generators/create-amino-converters';
 import { plugin as createRegistries } from './generators/create-registries';
 import { plugin as createLCDClients } from './generators/create-lcd-clients';
+import { plugin as createAggregatedLCDClient } from './generators/create-aggregated-lcd-client';
 import { plugin as createRPCQueryClients } from './generators/create-rpc-query-clients';
 import { plugin as createRPCMsgClients } from './generators/create-rpc-msg-clients';
 import { plugin as createStargateClients } from './generators/create-stargate-clients';
@@ -59,6 +60,7 @@ export class TelescopeBuilder {
 
                 // [x] write out one registry helper for all contexts w/mutations
                 createLCDClients(this, bundler);
+
                 createRPCQueryClients(this, bundler);
                 createRPCMsgClients(this, bundler);
 
@@ -67,6 +69,8 @@ export class TelescopeBuilder {
 
                 createBundle(this, bundler);
             });
+
+        createAggregatedLCDClient(this);
 
         // finally, write one index file with all files, exported
         createIndex(this);
