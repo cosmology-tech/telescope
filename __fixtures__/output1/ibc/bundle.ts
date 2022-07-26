@@ -22,18 +22,18 @@ import * as _251 from "./lightclients/localhost/v1/localhost";
 import * as _252 from "./lightclients/solomachine/v1/solomachine";
 import * as _253 from "./lightclients/solomachine/v2/solomachine";
 import * as _254 from "./lightclients/tendermint/v1/tendermint";
-import * as _396 from "./applications/transfer/v1/tx.amino";
-import * as _397 from "./core/channel/v1/tx.amino";
-import * as _398 from "./core/client/v1/tx.amino";
-import * as _399 from "./core/connection/v1/tx.amino";
-import * as _400 from "./applications/transfer/v1/tx.registry";
-import * as _401 from "./core/channel/v1/tx.registry";
-import * as _402 from "./core/client/v1/tx.registry";
-import * as _403 from "./core/connection/v1/tx.registry";
-import * as _404 from "./applications/transfer/v1/query.lcd";
-import * as _405 from "./core/channel/v1/query.lcd";
-import * as _406 from "./core/client/v1/query.lcd";
-import * as _407 from "./core/connection/v1/query.lcd";
+import * as _403 from "./applications/transfer/v1/tx.amino";
+import * as _404 from "./core/channel/v1/tx.amino";
+import * as _405 from "./core/client/v1/tx.amino";
+import * as _406 from "./core/connection/v1/tx.amino";
+import * as _407 from "./applications/transfer/v1/tx.registry";
+import * as _408 from "./core/channel/v1/tx.registry";
+import * as _409 from "./core/client/v1/tx.registry";
+import * as _410 from "./core/connection/v1/tx.registry";
+import * as _411 from "./applications/transfer/v1/query.lcd";
+import * as _412 from "./core/channel/v1/query.lcd";
+import * as _413 from "./core/client/v1/query.lcd";
+import * as _414 from "./core/connection/v1/query.lcd";
 export namespace ibc {
   export namespace applications {
     export namespace transfer {
@@ -41,9 +41,9 @@ export namespace ibc {
         ..._232,
         ..._233,
         ..._234,
-        ..._396,
-        ..._400,
-        ..._404
+        ..._403,
+        ..._407,
+        ..._411
       };
       export const v2 = { ..._235
       };
@@ -55,9 +55,9 @@ export namespace ibc {
         ..._237,
         ..._238,
         ..._239,
-        ..._397,
-        ..._401,
-        ..._405
+        ..._404,
+        ..._408,
+        ..._412
       };
     }
     export namespace client {
@@ -65,9 +65,9 @@ export namespace ibc {
         ..._241,
         ..._242,
         ..._243,
-        ..._398,
-        ..._402,
-        ..._406
+        ..._405,
+        ..._409,
+        ..._413
       };
     }
     export namespace commitment {
@@ -79,9 +79,9 @@ export namespace ibc {
         ..._246,
         ..._247,
         ..._248,
-        ..._399,
-        ..._403,
-        ..._407
+        ..._406,
+        ..._410,
+        ..._414
       };
     }
     export namespace port {

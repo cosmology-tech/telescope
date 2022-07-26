@@ -3,7 +3,7 @@ import { Any } from "../../../google/protobuf/any";
 import { Params } from "./auth";
 import { LCDClient } from "@osmonauts/lcd";
 import { QueryAccountsRequest, QueryAccountsResponse, QueryAccountRequest, QueryAccountResponse, QueryParamsRequest, QueryParamsResponse, QueryModuleAccountsRequest, QueryModuleAccountsResponse, Bech32PrefixRequest, Bech32PrefixResponse, AddressBytesToStringRequest, AddressBytesToStringResponse, AddressStringToBytesRequest, AddressStringToBytesResponse } from "./query";
-export class QueryClient extends LCDClient {
+export class LCDQueryClient extends LCDClient {
   constructor({
     restEndpoint
   }) {
@@ -24,7 +24,7 @@ export class QueryClient extends LCDClient {
       options.params.pagination = params.pagination;
     }
 
-    const endpoint = `cosmos/auth/v1beta1/accounts/`;
+    const endpoint = `cosmos/auth/v1beta1/accounts`;
     return await this.request(endpoint, options);
   }
 
@@ -36,19 +36,19 @@ export class QueryClient extends LCDClient {
 
   /* Params queries all parameters. */
   async params(params: QueryParamsRequest): Promise<QueryParamsResponse> {
-    const endpoint = `cosmos/auth/v1beta1/params/`;
+    const endpoint = `cosmos/auth/v1beta1/params`;
     return await this.request(endpoint);
   }
 
   /* ModuleAccounts returns all the existing module accounts. */
   async moduleAccounts(params: QueryModuleAccountsRequest): Promise<QueryModuleAccountsResponse> {
-    const endpoint = `cosmos/auth/v1beta1/module_accounts/`;
+    const endpoint = `cosmos/auth/v1beta1/module_accounts`;
     return await this.request(endpoint);
   }
 
   /* Bech32 queries bech32Prefix */
   async bech32Prefix(params: Bech32PrefixRequest): Promise<Bech32PrefixResponse> {
-    const endpoint = `cosmos/auth/v1beta1/bech32/`;
+    const endpoint = `cosmos/auth/v1beta1/bech32`;
     return await this.request(endpoint);
   }
 

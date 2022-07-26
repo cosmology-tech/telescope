@@ -10,7 +10,7 @@ export const MessageComposer = {
   encoded: {
     verifyInvariant(value: MsgVerifyInvariant) {
       return {
-        type_url: "/cosmos.crisis.v1beta1.MsgVerifyInvariant",
+        typeUrl: "/cosmos.crisis.v1beta1.MsgVerifyInvariant",
         value: MsgVerifyInvariant.encode(value).finish()
       };
     }

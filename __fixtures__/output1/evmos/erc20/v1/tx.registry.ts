@@ -11,14 +11,14 @@ export const MessageComposer = {
   encoded: {
     convertCoin(value: MsgConvertCoin) {
       return {
-        type_url: "/evmos.erc20.v1.MsgConvertCoin",
+        typeUrl: "/evmos.erc20.v1.MsgConvertCoin",
         value: MsgConvertCoin.encode(value).finish()
       };
     },
 
     convertERC20(value: MsgConvertERC20) {
       return {
-        type_url: "/evmos.erc20.v1.MsgConvertERC20",
+        typeUrl: "/evmos.erc20.v1.MsgConvertERC20",
         value: MsgConvertERC20.encode(value).finish()
       };
     }

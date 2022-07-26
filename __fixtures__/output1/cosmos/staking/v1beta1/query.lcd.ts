@@ -2,7 +2,7 @@ import { PageRequest, PageResponse } from "../../base/query/v1beta1/pagination";
 import { Validator, DelegationResponse, UnbondingDelegation, RedelegationResponse, HistoricalInfo, Pool, Params } from "./staking";
 import { LCDClient } from "@osmonauts/lcd";
 import { QueryValidatorsRequest, QueryValidatorsResponse, QueryValidatorRequest, QueryValidatorResponse, QueryValidatorDelegationsRequest, QueryValidatorDelegationsResponse, QueryValidatorUnbondingDelegationsRequest, QueryValidatorUnbondingDelegationsResponse, QueryDelegationRequest, QueryDelegationResponse, QueryUnbondingDelegationRequest, QueryUnbondingDelegationResponse, QueryDelegatorDelegationsRequest, QueryDelegatorDelegationsResponse, QueryDelegatorUnbondingDelegationsRequest, QueryDelegatorUnbondingDelegationsResponse, QueryRedelegationsRequest, QueryRedelegationsResponse, QueryDelegatorValidatorsRequest, QueryDelegatorValidatorsResponse, QueryDelegatorValidatorRequest, QueryDelegatorValidatorResponse, QueryHistoricalInfoRequest, QueryHistoricalInfoResponse, QueryPoolRequest, QueryPoolResponse, QueryParamsRequest, QueryParamsResponse } from "./query";
-export class QueryClient extends LCDClient {
+export class LCDQueryClient extends LCDClient {
   constructor({
     restEndpoint
   }) {
@@ -25,7 +25,7 @@ export class QueryClient extends LCDClient {
       options.params.pagination = params.pagination;
     }
 
-    const endpoint = `cosmos/staking/v1beta1/validators/`;
+    const endpoint = `cosmos/staking/v1beta1/validators`;
     return await this.request(endpoint, options);
   }
 
@@ -225,13 +225,13 @@ export class QueryClient extends LCDClient {
 
   /* Pool queries the pool info. */
   async pool(params: QueryPoolRequest): Promise<QueryPoolResponse> {
-    const endpoint = `cosmos/staking/v1beta1/pool/`;
+    const endpoint = `cosmos/staking/v1beta1/pool`;
     return await this.request(endpoint);
   }
 
   /* Parameters queries the staking parameters. */
   async params(params: QueryParamsRequest): Promise<QueryParamsResponse> {
-    const endpoint = `cosmos/staking/v1beta1/params/`;
+    const endpoint = `cosmos/staking/v1beta1/params`;
     return await this.request(endpoint);
   }
 

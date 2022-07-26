@@ -7,6 +7,7 @@ module.exports = (api) => {
       ['@babel/transform-runtime', { useESModules }],
       '@babel/proposal-object-rest-spread',
       '@babel/proposal-class-properties',
+      '@babel/plugin-proposal-numeric-separator',
       '@babel/proposal-export-default-from'
     ],
     presets: useESModules ? ['@babel/typescript'] : ['@babel/typescript', '@babel/env']

@@ -3,7 +3,7 @@ import { Params, ValidatorOutstandingRewards, ValidatorAccumulatedCommission, Va
 import { DecCoin } from "../../base/v1beta1/coin";
 import { LCDClient } from "@osmonauts/lcd";
 import { QueryParamsRequest, QueryParamsResponse, QueryValidatorOutstandingRewardsRequest, QueryValidatorOutstandingRewardsResponse, QueryValidatorCommissionRequest, QueryValidatorCommissionResponse, QueryValidatorSlashesRequest, QueryValidatorSlashesResponse, QueryDelegationRewardsRequest, QueryDelegationRewardsResponse, QueryDelegationTotalRewardsRequest, QueryDelegationTotalRewardsResponse, QueryDelegatorValidatorsRequest, QueryDelegatorValidatorsResponse, QueryDelegatorWithdrawAddressRequest, QueryDelegatorWithdrawAddressResponse, QueryCommunityPoolRequest, QueryCommunityPoolResponse } from "./query";
-export class QueryClient extends LCDClient {
+export class LCDQueryClient extends LCDClient {
   constructor({
     restEndpoint
   }) {
@@ -14,7 +14,7 @@ export class QueryClient extends LCDClient {
 
   /* Params queries params of the distribution module. */
   async params(params: QueryParamsRequest): Promise<QueryParamsResponse> {
-    const endpoint = `cosmos/distribution/v1beta1/params/`;
+    const endpoint = `cosmos/distribution/v1beta1/params`;
     return await this.request(endpoint);
   }
 
@@ -135,7 +135,7 @@ export class QueryClient extends LCDClient {
 
   /* CommunityPool queries the community pool coins. */
   async communityPool(params: QueryCommunityPoolRequest): Promise<QueryCommunityPoolResponse> {
-    const endpoint = `cosmos/distribution/v1beta1/community_pool/`;
+    const endpoint = `cosmos/distribution/v1beta1/community_pool`;
     return await this.request(endpoint);
   }
 

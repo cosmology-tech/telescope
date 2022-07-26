@@ -11,28 +11,28 @@ export const MessageComposer = {
   encoded: {
     createClient(value: MsgCreateClient) {
       return {
-        type_url: "/ibc.core.client.v1.MsgCreateClient",
+        typeUrl: "/ibc.core.client.v1.MsgCreateClient",
         value: MsgCreateClient.encode(value).finish()
       };
     },
 
     updateClient(value: MsgUpdateClient) {
       return {
-        type_url: "/ibc.core.client.v1.MsgUpdateClient",
+        typeUrl: "/ibc.core.client.v1.MsgUpdateClient",
         value: MsgUpdateClient.encode(value).finish()
       };
     },
 
     upgradeClient(value: MsgUpgradeClient) {
       return {
-        type_url: "/ibc.core.client.v1.MsgUpgradeClient",
+        typeUrl: "/ibc.core.client.v1.MsgUpgradeClient",
         value: MsgUpgradeClient.encode(value).finish()
       };
     },
 
     submitMisbehaviour(value: MsgSubmitMisbehaviour) {
       return {
-        type_url: "/ibc.core.client.v1.MsgSubmitMisbehaviour",
+        typeUrl: "/ibc.core.client.v1.MsgSubmitMisbehaviour",
         value: MsgSubmitMisbehaviour.encode(value).finish()
       };
     }

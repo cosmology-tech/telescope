@@ -4,7 +4,7 @@ import { Height, IdentifiedClientState } from "../../client/v1/client";
 import { Any } from "../../../../google/protobuf/any";
 import { LCDClient } from "@osmonauts/lcd";
 import { QueryConnectionRequest, QueryConnectionResponse, QueryConnectionsRequest, QueryConnectionsResponse, QueryClientConnectionsRequest, QueryClientConnectionsResponse, QueryConnectionClientStateRequest, QueryConnectionClientStateResponse, QueryConnectionConsensusStateRequest, QueryConnectionConsensusStateResponse } from "./query";
-export class QueryClient extends LCDClient {
+export class LCDQueryClient extends LCDClient {
   constructor({
     restEndpoint
   }) {
@@ -37,7 +37,7 @@ export class QueryClient extends LCDClient {
       options.params.pagination = params.pagination;
     }
 
-    const endpoint = `ibc/core/connection/v1/connections/`;
+    const endpoint = `ibc/core/connection/v1/connections`;
     return await this.request(endpoint, options);
   }
 

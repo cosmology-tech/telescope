@@ -1,7 +1,7 @@
 import { createAminoConverter } from './index';
 import { ProtoStore, parseProto } from '@osmonauts/proto-parser';
 import { prepareContext, expectCode } from '../../test-utils';
-import { camel } from 'case';
+import { camel } from '@osmonauts/utils';
 
 const store = new ProtoStore();
 store.protos = [];

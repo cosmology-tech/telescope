@@ -12,21 +12,21 @@ export const MessageComposer = {
   encoded: {
     createVestingAccount(value: MsgCreateVestingAccount) {
       return {
-        type_url: "/cosmos.vesting.v1beta1.MsgCreateVestingAccount",
+        typeUrl: "/cosmos.vesting.v1beta1.MsgCreateVestingAccount",
         value: MsgCreateVestingAccount.encode(value).finish()
       };
     },
 
     createPermanentLockedAccount(value: MsgCreatePermanentLockedAccount) {
       return {
-        type_url: "/cosmos.vesting.v1beta1.MsgCreatePermanentLockedAccount",
+        typeUrl: "/cosmos.vesting.v1beta1.MsgCreatePermanentLockedAccount",
         value: MsgCreatePermanentLockedAccount.encode(value).finish()
       };
     },
 
     createPeriodicVestingAccount(value: MsgCreatePeriodicVestingAccount) {
       return {
-        type_url: "/cosmos.vesting.v1beta1.MsgCreatePeriodicVestingAccount",
+        typeUrl: "/cosmos.vesting.v1beta1.MsgCreatePeriodicVestingAccount",
         value: MsgCreatePeriodicVestingAccount.encode(value).finish()
       };
     }

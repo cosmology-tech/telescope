@@ -3,7 +3,7 @@ import { DevFeeInfo } from "./fees";
 import { Params } from "./genesis";
 import { LCDClient } from "@osmonauts/lcd";
 import { QueryDevFeeInfosRequest, QueryDevFeeInfosResponse, QueryDevFeeInfoRequest, QueryDevFeeInfoResponse, QueryParamsRequest, QueryParamsResponse, QueryDevFeeInfosPerDeployerRequest, QueryDevFeeInfosPerDeployerResponse } from "./query";
-export class QueryClient extends LCDClient {
+export class LCDQueryClient extends LCDClient {
   constructor({
     restEndpoint
   }) {
@@ -22,7 +22,7 @@ export class QueryClient extends LCDClient {
       options.params.pagination = params.pagination;
     }
 
-    const endpoint = `evmos/fees/v1/fees/`;
+    const endpoint = `evmos/fees/v1/fees`;
     return await this.request(endpoint, options);
   }
 
@@ -42,7 +42,7 @@ export class QueryClient extends LCDClient {
 
   /* Params retrieves the fees module params */
   async params(params: QueryParamsRequest): Promise<QueryParamsResponse> {
-    const endpoint = `evmos/fees/v1/params/`;
+    const endpoint = `evmos/fees/v1/params`;
     return await this.request(endpoint);
   }
 

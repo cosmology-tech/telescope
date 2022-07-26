@@ -49,7 +49,7 @@ export function lockQueryTypeToJSON(object: LockQueryType): string {
 export interface PeriodLock {
   ID: Long;
   owner: string;
-  duration: string;
+  duration: Duration;
   endTime: Date;
   coins: Coin[];
 }
@@ -61,7 +61,7 @@ export interface QueryCondition {
   denom: string;
 
   /** valid when query condition is ByDuration */
-  duration: string;
+  duration: Duration;
 
   /** valid when query condition is ByTime */
   timestamp: Date;
@@ -93,7 +93,7 @@ export interface SyntheticLock {
    * value is set to uninitialized value
    */
   endTime: Date;
-  duration: string;
+  duration: Duration;
 }
 
 function createBasePeriodLock(): PeriodLock {
@@ -173,7 +173,7 @@ export const PeriodLock = {
     return {
       ID: isSet(object.ID) ? Long.fromString(object.ID) : Long.UZERO,
       owner: isSet(object.owner) ? String(object.owner) : "",
-      duration: isSet(object.duration) ? String(object.duration) : undefined,
+      duration: isSet(object.duration) ? Duration.fromJSON(object.duration) : undefined,
       endTime: isSet(object.endTime) ? fromJsonTimestamp(object.endTime) : undefined,
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromJSON(e)) : []
     };
@@ -275,7 +275,7 @@ export const QueryCondition = {
     return {
       lockQueryType: isSet(object.lockQueryType) ? lockQueryTypeFromJSON(object.lockQueryType) : 0,
       denom: isSet(object.denom) ? String(object.denom) : "",
-      duration: isSet(object.duration) ? String(object.duration) : undefined,
+      duration: isSet(object.duration) ? Duration.fromJSON(object.duration) : undefined,
       timestamp: isSet(object.timestamp) ? fromJsonTimestamp(object.timestamp) : undefined
     };
   },
@@ -369,7 +369,7 @@ export const SyntheticLock = {
       underlyingLockId: isSet(object.underlyingLockId) ? Long.fromString(object.underlyingLockId) : Long.UZERO,
       synthDenom: isSet(object.synthDenom) ? String(object.synthDenom) : "",
       endTime: isSet(object.endTime) ? fromJsonTimestamp(object.endTime) : undefined,
-      duration: isSet(object.duration) ? String(object.duration) : undefined
+      duration: isSet(object.duration) ? Duration.fromJSON(object.duration) : undefined
     };
   },
 

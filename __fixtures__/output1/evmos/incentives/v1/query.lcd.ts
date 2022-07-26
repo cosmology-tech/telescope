@@ -4,7 +4,7 @@ import { DecCoin } from "../../../cosmos/base/v1beta1/coin";
 import { Params } from "./genesis";
 import { LCDClient } from "@osmonauts/lcd";
 import { QueryIncentivesRequest, QueryIncentivesResponse, QueryIncentiveRequest, QueryIncentiveResponse, QueryGasMetersRequest, QueryGasMetersResponse, QueryGasMeterRequest, QueryGasMeterResponse, QueryAllocationMetersRequest, QueryAllocationMetersResponse, QueryAllocationMeterRequest, QueryAllocationMeterResponse, QueryParamsRequest, QueryParamsResponse } from "./query";
-export class QueryClient extends LCDClient {
+export class LCDQueryClient extends LCDClient {
   constructor({
     restEndpoint
   }) {
@@ -23,7 +23,7 @@ export class QueryClient extends LCDClient {
       options.params.pagination = params.pagination;
     }
 
-    const endpoint = `evmos/incentives/v1/incentives/`;
+    const endpoint = `evmos/incentives/v1/incentives`;
     return await this.request(endpoint, options);
   }
 
@@ -64,7 +64,7 @@ export class QueryClient extends LCDClient {
       options.params.pagination = params.pagination;
     }
 
-    const endpoint = `evmos/incentives/v1/allocation_meters/`;
+    const endpoint = `evmos/incentives/v1/allocation_meters`;
     return await this.request(endpoint, options);
   }
 
@@ -76,7 +76,7 @@ export class QueryClient extends LCDClient {
 
   /* Params retrieves the incentives module params */
   async params(params: QueryParamsRequest): Promise<QueryParamsResponse> {
-    const endpoint = `evmos/incentives/v1/params/`;
+    const endpoint = `evmos/incentives/v1/params`;
     return await this.request(endpoint);
   }
 

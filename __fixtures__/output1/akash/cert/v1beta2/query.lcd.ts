@@ -2,7 +2,7 @@ import { CertificateFilter, Certificate } from "./cert";
 import { PageRequest, PageResponse } from "../../../cosmos/base/query/v1beta1/pagination";
 import { LCDClient } from "@osmonauts/lcd";
 import { QueryCertificatesRequest, QueryCertificatesResponse } from "./query";
-export class QueryClient extends LCDClient {
+export class LCDQueryClient extends LCDClient {
   constructor({
     restEndpoint
   }) {
@@ -25,7 +25,7 @@ export class QueryClient extends LCDClient {
       options.params.pagination = params.pagination;
     }
 
-    const endpoint = `akash/cert/v1beta2/certificates/list/`;
+    const endpoint = `akash/cert/v1beta2/certificates/list`;
     return await this.request(endpoint, options);
   }
 

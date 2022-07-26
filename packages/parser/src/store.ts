@@ -35,6 +35,18 @@ export class ProtoStore {
         });
     }
 
+    findProtoWhere(fn: (ref: ProtoRef) => boolean): ProtoRef {
+        return this.getProtos().find(ref => {
+            return fn(ref)
+        });
+    }
+
+    filterProtoWhere(fn: (ref: ProtoRef) => boolean): ProtoRef[] {
+        return this.getProtos().filter(ref => {
+            return fn(ref)
+        });
+    }
+
     findProtoObject(filename, name): any {
         const proto = this.findProto(filename);
         return getNestedProto(proto.traversed ?? proto.proto)[name];

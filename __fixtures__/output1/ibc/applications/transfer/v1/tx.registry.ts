@@ -12,7 +12,7 @@ export const MessageComposer = {
   encoded: {
     transfer(value: MsgTransfer) {
       return {
-        type_url: "/ibc.applications.transfer.v1.MsgTransfer",
+        typeUrl: "/ibc.applications.transfer.v1.MsgTransfer",
         value: MsgTransfer.encode(value).finish()
       };
     }

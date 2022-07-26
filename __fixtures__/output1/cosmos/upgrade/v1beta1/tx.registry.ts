@@ -11,14 +11,14 @@ export const MessageComposer = {
   encoded: {
     softwareUpgrade(value: MsgSoftwareUpgrade) {
       return {
-        type_url: "/cosmos.upgrade.v1beta1.MsgSoftwareUpgrade",
+        typeUrl: "/cosmos.upgrade.v1beta1.MsgSoftwareUpgrade",
         value: MsgSoftwareUpgrade.encode(value).finish()
       };
     },
 
     cancelUpgrade(value: MsgCancelUpgrade) {
       return {
-        type_url: "/cosmos.upgrade.v1beta1.MsgCancelUpgrade",
+        typeUrl: "/cosmos.upgrade.v1beta1.MsgCancelUpgrade",
         value: MsgCancelUpgrade.encode(value).finish()
       };
     }

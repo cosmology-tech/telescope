@@ -6,7 +6,7 @@ import "google/protobuf/duration.proto";
 import "google/protobuf/timestamp.proto";
 import "cosmos/base/v1beta1/coin.proto";
 
-option go_package = "github.com/osmosis-labs/osmosis/v7/x/superfluid/types";
+option go_package = "github.com/osmosis-labs/osmosis/v9/x/superfluid/types";
 
 enum SuperfluidAssetType {
   option (gogoproto.goproto_enum_prefix) = false;
@@ -61,9 +61,13 @@ message SuperfluidDelegationRecord {
     (gogoproto.nullable) = false,
     (gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.Coin"
   ];
+  cosmos.base.v1beta1.Coin equivalent_staked_amount = 4
+      [ (gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.Coin" ];
 }
 
 message LockIdIntermediaryAccountConnection {
   uint64 lock_id = 1;
   string intermediary_account = 2;
 }
+
+message UnpoolWhitelistedPools { repeated uint64 ids = 1; }

@@ -12,7 +12,7 @@ export interface Params {
   mintedDenom: string;
 }
 export interface LockableDurationsInfo {
-  lockableDurations: string[];
+  lockableDurations: Duration[];
 }
 export interface DistrInfo {
   totalWeight: string;

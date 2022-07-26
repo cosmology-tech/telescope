@@ -100,7 +100,7 @@ export interface WaitOperationRequest {
    * will be at most the time permitted by the underlying HTTP/RPC protocol.
    * If RPC context deadline is also specified, the shorter one will be used.
    */
-  timeout: string;
+  timeout: Duration;
 }
 
 /**
@@ -634,7 +634,7 @@ export const WaitOperationRequest = {
   fromJSON(object: any): WaitOperationRequest {
     return {
       name: isSet(object.name) ? String(object.name) : "",
-      timeout: isSet(object.timeout) ? String(object.timeout) : undefined
+      timeout: isSet(object.timeout) ? Duration.fromJSON(object.timeout) : undefined
     };
   },
 

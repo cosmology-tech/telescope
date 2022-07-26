@@ -13,14 +13,14 @@ export const MessageComposer = {
   encoded: {
     createGauge(value: MsgCreateGauge) {
       return {
-        type_url: "/osmosis.incentives.MsgCreateGauge",
+        typeUrl: "/osmosis.incentives.MsgCreateGauge",
         value: MsgCreateGauge.encode(value).finish()
       };
     },
 
     addToGauge(value: MsgAddToGauge) {
       return {
-        type_url: "/osmosis.incentives.MsgAddToGauge",
+        typeUrl: "/osmosis.incentives.MsgAddToGauge",
         value: MsgAddToGauge.encode(value).finish()
       };
     }

@@ -10,7 +10,7 @@ export const MessageComposer = {
   encoded: {
     unjail(value: MsgUnjail) {
       return {
-        type_url: "/cosmos.slashing.v1beta1.MsgUnjail",
+        typeUrl: "/cosmos.slashing.v1beta1.MsgUnjail",
         value: MsgUnjail.encode(value).finish()
       };
     }

@@ -273,7 +273,7 @@ export interface Constant {
    */
 
   /** @deprecated */
-  durationValue?: string;
+  durationValue?: Duration;
 
   /**
    * protobuf.Timestamp value.
@@ -1274,7 +1274,7 @@ export const Constant = {
       doubleValue: isSet(object.doubleValue) ? Number(object.doubleValue) : undefined,
       stringValue: isSet(object.stringValue) ? String(object.stringValue) : undefined,
       bytesValue: isSet(object.bytesValue) ? bytesFromBase64(object.bytesValue) : undefined,
-      durationValue: isSet(object.durationValue) ? String(object.durationValue) : undefined,
+      durationValue: isSet(object.durationValue) ? Duration.fromJSON(object.durationValue) : undefined,
       timestampValue: isSet(object.timestampValue) ? fromJsonTimestamp(object.timestampValue) : undefined
     };
   },

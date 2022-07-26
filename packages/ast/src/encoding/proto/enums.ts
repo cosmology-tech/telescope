@@ -1,6 +1,6 @@
 import * as t from '@babel/types';
 import { getEnumFromJsonName, getEnumToJsonName } from './types';
-import { identifier, tsEnumMember, functionDeclaration, commentBlock, cleanComment } from '../../utils';
+import { identifier, tsEnumMember, functionDeclaration, makeCommentBlock, cleanComment } from '../../utils';
 import { ProtoEnum } from '@osmonauts/types';
 
 const getEnumValues = (proto: ProtoEnum) => {
@@ -67,7 +67,7 @@ export const createProtoEnum = (name: string, proto: ProtoEnum) => {
 
     if (proto.comment) {
         declaration.leadingComments = [
-            commentBlock(proto.comment)
+            makeCommentBlock(proto.comment)
         ];
     }
 

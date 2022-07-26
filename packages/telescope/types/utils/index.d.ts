@@ -11,6 +11,7 @@ export declare const UTILS: {
     fromBech32: string;
     fromDuration: string;
     fromHex: string;
+    fromUtf8: string;
     fromJsonTimestamp: string;
     fromTimestamp: string;
     GeneratedType: string;
@@ -33,8 +34,9 @@ export declare const UTILS: {
         name: string;
     };
     Exact: string;
+    Rpc: string;
     LCDClient: string;
     DeepPartial: string;
 };
 export declare const getRelativePath: (f1: string, f2: string) => string;
-export declare const variableSlug: (str: any) => string;
+export declare const variableSlug: (str: any) => any;

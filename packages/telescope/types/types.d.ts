@@ -1,3 +1,15 @@
+import { TelescopeOptions } from '@osmonauts/types';
+export interface Bundle {
+    bundleVariables: {};
+    bundleFile: string;
+    importPaths: any[];
+    base: string;
+}
+export interface BundlerFile {
+    package?: string;
+    localname: string;
+    filename: string;
+}
 export interface ServiceInfo {
     methodName: string;
     package: string;
@@ -19,4 +31,9 @@ export interface ImportObj {
 }
 export interface ImportHash {
     [key: string]: string[];
+}
+export interface TelescopeInput {
+    protoDirs: string[];
+    outPath: string;
+    options: TelescopeOptions;
 }

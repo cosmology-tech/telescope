@@ -5,7 +5,8 @@ export declare const aminoInterface: {
     string(args: RenderAminoField): t.TSPropertySignature;
     long(args: RenderAminoField): t.TSPropertySignature;
     height(args: RenderAminoField): t.TSPropertySignature;
-    duration(args: RenderAminoField): t.TSPropertySignature;
+    duration(args: RenderAminoField): any;
+    timestamp(args: RenderAminoField): any;
     enum(args: RenderAminoField): t.TSPropertySignature;
     enumArray(args: RenderAminoField): t.TSPropertySignature;
     type({ context, field, currentProtoPath, isOptional }: RenderAminoField): any;

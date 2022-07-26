@@ -4,7 +4,7 @@ import { Any } from "../../../google/protobuf/any";
 import { Coin } from "../../../cosmos/base/v1beta1/coin";
 import { LCDClient } from "@osmonauts/lcd";
 import { QueryPoolsRequest, QueryPoolsResponse, QueryNumPoolsRequest, QueryNumPoolsResponse, QueryTotalLiquidityRequest, QueryTotalLiquidityResponse, QueryPoolRequest, QueryPoolResponse, QueryPoolParamsRequest, QueryPoolParamsResponse, QueryTotalPoolLiquidityRequest, QueryTotalPoolLiquidityResponse, QueryTotalSharesRequest, QueryTotalSharesResponse, QuerySpotPriceRequest, QuerySpotPriceResponse, QuerySwapExactAmountInRequest, QuerySwapExactAmountInResponse, QuerySwapExactAmountOutRequest, QuerySwapExactAmountOutResponse } from "./query";
-export class QueryClient extends LCDClient {
+export class LCDQueryClient extends LCDClient {
   constructor({
     restEndpoint
   }) {
@@ -23,19 +23,19 @@ export class QueryClient extends LCDClient {
       options.params.pagination = params.pagination;
     }
 
-    const endpoint = `osmosis/gamm/v1beta1/pools/`;
+    const endpoint = `osmosis/gamm/v1beta1/pools`;
     return await this.request(endpoint, options);
   }
 
   /* NumPools */
   async numPools(params: QueryNumPoolsRequest): Promise<QueryNumPoolsResponse> {
-    const endpoint = `osmosis/gamm/v1beta1/num_pools/`;
+    const endpoint = `osmosis/gamm/v1beta1/num_pools`;
     return await this.request(endpoint);
   }
 
   /* TotalLiquidity */
   async totalLiquidity(params: QueryTotalLiquidityRequest): Promise<QueryTotalLiquidityResponse> {
-    const endpoint = `osmosis/gamm/v1beta1/total_liquidity/`;
+    const endpoint = `osmosis/gamm/v1beta1/total_liquidity`;
     return await this.request(endpoint);
   }
 
@@ -63,18 +63,19 @@ export class QueryClient extends LCDClient {
     return await this.request(endpoint);
   }
 
-  /* SpotPrice */
+  /* SpotPrice defines a gRPC query handler that returns the spot price given
+  a base denomination and a quote denomination. */
   async spotPrice(params: QuerySpotPriceRequest): Promise<QuerySpotPriceResponse> {
     const options: any = {
       params: {}
     };
 
-    if (typeof params?.tokenInDenom !== "undefined") {
-      options.params.token_in_denom = params.tokenInDenom;
+    if (typeof params?.baseAssetDenom !== "undefined") {
+      options.params.base_asset_denom = params.baseAssetDenom;
     }
 
-    if (typeof params?.tokenOutDenom !== "undefined") {
-      options.params.token_out_denom = params.tokenOutDenom;
+    if (typeof params?.quoteAssetDenom !== "undefined") {
+      options.params.quote_asset_denom = params.quoteAssetDenom;
     }
 
     const endpoint = `osmosis/gamm/v1beta1/pools/${params.poolId}/prices`;

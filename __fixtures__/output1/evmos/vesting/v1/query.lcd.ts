@@ -1,7 +1,7 @@
 import { Coin } from "../../../cosmos/base/v1beta1/coin";
 import { LCDClient } from "@osmonauts/lcd";
 import { QueryBalancesRequest, QueryBalancesResponse } from "./query";
-export class QueryClient extends LCDClient {
+export class LCDQueryClient extends LCDClient {
   constructor({
     restEndpoint
   }) {

@@ -37,6 +37,25 @@ export const renderAminoField = ({
         }
     }
 
+
+    // special "native" types...
+    // above Type,Enum since they're Types
+    switch (field.type) {
+        // TODO check can we just
+        // make pieces optional and avoid hard-coding this type?
+        case 'ibc.core.client.v1.Height':
+        case 'Height':
+            return aminoInterface.height(args);
+
+        case 'Timestamp':
+        case 'google.protobuf.Timestamp':
+            return aminoInterface.timestamp(args);
+
+        case 'Duration':
+        case 'google.protobuf.Duration':
+            return aminoInterface.duration(args);
+    }
+
     switch (field.parsedType.type) {
         case 'Type':
             return aminoInterface.type(args);
@@ -63,19 +82,21 @@ export const renderAminoField = ({
         case 'uint32':
         case 'fixed32':
         case 'sfixed32':
-        case 'Timestamp':
-        case 'google.protobuf.Timestamp':
             return aminoInterface.defaultType(args);
 
-        // TODO check can we just
-        // make pieces optional and avoid hard-coding this type?
-        case 'ibc.core.client.v1.Height':
-        case 'Height':
-            return aminoInterface.height(args);
+        // // TODO check can we just
+        // // make pieces optional and avoid hard-coding this type?
+        // case 'ibc.core.client.v1.Height':
+        // case 'Height':
+        // return aminoInterface.height(args);
 
-        case 'Duration':
-        case 'google.protobuf.Duration':
-            return aminoInterface.duration(args);
+        // case 'Timestamp':
+        // case 'google.protobuf.Timestamp':
+        //     return aminoInterface.timestamp(args);
+
+        // case 'Duration':
+        // case 'google.protobuf.Duration':
+        //     return aminoInterface.duration(args);
 
         default:
             return aminoInterface.defaultType(args);
@@ -95,7 +116,7 @@ export const makeAminoTypeInterface = ({
 
     const TypeName = proto.name;
     const typeUrl = getTypeUrl(context.ref.proto, proto);
-    const aminoType = typeUrlToAmino(typeUrl, context.options.exceptions);
+    const aminoType = typeUrlToAmino(context, typeUrl);
 
     const oneOfs = getOneOfs(proto);
     const fields = protoFieldsToArray(proto).map((field) => {

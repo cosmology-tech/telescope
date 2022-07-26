@@ -20,7 +20,7 @@ export const protobufPackage = "google.rpc";
  */
 export interface RetryInfo {
   /** Clients should wait at least this long between retrying the same request. */
-  retryDelay: string;
+  retryDelay: Duration;
 }
 
 /** Describes additional debugging info. */
@@ -322,7 +322,7 @@ export const RetryInfo = {
 
   fromJSON(object: any): RetryInfo {
     return {
-      retryDelay: isSet(object.retryDelay) ? String(object.retryDelay) : undefined
+      retryDelay: isSet(object.retryDelay) ? Duration.fromJSON(object.retryDelay) : undefined
     };
   },
 

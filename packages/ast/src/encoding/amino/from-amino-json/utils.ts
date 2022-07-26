@@ -31,6 +31,40 @@ export const fromAmino = {
         );
     },
 
+    rawBytes(args: FromAminoParseField) {
+        args.context.addUtil('toUtf8');
+        return t.objectProperty(
+            t.identifier(args.field.name),
+            t.callExpression(
+                t.identifier('toUtf8'),
+                [
+                    t.callExpression(
+                        t.memberExpression(
+                            t.identifier('JSON'),
+                            t.identifier('stringify')
+                        ),
+                        [
+                            memberExpressionOrIdentifierAminoCaseField(args.fieldPath, args.context.aminoCaseField)
+                        ]
+                    )
+                ]
+            )
+        );
+    },
+
+    wasmByteCode(args: FromAminoParseField) {
+        args.context.addUtil('fromBase64');
+        return t.objectProperty(
+            t.identifier(args.field.name),
+            t.callExpression(
+                t.identifier('fromBase64'),
+                [
+                    memberExpressionOrIdentifierAminoCaseField(args.fieldPath, args.context.aminoCaseField)
+                ]
+            )
+        );
+    },
+
     long(args: FromAminoParseField) {
         args.context.addUtil('Long');
 
@@ -47,6 +81,17 @@ export const fromAmino = {
     },
 
     duration(args: FromAminoParseField) {
+        const { useDuration } = args.context.options;
+        switch (useDuration) {
+            case 'duration':
+            // TODO duration amino type
+            case 'string':
+            default:
+                return fromAmino.durationString(args);
+        }
+    },
+
+    durationString(args: FromAminoParseField) {
         args.context.addUtil('Long');
 
         const value = t.objectExpression(

@@ -9,12 +9,15 @@ export const cleanComment = (str) => {
     return str.replace(/\*\//g, '*\\\/');
 };
 
-export const commentBlock = (comment: string): t.CommentBlock => {
+export const makeCommentBlock = (comment: string): t.CommentBlock => {
 
     if (!/[\n]+/.test(comment)) {
         return {
             type: 'CommentBlock',
-            value: `* ${cleanComment(comment)} `
+            value: `* ${cleanComment(comment)} `,
+            start: null,
+            end: null,
+            loc: null
         };
     }
 
@@ -28,7 +31,10 @@ export const commentBlock = (comment: string): t.CommentBlock => {
 
     return {
         type: 'CommentBlock',
-        value: comments.join('\n')
+        value: comments.join('\n'),
+        start: null,
+        end: null,
+        loc: null
     };
 };
 

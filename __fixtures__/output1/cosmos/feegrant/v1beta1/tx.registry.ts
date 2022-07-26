@@ -11,14 +11,14 @@ export const MessageComposer = {
   encoded: {
     grantAllowance(value: MsgGrantAllowance) {
       return {
-        type_url: "/cosmos.feegrant.v1beta1.MsgGrantAllowance",
+        typeUrl: "/cosmos.feegrant.v1beta1.MsgGrantAllowance",
         value: MsgGrantAllowance.encode(value).finish()
       };
     },
 
     revokeAllowance(value: MsgRevokeAllowance) {
       return {
-        type_url: "/cosmos.feegrant.v1beta1.MsgRevokeAllowance",
+        typeUrl: "/cosmos.feegrant.v1beta1.MsgRevokeAllowance",
         value: MsgRevokeAllowance.encode(value).finish()
       };
     }

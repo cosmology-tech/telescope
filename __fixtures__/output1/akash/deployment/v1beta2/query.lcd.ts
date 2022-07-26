@@ -5,7 +5,7 @@ import { Group } from "./group";
 import { Account } from "../../escrow/v1beta2/types";
 import { LCDClient } from "@osmonauts/lcd";
 import { QueryDeploymentsRequest, QueryDeploymentsResponse, QueryDeploymentRequest, QueryDeploymentResponse, QueryGroupRequest, QueryGroupResponse } from "./query";
-export class QueryClient extends LCDClient {
+export class LCDQueryClient extends LCDClient {
   constructor({
     restEndpoint
   }) {
@@ -28,7 +28,7 @@ export class QueryClient extends LCDClient {
       options.params.pagination = params.pagination;
     }
 
-    const endpoint = `akash/deployment/v1beta2/deployments/list/`;
+    const endpoint = `akash/deployment/v1beta2/deployments/list`;
     return await this.request(endpoint, options);
   }
 
@@ -42,7 +42,7 @@ export class QueryClient extends LCDClient {
       options.params.id = params.id;
     }
 
-    const endpoint = `akash/deployment/v1beta2/deployments/info/`;
+    const endpoint = `akash/deployment/v1beta2/deployments/info`;
     return await this.request(endpoint, options);
   }
 
@@ -56,7 +56,7 @@ export class QueryClient extends LCDClient {
       options.params.id = params.id;
     }
 
-    const endpoint = `akash/deployment/v1beta2/groups/info/`;
+    const endpoint = `akash/deployment/v1beta2/groups/info`;
     return await this.request(endpoint, options);
   }
 

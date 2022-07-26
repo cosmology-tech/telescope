@@ -2,7 +2,7 @@ import { PageRequest, PageResponse } from "../../../cosmos/base/query/v1beta1/pa
 import { Account, Payment } from "./types";
 import { LCDClient } from "@osmonauts/lcd";
 import { QueryAccountsRequest, QueryAccountsResponse, QueryPaymentsRequest, QueryPaymentsResponse } from "./query";
-export class QueryClient extends LCDClient {
+export class LCDQueryClient extends LCDClient {
   constructor({
     restEndpoint
   }) {
@@ -39,7 +39,7 @@ export class QueryClient extends LCDClient {
       options.params.pagination = params.pagination;
     }
 
-    const endpoint = `akash/escrow/v1beta1/types/accounts/list/`;
+    const endpoint = `akash/escrow/v1beta1/types/accounts/list`;
     return await this.request(endpoint, options);
   }
 
@@ -75,7 +75,7 @@ export class QueryClient extends LCDClient {
       options.params.pagination = params.pagination;
     }
 
-    const endpoint = `akash/escrow/v1beta1/types/payments/list/`;
+    const endpoint = `akash/escrow/v1beta1/types/payments/list`;
     return await this.request(endpoint, options);
   }
 

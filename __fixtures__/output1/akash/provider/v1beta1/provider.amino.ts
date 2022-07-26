@@ -2,7 +2,7 @@ import { Attribute } from "../../base/v1beta1/attribute";
 import { AminoMsg } from "@cosmjs/amino";
 import { ProviderInfo, MsgCreateProvider, MsgUpdateProvider, MsgDeleteProvider } from "./provider";
 export interface AminoMsgCreateProvider extends AminoMsg {
-  type: "/akash.provider.v1beta1.MsgCreateProvider";
+  type: "akash/provider/testonly-create-provider";
   value: {
     owner: string;
     host_uri: string;
@@ -17,7 +17,7 @@ export interface AminoMsgCreateProvider extends AminoMsg {
   };
 }
 export interface AminoMsgUpdateProvider extends AminoMsg {
-  type: "/akash.provider.v1beta1.MsgUpdateProvider";
+  type: "akash/provider/testonly-update-provider";
   value: {
     owner: string;
     host_uri: string;
@@ -32,14 +32,14 @@ export interface AminoMsgUpdateProvider extends AminoMsg {
   };
 }
 export interface AminoMsgDeleteProvider extends AminoMsg {
-  type: "/akash.provider.v1beta1.MsgDeleteProvider";
+  type: "akash/provider/testonly-delete-provider";
   value: {
     owner: string;
   };
 }
 export const AminoConverter = {
   "/akash.provider.v1beta1.MsgCreateProvider": {
-    aminoType: "/akash.provider.v1beta1.MsgCreateProvider",
+    aminoType: "akash/provider/testonly-create-provider",
     toAmino: ({
       owner,
       hostUri,
@@ -80,7 +80,7 @@ export const AminoConverter = {
     }
   },
   "/akash.provider.v1beta1.MsgUpdateProvider": {
-    aminoType: "/akash.provider.v1beta1.MsgUpdateProvider",
+    aminoType: "akash/provider/testonly-update-provider",
     toAmino: ({
       owner,
       hostUri,
@@ -121,7 +121,7 @@ export const AminoConverter = {
     }
   },
   "/akash.provider.v1beta1.MsgDeleteProvider": {
-    aminoType: "/akash.provider.v1beta1.MsgDeleteProvider",
+    aminoType: "akash/provider/testonly-delete-provider",
     toAmino: ({
       owner
     }: MsgDeleteProvider): AminoMsgDeleteProvider["value"] => {

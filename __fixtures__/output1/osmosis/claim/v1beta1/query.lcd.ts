@@ -3,7 +3,7 @@ import { Coin } from "../../../cosmos/base/v1beta1/coin";
 import { Params } from "./params";
 import { LCDClient } from "@osmonauts/lcd";
 import { QueryModuleAccountBalanceRequest, QueryModuleAccountBalanceResponse, QueryParamsRequest, QueryParamsResponse, QueryClaimRecordRequest, QueryClaimRecordResponse, QueryClaimableForActionRequest, QueryClaimableForActionResponse, QueryTotalClaimableRequest, QueryTotalClaimableResponse } from "./query";
-export class QueryClient extends LCDClient {
+export class LCDQueryClient extends LCDClient {
   constructor({
     restEndpoint
   }) {
@@ -14,13 +14,13 @@ export class QueryClient extends LCDClient {
 
   /* ModuleAccountBalance */
   async moduleAccountBalance(params: QueryModuleAccountBalanceRequest): Promise<QueryModuleAccountBalanceResponse> {
-    const endpoint = `osmosis/claim/v1beta1/module_account_balance/`;
+    const endpoint = `osmosis/claim/v1beta1/module_account_balance`;
     return await this.request(endpoint);
   }
 
   /* Params */
   async params(params: QueryParamsRequest): Promise<QueryParamsResponse> {
-    const endpoint = `osmosis/claim/v1beta1/params/`;
+    const endpoint = `osmosis/claim/v1beta1/params`;
     return await this.request(endpoint);
   }
 

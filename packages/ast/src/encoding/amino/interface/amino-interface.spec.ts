@@ -1,6 +1,7 @@
 import { makeAminoTypeInterface } from './index';
 import { ProtoStore } from '@osmonauts/proto-parser'
-import { camel, snake } from 'case';
+import { snake } from 'case';
+import { camel } from '@osmonauts/utils';
 import { prepareContext, expectCode, printCode } from '../../../../test-utils';
 const store = new ProtoStore([__dirname + '/../../../../../../__fixtures__/chain1']);
 store.traverseAll();

@@ -2,7 +2,7 @@ import { PageRequest, PageResponse } from "../../../cosmos/base/query/v1beta1/pa
 import { EpochInfo } from "./genesis";
 import { LCDClient } from "@osmonauts/lcd";
 import { QueryEpochsInfoRequest, QueryEpochsInfoResponse, QueryCurrentEpochRequest, QueryCurrentEpochResponse } from "./query";
-export class QueryClient extends LCDClient {
+export class LCDQueryClient extends LCDClient {
   constructor({
     restEndpoint
   }) {
@@ -21,7 +21,7 @@ export class QueryClient extends LCDClient {
       options.params.pagination = params.pagination;
     }
 
-    const endpoint = `evmos/epochs/v1/epochs/`;
+    const endpoint = `evmos/epochs/v1/epochs`;
     return await this.request(endpoint, options);
   }
 
@@ -35,7 +35,7 @@ export class QueryClient extends LCDClient {
       options.params.identifier = params.identifier;
     }
 
-    const endpoint = `evmos/epochs/v1/current_epoch/`;
+    const endpoint = `evmos/epochs/v1/current_epoch`;
     return await this.request(endpoint, options);
   }
 

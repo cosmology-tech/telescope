@@ -12,49 +12,49 @@ export const MessageComposer = {
   encoded: {
     createDeployment(value: MsgCreateDeployment) {
       return {
-        type_url: "/akash.deployment.v1beta1.MsgCreateDeployment",
+        typeUrl: "/akash.deployment.v1beta1.MsgCreateDeployment",
         value: MsgCreateDeployment.encode(value).finish()
       };
     },
 
     depositDeployment(value: MsgDepositDeployment) {
       return {
-        type_url: "/akash.deployment.v1beta1.MsgDepositDeployment",
+        typeUrl: "/akash.deployment.v1beta1.MsgDepositDeployment",
         value: MsgDepositDeployment.encode(value).finish()
       };
     },
 
     updateDeployment(value: MsgUpdateDeployment) {
       return {
-        type_url: "/akash.deployment.v1beta1.MsgUpdateDeployment",
+        typeUrl: "/akash.deployment.v1beta1.MsgUpdateDeployment",
         value: MsgUpdateDeployment.encode(value).finish()
       };
     },
 
     closeDeployment(value: MsgCloseDeployment) {
       return {
-        type_url: "/akash.deployment.v1beta1.MsgCloseDeployment",
+        typeUrl: "/akash.deployment.v1beta1.MsgCloseDeployment",
         value: MsgCloseDeployment.encode(value).finish()
       };
     },
 
     closeGroup(value: MsgCloseGroup) {
       return {
-        type_url: "/akash.deployment.v1beta1.MsgCloseGroup",
+        typeUrl: "/akash.deployment.v1beta1.MsgCloseGroup",
         value: MsgCloseGroup.encode(value).finish()
       };
     },
 
     pauseGroup(value: MsgPauseGroup) {
       return {
-        type_url: "/akash.deployment.v1beta1.MsgPauseGroup",
+        typeUrl: "/akash.deployment.v1beta1.MsgPauseGroup",
         value: MsgPauseGroup.encode(value).finish()
       };
     },
 
     startGroup(value: MsgStartGroup) {
       return {
-        type_url: "/akash.deployment.v1beta1.MsgStartGroup",
+        typeUrl: "/akash.deployment.v1beta1.MsgStartGroup",
         value: MsgStartGroup.encode(value).finish()
       };
     }

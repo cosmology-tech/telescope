@@ -5,7 +5,7 @@ import { LeaseFilters, LeaseID, Lease } from "./lease";
 import { Account, FractionalPayment } from "../../escrow/v1beta2/types";
 import { LCDClient } from "@osmonauts/lcd";
 import { QueryOrdersRequest, QueryOrdersResponse, QueryOrderRequest, QueryOrderResponse, QueryBidsRequest, QueryBidsResponse, QueryBidRequest, QueryBidResponse, QueryLeasesRequest, QueryLeasesResponse, QueryLeaseRequest, QueryLeaseResponse } from "./query";
-export class QueryClient extends LCDClient {
+export class LCDQueryClient extends LCDClient {
   constructor({
     restEndpoint
   }) {
@@ -28,7 +28,7 @@ export class QueryClient extends LCDClient {
       options.params.pagination = params.pagination;
     }
 
-    const endpoint = `akash/market/v1beta2/orders/list/`;
+    const endpoint = `akash/market/v1beta2/orders/list`;
     return await this.request(endpoint, options);
   }
 
@@ -42,7 +42,7 @@ export class QueryClient extends LCDClient {
       options.params.id = params.id;
     }
 
-    const endpoint = `akash/market/v1beta2/orders/info/`;
+    const endpoint = `akash/market/v1beta2/orders/info`;
     return await this.request(endpoint, options);
   }
 
@@ -60,7 +60,7 @@ export class QueryClient extends LCDClient {
       options.params.pagination = params.pagination;
     }
 
-    const endpoint = `akash/market/v1beta2/bids/list/`;
+    const endpoint = `akash/market/v1beta2/bids/list`;
     return await this.request(endpoint, options);
   }
 
@@ -74,7 +74,7 @@ export class QueryClient extends LCDClient {
       options.params.id = params.id;
     }
 
-    const endpoint = `akash/market/v1beta2/bids/info/`;
+    const endpoint = `akash/market/v1beta2/bids/info`;
     return await this.request(endpoint, options);
   }
 
@@ -92,7 +92,7 @@ export class QueryClient extends LCDClient {
       options.params.pagination = params.pagination;
     }
 
-    const endpoint = `akash/market/v1beta2/leases/list/`;
+    const endpoint = `akash/market/v1beta2/leases/list`;
     return await this.request(endpoint, options);
   }
 
@@ -106,7 +106,7 @@ export class QueryClient extends LCDClient {
       options.params.id = params.id;
     }
 
-    const endpoint = `akash/market/v1beta2/leases/info/`;
+    const endpoint = `akash/market/v1beta2/leases/info`;
     return await this.request(endpoint, options);
   }
 

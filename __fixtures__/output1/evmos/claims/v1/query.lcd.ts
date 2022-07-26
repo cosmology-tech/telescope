@@ -4,7 +4,7 @@ import { Params } from "./genesis";
 import { ClaimsRecordAddress, Claim } from "./claims";
 import { LCDClient } from "@osmonauts/lcd";
 import { QueryTotalUnclaimedRequest, QueryTotalUnclaimedResponse, QueryParamsRequest, QueryParamsResponse, QueryClaimsRecordsRequest, QueryClaimsRecordsResponse, QueryClaimsRecordRequest, QueryClaimsRecordResponse } from "./query";
-export class QueryClient extends LCDClient {
+export class LCDQueryClient extends LCDClient {
   constructor({
     restEndpoint
   }) {
@@ -15,13 +15,13 @@ export class QueryClient extends LCDClient {
 
   /* TotalUnclaimed queries the total unclaimed tokens from the airdrop */
   async totalUnclaimed(params: QueryTotalUnclaimedRequest): Promise<QueryTotalUnclaimedResponse> {
-    const endpoint = `evmos/claims/v1/total_unclaimed/`;
+    const endpoint = `evmos/claims/v1/total_unclaimed`;
     return await this.request(endpoint);
   }
 
   /* Params returns the claims module parameters */
   async params(params: QueryParamsRequest): Promise<QueryParamsResponse> {
-    const endpoint = `evmos/claims/v1/params/`;
+    const endpoint = `evmos/claims/v1/params`;
     return await this.request(endpoint);
   }
 
@@ -35,7 +35,7 @@ export class QueryClient extends LCDClient {
       options.params.pagination = params.pagination;
     }
 
-    const endpoint = `evmos/claims/v1/claims_records/`;
+    const endpoint = `evmos/claims/v1/claims_records`;
     return await this.request(endpoint, options);
   }
 

@@ -12,14 +12,14 @@ export const MessageComposer = {
   encoded: {
     send(value: MsgSend) {
       return {
-        type_url: "/cosmos.bank.v1beta1.MsgSend",
+        typeUrl: "/cosmos.bank.v1beta1.MsgSend",
         value: MsgSend.encode(value).finish()
       };
     },
 
     multiSend(value: MsgMultiSend) {
       return {
-        type_url: "/cosmos.bank.v1beta1.MsgMultiSend",
+        typeUrl: "/cosmos.bank.v1beta1.MsgMultiSend",
         value: MsgMultiSend.encode(value).finish()
       };
     }

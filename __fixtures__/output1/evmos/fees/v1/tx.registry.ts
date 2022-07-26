@@ -10,21 +10,21 @@ export const MessageComposer = {
   encoded: {
     registerDevFeeInfo(value: MsgRegisterDevFeeInfo) {
       return {
-        type_url: "/evmos.fees.v1.MsgRegisterDevFeeInfo",
+        typeUrl: "/evmos.fees.v1.MsgRegisterDevFeeInfo",
         value: MsgRegisterDevFeeInfo.encode(value).finish()
       };
     },
 
     cancelDevFeeInfo(value: MsgCancelDevFeeInfo) {
       return {
-        type_url: "/evmos.fees.v1.MsgCancelDevFeeInfo",
+        typeUrl: "/evmos.fees.v1.MsgCancelDevFeeInfo",
         value: MsgCancelDevFeeInfo.encode(value).finish()
       };
     },
 
     updateDevFeeInfo(value: MsgUpdateDevFeeInfo) {
       return {
-        type_url: "/evmos.fees.v1.MsgUpdateDevFeeInfo",
+        typeUrl: "/evmos.fees.v1.MsgUpdateDevFeeInfo",
         value: MsgUpdateDevFeeInfo.encode(value).finish()
       };
     }

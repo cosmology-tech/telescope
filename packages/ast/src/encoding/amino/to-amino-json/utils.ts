@@ -28,7 +28,54 @@ export const toAmino = {
         return t.objectProperty(t.identifier(args.context.aminoCaseField(args.field)), memberExpressionOrIdentifier(args.scope))
     },
 
+    rawBytes(args: ToAminoParseField) {
+        args.context.addUtil('fromUtf8');
+        return t.objectProperty(
+            t.identifier(args.context.aminoCaseField(args.field)),
+            t.callExpression(
+                t.memberExpression(
+                    t.identifier('JSON'),
+                    t.identifier('parse')
+                ),
+                [
+                    t.callExpression(
+                        t.identifier('fromUtf8'),
+                        [
+                            memberExpressionOrIdentifier(args.scope)
+                        ]
+                    )
+                ]
+            )
+
+        );
+    },
+
+    wasmByteCode(args: ToAminoParseField) {
+        args.context.addUtil('toBase64');
+        return t.objectProperty(
+            t.identifier(args.context.aminoCaseField(args.field)),
+            t.callExpression(
+                t.identifier('toBase64'),
+                [
+                    memberExpressionOrIdentifier(args.scope)
+                ]
+            )
+
+        );
+    },
+
     duration(args: ToAminoParseField) {
+        const { useDuration } = args.context.options;
+        switch (useDuration) {
+            case 'duration':
+            // TODO duration amino type
+            case 'string':
+            default:
+                return toAmino.durationString(args);
+        }
+    },
+
+    durationString(args: ToAminoParseField) {
         const exp = t.binaryExpression(
             '*',
             memberExpressionOrIdentifier(args.scope),
@@ -106,6 +153,7 @@ export const toAmino = {
     },
 
     coin(args: ToAminoParseField) {
+        args.context.addUtil('Long');
         const value = t.objectExpression([
             t.objectProperty(t.identifier('denom'), t.memberExpression(
                 memberExpressionOrIdentifier(args.scope),
@@ -164,7 +212,6 @@ export const toAmino = {
             )
         );
     },
-
 
     typeArray({ context, field, currentProtoPath, scope, fieldPath, nested, isOptional }: ToAminoParseField) {
         //////

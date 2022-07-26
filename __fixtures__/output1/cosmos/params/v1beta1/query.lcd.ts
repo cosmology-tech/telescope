@@ -1,7 +1,7 @@
 import { ParamChange } from "./params";
 import { LCDClient } from "@osmonauts/lcd";
 import { QueryParamsRequest, QueryParamsResponse, QuerySubspacesRequest, QuerySubspacesResponse } from "./query";
-export class QueryClient extends LCDClient {
+export class LCDQueryClient extends LCDClient {
   constructor({
     restEndpoint
   }) {
@@ -25,13 +25,13 @@ export class QueryClient extends LCDClient {
       options.params.key = params.key;
     }
 
-    const endpoint = `cosmos/params/v1beta1/params/`;
+    const endpoint = `cosmos/params/v1beta1/params`;
     return await this.request(endpoint, options);
   }
 
   /* Subspaces queries for all registered subspaces and all keys for a subspace. */
   async subspaces(params: QuerySubspacesRequest): Promise<QuerySubspacesResponse> {
-    const endpoint = `cosmos/params/v1beta1/subspaces/`;
+    const endpoint = `cosmos/params/v1beta1/subspaces`;
     return await this.request(endpoint);
   }
 

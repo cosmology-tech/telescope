@@ -11,7 +11,7 @@ export const MessageComposer = {
   encoded: {
     submitEvidence(value: MsgSubmitEvidence) {
       return {
-        type_url: "/cosmos.evidence.v1beta1.MsgSubmitEvidence",
+        typeUrl: "/cosmos.evidence.v1beta1.MsgSubmitEvidence",
         value: MsgSubmitEvidence.encode(value).finish()
       };
     }

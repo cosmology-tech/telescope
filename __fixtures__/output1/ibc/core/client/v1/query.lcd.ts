@@ -3,7 +3,7 @@ import { Any } from "../../../../google/protobuf/any";
 import { Height, IdentifiedClientState, ConsensusStateWithHeight, Params } from "./client";
 import { LCDClient } from "@osmonauts/lcd";
 import { QueryClientStateRequest, QueryClientStateResponse, QueryClientStatesRequest, QueryClientStatesResponse, QueryConsensusStateRequest, QueryConsensusStateResponse, QueryConsensusStatesRequest, QueryConsensusStatesResponse, QueryClientStatusRequest, QueryClientStatusResponse, QueryClientParamsRequest, QueryClientParamsResponse, QueryUpgradedClientStateRequest, QueryUpgradedClientStateResponse, QueryUpgradedConsensusStateRequest, QueryUpgradedConsensusStateResponse } from "./query";
-export class QueryClient extends LCDClient {
+export class LCDQueryClient extends LCDClient {
   constructor({
     restEndpoint
   }) {
@@ -36,7 +36,7 @@ export class QueryClient extends LCDClient {
       options.params.pagination = params.pagination;
     }
 
-    const endpoint = `ibc/core/client/v1/client_states/`;
+    const endpoint = `ibc/core/client/v1/client_states`;
     return await this.request(endpoint, options);
   }
 
@@ -102,19 +102,19 @@ export class QueryClient extends LCDClient {
 
   /* ClientParams queries all parameters of the ibc client. */
   async clientParams(params: QueryClientParamsRequest): Promise<QueryClientParamsResponse> {
-    const endpoint = `ibc/client/v1/params/`;
+    const endpoint = `ibc/client/v1/params`;
     return await this.request(endpoint);
   }
 
   /* UpgradedClientState queries an Upgraded IBC light client. */
   async upgradedClientState(params: QueryUpgradedClientStateRequest): Promise<QueryUpgradedClientStateResponse> {
-    const endpoint = `ibc/core/client/v1/upgraded_client_states/`;
+    const endpoint = `ibc/core/client/v1/upgraded_client_states`;
     return await this.request(endpoint);
   }
 
   /* UpgradedConsensusState queries an Upgraded IBC consensus state. */
   async upgradedConsensusState(params: QueryUpgradedConsensusStateRequest): Promise<QueryUpgradedConsensusStateResponse> {
-    const endpoint = `ibc/core/client/v1/upgraded_consensus_states/`;
+    const endpoint = `ibc/core/client/v1/upgraded_consensus_states`;
     return await this.request(endpoint);
   }
 

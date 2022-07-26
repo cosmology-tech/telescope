@@ -7,8 +7,8 @@ export const protobufPackage = "osmosis.claim.v1beta1";
 /** Params defines the claim module's parameters. */
 export interface Params {
   airdropStartTime: Date;
-  durationUntilDecay: string;
-  durationOfDecay: string;
+  durationUntilDecay: Duration;
+  durationOfDecay: Duration;
 
   /** denom of claimable asset */
   claimDenom: string;
@@ -81,8 +81,8 @@ export const Params = {
   fromJSON(object: any): Params {
     return {
       airdropStartTime: isSet(object.airdropStartTime) ? fromJsonTimestamp(object.airdropStartTime) : undefined,
-      durationUntilDecay: isSet(object.durationUntilDecay) ? String(object.durationUntilDecay) : undefined,
-      durationOfDecay: isSet(object.durationOfDecay) ? String(object.durationOfDecay) : undefined,
+      durationUntilDecay: isSet(object.durationUntilDecay) ? Duration.fromJSON(object.durationUntilDecay) : undefined,
+      durationOfDecay: isSet(object.durationOfDecay) ? Duration.fromJSON(object.durationOfDecay) : undefined,
       claimDenom: isSet(object.claimDenom) ? String(object.claimDenom) : ""
     };
   },

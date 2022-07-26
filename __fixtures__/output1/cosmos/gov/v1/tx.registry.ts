@@ -13,35 +13,35 @@ export const MessageComposer = {
   encoded: {
     submitProposal(value: MsgSubmitProposal) {
       return {
-        type_url: "/cosmos.gov.v1.MsgSubmitProposal",
+        typeUrl: "/cosmos.gov.v1.MsgSubmitProposal",
         value: MsgSubmitProposal.encode(value).finish()
       };
     },
 
     execLegacyContent(value: MsgExecLegacyContent) {
       return {
-        type_url: "/cosmos.gov.v1.MsgExecLegacyContent",
+        typeUrl: "/cosmos.gov.v1.MsgExecLegacyContent",
         value: MsgExecLegacyContent.encode(value).finish()
       };
     },
 
     vote(value: MsgVote) {
       return {
-        type_url: "/cosmos.gov.v1.MsgVote",
+        typeUrl: "/cosmos.gov.v1.MsgVote",
         value: MsgVote.encode(value).finish()
       };
     },
 
     voteWeighted(value: MsgVoteWeighted) {
       return {
-        type_url: "/cosmos.gov.v1.MsgVoteWeighted",
+        typeUrl: "/cosmos.gov.v1.MsgVoteWeighted",
         value: MsgVoteWeighted.encode(value).finish()
       };
     },
 
     deposit(value: MsgDeposit) {
       return {
-        type_url: "/cosmos.gov.v1.MsgDeposit",
+        typeUrl: "/cosmos.gov.v1.MsgDeposit",
         value: MsgDeposit.encode(value).finish()
       };
     }

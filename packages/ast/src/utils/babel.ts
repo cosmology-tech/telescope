@@ -2,6 +2,47 @@ import * as t from '@babel/types';
 
 // TODO move to @osmonauts/utils package
 
+export const commentBlock = (value: string): t.CommentBlock => {
+    return {
+        type: 'CommentBlock',
+        value,
+        start: null,
+        end: null,
+        loc: null
+    };
+};
+
+export const commentLine = (value: string): t.CommentLine => {
+    return {
+        type: 'CommentLine',
+        value,
+        start: null,
+        end: null,
+        loc: null
+    };
+};
+
+export function tsMethodSignature(
+    key: t.Expression,
+    typeParameters: t.TSTypeParameterDeclaration | null | undefined = null,
+    parameters: Array<t.Identifier | t.RestElement>,
+    typeAnnotation: t.TSTypeAnnotation | null = null,
+    trailingComments?: t.Comment[],
+    leadingComments?: t.Comment[]
+): t.TSMethodSignature {
+    const obj = t.tsMethodSignature(
+        key, typeParameters, parameters, typeAnnotation
+    );
+    obj.kind = 'method';
+    if (trailingComments && trailingComments.length) {
+        obj.trailingComments = trailingComments;
+    }
+    if (leadingComments && leadingComments.length) {
+        obj.trailingComments = leadingComments;
+    }
+    return obj;
+}
+
 export const classMethod = (
     kind: "get" | "set" | "method" | "constructor" | undefined,
     key: t.Identifier | t.StringLiteral | t.NumericLiteral | t.Expression,
@@ -74,24 +115,34 @@ export const identifier = (name: string, typeAnnotation: t.TSTypeAnnotation, opt
     return type;
 }
 
-export const classDeclaration = (name: string, body: any[], implementsExressions: t.TSExpressionWithTypeArguments[] = [], superClass: t.Identifier = null) => {
-    const declaration = t.classDeclaration(
-        t.identifier(name),
-        superClass,
-        t.classBody(body)
-    );
-    if (implementsExressions.length) {
-        declaration.implements = implementsExressions;
+export const classDeclaration = (
+    id: t.Identifier,
+    superClass: t.Expression | null | undefined = null,
+    body: t.ClassBody,
+    decorators: Array<t.Decorator> | null = null,
+    vImplements?: t.TSExpressionWithTypeArguments[]
+): t.ClassDeclaration => {
+    const obj = t.classDeclaration(id, superClass, body, decorators);
+    if (vImplements) {
+        obj.implements = vImplements;
     }
-    return declaration;
-};
+    return obj;
+}
 
-export const classProperty = (name: string, typeAnnotation: t.TSTypeAnnotation = null, isReadonly: boolean = false, isStatic: boolean = false) => {
-    const prop = t.classProperty(t.identifier(name));
-    if (isReadonly) prop.readonly = true;
-    if (isStatic) prop.static = true;
-    if (typeAnnotation) prop.typeAnnotation = typeAnnotation;
-    return prop;
+export function classProperty(
+    key: t.Identifier | t.StringLiteral | t.NumericLiteral | t.Expression,
+    value: t.Expression | null = null,
+    typeAnnotation: t.TypeAnnotation | t.TSTypeAnnotation | t.Noop | null = null,
+    decorators: Array<t.Decorator> | null = null,
+    computed: boolean = false,
+    _static: boolean = false,
+    _readonly: boolean = false,
+    accessibility?: 'private' | 'protected' | 'public',
+): t.ClassProperty {
+    const obj = t.classProperty(key, value, typeAnnotation, decorators, computed, _static);
+    if (accessibility) obj.accessibility = accessibility;
+    if (_readonly) obj.readonly = _readonly;
+    return obj;
 };
 
 export const arrowFunctionExpression = (

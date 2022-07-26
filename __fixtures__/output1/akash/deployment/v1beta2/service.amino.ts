@@ -13,7 +13,7 @@ import { Endpoint, endpoint_KindFromJSON } from "../../base/v1beta2/endpoint";
 import { MsgCreateDeployment, MsgDepositDeployment, MsgUpdateDeployment, MsgCloseDeployment } from "./deploymentmsg";
 import { MsgCloseGroup, MsgPauseGroup, MsgStartGroup } from "./groupmsg";
 export interface AminoMsgCreateDeployment extends AminoMsg {
-  type: "/akash.deployment.v1beta2.MsgCreateDeployment";
+  type: "akash/deployment/v1beta2/testonly-create-deployment";
   value: {
     id: {
       owner: string;
@@ -82,7 +82,7 @@ export interface AminoMsgCreateDeployment extends AminoMsg {
   };
 }
 export interface AminoMsgDepositDeployment extends AminoMsg {
-  type: "/akash.deployment.v1beta2.MsgDepositDeployment";
+  type: "akash/deployment/v1beta2/testonly-deposit-deployment";
   value: {
     id: {
       owner: string;
@@ -96,7 +96,7 @@ export interface AminoMsgDepositDeployment extends AminoMsg {
   };
 }
 export interface AminoMsgUpdateDeployment extends AminoMsg {
-  type: "/akash.deployment.v1beta2.MsgUpdateDeployment";
+  type: "akash/deployment/v1beta2/testonly-update-deployment";
   value: {
     id: {
       owner: string;
@@ -106,7 +106,7 @@ export interface AminoMsgUpdateDeployment extends AminoMsg {
   };
 }
 export interface AminoMsgCloseDeployment extends AminoMsg {
-  type: "/akash.deployment.v1beta2.MsgCloseDeployment";
+  type: "akash/deployment/v1beta2/testonly-close-deployment";
   value: {
     id: {
       owner: string;
@@ -115,7 +115,7 @@ export interface AminoMsgCloseDeployment extends AminoMsg {
   };
 }
 export interface AminoMsgCloseGroup extends AminoMsg {
-  type: "/akash.deployment.v1beta2.MsgCloseGroup";
+  type: "akash/deployment/v1beta2/testonly-close-group";
   value: {
     id: {
       owner: string;
@@ -125,7 +125,7 @@ export interface AminoMsgCloseGroup extends AminoMsg {
   };
 }
 export interface AminoMsgPauseGroup extends AminoMsg {
-  type: "/akash.deployment.v1beta2.MsgPauseGroup";
+  type: "akash/deployment/v1beta2/testonly-pause-group";
   value: {
     id: {
       owner: string;
@@ -135,7 +135,7 @@ export interface AminoMsgPauseGroup extends AminoMsg {
   };
 }
 export interface AminoMsgStartGroup extends AminoMsg {
-  type: "/akash.deployment.v1beta2.MsgStartGroup";
+  type: "akash/deployment/v1beta2/testonly-start-group";
   value: {
     id: {
       owner: string;
@@ -146,7 +146,7 @@ export interface AminoMsgStartGroup extends AminoMsg {
 }
 export const AminoConverter = {
   "/akash.deployment.v1beta2.MsgCreateDeployment": {
-    aminoType: "/akash.deployment.v1beta2.MsgCreateDeployment",
+    aminoType: "akash/deployment/v1beta2/testonly-create-deployment",
     toAmino: ({
       id,
       groups,
@@ -297,7 +297,7 @@ export const AminoConverter = {
     }
   },
   "/akash.deployment.v1beta2.MsgDepositDeployment": {
-    aminoType: "/akash.deployment.v1beta2.MsgDepositDeployment",
+    aminoType: "akash/deployment/v1beta2/testonly-deposit-deployment",
     toAmino: ({
       id,
       amount,
@@ -334,7 +334,7 @@ export const AminoConverter = {
     }
   },
   "/akash.deployment.v1beta2.MsgUpdateDeployment": {
-    aminoType: "/akash.deployment.v1beta2.MsgUpdateDeployment",
+    aminoType: "akash/deployment/v1beta2/testonly-update-deployment",
     toAmino: ({
       id,
       version
@@ -361,7 +361,7 @@ export const AminoConverter = {
     }
   },
   "/akash.deployment.v1beta2.MsgCloseDeployment": {
-    aminoType: "/akash.deployment.v1beta2.MsgCloseDeployment",
+    aminoType: "akash/deployment/v1beta2/testonly-close-deployment",
     toAmino: ({
       id
     }: MsgCloseDeployment): AminoMsgCloseDeployment["value"] => {
@@ -384,7 +384,7 @@ export const AminoConverter = {
     }
   },
   "/akash.deployment.v1beta2.MsgCloseGroup": {
-    aminoType: "/akash.deployment.v1beta2.MsgCloseGroup",
+    aminoType: "akash/deployment/v1beta2/testonly-close-group",
     toAmino: ({
       id
     }: MsgCloseGroup): AminoMsgCloseGroup["value"] => {
@@ -409,7 +409,7 @@ export const AminoConverter = {
     }
   },
   "/akash.deployment.v1beta2.MsgPauseGroup": {
-    aminoType: "/akash.deployment.v1beta2.MsgPauseGroup",
+    aminoType: "akash/deployment/v1beta2/testonly-pause-group",
     toAmino: ({
       id
     }: MsgPauseGroup): AminoMsgPauseGroup["value"] => {
@@ -434,7 +434,7 @@ export const AminoConverter = {
     }
   },
   "/akash.deployment.v1beta2.MsgStartGroup": {
-    aminoType: "/akash.deployment.v1beta2.MsgStartGroup",
+    aminoType: "akash/deployment/v1beta2/testonly-start-group",
     toAmino: ({
       id
     }: MsgStartGroup): AminoMsgStartGroup["value"] => {

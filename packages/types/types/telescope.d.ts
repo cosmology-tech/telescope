@@ -1,13 +1,21 @@
 import { AminoExceptions } from "./aminos";
 interface TelescopeOpts {
-    includeAminos?: boolean;
-    includeLCDClient?: boolean;
     aminoCasingFn?: Function;
     aminoExceptions?: AminoExceptions;
-    signingClientDefaults?: boolean;
+    aminoTypeUrl?: (typeUrl: string) => string | undefined;
+    camelRpcMethods?: boolean;
+    includeAminos?: boolean;
+    includeLCDClients?: boolean;
     includePackageVar?: boolean;
+    includeRpcClients?: boolean;
+    signingClientDefaults?: boolean;
     useDate?: 'date' | 'timestamp';
+    useDuration?: 'duration' | 'string';
     useExact?: boolean;
+    lcd?: {
+        dir: string;
+        packages: string[];
+    };
 }
 interface TelescopePackageOpts {
     packages?: Record<string, any>;

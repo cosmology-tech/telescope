@@ -331,8 +331,26 @@ Object {
         "type": "ServiceMethod",
       },
       "SpotPrice": Object {
-        "comment": null,
+        "comment": "SpotPrice defines a gRPC query handler that returns the spot price given
+a base denomination and a quote denomination.",
         "fields": Object {
+          "baseAssetDenom": Object {
+            "comment": null,
+            "id": 2,
+            "isScalar": true,
+            "options": Object {
+              "(gogoproto.moretags)": "yaml:base_asset_denom",
+              "(telescope:camel)": "baseAssetDenom",
+              "(telescope:name)": "baseAssetDenom",
+              "(telescope:orig)": "base_asset_denom",
+            },
+            "parsedType": Object {
+              "name": "string",
+              "type": "native",
+            },
+            "type": "string",
+            "typeNum": 13,
+          },
           "poolId": Object {
             "comment": null,
             "id": 1,
@@ -350,32 +368,15 @@ Object {
             "type": "uint64",
             "typeNum": 8,
           },
-          "tokenInDenom": Object {
-            "comment": null,
-            "id": 2,
-            "isScalar": true,
-            "options": Object {
-              "(gogoproto.moretags)": "yaml:token_in_denom",
-              "(telescope:camel)": "tokenInDenom",
-              "(telescope:name)": "tokenInDenom",
-              "(telescope:orig)": "tokenInDenom",
-            },
-            "parsedType": Object {
-              "name": "string",
-              "type": "native",
-            },
-            "type": "string",
-            "typeNum": 13,
-          },
-          "tokenOutDenom": Object {
+          "quoteAssetDenom": Object {
             "comment": null,
             "id": 3,
             "isScalar": true,
             "options": Object {
-              "(gogoproto.moretags)": "yaml:token_out_denom",
-              "(telescope:camel)": "tokenOutDenom",
-              "(telescope:name)": "tokenOutDenom",
-              "(telescope:orig)": "tokenOutDenom",
+              "(gogoproto.moretags)": "yaml:quote_asset_denom",
+              "(telescope:camel)": "quoteAssetDenom",
+              "(telescope:name)": "quoteAssetDenom",
+              "(telescope:orig)": "quote_asset_denom",
             },
             "parsedType": Object {
               "name": "string",
@@ -390,8 +391,8 @@ Object {
             "poolId",
           ],
           "queryParams": Array [
-            "tokenInDenom",
-            "tokenOutDenom",
+            "baseAssetDenom",
+            "quoteAssetDenom",
           ],
           "url": "/osmosis/gamm/v1beta1/pools/{poolId}/prices",
         },
@@ -738,8 +739,26 @@ Object {
     "type": "Type",
   },
   "QuerySpotPriceRequest": Object {
-    "comment": "=============================== SpotPrice",
+    "comment": "QuerySpotPriceRequest defines the gRPC request structure for a SpotPrice
+query.",
     "fields": Object {
+      "baseAssetDenom": Object {
+        "comment": null,
+        "id": 2,
+        "isScalar": true,
+        "options": Object {
+          "(gogoproto.moretags)": "yaml:base_asset_denom",
+          "(telescope:camel)": "baseAssetDenom",
+          "(telescope:name)": "baseAssetDenom",
+          "(telescope:orig)": "base_asset_denom",
+        },
+        "parsedType": Object {
+          "name": "string",
+          "type": "native",
+        },
+        "type": "string",
+        "typeNum": 13,
+      },
       "poolId": Object {
         "comment": null,
         "id": 1,
@@ -757,32 +776,15 @@ Object {
         "type": "uint64",
         "typeNum": 8,
       },
-      "tokenInDenom": Object {
-        "comment": null,
-        "id": 2,
-        "isScalar": true,
-        "options": Object {
-          "(gogoproto.moretags)": "yaml:token_in_denom",
-          "(telescope:camel)": "tokenInDenom",
-          "(telescope:name)": "tokenInDenom",
-          "(telescope:orig)": "tokenInDenom",
-        },
-        "parsedType": Object {
-          "name": "string",
-          "type": "native",
-        },
-        "type": "string",
-        "typeNum": 13,
-      },
-      "tokenOutDenom": Object {
+      "quoteAssetDenom": Object {
         "comment": null,
         "id": 3,
         "isScalar": true,
         "options": Object {
-          "(gogoproto.moretags)": "yaml:token_out_denom",
-          "(telescope:camel)": "tokenOutDenom",
-          "(telescope:name)": "tokenOutDenom",
-          "(telescope:orig)": "tokenOutDenom",
+          "(gogoproto.moretags)": "yaml:quote_asset_denom",
+          "(telescope:camel)": "quoteAssetDenom",
+          "(telescope:name)": "quoteAssetDenom",
+          "(telescope:orig)": "quote_asset_denom",
         },
         "parsedType": Object {
           "name": "string",
@@ -800,7 +802,8 @@ Object {
     "type": "Type",
   },
   "QuerySpotPriceResponse": Object {
-    "comment": null,
+    "comment": "QuerySpotPriceResponse defines the gRPC response structure for a SpotPrice
+query.",
     "fields": Object {
       "spotPrice": Object {
         "comment": "String of the Dec. Ex) 10.203uatom",

@@ -3,7 +3,7 @@ import { Coin } from "../../base/v1beta1/coin";
 import { Params, Metadata } from "./bank";
 import { LCDClient } from "@osmonauts/lcd";
 import { QueryBalanceRequest, QueryBalanceResponse, QueryAllBalancesRequest, QueryAllBalancesResponse, QuerySpendableBalancesRequest, QuerySpendableBalancesResponse, QueryTotalSupplyRequest, QueryTotalSupplyResponse, QuerySupplyOfRequest, QuerySupplyOfResponse, QueryParamsRequest, QueryParamsResponse, QueryDenomMetadataRequest, QueryDenomMetadataResponse, QueryDenomsMetadataRequest, QueryDenomsMetadataResponse, QueryDenomOwnersRequest, QueryDenomOwnersResponse } from "./query";
-export class QueryClient extends LCDClient {
+export class LCDQueryClient extends LCDClient {
   constructor({
     restEndpoint
   }) {
@@ -65,7 +65,7 @@ export class QueryClient extends LCDClient {
       options.params.pagination = params.pagination;
     }
 
-    const endpoint = `cosmos/bank/v1beta1/supply/`;
+    const endpoint = `cosmos/bank/v1beta1/supply`;
     return await this.request(endpoint, options);
   }
 
@@ -79,13 +79,13 @@ export class QueryClient extends LCDClient {
       options.params.denom = params.denom;
     }
 
-    const endpoint = `cosmos/bank/v1beta1/supply/by_denom/`;
+    const endpoint = `cosmos/bank/v1beta1/supply/by_denom`;
     return await this.request(endpoint, options);
   }
 
   /* Params queries the parameters of x/bank module. */
   async params(params: QueryParamsRequest): Promise<QueryParamsResponse> {
-    const endpoint = `cosmos/bank/v1beta1/params/`;
+    const endpoint = `cosmos/bank/v1beta1/params`;
     return await this.request(endpoint);
   }
 
@@ -106,7 +106,7 @@ export class QueryClient extends LCDClient {
       options.params.pagination = params.pagination;
     }
 
-    const endpoint = `cosmos/bank/v1beta1/denoms_metadata/`;
+    const endpoint = `cosmos/bank/v1beta1/denoms_metadata`;
     return await this.request(endpoint, options);
   }
 

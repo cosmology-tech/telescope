@@ -355,6 +355,7 @@ const traverseServiceMethod = (store: ProtoStore, ref: ProtoRef, obj: any, impor
 const getServiceType = (obj) => {
     if (obj.name === 'Msg') return 'Mutation';
     if (obj.name === 'Query') return 'Query';
+    if (obj.name === 'Service') return 'Service';
     return 'Unknown';
 }
 

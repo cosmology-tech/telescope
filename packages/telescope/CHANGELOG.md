@@ -3,6 +3,102 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.8.6](https://github.com/osmosis-labs/telescope/compare/@osmonauts/telescope@0.8.5...@osmonauts/telescope@0.8.6) (2022-07-25)
+
+**Note:** Version bump only for package @osmonauts/telescope
+
+
+
+
+
+## [0.8.5](https://github.com/osmosis-labs/telescope/compare/@osmonauts/telescope@0.8.4...@osmonauts/telescope@0.8.5) (2022-07-24)
+
+**Note:** Version bump only for package @osmonauts/telescope
+
+
+
+
+
+## [0.8.4](https://github.com/osmosis-labs/telescope/compare/@osmonauts/telescope@0.8.3...@osmonauts/telescope@0.8.4) (2022-07-24)
+
+**Note:** Version bump only for package @osmonauts/telescope
+
+
+
+
+
+## [0.8.3](https://github.com/osmosis-labs/telescope/compare/@osmonauts/telescope@0.8.2...@osmonauts/telescope@0.8.3) (2022-07-24)
+
+**Note:** Version bump only for package @osmonauts/telescope
+
+
+
+
+
+## [0.8.2](https://github.com/osmosis-labs/telescope/compare/@osmonauts/telescope@0.8.1...@osmonauts/telescope@0.8.2) (2022-07-24)
+
+**Note:** Version bump only for package @osmonauts/telescope
+
+
+
+
+
+## [0.8.1](https://github.com/osmosis-labs/telescope/compare/@osmonauts/telescope@0.8.0...@osmonauts/telescope@0.8.1) (2022-07-23)
+
+**Note:** Version bump only for package @osmonauts/telescope
+
+
+
+
+
+# [0.8.0](https://github.com/osmosis-labs/telescope/compare/@osmonauts/telescope@0.7.2...@osmonauts/telescope@0.8.0) (2022-07-23)
+
+**Note:** Version bump only for package @osmonauts/telescope
+
+
+
+
+
+## [0.7.2](https://github.com/osmosis-labs/telescope/compare/@osmonauts/telescope@0.7.1...@osmonauts/telescope@0.7.2) (2022-07-23)
+
+**Note:** Version bump only for package @osmonauts/telescope
+
+
+
+
+
+## [0.7.1](https://github.com/osmosis-labs/telescope/compare/@osmonauts/telescope@0.7.0...@osmonauts/telescope@0.7.1) (2022-07-23)
+
+**Note:** Version bump only for package @osmonauts/telescope
+
+
+
+
+
+# [0.7.0](https://github.com/osmosis-labs/telescope/compare/@osmonauts/telescope@0.6.2...@osmonauts/telescope@0.7.0) (2022-07-21)
+
+**Note:** Version bump only for package @osmonauts/telescope
+
+
+
+
+
+## [0.6.2](https://github.com/osmosis-labs/telescope/compare/@osmonauts/telescope@0.6.1...@osmonauts/telescope@0.6.2) (2022-07-19)
+
+**Note:** Version bump only for package @osmonauts/telescope
+
+
+
+
+
+## [0.6.1](https://github.com/osmosis-labs/telescope/compare/@osmonauts/telescope@0.6.0...@osmonauts/telescope@0.6.1) (2022-07-18)
+
+**Note:** Version bump only for package @osmonauts/telescope
+
+
+
+
+
 # [0.6.0](https://github.com/osmosis-labs/telescope/compare/@osmonauts/telescope@0.5.2...@osmonauts/telescope@0.6.0) (2022-07-15)
 
 **Note:** Version bump only for package @osmonauts/telescope

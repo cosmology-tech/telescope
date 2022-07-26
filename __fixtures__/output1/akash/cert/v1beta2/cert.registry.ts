@@ -10,14 +10,14 @@ export const MessageComposer = {
   encoded: {
     createCertificate(value: MsgCreateCertificate) {
       return {
-        type_url: "/akash.cert.v1beta2.MsgCreateCertificate",
+        typeUrl: "/akash.cert.v1beta2.MsgCreateCertificate",
         value: MsgCreateCertificate.encode(value).finish()
       };
     },
 
     revokeCertificate(value: MsgRevokeCertificate) {
       return {
-        type_url: "/akash.cert.v1beta2.MsgRevokeCertificate",
+        typeUrl: "/akash.cert.v1beta2.MsgRevokeCertificate",
         value: MsgRevokeCertificate.encode(value).finish()
       };
     }

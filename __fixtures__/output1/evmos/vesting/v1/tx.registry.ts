@@ -12,14 +12,14 @@ export const MessageComposer = {
   encoded: {
     createClawbackVestingAccount(value: MsgCreateClawbackVestingAccount) {
       return {
-        type_url: "/evmos.vesting.v1.MsgCreateClawbackVestingAccount",
+        typeUrl: "/evmos.vesting.v1.MsgCreateClawbackVestingAccount",
         value: MsgCreateClawbackVestingAccount.encode(value).finish()
       };
     },
 
     clawback(value: MsgClawback) {
       return {
-        type_url: "/evmos.vesting.v1.MsgClawback",
+        typeUrl: "/evmos.vesting.v1.MsgClawback",
         value: MsgClawback.encode(value).finish()
       };
     }

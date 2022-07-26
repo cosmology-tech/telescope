@@ -3,6 +3,62 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.7.3](https://github.com/osmosis-labs/telescope/compare/@osmonauts/proto-parser@0.7.2...@osmonauts/proto-parser@0.7.3) (2022-07-25)
+
+**Note:** Version bump only for package @osmonauts/proto-parser
+
+
+
+
+
+## [0.7.2](https://github.com/osmosis-labs/telescope/compare/@osmonauts/proto-parser@0.7.1...@osmonauts/proto-parser@0.7.2) (2022-07-24)
+
+**Note:** Version bump only for package @osmonauts/proto-parser
+
+
+
+
+
+## [0.7.1](https://github.com/osmosis-labs/telescope/compare/@osmonauts/proto-parser@0.7.0...@osmonauts/proto-parser@0.7.1) (2022-07-23)
+
+**Note:** Version bump only for package @osmonauts/proto-parser
+
+
+
+
+
+# [0.7.0](https://github.com/osmosis-labs/telescope/compare/@osmonauts/proto-parser@0.6.1...@osmonauts/proto-parser@0.7.0) (2022-07-23)
+
+**Note:** Version bump only for package @osmonauts/proto-parser
+
+
+
+
+
+## [0.6.1](https://github.com/osmosis-labs/telescope/compare/@osmonauts/proto-parser@0.6.0...@osmonauts/proto-parser@0.6.1) (2022-07-23)
+
+**Note:** Version bump only for package @osmonauts/proto-parser
+
+
+
+
+
+# [0.6.0](https://github.com/osmosis-labs/telescope/compare/@osmonauts/proto-parser@0.5.1...@osmonauts/proto-parser@0.6.0) (2022-07-21)
+
+**Note:** Version bump only for package @osmonauts/proto-parser
+
+
+
+
+
+## [0.5.1](https://github.com/osmosis-labs/telescope/compare/@osmonauts/proto-parser@0.5.0...@osmonauts/proto-parser@0.5.1) (2022-07-18)
+
+**Note:** Version bump only for package @osmonauts/proto-parser
+
+
+
+
+
 # [0.5.0](https://github.com/osmosis-labs/telescope/compare/@osmonauts/proto-parser@0.4.18...@osmonauts/proto-parser@0.5.0) (2022-07-15)
 
 **Note:** Version bump only for package @osmonauts/proto-parser

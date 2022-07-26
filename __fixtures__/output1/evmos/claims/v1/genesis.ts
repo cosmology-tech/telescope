@@ -23,10 +23,10 @@ export interface Params {
   airdropStartTime: Date;
 
   /** duration until decay of claimable tokens begin */
-  durationUntilDecay: string;
+  durationUntilDecay: Duration;
 
   /** duration of the token claim decay period */
-  durationOfDecay: string;
+  durationOfDecay: Duration;
 
   /** denom of claimable coin */
   claimsDenom: string;
@@ -211,8 +211,8 @@ export const Params = {
     return {
       enableClaims: isSet(object.enableClaims) ? Boolean(object.enableClaims) : false,
       airdropStartTime: isSet(object.airdropStartTime) ? fromJsonTimestamp(object.airdropStartTime) : undefined,
-      durationUntilDecay: isSet(object.durationUntilDecay) ? String(object.durationUntilDecay) : undefined,
-      durationOfDecay: isSet(object.durationOfDecay) ? String(object.durationOfDecay) : undefined,
+      durationUntilDecay: isSet(object.durationUntilDecay) ? Duration.fromJSON(object.durationUntilDecay) : undefined,
+      durationOfDecay: isSet(object.durationOfDecay) ? Duration.fromJSON(object.durationOfDecay) : undefined,
       claimsDenom: isSet(object.claimsDenom) ? String(object.claimsDenom) : "",
       authorizedChannels: Array.isArray(object?.authorizedChannels) ? object.authorizedChannels.map((e: any) => String(e)) : [],
       evmChannels: Array.isArray(object?.evmChannels) ? object.evmChannels.map((e: any) => String(e)) : []
