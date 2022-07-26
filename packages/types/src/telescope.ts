@@ -17,7 +17,13 @@ interface TelescopeOpts {
     lcd?: {
         dir: string;
         packages: string[]
-    }
+    },
+    createLCDBundles?: boolean;
+    lcds?: {
+        dir: string;
+        filename?: string;
+        packages: string[]
+    }[]
 }
 interface TelescopePackageOpts {
     packages?: Record<string, any>;
@@ -34,6 +40,7 @@ export const defaultTelescopeOptions: TelescopeOptions = {
     signingClientDefaults: true,
     includePackageVar: false,
     includeRpcClients: false,
+    createLCDBundles: false,
     camelRpcMethods: true,
     useDate: 'date',
     useDuration: 'duration',

@@ -253,9 +253,7 @@ export const getDepsFromMutations = (
             const f = filename;
             const f2 = imp.import;
             if (f === f2) return;
-            const rel = relative(dirname(f), f2);
-            let importPath = rel.replace(extname(rel), '');
-            if (!/\//.test(importPath)) importPath = `./${importPath}`;
+            const importPath = getRelativePath(f, f2);
             return {
                 ...imp,
                 importPath
@@ -280,9 +278,7 @@ export const getDepsFromQueries = (
             const f = filename;
             const f2 = imp.import;
             if (f === f2) return;
-            const rel = relative(dirname(f), f2);
-            let importPath = rel.replace(extname(rel), '');
-            if (!/\//.test(importPath)) importPath = `./${importPath}`;
+            const importPath = getRelativePath(f, f2);
             return {
                 ...imp,
                 importPath

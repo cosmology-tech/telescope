@@ -11,6 +11,7 @@ import { plugin as createAminoConverters } from './generators/create-amino-conve
 import { plugin as createRegistries } from './generators/create-registries';
 import { plugin as createLCDClients } from './generators/create-lcd-clients';
 import { plugin as createAggregatedLCDClient } from './generators/create-aggregated-lcd-client';
+import { plugin as createLCDClientsScoped } from './generators/create-lcd-client-scoped';
 import { plugin as createRPCQueryClients } from './generators/create-rpc-query-clients';
 import { plugin as createRPCMsgClients } from './generators/create-rpc-msg-clients';
 import { plugin as createStargateClients } from './generators/create-stargate-clients';
@@ -59,8 +60,8 @@ export class TelescopeBuilder {
 
     build() {
         // [x] get bundle of all packages
-        bundlePackages(this.store)
-            .forEach(bundle => {
+        const bundles = bundlePackages(this.store)
+            .map(bundle => {
 
                 // store bundleFile in filesToInclude
                 const bundler = new Bundler(this, bundle);
@@ -84,6 +85,14 @@ export class TelescopeBuilder {
                 createStargateClients(this, bundler);
 
                 createBundle(this, bundler);
+
+                return bundler;
+            });
+
+        // post run plugins
+        bundles
+            .forEach(bundler => {
+                createLCDClientsScoped(this, bundler);
             });
 
         createAggregatedLCDClient(this);

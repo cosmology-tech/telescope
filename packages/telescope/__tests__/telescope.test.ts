@@ -14,6 +14,7 @@ const input: TelescopeInput = {
     options: {
         ...defaultTelescopeOptions,
         includeLCDClients: true,
+        createLCDBundles: false,
         includePackageVar: true,
         includeRpcClients: false,
         lcd: {
@@ -23,6 +24,15 @@ const input: TelescopeInput = {
                 'osmosis.gamm.v1beta1'
             ]
         },
+        lcds: [{
+            dir: 'osmosis',
+            filename: 'lcd-client.ts',
+            packages: [
+                'cosmos.bank.v1beta1',
+                'cosmos.gov.v1beta1',
+                'osmosis.gamm.v1beta1'
+            ]
+        }],
         aminoExceptions: {
             '/akash.audit.v1beta2.MsgSignProviderAttributes': {
                 aminoType: 'mymessage-testonly'
