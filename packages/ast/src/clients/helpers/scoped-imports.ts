@@ -1,5 +1,82 @@
 import * as t from '@babel/types';
 
+export const lcdClassArguments = (): t.ObjectExpression[] => {
+    return [
+        t.objectExpression([
+            t.objectProperty(
+                t.identifier('restEndpoint'),
+                t.identifier('restEndpoint'),
+                false,
+                true
+            )
+        ])
+    ]
+}
+
+export const newAwaitImport = (
+    path: string,
+    className: string,
+    _arguments: t.ObjectExpression[]
+) => {
+    return t.newExpression(
+        t.memberExpression(
+            t.awaitExpression(
+                t.callExpression(
+                    t.import(),
+                    [
+                        t.stringLiteral(
+                            path
+                        )
+                    ]
+                )
+            ),
+            t.identifier(className),
+            false
+        ),
+        _arguments
+    );
+}
+
+export const recursiveObjectProps = (
+    names: string[],
+    leaf?: any
+) => {
+    const [name, ...rest] = names;
+
+    let baseComponent;
+    if (names.length === 1) {
+        baseComponent = leaf ? leaf : t.identifier(name)
+    } else {
+        baseComponent = recursiveObjectProps(rest, leaf)
+    }
+
+    return t.objectExpression([
+        t.objectProperty(
+            t.identifier(name),
+            baseComponent
+        )
+    ])
+};
+
+export const createScopedImportObject = (
+    names: string[],
+    path: string,
+    className: string,
+    _arguments: t.ObjectExpression[]
+) => {
+    return recursiveObjectProps(
+        names,
+        newAwaitImport(
+            path,
+            className,
+            _arguments
+        )
+    )
+};
+
+
+
+
 export const scopedImportObject = () => {
     return t.exportNamedDeclaration(
         t.variableDeclaration(
@@ -142,8 +219,6 @@ export const scopedImportObject = () => {
                                     )
                                 ])
                             ),
-
-
                         ]),
                         true
                     )
