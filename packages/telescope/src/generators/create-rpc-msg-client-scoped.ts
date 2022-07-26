@@ -58,7 +58,7 @@ const makeRPC = (
     const localname = getFileName(dir, rpc.filename);
 
     const obj = {};
-    builder.rpcQueryClients.forEach(file => {
+    builder.rpcMsgClients.forEach(file => {
 
         // ADD all option
         // which defaults to including cosmos 
@@ -75,7 +75,7 @@ const makeRPC = (
     const rpcast = createScopedImportObject(
         obj,
         methodName,
-        'RPCMsgClient', // make option later
+        'MsgClientImpl', // make option later
         rpcArguments()
     );
 

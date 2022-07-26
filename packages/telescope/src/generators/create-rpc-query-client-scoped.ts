@@ -75,7 +75,7 @@ const makeRPC = (
     const rpcast = createScopedImportObject(
         obj,
         methodName,
-        'RPCQueryClient', // make option later
+        'QueryClientImpl', // make option later
         rpcArguments()
     );
 
