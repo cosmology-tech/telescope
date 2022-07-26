@@ -24,7 +24,37 @@ export const scopedImportObject = () => {
                                 t.objectExpression([
                                     t.objectProperty(
                                         t.identifier('bank'),
-                                        t.identifier('bank'),
+                                        t.objectExpression([
+                                            t.objectProperty(
+                                                t.identifier('v1beta1'),
+                                                t.newExpression(
+                                                    t.memberExpression(
+                                                        t.awaitExpression(
+                                                            t.callExpression(
+                                                                t.import(),
+                                                                [
+                                                                    t.stringLiteral(
+                                                                        './proto/thing'
+                                                                    )
+                                                                ]
+                                                            )
+                                                        ),
+                                                        t.identifier('LCDQueryClient'),
+                                                        false
+                                                    ),
+                                                    [
+                                                        t.objectExpression([
+                                                            t.objectProperty(
+                                                                t.identifier('restEndpoint'),
+                                                                t.identifier('restEndpoint'),
+                                                                false,
+                                                                true
+                                                            )
+                                                        ])
+                                                    ]
+                                                )
+                                            )
+                                        ]),
                                         false,
                                         true
                                     )
