@@ -8,21 +8,26 @@ export const lcdArguments = (): t.ObjectProperty[] => {
             false,
             true
         )
-    ]
+    ];
 };
 
-export const rpcArguments = (): t.ObjectProperty[] => {
+export const lcdFuncArguments = (): t.ObjectPattern[] => {
     return [
-        t.objectProperty(
-            t.identifier('rpc'),
-            t.identifier('rpc'),
-            false,
-            true
+        t.objectPattern(
+            lcdArguments()
         )
-    ]
+    ];
 };
 
-export const newAwaitImport = (
+export const lcdClassArguments = (): t.ObjectExpression[] => {
+    return [
+        t.objectExpression(
+            lcdArguments()
+        )
+    ];
+};
+
+export const lcdNewAwaitImport = (
     path: string,
     className: string,
     _arguments: t.ObjectExpression[]
@@ -46,7 +51,7 @@ export const newAwaitImport = (
     );
 }
 
-export const recursiveObjectProps = (
+export const lcdRecursiveObjectProps = (
     names: string[],
     leaf?: any
 ) => {
@@ -56,7 +61,7 @@ export const recursiveObjectProps = (
     if (names.length === 1) {
         baseComponent = leaf ? leaf : t.identifier(name)
     } else {
-        baseComponent = recursiveObjectProps(rest, leaf)
+        baseComponent = lcdRecursiveObjectProps(rest, leaf)
     }
 
     return t.objectExpression([
@@ -67,19 +72,14 @@ export const recursiveObjectProps = (
     ])
 };
 
-export const nestedImportObject = (
+export const lcdNestedImportObject = (
     obj: object,
     className: string,
-    _arguments: t.ObjectProperty[]
+    _arguments: t.ObjectExpression[]
 ) => {
 
     if (typeof obj === 'string') {
-        return newAwaitImport(obj, className,
-            [
-                t.objectExpression(
-                    _arguments
-                )
-            ]);
+        return lcdNewAwaitImport(obj, className, _arguments);
     }
 
     const keys = Object.keys(obj);
@@ -87,16 +87,15 @@ export const nestedImportObject = (
     return t.objectExpression(keys.map(name => {
         return t.objectProperty(
             t.identifier(name),
-            nestedImportObject(obj[name], className, _arguments)
+            lcdNestedImportObject(obj[name], className, _arguments)
         )
     }))
 };
 
-export const createScopedImportObject = (
+export const createScopedLCDFactory = (
     obj: object,
     identifier: string,
-    className: string,
-    _arguments: t.ObjectProperty[]
+    className: string
 ) => {
     return t.exportNamedDeclaration(
         t.variableDeclaration(
@@ -105,14 +104,12 @@ export const createScopedImportObject = (
                 t.variableDeclarator(
                     t.identifier(identifier),
                     t.arrowFunctionExpression(
-                        [
-                            t.objectPattern(_arguments)
-                        ],
+                        lcdFuncArguments(),
                         //
-                        nestedImportObject(
+                        lcdNestedImportObject(
                             obj,
                             className,
-                            _arguments
+                            lcdClassArguments()
                         ),
                         true
                     )
@@ -120,4 +117,4 @@ export const createScopedImportObject = (
             ]
         )
     )
-}
+};

@@ -2,10 +2,12 @@ import * as dotty from 'dotty';
 import { getNestedProto } from '@osmonauts/proto-parser';
 import { join } from 'path';
 import { TelescopeBuilder } from '../builder';
-import { createScopedImportObject, rpcArguments } from '@osmonauts/ast';
+import { createScopedRpcFactory } from '@osmonauts/ast';
 import { ProtoRef } from '@osmonauts/types';
 import { getRelativePath } from '../utils';
 import { Bundler } from '../bundler';
+import { TelescopeParseContext } from '../build';
+import { aggregateImports, getDepsFromQueries, getImportStatments } from '../imports';
 
 export const plugin = (
     builder: TelescopeBuilder,
@@ -72,14 +74,59 @@ const makeRPC = (
         const importPath = getRelativePath(f, f2);
         dotty.put(obj, file.package, importPath);
     });
-    const rpcast = createScopedImportObject(
+
+    const ctx = new TelescopeParseContext(
+        {
+            absolute: '',
+            filename: localname,
+            proto: {
+                package: dir,
+                imports: null,
+                root: {},
+                importNames: null
+            },
+            traversed: {
+                package: dir,
+                imports: null,
+                root: {},
+                importNames: null
+            }
+        },
+        builder.store,
+        builder.options
+    );
+
+    // TODO add addUtil to generic context
+    ctx.proto.addUtil('Rpc');
+
+    const rpcast = createScopedRpcFactory(
         obj,
         methodName,
-        'QueryClientImpl', // make option later
-        rpcArguments()
+        'QueryClientImpl' // make option later
+    );
+
+
+    const serviceImports = getDepsFromQueries(
+        ctx.queries,
+        localname
+    );
+
+    const imports = aggregateImports(ctx, serviceImports, localname);
+
+    const fixlocalpaths = imports.map(imp => {
+        return {
+            ...imp,
+            path: (imp.path.startsWith('.') || imp.path.startsWith('@')) ?
+                imp.path : `./${imp.path}`
+        };
+    });
+
+    const importStmts = getImportStatments(
+        [...fixlocalpaths]
     );
 
     const prog = []
+        .concat(importStmts)
         .concat(rpcast);
 
     const filename = bundler.getFilename(localname);

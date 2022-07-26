@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`createScopedImportObject 1`] = `
+exports[`createScopedLCDFactory 1`] = `
 "export const lcd = async ({
   restEndpoint
 }) => ({
@@ -26,7 +26,7 @@ exports[`createScopedImportObject 1`] = `
 });"
 `;
 
-exports[`recursiveObjectProps 1`] = `
+exports[`lcdRecursiveObjectProps 1`] = `
 "{
   cosmos: {
     bank: {

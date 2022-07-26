@@ -2,7 +2,7 @@ import * as dotty from 'dotty';
 import { getNestedProto } from '@osmonauts/proto-parser';
 import { join } from 'path';
 import { TelescopeBuilder } from '../builder';
-import { createScopedImportObject, lcdArguments } from '@osmonauts/ast';
+import { createScopedLCDFactory } from '@osmonauts/ast';
 import { ProtoRef } from '@osmonauts/types';
 import { getRelativePath } from '../utils';
 import { Bundler } from '../bundler';
@@ -72,11 +72,10 @@ const makeLCD = (
         const importPath = getRelativePath(f, f2);
         dotty.put(obj, file.package, importPath);
     });
-    const lcdast = createScopedImportObject(
+    const lcdast = createScopedLCDFactory(
         obj,
         methodName,
-        'LCDQueryClient', // make option later
-        lcdArguments()
+        'LCDQueryClient' // make option later
     );
 
     const prog = []

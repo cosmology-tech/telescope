@@ -11,11 +11,15 @@ export declare class TelescopeBuilder {
     files: string[];
     readonly converters: BundlerFile[];
     readonly lcdClients: BundlerFile[];
+    readonly rpcQueryClients: BundlerFile[];
+    readonly rpcMsgClients: BundlerFile[];
     readonly registries: BundlerFile[];
     constructor({ protoDirs, outPath, store, options }: TelescopeInput & {
         store?: ProtoStore;
     });
     context(ref: any): TelescopeParseContext;
+    addRPCQueryClients(files: BundlerFile[]): void;
+    addRPCMsgClients(files: BundlerFile[]): void;
     addLCDClients(files: BundlerFile[]): void;
     addRegistries(files: BundlerFile[]): void;
     addConverters(files: BundlerFile[]): void;

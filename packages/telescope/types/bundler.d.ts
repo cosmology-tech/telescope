@@ -10,9 +10,13 @@ export declare class Bundler {
     files: string[];
     readonly converters: BundlerFile[];
     readonly lcdClients: BundlerFile[];
+    readonly rpcQueryClients: BundlerFile[];
+    readonly rpcMsgClients: BundlerFile[];
     readonly registries: BundlerFile[];
     constructor(builder: TelescopeBuilder, bundle: Bundle);
     addLCDClients(files: BundlerFile[]): void;
+    addRPCQueryClients(files: BundlerFile[]): void;
+    addRPCMsgClients(files: BundlerFile[]): void;
     addRegistries(files: BundlerFile[]): void;
     addConverters(files: BundlerFile[]): void;
     getFreshContext(context: TelescopeParseContext): TelescopeParseContext;
@@ -20,4 +24,5 @@ export declare class Bundler {
     getFilename(localname: string): string;
     writeAst(program: t.Statement[], filename: string): void;
     addToBundle(context: TelescopeParseContext, localname: string): void;
+    addToBundleToPackage(packagename: string, localname: string): void;
 }

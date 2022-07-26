@@ -83,7 +83,7 @@ export const plugin = (
         const fixlocalpaths = imports.map(imp => {
             return {
                 ...imp,
-                path: imp.path.startsWith('.') ?
+                path: (imp.path.startsWith('.') || imp.path.startsWith('@')) ?
                     imp.path : `./${imp.path}`
             };
         });

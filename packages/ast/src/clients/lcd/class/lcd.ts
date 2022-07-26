@@ -1,8 +1,8 @@
 import * as t from '@babel/types';
 import { ProtoService, ProtoServiceMethod, ProtoServiceMethodInfo } from '@osmonauts/types';
 import { snake } from 'case';
-import { GenericParseContext } from '../../encoding';
-import { classMethod, identifier } from '../../utils';
+import { GenericParseContext } from '../../../encoding';
+import { classMethod, identifier } from '../../../utils';
 
 const returnReponseType = (ResponseType: string) => {
     return t.tsTypeAnnotation(

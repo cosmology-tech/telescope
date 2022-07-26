@@ -2,7 +2,7 @@ import * as dotty from 'dotty';
 import { getNestedProto } from '@osmonauts/proto-parser';
 import { join } from 'path';
 import { TelescopeBuilder } from '../builder';
-import { createScopedImportObject, rpcArguments } from '@osmonauts/ast';
+import { createScopedRpcFactory } from '@osmonauts/ast';
 import { ProtoRef } from '@osmonauts/types';
 import { getRelativePath } from '../utils';
 import { Bundler } from '../bundler';
@@ -72,11 +72,10 @@ const makeRPC = (
         const importPath = getRelativePath(f, f2);
         dotty.put(obj, file.package, importPath);
     });
-    const rpcast = createScopedImportObject(
+    const rpcast = createScopedRpcFactory(
         obj,
         methodName,
-        'MsgClientImpl', // make option later
-        rpcArguments()
+        'MsgClientImpl' // make option later
     );
 
     const prog = []

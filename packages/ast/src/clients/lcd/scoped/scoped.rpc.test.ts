@@ -1,17 +1,16 @@
-import { expectCode, printCode } from '../../../test-utils'
+import { expectCode } from '../../../../test-utils'
 
 import {
-    recursiveObjectProps,
-    lcdArguments,
-    createScopedImportObject
-} from './scoped-imports';
+    lcdRecursiveObjectProps,
+    createScopedLCDFactory
+} from './scoped';
 
-it('recursiveObjectProps', async () => {
-    expectCode(recursiveObjectProps(['cosmos', 'bank', 'v1beta1']))
+it('lcdRecursiveObjectProps', async () => {
+    expectCode(lcdRecursiveObjectProps(['cosmos', 'bank', 'v1beta1']))
 });
 
-it('createScopedImportObject', async () => {
-    expectCode(createScopedImportObject({
+it('createScopedLCDFactory', async () => {
+    expectCode(createScopedLCDFactory({
         cosmos: {
             bank: {
                 v1beta1: "./proto/cosmos/bank/v1beta1/query.lcd"
@@ -27,7 +26,7 @@ it('createScopedImportObject', async () => {
         }
     },
         'lcd',
-        'LCDQueryClient',
-        lcdArguments()
+        'LCDQueryClient'
     ))
 });
+
