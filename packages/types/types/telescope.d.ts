@@ -16,9 +16,20 @@ interface TelescopeOpts {
         dir: string;
         packages: string[];
     };
+    rpc?: {
+        dir: string;
+        packages: string[];
+    };
     createLCDBundles?: boolean;
     createRPCBundles?: boolean;
     lcds?: {
+        dir: string;
+        filename?: string;
+        packages: string[];
+        addToBundle: boolean;
+        methodName?: string;
+    }[];
+    rpcs?: {
         dir: string;
         filename?: string;
         packages: string[];
