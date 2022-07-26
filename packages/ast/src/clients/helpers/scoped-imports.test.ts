@@ -4,7 +4,8 @@ import {
     scopedImportObject,
     recursiveObjectProps,
     createScopedImportObject,
-    lcdClassArguments
+    lcdClassArguments,
+    createNestedImportObject
 } from './scoped-imports';
 
 it('recursiveObjectProps', async () => {
@@ -15,6 +16,28 @@ it('createScopedImportObject', async () => {
     printCode(createScopedImportObject(
         ['cosmos', 'bank', 'v1beta1'],
         './proto/path/to/stuff',
+        'LCDQueryClient',
+        lcdClassArguments()
+    ))
+});
+
+it('createNestedImportObject', async () => {
+    printCode(createNestedImportObject(
+        {
+            cosmos: {
+                bank: {
+                    v1beta1: "./proto/cosmos/bank/v1beta1/query.lcd"
+                },
+                gov: {
+                    v1beta1: "./proto/cosmos/bank/v1beta1/query.lcd"
+                },
+            },
+            osmosis: {
+                gamm: {
+                    v1beta1: "./proto/cosmos/bank/v1beta1/query.lcd"
+                }
+            }
+        },
         'LCDQueryClient',
         lcdClassArguments()
     ))

@@ -58,6 +58,26 @@ export const recursiveObjectProps = (
     ])
 };
 
+export const createNestedImportObject = (
+    obj: object,
+    className: string,
+    _arguments: t.ObjectExpression[]
+) => {
+
+    if (typeof obj === 'string') {
+        return newAwaitImport(obj, className, _arguments)
+    }
+
+    const keys = Object.keys(obj);
+
+    return t.objectExpression(keys.map(name => {
+        return t.objectProperty(
+            t.identifier(name),
+            createNestedImportObject(obj[name], className, _arguments)
+        )
+    }))
+};
+
 export const createScopedImportObject = (
     names: string[],
     path: string,
@@ -73,9 +93,6 @@ export const createScopedImportObject = (
         )
     )
 };
-
-
-
 
 export const scopedImportObject = () => {
     return t.exportNamedDeclaration(
