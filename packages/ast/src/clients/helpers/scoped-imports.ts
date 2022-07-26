@@ -14,8 +14,8 @@ export const lcdArguments = (): t.ObjectProperty[] => {
 export const rpcArguments = (): t.ObjectProperty[] => {
     return [
         t.objectProperty(
-            t.identifier('rpcEndpoint'),
-            t.identifier('rpcEndpoint'),
+            t.identifier('rpc'),
+            t.identifier('rpc'),
             false,
             true
         )
