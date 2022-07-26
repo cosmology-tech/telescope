@@ -83,8 +83,10 @@ import * as _522 from "./incentives/tx.rpc.msg";
 import * as _523 from "./lockup/tx.rpc.msg";
 import * as _524 from "./superfluid/tx.rpc.msg";
 import * as _525 from "./tokenfactory/v1beta1/tx.rpc.msg";
-import * as _535 from "./custom-lcd-client";
-import * as _536 from "./lcd";
+import * as _545 from "./custom-lcd-client";
+import * as _546 from "./lcd";
+import * as _547 from "./rpc.query";
+import * as _548 from "./rpc.msg";
 export namespace osmosis {
   export namespace claim {
     export const v1beta1 = { ..._255,
@@ -207,6 +209,8 @@ export namespace osmosis {
     };
   }
 }
-export const ClientFactory = { ..._535,
-  ..._536
+export const ClientFactory = { ..._545,
+  ..._546,
+  ..._547,
+  ..._548
 };

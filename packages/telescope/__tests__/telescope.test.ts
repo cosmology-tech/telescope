@@ -15,8 +15,9 @@ const input: TelescopeInput = {
         ...defaultTelescopeOptions,
         includeLCDClients: true,
         createLCDBundles: true,
+        includeRPCClients: true,
+        createRPCBundles: true,
         includePackageVar: true,
-        includeRpcClients: false,
         lcd: {
             dir: 'osmosis',
             packages: [

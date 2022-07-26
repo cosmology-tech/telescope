@@ -43,7 +43,9 @@ import * as _481 from "./applications/transfer/v1/tx.rpc.msg";
 import * as _482 from "./core/channel/v1/tx.rpc.msg";
 import * as _483 from "./core/client/v1/tx.rpc.msg";
 import * as _484 from "./core/connection/v1/tx.rpc.msg";
-import * as _534 from "./lcd";
+import * as _542 from "./lcd";
+import * as _543 from "./rpc.query";
+import * as _544 from "./rpc.msg";
 export namespace ibc {
   export namespace applications {
     export namespace transfer {
@@ -129,5 +131,7 @@ export namespace ibc {
     }
   }
 }
-export const ClientFactory = { ..._534
+export const ClientFactory = { ..._542,
+  ..._543,
+  ..._544
 };

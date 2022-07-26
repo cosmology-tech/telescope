@@ -47,7 +47,9 @@ import * as _460 from "./vesting/v1/query.rpc.query";
 import * as _461 from "./erc20/v1/tx.rpc.msg";
 import * as _462 from "./fees/v1/tx.rpc.msg";
 import * as _463 from "./vesting/v1/tx.rpc.msg";
-import * as _533 from "./lcd";
+import * as _539 from "./lcd";
+import * as _540 from "./rpc.query";
+import * as _541 from "./rpc.msg";
 export namespace evmos {
   export namespace claims {
     export const v1 = { ..._154,
@@ -123,5 +125,7 @@ export namespace evmos {
     };
   }
 }
-export const ClientFactory = { ..._533
+export const ClientFactory = { ..._539,
+  ..._540,
+  ..._541
 };

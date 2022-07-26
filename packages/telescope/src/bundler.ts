@@ -18,6 +18,8 @@ export class Bundler {
 
     readonly converters: BundlerFile[] = [];
     readonly lcdClients: BundlerFile[] = [];
+    readonly rpcQueryClients: BundlerFile[] = [];
+    readonly rpcMsgClients: BundlerFile[] = [];
     readonly registries: BundlerFile[] = [];
 
     constructor(
@@ -34,6 +36,16 @@ export class Bundler {
     addLCDClients(files: BundlerFile[]) {
         [].push.apply(this.lcdClients, files);
         this.builder.addLCDClients(files);
+    }
+
+    addRPCQueryClients(files: BundlerFile[]) {
+        [].push.apply(this.rpcQueryClients, files);
+        this.builder.addRPCQueryClients(files);
+    }
+
+    addRPCMsgClients(files: BundlerFile[]) {
+        [].push.apply(this.rpcMsgClients, files);
+        this.builder.addRPCMsgClients(files);
     }
 
     addRegistries(files: BundlerFile[]) {

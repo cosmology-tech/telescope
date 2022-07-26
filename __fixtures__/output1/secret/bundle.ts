@@ -11,7 +11,8 @@ import * as _526 from "./compute/v1beta1/query.lcd";
 import * as _527 from "./registration/v1beta1/query.lcd";
 import * as _528 from "./compute/v1beta1/query.rpc.query";
 import * as _529 from "./registration/v1beta1/query.rpc.query";
-import * as _537 from "./lcd";
+import * as _549 from "./lcd";
+import * as _550 from "./rpc.query";
 export namespace secret {
   export namespace compute {
     export const v1beta1 = { ..._299,
@@ -36,5 +37,6 @@ export namespace secret {
     }
   }
 }
-export const ClientFactory = { ..._537
+export const ClientFactory = { ..._549,
+  ..._550
 };

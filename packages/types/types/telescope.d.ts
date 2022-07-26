@@ -7,7 +7,7 @@ interface TelescopeOpts {
     includeAminos?: boolean;
     includeLCDClients?: boolean;
     includePackageVar?: boolean;
-    includeRpcClients?: boolean;
+    includeRPCClients?: boolean;
     signingClientDefaults?: boolean;
     useDate?: 'date' | 'timestamp';
     useDuration?: 'duration' | 'string';
@@ -17,6 +17,7 @@ interface TelescopeOpts {
         packages: string[];
     };
     createLCDBundles?: boolean;
+    createRPCBundles?: boolean;
     lcds?: {
         dir: string;
         filename?: string;

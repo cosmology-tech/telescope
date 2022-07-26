@@ -9,7 +9,7 @@ export const plugin = (
     builder: TelescopeBuilder,
     bundler: Bundler
 ) => {
-    if (!builder.options.includeRpcClients) {
+    if (!builder.options.includeRPCClients) {
         return;
     }
 
@@ -17,7 +17,7 @@ export const plugin = (
         .contexts
         .filter(context => context.mutations.length > 0);
 
-    mutationContexts.map(c => {
+    const clients = mutationContexts.map(c => {
 
         const localname = bundler.getLocalFilename(c.ref, 'rpc.msg');
         const filename = bundler.getFilename(localname);
@@ -62,5 +62,6 @@ export const plugin = (
 
     }).filter(Boolean);
 
+    bundler.addRPCMsgClients(clients);
 
 };

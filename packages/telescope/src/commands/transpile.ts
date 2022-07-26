@@ -55,7 +55,7 @@ export default async (argv) => {
     },
     {
       type: 'confirm',
-      name: 'includeRpcClients',
+      name: 'includeRPCClients',
       message: 'output RPC clients?',
       default: false
     },
@@ -82,7 +82,7 @@ export default async (argv) => {
     includeLCDClients,
     includePackageVar,
     camelRpcMethods,
-    includeRpcClients,
+    includeRPCClients,
     useDate,
     useDuration
   } = await prompt(questions, argv);
@@ -96,7 +96,7 @@ export default async (argv) => {
     includeLCDClients,
     includePackageVar,
     camelRpcMethods,
-    includeRpcClients,
+    includeRPCClients,
     useDate,
     useDuration,
     useExact: false

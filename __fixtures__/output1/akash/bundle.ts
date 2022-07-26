@@ -92,6 +92,8 @@ import * as _356 from "./market/v1beta2/service.rpc.msg";
 import * as _357 from "./provider/v1beta1/provider.rpc.msg";
 import * as _358 from "./provider/v1beta2/provider.rpc.msg";
 import * as _530 from "./lcd";
+import * as _531 from "./rpc.query";
+import * as _532 from "./rpc.msg";
 export namespace akash {
   export namespace audit {
     export const v1beta1 = { ..._0,
@@ -216,5 +218,7 @@ export namespace akash {
     };
   }
 }
-export const ClientFactory = { ..._530
+export const ClientFactory = { ..._530,
+  ..._531,
+  ..._532
 };

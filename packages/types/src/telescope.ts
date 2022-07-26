@@ -9,7 +9,7 @@ interface TelescopeOpts {
     includeAminos?: boolean;
     includeLCDClients?: boolean;
     includePackageVar?: boolean;
-    includeRpcClients?: boolean;
+    includeRPCClients?: boolean;
     signingClientDefaults?: boolean;
     useDate?: 'date' | 'timestamp';
     useDuration?: 'duration' | 'string';
@@ -19,6 +19,7 @@ interface TelescopeOpts {
         packages: string[]
     },
     createLCDBundles?: boolean;
+    createRPCBundles?: boolean;
     lcds?: {
         dir: string;
         filename?: string;
@@ -41,8 +42,9 @@ export const defaultTelescopeOptions: TelescopeOptions = {
     includeLCDClients: false,
     signingClientDefaults: true,
     includePackageVar: false,
-    includeRpcClients: false,
+    includeRPCClients: false,
     createLCDBundles: false,
+    createRPCBundles: false,
     camelRpcMethods: true,
     useDate: 'date',
     useDuration: 'duration',

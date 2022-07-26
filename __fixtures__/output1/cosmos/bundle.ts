@@ -166,7 +166,9 @@ import * as _430 from "./slashing/v1beta1/tx.rpc.msg";
 import * as _431 from "./staking/v1beta1/tx.rpc.msg";
 import * as _432 from "./upgrade/v1beta1/tx.rpc.msg";
 import * as _433 from "./vesting/v1beta1/tx.rpc.msg";
-import * as _531 from "./lcd";
+import * as _533 from "./lcd";
+import * as _534 from "./rpc.query";
+import * as _535 from "./rpc.msg";
 export namespace cosmos {
   export namespace app {
     export const v1alpha1 = { ..._55,
@@ -448,5 +450,7 @@ export namespace cosmos {
     };
   }
 }
-export const ClientFactory = { ..._531
+export const ClientFactory = { ..._533,
+  ..._534,
+  ..._535
 };

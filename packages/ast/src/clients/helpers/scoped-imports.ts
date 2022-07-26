@@ -9,7 +9,18 @@ export const lcdArguments = (): t.ObjectProperty[] => {
             true
         )
     ]
-}
+};
+
+export const rpcArguments = (): t.ObjectProperty[] => {
+    return [
+        t.objectProperty(
+            t.identifier('rpcEndpoint'),
+            t.identifier('rpcEndpoint'),
+            false,
+            true
+        )
+    ]
+};
 
 export const newAwaitImport = (
     path: string,
