@@ -1,15 +1,13 @@
 import * as t from '@babel/types';
 
-export const lcdClassArguments = (): t.ObjectExpression[] => {
+export const lcdArguments = (): t.ObjectProperty[] => {
     return [
-        t.objectExpression([
-            t.objectProperty(
-                t.identifier('restEndpoint'),
-                t.identifier('restEndpoint'),
-                false,
-                true
-            )
-        ])
+        t.objectProperty(
+            t.identifier('restEndpoint'),
+            t.identifier('restEndpoint'),
+            false,
+            true
+        )
     ]
 }
 
@@ -58,14 +56,19 @@ export const recursiveObjectProps = (
     ])
 };
 
-export const createNestedImportObject = (
+export const nestedImportObject = (
     obj: object,
     className: string,
-    _arguments: t.ObjectExpression[]
+    _arguments: t.ObjectProperty[]
 ) => {
 
     if (typeof obj === 'string') {
-        return newAwaitImport(obj, className, _arguments)
+        return newAwaitImport(obj, className,
+            [
+                t.objectExpression(
+                    _arguments
+                )
+            ]);
     }
 
     const keys = Object.keys(obj);
@@ -73,170 +76,33 @@ export const createNestedImportObject = (
     return t.objectExpression(keys.map(name => {
         return t.objectProperty(
             t.identifier(name),
-            createNestedImportObject(obj[name], className, _arguments)
+            nestedImportObject(obj[name], className, _arguments)
         )
     }))
 };
 
 export const createScopedImportObject = (
-    names: string[],
-    path: string,
+    obj: object,
+    identifier: string,
     className: string,
-    _arguments: t.ObjectExpression[]
+    _arguments: t.ObjectProperty[]
 ) => {
-    return recursiveObjectProps(
-        names,
-        newAwaitImport(
-            path,
-            className,
-            _arguments
-        )
-    )
-};
-
-export const scopedImportObject = () => {
     return t.exportNamedDeclaration(
         t.variableDeclaration(
             'const',
             [
                 t.variableDeclarator(
-                    t.identifier('lcd'),
+                    t.identifier(identifier),
                     t.arrowFunctionExpression(
                         [
-                            t.objectPattern([
-                                t.objectProperty(
-                                    t.identifier('restEndpoint'),
-                                    t.identifier('restEndpoint'),
-                                    false,
-                                    true
-                                )
-                            ])
+                            t.objectPattern(_arguments)
                         ],
                         //
-                        t.objectExpression([
-                            t.objectProperty(
-                                t.identifier('cosmos'),
-                                t.objectExpression([
-                                    t.objectProperty(
-                                        t.identifier('bank'),
-                                        t.objectExpression([
-                                            t.objectProperty(
-                                                t.identifier('v1beta1'),
-                                                t.newExpression(
-                                                    t.memberExpression(
-                                                        t.awaitExpression(
-                                                            t.callExpression(
-                                                                t.import(),
-                                                                [
-                                                                    t.stringLiteral(
-                                                                        './proto/thing'
-                                                                    )
-                                                                ]
-                                                            )
-                                                        ),
-                                                        t.identifier('LCDQueryClient'),
-                                                        false
-                                                    ),
-                                                    [
-                                                        t.objectExpression([
-                                                            t.objectProperty(
-                                                                t.identifier('restEndpoint'),
-                                                                t.identifier('restEndpoint'),
-                                                                false,
-                                                                true
-                                                            )
-                                                        ])
-                                                    ]
-                                                )
-                                            )
-                                        ]),
-                                        false,
-                                        true
-                                    ),
-                                    ////////
-                                    t.objectProperty(
-                                        t.identifier('gov'),
-                                        t.objectExpression([
-                                            t.objectProperty(
-                                                t.identifier('v1beta1'),
-                                                t.newExpression(
-                                                    t.memberExpression(
-                                                        t.awaitExpression(
-                                                            t.callExpression(
-                                                                t.import(),
-                                                                [
-                                                                    t.stringLiteral(
-                                                                        './proto/thing'
-                                                                    )
-                                                                ]
-                                                            )
-                                                        ),
-                                                        t.identifier('LCDQueryClient'),
-                                                        false
-                                                    ),
-                                                    [
-                                                        t.objectExpression([
-                                                            t.objectProperty(
-                                                                t.identifier('restEndpoint'),
-                                                                t.identifier('restEndpoint'),
-                                                                false,
-                                                                true
-                                                            )
-                                                        ])
-                                                    ]
-                                                )
-                                            )
-                                        ]),
-                                        false,
-                                        true
-                                    ),
-
-                                ])
-                            ),
-                            //////
-
-                            t.objectProperty(
-                                t.identifier('osmosis'),
-                                t.objectExpression([
-                                    t.objectProperty(
-                                        t.identifier('gamm'),
-                                        t.objectExpression([
-                                            t.objectProperty(
-                                                t.identifier('v1beta1'),
-                                                t.newExpression(
-                                                    t.memberExpression(
-                                                        t.awaitExpression(
-                                                            t.callExpression(
-                                                                t.import(),
-                                                                [
-                                                                    t.stringLiteral(
-                                                                        './proto/thing'
-                                                                    )
-                                                                ]
-                                                            )
-                                                        ),
-                                                        t.identifier('LCDQueryClient'),
-                                                        false
-                                                    ),
-                                                    [
-                                                        t.objectExpression([
-                                                            t.objectProperty(
-                                                                t.identifier('restEndpoint'),
-                                                                t.identifier('restEndpoint'),
-                                                                false,
-                                                                true
-                                                            )
-                                                        ])
-                                                    ]
-                                                )
-                                            )
-                                        ]),
-                                        false,
-                                        true
-                                    )
-                                ])
-                            ),
-                        ]),
+                        nestedImportObject(
+                            obj,
+                            className,
+                            _arguments
+                        ),
                         true
                     )
                 )

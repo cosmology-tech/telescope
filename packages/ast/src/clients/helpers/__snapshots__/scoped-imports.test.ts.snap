@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`createScopedImportObject 1`] = `
+"export const lcd = async ({
+  restEndpoint
+}) => ({
+  cosmos: {
+    bank: {
+      v1beta1: new (await import(\\"./proto/cosmos/bank/v1beta1/query.lcd\\")).LCDQueryClient({
+        restEndpoint
+      })
+    },
+    gov: {
+      v1beta1: new (await import(\\"./proto/cosmos/bank/v1beta1/query.lcd\\")).LCDQueryClient({
+        restEndpoint
+      })
+    }
+  },
+  osmosis: {
+    gamm: {
+      v1beta1: new (await import(\\"./proto/cosmos/bank/v1beta1/query.lcd\\")).LCDQueryClient({
+        restEndpoint
+      })
+    }
+  }
+});"
+`;
+
+exports[`recursiveObjectProps 1`] = `
+"{
+  cosmos: {
+    bank: {
+      v1beta1: v1beta1
+    }
+  }
+}"
+`;
