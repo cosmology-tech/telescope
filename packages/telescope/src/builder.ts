@@ -84,7 +84,6 @@ export class TelescopeBuilder {
                 // [x] write out one client for each base package, referencing the last two steps
                 createStargateClients(this, bundler);
 
-                createBundle(this, bundler);
 
                 return bundler;
             });
@@ -93,6 +92,8 @@ export class TelescopeBuilder {
         bundles
             .forEach(bundler => {
                 createLCDClientsScoped(this, bundler);
+
+                createBundle(this, bundler);
             });
 
         createAggregatedLCDClient(this);

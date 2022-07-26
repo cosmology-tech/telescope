@@ -95,4 +95,17 @@ export class Bundler {
         );
     }
 
+    addToBundleToPackage(
+        packagename: string,
+        localname: string
+    ) {
+        createFileBundle(
+            packagename,
+            localname,
+            this.bundle.bundleFile,
+            this.bundle.importPaths,
+            this.bundle.bundleVariables
+        );
+    }
+
 }

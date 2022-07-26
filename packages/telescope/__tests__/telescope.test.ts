@@ -26,12 +26,14 @@ const input: TelescopeInput = {
         },
         lcds: [{
             dir: 'osmosis',
-            filename: 'lcd-client.ts',
+            filename: 'custom-lcd-client.ts',
             packages: [
                 'cosmos.bank.v1beta1',
                 'cosmos.gov.v1beta1',
                 'osmosis.gamm.v1beta1'
-            ]
+            ],
+            addToBundle: false,
+            methodName: 'createMyLCDClient'
         }],
         aminoExceptions: {
             '/akash.audit.v1beta2.MsgSignProviderAttributes': {

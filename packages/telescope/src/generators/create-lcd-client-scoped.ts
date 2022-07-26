@@ -1,13 +1,9 @@
-import * as t from '@babel/types';
 import * as dotty from 'dotty';
 import { getNestedProto } from '@osmonauts/proto-parser';
-import { dirname, join } from 'path';
-import { sync as mkdirp } from 'mkdirp';
-import { writeFileSync } from 'fs';
+import { join } from 'path';
 import { TelescopeBuilder } from '../builder';
 import { createScopedImportObject, lcdArguments } from '@osmonauts/ast';
 import { ProtoRef } from '@osmonauts/types';
-import generate from '@babel/generator';
 import { getRelativePath } from '../utils';
 import { Bundler } from '../bundler';
 
@@ -19,8 +15,10 @@ export const plugin = (
         builder.options.lcds &&
         builder.options.lcds.length) {
         builder.options.lcds.forEach(lcd => {
+            if (lcd.dir !== bundler.bundle.base) return;
             makeLCD(
                 builder,
+                bundler,
                 lcd
             );
         });
@@ -45,14 +43,18 @@ const getFileName = (dir, filename) => {
 
 const makeLCD = (
     builder: TelescopeBuilder,
+    bundler: Bundler,
     lcd: {
         dir: string;
         filename?: string;
-        packages: string[]
+        packages: string[];
+        addToBundle: boolean;
+        methodName?: string;
     }
 ) => {
     const dir = lcd.dir;
     const packages = lcd.packages;
+    const methodName = lcd.methodName ?? 'createLCDClient'
     const localname = getFileName(dir, lcd.filename);
 
     const obj = {};
@@ -72,20 +74,17 @@ const makeLCD = (
     });
     const lcdast = createScopedImportObject(
         obj,
-        'lcd',
-        'LCDQueryClient',
+        methodName,
+        'LCDQueryClient', // make option later
         lcdArguments()
     );
 
     const prog = []
-        .concat(lcdast)
+        .concat(lcdast);
 
-    const ast = t.program(prog);
-    const content = generate(ast).code;
-
-    const filename = join(builder.outPath, localname);
-    mkdirp(dirname(filename));
-    writeFileSync(filename, content);
+    const filename = bundler.getFilename(localname);
+    bundler.writeAst(prog, filename);
+    bundler.addToBundleToPackage('ClientFactory', localname)
 };
 
 // TODO
@@ -138,10 +137,16 @@ const makeLCDBundles = (
         return m;
     }, []);
 
-    makeLCD(builder, {
-        dir,
-        filename,
-        packages
-    });
+    makeLCD(
+        builder,
+        bundler,
+        {
+            dir,
+            filename,
+            packages,
+            addToBundle: true,
+            methodName: 'createLCDClient'
+        }
+    );
 
 };

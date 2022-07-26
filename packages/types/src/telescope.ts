@@ -22,7 +22,9 @@ interface TelescopeOpts {
     lcds?: {
         dir: string;
         filename?: string;
-        packages: string[]
+        packages: string[];
+        addToBundle: boolean;
+        methodName?: string;
     }[]
 }
 interface TelescopePackageOpts {
