@@ -66,7 +66,8 @@ import * as _435 from "./pool-incentives/v1beta1/query.lcd";
 import * as _436 from "./superfluid/query.lcd";
 import * as _437 from "./tokenfactory/v1beta1/query.lcd";
 import * as _438 from "./txfees/v1beta1/query.lcd";
-import * as _441 from "./custom-lcd-client";
+import * as _446 from "./custom-lcd-client";
+import * as _447 from "./lcd";
 export namespace osmosis {
   export namespace claim {
     export const v1beta1 = { ..._255,
@@ -172,5 +173,6 @@ export namespace osmosis {
     };
   }
 }
-export const ClientFactory = { ..._441
+export const ClientFactory = { ..._446,
+  ..._447
 };

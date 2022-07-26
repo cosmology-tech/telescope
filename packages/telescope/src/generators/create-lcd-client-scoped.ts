@@ -101,7 +101,7 @@ const makeLCDBundles = (
     // [x] loop through every bundle 
     // [x] if not cosmos, add all cosmos
     // [x] call makeLCD
-    // [ ] add to bundle
+    // [x] add to bundle
 
     const dir = bundler.bundle.base;
     const filename = 'lcd.ts'

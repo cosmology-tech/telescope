@@ -9,6 +9,7 @@ import * as _306 from "./registration/v1beta1/types";
 import * as _307 from "./registration/v1beta1/remote_attestation/types";
 import * as _439 from "./compute/v1beta1/query.lcd";
 import * as _440 from "./registration/v1beta1/query.lcd";
+import * as _448 from "./lcd";
 export namespace secret {
   export namespace compute {
     export const v1beta1 = { ..._299,
@@ -31,3 +32,5 @@ export namespace secret {
     }
   }
 }
+export const ClientFactory = { ..._448
+};

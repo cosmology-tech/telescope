@@ -7,6 +7,7 @@ import * as _153 from "./wasm/v1/types";
 import * as _386 from "./wasm/v1/tx.amino";
 import * as _387 from "./wasm/v1/tx.registry";
 import * as _388 from "./wasm/v1/query.lcd";
+import * as _443 from "./lcd";
 export namespace cosmwasm {
   export namespace wasm {
     export const v1 = { ..._148,
@@ -21,3 +22,5 @@ export namespace cosmwasm {
     };
   }
 }
+export const ClientFactory = { ..._443
+};

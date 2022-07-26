@@ -34,6 +34,7 @@ import * as _411 from "./applications/transfer/v1/query.lcd";
 import * as _412 from "./core/channel/v1/query.lcd";
 import * as _413 from "./core/client/v1/query.lcd";
 import * as _414 from "./core/connection/v1/query.lcd";
+import * as _445 from "./lcd";
 export namespace ibc {
   export namespace applications {
     export namespace transfer {
@@ -110,3 +111,5 @@ export namespace ibc {
     }
   }
 }
+export const ClientFactory = { ..._445
+};

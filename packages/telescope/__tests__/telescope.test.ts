@@ -14,7 +14,7 @@ const input: TelescopeInput = {
     options: {
         ...defaultTelescopeOptions,
         includeLCDClients: true,
-        createLCDBundles: false,
+        createLCDBundles: true,
         includePackageVar: true,
         includeRpcClients: false,
         lcd: {

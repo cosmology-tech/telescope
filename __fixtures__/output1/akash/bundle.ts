@@ -75,6 +75,7 @@ import * as _339 from "./escrow/v1beta1/query.lcd";
 import * as _340 from "./escrow/v1beta2/query.lcd";
 import * as _341 from "./market/v1beta2/query.lcd";
 import * as _342 from "./provider/v1beta2/query.lcd";
+import * as _441 from "./lcd";
 export namespace akash {
   export namespace audit {
     export const v1beta1 = { ..._0,
@@ -183,3 +184,5 @@ export namespace akash {
     };
   }
 }
+export const ClientFactory = { ..._441
+};

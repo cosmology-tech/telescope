@@ -134,6 +134,7 @@ import * as _382 from "./params/v1beta1/query.lcd";
 import * as _383 from "./slashing/v1beta1/query.lcd";
 import * as _384 from "./staking/v1beta1/query.lcd";
 import * as _385 from "./upgrade/v1beta1/query.lcd";
+import * as _442 from "./lcd";
 export namespace cosmos {
   export namespace app {
     export const v1alpha1 = { ..._55,
@@ -383,3 +384,5 @@ export namespace cosmos {
     };
   }
 }
+export const ClientFactory = { ..._442
+};

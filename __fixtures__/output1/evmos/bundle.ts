@@ -36,6 +36,7 @@ import * as _399 from "./incentives/v1/query.lcd";
 import * as _400 from "./inflation/v1/query.lcd";
 import * as _401 from "./recovery/v1/query.lcd";
 import * as _402 from "./vesting/v1/query.lcd";
+import * as _444 from "./lcd";
 export namespace evmos {
   export namespace claims {
     export const v1 = { ..._154,
@@ -100,3 +101,5 @@ export namespace evmos {
     };
   }
 }
+export const ClientFactory = { ..._444
+};
