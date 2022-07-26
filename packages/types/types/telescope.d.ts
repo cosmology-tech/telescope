@@ -16,6 +16,12 @@ interface TelescopeOpts {
         dir: string;
         packages: string[];
     };
+    createLCDBundles?: boolean;
+    lcds?: {
+        dir: string;
+        filename?: string;
+        packages: string[];
+    }[];
 }
 interface TelescopePackageOpts {
     packages?: Record<string, any>;
