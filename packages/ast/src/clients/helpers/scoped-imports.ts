@@ -18,6 +18,7 @@ export const scopedImportObject = () => {
                                 )
                             ])
                         ],
+                        //
                         t.objectExpression([
                             t.objectProperty(
                                 t.identifier('cosmos'),
@@ -57,9 +58,92 @@ export const scopedImportObject = () => {
                                         ]),
                                         false,
                                         true
+                                    ),
+                                    ////////
+                                    t.objectProperty(
+                                        t.identifier('gov'),
+                                        t.objectExpression([
+                                            t.objectProperty(
+                                                t.identifier('v1beta1'),
+                                                t.newExpression(
+                                                    t.memberExpression(
+                                                        t.awaitExpression(
+                                                            t.callExpression(
+                                                                t.import(),
+                                                                [
+                                                                    t.stringLiteral(
+                                                                        './proto/thing'
+                                                                    )
+                                                                ]
+                                                            )
+                                                        ),
+                                                        t.identifier('LCDQueryClient'),
+                                                        false
+                                                    ),
+                                                    [
+                                                        t.objectExpression([
+                                                            t.objectProperty(
+                                                                t.identifier('restEndpoint'),
+                                                                t.identifier('restEndpoint'),
+                                                                false,
+                                                                true
+                                                            )
+                                                        ])
+                                                    ]
+                                                )
+                                            )
+                                        ]),
+                                        false,
+                                        true
+                                    ),
+
+                                ])
+                            ),
+                            //////
+
+                            t.objectProperty(
+                                t.identifier('osmosis'),
+                                t.objectExpression([
+                                    t.objectProperty(
+                                        t.identifier('gamm'),
+                                        t.objectExpression([
+                                            t.objectProperty(
+                                                t.identifier('v1beta1'),
+                                                t.newExpression(
+                                                    t.memberExpression(
+                                                        t.awaitExpression(
+                                                            t.callExpression(
+                                                                t.import(),
+                                                                [
+                                                                    t.stringLiteral(
+                                                                        './proto/thing'
+                                                                    )
+                                                                ]
+                                                            )
+                                                        ),
+                                                        t.identifier('LCDQueryClient'),
+                                                        false
+                                                    ),
+                                                    [
+                                                        t.objectExpression([
+                                                            t.objectProperty(
+                                                                t.identifier('restEndpoint'),
+                                                                t.identifier('restEndpoint'),
+                                                                false,
+                                                                true
+                                                            )
+                                                        ])
+                                                    ]
+                                                )
+                                            )
+                                        ]),
+                                        false,
+                                        true
                                     )
                                 ])
-                            )
+                            ),
+
+
                         ]),
                         true
                     )
