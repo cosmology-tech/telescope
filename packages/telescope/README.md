@@ -83,7 +83,7 @@ yarn buidl
 
 ## Advanced Usage
 
-See our [advanced usage documentation](https://github.com/osmosis-labs/telescope/blob/master/packages/telescope/docs/readme.md).
+See our [advanced usage documentation](https://github.com/osmosis-labs/telescope/blob/main/packages/telescope/docs/readme.md).
 
 ## Disclaimer
 

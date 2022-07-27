@@ -556,7 +556,7 @@ TODO
 TODO
 ## Developing
 
-Initial setup
+### Initial setup
 
 ```
 yarn 
@@ -564,12 +564,17 @@ yarn bootstrap
 yarn build
 ```
 
+### Tests
+
 Then `cd` into a package and run the tests
 
 ```
 cd ./packages/ast
 yarn test:watch
 ```
+### Generators
+
+See our [plugin generators](https://github.com/osmosis-labs/telescope/blob/main/packages/telescope/src/generators).
 
 ## Sponsors
 
