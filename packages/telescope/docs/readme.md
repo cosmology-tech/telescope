@@ -117,23 +117,38 @@ telescope({
   protoDirs,
   outPath,
   options: {
-    includeAminos: true,
-    includeLCDClients: true,
-    includeRPCClients: true,
-    camelRpcMethods: true,
     includePackageVar: false,
-    useDate: 'date',
-    useDuration: 'duration',
-    useExact: false,
+    typingsFormat: {
+        useExact: false,
+        date: 'date',
+        duration: 'duration'
+    },
+    aminoEncoding: {
+        enabled: true
+    },
+    lcdClients: {
+        enabled: false
+    },
+    rpcClients: {
+        enabled: false,
+        camelCase: true
+    },
 
     // for nested options:
     packages: {
       nebula: {
-        useExact: true
+        typingsFormat: {
+            useExact: false
+        }
       },
       akash: {
-        signingClientDefaults: false,
-        useExact: false
+        stargateClients: {
+            enabled: true;
+            includeCosmosDefaultTypes: false;
+        },
+        typingsFormat: {
+            useExact: false
+        }
       }
     }
   }
@@ -142,45 +157,74 @@ telescope({
 
 ## Options
 
-"nestable" means you can provide an option inside of the `TelescopeOption.packages` on a per-package basis, or even a sub-scope of a package.
+### Amino Encoding
 
-| env var                  | nestable          | description                                                     |
-| ------------------------ | ----------------- | --------------------------------------------------------------  |
-| `aminoCasingFn`          | Yes               | set the amino-casing function for a project                     |
-| `aminoExceptions`        | No                | set specific aminoType name exceptions                          |
-| `aminoTypeUrl`           | No                | create functions for aminoType name exceptions                  |
-| `camelRpcMethods`        | No                | use camel-case for RPC methods when generating RPC clients      |
-| `includeAminos`          | No                | generate amino types and amino converters                       |
-| `includeLCDClients`      | No                | generate LCD clients that can query proto `Query` messages      |
-| `includePackageVar`      | No                | export a `protoPackage` variable to indicate package name       |
-| `includeRPCClients`      | No                | generate RPC clients that can interact with proto messages      |
-| `signingClientDefaults`  | Yes               | if true, will include the cosmjs defaults with stargate clients |
-| `useDate`                | No                | use either `date` or `timestamp` for `Timestamp` proto type     |
-| `useDuration`            | No                | use either `duration` or `string` for `Duration` proto type     |
-| `useExact`               | No                | defaults to false, but if enabled uses the `Exact` TS type      |
-| `createLCDBundles`       | No                | will generate factory of scoped bundles of all LCD Clients      |
-| `createRPCBundles`       | No                | will generate factory of scoped bundles of all RPC Clients      |
-| `lcds`                   | No                | will generate a set of LCD bundles based on parameters          |
-| `rpcs`                   | No                | will generate a set of RPC bundles based on parameters          |
+| option                         | description                                                     |
+| ------------------------------ | --------------------------------------------------------------  |
+| `aminoEncoding.casingFn`       | set the amino-casing function for a project                     |
+| `aminoEncoding.enabled`        | generate amino types and amino converters                       |
+| `aminoEncoding.exceptions`     | set specific aminoType name exceptions                          |
+| `aminoEncoding.typeUrlToAmino` | create functions for aminoType name exceptions                  |
+
+### Global Options
+
+| option                         | description                                                     |
+| ------------------------------ | --------------------------------------------------------------  |
+| `includePackageVar`            | export a `protoPackage` variable to indicate package name       |
+
+
+### LCD Client Options
+
+| option                         | description                                                     |
+| ------------------------------ | --------------------------------------------------------------  |
+| `lcdClients.enabled`           | generate LCD clients that can query proto `Query` messages      |
+| `lcdClients.scoped`            | will generate factory of scoped bundles of all LCD Clients      |
+| `lcdClients.scopedIsExclusive` | will allow both scoped bundles and all RPC Clients              |
+
+See [LCD Clients](#lcd-clients) for more info.
+### RPC Client Options
+
+| option                         | description                                                     |
+| ------------------------------ | --------------------------------------------------------------  |
+| `rpcClients.enabled`           | generate RPC clients that can interact with proto messages      |
+| `rpcClients.camelCase`         | use camel-case for RPC methods when generating RPC clients      |
+| `rpcClients.scoped`            | will generate factory of scoped bundles of all RPC Clients      |
+| `rpcClients.scopedIsExclusive` | will allow both scoped bundles and all RPC Clients              |
+
+See [RPC Clients](#rpc-clients) for more info.
+
+### Stargate Client Options
+
+| option                                       | description                                                     |
+| -------------------------------------------- | --------------------------------------------------------------  |
+| `stargateClients.includeCosmosDefaultTypes`  | if true, will include the cosmjs defaults with stargate clients |
+
+### Typings and Formating
+
+| option                         | description                                                     |
+| ------------------------------ | --------------------------------------------------------------  |
+| `typingsFormat.date`           | use either `date` or `timestamp` for `Timestamp` proto type     |
+| `typingsFormat.duration`       | use either `duration` or `string` for `Duration` proto type     |
+| `typingsFormat.useExact`       | defaults to false, but if enabled uses the `Exact` TS type      |
 
 ## Types
 
 ### Timestamp
 
-The representation of `google.protobuf.Timestamp` is configurable by the `useDate` option.
+The representation of `google.protobuf.Timestamp` is configurable by the `typingsFormat.date` option.
 
-| Protobuf type    | Default/`useDate='date'` | `useDate='timestamp'`                      |
+| Protobuf type    | Default/`date='date'` | `date='timestamp'`                      |
 | --------------------------- | ---------------------- | ----------------------------------|
 | `google.protobuf.Timestamp` | `Date`                 | `{ seconds: Long, nanos: number }`|
 
 TODO
-- [ ] add `useDate='string'` option
+- [ ] add `date='string'` option
 
 ### Duration
 
-The representation of `google.protobuf.Duration` is configurable by the `useDuration` option.
+The representation of `google.protobuf.Duration` is configurable by the `typingsFormat.duration` option.
 
-| Protobuf type    | Default/`useDuration='duration'` | `useDuration='string'`                      |  |
+| Protobuf type    | Default/`duration='duration'` | `duration='string'`                      |  |
 | --------------------------- | ---------------------- | ------------------------------------ | ---------------- |
 | `google.protobuf.Duration` | `{ seconds: Long, nanos: number }`                 | `string` |  |
 
@@ -347,9 +391,67 @@ export const getCustomSigningClient = async ({ rpcEndpoint, signer }: { rpcEndpo
 
 ## LCD Clients
 
-You can generate LCD classes with the `includeLCDClients` option.
+For querying data via REST endpoints, you can use LCD Clients. For a better developer experience, you can generate a factory of scoped bundles of all LCD Clients with the `lcdClients` option. 
 
-For any module that has a `Query` type, there will be a `LCDQueryClient` object:
+```ts
+const options: TelescopeOptions = {
+    lcdClients: {
+        enabled: true;
+    }
+};
+```
+
+If you use the `lcdClients.scoped` array, you can scope to only the modules of your interest.
+
+```ts
+const options: TelescopeOptions = {
+  lcdClients: {
+    enabled: true,
+    scoped: [
+      {
+        dir: 'osmosis',
+        filename: 'custom-lcd-client.ts',
+        packages: [
+          'cosmos.bank.v1beta1',
+          'cosmos.gov.v1beta1',
+          'osmosis.gamm.v1beta1'
+        ],
+        addToBundle: true,
+        methodName: 'createCustomLCDClient'
+      },
+      {
+        dir: 'evmos',
+        filename: 'custom-lcd-client.ts',
+        packages: [
+          'cosmos.bank.v1beta1',
+          'cosmos.gov.v1beta1',
+          'evmos.erc20.v1'
+        ],
+        addToBundle: true,
+        methodName: 'createEvmosLCDClient'
+      }
+    ]
+  }
+};
+```
+
+This will generate a nice helper in the `ClientFactory`, which you can then use to query multiple modules from a single object:
+
+```js
+import { osmosis } from './proto';
+
+const main = async () => {
+   const client = await osmosis.ClientFactory.createLCDClient({ restEndpoint: REST_ENDPOINT });
+
+   // now you can query the modules
+   const poolInfo = await client.osmosis.gamm.v1beta1.pool({ poolId: "1" });
+   const balance = await client.cosmos.bank.v1beta1.allBalances({ address: 'osmo1addresshere' });
+};
+```
+
+## LCD Clients Classes
+
+If you want to instantiate a single client, for any module that has a `Query` type, there will be a `LCDQueryClient` object:
 
 ```js
 import { osmosis } from "osmojs";
@@ -365,55 +467,57 @@ main().then(() => {
     console.log('all done')
 })
 ```
-
-## LCD Client Bundles
+## RPC Clients
 
 It may make sense for your app to query multiple modules, and it can get a bit complex to manage multiple clients for every module.
 
-For a better developer experience, you can generate a factory of scoped bundles of all LCD Clients with the `createLCDBundles` option. 
+For a better developer experience, you can generate a factory of scoped bundles of all RPC Clients with the `createRPCBundles` option. 
 
 ```ts
 const options: TelescopeOptions = {
-  createLCDBundles: true,
-  includeLCDClients: true
+  rpcClients: {
+    enabled: true
+  }
 };
 ```
 
-If you use the `lcds` array, you can scope to only the modules of your interest.
+If you use the `rpcs` array, you can scope to only the modules of your interest.
 
 ```ts
 const options: TelescopeOptions = {
-  createLCDBundles: true,
-  includeLCDClients: true,
-  lcds: [{
-      dir: 'osmosis',
-      filename: 'custom-osmosis-lcd-client.ts',
-      packages: [
+  rpcClients: {
+    enabled: true,
+    camelCase: true,
+    scoped: [
+      {
+        dir: 'osmosis',
+        filename: 'osmosis-rpc-client.ts',
+        packages: [
           'cosmos.bank.v1beta1',
           'cosmos.gov.v1beta1',
           'osmosis.gamm.v1beta1'
-      ],
-      addToBundle: true,
-      methodName: 'createLCDClient'
-  }]
+        ],
+        addToBundle: true,
+        methodNameQuery: 'createRPCQueryClient',
+        methodNameTx: 'createRPCTxClient'
+      }
+    ]
+  }
 };
 ```
 
-This will generate a nice helper `createLCDClient` with all the clients, which you can then use this to query multiple modules from a single object:
+This will generate helpers `createRPCQueryClient` and `createRPCTxClient` in the `ClientFactory`, which you can then use to query multiple modules from a single object:
 
 ```js
 import { osmosis } from './proto';
 
 const main = async () => {
-   const client = await osmosis.ClientFactory.createLCDClient({ restEndpoint: REST_ENDPOINT });
-
-   // now you can query the modules
-   const poolInfo = await client.osmosis.gamm.v1beta1.pool({ poolId: "1" });
-   const balance = await client.cosmos.bank.v1beta1.allBalances({ address: 'osmo1addresshere' });
+   const query = await osmosis.ClientFactory.createRPCQueryClient({ rpc });
+   const tx = await osmosis.ClientFactory.createRPCMsgClient({ rpc });
 };
 ```
 
-## RPC Clients
+## RPC Client Classes
 
 You can generate RPC classes with the `includeRPCClients` option;
 
@@ -447,54 +551,6 @@ export const main = async () => {
 main().then(() => {
     console.log('all done')
 })
-```
-
-## RPC Client Bundles
-
-It may make sense for your app to query multiple modules, and it can get a bit complex to manage multiple clients for every module.
-
-For a better developer experience, you can generate a factory of scoped bundles of all RPC Clients with the `createRPCBundles` option. 
-
-```ts
-const options: TelescopeOptions = {
-  ...otherOptions,
-  ////// RPC Options below:
-  createRPCBundles: true,
-  includeRPCClients: true
-};
-```
-
-If you use the `rpcs` array, you can scope to only the modules of your interest.
-
-```ts
-const options: TelescopeOptions = {
-  ...otherOptions,
-  ////// RPC Options below:
-  createRPCBundles: true,
-  includeRPCClients: true,
-  rpcs: [{
-      dir: 'osmosis',
-      filename: 'custom-osmosis-rpc-client.ts',
-      packages: [
-          'cosmos.bank.v1beta1',
-          'cosmos.gov.v1beta1',
-          'osmosis.gamm.v1beta1'
-      ],
-      addToBundle: true,
-      methodName: 'createRPCClient'
-  }]
-};
-```
-
-This will generate helpers `createRPCQueryClient` and `createRPCMsgClient` with all the clients, which you can then use this to query multiple modules from a single object:
-
-```js
-import { osmosis } from './proto';
-
-const main = async () => {
-   const query = await osmosis.ClientFactory.createRPCQueryClient({ rpc });
-   const tx = await osmosis.ClientFactory.createRPCMsgClient({ rpc });
-};
 ```
 
 ## Using Mnemonics
