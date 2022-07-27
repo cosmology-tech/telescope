@@ -577,8 +577,6 @@ Kudos to our sponsors:
 
 * [Osmosis](https://osmosis.zone) funded the creation of Telescope.
 
-If you need Telescope customizations or priority support, you can contact us [via email](mailto:pyramation@gmail.com).
-
 ## Related
 
 Checkout these related projects:
