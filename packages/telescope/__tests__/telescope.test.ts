@@ -18,12 +18,14 @@ const input: TelescopeInput = {
         includeRPCClients: true,
         createRPCBundles: true,
         includePackageVar: true,
-        lcd: {
+        aggregatedLCD: {
             dir: 'osmosis',
+            filename: 'agg-lcd.ts',
             packages: [
                 'cosmos.bank.v1beta1',
                 'osmosis.gamm.v1beta1'
-            ]
+            ],
+            addToBundle: false
         },
         lcds: [{
             dir: 'osmosis',
@@ -54,6 +56,11 @@ const input: TelescopeInput = {
                     n[n.length - 1] = n[n.length - 1].replace(/^msg-/, 'testonly-');
                     return n.join('/');
                 }
+            }
+        },
+        packages: {
+            akash: {
+                useExact: true
             }
         }
     }

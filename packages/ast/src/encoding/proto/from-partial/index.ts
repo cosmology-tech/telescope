@@ -154,12 +154,11 @@ export const fromPartialMethod = (context: ProtoParseContext, name: string, prot
         varName = '_';
     }
 
-
     let useExact = false;
     let typeParameters = undefined;
     let param = null;
 
-    if (context.useExact === true) {
+    if (context.pluginValue('useExact') === true) {
         context.addUtil('Exact');
 
         useExact = true;

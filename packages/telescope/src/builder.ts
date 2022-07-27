@@ -96,7 +96,6 @@ export class TelescopeBuilder {
                 // [x] write out one client for each base package, referencing the last two steps
                 createStargateClients(this, bundler);
 
-
                 return bundler;
             });
 

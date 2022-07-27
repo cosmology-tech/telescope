@@ -1,4 +1,9 @@
 import { AminoExceptions } from "./aminos";
+export interface NestableTelescopeOpts {
+    aminoCasingFn?: Function;
+    signingClientDefaults?: boolean;
+    useExact?: boolean;
+}
 interface TelescopeOpts {
     aminoCasingFn?: Function;
     aminoExceptions?: AminoExceptions;
@@ -12,13 +17,11 @@ interface TelescopeOpts {
     useDate?: 'date' | 'timestamp';
     useDuration?: 'duration' | 'string';
     useExact?: boolean;
-    lcd?: {
+    aggregatedLCD?: {
         dir: string;
+        filename: string;
         packages: string[];
-    };
-    rpc?: {
-        dir: string;
-        packages: string[];
+        addToBundle: boolean;
     };
     createLCDBundles?: boolean;
     createRPCBundles?: boolean;

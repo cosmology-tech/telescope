@@ -36,6 +36,10 @@ export class GenericParseContext implements ParseContext {
 
     }
 
+    pluginValue(name) {
+        return getPluginValue(name, this.ref.proto.package, this.options);
+    }
+
     addUtil(util) {
         this.utils[util] = true;
     }
@@ -95,7 +99,7 @@ export class AminoParseContext extends GenericParseContext implements ParseConte
 
     private setAminoCasingFn() {
         if (this.aminoCasingFn) return this.aminoCasingFn;
-        this.aminoCasingFn = getPluginValue('aminoCasingFn', this.ref.proto.package, this.options);
+        this.aminoCasingFn = this.pluginValue('aminoCasingFn');
         return this.aminoCasingFn;
     }
 

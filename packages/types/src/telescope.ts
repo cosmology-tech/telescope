@@ -1,6 +1,15 @@
 import { AminoExceptions, DEFAULT_AMINO_EXCEPTIONS } from "./aminos";
 import { snake } from 'case';
 import { camel } from '@osmonauts/utils';
+
+// NestableTelescopeOpts keeps track of which options 
+// actually use getPluginValue()
+export interface NestableTelescopeOpts {
+    aminoCasingFn?: Function;
+    signingClientDefaults?: boolean;
+    useExact?: boolean;
+}
+
 interface TelescopeOpts {
     aminoCasingFn?: Function;
     aminoExceptions?: AminoExceptions;
@@ -14,13 +23,12 @@ interface TelescopeOpts {
     useDate?: 'date' | 'timestamp';
     useDuration?: 'duration' | 'string';
     useExact?: boolean;
-    lcd?: {
+
+    aggregatedLCD?: {
         dir: string;
-        packages: string[]
-    },
-    rpc?: {
-        dir: string;
-        packages: string[]
+        filename: string;
+        packages: string[];
+        addToBundle: boolean;
     },
     createLCDBundles?: boolean;
     createRPCBundles?: boolean;
