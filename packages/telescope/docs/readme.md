@@ -517,7 +517,7 @@ const main = async () => {
 
 ## RPC Client Classes
 
-You can generate RPC classes with the `includeRPCClients` option;
+You can generate RPC classes with the `rpcClients` option;
 
 For any module that has a `Msg`, `Query` or `Service` type, a 
 

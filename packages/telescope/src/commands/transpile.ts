@@ -6,7 +6,7 @@ import { defaultTelescopeOptions } from '@osmonauts/types';
 export default async (argv) => {
 
   if (argv.useDefaults) {
-    const SKIP = ['aminoCasingFn', 'aminoExceptions', 'packages'];
+    const SKIP = ['aminoEncoding', 'packages'];
     Object.keys(defaultTelescopeOptions)
       .forEach(key => {
         if (SKIP.includes(key)) return;
@@ -43,18 +43,6 @@ export default async (argv) => {
     },
     {
       type: 'confirm',
-      name: 'includePackageVar',
-      message: 'export protobuf package names as variable?',
-      default: false
-    },
-    {
-      type: 'confirm',
-      name: 'camelRpcMethods',
-      message: 'camelcase RpcMethods?',
-      default: true
-    },
-    {
-      type: 'confirm',
       name: 'includeRPCClients',
       message: 'output RPC clients?',
       default: false
@@ -81,7 +69,6 @@ export default async (argv) => {
     includeAminos,
     includeLCDClients,
     includePackageVar,
-    camelRpcMethods,
     includeRPCClients,
     useDate,
     useDuration
@@ -92,14 +79,20 @@ export default async (argv) => {
   }
 
   const options = {
-    includeAminos,
-    includeLCDClients,
     includePackageVar,
-    camelRpcMethods,
-    includeRPCClients,
-    useDate,
-    useDuration,
-    useExact: false
+    typingsFormat: {
+      date: useDate,
+      duration: useDuration
+    },
+    aminoEncoding: {
+      enabled: includeAminos
+    },
+    lcdClients: {
+      enabled: includeLCDClients
+    },
+    rpcClients: {
+      enabled: includeRPCClients,
+    }
   };
 
   writeFileSync(
