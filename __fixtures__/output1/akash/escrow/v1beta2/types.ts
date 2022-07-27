@@ -1,6 +1,6 @@
 import { DecCoin, Coin } from "../../../cosmos/base/v1beta1/coin";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, Long } from "@osmonauts/helpers";
+import { isSet, DeepPartial, Exact, Long } from "@osmonauts/helpers";
 export const protobufPackage = "akash.escrow.v1beta2";
 
 /** State stores state for an escrow account */
@@ -230,7 +230,7 @@ export const AccountID = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<AccountID>): AccountID {
+  fromPartial<I extends Exact<DeepPartial<AccountID>, I>>(object: I): AccountID {
     const message = createBaseAccountID();
     message.scope = object.scope ?? "";
     message.xid = object.xid ?? "";
@@ -365,7 +365,7 @@ export const Account = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<Account>): Account {
+  fromPartial<I extends Exact<DeepPartial<Account>, I>>(object: I): Account {
     const message = createBaseAccount();
     message.id = object.id !== undefined && object.id !== null ? AccountID.fromPartial(object.id) : undefined;
     message.owner = object.owner ?? "";
@@ -495,7 +495,7 @@ export const FractionalPayment = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<FractionalPayment>): FractionalPayment {
+  fromPartial<I extends Exact<DeepPartial<FractionalPayment>, I>>(object: I): FractionalPayment {
     const message = createBaseFractionalPayment();
     message.accountId = object.accountId !== undefined && object.accountId !== null ? AccountID.fromPartial(object.accountId) : undefined;
     message.paymentId = object.paymentId ?? "";

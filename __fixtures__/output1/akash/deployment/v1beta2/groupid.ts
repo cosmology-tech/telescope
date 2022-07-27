@@ -1,5 +1,5 @@
 import * as _m0 from "protobufjs/minimal";
-import { Long, isSet, DeepPartial } from "@osmonauts/helpers";
+import { Long, isSet, DeepPartial, Exact } from "@osmonauts/helpers";
 export const protobufPackage = "akash.deployment.v1beta2";
 
 /** GroupID stores owner, deployment sequence number and group sequence number */
@@ -80,7 +80,7 @@ export const GroupID = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<GroupID>): GroupID {
+  fromPartial<I extends Exact<DeepPartial<GroupID>, I>>(object: I): GroupID {
     const message = createBaseGroupID();
     message.owner = object.owner ?? "";
     message.dseq = object.dseq !== undefined && object.dseq !== null ? Long.fromValue(object.dseq) : Long.UZERO;

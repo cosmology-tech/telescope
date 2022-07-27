@@ -1,7 +1,7 @@
 import { GroupID } from "./groupid";
 import { GroupSpec } from "./groupspec";
 import * as _m0 from "protobufjs/minimal";
-import { Long, isSet, DeepPartial } from "@osmonauts/helpers";
+import { Long, isSet, DeepPartial, Exact } from "@osmonauts/helpers";
 export const protobufPackage = "akash.deployment.v1beta2";
 
 /** State is an enum which refers to state of group */
@@ -162,7 +162,7 @@ export const Group = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<Group>): Group {
+  fromPartial<I extends Exact<DeepPartial<Group>, I>>(object: I): Group {
     const message = createBaseGroup();
     message.groupId = object.groupId !== undefined && object.groupId !== null ? GroupID.fromPartial(object.groupId) : undefined;
     message.state = object.state ?? 0;

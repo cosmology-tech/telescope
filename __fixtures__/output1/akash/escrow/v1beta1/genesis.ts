@@ -1,6 +1,6 @@
 import { Account, Payment } from "./types";
 import * as _m0 from "protobufjs/minimal";
-import { DeepPartial } from "@osmonauts/helpers";
+import { DeepPartial, Exact } from "@osmonauts/helpers";
 export const protobufPackage = "akash.escrow.v1beta1";
 
 /** GenesisState defines the basic genesis state used by escrow module */
@@ -80,7 +80,7 @@ export const GenesisState = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<GenesisState>): GenesisState {
+  fromPartial<I extends Exact<DeepPartial<GenesisState>, I>>(object: I): GenesisState {
     const message = createBaseGenesisState();
     message.accounts = object.accounts?.map(e => Account.fromPartial(e)) || [];
     message.payments = object.payments?.map(e => Payment.fromPartial(e)) || [];

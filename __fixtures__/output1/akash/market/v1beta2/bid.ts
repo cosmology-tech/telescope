@@ -1,7 +1,7 @@
 import { OrderID } from "./order";
 import { DecCoin, Coin } from "../../../cosmos/base/v1beta1/coin";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, Long } from "@osmonauts/helpers";
+import { isSet, DeepPartial, Exact, Long } from "@osmonauts/helpers";
 export const protobufPackage = "akash.market.v1beta2";
 
 /** State is an enum which refers to state of bid */
@@ -203,7 +203,7 @@ export const MsgCreateBid = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<MsgCreateBid>): MsgCreateBid {
+  fromPartial<I extends Exact<DeepPartial<MsgCreateBid>, I>>(object: I): MsgCreateBid {
     const message = createBaseMsgCreateBid();
     message.order = object.order !== undefined && object.order !== null ? OrderID.fromPartial(object.order) : undefined;
     message.provider = object.provider ?? "";
@@ -250,7 +250,7 @@ export const MsgCreateBidResponse = {
     return obj;
   },
 
-  fromPartial(_: DeepPartial<MsgCreateBidResponse>): MsgCreateBidResponse {
+  fromPartial<I extends Exact<DeepPartial<MsgCreateBidResponse>, I>>(_: I): MsgCreateBidResponse {
     const message = createBaseMsgCreateBidResponse();
     return message;
   }
@@ -306,7 +306,7 @@ export const MsgCloseBid = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<MsgCloseBid>): MsgCloseBid {
+  fromPartial<I extends Exact<DeepPartial<MsgCloseBid>, I>>(object: I): MsgCloseBid {
     const message = createBaseMsgCloseBid();
     message.bidId = object.bidId !== undefined && object.bidId !== null ? BidID.fromPartial(object.bidId) : undefined;
     return message;
@@ -350,7 +350,7 @@ export const MsgCloseBidResponse = {
     return obj;
   },
 
-  fromPartial(_: DeepPartial<MsgCloseBidResponse>): MsgCloseBidResponse {
+  fromPartial<I extends Exact<DeepPartial<MsgCloseBidResponse>, I>>(_: I): MsgCloseBidResponse {
     const message = createBaseMsgCloseBidResponse();
     return message;
   }
@@ -450,7 +450,7 @@ export const BidID = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<BidID>): BidID {
+  fromPartial<I extends Exact<DeepPartial<BidID>, I>>(object: I): BidID {
     const message = createBaseBidID();
     message.owner = object.owner ?? "";
     message.dseq = object.dseq !== undefined && object.dseq !== null ? Long.fromValue(object.dseq) : Long.UZERO;
@@ -544,7 +544,7 @@ export const Bid = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<Bid>): Bid {
+  fromPartial<I extends Exact<DeepPartial<Bid>, I>>(object: I): Bid {
     const message = createBaseBid();
     message.bidId = object.bidId !== undefined && object.bidId !== null ? BidID.fromPartial(object.bidId) : undefined;
     message.state = object.state ?? 0;
@@ -659,7 +659,7 @@ export const BidFilters = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<BidFilters>): BidFilters {
+  fromPartial<I extends Exact<DeepPartial<BidFilters>, I>>(object: I): BidFilters {
     const message = createBaseBidFilters();
     message.owner = object.owner ?? "";
     message.dseq = object.dseq !== undefined && object.dseq !== null ? Long.fromValue(object.dseq) : Long.UZERO;
