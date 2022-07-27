@@ -12,7 +12,7 @@ interface CreateStargateClient {
 
 export const createStargateClient = ({ name, registries, aminos, context }: CreateStargateClient) => {
 
-  const includeDefaults = context.pluginValue('signingClientDefaults');
+  const includeDefaults = context.pluginValue('stargateClients.includeCosmosDefaultTypes');
 
   if (includeDefaults) {
     context.addUtil('defaultRegistryTypes')

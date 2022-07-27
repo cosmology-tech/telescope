@@ -1,7 +1,6 @@
 import { AminoExceptions } from "./aminos";
 interface TelescopeOpts {
     includePackageVar?: boolean;
-    signingClientDefaults?: boolean;
     aggregatedLCD?: {
         dir: string;
         filename: string;
@@ -10,7 +9,7 @@ interface TelescopeOpts {
     };
     stargateClients?: {
         enabled: boolean;
-        includeCosmosDefaults?: boolean;
+        includeCosmosDefaultTypes?: boolean;
     };
     typingsFormat?: {
         useExact?: boolean;

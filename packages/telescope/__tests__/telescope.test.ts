@@ -17,6 +17,11 @@ const options: TelescopeOptions = {
         duration: 'duration'
     },
 
+    stargateClients: {
+        enabled: true,
+        includeCosmosDefaultTypes: true
+    },
+
     aggregatedLCD: {
         dir: 'osmosis',
         filename: 'agg-lcd.ts',

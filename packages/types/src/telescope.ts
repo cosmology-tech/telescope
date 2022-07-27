@@ -4,7 +4,6 @@ import { camel } from '@osmonauts/utils';
 
 interface TelescopeOpts {
     includePackageVar?: boolean;
-    signingClientDefaults?: boolean;
 
     aggregatedLCD?: {
         dir: string;
@@ -15,7 +14,7 @@ interface TelescopeOpts {
 
     stargateClients?: {
         enabled: boolean;
-        includeCosmosDefaults?: boolean;
+        includeCosmosDefaultTypes?: boolean;
     },
 
     typingsFormat?: {
@@ -67,7 +66,6 @@ export type TelescopeOption = keyof TelescopeOpts;
 
 export const defaultTelescopeOptions: TelescopeOptions = {
     // global options (can be overridden through plugins)
-    signingClientDefaults: true,
     includePackageVar: false,
 
     typingsFormat: {
@@ -96,7 +94,10 @@ export const defaultTelescopeOptions: TelescopeOptions = {
     // packages
     packages: {
         cosmos: {
-            signingClientDefaults: false
+            stargateClients: {
+                enabled: true,
+                includeCosmosDefaultTypes: false
+            }
         },
         osmosis: {
             aminoEncoding: {
