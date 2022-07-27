@@ -469,9 +469,7 @@ main().then(() => {
 ```
 ## RPC Clients
 
-It may make sense for your app to query multiple modules, and it can get a bit complex to manage multiple clients for every module.
-
-For a better developer experience, you can generate a factory of scoped bundles of all RPC Clients with the `createRPCBundles` option. 
+For querying data via RPC endpoints, you can use RPC Clients. For a better developer experience, you can generate a factory of scoped bundles of all RPC Clients with the `rpcClients` option. 
 
 ```ts
 const options: TelescopeOptions = {
@@ -481,7 +479,7 @@ const options: TelescopeOptions = {
 };
 ```
 
-If you use the `rpcs` array, you can scope to only the modules of your interest.
+If you use the `rpcClients.scoped` array, you can scope to only the modules of your interest.
 
 ```ts
 const options: TelescopeOptions = {
