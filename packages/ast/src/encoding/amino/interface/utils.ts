@@ -36,7 +36,7 @@ export const aminoInterface = {
         );
     },
     duration(args: RenderAminoField) {
-        const { useDuration } = args.context.options;
+        const useDuration = args.context.pluginValue('typingsFormat.duration');
         switch (useDuration) {
             case 'string':
                 return t.tsPropertySignature(
@@ -49,7 +49,7 @@ export const aminoInterface = {
         }
     },
     timestamp(args: RenderAminoField) {
-        const { useDate } = args.context.options;
+        const useDate = args.context.pluginValue('typingsFormat.date');
         switch (useDate) {
             case 'date':
             // TODO check is date is Date for amino?

@@ -234,7 +234,7 @@ export const toJSON = {
     },
 
     timestamp(args: ToJSONMethod) {
-        const { useDate } = args.context.options;
+        const useDate = args.context.pluginValue('typingsFormat.date')
         switch (useDate) {
             case 'timestamp':
                 return toJSON.timestampTimestamp(args);

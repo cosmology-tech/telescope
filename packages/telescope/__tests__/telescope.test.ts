@@ -11,6 +11,12 @@ store.traverseAll();
 const options: TelescopeOptions = {
     includePackageVar: true,
 
+    typingsFormat: {
+        useExact: false,
+        date: 'date',
+        duration: 'duration'
+    },
+
     aggregatedLCD: {
         dir: 'osmosis',
         filename: 'agg-lcd.ts',

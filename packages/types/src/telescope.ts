@@ -6,10 +6,6 @@ interface TelescopeOpts {
     includePackageVar?: boolean;
     signingClientDefaults?: boolean;
 
-    useDate?: 'date' | 'timestamp';
-    useDuration?: 'duration' | 'string';
-    useExact?: boolean;
-
     aggregatedLCD?: {
         dir: string;
         filename: string;
@@ -73,9 +69,6 @@ export const defaultTelescopeOptions: TelescopeOptions = {
     // global options (can be overridden through plugins)
     signingClientDefaults: true,
     includePackageVar: false,
-
-    useDate: 'date',
-    useDuration: 'duration',
 
     typingsFormat: {
         useExact: false,

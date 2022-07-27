@@ -76,7 +76,7 @@ export const decode = {
     duration(args: DecodeMethod) {
         const num = args.field.id;
         const prop = args.field.name;
-        const { useDuration } = args.context.options;
+        const useDuration = args.context.pluginValue('typingsFormat.duration');
 
         switch (useDuration) {
             case 'string':
@@ -89,8 +89,7 @@ export const decode = {
     timestamp(args: DecodeMethod) {
         const num = args.field.id;
         const prop = args.field.name;
-        const { useDate } = args.context.options;
-
+        const useDate = args.context.pluginValue('typingsFormat.date')
         switch (useDate) {
             case 'timestamp':
                 return switchOnTag(num, prop, baseTypes.timestamp(args));

@@ -2,9 +2,6 @@ import { AminoExceptions } from "./aminos";
 interface TelescopeOpts {
     includePackageVar?: boolean;
     signingClientDefaults?: boolean;
-    useDate?: 'date' | 'timestamp';
-    useDuration?: 'duration' | 'string';
-    useExact?: boolean;
     aggregatedLCD?: {
         dir: string;
         filename: string;
