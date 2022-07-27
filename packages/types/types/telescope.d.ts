@@ -1,18 +1,6 @@
 import { AminoExceptions } from "./aminos";
-export interface NestableTelescopeOpts {
-    aminoCasingFn?: Function;
-    signingClientDefaults?: boolean;
-    useExact?: boolean;
-}
 interface TelescopeOpts {
-    aminoCasingFn?: Function;
-    aminoExceptions?: AminoExceptions;
-    aminoTypeUrl?: (typeUrl: string) => string | undefined;
-    camelRpcMethods?: boolean;
-    includeAminos?: boolean;
-    includeLCDClients?: boolean;
     includePackageVar?: boolean;
-    includeRPCClients?: boolean;
     signingClientDefaults?: boolean;
     useDate?: 'date' | 'timestamp';
     useDuration?: 'duration' | 'string';
@@ -23,22 +11,45 @@ interface TelescopeOpts {
         packages: string[];
         addToBundle: boolean;
     };
-    createLCDBundles?: boolean;
-    createRPCBundles?: boolean;
-    lcds?: {
-        dir: string;
-        filename?: string;
-        packages: string[];
-        addToBundle: boolean;
-        methodName?: string;
-    }[];
-    rpcs?: {
-        dir: string;
-        filename?: string;
-        packages: string[];
-        addToBundle: boolean;
-        methodName?: string;
-    }[];
+    stargateClients?: {
+        enabled: boolean;
+        includeCosmosDefaults?: boolean;
+    };
+    typingsFormat?: {
+        useExact?: boolean;
+        date?: 'date' | 'timestamp';
+        duration?: 'duration' | 'string';
+    };
+    aminoEncoding?: {
+        enabled: boolean;
+        casingFn?: Function;
+        exceptions?: AminoExceptions;
+        typeUrlToAmino?: (typeUrl: string) => string | undefined;
+    };
+    lcdClients?: {
+        enabled: boolean;
+        scopedIsExclusive?: boolean;
+        scoped?: {
+            dir: string;
+            filename?: string;
+            packages: string[];
+            addToBundle: boolean;
+            methodName?: string;
+        }[];
+    };
+    rpcClients?: {
+        enabled: boolean;
+        camelCase?: boolean;
+        scopedIsExclusive?: boolean;
+        scoped?: {
+            dir: string;
+            filename?: string;
+            packages: string[];
+            addToBundle: boolean;
+            methodNameQuery?: string;
+            methodNameTx?: string;
+        }[];
+    };
 }
 interface TelescopePackageOpts {
     packages?: Record<string, any>;

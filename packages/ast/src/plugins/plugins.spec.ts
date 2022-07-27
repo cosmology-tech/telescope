@@ -6,6 +6,10 @@ const options = {
     includeLCDClients: false,
     useDate: false,
 
+    aminoEncoding: {
+        enabled: true
+    },
+
     packages: {
         cosmos: {
             useDate: true
@@ -19,20 +23,24 @@ const options = {
         },
         osmosis: {
             aminoCasing: 'camel'
+        },
+        akash: {
+            aminoEncoding: {
+                enabled: false
+            }
+        },
+        nebula: {
+            some: {
+                pkg: {
+                    aminoEncoding: {
+                        enabled: false
+                    }
+                }
+            }
         }
     }
 };
 
-cases('includeAminos', opts => {
-    const val = getPluginValue(opts.prop, opts.name, options);
-    expect(val).toMatchSnapshot();
-
-}, [
-    { name: 'cosmos.v1beta1.tx', prop: 'includeAminos' },
-    { name: 'cosmos.v1beta1', prop: 'includeAminos' },
-    { name: 'cosmos.v1beta1.other', prop: 'includeAminos' },
-    { name: 'cosmos', prop: 'includeAminos' },
-]);
 
 cases('useDate', opts => {
     const val = getPluginValue(opts.prop, opts.name, options);
@@ -43,4 +51,30 @@ cases('useDate', opts => {
     { name: 'cosmos.v1beta1', prop: 'useDate' },
     { name: 'cosmos.v1beta1.other', prop: 'useDate' },
     { name: 'cosmos', prop: 'useDate' },
+]);
+
+cases('aminoEncoding', opts => {
+    const val = getPluginValue(opts.prop, opts.name, options);
+    expect(val).toMatchSnapshot();
+
+}, [
+    { name: 'cosmos.v1beta1', prop: 'aminoEncoding' },
+    { name: 'cosmos', prop: 'aminoEncoding' },
+    { name: 'akash', prop: 'aminoEncoding' },
+    { name: 'nebula', prop: 'aminoEncoding' },
+    { name: 'nebula.some', prop: 'aminoEncoding' },
+    { name: 'nebula.some.pkg', prop: 'aminoEncoding' },
+]);
+
+cases('aminoEncoding.enabled', opts => {
+    const val = getPluginValue(opts.prop, opts.name, options);
+    expect(val).toMatchSnapshot();
+
+}, [
+    { name: 'cosmos.v1beta1', prop: 'aminoEncoding.enabled' },
+    { name: 'cosmos', prop: 'aminoEncoding.enabled' },
+    { name: 'akash', prop: 'aminoEncoding.enabled' },
+    { name: 'nebula', prop: 'aminoEncoding.enabled' },
+    { name: 'nebula.some', prop: 'aminoEncoding.enabled' },
+    { name: 'nebula.some.pkg', prop: 'aminoEncoding.enabled' },
 ]);

@@ -11,28 +11,45 @@ export const plugin = (
     builder: TelescopeBuilder,
     bundler: Bundler
 ) => {
-    if (
-        builder.options.lcds &&
-        builder.options.lcds.length) {
-        builder.options.lcds.forEach(lcd => {
-            if (lcd.dir !== bundler.bundle.base) return;
-            makeLCD(
-                builder,
-                bundler,
-                lcd
-            );
-        });
+
+    // if not enabled, exit
+    if (!builder.options?.lcdClients?.enabled) {
+        return;
     }
 
-    if (builder.options.createLCDBundles) {
-        if (!builder.options.includeLCDClients) {
-            throw new Error('createLCDBundles requires includeLCDClients option to be true');
-        }
-        makeLCDBundles(
+    // if no scopes, do them all!
+    if (
+        !builder.options.lcdClients.scoped ||
+        !builder.options.lcdClients.scoped.length
+    ) {
+        // TODO inefficient
+        // WE SHOULD NOT DO THIS IN A BUNDLER LOOP
+        // MAKE SEPARATE PLUGIN
+        return createAllLCDBundles(
             builder,
             bundler
         );
     }
+
+    if (!builder.options.lcdClients.scopedIsExclusive) {
+        // TODO inefficient
+        // WE SHOULD NOT DO THIS IN A BUNDLER LOOP
+        // MAKE SEPARATE PLUGIN
+        createAllLCDBundles(
+            builder,
+            bundler
+        );
+    }
+
+    // we have scopes!
+    builder.options.lcdClients.scoped.forEach(lcd => {
+        if (lcd.dir !== bundler.bundle.base) return;
+        makeLCD(
+            builder,
+            bundler,
+            lcd
+        );
+    });
 };
 
 const getFileName = (dir, filename) => {
@@ -95,7 +112,7 @@ const makeLCD = (
  clean up all these many options for one nested object full of options
 */
 
-const makeLCDBundles = (
+const createAllLCDBundles = (
     builder: TelescopeBuilder,
     bundler: Bundler
 ) => {

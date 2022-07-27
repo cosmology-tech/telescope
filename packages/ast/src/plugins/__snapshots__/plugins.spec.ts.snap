@@ -1,12 +1,52 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`includeAminos cosmos 1`] = `false`;
+exports[`aminoEncoding akash 1`] = `
+Object {
+  "enabled": false,
+}
+`;
 
-exports[`includeAminos cosmos.v1beta1 1`] = `true`;
+exports[`aminoEncoding cosmos 1`] = `
+Object {
+  "enabled": true,
+}
+`;
 
-exports[`includeAminos cosmos.v1beta1.other 1`] = `true`;
+exports[`aminoEncoding cosmos.v1beta1 1`] = `
+Object {
+  "enabled": true,
+}
+`;
 
-exports[`includeAminos cosmos.v1beta1.tx 1`] = `false`;
+exports[`aminoEncoding nebula 1`] = `
+Object {
+  "enabled": true,
+}
+`;
+
+exports[`aminoEncoding nebula.some 1`] = `
+Object {
+  "enabled": true,
+}
+`;
+
+exports[`aminoEncoding nebula.some.pkg 1`] = `
+Object {
+  "enabled": false,
+}
+`;
+
+exports[`aminoEncoding.enabled akash 1`] = `false`;
+
+exports[`aminoEncoding.enabled cosmos 1`] = `true`;
+
+exports[`aminoEncoding.enabled cosmos.v1beta1 1`] = `true`;
+
+exports[`aminoEncoding.enabled nebula 1`] = `true`;
+
+exports[`aminoEncoding.enabled nebula.some 1`] = `true`;
+
+exports[`aminoEncoding.enabled nebula.some.pkg 1`] = `false`;
 
 exports[`useDate cosmos 1`] = `true`;
 
@@ -14,4 +54,4 @@ exports[`useDate cosmos.v1beta1 1`] = `true`;
 
 exports[`useDate cosmos.v1beta1.other 1`] = `true`;
 
-exports[`useDate cosmos.v1beta1.tx 1`] = `false`;
+exports[`useDate cosmos.v1beta1.tx 1`] = `true`;

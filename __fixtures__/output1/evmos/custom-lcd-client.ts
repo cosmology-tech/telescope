@@ -1,4 +1,4 @@
-export const createCustomLCDClient = async ({
+export const createEvmosLCDClient = async ({
   restEndpoint
 }) => ({
   cosmos: {
@@ -13,9 +13,9 @@ export const createCustomLCDClient = async ({
       })
     }
   },
-  osmosis: {
-    gamm: {
-      v1beta1: new (await import("./gamm/v1beta1/query.lcd")).LCDQueryClient({
+  evmos: {
+    erc20: {
+      v1: new (await import("./erc20/v1/query.lcd")).LCDQueryClient({
         restEndpoint
       })
     }

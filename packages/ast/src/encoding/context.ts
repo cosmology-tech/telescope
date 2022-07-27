@@ -99,7 +99,7 @@ export class AminoParseContext extends GenericParseContext implements ParseConte
 
     private setAminoCasingFn() {
         if (this.aminoCasingFn) return this.aminoCasingFn;
-        this.aminoCasingFn = this.pluginValue('aminoCasingFn');
+        this.aminoCasingFn = this.pluginValue('aminoEncoding.casingFn');
         return this.aminoCasingFn;
     }
 

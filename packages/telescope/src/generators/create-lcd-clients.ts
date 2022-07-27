@@ -12,7 +12,7 @@ export const plugin = (
     bundler: Bundler
 ) => {
 
-    if (!builder.options.includeLCDClients) {
+    if (!builder.options.lcdClients.enabled) {
         return;
     }
 
@@ -22,6 +22,9 @@ export const plugin = (
 
     // [x] write out one registry helper for all contexts w/mutations
     const lcdClients = queryContexts.map(c => {
+
+        const enabled = c.proto.pluginValue('lcdClients.enabled');
+        if (!enabled) return;
 
         const localname = bundler.getLocalFilename(c.ref, 'lcd');
         const filename = bundler.getFilename(localname);

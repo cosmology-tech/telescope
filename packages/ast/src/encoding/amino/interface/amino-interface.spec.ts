@@ -13,9 +13,7 @@ describe('osmosis/gamm/v1beta1/tx', () => {
     } = prepareContext(store, 'osmosis/gamm/v1beta1/tx.proto')
 
     it('Interfaces', () => {
-        context.options = {
-            aminoCasingFn: camel
-        };
+        context.options.aminoEncoding.casingFn = camel;
         expectCode(makeAminoTypeInterface(
             {
                 context,
@@ -32,9 +30,7 @@ describe('cosmos/staking/v1beta1/tx', () => {
     } = prepareContext(store, 'cosmos/staking/v1beta1/tx.proto')
 
     it('MsgCreateValidator', () => {
-        context.options = {
-            aminoCasingFn: snake
-        }
+        context.options.aminoEncoding.casingFn = snake;
 
         expectCode(makeAminoTypeInterface(
             {
@@ -44,10 +40,7 @@ describe('cosmos/staking/v1beta1/tx', () => {
         ))
     })
     it('MsgEditValidator', () => {
-        context.options = {
-            aminoCasingFn: snake
-        }
-
+        context.options.aminoEncoding.casingFn = snake;
         expectCode(makeAminoTypeInterface(
             {
                 context,
@@ -56,10 +49,7 @@ describe('cosmos/staking/v1beta1/tx', () => {
         ))
     })
     it('MsgUndelegate', () => {
-        context.options = {
-            aminoCasingFn: snake
-        }
-
+        context.options.aminoEncoding.casingFn = snake;
         expectCode(makeAminoTypeInterface(
             {
                 context,

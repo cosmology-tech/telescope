@@ -8,7 +8,7 @@ export const plugin = (
     bundler: Bundler
 ) => {
 
-    if (!builder.options.includeAminos) {
+    if (!builder.options.aminoEncoding.enabled) {
         return;
     }
 
@@ -18,6 +18,9 @@ export const plugin = (
 
     // [x] write out one registry helper for all contexts w/mutations
     const registries = mutationContexts.map(c => {
+
+        const enabled = c.amino.pluginValue('aminoEncoding.enabled');
+        if (!enabled) return;
 
         const localname = bundler.getLocalFilename(c.ref, 'registry');
         const filename = bundler.getFilename(localname);

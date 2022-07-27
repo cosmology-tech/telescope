@@ -239,7 +239,7 @@ export const createRpcClientInterface = (
     context: GenericParseContext,
     service: ProtoService
 ) => {
-    const { camelRpcMethods } = context.options;
+    const camelRpcMethods = context.pluginValue('rpcClients.camelCase');
     const methods = Object.keys(service.methods ?? {})
         .map(key => {
             const method = service.methods[key];
@@ -283,7 +283,7 @@ export const createRpcClientClass = (
     context.addUtil('Rpc');
     context.addUtil('_m0');
 
-    const { camelRpcMethods } = context.options;
+    const camelRpcMethods = context.pluginValue('rpcClients.camelCase');
     const name = service.name + 'ClientImpl';
     const implementsName = service.name;
     const methodNames = Object.keys(service.methods ?? {})

@@ -374,8 +374,6 @@ For a better developer experience, you can generate a factory of scoped bundles 
 
 ```ts
 const options: TelescopeOptions = {
-  ...otherOptions,
-  ////// LCD Options below:
   createLCDBundles: true,
   includeLCDClients: true
 };
@@ -385,8 +383,6 @@ If you use the `lcds` array, you can scope to only the modules of your interest.
 
 ```ts
 const options: TelescopeOptions = {
-  ...otherOptions,
-  ////// LCD Options below:
   createLCDBundles: true,
   includeLCDClients: true,
   lcds: [{
@@ -590,11 +586,13 @@ Checkout these related projects:
 
 ## Credits
 
-Thanks to these teams and projects for inspiring Telescope:
+Thanks to these engineers, teams and projects for inspiring Telescope:
 
+* [@webmaster128](https://github.com/webmaster128)
 * [@assafmo](https://github.com/assafmo)
-* [ts-proto](https://github.com/stephenh/ts-proto)
 * [osmosis-frontend](https://github.com/osmosis-labs/osmosis-frontend)
+* [cosmjs](https://github.com/cosmos/cosmjs)
+* [ts-proto](https://github.com/stephenh/ts-proto)
 * [keplr-wallet](https://github.com/chainapsis/keplr-wallet)
 * [secret.js](https://github.com/scrtlabs/secret.js)
 

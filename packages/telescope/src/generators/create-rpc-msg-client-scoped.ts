@@ -13,33 +13,49 @@ export const plugin = (
     builder: TelescopeBuilder,
     bundler: Bundler
 ) => {
-    if (
-        builder.options.rpcs &&
-        builder.options.rpcs.length) {
-        builder.options.rpcs.forEach(rpc => {
-            if (rpc.dir !== bundler.bundle.base) return;
-            makeRPC(
-                builder,
-                bundler,
-                rpc
-            );
-        });
+    // if not enabled, exit
+    if (!builder.options?.rpcClients?.enabled) {
+        return;
     }
 
-    if (builder.options.createRPCBundles) {
-        if (!builder.options.includeRPCClients) {
-            throw new Error('createRPCBundles requires includeRPCClients option to be true');
-        }
-        makeRPCBundles(
+    // if no scopes, do them all!
+    if (
+        !builder.options.rpcClients.scoped ||
+        !builder.options.rpcClients.scoped.length
+    ) {
+        // TODO inefficient
+        // WE SHOULD NOT DO THIS IN A BUNDLER LOOP
+        // MAKE SEPARATE PLUGIN
+        return makeAllRPCBundles(
             builder,
             bundler
         );
     }
+
+    if (!builder.options.rpcClients.scopedIsExclusive) {
+        // TODO inefficient
+        // WE SHOULD NOT DO THIS IN A BUNDLER LOOP
+        // MAKE SEPARATE PLUGIN
+        makeAllRPCBundles(
+            builder,
+            bundler
+        );
+    }
+
+    // we have scopes!
+    builder.options.rpcClients.scoped.forEach(rpc => {
+        if (rpc.dir !== bundler.bundle.base) return;
+        makeRPC(
+            builder,
+            bundler,
+            rpc
+        );
+    });
 };
 
 const getFileName = (dir, filename) => {
-    const localname = join(dir, filename ?? 'rpc.msg.ts');
-    if (localname.endsWith('.ts')) return localname;
+    filename = filename.replace(/\.ts$/, '');
+    const localname = join(dir, filename + '.tx');
     return localname + '.ts';
 };
 
@@ -51,13 +67,14 @@ const makeRPC = (
         filename?: string;
         packages: string[];
         addToBundle: boolean;
-        methodName?: string;
+        methodNameQuery?: string;
+        methodNameTx?: string;
     }
 ) => {
     const dir = rpc.dir;
     const packages = rpc.packages;
-    const methodName = rpc.methodName ?? 'createRPCMsgClient'
-    const localname = getFileName(dir, rpc.filename);
+    const methodName = rpc.methodNameTx ?? 'createRPCMsgClient'
+    const localname = getFileName(dir, rpc.filename ?? 'rpc');
 
     const obj = {};
     builder.rpcMsgClients.forEach(file => {
@@ -141,7 +158,7 @@ const makeRPC = (
  clean up all these many options for one nested object full of options
 */
 
-const makeRPCBundles = (
+const makeAllRPCBundles = (
     builder: TelescopeBuilder,
     bundler: Bundler
 ) => {
@@ -151,7 +168,7 @@ const makeRPCBundles = (
     // [x] call makeRPC
 
     const dir = bundler.bundle.base;
-    const filename = 'rpc.msg.ts'
+    const filename = 'rpc';
 
     ///
     ///
@@ -192,7 +209,7 @@ const makeRPCBundles = (
             filename,
             packages,
             addToBundle: true,
-            methodName: 'createRPCMsgClient'
+            methodNameTx: 'createRPCMsgClient'
         }
     );
 

@@ -9,15 +9,18 @@ export const plugin = (
     builder: TelescopeBuilder,
     bundler: Bundler
 ) => {
-    if (!builder.options.includeRPCClients) {
-        return;
-    }
+    // if (!builder.options.rpcClients.enabled) {
+    //     return;
+    // }
 
     const mutationContexts = bundler
         .contexts
         .filter(context => context.mutations.length > 0);
 
     const clients = mutationContexts.map(c => {
+
+        const enabled = c.proto.pluginValue('rpcClients.enabled');
+        if (!enabled) return;
 
         const localname = bundler.getLocalFilename(c.ref, 'rpc.msg');
         const filename = bundler.getFilename(localname);

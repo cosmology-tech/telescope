@@ -12,9 +12,7 @@ describe('osmosis/gamm/v1beta1/tx', () => {
     } = prepareContext(store, 'osmosis/gamm/v1beta1/tx.proto')
 
     it('AminoConverter', () => {
-        context.options = {
-            aminoCasingFn: camel
-        };
+        context.options.aminoEncoding.casingFn = camel;
 
         expectCode(createAminoConverter({
             context,
@@ -31,9 +29,7 @@ describe('cosmos/staking/v1beta1/tx', () => {
     } = prepareContext(store, 'cosmos/staking/v1beta1/tx.proto')
 
     it('AminoConverter', () => {
-        context.options = {
-            aminoCasingFn: snake
-        };
+        context.options.aminoEncoding.casingFn = snake;
 
         expectCode(createAminoConverter({
             context,
@@ -51,9 +47,7 @@ describe('evmos/fees/v1/tx', () => {
     } = prepareContext(store, 'evmos/fees/v1/tx.proto')
 
     it('AminoConverter', () => {
-        context.options = {
-            aminoCasingFn: snake
-        };
+        context.options.aminoEncoding.casingFn = snake;
 
         expectCode(createAminoConverter({
             context,

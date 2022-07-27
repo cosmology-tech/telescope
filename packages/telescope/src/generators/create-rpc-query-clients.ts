@@ -10,11 +10,14 @@ export const plugin = (
     bundler: Bundler
 ) => {
 
-    if (!builder.options.includeRPCClients) {
-        return;
-    }
+    // if (!builder.options.rpcClients.enabled) {
+    //     return;
+    // }
 
     const clients = bundler.contexts.map(c => {
+
+        const enabled = c.proto.pluginValue('rpcClients.enabled');
+        if (!enabled) return;
 
         const ctx = bundler.getFreshContext(c);
 
