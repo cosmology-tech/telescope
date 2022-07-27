@@ -119,7 +119,7 @@ telescope({
   options: {
     includeAminos: true,
     includeLCDClients: true,
-    includeRpcClients: true,
+    includeRPCClients: true,
     camelRpcMethods: true,
     includePackageVar: false,
     useDate: 'date',
@@ -347,7 +347,7 @@ export const getCustomSigningClient = async ({ rpcEndpoint, signer }: { rpcEndpo
 
 ## LCD Clients
 
-You can generate LCD classes with the `includeLCDClients` option in [telescope](https://github.com/osmosis-labs/telescope).
+You can generate LCD classes with the `includeLCDClients` option.
 
 For any module that has a `Query` type, there will be a `LCDQueryClient` object:
 
@@ -366,9 +366,60 @@ main().then(() => {
 })
 ```
 
+## LCD Client Bundles
+
+It may make sense for your app to query multiple modules, and it can get a bit complex to manage multiple clients for every module.
+
+For a better developer experience, you can generate a factory of scoped bundles of all LCD Clients with the `createLCDBundles` option. 
+
+```ts
+const options: TelescopeOptions = {
+  ...otherOptions,
+  ////// LCD Options below:
+  createLCDBundles: true,
+  includeLCDClients: true
+};
+```
+
+If you use the `lcds` array, you can scope to only the modules of your interest.
+
+```ts
+const options: TelescopeOptions = {
+  ...otherOptions,
+  ////// LCD Options below:
+  createLCDBundles: true,
+  includeLCDClients: true,
+  lcds: [{
+      dir: 'osmosis',
+      filename: 'custom-osmosis-lcd-client.ts',
+      packages: [
+          'cosmos.bank.v1beta1',
+          'cosmos.gov.v1beta1',
+          'osmosis.gamm.v1beta1'
+      ],
+      addToBundle: true,
+      methodName: 'createLCDClient'
+  }]
+};
+```
+
+This will generate a nice helper `createLCDClient` with all the clients, which you can then use this to query multiple modules from a single object:
+
+```js
+import { osmosis } from './proto';
+
+const main = async () => {
+   const client = await osmosis.ClientFactory.createLCDClient({ restEndpoint: REST_ENDPOINT });
+
+   // now you can query the modules
+   const poolInfo = await client.osmosis.gamm.v1beta1.pool({ poolId: "1" });
+   const balance = await client.cosmos.bank.v1beta1.allBalances({ address: 'osmo1addresshere' });
+};
+```
+
 ## RPC Clients
 
-You can generate RPC classes with the `includeRpcClients` option in [telescope](https://github.com/osmosis-labs/telescope).
+You can generate RPC classes with the `includeRPCClients` option;
 
 For any module that has a `Msg`, `Query` or `Service` type, a 
 
@@ -400,6 +451,54 @@ export const main = async () => {
 main().then(() => {
     console.log('all done')
 })
+```
+
+## RPC Client Bundles
+
+It may make sense for your app to query multiple modules, and it can get a bit complex to manage multiple clients for every module.
+
+For a better developer experience, you can generate a factory of scoped bundles of all RPC Clients with the `createRPCBundles` option. 
+
+```ts
+const options: TelescopeOptions = {
+  ...otherOptions,
+  ////// RPC Options below:
+  createRPCBundles: true,
+  includeRPCClients: true
+};
+```
+
+If you use the `rpcs` array, you can scope to only the modules of your interest.
+
+```ts
+const options: TelescopeOptions = {
+  ...otherOptions,
+  ////// RPC Options below:
+  createRPCBundles: true,
+  includeRPCClients: true,
+  rpcs: [{
+      dir: 'osmosis',
+      filename: 'custom-osmosis-rpc-client.ts',
+      packages: [
+          'cosmos.bank.v1beta1',
+          'cosmos.gov.v1beta1',
+          'osmosis.gamm.v1beta1'
+      ],
+      addToBundle: true,
+      methodName: 'createRPCClient'
+  }]
+};
+```
+
+This will generate helpers `createRPCQueryClient` and `createRPCMsgClient` with all the clients, which you can then use this to query multiple modules from a single object:
+
+```js
+import { osmosis } from './proto';
+
+const main = async () => {
+   const query = await osmosis.ClientFactory.createRPCQueryClient({ rpc });
+   const tx = await osmosis.ClientFactory.createRPCMsgClient({ rpc });
+};
 ```
 
 ## Using Mnemonics
@@ -490,6 +589,7 @@ Checkout these related projects:
 
 Thanks to these teams and projects for inspiring Telescope:
 
+* [@assafmo](https://github.com/assafmo)
 * [ts-proto](https://github.com/stephenh/ts-proto)
 * [osmosis-frontend](https://github.com/osmosis-labs/osmosis-frontend)
 * [keplr-wallet](https://github.com/chainapsis/keplr-wallet)

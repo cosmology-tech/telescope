@@ -105,7 +105,6 @@ const makeRPC = (
         'QueryClientImpl' // make option later
     );
 
-
     const serviceImports = getDepsFromQueries(
         ctx.queries,
         localname
@@ -131,7 +130,9 @@ const makeRPC = (
 
     const filename = bundler.getFilename(localname);
     bundler.writeAst(prog, filename);
-    bundler.addToBundleToPackage('ClientFactory', localname)
+    if (rpc.addToBundle) {
+        bundler.addToBundleToPackage('ClientFactory', localname)
+    }
 };
 
 // TODO

@@ -25,7 +25,7 @@ const input: TelescopeInput = {
                 'cosmos.bank.v1beta1',
                 'osmosis.gamm.v1beta1'
             ],
-            addToBundle: false
+            addToBundle: true
         },
         lcds: [{
             dir: 'osmosis',
@@ -35,7 +35,7 @@ const input: TelescopeInput = {
                 'cosmos.gov.v1beta1',
                 'osmosis.gamm.v1beta1'
             ],
-            addToBundle: false,
+            addToBundle: true,
             methodName: 'createMyLCDClient'
         }],
         aminoExceptions: {
