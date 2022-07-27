@@ -81,9 +81,9 @@ yarn install
 yarn buidl
 ```
 
-## Advanced Usage
+## Documentation
 
-See our [advanced usage documentation](https://github.com/osmosis-labs/telescope/blob/main/packages/telescope/docs/readme.md).
+Check our [documentation here](https://github.com/osmosis-labs/telescope/blob/main/packages/telescope/docs/readme.md).
 
 ## Disclaimer
 
