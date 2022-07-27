@@ -1,4 +1,4 @@
-import { aggregateImports, getDepsFromQueries, getImportStatments } from '../imports';
+import { aggregateImports, getDepsFromQueries, getImportStatements } from '../imports';
 import { getNestedProto } from '@osmonauts/proto-parser';
 import { parse } from '../parse';
 import { dirname, join } from 'path';
@@ -97,7 +97,7 @@ export const plugin = (
         return [...m, ...fixlocalpaths]
     }, []);
 
-    const importStmts = getImportStatments(
+    const importStmts = getImportStatements(
         [...importsForAggregator, ...progImports]
     );
 

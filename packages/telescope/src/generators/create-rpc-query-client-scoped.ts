@@ -7,7 +7,7 @@ import { ProtoRef } from '@osmonauts/types';
 import { getRelativePath } from '../utils';
 import { Bundler } from '../bundler';
 import { TelescopeParseContext } from '../build';
-import { aggregateImports, getDepsFromQueries, getImportStatments } from '../imports';
+import { aggregateImports, getDepsFromQueries, getImportStatements } from '../imports';
 
 export const plugin = (
     builder: TelescopeBuilder,
@@ -120,7 +120,7 @@ const makeRPC = (
         };
     });
 
-    const importStmts = getImportStatments(
+    const importStmts = getImportStatements(
         [...fixlocalpaths]
     );
 

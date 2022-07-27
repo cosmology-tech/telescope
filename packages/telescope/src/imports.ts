@@ -112,7 +112,7 @@ const importAs = (name: string, importAs: string, importPath: string) => {
     )
 }
 
-export const getImportStatments = (list: ImportObj[]) => {
+export const getImportStatements = (list: ImportObj[]) => {
     const imports = list.reduce((m, obj) => {
         m[obj.path] = m[obj.path] || [];
         const exists = m[obj.path].find(el => el.type === obj.type && el.path === obj.path && el.name === obj.name);
@@ -195,7 +195,7 @@ const convertUtilsToImports = (context: TelescopeParseContext): ImportObj[] => {
 
 export const buildAllImports = (context: TelescopeParseContext, allImports: ImportHash, filepath: string) => {
     const imports = aggregateImports(context, allImports, filepath);
-    const importStmts = getImportStatments(imports);
+    const importStmts = getImportStatements(imports);
     return importStmts;
 }
 

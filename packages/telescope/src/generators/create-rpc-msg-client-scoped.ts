@@ -6,7 +6,7 @@ import { createScopedRpcFactory } from '@osmonauts/ast';
 import { ProtoRef } from '@osmonauts/types';
 import { getRelativePath } from '../utils';
 import { Bundler } from '../bundler';
-import { aggregateImports, getDepsFromQueries, getImportStatments } from '../imports';
+import { aggregateImports, getDepsFromQueries, getImportStatements } from '../imports';
 import { TelescopeParseContext } from '../build';
 
 export const plugin = (
@@ -120,7 +120,7 @@ const makeRPC = (
         };
     });
 
-    const importStmts = getImportStatments(
+    const importStmts = getImportStatements(
         [...fixlocalpaths]
     );
 
