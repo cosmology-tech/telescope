@@ -517,7 +517,7 @@ const main = async () => {
 
 ## RPC Client Classes
 
-You can generate RPC classes with the `rpcClients` option;
+If you want to instantiate a single client, you can generate RPC classes with the `rpcClients` option;
 
 For any module that has a `Msg`, `Query` or `Service` type, a 
 
