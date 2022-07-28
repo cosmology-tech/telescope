@@ -48,10 +48,10 @@ exports[`aminoEncoding.enabled nebula.some 1`] = `true`;
 
 exports[`aminoEncoding.enabled nebula.some.pkg 1`] = `false`;
 
-exports[`useDate cosmos 1`] = `true`;
+exports[`timestampFormat cosmos 1`] = `true`;
 
-exports[`useDate cosmos.v1beta1 1`] = `true`;
+exports[`timestampFormat cosmos.v1beta1 1`] = `true`;
 
-exports[`useDate cosmos.v1beta1.other 1`] = `true`;
+exports[`timestampFormat cosmos.v1beta1.other 1`] = `true`;
 
-exports[`useDate cosmos.v1beta1.tx 1`] = `true`;
+exports[`timestampFormat cosmos.v1beta1.tx 1`] = `true`;

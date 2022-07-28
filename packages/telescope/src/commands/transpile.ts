@@ -49,14 +49,14 @@ export default async (argv) => {
     },
     {
       type: 'list',
-      name: 'useDate',
+      name: 'timestampFormat',
       message: 'treat timestamps as Date or Timestamp?',
       default: 'date',
       choices: ['date', 'timestamp']
     },
     {
       type: 'list',
-      name: 'useDuration',
+      name: 'durationFormat',
       message: 'treat durations as Duration or string?',
       default: 'duration',
       choices: ['duration', 'string']
@@ -70,8 +70,8 @@ export default async (argv) => {
     includeLCDClients,
     includePackageVar,
     includeRPCClients,
-    useDate,
-    useDuration
+    timestampFormat,
+    durationFormat
   } = await prompt(questions, argv);
 
   if (!Array.isArray(protoDirs)) {
@@ -81,8 +81,8 @@ export default async (argv) => {
   const options = {
     includePackageVar,
     typingsFormat: {
-      date: useDate,
-      duration: useDuration
+      date: timestampFormat,
+      duration: durationFormat
     },
     aminoEncoding: {
       enabled: includeAminos

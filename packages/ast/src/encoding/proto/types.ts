@@ -53,7 +53,7 @@ export const getTSTypeFromProtoType = (context: GenericParseContext, type: strin
         case 'bool':
             return t.tsBooleanKeyword();
         case 'google.protobuf.Timestamp':
-            switch (context.pluginValue('typingsFormat.date')) {
+            switch (context.pluginValue('typingsFormat.timestamp')) {
                 case 'timestamp':
                     return t.tsTypeReference(t.identifier('Timestamp'));
                 case 'date':

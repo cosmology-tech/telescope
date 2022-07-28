@@ -203,7 +203,7 @@ See [RPC Clients](#rpc-clients) for more info.
 
 | option                         | description                                                     |
 | ------------------------------ | --------------------------------------------------------------  |
-| `typingsFormat.date`           | use either `date` or `timestamp` for `Timestamp` proto type     |
+| `typingsFormat.timestamp`      | use either `date` or `timestamp` for `Timestamp` proto type     |
 | `typingsFormat.duration`       | use either `duration` or `string` for `Duration` proto type     |
 | `typingsFormat.useExact`       | defaults to false, but if enabled uses the `Exact` TS type      |
 
@@ -211,7 +211,7 @@ See [RPC Clients](#rpc-clients) for more info.
 
 ### Timestamp
 
-The representation of `google.protobuf.Timestamp` is configurable by the `typingsFormat.date` option.
+The representation of `google.protobuf.Timestamp` is configurable by the `typingsFormat.timestamp` option.
 
 | Protobuf type    | Default/`date='date'` | `date='timestamp'`                      |
 | --------------------------- | ---------------------- | ----------------------------------|

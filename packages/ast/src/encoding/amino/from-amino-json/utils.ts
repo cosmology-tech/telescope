@@ -81,8 +81,8 @@ export const fromAmino = {
     },
 
     duration(args: FromAminoParseField) {
-        const useDuration = args.context.pluginValue('typingsFormat.duration');
-        switch (useDuration) {
+        const durationFormat = args.context.pluginValue('typingsFormat.duration');
+        switch (durationFormat) {
             case 'duration':
             // TODO duration amino type
             case 'string':

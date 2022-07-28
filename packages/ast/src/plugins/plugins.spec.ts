@@ -4,7 +4,7 @@ import { getPluginValue } from './plugins';
 const options = {
     includeAminos: false,
     includeLCDClients: false,
-    useDate: false,
+    timestampFormat: false,
 
     aminoEncoding: {
         enabled: true
@@ -12,11 +12,11 @@ const options = {
 
     packages: {
         cosmos: {
-            useDate: true
+            timestampFormat: true
         },
         'cosmos.v1beta1.tx': {
             includeAminos: false,
-            useDate: false
+            timestampFormat: false
         },
         'cosmos.v1beta1': {
             includeAminos: true,
@@ -42,15 +42,15 @@ const options = {
 };
 
 
-cases('useDate', opts => {
+cases('timestampFormat', opts => {
     const val = getPluginValue(opts.prop, opts.name, options);
     expect(val).toMatchSnapshot();
 
 }, [
-    { name: 'cosmos.v1beta1.tx', prop: 'useDate' },
-    { name: 'cosmos.v1beta1', prop: 'useDate' },
-    { name: 'cosmos.v1beta1.other', prop: 'useDate' },
-    { name: 'cosmos', prop: 'useDate' },
+    { name: 'cosmos.v1beta1.tx', prop: 'timestampFormat' },
+    { name: 'cosmos.v1beta1', prop: 'timestampFormat' },
+    { name: 'cosmos.v1beta1.other', prop: 'timestampFormat' },
+    { name: 'cosmos', prop: 'timestampFormat' },
 ]);
 
 cases('aminoEncoding', opts => {
