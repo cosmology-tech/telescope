@@ -74,6 +74,11 @@ export const defaultTelescopeOptions: TelescopeOptions = {
         duration: 'duration'
     },
 
+    stargateClients: {
+        enabled: true,
+        includeCosmosDefaultTypes: true
+    },
+
     aminoEncoding: {
         enabled: true,
         casingFn: snake,
@@ -82,11 +87,11 @@ export const defaultTelescopeOptions: TelescopeOptions = {
         }
     },
     lcdClients: {
-        enabled: false,
+        enabled: true,
         scopedIsExclusive: true
     },
     rpcClients: {
-        enabled: false,
+        enabled: true,
         camelCase: true,
         scopedIsExclusive: true
     },

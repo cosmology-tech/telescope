@@ -39,13 +39,13 @@ export default async (argv) => {
       type: 'confirm',
       name: 'includeLCDClients',
       message: 'output LCD Clients?',
-      default: false
+      default: true
     },
     {
       type: 'confirm',
       name: 'includeRPCClients',
       message: 'output RPC clients?',
-      default: false
+      default: true
     },
     {
       type: 'list',
