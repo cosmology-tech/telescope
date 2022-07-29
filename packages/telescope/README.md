@@ -603,10 +603,23 @@ const mnemonic =
 ## Troubleshooting
 
 ### Create React App
-TODO
 
-### Keplr
-TODO
+CRA requires that you update Webpack configurations:
+
+https://github.com/cosmos/cosmjs/blob/656e02374898afe755e980e93390591b4b65fd86/README.md#webpack-configs
+
+Here is an example of a `config-overrides.js`:
+
+https://github.com/pyramation/osmosis-ui/blob/main/config-overrides.js
+
+### Babel 
+
+This should not be an issue, but if you experience problems with syntax or are not using `preset-env`, you may need these babel plugins:
+
+* [babel-plugin-proposal-numeric-separator](https://babeljs.io/docs/en/babel-plugin-proposal-numeric-separator)
+* [babel-plugin-proposal-optional-chaining](https://babeljs.io/docs/en/babel-plugin-proposal-optional-chaining)
+* [babel-plugin-proposal-nullish-coalescing-operator](https://babeljs.io/docs/en/babel-plugin-proposal-nullish-coalescing-operator)
+
 ## Developing
 
 ### Initial setup
