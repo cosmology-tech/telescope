@@ -51,7 +51,7 @@ export default async (argv) => {
       type: 'list',
       name: 'timestampFormat',
       message: 'treat timestamps as Date or Timestamp?',
-      default: 'date',
+      default: 'timestamp',
       choices: ['date', 'timestamp']
     },
     {
@@ -81,7 +81,7 @@ export default async (argv) => {
   const options = {
     includePackageVar,
     typingsFormat: {
-      date: timestampFormat,
+      timestamp: timestampFormat,
       duration: durationFormat
     },
     aminoEncoding: {
