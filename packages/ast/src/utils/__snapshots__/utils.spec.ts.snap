@@ -7,12 +7,14 @@ exports[`recursiveNamespace 1`] = `
       export namespace pools {
         export const getSigningOsmosisClient = async ({
           rpcEndpoint,
-          signer
+          signer,
+          defaultTypes = defaultRegistryTypes
         }: {
           rpcEndpoint: string;
           signer: OfflineSigner;
+          defaultTypes?: ReadonlyArray<[string, GeneratedType]>;
         }) => {
-          const registry = new Registry([...osmosis.gamm.v1beta1.registry, ...osmosis.superfluid.v1beta1.registry, ...osmosis.lockup.registry]);
+          const registry = new Registry([...defaultTypes, ...osmosis.gamm.v1beta1.registry, ...osmosis.superfluid.v1beta1.registry, ...osmosis.lockup.registry]);
           const aminoTypes = new AminoTypes({ ...osmosis.gamm.v1beta1.AminoConverter,
             ...osmosis.superfluid.v1beta1.AminoConverter,
             ...osmosis.lockup.AminoConverter

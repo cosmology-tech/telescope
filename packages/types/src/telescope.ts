@@ -19,7 +19,7 @@ interface TelescopeOpts {
 
     typingsFormat?: {
         useExact?: boolean;
-        date?: 'date' | 'timestamp',
+        timestamp?: 'date' | 'timestamp',
         duration?: 'duration' | 'string'
     },
 
@@ -70,7 +70,7 @@ export const defaultTelescopeOptions: TelescopeOptions = {
 
     typingsFormat: {
         useExact: false,
-        date: 'date',
+        timestamp: 'date',
         duration: 'duration'
     },
 
