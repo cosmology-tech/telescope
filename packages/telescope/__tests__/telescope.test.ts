@@ -13,7 +13,7 @@ const options: TelescopeOptions = {
 
     typingsFormat: {
         useExact: false,
-        date: 'date',
+        timestamp: 'date',
         duration: 'duration'
     },
 

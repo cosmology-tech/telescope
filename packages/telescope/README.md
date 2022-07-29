@@ -123,7 +123,7 @@ telescope({
     includePackageVar: false,
     typingsFormat: {
         useExact: false,
-        date: 'date',
+        timestamp: 'date',
         duration: 'duration'
     },
     aminoEncoding: {
