@@ -1,5 +1,5 @@
 import { prompt } from '../prompt';
-import { reactQuery } from 'cosmwasm-typescript-gen';
+import { reactQuery } from '@cosmwasm/ts-codegen';
 import { getContracts, getContractSchemata } from '../utils/contracts';
 
 export default async (argv) => {

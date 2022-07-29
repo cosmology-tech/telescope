@@ -1,4 +1,4 @@
-import { readSchemas } from 'cosmwasm-typescript-gen';
+import { readSchemas } from '@cosmwasm/ts-codegen';
 import { pascal } from 'case';
 import { basename, dirname, join } from 'path';
 import { readFileSync, readdirSync } from 'fs';

@@ -652,7 +652,7 @@ Kudos to our sponsors:
 
 Checkout these related projects:
 
-* [cosmwasm-typescript-gen](https://github.com/CosmWasm/cosmwasm-typescript-gen) for generated CosmWasm contract Typescript classes
+* [@cosmwasm/ts-codegen](https://github.com/CosmWasm/ts-codegen) for generated CosmWasm contract Typescript classes
 
 ## Credits
 
