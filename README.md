@@ -103,6 +103,9 @@ Finally, run `install` and `buidl` to generate the JS and types for publishing y
 yarn install
 yarn buidl
 ```
+
+Now you should have code inside of your `./src` folder, ready for publshing via `npm publish`. Or, if you used the defaults, you can start developing and your code can be imported from `./src/proto`;
+
 # Usage
 ## Programatic Usage
 
