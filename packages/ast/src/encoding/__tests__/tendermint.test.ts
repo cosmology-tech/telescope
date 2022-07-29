@@ -15,8 +15,8 @@ cases('ibc/lightclients/tendermint/v1/tendermint', opts => {
     const ref = store.findProto('ibc/lightclients/tendermint/v1/tendermint.proto');
     const context = new ProtoParseContext(ref, store, defaultTelescopeOptions);
     const aminoCtx = new AminoParseContext(ref, store, defaultTelescopeOptions);
-    context.options.useDuration = opts.name;
-    aminoCtx.options.useDuration = opts.name;
+    context.options.typingsFormat.duration = opts.name;
+    aminoCtx.options.typingsFormat.duration = opts.name;
     expectCode(createProtoType(context, 'ClientState',
         getNestedProto(ref.traversed).ClientState
     ));

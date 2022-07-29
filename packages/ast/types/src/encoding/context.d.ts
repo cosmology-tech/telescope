@@ -19,6 +19,7 @@ export declare class GenericParseContext implements ParseContext {
     store: ProtoStore;
     ref: ProtoRef;
     constructor(ref: ProtoRef, store: ProtoStore, options: TelescopeOptions);
+    pluginValue(name: any): any;
     addUtil(util: any): void;
     addImport(imp: ImportUsage): void;
     getTypeName(field: ProtoField): string;

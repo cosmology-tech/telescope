@@ -1,5 +1,5 @@
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial } from "@osmonauts/helpers";
+import { isSet, DeepPartial, Exact } from "@osmonauts/helpers";
 export const protobufPackage = "akash.inflation.v1beta2";
 
 /** Params defines the parameters for the x/deployment package */
@@ -91,7 +91,7 @@ export const Params = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<Params>): Params {
+  fromPartial<I extends Exact<DeepPartial<Params>, I>>(object: I): Params {
     const message = createBaseParams();
     message.inflationDecayFactor = object.inflationDecayFactor ?? "";
     message.initialInflation = object.initialInflation ?? "";

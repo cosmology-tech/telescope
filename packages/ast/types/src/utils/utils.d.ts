@@ -3,7 +3,7 @@ import { ProtoField } from '@osmonauts/types';
 declare const BILLION: t.NumericLiteral;
 export { BILLION };
 export declare const cleanComment: (str: any) => any;
-export declare const commentBlock: (comment: string) => t.CommentBlock;
+export declare const makeCommentBlock: (comment: string) => t.CommentBlock;
 export declare const renderNameSafely: (name: any) => any;
 export declare const recursiveNamespace: (names: any, moduleBlockBody: any) => any;
 export declare const bindMethod: (name: string) => t.ExpressionStatement;

@@ -1,4 +1,5 @@
 import { TelescopeOptions, TelescopeOption } from '@osmonauts/types';
+import * as dotty from 'dotty';
 
 const getAllPackageParts = (name: string, list?: string[]) => {
     if (!list) list = [name];
@@ -9,20 +10,21 @@ const getAllPackageParts = (name: string, list?: string[]) => {
     return getAllPackageParts(newName, [...list, newName]);
 };
 
-export const getPluginValue = (optionName: TelescopeOption, currentPkg: string, options: TelescopeOptions) => {
+export const getPluginValue = (optionName: TelescopeOption | string, currentPkg: string, options: TelescopeOptions) => {
     const pkgOpts = options.packages;
     let value;
     getAllPackageParts(currentPkg).some((pkg, i) => {
-        if (pkgOpts.hasOwnProperty(pkg)) {
-            if (pkgOpts[pkg].hasOwnProperty(optionName)) {
-                value = pkgOpts[pkg][optionName];
+        if (dotty.exists(pkgOpts, pkg)) {
+            const obj = dotty.get(pkgOpts, pkg);
+            if (dotty.exists(obj, optionName)) {
+                value = dotty.get(obj, optionName);
                 return true;
             }
         }
     });
 
     if (value === undefined) {
-        const defaultValue = options.hasOwnProperty(optionName) ? options[optionName] : undefined;
+        const defaultValue = dotty.exists(options, optionName) ? dotty.get(options, optionName) : undefined;
         value = defaultValue;
     }
     return value;

@@ -6,7 +6,7 @@ import { defaultTelescopeOptions } from '@osmonauts/types';
 export default async (argv) => {
 
   if (argv.useDefaults) {
-    const SKIP = ['aminoCasingFn', 'aminoExceptions', 'packages'];
+    const SKIP = ['aminoEncoding', 'packages'];
     Object.keys(defaultTelescopeOptions)
       .forEach(key => {
         if (SKIP.includes(key)) return;
@@ -43,32 +43,20 @@ export default async (argv) => {
     },
     {
       type: 'confirm',
-      name: 'includePackageVar',
-      message: 'export protobuf package names as variable?',
-      default: false
-    },
-    {
-      type: 'confirm',
-      name: 'camelRpcMethods',
-      message: 'camelcase RpcMethods?',
-      default: true
-    },
-    {
-      type: 'confirm',
-      name: 'includeRpcClients',
+      name: 'includeRPCClients',
       message: 'output RPC clients?',
       default: false
     },
     {
       type: 'list',
-      name: 'useDate',
+      name: 'timestampFormat',
       message: 'treat timestamps as Date or Timestamp?',
       default: 'date',
       choices: ['date', 'timestamp']
     },
     {
       type: 'list',
-      name: 'useDuration',
+      name: 'durationFormat',
       message: 'treat durations as Duration or string?',
       default: 'duration',
       choices: ['duration', 'string']
@@ -81,10 +69,9 @@ export default async (argv) => {
     includeAminos,
     includeLCDClients,
     includePackageVar,
-    camelRpcMethods,
-    includeRpcClients,
-    useDate,
-    useDuration
+    includeRPCClients,
+    timestampFormat,
+    durationFormat
   } = await prompt(questions, argv);
 
   if (!Array.isArray(protoDirs)) {
@@ -92,14 +79,20 @@ export default async (argv) => {
   }
 
   const options = {
-    includeAminos,
-    includeLCDClients,
     includePackageVar,
-    camelRpcMethods,
-    includeRpcClients,
-    useDate,
-    useDuration,
-    useExact: false
+    typingsFormat: {
+      date: timestampFormat,
+      duration: durationFormat
+    },
+    aminoEncoding: {
+      enabled: includeAminos
+    },
+    lcdClients: {
+      enabled: includeLCDClients
+    },
+    rpcClients: {
+      enabled: includeRPCClients,
+    }
   };
 
   writeFileSync(

@@ -1,4 +1,4 @@
-import { aggregateImports, getDepsFromQueries, getImportStatments } from '../imports';
+import { aggregateImports, getDepsFromQueries, getImportStatements } from '../imports';
 import { getNestedProto } from '@osmonauts/proto-parser';
 import { parse } from '../parse';
 import { dirname, join } from 'path';
@@ -15,14 +15,20 @@ export const plugin = (
     builder: TelescopeBuilder
 ) => {
 
-    if (!builder.options.lcd) {
+    if (!builder.options.aggregatedLCD) {
         return;
     }
 
-    const dir = builder.options.lcd.dir;
-    const packages = builder.options.lcd.packages;
+    const opts = builder.options.aggregatedLCD;
 
-    const localname = join(dir, 'lcd.ts');
+    const {
+        dir,
+        filename: fname,
+        packages,
+        addToBundle
+    } = opts;
+
+    const localname = join(dir, fname);
 
     const refs = builder.store.filterProtoWhere((ref: ProtoRef) => {
         return packages.includes(ref.proto.package)
@@ -54,7 +60,7 @@ export const plugin = (
 
     const progImports = queryContexts.reduce((m, c) => {
 
-        if (!builder.options.lcd.packages.includes(c.ref.proto.package)) {
+        if (!builder.options.aggregatedLCD.packages.includes(c.ref.proto.package)) {
             return m;
         }
 
@@ -83,7 +89,7 @@ export const plugin = (
         const fixlocalpaths = imports.map(imp => {
             return {
                 ...imp,
-                path: imp.path.startsWith('.') ?
+                path: (imp.path.startsWith('.') || imp.path.startsWith('@')) ?
                     imp.path : `./${imp.path}`
             };
         });
@@ -91,7 +97,7 @@ export const plugin = (
         return [...m, ...fixlocalpaths]
     }, []);
 
-    const importStmts = getImportStatments(
+    const importStmts = getImportStatements(
         [...importsForAggregator, ...progImports]
     );
 

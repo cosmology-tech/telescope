@@ -14,8 +14,9 @@ describe('cosmwasm/wasm/v1/tx', () => {
     const ref = store.findProto('cosmwasm/wasm/v1/tx.proto');
     const context = new ProtoParseContext(ref, store, defaultTelescopeOptions);
     const aminoCtx = new AminoParseContext(ref, store, defaultTelescopeOptions);
-    context.options.useDate = 'date';
-    aminoCtx.options.useDate = 'date';
+    context.options.typingsFormat.timestamp = 'date';
+    aminoCtx.options.typingsFormat.timestamp = 'date';
+
     it('MsgExecuteContract', () => {
         expectCode(createAminoConverter({
             context: aminoCtx,

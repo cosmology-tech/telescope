@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`createScopedRpcFactory 1`] = `
+"export const createRpc = async ({
+  rpc
+}: {
+  rpc: Rpc;
+}) => ({
+  cosmos: {
+    bank: {
+      v1beta1: new (await import(\\"./proto/cosmos/bank/v1beta1/query.lcd\\")).RPCQueryClient(rpc)
+    },
+    gov: {
+      v1beta1: new (await import(\\"./proto/cosmos/bank/v1beta1/query.lcd\\")).RPCQueryClient(rpc)
+    }
+  },
+  osmosis: {
+    gamm: {
+      v1beta1: new (await import(\\"./proto/cosmos/bank/v1beta1/query.lcd\\")).RPCQueryClient(rpc)
+    }
+  }
+});"
+`;
+
+exports[`rpcRecursiveObjectProps 1`] = `
+"{
+  cosmos: {
+    bank: {
+      v1beta1: v1beta1
+    }
+  }
+}"
+`;

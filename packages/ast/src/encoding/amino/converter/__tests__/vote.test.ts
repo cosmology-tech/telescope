@@ -13,9 +13,7 @@ describe('cosmos/gov/v1beta1/tx', () => {
     } = prepareContext(store, 'cosmos/gov/v1beta1/tx.proto')
 
     it('AminoConverter', () => {
-        context.options = {
-            aminoCasingFn: snake
-        }
+        context.options.aminoEncoding.casingFn = snake;
         expectCode(createAminoConverter({
             context,
             root,

@@ -1,5 +1,5 @@
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial } from "@osmonauts/helpers";
+import { isSet, DeepPartial, Exact } from "@osmonauts/helpers";
 export const protobufPackage = "akash.base.v1beta1";
 
 /** Attribute represents key value pair */
@@ -91,7 +91,7 @@ export const Attribute = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<Attribute>): Attribute {
+  fromPartial<I extends Exact<DeepPartial<Attribute>, I>>(object: I): Attribute {
     const message = createBaseAttribute();
     message.key = object.key ?? "";
     message.value = object.value ?? "";
@@ -171,7 +171,7 @@ export const SignedBy = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<SignedBy>): SignedBy {
+  fromPartial<I extends Exact<DeepPartial<SignedBy>, I>>(object: I): SignedBy {
     const message = createBaseSignedBy();
     message.allOf = object.allOf?.map(e => e) || [];
     message.anyOf = object.anyOf?.map(e => e) || [];
@@ -246,7 +246,7 @@ export const PlacementRequirements = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<PlacementRequirements>): PlacementRequirements {
+  fromPartial<I extends Exact<DeepPartial<PlacementRequirements>, I>>(object: I): PlacementRequirements {
     const message = createBasePlacementRequirements();
     message.signedBy = object.signedBy !== undefined && object.signedBy !== null ? SignedBy.fromPartial(object.signedBy) : undefined;
     message.attributes = object.attributes?.map(e => Attribute.fromPartial(e)) || [];

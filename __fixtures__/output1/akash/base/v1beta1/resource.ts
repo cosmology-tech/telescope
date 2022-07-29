@@ -2,7 +2,7 @@ import { ResourceValue } from "./resourcevalue";
 import { Attribute } from "./attribute";
 import { Endpoint } from "./endpoint";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial } from "@osmonauts/helpers";
+import { isSet, DeepPartial, Exact } from "@osmonauts/helpers";
 export const protobufPackage = "akash.base.v1beta1";
 
 /** CPU stores resource units and cpu config attributes */
@@ -100,7 +100,7 @@ export const CPU = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<CPU>): CPU {
+  fromPartial<I extends Exact<DeepPartial<CPU>, I>>(object: I): CPU {
     const message = createBaseCPU();
     message.units = object.units !== undefined && object.units !== null ? ResourceValue.fromPartial(object.units) : undefined;
     message.attributes = object.attributes?.map(e => Attribute.fromPartial(e)) || [];
@@ -175,7 +175,7 @@ export const Memory = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<Memory>): Memory {
+  fromPartial<I extends Exact<DeepPartial<Memory>, I>>(object: I): Memory {
     const message = createBaseMemory();
     message.quantity = object.quantity !== undefined && object.quantity !== null ? ResourceValue.fromPartial(object.quantity) : undefined;
     message.attributes = object.attributes?.map(e => Attribute.fromPartial(e)) || [];
@@ -250,7 +250,7 @@ export const Storage = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<Storage>): Storage {
+  fromPartial<I extends Exact<DeepPartial<Storage>, I>>(object: I): Storage {
     const message = createBaseStorage();
     message.quantity = object.quantity !== undefined && object.quantity !== null ? ResourceValue.fromPartial(object.quantity) : undefined;
     message.attributes = object.attributes?.map(e => Attribute.fromPartial(e)) || [];
@@ -347,7 +347,7 @@ export const ResourceUnits = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<ResourceUnits>): ResourceUnits {
+  fromPartial<I extends Exact<DeepPartial<ResourceUnits>, I>>(object: I): ResourceUnits {
     const message = createBaseResourceUnits();
     message.cpu = object.cpu !== undefined && object.cpu !== null ? CPU.fromPartial(object.cpu) : undefined;
     message.memory = object.memory !== undefined && object.memory !== null ? Memory.fromPartial(object.memory) : undefined;

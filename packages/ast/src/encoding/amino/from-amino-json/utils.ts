@@ -81,8 +81,8 @@ export const fromAmino = {
     },
 
     duration(args: FromAminoParseField) {
-        const { useDuration } = args.context.options;
-        switch (useDuration) {
+        const durationFormat = args.context.pluginValue('typingsFormat.duration');
+        switch (durationFormat) {
             case 'duration':
             // TODO duration amino type
             case 'string':
@@ -150,7 +150,7 @@ export const fromAmino = {
                                     '||',
                                     t.memberExpression(
                                         memberExpressionOrIdentifierAminoCaseField(args.fieldPath, args.context.aminoCaseField),
-                                        t.identifier(args.context.options.aminoCasingFn('revision_height'))
+                                        t.identifier(args.context.aminoCasingFn('revision_height'))
                                     ),
                                     t.stringLiteral('0')
                                 ),
@@ -166,7 +166,7 @@ export const fromAmino = {
                                     '||',
                                     t.memberExpression(
                                         memberExpressionOrIdentifierAminoCaseField(args.fieldPath, args.context.aminoCaseField),
-                                        t.identifier(args.context.options.aminoCasingFn('revision_number'))
+                                        t.identifier(args.context.aminoCasingFn('revision_number'))
                                     ),
                                     t.stringLiteral('0')
                                 ),

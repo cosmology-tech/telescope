@@ -1,5 +1,5 @@
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial } from "@osmonauts/helpers";
+import { isSet, DeepPartial, Exact } from "@osmonauts/helpers";
 export const protobufPackage = "akash.base.v1beta2";
 
 /** This describes how the endpoint is implemented when the lease is deployed */
@@ -116,7 +116,7 @@ export const Endpoint = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<Endpoint>): Endpoint {
+  fromPartial<I extends Exact<DeepPartial<Endpoint>, I>>(object: I): Endpoint {
     const message = createBaseEndpoint();
     message.kind = object.kind ?? 0;
     message.sequenceNumber = object.sequenceNumber ?? 0;

@@ -1,6 +1,6 @@
 import { Params } from "./params";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial } from "@osmonauts/helpers";
+import { isSet, DeepPartial, Exact } from "@osmonauts/helpers";
 export const protobufPackage = "akash.inflation.v1beta2";
 
 /** GenesisState stores slice of genesis deployment instance */
@@ -57,7 +57,7 @@ export const GenesisState = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<GenesisState>): GenesisState {
+  fromPartial<I extends Exact<DeepPartial<GenesisState>, I>>(object: I): GenesisState {
     const message = createBaseGenesisState();
     message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     return message;

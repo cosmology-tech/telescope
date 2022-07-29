@@ -10,11 +10,14 @@ export const plugin = (
     bundler: Bundler
 ) => {
 
-    if (!builder.options.includeRpcClients) {
-        return;
-    }
+    // if (!builder.options.rpcClients.enabled) {
+    //     return;
+    // }
 
-    bundler.contexts.map(c => {
+    const clients = bundler.contexts.map(c => {
+
+        const enabled = c.proto.pluginValue('rpcClients.enabled');
+        if (!enabled) return;
 
         const ctx = bundler.getFreshContext(c);
 
@@ -78,4 +81,5 @@ export const plugin = (
 
     }).filter(Boolean);
 
+    bundler.addRPCQueryClients(clients);
 };

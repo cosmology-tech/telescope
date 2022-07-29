@@ -1,6 +1,5 @@
 import * as t from '@babel/types';
 import { GenericParseContext } from '../../encoding';
-import { getPluginValue } from '../../plugins';
 import { memberExpressionOrIdentifier, objectPattern } from '../../utils';
 
 interface CreateStargateClient {
@@ -12,7 +11,7 @@ interface CreateStargateClient {
 
 export const createStargateClient = ({ name, registries, aminos, context }: CreateStargateClient) => {
 
-  const includeDefaults = getPluginValue('signingClientDefaults', context.ref.proto.package, context.options);
+  const includeDefaults = context.pluginValue('stargateClients.includeCosmosDefaultTypes');
 
   if (includeDefaults) {
     context.addUtil('defaultRegistryTypes')

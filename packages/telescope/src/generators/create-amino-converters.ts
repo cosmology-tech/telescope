@@ -8,7 +8,8 @@ export const plugin = (
     bundler: Bundler
 ) => {
 
-    if (!builder.options.includeAminos) {
+    const aminoEncoding = builder.options.aminoEncoding;
+    if (!aminoEncoding.enabled) {
         return;
     }
 
@@ -17,6 +18,11 @@ export const plugin = (
         .filter(context => context.mutations.length > 0);
 
     const converters = mutationContexts.map(c => {
+
+        const aminoEncodingEnabled = c.amino.pluginValue('aminoEncoding.enabled');
+        if (!aminoEncodingEnabled) {
+            return;
+        }
 
         const localname = bundler.getLocalFilename(c.ref, 'amino');
         const filename = bundler.getFilename(localname);

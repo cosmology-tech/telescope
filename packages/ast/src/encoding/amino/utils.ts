@@ -18,17 +18,16 @@ export const typeUrlToAmino = (
     context: GenericParseContext,
     typeUrl: string
 ) => {
-
     const exceptionsToCheck = {
-        ...(context.options.aminoExceptions ?? {}),
+        ...(context.options.aminoEncoding.exceptions ?? {}),
         ...DEFAULT_AMINO_EXCEPTIONS
     }
     const exceptionAminoName = exceptionsToCheck?.[typeUrl]?.aminoType;
     if (exceptionAminoName) return exceptionAminoName;
 
-
-    if (typeof context.options.aminoTypeUrl === 'function') {
-        const result = context.options.aminoTypeUrl(typeUrl);
+    const modTypeUrlToAmino = context.pluginValue('aminoEncoding.typeUrlToAmino');
+    if (typeof modTypeUrlToAmino === 'function') {
+        const result = modTypeUrlToAmino(typeUrl);
         if (result) return result;
     }
 

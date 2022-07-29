@@ -2,7 +2,7 @@ import { DeploymentID } from "./deployment";
 import { GroupSpec } from "./groupspec";
 import { Coin } from "../../../cosmos/base/v1beta1/coin";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "@osmonauts/helpers";
+import { isSet, bytesFromBase64, base64FromBytes, DeepPartial, Exact } from "@osmonauts/helpers";
 export const protobufPackage = "akash.deployment.v1beta2";
 
 /** MsgCreateDeployment defines an SDK message for creating deployment */
@@ -147,7 +147,7 @@ export const MsgCreateDeployment = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<MsgCreateDeployment>): MsgCreateDeployment {
+  fromPartial<I extends Exact<DeepPartial<MsgCreateDeployment>, I>>(object: I): MsgCreateDeployment {
     const message = createBaseMsgCreateDeployment();
     message.id = object.id !== undefined && object.id !== null ? DeploymentID.fromPartial(object.id) : undefined;
     message.groups = object.groups?.map(e => GroupSpec.fromPartial(e)) || [];
@@ -195,7 +195,7 @@ export const MsgCreateDeploymentResponse = {
     return obj;
   },
 
-  fromPartial(_: DeepPartial<MsgCreateDeploymentResponse>): MsgCreateDeploymentResponse {
+  fromPartial<I extends Exact<DeepPartial<MsgCreateDeploymentResponse>, I>>(_: I): MsgCreateDeploymentResponse {
     const message = createBaseMsgCreateDeploymentResponse();
     return message;
   }
@@ -273,7 +273,7 @@ export const MsgDepositDeployment = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<MsgDepositDeployment>): MsgDepositDeployment {
+  fromPartial<I extends Exact<DeepPartial<MsgDepositDeployment>, I>>(object: I): MsgDepositDeployment {
     const message = createBaseMsgDepositDeployment();
     message.id = object.id !== undefined && object.id !== null ? DeploymentID.fromPartial(object.id) : undefined;
     message.amount = object.amount !== undefined && object.amount !== null ? Coin.fromPartial(object.amount) : undefined;
@@ -319,7 +319,7 @@ export const MsgDepositDeploymentResponse = {
     return obj;
   },
 
-  fromPartial(_: DeepPartial<MsgDepositDeploymentResponse>): MsgDepositDeploymentResponse {
+  fromPartial<I extends Exact<DeepPartial<MsgDepositDeploymentResponse>, I>>(_: I): MsgDepositDeploymentResponse {
     const message = createBaseMsgDepositDeploymentResponse();
     return message;
   }
@@ -386,7 +386,7 @@ export const MsgUpdateDeployment = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<MsgUpdateDeployment>): MsgUpdateDeployment {
+  fromPartial<I extends Exact<DeepPartial<MsgUpdateDeployment>, I>>(object: I): MsgUpdateDeployment {
     const message = createBaseMsgUpdateDeployment();
     message.id = object.id !== undefined && object.id !== null ? DeploymentID.fromPartial(object.id) : undefined;
     message.version = object.version ?? new Uint8Array();
@@ -431,7 +431,7 @@ export const MsgUpdateDeploymentResponse = {
     return obj;
   },
 
-  fromPartial(_: DeepPartial<MsgUpdateDeploymentResponse>): MsgUpdateDeploymentResponse {
+  fromPartial<I extends Exact<DeepPartial<MsgUpdateDeploymentResponse>, I>>(_: I): MsgUpdateDeploymentResponse {
     const message = createBaseMsgUpdateDeploymentResponse();
     return message;
   }
@@ -487,7 +487,7 @@ export const MsgCloseDeployment = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<MsgCloseDeployment>): MsgCloseDeployment {
+  fromPartial<I extends Exact<DeepPartial<MsgCloseDeployment>, I>>(object: I): MsgCloseDeployment {
     const message = createBaseMsgCloseDeployment();
     message.id = object.id !== undefined && object.id !== null ? DeploymentID.fromPartial(object.id) : undefined;
     return message;
@@ -531,7 +531,7 @@ export const MsgCloseDeploymentResponse = {
     return obj;
   },
 
-  fromPartial(_: DeepPartial<MsgCloseDeploymentResponse>): MsgCloseDeploymentResponse {
+  fromPartial<I extends Exact<DeepPartial<MsgCloseDeploymentResponse>, I>>(_: I): MsgCloseDeploymentResponse {
     const message = createBaseMsgCloseDeploymentResponse();
     return message;
   }

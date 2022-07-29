@@ -1,7 +1,7 @@
 import { CPU, Memory, Storage } from "./resource";
 import { Endpoint } from "./endpoint";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial } from "@osmonauts/helpers";
+import { isSet, DeepPartial, Exact } from "@osmonauts/helpers";
 export const protobufPackage = "akash.base.v1beta2";
 
 /**
@@ -108,7 +108,7 @@ export const ResourceUnits = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<ResourceUnits>): ResourceUnits {
+  fromPartial<I extends Exact<DeepPartial<ResourceUnits>, I>>(object: I): ResourceUnits {
     const message = createBaseResourceUnits();
     message.cpu = object.cpu !== undefined && object.cpu !== null ? CPU.fromPartial(object.cpu) : undefined;
     message.memory = object.memory !== undefined && object.memory !== null ? Memory.fromPartial(object.memory) : undefined;

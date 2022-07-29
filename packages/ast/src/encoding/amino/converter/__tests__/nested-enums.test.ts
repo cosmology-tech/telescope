@@ -65,9 +65,7 @@ describe('cosmology/example/msg', () => {
     } = prepareContext(store, 'cosmology/example/msg.proto')
 
     it('AminoConverter', () => {
-        context.options = {
-            aminoCasingFn: camel
-        };
+        context.options.aminoEncoding.casingFn = camel;
         expectCode(createAminoConverter({
             context,
             root,

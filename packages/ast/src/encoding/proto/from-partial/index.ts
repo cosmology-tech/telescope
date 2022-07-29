@@ -154,15 +154,13 @@ export const fromPartialMethod = (context: ProtoParseContext, name: string, prot
         varName = '_';
     }
 
-
-    let useExact = false;
     let typeParameters = undefined;
     let param = null;
 
-    if (context.useExact === true) {
+    const useExact = context.pluginValue('typingsFormat.useExact');
+    if (useExact === true) {
         context.addUtil('Exact');
 
-        useExact = true;
         // type params
         typeParameters = t.tsTypeParameterDeclaration([
             t.tsTypeParameter(

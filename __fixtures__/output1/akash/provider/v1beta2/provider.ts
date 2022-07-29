@@ -1,6 +1,6 @@
 import { Attribute } from "../../base/v1beta2/attribute";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial } from "@osmonauts/helpers";
+import { isSet, DeepPartial, Exact } from "@osmonauts/helpers";
 export const protobufPackage = "akash.provider.v1beta2";
 
 /** ProviderInfo */
@@ -107,7 +107,7 @@ export const ProviderInfo = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<ProviderInfo>): ProviderInfo {
+  fromPartial<I extends Exact<DeepPartial<ProviderInfo>, I>>(object: I): ProviderInfo {
     const message = createBaseProviderInfo();
     message.email = object.email ?? "";
     message.website = object.website ?? "";
@@ -204,7 +204,7 @@ export const MsgCreateProvider = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<MsgCreateProvider>): MsgCreateProvider {
+  fromPartial<I extends Exact<DeepPartial<MsgCreateProvider>, I>>(object: I): MsgCreateProvider {
     const message = createBaseMsgCreateProvider();
     message.owner = object.owner ?? "";
     message.hostUri = object.hostUri ?? "";
@@ -251,7 +251,7 @@ export const MsgCreateProviderResponse = {
     return obj;
   },
 
-  fromPartial(_: DeepPartial<MsgCreateProviderResponse>): MsgCreateProviderResponse {
+  fromPartial<I extends Exact<DeepPartial<MsgCreateProviderResponse>, I>>(_: I): MsgCreateProviderResponse {
     const message = createBaseMsgCreateProviderResponse();
     return message;
   }
@@ -346,7 +346,7 @@ export const MsgUpdateProvider = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<MsgUpdateProvider>): MsgUpdateProvider {
+  fromPartial<I extends Exact<DeepPartial<MsgUpdateProvider>, I>>(object: I): MsgUpdateProvider {
     const message = createBaseMsgUpdateProvider();
     message.owner = object.owner ?? "";
     message.hostUri = object.hostUri ?? "";
@@ -393,7 +393,7 @@ export const MsgUpdateProviderResponse = {
     return obj;
   },
 
-  fromPartial(_: DeepPartial<MsgUpdateProviderResponse>): MsgUpdateProviderResponse {
+  fromPartial<I extends Exact<DeepPartial<MsgUpdateProviderResponse>, I>>(_: I): MsgUpdateProviderResponse {
     const message = createBaseMsgUpdateProviderResponse();
     return message;
   }
@@ -449,7 +449,7 @@ export const MsgDeleteProvider = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<MsgDeleteProvider>): MsgDeleteProvider {
+  fromPartial<I extends Exact<DeepPartial<MsgDeleteProvider>, I>>(object: I): MsgDeleteProvider {
     const message = createBaseMsgDeleteProvider();
     message.owner = object.owner ?? "";
     return message;
@@ -493,7 +493,7 @@ export const MsgDeleteProviderResponse = {
     return obj;
   },
 
-  fromPartial(_: DeepPartial<MsgDeleteProviderResponse>): MsgDeleteProviderResponse {
+  fromPartial<I extends Exact<DeepPartial<MsgDeleteProviderResponse>, I>>(_: I): MsgDeleteProviderResponse {
     const message = createBaseMsgDeleteProviderResponse();
     return message;
   }
@@ -588,7 +588,7 @@ export const Provider = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<Provider>): Provider {
+  fromPartial<I extends Exact<DeepPartial<Provider>, I>>(object: I): Provider {
     const message = createBaseProvider();
     message.owner = object.owner ?? "";
     message.hostUri = object.hostUri ?? "";
