@@ -36,7 +36,7 @@ export namespace secret {
       };
     }
   }
+  export const ClientFactory = { ..._552,
+    ..._553
+  };
 }
-export const ClientFactory = { ..._552,
-  ..._553
-};

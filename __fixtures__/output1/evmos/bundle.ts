@@ -127,11 +127,11 @@ export namespace evmos {
       ..._461
     };
   }
+  export const ClientFactory = { ..._539,
+    ..._540,
+    ..._541,
+    ..._542,
+    ..._543,
+    ..._544
+  };
 }
-export const ClientFactory = { ..._539,
-  ..._540,
-  ..._541,
-  ..._542,
-  ..._543,
-  ..._544
-};

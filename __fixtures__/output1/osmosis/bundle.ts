@@ -208,9 +208,9 @@ export namespace osmosis {
       ..._516
     };
   }
+  export const ClientFactory = { ..._548,
+    ..._549,
+    ..._550,
+    ..._551
+  };
 }
-export const ClientFactory = { ..._548,
-  ..._549,
-  ..._550,
-  ..._551
-};

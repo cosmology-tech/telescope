@@ -130,8 +130,8 @@ export namespace ibc {
       };
     }
   }
+  export const ClientFactory = { ..._545,
+    ..._546,
+    ..._547
+  };
 }
-export const ClientFactory = { ..._545,
-  ..._546,
-  ..._547
-};

@@ -213,8 +213,8 @@ export namespace akash {
       ..._356
     };
   }
+  export const ClientFactory = { ..._528,
+    ..._529,
+    ..._530
+  };
 }
-export const ClientFactory = { ..._528,
-  ..._529,
-  ..._530
-};

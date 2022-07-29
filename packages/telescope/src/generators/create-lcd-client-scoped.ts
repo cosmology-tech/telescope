@@ -102,7 +102,7 @@ const makeLCD = (
     bundler.writeAst(prog, filename);
 
     if (lcd.addToBundle) {
-        bundler.addToBundleToPackage('ClientFactory', localname)
+        bundler.addToBundleToPackage(`${dir}.ClientFactory`, localname)
     }
 };
 

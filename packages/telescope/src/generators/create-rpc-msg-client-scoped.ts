@@ -148,7 +148,7 @@ const makeRPC = (
     const filename = bundler.getFilename(localname);
     bundler.writeAst(prog, filename);
     if (rpc.addToBundle) {
-        bundler.addToBundleToPackage('ClientFactory', localname)
+        bundler.addToBundleToPackage(`${dir}.ClientFactory`, localname)
     }
 };
 

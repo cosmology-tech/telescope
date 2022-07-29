@@ -451,10 +451,10 @@ export namespace cosmos {
       ..._431
     };
   }
+  export const ClientFactory = { ..._531,
+    ..._532,
+    ..._533,
+    ..._534,
+    ..._535
+  };
 }
-export const ClientFactory = { ..._531,
-  ..._532,
-  ..._533,
-  ..._534,
-  ..._535
-};
