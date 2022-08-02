@@ -1,7 +1,7 @@
 import * as t from '@babel/types';
 import { arrayTypeNDim } from '../utils';
 import { protoFieldsToArray } from '../utils';
-import { getTSTypeFromProtoType } from '../../proto/types';
+import { getTSTypeForAmino } from '../../types';
 import { getOneOfs, getFieldOptionality } from '../../proto';
 import { RenderAminoField, renderAminoField } from '.';
 
@@ -9,7 +9,7 @@ export const aminoInterface = {
     defaultType(args: RenderAminoField) {
         return t.tsPropertySignature(
             t.identifier(args.context.aminoCaseField(args.field)),
-            t.tsTypeAnnotation(getTSTypeFromProtoType(args.context, args.field.type))
+            t.tsTypeAnnotation(getTSTypeForAmino(args.context, args.field))
         );
     },
     string(args: RenderAminoField) {
@@ -149,7 +149,7 @@ export const aminoInterface = {
             t.identifier(args.context.aminoCaseField(args.field)),
             t.tsTypeAnnotation(
                 arrayTypeNDim(
-                    getTSTypeFromProtoType(args.context, args.field.type),
+                    getTSTypeForAmino(args.context, args.field),
                     1
                 )
             )

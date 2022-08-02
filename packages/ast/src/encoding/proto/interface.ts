@@ -6,11 +6,15 @@ import { ProtoParseContext } from '../context';
 import {
     NATIVE_TYPES,
     getBaseCreateTypeFuncName,
-    getDefaultTSTypeFromProtoType,
-    getTSTypeFromProtoType,
     getFieldOptionality,
-    getOneOfs
+    getOneOfs,
 } from './types';
+
+import {
+    getDefaultTSTypeFromProtoType,
+    getTSType,
+    getTSTypeForProto
+} from '../types';
 
 const getProtoFieldTypeName = (context: ProtoParseContext, field: ProtoField) => {
     let name = context.getTypeName(field)
@@ -26,7 +30,7 @@ const getProtoField = (context: ProtoParseContext, field: ProtoField) => {
     }
 
     if (NATIVE_TYPES.includes(field.type)) {
-        ast = getTSTypeFromProtoType(context, field.type);
+        ast = getTSTypeForProto(context, field);
     } else {
         ast = t.tsTypeReference(t.identifier(getProtoFieldTypeName(context, field)));
     }
@@ -41,7 +45,7 @@ const getProtoField = (context: ProtoParseContext, field: ProtoField) => {
                 t.tsIndexSignature([
                     identifier('key',
                         t.tsTypeAnnotation(
-                            getTSTypeFromProtoType(context, field.keyType)
+                            getTSType(context, field.keyType)
                         )
                     )
                 ],

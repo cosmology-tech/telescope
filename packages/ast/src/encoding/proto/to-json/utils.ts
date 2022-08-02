@@ -1,5 +1,5 @@
 import * as t from '@babel/types';
-import { getDefaultTSTypeFromProtoType } from '..';
+import { getDefaultTSTypeFromProtoType } from '../../types';
 import { ToJSONMethod } from './index';
 
 const notUndefinedSetValue = (prop: string, expr: t.Expression) => {

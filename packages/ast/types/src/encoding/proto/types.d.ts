@@ -1,9 +1,6 @@
-import * as t from '@babel/types';
 import { ProtoType, ProtoField } from '@osmonauts/types';
-import { GenericParseContext, ProtoParseContext } from '../context';
 export declare const SCALAR_TYPES: string[];
 export declare const NATIVE_TYPES: string[];
-export declare const getTSTypeFromProtoType: (context: GenericParseContext, type: string) => t.TSBooleanKeyword | t.TSNumberKeyword | t.TSStringKeyword | t.TSTypeReference;
 export declare const types: {
     basic: {
         double: number;
@@ -80,7 +77,6 @@ export declare const types: {
 export declare const getWireNumber: (type: any) => any;
 export declare const getPackedWireNumber: (type: any) => any;
 export declare const getTagNumber: (field: ProtoField) => number;
-export declare const getDefaultTSTypeFromProtoType: (context: ProtoParseContext, field: ProtoField, isOptional: boolean) => t.ArrayExpression | t.BooleanLiteral | t.Identifier | t.MemberExpression | t.NewExpression | t.NumericLiteral | t.ObjectExpression | t.StringLiteral;
 export declare const getEnumToJsonName: (name: any) => string;
 export declare const getEnumFromJsonName: (name: any) => string;
 export declare const getFieldsTypeName: (field: ProtoField) => string;

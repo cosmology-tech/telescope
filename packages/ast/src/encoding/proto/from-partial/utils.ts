@@ -1,7 +1,8 @@
 import * as t from '@babel/types';
 import { FromPartialMethod } from './index';
 import { identifier, callExpression } from '../../../utils';
-import { getDefaultTSTypeFromProtoType, getFieldsTypeName } from '..';
+import { getFieldsTypeName } from '..';
+import { getDefaultTSTypeFromProtoType } from '../../types';
 
 // message.sender = expr
 const setField = (prop: string, expr: t.Expression): t.Statement => {
