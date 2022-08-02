@@ -1,6 +1,6 @@
 {
   "name": "@osmonauts/helpers",
-  "version": "0.3.12",
+  "version": "0.4.0",
   "description": "Telescope helpers",
   "author": "Dan Lynch <pyramation@gmail.com>",
   "homepage": "https://github.com/osmosis-labs/telescope/tree/master/packages/helpers#readme",
