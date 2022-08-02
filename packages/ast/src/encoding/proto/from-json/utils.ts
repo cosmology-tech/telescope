@@ -1,7 +1,7 @@
 import * as t from '@babel/types';
 import { FromJSONMethod } from './index';
 import { callExpression, identifier } from '../../../utils';
-import { getDefaultTSTypeFromProtoType } from '..';
+import { getDefaultTSTypeFromProtoType } from '../../types';
 
 export const fromJSON = {
 

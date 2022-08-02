@@ -6,3 +6,5 @@ export * from './misc';
 export * from './partials';
 export * from './rpc';
 export * from './timestamp';
+export * from './signing';
+export * from './wallet';
