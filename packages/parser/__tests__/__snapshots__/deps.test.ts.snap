@@ -341,15 +341,6 @@ Array [
   "osmosis/txfees/v1beta1/genesis.proto",
   "osmosis/txfees/v1beta1/gov.proto",
   "osmosis/txfees/v1beta1/query.proto",
-  "secret/compute/v1beta1/types.proto",
-  "secret/compute/v1beta1/genesis.proto",
-  "secret/compute/v1beta1/msg.proto",
-  "secret/compute/v1beta1/query.proto",
-  "secret/registration/v1beta1/types.proto",
-  "secret/registration/v1beta1/msg.proto",
-  "secret/registration/v1beta1/genesis.proto",
-  "secret/registration/v1beta1/query.proto",
-  "secret/registration/v1beta1/remote_attestation/types.proto",
   "tendermint/libs/bits/types.proto",
 ]
 `;

@@ -53,7 +53,6 @@ export default async (argv) => {
                 'juno',
                 'osmosis',
                 'regen',
-                'secret',
                 'stargaze',
             ].map(name => {
                 return {

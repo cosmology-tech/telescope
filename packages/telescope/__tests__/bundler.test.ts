@@ -20,7 +20,6 @@ it('getPackagesBundled', () => {
             "google",
             "ibc",
             "osmosis",
-            "secret",
             "tendermint"]);
 });
 
