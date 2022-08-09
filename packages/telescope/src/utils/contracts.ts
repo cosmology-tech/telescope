@@ -19,16 +19,19 @@ export const getContracts = () => {
     return contracts;
 };
 
-export const getContractSchemata = (schemata: any[], out: string, argv) => {
-    return schemata.map(path => {
+export const getContractSchemata = async (schemata: any[], out: string, argv) => {
+    const s = [];
+    for (let i = 0; i < schemata.length; i++) {
+        const path = schemata[i];
         const pkg = JSON.parse(readFileSync(join(path, 'package.json'), 'utf-8'));
         const name = basename(path);
         const folder = basename(dirname(path));
         const contractName = pascal(pkg.contract) || pascal(name);
-        const schemas = readSchemas({ schemaDir: path, argv });
+        const schemas = await readSchemas({ schemaDir: path, schemaOptions: argv });
         const outPath = join(out, folder);
-        return {
+        s.push({
             contractName, schemas, outPath
-        };
-    });
+        });
+    }
+    return s;
 }

@@ -26,7 +26,7 @@ export default async (argv) => {
     let { schema, out } = await prompt(questions, argv);
     if (!Array.isArray(schema)) schema = [schema];
 
-    const s = getContractSchemata(schema, out, argv);
+    const s = await getContractSchemata(schema, out, argv);
     s.forEach(async ({ contractName, schemas, outPath }) => {
         await generateClient(contractName, schemas, outPath);
     });
