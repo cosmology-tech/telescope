@@ -1,9 +1,11 @@
+import { TSBuilderInput } from '@cosmwasm/ts-codegen';
 import { AminoExceptions, DEFAULT_AMINO_EXCEPTIONS } from "./aminos";
 import { snake } from 'case';
 import { camel } from '@osmonauts/utils';
-
 interface TelescopeOpts {
     includePackageVar?: boolean;
+
+    cosmwasm?: TSBuilderInput;
 
     aggregatedLCD?: {
         dir: string;

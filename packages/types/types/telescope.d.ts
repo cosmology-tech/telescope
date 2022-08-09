@@ -1,6 +1,8 @@
+import { TSBuilderInput } from '@cosmwasm/ts-codegen';
 import { AminoExceptions } from "./aminos";
 interface TelescopeOpts {
     includePackageVar?: boolean;
+    cosmwasm?: TSBuilderInput;
     aggregatedLCD?: {
         dir: string;
         filename: string;
