@@ -5,8 +5,8 @@ export * from './builder';
 export * from './bundler';
 export * from './types';
 
-export default (input: TelescopeInput) => {
+export default async (input: TelescopeInput) => {
     const builder = new TelescopeBuilder(input);
-    builder.build();
+    await builder.build();
 };
 

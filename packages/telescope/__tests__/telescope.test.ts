@@ -8,7 +8,7 @@ import { join } from 'path';
 
 const outPath = __dirname + '/../../../__fixtures__/output1';
 const store = new ProtoStore([__dirname + '/../../../__fixtures__/chain1']);
-const contractsDir = __dirname + '/../../../__fixtures__/cosmwasm';
+const contractsDir = __dirname + '/../../../__fixtures__/wasm/';
 store.traverseAll();
 
 const options: TelescopeOptions = {
@@ -179,10 +179,10 @@ const input: TelescopeInput = {
 };
 
 const telescope = new TelescopeBuilder(input);
-telescope.build();
 
 describe('bundle package registries and root file names', () => {
-  it('bundleRegistries', () => {
+  it('bundleRegistries', async () => {
+    await telescope.build();
     const registries = bundleRegistries(telescope);
     const result = registries.map(reg => ({
       ['package']: reg.package,
