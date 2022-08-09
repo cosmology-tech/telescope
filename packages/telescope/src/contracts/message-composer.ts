@@ -1,5 +1,5 @@
 import { prompt } from '../prompt';
-import { fromPartial } from '@cosmwasm/ts-codegen';
+import { generateMessageComposer } from '@cosmwasm/ts-codegen';
 import { getContracts, getContractSchemata } from '../utils/contracts';
 
 export default async (argv) => {
@@ -28,7 +28,7 @@ export default async (argv) => {
 
     const s = getContractSchemata(schema, out, argv);
     s.forEach(async ({ contractName, schemas, outPath }) => {
-        await fromPartial(contractName, schemas, outPath);
+        await generateMessageComposer(contractName, schemas, outPath);
     });
 
 };

@@ -1,5 +1,5 @@
 import { prompt } from '../prompt';
-import { generate } from '@cosmwasm/ts-codegen';
+import { generateClient } from '@cosmwasm/ts-codegen';
 import { getContracts, getContractSchemata } from '../utils/contracts';
 
 export default async (argv) => {
@@ -28,6 +28,6 @@ export default async (argv) => {
 
     const s = getContractSchemata(schema, out, argv);
     s.forEach(async ({ contractName, schemas, outPath }) => {
-        await generate(contractName, schemas, outPath);
+        await generateClient(contractName, schemas, outPath);
     });
 };
