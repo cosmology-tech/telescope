@@ -631,3 +631,36 @@ Then `cd` into a package and run the tests
 cd ./packages/ast
 yarn test:watch
 ```
+
+### Generators
+
+See our [plugin generators](https://github.com/osmosis-labs/telescope/blob/main/packages/telescope/src/generators).
+
+## Sponsors
+
+Kudos to our sponsors:
+
+* [Osmosis](https://osmosis.zone) funded the creation of Telescope.
+
+## Related
+
+Checkout these related projects:
+
+* [@cosmwasm/ts-codegen](https://github.com/CosmWasm/ts-codegen) for generated CosmWasm contract Typescript classes
+
+## Credits
+
+Thanks to these engineers, teams and projects for inspiring Telescope:
+
+* [@webmaster128](https://github.com/webmaster128)
+* [@assafmo](https://github.com/assafmo)
+* [osmosis-frontend](https://github.com/osmosis-labs/osmosis-frontend)
+* [cosmjs](https://github.com/cosmos/cosmjs)
+* [ts-proto](https://github.com/stephenh/ts-proto)
+* [keplr-wallet](https://github.com/chainapsis/keplr-wallet)
+
+## Disclaimer
+
+AS DESCRIBED IN THE TELESCOPE LICENSES, THE SOFTWARE IS PROVIDED “AS IS”, AT YOUR OWN RISK, AND WITHOUT WARRANTIES OF ANY KIND.
+
+No developer or entity involved in creating Telescope will be liable for any claims or damages whatsoever associated with your use, inability to use, or your interaction with other users of the Telescope code or Telescope CLI, including any direct, indirect, incidental, special, exemplary, punitive or consequential damages, or loss of profits, cryptocurrencies, tokens, or anything else of value.
