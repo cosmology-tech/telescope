@@ -1,6 +1,6 @@
 {
   "name": "@osmonauts/telescope",
-  "version": "0.11.3",
+  "version": "0.11.4",
   "description": "A TypeScript Transpiler for Cosmos Protobufs",
   "author": "Dan Lynch <pyramation@gmail.com>",
   "homepage": "https://github.com/osmosis-labs/telescope/tree/master/packages/telescope#readme",
@@ -81,8 +81,8 @@
     "@babel/traverse": "7.18.5",
     "@babel/types": "7.18.4",
     "@cosmwasm/ts-codegen": "0.9.0",
-    "@osmonauts/ast": "^0.9.0",
-    "@osmonauts/proto-parser": "^0.9.0",
+    "@osmonauts/ast": "^0.9.1",
+    "@osmonauts/proto-parser": "^0.9.1",
     "@osmonauts/types": "^0.7.0",
     "@osmonauts/utils": "^0.3.11",
     "@types/parse-package-name": "0.1.0",
