@@ -1847,10 +1847,10 @@
   resolved "https://registry.npmjs.org/@cosmjs/utils/-/utils-0.28.11.tgz#dee7902a4b3cac8f66563b7e8f99fa976f9c4f1f"
   integrity sha512-FXVEr7Pg6MX9VbY5NemuKbtFVabSlUlArWIV+R74FQg5LIuSa+0QkxSpNldCuOLBEU4/GlrzybT4uEl338vSzg==
 
-"@cosmwasm/ts-codegen@0.8.4":
-  version "0.8.4"
-  resolved "https://registry.npmjs.org/@cosmwasm/ts-codegen/-/ts-codegen-0.8.4.tgz#1aaa8071125fcefeb163a604863b083eb3d26f5e"
-  integrity sha512-80mjivML6YNYshwCQ7j7zgbVqI7F6tx3/JLh5bkosFgzDiA97IdL7dEGbzlu441j15Jk6mo2aiqEmor9P5wxeg==
+"@cosmwasm/ts-codegen@0.9.0":
+  version "0.9.0"
+  resolved "https://registry.npmjs.org/@cosmwasm/ts-codegen/-/ts-codegen-0.9.0.tgz#9b492bdd34d50894cbc013dc596cd6b6a9034970"
+  integrity sha512-QgkrTzkifM3MIsbpLtTCfRF9Lio0uzCuE6o8S/tdcN5Zh0Jv2N2r02TSfAOs7sTglPTRiO0a1/euhYxuQqbctg==
   dependencies:
     "@babel/core" "7.18.10"
     "@babel/generator" "7.18.12"
