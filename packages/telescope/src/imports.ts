@@ -1,6 +1,5 @@
 import * as t from '@babel/types';
-import { importStmt, } from '@osmonauts/ast';
-import { extname, relative, dirname } from 'path';
+import { importStmt } from '@osmonauts/ast';
 import { ImportHash, ImportObj, ServiceMutation } from './types';
 import { UTILS, getRelativePath } from './utils';
 import { TelescopeParseContext } from './build';

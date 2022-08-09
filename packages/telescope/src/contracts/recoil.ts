@@ -1,5 +1,5 @@
 import { prompt } from '../prompt';
-import { recoil } from '@cosmwasm/ts-codegen';
+import { generateRecoil } from '@cosmwasm/ts-codegen';
 import { getContracts, getContractSchemata } from '../utils/contracts';
 
 export default async (argv) => {
@@ -27,6 +27,6 @@ export default async (argv) => {
 
     const s = getContractSchemata(schema, out, argv);
     s.forEach(async ({ contractName, schemas, outPath }) => {
-        await recoil(contractName, schemas, outPath);
+        await generateRecoil(contractName, schemas, outPath);
     });
 };

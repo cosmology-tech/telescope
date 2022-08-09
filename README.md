@@ -164,7 +164,9 @@ telescope({
       }
     }
   }
-});
+}).then(()=>{
+  console.log('✨ all done!');
+})
 ```
 
 ## Options

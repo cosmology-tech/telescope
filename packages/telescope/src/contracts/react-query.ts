@@ -1,5 +1,5 @@
 import { prompt } from '../prompt';
-import { reactQuery } from '@cosmwasm/ts-codegen';
+import { generateReactQuery } from '@cosmwasm/ts-codegen';
 import { getContracts, getContractSchemata } from '../utils/contracts';
 
 export default async (argv) => {
@@ -27,7 +27,7 @@ export default async (argv) => {
 
     const s = getContractSchemata(schema, out, argv);
     s.forEach(async ({ contractName, schemas, outPath }) => {
-        await reactQuery(contractName, schemas, outPath);
+        await generateReactQuery(contractName, schemas, outPath);
     });
 
 };

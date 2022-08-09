@@ -19,6 +19,7 @@ import { plugin as createRPCMsgClients } from './generators/create-rpc-msg-clien
 import { plugin as createStargateClients } from './generators/create-stargate-clients';
 import { plugin as createBundle } from './generators/create-bundle';
 import { plugin as createIndex } from './generators/create-index';
+import { plugin as createCosmWasmBundle } from './generators/create-cosmwasm-bundle';
 
 export class TelescopeBuilder {
     store: ProtoStore;
@@ -70,7 +71,7 @@ export class TelescopeBuilder {
         [].push.apply(this.converters, files);
     }
 
-    build() {
+    async build() {
         // [x] get bundle of all packages
         const bundles = bundlePackages(this.store)
             .map(bundle => {
@@ -110,6 +111,7 @@ export class TelescopeBuilder {
             });
 
         createAggregatedLCDClient(this);
+        await createCosmWasmBundle(this);
 
         // finally, write one index file with all files, exported
         createIndex(this);
