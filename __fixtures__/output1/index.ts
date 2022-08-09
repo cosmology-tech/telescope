@@ -22,3 +22,4 @@ export * from "./osmosis/bundle";
 export * from "./osmosis/client";
 export * from "./secret/bundle";
 export * from "./tendermint/bundle";
+export * from "./contracts";
