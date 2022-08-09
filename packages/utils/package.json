@@ -1,6 +1,6 @@
 {
   "name": "@osmonauts/utils",
-  "version": "0.3.11",
+  "version": "0.3.12",
   "description": "Telescope utils",
   "author": "Dan Lynch <pyramation@gmail.com>",
   "homepage": "https://github.com/osmosis-labs/telescope/tree/master/packages/utils#readme",
