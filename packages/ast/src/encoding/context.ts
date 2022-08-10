@@ -40,6 +40,12 @@ export class GenericParseContext implements ParseContext {
         return getPluginValue(name, this.ref.proto.package, this.options);
     }
 
+    isExcluded() {
+        const packages = this.pluginValue('excluded.packages') ?? [];
+        const protos = this.pluginValue('excluded.protos') ?? [];
+        return packages.includes(this.ref.proto.package) || protos.includes(this.ref.filename);
+    }
+
     addUtil(util) {
         this.utils[util] = true;
     }

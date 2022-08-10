@@ -5,11 +5,16 @@ import { dirname, join } from 'path';
 import { sync as mkdirp } from 'mkdirp';
 import { writeFileSync } from 'fs';
 import { TelescopeBuilder } from '../builder';
-import { createAggregatedLCDClient, GenericParseContext } from '@osmonauts/ast';
+import { createAggregatedLCDClient } from '@osmonauts/ast';
 import { ProtoRef, ProtoService } from '@osmonauts/types';
 import { TelescopeParseContext } from '../build';
 import * as t from '@babel/types';
 import generate from '@babel/generator';
+
+const isExcluded = (builder: TelescopeBuilder, ref: ProtoRef) => {
+    return builder.options.excluded?.protos?.includes(ref.filename) ||
+        builder.options.excluded?.packages?.includes(ref.proto.package);
+};
 
 export const plugin = (
     builder: TelescopeBuilder
@@ -24,14 +29,14 @@ export const plugin = (
     const {
         dir,
         filename: fname,
-        packages,
-        addToBundle
+        packages
     } = opts;
 
     const localname = join(dir, fname);
 
     const refs = builder.store.filterProtoWhere((ref: ProtoRef) => {
-        return packages.includes(ref.proto.package)
+        return packages.includes(ref.proto.package) &&
+            !isExcluded(builder, ref);
     });
 
     const services: ProtoService[] = refs.map(ref => {

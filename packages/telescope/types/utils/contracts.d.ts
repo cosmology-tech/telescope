@@ -3,8 +3,4 @@ export declare const getContracts: () => {
     name: string;
     value: string;
 }[];
-export declare const getContractSchemata: (schemata: any[], out: string, argv: any) => {
-    contractName: string;
-    schemas: any[];
-    outPath: string;
-}[];
+export declare const getContractSchemata: (schemata: any[], out: string, argv: any) => Promise<any[]>;
