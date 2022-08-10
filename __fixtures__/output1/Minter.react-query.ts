@@ -6,13 +6,16 @@
 
 import { UseQueryOptions, useQuery, useMutation, UseMutationOptions } from "@tanstack/react-query";
 import { ExecuteResult } from "@cosmjs/cosmwasm-stargate";
+import { StdFee } from "@cosmjs/amino";
 import { Timestamp, Uint64, Uint128, ConfigResponse, Coin, Addr, Config, ExecuteMsg, Decimal, InstantiateMsg, InstantiateMsg1, CollectionInfoForRoyaltyInfoResponse, RoyaltyInfoResponse, QueryMsg } from "./Minter.types";
 import { MinterQueryClient, MinterClient } from "./Minter.client";
-export interface MinterMintCountQuery {
-  client?: MinterQueryClient;
-  options?: Omit<UseQueryOptions<MintCountResponse | undefined, Error, MintCountResponse, (string | undefined)[]>, "'queryKey' | 'queryFn' | 'initialData'"> & {
+export interface MinterReactQuery<TResponse> {
+  client: MinterQueryClient | undefined;
+  options?: Omit<UseQueryOptions<TResponse, Error, TResponse, (string | undefined)[]>, "'queryKey' | 'queryFn' | 'initialData'"> & {
     initialData?: undefined;
   };
+}
+export interface MinterMintCountQuery extends MinterReactQuery<MintCountResponse> {
   args: {
     address: string;
   };
@@ -22,65 +25,45 @@ export function useMinterMintCountQuery({
   args,
   options
 }: MinterMintCountQuery) {
-  return useQuery<MintCountResponse | undefined, Error, MintCountResponse, (string | undefined)[]>(["minterMintCount", client?.contractAddress, JSON.stringify(args)], () => client ? client.mintCount({
+  return useQuery<MintCountResponse, Error, MintCountResponse, (string | undefined)[]>(["minterMintCount", client?.contractAddress, JSON.stringify(args)], () => client ? client.mintCount({
     address: args.address
-  }) : undefined, { ...options,
+  }) : Promise.reject(new Error("Invalid client")), { ...options,
     enabled: !!client && (options?.enabled != undefined ? options.enabled : true)
   });
 }
-export interface MinterMintPriceQuery {
-  client?: MinterQueryClient;
-  options?: Omit<UseQueryOptions<MintPriceResponse | undefined, Error, MintPriceResponse, (string | undefined)[]>, "'queryKey' | 'queryFn' | 'initialData'"> & {
-    initialData?: undefined;
-  };
-}
+export interface MinterMintPriceQuery extends MinterReactQuery<MintPriceResponse> {}
 export function useMinterMintPriceQuery({
   client,
   options
 }: MinterMintPriceQuery) {
-  return useQuery<MintPriceResponse | undefined, Error, MintPriceResponse, (string | undefined)[]>(["minterMintPrice", client?.contractAddress], () => client ? client.mintPrice() : undefined, { ...options,
+  return useQuery<MintPriceResponse, Error, MintPriceResponse, (string | undefined)[]>(["minterMintPrice", client?.contractAddress], () => client ? client.mintPrice() : Promise.reject(new Error("Invalid client")), { ...options,
     enabled: !!client && (options?.enabled != undefined ? options.enabled : true)
   });
 }
-export interface MinterStartTimeQuery {
-  client?: MinterQueryClient;
-  options?: Omit<UseQueryOptions<StartTimeResponse | undefined, Error, StartTimeResponse, (string | undefined)[]>, "'queryKey' | 'queryFn' | 'initialData'"> & {
-    initialData?: undefined;
-  };
-}
+export interface MinterStartTimeQuery extends MinterReactQuery<StartTimeResponse> {}
 export function useMinterStartTimeQuery({
   client,
   options
 }: MinterStartTimeQuery) {
-  return useQuery<StartTimeResponse | undefined, Error, StartTimeResponse, (string | undefined)[]>(["minterStartTime", client?.contractAddress], () => client ? client.startTime() : undefined, { ...options,
+  return useQuery<StartTimeResponse, Error, StartTimeResponse, (string | undefined)[]>(["minterStartTime", client?.contractAddress], () => client ? client.startTime() : Promise.reject(new Error("Invalid client")), { ...options,
     enabled: !!client && (options?.enabled != undefined ? options.enabled : true)
   });
 }
-export interface MinterMintableNumTokensQuery {
-  client?: MinterQueryClient;
-  options?: Omit<UseQueryOptions<MintableNumTokensResponse | undefined, Error, MintableNumTokensResponse, (string | undefined)[]>, "'queryKey' | 'queryFn' | 'initialData'"> & {
-    initialData?: undefined;
-  };
-}
+export interface MinterMintableNumTokensQuery extends MinterReactQuery<MintableNumTokensResponse> {}
 export function useMinterMintableNumTokensQuery({
   client,
   options
 }: MinterMintableNumTokensQuery) {
-  return useQuery<MintableNumTokensResponse | undefined, Error, MintableNumTokensResponse, (string | undefined)[]>(["minterMintableNumTokens", client?.contractAddress], () => client ? client.mintableNumTokens() : undefined, { ...options,
+  return useQuery<MintableNumTokensResponse, Error, MintableNumTokensResponse, (string | undefined)[]>(["minterMintableNumTokens", client?.contractAddress], () => client ? client.mintableNumTokens() : Promise.reject(new Error("Invalid client")), { ...options,
     enabled: !!client && (options?.enabled != undefined ? options.enabled : true)
   });
 }
-export interface MinterConfigQuery {
-  client?: MinterQueryClient;
-  options?: Omit<UseQueryOptions<ConfigResponse | undefined, Error, ConfigResponse, (string | undefined)[]>, "'queryKey' | 'queryFn' | 'initialData'"> & {
-    initialData?: undefined;
-  };
-}
+export interface MinterConfigQuery extends MinterReactQuery<ConfigResponse> {}
 export function useMinterConfigQuery({
   client,
   options
 }: MinterConfigQuery) {
-  return useQuery<ConfigResponse | undefined, Error, ConfigResponse, (string | undefined)[]>(["minterConfig", client?.contractAddress], () => client ? client.config() : undefined, { ...options,
+  return useQuery<ConfigResponse, Error, ConfigResponse, (string | undefined)[]>(["minterConfig", client?.contractAddress], () => client ? client.config() : Promise.reject(new Error("Invalid client")), { ...options,
     enabled: !!client && (options?.enabled != undefined ? options.enabled : true)
   });
 }
