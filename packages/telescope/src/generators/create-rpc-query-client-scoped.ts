@@ -163,6 +163,9 @@ const makeAllRPCBundles = (
     bundler: Bundler
 ) => {
 
+
+    if (!builder.options.rpcClients.bundle) return;
+
     // [x] loop through every bundle 
     // [x] if not cosmos, add all cosmos
     // [x] call makeRPC
