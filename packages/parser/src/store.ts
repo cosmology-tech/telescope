@@ -7,6 +7,24 @@ import { getNestedProto, getPackageAndNestedFromStr } from './utils';
 import { traverse } from './traverse';
 import { lookupAny } from './lookup';
 
+import google_any from './native/any';
+import google_duration from './native/duration';
+import google_timestamp from './native/timestamp';
+import google_empty from './native/empty';
+import google_field_mask from './native/field_mask';
+import google_struct from './native/struct';
+import google_wrappers from './native/wrappers';
+
+const GOOGLE_PROTOS = [
+    ['google/protobuf/any.proto', google_any],
+    ['google/protobuf/duration.proto', google_duration],
+    ['google/protobuf/timestamp.proto', google_timestamp],
+    ['google/protobuf/empty.proto', google_empty],
+    ['google/protobuf/struct.proto', google_struct],
+    ['google/protobuf/wrappers.proto', google_wrappers],
+    ['google/protobuf/field_mask.proto', google_field_mask]
+];
+
 export const parseProto = (content) => {
     return parse(content, {
         // we need to update this
@@ -15,7 +33,6 @@ export const parseProto = (content) => {
         preferTrailingComment: false
     });
 };
-
 export class ProtoStore {
     files: string[];
     protoDirs: string[];
@@ -64,6 +81,19 @@ export class ProtoStore {
             }));
             return [...m, ...contents];
         }, []);
+
+        // if they don't got it, let's give it to 'em!
+        GOOGLE_PROTOS.map(([f, v]) => {
+            const found = contents.find(file => file.filename === f);
+            if (!found) {
+                contents.push({
+                    absolute: f,
+                    filename: f,
+                    content: v
+                });
+            }
+        });
+
         const protos = contents.map(({ absolute, filename, content }) => {
             try {
                 const proto = parseProto(content);
@@ -77,6 +107,7 @@ export class ProtoStore {
                 throw e;
             }
         });
+
         this.protos = protos;
         return protos;
     }
