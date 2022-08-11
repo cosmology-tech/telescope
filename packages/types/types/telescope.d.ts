@@ -31,6 +31,7 @@ interface TelescopeOpts {
     lcdClients?: {
         enabled: boolean;
         scopedIsExclusive?: boolean;
+        bundle?: boolean;
         scoped?: {
             dir: string;
             filename?: string;
@@ -43,6 +44,7 @@ interface TelescopeOpts {
         enabled: boolean;
         camelCase?: boolean;
         scopedIsExclusive?: boolean;
+        bundle?: boolean;
         scoped?: {
             dir: string;
             filename?: string;

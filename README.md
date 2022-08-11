@@ -176,53 +176,55 @@ telescope({
 
 ### Amino Encoding
 
-| option                         | description                                                     |
-| ------------------------------ | --------------------------------------------------------------  |
-| `aminoEncoding.casingFn`       | set the amino-casing function for a project                     |
-| `aminoEncoding.enabled`        | generate amino types and amino converters                       |
-| `aminoEncoding.exceptions`     | set specific aminoType name exceptions                          |
-| `aminoEncoding.typeUrlToAmino` | create functions for aminoType name exceptions                  |
+| option                         | description                                                     | defaults   |
+| ------------------------------ | --------------------------------------------------------------  | ---------- |
+| `aminoEncoding.enabled`        | generate amino types and amino converters                       | `true`     |
+| `aminoEncoding.casingFn`       | set the amino-casing function for a project                     | `snake()`  |
+| `aminoEncoding.exceptions`     | set specific aminoType name exceptions                          | see code   |
+| `aminoEncoding.typeUrlToAmino` | create functions for aminoType name exceptions                  | `undefined`|
 
 ### Global Options
 
-| option                         | description                                                     |
-| ------------------------------ | --------------------------------------------------------------  |
-| `includePackageVar`            | export a `protoPackage` variable to indicate package name       |
+| option                         | description                                                     | defaults   |
+| ------------------------------ | --------------------------------------------------------------  | ---------- |
+| `includePackageVar`            | export a `protoPackage` variable to indicate package name       | `false`    |
 
 
 ### LCD Client Options
 
-| option                         | description                                                     |
-| ------------------------------ | --------------------------------------------------------------  |
-| `lcdClients.enabled`           | generate LCD clients that can query proto `Query` messages      |
-| `lcdClients.scoped`            | will generate factory of scoped bundles of all LCD Clients      |
-| `lcdClients.scopedIsExclusive` | will allow both scoped bundles and all RPC Clients              |
+| option                         | description                                                     | defaults   |
+| ------------------------------ | --------------------------------------------------------------  | ---------- |   
+| `lcdClients.enabled`           | generate LCD clients that can query proto `Query` messages      | `true`     |
+| `lcdClients.bundle`            | will generate factory bundle aggregate of all LCD Clients       | `true`     |
+| `lcdClients.scoped`            | will generate factory of scoped LCD Clients                     | `undefined`|
+| `lcdClients.scopedIsExclusive` | will allow both scoped bundles and all RPC Clients              | `true`     |
 
 See [LCD Clients](#lcd-clients) for more info.
 ### RPC Client Options
 
-| option                         | description                                                     |
-| ------------------------------ | --------------------------------------------------------------  |
-| `rpcClients.enabled`           | generate RPC clients that can interact with proto messages      |
-| `rpcClients.camelCase`         | use camel-case for RPC methods when generating RPC clients      |
-| `rpcClients.scoped`            | will generate factory of scoped bundles of all RPC Clients      |
-| `rpcClients.scopedIsExclusive` | will allow both scoped bundles and all RPC Clients              |
+| option                         | description                                                     | defaults   |
+| ------------------------------ | --------------------------------------------------------------  | ---------- |   
+| `rpcClients.enabled`           | generate RPC clients that can interact with proto messages      | `true`     |
+| `rpcClients.bundle`            | will generate factory bundle aggregate of all RPC Clients       | `true`     |
+| `rpcClients.camelCase`         | use camel-case for RPC methods when generating RPC clients      | `true`     |
+| `rpcClients.scoped`            | will generate factory of scoped RPC Clients                     | `undefined`|
+| `rpcClients.scopedIsExclusive` | will allow both scoped bundles and all RPC Clients              | `true`     |
 
 See [RPC Clients](#rpc-clients) for more info.
 
 ### Stargate Client Options
 
-| option                                       | description                                                     |
-| -------------------------------------------- | --------------------------------------------------------------  |
-| `stargateClients.includeCosmosDefaultTypes`  | if true, will include the cosmjs defaults with stargate clients |
+| option                                       | description                                                     | defaults |
+| -------------------------------------------- | --------------------------------------------------------------  | ---------|
+| `stargateClients.includeCosmosDefaultTypes`  | if true, will include the cosmjs defaults with stargate clients | `true` (except cosmos package) |
 
 ### Typings and Formating
 
-| option                         | description                                                     |
-| ------------------------------ | --------------------------------------------------------------  |
-| `typingsFormat.timestamp`      | use either `date` or `timestamp` for `Timestamp` proto type     |
-| `typingsFormat.duration`       | use either `duration` or `string` for `Duration` proto type     |
-| `typingsFormat.useExact`       | defaults to false, but if enabled uses the `Exact` TS type      |
+| option                         | description                                                     | defaults  | 
+| ------------------------------ | --------------------------------------------------------------  | --------- |
+| `typingsFormat.useExact`       | defaults to false, but if enabled uses the `Exact` TS type      | `false`   |
+| `typingsFormat.timestamp`      | use either `date` or `timestamp` for `Timestamp` proto type     | "date"    |
+| `typingsFormat.duration`       | use either `duration` or `string` for `Duration` proto type     | "duration"|
 
 ## Types
 

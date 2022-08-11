@@ -117,6 +117,9 @@ const createAllLCDBundles = (
     bundler: Bundler
 ) => {
 
+    if (!builder.options.lcdClients.bundle) return;
+
+
     // [x] loop through every bundle 
     // [x] if not cosmos, add all cosmos
     // [x] call makeLCD
