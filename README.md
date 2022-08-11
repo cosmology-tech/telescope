@@ -188,7 +188,8 @@ telescope({
 | option                         | description                                                     | defaults   |
 | ------------------------------ | --------------------------------------------------------------  | ---------- |
 | `includePackageVar`            | export a `protoPackage` variable to indicate package name       | `false`    |
-
+| `excluded.packages`            | exclude a set of packages from transpilation                    | `undefined`|
+| `excluded.protos`              | exclude a set of proto files from transpilation                 | `undefined`|
 
 ### LCD Client Options
 
