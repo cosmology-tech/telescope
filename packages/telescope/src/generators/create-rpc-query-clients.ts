@@ -19,6 +19,8 @@ export const plugin = (
         const enabled = c.proto.pluginValue('rpcClients.enabled');
         if (!enabled) return;
 
+        if (c.proto.isExcluded()) return;
+
         const ctx = bundler.getFreshContext(c);
 
         // get mutations, services

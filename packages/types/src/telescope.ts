@@ -5,6 +5,11 @@ import { camel } from '@osmonauts/utils';
 interface TelescopeOpts {
     includePackageVar?: boolean;
 
+    excluded?: {
+        packages?: string[];
+        protos?: string[];
+    },
+
     cosmwasm?: TSBuilderInput;
 
     aggregatedLCD?: {

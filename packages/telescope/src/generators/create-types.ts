@@ -6,6 +6,12 @@ import { parse } from '../parse';
 import { writeFileSync } from 'fs';
 import { dirname } from 'path';
 import { sync as mkdirp } from 'mkdirp';
+import { ProtoRef } from '@osmonauts/types';
+
+const isExcluded = (builder: TelescopeBuilder, ref: ProtoRef) => {
+    return builder.options.excluded?.protos?.includes(ref.filename) ||
+        builder.options.excluded?.packages?.includes(ref.proto.package);
+};
 
 export const plugin = (
     builder: TelescopeBuilder,
@@ -19,6 +25,9 @@ export const plugin = (
     // [x] write out all TS files for package
     bundler.contexts = baseProtos.map(ref => {
         const context = builder.context(ref);
+
+        if (isExcluded(builder, ref)) return;
+
         parse(context);
         context.buildBase();
 
@@ -52,6 +61,6 @@ export const plugin = (
         }
 
         return context;
-    });
+    }).filter(Boolean);
 
 };

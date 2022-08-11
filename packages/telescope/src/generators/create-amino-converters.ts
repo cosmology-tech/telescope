@@ -24,6 +24,10 @@ export const plugin = (
             return;
         }
 
+        if (c.proto.isExcluded()) {
+            return;
+        }
+
         const localname = bundler.getLocalFilename(c.ref, 'amino');
         const filename = bundler.getFilename(localname);
         const ctx = bundler.getFreshContext(c);

@@ -26,6 +26,8 @@ export const plugin = (
         const enabled = c.proto.pluginValue('lcdClients.enabled');
         if (!enabled) return;
 
+        if (c.proto.isExcluded()) return;
+
         const localname = bundler.getLocalFilename(c.ref, 'lcd');
         const filename = bundler.getFilename(localname);
         const ctx = bundler.getFreshContext(c);

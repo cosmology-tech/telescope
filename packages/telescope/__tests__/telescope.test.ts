@@ -14,6 +14,12 @@ store.traverseAll();
 const options: TelescopeOptions = {
   includePackageVar: true,
 
+  excluded: {
+    protos: [
+      'cosmos/authz/v1beta1/event.proto'
+    ]
+  },
+
   cosmwasm: {
     contracts: [
       {

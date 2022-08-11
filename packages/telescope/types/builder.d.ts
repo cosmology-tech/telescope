@@ -23,5 +23,5 @@ export declare class TelescopeBuilder {
     addLCDClients(files: BundlerFile[]): void;
     addRegistries(files: BundlerFile[]): void;
     addConverters(files: BundlerFile[]): void;
-    build(): void;
+    build(): Promise<void>;
 }
