@@ -5,10 +5,14 @@ import { camel } from '@osmonauts/utils';
 interface TelescopeOpts {
     includePackageVar?: boolean;
 
+    bundle?: {
+        enabled: boolean;
+    };
+
     excluded?: {
         packages?: string[];
         protos?: string[];
-    },
+    };
 
     cosmwasm?: TSBuilderInput;
 
@@ -17,18 +21,18 @@ interface TelescopeOpts {
         filename: string;
         packages: string[];
         addToBundle: boolean;
-    },
+    };
 
     stargateClients?: {
         enabled: boolean;
         includeCosmosDefaultTypes?: boolean;
-    },
+    };
 
     typingsFormat?: {
         useExact?: boolean;
         timestamp?: 'date' | 'timestamp',
         duration?: 'duration' | 'string'
-    },
+    };
 
     aminoEncoding?: {
         enabled: boolean;
@@ -76,6 +80,10 @@ export type TelescopeOption = keyof TelescopeOpts;
 export const defaultTelescopeOptions: TelescopeOptions = {
     // global options (can be overridden through plugins)
     includePackageVar: false,
+
+    bundle: {
+        enabled: true
+    },
 
     typingsFormat: {
         useExact: false,

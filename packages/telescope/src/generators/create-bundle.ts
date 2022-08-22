@@ -9,6 +9,10 @@ export const plugin = (
     bundler: Bundler
 ) => {
 
+    if (!builder.options.bundle.enabled) {
+        return;
+    }
+
     // [x] bundle
     const body = recursiveModuleBundle(bundler.bundle.bundleVariables);
     const prog = []
