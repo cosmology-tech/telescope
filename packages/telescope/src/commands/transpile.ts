@@ -79,10 +79,12 @@ export default async (argv) => {
   }
 
   const options = {
-    includePackageVar,
-    typingsFormat: {
-      timestamp: timestampFormat,
-      duration: durationFormat
+    prototypes: {
+      includePackageVar,
+      typingsFormat: {
+        timestamp: timestampFormat,
+        duration: durationFormat
+      },
     },
     aminoEncoding: {
       enabled: includeAminos

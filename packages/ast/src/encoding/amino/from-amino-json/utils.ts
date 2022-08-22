@@ -81,7 +81,7 @@ export const fromAmino = {
     },
 
     duration(args: FromAminoParseField) {
-        const durationFormat = args.context.pluginValue('typingsFormat.duration');
+        const durationFormat = args.context.pluginValue('prototypes.typingsFormat.duration');
         switch (durationFormat) {
             case 'duration':
             // TODO duration amino type
@@ -218,7 +218,7 @@ export const fromAmino = {
         const oneOfs = getOneOfs(Type);
         const properties = protoFieldsToArray(Type).map(field => {
             const isOneOf = oneOfs.includes(field.name);
-            const isOptional = getFieldOptionality(field, isOneOf);
+            const isOptional = getFieldOptionality(context, field, isOneOf);
 
             if (parentField.import) currentProtoPath = parentField.import;
             return fromAminoParseField({
@@ -269,7 +269,7 @@ export const fromAmino = {
         const oneOfs = getOneOfs(Type);
         const properties = protoFieldsToArray(Type).map(field => {
             const isOneOf = oneOfs.includes(field.name);
-            const isOptional = getFieldOptionality(field, isOneOf);
+            const isOptional = getFieldOptionality(context, field, isOneOf);
 
             if (parentField.import) currentProtoPath = parentField.import;
 

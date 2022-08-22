@@ -23,7 +23,7 @@ export const fromJSONMethodFields = (context: ProtoParseContext, name: string, p
         };
 
         const isOneOf = oneOfs.includes(fieldName);
-        const isOptional = getFieldOptionality(field, isOneOf);
+        const isOptional = getFieldOptionality(context, field, isOneOf);
 
         const args: FromJSONMethod = {
             context,

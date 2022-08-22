@@ -1,13 +1,22 @@
 import { TSBuilderInput } from '@cosmwasm/ts-codegen';
 import { AminoExceptions } from "./aminos";
 interface TelescopeOpts {
-    includePackageVar?: boolean;
+    prototypes?: {
+        includePackageVar?: boolean;
+        defaultFieldOptionality?: boolean;
+        useOptionalNullable?: boolean;
+        excluded?: {
+            packages?: string[];
+            protos?: string[];
+        };
+        typingsFormat?: {
+            useExact?: boolean;
+            timestamp?: 'date' | 'timestamp';
+            duration?: 'duration' | 'string';
+        };
+    };
     bundle?: {
         enabled: boolean;
-    };
-    excluded?: {
-        packages?: string[];
-        protos?: string[];
     };
     cosmwasm?: TSBuilderInput;
     aggregatedLCD?: {
@@ -19,11 +28,6 @@ interface TelescopeOpts {
     stargateClients?: {
         enabled: boolean;
         includeCosmosDefaultTypes?: boolean;
-    };
-    typingsFormat?: {
-        useExact?: boolean;
-        timestamp?: 'date' | 'timestamp';
-        duration?: 'duration' | 'string';
     };
     aminoEncoding?: {
         enabled: boolean;

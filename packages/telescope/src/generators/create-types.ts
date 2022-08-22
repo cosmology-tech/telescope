@@ -9,8 +9,8 @@ import { sync as mkdirp } from 'mkdirp';
 import { ProtoRef } from '@osmonauts/types';
 
 const isExcluded = (builder: TelescopeBuilder, ref: ProtoRef) => {
-    return builder.options.excluded?.protos?.includes(ref.filename) ||
-        builder.options.excluded?.packages?.includes(ref.proto.package);
+    return builder.options.prototypes?.excluded?.protos?.includes(ref.filename) ||
+        builder.options.prototypes?.excluded?.packages?.includes(ref.proto.package);
 };
 
 export const plugin = (
@@ -38,7 +38,7 @@ export const plugin = (
             ;
 
         // package var
-        if (context.options.includePackageVar) {
+        if (context.proto.pluginValue('prototypes.includePackageVar')) {
             prog.push(t.exportNamedDeclaration(t.variableDeclaration('const', [
                 t.variableDeclarator(
                     t.identifier('protobufPackage'),

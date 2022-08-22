@@ -24,7 +24,7 @@ export const fromPartialMethodFields = (context: ProtoParseContext, name: string
         };
 
         const isOneOf = oneOfs.includes(fieldName);
-        const isOptional = getFieldOptionality(field, isOneOf);
+        const isOptional = getFieldOptionality(context, field, isOneOf);
 
         const args: FromPartialMethod = {
             context,
@@ -157,7 +157,7 @@ export const fromPartialMethod = (context: ProtoParseContext, name: string, prot
     let typeParameters = undefined;
     let param = null;
 
-    const useExact = context.pluginValue('typingsFormat.useExact');
+    const useExact = context.pluginValue('prototypes.typingsFormat.useExact');
     if (useExact === true) {
         context.addUtil('Exact');
 

@@ -276,7 +276,7 @@ export const fromJSON = {
     // period: isSet(object.period) ? Duration.fromJSON(object.period) : undefined,
 
     duration(args: FromJSONMethod) {
-        const durationFormat = args.context.pluginValue('typingsFormat.duration');
+        const durationFormat = args.context.pluginValue('prototypes.typingsFormat.duration');
         switch (durationFormat) {
             case 'string':
                 return fromJSON.durationString(args);

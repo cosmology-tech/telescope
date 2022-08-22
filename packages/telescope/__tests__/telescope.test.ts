@@ -12,16 +12,25 @@ const contractsDir = __dirname + '/../../../__fixtures__/wasm/';
 store.traverseAll();
 
 const options: TelescopeOptions = {
-  includePackageVar: true,
+
+  prototypes: {
+    includePackageVar: true,
+    defaultFieldOptionality: false,
+    useOptionalNullable: true,
+    excluded: {
+      protos: [
+        'cosmos/authz/v1beta1/event.proto'
+      ]
+    },
+    typingsFormat: {
+      useExact: false,
+      timestamp: 'date',
+      duration: 'duration'
+    }
+  },
 
   bundle: {
     enabled: true
-  },
-
-  excluded: {
-    protos: [
-      'cosmos/authz/v1beta1/event.proto'
-    ]
   },
 
   cosmwasm: {
@@ -60,12 +69,6 @@ const options: TelescopeOptions = {
         enabled: false
       }
     }
-  },
-
-  typingsFormat: {
-    useExact: false,
-    timestamp: 'date',
-    duration: 'duration'
   },
 
   stargateClients: {
@@ -175,8 +178,10 @@ const options: TelescopeOptions = {
           }
         }
       },
-      typingsFormat: {
-        useExact: true
+      prototypes: {
+        typingsFormat: {
+          useExact: true
+        }
       }
     }
   }
