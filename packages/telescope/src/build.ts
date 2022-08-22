@@ -42,7 +42,7 @@ export const buildBaseTypeScriptClass = (
     name: string,
     obj: any
 ) => {
-    context.body.push(createCreateProtoType(context, name, obj));
+    context.body.push(createCreateProtoType(context.proto, name, obj));
     context.body.push(createObjectWithMethods(context.proto, name, obj));
 };
 

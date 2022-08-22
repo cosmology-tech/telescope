@@ -15,8 +15,8 @@ cases('osmosis/lockup/tx', opts => {
     const ref = store.findProto('osmosis/lockup/tx.proto');
     const context = new ProtoParseContext(ref, store, defaultTelescopeOptions);
     const aminoCtx = new AminoParseContext(ref, store, defaultTelescopeOptions);
-    context.options.typingsFormat.duration = opts.name;
-    aminoCtx.options.typingsFormat.duration = opts.name;
+    context.options.prototypes.typingsFormat.duration = opts.name;
+    aminoCtx.options.prototypes.typingsFormat.duration = opts.name;
     expectCode(createProtoType(context, 'MsgLockTokens',
         getNestedProto(ref.traversed).MsgLockTokens
     ));

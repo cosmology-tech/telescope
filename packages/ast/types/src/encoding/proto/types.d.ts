@@ -1,4 +1,5 @@
 import { ProtoType, ProtoField } from '@osmonauts/types';
+import { AminoParseContext, ProtoParseContext } from '../context';
 export declare const SCALAR_TYPES: string[];
 export declare const NATIVE_TYPES: string[];
 export declare const types: {
@@ -83,5 +84,4 @@ export declare const getFieldsTypeName: (field: ProtoField) => string;
 export declare const getKeyTypeEntryName: (typeName: string, prop: string) => string;
 export declare const getBaseCreateTypeFuncName: (name: any) => string;
 export declare const getOneOfs: (type: ProtoType) => string[];
-export declare const getFieldOptionality: (field: ProtoField, isOneOf: boolean) => boolean;
-export declare const getObjectNameOld: (name: string, scope?: string[]) => string;
+export declare const getFieldOptionality: (context: ProtoParseContext | AminoParseContext, field: ProtoField, isOneOf: boolean) => any;

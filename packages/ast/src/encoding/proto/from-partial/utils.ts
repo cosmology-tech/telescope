@@ -210,7 +210,7 @@ export const fromPartial = {
     },
 
     timestamp(args: FromPartialMethod) {
-        const timestampFormat = args.context.pluginValue('typingsFormat.timestamp')
+        const timestampFormat = args.context.pluginValue('prototypes.typingsFormat.timestamp')
         switch (timestampFormat) {
             case 'timestamp':
                 return fromPartial.type(args);

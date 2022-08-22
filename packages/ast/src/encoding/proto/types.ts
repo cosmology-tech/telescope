@@ -1,5 +1,6 @@
 import { ProtoType, ProtoField } from '@osmonauts/types';
 import { pascal } from 'case';
+import { AminoParseContext, ProtoParseContext } from '../context';
 
 export const SCALAR_TYPES = [
     'string',
@@ -157,13 +158,17 @@ export const getOneOfs = (type: ProtoType) => {
     return type.oneofs[keys[0]].oneof;
 };
 
-export const getFieldOptionality = (field: ProtoField, isOneOf: boolean) => {
-    return isOneOf || field?.options?.['(gogoproto.nullable)'];
-};
-
-export const getObjectNameOld = (name: string, scope: string[] = []) => {
-    if (!scope.length || scope.length === 1) return name;
-    const [_pkg, ...scopes] = scope;
-    return [...scopes, name].join('_')
+export const getFieldOptionality = (
+    context: ProtoParseContext | AminoParseContext,
+    field: ProtoField,
+    isOneOf: boolean
+) => {
+    return isOneOf ||
+        (
+            context.pluginValue('prototypes.useOptionalNullable') &&
+            field?.options?.['(gogoproto.nullable)']
+        )
+        ||
+        context.pluginValue('prototypes.defaultFieldOptionality');
 };
 

@@ -179,7 +179,7 @@ export const fromAminoJsonMethod = ({
     const oneOfs = getOneOfs(proto);
     const fields = protoFieldsToArray(proto).map((field) => {
         const isOneOf = oneOfs.includes(field.name);
-        const isOptional = getFieldOptionality(field, isOneOf);
+        const isOptional = getFieldOptionality(context, field, isOneOf);
 
         const aminoField = fromAminoParseField({
             context,
