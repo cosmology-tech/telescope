@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.8.0](https://github.com/osmosis-labs/telescope/compare/@osmonauts/types@0.7.3...@osmonauts/types@0.8.0) (2022-08-22)
+
+**Note:** Version bump only for package @osmonauts/types
+
+
+
+
+
 ## [0.7.3](https://github.com/osmosis-labs/telescope/compare/@osmonauts/types@0.7.2...@osmonauts/types@0.7.3) (2022-08-22)
 
 **Note:** Version bump only for package @osmonauts/types
