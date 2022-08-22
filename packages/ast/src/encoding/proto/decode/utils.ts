@@ -76,7 +76,7 @@ export const decode = {
     duration(args: DecodeMethod) {
         const num = args.field.id;
         const prop = args.field.name;
-        const durationFormat = args.context.pluginValue('typingsFormat.duration');
+        const durationFormat = args.context.pluginValue('prototypes.typingsFormat.duration');
 
         switch (durationFormat) {
             case 'string':
@@ -89,7 +89,7 @@ export const decode = {
     timestamp(args: DecodeMethod) {
         const num = args.field.id;
         const prop = args.field.name;
-        const timestampFormat = args.context.pluginValue('typingsFormat.timestamp')
+        const timestampFormat = args.context.pluginValue('prototypes.typingsFormat.timestamp')
         switch (timestampFormat) {
             case 'timestamp':
                 return switchOnTag(num, prop, baseTypes.timestamp(args));

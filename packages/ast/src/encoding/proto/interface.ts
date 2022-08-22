@@ -23,11 +23,6 @@ const getProtoFieldTypeName = (context: ProtoParseContext, field: ProtoField) =>
 
 const getProtoField = (context: ProtoParseContext, field: ProtoField) => {
     let ast: any = null;
-    let optional = false;
-
-    if (field.options?.['(gogoproto.nullable)']) {
-        optional = true;
-    }
 
     if (NATIVE_TYPES.includes(field.type)) {
         ast = getTSTypeForProto(context, field);
@@ -80,7 +75,7 @@ export const createProtoType = (
                     t.tsTypeAnnotation(
                         getProtoField(context, field)
                     ),
-                    getFieldOptionality(field, isOneOf)
+                    getFieldOptionality(context, field, isOneOf)
                 );
 
                 const comments = [];
@@ -132,7 +127,7 @@ export const createCreateProtoType = (
 
     const fields = Object.keys(proto.fields).map(key => {
         const isOneOf = oneOfs.includes(key);
-        const isOptional = getFieldOptionality(proto.fields[key], isOneOf)
+        const isOptional = getFieldOptionality(context, proto.fields[key], isOneOf)
         return {
             name: key,
             ...proto.fields[key],

@@ -3,15 +3,24 @@ import { AminoExceptions, DEFAULT_AMINO_EXCEPTIONS } from "./aminos";
 import { snake } from 'case';
 import { camel } from '@osmonauts/utils';
 interface TelescopeOpts {
-    includePackageVar?: boolean;
+
+    prototypes?: {
+        includePackageVar?: boolean;
+        defaultFieldOptionality?: boolean;
+        useOptionalNullable?: boolean;
+        excluded?: {
+            packages?: string[];
+            protos?: string[];
+        };
+        typingsFormat?: {
+            useExact?: boolean;
+            timestamp?: 'date' | 'timestamp',
+            duration?: 'duration' | 'string'
+        };
+    };
 
     bundle?: {
         enabled: boolean;
-    };
-
-    excluded?: {
-        packages?: string[];
-        protos?: string[];
     };
 
     cosmwasm?: TSBuilderInput;
@@ -26,12 +35,6 @@ interface TelescopeOpts {
     stargateClients?: {
         enabled: boolean;
         includeCosmosDefaultTypes?: boolean;
-    };
-
-    typingsFormat?: {
-        useExact?: boolean;
-        timestamp?: 'date' | 'timestamp',
-        duration?: 'duration' | 'string'
     };
 
     aminoEncoding?: {
@@ -79,17 +82,22 @@ export type TelescopeOption = keyof TelescopeOpts;
 
 export const defaultTelescopeOptions: TelescopeOptions = {
     // global options (can be overridden through plugins)
-    includePackageVar: false,
+
+    prototypes: {
+        includePackageVar: false,
+        defaultFieldOptionality: false,
+        useOptionalNullable: true,
+        typingsFormat: {
+            useExact: false,
+            timestamp: 'date',
+            duration: 'duration'
+        },
+    },
 
     bundle: {
         enabled: true
     },
 
-    typingsFormat: {
-        useExact: false,
-        timestamp: 'date',
-        duration: 'duration'
-    },
 
     stargateClients: {
         enabled: true,

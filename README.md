@@ -132,12 +132,14 @@ telescope({
 
   // all options are totally optional ;)
   options: {
-    includePackageVar: false,
-    typingsFormat: {
-        useExact: false,
-        timestamp: 'date',
-        duration: 'duration'
-    },
+    prototypes: {
+      includePackageVar: false,
+      typingsFormat: {
+          useExact: false,
+          timestamp: 'date',
+          duration: 'duration'
+      },
+    }
     aminoEncoding: {
         enabled: true
     },
@@ -152,8 +154,10 @@ telescope({
     // you can scope options to certain packages:
     packages: {
       nebula: {
-        typingsFormat: {
+        prototypes: {
+          typingsFormat: {
             useExact: false
+          }
         }
       },
       akash: {
@@ -161,14 +165,19 @@ telescope({
             enabled: true;
             includeCosmosDefaultTypes: false;
         },
-        typingsFormat: {
-            useExact: false
+        prototypes: {
+          typingsFormat: {
+              useExact: false
+          }
         }
       }
     }
   }
 }).then(()=>{
   console.log('✨ all done!');
+}).catch(e=>{
+  console.error(e);
+  process.exit(1);
 })
 ```
 
@@ -189,13 +198,16 @@ telescope({
 | `aminoEncoding.exceptions`     | set specific aminoType name exceptions                          | see code   |
 | `aminoEncoding.typeUrlToAmino` | create functions for aminoType name exceptions                  | `undefined`|
 
-### Global Options
+### Prototypes Options
 
-| option                         | description                                                     | defaults   |
-| ------------------------------ | --------------------------------------------------------------  | ---------- |
-| `includePackageVar`            | export a `protoPackage` variable to indicate package name       | `false`    |
-| `excluded.packages`            | exclude a set of packages from transpilation                    | `undefined`|
-| `excluded.protos`              | exclude a set of proto files from transpilation                 | `undefined`|
+| option                                    | description                                                     | defaults   |
+| ----------------------------------------- | --------------------------------------------------------------  | ---------- |
+| `prototypes.includePackageVar`            | export a `protoPackage` variable to indicate package name       | `false`    |
+| `prototypes.excluded.packages`            | exclude a set of packages from transpilation                    | `undefined`|
+| `prototypes.excluded.protos`              | exclude a set of proto files from transpilation                 | `undefined`|
+| `prototypes.defaultFieldOptionality`      | boolean value representing default optionality of field         | `false`|
+| `prototypes.useOptionalNullable`          | use `(gogoproto.nullable)` values in determining optionality    | `true`|
+| `prototypes.defaultFieldOptionality`      | boolean value representing default optionality of field         | `false`|
 
 ### LCD Client Options
 
@@ -227,17 +239,17 @@ See [RPC Clients](#rpc-clients) for more info.
 
 ### Typings and Formating
 
-| option                         | description                                                     | defaults  | 
-| ------------------------------ | --------------------------------------------------------------  | --------- |
-| `typingsFormat.useExact`       | defaults to false, but if enabled uses the `Exact` TS type      | `false`   |
-| `typingsFormat.timestamp`      | use either `date` or `timestamp` for `Timestamp` proto type     | "date"    |
-| `typingsFormat.duration`       | use either `duration` or `string` for `Duration` proto type     | "duration"|
+| option                                    | description                                                     | defaults  | 
+| ----------------------------------------- | --------------------------------------------------------------  | --------- |
+| `prototypes.typingsFormat.useExact`       | defaults to false, but if enabled uses the `Exact` TS type      | `false`   |
+| `prototypes.typingsFormat.timestamp`      | use either `date` or `timestamp` for `Timestamp` proto type     | "date"    |
+| `prototypes.typingsFormat.duration`       | use either `duration` or `string` for `Duration` proto type     | "duration"|
 
 ## Types
 
 ### Timestamp
 
-The representation of `google.protobuf.Timestamp` is configurable by the `typingsFormat.timestamp` option.
+The representation of `google.protobuf.Timestamp` is configurable by the `prototypes.typingsFormat.timestamp` option.
 
 | Protobuf type    | Default/`date='date'` | `date='timestamp'`                      |
 | --------------------------- | ---------------------- | ----------------------------------|
@@ -248,7 +260,7 @@ TODO
 
 ### Duration
 
-The representation of `google.protobuf.Duration` is configurable by the `typingsFormat.duration` option.
+The representation of `google.protobuf.Duration` is configurable by the `prototypes.typingsFormat.duration` option.
 
 | Protobuf type    | Default/`duration='duration'` | `duration='string'`                      |  |
 | --------------------------- | ---------------------- | ------------------------------------ | ---------------- |

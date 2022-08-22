@@ -12,8 +12,8 @@ import * as t from '@babel/types';
 import generate from '@babel/generator';
 
 const isExcluded = (builder: TelescopeBuilder, ref: ProtoRef) => {
-    return builder.options.excluded?.protos?.includes(ref.filename) ||
-        builder.options.excluded?.packages?.includes(ref.proto.package);
+    return builder.options.prototypes?.excluded?.protos?.includes(ref.filename) ||
+        builder.options.prototypes?.excluded?.packages?.includes(ref.proto.package);
 };
 
 export const plugin = (

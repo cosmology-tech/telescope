@@ -36,7 +36,7 @@ export const aminoInterface = {
         );
     },
     duration(args: RenderAminoField) {
-        const durationFormat = args.context.pluginValue('typingsFormat.duration');
+        const durationFormat = args.context.pluginValue('prototypes.typingsFormat.duration');
         switch (durationFormat) {
             case 'string':
                 return t.tsPropertySignature(
@@ -49,7 +49,7 @@ export const aminoInterface = {
         }
     },
     timestamp(args: RenderAminoField) {
-        const timestampFormat = args.context.pluginValue('typingsFormat.timestamp');
+        const timestampFormat = args.context.pluginValue('prototypes.typingsFormat.timestamp');
         switch (timestampFormat) {
             case 'date':
             // TODO check is date is Date for amino?
@@ -83,7 +83,7 @@ export const aminoInterface = {
         const oneOfs = getOneOfs(Type);
         const properties = protoFieldsToArray(Type).map(field => {
             const isOneOf = oneOfs.includes(field.name);
-            const isOptional = getFieldOptionality(field, isOneOf);
+            const isOptional = getFieldOptionality(context, field, isOneOf);
             // TODO how to handle isOptional from parent to child...
             if (parentField.import) currentProtoPath = parentField.import;
             return renderAminoField({
@@ -112,7 +112,7 @@ export const aminoInterface = {
         const oneOfs = getOneOfs(Type);
         const properties = protoFieldsToArray(Type).map(field => {
             const isOneOf = oneOfs.includes(field.name);
-            const isOptional = getFieldOptionality(field, isOneOf);
+            const isOptional = getFieldOptionality(context, field, isOneOf);
 
             if (parentField.import) currentProtoPath = parentField.import;
             return renderAminoField({

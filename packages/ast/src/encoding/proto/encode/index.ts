@@ -27,7 +27,7 @@ export const encodeMethodFields = (context: ProtoParseContext, name: string, pro
         };
 
         const isOneOf = oneOfs.includes(fieldName);
-        const isOptional = getFieldOptionality(field, isOneOf);
+        const isOptional = getFieldOptionality(context, field, isOneOf);
 
         const args: EncodeMethod = {
             typeName: name,

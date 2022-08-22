@@ -226,7 +226,7 @@ export const encode = {
     timestamp(args: EncodeMethod) {
         const prop = args.field.name;
         const num = getTagNumber(args.field);
-        const timestampFormat = args.context.pluginValue('typingsFormat.timestamp')
+        const timestampFormat = args.context.pluginValue('prototypes.typingsFormat.timestamp')
         switch (timestampFormat) {
             case 'timestamp':
                 return types.timestamp(num, prop);
@@ -240,7 +240,7 @@ export const encode = {
     duration(args: EncodeMethod) {
         const prop = args.field.name;
         const num = getTagNumber(args.field);
-        const durationFormat = args.context.pluginValue('typingsFormat.duration');
+        const durationFormat = args.context.pluginValue('prototypes.typingsFormat.duration');
         switch (durationFormat) {
             case 'string':
                 args.context.addUtil('toDuration');
