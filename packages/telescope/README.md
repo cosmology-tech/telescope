@@ -174,6 +174,12 @@ telescope({
 
 ## Options
 
+### Bundle
+
+| option                         | description                                                     | defaults   |
+| ------------------------------ | --------------------------------------------------------------  | ---------- |
+| `bundle.enabled`               | bundle all files into a scoped index file                       | `true`     |
+
 ### Amino Encoding
 
 | option                         | description                                                     | defaults   |

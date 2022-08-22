@@ -2,6 +2,9 @@ import { TSBuilderInput } from '@cosmwasm/ts-codegen';
 import { AminoExceptions } from "./aminos";
 interface TelescopeOpts {
     includePackageVar?: boolean;
+    bundle?: {
+        enabled: boolean;
+    };
     excluded?: {
         packages?: string[];
         protos?: string[];
