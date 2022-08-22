@@ -13,6 +13,10 @@ export const plugin = (
     builder: TelescopeBuilder
 ) => {
 
+    if (!builder.options.bundle.enabled) {
+        return;
+    }
+
     // finally, write one index file with all files, exported
     const indexFile = 'index.ts';
     const indexOutFile = join(builder.outPath, indexFile);
