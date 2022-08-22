@@ -169,6 +169,11 @@ export const getFieldOptionality = (
             field?.options?.['(gogoproto.nullable)']
         )
         ||
-        context.pluginValue('prototypes.defaultFieldOptionality');
+        (
+            // this would only happen if previous predicate is false,
+            // so lets ensure not to override required properties when gogoproto.nullable=false
+            !context.pluginValue('prototypes.useOptionalNullable') &&
+            context.pluginValue('prototypes.defaultFieldOptionality')
+        );
 };
 
