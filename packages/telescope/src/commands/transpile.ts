@@ -27,7 +27,7 @@ export default async (argv) => {
       type: 'path',
       name: 'outPath',
       message: 'where is the output directory?',
-      default: './src/proto'
+      default: './src/codegen'
     },
     {
       type: 'confirm',

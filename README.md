@@ -106,7 +106,7 @@ yarn install
 yarn buidl
 ```
 
-Now you should have code inside of your `./src` folder, ready for publshing via `npm publish`. Or, if you used the defaults, you can start developing and your code can be imported from `./src/proto`;
+Now you should have code inside of your `./src` folder, ready for publshing via `npm publish`. Or, if you used the defaults, you can start developing and your code can be imported from `./src/codegen`;
 
 # Usage
 ## Programatic Usage
@@ -124,7 +124,7 @@ import { join } from 'path';
 import telescope from '@osmonauts/telescope';
 
 const protoDirs = [join(__dirname, '/../proto')];
-const outPath = join(__dirname, '../src/proto');
+const outPath = join(__dirname, '../src/codegen');
 
 telescope({
   protoDirs,
