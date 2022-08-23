@@ -2,7 +2,7 @@ import * as t from '@babel/types';
 import { ProtoService, ProtoServiceMethod, ProtoServiceMethodInfo } from '@osmonauts/types';
 import { snake } from 'case';
 import { GenericParseContext } from '../../../encoding';
-import { classMethod, identifier } from '../../../utils';
+import { callExpression, classMethod, identifier } from '../../../utils';
 
 const returnReponseType = (ResponseType: string) => {
     return t.tsTypeAnnotation(
@@ -22,7 +22,10 @@ const returnReponseType = (ResponseType: string) => {
 const firstLower = (s: string) => s = s.charAt(0).toLowerCase() + s.slice(1);
 const firstUpper = (s: string) => s = s.charAt(0).toUpperCase() + s.slice(1);
 
-const returnAwaitRequest = (hasOptions: boolean = false) => {
+const returnAwaitRequest = (
+    responseType: string,
+    hasOptions: boolean = false
+) => {
     const args = [
         t.identifier('endpoint')
     ];
@@ -31,12 +34,17 @@ const returnAwaitRequest = (hasOptions: boolean = false) => {
     }
     return t.returnStatement(
         t.awaitExpression(
-            t.callExpression(
+            callExpression(
                 t.memberExpression(
                     t.thisExpression(),
                     t.identifier('request')
                 ),
-                args
+                args,
+                t.tsTypeParameterInstantiation([
+                    t.tsTypeReference(
+                        t.identifier(responseType)
+                    )
+                ])
             )
         )
     );
@@ -259,7 +267,7 @@ const requestMethod = (
             ),
 
             // return 
-            returnAwaitRequest(serviceMethod.info.queryParams.length > 0)
+            returnAwaitRequest(serviceMethod.responseType, serviceMethod.info.queryParams.length > 0)
         ]),
         returnReponseType(serviceMethod.responseType),
         makeComment(comment),
