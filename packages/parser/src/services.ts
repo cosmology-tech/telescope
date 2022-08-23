@@ -15,6 +15,7 @@ export const parseServiceUrl = (
     };
 };
 
+// this basically takes in a ServiceMethod object! not any!
 export const parseService = (
     obj: any
 ) => {
@@ -26,7 +27,8 @@ export const parseService = (
     const queryParams = allParams.filter(param => !pathInfo.pathParams.includes(param));
     return {
         ...pathInfo,
-        queryParams
+        queryParams,
+        casing: {}
     };
 };
 

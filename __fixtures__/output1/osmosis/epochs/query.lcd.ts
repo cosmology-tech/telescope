@@ -11,7 +11,7 @@ export class LCDQueryClient extends LCDClient {
   }
 
   /* EpochInfos provide running epochInfos */
-  async epochInfos(params: QueryEpochsInfoRequest): Promise<QueryEpochsInfoResponse> {
+  async epochInfos(_params: QueryEpochsInfoRequest = {}): Promise<QueryEpochsInfoResponse> {
     const endpoint = `osmosis/epochs/v1beta1/epochs`;
     return await this.request<QueryEpochsInfoResponse>(endpoint);
   }

@@ -14,7 +14,7 @@ export class LCDQueryClient extends LCDClient {
   /* AllProvidersAttributes queries all providers
   buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
   buf:lint:ignore RPC_RESPONSE_STANDARD_NAME */
-  async allProvidersAttributes(params: QueryAllProvidersAttributesRequest): Promise<QueryProvidersResponse> {
+  async allProvidersAttributes(params: QueryAllProvidersAttributesRequest = {}): Promise<QueryProvidersResponse> {
     const options: any = {
       params: {}
     };

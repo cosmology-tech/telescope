@@ -45,7 +45,7 @@ export class LCDQueryClient extends LCDClient {
       options.params.pagination = params.pagination;
     }
 
-    const endpoint = `cosmwasm/wasm/v1/code/${params.code_id}/contracts`;
+    const endpoint = `cosmwasm/wasm/v1/code/${params.codeId}/contracts`;
     return await this.request<QueryContractsByCodeResponse>(endpoint, options);
   }
 
@@ -73,7 +73,7 @@ export class LCDQueryClient extends LCDClient {
       options.params.query_data = params.queryData;
     }
 
-    const endpoint = `wasm/v1/contract/${params.address}raw/${params.query_data}`;
+    const endpoint = `wasm/v1/contract/${params.address}raw/${params.queryData}`;
     return await this.request<QueryRawContractStateResponse>(endpoint, options);
   }
 
@@ -87,7 +87,7 @@ export class LCDQueryClient extends LCDClient {
       options.params.query_data = params.queryData;
     }
 
-    const endpoint = `wasm/v1/contract/${params.address}smart/${params.query_data}`;
+    const endpoint = `wasm/v1/contract/${params.address}smart/${params.queryData}`;
     return await this.request<QuerySmartContractStateResponse>(endpoint, options);
   }
 
@@ -101,12 +101,12 @@ export class LCDQueryClient extends LCDClient {
       options.params.code_id = params.codeId;
     }
 
-    const endpoint = `cosmwasm/wasm/v1/code/${params.code_id}`;
+    const endpoint = `cosmwasm/wasm/v1/code/${params.codeId}`;
     return await this.request<QueryCodeResponse>(endpoint, options);
   }
 
   /* Codes gets the metadata for all stored wasm codes */
-  async codes(params: QueryCodesRequest): Promise<QueryCodesResponse> {
+  async codes(params: QueryCodesRequest = {}): Promise<QueryCodesResponse> {
     const options: any = {
       params: {}
     };
@@ -120,7 +120,7 @@ export class LCDQueryClient extends LCDClient {
   }
 
   /* PinnedCodes gets the pinned code ids */
-  async pinnedCodes(params: QueryPinnedCodesRequest): Promise<QueryPinnedCodesResponse> {
+  async pinnedCodes(params: QueryPinnedCodesRequest = {}): Promise<QueryPinnedCodesResponse> {
     const options: any = {
       params: {}
     };

@@ -170,9 +170,10 @@ export const makeTemplateTag = (info: ProtoServiceMethodInfo) => {
     // Number of TemplateLiteral quasis should be exactly one more than the number of expressions
 
     const pathParams = info.pathParams.map(param => {
+        const name = info.casing?.[param] ? info.casing[param] : param;
         return t.memberExpression(
             t.identifier('params'),
-            t.identifier(param)
+            t.identifier(name)
         );
     });
 
@@ -225,28 +226,52 @@ const requestMethod = (
 
     // parse field types
     Object.entries(serviceMethod.fields ?? {})
-        .map(([key, value]) => {
+        .forEach(([key, value]) => {
             switch (value.parsedType.type) {
                 case 'Type':
-                    // this gets the import for us
+                    // this gets the import for us and loads them into ctx
                     // if later we need to get subtypes, we have it all w/ctx
                     context.getTypeName(value);
                 case 'native':
             }
         });
 
+    const fieldNames = Object.keys(serviceMethod.fields ?? {})
+    const hasParams = fieldNames.length > 0;
+    const paramName = hasParams ? 'params' : '_params';
+    let methodArgs: t.Identifier | t.AssignmentPattern = identifier(
+        paramName,
+        t.tsTypeAnnotation(
+            t.tsTypeReference(
+                t.identifier(serviceMethod.requestType)
+            )
+        )
+    );
+
+    // if no params, then let's default to empty object for cleaner API
+    if (!hasParams) {
+        methodArgs = t.assignmentPattern(
+            methodArgs,
+            t.objectExpression([])
+        )
+    } else if (hasParams && fieldNames.length === 1 && fieldNames.includes('pagination')) {
+        // if only argument "required" is pagination
+        // also default to empty
+        methodArgs = t.assignmentPattern(
+            methodArgs,
+            t.objectExpression([])
+            // IF THIS GIVES TROUBLE
+            // MAKE EMPTY pagination object
+        )
+    }
+
+
+
     return classMethod(
         'method',
         t.identifier(methodName),
         [
-            identifier(
-                'params',
-                t.tsTypeAnnotation(
-                    t.tsTypeReference(
-                        t.identifier(serviceMethod.requestType)
-                    )
-                )
-            )
+            methodArgs
         ],
         t.blockStatement([
 

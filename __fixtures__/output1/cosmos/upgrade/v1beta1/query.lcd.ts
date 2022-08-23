@@ -11,7 +11,7 @@ export class LCDQueryClient extends LCDClient {
   }
 
   /* CurrentPlan queries the current upgrade plan. */
-  async currentPlan(params: QueryCurrentPlanRequest): Promise<QueryCurrentPlanResponse> {
+  async currentPlan(_params: QueryCurrentPlanRequest = {}): Promise<QueryCurrentPlanResponse> {
     const endpoint = `cosmos/upgrade/v1beta1/current_plan`;
     return await this.request<QueryCurrentPlanResponse>(endpoint);
   }
@@ -37,7 +37,7 @@ export class LCDQueryClient extends LCDClient {
       options.params.last_height = params.lastHeight;
     }
 
-    const endpoint = `cosmos/upgrade/v1beta1/upgraded_consensus_state/${params.last_height}`;
+    const endpoint = `cosmos/upgrade/v1beta1/upgraded_consensus_state/${params.lastHeight}`;
     return await this.request<QueryUpgradedConsensusStateResponse>(endpoint, options);
   }
 
@@ -58,7 +58,7 @@ export class LCDQueryClient extends LCDClient {
   }
 
   /* Returns the account with authority to conduct upgrades */
-  async authority(params: QueryAuthorityRequest): Promise<QueryAuthorityResponse> {
+  async authority(_params: QueryAuthorityRequest = {}): Promise<QueryAuthorityResponse> {
     const endpoint = `cosmos/upgrade/v1beta1/authority`;
     return await this.request<QueryAuthorityResponse>(endpoint);
   }

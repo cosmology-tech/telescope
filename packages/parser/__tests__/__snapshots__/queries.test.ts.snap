@@ -86,6 +86,12 @@ Object {
           },
         },
         "info": Object {
+          "casing": Object {
+            "poolId": "poolId",
+            "routes": "routes",
+            "sender": "sender",
+            "tokenIn": "tokenIn",
+          },
           "pathParams": Array [
             "poolId",
           ],
@@ -185,6 +191,12 @@ Object {
           },
         },
         "info": Object {
+          "casing": Object {
+            "poolId": "poolId",
+            "routes": "routes",
+            "sender": "sender",
+            "tokenOut": "tokenOut",
+          },
           "pathParams": Array [
             "poolId",
           ],
@@ -207,6 +219,7 @@ Object {
         "comment": null,
         "fields": Object {},
         "info": Object {
+          "casing": Object {},
           "pathParams": Array [],
           "queryParams": Array [],
           "url": "/osmosis/gamm/v1beta1/num_pools",
@@ -241,6 +254,9 @@ Object {
           },
         },
         "info": Object {
+          "casing": Object {
+            "poolId": "poolId",
+          },
           "pathParams": Array [
             "poolId",
           ],
@@ -277,6 +293,9 @@ Object {
           },
         },
         "info": Object {
+          "casing": Object {
+            "poolId": "poolId",
+          },
           "pathParams": Array [
             "poolId",
           ],
@@ -316,6 +335,9 @@ Object {
           },
         },
         "info": Object {
+          "casing": Object {
+            "pagination": "pagination",
+          },
           "pathParams": Array [],
           "queryParams": Array [
             "pagination",
@@ -387,6 +409,11 @@ a base denomination and a quote denomination.",
           },
         },
         "info": Object {
+          "casing": Object {
+            "base_asset_denom": "baseAssetDenom",
+            "poolId": "poolId",
+            "quote_asset_denom": "quoteAssetDenom",
+          },
           "pathParams": Array [
             "poolId",
           ],
@@ -408,6 +435,7 @@ a base denomination and a quote denomination.",
         "comment": null,
         "fields": Object {},
         "info": Object {
+          "casing": Object {},
           "pathParams": Array [],
           "queryParams": Array [],
           "url": "/osmosis/gamm/v1beta1/total_liquidity",
@@ -442,6 +470,9 @@ a base denomination and a quote denomination.",
           },
         },
         "info": Object {
+          "casing": Object {
+            "poolId": "poolId",
+          },
           "pathParams": Array [
             "poolId",
           ],
@@ -478,6 +509,9 @@ a base denomination and a quote denomination.",
           },
         },
         "info": Object {
+          "casing": Object {
+            "poolId": "poolId",
+          },
           "pathParams": Array [
             "poolId",
           ],

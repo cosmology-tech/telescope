@@ -13,13 +13,13 @@ export class LCDQueryClient extends LCDClient {
   }
 
   /* ModuleAccountBalance */
-  async moduleAccountBalance(params: QueryModuleAccountBalanceRequest): Promise<QueryModuleAccountBalanceResponse> {
+  async moduleAccountBalance(_params: QueryModuleAccountBalanceRequest = {}): Promise<QueryModuleAccountBalanceResponse> {
     const endpoint = `osmosis/claim/v1beta1/module_account_balance`;
     return await this.request<QueryModuleAccountBalanceResponse>(endpoint);
   }
 
   /* Params */
-  async params(params: QueryParamsRequest): Promise<QueryParamsResponse> {
+  async params(_params: QueryParamsRequest = {}): Promise<QueryParamsResponse> {
     const endpoint = `osmosis/claim/v1beta1/params`;
     return await this.request<QueryParamsResponse>(endpoint);
   }
