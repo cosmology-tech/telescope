@@ -14,6 +14,28 @@ import * as akashDeploymentV1beta2ServiceAmino from "./deployment/v1beta2/servic
 import * as akashMarketV1beta2ServiceAmino from "./market/v1beta2/service.amino";
 import * as akashProviderV1beta1ProviderAmino from "./provider/v1beta1/provider.amino";
 import * as akashProviderV1beta2ProviderAmino from "./provider/v1beta2/provider.amino";
+export const getSigningAkashClientOptions = ({
+  defaultTypes = defaultRegistryTypes
+}: {
+  defaultTypes?: ReadonlyArray<[string, GeneratedType]>;
+} = {}): {
+  registry: Registry;
+  aminoTypes: AminoTypes;
+} => {
+  const registry = new Registry([...defaultTypes, ...akashAuditV1beta1AuditRegistry.registry, ...akashAuditV1beta2AuditRegistry.registry, ...akashCertV1beta2CertRegistry.registry, ...akashDeploymentV1beta2ServiceRegistry.registry, ...akashMarketV1beta2ServiceRegistry.registry, ...akashProviderV1beta1ProviderRegistry.registry, ...akashProviderV1beta2ProviderRegistry.registry]);
+  const aminoTypes = new AminoTypes({ ...akashAuditV1beta1AuditAmino.AminoConverter,
+    ...akashAuditV1beta2AuditAmino.AminoConverter,
+    ...akashCertV1beta2CertAmino.AminoConverter,
+    ...akashDeploymentV1beta2ServiceAmino.AminoConverter,
+    ...akashMarketV1beta2ServiceAmino.AminoConverter,
+    ...akashProviderV1beta1ProviderAmino.AminoConverter,
+    ...akashProviderV1beta2ProviderAmino.AminoConverter
+  });
+  return {
+    registry,
+    aminoTypes
+  };
+};
 export const getSigningAkashClient = async ({
   rpcEndpoint,
   signer,
@@ -23,14 +45,11 @@ export const getSigningAkashClient = async ({
   signer: OfflineSigner;
   defaultTypes?: ReadonlyArray<[string, GeneratedType]>;
 }) => {
-  const registry = new Registry([...defaultTypes, ...akashAuditV1beta1AuditRegistry.registry, ...akashAuditV1beta2AuditRegistry.registry, ...akashCertV1beta2CertRegistry.registry, ...akashDeploymentV1beta2ServiceRegistry.registry, ...akashMarketV1beta2ServiceRegistry.registry, ...akashProviderV1beta1ProviderRegistry.registry, ...akashProviderV1beta2ProviderRegistry.registry]);
-  const aminoTypes = new AminoTypes({ ...akashAuditV1beta1AuditAmino.AminoConverter,
-    ...akashAuditV1beta2AuditAmino.AminoConverter,
-    ...akashCertV1beta2CertAmino.AminoConverter,
-    ...akashDeploymentV1beta2ServiceAmino.AminoConverter,
-    ...akashMarketV1beta2ServiceAmino.AminoConverter,
-    ...akashProviderV1beta1ProviderAmino.AminoConverter,
-    ...akashProviderV1beta2ProviderAmino.AminoConverter
+  const {
+    registry,
+    aminoTypes
+  } = getSigningAkashClientOptions({
+    defaultTypes
   });
   const client = await SigningStargateClient.connectWithSigner(rpcEndpoint, signer, {
     registry,
