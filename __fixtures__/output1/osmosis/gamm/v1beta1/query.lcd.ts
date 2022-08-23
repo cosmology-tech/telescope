@@ -14,7 +14,7 @@ export class LCDQueryClient extends LCDClient {
   }
 
   /* Pools */
-  async pools(params: QueryPoolsRequest): Promise<QueryPoolsResponse> {
+  async pools(params: QueryPoolsRequest = {}): Promise<QueryPoolsResponse> {
     const options: any = {
       params: {}
     };
@@ -28,13 +28,13 @@ export class LCDQueryClient extends LCDClient {
   }
 
   /* NumPools */
-  async numPools(params: QueryNumPoolsRequest): Promise<QueryNumPoolsResponse> {
+  async numPools(_params: QueryNumPoolsRequest = {}): Promise<QueryNumPoolsResponse> {
     const endpoint = `osmosis/gamm/v1beta1/num_pools`;
     return await this.request<QueryNumPoolsResponse>(endpoint);
   }
 
   /* TotalLiquidity */
-  async totalLiquidity(params: QueryTotalLiquidityRequest): Promise<QueryTotalLiquidityResponse> {
+  async totalLiquidity(_params: QueryTotalLiquidityRequest = {}): Promise<QueryTotalLiquidityResponse> {
     const endpoint = `osmosis/gamm/v1beta1/total_liquidity`;
     return await this.request<QueryTotalLiquidityResponse>(endpoint);
   }

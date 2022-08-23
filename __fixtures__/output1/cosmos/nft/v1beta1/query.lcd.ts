@@ -21,7 +21,7 @@ export class LCDQueryClient extends LCDClient {
       options.params.class_id = params.classId;
     }
 
-    const endpoint = `cosmos/nft/v1beta1/balance/${params.owner}/${params.class_id}`;
+    const endpoint = `cosmos/nft/v1beta1/balance/${params.owner}/${params.classId}`;
     return await this.request<QueryBalanceResponse>(endpoint, options);
   }
 
@@ -35,7 +35,7 @@ export class LCDQueryClient extends LCDClient {
       options.params.class_id = params.classId;
     }
 
-    const endpoint = `cosmos/nft/v1beta1/owner/${params.class_id}/${params.id}`;
+    const endpoint = `cosmos/nft/v1beta1/owner/${params.classId}/${params.id}`;
     return await this.request<QueryOwnerResponse>(endpoint, options);
   }
 
@@ -49,7 +49,7 @@ export class LCDQueryClient extends LCDClient {
       options.params.class_id = params.classId;
     }
 
-    const endpoint = `cosmos/nft/v1beta1/supply/${params.class_id}`;
+    const endpoint = `cosmos/nft/v1beta1/supply/${params.classId}`;
     return await this.request<QuerySupplyResponse>(endpoint, options);
   }
 
@@ -86,7 +86,7 @@ export class LCDQueryClient extends LCDClient {
       options.params.class_id = params.classId;
     }
 
-    const endpoint = `cosmos/nft/v1beta1/nfts/${params.class_id}/${params.id}`;
+    const endpoint = `cosmos/nft/v1beta1/nfts/${params.classId}/${params.id}`;
     return await this.request<QueryNFTResponse>(endpoint, options);
   }
 
@@ -100,12 +100,12 @@ export class LCDQueryClient extends LCDClient {
       options.params.class_id = params.classId;
     }
 
-    const endpoint = `cosmos/nft/v1beta1/classes/${params.class_id}`;
+    const endpoint = `cosmos/nft/v1beta1/classes/${params.classId}`;
     return await this.request<QueryClassResponse>(endpoint, options);
   }
 
   /* Classes queries all NFT classes */
-  async classes(params: QueryClassesRequest): Promise<QueryClassesResponse> {
+  async classes(params: QueryClassesRequest = {}): Promise<QueryClassesResponse> {
     const options: any = {
       params: {}
     };

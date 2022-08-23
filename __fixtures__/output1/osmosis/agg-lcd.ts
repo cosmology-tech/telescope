@@ -59,7 +59,7 @@ export class QueryClient extends LCDClient {
   }
 
   /* TotalSupply queries the total supply of all coins. */
-  async totalSupply(params: QueryTotalSupplyRequest): Promise<QueryTotalSupplyResponse> {
+  async totalSupply(params: QueryTotalSupplyRequest = {}): Promise<QueryTotalSupplyResponse> {
     const options: any = {
       params: {}
     };
@@ -87,7 +87,7 @@ export class QueryClient extends LCDClient {
   }
 
   /* Params queries the parameters of x/bank module. */
-  async params(params: QueryParamsRequest): Promise<QueryParamsResponse> {
+  async params(_params: QueryParamsRequest = {}): Promise<QueryParamsResponse> {
     const endpoint = `cosmos/bank/v1beta1/params`;
     return await this.request<QueryParamsResponse>(endpoint);
   }
@@ -100,7 +100,7 @@ export class QueryClient extends LCDClient {
 
   /* DenomsMetadata queries the client metadata for all registered coin
   denominations. */
-  async denomsMetadata(params: QueryDenomsMetadataRequest): Promise<QueryDenomsMetadataResponse> {
+  async denomsMetadata(params: QueryDenomsMetadataRequest = {}): Promise<QueryDenomsMetadataResponse> {
     const options: any = {
       params: {}
     };
@@ -129,7 +129,7 @@ export class QueryClient extends LCDClient {
   }
 
   /* Pools */
-  async pools(params: QueryPoolsRequest): Promise<QueryPoolsResponse> {
+  async pools(params: QueryPoolsRequest = {}): Promise<QueryPoolsResponse> {
     const options: any = {
       params: {}
     };
@@ -143,13 +143,13 @@ export class QueryClient extends LCDClient {
   }
 
   /* NumPools */
-  async numPools(params: QueryNumPoolsRequest): Promise<QueryNumPoolsResponse> {
+  async numPools(_params: QueryNumPoolsRequest = {}): Promise<QueryNumPoolsResponse> {
     const endpoint = `osmosis/gamm/v1beta1/num_pools`;
     return await this.request<QueryNumPoolsResponse>(endpoint);
   }
 
   /* TotalLiquidity */
-  async totalLiquidity(params: QueryTotalLiquidityRequest): Promise<QueryTotalLiquidityResponse> {
+  async totalLiquidity(_params: QueryTotalLiquidityRequest = {}): Promise<QueryTotalLiquidityResponse> {
     const endpoint = `osmosis/gamm/v1beta1/total_liquidity`;
     return await this.request<QueryTotalLiquidityResponse>(endpoint);
   }

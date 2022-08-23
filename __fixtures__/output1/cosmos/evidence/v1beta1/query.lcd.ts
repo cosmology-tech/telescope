@@ -21,12 +21,12 @@ export class LCDQueryClient extends LCDClient {
       options.params.evidence_hash = params.evidenceHash;
     }
 
-    const endpoint = `cosmos/evidence/v1beta1/evidence/${params.evidence_hash}`;
+    const endpoint = `cosmos/evidence/v1beta1/evidence/${params.evidenceHash}`;
     return await this.request<QueryEvidenceResponse>(endpoint, options);
   }
 
   /* AllEvidence queries all evidence. */
-  async allEvidence(params: QueryAllEvidenceRequest): Promise<QueryAllEvidenceResponse> {
+  async allEvidence(params: QueryAllEvidenceRequest = {}): Promise<QueryAllEvidenceResponse> {
     const options: any = {
       params: {}
     };

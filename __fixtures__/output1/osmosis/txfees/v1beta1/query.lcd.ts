@@ -13,7 +13,7 @@ export class LCDQueryClient extends LCDClient {
   /* FeeTokens returns a list of all the whitelisted fee tokens and their
   corresponding pools It does not include the BaseDenom, which has its own
   query endpoint */
-  async feeTokens(params: QueryFeeTokensRequest): Promise<QueryFeeTokensResponse> {
+  async feeTokens(_params: QueryFeeTokensRequest = {}): Promise<QueryFeeTokensResponse> {
     const endpoint = `osmosis/txfees/v1beta1/fee_tokens`;
     return await this.request<QueryFeeTokensResponse>(endpoint);
   }
@@ -39,7 +39,7 @@ export class LCDQueryClient extends LCDClient {
   }
 
   /* BaseDenom */
-  async baseDenom(params: QueryBaseDenomRequest): Promise<QueryBaseDenomResponse> {
+  async baseDenom(_params: QueryBaseDenomRequest = {}): Promise<QueryBaseDenomResponse> {
     const endpoint = `osmosis/txfees/v1beta1/base_denom`;
     return await this.request<QueryBaseDenomResponse>(endpoint);
   }

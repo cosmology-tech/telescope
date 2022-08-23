@@ -14,13 +14,13 @@ export class LCDQueryClient extends LCDClient {
   }
 
   /* Return full balance of the module */
-  async moduleBalance(params: ModuleBalanceRequest): Promise<ModuleBalanceResponse> {
+  async moduleBalance(_params: ModuleBalanceRequest = {}): Promise<ModuleBalanceResponse> {
     const endpoint = `osmosis/lockup/v1beta1/module_balance`;
     return await this.request<ModuleBalanceResponse>(endpoint);
   }
 
   /* Return locked balance of the module */
-  async moduleLockedAmount(params: ModuleLockedAmountRequest): Promise<ModuleLockedAmountResponse> {
+  async moduleLockedAmount(_params: ModuleLockedAmountRequest = {}): Promise<ModuleLockedAmountResponse> {
     const endpoint = `osmosis/lockup/v1beta1/module_locked_amount`;
     return await this.request<ModuleLockedAmountResponse>(endpoint);
   }
@@ -132,7 +132,7 @@ export class LCDQueryClient extends LCDClient {
       options.params.lock_id = params.lockId;
     }
 
-    const endpoint = `osmosis/lockup/v1beta1/locked_by_id/${params.lock_id}`;
+    const endpoint = `osmosis/lockup/v1beta1/locked_by_id/${params.lockId}`;
     return await this.request<LockedResponse>(endpoint, options);
   }
 
@@ -146,7 +146,7 @@ export class LCDQueryClient extends LCDClient {
       options.params.lock_id = params.lockId;
     }
 
-    const endpoint = `osmosis/lockup/v1beta1/synthetic_lockups_by_lock_id/${params.lock_id}`;
+    const endpoint = `osmosis/lockup/v1beta1/synthetic_lockups_by_lock_id/${params.lockId}`;
     return await this.request<SyntheticLockupsByLockupIDResponse>(endpoint, options);
   }
 

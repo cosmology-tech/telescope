@@ -11,7 +11,7 @@ export class LCDQueryClient extends LCDClient {
   }
 
   /* Params retrieves the total set of recovery parameters. */
-  async params(params: QueryParamsRequest): Promise<QueryParamsResponse> {
+  async params(_params: QueryParamsRequest = {}): Promise<QueryParamsResponse> {
     const endpoint = `evmos/recovery/v1/params`;
     return await this.request<QueryParamsResponse>(endpoint);
   }

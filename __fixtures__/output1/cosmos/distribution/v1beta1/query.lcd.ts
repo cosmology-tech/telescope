@@ -13,7 +13,7 @@ export class LCDQueryClient extends LCDClient {
   }
 
   /* Params queries params of the distribution module. */
-  async params(params: QueryParamsRequest): Promise<QueryParamsResponse> {
+  async params(_params: QueryParamsRequest = {}): Promise<QueryParamsResponse> {
     const endpoint = `cosmos/distribution/v1beta1/params`;
     return await this.request<QueryParamsResponse>(endpoint);
   }
@@ -28,7 +28,7 @@ export class LCDQueryClient extends LCDClient {
       options.params.validator_address = params.validatorAddress;
     }
 
-    const endpoint = `cosmos/distribution/v1beta1/validators/${params.validator_address}/outstanding_rewards`;
+    const endpoint = `cosmos/distribution/v1beta1/validators/${params.validatorAddress}/outstanding_rewards`;
     return await this.request<QueryValidatorOutstandingRewardsResponse>(endpoint, options);
   }
 
@@ -42,7 +42,7 @@ export class LCDQueryClient extends LCDClient {
       options.params.validator_address = params.validatorAddress;
     }
 
-    const endpoint = `cosmos/distribution/v1beta1/validators/${params.validator_address}/commission`;
+    const endpoint = `cosmos/distribution/v1beta1/validators/${params.validatorAddress}/commission`;
     return await this.request<QueryValidatorCommissionResponse>(endpoint, options);
   }
 
@@ -68,7 +68,7 @@ export class LCDQueryClient extends LCDClient {
       options.params.pagination = params.pagination;
     }
 
-    const endpoint = `cosmos/distribution/v1beta1/validators/${params.validator_address}/slashes`;
+    const endpoint = `cosmos/distribution/v1beta1/validators/${params.validatorAddress}/slashes`;
     return await this.request<QueryValidatorSlashesResponse>(endpoint, options);
   }
 
@@ -86,7 +86,7 @@ export class LCDQueryClient extends LCDClient {
       options.params.validator_address = params.validatorAddress;
     }
 
-    const endpoint = `cosmos/distribution/v1beta1/delegators/${params.delegator_address}rewards/${params.validator_address}`;
+    const endpoint = `cosmos/distribution/v1beta1/delegators/${params.delegatorAddress}rewards/${params.validatorAddress}`;
     return await this.request<QueryDelegationRewardsResponse>(endpoint, options);
   }
 
@@ -101,7 +101,7 @@ export class LCDQueryClient extends LCDClient {
       options.params.delegator_address = params.delegatorAddress;
     }
 
-    const endpoint = `cosmos/distribution/v1beta1/delegators/${params.delegator_address}/rewards`;
+    const endpoint = `cosmos/distribution/v1beta1/delegators/${params.delegatorAddress}/rewards`;
     return await this.request<QueryDelegationTotalRewardsResponse>(endpoint, options);
   }
 
@@ -115,7 +115,7 @@ export class LCDQueryClient extends LCDClient {
       options.params.delegator_address = params.delegatorAddress;
     }
 
-    const endpoint = `cosmos/distribution/v1beta1/delegators/${params.delegator_address}/validators`;
+    const endpoint = `cosmos/distribution/v1beta1/delegators/${params.delegatorAddress}/validators`;
     return await this.request<QueryDelegatorValidatorsResponse>(endpoint, options);
   }
 
@@ -129,12 +129,12 @@ export class LCDQueryClient extends LCDClient {
       options.params.delegator_address = params.delegatorAddress;
     }
 
-    const endpoint = `cosmos/distribution/v1beta1/delegators/${params.delegator_address}/withdraw_address`;
+    const endpoint = `cosmos/distribution/v1beta1/delegators/${params.delegatorAddress}/withdraw_address`;
     return await this.request<QueryDelegatorWithdrawAddressResponse>(endpoint, options);
   }
 
   /* CommunityPool queries the community pool coins. */
-  async communityPool(params: QueryCommunityPoolRequest): Promise<QueryCommunityPoolResponse> {
+  async communityPool(_params: QueryCommunityPoolRequest = {}): Promise<QueryCommunityPoolResponse> {
     const endpoint = `cosmos/distribution/v1beta1/community_pool`;
     return await this.request<QueryCommunityPoolResponse>(endpoint);
   }

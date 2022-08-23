@@ -30,7 +30,7 @@ export class LCDQueryClient extends LCDClient {
   }
 
   /* Subspaces queries for all registered subspaces and all keys for a subspace. */
-  async subspaces(params: QuerySubspacesRequest): Promise<QuerySubspacesResponse> {
+  async subspaces(_params: QuerySubspacesRequest = {}): Promise<QuerySubspacesResponse> {
     const endpoint = `cosmos/params/v1beta1/subspaces`;
     return await this.request<QuerySubspacesResponse>(endpoint);
   }

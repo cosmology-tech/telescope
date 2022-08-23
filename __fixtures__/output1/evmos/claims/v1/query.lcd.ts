@@ -14,19 +14,19 @@ export class LCDQueryClient extends LCDClient {
   }
 
   /* TotalUnclaimed queries the total unclaimed tokens from the airdrop */
-  async totalUnclaimed(params: QueryTotalUnclaimedRequest): Promise<QueryTotalUnclaimedResponse> {
+  async totalUnclaimed(_params: QueryTotalUnclaimedRequest = {}): Promise<QueryTotalUnclaimedResponse> {
     const endpoint = `evmos/claims/v1/total_unclaimed`;
     return await this.request<QueryTotalUnclaimedResponse>(endpoint);
   }
 
   /* Params returns the claims module parameters */
-  async params(params: QueryParamsRequest): Promise<QueryParamsResponse> {
+  async params(_params: QueryParamsRequest = {}): Promise<QueryParamsResponse> {
     const endpoint = `evmos/claims/v1/params`;
     return await this.request<QueryParamsResponse>(endpoint);
   }
 
   /* ClaimsRecords returns all claims records */
-  async claimsRecords(params: QueryClaimsRecordsRequest): Promise<QueryClaimsRecordsResponse> {
+  async claimsRecords(params: QueryClaimsRecordsRequest = {}): Promise<QueryClaimsRecordsResponse> {
     const options: any = {
       params: {}
     };
