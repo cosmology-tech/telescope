@@ -208,7 +208,7 @@ export class QueryClient extends LCDClient {
     }
 
     if (typeof params?.tokenIn !== "undefined") {
-      options.params.token_in = params.tokenIn;
+      options.params.tokenIn = params.tokenIn;
     }
 
     if (typeof params?.routes !== "undefined") {
@@ -234,7 +234,7 @@ export class QueryClient extends LCDClient {
     }
 
     if (typeof params?.tokenOut !== "undefined") {
-      options.params.token_out = params.tokenOut;
+      options.params.tokenOut = params.tokenOut;
     }
 
     const endpoint = `osmosis/gamm/v1beta1/${params.poolId}/estimate/swap_exact_amount_out`;

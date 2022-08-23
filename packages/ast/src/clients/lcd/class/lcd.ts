@@ -82,7 +82,6 @@ const setParamOption = (name: string, svc: ProtoServiceMethod) => {
 
     const queryParam = flippedCasing[name] ? flippedCasing[name] : name;
 
-    console.log(svc.info, name);
     return t.ifStatement(
         t.binaryExpression(
             '!==',
