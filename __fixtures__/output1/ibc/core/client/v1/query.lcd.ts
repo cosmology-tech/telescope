@@ -2,6 +2,7 @@ import { PageRequest, PageResponse } from "../../../../cosmos/base/query/v1beta1
 import { Any } from "../../../../google/protobuf/any";
 import { Height, IdentifiedClientState, ConsensusStateWithHeight, Params } from "./client";
 import { LCDClient } from "@osmonauts/lcd";
+import { setPaginationParams } from "@osmonauts/helpers";
 import { QueryClientStateRequest, QueryClientStateResponse, QueryClientStatesRequest, QueryClientStatesResponse, QueryConsensusStateRequest, QueryConsensusStateResponse, QueryConsensusStatesRequest, QueryConsensusStatesResponse, QueryClientStatusRequest, QueryClientStatusResponse, QueryClientParamsRequest, QueryClientParamsResponse, QueryUpgradedClientStateRequest, QueryUpgradedClientStateResponse, QueryUpgradedConsensusStateRequest, QueryUpgradedConsensusStateResponse } from "./query";
 export class LCDQueryClient extends LCDClient {
   constructor({
@@ -35,7 +36,7 @@ export class LCDQueryClient extends LCDClient {
     };
 
     if (typeof params?.pagination !== "undefined") {
-      options.params.pagination = params.pagination;
+      setPaginationParams(options, params.pagination);
     }
 
     const endpoint = `ibc/core/client/v1/client_states`;
@@ -81,7 +82,7 @@ export class LCDQueryClient extends LCDClient {
     }
 
     if (typeof params?.pagination !== "undefined") {
-      options.params.pagination = params.pagination;
+      setPaginationParams(options, params.pagination);
     }
 
     const endpoint = `ibc/core/client/v1/consensus_states/${params.clientId}`;

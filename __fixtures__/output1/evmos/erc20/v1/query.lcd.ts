@@ -2,6 +2,7 @@ import { PageRequest, PageResponse } from "../../../cosmos/base/query/v1beta1/pa
 import { TokenPair } from "./erc20";
 import { Params } from "./genesis";
 import { LCDClient } from "@osmonauts/lcd";
+import { setPaginationParams } from "@osmonauts/helpers";
 import { QueryTokenPairsRequest, QueryTokenPairsResponse, QueryTokenPairRequest, QueryTokenPairResponse, QueryParamsRequest, QueryParamsResponse } from "./query";
 export class LCDQueryClient extends LCDClient {
   constructor({
@@ -21,7 +22,7 @@ export class LCDQueryClient extends LCDClient {
     };
 
     if (typeof params?.pagination !== "undefined") {
-      options.params.pagination = params.pagination;
+      setPaginationParams(options, params.pagination);
     }
 
     const endpoint = `evmos/erc20/v1/token_pairs`;

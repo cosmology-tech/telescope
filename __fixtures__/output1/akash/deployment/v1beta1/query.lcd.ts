@@ -3,6 +3,7 @@ import { PageRequest, PageResponse } from "../../../cosmos/base/query/v1beta1/pa
 import { GroupID, Group } from "./group";
 import { Account } from "../../escrow/v1beta1/types";
 import { LCDClient } from "@osmonauts/lcd";
+import { setPaginationParams } from "@osmonauts/helpers";
 import { QueryDeploymentsRequest, QueryDeploymentsResponse, QueryDeploymentRequest, QueryDeploymentResponse, QueryGroupRequest, QueryGroupResponse } from "./query";
 export class LCDQueryClient extends LCDClient {
   constructor({
@@ -24,7 +25,7 @@ export class LCDQueryClient extends LCDClient {
     }
 
     if (typeof params?.pagination !== "undefined") {
-      options.params.pagination = params.pagination;
+      setPaginationParams(options, params.pagination);
     }
 
     const endpoint = `akash/deployment/v1beta1/deployments/list`;

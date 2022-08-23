@@ -1,6 +1,7 @@
 import { PageRequest, PageResponse } from "../../base/query/v1beta1/pagination";
 import { GroupInfo, GroupPolicyInfo, GroupMember, Proposal, Vote, TallyResult } from "./types";
 import { LCDClient } from "@osmonauts/lcd";
+import { setPaginationParams } from "@osmonauts/helpers";
 import { QueryGroupInfoRequest, QueryGroupInfoResponse, QueryGroupPolicyInfoRequest, QueryGroupPolicyInfoResponse, QueryGroupMembersRequest, QueryGroupMembersResponse, QueryGroupsByAdminRequest, QueryGroupsByAdminResponse, QueryGroupPoliciesByGroupRequest, QueryGroupPoliciesByGroupResponse, QueryGroupPoliciesByAdminRequest, QueryGroupPoliciesByAdminResponse, QueryProposalRequest, QueryProposalResponse, QueryProposalsByGroupPolicyRequest, QueryProposalsByGroupPolicyResponse, QueryVoteByProposalVoterRequest, QueryVoteByProposalVoterResponse, QueryVotesByProposalRequest, QueryVotesByProposalResponse, QueryVotesByVoterRequest, QueryVotesByVoterResponse, QueryGroupsByMemberRequest, QueryGroupsByMemberResponse, QueryTallyResultRequest, QueryTallyResultResponse } from "./query";
 export class LCDQueryClient extends LCDClient {
   constructor({
@@ -42,7 +43,7 @@ export class LCDQueryClient extends LCDClient {
     }
 
     if (typeof params?.pagination !== "undefined") {
-      options.params.pagination = params.pagination;
+      setPaginationParams(options, params.pagination);
     }
 
     const endpoint = `cosmos/group/v1/group_members/${params.groupId}`;
@@ -56,7 +57,7 @@ export class LCDQueryClient extends LCDClient {
     };
 
     if (typeof params?.pagination !== "undefined") {
-      options.params.pagination = params.pagination;
+      setPaginationParams(options, params.pagination);
     }
 
     const endpoint = `cosmos/group/v1/groups_by_admin/${params.admin}`;
@@ -74,7 +75,7 @@ export class LCDQueryClient extends LCDClient {
     }
 
     if (typeof params?.pagination !== "undefined") {
-      options.params.pagination = params.pagination;
+      setPaginationParams(options, params.pagination);
     }
 
     const endpoint = `cosmos/group/v1/group_policies_by_group/${params.groupId}`;
@@ -88,7 +89,7 @@ export class LCDQueryClient extends LCDClient {
     };
 
     if (typeof params?.pagination !== "undefined") {
-      options.params.pagination = params.pagination;
+      setPaginationParams(options, params.pagination);
     }
 
     const endpoint = `cosmos/group/v1/group_policies_by_admin/${params.admin}`;
@@ -116,7 +117,7 @@ export class LCDQueryClient extends LCDClient {
     };
 
     if (typeof params?.pagination !== "undefined") {
-      options.params.pagination = params.pagination;
+      setPaginationParams(options, params.pagination);
     }
 
     const endpoint = `cosmos/group/v1/proposals_by_group_policy/${params.address}`;
@@ -148,7 +149,7 @@ export class LCDQueryClient extends LCDClient {
     }
 
     if (typeof params?.pagination !== "undefined") {
-      options.params.pagination = params.pagination;
+      setPaginationParams(options, params.pagination);
     }
 
     const endpoint = `cosmos/group/v1/votes_by_proposal/${params.proposalId}`;
@@ -162,7 +163,7 @@ export class LCDQueryClient extends LCDClient {
     };
 
     if (typeof params?.pagination !== "undefined") {
-      options.params.pagination = params.pagination;
+      setPaginationParams(options, params.pagination);
     }
 
     const endpoint = `cosmos/group/v1/votes_by_voter/${params.voter}`;
@@ -176,7 +177,7 @@ export class LCDQueryClient extends LCDClient {
     };
 
     if (typeof params?.pagination !== "undefined") {
-      options.params.pagination = params.pagination;
+      setPaginationParams(options, params.pagination);
     }
 
     const endpoint = `cosmos/group/v1/groups_by_member/${params.address}`;

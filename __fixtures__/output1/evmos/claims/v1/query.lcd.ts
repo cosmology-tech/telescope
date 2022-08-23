@@ -3,6 +3,7 @@ import { Coin } from "../../../cosmos/base/v1beta1/coin";
 import { Params } from "./genesis";
 import { ClaimsRecordAddress, Claim } from "./claims";
 import { LCDClient } from "@osmonauts/lcd";
+import { setPaginationParams } from "@osmonauts/helpers";
 import { QueryTotalUnclaimedRequest, QueryTotalUnclaimedResponse, QueryParamsRequest, QueryParamsResponse, QueryClaimsRecordsRequest, QueryClaimsRecordsResponse, QueryClaimsRecordRequest, QueryClaimsRecordResponse } from "./query";
 export class LCDQueryClient extends LCDClient {
   constructor({
@@ -34,7 +35,7 @@ export class LCDQueryClient extends LCDClient {
     };
 
     if (typeof params?.pagination !== "undefined") {
-      options.params.pagination = params.pagination;
+      setPaginationParams(options, params.pagination);
     }
 
     const endpoint = `evmos/claims/v1/claims_records`;

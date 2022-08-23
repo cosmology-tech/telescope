@@ -1,6 +1,7 @@
 import { CertificateFilter, Certificate } from "./cert";
 import { PageRequest, PageResponse } from "../../../cosmos/base/query/v1beta1/pagination";
 import { LCDClient } from "@osmonauts/lcd";
+import { setPaginationParams } from "@osmonauts/helpers";
 import { QueryCertificatesRequest, QueryCertificatesResponse } from "./query";
 export class LCDQueryClient extends LCDClient {
   constructor({
@@ -22,7 +23,7 @@ export class LCDQueryClient extends LCDClient {
     }
 
     if (typeof params?.pagination !== "undefined") {
-      options.params.pagination = params.pagination;
+      setPaginationParams(options, params.pagination);
     }
 
     const endpoint = `akash/cert/v1beta2/certificates/list`;

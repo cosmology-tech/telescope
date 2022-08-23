@@ -31,7 +31,7 @@ exports[`AggregatedLCDClient 1`] = `
     };
 
     if (typeof params?.pagination !== \\"undefined\\") {
-      options.params.pagination = params.pagination;
+      setPaginationParams(options, params.pagination);
     }
 
     const endpoint = \`cosmos/bank/v1beta1/balances/\${params.address}\`;
@@ -46,7 +46,7 @@ exports[`AggregatedLCDClient 1`] = `
     };
 
     if (typeof params?.pagination !== \\"undefined\\") {
-      options.params.pagination = params.pagination;
+      setPaginationParams(options, params.pagination);
     }
 
     const endpoint = \`cosmos/bank/v1beta1/spendable_balances/\${params.address}\`;
@@ -62,7 +62,7 @@ exports[`AggregatedLCDClient 1`] = `
     };
 
     if (typeof params?.pagination !== \\"undefined\\") {
-      options.params.pagination = params.pagination;
+      setPaginationParams(options, params.pagination);
     }
 
     const endpoint = \`cosmos/bank/v1beta1/supply\`;
@@ -105,7 +105,7 @@ exports[`AggregatedLCDClient 1`] = `
     };
 
     if (typeof params?.pagination !== \\"undefined\\") {
-      options.params.pagination = params.pagination;
+      setPaginationParams(options, params.pagination);
     }
 
     const endpoint = \`cosmos/bank/v1beta1/denoms_metadata\`;
@@ -120,7 +120,7 @@ exports[`AggregatedLCDClient 1`] = `
     };
 
     if (typeof params?.pagination !== \\"undefined\\") {
-      options.params.pagination = params.pagination;
+      setPaginationParams(options, params.pagination);
     }
 
     const endpoint = \`cosmos/bank/v1beta1/denom_owners/\${params.denom}\`;
@@ -136,7 +136,7 @@ exports[`AggregatedLCDClient 1`] = `
     };
 
     if (typeof params?.pagination !== \\"undefined\\") {
-      options.params.pagination = params.pagination;
+      setPaginationParams(options, params.pagination);
     }
 
     const endpoint = \`osmosis/gamm/v1beta1/pools\`;
@@ -276,7 +276,7 @@ exports[`options 1`] = `
     };
 
     if (typeof params?.pagination !== \\"undefined\\") {
-      options.params.pagination = params.pagination;
+      setPaginationParams(options, params.pagination);
     }
 
     const endpoint = \`cosmos/bank/v1beta1/balances/\${params.address}\`;
@@ -291,7 +291,7 @@ exports[`options 1`] = `
     };
 
     if (typeof params?.pagination !== \\"undefined\\") {
-      options.params.pagination = params.pagination;
+      setPaginationParams(options, params.pagination);
     }
 
     const endpoint = \`cosmos/bank/v1beta1/spendable_balances/\${params.address}\`;
@@ -307,7 +307,7 @@ exports[`options 1`] = `
     };
 
     if (typeof params?.pagination !== \\"undefined\\") {
-      options.params.pagination = params.pagination;
+      setPaginationParams(options, params.pagination);
     }
 
     const endpoint = \`cosmos/bank/v1beta1/supply\`;
@@ -350,7 +350,7 @@ exports[`options 1`] = `
     };
 
     if (typeof params?.pagination !== \\"undefined\\") {
-      options.params.pagination = params.pagination;
+      setPaginationParams(options, params.pagination);
     }
 
     const endpoint = \`cosmos/bank/v1beta1/denoms_metadata\`;
@@ -365,7 +365,7 @@ exports[`options 1`] = `
     };
 
     if (typeof params?.pagination !== \\"undefined\\") {
-      options.params.pagination = params.pagination;
+      setPaginationParams(options, params.pagination);
     }
 
     const endpoint = \`cosmos/bank/v1beta1/denom_owners/\${params.denom}\`;
@@ -381,7 +381,7 @@ exports[`options 1`] = `
     };
 
     if (typeof params?.pagination !== \\"undefined\\") {
-      options.params.pagination = params.pagination;
+      setPaginationParams(options, params.pagination);
     }
 
     const endpoint = \`osmosis/gamm/v1beta1/pools\`;

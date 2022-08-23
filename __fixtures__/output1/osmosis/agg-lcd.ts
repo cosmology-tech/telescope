@@ -1,5 +1,6 @@
 import { Coin } from "../cosmos/base/v1beta1/coin";
 import { LCDClient } from "@osmonauts/lcd";
+import { setPaginationParams } from "@osmonauts/helpers";
 import { PageRequest, PageResponse } from "../cosmos/base/query/v1beta1/pagination";
 import { SwapAmountInRoute, SwapAmountOutRoute } from "./gamm/v1beta1/tx";
 import { Params, Metadata } from "../cosmos/bank/v1beta1/bank";
@@ -36,7 +37,7 @@ export class QueryClient extends LCDClient {
     };
 
     if (typeof params?.pagination !== "undefined") {
-      options.params.pagination = params.pagination;
+      setPaginationParams(options, params.pagination);
     }
 
     const endpoint = `cosmos/bank/v1beta1/balances/${params.address}`;
@@ -51,7 +52,7 @@ export class QueryClient extends LCDClient {
     };
 
     if (typeof params?.pagination !== "undefined") {
-      options.params.pagination = params.pagination;
+      setPaginationParams(options, params.pagination);
     }
 
     const endpoint = `cosmos/bank/v1beta1/spendable_balances/${params.address}`;
@@ -67,7 +68,7 @@ export class QueryClient extends LCDClient {
     };
 
     if (typeof params?.pagination !== "undefined") {
-      options.params.pagination = params.pagination;
+      setPaginationParams(options, params.pagination);
     }
 
     const endpoint = `cosmos/bank/v1beta1/supply`;
@@ -110,7 +111,7 @@ export class QueryClient extends LCDClient {
     };
 
     if (typeof params?.pagination !== "undefined") {
-      options.params.pagination = params.pagination;
+      setPaginationParams(options, params.pagination);
     }
 
     const endpoint = `cosmos/bank/v1beta1/denoms_metadata`;
@@ -125,7 +126,7 @@ export class QueryClient extends LCDClient {
     };
 
     if (typeof params?.pagination !== "undefined") {
-      options.params.pagination = params.pagination;
+      setPaginationParams(options, params.pagination);
     }
 
     const endpoint = `cosmos/bank/v1beta1/denom_owners/${params.denom}`;
@@ -141,7 +142,7 @@ export class QueryClient extends LCDClient {
     };
 
     if (typeof params?.pagination !== "undefined") {
-      options.params.pagination = params.pagination;
+      setPaginationParams(options, params.pagination);
     }
 
     const endpoint = `osmosis/gamm/v1beta1/pools`;
