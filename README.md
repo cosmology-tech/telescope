@@ -205,9 +205,9 @@ telescope({
 | `prototypes.includePackageVar`            | export a `protoPackage` variable to indicate package name       | `false`    |
 | `prototypes.excluded.packages`            | exclude a set of packages from transpilation                    | `undefined`|
 | `prototypes.excluded.protos`              | exclude a set of proto files from transpilation                 | `undefined`|
-| `prototypes.defaultFieldOptionality`      | boolean value representing default optionality of field         | `false`|
+| `prototypes.fieldDefaultIsOptional`       | boolean value representing default optionality of field         | `false`|
 | `prototypes.useOptionalNullable`          | use `(gogoproto.nullable)` values in determining optionality    | `true`|
-| `prototypes.defaultFieldOptionality`      | boolean value representing default optionality of field         | `false`|
+| `prototypes.allowUndefinedTypes`          | boolean value allowing `Type`s to be `undefined`                | `false`|
 
 ### LCD Client Options
 

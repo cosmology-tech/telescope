@@ -15,8 +15,9 @@ const options: TelescopeOptions = {
 
   prototypes: {
     includePackageVar: true,
-    defaultFieldOptionality: false,
+    fieldDefaultIsOptional: false,
     useOptionalNullable: true,
+    allowUndefinedTypes: false,
     excluded: {
       protos: [
         'cosmos/authz/v1beta1/event.proto'
@@ -173,6 +174,9 @@ const options: TelescopeOptions = {
     akash: {
       deployment: {
         v1beta1: {
+          prototypes: {
+            allowUndefinedTypes: true
+          },
           aminoEncoding: {
             enabled: false
           }

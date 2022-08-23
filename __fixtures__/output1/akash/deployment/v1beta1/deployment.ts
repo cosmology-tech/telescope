@@ -54,10 +54,10 @@ export function deployment_StateToJSON(object: Deployment_State): string {
 
 /** MsgCreateDeployment defines an SDK message for creating deployment */
 export interface MsgCreateDeployment {
-  id: DeploymentID;
+  id: DeploymentID | undefined;
   groups: GroupSpec[];
   version: Uint8Array;
-  deposit: Coin;
+  deposit: Coin | undefined;
 }
 
 /** MsgCreateDeploymentResponse defines the Msg/CreateDeployment response type. */
@@ -65,8 +65,8 @@ export interface MsgCreateDeploymentResponse {}
 
 /** MsgDepositDeployment deposits more funds into the deposit account */
 export interface MsgDepositDeployment {
-  id: DeploymentID;
-  amount: Coin;
+  id: DeploymentID | undefined;
+  amount: Coin | undefined;
 }
 
 /** MsgCreateDeploymentResponse defines the Msg/CreateDeployment response type. */
@@ -74,7 +74,7 @@ export interface MsgDepositDeploymentResponse {}
 
 /** MsgUpdateDeployment defines an SDK message for updating deployment */
 export interface MsgUpdateDeployment {
-  id: DeploymentID;
+  id: DeploymentID | undefined;
   groups: GroupSpec[];
   version: Uint8Array;
 }
@@ -84,7 +84,7 @@ export interface MsgUpdateDeploymentResponse {}
 
 /** MsgCloseDeployment defines an SDK message for closing deployment */
 export interface MsgCloseDeployment {
-  id: DeploymentID;
+  id: DeploymentID | undefined;
 }
 
 /** MsgCloseDeploymentResponse defines the Msg/CloseDeployment response type. */
@@ -98,7 +98,7 @@ export interface DeploymentID {
 
 /** Deployment stores deploymentID, state and version details */
 export interface Deployment {
-  deploymentId: DeploymentID;
+  deploymentId: DeploymentID | undefined;
   state: Deployment_State;
   version: Uint8Array;
   createdAt: Long;

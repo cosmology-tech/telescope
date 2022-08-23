@@ -3,8 +3,9 @@ import { AminoExceptions } from "./aminos";
 interface TelescopeOpts {
     prototypes?: {
         includePackageVar?: boolean;
-        defaultFieldOptionality?: boolean;
+        fieldDefaultIsOptional?: boolean;
         useOptionalNullable?: boolean;
+        allowUndefinedTypes?: boolean;
         excluded?: {
             packages?: string[];
             protos?: string[];

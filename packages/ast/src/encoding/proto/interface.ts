@@ -27,7 +27,21 @@ const getProtoField = (context: ProtoParseContext, field: ProtoField) => {
     if (NATIVE_TYPES.includes(field.type)) {
         ast = getTSTypeForProto(context, field);
     } else {
-        ast = t.tsTypeReference(t.identifier(getProtoFieldTypeName(context, field)));
+        if (
+            field.parsedType?.type === 'Type' &&
+            field.rule !== 'repeated' &&
+            context.pluginValue('prototypes.allowUndefinedTypes')
+        ) {
+            // NOTE: unfortunately bc of defaults...
+            ast = t.tsUnionType(
+                [
+                    t.tsTypeReference(t.identifier(getProtoFieldTypeName(context, field))),
+                    t.tsUndefinedKeyword()
+                ]
+            )
+        } else {
+            ast = t.tsTypeReference(t.identifier(getProtoFieldTypeName(context, field)));
+        }
     }
 
     if (field.rule === 'repeated') {
