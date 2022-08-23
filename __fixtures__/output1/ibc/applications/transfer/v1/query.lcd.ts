@@ -14,7 +14,7 @@ export class LCDQueryClient extends LCDClient {
   /* DenomTrace queries a denomination trace information. */
   async denomTrace(params: QueryDenomTraceRequest): Promise<QueryDenomTraceResponse> {
     const endpoint = `ibc/apps/transfer/v1/denom_traces/${params.hash}`;
-    return await this.request(endpoint);
+    return await this.request<QueryDenomTraceResponse>(endpoint);
   }
 
   /* DenomTraces queries all denomination traces. */
@@ -28,13 +28,13 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `ibc/apps/transfer/v1/denom_traces`;
-    return await this.request(endpoint, options);
+    return await this.request<QueryDenomTracesResponse>(endpoint, options);
   }
 
   /* Params queries all parameters of the ibc-transfer module. */
   async params(params: QueryParamsRequest): Promise<QueryParamsResponse> {
     const endpoint = `ibc/apps/transfer/v1/params`;
-    return await this.request(endpoint);
+    return await this.request<QueryParamsResponse>(endpoint);
   }
 
 }

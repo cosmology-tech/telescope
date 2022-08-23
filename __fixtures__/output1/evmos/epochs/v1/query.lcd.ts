@@ -22,7 +22,7 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `evmos/epochs/v1/epochs`;
-    return await this.request(endpoint, options);
+    return await this.request<QueryEpochsInfoResponse>(endpoint, options);
   }
 
   /* CurrentEpoch provide current epoch of specified identifier */
@@ -36,7 +36,7 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `evmos/epochs/v1/current_epoch`;
-    return await this.request(endpoint, options);
+    return await this.request<QueryCurrentEpochResponse>(endpoint, options);
   }
 
 }

@@ -22,7 +22,7 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `cosmos/evidence/v1beta1/evidence/${params.evidence_hash}`;
-    return await this.request(endpoint, options);
+    return await this.request<QueryEvidenceResponse>(endpoint, options);
   }
 
   /* AllEvidence queries all evidence. */
@@ -36,7 +36,7 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `cosmos/evidence/v1beta1/evidence`;
-    return await this.request(endpoint, options);
+    return await this.request<QueryAllEvidenceResponse>(endpoint, options);
   }
 
 }

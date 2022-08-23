@@ -26,7 +26,7 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `akash/cert/v1beta2/certificates/list`;
-    return await this.request(endpoint, options);
+    return await this.request<QueryCertificatesResponse>(endpoint, options);
   }
 
 }

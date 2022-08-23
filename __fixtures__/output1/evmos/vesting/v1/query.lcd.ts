@@ -13,7 +13,7 @@ export class LCDQueryClient extends LCDClient {
   /* Retrieves the unvested, vested and locked tokens for a vesting account */
   async balances(params: QueryBalancesRequest): Promise<QueryBalancesResponse> {
     const endpoint = `evmos/vesting/v1/balances/${params.address}`;
-    return await this.request(endpoint);
+    return await this.request<QueryBalancesResponse>(endpoint);
   }
 
 }
