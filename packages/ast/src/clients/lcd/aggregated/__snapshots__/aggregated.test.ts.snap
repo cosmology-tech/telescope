@@ -203,7 +203,7 @@ exports[`AggregatedLCDClient 1`] = `
     }
 
     if (typeof params?.tokenIn !== \\"undefined\\") {
-      options.params.token_in = params.tokenIn;
+      options.params.tokenIn = params.tokenIn;
     }
 
     if (typeof params?.routes !== \\"undefined\\") {
@@ -229,7 +229,7 @@ exports[`AggregatedLCDClient 1`] = `
     }
 
     if (typeof params?.tokenOut !== \\"undefined\\") {
-      options.params.token_out = params.tokenOut;
+      options.params.tokenOut = params.tokenOut;
     }
 
     const endpoint = \`osmosis/gamm/v1beta1/\${params.poolId}/estimate/swap_exact_amount_out\`;
@@ -442,7 +442,7 @@ exports[`options 1`] = `
     }
 
     if (typeof params?.tokenIn !== \\"undefined\\") {
-      options.params.token_in = params.tokenIn;
+      options.params.tokenIn = params.tokenIn;
     }
 
     if (typeof params?.routes !== \\"undefined\\") {
@@ -468,7 +468,7 @@ exports[`options 1`] = `
     }
 
     if (typeof params?.tokenOut !== \\"undefined\\") {
-      options.params.token_out = params.tokenOut;
+      options.params.tokenOut = params.tokenOut;
     }
 
     const endpoint = \`osmosis/gamm/v1beta1/\${params.poolId}/estimate/swap_exact_amount_out\`;

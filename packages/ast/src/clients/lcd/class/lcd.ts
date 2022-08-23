@@ -1,6 +1,5 @@
 import * as t from '@babel/types';
 import { ProtoService, ProtoServiceMethod, ProtoServiceMethodInfo } from '@osmonauts/types';
-import { snake } from 'case';
 import { GenericParseContext } from '../../../encoding';
 import { callExpression, classMethod, identifier } from '../../../utils';
 
@@ -74,7 +73,16 @@ const makeOptionsObject = () => {
     )
 };
 
-const setParamOption = (name) => {
+const setParamOption = (name: string, svc: ProtoServiceMethod) => {
+
+    const flippedCasing = Object.keys(svc.info.casing).reduce((m, v) => {
+        m[svc.info.casing[v]] = v;
+        return m;
+    }, {});
+
+    const queryParam = flippedCasing[name] ? flippedCasing[name] : name;
+
+    console.log(svc.info, name);
     return t.ifStatement(
         t.binaryExpression(
             '!==',
@@ -98,7 +106,7 @@ const setParamOption = (name) => {
                             t.identifier('options'),
                             t.identifier('params')
                         ),
-                        t.identifier(snake(name))
+                        t.identifier(queryParam)
                     ),
                     t.memberExpression(
                         t.identifier('params'),
@@ -215,7 +223,7 @@ const requestMethod = (
     }
 
     const queryParams = serviceMethod.info.queryParams.map(param => {
-        return setParamOption(param);
+        return setParamOption(param, serviceMethod);
     });
 
     const optionsAst = [];
