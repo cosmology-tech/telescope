@@ -12,23 +12,22 @@ export class LCDClient {
         });
     }
 
-    request(endpoint, opts = {}) {
-        return new Promise(async (resolve, reject) => {
-            let response;
+    request<ResponseType = unknown>(endpoint, opts = {}) {
+        return new Promise<ResponseType>(async (resolve, reject) => {
             try {
-                response = await this.instance.get(endpoint, {
+                const response = await this.instance.get(endpoint, {
                     timeout: 10000,
                     ...opts
                 });
+                if (response && response.data) {
+                    resolve(response.data);
+                } else {
+                    reject('no response data');
+                }
             } catch (e) {
                 return reject(e);
             }
 
-            if (response && response.data) {
-                resolve(response.data);
-            } else {
-                reject('no response data');
-            }
         });
     }
 }
