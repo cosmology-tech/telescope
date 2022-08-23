@@ -31,7 +31,7 @@ exports[`cosmos LCDClient 1`] = `
     };
 
     if (typeof params?.pagination !== \\"undefined\\") {
-      options.params.pagination = params.pagination;
+      setPaginationParams(options, params.pagination);
     }
 
     const endpoint = \`cosmos/bank/v1beta1/balances/\${params.address}\`;
@@ -46,7 +46,7 @@ exports[`cosmos LCDClient 1`] = `
     };
 
     if (typeof params?.pagination !== \\"undefined\\") {
-      options.params.pagination = params.pagination;
+      setPaginationParams(options, params.pagination);
     }
 
     const endpoint = \`cosmos/bank/v1beta1/spendable_balances/\${params.address}\`;
@@ -62,7 +62,7 @@ exports[`cosmos LCDClient 1`] = `
     };
 
     if (typeof params?.pagination !== \\"undefined\\") {
-      options.params.pagination = params.pagination;
+      setPaginationParams(options, params.pagination);
     }
 
     const endpoint = \`cosmos/bank/v1beta1/supply\`;
@@ -105,7 +105,7 @@ exports[`cosmos LCDClient 1`] = `
     };
 
     if (typeof params?.pagination !== \\"undefined\\") {
-      options.params.pagination = params.pagination;
+      setPaginationParams(options, params.pagination);
     }
 
     const endpoint = \`cosmos/bank/v1beta1/denoms_metadata\`;
@@ -120,7 +120,7 @@ exports[`cosmos LCDClient 1`] = `
     };
 
     if (typeof params?.pagination !== \\"undefined\\") {
-      options.params.pagination = params.pagination;
+      setPaginationParams(options, params.pagination);
     }
 
     const endpoint = \`cosmos/bank/v1beta1/denom_owners/\${params.denom}\`;
@@ -153,7 +153,7 @@ exports[`cosmos fee LCDClient 1`] = `
     };
 
     if (typeof params?.pagination !== \\"undefined\\") {
-      options.params.pagination = params.pagination;
+      setPaginationParams(options, params.pagination);
     }
 
     const endpoint = \`cosmos/feegrant/v1beta1/allowances/\${params.grantee}\`;
@@ -168,7 +168,7 @@ exports[`cosmos fee LCDClient 1`] = `
     };
 
     if (typeof params?.pagination !== \\"undefined\\") {
-      options.params.pagination = params.pagination;
+      setPaginationParams(options, params.pagination);
     }
 
     const endpoint = \`cosmos/feegrant/v1beta1/issued/\${params.granter}\`;
@@ -201,7 +201,7 @@ exports[`cosmos/staking/v1beta1/query.proto 1`] = `
     }
 
     if (typeof params?.pagination !== \\"undefined\\") {
-      options.params.pagination = params.pagination;
+      setPaginationParams(options, params.pagination);
     }
 
     const endpoint = \`cosmos/staking/v1beta1/validators\`;
@@ -233,7 +233,7 @@ exports[`cosmos/staking/v1beta1/query.proto 1`] = `
     }
 
     if (typeof params?.pagination !== \\"undefined\\") {
-      options.params.pagination = params.pagination;
+      setPaginationParams(options, params.pagination);
     }
 
     const endpoint = \`cosmos/staking/v1beta1/validators/\${params.validatorAddr}/delegations\`;
@@ -251,7 +251,7 @@ exports[`cosmos/staking/v1beta1/query.proto 1`] = `
     }
 
     if (typeof params?.pagination !== \\"undefined\\") {
-      options.params.pagination = params.pagination;
+      setPaginationParams(options, params.pagination);
     }
 
     const endpoint = \`cosmos/staking/v1beta1/validators/\${params.validatorAddr}/unbonding_delegations\`;
@@ -306,7 +306,7 @@ exports[`cosmos/staking/v1beta1/query.proto 1`] = `
     }
 
     if (typeof params?.pagination !== \\"undefined\\") {
-      options.params.pagination = params.pagination;
+      setPaginationParams(options, params.pagination);
     }
 
     const endpoint = \`cosmos/staking/v1beta1/delegations/\${params.delegatorAddr}\`;
@@ -325,7 +325,7 @@ exports[`cosmos/staking/v1beta1/query.proto 1`] = `
     }
 
     if (typeof params?.pagination !== \\"undefined\\") {
-      options.params.pagination = params.pagination;
+      setPaginationParams(options, params.pagination);
     }
 
     const endpoint = \`cosmos/staking/v1beta1/delegators/\${params.delegatorAddr}/unbonding_delegations\`;
@@ -351,7 +351,7 @@ exports[`cosmos/staking/v1beta1/query.proto 1`] = `
     }
 
     if (typeof params?.pagination !== \\"undefined\\") {
-      options.params.pagination = params.pagination;
+      setPaginationParams(options, params.pagination);
     }
 
     const endpoint = \`cosmos/staking/v1beta1/delegators/\${params.delegatorAddr}/redelegations\`;
@@ -370,7 +370,7 @@ exports[`cosmos/staking/v1beta1/query.proto 1`] = `
     }
 
     if (typeof params?.pagination !== \\"undefined\\") {
-      options.params.pagination = params.pagination;
+      setPaginationParams(options, params.pagination);
     }
 
     const endpoint = \`cosmos/staking/v1beta1/delegators/\${params.delegatorAddr}/validators\`;
@@ -436,7 +436,7 @@ exports[`osmosis LCDClient 1`] = `
     };
 
     if (typeof params?.pagination !== \\"undefined\\") {
-      options.params.pagination = params.pagination;
+      setPaginationParams(options, params.pagination);
     }
 
     const endpoint = \`osmosis/gamm/v1beta1/pools\`;

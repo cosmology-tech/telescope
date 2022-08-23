@@ -73,7 +73,11 @@ const makeOptionsObject = () => {
     )
 };
 
-const setParamOption = (name: string, svc: ProtoServiceMethod) => {
+const setParamOption = (
+    context: GenericParseContext,
+    name: string,
+    svc: ProtoServiceMethod
+) => {
 
     const flippedCasing = Object.keys(svc.info.casing).reduce((m, v) => {
         m[svc.info.casing[v]] = v;
@@ -81,6 +85,43 @@ const setParamOption = (name: string, svc: ProtoServiceMethod) => {
     }, {});
 
     const queryParam = flippedCasing[name] ? flippedCasing[name] : name;
+
+    // options.params.group_id = params.groupId;
+    let expr = t.expressionStatement(
+        t.assignmentExpression(
+            '=',
+            t.memberExpression(
+                t.memberExpression(
+                    t.identifier('options'),
+                    t.identifier('params')
+                ),
+                t.identifier(queryParam)
+            ),
+            t.memberExpression(
+                t.identifier('params'),
+                t.identifier(name)
+            )
+        )
+    );
+
+    if (name === 'pagination') {
+        context.addUtil('setPaginationParams');
+        expr = t.expressionStatement(
+            t.callExpression(
+                t.identifier('setPaginationParams'),
+                [
+                    t.identifier('options'),
+                    t.memberExpression(
+                        t.identifier('params'),
+                        t.identifier('pagination'),
+                        false
+                    )
+                ]
+            )
+        )
+
+
+    }
 
     return t.ifStatement(
         t.binaryExpression(
@@ -97,22 +138,7 @@ const setParamOption = (name: string, svc: ProtoServiceMethod) => {
             t.stringLiteral('undefined')
         ),
         t.blockStatement([
-            t.expressionStatement(
-                t.assignmentExpression(
-                    '=',
-                    t.memberExpression(
-                        t.memberExpression(
-                            t.identifier('options'),
-                            t.identifier('params')
-                        ),
-                        t.identifier(queryParam)
-                    ),
-                    t.memberExpression(
-                        t.identifier('params'),
-                        t.identifier(name)
-                    )
-                )
-            )
+            expr
         ])
     );
 };
@@ -222,7 +248,7 @@ const requestMethod = (
     }
 
     const queryParams = serviceMethod.info.queryParams.map(param => {
-        return setParamOption(param, serviceMethod);
+        return setParamOption(context, param, serviceMethod);
     });
 
     const optionsAst = [];

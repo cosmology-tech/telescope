@@ -8,3 +8,4 @@ export * from './rpc';
 export * from './timestamp';
 export * from './signing';
 export * from './wallet';
+export * from './pagination';
