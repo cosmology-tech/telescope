@@ -46,20 +46,6 @@ export default async (argv) => {
       name: 'includeRPCClients',
       message: 'output RPC clients?',
       default: true
-    },
-    {
-      type: 'list',
-      name: 'timestampFormat',
-      message: 'treat timestamps as Date or Timestamp?',
-      default: 'timestamp',
-      choices: ['date', 'timestamp']
-    },
-    {
-      type: 'list',
-      name: 'durationFormat',
-      message: 'treat durations as Duration or string?',
-      default: 'duration',
-      choices: ['duration', 'string']
     }
   ];
 
@@ -68,10 +54,7 @@ export default async (argv) => {
     outPath,
     includeAminos,
     includeLCDClients,
-    includePackageVar,
     includeRPCClients,
-    timestampFormat,
-    durationFormat
   } = await prompt(questions, argv);
 
   if (!Array.isArray(protoDirs)) {
@@ -79,13 +62,6 @@ export default async (argv) => {
   }
 
   const options = {
-    prototypes: {
-      includePackageVar,
-      typingsFormat: {
-        timestamp: timestampFormat,
-        duration: durationFormat
-      },
-    },
     aminoEncoding: {
       enabled: includeAminos
     },
