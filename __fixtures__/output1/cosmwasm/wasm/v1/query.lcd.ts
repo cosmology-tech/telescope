@@ -106,7 +106,9 @@ export class LCDQueryClient extends LCDClient {
   }
 
   /* Codes gets the metadata for all stored wasm codes */
-  async codes(params: QueryCodesRequest = {}): Promise<QueryCodesResponse> {
+  async codes(params: QueryCodesRequest = {
+    pagination: undefined
+  }): Promise<QueryCodesResponse> {
     const options: any = {
       params: {}
     };
@@ -120,7 +122,9 @@ export class LCDQueryClient extends LCDClient {
   }
 
   /* PinnedCodes gets the pinned code ids */
-  async pinnedCodes(params: QueryPinnedCodesRequest = {}): Promise<QueryPinnedCodesResponse> {
+  async pinnedCodes(params: QueryPinnedCodesRequest = {
+    pagination: undefined
+  }): Promise<QueryPinnedCodesResponse> {
     const options: any = {
       params: {}
     };

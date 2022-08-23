@@ -14,7 +14,9 @@ export class LCDQueryClient extends LCDClient {
   }
 
   /* Pools */
-  async pools(params: QueryPoolsRequest = {}): Promise<QueryPoolsResponse> {
+  async pools(params: QueryPoolsRequest = {
+    pagination: undefined
+  }): Promise<QueryPoolsResponse> {
     const options: any = {
       params: {}
     };

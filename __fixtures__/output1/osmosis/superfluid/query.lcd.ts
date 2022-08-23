@@ -55,7 +55,9 @@ export class LCDQueryClient extends LCDClient {
   }
 
   /* Returns all superfluid intermediary account */
-  async allIntermediaryAccounts(params: AllIntermediaryAccountsRequest = {}): Promise<AllIntermediaryAccountsResponse> {
+  async allIntermediaryAccounts(params: AllIntermediaryAccountsRequest = {
+    pagination: undefined
+  }): Promise<AllIntermediaryAccountsResponse> {
     const options: any = {
       params: {}
     };

@@ -13,7 +13,9 @@ export class LCDQueryClient extends LCDClient {
   }
 
   /* TokenPairs retrieves registered token pairs */
-  async tokenPairs(params: QueryTokenPairsRequest = {}): Promise<QueryTokenPairsResponse> {
+  async tokenPairs(params: QueryTokenPairsRequest = {
+    pagination: undefined
+  }): Promise<QueryTokenPairsResponse> {
     const options: any = {
       params: {}
     };

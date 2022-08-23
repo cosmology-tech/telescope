@@ -32,7 +32,9 @@ export class LCDQueryClient extends LCDClient {
   }
 
   /* Channels queries all the IBC channels of a chain. */
-  async channels(params: QueryChannelsRequest = {}): Promise<QueryChannelsResponse> {
+  async channels(params: QueryChannelsRequest = {
+    pagination: undefined
+  }): Promise<QueryChannelsResponse> {
     const options: any = {
       params: {}
     };

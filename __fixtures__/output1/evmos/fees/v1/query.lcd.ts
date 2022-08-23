@@ -13,7 +13,9 @@ export class LCDQueryClient extends LCDClient {
   }
 
   /* DevFeeInfos retrieves all registered contracts for fee distribution */
-  async devFeeInfos(params: QueryDevFeeInfosRequest = {}): Promise<QueryDevFeeInfosResponse> {
+  async devFeeInfos(params: QueryDevFeeInfosRequest = {
+    pagination: undefined
+  }): Promise<QueryDevFeeInfosResponse> {
     const options: any = {
       params: {}
     };

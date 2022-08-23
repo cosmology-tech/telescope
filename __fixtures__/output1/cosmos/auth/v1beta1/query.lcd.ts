@@ -15,7 +15,9 @@ export class LCDQueryClient extends LCDClient {
   /* Accounts returns all the existing accounts
   
   Since: cosmos-sdk 0.43 */
-  async accounts(params: QueryAccountsRequest = {}): Promise<QueryAccountsResponse> {
+  async accounts(params: QueryAccountsRequest = {
+    pagination: undefined
+  }): Promise<QueryAccountsResponse> {
     const options: any = {
       params: {}
     };

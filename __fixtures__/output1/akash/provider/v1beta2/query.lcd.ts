@@ -12,7 +12,9 @@ export class LCDQueryClient extends LCDClient {
   }
 
   /* Providers queries providers */
-  async providers(params: QueryProvidersRequest = {}): Promise<QueryProvidersResponse> {
+  async providers(params: QueryProvidersRequest = {
+    pagination: undefined
+  }): Promise<QueryProvidersResponse> {
     const options: any = {
       params: {}
     };

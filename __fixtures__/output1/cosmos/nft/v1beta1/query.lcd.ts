@@ -105,7 +105,9 @@ export class LCDQueryClient extends LCDClient {
   }
 
   /* Classes queries all NFT classes */
-  async classes(params: QueryClassesRequest = {}): Promise<QueryClassesResponse> {
+  async classes(params: QueryClassesRequest = {
+    pagination: undefined
+  }): Promise<QueryClassesResponse> {
     const options: any = {
       params: {}
     };

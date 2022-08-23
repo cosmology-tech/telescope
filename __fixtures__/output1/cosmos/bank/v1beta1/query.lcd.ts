@@ -56,7 +56,9 @@ export class LCDQueryClient extends LCDClient {
   }
 
   /* TotalSupply queries the total supply of all coins. */
-  async totalSupply(params: QueryTotalSupplyRequest = {}): Promise<QueryTotalSupplyResponse> {
+  async totalSupply(params: QueryTotalSupplyRequest = {
+    pagination: undefined
+  }): Promise<QueryTotalSupplyResponse> {
     const options: any = {
       params: {}
     };
@@ -97,7 +99,9 @@ export class LCDQueryClient extends LCDClient {
 
   /* DenomsMetadata queries the client metadata for all registered coin
   denominations. */
-  async denomsMetadata(params: QueryDenomsMetadataRequest = {}): Promise<QueryDenomsMetadataResponse> {
+  async denomsMetadata(params: QueryDenomsMetadataRequest = {
+    pagination: undefined
+  }): Promise<QueryDenomsMetadataResponse> {
     const options: any = {
       params: {}
     };

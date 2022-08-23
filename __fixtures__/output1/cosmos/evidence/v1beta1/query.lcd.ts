@@ -26,7 +26,9 @@ export class LCDQueryClient extends LCDClient {
   }
 
   /* AllEvidence queries all evidence. */
-  async allEvidence(params: QueryAllEvidenceRequest = {}): Promise<QueryAllEvidenceResponse> {
+  async allEvidence(params: QueryAllEvidenceRequest = {
+    pagination: undefined
+  }): Promise<QueryAllEvidenceResponse> {
     const options: any = {
       params: {}
     };

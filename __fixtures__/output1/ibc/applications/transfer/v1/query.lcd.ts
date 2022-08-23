@@ -18,7 +18,9 @@ export class LCDQueryClient extends LCDClient {
   }
 
   /* DenomTraces queries all denomination traces. */
-  async denomTraces(params: QueryDenomTracesRequest = {}): Promise<QueryDenomTracesResponse> {
+  async denomTraces(params: QueryDenomTracesRequest = {
+    pagination: undefined
+  }): Promise<QueryDenomTracesResponse> {
     const options: any = {
       params: {}
     };

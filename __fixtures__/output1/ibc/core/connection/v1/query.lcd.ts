@@ -28,7 +28,9 @@ export class LCDQueryClient extends LCDClient {
   }
 
   /* Connections queries all the IBC connections of a chain. */
-  async connections(params: QueryConnectionsRequest = {}): Promise<QueryConnectionsResponse> {
+  async connections(params: QueryConnectionsRequest = {
+    pagination: undefined
+  }): Promise<QueryConnectionsResponse> {
     const options: any = {
       params: {}
     };

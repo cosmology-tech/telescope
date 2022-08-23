@@ -14,7 +14,9 @@ export class LCDQueryClient extends LCDClient {
   }
 
   /* Incentives retrieves registered incentives */
-  async incentives(params: QueryIncentivesRequest = {}): Promise<QueryIncentivesResponse> {
+  async incentives(params: QueryIncentivesRequest = {
+    pagination: undefined
+  }): Promise<QueryIncentivesResponse> {
     const options: any = {
       params: {}
     };
@@ -55,7 +57,9 @@ export class LCDQueryClient extends LCDClient {
 
   /* AllocationMeters retrieves active allocation meters for a given
   denomination */
-  async allocationMeters(params: QueryAllocationMetersRequest = {}): Promise<QueryAllocationMetersResponse> {
+  async allocationMeters(params: QueryAllocationMetersRequest = {
+    pagination: undefined
+  }): Promise<QueryAllocationMetersResponse> {
     const options: any = {
       params: {}
     };

@@ -26,7 +26,9 @@ export class LCDQueryClient extends LCDClient {
   }
 
   /* ClaimsRecords returns all claims records */
-  async claimsRecords(params: QueryClaimsRecordsRequest = {}): Promise<QueryClaimsRecordsResponse> {
+  async claimsRecords(params: QueryClaimsRecordsRequest = {
+    pagination: undefined
+  }): Promise<QueryClaimsRecordsResponse> {
     const options: any = {
       params: {}
     };
