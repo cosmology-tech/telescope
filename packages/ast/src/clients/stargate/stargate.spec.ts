@@ -1,5 +1,5 @@
-import { getGenericParseContextWithRef, expectCode } from '../../../test-utils'
-import { createStargateClient } from './stargate';
+import { getGenericParseContextWithRef, expectCode, printCode } from '../../../test-utils'
+import { createStargateClient, createStargateClientOptions } from './stargate';
 import { ProtoRef } from '@osmonauts/types';
 
 it('createStargateClient', async () => {
@@ -16,15 +16,35 @@ it('createStargateClient', async () => {
     expectCode(createStargateClient({
         context,
         name: 'getSigningOsmosisClient',
+        options: 'getSigningOsmosisClientOptions'
+    }));
+    expect(context.utils).toMatchSnapshot();
+});
+
+it('createStargateClientOptions', async () => {
+    const ref: ProtoRef = {
+        absolute: '/',
+        filename: '/',
+        proto: {
+            imports: [],
+            package: 'somepackage1.gamm.yolo',
+            root: {},
+        }
+    }
+    const context = getGenericParseContextWithRef(ref);
+    context.options.stargateClients.includeCosmosDefaultTypes = true;
+    expectCode(createStargateClientOptions({
+        context,
+        name: 'getSigningOsmosisClientOptions',
         registries: [
-            'osmosis.gamm.v1beta1',
-            'osmosis.superfluid.v1beta1',
-            'osmosis.lockup'
+            'somepackage1.gamm.v1beta1',
+            'somepackage1.superfluid.v1beta1',
+            'somepackage1.lockup'
         ],
         aminos: [
-            'osmosis.gamm.v1beta1',
-            'osmosis.superfluid.v1beta1',
-            'osmosis.lockup'
+            'somepackage1.gamm.v1beta1',
+            'somepackage1.superfluid.v1beta1',
+            'somepackage1.lockup'
         ]
     }));
     expect(context.utils).toMatchSnapshot();
@@ -36,23 +56,29 @@ it('createStargateClient w/o defaults', async () => {
         filename: '/',
         proto: {
             imports: [],
-            package: 'cosmos.gamm.yolo',
+            package: 'otherpackage1.gamm.yolo',
             root: {},
         }
     }
     const context = getGenericParseContextWithRef(ref);
+    context.options.stargateClients.includeCosmosDefaultTypes = false;
     expectCode(createStargateClient({
         context,
         name: 'getSigningOsmosisClient',
+        options: 'getSigningOsmosisClientOptions',
+    }));
+    expectCode(createStargateClientOptions({
+        context,
+        name: 'getSigningOsmosisClientOptions',
         registries: [
-            'osmosis.gamm.v1beta1',
-            'osmosis.superfluid.v1beta1',
-            'osmosis.lockup'
+            'otherpackage1.gamm.v1beta1',
+            'otherpackage1.superfluid.v1beta1',
+            'otherpackage1.lockup'
         ],
         aminos: [
-            'osmosis.gamm.v1beta1',
-            'osmosis.superfluid.v1beta1',
-            'osmosis.lockup'
+            'otherpackage1.gamm.v1beta1',
+            'otherpackage1.superfluid.v1beta1',
+            'otherpackage1.lockup'
         ]
     }));
     expect(context.utils).toMatchSnapshot();
