@@ -40,7 +40,7 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `akash/escrow/v1beta2/types/accounts/list`;
-    return await this.request(endpoint, options);
+    return await this.request<QueryAccountsResponse>(endpoint, options);
   }
 
   /* buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
@@ -76,7 +76,7 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `akash/escrow/v1beta2/types/payments/list`;
-    return await this.request(endpoint, options);
+    return await this.request<QueryPaymentsResponse>(endpoint, options);
   }
 
 }

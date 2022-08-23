@@ -26,7 +26,7 @@ export class QueryClient extends LCDClient {
     }
 
     const endpoint = `cosmos/bank/v1beta1/balances/${params.address}/by_denom`;
-    return await this.request(endpoint, options);
+    return await this.request<QueryBalanceResponse>(endpoint, options);
   }
 
   /* AllBalances queries the balance of all coins for a single account. */
@@ -40,7 +40,7 @@ export class QueryClient extends LCDClient {
     }
 
     const endpoint = `cosmos/bank/v1beta1/balances/${params.address}`;
-    return await this.request(endpoint, options);
+    return await this.request<QueryAllBalancesResponse>(endpoint, options);
   }
 
   /* SpendableBalances queries the spenable balance of all coins for a single
@@ -55,7 +55,7 @@ export class QueryClient extends LCDClient {
     }
 
     const endpoint = `cosmos/bank/v1beta1/spendable_balances/${params.address}`;
-    return await this.request(endpoint, options);
+    return await this.request<QuerySpendableBalancesResponse>(endpoint, options);
   }
 
   /* TotalSupply queries the total supply of all coins. */
@@ -69,7 +69,7 @@ export class QueryClient extends LCDClient {
     }
 
     const endpoint = `cosmos/bank/v1beta1/supply`;
-    return await this.request(endpoint, options);
+    return await this.request<QueryTotalSupplyResponse>(endpoint, options);
   }
 
   /* SupplyOf queries the supply of a single coin. */
@@ -83,19 +83,19 @@ export class QueryClient extends LCDClient {
     }
 
     const endpoint = `cosmos/bank/v1beta1/supply/by_denom`;
-    return await this.request(endpoint, options);
+    return await this.request<QuerySupplyOfResponse>(endpoint, options);
   }
 
   /* Params queries the parameters of x/bank module. */
   async params(params: QueryParamsRequest): Promise<QueryParamsResponse> {
     const endpoint = `cosmos/bank/v1beta1/params`;
-    return await this.request(endpoint);
+    return await this.request<QueryParamsResponse>(endpoint);
   }
 
   /* DenomsMetadata queries the client metadata of a given coin denomination. */
   async denomMetadata(params: QueryDenomMetadataRequest): Promise<QueryDenomMetadataResponse> {
     const endpoint = `cosmos/bank/v1beta1/denoms_metadata/${params.denom}`;
-    return await this.request(endpoint);
+    return await this.request<QueryDenomMetadataResponse>(endpoint);
   }
 
   /* DenomsMetadata queries the client metadata for all registered coin
@@ -110,7 +110,7 @@ export class QueryClient extends LCDClient {
     }
 
     const endpoint = `cosmos/bank/v1beta1/denoms_metadata`;
-    return await this.request(endpoint, options);
+    return await this.request<QueryDenomsMetadataResponse>(endpoint, options);
   }
 
   /* DenomOwners queries for all account addresses that own a particular token
@@ -125,7 +125,7 @@ export class QueryClient extends LCDClient {
     }
 
     const endpoint = `cosmos/bank/v1beta1/denom_owners/${params.denom}`;
-    return await this.request(endpoint, options);
+    return await this.request<QueryDenomOwnersResponse>(endpoint, options);
   }
 
   /* Pools */
@@ -139,43 +139,43 @@ export class QueryClient extends LCDClient {
     }
 
     const endpoint = `osmosis/gamm/v1beta1/pools`;
-    return await this.request(endpoint, options);
+    return await this.request<QueryPoolsResponse>(endpoint, options);
   }
 
   /* NumPools */
   async numPools(params: QueryNumPoolsRequest): Promise<QueryNumPoolsResponse> {
     const endpoint = `osmosis/gamm/v1beta1/num_pools`;
-    return await this.request(endpoint);
+    return await this.request<QueryNumPoolsResponse>(endpoint);
   }
 
   /* TotalLiquidity */
   async totalLiquidity(params: QueryTotalLiquidityRequest): Promise<QueryTotalLiquidityResponse> {
     const endpoint = `osmosis/gamm/v1beta1/total_liquidity`;
-    return await this.request(endpoint);
+    return await this.request<QueryTotalLiquidityResponse>(endpoint);
   }
 
   /* Per Pool gRPC Endpoints */
   async pool(params: QueryPoolRequest): Promise<QueryPoolResponse> {
     const endpoint = `osmosis/gamm/v1beta1/pools/${params.poolId}`;
-    return await this.request(endpoint);
+    return await this.request<QueryPoolResponse>(endpoint);
   }
 
   /* PoolParams */
   async poolParams(params: QueryPoolParamsRequest): Promise<QueryPoolParamsResponse> {
     const endpoint = `osmosis/gamm/v1beta1/pools/${params.poolId}/params`;
-    return await this.request(endpoint);
+    return await this.request<QueryPoolParamsResponse>(endpoint);
   }
 
   /* TotalPoolLiquidity */
   async totalPoolLiquidity(params: QueryTotalPoolLiquidityRequest): Promise<QueryTotalPoolLiquidityResponse> {
     const endpoint = `osmosis/gamm/v1beta1/pools/${params.poolId}/total_pool_liquidity`;
-    return await this.request(endpoint);
+    return await this.request<QueryTotalPoolLiquidityResponse>(endpoint);
   }
 
   /* TotalShares */
   async totalShares(params: QueryTotalSharesRequest): Promise<QueryTotalSharesResponse> {
     const endpoint = `osmosis/gamm/v1beta1/pools/${params.poolId}/total_shares`;
-    return await this.request(endpoint);
+    return await this.request<QueryTotalSharesResponse>(endpoint);
   }
 
   /* SpotPrice defines a gRPC query handler that returns the spot price given
@@ -194,7 +194,7 @@ export class QueryClient extends LCDClient {
     }
 
     const endpoint = `osmosis/gamm/v1beta1/pools/${params.poolId}/prices`;
-    return await this.request(endpoint, options);
+    return await this.request<QuerySpotPriceResponse>(endpoint, options);
   }
 
   /* Estimate the swap. */
@@ -216,7 +216,7 @@ export class QueryClient extends LCDClient {
     }
 
     const endpoint = `osmosis/gamm/v1beta1/${params.poolId}/estimate/swap_exact_amount_in`;
-    return await this.request(endpoint, options);
+    return await this.request<QuerySwapExactAmountInResponse>(endpoint, options);
   }
 
   /* EstimateSwapExactAmountOut */
@@ -238,7 +238,7 @@ export class QueryClient extends LCDClient {
     }
 
     const endpoint = `osmosis/gamm/v1beta1/${params.poolId}/estimate/swap_exact_amount_out`;
-    return await this.request(endpoint, options);
+    return await this.request<QuerySwapExactAmountOutResponse>(endpoint, options);
   }
 
 }

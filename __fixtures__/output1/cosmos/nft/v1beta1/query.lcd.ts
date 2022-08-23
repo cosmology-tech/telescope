@@ -22,7 +22,7 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `cosmos/nft/v1beta1/balance/${params.owner}/${params.class_id}`;
-    return await this.request(endpoint, options);
+    return await this.request<QueryBalanceResponse>(endpoint, options);
   }
 
   /* Owner queries the owner of the NFT based on its class and id, same as ownerOf in ERC721 */
@@ -36,7 +36,7 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `cosmos/nft/v1beta1/owner/${params.class_id}/${params.id}`;
-    return await this.request(endpoint, options);
+    return await this.request<QueryOwnerResponse>(endpoint, options);
   }
 
   /* Supply queries the number of NFTs from the given class, same as totalSupply of ERC721. */
@@ -50,7 +50,7 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `cosmos/nft/v1beta1/supply/${params.class_id}`;
-    return await this.request(endpoint, options);
+    return await this.request<QuerySupplyResponse>(endpoint, options);
   }
 
   /* NFTs queries all NFTs of a given class or owner,choose at least one of the two, similar to tokenByIndex in
@@ -73,7 +73,7 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `cosmos/nft/v1beta1/nfts`;
-    return await this.request(endpoint, options);
+    return await this.request<QueryNFTsResponse>(endpoint, options);
   }
 
   /* NFT queries an NFT based on its class and id. */
@@ -87,7 +87,7 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `cosmos/nft/v1beta1/nfts/${params.class_id}/${params.id}`;
-    return await this.request(endpoint, options);
+    return await this.request<QueryNFTResponse>(endpoint, options);
   }
 
   /* Class queries an NFT class based on its id */
@@ -101,7 +101,7 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `cosmos/nft/v1beta1/classes/${params.class_id}`;
-    return await this.request(endpoint, options);
+    return await this.request<QueryClassResponse>(endpoint, options);
   }
 
   /* Classes queries all NFT classes */
@@ -115,7 +115,7 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `cosmos/nft/v1beta1/classes`;
-    return await this.request(endpoint, options);
+    return await this.request<QueryClassesResponse>(endpoint, options);
   }
 
 }

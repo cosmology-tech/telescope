@@ -17,7 +17,7 @@ export class LCDQueryClient extends LCDClient {
   /* Params returns the total set of minting parameters. */
   async params(params: QueryParamsRequest): Promise<QueryParamsResponse> {
     const endpoint = `osmosis/superfluid/v1beta1/params`;
-    return await this.request(endpoint);
+    return await this.request<QueryParamsResponse>(endpoint);
   }
 
   /* Returns superfluid asset type */
@@ -31,13 +31,13 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `osmosis/superfluid/v1beta1/asset_type`;
-    return await this.request(endpoint, options);
+    return await this.request<AssetTypeResponse>(endpoint, options);
   }
 
   /* Returns all superfluid asset types */
   async allAssets(params: AllAssetsRequest): Promise<AllAssetsResponse> {
     const endpoint = `osmosis/superfluid/v1beta1/all_assets`;
-    return await this.request(endpoint);
+    return await this.request<AllAssetsResponse>(endpoint);
   }
 
   /* Returns superfluid asset Multiplier */
@@ -51,7 +51,7 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `osmosis/superfluid/v1beta1/asset_multiplier`;
-    return await this.request(endpoint, options);
+    return await this.request<AssetMultiplierResponse>(endpoint, options);
   }
 
   /* Returns all superfluid intermediary account */
@@ -65,7 +65,7 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `osmosis/superfluid/v1beta1/all_intermediary_accounts`;
-    return await this.request(endpoint, options);
+    return await this.request<AllIntermediaryAccountsResponse>(endpoint, options);
   }
 
   /* Returns intermediary account connected to a superfluid staked lock by id */
@@ -79,14 +79,14 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `osmosis/superfluid/v1beta1/connected_intermediary_account/${params.lock_id}`;
-    return await this.request(endpoint, options);
+    return await this.request<ConnectedIntermediaryAccountResponse>(endpoint, options);
   }
 
   /* Returns the total amount of osmo superfluidly staked
   response denominated in uosmo */
   async totalSuperfluidDelegations(params: TotalSuperfluidDelegationsRequest): Promise<TotalSuperfluidDelegationsResponse> {
     const endpoint = `osmosis/superfluid/v1beta1/all_superfluid_delegations`;
-    return await this.request(endpoint);
+    return await this.request<TotalSuperfluidDelegationsResponse>(endpoint);
   }
 
   /* Returns the coins superfluid delegated for a delegator, validator, denom
@@ -109,7 +109,7 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `osmosis/superfluid/v1beta1/superfluid_delegation_amount`;
-    return await this.request(endpoint, options);
+    return await this.request<SuperfluidDelegationAmountResponse>(endpoint, options);
   }
 
   /* Returns all the superfluid poistions for a specific delegator */
@@ -123,7 +123,7 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `osmosis/superfluid/v1beta1/superfluid_delegations/${params.delegator_address}`;
-    return await this.request(endpoint, options);
+    return await this.request<SuperfluidDelegationsByDelegatorResponse>(endpoint, options);
   }
 
   /* SuperfluidUndelegationsByDelegator */
@@ -141,7 +141,7 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `osmosis/superfluid/v1beta1/superfluid_undelegations_by_delegator/${params.delegator_address}`;
-    return await this.request(endpoint, options);
+    return await this.request<SuperfluidUndelegationsByDelegatorResponse>(endpoint, options);
   }
 
   /* Returns all the superfluid positions of a specific denom delegated to one
@@ -160,7 +160,7 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `osmosis/superfluid/v1beta1/superfluid_delegations_by_validator_denom`;
-    return await this.request(endpoint, options);
+    return await this.request<SuperfluidDelegationsByValidatorDenomResponse>(endpoint, options);
   }
 
   /* Returns the amount of a specific denom delegated to a specific validator
@@ -180,7 +180,7 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `osmosis/superfluid/v1beta1/estimate_superfluid_delegation_amount_by_validator_denom`;
-    return await this.request(endpoint, options);
+    return await this.request<EstimateSuperfluidDelegatedAmountByValidatorDenomResponse>(endpoint, options);
   }
 
 }

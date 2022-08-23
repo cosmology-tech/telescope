@@ -16,31 +16,31 @@ export class LCDQueryClient extends LCDClient {
   /* Return full balance of the module */
   async moduleBalance(params: ModuleBalanceRequest): Promise<ModuleBalanceResponse> {
     const endpoint = `osmosis/lockup/v1beta1/module_balance`;
-    return await this.request(endpoint);
+    return await this.request<ModuleBalanceResponse>(endpoint);
   }
 
   /* Return locked balance of the module */
   async moduleLockedAmount(params: ModuleLockedAmountRequest): Promise<ModuleLockedAmountResponse> {
     const endpoint = `osmosis/lockup/v1beta1/module_locked_amount`;
-    return await this.request(endpoint);
+    return await this.request<ModuleLockedAmountResponse>(endpoint);
   }
 
   /* Returns unlockable coins which are not withdrawn yet */
   async accountUnlockableCoins(params: AccountUnlockableCoinsRequest): Promise<AccountUnlockableCoinsResponse> {
     const endpoint = `osmosis/lockup/v1beta1/account_unlockable_coins/${params.owner}`;
-    return await this.request(endpoint);
+    return await this.request<AccountUnlockableCoinsResponse>(endpoint);
   }
 
   /* Returns unlocking coins */
   async accountUnlockingCoins(params: AccountUnlockingCoinsRequest): Promise<AccountUnlockingCoinsResponse> {
     const endpoint = `osmosis/lockup/v1beta1/account_unlocking_coins/${params.owner}`;
-    return await this.request(endpoint);
+    return await this.request<AccountUnlockingCoinsResponse>(endpoint);
   }
 
   /* Return a locked coins that can't be withdrawn */
   async accountLockedCoins(params: AccountLockedCoinsRequest): Promise<AccountLockedCoinsResponse> {
     const endpoint = `osmosis/lockup/v1beta1/account_locked_coins/${params.owner}`;
-    return await this.request(endpoint);
+    return await this.request<AccountLockedCoinsResponse>(endpoint);
   }
 
   /* Returns locked records of an account with unlock time beyond timestamp */
@@ -54,7 +54,7 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `osmosis/lockup/v1beta1/account_locked_pasttime/${params.owner}`;
-    return await this.request(endpoint, options);
+    return await this.request<AccountLockedPastTimeResponse>(endpoint, options);
   }
 
   /* Returns locked records of an account with unlock time beyond timestamp
@@ -69,7 +69,7 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `osmosis/lockup/v1beta1/account_locked_pasttime_not_unlocking_only/${params.owner}`;
-    return await this.request(endpoint, options);
+    return await this.request<AccountLockedPastTimeNotUnlockingOnlyResponse>(endpoint, options);
   }
 
   /* Returns unlocked records with unlock time before timestamp */
@@ -83,7 +83,7 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `osmosis/lockup/v1beta1/account_unlocked_before_time/${params.owner}`;
-    return await this.request(endpoint, options);
+    return await this.request<AccountUnlockedBeforeTimeResponse>(endpoint, options);
   }
 
   /* Returns lock records by address, timestamp, denom */
@@ -101,7 +101,7 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `osmosis/lockup/v1beta1/account_locked_pasttime_denom/${params.owner}`;
-    return await this.request(endpoint, options);
+    return await this.request<AccountLockedPastTimeDenomResponse>(endpoint, options);
   }
 
   /* Returns total locked per denom with longer past given time */
@@ -119,7 +119,7 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `osmosis/lockup/v1beta1/locked_denom`;
-    return await this.request(endpoint, options);
+    return await this.request<LockedDenomResponse>(endpoint, options);
   }
 
   /* Returns lock record by id */
@@ -133,7 +133,7 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `osmosis/lockup/v1beta1/locked_by_id/${params.lock_id}`;
-    return await this.request(endpoint, options);
+    return await this.request<LockedResponse>(endpoint, options);
   }
 
   /* Returns synthetic lockups by native lockup id */
@@ -147,7 +147,7 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `osmosis/lockup/v1beta1/synthetic_lockups_by_lock_id/${params.lock_id}`;
-    return await this.request(endpoint, options);
+    return await this.request<SyntheticLockupsByLockupIDResponse>(endpoint, options);
   }
 
   /* Returns account locked records with longer duration */
@@ -161,7 +161,7 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `osmosis/lockup/v1beta1/account_locked_longer_duration/${params.owner}`;
-    return await this.request(endpoint, options);
+    return await this.request<AccountLockedLongerDurationResponse>(endpoint, options);
   }
 
   /* Returns account locked records with a specific duration */
@@ -175,7 +175,7 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `osmosis/lockup/v1beta1/account_locked_duration/${params.owner}`;
-    return await this.request(endpoint, options);
+    return await this.request<AccountLockedDurationResponse>(endpoint, options);
   }
 
   /* Returns account locked records with longer duration excluding tokens
@@ -190,7 +190,7 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `osmosis/lockup/v1beta1/account_locked_longer_duration_not_unlocking_only/${params.owner}`;
-    return await this.request(endpoint, options);
+    return await this.request<AccountLockedLongerDurationNotUnlockingOnlyResponse>(endpoint, options);
   }
 
   /* Returns account's locked records for a denom with longer duration */
@@ -208,7 +208,7 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `osmosis/lockup/v1beta1/account_locked_longer_duration_denom/${params.owner}`;
-    return await this.request(endpoint, options);
+    return await this.request<AccountLockedLongerDurationDenomResponse>(endpoint, options);
   }
 
 }

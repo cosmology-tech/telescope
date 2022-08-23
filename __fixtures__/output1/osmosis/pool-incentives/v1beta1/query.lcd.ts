@@ -23,37 +23,37 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `osmosis/pool-incentives/v1beta1/gauge-ids/${params.pool_id}`;
-    return await this.request(endpoint, options);
+    return await this.request<QueryGaugeIdsResponse>(endpoint, options);
   }
 
   /* DistrInfo */
   async distrInfo(params: QueryDistrInfoRequest): Promise<QueryDistrInfoResponse> {
     const endpoint = `osmosis/pool-incentives/v1beta1/distr_info`;
-    return await this.request(endpoint);
+    return await this.request<QueryDistrInfoResponse>(endpoint);
   }
 
   /* Params */
   async params(params: QueryParamsRequest): Promise<QueryParamsResponse> {
     const endpoint = `osmosis/pool-incentives/v1beta1/params`;
-    return await this.request(endpoint);
+    return await this.request<QueryParamsResponse>(endpoint);
   }
 
   /* LockableDurations */
   async lockableDurations(params: QueryLockableDurationsRequest): Promise<QueryLockableDurationsResponse> {
     const endpoint = `osmosis/pool-incentives/v1beta1/lockable_durations`;
-    return await this.request(endpoint);
+    return await this.request<QueryLockableDurationsResponse>(endpoint);
   }
 
   /* IncentivizedPools */
   async incentivizedPools(params: QueryIncentivizedPoolsRequest): Promise<QueryIncentivizedPoolsResponse> {
     const endpoint = `osmosis/pool-incentives/v1beta1/incentivized_pools`;
-    return await this.request(endpoint);
+    return await this.request<QueryIncentivizedPoolsResponse>(endpoint);
   }
 
   /* ExternalIncentiveGauges */
   async externalIncentiveGauges(params: QueryExternalIncentiveGaugesRequest): Promise<QueryExternalIncentiveGaugesResponse> {
     const endpoint = `osmosis/pool-incentives/v1beta1/external_incentive_gauges`;
-    return await this.request(endpoint);
+    return await this.request<QueryExternalIncentiveGaugesResponse>(endpoint);
   }
 
 }

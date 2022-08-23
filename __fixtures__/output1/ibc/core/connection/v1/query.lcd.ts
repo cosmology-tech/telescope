@@ -24,7 +24,7 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `ibc/core/connection/v1/connections/${params.connection_id}`;
-    return await this.request(endpoint, options);
+    return await this.request<QueryConnectionResponse>(endpoint, options);
   }
 
   /* Connections queries all the IBC connections of a chain. */
@@ -38,7 +38,7 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `ibc/core/connection/v1/connections`;
-    return await this.request(endpoint, options);
+    return await this.request<QueryConnectionsResponse>(endpoint, options);
   }
 
   /* ClientConnections queries the connection paths associated with a client
@@ -53,7 +53,7 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `ibc/core/connection/v1/client_connections/${params.client_id}`;
-    return await this.request(endpoint, options);
+    return await this.request<QueryClientConnectionsResponse>(endpoint, options);
   }
 
   /* ConnectionClientState queries the client state associated with the
@@ -68,7 +68,7 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `ibc/core/connection/v1/connections/${params.connection_id}/client_state`;
-    return await this.request(endpoint, options);
+    return await this.request<QueryConnectionClientStateResponse>(endpoint, options);
   }
 
   /* ConnectionConsensusState queries the consensus state associated with the
@@ -91,7 +91,7 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `ibc/core/connection/v1/connections/${params.connection_id}/consensus_state/revision/${params.revision_number}height/${params.revision_height}`;
-    return await this.request(endpoint, options);
+    return await this.request<QueryConnectionConsensusStateResponse>(endpoint, options);
   }
 
 }

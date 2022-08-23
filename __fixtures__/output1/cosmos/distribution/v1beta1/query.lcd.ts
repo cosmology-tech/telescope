@@ -15,7 +15,7 @@ export class LCDQueryClient extends LCDClient {
   /* Params queries params of the distribution module. */
   async params(params: QueryParamsRequest): Promise<QueryParamsResponse> {
     const endpoint = `cosmos/distribution/v1beta1/params`;
-    return await this.request(endpoint);
+    return await this.request<QueryParamsResponse>(endpoint);
   }
 
   /* ValidatorOutstandingRewards queries rewards of a validator address. */
@@ -29,7 +29,7 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `cosmos/distribution/v1beta1/validators/${params.validator_address}/outstanding_rewards`;
-    return await this.request(endpoint, options);
+    return await this.request<QueryValidatorOutstandingRewardsResponse>(endpoint, options);
   }
 
   /* ValidatorCommission queries accumulated commission for a validator. */
@@ -43,7 +43,7 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `cosmos/distribution/v1beta1/validators/${params.validator_address}/commission`;
-    return await this.request(endpoint, options);
+    return await this.request<QueryValidatorCommissionResponse>(endpoint, options);
   }
 
   /* ValidatorSlashes queries slash events of a validator. */
@@ -69,7 +69,7 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `cosmos/distribution/v1beta1/validators/${params.validator_address}/slashes`;
-    return await this.request(endpoint, options);
+    return await this.request<QueryValidatorSlashesResponse>(endpoint, options);
   }
 
   /* DelegationRewards queries the total rewards accrued by a delegation. */
@@ -87,7 +87,7 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `cosmos/distribution/v1beta1/delegators/${params.delegator_address}rewards/${params.validator_address}`;
-    return await this.request(endpoint, options);
+    return await this.request<QueryDelegationRewardsResponse>(endpoint, options);
   }
 
   /* DelegationTotalRewards queries the total rewards accrued by a each
@@ -102,7 +102,7 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `cosmos/distribution/v1beta1/delegators/${params.delegator_address}/rewards`;
-    return await this.request(endpoint, options);
+    return await this.request<QueryDelegationTotalRewardsResponse>(endpoint, options);
   }
 
   /* DelegatorValidators queries the validators of a delegator. */
@@ -116,7 +116,7 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `cosmos/distribution/v1beta1/delegators/${params.delegator_address}/validators`;
-    return await this.request(endpoint, options);
+    return await this.request<QueryDelegatorValidatorsResponse>(endpoint, options);
   }
 
   /* DelegatorWithdrawAddress queries withdraw address of a delegator. */
@@ -130,13 +130,13 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `cosmos/distribution/v1beta1/delegators/${params.delegator_address}/withdraw_address`;
-    return await this.request(endpoint, options);
+    return await this.request<QueryDelegatorWithdrawAddressResponse>(endpoint, options);
   }
 
   /* CommunityPool queries the community pool coins. */
   async communityPool(params: QueryCommunityPoolRequest): Promise<QueryCommunityPoolResponse> {
     const endpoint = `cosmos/distribution/v1beta1/community_pool`;
-    return await this.request(endpoint);
+    return await this.request<QueryCommunityPoolResponse>(endpoint);
   }
 
 }
