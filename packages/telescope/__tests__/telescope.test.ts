@@ -174,6 +174,9 @@ const options: TelescopeOptions = {
     akash: {
       deployment: {
         v1beta1: {
+          prototypes: {
+            allowUndefinedTypes: true
+          },
           aminoEncoding: {
             enabled: false
           }
