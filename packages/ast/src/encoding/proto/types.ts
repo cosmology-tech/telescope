@@ -163,17 +163,20 @@ export const getFieldOptionality = (
     field: ProtoField,
     isOneOf: boolean
 ) => {
+    const fieldDefaultIsOptional = context.pluginValue('prototypes.fieldDefaultIsOptional');
+    const useOptionalNullable = context.pluginValue('prototypes.useOptionalNullable');
+    const isNullable = field?.options?.['(gogoproto.nullable)'] ?? fieldDefaultIsOptional;
     return isOneOf ||
         (
-            context.pluginValue('prototypes.useOptionalNullable') &&
+            useOptionalNullable &&
             field?.options?.['(gogoproto.nullable)']
         )
         ||
         (
             // this would only happen if previous predicate is false,
             // so lets ensure not to override required properties when gogoproto.nullable=false
-            !context.pluginValue('prototypes.useOptionalNullable') &&
-            context.pluginValue('prototypes.defaultFieldOptionality')
+            !useOptionalNullable &&
+            fieldDefaultIsOptional
         );
 };
 

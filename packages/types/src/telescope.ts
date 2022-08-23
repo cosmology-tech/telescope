@@ -6,8 +6,9 @@ interface TelescopeOpts {
 
     prototypes?: {
         includePackageVar?: boolean;
-        defaultFieldOptionality?: boolean;
+        fieldDefaultIsOptional?: boolean;
         useOptionalNullable?: boolean;
+        allowUndefinedTypes?: boolean;
         excluded?: {
             packages?: string[];
             protos?: string[];
@@ -85,7 +86,8 @@ export const defaultTelescopeOptions: TelescopeOptions = {
 
     prototypes: {
         includePackageVar: false,
-        defaultFieldOptionality: false,
+        fieldDefaultIsOptional: false,
+        allowUndefinedTypes: false,
         useOptionalNullable: true,
         typingsFormat: {
             useExact: false,
