@@ -266,9 +266,14 @@ const requestMethod = (
         // also default to empty
         methodArgs = t.assignmentPattern(
             methodArgs,
-            t.objectExpression([])
-            // IF THIS GIVES TROUBLE
-            // MAKE EMPTY pagination object
+            t.objectExpression([
+                t.objectProperty(
+                    t.identifier('pagination'),
+                    t.identifier('undefined'),
+                    false,
+                    false
+                )
+            ])
         )
     }
 
