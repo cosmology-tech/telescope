@@ -42,7 +42,8 @@ it('parsing service', () => {
     expect(parseService(EstimateSwapExactAmountIn)).toEqual({
         url: '/osmosis/gamm/v1beta1/{poolId}/estimate/swap_exact_amount_in',
         pathParams: ['poolId'],
-        queryParams: ['routes', 'sender', 'tokenIn']
+        queryParams: ['routes', 'sender', 'tokenIn'],
+        casing: {}
     })
 });
 

@@ -71,6 +71,7 @@ export interface ProtoServiceMethodInfo {
     url: string;
     pathParams: string[];
     queryParams: string[];
+    casing: Record<string, string>;
 };
 
 export interface ProtoServiceMethod {

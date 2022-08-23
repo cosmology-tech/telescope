@@ -2662,6 +2662,10 @@ Object {
                           },
                         },
                         "info": Object {
+                          "casing": Object {
+                            "address": "address",
+                            "pagination": "pagination",
+                          },
                           "pathParams": Array [
                             "address",
                           ],
@@ -2699,6 +2703,9 @@ Object {
                           },
                         },
                         "info": Object {
+                          "casing": Object {
+                            "code_id": "codeId",
+                          },
                           "pathParams": Array [
                             "code_id",
                           ],
@@ -2740,6 +2747,9 @@ Object {
                           },
                         },
                         "info": Object {
+                          "casing": Object {
+                            "pagination": "pagination",
+                          },
                           "pathParams": Array [],
                           "queryParams": Array [
                             "pagination",
@@ -2795,6 +2805,10 @@ Object {
                           },
                         },
                         "info": Object {
+                          "casing": Object {
+                            "address": "address",
+                            "pagination": "pagination",
+                          },
                           "pathParams": Array [
                             "address",
                           ],
@@ -2832,6 +2846,9 @@ Object {
                           },
                         },
                         "info": Object {
+                          "casing": Object {
+                            "address": "address",
+                          },
                           "pathParams": Array [
                             "address",
                           ],
@@ -2888,6 +2905,10 @@ pagination defines an optional pagination for the request.",
                           },
                         },
                         "info": Object {
+                          "casing": Object {
+                            "code_id": "codeId",
+                            "pagination": "pagination",
+                          },
                           "pathParams": Array [
                             "code_id",
                           ],
@@ -2930,6 +2951,9 @@ pagination defines an optional pagination for the request.",
                           },
                         },
                         "info": Object {
+                          "casing": Object {
+                            "pagination": "pagination",
+                          },
                           "pathParams": Array [],
                           "queryParams": Array [
                             "pagination",
@@ -2981,6 +3005,10 @@ pagination defines an optional pagination for the request.",
                           },
                         },
                         "info": Object {
+                          "casing": Object {
+                            "address": "address",
+                            "query_data": "queryData",
+                          },
                           "pathParams": Array [
                             "address",
                             "query_data",
@@ -3036,6 +3064,10 @@ pagination defines an optional pagination for the request.",
                           },
                         },
                         "info": Object {
+                          "casing": Object {
+                            "address": "address",
+                            "query_data": "queryData",
+                          },
                           "pathParams": Array [
                             "address",
                             "query_data",

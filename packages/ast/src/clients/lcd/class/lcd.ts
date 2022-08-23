@@ -170,9 +170,10 @@ export const makeTemplateTag = (info: ProtoServiceMethodInfo) => {
     // Number of TemplateLiteral quasis should be exactly one more than the number of expressions
 
     const pathParams = info.pathParams.map(param => {
+        const name = info.casing?.[param] ? info.casing[param] : param;
         return t.memberExpression(
             t.identifier('params'),
-            t.identifier(param)
+            t.identifier(name)
         );
     });
 

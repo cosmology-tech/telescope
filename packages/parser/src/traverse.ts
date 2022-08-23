@@ -277,8 +277,12 @@ const traverseField = (store: ProtoStore, ref: ProtoRef, obj: any, imports: obje
 const traverseServiceMethod = (store: ProtoStore, ref: ProtoRef, obj: any, imports: object, name: string, traversal: string[]) => {
     const service = obj.methods[name];
     const { requestType, responseType, options, comment } = service;
-    let refObject = lookupAny(store, ref, requestType);
-    if (!refObject) {
+    // let responseObject = lookupAny(store, ref, requestType);
+    // if (!responseObject) {
+    // throw new Error('Symbol not found ' + requestType);
+    // }
+    let requestObject = lookupAny(store, ref, requestType);
+    if (!requestObject) {
         throw new Error('Symbol not found ' + requestType);
     }
     const svc = {
@@ -289,13 +293,25 @@ const traverseServiceMethod = (store: ProtoStore, ref: ProtoRef, obj: any, impor
         requestType,
         responseType,
         options,
-        fields: traverseFields(store, ref, refObject.obj, imports, traversal)
+        fields: traverseFields(store, ref, requestObject.obj, imports, traversal)
     };
+
     const info = parseService({
         options,
         fields: svc.fields
     });
     svc.info = info;
+
+    if (info) {
+        // get casing info for request objects
+        Object.keys(requestObject.obj.fields).map(fieldName => {
+            const field: ProtoField = requestObject.obj.fields[fieldName];
+            const camelCase = field.options['(telescope:camel)'];
+            const origCase = field.options['(telescope:orig)'];
+            svc.info.casing = svc.info.casing || {};
+            svc.info.casing[origCase] = camelCase;
+        });
+    }
 
     return svc;
 };

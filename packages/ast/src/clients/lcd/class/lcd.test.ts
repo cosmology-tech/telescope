@@ -67,6 +67,14 @@ it('cosmos fee LCDClient', () => {
     const ast = createLCDClient(context, service);
     expectCode(ast);
 });
+it('cosmos/staking/v1beta1/query.proto', () => {
+    const ref = store.findProto('cosmos/staking/v1beta1/query.proto');
+    const res = traverse(store, ref);
+    const service: ProtoService = getNestedProto(res).Query;
+    const context = new GenericParseContext(ref, store, defaultTelescopeOptions);
+    const ast = createLCDClient(context, service);
+    expectCode(ast);
+});
 it('cosmos/app/v1alpha1/query.proto', () => {
     const ref = store.findProto('cosmos/app/v1alpha1/query.proto');
     const res = traverse(store, ref);
