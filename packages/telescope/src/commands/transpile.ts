@@ -83,7 +83,7 @@ export default async (argv) => {
       }, null, 2)
   );
 
-  telescope({
+  await telescope({
     protoDirs,
     outPath,
     options
