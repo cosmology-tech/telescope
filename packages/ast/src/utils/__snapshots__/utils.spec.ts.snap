@@ -5,25 +5,23 @@ exports[`recursiveNamespace 1`] = `
   export namespace gamm {
     export namespace v1beta {
       export namespace pools {
-        export const getSigningOsmosisClient = async ({
-          rpcEndpoint,
-          signer,
+        export const getSigningOsmosisClientOptions = ({
           defaultTypes = defaultRegistryTypes
         }: {
-          rpcEndpoint: string;
-          signer: OfflineSigner;
           defaultTypes?: ReadonlyArray<[string, GeneratedType]>;
-        }) => {
+        } = {}): {
+          registry: Registry;
+          aminoTypes: AminoTypes;
+        } => {
           const registry = new Registry([...defaultTypes, ...osmosis.gamm.v1beta1.registry, ...osmosis.superfluid.v1beta1.registry, ...osmosis.lockup.registry]);
           const aminoTypes = new AminoTypes({ ...osmosis.gamm.v1beta1.AminoConverter,
             ...osmosis.superfluid.v1beta1.AminoConverter,
             ...osmosis.lockup.AminoConverter
           });
-          const client = await SigningStargateClient.connectWithSigner(rpcEndpoint, signer, {
+          return {
             registry,
             aminoTypes
-          });
-          return client;
+          };
         };
       }
     }

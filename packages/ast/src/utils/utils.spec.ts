@@ -1,5 +1,5 @@
 import { recursiveNamespace, renderNameSafely } from './utils';
-import { createStargateClient } from '../clients/stargate';
+import { createStargateClientOptions } from '../clients/stargate';
 import { getGenericParseContextWithRef, expectCode } from '../../test-utils';
 import { ProtoRef } from '@osmonauts/types';
 
@@ -15,9 +15,9 @@ it('recursiveNamespace', async () => {
     }
     expectCode(
         recursiveNamespace(['osmosis', 'gamm', 'v1beta', 'pools'].reverse(), [
-            createStargateClient({
+            createStargateClientOptions({
                 context: getGenericParseContextWithRef(ref),
-                name: 'getSigningOsmosisClient',
+                name: 'getSigningOsmosisClientOptions',
                 registries: [
                     'osmosis.gamm.v1beta1',
                     'osmosis.superfluid.v1beta1',

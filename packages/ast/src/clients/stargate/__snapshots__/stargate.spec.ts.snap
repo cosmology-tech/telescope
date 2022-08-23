@@ -10,10 +10,11 @@ exports[`createStargateClient 1`] = `
   signer: OfflineSigner;
   defaultTypes?: ReadonlyArray<[string, GeneratedType]>;
 }) => {
-  const registry = new Registry([...defaultTypes, ...osmosis.gamm.v1beta1.registry, ...osmosis.superfluid.v1beta1.registry, ...osmosis.lockup.registry]);
-  const aminoTypes = new AminoTypes({ ...osmosis.gamm.v1beta1.AminoConverter,
-    ...osmosis.superfluid.v1beta1.AminoConverter,
-    ...osmosis.lockup.AminoConverter
+  const {
+    registry,
+    aminoTypes
+  } = getSigningOsmosisClientOptions({
+    defaultTypes
   });
   const client = await SigningStargateClient.connectWithSigner(rpcEndpoint, signer, {
     registry,
@@ -43,11 +44,10 @@ exports[`createStargateClient w/o defaults 1`] = `
   rpcEndpoint: string;
   signer: OfflineSigner;
 }) => {
-  const registry = new Registry([...osmosis.gamm.v1beta1.registry, ...osmosis.superfluid.v1beta1.registry, ...osmosis.lockup.registry]);
-  const aminoTypes = new AminoTypes({ ...osmosis.gamm.v1beta1.AminoConverter,
-    ...osmosis.superfluid.v1beta1.AminoConverter,
-    ...osmosis.lockup.AminoConverter
-  });
+  const {
+    registry,
+    aminoTypes
+  } = getSigningOsmosisClientOptions();
   const client = await SigningStargateClient.connectWithSigner(rpcEndpoint, signer, {
     registry,
     aminoTypes
@@ -57,6 +57,23 @@ exports[`createStargateClient w/o defaults 1`] = `
 `;
 
 exports[`createStargateClient w/o defaults 2`] = `
+"export const getSigningOsmosisClientOptions = (): {
+  registry: Registry;
+  aminoTypes: AminoTypes;
+} => {
+  const registry = new Registry([...otherpackage1.gamm.v1beta1.registry, ...otherpackage1.superfluid.v1beta1.registry, ...otherpackage1.lockup.registry]);
+  const aminoTypes = new AminoTypes({ ...otherpackage1.gamm.v1beta1.AminoConverter,
+    ...otherpackage1.superfluid.v1beta1.AminoConverter,
+    ...otherpackage1.lockup.AminoConverter
+  });
+  return {
+    registry,
+    aminoTypes
+  };
+};"
+`;
+
+exports[`createStargateClient w/o defaults 3`] = `
 Object {
   "AminoTypes": true,
   "GeneratedType": true,
@@ -64,5 +81,37 @@ Object {
   "ReadonlyArray": true,
   "Registry": true,
   "SigningStargateClient": true,
+}
+`;
+
+exports[`createStargateClientOptions 1`] = `
+"export const getSigningOsmosisClientOptions = ({
+  defaultTypes = defaultRegistryTypes
+}: {
+  defaultTypes?: ReadonlyArray<[string, GeneratedType]>;
+} = {}): {
+  registry: Registry;
+  aminoTypes: AminoTypes;
+} => {
+  const registry = new Registry([...defaultTypes, ...somepackage1.gamm.v1beta1.registry, ...somepackage1.superfluid.v1beta1.registry, ...somepackage1.lockup.registry]);
+  const aminoTypes = new AminoTypes({ ...somepackage1.gamm.v1beta1.AminoConverter,
+    ...somepackage1.superfluid.v1beta1.AminoConverter,
+    ...somepackage1.lockup.AminoConverter
+  });
+  return {
+    registry,
+    aminoTypes
+  };
+};"
+`;
+
+exports[`createStargateClientOptions 2`] = `
+Object {
+  "AminoTypes": true,
+  "GeneratedType": true,
+  "ReadonlyArray": true,
+  "Registry": true,
+  "SigningStargateClient": true,
+  "defaultRegistryTypes": true,
 }
 `;
