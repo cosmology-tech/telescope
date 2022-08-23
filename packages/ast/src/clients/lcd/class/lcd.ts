@@ -260,6 +260,8 @@ const requestMethod = (
         methodArgs = t.assignmentPattern(
             methodArgs,
             t.objectExpression([])
+            // IF THIS GIVES TROUBLE
+            // MAKE EMPTY pagination object
         )
     }
 
