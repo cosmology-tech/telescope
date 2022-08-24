@@ -11,6 +11,7 @@ interface TelescopeOpts {
             protos?: string[];
         };
         typingsFormat?: {
+            useDeepPartial?: boolean;
             useExact?: boolean;
             timestamp?: 'date' | 'timestamp';
             duration?: 'duration' | 'string';

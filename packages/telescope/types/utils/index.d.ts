@@ -28,6 +28,7 @@ export declare const UTILS: {
     toTimestamp: string;
     bytesFromBase64: string;
     base64FromBytes: string;
+    setPaginationParams: string;
     _m0: {
         type: string;
         path: string;

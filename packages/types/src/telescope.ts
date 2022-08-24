@@ -14,6 +14,7 @@ interface TelescopeOpts {
             protos?: string[];
         };
         typingsFormat?: {
+            useDeepPartial?: boolean;
             useExact?: boolean;
             timestamp?: 'date' | 'timestamp',
             duration?: 'duration' | 'string'
@@ -90,6 +91,7 @@ export const defaultTelescopeOptions: TelescopeOptions = {
         allowUndefinedTypes: false,
         useOptionalNullable: true,
         typingsFormat: {
+            useDeepPartial: true,
             useExact: false,
             timestamp: 'date',
             duration: 'duration'
