@@ -2,7 +2,7 @@ import { Deployment } from "./deployment";
 import { Group } from "./group";
 import { Params } from "./params";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, Exact } from "@osmonauts/helpers";
+import { isSet, Exact } from "@osmonauts/helpers";
 export const protobufPackage = "akash.deployment.v1beta1";
 
 /** GenesisDeployment defines the basic genesis state used by deployment module */
@@ -83,7 +83,7 @@ export const GenesisDeployment = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<GenesisDeployment>, I>>(object: I): GenesisDeployment {
+  fromPartial<I extends Exact<Partial<GenesisDeployment>, I>>(object: I): GenesisDeployment {
     const message = createBaseGenesisDeployment();
     message.deployment = object.deployment !== undefined && object.deployment !== null ? Deployment.fromPartial(object.deployment) : undefined;
     message.groups = object.groups?.map(e => Group.fromPartial(e)) || [];
@@ -158,7 +158,7 @@ export const GenesisState = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<GenesisState>, I>>(object: I): GenesisState {
+  fromPartial<I extends Exact<Partial<GenesisState>, I>>(object: I): GenesisState {
     const message = createBaseGenesisState();
     message.deployments = object.deployments?.map(e => GenesisDeployment.fromPartial(e)) || [];
     message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
