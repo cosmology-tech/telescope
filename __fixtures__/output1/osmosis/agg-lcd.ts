@@ -10,6 +10,8 @@ import { QueryPoolsRequest, QueryPoolsResponse, QueryNumPoolsRequest, QueryNumPo
 export class QueryClient extends LCDClient {
   constructor({
     restEndpoint
+  }: {
+    restEndpoint: string;
   }) {
     super({
       restEndpoint

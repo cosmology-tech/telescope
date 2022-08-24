@@ -6,6 +6,8 @@ import { QueryValidatorsRequest, QueryValidatorsResponse, QueryValidatorRequest,
 export class LCDQueryClient extends LCDClient {
   constructor({
     restEndpoint
+  }: {
+    restEndpoint: string;
   }) {
     super({
       restEndpoint

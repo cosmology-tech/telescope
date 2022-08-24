@@ -6,6 +6,8 @@ import { QueryDenomTraceRequest, QueryDenomTraceResponse, QueryDenomTracesReques
 export class LCDQueryClient extends LCDClient {
   constructor({
     restEndpoint
+  }: {
+    restEndpoint: string;
   }) {
     super({
       restEndpoint

@@ -7,6 +7,8 @@ import { QueryClientStateRequest, QueryClientStateResponse, QueryClientStatesReq
 export class LCDQueryClient extends LCDClient {
   constructor({
     restEndpoint
+  }: {
+    restEndpoint: string;
   }) {
     super({
       restEndpoint

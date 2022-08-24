@@ -6,6 +6,8 @@ import { QueryGaugeIdsRequest, QueryGaugeIdsResponse, QueryDistrInfoRequest, Que
 export class LCDQueryClient extends LCDClient {
   constructor({
     restEndpoint
+  }: {
+    restEndpoint: string;
   }) {
     super({
       restEndpoint

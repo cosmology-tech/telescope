@@ -4,6 +4,8 @@ import { QueryFeeTokensRequest, QueryFeeTokensResponse, QueryDenomSpotPriceReque
 export class LCDQueryClient extends LCDClient {
   constructor({
     restEndpoint
+  }: {
+    restEndpoint: string;
   }) {
     super({
       restEndpoint

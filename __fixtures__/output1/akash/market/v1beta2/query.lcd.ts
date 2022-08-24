@@ -9,6 +9,8 @@ import { QueryOrdersRequest, QueryOrdersResponse, QueryOrderRequest, QueryOrderR
 export class LCDQueryClient extends LCDClient {
   constructor({
     restEndpoint
+  }: {
+    restEndpoint: string;
   }) {
     super({
       restEndpoint

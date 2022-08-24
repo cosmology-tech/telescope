@@ -6,6 +6,8 @@ import { QueryCertificatesRequest, QueryCertificatesResponse } from "./query";
 export class LCDQueryClient extends LCDClient {
   constructor({
     restEndpoint
+  }: {
+    restEndpoint: string;
   }) {
     super({
       restEndpoint

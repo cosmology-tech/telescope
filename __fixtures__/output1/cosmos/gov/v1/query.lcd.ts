@@ -6,6 +6,8 @@ import { QueryProposalRequest, QueryProposalResponse, QueryProposalsRequest, Que
 export class LCDQueryClient extends LCDClient {
   constructor({
     restEndpoint
+  }: {
+    restEndpoint: string;
   }) {
     super({
       restEndpoint

@@ -6,6 +6,8 @@ import { QueryGroupInfoRequest, QueryGroupInfoResponse, QueryGroupPolicyInfoRequ
 export class LCDQueryClient extends LCDClient {
   constructor({
     restEndpoint
+  }: {
+    restEndpoint: string;
   }) {
     super({
       restEndpoint

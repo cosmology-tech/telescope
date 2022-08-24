@@ -5,6 +5,8 @@ import { QueryPeriodRequest, QueryPeriodResponse, QueryEpochMintProvisionRequest
 export class LCDQueryClient extends LCDClient {
   constructor({
     restEndpoint
+  }: {
+    restEndpoint: string;
   }) {
     super({
       restEndpoint

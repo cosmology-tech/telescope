@@ -4,6 +4,8 @@ import { QueryEpochsInfoRequest, QueryEpochsInfoResponse, QueryCurrentEpochReque
 export class LCDQueryClient extends LCDClient {
   constructor({
     restEndpoint
+  }: {
+    restEndpoint: string;
   }) {
     super({
       restEndpoint

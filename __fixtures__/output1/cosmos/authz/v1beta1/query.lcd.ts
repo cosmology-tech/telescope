@@ -6,6 +6,8 @@ import { QueryGrantsRequest, QueryGrantsResponse, QueryGranterGrantsRequest, Que
 export class LCDQueryClient extends LCDClient {
   constructor({
     restEndpoint
+  }: {
+    restEndpoint: string;
   }) {
     super({
       restEndpoint

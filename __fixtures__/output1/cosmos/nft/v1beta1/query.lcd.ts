@@ -6,6 +6,8 @@ import { QueryBalanceRequest, QueryBalanceResponse, QueryOwnerRequest, QueryOwne
 export class LCDQueryClient extends LCDClient {
   constructor({
     restEndpoint
+  }: {
+    restEndpoint: string;
   }) {
     super({
       restEndpoint

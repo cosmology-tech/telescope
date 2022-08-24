@@ -9,6 +9,8 @@ import { QueryParamsRequest, QueryParamsResponse, AssetTypeRequest, AssetTypeRes
 export class LCDQueryClient extends LCDClient {
   constructor({
     restEndpoint
+  }: {
+    restEndpoint: string;
   }) {
     super({
       restEndpoint

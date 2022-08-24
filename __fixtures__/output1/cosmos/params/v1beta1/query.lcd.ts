@@ -4,6 +4,8 @@ import { QueryParamsRequest, QueryParamsResponse, QuerySubspacesRequest, QuerySu
 export class LCDQueryClient extends LCDClient {
   constructor({
     restEndpoint
+  }: {
+    restEndpoint: string;
   }) {
     super({
       restEndpoint

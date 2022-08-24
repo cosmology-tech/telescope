@@ -7,6 +7,8 @@ import { QueryAccountsRequest, QueryAccountsResponse, QueryAccountRequest, Query
 export class LCDQueryClient extends LCDClient {
   constructor({
     restEndpoint
+  }: {
+    restEndpoint: string;
   }) {
     super({
       restEndpoint

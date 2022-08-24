@@ -1,7 +1,7 @@
 import * as t from '@babel/types';
 import { ProtoService, ProtoServiceMethod, ProtoServiceMethodInfo } from '@osmonauts/types';
 import { GenericParseContext } from '../../../encoding';
-import { callExpression, classMethod, identifier } from '../../../utils';
+import { callExpression, classMethod, identifier, objectPattern } from '../../../utils';
 
 const returnReponseType = (ResponseType: string) => {
     return t.tsTypeAnnotation(
@@ -352,14 +352,25 @@ const createLCDClientClassBody = (clientName: string, methods: t.ClassMethod[]) 
                     'constructor',
                     t.identifier('constructor'),
                     [
-                        t.objectPattern([
+                        objectPattern([
                             t.objectProperty(
                                 t.identifier('restEndpoint'),
                                 t.identifier('restEndpoint'),
                                 false,
                                 true
                             )
-                        ])
+                        ],
+                            t.tsTypeAnnotation(
+                                t.tsTypeLiteral([
+                                    t.tsPropertySignature(
+                                        t.identifier('restEndpoint'),
+                                        t.tsTypeAnnotation(
+                                            t.tsStringKeyword()
+                                        )
+                                    )
+                                ])
+                            )
+                        )
                     ],
                     t.blockStatement([
                         t.expressionStatement(

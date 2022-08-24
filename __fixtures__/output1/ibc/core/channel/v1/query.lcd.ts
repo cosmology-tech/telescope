@@ -8,6 +8,8 @@ import { QueryChannelRequest, QueryChannelResponse, QueryChannelsRequest, QueryC
 export class LCDQueryClient extends LCDClient {
   constructor({
     restEndpoint
+  }: {
+    restEndpoint: string;
   }) {
     super({
       restEndpoint

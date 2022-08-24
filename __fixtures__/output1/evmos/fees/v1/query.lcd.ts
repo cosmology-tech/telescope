@@ -7,6 +7,8 @@ import { QueryDevFeeInfosRequest, QueryDevFeeInfosResponse, QueryDevFeeInfoReque
 export class LCDQueryClient extends LCDClient {
   constructor({
     restEndpoint
+  }: {
+    restEndpoint: string;
   }) {
     super({
       restEndpoint
