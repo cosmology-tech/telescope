@@ -1,5 +1,7 @@
 export const createLCDClient = async ({
   restEndpoint
+}: {
+  restEndpoint: string;
 }) => ({
   cosmos: {
     auth: {

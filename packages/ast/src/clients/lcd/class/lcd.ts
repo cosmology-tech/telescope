@@ -358,8 +358,7 @@ const createLCDClientClassBody = (clientName: string, methods: t.ClassMethod[]) 
                                 t.identifier('restEndpoint'),
                                 false,
                                 true
-                            )
-                        ],
+                            )],
                             t.tsTypeAnnotation(
                                 t.tsTypeLiteral([
                                     t.tsPropertySignature(

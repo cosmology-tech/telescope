@@ -1,4 +1,5 @@
 import * as t from '@babel/types';
+import { objectPattern } from '../../../utils';
 
 export const lcdArguments = (): t.ObjectProperty[] => {
     return [
@@ -13,8 +14,18 @@ export const lcdArguments = (): t.ObjectProperty[] => {
 
 export const lcdFuncArguments = (): t.ObjectPattern[] => {
     return [
-        t.objectPattern(
-            lcdArguments()
+        objectPattern(
+            lcdArguments(),
+            t.tsTypeAnnotation(
+                t.tsTypeLiteral([
+                    t.tsPropertySignature(
+                        t.identifier('restEndpoint'),
+                        t.tsTypeAnnotation(
+                            t.tsStringKeyword()
+                        )
+                    )
+                ])
+            )
         )
     ];
 };

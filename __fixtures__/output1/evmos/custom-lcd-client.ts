@@ -1,5 +1,7 @@
 export const createEvmosLCDClient = async ({
   restEndpoint
+}: {
+  restEndpoint: string;
 }) => ({
   cosmos: {
     bank: {

@@ -1,5 +1,7 @@
 export const createCustomLCDClient = async ({
   restEndpoint
+}: {
+  restEndpoint: string;
 }) => ({
   cosmos: {
     bank: {
