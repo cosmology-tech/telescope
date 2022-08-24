@@ -10,7 +10,11 @@ export const getFieldTypeReference = (context: ProtoParseContext, field: ProtoFi
     let typ: any = null;
 
     if (SCALAR_TYPES.includes(field.type)) {
+
+        // return on scalar
         typ = getTSTypeForProto(context, field);
+        return typ;
+
     } else if (GOOGLE_TYPES.includes(field.type)) {
         typ = getTSTypeFromGoogleType(context, field.type);
     } else {
