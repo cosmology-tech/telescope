@@ -1,7 +1,7 @@
 import { ProtoType, ProtoField } from '@osmonauts/types';
 import { AminoParseContext, ProtoParseContext } from '../context';
 export declare const SCALAR_TYPES: string[];
-export declare const NATIVE_TYPES: string[];
+export declare const GOOGLE_TYPES: string[];
 export declare const types: {
     basic: {
         double: number;

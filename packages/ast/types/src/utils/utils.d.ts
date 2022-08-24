@@ -1,10 +1,12 @@
 import * as t from '@babel/types';
 import { ProtoField } from '@osmonauts/types';
+import { ProtoParseContext } from '../encoding';
 declare const BILLION: t.NumericLiteral;
 export { BILLION };
 export declare const cleanComment: (str: any) => any;
 export declare const makeCommentBlock: (comment: string) => t.CommentBlock;
 export declare const renderNameSafely: (name: any) => any;
+export declare const getProtoFieldTypeName: (context: ProtoParseContext, field: ProtoField) => any;
 export declare const recursiveNamespace: (names: any, moduleBlockBody: any) => any;
 export declare const bindMethod: (name: string) => t.ExpressionStatement;
 export declare const shorthandProperty: (prop: string) => t.ObjectProperty;

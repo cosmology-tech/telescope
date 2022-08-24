@@ -95,7 +95,7 @@ export const getObjectName = (name: string, scope: string[] = []) => {
     return [...scopes, name].join('_')
 };
 
-export const NATIVE_TYPES = [
+export const SCALAR_TYPES = [
     "double",   // 0
     "float",    // 1
     "int32",    // 2
