@@ -1,22 +1,18 @@
 import * as t from '@babel/types';
 import { ProtoType, ProtoField } from '@osmonauts/types';
-import { identifier, tsPropertySignature, functionDeclaration, makeCommentBlock, getProtoFieldTypeName } from '../../utils';
+import { identifier, tsPropertySignature, functionDeclaration, makeCommentBlock } from '../../utils';
 import { ProtoParseContext } from '../context';
 
 import {
-    SCALAR_TYPES,
     getBaseCreateTypeFuncName,
     getFieldOptionality,
-    getOneOfs,
-    GOOGLE_TYPES,
+    getOneOfs
 } from './types';
 
 import {
     getDefaultTSTypeFromProtoType,
     getFieldTypeReference,
-    getTSType,
-    getTSTypeForProto,
-    getTSTypeFromGoogleType
+    getTSType
 } from '../types';
 
 const getProtoField = (context: ProtoParseContext, field: ProtoField) => {
