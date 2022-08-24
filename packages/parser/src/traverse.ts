@@ -3,7 +3,7 @@ import { Service, Type, Field, Enum, Root, Namespace } from '@pyramation/protobu
 import { importLookup, lookup, lookupAny, lookupNested, protoScopeImportLookup } from './lookup';
 import { parseService } from './services';
 import { ProtoStore } from './store';
-import { instanceType, lookupSymbolScopes, NATIVE_TYPES } from './utils';
+import { instanceType, lookupSymbolScopes, SCALAR_TYPES } from './utils';
 
 export const traverse = (store: ProtoStore, ref: ProtoRef) => {
     const imports: Record<string, string[]> = {};
@@ -83,11 +83,11 @@ const traverseFields = (
 
         let found: any = null;
 
-        if (NATIVE_TYPES.includes(field.type)) {
+        if (SCALAR_TYPES.includes(field.type)) {
             m[key] = {
                 parsedType: { name: field.type, type: 'native' },
                 isScalar: true,
-                typeNum: NATIVE_TYPES.indexOf(field.type),
+                typeNum: SCALAR_TYPES.indexOf(field.type),
                 ...serialize()
             }
             return m;

@@ -1,5 +1,6 @@
 import * as t from '@babel/types';
 import { ProtoField } from '@osmonauts/types';
+import { ProtoParseContext } from '../encoding';
 
 const BILLION = t.numericLiteral(1_000_000_000);
 BILLION.extra = { raw: "1_000_000_000", rawValue: 1000000000 };
@@ -45,6 +46,12 @@ export const renderNameSafely = (name) => {
         return str;
     }).join('_');
 };
+
+export const getProtoFieldTypeName = (context: ProtoParseContext, field: ProtoField) => {
+    let name = context.getTypeName(field)
+    return renderNameSafely(name);
+};
+
 
 export const recursiveNamespace = (names, moduleBlockBody) => {
     if (!names || !names.length) return moduleBlockBody;

@@ -1,6 +1,44 @@
 import * as t from '@babel/types';
 import { ProtoField } from '@osmonauts/types';
+import { getProtoFieldTypeName } from '../utils';
 import { GenericParseContext, ProtoParseContext } from './context';
+import { GOOGLE_TYPES, SCALAR_TYPES } from './proto';
+
+
+export const getFieldTypeReference = (context: ProtoParseContext, field: ProtoField) => {
+    let ast: any = null;
+    let typ: any = null;
+
+    if (SCALAR_TYPES.includes(field.type)) {
+
+        // return on scalar
+        typ = getTSTypeForProto(context, field);
+        return typ;
+
+    } else if (GOOGLE_TYPES.includes(field.type)) {
+        typ = getTSTypeFromGoogleType(context, field.type);
+    } else {
+        typ = t.tsTypeReference(t.identifier(getProtoFieldTypeName(context, field)));
+    }
+
+    if (
+        field.parsedType?.type === 'Type' &&
+        field.rule !== 'repeated' &&
+        context.pluginValue('prototypes.allowUndefinedTypes')
+    ) {
+        // NOTE: unfortunately bc of defaults...
+        ast = t.tsUnionType(
+            [
+                typ,
+                t.tsUndefinedKeyword()
+            ]
+        )
+    } else {
+        ast = typ;
+    }
+
+    return ast;
+}
 
 export const getTSType = (context: GenericParseContext, type: string) => {
     switch (type) {
@@ -24,6 +62,13 @@ export const getTSType = (context: GenericParseContext, type: string) => {
             return t.tsTypeReference(t.identifier('Uint8Array'));
         case 'bool':
             return t.tsBooleanKeyword();
+        default:
+            throw new Error('getTSType() type not found');
+    };
+};
+
+export const getTSTypeFromGoogleType = (context: GenericParseContext, type: string) => {
+    switch (type) {
         case 'google.protobuf.Timestamp':
             switch (context.pluginValue('prototypes.typingsFormat.timestamp')) {
                 case 'timestamp':
@@ -43,7 +88,7 @@ export const getTSType = (context: GenericParseContext, type: string) => {
         case 'google.protobuf.Any':
             return t.tsTypeReference(t.identifier('Any'));
         default:
-            throw new Error('getTSType() type not found');
+            throw new Error('getTSTypeFromGoogleType() type not found');
     };
 };
 

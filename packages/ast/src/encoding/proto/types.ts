@@ -20,10 +20,7 @@ export const SCALAR_TYPES = [
     'bool'
 ];
 
-export const NATIVE_TYPES = [
-    ...SCALAR_TYPES,
-
-    // yes, they're not "native", but in many ways, they are...
+export const GOOGLE_TYPES = [
     'google.protobuf.Timestamp',
     'google.protobuf.Duration',
     'google.protobuf.Any'
