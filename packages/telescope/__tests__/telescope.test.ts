@@ -24,6 +24,7 @@ const options: TelescopeOptions = {
       ]
     },
     typingsFormat: {
+      useDeepPartial: true,
       useExact: false,
       timestamp: 'date',
       duration: 'duration'
@@ -175,7 +176,10 @@ const options: TelescopeOptions = {
       deployment: {
         v1beta1: {
           prototypes: {
-            allowUndefinedTypes: true
+            allowUndefinedTypes: true,
+            typingsFormat: {
+              useDeepPartial: false
+            }
           },
           aminoEncoding: {
             enabled: false
