@@ -146,7 +146,14 @@ export const fromPartialMethodFields = (context: ProtoParseContext, name: string
 };
 
 export const fromPartialMethod = (context: ProtoParseContext, name: string, proto: ProtoType) => {
-    context.addUtil('DeepPartial');
+    const useDeepPartial = context.pluginValue('prototypes.typingsFormat.useDeepPartial');
+
+    let partialName: 'Partial' | 'DeepPartial' = 'Partial';
+    if (useDeepPartial) {
+        context.addUtil('DeepPartial');
+        partialName = 'DeepPartial';
+    }
+
 
     const fields = fromPartialMethodFields(context, name, proto);
     let varName = 'object';
@@ -168,7 +175,7 @@ export const fromPartialMethod = (context: ProtoParseContext, name: string, prot
                     t.identifier('Exact'),
                     t.tsTypeParameterInstantiation([
                         t.tsTypeReference(
-                            t.identifier('DeepPartial'),
+                            t.identifier(partialName),
                             t.tsTypeParameterInstantiation([
                                 t.tsTypeReference(
                                     t.identifier(name)
@@ -199,7 +206,7 @@ export const fromPartialMethod = (context: ProtoParseContext, name: string, prot
             varName,
             t.tsTypeAnnotation(
                 t.tsTypeReference(
-                    t.identifier('DeepPartial'),
+                    t.identifier(partialName),
                     t.tsTypeParameterInstantiation(
                         [
                             t.tsTypeReference(

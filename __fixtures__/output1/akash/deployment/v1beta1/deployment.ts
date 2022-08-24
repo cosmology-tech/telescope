@@ -1,7 +1,7 @@
 import { GroupSpec, GroupID } from "./group";
 import { Coin } from "../../../cosmos/base/v1beta1/coin";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, bytesFromBase64, base64FromBytes, DeepPartial, Exact, Long } from "@osmonauts/helpers";
+import { isSet, bytesFromBase64, base64FromBytes, Exact, Long } from "@osmonauts/helpers";
 export const protobufPackage = "akash.deployment.v1beta1";
 
 /** State is an enum which refers to state of deployment */
@@ -199,7 +199,7 @@ export const MsgCreateDeployment = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgCreateDeployment>, I>>(object: I): MsgCreateDeployment {
+  fromPartial<I extends Exact<Partial<MsgCreateDeployment>, I>>(object: I): MsgCreateDeployment {
     const message = createBaseMsgCreateDeployment();
     message.id = object.id !== undefined && object.id !== null ? DeploymentID.fromPartial(object.id) : undefined;
     message.groups = object.groups?.map(e => GroupSpec.fromPartial(e)) || [];
@@ -246,7 +246,7 @@ export const MsgCreateDeploymentResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgCreateDeploymentResponse>, I>>(_: I): MsgCreateDeploymentResponse {
+  fromPartial<I extends Exact<Partial<MsgCreateDeploymentResponse>, I>>(_: I): MsgCreateDeploymentResponse {
     const message = createBaseMsgCreateDeploymentResponse();
     return message;
   }
@@ -313,7 +313,7 @@ export const MsgDepositDeployment = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgDepositDeployment>, I>>(object: I): MsgDepositDeployment {
+  fromPartial<I extends Exact<Partial<MsgDepositDeployment>, I>>(object: I): MsgDepositDeployment {
     const message = createBaseMsgDepositDeployment();
     message.id = object.id !== undefined && object.id !== null ? DeploymentID.fromPartial(object.id) : undefined;
     message.amount = object.amount !== undefined && object.amount !== null ? Coin.fromPartial(object.amount) : undefined;
@@ -358,7 +358,7 @@ export const MsgDepositDeploymentResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgDepositDeploymentResponse>, I>>(_: I): MsgDepositDeploymentResponse {
+  fromPartial<I extends Exact<Partial<MsgDepositDeploymentResponse>, I>>(_: I): MsgDepositDeploymentResponse {
     const message = createBaseMsgDepositDeploymentResponse();
     return message;
   }
@@ -442,7 +442,7 @@ export const MsgUpdateDeployment = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgUpdateDeployment>, I>>(object: I): MsgUpdateDeployment {
+  fromPartial<I extends Exact<Partial<MsgUpdateDeployment>, I>>(object: I): MsgUpdateDeployment {
     const message = createBaseMsgUpdateDeployment();
     message.id = object.id !== undefined && object.id !== null ? DeploymentID.fromPartial(object.id) : undefined;
     message.groups = object.groups?.map(e => GroupSpec.fromPartial(e)) || [];
@@ -488,7 +488,7 @@ export const MsgUpdateDeploymentResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgUpdateDeploymentResponse>, I>>(_: I): MsgUpdateDeploymentResponse {
+  fromPartial<I extends Exact<Partial<MsgUpdateDeploymentResponse>, I>>(_: I): MsgUpdateDeploymentResponse {
     const message = createBaseMsgUpdateDeploymentResponse();
     return message;
   }
@@ -544,7 +544,7 @@ export const MsgCloseDeployment = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgCloseDeployment>, I>>(object: I): MsgCloseDeployment {
+  fromPartial<I extends Exact<Partial<MsgCloseDeployment>, I>>(object: I): MsgCloseDeployment {
     const message = createBaseMsgCloseDeployment();
     message.id = object.id !== undefined && object.id !== null ? DeploymentID.fromPartial(object.id) : undefined;
     return message;
@@ -588,7 +588,7 @@ export const MsgCloseDeploymentResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgCloseDeploymentResponse>, I>>(_: I): MsgCloseDeploymentResponse {
+  fromPartial<I extends Exact<Partial<MsgCloseDeploymentResponse>, I>>(_: I): MsgCloseDeploymentResponse {
     const message = createBaseMsgCloseDeploymentResponse();
     return message;
   }
@@ -655,7 +655,7 @@ export const DeploymentID = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<DeploymentID>, I>>(object: I): DeploymentID {
+  fromPartial<I extends Exact<Partial<DeploymentID>, I>>(object: I): DeploymentID {
     const message = createBaseDeploymentID();
     message.owner = object.owner ?? "";
     message.dseq = object.dseq !== undefined && object.dseq !== null ? Long.fromValue(object.dseq) : Long.UZERO;
@@ -746,7 +746,7 @@ export const Deployment = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Deployment>, I>>(object: I): Deployment {
+  fromPartial<I extends Exact<Partial<Deployment>, I>>(object: I): Deployment {
     const message = createBaseDeployment();
     message.deploymentId = object.deploymentId !== undefined && object.deploymentId !== null ? DeploymentID.fromPartial(object.deploymentId) : undefined;
     message.state = object.state ?? 0;
@@ -828,7 +828,7 @@ export const DeploymentFilters = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<DeploymentFilters>, I>>(object: I): DeploymentFilters {
+  fromPartial<I extends Exact<Partial<DeploymentFilters>, I>>(object: I): DeploymentFilters {
     const message = createBaseDeploymentFilters();
     message.owner = object.owner ?? "";
     message.dseq = object.dseq !== undefined && object.dseq !== null ? Long.fromValue(object.dseq) : Long.UZERO;
