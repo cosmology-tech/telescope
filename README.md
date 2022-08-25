@@ -246,6 +246,14 @@ See [RPC Clients](#rpc-clients) for more info.
 | `prototypes.typingsFormat.timestamp`      | use either `date` or `timestamp` for `Timestamp` proto type     | "date"    |
 | `prototypes.typingsFormat.duration`       | use either `duration` or `string` for `Duration` proto type     | "duration"|
 
+### Typescript Disabling
+
+| option                                       | description                                                     | defaults |
+| -------------------------------------------- | --------------------------------------------------------------  | ---------|
+| `tsDisable.disableAll`                       | if true, will include `//@ts-nocheck` on every output file      | `false`  |
+| `tsDisable.patterns`                         | if set, will include `//@ts-nocheck` on matched patterns        | `[]`     |
+| `tsDisable.files`                            | if set, will include `//@ts-nocheck` on matched files           | `[]`     |
+
 ## Types
 
 ### Timestamp

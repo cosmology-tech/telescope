@@ -2,10 +2,10 @@ import { getRelativePath } from '../utils';
 import { join, dirname } from 'path';
 import { sync as mkdirp } from 'mkdirp';
 import { TelescopeBuilder } from '../builder';
-import { writeFileSync } from 'fs';
 import * as t from '@babel/types';
 import generate from '@babel/generator';
 import pkg from '../../package.json';
+import { writeContentToFile } from '../utils/files';
 
 const version = process.env.NODE_ENV === 'test' ? 'latest' : pkg.version;
 
@@ -35,6 +35,7 @@ export const plugin = (
   * and run the transpile command or yarn proto command to regenerate this bundle.
   */
  \n`;
-    writeFileSync(indexOutFile, header + indexContent);
+
+    writeContentToFile(builder.outPath, builder.options, header + indexContent, indexOutFile);
 
 };

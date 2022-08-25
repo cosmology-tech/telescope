@@ -1,15 +1,12 @@
 import { aggregateImports, getDepsFromQueries, getImportStatements } from '../imports';
 import { getNestedProto } from '@osmonauts/proto-parser';
 import { parse } from '../parse';
-import { dirname, join } from 'path';
-import { sync as mkdirp } from 'mkdirp';
-import { writeFileSync } from 'fs';
+import { join } from 'path';
 import { TelescopeBuilder } from '../builder';
 import { createAggregatedLCDClient } from '@osmonauts/ast';
 import { ProtoRef, ProtoService } from '@osmonauts/types';
 import { TelescopeParseContext } from '../build';
-import * as t from '@babel/types';
-import generate from '@babel/generator';
+import { writeAstToFile } from '../utils/files';
 
 const isExcluded = (builder: TelescopeBuilder, ref: ProtoRef) => {
     return builder.options.prototypes?.excluded?.protos?.includes(ref.filename) ||
@@ -110,11 +107,7 @@ export const plugin = (
         .concat(importStmts)
         .concat(lcdast);
 
-    const ast = t.program(prog);
-    const content = generate(ast).code;
-
     const filename = join(builder.outPath, localname);
-    mkdirp(dirname(filename));
-    writeFileSync(filename, content);
+    writeAstToFile(builder.outPath, builder.options, prog, filename);
 
 };

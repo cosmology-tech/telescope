@@ -22,8 +22,9 @@ interface TelescopeOpts {
     };
 
     tsDisable?: {
-        //@ts-nocheck
-        files?: string[]
+        files?: string[];
+        disableAll?: boolean;
+        patterns?: string[];
     },
 
     bundle?: {
@@ -108,7 +109,9 @@ export const defaultTelescopeOptions: TelescopeOptions = {
     },
 
     tsDisable: {
-        files: []
+        files: [],
+        patterns: [],
+        disableAll: false
     },
 
     stargateClients: {

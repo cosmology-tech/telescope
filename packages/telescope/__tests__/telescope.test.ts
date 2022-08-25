@@ -13,6 +13,16 @@ store.traverseAll();
 
 const options: TelescopeOptions = {
 
+  tsDisable: {
+    disableAll: false,
+    patterns: [
+      'osmosis/**/*amino.ts',
+    ],
+    files: [
+      'akash/deployment/v1beta1/deployment.ts'
+    ]
+  },
+
   prototypes: {
     includePackageVar: true,
     fieldDefaultIsOptional: false,

@@ -1614,10 +1614,10 @@
   resolved "https://registry.npmjs.org/@cosmjs/utils/-/utils-0.28.13.tgz#2fd2844ec832d7833811e2ae1691305d09791a08"
   integrity sha512-dVeMBiyg+46x7XBZEfJK8yTihphbCFpjVYmLJVqmTsHfJwymQ65cpyW/C+V/LgWARGK8hWQ/aX9HM5Ao8QmMSg==
 
-"@cosmwasm/ts-codegen@0.13.0":
-  version "0.13.0"
-  resolved "https://registry.npmjs.org/@cosmwasm/ts-codegen/-/ts-codegen-0.13.0.tgz#c7a0f49cc7f6c6afbbc8db76d193aa3dfde12e28"
-  integrity sha512-M28JwqRzdWy8s24GC2HSFsys4hcG2CclfSFt7S9bijYo6y44iRDDjJbkSDunGK/DAxkzJInso63vVYC8+0ue9g==
+"@cosmwasm/ts-codegen@0.13.1":
+  version "0.13.1"
+  resolved "https://registry.npmjs.org/@cosmwasm/ts-codegen/-/ts-codegen-0.13.1.tgz#eeb5918171e2bf635e55870ed8492aa88e47d5f3"
+  integrity sha512-q56nncxid1TwlgvOcszal4MUSiqVQw6iR4AOOKekwqbPEOdO9oPcGi5OBmo1Z/hPcB3kTP6p8L/0Md499zU3RA==
   dependencies:
     "@babel/core" "7.18.10"
     "@babel/generator" "7.18.12"
@@ -6659,19 +6659,19 @@ minimalistic-crypto-utils@^1.0.1:
   resolved "https://registry.npmjs.org/minimalistic-crypto-utils/-/minimalistic-crypto-utils-1.0.1.tgz#f6c00c1c0b082246e5c4d99dfb8c7c083b2b582a"
   integrity sha512-JIYlbt6g8i5jKfJ3xz7rF0LXmv2TkDxBLUkiBeZ7bAx4GnnNMr8xFpGnOxn6GhTEHx3SjRrZEoU+j04prX1ktg==
 
+minimatch@5.1.0, minimatch@^5.0.1:
+  version "5.1.0"
+  resolved "https://registry.npmjs.org/minimatch/-/minimatch-5.1.0.tgz#1717b464f4971b144f6aabe8f2d0b8e4511e09c7"
+  integrity sha512-9TPBGGak4nHfGZsPBohm9AWg6NoT7QTCehS3BIJABslyZbzxfV78QM2Y6+i741OPZIafFAaiiEMh5OyIrJPgtg==
+  dependencies:
+    brace-expansion "^2.0.1"
+
 minimatch@^3.0.4, minimatch@^3.1.1, minimatch@^3.1.2:
   version "3.1.2"
   resolved "https://registry.npmjs.org/minimatch/-/minimatch-3.1.2.tgz#19cd194bfd3e428f049a70817c038d89ab4be35b"
   integrity sha512-J7p63hRiAjw1NDEww1W7i37+ByIrOWO5XQQAzZ3VOcL0PNybwpfmV/N05zFAzwQ9USyEcX6t3UO+K5aqBQOIHw==
   dependencies:
     brace-expansion "^1.1.7"
-
-minimatch@^5.0.1:
-  version "5.1.0"
-  resolved "https://registry.npmjs.org/minimatch/-/minimatch-5.1.0.tgz#1717b464f4971b144f6aabe8f2d0b8e4511e09c7"
-  integrity sha512-9TPBGGak4nHfGZsPBohm9AWg6NoT7QTCehS3BIJABslyZbzxfV78QM2Y6+i741OPZIafFAaiiEMh5OyIrJPgtg==
-  dependencies:
-    brace-expansion "^2.0.1"
 
 minimist-options@4.1.0:
   version "4.1.0"

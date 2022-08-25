@@ -1,3 +1,4 @@
+//@ts-nocheck
 import { GroupSpec, GroupID } from "./group";
 import { Coin } from "../../../cosmos/base/v1beta1/coin";
 import * as _m0 from "protobufjs/minimal";

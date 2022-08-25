@@ -1,3 +1,4 @@
+//@ts-nocheck
 import { Coin } from "../../../cosmos/base/v1beta1/coin";
 import { AminoMsg } from "@cosmjs/amino";
 import { Long } from "@osmonauts/helpers";

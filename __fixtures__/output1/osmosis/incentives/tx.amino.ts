@@ -1,3 +1,4 @@
+//@ts-nocheck
 import { QueryCondition, lockQueryTypeFromJSON } from "../lockup/lock";
 import { Coin } from "../../cosmos/base/v1beta1/coin";
 import { Timestamp } from "../../google/protobuf/timestamp";
