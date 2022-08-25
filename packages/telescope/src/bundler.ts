@@ -88,7 +88,7 @@ export class Bundler {
         program: t.Statement[],
         filename: string
     ) {
-        writeAstToFile(this.builder.options, program, filename);
+        writeAstToFile(this.builder.outPath, this.builder.options, program, filename);
     }
 
     // addToBundle adds the path into the namespaced bundle object

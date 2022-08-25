@@ -5,6 +5,7 @@ import { bundlePackages } from './bundle';
 import { BundlerFile, TelescopeInput } from './types';
 import { Bundler } from './bundler';
 import deepmerge from 'deepmerge';
+import { resolve } from 'path';
 
 import { plugin as createTypes } from './generators/create-types';
 import { plugin as createAminoConverters } from './generators/create-amino-converters';
@@ -20,6 +21,13 @@ import { plugin as createStargateClients } from './generators/create-stargate-cl
 import { plugin as createBundle } from './generators/create-bundle';
 import { plugin as createIndex } from './generators/create-index';
 import { plugin as createCosmWasmBundle } from './generators/create-cosmwasm-bundle';
+
+const sanitizeOptions = (options): TelescopeOptions => {
+    options = deepmerge(defaultTelescopeOptions, options ?? {});
+    // strip off leading slashes
+    options.tsDisable.files = options.tsDisable.files.map(file => file.startsWith('/') ? file : file.replace(/^\//, ''));
+    return options;
+};
 
 export class TelescopeBuilder {
     store: ProtoStore;
@@ -37,8 +45,8 @@ export class TelescopeBuilder {
 
     constructor({ protoDirs, outPath, store, options }: TelescopeInput & { store?: ProtoStore }) {
         this.protoDirs = protoDirs;
-        this.outPath = outPath;
-        this.options = deepmerge(defaultTelescopeOptions, options ?? {});
+        this.outPath = resolve(outPath);
+        this.options = sanitizeOptions(options);
         this.store = store ?? new ProtoStore(protoDirs);
         this.store.traverseAll();
     }
@@ -75,7 +83,6 @@ export class TelescopeBuilder {
         // [x] get bundle of all packages
         const bundles = bundlePackages(this.store)
             .map(bundle => {
-
                 // store bundleFile in filesToInclude
                 const bundler = new Bundler(this, bundle);
 

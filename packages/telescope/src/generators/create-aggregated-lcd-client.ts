@@ -108,6 +108,6 @@ export const plugin = (
         .concat(lcdast);
 
     const filename = join(builder.outPath, localname);
-    writeAstToFile(builder.options, prog, filename);
+    writeAstToFile(builder.outPath, builder.options, prog, filename);
 
 };

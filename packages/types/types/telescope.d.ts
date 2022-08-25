@@ -20,6 +20,7 @@ interface TelescopeOpts {
     tsDisable?: {
         files?: string[];
         disableAll?: boolean;
+        patterns?: string[];
     };
     bundle?: {
         enabled: boolean;
