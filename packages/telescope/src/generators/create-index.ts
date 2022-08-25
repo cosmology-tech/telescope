@@ -36,6 +36,6 @@ export const plugin = (
   */
  \n`;
 
-    writeContentToFile(builder.options, header + indexContent, indexContent);
+    writeContentToFile(builder.options, header + indexContent, indexOutFile);
 
 };

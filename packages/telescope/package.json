@@ -80,7 +80,7 @@
     "@babel/runtime": "^7.18.9",
     "@babel/traverse": "7.18.13",
     "@babel/types": "7.18.13",
-    "@cosmwasm/ts-codegen": "0.13.0",
+    "@cosmwasm/ts-codegen": "0.13.1",
     "@osmonauts/ast": "^0.14.6",
     "@osmonauts/proto-parser": "^0.11.4",
     "@osmonauts/types": "^0.9.3",

@@ -1,15 +1,11 @@
 import { aggregateImports, getDepsFromQueries, getImportStatements } from '../imports';
 import { getNestedProto } from '@osmonauts/proto-parser';
 import { parse } from '../parse';
-import { dirname, join } from 'path';
-import { sync as mkdirp } from 'mkdirp';
-import { writeFileSync } from 'fs';
+import { join } from 'path';
 import { TelescopeBuilder } from '../builder';
 import { createAggregatedLCDClient } from '@osmonauts/ast';
 import { ProtoRef, ProtoService } from '@osmonauts/types';
 import { TelescopeParseContext } from '../build';
-import * as t from '@babel/types';
-import generate from '@babel/generator';
 import { writeAstToFile } from '../utils/files';
 
 const isExcluded = (builder: TelescopeBuilder, ref: ProtoRef) => {
