@@ -4,6 +4,8 @@ exports[`AggregatedLCDClient 1`] = `
 "export class QueryClient extends LCDClient {
   constructor({
     restEndpoint
+  }: {
+    restEndpoint: string;
   }) {
     super({
       restEndpoint
@@ -249,6 +251,8 @@ exports[`options 1`] = `
 "export class QueryClient extends LCDClient {
   constructor({
     restEndpoint
+  }: {
+    restEndpoint: string;
   }) {
     super({
       restEndpoint

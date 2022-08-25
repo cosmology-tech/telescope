@@ -3,6 +3,8 @@
 exports[`createScopedLCDFactory 1`] = `
 "export const lcd = async ({
   restEndpoint
+}: {
+  restEndpoint: string;
 }) => ({
   cosmos: {
     bank: {
