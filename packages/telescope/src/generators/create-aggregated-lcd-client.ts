@@ -10,6 +10,7 @@ import { ProtoRef, ProtoService } from '@osmonauts/types';
 import { TelescopeParseContext } from '../build';
 import * as t from '@babel/types';
 import generate from '@babel/generator';
+import { writeAstToFile } from '../utils/files';
 
 const isExcluded = (builder: TelescopeBuilder, ref: ProtoRef) => {
     return builder.options.prototypes?.excluded?.protos?.includes(ref.filename) ||
@@ -110,11 +111,7 @@ export const plugin = (
         .concat(importStmts)
         .concat(lcdast);
 
-    const ast = t.program(prog);
-    const content = generate(ast).code;
-
     const filename = join(builder.outPath, localname);
-    mkdirp(dirname(filename));
-    writeFileSync(filename, content);
+    writeAstToFile(builder.options, prog, filename);
 
 };

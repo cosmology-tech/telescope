@@ -8,6 +8,7 @@ import { createFileBundle } from './bundle';
 import { TelescopeBuilder } from './builder';
 import { ProtoRef } from '@osmonauts/types';
 import { Bundle, BundlerFile } from './types';
+import { writeAstToFile } from './utils/files';
 
 export class Bundler {
     builder: TelescopeBuilder;
@@ -87,10 +88,7 @@ export class Bundler {
         program: t.Statement[],
         filename: string
     ) {
-        const ast = t.program(program);
-        const content = generate(ast).code;
-        mkdirp(dirname(filename));
-        writeFileSync(filename, content);
+        writeAstToFile(this.builder.options, program, filename);
     }
 
     // addToBundle adds the path into the namespaced bundle object

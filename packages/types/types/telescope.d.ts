@@ -17,6 +17,10 @@ interface TelescopeOpts {
             duration?: 'duration' | 'string';
         };
     };
+    tsDisable?: {
+        files?: string[];
+        disableAll?: boolean;
+    };
     bundle?: {
         enabled: boolean;
     };
