@@ -50,6 +50,7 @@ export default async (argv) => {
                 'stargaze-royalty-group',
                 'stargaze-sg721',
                 'stargaze-whitelist',
+                'wasmswap',
             ].map(name => {
                 return {
                     name,
