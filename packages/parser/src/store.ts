@@ -2,10 +2,11 @@ import { sync as glob } from 'glob';
 import { parse } from '@pyramation/protobufjs';
 import { readFileSync } from 'fs';
 import { join, resolve as pathResolve } from 'path';
-import { ProtoDep, ProtoRef } from '@osmonauts/types';
+import { ProtoDep, ProtoRef, TelescopeOptions } from '@osmonauts/types';
 import { getNestedProto, getPackageAndNestedFromStr } from './utils';
 import { traverse } from './traverse';
 import { lookupAny } from './lookup';
+import { defaultTelescopeOptions } from '@osmonauts/types';
 
 import google_any from './native/any';
 import google_duration from './native/duration';
@@ -49,11 +50,11 @@ export class ProtoStore {
     deps: ProtoDep[];
     protos: ProtoRef[];
     packages: string[];
-    options: ParseProtoOptions;
+    options: TelescopeOptions;
 
     _traversed: boolean = false;
 
-    constructor(protoDirs: string[] = [], options: ParseProtoOptions = protoParseOptionsDefaults) {
+    constructor(protoDirs: string[] = [], options: TelescopeOptions = defaultTelescopeOptions) {
         this.protoDirs = protoDirs.map(protoDir => pathResolve(protoDir));
         this.options = options;
     }
@@ -108,7 +109,7 @@ export class ProtoStore {
 
         const protos = contents.map(({ absolute, filename, content }) => {
             try {
-                const proto = parseProto(content, this.options);
+                const proto = parseProto(content, this.options.prototypes.parser);
                 return {
                     absolute,
                     filename,

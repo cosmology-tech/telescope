@@ -1,4 +1,4 @@
-import { ProtoDep, ProtoRef } from '@osmonauts/types';
+import { ProtoDep, ProtoRef, TelescopeOptions } from '@osmonauts/types';
 interface ParseProtoOptions {
     keepCase: boolean;
     alternateCommentMode: boolean;
@@ -11,9 +11,9 @@ export declare class ProtoStore {
     deps: ProtoDep[];
     protos: ProtoRef[];
     packages: string[];
-    options: ParseProtoOptions;
+    options: TelescopeOptions;
     _traversed: boolean;
-    constructor(protoDirs?: string[], options?: ParseProtoOptions);
+    constructor(protoDirs?: string[], options?: TelescopeOptions);
     findProto(filename: any): ProtoRef;
     findProtoWhere(fn: (ref: ProtoRef) => boolean): ProtoRef;
     filterProtoWhere(fn: (ref: ProtoRef) => boolean): ProtoRef[];

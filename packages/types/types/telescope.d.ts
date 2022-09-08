@@ -2,6 +2,11 @@ import { TSBuilderInput } from '@cosmwasm/ts-codegen';
 import { AminoExceptions } from "./aminos";
 interface TelescopeOpts {
     prototypes?: {
+        parser?: {
+            keepCase: boolean;
+            alternateCommentMode: boolean;
+            preferTrailingComment: boolean;
+        };
         includePackageVar?: boolean;
         fieldDefaultIsOptional?: boolean;
         useOptionalNullable?: boolean;
