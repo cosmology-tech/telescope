@@ -1,13 +1,19 @@
 import { ProtoDep, ProtoRef } from '@osmonauts/types';
-export declare const parseProto: (content: any) => import("@pyramation/protobufjs").IParserResult;
+interface ParseProtoOptions {
+    keepCase: boolean;
+    alternateCommentMode: boolean;
+    preferTrailingComment: boolean;
+}
+export declare const parseProto: (content: any, options?: ParseProtoOptions) => import("@pyramation/protobufjs").IParserResult;
 export declare class ProtoStore {
     files: string[];
     protoDirs: string[];
     deps: ProtoDep[];
     protos: ProtoRef[];
     packages: string[];
+    options: ParseProtoOptions;
     _traversed: boolean;
-    constructor(protoDirs?: string[]);
+    constructor(protoDirs?: string[], options?: ParseProtoOptions);
     findProto(filename: any): ProtoRef;
     findProtoWhere(fn: (ref: ProtoRef) => boolean): ProtoRef;
     filterProtoWhere(fn: (ref: ProtoRef) => boolean): ProtoRef[];
@@ -22,3 +28,4 @@ export declare class ProtoStore {
     traverseAll(): void;
     get(from: ProtoRef, name: string): import("./lookup").Lookup;
 }
+export {};

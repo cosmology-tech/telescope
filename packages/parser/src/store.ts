@@ -25,13 +25,23 @@ const GOOGLE_PROTOS = [
     ['google/protobuf/field_mask.proto', google_field_mask]
 ];
 
-export const parseProto = (content) => {
-    return parse(content, {
-        // we need to update this
-        keepCase: false,
-        alternateCommentMode: true,
-        preferTrailingComment: false
-    });
+interface ParseProtoOptions {
+    keepCase: boolean;
+    alternateCommentMode: boolean;
+    preferTrailingComment: boolean;
+}
+
+const protoParseOptionsDefaults = {
+    keepCase: false,
+    alternateCommentMode: true,
+    preferTrailingComment: false
+};
+
+export const parseProto = (content, options?: ParseProtoOptions) => {
+    if (!options) {
+        options = protoParseOptionsDefaults
+    }
+    return parse(content, options);
 };
 export class ProtoStore {
     files: string[];
@@ -39,11 +49,13 @@ export class ProtoStore {
     deps: ProtoDep[];
     protos: ProtoRef[];
     packages: string[];
+    options: ParseProtoOptions;
 
     _traversed: boolean = false;
 
-    constructor(protoDirs: string[] = []) {
+    constructor(protoDirs: string[] = [], options: ParseProtoOptions = protoParseOptionsDefaults) {
         this.protoDirs = protoDirs.map(protoDir => pathResolve(protoDir));
+        this.options = options;
     }
 
     findProto(filename): ProtoRef {
@@ -96,7 +108,7 @@ export class ProtoStore {
 
         const protos = contents.map(({ absolute, filename, content }) => {
             try {
-                const proto = parseProto(content);
+                const proto = parseProto(content, this.options);
                 return {
                     absolute,
                     filename,

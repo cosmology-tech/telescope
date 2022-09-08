@@ -5,6 +5,11 @@ import { camel } from '@osmonauts/utils';
 interface TelescopeOpts {
 
     prototypes?: {
+        parser?: {
+            keepCase: boolean;
+            alternateCommentMode: boolean;
+            preferTrailingComment: boolean;
+        },
         includePackageVar?: boolean;
         fieldDefaultIsOptional?: boolean;
         useOptionalNullable?: boolean;
@@ -92,6 +97,11 @@ export const defaultTelescopeOptions: TelescopeOptions = {
     // global options (can be overridden through plugins)
 
     prototypes: {
+        parser: {
+            keepCase: false,
+            alternateCommentMode: true,
+            preferTrailingComment: false
+        },
         includePackageVar: false,
         fieldDefaultIsOptional: false,
         allowUndefinedTypes: false,
