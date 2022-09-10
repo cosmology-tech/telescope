@@ -83,3 +83,12 @@ it('cosmos/app/v1alpha1/query.proto', () => {
     const ast = createLCDClient(context, service);
     expectCode(ast);
 });
+it('cosmos/group/v1/query.proto', () => {
+    const ref = store.findProto('cosmos/group/v1/query.proto');
+    store.options.prototypes.parser.keepCase = true;
+    const res = traverse(store, ref);
+    const service: ProtoService = getNestedProto(res).Query;
+    const context = new GenericParseContext(ref, store, defaultTelescopeOptions);
+    const ast = createLCDClient(context, service);
+    expectCode(ast);
+});

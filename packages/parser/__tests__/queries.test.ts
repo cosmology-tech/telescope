@@ -63,6 +63,9 @@ const EstimateSwapExactAmountIn = {
             isScalar: true,
             options: {
                 "(gogoproto.moretags)": "yaml:pool_id",
+                "(telescope:camel)": "poolId",
+                "(telescope:name)": "poolId",
+                "(telescope:orig)": "poolId"
             },
             parsedType: {
                 name: "uint64",
@@ -79,6 +82,9 @@ const EstimateSwapExactAmountIn = {
             options: {
                 "(gogoproto.moretags)": "yaml:routes",
                 "(gogoproto.nullable)": false,
+                "(telescope:camel)": "routes",
+                "(telescope:name)": "routes",
+                "(telescope:orig)": "routes"
             },
             parsedType: {
                 name: "SwapAmountInRoute",
@@ -99,6 +105,9 @@ const EstimateSwapExactAmountIn = {
             isScalar: true,
             options: {
                 "(gogoproto.moretags)": "yaml:sender",
+                "(telescope:camel)": "sender",
+                "(telescope:name)": "sender",
+                "(telescope:orig)": "sender"
             },
             parsedType: {
                 name: "string",
@@ -113,6 +122,9 @@ const EstimateSwapExactAmountIn = {
             isScalar: true,
             options: {
                 "(gogoproto.moretags)": "yaml:token_in",
+                "(telescope:camel)": "tokenIn",
+                "(telescope:name)": "tokenIn",
+                "(telescope:orig)": "tokenIn"
             },
             parsedType: {
                 name: "string",

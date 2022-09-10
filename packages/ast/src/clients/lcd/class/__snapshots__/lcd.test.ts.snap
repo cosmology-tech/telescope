@@ -184,6 +184,163 @@ exports[`cosmos fee LCDClient 1`] = `
 
 exports[`cosmos/app/v1alpha1/query.proto 1`] = `""`;
 
+exports[`cosmos/group/v1/query.proto 1`] = `
+"export class LCDQueryClient extends LCDClient {
+  constructor({
+    restEndpoint
+  }: {
+    restEndpoint: string;
+  }) {
+    super({
+      restEndpoint
+    });
+  }
+
+  /* GroupInfo queries group info based on group id. */
+  async groupInfo(params: QueryGroupInfoRequest): Promise<QueryGroupInfoResponse> {
+    const endpoint = \`cosmos/group/v1/group_info/\${params.group_id}\`;
+    return await this.request<QueryGroupInfoResponse>(endpoint);
+  }
+
+  /* GroupPolicyInfo queries group policy info based on account address of group policy. */
+  async groupPolicyInfo(params: QueryGroupPolicyInfoRequest): Promise<QueryGroupPolicyInfoResponse> {
+    const endpoint = \`cosmos/group/v1/group_policy_info/\${params.address}\`;
+    return await this.request<QueryGroupPolicyInfoResponse>(endpoint);
+  }
+
+  /* GroupMembers queries members of a group */
+  async groupMembers(params: QueryGroupMembersRequest): Promise<QueryGroupMembersResponse> {
+    const options: any = {
+      params: {}
+    };
+
+    if (typeof params?.pagination !== \\"undefined\\") {
+      setPaginationParams(options, params.pagination);
+    }
+
+    const endpoint = \`cosmos/group/v1/group_members/\${params.group_id}\`;
+    return await this.request<QueryGroupMembersResponse>(endpoint, options);
+  }
+
+  /* GroupsByAdmin queries groups by admin address. */
+  async groupsByAdmin(params: QueryGroupsByAdminRequest): Promise<QueryGroupsByAdminResponse> {
+    const options: any = {
+      params: {}
+    };
+
+    if (typeof params?.pagination !== \\"undefined\\") {
+      setPaginationParams(options, params.pagination);
+    }
+
+    const endpoint = \`cosmos/group/v1/groups_by_admin/\${params.admin}\`;
+    return await this.request<QueryGroupsByAdminResponse>(endpoint, options);
+  }
+
+  /* GroupPoliciesByGroup queries group policies by group id. */
+  async groupPoliciesByGroup(params: QueryGroupPoliciesByGroupRequest): Promise<QueryGroupPoliciesByGroupResponse> {
+    const options: any = {
+      params: {}
+    };
+
+    if (typeof params?.pagination !== \\"undefined\\") {
+      setPaginationParams(options, params.pagination);
+    }
+
+    const endpoint = \`cosmos/group/v1/group_policies_by_group/\${params.group_id}\`;
+    return await this.request<QueryGroupPoliciesByGroupResponse>(endpoint, options);
+  }
+
+  /* GroupsByAdmin queries group policies by admin address. */
+  async groupPoliciesByAdmin(params: QueryGroupPoliciesByAdminRequest): Promise<QueryGroupPoliciesByAdminResponse> {
+    const options: any = {
+      params: {}
+    };
+
+    if (typeof params?.pagination !== \\"undefined\\") {
+      setPaginationParams(options, params.pagination);
+    }
+
+    const endpoint = \`cosmos/group/v1/group_policies_by_admin/\${params.admin}\`;
+    return await this.request<QueryGroupPoliciesByAdminResponse>(endpoint, options);
+  }
+
+  /* Proposal queries a proposal based on proposal id. */
+  async proposal(params: QueryProposalRequest): Promise<QueryProposalResponse> {
+    const endpoint = \`cosmos/group/v1/proposal/\${params.proposal_id}\`;
+    return await this.request<QueryProposalResponse>(endpoint);
+  }
+
+  /* ProposalsByGroupPolicy queries proposals based on account address of group policy. */
+  async proposalsByGroupPolicy(params: QueryProposalsByGroupPolicyRequest): Promise<QueryProposalsByGroupPolicyResponse> {
+    const options: any = {
+      params: {}
+    };
+
+    if (typeof params?.pagination !== \\"undefined\\") {
+      setPaginationParams(options, params.pagination);
+    }
+
+    const endpoint = \`cosmos/group/v1/proposals_by_group_policy/\${params.address}\`;
+    return await this.request<QueryProposalsByGroupPolicyResponse>(endpoint, options);
+  }
+
+  /* VoteByProposalVoter queries a vote by proposal id and voter. */
+  async voteByProposalVoter(params: QueryVoteByProposalVoterRequest): Promise<QueryVoteByProposalVoterResponse> {
+    const endpoint = \`cosmos/group/v1/vote_by_proposal_voter/\${params.proposal_id}/\${params.voter}\`;
+    return await this.request<QueryVoteByProposalVoterResponse>(endpoint);
+  }
+
+  /* VotesByProposal queries a vote by proposal. */
+  async votesByProposal(params: QueryVotesByProposalRequest): Promise<QueryVotesByProposalResponse> {
+    const options: any = {
+      params: {}
+    };
+
+    if (typeof params?.pagination !== \\"undefined\\") {
+      setPaginationParams(options, params.pagination);
+    }
+
+    const endpoint = \`cosmos/group/v1/votes_by_proposal/\${params.proposal_id}\`;
+    return await this.request<QueryVotesByProposalResponse>(endpoint, options);
+  }
+
+  /* VotesByVoter queries a vote by voter. */
+  async votesByVoter(params: QueryVotesByVoterRequest): Promise<QueryVotesByVoterResponse> {
+    const options: any = {
+      params: {}
+    };
+
+    if (typeof params?.pagination !== \\"undefined\\") {
+      setPaginationParams(options, params.pagination);
+    }
+
+    const endpoint = \`cosmos/group/v1/votes_by_voter/\${params.voter}\`;
+    return await this.request<QueryVotesByVoterResponse>(endpoint, options);
+  }
+
+  /* GroupsByMember queries groups by member address. */
+  async groupsByMember(params: QueryGroupsByMemberRequest): Promise<QueryGroupsByMemberResponse> {
+    const options: any = {
+      params: {}
+    };
+
+    if (typeof params?.pagination !== \\"undefined\\") {
+      setPaginationParams(options, params.pagination);
+    }
+
+    const endpoint = \`cosmos/group/v1/groups_by_member/\${params.address}\`;
+    return await this.request<QueryGroupsByMemberResponse>(endpoint, options);
+  }
+
+  /* TallyResult queries the tally of a proposal votes. */
+  async tallyResult(params: QueryTallyResultRequest): Promise<QueryTallyResultResponse> {
+    const endpoint = \`cosmos/group/v1/proposals/\${params.proposal_id}/tally\`;
+    return await this.request<QueryTallyResultResponse>(endpoint);
+  }
+
+}"
+`;
+
 exports[`cosmos/staking/v1beta1/query.proto 1`] = `
 "export class LCDQueryClient extends LCDClient {
   constructor({
@@ -216,16 +373,8 @@ exports[`cosmos/staking/v1beta1/query.proto 1`] = `
 
   /* Validator queries validator info for given validator address. */
   async validator(params: QueryValidatorRequest): Promise<QueryValidatorResponse> {
-    const options: any = {
-      params: {}
-    };
-
-    if (typeof params?.validatorAddr !== \\"undefined\\") {
-      options.params.validator_addr = params.validatorAddr;
-    }
-
     const endpoint = \`cosmos/staking/v1beta1/validators/\${params.validatorAddr}\`;
-    return await this.request<QueryValidatorResponse>(endpoint, options);
+    return await this.request<QueryValidatorResponse>(endpoint);
   }
 
   /* ValidatorDelegations queries delegate info for given validator. */
@@ -233,10 +382,6 @@ exports[`cosmos/staking/v1beta1/query.proto 1`] = `
     const options: any = {
       params: {}
     };
-
-    if (typeof params?.validatorAddr !== \\"undefined\\") {
-      options.params.validator_addr = params.validatorAddr;
-    }
 
     if (typeof params?.pagination !== \\"undefined\\") {
       setPaginationParams(options, params.pagination);
@@ -252,10 +397,6 @@ exports[`cosmos/staking/v1beta1/query.proto 1`] = `
       params: {}
     };
 
-    if (typeof params?.validatorAddr !== \\"undefined\\") {
-      options.params.validator_addr = params.validatorAddr;
-    }
-
     if (typeof params?.pagination !== \\"undefined\\") {
       setPaginationParams(options, params.pagination);
     }
@@ -266,39 +407,15 @@ exports[`cosmos/staking/v1beta1/query.proto 1`] = `
 
   /* Delegation queries delegate info for given validator delegator pair. */
   async delegation(params: QueryDelegationRequest): Promise<QueryDelegationResponse> {
-    const options: any = {
-      params: {}
-    };
-
-    if (typeof params?.delegatorAddr !== \\"undefined\\") {
-      options.params.delegator_addr = params.delegatorAddr;
-    }
-
-    if (typeof params?.validatorAddr !== \\"undefined\\") {
-      options.params.validator_addr = params.validatorAddr;
-    }
-
     const endpoint = \`cosmos/staking/v1beta1/validators/\${params.validatorAddr}delegations/\${params.delegatorAddr}\`;
-    return await this.request<QueryDelegationResponse>(endpoint, options);
+    return await this.request<QueryDelegationResponse>(endpoint);
   }
 
   /* UnbondingDelegation queries unbonding info for given validator delegator
   pair. */
   async unbondingDelegation(params: QueryUnbondingDelegationRequest): Promise<QueryUnbondingDelegationResponse> {
-    const options: any = {
-      params: {}
-    };
-
-    if (typeof params?.delegatorAddr !== \\"undefined\\") {
-      options.params.delegator_addr = params.delegatorAddr;
-    }
-
-    if (typeof params?.validatorAddr !== \\"undefined\\") {
-      options.params.validator_addr = params.validatorAddr;
-    }
-
     const endpoint = \`cosmos/staking/v1beta1/validators/\${params.validatorAddr}/delegations/\${params.delegatorAddr}/unbonding_delegation\`;
-    return await this.request<QueryUnbondingDelegationResponse>(endpoint, options);
+    return await this.request<QueryUnbondingDelegationResponse>(endpoint);
   }
 
   /* DelegatorDelegations queries all delegations of a given delegator address. */
@@ -306,10 +423,6 @@ exports[`cosmos/staking/v1beta1/query.proto 1`] = `
     const options: any = {
       params: {}
     };
-
-    if (typeof params?.delegatorAddr !== \\"undefined\\") {
-      options.params.delegator_addr = params.delegatorAddr;
-    }
 
     if (typeof params?.pagination !== \\"undefined\\") {
       setPaginationParams(options, params.pagination);
@@ -326,10 +439,6 @@ exports[`cosmos/staking/v1beta1/query.proto 1`] = `
       params: {}
     };
 
-    if (typeof params?.delegatorAddr !== \\"undefined\\") {
-      options.params.delegator_addr = params.delegatorAddr;
-    }
-
     if (typeof params?.pagination !== \\"undefined\\") {
       setPaginationParams(options, params.pagination);
     }
@@ -344,16 +453,12 @@ exports[`cosmos/staking/v1beta1/query.proto 1`] = `
       params: {}
     };
 
-    if (typeof params?.delegatorAddr !== \\"undefined\\") {
-      options.params.delegator_addr = params.delegatorAddr;
+    if (typeof params?.src_validator_addr !== \\"undefined\\") {
+      options.params.src_validator_addr = params.src_validator_addr;
     }
 
-    if (typeof params?.srcValidatorAddr !== \\"undefined\\") {
-      options.params.src_validator_addr = params.srcValidatorAddr;
-    }
-
-    if (typeof params?.dstValidatorAddr !== \\"undefined\\") {
-      options.params.dst_validator_addr = params.dstValidatorAddr;
+    if (typeof params?.dst_validator_addr !== \\"undefined\\") {
+      options.params.dst_validator_addr = params.dst_validator_addr;
     }
 
     if (typeof params?.pagination !== \\"undefined\\") {
@@ -371,10 +476,6 @@ exports[`cosmos/staking/v1beta1/query.proto 1`] = `
       params: {}
     };
 
-    if (typeof params?.delegatorAddr !== \\"undefined\\") {
-      options.params.delegator_addr = params.delegatorAddr;
-    }
-
     if (typeof params?.pagination !== \\"undefined\\") {
       setPaginationParams(options, params.pagination);
     }
@@ -386,20 +487,8 @@ exports[`cosmos/staking/v1beta1/query.proto 1`] = `
   /* DelegatorValidator queries validator info for given delegator validator
   pair. */
   async delegatorValidator(params: QueryDelegatorValidatorRequest): Promise<QueryDelegatorValidatorResponse> {
-    const options: any = {
-      params: {}
-    };
-
-    if (typeof params?.delegatorAddr !== \\"undefined\\") {
-      options.params.delegator_addr = params.delegatorAddr;
-    }
-
-    if (typeof params?.validatorAddr !== \\"undefined\\") {
-      options.params.validator_addr = params.validatorAddr;
-    }
-
     const endpoint = \`cosmos/staking/v1beta1/delegators/\${params.delegatorAddr}validators/\${params.validatorAddr}\`;
-    return await this.request<QueryDelegatorValidatorResponse>(endpoint, options);
+    return await this.request<QueryDelegatorValidatorResponse>(endpoint);
   }
 
   /* HistoricalInfo queries the historical info for given height. */
@@ -494,12 +583,12 @@ exports[`osmosis LCDClient 1`] = `
       params: {}
     };
 
-    if (typeof params?.baseAssetDenom !== \\"undefined\\") {
-      options.params.base_asset_denom = params.baseAssetDenom;
+    if (typeof params?.base_asset_denom !== \\"undefined\\") {
+      options.params.base_asset_denom = params.base_asset_denom;
     }
 
-    if (typeof params?.quoteAssetDenom !== \\"undefined\\") {
-      options.params.quote_asset_denom = params.quoteAssetDenom;
+    if (typeof params?.quote_asset_denom !== \\"undefined\\") {
+      options.params.quote_asset_denom = params.quote_asset_denom;
     }
 
     const endpoint = \`osmosis/gamm/v1beta1/pools/\${params.poolId}/prices\`;
