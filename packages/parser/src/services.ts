@@ -43,6 +43,7 @@ export const parseService = (
         ...pathInfo,
         queryParams,
         paramMap,
+        // TODO paramMap === casing?
         casing: {}
     };
 };
