@@ -34,7 +34,7 @@ export interface QueryChannelResponse {
 /** QueryChannelsRequest is the request type for the Query/Channels RPC method */
 export interface QueryChannelsRequest {
   /** pagination request */
-  pagination: PageRequest;
+  pagination?: PageRequest;
 }
 
 /** QueryChannelsResponse is the response type for the Query/Channels RPC method. */
@@ -43,7 +43,7 @@ export interface QueryChannelsResponse {
   channels: IdentifiedChannel[];
 
   /** pagination response */
-  pagination: PageResponse;
+  pagination?: PageResponse;
 
   /** query block height */
   height: Height;
@@ -58,7 +58,7 @@ export interface QueryConnectionChannelsRequest {
   connection: string;
 
   /** pagination request */
-  pagination: PageRequest;
+  pagination?: PageRequest;
 }
 
 /**
@@ -70,7 +70,7 @@ export interface QueryConnectionChannelsResponse {
   channels: IdentifiedChannel[];
 
   /** pagination response */
-  pagination: PageResponse;
+  pagination?: PageResponse;
 
   /** query block height */
   height: Height;
@@ -182,7 +182,7 @@ export interface QueryPacketCommitmentsRequest {
   channelId: string;
 
   /** pagination request */
-  pagination: PageRequest;
+  pagination?: PageRequest;
 }
 
 /**
@@ -193,7 +193,7 @@ export interface QueryPacketCommitmentsResponse {
   commitments: PacketState[];
 
   /** pagination response */
-  pagination: PageResponse;
+  pagination?: PageResponse;
 
   /** query block height */
   height: Height;
@@ -273,7 +273,7 @@ export interface QueryPacketAcknowledgementsRequest {
   channelId: string;
 
   /** pagination request */
-  pagination: PageRequest;
+  pagination?: PageRequest;
 
   /** list of packet sequences */
   packetCommitmentSequences: Long[];
@@ -287,7 +287,7 @@ export interface QueryPacketAcknowledgementsResponse {
   acknowledgements: PacketState[];
 
   /** pagination response */
-  pagination: PageResponse;
+  pagination?: PageResponse;
 
   /** query block height */
   height: Height;

@@ -21,53 +21,53 @@ export interface GaugeByIDResponse {
 }
 export interface GaugesRequest {
   /** pagination defines an pagination for the request. */
-  pagination: PageRequest;
+  pagination?: PageRequest;
 }
 export interface GaugesResponse {
   data: Gauge[];
 
   /** pagination defines an pagination for the response. */
-  pagination: PageResponse;
+  pagination?: PageResponse;
 }
 export interface ActiveGaugesRequest {
   /** pagination defines an pagination for the request. */
-  pagination: PageRequest;
+  pagination?: PageRequest;
 }
 export interface ActiveGaugesResponse {
   data: Gauge[];
 
   /** pagination defines an pagination for the response. */
-  pagination: PageResponse;
+  pagination?: PageResponse;
 }
 export interface ActiveGaugesPerDenomRequest {
   denom: string;
 
   /** pagination defines an pagination for the request. */
-  pagination: PageRequest;
+  pagination?: PageRequest;
 }
 export interface ActiveGaugesPerDenomResponse {
   data: Gauge[];
 
   /** pagination defines an pagination for the response. */
-  pagination: PageResponse;
+  pagination?: PageResponse;
 }
 export interface UpcomingGaugesRequest {
   /** pagination defines an pagination for the request. */
-  pagination: PageRequest;
+  pagination?: PageRequest;
 }
 export interface UpcomingGaugesResponse {
   data: Gauge[];
 
   /** pagination defines an pagination for the response. */
-  pagination: PageResponse;
+  pagination?: PageResponse;
 }
 export interface UpcomingGaugesPerDenomRequest {
   denom: string;
-  pagination: PageRequest;
+  pagination?: PageRequest;
 }
 export interface UpcomingGaugesPerDenomResponse {
   upcomingGauges: Gauge[];
-  pagination: PageResponse;
+  pagination?: PageResponse;
 }
 export interface RewardsEstRequest {
   owner: string;

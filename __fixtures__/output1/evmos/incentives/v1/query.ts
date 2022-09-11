@@ -12,7 +12,7 @@ export const protobufPackage = "evmos.incentives.v1";
  */
 export interface QueryIncentivesRequest {
   /** pagination defines an optional pagination for the request. */
-  pagination: PageRequest;
+  pagination?: PageRequest;
 }
 
 /**
@@ -23,7 +23,7 @@ export interface QueryIncentivesResponse {
   incentives: Incentive[];
 
   /** pagination defines the pagination in the response. */
-  pagination: PageResponse;
+  pagination?: PageResponse;
 }
 
 /** QueryIncentiveRequest is the request type for the Query/Incentive RPC method. */
@@ -49,7 +49,7 @@ export interface QueryGasMetersRequest {
   contract: string;
 
   /** pagination defines an optional pagination for the request. */
-  pagination: PageRequest;
+  pagination?: PageRequest;
 }
 
 /**
@@ -60,7 +60,7 @@ export interface QueryGasMetersResponse {
   gasMeters: GasMeter[];
 
   /** pagination defines the pagination in the response. */
-  pagination: PageResponse;
+  pagination?: PageResponse;
 }
 
 /** QueryGasMeterRequest is the request type for the Query/Incentive RPC method. */
@@ -90,7 +90,7 @@ export interface QueryGasMeterResponse {
  */
 export interface QueryAllocationMetersRequest {
   /** pagination defines an optional pagination for the request. */
-  pagination: PageRequest;
+  pagination?: PageRequest;
 }
 
 /**
@@ -101,7 +101,7 @@ export interface QueryAllocationMetersResponse {
   allocationMeters: DecCoin[];
 
   /** pagination defines the pagination in the response. */
-  pagination: PageResponse;
+  pagination?: PageResponse;
 }
 
 /**

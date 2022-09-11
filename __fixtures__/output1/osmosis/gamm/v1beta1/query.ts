@@ -17,13 +17,13 @@ export interface QueryPoolResponse {
 /** =============================== Pools */
 export interface QueryPoolsRequest {
   /** pagination defines an optional pagination for the request. */
-  pagination: PageRequest;
+  pagination?: PageRequest;
 }
 export interface QueryPoolsResponse {
   pools: Any[];
 
   /** pagination defines the pagination in the response. */
-  pagination: PageResponse;
+  pagination?: PageResponse;
 }
 
 /** =============================== NumPools */

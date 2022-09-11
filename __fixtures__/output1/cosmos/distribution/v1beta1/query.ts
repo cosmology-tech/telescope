@@ -64,7 +64,7 @@ export interface QueryValidatorSlashesRequest {
   endingHeight: Long;
 
   /** pagination defines an optional pagination for the request. */
-  pagination: PageRequest;
+  pagination?: PageRequest;
 }
 
 /**
@@ -76,7 +76,7 @@ export interface QueryValidatorSlashesResponse {
   slashes: ValidatorSlashEvent[];
 
   /** pagination defines the pagination in the response. */
-  pagination: PageResponse;
+  pagination?: PageResponse;
 }
 
 /**

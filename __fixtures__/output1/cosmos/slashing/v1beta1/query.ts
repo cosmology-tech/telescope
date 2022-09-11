@@ -35,7 +35,7 @@ export interface QuerySigningInfoResponse {
  * method
  */
 export interface QuerySigningInfosRequest {
-  pagination: PageRequest;
+  pagination?: PageRequest;
 }
 
 /**
@@ -45,7 +45,7 @@ export interface QuerySigningInfosRequest {
 export interface QuerySigningInfosResponse {
   /** info is the signing info of all validators */
   info: ValidatorSigningInfo[];
-  pagination: PageResponse;
+  pagination?: PageResponse;
 }
 
 function createBaseQueryParamsRequest(): QueryParamsRequest {

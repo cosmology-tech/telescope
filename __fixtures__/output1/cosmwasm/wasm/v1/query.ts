@@ -32,7 +32,7 @@ export interface QueryContractHistoryRequest {
   address: string;
 
   /** pagination defines an optional pagination for the request. */
-  pagination: PageRequest;
+  pagination?: PageRequest;
 }
 
 /**
@@ -43,7 +43,7 @@ export interface QueryContractHistoryResponse {
   entries: ContractCodeHistoryEntry[];
 
   /** pagination defines the pagination in the response. */
-  pagination: PageResponse;
+  pagination?: PageResponse;
 }
 
 /**
@@ -56,7 +56,7 @@ export interface QueryContractsByCodeRequest {
    * pagination defines an optional pagination for the request.
    */
   codeId: Long;
-  pagination: PageRequest;
+  pagination?: PageRequest;
 }
 
 /**
@@ -68,7 +68,7 @@ export interface QueryContractsByCodeResponse {
   contracts: string[];
 
   /** pagination defines the pagination in the response. */
-  pagination: PageResponse;
+  pagination?: PageResponse;
 }
 
 /**
@@ -80,7 +80,7 @@ export interface QueryAllContractStateRequest {
   address: string;
 
   /** pagination defines an optional pagination for the request. */
-  pagination: PageRequest;
+  pagination?: PageRequest;
 }
 
 /**
@@ -91,7 +91,7 @@ export interface QueryAllContractStateResponse {
   models: Model[];
 
   /** pagination defines the pagination in the response. */
-  pagination: PageResponse;
+  pagination?: PageResponse;
 }
 
 /**
@@ -156,7 +156,7 @@ export interface QueryCodeResponse {
 /** QueryCodesRequest is the request type for the Query/Codes RPC method */
 export interface QueryCodesRequest {
   /** pagination defines an optional pagination for the request. */
-  pagination: PageRequest;
+  pagination?: PageRequest;
 }
 
 /** QueryCodesResponse is the response type for the Query/Codes RPC method */
@@ -164,7 +164,7 @@ export interface QueryCodesResponse {
   codeInfos: CodeInfoResponse[];
 
   /** pagination defines the pagination in the response. */
-  pagination: PageResponse;
+  pagination?: PageResponse;
 }
 
 /**
@@ -173,7 +173,7 @@ export interface QueryCodesResponse {
  */
 export interface QueryPinnedCodesRequest {
   /** pagination defines an optional pagination for the request. */
-  pagination: PageRequest;
+  pagination?: PageRequest;
 }
 
 /**
@@ -184,7 +184,7 @@ export interface QueryPinnedCodesResponse {
   codeIds: Long[];
 
   /** pagination defines the pagination in the response. */
-  pagination: PageResponse;
+  pagination?: PageResponse;
 }
 
 function createBaseQueryContractInfoRequest(): QueryContractInfoRequest {

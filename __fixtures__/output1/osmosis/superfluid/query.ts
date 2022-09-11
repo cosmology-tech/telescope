@@ -34,11 +34,11 @@ export interface SuperfluidIntermediaryAccountInfo {
   address: string;
 }
 export interface AllIntermediaryAccountsRequest {
-  pagination: PageRequest;
+  pagination?: PageRequest;
 }
 export interface AllIntermediaryAccountsResponse {
   accounts: SuperfluidIntermediaryAccountInfo[];
-  pagination: PageResponse;
+  pagination?: PageResponse;
 }
 export interface ConnectedIntermediaryAccountRequest {
   lockId: Long;

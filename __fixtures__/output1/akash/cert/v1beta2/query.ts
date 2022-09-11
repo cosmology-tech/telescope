@@ -13,13 +13,13 @@ export interface CertificateResponse {
 /** QueryDeploymentsRequest is request type for the Query/Deployments RPC method */
 export interface QueryCertificatesRequest {
   filter: CertificateFilter;
-  pagination: PageRequest;
+  pagination?: PageRequest;
 }
 
 /** QueryCertificatesResponse is response type for the Query/Certificates RPC method */
 export interface QueryCertificatesResponse {
   certificates: CertificateResponse[];
-  pagination: PageResponse;
+  pagination?: PageResponse;
 }
 
 function createBaseCertificateResponse(): CertificateResponse {

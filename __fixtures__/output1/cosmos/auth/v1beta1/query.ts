@@ -12,7 +12,7 @@ export const protobufPackage = "cosmos.auth.v1beta1";
  */
 export interface QueryAccountsRequest {
   /** pagination defines an optional pagination for the request. */
-  pagination: PageRequest;
+  pagination?: PageRequest;
 }
 
 /**
@@ -25,7 +25,7 @@ export interface QueryAccountsResponse {
   accounts: Any[];
 
   /** pagination defines the pagination in the response. */
-  pagination: PageResponse;
+  pagination?: PageResponse;
 }
 
 /** QueryAccountRequest is the request type for the Query/Account RPC method. */
