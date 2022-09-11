@@ -33,16 +33,8 @@ export class LCDQueryClient extends LCDClient {
 
   /* DevFeeInfo retrieves a registered contract for fee distribution */
   async devFeeInfo(params: QueryDevFeeInfoRequest): Promise<QueryDevFeeInfoResponse> {
-    const options: any = {
-      params: {}
-    };
-
-    if (typeof params?.contractAddress !== "undefined") {
-      options.params.contract_address = params.contractAddress;
-    }
-
     const endpoint = `evmos/fees/v1/fees/${params.contractAddress}`;
-    return await this.request<QueryDevFeeInfoResponse>(endpoint, options);
+    return await this.request<QueryDevFeeInfoResponse>(endpoint);
   }
 
   /* Params retrieves the fees module params */
@@ -57,10 +49,6 @@ export class LCDQueryClient extends LCDClient {
     const options: any = {
       params: {}
     };
-
-    if (typeof params?.deployerAddress !== "undefined") {
-      options.params.deployer_address = params.deployerAddress;
-    }
 
     if (typeof params?.pagination !== "undefined") {
       setPaginationParams(options, params.pagination);

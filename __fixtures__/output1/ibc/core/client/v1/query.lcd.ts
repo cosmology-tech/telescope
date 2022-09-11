@@ -17,16 +17,8 @@ export class LCDQueryClient extends LCDClient {
 
   /* ClientState queries an IBC light client. */
   async clientState(params: QueryClientStateRequest): Promise<QueryClientStateResponse> {
-    const options: any = {
-      params: {}
-    };
-
-    if (typeof params?.clientId !== "undefined") {
-      options.params.client_id = params.clientId;
-    }
-
     const endpoint = `ibc/core/client/v1/client_states/${params.clientId}`;
-    return await this.request<QueryClientStateResponse>(endpoint, options);
+    return await this.request<QueryClientStateResponse>(endpoint);
   }
 
   /* ClientStates queries all the IBC light clients of a chain. */
@@ -52,18 +44,6 @@ export class LCDQueryClient extends LCDClient {
       params: {}
     };
 
-    if (typeof params?.clientId !== "undefined") {
-      options.params.client_id = params.clientId;
-    }
-
-    if (typeof params?.revisionNumber !== "undefined") {
-      options.params.revision_number = params.revisionNumber;
-    }
-
-    if (typeof params?.revisionHeight !== "undefined") {
-      options.params.revision_height = params.revisionHeight;
-    }
-
     if (typeof params?.latestHeight !== "undefined") {
       options.params.latest_height = params.latestHeight;
     }
@@ -79,10 +59,6 @@ export class LCDQueryClient extends LCDClient {
       params: {}
     };
 
-    if (typeof params?.clientId !== "undefined") {
-      options.params.client_id = params.clientId;
-    }
-
     if (typeof params?.pagination !== "undefined") {
       setPaginationParams(options, params.pagination);
     }
@@ -93,16 +69,8 @@ export class LCDQueryClient extends LCDClient {
 
   /* Status queries the status of an IBC client. */
   async clientStatus(params: QueryClientStatusRequest): Promise<QueryClientStatusResponse> {
-    const options: any = {
-      params: {}
-    };
-
-    if (typeof params?.clientId !== "undefined") {
-      options.params.client_id = params.clientId;
-    }
-
     const endpoint = `ibc/core/client/v1/client_status/${params.clientId}`;
-    return await this.request<QueryClientStatusResponse>(endpoint, options);
+    return await this.request<QueryClientStatusResponse>(endpoint);
   }
 
   /* ClientParams queries all parameters of the ibc client. */

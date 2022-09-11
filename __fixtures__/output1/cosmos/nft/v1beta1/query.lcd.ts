@@ -16,44 +16,20 @@ export class LCDQueryClient extends LCDClient {
 
   /* Balance queries the number of NFTs of a given class owned by the owner, same as balanceOf in ERC721 */
   async balance(params: QueryBalanceRequest): Promise<QueryBalanceResponse> {
-    const options: any = {
-      params: {}
-    };
-
-    if (typeof params?.classId !== "undefined") {
-      options.params.class_id = params.classId;
-    }
-
     const endpoint = `cosmos/nft/v1beta1/balance/${params.owner}/${params.classId}`;
-    return await this.request<QueryBalanceResponse>(endpoint, options);
+    return await this.request<QueryBalanceResponse>(endpoint);
   }
 
   /* Owner queries the owner of the NFT based on its class and id, same as ownerOf in ERC721 */
   async owner(params: QueryOwnerRequest): Promise<QueryOwnerResponse> {
-    const options: any = {
-      params: {}
-    };
-
-    if (typeof params?.classId !== "undefined") {
-      options.params.class_id = params.classId;
-    }
-
     const endpoint = `cosmos/nft/v1beta1/owner/${params.classId}/${params.id}`;
-    return await this.request<QueryOwnerResponse>(endpoint, options);
+    return await this.request<QueryOwnerResponse>(endpoint);
   }
 
   /* Supply queries the number of NFTs from the given class, same as totalSupply of ERC721. */
   async supply(params: QuerySupplyRequest): Promise<QuerySupplyResponse> {
-    const options: any = {
-      params: {}
-    };
-
-    if (typeof params?.classId !== "undefined") {
-      options.params.class_id = params.classId;
-    }
-
     const endpoint = `cosmos/nft/v1beta1/supply/${params.classId}`;
-    return await this.request<QuerySupplyResponse>(endpoint, options);
+    return await this.request<QuerySupplyResponse>(endpoint);
   }
 
   /* NFTs queries all NFTs of a given class or owner,choose at least one of the two, similar to tokenByIndex in
@@ -81,30 +57,14 @@ export class LCDQueryClient extends LCDClient {
 
   /* NFT queries an NFT based on its class and id. */
   async nFT(params: QueryNFTRequest): Promise<QueryNFTResponse> {
-    const options: any = {
-      params: {}
-    };
-
-    if (typeof params?.classId !== "undefined") {
-      options.params.class_id = params.classId;
-    }
-
     const endpoint = `cosmos/nft/v1beta1/nfts/${params.classId}/${params.id}`;
-    return await this.request<QueryNFTResponse>(endpoint, options);
+    return await this.request<QueryNFTResponse>(endpoint);
   }
 
   /* Class queries an NFT class based on its id */
   async class(params: QueryClassRequest): Promise<QueryClassResponse> {
-    const options: any = {
-      params: {}
-    };
-
-    if (typeof params?.classId !== "undefined") {
-      options.params.class_id = params.classId;
-    }
-
     const endpoint = `cosmos/nft/v1beta1/classes/${params.classId}`;
-    return await this.request<QueryClassResponse>(endpoint, options);
+    return await this.request<QueryClassResponse>(endpoint);
   }
 
   /* Classes queries all NFT classes */

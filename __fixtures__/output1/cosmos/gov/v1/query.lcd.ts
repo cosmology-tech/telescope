@@ -16,16 +16,8 @@ export class LCDQueryClient extends LCDClient {
 
   /* Proposal queries proposal details based on ProposalID. */
   async proposal(params: QueryProposalRequest): Promise<QueryProposalResponse> {
-    const options: any = {
-      params: {}
-    };
-
-    if (typeof params?.proposalId !== "undefined") {
-      options.params.proposal_id = params.proposalId;
-    }
-
     const endpoint = `cosmos/gov/v1/proposals/${params.proposalId}`;
-    return await this.request<QueryProposalResponse>(endpoint, options);
+    return await this.request<QueryProposalResponse>(endpoint);
   }
 
   /* Proposals queries all proposals based on given status. */
@@ -56,16 +48,8 @@ export class LCDQueryClient extends LCDClient {
 
   /* Vote queries voted information based on proposalID, voterAddr. */
   async vote(params: QueryVoteRequest): Promise<QueryVoteResponse> {
-    const options: any = {
-      params: {}
-    };
-
-    if (typeof params?.proposalId !== "undefined") {
-      options.params.proposal_id = params.proposalId;
-    }
-
     const endpoint = `cosmos/gov/v1/proposals/${params.proposalId}votes/${params.voter}`;
-    return await this.request<QueryVoteResponse>(endpoint, options);
+    return await this.request<QueryVoteResponse>(endpoint);
   }
 
   /* Votes queries votes of a given proposal. */
@@ -73,10 +57,6 @@ export class LCDQueryClient extends LCDClient {
     const options: any = {
       params: {}
     };
-
-    if (typeof params?.proposalId !== "undefined") {
-      options.params.proposal_id = params.proposalId;
-    }
 
     if (typeof params?.pagination !== "undefined") {
       setPaginationParams(options, params.pagination);
@@ -88,30 +68,14 @@ export class LCDQueryClient extends LCDClient {
 
   /* Params queries all parameters of the gov module. */
   async params(params: QueryParamsRequest): Promise<QueryParamsResponse> {
-    const options: any = {
-      params: {}
-    };
-
-    if (typeof params?.paramsType !== "undefined") {
-      options.params.params_type = params.paramsType;
-    }
-
     const endpoint = `cosmos/gov/v1/params/${params.paramsType}`;
-    return await this.request<QueryParamsResponse>(endpoint, options);
+    return await this.request<QueryParamsResponse>(endpoint);
   }
 
   /* Deposit queries single deposit information based proposalID, depositAddr. */
   async deposit(params: QueryDepositRequest): Promise<QueryDepositResponse> {
-    const options: any = {
-      params: {}
-    };
-
-    if (typeof params?.proposalId !== "undefined") {
-      options.params.proposal_id = params.proposalId;
-    }
-
     const endpoint = `cosmos/gov/v1/proposals/${params.proposalId}deposits/${params.depositor}`;
-    return await this.request<QueryDepositResponse>(endpoint, options);
+    return await this.request<QueryDepositResponse>(endpoint);
   }
 
   /* Deposits queries all deposits of a single proposal. */
@@ -119,10 +83,6 @@ export class LCDQueryClient extends LCDClient {
     const options: any = {
       params: {}
     };
-
-    if (typeof params?.proposalId !== "undefined") {
-      options.params.proposal_id = params.proposalId;
-    }
 
     if (typeof params?.pagination !== "undefined") {
       setPaginationParams(options, params.pagination);
@@ -134,16 +94,8 @@ export class LCDQueryClient extends LCDClient {
 
   /* TallyResult queries the tally of a proposal vote. */
   async tallyResult(params: QueryTallyResultRequest): Promise<QueryTallyResultResponse> {
-    const options: any = {
-      params: {}
-    };
-
-    if (typeof params?.proposalId !== "undefined") {
-      options.params.proposal_id = params.proposalId;
-    }
-
     const endpoint = `cosmos/gov/v1/proposals/${params.proposalId}/tally`;
-    return await this.request<QueryTallyResultResponse>(endpoint, options);
+    return await this.request<QueryTallyResultResponse>(endpoint);
   }
 
 }

@@ -16,16 +16,8 @@ export class LCDQueryClient extends LCDClient {
 
   /* Evidence queries evidence based on evidence hash. */
   async evidence(params: QueryEvidenceRequest): Promise<QueryEvidenceResponse> {
-    const options: any = {
-      params: {}
-    };
-
-    if (typeof params?.evidenceHash !== "undefined") {
-      options.params.evidence_hash = params.evidenceHash;
-    }
-
     const endpoint = `cosmos/evidence/v1beta1/evidence/${params.evidenceHash}`;
-    return await this.request<QueryEvidenceResponse>(endpoint, options);
+    return await this.request<QueryEvidenceResponse>(endpoint);
   }
 
   /* AllEvidence queries all evidence. */

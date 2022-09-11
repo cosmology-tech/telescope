@@ -22,16 +22,8 @@ export class LCDQueryClient extends LCDClient {
 
   /* SigningInfo queries the signing info of given cons address */
   async signingInfo(params: QuerySigningInfoRequest): Promise<QuerySigningInfoResponse> {
-    const options: any = {
-      params: {}
-    };
-
-    if (typeof params?.consAddress !== "undefined") {
-      options.params.cons_address = params.consAddress;
-    }
-
     const endpoint = `cosmos/slashing/v1beta1/signing_infos/${params.consAddress}`;
-    return await this.request<QuerySigningInfoResponse>(endpoint, options);
+    return await this.request<QuerySigningInfoResponse>(endpoint);
   }
 
   /* SigningInfos queries signing info of all validators */
