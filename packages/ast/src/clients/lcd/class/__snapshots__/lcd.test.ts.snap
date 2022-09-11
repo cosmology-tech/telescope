@@ -453,12 +453,12 @@ exports[`cosmos/staking/v1beta1/query.proto 1`] = `
       params: {}
     };
 
-    if (typeof params?.src_validator_addr !== \\"undefined\\") {
-      options.params.src_validator_addr = params.src_validator_addr;
+    if (typeof params?.srcValidatorAddr !== \\"undefined\\") {
+      options.params.src_validator_addr = params.srcValidatorAddr;
     }
 
-    if (typeof params?.dst_validator_addr !== \\"undefined\\") {
-      options.params.dst_validator_addr = params.dst_validator_addr;
+    if (typeof params?.dstValidatorAddr !== \\"undefined\\") {
+      options.params.dst_validator_addr = params.dstValidatorAddr;
     }
 
     if (typeof params?.pagination !== \\"undefined\\") {
@@ -583,12 +583,12 @@ exports[`osmosis LCDClient 1`] = `
       params: {}
     };
 
-    if (typeof params?.base_asset_denom !== \\"undefined\\") {
-      options.params.base_asset_denom = params.base_asset_denom;
+    if (typeof params?.baseAssetDenom !== \\"undefined\\") {
+      options.params.base_asset_denom = params.baseAssetDenom;
     }
 
-    if (typeof params?.quote_asset_denom !== \\"undefined\\") {
-      options.params.quote_asset_denom = params.quote_asset_denom;
+    if (typeof params?.quoteAssetDenom !== \\"undefined\\") {
+      options.params.quote_asset_denom = params.quoteAssetDenom;
     }
 
     const endpoint = \`osmosis/gamm/v1beta1/pools/\${params.poolId}/prices\`;

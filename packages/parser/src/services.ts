@@ -27,14 +27,22 @@ export const parseService = (
     const options: ServiceOptions = obj.options ?? {};
     const pathInfo = parseServiceUrl(options);
     if (!pathInfo) return;
+    const mapping = {};
     const allParams = Object.keys(fields).map(field => {
         // NOTE pathParams are the original casing!
-        return fields[field].options['(telescope:orig)'];
+        const name = fields[field].options['(telescope:orig)'];
+        mapping[name] = fields[field].options['(telescope:name)']
+        return name;
     })
-    const queryParams = allParams.filter(param => !pathInfo.pathParams.includes(param));
+    const queryParams = allParams
+        .filter(param => !pathInfo.pathParams.includes(param))
+
+    const paramMap = mapping;
+
     return {
         ...pathInfo,
         queryParams,
+        paramMap,
         casing: {}
     };
 };

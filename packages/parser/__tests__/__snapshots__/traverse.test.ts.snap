@@ -2666,6 +2666,10 @@ Object {
                             "address": "address",
                             "pagination": "pagination",
                           },
+                          "paramMap": Object {
+                            "address": "address",
+                            "pagination": "pagination",
+                          },
                           "pathParams": Array [
                             "address",
                           ],
@@ -2704,6 +2708,9 @@ Object {
                         },
                         "info": Object {
                           "casing": Object {
+                            "code_id": "codeId",
+                          },
+                          "paramMap": Object {
                             "code_id": "codeId",
                           },
                           "pathParams": Array [
@@ -2746,6 +2753,9 @@ Object {
                         },
                         "info": Object {
                           "casing": Object {
+                            "pagination": "pagination",
+                          },
+                          "paramMap": Object {
                             "pagination": "pagination",
                           },
                           "pathParams": Array [],
@@ -2807,6 +2817,10 @@ Object {
                             "address": "address",
                             "pagination": "pagination",
                           },
+                          "paramMap": Object {
+                            "address": "address",
+                            "pagination": "pagination",
+                          },
                           "pathParams": Array [
                             "address",
                           ],
@@ -2845,6 +2859,9 @@ Object {
                         },
                         "info": Object {
                           "casing": Object {
+                            "address": "address",
+                          },
+                          "paramMap": Object {
                             "address": "address",
                           },
                           "pathParams": Array [
@@ -2907,6 +2924,10 @@ pagination defines an optional pagination for the request.",
                             "code_id": "codeId",
                             "pagination": "pagination",
                           },
+                          "paramMap": Object {
+                            "code_id": "codeId",
+                            "pagination": "pagination",
+                          },
                           "pathParams": Array [
                             "code_id",
                           ],
@@ -2949,6 +2970,9 @@ pagination defines an optional pagination for the request.",
                         },
                         "info": Object {
                           "casing": Object {
+                            "pagination": "pagination",
+                          },
+                          "paramMap": Object {
                             "pagination": "pagination",
                           },
                           "pathParams": Array [],
@@ -3006,6 +3030,10 @@ pagination defines an optional pagination for the request.",
                             "address": "address",
                             "query_data": "queryData",
                           },
+                          "paramMap": Object {
+                            "address": "address",
+                            "query_data": "queryData",
+                          },
                           "pathParams": Array [
                             "address",
                             "query_data",
@@ -3060,6 +3088,10 @@ pagination defines an optional pagination for the request.",
                         },
                         "info": Object {
                           "casing": Object {
+                            "address": "address",
+                            "query_data": "queryData",
+                          },
+                          "paramMap": Object {
                             "address": "address",
                             "query_data": "queryData",
                           },

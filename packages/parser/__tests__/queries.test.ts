@@ -40,9 +40,15 @@ it('parsing options many path params', () => {
 // https://osmosis.stakesystems.io/static/openapi
 it('parsing service', () => {
     expect(parseService(EstimateSwapExactAmountIn)).toEqual({
-        url: '/osmosis/gamm/v1beta1/{poolId}/estimate/swap_exact_amount_in',
-        pathParams: ['poolId'],
-        queryParams: ['routes', 'sender', 'tokenIn'],
+        url: '/osmosis/gamm/v1beta1/{pool_id}/estimate/swap_exact_amount_in',
+        pathParams: ['pool_id'],
+        queryParams: ['routes', 'sender', 'token_id'],
+        paramMap: {
+            "pool_id": "poolId",
+            "routes": "routes",
+            "sender": "sender",
+            "token_id": "tokenIn",
+        },
         casing: {}
     })
 });
@@ -51,7 +57,7 @@ const EstimateSwapExactAmountIn = {
     type: "ServiceMethod",
     name: "EstimateSwapExactAmountIn",
     options: {
-        "(google.api.http).get": "/osmosis/gamm/v1beta1/{poolId}/estimate/swap_exact_amount_in",
+        "(google.api.http).get": "/osmosis/gamm/v1beta1/{pool_id}/estimate/swap_exact_amount_in",
     },
     requestType: "QuerySwapExactAmountInRequest",
     responseType: "QuerySwapExactAmountInResponse",
@@ -65,7 +71,7 @@ const EstimateSwapExactAmountIn = {
                 "(gogoproto.moretags)": "yaml:pool_id",
                 "(telescope:camel)": "poolId",
                 "(telescope:name)": "poolId",
-                "(telescope:orig)": "poolId"
+                "(telescope:orig)": "pool_id"
             },
             parsedType: {
                 name: "uint64",
@@ -124,7 +130,7 @@ const EstimateSwapExactAmountIn = {
                 "(gogoproto.moretags)": "yaml:token_in",
                 "(telescope:camel)": "tokenIn",
                 "(telescope:name)": "tokenIn",
-                "(telescope:orig)": "tokenIn"
+                "(telescope:orig)": "token_id"
             },
             parsedType: {
                 name: "string",

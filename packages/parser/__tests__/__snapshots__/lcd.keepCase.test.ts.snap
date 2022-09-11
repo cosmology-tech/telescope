@@ -48,6 +48,10 @@ Object {
             "delegator_addr": "delegator_addr",
             "validator_addr": "validator_addr",
           },
+          "paramMap": Object {
+            "delegator_addr": "delegator_addr",
+            "validator_addr": "validator_addr",
+          },
           "pathParams": Array [
             "validator_addr",
             "delegator_addr",
@@ -106,6 +110,10 @@ Object {
         },
         "info": Object {
           "casing": Object {
+            "delegator_addr": "delegator_addr",
+            "pagination": "pagination",
+          },
+          "paramMap": Object {
             "delegator_addr": "delegator_addr",
             "pagination": "pagination",
           },
@@ -172,6 +180,10 @@ delegator address.",
             "delegator_addr": "delegator_addr",
             "pagination": "pagination",
           },
+          "paramMap": Object {
+            "delegator_addr": "delegator_addr",
+            "pagination": "pagination",
+          },
           "pathParams": Array [
             "delegator_addr",
           ],
@@ -229,6 +241,10 @@ pair.",
         },
         "info": Object {
           "casing": Object {
+            "delegator_addr": "delegator_addr",
+            "validator_addr": "validator_addr",
+          },
+          "paramMap": Object {
             "delegator_addr": "delegator_addr",
             "validator_addr": "validator_addr",
           },
@@ -294,6 +310,10 @@ address.",
             "delegator_addr": "delegator_addr",
             "pagination": "pagination",
           },
+          "paramMap": Object {
+            "delegator_addr": "delegator_addr",
+            "pagination": "pagination",
+          },
           "pathParams": Array [
             "delegator_addr",
           ],
@@ -334,6 +354,9 @@ address.",
           "casing": Object {
             "height": "height",
           },
+          "paramMap": Object {
+            "height": "height",
+          },
           "pathParams": Array [
             "height",
           ],
@@ -353,6 +376,7 @@ address.",
         "fields": Object {},
         "info": Object {
           "casing": Object {},
+          "paramMap": Object {},
           "pathParams": Array [],
           "queryParams": Array [],
           "url": "/cosmos/staking/v1beta1/params",
@@ -370,6 +394,7 @@ address.",
         "fields": Object {},
         "info": Object {
           "casing": Object {},
+          "paramMap": Object {},
           "pathParams": Array [],
           "queryParams": Array [],
           "url": "/cosmos/staking/v1beta1/pool",
@@ -464,6 +489,12 @@ address.",
             "pagination": "pagination",
             "src_validator_addr": "src_validator_addr",
           },
+          "paramMap": Object {
+            "delegator_addr": "delegator_addr",
+            "dst_validator_addr": "dst_validator_addr",
+            "pagination": "pagination",
+            "src_validator_addr": "src_validator_addr",
+          },
           "pathParams": Array [
             "delegator_addr",
           ],
@@ -526,6 +557,10 @@ pair.",
             "delegator_addr": "delegator_addr",
             "validator_addr": "validator_addr",
           },
+          "paramMap": Object {
+            "delegator_addr": "delegator_addr",
+            "validator_addr": "validator_addr",
+          },
           "pathParams": Array [
             "validator_addr",
             "delegator_addr",
@@ -564,6 +599,9 @@ pair.",
         },
         "info": Object {
           "casing": Object {
+            "validator_addr": "validator_addr",
+          },
+          "paramMap": Object {
             "validator_addr": "validator_addr",
           },
           "pathParams": Array [
@@ -623,6 +661,10 @@ pair.",
         },
         "info": Object {
           "casing": Object {
+            "pagination": "pagination",
+            "validator_addr": "validator_addr",
+          },
+          "paramMap": Object {
             "pagination": "pagination",
             "validator_addr": "validator_addr",
           },
@@ -688,6 +730,10 @@ pair.",
             "pagination": "pagination",
             "validator_addr": "validator_addr",
           },
+          "paramMap": Object {
+            "pagination": "pagination",
+            "validator_addr": "validator_addr",
+          },
           "pathParams": Array [
             "validator_addr",
           ],
@@ -746,6 +792,10 @@ pair.",
         },
         "info": Object {
           "casing": Object {
+            "pagination": "pagination",
+            "status": "status",
+          },
+          "paramMap": Object {
             "pagination": "pagination",
             "status": "status",
           },
