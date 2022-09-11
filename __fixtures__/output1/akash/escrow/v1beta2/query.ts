@@ -10,13 +10,13 @@ export interface QueryAccountsRequest {
   xid: string;
   owner: string;
   state: string;
-  pagination: PageRequest;
+  pagination?: PageRequest;
 }
 
 /** QueryProvidersResponse is response type for the Query/Providers RPC method */
 export interface QueryAccountsResponse {
   accounts: Account[];
-  pagination: PageResponse;
+  pagination?: PageResponse;
 }
 
 /** QueryPaymentRequest is request type for the Query/Payment RPC method */
@@ -26,13 +26,13 @@ export interface QueryPaymentsRequest {
   id: string;
   owner: string;
   state: string;
-  pagination: PageRequest;
+  pagination?: PageRequest;
 }
 
 /** QueryProvidersResponse is response type for the Query/Providers RPC method */
 export interface QueryPaymentsResponse {
   payments: FractionalPayment[];
-  pagination: PageResponse;
+  pagination?: PageResponse;
 }
 
 function createBaseQueryAccountsRequest(): QueryAccountsRequest {

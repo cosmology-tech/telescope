@@ -13,7 +13,7 @@ export interface QueryGrantsRequest {
   msgTypeUrl: string;
 
   /** pagination defines an pagination for the request. */
-  pagination: PageRequest;
+  pagination?: PageRequest;
 }
 
 /** QueryGrantsResponse is the response type for the Query/Authorizations RPC method. */
@@ -22,7 +22,7 @@ export interface QueryGrantsResponse {
   grants: Grant[];
 
   /** pagination defines an pagination for the response. */
-  pagination: PageResponse;
+  pagination?: PageResponse;
 }
 
 /** QueryGranterGrantsRequest is the request type for the Query/GranterGrants RPC method. */
@@ -30,7 +30,7 @@ export interface QueryGranterGrantsRequest {
   granter: string;
 
   /** pagination defines an pagination for the request. */
-  pagination: PageRequest;
+  pagination?: PageRequest;
 }
 
 /** QueryGranterGrantsResponse is the response type for the Query/GranterGrants RPC method. */
@@ -39,7 +39,7 @@ export interface QueryGranterGrantsResponse {
   grants: GrantAuthorization[];
 
   /** pagination defines an pagination for the response. */
-  pagination: PageResponse;
+  pagination?: PageResponse;
 }
 
 /** QueryGranteeGrantsRequest is the request type for the Query/IssuedGrants RPC method. */
@@ -47,7 +47,7 @@ export interface QueryGranteeGrantsRequest {
   grantee: string;
 
   /** pagination defines an pagination for the request. */
-  pagination: PageRequest;
+  pagination?: PageRequest;
 }
 
 /** QueryGranteeGrantsResponse is the response type for the Query/GranteeGrants RPC method. */
@@ -56,7 +56,7 @@ export interface QueryGranteeGrantsResponse {
   grants: GrantAuthorization[];
 
   /** pagination defines an pagination for the response. */
-  pagination: PageResponse;
+  pagination?: PageResponse;
 }
 
 function createBaseQueryGrantsRequest(): QueryGrantsRequest {

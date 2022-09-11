@@ -40,10 +40,6 @@ export class LCDQueryClient extends LCDClient {
       params: {}
     };
 
-    if (typeof params?.codeId !== "undefined") {
-      options.params.code_id = params.codeId;
-    }
-
     if (typeof params?.pagination !== "undefined") {
       setPaginationParams(options, params.pagination);
     }
@@ -68,44 +64,20 @@ export class LCDQueryClient extends LCDClient {
 
   /* RawContractState gets single key from the raw store data of a contract */
   async rawContractState(params: QueryRawContractStateRequest): Promise<QueryRawContractStateResponse> {
-    const options: any = {
-      params: {}
-    };
-
-    if (typeof params?.queryData !== "undefined") {
-      options.params.query_data = params.queryData;
-    }
-
     const endpoint = `wasm/v1/contract/${params.address}raw/${params.queryData}`;
-    return await this.request<QueryRawContractStateResponse>(endpoint, options);
+    return await this.request<QueryRawContractStateResponse>(endpoint);
   }
 
   /* SmartContractState get smart query result from the contract */
   async smartContractState(params: QuerySmartContractStateRequest): Promise<QuerySmartContractStateResponse> {
-    const options: any = {
-      params: {}
-    };
-
-    if (typeof params?.queryData !== "undefined") {
-      options.params.query_data = params.queryData;
-    }
-
     const endpoint = `wasm/v1/contract/${params.address}smart/${params.queryData}`;
-    return await this.request<QuerySmartContractStateResponse>(endpoint, options);
+    return await this.request<QuerySmartContractStateResponse>(endpoint);
   }
 
   /* Code gets the binary code and metadata for a singe wasm code */
   async code(params: QueryCodeRequest): Promise<QueryCodeResponse> {
-    const options: any = {
-      params: {}
-    };
-
-    if (typeof params?.codeId !== "undefined") {
-      options.params.code_id = params.codeId;
-    }
-
     const endpoint = `cosmwasm/wasm/v1/code/${params.codeId}`;
-    return await this.request<QueryCodeResponse>(endpoint, options);
+    return await this.request<QueryCodeResponse>(endpoint);
   }
 
   /* Codes gets the metadata for all stored wasm codes */

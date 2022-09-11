@@ -2666,6 +2666,10 @@ Object {
                             "address": "address",
                             "pagination": "pagination",
                           },
+                          "paramMap": Object {
+                            "address": "address",
+                            "pagination": "pagination",
+                          },
                           "pathParams": Array [
                             "address",
                           ],
@@ -2706,12 +2710,13 @@ Object {
                           "casing": Object {
                             "code_id": "codeId",
                           },
+                          "paramMap": Object {
+                            "code_id": "codeId",
+                          },
                           "pathParams": Array [
                             "code_id",
                           ],
-                          "queryParams": Array [
-                            "codeId",
-                          ],
+                          "queryParams": Array [],
                           "url": "/cosmwasm/wasm/v1/code/{code_id}",
                         },
                         "name": "Code",
@@ -2748,6 +2753,9 @@ Object {
                         },
                         "info": Object {
                           "casing": Object {
+                            "pagination": "pagination",
+                          },
+                          "paramMap": Object {
                             "pagination": "pagination",
                           },
                           "pathParams": Array [],
@@ -2809,6 +2817,10 @@ Object {
                             "address": "address",
                             "pagination": "pagination",
                           },
+                          "paramMap": Object {
+                            "address": "address",
+                            "pagination": "pagination",
+                          },
                           "pathParams": Array [
                             "address",
                           ],
@@ -2847,6 +2859,9 @@ Object {
                         },
                         "info": Object {
                           "casing": Object {
+                            "address": "address",
+                          },
+                          "paramMap": Object {
                             "address": "address",
                           },
                           "pathParams": Array [
@@ -2909,11 +2924,14 @@ pagination defines an optional pagination for the request.",
                             "code_id": "codeId",
                             "pagination": "pagination",
                           },
+                          "paramMap": Object {
+                            "code_id": "codeId",
+                            "pagination": "pagination",
+                          },
                           "pathParams": Array [
                             "code_id",
                           ],
                           "queryParams": Array [
-                            "codeId",
                             "pagination",
                           ],
                           "url": "/cosmwasm/wasm/v1/code/{code_id}/contracts",
@@ -2952,6 +2970,9 @@ pagination defines an optional pagination for the request.",
                         },
                         "info": Object {
                           "casing": Object {
+                            "pagination": "pagination",
+                          },
+                          "paramMap": Object {
                             "pagination": "pagination",
                           },
                           "pathParams": Array [],
@@ -3009,13 +3030,15 @@ pagination defines an optional pagination for the request.",
                             "address": "address",
                             "query_data": "queryData",
                           },
+                          "paramMap": Object {
+                            "address": "address",
+                            "query_data": "queryData",
+                          },
                           "pathParams": Array [
                             "address",
                             "query_data",
                           ],
-                          "queryParams": Array [
-                            "queryData",
-                          ],
+                          "queryParams": Array [],
                           "url": "/wasm/v1/contract/{address}/raw/{query_data}",
                         },
                         "name": "RawContractState",
@@ -3068,13 +3091,15 @@ pagination defines an optional pagination for the request.",
                             "address": "address",
                             "query_data": "queryData",
                           },
+                          "paramMap": Object {
+                            "address": "address",
+                            "query_data": "queryData",
+                          },
                           "pathParams": Array [
                             "address",
                             "query_data",
                           ],
-                          "queryParams": Array [
-                            "queryData",
-                          ],
+                          "queryParams": Array [],
                           "url": "/wasm/v1/contract/{address}/smart/{query_data}",
                         },
                         "name": "SmartContractState",

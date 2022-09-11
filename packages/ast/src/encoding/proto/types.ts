@@ -163,6 +163,17 @@ export const getFieldOptionality = (
     const fieldDefaultIsOptional = context.pluginValue('prototypes.fieldDefaultIsOptional');
     const useOptionalNullable = context.pluginValue('prototypes.useOptionalNullable');
     const isNullable = field?.options?.['(gogoproto.nullable)'] ?? fieldDefaultIsOptional;
+
+    if ([
+        'cosmos.base.query.v1beta1.PageRequest',
+        'PageRequest',
+        'cosmos.base.query.v1beta1.PageResponse',
+        'PageResponse'
+    ].includes(field.type)) {
+        // pagination
+        return true;
+    }
+
     return isOneOf ||
         (
             useOptionalNullable &&

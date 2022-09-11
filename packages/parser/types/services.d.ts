@@ -7,6 +7,7 @@ export declare const parseServiceUrl: (options: ServiceOptions) => {
 };
 export declare const parseService: (obj: any) => {
     queryParams: string[];
+    paramMap: {};
     casing: {};
     url: string;
     pathParams: string[];

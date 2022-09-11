@@ -85,6 +85,8 @@ const setParamOption = (
     }, {});
 
     const queryParam = flippedCasing[name] ? flippedCasing[name] : name;
+    const param = svc.info.paramMap[name];
+    // console.log(oldQueryParam, queryParam);
 
     // options.params.group_id = params.groupId;
     let expr = t.expressionStatement(
@@ -99,7 +101,7 @@ const setParamOption = (
             ),
             t.memberExpression(
                 t.identifier('params'),
-                t.identifier(name)
+                t.identifier(param)
             )
         )
     );
@@ -130,7 +132,7 @@ const setParamOption = (
                 'typeof',
                 t.optionalMemberExpression(
                     t.identifier('params'),
-                    t.identifier(name),
+                    t.identifier(param),
                     false,
                     true
                 )

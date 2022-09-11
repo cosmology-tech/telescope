@@ -9,6 +9,10 @@ export const parseServiceUrl = (
     const url = options?.['(google.api.http).get'];
     if (!url) return;
     const match = url.match(/\{([^\}]*)\}/g);
+    // NOTE pathParams are the original casing!
+    // e.g.: 
+    // "(google.api.http).get": "/cosmwasm/wasm/v1/code/{code_id}",
+    // "(google.api.http).get": "/osmosis/gamm/v1beta1/pools/{poolId}/total_pool_liquidity",
     return {
         url,
         pathParams: match?.length ? match.map(el => el.replace('{', '').replace('}', '')) : []
@@ -23,12 +27,39 @@ export const parseService = (
     const options: ServiceOptions = obj.options ?? {};
     const pathInfo = parseServiceUrl(options);
     if (!pathInfo) return;
-    const allParams = Object.keys(fields);
-    const queryParams = allParams.filter(param => !pathInfo.pathParams.includes(param));
+    const mapping = {};
+    const allParams = Object.keys(fields).map(field => {
+        // NOTE pathParams are the original casing!
+        const name = fields[field].options['(telescope:orig)'];
+        mapping[name] = fields[field].options['(telescope:name)']
+        return name;
+    })
+    const queryParams = allParams
+        .filter(param => !pathInfo.pathParams.includes(param))
+
+    const paramMap = mapping;
+
     return {
         ...pathInfo,
         queryParams,
+        paramMap,
+        // TODO paramMap === casing?
         casing: {}
     };
 };
 
+// ProtoField:
+// validatorAddress: {
+//     parsedType: { name: 'string', type: 'native' },
+//     isScalar: true,
+//     typeNum: 13,
+//     type: 'string',
+//     id: 1,
+//     options: {
+//       '(cosmos_proto.scalar)': 'cosmos.AddressString',
+//       '(telescope:name)': 'validatorAddress',
+//       '(telescope:orig)': 'validator_address',
+//       '(telescope:camel)': 'validatorAddress'
+//     },
+//     comment: 'validator_address defines the validator address to query for.'
+//   }

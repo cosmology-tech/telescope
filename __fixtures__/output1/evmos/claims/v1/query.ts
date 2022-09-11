@@ -36,7 +36,7 @@ export interface QueryParamsResponse {
  */
 export interface QueryClaimsRecordsRequest {
   /** pagination defines an optional pagination for the request. */
-  pagination: PageRequest;
+  pagination?: PageRequest;
 }
 
 /**
@@ -48,7 +48,7 @@ export interface QueryClaimsRecordsResponse {
   claims: ClaimsRecordAddress[];
 
   /** pagination defines the pagination in the response. */
-  pagination: PageResponse;
+  pagination?: PageResponse;
 }
 
 /**

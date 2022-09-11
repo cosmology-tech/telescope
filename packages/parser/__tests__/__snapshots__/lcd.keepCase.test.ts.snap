@@ -8,14 +8,14 @@ Object {
       "Delegation": Object {
         "comment": "Delegation queries delegate info for given validator delegator pair.",
         "fields": Object {
-          "delegatorAddr": Object {
+          "delegator_addr": Object {
             "comment": "delegator_addr defines the delegator address to query for.",
             "id": 1,
             "isScalar": true,
             "options": Object {
               "(cosmos_proto.scalar)": "cosmos.AddressString",
               "(telescope:camel)": "delegatorAddr",
-              "(telescope:name)": "delegatorAddr",
+              "(telescope:name)": "delegator_addr",
               "(telescope:orig)": "delegator_addr",
             },
             "parsedType": Object {
@@ -25,14 +25,14 @@ Object {
             "type": "string",
             "typeNum": 13,
           },
-          "validatorAddr": Object {
+          "validator_addr": Object {
             "comment": "validator_addr defines the validator address to query for.",
             "id": 2,
             "isScalar": true,
             "options": Object {
               "(cosmos_proto.scalar)": "cosmos.AddressString",
               "(telescope:camel)": "validatorAddr",
-              "(telescope:name)": "validatorAddr",
+              "(telescope:name)": "validator_addr",
               "(telescope:orig)": "validator_addr",
             },
             "parsedType": Object {
@@ -45,12 +45,12 @@ Object {
         },
         "info": Object {
           "casing": Object {
-            "delegator_addr": "delegatorAddr",
-            "validator_addr": "validatorAddr",
+            "delegator_addr": "delegator_addr",
+            "validator_addr": "validator_addr",
           },
           "paramMap": Object {
-            "delegator_addr": "delegatorAddr",
-            "validator_addr": "validatorAddr",
+            "delegator_addr": "delegator_addr",
+            "validator_addr": "validator_addr",
           },
           "pathParams": Array [
             "validator_addr",
@@ -70,14 +70,14 @@ Object {
       "DelegatorDelegations": Object {
         "comment": "DelegatorDelegations queries all delegations of a given delegator address.",
         "fields": Object {
-          "delegatorAddr": Object {
+          "delegator_addr": Object {
             "comment": "delegator_addr defines the delegator address to query for.",
             "id": 1,
             "isScalar": true,
             "options": Object {
               "(cosmos_proto.scalar)": "cosmos.AddressString",
               "(telescope:camel)": "delegatorAddr",
-              "(telescope:name)": "delegatorAddr",
+              "(telescope:name)": "delegator_addr",
               "(telescope:orig)": "delegator_addr",
             },
             "parsedType": Object {
@@ -110,11 +110,11 @@ Object {
         },
         "info": Object {
           "casing": Object {
-            "delegator_addr": "delegatorAddr",
+            "delegator_addr": "delegator_addr",
             "pagination": "pagination",
           },
           "paramMap": Object {
-            "delegator_addr": "delegatorAddr",
+            "delegator_addr": "delegator_addr",
             "pagination": "pagination",
           },
           "pathParams": Array [
@@ -137,14 +137,14 @@ Object {
         "comment": "DelegatorUnbondingDelegations queries all unbonding delegations of a given
 delegator address.",
         "fields": Object {
-          "delegatorAddr": Object {
+          "delegator_addr": Object {
             "comment": "delegator_addr defines the delegator address to query for.",
             "id": 1,
             "isScalar": true,
             "options": Object {
               "(cosmos_proto.scalar)": "cosmos.AddressString",
               "(telescope:camel)": "delegatorAddr",
-              "(telescope:name)": "delegatorAddr",
+              "(telescope:name)": "delegator_addr",
               "(telescope:orig)": "delegator_addr",
             },
             "parsedType": Object {
@@ -177,11 +177,11 @@ delegator address.",
         },
         "info": Object {
           "casing": Object {
-            "delegator_addr": "delegatorAddr",
+            "delegator_addr": "delegator_addr",
             "pagination": "pagination",
           },
           "paramMap": Object {
-            "delegator_addr": "delegatorAddr",
+            "delegator_addr": "delegator_addr",
             "pagination": "pagination",
           },
           "pathParams": Array [
@@ -204,14 +204,14 @@ delegator address.",
         "comment": "DelegatorValidator queries validator info for given delegator validator
 pair.",
         "fields": Object {
-          "delegatorAddr": Object {
+          "delegator_addr": Object {
             "comment": "delegator_addr defines the delegator address to query for.",
             "id": 1,
             "isScalar": true,
             "options": Object {
               "(cosmos_proto.scalar)": "cosmos.AddressString",
               "(telescope:camel)": "delegatorAddr",
-              "(telescope:name)": "delegatorAddr",
+              "(telescope:name)": "delegator_addr",
               "(telescope:orig)": "delegator_addr",
             },
             "parsedType": Object {
@@ -221,14 +221,14 @@ pair.",
             "type": "string",
             "typeNum": 13,
           },
-          "validatorAddr": Object {
+          "validator_addr": Object {
             "comment": "validator_addr defines the validator address to query for.",
             "id": 2,
             "isScalar": true,
             "options": Object {
               "(cosmos_proto.scalar)": "cosmos.AddressString",
               "(telescope:camel)": "validatorAddr",
-              "(telescope:name)": "validatorAddr",
+              "(telescope:name)": "validator_addr",
               "(telescope:orig)": "validator_addr",
             },
             "parsedType": Object {
@@ -241,12 +241,12 @@ pair.",
         },
         "info": Object {
           "casing": Object {
-            "delegator_addr": "delegatorAddr",
-            "validator_addr": "validatorAddr",
+            "delegator_addr": "delegator_addr",
+            "validator_addr": "validator_addr",
           },
           "paramMap": Object {
-            "delegator_addr": "delegatorAddr",
-            "validator_addr": "validatorAddr",
+            "delegator_addr": "delegator_addr",
+            "validator_addr": "validator_addr",
           },
           "pathParams": Array [
             "delegator_addr",
@@ -267,14 +267,14 @@ pair.",
         "comment": "DelegatorValidators queries all validators info for given delegator
 address.",
         "fields": Object {
-          "delegatorAddr": Object {
+          "delegator_addr": Object {
             "comment": "delegator_addr defines the delegator address to query for.",
             "id": 1,
             "isScalar": true,
             "options": Object {
               "(cosmos_proto.scalar)": "cosmos.AddressString",
               "(telescope:camel)": "delegatorAddr",
-              "(telescope:name)": "delegatorAddr",
+              "(telescope:name)": "delegator_addr",
               "(telescope:orig)": "delegator_addr",
             },
             "parsedType": Object {
@@ -307,11 +307,11 @@ address.",
         },
         "info": Object {
           "casing": Object {
-            "delegator_addr": "delegatorAddr",
+            "delegator_addr": "delegator_addr",
             "pagination": "pagination",
           },
           "paramMap": Object {
-            "delegator_addr": "delegatorAddr",
+            "delegator_addr": "delegator_addr",
             "pagination": "pagination",
           },
           "pathParams": Array [
@@ -410,14 +410,14 @@ address.",
       "Redelegations": Object {
         "comment": "Redelegations queries redelegations of given address.",
         "fields": Object {
-          "delegatorAddr": Object {
+          "delegator_addr": Object {
             "comment": "delegator_addr defines the delegator address to query for.",
             "id": 1,
             "isScalar": true,
             "options": Object {
               "(cosmos_proto.scalar)": "cosmos.AddressString",
               "(telescope:camel)": "delegatorAddr",
-              "(telescope:name)": "delegatorAddr",
+              "(telescope:name)": "delegator_addr",
               "(telescope:orig)": "delegator_addr",
             },
             "parsedType": Object {
@@ -427,14 +427,14 @@ address.",
             "type": "string",
             "typeNum": 13,
           },
-          "dstValidatorAddr": Object {
+          "dst_validator_addr": Object {
             "comment": "dst_validator_addr defines the validator address to redelegate to.",
             "id": 3,
             "isScalar": true,
             "options": Object {
               "(cosmos_proto.scalar)": "cosmos.AddressString",
               "(telescope:camel)": "dstValidatorAddr",
-              "(telescope:name)": "dstValidatorAddr",
+              "(telescope:name)": "dst_validator_addr",
               "(telescope:orig)": "dst_validator_addr",
             },
             "parsedType": Object {
@@ -464,14 +464,14 @@ address.",
             "scopeType": "protoImport",
             "type": "cosmos.base.query.v1beta1.PageRequest",
           },
-          "srcValidatorAddr": Object {
+          "src_validator_addr": Object {
             "comment": "src_validator_addr defines the validator address to redelegate from.",
             "id": 2,
             "isScalar": true,
             "options": Object {
               "(cosmos_proto.scalar)": "cosmos.AddressString",
               "(telescope:camel)": "srcValidatorAddr",
-              "(telescope:name)": "srcValidatorAddr",
+              "(telescope:name)": "src_validator_addr",
               "(telescope:orig)": "src_validator_addr",
             },
             "parsedType": Object {
@@ -484,16 +484,16 @@ address.",
         },
         "info": Object {
           "casing": Object {
-            "delegator_addr": "delegatorAddr",
-            "dst_validator_addr": "dstValidatorAddr",
+            "delegator_addr": "delegator_addr",
+            "dst_validator_addr": "dst_validator_addr",
             "pagination": "pagination",
-            "src_validator_addr": "srcValidatorAddr",
+            "src_validator_addr": "src_validator_addr",
           },
           "paramMap": Object {
-            "delegator_addr": "delegatorAddr",
-            "dst_validator_addr": "dstValidatorAddr",
+            "delegator_addr": "delegator_addr",
+            "dst_validator_addr": "dst_validator_addr",
             "pagination": "pagination",
-            "src_validator_addr": "srcValidatorAddr",
+            "src_validator_addr": "src_validator_addr",
           },
           "pathParams": Array [
             "delegator_addr",
@@ -517,14 +517,14 @@ address.",
         "comment": "UnbondingDelegation queries unbonding info for given validator delegator
 pair.",
         "fields": Object {
-          "delegatorAddr": Object {
+          "delegator_addr": Object {
             "comment": "delegator_addr defines the delegator address to query for.",
             "id": 1,
             "isScalar": true,
             "options": Object {
               "(cosmos_proto.scalar)": "cosmos.AddressString",
               "(telescope:camel)": "delegatorAddr",
-              "(telescope:name)": "delegatorAddr",
+              "(telescope:name)": "delegator_addr",
               "(telescope:orig)": "delegator_addr",
             },
             "parsedType": Object {
@@ -534,14 +534,14 @@ pair.",
             "type": "string",
             "typeNum": 13,
           },
-          "validatorAddr": Object {
+          "validator_addr": Object {
             "comment": "validator_addr defines the validator address to query for.",
             "id": 2,
             "isScalar": true,
             "options": Object {
               "(cosmos_proto.scalar)": "cosmos.AddressString",
               "(telescope:camel)": "validatorAddr",
-              "(telescope:name)": "validatorAddr",
+              "(telescope:name)": "validator_addr",
               "(telescope:orig)": "validator_addr",
             },
             "parsedType": Object {
@@ -554,12 +554,12 @@ pair.",
         },
         "info": Object {
           "casing": Object {
-            "delegator_addr": "delegatorAddr",
-            "validator_addr": "validatorAddr",
+            "delegator_addr": "delegator_addr",
+            "validator_addr": "validator_addr",
           },
           "paramMap": Object {
-            "delegator_addr": "delegatorAddr",
-            "validator_addr": "validatorAddr",
+            "delegator_addr": "delegator_addr",
+            "validator_addr": "validator_addr",
           },
           "pathParams": Array [
             "validator_addr",
@@ -579,14 +579,14 @@ pair.",
       "Validator": Object {
         "comment": "Validator queries validator info for given validator address.",
         "fields": Object {
-          "validatorAddr": Object {
+          "validator_addr": Object {
             "comment": "validator_addr defines the validator address to query for.",
             "id": 1,
             "isScalar": true,
             "options": Object {
               "(cosmos_proto.scalar)": "cosmos.AddressString",
               "(telescope:camel)": "validatorAddr",
-              "(telescope:name)": "validatorAddr",
+              "(telescope:name)": "validator_addr",
               "(telescope:orig)": "validator_addr",
             },
             "parsedType": Object {
@@ -599,10 +599,10 @@ pair.",
         },
         "info": Object {
           "casing": Object {
-            "validator_addr": "validatorAddr",
+            "validator_addr": "validator_addr",
           },
           "paramMap": Object {
-            "validator_addr": "validatorAddr",
+            "validator_addr": "validator_addr",
           },
           "pathParams": Array [
             "validator_addr",
@@ -641,14 +641,14 @@ pair.",
             "scopeType": "protoImport",
             "type": "cosmos.base.query.v1beta1.PageRequest",
           },
-          "validatorAddr": Object {
+          "validator_addr": Object {
             "comment": "validator_addr defines the validator address to query for.",
             "id": 1,
             "isScalar": true,
             "options": Object {
               "(cosmos_proto.scalar)": "cosmos.AddressString",
               "(telescope:camel)": "validatorAddr",
-              "(telescope:name)": "validatorAddr",
+              "(telescope:name)": "validator_addr",
               "(telescope:orig)": "validator_addr",
             },
             "parsedType": Object {
@@ -662,11 +662,11 @@ pair.",
         "info": Object {
           "casing": Object {
             "pagination": "pagination",
-            "validator_addr": "validatorAddr",
+            "validator_addr": "validator_addr",
           },
           "paramMap": Object {
             "pagination": "pagination",
-            "validator_addr": "validatorAddr",
+            "validator_addr": "validator_addr",
           },
           "pathParams": Array [
             "validator_addr",
@@ -707,14 +707,14 @@ pair.",
             "scopeType": "protoImport",
             "type": "cosmos.base.query.v1beta1.PageRequest",
           },
-          "validatorAddr": Object {
+          "validator_addr": Object {
             "comment": "validator_addr defines the validator address to query for.",
             "id": 1,
             "isScalar": true,
             "options": Object {
               "(cosmos_proto.scalar)": "cosmos.AddressString",
               "(telescope:camel)": "validatorAddr",
-              "(telescope:name)": "validatorAddr",
+              "(telescope:name)": "validator_addr",
               "(telescope:orig)": "validator_addr",
             },
             "parsedType": Object {
@@ -728,11 +728,11 @@ pair.",
         "info": Object {
           "casing": Object {
             "pagination": "pagination",
-            "validator_addr": "validatorAddr",
+            "validator_addr": "validator_addr",
           },
           "paramMap": Object {
             "pagination": "pagination",
-            "validator_addr": "validatorAddr",
+            "validator_addr": "validator_addr",
           },
           "pathParams": Array [
             "validator_addr",
@@ -822,14 +822,14 @@ pair.",
   "QueryDelegationRequest": Object {
     "comment": "QueryDelegationRequest is request type for the Query/Delegation RPC method.",
     "fields": Object {
-      "delegatorAddr": Object {
+      "delegator_addr": Object {
         "comment": "delegator_addr defines the delegator address to query for.",
         "id": 1,
         "isScalar": true,
         "options": Object {
           "(cosmos_proto.scalar)": "cosmos.AddressString",
           "(telescope:camel)": "delegatorAddr",
-          "(telescope:name)": "delegatorAddr",
+          "(telescope:name)": "delegator_addr",
           "(telescope:orig)": "delegator_addr",
         },
         "parsedType": Object {
@@ -839,14 +839,14 @@ pair.",
         "type": "string",
         "typeNum": 13,
       },
-      "validatorAddr": Object {
+      "validator_addr": Object {
         "comment": "validator_addr defines the validator address to query for.",
         "id": 2,
         "isScalar": true,
         "options": Object {
           "(cosmos_proto.scalar)": "cosmos.AddressString",
           "(telescope:camel)": "validatorAddr",
-          "(telescope:name)": "validatorAddr",
+          "(telescope:name)": "validator_addr",
           "(telescope:orig)": "validator_addr",
         },
         "parsedType": Object {
@@ -870,14 +870,14 @@ pair.",
   "QueryDelegationResponse": Object {
     "comment": "QueryDelegationResponse is response type for the Query/Delegation RPC method.",
     "fields": Object {
-      "delegationResponse": Object {
+      "delegation_response": Object {
         "comment": "delegation_responses defines the delegation info of a delegation.",
         "id": 1,
         "import": "cosmos/staking/v1beta1/staking.proto",
         "importedName": "DelegationResponse",
         "options": Object {
           "(telescope:camel)": "delegationResponse",
-          "(telescope:name)": "delegationResponse",
+          "(telescope:name)": "delegation_response",
           "(telescope:orig)": "delegation_response",
         },
         "parsedType": Object {
@@ -904,14 +904,14 @@ pair.",
     "comment": "QueryDelegatorDelegationsRequest is request type for the
 Query/DelegatorDelegations RPC method.",
     "fields": Object {
-      "delegatorAddr": Object {
+      "delegator_addr": Object {
         "comment": "delegator_addr defines the delegator address to query for.",
         "id": 1,
         "isScalar": true,
         "options": Object {
           "(cosmos_proto.scalar)": "cosmos.AddressString",
           "(telescope:camel)": "delegatorAddr",
-          "(telescope:name)": "delegatorAddr",
+          "(telescope:name)": "delegator_addr",
           "(telescope:orig)": "delegator_addr",
         },
         "parsedType": Object {
@@ -956,7 +956,7 @@ Query/DelegatorDelegations RPC method.",
     "comment": "QueryDelegatorDelegationsResponse is response type for the
 Query/DelegatorDelegations RPC method.",
     "fields": Object {
-      "delegationResponses": Object {
+      "delegation_responses": Object {
         "comment": "delegation_responses defines all the delegations' info of a delegator.",
         "id": 1,
         "import": "cosmos/staking/v1beta1/staking.proto",
@@ -964,7 +964,7 @@ Query/DelegatorDelegations RPC method.",
         "options": Object {
           "(gogoproto.nullable)": false,
           "(telescope:camel)": "delegationResponses",
-          "(telescope:name)": "delegationResponses",
+          "(telescope:name)": "delegation_responses",
           "(telescope:orig)": "delegation_responses",
         },
         "parsedType": Object {
@@ -1012,14 +1012,14 @@ Query/DelegatorDelegations RPC method.",
     "comment": "QueryDelegatorUnbondingDelegationsRequest is request type for the
 Query/DelegatorUnbondingDelegations RPC method.",
     "fields": Object {
-      "delegatorAddr": Object {
+      "delegator_addr": Object {
         "comment": "delegator_addr defines the delegator address to query for.",
         "id": 1,
         "isScalar": true,
         "options": Object {
           "(cosmos_proto.scalar)": "cosmos.AddressString",
           "(telescope:camel)": "delegatorAddr",
-          "(telescope:name)": "delegatorAddr",
+          "(telescope:name)": "delegator_addr",
           "(telescope:orig)": "delegator_addr",
         },
         "parsedType": Object {
@@ -1084,7 +1084,7 @@ Query/UnbondingDelegatorDelegations RPC method.",
         "scopeType": "protoImport",
         "type": "cosmos.base.query.v1beta1.PageResponse",
       },
-      "unbondingResponses": Object {
+      "unbonding_responses": Object {
         "comment": null,
         "id": 1,
         "import": "cosmos/staking/v1beta1/staking.proto",
@@ -1092,7 +1092,7 @@ Query/UnbondingDelegatorDelegations RPC method.",
         "options": Object {
           "(gogoproto.nullable)": false,
           "(telescope:camel)": "unbondingResponses",
-          "(telescope:name)": "unbondingResponses",
+          "(telescope:name)": "unbonding_responses",
           "(telescope:orig)": "unbonding_responses",
         },
         "parsedType": Object {
@@ -1120,14 +1120,14 @@ Query/UnbondingDelegatorDelegations RPC method.",
     "comment": "QueryDelegatorValidatorRequest is request type for the
 Query/DelegatorValidator RPC method.",
     "fields": Object {
-      "delegatorAddr": Object {
+      "delegator_addr": Object {
         "comment": "delegator_addr defines the delegator address to query for.",
         "id": 1,
         "isScalar": true,
         "options": Object {
           "(cosmos_proto.scalar)": "cosmos.AddressString",
           "(telescope:camel)": "delegatorAddr",
-          "(telescope:name)": "delegatorAddr",
+          "(telescope:name)": "delegator_addr",
           "(telescope:orig)": "delegator_addr",
         },
         "parsedType": Object {
@@ -1137,14 +1137,14 @@ Query/DelegatorValidator RPC method.",
         "type": "string",
         "typeNum": 13,
       },
-      "validatorAddr": Object {
+      "validator_addr": Object {
         "comment": "validator_addr defines the validator address to query for.",
         "id": 2,
         "isScalar": true,
         "options": Object {
           "(cosmos_proto.scalar)": "cosmos.AddressString",
           "(telescope:camel)": "validatorAddr",
-          "(telescope:name)": "validatorAddr",
+          "(telescope:name)": "validator_addr",
           "(telescope:orig)": "validator_addr",
         },
         "parsedType": Object {
@@ -1204,14 +1204,14 @@ Query/DelegatorValidator RPC method.",
     "comment": "QueryDelegatorValidatorsRequest is request type for the
 Query/DelegatorValidators RPC method.",
     "fields": Object {
-      "delegatorAddr": Object {
+      "delegator_addr": Object {
         "comment": "delegator_addr defines the delegator address to query for.",
         "id": 1,
         "isScalar": true,
         "options": Object {
           "(cosmos_proto.scalar)": "cosmos.AddressString",
           "(telescope:camel)": "delegatorAddr",
-          "(telescope:name)": "delegatorAddr",
+          "(telescope:name)": "delegator_addr",
           "(telescope:orig)": "delegator_addr",
         },
         "parsedType": Object {
@@ -1462,14 +1462,14 @@ method.",
     "comment": "QueryRedelegationsRequest is request type for the Query/Redelegations RPC
 method.",
     "fields": Object {
-      "delegatorAddr": Object {
+      "delegator_addr": Object {
         "comment": "delegator_addr defines the delegator address to query for.",
         "id": 1,
         "isScalar": true,
         "options": Object {
           "(cosmos_proto.scalar)": "cosmos.AddressString",
           "(telescope:camel)": "delegatorAddr",
-          "(telescope:name)": "delegatorAddr",
+          "(telescope:name)": "delegator_addr",
           "(telescope:orig)": "delegator_addr",
         },
         "parsedType": Object {
@@ -1479,14 +1479,14 @@ method.",
         "type": "string",
         "typeNum": 13,
       },
-      "dstValidatorAddr": Object {
+      "dst_validator_addr": Object {
         "comment": "dst_validator_addr defines the validator address to redelegate to.",
         "id": 3,
         "isScalar": true,
         "options": Object {
           "(cosmos_proto.scalar)": "cosmos.AddressString",
           "(telescope:camel)": "dstValidatorAddr",
-          "(telescope:name)": "dstValidatorAddr",
+          "(telescope:name)": "dst_validator_addr",
           "(telescope:orig)": "dst_validator_addr",
         },
         "parsedType": Object {
@@ -1516,14 +1516,14 @@ method.",
         "scopeType": "protoImport",
         "type": "cosmos.base.query.v1beta1.PageRequest",
       },
-      "srcValidatorAddr": Object {
+      "src_validator_addr": Object {
         "comment": "src_validator_addr defines the validator address to redelegate from.",
         "id": 2,
         "isScalar": true,
         "options": Object {
           "(cosmos_proto.scalar)": "cosmos.AddressString",
           "(telescope:camel)": "srcValidatorAddr",
-          "(telescope:name)": "srcValidatorAddr",
+          "(telescope:name)": "src_validator_addr",
           "(telescope:orig)": "src_validator_addr",
         },
         "parsedType": Object {
@@ -1568,7 +1568,7 @@ method.",
         "scopeType": "protoImport",
         "type": "cosmos.base.query.v1beta1.PageResponse",
       },
-      "redelegationResponses": Object {
+      "redelegation_responses": Object {
         "comment": null,
         "id": 1,
         "import": "cosmos/staking/v1beta1/staking.proto",
@@ -1576,7 +1576,7 @@ method.",
         "options": Object {
           "(gogoproto.nullable)": false,
           "(telescope:camel)": "redelegationResponses",
-          "(telescope:name)": "redelegationResponses",
+          "(telescope:name)": "redelegation_responses",
           "(telescope:orig)": "redelegation_responses",
         },
         "parsedType": Object {
@@ -1604,14 +1604,14 @@ method.",
     "comment": "QueryUnbondingDelegationRequest is request type for the
 Query/UnbondingDelegation RPC method.",
     "fields": Object {
-      "delegatorAddr": Object {
+      "delegator_addr": Object {
         "comment": "delegator_addr defines the delegator address to query for.",
         "id": 1,
         "isScalar": true,
         "options": Object {
           "(cosmos_proto.scalar)": "cosmos.AddressString",
           "(telescope:camel)": "delegatorAddr",
-          "(telescope:name)": "delegatorAddr",
+          "(telescope:name)": "delegator_addr",
           "(telescope:orig)": "delegator_addr",
         },
         "parsedType": Object {
@@ -1621,14 +1621,14 @@ Query/UnbondingDelegation RPC method.",
         "type": "string",
         "typeNum": 13,
       },
-      "validatorAddr": Object {
+      "validator_addr": Object {
         "comment": "validator_addr defines the validator address to query for.",
         "id": 2,
         "isScalar": true,
         "options": Object {
           "(cosmos_proto.scalar)": "cosmos.AddressString",
           "(telescope:camel)": "validatorAddr",
-          "(telescope:name)": "validatorAddr",
+          "(telescope:name)": "validator_addr",
           "(telescope:orig)": "validator_addr",
         },
         "parsedType": Object {
@@ -1708,14 +1708,14 @@ Query/ValidatorDelegations RPC method",
         "scopeType": "protoImport",
         "type": "cosmos.base.query.v1beta1.PageRequest",
       },
-      "validatorAddr": Object {
+      "validator_addr": Object {
         "comment": "validator_addr defines the validator address to query for.",
         "id": 1,
         "isScalar": true,
         "options": Object {
           "(cosmos_proto.scalar)": "cosmos.AddressString",
           "(telescope:camel)": "validatorAddr",
-          "(telescope:name)": "validatorAddr",
+          "(telescope:name)": "validator_addr",
           "(telescope:orig)": "validator_addr",
         },
         "parsedType": Object {
@@ -1737,7 +1737,7 @@ Query/ValidatorDelegations RPC method",
     "comment": "QueryValidatorDelegationsResponse is response type for the
 Query/ValidatorDelegations RPC method",
     "fields": Object {
-      "delegationResponses": Object {
+      "delegation_responses": Object {
         "comment": null,
         "id": 1,
         "import": "cosmos/staking/v1beta1/staking.proto",
@@ -1746,7 +1746,7 @@ Query/ValidatorDelegations RPC method",
           "(gogoproto.castrepeated)": "DelegationResponses",
           "(gogoproto.nullable)": false,
           "(telescope:camel)": "delegationResponses",
-          "(telescope:name)": "delegationResponses",
+          "(telescope:name)": "delegation_responses",
           "(telescope:orig)": "delegation_responses",
         },
         "parsedType": Object {
@@ -1793,14 +1793,14 @@ Query/ValidatorDelegations RPC method",
   "QueryValidatorRequest": Object {
     "comment": "QueryValidatorRequest is response type for the Query/Validator RPC method",
     "fields": Object {
-      "validatorAddr": Object {
+      "validator_addr": Object {
         "comment": "validator_addr defines the validator address to query for.",
         "id": 1,
         "isScalar": true,
         "options": Object {
           "(cosmos_proto.scalar)": "cosmos.AddressString",
           "(telescope:camel)": "validatorAddr",
-          "(telescope:name)": "validatorAddr",
+          "(telescope:name)": "validator_addr",
           "(telescope:orig)": "validator_addr",
         },
         "parsedType": Object {
@@ -1876,14 +1876,14 @@ Query/ValidatorUnbondingDelegations RPC method",
         "scopeType": "protoImport",
         "type": "cosmos.base.query.v1beta1.PageRequest",
       },
-      "validatorAddr": Object {
+      "validator_addr": Object {
         "comment": "validator_addr defines the validator address to query for.",
         "id": 1,
         "isScalar": true,
         "options": Object {
           "(cosmos_proto.scalar)": "cosmos.AddressString",
           "(telescope:camel)": "validatorAddr",
-          "(telescope:name)": "validatorAddr",
+          "(telescope:name)": "validator_addr",
           "(telescope:orig)": "validator_addr",
         },
         "parsedType": Object {
@@ -1925,7 +1925,7 @@ Query/ValidatorUnbondingDelegations RPC method.",
         "scopeType": "protoImport",
         "type": "cosmos.base.query.v1beta1.PageResponse",
       },
-      "unbondingResponses": Object {
+      "unbonding_responses": Object {
         "comment": null,
         "id": 1,
         "import": "cosmos/staking/v1beta1/staking.proto",
@@ -1933,7 +1933,7 @@ Query/ValidatorUnbondingDelegations RPC method.",
         "options": Object {
           "(gogoproto.nullable)": false,
           "(telescope:camel)": "unbondingResponses",
-          "(telescope:name)": "unbondingResponses",
+          "(telescope:name)": "unbonding_responses",
           "(telescope:orig)": "unbonding_responses",
         },
         "parsedType": Object {

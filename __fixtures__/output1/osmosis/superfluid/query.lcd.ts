@@ -75,16 +75,8 @@ export class LCDQueryClient extends LCDClient {
 
   /* Returns intermediary account connected to a superfluid staked lock by id */
   async connectedIntermediaryAccount(params: ConnectedIntermediaryAccountRequest): Promise<ConnectedIntermediaryAccountResponse> {
-    const options: any = {
-      params: {}
-    };
-
-    if (typeof params?.lockId !== "undefined") {
-      options.params.lock_id = params.lockId;
-    }
-
     const endpoint = `osmosis/superfluid/v1beta1/connected_intermediary_account/${params.lockId}`;
-    return await this.request<ConnectedIntermediaryAccountResponse>(endpoint, options);
+    return await this.request<ConnectedIntermediaryAccountResponse>(endpoint);
   }
 
   /* Returns the total amount of osmo superfluidly staked
@@ -119,16 +111,8 @@ export class LCDQueryClient extends LCDClient {
 
   /* Returns all the superfluid poistions for a specific delegator */
   async superfluidDelegationsByDelegator(params: SuperfluidDelegationsByDelegatorRequest): Promise<SuperfluidDelegationsByDelegatorResponse> {
-    const options: any = {
-      params: {}
-    };
-
-    if (typeof params?.delegatorAddress !== "undefined") {
-      options.params.delegator_address = params.delegatorAddress;
-    }
-
     const endpoint = `osmosis/superfluid/v1beta1/superfluid_delegations/${params.delegatorAddress}`;
-    return await this.request<SuperfluidDelegationsByDelegatorResponse>(endpoint, options);
+    return await this.request<SuperfluidDelegationsByDelegatorResponse>(endpoint);
   }
 
   /* SuperfluidUndelegationsByDelegator */
@@ -136,10 +120,6 @@ export class LCDQueryClient extends LCDClient {
     const options: any = {
       params: {}
     };
-
-    if (typeof params?.delegatorAddress !== "undefined") {
-      options.params.delegator_address = params.delegatorAddress;
-    }
 
     if (typeof params?.denom !== "undefined") {
       options.params.denom = params.denom;
