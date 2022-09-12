@@ -103,7 +103,6 @@ export const createProtoType = (
         declaration.leadingComments = comments;
     }
 
-
     return declaration;
 };
 

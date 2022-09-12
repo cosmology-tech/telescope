@@ -9,7 +9,16 @@ interface TelescopeOpts {
             keepCase: boolean;
             alternateCommentMode: boolean;
             preferTrailingComment: boolean;
-        },
+        };
+        methods?: {
+            encode?: boolean;
+            decode?: boolean;
+            fromJSON?: boolean;
+            toJSON?: boolean;
+            fromPartial?: boolean;
+            toApiJson?: boolean;
+            fromApiJson?: boolean;
+        };
         includePackageVar?: boolean;
         fieldDefaultIsOptional?: boolean;
         useOptionalNullable?: boolean;
@@ -101,6 +110,15 @@ export const defaultTelescopeOptions: TelescopeOptions = {
             keepCase: false,
             alternateCommentMode: true,
             preferTrailingComment: false
+        },
+        methods: {
+            encode: true,
+            decode: true,
+            fromJSON: true,
+            toJSON: true,
+            fromPartial: true,
+            toApiJson: false,
+            fromApiJson: false
         },
         includePackageVar: false,
         fieldDefaultIsOptional: false,

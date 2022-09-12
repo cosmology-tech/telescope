@@ -156,6 +156,25 @@ export const memberExpressionOrIdentifierAminoCaseField = (fields: ProtoField[],
     )
 };
 
+export const memberExpressionOrIdentifierApiCaseField = (fields: ProtoField[]) => {
+    if (fields.length === 1) {
+        return t.identifier(fields[0].options['(telescope:orig)'])
+    }
+    if (fields.length === 2) {
+        const [b, a] = fields;
+        return t.memberExpression(
+            t.identifier(a.options['(telescope:orig)']),
+            t.identifier(b.options['(telescope:orig)'])
+        );
+    }
+    const [field, ...rest] = fields;
+
+    return t.memberExpression(
+        memberExpressionOrIdentifierApiCaseField(rest),
+        t.identifier(field.options['(telescope:orig)'])
+    )
+};
+
 export const promiseTypeAnnotation = (name) => {
     return t.tsTypeAnnotation(
         t.tsTypeReference(

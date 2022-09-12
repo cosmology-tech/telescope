@@ -1,0 +1,179 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`cosmos/staking/v1beta1/tx MsgCreateValidator 1`] = `
+"export interface ApiMsgCreateValidator {
+  type: \\"cosmos-sdk/MsgCreateValidator\\";
+  value: {
+    description: {
+      moniker: string;
+      identity: string;
+      website: string;
+      security_contact: string;
+      details: string;
+    };
+    commission: {
+      rate: string;
+      max_rate: string;
+      max_change_rate: string;
+    };
+    min_self_delegation: string;
+    delegator_address: string;
+    validator_address: string;
+    pubkey: {
+      type_url: string;
+      value: Uint8Array;
+    };
+    value: {
+      denom: string;
+      amount: string;
+    };
+  };
+}"
+`;
+
+exports[`cosmos/staking/v1beta1/tx converter 1`] = `
+"export const ApiConverter = {
+  \\"/cosmos.staking.v1beta1.MsgCreateValidator\\": {
+    toApi: ({
+      description,
+      commission,
+      minSelfDelegation,
+      delegatorAddress,
+      validatorAddress,
+      pubkey,
+      value
+    }: MsgCreateValidator): ApiMsgCreateValidator[\\"value\\"] => {
+      return {
+        description: {
+          moniker: description.moniker,
+          identity: description.identity,
+          website: description.website,
+          security_contact: description.securityContact,
+          details: description.details
+        },
+        commission: {
+          rate: commission.rate,
+          max_rate: commission.maxRate,
+          max_change_rate: commission.maxChangeRate
+        },
+        min_self_delegation: minSelfDelegation,
+        delegator_address: delegatorAddress,
+        validator_address: validatorAddress,
+        pubkey: {
+          type_url: pubkey.typeUrl,
+          value: pubkey.value
+        },
+        value
+      };
+    },
+    fromApi: ({
+      description,
+      commission,
+      min_self_delegation,
+      delegator_address,
+      validator_address,
+      pubkey,
+      value
+    }: ApiMsgCreateValidator[\\"value\\"]): MsgCreateValidator => {
+      return {
+        description: {
+          moniker: description.moniker,
+          identity: description.identity,
+          website: description.website,
+          securityContact: description.security_contact,
+          details: description.details
+        },
+        commission: {
+          rate: commission.rate,
+          maxRate: commission.max_rate,
+          maxChangeRate: commission.max_change_rate
+        },
+        minSelfDelegation: min_self_delegation,
+        delegatorAddress: delegator_address,
+        validatorAddress: validator_address,
+        pubkey: {
+          typeUrl: pubkey.type_url,
+          value: pubkey.value
+        },
+        value: {
+          denom: value.denom,
+          amount: value.amount
+        }
+      };
+    }
+  }
+};"
+`;
+
+exports[`cosmos/staking/v1beta1/tx from-api 1`] = `
+"fromApi({
+  description,
+  commission,
+  min_self_delegation,
+  delegator_address,
+  validator_address,
+  pubkey,
+  value
+}: ApiMsgCreateValidator[\\"value\\"]): MsgCreateValidator {
+  return {
+    description: {
+      moniker: description.moniker,
+      identity: description.identity,
+      website: description.website,
+      securityContact: description.security_contact,
+      details: description.details
+    },
+    commission: {
+      rate: commission.rate,
+      maxRate: commission.max_rate,
+      maxChangeRate: commission.max_change_rate
+    },
+    minSelfDelegation: min_self_delegation,
+    delegatorAddress: delegator_address,
+    validatorAddress: validator_address,
+    pubkey: {
+      typeUrl: pubkey.type_url,
+      value: pubkey.value
+    },
+    value: {
+      denom: value.denom,
+      amount: value.amount
+    }
+  };
+}"
+`;
+
+exports[`cosmos/staking/v1beta1/tx to-api 1`] = `
+"toApi({
+  description,
+  commission,
+  minSelfDelegation,
+  delegatorAddress,
+  validatorAddress,
+  pubkey,
+  value
+}: MsgCreateValidator): ApiMsgCreateValidator[\\"value\\"] {
+  return {
+    description: {
+      moniker: description.moniker,
+      identity: description.identity,
+      website: description.website,
+      security_contact: description.securityContact,
+      details: description.details
+    },
+    commission: {
+      rate: commission.rate,
+      max_rate: commission.maxRate,
+      max_change_rate: commission.maxChangeRate
+    },
+    min_self_delegation: minSelfDelegation,
+    delegator_address: delegatorAddress,
+    validator_address: validatorAddress,
+    pubkey: {
+      type_url: pubkey.typeUrl,
+      value: pubkey.value
+    },
+    value
+  };
+}"
+`;

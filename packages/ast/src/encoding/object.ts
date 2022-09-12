@@ -6,6 +6,7 @@ import { encodeMethod } from './proto/encode';
 import { fromJSONMethod } from './proto/from-json';
 import { toJSONMethod } from './proto/to-json';
 import { ProtoParseContext } from './context';
+import { fromApiJsonMethod, toApiJsonMethod } from './proto';
 
 export const createObjectWithMethods = (
     context: ProtoParseContext,
@@ -14,12 +15,14 @@ export const createObjectWithMethods = (
 ) => {
 
     const methods = [
-        encodeMethod(context, name, proto),
-        decodeMethod(context, name, proto),
-        fromJSONMethod(context, name, proto),
-        toJSONMethod(context, name, proto),
-        fromPartialMethod(context, name, proto),
-    ];
+        context.pluginValue('prototypes.methods.encode') && encodeMethod(context, name, proto),
+        context.pluginValue('prototypes.methods.decode') && decodeMethod(context, name, proto),
+        context.pluginValue('prototypes.methods.fromJSON') && fromJSONMethod(context, name, proto),
+        context.pluginValue('prototypes.methods.toJSON') && toJSONMethod(context, name, proto),
+        context.pluginValue('prototypes.methods.fromPartial') && fromPartialMethod(context, name, proto),
+        context.pluginValue('prototypes.methods.toApiJson') && toApiJsonMethod({ context, proto }),
+        context.pluginValue('prototypes.methods.fromApiJson') && fromApiJsonMethod({ context, proto })
+    ].filter(Boolean);
 
     return t.exportNamedDeclaration(
         t.variableDeclaration('const',

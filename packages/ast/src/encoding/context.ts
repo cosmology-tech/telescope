@@ -76,6 +76,36 @@ export class GenericParseContext implements ParseContext {
         return importedAs;
     }
 
+    getTypeFromCurrentPath(field: ProtoField, currentProtoPath: string) {
+        const ref = this.store.findProto(currentProtoPath);
+        let lookup = this.store.get(ref, field.parsedType.name);
+        if (!lookup) {
+
+            // if we can't find it, use field import
+            if (field.import) {
+                const importRef = this.store.findProto(field.import);
+                if (!importRef) {
+                    throw new Error(`bad import ${field.import}`);
+                }
+                lookup = this.store.get(importRef, field.parsedType.name);
+            }
+
+            if (!lookup) {
+                throw new Error('Undefined Symbol: ' + field.parsedType.name);
+            }
+        }
+
+        this.addImport(
+            {
+                type: 'typeImport',
+                name: lookup.importedName,
+                import: lookup.import
+            }
+        )
+
+        return lookup.obj;
+    }
+
 }
 
 export class AminoParseContext extends GenericParseContext implements ParseContext {
@@ -136,36 +166,6 @@ export class AminoParseContext extends GenericParseContext implements ParseConte
             }
         }
         return lookup;
-    }
-
-    getTypeFromCurrentPath(field: ProtoField, currentProtoPath: string) {
-        const ref = this.store.findProto(currentProtoPath);
-        let lookup = this.store.get(ref, field.parsedType.name);
-        if (!lookup) {
-
-            // if we can't find it, use field import
-            if (field.import) {
-                const importRef = this.store.findProto(field.import);
-                if (!importRef) {
-                    throw new Error(`bad import ${field.import}`);
-                }
-                lookup = this.store.get(importRef, field.parsedType.name);
-            }
-
-            if (!lookup) {
-                throw new Error('Undefined Symbol: ' + field.parsedType.name);
-            }
-        }
-
-        this.addImport(
-            {
-                type: 'typeImport',
-                name: lookup.importedName,
-                import: lookup.import
-            }
-        )
-
-        return lookup.obj;
     }
 
     lookupEnumFromJson(field: ProtoField, currentProtoPath: string) {
