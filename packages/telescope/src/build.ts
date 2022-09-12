@@ -9,6 +9,7 @@ import {
     createProtoEnumToJSON,
     createProtoEnumFromJSON,
     createProtoType,
+    makeApiInterface,
     makeAminoTypeInterface,
     GenericParseContext,
     ProtoParseContext,
@@ -51,6 +52,13 @@ export const buildBaseTypeScriptInterface = (
     name: string,
     obj: any
 ) => {
+    if (
+        context.proto.pluginValue('methods.toApiJson') ||
+        context.proto.pluginValue('methods.fromApiJson')) {
+        context.body.push(makeApiInterface({
+            context: context.proto, proto: obj
+        }));
+    }
     context.body.push(createProtoType(context.proto, name, obj));
 };
 

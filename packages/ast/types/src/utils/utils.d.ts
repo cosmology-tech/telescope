@@ -14,4 +14,5 @@ export declare const importStmt: (names: string[], path: string) => t.ImportDecl
 export declare const memberExpressionOrIdentifier: (names: any) => any;
 export declare const memberExpressionOrIdentifierAminoCasing: (names: any, aminoCasingFn: Function) => any;
 export declare const memberExpressionOrIdentifierAminoCaseField: (fields: ProtoField[], aminoCaseFunc: Function) => any;
+export declare const memberExpressionOrIdentifierApiCaseField: (fields: ProtoField[]) => any;
 export declare const promiseTypeAnnotation: (name: any) => t.TSTypeAnnotation;

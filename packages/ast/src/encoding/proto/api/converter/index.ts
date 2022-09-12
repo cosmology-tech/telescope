@@ -5,7 +5,7 @@ import { ProtoParseContext } from '../../../context';
 import { getTypeUrl } from '../../../amino';
 import { fromApiJsonFunction } from '../from-api-json';
 
-interface AminoConverterItemParams {
+interface ApiConverterItemParams {
     root: ProtoRoot,
     context: ProtoParseContext,
     proto: ProtoType
@@ -15,7 +15,7 @@ export const createApiConverterItem = (
         root,
         context,
         proto
-    }: AminoConverterItemParams
+    }: ApiConverterItemParams
 ) => {
 
     const typeUrl = getTypeUrl(root, proto);
