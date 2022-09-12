@@ -70,7 +70,13 @@ export const toApiParseField = ({
         }
 
         switch (field.parsedType.type) {
+            case 'Enum':
+                return toApi.defaultType(args);
             case 'Type':
+                return toApi.defaultType(args);
+                if (fieldPath.length > 10) {
+                    return toApi.defaultType(args);
+                }
                 return toApi.typeArray(args);
         }
 
@@ -95,6 +101,10 @@ export const toApiParseField = ({
         case 'Enum':
             return toApi.defaultType(args);
         case 'Type':
+            return toApi.defaultType(args);
+            if (fieldPath.length > 10) {
+                return toApi.defaultType(args);
+            }
             return toApi.type(args);
     }
 
@@ -123,16 +133,11 @@ export const toApiParseField = ({
     }
 };
 
-
-interface ToApiJSON {
-    context: ProtoParseContext;
-    proto: ProtoType;
-}
-
-export const toApiJsonInfo = ({
-    context,
-    proto
-}: ToApiJSON) => {
+export const toApiJsonInfo = (
+    context: ProtoParseContext,
+    name: string,
+    proto: ProtoType
+) => {
 
     const toApiParams = t.objectPattern(
         protoFieldsToArray(proto).map((field) =>
@@ -143,11 +148,12 @@ export const toApiJsonInfo = ({
                 true)
         )
     );
-    toApiParams.typeAnnotation = t.tsTypeAnnotation(t.tsTypeReference(t.identifier(proto.name)))
+
+    toApiParams.typeAnnotation = t.tsTypeAnnotation(t.tsTypeReference(t.identifier(name)))
 
     const oneOfs = getOneOfs(proto);
-    const fields = protoFieldsToArray(proto).map((field) => {
 
+    const fields = protoFieldsToArray(proto).map((field) => {
         const isOneOf = oneOfs.includes(field.name);
         const isOptional = getFieldOptionality(context, field, isOneOf);
 
@@ -176,25 +182,27 @@ export const toApiJsonInfo = ({
             )
         ]),
         typeAnnotation: t.tsTypeAnnotation(t.tsIndexedAccessType(
-            t.tsTypeReference(t.identifier('Api' + proto.name)),
+            t.tsTypeReference(t.identifier('Api' + name)),
             t.tsLiteralType(t.stringLiteral('value'))
         ))
     };
 };
 
-export const toApiJsonMethod = ({
-    context,
-    proto
-}: ToApiJSON) => {
+export const toApiJsonMethod = (
+    context: ProtoParseContext,
+    name: string,
+    proto: ProtoType
+) => {
 
     const {
         toApiParams,
         blockStatement,
         typeAnnotation
-    } = toApiJsonInfo({
+    } = toApiJsonInfo(
         context,
+        name,
         proto
-    });
+    );
 
     return objectMethod(
         'method',
@@ -210,19 +218,21 @@ export const toApiJsonMethod = ({
     );
 };
 
-export const toApiJsonFunction = ({
-    context,
-    proto
-}: ToApiJSON) => {
+export const toApiJsonFunction = (
+    context: ProtoParseContext,
+    name: string,
+    proto: ProtoType
+) => {
 
     const {
         toApiParams,
         blockStatement,
         typeAnnotation
-    } = toApiJsonInfo({
+    } = toApiJsonInfo(
         context,
+        name,
         proto
-    });
+    );
 
     return arrowFunctionExpression(
         [

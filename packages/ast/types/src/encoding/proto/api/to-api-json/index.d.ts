@@ -11,15 +11,10 @@ export interface ToApiParseField {
     isOptional: boolean;
 }
 export declare const toApiParseField: ({ context, field, currentProtoPath, scope: previousScope, fieldPath: previousFieldPath, nested, isOptional }: ToApiParseField) => any;
-interface ToApiJSON {
-    context: ProtoParseContext;
-    proto: ProtoType;
-}
-export declare const toApiJsonInfo: ({ context, proto }: ToApiJSON) => {
+export declare const toApiJsonInfo: (context: ProtoParseContext, name: string, proto: ProtoType) => {
     toApiParams: t.ObjectPattern;
     blockStatement: t.BlockStatement;
     typeAnnotation: t.TSTypeAnnotation;
 };
-export declare const toApiJsonMethod: ({ context, proto }: ToApiJSON) => t.ObjectMethod;
-export declare const toApiJsonFunction: ({ context, proto }: ToApiJSON) => t.ArrowFunctionExpression;
-export {};
+export declare const toApiJsonMethod: (context: ProtoParseContext, name: string, proto: ProtoType) => t.ObjectMethod;
+export declare const toApiJsonFunction: (context: ProtoParseContext, name: string, proto: ProtoType) => t.ArrowFunctionExpression;

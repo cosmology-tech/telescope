@@ -16,28 +16,26 @@ describe('cosmos/staking/v1beta1/tx', () => {
     it('MsgCreateValidator', () => {
         context.options.aminoEncoding.casingFn = snake;
         expectCode(makeApiInterface(
-            {
-                context,
-                proto: protos.find(p => p.name === 'MsgCreateValidator'),
-            }
+            context,
+            'MsgCreateValidator',
+            protos.find(p => p.name === 'MsgCreateValidator'),
         ))
     })
     it('from-api', () => {
         context.options.aminoEncoding.casingFn = snake;
         expectCode(fromApiJsonMethod(
-            {
-                context,
-                proto: protos.find(p => p.name === 'MsgCreateValidator'),
-            }
+            context,
+            'MsgCreateValidator',
+            protos.find(p => p.name === 'MsgCreateValidator'),
         ))
     })
     it('to-api', () => {
         context.options.aminoEncoding.casingFn = snake;
         expectCode(toApiJsonMethod(
-            {
-                context,
-                proto: protos.find(p => p.name === 'MsgCreateValidator'),
-            }
+            context,
+            'MsgCreateValidator',
+            protos.find(p => p.name === 'MsgCreateValidator'),
+
         ))
     })
     it('converter', () => {

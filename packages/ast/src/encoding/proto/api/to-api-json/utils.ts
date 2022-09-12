@@ -24,6 +24,7 @@ export const toApi = {
             const isOptional = getFieldOptionality(context, field, isOneOf);
 
             if (parentField.import) currentProtoPath = parentField.import;
+
             return toApiParseField({
                 context,
                 field,
@@ -68,6 +69,11 @@ export const toApi = {
             const isOptional = getFieldOptionality(context, field, isOneOf);
 
             if (parentField.import) currentProtoPath = parentField.import;
+
+            if (!field.name) {
+                console.log('missing name:')
+                console.log(JSON.stringify(field, null, 2))
+            }
 
             return toApiParseField({
                 context,

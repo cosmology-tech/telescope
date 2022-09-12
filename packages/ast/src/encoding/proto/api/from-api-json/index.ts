@@ -119,15 +119,11 @@ export const fromApiParseField = ({
     }
 };
 
-interface FromApiJSON {
-    context: ProtoParseContext;
-    proto: ProtoType;
-}
-
-export const fromApiJsonInfo = ({
-    context,
-    proto
-}: FromApiJSON) => {
+export const fromApiJsonInfo = (
+    context: ProtoParseContext,
+    name: string,
+    proto: ProtoType
+) => {
 
     const fromApiParams = t.objectPattern(
         Object.keys(proto.fields).map((field) => t.objectProperty(
@@ -138,7 +134,7 @@ export const fromApiJsonInfo = ({
         )
     );
     fromApiParams.typeAnnotation = t.tsTypeAnnotation(t.tsIndexedAccessType(
-        t.tsTypeReference(t.identifier('Api' + proto.name)),
+        t.tsTypeReference(t.identifier('Api' + name)),
         t.tsLiteralType(t.stringLiteral('value'))
     ));
 
@@ -171,24 +167,26 @@ export const fromApiJsonInfo = ({
                 )
             )
         ]),
-        typeAnnotation: t.tsTypeAnnotation(t.tsTypeReference(t.identifier(proto.name)))
+        typeAnnotation: t.tsTypeAnnotation(t.tsTypeReference(t.identifier(name)))
     };
 
 };
 
-export const fromApiJsonMethod = ({
-    context,
-    proto
-}: FromApiJSON) => {
+export const fromApiJsonMethod = (
+    context: ProtoParseContext,
+    name: string,
+    proto: ProtoType
+) => {
 
     const {
         fromApiParams,
         blockStatement,
         typeAnnotation
-    } = fromApiJsonInfo({
+    } = fromApiJsonInfo(
         context,
+        name,
         proto
-    });
+    );
 
     return objectMethod(
         'method',
@@ -205,19 +203,20 @@ export const fromApiJsonMethod = ({
 };
 
 
-export const fromApiJsonFunction = ({
-    context,
-    proto
-}: FromApiJSON) => {
-
+export const fromApiJsonFunction = (
+    context: ProtoParseContext,
+    name: string,
+    proto: ProtoType
+) => {
     const {
         fromApiParams,
         blockStatement,
         typeAnnotation
-    } = fromApiJsonInfo({
+    } = fromApiJsonInfo(
         context,
+        name,
         proto
-    });
+    );
 
     return arrowFunctionExpression(
         [

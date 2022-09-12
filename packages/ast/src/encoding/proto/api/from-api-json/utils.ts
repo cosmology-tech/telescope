@@ -11,7 +11,7 @@ import { protoFieldsToArray } from '../../../amino';
 
 export const fromApi = {
     defaultType(args: FromApiParseField) {
-        if (args.field.name === args.field.options['(telescope:orig)']
+        if (args.field.name === args.field?.options?.['(telescope:orig)']
             && args.scope.length === 1) {
             return shorthandProperty(args.field.name);
         }

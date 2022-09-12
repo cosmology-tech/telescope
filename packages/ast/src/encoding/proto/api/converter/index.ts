@@ -19,24 +19,26 @@ export const createApiConverterItem = (
 ) => {
 
     const typeUrl = getTypeUrl(root, proto);
-
+    const name = proto.name;
     return t.objectProperty(
         t.stringLiteral(typeUrl),
         t.objectExpression(
             [
                 t.objectProperty(
                     t.identifier('toApi'),
-                    toApiJsonFunction({
+                    toApiJsonFunction(
                         context,
+                        name,
                         proto
-                    })
+                    )
                 ),
                 t.objectProperty(
                     t.identifier('fromApi'),
-                    fromApiJsonFunction({
+                    fromApiJsonFunction(
                         context,
+                        name,
                         proto
-                    })
+                    )
                 )
             ]
         )

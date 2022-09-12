@@ -54,10 +54,13 @@ export const buildBaseTypeScriptInterface = (
 ) => {
     if (
         context.proto.pluginValue('methods.toApiJson') ||
-        context.proto.pluginValue('methods.fromApiJson')) {
-        context.body.push(makeApiInterface({
-            context: context.proto, proto: obj
-        }));
+        context.proto.pluginValue('methods.fromApiJson')
+    ) {
+        context.body.push(makeApiInterface(
+            context.proto,
+            name,
+            obj
+        ));
     }
     context.body.push(createProtoType(context.proto, name, obj));
 };

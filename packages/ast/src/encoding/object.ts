@@ -20,8 +20,8 @@ export const createObjectWithMethods = (
         context.pluginValue('prototypes.methods.fromJSON') && fromJSONMethod(context, name, proto),
         context.pluginValue('prototypes.methods.toJSON') && toJSONMethod(context, name, proto),
         context.pluginValue('prototypes.methods.fromPartial') && fromPartialMethod(context, name, proto),
-        context.pluginValue('prototypes.methods.toApiJson') && toApiJsonMethod({ context, proto }),
-        context.pluginValue('prototypes.methods.fromApiJson') && fromApiJsonMethod({ context, proto })
+        context.pluginValue('prototypes.methods.toApiJson') && toApiJsonMethod(context, name, proto),
+        context.pluginValue('prototypes.methods.fromApiJson') && fromApiJsonMethod(context, name, proto)
     ].filter(Boolean);
 
     return t.exportNamedDeclaration(

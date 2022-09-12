@@ -96,18 +96,14 @@ export const renderApiField = ({
     }
 };
 
-export interface MakeAPITypeInterface {
-    context: ProtoParseContext;
-    proto: ProtoType;
-};
-
-export const makeApiInterface = ({
-    context,
-    proto
-}: MakeAPITypeInterface) => {
+export const makeApiInterface = (
+    context: ProtoParseContext,
+    name: string,
+    proto: ProtoType
+) => {
     context.addUtil('AminoMsg');
 
-    const TypeName = proto.name;
+    const TypeName = name;
     const typeUrl = getTypeUrl(context.ref.proto, proto);
     const aminoType = typeUrlToAmino(context, typeUrl);
 

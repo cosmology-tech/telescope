@@ -8,8 +8,4 @@ export interface RenderApiField {
     isOptional: boolean;
 }
 export declare const renderApiField: ({ context, field, currentProtoPath, isOptional }: RenderApiField) => any;
-export interface MakeAPITypeInterface {
-    context: ProtoParseContext;
-    proto: ProtoType;
-}
-export declare const makeApiInterface: ({ context, proto }: MakeAPITypeInterface) => t.ExportNamedDeclaration;
+export declare const makeApiInterface: (context: ProtoParseContext, name: string, proto: ProtoType) => t.ExportNamedDeclaration;
