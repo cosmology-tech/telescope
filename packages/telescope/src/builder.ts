@@ -23,6 +23,7 @@ import { plugin as createIndex } from './generators/create-index';
 import { plugin as createCosmWasmBundle } from './generators/create-cosmwasm-bundle';
 
 const sanitizeOptions = (options): TelescopeOptions => {
+    // If an element at the same key is present for both x and y, the value from y will appear in the result.
     options = deepmerge(defaultTelescopeOptions, options ?? {});
     // strip off leading slashes
     options.tsDisable.files = options.tsDisable.files.map(file => file.startsWith('/') ? file : file.replace(/^\//, ''));

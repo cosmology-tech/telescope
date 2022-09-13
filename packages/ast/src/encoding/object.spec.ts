@@ -1,22 +1,11 @@
 import { createObjectWithMethods } from './object';
-import generate from '@babel/generator';
-import { ProtoStore, traverse, getNestedProto } from '@osmonauts/proto-parser';
+import { traverse, getNestedProto } from '@osmonauts/proto-parser';
 import { defaultTelescopeOptions } from '@osmonauts/types';
 import { ProtoParseContext } from './context';
 import { createProtoType } from './proto';
+import { getTestProtoStore, expectCode } from '../../test-utils';
 
-const store = new ProtoStore([__dirname + '/../../../../__fixtures__/chain1']);
-
-const expectCode = (ast) => {
-    expect(
-        generate(ast).code
-    ).toMatchSnapshot();
-}
-const printCode = (ast) => {
-    console.log(
-        generate(ast).code
-    );
-}
+const store = getTestProtoStore();
 
 describe('osmosis/gamm/v1beta1/tx', () => {
     const ref = store.findProto('osmosis/gamm/v1beta1/tx.proto');

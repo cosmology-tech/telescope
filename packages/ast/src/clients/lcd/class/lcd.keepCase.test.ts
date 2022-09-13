@@ -8,20 +8,10 @@ import { ProtoStore, traverse, getNestedProto } from '@osmonauts/proto-parser'
 import { defaultTelescopeOptions, ProtoService } from '@osmonauts/types';
 import generate from '@babel/generator';
 import { GenericParseContext } from '../../../encoding';
-const store = new ProtoStore([__dirname + '/../../../../../../__fixtures__/chain1']);
+import { getTestProtoStore, expectCode, printCode } from '../../../../test-utils';
+const store = getTestProtoStore();
 store.options.prototypes.parser.keepCase = true;
 store.traverseAll();
-
-const expectCode = (ast) => {
-    expect(
-        generate(ast).code
-    ).toMatchSnapshot();
-}
-const printCode = (ast) => {
-    console.log(
-        generate(ast).code
-    );
-}
 
 it('cosmos/group/v1/query.proto', () => {
     const ref = store.findProto('cosmos/group/v1/query.proto');

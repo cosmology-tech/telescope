@@ -1,6 +1,6 @@
-import { ProtoStore } from '../src/index'
 import { getEnums } from '../src/utils';
-const store = new ProtoStore([__dirname + '/../../../__fixtures__/chain1']);
+import { getTestProtoStore } from '../test-utils';
+const store = getTestProtoStore();
 
 it('find', () => {
     const services = store.findProto('cosmos/gov/v1beta1/gov.proto');

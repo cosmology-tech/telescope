@@ -5,9 +5,10 @@ import { bundleBaseRegistries, bundleRegistries, parseContextsForRegistry } from
 import { TelescopeInput } from '../src';
 import { kebab } from "case";
 import { join } from 'path';
+import { getTestProtoStore } from '../test-utils';
 
 const outPath = __dirname + '/../../../__fixtures__/output1';
-const store = new ProtoStore([__dirname + '/../../../__fixtures__/chain1']);
+const store = getTestProtoStore();
 const contractsDir = __dirname + '/../../../__fixtures__/wasm/';
 store.traverseAll();
 

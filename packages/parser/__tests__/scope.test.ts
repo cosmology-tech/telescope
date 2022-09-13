@@ -1,6 +1,6 @@
-import { ProtoStore } from '../src/index'
 import { getObjectName, lookup } from '../src/';
-const store = new ProtoStore([__dirname + '/../../../__fixtures__/chain1']);
+import { getTestProtoStore } from '../test-utils';
+const store = getTestProtoStore();
 
 it('top-level lookup', () => {
     const ref = store.findProto('cosmos/gov/v1beta1/gov.proto');

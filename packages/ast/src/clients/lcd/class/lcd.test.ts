@@ -8,19 +8,9 @@ import { ProtoStore, traverse, getNestedProto } from '@osmonauts/proto-parser'
 import { defaultTelescopeOptions, ProtoService } from '@osmonauts/types';
 import generate from '@babel/generator';
 import { GenericParseContext } from '../../../encoding';
-const store = new ProtoStore([__dirname + '/../../../../../../__fixtures__/chain1']);
+import { getTestProtoStore, expectCode, printCode } from '../../../../test-utils';
+const store = getTestProtoStore();
 store.traverseAll();
-
-const expectCode = (ast) => {
-    expect(
-        generate(ast).code
-    ).toMatchSnapshot();
-}
-const printCode = (ast) => {
-    console.log(
-        generate(ast).code
-    );
-}
 
 it('service info template', () => {
     expect(getUrlTemplateString('/osmosis/{gamm}/v1beta1/estimate/swap_exact_amount_in')).toMatchSnapshot();

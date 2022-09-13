@@ -2,8 +2,8 @@ import { createAminoConverter } from './index';
 import { ProtoStore } from '@osmonauts/proto-parser'
 import { snake } from 'case';
 import { camel } from '@osmonauts/utils';
-import { prepareContext, expectCode } from '../../../../test-utils'
-const store = new ProtoStore([__dirname + '/../../../../../../__fixtures__/chain1']);
+import { prepareContext, expectCode, getTestProtoStore } from '../../../../test-utils'
+const store = getTestProtoStore();
 store.traverseAll();
 
 describe('osmosis/gamm/v1beta1/tx', () => {

@@ -6,20 +6,11 @@ import generate from '@babel/generator';
 import { ProtoStore, traverse, getNestedProto } from '@osmonauts/proto-parser'
 import { defaultTelescopeOptions } from '@osmonauts/types'
 import { ProtoParseContext } from '../context';
+import { getTestProtoStore, expectCode, printCode } from '../../../test-utils';
 
-const store = new ProtoStore([__dirname + '/../../../../../__fixtures__/chain1']);
-
-const expectCode = (ast) => {
-    expect(
-        generate(ast).code
-    ).toMatchSnapshot();
-}
-const printCode = (ast) => {
-    console.log(
-        generate(ast).code
-    );
-}
+const store = getTestProtoStore();
 store.traverseAll();
+
 it('ListValue', async () => {
     const ref = store.findProto('google/protobuf/struct.proto');
     const context = new ProtoParseContext(ref, store, defaultTelescopeOptions);

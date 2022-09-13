@@ -1,14 +1,13 @@
 import { getNestedProto } from '@osmonauts/proto-parser';
 import { defaultTelescopeOptions } from '@osmonauts/types';
-import { ProtoStore } from '@osmonauts/proto-parser'
-import { expectCode } from '../../../test-utils/'
+import { expectCode, getTestProtoStore } from '../../../test-utils/'
 import { AminoParseContext, ProtoParseContext } from '../context';
 import { createProtoType } from '..';
 import { createObjectWithMethods } from '../object';
 import { createAminoConverter, makeAminoTypeInterface } from '../amino/index';
 import cases from 'jest-in-case'
 
-const store = new ProtoStore([__dirname + '/../../../../../__fixtures__/chain1']);
+const store = getTestProtoStore();
 store.traverseAll();
 
 cases('osmosis/lockup/tx', opts => {

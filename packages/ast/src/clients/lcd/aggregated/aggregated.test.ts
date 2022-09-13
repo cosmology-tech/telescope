@@ -5,7 +5,9 @@ import { ProtoStore, traverse, getNestedProto } from '@osmonauts/proto-parser'
 import { defaultTelescopeOptions, ProtoRef, ProtoService } from '@osmonauts/types';
 import generate from '@babel/generator';
 import { GenericParseContext } from '../../../encoding';
-const store = new ProtoStore([__dirname + '/../../../../../../__fixtures__/chain1']);
+import { getTestProtoStore } from '../../../../test-utils';
+
+const store = getTestProtoStore();
 store.traverseAll();
 
 const expectCode = (ast) => {

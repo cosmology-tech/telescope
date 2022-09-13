@@ -1,6 +1,6 @@
-import { ProtoStore } from '../src/index'
 import { importLookup, protoImportLookup, traverse } from '../src/';
-const store = new ProtoStore([__dirname + '/../../../__fixtures__/chain1']);
+import { getTestProtoStore } from '../test-utils';
+const store = getTestProtoStore();
 
 it('google/api/expr/v1alpha1/checked', () => {
     const ref = store.findProto('google/api/expr/v1alpha1/checked.proto');

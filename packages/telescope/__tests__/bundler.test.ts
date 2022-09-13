@@ -1,10 +1,10 @@
 import * as t from '@babel/types';
-import { ProtoStore } from '@osmonauts/proto-parser'
 import { bundlePackages, getPackagesBundled } from '../src/bundle'
 import generate from '@babel/generator';
 import { recursiveModuleBundle } from '@osmonauts/ast';
+import { getTestProtoStore } from '../test-utils';
 
-const store = new ProtoStore([__dirname + '/../../../__fixtures__/chain1']);
+const store = getTestProtoStore();
 store.traverseAll();
 
 it('getPackagesBundled', () => {

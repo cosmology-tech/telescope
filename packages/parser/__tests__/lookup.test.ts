@@ -1,6 +1,7 @@
 import { ProtoStore } from '../src/index'
 import { getObjectName, lookupSymbolScopes, lookup, getPackageAndNestedFromStr } from '../src/';
-const store = new ProtoStore([__dirname + '/../../../__fixtures__/chain1']);
+import { getTestProtoStore } from '../test-utils';
+const store = getTestProtoStore();
 
 // you may need to fix TRAVERSE
 

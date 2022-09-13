@@ -1,5 +1,6 @@
 import { ProtoResolver, ProtoStore } from '../src/index'
-const store = new ProtoStore([__dirname + '/../../../__fixtures__/chain1']);
+import { getTestProtoStore } from '../test-utils';
+const store = getTestProtoStore();
 const resolver = new ProtoResolver(store.getDeps());
 
 it('cosmos/tx/signing/v1beta1/signing.proto', () => {

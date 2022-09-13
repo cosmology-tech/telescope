@@ -1,9 +1,9 @@
-import { ProtoStore } from '../src/index'
 import { traverse } from '../src/';
 import { getNested } from '../src/utils'
 import { parseService, parseServiceUrl } from '../src/services'
+import { getTestProtoStore } from '../test-utils';
 
-const store = new ProtoStore([__dirname + '/../../../__fixtures__/chain1']);
+const store = getTestProtoStore();
 
 it('queries', () => {
     const ref = store.findProto('osmosis/gamm/v1beta1/query.proto');

@@ -1,5 +1,5 @@
-import { ProtoStore } from '../src/index'
-const store = new ProtoStore([__dirname + '/../../../__fixtures__/chain1']);
+import { getTestProtoStore } from '../test-utils';
+const store = getTestProtoStore();
 
 describe('osmosis/gamm/v1beta1/tx', () => {
   store.traverseAll();

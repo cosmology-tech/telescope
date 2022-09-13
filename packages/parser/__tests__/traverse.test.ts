@@ -1,7 +1,8 @@
-import { ProtoStore } from '../src/index'
 import { traverse } from '../src/';
-const store = new ProtoStore([__dirname + '/../../../__fixtures__/chain1']);
 import { getNested } from '../src/utils'
+import { getTestProtoStore } from '../test-utils';
+
+const store = getTestProtoStore();
 
 it('osmosis/claim/v1beta1/params', () => {
   const ref = store.findProto('osmosis/claim/v1beta1/params.proto');
