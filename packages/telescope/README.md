@@ -136,6 +136,9 @@ telescope({
   // all options are totally optional ;)
   options: {
     prototypes: {
+      parser: {
+        keepCase: true
+      },
       includePackageVar: false,
       typingsFormat: {
           useExact: false,
@@ -253,7 +256,7 @@ See [RPC Clients](#rpc-clients) for more info.
 
 | option                                    | description                                                     | defaults  | 
 | ----------------------------------------- | --------------------------------------------------------------  | --------- |
-| `prototypes.parser.keepCase`              | passes `keepCase` to protobuf `parse()` to keep original casing | `false`   |
+| `prototypes.parser.keepCase`              | passes `keepCase` to protobuf `parse()` to keep original casing | `true`   |
 | `prototypes.parser.alternateCommentMode`  | passes `alternateCommentMode` to protobuf `parse()` method      | `true`    |
 | `prototypes.parser.preferTrailingComment` | passes `preferTrailingComment` to protobuf `parse()` method     | `false`   |
 

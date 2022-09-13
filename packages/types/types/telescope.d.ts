@@ -3,9 +3,9 @@ import { AminoExceptions } from "./aminos";
 interface TelescopeOpts {
     prototypes?: {
         parser?: {
-            keepCase: boolean;
-            alternateCommentMode: boolean;
-            preferTrailingComment: boolean;
+            keepCase?: boolean;
+            alternateCommentMode?: boolean;
+            preferTrailingComment?: boolean;
         };
         includePackageVar?: boolean;
         fieldDefaultIsOptional?: boolean;

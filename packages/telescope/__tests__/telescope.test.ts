@@ -24,6 +24,9 @@ const options: TelescopeOptions = {
   },
 
   prototypes: {
+    parser: {
+      keepCase: false
+    },
     includePackageVar: true,
     fieldDefaultIsOptional: false,
     useOptionalNullable: true,

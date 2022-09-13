@@ -6,9 +6,9 @@ interface TelescopeOpts {
 
     prototypes?: {
         parser?: {
-            keepCase: boolean;
-            alternateCommentMode: boolean;
-            preferTrailingComment: boolean;
+            keepCase?: boolean;
+            alternateCommentMode?: boolean;
+            preferTrailingComment?: boolean;
         },
         includePackageVar?: boolean;
         fieldDefaultIsOptional?: boolean;
@@ -98,7 +98,7 @@ export const defaultTelescopeOptions: TelescopeOptions = {
 
     prototypes: {
         parser: {
-            keepCase: false,
+            keepCase: true,
             alternateCommentMode: true,
             preferTrailingComment: false
         },
