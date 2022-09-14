@@ -33,6 +33,10 @@ const options: TelescopeOptions = {
     useOptionalNullable: true,
     allowUndefinedTypes: false,
     excluded: {
+      packages: [
+        'cosmos.gov.v1',
+        'cosmos.group.v1'
+      ],
       protos: [
         'cosmos/authz/v1beta1/event.proto'
       ]

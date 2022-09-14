@@ -4,6 +4,7 @@ import * as dotty from 'dotty';
 import { TelescopeBuilder, TelescopeInput } from './index';
 import { join, relative, dirname } from 'path';
 import { TelescopeParseContext } from './build';
+import { TelescopeOptions } from '@osmonauts/types';
 
 // TODO move to store
 export const getPackages = (store: ProtoStore) => {
@@ -20,10 +21,16 @@ export const getPackagesBundled = (store: ProtoStore) => {
     const objectified = {};
     const pkgs = getPackages(store);
     Object.keys(pkgs).forEach(key => {
+        if (store.options.prototypes?.excluded?.packages?.includes?.(key)) return;
         const files = pkgs[key];
         dotty.put(objectified, key, {
             pkg: key,
-            files
+            files: files.filter(file => {
+                // TODO implement pattern
+                const val = store.options.prototypes?.excluded?.protos?.includes?.(file.filename);
+                if (typeof val === 'undefined') return true;
+                return !val;
+            })
         });
     });
     return objectified;
@@ -37,7 +44,7 @@ export const bundlePackages = (store: ProtoStore) => {
         const bundleVariables = {};
         const bundleFile = join(base, 'bundle.ts');
         const importPaths = [];
-        parsePackage(pkgs, bundleFile, importPaths, bundleVariables);
+        parsePackage(store.options, pkgs, bundleFile, importPaths, bundleVariables);
         return {
             bundleVariables,
             bundleFile,
@@ -118,21 +125,34 @@ export const parseContextsForRegistry = (contexts: TelescopeParseContext[]) => {
     });
 };
 
-export const parsePackage = (obj, bundleFile, importPaths, bundleVariables) => {
+export const parsePackage = (
+    options: TelescopeOptions,
+    obj,
+    bundleFile,
+    importPaths,
+    bundleVariables
+) => {
     if (!obj) return;
     if (obj.pkg && obj.files) {
         obj.files.forEach(file => {
-            createFileBundle(obj.pkg, file.filename, bundleFile, importPaths, bundleVariables);
+            createFileBundle(options, obj.pkg, file.filename, bundleFile, importPaths, bundleVariables);
         });
         return;
     }
     Object.keys(obj).forEach(mini => {
-        parsePackage(obj[mini], bundleFile, importPaths, bundleVariables);
+        parsePackage(options, obj[mini], bundleFile, importPaths, bundleVariables);
     })
 }
 
 let counter = 0;
-export const createFileBundle = (pkg, filename, bundleFile, importPaths, bundleVariables) => {
+export const createFileBundle = (
+    options: TelescopeOptions,
+    pkg,
+    filename,
+    bundleFile,
+    importPaths,
+    bundleVariables
+) => {
     let rel = relative(dirname(bundleFile), filename);
     if (!rel.startsWith('.')) rel = `./${rel}`;
     const variable = `_${counter++}`;

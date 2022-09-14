@@ -9,6 +9,18 @@ store.traverseAll();
 
 it('getPackagesBundled', () => {
     const bundle = getPackagesBundled(store);
+    // osmosis: {
+    // ...
+    // },
+    // tendermint: {
+    //     abci: { pkg: 'tendermint.abci', files: [Array] },
+    //     crypto: { pkg: 'tendermint.crypto', files: [Array] },
+    //     libs: { bits: [Object] },
+    //     p2p: { pkg: 'tendermint.p2p', files: [Array] },
+    //     types: { pkg: 'tendermint.types', files: [Array] },
+    //     version: { pkg: 'tendermint.version', files: [Array] }
+    //   }
+
     expect(Object.keys(bundle)).toEqual(
         ["akash",
             "ics23",

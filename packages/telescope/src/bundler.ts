@@ -97,6 +97,7 @@ export class Bundler {
         localname: string
     ) {
         createFileBundle(
+            this.builder.options,
             context.ref.proto.package,
             localname,
             this.bundle.bundleFile,
@@ -110,6 +111,7 @@ export class Bundler {
         localname: string
     ) {
         createFileBundle(
+            this.builder.options,
             packagename,
             localname,
             this.bundle.bundleFile,
