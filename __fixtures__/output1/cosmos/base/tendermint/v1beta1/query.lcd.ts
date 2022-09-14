@@ -6,7 +6,7 @@ import { NodeInfo } from "../../../../tendermint/p2p/types";
 import { setPaginationParams } from "@osmonauts/helpers";
 import { LCDClient } from "@osmonauts/lcd";
 import { GetNodeInfoRequest, GetNodeInfoResponse, GetSyncingRequest, GetSyncingResponse, GetLatestBlockRequest, GetLatestBlockResponse, GetBlockByHeightRequest, GetBlockByHeightResponse, GetLatestValidatorSetRequest, GetLatestValidatorSetResponse, GetValidatorSetByHeightRequest, GetValidatorSetByHeightResponse } from "./query";
-export class LCDServiceClient extends LCDClient {
+export class LCDQueryClient extends LCDClient {
   constructor({
     restEndpoint
   }: {

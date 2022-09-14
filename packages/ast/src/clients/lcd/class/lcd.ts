@@ -439,7 +439,7 @@ export const createLCDClient = (
     }).filter(Boolean);
     context.addUtil('LCDClient');
     if (methods.length) {
-        const clientName = 'LCD' + firstUpper(service.name) + 'Client'
+        const clientName = 'LCDQueryClient'
         return createLCDClientClassBody(clientName, methods);
     }
 };

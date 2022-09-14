@@ -6,7 +6,7 @@ import { Block } from "../../../tendermint/types/block";
 import { setPaginationParams } from "@osmonauts/helpers";
 import { LCDClient } from "@osmonauts/lcd";
 import { SimulateRequest, SimulateResponse, GetTxRequest, GetTxResponse, BroadcastTxRequest, BroadcastTxResponse, GetTxsEventRequest, GetTxsEventResponse, GetBlockWithTxsRequest, GetBlockWithTxsResponse } from "./service";
-export class LCDServiceClient extends LCDClient {
+export class LCDQueryClient extends LCDClient {
   constructor({
     restEndpoint
   }: {
