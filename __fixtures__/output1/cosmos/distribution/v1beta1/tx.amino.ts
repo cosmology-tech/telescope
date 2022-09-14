@@ -16,7 +16,7 @@ export interface AminoMsgWithdrawDelegatorReward extends AminoMsg {
   };
 }
 export interface AminoMsgWithdrawValidatorCommission extends AminoMsg {
-  type: "cosmos-sdk/MsgWithdrawValidatorCommission";
+  type: "cosmos-sdk/MsgWithdrawValCommission";
   value: {
     validator_address: string;
   };
@@ -75,7 +75,7 @@ export const AminoConverter = {
     }
   },
   "/cosmos.distribution.v1beta1.MsgWithdrawValidatorCommission": {
-    aminoType: "cosmos-sdk/MsgWithdrawValidatorCommission",
+    aminoType: "cosmos-sdk/MsgWithdrawValCommission",
     toAmino: ({
       validatorAddress
     }: MsgWithdrawValidatorCommission): AminoMsgWithdrawValidatorCommission["value"] => {

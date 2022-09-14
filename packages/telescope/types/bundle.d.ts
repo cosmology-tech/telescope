@@ -1,6 +1,7 @@
 import { ProtoStore } from '@osmonauts/proto-parser';
 import { TelescopeBuilder } from './index';
 import { TelescopeParseContext } from './build';
+import { TelescopeOptions } from '@osmonauts/types';
 export declare const getPackages: (store: ProtoStore) => {};
 export declare const getPackagesBundled: (store: ProtoStore) => {};
 export declare const bundlePackages: (store: ProtoStore) => {
@@ -25,5 +26,5 @@ export declare const parseContextsForRegistry: (contexts: TelescopeParseContext[
     imports: {};
     objects: any[];
 }[];
-export declare const parsePackage: (obj: any, bundleFile: any, importPaths: any, bundleVariables: any) => void;
-export declare const createFileBundle: (pkg: any, filename: any, bundleFile: any, importPaths: any, bundleVariables: any) => void;
+export declare const parsePackage: (options: TelescopeOptions, obj: any, bundleFile: any, importPaths: any, bundleVariables: any) => void;
+export declare const createFileBundle: (options: TelescopeOptions, pkg: any, filename: any, bundleFile: any, importPaths: any, bundleVariables: any) => void;

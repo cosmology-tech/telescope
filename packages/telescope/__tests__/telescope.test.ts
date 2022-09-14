@@ -1,5 +1,4 @@
 import { TelescopeBuilder } from '../src/builder';
-import { ProtoStore } from '@osmonauts/proto-parser';
 import { TelescopeOptions } from '@osmonauts/types';
 import { bundleBaseRegistries, bundleRegistries, parseContextsForRegistry } from '../src/bundle'
 import { TelescopeInput } from '../src';
@@ -34,8 +33,8 @@ const options: TelescopeOptions = {
     allowUndefinedTypes: false,
     excluded: {
       packages: [
-        'cosmos.gov.v1',
-        'cosmos.group.v1'
+        // 'cosmos.gov.v1',
+        // 'cosmos.group.v1'
       ],
       protos: [
         'cosmos/authz/v1beta1/event.proto'
