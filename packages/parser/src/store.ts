@@ -27,9 +27,9 @@ const GOOGLE_PROTOS = [
 ];
 
 interface ParseProtoOptions {
-    keepCase: boolean;
-    alternateCommentMode: boolean;
-    preferTrailingComment: boolean;
+    keepCase?: boolean;
+    alternateCommentMode?: boolean;
+    preferTrailingComment?: boolean;
 }
 
 const protoParseOptionsDefaults = {
