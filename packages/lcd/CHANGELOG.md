@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.4.1](https://github.com/osmosis-labs/telescope/compare/@osmonauts/lcd@0.4.0...@osmonauts/lcd@0.4.1) (2022-09-14)
+
+**Note:** Version bump only for package @osmonauts/lcd
+
+
+
+
+
 # [0.4.0](https://github.com/osmosis-labs/telescope/compare/@osmonauts/lcd@0.3.12...@osmonauts/lcd@0.4.0) (2022-08-23)
 
 **Note:** Version bump only for package @osmonauts/lcd
