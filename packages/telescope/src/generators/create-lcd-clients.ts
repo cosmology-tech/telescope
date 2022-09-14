@@ -18,7 +18,10 @@ export const plugin = (
 
     const queryContexts = bundler
         .contexts
-        .filter(context => context.queries.length > 0);
+        .filter(context =>
+            context.queries.length > 0 ||
+            context.services.length > 0
+        );
 
     // [x] write out one registry helper for all contexts w/mutations
     const lcdClients = queryContexts.map(c => {
@@ -28,27 +31,50 @@ export const plugin = (
 
         if (c.proto.isExcluded()) return;
 
-        const localname = bundler.getLocalFilename(c.ref, 'lcd');
-        const filename = bundler.getFilename(localname);
         const ctx = bundler.getFreshContext(c);
 
         // get mutations, services
         parse(ctx);
 
         const proto = getNestedProto(c.ref.traversed);
-        // hard-coding, for now, only Query service
-        if (!proto?.Query || proto.Query?.type !== 'Service') {
+
+        if (
+            (!proto?.Query ||
+                proto.Query?.type !== 'Service') &&
+            (!proto?.Service ||
+                proto.Service?.type !== 'Service')
+        ) {
             return;
         }
 
-        const lcdAst = createLCDClient(ctx.generic, proto.Query);
+        let name, getImportsFrom;
 
-        if (!lcdAst) {
+        // both Query and Service
+        if (proto.Query) {
+            name = 'query';
+            getImportsFrom = ctx.queries;
+        } else if (proto.Service) {
+            name = 'svc';
+            getImportsFrom = ctx.services;
+        }
+
+        const localname = bundler.getLocalFilename(c.ref, 'lcd');
+        const filename = bundler.getFilename(localname);
+
+        let ast = null;
+        if (proto.Query) {
+            ast = createLCDClient(ctx.generic, proto.Query);
+        }
+        if (proto.Service) {
+            ast = createLCDClient(ctx.generic, proto.Service);
+        }
+
+        if (!ast) {
             return;
         }
 
         const serviceImports = getDepsFromQueries(
-            ctx.queries,
+            getImportsFrom,
             localname
         );
 
@@ -56,7 +82,7 @@ export const plugin = (
         const prog = []
             .concat(imports)
             .concat(ctx.body)
-            .concat(lcdAst);
+            .concat(ast);
 
         bundler.writeAst(prog, filename);
         bundler.addToBundle(c, localname);

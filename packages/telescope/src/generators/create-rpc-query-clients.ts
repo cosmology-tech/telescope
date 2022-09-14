@@ -28,7 +28,6 @@ export const plugin = (
 
         const proto = getNestedProto(c.ref.traversed);
 
-        let name, getImportsFrom;
         if (
             (!proto?.Query ||
                 proto.Query?.type !== 'Service') &&
@@ -38,6 +37,9 @@ export const plugin = (
             return;
         }
 
+        let name, getImportsFrom;
+
+        // both Query and Service
         if (proto.Query) {
             name = 'query';
             getImportsFrom = ctx.queries;
@@ -58,7 +60,10 @@ export const plugin = (
             asts.push(createRpcClientInterface(ctx.generic, proto.Service))
             asts.push(createRpcClientClass(ctx.generic, proto.Service))
         }
-        ////////
+
+        if (!asts.length) {
+            return;
+        }
 
         const serviceImports = getDepsFromQueries(
             getImportsFrom,

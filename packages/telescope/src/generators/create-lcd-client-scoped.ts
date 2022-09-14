@@ -135,7 +135,12 @@ const createAllLCDBundles = (
     // refs with services
     const refs = builder.store.getProtos().filter((ref: ProtoRef) => {
         const proto = getNestedProto(ref.traversed);
-        if (!proto?.Query || proto.Query?.type !== 'Service') {
+        if (
+            (!proto?.Query ||
+                proto.Query?.type !== 'Service') &&
+            (!proto?.Service ||
+                proto.Service?.type !== 'Service')
+        ) {
             return;
         }
         return true;

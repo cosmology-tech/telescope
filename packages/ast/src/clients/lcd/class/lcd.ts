@@ -23,20 +23,26 @@ const firstUpper = (s: string) => s = s.charAt(0).toUpperCase() + s.slice(1);
 
 const returnAwaitRequest = (
     responseType: string,
+    // method: 'get' | 'post',
     hasOptions: boolean = false
 ) => {
     const args = [
         t.identifier('endpoint')
     ];
+    // if (method === 'post') {
+    //     args.push(t.identifier('body'));
+    // }
+
     if (hasOptions) {
         args.push(t.identifier('options'));
     }
+
     return t.returnStatement(
         t.awaitExpression(
             callExpression(
                 t.memberExpression(
                     t.thisExpression(),
-                    t.identifier('request')
+                    t.identifier('get')
                 ),
                 args,
                 t.tsTypeParameterInstantiation([
@@ -47,6 +53,7 @@ const returnAwaitRequest = (
             )
         )
     );
+
 };
 
 const makeOptionsObject = () => {
@@ -86,7 +93,6 @@ const setParamOption = (
 
     const queryParam = flippedCasing[name] ? flippedCasing[name] : name;
     const param = svc.info.paramMap[name];
-    // console.log(oldQueryParam, queryParam);
 
     // options.params.group_id = params.groupId;
     let expr = t.expressionStatement(
@@ -305,7 +311,19 @@ const requestMethod = (
         )
     }
 
-
+    const body = [];
+    // if (serviceMethod.info.method === 'post') {
+    //     body.push(t.variableDeclaration(
+    //         'const',
+    //         [
+    //             t.variableDeclarator
+    //                 (
+    //                     t.identifier('body'),
+    //                     t.objectExpression([])
+    //                 )
+    //         ]
+    //     ));
+    // }
 
     return classMethod(
         'method',
@@ -316,8 +334,12 @@ const requestMethod = (
         t.blockStatement([
 
             ...optionsAst,
+
             // if optional params not undefined
             ...queryParams,
+
+            // body
+            ...body,
 
             // endpoint
             t.variableDeclaration(
@@ -332,7 +354,11 @@ const requestMethod = (
             ),
 
             // return 
-            returnAwaitRequest(serviceMethod.responseType, serviceMethod.info.queryParams.length > 0)
+            returnAwaitRequest(
+                serviceMethod.responseType,
+                // serviceMethod.info.method,
+                serviceMethod.info.queryParams.length > 0
+            )
         ]),
         returnReponseType(serviceMethod.responseType),
         makeComment(comment),
@@ -403,12 +429,15 @@ export const createLCDClient = (
     context: GenericParseContext,
     service: ProtoService
 ) => {
-    context.addUtil('LCDClient');
     const methods = Object.keys(service.methods).map(key => {
         const method: ProtoServiceMethod = service.methods[key];
-        if (method.info)
+        if (method.info &&
+            (method.options['(google.api.http).get'] || method.options['(google.api.http)'])
+        ) {
             return requestMethod(context, method);
+        }
     }).filter(Boolean);
+    context.addUtil('LCDClient');
     if (methods.length) {
         const clientName = 'LCD' + firstUpper(service.name) + 'Client'
         return createLCDClientClassBody(clientName, methods);

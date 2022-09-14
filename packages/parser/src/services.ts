@@ -1,19 +1,31 @@
 import { ProtoField } from '@osmonauts/types';
 
 interface ServiceOptions {
-    "(google.api.http).get": string;
+    "(google.api.http).get"?: string;
+    "(google.api.http)"?: {
+        post: string;
+        body: string;
+    }
 }
 export const parseServiceUrl = (
     options: ServiceOptions
 ) => {
-    const url = options?.['(google.api.http).get'];
-    if (!url) return;
+    let method = 'get';
+    let url = options?.['(google.api.http).get'];
+    if (!url) {
+        method = 'post';
+        url = options?.['(google.api.http)']?.post;
+    }
+    if (!url) {
+        return;
+    }
     const match = url.match(/\{([^\}]*)\}/g);
     // NOTE pathParams are the original casing!
     // e.g.: 
     // "(google.api.http).get": "/cosmwasm/wasm/v1/code/{code_id}",
     // "(google.api.http).get": "/osmosis/gamm/v1beta1/pools/{poolId}/total_pool_liquidity",
     return {
+        method,
         url,
         pathParams: match?.length ? match.map(el => el.replace('{', '').replace('}', '')) : []
     };
