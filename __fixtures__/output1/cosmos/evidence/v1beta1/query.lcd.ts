@@ -1,7 +1,7 @@
 import { PageRequest, PageResponse } from "../../base/query/v1beta1/pagination";
 import { Any } from "../../../google/protobuf/any";
-import { LCDClient } from "@osmonauts/lcd";
 import { setPaginationParams } from "@osmonauts/helpers";
+import { LCDClient } from "@osmonauts/lcd";
 import { QueryEvidenceRequest, QueryEvidenceResponse, QueryAllEvidenceRequest, QueryAllEvidenceResponse } from "./query";
 export class LCDQueryClient extends LCDClient {
   constructor({
@@ -17,7 +17,7 @@ export class LCDQueryClient extends LCDClient {
   /* Evidence queries evidence based on evidence hash. */
   async evidence(params: QueryEvidenceRequest): Promise<QueryEvidenceResponse> {
     const endpoint = `cosmos/evidence/v1beta1/evidence/${params.evidenceHash}`;
-    return await this.request<QueryEvidenceResponse>(endpoint);
+    return await this.get<QueryEvidenceResponse>(endpoint);
   }
 
   /* AllEvidence queries all evidence. */
@@ -33,7 +33,7 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `cosmos/evidence/v1beta1/evidence`;
-    return await this.request<QueryAllEvidenceResponse>(endpoint, options);
+    return await this.get<QueryAllEvidenceResponse>(endpoint, options);
   }
 
 }

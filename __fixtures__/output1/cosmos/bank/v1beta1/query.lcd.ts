@@ -1,8 +1,8 @@
 import { PageRequest, PageResponse } from "../../base/query/v1beta1/pagination";
 import { Coin } from "../../base/v1beta1/coin";
 import { Params, Metadata } from "./bank";
-import { LCDClient } from "@osmonauts/lcd";
 import { setPaginationParams } from "@osmonauts/helpers";
+import { LCDClient } from "@osmonauts/lcd";
 import { QueryBalanceRequest, QueryBalanceResponse, QueryAllBalancesRequest, QueryAllBalancesResponse, QuerySpendableBalancesRequest, QuerySpendableBalancesResponse, QueryTotalSupplyRequest, QueryTotalSupplyResponse, QuerySupplyOfRequest, QuerySupplyOfResponse, QueryParamsRequest, QueryParamsResponse, QueryDenomMetadataRequest, QueryDenomMetadataResponse, QueryDenomsMetadataRequest, QueryDenomsMetadataResponse, QueryDenomOwnersRequest, QueryDenomOwnersResponse } from "./query";
 export class LCDQueryClient extends LCDClient {
   constructor({
@@ -26,7 +26,7 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `cosmos/bank/v1beta1/balances/${params.address}/by_denom`;
-    return await this.request<QueryBalanceResponse>(endpoint, options);
+    return await this.get<QueryBalanceResponse>(endpoint, options);
   }
 
   /* AllBalances queries the balance of all coins for a single account. */
@@ -40,7 +40,7 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `cosmos/bank/v1beta1/balances/${params.address}`;
-    return await this.request<QueryAllBalancesResponse>(endpoint, options);
+    return await this.get<QueryAllBalancesResponse>(endpoint, options);
   }
 
   /* SpendableBalances queries the spenable balance of all coins for a single
@@ -55,7 +55,7 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `cosmos/bank/v1beta1/spendable_balances/${params.address}`;
-    return await this.request<QuerySpendableBalancesResponse>(endpoint, options);
+    return await this.get<QuerySpendableBalancesResponse>(endpoint, options);
   }
 
   /* TotalSupply queries the total supply of all coins. */
@@ -71,7 +71,7 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `cosmos/bank/v1beta1/supply`;
-    return await this.request<QueryTotalSupplyResponse>(endpoint, options);
+    return await this.get<QueryTotalSupplyResponse>(endpoint, options);
   }
 
   /* SupplyOf queries the supply of a single coin. */
@@ -85,19 +85,19 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `cosmos/bank/v1beta1/supply/by_denom`;
-    return await this.request<QuerySupplyOfResponse>(endpoint, options);
+    return await this.get<QuerySupplyOfResponse>(endpoint, options);
   }
 
   /* Params queries the parameters of x/bank module. */
   async params(_params: QueryParamsRequest = {}): Promise<QueryParamsResponse> {
     const endpoint = `cosmos/bank/v1beta1/params`;
-    return await this.request<QueryParamsResponse>(endpoint);
+    return await this.get<QueryParamsResponse>(endpoint);
   }
 
   /* DenomsMetadata queries the client metadata of a given coin denomination. */
   async denomMetadata(params: QueryDenomMetadataRequest): Promise<QueryDenomMetadataResponse> {
     const endpoint = `cosmos/bank/v1beta1/denoms_metadata/${params.denom}`;
-    return await this.request<QueryDenomMetadataResponse>(endpoint);
+    return await this.get<QueryDenomMetadataResponse>(endpoint);
   }
 
   /* DenomsMetadata queries the client metadata for all registered coin
@@ -114,7 +114,7 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `cosmos/bank/v1beta1/denoms_metadata`;
-    return await this.request<QueryDenomsMetadataResponse>(endpoint, options);
+    return await this.get<QueryDenomsMetadataResponse>(endpoint, options);
   }
 
   /* DenomOwners queries for all account addresses that own a particular token
@@ -129,7 +129,7 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `cosmos/bank/v1beta1/denom_owners/${params.denom}`;
-    return await this.request<QueryDenomOwnersResponse>(endpoint, options);
+    return await this.get<QueryDenomOwnersResponse>(endpoint, options);
   }
 
 }

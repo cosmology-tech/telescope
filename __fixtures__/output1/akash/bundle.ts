@@ -89,9 +89,9 @@ import * as _343 from "./deployment/v1beta2/service.rpc.msg";
 import * as _344 from "./market/v1beta2/service.rpc.msg";
 import * as _345 from "./provider/v1beta1/provider.rpc.msg";
 import * as _346 from "./provider/v1beta2/provider.rpc.msg";
-import * as _514 from "./lcd";
-import * as _515 from "./rpc.query";
-import * as _516 from "./rpc.tx";
+import * as _516 from "./lcd";
+import * as _517 from "./rpc.query";
+import * as _518 from "./rpc.tx";
 export namespace akash {
   export namespace audit {
     export const v1beta1 = { ..._0,
@@ -213,8 +213,8 @@ export namespace akash {
       ..._346
     };
   }
-  export const ClientFactory = { ..._514,
-    ..._515,
-    ..._516
+  export const ClientFactory = { ..._516,
+    ..._517,
+    ..._518
   };
 }

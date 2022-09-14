@@ -4,5 +4,6 @@ export declare class LCDClient {
     constructor({ restEndpoint }: {
         restEndpoint: any;
     });
-    request<ResponseType = unknown>(endpoint: any, opts?: {}): Promise<ResponseType>;
+    get<ResponseType = unknown>(endpoint: any, opts?: {}): Promise<ResponseType>;
+    post<ResponseType = unknown>(endpoint: any, body?: {}, opts?: {}): Promise<ResponseType>;
 }

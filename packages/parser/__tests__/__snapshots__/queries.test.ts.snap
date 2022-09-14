@@ -92,6 +92,7 @@ Object {
             "sender": "sender",
             "tokenIn": "tokenIn",
           },
+          "method": "get",
           "paramMap": Object {
             "poolId": "poolId",
             "routes": "routes",
@@ -203,6 +204,7 @@ Object {
             "sender": "sender",
             "tokenOut": "tokenOut",
           },
+          "method": "get",
           "paramMap": Object {
             "poolId": "poolId",
             "routes": "routes",
@@ -232,6 +234,7 @@ Object {
         "fields": Object {},
         "info": Object {
           "casing": Object {},
+          "method": "get",
           "paramMap": Object {},
           "pathParams": Array [],
           "queryParams": Array [],
@@ -270,6 +273,7 @@ Object {
           "casing": Object {
             "poolId": "poolId",
           },
+          "method": "get",
           "paramMap": Object {
             "poolId": "poolId",
           },
@@ -312,6 +316,7 @@ Object {
           "casing": Object {
             "poolId": "poolId",
           },
+          "method": "get",
           "paramMap": Object {
             "poolId": "poolId",
           },
@@ -357,6 +362,7 @@ Object {
           "casing": Object {
             "pagination": "pagination",
           },
+          "method": "get",
           "paramMap": Object {
             "pagination": "pagination",
           },
@@ -436,6 +442,7 @@ a base denomination and a quote denomination.",
             "poolId": "poolId",
             "quote_asset_denom": "quoteAssetDenom",
           },
+          "method": "get",
           "paramMap": Object {
             "base_asset_denom": "baseAssetDenom",
             "poolId": "poolId",
@@ -463,6 +470,7 @@ a base denomination and a quote denomination.",
         "fields": Object {},
         "info": Object {
           "casing": Object {},
+          "method": "get",
           "paramMap": Object {},
           "pathParams": Array [],
           "queryParams": Array [],
@@ -501,6 +509,7 @@ a base denomination and a quote denomination.",
           "casing": Object {
             "poolId": "poolId",
           },
+          "method": "get",
           "paramMap": Object {
             "poolId": "poolId",
           },
@@ -543,6 +552,7 @@ a base denomination and a quote denomination.",
           "casing": Object {
             "poolId": "poolId",
           },
+          "method": "get",
           "paramMap": Object {
             "poolId": "poolId",
           },

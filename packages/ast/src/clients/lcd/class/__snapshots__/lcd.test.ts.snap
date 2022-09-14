@@ -23,7 +23,7 @@ exports[`cosmos LCDClient 1`] = `
     }
 
     const endpoint = \`cosmos/bank/v1beta1/balances/\${params.address}/by_denom\`;
-    return await this.request<QueryBalanceResponse>(endpoint, options);
+    return await this.get<QueryBalanceResponse>(endpoint, options);
   }
 
   /* AllBalances queries the balance of all coins for a single account. */
@@ -37,7 +37,7 @@ exports[`cosmos LCDClient 1`] = `
     }
 
     const endpoint = \`cosmos/bank/v1beta1/balances/\${params.address}\`;
-    return await this.request<QueryAllBalancesResponse>(endpoint, options);
+    return await this.get<QueryAllBalancesResponse>(endpoint, options);
   }
 
   /* SpendableBalances queries the spenable balance of all coins for a single
@@ -52,7 +52,7 @@ exports[`cosmos LCDClient 1`] = `
     }
 
     const endpoint = \`cosmos/bank/v1beta1/spendable_balances/\${params.address}\`;
-    return await this.request<QuerySpendableBalancesResponse>(endpoint, options);
+    return await this.get<QuerySpendableBalancesResponse>(endpoint, options);
   }
 
   /* TotalSupply queries the total supply of all coins. */
@@ -68,7 +68,7 @@ exports[`cosmos LCDClient 1`] = `
     }
 
     const endpoint = \`cosmos/bank/v1beta1/supply\`;
-    return await this.request<QueryTotalSupplyResponse>(endpoint, options);
+    return await this.get<QueryTotalSupplyResponse>(endpoint, options);
   }
 
   /* SupplyOf queries the supply of a single coin. */
@@ -82,19 +82,19 @@ exports[`cosmos LCDClient 1`] = `
     }
 
     const endpoint = \`cosmos/bank/v1beta1/supply/by_denom\`;
-    return await this.request<QuerySupplyOfResponse>(endpoint, options);
+    return await this.get<QuerySupplyOfResponse>(endpoint, options);
   }
 
   /* Params queries the parameters of x/bank module. */
   async params(_params: QueryParamsRequest = {}): Promise<QueryParamsResponse> {
     const endpoint = \`cosmos/bank/v1beta1/params\`;
-    return await this.request<QueryParamsResponse>(endpoint);
+    return await this.get<QueryParamsResponse>(endpoint);
   }
 
   /* DenomsMetadata queries the client metadata of a given coin denomination. */
   async denomMetadata(params: QueryDenomMetadataRequest): Promise<QueryDenomMetadataResponse> {
     const endpoint = \`cosmos/bank/v1beta1/denoms_metadata/\${params.denom}\`;
-    return await this.request<QueryDenomMetadataResponse>(endpoint);
+    return await this.get<QueryDenomMetadataResponse>(endpoint);
   }
 
   /* DenomsMetadata queries the client metadata for all registered coin
@@ -111,7 +111,7 @@ exports[`cosmos LCDClient 1`] = `
     }
 
     const endpoint = \`cosmos/bank/v1beta1/denoms_metadata\`;
-    return await this.request<QueryDenomsMetadataResponse>(endpoint, options);
+    return await this.get<QueryDenomsMetadataResponse>(endpoint, options);
   }
 
   /* DenomOwners queries for all account addresses that own a particular token
@@ -126,7 +126,7 @@ exports[`cosmos LCDClient 1`] = `
     }
 
     const endpoint = \`cosmos/bank/v1beta1/denom_owners/\${params.denom}\`;
-    return await this.request<QueryDenomOwnersResponse>(endpoint, options);
+    return await this.get<QueryDenomOwnersResponse>(endpoint, options);
   }
 
 }"
@@ -147,7 +147,7 @@ exports[`cosmos fee LCDClient 1`] = `
   /* Allowance returns fee granted to the grantee by the granter. */
   async allowance(params: QueryAllowanceRequest): Promise<QueryAllowanceResponse> {
     const endpoint = \`cosmos/feegrant/v1beta1/allowance/\${params.granter}/\${params.grantee}\`;
-    return await this.request<QueryAllowanceResponse>(endpoint);
+    return await this.get<QueryAllowanceResponse>(endpoint);
   }
 
   /* Allowances returns all the grants for address. */
@@ -161,7 +161,7 @@ exports[`cosmos fee LCDClient 1`] = `
     }
 
     const endpoint = \`cosmos/feegrant/v1beta1/allowances/\${params.grantee}\`;
-    return await this.request<QueryAllowancesResponse>(endpoint, options);
+    return await this.get<QueryAllowancesResponse>(endpoint, options);
   }
 
   /* AllowancesByGranter returns all the grants given by an address
@@ -176,7 +176,7 @@ exports[`cosmos fee LCDClient 1`] = `
     }
 
     const endpoint = \`cosmos/feegrant/v1beta1/issued/\${params.granter}\`;
-    return await this.request<QueryAllowancesByGranterResponse>(endpoint, options);
+    return await this.get<QueryAllowancesByGranterResponse>(endpoint, options);
   }
 
 }"
@@ -199,13 +199,13 @@ exports[`cosmos/group/v1/query.proto 1`] = `
   /* GroupInfo queries group info based on group id. */
   async groupInfo(params: QueryGroupInfoRequest): Promise<QueryGroupInfoResponse> {
     const endpoint = \`cosmos/group/v1/group_info/\${params.group_id}\`;
-    return await this.request<QueryGroupInfoResponse>(endpoint);
+    return await this.get<QueryGroupInfoResponse>(endpoint);
   }
 
   /* GroupPolicyInfo queries group policy info based on account address of group policy. */
   async groupPolicyInfo(params: QueryGroupPolicyInfoRequest): Promise<QueryGroupPolicyInfoResponse> {
     const endpoint = \`cosmos/group/v1/group_policy_info/\${params.address}\`;
-    return await this.request<QueryGroupPolicyInfoResponse>(endpoint);
+    return await this.get<QueryGroupPolicyInfoResponse>(endpoint);
   }
 
   /* GroupMembers queries members of a group */
@@ -219,7 +219,7 @@ exports[`cosmos/group/v1/query.proto 1`] = `
     }
 
     const endpoint = \`cosmos/group/v1/group_members/\${params.group_id}\`;
-    return await this.request<QueryGroupMembersResponse>(endpoint, options);
+    return await this.get<QueryGroupMembersResponse>(endpoint, options);
   }
 
   /* GroupsByAdmin queries groups by admin address. */
@@ -233,7 +233,7 @@ exports[`cosmos/group/v1/query.proto 1`] = `
     }
 
     const endpoint = \`cosmos/group/v1/groups_by_admin/\${params.admin}\`;
-    return await this.request<QueryGroupsByAdminResponse>(endpoint, options);
+    return await this.get<QueryGroupsByAdminResponse>(endpoint, options);
   }
 
   /* GroupPoliciesByGroup queries group policies by group id. */
@@ -247,7 +247,7 @@ exports[`cosmos/group/v1/query.proto 1`] = `
     }
 
     const endpoint = \`cosmos/group/v1/group_policies_by_group/\${params.group_id}\`;
-    return await this.request<QueryGroupPoliciesByGroupResponse>(endpoint, options);
+    return await this.get<QueryGroupPoliciesByGroupResponse>(endpoint, options);
   }
 
   /* GroupsByAdmin queries group policies by admin address. */
@@ -261,13 +261,13 @@ exports[`cosmos/group/v1/query.proto 1`] = `
     }
 
     const endpoint = \`cosmos/group/v1/group_policies_by_admin/\${params.admin}\`;
-    return await this.request<QueryGroupPoliciesByAdminResponse>(endpoint, options);
+    return await this.get<QueryGroupPoliciesByAdminResponse>(endpoint, options);
   }
 
   /* Proposal queries a proposal based on proposal id. */
   async proposal(params: QueryProposalRequest): Promise<QueryProposalResponse> {
     const endpoint = \`cosmos/group/v1/proposal/\${params.proposal_id}\`;
-    return await this.request<QueryProposalResponse>(endpoint);
+    return await this.get<QueryProposalResponse>(endpoint);
   }
 
   /* ProposalsByGroupPolicy queries proposals based on account address of group policy. */
@@ -281,13 +281,13 @@ exports[`cosmos/group/v1/query.proto 1`] = `
     }
 
     const endpoint = \`cosmos/group/v1/proposals_by_group_policy/\${params.address}\`;
-    return await this.request<QueryProposalsByGroupPolicyResponse>(endpoint, options);
+    return await this.get<QueryProposalsByGroupPolicyResponse>(endpoint, options);
   }
 
   /* VoteByProposalVoter queries a vote by proposal id and voter. */
   async voteByProposalVoter(params: QueryVoteByProposalVoterRequest): Promise<QueryVoteByProposalVoterResponse> {
     const endpoint = \`cosmos/group/v1/vote_by_proposal_voter/\${params.proposal_id}/\${params.voter}\`;
-    return await this.request<QueryVoteByProposalVoterResponse>(endpoint);
+    return await this.get<QueryVoteByProposalVoterResponse>(endpoint);
   }
 
   /* VotesByProposal queries a vote by proposal. */
@@ -301,7 +301,7 @@ exports[`cosmos/group/v1/query.proto 1`] = `
     }
 
     const endpoint = \`cosmos/group/v1/votes_by_proposal/\${params.proposal_id}\`;
-    return await this.request<QueryVotesByProposalResponse>(endpoint, options);
+    return await this.get<QueryVotesByProposalResponse>(endpoint, options);
   }
 
   /* VotesByVoter queries a vote by voter. */
@@ -315,7 +315,7 @@ exports[`cosmos/group/v1/query.proto 1`] = `
     }
 
     const endpoint = \`cosmos/group/v1/votes_by_voter/\${params.voter}\`;
-    return await this.request<QueryVotesByVoterResponse>(endpoint, options);
+    return await this.get<QueryVotesByVoterResponse>(endpoint, options);
   }
 
   /* GroupsByMember queries groups by member address. */
@@ -329,13 +329,13 @@ exports[`cosmos/group/v1/query.proto 1`] = `
     }
 
     const endpoint = \`cosmos/group/v1/groups_by_member/\${params.address}\`;
-    return await this.request<QueryGroupsByMemberResponse>(endpoint, options);
+    return await this.get<QueryGroupsByMemberResponse>(endpoint, options);
   }
 
   /* TallyResult queries the tally of a proposal votes. */
   async tallyResult(params: QueryTallyResultRequest): Promise<QueryTallyResultResponse> {
     const endpoint = \`cosmos/group/v1/proposals/\${params.proposal_id}/tally\`;
-    return await this.request<QueryTallyResultResponse>(endpoint);
+    return await this.get<QueryTallyResultResponse>(endpoint);
   }
 
 }"
@@ -368,13 +368,13 @@ exports[`cosmos/staking/v1beta1/query.proto 1`] = `
     }
 
     const endpoint = \`cosmos/staking/v1beta1/validators\`;
-    return await this.request<QueryValidatorsResponse>(endpoint, options);
+    return await this.get<QueryValidatorsResponse>(endpoint, options);
   }
 
   /* Validator queries validator info for given validator address. */
   async validator(params: QueryValidatorRequest): Promise<QueryValidatorResponse> {
     const endpoint = \`cosmos/staking/v1beta1/validators/\${params.validatorAddr}\`;
-    return await this.request<QueryValidatorResponse>(endpoint);
+    return await this.get<QueryValidatorResponse>(endpoint);
   }
 
   /* ValidatorDelegations queries delegate info for given validator. */
@@ -388,7 +388,7 @@ exports[`cosmos/staking/v1beta1/query.proto 1`] = `
     }
 
     const endpoint = \`cosmos/staking/v1beta1/validators/\${params.validatorAddr}/delegations\`;
-    return await this.request<QueryValidatorDelegationsResponse>(endpoint, options);
+    return await this.get<QueryValidatorDelegationsResponse>(endpoint, options);
   }
 
   /* ValidatorUnbondingDelegations queries unbonding delegations of a validator. */
@@ -402,20 +402,20 @@ exports[`cosmos/staking/v1beta1/query.proto 1`] = `
     }
 
     const endpoint = \`cosmos/staking/v1beta1/validators/\${params.validatorAddr}/unbonding_delegations\`;
-    return await this.request<QueryValidatorUnbondingDelegationsResponse>(endpoint, options);
+    return await this.get<QueryValidatorUnbondingDelegationsResponse>(endpoint, options);
   }
 
   /* Delegation queries delegate info for given validator delegator pair. */
   async delegation(params: QueryDelegationRequest): Promise<QueryDelegationResponse> {
     const endpoint = \`cosmos/staking/v1beta1/validators/\${params.validatorAddr}delegations/\${params.delegatorAddr}\`;
-    return await this.request<QueryDelegationResponse>(endpoint);
+    return await this.get<QueryDelegationResponse>(endpoint);
   }
 
   /* UnbondingDelegation queries unbonding info for given validator delegator
   pair. */
   async unbondingDelegation(params: QueryUnbondingDelegationRequest): Promise<QueryUnbondingDelegationResponse> {
     const endpoint = \`cosmos/staking/v1beta1/validators/\${params.validatorAddr}/delegations/\${params.delegatorAddr}/unbonding_delegation\`;
-    return await this.request<QueryUnbondingDelegationResponse>(endpoint);
+    return await this.get<QueryUnbondingDelegationResponse>(endpoint);
   }
 
   /* DelegatorDelegations queries all delegations of a given delegator address. */
@@ -429,7 +429,7 @@ exports[`cosmos/staking/v1beta1/query.proto 1`] = `
     }
 
     const endpoint = \`cosmos/staking/v1beta1/delegations/\${params.delegatorAddr}\`;
-    return await this.request<QueryDelegatorDelegationsResponse>(endpoint, options);
+    return await this.get<QueryDelegatorDelegationsResponse>(endpoint, options);
   }
 
   /* DelegatorUnbondingDelegations queries all unbonding delegations of a given
@@ -444,7 +444,7 @@ exports[`cosmos/staking/v1beta1/query.proto 1`] = `
     }
 
     const endpoint = \`cosmos/staking/v1beta1/delegators/\${params.delegatorAddr}/unbonding_delegations\`;
-    return await this.request<QueryDelegatorUnbondingDelegationsResponse>(endpoint, options);
+    return await this.get<QueryDelegatorUnbondingDelegationsResponse>(endpoint, options);
   }
 
   /* Redelegations queries redelegations of given address. */
@@ -466,7 +466,7 @@ exports[`cosmos/staking/v1beta1/query.proto 1`] = `
     }
 
     const endpoint = \`cosmos/staking/v1beta1/delegators/\${params.delegatorAddr}/redelegations\`;
-    return await this.request<QueryRedelegationsResponse>(endpoint, options);
+    return await this.get<QueryRedelegationsResponse>(endpoint, options);
   }
 
   /* DelegatorValidators queries all validators info for given delegator
@@ -481,32 +481,32 @@ exports[`cosmos/staking/v1beta1/query.proto 1`] = `
     }
 
     const endpoint = \`cosmos/staking/v1beta1/delegators/\${params.delegatorAddr}/validators\`;
-    return await this.request<QueryDelegatorValidatorsResponse>(endpoint, options);
+    return await this.get<QueryDelegatorValidatorsResponse>(endpoint, options);
   }
 
   /* DelegatorValidator queries validator info for given delegator validator
   pair. */
   async delegatorValidator(params: QueryDelegatorValidatorRequest): Promise<QueryDelegatorValidatorResponse> {
     const endpoint = \`cosmos/staking/v1beta1/delegators/\${params.delegatorAddr}validators/\${params.validatorAddr}\`;
-    return await this.request<QueryDelegatorValidatorResponse>(endpoint);
+    return await this.get<QueryDelegatorValidatorResponse>(endpoint);
   }
 
   /* HistoricalInfo queries the historical info for given height. */
   async historicalInfo(params: QueryHistoricalInfoRequest): Promise<QueryHistoricalInfoResponse> {
     const endpoint = \`cosmos/staking/v1beta1/historical_info/\${params.height}\`;
-    return await this.request<QueryHistoricalInfoResponse>(endpoint);
+    return await this.get<QueryHistoricalInfoResponse>(endpoint);
   }
 
   /* Pool queries the pool info. */
   async pool(_params: QueryPoolRequest = {}): Promise<QueryPoolResponse> {
     const endpoint = \`cosmos/staking/v1beta1/pool\`;
-    return await this.request<QueryPoolResponse>(endpoint);
+    return await this.get<QueryPoolResponse>(endpoint);
   }
 
   /* Parameters queries the staking parameters. */
   async params(_params: QueryParamsRequest = {}): Promise<QueryParamsResponse> {
     const endpoint = \`cosmos/staking/v1beta1/params\`;
-    return await this.request<QueryParamsResponse>(endpoint);
+    return await this.get<QueryParamsResponse>(endpoint);
   }
 
 }"
@@ -537,43 +537,43 @@ exports[`osmosis LCDClient 1`] = `
     }
 
     const endpoint = \`osmosis/gamm/v1beta1/pools\`;
-    return await this.request<QueryPoolsResponse>(endpoint, options);
+    return await this.get<QueryPoolsResponse>(endpoint, options);
   }
 
   /* NumPools */
   async numPools(_params: QueryNumPoolsRequest = {}): Promise<QueryNumPoolsResponse> {
     const endpoint = \`osmosis/gamm/v1beta1/num_pools\`;
-    return await this.request<QueryNumPoolsResponse>(endpoint);
+    return await this.get<QueryNumPoolsResponse>(endpoint);
   }
 
   /* TotalLiquidity */
   async totalLiquidity(_params: QueryTotalLiquidityRequest = {}): Promise<QueryTotalLiquidityResponse> {
     const endpoint = \`osmosis/gamm/v1beta1/total_liquidity\`;
-    return await this.request<QueryTotalLiquidityResponse>(endpoint);
+    return await this.get<QueryTotalLiquidityResponse>(endpoint);
   }
 
   /* Per Pool gRPC Endpoints */
   async pool(params: QueryPoolRequest): Promise<QueryPoolResponse> {
     const endpoint = \`osmosis/gamm/v1beta1/pools/\${params.poolId}\`;
-    return await this.request<QueryPoolResponse>(endpoint);
+    return await this.get<QueryPoolResponse>(endpoint);
   }
 
   /* PoolParams */
   async poolParams(params: QueryPoolParamsRequest): Promise<QueryPoolParamsResponse> {
     const endpoint = \`osmosis/gamm/v1beta1/pools/\${params.poolId}/params\`;
-    return await this.request<QueryPoolParamsResponse>(endpoint);
+    return await this.get<QueryPoolParamsResponse>(endpoint);
   }
 
   /* TotalPoolLiquidity */
   async totalPoolLiquidity(params: QueryTotalPoolLiquidityRequest): Promise<QueryTotalPoolLiquidityResponse> {
     const endpoint = \`osmosis/gamm/v1beta1/pools/\${params.poolId}/total_pool_liquidity\`;
-    return await this.request<QueryTotalPoolLiquidityResponse>(endpoint);
+    return await this.get<QueryTotalPoolLiquidityResponse>(endpoint);
   }
 
   /* TotalShares */
   async totalShares(params: QueryTotalSharesRequest): Promise<QueryTotalSharesResponse> {
     const endpoint = \`osmosis/gamm/v1beta1/pools/\${params.poolId}/total_shares\`;
-    return await this.request<QueryTotalSharesResponse>(endpoint);
+    return await this.get<QueryTotalSharesResponse>(endpoint);
   }
 
   /* SpotPrice defines a gRPC query handler that returns the spot price given
@@ -592,7 +592,7 @@ exports[`osmosis LCDClient 1`] = `
     }
 
     const endpoint = \`osmosis/gamm/v1beta1/pools/\${params.poolId}/prices\`;
-    return await this.request<QuerySpotPriceResponse>(endpoint, options);
+    return await this.get<QuerySpotPriceResponse>(endpoint, options);
   }
 
   /* Estimate the swap. */
@@ -614,7 +614,7 @@ exports[`osmosis LCDClient 1`] = `
     }
 
     const endpoint = \`osmosis/gamm/v1beta1/\${params.poolId}/estimate/swap_exact_amount_in\`;
-    return await this.request<QuerySwapExactAmountInResponse>(endpoint, options);
+    return await this.get<QuerySwapExactAmountInResponse>(endpoint, options);
   }
 
   /* EstimateSwapExactAmountOut */
@@ -636,7 +636,7 @@ exports[`osmosis LCDClient 1`] = `
     }
 
     const endpoint = \`osmosis/gamm/v1beta1/\${params.poolId}/estimate/swap_exact_amount_out\`;
-    return await this.request<QuerySwapExactAmountOutResponse>(endpoint, options);
+    return await this.get<QuerySwapExactAmountOutResponse>(endpoint, options);
   }
 
 }"

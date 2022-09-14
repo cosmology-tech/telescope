@@ -2666,6 +2666,7 @@ Object {
                             "address": "address",
                             "pagination": "pagination",
                           },
+                          "method": "get",
                           "paramMap": Object {
                             "address": "address",
                             "pagination": "pagination",
@@ -2710,6 +2711,7 @@ Object {
                           "casing": Object {
                             "code_id": "codeId",
                           },
+                          "method": "get",
                           "paramMap": Object {
                             "code_id": "codeId",
                           },
@@ -2755,6 +2757,7 @@ Object {
                           "casing": Object {
                             "pagination": "pagination",
                           },
+                          "method": "get",
                           "paramMap": Object {
                             "pagination": "pagination",
                           },
@@ -2817,6 +2820,7 @@ Object {
                             "address": "address",
                             "pagination": "pagination",
                           },
+                          "method": "get",
                           "paramMap": Object {
                             "address": "address",
                             "pagination": "pagination",
@@ -2861,6 +2865,7 @@ Object {
                           "casing": Object {
                             "address": "address",
                           },
+                          "method": "get",
                           "paramMap": Object {
                             "address": "address",
                           },
@@ -2924,6 +2929,7 @@ pagination defines an optional pagination for the request.",
                             "code_id": "codeId",
                             "pagination": "pagination",
                           },
+                          "method": "get",
                           "paramMap": Object {
                             "code_id": "codeId",
                             "pagination": "pagination",
@@ -2972,6 +2978,7 @@ pagination defines an optional pagination for the request.",
                           "casing": Object {
                             "pagination": "pagination",
                           },
+                          "method": "get",
                           "paramMap": Object {
                             "pagination": "pagination",
                           },
@@ -3030,6 +3037,7 @@ pagination defines an optional pagination for the request.",
                             "address": "address",
                             "query_data": "queryData",
                           },
+                          "method": "get",
                           "paramMap": Object {
                             "address": "address",
                             "query_data": "queryData",
@@ -3091,6 +3099,7 @@ pagination defines an optional pagination for the request.",
                             "address": "address",
                             "query_data": "queryData",
                           },
+                          "method": "get",
                           "paramMap": Object {
                             "address": "address",
                             "query_data": "queryData",

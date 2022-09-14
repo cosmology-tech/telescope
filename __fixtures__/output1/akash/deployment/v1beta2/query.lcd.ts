@@ -3,8 +3,8 @@ import { PageRequest, PageResponse } from "../../../cosmos/base/query/v1beta1/pa
 import { GroupID } from "./groupid";
 import { Group } from "./group";
 import { Account } from "../../escrow/v1beta2/types";
-import { LCDClient } from "@osmonauts/lcd";
 import { setPaginationParams } from "@osmonauts/helpers";
+import { LCDClient } from "@osmonauts/lcd";
 import { QueryDeploymentsRequest, QueryDeploymentsResponse, QueryDeploymentRequest, QueryDeploymentResponse, QueryGroupRequest, QueryGroupResponse } from "./query";
 export class LCDQueryClient extends LCDClient {
   constructor({
@@ -32,7 +32,7 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `akash/deployment/v1beta2/deployments/list`;
-    return await this.request<QueryDeploymentsResponse>(endpoint, options);
+    return await this.get<QueryDeploymentsResponse>(endpoint, options);
   }
 
   /* Deployment queries deployment details */
@@ -46,7 +46,7 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `akash/deployment/v1beta2/deployments/info`;
-    return await this.request<QueryDeploymentResponse>(endpoint, options);
+    return await this.get<QueryDeploymentResponse>(endpoint, options);
   }
 
   /* Group queries group details */
@@ -60,7 +60,7 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `akash/deployment/v1beta2/groups/info`;
-    return await this.request<QueryGroupResponse>(endpoint, options);
+    return await this.get<QueryGroupResponse>(endpoint, options);
   }
 
 }

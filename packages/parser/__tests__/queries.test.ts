@@ -21,6 +21,7 @@ it('parsing options', () => {
         "(google.api.http).get": "/osmosis/gamm/v1beta1/{poolId}/estimate/swap_exact_amount_in"
     };
     expect(parseServiceUrl(opts)).toEqual({
+        method: 'get',
         url: '/osmosis/gamm/v1beta1/{poolId}/estimate/swap_exact_amount_in',
         pathParams: ['poolId']
     })
@@ -31,6 +32,7 @@ it('parsing options many path params', () => {
         "(google.api.http).get": "/osmosis/gamm/v1beta1/{poolId}/{estimate}/{swap_exact_amount_in}"
     };
     expect(parseServiceUrl(opts)).toEqual({
+        method: 'get',
         url: '/osmosis/gamm/v1beta1/{poolId}/{estimate}/{swap_exact_amount_in}',
         pathParams: ['poolId', 'estimate', 'swap_exact_amount_in']
     })
@@ -40,6 +42,7 @@ it('parsing options many path params', () => {
 // https://osmosis.stakesystems.io/static/openapi
 it('parsing service', () => {
     expect(parseService(EstimateSwapExactAmountIn)).toEqual({
+        method: 'get',
         url: '/osmosis/gamm/v1beta1/{pool_id}/estimate/swap_exact_amount_in',
         pathParams: ['pool_id'],
         queryParams: ['routes', 'sender', 'token_id'],

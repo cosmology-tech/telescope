@@ -1,7 +1,7 @@
 import { PageRequest, PageResponse } from "../../../cosmos/base/query/v1beta1/pagination";
 import { Provider } from "./provider";
-import { LCDClient } from "@osmonauts/lcd";
 import { setPaginationParams } from "@osmonauts/helpers";
+import { LCDClient } from "@osmonauts/lcd";
 import { QueryProvidersRequest, QueryProvidersResponse, QueryProviderRequest, QueryProviderResponse } from "./query";
 export class LCDQueryClient extends LCDClient {
   constructor({
@@ -27,13 +27,13 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `akash/provider/v1beta2/providers`;
-    return await this.request<QueryProvidersResponse>(endpoint, options);
+    return await this.get<QueryProvidersResponse>(endpoint, options);
   }
 
   /* Provider queries provider details */
   async provider(params: QueryProviderRequest): Promise<QueryProviderResponse> {
     const endpoint = `akash/provider/v1beta2/providers/${params.owner}`;
-    return await this.request<QueryProviderResponse>(endpoint);
+    return await this.get<QueryProviderResponse>(endpoint);
   }
 
 }

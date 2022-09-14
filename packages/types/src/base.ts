@@ -68,6 +68,7 @@ export interface ProtoField {
 };
 
 export interface ProtoServiceMethodInfo {
+    method: 'get' | 'post';
     url: string;
     pathParams: string[];
     queryParams: string[];
@@ -82,6 +83,11 @@ export interface ProtoServiceMethod {
     options: {
         [key: string]: any;
         "(google.api.http).get"?: string;
+        "(google.api.http).post"?: string;
+        "(google.api.http)"?: {
+            post: string;
+            body: string;
+        }
     }
     comment?: string;
     requestType: string;
@@ -91,7 +97,7 @@ export interface ProtoServiceMethod {
 export interface ProtoService {
     type: 'Service';
     name: string;
-    serviceType: 'Msg' | 'Query' | string;
+    serviceType: 'Msg' | 'Query' | 'Service' | string;
     methods: Record<string, ProtoServiceMethod>
 };
 export interface ProtoAny {

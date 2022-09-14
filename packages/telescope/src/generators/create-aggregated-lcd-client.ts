@@ -57,8 +57,10 @@ export const plugin = (
 
     const queryContexts = builder
         .contexts
-        .filter(context => context.queries.length > 0);
-
+        .filter(context =>
+            context.queries.length > 0 ||
+            context.services.length > 0
+        );
 
     const progImports = queryContexts.reduce((m, c) => {
 
@@ -76,13 +78,29 @@ export const plugin = (
         parse(ctx);
 
         const proto = getNestedProto(c.ref.traversed);
-        // hard-coding, for now, only Query service
-        if (!proto?.Query || proto.Query?.type !== 'Service') {
+
+        if (
+            (!proto?.Query ||
+                proto.Query?.type !== 'Service') &&
+            (!proto?.Service ||
+                proto.Service?.type !== 'Service')
+        ) {
             return;
         }
 
+        let name, getImportsFrom;
+
+        // both Query and Service
+        if (proto.Query) {
+            name = 'query';
+            getImportsFrom = ctx.queries;
+        } else if (proto.Service) {
+            name = 'svc';
+            getImportsFrom = ctx.services;
+        }
+
         const serviceImports = getDepsFromQueries(
-            ctx.queries,
+            getImportsFrom,
             localname
         );
 
