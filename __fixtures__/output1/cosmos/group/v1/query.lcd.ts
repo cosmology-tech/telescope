@@ -1,7 +1,7 @@
 import { PageRequest, PageResponse } from "../../base/query/v1beta1/pagination";
 import { GroupInfo, GroupPolicyInfo, GroupMember, Proposal, Vote, TallyResult } from "./types";
-import { LCDClient } from "@osmonauts/lcd";
 import { setPaginationParams } from "@osmonauts/helpers";
+import { LCDClient } from "@osmonauts/lcd";
 import { QueryGroupInfoRequest, QueryGroupInfoResponse, QueryGroupPolicyInfoRequest, QueryGroupPolicyInfoResponse, QueryGroupMembersRequest, QueryGroupMembersResponse, QueryGroupsByAdminRequest, QueryGroupsByAdminResponse, QueryGroupPoliciesByGroupRequest, QueryGroupPoliciesByGroupResponse, QueryGroupPoliciesByAdminRequest, QueryGroupPoliciesByAdminResponse, QueryProposalRequest, QueryProposalResponse, QueryProposalsByGroupPolicyRequest, QueryProposalsByGroupPolicyResponse, QueryVoteByProposalVoterRequest, QueryVoteByProposalVoterResponse, QueryVotesByProposalRequest, QueryVotesByProposalResponse, QueryVotesByVoterRequest, QueryVotesByVoterResponse, QueryGroupsByMemberRequest, QueryGroupsByMemberResponse, QueryTallyResultRequest, QueryTallyResultResponse } from "./query";
 export class LCDQueryClient extends LCDClient {
   constructor({
@@ -17,13 +17,13 @@ export class LCDQueryClient extends LCDClient {
   /* GroupInfo queries group info based on group id. */
   async groupInfo(params: QueryGroupInfoRequest): Promise<QueryGroupInfoResponse> {
     const endpoint = `cosmos/group/v1/group_info/${params.groupId}`;
-    return await this.request<QueryGroupInfoResponse>(endpoint);
+    return await this.get<QueryGroupInfoResponse>(endpoint);
   }
 
   /* GroupPolicyInfo queries group policy info based on account address of group policy. */
   async groupPolicyInfo(params: QueryGroupPolicyInfoRequest): Promise<QueryGroupPolicyInfoResponse> {
     const endpoint = `cosmos/group/v1/group_policy_info/${params.address}`;
-    return await this.request<QueryGroupPolicyInfoResponse>(endpoint);
+    return await this.get<QueryGroupPolicyInfoResponse>(endpoint);
   }
 
   /* GroupMembers queries members of a group */
@@ -37,7 +37,7 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `cosmos/group/v1/group_members/${params.groupId}`;
-    return await this.request<QueryGroupMembersResponse>(endpoint, options);
+    return await this.get<QueryGroupMembersResponse>(endpoint, options);
   }
 
   /* GroupsByAdmin queries groups by admin address. */
@@ -51,7 +51,7 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `cosmos/group/v1/groups_by_admin/${params.admin}`;
-    return await this.request<QueryGroupsByAdminResponse>(endpoint, options);
+    return await this.get<QueryGroupsByAdminResponse>(endpoint, options);
   }
 
   /* GroupPoliciesByGroup queries group policies by group id. */
@@ -65,7 +65,7 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `cosmos/group/v1/group_policies_by_group/${params.groupId}`;
-    return await this.request<QueryGroupPoliciesByGroupResponse>(endpoint, options);
+    return await this.get<QueryGroupPoliciesByGroupResponse>(endpoint, options);
   }
 
   /* GroupsByAdmin queries group policies by admin address. */
@@ -79,13 +79,13 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `cosmos/group/v1/group_policies_by_admin/${params.admin}`;
-    return await this.request<QueryGroupPoliciesByAdminResponse>(endpoint, options);
+    return await this.get<QueryGroupPoliciesByAdminResponse>(endpoint, options);
   }
 
   /* Proposal queries a proposal based on proposal id. */
   async proposal(params: QueryProposalRequest): Promise<QueryProposalResponse> {
     const endpoint = `cosmos/group/v1/proposal/${params.proposalId}`;
-    return await this.request<QueryProposalResponse>(endpoint);
+    return await this.get<QueryProposalResponse>(endpoint);
   }
 
   /* ProposalsByGroupPolicy queries proposals based on account address of group policy. */
@@ -99,13 +99,13 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `cosmos/group/v1/proposals_by_group_policy/${params.address}`;
-    return await this.request<QueryProposalsByGroupPolicyResponse>(endpoint, options);
+    return await this.get<QueryProposalsByGroupPolicyResponse>(endpoint, options);
   }
 
   /* VoteByProposalVoter queries a vote by proposal id and voter. */
   async voteByProposalVoter(params: QueryVoteByProposalVoterRequest): Promise<QueryVoteByProposalVoterResponse> {
     const endpoint = `cosmos/group/v1/vote_by_proposal_voter/${params.proposalId}/${params.voter}`;
-    return await this.request<QueryVoteByProposalVoterResponse>(endpoint);
+    return await this.get<QueryVoteByProposalVoterResponse>(endpoint);
   }
 
   /* VotesByProposal queries a vote by proposal. */
@@ -119,7 +119,7 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `cosmos/group/v1/votes_by_proposal/${params.proposalId}`;
-    return await this.request<QueryVotesByProposalResponse>(endpoint, options);
+    return await this.get<QueryVotesByProposalResponse>(endpoint, options);
   }
 
   /* VotesByVoter queries a vote by voter. */
@@ -133,7 +133,7 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `cosmos/group/v1/votes_by_voter/${params.voter}`;
-    return await this.request<QueryVotesByVoterResponse>(endpoint, options);
+    return await this.get<QueryVotesByVoterResponse>(endpoint, options);
   }
 
   /* GroupsByMember queries groups by member address. */
@@ -147,13 +147,13 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `cosmos/group/v1/groups_by_member/${params.address}`;
-    return await this.request<QueryGroupsByMemberResponse>(endpoint, options);
+    return await this.get<QueryGroupsByMemberResponse>(endpoint, options);
   }
 
   /* TallyResult queries the tally of a proposal votes. */
   async tallyResult(params: QueryTallyResultRequest): Promise<QueryTallyResultResponse> {
     const endpoint = `cosmos/group/v1/proposals/${params.proposalId}/tally`;
-    return await this.request<QueryTallyResultResponse>(endpoint);
+    return await this.get<QueryTallyResultResponse>(endpoint);
   }
 
 }

@@ -1,7 +1,7 @@
 import { PageRequest, PageResponse } from "../../../cosmos/base/query/v1beta1/pagination";
 import { Account, Payment } from "./types";
-import { LCDClient } from "@osmonauts/lcd";
 import { setPaginationParams } from "@osmonauts/helpers";
+import { LCDClient } from "@osmonauts/lcd";
 import { QueryAccountsRequest, QueryAccountsResponse, QueryPaymentsRequest, QueryPaymentsResponse } from "./query";
 export class LCDQueryClient extends LCDClient {
   constructor({
@@ -43,7 +43,7 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `akash/escrow/v1beta1/types/accounts/list`;
-    return await this.request<QueryAccountsResponse>(endpoint, options);
+    return await this.get<QueryAccountsResponse>(endpoint, options);
   }
 
   /* buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
@@ -79,7 +79,7 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `akash/escrow/v1beta1/types/payments/list`;
-    return await this.request<QueryPaymentsResponse>(endpoint, options);
+    return await this.get<QueryPaymentsResponse>(endpoint, options);
   }
 
 }

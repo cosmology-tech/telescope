@@ -2,8 +2,8 @@ import { PageRequest, PageResponse } from "../../cosmos/base/query/v1beta1/pagin
 import { Coin } from "../../cosmos/base/v1beta1/coin";
 import { Gauge } from "./gauge";
 import { Duration } from "../../google/protobuf/duration";
-import { LCDClient } from "@osmonauts/lcd";
 import { setPaginationParams } from "@osmonauts/helpers";
+import { LCDClient } from "@osmonauts/lcd";
 import { ModuleToDistributeCoinsRequest, ModuleToDistributeCoinsResponse, ModuleDistributedCoinsRequest, ModuleDistributedCoinsResponse, GaugeByIDRequest, GaugeByIDResponse, GaugesRequest, GaugesResponse, ActiveGaugesRequest, ActiveGaugesResponse, ActiveGaugesPerDenomRequest, ActiveGaugesPerDenomResponse, UpcomingGaugesRequest, UpcomingGaugesResponse, UpcomingGaugesPerDenomRequest, UpcomingGaugesPerDenomResponse, RewardsEstRequest, RewardsEstResponse, QueryLockableDurationsRequest, QueryLockableDurationsResponse } from "./query";
 export class LCDQueryClient extends LCDClient {
   constructor({
@@ -19,19 +19,19 @@ export class LCDQueryClient extends LCDClient {
   /* returns coins that is going to be distributed */
   async moduleToDistributeCoins(_params: ModuleToDistributeCoinsRequest = {}): Promise<ModuleToDistributeCoinsResponse> {
     const endpoint = `osmosis/incentives/v1beta1/module_to_distribute_coins`;
-    return await this.request<ModuleToDistributeCoinsResponse>(endpoint);
+    return await this.get<ModuleToDistributeCoinsResponse>(endpoint);
   }
 
   /* returns coins that are distributed by module so far */
   async moduleDistributedCoins(_params: ModuleDistributedCoinsRequest = {}): Promise<ModuleDistributedCoinsResponse> {
     const endpoint = `osmosis/incentives/v1beta1/module_distributed_coins`;
-    return await this.request<ModuleDistributedCoinsResponse>(endpoint);
+    return await this.get<ModuleDistributedCoinsResponse>(endpoint);
   }
 
   /* returns Gauge by id */
   async gaugeByID(params: GaugeByIDRequest): Promise<GaugeByIDResponse> {
     const endpoint = `osmosis/incentives/v1beta1/gauge_by_id/${params.id}`;
-    return await this.request<GaugeByIDResponse>(endpoint);
+    return await this.get<GaugeByIDResponse>(endpoint);
   }
 
   /* returns gauges both upcoming and active */
@@ -47,7 +47,7 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `osmosis/incentives/v1beta1/gauges`;
-    return await this.request<GaugesResponse>(endpoint, options);
+    return await this.get<GaugesResponse>(endpoint, options);
   }
 
   /* returns active gauges */
@@ -63,7 +63,7 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `osmosis/incentives/v1beta1/active_gauges`;
-    return await this.request<ActiveGaugesResponse>(endpoint, options);
+    return await this.get<ActiveGaugesResponse>(endpoint, options);
   }
 
   /* returns active gauges per denom */
@@ -81,7 +81,7 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `osmosis/incentives/v1beta1/active_gauges_per_denom`;
-    return await this.request<ActiveGaugesPerDenomResponse>(endpoint, options);
+    return await this.get<ActiveGaugesPerDenomResponse>(endpoint, options);
   }
 
   /* returns scheduled gauges */
@@ -97,7 +97,7 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `osmosis/incentives/v1beta1/upcoming_gauges`;
-    return await this.request<UpcomingGaugesResponse>(endpoint, options);
+    return await this.get<UpcomingGaugesResponse>(endpoint, options);
   }
 
   /* returns scheduled gauges per denom */
@@ -115,7 +115,7 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `osmosis/incentives/v1beta1/upcoming_gauges_per_denom`;
-    return await this.request<UpcomingGaugesPerDenomResponse>(endpoint, options);
+    return await this.get<UpcomingGaugesPerDenomResponse>(endpoint, options);
   }
 
   /* RewardsEst returns an estimate of the rewards at a future specific time.
@@ -135,13 +135,13 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `osmosis/incentives/v1beta1/rewards_est/${params.owner}`;
-    return await this.request<RewardsEstResponse>(endpoint, options);
+    return await this.get<RewardsEstResponse>(endpoint, options);
   }
 
   /* returns lockable durations that are valid to give incentives */
   async lockableDurations(_params: QueryLockableDurationsRequest = {}): Promise<QueryLockableDurationsResponse> {
     const endpoint = `osmosis/incentives/v1beta1/lockable_durations`;
-    return await this.request<QueryLockableDurationsResponse>(endpoint);
+    return await this.get<QueryLockableDurationsResponse>(endpoint);
   }
 
 }

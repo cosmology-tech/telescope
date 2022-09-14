@@ -2,8 +2,8 @@ import { PageRequest, PageResponse } from "../../../../cosmos/base/query/v1beta1
 import { ConnectionEnd, IdentifiedConnection } from "./connection";
 import { Height, IdentifiedClientState } from "../../client/v1/client";
 import { Any } from "../../../../google/protobuf/any";
-import { LCDClient } from "@osmonauts/lcd";
 import { setPaginationParams } from "@osmonauts/helpers";
+import { LCDClient } from "@osmonauts/lcd";
 import { QueryConnectionRequest, QueryConnectionResponse, QueryConnectionsRequest, QueryConnectionsResponse, QueryClientConnectionsRequest, QueryClientConnectionsResponse, QueryConnectionClientStateRequest, QueryConnectionClientStateResponse, QueryConnectionConsensusStateRequest, QueryConnectionConsensusStateResponse } from "./query";
 export class LCDQueryClient extends LCDClient {
   constructor({
@@ -19,7 +19,7 @@ export class LCDQueryClient extends LCDClient {
   /* Connection queries an IBC connection end. */
   async connection(params: QueryConnectionRequest): Promise<QueryConnectionResponse> {
     const endpoint = `ibc/core/connection/v1/connections/${params.connectionId}`;
-    return await this.request<QueryConnectionResponse>(endpoint);
+    return await this.get<QueryConnectionResponse>(endpoint);
   }
 
   /* Connections queries all the IBC connections of a chain. */
@@ -35,28 +35,28 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `ibc/core/connection/v1/connections`;
-    return await this.request<QueryConnectionsResponse>(endpoint, options);
+    return await this.get<QueryConnectionsResponse>(endpoint, options);
   }
 
   /* ClientConnections queries the connection paths associated with a client
   state. */
   async clientConnections(params: QueryClientConnectionsRequest): Promise<QueryClientConnectionsResponse> {
     const endpoint = `ibc/core/connection/v1/client_connections/${params.clientId}`;
-    return await this.request<QueryClientConnectionsResponse>(endpoint);
+    return await this.get<QueryClientConnectionsResponse>(endpoint);
   }
 
   /* ConnectionClientState queries the client state associated with the
   connection. */
   async connectionClientState(params: QueryConnectionClientStateRequest): Promise<QueryConnectionClientStateResponse> {
     const endpoint = `ibc/core/connection/v1/connections/${params.connectionId}/client_state`;
-    return await this.request<QueryConnectionClientStateResponse>(endpoint);
+    return await this.get<QueryConnectionClientStateResponse>(endpoint);
   }
 
   /* ConnectionConsensusState queries the consensus state associated with the
   connection. */
   async connectionConsensusState(params: QueryConnectionConsensusStateRequest): Promise<QueryConnectionConsensusStateResponse> {
     const endpoint = `ibc/core/connection/v1/connections/${params.connectionId}/consensus_state/revision/${params.revisionNumber}height/${params.revisionHeight}`;
-    return await this.request<QueryConnectionConsensusStateResponse>(endpoint);
+    return await this.get<QueryConnectionConsensusStateResponse>(endpoint);
   }
 
 }

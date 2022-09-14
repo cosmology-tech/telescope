@@ -28,13 +28,13 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `cosmos/params/v1beta1/params`;
-    return await this.request<QueryParamsResponse>(endpoint, options);
+    return await this.get<QueryParamsResponse>(endpoint, options);
   }
 
   /* Subspaces queries for all registered subspaces and all keys for a subspace. */
   async subspaces(_params: QuerySubspacesRequest = {}): Promise<QuerySubspacesResponse> {
     const endpoint = `cosmos/params/v1beta1/subspaces`;
-    return await this.request<QuerySubspacesResponse>(endpoint);
+    return await this.get<QuerySubspacesResponse>(endpoint);
   }
 
 }

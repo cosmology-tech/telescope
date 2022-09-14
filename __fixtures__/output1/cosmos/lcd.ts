@@ -19,6 +19,13 @@ export const createLCDClient = async ({
         restEndpoint
       })
     },
+    base: {
+      tendermint: {
+        v1beta1: new (await import("./base/tendermint/v1beta1/query.lcd")).LCDQueryClient({
+          restEndpoint
+        })
+      }
+    },
     distribution: {
       v1beta1: new (await import("./distribution/v1beta1/query.lcd")).LCDQueryClient({
         restEndpoint
@@ -69,6 +76,11 @@ export const createLCDClient = async ({
     },
     staking: {
       v1beta1: new (await import("./staking/v1beta1/query.lcd")).LCDQueryClient({
+        restEndpoint
+      })
+    },
+    tx: {
+      v1beta1: new (await import("./tx/v1beta1/service.lcd")).LCDQueryClient({
         restEndpoint
       })
     },

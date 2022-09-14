@@ -39,6 +39,11 @@ export const createRPCQueryClient = async ({
     bank: {
       v1beta1: new (await import("../cosmos/bank/v1beta1/query.rpc.query")).QueryClientImpl(rpc)
     },
+    base: {
+      tendermint: {
+        v1beta1: new (await import("../cosmos/base/tendermint/v1beta1/query.rpc.svc")).QueryClientImpl(rpc)
+      }
+    },
     distribution: {
       v1beta1: new (await import("../cosmos/distribution/v1beta1/query.rpc.query")).QueryClientImpl(rpc)
     },
@@ -69,6 +74,9 @@ export const createRPCQueryClient = async ({
     },
     staking: {
       v1beta1: new (await import("../cosmos/staking/v1beta1/query.rpc.query")).QueryClientImpl(rpc)
+    },
+    tx: {
+      v1beta1: new (await import("../cosmos/tx/v1beta1/service.rpc.svc")).QueryClientImpl(rpc)
     },
     upgrade: {
       v1beta1: new (await import("../cosmos/upgrade/v1beta1/query.rpc.query")).QueryClientImpl(rpc)

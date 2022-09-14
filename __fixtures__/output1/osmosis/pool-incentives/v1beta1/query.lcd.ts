@@ -17,37 +17,37 @@ export class LCDQueryClient extends LCDClient {
   /* GaugeIds takes the pool id and returns the matching gauge ids and durations */
   async gaugeIds(params: QueryGaugeIdsRequest): Promise<QueryGaugeIdsResponse> {
     const endpoint = `osmosis/pool-incentives/v1beta1/gauge-ids/${params.poolId}`;
-    return await this.request<QueryGaugeIdsResponse>(endpoint);
+    return await this.get<QueryGaugeIdsResponse>(endpoint);
   }
 
   /* DistrInfo */
   async distrInfo(_params: QueryDistrInfoRequest = {}): Promise<QueryDistrInfoResponse> {
     const endpoint = `osmosis/pool-incentives/v1beta1/distr_info`;
-    return await this.request<QueryDistrInfoResponse>(endpoint);
+    return await this.get<QueryDistrInfoResponse>(endpoint);
   }
 
   /* Params */
   async params(_params: QueryParamsRequest = {}): Promise<QueryParamsResponse> {
     const endpoint = `osmosis/pool-incentives/v1beta1/params`;
-    return await this.request<QueryParamsResponse>(endpoint);
+    return await this.get<QueryParamsResponse>(endpoint);
   }
 
   /* LockableDurations */
   async lockableDurations(_params: QueryLockableDurationsRequest = {}): Promise<QueryLockableDurationsResponse> {
     const endpoint = `osmosis/pool-incentives/v1beta1/lockable_durations`;
-    return await this.request<QueryLockableDurationsResponse>(endpoint);
+    return await this.get<QueryLockableDurationsResponse>(endpoint);
   }
 
   /* IncentivizedPools */
   async incentivizedPools(_params: QueryIncentivizedPoolsRequest = {}): Promise<QueryIncentivizedPoolsResponse> {
     const endpoint = `osmosis/pool-incentives/v1beta1/incentivized_pools`;
-    return await this.request<QueryIncentivizedPoolsResponse>(endpoint);
+    return await this.get<QueryIncentivizedPoolsResponse>(endpoint);
   }
 
   /* ExternalIncentiveGauges */
   async externalIncentiveGauges(_params: QueryExternalIncentiveGaugesRequest = {}): Promise<QueryExternalIncentiveGaugesResponse> {
     const endpoint = `osmosis/pool-incentives/v1beta1/external_incentive_gauges`;
-    return await this.request<QueryExternalIncentiveGaugesResponse>(endpoint);
+    return await this.get<QueryExternalIncentiveGaugesResponse>(endpoint);
   }
 
 }

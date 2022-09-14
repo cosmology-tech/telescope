@@ -15,13 +15,13 @@ export class LCDQueryClient extends LCDClient {
   /* Params returns the total set of minting parameters. */
   async params(_params: QueryParamsRequest = {}): Promise<QueryParamsResponse> {
     const endpoint = `osmosis/mint/v1beta1/params`;
-    return await this.request<QueryParamsResponse>(endpoint);
+    return await this.get<QueryParamsResponse>(endpoint);
   }
 
   /* EpochProvisions current minting epoch provisions value. */
   async epochProvisions(_params: QueryEpochProvisionsRequest = {}): Promise<QueryEpochProvisionsResponse> {
     const endpoint = `osmosis/mint/v1beta1/epoch_provisions`;
-    return await this.request<QueryEpochProvisionsResponse>(endpoint);
+    return await this.get<QueryEpochProvisionsResponse>(endpoint);
   }
 
 }
