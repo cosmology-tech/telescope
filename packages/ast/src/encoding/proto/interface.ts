@@ -52,6 +52,18 @@ export const createProtoType = (
 ) => {
     const oneOfs = getOneOfs(proto);
 
+    const optionalityMap = {};
+    if (context.store.requests[name]) {
+        const svc = context.store.requests[name];
+        if (svc.info) {
+            // console.log('svc.info', svc.info);
+            // const reverseObj = Object.keys(svc.info.paramMap)
+            svc.info.queryParams.map(param => {
+                optionalityMap[param] = true;
+            })
+        }
+    }
+
     const declaration = t.exportNamedDeclaration(t.tsInterfaceDeclaration(
         t.identifier(name),
         null,
@@ -60,12 +72,17 @@ export const createProtoType = (
             Object.keys(proto.fields).reduce((m, fieldName) => {
                 const isOneOf = oneOfs.includes(fieldName);
                 const field = proto.fields[fieldName];
+                const orig = field.options?.['(telescope:orig)'];
+                let optional = false;
+                if (optionalityMap[orig]) {
+                    optional = true;
+                }
                 const propSig = tsPropertySignature(
                     t.identifier(fieldName),
                     t.tsTypeAnnotation(
                         getProtoField(context, field)
                     ),
-                    getFieldOptionality(context, field, isOneOf)
+                    optional || getFieldOptionality(context, field, isOneOf)
                 );
 
                 const comments = [];

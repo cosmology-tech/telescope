@@ -1,9 +1,6 @@
 import * as t from '@babel/types';
-import { dirname, resolve, join } from 'path';
-import { sync as mkdirp } from 'mkdirp';
+import { resolve, join } from 'path';
 import { TelescopeParseContext } from './build';
-import { writeFileSync } from 'fs';
-import generate from '@babel/generator';
 import { createFileBundle } from './bundle';
 import { TelescopeBuilder } from './builder';
 import { ProtoRef } from '@osmonauts/types';

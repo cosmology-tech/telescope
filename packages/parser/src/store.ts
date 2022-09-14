@@ -2,7 +2,7 @@ import { sync as glob } from 'glob';
 import { parse } from '@pyramation/protobufjs';
 import { readFileSync } from 'fs';
 import { join, resolve as pathResolve } from 'path';
-import { ProtoDep, ProtoRef, TelescopeOptions } from '@osmonauts/types';
+import { ProtoDep, ProtoRef, ProtoServiceMethod, TelescopeOptions } from '@osmonauts/types';
 import { getNestedProto, getPackageAndNestedFromStr } from './utils';
 import { traverse } from './traverse';
 import { lookupAny } from './lookup';
@@ -52,6 +52,8 @@ export class ProtoStore {
     packages: string[];
     options: TelescopeOptions;
 
+    requests: Record<string, ProtoServiceMethod> = {};
+
     _traversed: boolean = false;
 
     constructor(protoDirs: string[] = [], options: TelescopeOptions = defaultTelescopeOptions) {
@@ -81,6 +83,10 @@ export class ProtoStore {
         const proto = this.findProto(filename);
         return getNestedProto(proto.traversed ?? proto.proto)[name];
     }
+
+    registerRequest(requestType: string, svc: ProtoServiceMethod): void {
+        this.requests[requestType] = svc;
+    };
 
     getProtos(): ProtoRef[] {
         if (this.protos) return this.protos;

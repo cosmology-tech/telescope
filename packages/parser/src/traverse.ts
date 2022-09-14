@@ -1,4 +1,4 @@
-import { ProtoRoot, ProtoRef, ProtoType, ProtoService, ProtoField } from '@osmonauts/types';
+import { ProtoRoot, ProtoRef, ProtoType, ProtoService, ProtoField, ProtoServiceMethod, ProtoServiceMethodInfo } from '@osmonauts/types';
 import { Service, Type, Field, Enum, Root, Namespace } from '@pyramation/protobufjs';
 import { importLookup, lookup, lookupAny, lookupNested, protoScopeImportLookup } from './lookup';
 import { parseService } from './services';
@@ -282,32 +282,34 @@ const traverseServiceMethod = (
     name: string,
     traversal: string[]
 ) => {
-    const service = obj.methods[name];
+    const service: ProtoServiceMethod = obj.methods[name];
     const { requestType, responseType, options, comment } = service;
-    // let responseObject = lookupAny(store, ref, requestType);
-    // if (!responseObject) {
-    // throw new Error('Symbol not found ' + requestType);
-    // }
+    let responseObject = lookupAny(store, ref, requestType);
+    if (!responseObject) {
+        throw new Error('Symbol not found ' + requestType);
+    }
     let requestObject = lookupAny(store, ref, requestType);
     if (!requestObject) {
         throw new Error('Symbol not found ' + requestType);
     }
-    const svc = {
+
+
+    const fields = traverseFields(store, ref, requestObject.obj, imports, traversal);
+    const info: ProtoServiceMethodInfo = parseService({
+        options,
+        fields
+    });
+
+    const svc: ProtoServiceMethod = {
         type: 'ServiceMethod',
-        info: null,
+        info,
         name,
         comment,
         requestType,
         responseType,
         options,
-        fields: traverseFields(store, ref, requestObject.obj, imports, traversal)
+        fields
     };
-
-    const info = parseService({
-        options,
-        fields: svc.fields
-    });
-    svc.info = info;
 
     if (info) {
         // get casing info for request objects
@@ -323,6 +325,11 @@ const traverseServiceMethod = (
             svc.info.casing[origCase] = protoCasing;
         });
     }
+
+    store.registerRequest(
+        requestType,
+        svc
+    );
 
     return svc;
 };
