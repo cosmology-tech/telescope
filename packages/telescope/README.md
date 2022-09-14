@@ -135,17 +135,6 @@ telescope({
 
   // all options are totally optional ;)
   options: {
-    prototypes: {
-      parser: {
-        keepCase: true
-      },
-      includePackageVar: false,
-      typingsFormat: {
-          useExact: false,
-          timestamp: 'date',
-          duration: 'duration'
-      },
-    }
     aminoEncoding: {
         enabled: true
     },
