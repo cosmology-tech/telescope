@@ -8,7 +8,7 @@ export const protobufPackage = "akash.deployment.v1beta1";
 
 /** QueryDeploymentsRequest is request type for the Query/Deployments RPC method */
 export interface QueryDeploymentsRequest {
-  filters: DeploymentFilters | undefined;
+  filters?: DeploymentFilters | undefined;
   pagination?: PageRequest | undefined;
 }
 
@@ -20,7 +20,7 @@ export interface QueryDeploymentsResponse {
 
 /** QueryDeploymentRequest is request type for the Query/Deployment RPC method */
 export interface QueryDeploymentRequest {
-  id: DeploymentID | undefined;
+  id?: DeploymentID | undefined;
 }
 
 /** QueryDeploymentResponse is response type for the Query/Deployment RPC method */
@@ -32,7 +32,7 @@ export interface QueryDeploymentResponse {
 
 /** QueryGroupRequest is request type for the Query/Group RPC method */
 export interface QueryGroupRequest {
-  id: GroupID | undefined;
+  id?: GroupID | undefined;
 }
 
 /** QueryGroupResponse is response type for the Query/Group RPC method */

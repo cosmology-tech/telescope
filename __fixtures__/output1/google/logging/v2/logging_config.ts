@@ -481,7 +481,7 @@ export interface ListBucketsRequest {
    * supplying the character `-` in place of [LOCATION_ID] will return all
    * buckets.
    */
-  parent: string;
+  parent?: string;
 
   /**
    * Optional. If present, then retrieve the next batch of results from the preceding call
@@ -489,14 +489,14 @@ export interface ListBucketsRequest {
    * previous response. The values of other method parameters should be
    * identical to those in the previous call.
    */
-  pageToken: string;
+  pageToken?: string;
 
   /**
    * Optional. The maximum number of results to return from this request. Non-positive
    * values are ignored. The presence of `nextPageToken` in the response
    * indicates that more results might be available.
    */
-  pageSize: number;
+  pageSize?: number;
 }
 
 /** The response from ListBuckets. */
@@ -586,7 +586,7 @@ export interface GetBucketRequest {
    * 
    * `"projects/my-project/locations/global/buckets/my-bucket"`
    */
-  name: string;
+  name?: string;
 }
 
 /** The parameters to `DeleteBucket`. */
@@ -630,7 +630,7 @@ export interface ListViewsRequest {
    * 
    * "projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
    */
-  parent: string;
+  parent?: string;
 
   /**
    * Optional. If present, then retrieve the next batch of results from the preceding call
@@ -638,7 +638,7 @@ export interface ListViewsRequest {
    * previous response. The values of other method parameters should be
    * identical to those in the previous call.
    */
-  pageToken: string;
+  pageToken?: string;
 
   /**
    * Optional. The maximum number of results to return from this request.
@@ -646,7 +646,7 @@ export interface ListViewsRequest {
    * Non-positive values are ignored. The presence of `nextPageToken` in the
    * response indicates that more results might be available.
    */
-  pageSize: number;
+  pageSize?: number;
 }
 
 /** The response from ListViews. */
@@ -722,7 +722,7 @@ export interface GetViewRequest {
    * 
    * `"projects/my-project/locations/global/buckets/my-bucket/views/my-view"`
    */
-  name: string;
+  name?: string;
 }
 
 /** The parameters to `DeleteView`. */
@@ -749,7 +749,7 @@ export interface ListSinksRequest {
    * "billingAccounts/[BILLING_ACCOUNT_ID]"
    * "folders/[FOLDER_ID]"
    */
-  parent: string;
+  parent?: string;
 
   /**
    * Optional. If present, then retrieve the next batch of results from the
@@ -757,14 +757,14 @@ export interface ListSinksRequest {
    * `nextPageToken` from the previous response. The values of other method
    * parameters should be identical to those in the previous call.
    */
-  pageToken: string;
+  pageToken?: string;
 
   /**
    * Optional. The maximum number of results to return from this request.
    * Non-positive values are ignored. The presence of `nextPageToken` in the
    * response indicates that more results might be available.
    */
-  pageSize: number;
+  pageSize?: number;
 }
 
 /** Result returned from `ListSinks`. */
@@ -794,7 +794,7 @@ export interface GetSinkRequest {
    * 
    * `"projects/my-project/sinks/my-sink"`
    */
-  sinkName: string;
+  sinkName?: string;
 }
 
 /** The parameters to `CreateSink`. */
@@ -979,7 +979,7 @@ export interface ListExclusionsRequest {
    * "billingAccounts/[BILLING_ACCOUNT_ID]"
    * "folders/[FOLDER_ID]"
    */
-  parent: string;
+  parent?: string;
 
   /**
    * Optional. If present, then retrieve the next batch of results from the
@@ -987,14 +987,14 @@ export interface ListExclusionsRequest {
    * `nextPageToken` from the previous response. The values of other method
    * parameters should be identical to those in the previous call.
    */
-  pageToken: string;
+  pageToken?: string;
 
   /**
    * Optional. The maximum number of results to return from this request.
    * Non-positive values are ignored. The presence of `nextPageToken` in the
    * response indicates that more results might be available.
    */
-  pageSize: number;
+  pageSize?: number;
 }
 
 /** Result returned from `ListExclusions`. */
@@ -1024,7 +1024,7 @@ export interface GetExclusionRequest {
    * 
    * `"projects/my-project/exclusions/my-exclusion"`
    */
-  name: string;
+  name?: string;
 }
 
 /** The parameters to `CreateExclusion`. */
@@ -1128,7 +1128,7 @@ export interface GetCmekSettingsRequest {
    * organization, it applies to all projects and folders in the Google Cloud
    * organization.
    */
-  name: string;
+  name?: string;
 }
 
 /**
@@ -1270,7 +1270,7 @@ export interface GetSettingsRequest {
    * configured for organizations. Once configured for an organization, it
    * applies to all projects and folders in the Google Cloud organization.
    */
-  name: string;
+  name?: string;
 }
 
 /**

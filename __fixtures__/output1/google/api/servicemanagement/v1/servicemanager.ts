@@ -55,13 +55,13 @@ export interface ListServicesRequest {
    * The max number of items to include in the response list. Page size is 50
    * if not specified. Maximum value is 100.
    */
-  pageSize: number;
+  pageSize?: number;
 
   /**
    * Token identifying which result to start with; returned by a previous list
    * call.
    */
-  pageToken: string;
+  pageToken?: string;
 
   /**
    * Include services consumed by the specified consumer.
@@ -143,7 +143,7 @@ export interface GetServiceConfigRequest {
    * Specifies which parts of the Service Config should be returned in the
    * response.
    */
-  view: GetServiceConfigRequest_ConfigView;
+  view?: GetServiceConfigRequest_ConfigView;
 }
 
 /** Request message for ListServiceConfigs method. */
@@ -155,13 +155,13 @@ export interface ListServiceConfigsRequest {
   serviceName: string;
 
   /** The token of the page to retrieve. */
-  pageToken: string;
+  pageToken?: string;
 
   /**
    * The max number of items to include in the response list. Page size is 50
    * if not specified. Maximum value is 100.
    */
-  pageSize: number;
+  pageSize?: number;
 }
 
 /** Response message for ListServiceConfigs method. */
@@ -231,13 +231,13 @@ export interface ListServiceRolloutsRequest {
   serviceName: string;
 
   /** The token of the page to retrieve. */
-  pageToken: string;
+  pageToken?: string;
 
   /**
    * The max number of items to include in the response list. Page size is 50
    * if not specified. Maximum value is 100.
    */
-  pageSize: number;
+  pageSize?: number;
 
   /**
    * Required. Use `filter` to return subset of rollouts.
@@ -249,7 +249,7 @@ export interface ListServiceRolloutsRequest {
    * [status](google.api.servicemanagement.v1.RolloutStatus) 'CANCELLED'
    * or 'FAILED', use filter='status=CANCELLED OR status=FAILED'
    */
-  filter: string;
+  filter?: string;
 }
 
 /** Response message for ListServiceRollouts method. */

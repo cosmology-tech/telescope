@@ -38,8 +38,8 @@ export interface QuerySupplyResponse {
 
 /** QueryNFTstRequest is the request type for the Query/NFTs RPC method */
 export interface QueryNFTsRequest {
-  classId: string;
-  owner: string;
+  classId?: string;
+  owner?: string;
   pagination?: PageRequest;
 }
 

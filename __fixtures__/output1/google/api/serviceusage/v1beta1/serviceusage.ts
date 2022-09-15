@@ -86,7 +86,7 @@ export interface GetServiceRequest {
    * `projects/123/services/serviceusage.googleapis.com`
    * where `123` is the project number (not project ID).
    */
-  name: string;
+  name?: string;
 }
 
 /** Request message for the `ListServices` method. */
@@ -98,26 +98,26 @@ export interface ListServicesRequest {
    * `projects/123`
    * where `123` is the project number (not project ID).
    */
-  parent: string;
+  parent?: string;
 
   /**
    * Requested size of the next page of data.
    * Requested page size cannot exceed 200.
    * If not set, the default page size is 50.
    */
-  pageSize: number;
+  pageSize?: number;
 
   /**
    * Token identifying which result to start with, which is returned by a
    * previous list call.
    */
-  pageToken: string;
+  pageToken?: string;
 
   /**
    * Only list services that conform to the given filter.
    * The allowed filter strings are `state:ENABLED` and `state:DISABLED`.
    */
-  filter: string;
+  filter?: string;
 }
 
 /** Response message for the `ListServices` method. */
@@ -174,19 +174,19 @@ export interface ListConsumerQuotaMetricsRequest {
    * `folders/345/services/serviceconsumermanagement.googleapis.com`
    * `organizations/456/services/serviceconsumermanagement.googleapis.com`
    */
-  parent: string;
+  parent?: string;
 
   /** Requested size of the next page of data. */
-  pageSize: number;
+  pageSize?: number;
 
   /**
    * Token identifying which result to start with; returned by a previous list
    * call.
    */
-  pageToken: string;
+  pageToken?: string;
 
   /** Specifies the level of detail for quota information in the response. */
-  view: QuotaView;
+  view?: QuotaView;
 }
 
 /** Response message for ListConsumerQuotaMetrics */
@@ -209,10 +209,10 @@ export interface GetConsumerQuotaMetricRequest {
    * An example name would be:
    * `projects/123/services/serviceusage.googleapis.com/quotas/metrics/serviceusage.googleapis.com%2Fmutate_requests`
    */
-  name: string;
+  name?: string;
 
   /** Specifies the level of detail for quota information in the response. */
-  view: QuotaView;
+  view?: QuotaView;
 }
 
 /** Request message for GetConsumerQuotaLimit */
@@ -223,10 +223,10 @@ export interface GetConsumerQuotaLimitRequest {
    * Use the quota limit resource name returned by previous
    * ListConsumerQuotaMetrics and GetConsumerQuotaMetric API calls.
    */
-  name: string;
+  name?: string;
 
   /** Specifies the level of detail for quota information in the response. */
-  view: QuotaView;
+  view?: QuotaView;
 }
 
 /** Request message for CreateAdminOverride. */
@@ -332,16 +332,16 @@ export interface ListAdminOverridesRequest {
    * An example name would be:
    * `projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion`
    */
-  parent: string;
+  parent?: string;
 
   /** Requested size of the next page of data. */
-  pageSize: number;
+  pageSize?: number;
 
   /**
    * Token identifying which result to start with; returned by a previous list
    * call.
    */
-  pageToken: string;
+  pageToken?: string;
 }
 
 /** Response message for ListAdminOverrides. */
@@ -507,16 +507,16 @@ export interface ListConsumerOverridesRequest {
    * An example name would be:
    * `projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion`
    */
-  parent: string;
+  parent?: string;
 
   /** Requested size of the next page of data. */
-  pageSize: number;
+  pageSize?: number;
 
   /**
    * Token identifying which result to start with; returned by a previous list
    * call.
    */
-  pageToken: string;
+  pageToken?: string;
 }
 
 /** Response message for ListConsumerOverrides. */

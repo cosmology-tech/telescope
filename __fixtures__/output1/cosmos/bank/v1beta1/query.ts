@@ -97,7 +97,7 @@ export interface QueryTotalSupplyResponse {
 /** QuerySupplyOfRequest is the request type for the Query/SupplyOf RPC method. */
 export interface QuerySupplyOfRequest {
   /** denom is the coin denom to query balances for. */
-  denom: string;
+  denom?: string;
 }
 
 /** QuerySupplyOfResponse is the response type for the Query/SupplyOf RPC method. */

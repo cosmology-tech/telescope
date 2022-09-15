@@ -11,7 +11,7 @@ export interface QueryEpochsInfoResponse {
   pagination?: PageResponse;
 }
 export interface QueryCurrentEpochRequest {
-  identifier: string;
+  identifier?: string;
 }
 export interface QueryCurrentEpochResponse {
   currentEpoch: Long;

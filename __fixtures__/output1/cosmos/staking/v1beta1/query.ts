@@ -7,7 +7,7 @@ export const protobufPackage = "cosmos.staking.v1beta1";
 /** QueryValidatorsRequest is request type for Query/Validators RPC method. */
 export interface QueryValidatorsRequest {
   /** status enables to query for validators matching a given status. */
-  status: string;
+  status?: string;
 
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequest;
@@ -172,10 +172,10 @@ export interface QueryRedelegationsRequest {
   delegatorAddr: string;
 
   /** src_validator_addr defines the validator address to redelegate from. */
-  srcValidatorAddr: string;
+  srcValidatorAddr?: string;
 
   /** dst_validator_addr defines the validator address to redelegate to. */
-  dstValidatorAddr: string;
+  dstValidatorAddr?: string;
 
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequest;
