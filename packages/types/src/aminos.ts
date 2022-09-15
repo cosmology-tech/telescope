@@ -15,7 +15,8 @@ export const DEFAULT_AMINO_EXCEPTIONS: AminoExceptions = {
         aminoType: 'cosmos-sdk/MsgWithdrawDelegationReward'
     },
     '/cosmos.distribution.v1beta1.MsgWithdrawValidatorCommission': {
-        aminoType: 'cosmos-sdk/MsgWithdrawValCommission'
+        // aminoType: 'cosmos-sdk/MsgWithdrawValCommission' // why is this what is in cosmos-sdk?
+        aminoType: 'cosmos-sdk/MsgWithdrawValidatorCommission'
     },
     '/cosmos.gov.v1.MsgSubmitProposal': {
         aminoType: 'cosmos-sdk/v1/MsgSubmitProposal'
