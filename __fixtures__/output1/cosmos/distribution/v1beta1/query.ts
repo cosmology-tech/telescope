@@ -58,10 +58,10 @@ export interface QueryValidatorSlashesRequest {
   validatorAddress: string;
 
   /** starting_height defines the optional starting height to query the slashes. */
-  startingHeight: Long;
+  startingHeight?: Long;
 
   /** starting_height defines the optional ending height to query the slashes. */
-  endingHeight: Long;
+  endingHeight?: Long;
 
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequest;

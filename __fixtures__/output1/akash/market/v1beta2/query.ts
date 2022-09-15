@@ -9,7 +9,7 @@ export const protobufPackage = "akash.market.v1beta2";
 
 /** QueryOrdersRequest is request type for the Query/Orders RPC method */
 export interface QueryOrdersRequest {
-  filters: OrderFilters;
+  filters?: OrderFilters;
   pagination?: PageRequest;
 }
 
@@ -21,7 +21,7 @@ export interface QueryOrdersResponse {
 
 /** QueryOrderRequest is request type for the Query/Order RPC method */
 export interface QueryOrderRequest {
-  id: OrderID;
+  id?: OrderID;
 }
 
 /** QueryOrderResponse is response type for the Query/Order RPC method */
@@ -31,7 +31,7 @@ export interface QueryOrderResponse {
 
 /** QueryBidsRequest is request type for the Query/Bids RPC method */
 export interface QueryBidsRequest {
-  filters: BidFilters;
+  filters?: BidFilters;
   pagination?: PageRequest;
 }
 
@@ -43,7 +43,7 @@ export interface QueryBidsResponse {
 
 /** QueryBidRequest is request type for the Query/Bid RPC method */
 export interface QueryBidRequest {
-  id: BidID;
+  id?: BidID;
 }
 
 /** QueryBidResponse is response type for the Query/Bid RPC method */
@@ -54,7 +54,7 @@ export interface QueryBidResponse {
 
 /** QueryLeasesRequest is request type for the Query/Leases RPC method */
 export interface QueryLeasesRequest {
-  filters: LeaseFilters;
+  filters?: LeaseFilters;
   pagination?: PageRequest;
 }
 
@@ -66,7 +66,7 @@ export interface QueryLeasesResponse {
 
 /** QueryLeaseRequest is request type for the Query/Lease RPC method */
 export interface QueryLeaseRequest {
-  id: LeaseID;
+  id?: LeaseID;
 }
 
 /** QueryLeaseResponse is response type for the Query/Lease RPC method */

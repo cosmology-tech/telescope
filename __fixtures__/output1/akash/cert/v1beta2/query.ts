@@ -12,7 +12,7 @@ export interface CertificateResponse {
 
 /** QueryDeploymentsRequest is request type for the Query/Deployments RPC method */
 export interface QueryCertificatesRequest {
-  filter: CertificateFilter;
+  filter?: CertificateFilter;
   pagination?: PageRequest;
 }
 

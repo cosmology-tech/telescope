@@ -33,36 +33,36 @@ export interface AccountLockedCoinsResponse {
 }
 export interface AccountLockedPastTimeRequest {
   owner: string;
-  timestamp: Date;
+  timestamp?: Date;
 }
 export interface AccountLockedPastTimeResponse {
   locks: PeriodLock[];
 }
 export interface AccountLockedPastTimeNotUnlockingOnlyRequest {
   owner: string;
-  timestamp: Date;
+  timestamp?: Date;
 }
 export interface AccountLockedPastTimeNotUnlockingOnlyResponse {
   locks: PeriodLock[];
 }
 export interface AccountUnlockedBeforeTimeRequest {
   owner: string;
-  timestamp: Date;
+  timestamp?: Date;
 }
 export interface AccountUnlockedBeforeTimeResponse {
   locks: PeriodLock[];
 }
 export interface AccountLockedPastTimeDenomRequest {
   owner: string;
-  timestamp: Date;
-  denom: string;
+  timestamp?: Date;
+  denom?: string;
 }
 export interface AccountLockedPastTimeDenomResponse {
   locks: PeriodLock[];
 }
 export interface LockedDenomRequest {
-  denom: string;
-  duration: Duration;
+  denom?: string;
+  duration?: Duration;
 }
 export interface LockedDenomResponse {
   amount: string;
@@ -81,29 +81,29 @@ export interface SyntheticLockupsByLockupIDResponse {
 }
 export interface AccountLockedLongerDurationRequest {
   owner: string;
-  duration: Duration;
+  duration?: Duration;
 }
 export interface AccountLockedLongerDurationResponse {
   locks: PeriodLock[];
 }
 export interface AccountLockedDurationRequest {
   owner: string;
-  duration: Duration;
+  duration?: Duration;
 }
 export interface AccountLockedDurationResponse {
   locks: PeriodLock[];
 }
 export interface AccountLockedLongerDurationNotUnlockingOnlyRequest {
   owner: string;
-  duration: Duration;
+  duration?: Duration;
 }
 export interface AccountLockedLongerDurationNotUnlockingOnlyResponse {
   locks: PeriodLock[];
 }
 export interface AccountLockedLongerDurationDenomRequest {
   owner: string;
-  duration: Duration;
-  denom: string;
+  duration?: Duration;
+  denom?: string;
 }
 export interface AccountLockedLongerDurationDenomResponse {
   locks: PeriodLock[];

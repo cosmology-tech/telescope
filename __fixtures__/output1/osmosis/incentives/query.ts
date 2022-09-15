@@ -40,7 +40,7 @@ export interface ActiveGaugesResponse {
   pagination?: PageResponse;
 }
 export interface ActiveGaugesPerDenomRequest {
-  denom: string;
+  denom?: string;
 
   /** pagination defines an pagination for the request. */
   pagination?: PageRequest;
@@ -62,7 +62,7 @@ export interface UpcomingGaugesResponse {
   pagination?: PageResponse;
 }
 export interface UpcomingGaugesPerDenomRequest {
-  denom: string;
+  denom?: string;
   pagination?: PageRequest;
 }
 export interface UpcomingGaugesPerDenomResponse {
@@ -71,8 +71,8 @@ export interface UpcomingGaugesPerDenomResponse {
 }
 export interface RewardsEstRequest {
   owner: string;
-  lockIds: Long[];
-  endEpoch: Long;
+  lockIds?: Long[];
+  endEpoch?: Long;
 }
 export interface RewardsEstResponse {
   coins: Coin[];

@@ -9,13 +9,13 @@ export interface MsgConvertCoin {
    * Cosmos coin which denomination is registered in a token pair. The coin
    * amount defines the amount of coins to convert.
    */
-  coin: Coin;
+  coin?: Coin;
 
   /** recipient hex address to receive ERC20 token */
-  receiver: string;
+  receiver?: string;
 
   /** cosmos bech32 address from the owner of the given Cosmos coins */
-  sender: string;
+  sender?: string;
 }
 
 /** MsgConvertCoinResponse returns no fields */
@@ -27,16 +27,16 @@ export interface MsgConvertCoinResponse {}
  */
 export interface MsgConvertERC20 {
   /** ERC20 token contract address registered in a token pair */
-  contractAddress: string;
+  contractAddress?: string;
 
   /** amount of ERC20 tokens to convert */
-  amount: string;
+  amount?: string;
 
   /** bech32 address to receive native Cosmos coins */
-  receiver: string;
+  receiver?: string;
 
   /** sender hex address from the owner of the given ERC20 tokens */
-  sender: string;
+  sender?: string;
 }
 
 /** MsgConvertERC20Response returns no fields */

@@ -312,6 +312,9 @@ const traverseServiceMethod = (
     };
 
     if (info) {
+
+        // TODO is this still needed?
+
         // get casing info for request objects
         Object.keys(requestObject.obj.fields).map(fieldName => {
             const field: ProtoField = requestObject.obj.fields[fieldName];

@@ -62,8 +62,8 @@ export interface QueryTotalSharesResponse {
  */
 export interface QuerySpotPriceRequest {
   poolId: Long;
-  baseAssetDenom: string;
-  quoteAssetDenom: string;
+  baseAssetDenom?: string;
+  quoteAssetDenom?: string;
 }
 
 /**
@@ -77,10 +77,10 @@ export interface QuerySpotPriceResponse {
 
 /** =============================== EstimateSwapExactAmountIn */
 export interface QuerySwapExactAmountInRequest {
-  sender: string;
+  sender?: string;
   poolId: Long;
-  tokenIn: string;
-  routes: SwapAmountInRoute[];
+  tokenIn?: string;
+  routes?: SwapAmountInRoute[];
 }
 export interface QuerySwapExactAmountInResponse {
   tokenOutAmount: string;
@@ -88,10 +88,10 @@ export interface QuerySwapExactAmountInResponse {
 
 /** =============================== EstimateSwapExactAmountOut */
 export interface QuerySwapExactAmountOutRequest {
-  sender: string;
+  sender?: string;
   poolId: Long;
-  routes: SwapAmountOutRoute[];
-  tokenOut: string;
+  routes?: SwapAmountOutRoute[];
+  tokenOut?: string;
 }
 export interface QuerySwapExactAmountOutResponse {
   tokenInAmount: string;

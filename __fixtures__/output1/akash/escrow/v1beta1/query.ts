@@ -21,11 +21,11 @@ export interface QueryAccountsResponse {
 
 /** QueryPaymentRequest is request type for the Query/Payment RPC method */
 export interface QueryPaymentsRequest {
-  scope: string;
-  xid: string;
-  id: string;
-  owner: string;
-  state: string;
+  scope?: string;
+  xid?: string;
+  id?: string;
+  owner?: string;
+  state?: string;
   pagination?: PageRequest;
 }
 
