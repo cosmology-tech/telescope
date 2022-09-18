@@ -37,7 +37,7 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `cosmos/authz/v1beta1/grants`;
-    return await this.get<QueryGrantsResponse>(endpoint, options);
+    return await this.get<QueryGrantsResponseSDKType>(endpoint, options);
   }
 
   /* GranterGrants returns list of `GrantAuthorization`, granted by granter.
@@ -53,7 +53,7 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `cosmos/authz/v1beta1/grants/granter/${params.granter}`;
-    return await this.get<QueryGranterGrantsResponse>(endpoint, options);
+    return await this.get<QueryGranterGrantsResponseSDKType>(endpoint, options);
   }
 
   /* GranteeGrants returns a list of `GrantAuthorization` by grantee.
@@ -69,7 +69,7 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `cosmos/authz/v1beta1/grants/grantee/${params.grantee}`;
-    return await this.get<QueryGranteeGrantsResponse>(endpoint, options);
+    return await this.get<QueryGranteeGrantsResponseSDKType>(endpoint, options);
   }
 
 }

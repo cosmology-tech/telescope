@@ -20,25 +20,25 @@ export class LCDQueryClient extends LCDClient {
   /* GetNodeInfo queries the current node info. */
   async getNodeInfo(_params: GetNodeInfoRequest = {}): Promise<GetNodeInfoResponse> {
     const endpoint = `cosmos/base/tendermint/v1beta1/node_info`;
-    return await this.get<GetNodeInfoResponse>(endpoint);
+    return await this.get<GetNodeInfoResponseSDKType>(endpoint);
   }
 
   /* GetSyncing queries node syncing. */
   async getSyncing(_params: GetSyncingRequest = {}): Promise<GetSyncingResponse> {
     const endpoint = `cosmos/base/tendermint/v1beta1/syncing`;
-    return await this.get<GetSyncingResponse>(endpoint);
+    return await this.get<GetSyncingResponseSDKType>(endpoint);
   }
 
   /* GetLatestBlock returns the latest block. */
   async getLatestBlock(_params: GetLatestBlockRequest = {}): Promise<GetLatestBlockResponse> {
     const endpoint = `cosmos/base/tendermint/v1beta1/blocks/latest`;
-    return await this.get<GetLatestBlockResponse>(endpoint);
+    return await this.get<GetLatestBlockResponseSDKType>(endpoint);
   }
 
   /* GetBlockByHeight queries block for given height. */
   async getBlockByHeight(params: GetBlockByHeightRequest): Promise<GetBlockByHeightResponse> {
     const endpoint = `cosmos/base/tendermint/v1beta1/blocks/${params.height}`;
-    return await this.get<GetBlockByHeightResponse>(endpoint);
+    return await this.get<GetBlockByHeightResponseSDKType>(endpoint);
   }
 
   /* GetLatestValidatorSet queries latest validator-set. */
@@ -54,7 +54,7 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `cosmos/base/tendermint/v1beta1/validatorsets/latest`;
-    return await this.get<GetLatestValidatorSetResponse>(endpoint, options);
+    return await this.get<GetLatestValidatorSetResponseSDKType>(endpoint, options);
   }
 
   /* GetValidatorSetByHeight queries validator-set at a given height. */
@@ -68,7 +68,7 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `cosmos/base/tendermint/v1beta1/validatorsets/${params.height}`;
-    return await this.get<GetValidatorSetByHeightResponse>(endpoint, options);
+    return await this.get<GetValidatorSetByHeightResponseSDKType>(endpoint, options);
   }
 
 }

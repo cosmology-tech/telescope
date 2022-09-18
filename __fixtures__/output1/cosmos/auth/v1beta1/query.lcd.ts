@@ -30,43 +30,43 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `cosmos/auth/v1beta1/accounts`;
-    return await this.get<QueryAccountsResponse>(endpoint, options);
+    return await this.get<QueryAccountsResponseSDKType>(endpoint, options);
   }
 
   /* Account returns account details based on address. */
   async account(params: QueryAccountRequest): Promise<QueryAccountResponse> {
     const endpoint = `cosmos/auth/v1beta1/accounts/${params.address}`;
-    return await this.get<QueryAccountResponse>(endpoint);
+    return await this.get<QueryAccountResponseSDKType>(endpoint);
   }
 
   /* Params queries all parameters. */
   async params(_params: QueryParamsRequest = {}): Promise<QueryParamsResponse> {
     const endpoint = `cosmos/auth/v1beta1/params`;
-    return await this.get<QueryParamsResponse>(endpoint);
+    return await this.get<QueryParamsResponseSDKType>(endpoint);
   }
 
   /* ModuleAccounts returns all the existing module accounts. */
   async moduleAccounts(_params: QueryModuleAccountsRequest = {}): Promise<QueryModuleAccountsResponse> {
     const endpoint = `cosmos/auth/v1beta1/module_accounts`;
-    return await this.get<QueryModuleAccountsResponse>(endpoint);
+    return await this.get<QueryModuleAccountsResponseSDKType>(endpoint);
   }
 
   /* Bech32 queries bech32Prefix */
   async bech32Prefix(_params: Bech32PrefixRequest = {}): Promise<Bech32PrefixResponse> {
     const endpoint = `cosmos/auth/v1beta1/bech32`;
-    return await this.get<Bech32PrefixResponse>(endpoint);
+    return await this.get<Bech32PrefixResponseSDKType>(endpoint);
   }
 
   /* AddressBytesToString converts Account Address bytes to string */
   async addressBytesToString(params: AddressBytesToStringRequest): Promise<AddressBytesToStringResponse> {
     const endpoint = `cosmos/auth/v1beta1/bech32/${params.addressBytes}`;
-    return await this.get<AddressBytesToStringResponse>(endpoint);
+    return await this.get<AddressBytesToStringResponseSDKType>(endpoint);
   }
 
   /* AddressStringToBytes converts Address string to bytes */
   async addressStringToBytes(params: AddressStringToBytesRequest): Promise<AddressStringToBytesResponse> {
     const endpoint = `cosmos/auth/v1beta1/bech32/${params.addressString}`;
-    return await this.get<AddressStringToBytesResponse>(endpoint);
+    return await this.get<AddressStringToBytesResponseSDKType>(endpoint);
   }
 
 }

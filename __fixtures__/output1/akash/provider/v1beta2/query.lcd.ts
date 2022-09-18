@@ -27,13 +27,13 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `akash/provider/v1beta2/providers`;
-    return await this.get<QueryProvidersResponse>(endpoint, options);
+    return await this.get<QueryProvidersResponseSDKType>(endpoint, options);
   }
 
   /* Provider queries provider details */
   async provider(params: QueryProviderRequest): Promise<QueryProviderResponse> {
     const endpoint = `akash/provider/v1beta2/providers/${params.owner}`;
-    return await this.get<QueryProviderResponse>(endpoint);
+    return await this.get<QueryProviderResponseSDKType>(endpoint);
   }
 
 }

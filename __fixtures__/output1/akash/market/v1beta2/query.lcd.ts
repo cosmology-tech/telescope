@@ -32,7 +32,7 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `akash/market/v1beta2/orders/list`;
-    return await this.get<QueryOrdersResponse>(endpoint, options);
+    return await this.get<QueryOrdersResponseSDKType>(endpoint, options);
   }
 
   /* Order queries order details */
@@ -46,7 +46,7 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `akash/market/v1beta2/orders/info`;
-    return await this.get<QueryOrderResponse>(endpoint, options);
+    return await this.get<QueryOrderResponseSDKType>(endpoint, options);
   }
 
   /* Bids queries bids with filters */
@@ -64,7 +64,7 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `akash/market/v1beta2/bids/list`;
-    return await this.get<QueryBidsResponse>(endpoint, options);
+    return await this.get<QueryBidsResponseSDKType>(endpoint, options);
   }
 
   /* Bid queries bid details */
@@ -78,7 +78,7 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `akash/market/v1beta2/bids/info`;
-    return await this.get<QueryBidResponse>(endpoint, options);
+    return await this.get<QueryBidResponseSDKType>(endpoint, options);
   }
 
   /* Leases queries leases with filters */
@@ -96,7 +96,7 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `akash/market/v1beta2/leases/list`;
-    return await this.get<QueryLeasesResponse>(endpoint, options);
+    return await this.get<QueryLeasesResponseSDKType>(endpoint, options);
   }
 
   /* Lease queries lease details */
@@ -110,7 +110,7 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `akash/market/v1beta2/leases/info`;
-    return await this.get<QueryLeaseResponse>(endpoint, options);
+    return await this.get<QueryLeaseResponseSDKType>(endpoint, options);
   }
 
 }

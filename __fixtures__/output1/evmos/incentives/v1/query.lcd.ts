@@ -29,13 +29,13 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `evmos/incentives/v1/incentives`;
-    return await this.get<QueryIncentivesResponse>(endpoint, options);
+    return await this.get<QueryIncentivesResponseSDKType>(endpoint, options);
   }
 
   /* Incentive retrieves a registered incentive */
   async incentive(params: QueryIncentiveRequest): Promise<QueryIncentiveResponse> {
     const endpoint = `evmos/incentives/v1/incentives/${params.contract}`;
-    return await this.get<QueryIncentiveResponse>(endpoint);
+    return await this.get<QueryIncentiveResponseSDKType>(endpoint);
   }
 
   /* GasMeters retrieves active gas meters for a given contract */
@@ -49,13 +49,13 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `evmos/incentives/v1/gas_meters/${params.contract}`;
-    return await this.get<QueryGasMetersResponse>(endpoint, options);
+    return await this.get<QueryGasMetersResponseSDKType>(endpoint, options);
   }
 
   /* GasMeter Retrieves a active gas meter */
   async gasMeter(params: QueryGasMeterRequest): Promise<QueryGasMeterResponse> {
     const endpoint = `evmos/incentives/v1/gas_meters/${params.contract}/${params.participant}`;
-    return await this.get<QueryGasMeterResponse>(endpoint);
+    return await this.get<QueryGasMeterResponseSDKType>(endpoint);
   }
 
   /* AllocationMeters retrieves active allocation meters for a given
@@ -72,19 +72,19 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `evmos/incentives/v1/allocation_meters`;
-    return await this.get<QueryAllocationMetersResponse>(endpoint, options);
+    return await this.get<QueryAllocationMetersResponseSDKType>(endpoint, options);
   }
 
   /* AllocationMeter Retrieves a active gas meter */
   async allocationMeter(params: QueryAllocationMeterRequest): Promise<QueryAllocationMeterResponse> {
     const endpoint = `evmos/incentives/v1/allocation_meters/${params.denom}`;
-    return await this.get<QueryAllocationMeterResponse>(endpoint);
+    return await this.get<QueryAllocationMeterResponseSDKType>(endpoint);
   }
 
   /* Params retrieves the incentives module params */
   async params(_params: QueryParamsRequest = {}): Promise<QueryParamsResponse> {
     const endpoint = `evmos/incentives/v1/params`;
-    return await this.get<QueryParamsResponse>(endpoint);
+    return await this.get<QueryParamsResponseSDKType>(endpoint);
   }
 
 }

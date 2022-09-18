@@ -27,7 +27,7 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `evmos/epochs/v1/epochs`;
-    return await this.get<QueryEpochsInfoResponse>(endpoint, options);
+    return await this.get<QueryEpochsInfoResponseSDKType>(endpoint, options);
   }
 
   /* CurrentEpoch provide current epoch of specified identifier */
@@ -41,7 +41,7 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `evmos/epochs/v1/current_epoch`;
-    return await this.get<QueryCurrentEpochResponse>(endpoint, options);
+    return await this.get<QueryCurrentEpochResponseSDKType>(endpoint, options);
   }
 
 }

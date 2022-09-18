@@ -29,7 +29,7 @@ export class QueryClient extends LCDClient {
     }
 
     const endpoint = `cosmos/bank/v1beta1/balances/${params.address}/by_denom`;
-    return await this.get<QueryBalanceResponse>(endpoint, options);
+    return await this.get<QueryBalanceResponseSDKType>(endpoint, options);
   }
 
   /* AllBalances queries the balance of all coins for a single account. */
@@ -43,7 +43,7 @@ export class QueryClient extends LCDClient {
     }
 
     const endpoint = `cosmos/bank/v1beta1/balances/${params.address}`;
-    return await this.get<QueryAllBalancesResponse>(endpoint, options);
+    return await this.get<QueryAllBalancesResponseSDKType>(endpoint, options);
   }
 
   /* SpendableBalances queries the spenable balance of all coins for a single
@@ -58,7 +58,7 @@ export class QueryClient extends LCDClient {
     }
 
     const endpoint = `cosmos/bank/v1beta1/spendable_balances/${params.address}`;
-    return await this.get<QuerySpendableBalancesResponse>(endpoint, options);
+    return await this.get<QuerySpendableBalancesResponseSDKType>(endpoint, options);
   }
 
   /* TotalSupply queries the total supply of all coins. */
@@ -74,7 +74,7 @@ export class QueryClient extends LCDClient {
     }
 
     const endpoint = `cosmos/bank/v1beta1/supply`;
-    return await this.get<QueryTotalSupplyResponse>(endpoint, options);
+    return await this.get<QueryTotalSupplyResponseSDKType>(endpoint, options);
   }
 
   /* SupplyOf queries the supply of a single coin. */
@@ -88,19 +88,19 @@ export class QueryClient extends LCDClient {
     }
 
     const endpoint = `cosmos/bank/v1beta1/supply/by_denom`;
-    return await this.get<QuerySupplyOfResponse>(endpoint, options);
+    return await this.get<QuerySupplyOfResponseSDKType>(endpoint, options);
   }
 
   /* Params queries the parameters of x/bank module. */
   async params(_params: QueryParamsRequest = {}): Promise<QueryParamsResponse> {
     const endpoint = `cosmos/bank/v1beta1/params`;
-    return await this.get<QueryParamsResponse>(endpoint);
+    return await this.get<QueryParamsResponseSDKType>(endpoint);
   }
 
   /* DenomsMetadata queries the client metadata of a given coin denomination. */
   async denomMetadata(params: QueryDenomMetadataRequest): Promise<QueryDenomMetadataResponse> {
     const endpoint = `cosmos/bank/v1beta1/denoms_metadata/${params.denom}`;
-    return await this.get<QueryDenomMetadataResponse>(endpoint);
+    return await this.get<QueryDenomMetadataResponseSDKType>(endpoint);
   }
 
   /* DenomsMetadata queries the client metadata for all registered coin
@@ -117,7 +117,7 @@ export class QueryClient extends LCDClient {
     }
 
     const endpoint = `cosmos/bank/v1beta1/denoms_metadata`;
-    return await this.get<QueryDenomsMetadataResponse>(endpoint, options);
+    return await this.get<QueryDenomsMetadataResponseSDKType>(endpoint, options);
   }
 
   /* DenomOwners queries for all account addresses that own a particular token
@@ -132,7 +132,7 @@ export class QueryClient extends LCDClient {
     }
 
     const endpoint = `cosmos/bank/v1beta1/denom_owners/${params.denom}`;
-    return await this.get<QueryDenomOwnersResponse>(endpoint, options);
+    return await this.get<QueryDenomOwnersResponseSDKType>(endpoint, options);
   }
 
   /* Pools */
@@ -148,43 +148,43 @@ export class QueryClient extends LCDClient {
     }
 
     const endpoint = `osmosis/gamm/v1beta1/pools`;
-    return await this.get<QueryPoolsResponse>(endpoint, options);
+    return await this.get<QueryPoolsResponseSDKType>(endpoint, options);
   }
 
   /* NumPools */
   async numPools(_params: QueryNumPoolsRequest = {}): Promise<QueryNumPoolsResponse> {
     const endpoint = `osmosis/gamm/v1beta1/num_pools`;
-    return await this.get<QueryNumPoolsResponse>(endpoint);
+    return await this.get<QueryNumPoolsResponseSDKType>(endpoint);
   }
 
   /* TotalLiquidity */
   async totalLiquidity(_params: QueryTotalLiquidityRequest = {}): Promise<QueryTotalLiquidityResponse> {
     const endpoint = `osmosis/gamm/v1beta1/total_liquidity`;
-    return await this.get<QueryTotalLiquidityResponse>(endpoint);
+    return await this.get<QueryTotalLiquidityResponseSDKType>(endpoint);
   }
 
   /* Per Pool gRPC Endpoints */
   async pool(params: QueryPoolRequest): Promise<QueryPoolResponse> {
     const endpoint = `osmosis/gamm/v1beta1/pools/${params.poolId}`;
-    return await this.get<QueryPoolResponse>(endpoint);
+    return await this.get<QueryPoolResponseSDKType>(endpoint);
   }
 
   /* PoolParams */
   async poolParams(params: QueryPoolParamsRequest): Promise<QueryPoolParamsResponse> {
     const endpoint = `osmosis/gamm/v1beta1/pools/${params.poolId}/params`;
-    return await this.get<QueryPoolParamsResponse>(endpoint);
+    return await this.get<QueryPoolParamsResponseSDKType>(endpoint);
   }
 
   /* TotalPoolLiquidity */
   async totalPoolLiquidity(params: QueryTotalPoolLiquidityRequest): Promise<QueryTotalPoolLiquidityResponse> {
     const endpoint = `osmosis/gamm/v1beta1/pools/${params.poolId}/total_pool_liquidity`;
-    return await this.get<QueryTotalPoolLiquidityResponse>(endpoint);
+    return await this.get<QueryTotalPoolLiquidityResponseSDKType>(endpoint);
   }
 
   /* TotalShares */
   async totalShares(params: QueryTotalSharesRequest): Promise<QueryTotalSharesResponse> {
     const endpoint = `osmosis/gamm/v1beta1/pools/${params.poolId}/total_shares`;
-    return await this.get<QueryTotalSharesResponse>(endpoint);
+    return await this.get<QueryTotalSharesResponseSDKType>(endpoint);
   }
 
   /* SpotPrice defines a gRPC query handler that returns the spot price given
@@ -203,7 +203,7 @@ export class QueryClient extends LCDClient {
     }
 
     const endpoint = `osmosis/gamm/v1beta1/pools/${params.poolId}/prices`;
-    return await this.get<QuerySpotPriceResponse>(endpoint, options);
+    return await this.get<QuerySpotPriceResponseSDKType>(endpoint, options);
   }
 
   /* Estimate the swap. */
@@ -225,7 +225,7 @@ export class QueryClient extends LCDClient {
     }
 
     const endpoint = `osmosis/gamm/v1beta1/${params.poolId}/estimate/swap_exact_amount_in`;
-    return await this.get<QuerySwapExactAmountInResponse>(endpoint, options);
+    return await this.get<QuerySwapExactAmountInResponseSDKType>(endpoint, options);
   }
 
   /* EstimateSwapExactAmountOut */
@@ -247,7 +247,7 @@ export class QueryClient extends LCDClient {
     }
 
     const endpoint = `osmosis/gamm/v1beta1/${params.poolId}/estimate/swap_exact_amount_out`;
-    return await this.get<QuerySwapExactAmountOutResponse>(endpoint, options);
+    return await this.get<QuerySwapExactAmountOutResponseSDKType>(endpoint, options);
   }
 
 }

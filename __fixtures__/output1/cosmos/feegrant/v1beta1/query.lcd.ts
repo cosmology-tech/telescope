@@ -17,7 +17,7 @@ export class LCDQueryClient extends LCDClient {
   /* Allowance returns fee granted to the grantee by the granter. */
   async allowance(params: QueryAllowanceRequest): Promise<QueryAllowanceResponse> {
     const endpoint = `cosmos/feegrant/v1beta1/allowance/${params.granter}/${params.grantee}`;
-    return await this.get<QueryAllowanceResponse>(endpoint);
+    return await this.get<QueryAllowanceResponseSDKType>(endpoint);
   }
 
   /* Allowances returns all the grants for address. */
@@ -31,7 +31,7 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `cosmos/feegrant/v1beta1/allowances/${params.grantee}`;
-    return await this.get<QueryAllowancesResponse>(endpoint, options);
+    return await this.get<QueryAllowancesResponseSDKType>(endpoint, options);
   }
 
   /* AllowancesByGranter returns all the grants given by an address
@@ -46,7 +46,7 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `cosmos/feegrant/v1beta1/issued/${params.granter}`;
-    return await this.get<QueryAllowancesByGranterResponse>(endpoint, options);
+    return await this.get<QueryAllowancesByGranterResponseSDKType>(endpoint, options);
   }
 
 }

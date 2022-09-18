@@ -19,13 +19,13 @@ export class LCDQueryClient extends LCDClient {
   /* TotalUnclaimed queries the total unclaimed tokens from the airdrop */
   async totalUnclaimed(_params: QueryTotalUnclaimedRequest = {}): Promise<QueryTotalUnclaimedResponse> {
     const endpoint = `evmos/claims/v1/total_unclaimed`;
-    return await this.get<QueryTotalUnclaimedResponse>(endpoint);
+    return await this.get<QueryTotalUnclaimedResponseSDKType>(endpoint);
   }
 
   /* Params returns the claims module parameters */
   async params(_params: QueryParamsRequest = {}): Promise<QueryParamsResponse> {
     const endpoint = `evmos/claims/v1/params`;
-    return await this.get<QueryParamsResponse>(endpoint);
+    return await this.get<QueryParamsResponseSDKType>(endpoint);
   }
 
   /* ClaimsRecords returns all claims records */
@@ -41,13 +41,13 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `evmos/claims/v1/claims_records`;
-    return await this.get<QueryClaimsRecordsResponse>(endpoint, options);
+    return await this.get<QueryClaimsRecordsResponseSDKType>(endpoint, options);
   }
 
   /* ClaimsRecord returns the claims record for a given address */
   async claimsRecord(params: QueryClaimsRecordRequest): Promise<QueryClaimsRecordResponse> {
     const endpoint = `evmos/claims/v1/claims_records/${params.address}`;
-    return await this.get<QueryClaimsRecordResponse>(endpoint);
+    return await this.get<QueryClaimsRecordResponseSDKType>(endpoint);
   }
 
 }

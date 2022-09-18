@@ -28,19 +28,19 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `evmos/erc20/v1/token_pairs`;
-    return await this.get<QueryTokenPairsResponse>(endpoint, options);
+    return await this.get<QueryTokenPairsResponseSDKType>(endpoint, options);
   }
 
   /* TokenPair retrieves a registered token pair */
   async tokenPair(params: QueryTokenPairRequest): Promise<QueryTokenPairResponse> {
     const endpoint = `evmos/erc20/v1/token_pairs/${params.token}`;
-    return await this.get<QueryTokenPairResponse>(endpoint);
+    return await this.get<QueryTokenPairResponseSDKType>(endpoint);
   }
 
   /* Params retrieves the erc20 module params */
   async params(_params: QueryParamsRequest = {}): Promise<QueryParamsResponse> {
     const endpoint = `evmos/erc20/v1/params`;
-    return await this.get<QueryParamsResponse>(endpoint);
+    return await this.get<QueryParamsResponseSDKType>(endpoint);
   }
 
 }

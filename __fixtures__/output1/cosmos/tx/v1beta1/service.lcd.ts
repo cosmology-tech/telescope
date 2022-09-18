@@ -20,7 +20,7 @@ export class LCDQueryClient extends LCDClient {
   /* GetTx fetches a tx by hash. */
   async getTx(params: GetTxRequest): Promise<GetTxResponse> {
     const endpoint = `cosmos/tx/v1beta1/txs/${params.hash}`;
-    return await this.get<GetTxResponse>(endpoint);
+    return await this.get<GetTxResponseSDKType>(endpoint);
   }
 
   /* GetTxsEvent fetches txs by event. */
@@ -42,7 +42,7 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `cosmos/tx/v1beta1/txs`;
-    return await this.get<GetTxsEventResponse>(endpoint, options);
+    return await this.get<GetTxsEventResponseSDKType>(endpoint, options);
   }
 
   /* GetBlockWithTxs fetches a block with decoded txs.
@@ -58,7 +58,7 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `cosmos/tx/v1beta1/txs/block/${params.height}`;
-    return await this.get<GetBlockWithTxsResponse>(endpoint, options);
+    return await this.get<GetBlockWithTxsResponseSDKType>(endpoint, options);
   }
 
 }
