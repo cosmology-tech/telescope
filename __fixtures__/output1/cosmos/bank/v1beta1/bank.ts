@@ -297,7 +297,7 @@ export const Params = {
   fromSDK(object: ParamsSDKType): Params {
     return {
       sendEnabled: Array.isArray(object?.send_enabled) ? object.send_enabled.map((e: any) => SendEnabled.fromSDK(e)) : [],
-      defaultSendEnabled: isSet(object.default_send_enabled) ? object.default_send_enabled : false
+      defaultSendEnabled: isSet(object.default_send_enabled) ? object.default_send_enabled : undefined
     };
   },
 
@@ -385,8 +385,8 @@ export const SendEnabled = {
 
   fromSDK(object: SendEnabledSDKType): SendEnabled {
     return {
-      denom: isSet(object.denom) ? object.denom : "",
-      enabled: isSet(object.enabled) ? object.enabled : false
+      denom: isSet(object.denom) ? object.denom : undefined,
+      enabled: isSet(object.enabled) ? object.enabled : undefined
     };
   },
 
@@ -474,7 +474,7 @@ export const Input = {
 
   fromSDK(object: InputSDKType): Input {
     return {
-      address: isSet(object.address) ? object.address : "",
+      address: isSet(object.address) ? object.address : undefined,
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDK(e)) : []
     };
   },
@@ -569,7 +569,7 @@ export const Output = {
 
   fromSDK(object: OutputSDKType): Output {
     return {
-      address: isSet(object.address) ? object.address : "",
+      address: isSet(object.address) ? object.address : undefined,
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDK(e)) : []
     };
   },
@@ -757,8 +757,8 @@ export const DenomUnit = {
 
   fromSDK(object: DenomUnitSDKType): DenomUnit {
     return {
-      denom: isSet(object.denom) ? object.denom : "",
-      exponent: isSet(object.exponent) ? object.exponent : 0,
+      denom: isSet(object.denom) ? object.denom : undefined,
+      exponent: isSet(object.exponent) ? object.exponent : undefined,
       aliases: Array.isArray(object?.aliases) ? object.aliases.map((e: any) => e) : []
     };
   },
@@ -926,14 +926,14 @@ export const Metadata = {
 
   fromSDK(object: MetadataSDKType): Metadata {
     return {
-      description: isSet(object.description) ? object.description : "",
+      description: isSet(object.description) ? object.description : undefined,
       denomUnits: Array.isArray(object?.denom_units) ? object.denom_units.map((e: any) => DenomUnit.fromSDK(e)) : [],
-      base: isSet(object.base) ? object.base : "",
-      display: isSet(object.display) ? object.display : "",
-      name: isSet(object.name) ? object.name : "",
-      symbol: isSet(object.symbol) ? object.symbol : "",
-      uri: isSet(object.uri) ? object.uri : "",
-      uriHash: isSet(object.uri_hash) ? object.uri_hash : ""
+      base: isSet(object.base) ? object.base : undefined,
+      display: isSet(object.display) ? object.display : undefined,
+      name: isSet(object.name) ? object.name : undefined,
+      symbol: isSet(object.symbol) ? object.symbol : undefined,
+      uri: isSet(object.uri) ? object.uri : undefined,
+      uriHash: isSet(object.uri_hash) ? object.uri_hash : undefined
     };
   },
 

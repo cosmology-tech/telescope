@@ -409,7 +409,7 @@ export const ClientState = {
 
   fromSDK(object: ClientStateSDKType): ClientState {
     return {
-      chainId: isSet(object.chain_id) ? object.chain_id : "",
+      chainId: isSet(object.chain_id) ? object.chain_id : undefined,
       trustLevel: isSet(object.trust_level) ? Fraction.fromSDK(object.trust_level) : undefined,
       trustingPeriod: isSet(object.trusting_period) ? Duration.fromSDK(object.trusting_period) : undefined,
       unbondingPeriod: isSet(object.unbonding_period) ? Duration.fromSDK(object.unbonding_period) : undefined,
@@ -418,8 +418,8 @@ export const ClientState = {
       latestHeight: isSet(object.latest_height) ? Height.fromSDK(object.latest_height) : undefined,
       proofSpecs: Array.isArray(object?.proof_specs) ? object.proof_specs.map((e: any) => ProofSpec.fromSDK(e)) : [],
       upgradePath: Array.isArray(object?.upgrade_path) ? object.upgrade_path.map((e: any) => e) : [],
-      allowUpdateAfterExpiry: isSet(object.allow_update_after_expiry) ? object.allow_update_after_expiry : false,
-      allowUpdateAfterMisbehaviour: isSet(object.allow_update_after_misbehaviour) ? object.allow_update_after_misbehaviour : false
+      allowUpdateAfterExpiry: isSet(object.allow_update_after_expiry) ? object.allow_update_after_expiry : undefined,
+      allowUpdateAfterMisbehaviour: isSet(object.allow_update_after_misbehaviour) ? object.allow_update_after_misbehaviour : undefined
     };
   },
 
@@ -535,7 +535,7 @@ export const ConsensusState = {
     return {
       timestamp: isSet(object.timestamp) ? Timestamp.fromSDK(object.timestamp) : undefined,
       root: isSet(object.root) ? MerkleRoot.fromSDK(object.root) : undefined,
-      nextValidatorsHash: isSet(object.next_validators_hash) ? object.next_validators_hash : new Uint8Array()
+      nextValidatorsHash: isSet(object.next_validators_hash) ? object.next_validators_hash : undefined
     };
   },
 
@@ -630,7 +630,7 @@ export const Misbehaviour = {
 
   fromSDK(object: MisbehaviourSDKType): Misbehaviour {
     return {
-      clientId: isSet(object.client_id) ? object.client_id : "",
+      clientId: isSet(object.client_id) ? object.client_id : undefined,
       header_1: isSet(object.header_1) ? Header.fromSDK(object.header_1) : undefined,
       header_2: isSet(object.header_2) ? Header.fromSDK(object.header_2) : undefined
     };
@@ -826,8 +826,8 @@ export const Fraction = {
 
   fromSDK(object: FractionSDKType): Fraction {
     return {
-      numerator: isSet(object.numerator) ? object.numerator : Long.UZERO,
-      denominator: isSet(object.denominator) ? object.denominator : Long.UZERO
+      numerator: isSet(object.numerator) ? object.numerator : undefined,
+      denominator: isSet(object.denominator) ? object.denominator : undefined
     };
   },
 

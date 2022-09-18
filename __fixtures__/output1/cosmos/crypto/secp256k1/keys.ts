@@ -91,7 +91,7 @@ export const PubKey = {
 
   fromSDK(object: PubKeySDKType): PubKey {
     return {
-      key: isSet(object.key) ? object.key : new Uint8Array()
+      key: isSet(object.key) ? object.key : undefined
     };
   },
 
@@ -160,7 +160,7 @@ export const PrivKey = {
 
   fromSDK(object: PrivKeySDKType): PrivKey {
     return {
-      key: isSet(object.key) ? object.key : new Uint8Array()
+      key: isSet(object.key) ? object.key : undefined
     };
   },
 

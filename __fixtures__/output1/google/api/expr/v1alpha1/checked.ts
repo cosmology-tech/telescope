@@ -858,7 +858,7 @@ export const CheckedExpr_ReferenceMapEntry = {
 
   fromSDK(object: CheckedExpr_ReferenceMapEntrySDKType): CheckedExpr_ReferenceMapEntry {
     return {
-      key: isSet(object.key) ? object.key : Long.ZERO,
+      key: isSet(object.key) ? object.key : undefined,
       value: isSet(object.value) ? Reference.fromSDK(object.value) : undefined
     };
   },
@@ -941,7 +941,7 @@ export const CheckedExpr_TypeMapEntry = {
 
   fromSDK(object: CheckedExpr_TypeMapEntrySDKType): CheckedExpr_TypeMapEntry {
     return {
-      key: isSet(object.key) ? object.key : Long.ZERO,
+      key: isSet(object.key) ? object.key : undefined,
       value: isSet(object.value) ? Type.fromSDK(object.value) : undefined
     };
   },
@@ -1128,7 +1128,7 @@ export const CheckedExpr = {
         return acc;
       }, {}) : {},
       sourceInfo: isSet(object.source_info) ? SourceInfo.fromSDK(object.source_info) : undefined,
-      exprVersion: isSet(object.expr_version) ? object.expr_version : "",
+      exprVersion: isSet(object.expr_version) ? object.expr_version : undefined,
       expr: isSet(object.expr) ? Expr.fromSDK(object.expr) : undefined
     };
   },
@@ -1718,7 +1718,7 @@ export const Type_AbstractType = {
 
   fromSDK(object: Type_AbstractTypeSDKType): Type_AbstractType {
     return {
-      name: isSet(object.name) ? object.name : "",
+      name: isSet(object.name) ? object.name : undefined,
       parameterTypes: Array.isArray(object?.parameter_types) ? object.parameter_types.map((e: any) => Type.fromSDK(e)) : []
     };
   },
@@ -1819,7 +1819,7 @@ export const Decl = {
 
   fromSDK(object: DeclSDKType): Decl {
     return {
-      name: isSet(object.name) ? object.name : "",
+      name: isSet(object.name) ? object.name : undefined,
       ident: isSet(object.ident) ? Decl_IdentDecl.fromSDK(object.ident) : undefined,
       function: isSet(object.function) ? Decl_FunctionDecl.fromSDK(object.function) : undefined
     };
@@ -1918,7 +1918,7 @@ export const Decl_IdentDecl = {
     return {
       type: isSet(object.type) ? Type.fromSDK(object.type) : undefined,
       value: isSet(object.value) ? Constant.fromSDK(object.value) : undefined,
-      doc: isSet(object.doc) ? object.doc : ""
+      doc: isSet(object.doc) ? object.doc : undefined
     };
   },
 
@@ -2141,12 +2141,12 @@ export const Decl_FunctionDecl_Overload = {
 
   fromSDK(object: Decl_FunctionDecl_OverloadSDKType): Decl_FunctionDecl_Overload {
     return {
-      overloadId: isSet(object.overload_id) ? object.overload_id : "",
+      overloadId: isSet(object.overload_id) ? object.overload_id : undefined,
       params: Array.isArray(object?.params) ? object.params.map((e: any) => Type.fromSDK(e)) : [],
       typeParams: Array.isArray(object?.type_params) ? object.type_params.map((e: any) => e) : [],
       resultType: isSet(object.result_type) ? Type.fromSDK(object.result_type) : undefined,
-      isInstanceFunction: isSet(object.is_instance_function) ? object.is_instance_function : false,
-      doc: isSet(object.doc) ? object.doc : ""
+      isInstanceFunction: isSet(object.is_instance_function) ? object.is_instance_function : undefined,
+      doc: isSet(object.doc) ? object.doc : undefined
     };
   },
 
@@ -2261,7 +2261,7 @@ export const Reference = {
 
   fromSDK(object: ReferenceSDKType): Reference {
     return {
-      name: isSet(object.name) ? object.name : "",
+      name: isSet(object.name) ? object.name : undefined,
       overloadId: Array.isArray(object?.overload_id) ? object.overload_id.map((e: any) => e) : [],
       value: isSet(object.value) ? Constant.fromSDK(object.value) : undefined
     };

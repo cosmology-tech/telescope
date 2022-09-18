@@ -131,10 +131,10 @@ export const MsgSend = {
 
   fromSDK(object: MsgSendSDKType): MsgSend {
     return {
-      classId: isSet(object.class_id) ? object.class_id : "",
-      id: isSet(object.id) ? object.id : "",
-      sender: isSet(object.sender) ? object.sender : "",
-      receiver: isSet(object.receiver) ? object.receiver : ""
+      classId: isSet(object.class_id) ? object.class_id : undefined,
+      id: isSet(object.id) ? object.id : undefined,
+      sender: isSet(object.sender) ? object.sender : undefined,
+      receiver: isSet(object.receiver) ? object.receiver : undefined
     };
   },
 

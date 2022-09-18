@@ -580,8 +580,8 @@ export const MetricRule_MetricCostsEntry = {
 
   fromSDK(object: MetricRule_MetricCostsEntrySDKType): MetricRule_MetricCostsEntry {
     return {
-      key: isSet(object.key) ? object.key : "",
-      value: isSet(object.value) ? object.value : Long.ZERO
+      key: isSet(object.key) ? object.key : undefined,
+      value: isSet(object.value) ? object.value : undefined
     };
   },
 
@@ -690,7 +690,7 @@ export const MetricRule = {
 
   fromSDK(object: MetricRuleSDKType): MetricRule {
     return {
-      selector: isSet(object.selector) ? object.selector : "",
+      selector: isSet(object.selector) ? object.selector : undefined,
       metricCosts: isObject(object.metric_costs) ? Object.entries(object.metric_costs).reduce<{
         [key: string]: Long;
       }>((acc, [key, value]) => {
@@ -785,8 +785,8 @@ export const QuotaLimit_ValuesEntry = {
 
   fromSDK(object: QuotaLimit_ValuesEntrySDKType): QuotaLimit_ValuesEntry {
     return {
-      key: isSet(object.key) ? object.key : "",
-      value: isSet(object.value) ? object.value : Long.ZERO
+      key: isSet(object.key) ? object.key : undefined,
+      value: isSet(object.value) ? object.value : undefined
     };
   },
 
@@ -992,21 +992,21 @@ export const QuotaLimit = {
 
   fromSDK(object: QuotaLimitSDKType): QuotaLimit {
     return {
-      name: isSet(object.name) ? object.name : "",
-      description: isSet(object.description) ? object.description : "",
-      defaultLimit: isSet(object.default_limit) ? object.default_limit : Long.ZERO,
-      maxLimit: isSet(object.max_limit) ? object.max_limit : Long.ZERO,
-      freeTier: isSet(object.free_tier) ? object.free_tier : Long.ZERO,
-      duration: isSet(object.duration) ? object.duration : "",
-      metric: isSet(object.metric) ? object.metric : "",
-      unit: isSet(object.unit) ? object.unit : "",
+      name: isSet(object.name) ? object.name : undefined,
+      description: isSet(object.description) ? object.description : undefined,
+      defaultLimit: isSet(object.default_limit) ? object.default_limit : undefined,
+      maxLimit: isSet(object.max_limit) ? object.max_limit : undefined,
+      freeTier: isSet(object.free_tier) ? object.free_tier : undefined,
+      duration: isSet(object.duration) ? object.duration : undefined,
+      metric: isSet(object.metric) ? object.metric : undefined,
+      unit: isSet(object.unit) ? object.unit : undefined,
       values: isObject(object.values) ? Object.entries(object.values).reduce<{
         [key: string]: Long;
       }>((acc, [key, value]) => {
         acc[key] = Long.fromValue((value as Long | string));
         return acc;
       }, {}) : {},
-      displayName: isSet(object.display_name) ? object.display_name : ""
+      displayName: isSet(object.display_name) ? object.display_name : undefined
     };
   },
 

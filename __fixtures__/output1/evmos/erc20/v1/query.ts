@@ -322,7 +322,7 @@ export const QueryTokenPairRequest = {
 
   fromSDK(object: QueryTokenPairRequestSDKType): QueryTokenPairRequest {
     return {
-      token: isSet(object.token) ? object.token : ""
+      token: isSet(object.token) ? object.token : undefined
     };
   },
 

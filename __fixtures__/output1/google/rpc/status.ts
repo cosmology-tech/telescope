@@ -144,8 +144,8 @@ export const Status = {
 
   fromSDK(object: StatusSDKType): Status {
     return {
-      code: isSet(object.code) ? object.code : 0,
-      message: isSet(object.message) ? object.message : "",
+      code: isSet(object.code) ? object.code : undefined,
+      message: isSet(object.message) ? object.message : undefined,
       details: Array.isArray(object?.details) ? object.details.map((e: any) => Any.fromSDK(e)) : []
     };
   },

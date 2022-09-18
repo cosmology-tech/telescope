@@ -190,7 +190,7 @@ export const GenesisDenom = {
 
   fromSDK(object: GenesisDenomSDKType): GenesisDenom {
     return {
-      denom: isSet(object.denom) ? object.denom : "",
+      denom: isSet(object.denom) ? object.denom : undefined,
       authorityMetadata: isSet(object.authority_metadata) ? DenomAuthorityMetadata.fromSDK(object.authority_metadata) : undefined
     };
   },

@@ -481,7 +481,7 @@ export const GaugeByIDRequest = {
 
   fromSDK(object: GaugeByIDRequestSDKType): GaugeByIDRequest {
     return {
-      id: isSet(object.id) ? object.id : Long.UZERO
+      id: isSet(object.id) ? object.id : undefined
     };
   },
 
@@ -959,7 +959,7 @@ export const ActiveGaugesPerDenomRequest = {
 
   fromSDK(object: ActiveGaugesPerDenomRequestSDKType): ActiveGaugesPerDenomRequest {
     return {
-      denom: isSet(object.denom) ? object.denom : "",
+      denom: isSet(object.denom) ? object.denom : undefined,
       pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
@@ -1301,7 +1301,7 @@ export const UpcomingGaugesPerDenomRequest = {
 
   fromSDK(object: UpcomingGaugesPerDenomRequestSDKType): UpcomingGaugesPerDenomRequest {
     return {
-      denom: isSet(object.denom) ? object.denom : "",
+      denom: isSet(object.denom) ? object.denom : undefined,
       pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
@@ -1510,9 +1510,9 @@ export const RewardsEstRequest = {
 
   fromSDK(object: RewardsEstRequestSDKType): RewardsEstRequest {
     return {
-      owner: isSet(object.owner) ? object.owner : "",
+      owner: isSet(object.owner) ? object.owner : undefined,
       lockIds: Array.isArray(object?.lock_ids) ? object.lock_ids.map((e: any) => e) : [],
-      endEpoch: isSet(object.end_epoch) ? object.end_epoch : Long.ZERO
+      endEpoch: isSet(object.end_epoch) ? object.end_epoch : undefined
     };
   },
 

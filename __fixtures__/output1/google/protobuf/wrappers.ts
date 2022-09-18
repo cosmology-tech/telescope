@@ -239,7 +239,7 @@ export const DoubleValue = {
 
   fromSDK(object: DoubleValueSDKType): DoubleValue {
     return {
-      value: isSet(object.value) ? object.value : 0
+      value: isSet(object.value) ? object.value : undefined
     };
   },
 
@@ -308,7 +308,7 @@ export const FloatValue = {
 
   fromSDK(object: FloatValueSDKType): FloatValue {
     return {
-      value: isSet(object.value) ? object.value : 0
+      value: isSet(object.value) ? object.value : undefined
     };
   },
 
@@ -377,7 +377,7 @@ export const Int64Value = {
 
   fromSDK(object: Int64ValueSDKType): Int64Value {
     return {
-      value: isSet(object.value) ? object.value : Long.ZERO
+      value: isSet(object.value) ? object.value : undefined
     };
   },
 
@@ -446,7 +446,7 @@ export const UInt64Value = {
 
   fromSDK(object: UInt64ValueSDKType): UInt64Value {
     return {
-      value: isSet(object.value) ? object.value : Long.UZERO
+      value: isSet(object.value) ? object.value : undefined
     };
   },
 
@@ -515,7 +515,7 @@ export const Int32Value = {
 
   fromSDK(object: Int32ValueSDKType): Int32Value {
     return {
-      value: isSet(object.value) ? object.value : 0
+      value: isSet(object.value) ? object.value : undefined
     };
   },
 
@@ -584,7 +584,7 @@ export const UInt32Value = {
 
   fromSDK(object: UInt32ValueSDKType): UInt32Value {
     return {
-      value: isSet(object.value) ? object.value : 0
+      value: isSet(object.value) ? object.value : undefined
     };
   },
 
@@ -653,7 +653,7 @@ export const BoolValue = {
 
   fromSDK(object: BoolValueSDKType): BoolValue {
     return {
-      value: isSet(object.value) ? object.value : false
+      value: isSet(object.value) ? object.value : undefined
     };
   },
 
@@ -722,7 +722,7 @@ export const StringValue = {
 
   fromSDK(object: StringValueSDKType): StringValue {
     return {
-      value: isSet(object.value) ? object.value : ""
+      value: isSet(object.value) ? object.value : undefined
     };
   },
 
@@ -791,7 +791,7 @@ export const BytesValue = {
 
   fromSDK(object: BytesValueSDKType): BytesValue {
     return {
-      value: isSet(object.value) ? object.value : new Uint8Array()
+      value: isSet(object.value) ? object.value : undefined
     };
   },
 

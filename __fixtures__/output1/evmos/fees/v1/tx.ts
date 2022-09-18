@@ -235,9 +235,9 @@ export const MsgRegisterDevFeeInfo = {
 
   fromSDK(object: MsgRegisterDevFeeInfoSDKType): MsgRegisterDevFeeInfo {
     return {
-      contractAddress: isSet(object.contract_address) ? object.contract_address : "",
-      deployerAddress: isSet(object.deployer_address) ? object.deployer_address : "",
-      withdrawAddress: isSet(object.withdraw_address) ? object.withdraw_address : "",
+      contractAddress: isSet(object.contract_address) ? object.contract_address : undefined,
+      deployerAddress: isSet(object.deployer_address) ? object.deployer_address : undefined,
+      withdrawAddress: isSet(object.withdraw_address) ? object.withdraw_address : undefined,
       nonces: Array.isArray(object?.nonces) ? object.nonces.map((e: any) => e) : []
     };
   },
@@ -380,8 +380,8 @@ export const MsgCancelDevFeeInfo = {
 
   fromSDK(object: MsgCancelDevFeeInfoSDKType): MsgCancelDevFeeInfo {
     return {
-      contractAddress: isSet(object.contract_address) ? object.contract_address : "",
-      deployerAddress: isSet(object.deployer_address) ? object.deployer_address : ""
+      contractAddress: isSet(object.contract_address) ? object.contract_address : undefined,
+      deployerAddress: isSet(object.deployer_address) ? object.deployer_address : undefined
     };
   },
 
@@ -527,9 +527,9 @@ export const MsgUpdateDevFeeInfo = {
 
   fromSDK(object: MsgUpdateDevFeeInfoSDKType): MsgUpdateDevFeeInfo {
     return {
-      contractAddress: isSet(object.contract_address) ? object.contract_address : "",
-      deployerAddress: isSet(object.deployer_address) ? object.deployer_address : "",
-      withdrawAddress: isSet(object.withdraw_address) ? object.withdraw_address : ""
+      contractAddress: isSet(object.contract_address) ? object.contract_address : undefined,
+      deployerAddress: isSet(object.deployer_address) ? object.deployer_address : undefined,
+      withdrawAddress: isSet(object.withdraw_address) ? object.withdraw_address : undefined
     };
   },
 

@@ -93,8 +93,8 @@ export const FeeToken = {
 
   fromSDK(object: FeeTokenSDKType): FeeToken {
     return {
-      denom: isSet(object.denom) ? object.denom : "",
-      poolID: isSet(object.poolID) ? object.poolID : Long.UZERO
+      denom: isSet(object.denom) ? object.denom : undefined,
+      poolID: isSet(object.poolID) ? object.poolID : undefined
     };
   },
 

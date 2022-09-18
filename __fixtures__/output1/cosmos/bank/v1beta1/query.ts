@@ -426,8 +426,8 @@ export const QueryBalanceRequest = {
 
   fromSDK(object: QueryBalanceRequestSDKType): QueryBalanceRequest {
     return {
-      address: isSet(object.address) ? object.address : "",
-      denom: isSet(object.denom) ? object.denom : ""
+      address: isSet(object.address) ? object.address : undefined,
+      denom: isSet(object.denom) ? object.denom : undefined
     };
   },
 
@@ -578,7 +578,7 @@ export const QueryAllBalancesRequest = {
 
   fromSDK(object: QueryAllBalancesRequestSDKType): QueryAllBalancesRequest {
     return {
-      address: isSet(object.address) ? object.address : "",
+      address: isSet(object.address) ? object.address : undefined,
       pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
@@ -756,7 +756,7 @@ export const QuerySpendableBalancesRequest = {
 
   fromSDK(object: QuerySpendableBalancesRequestSDKType): QuerySpendableBalancesRequest {
     return {
-      address: isSet(object.address) ? object.address : "",
+      address: isSet(object.address) ? object.address : undefined,
       pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
@@ -1086,7 +1086,7 @@ export const QuerySupplyOfRequest = {
 
   fromSDK(object: QuerySupplyOfRequestSDKType): QuerySupplyOfRequest {
     return {
-      denom: isSet(object.denom) ? object.denom : ""
+      denom: isSet(object.denom) ? object.denom : undefined
     };
   },
 
@@ -1509,7 +1509,7 @@ export const QueryDenomMetadataRequest = {
 
   fromSDK(object: QueryDenomMetadataRequestSDKType): QueryDenomMetadataRequest {
     return {
-      denom: isSet(object.denom) ? object.denom : ""
+      denom: isSet(object.denom) ? object.denom : undefined
     };
   },
 
@@ -1659,7 +1659,7 @@ export const QueryDenomOwnersRequest = {
 
   fromSDK(object: QueryDenomOwnersRequestSDKType): QueryDenomOwnersRequest {
     return {
-      denom: isSet(object.denom) ? object.denom : "",
+      denom: isSet(object.denom) ? object.denom : undefined,
       pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
@@ -1742,7 +1742,7 @@ export const DenomOwner = {
 
   fromSDK(object: DenomOwnerSDKType): DenomOwner {
     return {
-      address: isSet(object.address) ? object.address : "",
+      address: isSet(object.address) ? object.address : undefined,
       balance: isSet(object.balance) ? Coin.fromSDK(object.balance) : undefined
     };
   },

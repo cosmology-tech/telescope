@@ -120,7 +120,7 @@ export const Params = {
       airdropStartTime: isSet(object.airdrop_start_time) ? Timestamp.fromSDK(object.airdrop_start_time) : undefined,
       durationUntilDecay: isSet(object.duration_until_decay) ? Duration.fromSDK(object.duration_until_decay) : undefined,
       durationOfDecay: isSet(object.duration_of_decay) ? Duration.fromSDK(object.duration_of_decay) : undefined,
-      claimDenom: isSet(object.claim_denom) ? object.claim_denom : ""
+      claimDenom: isSet(object.claim_denom) ? object.claim_denom : undefined
     };
   },
 

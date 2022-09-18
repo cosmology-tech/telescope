@@ -602,8 +602,8 @@ export const LogMetric_LabelExtractorsEntry = {
 
   fromSDK(object: LogMetric_LabelExtractorsEntrySDKType): LogMetric_LabelExtractorsEntry {
     return {
-      key: isSet(object.key) ? object.key : "",
-      value: isSet(object.value) ? object.value : ""
+      key: isSet(object.key) ? object.key : undefined,
+      value: isSet(object.value) ? object.value : undefined
     };
   },
 
@@ -821,12 +821,12 @@ export const LogMetric = {
 
   fromSDK(object: LogMetricSDKType): LogMetric {
     return {
-      name: isSet(object.name) ? object.name : "",
-      description: isSet(object.description) ? object.description : "",
-      filter: isSet(object.filter) ? object.filter : "",
-      disabled: isSet(object.disabled) ? object.disabled : false,
+      name: isSet(object.name) ? object.name : undefined,
+      description: isSet(object.description) ? object.description : undefined,
+      filter: isSet(object.filter) ? object.filter : undefined,
+      disabled: isSet(object.disabled) ? object.disabled : undefined,
       metricDescriptor: isSet(object.metric_descriptor) ? MetricDescriptor.fromSDK(object.metric_descriptor) : undefined,
-      valueExtractor: isSet(object.value_extractor) ? object.value_extractor : "",
+      valueExtractor: isSet(object.value_extractor) ? object.value_extractor : undefined,
       labelExtractors: isObject(object.label_extractors) ? Object.entries(object.label_extractors).reduce<{
         [key: string]: string;
       }>((acc, [key, value]) => {
@@ -946,9 +946,9 @@ export const ListLogMetricsRequest = {
 
   fromSDK(object: ListLogMetricsRequestSDKType): ListLogMetricsRequest {
     return {
-      parent: isSet(object.parent) ? object.parent : "",
-      pageToken: isSet(object.page_token) ? object.page_token : "",
-      pageSize: isSet(object.page_size) ? object.page_size : 0
+      parent: isSet(object.parent) ? object.parent : undefined,
+      pageToken: isSet(object.page_token) ? object.page_token : undefined,
+      pageSize: isSet(object.page_size) ? object.page_size : undefined
     };
   },
 
@@ -1038,7 +1038,7 @@ export const ListLogMetricsResponse = {
   fromSDK(object: ListLogMetricsResponseSDKType): ListLogMetricsResponse {
     return {
       metrics: Array.isArray(object?.metrics) ? object.metrics.map((e: any) => LogMetric.fromSDK(e)) : [],
-      nextPageToken: isSet(object.next_page_token) ? object.next_page_token : ""
+      nextPageToken: isSet(object.next_page_token) ? object.next_page_token : undefined
     };
   },
 
@@ -1114,7 +1114,7 @@ export const GetLogMetricRequest = {
 
   fromSDK(object: GetLogMetricRequestSDKType): GetLogMetricRequest {
     return {
-      metricName: isSet(object.metric_name) ? object.metric_name : ""
+      metricName: isSet(object.metric_name) ? object.metric_name : undefined
     };
   },
 
@@ -1195,7 +1195,7 @@ export const CreateLogMetricRequest = {
 
   fromSDK(object: CreateLogMetricRequestSDKType): CreateLogMetricRequest {
     return {
-      parent: isSet(object.parent) ? object.parent : "",
+      parent: isSet(object.parent) ? object.parent : undefined,
       metric: isSet(object.metric) ? LogMetric.fromSDK(object.metric) : undefined
     };
   },
@@ -1278,7 +1278,7 @@ export const UpdateLogMetricRequest = {
 
   fromSDK(object: UpdateLogMetricRequestSDKType): UpdateLogMetricRequest {
     return {
-      metricName: isSet(object.metric_name) ? object.metric_name : "",
+      metricName: isSet(object.metric_name) ? object.metric_name : undefined,
       metric: isSet(object.metric) ? LogMetric.fromSDK(object.metric) : undefined
     };
   },
@@ -1349,7 +1349,7 @@ export const DeleteLogMetricRequest = {
 
   fromSDK(object: DeleteLogMetricRequestSDKType): DeleteLogMetricRequest {
     return {
-      metricName: isSet(object.metric_name) ? object.metric_name : ""
+      metricName: isSet(object.metric_name) ? object.metric_name : undefined
     };
   },
 

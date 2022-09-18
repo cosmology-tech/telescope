@@ -196,7 +196,7 @@ export const GenesisState = {
 
   fromSDK(object: GenesisStateSDKType): GenesisState {
     return {
-      startingProposalId: isSet(object.starting_proposal_id) ? object.starting_proposal_id : Long.UZERO,
+      startingProposalId: isSet(object.starting_proposal_id) ? object.starting_proposal_id : undefined,
       deposits: Array.isArray(object?.deposits) ? object.deposits.map((e: any) => Deposit.fromSDK(e)) : [],
       votes: Array.isArray(object?.votes) ? object.votes.map((e: any) => Vote.fromSDK(e)) : [],
       proposals: Array.isArray(object?.proposals) ? object.proposals.map((e: any) => Proposal.fromSDK(e)) : [],

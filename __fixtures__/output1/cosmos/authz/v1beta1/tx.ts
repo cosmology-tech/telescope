@@ -179,8 +179,8 @@ export const MsgGrant = {
 
   fromSDK(object: MsgGrantSDKType): MsgGrant {
     return {
-      granter: isSet(object.granter) ? object.granter : "",
-      grantee: isSet(object.grantee) ? object.grantee : "",
+      granter: isSet(object.granter) ? object.granter : undefined,
+      grantee: isSet(object.grantee) ? object.grantee : undefined,
       grant: isSet(object.grant) ? Grant.fromSDK(object.grant) : undefined
     };
   },
@@ -351,7 +351,7 @@ export const MsgExec = {
 
   fromSDK(object: MsgExecSDKType): MsgExec {
     return {
-      grantee: isSet(object.grantee) ? object.grantee : "",
+      grantee: isSet(object.grantee) ? object.grantee : undefined,
       msgs: Array.isArray(object?.msgs) ? object.msgs.map((e: any) => Any.fromSDK(e)) : []
     };
   },
@@ -504,9 +504,9 @@ export const MsgRevoke = {
 
   fromSDK(object: MsgRevokeSDKType): MsgRevoke {
     return {
-      granter: isSet(object.granter) ? object.granter : "",
-      grantee: isSet(object.grantee) ? object.grantee : "",
-      msgTypeUrl: isSet(object.msg_type_url) ? object.msg_type_url : ""
+      granter: isSet(object.granter) ? object.granter : undefined,
+      grantee: isSet(object.grantee) ? object.grantee : undefined,
+      msgTypeUrl: isSet(object.msg_type_url) ? object.msg_type_url : undefined
     };
   },
 

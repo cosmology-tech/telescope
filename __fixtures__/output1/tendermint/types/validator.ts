@@ -122,7 +122,7 @@ export const ValidatorSet = {
     return {
       validators: Array.isArray(object?.validators) ? object.validators.map((e: any) => Validator.fromSDK(e)) : [],
       proposer: isSet(object.proposer) ? Validator.fromSDK(object.proposer) : undefined,
-      totalVotingPower: isSet(object.total_voting_power) ? object.total_voting_power : Long.ZERO
+      totalVotingPower: isSet(object.total_voting_power) ? object.total_voting_power : undefined
     };
   },
 
@@ -235,10 +235,10 @@ export const Validator = {
 
   fromSDK(object: ValidatorSDKType): Validator {
     return {
-      address: isSet(object.address) ? object.address : new Uint8Array(),
+      address: isSet(object.address) ? object.address : undefined,
       pubKey: isSet(object.pub_key) ? PublicKey.fromSDK(object.pub_key) : undefined,
-      votingPower: isSet(object.voting_power) ? object.voting_power : Long.ZERO,
-      proposerPriority: isSet(object.proposer_priority) ? object.proposer_priority : Long.ZERO
+      votingPower: isSet(object.voting_power) ? object.voting_power : undefined,
+      proposerPriority: isSet(object.proposer_priority) ? object.proposer_priority : undefined
     };
   },
 
@@ -323,7 +323,7 @@ export const SimpleValidator = {
   fromSDK(object: SimpleValidatorSDKType): SimpleValidator {
     return {
       pubKey: isSet(object.pub_key) ? PublicKey.fromSDK(object.pub_key) : undefined,
-      votingPower: isSet(object.voting_power) ? object.voting_power : Long.ZERO
+      votingPower: isSet(object.voting_power) ? object.voting_power : undefined
     };
   },
 

@@ -135,8 +135,8 @@ export const Coin = {
 
   fromSDK(object: CoinSDKType): Coin {
     return {
-      denom: isSet(object.denom) ? object.denom : "",
-      amount: isSet(object.amount) ? object.amount : ""
+      denom: isSet(object.denom) ? object.denom : undefined,
+      amount: isSet(object.amount) ? object.amount : undefined
     };
   },
 
@@ -218,8 +218,8 @@ export const DecCoin = {
 
   fromSDK(object: DecCoinSDKType): DecCoin {
     return {
-      denom: isSet(object.denom) ? object.denom : "",
-      amount: isSet(object.amount) ? object.amount : ""
+      denom: isSet(object.denom) ? object.denom : undefined,
+      amount: isSet(object.amount) ? object.amount : undefined
     };
   },
 
@@ -289,7 +289,7 @@ export const IntProto = {
 
   fromSDK(object: IntProtoSDKType): IntProto {
     return {
-      int: isSet(object.int) ? object.int : ""
+      int: isSet(object.int) ? object.int : undefined
     };
   },
 
@@ -358,7 +358,7 @@ export const DecProto = {
 
   fromSDK(object: DecProtoSDKType): DecProto {
     return {
-      dec: isSet(object.dec) ? object.dec : ""
+      dec: isSet(object.dec) ? object.dec : undefined
     };
   },
 

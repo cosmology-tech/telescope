@@ -174,8 +174,8 @@ export const Pair = {
 
   fromSDK(object: PairSDKType): Pair {
     return {
-      key: isSet(object.key) ? object.key : new Uint8Array(),
-      value: isSet(object.value) ? object.value : new Uint8Array()
+      key: isSet(object.key) ? object.key : undefined,
+      value: isSet(object.value) ? object.value : undefined
     };
   },
 

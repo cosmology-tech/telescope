@@ -393,7 +393,7 @@ export const EvalState_Result = {
   fromSDK(object: EvalState_ResultSDKType): EvalState_Result {
     return {
       expr: isSet(object.expr) ? IdRef.fromSDK(object.expr) : undefined,
-      value: isSet(object.value) ? object.value : 0
+      value: isSet(object.value) ? object.value : undefined
     };
   },
 
@@ -722,7 +722,7 @@ export const IdRef = {
 
   fromSDK(object: IdRefSDKType): IdRef {
     return {
-      id: isSet(object.id) ? object.id : 0
+      id: isSet(object.id) ? object.id : undefined
     };
   },
 

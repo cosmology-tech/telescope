@@ -312,8 +312,8 @@ export const Operation_LabelsEntry = {
 
   fromSDK(object: Operation_LabelsEntrySDKType): Operation_LabelsEntry {
     return {
-      key: isSet(object.key) ? object.key : "",
-      value: isSet(object.value) ? object.value : ""
+      key: isSet(object.key) ? object.key : undefined,
+      value: isSet(object.value) ? object.value : undefined
     };
   },
 
@@ -535,9 +535,9 @@ export const Operation = {
 
   fromSDK(object: OperationSDKType): Operation {
     return {
-      operationId: isSet(object.operation_id) ? object.operation_id : "",
-      operationName: isSet(object.operation_name) ? object.operation_name : "",
-      consumerId: isSet(object.consumer_id) ? object.consumer_id : "",
+      operationId: isSet(object.operation_id) ? object.operation_id : undefined,
+      operationName: isSet(object.operation_name) ? object.operation_name : undefined,
+      consumerId: isSet(object.consumer_id) ? object.consumer_id : undefined,
       startTime: isSet(object.start_time) ? Timestamp.fromSDK(object.start_time) : undefined,
       endTime: isSet(object.end_time) ? Timestamp.fromSDK(object.end_time) : undefined,
       labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{

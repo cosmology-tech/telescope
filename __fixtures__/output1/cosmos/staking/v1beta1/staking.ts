@@ -787,9 +787,9 @@ export const CommissionRates = {
 
   fromSDK(object: CommissionRatesSDKType): CommissionRates {
     return {
-      rate: isSet(object.rate) ? object.rate : "",
-      maxRate: isSet(object.max_rate) ? object.max_rate : "",
-      maxChangeRate: isSet(object.max_change_rate) ? object.max_change_rate : ""
+      rate: isSet(object.rate) ? object.rate : undefined,
+      maxRate: isSet(object.max_rate) ? object.max_rate : undefined,
+      maxChangeRate: isSet(object.max_change_rate) ? object.max_change_rate : undefined
     };
   },
 
@@ -991,11 +991,11 @@ export const Description = {
 
   fromSDK(object: DescriptionSDKType): Description {
     return {
-      moniker: isSet(object.moniker) ? object.moniker : "",
-      identity: isSet(object.identity) ? object.identity : "",
-      website: isSet(object.website) ? object.website : "",
-      securityContact: isSet(object.security_contact) ? object.security_contact : "",
-      details: isSet(object.details) ? object.details : ""
+      moniker: isSet(object.moniker) ? object.moniker : undefined,
+      identity: isSet(object.identity) ? object.identity : undefined,
+      website: isSet(object.website) ? object.website : undefined,
+      securityContact: isSet(object.security_contact) ? object.security_contact : undefined,
+      details: isSet(object.details) ? object.details : undefined
     };
   },
 
@@ -1188,17 +1188,17 @@ export const Validator = {
 
   fromSDK(object: ValidatorSDKType): Validator {
     return {
-      operatorAddress: isSet(object.operator_address) ? object.operator_address : "",
+      operatorAddress: isSet(object.operator_address) ? object.operator_address : undefined,
       consensusPubkey: isSet(object.consensus_pubkey) ? Any.fromSDK(object.consensus_pubkey) : undefined,
-      jailed: isSet(object.jailed) ? object.jailed : false,
+      jailed: isSet(object.jailed) ? object.jailed : undefined,
       status: isSet(object.status) ? bondStatusFromJSON(object.status) : 0,
-      tokens: isSet(object.tokens) ? object.tokens : "",
-      delegatorShares: isSet(object.delegator_shares) ? object.delegator_shares : "",
+      tokens: isSet(object.tokens) ? object.tokens : undefined,
+      delegatorShares: isSet(object.delegator_shares) ? object.delegator_shares : undefined,
       description: isSet(object.description) ? Description.fromSDK(object.description) : undefined,
-      unbondingHeight: isSet(object.unbonding_height) ? object.unbonding_height : Long.ZERO,
+      unbondingHeight: isSet(object.unbonding_height) ? object.unbonding_height : undefined,
       unbondingTime: isSet(object.unbonding_time) ? Timestamp.fromSDK(object.unbonding_time) : undefined,
       commission: isSet(object.commission) ? Commission.fromSDK(object.commission) : undefined,
-      minSelfDelegation: isSet(object.min_self_delegation) ? object.min_self_delegation : ""
+      minSelfDelegation: isSet(object.min_self_delegation) ? object.min_self_delegation : undefined
     };
   },
 
@@ -1370,8 +1370,8 @@ export const DVPair = {
 
   fromSDK(object: DVPairSDKType): DVPair {
     return {
-      delegatorAddress: isSet(object.delegator_address) ? object.delegator_address : "",
-      validatorAddress: isSet(object.validator_address) ? object.validator_address : ""
+      delegatorAddress: isSet(object.delegator_address) ? object.delegator_address : undefined,
+      validatorAddress: isSet(object.validator_address) ? object.validator_address : undefined
     };
   },
 
@@ -1546,9 +1546,9 @@ export const DVVTriplet = {
 
   fromSDK(object: DVVTripletSDKType): DVVTriplet {
     return {
-      delegatorAddress: isSet(object.delegator_address) ? object.delegator_address : "",
-      validatorSrcAddress: isSet(object.validator_src_address) ? object.validator_src_address : "",
-      validatorDstAddress: isSet(object.validator_dst_address) ? object.validator_dst_address : ""
+      delegatorAddress: isSet(object.delegator_address) ? object.delegator_address : undefined,
+      validatorSrcAddress: isSet(object.validator_src_address) ? object.validator_src_address : undefined,
+      validatorDstAddress: isSet(object.validator_dst_address) ? object.validator_dst_address : undefined
     };
   },
 
@@ -1724,9 +1724,9 @@ export const Delegation = {
 
   fromSDK(object: DelegationSDKType): Delegation {
     return {
-      delegatorAddress: isSet(object.delegator_address) ? object.delegator_address : "",
-      validatorAddress: isSet(object.validator_address) ? object.validator_address : "",
-      shares: isSet(object.shares) ? object.shares : ""
+      delegatorAddress: isSet(object.delegator_address) ? object.delegator_address : undefined,
+      validatorAddress: isSet(object.validator_address) ? object.validator_address : undefined,
+      shares: isSet(object.shares) ? object.shares : undefined
     };
   },
 
@@ -1827,8 +1827,8 @@ export const UnbondingDelegation = {
 
   fromSDK(object: UnbondingDelegationSDKType): UnbondingDelegation {
     return {
-      delegatorAddress: isSet(object.delegator_address) ? object.delegator_address : "",
-      validatorAddress: isSet(object.validator_address) ? object.validator_address : "",
+      delegatorAddress: isSet(object.delegator_address) ? object.delegator_address : undefined,
+      validatorAddress: isSet(object.validator_address) ? object.validator_address : undefined,
       entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => UnbondingDelegationEntry.fromSDK(e)) : []
     };
   },
@@ -1942,10 +1942,10 @@ export const UnbondingDelegationEntry = {
 
   fromSDK(object: UnbondingDelegationEntrySDKType): UnbondingDelegationEntry {
     return {
-      creationHeight: isSet(object.creation_height) ? object.creation_height : Long.ZERO,
+      creationHeight: isSet(object.creation_height) ? object.creation_height : undefined,
       completionTime: isSet(object.completion_time) ? Timestamp.fromSDK(object.completion_time) : undefined,
-      initialBalance: isSet(object.initial_balance) ? object.initial_balance : "",
-      balance: isSet(object.balance) ? object.balance : ""
+      initialBalance: isSet(object.initial_balance) ? object.initial_balance : undefined,
+      balance: isSet(object.balance) ? object.balance : undefined
     };
   },
 
@@ -2053,10 +2053,10 @@ export const RedelegationEntry = {
 
   fromSDK(object: RedelegationEntrySDKType): RedelegationEntry {
     return {
-      creationHeight: isSet(object.creation_height) ? object.creation_height : Long.ZERO,
+      creationHeight: isSet(object.creation_height) ? object.creation_height : undefined,
       completionTime: isSet(object.completion_time) ? Timestamp.fromSDK(object.completion_time) : undefined,
-      initialBalance: isSet(object.initial_balance) ? object.initial_balance : "",
-      sharesDst: isSet(object.shares_dst) ? object.shares_dst : ""
+      initialBalance: isSet(object.initial_balance) ? object.initial_balance : undefined,
+      sharesDst: isSet(object.shares_dst) ? object.shares_dst : undefined
     };
   },
 
@@ -2170,9 +2170,9 @@ export const Redelegation = {
 
   fromSDK(object: RedelegationSDKType): Redelegation {
     return {
-      delegatorAddress: isSet(object.delegator_address) ? object.delegator_address : "",
-      validatorSrcAddress: isSet(object.validator_src_address) ? object.validator_src_address : "",
-      validatorDstAddress: isSet(object.validator_dst_address) ? object.validator_dst_address : "",
+      delegatorAddress: isSet(object.delegator_address) ? object.delegator_address : undefined,
+      validatorSrcAddress: isSet(object.validator_src_address) ? object.validator_src_address : undefined,
+      validatorDstAddress: isSet(object.validator_dst_address) ? object.validator_dst_address : undefined,
       entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => RedelegationEntry.fromSDK(e)) : []
     };
   },
@@ -2312,11 +2312,11 @@ export const Params = {
   fromSDK(object: ParamsSDKType): Params {
     return {
       unbondingTime: isSet(object.unbonding_time) ? Duration.fromSDK(object.unbonding_time) : undefined,
-      maxValidators: isSet(object.max_validators) ? object.max_validators : 0,
-      maxEntries: isSet(object.max_entries) ? object.max_entries : 0,
-      historicalEntries: isSet(object.historical_entries) ? object.historical_entries : 0,
-      bondDenom: isSet(object.bond_denom) ? object.bond_denom : "",
-      minCommissionRate: isSet(object.min_commission_rate) ? object.min_commission_rate : ""
+      maxValidators: isSet(object.max_validators) ? object.max_validators : undefined,
+      maxEntries: isSet(object.max_entries) ? object.max_entries : undefined,
+      historicalEntries: isSet(object.historical_entries) ? object.historical_entries : undefined,
+      bondDenom: isSet(object.bond_denom) ? object.bond_denom : undefined,
+      minCommissionRate: isSet(object.min_commission_rate) ? object.min_commission_rate : undefined
     };
   },
 
@@ -2486,7 +2486,7 @@ export const RedelegationEntryResponse = {
   fromSDK(object: RedelegationEntryResponseSDKType): RedelegationEntryResponse {
     return {
       redelegationEntry: isSet(object.redelegation_entry) ? RedelegationEntry.fromSDK(object.redelegation_entry) : undefined,
-      balance: isSet(object.balance) ? object.balance : ""
+      balance: isSet(object.balance) ? object.balance : undefined
     };
   },
 
@@ -2663,8 +2663,8 @@ export const Pool = {
 
   fromSDK(object: PoolSDKType): Pool {
     return {
-      notBondedTokens: isSet(object.not_bonded_tokens) ? object.not_bonded_tokens : "",
-      bondedTokens: isSet(object.bonded_tokens) ? object.bonded_tokens : ""
+      notBondedTokens: isSet(object.not_bonded_tokens) ? object.not_bonded_tokens : undefined,
+      bondedTokens: isSet(object.bonded_tokens) ? object.bonded_tokens : undefined
     };
   },
 

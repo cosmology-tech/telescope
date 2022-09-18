@@ -229,8 +229,8 @@ export const QueryBalanceRequest = {
 
   fromSDK(object: QueryBalanceRequestSDKType): QueryBalanceRequest {
     return {
-      classId: isSet(object.class_id) ? object.class_id : "",
-      owner: isSet(object.owner) ? object.owner : ""
+      classId: isSet(object.class_id) ? object.class_id : undefined,
+      owner: isSet(object.owner) ? object.owner : undefined
     };
   },
 
@@ -300,7 +300,7 @@ export const QueryBalanceResponse = {
 
   fromSDK(object: QueryBalanceResponseSDKType): QueryBalanceResponse {
     return {
-      amount: isSet(object.amount) ? object.amount : Long.UZERO
+      amount: isSet(object.amount) ? object.amount : undefined
     };
   },
 
@@ -381,8 +381,8 @@ export const QueryOwnerRequest = {
 
   fromSDK(object: QueryOwnerRequestSDKType): QueryOwnerRequest {
     return {
-      classId: isSet(object.class_id) ? object.class_id : "",
-      id: isSet(object.id) ? object.id : ""
+      classId: isSet(object.class_id) ? object.class_id : undefined,
+      id: isSet(object.id) ? object.id : undefined
     };
   },
 
@@ -452,7 +452,7 @@ export const QueryOwnerResponse = {
 
   fromSDK(object: QueryOwnerResponseSDKType): QueryOwnerResponse {
     return {
-      owner: isSet(object.owner) ? object.owner : ""
+      owner: isSet(object.owner) ? object.owner : undefined
     };
   },
 
@@ -521,7 +521,7 @@ export const QuerySupplyRequest = {
 
   fromSDK(object: QuerySupplyRequestSDKType): QuerySupplyRequest {
     return {
-      classId: isSet(object.class_id) ? object.class_id : ""
+      classId: isSet(object.class_id) ? object.class_id : undefined
     };
   },
 
@@ -590,7 +590,7 @@ export const QuerySupplyResponse = {
 
   fromSDK(object: QuerySupplyResponseSDKType): QuerySupplyResponse {
     return {
-      amount: isSet(object.amount) ? object.amount : Long.UZERO
+      amount: isSet(object.amount) ? object.amount : undefined
     };
   },
 
@@ -683,8 +683,8 @@ export const QueryNFTsRequest = {
 
   fromSDK(object: QueryNFTsRequestSDKType): QueryNFTsRequest {
     return {
-      classId: isSet(object.class_id) ? object.class_id : "",
-      owner: isSet(object.owner) ? object.owner : "",
+      classId: isSet(object.class_id) ? object.class_id : undefined,
+      owner: isSet(object.owner) ? object.owner : undefined,
       pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
@@ -863,8 +863,8 @@ export const QueryNFTRequest = {
 
   fromSDK(object: QueryNFTRequestSDKType): QueryNFTRequest {
     return {
-      classId: isSet(object.class_id) ? object.class_id : "",
-      id: isSet(object.id) ? object.id : ""
+      classId: isSet(object.class_id) ? object.class_id : undefined,
+      id: isSet(object.id) ? object.id : undefined
     };
   },
 
@@ -1003,7 +1003,7 @@ export const QueryClassRequest = {
 
   fromSDK(object: QueryClassRequestSDKType): QueryClassRequest {
     return {
-      classId: isSet(object.class_id) ? object.class_id : ""
+      classId: isSet(object.class_id) ? object.class_id : undefined
     };
   },
 

@@ -427,7 +427,7 @@ export const WeightedVoteOption = {
   fromSDK(object: WeightedVoteOptionSDKType): WeightedVoteOption {
     return {
       option: isSet(object.option) ? voteOptionFromJSON(object.option) : 0,
-      weight: isSet(object.weight) ? object.weight : ""
+      weight: isSet(object.weight) ? object.weight : undefined
     };
   },
 
@@ -527,8 +527,8 @@ export const Deposit = {
 
   fromSDK(object: DepositSDKType): Deposit {
     return {
-      proposalId: isSet(object.proposal_id) ? object.proposal_id : Long.UZERO,
-      depositor: isSet(object.depositor) ? object.depositor : "",
+      proposalId: isSet(object.proposal_id) ? object.proposal_id : undefined,
+      depositor: isSet(object.depositor) ? object.depositor : undefined,
       amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromSDK(e)) : []
     };
   },
@@ -726,7 +726,7 @@ export const Proposal = {
 
   fromSDK(object: ProposalSDKType): Proposal {
     return {
-      id: isSet(object.id) ? object.id : Long.UZERO,
+      id: isSet(object.id) ? object.id : undefined,
       messages: Array.isArray(object?.messages) ? object.messages.map((e: any) => Any.fromSDK(e)) : [],
       status: isSet(object.status) ? proposalStatusFromJSON(object.status) : 0,
       finalTallyResult: isSet(object.final_tally_result) ? TallyResult.fromSDK(object.final_tally_result) : undefined,
@@ -735,7 +735,7 @@ export const Proposal = {
       totalDeposit: Array.isArray(object?.total_deposit) ? object.total_deposit.map((e: any) => Coin.fromSDK(e)) : [],
       votingStartTime: isSet(object.voting_start_time) ? Timestamp.fromSDK(object.voting_start_time) : undefined,
       votingEndTime: isSet(object.voting_end_time) ? Timestamp.fromSDK(object.voting_end_time) : undefined,
-      metadata: isSet(object.metadata) ? object.metadata : ""
+      metadata: isSet(object.metadata) ? object.metadata : undefined
     };
   },
 
@@ -861,10 +861,10 @@ export const TallyResult = {
 
   fromSDK(object: TallyResultSDKType): TallyResult {
     return {
-      yesCount: isSet(object.yes_count) ? object.yes_count : "",
-      abstainCount: isSet(object.abstain_count) ? object.abstain_count : "",
-      noCount: isSet(object.no_count) ? object.no_count : "",
-      noWithVetoCount: isSet(object.no_with_veto_count) ? object.no_with_veto_count : ""
+      yesCount: isSet(object.yes_count) ? object.yes_count : undefined,
+      abstainCount: isSet(object.abstain_count) ? object.abstain_count : undefined,
+      noCount: isSet(object.no_count) ? object.no_count : undefined,
+      noWithVetoCount: isSet(object.no_with_veto_count) ? object.no_with_veto_count : undefined
     };
   },
 
@@ -978,10 +978,10 @@ export const Vote = {
 
   fromSDK(object: VoteSDKType): Vote {
     return {
-      proposalId: isSet(object.proposal_id) ? object.proposal_id : Long.UZERO,
-      voter: isSet(object.voter) ? object.voter : "",
+      proposalId: isSet(object.proposal_id) ? object.proposal_id : undefined,
+      voter: isSet(object.voter) ? object.voter : undefined,
       options: Array.isArray(object?.options) ? object.options.map((e: any) => WeightedVoteOption.fromSDK(e)) : [],
-      metadata: isSet(object.metadata) ? object.metadata : ""
+      metadata: isSet(object.metadata) ? object.metadata : undefined
     };
   },
 
@@ -1247,9 +1247,9 @@ export const TallyParams = {
 
   fromSDK(object: TallyParamsSDKType): TallyParams {
     return {
-      quorum: isSet(object.quorum) ? object.quorum : "",
-      threshold: isSet(object.threshold) ? object.threshold : "",
-      vetoThreshold: isSet(object.veto_threshold) ? object.veto_threshold : ""
+      quorum: isSet(object.quorum) ? object.quorum : undefined,
+      threshold: isSet(object.threshold) ? object.threshold : undefined,
+      vetoThreshold: isSet(object.veto_threshold) ? object.veto_threshold : undefined
     };
   },
 

@@ -452,12 +452,12 @@ export const Documentation = {
 
   fromSDK(object: DocumentationSDKType): Documentation {
     return {
-      summary: isSet(object.summary) ? object.summary : "",
+      summary: isSet(object.summary) ? object.summary : undefined,
       pages: Array.isArray(object?.pages) ? object.pages.map((e: any) => Page.fromSDK(e)) : [],
       rules: Array.isArray(object?.rules) ? object.rules.map((e: any) => DocumentationRule.fromSDK(e)) : [],
-      documentationRootUrl: isSet(object.documentation_root_url) ? object.documentation_root_url : "",
-      serviceRootUrl: isSet(object.service_root_url) ? object.service_root_url : "",
-      overview: isSet(object.overview) ? object.overview : ""
+      documentationRootUrl: isSet(object.documentation_root_url) ? object.documentation_root_url : undefined,
+      serviceRootUrl: isSet(object.service_root_url) ? object.service_root_url : undefined,
+      overview: isSet(object.overview) ? object.overview : undefined
     };
   },
 
@@ -566,9 +566,9 @@ export const DocumentationRule = {
 
   fromSDK(object: DocumentationRuleSDKType): DocumentationRule {
     return {
-      selector: isSet(object.selector) ? object.selector : "",
-      description: isSet(object.description) ? object.description : "",
-      deprecationDescription: isSet(object.deprecation_description) ? object.deprecation_description : ""
+      selector: isSet(object.selector) ? object.selector : undefined,
+      description: isSet(object.description) ? object.description : undefined,
+      deprecationDescription: isSet(object.deprecation_description) ? object.deprecation_description : undefined
     };
   },
 
@@ -669,8 +669,8 @@ export const Page = {
 
   fromSDK(object: PageSDKType): Page {
     return {
-      name: isSet(object.name) ? object.name : "",
-      content: isSet(object.content) ? object.content : "",
+      name: isSet(object.name) ? object.name : undefined,
+      content: isSet(object.content) ? object.content : undefined,
       subpages: Array.isArray(object?.subpages) ? object.subpages.map((e: any) => Page.fromSDK(e)) : []
     };
   },

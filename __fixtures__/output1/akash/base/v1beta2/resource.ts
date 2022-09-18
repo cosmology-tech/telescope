@@ -319,7 +319,7 @@ export const Storage = {
 
   fromSDK(object: StorageSDKType): Storage {
     return {
-      name: isSet(object.name) ? object.name : "",
+      name: isSet(object.name) ? object.name : undefined,
       quantity: isSet(object.quantity) ? ResourceValue.fromSDK(object.quantity) : undefined,
       attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromSDK(e)) : []
     };

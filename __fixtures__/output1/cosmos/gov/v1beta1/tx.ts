@@ -200,7 +200,7 @@ export const MsgSubmitProposal = {
     return {
       content: isSet(object.content) ? Any.fromSDK(object.content) : undefined,
       initialDeposit: Array.isArray(object?.initial_deposit) ? object.initial_deposit.map((e: any) => Coin.fromSDK(e)) : [],
-      proposer: isSet(object.proposer) ? object.proposer : ""
+      proposer: isSet(object.proposer) ? object.proposer : undefined
     };
   },
 
@@ -277,7 +277,7 @@ export const MsgSubmitProposalResponse = {
 
   fromSDK(object: MsgSubmitProposalResponseSDKType): MsgSubmitProposalResponse {
     return {
-      proposalId: isSet(object.proposal_id) ? object.proposal_id : Long.UZERO
+      proposalId: isSet(object.proposal_id) ? object.proposal_id : undefined
     };
   },
 
@@ -370,8 +370,8 @@ export const MsgVote = {
 
   fromSDK(object: MsgVoteSDKType): MsgVote {
     return {
-      proposalId: isSet(object.proposal_id) ? object.proposal_id : Long.UZERO,
-      voter: isSet(object.voter) ? object.voter : "",
+      proposalId: isSet(object.proposal_id) ? object.proposal_id : undefined,
+      voter: isSet(object.voter) ? object.voter : undefined,
       option: isSet(object.option) ? voteOptionFromJSON(object.option) : 0
     };
   },
@@ -525,8 +525,8 @@ export const MsgVoteWeighted = {
 
   fromSDK(object: MsgVoteWeightedSDKType): MsgVoteWeighted {
     return {
-      proposalId: isSet(object.proposal_id) ? object.proposal_id : Long.UZERO,
-      voter: isSet(object.voter) ? object.voter : "",
+      proposalId: isSet(object.proposal_id) ? object.proposal_id : undefined,
+      voter: isSet(object.voter) ? object.voter : undefined,
       options: Array.isArray(object?.options) ? object.options.map((e: any) => WeightedVoteOption.fromSDK(e)) : []
     };
   },
@@ -686,8 +686,8 @@ export const MsgDeposit = {
 
   fromSDK(object: MsgDepositSDKType): MsgDeposit {
     return {
-      proposalId: isSet(object.proposal_id) ? object.proposal_id : Long.UZERO,
-      depositor: isSet(object.depositor) ? object.depositor : "",
+      proposalId: isSet(object.proposal_id) ? object.proposal_id : undefined,
+      depositor: isSet(object.depositor) ? object.depositor : undefined,
       amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromSDK(e)) : []
     };
   },

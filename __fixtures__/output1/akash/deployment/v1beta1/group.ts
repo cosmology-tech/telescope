@@ -623,9 +623,9 @@ export const GroupID = {
 
   fromSDK(object: GroupIDSDKType): GroupID {
     return {
-      owner: isSet(object.owner) ? object.owner : "",
-      dseq: isSet(object.dseq) ? object.dseq : Long.UZERO,
-      gseq: isSet(object.gseq) ? object.gseq : 0
+      owner: isSet(object.owner) ? object.owner : undefined,
+      dseq: isSet(object.dseq) ? object.dseq : undefined,
+      gseq: isSet(object.gseq) ? object.gseq : undefined
     };
   },
 
@@ -726,7 +726,7 @@ export const GroupSpec = {
 
   fromSDK(object: GroupSpecSDKType): GroupSpec {
     return {
-      name: isSet(object.name) ? object.name : "",
+      name: isSet(object.name) ? object.name : undefined,
       requirements: isSet(object.requirements) ? PlacementRequirements.fromSDK(object.requirements) : undefined,
       resources: Array.isArray(object?.resources) ? object.resources.map((e: any) => Resource.fromSDK(e)) : []
     };
@@ -844,7 +844,7 @@ export const Group = {
       groupId: isSet(object.group_id) ? GroupID.fromSDK(object.group_id) : undefined,
       state: isSet(object.state) ? group_StateFromJSON(object.state) : 0,
       groupSpec: isSet(object.group_spec) ? GroupSpec.fromSDK(object.group_spec) : undefined,
-      createdAt: isSet(object.created_at) ? object.created_at : Long.ZERO
+      createdAt: isSet(object.created_at) ? object.created_at : undefined
     };
   },
 
@@ -941,7 +941,7 @@ export const Resource = {
   fromSDK(object: ResourceSDKType): Resource {
     return {
       resources: isSet(object.resources) ? ResourceUnits.fromSDK(object.resources) : undefined,
-      count: isSet(object.count) ? object.count : 0,
+      count: isSet(object.count) ? object.count : undefined,
       price: isSet(object.price) ? Coin.fromSDK(object.price) : undefined
     };
   },

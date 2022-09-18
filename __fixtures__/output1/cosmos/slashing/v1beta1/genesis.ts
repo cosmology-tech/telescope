@@ -287,7 +287,7 @@ export const SigningInfo = {
 
   fromSDK(object: SigningInfoSDKType): SigningInfo {
     return {
-      address: isSet(object.address) ? object.address : "",
+      address: isSet(object.address) ? object.address : undefined,
       validatorSigningInfo: isSet(object.validator_signing_info) ? ValidatorSigningInfo.fromSDK(object.validator_signing_info) : undefined
     };
   },
@@ -376,7 +376,7 @@ export const ValidatorMissedBlocks = {
 
   fromSDK(object: ValidatorMissedBlocksSDKType): ValidatorMissedBlocks {
     return {
-      address: isSet(object.address) ? object.address : "",
+      address: isSet(object.address) ? object.address : undefined,
       missedBlocks: Array.isArray(object?.missed_blocks) ? object.missed_blocks.map((e: any) => MissedBlock.fromSDK(e)) : []
     };
   },
@@ -465,8 +465,8 @@ export const MissedBlock = {
 
   fromSDK(object: MissedBlockSDKType): MissedBlock {
     return {
-      index: isSet(object.index) ? object.index : Long.ZERO,
-      missed: isSet(object.missed) ? object.missed : false
+      index: isSet(object.index) ? object.index : undefined,
+      missed: isSet(object.missed) ? object.missed : undefined
     };
   },
 

@@ -100,7 +100,7 @@ export const Resource = {
   fromSDK(object: ResourceSDKType): Resource {
     return {
       resources: isSet(object.resources) ? ResourceUnits.fromSDK(object.resources) : undefined,
-      count: isSet(object.count) ? object.count : 0,
+      count: isSet(object.count) ? object.count : undefined,
       price: isSet(object.price) ? DecCoin.fromSDK(object.price) : undefined
     };
   },

@@ -567,9 +567,9 @@ export const AllocateQuotaRequest = {
 
   fromSDK(object: AllocateQuotaRequestSDKType): AllocateQuotaRequest {
     return {
-      serviceName: isSet(object.service_name) ? object.service_name : "",
+      serviceName: isSet(object.service_name) ? object.service_name : undefined,
       allocateOperation: isSet(object.allocate_operation) ? QuotaOperation.fromSDK(object.allocate_operation) : undefined,
-      serviceConfigId: isSet(object.service_config_id) ? object.service_config_id : ""
+      serviceConfigId: isSet(object.service_config_id) ? object.service_config_id : undefined
     };
   },
 
@@ -652,8 +652,8 @@ export const QuotaOperation_LabelsEntry = {
 
   fromSDK(object: QuotaOperation_LabelsEntrySDKType): QuotaOperation_LabelsEntry {
     return {
-      key: isSet(object.key) ? object.key : "",
-      value: isSet(object.value) ? object.value : ""
+      key: isSet(object.key) ? object.key : undefined,
+      value: isSet(object.value) ? object.value : undefined
     };
   },
 
@@ -816,9 +816,9 @@ export const QuotaOperation = {
 
   fromSDK(object: QuotaOperationSDKType): QuotaOperation {
     return {
-      operationId: isSet(object.operation_id) ? object.operation_id : "",
-      methodName: isSet(object.method_name) ? object.method_name : "",
-      consumerId: isSet(object.consumer_id) ? object.consumer_id : "",
+      operationId: isSet(object.operation_id) ? object.operation_id : undefined,
+      methodName: isSet(object.method_name) ? object.method_name : undefined,
+      consumerId: isSet(object.consumer_id) ? object.consumer_id : undefined,
       labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
         [key: string]: string;
       }>((acc, [key, value]) => {
@@ -959,10 +959,10 @@ export const AllocateQuotaResponse = {
 
   fromSDK(object: AllocateQuotaResponseSDKType): AllocateQuotaResponse {
     return {
-      operationId: isSet(object.operation_id) ? object.operation_id : "",
+      operationId: isSet(object.operation_id) ? object.operation_id : undefined,
       allocateErrors: Array.isArray(object?.allocate_errors) ? object.allocate_errors.map((e: any) => QuotaError.fromSDK(e)) : [],
       quotaMetrics: Array.isArray(object?.quota_metrics) ? object.quota_metrics.map((e: any) => MetricValueSet.fromSDK(e)) : [],
-      serviceConfigId: isSet(object.service_config_id) ? object.service_config_id : ""
+      serviceConfigId: isSet(object.service_config_id) ? object.service_config_id : undefined
     };
   },
 
@@ -1082,8 +1082,8 @@ export const QuotaError = {
   fromSDK(object: QuotaErrorSDKType): QuotaError {
     return {
       code: isSet(object.code) ? quotaError_CodeFromJSON(object.code) : 0,
-      subject: isSet(object.subject) ? object.subject : "",
-      description: isSet(object.description) ? object.description : "",
+      subject: isSet(object.subject) ? object.subject : undefined,
+      description: isSet(object.description) ? object.description : undefined,
       status: isSet(object.status) ? Status.fromSDK(object.status) : undefined
     };
   },

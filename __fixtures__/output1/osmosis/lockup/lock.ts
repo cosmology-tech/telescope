@@ -262,8 +262,8 @@ export const PeriodLock = {
 
   fromSDK(object: PeriodLockSDKType): PeriodLock {
     return {
-      ID: isSet(object.ID) ? object.ID : Long.UZERO,
-      owner: isSet(object.owner) ? object.owner : "",
+      ID: isSet(object.ID) ? object.ID : undefined,
+      owner: isSet(object.owner) ? object.owner : undefined,
       duration: isSet(object.duration) ? Duration.fromSDK(object.duration) : undefined,
       endTime: isSet(object.end_time) ? Timestamp.fromSDK(object.end_time) : undefined,
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDK(e)) : []
@@ -382,7 +382,7 @@ export const QueryCondition = {
   fromSDK(object: QueryConditionSDKType): QueryCondition {
     return {
       lockQueryType: isSet(object.lock_query_type) ? lockQueryTypeFromJSON(object.lock_query_type) : 0,
-      denom: isSet(object.denom) ? object.denom : "",
+      denom: isSet(object.denom) ? object.denom : undefined,
       duration: isSet(object.duration) ? Duration.fromSDK(object.duration) : undefined,
       timestamp: isSet(object.timestamp) ? Timestamp.fromSDK(object.timestamp) : undefined
     };
@@ -492,8 +492,8 @@ export const SyntheticLock = {
 
   fromSDK(object: SyntheticLockSDKType): SyntheticLock {
     return {
-      underlyingLockId: isSet(object.underlying_lock_id) ? object.underlying_lock_id : Long.UZERO,
-      synthDenom: isSet(object.synth_denom) ? object.synth_denom : "",
+      underlyingLockId: isSet(object.underlying_lock_id) ? object.underlying_lock_id : undefined,
+      synthDenom: isSet(object.synth_denom) ? object.synth_denom : undefined,
       endTime: isSet(object.end_time) ? Timestamp.fromSDK(object.end_time) : undefined,
       duration: isSet(object.duration) ? Duration.fromSDK(object.duration) : undefined
     };

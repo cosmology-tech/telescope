@@ -267,7 +267,7 @@ export const QueryProviderRequest = {
 
   fromSDK(object: QueryProviderRequestSDKType): QueryProviderRequest {
     return {
-      owner: isSet(object.owner) ? object.owner : ""
+      owner: isSet(object.owner) ? object.owner : undefined
     };
   },
 

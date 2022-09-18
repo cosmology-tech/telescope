@@ -324,9 +324,9 @@ export const Property = {
 
   fromSDK(object: PropertySDKType): Property {
     return {
-      name: isSet(object.name) ? object.name : "",
+      name: isSet(object.name) ? object.name : undefined,
       type: isSet(object.type) ? property_PropertyTypeFromJSON(object.type) : 0,
-      description: isSet(object.description) ? object.description : ""
+      description: isSet(object.description) ? object.description : undefined
     };
   },
 

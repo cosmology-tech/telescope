@@ -427,7 +427,7 @@ export const QueryContractInfoRequest = {
 
   fromSDK(object: QueryContractInfoRequestSDKType): QueryContractInfoRequest {
     return {
-      address: isSet(object.address) ? object.address : ""
+      address: isSet(object.address) ? object.address : undefined
     };
   },
 
@@ -508,7 +508,7 @@ export const QueryContractInfoResponse = {
 
   fromSDK(object: QueryContractInfoResponseSDKType): QueryContractInfoResponse {
     return {
-      address: isSet(object.address) ? object.address : "",
+      address: isSet(object.address) ? object.address : undefined,
       contractInfo: isSet(object.contract_info) ? ContractInfo.fromSDK(object.contract_info) : undefined
     };
   },
@@ -591,7 +591,7 @@ export const QueryContractHistoryRequest = {
 
   fromSDK(object: QueryContractHistoryRequestSDKType): QueryContractHistoryRequest {
     return {
-      address: isSet(object.address) ? object.address : "",
+      address: isSet(object.address) ? object.address : undefined,
       pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
@@ -769,7 +769,7 @@ export const QueryContractsByCodeRequest = {
 
   fromSDK(object: QueryContractsByCodeRequestSDKType): QueryContractsByCodeRequest {
     return {
-      codeId: isSet(object.code_id) ? object.code_id : Long.UZERO,
+      codeId: isSet(object.code_id) ? object.code_id : undefined,
       pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
@@ -947,7 +947,7 @@ export const QueryAllContractStateRequest = {
 
   fromSDK(object: QueryAllContractStateRequestSDKType): QueryAllContractStateRequest {
     return {
-      address: isSet(object.address) ? object.address : "",
+      address: isSet(object.address) ? object.address : undefined,
       pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
@@ -1125,8 +1125,8 @@ export const QueryRawContractStateRequest = {
 
   fromSDK(object: QueryRawContractStateRequestSDKType): QueryRawContractStateRequest {
     return {
-      address: isSet(object.address) ? object.address : "",
-      queryData: isSet(object.query_data) ? object.query_data : new Uint8Array()
+      address: isSet(object.address) ? object.address : undefined,
+      queryData: isSet(object.query_data) ? object.query_data : undefined
     };
   },
 
@@ -1196,7 +1196,7 @@ export const QueryRawContractStateResponse = {
 
   fromSDK(object: QueryRawContractStateResponseSDKType): QueryRawContractStateResponse {
     return {
-      data: isSet(object.data) ? object.data : new Uint8Array()
+      data: isSet(object.data) ? object.data : undefined
     };
   },
 
@@ -1277,8 +1277,8 @@ export const QuerySmartContractStateRequest = {
 
   fromSDK(object: QuerySmartContractStateRequestSDKType): QuerySmartContractStateRequest {
     return {
-      address: isSet(object.address) ? object.address : "",
-      queryData: isSet(object.query_data) ? object.query_data : new Uint8Array()
+      address: isSet(object.address) ? object.address : undefined,
+      queryData: isSet(object.query_data) ? object.query_data : undefined
     };
   },
 
@@ -1348,7 +1348,7 @@ export const QuerySmartContractStateResponse = {
 
   fromSDK(object: QuerySmartContractStateResponseSDKType): QuerySmartContractStateResponse {
     return {
-      data: isSet(object.data) ? object.data : new Uint8Array()
+      data: isSet(object.data) ? object.data : undefined
     };
   },
 
@@ -1417,7 +1417,7 @@ export const QueryCodeRequest = {
 
   fromSDK(object: QueryCodeRequestSDKType): QueryCodeRequest {
     return {
-      codeId: isSet(object.code_id) ? object.code_id : Long.UZERO
+      codeId: isSet(object.code_id) ? object.code_id : undefined
     };
   },
 
@@ -1510,9 +1510,9 @@ export const CodeInfoResponse = {
 
   fromSDK(object: CodeInfoResponseSDKType): CodeInfoResponse {
     return {
-      codeId: isSet(object.code_id) ? object.code_id : Long.UZERO,
-      creator: isSet(object.creator) ? object.creator : "",
-      dataHash: isSet(object.data_hash) ? object.data_hash : new Uint8Array()
+      codeId: isSet(object.code_id) ? object.code_id : undefined,
+      creator: isSet(object.creator) ? object.creator : undefined,
+      dataHash: isSet(object.data_hash) ? object.data_hash : undefined
     };
   },
 
@@ -1596,7 +1596,7 @@ export const QueryCodeResponse = {
   fromSDK(object: QueryCodeResponseSDKType): QueryCodeResponse {
     return {
       codeInfo: isSet(object.code_info) ? CodeInfoResponse.fromSDK(object.code_info) : undefined,
-      data: isSet(object.data) ? object.data : new Uint8Array()
+      data: isSet(object.data) ? object.data : undefined
     };
   },
 

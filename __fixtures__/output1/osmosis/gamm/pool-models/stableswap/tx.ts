@@ -141,10 +141,10 @@ export const MsgCreateStableswapPool = {
 
   fromSDK(object: MsgCreateStableswapPoolSDKType): MsgCreateStableswapPool {
     return {
-      sender: isSet(object.sender) ? object.sender : "",
+      sender: isSet(object.sender) ? object.sender : undefined,
       poolParams: isSet(object.poolParams) ? PoolParams.fromSDK(object.poolParams) : undefined,
       initialPoolLiquidity: Array.isArray(object?.initial_pool_liquidity) ? object.initial_pool_liquidity.map((e: any) => Coin.fromSDK(e)) : [],
-      futurePoolGovernor: isSet(object.future_pool_governor) ? object.future_pool_governor : ""
+      futurePoolGovernor: isSet(object.future_pool_governor) ? object.future_pool_governor : undefined
     };
   },
 
@@ -222,7 +222,7 @@ export const MsgCreateStableswapPoolResponse = {
 
   fromSDK(object: MsgCreateStableswapPoolResponseSDKType): MsgCreateStableswapPoolResponse {
     return {
-      poolId: isSet(object.pool_id) ? object.pool_id : Long.UZERO
+      poolId: isSet(object.pool_id) ? object.pool_id : undefined
     };
   },
 
@@ -333,8 +333,8 @@ export const MsgStableSwapAdjustScalingFactors = {
 
   fromSDK(object: MsgStableSwapAdjustScalingFactorsSDKType): MsgStableSwapAdjustScalingFactors {
     return {
-      sender: isSet(object.sender) ? object.sender : "",
-      poolId: isSet(object.pool_id) ? object.pool_id : Long.UZERO,
+      sender: isSet(object.sender) ? object.sender : undefined,
+      poolId: isSet(object.pool_id) ? object.pool_id : undefined,
       scalingFactors: Array.isArray(object?.scaling_factors) ? object.scaling_factors.map((e: any) => e) : []
     };
   },

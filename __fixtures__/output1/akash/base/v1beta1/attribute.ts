@@ -129,8 +129,8 @@ export const Attribute = {
 
   fromSDK(object: AttributeSDKType): Attribute {
     return {
-      key: isSet(object.key) ? object.key : "",
-      value: isSet(object.value) ? object.value : ""
+      key: isSet(object.key) ? object.key : undefined,
+      value: isSet(object.value) ? object.value : undefined
     };
   },
 

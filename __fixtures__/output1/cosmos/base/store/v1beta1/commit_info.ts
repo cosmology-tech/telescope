@@ -131,7 +131,7 @@ export const CommitInfo = {
 
   fromSDK(object: CommitInfoSDKType): CommitInfo {
     return {
-      version: isSet(object.version) ? object.version : Long.ZERO,
+      version: isSet(object.version) ? object.version : undefined,
       storeInfos: Array.isArray(object?.store_infos) ? object.store_infos.map((e: any) => StoreInfo.fromSDK(e)) : []
     };
   },
@@ -220,7 +220,7 @@ export const StoreInfo = {
 
   fromSDK(object: StoreInfoSDKType): StoreInfo {
     return {
-      name: isSet(object.name) ? object.name : "",
+      name: isSet(object.name) ? object.name : undefined,
       commitId: isSet(object.commit_id) ? CommitID.fromSDK(object.commit_id) : undefined
     };
   },
@@ -303,8 +303,8 @@ export const CommitID = {
 
   fromSDK(object: CommitIDSDKType): CommitID {
     return {
-      version: isSet(object.version) ? object.version : Long.ZERO,
-      hash: isSet(object.hash) ? object.hash : new Uint8Array()
+      version: isSet(object.version) ? object.version : undefined,
+      hash: isSet(object.hash) ? object.hash : undefined
     };
   },
 

@@ -289,9 +289,9 @@ export const MsgCreateValidator = {
     return {
       description: isSet(object.description) ? Description.fromSDK(object.description) : undefined,
       commission: isSet(object.commission) ? CommissionRates.fromSDK(object.commission) : undefined,
-      minSelfDelegation: isSet(object.min_self_delegation) ? object.min_self_delegation : "",
-      delegatorAddress: isSet(object.delegator_address) ? object.delegator_address : "",
-      validatorAddress: isSet(object.validator_address) ? object.validator_address : "",
+      minSelfDelegation: isSet(object.min_self_delegation) ? object.min_self_delegation : undefined,
+      delegatorAddress: isSet(object.delegator_address) ? object.delegator_address : undefined,
+      validatorAddress: isSet(object.validator_address) ? object.validator_address : undefined,
       pubkey: isSet(object.pubkey) ? Any.fromSDK(object.pubkey) : undefined,
       value: isSet(object.value) ? Coin.fromSDK(object.value) : undefined
     };
@@ -457,9 +457,9 @@ export const MsgEditValidator = {
   fromSDK(object: MsgEditValidatorSDKType): MsgEditValidator {
     return {
       description: isSet(object.description) ? Description.fromSDK(object.description) : undefined,
-      validatorAddress: isSet(object.validator_address) ? object.validator_address : "",
-      commissionRate: isSet(object.commission_rate) ? object.commission_rate : "",
-      minSelfDelegation: isSet(object.min_self_delegation) ? object.min_self_delegation : ""
+      validatorAddress: isSet(object.validator_address) ? object.validator_address : undefined,
+      commissionRate: isSet(object.commission_rate) ? object.commission_rate : undefined,
+      minSelfDelegation: isSet(object.min_self_delegation) ? object.min_self_delegation : undefined
     };
   },
 
@@ -607,8 +607,8 @@ export const MsgDelegate = {
 
   fromSDK(object: MsgDelegateSDKType): MsgDelegate {
     return {
-      delegatorAddress: isSet(object.delegator_address) ? object.delegator_address : "",
-      validatorAddress: isSet(object.validator_address) ? object.validator_address : "",
+      delegatorAddress: isSet(object.delegator_address) ? object.delegator_address : undefined,
+      validatorAddress: isSet(object.validator_address) ? object.validator_address : undefined,
       amount: isSet(object.amount) ? Coin.fromSDK(object.amount) : undefined
     };
   },
@@ -768,9 +768,9 @@ export const MsgBeginRedelegate = {
 
   fromSDK(object: MsgBeginRedelegateSDKType): MsgBeginRedelegate {
     return {
-      delegatorAddress: isSet(object.delegator_address) ? object.delegator_address : "",
-      validatorSrcAddress: isSet(object.validator_src_address) ? object.validator_src_address : "",
-      validatorDstAddress: isSet(object.validator_dst_address) ? object.validator_dst_address : "",
+      delegatorAddress: isSet(object.delegator_address) ? object.delegator_address : undefined,
+      validatorSrcAddress: isSet(object.validator_src_address) ? object.validator_src_address : undefined,
+      validatorDstAddress: isSet(object.validator_dst_address) ? object.validator_dst_address : undefined,
       amount: isSet(object.amount) ? Coin.fromSDK(object.amount) : undefined
     };
   },
@@ -936,8 +936,8 @@ export const MsgUndelegate = {
 
   fromSDK(object: MsgUndelegateSDKType): MsgUndelegate {
     return {
-      delegatorAddress: isSet(object.delegator_address) ? object.delegator_address : "",
-      validatorAddress: isSet(object.validator_address) ? object.validator_address : "",
+      delegatorAddress: isSet(object.delegator_address) ? object.delegator_address : undefined,
+      validatorAddress: isSet(object.validator_address) ? object.validator_address : undefined,
       amount: isSet(object.amount) ? Coin.fromSDK(object.amount) : undefined
     };
   },

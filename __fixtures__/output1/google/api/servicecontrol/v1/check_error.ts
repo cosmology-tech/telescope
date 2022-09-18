@@ -404,8 +404,8 @@ export const CheckError = {
   fromSDK(object: CheckErrorSDKType): CheckError {
     return {
       code: isSet(object.code) ? checkError_CodeFromJSON(object.code) : 0,
-      subject: isSet(object.subject) ? object.subject : "",
-      detail: isSet(object.detail) ? object.detail : "",
+      subject: isSet(object.subject) ? object.subject : undefined,
+      detail: isSet(object.detail) ? object.detail : undefined,
       status: isSet(object.status) ? Status.fromSDK(object.status) : undefined
     };
   },

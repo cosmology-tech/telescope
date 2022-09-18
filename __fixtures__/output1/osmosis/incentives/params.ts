@@ -71,7 +71,7 @@ export const Params = {
 
   fromSDK(object: ParamsSDKType): Params {
     return {
-      distrEpochIdentifier: isSet(object.distr_epoch_identifier) ? object.distr_epoch_identifier : ""
+      distrEpochIdentifier: isSet(object.distr_epoch_identifier) ? object.distr_epoch_identifier : undefined
     };
   },
 

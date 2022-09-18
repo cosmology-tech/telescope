@@ -163,8 +163,8 @@ export const MsgConvertCoin = {
   fromSDK(object: MsgConvertCoinSDKType): MsgConvertCoin {
     return {
       coin: isSet(object.coin) ? Coin.fromSDK(object.coin) : undefined,
-      receiver: isSet(object.receiver) ? object.receiver : "",
-      sender: isSet(object.sender) ? object.sender : ""
+      receiver: isSet(object.receiver) ? object.receiver : undefined,
+      sender: isSet(object.sender) ? object.sender : undefined
     };
   },
 
@@ -323,10 +323,10 @@ export const MsgConvertERC20 = {
 
   fromSDK(object: MsgConvertERC20SDKType): MsgConvertERC20 {
     return {
-      contractAddress: isSet(object.contract_address) ? object.contract_address : "",
-      amount: isSet(object.amount) ? object.amount : "",
-      receiver: isSet(object.receiver) ? object.receiver : "",
-      sender: isSet(object.sender) ? object.sender : ""
+      contractAddress: isSet(object.contract_address) ? object.contract_address : undefined,
+      amount: isSet(object.amount) ? object.amount : undefined,
+      receiver: isSet(object.receiver) ? object.receiver : undefined,
+      sender: isSet(object.sender) ? object.sender : undefined
     };
   },
 

@@ -251,13 +251,13 @@ export const GenesisState = {
   fromSDK(object: GenesisStateSDKType): GenesisState {
     return {
       params: isSet(object.params) ? Params.fromSDK(object.params) : undefined,
-      lastTotalPower: isSet(object.last_total_power) ? object.last_total_power : new Uint8Array(),
+      lastTotalPower: isSet(object.last_total_power) ? object.last_total_power : undefined,
       lastValidatorPowers: Array.isArray(object?.last_validator_powers) ? object.last_validator_powers.map((e: any) => LastValidatorPower.fromSDK(e)) : [],
       validators: Array.isArray(object?.validators) ? object.validators.map((e: any) => Validator.fromSDK(e)) : [],
       delegations: Array.isArray(object?.delegations) ? object.delegations.map((e: any) => Delegation.fromSDK(e)) : [],
       unbondingDelegations: Array.isArray(object?.unbonding_delegations) ? object.unbonding_delegations.map((e: any) => UnbondingDelegation.fromSDK(e)) : [],
       redelegations: Array.isArray(object?.redelegations) ? object.redelegations.map((e: any) => Redelegation.fromSDK(e)) : [],
-      exported: isSet(object.exported) ? object.exported : false
+      exported: isSet(object.exported) ? object.exported : undefined
     };
   },
 
@@ -371,8 +371,8 @@ export const LastValidatorPower = {
 
   fromSDK(object: LastValidatorPowerSDKType): LastValidatorPower {
     return {
-      address: isSet(object.address) ? object.address : "",
-      power: isSet(object.power) ? object.power : Long.ZERO
+      address: isSet(object.address) ? object.address : undefined,
+      power: isSet(object.power) ? object.power : undefined
     };
   },
 

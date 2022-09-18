@@ -247,11 +247,11 @@ export const PageRequest = {
 
   fromSDK(object: PageRequestSDKType): PageRequest {
     return {
-      key: isSet(object.key) ? object.key : new Uint8Array(),
-      offset: isSet(object.offset) ? object.offset : Long.UZERO,
-      limit: isSet(object.limit) ? object.limit : Long.UZERO,
-      countTotal: isSet(object.count_total) ? object.count_total : false,
-      reverse: isSet(object.reverse) ? object.reverse : false
+      key: isSet(object.key) ? object.key : undefined,
+      offset: isSet(object.offset) ? object.offset : undefined,
+      limit: isSet(object.limit) ? object.limit : undefined,
+      countTotal: isSet(object.count_total) ? object.count_total : undefined,
+      reverse: isSet(object.reverse) ? object.reverse : undefined
     };
   },
 
@@ -336,8 +336,8 @@ export const PageResponse = {
 
   fromSDK(object: PageResponseSDKType): PageResponse {
     return {
-      nextKey: isSet(object.next_key) ? object.next_key : new Uint8Array(),
-      total: isSet(object.total) ? object.total : Long.UZERO
+      nextKey: isSet(object.next_key) ? object.next_key : undefined,
+      total: isSet(object.total) ? object.total : undefined
     };
   },
 

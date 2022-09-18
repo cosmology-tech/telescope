@@ -85,7 +85,7 @@ export const Params = {
   fromSDK(object: ParamsSDKType): Params {
     return {
       bidMinDeposit: isSet(object.bid_min_deposit) ? Coin.fromSDK(object.bid_min_deposit) : undefined,
-      orderMaxBids: isSet(object.order_max_bids) ? object.order_max_bids : 0
+      orderMaxBids: isSet(object.order_max_bids) ? object.order_max_bids : undefined
     };
   },
 

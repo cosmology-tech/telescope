@@ -119,9 +119,9 @@ export const Params = {
 
   fromSDK(object: ParamsSDKType): Params {
     return {
-      inflationDecayFactor: isSet(object.inflation_decay_factor) ? object.inflation_decay_factor : "",
-      initialInflation: isSet(object.initial_inflation) ? object.initial_inflation : "",
-      variance: isSet(object.variance) ? object.variance : ""
+      inflationDecayFactor: isSet(object.inflation_decay_factor) ? object.inflation_decay_factor : undefined,
+      initialInflation: isSet(object.initial_inflation) ? object.initial_inflation : undefined,
+      variance: isSet(object.variance) ? object.variance : undefined
     };
   },
 

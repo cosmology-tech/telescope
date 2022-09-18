@@ -320,7 +320,7 @@ export const Logging_LoggingDestination = {
 
   fromSDK(object: Logging_LoggingDestinationSDKType): Logging_LoggingDestination {
     return {
-      monitoredResource: isSet(object.monitored_resource) ? object.monitored_resource : "",
+      monitoredResource: isSet(object.monitored_resource) ? object.monitored_resource : undefined,
       logs: Array.isArray(object?.logs) ? object.logs.map((e: any) => e) : []
     };
   },

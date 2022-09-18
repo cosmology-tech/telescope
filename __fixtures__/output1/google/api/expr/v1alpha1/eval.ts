@@ -380,8 +380,8 @@ export const EvalState_Result = {
 
   fromSDK(object: EvalState_ResultSDKType): EvalState_Result {
     return {
-      expr: isSet(object.expr) ? object.expr : Long.ZERO,
-      value: isSet(object.value) ? object.value : Long.ZERO
+      expr: isSet(object.expr) ? object.expr : undefined,
+      value: isSet(object.value) ? object.value : undefined
     };
   },
 

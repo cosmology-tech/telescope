@@ -211,7 +211,7 @@ export const SuperfluidAsset = {
 
   fromSDK(object: SuperfluidAssetSDKType): SuperfluidAsset {
     return {
-      denom: isSet(object.denom) ? object.denom : "",
+      denom: isSet(object.denom) ? object.denom : undefined,
       assetType: isSet(object.asset_type) ? superfluidAssetTypeFromJSON(object.asset_type) : 0
     };
   },
@@ -306,9 +306,9 @@ export const SuperfluidIntermediaryAccount = {
 
   fromSDK(object: SuperfluidIntermediaryAccountSDKType): SuperfluidIntermediaryAccount {
     return {
-      denom: isSet(object.denom) ? object.denom : "",
-      valAddr: isSet(object.val_addr) ? object.val_addr : "",
-      gaugeId: isSet(object.gauge_id) ? object.gauge_id : Long.UZERO
+      denom: isSet(object.denom) ? object.denom : undefined,
+      valAddr: isSet(object.val_addr) ? object.val_addr : undefined,
+      gaugeId: isSet(object.gauge_id) ? object.gauge_id : undefined
     };
   },
 
@@ -403,9 +403,9 @@ export const OsmoEquivalentMultiplierRecord = {
 
   fromSDK(object: OsmoEquivalentMultiplierRecordSDKType): OsmoEquivalentMultiplierRecord {
     return {
-      epochNumber: isSet(object.epoch_number) ? object.epoch_number : Long.ZERO,
-      denom: isSet(object.denom) ? object.denom : "",
-      multiplier: isSet(object.multiplier) ? object.multiplier : ""
+      epochNumber: isSet(object.epoch_number) ? object.epoch_number : undefined,
+      denom: isSet(object.denom) ? object.denom : undefined,
+      multiplier: isSet(object.multiplier) ? object.multiplier : undefined
     };
   },
 
@@ -512,8 +512,8 @@ export const SuperfluidDelegationRecord = {
 
   fromSDK(object: SuperfluidDelegationRecordSDKType): SuperfluidDelegationRecord {
     return {
-      delegatorAddress: isSet(object.delegator_address) ? object.delegator_address : "",
-      validatorAddress: isSet(object.validator_address) ? object.validator_address : "",
+      delegatorAddress: isSet(object.delegator_address) ? object.delegator_address : undefined,
+      validatorAddress: isSet(object.validator_address) ? object.validator_address : undefined,
       delegationAmount: isSet(object.delegation_amount) ? Coin.fromSDK(object.delegation_amount) : undefined,
       equivalentStakedAmount: isSet(object.equivalent_staked_amount) ? Coin.fromSDK(object.equivalent_staked_amount) : undefined
     };
@@ -599,8 +599,8 @@ export const LockIdIntermediaryAccountConnection = {
 
   fromSDK(object: LockIdIntermediaryAccountConnectionSDKType): LockIdIntermediaryAccountConnection {
     return {
-      lockId: isSet(object.lock_id) ? object.lock_id : Long.UZERO,
-      intermediaryAccount: isSet(object.intermediary_account) ? object.intermediary_account : ""
+      lockId: isSet(object.lock_id) ? object.lock_id : undefined,
+      intermediaryAccount: isSet(object.intermediary_account) ? object.intermediary_account : undefined
     };
   },
 

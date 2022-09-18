@@ -76,7 +76,7 @@ exports[`cosmos/tx/signing/v1beta1/signing SignatureDescriptor 1`] = `
     return {
       publicKey: isSet(object.public_key) ? Any.fromSDK(object.public_key) : undefined,
       data: isSet(object.data) ? SignatureDescriptor_Data.fromSDK(object.data) : undefined,
-      sequence: isSet(object.sequence) ? object.sequence : Long.UZERO
+      sequence: isSet(object.sequence) ? object.sequence : undefined
     };
   },
 
@@ -253,10 +253,10 @@ exports[`cosmos/tx/v1beta1/tx AuxSignerData 1`] = `
 
   fromSDK(object: AuxSignerDataSDKType): AuxSignerData {
     return {
-      address: isSet(object.address) ? object.address : \\"\\",
+      address: isSet(object.address) ? object.address : undefined,
       signDoc: isSet(object.sign_doc) ? SignDocDirectAux.fromSDK(object.sign_doc) : undefined,
       mode: isSet(object.mode) ? signModeFromJSON(object.mode) : 0,
-      sig: isSet(object.sig) ? object.sig : new Uint8Array()
+      sig: isSet(object.sig) ? object.sig : undefined
     };
   },
 
@@ -442,8 +442,8 @@ exports[`cosmwasm/wasm/v1/proposal 1`] = `
 
   fromSDK(object: PinCodesProposalSDKType): PinCodesProposal {
     return {
-      title: isSet(object.title) ? object.title : \\"\\",
-      description: isSet(object.description) ? object.description : \\"\\",
+      title: isSet(object.title) ? object.title : undefined,
+      description: isSet(object.description) ? object.description : undefined,
       codeIds: Array.isArray(object?.code_ids) ? object.code_ids.map((e: any) => e) : []
     };
   },
@@ -557,8 +557,8 @@ exports[`cosmwasm/wasm/v1/proposal 2`] = `
 
   fromSDK(object: UnpinCodesProposalSDKType): UnpinCodesProposal {
     return {
-      title: isSet(object.title) ? object.title : \\"\\",
-      description: isSet(object.description) ? object.description : \\"\\",
+      title: isSet(object.title) ? object.title : undefined,
+      description: isSet(object.description) ? object.description : undefined,
       codeIds: Array.isArray(object?.code_ids) ? object.code_ids.map((e: any) => e) : []
     };
   },
@@ -643,8 +643,8 @@ exports[`cosmwasm/wasm/v1/query 1`] = `
 
   fromSDK(object: QueryRawContractStateRequestSDKType): QueryRawContractStateRequest {
     return {
-      address: isSet(object.address) ? object.address : \\"\\",
-      queryData: isSet(object.query_data) ? object.query_data : new Uint8Array()
+      address: isSet(object.address) ? object.address : undefined,
+      queryData: isSet(object.query_data) ? object.query_data : undefined
     };
   },
 
@@ -761,9 +761,9 @@ exports[`evmos/fees/v1/tx 1`] = `
 
   fromSDK(object: MsgRegisterDevFeeInfoSDKType): MsgRegisterDevFeeInfo {
     return {
-      contractAddress: isSet(object.contract_address) ? object.contract_address : \\"\\",
-      deployerAddress: isSet(object.deployer_address) ? object.deployer_address : \\"\\",
-      withdrawAddress: isSet(object.withdraw_address) ? object.withdraw_address : \\"\\",
+      contractAddress: isSet(object.contract_address) ? object.contract_address : undefined,
+      deployerAddress: isSet(object.deployer_address) ? object.deployer_address : undefined,
+      withdrawAddress: isSet(object.withdraw_address) ? object.withdraw_address : undefined,
       nonces: Array.isArray(object?.nonces) ? object.nonces.map((e: any) => e) : []
     };
   },
@@ -871,10 +871,10 @@ exports[`google/api/expr/conformance/v1alpha1/conformance_service ParseRequest 1
 
   fromSDK(object: ParseRequestSDKType): ParseRequest {
     return {
-      celSource: isSet(object.cel_source) ? object.cel_source : \\"\\",
-      syntaxVersion: isSet(object.syntax_version) ? object.syntax_version : \\"\\",
-      sourceLocation: isSet(object.source_location) ? object.source_location : \\"\\",
-      disableMacros: isSet(object.disable_macros) ? object.disable_macros : false
+      celSource: isSet(object.cel_source) ? object.cel_source : undefined,
+      syntaxVersion: isSet(object.syntax_version) ? object.syntax_version : undefined,
+      sourceLocation: isSet(object.source_location) ? object.source_location : undefined,
+      disableMacros: isSet(object.disable_macros) ? object.disable_macros : undefined
     };
   },
 
@@ -1008,12 +1008,12 @@ exports[`google/api/expr/v1alpha1/checked Decl_FunctionDecl_Overload MapType 1`]
 
   fromSDK(object: Decl_FunctionDecl_OverloadSDKType): Decl_FunctionDecl_Overload {
     return {
-      overloadId: isSet(object.overload_id) ? object.overload_id : \\"\\",
+      overloadId: isSet(object.overload_id) ? object.overload_id : undefined,
       params: Array.isArray(object?.params) ? object.params.map((e: any) => Type.fromSDK(e)) : [],
       typeParams: Array.isArray(object?.type_params) ? object.type_params.map((e: any) => e) : [],
       resultType: isSet(object.result_type) ? Type.fromSDK(object.result_type) : undefined,
-      isInstanceFunction: isSet(object.is_instance_function) ? object.is_instance_function : false,
-      doc: isSet(object.doc) ? object.doc : \\"\\"
+      isInstanceFunction: isSet(object.is_instance_function) ? object.is_instance_function : undefined,
+      doc: isSet(object.doc) ? object.doc : undefined
     };
   },
 
@@ -1505,7 +1505,7 @@ exports[`google/api/expr/v1alpha1/checked typeHash (Long) CheckedExpr 1`] = `
         return acc;
       }, {}) : {},
       sourceInfo: isSet(object.source_info) ? SourceInfo.fromSDK(object.source_info) : undefined,
-      exprVersion: isSet(object.expr_version) ? object.expr_version : \\"\\",
+      exprVersion: isSet(object.expr_version) ? object.expr_version : undefined,
       expr: isSet(object.expr) ? Expr.fromSDK(object.expr) : undefined
     };
   },
@@ -1984,7 +1984,7 @@ exports[`google/api/expr/v1beta1/source 1`] = `
 
   fromSDK(object: SourceInfoSDKType): SourceInfo {
     return {
-      location: isSet(object.location) ? object.location : \\"\\",
+      location: isSet(object.location) ? object.location : undefined,
       lineOffsets: Array.isArray(object?.line_offsets) ? object.line_offsets.map((e: any) => e) : [],
       positions: isObject(object.positions) ? Object.entries(object.positions).reduce<{
         [key: number]: number;
@@ -2109,7 +2109,7 @@ exports[`google/api/quota keyType 1`] = `
 
   fromSDK(object: MetricRuleSDKType): MetricRule {
     return {
-      selector: isSet(object.selector) ? object.selector : \\"\\",
+      selector: isSet(object.selector) ? object.selector : undefined,
       metricCosts: isObject(object.metric_costs) ? Object.entries(object.metric_costs).reduce<{
         [key: string]: Long;
       }>((acc, [key, value]) => {
@@ -2339,12 +2339,12 @@ exports[`google/api/servicecontrol/v1/log_entry LogEntry 1`] = `
 
   fromSDK(object: LogEntrySDKType): LogEntry {
     return {
-      name: isSet(object.name) ? object.name : \\"\\",
+      name: isSet(object.name) ? object.name : undefined,
       timestamp: isSet(object.timestamp) ? Timestamp.fromSDK(object.timestamp) : undefined,
       severity: isSet(object.severity) ? logSeverityFromJSON(object.severity) : 0,
       httpRequest: isSet(object.http_request) ? HttpRequest.fromSDK(object.http_request) : undefined,
-      trace: isSet(object.trace) ? object.trace : \\"\\",
-      insertId: isSet(object.insert_id) ? object.insert_id : \\"\\",
+      trace: isSet(object.trace) ? object.trace : undefined,
+      insertId: isSet(object.insert_id) ? object.insert_id : undefined,
       labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
         [key: string]: string;
       }>((acc, [key, value]) => {
@@ -2573,11 +2573,11 @@ exports[`ibc/core/port/v1/query 1`] = `
 
   fromSDK(object: QueryAppVersionRequestSDKType): QueryAppVersionRequest {
     return {
-      portId: isSet(object.port_id) ? object.port_id : \\"\\",
-      connectionId: isSet(object.connection_id) ? object.connection_id : \\"\\",
+      portId: isSet(object.port_id) ? object.port_id : undefined,
+      connectionId: isSet(object.connection_id) ? object.connection_id : undefined,
       ordering: isSet(object.ordering) ? orderFromJSON(object.ordering) : 0,
       counterparty: isSet(object.counterparty) ? Counterparty.fromSDK(object.counterparty) : undefined,
-      proposedVersion: isSet(object.proposed_version) ? object.proposed_version : \\"\\"
+      proposedVersion: isSet(object.proposed_version) ? object.proposed_version : undefined
     };
   },
 
@@ -2982,9 +2982,9 @@ exports[`osmosis/gamm/v1beta1/tx MsgJoinPool 1`] = `
 
   fromSDK(object: MsgJoinPoolSDKType): MsgJoinPool {
     return {
-      sender: isSet(object.sender) ? object.sender : \\"\\",
-      poolId: isSet(object.poolId) ? object.poolId : Long.UZERO,
-      shareOutAmount: isSet(object.shareOutAmount) ? object.shareOutAmount : \\"\\",
+      sender: isSet(object.sender) ? object.sender : undefined,
+      poolId: isSet(object.poolId) ? object.poolId : undefined,
+      shareOutAmount: isSet(object.shareOutAmount) ? object.shareOutAmount : undefined,
       tokenInMaxs: Array.isArray(object?.tokenInMaxs) ? object.tokenInMaxs.map((e: any) => Coin.fromSDK(e)) : []
     };
   },
@@ -3098,10 +3098,10 @@ exports[`osmosis/gamm/v1beta1/tx MsgSwapExactAmountIn 1`] = `
 
   fromSDK(object: MsgSwapExactAmountInSDKType): MsgSwapExactAmountIn {
     return {
-      sender: isSet(object.sender) ? object.sender : \\"\\",
+      sender: isSet(object.sender) ? object.sender : undefined,
       routes: Array.isArray(object?.routes) ? object.routes.map((e: any) => SwapAmountInRoute.fromSDK(e)) : [],
       tokenIn: isSet(object.tokenIn) ? Coin.fromSDK(object.tokenIn) : undefined,
-      tokenOutMinAmount: isSet(object.tokenOutMinAmount) ? object.tokenOutMinAmount : \\"\\"
+      tokenOutMinAmount: isSet(object.tokenOutMinAmount) ? object.tokenOutMinAmount : undefined
     };
   },
 
@@ -3214,9 +3214,9 @@ exports[`osmosis/gamm/v1beta1/tx MsgSwapExactAmountOut 1`] = `
 
   fromSDK(object: MsgSwapExactAmountOutSDKType): MsgSwapExactAmountOut {
     return {
-      sender: isSet(object.sender) ? object.sender : \\"\\",
+      sender: isSet(object.sender) ? object.sender : undefined,
       routes: Array.isArray(object?.routes) ? object.routes.map((e: any) => SwapAmountOutRoute.fromSDK(e)) : [],
-      tokenInMaxAmount: isSet(object.tokenInMaxAmount) ? object.tokenInMaxAmount : \\"\\",
+      tokenInMaxAmount: isSet(object.tokenInMaxAmount) ? object.tokenInMaxAmount : undefined,
       tokenOut: isSet(object.tokenOut) ? Coin.fromSDK(object.tokenOut) : undefined
     };
   },

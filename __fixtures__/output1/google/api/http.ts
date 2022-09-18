@@ -810,7 +810,7 @@ export const Http = {
   fromSDK(object: HttpSDKType): Http {
     return {
       rules: Array.isArray(object?.rules) ? object.rules.map((e: any) => HttpRule.fromSDK(e)) : [],
-      fullyDecodeReservedExpansion: isSet(object.fully_decode_reserved_expansion) ? object.fully_decode_reserved_expansion : false
+      fullyDecodeReservedExpansion: isSet(object.fully_decode_reserved_expansion) ? object.fully_decode_reserved_expansion : undefined
     };
   },
 
@@ -1000,15 +1000,15 @@ export const HttpRule = {
 
   fromSDK(object: HttpRuleSDKType): HttpRule {
     return {
-      selector: isSet(object.selector) ? object.selector : "",
+      selector: isSet(object.selector) ? object.selector : undefined,
       get: isSet(object.get) ? object.get : undefined,
       put: isSet(object.put) ? object.put : undefined,
       post: isSet(object.post) ? object.post : undefined,
       delete: isSet(object.delete) ? object.delete : undefined,
       patch: isSet(object.patch) ? object.patch : undefined,
       custom: isSet(object.custom) ? CustomHttpPattern.fromSDK(object.custom) : undefined,
-      body: isSet(object.body) ? object.body : "",
-      responseBody: isSet(object.response_body) ? object.response_body : "",
+      body: isSet(object.body) ? object.body : undefined,
+      responseBody: isSet(object.response_body) ? object.response_body : undefined,
       additionalBindings: Array.isArray(object?.additional_bindings) ? object.additional_bindings.map((e: any) => HttpRule.fromSDK(e)) : []
     };
   },
@@ -1105,8 +1105,8 @@ export const CustomHttpPattern = {
 
   fromSDK(object: CustomHttpPatternSDKType): CustomHttpPattern {
     return {
-      kind: isSet(object.kind) ? object.kind : "",
-      path: isSet(object.path) ? object.path : ""
+      kind: isSet(object.kind) ? object.kind : undefined,
+      path: isSet(object.path) ? object.path : undefined
     };
   },
 

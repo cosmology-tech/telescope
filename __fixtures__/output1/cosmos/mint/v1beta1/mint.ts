@@ -131,8 +131,8 @@ export const Minter = {
 
   fromSDK(object: MinterSDKType): Minter {
     return {
-      inflation: isSet(object.inflation) ? object.inflation : "",
-      annualProvisions: isSet(object.annual_provisions) ? object.annual_provisions : ""
+      inflation: isSet(object.inflation) ? object.inflation : undefined,
+      annualProvisions: isSet(object.annual_provisions) ? object.annual_provisions : undefined
     };
   },
 
@@ -262,12 +262,12 @@ export const Params = {
 
   fromSDK(object: ParamsSDKType): Params {
     return {
-      mintDenom: isSet(object.mint_denom) ? object.mint_denom : "",
-      inflationRateChange: isSet(object.inflation_rate_change) ? object.inflation_rate_change : "",
-      inflationMax: isSet(object.inflation_max) ? object.inflation_max : "",
-      inflationMin: isSet(object.inflation_min) ? object.inflation_min : "",
-      goalBonded: isSet(object.goal_bonded) ? object.goal_bonded : "",
-      blocksPerYear: isSet(object.blocks_per_year) ? object.blocks_per_year : Long.UZERO
+      mintDenom: isSet(object.mint_denom) ? object.mint_denom : undefined,
+      inflationRateChange: isSet(object.inflation_rate_change) ? object.inflation_rate_change : undefined,
+      inflationMax: isSet(object.inflation_max) ? object.inflation_max : undefined,
+      inflationMin: isSet(object.inflation_min) ? object.inflation_min : undefined,
+      goalBonded: isSet(object.goal_bonded) ? object.goal_bonded : undefined,
+      blocksPerYear: isSet(object.blocks_per_year) ? object.blocks_per_year : undefined
     };
   },
 

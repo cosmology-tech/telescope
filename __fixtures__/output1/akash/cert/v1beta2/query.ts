@@ -110,7 +110,7 @@ export const CertificateResponse = {
   fromSDK(object: CertificateResponseSDKType): CertificateResponse {
     return {
       certificate: isSet(object.certificate) ? Certificate.fromSDK(object.certificate) : undefined,
-      serial: isSet(object.serial) ? object.serial : ""
+      serial: isSet(object.serial) ? object.serial : undefined
     };
   },
 

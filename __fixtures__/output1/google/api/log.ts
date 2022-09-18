@@ -180,10 +180,10 @@ export const LogDescriptor = {
 
   fromSDK(object: LogDescriptorSDKType): LogDescriptor {
     return {
-      name: isSet(object.name) ? object.name : "",
+      name: isSet(object.name) ? object.name : undefined,
       labels: Array.isArray(object?.labels) ? object.labels.map((e: any) => LabelDescriptor.fromSDK(e)) : [],
-      description: isSet(object.description) ? object.description : "",
-      displayName: isSet(object.display_name) ? object.display_name : ""
+      description: isSet(object.description) ? object.description : undefined,
+      displayName: isSet(object.display_name) ? object.display_name : undefined
     };
   },
 

@@ -305,7 +305,7 @@ export const QueryInflationResponse = {
 
   fromSDK(object: QueryInflationResponseSDKType): QueryInflationResponse {
     return {
-      inflation: isSet(object.inflation) ? object.inflation : new Uint8Array()
+      inflation: isSet(object.inflation) ? object.inflation : undefined
     };
   },
 
@@ -426,7 +426,7 @@ export const QueryAnnualProvisionsResponse = {
 
   fromSDK(object: QueryAnnualProvisionsResponseSDKType): QueryAnnualProvisionsResponse {
     return {
-      annualProvisions: isSet(object.annual_provisions) ? object.annual_provisions : new Uint8Array()
+      annualProvisions: isSet(object.annual_provisions) ? object.annual_provisions : undefined
     };
   },
 

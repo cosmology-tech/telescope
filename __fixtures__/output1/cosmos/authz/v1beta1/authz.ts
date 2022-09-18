@@ -143,7 +143,7 @@ export const GenericAuthorization = {
 
   fromSDK(object: GenericAuthorizationSDKType): GenericAuthorization {
     return {
-      msg: isSet(object.msg) ? object.msg : ""
+      msg: isSet(object.msg) ? object.msg : undefined
     };
   },
 
@@ -331,8 +331,8 @@ export const GrantAuthorization = {
 
   fromSDK(object: GrantAuthorizationSDKType): GrantAuthorization {
     return {
-      granter: isSet(object.granter) ? object.granter : "",
-      grantee: isSet(object.grantee) ? object.grantee : "",
+      granter: isSet(object.granter) ? object.granter : undefined,
+      grantee: isSet(object.grantee) ? object.grantee : undefined,
       authorization: isSet(object.authorization) ? Any.fromSDK(object.authorization) : undefined,
       expiration: isSet(object.expiration) ? Timestamp.fromSDK(object.expiration) : undefined
     };

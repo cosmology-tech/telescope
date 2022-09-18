@@ -402,11 +402,11 @@ export const ConnectionEnd = {
 
   fromSDK(object: ConnectionEndSDKType): ConnectionEnd {
     return {
-      clientId: isSet(object.client_id) ? object.client_id : "",
+      clientId: isSet(object.client_id) ? object.client_id : undefined,
       versions: Array.isArray(object?.versions) ? object.versions.map((e: any) => Version.fromSDK(e)) : [],
       state: isSet(object.state) ? stateFromJSON(object.state) : 0,
       counterparty: isSet(object.counterparty) ? Counterparty.fromSDK(object.counterparty) : undefined,
-      delayPeriod: isSet(object.delay_period) ? object.delay_period : Long.UZERO
+      delayPeriod: isSet(object.delay_period) ? object.delay_period : undefined
     };
   },
 
@@ -551,12 +551,12 @@ export const IdentifiedConnection = {
 
   fromSDK(object: IdentifiedConnectionSDKType): IdentifiedConnection {
     return {
-      id: isSet(object.id) ? object.id : "",
-      clientId: isSet(object.client_id) ? object.client_id : "",
+      id: isSet(object.id) ? object.id : undefined,
+      clientId: isSet(object.client_id) ? object.client_id : undefined,
       versions: Array.isArray(object?.versions) ? object.versions.map((e: any) => Version.fromSDK(e)) : [],
       state: isSet(object.state) ? stateFromJSON(object.state) : 0,
       counterparty: isSet(object.counterparty) ? Counterparty.fromSDK(object.counterparty) : undefined,
-      delayPeriod: isSet(object.delay_period) ? object.delay_period : Long.UZERO
+      delayPeriod: isSet(object.delay_period) ? object.delay_period : undefined
     };
   },
 
@@ -660,8 +660,8 @@ export const Counterparty = {
 
   fromSDK(object: CounterpartySDKType): Counterparty {
     return {
-      clientId: isSet(object.client_id) ? object.client_id : "",
-      connectionId: isSet(object.connection_id) ? object.connection_id : "",
+      clientId: isSet(object.client_id) ? object.client_id : undefined,
+      connectionId: isSet(object.connection_id) ? object.connection_id : undefined,
       prefix: isSet(object.prefix) ? MerklePrefix.fromSDK(object.prefix) : undefined
     };
   },
@@ -832,7 +832,7 @@ export const ConnectionPaths = {
 
   fromSDK(object: ConnectionPathsSDKType): ConnectionPaths {
     return {
-      clientId: isSet(object.client_id) ? object.client_id : "",
+      clientId: isSet(object.client_id) ? object.client_id : undefined,
       paths: Array.isArray(object?.paths) ? object.paths.map((e: any) => e) : []
     };
   },
@@ -927,7 +927,7 @@ export const Version = {
 
   fromSDK(object: VersionSDKType): Version {
     return {
-      identifier: isSet(object.identifier) ? object.identifier : "",
+      identifier: isSet(object.identifier) ? object.identifier : undefined,
       features: Array.isArray(object?.features) ? object.features.map((e: any) => e) : []
     };
   },
@@ -1004,7 +1004,7 @@ export const Params = {
 
   fromSDK(object: ParamsSDKType): Params {
     return {
-      maxExpectedTimePerBlock: isSet(object.max_expected_time_per_block) ? object.max_expected_time_per_block : Long.UZERO
+      maxExpectedTimePerBlock: isSet(object.max_expected_time_per_block) ? object.max_expected_time_per_block : undefined
     };
   },
 

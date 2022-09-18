@@ -283,7 +283,7 @@ export const IdentifiedClientState = {
 
   fromSDK(object: IdentifiedClientStateSDKType): IdentifiedClientState {
     return {
-      clientId: isSet(object.client_id) ? object.client_id : "",
+      clientId: isSet(object.client_id) ? object.client_id : undefined,
       clientState: isSet(object.client_state) ? Any.fromSDK(object.client_state) : undefined
     };
   },
@@ -455,7 +455,7 @@ export const ClientConsensusStates = {
 
   fromSDK(object: ClientConsensusStatesSDKType): ClientConsensusStates {
     return {
-      clientId: isSet(object.client_id) ? object.client_id : "",
+      clientId: isSet(object.client_id) ? object.client_id : undefined,
       consensusStates: Array.isArray(object?.consensus_states) ? object.consensus_states.map((e: any) => ConsensusStateWithHeight.fromSDK(e)) : []
     };
   },
@@ -568,10 +568,10 @@ export const ClientUpdateProposal = {
 
   fromSDK(object: ClientUpdateProposalSDKType): ClientUpdateProposal {
     return {
-      title: isSet(object.title) ? object.title : "",
-      description: isSet(object.description) ? object.description : "",
-      subjectClientId: isSet(object.subject_client_id) ? object.subject_client_id : "",
-      substituteClientId: isSet(object.substitute_client_id) ? object.substitute_client_id : ""
+      title: isSet(object.title) ? object.title : undefined,
+      description: isSet(object.description) ? object.description : undefined,
+      subjectClientId: isSet(object.subject_client_id) ? object.subject_client_id : undefined,
+      substituteClientId: isSet(object.substitute_client_id) ? object.substitute_client_id : undefined
     };
   },
 
@@ -679,8 +679,8 @@ export const UpgradeProposal = {
 
   fromSDK(object: UpgradeProposalSDKType): UpgradeProposal {
     return {
-      title: isSet(object.title) ? object.title : "",
-      description: isSet(object.description) ? object.description : "",
+      title: isSet(object.title) ? object.title : undefined,
+      description: isSet(object.description) ? object.description : undefined,
       plan: isSet(object.plan) ? Plan.fromSDK(object.plan) : undefined,
       upgradedClientState: isSet(object.upgraded_client_state) ? Any.fromSDK(object.upgraded_client_state) : undefined
     };
@@ -766,8 +766,8 @@ export const Height = {
 
   fromSDK(object: HeightSDKType): Height {
     return {
-      revisionNumber: isSet(object.revision_number) ? object.revision_number : Long.UZERO,
-      revisionHeight: isSet(object.revision_height) ? object.revision_height : Long.UZERO
+      revisionNumber: isSet(object.revision_number) ? object.revision_number : undefined,
+      revisionHeight: isSet(object.revision_height) ? object.revision_height : undefined
     };
   },
 

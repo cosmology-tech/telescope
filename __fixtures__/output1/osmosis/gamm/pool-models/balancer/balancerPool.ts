@@ -421,8 +421,8 @@ export const PoolParams = {
 
   fromSDK(object: PoolParamsSDKType): PoolParams {
     return {
-      swapFee: isSet(object.swapFee) ? object.swapFee : "",
-      exitFee: isSet(object.exitFee) ? object.exitFee : "",
+      swapFee: isSet(object.swapFee) ? object.swapFee : undefined,
+      exitFee: isSet(object.exitFee) ? object.exitFee : undefined,
       smoothWeightChangeParams: isSet(object.smoothWeightChangeParams) ? SmoothWeightChangeParams.fromSDK(object.smoothWeightChangeParams) : undefined
     };
   },
@@ -507,7 +507,7 @@ export const PoolAsset = {
   fromSDK(object: PoolAssetSDKType): PoolAsset {
     return {
       token: isSet(object.token) ? Coin.fromSDK(object.token) : undefined,
-      weight: isSet(object.weight) ? object.weight : ""
+      weight: isSet(object.weight) ? object.weight : undefined
     };
   },
 
@@ -655,13 +655,13 @@ export const Pool = {
 
   fromSDK(object: PoolSDKType): Pool {
     return {
-      address: isSet(object.address) ? object.address : "",
-      id: isSet(object.id) ? object.id : Long.UZERO,
+      address: isSet(object.address) ? object.address : undefined,
+      id: isSet(object.id) ? object.id : undefined,
       poolParams: isSet(object.poolParams) ? PoolParams.fromSDK(object.poolParams) : undefined,
-      futurePoolGovernor: isSet(object.future_pool_governor) ? object.future_pool_governor : "",
+      futurePoolGovernor: isSet(object.future_pool_governor) ? object.future_pool_governor : undefined,
       totalShares: isSet(object.totalShares) ? Coin.fromSDK(object.totalShares) : undefined,
       poolAssets: Array.isArray(object?.poolAssets) ? object.poolAssets.map((e: any) => PoolAsset.fromSDK(e)) : [],
-      totalWeight: isSet(object.totalWeight) ? object.totalWeight : ""
+      totalWeight: isSet(object.totalWeight) ? object.totalWeight : undefined
     };
   },
 

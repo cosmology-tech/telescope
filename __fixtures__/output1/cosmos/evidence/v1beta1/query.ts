@@ -127,7 +127,7 @@ export const QueryEvidenceRequest = {
 
   fromSDK(object: QueryEvidenceRequestSDKType): QueryEvidenceRequest {
     return {
-      evidenceHash: isSet(object.evidence_hash) ? object.evidence_hash : new Uint8Array()
+      evidenceHash: isSet(object.evidence_hash) ? object.evidence_hash : undefined
     };
   },
 

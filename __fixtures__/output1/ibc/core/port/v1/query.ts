@@ -162,11 +162,11 @@ export const QueryAppVersionRequest = {
 
   fromSDK(object: QueryAppVersionRequestSDKType): QueryAppVersionRequest {
     return {
-      portId: isSet(object.port_id) ? object.port_id : "",
-      connectionId: isSet(object.connection_id) ? object.connection_id : "",
+      portId: isSet(object.port_id) ? object.port_id : undefined,
+      connectionId: isSet(object.connection_id) ? object.connection_id : undefined,
       ordering: isSet(object.ordering) ? orderFromJSON(object.ordering) : 0,
       counterparty: isSet(object.counterparty) ? Counterparty.fromSDK(object.counterparty) : undefined,
-      proposedVersion: isSet(object.proposed_version) ? object.proposed_version : ""
+      proposedVersion: isSet(object.proposed_version) ? object.proposed_version : undefined
     };
   },
 
@@ -251,8 +251,8 @@ export const QueryAppVersionResponse = {
 
   fromSDK(object: QueryAppVersionResponseSDKType): QueryAppVersionResponse {
     return {
-      portId: isSet(object.port_id) ? object.port_id : "",
-      version: isSet(object.version) ? object.version : ""
+      portId: isSet(object.port_id) ? object.port_id : undefined,
+      version: isSet(object.version) ? object.version : undefined
     };
   },
 

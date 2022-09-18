@@ -75,7 +75,7 @@ export const MsgUnjail = {
 
   fromSDK(object: MsgUnjailSDKType): MsgUnjail {
     return {
-      validatorAddr: isSet(object.validator_addr) ? object.validator_addr : ""
+      validatorAddr: isSet(object.validator_addr) ? object.validator_addr : undefined
     };
   },
 

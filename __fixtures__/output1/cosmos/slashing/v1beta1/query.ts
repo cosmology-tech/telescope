@@ -270,7 +270,7 @@ export const QuerySigningInfoRequest = {
 
   fromSDK(object: QuerySigningInfoRequestSDKType): QuerySigningInfoRequest {
     return {
-      consAddress: isSet(object.cons_address) ? object.cons_address : ""
+      consAddress: isSet(object.cons_address) ? object.cons_address : undefined
     };
   },
 

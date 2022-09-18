@@ -245,8 +245,8 @@ export const DuplicateVoteEvidence = {
     return {
       voteA: isSet(object.vote_a) ? Vote.fromSDK(object.vote_a) : undefined,
       voteB: isSet(object.vote_b) ? Vote.fromSDK(object.vote_b) : undefined,
-      totalVotingPower: isSet(object.total_voting_power) ? object.total_voting_power : Long.ZERO,
-      validatorPower: isSet(object.validator_power) ? object.validator_power : Long.ZERO,
+      totalVotingPower: isSet(object.total_voting_power) ? object.total_voting_power : undefined,
+      validatorPower: isSet(object.validator_power) ? object.validator_power : undefined,
       timestamp: isSet(object.timestamp) ? Timestamp.fromSDK(object.timestamp) : undefined
     };
   },
@@ -375,9 +375,9 @@ export const LightClientAttackEvidence = {
   fromSDK(object: LightClientAttackEvidenceSDKType): LightClientAttackEvidence {
     return {
       conflictingBlock: isSet(object.conflicting_block) ? LightBlock.fromSDK(object.conflicting_block) : undefined,
-      commonHeight: isSet(object.common_height) ? object.common_height : Long.ZERO,
+      commonHeight: isSet(object.common_height) ? object.common_height : undefined,
       byzantineValidators: Array.isArray(object?.byzantine_validators) ? object.byzantine_validators.map((e: any) => Validator.fromSDK(e)) : [],
-      totalVotingPower: isSet(object.total_voting_power) ? object.total_voting_power : Long.ZERO,
+      totalVotingPower: isSet(object.total_voting_power) ? object.total_voting_power : undefined,
       timestamp: isSet(object.timestamp) ? Timestamp.fromSDK(object.timestamp) : undefined
     };
   },

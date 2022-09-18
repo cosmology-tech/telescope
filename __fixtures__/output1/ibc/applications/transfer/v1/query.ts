@@ -157,7 +157,7 @@ export const QueryDenomTraceRequest = {
 
   fromSDK(object: QueryDenomTraceRequestSDKType): QueryDenomTraceRequest {
     return {
-      hash: isSet(object.hash) ? object.hash : ""
+      hash: isSet(object.hash) ? object.hash : undefined
     };
   },
 

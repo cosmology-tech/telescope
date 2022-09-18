@@ -272,7 +272,7 @@ export const MsgCreateDeployment = {
     return {
       id: isSet(object.id) ? DeploymentID.fromSDK(object.id) : undefined,
       groups: Array.isArray(object?.groups) ? object.groups.map((e: any) => GroupSpec.fromSDK(e)) : [],
-      version: isSet(object.version) ? object.version : new Uint8Array(),
+      version: isSet(object.version) ? object.version : undefined,
       deposit: isSet(object.deposit) ? Coin.fromSDK(object.deposit) : undefined
     };
   },
@@ -570,7 +570,7 @@ export const MsgUpdateDeployment = {
     return {
       id: isSet(object.id) ? DeploymentID.fromSDK(object.id) : undefined,
       groups: Array.isArray(object?.groups) ? object.groups.map((e: any) => GroupSpec.fromSDK(e)) : [],
-      version: isSet(object.version) ? object.version : new Uint8Array()
+      version: isSet(object.version) ? object.version : undefined
     };
   },
 
@@ -832,8 +832,8 @@ export const DeploymentID = {
 
   fromSDK(object: DeploymentIDSDKType): DeploymentID {
     return {
-      owner: isSet(object.owner) ? object.owner : "",
-      dseq: isSet(object.dseq) ? object.dseq : Long.UZERO
+      owner: isSet(object.owner) ? object.owner : undefined,
+      dseq: isSet(object.dseq) ? object.dseq : undefined
     };
   },
 
@@ -941,8 +941,8 @@ export const Deployment = {
     return {
       deploymentId: isSet(object.deployment_id) ? DeploymentID.fromSDK(object.deployment_id) : undefined,
       state: isSet(object.state) ? deployment_StateFromJSON(object.state) : 0,
-      version: isSet(object.version) ? object.version : new Uint8Array(),
-      createdAt: isSet(object.created_at) ? object.created_at : Long.ZERO
+      version: isSet(object.version) ? object.version : undefined,
+      createdAt: isSet(object.created_at) ? object.created_at : undefined
     };
   },
 
@@ -1038,9 +1038,9 @@ export const DeploymentFilters = {
 
   fromSDK(object: DeploymentFiltersSDKType): DeploymentFilters {
     return {
-      owner: isSet(object.owner) ? object.owner : "",
-      dseq: isSet(object.dseq) ? object.dseq : Long.UZERO,
-      state: isSet(object.state) ? object.state : ""
+      owner: isSet(object.owner) ? object.owner : undefined,
+      dseq: isSet(object.dseq) ? object.dseq : undefined,
+      state: isSet(object.state) ? object.state : undefined
     };
   },
 

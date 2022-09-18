@@ -535,7 +535,7 @@ export const AccountUnlockableCoinsRequest = {
 
   fromSDK(object: AccountUnlockableCoinsRequestSDKType): AccountUnlockableCoinsRequest {
     return {
-      owner: isSet(object.owner) ? object.owner : ""
+      owner: isSet(object.owner) ? object.owner : undefined
     };
   },
 
@@ -685,7 +685,7 @@ export const AccountUnlockingCoinsRequest = {
 
   fromSDK(object: AccountUnlockingCoinsRequestSDKType): AccountUnlockingCoinsRequest {
     return {
-      owner: isSet(object.owner) ? object.owner : ""
+      owner: isSet(object.owner) ? object.owner : undefined
     };
   },
 
@@ -835,7 +835,7 @@ export const AccountLockedCoinsRequest = {
 
   fromSDK(object: AccountLockedCoinsRequestSDKType): AccountLockedCoinsRequest {
     return {
-      owner: isSet(object.owner) ? object.owner : ""
+      owner: isSet(object.owner) ? object.owner : undefined
     };
   },
 
@@ -997,7 +997,7 @@ export const AccountLockedPastTimeRequest = {
 
   fromSDK(object: AccountLockedPastTimeRequestSDKType): AccountLockedPastTimeRequest {
     return {
-      owner: isSet(object.owner) ? object.owner : "",
+      owner: isSet(object.owner) ? object.owner : undefined,
       timestamp: isSet(object.timestamp) ? Timestamp.fromSDK(object.timestamp) : undefined
     };
   },
@@ -1161,7 +1161,7 @@ export const AccountLockedPastTimeNotUnlockingOnlyRequest = {
 
   fromSDK(object: AccountLockedPastTimeNotUnlockingOnlyRequestSDKType): AccountLockedPastTimeNotUnlockingOnlyRequest {
     return {
-      owner: isSet(object.owner) ? object.owner : "",
+      owner: isSet(object.owner) ? object.owner : undefined,
       timestamp: isSet(object.timestamp) ? Timestamp.fromSDK(object.timestamp) : undefined
     };
   },
@@ -1325,7 +1325,7 @@ export const AccountUnlockedBeforeTimeRequest = {
 
   fromSDK(object: AccountUnlockedBeforeTimeRequestSDKType): AccountUnlockedBeforeTimeRequest {
     return {
-      owner: isSet(object.owner) ? object.owner : "",
+      owner: isSet(object.owner) ? object.owner : undefined,
       timestamp: isSet(object.timestamp) ? Timestamp.fromSDK(object.timestamp) : undefined
     };
   },
@@ -1501,9 +1501,9 @@ export const AccountLockedPastTimeDenomRequest = {
 
   fromSDK(object: AccountLockedPastTimeDenomRequestSDKType): AccountLockedPastTimeDenomRequest {
     return {
-      owner: isSet(object.owner) ? object.owner : "",
+      owner: isSet(object.owner) ? object.owner : undefined,
       timestamp: isSet(object.timestamp) ? Timestamp.fromSDK(object.timestamp) : undefined,
-      denom: isSet(object.denom) ? object.denom : ""
+      denom: isSet(object.denom) ? object.denom : undefined
     };
   },
 
@@ -1667,7 +1667,7 @@ export const LockedDenomRequest = {
 
   fromSDK(object: LockedDenomRequestSDKType): LockedDenomRequest {
     return {
-      denom: isSet(object.denom) ? object.denom : "",
+      denom: isSet(object.denom) ? object.denom : undefined,
       duration: isSet(object.duration) ? Duration.fromSDK(object.duration) : undefined
     };
   },
@@ -1738,7 +1738,7 @@ export const LockedDenomResponse = {
 
   fromSDK(object: LockedDenomResponseSDKType): LockedDenomResponse {
     return {
-      amount: isSet(object.amount) ? object.amount : ""
+      amount: isSet(object.amount) ? object.amount : undefined
     };
   },
 
@@ -1807,7 +1807,7 @@ export const LockedRequest = {
 
   fromSDK(object: LockedRequestSDKType): LockedRequest {
     return {
-      lockId: isSet(object.lock_id) ? object.lock_id : Long.UZERO
+      lockId: isSet(object.lock_id) ? object.lock_id : undefined
     };
   },
 
@@ -1945,7 +1945,7 @@ export const SyntheticLockupsByLockupIDRequest = {
 
   fromSDK(object: SyntheticLockupsByLockupIDRequestSDKType): SyntheticLockupsByLockupIDRequest {
     return {
-      lockId: isSet(object.lock_id) ? object.lock_id : Long.UZERO
+      lockId: isSet(object.lock_id) ? object.lock_id : undefined
     };
   },
 
@@ -2107,7 +2107,7 @@ export const AccountLockedLongerDurationRequest = {
 
   fromSDK(object: AccountLockedLongerDurationRequestSDKType): AccountLockedLongerDurationRequest {
     return {
-      owner: isSet(object.owner) ? object.owner : "",
+      owner: isSet(object.owner) ? object.owner : undefined,
       duration: isSet(object.duration) ? Duration.fromSDK(object.duration) : undefined
     };
   },
@@ -2271,7 +2271,7 @@ export const AccountLockedDurationRequest = {
 
   fromSDK(object: AccountLockedDurationRequestSDKType): AccountLockedDurationRequest {
     return {
-      owner: isSet(object.owner) ? object.owner : "",
+      owner: isSet(object.owner) ? object.owner : undefined,
       duration: isSet(object.duration) ? Duration.fromSDK(object.duration) : undefined
     };
   },
@@ -2435,7 +2435,7 @@ export const AccountLockedLongerDurationNotUnlockingOnlyRequest = {
 
   fromSDK(object: AccountLockedLongerDurationNotUnlockingOnlyRequestSDKType): AccountLockedLongerDurationNotUnlockingOnlyRequest {
     return {
-      owner: isSet(object.owner) ? object.owner : "",
+      owner: isSet(object.owner) ? object.owner : undefined,
       duration: isSet(object.duration) ? Duration.fromSDK(object.duration) : undefined
     };
   },
@@ -2611,9 +2611,9 @@ export const AccountLockedLongerDurationDenomRequest = {
 
   fromSDK(object: AccountLockedLongerDurationDenomRequestSDKType): AccountLockedLongerDurationDenomRequest {
     return {
-      owner: isSet(object.owner) ? object.owner : "",
+      owner: isSet(object.owner) ? object.owner : undefined,
       duration: isSet(object.duration) ? Duration.fromSDK(object.duration) : undefined,
-      denom: isSet(object.denom) ? object.denom : ""
+      denom: isSet(object.denom) ? object.denom : undefined
     };
   },
 

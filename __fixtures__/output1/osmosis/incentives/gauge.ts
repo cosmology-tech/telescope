@@ -233,13 +233,13 @@ export const Gauge = {
 
   fromSDK(object: GaugeSDKType): Gauge {
     return {
-      id: isSet(object.id) ? object.id : Long.UZERO,
-      isPerpetual: isSet(object.is_perpetual) ? object.is_perpetual : false,
+      id: isSet(object.id) ? object.id : undefined,
+      isPerpetual: isSet(object.is_perpetual) ? object.is_perpetual : undefined,
       distributeTo: isSet(object.distribute_to) ? QueryCondition.fromSDK(object.distribute_to) : undefined,
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDK(e)) : [],
       startTime: isSet(object.start_time) ? Timestamp.fromSDK(object.start_time) : undefined,
-      numEpochsPaidOver: isSet(object.num_epochs_paid_over) ? object.num_epochs_paid_over : Long.UZERO,
-      filledEpochs: isSet(object.filled_epochs) ? object.filled_epochs : Long.UZERO,
+      numEpochsPaidOver: isSet(object.num_epochs_paid_over) ? object.num_epochs_paid_over : undefined,
+      filledEpochs: isSet(object.filled_epochs) ? object.filled_epochs : undefined,
       distributedCoins: Array.isArray(object?.distributed_coins) ? object.distributed_coins.map((e: any) => Coin.fromSDK(e)) : []
     };
   },

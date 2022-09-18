@@ -171,8 +171,8 @@ export const QueryAllowanceRequest = {
 
   fromSDK(object: QueryAllowanceRequestSDKType): QueryAllowanceRequest {
     return {
-      granter: isSet(object.granter) ? object.granter : "",
-      grantee: isSet(object.grantee) ? object.grantee : ""
+      granter: isSet(object.granter) ? object.granter : undefined,
+      grantee: isSet(object.grantee) ? object.grantee : undefined
     };
   },
 
@@ -323,7 +323,7 @@ export const QueryAllowancesRequest = {
 
   fromSDK(object: QueryAllowancesRequestSDKType): QueryAllowancesRequest {
     return {
-      grantee: isSet(object.grantee) ? object.grantee : "",
+      grantee: isSet(object.grantee) ? object.grantee : undefined,
       pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
@@ -501,7 +501,7 @@ export const QueryAllowancesByGranterRequest = {
 
   fromSDK(object: QueryAllowancesByGranterRequestSDKType): QueryAllowancesByGranterRequest {
     return {
-      granter: isSet(object.granter) ? object.granter : "",
+      granter: isSet(object.granter) ? object.granter : undefined,
       pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },

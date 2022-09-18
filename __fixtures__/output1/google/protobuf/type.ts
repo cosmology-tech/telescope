@@ -665,7 +665,7 @@ export const Type = {
 
   fromSDK(object: TypeSDKType): Type {
     return {
-      name: isSet(object.name) ? object.name : "",
+      name: isSet(object.name) ? object.name : undefined,
       fields: Array.isArray(object?.fields) ? object.fields.map((e: any) => Field.fromSDK(e)) : [],
       oneofs: Array.isArray(object?.oneofs) ? object.oneofs.map((e: any) => e) : [],
       options: Array.isArray(object?.options) ? object.options.map((e: any) => Option.fromSDK(e)) : [],
@@ -876,14 +876,14 @@ export const Field = {
     return {
       kind: isSet(object.kind) ? field_KindFromJSON(object.kind) : 0,
       cardinality: isSet(object.cardinality) ? field_CardinalityFromJSON(object.cardinality) : 0,
-      number: isSet(object.number) ? object.number : 0,
-      name: isSet(object.name) ? object.name : "",
-      typeUrl: isSet(object.type_url) ? object.type_url : "",
-      oneofIndex: isSet(object.oneof_index) ? object.oneof_index : 0,
-      packed: isSet(object.packed) ? object.packed : false,
+      number: isSet(object.number) ? object.number : undefined,
+      name: isSet(object.name) ? object.name : undefined,
+      typeUrl: isSet(object.type_url) ? object.type_url : undefined,
+      oneofIndex: isSet(object.oneof_index) ? object.oneof_index : undefined,
+      packed: isSet(object.packed) ? object.packed : undefined,
       options: Array.isArray(object?.options) ? object.options.map((e: any) => Option.fromSDK(e)) : [],
-      jsonName: isSet(object.json_name) ? object.json_name : "",
-      defaultValue: isSet(object.default_value) ? object.default_value : ""
+      jsonName: isSet(object.json_name) ? object.json_name : undefined,
+      defaultValue: isSet(object.default_value) ? object.default_value : undefined
     };
   },
 
@@ -1026,7 +1026,7 @@ export const Enum = {
 
   fromSDK(object: EnumSDKType): Enum {
     return {
-      name: isSet(object.name) ? object.name : "",
+      name: isSet(object.name) ? object.name : undefined,
       enumvalue: Array.isArray(object?.enumvalue) ? object.enumvalue.map((e: any) => EnumValue.fromSDK(e)) : [],
       options: Array.isArray(object?.options) ? object.options.map((e: any) => Option.fromSDK(e)) : [],
       sourceContext: isSet(object.source_context) ? SourceContext.fromSDK(object.source_context) : undefined,
@@ -1144,8 +1144,8 @@ export const EnumValue = {
 
   fromSDK(object: EnumValueSDKType): EnumValue {
     return {
-      name: isSet(object.name) ? object.name : "",
-      number: isSet(object.number) ? object.number : 0,
+      name: isSet(object.name) ? object.name : undefined,
+      number: isSet(object.number) ? object.number : undefined,
       options: Array.isArray(object?.options) ? object.options.map((e: any) => Option.fromSDK(e)) : []
     };
   },
@@ -1235,7 +1235,7 @@ export const Option = {
 
   fromSDK(object: OptionSDKType): Option {
     return {
-      name: isSet(object.name) ? object.name : "",
+      name: isSet(object.name) ? object.name : undefined,
       value: isSet(object.value) ? Any.fromSDK(object.value) : undefined
     };
   },

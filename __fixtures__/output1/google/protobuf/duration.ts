@@ -229,8 +229,8 @@ export const Duration = {
 
   fromSDK(object: DurationSDKType): Duration {
     return {
-      seconds: isSet(object.seconds) ? object.seconds : Long.ZERO,
-      nanos: isSet(object.nanos) ? object.nanos : 0
+      seconds: isSet(object.seconds) ? object.seconds : undefined,
+      nanos: isSet(object.nanos) ? object.nanos : undefined
     };
   },
 

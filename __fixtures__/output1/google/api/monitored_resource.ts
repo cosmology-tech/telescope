@@ -374,10 +374,10 @@ export const MonitoredResourceDescriptor = {
 
   fromSDK(object: MonitoredResourceDescriptorSDKType): MonitoredResourceDescriptor {
     return {
-      name: isSet(object.name) ? object.name : "",
-      type: isSet(object.type) ? object.type : "",
-      displayName: isSet(object.display_name) ? object.display_name : "",
-      description: isSet(object.description) ? object.description : "",
+      name: isSet(object.name) ? object.name : undefined,
+      type: isSet(object.type) ? object.type : undefined,
+      displayName: isSet(object.display_name) ? object.display_name : undefined,
+      description: isSet(object.description) ? object.description : undefined,
       labels: Array.isArray(object?.labels) ? object.labels.map((e: any) => LabelDescriptor.fromSDK(e)) : [],
       launchStage: isSet(object.launch_stage) ? launchStageFromJSON(object.launch_stage) : 0
     };
@@ -471,8 +471,8 @@ export const MonitoredResource_LabelsEntry = {
 
   fromSDK(object: MonitoredResource_LabelsEntrySDKType): MonitoredResource_LabelsEntry {
     return {
-      key: isSet(object.key) ? object.key : "",
-      value: isSet(object.value) ? object.value : ""
+      key: isSet(object.key) ? object.key : undefined,
+      value: isSet(object.value) ? object.value : undefined
     };
   },
 
@@ -581,7 +581,7 @@ export const MonitoredResource = {
 
   fromSDK(object: MonitoredResourceSDKType): MonitoredResource {
     return {
-      type: isSet(object.type) ? object.type : "",
+      type: isSet(object.type) ? object.type : undefined,
       labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
         [key: string]: string;
       }>((acc, [key, value]) => {
@@ -676,8 +676,8 @@ export const MonitoredResourceMetadata_UserLabelsEntry = {
 
   fromSDK(object: MonitoredResourceMetadata_UserLabelsEntrySDKType): MonitoredResourceMetadata_UserLabelsEntry {
     return {
-      key: isSet(object.key) ? object.key : "",
-      value: isSet(object.value) ? object.value : ""
+      key: isSet(object.key) ? object.key : undefined,
+      value: isSet(object.value) ? object.value : undefined
     };
   },
 

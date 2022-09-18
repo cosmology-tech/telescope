@@ -560,8 +560,8 @@ export const Grant = {
 
   fromSDK(object: GrantSDKType): Grant {
     return {
-      granter: isSet(object.granter) ? object.granter : "",
-      grantee: isSet(object.grantee) ? object.grantee : "",
+      granter: isSet(object.granter) ? object.granter : undefined,
+      grantee: isSet(object.grantee) ? object.grantee : undefined,
       allowance: isSet(object.allowance) ? Any.fromSDK(object.allowance) : undefined
     };
   },

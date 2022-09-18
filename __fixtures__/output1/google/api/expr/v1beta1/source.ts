@@ -179,8 +179,8 @@ export const SourceInfo_PositionsEntry = {
 
   fromSDK(object: SourceInfo_PositionsEntrySDKType): SourceInfo_PositionsEntry {
     return {
-      key: isSet(object.key) ? object.key : 0,
-      value: isSet(object.value) ? object.value : 0
+      key: isSet(object.key) ? object.key : undefined,
+      value: isSet(object.value) ? object.value : undefined
     };
   },
 
@@ -319,7 +319,7 @@ export const SourceInfo = {
 
   fromSDK(object: SourceInfoSDKType): SourceInfo {
     return {
-      location: isSet(object.location) ? object.location : "",
+      location: isSet(object.location) ? object.location : undefined,
       lineOffsets: Array.isArray(object?.line_offsets) ? object.line_offsets.map((e: any) => e) : [],
       positions: isObject(object.positions) ? Object.entries(object.positions).reduce<{
         [key: number]: number;
@@ -446,10 +446,10 @@ export const SourcePosition = {
 
   fromSDK(object: SourcePositionSDKType): SourcePosition {
     return {
-      location: isSet(object.location) ? object.location : "",
-      offset: isSet(object.offset) ? object.offset : 0,
-      line: isSet(object.line) ? object.line : 0,
-      column: isSet(object.column) ? object.column : 0
+      location: isSet(object.location) ? object.location : undefined,
+      offset: isSet(object.offset) ? object.offset : undefined,
+      line: isSet(object.line) ? object.line : undefined,
+      column: isSet(object.column) ? object.column : undefined
     };
   },
 

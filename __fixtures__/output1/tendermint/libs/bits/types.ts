@@ -97,7 +97,7 @@ export const BitArray = {
 
   fromSDK(object: BitArraySDKType): BitArray {
     return {
-      bits: isSet(object.bits) ? object.bits : Long.ZERO,
+      bits: isSet(object.bits) ? object.bits : undefined,
       elems: Array.isArray(object?.elems) ? object.elems.map((e: any) => e) : []
     };
   },

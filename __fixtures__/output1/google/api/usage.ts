@@ -268,7 +268,7 @@ export const Usage = {
     return {
       requirements: Array.isArray(object?.requirements) ? object.requirements.map((e: any) => e) : [],
       rules: Array.isArray(object?.rules) ? object.rules.map((e: any) => UsageRule.fromSDK(e)) : [],
-      producerNotificationChannel: isSet(object.producer_notification_channel) ? object.producer_notification_channel : ""
+      producerNotificationChannel: isSet(object.producer_notification_channel) ? object.producer_notification_channel : undefined
     };
   },
 
@@ -374,9 +374,9 @@ export const UsageRule = {
 
   fromSDK(object: UsageRuleSDKType): UsageRule {
     return {
-      selector: isSet(object.selector) ? object.selector : "",
-      allowUnregisteredCalls: isSet(object.allow_unregistered_calls) ? object.allow_unregistered_calls : false,
-      skipServiceControl: isSet(object.skip_service_control) ? object.skip_service_control : false
+      selector: isSet(object.selector) ? object.selector : undefined,
+      allowUnregisteredCalls: isSet(object.allow_unregistered_calls) ? object.allow_unregistered_calls : undefined,
+      skipServiceControl: isSet(object.skip_service_control) ? object.skip_service_control : undefined
     };
   },
 

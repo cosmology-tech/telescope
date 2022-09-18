@@ -129,8 +129,8 @@ export const MsgSend = {
 
   fromSDK(object: MsgSendSDKType): MsgSend {
     return {
-      fromAddress: isSet(object.from_address) ? object.from_address : "",
-      toAddress: isSet(object.to_address) ? object.to_address : "",
+      fromAddress: isSet(object.from_address) ? object.from_address : undefined,
+      toAddress: isSet(object.to_address) ? object.to_address : undefined,
       amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromSDK(e)) : []
     };
   },

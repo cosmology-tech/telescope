@@ -338,10 +338,10 @@ export const Params = {
 
   fromSDK(object: ParamsSDKType): Params {
     return {
-      communityTax: isSet(object.community_tax) ? object.community_tax : "",
-      baseProposerReward: isSet(object.base_proposer_reward) ? object.base_proposer_reward : "",
-      bonusProposerReward: isSet(object.bonus_proposer_reward) ? object.bonus_proposer_reward : "",
-      withdrawAddrEnabled: isSet(object.withdraw_addr_enabled) ? object.withdraw_addr_enabled : false
+      communityTax: isSet(object.community_tax) ? object.community_tax : undefined,
+      baseProposerReward: isSet(object.base_proposer_reward) ? object.base_proposer_reward : undefined,
+      bonusProposerReward: isSet(object.bonus_proposer_reward) ? object.bonus_proposer_reward : undefined,
+      withdrawAddrEnabled: isSet(object.withdraw_addr_enabled) ? object.withdraw_addr_enabled : undefined
     };
   },
 
@@ -432,7 +432,7 @@ export const ValidatorHistoricalRewards = {
   fromSDK(object: ValidatorHistoricalRewardsSDKType): ValidatorHistoricalRewards {
     return {
       cumulativeRewardRatio: Array.isArray(object?.cumulative_reward_ratio) ? object.cumulative_reward_ratio.map((e: any) => DecCoin.fromSDK(e)) : [],
-      referenceCount: isSet(object.reference_count) ? object.reference_count : 0
+      referenceCount: isSet(object.reference_count) ? object.reference_count : undefined
     };
   },
 
@@ -527,7 +527,7 @@ export const ValidatorCurrentRewards = {
   fromSDK(object: ValidatorCurrentRewardsSDKType): ValidatorCurrentRewards {
     return {
       rewards: Array.isArray(object?.rewards) ? object.rewards.map((e: any) => DecCoin.fromSDK(e)) : [],
-      period: isSet(object.period) ? object.period : Long.UZERO
+      period: isSet(object.period) ? object.period : undefined
     };
   },
 
@@ -777,8 +777,8 @@ export const ValidatorSlashEvent = {
 
   fromSDK(object: ValidatorSlashEventSDKType): ValidatorSlashEvent {
     return {
-      validatorPeriod: isSet(object.validator_period) ? object.validator_period : Long.UZERO,
-      fraction: isSet(object.fraction) ? object.fraction : ""
+      validatorPeriod: isSet(object.validator_period) ? object.validator_period : undefined,
+      fraction: isSet(object.fraction) ? object.fraction : undefined
     };
   },
 
@@ -1052,9 +1052,9 @@ export const CommunityPoolSpendProposal = {
 
   fromSDK(object: CommunityPoolSpendProposalSDKType): CommunityPoolSpendProposal {
     return {
-      title: isSet(object.title) ? object.title : "",
-      description: isSet(object.description) ? object.description : "",
-      recipient: isSet(object.recipient) ? object.recipient : "",
+      title: isSet(object.title) ? object.title : undefined,
+      description: isSet(object.description) ? object.description : undefined,
+      recipient: isSet(object.recipient) ? object.recipient : undefined,
       amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromSDK(e)) : []
     };
   },
@@ -1157,9 +1157,9 @@ export const DelegatorStartingInfo = {
 
   fromSDK(object: DelegatorStartingInfoSDKType): DelegatorStartingInfo {
     return {
-      previousPeriod: isSet(object.previous_period) ? object.previous_period : Long.UZERO,
-      stake: isSet(object.stake) ? object.stake : "",
-      height: isSet(object.height) ? object.height : Long.UZERO
+      previousPeriod: isSet(object.previous_period) ? object.previous_period : undefined,
+      stake: isSet(object.stake) ? object.stake : undefined,
+      height: isSet(object.height) ? object.height : undefined
     };
   },
 
@@ -1248,7 +1248,7 @@ export const DelegationDelegatorReward = {
 
   fromSDK(object: DelegationDelegatorRewardSDKType): DelegationDelegatorReward {
     return {
-      validatorAddress: isSet(object.validator_address) ? object.validator_address : "",
+      validatorAddress: isSet(object.validator_address) ? object.validator_address : undefined,
       reward: Array.isArray(object?.reward) ? object.reward.map((e: any) => DecCoin.fromSDK(e)) : []
     };
   },
@@ -1373,11 +1373,11 @@ export const CommunityPoolSpendProposalWithDeposit = {
 
   fromSDK(object: CommunityPoolSpendProposalWithDepositSDKType): CommunityPoolSpendProposalWithDeposit {
     return {
-      title: isSet(object.title) ? object.title : "",
-      description: isSet(object.description) ? object.description : "",
-      recipient: isSet(object.recipient) ? object.recipient : "",
-      amount: isSet(object.amount) ? object.amount : "",
-      deposit: isSet(object.deposit) ? object.deposit : ""
+      title: isSet(object.title) ? object.title : undefined,
+      description: isSet(object.description) ? object.description : undefined,
+      recipient: isSet(object.recipient) ? object.recipient : undefined,
+      amount: isSet(object.amount) ? object.amount : undefined,
+      deposit: isSet(object.deposit) ? object.deposit : undefined
     };
   },
 

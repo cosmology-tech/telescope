@@ -1026,8 +1026,8 @@ export const RoutingParameter = {
 
   fromSDK(object: RoutingParameterSDKType): RoutingParameter {
     return {
-      field: isSet(object.field) ? object.field : "",
-      pathTemplate: isSet(object.path_template) ? object.path_template : ""
+      field: isSet(object.field) ? object.field : undefined,
+      pathTemplate: isSet(object.path_template) ? object.path_template : undefined
     };
   },
 

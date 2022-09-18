@@ -331,7 +331,7 @@ export const QueryProposalRequest = {
 
   fromSDK(object: QueryProposalRequestSDKType): QueryProposalRequest {
     return {
-      proposalId: isSet(object.proposal_id) ? object.proposal_id : Long.UZERO
+      proposalId: isSet(object.proposal_id) ? object.proposal_id : undefined
     };
   },
 
@@ -506,8 +506,8 @@ export const QueryProposalsRequest = {
   fromSDK(object: QueryProposalsRequestSDKType): QueryProposalsRequest {
     return {
       proposalStatus: isSet(object.proposal_status) ? proposalStatusFromJSON(object.proposal_status) : 0,
-      voter: isSet(object.voter) ? object.voter : "",
-      depositor: isSet(object.depositor) ? object.depositor : "",
+      voter: isSet(object.voter) ? object.voter : undefined,
+      depositor: isSet(object.depositor) ? object.depositor : undefined,
       pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
@@ -687,8 +687,8 @@ export const QueryVoteRequest = {
 
   fromSDK(object: QueryVoteRequestSDKType): QueryVoteRequest {
     return {
-      proposalId: isSet(object.proposal_id) ? object.proposal_id : Long.UZERO,
-      voter: isSet(object.voter) ? object.voter : ""
+      proposalId: isSet(object.proposal_id) ? object.proposal_id : undefined,
+      voter: isSet(object.voter) ? object.voter : undefined
     };
   },
 
@@ -839,7 +839,7 @@ export const QueryVotesRequest = {
 
   fromSDK(object: QueryVotesRequestSDKType): QueryVotesRequest {
     return {
-      proposalId: isSet(object.proposal_id) ? object.proposal_id : Long.UZERO,
+      proposalId: isSet(object.proposal_id) ? object.proposal_id : undefined,
       pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
@@ -1005,7 +1005,7 @@ export const QueryParamsRequest = {
 
   fromSDK(object: QueryParamsRequestSDKType): QueryParamsRequest {
     return {
-      paramsType: isSet(object.params_type) ? object.params_type : ""
+      paramsType: isSet(object.params_type) ? object.params_type : undefined
     };
   },
 
@@ -1183,8 +1183,8 @@ export const QueryDepositRequest = {
 
   fromSDK(object: QueryDepositRequestSDKType): QueryDepositRequest {
     return {
-      proposalId: isSet(object.proposal_id) ? object.proposal_id : Long.UZERO,
-      depositor: isSet(object.depositor) ? object.depositor : ""
+      proposalId: isSet(object.proposal_id) ? object.proposal_id : undefined,
+      depositor: isSet(object.depositor) ? object.depositor : undefined
     };
   },
 
@@ -1335,7 +1335,7 @@ export const QueryDepositsRequest = {
 
   fromSDK(object: QueryDepositsRequestSDKType): QueryDepositsRequest {
     return {
-      proposalId: isSet(object.proposal_id) ? object.proposal_id : Long.UZERO,
+      proposalId: isSet(object.proposal_id) ? object.proposal_id : undefined,
       pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
@@ -1501,7 +1501,7 @@ export const QueryTallyResultRequest = {
 
   fromSDK(object: QueryTallyResultRequestSDKType): QueryTallyResultRequest {
     return {
-      proposalId: isSet(object.proposal_id) ? object.proposal_id : Long.UZERO
+      proposalId: isSet(object.proposal_id) ? object.proposal_id : undefined
     };
   },
 

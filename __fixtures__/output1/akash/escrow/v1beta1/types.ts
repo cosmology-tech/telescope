@@ -264,8 +264,8 @@ export const AccountID = {
 
   fromSDK(object: AccountIDSDKType): AccountID {
     return {
-      scope: isSet(object.scope) ? object.scope : "",
-      xid: isSet(object.xid) ? object.xid : ""
+      scope: isSet(object.scope) ? object.scope : undefined,
+      xid: isSet(object.xid) ? object.xid : undefined
     };
   },
 
@@ -396,11 +396,11 @@ export const Account = {
   fromSDK(object: AccountSDKType): Account {
     return {
       id: isSet(object.id) ? AccountID.fromSDK(object.id) : undefined,
-      owner: isSet(object.owner) ? object.owner : "",
+      owner: isSet(object.owner) ? object.owner : undefined,
       state: isSet(object.state) ? account_StateFromJSON(object.state) : 0,
       balance: isSet(object.balance) ? Coin.fromSDK(object.balance) : undefined,
       transferred: isSet(object.transferred) ? Coin.fromSDK(object.transferred) : undefined,
-      settledAt: isSet(object.settled_at) ? object.settled_at : Long.ZERO
+      settledAt: isSet(object.settled_at) ? object.settled_at : undefined
     };
   },
 
@@ -547,8 +547,8 @@ export const Payment = {
   fromSDK(object: PaymentSDKType): Payment {
     return {
       accountId: isSet(object.account_id) ? AccountID.fromSDK(object.account_id) : undefined,
-      paymentId: isSet(object.payment_id) ? object.payment_id : "",
-      owner: isSet(object.owner) ? object.owner : "",
+      paymentId: isSet(object.payment_id) ? object.payment_id : undefined,
+      owner: isSet(object.owner) ? object.owner : undefined,
       state: isSet(object.state) ? payment_StateFromJSON(object.state) : 0,
       rate: isSet(object.rate) ? Coin.fromSDK(object.rate) : undefined,
       balance: isSet(object.balance) ? Coin.fromSDK(object.balance) : undefined,

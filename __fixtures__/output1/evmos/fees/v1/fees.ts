@@ -119,9 +119,9 @@ export const DevFeeInfo = {
 
   fromSDK(object: DevFeeInfoSDKType): DevFeeInfo {
     return {
-      contractAddress: isSet(object.contract_address) ? object.contract_address : "",
-      deployerAddress: isSet(object.deployer_address) ? object.deployer_address : "",
-      withdrawAddress: isSet(object.withdraw_address) ? object.withdraw_address : ""
+      contractAddress: isSet(object.contract_address) ? object.contract_address : undefined,
+      deployerAddress: isSet(object.deployer_address) ? object.deployer_address : undefined,
+      withdrawAddress: isSet(object.withdraw_address) ? object.withdraw_address : undefined
     };
   },
 

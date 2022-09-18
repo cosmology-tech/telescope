@@ -345,11 +345,11 @@ export const CheckRequest = {
 
   fromSDK(object: CheckRequestSDKType): CheckRequest {
     return {
-      serviceName: isSet(object.service_name) ? object.service_name : "",
-      serviceConfigId: isSet(object.service_config_id) ? object.service_config_id : "",
+      serviceName: isSet(object.service_name) ? object.service_name : undefined,
+      serviceConfigId: isSet(object.service_config_id) ? object.service_config_id : undefined,
       attributes: isSet(object.attributes) ? AttributeContext.fromSDK(object.attributes) : undefined,
       resources: Array.isArray(object?.resources) ? object.resources.map((e: any) => ResourceInfo.fromSDK(e)) : [],
-      flags: isSet(object.flags) ? object.flags : ""
+      flags: isSet(object.flags) ? object.flags : undefined
     };
   },
 
@@ -476,11 +476,11 @@ export const ResourceInfo = {
 
   fromSDK(object: ResourceInfoSDKType): ResourceInfo {
     return {
-      name: isSet(object.name) ? object.name : "",
-      type: isSet(object.type) ? object.type : "",
-      permission: isSet(object.permission) ? object.permission : "",
-      container: isSet(object.container) ? object.container : "",
-      location: isSet(object.location) ? object.location : ""
+      name: isSet(object.name) ? object.name : undefined,
+      type: isSet(object.type) ? object.type : undefined,
+      permission: isSet(object.permission) ? object.permission : undefined,
+      container: isSet(object.container) ? object.container : undefined,
+      location: isSet(object.location) ? object.location : undefined
     };
   },
 
@@ -565,8 +565,8 @@ export const CheckResponse_HeadersEntry = {
 
   fromSDK(object: CheckResponse_HeadersEntrySDKType): CheckResponse_HeadersEntry {
     return {
-      key: isSet(object.key) ? object.key : "",
-      value: isSet(object.value) ? object.value : ""
+      key: isSet(object.key) ? object.key : undefined,
+      value: isSet(object.value) ? object.value : undefined
     };
   },
 
@@ -788,8 +788,8 @@ export const ReportRequest = {
 
   fromSDK(object: ReportRequestSDKType): ReportRequest {
     return {
-      serviceName: isSet(object.service_name) ? object.service_name : "",
-      serviceConfigId: isSet(object.service_config_id) ? object.service_config_id : "",
+      serviceName: isSet(object.service_name) ? object.service_name : undefined,
+      serviceConfigId: isSet(object.service_config_id) ? object.service_config_id : undefined,
       operations: Array.isArray(object?.operations) ? object.operations.map((e: any) => AttributeContext.fromSDK(e)) : []
     };
   },

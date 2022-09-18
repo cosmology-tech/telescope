@@ -220,8 +220,8 @@ export const InterfaceDescriptor = {
 
   fromSDK(object: InterfaceDescriptorSDKType): InterfaceDescriptor {
     return {
-      name: isSet(object.name) ? object.name : "",
-      description: isSet(object.description) ? object.description : ""
+      name: isSet(object.name) ? object.name : undefined,
+      description: isSet(object.description) ? object.description : undefined
     };
   },
 
@@ -333,8 +333,8 @@ export const ScalarDescriptor = {
 
   fromSDK(object: ScalarDescriptorSDKType): ScalarDescriptor {
     return {
-      name: isSet(object.name) ? object.name : "",
-      description: isSet(object.description) ? object.description : "",
+      name: isSet(object.name) ? object.name : undefined,
+      description: isSet(object.description) ? object.description : undefined,
       fieldType: Array.isArray(object?.field_type) ? object.field_type.map((e: any) => scalarTypeFromJSON(e)) : []
     };
   },

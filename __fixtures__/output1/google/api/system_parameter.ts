@@ -334,7 +334,7 @@ export const SystemParameterRule = {
 
   fromSDK(object: SystemParameterRuleSDKType): SystemParameterRule {
     return {
-      selector: isSet(object.selector) ? object.selector : "",
+      selector: isSet(object.selector) ? object.selector : undefined,
       parameters: Array.isArray(object?.parameters) ? object.parameters.map((e: any) => SystemParameter.fromSDK(e)) : []
     };
   },
@@ -435,9 +435,9 @@ export const SystemParameter = {
 
   fromSDK(object: SystemParameterSDKType): SystemParameter {
     return {
-      name: isSet(object.name) ? object.name : "",
-      httpHeader: isSet(object.http_header) ? object.http_header : "",
-      urlQueryParameter: isSet(object.url_query_parameter) ? object.url_query_parameter : ""
+      name: isSet(object.name) ? object.name : undefined,
+      httpHeader: isSet(object.http_header) ? object.http_header : undefined,
+      urlQueryParameter: isSet(object.url_query_parameter) ? object.url_query_parameter : undefined
     };
   },
 

@@ -517,7 +517,7 @@ export const QueryValidatorOutstandingRewardsRequest = {
 
   fromSDK(object: QueryValidatorOutstandingRewardsRequestSDKType): QueryValidatorOutstandingRewardsRequest {
     return {
-      validatorAddress: isSet(object.validator_address) ? object.validator_address : ""
+      validatorAddress: isSet(object.validator_address) ? object.validator_address : undefined
     };
   },
 
@@ -655,7 +655,7 @@ export const QueryValidatorCommissionRequest = {
 
   fromSDK(object: QueryValidatorCommissionRequestSDKType): QueryValidatorCommissionRequest {
     return {
-      validatorAddress: isSet(object.validator_address) ? object.validator_address : ""
+      validatorAddress: isSet(object.validator_address) ? object.validator_address : undefined
     };
   },
 
@@ -829,9 +829,9 @@ export const QueryValidatorSlashesRequest = {
 
   fromSDK(object: QueryValidatorSlashesRequestSDKType): QueryValidatorSlashesRequest {
     return {
-      validatorAddress: isSet(object.validator_address) ? object.validator_address : "",
-      startingHeight: isSet(object.starting_height) ? object.starting_height : Long.UZERO,
-      endingHeight: isSet(object.ending_height) ? object.ending_height : Long.UZERO,
+      validatorAddress: isSet(object.validator_address) ? object.validator_address : undefined,
+      startingHeight: isSet(object.starting_height) ? object.starting_height : undefined,
+      endingHeight: isSet(object.ending_height) ? object.ending_height : undefined,
       pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
@@ -1011,8 +1011,8 @@ export const QueryDelegationRewardsRequest = {
 
   fromSDK(object: QueryDelegationRewardsRequestSDKType): QueryDelegationRewardsRequest {
     return {
-      delegatorAddress: isSet(object.delegator_address) ? object.delegator_address : "",
-      validatorAddress: isSet(object.validator_address) ? object.validator_address : ""
+      delegatorAddress: isSet(object.delegator_address) ? object.delegator_address : undefined,
+      validatorAddress: isSet(object.validator_address) ? object.validator_address : undefined
     };
   },
 
@@ -1163,7 +1163,7 @@ export const QueryDelegationTotalRewardsRequest = {
 
   fromSDK(object: QueryDelegationTotalRewardsRequestSDKType): QueryDelegationTotalRewardsRequest {
     return {
-      delegatorAddress: isSet(object.delegator_address) ? object.delegator_address : ""
+      delegatorAddress: isSet(object.delegator_address) ? object.delegator_address : undefined
     };
   },
 
@@ -1337,7 +1337,7 @@ export const QueryDelegatorValidatorsRequest = {
 
   fromSDK(object: QueryDelegatorValidatorsRequestSDKType): QueryDelegatorValidatorsRequest {
     return {
-      delegatorAddress: isSet(object.delegator_address) ? object.delegator_address : ""
+      delegatorAddress: isSet(object.delegator_address) ? object.delegator_address : undefined
     };
   },
 
@@ -1487,7 +1487,7 @@ export const QueryDelegatorWithdrawAddressRequest = {
 
   fromSDK(object: QueryDelegatorWithdrawAddressRequestSDKType): QueryDelegatorWithdrawAddressRequest {
     return {
-      delegatorAddress: isSet(object.delegator_address) ? object.delegator_address : ""
+      delegatorAddress: isSet(object.delegator_address) ? object.delegator_address : undefined
     };
   },
 
@@ -1556,7 +1556,7 @@ export const QueryDelegatorWithdrawAddressResponse = {
 
   fromSDK(object: QueryDelegatorWithdrawAddressResponseSDKType): QueryDelegatorWithdrawAddressResponse {
     return {
-      withdrawAddress: isSet(object.withdraw_address) ? object.withdraw_address : ""
+      withdrawAddress: isSet(object.withdraw_address) ? object.withdraw_address : undefined
     };
   },
 

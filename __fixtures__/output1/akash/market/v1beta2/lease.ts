@@ -271,11 +271,11 @@ export const LeaseID = {
 
   fromSDK(object: LeaseIDSDKType): LeaseID {
     return {
-      owner: isSet(object.owner) ? object.owner : "",
-      dseq: isSet(object.dseq) ? object.dseq : Long.UZERO,
-      gseq: isSet(object.gseq) ? object.gseq : 0,
-      oseq: isSet(object.oseq) ? object.oseq : 0,
-      provider: isSet(object.provider) ? object.provider : ""
+      owner: isSet(object.owner) ? object.owner : undefined,
+      dseq: isSet(object.dseq) ? object.dseq : undefined,
+      gseq: isSet(object.gseq) ? object.gseq : undefined,
+      oseq: isSet(object.oseq) ? object.oseq : undefined,
+      provider: isSet(object.provider) ? object.provider : undefined
     };
   },
 
@@ -399,8 +399,8 @@ export const Lease = {
       leaseId: isSet(object.lease_id) ? LeaseID.fromSDK(object.lease_id) : undefined,
       state: isSet(object.state) ? lease_StateFromJSON(object.state) : 0,
       price: isSet(object.price) ? DecCoin.fromSDK(object.price) : undefined,
-      createdAt: isSet(object.created_at) ? object.created_at : Long.ZERO,
-      closedOn: isSet(object.closed_on) ? object.closed_on : Long.ZERO
+      createdAt: isSet(object.created_at) ? object.created_at : undefined,
+      closedOn: isSet(object.closed_on) ? object.closed_on : undefined
     };
   },
 
@@ -533,12 +533,12 @@ export const LeaseFilters = {
 
   fromSDK(object: LeaseFiltersSDKType): LeaseFilters {
     return {
-      owner: isSet(object.owner) ? object.owner : "",
-      dseq: isSet(object.dseq) ? object.dseq : Long.UZERO,
-      gseq: isSet(object.gseq) ? object.gseq : 0,
-      oseq: isSet(object.oseq) ? object.oseq : 0,
-      provider: isSet(object.provider) ? object.provider : "",
-      state: isSet(object.state) ? object.state : ""
+      owner: isSet(object.owner) ? object.owner : undefined,
+      dseq: isSet(object.dseq) ? object.dseq : undefined,
+      gseq: isSet(object.gseq) ? object.gseq : undefined,
+      oseq: isSet(object.oseq) ? object.oseq : undefined,
+      provider: isSet(object.provider) ? object.provider : undefined,
+      state: isSet(object.state) ? object.state : undefined
     };
   },
 

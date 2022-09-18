@@ -69,7 +69,7 @@ export const ResourceValue = {
 
   fromSDK(object: ResourceValueSDKType): ResourceValue {
     return {
-      val: isSet(object.val) ? object.val : new Uint8Array()
+      val: isSet(object.val) ? object.val : undefined
     };
   },
 

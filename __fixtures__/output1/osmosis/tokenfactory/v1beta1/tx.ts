@@ -182,8 +182,8 @@ export const MsgCreateDenom = {
 
   fromSDK(object: MsgCreateDenomSDKType): MsgCreateDenom {
     return {
-      sender: isSet(object.sender) ? object.sender : "",
-      subdenom: isSet(object.subdenom) ? object.subdenom : ""
+      sender: isSet(object.sender) ? object.sender : undefined,
+      subdenom: isSet(object.subdenom) ? object.subdenom : undefined
     };
   },
 
@@ -253,7 +253,7 @@ export const MsgCreateDenomResponse = {
 
   fromSDK(object: MsgCreateDenomResponseSDKType): MsgCreateDenomResponse {
     return {
-      newTokenDenom: isSet(object.new_token_denom) ? object.new_token_denom : ""
+      newTokenDenom: isSet(object.new_token_denom) ? object.new_token_denom : undefined
     };
   },
 
@@ -334,7 +334,7 @@ export const MsgMint = {
 
   fromSDK(object: MsgMintSDKType): MsgMint {
     return {
-      sender: isSet(object.sender) ? object.sender : "",
+      sender: isSet(object.sender) ? object.sender : undefined,
       amount: isSet(object.amount) ? Coin.fromSDK(object.amount) : undefined
     };
   },
@@ -469,7 +469,7 @@ export const MsgBurn = {
 
   fromSDK(object: MsgBurnSDKType): MsgBurn {
     return {
-      sender: isSet(object.sender) ? object.sender : "",
+      sender: isSet(object.sender) ? object.sender : undefined,
       amount: isSet(object.amount) ? Coin.fromSDK(object.amount) : undefined
     };
   },
@@ -616,9 +616,9 @@ export const MsgChangeAdmin = {
 
   fromSDK(object: MsgChangeAdminSDKType): MsgChangeAdmin {
     return {
-      sender: isSet(object.sender) ? object.sender : "",
-      denom: isSet(object.denom) ? object.denom : "",
-      newAdmin: isSet(object.newAdmin) ? object.newAdmin : ""
+      sender: isSet(object.sender) ? object.sender : undefined,
+      denom: isSet(object.denom) ? object.denom : undefined,
+      newAdmin: isSet(object.newAdmin) ? object.newAdmin : undefined
     };
   },
 

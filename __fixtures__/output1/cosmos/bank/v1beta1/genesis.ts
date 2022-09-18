@@ -282,7 +282,7 @@ export const Balance = {
 
   fromSDK(object: BalanceSDKType): Balance {
     return {
-      address: isSet(object.address) ? object.address : "",
+      address: isSet(object.address) ? object.address : undefined,
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDK(e)) : []
     };
   },

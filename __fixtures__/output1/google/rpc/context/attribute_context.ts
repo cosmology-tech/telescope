@@ -1116,8 +1116,8 @@ export const AttributeContext_Peer_LabelsEntry = {
 
   fromSDK(object: AttributeContext_Peer_LabelsEntrySDKType): AttributeContext_Peer_LabelsEntry {
     return {
-      key: isSet(object.key) ? object.key : "",
-      value: isSet(object.value) ? object.value : ""
+      key: isSet(object.key) ? object.key : undefined,
+      value: isSet(object.value) ? object.value : undefined
     };
   },
 
@@ -1263,16 +1263,16 @@ export const AttributeContext_Peer = {
 
   fromSDK(object: AttributeContext_PeerSDKType): AttributeContext_Peer {
     return {
-      ip: isSet(object.ip) ? object.ip : "",
-      port: isSet(object.port) ? object.port : Long.ZERO,
+      ip: isSet(object.ip) ? object.ip : undefined,
+      port: isSet(object.port) ? object.port : undefined,
       labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
         [key: string]: string;
       }>((acc, [key, value]) => {
         acc[key] = String(value);
         return acc;
       }, {}) : {},
-      principal: isSet(object.principal) ? object.principal : "",
-      regionCode: isSet(object.region_code) ? object.region_code : ""
+      principal: isSet(object.principal) ? object.principal : undefined,
+      regionCode: isSet(object.region_code) ? object.region_code : undefined
     };
   },
 
@@ -1388,10 +1388,10 @@ export const AttributeContext_Api = {
 
   fromSDK(object: AttributeContext_ApiSDKType): AttributeContext_Api {
     return {
-      service: isSet(object.service) ? object.service : "",
-      operation: isSet(object.operation) ? object.operation : "",
-      protocol: isSet(object.protocol) ? object.protocol : "",
-      version: isSet(object.version) ? object.version : ""
+      service: isSet(object.service) ? object.service : undefined,
+      operation: isSet(object.operation) ? object.operation : undefined,
+      protocol: isSet(object.protocol) ? object.protocol : undefined,
+      version: isSet(object.version) ? object.version : undefined
     };
   },
 
@@ -1523,9 +1523,9 @@ export const AttributeContext_Auth = {
 
   fromSDK(object: AttributeContext_AuthSDKType): AttributeContext_Auth {
     return {
-      principal: isSet(object.principal) ? object.principal : "",
+      principal: isSet(object.principal) ? object.principal : undefined,
       audiences: Array.isArray(object?.audiences) ? object.audiences.map((e: any) => e) : [],
-      presenter: isSet(object.presenter) ? object.presenter : "",
+      presenter: isSet(object.presenter) ? object.presenter : undefined,
       claims: isSet(object.claims) ? Struct.fromSDK(object.claims) : undefined,
       accessLevels: Array.isArray(object?.access_levels) ? object.access_levels.map((e: any) => e) : []
     };
@@ -1624,8 +1624,8 @@ export const AttributeContext_Request_HeadersEntry = {
 
   fromSDK(object: AttributeContext_Request_HeadersEntrySDKType): AttributeContext_Request_HeadersEntry {
     return {
-      key: isSet(object.key) ? object.key : "",
-      value: isSet(object.value) ? object.value : ""
+      key: isSet(object.key) ? object.key : undefined,
+      value: isSet(object.value) ? object.value : undefined
     };
   },
 
@@ -1855,22 +1855,22 @@ export const AttributeContext_Request = {
 
   fromSDK(object: AttributeContext_RequestSDKType): AttributeContext_Request {
     return {
-      id: isSet(object.id) ? object.id : "",
-      method: isSet(object.method) ? object.method : "",
+      id: isSet(object.id) ? object.id : undefined,
+      method: isSet(object.method) ? object.method : undefined,
       headers: isObject(object.headers) ? Object.entries(object.headers).reduce<{
         [key: string]: string;
       }>((acc, [key, value]) => {
         acc[key] = String(value);
         return acc;
       }, {}) : {},
-      path: isSet(object.path) ? object.path : "",
-      host: isSet(object.host) ? object.host : "",
-      scheme: isSet(object.scheme) ? object.scheme : "",
-      query: isSet(object.query) ? object.query : "",
+      path: isSet(object.path) ? object.path : undefined,
+      host: isSet(object.host) ? object.host : undefined,
+      scheme: isSet(object.scheme) ? object.scheme : undefined,
+      query: isSet(object.query) ? object.query : undefined,
       time: isSet(object.time) ? Timestamp.fromSDK(object.time) : undefined,
-      size: isSet(object.size) ? object.size : Long.ZERO,
-      protocol: isSet(object.protocol) ? object.protocol : "",
-      reason: isSet(object.reason) ? object.reason : "",
+      size: isSet(object.size) ? object.size : undefined,
+      protocol: isSet(object.protocol) ? object.protocol : undefined,
+      reason: isSet(object.reason) ? object.reason : undefined,
       auth: isSet(object.auth) ? AttributeContext_Auth.fromSDK(object.auth) : undefined
     };
   },
@@ -1970,8 +1970,8 @@ export const AttributeContext_Response_HeadersEntry = {
 
   fromSDK(object: AttributeContext_Response_HeadersEntrySDKType): AttributeContext_Response_HeadersEntry {
     return {
-      key: isSet(object.key) ? object.key : "",
-      value: isSet(object.value) ? object.value : ""
+      key: isSet(object.key) ? object.key : undefined,
+      value: isSet(object.value) ? object.value : undefined
     };
   },
 
@@ -2117,8 +2117,8 @@ export const AttributeContext_Response = {
 
   fromSDK(object: AttributeContext_ResponseSDKType): AttributeContext_Response {
     return {
-      code: isSet(object.code) ? object.code : Long.ZERO,
-      size: isSet(object.size) ? object.size : Long.ZERO,
+      code: isSet(object.code) ? object.code : undefined,
+      size: isSet(object.size) ? object.size : undefined,
       headers: isObject(object.headers) ? Object.entries(object.headers).reduce<{
         [key: string]: string;
       }>((acc, [key, value]) => {
@@ -2218,8 +2218,8 @@ export const AttributeContext_Resource_LabelsEntry = {
 
   fromSDK(object: AttributeContext_Resource_LabelsEntrySDKType): AttributeContext_Resource_LabelsEntry {
     return {
-      key: isSet(object.key) ? object.key : "",
-      value: isSet(object.value) ? object.value : ""
+      key: isSet(object.key) ? object.key : undefined,
+      value: isSet(object.value) ? object.value : undefined
     };
   },
 
@@ -2301,8 +2301,8 @@ export const AttributeContext_Resource_AnnotationsEntry = {
 
   fromSDK(object: AttributeContext_Resource_AnnotationsEntrySDKType): AttributeContext_Resource_AnnotationsEntry {
     return {
-      key: isSet(object.key) ? object.key : "",
-      value: isSet(object.value) ? object.value : ""
+      key: isSet(object.key) ? object.key : undefined,
+      value: isSet(object.value) ? object.value : undefined
     };
   },
 
@@ -2560,28 +2560,28 @@ export const AttributeContext_Resource = {
 
   fromSDK(object: AttributeContext_ResourceSDKType): AttributeContext_Resource {
     return {
-      service: isSet(object.service) ? object.service : "",
-      name: isSet(object.name) ? object.name : "",
-      type: isSet(object.type) ? object.type : "",
+      service: isSet(object.service) ? object.service : undefined,
+      name: isSet(object.name) ? object.name : undefined,
+      type: isSet(object.type) ? object.type : undefined,
       labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
         [key: string]: string;
       }>((acc, [key, value]) => {
         acc[key] = String(value);
         return acc;
       }, {}) : {},
-      uid: isSet(object.uid) ? object.uid : "",
+      uid: isSet(object.uid) ? object.uid : undefined,
       annotations: isObject(object.annotations) ? Object.entries(object.annotations).reduce<{
         [key: string]: string;
       }>((acc, [key, value]) => {
         acc[key] = String(value);
         return acc;
       }, {}) : {},
-      displayName: isSet(object.display_name) ? object.display_name : "",
+      displayName: isSet(object.display_name) ? object.display_name : undefined,
       createTime: isSet(object.create_time) ? Timestamp.fromSDK(object.create_time) : undefined,
       updateTime: isSet(object.update_time) ? Timestamp.fromSDK(object.update_time) : undefined,
       deleteTime: isSet(object.delete_time) ? Timestamp.fromSDK(object.delete_time) : undefined,
-      etag: isSet(object.etag) ? object.etag : "",
-      location: isSet(object.location) ? object.location : ""
+      etag: isSet(object.etag) ? object.etag : undefined,
+      location: isSet(object.location) ? object.location : undefined
     };
   },
 

@@ -105,7 +105,7 @@ export const GroupSpec = {
 
   fromSDK(object: GroupSpecSDKType): GroupSpec {
     return {
-      name: isSet(object.name) ? object.name : "",
+      name: isSet(object.name) ? object.name : undefined,
       requirements: isSet(object.requirements) ? PlacementRequirements.fromSDK(object.requirements) : undefined,
       resources: Array.isArray(object?.resources) ? object.resources.map((e: any) => Resource.fromSDK(e)) : []
     };

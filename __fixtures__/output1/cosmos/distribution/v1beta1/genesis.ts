@@ -309,8 +309,8 @@ export const DelegatorWithdrawInfo = {
 
   fromSDK(object: DelegatorWithdrawInfoSDKType): DelegatorWithdrawInfo {
     return {
-      delegatorAddress: isSet(object.delegator_address) ? object.delegator_address : "",
-      withdrawAddress: isSet(object.withdraw_address) ? object.withdraw_address : ""
+      delegatorAddress: isSet(object.delegator_address) ? object.delegator_address : undefined,
+      withdrawAddress: isSet(object.withdraw_address) ? object.withdraw_address : undefined
     };
   },
 
@@ -398,7 +398,7 @@ export const ValidatorOutstandingRewardsRecord = {
 
   fromSDK(object: ValidatorOutstandingRewardsRecordSDKType): ValidatorOutstandingRewardsRecord {
     return {
-      validatorAddress: isSet(object.validator_address) ? object.validator_address : "",
+      validatorAddress: isSet(object.validator_address) ? object.validator_address : undefined,
       outstandingRewards: Array.isArray(object?.outstanding_rewards) ? object.outstanding_rewards.map((e: any) => DecCoin.fromSDK(e)) : []
     };
   },
@@ -487,7 +487,7 @@ export const ValidatorAccumulatedCommissionRecord = {
 
   fromSDK(object: ValidatorAccumulatedCommissionRecordSDKType): ValidatorAccumulatedCommissionRecord {
     return {
-      validatorAddress: isSet(object.validator_address) ? object.validator_address : "",
+      validatorAddress: isSet(object.validator_address) ? object.validator_address : undefined,
       accumulated: isSet(object.accumulated) ? ValidatorAccumulatedCommission.fromSDK(object.accumulated) : undefined
     };
   },
@@ -582,8 +582,8 @@ export const ValidatorHistoricalRewardsRecord = {
 
   fromSDK(object: ValidatorHistoricalRewardsRecordSDKType): ValidatorHistoricalRewardsRecord {
     return {
-      validatorAddress: isSet(object.validator_address) ? object.validator_address : "",
-      period: isSet(object.period) ? object.period : Long.UZERO,
+      validatorAddress: isSet(object.validator_address) ? object.validator_address : undefined,
+      period: isSet(object.period) ? object.period : undefined,
       rewards: isSet(object.rewards) ? ValidatorHistoricalRewards.fromSDK(object.rewards) : undefined
     };
   },
@@ -667,7 +667,7 @@ export const ValidatorCurrentRewardsRecord = {
 
   fromSDK(object: ValidatorCurrentRewardsRecordSDKType): ValidatorCurrentRewardsRecord {
     return {
-      validatorAddress: isSet(object.validator_address) ? object.validator_address : "",
+      validatorAddress: isSet(object.validator_address) ? object.validator_address : undefined,
       rewards: isSet(object.rewards) ? ValidatorCurrentRewards.fromSDK(object.rewards) : undefined
     };
   },
@@ -762,8 +762,8 @@ export const DelegatorStartingInfoRecord = {
 
   fromSDK(object: DelegatorStartingInfoRecordSDKType): DelegatorStartingInfoRecord {
     return {
-      delegatorAddress: isSet(object.delegator_address) ? object.delegator_address : "",
-      validatorAddress: isSet(object.validator_address) ? object.validator_address : "",
+      delegatorAddress: isSet(object.delegator_address) ? object.delegator_address : undefined,
+      validatorAddress: isSet(object.validator_address) ? object.validator_address : undefined,
       startingInfo: isSet(object.starting_info) ? DelegatorStartingInfo.fromSDK(object.starting_info) : undefined
     };
   },
@@ -871,9 +871,9 @@ export const ValidatorSlashEventRecord = {
 
   fromSDK(object: ValidatorSlashEventRecordSDKType): ValidatorSlashEventRecord {
     return {
-      validatorAddress: isSet(object.validator_address) ? object.validator_address : "",
-      height: isSet(object.height) ? object.height : Long.UZERO,
-      period: isSet(object.period) ? object.period : Long.UZERO,
+      validatorAddress: isSet(object.validator_address) ? object.validator_address : undefined,
+      height: isSet(object.height) ? object.height : undefined,
+      period: isSet(object.period) ? object.period : undefined,
       validatorSlashEvent: isSet(object.validator_slash_event) ? ValidatorSlashEvent.fromSDK(object.validator_slash_event) : undefined
     };
   },
@@ -1094,7 +1094,7 @@ export const GenesisState = {
       params: isSet(object.params) ? Params.fromSDK(object.params) : undefined,
       feePool: isSet(object.fee_pool) ? FeePool.fromSDK(object.fee_pool) : undefined,
       delegatorWithdrawInfos: Array.isArray(object?.delegator_withdraw_infos) ? object.delegator_withdraw_infos.map((e: any) => DelegatorWithdrawInfo.fromSDK(e)) : [],
-      previousProposer: isSet(object.previous_proposer) ? object.previous_proposer : "",
+      previousProposer: isSet(object.previous_proposer) ? object.previous_proposer : undefined,
       outstandingRewards: Array.isArray(object?.outstanding_rewards) ? object.outstanding_rewards.map((e: any) => ValidatorOutstandingRewardsRecord.fromSDK(e)) : [],
       validatorAccumulatedCommissions: Array.isArray(object?.validator_accumulated_commissions) ? object.validator_accumulated_commissions.map((e: any) => ValidatorAccumulatedCommissionRecord.fromSDK(e)) : [],
       validatorHistoricalRewards: Array.isArray(object?.validator_historical_rewards) ? object.validator_historical_rewards.map((e: any) => ValidatorHistoricalRewardsRecord.fromSDK(e)) : [],

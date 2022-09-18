@@ -129,10 +129,10 @@ export const StoreKVPair = {
 
   fromSDK(object: StoreKVPairSDKType): StoreKVPair {
     return {
-      storeKey: isSet(object.store_key) ? object.store_key : "",
-      delete: isSet(object.delete) ? object.delete : false,
-      key: isSet(object.key) ? object.key : new Uint8Array(),
-      value: isSet(object.value) ? object.value : new Uint8Array()
+      storeKey: isSet(object.store_key) ? object.store_key : undefined,
+      delete: isSet(object.delete) ? object.delete : undefined,
+      key: isSet(object.key) ? object.key : undefined,
+      value: isSet(object.value) ? object.value : undefined
     };
   },
 

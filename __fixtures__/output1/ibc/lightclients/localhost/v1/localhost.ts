@@ -96,7 +96,7 @@ export const ClientState = {
 
   fromSDK(object: ClientStateSDKType): ClientState {
     return {
-      chainId: isSet(object.chain_id) ? object.chain_id : "",
+      chainId: isSet(object.chain_id) ? object.chain_id : undefined,
       height: isSet(object.height) ? Height.fromSDK(object.height) : undefined
     };
   },

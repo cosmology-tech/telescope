@@ -668,7 +668,7 @@ export const TxDescriptor = {
 
   fromSDK(object: TxDescriptorSDKType): TxDescriptor {
     return {
-      fullname: isSet(object.fullname) ? object.fullname : "",
+      fullname: isSet(object.fullname) ? object.fullname : undefined,
       msgs: Array.isArray(object?.msgs) ? object.msgs.map((e: any) => MsgDescriptor.fromSDK(e)) : []
     };
   },
@@ -850,9 +850,9 @@ export const SigningModeDescriptor = {
 
   fromSDK(object: SigningModeDescriptorSDKType): SigningModeDescriptor {
     return {
-      name: isSet(object.name) ? object.name : "",
-      number: isSet(object.number) ? object.number : 0,
-      authnInfoProviderMethodFullname: isSet(object.authn_info_provider_method_fullname) ? object.authn_info_provider_method_fullname : ""
+      name: isSet(object.name) ? object.name : undefined,
+      number: isSet(object.number) ? object.number : undefined,
+      authnInfoProviderMethodFullname: isSet(object.authn_info_provider_method_fullname) ? object.authn_info_provider_method_fullname : undefined
     };
   },
 
@@ -923,7 +923,7 @@ export const ChainDescriptor = {
 
   fromSDK(object: ChainDescriptorSDKType): ChainDescriptor {
     return {
-      id: isSet(object.id) ? object.id : ""
+      id: isSet(object.id) ? object.id : undefined
     };
   },
 
@@ -1108,7 +1108,7 @@ export const InterfaceDescriptor = {
 
   fromSDK(object: InterfaceDescriptorSDKType): InterfaceDescriptor {
     return {
-      fullname: isSet(object.fullname) ? object.fullname : "",
+      fullname: isSet(object.fullname) ? object.fullname : undefined,
       interfaceAcceptingMessages: Array.isArray(object?.interface_accepting_messages) ? object.interface_accepting_messages.map((e: any) => InterfaceAcceptingMessageDescriptor.fromSDK(e)) : [],
       interfaceImplementers: Array.isArray(object?.interface_implementers) ? object.interface_implementers.map((e: any) => InterfaceImplementerDescriptor.fromSDK(e)) : []
     };
@@ -1204,8 +1204,8 @@ export const InterfaceImplementerDescriptor = {
 
   fromSDK(object: InterfaceImplementerDescriptorSDKType): InterfaceImplementerDescriptor {
     return {
-      fullname: isSet(object.fullname) ? object.fullname : "",
-      typeUrl: isSet(object.type_url) ? object.type_url : ""
+      fullname: isSet(object.fullname) ? object.fullname : undefined,
+      typeUrl: isSet(object.type_url) ? object.type_url : undefined
     };
   },
 
@@ -1293,7 +1293,7 @@ export const InterfaceAcceptingMessageDescriptor = {
 
   fromSDK(object: InterfaceAcceptingMessageDescriptorSDKType): InterfaceAcceptingMessageDescriptor {
     return {
-      fullname: isSet(object.fullname) ? object.fullname : "",
+      fullname: isSet(object.fullname) ? object.fullname : undefined,
       fieldDescriptorNames: Array.isArray(object?.field_descriptor_names) ? object.field_descriptor_names.map((e: any) => e) : []
     };
   },
@@ -1370,7 +1370,7 @@ export const ConfigurationDescriptor = {
 
   fromSDK(object: ConfigurationDescriptorSDKType): ConfigurationDescriptor {
     return {
-      bech32AccountAddressPrefix: isSet(object.bech32_account_address_prefix) ? object.bech32_account_address_prefix : ""
+      bech32AccountAddressPrefix: isSet(object.bech32_account_address_prefix) ? object.bech32_account_address_prefix : undefined
     };
   },
 
@@ -1439,7 +1439,7 @@ export const MsgDescriptor = {
 
   fromSDK(object: MsgDescriptorSDKType): MsgDescriptor {
     return {
-      msgTypeUrl: isSet(object.msg_type_url) ? object.msg_type_url : ""
+      msgTypeUrl: isSet(object.msg_type_url) ? object.msg_type_url : undefined
     };
   },
 
@@ -2345,8 +2345,8 @@ export const QueryServiceDescriptor = {
 
   fromSDK(object: QueryServiceDescriptorSDKType): QueryServiceDescriptor {
     return {
-      fullname: isSet(object.fullname) ? object.fullname : "",
-      isModule: isSet(object.is_module) ? object.is_module : false,
+      fullname: isSet(object.fullname) ? object.fullname : undefined,
+      isModule: isSet(object.is_module) ? object.is_module : undefined,
       methods: Array.isArray(object?.methods) ? object.methods.map((e: any) => QueryMethodDescriptor.fromSDK(e)) : []
     };
   },
@@ -2436,8 +2436,8 @@ export const QueryMethodDescriptor = {
 
   fromSDK(object: QueryMethodDescriptorSDKType): QueryMethodDescriptor {
     return {
-      name: isSet(object.name) ? object.name : "",
-      fullQueryPath: isSet(object.full_query_path) ? object.full_query_path : ""
+      name: isSet(object.name) ? object.name : undefined,
+      fullQueryPath: isSet(object.full_query_path) ? object.full_query_path : undefined
     };
   },
 

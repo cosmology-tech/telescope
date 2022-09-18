@@ -281,7 +281,7 @@ export const QueryEpochProvisionsResponse = {
 
   fromSDK(object: QueryEpochProvisionsResponseSDKType): QueryEpochProvisionsResponse {
     return {
-      epochProvisions: isSet(object.epoch_provisions) ? object.epoch_provisions : new Uint8Array()
+      epochProvisions: isSet(object.epoch_provisions) ? object.epoch_provisions : undefined
     };
   },
 

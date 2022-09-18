@@ -228,7 +228,7 @@ exports[`ibc/lightclients/tendermint/v1/tendermint duration 2`] = `
 
   fromSDK(object: ClientStateSDKType): ClientState {
     return {
-      chainId: isSet(object.chain_id) ? object.chain_id : \\"\\",
+      chainId: isSet(object.chain_id) ? object.chain_id : undefined,
       trustLevel: isSet(object.trust_level) ? Fraction.fromSDK(object.trust_level) : undefined,
       trustingPeriod: isSet(object.trusting_period) ? Duration.fromSDK(object.trusting_period) : undefined,
       unbondingPeriod: isSet(object.unbonding_period) ? Duration.fromSDK(object.unbonding_period) : undefined,
@@ -237,8 +237,8 @@ exports[`ibc/lightclients/tendermint/v1/tendermint duration 2`] = `
       latestHeight: isSet(object.latest_height) ? Height.fromSDK(object.latest_height) : undefined,
       proofSpecs: Array.isArray(object?.proof_specs) ? object.proof_specs.map((e: any) => ProofSpec.fromSDK(e)) : [],
       upgradePath: Array.isArray(object?.upgrade_path) ? object.upgrade_path.map((e: any) => e) : [],
-      allowUpdateAfterExpiry: isSet(object.allow_update_after_expiry) ? object.allow_update_after_expiry : false,
-      allowUpdateAfterMisbehaviour: isSet(object.allow_update_after_misbehaviour) ? object.allow_update_after_misbehaviour : false
+      allowUpdateAfterExpiry: isSet(object.allow_update_after_expiry) ? object.allow_update_after_expiry : undefined,
+      allowUpdateAfterMisbehaviour: isSet(object.allow_update_after_misbehaviour) ? object.allow_update_after_misbehaviour : undefined
     };
   },
 
@@ -674,7 +674,7 @@ exports[`ibc/lightclients/tendermint/v1/tendermint string 2`] = `
 
   fromSDK(object: ClientStateSDKType): ClientState {
     return {
-      chainId: isSet(object.chain_id) ? object.chain_id : \\"\\",
+      chainId: isSet(object.chain_id) ? object.chain_id : undefined,
       trustLevel: isSet(object.trust_level) ? Fraction.fromSDK(object.trust_level) : undefined,
       trustingPeriod: isSet(object.trusting_period) ? Duration.fromSDK(object.trusting_period) : undefined,
       unbondingPeriod: isSet(object.unbonding_period) ? Duration.fromSDK(object.unbonding_period) : undefined,
@@ -683,8 +683,8 @@ exports[`ibc/lightclients/tendermint/v1/tendermint string 2`] = `
       latestHeight: isSet(object.latest_height) ? Height.fromSDK(object.latest_height) : undefined,
       proofSpecs: Array.isArray(object?.proof_specs) ? object.proof_specs.map((e: any) => ProofSpec.fromSDK(e)) : [],
       upgradePath: Array.isArray(object?.upgrade_path) ? object.upgrade_path.map((e: any) => e) : [],
-      allowUpdateAfterExpiry: isSet(object.allow_update_after_expiry) ? object.allow_update_after_expiry : false,
-      allowUpdateAfterMisbehaviour: isSet(object.allow_update_after_misbehaviour) ? object.allow_update_after_misbehaviour : false
+      allowUpdateAfterExpiry: isSet(object.allow_update_after_expiry) ? object.allow_update_after_expiry : undefined,
+      allowUpdateAfterMisbehaviour: isSet(object.allow_update_after_misbehaviour) ? object.allow_update_after_misbehaviour : undefined
     };
   },
 

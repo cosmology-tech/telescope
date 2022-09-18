@@ -123,8 +123,8 @@ export const ParameterChangeProposal = {
 
   fromSDK(object: ParameterChangeProposalSDKType): ParameterChangeProposal {
     return {
-      title: isSet(object.title) ? object.title : "",
-      description: isSet(object.description) ? object.description : "",
+      title: isSet(object.title) ? object.title : undefined,
+      description: isSet(object.description) ? object.description : undefined,
       changes: Array.isArray(object?.changes) ? object.changes.map((e: any) => ParamChange.fromSDK(e)) : []
     };
   },
@@ -226,9 +226,9 @@ export const ParamChange = {
 
   fromSDK(object: ParamChangeSDKType): ParamChange {
     return {
-      subspace: isSet(object.subspace) ? object.subspace : "",
-      key: isSet(object.key) ? object.key : "",
-      value: isSet(object.value) ? object.value : ""
+      subspace: isSet(object.subspace) ? object.subspace : undefined,
+      key: isSet(object.key) ? object.key : undefined,
+      value: isSet(object.value) ? object.value : undefined
     };
   },
 

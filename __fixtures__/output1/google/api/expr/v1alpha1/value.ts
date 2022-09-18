@@ -484,8 +484,8 @@ export const EnumValue = {
 
   fromSDK(object: EnumValueSDKType): EnumValue {
     return {
-      type: isSet(object.type) ? object.type : "",
-      value: isSet(object.value) ? object.value : 0
+      type: isSet(object.type) ? object.type : undefined,
+      value: isSet(object.value) ? object.value : undefined
     };
   },
 

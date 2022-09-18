@@ -269,7 +269,7 @@ export const QueryPeriodResponse = {
 
   fromSDK(object: QueryPeriodResponseSDKType): QueryPeriodResponse {
     return {
-      period: isSet(object.period) ? object.period : Long.UZERO
+      period: isSet(object.period) ? object.period : undefined
     };
   },
 
@@ -511,7 +511,7 @@ export const QuerySkippedEpochsResponse = {
 
   fromSDK(object: QuerySkippedEpochsResponseSDKType): QuerySkippedEpochsResponse {
     return {
-      skippedEpochs: isSet(object.skipped_epochs) ? object.skipped_epochs : Long.UZERO
+      skippedEpochs: isSet(object.skipped_epochs) ? object.skipped_epochs : undefined
     };
   },
 
@@ -753,7 +753,7 @@ export const QueryInflationRateResponse = {
 
   fromSDK(object: QueryInflationRateResponseSDKType): QueryInflationRateResponse {
     return {
-      inflationRate: isSet(object.inflation_rate) ? object.inflation_rate : ""
+      inflationRate: isSet(object.inflation_rate) ? object.inflation_rate : undefined
     };
   },
 

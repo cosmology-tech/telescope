@@ -290,8 +290,8 @@ export const AccountID = {
 
   fromSDK(object: AccountIDSDKType): AccountID {
     return {
-      scope: isSet(object.scope) ? object.scope : "",
-      xid: isSet(object.xid) ? object.xid : ""
+      scope: isSet(object.scope) ? object.scope : undefined,
+      xid: isSet(object.xid) ? object.xid : undefined
     };
   },
 
@@ -446,12 +446,12 @@ export const Account = {
   fromSDK(object: AccountSDKType): Account {
     return {
       id: isSet(object.id) ? AccountID.fromSDK(object.id) : undefined,
-      owner: isSet(object.owner) ? object.owner : "",
+      owner: isSet(object.owner) ? object.owner : undefined,
       state: isSet(object.state) ? account_StateFromJSON(object.state) : 0,
       balance: isSet(object.balance) ? DecCoin.fromSDK(object.balance) : undefined,
       transferred: isSet(object.transferred) ? DecCoin.fromSDK(object.transferred) : undefined,
-      settledAt: isSet(object.settled_at) ? object.settled_at : Long.ZERO,
-      depositor: isSet(object.depositor) ? object.depositor : "",
+      settledAt: isSet(object.settled_at) ? object.settled_at : undefined,
+      depositor: isSet(object.depositor) ? object.depositor : undefined,
       funds: isSet(object.funds) ? DecCoin.fromSDK(object.funds) : undefined
     };
   },
@@ -601,8 +601,8 @@ export const FractionalPayment = {
   fromSDK(object: FractionalPaymentSDKType): FractionalPayment {
     return {
       accountId: isSet(object.account_id) ? AccountID.fromSDK(object.account_id) : undefined,
-      paymentId: isSet(object.payment_id) ? object.payment_id : "",
-      owner: isSet(object.owner) ? object.owner : "",
+      paymentId: isSet(object.payment_id) ? object.payment_id : undefined,
+      owner: isSet(object.owner) ? object.owner : undefined,
       state: isSet(object.state) ? fractionalPayment_StateFromJSON(object.state) : 0,
       rate: isSet(object.rate) ? DecCoin.fromSDK(object.rate) : undefined,
       balance: isSet(object.balance) ? DecCoin.fromSDK(object.balance) : undefined,

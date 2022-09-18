@@ -312,11 +312,11 @@ export const Params = {
 
   fromSDK(object: ParamsSDKType): Params {
     return {
-      enableClaims: isSet(object.enable_claims) ? object.enable_claims : false,
+      enableClaims: isSet(object.enable_claims) ? object.enable_claims : undefined,
       airdropStartTime: isSet(object.airdrop_start_time) ? Timestamp.fromSDK(object.airdrop_start_time) : undefined,
       durationUntilDecay: isSet(object.duration_until_decay) ? Duration.fromSDK(object.duration_until_decay) : undefined,
       durationOfDecay: isSet(object.duration_of_decay) ? Duration.fromSDK(object.duration_of_decay) : undefined,
-      claimsDenom: isSet(object.claims_denom) ? object.claims_denom : "",
+      claimsDenom: isSet(object.claims_denom) ? object.claims_denom : undefined,
       authorizedChannels: Array.isArray(object?.authorized_channels) ? object.authorized_channels.map((e: any) => e) : [],
       evmChannels: Array.isArray(object?.evm_channels) ? object.evm_channels.map((e: any) => e) : []
     };

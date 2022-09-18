@@ -222,7 +222,7 @@ export const Struct_FieldsEntry = {
 
   fromSDK(object: Struct_FieldsEntrySDKType): Struct_FieldsEntry {
     return {
-      key: isSet(object.key) ? object.key : "",
+      key: isSet(object.key) ? object.key : undefined,
       value: isSet(object.value) ? Value.fromSDK(object.value) : undefined
     };
   },

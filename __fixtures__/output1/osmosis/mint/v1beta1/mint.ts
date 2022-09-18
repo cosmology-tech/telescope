@@ -183,7 +183,7 @@ export const Minter = {
 
   fromSDK(object: MinterSDKType): Minter {
     return {
-      epochProvisions: isSet(object.epoch_provisions) ? object.epoch_provisions : ""
+      epochProvisions: isSet(object.epoch_provisions) ? object.epoch_provisions : undefined
     };
   },
 
@@ -264,8 +264,8 @@ export const WeightedAddress = {
 
   fromSDK(object: WeightedAddressSDKType): WeightedAddress {
     return {
-      address: isSet(object.address) ? object.address : "",
-      weight: isSet(object.weight) ? object.weight : ""
+      address: isSet(object.address) ? object.address : undefined,
+      weight: isSet(object.weight) ? object.weight : undefined
     };
   },
 
@@ -371,10 +371,10 @@ export const DistributionProportions = {
 
   fromSDK(object: DistributionProportionsSDKType): DistributionProportions {
     return {
-      staking: isSet(object.staking) ? object.staking : "",
-      poolIncentives: isSet(object.pool_incentives) ? object.pool_incentives : "",
-      developerRewards: isSet(object.developer_rewards) ? object.developer_rewards : "",
-      communityPool: isSet(object.community_pool) ? object.community_pool : ""
+      staking: isSet(object.staking) ? object.staking : undefined,
+      poolIncentives: isSet(object.pool_incentives) ? object.pool_incentives : undefined,
+      developerRewards: isSet(object.developer_rewards) ? object.developer_rewards : undefined,
+      communityPool: isSet(object.community_pool) ? object.community_pool : undefined
     };
   },
 
@@ -536,14 +536,14 @@ export const Params = {
 
   fromSDK(object: ParamsSDKType): Params {
     return {
-      mintDenom: isSet(object.mint_denom) ? object.mint_denom : "",
-      genesisEpochProvisions: isSet(object.genesis_epoch_provisions) ? object.genesis_epoch_provisions : "",
-      epochIdentifier: isSet(object.epoch_identifier) ? object.epoch_identifier : "",
-      reductionPeriodInEpochs: isSet(object.reduction_period_in_epochs) ? object.reduction_period_in_epochs : Long.ZERO,
-      reductionFactor: isSet(object.reduction_factor) ? object.reduction_factor : "",
+      mintDenom: isSet(object.mint_denom) ? object.mint_denom : undefined,
+      genesisEpochProvisions: isSet(object.genesis_epoch_provisions) ? object.genesis_epoch_provisions : undefined,
+      epochIdentifier: isSet(object.epoch_identifier) ? object.epoch_identifier : undefined,
+      reductionPeriodInEpochs: isSet(object.reduction_period_in_epochs) ? object.reduction_period_in_epochs : undefined,
+      reductionFactor: isSet(object.reduction_factor) ? object.reduction_factor : undefined,
       distributionProportions: isSet(object.distribution_proportions) ? DistributionProportions.fromSDK(object.distribution_proportions) : undefined,
       weightedDeveloperRewardsReceivers: Array.isArray(object?.weighted_developer_rewards_receivers) ? object.weighted_developer_rewards_receivers.map((e: any) => WeightedAddress.fromSDK(e)) : [],
-      mintingRewardsDistributionStartEpoch: isSet(object.minting_rewards_distribution_start_epoch) ? object.minting_rewards_distribution_start_epoch : Long.ZERO
+      mintingRewardsDistributionStartEpoch: isSet(object.minting_rewards_distribution_start_epoch) ? object.minting_rewards_distribution_start_epoch : undefined
     };
   },
 

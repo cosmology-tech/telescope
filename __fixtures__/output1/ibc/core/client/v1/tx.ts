@@ -260,7 +260,7 @@ export const MsgCreateClient = {
     return {
       clientState: isSet(object.client_state) ? Any.fromSDK(object.client_state) : undefined,
       consensusState: isSet(object.consensus_state) ? Any.fromSDK(object.consensus_state) : undefined,
-      signer: isSet(object.signer) ? object.signer : ""
+      signer: isSet(object.signer) ? object.signer : undefined
     };
   },
 
@@ -407,9 +407,9 @@ export const MsgUpdateClient = {
 
   fromSDK(object: MsgUpdateClientSDKType): MsgUpdateClient {
     return {
-      clientId: isSet(object.client_id) ? object.client_id : "",
+      clientId: isSet(object.client_id) ? object.client_id : undefined,
       header: isSet(object.header) ? Any.fromSDK(object.header) : undefined,
-      signer: isSet(object.signer) ? object.signer : ""
+      signer: isSet(object.signer) ? object.signer : undefined
     };
   },
 
@@ -592,12 +592,12 @@ export const MsgUpgradeClient = {
 
   fromSDK(object: MsgUpgradeClientSDKType): MsgUpgradeClient {
     return {
-      clientId: isSet(object.client_id) ? object.client_id : "",
+      clientId: isSet(object.client_id) ? object.client_id : undefined,
       clientState: isSet(object.client_state) ? Any.fromSDK(object.client_state) : undefined,
       consensusState: isSet(object.consensus_state) ? Any.fromSDK(object.consensus_state) : undefined,
-      proofUpgradeClient: isSet(object.proof_upgrade_client) ? object.proof_upgrade_client : new Uint8Array(),
-      proofUpgradeConsensusState: isSet(object.proof_upgrade_consensus_state) ? object.proof_upgrade_consensus_state : new Uint8Array(),
-      signer: isSet(object.signer) ? object.signer : ""
+      proofUpgradeClient: isSet(object.proof_upgrade_client) ? object.proof_upgrade_client : undefined,
+      proofUpgradeConsensusState: isSet(object.proof_upgrade_consensus_state) ? object.proof_upgrade_consensus_state : undefined,
+      signer: isSet(object.signer) ? object.signer : undefined
     };
   },
 
@@ -747,9 +747,9 @@ export const MsgSubmitMisbehaviour = {
 
   fromSDK(object: MsgSubmitMisbehaviourSDKType): MsgSubmitMisbehaviour {
     return {
-      clientId: isSet(object.client_id) ? object.client_id : "",
+      clientId: isSet(object.client_id) ? object.client_id : undefined,
       misbehaviour: isSet(object.misbehaviour) ? Any.fromSDK(object.misbehaviour) : undefined,
-      signer: isSet(object.signer) ? object.signer : ""
+      signer: isSet(object.signer) ? object.signer : undefined
     };
   },
 

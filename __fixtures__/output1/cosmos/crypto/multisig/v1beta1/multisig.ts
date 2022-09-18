@@ -192,8 +192,8 @@ export const CompactBitArray = {
 
   fromSDK(object: CompactBitArraySDKType): CompactBitArray {
     return {
-      extraBitsStored: isSet(object.extra_bits_stored) ? object.extra_bits_stored : 0,
-      elems: isSet(object.elems) ? object.elems : new Uint8Array()
+      extraBitsStored: isSet(object.extra_bits_stored) ? object.extra_bits_stored : undefined,
+      elems: isSet(object.elems) ? object.elems : undefined
     };
   },
 

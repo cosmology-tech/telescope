@@ -445,10 +445,10 @@ export const Code = {
 
   fromSDK(object: CodeSDKType): Code {
     return {
-      codeId: isSet(object.code_id) ? object.code_id : Long.UZERO,
+      codeId: isSet(object.code_id) ? object.code_id : undefined,
       codeInfo: isSet(object.code_info) ? CodeInfo.fromSDK(object.code_info) : undefined,
-      codeBytes: isSet(object.code_bytes) ? object.code_bytes : new Uint8Array(),
-      pinned: isSet(object.pinned) ? object.pinned : false
+      codeBytes: isSet(object.code_bytes) ? object.code_bytes : undefined,
+      pinned: isSet(object.pinned) ? object.pinned : undefined
     };
   },
 
@@ -550,7 +550,7 @@ export const Contract = {
 
   fromSDK(object: ContractSDKType): Contract {
     return {
-      contractAddress: isSet(object.contract_address) ? object.contract_address : "",
+      contractAddress: isSet(object.contract_address) ? object.contract_address : undefined,
       contractInfo: isSet(object.contract_info) ? ContractInfo.fromSDK(object.contract_info) : undefined,
       contractState: Array.isArray(object?.contract_state) ? object.contract_state.map((e: any) => Model.fromSDK(e)) : []
     };
@@ -641,8 +641,8 @@ export const Sequence = {
 
   fromSDK(object: SequenceSDKType): Sequence {
     return {
-      idKey: isSet(object.id_key) ? object.id_key : new Uint8Array(),
-      value: isSet(object.value) ? object.value : Long.UZERO
+      idKey: isSet(object.id_key) ? object.id_key : undefined,
+      value: isSet(object.value) ? object.value : undefined
     };
   },
 

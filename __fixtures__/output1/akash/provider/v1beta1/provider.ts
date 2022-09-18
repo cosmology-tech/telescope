@@ -160,8 +160,8 @@ export const ProviderInfo = {
 
   fromSDK(object: ProviderInfoSDKType): ProviderInfo {
     return {
-      email: isSet(object.email) ? object.email : "",
-      website: isSet(object.website) ? object.website : ""
+      email: isSet(object.email) ? object.email : undefined,
+      website: isSet(object.website) ? object.website : undefined
     };
   },
 
@@ -273,8 +273,8 @@ export const MsgCreateProvider = {
 
   fromSDK(object: MsgCreateProviderSDKType): MsgCreateProvider {
     return {
-      owner: isSet(object.owner) ? object.owner : "",
-      hostUri: isSet(object.host_uri) ? object.host_uri : "",
+      owner: isSet(object.owner) ? object.owner : undefined,
+      hostUri: isSet(object.host_uri) ? object.host_uri : undefined,
       attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromSDK(e)) : [],
       info: isSet(object.info) ? ProviderInfo.fromSDK(object.info) : undefined
     };
@@ -448,8 +448,8 @@ export const MsgUpdateProvider = {
 
   fromSDK(object: MsgUpdateProviderSDKType): MsgUpdateProvider {
     return {
-      owner: isSet(object.owner) ? object.owner : "",
-      hostUri: isSet(object.host_uri) ? object.host_uri : "",
+      owner: isSet(object.owner) ? object.owner : undefined,
+      hostUri: isSet(object.host_uri) ? object.host_uri : undefined,
       attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromSDK(e)) : [],
       info: isSet(object.info) ? ProviderInfo.fromSDK(object.info) : undefined
     };
@@ -581,7 +581,7 @@ export const MsgDeleteProvider = {
 
   fromSDK(object: MsgDeleteProviderSDKType): MsgDeleteProvider {
     return {
-      owner: isSet(object.owner) ? object.owner : ""
+      owner: isSet(object.owner) ? object.owner : undefined
     };
   },
 
@@ -744,8 +744,8 @@ export const Provider = {
 
   fromSDK(object: ProviderSDKType): Provider {
     return {
-      owner: isSet(object.owner) ? object.owner : "",
-      hostUri: isSet(object.host_uri) ? object.host_uri : "",
+      owner: isSet(object.owner) ? object.owner : undefined,
+      hostUri: isSet(object.host_uri) ? object.host_uri : undefined,
       attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromSDK(e)) : [],
       info: isSet(object.info) ? ProviderInfo.fromSDK(object.info) : undefined
     };

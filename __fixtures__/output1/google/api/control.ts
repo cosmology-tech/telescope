@@ -85,7 +85,7 @@ export const Control = {
 
   fromSDK(object: ControlSDKType): Control {
     return {
-      environment: isSet(object.environment) ? object.environment : ""
+      environment: isSet(object.environment) ? object.environment : undefined
     };
   },
 

@@ -175,10 +175,10 @@ export const GenesisState = {
   fromSDK(object: GenesisStateSDKType): GenesisState {
     return {
       params: isSet(object.params) ? Params.fromSDK(object.params) : undefined,
-      period: isSet(object.period) ? object.period : Long.UZERO,
-      epochIdentifier: isSet(object.epoch_identifier) ? object.epoch_identifier : "",
-      epochsPerPeriod: isSet(object.epochs_per_period) ? object.epochs_per_period : Long.ZERO,
-      skippedEpochs: isSet(object.skipped_epochs) ? object.skipped_epochs : Long.UZERO
+      period: isSet(object.period) ? object.period : undefined,
+      epochIdentifier: isSet(object.epoch_identifier) ? object.epoch_identifier : undefined,
+      epochsPerPeriod: isSet(object.epochs_per_period) ? object.epochs_per_period : undefined,
+      skippedEpochs: isSet(object.skipped_epochs) ? object.skipped_epochs : undefined
     };
   },
 
@@ -287,10 +287,10 @@ export const Params = {
 
   fromSDK(object: ParamsSDKType): Params {
     return {
-      mintDenom: isSet(object.mint_denom) ? object.mint_denom : "",
+      mintDenom: isSet(object.mint_denom) ? object.mint_denom : undefined,
       exponentialCalculation: isSet(object.exponential_calculation) ? ExponentialCalculation.fromSDK(object.exponential_calculation) : undefined,
       inflationDistribution: isSet(object.inflation_distribution) ? InflationDistribution.fromSDK(object.inflation_distribution) : undefined,
-      enableInflation: isSet(object.enable_inflation) ? object.enable_inflation : false
+      enableInflation: isSet(object.enable_inflation) ? object.enable_inflation : undefined
     };
   },
 

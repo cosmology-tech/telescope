@@ -215,7 +215,7 @@ export const Entry = {
 
   fromSDK(object: EntrySDKType): Entry {
     return {
-      owner: isSet(object.owner) ? object.owner : "",
+      owner: isSet(object.owner) ? object.owner : undefined,
       nfts: Array.isArray(object?.nfts) ? object.nfts.map((e: any) => NFT.fromSDK(e)) : []
     };
   },

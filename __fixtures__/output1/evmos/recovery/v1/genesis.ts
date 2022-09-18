@@ -171,7 +171,7 @@ export const Params = {
 
   fromSDK(object: ParamsSDKType): Params {
     return {
-      enableRecovery: isSet(object.enable_recovery) ? object.enable_recovery : false,
+      enableRecovery: isSet(object.enable_recovery) ? object.enable_recovery : undefined,
       packetTimeoutDuration: isSet(object.packet_timeout_duration) ? Duration.fromSDK(object.packet_timeout_duration) : undefined
     };
   },

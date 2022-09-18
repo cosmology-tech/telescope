@@ -197,7 +197,7 @@ export const GenesisState = {
   fromSDK(object: GenesisStateSDKType): GenesisState {
     return {
       pools: Array.isArray(object?.pools) ? object.pools.map((e: any) => Any.fromSDK(e)) : [],
-      nextPoolNumber: isSet(object.next_pool_number) ? object.next_pool_number : Long.UZERO,
+      nextPoolNumber: isSet(object.next_pool_number) ? object.next_pool_number : undefined,
       params: isSet(object.params) ? Params.fromSDK(object.params) : undefined
     };
   },

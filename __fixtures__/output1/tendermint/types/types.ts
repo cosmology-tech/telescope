@@ -431,8 +431,8 @@ export const PartSetHeader = {
 
   fromSDK(object: PartSetHeaderSDKType): PartSetHeader {
     return {
-      total: isSet(object.total) ? object.total : 0,
-      hash: isSet(object.hash) ? object.hash : new Uint8Array()
+      total: isSet(object.total) ? object.total : undefined,
+      hash: isSet(object.hash) ? object.hash : undefined
     };
   },
 
@@ -526,8 +526,8 @@ export const Part = {
 
   fromSDK(object: PartSDKType): Part {
     return {
-      index: isSet(object.index) ? object.index : 0,
-      bytes: isSet(object.bytes) ? object.bytes : new Uint8Array(),
+      index: isSet(object.index) ? object.index : undefined,
+      bytes: isSet(object.bytes) ? object.bytes : undefined,
       proof: isSet(object.proof) ? Proof.fromSDK(object.proof) : undefined
     };
   },
@@ -611,7 +611,7 @@ export const BlockID = {
 
   fromSDK(object: BlockIDSDKType): BlockID {
     return {
-      hash: isSet(object.hash) ? object.hash : new Uint8Array(),
+      hash: isSet(object.hash) ? object.hash : undefined,
       partSetHeader: isSet(object.part_set_header) ? PartSetHeader.fromSDK(object.part_set_header) : undefined
     };
   },
@@ -839,19 +839,19 @@ export const Header = {
   fromSDK(object: HeaderSDKType): Header {
     return {
       version: isSet(object.version) ? Consensus.fromSDK(object.version) : undefined,
-      chainId: isSet(object.chain_id) ? object.chain_id : "",
-      height: isSet(object.height) ? object.height : Long.ZERO,
+      chainId: isSet(object.chain_id) ? object.chain_id : undefined,
+      height: isSet(object.height) ? object.height : undefined,
       time: isSet(object.time) ? Timestamp.fromSDK(object.time) : undefined,
       lastBlockId: isSet(object.last_block_id) ? BlockID.fromSDK(object.last_block_id) : undefined,
-      lastCommitHash: isSet(object.last_commit_hash) ? object.last_commit_hash : new Uint8Array(),
-      dataHash: isSet(object.data_hash) ? object.data_hash : new Uint8Array(),
-      validatorsHash: isSet(object.validators_hash) ? object.validators_hash : new Uint8Array(),
-      nextValidatorsHash: isSet(object.next_validators_hash) ? object.next_validators_hash : new Uint8Array(),
-      consensusHash: isSet(object.consensus_hash) ? object.consensus_hash : new Uint8Array(),
-      appHash: isSet(object.app_hash) ? object.app_hash : new Uint8Array(),
-      lastResultsHash: isSet(object.last_results_hash) ? object.last_results_hash : new Uint8Array(),
-      evidenceHash: isSet(object.evidence_hash) ? object.evidence_hash : new Uint8Array(),
-      proposerAddress: isSet(object.proposer_address) ? object.proposer_address : new Uint8Array()
+      lastCommitHash: isSet(object.last_commit_hash) ? object.last_commit_hash : undefined,
+      dataHash: isSet(object.data_hash) ? object.data_hash : undefined,
+      validatorsHash: isSet(object.validators_hash) ? object.validators_hash : undefined,
+      nextValidatorsHash: isSet(object.next_validators_hash) ? object.next_validators_hash : undefined,
+      consensusHash: isSet(object.consensus_hash) ? object.consensus_hash : undefined,
+      appHash: isSet(object.app_hash) ? object.app_hash : undefined,
+      lastResultsHash: isSet(object.last_results_hash) ? object.last_results_hash : undefined,
+      evidenceHash: isSet(object.evidence_hash) ? object.evidence_hash : undefined,
+      proposerAddress: isSet(object.proposer_address) ? object.proposer_address : undefined
     };
   },
 
@@ -1099,13 +1099,13 @@ export const Vote = {
   fromSDK(object: VoteSDKType): Vote {
     return {
       type: isSet(object.type) ? signedMsgTypeFromJSON(object.type) : 0,
-      height: isSet(object.height) ? object.height : Long.ZERO,
-      round: isSet(object.round) ? object.round : 0,
+      height: isSet(object.height) ? object.height : undefined,
+      round: isSet(object.round) ? object.round : undefined,
       blockId: isSet(object.block_id) ? BlockID.fromSDK(object.block_id) : undefined,
       timestamp: isSet(object.timestamp) ? Timestamp.fromSDK(object.timestamp) : undefined,
-      validatorAddress: isSet(object.validator_address) ? object.validator_address : new Uint8Array(),
-      validatorIndex: isSet(object.validator_index) ? object.validator_index : 0,
-      signature: isSet(object.signature) ? object.signature : new Uint8Array()
+      validatorAddress: isSet(object.validator_address) ? object.validator_address : undefined,
+      validatorIndex: isSet(object.validator_index) ? object.validator_index : undefined,
+      signature: isSet(object.signature) ? object.signature : undefined
     };
   },
 
@@ -1223,8 +1223,8 @@ export const Commit = {
 
   fromSDK(object: CommitSDKType): Commit {
     return {
-      height: isSet(object.height) ? object.height : Long.ZERO,
-      round: isSet(object.round) ? object.round : 0,
+      height: isSet(object.height) ? object.height : undefined,
+      round: isSet(object.round) ? object.round : undefined,
       blockId: isSet(object.block_id) ? BlockID.fromSDK(object.block_id) : undefined,
       signatures: Array.isArray(object?.signatures) ? object.signatures.map((e: any) => CommitSig.fromSDK(e)) : []
     };
@@ -1341,9 +1341,9 @@ export const CommitSig = {
   fromSDK(object: CommitSigSDKType): CommitSig {
     return {
       blockIdFlag: isSet(object.block_id_flag) ? blockIDFlagFromJSON(object.block_id_flag) : 0,
-      validatorAddress: isSet(object.validator_address) ? object.validator_address : new Uint8Array(),
+      validatorAddress: isSet(object.validator_address) ? object.validator_address : undefined,
       timestamp: isSet(object.timestamp) ? Timestamp.fromSDK(object.timestamp) : undefined,
-      signature: isSet(object.signature) ? object.signature : new Uint8Array()
+      signature: isSet(object.signature) ? object.signature : undefined
     };
   },
 
@@ -1488,12 +1488,12 @@ export const Proposal = {
   fromSDK(object: ProposalSDKType): Proposal {
     return {
       type: isSet(object.type) ? signedMsgTypeFromJSON(object.type) : 0,
-      height: isSet(object.height) ? object.height : Long.ZERO,
-      round: isSet(object.round) ? object.round : 0,
-      polRound: isSet(object.pol_round) ? object.pol_round : 0,
+      height: isSet(object.height) ? object.height : undefined,
+      round: isSet(object.round) ? object.round : undefined,
+      polRound: isSet(object.pol_round) ? object.pol_round : undefined,
       blockId: isSet(object.block_id) ? BlockID.fromSDK(object.block_id) : undefined,
       timestamp: isSet(object.timestamp) ? Timestamp.fromSDK(object.timestamp) : undefined,
-      signature: isSet(object.signature) ? object.signature : new Uint8Array()
+      signature: isSet(object.signature) ? object.signature : undefined
     };
   },
 
@@ -1771,9 +1771,9 @@ export const BlockMeta = {
   fromSDK(object: BlockMetaSDKType): BlockMeta {
     return {
       blockId: isSet(object.block_id) ? BlockID.fromSDK(object.block_id) : undefined,
-      blockSize: isSet(object.block_size) ? object.block_size : Long.ZERO,
+      blockSize: isSet(object.block_size) ? object.block_size : undefined,
       header: isSet(object.header) ? Header.fromSDK(object.header) : undefined,
-      numTxs: isSet(object.num_txs) ? object.num_txs : Long.ZERO
+      numTxs: isSet(object.num_txs) ? object.num_txs : undefined
     };
   },
 
@@ -1869,8 +1869,8 @@ export const TxProof = {
 
   fromSDK(object: TxProofSDKType): TxProof {
     return {
-      rootHash: isSet(object.root_hash) ? object.root_hash : new Uint8Array(),
-      data: isSet(object.data) ? object.data : new Uint8Array(),
+      rootHash: isSet(object.root_hash) ? object.root_hash : undefined,
+      data: isSet(object.data) ? object.data : undefined,
       proof: isSet(object.proof) ? Proof.fromSDK(object.proof) : undefined
     };
   },

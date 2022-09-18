@@ -139,10 +139,10 @@ export const EventSend = {
 
   fromSDK(object: EventSendSDKType): EventSend {
     return {
-      classId: isSet(object.class_id) ? object.class_id : "",
-      id: isSet(object.id) ? object.id : "",
-      sender: isSet(object.sender) ? object.sender : "",
-      receiver: isSet(object.receiver) ? object.receiver : ""
+      classId: isSet(object.class_id) ? object.class_id : undefined,
+      id: isSet(object.id) ? object.id : undefined,
+      sender: isSet(object.sender) ? object.sender : undefined,
+      receiver: isSet(object.receiver) ? object.receiver : undefined
     };
   },
 
@@ -238,9 +238,9 @@ export const EventMint = {
 
   fromSDK(object: EventMintSDKType): EventMint {
     return {
-      classId: isSet(object.class_id) ? object.class_id : "",
-      id: isSet(object.id) ? object.id : "",
-      owner: isSet(object.owner) ? object.owner : ""
+      classId: isSet(object.class_id) ? object.class_id : undefined,
+      id: isSet(object.id) ? object.id : undefined,
+      owner: isSet(object.owner) ? object.owner : undefined
     };
   },
 
@@ -335,9 +335,9 @@ export const EventBurn = {
 
   fromSDK(object: EventBurnSDKType): EventBurn {
     return {
-      classId: isSet(object.class_id) ? object.class_id : "",
-      id: isSet(object.id) ? object.id : "",
-      owner: isSet(object.owner) ? object.owner : ""
+      classId: isSet(object.class_id) ? object.class_id : undefined,
+      id: isSet(object.id) ? object.id : undefined,
+      owner: isSet(object.owner) ? object.owner : undefined
     };
   },
 

@@ -207,13 +207,13 @@ export const MsgTransfer = {
 
   fromSDK(object: MsgTransferSDKType): MsgTransfer {
     return {
-      sourcePort: isSet(object.source_port) ? object.source_port : "",
-      sourceChannel: isSet(object.source_channel) ? object.source_channel : "",
+      sourcePort: isSet(object.source_port) ? object.source_port : undefined,
+      sourceChannel: isSet(object.source_channel) ? object.source_channel : undefined,
       token: isSet(object.token) ? Coin.fromSDK(object.token) : undefined,
-      sender: isSet(object.sender) ? object.sender : "",
-      receiver: isSet(object.receiver) ? object.receiver : "",
+      sender: isSet(object.sender) ? object.sender : undefined,
+      receiver: isSet(object.receiver) ? object.receiver : undefined,
       timeoutHeight: isSet(object.timeout_height) ? Height.fromSDK(object.timeout_height) : undefined,
-      timeoutTimestamp: isSet(object.timeout_timestamp) ? object.timeout_timestamp : Long.UZERO
+      timeoutTimestamp: isSet(object.timeout_timestamp) ? object.timeout_timestamp : undefined
     };
   },
 

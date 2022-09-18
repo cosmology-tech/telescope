@@ -235,7 +235,7 @@ export const GenesisState = {
       sendSequences: Array.isArray(object?.send_sequences) ? object.send_sequences.map((e: any) => PacketSequence.fromSDK(e)) : [],
       recvSequences: Array.isArray(object?.recv_sequences) ? object.recv_sequences.map((e: any) => PacketSequence.fromSDK(e)) : [],
       ackSequences: Array.isArray(object?.ack_sequences) ? object.ack_sequences.map((e: any) => PacketSequence.fromSDK(e)) : [],
-      nextChannelSequence: isSet(object.next_channel_sequence) ? object.next_channel_sequence : Long.UZERO
+      nextChannelSequence: isSet(object.next_channel_sequence) ? object.next_channel_sequence : undefined
     };
   },
 
@@ -371,9 +371,9 @@ export const PacketSequence = {
 
   fromSDK(object: PacketSequenceSDKType): PacketSequence {
     return {
-      portId: isSet(object.port_id) ? object.port_id : "",
-      channelId: isSet(object.channel_id) ? object.channel_id : "",
-      sequence: isSet(object.sequence) ? object.sequence : Long.UZERO
+      portId: isSet(object.port_id) ? object.port_id : undefined,
+      channelId: isSet(object.channel_id) ? object.channel_id : undefined,
+      sequence: isSet(object.sequence) ? object.sequence : undefined
     };
   },
 

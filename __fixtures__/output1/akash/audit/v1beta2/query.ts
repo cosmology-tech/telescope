@@ -238,8 +238,8 @@ export const QueryProviderRequest = {
 
   fromSDK(object: QueryProviderRequestSDKType): QueryProviderRequest {
     return {
-      auditor: isSet(object.auditor) ? object.auditor : "",
-      owner: isSet(object.owner) ? object.owner : ""
+      auditor: isSet(object.auditor) ? object.auditor : undefined,
+      owner: isSet(object.owner) ? object.owner : undefined
     };
   },
 
@@ -390,7 +390,7 @@ export const QueryProviderAttributesRequest = {
 
   fromSDK(object: QueryProviderAttributesRequestSDKType): QueryProviderAttributesRequest {
     return {
-      owner: isSet(object.owner) ? object.owner : "",
+      owner: isSet(object.owner) ? object.owner : undefined,
       pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
@@ -473,8 +473,8 @@ export const QueryProviderAuditorRequest = {
 
   fromSDK(object: QueryProviderAuditorRequestSDKType): QueryProviderAuditorRequest {
     return {
-      auditor: isSet(object.auditor) ? object.auditor : "",
-      owner: isSet(object.owner) ? object.owner : ""
+      auditor: isSet(object.auditor) ? object.auditor : undefined,
+      owner: isSet(object.owner) ? object.owner : undefined
     };
   },
 
@@ -556,7 +556,7 @@ export const QueryAuditorAttributesRequest = {
 
   fromSDK(object: QueryAuditorAttributesRequestSDKType): QueryAuditorAttributesRequest {
     return {
-      auditor: isSet(object.auditor) ? object.auditor : "",
+      auditor: isSet(object.auditor) ? object.auditor : undefined,
       pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },

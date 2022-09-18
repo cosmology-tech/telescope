@@ -211,10 +211,10 @@ export const Endpoint = {
 
   fromSDK(object: EndpointSDKType): Endpoint {
     return {
-      name: isSet(object.name) ? object.name : "",
+      name: isSet(object.name) ? object.name : undefined,
       aliases: Array.isArray(object?.aliases) ? object.aliases.map((e: any) => e) : [],
-      target: isSet(object.target) ? object.target : "",
-      allowCors: isSet(object.allow_cors) ? object.allow_cors : false
+      target: isSet(object.target) ? object.target : undefined,
+      allowCors: isSet(object.allow_cors) ? object.allow_cors : undefined
     };
   },
 

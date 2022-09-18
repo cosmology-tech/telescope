@@ -28,7 +28,8 @@ export const fromSDK = {
                     t.identifier('object'),
                     t.identifier(origName)
                 ),
-                getDefaultTSTypeFromProtoType(args.context, args.field, args.isOptional)
+                // getDefaultTSTypeFromProtoType(args.context, args.field, args.isOptional)
+                t.identifier('undefined')
             )
         )
     },

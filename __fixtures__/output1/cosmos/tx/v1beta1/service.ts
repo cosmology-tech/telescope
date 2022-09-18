@@ -673,7 +673,7 @@ export const BroadcastTxRequest = {
 
   fromSDK(object: BroadcastTxRequestSDKType): BroadcastTxRequest {
     return {
-      txBytes: isSet(object.tx_bytes) ? object.tx_bytes : new Uint8Array(),
+      txBytes: isSet(object.tx_bytes) ? object.tx_bytes : undefined,
       mode: isSet(object.mode) ? broadcastModeFromJSON(object.mode) : 0
     };
   },
@@ -826,7 +826,7 @@ export const SimulateRequest = {
   fromSDK(object: SimulateRequestSDKType): SimulateRequest {
     return {
       tx: isSet(object.tx) ? Tx.fromSDK(object.tx) : undefined,
-      txBytes: isSet(object.tx_bytes) ? object.tx_bytes : new Uint8Array()
+      txBytes: isSet(object.tx_bytes) ? object.tx_bytes : undefined
     };
   },
 
@@ -979,7 +979,7 @@ export const GetTxRequest = {
 
   fromSDK(object: GetTxRequestSDKType): GetTxRequest {
     return {
-      hash: isSet(object.hash) ? object.hash : ""
+      hash: isSet(object.hash) ? object.hash : undefined
     };
   },
 
@@ -1143,7 +1143,7 @@ export const GetBlockWithTxsRequest = {
 
   fromSDK(object: GetBlockWithTxsRequestSDKType): GetBlockWithTxsRequest {
     return {
-      height: isSet(object.height) ? object.height : Long.ZERO,
+      height: isSet(object.height) ? object.height : undefined,
       pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },

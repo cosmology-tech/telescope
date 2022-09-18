@@ -363,9 +363,9 @@ export const BlockParams = {
 
   fromSDK(object: BlockParamsSDKType): BlockParams {
     return {
-      maxBytes: isSet(object.max_bytes) ? object.max_bytes : Long.ZERO,
-      maxGas: isSet(object.max_gas) ? object.max_gas : Long.ZERO,
-      timeIotaMs: isSet(object.time_iota_ms) ? object.time_iota_ms : Long.ZERO
+      maxBytes: isSet(object.max_bytes) ? object.max_bytes : undefined,
+      maxGas: isSet(object.max_gas) ? object.max_gas : undefined,
+      timeIotaMs: isSet(object.time_iota_ms) ? object.time_iota_ms : undefined
     };
   },
 
@@ -460,9 +460,9 @@ export const EvidenceParams = {
 
   fromSDK(object: EvidenceParamsSDKType): EvidenceParams {
     return {
-      maxAgeNumBlocks: isSet(object.max_age_num_blocks) ? object.max_age_num_blocks : Long.ZERO,
+      maxAgeNumBlocks: isSet(object.max_age_num_blocks) ? object.max_age_num_blocks : undefined,
       maxAgeDuration: isSet(object.max_age_duration) ? Duration.fromSDK(object.max_age_duration) : undefined,
-      maxBytes: isSet(object.max_bytes) ? object.max_bytes : Long.ZERO
+      maxBytes: isSet(object.max_bytes) ? object.max_bytes : undefined
     };
   },
 
@@ -614,7 +614,7 @@ export const VersionParams = {
 
   fromSDK(object: VersionParamsSDKType): VersionParams {
     return {
-      appVersion: isSet(object.app_version) ? object.app_version : Long.UZERO
+      appVersion: isSet(object.app_version) ? object.app_version : undefined
     };
   },
 
@@ -695,8 +695,8 @@ export const HashedParams = {
 
   fromSDK(object: HashedParamsSDKType): HashedParams {
     return {
-      blockMaxBytes: isSet(object.block_max_bytes) ? object.block_max_bytes : Long.ZERO,
-      blockMaxGas: isSet(object.block_max_gas) ? object.block_max_gas : Long.ZERO
+      blockMaxBytes: isSet(object.block_max_bytes) ? object.block_max_bytes : undefined,
+      blockMaxGas: isSet(object.block_max_gas) ? object.block_max_gas : undefined
     };
   },
 

@@ -879,7 +879,7 @@ export const DeleteLogRequest = {
 
   fromSDK(object: DeleteLogRequestSDKType): DeleteLogRequest {
     return {
-      logName: isSet(object.log_name) ? object.log_name : ""
+      logName: isSet(object.log_name) ? object.log_name : undefined
     };
   },
 
@@ -960,8 +960,8 @@ export const WriteLogEntriesRequest_LabelsEntry = {
 
   fromSDK(object: WriteLogEntriesRequest_LabelsEntrySDKType): WriteLogEntriesRequest_LabelsEntry {
     return {
-      key: isSet(object.key) ? object.key : "",
-      value: isSet(object.value) ? object.value : ""
+      key: isSet(object.key) ? object.key : undefined,
+      value: isSet(object.value) ? object.value : undefined
     };
   },
 
@@ -1124,7 +1124,7 @@ export const WriteLogEntriesRequest = {
 
   fromSDK(object: WriteLogEntriesRequestSDKType): WriteLogEntriesRequest {
     return {
-      logName: isSet(object.log_name) ? object.log_name : "",
+      logName: isSet(object.log_name) ? object.log_name : undefined,
       resource: isSet(object.resource) ? MonitoredResource.fromSDK(object.resource) : undefined,
       labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
         [key: string]: string;
@@ -1133,8 +1133,8 @@ export const WriteLogEntriesRequest = {
         return acc;
       }, {}) : {},
       entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => LogEntry.fromSDK(e)) : [],
-      partialSuccess: isSet(object.partial_success) ? object.partial_success : false,
-      dryRun: isSet(object.dry_run) ? object.dry_run : false
+      partialSuccess: isSet(object.partial_success) ? object.partial_success : undefined,
+      dryRun: isSet(object.dry_run) ? object.dry_run : undefined
     };
   },
 
@@ -1284,7 +1284,7 @@ export const WriteLogEntriesPartialErrors_LogEntryErrorsEntry = {
 
   fromSDK(object: WriteLogEntriesPartialErrors_LogEntryErrorsEntrySDKType): WriteLogEntriesPartialErrors_LogEntryErrorsEntry {
     return {
-      key: isSet(object.key) ? object.key : 0,
+      key: isSet(object.key) ? object.key : undefined,
       value: isSet(object.value) ? google.rpc.Status.fromSDK(object.value) : undefined
     };
   },
@@ -1518,10 +1518,10 @@ export const ListLogEntriesRequest = {
   fromSDK(object: ListLogEntriesRequestSDKType): ListLogEntriesRequest {
     return {
       resourceNames: Array.isArray(object?.resource_names) ? object.resource_names.map((e: any) => e) : [],
-      filter: isSet(object.filter) ? object.filter : "",
-      orderBy: isSet(object.order_by) ? object.order_by : "",
-      pageSize: isSet(object.page_size) ? object.page_size : 0,
-      pageToken: isSet(object.page_token) ? object.page_token : ""
+      filter: isSet(object.filter) ? object.filter : undefined,
+      orderBy: isSet(object.order_by) ? object.order_by : undefined,
+      pageSize: isSet(object.page_size) ? object.page_size : undefined,
+      pageToken: isSet(object.page_token) ? object.page_token : undefined
     };
   },
 
@@ -1619,7 +1619,7 @@ export const ListLogEntriesResponse = {
   fromSDK(object: ListLogEntriesResponseSDKType): ListLogEntriesResponse {
     return {
       entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => LogEntry.fromSDK(e)) : [],
-      nextPageToken: isSet(object.next_page_token) ? object.next_page_token : ""
+      nextPageToken: isSet(object.next_page_token) ? object.next_page_token : undefined
     };
   },
 
@@ -1707,8 +1707,8 @@ export const ListMonitoredResourceDescriptorsRequest = {
 
   fromSDK(object: ListMonitoredResourceDescriptorsRequestSDKType): ListMonitoredResourceDescriptorsRequest {
     return {
-      pageSize: isSet(object.page_size) ? object.page_size : 0,
-      pageToken: isSet(object.page_token) ? object.page_token : ""
+      pageSize: isSet(object.page_size) ? object.page_size : undefined,
+      pageToken: isSet(object.page_token) ? object.page_token : undefined
     };
   },
 
@@ -1797,7 +1797,7 @@ export const ListMonitoredResourceDescriptorsResponse = {
   fromSDK(object: ListMonitoredResourceDescriptorsResponseSDKType): ListMonitoredResourceDescriptorsResponse {
     return {
       resourceDescriptors: Array.isArray(object?.resource_descriptors) ? object.resource_descriptors.map((e: any) => MonitoredResourceDescriptor.fromSDK(e)) : [],
-      nextPageToken: isSet(object.next_page_token) ? object.next_page_token : ""
+      nextPageToken: isSet(object.next_page_token) ? object.next_page_token : undefined
     };
   },
 
@@ -1915,9 +1915,9 @@ export const ListLogsRequest = {
 
   fromSDK(object: ListLogsRequestSDKType): ListLogsRequest {
     return {
-      parent: isSet(object.parent) ? object.parent : "",
-      pageSize: isSet(object.page_size) ? object.page_size : 0,
-      pageToken: isSet(object.page_token) ? object.page_token : "",
+      parent: isSet(object.parent) ? object.parent : undefined,
+      pageSize: isSet(object.page_size) ? object.page_size : undefined,
+      pageToken: isSet(object.page_token) ? object.page_token : undefined,
       resourceNames: Array.isArray(object?.resource_names) ? object.resource_names.map((e: any) => e) : []
     };
   },
@@ -2015,7 +2015,7 @@ export const ListLogsResponse = {
   fromSDK(object: ListLogsResponseSDKType): ListLogsResponse {
     return {
       logNames: Array.isArray(object?.log_names) ? object.log_names.map((e: any) => e) : [],
-      nextPageToken: isSet(object.next_page_token) ? object.next_page_token : ""
+      nextPageToken: isSet(object.next_page_token) ? object.next_page_token : undefined
     };
   },
 
@@ -2122,7 +2122,7 @@ export const TailLogEntriesRequest = {
   fromSDK(object: TailLogEntriesRequestSDKType): TailLogEntriesRequest {
     return {
       resourceNames: Array.isArray(object?.resource_names) ? object.resource_names.map((e: any) => e) : [],
-      filter: isSet(object.filter) ? object.filter : "",
+      filter: isSet(object.filter) ? object.filter : undefined,
       bufferWindow: isSet(object.buffer_window) ? Duration.fromSDK(object.buffer_window) : undefined
     };
   },
@@ -2318,7 +2318,7 @@ export const TailLogEntriesResponse_SuppressionInfo = {
   fromSDK(object: TailLogEntriesResponse_SuppressionInfoSDKType): TailLogEntriesResponse_SuppressionInfo {
     return {
       reason: isSet(object.reason) ? tailLogEntriesResponse_SuppressionInfo_ReasonFromJSON(object.reason) : 0,
-      suppressedCount: isSet(object.suppressed_count) ? object.suppressed_count : 0
+      suppressedCount: isSet(object.suppressed_count) ? object.suppressed_count : undefined
     };
   },
 

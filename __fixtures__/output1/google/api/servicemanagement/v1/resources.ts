@@ -798,8 +798,8 @@ export const ManagedService = {
 
   fromSDK(object: ManagedServiceSDKType): ManagedService {
     return {
-      serviceName: isSet(object.service_name) ? object.service_name : "",
-      producerProjectId: isSet(object.producer_project_id) ? object.producer_project_id : ""
+      serviceName: isSet(object.service_name) ? object.service_name : undefined,
+      producerProjectId: isSet(object.producer_project_id) ? object.producer_project_id : undefined
     };
   },
 
@@ -918,7 +918,7 @@ export const OperationMetadata = {
     return {
       resourceNames: Array.isArray(object?.resource_names) ? object.resource_names.map((e: any) => e) : [],
       steps: Array.isArray(object?.steps) ? object.steps.map((e: any) => OperationMetadata_Step.fromSDK(e)) : [],
-      progressPercentage: isSet(object.progress_percentage) ? object.progress_percentage : 0,
+      progressPercentage: isSet(object.progress_percentage) ? object.progress_percentage : undefined,
       startTime: isSet(object.start_time) ? Timestamp.fromSDK(object.start_time) : undefined
     };
   },
@@ -1014,7 +1014,7 @@ export const OperationMetadata_Step = {
 
   fromSDK(object: OperationMetadata_StepSDKType): OperationMetadata_Step {
     return {
-      description: isSet(object.description) ? object.description : "",
+      description: isSet(object.description) ? object.description : undefined,
       status: isSet(object.status) ? operationMetadata_StatusFromJSON(object.status) : 0
     };
   },
@@ -1109,9 +1109,9 @@ export const Diagnostic = {
 
   fromSDK(object: DiagnosticSDKType): Diagnostic {
     return {
-      location: isSet(object.location) ? object.location : "",
+      location: isSet(object.location) ? object.location : undefined,
       kind: isSet(object.kind) ? diagnostic_KindFromJSON(object.kind) : 0,
-      message: isSet(object.message) ? object.message : ""
+      message: isSet(object.message) ? object.message : undefined
     };
   },
 
@@ -1200,7 +1200,7 @@ export const ConfigSource = {
 
   fromSDK(object: ConfigSourceSDKType): ConfigSource {
     return {
-      id: isSet(object.id) ? object.id : "",
+      id: isSet(object.id) ? object.id : undefined,
       files: Array.isArray(object?.files) ? object.files.map((e: any) => ConfigFile.fromSDK(e)) : []
     };
   },
@@ -1301,8 +1301,8 @@ export const ConfigFile = {
 
   fromSDK(object: ConfigFileSDKType): ConfigFile {
     return {
-      filePath: isSet(object.file_path) ? object.file_path : "",
-      fileContents: isSet(object.file_contents) ? object.file_contents : new Uint8Array(),
+      filePath: isSet(object.file_path) ? object.file_path : undefined,
+      fileContents: isSet(object.file_contents) ? object.file_contents : undefined,
       fileType: isSet(object.file_type) ? configFile_FileTypeFromJSON(object.file_type) : 0
     };
   },
@@ -1374,7 +1374,7 @@ export const ConfigRef = {
 
   fromSDK(object: ConfigRefSDKType): ConfigRef {
     return {
-      name: isSet(object.name) ? object.name : ""
+      name: isSet(object.name) ? object.name : undefined
     };
   },
 
@@ -1596,13 +1596,13 @@ export const Rollout = {
 
   fromSDK(object: RolloutSDKType): Rollout {
     return {
-      rolloutId: isSet(object.rollout_id) ? object.rollout_id : "",
+      rolloutId: isSet(object.rollout_id) ? object.rollout_id : undefined,
       createTime: isSet(object.create_time) ? Timestamp.fromSDK(object.create_time) : undefined,
-      createdBy: isSet(object.created_by) ? object.created_by : "",
+      createdBy: isSet(object.created_by) ? object.created_by : undefined,
       status: isSet(object.status) ? rollout_RolloutStatusFromJSON(object.status) : 0,
       trafficPercentStrategy: isSet(object.traffic_percent_strategy) ? Rollout_TrafficPercentStrategy.fromSDK(object.traffic_percent_strategy) : undefined,
       deleteServiceStrategy: isSet(object.delete_service_strategy) ? Rollout_DeleteServiceStrategy.fromSDK(object.delete_service_strategy) : undefined,
-      serviceName: isSet(object.service_name) ? object.service_name : ""
+      serviceName: isSet(object.service_name) ? object.service_name : undefined
     };
   },
 
@@ -1689,8 +1689,8 @@ export const Rollout_TrafficPercentStrategy_PercentagesEntry = {
 
   fromSDK(object: Rollout_TrafficPercentStrategy_PercentagesEntrySDKType): Rollout_TrafficPercentStrategy_PercentagesEntry {
     return {
-      key: isSet(object.key) ? object.key : "",
-      value: isSet(object.value) ? object.value : 0
+      key: isSet(object.key) ? object.key : undefined,
+      value: isSet(object.value) ? object.value : undefined
     };
   },
 

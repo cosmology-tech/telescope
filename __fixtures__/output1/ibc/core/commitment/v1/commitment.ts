@@ -134,7 +134,7 @@ export const MerkleRoot = {
 
   fromSDK(object: MerkleRootSDKType): MerkleRoot {
     return {
-      hash: isSet(object.hash) ? object.hash : new Uint8Array()
+      hash: isSet(object.hash) ? object.hash : undefined
     };
   },
 
@@ -203,7 +203,7 @@ export const MerklePrefix = {
 
   fromSDK(object: MerklePrefixSDKType): MerklePrefix {
     return {
-      keyPrefix: isSet(object.key_prefix) ? object.key_prefix : new Uint8Array()
+      keyPrefix: isSet(object.key_prefix) ? object.key_prefix : undefined
     };
   },
 

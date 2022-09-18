@@ -204,10 +204,10 @@ export const OrderID = {
 
   fromSDK(object: OrderIDSDKType): OrderID {
     return {
-      owner: isSet(object.owner) ? object.owner : "",
-      dseq: isSet(object.dseq) ? object.dseq : Long.UZERO,
-      gseq: isSet(object.gseq) ? object.gseq : 0,
-      oseq: isSet(object.oseq) ? object.oseq : 0
+      owner: isSet(object.owner) ? object.owner : undefined,
+      dseq: isSet(object.dseq) ? object.dseq : undefined,
+      gseq: isSet(object.gseq) ? object.gseq : undefined,
+      oseq: isSet(object.oseq) ? object.oseq : undefined
     };
   },
 
@@ -318,7 +318,7 @@ export const Order = {
       orderId: isSet(object.order_id) ? OrderID.fromSDK(object.order_id) : undefined,
       state: isSet(object.state) ? order_StateFromJSON(object.state) : 0,
       spec: isSet(object.spec) ? GroupSpec.fromSDK(object.spec) : undefined,
-      createdAt: isSet(object.created_at) ? object.created_at : Long.ZERO
+      createdAt: isSet(object.created_at) ? object.created_at : undefined
     };
   },
 
@@ -438,11 +438,11 @@ export const OrderFilters = {
 
   fromSDK(object: OrderFiltersSDKType): OrderFilters {
     return {
-      owner: isSet(object.owner) ? object.owner : "",
-      dseq: isSet(object.dseq) ? object.dseq : Long.UZERO,
-      gseq: isSet(object.gseq) ? object.gseq : 0,
-      oseq: isSet(object.oseq) ? object.oseq : 0,
-      state: isSet(object.state) ? object.state : ""
+      owner: isSet(object.owner) ? object.owner : undefined,
+      dseq: isSet(object.dseq) ? object.dseq : undefined,
+      gseq: isSet(object.gseq) ? object.gseq : undefined,
+      oseq: isSet(object.oseq) ? object.oseq : undefined,
+      state: isSet(object.state) ? object.state : undefined
     };
   },
 

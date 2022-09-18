@@ -569,8 +569,8 @@ export const LogEntry_LabelsEntry = {
 
   fromSDK(object: LogEntry_LabelsEntrySDKType): LogEntry_LabelsEntry {
     return {
-      key: isSet(object.key) ? object.key : "",
-      value: isSet(object.value) ? object.value : ""
+      key: isSet(object.key) ? object.key : undefined,
+      value: isSet(object.value) ? object.value : undefined
     };
   },
 
@@ -860,7 +860,7 @@ export const LogEntry = {
 
   fromSDK(object: LogEntrySDKType): LogEntry {
     return {
-      logName: isSet(object.log_name) ? object.log_name : "",
+      logName: isSet(object.log_name) ? object.log_name : undefined,
       resource: isSet(object.resource) ? MonitoredResource.fromSDK(object.resource) : undefined,
       protoPayload: isSet(object.proto_payload) ? Any.fromSDK(object.proto_payload) : undefined,
       textPayload: isSet(object.text_payload) ? object.text_payload : undefined,
@@ -868,7 +868,7 @@ export const LogEntry = {
       timestamp: isSet(object.timestamp) ? Timestamp.fromSDK(object.timestamp) : undefined,
       receiveTimestamp: isSet(object.receive_timestamp) ? Timestamp.fromSDK(object.receive_timestamp) : undefined,
       severity: isSet(object.severity) ? logSeverityFromJSON(object.severity) : 0,
-      insertId: isSet(object.insert_id) ? object.insert_id : "",
+      insertId: isSet(object.insert_id) ? object.insert_id : undefined,
       httpRequest: isSet(object.http_request) ? HttpRequest.fromSDK(object.http_request) : undefined,
       labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
         [key: string]: string;
@@ -877,9 +877,9 @@ export const LogEntry = {
         return acc;
       }, {}) : {},
       operation: isSet(object.operation) ? LogEntryOperation.fromSDK(object.operation) : undefined,
-      trace: isSet(object.trace) ? object.trace : "",
-      spanId: isSet(object.span_id) ? object.span_id : "",
-      traceSampled: isSet(object.trace_sampled) ? object.trace_sampled : false,
+      trace: isSet(object.trace) ? object.trace : undefined,
+      spanId: isSet(object.span_id) ? object.span_id : undefined,
+      traceSampled: isSet(object.trace_sampled) ? object.trace_sampled : undefined,
       sourceLocation: isSet(object.source_location) ? LogEntrySourceLocation.fromSDK(object.source_location) : undefined,
       split: isSet(object.split) ? LogSplit.fromSDK(object.split) : undefined
     };
@@ -1009,10 +1009,10 @@ export const LogEntryOperation = {
 
   fromSDK(object: LogEntryOperationSDKType): LogEntryOperation {
     return {
-      id: isSet(object.id) ? object.id : "",
-      producer: isSet(object.producer) ? object.producer : "",
-      first: isSet(object.first) ? object.first : false,
-      last: isSet(object.last) ? object.last : false
+      id: isSet(object.id) ? object.id : undefined,
+      producer: isSet(object.producer) ? object.producer : undefined,
+      first: isSet(object.first) ? object.first : undefined,
+      last: isSet(object.last) ? object.last : undefined
     };
   },
 
@@ -1108,9 +1108,9 @@ export const LogEntrySourceLocation = {
 
   fromSDK(object: LogEntrySourceLocationSDKType): LogEntrySourceLocation {
     return {
-      file: isSet(object.file) ? object.file : "",
-      line: isSet(object.line) ? object.line : Long.ZERO,
-      function: isSet(object.function) ? object.function : ""
+      file: isSet(object.file) ? object.file : undefined,
+      line: isSet(object.line) ? object.line : undefined,
+      function: isSet(object.function) ? object.function : undefined
     };
   },
 
@@ -1205,9 +1205,9 @@ export const LogSplit = {
 
   fromSDK(object: LogSplitSDKType): LogSplit {
     return {
-      uid: isSet(object.uid) ? object.uid : "",
-      index: isSet(object.index) ? object.index : 0,
-      totalSplits: isSet(object.total_splits) ? object.total_splits : 0
+      uid: isSet(object.uid) ? object.uid : undefined,
+      index: isSet(object.index) ? object.index : undefined,
+      totalSplits: isSet(object.total_splits) ? object.total_splits : undefined
     };
   },
 

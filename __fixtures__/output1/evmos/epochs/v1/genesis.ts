@@ -161,13 +161,13 @@ export const EpochInfo = {
 
   fromSDK(object: EpochInfoSDKType): EpochInfo {
     return {
-      identifier: isSet(object.identifier) ? object.identifier : "",
+      identifier: isSet(object.identifier) ? object.identifier : undefined,
       startTime: isSet(object.start_time) ? Timestamp.fromSDK(object.start_time) : undefined,
       duration: isSet(object.duration) ? Duration.fromSDK(object.duration) : undefined,
-      currentEpoch: isSet(object.current_epoch) ? object.current_epoch : Long.ZERO,
+      currentEpoch: isSet(object.current_epoch) ? object.current_epoch : undefined,
       currentEpochStartTime: isSet(object.current_epoch_start_time) ? Timestamp.fromSDK(object.current_epoch_start_time) : undefined,
-      epochCountingStarted: isSet(object.epoch_counting_started) ? object.epoch_counting_started : false,
-      currentEpochStartHeight: isSet(object.current_epoch_start_height) ? object.current_epoch_start_height : Long.ZERO
+      epochCountingStarted: isSet(object.epoch_counting_started) ? object.epoch_counting_started : undefined,
+      currentEpochStartHeight: isSet(object.current_epoch_start_height) ? object.current_epoch_start_height : undefined
     };
   },
 

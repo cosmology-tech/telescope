@@ -189,9 +189,9 @@ export const InflationDistribution = {
 
   fromSDK(object: InflationDistributionSDKType): InflationDistribution {
     return {
-      stakingRewards: isSet(object.staking_rewards) ? object.staking_rewards : "",
-      usageIncentives: isSet(object.usage_incentives) ? object.usage_incentives : "",
-      communityPool: isSet(object.community_pool) ? object.community_pool : ""
+      stakingRewards: isSet(object.staking_rewards) ? object.staking_rewards : undefined,
+      usageIncentives: isSet(object.usage_incentives) ? object.usage_incentives : undefined,
+      communityPool: isSet(object.community_pool) ? object.community_pool : undefined
     };
   },
 
@@ -310,11 +310,11 @@ export const ExponentialCalculation = {
 
   fromSDK(object: ExponentialCalculationSDKType): ExponentialCalculation {
     return {
-      a: isSet(object.a) ? object.a : "",
-      r: isSet(object.r) ? object.r : "",
-      c: isSet(object.c) ? object.c : "",
-      bondingTarget: isSet(object.bonding_target) ? object.bonding_target : "",
-      maxVariance: isSet(object.max_variance) ? object.max_variance : ""
+      a: isSet(object.a) ? object.a : undefined,
+      r: isSet(object.r) ? object.r : undefined,
+      c: isSet(object.c) ? object.c : undefined,
+      bondingTarget: isSet(object.bonding_target) ? object.bonding_target : undefined,
+      maxVariance: isSet(object.max_variance) ? object.max_variance : undefined
     };
   },
 

@@ -270,7 +270,7 @@ export const ModuleDescriptor = {
 
   fromSDK(object: ModuleDescriptorSDKType): ModuleDescriptor {
     return {
-      goImport: isSet(object.go_import) ? object.go_import : "",
+      goImport: isSet(object.go_import) ? object.go_import : undefined,
       usePackage: Array.isArray(object?.use_package) ? object.use_package.map((e: any) => PackageReference.fromSDK(e)) : [],
       canMigrateFrom: Array.isArray(object?.can_migrate_from) ? object.can_migrate_from.map((e: any) => MigrateFromInfo.fromSDK(e)) : []
     };
@@ -366,8 +366,8 @@ export const PackageReference = {
 
   fromSDK(object: PackageReferenceSDKType): PackageReference {
     return {
-      name: isSet(object.name) ? object.name : "",
-      revision: isSet(object.revision) ? object.revision : 0
+      name: isSet(object.name) ? object.name : undefined,
+      revision: isSet(object.revision) ? object.revision : undefined
     };
   },
 
@@ -437,7 +437,7 @@ export const MigrateFromInfo = {
 
   fromSDK(object: MigrateFromInfoSDKType): MigrateFromInfo {
     return {
-      module: isSet(object.module) ? object.module : ""
+      module: isSet(object.module) ? object.module : undefined
     };
   },
 

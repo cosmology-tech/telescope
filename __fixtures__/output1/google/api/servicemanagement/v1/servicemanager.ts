@@ -679,10 +679,10 @@ export const ListServicesRequest = {
 
   fromSDK(object: ListServicesRequestSDKType): ListServicesRequest {
     return {
-      producerProjectId: isSet(object.producer_project_id) ? object.producer_project_id : "",
-      pageSize: isSet(object.page_size) ? object.page_size : 0,
-      pageToken: isSet(object.page_token) ? object.page_token : "",
-      consumerId: isSet(object.consumer_id) ? object.consumer_id : ""
+      producerProjectId: isSet(object.producer_project_id) ? object.producer_project_id : undefined,
+      pageSize: isSet(object.page_size) ? object.page_size : undefined,
+      pageToken: isSet(object.page_token) ? object.page_token : undefined,
+      consumerId: isSet(object.consumer_id) ? object.consumer_id : undefined
     };
   },
 
@@ -773,7 +773,7 @@ export const ListServicesResponse = {
   fromSDK(object: ListServicesResponseSDKType): ListServicesResponse {
     return {
       services: Array.isArray(object?.services) ? object.services.map((e: any) => ManagedService.fromSDK(e)) : [],
-      nextPageToken: isSet(object.next_page_token) ? object.next_page_token : ""
+      nextPageToken: isSet(object.next_page_token) ? object.next_page_token : undefined
     };
   },
 
@@ -849,7 +849,7 @@ export const GetServiceRequest = {
 
   fromSDK(object: GetServiceRequestSDKType): GetServiceRequest {
     return {
-      serviceName: isSet(object.service_name) ? object.service_name : ""
+      serviceName: isSet(object.service_name) ? object.service_name : undefined
     };
   },
 
@@ -987,7 +987,7 @@ export const DeleteServiceRequest = {
 
   fromSDK(object: DeleteServiceRequestSDKType): DeleteServiceRequest {
     return {
-      serviceName: isSet(object.service_name) ? object.service_name : ""
+      serviceName: isSet(object.service_name) ? object.service_name : undefined
     };
   },
 
@@ -1056,7 +1056,7 @@ export const UndeleteServiceRequest = {
 
   fromSDK(object: UndeleteServiceRequestSDKType): UndeleteServiceRequest {
     return {
-      serviceName: isSet(object.service_name) ? object.service_name : ""
+      serviceName: isSet(object.service_name) ? object.service_name : undefined
     };
   },
 
@@ -1218,8 +1218,8 @@ export const GetServiceConfigRequest = {
 
   fromSDK(object: GetServiceConfigRequestSDKType): GetServiceConfigRequest {
     return {
-      serviceName: isSet(object.service_name) ? object.service_name : "",
-      configId: isSet(object.config_id) ? object.config_id : "",
+      serviceName: isSet(object.service_name) ? object.service_name : undefined,
+      configId: isSet(object.config_id) ? object.config_id : undefined,
       view: isSet(object.view) ? getServiceConfigRequest_ConfigViewFromJSON(object.view) : 0
     };
   },
@@ -1315,9 +1315,9 @@ export const ListServiceConfigsRequest = {
 
   fromSDK(object: ListServiceConfigsRequestSDKType): ListServiceConfigsRequest {
     return {
-      serviceName: isSet(object.service_name) ? object.service_name : "",
-      pageToken: isSet(object.page_token) ? object.page_token : "",
-      pageSize: isSet(object.page_size) ? object.page_size : 0
+      serviceName: isSet(object.service_name) ? object.service_name : undefined,
+      pageToken: isSet(object.page_token) ? object.page_token : undefined,
+      pageSize: isSet(object.page_size) ? object.page_size : undefined
     };
   },
 
@@ -1407,7 +1407,7 @@ export const ListServiceConfigsResponse = {
   fromSDK(object: ListServiceConfigsResponseSDKType): ListServiceConfigsResponse {
     return {
       serviceConfigs: Array.isArray(object?.service_configs) ? object.service_configs.map((e: any) => Service.fromSDK(e)) : [],
-      nextPageToken: isSet(object.next_page_token) ? object.next_page_token : ""
+      nextPageToken: isSet(object.next_page_token) ? object.next_page_token : undefined
     };
   },
 
@@ -1495,7 +1495,7 @@ export const CreateServiceConfigRequest = {
 
   fromSDK(object: CreateServiceConfigRequestSDKType): CreateServiceConfigRequest {
     return {
-      serviceName: isSet(object.service_name) ? object.service_name : "",
+      serviceName: isSet(object.service_name) ? object.service_name : undefined,
       serviceConfig: isSet(object.service_config) ? Service.fromSDK(object.service_config) : undefined
     };
   },
@@ -1590,9 +1590,9 @@ export const SubmitConfigSourceRequest = {
 
   fromSDK(object: SubmitConfigSourceRequestSDKType): SubmitConfigSourceRequest {
     return {
-      serviceName: isSet(object.service_name) ? object.service_name : "",
+      serviceName: isSet(object.service_name) ? object.service_name : undefined,
       configSource: isSet(object.config_source) ? ConfigSource.fromSDK(object.config_source) : undefined,
-      validateOnly: isSet(object.validate_only) ? object.validate_only : false
+      validateOnly: isSet(object.validate_only) ? object.validate_only : undefined
     };
   },
 
@@ -1744,7 +1744,7 @@ export const CreateServiceRolloutRequest = {
 
   fromSDK(object: CreateServiceRolloutRequestSDKType): CreateServiceRolloutRequest {
     return {
-      serviceName: isSet(object.service_name) ? object.service_name : "",
+      serviceName: isSet(object.service_name) ? object.service_name : undefined,
       rollout: isSet(object.rollout) ? Rollout.fromSDK(object.rollout) : undefined
     };
   },
@@ -1851,10 +1851,10 @@ export const ListServiceRolloutsRequest = {
 
   fromSDK(object: ListServiceRolloutsRequestSDKType): ListServiceRolloutsRequest {
     return {
-      serviceName: isSet(object.service_name) ? object.service_name : "",
-      pageToken: isSet(object.page_token) ? object.page_token : "",
-      pageSize: isSet(object.page_size) ? object.page_size : 0,
-      filter: isSet(object.filter) ? object.filter : ""
+      serviceName: isSet(object.service_name) ? object.service_name : undefined,
+      pageToken: isSet(object.page_token) ? object.page_token : undefined,
+      pageSize: isSet(object.page_size) ? object.page_size : undefined,
+      filter: isSet(object.filter) ? object.filter : undefined
     };
   },
 
@@ -1945,7 +1945,7 @@ export const ListServiceRolloutsResponse = {
   fromSDK(object: ListServiceRolloutsResponseSDKType): ListServiceRolloutsResponse {
     return {
       rollouts: Array.isArray(object?.rollouts) ? object.rollouts.map((e: any) => Rollout.fromSDK(e)) : [],
-      nextPageToken: isSet(object.next_page_token) ? object.next_page_token : ""
+      nextPageToken: isSet(object.next_page_token) ? object.next_page_token : undefined
     };
   },
 
@@ -2033,8 +2033,8 @@ export const GetServiceRolloutRequest = {
 
   fromSDK(object: GetServiceRolloutRequestSDKType): GetServiceRolloutRequest {
     return {
-      serviceName: isSet(object.service_name) ? object.service_name : "",
-      rolloutId: isSet(object.rollout_id) ? object.rollout_id : ""
+      serviceName: isSet(object.service_name) ? object.service_name : undefined,
+      rolloutId: isSet(object.rollout_id) ? object.rollout_id : undefined
     };
   },
 
@@ -2234,8 +2234,8 @@ export const GenerateConfigReportResponse = {
 
   fromSDK(object: GenerateConfigReportResponseSDKType): GenerateConfigReportResponse {
     return {
-      serviceName: isSet(object.service_name) ? object.service_name : "",
-      id: isSet(object.id) ? object.id : "",
+      serviceName: isSet(object.service_name) ? object.service_name : undefined,
+      id: isSet(object.id) ? object.id : undefined,
       changeReports: Array.isArray(object?.change_reports) ? object.change_reports.map((e: any) => ChangeReport.fromSDK(e)) : [],
       diagnostics: Array.isArray(object?.diagnostics) ? object.diagnostics.map((e: any) => Diagnostic.fromSDK(e)) : []
     };

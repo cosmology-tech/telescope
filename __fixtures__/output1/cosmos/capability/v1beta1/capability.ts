@@ -109,7 +109,7 @@ export const Capability = {
 
   fromSDK(object: CapabilitySDKType): Capability {
     return {
-      index: isSet(object.index) ? object.index : Long.UZERO
+      index: isSet(object.index) ? object.index : undefined
     };
   },
 
@@ -190,8 +190,8 @@ export const Owner = {
 
   fromSDK(object: OwnerSDKType): Owner {
     return {
-      module: isSet(object.module) ? object.module : "",
-      name: isSet(object.name) ? object.name : ""
+      module: isSet(object.module) ? object.module : undefined,
+      name: isSet(object.name) ? object.name : undefined
     };
   },
 

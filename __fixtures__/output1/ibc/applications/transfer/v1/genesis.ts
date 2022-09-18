@@ -104,7 +104,7 @@ export const GenesisState = {
 
   fromSDK(object: GenesisStateSDKType): GenesisState {
     return {
-      portId: isSet(object.port_id) ? object.port_id : "",
+      portId: isSet(object.port_id) ? object.port_id : undefined,
       denomTraces: Array.isArray(object?.denom_traces) ? object.denom_traces.map((e: any) => DenomTrace.fromSDK(e)) : [],
       params: isSet(object.params) ? Params.fromSDK(object.params) : undefined
     };

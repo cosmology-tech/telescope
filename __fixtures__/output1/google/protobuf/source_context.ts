@@ -83,7 +83,7 @@ export const SourceContext = {
 
   fromSDK(object: SourceContextSDKType): SourceContext {
     return {
-      fileName: isSet(object.file_name) ? object.file_name : ""
+      fileName: isSet(object.file_name) ? object.file_name : undefined
     };
   },
 

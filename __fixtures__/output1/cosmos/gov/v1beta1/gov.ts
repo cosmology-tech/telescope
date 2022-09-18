@@ -463,7 +463,7 @@ export const WeightedVoteOption = {
   fromSDK(object: WeightedVoteOptionSDKType): WeightedVoteOption {
     return {
       option: isSet(object.option) ? voteOptionFromJSON(object.option) : 0,
-      weight: isSet(object.weight) ? object.weight : ""
+      weight: isSet(object.weight) ? object.weight : undefined
     };
   },
 
@@ -545,8 +545,8 @@ export const TextProposal = {
 
   fromSDK(object: TextProposalSDKType): TextProposal {
     return {
-      title: isSet(object.title) ? object.title : "",
-      description: isSet(object.description) ? object.description : ""
+      title: isSet(object.title) ? object.title : undefined,
+      description: isSet(object.description) ? object.description : undefined
     };
   },
 
@@ -646,8 +646,8 @@ export const Deposit = {
 
   fromSDK(object: DepositSDKType): Deposit {
     return {
-      proposalId: isSet(object.proposal_id) ? object.proposal_id : Long.UZERO,
-      depositor: isSet(object.depositor) ? object.depositor : "",
+      proposalId: isSet(object.proposal_id) ? object.proposal_id : undefined,
+      depositor: isSet(object.depositor) ? object.depositor : undefined,
       amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromSDK(e)) : []
     };
   },
@@ -827,7 +827,7 @@ export const Proposal = {
 
   fromSDK(object: ProposalSDKType): Proposal {
     return {
-      proposalId: isSet(object.proposal_id) ? object.proposal_id : Long.UZERO,
+      proposalId: isSet(object.proposal_id) ? object.proposal_id : undefined,
       content: isSet(object.content) ? Any.fromSDK(object.content) : undefined,
       status: isSet(object.status) ? proposalStatusFromJSON(object.status) : 0,
       finalTallyResult: isSet(object.final_tally_result) ? TallyResult.fromSDK(object.final_tally_result) : undefined,
@@ -954,10 +954,10 @@ export const TallyResult = {
 
   fromSDK(object: TallyResultSDKType): TallyResult {
     return {
-      yes: isSet(object.yes) ? object.yes : "",
-      abstain: isSet(object.abstain) ? object.abstain : "",
-      no: isSet(object.no) ? object.no : "",
-      noWithVeto: isSet(object.no_with_veto) ? object.no_with_veto : ""
+      yes: isSet(object.yes) ? object.yes : undefined,
+      abstain: isSet(object.abstain) ? object.abstain : undefined,
+      no: isSet(object.no) ? object.no : undefined,
+      noWithVeto: isSet(object.no_with_veto) ? object.no_with_veto : undefined
     };
   },
 
@@ -1071,8 +1071,8 @@ export const Vote = {
 
   fromSDK(object: VoteSDKType): Vote {
     return {
-      proposalId: isSet(object.proposal_id) ? object.proposal_id : Long.UZERO,
-      voter: isSet(object.voter) ? object.voter : "",
+      proposalId: isSet(object.proposal_id) ? object.proposal_id : undefined,
+      voter: isSet(object.voter) ? object.voter : undefined,
       option: isSet(object.option) ? voteOptionFromJSON(object.option) : 0,
       options: Array.isArray(object?.options) ? object.options.map((e: any) => WeightedVoteOption.fromSDK(e)) : []
     };
@@ -1340,9 +1340,9 @@ export const TallyParams = {
 
   fromSDK(object: TallyParamsSDKType): TallyParams {
     return {
-      quorum: isSet(object.quorum) ? object.quorum : new Uint8Array(),
-      threshold: isSet(object.threshold) ? object.threshold : new Uint8Array(),
-      vetoThreshold: isSet(object.veto_threshold) ? object.veto_threshold : new Uint8Array()
+      quorum: isSet(object.quorum) ? object.quorum : undefined,
+      threshold: isSet(object.threshold) ? object.threshold : undefined,
+      vetoThreshold: isSet(object.veto_threshold) ? object.veto_threshold : undefined
     };
   },
 

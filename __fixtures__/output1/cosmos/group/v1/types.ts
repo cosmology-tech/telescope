@@ -809,9 +809,9 @@ export const Member = {
 
   fromSDK(object: MemberSDKType): Member {
     return {
-      address: isSet(object.address) ? object.address : "",
-      weight: isSet(object.weight) ? object.weight : "",
-      metadata: isSet(object.metadata) ? object.metadata : "",
+      address: isSet(object.address) ? object.address : undefined,
+      weight: isSet(object.weight) ? object.weight : undefined,
+      metadata: isSet(object.metadata) ? object.metadata : undefined,
       addedAt: isSet(object.added_at) ? Timestamp.fromSDK(object.added_at) : undefined
     };
   },
@@ -977,7 +977,7 @@ export const ThresholdDecisionPolicy = {
 
   fromSDK(object: ThresholdDecisionPolicySDKType): ThresholdDecisionPolicy {
     return {
-      threshold: isSet(object.threshold) ? object.threshold : "",
+      threshold: isSet(object.threshold) ? object.threshold : undefined,
       windows: isSet(object.windows) ? DecisionPolicyWindows.fromSDK(object.windows) : undefined
     };
   },
@@ -1060,7 +1060,7 @@ export const PercentageDecisionPolicy = {
 
   fromSDK(object: PercentageDecisionPolicySDKType): PercentageDecisionPolicy {
     return {
-      percentage: isSet(object.percentage) ? object.percentage : "",
+      percentage: isSet(object.percentage) ? object.percentage : undefined,
       windows: isSet(object.windows) ? DecisionPolicyWindows.fromSDK(object.windows) : undefined
     };
   },
@@ -1274,11 +1274,11 @@ export const GroupInfo = {
 
   fromSDK(object: GroupInfoSDKType): GroupInfo {
     return {
-      id: isSet(object.id) ? object.id : Long.UZERO,
-      admin: isSet(object.admin) ? object.admin : "",
-      metadata: isSet(object.metadata) ? object.metadata : "",
-      version: isSet(object.version) ? object.version : Long.UZERO,
-      totalWeight: isSet(object.total_weight) ? object.total_weight : "",
+      id: isSet(object.id) ? object.id : undefined,
+      admin: isSet(object.admin) ? object.admin : undefined,
+      metadata: isSet(object.metadata) ? object.metadata : undefined,
+      version: isSet(object.version) ? object.version : undefined,
+      totalWeight: isSet(object.total_weight) ? object.total_weight : undefined,
       createdAt: isSet(object.created_at) ? Timestamp.fromSDK(object.created_at) : undefined
     };
   },
@@ -1365,7 +1365,7 @@ export const GroupMember = {
 
   fromSDK(object: GroupMemberSDKType): GroupMember {
     return {
-      groupId: isSet(object.group_id) ? object.group_id : Long.UZERO,
+      groupId: isSet(object.group_id) ? object.group_id : undefined,
       member: isSet(object.member) ? Member.fromSDK(object.member) : undefined
     };
   },
@@ -1508,11 +1508,11 @@ export const GroupPolicyInfo = {
 
   fromSDK(object: GroupPolicyInfoSDKType): GroupPolicyInfo {
     return {
-      address: isSet(object.address) ? object.address : "",
-      groupId: isSet(object.group_id) ? object.group_id : Long.UZERO,
-      admin: isSet(object.admin) ? object.admin : "",
-      metadata: isSet(object.metadata) ? object.metadata : "",
-      version: isSet(object.version) ? object.version : Long.UZERO,
+      address: isSet(object.address) ? object.address : undefined,
+      groupId: isSet(object.group_id) ? object.group_id : undefined,
+      admin: isSet(object.admin) ? object.admin : undefined,
+      metadata: isSet(object.metadata) ? object.metadata : undefined,
+      version: isSet(object.version) ? object.version : undefined,
       decisionPolicy: isSet(object.decision_policy) ? Any.fromSDK(object.decision_policy) : undefined,
       createdAt: isSet(object.created_at) ? Timestamp.fromSDK(object.created_at) : undefined
     };
@@ -1745,13 +1745,13 @@ export const Proposal = {
 
   fromSDK(object: ProposalSDKType): Proposal {
     return {
-      id: isSet(object.id) ? object.id : Long.UZERO,
-      address: isSet(object.address) ? object.address : "",
-      metadata: isSet(object.metadata) ? object.metadata : "",
+      id: isSet(object.id) ? object.id : undefined,
+      address: isSet(object.address) ? object.address : undefined,
+      metadata: isSet(object.metadata) ? object.metadata : undefined,
       proposers: Array.isArray(object?.proposers) ? object.proposers.map((e: any) => e) : [],
       submitTime: isSet(object.submit_time) ? Timestamp.fromSDK(object.submit_time) : undefined,
-      groupVersion: isSet(object.group_version) ? object.group_version : Long.UZERO,
-      groupPolicyVersion: isSet(object.group_policy_version) ? object.group_policy_version : Long.UZERO,
+      groupVersion: isSet(object.group_version) ? object.group_version : undefined,
+      groupPolicyVersion: isSet(object.group_policy_version) ? object.group_policy_version : undefined,
       status: isSet(object.status) ? proposalStatusFromJSON(object.status) : 0,
       result: isSet(object.result) ? proposalResultFromJSON(object.result) : 0,
       finalTallyResult: isSet(object.final_tally_result) ? TallyResult.fromSDK(object.final_tally_result) : undefined,
@@ -1886,10 +1886,10 @@ export const TallyResult = {
 
   fromSDK(object: TallyResultSDKType): TallyResult {
     return {
-      yesCount: isSet(object.yes_count) ? object.yes_count : "",
-      abstainCount: isSet(object.abstain_count) ? object.abstain_count : "",
-      noCount: isSet(object.no_count) ? object.no_count : "",
-      noWithVetoCount: isSet(object.no_with_veto_count) ? object.no_with_veto_count : ""
+      yesCount: isSet(object.yes_count) ? object.yes_count : undefined,
+      abstainCount: isSet(object.abstain_count) ? object.abstain_count : undefined,
+      noCount: isSet(object.no_count) ? object.no_count : undefined,
+      noWithVetoCount: isSet(object.no_with_veto_count) ? object.no_with_veto_count : undefined
     };
   },
 
@@ -2009,10 +2009,10 @@ export const Vote = {
 
   fromSDK(object: VoteSDKType): Vote {
     return {
-      proposalId: isSet(object.proposal_id) ? object.proposal_id : Long.UZERO,
-      voter: isSet(object.voter) ? object.voter : "",
+      proposalId: isSet(object.proposal_id) ? object.proposal_id : undefined,
+      voter: isSet(object.voter) ? object.voter : undefined,
       option: isSet(object.option) ? voteOptionFromJSON(object.option) : 0,
-      metadata: isSet(object.metadata) ? object.metadata : "",
+      metadata: isSet(object.metadata) ? object.metadata : undefined,
       submitTime: isSet(object.submit_time) ? Timestamp.fromSDK(object.submit_time) : undefined
     };
   },

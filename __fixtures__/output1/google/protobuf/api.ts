@@ -500,10 +500,10 @@ export const Api = {
 
   fromSDK(object: ApiSDKType): Api {
     return {
-      name: isSet(object.name) ? object.name : "",
+      name: isSet(object.name) ? object.name : undefined,
       methods: Array.isArray(object?.methods) ? object.methods.map((e: any) => Method.fromSDK(e)) : [],
       options: Array.isArray(object?.options) ? object.options.map((e: any) => Option.fromSDK(e)) : [],
-      version: isSet(object.version) ? object.version : "",
+      version: isSet(object.version) ? object.version : undefined,
       sourceContext: isSet(object.source_context) ? SourceContext.fromSDK(object.source_context) : undefined,
       mixins: Array.isArray(object?.mixins) ? object.mixins.map((e: any) => Mixin.fromSDK(e)) : [],
       syntax: isSet(object.syntax) ? syntaxFromJSON(object.syntax) : 0
@@ -676,11 +676,11 @@ export const Method = {
 
   fromSDK(object: MethodSDKType): Method {
     return {
-      name: isSet(object.name) ? object.name : "",
-      requestTypeUrl: isSet(object.request_type_url) ? object.request_type_url : "",
-      requestStreaming: isSet(object.request_streaming) ? object.request_streaming : false,
-      responseTypeUrl: isSet(object.response_type_url) ? object.response_type_url : "",
-      responseStreaming: isSet(object.response_streaming) ? object.response_streaming : false,
+      name: isSet(object.name) ? object.name : undefined,
+      requestTypeUrl: isSet(object.request_type_url) ? object.request_type_url : undefined,
+      requestStreaming: isSet(object.request_streaming) ? object.request_streaming : undefined,
+      responseTypeUrl: isSet(object.response_type_url) ? object.response_type_url : undefined,
+      responseStreaming: isSet(object.response_streaming) ? object.response_streaming : undefined,
       options: Array.isArray(object?.options) ? object.options.map((e: any) => Option.fromSDK(e)) : [],
       syntax: isSet(object.syntax) ? syntaxFromJSON(object.syntax) : 0
     };
@@ -775,8 +775,8 @@ export const Mixin = {
 
   fromSDK(object: MixinSDKType): Mixin {
     return {
-      name: isSet(object.name) ? object.name : "",
-      root: isSet(object.root) ? object.root : ""
+      name: isSet(object.name) ? object.name : undefined,
+      root: isSet(object.root) ? object.root : undefined
     };
   },
 

@@ -216,12 +216,12 @@ export const Class = {
 
   fromSDK(object: ClassSDKType): Class {
     return {
-      id: isSet(object.id) ? object.id : "",
-      name: isSet(object.name) ? object.name : "",
-      symbol: isSet(object.symbol) ? object.symbol : "",
-      description: isSet(object.description) ? object.description : "",
-      uri: isSet(object.uri) ? object.uri : "",
-      uriHash: isSet(object.uri_hash) ? object.uri_hash : "",
+      id: isSet(object.id) ? object.id : undefined,
+      name: isSet(object.name) ? object.name : undefined,
+      symbol: isSet(object.symbol) ? object.symbol : undefined,
+      description: isSet(object.description) ? object.description : undefined,
+      uri: isSet(object.uri) ? object.uri : undefined,
+      uriHash: isSet(object.uri_hash) ? object.uri_hash : undefined,
       data: isSet(object.data) ? Any.fromSDK(object.data) : undefined
     };
   },
@@ -345,10 +345,10 @@ export const NFT = {
 
   fromSDK(object: NFTSDKType): NFT {
     return {
-      classId: isSet(object.class_id) ? object.class_id : "",
-      id: isSet(object.id) ? object.id : "",
-      uri: isSet(object.uri) ? object.uri : "",
-      uriHash: isSet(object.uri_hash) ? object.uri_hash : "",
+      classId: isSet(object.class_id) ? object.class_id : undefined,
+      id: isSet(object.id) ? object.id : undefined,
+      uri: isSet(object.uri) ? object.uri : undefined,
+      uriHash: isSet(object.uri_hash) ? object.uri_hash : undefined,
       data: isSet(object.data) ? Any.fromSDK(object.data) : undefined
     };
   },

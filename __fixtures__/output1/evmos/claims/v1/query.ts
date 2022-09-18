@@ -613,7 +613,7 @@ export const QueryClaimsRecordRequest = {
 
   fromSDK(object: QueryClaimsRecordRequestSDKType): QueryClaimsRecordRequest {
     return {
-      address: isSet(object.address) ? object.address : ""
+      address: isSet(object.address) ? object.address : undefined
     };
   },
 
@@ -700,7 +700,7 @@ export const QueryClaimsRecordResponse = {
 
   fromSDK(object: QueryClaimsRecordResponseSDKType): QueryClaimsRecordResponse {
     return {
-      initialClaimableAmount: isSet(object.initial_claimable_amount) ? object.initial_claimable_amount : "",
+      initialClaimableAmount: isSet(object.initial_claimable_amount) ? object.initial_claimable_amount : undefined,
       claims: Array.isArray(object?.claims) ? object.claims.map((e: any) => Claim.fromSDK(e)) : []
     };
   },

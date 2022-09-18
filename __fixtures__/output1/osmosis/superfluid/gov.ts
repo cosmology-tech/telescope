@@ -130,8 +130,8 @@ export const SetSuperfluidAssetsProposal = {
 
   fromSDK(object: SetSuperfluidAssetsProposalSDKType): SetSuperfluidAssetsProposal {
     return {
-      title: isSet(object.title) ? object.title : "",
-      description: isSet(object.description) ? object.description : "",
+      title: isSet(object.title) ? object.title : undefined,
+      description: isSet(object.description) ? object.description : undefined,
       assets: Array.isArray(object?.assets) ? object.assets.map((e: any) => SuperfluidAsset.fromSDK(e)) : []
     };
   },
@@ -239,8 +239,8 @@ export const RemoveSuperfluidAssetsProposal = {
 
   fromSDK(object: RemoveSuperfluidAssetsProposalSDKType): RemoveSuperfluidAssetsProposal {
     return {
-      title: isSet(object.title) ? object.title : "",
-      description: isSet(object.description) ? object.description : "",
+      title: isSet(object.title) ? object.title : undefined,
+      description: isSet(object.description) ? object.description : undefined,
       superfluidAssetDenoms: Array.isArray(object?.superfluid_asset_denoms) ? object.superfluid_asset_denoms.map((e: any) => e) : []
     };
   },

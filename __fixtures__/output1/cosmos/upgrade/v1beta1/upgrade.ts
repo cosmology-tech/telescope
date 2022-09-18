@@ -277,10 +277,10 @@ export const Plan = {
 
   fromSDK(object: PlanSDKType): Plan {
     return {
-      name: isSet(object.name) ? object.name : "",
+      name: isSet(object.name) ? object.name : undefined,
       time: isSet(object.time) ? Timestamp.fromSDK(object.time) : undefined,
-      height: isSet(object.height) ? object.height : Long.ZERO,
-      info: isSet(object.info) ? object.info : "",
+      height: isSet(object.height) ? object.height : undefined,
+      info: isSet(object.info) ? object.info : undefined,
       upgradedClientState: isSet(object.upgraded_client_state) ? Any.fromSDK(object.upgraded_client_state) : undefined
     };
   },
@@ -378,8 +378,8 @@ export const SoftwareUpgradeProposal = {
 
   fromSDK(object: SoftwareUpgradeProposalSDKType): SoftwareUpgradeProposal {
     return {
-      title: isSet(object.title) ? object.title : "",
-      description: isSet(object.description) ? object.description : "",
+      title: isSet(object.title) ? object.title : undefined,
+      description: isSet(object.description) ? object.description : undefined,
       plan: isSet(object.plan) ? Plan.fromSDK(object.plan) : undefined
     };
   },
@@ -463,8 +463,8 @@ export const CancelSoftwareUpgradeProposal = {
 
   fromSDK(object: CancelSoftwareUpgradeProposalSDKType): CancelSoftwareUpgradeProposal {
     return {
-      title: isSet(object.title) ? object.title : "",
-      description: isSet(object.description) ? object.description : ""
+      title: isSet(object.title) ? object.title : undefined,
+      description: isSet(object.description) ? object.description : undefined
     };
   },
 
@@ -546,8 +546,8 @@ export const ModuleVersion = {
 
   fromSDK(object: ModuleVersionSDKType): ModuleVersion {
     return {
-      name: isSet(object.name) ? object.name : "",
-      version: isSet(object.version) ? object.version : Long.UZERO
+      name: isSet(object.name) ? object.name : undefined,
+      version: isSet(object.version) ? object.version : undefined
     };
   },
 

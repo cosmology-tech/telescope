@@ -110,8 +110,8 @@ export const UpdateFeeTokenProposal = {
 
   fromSDK(object: UpdateFeeTokenProposalSDKType): UpdateFeeTokenProposal {
     return {
-      title: isSet(object.title) ? object.title : "",
-      description: isSet(object.description) ? object.description : "",
+      title: isSet(object.title) ? object.title : undefined,
+      description: isSet(object.description) ? object.description : undefined,
       feetoken: isSet(object.feetoken) ? FeeToken.fromSDK(object.feetoken) : undefined
     };
   },

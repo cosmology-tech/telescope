@@ -77,7 +77,7 @@ export const Params = {
 
   fromSDK(object: ParamsSDKType): Params {
     return {
-      minimumRiskFactor: isSet(object.minimum_risk_factor) ? object.minimum_risk_factor : ""
+      minimumRiskFactor: isSet(object.minimum_risk_factor) ? object.minimum_risk_factor : undefined
     };
   },
 

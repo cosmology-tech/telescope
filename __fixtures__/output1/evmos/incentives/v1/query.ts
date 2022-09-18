@@ -479,7 +479,7 @@ export const QueryIncentiveRequest = {
 
   fromSDK(object: QueryIncentiveRequestSDKType): QueryIncentiveRequest {
     return {
-      contract: isSet(object.contract) ? object.contract : ""
+      contract: isSet(object.contract) ? object.contract : undefined
     };
   },
 
@@ -629,7 +629,7 @@ export const QueryGasMetersRequest = {
 
   fromSDK(object: QueryGasMetersRequestSDKType): QueryGasMetersRequest {
     return {
-      contract: isSet(object.contract) ? object.contract : "",
+      contract: isSet(object.contract) ? object.contract : undefined,
       pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
@@ -807,8 +807,8 @@ export const QueryGasMeterRequest = {
 
   fromSDK(object: QueryGasMeterRequestSDKType): QueryGasMeterRequest {
     return {
-      contract: isSet(object.contract) ? object.contract : "",
-      participant: isSet(object.participant) ? object.participant : ""
+      contract: isSet(object.contract) ? object.contract : undefined,
+      participant: isSet(object.participant) ? object.participant : undefined
     };
   },
 
@@ -878,7 +878,7 @@ export const QueryGasMeterResponse = {
 
   fromSDK(object: QueryGasMeterResponseSDKType): QueryGasMeterResponse {
     return {
-      gasMeter: isSet(object.gas_meter) ? object.gas_meter : Long.UZERO
+      gasMeter: isSet(object.gas_meter) ? object.gas_meter : undefined
     };
   },
 
@@ -1111,7 +1111,7 @@ export const QueryAllocationMeterRequest = {
 
   fromSDK(object: QueryAllocationMeterRequestSDKType): QueryAllocationMeterRequest {
     return {
-      denom: isSet(object.denom) ? object.denom : ""
+      denom: isSet(object.denom) ? object.denom : undefined
     };
   },
 

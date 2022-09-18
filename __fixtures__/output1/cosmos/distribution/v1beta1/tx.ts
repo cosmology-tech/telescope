@@ -174,8 +174,8 @@ export const MsgSetWithdrawAddress = {
 
   fromSDK(object: MsgSetWithdrawAddressSDKType): MsgSetWithdrawAddress {
     return {
-      delegatorAddress: isSet(object.delegator_address) ? object.delegator_address : "",
-      withdrawAddress: isSet(object.withdraw_address) ? object.withdraw_address : ""
+      delegatorAddress: isSet(object.delegator_address) ? object.delegator_address : undefined,
+      withdrawAddress: isSet(object.withdraw_address) ? object.withdraw_address : undefined
     };
   },
 
@@ -309,8 +309,8 @@ export const MsgWithdrawDelegatorReward = {
 
   fromSDK(object: MsgWithdrawDelegatorRewardSDKType): MsgWithdrawDelegatorReward {
     return {
-      delegatorAddress: isSet(object.delegator_address) ? object.delegator_address : "",
-      validatorAddress: isSet(object.validator_address) ? object.validator_address : ""
+      delegatorAddress: isSet(object.delegator_address) ? object.delegator_address : undefined,
+      validatorAddress: isSet(object.validator_address) ? object.validator_address : undefined
     };
   },
 
@@ -461,7 +461,7 @@ export const MsgWithdrawValidatorCommission = {
 
   fromSDK(object: MsgWithdrawValidatorCommissionSDKType): MsgWithdrawValidatorCommission {
     return {
-      validatorAddress: isSet(object.validator_address) ? object.validator_address : ""
+      validatorAddress: isSet(object.validator_address) ? object.validator_address : undefined
     };
   },
 
@@ -630,7 +630,7 @@ export const MsgFundCommunityPool = {
   fromSDK(object: MsgFundCommunityPoolSDKType): MsgFundCommunityPool {
     return {
       amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromSDK(e)) : [],
-      depositor: isSet(object.depositor) ? object.depositor : ""
+      depositor: isSet(object.depositor) ? object.depositor : undefined
     };
   },
 

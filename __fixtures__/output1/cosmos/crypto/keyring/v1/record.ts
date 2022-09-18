@@ -203,7 +203,7 @@ export const Record = {
 
   fromSDK(object: RecordSDKType): Record {
     return {
-      name: isSet(object.name) ? object.name : "",
+      name: isSet(object.name) ? object.name : undefined,
       pubKey: isSet(object.pub_key) ? Any.fromSDK(object.pub_key) : undefined,
       local: isSet(object.local) ? Record_Local.fromSDK(object.local) : undefined,
       ledger: isSet(object.ledger) ? Record_Ledger.fromSDK(object.ledger) : undefined,
@@ -295,7 +295,7 @@ export const Record_Local = {
   fromSDK(object: Record_LocalSDKType): Record_Local {
     return {
       privKey: isSet(object.priv_key) ? Any.fromSDK(object.priv_key) : undefined,
-      privKeyType: isSet(object.priv_key_type) ? object.priv_key_type : ""
+      privKeyType: isSet(object.priv_key_type) ? object.priv_key_type : undefined
     };
   },
 

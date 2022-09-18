@@ -169,9 +169,9 @@ export const Proof = {
 
   fromSDK(object: ProofSDKType): Proof {
     return {
-      total: isSet(object.total) ? object.total : Long.ZERO,
-      index: isSet(object.index) ? object.index : Long.ZERO,
-      leafHash: isSet(object.leaf_hash) ? object.leaf_hash : new Uint8Array(),
+      total: isSet(object.total) ? object.total : undefined,
+      index: isSet(object.index) ? object.index : undefined,
+      leafHash: isSet(object.leaf_hash) ? object.leaf_hash : undefined,
       aunts: Array.isArray(object?.aunts) ? object.aunts.map((e: any) => e) : []
     };
   },
@@ -262,7 +262,7 @@ export const ValueOp = {
 
   fromSDK(object: ValueOpSDKType): ValueOp {
     return {
-      key: isSet(object.key) ? object.key : new Uint8Array(),
+      key: isSet(object.key) ? object.key : undefined,
       proof: isSet(object.proof) ? Proof.fromSDK(object.proof) : undefined
     };
   },
@@ -357,9 +357,9 @@ export const DominoOp = {
 
   fromSDK(object: DominoOpSDKType): DominoOp {
     return {
-      key: isSet(object.key) ? object.key : "",
-      input: isSet(object.input) ? object.input : "",
-      output: isSet(object.output) ? object.output : ""
+      key: isSet(object.key) ? object.key : undefined,
+      input: isSet(object.input) ? object.input : undefined,
+      output: isSet(object.output) ? object.output : undefined
     };
   },
 
@@ -454,9 +454,9 @@ export const ProofOp = {
 
   fromSDK(object: ProofOpSDKType): ProofOp {
     return {
-      type: isSet(object.type) ? object.type : "",
-      key: isSet(object.key) ? object.key : new Uint8Array(),
-      data: isSet(object.data) ? object.data : new Uint8Array()
+      type: isSet(object.type) ? object.type : undefined,
+      key: isSet(object.key) ? object.key : undefined,
+      data: isSet(object.data) ? object.data : undefined
     };
   },
 

@@ -205,12 +205,12 @@ export const ValidatorSigningInfo = {
 
   fromSDK(object: ValidatorSigningInfoSDKType): ValidatorSigningInfo {
     return {
-      address: isSet(object.address) ? object.address : "",
-      startHeight: isSet(object.start_height) ? object.start_height : Long.ZERO,
-      indexOffset: isSet(object.index_offset) ? object.index_offset : Long.ZERO,
+      address: isSet(object.address) ? object.address : undefined,
+      startHeight: isSet(object.start_height) ? object.start_height : undefined,
+      indexOffset: isSet(object.index_offset) ? object.index_offset : undefined,
       jailedUntil: isSet(object.jailed_until) ? Timestamp.fromSDK(object.jailed_until) : undefined,
-      tombstoned: isSet(object.tombstoned) ? object.tombstoned : false,
-      missedBlocksCounter: isSet(object.missed_blocks_counter) ? object.missed_blocks_counter : Long.ZERO
+      tombstoned: isSet(object.tombstoned) ? object.tombstoned : undefined,
+      missedBlocksCounter: isSet(object.missed_blocks_counter) ? object.missed_blocks_counter : undefined
     };
   },
 
@@ -332,11 +332,11 @@ export const Params = {
 
   fromSDK(object: ParamsSDKType): Params {
     return {
-      signedBlocksWindow: isSet(object.signed_blocks_window) ? object.signed_blocks_window : Long.ZERO,
-      minSignedPerWindow: isSet(object.min_signed_per_window) ? object.min_signed_per_window : new Uint8Array(),
+      signedBlocksWindow: isSet(object.signed_blocks_window) ? object.signed_blocks_window : undefined,
+      minSignedPerWindow: isSet(object.min_signed_per_window) ? object.min_signed_per_window : undefined,
       downtimeJailDuration: isSet(object.downtime_jail_duration) ? Duration.fromSDK(object.downtime_jail_duration) : undefined,
-      slashFractionDoubleSign: isSet(object.slash_fraction_double_sign) ? object.slash_fraction_double_sign : new Uint8Array(),
-      slashFractionDowntime: isSet(object.slash_fraction_downtime) ? object.slash_fraction_downtime : new Uint8Array()
+      slashFractionDoubleSign: isSet(object.slash_fraction_double_sign) ? object.slash_fraction_double_sign : undefined,
+      slashFractionDowntime: isSet(object.slash_fraction_downtime) ? object.slash_fraction_downtime : undefined
     };
   },
 

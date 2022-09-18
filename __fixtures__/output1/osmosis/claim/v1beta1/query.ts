@@ -390,7 +390,7 @@ export const QueryClaimRecordRequest = {
 
   fromSDK(object: QueryClaimRecordRequestSDKType): QueryClaimRecordRequest {
     return {
-      address: isSet(object.address) ? object.address : ""
+      address: isSet(object.address) ? object.address : undefined
     };
   },
 
@@ -540,7 +540,7 @@ export const QueryClaimableForActionRequest = {
 
   fromSDK(object: QueryClaimableForActionRequestSDKType): QueryClaimableForActionRequest {
     return {
-      address: isSet(object.address) ? object.address : "",
+      address: isSet(object.address) ? object.address : undefined,
       action: isSet(object.action) ? actionFromJSON(object.action) : 0
     };
   },
@@ -692,7 +692,7 @@ export const QueryTotalClaimableRequest = {
 
   fromSDK(object: QueryTotalClaimableRequestSDKType): QueryTotalClaimableRequest {
     return {
-      address: isSet(object.address) ? object.address : ""
+      address: isSet(object.address) ? object.address : undefined
     };
   },
 

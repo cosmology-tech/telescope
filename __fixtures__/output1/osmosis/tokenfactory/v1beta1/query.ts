@@ -224,7 +224,7 @@ export const QueryDenomAuthorityMetadataRequest = {
 
   fromSDK(object: QueryDenomAuthorityMetadataRequestSDKType): QueryDenomAuthorityMetadataRequest {
     return {
-      denom: isSet(object.denom) ? object.denom : ""
+      denom: isSet(object.denom) ? object.denom : undefined
     };
   },
 
@@ -362,7 +362,7 @@ export const QueryDenomsFromCreatorRequest = {
 
   fromSDK(object: QueryDenomsFromCreatorRequestSDKType): QueryDenomsFromCreatorRequest {
     return {
-      creator: isSet(object.creator) ? object.creator : ""
+      creator: isSet(object.creator) ? object.creator : undefined
     };
   },
 

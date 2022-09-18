@@ -692,9 +692,9 @@ export const AuthenticationRule = {
 
   fromSDK(object: AuthenticationRuleSDKType): AuthenticationRule {
     return {
-      selector: isSet(object.selector) ? object.selector : "",
+      selector: isSet(object.selector) ? object.selector : undefined,
       oauth: isSet(object.oauth) ? OAuthRequirements.fromSDK(object.oauth) : undefined,
-      allowWithoutCredential: isSet(object.allow_without_credential) ? object.allow_without_credential : false,
+      allowWithoutCredential: isSet(object.allow_without_credential) ? object.allow_without_credential : undefined,
       requirements: Array.isArray(object?.requirements) ? object.requirements.map((e: any) => AuthRequirement.fromSDK(e)) : []
     };
   },
@@ -799,7 +799,7 @@ export const JwtLocation = {
     return {
       header: isSet(object.header) ? object.header : undefined,
       query: isSet(object.query) ? object.query : undefined,
-      valuePrefix: isSet(object.value_prefix) ? object.value_prefix : ""
+      valuePrefix: isSet(object.value_prefix) ? object.value_prefix : undefined
     };
   },
 
@@ -936,11 +936,11 @@ export const AuthProvider = {
 
   fromSDK(object: AuthProviderSDKType): AuthProvider {
     return {
-      id: isSet(object.id) ? object.id : "",
-      issuer: isSet(object.issuer) ? object.issuer : "",
-      jwksUri: isSet(object.jwks_uri) ? object.jwks_uri : "",
-      audiences: isSet(object.audiences) ? object.audiences : "",
-      authorizationUrl: isSet(object.authorization_url) ? object.authorization_url : "",
+      id: isSet(object.id) ? object.id : undefined,
+      issuer: isSet(object.issuer) ? object.issuer : undefined,
+      jwksUri: isSet(object.jwks_uri) ? object.jwks_uri : undefined,
+      audiences: isSet(object.audiences) ? object.audiences : undefined,
+      authorizationUrl: isSet(object.authorization_url) ? object.authorization_url : undefined,
       jwtLocations: Array.isArray(object?.jwt_locations) ? object.jwt_locations.map((e: any) => JwtLocation.fromSDK(e)) : []
     };
   },
@@ -1021,7 +1021,7 @@ export const OAuthRequirements = {
 
   fromSDK(object: OAuthRequirementsSDKType): OAuthRequirements {
     return {
-      canonicalScopes: isSet(object.canonical_scopes) ? object.canonical_scopes : ""
+      canonicalScopes: isSet(object.canonical_scopes) ? object.canonical_scopes : undefined
     };
   },
 
@@ -1102,8 +1102,8 @@ export const AuthRequirement = {
 
   fromSDK(object: AuthRequirementSDKType): AuthRequirement {
     return {
-      providerId: isSet(object.provider_id) ? object.provider_id : "",
-      audiences: isSet(object.audiences) ? object.audiences : ""
+      providerId: isSet(object.provider_id) ? object.provider_id : undefined,
+      audiences: isSet(object.audiences) ? object.audiences : undefined
     };
   },
 

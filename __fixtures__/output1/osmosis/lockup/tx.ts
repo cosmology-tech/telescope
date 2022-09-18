@@ -176,7 +176,7 @@ export const MsgLockTokens = {
 
   fromSDK(object: MsgLockTokensSDKType): MsgLockTokens {
     return {
-      owner: isSet(object.owner) ? object.owner : "",
+      owner: isSet(object.owner) ? object.owner : undefined,
       duration: isSet(object.duration) ? Duration.fromSDK(object.duration) : undefined,
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDK(e)) : []
     };
@@ -255,7 +255,7 @@ export const MsgLockTokensResponse = {
 
   fromSDK(object: MsgLockTokensResponseSDKType): MsgLockTokensResponse {
     return {
-      ID: isSet(object.ID) ? object.ID : Long.UZERO
+      ID: isSet(object.ID) ? object.ID : undefined
     };
   },
 
@@ -324,7 +324,7 @@ export const MsgBeginUnlockingAll = {
 
   fromSDK(object: MsgBeginUnlockingAllSDKType): MsgBeginUnlockingAll {
     return {
-      owner: isSet(object.owner) ? object.owner : ""
+      owner: isSet(object.owner) ? object.owner : undefined
     };
   },
 
@@ -504,8 +504,8 @@ export const MsgBeginUnlocking = {
 
   fromSDK(object: MsgBeginUnlockingSDKType): MsgBeginUnlocking {
     return {
-      owner: isSet(object.owner) ? object.owner : "",
-      ID: isSet(object.ID) ? object.ID : Long.UZERO,
+      owner: isSet(object.owner) ? object.owner : undefined,
+      ID: isSet(object.ID) ? object.ID : undefined,
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDK(e)) : []
     };
   },
@@ -583,7 +583,7 @@ export const MsgBeginUnlockingResponse = {
 
   fromSDK(object: MsgBeginUnlockingResponseSDKType): MsgBeginUnlockingResponse {
     return {
-      success: isSet(object.success) ? object.success : false
+      success: isSet(object.success) ? object.success : undefined
     };
   },
 
@@ -676,8 +676,8 @@ export const MsgExtendLockup = {
 
   fromSDK(object: MsgExtendLockupSDKType): MsgExtendLockup {
     return {
-      owner: isSet(object.owner) ? object.owner : "",
-      ID: isSet(object.ID) ? object.ID : Long.UZERO,
+      owner: isSet(object.owner) ? object.owner : undefined,
+      ID: isSet(object.ID) ? object.ID : undefined,
       duration: isSet(object.duration) ? Duration.fromSDK(object.duration) : undefined
     };
   },
@@ -749,7 +749,7 @@ export const MsgExtendLockupResponse = {
 
   fromSDK(object: MsgExtendLockupResponseSDKType): MsgExtendLockupResponse {
     return {
-      success: isSet(object.success) ? object.success : false
+      success: isSet(object.success) ? object.success : undefined
     };
   },
 

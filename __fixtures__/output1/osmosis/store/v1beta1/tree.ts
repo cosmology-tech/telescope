@@ -172,8 +172,8 @@ export const Child = {
 
   fromSDK(object: ChildSDKType): Child {
     return {
-      index: isSet(object.index) ? object.index : new Uint8Array(),
-      accumulation: isSet(object.accumulation) ? object.accumulation : ""
+      index: isSet(object.index) ? object.index : undefined,
+      accumulation: isSet(object.accumulation) ? object.accumulation : undefined
     };
   },
 

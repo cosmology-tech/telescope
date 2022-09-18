@@ -207,9 +207,9 @@ export const QueryGrantsRequest = {
 
   fromSDK(object: QueryGrantsRequestSDKType): QueryGrantsRequest {
     return {
-      granter: isSet(object.granter) ? object.granter : "",
-      grantee: isSet(object.grantee) ? object.grantee : "",
-      msgTypeUrl: isSet(object.msg_type_url) ? object.msg_type_url : "",
+      granter: isSet(object.granter) ? object.granter : undefined,
+      grantee: isSet(object.grantee) ? object.grantee : undefined,
+      msgTypeUrl: isSet(object.msg_type_url) ? object.msg_type_url : undefined,
       pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
@@ -389,7 +389,7 @@ export const QueryGranterGrantsRequest = {
 
   fromSDK(object: QueryGranterGrantsRequestSDKType): QueryGranterGrantsRequest {
     return {
-      granter: isSet(object.granter) ? object.granter : "",
+      granter: isSet(object.granter) ? object.granter : undefined,
       pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
@@ -567,7 +567,7 @@ export const QueryGranteeGrantsRequest = {
 
   fromSDK(object: QueryGranteeGrantsRequestSDKType): QueryGranteeGrantsRequest {
     return {
-      grantee: isSet(object.grantee) ? object.grantee : "",
+      grantee: isSet(object.grantee) ? object.grantee : undefined,
       pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },

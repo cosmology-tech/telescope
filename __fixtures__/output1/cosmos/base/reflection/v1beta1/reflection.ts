@@ -244,7 +244,7 @@ export const ListImplementationsRequest = {
 
   fromSDK(object: ListImplementationsRequestSDKType): ListImplementationsRequest {
     return {
-      interfaceName: isSet(object.interface_name) ? object.interface_name : ""
+      interfaceName: isSet(object.interface_name) ? object.interface_name : undefined
     };
   },
 

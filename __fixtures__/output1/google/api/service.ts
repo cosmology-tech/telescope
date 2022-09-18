@@ -701,10 +701,10 @@ export const Service = {
 
   fromSDK(object: ServiceSDKType): Service {
     return {
-      name: isSet(object.name) ? object.name : "",
-      title: isSet(object.title) ? object.title : "",
-      producerProjectId: isSet(object.producer_project_id) ? object.producer_project_id : "",
-      id: isSet(object.id) ? object.id : "",
+      name: isSet(object.name) ? object.name : undefined,
+      title: isSet(object.title) ? object.title : undefined,
+      producerProjectId: isSet(object.producer_project_id) ? object.producer_project_id : undefined,
+      id: isSet(object.id) ? object.id : undefined,
       apis: Array.isArray(object?.apis) ? object.apis.map((e: any) => Api.fromSDK(e)) : [],
       types: Array.isArray(object?.types) ? object.types.map((e: any) => Type.fromSDK(e)) : [],
       enums: Array.isArray(object?.enums) ? object.enums.map((e: any) => Enum.fromSDK(e)) : [],

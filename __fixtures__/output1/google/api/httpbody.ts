@@ -208,8 +208,8 @@ export const HttpBody = {
 
   fromSDK(object: HttpBodySDKType): HttpBody {
     return {
-      contentType: isSet(object.content_type) ? object.content_type : "",
-      data: isSet(object.data) ? object.data : new Uint8Array(),
+      contentType: isSet(object.content_type) ? object.content_type : undefined,
+      data: isSet(object.data) ? object.data : undefined,
       extensions: Array.isArray(object?.extensions) ? object.extensions.map((e: any) => Any.fromSDK(e)) : []
     };
   },

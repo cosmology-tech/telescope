@@ -244,12 +244,12 @@ export const GenesisState = {
 
   fromSDK(object: GenesisStateSDKType): GenesisState {
     return {
-      groupSeq: isSet(object.group_seq) ? object.group_seq : Long.UZERO,
+      groupSeq: isSet(object.group_seq) ? object.group_seq : undefined,
       groups: Array.isArray(object?.groups) ? object.groups.map((e: any) => GroupInfo.fromSDK(e)) : [],
       groupMembers: Array.isArray(object?.group_members) ? object.group_members.map((e: any) => GroupMember.fromSDK(e)) : [],
-      groupPolicySeq: isSet(object.group_policy_seq) ? object.group_policy_seq : Long.UZERO,
+      groupPolicySeq: isSet(object.group_policy_seq) ? object.group_policy_seq : undefined,
       groupPolicies: Array.isArray(object?.group_policies) ? object.group_policies.map((e: any) => GroupPolicyInfo.fromSDK(e)) : [],
-      proposalSeq: isSet(object.proposal_seq) ? object.proposal_seq : Long.UZERO,
+      proposalSeq: isSet(object.proposal_seq) ? object.proposal_seq : undefined,
       proposals: Array.isArray(object?.proposals) ? object.proposals.map((e: any) => Proposal.fromSDK(e)) : [],
       votes: Array.isArray(object?.votes) ? object.votes.map((e: any) => Vote.fromSDK(e)) : []
     };

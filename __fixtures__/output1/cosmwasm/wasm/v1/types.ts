@@ -448,7 +448,7 @@ export const AccessConfig = {
   fromSDK(object: AccessConfigSDKType): AccessConfig {
     return {
       permission: isSet(object.permission) ? accessTypeFromJSON(object.permission) : 0,
-      address: isSet(object.address) ? object.address : ""
+      address: isSet(object.address) ? object.address : undefined
     };
   },
 
@@ -544,7 +544,7 @@ export const Params = {
     return {
       codeUploadAccess: isSet(object.code_upload_access) ? AccessConfig.fromSDK(object.code_upload_access) : undefined,
       instantiateDefaultPermission: isSet(object.instantiate_default_permission) ? accessTypeFromJSON(object.instantiate_default_permission) : 0,
-      maxWasmCodeSize: isSet(object.max_wasm_code_size) ? object.max_wasm_code_size : Long.UZERO
+      maxWasmCodeSize: isSet(object.max_wasm_code_size) ? object.max_wasm_code_size : undefined
     };
   },
 
@@ -639,8 +639,8 @@ export const CodeInfo = {
 
   fromSDK(object: CodeInfoSDKType): CodeInfo {
     return {
-      codeHash: isSet(object.code_hash) ? object.code_hash : new Uint8Array(),
-      creator: isSet(object.creator) ? object.creator : "",
+      codeHash: isSet(object.code_hash) ? object.code_hash : undefined,
+      creator: isSet(object.creator) ? object.creator : undefined,
       instantiateConfig: isSet(object.instantiate_config) ? AccessConfig.fromSDK(object.instantiate_config) : undefined
     };
   },
@@ -784,12 +784,12 @@ export const ContractInfo = {
 
   fromSDK(object: ContractInfoSDKType): ContractInfo {
     return {
-      codeId: isSet(object.code_id) ? object.code_id : Long.UZERO,
-      creator: isSet(object.creator) ? object.creator : "",
-      admin: isSet(object.admin) ? object.admin : "",
-      label: isSet(object.label) ? object.label : "",
+      codeId: isSet(object.code_id) ? object.code_id : undefined,
+      creator: isSet(object.creator) ? object.creator : undefined,
+      admin: isSet(object.admin) ? object.admin : undefined,
+      label: isSet(object.label) ? object.label : undefined,
       created: isSet(object.created) ? AbsoluteTxPosition.fromSDK(object.created) : undefined,
-      ibcPortId: isSet(object.ibc_port_id) ? object.ibc_port_id : "",
+      ibcPortId: isSet(object.ibc_port_id) ? object.ibc_port_id : undefined,
       extension: isSet(object.extension) ? Any.fromSDK(object.extension) : undefined
     };
   },
@@ -902,9 +902,9 @@ export const ContractCodeHistoryEntry = {
   fromSDK(object: ContractCodeHistoryEntrySDKType): ContractCodeHistoryEntry {
     return {
       operation: isSet(object.operation) ? contractCodeHistoryOperationTypeFromJSON(object.operation) : 0,
-      codeId: isSet(object.code_id) ? object.code_id : Long.UZERO,
+      codeId: isSet(object.code_id) ? object.code_id : undefined,
       updated: isSet(object.updated) ? AbsoluteTxPosition.fromSDK(object.updated) : undefined,
-      msg: isSet(object.msg) ? object.msg : new Uint8Array()
+      msg: isSet(object.msg) ? object.msg : undefined
     };
   },
 
@@ -988,8 +988,8 @@ export const AbsoluteTxPosition = {
 
   fromSDK(object: AbsoluteTxPositionSDKType): AbsoluteTxPosition {
     return {
-      blockHeight: isSet(object.block_height) ? object.block_height : Long.UZERO,
-      txIndex: isSet(object.tx_index) ? object.tx_index : Long.UZERO
+      blockHeight: isSet(object.block_height) ? object.block_height : undefined,
+      txIndex: isSet(object.tx_index) ? object.tx_index : undefined
     };
   },
 
@@ -1071,8 +1071,8 @@ export const Model = {
 
   fromSDK(object: ModelSDKType): Model {
     return {
-      key: isSet(object.key) ? object.key : new Uint8Array(),
-      value: isSet(object.value) ? object.value : new Uint8Array()
+      key: isSet(object.key) ? object.key : undefined,
+      value: isSet(object.value) ? object.value : undefined
     };
   },
 

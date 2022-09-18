@@ -386,7 +386,7 @@ export const QueryAccountRequest = {
 
   fromSDK(object: QueryAccountRequestSDKType): QueryAccountRequest {
     return {
-      address: isSet(object.address) ? object.address : ""
+      address: isSet(object.address) ? object.address : undefined
     };
   },
 
@@ -830,7 +830,7 @@ export const Bech32PrefixResponse = {
 
   fromSDK(object: Bech32PrefixResponseSDKType): Bech32PrefixResponse {
     return {
-      bech32Prefix: isSet(object.bech32_prefix) ? object.bech32_prefix : ""
+      bech32Prefix: isSet(object.bech32_prefix) ? object.bech32_prefix : undefined
     };
   },
 
@@ -899,7 +899,7 @@ export const AddressBytesToStringRequest = {
 
   fromSDK(object: AddressBytesToStringRequestSDKType): AddressBytesToStringRequest {
     return {
-      addressBytes: isSet(object.address_bytes) ? object.address_bytes : new Uint8Array()
+      addressBytes: isSet(object.address_bytes) ? object.address_bytes : undefined
     };
   },
 
@@ -968,7 +968,7 @@ export const AddressBytesToStringResponse = {
 
   fromSDK(object: AddressBytesToStringResponseSDKType): AddressBytesToStringResponse {
     return {
-      addressString: isSet(object.address_string) ? object.address_string : ""
+      addressString: isSet(object.address_string) ? object.address_string : undefined
     };
   },
 
@@ -1037,7 +1037,7 @@ export const AddressStringToBytesRequest = {
 
   fromSDK(object: AddressStringToBytesRequestSDKType): AddressStringToBytesRequest {
     return {
-      addressString: isSet(object.address_string) ? object.address_string : ""
+      addressString: isSet(object.address_string) ? object.address_string : undefined
     };
   },
 
@@ -1106,7 +1106,7 @@ export const AddressStringToBytesResponse = {
 
   fromSDK(object: AddressStringToBytesResponseSDKType): AddressStringToBytesResponse {
     return {
-      addressBytes: isSet(object.address_bytes) ? object.address_bytes : new Uint8Array()
+      addressBytes: isSet(object.address_bytes) ? object.address_bytes : undefined
     };
   },
 

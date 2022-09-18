@@ -282,7 +282,7 @@ export const GetValidatorSetByHeightRequest = {
 
   fromSDK(object: GetValidatorSetByHeightRequestSDKType): GetValidatorSetByHeightRequest {
     return {
-      height: isSet(object.height) ? object.height : Long.ZERO,
+      height: isSet(object.height) ? object.height : undefined,
       pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
@@ -383,7 +383,7 @@ export const GetValidatorSetByHeightResponse = {
 
   fromSDK(object: GetValidatorSetByHeightResponseSDKType): GetValidatorSetByHeightResponse {
     return {
-      blockHeight: isSet(object.block_height) ? object.block_height : Long.ZERO,
+      blockHeight: isSet(object.block_height) ? object.block_height : undefined,
       validators: Array.isArray(object?.validators) ? object.validators.map((e: any) => Validator.fromSDK(e)) : [],
       pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
     };
@@ -561,7 +561,7 @@ export const GetLatestValidatorSetResponse = {
 
   fromSDK(object: GetLatestValidatorSetResponseSDKType): GetLatestValidatorSetResponse {
     return {
-      blockHeight: isSet(object.block_height) ? object.block_height : Long.ZERO,
+      blockHeight: isSet(object.block_height) ? object.block_height : undefined,
       validators: Array.isArray(object?.validators) ? object.validators.map((e: any) => Validator.fromSDK(e)) : [],
       pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
     };
@@ -676,10 +676,10 @@ export const Validator = {
 
   fromSDK(object: ValidatorSDKType): Validator {
     return {
-      address: isSet(object.address) ? object.address : "",
+      address: isSet(object.address) ? object.address : undefined,
       pubKey: isSet(object.pub_key) ? Any.fromSDK(object.pub_key) : undefined,
-      votingPower: isSet(object.voting_power) ? object.voting_power : Long.ZERO,
-      proposerPriority: isSet(object.proposer_priority) ? object.proposer_priority : Long.ZERO
+      votingPower: isSet(object.voting_power) ? object.voting_power : undefined,
+      proposerPriority: isSet(object.proposer_priority) ? object.proposer_priority : undefined
     };
   },
 
@@ -751,7 +751,7 @@ export const GetBlockByHeightRequest = {
 
   fromSDK(object: GetBlockByHeightRequestSDKType): GetBlockByHeightRequest {
     return {
-      height: isSet(object.height) ? object.height : Long.ZERO
+      height: isSet(object.height) ? object.height : undefined
     };
   },
 
@@ -1090,7 +1090,7 @@ export const GetSyncingResponse = {
 
   fromSDK(object: GetSyncingResponseSDKType): GetSyncingResponse {
     return {
-      syncing: isSet(object.syncing) ? object.syncing : false
+      syncing: isSet(object.syncing) ? object.syncing : undefined
     };
   },
 
@@ -1384,14 +1384,14 @@ export const VersionInfo = {
 
   fromSDK(object: VersionInfoSDKType): VersionInfo {
     return {
-      name: isSet(object.name) ? object.name : "",
-      appName: isSet(object.app_name) ? object.app_name : "",
-      version: isSet(object.version) ? object.version : "",
-      gitCommit: isSet(object.git_commit) ? object.git_commit : "",
-      buildTags: isSet(object.build_tags) ? object.build_tags : "",
-      goVersion: isSet(object.go_version) ? object.go_version : "",
+      name: isSet(object.name) ? object.name : undefined,
+      appName: isSet(object.app_name) ? object.app_name : undefined,
+      version: isSet(object.version) ? object.version : undefined,
+      gitCommit: isSet(object.git_commit) ? object.git_commit : undefined,
+      buildTags: isSet(object.build_tags) ? object.build_tags : undefined,
+      goVersion: isSet(object.go_version) ? object.go_version : undefined,
       buildDeps: Array.isArray(object?.build_deps) ? object.build_deps.map((e: any) => Module.fromSDK(e)) : [],
-      cosmosSdkVersion: isSet(object.cosmos_sdk_version) ? object.cosmos_sdk_version : ""
+      cosmosSdkVersion: isSet(object.cosmos_sdk_version) ? object.cosmos_sdk_version : undefined
     };
   },
 
@@ -1497,9 +1497,9 @@ export const Module = {
 
   fromSDK(object: ModuleSDKType): Module {
     return {
-      path: isSet(object.path) ? object.path : "",
-      version: isSet(object.version) ? object.version : "",
-      sum: isSet(object.sum) ? object.sum : ""
+      path: isSet(object.path) ? object.path : undefined,
+      version: isSet(object.version) ? object.version : undefined,
+      sum: isSet(object.sum) ? object.sum : undefined
     };
   },
 

@@ -144,8 +144,8 @@ export const MsgGrantAllowance = {
 
   fromSDK(object: MsgGrantAllowanceSDKType): MsgGrantAllowance {
     return {
-      granter: isSet(object.granter) ? object.granter : "",
-      grantee: isSet(object.grantee) ? object.grantee : "",
+      granter: isSet(object.granter) ? object.granter : undefined,
+      grantee: isSet(object.grantee) ? object.grantee : undefined,
       allowance: isSet(object.allowance) ? Any.fromSDK(object.allowance) : undefined
     };
   },
@@ -281,8 +281,8 @@ export const MsgRevokeAllowance = {
 
   fromSDK(object: MsgRevokeAllowanceSDKType): MsgRevokeAllowance {
     return {
-      granter: isSet(object.granter) ? object.granter : "",
-      grantee: isSet(object.grantee) ? object.grantee : ""
+      granter: isSet(object.granter) ? object.granter : undefined,
+      grantee: isSet(object.grantee) ? object.grantee : undefined
     };
   },
 

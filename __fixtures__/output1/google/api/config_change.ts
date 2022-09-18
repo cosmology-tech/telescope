@@ -295,9 +295,9 @@ export const ConfigChange = {
 
   fromSDK(object: ConfigChangeSDKType): ConfigChange {
     return {
-      element: isSet(object.element) ? object.element : "",
-      oldValue: isSet(object.old_value) ? object.old_value : "",
-      newValue: isSet(object.new_value) ? object.new_value : "",
+      element: isSet(object.element) ? object.element : undefined,
+      oldValue: isSet(object.old_value) ? object.old_value : undefined,
+      newValue: isSet(object.new_value) ? object.new_value : undefined,
       changeType: isSet(object.change_type) ? changeTypeFromJSON(object.change_type) : 0,
       advices: Array.isArray(object?.advices) ? object.advices.map((e: any) => Advice.fromSDK(e)) : []
     };
@@ -378,7 +378,7 @@ export const Advice = {
 
   fromSDK(object: AdviceSDKType): Advice {
     return {
-      description: isSet(object.description) ? object.description : ""
+      description: isSet(object.description) ? object.description : undefined
     };
   },
 

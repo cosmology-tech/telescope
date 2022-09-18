@@ -102,7 +102,7 @@ export const QueryBalancesRequest = {
 
   fromSDK(object: QueryBalancesRequestSDKType): QueryBalancesRequest {
     return {
-      address: isSet(object.address) ? object.address : ""
+      address: isSet(object.address) ? object.address : undefined
     };
   },
 

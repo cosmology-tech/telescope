@@ -346,10 +346,10 @@ export const Version = {
 
   fromSDK(object: VersionSDKType): Version {
     return {
-      major: isSet(object.major) ? object.major : 0,
-      minor: isSet(object.minor) ? object.minor : 0,
-      patch: isSet(object.patch) ? object.patch : 0,
-      suffix: isSet(object.suffix) ? object.suffix : ""
+      major: isSet(object.major) ? object.major : undefined,
+      minor: isSet(object.minor) ? object.minor : undefined,
+      patch: isSet(object.patch) ? object.patch : undefined,
+      suffix: isSet(object.suffix) ? object.suffix : undefined
     };
   },
 
@@ -470,7 +470,7 @@ export const CodeGeneratorRequest = {
   fromSDK(object: CodeGeneratorRequestSDKType): CodeGeneratorRequest {
     return {
       fileToGenerate: Array.isArray(object?.file_to_generate) ? object.file_to_generate.map((e: any) => e) : [],
-      parameter: isSet(object.parameter) ? object.parameter : "",
+      parameter: isSet(object.parameter) ? object.parameter : undefined,
       protoFile: Array.isArray(object?.proto_file) ? object.proto_file.map((e: any) => FileDescriptorProto.fromSDK(e)) : [],
       compilerVersion: isSet(object.compiler_version) ? Version.fromSDK(object.compiler_version) : undefined
     };
@@ -574,7 +574,7 @@ export const CodeGeneratorResponse = {
 
   fromSDK(object: CodeGeneratorResponseSDKType): CodeGeneratorResponse {
     return {
-      error: isSet(object.error) ? object.error : "",
+      error: isSet(object.error) ? object.error : undefined,
       file: Array.isArray(object?.file) ? object.file.map((e: any) => CodeGeneratorResponse_File.fromSDK(e)) : []
     };
   },
@@ -675,9 +675,9 @@ export const CodeGeneratorResponse_File = {
 
   fromSDK(object: CodeGeneratorResponse_FileSDKType): CodeGeneratorResponse_File {
     return {
-      name: isSet(object.name) ? object.name : "",
-      insertionPoint: isSet(object.insertion_point) ? object.insertion_point : "",
-      content: isSet(object.content) ? object.content : ""
+      name: isSet(object.name) ? object.name : undefined,
+      insertionPoint: isSet(object.insertion_point) ? object.insertion_point : undefined,
+      content: isSet(object.content) ? object.content : undefined
     };
   },
 

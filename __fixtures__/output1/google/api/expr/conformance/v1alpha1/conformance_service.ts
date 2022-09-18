@@ -386,10 +386,10 @@ export const ParseRequest = {
 
   fromSDK(object: ParseRequestSDKType): ParseRequest {
     return {
-      celSource: isSet(object.cel_source) ? object.cel_source : "",
-      syntaxVersion: isSet(object.syntax_version) ? object.syntax_version : "",
-      sourceLocation: isSet(object.source_location) ? object.source_location : "",
-      disableMacros: isSet(object.disable_macros) ? object.disable_macros : false
+      celSource: isSet(object.cel_source) ? object.cel_source : undefined,
+      syntaxVersion: isSet(object.syntax_version) ? object.syntax_version : undefined,
+      sourceLocation: isSet(object.source_location) ? object.source_location : undefined,
+      disableMacros: isSet(object.disable_macros) ? object.disable_macros : undefined
     };
   },
 
@@ -600,8 +600,8 @@ export const CheckRequest = {
     return {
       parsedExpr: isSet(object.parsed_expr) ? ParsedExpr.fromSDK(object.parsed_expr) : undefined,
       typeEnv: Array.isArray(object?.type_env) ? object.type_env.map((e: any) => Decl.fromSDK(e)) : [],
-      container: isSet(object.container) ? object.container : "",
-      noStdEnv: isSet(object.no_std_env) ? object.no_std_env : false
+      container: isSet(object.container) ? object.container : undefined,
+      noStdEnv: isSet(object.no_std_env) ? object.no_std_env : undefined
     };
   },
 
@@ -786,7 +786,7 @@ export const EvalRequest_BindingsEntry = {
 
   fromSDK(object: EvalRequest_BindingsEntrySDKType): EvalRequest_BindingsEntry {
     return {
-      key: isSet(object.key) ? object.key : "",
+      key: isSet(object.key) ? object.key : undefined,
       value: isSet(object.value) ? google.api.expr.v1alpha1.ExprValue.fromSDK(object.value) : undefined
     };
   },
@@ -929,7 +929,7 @@ export const EvalRequest = {
         acc[key] = ExprValue.fromSDK(value);
         return acc;
       }, {}) : {},
-      container: isSet(object.container) ? object.container : ""
+      container: isSet(object.container) ? object.container : undefined
     };
   },
 
@@ -1129,7 +1129,7 @@ export const IssueDetails = {
     return {
       severity: isSet(object.severity) ? issueDetails_SeverityFromJSON(object.severity) : 0,
       position: isSet(object.position) ? SourcePosition.fromSDK(object.position) : undefined,
-      id: isSet(object.id) ? object.id : Long.ZERO
+      id: isSet(object.id) ? object.id : undefined
     };
   },
 

@@ -708,7 +708,7 @@ export const DebugInfo = {
   fromSDK(object: DebugInfoSDKType): DebugInfo {
     return {
       stackEntries: Array.isArray(object?.stack_entries) ? object.stack_entries.map((e: any) => e) : [],
-      detail: isSet(object.detail) ? object.detail : ""
+      detail: isSet(object.detail) ? object.detail : undefined
     };
   },
 
@@ -877,8 +877,8 @@ export const QuotaFailure_Violation = {
 
   fromSDK(object: QuotaFailure_ViolationSDKType): QuotaFailure_Violation {
     return {
-      subject: isSet(object.subject) ? object.subject : "",
-      description: isSet(object.description) ? object.description : ""
+      subject: isSet(object.subject) ? object.subject : undefined,
+      description: isSet(object.description) ? object.description : undefined
     };
   },
 
@@ -960,8 +960,8 @@ export const ErrorInfo_MetadataEntry = {
 
   fromSDK(object: ErrorInfo_MetadataEntrySDKType): ErrorInfo_MetadataEntry {
     return {
-      key: isSet(object.key) ? object.key : "",
-      value: isSet(object.value) ? object.value : ""
+      key: isSet(object.key) ? object.key : undefined,
+      value: isSet(object.value) ? object.value : undefined
     };
   },
 
@@ -1082,8 +1082,8 @@ export const ErrorInfo = {
 
   fromSDK(object: ErrorInfoSDKType): ErrorInfo {
     return {
-      reason: isSet(object.reason) ? object.reason : "",
-      domain: isSet(object.domain) ? object.domain : "",
+      reason: isSet(object.reason) ? object.reason : undefined,
+      domain: isSet(object.domain) ? object.domain : undefined,
       metadata: isObject(object.metadata) ? Object.entries(object.metadata).reduce<{
         [key: string]: string;
       }>((acc, [key, value]) => {
@@ -1272,9 +1272,9 @@ export const PreconditionFailure_Violation = {
 
   fromSDK(object: PreconditionFailure_ViolationSDKType): PreconditionFailure_Violation {
     return {
-      type: isSet(object.type) ? object.type : "",
-      subject: isSet(object.subject) ? object.subject : "",
-      description: isSet(object.description) ? object.description : ""
+      type: isSet(object.type) ? object.type : undefined,
+      subject: isSet(object.subject) ? object.subject : undefined,
+      description: isSet(object.description) ? object.description : undefined
     };
   },
 
@@ -1438,8 +1438,8 @@ export const BadRequest_FieldViolation = {
 
   fromSDK(object: BadRequest_FieldViolationSDKType): BadRequest_FieldViolation {
     return {
-      field: isSet(object.field) ? object.field : "",
-      description: isSet(object.description) ? object.description : ""
+      field: isSet(object.field) ? object.field : undefined,
+      description: isSet(object.description) ? object.description : undefined
     };
   },
 
@@ -1521,8 +1521,8 @@ export const RequestInfo = {
 
   fromSDK(object: RequestInfoSDKType): RequestInfo {
     return {
-      requestId: isSet(object.request_id) ? object.request_id : "",
-      servingData: isSet(object.serving_data) ? object.serving_data : ""
+      requestId: isSet(object.request_id) ? object.request_id : undefined,
+      servingData: isSet(object.serving_data) ? object.serving_data : undefined
     };
   },
 
@@ -1628,10 +1628,10 @@ export const ResourceInfo = {
 
   fromSDK(object: ResourceInfoSDKType): ResourceInfo {
     return {
-      resourceType: isSet(object.resource_type) ? object.resource_type : "",
-      resourceName: isSet(object.resource_name) ? object.resource_name : "",
-      owner: isSet(object.owner) ? object.owner : "",
-      description: isSet(object.description) ? object.description : ""
+      resourceType: isSet(object.resource_type) ? object.resource_type : undefined,
+      resourceName: isSet(object.resource_name) ? object.resource_name : undefined,
+      owner: isSet(object.owner) ? object.owner : undefined,
+      description: isSet(object.description) ? object.description : undefined
     };
   },
 
@@ -1796,8 +1796,8 @@ export const Help_Link = {
 
   fromSDK(object: Help_LinkSDKType): Help_Link {
     return {
-      description: isSet(object.description) ? object.description : "",
-      url: isSet(object.url) ? object.url : ""
+      description: isSet(object.description) ? object.description : undefined,
+      url: isSet(object.url) ? object.url : undefined
     };
   },
 
@@ -1879,8 +1879,8 @@ export const LocalizedMessage = {
 
   fromSDK(object: LocalizedMessageSDKType): LocalizedMessage {
     return {
-      locale: isSet(object.locale) ? object.locale : "",
-      message: isSet(object.message) ? object.message : ""
+      locale: isSet(object.locale) ? object.locale : undefined,
+      message: isSet(object.message) ? object.message : undefined
     };
   },
 

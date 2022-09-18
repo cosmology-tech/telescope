@@ -302,9 +302,9 @@ export const MsgJoinPool = {
 
   fromSDK(object: MsgJoinPoolSDKType): MsgJoinPool {
     return {
-      sender: isSet(object.sender) ? object.sender : "",
-      poolId: isSet(object.poolId) ? object.poolId : Long.UZERO,
-      shareOutAmount: isSet(object.shareOutAmount) ? object.shareOutAmount : "",
+      sender: isSet(object.sender) ? object.sender : undefined,
+      poolId: isSet(object.poolId) ? object.poolId : undefined,
+      shareOutAmount: isSet(object.shareOutAmount) ? object.shareOutAmount : undefined,
       tokenInMaxs: Array.isArray(object?.tokenInMaxs) ? object.tokenInMaxs.map((e: any) => Coin.fromSDK(e)) : []
     };
   },
@@ -477,9 +477,9 @@ export const MsgExitPool = {
 
   fromSDK(object: MsgExitPoolSDKType): MsgExitPool {
     return {
-      sender: isSet(object.sender) ? object.sender : "",
-      poolId: isSet(object.poolId) ? object.poolId : Long.UZERO,
-      shareInAmount: isSet(object.shareInAmount) ? object.shareInAmount : "",
+      sender: isSet(object.sender) ? object.sender : undefined,
+      poolId: isSet(object.poolId) ? object.poolId : undefined,
+      shareInAmount: isSet(object.shareInAmount) ? object.shareInAmount : undefined,
       tokenOutMins: Array.isArray(object?.tokenOutMins) ? object.tokenOutMins.map((e: any) => Coin.fromSDK(e)) : []
     };
   },
@@ -622,8 +622,8 @@ export const SwapAmountInRoute = {
 
   fromSDK(object: SwapAmountInRouteSDKType): SwapAmountInRoute {
     return {
-      poolId: isSet(object.poolId) ? object.poolId : Long.UZERO,
-      tokenOutDenom: isSet(object.tokenOutDenom) ? object.tokenOutDenom : ""
+      poolId: isSet(object.poolId) ? object.poolId : undefined,
+      tokenOutDenom: isSet(object.tokenOutDenom) ? object.tokenOutDenom : undefined
     };
   },
 
@@ -735,10 +735,10 @@ export const MsgSwapExactAmountIn = {
 
   fromSDK(object: MsgSwapExactAmountInSDKType): MsgSwapExactAmountIn {
     return {
-      sender: isSet(object.sender) ? object.sender : "",
+      sender: isSet(object.sender) ? object.sender : undefined,
       routes: Array.isArray(object?.routes) ? object.routes.map((e: any) => SwapAmountInRoute.fromSDK(e)) : [],
       tokenIn: isSet(object.tokenIn) ? Coin.fromSDK(object.tokenIn) : undefined,
-      tokenOutMinAmount: isSet(object.tokenOutMinAmount) ? object.tokenOutMinAmount : ""
+      tokenOutMinAmount: isSet(object.tokenOutMinAmount) ? object.tokenOutMinAmount : undefined
     };
   },
 
@@ -816,7 +816,7 @@ export const MsgSwapExactAmountInResponse = {
 
   fromSDK(object: MsgSwapExactAmountInResponseSDKType): MsgSwapExactAmountInResponse {
     return {
-      tokenOutAmount: isSet(object.tokenOutAmount) ? object.tokenOutAmount : ""
+      tokenOutAmount: isSet(object.tokenOutAmount) ? object.tokenOutAmount : undefined
     };
   },
 
@@ -897,8 +897,8 @@ export const SwapAmountOutRoute = {
 
   fromSDK(object: SwapAmountOutRouteSDKType): SwapAmountOutRoute {
     return {
-      poolId: isSet(object.poolId) ? object.poolId : Long.UZERO,
-      tokenInDenom: isSet(object.tokenInDenom) ? object.tokenInDenom : ""
+      poolId: isSet(object.poolId) ? object.poolId : undefined,
+      tokenInDenom: isSet(object.tokenInDenom) ? object.tokenInDenom : undefined
     };
   },
 
@@ -1010,9 +1010,9 @@ export const MsgSwapExactAmountOut = {
 
   fromSDK(object: MsgSwapExactAmountOutSDKType): MsgSwapExactAmountOut {
     return {
-      sender: isSet(object.sender) ? object.sender : "",
+      sender: isSet(object.sender) ? object.sender : undefined,
       routes: Array.isArray(object?.routes) ? object.routes.map((e: any) => SwapAmountOutRoute.fromSDK(e)) : [],
-      tokenInMaxAmount: isSet(object.tokenInMaxAmount) ? object.tokenInMaxAmount : "",
+      tokenInMaxAmount: isSet(object.tokenInMaxAmount) ? object.tokenInMaxAmount : undefined,
       tokenOut: isSet(object.tokenOut) ? Coin.fromSDK(object.tokenOut) : undefined
     };
   },
@@ -1091,7 +1091,7 @@ export const MsgSwapExactAmountOutResponse = {
 
   fromSDK(object: MsgSwapExactAmountOutResponseSDKType): MsgSwapExactAmountOutResponse {
     return {
-      tokenInAmount: isSet(object.tokenInAmount) ? object.tokenInAmount : ""
+      tokenInAmount: isSet(object.tokenInAmount) ? object.tokenInAmount : undefined
     };
   },
 
@@ -1196,10 +1196,10 @@ export const MsgJoinSwapExternAmountIn = {
 
   fromSDK(object: MsgJoinSwapExternAmountInSDKType): MsgJoinSwapExternAmountIn {
     return {
-      sender: isSet(object.sender) ? object.sender : "",
-      poolId: isSet(object.poolId) ? object.poolId : Long.UZERO,
+      sender: isSet(object.sender) ? object.sender : undefined,
+      poolId: isSet(object.poolId) ? object.poolId : undefined,
       tokenIn: isSet(object.tokenIn) ? Coin.fromSDK(object.tokenIn) : undefined,
-      shareOutMinAmount: isSet(object.shareOutMinAmount) ? object.shareOutMinAmount : ""
+      shareOutMinAmount: isSet(object.shareOutMinAmount) ? object.shareOutMinAmount : undefined
     };
   },
 
@@ -1271,7 +1271,7 @@ export const MsgJoinSwapExternAmountInResponse = {
 
   fromSDK(object: MsgJoinSwapExternAmountInResponseSDKType): MsgJoinSwapExternAmountInResponse {
     return {
-      shareOutAmount: isSet(object.shareOutAmount) ? object.shareOutAmount : ""
+      shareOutAmount: isSet(object.shareOutAmount) ? object.shareOutAmount : undefined
     };
   },
 
@@ -1388,11 +1388,11 @@ export const MsgJoinSwapShareAmountOut = {
 
   fromSDK(object: MsgJoinSwapShareAmountOutSDKType): MsgJoinSwapShareAmountOut {
     return {
-      sender: isSet(object.sender) ? object.sender : "",
-      poolId: isSet(object.poolId) ? object.poolId : Long.UZERO,
-      tokenInDenom: isSet(object.tokenInDenom) ? object.tokenInDenom : "",
-      shareOutAmount: isSet(object.shareOutAmount) ? object.shareOutAmount : "",
-      tokenInMaxAmount: isSet(object.tokenInMaxAmount) ? object.tokenInMaxAmount : ""
+      sender: isSet(object.sender) ? object.sender : undefined,
+      poolId: isSet(object.poolId) ? object.poolId : undefined,
+      tokenInDenom: isSet(object.tokenInDenom) ? object.tokenInDenom : undefined,
+      shareOutAmount: isSet(object.shareOutAmount) ? object.shareOutAmount : undefined,
+      tokenInMaxAmount: isSet(object.tokenInMaxAmount) ? object.tokenInMaxAmount : undefined
     };
   },
 
@@ -1465,7 +1465,7 @@ export const MsgJoinSwapShareAmountOutResponse = {
 
   fromSDK(object: MsgJoinSwapShareAmountOutResponseSDKType): MsgJoinSwapShareAmountOutResponse {
     return {
-      tokenInAmount: isSet(object.tokenInAmount) ? object.tokenInAmount : ""
+      tokenInAmount: isSet(object.tokenInAmount) ? object.tokenInAmount : undefined
     };
   },
 
@@ -1582,11 +1582,11 @@ export const MsgExitSwapShareAmountIn = {
 
   fromSDK(object: MsgExitSwapShareAmountInSDKType): MsgExitSwapShareAmountIn {
     return {
-      sender: isSet(object.sender) ? object.sender : "",
-      poolId: isSet(object.poolId) ? object.poolId : Long.UZERO,
-      tokenOutDenom: isSet(object.tokenOutDenom) ? object.tokenOutDenom : "",
-      shareInAmount: isSet(object.shareInAmount) ? object.shareInAmount : "",
-      tokenOutMinAmount: isSet(object.tokenOutMinAmount) ? object.tokenOutMinAmount : ""
+      sender: isSet(object.sender) ? object.sender : undefined,
+      poolId: isSet(object.poolId) ? object.poolId : undefined,
+      tokenOutDenom: isSet(object.tokenOutDenom) ? object.tokenOutDenom : undefined,
+      shareInAmount: isSet(object.shareInAmount) ? object.shareInAmount : undefined,
+      tokenOutMinAmount: isSet(object.tokenOutMinAmount) ? object.tokenOutMinAmount : undefined
     };
   },
 
@@ -1659,7 +1659,7 @@ export const MsgExitSwapShareAmountInResponse = {
 
   fromSDK(object: MsgExitSwapShareAmountInResponseSDKType): MsgExitSwapShareAmountInResponse {
     return {
-      tokenOutAmount: isSet(object.tokenOutAmount) ? object.tokenOutAmount : ""
+      tokenOutAmount: isSet(object.tokenOutAmount) ? object.tokenOutAmount : undefined
     };
   },
 
@@ -1764,10 +1764,10 @@ export const MsgExitSwapExternAmountOut = {
 
   fromSDK(object: MsgExitSwapExternAmountOutSDKType): MsgExitSwapExternAmountOut {
     return {
-      sender: isSet(object.sender) ? object.sender : "",
-      poolId: isSet(object.poolId) ? object.poolId : Long.UZERO,
+      sender: isSet(object.sender) ? object.sender : undefined,
+      poolId: isSet(object.poolId) ? object.poolId : undefined,
       tokenOut: isSet(object.tokenOut) ? Coin.fromSDK(object.tokenOut) : undefined,
-      shareInMaxAmount: isSet(object.shareInMaxAmount) ? object.shareInMaxAmount : ""
+      shareInMaxAmount: isSet(object.shareInMaxAmount) ? object.shareInMaxAmount : undefined
     };
   },
 
@@ -1839,7 +1839,7 @@ export const MsgExitSwapExternAmountOutResponse = {
 
   fromSDK(object: MsgExitSwapExternAmountOutResponseSDKType): MsgExitSwapExternAmountOutResponse {
     return {
-      shareInAmount: isSet(object.shareInAmount) ? object.shareInAmount : ""
+      shareInAmount: isSet(object.shareInAmount) ? object.shareInAmount : undefined
     };
   },
 

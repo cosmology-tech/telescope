@@ -541,15 +541,15 @@ export const BackendRule = {
 
   fromSDK(object: BackendRuleSDKType): BackendRule {
     return {
-      selector: isSet(object.selector) ? object.selector : "",
-      address: isSet(object.address) ? object.address : "",
-      deadline: isSet(object.deadline) ? object.deadline : 0,
-      minDeadline: isSet(object.min_deadline) ? object.min_deadline : 0,
-      operationDeadline: isSet(object.operation_deadline) ? object.operation_deadline : 0,
+      selector: isSet(object.selector) ? object.selector : undefined,
+      address: isSet(object.address) ? object.address : undefined,
+      deadline: isSet(object.deadline) ? object.deadline : undefined,
+      minDeadline: isSet(object.min_deadline) ? object.min_deadline : undefined,
+      operationDeadline: isSet(object.operation_deadline) ? object.operation_deadline : undefined,
       pathTranslation: isSet(object.path_translation) ? backendRule_PathTranslationFromJSON(object.path_translation) : 0,
       jwtAudience: isSet(object.jwt_audience) ? object.jwt_audience : undefined,
       disableAuth: isSet(object.disable_auth) ? object.disable_auth : undefined,
-      protocol: isSet(object.protocol) ? object.protocol : ""
+      protocol: isSet(object.protocol) ? object.protocol : undefined
     };
   },
 

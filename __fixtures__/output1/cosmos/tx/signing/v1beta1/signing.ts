@@ -369,7 +369,7 @@ export const SignatureDescriptor = {
     return {
       publicKey: isSet(object.public_key) ? Any.fromSDK(object.public_key) : undefined,
       data: isSet(object.data) ? SignatureDescriptor_Data.fromSDK(object.data) : undefined,
-      sequence: isSet(object.sequence) ? object.sequence : Long.UZERO
+      sequence: isSet(object.sequence) ? object.sequence : undefined
     };
   },
 
@@ -536,7 +536,7 @@ export const SignatureDescriptor_Data_Single = {
   fromSDK(object: SignatureDescriptor_Data_SingleSDKType): SignatureDescriptor_Data_Single {
     return {
       mode: isSet(object.mode) ? signModeFromJSON(object.mode) : 0,
-      signature: isSet(object.signature) ? object.signature : new Uint8Array()
+      signature: isSet(object.signature) ? object.signature : undefined
     };
   },
 

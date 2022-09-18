@@ -111,8 +111,8 @@ export const App = {
 
   fromSDK(object: AppSDKType): App {
     return {
-      protocol: isSet(object.protocol) ? object.protocol : Long.UZERO,
-      software: isSet(object.software) ? object.software : ""
+      protocol: isSet(object.protocol) ? object.protocol : undefined,
+      software: isSet(object.software) ? object.software : undefined
     };
   },
 
@@ -194,8 +194,8 @@ export const Consensus = {
 
   fromSDK(object: ConsensusSDKType): Consensus {
     return {
-      block: isSet(object.block) ? object.block : Long.UZERO,
-      app: isSet(object.app) ? object.app : Long.UZERO
+      block: isSet(object.block) ? object.block : undefined,
+      app: isSet(object.app) ? object.app : undefined
     };
   },
 

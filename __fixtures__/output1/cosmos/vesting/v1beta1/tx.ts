@@ -205,11 +205,11 @@ export const MsgCreateVestingAccount = {
 
   fromSDK(object: MsgCreateVestingAccountSDKType): MsgCreateVestingAccount {
     return {
-      fromAddress: isSet(object.from_address) ? object.from_address : "",
-      toAddress: isSet(object.to_address) ? object.to_address : "",
+      fromAddress: isSet(object.from_address) ? object.from_address : undefined,
+      toAddress: isSet(object.to_address) ? object.to_address : undefined,
       amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromSDK(e)) : [],
-      endTime: isSet(object.end_time) ? object.end_time : Long.ZERO,
-      delayed: isSet(object.delayed) ? object.delayed : false
+      endTime: isSet(object.end_time) ? object.end_time : undefined,
+      delayed: isSet(object.delayed) ? object.delayed : undefined
     };
   },
 
@@ -370,8 +370,8 @@ export const MsgCreatePermanentLockedAccount = {
 
   fromSDK(object: MsgCreatePermanentLockedAccountSDKType): MsgCreatePermanentLockedAccount {
     return {
-      fromAddress: isSet(object.from_address) ? object.from_address : "",
-      toAddress: isSet(object.to_address) ? object.to_address : "",
+      fromAddress: isSet(object.from_address) ? object.from_address : undefined,
+      toAddress: isSet(object.to_address) ? object.to_address : undefined,
       amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromSDK(e)) : []
     };
   },
@@ -543,9 +543,9 @@ export const MsgCreatePeriodicVestingAccount = {
 
   fromSDK(object: MsgCreatePeriodicVestingAccountSDKType): MsgCreatePeriodicVestingAccount {
     return {
-      fromAddress: isSet(object.from_address) ? object.from_address : "",
-      toAddress: isSet(object.to_address) ? object.to_address : "",
-      startTime: isSet(object.start_time) ? object.start_time : Long.ZERO,
+      fromAddress: isSet(object.from_address) ? object.from_address : undefined,
+      toAddress: isSet(object.to_address) ? object.to_address : undefined,
+      startTime: isSet(object.start_time) ? object.start_time : undefined,
       vestingPeriods: Array.isArray(object?.vesting_periods) ? object.vesting_periods.map((e: any) => Period.fromSDK(e)) : []
     };
   },

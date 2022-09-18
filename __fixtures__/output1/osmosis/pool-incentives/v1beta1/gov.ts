@@ -150,8 +150,8 @@ export const ReplacePoolIncentivesProposal = {
 
   fromSDK(object: ReplacePoolIncentivesProposalSDKType): ReplacePoolIncentivesProposal {
     return {
-      title: isSet(object.title) ? object.title : "",
-      description: isSet(object.description) ? object.description : "",
+      title: isSet(object.title) ? object.title : undefined,
+      description: isSet(object.description) ? object.description : undefined,
       records: Array.isArray(object?.records) ? object.records.map((e: any) => DistrRecord.fromSDK(e)) : []
     };
   },
@@ -259,8 +259,8 @@ export const UpdatePoolIncentivesProposal = {
 
   fromSDK(object: UpdatePoolIncentivesProposalSDKType): UpdatePoolIncentivesProposal {
     return {
-      title: isSet(object.title) ? object.title : "",
-      description: isSet(object.description) ? object.description : "",
+      title: isSet(object.title) ? object.title : undefined,
+      description: isSet(object.description) ? object.description : undefined,
       records: Array.isArray(object?.records) ? object.records.map((e: any) => DistrRecord.fromSDK(e)) : []
     };
   },

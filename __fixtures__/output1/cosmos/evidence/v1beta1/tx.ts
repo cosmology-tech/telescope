@@ -102,7 +102,7 @@ export const MsgSubmitEvidence = {
 
   fromSDK(object: MsgSubmitEvidenceSDKType): MsgSubmitEvidence {
     return {
-      submitter: isSet(object.submitter) ? object.submitter : "",
+      submitter: isSet(object.submitter) ? object.submitter : undefined,
       evidence: isSet(object.evidence) ? Any.fromSDK(object.evidence) : undefined
     };
   },
@@ -173,7 +173,7 @@ export const MsgSubmitEvidenceResponse = {
 
   fromSDK(object: MsgSubmitEvidenceResponseSDKType): MsgSubmitEvidenceResponse {
     return {
-      hash: isSet(object.hash) ? object.hash : new Uint8Array()
+      hash: isSet(object.hash) ? object.hash : undefined
     };
   },
 

@@ -186,7 +186,7 @@ export const ClaimRecord = {
 
   fromSDK(object: ClaimRecordSDKType): ClaimRecord {
     return {
-      address: isSet(object.address) ? object.address : "",
+      address: isSet(object.address) ? object.address : undefined,
       initialClaimableAmount: Array.isArray(object?.initial_claimable_amount) ? object.initial_claimable_amount.map((e: any) => Coin.fromSDK(e)) : [],
       actionCompleted: Array.isArray(object?.action_completed) ? object.action_completed.map((e: any) => e) : []
     };

@@ -802,14 +802,14 @@ export const MetricDescriptor = {
 
   fromSDK(object: MetricDescriptorSDKType): MetricDescriptor {
     return {
-      name: isSet(object.name) ? object.name : "",
-      type: isSet(object.type) ? object.type : "",
+      name: isSet(object.name) ? object.name : undefined,
+      type: isSet(object.type) ? object.type : undefined,
       labels: Array.isArray(object?.labels) ? object.labels.map((e: any) => LabelDescriptor.fromSDK(e)) : [],
       metricKind: isSet(object.metric_kind) ? metricDescriptor_MetricKindFromJSON(object.metric_kind) : 0,
       valueType: isSet(object.value_type) ? metricDescriptor_ValueTypeFromJSON(object.value_type) : 0,
-      unit: isSet(object.unit) ? object.unit : "",
-      description: isSet(object.description) ? object.description : "",
-      displayName: isSet(object.display_name) ? object.display_name : "",
+      unit: isSet(object.unit) ? object.unit : undefined,
+      description: isSet(object.description) ? object.description : undefined,
+      displayName: isSet(object.display_name) ? object.display_name : undefined,
       metadata: isSet(object.metadata) ? MetricDescriptor_MetricDescriptorMetadata.fromSDK(object.metadata) : undefined,
       launchStage: isSet(object.launch_stage) ? launchStageFromJSON(object.launch_stage) : 0,
       monitoredResourceTypes: Array.isArray(object?.monitored_resource_types) ? object.monitored_resource_types.map((e: any) => e) : []
@@ -1012,8 +1012,8 @@ export const Metric_LabelsEntry = {
 
   fromSDK(object: Metric_LabelsEntrySDKType): Metric_LabelsEntry {
     return {
-      key: isSet(object.key) ? object.key : "",
-      value: isSet(object.value) ? object.value : ""
+      key: isSet(object.key) ? object.key : undefined,
+      value: isSet(object.value) ? object.value : undefined
     };
   },
 
@@ -1122,7 +1122,7 @@ export const Metric = {
 
   fromSDK(object: MetricSDKType): Metric {
     return {
-      type: isSet(object.type) ? object.type : "",
+      type: isSet(object.type) ? object.type : undefined,
       labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
         [key: string]: string;
       }>((acc, [key, value]) => {

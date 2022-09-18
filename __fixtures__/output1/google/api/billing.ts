@@ -282,7 +282,7 @@ export const Billing_BillingDestination = {
 
   fromSDK(object: Billing_BillingDestinationSDKType): Billing_BillingDestination {
     return {
-      monitoredResource: isSet(object.monitored_resource) ? object.monitored_resource : "",
+      monitoredResource: isSet(object.monitored_resource) ? object.monitored_resource : undefined,
       metrics: Array.isArray(object?.metrics) ? object.metrics.map((e: any) => e) : []
     };
   },

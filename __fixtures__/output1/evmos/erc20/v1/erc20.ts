@@ -276,9 +276,9 @@ export const TokenPair = {
 
   fromSDK(object: TokenPairSDKType): TokenPair {
     return {
-      erc20Address: isSet(object.erc20_address) ? object.erc20_address : "",
-      denom: isSet(object.denom) ? object.denom : "",
-      enabled: isSet(object.enabled) ? object.enabled : false,
+      erc20Address: isSet(object.erc20_address) ? object.erc20_address : undefined,
+      denom: isSet(object.denom) ? object.denom : undefined,
+      enabled: isSet(object.enabled) ? object.enabled : undefined,
       contractOwner: isSet(object.contract_owner) ? ownerFromJSON(object.contract_owner) : 0
     };
   },
@@ -375,8 +375,8 @@ export const RegisterCoinProposal = {
 
   fromSDK(object: RegisterCoinProposalSDKType): RegisterCoinProposal {
     return {
-      title: isSet(object.title) ? object.title : "",
-      description: isSet(object.description) ? object.description : "",
+      title: isSet(object.title) ? object.title : undefined,
+      description: isSet(object.description) ? object.description : undefined,
       metadata: isSet(object.metadata) ? Metadata.fromSDK(object.metadata) : undefined
     };
   },
@@ -472,9 +472,9 @@ export const RegisterERC20Proposal = {
 
   fromSDK(object: RegisterERC20ProposalSDKType): RegisterERC20Proposal {
     return {
-      title: isSet(object.title) ? object.title : "",
-      description: isSet(object.description) ? object.description : "",
-      erc20address: isSet(object.erc20address) ? object.erc20address : ""
+      title: isSet(object.title) ? object.title : undefined,
+      description: isSet(object.description) ? object.description : undefined,
+      erc20address: isSet(object.erc20address) ? object.erc20address : undefined
     };
   },
 
@@ -569,9 +569,9 @@ export const ToggleTokenConversionProposal = {
 
   fromSDK(object: ToggleTokenConversionProposalSDKType): ToggleTokenConversionProposal {
     return {
-      title: isSet(object.title) ? object.title : "",
-      description: isSet(object.description) ? object.description : "",
-      token: isSet(object.token) ? object.token : ""
+      title: isSet(object.title) ? object.title : undefined,
+      description: isSet(object.description) ? object.description : undefined,
+      token: isSet(object.token) ? object.token : undefined
     };
   },
 

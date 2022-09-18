@@ -97,9 +97,9 @@ export const GroupID = {
 
   fromSDK(object: GroupIDSDKType): GroupID {
     return {
-      owner: isSet(object.owner) ? object.owner : "",
-      dseq: isSet(object.dseq) ? object.dseq : Long.UZERO,
-      gseq: isSet(object.gseq) ? object.gseq : 0
+      owner: isSet(object.owner) ? object.owner : undefined,
+      dseq: isSet(object.dseq) ? object.dseq : undefined,
+      gseq: isSet(object.gseq) ? object.gseq : undefined
     };
   },
 

@@ -171,10 +171,10 @@ export const QueryAccountsRequest = {
 
   fromSDK(object: QueryAccountsRequestSDKType): QueryAccountsRequest {
     return {
-      scope: isSet(object.scope) ? object.scope : "",
-      xid: isSet(object.xid) ? object.xid : "",
-      owner: isSet(object.owner) ? object.owner : "",
-      state: isSet(object.state) ? object.state : "",
+      scope: isSet(object.scope) ? object.scope : undefined,
+      xid: isSet(object.xid) ? object.xid : undefined,
+      owner: isSet(object.owner) ? object.owner : undefined,
+      state: isSet(object.state) ? object.state : undefined,
       pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
@@ -403,11 +403,11 @@ export const QueryPaymentsRequest = {
 
   fromSDK(object: QueryPaymentsRequestSDKType): QueryPaymentsRequest {
     return {
-      scope: isSet(object.scope) ? object.scope : "",
-      xid: isSet(object.xid) ? object.xid : "",
-      id: isSet(object.id) ? object.id : "",
-      owner: isSet(object.owner) ? object.owner : "",
-      state: isSet(object.state) ? object.state : "",
+      scope: isSet(object.scope) ? object.scope : undefined,
+      xid: isSet(object.xid) ? object.xid : undefined,
+      id: isSet(object.id) ? object.id : undefined,
+      owner: isSet(object.owner) ? object.owner : undefined,
+      state: isSet(object.state) ? object.state : undefined,
       pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },

@@ -248,12 +248,12 @@ export const MsgCreateClawbackVestingAccount = {
 
   fromSDK(object: MsgCreateClawbackVestingAccountSDKType): MsgCreateClawbackVestingAccount {
     return {
-      fromAddress: isSet(object.from_address) ? object.from_address : "",
-      toAddress: isSet(object.to_address) ? object.to_address : "",
+      fromAddress: isSet(object.from_address) ? object.from_address : undefined,
+      toAddress: isSet(object.to_address) ? object.to_address : undefined,
       startTime: isSet(object.start_time) ? Timestamp.fromSDK(object.start_time) : undefined,
       lockupPeriods: Array.isArray(object?.lockup_periods) ? object.lockup_periods.map((e: any) => Period.fromSDK(e)) : [],
       vestingPeriods: Array.isArray(object?.vesting_periods) ? object.vesting_periods.map((e: any) => Period.fromSDK(e)) : [],
-      merge: isSet(object.merge) ? object.merge : false
+      merge: isSet(object.merge) ? object.merge : undefined
     };
   },
 
@@ -414,9 +414,9 @@ export const MsgClawback = {
 
   fromSDK(object: MsgClawbackSDKType): MsgClawback {
     return {
-      funderAddress: isSet(object.funder_address) ? object.funder_address : "",
-      accountAddress: isSet(object.account_address) ? object.account_address : "",
-      destAddress: isSet(object.dest_address) ? object.dest_address : ""
+      funderAddress: isSet(object.funder_address) ? object.funder_address : undefined,
+      accountAddress: isSet(object.account_address) ? object.account_address : undefined,
+      destAddress: isSet(object.dest_address) ? object.dest_address : undefined
     };
   },
 

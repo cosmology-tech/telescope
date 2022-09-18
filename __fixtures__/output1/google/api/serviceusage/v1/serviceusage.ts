@@ -513,7 +513,7 @@ export const EnableServiceRequest = {
 
   fromSDK(object: EnableServiceRequestSDKType): EnableServiceRequest {
     return {
-      name: isSet(object.name) ? object.name : ""
+      name: isSet(object.name) ? object.name : undefined
     };
   },
 
@@ -675,8 +675,8 @@ export const DisableServiceRequest = {
 
   fromSDK(object: DisableServiceRequestSDKType): DisableServiceRequest {
     return {
-      name: isSet(object.name) ? object.name : "",
-      disableDependentServices: isSet(object.disable_dependent_services) ? object.disable_dependent_services : false,
+      name: isSet(object.name) ? object.name : undefined,
+      disableDependentServices: isSet(object.disable_dependent_services) ? object.disable_dependent_services : undefined,
       checkIfServiceHasUsage: isSet(object.check_if_service_has_usage) ? disableServiceRequest_CheckIfServiceHasUsageFromJSON(object.check_if_service_has_usage) : 0
     };
   },
@@ -817,7 +817,7 @@ export const GetServiceRequest = {
 
   fromSDK(object: GetServiceRequestSDKType): GetServiceRequest {
     return {
-      name: isSet(object.name) ? object.name : ""
+      name: isSet(object.name) ? object.name : undefined
     };
   },
 
@@ -922,10 +922,10 @@ export const ListServicesRequest = {
 
   fromSDK(object: ListServicesRequestSDKType): ListServicesRequest {
     return {
-      parent: isSet(object.parent) ? object.parent : "",
-      pageSize: isSet(object.page_size) ? object.page_size : 0,
-      pageToken: isSet(object.page_token) ? object.page_token : "",
-      filter: isSet(object.filter) ? object.filter : ""
+      parent: isSet(object.parent) ? object.parent : undefined,
+      pageSize: isSet(object.page_size) ? object.page_size : undefined,
+      pageToken: isSet(object.page_token) ? object.page_token : undefined,
+      filter: isSet(object.filter) ? object.filter : undefined
     };
   },
 
@@ -1016,7 +1016,7 @@ export const ListServicesResponse = {
   fromSDK(object: ListServicesResponseSDKType): ListServicesResponse {
     return {
       services: Array.isArray(object?.services) ? object.services.map((e: any) => Service.fromSDK(e)) : [],
-      nextPageToken: isSet(object.next_page_token) ? object.next_page_token : ""
+      nextPageToken: isSet(object.next_page_token) ? object.next_page_token : undefined
     };
   },
 
@@ -1110,7 +1110,7 @@ export const BatchEnableServicesRequest = {
 
   fromSDK(object: BatchEnableServicesRequestSDKType): BatchEnableServicesRequest {
     return {
-      parent: isSet(object.parent) ? object.parent : "",
+      parent: isSet(object.parent) ? object.parent : undefined,
       serviceIds: Array.isArray(object?.service_ids) ? object.service_ids.map((e: any) => e) : []
     };
   },
@@ -1304,8 +1304,8 @@ export const BatchEnableServicesResponse_EnableFailure = {
 
   fromSDK(object: BatchEnableServicesResponse_EnableFailureSDKType): BatchEnableServicesResponse_EnableFailure {
     return {
-      serviceId: isSet(object.service_id) ? object.service_id : "",
-      errorMessage: isSet(object.error_message) ? object.error_message : ""
+      serviceId: isSet(object.service_id) ? object.service_id : undefined,
+      errorMessage: isSet(object.error_message) ? object.error_message : undefined
     };
   },
 
@@ -1393,7 +1393,7 @@ export const BatchGetServicesRequest = {
 
   fromSDK(object: BatchGetServicesRequestSDKType): BatchGetServicesRequest {
     return {
-      parent: isSet(object.parent) ? object.parent : "",
+      parent: isSet(object.parent) ? object.parent : undefined,
       names: Array.isArray(object?.names) ? object.names.map((e: any) => e) : []
     };
   },

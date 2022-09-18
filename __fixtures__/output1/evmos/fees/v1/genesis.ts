@@ -275,11 +275,11 @@ export const Params = {
 
   fromSDK(object: ParamsSDKType): Params {
     return {
-      enableFees: isSet(object.enable_fees) ? object.enable_fees : false,
-      developerShares: isSet(object.developer_shares) ? object.developer_shares : "",
-      validatorShares: isSet(object.validator_shares) ? object.validator_shares : "",
-      addrDerivationCostCreate: isSet(object.addr_derivation_cost_create) ? object.addr_derivation_cost_create : Long.UZERO,
-      minGasPrice: isSet(object.min_gas_price) ? object.min_gas_price : ""
+      enableFees: isSet(object.enable_fees) ? object.enable_fees : undefined,
+      developerShares: isSet(object.developer_shares) ? object.developer_shares : undefined,
+      validatorShares: isSet(object.validator_shares) ? object.validator_shares : undefined,
+      addrDerivationCostCreate: isSet(object.addr_derivation_cost_create) ? object.addr_derivation_cost_create : undefined,
+      minGasPrice: isSet(object.min_gas_price) ? object.min_gas_price : undefined
     };
   },
 

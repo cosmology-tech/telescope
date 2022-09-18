@@ -144,9 +144,9 @@ export const ProtocolVersion = {
 
   fromSDK(object: ProtocolVersionSDKType): ProtocolVersion {
     return {
-      p2p: isSet(object.p2p) ? object.p2p : Long.UZERO,
-      block: isSet(object.block) ? object.block : Long.UZERO,
-      app: isSet(object.app) ? object.app : Long.UZERO
+      p2p: isSet(object.p2p) ? object.p2p : undefined,
+      block: isSet(object.block) ? object.block : undefined,
+      app: isSet(object.app) ? object.app : undefined
     };
   },
 
@@ -302,12 +302,12 @@ export const NodeInfo = {
   fromSDK(object: NodeInfoSDKType): NodeInfo {
     return {
       protocolVersion: isSet(object.protocol_version) ? ProtocolVersion.fromSDK(object.protocol_version) : undefined,
-      nodeId: isSet(object.node_id) ? object.node_id : "",
-      listenAddr: isSet(object.listen_addr) ? object.listen_addr : "",
-      network: isSet(object.network) ? object.network : "",
-      version: isSet(object.version) ? object.version : "",
-      channels: isSet(object.channels) ? object.channels : new Uint8Array(),
-      moniker: isSet(object.moniker) ? object.moniker : "",
+      nodeId: isSet(object.node_id) ? object.node_id : undefined,
+      listenAddr: isSet(object.listen_addr) ? object.listen_addr : undefined,
+      network: isSet(object.network) ? object.network : undefined,
+      version: isSet(object.version) ? object.version : undefined,
+      channels: isSet(object.channels) ? object.channels : undefined,
+      moniker: isSet(object.moniker) ? object.moniker : undefined,
       other: isSet(object.other) ? NodeInfoOther.fromSDK(object.other) : undefined
     };
   },
@@ -396,8 +396,8 @@ export const NodeInfoOther = {
 
   fromSDK(object: NodeInfoOtherSDKType): NodeInfoOther {
     return {
-      txIndex: isSet(object.tx_index) ? object.tx_index : "",
-      rpcAddress: isSet(object.rpc_address) ? object.rpc_address : ""
+      txIndex: isSet(object.tx_index) ? object.tx_index : undefined,
+      rpcAddress: isSet(object.rpc_address) ? object.rpc_address : undefined
     };
   },
 
@@ -497,7 +497,7 @@ export const PeerInfo = {
 
   fromSDK(object: PeerInfoSDKType): PeerInfo {
     return {
-      id: isSet(object.id) ? object.id : "",
+      id: isSet(object.id) ? object.id : undefined,
       addressInfo: Array.isArray(object?.address_info) ? object.address_info.map((e: any) => PeerAddressInfo.fromSDK(e)) : [],
       lastConnected: isSet(object.last_connected) ? Timestamp.fromSDK(object.last_connected) : undefined
     };
@@ -612,10 +612,10 @@ export const PeerAddressInfo = {
 
   fromSDK(object: PeerAddressInfoSDKType): PeerAddressInfo {
     return {
-      address: isSet(object.address) ? object.address : "",
+      address: isSet(object.address) ? object.address : undefined,
       lastDialSuccess: isSet(object.last_dial_success) ? Timestamp.fromSDK(object.last_dial_success) : undefined,
       lastDialFailure: isSet(object.last_dial_failure) ? Timestamp.fromSDK(object.last_dial_failure) : undefined,
-      dialFailures: isSet(object.dial_failures) ? object.dial_failures : 0
+      dialFailures: isSet(object.dial_failures) ? object.dial_failures : undefined
     };
   },
 

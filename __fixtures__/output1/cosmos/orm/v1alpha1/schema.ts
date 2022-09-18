@@ -243,7 +243,7 @@ export const ModuleSchemaDescriptor = {
   fromSDK(object: ModuleSchemaDescriptorSDKType): ModuleSchemaDescriptor {
     return {
       schemaFile: Array.isArray(object?.schema_file) ? object.schema_file.map((e: any) => ModuleSchemaDescriptor_FileEntry.fromSDK(e)) : [],
-      prefix: isSet(object.prefix) ? object.prefix : new Uint8Array()
+      prefix: isSet(object.prefix) ? object.prefix : undefined
     };
   },
 
@@ -343,8 +343,8 @@ export const ModuleSchemaDescriptor_FileEntry = {
 
   fromSDK(object: ModuleSchemaDescriptor_FileEntrySDKType): ModuleSchemaDescriptor_FileEntry {
     return {
-      id: isSet(object.id) ? object.id : 0,
-      protoFileName: isSet(object.proto_file_name) ? object.proto_file_name : "",
+      id: isSet(object.id) ? object.id : undefined,
+      protoFileName: isSet(object.proto_file_name) ? object.proto_file_name : undefined,
       storageType: isSet(object.storage_type) ? storageTypeFromJSON(object.storage_type) : 0
     };
   },

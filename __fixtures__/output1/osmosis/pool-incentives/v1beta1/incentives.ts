@@ -100,7 +100,7 @@ export const Params = {
 
   fromSDK(object: ParamsSDKType): Params {
     return {
-      mintedDenom: isSet(object.minted_denom) ? object.minted_denom : ""
+      mintedDenom: isSet(object.minted_denom) ? object.minted_denom : undefined
     };
   },
 
@@ -268,7 +268,7 @@ export const DistrInfo = {
 
   fromSDK(object: DistrInfoSDKType): DistrInfo {
     return {
-      totalWeight: isSet(object.total_weight) ? object.total_weight : "",
+      totalWeight: isSet(object.total_weight) ? object.total_weight : undefined,
       records: Array.isArray(object?.records) ? object.records.map((e: any) => DistrRecord.fromSDK(e)) : []
     };
   },
@@ -357,8 +357,8 @@ export const DistrRecord = {
 
   fromSDK(object: DistrRecordSDKType): DistrRecord {
     return {
-      gaugeId: isSet(object.gauge_id) ? object.gauge_id : Long.UZERO,
-      weight: isSet(object.weight) ? object.weight : ""
+      gaugeId: isSet(object.gauge_id) ? object.gauge_id : undefined,
+      weight: isSet(object.weight) ? object.weight : undefined
     };
   },
 

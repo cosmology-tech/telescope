@@ -381,7 +381,7 @@ export const QueryAppliedPlanRequest = {
 
   fromSDK(object: QueryAppliedPlanRequestSDKType): QueryAppliedPlanRequest {
     return {
-      name: isSet(object.name) ? object.name : ""
+      name: isSet(object.name) ? object.name : undefined
     };
   },
 
@@ -450,7 +450,7 @@ export const QueryAppliedPlanResponse = {
 
   fromSDK(object: QueryAppliedPlanResponseSDKType): QueryAppliedPlanResponse {
     return {
-      height: isSet(object.height) ? object.height : Long.ZERO
+      height: isSet(object.height) ? object.height : undefined
     };
   },
 
@@ -519,7 +519,7 @@ export const QueryUpgradedConsensusStateRequest = {
 
   fromSDK(object: QueryUpgradedConsensusStateRequestSDKType): QueryUpgradedConsensusStateRequest {
     return {
-      lastHeight: isSet(object.last_height) ? object.last_height : Long.ZERO
+      lastHeight: isSet(object.last_height) ? object.last_height : undefined
     };
   },
 
@@ -588,7 +588,7 @@ export const QueryUpgradedConsensusStateResponse = {
 
   fromSDK(object: QueryUpgradedConsensusStateResponseSDKType): QueryUpgradedConsensusStateResponse {
     return {
-      upgradedConsensusState: isSet(object.upgraded_consensus_state) ? object.upgraded_consensus_state : new Uint8Array()
+      upgradedConsensusState: isSet(object.upgraded_consensus_state) ? object.upgraded_consensus_state : undefined
     };
   },
 
@@ -657,7 +657,7 @@ export const QueryModuleVersionsRequest = {
 
   fromSDK(object: QueryModuleVersionsRequestSDKType): QueryModuleVersionsRequest {
     return {
-      moduleName: isSet(object.module_name) ? object.module_name : ""
+      moduleName: isSet(object.module_name) ? object.module_name : undefined
     };
   },
 
@@ -859,7 +859,7 @@ export const QueryAuthorityResponse = {
 
   fromSDK(object: QueryAuthorityResponseSDKType): QueryAuthorityResponse {
     return {
-      address: isSet(object.address) ? object.address : ""
+      address: isSet(object.address) ? object.address : undefined
     };
   },
 

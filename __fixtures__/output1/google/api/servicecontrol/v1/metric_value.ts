@@ -195,8 +195,8 @@ export const MetricValue_LabelsEntry = {
 
   fromSDK(object: MetricValue_LabelsEntrySDKType): MetricValue_LabelsEntry {
     return {
-      key: isSet(object.key) ? object.key : "",
-      value: isSet(object.value) ? object.value : ""
+      key: isSet(object.key) ? object.key : undefined,
+      value: isSet(object.value) ? object.value : undefined
     };
   },
 
@@ -491,7 +491,7 @@ export const MetricValueSet = {
 
   fromSDK(object: MetricValueSetSDKType): MetricValueSet {
     return {
-      metricName: isSet(object.metric_name) ? object.metric_name : "",
+      metricName: isSet(object.metric_name) ? object.metric_name : undefined,
       metricValues: Array.isArray(object?.metric_values) ? object.metric_values.map((e: any) => MetricValue.fromSDK(e)) : []
     };
   },

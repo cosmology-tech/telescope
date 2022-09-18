@@ -243,7 +243,7 @@ export const BaseVestingAccount = {
       originalVesting: Array.isArray(object?.original_vesting) ? object.original_vesting.map((e: any) => Coin.fromSDK(e)) : [],
       delegatedFree: Array.isArray(object?.delegated_free) ? object.delegated_free.map((e: any) => Coin.fromSDK(e)) : [],
       delegatedVesting: Array.isArray(object?.delegated_vesting) ? object.delegated_vesting.map((e: any) => Coin.fromSDK(e)) : [],
-      endTime: isSet(object.end_time) ? object.end_time : Long.ZERO
+      endTime: isSet(object.end_time) ? object.end_time : undefined
     };
   },
 
@@ -345,7 +345,7 @@ export const ContinuousVestingAccount = {
   fromSDK(object: ContinuousVestingAccountSDKType): ContinuousVestingAccount {
     return {
       baseVestingAccount: isSet(object.base_vesting_account) ? BaseVestingAccount.fromSDK(object.base_vesting_account) : undefined,
-      startTime: isSet(object.start_time) ? object.start_time : Long.ZERO
+      startTime: isSet(object.start_time) ? object.start_time : undefined
     };
   },
 
@@ -502,7 +502,7 @@ export const Period = {
 
   fromSDK(object: PeriodSDKType): Period {
     return {
-      length: isSet(object.length) ? object.length : Long.ZERO,
+      length: isSet(object.length) ? object.length : undefined,
       amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromSDK(e)) : []
     };
   },
@@ -610,7 +610,7 @@ export const PeriodicVestingAccount = {
   fromSDK(object: PeriodicVestingAccountSDKType): PeriodicVestingAccount {
     return {
       baseVestingAccount: isSet(object.base_vesting_account) ? BaseVestingAccount.fromSDK(object.base_vesting_account) : undefined,
-      startTime: isSet(object.start_time) ? object.start_time : Long.ZERO,
+      startTime: isSet(object.start_time) ? object.start_time : undefined,
       vestingPeriods: Array.isArray(object?.vesting_periods) ? object.vesting_periods.map((e: any) => Period.fromSDK(e)) : []
     };
   },

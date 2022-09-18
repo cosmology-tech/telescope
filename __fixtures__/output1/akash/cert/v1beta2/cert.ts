@@ -195,8 +195,8 @@ export const CertificateID = {
 
   fromSDK(object: CertificateIDSDKType): CertificateID {
     return {
-      owner: isSet(object.owner) ? object.owner : "",
-      serial: isSet(object.serial) ? object.serial : ""
+      owner: isSet(object.owner) ? object.owner : undefined,
+      serial: isSet(object.serial) ? object.serial : undefined
     };
   },
 
@@ -291,8 +291,8 @@ export const Certificate = {
   fromSDK(object: CertificateSDKType): Certificate {
     return {
       state: isSet(object.state) ? certificate_StateFromJSON(object.state) : 0,
-      cert: isSet(object.cert) ? object.cert : new Uint8Array(),
-      pubkey: isSet(object.pubkey) ? object.pubkey : new Uint8Array()
+      cert: isSet(object.cert) ? object.cert : undefined,
+      pubkey: isSet(object.pubkey) ? object.pubkey : undefined
     };
   },
 
@@ -387,9 +387,9 @@ export const CertificateFilter = {
 
   fromSDK(object: CertificateFilterSDKType): CertificateFilter {
     return {
-      owner: isSet(object.owner) ? object.owner : "",
-      serial: isSet(object.serial) ? object.serial : "",
-      state: isSet(object.state) ? object.state : ""
+      owner: isSet(object.owner) ? object.owner : undefined,
+      serial: isSet(object.serial) ? object.serial : undefined,
+      state: isSet(object.state) ? object.state : undefined
     };
   },
 
@@ -484,9 +484,9 @@ export const MsgCreateCertificate = {
 
   fromSDK(object: MsgCreateCertificateSDKType): MsgCreateCertificate {
     return {
-      owner: isSet(object.owner) ? object.owner : "",
-      cert: isSet(object.cert) ? object.cert : new Uint8Array(),
-      pubkey: isSet(object.pubkey) ? object.pubkey : new Uint8Array()
+      owner: isSet(object.owner) ? object.owner : undefined,
+      cert: isSet(object.cert) ? object.cert : undefined,
+      pubkey: isSet(object.pubkey) ? object.pubkey : undefined
     };
   },
 

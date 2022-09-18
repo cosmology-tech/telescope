@@ -245,8 +245,8 @@ export const Explain_ExprStep = {
 
   fromSDK(object: Explain_ExprStepSDKType): Explain_ExprStep {
     return {
-      id: isSet(object.id) ? object.id : Long.ZERO,
-      valueIndex: isSet(object.value_index) ? object.value_index : 0
+      id: isSet(object.id) ? object.id : undefined,
+      valueIndex: isSet(object.value_index) ? object.value_index : undefined
     };
   },
 

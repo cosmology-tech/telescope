@@ -129,7 +129,7 @@ export const GenesisState = {
     return {
       connections: Array.isArray(object?.connections) ? object.connections.map((e: any) => IdentifiedConnection.fromSDK(e)) : [],
       clientConnectionPaths: Array.isArray(object?.client_connection_paths) ? object.client_connection_paths.map((e: any) => ConnectionPaths.fromSDK(e)) : [],
-      nextConnectionSequence: isSet(object.next_connection_sequence) ? object.next_connection_sequence : Long.UZERO,
+      nextConnectionSequence: isSet(object.next_connection_sequence) ? object.next_connection_sequence : undefined,
       params: isSet(object.params) ? Params.fromSDK(object.params) : undefined
     };
   },

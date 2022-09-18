@@ -305,8 +305,8 @@ export const Any = {
 
   fromSDK(object: AnySDKType): Any {
     return {
-      typeUrl: isSet(object.type_url) ? object.type_url : "",
-      value: isSet(object.value) ? object.value : new Uint8Array()
+      typeUrl: isSet(object.type_url) ? object.type_url : undefined,
+      value: isSet(object.value) ? object.value : undefined
     };
   },
 

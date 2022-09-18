@@ -118,10 +118,10 @@ export const Equivocation = {
 
   fromSDK(object: EquivocationSDKType): Equivocation {
     return {
-      height: isSet(object.height) ? object.height : Long.ZERO,
+      height: isSet(object.height) ? object.height : undefined,
       time: isSet(object.time) ? Timestamp.fromSDK(object.time) : undefined,
-      power: isSet(object.power) ? object.power : Long.ZERO,
-      consensusAddress: isSet(object.consensus_address) ? object.consensus_address : ""
+      power: isSet(object.power) ? object.power : undefined,
+      consensusAddress: isSet(object.consensus_address) ? object.consensus_address : undefined
     };
   },
 

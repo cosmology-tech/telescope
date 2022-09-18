@@ -589,18 +589,18 @@ export const TxResponse = {
 
   fromSDK(object: TxResponseSDKType): TxResponse {
     return {
-      height: isSet(object.height) ? object.height : Long.ZERO,
-      txhash: isSet(object.txhash) ? object.txhash : "",
-      codespace: isSet(object.codespace) ? object.codespace : "",
-      code: isSet(object.code) ? object.code : 0,
-      data: isSet(object.data) ? object.data : "",
-      rawLog: isSet(object.raw_log) ? object.raw_log : "",
+      height: isSet(object.height) ? object.height : undefined,
+      txhash: isSet(object.txhash) ? object.txhash : undefined,
+      codespace: isSet(object.codespace) ? object.codespace : undefined,
+      code: isSet(object.code) ? object.code : undefined,
+      data: isSet(object.data) ? object.data : undefined,
+      rawLog: isSet(object.raw_log) ? object.raw_log : undefined,
       logs: Array.isArray(object?.logs) ? object.logs.map((e: any) => ABCIMessageLog.fromSDK(e)) : [],
-      info: isSet(object.info) ? object.info : "",
-      gasWanted: isSet(object.gas_wanted) ? object.gas_wanted : Long.ZERO,
-      gasUsed: isSet(object.gas_used) ? object.gas_used : Long.ZERO,
+      info: isSet(object.info) ? object.info : undefined,
+      gasWanted: isSet(object.gas_wanted) ? object.gas_wanted : undefined,
+      gasUsed: isSet(object.gas_used) ? object.gas_used : undefined,
       tx: isSet(object.tx) ? Any.fromSDK(object.tx) : undefined,
-      timestamp: isSet(object.timestamp) ? object.timestamp : "",
+      timestamp: isSet(object.timestamp) ? object.timestamp : undefined,
       events: Array.isArray(object?.events) ? object.events.map((e: any) => Event.fromSDK(e)) : []
     };
   },
@@ -724,8 +724,8 @@ export const ABCIMessageLog = {
 
   fromSDK(object: ABCIMessageLogSDKType): ABCIMessageLog {
     return {
-      msgIndex: isSet(object.msg_index) ? object.msg_index : 0,
-      log: isSet(object.log) ? object.log : "",
+      msgIndex: isSet(object.msg_index) ? object.msg_index : undefined,
+      log: isSet(object.log) ? object.log : undefined,
       events: Array.isArray(object?.events) ? object.events.map((e: any) => StringEvent.fromSDK(e)) : []
     };
   },
@@ -821,7 +821,7 @@ export const StringEvent = {
 
   fromSDK(object: StringEventSDKType): StringEvent {
     return {
-      type: isSet(object.type) ? object.type : "",
+      type: isSet(object.type) ? object.type : undefined,
       attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromSDK(e)) : []
     };
   },
@@ -910,8 +910,8 @@ export const Attribute = {
 
   fromSDK(object: AttributeSDKType): Attribute {
     return {
-      key: isSet(object.key) ? object.key : "",
-      value: isSet(object.value) ? object.value : ""
+      key: isSet(object.key) ? object.key : undefined,
+      value: isSet(object.value) ? object.value : undefined
     };
   },
 
@@ -993,8 +993,8 @@ export const GasInfo = {
 
   fromSDK(object: GasInfoSDKType): GasInfo {
     return {
-      gasWanted: isSet(object.gas_wanted) ? object.gas_wanted : Long.UZERO,
-      gasUsed: isSet(object.gas_used) ? object.gas_used : Long.UZERO
+      gasWanted: isSet(object.gas_wanted) ? object.gas_wanted : undefined,
+      gasUsed: isSet(object.gas_used) ? object.gas_used : undefined
     };
   },
 
@@ -1111,8 +1111,8 @@ export const Result = {
 
   fromSDK(object: ResultSDKType): Result {
     return {
-      data: isSet(object.data) ? object.data : new Uint8Array(),
-      log: isSet(object.log) ? object.log : "",
+      data: isSet(object.data) ? object.data : undefined,
+      log: isSet(object.log) ? object.log : undefined,
       events: Array.isArray(object?.events) ? object.events.map((e: any) => Event.fromSDK(e)) : [],
       msgResponses: Array.isArray(object?.msg_responses) ? object.msg_responses.map((e: any) => Any.fromSDK(e)) : []
     };
@@ -1292,8 +1292,8 @@ export const MsgData = {
 
   fromSDK(object: MsgDataSDKType): MsgData {
     return {
-      msgType: isSet(object.msg_type) ? object.msg_type : "",
-      data: isSet(object.data) ? object.data : new Uint8Array()
+      msgType: isSet(object.msg_type) ? object.msg_type : undefined,
+      data: isSet(object.data) ? object.data : undefined
     };
   },
 
@@ -1534,11 +1534,11 @@ export const SearchTxsResult = {
 
   fromSDK(object: SearchTxsResultSDKType): SearchTxsResult {
     return {
-      totalCount: isSet(object.total_count) ? object.total_count : Long.UZERO,
-      count: isSet(object.count) ? object.count : Long.UZERO,
-      pageNumber: isSet(object.page_number) ? object.page_number : Long.UZERO,
-      pageTotal: isSet(object.page_total) ? object.page_total : Long.UZERO,
-      limit: isSet(object.limit) ? object.limit : Long.UZERO,
+      totalCount: isSet(object.total_count) ? object.total_count : undefined,
+      count: isSet(object.count) ? object.count : undefined,
+      pageNumber: isSet(object.page_number) ? object.page_number : undefined,
+      pageTotal: isSet(object.page_total) ? object.page_total : undefined,
+      limit: isSet(object.limit) ? object.limit : undefined,
       txs: Array.isArray(object?.txs) ? object.txs.map((e: any) => TxResponse.fromSDK(e)) : []
     };
   },

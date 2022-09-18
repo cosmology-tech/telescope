@@ -180,8 +180,8 @@ export const Provider = {
 
   fromSDK(object: ProviderSDKType): Provider {
     return {
-      owner: isSet(object.owner) ? object.owner : "",
-      auditor: isSet(object.auditor) ? object.auditor : "",
+      owner: isSet(object.owner) ? object.owner : undefined,
+      auditor: isSet(object.auditor) ? object.auditor : undefined,
       attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromSDK(e)) : []
     };
   },
@@ -289,8 +289,8 @@ export const AuditedAttributes = {
 
   fromSDK(object: AuditedAttributesSDKType): AuditedAttributes {
     return {
-      owner: isSet(object.owner) ? object.owner : "",
-      auditor: isSet(object.auditor) ? object.auditor : "",
+      owner: isSet(object.owner) ? object.owner : undefined,
+      auditor: isSet(object.auditor) ? object.auditor : undefined,
       attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromSDK(e)) : []
     };
   },
@@ -584,8 +584,8 @@ export const MsgSignProviderAttributes = {
 
   fromSDK(object: MsgSignProviderAttributesSDKType): MsgSignProviderAttributes {
     return {
-      owner: isSet(object.owner) ? object.owner : "",
-      auditor: isSet(object.auditor) ? object.auditor : "",
+      owner: isSet(object.owner) ? object.owner : undefined,
+      auditor: isSet(object.auditor) ? object.auditor : undefined,
       attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromSDK(e)) : []
     };
   },
@@ -745,8 +745,8 @@ export const MsgDeleteProviderAttributes = {
 
   fromSDK(object: MsgDeleteProviderAttributesSDKType): MsgDeleteProviderAttributes {
     return {
-      owner: isSet(object.owner) ? object.owner : "",
-      auditor: isSet(object.auditor) ? object.auditor : "",
+      owner: isSet(object.owner) ? object.owner : undefined,
+      auditor: isSet(object.auditor) ? object.auditor : undefined,
       keys: Array.isArray(object?.keys) ? object.keys.map((e: any) => e) : []
     };
   },

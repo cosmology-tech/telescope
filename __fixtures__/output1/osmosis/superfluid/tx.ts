@@ -180,9 +180,9 @@ export const MsgSuperfluidDelegate = {
 
   fromSDK(object: MsgSuperfluidDelegateSDKType): MsgSuperfluidDelegate {
     return {
-      sender: isSet(object.sender) ? object.sender : "",
-      lockId: isSet(object.lock_id) ? object.lock_id : Long.UZERO,
-      valAddr: isSet(object.val_addr) ? object.val_addr : ""
+      sender: isSet(object.sender) ? object.sender : undefined,
+      lockId: isSet(object.lock_id) ? object.lock_id : undefined,
+      valAddr: isSet(object.val_addr) ? object.val_addr : undefined
     };
   },
 
@@ -317,8 +317,8 @@ export const MsgSuperfluidUndelegate = {
 
   fromSDK(object: MsgSuperfluidUndelegateSDKType): MsgSuperfluidUndelegate {
     return {
-      sender: isSet(object.sender) ? object.sender : "",
-      lockId: isSet(object.lock_id) ? object.lock_id : Long.UZERO
+      sender: isSet(object.sender) ? object.sender : undefined,
+      lockId: isSet(object.lock_id) ? object.lock_id : undefined
     };
   },
 
@@ -452,8 +452,8 @@ export const MsgSuperfluidUnbondLock = {
 
   fromSDK(object: MsgSuperfluidUnbondLockSDKType): MsgSuperfluidUnbondLock {
     return {
-      sender: isSet(object.sender) ? object.sender : "",
-      lockId: isSet(object.lock_id) ? object.lock_id : Long.UZERO
+      sender: isSet(object.sender) ? object.sender : undefined,
+      lockId: isSet(object.lock_id) ? object.lock_id : undefined
     };
   },
 
@@ -605,9 +605,9 @@ export const MsgLockAndSuperfluidDelegate = {
 
   fromSDK(object: MsgLockAndSuperfluidDelegateSDKType): MsgLockAndSuperfluidDelegate {
     return {
-      sender: isSet(object.sender) ? object.sender : "",
+      sender: isSet(object.sender) ? object.sender : undefined,
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDK(e)) : [],
-      valAddr: isSet(object.val_addr) ? object.val_addr : ""
+      valAddr: isSet(object.val_addr) ? object.val_addr : undefined
     };
   },
 
@@ -684,7 +684,7 @@ export const MsgLockAndSuperfluidDelegateResponse = {
 
   fromSDK(object: MsgLockAndSuperfluidDelegateResponseSDKType): MsgLockAndSuperfluidDelegateResponse {
     return {
-      ID: isSet(object.ID) ? object.ID : Long.UZERO
+      ID: isSet(object.ID) ? object.ID : undefined
     };
   },
 
@@ -765,8 +765,8 @@ export const MsgUnPoolWhitelistedPool = {
 
   fromSDK(object: MsgUnPoolWhitelistedPoolSDKType): MsgUnPoolWhitelistedPool {
     return {
-      sender: isSet(object.sender) ? object.sender : "",
-      poolId: isSet(object.pool_id) ? object.pool_id : Long.UZERO
+      sender: isSet(object.sender) ? object.sender : undefined,
+      poolId: isSet(object.pool_id) ? object.pool_id : undefined
     };
   },
 

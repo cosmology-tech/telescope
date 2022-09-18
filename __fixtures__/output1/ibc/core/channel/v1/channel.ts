@@ -504,7 +504,7 @@ export const Channel = {
       ordering: isSet(object.ordering) ? orderFromJSON(object.ordering) : 0,
       counterparty: isSet(object.counterparty) ? Counterparty.fromSDK(object.counterparty) : undefined,
       connectionHops: Array.isArray(object?.connection_hops) ? object.connection_hops.map((e: any) => e) : [],
-      version: isSet(object.version) ? object.version : ""
+      version: isSet(object.version) ? object.version : undefined
     };
   },
 
@@ -665,9 +665,9 @@ export const IdentifiedChannel = {
       ordering: isSet(object.ordering) ? orderFromJSON(object.ordering) : 0,
       counterparty: isSet(object.counterparty) ? Counterparty.fromSDK(object.counterparty) : undefined,
       connectionHops: Array.isArray(object?.connection_hops) ? object.connection_hops.map((e: any) => e) : [],
-      version: isSet(object.version) ? object.version : "",
-      portId: isSet(object.port_id) ? object.port_id : "",
-      channelId: isSet(object.channel_id) ? object.channel_id : ""
+      version: isSet(object.version) ? object.version : undefined,
+      portId: isSet(object.port_id) ? object.port_id : undefined,
+      channelId: isSet(object.channel_id) ? object.channel_id : undefined
     };
   },
 
@@ -760,8 +760,8 @@ export const Counterparty = {
 
   fromSDK(object: CounterpartySDKType): Counterparty {
     return {
-      portId: isSet(object.port_id) ? object.port_id : "",
-      channelId: isSet(object.channel_id) ? object.channel_id : ""
+      portId: isSet(object.port_id) ? object.port_id : undefined,
+      channelId: isSet(object.channel_id) ? object.channel_id : undefined
     };
   },
 
@@ -915,14 +915,14 @@ export const Packet = {
 
   fromSDK(object: PacketSDKType): Packet {
     return {
-      sequence: isSet(object.sequence) ? object.sequence : Long.UZERO,
-      sourcePort: isSet(object.source_port) ? object.source_port : "",
-      sourceChannel: isSet(object.source_channel) ? object.source_channel : "",
-      destinationPort: isSet(object.destination_port) ? object.destination_port : "",
-      destinationChannel: isSet(object.destination_channel) ? object.destination_channel : "",
-      data: isSet(object.data) ? object.data : new Uint8Array(),
+      sequence: isSet(object.sequence) ? object.sequence : undefined,
+      sourcePort: isSet(object.source_port) ? object.source_port : undefined,
+      sourceChannel: isSet(object.source_channel) ? object.source_channel : undefined,
+      destinationPort: isSet(object.destination_port) ? object.destination_port : undefined,
+      destinationChannel: isSet(object.destination_channel) ? object.destination_channel : undefined,
+      data: isSet(object.data) ? object.data : undefined,
       timeoutHeight: isSet(object.timeout_height) ? Height.fromSDK(object.timeout_height) : undefined,
-      timeoutTimestamp: isSet(object.timeout_timestamp) ? object.timeout_timestamp : Long.UZERO
+      timeoutTimestamp: isSet(object.timeout_timestamp) ? object.timeout_timestamp : undefined
     };
   },
 
@@ -1034,10 +1034,10 @@ export const PacketState = {
 
   fromSDK(object: PacketStateSDKType): PacketState {
     return {
-      portId: isSet(object.port_id) ? object.port_id : "",
-      channelId: isSet(object.channel_id) ? object.channel_id : "",
-      sequence: isSet(object.sequence) ? object.sequence : Long.UZERO,
-      data: isSet(object.data) ? object.data : new Uint8Array()
+      portId: isSet(object.port_id) ? object.port_id : undefined,
+      channelId: isSet(object.channel_id) ? object.channel_id : undefined,
+      sequence: isSet(object.sequence) ? object.sequence : undefined,
+      data: isSet(object.data) ? object.data : undefined
     };
   },
 

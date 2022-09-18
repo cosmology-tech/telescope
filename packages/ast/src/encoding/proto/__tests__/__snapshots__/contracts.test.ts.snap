@@ -108,9 +108,9 @@ exports[`MsgExecuteContract interface 2`] = `
 
   fromSDK(object: MsgExecuteContractSDKType): MsgExecuteContract {
     return {
-      sender: isSet(object.sender) ? object.sender : \\"\\",
-      contract: isSet(object.contract) ? object.contract : \\"\\",
-      msg: isSet(object.msg) ? object.msg : new Uint8Array(),
+      sender: isSet(object.sender) ? object.sender : undefined,
+      contract: isSet(object.contract) ? object.contract : undefined,
+      msg: isSet(object.msg) ? object.msg : undefined,
       funds: Array.isArray(object?.funds) ? object.funds.map((e: any) => Coin.fromSDK(e)) : []
     };
   },

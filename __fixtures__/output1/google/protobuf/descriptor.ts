@@ -2295,8 +2295,8 @@ export const FileDescriptorProto = {
 
   fromSDK(object: FileDescriptorProtoSDKType): FileDescriptorProto {
     return {
-      name: isSet(object.name) ? object.name : "",
-      package: isSet(object.package) ? object.package : "",
+      name: isSet(object.name) ? object.name : undefined,
+      package: isSet(object.package) ? object.package : undefined,
       dependency: Array.isArray(object?.dependency) ? object.dependency.map((e: any) => e) : [],
       publicDependency: Array.isArray(object?.public_dependency) ? object.public_dependency.map((e: any) => e) : [],
       weakDependency: Array.isArray(object?.weak_dependency) ? object.weak_dependency.map((e: any) => e) : [],
@@ -2306,7 +2306,7 @@ export const FileDescriptorProto = {
       extension: Array.isArray(object?.extension) ? object.extension.map((e: any) => FieldDescriptorProto.fromSDK(e)) : [],
       options: isSet(object.options) ? FileOptions.fromSDK(object.options) : undefined,
       sourceCodeInfo: isSet(object.source_code_info) ? SourceCodeInfo.fromSDK(object.source_code_info) : undefined,
-      syntax: isSet(object.syntax) ? object.syntax : ""
+      syntax: isSet(object.syntax) ? object.syntax : undefined
     };
   },
 
@@ -2572,7 +2572,7 @@ export const DescriptorProto = {
 
   fromSDK(object: DescriptorProtoSDKType): DescriptorProto {
     return {
-      name: isSet(object.name) ? object.name : "",
+      name: isSet(object.name) ? object.name : undefined,
       field: Array.isArray(object?.field) ? object.field.map((e: any) => FieldDescriptorProto.fromSDK(e)) : [],
       extension: Array.isArray(object?.extension) ? object.extension.map((e: any) => FieldDescriptorProto.fromSDK(e)) : [],
       nestedType: Array.isArray(object?.nested_type) ? object.nested_type.map((e: any) => DescriptorProto.fromSDK(e)) : [],
@@ -2725,8 +2725,8 @@ export const DescriptorProto_ExtensionRange = {
 
   fromSDK(object: DescriptorProto_ExtensionRangeSDKType): DescriptorProto_ExtensionRange {
     return {
-      start: isSet(object.start) ? object.start : 0,
-      end: isSet(object.end) ? object.end : 0,
+      start: isSet(object.start) ? object.start : undefined,
+      end: isSet(object.end) ? object.end : undefined,
       options: isSet(object.options) ? ExtensionRangeOptions.fromSDK(object.options) : undefined
     };
   },
@@ -2810,8 +2810,8 @@ export const DescriptorProto_ReservedRange = {
 
   fromSDK(object: DescriptorProto_ReservedRangeSDKType): DescriptorProto_ReservedRange {
     return {
-      start: isSet(object.start) ? object.start : 0,
-      end: isSet(object.end) ? object.end : 0
+      start: isSet(object.start) ? object.start : undefined,
+      end: isSet(object.end) ? object.end : undefined
     };
   },
 
@@ -3070,15 +3070,15 @@ export const FieldDescriptorProto = {
 
   fromSDK(object: FieldDescriptorProtoSDKType): FieldDescriptorProto {
     return {
-      name: isSet(object.name) ? object.name : "",
-      number: isSet(object.number) ? object.number : 0,
+      name: isSet(object.name) ? object.name : undefined,
+      number: isSet(object.number) ? object.number : undefined,
       label: isSet(object.label) ? fieldDescriptorProto_LabelFromJSON(object.label) : 0,
       type: isSet(object.type) ? fieldDescriptorProto_TypeFromJSON(object.type) : 0,
-      typeName: isSet(object.type_name) ? object.type_name : "",
-      extendee: isSet(object.extendee) ? object.extendee : "",
-      defaultValue: isSet(object.default_value) ? object.default_value : "",
-      oneofIndex: isSet(object.oneof_index) ? object.oneof_index : 0,
-      jsonName: isSet(object.json_name) ? object.json_name : "",
+      typeName: isSet(object.type_name) ? object.type_name : undefined,
+      extendee: isSet(object.extendee) ? object.extendee : undefined,
+      defaultValue: isSet(object.default_value) ? object.default_value : undefined,
+      oneofIndex: isSet(object.oneof_index) ? object.oneof_index : undefined,
+      jsonName: isSet(object.json_name) ? object.json_name : undefined,
       options: isSet(object.options) ? FieldOptions.fromSDK(object.options) : undefined
     };
   },
@@ -3169,7 +3169,7 @@ export const OneofDescriptorProto = {
 
   fromSDK(object: OneofDescriptorProtoSDKType): OneofDescriptorProto {
     return {
-      name: isSet(object.name) ? object.name : "",
+      name: isSet(object.name) ? object.name : undefined,
       options: isSet(object.options) ? OneofOptions.fromSDK(object.options) : undefined
     };
   },
@@ -3305,7 +3305,7 @@ export const EnumDescriptorProto = {
 
   fromSDK(object: EnumDescriptorProtoSDKType): EnumDescriptorProto {
     return {
-      name: isSet(object.name) ? object.name : "",
+      name: isSet(object.name) ? object.name : undefined,
       value: Array.isArray(object?.value) ? object.value.map((e: any) => EnumValueDescriptorProto.fromSDK(e)) : [],
       options: isSet(object.options) ? EnumOptions.fromSDK(object.options) : undefined,
       reservedRange: Array.isArray(object?.reserved_range) ? object.reserved_range.map((e: any) => EnumDescriptorProto_EnumReservedRange.fromSDK(e)) : [],
@@ -3411,8 +3411,8 @@ export const EnumDescriptorProto_EnumReservedRange = {
 
   fromSDK(object: EnumDescriptorProto_EnumReservedRangeSDKType): EnumDescriptorProto_EnumReservedRange {
     return {
-      start: isSet(object.start) ? object.start : 0,
-      end: isSet(object.end) ? object.end : 0
+      start: isSet(object.start) ? object.start : undefined,
+      end: isSet(object.end) ? object.end : undefined
     };
   },
 
@@ -3506,8 +3506,8 @@ export const EnumValueDescriptorProto = {
 
   fromSDK(object: EnumValueDescriptorProtoSDKType): EnumValueDescriptorProto {
     return {
-      name: isSet(object.name) ? object.name : "",
-      number: isSet(object.number) ? object.number : 0,
+      name: isSet(object.name) ? object.name : undefined,
+      number: isSet(object.number) ? object.number : undefined,
       options: isSet(object.options) ? EnumValueOptions.fromSDK(object.options) : undefined
     };
   },
@@ -3609,7 +3609,7 @@ export const ServiceDescriptorProto = {
 
   fromSDK(object: ServiceDescriptorProtoSDKType): ServiceDescriptorProto {
     return {
-      name: isSet(object.name) ? object.name : "",
+      name: isSet(object.name) ? object.name : undefined,
       method: Array.isArray(object?.method) ? object.method.map((e: any) => MethodDescriptorProto.fromSDK(e)) : [],
       options: isSet(object.options) ? ServiceOptions.fromSDK(object.options) : undefined
     };
@@ -3748,12 +3748,12 @@ export const MethodDescriptorProto = {
 
   fromSDK(object: MethodDescriptorProtoSDKType): MethodDescriptorProto {
     return {
-      name: isSet(object.name) ? object.name : "",
-      inputType: isSet(object.input_type) ? object.input_type : "",
-      outputType: isSet(object.output_type) ? object.output_type : "",
+      name: isSet(object.name) ? object.name : undefined,
+      inputType: isSet(object.input_type) ? object.input_type : undefined,
+      outputType: isSet(object.output_type) ? object.output_type : undefined,
       options: isSet(object.options) ? MethodOptions.fromSDK(object.options) : undefined,
-      clientStreaming: isSet(object.client_streaming) ? object.client_streaming : false,
-      serverStreaming: isSet(object.server_streaming) ? object.server_streaming : false
+      clientStreaming: isSet(object.client_streaming) ? object.client_streaming : undefined,
+      serverStreaming: isSet(object.server_streaming) ? object.server_streaming : undefined
     };
   },
 
@@ -4073,26 +4073,26 @@ export const FileOptions = {
 
   fromSDK(object: FileOptionsSDKType): FileOptions {
     return {
-      javaPackage: isSet(object.java_package) ? object.java_package : "",
-      javaOuterClassname: isSet(object.java_outer_classname) ? object.java_outer_classname : "",
-      javaMultipleFiles: isSet(object.java_multiple_files) ? object.java_multiple_files : false,
-      javaGenerateEqualsAndHash: isSet(object.java_generate_equals_and_hash) ? object.java_generate_equals_and_hash : false,
-      javaStringCheckUtf8: isSet(object.java_string_check_utf8) ? object.java_string_check_utf8 : false,
+      javaPackage: isSet(object.java_package) ? object.java_package : undefined,
+      javaOuterClassname: isSet(object.java_outer_classname) ? object.java_outer_classname : undefined,
+      javaMultipleFiles: isSet(object.java_multiple_files) ? object.java_multiple_files : undefined,
+      javaGenerateEqualsAndHash: isSet(object.java_generate_equals_and_hash) ? object.java_generate_equals_and_hash : undefined,
+      javaStringCheckUtf8: isSet(object.java_string_check_utf8) ? object.java_string_check_utf8 : undefined,
       optimizeFor: isSet(object.optimize_for) ? fileOptions_OptimizeModeFromJSON(object.optimize_for) : 0,
-      goPackage: isSet(object.go_package) ? object.go_package : "",
-      ccGenericServices: isSet(object.cc_generic_services) ? object.cc_generic_services : false,
-      javaGenericServices: isSet(object.java_generic_services) ? object.java_generic_services : false,
-      pyGenericServices: isSet(object.py_generic_services) ? object.py_generic_services : false,
-      phpGenericServices: isSet(object.php_generic_services) ? object.php_generic_services : false,
-      deprecated: isSet(object.deprecated) ? object.deprecated : false,
-      ccEnableArenas: isSet(object.cc_enable_arenas) ? object.cc_enable_arenas : false,
-      objcClassPrefix: isSet(object.objc_class_prefix) ? object.objc_class_prefix : "",
-      csharpNamespace: isSet(object.csharp_namespace) ? object.csharp_namespace : "",
-      swiftPrefix: isSet(object.swift_prefix) ? object.swift_prefix : "",
-      phpClassPrefix: isSet(object.php_class_prefix) ? object.php_class_prefix : "",
-      phpNamespace: isSet(object.php_namespace) ? object.php_namespace : "",
-      phpMetadataNamespace: isSet(object.php_metadata_namespace) ? object.php_metadata_namespace : "",
-      rubyPackage: isSet(object.ruby_package) ? object.ruby_package : "",
+      goPackage: isSet(object.go_package) ? object.go_package : undefined,
+      ccGenericServices: isSet(object.cc_generic_services) ? object.cc_generic_services : undefined,
+      javaGenericServices: isSet(object.java_generic_services) ? object.java_generic_services : undefined,
+      pyGenericServices: isSet(object.py_generic_services) ? object.py_generic_services : undefined,
+      phpGenericServices: isSet(object.php_generic_services) ? object.php_generic_services : undefined,
+      deprecated: isSet(object.deprecated) ? object.deprecated : undefined,
+      ccEnableArenas: isSet(object.cc_enable_arenas) ? object.cc_enable_arenas : undefined,
+      objcClassPrefix: isSet(object.objc_class_prefix) ? object.objc_class_prefix : undefined,
+      csharpNamespace: isSet(object.csharp_namespace) ? object.csharp_namespace : undefined,
+      swiftPrefix: isSet(object.swift_prefix) ? object.swift_prefix : undefined,
+      phpClassPrefix: isSet(object.php_class_prefix) ? object.php_class_prefix : undefined,
+      phpNamespace: isSet(object.php_namespace) ? object.php_namespace : undefined,
+      phpMetadataNamespace: isSet(object.php_metadata_namespace) ? object.php_metadata_namespace : undefined,
+      rubyPackage: isSet(object.ruby_package) ? object.ruby_package : undefined,
       uninterpretedOption: Array.isArray(object?.uninterpreted_option) ? object.uninterpreted_option.map((e: any) => UninterpretedOption.fromSDK(e)) : []
     };
   },
@@ -4242,10 +4242,10 @@ export const MessageOptions = {
 
   fromSDK(object: MessageOptionsSDKType): MessageOptions {
     return {
-      messageSetWireFormat: isSet(object.message_set_wire_format) ? object.message_set_wire_format : false,
-      noStandardDescriptorAccessor: isSet(object.no_standard_descriptor_accessor) ? object.no_standard_descriptor_accessor : false,
-      deprecated: isSet(object.deprecated) ? object.deprecated : false,
-      mapEntry: isSet(object.map_entry) ? object.map_entry : false,
+      messageSetWireFormat: isSet(object.message_set_wire_format) ? object.message_set_wire_format : undefined,
+      noStandardDescriptorAccessor: isSet(object.no_standard_descriptor_accessor) ? object.no_standard_descriptor_accessor : undefined,
+      deprecated: isSet(object.deprecated) ? object.deprecated : undefined,
+      mapEntry: isSet(object.map_entry) ? object.map_entry : undefined,
       uninterpretedOption: Array.isArray(object?.uninterpreted_option) ? object.uninterpreted_option.map((e: any) => UninterpretedOption.fromSDK(e)) : []
     };
   },
@@ -4404,11 +4404,11 @@ export const FieldOptions = {
   fromSDK(object: FieldOptionsSDKType): FieldOptions {
     return {
       ctype: isSet(object.ctype) ? fieldOptions_CTypeFromJSON(object.ctype) : 0,
-      packed: isSet(object.packed) ? object.packed : false,
+      packed: isSet(object.packed) ? object.packed : undefined,
       jstype: isSet(object.jstype) ? fieldOptions_JSTypeFromJSON(object.jstype) : 0,
-      lazy: isSet(object.lazy) ? object.lazy : false,
-      deprecated: isSet(object.deprecated) ? object.deprecated : false,
-      weak: isSet(object.weak) ? object.weak : false,
+      lazy: isSet(object.lazy) ? object.lazy : undefined,
+      deprecated: isSet(object.deprecated) ? object.deprecated : undefined,
+      weak: isSet(object.weak) ? object.weak : undefined,
       uninterpretedOption: Array.isArray(object?.uninterpreted_option) ? object.uninterpreted_option.map((e: any) => UninterpretedOption.fromSDK(e)) : []
     };
   },
@@ -4601,8 +4601,8 @@ export const EnumOptions = {
 
   fromSDK(object: EnumOptionsSDKType): EnumOptions {
     return {
-      allowAlias: isSet(object.allow_alias) ? object.allow_alias : false,
-      deprecated: isSet(object.deprecated) ? object.deprecated : false,
+      allowAlias: isSet(object.allow_alias) ? object.allow_alias : undefined,
+      deprecated: isSet(object.deprecated) ? object.deprecated : undefined,
       uninterpretedOption: Array.isArray(object?.uninterpreted_option) ? object.uninterpreted_option.map((e: any) => UninterpretedOption.fromSDK(e)) : []
     };
   },
@@ -4698,7 +4698,7 @@ export const EnumValueOptions = {
 
   fromSDK(object: EnumValueOptionsSDKType): EnumValueOptions {
     return {
-      deprecated: isSet(object.deprecated) ? object.deprecated : false,
+      deprecated: isSet(object.deprecated) ? object.deprecated : undefined,
       uninterpretedOption: Array.isArray(object?.uninterpreted_option) ? object.uninterpreted_option.map((e: any) => UninterpretedOption.fromSDK(e)) : []
     };
   },
@@ -4793,7 +4793,7 @@ export const ServiceOptions = {
 
   fromSDK(object: ServiceOptionsSDKType): ServiceOptions {
     return {
-      deprecated: isSet(object.deprecated) ? object.deprecated : false,
+      deprecated: isSet(object.deprecated) ? object.deprecated : undefined,
       uninterpretedOption: Array.isArray(object?.uninterpreted_option) ? object.uninterpreted_option.map((e: any) => UninterpretedOption.fromSDK(e)) : []
     };
   },
@@ -4900,7 +4900,7 @@ export const MethodOptions = {
 
   fromSDK(object: MethodOptionsSDKType): MethodOptions {
     return {
-      deprecated: isSet(object.deprecated) ? object.deprecated : false,
+      deprecated: isSet(object.deprecated) ? object.deprecated : undefined,
       idempotencyLevel: isSet(object.idempotency_level) ? methodOptions_IdempotencyLevelFromJSON(object.idempotency_level) : 0,
       uninterpretedOption: Array.isArray(object?.uninterpreted_option) ? object.uninterpreted_option.map((e: any) => UninterpretedOption.fromSDK(e)) : []
     };
@@ -5058,12 +5058,12 @@ export const UninterpretedOption = {
   fromSDK(object: UninterpretedOptionSDKType): UninterpretedOption {
     return {
       name: Array.isArray(object?.name) ? object.name.map((e: any) => UninterpretedOption_NamePart.fromSDK(e)) : [],
-      identifierValue: isSet(object.identifier_value) ? object.identifier_value : "",
-      positiveIntValue: isSet(object.positive_int_value) ? object.positive_int_value : Long.UZERO,
-      negativeIntValue: isSet(object.negative_int_value) ? object.negative_int_value : Long.ZERO,
-      doubleValue: isSet(object.double_value) ? object.double_value : 0,
-      stringValue: isSet(object.string_value) ? object.string_value : new Uint8Array(),
-      aggregateValue: isSet(object.aggregate_value) ? object.aggregate_value : ""
+      identifierValue: isSet(object.identifier_value) ? object.identifier_value : undefined,
+      positiveIntValue: isSet(object.positive_int_value) ? object.positive_int_value : undefined,
+      negativeIntValue: isSet(object.negative_int_value) ? object.negative_int_value : undefined,
+      doubleValue: isSet(object.double_value) ? object.double_value : undefined,
+      stringValue: isSet(object.string_value) ? object.string_value : undefined,
+      aggregateValue: isSet(object.aggregate_value) ? object.aggregate_value : undefined
     };
   },
 
@@ -5156,8 +5156,8 @@ export const UninterpretedOption_NamePart = {
 
   fromSDK(object: UninterpretedOption_NamePartSDKType): UninterpretedOption_NamePart {
     return {
-      namePart: isSet(object.name_part) ? object.name_part : "",
-      isExtension: isSet(object.is_extension) ? object.is_extension : false
+      namePart: isSet(object.name_part) ? object.name_part : undefined,
+      isExtension: isSet(object.is_extension) ? object.is_extension : undefined
     };
   },
 
@@ -5400,8 +5400,8 @@ export const SourceCodeInfo_Location = {
     return {
       path: Array.isArray(object?.path) ? object.path.map((e: any) => e) : [],
       span: Array.isArray(object?.span) ? object.span.map((e: any) => e) : [],
-      leadingComments: isSet(object.leading_comments) ? object.leading_comments : "",
-      trailingComments: isSet(object.trailing_comments) ? object.trailing_comments : "",
+      leadingComments: isSet(object.leading_comments) ? object.leading_comments : undefined,
+      trailingComments: isSet(object.trailing_comments) ? object.trailing_comments : undefined,
       leadingDetachedComments: Array.isArray(object?.leading_detached_comments) ? object.leading_detached_comments.map((e: any) => e) : []
     };
   },
@@ -5629,9 +5629,9 @@ export const GeneratedCodeInfo_Annotation = {
   fromSDK(object: GeneratedCodeInfo_AnnotationSDKType): GeneratedCodeInfo_Annotation {
     return {
       path: Array.isArray(object?.path) ? object.path.map((e: any) => e) : [],
-      sourceFile: isSet(object.source_file) ? object.source_file : "",
-      begin: isSet(object.begin) ? object.begin : 0,
-      end: isSet(object.end) ? object.end : 0
+      sourceFile: isSet(object.source_file) ? object.source_file : undefined,
+      begin: isSet(object.begin) ? object.begin : undefined,
+      end: isSet(object.end) ? object.end : undefined
     };
   },
 

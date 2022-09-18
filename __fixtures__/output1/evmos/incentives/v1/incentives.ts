@@ -241,11 +241,11 @@ export const Incentive = {
 
   fromSDK(object: IncentiveSDKType): Incentive {
     return {
-      contract: isSet(object.contract) ? object.contract : "",
+      contract: isSet(object.contract) ? object.contract : undefined,
       allocations: Array.isArray(object?.allocations) ? object.allocations.map((e: any) => DecCoin.fromSDK(e)) : [],
-      epochs: isSet(object.epochs) ? object.epochs : 0,
+      epochs: isSet(object.epochs) ? object.epochs : undefined,
       startTime: isSet(object.start_time) ? Timestamp.fromSDK(object.start_time) : undefined,
-      totalGas: isSet(object.total_gas) ? object.total_gas : Long.UZERO
+      totalGas: isSet(object.total_gas) ? object.total_gas : undefined
     };
   },
 
@@ -348,9 +348,9 @@ export const GasMeter = {
 
   fromSDK(object: GasMeterSDKType): GasMeter {
     return {
-      contract: isSet(object.contract) ? object.contract : "",
-      participant: isSet(object.participant) ? object.participant : "",
-      cumulativeGas: isSet(object.cumulative_gas) ? object.cumulative_gas : Long.UZERO
+      contract: isSet(object.contract) ? object.contract : undefined,
+      participant: isSet(object.participant) ? object.participant : undefined,
+      cumulativeGas: isSet(object.cumulative_gas) ? object.cumulative_gas : undefined
     };
   },
 
@@ -475,11 +475,11 @@ export const RegisterIncentiveProposal = {
 
   fromSDK(object: RegisterIncentiveProposalSDKType): RegisterIncentiveProposal {
     return {
-      title: isSet(object.title) ? object.title : "",
-      description: isSet(object.description) ? object.description : "",
-      contract: isSet(object.contract) ? object.contract : "",
+      title: isSet(object.title) ? object.title : undefined,
+      description: isSet(object.description) ? object.description : undefined,
+      contract: isSet(object.contract) ? object.contract : undefined,
       allocations: Array.isArray(object?.allocations) ? object.allocations.map((e: any) => DecCoin.fromSDK(e)) : [],
-      epochs: isSet(object.epochs) ? object.epochs : 0
+      epochs: isSet(object.epochs) ? object.epochs : undefined
     };
   },
 
@@ -582,9 +582,9 @@ export const CancelIncentiveProposal = {
 
   fromSDK(object: CancelIncentiveProposalSDKType): CancelIncentiveProposal {
     return {
-      title: isSet(object.title) ? object.title : "",
-      description: isSet(object.description) ? object.description : "",
-      contract: isSet(object.contract) ? object.contract : ""
+      title: isSet(object.title) ? object.title : undefined,
+      description: isSet(object.description) ? object.description : undefined,
+      contract: isSet(object.contract) ? object.contract : undefined
     };
   },
 

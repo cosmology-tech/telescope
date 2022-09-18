@@ -184,7 +184,7 @@ export const Group = {
       groupId: isSet(object.group_id) ? GroupID.fromSDK(object.group_id) : undefined,
       state: isSet(object.state) ? group_StateFromJSON(object.state) : 0,
       groupSpec: isSet(object.group_spec) ? GroupSpec.fromSDK(object.group_spec) : undefined,
-      createdAt: isSet(object.created_at) ? object.created_at : Long.ZERO
+      createdAt: isSet(object.created_at) ? object.created_at : undefined
     };
   },
 

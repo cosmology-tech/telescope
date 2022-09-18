@@ -662,8 +662,8 @@ export const ExistenceProof = {
 
   fromSDK(object: ExistenceProofSDKType): ExistenceProof {
     return {
-      key: isSet(object.key) ? object.key : new Uint8Array(),
-      value: isSet(object.value) ? object.value : new Uint8Array(),
+      key: isSet(object.key) ? object.key : undefined,
+      value: isSet(object.value) ? object.value : undefined,
       leaf: isSet(object.leaf) ? LeafOp.fromSDK(object.leaf) : undefined,
       path: Array.isArray(object?.path) ? object.path.map((e: any) => InnerOp.fromSDK(e)) : []
     };
@@ -767,7 +767,7 @@ export const NonExistenceProof = {
 
   fromSDK(object: NonExistenceProofSDKType): NonExistenceProof {
     return {
-      key: isSet(object.key) ? object.key : new Uint8Array(),
+      key: isSet(object.key) ? object.key : undefined,
       left: isSet(object.left) ? ExistenceProof.fromSDK(object.left) : undefined,
       right: isSet(object.right) ? ExistenceProof.fromSDK(object.right) : undefined
     };
@@ -1003,7 +1003,7 @@ export const LeafOp = {
       prehashKey: isSet(object.prehash_key) ? hashOpFromJSON(object.prehash_key) : 0,
       prehashValue: isSet(object.prehash_value) ? hashOpFromJSON(object.prehash_value) : 0,
       length: isSet(object.length) ? lengthOpFromJSON(object.length) : 0,
-      prefix: isSet(object.prefix) ? object.prefix : new Uint8Array()
+      prefix: isSet(object.prefix) ? object.prefix : undefined
     };
   },
 
@@ -1101,8 +1101,8 @@ export const InnerOp = {
   fromSDK(object: InnerOpSDKType): InnerOp {
     return {
       hash: isSet(object.hash) ? hashOpFromJSON(object.hash) : 0,
-      prefix: isSet(object.prefix) ? object.prefix : new Uint8Array(),
-      suffix: isSet(object.suffix) ? object.suffix : new Uint8Array()
+      prefix: isSet(object.prefix) ? object.prefix : undefined,
+      suffix: isSet(object.suffix) ? object.suffix : undefined
     };
   },
 
@@ -1211,8 +1211,8 @@ export const ProofSpec = {
     return {
       leafSpec: isSet(object.leaf_spec) ? LeafOp.fromSDK(object.leaf_spec) : undefined,
       innerSpec: isSet(object.inner_spec) ? InnerSpec.fromSDK(object.inner_spec) : undefined,
-      maxDepth: isSet(object.max_depth) ? object.max_depth : 0,
-      minDepth: isSet(object.min_depth) ? object.min_depth : 0
+      maxDepth: isSet(object.max_depth) ? object.max_depth : undefined,
+      minDepth: isSet(object.min_depth) ? object.min_depth : undefined
     };
   },
 
@@ -1364,10 +1364,10 @@ export const InnerSpec = {
   fromSDK(object: InnerSpecSDKType): InnerSpec {
     return {
       childOrder: Array.isArray(object?.child_order) ? object.child_order.map((e: any) => e) : [],
-      childSize: isSet(object.child_size) ? object.child_size : 0,
-      minPrefixLength: isSet(object.min_prefix_length) ? object.min_prefix_length : 0,
-      maxPrefixLength: isSet(object.max_prefix_length) ? object.max_prefix_length : 0,
-      emptyChild: isSet(object.empty_child) ? object.empty_child : new Uint8Array(),
+      childSize: isSet(object.child_size) ? object.child_size : undefined,
+      minPrefixLength: isSet(object.min_prefix_length) ? object.min_prefix_length : undefined,
+      maxPrefixLength: isSet(object.max_prefix_length) ? object.max_prefix_length : undefined,
+      emptyChild: isSet(object.empty_child) ? object.empty_child : undefined,
       hash: isSet(object.hash) ? hashOpFromJSON(object.hash) : 0
     };
   },
@@ -1854,8 +1854,8 @@ export const CompressedExistenceProof = {
 
   fromSDK(object: CompressedExistenceProofSDKType): CompressedExistenceProof {
     return {
-      key: isSet(object.key) ? object.key : new Uint8Array(),
-      value: isSet(object.value) ? object.value : new Uint8Array(),
+      key: isSet(object.key) ? object.key : undefined,
+      value: isSet(object.value) ? object.value : undefined,
       leaf: isSet(object.leaf) ? LeafOp.fromSDK(object.leaf) : undefined,
       path: Array.isArray(object?.path) ? object.path.map((e: any) => e) : []
     };
@@ -1959,7 +1959,7 @@ export const CompressedNonExistenceProof = {
 
   fromSDK(object: CompressedNonExistenceProofSDKType): CompressedNonExistenceProof {
     return {
-      key: isSet(object.key) ? object.key : new Uint8Array(),
+      key: isSet(object.key) ? object.key : undefined,
       left: isSet(object.left) ? CompressedExistenceProof.fromSDK(object.left) : undefined,
       right: isSet(object.right) ? CompressedExistenceProof.fromSDK(object.right) : undefined
     };

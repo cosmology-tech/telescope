@@ -79,7 +79,7 @@ export const DenomAuthorityMetadata = {
 
   fromSDK(object: DenomAuthorityMetadataSDKType): DenomAuthorityMetadata {
     return {
-      Admin: isSet(object.Admin) ? object.Admin : ""
+      Admin: isSet(object.Admin) ? object.Admin : undefined
     };
   },
 

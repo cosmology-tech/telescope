@@ -253,7 +253,7 @@ export const QueryPoolRequest = {
 
   fromSDK(object: QueryPoolRequestSDKType): QueryPoolRequest {
     return {
-      poolId: isSet(object.poolId) ? object.poolId : Long.UZERO
+      poolId: isSet(object.poolId) ? object.poolId : undefined
     };
   },
 
@@ -607,7 +607,7 @@ export const QueryNumPoolsResponse = {
 
   fromSDK(object: QueryNumPoolsResponseSDKType): QueryNumPoolsResponse {
     return {
-      numPools: isSet(object.numPools) ? object.numPools : Long.UZERO
+      numPools: isSet(object.numPools) ? object.numPools : undefined
     };
   },
 
@@ -676,7 +676,7 @@ export const QueryPoolParamsRequest = {
 
   fromSDK(object: QueryPoolParamsRequestSDKType): QueryPoolParamsRequest {
     return {
-      poolId: isSet(object.poolId) ? object.poolId : Long.UZERO
+      poolId: isSet(object.poolId) ? object.poolId : undefined
     };
   },
 
@@ -814,7 +814,7 @@ export const QueryTotalPoolLiquidityRequest = {
 
   fromSDK(object: QueryTotalPoolLiquidityRequestSDKType): QueryTotalPoolLiquidityRequest {
     return {
-      poolId: isSet(object.poolId) ? object.poolId : Long.UZERO
+      poolId: isSet(object.poolId) ? object.poolId : undefined
     };
   },
 
@@ -964,7 +964,7 @@ export const QueryTotalSharesRequest = {
 
   fromSDK(object: QueryTotalSharesRequestSDKType): QueryTotalSharesRequest {
     return {
-      poolId: isSet(object.poolId) ? object.poolId : Long.UZERO
+      poolId: isSet(object.poolId) ? object.poolId : undefined
     };
   },
 
@@ -1126,9 +1126,9 @@ export const QuerySpotPriceRequest = {
 
   fromSDK(object: QuerySpotPriceRequestSDKType): QuerySpotPriceRequest {
     return {
-      poolId: isSet(object.poolId) ? object.poolId : Long.UZERO,
-      baseAssetDenom: isSet(object.base_asset_denom) ? object.base_asset_denom : "",
-      quoteAssetDenom: isSet(object.quote_asset_denom) ? object.quote_asset_denom : ""
+      poolId: isSet(object.poolId) ? object.poolId : undefined,
+      baseAssetDenom: isSet(object.base_asset_denom) ? object.base_asset_denom : undefined,
+      quoteAssetDenom: isSet(object.quote_asset_denom) ? object.quote_asset_denom : undefined
     };
   },
 
@@ -1199,7 +1199,7 @@ export const QuerySpotPriceResponse = {
 
   fromSDK(object: QuerySpotPriceResponseSDKType): QuerySpotPriceResponse {
     return {
-      spotPrice: isSet(object.spotPrice) ? object.spotPrice : ""
+      spotPrice: isSet(object.spotPrice) ? object.spotPrice : undefined
     };
   },
 
@@ -1310,9 +1310,9 @@ export const QuerySwapExactAmountInRequest = {
 
   fromSDK(object: QuerySwapExactAmountInRequestSDKType): QuerySwapExactAmountInRequest {
     return {
-      sender: isSet(object.sender) ? object.sender : "",
-      poolId: isSet(object.poolId) ? object.poolId : Long.UZERO,
-      tokenIn: isSet(object.tokenIn) ? object.tokenIn : "",
+      sender: isSet(object.sender) ? object.sender : undefined,
+      poolId: isSet(object.poolId) ? object.poolId : undefined,
+      tokenIn: isSet(object.tokenIn) ? object.tokenIn : undefined,
       routes: Array.isArray(object?.routes) ? object.routes.map((e: any) => SwapAmountInRoute.fromSDK(e)) : []
     };
   },
@@ -1391,7 +1391,7 @@ export const QuerySwapExactAmountInResponse = {
 
   fromSDK(object: QuerySwapExactAmountInResponseSDKType): QuerySwapExactAmountInResponse {
     return {
-      tokenOutAmount: isSet(object.tokenOutAmount) ? object.tokenOutAmount : ""
+      tokenOutAmount: isSet(object.tokenOutAmount) ? object.tokenOutAmount : undefined
     };
   },
 
@@ -1502,10 +1502,10 @@ export const QuerySwapExactAmountOutRequest = {
 
   fromSDK(object: QuerySwapExactAmountOutRequestSDKType): QuerySwapExactAmountOutRequest {
     return {
-      sender: isSet(object.sender) ? object.sender : "",
-      poolId: isSet(object.poolId) ? object.poolId : Long.UZERO,
+      sender: isSet(object.sender) ? object.sender : undefined,
+      poolId: isSet(object.poolId) ? object.poolId : undefined,
       routes: Array.isArray(object?.routes) ? object.routes.map((e: any) => SwapAmountOutRoute.fromSDK(e)) : [],
-      tokenOut: isSet(object.tokenOut) ? object.tokenOut : ""
+      tokenOut: isSet(object.tokenOut) ? object.tokenOut : undefined
     };
   },
 
@@ -1583,7 +1583,7 @@ export const QuerySwapExactAmountOutResponse = {
 
   fromSDK(object: QuerySwapExactAmountOutResponseSDKType): QuerySwapExactAmountOutResponse {
     return {
-      tokenInAmount: isSet(object.tokenInAmount) ? object.tokenInAmount : ""
+      tokenInAmount: isSet(object.tokenInAmount) ? object.tokenInAmount : undefined
     };
   },
 

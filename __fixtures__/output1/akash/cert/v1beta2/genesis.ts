@@ -94,7 +94,7 @@ export const GenesisCertificate = {
 
   fromSDK(object: GenesisCertificateSDKType): GenesisCertificate {
     return {
-      owner: isSet(object.owner) ? object.owner : "",
+      owner: isSet(object.owner) ? object.owner : undefined,
       certificate: isSet(object.certificate) ? Certificate.fromSDK(object.certificate) : undefined
     };
   },

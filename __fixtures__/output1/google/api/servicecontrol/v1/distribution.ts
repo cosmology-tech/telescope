@@ -463,11 +463,11 @@ export const Distribution = {
 
   fromSDK(object: DistributionSDKType): Distribution {
     return {
-      count: isSet(object.count) ? object.count : Long.ZERO,
-      mean: isSet(object.mean) ? object.mean : 0,
-      minimum: isSet(object.minimum) ? object.minimum : 0,
-      maximum: isSet(object.maximum) ? object.maximum : 0,
-      sumOfSquaredDeviation: isSet(object.sum_of_squared_deviation) ? object.sum_of_squared_deviation : 0,
+      count: isSet(object.count) ? object.count : undefined,
+      mean: isSet(object.mean) ? object.mean : undefined,
+      minimum: isSet(object.minimum) ? object.minimum : undefined,
+      maximum: isSet(object.maximum) ? object.maximum : undefined,
+      sumOfSquaredDeviation: isSet(object.sum_of_squared_deviation) ? object.sum_of_squared_deviation : undefined,
       bucketCounts: Array.isArray(object?.bucket_counts) ? object.bucket_counts.map((e: any) => e) : [],
       linearBuckets: isSet(object.linear_buckets) ? Distribution_LinearBuckets.fromSDK(object.linear_buckets) : undefined,
       exponentialBuckets: isSet(object.exponential_buckets) ? Distribution_ExponentialBuckets.fromSDK(object.exponential_buckets) : undefined,
@@ -586,9 +586,9 @@ export const Distribution_LinearBuckets = {
 
   fromSDK(object: Distribution_LinearBucketsSDKType): Distribution_LinearBuckets {
     return {
-      numFiniteBuckets: isSet(object.num_finite_buckets) ? object.num_finite_buckets : 0,
-      width: isSet(object.width) ? object.width : 0,
-      offset: isSet(object.offset) ? object.offset : 0
+      numFiniteBuckets: isSet(object.num_finite_buckets) ? object.num_finite_buckets : undefined,
+      width: isSet(object.width) ? object.width : undefined,
+      offset: isSet(object.offset) ? object.offset : undefined
     };
   },
 
@@ -683,9 +683,9 @@ export const Distribution_ExponentialBuckets = {
 
   fromSDK(object: Distribution_ExponentialBucketsSDKType): Distribution_ExponentialBuckets {
     return {
-      numFiniteBuckets: isSet(object.num_finite_buckets) ? object.num_finite_buckets : 0,
-      growthFactor: isSet(object.growth_factor) ? object.growth_factor : 0,
-      scale: isSet(object.scale) ? object.scale : 0
+      numFiniteBuckets: isSet(object.num_finite_buckets) ? object.num_finite_buckets : undefined,
+      growthFactor: isSet(object.growth_factor) ? object.growth_factor : undefined,
+      scale: isSet(object.scale) ? object.scale : undefined
     };
   },
 

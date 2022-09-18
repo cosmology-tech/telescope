@@ -475,7 +475,7 @@ export const QueryGroupInfoRequest = {
 
   fromSDK(object: QueryGroupInfoRequestSDKType): QueryGroupInfoRequest {
     return {
-      groupId: isSet(object.group_id) ? object.group_id : Long.UZERO
+      groupId: isSet(object.group_id) ? object.group_id : undefined
     };
   },
 
@@ -613,7 +613,7 @@ export const QueryGroupPolicyInfoRequest = {
 
   fromSDK(object: QueryGroupPolicyInfoRequestSDKType): QueryGroupPolicyInfoRequest {
     return {
-      address: isSet(object.address) ? object.address : ""
+      address: isSet(object.address) ? object.address : undefined
     };
   },
 
@@ -763,7 +763,7 @@ export const QueryGroupMembersRequest = {
 
   fromSDK(object: QueryGroupMembersRequestSDKType): QueryGroupMembersRequest {
     return {
-      groupId: isSet(object.group_id) ? object.group_id : Long.UZERO,
+      groupId: isSet(object.group_id) ? object.group_id : undefined,
       pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
@@ -941,7 +941,7 @@ export const QueryGroupsByAdminRequest = {
 
   fromSDK(object: QueryGroupsByAdminRequestSDKType): QueryGroupsByAdminRequest {
     return {
-      admin: isSet(object.admin) ? object.admin : "",
+      admin: isSet(object.admin) ? object.admin : undefined,
       pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
@@ -1119,7 +1119,7 @@ export const QueryGroupPoliciesByGroupRequest = {
 
   fromSDK(object: QueryGroupPoliciesByGroupRequestSDKType): QueryGroupPoliciesByGroupRequest {
     return {
-      groupId: isSet(object.group_id) ? object.group_id : Long.UZERO,
+      groupId: isSet(object.group_id) ? object.group_id : undefined,
       pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
@@ -1297,7 +1297,7 @@ export const QueryGroupPoliciesByAdminRequest = {
 
   fromSDK(object: QueryGroupPoliciesByAdminRequestSDKType): QueryGroupPoliciesByAdminRequest {
     return {
-      admin: isSet(object.admin) ? object.admin : "",
+      admin: isSet(object.admin) ? object.admin : undefined,
       pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
@@ -1463,7 +1463,7 @@ export const QueryProposalRequest = {
 
   fromSDK(object: QueryProposalRequestSDKType): QueryProposalRequest {
     return {
-      proposalId: isSet(object.proposal_id) ? object.proposal_id : Long.UZERO
+      proposalId: isSet(object.proposal_id) ? object.proposal_id : undefined
     };
   },
 
@@ -1613,7 +1613,7 @@ export const QueryProposalsByGroupPolicyRequest = {
 
   fromSDK(object: QueryProposalsByGroupPolicyRequestSDKType): QueryProposalsByGroupPolicyRequest {
     return {
-      address: isSet(object.address) ? object.address : "",
+      address: isSet(object.address) ? object.address : undefined,
       pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
@@ -1791,8 +1791,8 @@ export const QueryVoteByProposalVoterRequest = {
 
   fromSDK(object: QueryVoteByProposalVoterRequestSDKType): QueryVoteByProposalVoterRequest {
     return {
-      proposalId: isSet(object.proposal_id) ? object.proposal_id : Long.UZERO,
-      voter: isSet(object.voter) ? object.voter : ""
+      proposalId: isSet(object.proposal_id) ? object.proposal_id : undefined,
+      voter: isSet(object.voter) ? object.voter : undefined
     };
   },
 
@@ -1943,7 +1943,7 @@ export const QueryVotesByProposalRequest = {
 
   fromSDK(object: QueryVotesByProposalRequestSDKType): QueryVotesByProposalRequest {
     return {
-      proposalId: isSet(object.proposal_id) ? object.proposal_id : Long.UZERO,
+      proposalId: isSet(object.proposal_id) ? object.proposal_id : undefined,
       pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
@@ -2121,7 +2121,7 @@ export const QueryVotesByVoterRequest = {
 
   fromSDK(object: QueryVotesByVoterRequestSDKType): QueryVotesByVoterRequest {
     return {
-      voter: isSet(object.voter) ? object.voter : "",
+      voter: isSet(object.voter) ? object.voter : undefined,
       pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
@@ -2299,7 +2299,7 @@ export const QueryGroupsByMemberRequest = {
 
   fromSDK(object: QueryGroupsByMemberRequestSDKType): QueryGroupsByMemberRequest {
     return {
-      address: isSet(object.address) ? object.address : "",
+      address: isSet(object.address) ? object.address : undefined,
       pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
@@ -2465,7 +2465,7 @@ export const QueryTallyResultRequest = {
 
   fromSDK(object: QueryTallyResultRequestSDKType): QueryTallyResultRequest {
     return {
-      proposalId: isSet(object.proposal_id) ? object.proposal_id : Long.UZERO
+      proposalId: isSet(object.proposal_id) ? object.proposal_id : undefined
     };
   },
 

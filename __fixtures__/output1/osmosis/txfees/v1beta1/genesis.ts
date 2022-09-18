@@ -90,7 +90,7 @@ export const GenesisState = {
 
   fromSDK(object: GenesisStateSDKType): GenesisState {
     return {
-      basedenom: isSet(object.basedenom) ? object.basedenom : "",
+      basedenom: isSet(object.basedenom) ? object.basedenom : undefined,
       feetokens: Array.isArray(object?.feetokens) ? object.feetokens.map((e: any) => FeeToken.fromSDK(e)) : []
     };
   },

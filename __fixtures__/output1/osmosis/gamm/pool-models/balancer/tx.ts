@@ -124,10 +124,10 @@ export const MsgCreateBalancerPool = {
 
   fromSDK(object: MsgCreateBalancerPoolSDKType): MsgCreateBalancerPool {
     return {
-      sender: isSet(object.sender) ? object.sender : "",
+      sender: isSet(object.sender) ? object.sender : undefined,
       poolParams: isSet(object.poolParams) ? PoolParams.fromSDK(object.poolParams) : undefined,
       poolAssets: Array.isArray(object?.poolAssets) ? object.poolAssets.map((e: any) => PoolAsset.fromSDK(e)) : [],
-      futurePoolGovernor: isSet(object.future_pool_governor) ? object.future_pool_governor : ""
+      futurePoolGovernor: isSet(object.future_pool_governor) ? object.future_pool_governor : undefined
     };
   },
 
@@ -205,7 +205,7 @@ export const MsgCreateBalancerPoolResponse = {
 
   fromSDK(object: MsgCreateBalancerPoolResponseSDKType): MsgCreateBalancerPoolResponse {
     return {
-      poolId: isSet(object.pool_id) ? object.pool_id : Long.UZERO
+      poolId: isSet(object.pool_id) ? object.pool_id : undefined
     };
   },
 

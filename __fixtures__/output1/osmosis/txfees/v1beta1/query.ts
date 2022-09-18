@@ -255,7 +255,7 @@ export const QueryDenomSpotPriceRequest = {
 
   fromSDK(object: QueryDenomSpotPriceRequestSDKType): QueryDenomSpotPriceRequest {
     return {
-      denom: isSet(object.denom) ? object.denom : ""
+      denom: isSet(object.denom) ? object.denom : undefined
     };
   },
 
@@ -336,8 +336,8 @@ export const QueryDenomSpotPriceResponse = {
 
   fromSDK(object: QueryDenomSpotPriceResponseSDKType): QueryDenomSpotPriceResponse {
     return {
-      poolID: isSet(object.poolID) ? object.poolID : Long.UZERO,
-      spotPrice: isSet(object.spot_price) ? object.spot_price : ""
+      poolID: isSet(object.poolID) ? object.poolID : undefined,
+      spotPrice: isSet(object.spot_price) ? object.spot_price : undefined
     };
   },
 
@@ -407,7 +407,7 @@ export const QueryDenomPoolIdRequest = {
 
   fromSDK(object: QueryDenomPoolIdRequestSDKType): QueryDenomPoolIdRequest {
     return {
-      denom: isSet(object.denom) ? object.denom : ""
+      denom: isSet(object.denom) ? object.denom : undefined
     };
   },
 
@@ -476,7 +476,7 @@ export const QueryDenomPoolIdResponse = {
 
   fromSDK(object: QueryDenomPoolIdResponseSDKType): QueryDenomPoolIdResponse {
     return {
-      poolID: isSet(object.poolID) ? object.poolID : Long.UZERO
+      poolID: isSet(object.poolID) ? object.poolID : undefined
     };
   },
 
@@ -597,7 +597,7 @@ export const QueryBaseDenomResponse = {
 
   fromSDK(object: QueryBaseDenomResponseSDKType): QueryBaseDenomResponse {
     return {
-      baseDenom: isSet(object.base_denom) ? object.base_denom : ""
+      baseDenom: isSet(object.base_denom) ? object.base_denom : undefined
     };
   },
 

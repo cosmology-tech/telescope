@@ -182,12 +182,12 @@ export const MsgCreateGauge = {
 
   fromSDK(object: MsgCreateGaugeSDKType): MsgCreateGauge {
     return {
-      isPerpetual: isSet(object.is_perpetual) ? object.is_perpetual : false,
-      owner: isSet(object.owner) ? object.owner : "",
+      isPerpetual: isSet(object.is_perpetual) ? object.is_perpetual : undefined,
+      owner: isSet(object.owner) ? object.owner : undefined,
       distributeTo: isSet(object.distribute_to) ? QueryCondition.fromSDK(object.distribute_to) : undefined,
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDK(e)) : [],
       startTime: isSet(object.start_time) ? Timestamp.fromSDK(object.start_time) : undefined,
-      numEpochsPaidOver: isSet(object.num_epochs_paid_over) ? object.num_epochs_paid_over : Long.UZERO
+      numEpochsPaidOver: isSet(object.num_epochs_paid_over) ? object.num_epochs_paid_over : undefined
     };
   },
 
@@ -349,8 +349,8 @@ export const MsgAddToGauge = {
 
   fromSDK(object: MsgAddToGaugeSDKType): MsgAddToGauge {
     return {
-      owner: isSet(object.owner) ? object.owner : "",
-      gaugeId: isSet(object.gauge_id) ? object.gauge_id : Long.UZERO,
+      owner: isSet(object.owner) ? object.owner : undefined,
+      gaugeId: isSet(object.gauge_id) ? object.gauge_id : undefined,
       rewards: Array.isArray(object?.rewards) ? object.rewards.map((e: any) => Coin.fromSDK(e)) : []
     };
   },

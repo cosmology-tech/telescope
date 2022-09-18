@@ -412,21 +412,21 @@ export const HttpRequest = {
 
   fromSDK(object: HttpRequestSDKType): HttpRequest {
     return {
-      requestMethod: isSet(object.request_method) ? object.request_method : "",
-      requestUrl: isSet(object.request_url) ? object.request_url : "",
-      requestSize: isSet(object.request_size) ? object.request_size : Long.ZERO,
-      status: isSet(object.status) ? object.status : 0,
-      responseSize: isSet(object.response_size) ? object.response_size : Long.ZERO,
-      userAgent: isSet(object.user_agent) ? object.user_agent : "",
-      remoteIp: isSet(object.remote_ip) ? object.remote_ip : "",
-      serverIp: isSet(object.server_ip) ? object.server_ip : "",
-      referer: isSet(object.referer) ? object.referer : "",
+      requestMethod: isSet(object.request_method) ? object.request_method : undefined,
+      requestUrl: isSet(object.request_url) ? object.request_url : undefined,
+      requestSize: isSet(object.request_size) ? object.request_size : undefined,
+      status: isSet(object.status) ? object.status : undefined,
+      responseSize: isSet(object.response_size) ? object.response_size : undefined,
+      userAgent: isSet(object.user_agent) ? object.user_agent : undefined,
+      remoteIp: isSet(object.remote_ip) ? object.remote_ip : undefined,
+      serverIp: isSet(object.server_ip) ? object.server_ip : undefined,
+      referer: isSet(object.referer) ? object.referer : undefined,
       latency: isSet(object.latency) ? Duration.fromSDK(object.latency) : undefined,
-      cacheLookup: isSet(object.cache_lookup) ? object.cache_lookup : false,
-      cacheHit: isSet(object.cache_hit) ? object.cache_hit : false,
-      cacheValidatedWithOriginServer: isSet(object.cache_validated_with_origin_server) ? object.cache_validated_with_origin_server : false,
-      cacheFillBytes: isSet(object.cache_fill_bytes) ? object.cache_fill_bytes : Long.ZERO,
-      protocol: isSet(object.protocol) ? object.protocol : ""
+      cacheLookup: isSet(object.cache_lookup) ? object.cache_lookup : undefined,
+      cacheHit: isSet(object.cache_hit) ? object.cache_hit : undefined,
+      cacheValidatedWithOriginServer: isSet(object.cache_validated_with_origin_server) ? object.cache_validated_with_origin_server : undefined,
+      cacheFillBytes: isSet(object.cache_fill_bytes) ? object.cache_fill_bytes : undefined,
+      protocol: isSet(object.protocol) ? object.protocol : undefined
     };
   },
 

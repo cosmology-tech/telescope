@@ -204,9 +204,9 @@ export const MsgCreateDeployment = {
     return {
       id: isSet(object.id) ? DeploymentID.fromSDK(object.id) : undefined,
       groups: Array.isArray(object?.groups) ? object.groups.map((e: any) => GroupSpec.fromSDK(e)) : [],
-      version: isSet(object.version) ? object.version : new Uint8Array(),
+      version: isSet(object.version) ? object.version : undefined,
       deposit: isSet(object.deposit) ? Coin.fromSDK(object.deposit) : undefined,
-      depositor: isSet(object.depositor) ? object.depositor : ""
+      depositor: isSet(object.depositor) ? object.depositor : undefined
     };
   },
 
@@ -363,7 +363,7 @@ export const MsgDepositDeployment = {
     return {
       id: isSet(object.id) ? DeploymentID.fromSDK(object.id) : undefined,
       amount: isSet(object.amount) ? Coin.fromSDK(object.amount) : undefined,
-      depositor: isSet(object.depositor) ? object.depositor : ""
+      depositor: isSet(object.depositor) ? object.depositor : undefined
     };
   },
 
@@ -499,7 +499,7 @@ export const MsgUpdateDeployment = {
   fromSDK(object: MsgUpdateDeploymentSDKType): MsgUpdateDeployment {
     return {
       id: isSet(object.id) ? DeploymentID.fromSDK(object.id) : undefined,
-      version: isSet(object.version) ? object.version : new Uint8Array()
+      version: isSet(object.version) ? object.version : undefined
     };
   },
 

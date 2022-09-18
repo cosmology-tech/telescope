@@ -628,12 +628,12 @@ export const ResourceDescriptor = {
 
   fromSDK(object: ResourceDescriptorSDKType): ResourceDescriptor {
     return {
-      type: isSet(object.type) ? object.type : "",
+      type: isSet(object.type) ? object.type : undefined,
       pattern: Array.isArray(object?.pattern) ? object.pattern.map((e: any) => e) : [],
-      nameField: isSet(object.name_field) ? object.name_field : "",
+      nameField: isSet(object.name_field) ? object.name_field : undefined,
       history: isSet(object.history) ? resourceDescriptor_HistoryFromJSON(object.history) : 0,
-      plural: isSet(object.plural) ? object.plural : "",
-      singular: isSet(object.singular) ? object.singular : "",
+      plural: isSet(object.plural) ? object.plural : undefined,
+      singular: isSet(object.singular) ? object.singular : undefined,
       style: Array.isArray(object?.style) ? object.style.map((e: any) => resourceDescriptor_StyleFromJSON(e)) : []
     };
   },
@@ -733,8 +733,8 @@ export const ResourceReference = {
 
   fromSDK(object: ResourceReferenceSDKType): ResourceReference {
     return {
-      type: isSet(object.type) ? object.type : "",
-      childType: isSet(object.child_type) ? object.child_type : ""
+      type: isSet(object.type) ? object.type : undefined,
+      childType: isSet(object.child_type) ? object.child_type : undefined
     };
   },
 

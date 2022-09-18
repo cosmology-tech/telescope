@@ -235,10 +235,10 @@ export const Snapshot = {
 
   fromSDK(object: SnapshotSDKType): Snapshot {
     return {
-      height: isSet(object.height) ? object.height : Long.UZERO,
-      format: isSet(object.format) ? object.format : 0,
-      chunks: isSet(object.chunks) ? object.chunks : 0,
-      hash: isSet(object.hash) ? object.hash : new Uint8Array(),
+      height: isSet(object.height) ? object.height : undefined,
+      format: isSet(object.format) ? object.format : undefined,
+      chunks: isSet(object.chunks) ? object.chunks : undefined,
+      hash: isSet(object.hash) ? object.hash : undefined,
       metadata: isSet(object.metadata) ? Metadata.fromSDK(object.metadata) : undefined
     };
   },
@@ -532,7 +532,7 @@ export const SnapshotStoreItem = {
 
   fromSDK(object: SnapshotStoreItemSDKType): SnapshotStoreItem {
     return {
-      name: isSet(object.name) ? object.name : ""
+      name: isSet(object.name) ? object.name : undefined
     };
   },
 
@@ -637,10 +637,10 @@ export const SnapshotIAVLItem = {
 
   fromSDK(object: SnapshotIAVLItemSDKType): SnapshotIAVLItem {
     return {
-      key: isSet(object.key) ? object.key : new Uint8Array(),
-      value: isSet(object.value) ? object.value : new Uint8Array(),
-      version: isSet(object.version) ? object.version : Long.ZERO,
-      height: isSet(object.height) ? object.height : 0
+      key: isSet(object.key) ? object.key : undefined,
+      value: isSet(object.value) ? object.value : undefined,
+      version: isSet(object.version) ? object.version : undefined,
+      height: isSet(object.height) ? object.height : undefined
     };
   },
 
@@ -724,8 +724,8 @@ export const SnapshotExtensionMeta = {
 
   fromSDK(object: SnapshotExtensionMetaSDKType): SnapshotExtensionMeta {
     return {
-      name: isSet(object.name) ? object.name : "",
-      format: isSet(object.format) ? object.format : 0
+      name: isSet(object.name) ? object.name : undefined,
+      format: isSet(object.format) ? object.format : undefined
     };
   },
 
@@ -795,7 +795,7 @@ export const SnapshotExtensionPayload = {
 
   fromSDK(object: SnapshotExtensionPayloadSDKType): SnapshotExtensionPayload {
     return {
-      payload: isSet(object.payload) ? object.payload : new Uint8Array()
+      payload: isSet(object.payload) ? object.payload : undefined
     };
   },
 
@@ -876,8 +876,8 @@ export const SnapshotKVItem = {
 
   fromSDK(object: SnapshotKVItemSDKType): SnapshotKVItem {
     return {
-      key: isSet(object.key) ? object.key : new Uint8Array(),
-      value: isSet(object.value) ? object.value : new Uint8Array()
+      key: isSet(object.key) ? object.key : undefined,
+      value: isSet(object.value) ? object.value : undefined
     };
   },
 

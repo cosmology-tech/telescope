@@ -400,7 +400,7 @@ export const QueryClientStateRequest = {
 
   fromSDK(object: QueryClientStateRequestSDKType): QueryClientStateRequest {
     return {
-      clientId: isSet(object.client_id) ? object.client_id : ""
+      clientId: isSet(object.client_id) ? object.client_id : undefined
     };
   },
 
@@ -494,7 +494,7 @@ export const QueryClientStateResponse = {
   fromSDK(object: QueryClientStateResponseSDKType): QueryClientStateResponse {
     return {
       clientState: isSet(object.client_state) ? Any.fromSDK(object.client_state) : undefined,
-      proof: isSet(object.proof) ? object.proof : new Uint8Array(),
+      proof: isSet(object.proof) ? object.proof : undefined,
       proofHeight: isSet(object.proof_height) ? Height.fromSDK(object.proof_height) : undefined
     };
   },
@@ -766,10 +766,10 @@ export const QueryConsensusStateRequest = {
 
   fromSDK(object: QueryConsensusStateRequestSDKType): QueryConsensusStateRequest {
     return {
-      clientId: isSet(object.client_id) ? object.client_id : "",
-      revisionNumber: isSet(object.revision_number) ? object.revision_number : Long.UZERO,
-      revisionHeight: isSet(object.revision_height) ? object.revision_height : Long.UZERO,
-      latestHeight: isSet(object.latest_height) ? object.latest_height : false
+      clientId: isSet(object.client_id) ? object.client_id : undefined,
+      revisionNumber: isSet(object.revision_number) ? object.revision_number : undefined,
+      revisionHeight: isSet(object.revision_height) ? object.revision_height : undefined,
+      latestHeight: isSet(object.latest_height) ? object.latest_height : undefined
     };
   },
 
@@ -866,7 +866,7 @@ export const QueryConsensusStateResponse = {
   fromSDK(object: QueryConsensusStateResponseSDKType): QueryConsensusStateResponse {
     return {
       consensusState: isSet(object.consensus_state) ? Any.fromSDK(object.consensus_state) : undefined,
-      proof: isSet(object.proof) ? object.proof : new Uint8Array(),
+      proof: isSet(object.proof) ? object.proof : undefined,
       proofHeight: isSet(object.proof_height) ? Height.fromSDK(object.proof_height) : undefined
     };
   },
@@ -950,7 +950,7 @@ export const QueryConsensusStatesRequest = {
 
   fromSDK(object: QueryConsensusStatesRequestSDKType): QueryConsensusStatesRequest {
     return {
-      clientId: isSet(object.client_id) ? object.client_id : "",
+      clientId: isSet(object.client_id) ? object.client_id : undefined,
       pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },
@@ -1116,7 +1116,7 @@ export const QueryClientStatusRequest = {
 
   fromSDK(object: QueryClientStatusRequestSDKType): QueryClientStatusRequest {
     return {
-      clientId: isSet(object.client_id) ? object.client_id : ""
+      clientId: isSet(object.client_id) ? object.client_id : undefined
     };
   },
 
@@ -1185,7 +1185,7 @@ export const QueryClientStatusResponse = {
 
   fromSDK(object: QueryClientStatusResponseSDKType): QueryClientStatusResponse {
     return {
-      status: isSet(object.status) ? object.status : ""
+      status: isSet(object.status) ? object.status : undefined
     };
   },
 

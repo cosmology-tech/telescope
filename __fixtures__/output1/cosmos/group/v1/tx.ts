@@ -643,9 +643,9 @@ export const MsgCreateGroup = {
 
   fromSDK(object: MsgCreateGroupSDKType): MsgCreateGroup {
     return {
-      admin: isSet(object.admin) ? object.admin : "",
+      admin: isSet(object.admin) ? object.admin : undefined,
       members: Array.isArray(object?.members) ? object.members.map((e: any) => Member.fromSDK(e)) : [],
-      metadata: isSet(object.metadata) ? object.metadata : ""
+      metadata: isSet(object.metadata) ? object.metadata : undefined
     };
   },
 
@@ -722,7 +722,7 @@ export const MsgCreateGroupResponse = {
 
   fromSDK(object: MsgCreateGroupResponseSDKType): MsgCreateGroupResponse {
     return {
-      groupId: isSet(object.group_id) ? object.group_id : Long.UZERO
+      groupId: isSet(object.group_id) ? object.group_id : undefined
     };
   },
 
@@ -821,8 +821,8 @@ export const MsgUpdateGroupMembers = {
 
   fromSDK(object: MsgUpdateGroupMembersSDKType): MsgUpdateGroupMembers {
     return {
-      admin: isSet(object.admin) ? object.admin : "",
-      groupId: isSet(object.group_id) ? object.group_id : Long.UZERO,
+      admin: isSet(object.admin) ? object.admin : undefined,
+      groupId: isSet(object.group_id) ? object.group_id : undefined,
       memberUpdates: Array.isArray(object?.member_updates) ? object.member_updates.map((e: any) => Member.fromSDK(e)) : []
     };
   },
@@ -976,9 +976,9 @@ export const MsgUpdateGroupAdmin = {
 
   fromSDK(object: MsgUpdateGroupAdminSDKType): MsgUpdateGroupAdmin {
     return {
-      admin: isSet(object.admin) ? object.admin : "",
-      groupId: isSet(object.group_id) ? object.group_id : Long.UZERO,
-      newAdmin: isSet(object.new_admin) ? object.new_admin : ""
+      admin: isSet(object.admin) ? object.admin : undefined,
+      groupId: isSet(object.group_id) ? object.group_id : undefined,
+      newAdmin: isSet(object.new_admin) ? object.new_admin : undefined
     };
   },
 
@@ -1125,9 +1125,9 @@ export const MsgUpdateGroupMetadata = {
 
   fromSDK(object: MsgUpdateGroupMetadataSDKType): MsgUpdateGroupMetadata {
     return {
-      admin: isSet(object.admin) ? object.admin : "",
-      groupId: isSet(object.group_id) ? object.group_id : Long.UZERO,
-      metadata: isSet(object.metadata) ? object.metadata : ""
+      admin: isSet(object.admin) ? object.admin : undefined,
+      groupId: isSet(object.group_id) ? object.group_id : undefined,
+      metadata: isSet(object.metadata) ? object.metadata : undefined
     };
   },
 
@@ -1286,9 +1286,9 @@ export const MsgCreateGroupPolicy = {
 
   fromSDK(object: MsgCreateGroupPolicySDKType): MsgCreateGroupPolicy {
     return {
-      admin: isSet(object.admin) ? object.admin : "",
-      groupId: isSet(object.group_id) ? object.group_id : Long.UZERO,
-      metadata: isSet(object.metadata) ? object.metadata : "",
+      admin: isSet(object.admin) ? object.admin : undefined,
+      groupId: isSet(object.group_id) ? object.group_id : undefined,
+      metadata: isSet(object.metadata) ? object.metadata : undefined,
       decisionPolicy: isSet(object.decision_policy) ? Any.fromSDK(object.decision_policy) : undefined
     };
   },
@@ -1361,7 +1361,7 @@ export const MsgCreateGroupPolicyResponse = {
 
   fromSDK(object: MsgCreateGroupPolicyResponseSDKType): MsgCreateGroupPolicyResponse {
     return {
-      address: isSet(object.address) ? object.address : ""
+      address: isSet(object.address) ? object.address : undefined
     };
   },
 
@@ -1454,9 +1454,9 @@ export const MsgUpdateGroupPolicyAdmin = {
 
   fromSDK(object: MsgUpdateGroupPolicyAdminSDKType): MsgUpdateGroupPolicyAdmin {
     return {
-      admin: isSet(object.admin) ? object.admin : "",
-      address: isSet(object.address) ? object.address : "",
-      newAdmin: isSet(object.new_admin) ? object.new_admin : ""
+      admin: isSet(object.admin) ? object.admin : undefined,
+      address: isSet(object.address) ? object.address : undefined,
+      newAdmin: isSet(object.new_admin) ? object.new_admin : undefined
     };
   },
 
@@ -1593,11 +1593,11 @@ export const MsgCreateGroupWithPolicy = {
 
   fromSDK(object: MsgCreateGroupWithPolicySDKType): MsgCreateGroupWithPolicy {
     return {
-      admin: isSet(object.admin) ? object.admin : "",
+      admin: isSet(object.admin) ? object.admin : undefined,
       members: Array.isArray(object?.members) ? object.members.map((e: any) => Member.fromSDK(e)) : [],
-      groupMetadata: isSet(object.group_metadata) ? object.group_metadata : "",
-      groupPolicyMetadata: isSet(object.group_policy_metadata) ? object.group_policy_metadata : "",
-      groupPolicyAsAdmin: isSet(object.group_policy_as_admin) ? object.group_policy_as_admin : false,
+      groupMetadata: isSet(object.group_metadata) ? object.group_metadata : undefined,
+      groupPolicyMetadata: isSet(object.group_policy_metadata) ? object.group_policy_metadata : undefined,
+      groupPolicyAsAdmin: isSet(object.group_policy_as_admin) ? object.group_policy_as_admin : undefined,
       decisionPolicy: isSet(object.decision_policy) ? Any.fromSDK(object.decision_policy) : undefined
     };
   },
@@ -1690,8 +1690,8 @@ export const MsgCreateGroupWithPolicyResponse = {
 
   fromSDK(object: MsgCreateGroupWithPolicyResponseSDKType): MsgCreateGroupWithPolicyResponse {
     return {
-      groupId: isSet(object.group_id) ? object.group_id : Long.UZERO,
-      groupPolicyAddress: isSet(object.group_policy_address) ? object.group_policy_address : ""
+      groupId: isSet(object.group_id) ? object.group_id : undefined,
+      groupPolicyAddress: isSet(object.group_policy_address) ? object.group_policy_address : undefined
     };
   },
 
@@ -1837,8 +1837,8 @@ export const MsgUpdateGroupPolicyDecisionPolicy = {
 
   fromSDK(object: MsgUpdateGroupPolicyDecisionPolicySDKType): MsgUpdateGroupPolicyDecisionPolicy {
     return {
-      admin: isSet(object.admin) ? object.admin : "",
-      address: isSet(object.address) ? object.address : "",
+      admin: isSet(object.admin) ? object.admin : undefined,
+      address: isSet(object.address) ? object.address : undefined,
       decisionPolicy: isSet(object.decision_policy) ? Any.fromSDK(object.decision_policy) : undefined
     };
   },
@@ -1986,9 +1986,9 @@ export const MsgUpdateGroupPolicyMetadata = {
 
   fromSDK(object: MsgUpdateGroupPolicyMetadataSDKType): MsgUpdateGroupPolicyMetadata {
     return {
-      admin: isSet(object.admin) ? object.admin : "",
-      address: isSet(object.address) ? object.address : "",
-      metadata: isSet(object.metadata) ? object.metadata : ""
+      admin: isSet(object.admin) ? object.admin : undefined,
+      address: isSet(object.address) ? object.address : undefined,
+      metadata: isSet(object.metadata) ? object.metadata : undefined
     };
   },
 
@@ -2171,9 +2171,9 @@ export const MsgSubmitProposal = {
 
   fromSDK(object: MsgSubmitProposalSDKType): MsgSubmitProposal {
     return {
-      address: isSet(object.address) ? object.address : "",
+      address: isSet(object.address) ? object.address : undefined,
       proposers: Array.isArray(object?.proposers) ? object.proposers.map((e: any) => e) : [],
-      metadata: isSet(object.metadata) ? object.metadata : "",
+      metadata: isSet(object.metadata) ? object.metadata : undefined,
       messages: Array.isArray(object?.messages) ? object.messages.map((e: any) => Any.fromSDK(e)) : [],
       exec: isSet(object.exec) ? execFromJSON(object.exec) : 0
     };
@@ -2260,7 +2260,7 @@ export const MsgSubmitProposalResponse = {
 
   fromSDK(object: MsgSubmitProposalResponseSDKType): MsgSubmitProposalResponse {
     return {
-      proposalId: isSet(object.proposal_id) ? object.proposal_id : Long.UZERO
+      proposalId: isSet(object.proposal_id) ? object.proposal_id : undefined
     };
   },
 
@@ -2341,8 +2341,8 @@ export const MsgWithdrawProposal = {
 
   fromSDK(object: MsgWithdrawProposalSDKType): MsgWithdrawProposal {
     return {
-      proposalId: isSet(object.proposal_id) ? object.proposal_id : Long.UZERO,
-      address: isSet(object.address) ? object.address : ""
+      proposalId: isSet(object.proposal_id) ? object.proposal_id : undefined,
+      address: isSet(object.address) ? object.address : undefined
     };
   },
 
@@ -2512,10 +2512,10 @@ export const MsgVote = {
 
   fromSDK(object: MsgVoteSDKType): MsgVote {
     return {
-      proposalId: isSet(object.proposal_id) ? object.proposal_id : Long.UZERO,
-      voter: isSet(object.voter) ? object.voter : "",
+      proposalId: isSet(object.proposal_id) ? object.proposal_id : undefined,
+      voter: isSet(object.voter) ? object.voter : undefined,
       option: isSet(object.option) ? voteOptionFromJSON(object.option) : 0,
-      metadata: isSet(object.metadata) ? object.metadata : "",
+      metadata: isSet(object.metadata) ? object.metadata : undefined,
       exec: isSet(object.exec) ? execFromJSON(object.exec) : 0
     };
   },
@@ -2653,8 +2653,8 @@ export const MsgExec = {
 
   fromSDK(object: MsgExecSDKType): MsgExec {
     return {
-      proposalId: isSet(object.proposal_id) ? object.proposal_id : Long.UZERO,
-      signer: isSet(object.signer) ? object.signer : ""
+      proposalId: isSet(object.proposal_id) ? object.proposal_id : undefined,
+      signer: isSet(object.signer) ? object.signer : undefined
     };
   },
 
@@ -2788,8 +2788,8 @@ export const MsgLeaveGroup = {
 
   fromSDK(object: MsgLeaveGroupSDKType): MsgLeaveGroup {
     return {
-      address: isSet(object.address) ? object.address : "",
-      groupId: isSet(object.group_id) ? object.group_id : Long.UZERO
+      address: isSet(object.address) ? object.address : undefined,
+      groupId: isSet(object.group_id) ? object.group_id : undefined
     };
   },
 

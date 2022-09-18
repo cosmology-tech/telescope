@@ -132,7 +132,7 @@ export const QueryGaugeIdsRequest = {
 
   fromSDK(object: QueryGaugeIdsRequestSDKType): QueryGaugeIdsRequest {
     return {
-      poolId: isSet(object.pool_id) ? object.pool_id : Long.UZERO
+      poolId: isSet(object.pool_id) ? object.pool_id : undefined
     };
   },
 
@@ -294,7 +294,7 @@ export const QueryGaugeIdsResponse_GaugeIdWithDuration = {
 
   fromSDK(object: QueryGaugeIdsResponse_GaugeIdWithDurationSDKType): QueryGaugeIdsResponse_GaugeIdWithDuration {
     return {
-      gaugeId: isSet(object.gauge_id) ? object.gauge_id : Long.UZERO,
+      gaugeId: isSet(object.gauge_id) ? object.gauge_id : undefined,
       duration: isSet(object.duration) ? Duration.fromSDK(object.duration) : undefined
     };
   },
@@ -816,9 +816,9 @@ export const IncentivizedPool = {
 
   fromSDK(object: IncentivizedPoolSDKType): IncentivizedPool {
     return {
-      poolId: isSet(object.pool_id) ? object.pool_id : Long.UZERO,
+      poolId: isSet(object.pool_id) ? object.pool_id : undefined,
       lockableDuration: isSet(object.lockable_duration) ? Duration.fromSDK(object.lockable_duration) : undefined,
-      gaugeId: isSet(object.gauge_id) ? object.gauge_id : Long.UZERO
+      gaugeId: isSet(object.gauge_id) ? object.gauge_id : undefined
     };
   },
 

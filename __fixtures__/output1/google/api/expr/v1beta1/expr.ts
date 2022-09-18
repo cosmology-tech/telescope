@@ -613,7 +613,7 @@ export const ParsedExpr = {
     return {
       expr: isSet(object.expr) ? Expr.fromSDK(object.expr) : undefined,
       sourceInfo: isSet(object.source_info) ? SourceInfo.fromSDK(object.source_info) : undefined,
-      syntaxVersion: isSet(object.syntax_version) ? object.syntax_version : ""
+      syntaxVersion: isSet(object.syntax_version) ? object.syntax_version : undefined
     };
   },
 
@@ -768,7 +768,7 @@ export const Expr = {
 
   fromSDK(object: ExprSDKType): Expr {
     return {
-      id: isSet(object.id) ? object.id : 0,
+      id: isSet(object.id) ? object.id : undefined,
       literalExpr: isSet(object.literal_expr) ? Literal.fromSDK(object.literal_expr) : undefined,
       identExpr: isSet(object.ident_expr) ? Expr_Ident.fromSDK(object.ident_expr) : undefined,
       selectExpr: isSet(object.select_expr) ? Expr_Select.fromSDK(object.select_expr) : undefined,
@@ -851,7 +851,7 @@ export const Expr_Ident = {
 
   fromSDK(object: Expr_IdentSDKType): Expr_Ident {
     return {
-      name: isSet(object.name) ? object.name : ""
+      name: isSet(object.name) ? object.name : undefined
     };
   },
 
@@ -945,8 +945,8 @@ export const Expr_Select = {
   fromSDK(object: Expr_SelectSDKType): Expr_Select {
     return {
       operand: isSet(object.operand) ? Expr.fromSDK(object.operand) : undefined,
-      field: isSet(object.field) ? object.field : "",
-      testOnly: isSet(object.test_only) ? object.test_only : false
+      field: isSet(object.field) ? object.field : undefined,
+      testOnly: isSet(object.test_only) ? object.test_only : undefined
     };
   },
 
@@ -1048,7 +1048,7 @@ export const Expr_Call = {
   fromSDK(object: Expr_CallSDKType): Expr_Call {
     return {
       target: isSet(object.target) ? Expr.fromSDK(object.target) : undefined,
-      function: isSet(object.function) ? object.function : "",
+      function: isSet(object.function) ? object.function : undefined,
       args: Array.isArray(object?.args) ? object.args.map((e: any) => Expr.fromSDK(e)) : []
     };
   },
@@ -1225,7 +1225,7 @@ export const Expr_CreateStruct = {
 
   fromSDK(object: Expr_CreateStructSDKType): Expr_CreateStruct {
     return {
-      type: isSet(object.type) ? object.type : "",
+      type: isSet(object.type) ? object.type : undefined,
       entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => Expr_CreateStruct_Entry.fromSDK(e)) : []
     };
   },
@@ -1338,7 +1338,7 @@ export const Expr_CreateStruct_Entry = {
 
   fromSDK(object: Expr_CreateStruct_EntrySDKType): Expr_CreateStruct_Entry {
     return {
-      id: isSet(object.id) ? object.id : 0,
+      id: isSet(object.id) ? object.id : undefined,
       fieldKey: isSet(object.field_key) ? object.field_key : undefined,
       mapKey: isSet(object.map_key) ? Expr.fromSDK(object.map_key) : undefined,
       value: isSet(object.value) ? Expr.fromSDK(object.value) : undefined
@@ -1485,9 +1485,9 @@ export const Expr_Comprehension = {
 
   fromSDK(object: Expr_ComprehensionSDKType): Expr_Comprehension {
     return {
-      iterVar: isSet(object.iter_var) ? object.iter_var : "",
+      iterVar: isSet(object.iter_var) ? object.iter_var : undefined,
       iterRange: isSet(object.iter_range) ? Expr.fromSDK(object.iter_range) : undefined,
-      accuVar: isSet(object.accu_var) ? object.accu_var : "",
+      accuVar: isSet(object.accu_var) ? object.accu_var : undefined,
       accuInit: isSet(object.accu_init) ? Expr.fromSDK(object.accu_init) : undefined,
       loopCondition: isSet(object.loop_condition) ? Expr.fromSDK(object.loop_condition) : undefined,
       loopStep: isSet(object.loop_step) ? Expr.fromSDK(object.loop_step) : undefined,

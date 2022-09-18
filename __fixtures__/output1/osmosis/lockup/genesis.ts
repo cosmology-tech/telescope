@@ -109,7 +109,7 @@ export const GenesisState = {
 
   fromSDK(object: GenesisStateSDKType): GenesisState {
     return {
-      lastLockId: isSet(object.last_lock_id) ? object.last_lock_id : Long.UZERO,
+      lastLockId: isSet(object.last_lock_id) ? object.last_lock_id : undefined,
       locks: Array.isArray(object?.locks) ? object.locks.map((e: any) => PeriodLock.fromSDK(e)) : [],
       syntheticLocks: Array.isArray(object?.synthetic_locks) ? object.synthetic_locks.map((e: any) => SyntheticLock.fromSDK(e)) : []
     };

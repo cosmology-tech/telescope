@@ -269,10 +269,10 @@ export const Params = {
 
   fromSDK(object: ParamsSDKType): Params {
     return {
-      enableIncentives: isSet(object.enable_incentives) ? object.enable_incentives : false,
-      allocationLimit: isSet(object.allocation_limit) ? object.allocation_limit : "",
-      incentivesEpochIdentifier: isSet(object.incentives_epoch_identifier) ? object.incentives_epoch_identifier : "",
-      rewardScaler: isSet(object.reward_scaler) ? object.reward_scaler : ""
+      enableIncentives: isSet(object.enable_incentives) ? object.enable_incentives : undefined,
+      allocationLimit: isSet(object.allocation_limit) ? object.allocation_limit : undefined,
+      incentivesEpochIdentifier: isSet(object.incentives_epoch_identifier) ? object.incentives_epoch_identifier : undefined,
+      rewardScaler: isSet(object.reward_scaler) ? object.reward_scaler : undefined
     };
   },
 

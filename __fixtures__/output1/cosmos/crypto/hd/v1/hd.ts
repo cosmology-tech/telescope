@@ -149,11 +149,11 @@ export const BIP44Params = {
 
   fromSDK(object: BIP44ParamsSDKType): BIP44Params {
     return {
-      purpose: isSet(object.purpose) ? object.purpose : 0,
-      coinType: isSet(object.coin_type) ? object.coin_type : 0,
-      account: isSet(object.account) ? object.account : 0,
-      change: isSet(object.change) ? object.change : false,
-      addressIndex: isSet(object.address_index) ? object.address_index : 0
+      purpose: isSet(object.purpose) ? object.purpose : undefined,
+      coinType: isSet(object.coin_type) ? object.coin_type : undefined,
+      account: isSet(object.account) ? object.account : undefined,
+      change: isSet(object.change) ? object.change : undefined,
+      addressIndex: isSet(object.address_index) ? object.address_index : undefined
     };
   },
 

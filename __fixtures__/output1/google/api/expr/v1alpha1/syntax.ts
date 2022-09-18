@@ -941,7 +941,7 @@ export const Expr = {
 
   fromSDK(object: ExprSDKType): Expr {
     return {
-      id: isSet(object.id) ? object.id : Long.ZERO,
+      id: isSet(object.id) ? object.id : undefined,
       constExpr: isSet(object.const_expr) ? Constant.fromSDK(object.const_expr) : undefined,
       identExpr: isSet(object.ident_expr) ? Expr_Ident.fromSDK(object.ident_expr) : undefined,
       selectExpr: isSet(object.select_expr) ? Expr_Select.fromSDK(object.select_expr) : undefined,
@@ -1024,7 +1024,7 @@ export const Expr_Ident = {
 
   fromSDK(object: Expr_IdentSDKType): Expr_Ident {
     return {
-      name: isSet(object.name) ? object.name : ""
+      name: isSet(object.name) ? object.name : undefined
     };
   },
 
@@ -1118,8 +1118,8 @@ export const Expr_Select = {
   fromSDK(object: Expr_SelectSDKType): Expr_Select {
     return {
       operand: isSet(object.operand) ? Expr.fromSDK(object.operand) : undefined,
-      field: isSet(object.field) ? object.field : "",
-      testOnly: isSet(object.test_only) ? object.test_only : false
+      field: isSet(object.field) ? object.field : undefined,
+      testOnly: isSet(object.test_only) ? object.test_only : undefined
     };
   },
 
@@ -1221,7 +1221,7 @@ export const Expr_Call = {
   fromSDK(object: Expr_CallSDKType): Expr_Call {
     return {
       target: isSet(object.target) ? Expr.fromSDK(object.target) : undefined,
-      function: isSet(object.function) ? object.function : "",
+      function: isSet(object.function) ? object.function : undefined,
       args: Array.isArray(object?.args) ? object.args.map((e: any) => Expr.fromSDK(e)) : []
     };
   },
@@ -1398,7 +1398,7 @@ export const Expr_CreateStruct = {
 
   fromSDK(object: Expr_CreateStructSDKType): Expr_CreateStruct {
     return {
-      messageName: isSet(object.message_name) ? object.message_name : "",
+      messageName: isSet(object.message_name) ? object.message_name : undefined,
       entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => Expr_CreateStruct_Entry.fromSDK(e)) : []
     };
   },
@@ -1511,7 +1511,7 @@ export const Expr_CreateStruct_Entry = {
 
   fromSDK(object: Expr_CreateStruct_EntrySDKType): Expr_CreateStruct_Entry {
     return {
-      id: isSet(object.id) ? object.id : Long.ZERO,
+      id: isSet(object.id) ? object.id : undefined,
       fieldKey: isSet(object.field_key) ? object.field_key : undefined,
       mapKey: isSet(object.map_key) ? Expr.fromSDK(object.map_key) : undefined,
       value: isSet(object.value) ? Expr.fromSDK(object.value) : undefined
@@ -1658,9 +1658,9 @@ export const Expr_Comprehension = {
 
   fromSDK(object: Expr_ComprehensionSDKType): Expr_Comprehension {
     return {
-      iterVar: isSet(object.iter_var) ? object.iter_var : "",
+      iterVar: isSet(object.iter_var) ? object.iter_var : undefined,
       iterRange: isSet(object.iter_range) ? Expr.fromSDK(object.iter_range) : undefined,
-      accuVar: isSet(object.accu_var) ? object.accu_var : "",
+      accuVar: isSet(object.accu_var) ? object.accu_var : undefined,
       accuInit: isSet(object.accu_init) ? Expr.fromSDK(object.accu_init) : undefined,
       loopCondition: isSet(object.loop_condition) ? Expr.fromSDK(object.loop_condition) : undefined,
       loopStep: isSet(object.loop_step) ? Expr.fromSDK(object.loop_step) : undefined,
@@ -1932,8 +1932,8 @@ export const SourceInfo_PositionsEntry = {
 
   fromSDK(object: SourceInfo_PositionsEntrySDKType): SourceInfo_PositionsEntry {
     return {
-      key: isSet(object.key) ? object.key : Long.ZERO,
-      value: isSet(object.value) ? object.value : 0
+      key: isSet(object.key) ? object.key : undefined,
+      value: isSet(object.value) ? object.value : undefined
     };
   },
 
@@ -2015,7 +2015,7 @@ export const SourceInfo_MacroCallsEntry = {
 
   fromSDK(object: SourceInfo_MacroCallsEntrySDKType): SourceInfo_MacroCallsEntry {
     return {
-      key: isSet(object.key) ? object.key : Long.ZERO,
+      key: isSet(object.key) ? object.key : undefined,
       value: isSet(object.value) ? Expr.fromSDK(object.value) : undefined
     };
   },
@@ -2206,8 +2206,8 @@ export const SourceInfo = {
 
   fromSDK(object: SourceInfoSDKType): SourceInfo {
     return {
-      syntaxVersion: isSet(object.syntax_version) ? object.syntax_version : "",
-      location: isSet(object.location) ? object.location : "",
+      syntaxVersion: isSet(object.syntax_version) ? object.syntax_version : undefined,
+      location: isSet(object.location) ? object.location : undefined,
       lineOffsets: Array.isArray(object?.line_offsets) ? object.line_offsets.map((e: any) => e) : [],
       positions: isObject(object.positions) ? Object.entries(object.positions).reduce<{
         [key: Long]: number;
@@ -2349,10 +2349,10 @@ export const SourcePosition = {
 
   fromSDK(object: SourcePositionSDKType): SourcePosition {
     return {
-      location: isSet(object.location) ? object.location : "",
-      offset: isSet(object.offset) ? object.offset : 0,
-      line: isSet(object.line) ? object.line : 0,
-      column: isSet(object.column) ? object.column : 0
+      location: isSet(object.location) ? object.location : undefined,
+      offset: isSet(object.offset) ? object.offset : undefined,
+      line: isSet(object.line) ? object.line : undefined,
+      column: isSet(object.column) ? object.column : undefined
     };
   },
 

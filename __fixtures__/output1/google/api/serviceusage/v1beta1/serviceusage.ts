@@ -1298,7 +1298,7 @@ export const EnableServiceRequest = {
 
   fromSDK(object: EnableServiceRequestSDKType): EnableServiceRequest {
     return {
-      name: isSet(object.name) ? object.name : ""
+      name: isSet(object.name) ? object.name : undefined
     };
   },
 
@@ -1367,7 +1367,7 @@ export const DisableServiceRequest = {
 
   fromSDK(object: DisableServiceRequestSDKType): DisableServiceRequest {
     return {
-      name: isSet(object.name) ? object.name : ""
+      name: isSet(object.name) ? object.name : undefined
     };
   },
 
@@ -1436,7 +1436,7 @@ export const GetServiceRequest = {
 
   fromSDK(object: GetServiceRequestSDKType): GetServiceRequest {
     return {
-      name: isSet(object.name) ? object.name : ""
+      name: isSet(object.name) ? object.name : undefined
     };
   },
 
@@ -1541,10 +1541,10 @@ export const ListServicesRequest = {
 
   fromSDK(object: ListServicesRequestSDKType): ListServicesRequest {
     return {
-      parent: isSet(object.parent) ? object.parent : "",
-      pageSize: isSet(object.page_size) ? object.page_size : 0,
-      pageToken: isSet(object.page_token) ? object.page_token : "",
-      filter: isSet(object.filter) ? object.filter : ""
+      parent: isSet(object.parent) ? object.parent : undefined,
+      pageSize: isSet(object.page_size) ? object.page_size : undefined,
+      pageToken: isSet(object.page_token) ? object.page_token : undefined,
+      filter: isSet(object.filter) ? object.filter : undefined
     };
   },
 
@@ -1635,7 +1635,7 @@ export const ListServicesResponse = {
   fromSDK(object: ListServicesResponseSDKType): ListServicesResponse {
     return {
       services: Array.isArray(object?.services) ? object.services.map((e: any) => Service.fromSDK(e)) : [],
-      nextPageToken: isSet(object.next_page_token) ? object.next_page_token : ""
+      nextPageToken: isSet(object.next_page_token) ? object.next_page_token : undefined
     };
   },
 
@@ -1729,7 +1729,7 @@ export const BatchEnableServicesRequest = {
 
   fromSDK(object: BatchEnableServicesRequestSDKType): BatchEnableServicesRequest {
     return {
-      parent: isSet(object.parent) ? object.parent : "",
+      parent: isSet(object.parent) ? object.parent : undefined,
       serviceIds: Array.isArray(object?.service_ids) ? object.service_ids.map((e: any) => e) : []
     };
   },
@@ -1842,9 +1842,9 @@ export const ListConsumerQuotaMetricsRequest = {
 
   fromSDK(object: ListConsumerQuotaMetricsRequestSDKType): ListConsumerQuotaMetricsRequest {
     return {
-      parent: isSet(object.parent) ? object.parent : "",
-      pageSize: isSet(object.page_size) ? object.page_size : 0,
-      pageToken: isSet(object.page_token) ? object.page_token : "",
+      parent: isSet(object.parent) ? object.parent : undefined,
+      pageSize: isSet(object.page_size) ? object.page_size : undefined,
+      pageToken: isSet(object.page_token) ? object.page_token : undefined,
       view: isSet(object.view) ? quotaViewFromJSON(object.view) : 0
     };
   },
@@ -1936,7 +1936,7 @@ export const ListConsumerQuotaMetricsResponse = {
   fromSDK(object: ListConsumerQuotaMetricsResponseSDKType): ListConsumerQuotaMetricsResponse {
     return {
       metrics: Array.isArray(object?.metrics) ? object.metrics.map((e: any) => ConsumerQuotaMetric.fromSDK(e)) : [],
-      nextPageToken: isSet(object.next_page_token) ? object.next_page_token : ""
+      nextPageToken: isSet(object.next_page_token) ? object.next_page_token : undefined
     };
   },
 
@@ -2024,7 +2024,7 @@ export const GetConsumerQuotaMetricRequest = {
 
   fromSDK(object: GetConsumerQuotaMetricRequestSDKType): GetConsumerQuotaMetricRequest {
     return {
-      name: isSet(object.name) ? object.name : "",
+      name: isSet(object.name) ? object.name : undefined,
       view: isSet(object.view) ? quotaViewFromJSON(object.view) : 0
     };
   },
@@ -2107,7 +2107,7 @@ export const GetConsumerQuotaLimitRequest = {
 
   fromSDK(object: GetConsumerQuotaLimitRequestSDKType): GetConsumerQuotaLimitRequest {
     return {
-      name: isSet(object.name) ? object.name : "",
+      name: isSet(object.name) ? object.name : undefined,
       view: isSet(object.view) ? quotaViewFromJSON(object.view) : 0
     };
   },
@@ -2232,9 +2232,9 @@ export const CreateAdminOverrideRequest = {
 
   fromSDK(object: CreateAdminOverrideRequestSDKType): CreateAdminOverrideRequest {
     return {
-      parent: isSet(object.parent) ? object.parent : "",
+      parent: isSet(object.parent) ? object.parent : undefined,
       override: isSet(object.override) ? QuotaOverride.fromSDK(object.override) : undefined,
-      force: isSet(object.force) ? object.force : false,
+      force: isSet(object.force) ? object.force : undefined,
       forceOnly: Array.isArray(object?.force_only) ? object.force_only.map((e: any) => quotaSafetyCheckFromJSON(e)) : []
     };
   },
@@ -2379,9 +2379,9 @@ export const UpdateAdminOverrideRequest = {
 
   fromSDK(object: UpdateAdminOverrideRequestSDKType): UpdateAdminOverrideRequest {
     return {
-      name: isSet(object.name) ? object.name : "",
+      name: isSet(object.name) ? object.name : undefined,
       override: isSet(object.override) ? QuotaOverride.fromSDK(object.override) : undefined,
-      force: isSet(object.force) ? object.force : false,
+      force: isSet(object.force) ? object.force : undefined,
       updateMask: isSet(object.update_mask) ? FieldMask.fromSDK(object.update_mask) : undefined,
       forceOnly: Array.isArray(object?.force_only) ? object.force_only.map((e: any) => quotaSafetyCheckFromJSON(e)) : []
     };
@@ -2504,8 +2504,8 @@ export const DeleteAdminOverrideRequest = {
 
   fromSDK(object: DeleteAdminOverrideRequestSDKType): DeleteAdminOverrideRequest {
     return {
-      name: isSet(object.name) ? object.name : "",
-      force: isSet(object.force) ? object.force : false,
+      name: isSet(object.name) ? object.name : undefined,
+      force: isSet(object.force) ? object.force : undefined,
       forceOnly: Array.isArray(object?.force_only) ? object.force_only.map((e: any) => quotaSafetyCheckFromJSON(e)) : []
     };
   },
@@ -2607,9 +2607,9 @@ export const ListAdminOverridesRequest = {
 
   fromSDK(object: ListAdminOverridesRequestSDKType): ListAdminOverridesRequest {
     return {
-      parent: isSet(object.parent) ? object.parent : "",
-      pageSize: isSet(object.page_size) ? object.page_size : 0,
-      pageToken: isSet(object.page_token) ? object.page_token : ""
+      parent: isSet(object.parent) ? object.parent : undefined,
+      pageSize: isSet(object.page_size) ? object.page_size : undefined,
+      pageToken: isSet(object.page_token) ? object.page_token : undefined
     };
   },
 
@@ -2699,7 +2699,7 @@ export const ListAdminOverridesResponse = {
   fromSDK(object: ListAdminOverridesResponseSDKType): ListAdminOverridesResponse {
     return {
       overrides: Array.isArray(object?.overrides) ? object.overrides.map((e: any) => QuotaOverride.fromSDK(e)) : [],
-      nextPageToken: isSet(object.next_page_token) ? object.next_page_token : ""
+      nextPageToken: isSet(object.next_page_token) ? object.next_page_token : undefined
     };
   },
 
@@ -2910,9 +2910,9 @@ export const ImportAdminOverridesRequest = {
 
   fromSDK(object: ImportAdminOverridesRequestSDKType): ImportAdminOverridesRequest {
     return {
-      parent: isSet(object.parent) ? object.parent : "",
+      parent: isSet(object.parent) ? object.parent : undefined,
       inlineSource: isSet(object.inline_source) ? OverrideInlineSource.fromSDK(object.inline_source) : undefined,
-      force: isSet(object.force) ? object.force : false,
+      force: isSet(object.force) ? object.force : undefined,
       forceOnly: Array.isArray(object?.force_only) ? object.force_only.map((e: any) => quotaSafetyCheckFromJSON(e)) : []
     };
   },
@@ -3178,9 +3178,9 @@ export const CreateConsumerOverrideRequest = {
 
   fromSDK(object: CreateConsumerOverrideRequestSDKType): CreateConsumerOverrideRequest {
     return {
-      parent: isSet(object.parent) ? object.parent : "",
+      parent: isSet(object.parent) ? object.parent : undefined,
       override: isSet(object.override) ? QuotaOverride.fromSDK(object.override) : undefined,
-      force: isSet(object.force) ? object.force : false,
+      force: isSet(object.force) ? object.force : undefined,
       forceOnly: Array.isArray(object?.force_only) ? object.force_only.map((e: any) => quotaSafetyCheckFromJSON(e)) : []
     };
   },
@@ -3325,9 +3325,9 @@ export const UpdateConsumerOverrideRequest = {
 
   fromSDK(object: UpdateConsumerOverrideRequestSDKType): UpdateConsumerOverrideRequest {
     return {
-      name: isSet(object.name) ? object.name : "",
+      name: isSet(object.name) ? object.name : undefined,
       override: isSet(object.override) ? QuotaOverride.fromSDK(object.override) : undefined,
-      force: isSet(object.force) ? object.force : false,
+      force: isSet(object.force) ? object.force : undefined,
       updateMask: isSet(object.update_mask) ? FieldMask.fromSDK(object.update_mask) : undefined,
       forceOnly: Array.isArray(object?.force_only) ? object.force_only.map((e: any) => quotaSafetyCheckFromJSON(e)) : []
     };
@@ -3450,8 +3450,8 @@ export const DeleteConsumerOverrideRequest = {
 
   fromSDK(object: DeleteConsumerOverrideRequestSDKType): DeleteConsumerOverrideRequest {
     return {
-      name: isSet(object.name) ? object.name : "",
-      force: isSet(object.force) ? object.force : false,
+      name: isSet(object.name) ? object.name : undefined,
+      force: isSet(object.force) ? object.force : undefined,
       forceOnly: Array.isArray(object?.force_only) ? object.force_only.map((e: any) => quotaSafetyCheckFromJSON(e)) : []
     };
   },
@@ -3553,9 +3553,9 @@ export const ListConsumerOverridesRequest = {
 
   fromSDK(object: ListConsumerOverridesRequestSDKType): ListConsumerOverridesRequest {
     return {
-      parent: isSet(object.parent) ? object.parent : "",
-      pageSize: isSet(object.page_size) ? object.page_size : 0,
-      pageToken: isSet(object.page_token) ? object.page_token : ""
+      parent: isSet(object.parent) ? object.parent : undefined,
+      pageSize: isSet(object.page_size) ? object.page_size : undefined,
+      pageToken: isSet(object.page_token) ? object.page_token : undefined
     };
   },
 
@@ -3645,7 +3645,7 @@ export const ListConsumerOverridesResponse = {
   fromSDK(object: ListConsumerOverridesResponseSDKType): ListConsumerOverridesResponse {
     return {
       overrides: Array.isArray(object?.overrides) ? object.overrides.map((e: any) => QuotaOverride.fromSDK(e)) : [],
-      nextPageToken: isSet(object.next_page_token) ? object.next_page_token : ""
+      nextPageToken: isSet(object.next_page_token) ? object.next_page_token : undefined
     };
   },
 
@@ -3856,9 +3856,9 @@ export const ImportConsumerOverridesRequest = {
 
   fromSDK(object: ImportConsumerOverridesRequestSDKType): ImportConsumerOverridesRequest {
     return {
-      parent: isSet(object.parent) ? object.parent : "",
+      parent: isSet(object.parent) ? object.parent : undefined,
       inlineSource: isSet(object.inline_source) ? OverrideInlineSource.fromSDK(object.inline_source) : undefined,
-      force: isSet(object.force) ? object.force : false,
+      force: isSet(object.force) ? object.force : undefined,
       forceOnly: Array.isArray(object?.force_only) ? object.force_only.map((e: any) => quotaSafetyCheckFromJSON(e)) : []
     };
   },
@@ -4359,7 +4359,7 @@ export const GenerateServiceIdentityRequest = {
 
   fromSDK(object: GenerateServiceIdentityRequestSDKType): GenerateServiceIdentityRequest {
     return {
-      parent: isSet(object.parent) ? object.parent : ""
+      parent: isSet(object.parent) ? object.parent : undefined
     };
   },
 

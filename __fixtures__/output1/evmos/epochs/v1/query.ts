@@ -251,7 +251,7 @@ export const QueryCurrentEpochRequest = {
 
   fromSDK(object: QueryCurrentEpochRequestSDKType): QueryCurrentEpochRequest {
     return {
-      identifier: isSet(object.identifier) ? object.identifier : ""
+      identifier: isSet(object.identifier) ? object.identifier : undefined
     };
   },
 
@@ -320,7 +320,7 @@ export const QueryCurrentEpochResponse = {
 
   fromSDK(object: QueryCurrentEpochResponseSDKType): QueryCurrentEpochResponse {
     return {
-      currentEpoch: isSet(object.current_epoch) ? object.current_epoch : Long.ZERO
+      currentEpoch: isSet(object.current_epoch) ? object.current_epoch : undefined
     };
   },
 

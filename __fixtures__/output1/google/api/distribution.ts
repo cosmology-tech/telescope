@@ -577,9 +577,9 @@ export const Distribution = {
 
   fromSDK(object: DistributionSDKType): Distribution {
     return {
-      count: isSet(object.count) ? object.count : Long.ZERO,
-      mean: isSet(object.mean) ? object.mean : 0,
-      sumOfSquaredDeviation: isSet(object.sum_of_squared_deviation) ? object.sum_of_squared_deviation : 0,
+      count: isSet(object.count) ? object.count : undefined,
+      mean: isSet(object.mean) ? object.mean : undefined,
+      sumOfSquaredDeviation: isSet(object.sum_of_squared_deviation) ? object.sum_of_squared_deviation : undefined,
       range: isSet(object.range) ? Distribution_Range.fromSDK(object.range) : undefined,
       bucketOptions: isSet(object.bucket_options) ? Distribution_BucketOptions.fromSDK(object.bucket_options) : undefined,
       bucketCounts: Array.isArray(object?.bucket_counts) ? object.bucket_counts.map((e: any) => e) : [],
@@ -681,8 +681,8 @@ export const Distribution_Range = {
 
   fromSDK(object: Distribution_RangeSDKType): Distribution_Range {
     return {
-      min: isSet(object.min) ? object.min : 0,
-      max: isSet(object.max) ? object.max : 0
+      min: isSet(object.min) ? object.min : undefined,
+      max: isSet(object.max) ? object.max : undefined
     };
   },
 
@@ -873,9 +873,9 @@ export const Distribution_BucketOptions_Linear = {
 
   fromSDK(object: Distribution_BucketOptions_LinearSDKType): Distribution_BucketOptions_Linear {
     return {
-      numFiniteBuckets: isSet(object.num_finite_buckets) ? object.num_finite_buckets : 0,
-      width: isSet(object.width) ? object.width : 0,
-      offset: isSet(object.offset) ? object.offset : 0
+      numFiniteBuckets: isSet(object.num_finite_buckets) ? object.num_finite_buckets : undefined,
+      width: isSet(object.width) ? object.width : undefined,
+      offset: isSet(object.offset) ? object.offset : undefined
     };
   },
 
@@ -970,9 +970,9 @@ export const Distribution_BucketOptions_Exponential = {
 
   fromSDK(object: Distribution_BucketOptions_ExponentialSDKType): Distribution_BucketOptions_Exponential {
     return {
-      numFiniteBuckets: isSet(object.num_finite_buckets) ? object.num_finite_buckets : 0,
-      growthFactor: isSet(object.growth_factor) ? object.growth_factor : 0,
-      scale: isSet(object.scale) ? object.scale : 0
+      numFiniteBuckets: isSet(object.num_finite_buckets) ? object.num_finite_buckets : undefined,
+      growthFactor: isSet(object.growth_factor) ? object.growth_factor : undefined,
+      scale: isSet(object.scale) ? object.scale : undefined
     };
   },
 
@@ -1166,7 +1166,7 @@ export const Distribution_Exemplar = {
 
   fromSDK(object: Distribution_ExemplarSDKType): Distribution_Exemplar {
     return {
-      value: isSet(object.value) ? object.value : 0,
+      value: isSet(object.value) ? object.value : undefined,
       timestamp: isSet(object.timestamp) ? Timestamp.fromSDK(object.timestamp) : undefined,
       attachments: Array.isArray(object?.attachments) ? object.attachments.map((e: any) => Any.fromSDK(e)) : []
     };

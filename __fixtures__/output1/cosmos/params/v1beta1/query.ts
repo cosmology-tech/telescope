@@ -148,8 +148,8 @@ export const QueryParamsRequest = {
 
   fromSDK(object: QueryParamsRequestSDKType): QueryParamsRequest {
     return {
-      subspace: isSet(object.subspace) ? object.subspace : "",
-      key: isSet(object.key) ? object.key : ""
+      subspace: isSet(object.subspace) ? object.subspace : undefined,
+      key: isSet(object.key) ? object.key : undefined
     };
   },
 
@@ -439,7 +439,7 @@ export const Subspace = {
 
   fromSDK(object: SubspaceSDKType): Subspace {
     return {
-      subspace: isSet(object.subspace) ? object.subspace : "",
+      subspace: isSet(object.subspace) ? object.subspace : undefined,
       keys: Array.isArray(object?.keys) ? object.keys.map((e: any) => e) : []
     };
   },

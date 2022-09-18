@@ -152,10 +152,10 @@ export const BaseAccount = {
 
   fromSDK(object: BaseAccountSDKType): BaseAccount {
     return {
-      address: isSet(object.address) ? object.address : "",
+      address: isSet(object.address) ? object.address : undefined,
       pubKey: isSet(object.pub_key) ? Any.fromSDK(object.pub_key) : undefined,
-      accountNumber: isSet(object.account_number) ? object.account_number : Long.UZERO,
-      sequence: isSet(object.sequence) ? object.sequence : Long.UZERO
+      accountNumber: isSet(object.account_number) ? object.account_number : undefined,
+      sequence: isSet(object.sequence) ? object.sequence : undefined
     };
   },
 
@@ -258,7 +258,7 @@ export const ModuleAccount = {
   fromSDK(object: ModuleAccountSDKType): ModuleAccount {
     return {
       baseAccount: isSet(object.base_account) ? BaseAccount.fromSDK(object.base_account) : undefined,
-      name: isSet(object.name) ? object.name : "",
+      name: isSet(object.name) ? object.name : undefined,
       permissions: Array.isArray(object?.permissions) ? object.permissions.map((e: any) => e) : []
     };
   },
@@ -384,11 +384,11 @@ export const Params = {
 
   fromSDK(object: ParamsSDKType): Params {
     return {
-      maxMemoCharacters: isSet(object.max_memo_characters) ? object.max_memo_characters : Long.UZERO,
-      txSigLimit: isSet(object.tx_sig_limit) ? object.tx_sig_limit : Long.UZERO,
-      txSizeCostPerByte: isSet(object.tx_size_cost_per_byte) ? object.tx_size_cost_per_byte : Long.UZERO,
-      sigVerifyCostEd25519: isSet(object.sig_verify_cost_ed25519) ? object.sig_verify_cost_ed25519 : Long.UZERO,
-      sigVerifyCostSecp256k1: isSet(object.sig_verify_cost_secp256k1) ? object.sig_verify_cost_secp256k1 : Long.UZERO
+      maxMemoCharacters: isSet(object.max_memo_characters) ? object.max_memo_characters : undefined,
+      txSigLimit: isSet(object.tx_sig_limit) ? object.tx_sig_limit : undefined,
+      txSizeCostPerByte: isSet(object.tx_size_cost_per_byte) ? object.tx_size_cost_per_byte : undefined,
+      sigVerifyCostEd25519: isSet(object.sig_verify_cost_ed25519) ? object.sig_verify_cost_ed25519 : undefined,
+      sigVerifyCostSecp256k1: isSet(object.sig_verify_cost_secp256k1) ? object.sig_verify_cost_secp256k1 : undefined
     };
   },
 

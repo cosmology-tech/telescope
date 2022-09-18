@@ -211,8 +211,8 @@ export const Params = {
 
   fromSDK(object: ParamsSDKType): Params {
     return {
-      enableErc20: isSet(object.enable_erc20) ? object.enable_erc20 : false,
-      enableEvmHook: isSet(object.enable_evm_hook) ? object.enable_evm_hook : false
+      enableErc20: isSet(object.enable_erc20) ? object.enable_erc20 : undefined,
+      enableEvmHook: isSet(object.enable_evm_hook) ? object.enable_evm_hook : undefined
     };
   },
 

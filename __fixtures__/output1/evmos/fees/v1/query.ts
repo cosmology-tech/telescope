@@ -368,7 +368,7 @@ export const QueryDevFeeInfoRequest = {
 
   fromSDK(object: QueryDevFeeInfoRequestSDKType): QueryDevFeeInfoRequest {
     return {
-      contractAddress: isSet(object.contract_address) ? object.contract_address : ""
+      contractAddress: isSet(object.contract_address) ? object.contract_address : undefined
     };
   },
 
@@ -639,7 +639,7 @@ export const QueryDevFeeInfosPerDeployerRequest = {
 
   fromSDK(object: QueryDevFeeInfosPerDeployerRequestSDKType): QueryDevFeeInfosPerDeployerRequest {
     return {
-      deployerAddress: isSet(object.deployer_address) ? object.deployer_address : "",
+      deployerAddress: isSet(object.deployer_address) ? object.deployer_address : undefined,
       pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
     };
   },

@@ -351,7 +351,7 @@ export const AssetTypeRequest = {
 
   fromSDK(object: AssetTypeRequestSDKType): AssetTypeRequest {
     return {
-      denom: isSet(object.denom) ? object.denom : ""
+      denom: isSet(object.denom) ? object.denom : undefined
     };
   },
 
@@ -622,7 +622,7 @@ export const AssetMultiplierRequest = {
 
   fromSDK(object: AssetMultiplierRequestSDKType): AssetMultiplierRequest {
     return {
-      denom: isSet(object.denom) ? object.denom : ""
+      denom: isSet(object.denom) ? object.denom : undefined
     };
   },
 
@@ -796,10 +796,10 @@ export const SuperfluidIntermediaryAccountInfo = {
 
   fromSDK(object: SuperfluidIntermediaryAccountInfoSDKType): SuperfluidIntermediaryAccountInfo {
     return {
-      denom: isSet(object.denom) ? object.denom : "",
-      valAddr: isSet(object.val_addr) ? object.val_addr : "",
-      gaugeId: isSet(object.gauge_id) ? object.gauge_id : Long.UZERO,
-      address: isSet(object.address) ? object.address : ""
+      denom: isSet(object.denom) ? object.denom : undefined,
+      valAddr: isSet(object.val_addr) ? object.val_addr : undefined,
+      gaugeId: isSet(object.gauge_id) ? object.gauge_id : undefined,
+      address: isSet(object.address) ? object.address : undefined
     };
   },
 
@@ -1035,7 +1035,7 @@ export const ConnectedIntermediaryAccountRequest = {
 
   fromSDK(object: ConnectedIntermediaryAccountRequestSDKType): ConnectedIntermediaryAccountRequest {
     return {
-      lockId: isSet(object.lock_id) ? object.lock_id : Long.UZERO
+      lockId: isSet(object.lock_id) ? object.lock_id : undefined
     };
   },
 
@@ -1225,7 +1225,7 @@ export const TotalSuperfluidDelegationsResponse = {
 
   fromSDK(object: TotalSuperfluidDelegationsResponseSDKType): TotalSuperfluidDelegationsResponse {
     return {
-      totalDelegations: isSet(object.totalDelegations) ? object.totalDelegations : ""
+      totalDelegations: isSet(object.totalDelegations) ? object.totalDelegations : undefined
     };
   },
 
@@ -1318,9 +1318,9 @@ export const SuperfluidDelegationAmountRequest = {
 
   fromSDK(object: SuperfluidDelegationAmountRequestSDKType): SuperfluidDelegationAmountRequest {
     return {
-      delegatorAddress: isSet(object.delegator_address) ? object.delegator_address : "",
-      validatorAddress: isSet(object.validator_address) ? object.validator_address : "",
-      denom: isSet(object.denom) ? object.denom : ""
+      delegatorAddress: isSet(object.delegator_address) ? object.delegator_address : undefined,
+      validatorAddress: isSet(object.validator_address) ? object.validator_address : undefined,
+      denom: isSet(object.denom) ? object.denom : undefined
     };
   },
 
@@ -1472,7 +1472,7 @@ export const SuperfluidDelegationsByDelegatorRequest = {
 
   fromSDK(object: SuperfluidDelegationsByDelegatorRequestSDKType): SuperfluidDelegationsByDelegatorRequest {
     return {
-      delegatorAddress: isSet(object.delegator_address) ? object.delegator_address : ""
+      delegatorAddress: isSet(object.delegator_address) ? object.delegator_address : undefined
     };
   },
 
@@ -1672,8 +1672,8 @@ export const SuperfluidUndelegationsByDelegatorRequest = {
 
   fromSDK(object: SuperfluidUndelegationsByDelegatorRequestSDKType): SuperfluidUndelegationsByDelegatorRequest {
     return {
-      delegatorAddress: isSet(object.delegator_address) ? object.delegator_address : "",
-      denom: isSet(object.denom) ? object.denom : ""
+      delegatorAddress: isSet(object.delegator_address) ? object.delegator_address : undefined,
+      denom: isSet(object.denom) ? object.denom : undefined
     };
   },
 
@@ -1884,8 +1884,8 @@ export const SuperfluidDelegationsByValidatorDenomRequest = {
 
   fromSDK(object: SuperfluidDelegationsByValidatorDenomRequestSDKType): SuperfluidDelegationsByValidatorDenomRequest {
     return {
-      validatorAddress: isSet(object.validator_address) ? object.validator_address : "",
-      denom: isSet(object.denom) ? object.denom : ""
+      validatorAddress: isSet(object.validator_address) ? object.validator_address : undefined,
+      denom: isSet(object.denom) ? object.denom : undefined
     };
   },
 
@@ -2048,8 +2048,8 @@ export const EstimateSuperfluidDelegatedAmountByValidatorDenomRequest = {
 
   fromSDK(object: EstimateSuperfluidDelegatedAmountByValidatorDenomRequestSDKType): EstimateSuperfluidDelegatedAmountByValidatorDenomRequest {
     return {
-      validatorAddress: isSet(object.validator_address) ? object.validator_address : "",
-      denom: isSet(object.denom) ? object.denom : ""
+      validatorAddress: isSet(object.validator_address) ? object.validator_address : undefined,
+      denom: isSet(object.denom) ? object.denom : undefined
     };
   },
 

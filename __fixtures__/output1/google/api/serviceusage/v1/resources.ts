@@ -342,8 +342,8 @@ export const Service = {
 
   fromSDK(object: ServiceSDKType): Service {
     return {
-      name: isSet(object.name) ? object.name : "",
-      parent: isSet(object.parent) ? object.parent : "",
+      name: isSet(object.name) ? object.name : undefined,
+      parent: isSet(object.parent) ? object.parent : undefined,
       config: isSet(object.config) ? ServiceConfig.fromSDK(object.config) : undefined,
       state: isSet(object.state) ? stateFromJSON(object.state) : 0
     };
@@ -542,8 +542,8 @@ export const ServiceConfig = {
 
   fromSDK(object: ServiceConfigSDKType): ServiceConfig {
     return {
-      name: isSet(object.name) ? object.name : "",
-      title: isSet(object.title) ? object.title : "",
+      name: isSet(object.name) ? object.name : undefined,
+      title: isSet(object.title) ? object.title : undefined,
       apis: Array.isArray(object?.apis) ? object.apis.map((e: any) => Api.fromSDK(e)) : [],
       documentation: isSet(object.documentation) ? Documentation.fromSDK(object.documentation) : undefined,
       quota: isSet(object.quota) ? Quota.fromSDK(object.quota) : undefined,

@@ -337,8 +337,8 @@ export const MsgStoreCode = {
 
   fromSDK(object: MsgStoreCodeSDKType): MsgStoreCode {
     return {
-      sender: isSet(object.sender) ? object.sender : "",
-      wasmByteCode: isSet(object.wasm_byte_code) ? object.wasm_byte_code : new Uint8Array(),
+      sender: isSet(object.sender) ? object.sender : undefined,
+      wasmByteCode: isSet(object.wasm_byte_code) ? object.wasm_byte_code : undefined,
       instantiatePermission: isSet(object.instantiate_permission) ? AccessConfig.fromSDK(object.instantiate_permission) : undefined
     };
   },
@@ -410,7 +410,7 @@ export const MsgStoreCodeResponse = {
 
   fromSDK(object: MsgStoreCodeResponseSDKType): MsgStoreCodeResponse {
     return {
-      codeId: isSet(object.code_id) ? object.code_id : Long.UZERO
+      codeId: isSet(object.code_id) ? object.code_id : undefined
     };
   },
 
@@ -545,11 +545,11 @@ export const MsgInstantiateContract = {
 
   fromSDK(object: MsgInstantiateContractSDKType): MsgInstantiateContract {
     return {
-      sender: isSet(object.sender) ? object.sender : "",
-      admin: isSet(object.admin) ? object.admin : "",
-      codeId: isSet(object.code_id) ? object.code_id : Long.UZERO,
-      label: isSet(object.label) ? object.label : "",
-      msg: isSet(object.msg) ? object.msg : new Uint8Array(),
+      sender: isSet(object.sender) ? object.sender : undefined,
+      admin: isSet(object.admin) ? object.admin : undefined,
+      codeId: isSet(object.code_id) ? object.code_id : undefined,
+      label: isSet(object.label) ? object.label : undefined,
+      msg: isSet(object.msg) ? object.msg : undefined,
       funds: Array.isArray(object?.funds) ? object.funds.map((e: any) => Coin.fromSDK(e)) : []
     };
   },
@@ -642,8 +642,8 @@ export const MsgInstantiateContractResponse = {
 
   fromSDK(object: MsgInstantiateContractResponseSDKType): MsgInstantiateContractResponse {
     return {
-      address: isSet(object.address) ? object.address : "",
-      data: isSet(object.data) ? object.data : new Uint8Array()
+      address: isSet(object.address) ? object.address : undefined,
+      data: isSet(object.data) ? object.data : undefined
     };
   },
 
@@ -755,9 +755,9 @@ export const MsgExecuteContract = {
 
   fromSDK(object: MsgExecuteContractSDKType): MsgExecuteContract {
     return {
-      sender: isSet(object.sender) ? object.sender : "",
-      contract: isSet(object.contract) ? object.contract : "",
-      msg: isSet(object.msg) ? object.msg : new Uint8Array(),
+      sender: isSet(object.sender) ? object.sender : undefined,
+      contract: isSet(object.contract) ? object.contract : undefined,
+      msg: isSet(object.msg) ? object.msg : undefined,
       funds: Array.isArray(object?.funds) ? object.funds.map((e: any) => Coin.fromSDK(e)) : []
     };
   },
@@ -836,7 +836,7 @@ export const MsgExecuteContractResponse = {
 
   fromSDK(object: MsgExecuteContractResponseSDKType): MsgExecuteContractResponse {
     return {
-      data: isSet(object.data) ? object.data : new Uint8Array()
+      data: isSet(object.data) ? object.data : undefined
     };
   },
 
@@ -941,10 +941,10 @@ export const MsgMigrateContract = {
 
   fromSDK(object: MsgMigrateContractSDKType): MsgMigrateContract {
     return {
-      sender: isSet(object.sender) ? object.sender : "",
-      contract: isSet(object.contract) ? object.contract : "",
-      codeId: isSet(object.code_id) ? object.code_id : Long.UZERO,
-      msg: isSet(object.msg) ? object.msg : new Uint8Array()
+      sender: isSet(object.sender) ? object.sender : undefined,
+      contract: isSet(object.contract) ? object.contract : undefined,
+      codeId: isSet(object.code_id) ? object.code_id : undefined,
+      msg: isSet(object.msg) ? object.msg : undefined
     };
   },
 
@@ -1016,7 +1016,7 @@ export const MsgMigrateContractResponse = {
 
   fromSDK(object: MsgMigrateContractResponseSDKType): MsgMigrateContractResponse {
     return {
-      data: isSet(object.data) ? object.data : new Uint8Array()
+      data: isSet(object.data) ? object.data : undefined
     };
   },
 
@@ -1109,9 +1109,9 @@ export const MsgUpdateAdmin = {
 
   fromSDK(object: MsgUpdateAdminSDKType): MsgUpdateAdmin {
     return {
-      sender: isSet(object.sender) ? object.sender : "",
-      newAdmin: isSet(object.new_admin) ? object.new_admin : "",
-      contract: isSet(object.contract) ? object.contract : ""
+      sender: isSet(object.sender) ? object.sender : undefined,
+      newAdmin: isSet(object.new_admin) ? object.new_admin : undefined,
+      contract: isSet(object.contract) ? object.contract : undefined
     };
   },
 
@@ -1246,8 +1246,8 @@ export const MsgClearAdmin = {
 
   fromSDK(object: MsgClearAdminSDKType): MsgClearAdmin {
     return {
-      sender: isSet(object.sender) ? object.sender : "",
-      contract: isSet(object.contract) ? object.contract : ""
+      sender: isSet(object.sender) ? object.sender : undefined,
+      contract: isSet(object.contract) ? object.contract : undefined
     };
   },
 

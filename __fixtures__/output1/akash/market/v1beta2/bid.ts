@@ -264,7 +264,7 @@ export const MsgCreateBid = {
   fromSDK(object: MsgCreateBidSDKType): MsgCreateBid {
     return {
       order: isSet(object.order) ? OrderID.fromSDK(object.order) : undefined,
-      provider: isSet(object.provider) ? object.provider : "",
+      provider: isSet(object.provider) ? object.provider : undefined,
       price: isSet(object.price) ? DecCoin.fromSDK(object.price) : undefined,
       deposit: isSet(object.deposit) ? Coin.fromSDK(object.deposit) : undefined
     };
@@ -559,11 +559,11 @@ export const BidID = {
 
   fromSDK(object: BidIDSDKType): BidID {
     return {
-      owner: isSet(object.owner) ? object.owner : "",
-      dseq: isSet(object.dseq) ? object.dseq : Long.UZERO,
-      gseq: isSet(object.gseq) ? object.gseq : 0,
-      oseq: isSet(object.oseq) ? object.oseq : 0,
-      provider: isSet(object.provider) ? object.provider : ""
+      owner: isSet(object.owner) ? object.owner : undefined,
+      dseq: isSet(object.dseq) ? object.dseq : undefined,
+      gseq: isSet(object.gseq) ? object.gseq : undefined,
+      oseq: isSet(object.oseq) ? object.oseq : undefined,
+      provider: isSet(object.provider) ? object.provider : undefined
     };
   },
 
@@ -675,7 +675,7 @@ export const Bid = {
       bidId: isSet(object.bid_id) ? BidID.fromSDK(object.bid_id) : undefined,
       state: isSet(object.state) ? bid_StateFromJSON(object.state) : 0,
       price: isSet(object.price) ? DecCoin.fromSDK(object.price) : undefined,
-      createdAt: isSet(object.created_at) ? object.created_at : Long.ZERO
+      createdAt: isSet(object.created_at) ? object.created_at : undefined
     };
   },
 
@@ -807,12 +807,12 @@ export const BidFilters = {
 
   fromSDK(object: BidFiltersSDKType): BidFilters {
     return {
-      owner: isSet(object.owner) ? object.owner : "",
-      dseq: isSet(object.dseq) ? object.dseq : Long.UZERO,
-      gseq: isSet(object.gseq) ? object.gseq : 0,
-      oseq: isSet(object.oseq) ? object.oseq : 0,
-      provider: isSet(object.provider) ? object.provider : "",
-      state: isSet(object.state) ? object.state : ""
+      owner: isSet(object.owner) ? object.owner : undefined,
+      dseq: isSet(object.dseq) ? object.dseq : undefined,
+      gseq: isSet(object.gseq) ? object.gseq : undefined,
+      oseq: isSet(object.oseq) ? object.oseq : undefined,
+      provider: isSet(object.provider) ? object.provider : undefined,
+      state: isSet(object.state) ? object.state : undefined
     };
   },
 

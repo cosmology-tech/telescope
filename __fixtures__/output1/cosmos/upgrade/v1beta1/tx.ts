@@ -146,7 +146,7 @@ export const MsgSoftwareUpgrade = {
 
   fromSDK(object: MsgSoftwareUpgradeSDKType): MsgSoftwareUpgrade {
     return {
-      authority: isSet(object.authority) ? object.authority : "",
+      authority: isSet(object.authority) ? object.authority : undefined,
       plan: isSet(object.plan) ? Plan.fromSDK(object.plan) : undefined
     };
   },
@@ -269,7 +269,7 @@ export const MsgCancelUpgrade = {
 
   fromSDK(object: MsgCancelUpgradeSDKType): MsgCancelUpgrade {
     return {
-      authority: isSet(object.authority) ? object.authority : ""
+      authority: isSet(object.authority) ? object.authority : undefined
     };
   },
 

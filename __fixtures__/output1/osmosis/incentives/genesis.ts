@@ -130,7 +130,7 @@ export const GenesisState = {
       params: isSet(object.params) ? Params.fromSDK(object.params) : undefined,
       gauges: Array.isArray(object?.gauges) ? object.gauges.map((e: any) => Gauge.fromSDK(e)) : [],
       lockableDurations: Array.isArray(object?.lockable_durations) ? object.lockable_durations.map((e: any) => Duration.fromSDK(e)) : [],
-      lastGaugeId: isSet(object.last_gauge_id) ? object.last_gauge_id : Long.UZERO
+      lastGaugeId: isSet(object.last_gauge_id) ? object.last_gauge_id : undefined
     };
   },
 

@@ -220,8 +220,8 @@ export const GenesisState = {
       clientsConsensus: Array.isArray(object?.clients_consensus) ? object.clients_consensus.map((e: any) => ClientConsensusStates.fromSDK(e)) : [],
       clientsMetadata: Array.isArray(object?.clients_metadata) ? object.clients_metadata.map((e: any) => IdentifiedGenesisMetadata.fromSDK(e)) : [],
       params: isSet(object.params) ? Params.fromSDK(object.params) : undefined,
-      createLocalhost: isSet(object.create_localhost) ? object.create_localhost : false,
-      nextClientSequence: isSet(object.next_client_sequence) ? object.next_client_sequence : Long.UZERO
+      createLocalhost: isSet(object.create_localhost) ? object.create_localhost : undefined,
+      nextClientSequence: isSet(object.next_client_sequence) ? object.next_client_sequence : undefined
     };
   },
 
@@ -323,8 +323,8 @@ export const GenesisMetadata = {
 
   fromSDK(object: GenesisMetadataSDKType): GenesisMetadata {
     return {
-      key: isSet(object.key) ? object.key : new Uint8Array(),
-      value: isSet(object.value) ? object.value : new Uint8Array()
+      key: isSet(object.key) ? object.key : undefined,
+      value: isSet(object.value) ? object.value : undefined
     };
   },
 
@@ -412,7 +412,7 @@ export const IdentifiedGenesisMetadata = {
 
   fromSDK(object: IdentifiedGenesisMetadataSDKType): IdentifiedGenesisMetadata {
     return {
-      clientId: isSet(object.client_id) ? object.client_id : "",
+      clientId: isSet(object.client_id) ? object.client_id : undefined,
       clientMetadata: Array.isArray(object?.client_metadata) ? object.client_metadata.map((e: any) => GenesisMetadata.fromSDK(e)) : []
     };
   },
