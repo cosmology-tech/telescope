@@ -116,6 +116,11 @@ called.
 the message.",
                             "id": 2,
                             "keyType": "int64",
+                            "options": Object {
+                              "(telescope:camel)": "referenceMap",
+                              "(telescope:name)": "referenceMap",
+                              "(telescope:orig)": "reference_map",
+                            },
                             "parsedType": Object {
                               "name": "Reference",
                               "type": "Type",
@@ -156,6 +161,11 @@ here. If an expression has type DYN, it is omitted from this map to save
 space.",
                             "id": 3,
                             "keyType": "int64",
+                            "options": Object {
+                              "(telescope:camel)": "typeMap",
+                              "(telescope:name)": "typeMap",
+                              "(telescope:orig)": "type_map",
+                            },
                             "parsedType": Object {
                               "name": "Type",
                               "type": "Type",
@@ -186,6 +196,11 @@ the message.",
                             "id": 2,
                             "keyType": "int64",
                             "name": "referenceMap",
+                            "options": Object {
+                              "(telescope:camel)": "referenceMap",
+                              "(telescope:name)": "referenceMap",
+                              "(telescope:orig)": "reference_map",
+                            },
                             "parsedType": Object {
                               "name": "Reference",
                               "type": "Type",
@@ -204,6 +219,11 @@ space.",
                             "id": 3,
                             "keyType": "int64",
                             "name": "typeMap",
+                            "options": Object {
+                              "(telescope:camel)": "typeMap",
+                              "(telescope:name)": "typeMap",
+                              "(telescope:orig)": "type_map",
+                            },
                             "parsedType": Object {
                               "name": "Type",
                               "type": "Type",
@@ -1793,11 +1813,21 @@ Examples of literals include: \`\\"hello\\"\`, \`b'bytes'\`, \`1u\`, \`4.2\`, \`
             "macroCalls": Object {
               "id": 5,
               "keyType": "int64",
+              "options": Object {
+                "(telescope:camel)": "macroCalls",
+                "(telescope:name)": "macroCalls",
+                "(telescope:orig)": "macro_calls",
+              },
               "type": "Expr",
             },
             "positions": Object {
               "id": 4,
               "keyType": "int64",
+              "options": Object {
+                "(telescope:camel)": "positions",
+                "(telescope:name)": "positions",
+                "(telescope:orig)": "positions",
+              },
               "type": "int32",
             },
             "syntaxVersion": Object {
