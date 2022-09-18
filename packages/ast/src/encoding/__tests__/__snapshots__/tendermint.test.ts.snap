@@ -224,6 +224,49 @@ exports[`ibc/lightclients/tendermint/v1/tendermint duration 2`] = `
     message.allowUpdateAfterExpiry = object.allowUpdateAfterExpiry ?? false;
     message.allowUpdateAfterMisbehaviour = object.allowUpdateAfterMisbehaviour ?? false;
     return message;
+  },
+
+  fromSDK(object: ClientStateSDKType): ClientState {
+    return {
+      chainId: isSet(object.chain_id) ? object.chain_id : \\"\\",
+      trustLevel: isSet(object.trust_level) ? Fraction.fromSDK(object.trust_level) : undefined,
+      trustingPeriod: isSet(object.trusting_period) ? Duration.fromSDK(object.trusting_period) : undefined,
+      unbondingPeriod: isSet(object.unbonding_period) ? Duration.fromSDK(object.unbonding_period) : undefined,
+      maxClockDrift: isSet(object.max_clock_drift) ? Duration.fromSDK(object.max_clock_drift) : undefined,
+      frozenHeight: isSet(object.frozen_height) ? Height.fromSDK(object.frozen_height) : undefined,
+      latestHeight: isSet(object.latest_height) ? Height.fromSDK(object.latest_height) : undefined,
+      proofSpecs: Array.isArray(object?.proof_specs) ? object.proof_specs.map((e: any) => ProofSpec.fromSDK(e)) : [],
+      upgradePath: Array.isArray(object?.upgrade_path) ? object.upgrade_path.map((e: any) => e) : [],
+      allowUpdateAfterExpiry: isSet(object.allow_update_after_expiry) ? object.allow_update_after_expiry : false,
+      allowUpdateAfterMisbehaviour: isSet(object.allow_update_after_misbehaviour) ? object.allow_update_after_misbehaviour : false
+    };
+  },
+
+  toSDK(message: ClientState): ClientStateSDKType {
+    const obj: any = {};
+    message.chainId !== undefined && (obj.chain_id = message.chainId);
+    message.trustLevel !== undefined && (obj.trust_level = message.trustLevel ? Fraction.toSDK(message.trustLevel) : undefined);
+    message.trustingPeriod !== undefined && (obj.trusting_period = message.trustingPeriod ? Duration.toSDK(message.trustingPeriod) : undefined);
+    message.unbondingPeriod !== undefined && (obj.unbonding_period = message.unbondingPeriod ? Duration.toSDK(message.unbondingPeriod) : undefined);
+    message.maxClockDrift !== undefined && (obj.max_clock_drift = message.maxClockDrift ? Duration.toSDK(message.maxClockDrift) : undefined);
+    message.frozenHeight !== undefined && (obj.frozen_height = message.frozenHeight ? Height.toSDK(message.frozenHeight) : undefined);
+    message.latestHeight !== undefined && (obj.latest_height = message.latestHeight ? Height.toSDK(message.latestHeight) : undefined);
+
+    if (message.proofSpecs) {
+      obj.proof_specs = message.proofSpecs.map(e => e ? ProofSpec.toSDK(e) : undefined);
+    } else {
+      obj.proof_specs = [];
+    }
+
+    if (message.upgradePath) {
+      obj.upgrade_path = message.upgradePath.map(e => e);
+    } else {
+      obj.upgrade_path = [];
+    }
+
+    message.allowUpdateAfterExpiry !== undefined && (obj.allow_update_after_expiry = message.allowUpdateAfterExpiry);
+    message.allowUpdateAfterMisbehaviour !== undefined && (obj.allow_update_after_misbehaviour = message.allowUpdateAfterMisbehaviour);
+    return obj;
   }
 
 };"
@@ -627,6 +670,49 @@ exports[`ibc/lightclients/tendermint/v1/tendermint string 2`] = `
     message.allowUpdateAfterExpiry = object.allowUpdateAfterExpiry ?? false;
     message.allowUpdateAfterMisbehaviour = object.allowUpdateAfterMisbehaviour ?? false;
     return message;
+  },
+
+  fromSDK(object: ClientStateSDKType): ClientState {
+    return {
+      chainId: isSet(object.chain_id) ? object.chain_id : \\"\\",
+      trustLevel: isSet(object.trust_level) ? Fraction.fromSDK(object.trust_level) : undefined,
+      trustingPeriod: isSet(object.trusting_period) ? Duration.fromSDK(object.trusting_period) : undefined,
+      unbondingPeriod: isSet(object.unbonding_period) ? Duration.fromSDK(object.unbonding_period) : undefined,
+      maxClockDrift: isSet(object.max_clock_drift) ? Duration.fromSDK(object.max_clock_drift) : undefined,
+      frozenHeight: isSet(object.frozen_height) ? Height.fromSDK(object.frozen_height) : undefined,
+      latestHeight: isSet(object.latest_height) ? Height.fromSDK(object.latest_height) : undefined,
+      proofSpecs: Array.isArray(object?.proof_specs) ? object.proof_specs.map((e: any) => ProofSpec.fromSDK(e)) : [],
+      upgradePath: Array.isArray(object?.upgrade_path) ? object.upgrade_path.map((e: any) => e) : [],
+      allowUpdateAfterExpiry: isSet(object.allow_update_after_expiry) ? object.allow_update_after_expiry : false,
+      allowUpdateAfterMisbehaviour: isSet(object.allow_update_after_misbehaviour) ? object.allow_update_after_misbehaviour : false
+    };
+  },
+
+  toSDK(message: ClientState): ClientStateSDKType {
+    const obj: any = {};
+    message.chainId !== undefined && (obj.chain_id = message.chainId);
+    message.trustLevel !== undefined && (obj.trust_level = message.trustLevel ? Fraction.toSDK(message.trustLevel) : undefined);
+    message.trustingPeriod !== undefined && (obj.trusting_period = message.trustingPeriod ? Duration.toSDK(message.trustingPeriod) : undefined);
+    message.unbondingPeriod !== undefined && (obj.unbonding_period = message.unbondingPeriod ? Duration.toSDK(message.unbondingPeriod) : undefined);
+    message.maxClockDrift !== undefined && (obj.max_clock_drift = message.maxClockDrift ? Duration.toSDK(message.maxClockDrift) : undefined);
+    message.frozenHeight !== undefined && (obj.frozen_height = message.frozenHeight ? Height.toSDK(message.frozenHeight) : undefined);
+    message.latestHeight !== undefined && (obj.latest_height = message.latestHeight ? Height.toSDK(message.latestHeight) : undefined);
+
+    if (message.proofSpecs) {
+      obj.proof_specs = message.proofSpecs.map(e => e ? ProofSpec.toSDK(e) : undefined);
+    } else {
+      obj.proof_specs = [];
+    }
+
+    if (message.upgradePath) {
+      obj.upgrade_path = message.upgradePath.map(e => e);
+    } else {
+      obj.upgrade_path = [];
+    }
+
+    message.allowUpdateAfterExpiry !== undefined && (obj.allow_update_after_expiry = message.allowUpdateAfterExpiry);
+    message.allowUpdateAfterMisbehaviour !== undefined && (obj.allow_update_after_misbehaviour = message.allowUpdateAfterMisbehaviour);
+    return obj;
   }
 
 };"

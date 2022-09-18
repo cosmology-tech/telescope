@@ -70,6 +70,22 @@ exports[`cosmos/tx/signing/v1beta1/signing SignatureDescriptor 1`] = `
     message.data = object.data !== undefined && object.data !== null ? SignatureDescriptor_Data.fromPartial(object.data) : undefined;
     message.sequence = object.sequence !== undefined && object.sequence !== null ? Long.fromValue(object.sequence) : Long.UZERO;
     return message;
+  },
+
+  fromSDK(object: SignatureDescriptorSDKType): SignatureDescriptor {
+    return {
+      publicKey: isSet(object.public_key) ? Any.fromSDK(object.public_key) : undefined,
+      data: isSet(object.data) ? SignatureDescriptor_Data.fromSDK(object.data) : undefined,
+      sequence: isSet(object.sequence) ? object.sequence : Long.UZERO
+    };
+  },
+
+  toSDK(message: SignatureDescriptor): SignatureDescriptorSDKType {
+    const obj: any = {};
+    message.publicKey !== undefined && (obj.public_key = message.publicKey ? Any.toSDK(message.publicKey) : undefined);
+    message.data !== undefined && (obj.data = message.data ? SignatureDescriptor_Data.toSDK(message.data) : undefined);
+    message.sequence !== undefined && (obj.sequence = message.sequence);
+    return obj;
   }
 
 };"
@@ -129,6 +145,24 @@ exports[`cosmos/tx/signing/v1beta1/signing SignatureDescriptors 1`] = `
     const message = createBaseSignatureDescriptors();
     message.signatures = object.signatures?.map(e => SignatureDescriptor.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: SignatureDescriptorsSDKType): SignatureDescriptors {
+    return {
+      signatures: Array.isArray(object?.signatures) ? object.signatures.map((e: any) => SignatureDescriptor.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: SignatureDescriptors): SignatureDescriptorsSDKType {
+    const obj: any = {};
+
+    if (message.signatures) {
+      obj.signatures = message.signatures.map(e => e ? SignatureDescriptor.toSDK(e) : undefined);
+    } else {
+      obj.signatures = [];
+    }
+
+    return obj;
   }
 
 };"
@@ -215,6 +249,24 @@ exports[`cosmos/tx/v1beta1/tx AuxSignerData 1`] = `
     message.mode = object.mode ?? 0;
     message.sig = object.sig ?? new Uint8Array();
     return message;
+  },
+
+  fromSDK(object: AuxSignerDataSDKType): AuxSignerData {
+    return {
+      address: isSet(object.address) ? object.address : \\"\\",
+      signDoc: isSet(object.sign_doc) ? SignDocDirectAux.fromSDK(object.sign_doc) : undefined,
+      mode: isSet(object.mode) ? signModeFromJSON(object.mode) : 0,
+      sig: isSet(object.sig) ? object.sig : new Uint8Array()
+    };
+  },
+
+  toSDK(message: AuxSignerData): AuxSignerDataSDKType {
+    const obj: any = {};
+    message.address !== undefined && (obj.address = message.address);
+    message.signDoc !== undefined && (obj.sign_doc = message.signDoc ? SignDocDirectAux.toSDK(message.signDoc) : undefined);
+    message.mode !== undefined && (obj.mode = signModeToJSON(message.mode));
+    message.sig !== undefined && (obj.sig = message.sig);
+    return obj;
   }
 
 };"
@@ -279,6 +331,20 @@ exports[`cosmos/tx/v1beta1/tx ModeInfo_Multi 1`] = `
     message.single = object.single !== undefined && object.single !== null ? ModeInfo_Single.fromPartial(object.single) : undefined;
     message.multi = object.multi !== undefined && object.multi !== null ? ModeInfo_Multi.fromPartial(object.multi) : undefined;
     return message;
+  },
+
+  fromSDK(object: ModeInfo_MultiSDKType): ModeInfo_Multi {
+    return {
+      single: isSet(object.single) ? ModeInfo_Single.fromSDK(object.single) : undefined,
+      multi: isSet(object.multi) ? ModeInfo_Multi.fromSDK(object.multi) : undefined
+    };
+  },
+
+  toSDK(message: ModeInfo_Multi): ModeInfo_MultiSDKType {
+    const obj: any = {};
+    message.single !== undefined && (obj.single = message.single ? ModeInfo_Single.toSDK(message.single) : undefined);
+    message.multi !== undefined && (obj.multi = message.multi ? ModeInfo_Multi.toSDK(message.multi) : undefined);
+    return obj;
   }
 
 };"
@@ -372,6 +438,28 @@ exports[`cosmwasm/wasm/v1/proposal 1`] = `
     message.description = object.description ?? \\"\\";
     message.codeIds = object.codeIds?.map(e => Long.fromValue(e)) || [];
     return message;
+  },
+
+  fromSDK(object: PinCodesProposalSDKType): PinCodesProposal {
+    return {
+      title: isSet(object.title) ? object.title : \\"\\",
+      description: isSet(object.description) ? object.description : \\"\\",
+      codeIds: Array.isArray(object?.code_ids) ? object.code_ids.map((e: any) => e) : []
+    };
+  },
+
+  toSDK(message: PinCodesProposal): PinCodesProposalSDKType {
+    const obj: any = {};
+    message.title !== undefined && (obj.title = message.title);
+    message.description !== undefined && (obj.description = message.description);
+
+    if (message.codeIds) {
+      obj.code_ids = message.codeIds.map(e => e);
+    } else {
+      obj.code_ids = [];
+    }
+
+    return obj;
   }
 
 };"
@@ -465,6 +553,28 @@ exports[`cosmwasm/wasm/v1/proposal 2`] = `
     message.description = object.description ?? \\"\\";
     message.codeIds = object.codeIds?.map(e => Long.fromValue(e)) || [];
     return message;
+  },
+
+  fromSDK(object: UnpinCodesProposalSDKType): UnpinCodesProposal {
+    return {
+      title: isSet(object.title) ? object.title : \\"\\",
+      description: isSet(object.description) ? object.description : \\"\\",
+      codeIds: Array.isArray(object?.code_ids) ? object.code_ids.map((e: any) => e) : []
+    };
+  },
+
+  toSDK(message: UnpinCodesProposal): UnpinCodesProposalSDKType {
+    const obj: any = {};
+    message.title !== undefined && (obj.title = message.title);
+    message.description !== undefined && (obj.description = message.description);
+
+    if (message.codeIds) {
+      obj.code_ids = message.codeIds.map(e => e);
+    } else {
+      obj.code_ids = [];
+    }
+
+    return obj;
   }
 
 };"
@@ -529,6 +639,20 @@ exports[`cosmwasm/wasm/v1/query 1`] = `
     message.address = object.address ?? \\"\\";
     message.queryData = object.queryData ?? new Uint8Array();
     return message;
+  },
+
+  fromSDK(object: QueryRawContractStateRequestSDKType): QueryRawContractStateRequest {
+    return {
+      address: isSet(object.address) ? object.address : \\"\\",
+      queryData: isSet(object.query_data) ? object.query_data : new Uint8Array()
+    };
+  },
+
+  toSDK(message: QueryRawContractStateRequest): QueryRawContractStateRequestSDKType {
+    const obj: any = {};
+    message.address !== undefined && (obj.address = message.address);
+    message.queryData !== undefined && (obj.query_data = message.queryData);
+    return obj;
   }
 
 };"
@@ -633,6 +757,30 @@ exports[`evmos/fees/v1/tx 1`] = `
     message.withdrawAddress = object.withdrawAddress ?? \\"\\";
     message.nonces = object.nonces?.map(e => Long.fromValue(e)) || [];
     return message;
+  },
+
+  fromSDK(object: MsgRegisterDevFeeInfoSDKType): MsgRegisterDevFeeInfo {
+    return {
+      contractAddress: isSet(object.contract_address) ? object.contract_address : \\"\\",
+      deployerAddress: isSet(object.deployer_address) ? object.deployer_address : \\"\\",
+      withdrawAddress: isSet(object.withdraw_address) ? object.withdraw_address : \\"\\",
+      nonces: Array.isArray(object?.nonces) ? object.nonces.map((e: any) => e) : []
+    };
+  },
+
+  toSDK(message: MsgRegisterDevFeeInfo): MsgRegisterDevFeeInfoSDKType {
+    const obj: any = {};
+    message.contractAddress !== undefined && (obj.contract_address = message.contractAddress);
+    message.deployerAddress !== undefined && (obj.deployer_address = message.deployerAddress);
+    message.withdrawAddress !== undefined && (obj.withdraw_address = message.withdrawAddress);
+
+    if (message.nonces) {
+      obj.nonces = message.nonces.map(e => e);
+    } else {
+      obj.nonces = [];
+    }
+
+    return obj;
   }
 
 };"
@@ -719,6 +867,24 @@ exports[`google/api/expr/conformance/v1alpha1/conformance_service ParseRequest 1
     message.sourceLocation = object.sourceLocation ?? \\"\\";
     message.disableMacros = object.disableMacros ?? false;
     return message;
+  },
+
+  fromSDK(object: ParseRequestSDKType): ParseRequest {
+    return {
+      celSource: isSet(object.cel_source) ? object.cel_source : \\"\\",
+      syntaxVersion: isSet(object.syntax_version) ? object.syntax_version : \\"\\",
+      sourceLocation: isSet(object.source_location) ? object.source_location : \\"\\",
+      disableMacros: isSet(object.disable_macros) ? object.disable_macros : false
+    };
+  },
+
+  toSDK(message: ParseRequest): ParseRequestSDKType {
+    const obj: any = {};
+    message.celSource !== undefined && (obj.cel_source = message.celSource);
+    message.syntaxVersion !== undefined && (obj.syntax_version = message.syntaxVersion);
+    message.sourceLocation !== undefined && (obj.source_location = message.sourceLocation);
+    message.disableMacros !== undefined && (obj.disable_macros = message.disableMacros);
+    return obj;
   }
 
 };"
@@ -838,6 +1004,39 @@ exports[`google/api/expr/v1alpha1/checked Decl_FunctionDecl_Overload MapType 1`]
     message.isInstanceFunction = object.isInstanceFunction ?? false;
     message.doc = object.doc ?? \\"\\";
     return message;
+  },
+
+  fromSDK(object: Decl_FunctionDecl_OverloadSDKType): Decl_FunctionDecl_Overload {
+    return {
+      overloadId: isSet(object.overload_id) ? object.overload_id : \\"\\",
+      params: Array.isArray(object?.params) ? object.params.map((e: any) => Type.fromSDK(e)) : [],
+      typeParams: Array.isArray(object?.type_params) ? object.type_params.map((e: any) => e) : [],
+      resultType: isSet(object.result_type) ? Type.fromSDK(object.result_type) : undefined,
+      isInstanceFunction: isSet(object.is_instance_function) ? object.is_instance_function : false,
+      doc: isSet(object.doc) ? object.doc : \\"\\"
+    };
+  },
+
+  toSDK(message: Decl_FunctionDecl_Overload): Decl_FunctionDecl_OverloadSDKType {
+    const obj: any = {};
+    message.overloadId !== undefined && (obj.overload_id = message.overloadId);
+
+    if (message.params) {
+      obj.params = message.params.map(e => e ? Type.toSDK(e) : undefined);
+    } else {
+      obj.params = [];
+    }
+
+    if (message.typeParams) {
+      obj.type_params = message.typeParams.map(e => e);
+    } else {
+      obj.type_params = [];
+    }
+
+    message.resultType !== undefined && (obj.result_type = message.resultType ? Type.toSDK(message.resultType) : undefined);
+    message.isInstanceFunction !== undefined && (obj.is_instance_function = message.isInstanceFunction);
+    message.doc !== undefined && (obj.doc = message.doc);
+    return obj;
   }
 
 };"
@@ -1023,6 +1222,42 @@ exports[`google/api/expr/v1alpha1/checked Type 1`] = `
     message.error = object.error !== undefined && object.error !== null ? Empty.fromPartial(object.error) : undefined;
     message.abstractType = object.abstractType !== undefined && object.abstractType !== null ? Type_AbstractType.fromPartial(object.abstractType) : undefined;
     return message;
+  },
+
+  fromSDK(object: TypeSDKType): Type {
+    return {
+      dyn: isSet(object.dyn) ? Empty.fromSDK(object.dyn) : undefined,
+      null: isSet(object.null) ? nullValueFromJSON(object.null) : undefined,
+      primitive: isSet(object.primitive) ? type_PrimitiveTypeFromJSON(object.primitive) : undefined,
+      wrapper: isSet(object.wrapper) ? type_PrimitiveTypeFromJSON(object.wrapper) : undefined,
+      wellKnown: isSet(object.well_known) ? type_WellKnownTypeFromJSON(object.well_known) : undefined,
+      listType: isSet(object.list_type) ? Type_ListType.fromSDK(object.list_type) : undefined,
+      mapType: isSet(object.map_type) ? Type_MapType.fromSDK(object.map_type) : undefined,
+      function: isSet(object.function) ? Type_FunctionType.fromSDK(object.function) : undefined,
+      messageType: isSet(object.message_type) ? object.message_type : undefined,
+      typeParam: isSet(object.type_param) ? object.type_param : undefined,
+      type: isSet(object.type) ? Type.fromSDK(object.type) : undefined,
+      error: isSet(object.error) ? Empty.fromSDK(object.error) : undefined,
+      abstractType: isSet(object.abstract_type) ? Type_AbstractType.fromSDK(object.abstract_type) : undefined
+    };
+  },
+
+  toSDK(message: Type): TypeSDKType {
+    const obj: any = {};
+    message.dyn !== undefined && (obj.dyn = message.dyn ? Empty.toSDK(message.dyn) : undefined);
+    message.null !== undefined && (obj.null = nullValueToJSON(message.null));
+    message.primitive !== undefined && (obj.primitive = type_PrimitiveTypeToJSON(message.primitive));
+    message.wrapper !== undefined && (obj.wrapper = type_PrimitiveTypeToJSON(message.wrapper));
+    message.wellKnown !== undefined && (obj.well_known = type_WellKnownTypeToJSON(message.wellKnown));
+    message.listType !== undefined && (obj.list_type = message.listType ? Type_ListType.toSDK(message.listType) : undefined);
+    message.mapType !== undefined && (obj.map_type = message.mapType ? Type_MapType.toSDK(message.mapType) : undefined);
+    message.function !== undefined && (obj.function = message.function ? Type_FunctionType.toSDK(message.function) : undefined);
+    message.messageType !== undefined && (obj.message_type = message.messageType);
+    message.typeParam !== undefined && (obj.type_param = message.typeParam);
+    message.type !== undefined && (obj.type = message.type ? Type.toSDK(message.type) : undefined);
+    message.error !== undefined && (obj.error = message.error ? Empty.toSDK(message.error) : undefined);
+    message.abstractType !== undefined && (obj.abstract_type = message.abstractType ? Type_AbstractType.toSDK(message.abstractType) : undefined);
+    return obj;
   }
 
 };"
@@ -1087,6 +1322,20 @@ exports[`google/api/expr/v1alpha1/checked nested MapType 1`] = `
     message.keyType = object.keyType !== undefined && object.keyType !== null ? Type.fromPartial(object.keyType) : undefined;
     message.valueType = object.valueType !== undefined && object.valueType !== null ? Type.fromPartial(object.valueType) : undefined;
     return message;
+  },
+
+  fromSDK(object: Type_MapTypeSDKType): Type_MapType {
+    return {
+      keyType: isSet(object.key_type) ? Type.fromSDK(object.key_type) : undefined,
+      valueType: isSet(object.value_type) ? Type.fromSDK(object.value_type) : undefined
+    };
+  },
+
+  toSDK(message: Type_MapType): Type_MapTypeSDKType {
+    const obj: any = {};
+    message.keyType !== undefined && (obj.key_type = message.keyType ? Type.toSDK(message.keyType) : undefined);
+    message.valueType !== undefined && (obj.value_type = message.valueType ? Type.toSDK(message.valueType) : undefined);
+    return obj;
   }
 
 };"
@@ -1239,6 +1488,50 @@ exports[`google/api/expr/v1alpha1/checked typeHash (Long) CheckedExpr 1`] = `
     message.exprVersion = object.exprVersion ?? \\"\\";
     message.expr = object.expr !== undefined && object.expr !== null ? Expr.fromPartial(object.expr) : undefined;
     return message;
+  },
+
+  fromSDK(object: CheckedExprSDKType): CheckedExpr {
+    return {
+      referenceMap: isObject(object.reference_map) ? Object.entries(object.reference_map).reduce<{
+        [key: Long]: Reference;
+      }>((acc, [key, value]) => {
+        acc[Number(key)] = Reference.fromSDK(value);
+        return acc;
+      }, {}) : {},
+      typeMap: isObject(object.type_map) ? Object.entries(object.type_map).reduce<{
+        [key: Long]: Type;
+      }>((acc, [key, value]) => {
+        acc[Number(key)] = Type.fromSDK(value);
+        return acc;
+      }, {}) : {},
+      sourceInfo: isSet(object.source_info) ? SourceInfo.fromSDK(object.source_info) : undefined,
+      exprVersion: isSet(object.expr_version) ? object.expr_version : \\"\\",
+      expr: isSet(object.expr) ? Expr.fromSDK(object.expr) : undefined
+    };
+  },
+
+  toSDK(message: CheckedExpr): CheckedExprSDKType {
+    const obj: any = {};
+    obj.reference_map = {};
+
+    if (message.referenceMap) {
+      Object.entries(message.referenceMap).forEach(([k, v]) => {
+        obj.reference_map[k] = Reference.toSDK(v);
+      });
+    }
+
+    obj.type_map = {};
+
+    if (message.typeMap) {
+      Object.entries(message.typeMap).forEach(([k, v]) => {
+        obj.type_map[k] = Type.toSDK(v);
+      });
+    }
+
+    message.sourceInfo !== undefined && (obj.source_info = message.sourceInfo ? SourceInfo.toSDK(message.sourceInfo) : undefined);
+    message.exprVersion !== undefined && (obj.expr_version = message.exprVersion);
+    message.expr !== undefined && (obj.expr = message.expr ? Expr.toSDK(message.expr) : undefined);
+    return obj;
   }
 
 };"
@@ -1380,6 +1673,34 @@ exports[`google/api/expr/v1alpha1/syntax Constant 1`] = `
     message.durationValue = object.durationValue ?? undefined;
     message.timestampValue = object.timestampValue ?? undefined;
     return message;
+  },
+
+  fromSDK(object: ConstantSDKType): Constant {
+    return {
+      nullValue: isSet(object.null_value) ? nullValueFromJSON(object.null_value) : undefined,
+      boolValue: isSet(object.bool_value) ? object.bool_value : undefined,
+      int64Value: isSet(object.int64_value) ? object.int64_value : undefined,
+      uint64Value: isSet(object.uint64_value) ? object.uint64_value : undefined,
+      doubleValue: isSet(object.double_value) ? object.double_value : undefined,
+      stringValue: isSet(object.string_value) ? object.string_value : undefined,
+      bytesValue: isSet(object.bytes_value) ? object.bytes_value : undefined,
+      durationValue: isSet(object.duration_value) ? Duration.fromSDK(object.duration_value) : undefined,
+      timestampValue: isSet(object.timestamp_value) ? Timestamp.fromSDK(object.timestamp_value) : undefined
+    };
+  },
+
+  toSDK(message: Constant): ConstantSDKType {
+    const obj: any = {};
+    message.nullValue !== undefined && (obj.null_value = nullValueToJSON(message.nullValue));
+    message.boolValue !== undefined && (obj.bool_value = message.boolValue);
+    message.int64Value !== undefined && (obj.int64_value = message.int64Value);
+    message.uint64Value !== undefined && (obj.uint64_value = message.uint64Value);
+    message.doubleValue !== undefined && (obj.double_value = message.doubleValue);
+    message.stringValue !== undefined && (obj.string_value = message.stringValue);
+    message.bytesValue !== undefined && (obj.bytes_value = message.bytesValue);
+    message.durationValue !== undefined && (obj.duration_value = message.durationValue ? Duration.toSDK(message.durationValue) : undefined);
+    message.timestampValue !== undefined && (obj.timestamp_value = message.timestampValue ? Timestamp.toSDK(message.timestampValue) : undefined);
+    return obj;
   }
 
 };"
@@ -1444,6 +1765,20 @@ exports[`google/api/expr/v1alpha1/value Entry 1`] = `
     message.key = object.key !== undefined && object.key !== null ? Value.fromPartial(object.key) : undefined;
     message.value = object.value !== undefined && object.value !== null ? Value.fromPartial(object.value) : undefined;
     return message;
+  },
+
+  fromSDK(object: EntrySDKType): Entry {
+    return {
+      key: isSet(object.key) ? Value.fromSDK(object.key) : undefined,
+      value: isSet(object.value) ? Value.fromSDK(object.value) : undefined
+    };
+  },
+
+  toSDK(message: Entry): EntrySDKType {
+    const obj: any = {};
+    message.key !== undefined && (obj.key = message.key ? Value.toSDK(message.key) : undefined);
+    message.value !== undefined && (obj.value = message.value ? Value.toSDK(message.value) : undefined);
+    return obj;
   }
 
 };"
@@ -1505,6 +1840,24 @@ exports[`google/api/expr/v1alpha1/value MapValue 1`] = `
     const message = createBaseMapValue();
     message.entries = object.entries?.map(e => MapValue_Entry.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: MapValueSDKType): MapValue {
+    return {
+      entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => MapValue_Entry.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: MapValue): MapValueSDKType {
+    const obj: any = {};
+
+    if (message.entries) {
+      obj.entries = message.entries.map(e => e ? MapValue_Entry.toSDK(e) : undefined);
+    } else {
+      obj.entries = [];
+    }
+
+    return obj;
   }
 
 };"
@@ -1627,6 +1980,40 @@ exports[`google/api/expr/v1beta1/source 1`] = `
       return acc;
     }, {});
     return message;
+  },
+
+  fromSDK(object: SourceInfoSDKType): SourceInfo {
+    return {
+      location: isSet(object.location) ? object.location : \\"\\",
+      lineOffsets: Array.isArray(object?.line_offsets) ? object.line_offsets.map((e: any) => e) : [],
+      positions: isObject(object.positions) ? Object.entries(object.positions).reduce<{
+        [key: number]: number;
+      }>((acc, [key, value]) => {
+        acc[Number(key)] = Number(value);
+        return acc;
+      }, {}) : {}
+    };
+  },
+
+  toSDK(message: SourceInfo): SourceInfoSDKType {
+    const obj: any = {};
+    message.location !== undefined && (obj.location = message.location);
+
+    if (message.lineOffsets) {
+      obj.line_offsets = message.lineOffsets.map(e => e);
+    } else {
+      obj.line_offsets = [];
+    }
+
+    obj.positions = {};
+
+    if (message.positions) {
+      Object.entries(message.positions).forEach(([k, v]) => {
+        obj.positions[k] = Math.round(v);
+      });
+    }
+
+    return obj;
   }
 
 };"
@@ -1718,6 +2105,32 @@ exports[`google/api/quota keyType 1`] = `
       return acc;
     }, {});
     return message;
+  },
+
+  fromSDK(object: MetricRuleSDKType): MetricRule {
+    return {
+      selector: isSet(object.selector) ? object.selector : \\"\\",
+      metricCosts: isObject(object.metric_costs) ? Object.entries(object.metric_costs).reduce<{
+        [key: string]: Long;
+      }>((acc, [key, value]) => {
+        acc[key] = Long.fromValue((value as Long | string));
+        return acc;
+      }, {}) : {}
+    };
+  },
+
+  toSDK(message: MetricRule): MetricRuleSDKType {
+    const obj: any = {};
+    message.selector !== undefined && (obj.selector = message.selector);
+    obj.metric_costs = {};
+
+    if (message.metricCosts) {
+      Object.entries(message.metricCosts).forEach(([k, v]) => {
+        obj.metric_costs[k] = v.toString();
+      });
+    }
+
+    return obj;
   }
 
 };"
@@ -1922,6 +2335,52 @@ exports[`google/api/servicecontrol/v1/log_entry LogEntry 1`] = `
     message.operation = object.operation !== undefined && object.operation !== null ? LogEntryOperation.fromPartial(object.operation) : undefined;
     message.sourceLocation = object.sourceLocation !== undefined && object.sourceLocation !== null ? LogEntrySourceLocation.fromPartial(object.sourceLocation) : undefined;
     return message;
+  },
+
+  fromSDK(object: LogEntrySDKType): LogEntry {
+    return {
+      name: isSet(object.name) ? object.name : \\"\\",
+      timestamp: isSet(object.timestamp) ? Timestamp.fromSDK(object.timestamp) : undefined,
+      severity: isSet(object.severity) ? logSeverityFromJSON(object.severity) : 0,
+      httpRequest: isSet(object.http_request) ? HttpRequest.fromSDK(object.http_request) : undefined,
+      trace: isSet(object.trace) ? object.trace : \\"\\",
+      insertId: isSet(object.insert_id) ? object.insert_id : \\"\\",
+      labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
+        [key: string]: string;
+      }>((acc, [key, value]) => {
+        acc[key] = String(value);
+        return acc;
+      }, {}) : {},
+      protoPayload: isSet(object.proto_payload) ? Any.fromSDK(object.proto_payload) : undefined,
+      textPayload: isSet(object.text_payload) ? object.text_payload : undefined,
+      structPayload: isSet(object.struct_payload) ? Struct.fromSDK(object.struct_payload) : undefined,
+      operation: isSet(object.operation) ? LogEntryOperation.fromSDK(object.operation) : undefined,
+      sourceLocation: isSet(object.source_location) ? LogEntrySourceLocation.fromSDK(object.source_location) : undefined
+    };
+  },
+
+  toSDK(message: LogEntry): LogEntrySDKType {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    message.timestamp !== undefined && (obj.timestamp = message.timestamp ? Timestamp.toSDK(message.timestamp) : undefined);
+    message.severity !== undefined && (obj.severity = logSeverityToJSON(message.severity));
+    message.httpRequest !== undefined && (obj.http_request = message.httpRequest ? HttpRequest.toSDK(message.httpRequest) : undefined);
+    message.trace !== undefined && (obj.trace = message.trace);
+    message.insertId !== undefined && (obj.insert_id = message.insertId);
+    obj.labels = {};
+
+    if (message.labels) {
+      Object.entries(message.labels).forEach(([k, v]) => {
+        obj.labels[k] = v;
+      });
+    }
+
+    message.protoPayload !== undefined && (obj.proto_payload = message.protoPayload ? Any.toSDK(message.protoPayload) : undefined);
+    message.textPayload !== undefined && (obj.text_payload = message.textPayload);
+    message.structPayload !== undefined && (obj.struct_payload = message.structPayload ? Struct.toSDK(message.structPayload) : undefined);
+    message.operation !== undefined && (obj.operation = message.operation ? LogEntryOperation.toSDK(message.operation) : undefined);
+    message.sourceLocation !== undefined && (obj.source_location = message.sourceLocation ? LogEntrySourceLocation.toSDK(message.sourceLocation) : undefined);
+    return obj;
   }
 
 };"
@@ -1995,6 +2454,24 @@ exports[`google/rpc/error_details name collisions 2`] = `
     const message = createBasePreconditionFailure();
     message.violations = object.violations?.map(e => PreconditionFailure_Violation.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: PreconditionFailureSDKType): PreconditionFailure {
+    return {
+      violations: Array.isArray(object?.violations) ? object.violations.map((e: any) => PreconditionFailure_Violation.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: PreconditionFailure): PreconditionFailureSDKType {
+    const obj: any = {};
+
+    if (message.violations) {
+      obj.violations = message.violations.map(e => e ? PreconditionFailure_Violation.toSDK(e) : undefined);
+    } else {
+      obj.violations = [];
+    }
+
+    return obj;
   }
 
 };"
@@ -2092,6 +2569,26 @@ exports[`ibc/core/port/v1/query 1`] = `
     message.counterparty = object.counterparty !== undefined && object.counterparty !== null ? Counterparty.fromPartial(object.counterparty) : undefined;
     message.proposedVersion = object.proposedVersion ?? \\"\\";
     return message;
+  },
+
+  fromSDK(object: QueryAppVersionRequestSDKType): QueryAppVersionRequest {
+    return {
+      portId: isSet(object.port_id) ? object.port_id : \\"\\",
+      connectionId: isSet(object.connection_id) ? object.connection_id : \\"\\",
+      ordering: isSet(object.ordering) ? orderFromJSON(object.ordering) : 0,
+      counterparty: isSet(object.counterparty) ? Counterparty.fromSDK(object.counterparty) : undefined,
+      proposedVersion: isSet(object.proposed_version) ? object.proposed_version : \\"\\"
+    };
+  },
+
+  toSDK(message: QueryAppVersionRequest): QueryAppVersionRequestSDKType {
+    const obj: any = {};
+    message.portId !== undefined && (obj.port_id = message.portId);
+    message.connectionId !== undefined && (obj.connection_id = message.connectionId);
+    message.ordering !== undefined && (obj.ordering = orderToJSON(message.ordering));
+    message.counterparty !== undefined && (obj.counterparty = message.counterparty ? Counterparty.toSDK(message.counterparty) : undefined);
+    message.proposedVersion !== undefined && (obj.proposed_version = message.proposedVersion);
+    return obj;
   }
 
 };"
@@ -2104,6 +2601,28 @@ Array [
     "importedAs": "Counterparty",
     "name": "Counterparty",
     "type": "typeImport",
+  },
+  Object {
+    "import": "ibc/core/channel/v1/channel.proto",
+    "importedAs": "Counterparty",
+    "name": "Counterparty",
+    "type": "typeImport",
+  },
+  Object {
+    "import": "ibc/core/channel/v1/channel.proto",
+    "name": "orderFromJSON",
+    "type": "fromJSONEnum",
+  },
+  Object {
+    "import": "ibc/core/channel/v1/channel.proto",
+    "importedAs": "Counterparty",
+    "name": "Counterparty",
+    "type": "typeImport",
+  },
+  Object {
+    "import": "ibc/core/channel/v1/channel.proto",
+    "name": "orderToJSON",
+    "type": "toJSONEnum",
   },
   Object {
     "import": "ibc/core/channel/v1/channel.proto",
@@ -2220,6 +2739,22 @@ exports[`ibc/core/types/v1/genesis name collisions 2`] = `
     message.connectionGenesis = object.connectionGenesis !== undefined && object.connectionGenesis !== null ? GenesisState.fromPartial(object.connectionGenesis) : undefined;
     message.channelGenesis = object.channelGenesis !== undefined && object.channelGenesis !== null ? GenesisState.fromPartial(object.channelGenesis) : undefined;
     return message;
+  },
+
+  fromSDK(object: GenesisStateSDKType): GenesisState {
+    return {
+      clientGenesis: isSet(object.client_genesis) ? GenesisState1.fromSDK(object.client_genesis) : undefined,
+      connectionGenesis: isSet(object.connection_genesis) ? GenesisState2.fromSDK(object.connection_genesis) : undefined,
+      channelGenesis: isSet(object.channel_genesis) ? GenesisState3.fromSDK(object.channel_genesis) : undefined
+    };
+  },
+
+  toSDK(message: GenesisState): GenesisStateSDKType {
+    const obj: any = {};
+    message.clientGenesis !== undefined && (obj.client_genesis = message.clientGenesis ? GenesisState1.toSDK(message.clientGenesis) : undefined);
+    message.connectionGenesis !== undefined && (obj.connection_genesis = message.connectionGenesis ? GenesisState2.toSDK(message.connectionGenesis) : undefined);
+    message.channelGenesis !== undefined && (obj.channel_genesis = message.channelGenesis ? GenesisState3.toSDK(message.channelGenesis) : undefined);
+    return obj;
   }
 
 };"
@@ -2227,6 +2762,42 @@ exports[`ibc/core/types/v1/genesis name collisions 2`] = `
 
 exports[`ibc/core/types/v1/genesis name collisions 3`] = `
 Array [
+  Object {
+    "import": "ibc/core/client/v1/genesis.proto",
+    "importedAs": "GenesisState1",
+    "name": "GenesisState",
+    "type": "typeImport",
+  },
+  Object {
+    "import": "ibc/core/connection/v1/genesis.proto",
+    "importedAs": "GenesisState2",
+    "name": "GenesisState",
+    "type": "typeImport",
+  },
+  Object {
+    "import": "ibc/core/channel/v1/genesis.proto",
+    "importedAs": "GenesisState3",
+    "name": "GenesisState",
+    "type": "typeImport",
+  },
+  Object {
+    "import": "ibc/core/client/v1/genesis.proto",
+    "importedAs": "GenesisState1",
+    "name": "GenesisState",
+    "type": "typeImport",
+  },
+  Object {
+    "import": "ibc/core/connection/v1/genesis.proto",
+    "importedAs": "GenesisState2",
+    "name": "GenesisState",
+    "type": "typeImport",
+  },
+  Object {
+    "import": "ibc/core/channel/v1/genesis.proto",
+    "importedAs": "GenesisState3",
+    "name": "GenesisState",
+    "type": "typeImport",
+  },
   Object {
     "import": "ibc/core/client/v1/genesis.proto",
     "importedAs": "GenesisState1",
@@ -2407,6 +2978,30 @@ exports[`osmosis/gamm/v1beta1/tx MsgJoinPool 1`] = `
     message.shareOutAmount = object.shareOutAmount ?? \\"\\";
     message.tokenInMaxs = object.tokenInMaxs?.map(e => Coin.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: MsgJoinPoolSDKType): MsgJoinPool {
+    return {
+      sender: isSet(object.sender) ? object.sender : \\"\\",
+      poolId: isSet(object.poolId) ? object.poolId : Long.UZERO,
+      shareOutAmount: isSet(object.shareOutAmount) ? object.shareOutAmount : \\"\\",
+      tokenInMaxs: Array.isArray(object?.tokenInMaxs) ? object.tokenInMaxs.map((e: any) => Coin.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: MsgJoinPool): MsgJoinPoolSDKType {
+    const obj: any = {};
+    message.sender !== undefined && (obj.sender = message.sender);
+    message.poolId !== undefined && (obj.poolId = message.poolId);
+    message.shareOutAmount !== undefined && (obj.shareOutAmount = message.shareOutAmount);
+
+    if (message.tokenInMaxs) {
+      obj.tokenInMaxs = message.tokenInMaxs.map(e => e ? Coin.toSDK(e) : undefined);
+    } else {
+      obj.tokenInMaxs = [];
+    }
+
+    return obj;
   }
 
 };"
@@ -2499,6 +3094,30 @@ exports[`osmosis/gamm/v1beta1/tx MsgSwapExactAmountIn 1`] = `
     message.tokenIn = object.tokenIn !== undefined && object.tokenIn !== null ? Coin.fromPartial(object.tokenIn) : undefined;
     message.tokenOutMinAmount = object.tokenOutMinAmount ?? \\"\\";
     return message;
+  },
+
+  fromSDK(object: MsgSwapExactAmountInSDKType): MsgSwapExactAmountIn {
+    return {
+      sender: isSet(object.sender) ? object.sender : \\"\\",
+      routes: Array.isArray(object?.routes) ? object.routes.map((e: any) => SwapAmountInRoute.fromSDK(e)) : [],
+      tokenIn: isSet(object.tokenIn) ? Coin.fromSDK(object.tokenIn) : undefined,
+      tokenOutMinAmount: isSet(object.tokenOutMinAmount) ? object.tokenOutMinAmount : \\"\\"
+    };
+  },
+
+  toSDK(message: MsgSwapExactAmountIn): MsgSwapExactAmountInSDKType {
+    const obj: any = {};
+    message.sender !== undefined && (obj.sender = message.sender);
+
+    if (message.routes) {
+      obj.routes = message.routes.map(e => e ? SwapAmountInRoute.toSDK(e) : undefined);
+    } else {
+      obj.routes = [];
+    }
+
+    message.tokenIn !== undefined && (obj.tokenIn = message.tokenIn ? Coin.toSDK(message.tokenIn) : undefined);
+    message.tokenOutMinAmount !== undefined && (obj.tokenOutMinAmount = message.tokenOutMinAmount);
+    return obj;
   }
 
 };"
@@ -2591,6 +3210,30 @@ exports[`osmosis/gamm/v1beta1/tx MsgSwapExactAmountOut 1`] = `
     message.tokenInMaxAmount = object.tokenInMaxAmount ?? \\"\\";
     message.tokenOut = object.tokenOut !== undefined && object.tokenOut !== null ? Coin.fromPartial(object.tokenOut) : undefined;
     return message;
+  },
+
+  fromSDK(object: MsgSwapExactAmountOutSDKType): MsgSwapExactAmountOut {
+    return {
+      sender: isSet(object.sender) ? object.sender : \\"\\",
+      routes: Array.isArray(object?.routes) ? object.routes.map((e: any) => SwapAmountOutRoute.fromSDK(e)) : [],
+      tokenInMaxAmount: isSet(object.tokenInMaxAmount) ? object.tokenInMaxAmount : \\"\\",
+      tokenOut: isSet(object.tokenOut) ? Coin.fromSDK(object.tokenOut) : undefined
+    };
+  },
+
+  toSDK(message: MsgSwapExactAmountOut): MsgSwapExactAmountOutSDKType {
+    const obj: any = {};
+    message.sender !== undefined && (obj.sender = message.sender);
+
+    if (message.routes) {
+      obj.routes = message.routes.map(e => e ? SwapAmountOutRoute.toSDK(e) : undefined);
+    } else {
+      obj.routes = [];
+    }
+
+    message.tokenInMaxAmount !== undefined && (obj.tokenInMaxAmount = message.tokenInMaxAmount);
+    message.tokenOut !== undefined && (obj.tokenOut = message.tokenOut ? Coin.toSDK(message.tokenOut) : undefined);
+    return obj;
   }
 
 };"

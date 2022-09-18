@@ -9,6 +9,7 @@ import {
     createProtoEnumToJSON,
     createProtoEnumFromJSON,
     createProtoType,
+    createSDKType,
     makeAminoTypeInterface,
     GenericParseContext,
     ProtoParseContext,
@@ -52,6 +53,7 @@ export const buildBaseTypeScriptInterface = (
     obj: any
 ) => {
     context.body.push(createProtoType(context.proto, name, obj));
+    context.body.push(createSDKType(context.proto, name, obj));
 };
 
 export const buildEnums = (

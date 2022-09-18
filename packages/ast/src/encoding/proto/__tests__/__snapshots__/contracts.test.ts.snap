@@ -104,6 +104,30 @@ exports[`MsgExecuteContract interface 2`] = `
     message.msg = object.msg ?? new Uint8Array();
     message.funds = object.funds?.map(e => Coin.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: MsgExecuteContractSDKType): MsgExecuteContract {
+    return {
+      sender: isSet(object.sender) ? object.sender : \\"\\",
+      contract: isSet(object.contract) ? object.contract : \\"\\",
+      msg: isSet(object.msg) ? object.msg : new Uint8Array(),
+      funds: Array.isArray(object?.funds) ? object.funds.map((e: any) => Coin.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: MsgExecuteContract): MsgExecuteContractSDKType {
+    const obj: any = {};
+    message.sender !== undefined && (obj.sender = message.sender);
+    message.contract !== undefined && (obj.contract = message.contract);
+    message.msg !== undefined && (obj.msg = message.msg);
+
+    if (message.funds) {
+      obj.funds = message.funds.map(e => e ? Coin.toSDK(e) : undefined);
+    } else {
+      obj.funds = [];
+    }
+
+    return obj;
   }
 
 };"

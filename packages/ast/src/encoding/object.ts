@@ -5,6 +5,8 @@ import { decodeMethod } from './proto/decode';
 import { encodeMethod } from './proto/encode';
 import { fromJSONMethod } from './proto/from-json';
 import { toJSONMethod } from './proto/to-json';
+import { toSDKMethod } from './proto/to-sdk';
+import { fromSDKMethod } from './proto/from-sdk';
 import { ProtoParseContext } from './context';
 
 export const createObjectWithMethods = (
@@ -19,6 +21,8 @@ export const createObjectWithMethods = (
         fromJSONMethod(context, name, proto),
         toJSONMethod(context, name, proto),
         fromPartialMethod(context, name, proto),
+        fromSDKMethod(context, name, proto),
+        toSDKMethod(context, name, proto),
     ];
 
     return t.exportNamedDeclaration(

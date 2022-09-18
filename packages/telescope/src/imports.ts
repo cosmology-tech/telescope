@@ -114,14 +114,29 @@ const importAs = (name: string, importAs: string, importPath: string) => {
 export const getImportStatements = (list: ImportObj[]) => {
     const imports = list.reduce((m, obj) => {
         m[obj.path] = m[obj.path] || [];
-        const exists = m[obj.path].find(el => el.type === obj.type && el.path === obj.path && el.name === obj.name);
+        const exists = m[obj.path].find(el =>
+            el.type === obj.type && el.path === obj.path && el.name === obj.name);
 
         // TODO some have google.protobuf.Any shows up... figure out the better way to handle this
         if (/\./.test(obj.name)) {
             obj.name = obj.name.split('.')[obj.name.split('.').length - 1];
         }
 
-        if (!exists) m[obj.path].push(obj);
+        if (!exists) {
+            m[obj.path].push(obj);
+            // SDKType
+            // this is a bit hacky
+            // lets add a prop to ImportObj to make it type
+            // probably wont need this until we start generating osmonauts/helpers inline
+            if (obj.type === 'import' && obj.path.startsWith('.')) {
+                const SDKTypeObject = {
+                    ...obj,
+                    name: obj.name + 'SDKType',
+                    importAs: (obj.importAs ?? obj.name) + 'SDKType',
+                };
+                m[obj.path].push(SDKTypeObject);
+            }
+        }
         return m;
     }, {})
 

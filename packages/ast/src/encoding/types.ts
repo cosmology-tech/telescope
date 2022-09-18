@@ -4,8 +4,38 @@ import { getProtoFieldTypeName } from '../utils';
 import { GenericParseContext, ProtoParseContext } from './context';
 import { GOOGLE_TYPES, SCALAR_TYPES } from './proto';
 
+export const getFieldNames = (field: ProtoField) => {
+    const propName = field.options?.['(telescope:name)'] ?? field.name;
+    const origName = field.options?.['(telescope:orig)'] ?? field.name;
+    return {
+        propName,
+        origName
+    };
+}
 
-export const getFieldTypeReference = (context: ProtoParseContext, field: ProtoField) => {
+export interface CreateProtoTypeOptions {
+    useOriginalCase: boolean;
+    typeNamePrefix?: string;
+    typeNameSuffix?: string;
+};
+
+export const createProtoTypeOptionsDefaults = {
+    useOriginalCase: false
+};
+
+export const getMessageName = (
+    name: string,
+    options: CreateProtoTypeOptions = createProtoTypeOptionsDefaults
+) => {
+    const MsgName = [options.typeNamePrefix, name, options.typeNameSuffix].filter(Boolean).join('');
+    return MsgName;
+}
+
+export const getFieldTypeReference = (
+    context: ProtoParseContext,
+    field: ProtoField,
+    options: CreateProtoTypeOptions = createProtoTypeOptionsDefaults
+) => {
     let ast: any = null;
     let typ: any = null;
 
@@ -18,7 +48,9 @@ export const getFieldTypeReference = (context: ProtoParseContext, field: ProtoFi
     } else if (GOOGLE_TYPES.includes(field.type)) {
         typ = getTSTypeFromGoogleType(context, field.type);
     } else {
-        typ = t.tsTypeReference(t.identifier(getProtoFieldTypeName(context, field)));
+        const propName = getProtoFieldTypeName(context, field);
+        const MsgName = getMessageName(propName, options);
+        typ = t.tsTypeReference(t.identifier(MsgName));
     }
 
     if (
