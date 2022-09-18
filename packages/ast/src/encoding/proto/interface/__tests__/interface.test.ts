@@ -3,7 +3,6 @@ import { defaultTelescopeOptions } from '@osmonauts/types';
 import { expectCode, getTestProtoStore } from '../../../../../test-utils/'
 import { ProtoParseContext } from '../../../context';
 import { createSDKType, createProtoType } from '..';
-import { createObjectWithMethods } from '../../../object';
 
 const store = getTestProtoStore();
 store.traverseAll();

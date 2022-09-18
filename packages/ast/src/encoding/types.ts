@@ -46,7 +46,7 @@ export const getFieldTypeReference = (
         return typ;
 
     } else if (GOOGLE_TYPES.includes(field.type)) {
-        typ = getTSTypeFromGoogleType(context, field.type);
+        typ = getTSTypeFromGoogleType(context, field.type, options);
     } else {
         const propName = getProtoFieldTypeName(context, field);
         const MsgName = getMessageName(propName, options);
@@ -99,12 +99,21 @@ export const getTSType = (context: GenericParseContext, type: string) => {
     };
 };
 
-export const getTSTypeFromGoogleType = (context: GenericParseContext, type: string) => {
+export const getTSTypeFromGoogleType = (
+    context: GenericParseContext,
+    type: string,
+    options: CreateProtoTypeOptions = createProtoTypeOptionsDefaults
+) => {
+
+    const identifier = (str) => {
+        return t.identifier(getMessageName(str, options));
+    };
+
     switch (type) {
         case 'google.protobuf.Timestamp':
             switch (context.pluginValue('prototypes.typingsFormat.timestamp')) {
                 case 'timestamp':
-                    return t.tsTypeReference(t.identifier('Timestamp'));
+                    return t.tsTypeReference(identifier('Timestamp'));
                 case 'date':
                 default:
                     return t.tsTypeReference(t.identifier('Date'));
@@ -112,13 +121,13 @@ export const getTSTypeFromGoogleType = (context: GenericParseContext, type: stri
         case 'google.protobuf.Duration':
             switch (context.pluginValue('prototypes.typingsFormat.duration')) {
                 case 'duration':
-                    return t.tsTypeReference(t.identifier('Duration'));
+                    return t.tsTypeReference(identifier('Duration'));
                 case 'string':
                 default:
                     return t.tsStringKeyword();
             }
         case 'google.protobuf.Any':
-            return t.tsTypeReference(t.identifier('Any'));
+            return t.tsTypeReference(identifier('Any'));
         default:
             throw new Error('getTSTypeFromGoogleType() type not found');
     };
