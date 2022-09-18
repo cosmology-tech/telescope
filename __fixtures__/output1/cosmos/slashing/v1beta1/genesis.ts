@@ -1,4 +1,4 @@
-import { Params, ValidatorSigningInfo } from "./slashing";
+import { Params, ParamsSDKType, ValidatorSigningInfo, ValidatorSigningInfoSDKType } from "./slashing";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, Long } from "@osmonauts/helpers";
 export const protobufPackage = "cosmos.slashing.v1beta1";
@@ -21,6 +21,24 @@ export interface GenesisState {
   missedBlocks: ValidatorMissedBlocks[];
 }
 
+/** GenesisState defines the slashing module's genesis state. */
+export interface GenesisStateSDKType {
+  /** params defines all the paramaters of related to deposit. */
+  params: ParamsSDKType;
+
+  /**
+   * signing_infos represents a map between validator addresses and their
+   * signing infos.
+   */
+  signing_infos: SigningInfoSDKType[];
+
+  /**
+   * missed_blocks represents a map between validator addresses and their
+   * missed blocks.
+   */
+  missed_blocks: ValidatorMissedBlocksSDKType[];
+}
+
 /** SigningInfo stores validator signing info of corresponding address. */
 export interface SigningInfo {
   /** address is the validator address. */
@@ -28,6 +46,15 @@ export interface SigningInfo {
 
   /** validator_signing_info represents the signing info of this validator. */
   validatorSigningInfo: ValidatorSigningInfo;
+}
+
+/** SigningInfo stores validator signing info of corresponding address. */
+export interface SigningInfoSDKType {
+  /** address is the validator address. */
+  address: string;
+
+  /** validator_signing_info represents the signing info of this validator. */
+  validator_signing_info: ValidatorSigningInfoSDKType;
 }
 
 /**
@@ -42,8 +69,29 @@ export interface ValidatorMissedBlocks {
   missedBlocks: MissedBlock[];
 }
 
+/**
+ * ValidatorMissedBlocks contains array of missed blocks of corresponding
+ * address.
+ */
+export interface ValidatorMissedBlocksSDKType {
+  /** address is the validator address. */
+  address: string;
+
+  /** missed_blocks is an array of missed blocks by the validator. */
+  missed_blocks: MissedBlockSDKType[];
+}
+
 /** MissedBlock contains height and missed status as boolean. */
 export interface MissedBlock {
+  /** index is the height at which the block was missed. */
+  index: Long;
+
+  /** missed is the missed status. */
+  missed: boolean;
+}
+
+/** MissedBlock contains height and missed status as boolean. */
+export interface MissedBlockSDKType {
   /** index is the height at which the block was missed. */
   index: Long;
 
@@ -139,6 +187,33 @@ export const GenesisState = {
     message.signingInfos = object.signingInfos?.map(e => SigningInfo.fromPartial(e)) || [];
     message.missedBlocks = object.missedBlocks?.map(e => ValidatorMissedBlocks.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: GenesisStateSDKType): GenesisState {
+    return {
+      params: isSet(object.params) ? Params.fromSDK(object.params) : undefined,
+      signingInfos: Array.isArray(object?.signing_infos) ? object.signing_infos.map((e: any) => SigningInfo.fromSDK(e)) : [],
+      missedBlocks: Array.isArray(object?.missed_blocks) ? object.missed_blocks.map((e: any) => ValidatorMissedBlocks.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: GenesisState): GenesisStateSDKType {
+    const obj: any = {};
+    message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
+
+    if (message.signingInfos) {
+      obj.signing_infos = message.signingInfos.map(e => e ? SigningInfo.toSDK(e) : undefined);
+    } else {
+      obj.signing_infos = [];
+    }
+
+    if (message.missedBlocks) {
+      obj.missed_blocks = message.missedBlocks.map(e => e ? ValidatorMissedBlocks.toSDK(e) : undefined);
+    } else {
+      obj.missed_blocks = [];
+    }
+
+    return obj;
   }
 
 };
@@ -208,6 +283,20 @@ export const SigningInfo = {
     message.address = object.address ?? "";
     message.validatorSigningInfo = object.validatorSigningInfo !== undefined && object.validatorSigningInfo !== null ? ValidatorSigningInfo.fromPartial(object.validatorSigningInfo) : undefined;
     return message;
+  },
+
+  fromSDK(object: SigningInfoSDKType): SigningInfo {
+    return {
+      address: isSet(object.address) ? object.address : "",
+      validatorSigningInfo: isSet(object.validator_signing_info) ? ValidatorSigningInfo.fromSDK(object.validator_signing_info) : undefined
+    };
+  },
+
+  toSDK(message: SigningInfo): SigningInfoSDKType {
+    const obj: any = {};
+    message.address !== undefined && (obj.address = message.address);
+    message.validatorSigningInfo !== undefined && (obj.validator_signing_info = message.validatorSigningInfo ? ValidatorSigningInfo.toSDK(message.validatorSigningInfo) : undefined);
+    return obj;
   }
 
 };
@@ -283,6 +372,26 @@ export const ValidatorMissedBlocks = {
     message.address = object.address ?? "";
     message.missedBlocks = object.missedBlocks?.map(e => MissedBlock.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: ValidatorMissedBlocksSDKType): ValidatorMissedBlocks {
+    return {
+      address: isSet(object.address) ? object.address : "",
+      missedBlocks: Array.isArray(object?.missed_blocks) ? object.missed_blocks.map((e: any) => MissedBlock.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: ValidatorMissedBlocks): ValidatorMissedBlocksSDKType {
+    const obj: any = {};
+    message.address !== undefined && (obj.address = message.address);
+
+    if (message.missedBlocks) {
+      obj.missed_blocks = message.missedBlocks.map(e => e ? MissedBlock.toSDK(e) : undefined);
+    } else {
+      obj.missed_blocks = [];
+    }
+
+    return obj;
   }
 
 };
@@ -352,6 +461,20 @@ export const MissedBlock = {
     message.index = object.index !== undefined && object.index !== null ? Long.fromValue(object.index) : Long.ZERO;
     message.missed = object.missed ?? false;
     return message;
+  },
+
+  fromSDK(object: MissedBlockSDKType): MissedBlock {
+    return {
+      index: isSet(object.index) ? object.index : Long.ZERO,
+      missed: isSet(object.missed) ? object.missed : false
+    };
+  },
+
+  toSDK(message: MissedBlock): MissedBlockSDKType {
+    const obj: any = {};
+    message.index !== undefined && (obj.index = message.index);
+    message.missed !== undefined && (obj.missed = message.missed);
+    return obj;
   }
 
 };

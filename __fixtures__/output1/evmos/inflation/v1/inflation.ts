@@ -32,6 +32,35 @@ export interface InflationDistribution {
 }
 
 /**
+ * InflationDistribution defines the distribution in which inflation is
+ * allocated through minting on each epoch (staking, incentives, community). It
+ * excludes the team vesting distribution, as this is minted once at genesis.
+ * The initial InflationDistribution can be calculated from the Evmos Token
+ * Model like this:
+ * mintDistribution1 = distribution1 / (1 - teamVestingDistribution)
+ * 0.5333333         = 40%           / (1 - 25%)
+ */
+export interface InflationDistributionSDKType {
+  /**
+   * staking_rewards defines the proportion of the minted minted_denom that is
+   * to be allocated as staking rewards
+   */
+  staking_rewards: string;
+
+  /**
+   * usage_incentives defines the proportion of the minted minted_denom that is
+   * to be allocated to the incentives module address
+   */
+  usage_incentives: string;
+
+  /**
+   * community_pool defines the proportion of the minted minted_denom that is to
+   * be allocated to the community pool
+   */
+  community_pool: string;
+}
+
+/**
  * ExponentialCalculation holds factors to calculate exponential inflation on
  * each period. Calculation reference:
  * periodProvision = exponentialDecay       *  bondingIncentive
@@ -53,6 +82,30 @@ export interface ExponentialCalculation {
 
   /** max variance */
   maxVariance: string;
+}
+
+/**
+ * ExponentialCalculation holds factors to calculate exponential inflation on
+ * each period. Calculation reference:
+ * periodProvision = exponentialDecay       *  bondingIncentive
+ * f(x)            = (a * (1 - r) ^ x + c)  *  (1 + max_variance - bondedRatio *
+ * (max_variance / bonding_target))
+ */
+export interface ExponentialCalculationSDKType {
+  /** initial value */
+  a: string;
+
+  /** reduction factor */
+  r: string;
+
+  /** long term inflation */
+  c: string;
+
+  /** bonding target */
+  bonding_target: string;
+
+  /** max variance */
+  max_variance: string;
 }
 
 function createBaseInflationDistribution(): InflationDistribution {
@@ -132,6 +185,22 @@ export const InflationDistribution = {
     message.usageIncentives = object.usageIncentives ?? "";
     message.communityPool = object.communityPool ?? "";
     return message;
+  },
+
+  fromSDK(object: InflationDistributionSDKType): InflationDistribution {
+    return {
+      stakingRewards: isSet(object.staking_rewards) ? object.staking_rewards : "",
+      usageIncentives: isSet(object.usage_incentives) ? object.usage_incentives : "",
+      communityPool: isSet(object.community_pool) ? object.community_pool : ""
+    };
+  },
+
+  toSDK(message: InflationDistribution): InflationDistributionSDKType {
+    const obj: any = {};
+    message.stakingRewards !== undefined && (obj.staking_rewards = message.stakingRewards);
+    message.usageIncentives !== undefined && (obj.usage_incentives = message.usageIncentives);
+    message.communityPool !== undefined && (obj.community_pool = message.communityPool);
+    return obj;
   }
 
 };
@@ -237,6 +306,26 @@ export const ExponentialCalculation = {
     message.bondingTarget = object.bondingTarget ?? "";
     message.maxVariance = object.maxVariance ?? "";
     return message;
+  },
+
+  fromSDK(object: ExponentialCalculationSDKType): ExponentialCalculation {
+    return {
+      a: isSet(object.a) ? object.a : "",
+      r: isSet(object.r) ? object.r : "",
+      c: isSet(object.c) ? object.c : "",
+      bondingTarget: isSet(object.bonding_target) ? object.bonding_target : "",
+      maxVariance: isSet(object.max_variance) ? object.max_variance : ""
+    };
+  },
+
+  toSDK(message: ExponentialCalculation): ExponentialCalculationSDKType {
+    const obj: any = {};
+    message.a !== undefined && (obj.a = message.a);
+    message.r !== undefined && (obj.r = message.r);
+    message.c !== undefined && (obj.c = message.c);
+    message.bondingTarget !== undefined && (obj.bonding_target = message.bondingTarget);
+    message.maxVariance !== undefined && (obj.max_variance = message.maxVariance);
+    return obj;
   }
 
 };

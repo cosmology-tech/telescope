@@ -1,6 +1,6 @@
-import { Any } from "../../../../google/protobuf/any";
-import { ConnectionEnd } from "../../../core/connection/v1/connection";
-import { Channel } from "../../../core/channel/v1/channel";
+import { Any, AnySDKType } from "../../../../google/protobuf/any";
+import { ConnectionEnd, ConnectionEndSDKType } from "../../../core/connection/v1/connection";
+import { Channel, ChannelSDKType } from "../../../core/channel/v1/channel";
 import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
 export const protobufPackage = "ibc.lightclients.solomachine.v1";
@@ -146,6 +146,25 @@ export interface ClientState {
 }
 
 /**
+ * ClientState defines a solo machine client that tracks the current consensus
+ * state and if the client is frozen.
+ */
+export interface ClientStateSDKType {
+  /** latest sequence of the client state */
+  sequence: Long;
+
+  /** frozen sequence of the solo machine */
+  frozen_sequence: Long;
+  consensus_state: ConsensusStateSDKType;
+
+  /**
+   * when set to true, will allow governance to update a solo machine client.
+   * The client will be unfrozen if it is frozen.
+   */
+  allow_update_after_proposal: boolean;
+}
+
+/**
  * ConsensusState defines a solo machine consensus state. The sequence of a
  * consensus state is contained in the "height" key used in storing the
  * consensus state.
@@ -153,6 +172,24 @@ export interface ClientState {
 export interface ConsensusState {
   /** public key of the solo machine */
   publicKey: Any;
+
+  /**
+   * diversifier allows the same public key to be re-used across different solo
+   * machine clients (potentially on different chains) without being considered
+   * misbehaviour.
+   */
+  diversifier: string;
+  timestamp: Long;
+}
+
+/**
+ * ConsensusState defines a solo machine consensus state. The sequence of a
+ * consensus state is contained in the "height" key used in storing the
+ * consensus state.
+ */
+export interface ConsensusStateSDKType {
+  /** public key of the solo machine */
+  public_key: Any;
 
   /**
    * diversifier allows the same public key to be re-used across different solo
@@ -173,6 +210,16 @@ export interface Header {
   newDiversifier: string;
 }
 
+/** Header defines a solo machine consensus header */
+export interface HeaderSDKType {
+  /** sequence to update solo machine public key at */
+  sequence: Long;
+  timestamp: Long;
+  signature: Uint8Array;
+  new_public_key: Any;
+  new_diversifier: string;
+}
+
 /**
  * Misbehaviour defines misbehaviour for a solo machine which consists
  * of a sequence and two signatures over different messages at that sequence.
@@ -182,6 +229,17 @@ export interface Misbehaviour {
   sequence: Long;
   signatureOne: SignatureAndData;
   signatureTwo: SignatureAndData;
+}
+
+/**
+ * Misbehaviour defines misbehaviour for a solo machine which consists
+ * of a sequence and two signatures over different messages at that sequence.
+ */
+export interface MisbehaviourSDKType {
+  client_id: string;
+  sequence: Long;
+  signature_one: SignatureAndDataSDKType;
+  signature_two: SignatureAndDataSDKType;
 }
 
 /**
@@ -196,11 +254,31 @@ export interface SignatureAndData {
 }
 
 /**
+ * SignatureAndData contains a signature and the data signed over to create that
+ * signature.
+ */
+export interface SignatureAndDataSDKType {
+  signature: Uint8Array;
+  data_type: DataTypeSDKType;
+  data: Uint8Array;
+  timestamp: Long;
+}
+
+/**
  * TimestampedSignatureData contains the signature data and the timestamp of the
  * signature.
  */
 export interface TimestampedSignatureData {
   signatureData: Uint8Array;
+  timestamp: Long;
+}
+
+/**
+ * TimestampedSignatureData contains the signature data and the timestamp of the
+ * signature.
+ */
+export interface TimestampedSignatureDataSDKType {
+  signature_data: Uint8Array;
   timestamp: Long;
 }
 
@@ -217,6 +295,19 @@ export interface SignBytes {
   data: Uint8Array;
 }
 
+/** SignBytes defines the signed bytes used for signature verification. */
+export interface SignBytesSDKType {
+  sequence: Long;
+  timestamp: Long;
+  diversifier: string;
+
+  /** type of the data used */
+  data_type: DataTypeSDKType;
+
+  /** marshaled data */
+  data: Uint8Array;
+}
+
 /** HeaderData returns the SignBytes data for update verification. */
 export interface HeaderData {
   /** header public key */
@@ -226,10 +317,25 @@ export interface HeaderData {
   newDiversifier: string;
 }
 
+/** HeaderData returns the SignBytes data for update verification. */
+export interface HeaderDataSDKType {
+  /** header public key */
+  new_pub_key: Any;
+
+  /** header diversifier */
+  new_diversifier: string;
+}
+
 /** ClientStateData returns the SignBytes data for client state verification. */
 export interface ClientStateData {
   path: Uint8Array;
   clientState: Any;
+}
+
+/** ClientStateData returns the SignBytes data for client state verification. */
+export interface ClientStateDataSDKType {
+  path: Uint8Array;
+  client_state: Any;
 }
 
 /**
@@ -242,12 +348,30 @@ export interface ConsensusStateData {
 }
 
 /**
+ * ConsensusStateData returns the SignBytes data for consensus state
+ * verification.
+ */
+export interface ConsensusStateDataSDKType {
+  path: Uint8Array;
+  consensus_state: Any;
+}
+
+/**
  * ConnectionStateData returns the SignBytes data for connection state
  * verification.
  */
 export interface ConnectionStateData {
   path: Uint8Array;
   connection: ConnectionEnd;
+}
+
+/**
+ * ConnectionStateData returns the SignBytes data for connection state
+ * verification.
+ */
+export interface ConnectionStateDataSDKType {
+  path: Uint8Array;
+  connection: ConnectionEndSDKType;
 }
 
 /**
@@ -260,10 +384,28 @@ export interface ChannelStateData {
 }
 
 /**
+ * ChannelStateData returns the SignBytes data for channel state
+ * verification.
+ */
+export interface ChannelStateDataSDKType {
+  path: Uint8Array;
+  channel: ChannelSDKType;
+}
+
+/**
  * PacketCommitmentData returns the SignBytes data for packet commitment
  * verification.
  */
 export interface PacketCommitmentData {
+  path: Uint8Array;
+  commitment: Uint8Array;
+}
+
+/**
+ * PacketCommitmentData returns the SignBytes data for packet commitment
+ * verification.
+ */
+export interface PacketCommitmentDataSDKType {
   path: Uint8Array;
   commitment: Uint8Array;
 }
@@ -278,10 +420,27 @@ export interface PacketAcknowledgementData {
 }
 
 /**
+ * PacketAcknowledgementData returns the SignBytes data for acknowledgement
+ * verification.
+ */
+export interface PacketAcknowledgementDataSDKType {
+  path: Uint8Array;
+  acknowledgement: Uint8Array;
+}
+
+/**
  * PacketReceiptAbsenceData returns the SignBytes data for
  * packet receipt absence verification.
  */
 export interface PacketReceiptAbsenceData {
+  path: Uint8Array;
+}
+
+/**
+ * PacketReceiptAbsenceData returns the SignBytes data for
+ * packet receipt absence verification.
+ */
+export interface PacketReceiptAbsenceDataSDKType {
   path: Uint8Array;
 }
 
@@ -292,6 +451,15 @@ export interface PacketReceiptAbsenceData {
 export interface NextSequenceRecvData {
   path: Uint8Array;
   nextSeqRecv: Long;
+}
+
+/**
+ * NextSequenceRecvData returns the SignBytes data for verification of the next
+ * sequence to be received.
+ */
+export interface NextSequenceRecvDataSDKType {
+  path: Uint8Array;
+  next_seq_recv: Long;
 }
 
 function createBaseClientState(): ClientState {
@@ -383,6 +551,24 @@ export const ClientState = {
     message.consensusState = object.consensusState !== undefined && object.consensusState !== null ? ConsensusState.fromPartial(object.consensusState) : undefined;
     message.allowUpdateAfterProposal = object.allowUpdateAfterProposal ?? false;
     return message;
+  },
+
+  fromSDK(object: ClientStateSDKType): ClientState {
+    return {
+      sequence: isSet(object.sequence) ? object.sequence : Long.UZERO,
+      frozenSequence: isSet(object.frozen_sequence) ? object.frozen_sequence : Long.UZERO,
+      consensusState: isSet(object.consensus_state) ? ConsensusState.fromSDK(object.consensus_state) : undefined,
+      allowUpdateAfterProposal: isSet(object.allow_update_after_proposal) ? object.allow_update_after_proposal : false
+    };
+  },
+
+  toSDK(message: ClientState): ClientStateSDKType {
+    const obj: any = {};
+    message.sequence !== undefined && (obj.sequence = message.sequence);
+    message.frozenSequence !== undefined && (obj.frozen_sequence = message.frozenSequence);
+    message.consensusState !== undefined && (obj.consensus_state = message.consensusState ? ConsensusState.toSDK(message.consensusState) : undefined);
+    message.allowUpdateAfterProposal !== undefined && (obj.allow_update_after_proposal = message.allowUpdateAfterProposal);
+    return obj;
   }
 
 };
@@ -464,6 +650,22 @@ export const ConsensusState = {
     message.diversifier = object.diversifier ?? "";
     message.timestamp = object.timestamp !== undefined && object.timestamp !== null ? Long.fromValue(object.timestamp) : Long.UZERO;
     return message;
+  },
+
+  fromSDK(object: ConsensusStateSDKType): ConsensusState {
+    return {
+      publicKey: isSet(object.public_key) ? Any.fromSDK(object.public_key) : undefined,
+      diversifier: isSet(object.diversifier) ? object.diversifier : "",
+      timestamp: isSet(object.timestamp) ? object.timestamp : Long.UZERO
+    };
+  },
+
+  toSDK(message: ConsensusState): ConsensusStateSDKType {
+    const obj: any = {};
+    message.publicKey !== undefined && (obj.public_key = message.publicKey ? Any.toSDK(message.publicKey) : undefined);
+    message.diversifier !== undefined && (obj.diversifier = message.diversifier);
+    message.timestamp !== undefined && (obj.timestamp = message.timestamp);
+    return obj;
   }
 
 };
@@ -569,6 +771,26 @@ export const Header = {
     message.newPublicKey = object.newPublicKey !== undefined && object.newPublicKey !== null ? Any.fromPartial(object.newPublicKey) : undefined;
     message.newDiversifier = object.newDiversifier ?? "";
     return message;
+  },
+
+  fromSDK(object: HeaderSDKType): Header {
+    return {
+      sequence: isSet(object.sequence) ? object.sequence : Long.UZERO,
+      timestamp: isSet(object.timestamp) ? object.timestamp : Long.UZERO,
+      signature: isSet(object.signature) ? object.signature : new Uint8Array(),
+      newPublicKey: isSet(object.new_public_key) ? Any.fromSDK(object.new_public_key) : undefined,
+      newDiversifier: isSet(object.new_diversifier) ? object.new_diversifier : ""
+    };
+  },
+
+  toSDK(message: Header): HeaderSDKType {
+    const obj: any = {};
+    message.sequence !== undefined && (obj.sequence = message.sequence);
+    message.timestamp !== undefined && (obj.timestamp = message.timestamp);
+    message.signature !== undefined && (obj.signature = message.signature);
+    message.newPublicKey !== undefined && (obj.new_public_key = message.newPublicKey ? Any.toSDK(message.newPublicKey) : undefined);
+    message.newDiversifier !== undefined && (obj.new_diversifier = message.newDiversifier);
+    return obj;
   }
 
 };
@@ -662,6 +884,24 @@ export const Misbehaviour = {
     message.signatureOne = object.signatureOne !== undefined && object.signatureOne !== null ? SignatureAndData.fromPartial(object.signatureOne) : undefined;
     message.signatureTwo = object.signatureTwo !== undefined && object.signatureTwo !== null ? SignatureAndData.fromPartial(object.signatureTwo) : undefined;
     return message;
+  },
+
+  fromSDK(object: MisbehaviourSDKType): Misbehaviour {
+    return {
+      clientId: isSet(object.client_id) ? object.client_id : "",
+      sequence: isSet(object.sequence) ? object.sequence : Long.UZERO,
+      signatureOne: isSet(object.signature_one) ? SignatureAndData.fromSDK(object.signature_one) : undefined,
+      signatureTwo: isSet(object.signature_two) ? SignatureAndData.fromSDK(object.signature_two) : undefined
+    };
+  },
+
+  toSDK(message: Misbehaviour): MisbehaviourSDKType {
+    const obj: any = {};
+    message.clientId !== undefined && (obj.client_id = message.clientId);
+    message.sequence !== undefined && (obj.sequence = message.sequence);
+    message.signatureOne !== undefined && (obj.signature_one = message.signatureOne ? SignatureAndData.toSDK(message.signatureOne) : undefined);
+    message.signatureTwo !== undefined && (obj.signature_two = message.signatureTwo ? SignatureAndData.toSDK(message.signatureTwo) : undefined);
+    return obj;
   }
 
 };
@@ -755,6 +995,24 @@ export const SignatureAndData = {
     message.data = object.data ?? new Uint8Array();
     message.timestamp = object.timestamp !== undefined && object.timestamp !== null ? Long.fromValue(object.timestamp) : Long.UZERO;
     return message;
+  },
+
+  fromSDK(object: SignatureAndDataSDKType): SignatureAndData {
+    return {
+      signature: isSet(object.signature) ? object.signature : new Uint8Array(),
+      dataType: isSet(object.data_type) ? dataTypeFromJSON(object.data_type) : 0,
+      data: isSet(object.data) ? object.data : new Uint8Array(),
+      timestamp: isSet(object.timestamp) ? object.timestamp : Long.UZERO
+    };
+  },
+
+  toSDK(message: SignatureAndData): SignatureAndDataSDKType {
+    const obj: any = {};
+    message.signature !== undefined && (obj.signature = message.signature);
+    message.dataType !== undefined && (obj.data_type = dataTypeToJSON(message.dataType));
+    message.data !== undefined && (obj.data = message.data);
+    message.timestamp !== undefined && (obj.timestamp = message.timestamp);
+    return obj;
   }
 
 };
@@ -824,6 +1082,20 @@ export const TimestampedSignatureData = {
     message.signatureData = object.signatureData ?? new Uint8Array();
     message.timestamp = object.timestamp !== undefined && object.timestamp !== null ? Long.fromValue(object.timestamp) : Long.UZERO;
     return message;
+  },
+
+  fromSDK(object: TimestampedSignatureDataSDKType): TimestampedSignatureData {
+    return {
+      signatureData: isSet(object.signature_data) ? object.signature_data : new Uint8Array(),
+      timestamp: isSet(object.timestamp) ? object.timestamp : Long.UZERO
+    };
+  },
+
+  toSDK(message: TimestampedSignatureData): TimestampedSignatureDataSDKType {
+    const obj: any = {};
+    message.signatureData !== undefined && (obj.signature_data = message.signatureData);
+    message.timestamp !== undefined && (obj.timestamp = message.timestamp);
+    return obj;
   }
 
 };
@@ -929,6 +1201,26 @@ export const SignBytes = {
     message.dataType = object.dataType ?? 0;
     message.data = object.data ?? new Uint8Array();
     return message;
+  },
+
+  fromSDK(object: SignBytesSDKType): SignBytes {
+    return {
+      sequence: isSet(object.sequence) ? object.sequence : Long.UZERO,
+      timestamp: isSet(object.timestamp) ? object.timestamp : Long.UZERO,
+      diversifier: isSet(object.diversifier) ? object.diversifier : "",
+      dataType: isSet(object.data_type) ? dataTypeFromJSON(object.data_type) : 0,
+      data: isSet(object.data) ? object.data : new Uint8Array()
+    };
+  },
+
+  toSDK(message: SignBytes): SignBytesSDKType {
+    const obj: any = {};
+    message.sequence !== undefined && (obj.sequence = message.sequence);
+    message.timestamp !== undefined && (obj.timestamp = message.timestamp);
+    message.diversifier !== undefined && (obj.diversifier = message.diversifier);
+    message.dataType !== undefined && (obj.data_type = dataTypeToJSON(message.dataType));
+    message.data !== undefined && (obj.data = message.data);
+    return obj;
   }
 
 };
@@ -998,6 +1290,20 @@ export const HeaderData = {
     message.newPubKey = object.newPubKey !== undefined && object.newPubKey !== null ? Any.fromPartial(object.newPubKey) : undefined;
     message.newDiversifier = object.newDiversifier ?? "";
     return message;
+  },
+
+  fromSDK(object: HeaderDataSDKType): HeaderData {
+    return {
+      newPubKey: isSet(object.new_pub_key) ? Any.fromSDK(object.new_pub_key) : undefined,
+      newDiversifier: isSet(object.new_diversifier) ? object.new_diversifier : ""
+    };
+  },
+
+  toSDK(message: HeaderData): HeaderDataSDKType {
+    const obj: any = {};
+    message.newPubKey !== undefined && (obj.new_pub_key = message.newPubKey ? Any.toSDK(message.newPubKey) : undefined);
+    message.newDiversifier !== undefined && (obj.new_diversifier = message.newDiversifier);
+    return obj;
   }
 
 };
@@ -1067,6 +1373,20 @@ export const ClientStateData = {
     message.path = object.path ?? new Uint8Array();
     message.clientState = object.clientState !== undefined && object.clientState !== null ? Any.fromPartial(object.clientState) : undefined;
     return message;
+  },
+
+  fromSDK(object: ClientStateDataSDKType): ClientStateData {
+    return {
+      path: isSet(object.path) ? object.path : new Uint8Array(),
+      clientState: isSet(object.client_state) ? Any.fromSDK(object.client_state) : undefined
+    };
+  },
+
+  toSDK(message: ClientStateData): ClientStateDataSDKType {
+    const obj: any = {};
+    message.path !== undefined && (obj.path = message.path);
+    message.clientState !== undefined && (obj.client_state = message.clientState ? Any.toSDK(message.clientState) : undefined);
+    return obj;
   }
 
 };
@@ -1136,6 +1456,20 @@ export const ConsensusStateData = {
     message.path = object.path ?? new Uint8Array();
     message.consensusState = object.consensusState !== undefined && object.consensusState !== null ? Any.fromPartial(object.consensusState) : undefined;
     return message;
+  },
+
+  fromSDK(object: ConsensusStateDataSDKType): ConsensusStateData {
+    return {
+      path: isSet(object.path) ? object.path : new Uint8Array(),
+      consensusState: isSet(object.consensus_state) ? Any.fromSDK(object.consensus_state) : undefined
+    };
+  },
+
+  toSDK(message: ConsensusStateData): ConsensusStateDataSDKType {
+    const obj: any = {};
+    message.path !== undefined && (obj.path = message.path);
+    message.consensusState !== undefined && (obj.consensus_state = message.consensusState ? Any.toSDK(message.consensusState) : undefined);
+    return obj;
   }
 
 };
@@ -1205,6 +1539,20 @@ export const ConnectionStateData = {
     message.path = object.path ?? new Uint8Array();
     message.connection = object.connection !== undefined && object.connection !== null ? ConnectionEnd.fromPartial(object.connection) : undefined;
     return message;
+  },
+
+  fromSDK(object: ConnectionStateDataSDKType): ConnectionStateData {
+    return {
+      path: isSet(object.path) ? object.path : new Uint8Array(),
+      connection: isSet(object.connection) ? ConnectionEnd.fromSDK(object.connection) : undefined
+    };
+  },
+
+  toSDK(message: ConnectionStateData): ConnectionStateDataSDKType {
+    const obj: any = {};
+    message.path !== undefined && (obj.path = message.path);
+    message.connection !== undefined && (obj.connection = message.connection ? ConnectionEnd.toSDK(message.connection) : undefined);
+    return obj;
   }
 
 };
@@ -1274,6 +1622,20 @@ export const ChannelStateData = {
     message.path = object.path ?? new Uint8Array();
     message.channel = object.channel !== undefined && object.channel !== null ? Channel.fromPartial(object.channel) : undefined;
     return message;
+  },
+
+  fromSDK(object: ChannelStateDataSDKType): ChannelStateData {
+    return {
+      path: isSet(object.path) ? object.path : new Uint8Array(),
+      channel: isSet(object.channel) ? Channel.fromSDK(object.channel) : undefined
+    };
+  },
+
+  toSDK(message: ChannelStateData): ChannelStateDataSDKType {
+    const obj: any = {};
+    message.path !== undefined && (obj.path = message.path);
+    message.channel !== undefined && (obj.channel = message.channel ? Channel.toSDK(message.channel) : undefined);
+    return obj;
   }
 
 };
@@ -1343,6 +1705,20 @@ export const PacketCommitmentData = {
     message.path = object.path ?? new Uint8Array();
     message.commitment = object.commitment ?? new Uint8Array();
     return message;
+  },
+
+  fromSDK(object: PacketCommitmentDataSDKType): PacketCommitmentData {
+    return {
+      path: isSet(object.path) ? object.path : new Uint8Array(),
+      commitment: isSet(object.commitment) ? object.commitment : new Uint8Array()
+    };
+  },
+
+  toSDK(message: PacketCommitmentData): PacketCommitmentDataSDKType {
+    const obj: any = {};
+    message.path !== undefined && (obj.path = message.path);
+    message.commitment !== undefined && (obj.commitment = message.commitment);
+    return obj;
   }
 
 };
@@ -1412,6 +1788,20 @@ export const PacketAcknowledgementData = {
     message.path = object.path ?? new Uint8Array();
     message.acknowledgement = object.acknowledgement ?? new Uint8Array();
     return message;
+  },
+
+  fromSDK(object: PacketAcknowledgementDataSDKType): PacketAcknowledgementData {
+    return {
+      path: isSet(object.path) ? object.path : new Uint8Array(),
+      acknowledgement: isSet(object.acknowledgement) ? object.acknowledgement : new Uint8Array()
+    };
+  },
+
+  toSDK(message: PacketAcknowledgementData): PacketAcknowledgementDataSDKType {
+    const obj: any = {};
+    message.path !== undefined && (obj.path = message.path);
+    message.acknowledgement !== undefined && (obj.acknowledgement = message.acknowledgement);
+    return obj;
   }
 
 };
@@ -1469,6 +1859,18 @@ export const PacketReceiptAbsenceData = {
     const message = createBasePacketReceiptAbsenceData();
     message.path = object.path ?? new Uint8Array();
     return message;
+  },
+
+  fromSDK(object: PacketReceiptAbsenceDataSDKType): PacketReceiptAbsenceData {
+    return {
+      path: isSet(object.path) ? object.path : new Uint8Array()
+    };
+  },
+
+  toSDK(message: PacketReceiptAbsenceData): PacketReceiptAbsenceDataSDKType {
+    const obj: any = {};
+    message.path !== undefined && (obj.path = message.path);
+    return obj;
   }
 
 };
@@ -1538,6 +1940,20 @@ export const NextSequenceRecvData = {
     message.path = object.path ?? new Uint8Array();
     message.nextSeqRecv = object.nextSeqRecv !== undefined && object.nextSeqRecv !== null ? Long.fromValue(object.nextSeqRecv) : Long.UZERO;
     return message;
+  },
+
+  fromSDK(object: NextSequenceRecvDataSDKType): NextSequenceRecvData {
+    return {
+      path: isSet(object.path) ? object.path : new Uint8Array(),
+      nextSeqRecv: isSet(object.next_seq_recv) ? object.next_seq_recv : Long.UZERO
+    };
+  },
+
+  toSDK(message: NextSequenceRecvData): NextSequenceRecvDataSDKType {
+    const obj: any = {};
+    message.path !== undefined && (obj.path = message.path);
+    message.nextSeqRecv !== undefined && (obj.next_seq_recv = message.nextSeqRecv);
+    return obj;
   }
 
 };

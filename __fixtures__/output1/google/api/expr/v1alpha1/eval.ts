@@ -1,5 +1,5 @@
-import { Value } from "./value";
-import { Status } from "../../../rpc/status";
+import { Value, ValueSDKType } from "./value";
+import { Status, StatusSDKType } from "../../../rpc/status";
 import * as _m0 from "protobufjs/minimal";
 import { DeepPartial, Long, isSet } from "@osmonauts/helpers";
 export const protobufPackage = "google.api.expr.v1alpha1";
@@ -22,8 +22,35 @@ export interface EvalState {
   results: EvalState_Result[];
 }
 
+/**
+ * The state of an evaluation.
+ * 
+ * Can represent an inital, partial, or completed state of evaluation.
+ */
+export interface EvalStateSDKType {
+  /** The unique values referenced in this message. */
+  values: ExprValueSDKType[];
+
+  /**
+   * An ordered list of results.
+   * 
+   * Tracks the flow of evaluation through the expression.
+   * May be sparse.
+   */
+  results: EvalState_ResultSDKType[];
+}
+
 /** A single evalution result. */
 export interface EvalState_Result {
+  /** The id of the expression this result if for. */
+  expr: Long;
+
+  /** The index in `values` of the resulting value. */
+  value: Long;
+}
+
+/** A single evalution result. */
+export interface EvalState_ResultSDKType {
   /** The id of the expression this result if for. */
   expr: Long;
 
@@ -85,6 +112,60 @@ export interface ExprValue {
   unknown?: UnknownSet;
 }
 
+/** The value of an evaluated expression. */
+export interface ExprValueSDKType {
+  /** A concrete value. */
+  value?: ValueSDKType;
+
+  /**
+   * The set of errors in the critical path of evalution.
+   * 
+   * Only errors in the critical path are included. For example,
+   * `(<error1> || true) && <error2>` will only result in `<error2>`,
+   * while `<error1> || <error2>` will result in both `<error1>` and
+   * `<error2>`.
+   * 
+   * Errors cause by the presence of other errors are not included in the
+   * set. For example `<error1>.foo`, `foo(<error1>)`, and `<error1> + 1` will
+   * only result in `<error1>`.
+   * 
+   * Multiple errors *might* be included when evaluation could result
+   * in different errors. For example `<error1> + <error2>` and
+   * `foo(<error1>, <error2>)` may result in `<error1>`, `<error2>` or both.
+   * The exact subset of errors included for this case is unspecified and
+   * depends on the implementation details of the evaluator.
+   */
+  error?: ErrorSetSDKType;
+
+  /**
+   * The set of unknowns in the critical path of evaluation.
+   * 
+   * Unknown behaves identically to Error with regards to propagation.
+   * Specifically, only unknowns in the critical path are included, unknowns
+   * caused by the presence of other unknowns are not included, and multiple
+   * unknowns *might* be included included when evaluation could result in
+   * different unknowns. For example:
+   * 
+   * (<unknown[1]> || true) && <unknown[2]> -> <unknown[2]>
+   * <unknown[1]> || <unknown[2]> -> <unknown[1,2]>
+   * <unknown[1]>.foo -> <unknown[1]>
+   * foo(<unknown[1]>) -> <unknown[1]>
+   * <unknown[1]> + <unknown[2]> -> <unknown[1]> or <unknown[2[>
+   * 
+   * Unknown takes precidence over Error in cases where a `Value` can short
+   * circuit the result:
+   * 
+   * <error> || <unknown> -> <unknown>
+   * <error> && <unknown> -> <unknown>
+   * 
+   * Errors take precidence in all other cases:
+   * 
+   * <unknown> + <error> -> <error>
+   * foo(<unknown>, <error>) -> <error>
+   */
+  unknown?: UnknownSetSDKType;
+}
+
 /**
  * A set of errors.
  * 
@@ -96,11 +177,31 @@ export interface ErrorSet {
 }
 
 /**
+ * A set of errors.
+ * 
+ * The errors included depend on the context. See `ExprValue.error`.
+ */
+export interface ErrorSetSDKType {
+  /** The errors in the set. */
+  errors: StatusSDKType[];
+}
+
+/**
  * A set of expressions for which the value is unknown.
  * 
  * The unknowns included depend on the context. See `ExprValue.unknown`.
  */
 export interface UnknownSet {
+  /** The ids of the expressions with unknown values. */
+  exprs: Long[];
+}
+
+/**
+ * A set of expressions for which the value is unknown.
+ * 
+ * The unknowns included depend on the context. See `ExprValue.unknown`.
+ */
+export interface UnknownSetSDKType {
   /** The ids of the expressions with unknown values. */
   exprs: Long[];
 }
@@ -181,6 +282,31 @@ export const EvalState = {
     message.values = object.values?.map(e => ExprValue.fromPartial(e)) || [];
     message.results = object.results?.map(e => EvalState_Result.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: EvalStateSDKType): EvalState {
+    return {
+      values: Array.isArray(object?.values) ? object.values.map((e: any) => ExprValue.fromSDK(e)) : [],
+      results: Array.isArray(object?.results) ? object.results.map((e: any) => EvalState_Result.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: EvalState): EvalStateSDKType {
+    const obj: any = {};
+
+    if (message.values) {
+      obj.values = message.values.map(e => e ? ExprValue.toSDK(e) : undefined);
+    } else {
+      obj.values = [];
+    }
+
+    if (message.results) {
+      obj.results = message.results.map(e => e ? EvalState_Result.toSDK(e) : undefined);
+    } else {
+      obj.results = [];
+    }
+
+    return obj;
   }
 
 };
@@ -250,6 +376,20 @@ export const EvalState_Result = {
     message.expr = object.expr !== undefined && object.expr !== null ? Long.fromValue(object.expr) : Long.ZERO;
     message.value = object.value !== undefined && object.value !== null ? Long.fromValue(object.value) : Long.ZERO;
     return message;
+  },
+
+  fromSDK(object: EvalState_ResultSDKType): EvalState_Result {
+    return {
+      expr: isSet(object.expr) ? object.expr : Long.ZERO,
+      value: isSet(object.value) ? object.value : Long.ZERO
+    };
+  },
+
+  toSDK(message: EvalState_Result): EvalState_ResultSDKType {
+    const obj: any = {};
+    message.expr !== undefined && (obj.expr = message.expr);
+    message.value !== undefined && (obj.value = message.value);
+    return obj;
   }
 
 };
@@ -331,6 +471,22 @@ export const ExprValue = {
     message.error = object.error !== undefined && object.error !== null ? ErrorSet.fromPartial(object.error) : undefined;
     message.unknown = object.unknown !== undefined && object.unknown !== null ? UnknownSet.fromPartial(object.unknown) : undefined;
     return message;
+  },
+
+  fromSDK(object: ExprValueSDKType): ExprValue {
+    return {
+      value: isSet(object.value) ? Value.fromSDK(object.value) : undefined,
+      error: isSet(object.error) ? ErrorSet.fromSDK(object.error) : undefined,
+      unknown: isSet(object.unknown) ? UnknownSet.fromSDK(object.unknown) : undefined
+    };
+  },
+
+  toSDK(message: ExprValue): ExprValueSDKType {
+    const obj: any = {};
+    message.value !== undefined && (obj.value = message.value ? Value.toSDK(message.value) : undefined);
+    message.error !== undefined && (obj.error = message.error ? ErrorSet.toSDK(message.error) : undefined);
+    message.unknown !== undefined && (obj.unknown = message.unknown ? UnknownSet.toSDK(message.unknown) : undefined);
+    return obj;
   }
 
 };
@@ -394,6 +550,24 @@ export const ErrorSet = {
     const message = createBaseErrorSet();
     message.errors = object.errors?.map(e => Status.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: ErrorSetSDKType): ErrorSet {
+    return {
+      errors: Array.isArray(object?.errors) ? object.errors.map((e: any) => Status.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: ErrorSet): ErrorSetSDKType {
+    const obj: any = {};
+
+    if (message.errors) {
+      obj.errors = message.errors.map(e => e ? Status.toSDK(e) : undefined);
+    } else {
+      obj.errors = [];
+    }
+
+    return obj;
   }
 
 };
@@ -469,6 +643,24 @@ export const UnknownSet = {
     const message = createBaseUnknownSet();
     message.exprs = object.exprs?.map(e => Long.fromValue(e)) || [];
     return message;
+  },
+
+  fromSDK(object: UnknownSetSDKType): UnknownSet {
+    return {
+      exprs: Array.isArray(object?.exprs) ? object.exprs.map((e: any) => e) : []
+    };
+  },
+
+  toSDK(message: UnknownSet): UnknownSetSDKType {
+    const obj: any = {};
+
+    if (message.exprs) {
+      obj.exprs = message.exprs.map(e => e);
+    } else {
+      obj.exprs = [];
+    }
+
+    return obj;
   }
 
 };

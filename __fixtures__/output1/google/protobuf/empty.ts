@@ -15,6 +15,19 @@ export const protobufPackage = "google.protobuf";
  */
 export interface Empty {}
 
+/**
+ * A generic empty message that you can re-use to avoid defining duplicated
+ * empty messages in your APIs. A typical example is to use it as the request
+ * or the response type of an API method. For instance:
+ * 
+ * service Foo {
+ * rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty);
+ * }
+ * 
+ * The JSON representation for `Empty` is empty JSON object `{}`.
+ */
+export interface EmptySDKType {}
+
 function createBaseEmpty(): Empty {
   return {};
 }
@@ -54,6 +67,15 @@ export const Empty = {
   fromPartial(_: DeepPartial<Empty>): Empty {
     const message = createBaseEmpty();
     return message;
+  },
+
+  fromSDK(_: EmptySDKType): Empty {
+    return {};
+  },
+
+  toSDK(_: Empty): EmptySDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };

@@ -1,6 +1,6 @@
-import { PageRequest, PageResponse } from "../../base/query/v1beta1/pagination";
-import { Coin } from "../../base/v1beta1/coin";
-import { Params, Metadata } from "./bank";
+import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../base/query/v1beta1/pagination";
+import { Coin, CoinSDKType } from "../../base/v1beta1/coin";
+import { Params, ParamsSDKType, Metadata, MetadataSDKType } from "./bank";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "@osmonauts/helpers";
 export const protobufPackage = "cosmos.bank.v1beta1";
@@ -14,10 +14,25 @@ export interface QueryBalanceRequest {
   denom: string;
 }
 
+/** QueryBalanceRequest is the request type for the Query/Balance RPC method. */
+export interface QueryBalanceRequestSDKType {
+  /** address is the address to query balances for. */
+  address: string;
+
+  /** denom is the coin denom to query balances for. */
+  denom: string;
+}
+
 /** QueryBalanceResponse is the response type for the Query/Balance RPC method. */
 export interface QueryBalanceResponse {
   /** balance is the balance of the coin. */
   balance: Coin;
+}
+
+/** QueryBalanceResponse is the response type for the Query/Balance RPC method. */
+export interface QueryBalanceResponseSDKType {
+  /** balance is the balance of the coin. */
+  balance: CoinSDKType;
 }
 
 /** QueryBalanceRequest is the request type for the Query/AllBalances RPC method. */
@@ -27,6 +42,15 @@ export interface QueryAllBalancesRequest {
 
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequest;
+}
+
+/** QueryBalanceRequest is the request type for the Query/AllBalances RPC method. */
+export interface QueryAllBalancesRequestSDKType {
+  /** address is the address to query balances for. */
+  address: string;
+
+  /** pagination defines an optional pagination for the request. */
+  pagination?: PageRequestSDKType;
 }
 
 /**
@@ -42,6 +66,18 @@ export interface QueryAllBalancesResponse {
 }
 
 /**
+ * QueryAllBalancesResponse is the response type for the Query/AllBalances RPC
+ * method.
+ */
+export interface QueryAllBalancesResponseSDKType {
+  /** balances is the balances of all the coins. */
+  balances: CoinSDKType[];
+
+  /** pagination defines the pagination in the response. */
+  pagination?: PageResponseSDKType;
+}
+
+/**
  * QuerySpendableBalancesRequest defines the gRPC request structure for querying
  * an account's spendable balances.
  */
@@ -51,6 +87,18 @@ export interface QuerySpendableBalancesRequest {
 
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequest;
+}
+
+/**
+ * QuerySpendableBalancesRequest defines the gRPC request structure for querying
+ * an account's spendable balances.
+ */
+export interface QuerySpendableBalancesRequestSDKType {
+  /** address is the address to query spendable balances for. */
+  address: string;
+
+  /** pagination defines an optional pagination for the request. */
+  pagination?: PageRequestSDKType;
 }
 
 /**
@@ -66,6 +114,18 @@ export interface QuerySpendableBalancesResponse {
 }
 
 /**
+ * QuerySpendableBalancesResponse defines the gRPC response structure for querying
+ * an account's spendable balances.
+ */
+export interface QuerySpendableBalancesResponseSDKType {
+  /** balances is the spendable balances of all the coins. */
+  balances: CoinSDKType[];
+
+  /** pagination defines the pagination in the response. */
+  pagination?: PageResponseSDKType;
+}
+
+/**
  * QueryTotalSupplyRequest is the request type for the Query/TotalSupply RPC
  * method.
  */
@@ -76,6 +136,19 @@ export interface QueryTotalSupplyRequest {
    * Since: cosmos-sdk 0.43
    */
   pagination?: PageRequest;
+}
+
+/**
+ * QueryTotalSupplyRequest is the request type for the Query/TotalSupply RPC
+ * method.
+ */
+export interface QueryTotalSupplyRequestSDKType {
+  /**
+   * pagination defines an optional pagination for the request.
+   * 
+   * Since: cosmos-sdk 0.43
+   */
+  pagination?: PageRequestSDKType;
 }
 
 /**
@@ -94,8 +167,30 @@ export interface QueryTotalSupplyResponse {
   pagination?: PageResponse;
 }
 
+/**
+ * QueryTotalSupplyResponse is the response type for the Query/TotalSupply RPC
+ * method
+ */
+export interface QueryTotalSupplyResponseSDKType {
+  /** supply is the supply of the coins */
+  supply: CoinSDKType[];
+
+  /**
+   * pagination defines the pagination in the response.
+   * 
+   * Since: cosmos-sdk 0.43
+   */
+  pagination?: PageResponseSDKType;
+}
+
 /** QuerySupplyOfRequest is the request type for the Query/SupplyOf RPC method. */
 export interface QuerySupplyOfRequest {
+  /** denom is the coin denom to query balances for. */
+  denom?: string;
+}
+
+/** QuerySupplyOfRequest is the request type for the Query/SupplyOf RPC method. */
+export interface QuerySupplyOfRequestSDKType {
   /** denom is the coin denom to query balances for. */
   denom?: string;
 }
@@ -106,18 +201,38 @@ export interface QuerySupplyOfResponse {
   amount: Coin;
 }
 
+/** QuerySupplyOfResponse is the response type for the Query/SupplyOf RPC method. */
+export interface QuerySupplyOfResponseSDKType {
+  /** amount is the supply of the coin. */
+  amount: CoinSDKType;
+}
+
 /** QueryParamsRequest defines the request type for querying x/bank parameters. */
 export interface QueryParamsRequest {}
+
+/** QueryParamsRequest defines the request type for querying x/bank parameters. */
+export interface QueryParamsRequestSDKType {}
 
 /** QueryParamsResponse defines the response type for querying x/bank parameters. */
 export interface QueryParamsResponse {
   params: Params;
 }
 
+/** QueryParamsResponse defines the response type for querying x/bank parameters. */
+export interface QueryParamsResponseSDKType {
+  params: ParamsSDKType;
+}
+
 /** QueryDenomsMetadataRequest is the request type for the Query/DenomsMetadata RPC method. */
 export interface QueryDenomsMetadataRequest {
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequest;
+}
+
+/** QueryDenomsMetadataRequest is the request type for the Query/DenomsMetadata RPC method. */
+export interface QueryDenomsMetadataRequestSDKType {
+  /** pagination defines an optional pagination for the request. */
+  pagination?: PageRequestSDKType;
 }
 
 /**
@@ -132,8 +247,26 @@ export interface QueryDenomsMetadataResponse {
   pagination?: PageResponse;
 }
 
+/**
+ * QueryDenomsMetadataResponse is the response type for the Query/DenomsMetadata RPC
+ * method.
+ */
+export interface QueryDenomsMetadataResponseSDKType {
+  /** metadata provides the client information for all the registered tokens. */
+  metadatas: MetadataSDKType[];
+
+  /** pagination defines the pagination in the response. */
+  pagination?: PageResponseSDKType;
+}
+
 /** QueryDenomMetadataRequest is the request type for the Query/DenomMetadata RPC method. */
 export interface QueryDenomMetadataRequest {
+  /** denom is the coin denom to query the metadata for. */
+  denom: string;
+}
+
+/** QueryDenomMetadataRequest is the request type for the Query/DenomMetadata RPC method. */
+export interface QueryDenomMetadataRequestSDKType {
   /** denom is the coin denom to query the metadata for. */
   denom: string;
 }
@@ -145,6 +278,15 @@ export interface QueryDenomMetadataRequest {
 export interface QueryDenomMetadataResponse {
   /** metadata describes and provides all the client information for the requested token. */
   metadata: Metadata;
+}
+
+/**
+ * QueryDenomMetadataResponse is the response type for the Query/DenomMetadata RPC
+ * method.
+ */
+export interface QueryDenomMetadataResponseSDKType {
+  /** metadata describes and provides all the client information for the requested token. */
+  metadata: MetadataSDKType;
 }
 
 /**
@@ -161,6 +303,19 @@ export interface QueryDenomOwnersRequest {
 }
 
 /**
+ * QueryDenomOwnersRequest defines the request type for the DenomOwners RPC query,
+ * which queries for a paginated set of all account holders of a particular
+ * denomination.
+ */
+export interface QueryDenomOwnersRequestSDKType {
+  /** denom defines the coin denomination to query all account holders for. */
+  denom: string;
+
+  /** pagination defines an optional pagination for the request. */
+  pagination?: PageRequestSDKType;
+}
+
+/**
  * DenomOwner defines structure representing an account that owns or holds a
  * particular denominated token. It contains the account address and account
  * balance of the denominated token.
@@ -173,12 +328,33 @@ export interface DenomOwner {
   balance: Coin;
 }
 
+/**
+ * DenomOwner defines structure representing an account that owns or holds a
+ * particular denominated token. It contains the account address and account
+ * balance of the denominated token.
+ */
+export interface DenomOwnerSDKType {
+  /** address defines the address that owns a particular denomination. */
+  address: string;
+
+  /** balance is the balance of the denominated coin for an account. */
+  balance: CoinSDKType;
+}
+
 /** QueryDenomOwnersResponse defines the RPC response of a DenomOwners RPC query. */
 export interface QueryDenomOwnersResponse {
   denomOwners: DenomOwner[];
 
   /** pagination defines the pagination in the response. */
   pagination?: PageResponse;
+}
+
+/** QueryDenomOwnersResponse defines the RPC response of a DenomOwners RPC query. */
+export interface QueryDenomOwnersResponseSDKType {
+  denom_owners: DenomOwnerSDKType[];
+
+  /** pagination defines the pagination in the response. */
+  pagination?: PageResponseSDKType;
 }
 
 function createBaseQueryBalanceRequest(): QueryBalanceRequest {
@@ -246,6 +422,20 @@ export const QueryBalanceRequest = {
     message.address = object.address ?? "";
     message.denom = object.denom ?? "";
     return message;
+  },
+
+  fromSDK(object: QueryBalanceRequestSDKType): QueryBalanceRequest {
+    return {
+      address: isSet(object.address) ? object.address : "",
+      denom: isSet(object.denom) ? object.denom : ""
+    };
+  },
+
+  toSDK(message: QueryBalanceRequest): QueryBalanceRequestSDKType {
+    const obj: any = {};
+    message.address !== undefined && (obj.address = message.address);
+    message.denom !== undefined && (obj.denom = message.denom);
+    return obj;
   }
 
 };
@@ -303,6 +493,18 @@ export const QueryBalanceResponse = {
     const message = createBaseQueryBalanceResponse();
     message.balance = object.balance !== undefined && object.balance !== null ? Coin.fromPartial(object.balance) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryBalanceResponseSDKType): QueryBalanceResponse {
+    return {
+      balance: isSet(object.balance) ? Coin.fromSDK(object.balance) : undefined
+    };
+  },
+
+  toSDK(message: QueryBalanceResponse): QueryBalanceResponseSDKType {
+    const obj: any = {};
+    message.balance !== undefined && (obj.balance = message.balance ? Coin.toSDK(message.balance) : undefined);
+    return obj;
   }
 
 };
@@ -372,6 +574,20 @@ export const QueryAllBalancesRequest = {
     message.address = object.address ?? "";
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryAllBalancesRequestSDKType): QueryAllBalancesRequest {
+    return {
+      address: isSet(object.address) ? object.address : "",
+      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  toSDK(message: QueryAllBalancesRequest): QueryAllBalancesRequestSDKType {
+    const obj: any = {};
+    message.address !== undefined && (obj.address = message.address);
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
+    return obj;
   }
 
 };
@@ -447,6 +663,26 @@ export const QueryAllBalancesResponse = {
     message.balances = object.balances?.map(e => Coin.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryAllBalancesResponseSDKType): QueryAllBalancesResponse {
+    return {
+      balances: Array.isArray(object?.balances) ? object.balances.map((e: any) => Coin.fromSDK(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  toSDK(message: QueryAllBalancesResponse): QueryAllBalancesResponseSDKType {
+    const obj: any = {};
+
+    if (message.balances) {
+      obj.balances = message.balances.map(e => e ? Coin.toSDK(e) : undefined);
+    } else {
+      obj.balances = [];
+    }
+
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
+    return obj;
   }
 
 };
@@ -516,6 +752,20 @@ export const QuerySpendableBalancesRequest = {
     message.address = object.address ?? "";
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDK(object: QuerySpendableBalancesRequestSDKType): QuerySpendableBalancesRequest {
+    return {
+      address: isSet(object.address) ? object.address : "",
+      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  toSDK(message: QuerySpendableBalancesRequest): QuerySpendableBalancesRequestSDKType {
+    const obj: any = {};
+    message.address !== undefined && (obj.address = message.address);
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
+    return obj;
   }
 
 };
@@ -591,6 +841,26 @@ export const QuerySpendableBalancesResponse = {
     message.balances = object.balances?.map(e => Coin.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDK(object: QuerySpendableBalancesResponseSDKType): QuerySpendableBalancesResponse {
+    return {
+      balances: Array.isArray(object?.balances) ? object.balances.map((e: any) => Coin.fromSDK(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  toSDK(message: QuerySpendableBalancesResponse): QuerySpendableBalancesResponseSDKType {
+    const obj: any = {};
+
+    if (message.balances) {
+      obj.balances = message.balances.map(e => e ? Coin.toSDK(e) : undefined);
+    } else {
+      obj.balances = [];
+    }
+
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
+    return obj;
   }
 
 };
@@ -648,6 +918,18 @@ export const QueryTotalSupplyRequest = {
     const message = createBaseQueryTotalSupplyRequest();
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryTotalSupplyRequestSDKType): QueryTotalSupplyRequest {
+    return {
+      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  toSDK(message: QueryTotalSupplyRequest): QueryTotalSupplyRequestSDKType {
+    const obj: any = {};
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
+    return obj;
   }
 
 };
@@ -723,6 +1005,26 @@ export const QueryTotalSupplyResponse = {
     message.supply = object.supply?.map(e => Coin.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryTotalSupplyResponseSDKType): QueryTotalSupplyResponse {
+    return {
+      supply: Array.isArray(object?.supply) ? object.supply.map((e: any) => Coin.fromSDK(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  toSDK(message: QueryTotalSupplyResponse): QueryTotalSupplyResponseSDKType {
+    const obj: any = {};
+
+    if (message.supply) {
+      obj.supply = message.supply.map(e => e ? Coin.toSDK(e) : undefined);
+    } else {
+      obj.supply = [];
+    }
+
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
+    return obj;
   }
 
 };
@@ -780,6 +1082,18 @@ export const QuerySupplyOfRequest = {
     const message = createBaseQuerySupplyOfRequest();
     message.denom = object.denom ?? "";
     return message;
+  },
+
+  fromSDK(object: QuerySupplyOfRequestSDKType): QuerySupplyOfRequest {
+    return {
+      denom: isSet(object.denom) ? object.denom : ""
+    };
+  },
+
+  toSDK(message: QuerySupplyOfRequest): QuerySupplyOfRequestSDKType {
+    const obj: any = {};
+    message.denom !== undefined && (obj.denom = message.denom);
+    return obj;
   }
 
 };
@@ -837,6 +1151,18 @@ export const QuerySupplyOfResponse = {
     const message = createBaseQuerySupplyOfResponse();
     message.amount = object.amount !== undefined && object.amount !== null ? Coin.fromPartial(object.amount) : undefined;
     return message;
+  },
+
+  fromSDK(object: QuerySupplyOfResponseSDKType): QuerySupplyOfResponse {
+    return {
+      amount: isSet(object.amount) ? Coin.fromSDK(object.amount) : undefined
+    };
+  },
+
+  toSDK(message: QuerySupplyOfResponse): QuerySupplyOfResponseSDKType {
+    const obj: any = {};
+    message.amount !== undefined && (obj.amount = message.amount ? Coin.toSDK(message.amount) : undefined);
+    return obj;
   }
 
 };
@@ -880,6 +1206,15 @@ export const QueryParamsRequest = {
   fromPartial(_: DeepPartial<QueryParamsRequest>): QueryParamsRequest {
     const message = createBaseQueryParamsRequest();
     return message;
+  },
+
+  fromSDK(_: QueryParamsRequestSDKType): QueryParamsRequest {
+    return {};
+  },
+
+  toSDK(_: QueryParamsRequest): QueryParamsRequestSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -937,6 +1272,18 @@ export const QueryParamsResponse = {
     const message = createBaseQueryParamsResponse();
     message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryParamsResponseSDKType): QueryParamsResponse {
+    return {
+      params: isSet(object.params) ? Params.fromSDK(object.params) : undefined
+    };
+  },
+
+  toSDK(message: QueryParamsResponse): QueryParamsResponseSDKType {
+    const obj: any = {};
+    message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
+    return obj;
   }
 
 };
@@ -994,6 +1341,18 @@ export const QueryDenomsMetadataRequest = {
     const message = createBaseQueryDenomsMetadataRequest();
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryDenomsMetadataRequestSDKType): QueryDenomsMetadataRequest {
+    return {
+      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  toSDK(message: QueryDenomsMetadataRequest): QueryDenomsMetadataRequestSDKType {
+    const obj: any = {};
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
+    return obj;
   }
 
 };
@@ -1069,6 +1428,26 @@ export const QueryDenomsMetadataResponse = {
     message.metadatas = object.metadatas?.map(e => Metadata.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryDenomsMetadataResponseSDKType): QueryDenomsMetadataResponse {
+    return {
+      metadatas: Array.isArray(object?.metadatas) ? object.metadatas.map((e: any) => Metadata.fromSDK(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  toSDK(message: QueryDenomsMetadataResponse): QueryDenomsMetadataResponseSDKType {
+    const obj: any = {};
+
+    if (message.metadatas) {
+      obj.metadatas = message.metadatas.map(e => e ? Metadata.toSDK(e) : undefined);
+    } else {
+      obj.metadatas = [];
+    }
+
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
+    return obj;
   }
 
 };
@@ -1126,6 +1505,18 @@ export const QueryDenomMetadataRequest = {
     const message = createBaseQueryDenomMetadataRequest();
     message.denom = object.denom ?? "";
     return message;
+  },
+
+  fromSDK(object: QueryDenomMetadataRequestSDKType): QueryDenomMetadataRequest {
+    return {
+      denom: isSet(object.denom) ? object.denom : ""
+    };
+  },
+
+  toSDK(message: QueryDenomMetadataRequest): QueryDenomMetadataRequestSDKType {
+    const obj: any = {};
+    message.denom !== undefined && (obj.denom = message.denom);
+    return obj;
   }
 
 };
@@ -1183,6 +1574,18 @@ export const QueryDenomMetadataResponse = {
     const message = createBaseQueryDenomMetadataResponse();
     message.metadata = object.metadata !== undefined && object.metadata !== null ? Metadata.fromPartial(object.metadata) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryDenomMetadataResponseSDKType): QueryDenomMetadataResponse {
+    return {
+      metadata: isSet(object.metadata) ? Metadata.fromSDK(object.metadata) : undefined
+    };
+  },
+
+  toSDK(message: QueryDenomMetadataResponse): QueryDenomMetadataResponseSDKType {
+    const obj: any = {};
+    message.metadata !== undefined && (obj.metadata = message.metadata ? Metadata.toSDK(message.metadata) : undefined);
+    return obj;
   }
 
 };
@@ -1252,6 +1655,20 @@ export const QueryDenomOwnersRequest = {
     message.denom = object.denom ?? "";
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryDenomOwnersRequestSDKType): QueryDenomOwnersRequest {
+    return {
+      denom: isSet(object.denom) ? object.denom : "",
+      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  toSDK(message: QueryDenomOwnersRequest): QueryDenomOwnersRequestSDKType {
+    const obj: any = {};
+    message.denom !== undefined && (obj.denom = message.denom);
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
+    return obj;
   }
 
 };
@@ -1321,6 +1738,20 @@ export const DenomOwner = {
     message.address = object.address ?? "";
     message.balance = object.balance !== undefined && object.balance !== null ? Coin.fromPartial(object.balance) : undefined;
     return message;
+  },
+
+  fromSDK(object: DenomOwnerSDKType): DenomOwner {
+    return {
+      address: isSet(object.address) ? object.address : "",
+      balance: isSet(object.balance) ? Coin.fromSDK(object.balance) : undefined
+    };
+  },
+
+  toSDK(message: DenomOwner): DenomOwnerSDKType {
+    const obj: any = {};
+    message.address !== undefined && (obj.address = message.address);
+    message.balance !== undefined && (obj.balance = message.balance ? Coin.toSDK(message.balance) : undefined);
+    return obj;
   }
 
 };
@@ -1396,6 +1827,26 @@ export const QueryDenomOwnersResponse = {
     message.denomOwners = object.denomOwners?.map(e => DenomOwner.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryDenomOwnersResponseSDKType): QueryDenomOwnersResponse {
+    return {
+      denomOwners: Array.isArray(object?.denom_owners) ? object.denom_owners.map((e: any) => DenomOwner.fromSDK(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  toSDK(message: QueryDenomOwnersResponse): QueryDenomOwnersResponseSDKType {
+    const obj: any = {};
+
+    if (message.denomOwners) {
+      obj.denom_owners = message.denomOwners.map(e => e ? DenomOwner.toSDK(e) : undefined);
+    } else {
+      obj.denom_owners = [];
+    }
+
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
+    return obj;
   }
 
 };

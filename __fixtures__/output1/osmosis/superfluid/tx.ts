@@ -1,4 +1,4 @@
-import { Coin } from "../../cosmos/base/v1beta1/coin";
+import { Coin, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
 import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, DeepPartial } from "@osmonauts/helpers";
 export const protobufPackage = "osmosis.superfluid";
@@ -7,17 +7,33 @@ export interface MsgSuperfluidDelegate {
   lockId: Long;
   valAddr: string;
 }
+export interface MsgSuperfluidDelegateSDKType {
+  sender: string;
+  lock_id: Long;
+  val_addr: string;
+}
 export interface MsgSuperfluidDelegateResponse {}
+export interface MsgSuperfluidDelegateResponseSDKType {}
 export interface MsgSuperfluidUndelegate {
   sender: string;
   lockId: Long;
 }
+export interface MsgSuperfluidUndelegateSDKType {
+  sender: string;
+  lock_id: Long;
+}
 export interface MsgSuperfluidUndelegateResponse {}
+export interface MsgSuperfluidUndelegateResponseSDKType {}
 export interface MsgSuperfluidUnbondLock {
   sender: string;
   lockId: Long;
 }
+export interface MsgSuperfluidUnbondLockSDKType {
+  sender: string;
+  lock_id: Long;
+}
 export interface MsgSuperfluidUnbondLockResponse {}
+export interface MsgSuperfluidUnbondLockResponseSDKType {}
 
 /**
  * MsgLockAndSuperfluidDelegate locks coins with the unbonding period duration,
@@ -29,7 +45,21 @@ export interface MsgLockAndSuperfluidDelegate {
   coins: Coin[];
   valAddr: string;
 }
+
+/**
+ * MsgLockAndSuperfluidDelegate locks coins with the unbonding period duration,
+ * and then does a superfluid lock from the newly created lockup, to the
+ * specified validator addr.
+ */
+export interface MsgLockAndSuperfluidDelegateSDKType {
+  sender: string;
+  coins: CoinSDKType[];
+  val_addr: string;
+}
 export interface MsgLockAndSuperfluidDelegateResponse {
+  ID: Long;
+}
+export interface MsgLockAndSuperfluidDelegateResponseSDKType {
   ID: Long;
 }
 
@@ -47,7 +77,25 @@ export interface MsgUnPoolWhitelistedPool {
   sender: string;
   poolId: Long;
 }
+
+/**
+ * MsgUnPoolWhitelistedPool Unpools every lock the sender has, that is
+ * associated with pool pool_id. If pool_id is not approved for unpooling by
+ * governance, this is a no-op. Unpooling takes the locked gamm shares, and runs
+ * "ExitPool" on it, to get the constituent tokens. e.g. z gamm/pool/1 tokens
+ * ExitPools into constituent tokens x uatom, y uosmo. Then it creates a new
+ * lock for every constituent token, with the duration associated with the lock.
+ * If the lock was unbonding, the new lockup durations should be the time left
+ * until unbond completion.
+ */
+export interface MsgUnPoolWhitelistedPoolSDKType {
+  sender: string;
+  pool_id: Long;
+}
 export interface MsgUnPoolWhitelistedPoolResponse {
+  exitedLockIds: Long[];
+}
+export interface MsgUnPoolWhitelistedPoolResponseSDKType {
   exitedLockIds: Long[];
 }
 
@@ -128,6 +176,22 @@ export const MsgSuperfluidDelegate = {
     message.lockId = object.lockId !== undefined && object.lockId !== null ? Long.fromValue(object.lockId) : Long.UZERO;
     message.valAddr = object.valAddr ?? "";
     return message;
+  },
+
+  fromSDK(object: MsgSuperfluidDelegateSDKType): MsgSuperfluidDelegate {
+    return {
+      sender: isSet(object.sender) ? object.sender : "",
+      lockId: isSet(object.lock_id) ? object.lock_id : Long.UZERO,
+      valAddr: isSet(object.val_addr) ? object.val_addr : ""
+    };
+  },
+
+  toSDK(message: MsgSuperfluidDelegate): MsgSuperfluidDelegateSDKType {
+    const obj: any = {};
+    message.sender !== undefined && (obj.sender = message.sender);
+    message.lockId !== undefined && (obj.lock_id = message.lockId);
+    message.valAddr !== undefined && (obj.val_addr = message.valAddr);
+    return obj;
   }
 
 };
@@ -171,6 +235,15 @@ export const MsgSuperfluidDelegateResponse = {
   fromPartial(_: DeepPartial<MsgSuperfluidDelegateResponse>): MsgSuperfluidDelegateResponse {
     const message = createBaseMsgSuperfluidDelegateResponse();
     return message;
+  },
+
+  fromSDK(_: MsgSuperfluidDelegateResponseSDKType): MsgSuperfluidDelegateResponse {
+    return {};
+  },
+
+  toSDK(_: MsgSuperfluidDelegateResponse): MsgSuperfluidDelegateResponseSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -240,6 +313,20 @@ export const MsgSuperfluidUndelegate = {
     message.sender = object.sender ?? "";
     message.lockId = object.lockId !== undefined && object.lockId !== null ? Long.fromValue(object.lockId) : Long.UZERO;
     return message;
+  },
+
+  fromSDK(object: MsgSuperfluidUndelegateSDKType): MsgSuperfluidUndelegate {
+    return {
+      sender: isSet(object.sender) ? object.sender : "",
+      lockId: isSet(object.lock_id) ? object.lock_id : Long.UZERO
+    };
+  },
+
+  toSDK(message: MsgSuperfluidUndelegate): MsgSuperfluidUndelegateSDKType {
+    const obj: any = {};
+    message.sender !== undefined && (obj.sender = message.sender);
+    message.lockId !== undefined && (obj.lock_id = message.lockId);
+    return obj;
   }
 
 };
@@ -283,6 +370,15 @@ export const MsgSuperfluidUndelegateResponse = {
   fromPartial(_: DeepPartial<MsgSuperfluidUndelegateResponse>): MsgSuperfluidUndelegateResponse {
     const message = createBaseMsgSuperfluidUndelegateResponse();
     return message;
+  },
+
+  fromSDK(_: MsgSuperfluidUndelegateResponseSDKType): MsgSuperfluidUndelegateResponse {
+    return {};
+  },
+
+  toSDK(_: MsgSuperfluidUndelegateResponse): MsgSuperfluidUndelegateResponseSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -352,6 +448,20 @@ export const MsgSuperfluidUnbondLock = {
     message.sender = object.sender ?? "";
     message.lockId = object.lockId !== undefined && object.lockId !== null ? Long.fromValue(object.lockId) : Long.UZERO;
     return message;
+  },
+
+  fromSDK(object: MsgSuperfluidUnbondLockSDKType): MsgSuperfluidUnbondLock {
+    return {
+      sender: isSet(object.sender) ? object.sender : "",
+      lockId: isSet(object.lock_id) ? object.lock_id : Long.UZERO
+    };
+  },
+
+  toSDK(message: MsgSuperfluidUnbondLock): MsgSuperfluidUnbondLockSDKType {
+    const obj: any = {};
+    message.sender !== undefined && (obj.sender = message.sender);
+    message.lockId !== undefined && (obj.lock_id = message.lockId);
+    return obj;
   }
 
 };
@@ -395,6 +505,15 @@ export const MsgSuperfluidUnbondLockResponse = {
   fromPartial(_: DeepPartial<MsgSuperfluidUnbondLockResponse>): MsgSuperfluidUnbondLockResponse {
     const message = createBaseMsgSuperfluidUnbondLockResponse();
     return message;
+  },
+
+  fromSDK(_: MsgSuperfluidUnbondLockResponseSDKType): MsgSuperfluidUnbondLockResponse {
+    return {};
+  },
+
+  toSDK(_: MsgSuperfluidUnbondLockResponse): MsgSuperfluidUnbondLockResponseSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -482,6 +601,28 @@ export const MsgLockAndSuperfluidDelegate = {
     message.coins = object.coins?.map(e => Coin.fromPartial(e)) || [];
     message.valAddr = object.valAddr ?? "";
     return message;
+  },
+
+  fromSDK(object: MsgLockAndSuperfluidDelegateSDKType): MsgLockAndSuperfluidDelegate {
+    return {
+      sender: isSet(object.sender) ? object.sender : "",
+      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDK(e)) : [],
+      valAddr: isSet(object.val_addr) ? object.val_addr : ""
+    };
+  },
+
+  toSDK(message: MsgLockAndSuperfluidDelegate): MsgLockAndSuperfluidDelegateSDKType {
+    const obj: any = {};
+    message.sender !== undefined && (obj.sender = message.sender);
+
+    if (message.coins) {
+      obj.coins = message.coins.map(e => e ? Coin.toSDK(e) : undefined);
+    } else {
+      obj.coins = [];
+    }
+
+    message.valAddr !== undefined && (obj.val_addr = message.valAddr);
+    return obj;
   }
 
 };
@@ -539,6 +680,18 @@ export const MsgLockAndSuperfluidDelegateResponse = {
     const message = createBaseMsgLockAndSuperfluidDelegateResponse();
     message.ID = object.ID !== undefined && object.ID !== null ? Long.fromValue(object.ID) : Long.UZERO;
     return message;
+  },
+
+  fromSDK(object: MsgLockAndSuperfluidDelegateResponseSDKType): MsgLockAndSuperfluidDelegateResponse {
+    return {
+      ID: isSet(object.ID) ? object.ID : Long.UZERO
+    };
+  },
+
+  toSDK(message: MsgLockAndSuperfluidDelegateResponse): MsgLockAndSuperfluidDelegateResponseSDKType {
+    const obj: any = {};
+    message.ID !== undefined && (obj.ID = message.ID);
+    return obj;
   }
 
 };
@@ -608,6 +761,20 @@ export const MsgUnPoolWhitelistedPool = {
     message.sender = object.sender ?? "";
     message.poolId = object.poolId !== undefined && object.poolId !== null ? Long.fromValue(object.poolId) : Long.UZERO;
     return message;
+  },
+
+  fromSDK(object: MsgUnPoolWhitelistedPoolSDKType): MsgUnPoolWhitelistedPool {
+    return {
+      sender: isSet(object.sender) ? object.sender : "",
+      poolId: isSet(object.pool_id) ? object.pool_id : Long.UZERO
+    };
+  },
+
+  toSDK(message: MsgUnPoolWhitelistedPool): MsgUnPoolWhitelistedPoolSDKType {
+    const obj: any = {};
+    message.sender !== undefined && (obj.sender = message.sender);
+    message.poolId !== undefined && (obj.pool_id = message.poolId);
+    return obj;
   }
 
 };
@@ -683,6 +850,24 @@ export const MsgUnPoolWhitelistedPoolResponse = {
     const message = createBaseMsgUnPoolWhitelistedPoolResponse();
     message.exitedLockIds = object.exitedLockIds?.map(e => Long.fromValue(e)) || [];
     return message;
+  },
+
+  fromSDK(object: MsgUnPoolWhitelistedPoolResponseSDKType): MsgUnPoolWhitelistedPoolResponse {
+    return {
+      exitedLockIds: Array.isArray(object?.exitedLockIds) ? object.exitedLockIds.map((e: any) => e) : []
+    };
+  },
+
+  toSDK(message: MsgUnPoolWhitelistedPoolResponse): MsgUnPoolWhitelistedPoolResponseSDKType {
+    const obj: any = {};
+
+    if (message.exitedLockIds) {
+      obj.exitedLockIds = message.exitedLockIds.map(e => e);
+    } else {
+      obj.exitedLockIds = [];
+    }
+
+    return obj;
   }
 
 };

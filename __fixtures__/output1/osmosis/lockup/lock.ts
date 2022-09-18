@@ -1,6 +1,6 @@
-import { Duration } from "../../google/protobuf/duration";
-import { Timestamp } from "../../google/protobuf/timestamp";
-import { Coin } from "../../cosmos/base/v1beta1/coin";
+import { Duration, DurationSDKType } from "../../google/protobuf/duration";
+import { Timestamp, TimestampSDKType } from "../../google/protobuf/timestamp";
+import { Coin, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
 import * as _m0 from "protobufjs/minimal";
 import { toTimestamp, Long, fromTimestamp, isSet, fromJsonTimestamp, DeepPartial } from "@osmonauts/helpers";
 export const protobufPackage = "osmosis.lockup";
@@ -53,9 +53,35 @@ export interface PeriodLock {
   endTime: Date;
   coins: Coin[];
 }
+
+/**
+ * PeriodLock is a single unit of lock by period. It's a record of locked coin
+ * at a specific time. It stores owner, duration, unlock time and the amount of
+ * coins locked.
+ */
+export interface PeriodLockSDKType {
+  ID: Long;
+  owner: string;
+  duration: Duration;
+  end_time: Date;
+  coins: CoinSDKType[];
+}
 export interface QueryCondition {
   /** type of lock query, ByLockDuration | ByLockTime */
   lockQueryType: LockQueryType;
+
+  /** What token denomination are we looking for lockups of */
+  denom: string;
+
+  /** valid when query condition is ByDuration */
+  duration: Duration;
+
+  /** valid when query condition is ByTime */
+  timestamp: Date;
+}
+export interface QueryConditionSDKType {
+  /** type of lock query, ByLockDuration | ByLockTime */
+  lock_query_type: LockQueryTypeSDKType;
 
   /** What token denomination are we looking for lockups of */
   denom: string;
@@ -93,6 +119,35 @@ export interface SyntheticLock {
    * value is set to uninitialized value
    */
   endTime: Date;
+  duration: Duration;
+}
+
+/**
+ * SyntheticLock is a single unit of synthetic lockup
+ * TODO: Change this to have
+ * * underlying_lock_id
+ * * synthetic_coin
+ * * end_time
+ * * duration
+ * * owner
+ * We then index synthetic locks by the denom, just like we do with normal
+ * locks. Ideally we even get an interface, so we can re-use that same logic.
+ * I currently have no idea how reward distribution is supposed to be working...
+ * EVENTUALLY
+ * we make a "constrained_coin" field, which is what the current "coins" field
+ * is. Constrained coin field can be a #post-v7 feature, since we aren't
+ * allowing partial unlocks of synthetic lockups.
+ */
+export interface SyntheticLockSDKType {
+  /** underlying native lockup id for this synthetic lockup */
+  underlying_lock_id: Long;
+  synth_denom: string;
+
+  /**
+   * used for unbonding synthetic lockups, for active synthetic lockups, this
+   * value is set to uninitialized value
+   */
+  end_time: Date;
   duration: Duration;
 }
 
@@ -203,6 +258,32 @@ export const PeriodLock = {
     message.endTime = object.endTime ?? undefined;
     message.coins = object.coins?.map(e => Coin.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: PeriodLockSDKType): PeriodLock {
+    return {
+      ID: isSet(object.ID) ? object.ID : Long.UZERO,
+      owner: isSet(object.owner) ? object.owner : "",
+      duration: isSet(object.duration) ? Duration.fromSDK(object.duration) : undefined,
+      endTime: isSet(object.end_time) ? Timestamp.fromSDK(object.end_time) : undefined,
+      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: PeriodLock): PeriodLockSDKType {
+    const obj: any = {};
+    message.ID !== undefined && (obj.ID = message.ID);
+    message.owner !== undefined && (obj.owner = message.owner);
+    message.duration !== undefined && (obj.duration = message.duration ? Duration.toSDK(message.duration) : undefined);
+    message.endTime !== undefined && (obj.end_time = message.endTime ? Timestamp.toSDK(message.endTime) : undefined);
+
+    if (message.coins) {
+      obj.coins = message.coins.map(e => e ? Coin.toSDK(e) : undefined);
+    } else {
+      obj.coins = [];
+    }
+
+    return obj;
   }
 
 };
@@ -296,6 +377,24 @@ export const QueryCondition = {
     message.duration = object.duration ?? undefined;
     message.timestamp = object.timestamp ?? undefined;
     return message;
+  },
+
+  fromSDK(object: QueryConditionSDKType): QueryCondition {
+    return {
+      lockQueryType: isSet(object.lock_query_type) ? lockQueryTypeFromJSON(object.lock_query_type) : 0,
+      denom: isSet(object.denom) ? object.denom : "",
+      duration: isSet(object.duration) ? Duration.fromSDK(object.duration) : undefined,
+      timestamp: isSet(object.timestamp) ? Timestamp.fromSDK(object.timestamp) : undefined
+    };
+  },
+
+  toSDK(message: QueryCondition): QueryConditionSDKType {
+    const obj: any = {};
+    message.lockQueryType !== undefined && (obj.lock_query_type = lockQueryTypeToJSON(message.lockQueryType));
+    message.denom !== undefined && (obj.denom = message.denom);
+    message.duration !== undefined && (obj.duration = message.duration ? Duration.toSDK(message.duration) : undefined);
+    message.timestamp !== undefined && (obj.timestamp = message.timestamp ? Timestamp.toSDK(message.timestamp) : undefined);
+    return obj;
   }
 
 };
@@ -389,6 +488,24 @@ export const SyntheticLock = {
     message.endTime = object.endTime ?? undefined;
     message.duration = object.duration ?? undefined;
     return message;
+  },
+
+  fromSDK(object: SyntheticLockSDKType): SyntheticLock {
+    return {
+      underlyingLockId: isSet(object.underlying_lock_id) ? object.underlying_lock_id : Long.UZERO,
+      synthDenom: isSet(object.synth_denom) ? object.synth_denom : "",
+      endTime: isSet(object.end_time) ? Timestamp.fromSDK(object.end_time) : undefined,
+      duration: isSet(object.duration) ? Duration.fromSDK(object.duration) : undefined
+    };
+  },
+
+  toSDK(message: SyntheticLock): SyntheticLockSDKType {
+    const obj: any = {};
+    message.underlyingLockId !== undefined && (obj.underlying_lock_id = message.underlyingLockId);
+    message.synthDenom !== undefined && (obj.synth_denom = message.synthDenom);
+    message.endTime !== undefined && (obj.end_time = message.endTime ? Timestamp.toSDK(message.endTime) : undefined);
+    message.duration !== undefined && (obj.duration = message.duration ? Duration.toSDK(message.duration) : undefined);
+    return obj;
   }
 
 };

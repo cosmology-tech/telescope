@@ -1,4 +1,4 @@
-import { Any } from "../protobuf/any";
+import { Any, AnySDKType } from "../protobuf/any";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "@osmonauts/helpers";
 export const protobufPackage = "google.api";
@@ -51,6 +51,65 @@ export const protobufPackage = "google.api";
 export interface HttpBody {
   /** The HTTP Content-Type header value specifying the content type of the body. */
   contentType: string;
+
+  /** The HTTP request/response body as raw binary. */
+  data: Uint8Array;
+
+  /**
+   * Application specific response metadata. Must be set in the first response
+   * for streaming APIs.
+   */
+  extensions: Any[];
+}
+
+/**
+ * Message that represents an arbitrary HTTP body. It should only be used for
+ * payload formats that can't be represented as JSON, such as raw binary or
+ * an HTML page.
+ * 
+ * 
+ * This message can be used both in streaming and non-streaming API methods in
+ * the request as well as the response.
+ * 
+ * It can be used as a top-level request field, which is convenient if one
+ * wants to extract parameters from either the URL or HTTP template into the
+ * request fields and also want access to the raw HTTP body.
+ * 
+ * Example:
+ * 
+ * message GetResourceRequest {
+ * // A unique request id.
+ * string request_id = 1;
+ * 
+ * // The raw HTTP body is bound to this field.
+ * google.api.HttpBody http_body = 2;
+ * 
+ * }
+ * 
+ * service ResourceService {
+ * rpc GetResource(GetResourceRequest)
+ * returns (google.api.HttpBody);
+ * rpc UpdateResource(google.api.HttpBody)
+ * returns (google.protobuf.Empty);
+ * 
+ * }
+ * 
+ * Example with streaming methods:
+ * 
+ * service CaldavService {
+ * rpc GetCalendar(stream google.api.HttpBody)
+ * returns (stream google.api.HttpBody);
+ * rpc UpdateCalendar(stream google.api.HttpBody)
+ * returns (stream google.api.HttpBody);
+ * 
+ * }
+ * 
+ * Use of this type only changes how the request and response bodies are
+ * handled, all other features will continue to work unchanged.
+ */
+export interface HttpBodySDKType {
+  /** The HTTP Content-Type header value specifying the content type of the body. */
+  content_type: string;
 
   /** The HTTP request/response body as raw binary. */
   data: Uint8Array;
@@ -145,6 +204,28 @@ export const HttpBody = {
     message.data = object.data ?? new Uint8Array();
     message.extensions = object.extensions?.map(e => Any.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: HttpBodySDKType): HttpBody {
+    return {
+      contentType: isSet(object.content_type) ? object.content_type : "",
+      data: isSet(object.data) ? object.data : new Uint8Array(),
+      extensions: Array.isArray(object?.extensions) ? object.extensions.map((e: any) => Any.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: HttpBody): HttpBodySDKType {
+    const obj: any = {};
+    message.contentType !== undefined && (obj.content_type = message.contentType);
+    message.data !== undefined && (obj.data = message.data);
+
+    if (message.extensions) {
+      obj.extensions = message.extensions.map(e => e ? Any.toSDK(e) : undefined);
+    } else {
+      obj.extensions = [];
+    }
+
+    return obj;
   }
 
 };

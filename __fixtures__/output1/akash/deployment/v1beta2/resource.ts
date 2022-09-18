@@ -1,5 +1,5 @@
-import { ResourceUnits } from "../../base/v1beta2/resourceunits";
-import { DecCoin } from "../../../cosmos/base/v1beta1/coin";
+import { ResourceUnits, ResourceUnitsSDKType } from "../../base/v1beta2/resourceunits";
+import { DecCoin, DecCoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, Exact } from "@osmonauts/helpers";
 export const protobufPackage = "akash.deployment.v1beta2";
@@ -9,6 +9,13 @@ export interface Resource {
   resources: ResourceUnits;
   count: number;
   price: DecCoin;
+}
+
+/** Resource stores unit, total count and price of resource */
+export interface ResourceSDKType {
+  resources: ResourceUnitsSDKType;
+  count: number;
+  price: DecCoinSDKType;
 }
 
 function createBaseResource(): Resource {
@@ -88,6 +95,22 @@ export const Resource = {
     message.count = object.count ?? 0;
     message.price = object.price !== undefined && object.price !== null ? DecCoin.fromPartial(object.price) : undefined;
     return message;
+  },
+
+  fromSDK(object: ResourceSDKType): Resource {
+    return {
+      resources: isSet(object.resources) ? ResourceUnits.fromSDK(object.resources) : undefined,
+      count: isSet(object.count) ? object.count : 0,
+      price: isSet(object.price) ? DecCoin.fromSDK(object.price) : undefined
+    };
+  },
+
+  toSDK(message: Resource): ResourceSDKType {
+    const obj: any = {};
+    message.resources !== undefined && (obj.resources = message.resources ? ResourceUnits.toSDK(message.resources) : undefined);
+    message.count !== undefined && (obj.count = message.count);
+    message.price !== undefined && (obj.price = message.price ? DecCoin.toSDK(message.price) : undefined);
+    return obj;
   }
 
 };

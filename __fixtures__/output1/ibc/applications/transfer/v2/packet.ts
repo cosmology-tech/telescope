@@ -21,6 +21,25 @@ export interface FungibleTokenPacketData {
   receiver: string;
 }
 
+/**
+ * FungibleTokenPacketData defines a struct for the packet payload
+ * See FungibleTokenPacketData spec:
+ * https://github.com/cosmos/ibc/tree/master/spec/app/ics-020-fungible-token-transfer#data-structures
+ */
+export interface FungibleTokenPacketDataSDKType {
+  /** the token denomination to be transferred */
+  denom: string;
+
+  /** the token amount to be transferred */
+  amount: string;
+
+  /** the sender address */
+  sender: string;
+
+  /** the recipient address on the destination chain */
+  receiver: string;
+}
+
 function createBaseFungibleTokenPacketData(): FungibleTokenPacketData {
   return {
     denom: "",
@@ -110,6 +129,24 @@ export const FungibleTokenPacketData = {
     message.sender = object.sender ?? "";
     message.receiver = object.receiver ?? "";
     return message;
+  },
+
+  fromSDK(object: FungibleTokenPacketDataSDKType): FungibleTokenPacketData {
+    return {
+      denom: isSet(object.denom) ? object.denom : "",
+      amount: isSet(object.amount) ? object.amount : "",
+      sender: isSet(object.sender) ? object.sender : "",
+      receiver: isSet(object.receiver) ? object.receiver : ""
+    };
+  },
+
+  toSDK(message: FungibleTokenPacketData): FungibleTokenPacketDataSDKType {
+    const obj: any = {};
+    message.denom !== undefined && (obj.denom = message.denom);
+    message.amount !== undefined && (obj.amount = message.amount);
+    message.sender !== undefined && (obj.sender = message.sender);
+    message.receiver !== undefined && (obj.receiver = message.receiver);
+    return obj;
   }
 
 };

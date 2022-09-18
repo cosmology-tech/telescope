@@ -1,5 +1,5 @@
-import { Params, DistrInfo } from "./incentives";
-import { Duration } from "../../../google/protobuf/duration";
+import { Params, ParamsSDKType, DistrInfo, DistrInfoSDKType } from "./incentives";
+import { Duration, DurationSDKType } from "../../../google/protobuf/duration";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "@osmonauts/helpers";
 export const protobufPackage = "osmosis.poolincentives.v1beta1";
@@ -10,6 +10,14 @@ export interface GenesisState {
   params: Params;
   lockableDurations: Duration[];
   distrInfo?: DistrInfo;
+}
+
+/** GenesisState defines the pool incentives module's genesis state. */
+export interface GenesisStateSDKType {
+  /** params defines all the paramaters of the module. */
+  params: ParamsSDKType;
+  lockable_durations: Duration[];
+  distr_info?: DistrInfoSDKType;
 }
 
 function createBaseGenesisState(): GenesisState {
@@ -95,6 +103,28 @@ export const GenesisState = {
     message.lockableDurations = object.lockableDurations?.map(e => Duration.fromPartial(e)) || [];
     message.distrInfo = object.distrInfo !== undefined && object.distrInfo !== null ? DistrInfo.fromPartial(object.distrInfo) : undefined;
     return message;
+  },
+
+  fromSDK(object: GenesisStateSDKType): GenesisState {
+    return {
+      params: isSet(object.params) ? Params.fromSDK(object.params) : undefined,
+      lockableDurations: Array.isArray(object?.lockable_durations) ? object.lockable_durations.map((e: any) => Duration.fromSDK(e)) : [],
+      distrInfo: isSet(object.distr_info) ? DistrInfo.fromSDK(object.distr_info) : undefined
+    };
+  },
+
+  toSDK(message: GenesisState): GenesisStateSDKType {
+    const obj: any = {};
+    message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
+
+    if (message.lockableDurations) {
+      obj.lockable_durations = message.lockableDurations.map(e => e ? Duration.toSDK(e) : undefined);
+    } else {
+      obj.lockable_durations = [];
+    }
+
+    message.distrInfo !== undefined && (obj.distr_info = message.distrInfo ? DistrInfo.toSDK(message.distrInfo) : undefined);
+    return obj;
   }
 
 };

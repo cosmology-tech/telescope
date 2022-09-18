@@ -1,6 +1,6 @@
-import { ClaimsRecordAddress } from "./claims";
-import { Timestamp } from "../../../google/protobuf/timestamp";
-import { Duration } from "../../../google/protobuf/duration";
+import { ClaimsRecordAddress, ClaimsRecordAddressSDKType } from "./claims";
+import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
+import { Duration, DurationSDKType } from "../../../google/protobuf/duration";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, toTimestamp, fromTimestamp, fromJsonTimestamp } from "@osmonauts/helpers";
 export const protobufPackage = "evmos.claims.v1";
@@ -12,6 +12,15 @@ export interface GenesisState {
 
   /** list of claim records with the corresponding airdrop recipient */
   claimsRecords: ClaimsRecordAddress[];
+}
+
+/** GenesisState define the claims module's genesis state. */
+export interface GenesisStateSDKType {
+  /** params defines all the parameters of the module. */
+  params: ParamsSDKType;
+
+  /** list of claim records with the corresponding airdrop recipient */
+  claims_records: ClaimsRecordAddressSDKType[];
 }
 
 /** Params defines the claims module's parameters. */
@@ -39,6 +48,33 @@ export interface Params {
 
   /** list of channel identifiers from EVM compatible chains */
   evmChannels: string[];
+}
+
+/** Params defines the claims module's parameters. */
+export interface ParamsSDKType {
+  /** enable claiming process */
+  enable_claims: boolean;
+
+  /** timestamp of the airdrop start */
+  airdrop_start_time: Date;
+
+  /** duration until decay of claimable tokens begin */
+  duration_until_decay: Duration;
+
+  /** duration of the token claim decay period */
+  duration_of_decay: Duration;
+
+  /** denom of claimable coin */
+  claims_denom: string;
+
+  /**
+   * list of authorized channel identifiers that can perform address
+   * attestations via IBC.
+   */
+  authorized_channels: string[];
+
+  /** list of channel identifiers from EVM compatible chains */
+  evm_channels: string[];
 }
 
 function createBaseGenesisState(): GenesisState {
@@ -112,6 +148,26 @@ export const GenesisState = {
     message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     message.claimsRecords = object.claimsRecords?.map(e => ClaimsRecordAddress.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: GenesisStateSDKType): GenesisState {
+    return {
+      params: isSet(object.params) ? Params.fromSDK(object.params) : undefined,
+      claimsRecords: Array.isArray(object?.claims_records) ? object.claims_records.map((e: any) => ClaimsRecordAddress.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: GenesisState): GenesisStateSDKType {
+    const obj: any = {};
+    message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
+
+    if (message.claimsRecords) {
+      obj.claims_records = message.claimsRecords.map(e => e ? ClaimsRecordAddress.toSDK(e) : undefined);
+    } else {
+      obj.claims_records = [];
+    }
+
+    return obj;
   }
 
 };
@@ -252,6 +308,41 @@ export const Params = {
     message.authorizedChannels = object.authorizedChannels?.map(e => e) || [];
     message.evmChannels = object.evmChannels?.map(e => e) || [];
     return message;
+  },
+
+  fromSDK(object: ParamsSDKType): Params {
+    return {
+      enableClaims: isSet(object.enable_claims) ? object.enable_claims : false,
+      airdropStartTime: isSet(object.airdrop_start_time) ? Timestamp.fromSDK(object.airdrop_start_time) : undefined,
+      durationUntilDecay: isSet(object.duration_until_decay) ? Duration.fromSDK(object.duration_until_decay) : undefined,
+      durationOfDecay: isSet(object.duration_of_decay) ? Duration.fromSDK(object.duration_of_decay) : undefined,
+      claimsDenom: isSet(object.claims_denom) ? object.claims_denom : "",
+      authorizedChannels: Array.isArray(object?.authorized_channels) ? object.authorized_channels.map((e: any) => e) : [],
+      evmChannels: Array.isArray(object?.evm_channels) ? object.evm_channels.map((e: any) => e) : []
+    };
+  },
+
+  toSDK(message: Params): ParamsSDKType {
+    const obj: any = {};
+    message.enableClaims !== undefined && (obj.enable_claims = message.enableClaims);
+    message.airdropStartTime !== undefined && (obj.airdrop_start_time = message.airdropStartTime ? Timestamp.toSDK(message.airdropStartTime) : undefined);
+    message.durationUntilDecay !== undefined && (obj.duration_until_decay = message.durationUntilDecay ? Duration.toSDK(message.durationUntilDecay) : undefined);
+    message.durationOfDecay !== undefined && (obj.duration_of_decay = message.durationOfDecay ? Duration.toSDK(message.durationOfDecay) : undefined);
+    message.claimsDenom !== undefined && (obj.claims_denom = message.claimsDenom);
+
+    if (message.authorizedChannels) {
+      obj.authorized_channels = message.authorizedChannels.map(e => e);
+    } else {
+      obj.authorized_channels = [];
+    }
+
+    if (message.evmChannels) {
+      obj.evm_channels = message.evmChannels.map(e => e);
+    } else {
+      obj.evm_channels = [];
+    }
+
+    return obj;
   }
 
 };

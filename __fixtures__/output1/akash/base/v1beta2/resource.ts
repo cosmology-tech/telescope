@@ -1,5 +1,5 @@
-import { ResourceValue } from "./resourcevalue";
-import { Attribute } from "./attribute";
+import { ResourceValue, ResourceValueSDKType } from "./resourcevalue";
+import { Attribute, AttributeSDKType } from "./attribute";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, Exact } from "@osmonauts/helpers";
 export const protobufPackage = "akash.base.v1beta2";
@@ -10,10 +10,22 @@ export interface CPU {
   attributes: Attribute[];
 }
 
+/** CPU stores resource units and cpu config attributes */
+export interface CPUSDKType {
+  units: ResourceValueSDKType;
+  attributes: AttributeSDKType[];
+}
+
 /** Memory stores resource quantity and memory attributes */
 export interface Memory {
   quantity: ResourceValue;
   attributes: Attribute[];
+}
+
+/** Memory stores resource quantity and memory attributes */
+export interface MemorySDKType {
+  quantity: ResourceValueSDKType;
+  attributes: AttributeSDKType[];
 }
 
 /** Storage stores resource quantity and storage attributes */
@@ -21,6 +33,13 @@ export interface Storage {
   name: string;
   quantity: ResourceValue;
   attributes: Attribute[];
+}
+
+/** Storage stores resource quantity and storage attributes */
+export interface StorageSDKType {
+  name: string;
+  quantity: ResourceValueSDKType;
+  attributes: AttributeSDKType[];
 }
 
 function createBaseCPU(): CPU {
@@ -94,6 +113,26 @@ export const CPU = {
     message.units = object.units !== undefined && object.units !== null ? ResourceValue.fromPartial(object.units) : undefined;
     message.attributes = object.attributes?.map(e => Attribute.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: CPUSDKType): CPU {
+    return {
+      units: isSet(object.units) ? ResourceValue.fromSDK(object.units) : undefined,
+      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: CPU): CPUSDKType {
+    const obj: any = {};
+    message.units !== undefined && (obj.units = message.units ? ResourceValue.toSDK(message.units) : undefined);
+
+    if (message.attributes) {
+      obj.attributes = message.attributes.map(e => e ? Attribute.toSDK(e) : undefined);
+    } else {
+      obj.attributes = [];
+    }
+
+    return obj;
   }
 
 };
@@ -169,6 +208,26 @@ export const Memory = {
     message.quantity = object.quantity !== undefined && object.quantity !== null ? ResourceValue.fromPartial(object.quantity) : undefined;
     message.attributes = object.attributes?.map(e => Attribute.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: MemorySDKType): Memory {
+    return {
+      quantity: isSet(object.quantity) ? ResourceValue.fromSDK(object.quantity) : undefined,
+      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: Memory): MemorySDKType {
+    const obj: any = {};
+    message.quantity !== undefined && (obj.quantity = message.quantity ? ResourceValue.toSDK(message.quantity) : undefined);
+
+    if (message.attributes) {
+      obj.attributes = message.attributes.map(e => e ? Attribute.toSDK(e) : undefined);
+    } else {
+      obj.attributes = [];
+    }
+
+    return obj;
   }
 
 };
@@ -256,6 +315,28 @@ export const Storage = {
     message.quantity = object.quantity !== undefined && object.quantity !== null ? ResourceValue.fromPartial(object.quantity) : undefined;
     message.attributes = object.attributes?.map(e => Attribute.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: StorageSDKType): Storage {
+    return {
+      name: isSet(object.name) ? object.name : "",
+      quantity: isSet(object.quantity) ? ResourceValue.fromSDK(object.quantity) : undefined,
+      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: Storage): StorageSDKType {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    message.quantity !== undefined && (obj.quantity = message.quantity ? ResourceValue.toSDK(message.quantity) : undefined);
+
+    if (message.attributes) {
+      obj.attributes = message.attributes.map(e => e ? Attribute.toSDK(e) : undefined);
+    } else {
+      obj.attributes = [];
+    }
+
+    return obj;
   }
 
 };

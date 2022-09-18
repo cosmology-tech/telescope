@@ -1,6 +1,6 @@
 import { Rpc } from "@osmonauts/helpers";
 import * as _m0 from "protobufjs/minimal";
-import { MsgVerifyInvariant, MsgVerifyInvariantResponse } from "./tx";
+import { MsgVerifyInvariant, MsgVerifyInvariantSDKType, MsgVerifyInvariantResponse, MsgVerifyInvariantResponseSDKType } from "./tx";
 
 /** Msg defines the RPC service */
 export interface Msg {

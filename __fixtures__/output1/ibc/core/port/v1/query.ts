@@ -1,4 +1,4 @@
-import { Order, Counterparty, orderFromJSON, orderToJSON } from "../../channel/v1/channel";
+import { Order, OrderSDKType, Counterparty, CounterpartySDKType, orderFromJSON, orderFromJSONSDKType, orderToJSON, orderToJSONSDKType } from "../../channel/v1/channel";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "@osmonauts/helpers";
 export const protobufPackage = "ibc.core.port.v1";
@@ -21,10 +21,37 @@ export interface QueryAppVersionRequest {
   proposedVersion: string;
 }
 
+/** QueryAppVersionRequest is the request type for the Query/AppVersion RPC method */
+export interface QueryAppVersionRequestSDKType {
+  /** port unique identifier */
+  port_id: string;
+
+  /** connection unique identifier */
+  connection_id: string;
+
+  /** whether the channel is ordered or unordered */
+  ordering: OrderSDKType;
+
+  /** counterparty channel end */
+  counterparty: CounterpartySDKType;
+
+  /** proposed version */
+  proposed_version: string;
+}
+
 /** QueryAppVersionResponse is the response type for the Query/AppVersion RPC method. */
 export interface QueryAppVersionResponse {
   /** port id associated with the request identifiers */
   portId: string;
+
+  /** supported app version */
+  version: string;
+}
+
+/** QueryAppVersionResponse is the response type for the Query/AppVersion RPC method. */
+export interface QueryAppVersionResponseSDKType {
+  /** port id associated with the request identifiers */
+  port_id: string;
 
   /** supported app version */
   version: string;
@@ -131,6 +158,26 @@ export const QueryAppVersionRequest = {
     message.counterparty = object.counterparty !== undefined && object.counterparty !== null ? Counterparty.fromPartial(object.counterparty) : undefined;
     message.proposedVersion = object.proposedVersion ?? "";
     return message;
+  },
+
+  fromSDK(object: QueryAppVersionRequestSDKType): QueryAppVersionRequest {
+    return {
+      portId: isSet(object.port_id) ? object.port_id : "",
+      connectionId: isSet(object.connection_id) ? object.connection_id : "",
+      ordering: isSet(object.ordering) ? orderFromJSON(object.ordering) : 0,
+      counterparty: isSet(object.counterparty) ? Counterparty.fromSDK(object.counterparty) : undefined,
+      proposedVersion: isSet(object.proposed_version) ? object.proposed_version : ""
+    };
+  },
+
+  toSDK(message: QueryAppVersionRequest): QueryAppVersionRequestSDKType {
+    const obj: any = {};
+    message.portId !== undefined && (obj.port_id = message.portId);
+    message.connectionId !== undefined && (obj.connection_id = message.connectionId);
+    message.ordering !== undefined && (obj.ordering = orderToJSON(message.ordering));
+    message.counterparty !== undefined && (obj.counterparty = message.counterparty ? Counterparty.toSDK(message.counterparty) : undefined);
+    message.proposedVersion !== undefined && (obj.proposed_version = message.proposedVersion);
+    return obj;
   }
 
 };
@@ -200,6 +247,20 @@ export const QueryAppVersionResponse = {
     message.portId = object.portId ?? "";
     message.version = object.version ?? "";
     return message;
+  },
+
+  fromSDK(object: QueryAppVersionResponseSDKType): QueryAppVersionResponse {
+    return {
+      portId: isSet(object.port_id) ? object.port_id : "",
+      version: isSet(object.version) ? object.version : ""
+    };
+  },
+
+  toSDK(message: QueryAppVersionResponse): QueryAppVersionResponseSDKType {
+    const obj: any = {};
+    message.portId !== undefined && (obj.port_id = message.portId);
+    message.version !== undefined && (obj.version = message.version);
+    return obj;
   }
 
 };

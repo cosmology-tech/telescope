@@ -1,4 +1,4 @@
-import { Any } from "../../../../google/protobuf/any";
+import { Any, AnySDKType } from "../../../../google/protobuf/any";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
 export const protobufPackage = "ibc.core.client.v1";
@@ -18,8 +18,26 @@ export interface MsgCreateClient {
   signer: string;
 }
 
+/** MsgCreateClient defines a message to create an IBC client */
+export interface MsgCreateClientSDKType {
+  /** light client state */
+  client_state: Any;
+
+  /**
+   * consensus state associated with the client that corresponds to a given
+   * height.
+   */
+  consensus_state: Any;
+
+  /** signer address */
+  signer: string;
+}
+
 /** MsgCreateClientResponse defines the Msg/CreateClient response type. */
 export interface MsgCreateClientResponse {}
+
+/** MsgCreateClientResponse defines the Msg/CreateClient response type. */
+export interface MsgCreateClientResponseSDKType {}
 
 /**
  * MsgUpdateClient defines an sdk.Msg to update a IBC client state using
@@ -36,8 +54,26 @@ export interface MsgUpdateClient {
   signer: string;
 }
 
+/**
+ * MsgUpdateClient defines an sdk.Msg to update a IBC client state using
+ * the given header.
+ */
+export interface MsgUpdateClientSDKType {
+  /** client unique identifier */
+  client_id: string;
+
+  /** header to update the light client */
+  header: Any;
+
+  /** signer address */
+  signer: string;
+}
+
 /** MsgUpdateClientResponse defines the Msg/UpdateClient response type. */
 export interface MsgUpdateClientResponse {}
+
+/** MsgUpdateClientResponse defines the Msg/UpdateClient response type. */
+export interface MsgUpdateClientResponseSDKType {}
 
 /**
  * MsgUpgradeClient defines an sdk.Msg to upgrade an IBC client to a new client
@@ -66,8 +102,38 @@ export interface MsgUpgradeClient {
   signer: string;
 }
 
+/**
+ * MsgUpgradeClient defines an sdk.Msg to upgrade an IBC client to a new client
+ * state
+ */
+export interface MsgUpgradeClientSDKType {
+  /** client unique identifier */
+  client_id: string;
+
+  /** upgraded client state */
+  client_state: Any;
+
+  /**
+   * upgraded consensus state, only contains enough information to serve as a
+   * basis of trust in update logic
+   */
+  consensus_state: Any;
+
+  /** proof that old chain committed to new client */
+  proof_upgrade_client: Uint8Array;
+
+  /** proof that old chain committed to new consensus state */
+  proof_upgrade_consensus_state: Uint8Array;
+
+  /** signer address */
+  signer: string;
+}
+
 /** MsgUpgradeClientResponse defines the Msg/UpgradeClient response type. */
 export interface MsgUpgradeClientResponse {}
+
+/** MsgUpgradeClientResponse defines the Msg/UpgradeClient response type. */
+export interface MsgUpgradeClientResponseSDKType {}
 
 /**
  * MsgSubmitMisbehaviour defines an sdk.Msg type that submits Evidence for
@@ -85,10 +151,31 @@ export interface MsgSubmitMisbehaviour {
 }
 
 /**
+ * MsgSubmitMisbehaviour defines an sdk.Msg type that submits Evidence for
+ * light client misbehaviour.
+ */
+export interface MsgSubmitMisbehaviourSDKType {
+  /** client unique identifier */
+  client_id: string;
+
+  /** misbehaviour used for freezing the light client */
+  misbehaviour: Any;
+
+  /** signer address */
+  signer: string;
+}
+
+/**
  * MsgSubmitMisbehaviourResponse defines the Msg/SubmitMisbehaviour response
  * type.
  */
 export interface MsgSubmitMisbehaviourResponse {}
+
+/**
+ * MsgSubmitMisbehaviourResponse defines the Msg/SubmitMisbehaviour response
+ * type.
+ */
+export interface MsgSubmitMisbehaviourResponseSDKType {}
 
 function createBaseMsgCreateClient(): MsgCreateClient {
   return {
@@ -167,6 +254,22 @@ export const MsgCreateClient = {
     message.consensusState = object.consensusState !== undefined && object.consensusState !== null ? Any.fromPartial(object.consensusState) : undefined;
     message.signer = object.signer ?? "";
     return message;
+  },
+
+  fromSDK(object: MsgCreateClientSDKType): MsgCreateClient {
+    return {
+      clientState: isSet(object.client_state) ? Any.fromSDK(object.client_state) : undefined,
+      consensusState: isSet(object.consensus_state) ? Any.fromSDK(object.consensus_state) : undefined,
+      signer: isSet(object.signer) ? object.signer : ""
+    };
+  },
+
+  toSDK(message: MsgCreateClient): MsgCreateClientSDKType {
+    const obj: any = {};
+    message.clientState !== undefined && (obj.client_state = message.clientState ? Any.toSDK(message.clientState) : undefined);
+    message.consensusState !== undefined && (obj.consensus_state = message.consensusState ? Any.toSDK(message.consensusState) : undefined);
+    message.signer !== undefined && (obj.signer = message.signer);
+    return obj;
   }
 
 };
@@ -210,6 +313,15 @@ export const MsgCreateClientResponse = {
   fromPartial(_: DeepPartial<MsgCreateClientResponse>): MsgCreateClientResponse {
     const message = createBaseMsgCreateClientResponse();
     return message;
+  },
+
+  fromSDK(_: MsgCreateClientResponseSDKType): MsgCreateClientResponse {
+    return {};
+  },
+
+  toSDK(_: MsgCreateClientResponse): MsgCreateClientResponseSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -291,6 +403,22 @@ export const MsgUpdateClient = {
     message.header = object.header !== undefined && object.header !== null ? Any.fromPartial(object.header) : undefined;
     message.signer = object.signer ?? "";
     return message;
+  },
+
+  fromSDK(object: MsgUpdateClientSDKType): MsgUpdateClient {
+    return {
+      clientId: isSet(object.client_id) ? object.client_id : "",
+      header: isSet(object.header) ? Any.fromSDK(object.header) : undefined,
+      signer: isSet(object.signer) ? object.signer : ""
+    };
+  },
+
+  toSDK(message: MsgUpdateClient): MsgUpdateClientSDKType {
+    const obj: any = {};
+    message.clientId !== undefined && (obj.client_id = message.clientId);
+    message.header !== undefined && (obj.header = message.header ? Any.toSDK(message.header) : undefined);
+    message.signer !== undefined && (obj.signer = message.signer);
+    return obj;
   }
 
 };
@@ -334,6 +462,15 @@ export const MsgUpdateClientResponse = {
   fromPartial(_: DeepPartial<MsgUpdateClientResponse>): MsgUpdateClientResponse {
     const message = createBaseMsgUpdateClientResponse();
     return message;
+  },
+
+  fromSDK(_: MsgUpdateClientResponseSDKType): MsgUpdateClientResponse {
+    return {};
+  },
+
+  toSDK(_: MsgUpdateClientResponse): MsgUpdateClientResponseSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -451,6 +588,28 @@ export const MsgUpgradeClient = {
     message.proofUpgradeConsensusState = object.proofUpgradeConsensusState ?? new Uint8Array();
     message.signer = object.signer ?? "";
     return message;
+  },
+
+  fromSDK(object: MsgUpgradeClientSDKType): MsgUpgradeClient {
+    return {
+      clientId: isSet(object.client_id) ? object.client_id : "",
+      clientState: isSet(object.client_state) ? Any.fromSDK(object.client_state) : undefined,
+      consensusState: isSet(object.consensus_state) ? Any.fromSDK(object.consensus_state) : undefined,
+      proofUpgradeClient: isSet(object.proof_upgrade_client) ? object.proof_upgrade_client : new Uint8Array(),
+      proofUpgradeConsensusState: isSet(object.proof_upgrade_consensus_state) ? object.proof_upgrade_consensus_state : new Uint8Array(),
+      signer: isSet(object.signer) ? object.signer : ""
+    };
+  },
+
+  toSDK(message: MsgUpgradeClient): MsgUpgradeClientSDKType {
+    const obj: any = {};
+    message.clientId !== undefined && (obj.client_id = message.clientId);
+    message.clientState !== undefined && (obj.client_state = message.clientState ? Any.toSDK(message.clientState) : undefined);
+    message.consensusState !== undefined && (obj.consensus_state = message.consensusState ? Any.toSDK(message.consensusState) : undefined);
+    message.proofUpgradeClient !== undefined && (obj.proof_upgrade_client = message.proofUpgradeClient);
+    message.proofUpgradeConsensusState !== undefined && (obj.proof_upgrade_consensus_state = message.proofUpgradeConsensusState);
+    message.signer !== undefined && (obj.signer = message.signer);
+    return obj;
   }
 
 };
@@ -494,6 +653,15 @@ export const MsgUpgradeClientResponse = {
   fromPartial(_: DeepPartial<MsgUpgradeClientResponse>): MsgUpgradeClientResponse {
     const message = createBaseMsgUpgradeClientResponse();
     return message;
+  },
+
+  fromSDK(_: MsgUpgradeClientResponseSDKType): MsgUpgradeClientResponse {
+    return {};
+  },
+
+  toSDK(_: MsgUpgradeClientResponse): MsgUpgradeClientResponseSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -575,6 +743,22 @@ export const MsgSubmitMisbehaviour = {
     message.misbehaviour = object.misbehaviour !== undefined && object.misbehaviour !== null ? Any.fromPartial(object.misbehaviour) : undefined;
     message.signer = object.signer ?? "";
     return message;
+  },
+
+  fromSDK(object: MsgSubmitMisbehaviourSDKType): MsgSubmitMisbehaviour {
+    return {
+      clientId: isSet(object.client_id) ? object.client_id : "",
+      misbehaviour: isSet(object.misbehaviour) ? Any.fromSDK(object.misbehaviour) : undefined,
+      signer: isSet(object.signer) ? object.signer : ""
+    };
+  },
+
+  toSDK(message: MsgSubmitMisbehaviour): MsgSubmitMisbehaviourSDKType {
+    const obj: any = {};
+    message.clientId !== undefined && (obj.client_id = message.clientId);
+    message.misbehaviour !== undefined && (obj.misbehaviour = message.misbehaviour ? Any.toSDK(message.misbehaviour) : undefined);
+    message.signer !== undefined && (obj.signer = message.signer);
+    return obj;
   }
 
 };
@@ -618,6 +802,15 @@ export const MsgSubmitMisbehaviourResponse = {
   fromPartial(_: DeepPartial<MsgSubmitMisbehaviourResponse>): MsgSubmitMisbehaviourResponse {
     const message = createBaseMsgSubmitMisbehaviourResponse();
     return message;
+  },
+
+  fromSDK(_: MsgSubmitMisbehaviourResponseSDKType): MsgSubmitMisbehaviourResponse {
+    return {};
+  },
+
+  toSDK(_: MsgSubmitMisbehaviourResponse): MsgSubmitMisbehaviourResponseSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };

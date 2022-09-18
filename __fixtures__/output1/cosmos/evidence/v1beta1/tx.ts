@@ -1,4 +1,4 @@
-import { Any } from "../../../google/protobuf/any";
+import { Any, AnySDKType } from "../../../google/protobuf/any";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
 export const protobufPackage = "cosmos.evidence.v1beta1";
@@ -12,8 +12,23 @@ export interface MsgSubmitEvidence {
   evidence: Any;
 }
 
+/**
+ * MsgSubmitEvidence represents a message that supports submitting arbitrary
+ * Evidence of misbehavior such as equivocation or counterfactual signing.
+ */
+export interface MsgSubmitEvidenceSDKType {
+  submitter: string;
+  evidence: Any;
+}
+
 /** MsgSubmitEvidenceResponse defines the Msg/SubmitEvidence response type. */
 export interface MsgSubmitEvidenceResponse {
+  /** hash defines the hash of the evidence. */
+  hash: Uint8Array;
+}
+
+/** MsgSubmitEvidenceResponse defines the Msg/SubmitEvidence response type. */
+export interface MsgSubmitEvidenceResponseSDKType {
   /** hash defines the hash of the evidence. */
   hash: Uint8Array;
 }
@@ -83,6 +98,20 @@ export const MsgSubmitEvidence = {
     message.submitter = object.submitter ?? "";
     message.evidence = object.evidence !== undefined && object.evidence !== null ? Any.fromPartial(object.evidence) : undefined;
     return message;
+  },
+
+  fromSDK(object: MsgSubmitEvidenceSDKType): MsgSubmitEvidence {
+    return {
+      submitter: isSet(object.submitter) ? object.submitter : "",
+      evidence: isSet(object.evidence) ? Any.fromSDK(object.evidence) : undefined
+    };
+  },
+
+  toSDK(message: MsgSubmitEvidence): MsgSubmitEvidenceSDKType {
+    const obj: any = {};
+    message.submitter !== undefined && (obj.submitter = message.submitter);
+    message.evidence !== undefined && (obj.evidence = message.evidence ? Any.toSDK(message.evidence) : undefined);
+    return obj;
   }
 
 };
@@ -140,6 +169,18 @@ export const MsgSubmitEvidenceResponse = {
     const message = createBaseMsgSubmitEvidenceResponse();
     message.hash = object.hash ?? new Uint8Array();
     return message;
+  },
+
+  fromSDK(object: MsgSubmitEvidenceResponseSDKType): MsgSubmitEvidenceResponse {
+    return {
+      hash: isSet(object.hash) ? object.hash : new Uint8Array()
+    };
+  },
+
+  toSDK(message: MsgSubmitEvidenceResponse): MsgSubmitEvidenceResponseSDKType {
+    const obj: any = {};
+    message.hash !== undefined && (obj.hash = message.hash);
+    return obj;
   }
 
 };

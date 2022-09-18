@@ -1,7 +1,7 @@
-import { QueryCondition } from "../lockup/lock";
-import { Coin } from "../../cosmos/base/v1beta1/coin";
-import { Timestamp } from "../../google/protobuf/timestamp";
-import { Duration } from "../../google/protobuf/duration";
+import { QueryCondition, QueryConditionSDKType } from "../lockup/lock";
+import { Coin, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
+import { Timestamp, TimestampSDKType } from "../../google/protobuf/timestamp";
+import { Duration, DurationSDKType } from "../../google/protobuf/duration";
 import * as _m0 from "protobufjs/minimal";
 import { toTimestamp, Long, fromTimestamp, isSet, fromJsonTimestamp, DeepPartial } from "@osmonauts/helpers";
 export const protobufPackage = "osmosis.incentives";
@@ -39,8 +39,45 @@ export interface Gauge {
   /** already distributed coins */
   distributedCoins: Coin[];
 }
+export interface GaugeSDKType {
+  /** unique ID of a Gauge */
+  id: Long;
+
+  /**
+   * flag to show if it's perpetual or multi-epoch
+   * distribution incentives by third party
+   */
+  is_perpetual: boolean;
+
+  /**
+   * Rewards are distributed to lockups that are are returned by at least one of
+   * these queries
+   */
+  distribute_to: QueryConditionSDKType;
+
+  /**
+   * total amount of Coins that has been in the gauge.
+   * can distribute multiple coins
+   */
+  coins: CoinSDKType[];
+
+  /** distribution start time */
+  start_time: Date;
+
+  /** number of epochs distribution will be done */
+  num_epochs_paid_over: Long;
+
+  /** number of epochs distributed already */
+  filled_epochs: Long;
+
+  /** already distributed coins */
+  distributed_coins: CoinSDKType[];
+}
 export interface LockableDurationsInfo {
   lockableDurations: Duration[];
+}
+export interface LockableDurationsInfoSDKType {
+  lockable_durations: Duration[];
 }
 
 function createBaseGauge(): Gauge {
@@ -192,6 +229,44 @@ export const Gauge = {
     message.filledEpochs = object.filledEpochs !== undefined && object.filledEpochs !== null ? Long.fromValue(object.filledEpochs) : Long.UZERO;
     message.distributedCoins = object.distributedCoins?.map(e => Coin.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: GaugeSDKType): Gauge {
+    return {
+      id: isSet(object.id) ? object.id : Long.UZERO,
+      isPerpetual: isSet(object.is_perpetual) ? object.is_perpetual : false,
+      distributeTo: isSet(object.distribute_to) ? QueryCondition.fromSDK(object.distribute_to) : undefined,
+      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDK(e)) : [],
+      startTime: isSet(object.start_time) ? Timestamp.fromSDK(object.start_time) : undefined,
+      numEpochsPaidOver: isSet(object.num_epochs_paid_over) ? object.num_epochs_paid_over : Long.UZERO,
+      filledEpochs: isSet(object.filled_epochs) ? object.filled_epochs : Long.UZERO,
+      distributedCoins: Array.isArray(object?.distributed_coins) ? object.distributed_coins.map((e: any) => Coin.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: Gauge): GaugeSDKType {
+    const obj: any = {};
+    message.id !== undefined && (obj.id = message.id);
+    message.isPerpetual !== undefined && (obj.is_perpetual = message.isPerpetual);
+    message.distributeTo !== undefined && (obj.distribute_to = message.distributeTo ? QueryCondition.toSDK(message.distributeTo) : undefined);
+
+    if (message.coins) {
+      obj.coins = message.coins.map(e => e ? Coin.toSDK(e) : undefined);
+    } else {
+      obj.coins = [];
+    }
+
+    message.startTime !== undefined && (obj.start_time = message.startTime ? Timestamp.toSDK(message.startTime) : undefined);
+    message.numEpochsPaidOver !== undefined && (obj.num_epochs_paid_over = message.numEpochsPaidOver);
+    message.filledEpochs !== undefined && (obj.filled_epochs = message.filledEpochs);
+
+    if (message.distributedCoins) {
+      obj.distributed_coins = message.distributedCoins.map(e => e ? Coin.toSDK(e) : undefined);
+    } else {
+      obj.distributed_coins = [];
+    }
+
+    return obj;
   }
 
 };
@@ -255,6 +330,24 @@ export const LockableDurationsInfo = {
     const message = createBaseLockableDurationsInfo();
     message.lockableDurations = object.lockableDurations?.map(e => Duration.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: LockableDurationsInfoSDKType): LockableDurationsInfo {
+    return {
+      lockableDurations: Array.isArray(object?.lockable_durations) ? object.lockable_durations.map((e: any) => Duration.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: LockableDurationsInfo): LockableDurationsInfoSDKType {
+    const obj: any = {};
+
+    if (message.lockableDurations) {
+      obj.lockable_durations = message.lockableDurations.map(e => e ? Duration.toSDK(e) : undefined);
+    } else {
+      obj.lockable_durations = [];
+    }
+
+    return obj;
   }
 
 };

@@ -1,5 +1,5 @@
-import { Timestamp } from "../../../google/protobuf/timestamp";
-import { Duration } from "../../../google/protobuf/duration";
+import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
+import { Duration, DurationSDKType } from "../../../google/protobuf/duration";
 import * as _m0 from "protobufjs/minimal";
 import { toTimestamp, Long, fromTimestamp, isSet, fromJsonTimestamp, DeepPartial, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
 export const protobufPackage = "cosmos.slashing.v1beta1";
@@ -37,6 +37,39 @@ export interface ValidatorSigningInfo {
   missedBlocksCounter: Long;
 }
 
+/**
+ * ValidatorSigningInfo defines a validator's signing info for monitoring their
+ * liveness activity.
+ */
+export interface ValidatorSigningInfoSDKType {
+  address: string;
+
+  /** Height at which validator was first a candidate OR was unjailed */
+  start_height: Long;
+
+  /**
+   * Index which is incremented each time the validator was a bonded
+   * in a block and may have signed a precommit or not. This in conjunction with the
+   * `SignedBlocksWindow` param determines the index in the `MissedBlocksBitArray`.
+   */
+  index_offset: Long;
+
+  /** Timestamp until which the validator is jailed due to liveness downtime. */
+  jailed_until: Date;
+
+  /**
+   * Whether or not a validator has been tombstoned (killed out of validator set). It is set
+   * once the validator commits an equivocation or for any other configured misbehiavor.
+   */
+  tombstoned: boolean;
+
+  /**
+   * A counter kept to avoid unnecessary array reads.
+   * Note that `Sum(MissedBlocksBitArray)` always equals `MissedBlocksCounter`.
+   */
+  missed_blocks_counter: Long;
+}
+
 /** Params represents the parameters used for by the slashing module. */
 export interface Params {
   signedBlocksWindow: Long;
@@ -44,6 +77,15 @@ export interface Params {
   downtimeJailDuration: Duration;
   slashFractionDoubleSign: Uint8Array;
   slashFractionDowntime: Uint8Array;
+}
+
+/** Params represents the parameters used for by the slashing module. */
+export interface ParamsSDKType {
+  signed_blocks_window: Long;
+  min_signed_per_window: Uint8Array;
+  downtime_jail_duration: Duration;
+  slash_fraction_double_sign: Uint8Array;
+  slash_fraction_downtime: Uint8Array;
 }
 
 function createBaseValidatorSigningInfo(): ValidatorSigningInfo {
@@ -159,6 +201,28 @@ export const ValidatorSigningInfo = {
     message.tombstoned = object.tombstoned ?? false;
     message.missedBlocksCounter = object.missedBlocksCounter !== undefined && object.missedBlocksCounter !== null ? Long.fromValue(object.missedBlocksCounter) : Long.ZERO;
     return message;
+  },
+
+  fromSDK(object: ValidatorSigningInfoSDKType): ValidatorSigningInfo {
+    return {
+      address: isSet(object.address) ? object.address : "",
+      startHeight: isSet(object.start_height) ? object.start_height : Long.ZERO,
+      indexOffset: isSet(object.index_offset) ? object.index_offset : Long.ZERO,
+      jailedUntil: isSet(object.jailed_until) ? Timestamp.fromSDK(object.jailed_until) : undefined,
+      tombstoned: isSet(object.tombstoned) ? object.tombstoned : false,
+      missedBlocksCounter: isSet(object.missed_blocks_counter) ? object.missed_blocks_counter : Long.ZERO
+    };
+  },
+
+  toSDK(message: ValidatorSigningInfo): ValidatorSigningInfoSDKType {
+    const obj: any = {};
+    message.address !== undefined && (obj.address = message.address);
+    message.startHeight !== undefined && (obj.start_height = message.startHeight);
+    message.indexOffset !== undefined && (obj.index_offset = message.indexOffset);
+    message.jailedUntil !== undefined && (obj.jailed_until = message.jailedUntil ? Timestamp.toSDK(message.jailedUntil) : undefined);
+    message.tombstoned !== undefined && (obj.tombstoned = message.tombstoned);
+    message.missedBlocksCounter !== undefined && (obj.missed_blocks_counter = message.missedBlocksCounter);
+    return obj;
   }
 
 };
@@ -264,6 +328,26 @@ export const Params = {
     message.slashFractionDoubleSign = object.slashFractionDoubleSign ?? new Uint8Array();
     message.slashFractionDowntime = object.slashFractionDowntime ?? new Uint8Array();
     return message;
+  },
+
+  fromSDK(object: ParamsSDKType): Params {
+    return {
+      signedBlocksWindow: isSet(object.signed_blocks_window) ? object.signed_blocks_window : Long.ZERO,
+      minSignedPerWindow: isSet(object.min_signed_per_window) ? object.min_signed_per_window : new Uint8Array(),
+      downtimeJailDuration: isSet(object.downtime_jail_duration) ? Duration.fromSDK(object.downtime_jail_duration) : undefined,
+      slashFractionDoubleSign: isSet(object.slash_fraction_double_sign) ? object.slash_fraction_double_sign : new Uint8Array(),
+      slashFractionDowntime: isSet(object.slash_fraction_downtime) ? object.slash_fraction_downtime : new Uint8Array()
+    };
+  },
+
+  toSDK(message: Params): ParamsSDKType {
+    const obj: any = {};
+    message.signedBlocksWindow !== undefined && (obj.signed_blocks_window = message.signedBlocksWindow);
+    message.minSignedPerWindow !== undefined && (obj.min_signed_per_window = message.minSignedPerWindow);
+    message.downtimeJailDuration !== undefined && (obj.downtime_jail_duration = message.downtimeJailDuration ? Duration.toSDK(message.downtimeJailDuration) : undefined);
+    message.slashFractionDoubleSign !== undefined && (obj.slash_fraction_double_sign = message.slashFractionDoubleSign);
+    message.slashFractionDowntime !== undefined && (obj.slash_fraction_downtime = message.slashFractionDowntime);
+    return obj;
   }
 
 };

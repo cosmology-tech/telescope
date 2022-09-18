@@ -1,4 +1,4 @@
-import { Coin } from "../../../cosmos/base/v1beta1/coin";
+import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, Exact } from "@osmonauts/helpers";
 export const protobufPackage = "akash.market.v1beta2";
@@ -7,6 +7,12 @@ export const protobufPackage = "akash.market.v1beta2";
 export interface Params {
   bidMinDeposit: Coin;
   orderMaxBids: number;
+}
+
+/** Params is the params for the x/market module */
+export interface ParamsSDKType {
+  bid_min_deposit: CoinSDKType;
+  order_max_bids: number;
 }
 
 function createBaseParams(): Params {
@@ -74,6 +80,20 @@ export const Params = {
     message.bidMinDeposit = object.bidMinDeposit !== undefined && object.bidMinDeposit !== null ? Coin.fromPartial(object.bidMinDeposit) : undefined;
     message.orderMaxBids = object.orderMaxBids ?? 0;
     return message;
+  },
+
+  fromSDK(object: ParamsSDKType): Params {
+    return {
+      bidMinDeposit: isSet(object.bid_min_deposit) ? Coin.fromSDK(object.bid_min_deposit) : undefined,
+      orderMaxBids: isSet(object.order_max_bids) ? object.order_max_bids : 0
+    };
+  },
+
+  toSDK(message: Params): ParamsSDKType {
+    const obj: any = {};
+    message.bidMinDeposit !== undefined && (obj.bid_min_deposit = message.bidMinDeposit ? Coin.toSDK(message.bidMinDeposit) : undefined);
+    message.orderMaxBids !== undefined && (obj.order_max_bids = message.orderMaxBids);
+    return obj;
   }
 
 };

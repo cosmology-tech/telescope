@@ -1,6 +1,6 @@
-import { Any } from "../../../google/protobuf/any";
-import { Coin } from "../../base/v1beta1/coin";
-import { VoteOption, WeightedVoteOption, voteOptionFromJSON, voteOptionToJSON } from "./gov";
+import { Any, AnySDKType } from "../../../google/protobuf/any";
+import { Coin, CoinSDKType } from "../../base/v1beta1/coin";
+import { VoteOption, VoteOptionSDKType, WeightedVoteOption, WeightedVoteOptionSDKType, voteOptionFromJSON, voteOptionFromJSONSDKType, voteOptionToJSON, voteOptionToJSONSDKType } from "./gov";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, Long } from "@osmonauts/helpers";
 export const protobufPackage = "cosmos.gov.v1";
@@ -18,9 +18,27 @@ export interface MsgSubmitProposal {
   metadata: string;
 }
 
+/**
+ * MsgSubmitProposal defines an sdk.Msg type that supports submitting arbitrary
+ * proposal Content.
+ */
+export interface MsgSubmitProposalSDKType {
+  messages: Any[];
+  initial_deposit: CoinSDKType[];
+  proposer: string;
+
+  /** metadata is any arbitrary metadata attached to the proposal. */
+  metadata: string;
+}
+
 /** MsgSubmitProposalResponse defines the Msg/SubmitProposal response type. */
 export interface MsgSubmitProposalResponse {
   proposalId: Long;
+}
+
+/** MsgSubmitProposalResponse defines the Msg/SubmitProposal response type. */
+export interface MsgSubmitProposalResponseSDKType {
+  proposal_id: Long;
 }
 
 /**
@@ -35,8 +53,23 @@ export interface MsgExecLegacyContent {
   authority: string;
 }
 
+/**
+ * MsgExecLegacyContent is used to wrap the legacy content field into a message.
+ * This ensures backwards compatibility with v1beta1.MsgSubmitProposal.
+ */
+export interface MsgExecLegacyContentSDKType {
+  /** content is the proposal's content. */
+  content: Any;
+
+  /** authority must be the gov module address. */
+  authority: string;
+}
+
 /** MsgExecLegacyContentResponse defines the Msg/ExecLegacyContent response type. */
 export interface MsgExecLegacyContentResponse {}
+
+/** MsgExecLegacyContentResponse defines the Msg/ExecLegacyContent response type. */
+export interface MsgExecLegacyContentResponseSDKType {}
 
 /** MsgVote defines a message to cast a vote. */
 export interface MsgVote {
@@ -46,8 +79,19 @@ export interface MsgVote {
   metadata: string;
 }
 
+/** MsgVote defines a message to cast a vote. */
+export interface MsgVoteSDKType {
+  proposal_id: Long;
+  voter: string;
+  option: VoteOptionSDKType;
+  metadata: string;
+}
+
 /** MsgVoteResponse defines the Msg/Vote response type. */
 export interface MsgVoteResponse {}
+
+/** MsgVoteResponse defines the Msg/Vote response type. */
+export interface MsgVoteResponseSDKType {}
 
 /** MsgVoteWeighted defines a message to cast a vote. */
 export interface MsgVoteWeighted {
@@ -57,8 +101,19 @@ export interface MsgVoteWeighted {
   metadata: string;
 }
 
+/** MsgVoteWeighted defines a message to cast a vote. */
+export interface MsgVoteWeightedSDKType {
+  proposal_id: Long;
+  voter: string;
+  options: WeightedVoteOptionSDKType[];
+  metadata: string;
+}
+
 /** MsgVoteWeightedResponse defines the Msg/VoteWeighted response type. */
 export interface MsgVoteWeightedResponse {}
+
+/** MsgVoteWeightedResponse defines the Msg/VoteWeighted response type. */
+export interface MsgVoteWeightedResponseSDKType {}
 
 /** MsgDeposit defines a message to submit a deposit to an existing proposal. */
 export interface MsgDeposit {
@@ -67,8 +122,18 @@ export interface MsgDeposit {
   amount: Coin[];
 }
 
+/** MsgDeposit defines a message to submit a deposit to an existing proposal. */
+export interface MsgDepositSDKType {
+  proposal_id: Long;
+  depositor: string;
+  amount: CoinSDKType[];
+}
+
 /** MsgDepositResponse defines the Msg/Deposit response type. */
 export interface MsgDepositResponse {}
+
+/** MsgDepositResponse defines the Msg/Deposit response type. */
+export interface MsgDepositResponseSDKType {}
 
 function createBaseMsgSubmitProposal(): MsgSubmitProposal {
   return {
@@ -170,6 +235,35 @@ export const MsgSubmitProposal = {
     message.proposer = object.proposer ?? "";
     message.metadata = object.metadata ?? "";
     return message;
+  },
+
+  fromSDK(object: MsgSubmitProposalSDKType): MsgSubmitProposal {
+    return {
+      messages: Array.isArray(object?.messages) ? object.messages.map((e: any) => Any.fromSDK(e)) : [],
+      initialDeposit: Array.isArray(object?.initial_deposit) ? object.initial_deposit.map((e: any) => Coin.fromSDK(e)) : [],
+      proposer: isSet(object.proposer) ? object.proposer : "",
+      metadata: isSet(object.metadata) ? object.metadata : ""
+    };
+  },
+
+  toSDK(message: MsgSubmitProposal): MsgSubmitProposalSDKType {
+    const obj: any = {};
+
+    if (message.messages) {
+      obj.messages = message.messages.map(e => e ? Any.toSDK(e) : undefined);
+    } else {
+      obj.messages = [];
+    }
+
+    if (message.initialDeposit) {
+      obj.initial_deposit = message.initialDeposit.map(e => e ? Coin.toSDK(e) : undefined);
+    } else {
+      obj.initial_deposit = [];
+    }
+
+    message.proposer !== undefined && (obj.proposer = message.proposer);
+    message.metadata !== undefined && (obj.metadata = message.metadata);
+    return obj;
   }
 
 };
@@ -227,6 +321,18 @@ export const MsgSubmitProposalResponse = {
     const message = createBaseMsgSubmitProposalResponse();
     message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? Long.fromValue(object.proposalId) : Long.UZERO;
     return message;
+  },
+
+  fromSDK(object: MsgSubmitProposalResponseSDKType): MsgSubmitProposalResponse {
+    return {
+      proposalId: isSet(object.proposal_id) ? object.proposal_id : Long.UZERO
+    };
+  },
+
+  toSDK(message: MsgSubmitProposalResponse): MsgSubmitProposalResponseSDKType {
+    const obj: any = {};
+    message.proposalId !== undefined && (obj.proposal_id = message.proposalId);
+    return obj;
   }
 
 };
@@ -296,6 +402,20 @@ export const MsgExecLegacyContent = {
     message.content = object.content !== undefined && object.content !== null ? Any.fromPartial(object.content) : undefined;
     message.authority = object.authority ?? "";
     return message;
+  },
+
+  fromSDK(object: MsgExecLegacyContentSDKType): MsgExecLegacyContent {
+    return {
+      content: isSet(object.content) ? Any.fromSDK(object.content) : undefined,
+      authority: isSet(object.authority) ? object.authority : ""
+    };
+  },
+
+  toSDK(message: MsgExecLegacyContent): MsgExecLegacyContentSDKType {
+    const obj: any = {};
+    message.content !== undefined && (obj.content = message.content ? Any.toSDK(message.content) : undefined);
+    message.authority !== undefined && (obj.authority = message.authority);
+    return obj;
   }
 
 };
@@ -339,6 +459,15 @@ export const MsgExecLegacyContentResponse = {
   fromPartial(_: DeepPartial<MsgExecLegacyContentResponse>): MsgExecLegacyContentResponse {
     const message = createBaseMsgExecLegacyContentResponse();
     return message;
+  },
+
+  fromSDK(_: MsgExecLegacyContentResponseSDKType): MsgExecLegacyContentResponse {
+    return {};
+  },
+
+  toSDK(_: MsgExecLegacyContentResponse): MsgExecLegacyContentResponseSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -432,6 +561,24 @@ export const MsgVote = {
     message.option = object.option ?? 0;
     message.metadata = object.metadata ?? "";
     return message;
+  },
+
+  fromSDK(object: MsgVoteSDKType): MsgVote {
+    return {
+      proposalId: isSet(object.proposal_id) ? object.proposal_id : Long.UZERO,
+      voter: isSet(object.voter) ? object.voter : "",
+      option: isSet(object.option) ? voteOptionFromJSON(object.option) : 0,
+      metadata: isSet(object.metadata) ? object.metadata : ""
+    };
+  },
+
+  toSDK(message: MsgVote): MsgVoteSDKType {
+    const obj: any = {};
+    message.proposalId !== undefined && (obj.proposal_id = message.proposalId);
+    message.voter !== undefined && (obj.voter = message.voter);
+    message.option !== undefined && (obj.option = voteOptionToJSON(message.option));
+    message.metadata !== undefined && (obj.metadata = message.metadata);
+    return obj;
   }
 
 };
@@ -475,6 +622,15 @@ export const MsgVoteResponse = {
   fromPartial(_: DeepPartial<MsgVoteResponse>): MsgVoteResponse {
     const message = createBaseMsgVoteResponse();
     return message;
+  },
+
+  fromSDK(_: MsgVoteResponseSDKType): MsgVoteResponse {
+    return {};
+  },
+
+  toSDK(_: MsgVoteResponse): MsgVoteResponseSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -574,6 +730,30 @@ export const MsgVoteWeighted = {
     message.options = object.options?.map(e => WeightedVoteOption.fromPartial(e)) || [];
     message.metadata = object.metadata ?? "";
     return message;
+  },
+
+  fromSDK(object: MsgVoteWeightedSDKType): MsgVoteWeighted {
+    return {
+      proposalId: isSet(object.proposal_id) ? object.proposal_id : Long.UZERO,
+      voter: isSet(object.voter) ? object.voter : "",
+      options: Array.isArray(object?.options) ? object.options.map((e: any) => WeightedVoteOption.fromSDK(e)) : [],
+      metadata: isSet(object.metadata) ? object.metadata : ""
+    };
+  },
+
+  toSDK(message: MsgVoteWeighted): MsgVoteWeightedSDKType {
+    const obj: any = {};
+    message.proposalId !== undefined && (obj.proposal_id = message.proposalId);
+    message.voter !== undefined && (obj.voter = message.voter);
+
+    if (message.options) {
+      obj.options = message.options.map(e => e ? WeightedVoteOption.toSDK(e) : undefined);
+    } else {
+      obj.options = [];
+    }
+
+    message.metadata !== undefined && (obj.metadata = message.metadata);
+    return obj;
   }
 
 };
@@ -617,6 +797,15 @@ export const MsgVoteWeightedResponse = {
   fromPartial(_: DeepPartial<MsgVoteWeightedResponse>): MsgVoteWeightedResponse {
     const message = createBaseMsgVoteWeightedResponse();
     return message;
+  },
+
+  fromSDK(_: MsgVoteWeightedResponseSDKType): MsgVoteWeightedResponse {
+    return {};
+  },
+
+  toSDK(_: MsgVoteWeightedResponse): MsgVoteWeightedResponseSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -704,6 +893,28 @@ export const MsgDeposit = {
     message.depositor = object.depositor ?? "";
     message.amount = object.amount?.map(e => Coin.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: MsgDepositSDKType): MsgDeposit {
+    return {
+      proposalId: isSet(object.proposal_id) ? object.proposal_id : Long.UZERO,
+      depositor: isSet(object.depositor) ? object.depositor : "",
+      amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: MsgDeposit): MsgDepositSDKType {
+    const obj: any = {};
+    message.proposalId !== undefined && (obj.proposal_id = message.proposalId);
+    message.depositor !== undefined && (obj.depositor = message.depositor);
+
+    if (message.amount) {
+      obj.amount = message.amount.map(e => e ? Coin.toSDK(e) : undefined);
+    } else {
+      obj.amount = [];
+    }
+
+    return obj;
   }
 
 };
@@ -747,6 +958,15 @@ export const MsgDepositResponse = {
   fromPartial(_: DeepPartial<MsgDepositResponse>): MsgDepositResponse {
     const message = createBaseMsgDepositResponse();
     return message;
+  },
+
+  fromSDK(_: MsgDepositResponseSDKType): MsgDepositResponse {
+    return {};
+  },
+
+  toSDK(_: MsgDepositResponse): MsgDepositResponseSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };

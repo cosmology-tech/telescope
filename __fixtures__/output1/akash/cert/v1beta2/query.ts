@@ -1,5 +1,5 @@
-import { CertificateFilter, Certificate } from "./cert";
-import { PageRequest, PageResponse } from "../../../cosmos/base/query/v1beta1/pagination";
+import { CertificateFilter, CertificateFilterSDKType, Certificate, CertificateSDKType } from "./cert";
+import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, Exact } from "@osmonauts/helpers";
 export const protobufPackage = "akash.cert.v1beta2";
@@ -10,16 +10,34 @@ export interface CertificateResponse {
   serial: string;
 }
 
+/** CertificateResponse contains a single X509 certificate and its serial number */
+export interface CertificateResponseSDKType {
+  certificate: CertificateSDKType;
+  serial: string;
+}
+
 /** QueryDeploymentsRequest is request type for the Query/Deployments RPC method */
 export interface QueryCertificatesRequest {
   filter?: CertificateFilter;
   pagination?: PageRequest;
 }
 
+/** QueryDeploymentsRequest is request type for the Query/Deployments RPC method */
+export interface QueryCertificatesRequestSDKType {
+  filter?: CertificateFilterSDKType;
+  pagination?: PageRequestSDKType;
+}
+
 /** QueryCertificatesResponse is response type for the Query/Certificates RPC method */
 export interface QueryCertificatesResponse {
   certificates: CertificateResponse[];
   pagination?: PageResponse;
+}
+
+/** QueryCertificatesResponse is response type for the Query/Certificates RPC method */
+export interface QueryCertificatesResponseSDKType {
+  certificates: CertificateResponseSDKType[];
+  pagination?: PageResponseSDKType;
 }
 
 function createBaseCertificateResponse(): CertificateResponse {
@@ -87,6 +105,20 @@ export const CertificateResponse = {
     message.certificate = object.certificate !== undefined && object.certificate !== null ? Certificate.fromPartial(object.certificate) : undefined;
     message.serial = object.serial ?? "";
     return message;
+  },
+
+  fromSDK(object: CertificateResponseSDKType): CertificateResponse {
+    return {
+      certificate: isSet(object.certificate) ? Certificate.fromSDK(object.certificate) : undefined,
+      serial: isSet(object.serial) ? object.serial : ""
+    };
+  },
+
+  toSDK(message: CertificateResponse): CertificateResponseSDKType {
+    const obj: any = {};
+    message.certificate !== undefined && (obj.certificate = message.certificate ? Certificate.toSDK(message.certificate) : undefined);
+    message.serial !== undefined && (obj.serial = message.serial);
+    return obj;
   }
 
 };
@@ -156,6 +188,20 @@ export const QueryCertificatesRequest = {
     message.filter = object.filter !== undefined && object.filter !== null ? CertificateFilter.fromPartial(object.filter) : undefined;
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryCertificatesRequestSDKType): QueryCertificatesRequest {
+    return {
+      filter: isSet(object.filter) ? CertificateFilter.fromSDK(object.filter) : undefined,
+      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  toSDK(message: QueryCertificatesRequest): QueryCertificatesRequestSDKType {
+    const obj: any = {};
+    message.filter !== undefined && (obj.filter = message.filter ? CertificateFilter.toSDK(message.filter) : undefined);
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
+    return obj;
   }
 
 };
@@ -231,6 +277,26 @@ export const QueryCertificatesResponse = {
     message.certificates = object.certificates?.map(e => CertificateResponse.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryCertificatesResponseSDKType): QueryCertificatesResponse {
+    return {
+      certificates: Array.isArray(object?.certificates) ? object.certificates.map((e: any) => CertificateResponse.fromSDK(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  toSDK(message: QueryCertificatesResponse): QueryCertificatesResponseSDKType {
+    const obj: any = {};
+
+    if (message.certificates) {
+      obj.certificates = message.certificates.map(e => e ? CertificateResponse.toSDK(e) : undefined);
+    } else {
+      obj.certificates = [];
+    }
+
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
+    return obj;
   }
 
 };

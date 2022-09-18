@@ -1,5 +1,5 @@
-import { AccessConfig } from "./types";
-import { Coin } from "../../../cosmos/base/v1beta1/coin";
+import { AccessConfig, AccessConfigSDKType } from "./types";
+import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, bytesFromBase64, base64FromBytes, DeepPartial, Long } from "@osmonauts/helpers";
 export const protobufPackage = "cosmwasm.wasm.v1";
@@ -19,10 +19,31 @@ export interface MsgStoreCode {
   instantiatePermission: AccessConfig;
 }
 
+/** MsgStoreCode submit Wasm code to the system */
+export interface MsgStoreCodeSDKType {
+  /** Sender is the that actor that signed the messages */
+  sender: string;
+
+  /** WASMByteCode can be raw or gzip compressed */
+  wasm_byte_code: Uint8Array;
+
+  /**
+   * InstantiatePermission access control to apply on contract creation,
+   * optional
+   */
+  instantiate_permission: AccessConfigSDKType;
+}
+
 /** MsgStoreCodeResponse returns store result data. */
 export interface MsgStoreCodeResponse {
   /** CodeID is the reference to the stored WASM code */
   codeId: Long;
+}
+
+/** MsgStoreCodeResponse returns store result data. */
+export interface MsgStoreCodeResponseSDKType {
+  /** CodeID is the reference to the stored WASM code */
+  code_id: Long;
 }
 
 /**
@@ -49,8 +70,41 @@ export interface MsgInstantiateContract {
   funds: Coin[];
 }
 
+/**
+ * MsgInstantiateContract create a new smart contract instance for the given
+ * code id.
+ */
+export interface MsgInstantiateContractSDKType {
+  /** Sender is the that actor that signed the messages */
+  sender: string;
+
+  /** Admin is an optional address that can execute migrations */
+  admin: string;
+
+  /** CodeID is the reference to the stored WASM code */
+  code_id: Long;
+
+  /** Label is optional metadata to be stored with a contract instance. */
+  label: string;
+
+  /** Msg json encoded message to be passed to the contract on instantiation */
+  msg: Uint8Array;
+
+  /** Funds coins that are transferred to the contract on instantiation */
+  funds: CoinSDKType[];
+}
+
 /** MsgInstantiateContractResponse return instantiation result data */
 export interface MsgInstantiateContractResponse {
+  /** Address is the bech32 address of the new contract instance. */
+  address: string;
+
+  /** Data contains base64-encoded bytes to returned from the contract */
+  data: Uint8Array;
+}
+
+/** MsgInstantiateContractResponse return instantiation result data */
+export interface MsgInstantiateContractResponseSDKType {
   /** Address is the bech32 address of the new contract instance. */
   address: string;
 
@@ -73,8 +127,29 @@ export interface MsgExecuteContract {
   funds: Coin[];
 }
 
+/** MsgExecuteContract submits the given message data to a smart contract */
+export interface MsgExecuteContractSDKType {
+  /** Sender is the that actor that signed the messages */
+  sender: string;
+
+  /** Contract is the address of the smart contract */
+  contract: string;
+
+  /** Msg json encoded message to be passed to the contract */
+  msg: Uint8Array;
+
+  /** Funds coins that are transferred to the contract on execution */
+  funds: CoinSDKType[];
+}
+
 /** MsgExecuteContractResponse returns execution result data. */
 export interface MsgExecuteContractResponse {
+  /** Data contains base64-encoded bytes to returned from the contract */
+  data: Uint8Array;
+}
+
+/** MsgExecuteContractResponse returns execution result data. */
+export interface MsgExecuteContractResponseSDKType {
   /** Data contains base64-encoded bytes to returned from the contract */
   data: Uint8Array;
 }
@@ -94,8 +169,32 @@ export interface MsgMigrateContract {
   msg: Uint8Array;
 }
 
+/** MsgMigrateContract runs a code upgrade/ downgrade for a smart contract */
+export interface MsgMigrateContractSDKType {
+  /** Sender is the that actor that signed the messages */
+  sender: string;
+
+  /** Contract is the address of the smart contract */
+  contract: string;
+
+  /** CodeID references the new WASM code */
+  code_id: Long;
+
+  /** Msg json encoded message to be passed to the contract on migration */
+  msg: Uint8Array;
+}
+
 /** MsgMigrateContractResponse returns contract migration result data. */
 export interface MsgMigrateContractResponse {
+  /**
+   * Data contains same raw bytes returned as data from the wasm contract.
+   * (May be empty)
+   */
+  data: Uint8Array;
+}
+
+/** MsgMigrateContractResponse returns contract migration result data. */
+export interface MsgMigrateContractResponseSDKType {
   /**
    * Data contains same raw bytes returned as data from the wasm contract.
    * (May be empty)
@@ -115,8 +214,23 @@ export interface MsgUpdateAdmin {
   contract: string;
 }
 
+/** MsgUpdateAdmin sets a new admin for a smart contract */
+export interface MsgUpdateAdminSDKType {
+  /** Sender is the that actor that signed the messages */
+  sender: string;
+
+  /** NewAdmin address to be set */
+  new_admin: string;
+
+  /** Contract is the address of the smart contract */
+  contract: string;
+}
+
 /** MsgUpdateAdminResponse returns empty data */
 export interface MsgUpdateAdminResponse {}
+
+/** MsgUpdateAdminResponse returns empty data */
+export interface MsgUpdateAdminResponseSDKType {}
 
 /** MsgClearAdmin removes any admin stored for a smart contract */
 export interface MsgClearAdmin {
@@ -127,8 +241,20 @@ export interface MsgClearAdmin {
   contract: string;
 }
 
+/** MsgClearAdmin removes any admin stored for a smart contract */
+export interface MsgClearAdminSDKType {
+  /** Sender is the that actor that signed the messages */
+  sender: string;
+
+  /** Contract is the address of the smart contract */
+  contract: string;
+}
+
 /** MsgClearAdminResponse returns empty data */
 export interface MsgClearAdminResponse {}
+
+/** MsgClearAdminResponse returns empty data */
+export interface MsgClearAdminResponseSDKType {}
 
 function createBaseMsgStoreCode(): MsgStoreCode {
   return {
@@ -207,6 +333,22 @@ export const MsgStoreCode = {
     message.wasmByteCode = object.wasmByteCode ?? new Uint8Array();
     message.instantiatePermission = object.instantiatePermission !== undefined && object.instantiatePermission !== null ? AccessConfig.fromPartial(object.instantiatePermission) : undefined;
     return message;
+  },
+
+  fromSDK(object: MsgStoreCodeSDKType): MsgStoreCode {
+    return {
+      sender: isSet(object.sender) ? object.sender : "",
+      wasmByteCode: isSet(object.wasm_byte_code) ? object.wasm_byte_code : new Uint8Array(),
+      instantiatePermission: isSet(object.instantiate_permission) ? AccessConfig.fromSDK(object.instantiate_permission) : undefined
+    };
+  },
+
+  toSDK(message: MsgStoreCode): MsgStoreCodeSDKType {
+    const obj: any = {};
+    message.sender !== undefined && (obj.sender = message.sender);
+    message.wasmByteCode !== undefined && (obj.wasm_byte_code = message.wasmByteCode);
+    message.instantiatePermission !== undefined && (obj.instantiate_permission = message.instantiatePermission ? AccessConfig.toSDK(message.instantiatePermission) : undefined);
+    return obj;
   }
 
 };
@@ -264,6 +406,18 @@ export const MsgStoreCodeResponse = {
     const message = createBaseMsgStoreCodeResponse();
     message.codeId = object.codeId !== undefined && object.codeId !== null ? Long.fromValue(object.codeId) : Long.UZERO;
     return message;
+  },
+
+  fromSDK(object: MsgStoreCodeResponseSDKType): MsgStoreCodeResponse {
+    return {
+      codeId: isSet(object.code_id) ? object.code_id : Long.UZERO
+    };
+  },
+
+  toSDK(message: MsgStoreCodeResponse): MsgStoreCodeResponseSDKType {
+    const obj: any = {};
+    message.codeId !== undefined && (obj.code_id = message.codeId);
+    return obj;
   }
 
 };
@@ -387,6 +541,34 @@ export const MsgInstantiateContract = {
     message.msg = object.msg ?? new Uint8Array();
     message.funds = object.funds?.map(e => Coin.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: MsgInstantiateContractSDKType): MsgInstantiateContract {
+    return {
+      sender: isSet(object.sender) ? object.sender : "",
+      admin: isSet(object.admin) ? object.admin : "",
+      codeId: isSet(object.code_id) ? object.code_id : Long.UZERO,
+      label: isSet(object.label) ? object.label : "",
+      msg: isSet(object.msg) ? object.msg : new Uint8Array(),
+      funds: Array.isArray(object?.funds) ? object.funds.map((e: any) => Coin.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: MsgInstantiateContract): MsgInstantiateContractSDKType {
+    const obj: any = {};
+    message.sender !== undefined && (obj.sender = message.sender);
+    message.admin !== undefined && (obj.admin = message.admin);
+    message.codeId !== undefined && (obj.code_id = message.codeId);
+    message.label !== undefined && (obj.label = message.label);
+    message.msg !== undefined && (obj.msg = message.msg);
+
+    if (message.funds) {
+      obj.funds = message.funds.map(e => e ? Coin.toSDK(e) : undefined);
+    } else {
+      obj.funds = [];
+    }
+
+    return obj;
   }
 
 };
@@ -456,6 +638,20 @@ export const MsgInstantiateContractResponse = {
     message.address = object.address ?? "";
     message.data = object.data ?? new Uint8Array();
     return message;
+  },
+
+  fromSDK(object: MsgInstantiateContractResponseSDKType): MsgInstantiateContractResponse {
+    return {
+      address: isSet(object.address) ? object.address : "",
+      data: isSet(object.data) ? object.data : new Uint8Array()
+    };
+  },
+
+  toSDK(message: MsgInstantiateContractResponse): MsgInstantiateContractResponseSDKType {
+    const obj: any = {};
+    message.address !== undefined && (obj.address = message.address);
+    message.data !== undefined && (obj.data = message.data);
+    return obj;
   }
 
 };
@@ -555,6 +751,30 @@ export const MsgExecuteContract = {
     message.msg = object.msg ?? new Uint8Array();
     message.funds = object.funds?.map(e => Coin.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: MsgExecuteContractSDKType): MsgExecuteContract {
+    return {
+      sender: isSet(object.sender) ? object.sender : "",
+      contract: isSet(object.contract) ? object.contract : "",
+      msg: isSet(object.msg) ? object.msg : new Uint8Array(),
+      funds: Array.isArray(object?.funds) ? object.funds.map((e: any) => Coin.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: MsgExecuteContract): MsgExecuteContractSDKType {
+    const obj: any = {};
+    message.sender !== undefined && (obj.sender = message.sender);
+    message.contract !== undefined && (obj.contract = message.contract);
+    message.msg !== undefined && (obj.msg = message.msg);
+
+    if (message.funds) {
+      obj.funds = message.funds.map(e => e ? Coin.toSDK(e) : undefined);
+    } else {
+      obj.funds = [];
+    }
+
+    return obj;
   }
 
 };
@@ -612,6 +832,18 @@ export const MsgExecuteContractResponse = {
     const message = createBaseMsgExecuteContractResponse();
     message.data = object.data ?? new Uint8Array();
     return message;
+  },
+
+  fromSDK(object: MsgExecuteContractResponseSDKType): MsgExecuteContractResponse {
+    return {
+      data: isSet(object.data) ? object.data : new Uint8Array()
+    };
+  },
+
+  toSDK(message: MsgExecuteContractResponse): MsgExecuteContractResponseSDKType {
+    const obj: any = {};
+    message.data !== undefined && (obj.data = message.data);
+    return obj;
   }
 
 };
@@ -705,6 +937,24 @@ export const MsgMigrateContract = {
     message.codeId = object.codeId !== undefined && object.codeId !== null ? Long.fromValue(object.codeId) : Long.UZERO;
     message.msg = object.msg ?? new Uint8Array();
     return message;
+  },
+
+  fromSDK(object: MsgMigrateContractSDKType): MsgMigrateContract {
+    return {
+      sender: isSet(object.sender) ? object.sender : "",
+      contract: isSet(object.contract) ? object.contract : "",
+      codeId: isSet(object.code_id) ? object.code_id : Long.UZERO,
+      msg: isSet(object.msg) ? object.msg : new Uint8Array()
+    };
+  },
+
+  toSDK(message: MsgMigrateContract): MsgMigrateContractSDKType {
+    const obj: any = {};
+    message.sender !== undefined && (obj.sender = message.sender);
+    message.contract !== undefined && (obj.contract = message.contract);
+    message.codeId !== undefined && (obj.code_id = message.codeId);
+    message.msg !== undefined && (obj.msg = message.msg);
+    return obj;
   }
 
 };
@@ -762,6 +1012,18 @@ export const MsgMigrateContractResponse = {
     const message = createBaseMsgMigrateContractResponse();
     message.data = object.data ?? new Uint8Array();
     return message;
+  },
+
+  fromSDK(object: MsgMigrateContractResponseSDKType): MsgMigrateContractResponse {
+    return {
+      data: isSet(object.data) ? object.data : new Uint8Array()
+    };
+  },
+
+  toSDK(message: MsgMigrateContractResponse): MsgMigrateContractResponseSDKType {
+    const obj: any = {};
+    message.data !== undefined && (obj.data = message.data);
+    return obj;
   }
 
 };
@@ -843,6 +1105,22 @@ export const MsgUpdateAdmin = {
     message.newAdmin = object.newAdmin ?? "";
     message.contract = object.contract ?? "";
     return message;
+  },
+
+  fromSDK(object: MsgUpdateAdminSDKType): MsgUpdateAdmin {
+    return {
+      sender: isSet(object.sender) ? object.sender : "",
+      newAdmin: isSet(object.new_admin) ? object.new_admin : "",
+      contract: isSet(object.contract) ? object.contract : ""
+    };
+  },
+
+  toSDK(message: MsgUpdateAdmin): MsgUpdateAdminSDKType {
+    const obj: any = {};
+    message.sender !== undefined && (obj.sender = message.sender);
+    message.newAdmin !== undefined && (obj.new_admin = message.newAdmin);
+    message.contract !== undefined && (obj.contract = message.contract);
+    return obj;
   }
 
 };
@@ -886,6 +1164,15 @@ export const MsgUpdateAdminResponse = {
   fromPartial(_: DeepPartial<MsgUpdateAdminResponse>): MsgUpdateAdminResponse {
     const message = createBaseMsgUpdateAdminResponse();
     return message;
+  },
+
+  fromSDK(_: MsgUpdateAdminResponseSDKType): MsgUpdateAdminResponse {
+    return {};
+  },
+
+  toSDK(_: MsgUpdateAdminResponse): MsgUpdateAdminResponseSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -955,6 +1242,20 @@ export const MsgClearAdmin = {
     message.sender = object.sender ?? "";
     message.contract = object.contract ?? "";
     return message;
+  },
+
+  fromSDK(object: MsgClearAdminSDKType): MsgClearAdmin {
+    return {
+      sender: isSet(object.sender) ? object.sender : "",
+      contract: isSet(object.contract) ? object.contract : ""
+    };
+  },
+
+  toSDK(message: MsgClearAdmin): MsgClearAdminSDKType {
+    const obj: any = {};
+    message.sender !== undefined && (obj.sender = message.sender);
+    message.contract !== undefined && (obj.contract = message.contract);
+    return obj;
   }
 
 };
@@ -998,6 +1299,15 @@ export const MsgClearAdminResponse = {
   fromPartial(_: DeepPartial<MsgClearAdminResponse>): MsgClearAdminResponse {
     const message = createBaseMsgClearAdminResponse();
     return message;
+  },
+
+  fromSDK(_: MsgClearAdminResponseSDKType): MsgClearAdminResponse {
+    return {};
+  },
+
+  toSDK(_: MsgClearAdminResponse): MsgClearAdminResponseSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };

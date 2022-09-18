@@ -1,12 +1,16 @@
-import { Timestamp } from "../../../protobuf/timestamp";
-import { LogSeverity, logSeverityFromJSON, logSeverityToJSON } from "../../../logging/type/log_severity";
-import { HttpRequest } from "./http_request";
-import { Any } from "../../../protobuf/any";
-import { Struct } from "../../../protobuf/struct";
+import { Timestamp, TimestampSDKType } from "../../../protobuf/timestamp";
+import { LogSeverity, LogSeveritySDKType, logSeverityFromJSON, logSeverityFromJSONSDKType, logSeverityToJSON, logSeverityToJSONSDKType } from "../../../logging/type/log_severity";
+import { HttpRequest, HttpRequestSDKType } from "./http_request";
+import { Any, AnySDKType } from "../../../protobuf/any";
+import { Struct, StructSDKType } from "../../../protobuf/struct";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, toTimestamp, fromTimestamp, fromJsonTimestamp, isObject, Long } from "@osmonauts/helpers";
 export const protobufPackage = "google.api.servicecontrol.v1";
 export interface LogEntry_LabelsEntry {
+  key: string;
+  value: string;
+}
+export interface LogEntry_LabelsEntrySDKType {
   key: string;
   value: string;
 }
@@ -88,6 +92,83 @@ export interface LogEntry {
   sourceLocation: LogEntrySourceLocation;
 }
 
+/** An individual log entry. */
+export interface LogEntrySDKType {
+  /**
+   * Required. The log to which this log entry belongs. Examples: `"syslog"`,
+   * `"book_log"`.
+   */
+  name: string;
+
+  /**
+   * The time the event described by the log entry occurred. If
+   * omitted, defaults to operation start time.
+   */
+  timestamp: Date;
+
+  /**
+   * The severity of the log entry. The default value is
+   * `LogSeverity.DEFAULT`.
+   */
+  severity: LogSeveritySDKType;
+
+  /**
+   * Optional. Information about the HTTP request associated with this
+   * log entry, if applicable.
+   */
+  http_request: HttpRequestSDKType;
+
+  /**
+   * Optional. Resource name of the trace associated with the log entry, if any.
+   * If this field contains a relative resource name, you can assume the name is
+   * relative to `//tracing.googleapis.com`. Example:
+   * `projects/my-projectid/traces/06796866738c859f2f19b7cfb3214824`
+   */
+  trace: string;
+
+  /**
+   * A unique ID for the log entry used for deduplication. If omitted,
+   * the implementation will generate one based on operation_id.
+   */
+  insert_id: string;
+
+  /**
+   * A set of user-defined (key, value) data that provides additional
+   * information about the log entry.
+   */
+  labels: {
+    [key: string]: string;
+  };
+
+  /**
+   * The log entry payload, represented as a protocol buffer that is
+   * expressed as a JSON object. The only accepted type currently is
+   * [AuditLog][google.cloud.audit.AuditLog].
+   */
+  proto_payload?: Any;
+
+  /** The log entry payload, represented as a Unicode string (UTF-8). */
+  text_payload?: string;
+
+  /**
+   * The log entry payload, represented as a structure that
+   * is expressed as a JSON object.
+   */
+  struct_payload?: StructSDKType;
+
+  /**
+   * Optional. Information about an operation associated with the log entry, if
+   * applicable.
+   */
+  operation: LogEntryOperationSDKType;
+
+  /**
+   * Optional. Source code location information associated with the log entry,
+   * if any.
+   */
+  source_location: LogEntrySourceLocationSDKType;
+}
+
 /**
  * Additional information about a potentially long-running operation with which
  * a log entry is associated.
@@ -114,10 +195,63 @@ export interface LogEntryOperation {
 }
 
 /**
+ * Additional information about a potentially long-running operation with which
+ * a log entry is associated.
+ */
+export interface LogEntryOperationSDKType {
+  /**
+   * Optional. An arbitrary operation identifier. Log entries with the
+   * same identifier are assumed to be part of the same operation.
+   */
+  id: string;
+
+  /**
+   * Optional. An arbitrary producer identifier. The combination of
+   * `id` and `producer` must be globally unique.  Examples for `producer`:
+   * `"MyDivision.MyBigCompany.com"`, `"github.com/MyProject/MyApplication"`.
+   */
+  producer: string;
+
+  /** Optional. Set this to True if this is the first log entry in the operation. */
+  first: boolean;
+
+  /** Optional. Set this to True if this is the last log entry in the operation. */
+  last: boolean;
+}
+
+/**
  * Additional information about the source code location that produced the log
  * entry.
  */
 export interface LogEntrySourceLocation {
+  /**
+   * Optional. Source file name. Depending on the runtime environment, this
+   * might be a simple name or a fully-qualified name.
+   */
+  file: string;
+
+  /**
+   * Optional. Line within the source file. 1-based; 0 indicates no line number
+   * available.
+   */
+  line: Long;
+
+  /**
+   * Optional. Human-readable name of the function or method being invoked, with
+   * optional context such as the class or package name. This information may be
+   * used in contexts such as the logs viewer, where a file and line number are
+   * less meaningful. The format can vary by language. For example:
+   * `qual.if.ied.Class.method` (Java), `dir/package.func` (Go), `function`
+   * (Python).
+   */
+  function: string;
+}
+
+/**
+ * Additional information about the source code location that produced the log
+ * entry.
+ */
+export interface LogEntrySourceLocationSDKType {
   /**
    * Optional. Source file name. Depending on the runtime environment, this
    * might be a simple name or a fully-qualified name.
@@ -206,6 +340,20 @@ export const LogEntry_LabelsEntry = {
     message.key = object.key ?? "";
     message.value = object.value ?? "";
     return message;
+  },
+
+  fromSDK(object: LogEntry_LabelsEntrySDKType): LogEntry_LabelsEntry {
+    return {
+      key: isSet(object.key) ? object.key : "",
+      value: isSet(object.value) ? object.value : ""
+    };
+  },
+
+  toSDK(message: LogEntry_LabelsEntry): LogEntry_LabelsEntrySDKType {
+    const obj: any = {};
+    message.key !== undefined && (obj.key = message.key);
+    message.value !== undefined && (obj.value = message.value);
+    return obj;
   }
 
 };
@@ -423,6 +571,52 @@ export const LogEntry = {
     message.operation = object.operation !== undefined && object.operation !== null ? LogEntryOperation.fromPartial(object.operation) : undefined;
     message.sourceLocation = object.sourceLocation !== undefined && object.sourceLocation !== null ? LogEntrySourceLocation.fromPartial(object.sourceLocation) : undefined;
     return message;
+  },
+
+  fromSDK(object: LogEntrySDKType): LogEntry {
+    return {
+      name: isSet(object.name) ? object.name : "",
+      timestamp: isSet(object.timestamp) ? Timestamp.fromSDK(object.timestamp) : undefined,
+      severity: isSet(object.severity) ? logSeverityFromJSON(object.severity) : 0,
+      httpRequest: isSet(object.http_request) ? HttpRequest.fromSDK(object.http_request) : undefined,
+      trace: isSet(object.trace) ? object.trace : "",
+      insertId: isSet(object.insert_id) ? object.insert_id : "",
+      labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
+        [key: string]: string;
+      }>((acc, [key, value]) => {
+        acc[key] = String(value);
+        return acc;
+      }, {}) : {},
+      protoPayload: isSet(object.proto_payload) ? Any.fromSDK(object.proto_payload) : undefined,
+      textPayload: isSet(object.text_payload) ? object.text_payload : undefined,
+      structPayload: isSet(object.struct_payload) ? Struct.fromSDK(object.struct_payload) : undefined,
+      operation: isSet(object.operation) ? LogEntryOperation.fromSDK(object.operation) : undefined,
+      sourceLocation: isSet(object.source_location) ? LogEntrySourceLocation.fromSDK(object.source_location) : undefined
+    };
+  },
+
+  toSDK(message: LogEntry): LogEntrySDKType {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    message.timestamp !== undefined && (obj.timestamp = message.timestamp ? Timestamp.toSDK(message.timestamp) : undefined);
+    message.severity !== undefined && (obj.severity = logSeverityToJSON(message.severity));
+    message.httpRequest !== undefined && (obj.http_request = message.httpRequest ? HttpRequest.toSDK(message.httpRequest) : undefined);
+    message.trace !== undefined && (obj.trace = message.trace);
+    message.insertId !== undefined && (obj.insert_id = message.insertId);
+    obj.labels = {};
+
+    if (message.labels) {
+      Object.entries(message.labels).forEach(([k, v]) => {
+        obj.labels[k] = v;
+      });
+    }
+
+    message.protoPayload !== undefined && (obj.proto_payload = message.protoPayload ? Any.toSDK(message.protoPayload) : undefined);
+    message.textPayload !== undefined && (obj.text_payload = message.textPayload);
+    message.structPayload !== undefined && (obj.struct_payload = message.structPayload ? Struct.toSDK(message.structPayload) : undefined);
+    message.operation !== undefined && (obj.operation = message.operation ? LogEntryOperation.toSDK(message.operation) : undefined);
+    message.sourceLocation !== undefined && (obj.source_location = message.sourceLocation ? LogEntrySourceLocation.toSDK(message.sourceLocation) : undefined);
+    return obj;
   }
 
 };
@@ -516,6 +710,24 @@ export const LogEntryOperation = {
     message.first = object.first ?? false;
     message.last = object.last ?? false;
     return message;
+  },
+
+  fromSDK(object: LogEntryOperationSDKType): LogEntryOperation {
+    return {
+      id: isSet(object.id) ? object.id : "",
+      producer: isSet(object.producer) ? object.producer : "",
+      first: isSet(object.first) ? object.first : false,
+      last: isSet(object.last) ? object.last : false
+    };
+  },
+
+  toSDK(message: LogEntryOperation): LogEntryOperationSDKType {
+    const obj: any = {};
+    message.id !== undefined && (obj.id = message.id);
+    message.producer !== undefined && (obj.producer = message.producer);
+    message.first !== undefined && (obj.first = message.first);
+    message.last !== undefined && (obj.last = message.last);
+    return obj;
   }
 
 };
@@ -597,6 +809,22 @@ export const LogEntrySourceLocation = {
     message.line = object.line !== undefined && object.line !== null ? Long.fromValue(object.line) : Long.ZERO;
     message.function = object.function ?? "";
     return message;
+  },
+
+  fromSDK(object: LogEntrySourceLocationSDKType): LogEntrySourceLocation {
+    return {
+      file: isSet(object.file) ? object.file : "",
+      line: isSet(object.line) ? object.line : Long.ZERO,
+      function: isSet(object.function) ? object.function : ""
+    };
+  },
+
+  toSDK(message: LogEntrySourceLocation): LogEntrySourceLocationSDKType {
+    const obj: any = {};
+    message.file !== undefined && (obj.file = message.file);
+    message.line !== undefined && (obj.line = message.line);
+    message.function !== undefined && (obj.function = message.function);
+    return obj;
   }
 
 };

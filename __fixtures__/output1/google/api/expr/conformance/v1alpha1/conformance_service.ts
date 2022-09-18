@@ -1,7 +1,7 @@
-import { ParsedExpr, SourcePosition } from "../../v1alpha1/syntax";
-import { Decl, CheckedExpr } from "../../v1alpha1/checked";
-import { ExprValue } from "../../v1alpha1/eval";
-import { Status } from "../../../../rpc/status";
+import { ParsedExpr, ParsedExprSDKType, SourcePosition, SourcePositionSDKType } from "../../v1alpha1/syntax";
+import { Decl, DeclSDKType, CheckedExpr, CheckedExprSDKType } from "../../v1alpha1/checked";
+import { ExprValue, ExprValueSDKType } from "../../v1alpha1/eval";
+import { Status, StatusSDKType } from "../../../../rpc/status";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, isObject, Long } from "@osmonauts/helpers";
 export const protobufPackage = "google.api.expr.conformance.v1alpha1";
@@ -82,6 +82,21 @@ export interface ParseRequest {
   disableMacros: boolean;
 }
 
+/** Request message for the Parse method. */
+export interface ParseRequestSDKType {
+  /** Required. Source text in CEL syntax. */
+  cel_source: string;
+
+  /** Tag for version of CEL syntax, for future use. */
+  syntax_version: string;
+
+  /** File or resource for source text, used in [SourceInfo][google.api.SourceInfo]. */
+  source_location: string;
+
+  /** Prevent macro expansion.  See "Macros" in Language Defiinition. */
+  disable_macros: boolean;
+}
+
 /** Response message for the Parse method. */
 export interface ParseResponse {
   /** The parsed representation, or unset if parsing failed. */
@@ -89,6 +104,15 @@ export interface ParseResponse {
 
   /** Any number of issues with [StatusDetails][] as the details. */
   issues: Status[];
+}
+
+/** Response message for the Parse method. */
+export interface ParseResponseSDKType {
+  /** The parsed representation, or unset if parsing failed. */
+  parsed_expr: ParsedExprSDKType;
+
+  /** Any number of issues with [StatusDetails][] as the details. */
+  issues: StatusSDKType[];
 }
 
 /** Request message for the Check method. */
@@ -117,6 +141,32 @@ export interface CheckRequest {
   noStdEnv: boolean;
 }
 
+/** Request message for the Check method. */
+export interface CheckRequestSDKType {
+  /** Required. The parsed representation of the CEL program. */
+  parsed_expr: ParsedExprSDKType;
+
+  /**
+   * Declarations of types for external variables and functions.
+   * Required if program uses external variables or functions
+   * not in the default environment.
+   */
+  type_env: DeclSDKType[];
+
+  /**
+   * The protocol buffer context.  See "Name Resolution" in the
+   * Language Definition.
+   */
+  container: string;
+
+  /**
+   * If true, use only the declarations in [type_env][google.api.expr.conformance.v1alpha1.CheckRequest.type_env].  If false (default),
+   * add declarations for the standard definitions to the type environment.  See
+   * "Standard Definitions" in the Language Definition.
+   */
+  no_std_env: boolean;
+}
+
 /** Response message for the Check method. */
 export interface CheckResponse {
   /** The annotated representation, or unset if checking failed. */
@@ -125,9 +175,22 @@ export interface CheckResponse {
   /** Any number of issues with [StatusDetails][] as the details. */
   issues: Status[];
 }
+
+/** Response message for the Check method. */
+export interface CheckResponseSDKType {
+  /** The annotated representation, or unset if checking failed. */
+  checked_expr: CheckedExprSDKType;
+
+  /** Any number of issues with [StatusDetails][] as the details. */
+  issues: StatusSDKType[];
+}
 export interface EvalRequest_BindingsEntry {
   key: string;
   value: ExprValue;
+}
+export interface EvalRequest_BindingsEntrySDKType {
+  key: string;
+  value: ExprValueSDKType;
 }
 
 /** Request message for the Eval method. */
@@ -150,6 +213,26 @@ export interface EvalRequest {
   container: string;
 }
 
+/** Request message for the Eval method. */
+export interface EvalRequestSDKType {
+  /** Evaluate based on the parsed representation. */
+  parsed_expr?: ParsedExprSDKType;
+
+  /** Evaluate based on the checked representation. */
+  checked_expr?: CheckedExprSDKType;
+
+  /**
+   * Bindings for the external variables.  The types SHOULD be compatible
+   * with the type environment in [CheckRequest][google.api.expr.conformance.v1alpha1.CheckRequest], if checked.
+   */
+  bindings: {
+    [key: string]: ExprValueSDKType;
+  };
+
+  /** SHOULD be the same container as used in [CheckRequest][google.api.expr.conformance.v1alpha1.CheckRequest], if checked. */
+  container: string;
+}
+
 /** Response message for the Eval method. */
 export interface EvalResponse {
   /** The execution result, or unset if execution couldn't start. */
@@ -164,6 +247,20 @@ export interface EvalResponse {
   issues: Status[];
 }
 
+/** Response message for the Eval method. */
+export interface EvalResponseSDKType {
+  /** The execution result, or unset if execution couldn't start. */
+  result: ExprValueSDKType;
+
+  /**
+   * Any number of issues with [StatusDetails][] as the details.
+   * Note that CEL execution errors are reified into [ExprValue][].
+   * Nevertheless, we'll allow out-of-band issues to be raised,
+   * which also makes the replies more regular.
+   */
+  issues: StatusSDKType[];
+}
+
 /**
  * Warnings or errors in service execution are represented by
  * [google.rpc.Status][google.rpc.Status] messages, with the following message
@@ -175,6 +272,22 @@ export interface IssueDetails {
 
   /** Position in the source, if known. */
   position: SourcePosition;
+
+  /** Expression ID from [Expr][], 0 if unknown. */
+  id: Long;
+}
+
+/**
+ * Warnings or errors in service execution are represented by
+ * [google.rpc.Status][google.rpc.Status] messages, with the following message
+ * in the details field.
+ */
+export interface IssueDetailsSDKType {
+  /** The severity of the issue. */
+  severity: IssueDetails_SeveritySDKType;
+
+  /** Position in the source, if known. */
+  position: SourcePositionSDKType;
 
   /** Expression ID from [Expr][], 0 if unknown. */
   id: Long;
@@ -269,6 +382,24 @@ export const ParseRequest = {
     message.sourceLocation = object.sourceLocation ?? "";
     message.disableMacros = object.disableMacros ?? false;
     return message;
+  },
+
+  fromSDK(object: ParseRequestSDKType): ParseRequest {
+    return {
+      celSource: isSet(object.cel_source) ? object.cel_source : "",
+      syntaxVersion: isSet(object.syntax_version) ? object.syntax_version : "",
+      sourceLocation: isSet(object.source_location) ? object.source_location : "",
+      disableMacros: isSet(object.disable_macros) ? object.disable_macros : false
+    };
+  },
+
+  toSDK(message: ParseRequest): ParseRequestSDKType {
+    const obj: any = {};
+    message.celSource !== undefined && (obj.cel_source = message.celSource);
+    message.syntaxVersion !== undefined && (obj.syntax_version = message.syntaxVersion);
+    message.sourceLocation !== undefined && (obj.source_location = message.sourceLocation);
+    message.disableMacros !== undefined && (obj.disable_macros = message.disableMacros);
+    return obj;
   }
 
 };
@@ -344,6 +475,26 @@ export const ParseResponse = {
     message.parsedExpr = object.parsedExpr !== undefined && object.parsedExpr !== null ? ParsedExpr.fromPartial(object.parsedExpr) : undefined;
     message.issues = object.issues?.map(e => Status.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: ParseResponseSDKType): ParseResponse {
+    return {
+      parsedExpr: isSet(object.parsed_expr) ? ParsedExpr.fromSDK(object.parsed_expr) : undefined,
+      issues: Array.isArray(object?.issues) ? object.issues.map((e: any) => Status.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: ParseResponse): ParseResponseSDKType {
+    const obj: any = {};
+    message.parsedExpr !== undefined && (obj.parsed_expr = message.parsedExpr ? ParsedExpr.toSDK(message.parsedExpr) : undefined);
+
+    if (message.issues) {
+      obj.issues = message.issues.map(e => e ? Status.toSDK(e) : undefined);
+    } else {
+      obj.issues = [];
+    }
+
+    return obj;
   }
 
 };
@@ -443,6 +594,30 @@ export const CheckRequest = {
     message.container = object.container ?? "";
     message.noStdEnv = object.noStdEnv ?? false;
     return message;
+  },
+
+  fromSDK(object: CheckRequestSDKType): CheckRequest {
+    return {
+      parsedExpr: isSet(object.parsed_expr) ? ParsedExpr.fromSDK(object.parsed_expr) : undefined,
+      typeEnv: Array.isArray(object?.type_env) ? object.type_env.map((e: any) => Decl.fromSDK(e)) : [],
+      container: isSet(object.container) ? object.container : "",
+      noStdEnv: isSet(object.no_std_env) ? object.no_std_env : false
+    };
+  },
+
+  toSDK(message: CheckRequest): CheckRequestSDKType {
+    const obj: any = {};
+    message.parsedExpr !== undefined && (obj.parsed_expr = message.parsedExpr ? ParsedExpr.toSDK(message.parsedExpr) : undefined);
+
+    if (message.typeEnv) {
+      obj.type_env = message.typeEnv.map(e => e ? Decl.toSDK(e) : undefined);
+    } else {
+      obj.type_env = [];
+    }
+
+    message.container !== undefined && (obj.container = message.container);
+    message.noStdEnv !== undefined && (obj.no_std_env = message.noStdEnv);
+    return obj;
   }
 
 };
@@ -518,6 +693,26 @@ export const CheckResponse = {
     message.checkedExpr = object.checkedExpr !== undefined && object.checkedExpr !== null ? CheckedExpr.fromPartial(object.checkedExpr) : undefined;
     message.issues = object.issues?.map(e => Status.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: CheckResponseSDKType): CheckResponse {
+    return {
+      checkedExpr: isSet(object.checked_expr) ? CheckedExpr.fromSDK(object.checked_expr) : undefined,
+      issues: Array.isArray(object?.issues) ? object.issues.map((e: any) => Status.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: CheckResponse): CheckResponseSDKType {
+    const obj: any = {};
+    message.checkedExpr !== undefined && (obj.checked_expr = message.checkedExpr ? CheckedExpr.toSDK(message.checkedExpr) : undefined);
+
+    if (message.issues) {
+      obj.issues = message.issues.map(e => e ? Status.toSDK(e) : undefined);
+    } else {
+      obj.issues = [];
+    }
+
+    return obj;
   }
 
 };
@@ -587,6 +782,20 @@ export const EvalRequest_BindingsEntry = {
     message.key = object.key ?? "";
     message.value = object.value !== undefined && object.value !== null ? google.api.expr.v1alpha1.ExprValue.fromPartial(object.value) : undefined;
     return message;
+  },
+
+  fromSDK(object: EvalRequest_BindingsEntrySDKType): EvalRequest_BindingsEntry {
+    return {
+      key: isSet(object.key) ? object.key : "",
+      value: isSet(object.value) ? google.api.expr.v1alpha1.ExprValue.fromSDK(object.value) : undefined
+    };
+  },
+
+  toSDK(message: EvalRequest_BindingsEntry): EvalRequest_BindingsEntrySDKType {
+    const obj: any = {};
+    message.key !== undefined && (obj.key = message.key);
+    message.value !== undefined && (obj.value = message.value ? google.api.expr.v1alpha1.ExprValue.toSDK(message.value) : undefined);
+    return obj;
   }
 
 };
@@ -708,6 +917,36 @@ export const EvalRequest = {
     }, {});
     message.container = object.container ?? "";
     return message;
+  },
+
+  fromSDK(object: EvalRequestSDKType): EvalRequest {
+    return {
+      parsedExpr: isSet(object.parsed_expr) ? ParsedExpr.fromSDK(object.parsed_expr) : undefined,
+      checkedExpr: isSet(object.checked_expr) ? CheckedExpr.fromSDK(object.checked_expr) : undefined,
+      bindings: isObject(object.bindings) ? Object.entries(object.bindings).reduce<{
+        [key: string]: ExprValue;
+      }>((acc, [key, value]) => {
+        acc[key] = ExprValue.fromSDK(value);
+        return acc;
+      }, {}) : {},
+      container: isSet(object.container) ? object.container : ""
+    };
+  },
+
+  toSDK(message: EvalRequest): EvalRequestSDKType {
+    const obj: any = {};
+    message.parsedExpr !== undefined && (obj.parsed_expr = message.parsedExpr ? ParsedExpr.toSDK(message.parsedExpr) : undefined);
+    message.checkedExpr !== undefined && (obj.checked_expr = message.checkedExpr ? CheckedExpr.toSDK(message.checkedExpr) : undefined);
+    obj.bindings = {};
+
+    if (message.bindings) {
+      Object.entries(message.bindings).forEach(([k, v]) => {
+        obj.bindings[k] = ExprValue.toSDK(v);
+      });
+    }
+
+    message.container !== undefined && (obj.container = message.container);
+    return obj;
   }
 
 };
@@ -783,6 +1022,26 @@ export const EvalResponse = {
     message.result = object.result !== undefined && object.result !== null ? ExprValue.fromPartial(object.result) : undefined;
     message.issues = object.issues?.map(e => Status.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: EvalResponseSDKType): EvalResponse {
+    return {
+      result: isSet(object.result) ? ExprValue.fromSDK(object.result) : undefined,
+      issues: Array.isArray(object?.issues) ? object.issues.map((e: any) => Status.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: EvalResponse): EvalResponseSDKType {
+    const obj: any = {};
+    message.result !== undefined && (obj.result = message.result ? ExprValue.toSDK(message.result) : undefined);
+
+    if (message.issues) {
+      obj.issues = message.issues.map(e => e ? Status.toSDK(e) : undefined);
+    } else {
+      obj.issues = [];
+    }
+
+    return obj;
   }
 
 };
@@ -864,6 +1123,22 @@ export const IssueDetails = {
     message.position = object.position !== undefined && object.position !== null ? SourcePosition.fromPartial(object.position) : undefined;
     message.id = object.id !== undefined && object.id !== null ? Long.fromValue(object.id) : Long.ZERO;
     return message;
+  },
+
+  fromSDK(object: IssueDetailsSDKType): IssueDetails {
+    return {
+      severity: isSet(object.severity) ? issueDetails_SeverityFromJSON(object.severity) : 0,
+      position: isSet(object.position) ? SourcePosition.fromSDK(object.position) : undefined,
+      id: isSet(object.id) ? object.id : Long.ZERO
+    };
+  },
+
+  toSDK(message: IssueDetails): IssueDetailsSDKType {
+    const obj: any = {};
+    message.severity !== undefined && (obj.severity = issueDetails_SeverityToJSON(message.severity));
+    message.position !== undefined && (obj.position = message.position ? SourcePosition.toSDK(message.position) : undefined);
+    message.id !== undefined && (obj.id = message.id);
+    return obj;
   }
 
 };

@@ -1,6 +1,6 @@
 import { Rpc } from "@osmonauts/helpers";
 import * as _m0 from "protobufjs/minimal";
-import { MsgSend, MsgSendResponse } from "./tx";
+import { MsgSend, MsgSendSDKType, MsgSendResponse, MsgSendResponseSDKType } from "./tx";
 
 /** Msg defines the RPC service */
 export interface Msg {

@@ -1,4 +1,4 @@
-import { Any } from "../../../google/protobuf/any";
+import { Any, AnySDKType } from "../../../google/protobuf/any";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, Long, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
 export const protobufPackage = "cosmwasm.wasm.v1";
@@ -124,9 +124,20 @@ export interface AccessTypeParam {
   value: AccessType;
 }
 
+/** AccessTypeParam */
+export interface AccessTypeParamSDKType {
+  value: AccessTypeSDKType;
+}
+
 /** AccessConfig access control type. */
 export interface AccessConfig {
   permission: AccessType;
+  address: string;
+}
+
+/** AccessConfig access control type. */
+export interface AccessConfigSDKType {
+  permission: AccessTypeSDKType;
   address: string;
 }
 
@@ -135,6 +146,13 @@ export interface Params {
   codeUploadAccess: AccessConfig;
   instantiateDefaultPermission: AccessType;
   maxWasmCodeSize: Long;
+}
+
+/** Params defines the set of wasm parameters. */
+export interface ParamsSDKType {
+  code_upload_access: AccessConfigSDKType;
+  instantiate_default_permission: AccessTypeSDKType;
+  max_wasm_code_size: Long;
 }
 
 /** CodeInfo is data for the uploaded contract WASM code */
@@ -147,6 +165,18 @@ export interface CodeInfo {
 
   /** InstantiateConfig access control to apply on contract creation, optional */
   instantiateConfig: AccessConfig;
+}
+
+/** CodeInfo is data for the uploaded contract WASM code */
+export interface CodeInfoSDKType {
+  /** CodeHash is the unique identifier created by wasmvm */
+  code_hash: Uint8Array;
+
+  /** Creator address who initially stored the code */
+  creator: string;
+
+  /** InstantiateConfig access control to apply on contract creation, optional */
+  instantiate_config: AccessConfigSDKType;
 }
 
 /** ContractInfo stores a WASM contract instance */
@@ -178,6 +208,35 @@ export interface ContractInfo {
   extension: Any;
 }
 
+/** ContractInfo stores a WASM contract instance */
+export interface ContractInfoSDKType {
+  /** CodeID is the reference to the stored Wasm code */
+  code_id: Long;
+
+  /** Creator address who initially instantiated the contract */
+  creator: string;
+
+  /** Admin is an optional address that can execute migrations */
+  admin: string;
+
+  /** Label is optional metadata to be stored with a contract instance. */
+  label: string;
+
+  /**
+   * Created Tx position when the contract was instantiated.
+   * This data should kept internal and not be exposed via query results. Just
+   * use for sorting
+   */
+  created: AbsoluteTxPositionSDKType;
+  ibc_port_id: string;
+
+  /**
+   * Extension is an extension point to store custom metadata within the
+   * persistence model.
+   */
+  extension: Any;
+}
+
 /** ContractCodeHistoryEntry metadata to a contract. */
 export interface ContractCodeHistoryEntry {
   operation: ContractCodeHistoryOperationType;
@@ -187,6 +246,18 @@ export interface ContractCodeHistoryEntry {
 
   /** Updated Tx position when the operation was executed. */
   updated: AbsoluteTxPosition;
+  msg: Uint8Array;
+}
+
+/** ContractCodeHistoryEntry metadata to a contract. */
+export interface ContractCodeHistoryEntrySDKType {
+  operation: ContractCodeHistoryOperationTypeSDKType;
+
+  /** CodeID is the reference to the stored WASM code */
+  code_id: Long;
+
+  /** Updated Tx position when the operation was executed. */
+  updated: AbsoluteTxPositionSDKType;
   msg: Uint8Array;
 }
 
@@ -205,8 +276,32 @@ export interface AbsoluteTxPosition {
   txIndex: Long;
 }
 
+/**
+ * AbsoluteTxPosition is a unique transaction position that allows for global
+ * ordering of transactions.
+ */
+export interface AbsoluteTxPositionSDKType {
+  /** BlockHeight is the block the contract was created at */
+  block_height: Long;
+
+  /**
+   * TxIndex is a monotonic counter within the block (actual transaction index,
+   * or gas consumed)
+   */
+  tx_index: Long;
+}
+
 /** Model is a struct that holds a KV pair */
 export interface Model {
+  /** hex-encode key to read it better (this is often ascii) */
+  key: Uint8Array;
+
+  /** base64-encode raw value */
+  value: Uint8Array;
+}
+
+/** Model is a struct that holds a KV pair */
+export interface ModelSDKType {
   /** hex-encode key to read it better (this is often ascii) */
   key: Uint8Array;
 
@@ -267,6 +362,18 @@ export const AccessTypeParam = {
     const message = createBaseAccessTypeParam();
     message.value = object.value ?? 0;
     return message;
+  },
+
+  fromSDK(object: AccessTypeParamSDKType): AccessTypeParam {
+    return {
+      value: isSet(object.value) ? accessTypeFromJSON(object.value) : 0
+    };
+  },
+
+  toSDK(message: AccessTypeParam): AccessTypeParamSDKType {
+    const obj: any = {};
+    message.value !== undefined && (obj.value = accessTypeToJSON(message.value));
+    return obj;
   }
 
 };
@@ -336,6 +443,20 @@ export const AccessConfig = {
     message.permission = object.permission ?? 0;
     message.address = object.address ?? "";
     return message;
+  },
+
+  fromSDK(object: AccessConfigSDKType): AccessConfig {
+    return {
+      permission: isSet(object.permission) ? accessTypeFromJSON(object.permission) : 0,
+      address: isSet(object.address) ? object.address : ""
+    };
+  },
+
+  toSDK(message: AccessConfig): AccessConfigSDKType {
+    const obj: any = {};
+    message.permission !== undefined && (obj.permission = accessTypeToJSON(message.permission));
+    message.address !== undefined && (obj.address = message.address);
+    return obj;
   }
 
 };
@@ -417,6 +538,22 @@ export const Params = {
     message.instantiateDefaultPermission = object.instantiateDefaultPermission ?? 0;
     message.maxWasmCodeSize = object.maxWasmCodeSize !== undefined && object.maxWasmCodeSize !== null ? Long.fromValue(object.maxWasmCodeSize) : Long.UZERO;
     return message;
+  },
+
+  fromSDK(object: ParamsSDKType): Params {
+    return {
+      codeUploadAccess: isSet(object.code_upload_access) ? AccessConfig.fromSDK(object.code_upload_access) : undefined,
+      instantiateDefaultPermission: isSet(object.instantiate_default_permission) ? accessTypeFromJSON(object.instantiate_default_permission) : 0,
+      maxWasmCodeSize: isSet(object.max_wasm_code_size) ? object.max_wasm_code_size : Long.UZERO
+    };
+  },
+
+  toSDK(message: Params): ParamsSDKType {
+    const obj: any = {};
+    message.codeUploadAccess !== undefined && (obj.code_upload_access = message.codeUploadAccess ? AccessConfig.toSDK(message.codeUploadAccess) : undefined);
+    message.instantiateDefaultPermission !== undefined && (obj.instantiate_default_permission = accessTypeToJSON(message.instantiateDefaultPermission));
+    message.maxWasmCodeSize !== undefined && (obj.max_wasm_code_size = message.maxWasmCodeSize);
+    return obj;
   }
 
 };
@@ -498,6 +635,22 @@ export const CodeInfo = {
     message.creator = object.creator ?? "";
     message.instantiateConfig = object.instantiateConfig !== undefined && object.instantiateConfig !== null ? AccessConfig.fromPartial(object.instantiateConfig) : undefined;
     return message;
+  },
+
+  fromSDK(object: CodeInfoSDKType): CodeInfo {
+    return {
+      codeHash: isSet(object.code_hash) ? object.code_hash : new Uint8Array(),
+      creator: isSet(object.creator) ? object.creator : "",
+      instantiateConfig: isSet(object.instantiate_config) ? AccessConfig.fromSDK(object.instantiate_config) : undefined
+    };
+  },
+
+  toSDK(message: CodeInfo): CodeInfoSDKType {
+    const obj: any = {};
+    message.codeHash !== undefined && (obj.code_hash = message.codeHash);
+    message.creator !== undefined && (obj.creator = message.creator);
+    message.instantiateConfig !== undefined && (obj.instantiate_config = message.instantiateConfig ? AccessConfig.toSDK(message.instantiateConfig) : undefined);
+    return obj;
   }
 
 };
@@ -627,6 +780,30 @@ export const ContractInfo = {
     message.ibcPortId = object.ibcPortId ?? "";
     message.extension = object.extension !== undefined && object.extension !== null ? Any.fromPartial(object.extension) : undefined;
     return message;
+  },
+
+  fromSDK(object: ContractInfoSDKType): ContractInfo {
+    return {
+      codeId: isSet(object.code_id) ? object.code_id : Long.UZERO,
+      creator: isSet(object.creator) ? object.creator : "",
+      admin: isSet(object.admin) ? object.admin : "",
+      label: isSet(object.label) ? object.label : "",
+      created: isSet(object.created) ? AbsoluteTxPosition.fromSDK(object.created) : undefined,
+      ibcPortId: isSet(object.ibc_port_id) ? object.ibc_port_id : "",
+      extension: isSet(object.extension) ? Any.fromSDK(object.extension) : undefined
+    };
+  },
+
+  toSDK(message: ContractInfo): ContractInfoSDKType {
+    const obj: any = {};
+    message.codeId !== undefined && (obj.code_id = message.codeId);
+    message.creator !== undefined && (obj.creator = message.creator);
+    message.admin !== undefined && (obj.admin = message.admin);
+    message.label !== undefined && (obj.label = message.label);
+    message.created !== undefined && (obj.created = message.created ? AbsoluteTxPosition.toSDK(message.created) : undefined);
+    message.ibcPortId !== undefined && (obj.ibc_port_id = message.ibcPortId);
+    message.extension !== undefined && (obj.extension = message.extension ? Any.toSDK(message.extension) : undefined);
+    return obj;
   }
 
 };
@@ -720,6 +897,24 @@ export const ContractCodeHistoryEntry = {
     message.updated = object.updated !== undefined && object.updated !== null ? AbsoluteTxPosition.fromPartial(object.updated) : undefined;
     message.msg = object.msg ?? new Uint8Array();
     return message;
+  },
+
+  fromSDK(object: ContractCodeHistoryEntrySDKType): ContractCodeHistoryEntry {
+    return {
+      operation: isSet(object.operation) ? contractCodeHistoryOperationTypeFromJSON(object.operation) : 0,
+      codeId: isSet(object.code_id) ? object.code_id : Long.UZERO,
+      updated: isSet(object.updated) ? AbsoluteTxPosition.fromSDK(object.updated) : undefined,
+      msg: isSet(object.msg) ? object.msg : new Uint8Array()
+    };
+  },
+
+  toSDK(message: ContractCodeHistoryEntry): ContractCodeHistoryEntrySDKType {
+    const obj: any = {};
+    message.operation !== undefined && (obj.operation = contractCodeHistoryOperationTypeToJSON(message.operation));
+    message.codeId !== undefined && (obj.code_id = message.codeId);
+    message.updated !== undefined && (obj.updated = message.updated ? AbsoluteTxPosition.toSDK(message.updated) : undefined);
+    message.msg !== undefined && (obj.msg = message.msg);
+    return obj;
   }
 
 };
@@ -789,6 +984,20 @@ export const AbsoluteTxPosition = {
     message.blockHeight = object.blockHeight !== undefined && object.blockHeight !== null ? Long.fromValue(object.blockHeight) : Long.UZERO;
     message.txIndex = object.txIndex !== undefined && object.txIndex !== null ? Long.fromValue(object.txIndex) : Long.UZERO;
     return message;
+  },
+
+  fromSDK(object: AbsoluteTxPositionSDKType): AbsoluteTxPosition {
+    return {
+      blockHeight: isSet(object.block_height) ? object.block_height : Long.UZERO,
+      txIndex: isSet(object.tx_index) ? object.tx_index : Long.UZERO
+    };
+  },
+
+  toSDK(message: AbsoluteTxPosition): AbsoluteTxPositionSDKType {
+    const obj: any = {};
+    message.blockHeight !== undefined && (obj.block_height = message.blockHeight);
+    message.txIndex !== undefined && (obj.tx_index = message.txIndex);
+    return obj;
   }
 
 };
@@ -858,6 +1067,20 @@ export const Model = {
     message.key = object.key ?? new Uint8Array();
     message.value = object.value ?? new Uint8Array();
     return message;
+  },
+
+  fromSDK(object: ModelSDKType): Model {
+    return {
+      key: isSet(object.key) ? object.key : new Uint8Array(),
+      value: isSet(object.value) ? object.value : new Uint8Array()
+    };
+  },
+
+  toSDK(message: Model): ModelSDKType {
+    const obj: any = {};
+    message.key !== undefined && (obj.key = message.key);
+    message.value !== undefined && (obj.value = message.value);
+    return obj;
   }
 
 };

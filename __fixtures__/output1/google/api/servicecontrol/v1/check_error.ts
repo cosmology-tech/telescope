@@ -1,4 +1,4 @@
-import { Status } from "../../../rpc/status";
+import { Status, StatusSDKType } from "../../../rpc/status";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "@osmonauts/helpers";
 export const protobufPackage = "google.api.servicecontrol.v1";
@@ -281,6 +281,35 @@ export interface CheckError {
   status: Status;
 }
 
+/**
+ * Defines the errors to be returned in
+ * [google.api.servicecontrol.v1.CheckResponse.check_errors][google.api.servicecontrol.v1.CheckResponse.check_errors].
+ */
+export interface CheckErrorSDKType {
+  /** The error code. */
+  code: CheckError_CodeSDKType;
+
+  /**
+   * Subject to whom this error applies. See the specific code enum for more
+   * details on this field. For example:
+   * 
+   * - "project:<project-id or project-number>"
+   * - "folder:<folder-id>"
+   * - "organization:<organization-id>"
+   */
+  subject: string;
+
+  /** Free-form text providing details on the error cause of the error. */
+  detail: string;
+
+  /**
+   * Contains public information about the check error. If available,
+   * `status.code` will be non zero and client can propagate it out as public
+   * error.
+   */
+  status: StatusSDKType;
+}
+
 function createBaseCheckError(): CheckError {
   return {
     code: 0,
@@ -370,6 +399,24 @@ export const CheckError = {
     message.detail = object.detail ?? "";
     message.status = object.status !== undefined && object.status !== null ? Status.fromPartial(object.status) : undefined;
     return message;
+  },
+
+  fromSDK(object: CheckErrorSDKType): CheckError {
+    return {
+      code: isSet(object.code) ? checkError_CodeFromJSON(object.code) : 0,
+      subject: isSet(object.subject) ? object.subject : "",
+      detail: isSet(object.detail) ? object.detail : "",
+      status: isSet(object.status) ? Status.fromSDK(object.status) : undefined
+    };
+  },
+
+  toSDK(message: CheckError): CheckErrorSDKType {
+    const obj: any = {};
+    message.code !== undefined && (obj.code = checkError_CodeToJSON(message.code));
+    message.subject !== undefined && (obj.subject = message.subject);
+    message.detail !== undefined && (obj.detail = message.detail);
+    message.status !== undefined && (obj.status = message.status ? Status.toSDK(message.status) : undefined);
+    return obj;
   }
 
 };

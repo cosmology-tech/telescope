@@ -20,6 +20,24 @@ export interface Params {
   variance: string;
 }
 
+/** Params defines the parameters for the x/deployment package */
+export interface ParamsSDKType {
+  /** InflationDecayFactor is the number of years it takes inflation to halve. */
+  inflation_decay_factor: string;
+
+  /**
+   * InitialInflation is the rate at which inflation starts at genesis.
+   * It is a decimal value in the range [0.0, 100.0].
+   */
+  initial_inflation: string;
+
+  /**
+   * Variance defines the fraction by which inflation can vary from ideal inflation in a block.
+   * It is a decimal value in the range [0.0, 1.0].
+   */
+  variance: string;
+}
+
 function createBaseParams(): Params {
   return {
     inflationDecayFactor: "",
@@ -97,6 +115,22 @@ export const Params = {
     message.initialInflation = object.initialInflation ?? "";
     message.variance = object.variance ?? "";
     return message;
+  },
+
+  fromSDK(object: ParamsSDKType): Params {
+    return {
+      inflationDecayFactor: isSet(object.inflation_decay_factor) ? object.inflation_decay_factor : "",
+      initialInflation: isSet(object.initial_inflation) ? object.initial_inflation : "",
+      variance: isSet(object.variance) ? object.variance : ""
+    };
+  },
+
+  toSDK(message: Params): ParamsSDKType {
+    const obj: any = {};
+    message.inflationDecayFactor !== undefined && (obj.inflation_decay_factor = message.inflationDecayFactor);
+    message.initialInflation !== undefined && (obj.initial_inflation = message.initialInflation);
+    message.variance !== undefined && (obj.variance = message.variance);
+    return obj;
   }
 
 };

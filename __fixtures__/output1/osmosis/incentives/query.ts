@@ -1,27 +1,45 @@
-import { PageRequest, PageResponse } from "../../cosmos/base/query/v1beta1/pagination";
-import { Coin } from "../../cosmos/base/v1beta1/coin";
-import { Gauge } from "./gauge";
-import { Duration } from "../../google/protobuf/duration";
+import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../cosmos/base/query/v1beta1/pagination";
+import { Coin, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
+import { Gauge, GaugeSDKType } from "./gauge";
+import { Duration, DurationSDKType } from "../../google/protobuf/duration";
 import * as _m0 from "protobufjs/minimal";
 import { DeepPartial, Long, isSet } from "@osmonauts/helpers";
 export const protobufPackage = "osmosis.incentives";
 export interface ModuleToDistributeCoinsRequest {}
+export interface ModuleToDistributeCoinsRequestSDKType {}
 export interface ModuleToDistributeCoinsResponse {
   coins: Coin[];
 }
+export interface ModuleToDistributeCoinsResponseSDKType {
+  coins: CoinSDKType[];
+}
 export interface ModuleDistributedCoinsRequest {}
+export interface ModuleDistributedCoinsRequestSDKType {}
 export interface ModuleDistributedCoinsResponse {
   coins: Coin[];
 }
+export interface ModuleDistributedCoinsResponseSDKType {
+  coins: CoinSDKType[];
+}
 export interface GaugeByIDRequest {
+  id: Long;
+}
+export interface GaugeByIDRequestSDKType {
   id: Long;
 }
 export interface GaugeByIDResponse {
   gauge: Gauge;
 }
+export interface GaugeByIDResponseSDKType {
+  gauge: GaugeSDKType;
+}
 export interface GaugesRequest {
   /** pagination defines an pagination for the request. */
   pagination?: PageRequest;
+}
+export interface GaugesRequestSDKType {
+  /** pagination defines an pagination for the request. */
+  pagination?: PageRequestSDKType;
 }
 export interface GaugesResponse {
   data: Gauge[];
@@ -29,9 +47,19 @@ export interface GaugesResponse {
   /** pagination defines an pagination for the response. */
   pagination?: PageResponse;
 }
+export interface GaugesResponseSDKType {
+  data: GaugeSDKType[];
+
+  /** pagination defines an pagination for the response. */
+  pagination?: PageResponseSDKType;
+}
 export interface ActiveGaugesRequest {
   /** pagination defines an pagination for the request. */
   pagination?: PageRequest;
+}
+export interface ActiveGaugesRequestSDKType {
+  /** pagination defines an pagination for the request. */
+  pagination?: PageRequestSDKType;
 }
 export interface ActiveGaugesResponse {
   data: Gauge[];
@@ -39,11 +67,23 @@ export interface ActiveGaugesResponse {
   /** pagination defines an pagination for the response. */
   pagination?: PageResponse;
 }
+export interface ActiveGaugesResponseSDKType {
+  data: GaugeSDKType[];
+
+  /** pagination defines an pagination for the response. */
+  pagination?: PageResponseSDKType;
+}
 export interface ActiveGaugesPerDenomRequest {
   denom?: string;
 
   /** pagination defines an pagination for the request. */
   pagination?: PageRequest;
+}
+export interface ActiveGaugesPerDenomRequestSDKType {
+  denom?: string;
+
+  /** pagination defines an pagination for the request. */
+  pagination?: PageRequestSDKType;
 }
 export interface ActiveGaugesPerDenomResponse {
   data: Gauge[];
@@ -51,9 +91,19 @@ export interface ActiveGaugesPerDenomResponse {
   /** pagination defines an pagination for the response. */
   pagination?: PageResponse;
 }
+export interface ActiveGaugesPerDenomResponseSDKType {
+  data: GaugeSDKType[];
+
+  /** pagination defines an pagination for the response. */
+  pagination?: PageResponseSDKType;
+}
 export interface UpcomingGaugesRequest {
   /** pagination defines an pagination for the request. */
   pagination?: PageRequest;
+}
+export interface UpcomingGaugesRequestSDKType {
+  /** pagination defines an pagination for the request. */
+  pagination?: PageRequestSDKType;
 }
 export interface UpcomingGaugesResponse {
   data: Gauge[];
@@ -61,25 +111,51 @@ export interface UpcomingGaugesResponse {
   /** pagination defines an pagination for the response. */
   pagination?: PageResponse;
 }
+export interface UpcomingGaugesResponseSDKType {
+  data: GaugeSDKType[];
+
+  /** pagination defines an pagination for the response. */
+  pagination?: PageResponseSDKType;
+}
 export interface UpcomingGaugesPerDenomRequest {
   denom?: string;
   pagination?: PageRequest;
 }
+export interface UpcomingGaugesPerDenomRequestSDKType {
+  denom?: string;
+  pagination?: PageRequestSDKType;
+}
 export interface UpcomingGaugesPerDenomResponse {
   upcomingGauges: Gauge[];
   pagination?: PageResponse;
+}
+export interface UpcomingGaugesPerDenomResponseSDKType {
+  upcoming_gauges: GaugeSDKType[];
+  pagination?: PageResponseSDKType;
 }
 export interface RewardsEstRequest {
   owner: string;
   lockIds?: Long[];
   endEpoch?: Long;
 }
+export interface RewardsEstRequestSDKType {
+  owner: string;
+  lock_ids?: Long[];
+  end_epoch?: Long;
+}
 export interface RewardsEstResponse {
   coins: Coin[];
 }
+export interface RewardsEstResponseSDKType {
+  coins: CoinSDKType[];
+}
 export interface QueryLockableDurationsRequest {}
+export interface QueryLockableDurationsRequestSDKType {}
 export interface QueryLockableDurationsResponse {
   lockableDurations: Duration[];
+}
+export interface QueryLockableDurationsResponseSDKType {
+  lockable_durations: Duration[];
 }
 
 function createBaseModuleToDistributeCoinsRequest(): ModuleToDistributeCoinsRequest {
@@ -121,6 +197,15 @@ export const ModuleToDistributeCoinsRequest = {
   fromPartial(_: DeepPartial<ModuleToDistributeCoinsRequest>): ModuleToDistributeCoinsRequest {
     const message = createBaseModuleToDistributeCoinsRequest();
     return message;
+  },
+
+  fromSDK(_: ModuleToDistributeCoinsRequestSDKType): ModuleToDistributeCoinsRequest {
+    return {};
+  },
+
+  toSDK(_: ModuleToDistributeCoinsRequest): ModuleToDistributeCoinsRequestSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -184,6 +269,24 @@ export const ModuleToDistributeCoinsResponse = {
     const message = createBaseModuleToDistributeCoinsResponse();
     message.coins = object.coins?.map(e => Coin.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: ModuleToDistributeCoinsResponseSDKType): ModuleToDistributeCoinsResponse {
+    return {
+      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: ModuleToDistributeCoinsResponse): ModuleToDistributeCoinsResponseSDKType {
+    const obj: any = {};
+
+    if (message.coins) {
+      obj.coins = message.coins.map(e => e ? Coin.toSDK(e) : undefined);
+    } else {
+      obj.coins = [];
+    }
+
+    return obj;
   }
 
 };
@@ -227,6 +330,15 @@ export const ModuleDistributedCoinsRequest = {
   fromPartial(_: DeepPartial<ModuleDistributedCoinsRequest>): ModuleDistributedCoinsRequest {
     const message = createBaseModuleDistributedCoinsRequest();
     return message;
+  },
+
+  fromSDK(_: ModuleDistributedCoinsRequestSDKType): ModuleDistributedCoinsRequest {
+    return {};
+  },
+
+  toSDK(_: ModuleDistributedCoinsRequest): ModuleDistributedCoinsRequestSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -290,6 +402,24 @@ export const ModuleDistributedCoinsResponse = {
     const message = createBaseModuleDistributedCoinsResponse();
     message.coins = object.coins?.map(e => Coin.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: ModuleDistributedCoinsResponseSDKType): ModuleDistributedCoinsResponse {
+    return {
+      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: ModuleDistributedCoinsResponse): ModuleDistributedCoinsResponseSDKType {
+    const obj: any = {};
+
+    if (message.coins) {
+      obj.coins = message.coins.map(e => e ? Coin.toSDK(e) : undefined);
+    } else {
+      obj.coins = [];
+    }
+
+    return obj;
   }
 
 };
@@ -347,6 +477,18 @@ export const GaugeByIDRequest = {
     const message = createBaseGaugeByIDRequest();
     message.id = object.id !== undefined && object.id !== null ? Long.fromValue(object.id) : Long.UZERO;
     return message;
+  },
+
+  fromSDK(object: GaugeByIDRequestSDKType): GaugeByIDRequest {
+    return {
+      id: isSet(object.id) ? object.id : Long.UZERO
+    };
+  },
+
+  toSDK(message: GaugeByIDRequest): GaugeByIDRequestSDKType {
+    const obj: any = {};
+    message.id !== undefined && (obj.id = message.id);
+    return obj;
   }
 
 };
@@ -404,6 +546,18 @@ export const GaugeByIDResponse = {
     const message = createBaseGaugeByIDResponse();
     message.gauge = object.gauge !== undefined && object.gauge !== null ? Gauge.fromPartial(object.gauge) : undefined;
     return message;
+  },
+
+  fromSDK(object: GaugeByIDResponseSDKType): GaugeByIDResponse {
+    return {
+      gauge: isSet(object.gauge) ? Gauge.fromSDK(object.gauge) : undefined
+    };
+  },
+
+  toSDK(message: GaugeByIDResponse): GaugeByIDResponseSDKType {
+    const obj: any = {};
+    message.gauge !== undefined && (obj.gauge = message.gauge ? Gauge.toSDK(message.gauge) : undefined);
+    return obj;
   }
 
 };
@@ -461,6 +615,18 @@ export const GaugesRequest = {
     const message = createBaseGaugesRequest();
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDK(object: GaugesRequestSDKType): GaugesRequest {
+    return {
+      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  toSDK(message: GaugesRequest): GaugesRequestSDKType {
+    const obj: any = {};
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
+    return obj;
   }
 
 };
@@ -536,6 +702,26 @@ export const GaugesResponse = {
     message.data = object.data?.map(e => Gauge.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDK(object: GaugesResponseSDKType): GaugesResponse {
+    return {
+      data: Array.isArray(object?.data) ? object.data.map((e: any) => Gauge.fromSDK(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  toSDK(message: GaugesResponse): GaugesResponseSDKType {
+    const obj: any = {};
+
+    if (message.data) {
+      obj.data = message.data.map(e => e ? Gauge.toSDK(e) : undefined);
+    } else {
+      obj.data = [];
+    }
+
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
+    return obj;
   }
 
 };
@@ -593,6 +779,18 @@ export const ActiveGaugesRequest = {
     const message = createBaseActiveGaugesRequest();
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDK(object: ActiveGaugesRequestSDKType): ActiveGaugesRequest {
+    return {
+      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  toSDK(message: ActiveGaugesRequest): ActiveGaugesRequestSDKType {
+    const obj: any = {};
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
+    return obj;
   }
 
 };
@@ -668,6 +866,26 @@ export const ActiveGaugesResponse = {
     message.data = object.data?.map(e => Gauge.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDK(object: ActiveGaugesResponseSDKType): ActiveGaugesResponse {
+    return {
+      data: Array.isArray(object?.data) ? object.data.map((e: any) => Gauge.fromSDK(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  toSDK(message: ActiveGaugesResponse): ActiveGaugesResponseSDKType {
+    const obj: any = {};
+
+    if (message.data) {
+      obj.data = message.data.map(e => e ? Gauge.toSDK(e) : undefined);
+    } else {
+      obj.data = [];
+    }
+
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
+    return obj;
   }
 
 };
@@ -737,6 +955,20 @@ export const ActiveGaugesPerDenomRequest = {
     message.denom = object.denom ?? "";
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDK(object: ActiveGaugesPerDenomRequestSDKType): ActiveGaugesPerDenomRequest {
+    return {
+      denom: isSet(object.denom) ? object.denom : "",
+      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  toSDK(message: ActiveGaugesPerDenomRequest): ActiveGaugesPerDenomRequestSDKType {
+    const obj: any = {};
+    message.denom !== undefined && (obj.denom = message.denom);
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
+    return obj;
   }
 
 };
@@ -812,6 +1044,26 @@ export const ActiveGaugesPerDenomResponse = {
     message.data = object.data?.map(e => Gauge.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDK(object: ActiveGaugesPerDenomResponseSDKType): ActiveGaugesPerDenomResponse {
+    return {
+      data: Array.isArray(object?.data) ? object.data.map((e: any) => Gauge.fromSDK(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  toSDK(message: ActiveGaugesPerDenomResponse): ActiveGaugesPerDenomResponseSDKType {
+    const obj: any = {};
+
+    if (message.data) {
+      obj.data = message.data.map(e => e ? Gauge.toSDK(e) : undefined);
+    } else {
+      obj.data = [];
+    }
+
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
+    return obj;
   }
 
 };
@@ -869,6 +1121,18 @@ export const UpcomingGaugesRequest = {
     const message = createBaseUpcomingGaugesRequest();
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDK(object: UpcomingGaugesRequestSDKType): UpcomingGaugesRequest {
+    return {
+      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  toSDK(message: UpcomingGaugesRequest): UpcomingGaugesRequestSDKType {
+    const obj: any = {};
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
+    return obj;
   }
 
 };
@@ -944,6 +1208,26 @@ export const UpcomingGaugesResponse = {
     message.data = object.data?.map(e => Gauge.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDK(object: UpcomingGaugesResponseSDKType): UpcomingGaugesResponse {
+    return {
+      data: Array.isArray(object?.data) ? object.data.map((e: any) => Gauge.fromSDK(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  toSDK(message: UpcomingGaugesResponse): UpcomingGaugesResponseSDKType {
+    const obj: any = {};
+
+    if (message.data) {
+      obj.data = message.data.map(e => e ? Gauge.toSDK(e) : undefined);
+    } else {
+      obj.data = [];
+    }
+
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
+    return obj;
   }
 
 };
@@ -1013,6 +1297,20 @@ export const UpcomingGaugesPerDenomRequest = {
     message.denom = object.denom ?? "";
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDK(object: UpcomingGaugesPerDenomRequestSDKType): UpcomingGaugesPerDenomRequest {
+    return {
+      denom: isSet(object.denom) ? object.denom : "",
+      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  toSDK(message: UpcomingGaugesPerDenomRequest): UpcomingGaugesPerDenomRequestSDKType {
+    const obj: any = {};
+    message.denom !== undefined && (obj.denom = message.denom);
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
+    return obj;
   }
 
 };
@@ -1088,6 +1386,26 @@ export const UpcomingGaugesPerDenomResponse = {
     message.upcomingGauges = object.upcomingGauges?.map(e => Gauge.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDK(object: UpcomingGaugesPerDenomResponseSDKType): UpcomingGaugesPerDenomResponse {
+    return {
+      upcomingGauges: Array.isArray(object?.upcoming_gauges) ? object.upcoming_gauges.map((e: any) => Gauge.fromSDK(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  toSDK(message: UpcomingGaugesPerDenomResponse): UpcomingGaugesPerDenomResponseSDKType {
+    const obj: any = {};
+
+    if (message.upcomingGauges) {
+      obj.upcoming_gauges = message.upcomingGauges.map(e => e ? Gauge.toSDK(e) : undefined);
+    } else {
+      obj.upcoming_gauges = [];
+    }
+
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
+    return obj;
   }
 
 };
@@ -1188,6 +1506,28 @@ export const RewardsEstRequest = {
     message.lockIds = object.lockIds?.map(e => Long.fromValue(e)) || [];
     message.endEpoch = object.endEpoch !== undefined && object.endEpoch !== null ? Long.fromValue(object.endEpoch) : Long.ZERO;
     return message;
+  },
+
+  fromSDK(object: RewardsEstRequestSDKType): RewardsEstRequest {
+    return {
+      owner: isSet(object.owner) ? object.owner : "",
+      lockIds: Array.isArray(object?.lock_ids) ? object.lock_ids.map((e: any) => e) : [],
+      endEpoch: isSet(object.end_epoch) ? object.end_epoch : Long.ZERO
+    };
+  },
+
+  toSDK(message: RewardsEstRequest): RewardsEstRequestSDKType {
+    const obj: any = {};
+    message.owner !== undefined && (obj.owner = message.owner);
+
+    if (message.lockIds) {
+      obj.lock_ids = message.lockIds.map(e => e);
+    } else {
+      obj.lock_ids = [];
+    }
+
+    message.endEpoch !== undefined && (obj.end_epoch = message.endEpoch);
+    return obj;
   }
 
 };
@@ -1251,6 +1591,24 @@ export const RewardsEstResponse = {
     const message = createBaseRewardsEstResponse();
     message.coins = object.coins?.map(e => Coin.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: RewardsEstResponseSDKType): RewardsEstResponse {
+    return {
+      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: RewardsEstResponse): RewardsEstResponseSDKType {
+    const obj: any = {};
+
+    if (message.coins) {
+      obj.coins = message.coins.map(e => e ? Coin.toSDK(e) : undefined);
+    } else {
+      obj.coins = [];
+    }
+
+    return obj;
   }
 
 };
@@ -1294,6 +1652,15 @@ export const QueryLockableDurationsRequest = {
   fromPartial(_: DeepPartial<QueryLockableDurationsRequest>): QueryLockableDurationsRequest {
     const message = createBaseQueryLockableDurationsRequest();
     return message;
+  },
+
+  fromSDK(_: QueryLockableDurationsRequestSDKType): QueryLockableDurationsRequest {
+    return {};
+  },
+
+  toSDK(_: QueryLockableDurationsRequest): QueryLockableDurationsRequestSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -1357,6 +1724,24 @@ export const QueryLockableDurationsResponse = {
     const message = createBaseQueryLockableDurationsResponse();
     message.lockableDurations = object.lockableDurations?.map(e => Duration.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: QueryLockableDurationsResponseSDKType): QueryLockableDurationsResponse {
+    return {
+      lockableDurations: Array.isArray(object?.lockable_durations) ? object.lockable_durations.map((e: any) => Duration.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: QueryLockableDurationsResponse): QueryLockableDurationsResponseSDKType {
+    const obj: any = {};
+
+    if (message.lockableDurations) {
+      obj.lockable_durations = message.lockableDurations.map(e => e ? Duration.toSDK(e) : undefined);
+    } else {
+      obj.lockable_durations = [];
+    }
+
+    return obj;
   }
 
 };

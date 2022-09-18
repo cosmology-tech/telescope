@@ -1,4 +1,4 @@
-import { GroupID } from "./groupid";
+import { GroupID, GroupIDSDKType } from "./groupid";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, Exact } from "@osmonauts/helpers";
 export const protobufPackage = "akash.deployment.v1beta2";
@@ -8,24 +8,48 @@ export interface MsgCloseGroup {
   id: GroupID;
 }
 
+/** MsgCloseGroup defines SDK message to close a single Group within a Deployment. */
+export interface MsgCloseGroupSDKType {
+  id: GroupIDSDKType;
+}
+
 /** MsgCloseGroupResponse defines the Msg/CloseGroup response type. */
 export interface MsgCloseGroupResponse {}
+
+/** MsgCloseGroupResponse defines the Msg/CloseGroup response type. */
+export interface MsgCloseGroupResponseSDKType {}
 
 /** MsgPauseGroup defines SDK message to close a single Group within a Deployment. */
 export interface MsgPauseGroup {
   id: GroupID;
 }
 
+/** MsgPauseGroup defines SDK message to close a single Group within a Deployment. */
+export interface MsgPauseGroupSDKType {
+  id: GroupIDSDKType;
+}
+
 /** MsgPauseGroupResponse defines the Msg/PauseGroup response type. */
 export interface MsgPauseGroupResponse {}
+
+/** MsgPauseGroupResponse defines the Msg/PauseGroup response type. */
+export interface MsgPauseGroupResponseSDKType {}
 
 /** MsgStartGroup defines SDK message to close a single Group within a Deployment. */
 export interface MsgStartGroup {
   id: GroupID;
 }
 
+/** MsgStartGroup defines SDK message to close a single Group within a Deployment. */
+export interface MsgStartGroupSDKType {
+  id: GroupIDSDKType;
+}
+
 /** MsgStartGroupResponse defines the Msg/StartGroup response type. */
 export interface MsgStartGroupResponse {}
+
+/** MsgStartGroupResponse defines the Msg/StartGroup response type. */
+export interface MsgStartGroupResponseSDKType {}
 
 function createBaseMsgCloseGroup(): MsgCloseGroup {
   return {
@@ -80,6 +104,18 @@ export const MsgCloseGroup = {
     const message = createBaseMsgCloseGroup();
     message.id = object.id !== undefined && object.id !== null ? GroupID.fromPartial(object.id) : undefined;
     return message;
+  },
+
+  fromSDK(object: MsgCloseGroupSDKType): MsgCloseGroup {
+    return {
+      id: isSet(object.id) ? GroupID.fromSDK(object.id) : undefined
+    };
+  },
+
+  toSDK(message: MsgCloseGroup): MsgCloseGroupSDKType {
+    const obj: any = {};
+    message.id !== undefined && (obj.id = message.id ? GroupID.toSDK(message.id) : undefined);
+    return obj;
   }
 
 };
@@ -123,6 +159,15 @@ export const MsgCloseGroupResponse = {
   fromPartial<I extends Exact<DeepPartial<MsgCloseGroupResponse>, I>>(_: I): MsgCloseGroupResponse {
     const message = createBaseMsgCloseGroupResponse();
     return message;
+  },
+
+  fromSDK(_: MsgCloseGroupResponseSDKType): MsgCloseGroupResponse {
+    return {};
+  },
+
+  toSDK(_: MsgCloseGroupResponse): MsgCloseGroupResponseSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -180,6 +225,18 @@ export const MsgPauseGroup = {
     const message = createBaseMsgPauseGroup();
     message.id = object.id !== undefined && object.id !== null ? GroupID.fromPartial(object.id) : undefined;
     return message;
+  },
+
+  fromSDK(object: MsgPauseGroupSDKType): MsgPauseGroup {
+    return {
+      id: isSet(object.id) ? GroupID.fromSDK(object.id) : undefined
+    };
+  },
+
+  toSDK(message: MsgPauseGroup): MsgPauseGroupSDKType {
+    const obj: any = {};
+    message.id !== undefined && (obj.id = message.id ? GroupID.toSDK(message.id) : undefined);
+    return obj;
   }
 
 };
@@ -223,6 +280,15 @@ export const MsgPauseGroupResponse = {
   fromPartial<I extends Exact<DeepPartial<MsgPauseGroupResponse>, I>>(_: I): MsgPauseGroupResponse {
     const message = createBaseMsgPauseGroupResponse();
     return message;
+  },
+
+  fromSDK(_: MsgPauseGroupResponseSDKType): MsgPauseGroupResponse {
+    return {};
+  },
+
+  toSDK(_: MsgPauseGroupResponse): MsgPauseGroupResponseSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -280,6 +346,18 @@ export const MsgStartGroup = {
     const message = createBaseMsgStartGroup();
     message.id = object.id !== undefined && object.id !== null ? GroupID.fromPartial(object.id) : undefined;
     return message;
+  },
+
+  fromSDK(object: MsgStartGroupSDKType): MsgStartGroup {
+    return {
+      id: isSet(object.id) ? GroupID.fromSDK(object.id) : undefined
+    };
+  },
+
+  toSDK(message: MsgStartGroup): MsgStartGroupSDKType {
+    const obj: any = {};
+    message.id !== undefined && (obj.id = message.id ? GroupID.toSDK(message.id) : undefined);
+    return obj;
   }
 
 };
@@ -323,6 +401,15 @@ export const MsgStartGroupResponse = {
   fromPartial<I extends Exact<DeepPartial<MsgStartGroupResponse>, I>>(_: I): MsgStartGroupResponse {
     const message = createBaseMsgStartGroupResponse();
     return message;
+  },
+
+  fromSDK(_: MsgStartGroupResponseSDKType): MsgStartGroupResponse {
+    return {};
+  },
+
+  toSDK(_: MsgStartGroupResponse): MsgStartGroupResponseSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };

@@ -24,11 +24,39 @@ export interface MsgRegisterDevFeeInfo {
   nonces: Long[];
 }
 
+/** MsgRegisterFeesContract defines a message that registers a DevFeeInfo */
+export interface MsgRegisterDevFeeInfoSDKType {
+  /** contract hex address */
+  contract_address: string;
+
+  /**
+   * bech32 address of message sender, must be the same as the origin EOA
+   * sending the transaction which deploys the contract
+   */
+  deployer_address: string;
+
+  /** bech32 address of account receiving the transaction fees */
+  withdraw_address: string;
+
+  /**
+   * array of nonces from the address path, where the last nonce is
+   * the nonce that determines the contract's address - it can be an EOA nonce
+   * or a factory contract nonce
+   */
+  nonces: Long[];
+}
+
 /**
  * MsgRegisterDevFeeInfoResponse defines the MsgRegisterDevFeeInfo response
  * type
  */
 export interface MsgRegisterDevFeeInfoResponse {}
+
+/**
+ * MsgRegisterDevFeeInfoResponse defines the MsgRegisterDevFeeInfo response
+ * type
+ */
+export interface MsgRegisterDevFeeInfoResponseSDKType {}
 
 /**
  * MsgCancelDevFeeInfo defines a message that cancels a registered a
@@ -42,8 +70,23 @@ export interface MsgCancelDevFeeInfo {
   deployerAddress: string;
 }
 
+/**
+ * MsgCancelDevFeeInfo defines a message that cancels a registered a
+ * DevFeeInfo
+ */
+export interface MsgCancelDevFeeInfoSDKType {
+  /** contract hex address */
+  contract_address: string;
+
+  /** deployer bech32 address */
+  deployer_address: string;
+}
+
 /** MsgCancelDevFeeInfoResponse defines the MsgCancelDevFeeInfo response type */
 export interface MsgCancelDevFeeInfoResponse {}
+
+/** MsgCancelDevFeeInfoResponse defines the MsgCancelDevFeeInfo response type */
+export interface MsgCancelDevFeeInfoResponseSDKType {}
 
 /**
  * MsgUpdateDevFeeInfo defines a message that updates the withdraw address for
@@ -60,8 +103,26 @@ export interface MsgUpdateDevFeeInfo {
   withdrawAddress: string;
 }
 
+/**
+ * MsgUpdateDevFeeInfo defines a message that updates the withdraw address for
+ * a registered DevFeeInfo
+ */
+export interface MsgUpdateDevFeeInfoSDKType {
+  /** contract hex address */
+  contract_address: string;
+
+  /** deployer bech32 address */
+  deployer_address: string;
+
+  /** new withdraw bech32 address for receiving the transaction fees */
+  withdraw_address: string;
+}
+
 /** MsgUpdateDevFeeInfoResponse defines the MsgUpdateDevFeeInfo response type */
 export interface MsgUpdateDevFeeInfoResponse {}
+
+/** MsgUpdateDevFeeInfoResponse defines the MsgUpdateDevFeeInfo response type */
+export interface MsgUpdateDevFeeInfoResponseSDKType {}
 
 function createBaseMsgRegisterDevFeeInfo(): MsgRegisterDevFeeInfo {
   return {
@@ -170,6 +231,30 @@ export const MsgRegisterDevFeeInfo = {
     message.withdrawAddress = object.withdrawAddress ?? "";
     message.nonces = object.nonces?.map(e => Long.fromValue(e)) || [];
     return message;
+  },
+
+  fromSDK(object: MsgRegisterDevFeeInfoSDKType): MsgRegisterDevFeeInfo {
+    return {
+      contractAddress: isSet(object.contract_address) ? object.contract_address : "",
+      deployerAddress: isSet(object.deployer_address) ? object.deployer_address : "",
+      withdrawAddress: isSet(object.withdraw_address) ? object.withdraw_address : "",
+      nonces: Array.isArray(object?.nonces) ? object.nonces.map((e: any) => e) : []
+    };
+  },
+
+  toSDK(message: MsgRegisterDevFeeInfo): MsgRegisterDevFeeInfoSDKType {
+    const obj: any = {};
+    message.contractAddress !== undefined && (obj.contract_address = message.contractAddress);
+    message.deployerAddress !== undefined && (obj.deployer_address = message.deployerAddress);
+    message.withdrawAddress !== undefined && (obj.withdraw_address = message.withdrawAddress);
+
+    if (message.nonces) {
+      obj.nonces = message.nonces.map(e => e);
+    } else {
+      obj.nonces = [];
+    }
+
+    return obj;
   }
 
 };
@@ -213,6 +298,15 @@ export const MsgRegisterDevFeeInfoResponse = {
   fromPartial(_: DeepPartial<MsgRegisterDevFeeInfoResponse>): MsgRegisterDevFeeInfoResponse {
     const message = createBaseMsgRegisterDevFeeInfoResponse();
     return message;
+  },
+
+  fromSDK(_: MsgRegisterDevFeeInfoResponseSDKType): MsgRegisterDevFeeInfoResponse {
+    return {};
+  },
+
+  toSDK(_: MsgRegisterDevFeeInfoResponse): MsgRegisterDevFeeInfoResponseSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -282,6 +376,20 @@ export const MsgCancelDevFeeInfo = {
     message.contractAddress = object.contractAddress ?? "";
     message.deployerAddress = object.deployerAddress ?? "";
     return message;
+  },
+
+  fromSDK(object: MsgCancelDevFeeInfoSDKType): MsgCancelDevFeeInfo {
+    return {
+      contractAddress: isSet(object.contract_address) ? object.contract_address : "",
+      deployerAddress: isSet(object.deployer_address) ? object.deployer_address : ""
+    };
+  },
+
+  toSDK(message: MsgCancelDevFeeInfo): MsgCancelDevFeeInfoSDKType {
+    const obj: any = {};
+    message.contractAddress !== undefined && (obj.contract_address = message.contractAddress);
+    message.deployerAddress !== undefined && (obj.deployer_address = message.deployerAddress);
+    return obj;
   }
 
 };
@@ -325,6 +433,15 @@ export const MsgCancelDevFeeInfoResponse = {
   fromPartial(_: DeepPartial<MsgCancelDevFeeInfoResponse>): MsgCancelDevFeeInfoResponse {
     const message = createBaseMsgCancelDevFeeInfoResponse();
     return message;
+  },
+
+  fromSDK(_: MsgCancelDevFeeInfoResponseSDKType): MsgCancelDevFeeInfoResponse {
+    return {};
+  },
+
+  toSDK(_: MsgCancelDevFeeInfoResponse): MsgCancelDevFeeInfoResponseSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -406,6 +523,22 @@ export const MsgUpdateDevFeeInfo = {
     message.deployerAddress = object.deployerAddress ?? "";
     message.withdrawAddress = object.withdrawAddress ?? "";
     return message;
+  },
+
+  fromSDK(object: MsgUpdateDevFeeInfoSDKType): MsgUpdateDevFeeInfo {
+    return {
+      contractAddress: isSet(object.contract_address) ? object.contract_address : "",
+      deployerAddress: isSet(object.deployer_address) ? object.deployer_address : "",
+      withdrawAddress: isSet(object.withdraw_address) ? object.withdraw_address : ""
+    };
+  },
+
+  toSDK(message: MsgUpdateDevFeeInfo): MsgUpdateDevFeeInfoSDKType {
+    const obj: any = {};
+    message.contractAddress !== undefined && (obj.contract_address = message.contractAddress);
+    message.deployerAddress !== undefined && (obj.deployer_address = message.deployerAddress);
+    message.withdrawAddress !== undefined && (obj.withdraw_address = message.withdrawAddress);
+    return obj;
   }
 
 };
@@ -449,6 +582,15 @@ export const MsgUpdateDevFeeInfoResponse = {
   fromPartial(_: DeepPartial<MsgUpdateDevFeeInfoResponse>): MsgUpdateDevFeeInfoResponse {
     const message = createBaseMsgUpdateDevFeeInfoResponse();
     return message;
+  },
+
+  fromSDK(_: MsgUpdateDevFeeInfoResponseSDKType): MsgUpdateDevFeeInfoResponse {
+    return {};
+  },
+
+  toSDK(_: MsgUpdateDevFeeInfoResponse): MsgUpdateDevFeeInfoResponseSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };

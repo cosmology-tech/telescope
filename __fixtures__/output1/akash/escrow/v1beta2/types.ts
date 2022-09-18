@@ -1,4 +1,4 @@
-import { DecCoin, Coin } from "../../../cosmos/base/v1beta1/coin";
+import { DecCoin, DecCoinSDKType, Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, Exact, Long } from "@osmonauts/helpers";
 export const protobufPackage = "akash.escrow.v1beta2";
@@ -125,6 +125,12 @@ export interface AccountID {
   xid: string;
 }
 
+/** AccountID is the account identifier */
+export interface AccountIDSDKType {
+  scope: string;
+  xid: string;
+}
+
 /** Account stores state for an escrow account */
 export interface Account {
   /** unique identifier for this escrow account */
@@ -159,6 +165,40 @@ export interface Account {
   funds: DecCoin;
 }
 
+/** Account stores state for an escrow account */
+export interface AccountSDKType {
+  /** unique identifier for this escrow account */
+  id: AccountIDSDKType;
+
+  /** bech32 encoded account address of the owner of this escrow account */
+  owner: string;
+
+  /** current state of this escrow account */
+  state: Account_StateSDKType;
+
+  /** unspent coins received from the owner's wallet */
+  balance: DecCoinSDKType;
+
+  /** total coins spent by this account */
+  transferred: DecCoinSDKType;
+
+  /** block height at which this account was last settled */
+  settled_at: Long;
+
+  /**
+   * bech32 encoded account address of the depositor.
+   * If depositor is same as the owner, then any incoming coins are added to the Balance.
+   * If depositor isn't same as the owner, then any incoming coins are added to the Funds.
+   */
+  depositor: string;
+
+  /**
+   * Funds are unspent coins received from the (non-Owner) Depositor's wallet.
+   * If there are any funds, they should be spent before spending the Balance.
+   */
+  funds: DecCoinSDKType;
+}
+
 /** Payment stores state for a payment */
 export interface FractionalPayment {
   accountId: AccountID;
@@ -168,6 +208,17 @@ export interface FractionalPayment {
   rate: DecCoin;
   balance: DecCoin;
   withdrawn: Coin;
+}
+
+/** Payment stores state for a payment */
+export interface FractionalPaymentSDKType {
+  account_id: AccountIDSDKType;
+  payment_id: string;
+  owner: string;
+  state: FractionalPayment_StateSDKType;
+  rate: DecCoinSDKType;
+  balance: DecCoinSDKType;
+  withdrawn: CoinSDKType;
 }
 
 function createBaseAccountID(): AccountID {
@@ -235,6 +286,20 @@ export const AccountID = {
     message.scope = object.scope ?? "";
     message.xid = object.xid ?? "";
     return message;
+  },
+
+  fromSDK(object: AccountIDSDKType): AccountID {
+    return {
+      scope: isSet(object.scope) ? object.scope : "",
+      xid: isSet(object.xid) ? object.xid : ""
+    };
+  },
+
+  toSDK(message: AccountID): AccountIDSDKType {
+    const obj: any = {};
+    message.scope !== undefined && (obj.scope = message.scope);
+    message.xid !== undefined && (obj.xid = message.xid);
+    return obj;
   }
 
 };
@@ -376,6 +441,32 @@ export const Account = {
     message.depositor = object.depositor ?? "";
     message.funds = object.funds !== undefined && object.funds !== null ? DecCoin.fromPartial(object.funds) : undefined;
     return message;
+  },
+
+  fromSDK(object: AccountSDKType): Account {
+    return {
+      id: isSet(object.id) ? AccountID.fromSDK(object.id) : undefined,
+      owner: isSet(object.owner) ? object.owner : "",
+      state: isSet(object.state) ? account_StateFromJSON(object.state) : 0,
+      balance: isSet(object.balance) ? DecCoin.fromSDK(object.balance) : undefined,
+      transferred: isSet(object.transferred) ? DecCoin.fromSDK(object.transferred) : undefined,
+      settledAt: isSet(object.settled_at) ? object.settled_at : Long.ZERO,
+      depositor: isSet(object.depositor) ? object.depositor : "",
+      funds: isSet(object.funds) ? DecCoin.fromSDK(object.funds) : undefined
+    };
+  },
+
+  toSDK(message: Account): AccountSDKType {
+    const obj: any = {};
+    message.id !== undefined && (obj.id = message.id ? AccountID.toSDK(message.id) : undefined);
+    message.owner !== undefined && (obj.owner = message.owner);
+    message.state !== undefined && (obj.state = account_StateToJSON(message.state));
+    message.balance !== undefined && (obj.balance = message.balance ? DecCoin.toSDK(message.balance) : undefined);
+    message.transferred !== undefined && (obj.transferred = message.transferred ? DecCoin.toSDK(message.transferred) : undefined);
+    message.settledAt !== undefined && (obj.settled_at = message.settledAt);
+    message.depositor !== undefined && (obj.depositor = message.depositor);
+    message.funds !== undefined && (obj.funds = message.funds ? DecCoin.toSDK(message.funds) : undefined);
+    return obj;
   }
 
 };
@@ -505,6 +596,30 @@ export const FractionalPayment = {
     message.balance = object.balance !== undefined && object.balance !== null ? DecCoin.fromPartial(object.balance) : undefined;
     message.withdrawn = object.withdrawn !== undefined && object.withdrawn !== null ? Coin.fromPartial(object.withdrawn) : undefined;
     return message;
+  },
+
+  fromSDK(object: FractionalPaymentSDKType): FractionalPayment {
+    return {
+      accountId: isSet(object.account_id) ? AccountID.fromSDK(object.account_id) : undefined,
+      paymentId: isSet(object.payment_id) ? object.payment_id : "",
+      owner: isSet(object.owner) ? object.owner : "",
+      state: isSet(object.state) ? fractionalPayment_StateFromJSON(object.state) : 0,
+      rate: isSet(object.rate) ? DecCoin.fromSDK(object.rate) : undefined,
+      balance: isSet(object.balance) ? DecCoin.fromSDK(object.balance) : undefined,
+      withdrawn: isSet(object.withdrawn) ? Coin.fromSDK(object.withdrawn) : undefined
+    };
+  },
+
+  toSDK(message: FractionalPayment): FractionalPaymentSDKType {
+    const obj: any = {};
+    message.accountId !== undefined && (obj.account_id = message.accountId ? AccountID.toSDK(message.accountId) : undefined);
+    message.paymentId !== undefined && (obj.payment_id = message.paymentId);
+    message.owner !== undefined && (obj.owner = message.owner);
+    message.state !== undefined && (obj.state = fractionalPayment_StateToJSON(message.state));
+    message.rate !== undefined && (obj.rate = message.rate ? DecCoin.toSDK(message.rate) : undefined);
+    message.balance !== undefined && (obj.balance = message.balance ? DecCoin.toSDK(message.balance) : undefined);
+    message.withdrawn !== undefined && (obj.withdrawn = message.withdrawn ? Coin.toSDK(message.withdrawn) : undefined);
+    return obj;
   }
 
 };

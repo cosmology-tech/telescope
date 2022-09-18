@@ -1,5 +1,5 @@
-import { Any } from "../../../../google/protobuf/any";
-import { Event } from "../../../../tendermint/abci/types";
+import { Any, AnySDKType } from "../../../../google/protobuf/any";
+import { Event, EventSDKType } from "../../../../tendermint/abci/types";
 import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
 export const protobufPackage = "cosmos.base.abci.v1beta1";
@@ -63,6 +63,65 @@ export interface TxResponse {
   events: Event[];
 }
 
+/**
+ * TxResponse defines a structure containing relevant tx data and metadata. The
+ * tags are stringified and the log is JSON decoded.
+ */
+export interface TxResponseSDKType {
+  /** The block height */
+  height: Long;
+
+  /** The transaction hash. */
+  txhash: string;
+
+  /** Namespace for the Code */
+  codespace: string;
+
+  /** Response code. */
+  code: number;
+
+  /** Result bytes, if any. */
+  data: string;
+
+  /**
+   * The output of the application's logger (raw string). May be
+   * non-deterministic.
+   */
+  raw_log: string;
+
+  /** The output of the application's logger (typed). May be non-deterministic. */
+  logs: ABCIMessageLogSDKType[];
+
+  /** Additional information. May be non-deterministic. */
+  info: string;
+
+  /** Amount of gas requested for transaction. */
+  gas_wanted: Long;
+
+  /** Amount of gas consumed by transaction. */
+  gas_used: Long;
+
+  /** The request transaction bytes. */
+  tx: Any;
+
+  /**
+   * Time of the previous block. For heights > 1, it's the weighted median of
+   * the timestamps of the valid votes in the block.LastCommit. For height == 1,
+   * it's genesis time.
+   */
+  timestamp: string;
+
+  /**
+   * Events defines all the events emitted by processing a transaction. Note,
+   * these events include those emitted by processing all the messages and those
+   * emitted from the ante handler. Whereas Logs contains the events, with
+   * additional metadata, emitted only by processing the messages.
+   * 
+   * Since: cosmos-sdk 0.42.11, 0.44.5, 0.45
+   */
+  events: EventSDKType[];
+}
+
 /** ABCIMessageLog defines a structure containing an indexed tx ABCI message log. */
 export interface ABCIMessageLog {
   msgIndex: number;
@@ -75,6 +134,18 @@ export interface ABCIMessageLog {
   events: StringEvent[];
 }
 
+/** ABCIMessageLog defines a structure containing an indexed tx ABCI message log. */
+export interface ABCIMessageLogSDKType {
+  msg_index: number;
+  log: string;
+
+  /**
+   * Events contains a slice of Event objects that were emitted during some
+   * execution.
+   */
+  events: StringEventSDKType[];
+}
+
 /**
  * StringEvent defines en Event object wrapper where all the attributes
  * contain key/value pairs that are strings instead of raw bytes.
@@ -82,6 +153,15 @@ export interface ABCIMessageLog {
 export interface StringEvent {
   type: string;
   attributes: Attribute[];
+}
+
+/**
+ * StringEvent defines en Event object wrapper where all the attributes
+ * contain key/value pairs that are strings instead of raw bytes.
+ */
+export interface StringEventSDKType {
+  type: string;
+  attributes: AttributeSDKType[];
 }
 
 /**
@@ -93,6 +173,15 @@ export interface Attribute {
   value: string;
 }
 
+/**
+ * Attribute defines an attribute wrapper where the key and value are
+ * strings instead of raw bytes.
+ */
+export interface AttributeSDKType {
+  key: string;
+  value: string;
+}
+
 /** GasInfo defines tx execution gas context. */
 export interface GasInfo {
   /** GasWanted is the maximum units of work we allow this tx to perform. */
@@ -100,6 +189,15 @@ export interface GasInfo {
 
   /** GasUsed is the amount of gas actually consumed. */
   gasUsed: Long;
+}
+
+/** GasInfo defines tx execution gas context. */
+export interface GasInfoSDKType {
+  /** GasWanted is the maximum units of work we allow this tx to perform. */
+  gas_wanted: Long;
+
+  /** GasUsed is the amount of gas actually consumed. */
+  gas_used: Long;
 }
 
 /** Result is the union of ResponseFormat and ResponseCheckTx. */
@@ -131,6 +229,35 @@ export interface Result {
   msgResponses: Any[];
 }
 
+/** Result is the union of ResponseFormat and ResponseCheckTx. */
+export interface ResultSDKType {
+  /**
+   * Data is any data returned from message or handler execution. It MUST be
+   * length prefixed in order to separate data from multiple message executions.
+   * Deprecated. This field is still populated, but prefer msg_response instead
+   * because it also contains the Msg response typeURL.
+   */
+
+  /** @deprecated */
+  data: Uint8Array;
+
+  /** Log contains the log information from message or handler execution. */
+  log: string;
+
+  /**
+   * Events contains a slice of Event objects that were emitted during message
+   * or handler execution.
+   */
+  events: EventSDKType[];
+
+  /**
+   * msg_responses contains the Msg handler responses type packed in Anys.
+   * 
+   * Since: cosmos-sdk 0.46
+   */
+  msg_responses: Any[];
+}
+
 /**
  * SimulationResponse defines the response generated when a transaction is
  * successfully simulated.
@@ -141,6 +268,15 @@ export interface SimulationResponse {
 }
 
 /**
+ * SimulationResponse defines the response generated when a transaction is
+ * successfully simulated.
+ */
+export interface SimulationResponseSDKType {
+  gas_info: GasInfoSDKType;
+  result: ResultSDKType;
+}
+
+/**
  * MsgData defines the data returned in a Result object during message
  * execution.
  */
@@ -148,6 +284,17 @@ export interface SimulationResponse {
 /** @deprecated */
 export interface MsgData {
   msgType: string;
+  data: Uint8Array;
+}
+
+/**
+ * MsgData defines the data returned in a Result object during message
+ * execution.
+ */
+
+/** @deprecated */
+export interface MsgDataSDKType {
+  msg_type: string;
   data: Uint8Array;
 }
 
@@ -169,6 +316,24 @@ export interface TxMsgData {
   msgResponses: Any[];
 }
 
+/**
+ * TxMsgData defines a list of MsgData. A transaction will have a MsgData object
+ * for each message.
+ */
+export interface TxMsgDataSDKType {
+  /** data field is deprecated and not populated. */
+
+  /** @deprecated */
+  data: MsgDataSDKType[];
+
+  /**
+   * msg_responses contains the Msg handler responses packed into Anys.
+   * 
+   * Since: cosmos-sdk 0.46
+   */
+  msg_responses: Any[];
+}
+
 /** SearchTxsResult defines a structure for querying txs pageable */
 export interface SearchTxsResult {
   /** Count of all txs */
@@ -188,6 +353,27 @@ export interface SearchTxsResult {
 
   /** List of txs in current page */
   txs: TxResponse[];
+}
+
+/** SearchTxsResult defines a structure for querying txs pageable */
+export interface SearchTxsResultSDKType {
+  /** Count of all txs */
+  total_count: Long;
+
+  /** Count of txs in current page */
+  count: Long;
+
+  /** Index of current page, start from 1 */
+  page_number: Long;
+
+  /** Count of total pages */
+  page_total: Long;
+
+  /** Max count txs per page */
+  limit: Long;
+
+  /** List of txs in current page */
+  txs: TxResponseSDKType[];
 }
 
 function createBaseTxResponse(): TxResponse {
@@ -399,6 +585,54 @@ export const TxResponse = {
     message.timestamp = object.timestamp ?? "";
     message.events = object.events?.map(e => Event.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: TxResponseSDKType): TxResponse {
+    return {
+      height: isSet(object.height) ? object.height : Long.ZERO,
+      txhash: isSet(object.txhash) ? object.txhash : "",
+      codespace: isSet(object.codespace) ? object.codespace : "",
+      code: isSet(object.code) ? object.code : 0,
+      data: isSet(object.data) ? object.data : "",
+      rawLog: isSet(object.raw_log) ? object.raw_log : "",
+      logs: Array.isArray(object?.logs) ? object.logs.map((e: any) => ABCIMessageLog.fromSDK(e)) : [],
+      info: isSet(object.info) ? object.info : "",
+      gasWanted: isSet(object.gas_wanted) ? object.gas_wanted : Long.ZERO,
+      gasUsed: isSet(object.gas_used) ? object.gas_used : Long.ZERO,
+      tx: isSet(object.tx) ? Any.fromSDK(object.tx) : undefined,
+      timestamp: isSet(object.timestamp) ? object.timestamp : "",
+      events: Array.isArray(object?.events) ? object.events.map((e: any) => Event.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: TxResponse): TxResponseSDKType {
+    const obj: any = {};
+    message.height !== undefined && (obj.height = message.height);
+    message.txhash !== undefined && (obj.txhash = message.txhash);
+    message.codespace !== undefined && (obj.codespace = message.codespace);
+    message.code !== undefined && (obj.code = message.code);
+    message.data !== undefined && (obj.data = message.data);
+    message.rawLog !== undefined && (obj.raw_log = message.rawLog);
+
+    if (message.logs) {
+      obj.logs = message.logs.map(e => e ? ABCIMessageLog.toSDK(e) : undefined);
+    } else {
+      obj.logs = [];
+    }
+
+    message.info !== undefined && (obj.info = message.info);
+    message.gasWanted !== undefined && (obj.gas_wanted = message.gasWanted);
+    message.gasUsed !== undefined && (obj.gas_used = message.gasUsed);
+    message.tx !== undefined && (obj.tx = message.tx ? Any.toSDK(message.tx) : undefined);
+    message.timestamp !== undefined && (obj.timestamp = message.timestamp);
+
+    if (message.events) {
+      obj.events = message.events.map(e => e ? Event.toSDK(e) : undefined);
+    } else {
+      obj.events = [];
+    }
+
+    return obj;
   }
 
 };
@@ -486,6 +720,28 @@ export const ABCIMessageLog = {
     message.log = object.log ?? "";
     message.events = object.events?.map(e => StringEvent.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: ABCIMessageLogSDKType): ABCIMessageLog {
+    return {
+      msgIndex: isSet(object.msg_index) ? object.msg_index : 0,
+      log: isSet(object.log) ? object.log : "",
+      events: Array.isArray(object?.events) ? object.events.map((e: any) => StringEvent.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: ABCIMessageLog): ABCIMessageLogSDKType {
+    const obj: any = {};
+    message.msgIndex !== undefined && (obj.msg_index = message.msgIndex);
+    message.log !== undefined && (obj.log = message.log);
+
+    if (message.events) {
+      obj.events = message.events.map(e => e ? StringEvent.toSDK(e) : undefined);
+    } else {
+      obj.events = [];
+    }
+
+    return obj;
   }
 
 };
@@ -561,6 +817,26 @@ export const StringEvent = {
     message.type = object.type ?? "";
     message.attributes = object.attributes?.map(e => Attribute.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: StringEventSDKType): StringEvent {
+    return {
+      type: isSet(object.type) ? object.type : "",
+      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: StringEvent): StringEventSDKType {
+    const obj: any = {};
+    message.type !== undefined && (obj.type = message.type);
+
+    if (message.attributes) {
+      obj.attributes = message.attributes.map(e => e ? Attribute.toSDK(e) : undefined);
+    } else {
+      obj.attributes = [];
+    }
+
+    return obj;
   }
 
 };
@@ -630,6 +906,20 @@ export const Attribute = {
     message.key = object.key ?? "";
     message.value = object.value ?? "";
     return message;
+  },
+
+  fromSDK(object: AttributeSDKType): Attribute {
+    return {
+      key: isSet(object.key) ? object.key : "",
+      value: isSet(object.value) ? object.value : ""
+    };
+  },
+
+  toSDK(message: Attribute): AttributeSDKType {
+    const obj: any = {};
+    message.key !== undefined && (obj.key = message.key);
+    message.value !== undefined && (obj.value = message.value);
+    return obj;
   }
 
 };
@@ -699,6 +989,20 @@ export const GasInfo = {
     message.gasWanted = object.gasWanted !== undefined && object.gasWanted !== null ? Long.fromValue(object.gasWanted) : Long.UZERO;
     message.gasUsed = object.gasUsed !== undefined && object.gasUsed !== null ? Long.fromValue(object.gasUsed) : Long.UZERO;
     return message;
+  },
+
+  fromSDK(object: GasInfoSDKType): GasInfo {
+    return {
+      gasWanted: isSet(object.gas_wanted) ? object.gas_wanted : Long.UZERO,
+      gasUsed: isSet(object.gas_used) ? object.gas_used : Long.UZERO
+    };
+  },
+
+  toSDK(message: GasInfo): GasInfoSDKType {
+    const obj: any = {};
+    message.gasWanted !== undefined && (obj.gas_wanted = message.gasWanted);
+    message.gasUsed !== undefined && (obj.gas_used = message.gasUsed);
+    return obj;
   }
 
 };
@@ -803,6 +1107,35 @@ export const Result = {
     message.events = object.events?.map(e => Event.fromPartial(e)) || [];
     message.msgResponses = object.msgResponses?.map(e => Any.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: ResultSDKType): Result {
+    return {
+      data: isSet(object.data) ? object.data : new Uint8Array(),
+      log: isSet(object.log) ? object.log : "",
+      events: Array.isArray(object?.events) ? object.events.map((e: any) => Event.fromSDK(e)) : [],
+      msgResponses: Array.isArray(object?.msg_responses) ? object.msg_responses.map((e: any) => Any.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: Result): ResultSDKType {
+    const obj: any = {};
+    message.data !== undefined && (obj.data = message.data);
+    message.log !== undefined && (obj.log = message.log);
+
+    if (message.events) {
+      obj.events = message.events.map(e => e ? Event.toSDK(e) : undefined);
+    } else {
+      obj.events = [];
+    }
+
+    if (message.msgResponses) {
+      obj.msg_responses = message.msgResponses.map(e => e ? Any.toSDK(e) : undefined);
+    } else {
+      obj.msg_responses = [];
+    }
+
+    return obj;
   }
 
 };
@@ -872,6 +1205,20 @@ export const SimulationResponse = {
     message.gasInfo = object.gasInfo !== undefined && object.gasInfo !== null ? GasInfo.fromPartial(object.gasInfo) : undefined;
     message.result = object.result !== undefined && object.result !== null ? Result.fromPartial(object.result) : undefined;
     return message;
+  },
+
+  fromSDK(object: SimulationResponseSDKType): SimulationResponse {
+    return {
+      gasInfo: isSet(object.gas_info) ? GasInfo.fromSDK(object.gas_info) : undefined,
+      result: isSet(object.result) ? Result.fromSDK(object.result) : undefined
+    };
+  },
+
+  toSDK(message: SimulationResponse): SimulationResponseSDKType {
+    const obj: any = {};
+    message.gasInfo !== undefined && (obj.gas_info = message.gasInfo ? GasInfo.toSDK(message.gasInfo) : undefined);
+    message.result !== undefined && (obj.result = message.result ? Result.toSDK(message.result) : undefined);
+    return obj;
   }
 
 };
@@ -941,6 +1288,20 @@ export const MsgData = {
     message.msgType = object.msgType ?? "";
     message.data = object.data ?? new Uint8Array();
     return message;
+  },
+
+  fromSDK(object: MsgDataSDKType): MsgData {
+    return {
+      msgType: isSet(object.msg_type) ? object.msg_type : "",
+      data: isSet(object.data) ? object.data : new Uint8Array()
+    };
+  },
+
+  toSDK(message: MsgData): MsgDataSDKType {
+    const obj: any = {};
+    message.msgType !== undefined && (obj.msg_type = message.msgType);
+    message.data !== undefined && (obj.data = message.data);
+    return obj;
   }
 
 };
@@ -1021,6 +1382,31 @@ export const TxMsgData = {
     message.data = object.data?.map(e => MsgData.fromPartial(e)) || [];
     message.msgResponses = object.msgResponses?.map(e => Any.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: TxMsgDataSDKType): TxMsgData {
+    return {
+      data: Array.isArray(object?.data) ? object.data.map((e: any) => MsgData.fromSDK(e)) : [],
+      msgResponses: Array.isArray(object?.msg_responses) ? object.msg_responses.map((e: any) => Any.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: TxMsgData): TxMsgDataSDKType {
+    const obj: any = {};
+
+    if (message.data) {
+      obj.data = message.data.map(e => e ? MsgData.toSDK(e) : undefined);
+    } else {
+      obj.data = [];
+    }
+
+    if (message.msgResponses) {
+      obj.msg_responses = message.msgResponses.map(e => e ? Any.toSDK(e) : undefined);
+    } else {
+      obj.msg_responses = [];
+    }
+
+    return obj;
   }
 
 };
@@ -1144,6 +1530,34 @@ export const SearchTxsResult = {
     message.limit = object.limit !== undefined && object.limit !== null ? Long.fromValue(object.limit) : Long.UZERO;
     message.txs = object.txs?.map(e => TxResponse.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: SearchTxsResultSDKType): SearchTxsResult {
+    return {
+      totalCount: isSet(object.total_count) ? object.total_count : Long.UZERO,
+      count: isSet(object.count) ? object.count : Long.UZERO,
+      pageNumber: isSet(object.page_number) ? object.page_number : Long.UZERO,
+      pageTotal: isSet(object.page_total) ? object.page_total : Long.UZERO,
+      limit: isSet(object.limit) ? object.limit : Long.UZERO,
+      txs: Array.isArray(object?.txs) ? object.txs.map((e: any) => TxResponse.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: SearchTxsResult): SearchTxsResultSDKType {
+    const obj: any = {};
+    message.totalCount !== undefined && (obj.total_count = message.totalCount);
+    message.count !== undefined && (obj.count = message.count);
+    message.pageNumber !== undefined && (obj.page_number = message.pageNumber);
+    message.pageTotal !== undefined && (obj.page_total = message.pageTotal);
+    message.limit !== undefined && (obj.limit = message.limit);
+
+    if (message.txs) {
+      obj.txs = message.txs.map(e => e ? TxResponse.toSDK(e) : undefined);
+    } else {
+      obj.txs = [];
+    }
+
+    return obj;
   }
 
 };

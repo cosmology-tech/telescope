@@ -1,4 +1,4 @@
-import { Coin } from "../../../cosmos/base/v1beta1/coin";
+import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, Exact } from "@osmonauts/helpers";
 export const protobufPackage = "akash.deployment.v1beta2";
@@ -6,6 +6,11 @@ export const protobufPackage = "akash.deployment.v1beta2";
 /** Params defines the parameters for the x/deployment package */
 export interface Params {
   deploymentMinDeposit: Coin;
+}
+
+/** Params defines the parameters for the x/deployment package */
+export interface ParamsSDKType {
+  deployment_min_deposit: CoinSDKType;
 }
 
 function createBaseParams(): Params {
@@ -61,6 +66,18 @@ export const Params = {
     const message = createBaseParams();
     message.deploymentMinDeposit = object.deploymentMinDeposit !== undefined && object.deploymentMinDeposit !== null ? Coin.fromPartial(object.deploymentMinDeposit) : undefined;
     return message;
+  },
+
+  fromSDK(object: ParamsSDKType): Params {
+    return {
+      deploymentMinDeposit: isSet(object.deployment_min_deposit) ? Coin.fromSDK(object.deployment_min_deposit) : undefined
+    };
+  },
+
+  toSDK(message: Params): ParamsSDKType {
+    const obj: any = {};
+    message.deploymentMinDeposit !== undefined && (obj.deployment_min_deposit = message.deploymentMinDeposit ? Coin.toSDK(message.deploymentMinDeposit) : undefined);
+    return obj;
   }
 
 };

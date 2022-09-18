@@ -1,5 +1,5 @@
-import { Params } from "./auth";
-import { Any } from "../../../google/protobuf/any";
+import { Params, ParamsSDKType } from "./auth";
+import { Any, AnySDKType } from "../../../google/protobuf/any";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "@osmonauts/helpers";
 export const protobufPackage = "cosmos.auth.v1beta1";
@@ -8,6 +8,15 @@ export const protobufPackage = "cosmos.auth.v1beta1";
 export interface GenesisState {
   /** params defines all the paramaters of the module. */
   params: Params;
+
+  /** accounts are the accounts present at genesis. */
+  accounts: Any[];
+}
+
+/** GenesisState defines the auth module's genesis state. */
+export interface GenesisStateSDKType {
+  /** params defines all the paramaters of the module. */
+  params: ParamsSDKType;
 
   /** accounts are the accounts present at genesis. */
   accounts: Any[];
@@ -84,6 +93,26 @@ export const GenesisState = {
     message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     message.accounts = object.accounts?.map(e => Any.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: GenesisStateSDKType): GenesisState {
+    return {
+      params: isSet(object.params) ? Params.fromSDK(object.params) : undefined,
+      accounts: Array.isArray(object?.accounts) ? object.accounts.map((e: any) => Any.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: GenesisState): GenesisStateSDKType {
+    const obj: any = {};
+    message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
+
+    if (message.accounts) {
+      obj.accounts = message.accounts.map(e => e ? Any.toSDK(e) : undefined);
+    } else {
+      obj.accounts = [];
+    }
+
+    return obj;
   }
 
 };

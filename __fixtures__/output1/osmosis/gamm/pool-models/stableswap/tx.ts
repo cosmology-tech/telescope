@@ -1,5 +1,5 @@
-import { PoolParams } from "./stableswap_pool";
-import { Coin } from "../../../../cosmos/base/v1beta1/coin";
+import { PoolParams, PoolParamsSDKType } from "./stableswap_pool";
+import { Coin, CoinSDKType } from "../../../../cosmos/base/v1beta1/coin";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, Long } from "@osmonauts/helpers";
 export const protobufPackage = "osmosis.gamm.poolmodels.stableswap.v1beta1";
@@ -9,8 +9,17 @@ export interface MsgCreateStableswapPool {
   initialPoolLiquidity: Coin[];
   futurePoolGovernor: string;
 }
+export interface MsgCreateStableswapPoolSDKType {
+  sender: string;
+  poolParams: PoolParamsSDKType;
+  initial_pool_liquidity: CoinSDKType[];
+  future_pool_governor: string;
+}
 export interface MsgCreateStableswapPoolResponse {
   poolId: Long;
+}
+export interface MsgCreateStableswapPoolResponseSDKType {
+  pool_id: Long;
 }
 export interface MsgStableSwapAdjustScalingFactors {
   /**
@@ -21,7 +30,17 @@ export interface MsgStableSwapAdjustScalingFactors {
   poolId: Long;
   scalingFactors: Long[];
 }
+export interface MsgStableSwapAdjustScalingFactorsSDKType {
+  /**
+   * Sender must be the pool's scaling_factor_governor in order for the tx to
+   * succeed
+   */
+  sender: string;
+  pool_id: Long;
+  scaling_factors: Long[];
+}
 export interface MsgStableSwapAdjustScalingFactorsResponse {}
+export interface MsgStableSwapAdjustScalingFactorsResponseSDKType {}
 
 function createBaseMsgCreateStableswapPool(): MsgCreateStableswapPool {
   return {
@@ -118,6 +137,30 @@ export const MsgCreateStableswapPool = {
     message.initialPoolLiquidity = object.initialPoolLiquidity?.map(e => Coin.fromPartial(e)) || [];
     message.futurePoolGovernor = object.futurePoolGovernor ?? "";
     return message;
+  },
+
+  fromSDK(object: MsgCreateStableswapPoolSDKType): MsgCreateStableswapPool {
+    return {
+      sender: isSet(object.sender) ? object.sender : "",
+      poolParams: isSet(object.poolParams) ? PoolParams.fromSDK(object.poolParams) : undefined,
+      initialPoolLiquidity: Array.isArray(object?.initial_pool_liquidity) ? object.initial_pool_liquidity.map((e: any) => Coin.fromSDK(e)) : [],
+      futurePoolGovernor: isSet(object.future_pool_governor) ? object.future_pool_governor : ""
+    };
+  },
+
+  toSDK(message: MsgCreateStableswapPool): MsgCreateStableswapPoolSDKType {
+    const obj: any = {};
+    message.sender !== undefined && (obj.sender = message.sender);
+    message.poolParams !== undefined && (obj.poolParams = message.poolParams ? PoolParams.toSDK(message.poolParams) : undefined);
+
+    if (message.initialPoolLiquidity) {
+      obj.initial_pool_liquidity = message.initialPoolLiquidity.map(e => e ? Coin.toSDK(e) : undefined);
+    } else {
+      obj.initial_pool_liquidity = [];
+    }
+
+    message.futurePoolGovernor !== undefined && (obj.future_pool_governor = message.futurePoolGovernor);
+    return obj;
   }
 
 };
@@ -175,6 +218,18 @@ export const MsgCreateStableswapPoolResponse = {
     const message = createBaseMsgCreateStableswapPoolResponse();
     message.poolId = object.poolId !== undefined && object.poolId !== null ? Long.fromValue(object.poolId) : Long.UZERO;
     return message;
+  },
+
+  fromSDK(object: MsgCreateStableswapPoolResponseSDKType): MsgCreateStableswapPoolResponse {
+    return {
+      poolId: isSet(object.pool_id) ? object.pool_id : Long.UZERO
+    };
+  },
+
+  toSDK(message: MsgCreateStableswapPoolResponse): MsgCreateStableswapPoolResponseSDKType {
+    const obj: any = {};
+    message.poolId !== undefined && (obj.pool_id = message.poolId);
+    return obj;
   }
 
 };
@@ -274,6 +329,28 @@ export const MsgStableSwapAdjustScalingFactors = {
     message.poolId = object.poolId !== undefined && object.poolId !== null ? Long.fromValue(object.poolId) : Long.UZERO;
     message.scalingFactors = object.scalingFactors?.map(e => Long.fromValue(e)) || [];
     return message;
+  },
+
+  fromSDK(object: MsgStableSwapAdjustScalingFactorsSDKType): MsgStableSwapAdjustScalingFactors {
+    return {
+      sender: isSet(object.sender) ? object.sender : "",
+      poolId: isSet(object.pool_id) ? object.pool_id : Long.UZERO,
+      scalingFactors: Array.isArray(object?.scaling_factors) ? object.scaling_factors.map((e: any) => e) : []
+    };
+  },
+
+  toSDK(message: MsgStableSwapAdjustScalingFactors): MsgStableSwapAdjustScalingFactorsSDKType {
+    const obj: any = {};
+    message.sender !== undefined && (obj.sender = message.sender);
+    message.poolId !== undefined && (obj.pool_id = message.poolId);
+
+    if (message.scalingFactors) {
+      obj.scaling_factors = message.scalingFactors.map(e => e);
+    } else {
+      obj.scaling_factors = [];
+    }
+
+    return obj;
   }
 
 };
@@ -317,6 +394,15 @@ export const MsgStableSwapAdjustScalingFactorsResponse = {
   fromPartial(_: DeepPartial<MsgStableSwapAdjustScalingFactorsResponse>): MsgStableSwapAdjustScalingFactorsResponse {
     const message = createBaseMsgStableSwapAdjustScalingFactorsResponse();
     return message;
+  },
+
+  fromSDK(_: MsgStableSwapAdjustScalingFactorsResponseSDKType): MsgStableSwapAdjustScalingFactorsResponse {
+    return {};
+  },
+
+  toSDK(_: MsgStableSwapAdjustScalingFactorsResponse): MsgStableSwapAdjustScalingFactorsResponseSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };

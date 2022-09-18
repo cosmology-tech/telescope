@@ -1,5 +1,5 @@
-import { PageRequest, PageResponse } from "../../base/query/v1beta1/pagination";
-import { Grant } from "./feegrant";
+import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../base/query/v1beta1/pagination";
+import { Grant, GrantSDKType } from "./feegrant";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "@osmonauts/helpers";
 export const protobufPackage = "cosmos.feegrant.v1beta1";
@@ -13,10 +13,25 @@ export interface QueryAllowanceRequest {
   grantee: string;
 }
 
+/** QueryAllowanceRequest is the request type for the Query/Allowance RPC method. */
+export interface QueryAllowanceRequestSDKType {
+  /** granter is the address of the user granting an allowance of their funds. */
+  granter: string;
+
+  /** grantee is the address of the user being granted an allowance of another user's funds. */
+  grantee: string;
+}
+
 /** QueryAllowanceResponse is the response type for the Query/Allowance RPC method. */
 export interface QueryAllowanceResponse {
   /** allowance is a allowance granted for grantee by granter. */
   allowance: Grant;
+}
+
+/** QueryAllowanceResponse is the response type for the Query/Allowance RPC method. */
+export interface QueryAllowanceResponseSDKType {
+  /** allowance is a allowance granted for grantee by granter. */
+  allowance: GrantSDKType;
 }
 
 /** QueryAllowancesRequest is the request type for the Query/Allowances RPC method. */
@@ -25,6 +40,14 @@ export interface QueryAllowancesRequest {
 
   /** pagination defines an pagination for the request. */
   pagination?: PageRequest;
+}
+
+/** QueryAllowancesRequest is the request type for the Query/Allowances RPC method. */
+export interface QueryAllowancesRequestSDKType {
+  grantee: string;
+
+  /** pagination defines an pagination for the request. */
+  pagination?: PageRequestSDKType;
 }
 
 /** QueryAllowancesResponse is the response type for the Query/Allowances RPC method. */
@@ -36,12 +59,29 @@ export interface QueryAllowancesResponse {
   pagination?: PageResponse;
 }
 
+/** QueryAllowancesResponse is the response type for the Query/Allowances RPC method. */
+export interface QueryAllowancesResponseSDKType {
+  /** allowances are allowance's granted for grantee by granter. */
+  allowances: GrantSDKType[];
+
+  /** pagination defines an pagination for the response. */
+  pagination?: PageResponseSDKType;
+}
+
 /** QueryAllowancesByGranterRequest is the request type for the Query/AllowancesByGranter RPC method. */
 export interface QueryAllowancesByGranterRequest {
   granter: string;
 
   /** pagination defines an pagination for the request. */
   pagination?: PageRequest;
+}
+
+/** QueryAllowancesByGranterRequest is the request type for the Query/AllowancesByGranter RPC method. */
+export interface QueryAllowancesByGranterRequestSDKType {
+  granter: string;
+
+  /** pagination defines an pagination for the request. */
+  pagination?: PageRequestSDKType;
 }
 
 /** QueryAllowancesByGranterResponse is the response type for the Query/AllowancesByGranter RPC method. */
@@ -51,6 +91,15 @@ export interface QueryAllowancesByGranterResponse {
 
   /** pagination defines an pagination for the response. */
   pagination?: PageResponse;
+}
+
+/** QueryAllowancesByGranterResponse is the response type for the Query/AllowancesByGranter RPC method. */
+export interface QueryAllowancesByGranterResponseSDKType {
+  /** allowances that have been issued by the granter. */
+  allowances: GrantSDKType[];
+
+  /** pagination defines an pagination for the response. */
+  pagination?: PageResponseSDKType;
 }
 
 function createBaseQueryAllowanceRequest(): QueryAllowanceRequest {
@@ -118,6 +167,20 @@ export const QueryAllowanceRequest = {
     message.granter = object.granter ?? "";
     message.grantee = object.grantee ?? "";
     return message;
+  },
+
+  fromSDK(object: QueryAllowanceRequestSDKType): QueryAllowanceRequest {
+    return {
+      granter: isSet(object.granter) ? object.granter : "",
+      grantee: isSet(object.grantee) ? object.grantee : ""
+    };
+  },
+
+  toSDK(message: QueryAllowanceRequest): QueryAllowanceRequestSDKType {
+    const obj: any = {};
+    message.granter !== undefined && (obj.granter = message.granter);
+    message.grantee !== undefined && (obj.grantee = message.grantee);
+    return obj;
   }
 
 };
@@ -175,6 +238,18 @@ export const QueryAllowanceResponse = {
     const message = createBaseQueryAllowanceResponse();
     message.allowance = object.allowance !== undefined && object.allowance !== null ? Grant.fromPartial(object.allowance) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryAllowanceResponseSDKType): QueryAllowanceResponse {
+    return {
+      allowance: isSet(object.allowance) ? Grant.fromSDK(object.allowance) : undefined
+    };
+  },
+
+  toSDK(message: QueryAllowanceResponse): QueryAllowanceResponseSDKType {
+    const obj: any = {};
+    message.allowance !== undefined && (obj.allowance = message.allowance ? Grant.toSDK(message.allowance) : undefined);
+    return obj;
   }
 
 };
@@ -244,6 +319,20 @@ export const QueryAllowancesRequest = {
     message.grantee = object.grantee ?? "";
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryAllowancesRequestSDKType): QueryAllowancesRequest {
+    return {
+      grantee: isSet(object.grantee) ? object.grantee : "",
+      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  toSDK(message: QueryAllowancesRequest): QueryAllowancesRequestSDKType {
+    const obj: any = {};
+    message.grantee !== undefined && (obj.grantee = message.grantee);
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
+    return obj;
   }
 
 };
@@ -319,6 +408,26 @@ export const QueryAllowancesResponse = {
     message.allowances = object.allowances?.map(e => Grant.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryAllowancesResponseSDKType): QueryAllowancesResponse {
+    return {
+      allowances: Array.isArray(object?.allowances) ? object.allowances.map((e: any) => Grant.fromSDK(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  toSDK(message: QueryAllowancesResponse): QueryAllowancesResponseSDKType {
+    const obj: any = {};
+
+    if (message.allowances) {
+      obj.allowances = message.allowances.map(e => e ? Grant.toSDK(e) : undefined);
+    } else {
+      obj.allowances = [];
+    }
+
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
+    return obj;
   }
 
 };
@@ -388,6 +497,20 @@ export const QueryAllowancesByGranterRequest = {
     message.granter = object.granter ?? "";
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryAllowancesByGranterRequestSDKType): QueryAllowancesByGranterRequest {
+    return {
+      granter: isSet(object.granter) ? object.granter : "",
+      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  toSDK(message: QueryAllowancesByGranterRequest): QueryAllowancesByGranterRequestSDKType {
+    const obj: any = {};
+    message.granter !== undefined && (obj.granter = message.granter);
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
+    return obj;
   }
 
 };
@@ -463,6 +586,26 @@ export const QueryAllowancesByGranterResponse = {
     message.allowances = object.allowances?.map(e => Grant.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryAllowancesByGranterResponseSDKType): QueryAllowancesByGranterResponse {
+    return {
+      allowances: Array.isArray(object?.allowances) ? object.allowances.map((e: any) => Grant.fromSDK(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  toSDK(message: QueryAllowancesByGranterResponse): QueryAllowancesByGranterResponseSDKType {
+    const obj: any = {};
+
+    if (message.allowances) {
+      obj.allowances = message.allowances.map(e => e ? Grant.toSDK(e) : undefined);
+    } else {
+      obj.allowances = [];
+    }
+
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
+    return obj;
   }
 
 };

@@ -1,5 +1,5 @@
-import { Timestamp } from "../../../google/protobuf/timestamp";
-import { Period } from "../../../cosmos/vesting/v1beta1/vesting";
+import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
+import { Period, PeriodSDKType } from "../../../cosmos/vesting/v1beta1/vesting";
 import * as _m0 from "protobufjs/minimal";
 import { toTimestamp, fromTimestamp, isSet, fromJsonTimestamp, DeepPartial } from "@osmonauts/helpers";
 export const protobufPackage = "evmos.vesting.v1";
@@ -34,11 +34,47 @@ export interface MsgCreateClawbackVestingAccount {
   merge?: boolean;
 }
 
+/** MsgCreateClawbackVestingAccount defines a message that enables creating a ClawbackVestingAccount. */
+export interface MsgCreateClawbackVestingAccountSDKType {
+  /**
+   * from_address specifies the account to provide the funds and sign the
+   * clawback request
+   */
+  from_address?: string;
+
+  /** to_address specifies the account to receive the funds */
+  to_address?: string;
+
+  /** start_time defines the time at which the vesting period begins */
+  start_time?: Date;
+
+  /** lockup_periods defines the unlocking schedule relative to the start_time */
+  lockup_periods?: PeriodSDKType[];
+
+  /** vesting_periods defines thevesting schedule relative to the start_time */
+  vesting_periods?: PeriodSDKType[];
+
+  /**
+   * merge specifies a the creation mechanism for existing
+   * ClawbackVestingAccounts. If true, merge this new grant into an existing
+   * ClawbackVestingAccount, or create it if it does not exist. If false,
+   * creates a new account. New grants to an existing account must be from the
+   * same from_address.
+   */
+  merge?: boolean;
+}
+
 /**
  * MsgCreateClawbackVestingAccountResponse defines the
  * MsgCreateClawbackVestingAccount response type.
  */
 export interface MsgCreateClawbackVestingAccountResponse {}
+
+/**
+ * MsgCreateClawbackVestingAccountResponse defines the
+ * MsgCreateClawbackVestingAccount response type.
+ */
+export interface MsgCreateClawbackVestingAccountResponseSDKType {}
 
 /**
  * MsgClawback defines a message that removes unvested tokens from a
@@ -59,8 +95,30 @@ export interface MsgClawback {
   destAddress?: string;
 }
 
+/**
+ * MsgClawback defines a message that removes unvested tokens from a
+ * ClawbackVestingAccount.
+ */
+export interface MsgClawbackSDKType {
+  /** funder_address is the address which funded the account */
+  funder_address?: string;
+
+  /** account_address is the address of the ClawbackVestingAccount to claw back from. */
+  account_address?: string;
+
+  /**
+   * dest_address specifies where the clawed-back tokens should be transferred
+   * to. If empty, the tokens will be transferred back to the original funder of
+   * the account.
+   */
+  dest_address?: string;
+}
+
 /** MsgClawbackResponse defines the MsgClawback response type. */
 export interface MsgClawbackResponse {}
+
+/** MsgClawbackResponse defines the MsgClawback response type. */
+export interface MsgClawbackResponseSDKType {}
 
 function createBaseMsgCreateClawbackVestingAccount(): MsgCreateClawbackVestingAccount {
   return {
@@ -186,6 +244,39 @@ export const MsgCreateClawbackVestingAccount = {
     message.vestingPeriods = object.vestingPeriods?.map(e => Period.fromPartial(e)) || [];
     message.merge = object.merge ?? false;
     return message;
+  },
+
+  fromSDK(object: MsgCreateClawbackVestingAccountSDKType): MsgCreateClawbackVestingAccount {
+    return {
+      fromAddress: isSet(object.from_address) ? object.from_address : "",
+      toAddress: isSet(object.to_address) ? object.to_address : "",
+      startTime: isSet(object.start_time) ? Timestamp.fromSDK(object.start_time) : undefined,
+      lockupPeriods: Array.isArray(object?.lockup_periods) ? object.lockup_periods.map((e: any) => Period.fromSDK(e)) : [],
+      vestingPeriods: Array.isArray(object?.vesting_periods) ? object.vesting_periods.map((e: any) => Period.fromSDK(e)) : [],
+      merge: isSet(object.merge) ? object.merge : false
+    };
+  },
+
+  toSDK(message: MsgCreateClawbackVestingAccount): MsgCreateClawbackVestingAccountSDKType {
+    const obj: any = {};
+    message.fromAddress !== undefined && (obj.from_address = message.fromAddress);
+    message.toAddress !== undefined && (obj.to_address = message.toAddress);
+    message.startTime !== undefined && (obj.start_time = message.startTime ? Timestamp.toSDK(message.startTime) : undefined);
+
+    if (message.lockupPeriods) {
+      obj.lockup_periods = message.lockupPeriods.map(e => e ? Period.toSDK(e) : undefined);
+    } else {
+      obj.lockup_periods = [];
+    }
+
+    if (message.vestingPeriods) {
+      obj.vesting_periods = message.vestingPeriods.map(e => e ? Period.toSDK(e) : undefined);
+    } else {
+      obj.vesting_periods = [];
+    }
+
+    message.merge !== undefined && (obj.merge = message.merge);
+    return obj;
   }
 
 };
@@ -229,6 +320,15 @@ export const MsgCreateClawbackVestingAccountResponse = {
   fromPartial(_: DeepPartial<MsgCreateClawbackVestingAccountResponse>): MsgCreateClawbackVestingAccountResponse {
     const message = createBaseMsgCreateClawbackVestingAccountResponse();
     return message;
+  },
+
+  fromSDK(_: MsgCreateClawbackVestingAccountResponseSDKType): MsgCreateClawbackVestingAccountResponse {
+    return {};
+  },
+
+  toSDK(_: MsgCreateClawbackVestingAccountResponse): MsgCreateClawbackVestingAccountResponseSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -310,6 +410,22 @@ export const MsgClawback = {
     message.accountAddress = object.accountAddress ?? "";
     message.destAddress = object.destAddress ?? "";
     return message;
+  },
+
+  fromSDK(object: MsgClawbackSDKType): MsgClawback {
+    return {
+      funderAddress: isSet(object.funder_address) ? object.funder_address : "",
+      accountAddress: isSet(object.account_address) ? object.account_address : "",
+      destAddress: isSet(object.dest_address) ? object.dest_address : ""
+    };
+  },
+
+  toSDK(message: MsgClawback): MsgClawbackSDKType {
+    const obj: any = {};
+    message.funderAddress !== undefined && (obj.funder_address = message.funderAddress);
+    message.accountAddress !== undefined && (obj.account_address = message.accountAddress);
+    message.destAddress !== undefined && (obj.dest_address = message.destAddress);
+    return obj;
   }
 
 };
@@ -353,6 +469,15 @@ export const MsgClawbackResponse = {
   fromPartial(_: DeepPartial<MsgClawbackResponse>): MsgClawbackResponse {
     const message = createBaseMsgClawbackResponse();
     return message;
+  },
+
+  fromSDK(_: MsgClawbackResponseSDKType): MsgClawbackResponse {
+    return {};
+  },
+
+  toSDK(_: MsgClawbackResponse): MsgClawbackResponseSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };

@@ -1,6 +1,6 @@
-import { Any } from "../../../google/protobuf/any";
-import { Coin } from "../../base/v1beta1/coin";
-import { VoteOption, WeightedVoteOption, voteOptionFromJSON, voteOptionToJSON } from "./gov";
+import { Any, AnySDKType } from "../../../google/protobuf/any";
+import { Coin, CoinSDKType } from "../../base/v1beta1/coin";
+import { VoteOption, VoteOptionSDKType, WeightedVoteOption, WeightedVoteOptionSDKType, voteOptionFromJSON, voteOptionFromJSONSDKType, voteOptionToJSON, voteOptionToJSONSDKType } from "./gov";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, Long } from "@osmonauts/helpers";
 export const protobufPackage = "cosmos.gov.v1beta1";
@@ -15,9 +15,24 @@ export interface MsgSubmitProposal {
   proposer: string;
 }
 
+/**
+ * MsgSubmitProposal defines an sdk.Msg type that supports submitting arbitrary
+ * proposal Content.
+ */
+export interface MsgSubmitProposalSDKType {
+  content: Any;
+  initial_deposit: CoinSDKType[];
+  proposer: string;
+}
+
 /** MsgSubmitProposalResponse defines the Msg/SubmitProposal response type. */
 export interface MsgSubmitProposalResponse {
   proposalId: Long;
+}
+
+/** MsgSubmitProposalResponse defines the Msg/SubmitProposal response type. */
+export interface MsgSubmitProposalResponseSDKType {
+  proposal_id: Long;
 }
 
 /** MsgVote defines a message to cast a vote. */
@@ -27,8 +42,18 @@ export interface MsgVote {
   option: VoteOption;
 }
 
+/** MsgVote defines a message to cast a vote. */
+export interface MsgVoteSDKType {
+  proposal_id: Long;
+  voter: string;
+  option: VoteOptionSDKType;
+}
+
 /** MsgVoteResponse defines the Msg/Vote response type. */
 export interface MsgVoteResponse {}
+
+/** MsgVoteResponse defines the Msg/Vote response type. */
+export interface MsgVoteResponseSDKType {}
 
 /**
  * MsgVoteWeighted defines a message to cast a vote.
@@ -42,11 +67,29 @@ export interface MsgVoteWeighted {
 }
 
 /**
+ * MsgVoteWeighted defines a message to cast a vote.
+ * 
+ * Since: cosmos-sdk 0.43
+ */
+export interface MsgVoteWeightedSDKType {
+  proposal_id: Long;
+  voter: string;
+  options: WeightedVoteOptionSDKType[];
+}
+
+/**
  * MsgVoteWeightedResponse defines the Msg/VoteWeighted response type.
  * 
  * Since: cosmos-sdk 0.43
  */
 export interface MsgVoteWeightedResponse {}
+
+/**
+ * MsgVoteWeightedResponse defines the Msg/VoteWeighted response type.
+ * 
+ * Since: cosmos-sdk 0.43
+ */
+export interface MsgVoteWeightedResponseSDKType {}
 
 /** MsgDeposit defines a message to submit a deposit to an existing proposal. */
 export interface MsgDeposit {
@@ -55,8 +98,18 @@ export interface MsgDeposit {
   amount: Coin[];
 }
 
+/** MsgDeposit defines a message to submit a deposit to an existing proposal. */
+export interface MsgDepositSDKType {
+  proposal_id: Long;
+  depositor: string;
+  amount: CoinSDKType[];
+}
+
 /** MsgDepositResponse defines the Msg/Deposit response type. */
 export interface MsgDepositResponse {}
+
+/** MsgDepositResponse defines the Msg/Deposit response type. */
+export interface MsgDepositResponseSDKType {}
 
 function createBaseMsgSubmitProposal(): MsgSubmitProposal {
   return {
@@ -141,6 +194,28 @@ export const MsgSubmitProposal = {
     message.initialDeposit = object.initialDeposit?.map(e => Coin.fromPartial(e)) || [];
     message.proposer = object.proposer ?? "";
     return message;
+  },
+
+  fromSDK(object: MsgSubmitProposalSDKType): MsgSubmitProposal {
+    return {
+      content: isSet(object.content) ? Any.fromSDK(object.content) : undefined,
+      initialDeposit: Array.isArray(object?.initial_deposit) ? object.initial_deposit.map((e: any) => Coin.fromSDK(e)) : [],
+      proposer: isSet(object.proposer) ? object.proposer : ""
+    };
+  },
+
+  toSDK(message: MsgSubmitProposal): MsgSubmitProposalSDKType {
+    const obj: any = {};
+    message.content !== undefined && (obj.content = message.content ? Any.toSDK(message.content) : undefined);
+
+    if (message.initialDeposit) {
+      obj.initial_deposit = message.initialDeposit.map(e => e ? Coin.toSDK(e) : undefined);
+    } else {
+      obj.initial_deposit = [];
+    }
+
+    message.proposer !== undefined && (obj.proposer = message.proposer);
+    return obj;
   }
 
 };
@@ -198,6 +273,18 @@ export const MsgSubmitProposalResponse = {
     const message = createBaseMsgSubmitProposalResponse();
     message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? Long.fromValue(object.proposalId) : Long.UZERO;
     return message;
+  },
+
+  fromSDK(object: MsgSubmitProposalResponseSDKType): MsgSubmitProposalResponse {
+    return {
+      proposalId: isSet(object.proposal_id) ? object.proposal_id : Long.UZERO
+    };
+  },
+
+  toSDK(message: MsgSubmitProposalResponse): MsgSubmitProposalResponseSDKType {
+    const obj: any = {};
+    message.proposalId !== undefined && (obj.proposal_id = message.proposalId);
+    return obj;
   }
 
 };
@@ -279,6 +366,22 @@ export const MsgVote = {
     message.voter = object.voter ?? "";
     message.option = object.option ?? 0;
     return message;
+  },
+
+  fromSDK(object: MsgVoteSDKType): MsgVote {
+    return {
+      proposalId: isSet(object.proposal_id) ? object.proposal_id : Long.UZERO,
+      voter: isSet(object.voter) ? object.voter : "",
+      option: isSet(object.option) ? voteOptionFromJSON(object.option) : 0
+    };
+  },
+
+  toSDK(message: MsgVote): MsgVoteSDKType {
+    const obj: any = {};
+    message.proposalId !== undefined && (obj.proposal_id = message.proposalId);
+    message.voter !== undefined && (obj.voter = message.voter);
+    message.option !== undefined && (obj.option = voteOptionToJSON(message.option));
+    return obj;
   }
 
 };
@@ -322,6 +425,15 @@ export const MsgVoteResponse = {
   fromPartial(_: DeepPartial<MsgVoteResponse>): MsgVoteResponse {
     const message = createBaseMsgVoteResponse();
     return message;
+  },
+
+  fromSDK(_: MsgVoteResponseSDKType): MsgVoteResponse {
+    return {};
+  },
+
+  toSDK(_: MsgVoteResponse): MsgVoteResponseSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -409,6 +521,28 @@ export const MsgVoteWeighted = {
     message.voter = object.voter ?? "";
     message.options = object.options?.map(e => WeightedVoteOption.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: MsgVoteWeightedSDKType): MsgVoteWeighted {
+    return {
+      proposalId: isSet(object.proposal_id) ? object.proposal_id : Long.UZERO,
+      voter: isSet(object.voter) ? object.voter : "",
+      options: Array.isArray(object?.options) ? object.options.map((e: any) => WeightedVoteOption.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: MsgVoteWeighted): MsgVoteWeightedSDKType {
+    const obj: any = {};
+    message.proposalId !== undefined && (obj.proposal_id = message.proposalId);
+    message.voter !== undefined && (obj.voter = message.voter);
+
+    if (message.options) {
+      obj.options = message.options.map(e => e ? WeightedVoteOption.toSDK(e) : undefined);
+    } else {
+      obj.options = [];
+    }
+
+    return obj;
   }
 
 };
@@ -452,6 +586,15 @@ export const MsgVoteWeightedResponse = {
   fromPartial(_: DeepPartial<MsgVoteWeightedResponse>): MsgVoteWeightedResponse {
     const message = createBaseMsgVoteWeightedResponse();
     return message;
+  },
+
+  fromSDK(_: MsgVoteWeightedResponseSDKType): MsgVoteWeightedResponse {
+    return {};
+  },
+
+  toSDK(_: MsgVoteWeightedResponse): MsgVoteWeightedResponseSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -539,6 +682,28 @@ export const MsgDeposit = {
     message.depositor = object.depositor ?? "";
     message.amount = object.amount?.map(e => Coin.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: MsgDepositSDKType): MsgDeposit {
+    return {
+      proposalId: isSet(object.proposal_id) ? object.proposal_id : Long.UZERO,
+      depositor: isSet(object.depositor) ? object.depositor : "",
+      amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: MsgDeposit): MsgDepositSDKType {
+    const obj: any = {};
+    message.proposalId !== undefined && (obj.proposal_id = message.proposalId);
+    message.depositor !== undefined && (obj.depositor = message.depositor);
+
+    if (message.amount) {
+      obj.amount = message.amount.map(e => e ? Coin.toSDK(e) : undefined);
+    } else {
+      obj.amount = [];
+    }
+
+    return obj;
   }
 
 };
@@ -582,6 +747,15 @@ export const MsgDepositResponse = {
   fromPartial(_: DeepPartial<MsgDepositResponse>): MsgDepositResponse {
     const message = createBaseMsgDepositResponse();
     return message;
+  },
+
+  fromSDK(_: MsgDepositResponseSDKType): MsgDepositResponse {
+    return {};
+  },
+
+  toSDK(_: MsgDepositResponse): MsgDepositResponseSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };

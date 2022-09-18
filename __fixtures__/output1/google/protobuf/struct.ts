@@ -38,6 +38,10 @@ export interface Struct_FieldsEntry {
   key: string;
   value: Value;
 }
+export interface Struct_FieldsEntrySDKType {
+  key: string;
+  value: ValueSDKType;
+}
 
 /**
  * `Struct` represents a structured data value, consisting of fields
@@ -53,6 +57,23 @@ export interface Struct {
   /** Unordered map of dynamically typed values. */
   fields: {
     [key: string]: Value;
+  };
+}
+
+/**
+ * `Struct` represents a structured data value, consisting of fields
+ * which map to dynamically typed values. In some languages, `Struct`
+ * might be supported by a native representation. For example, in
+ * scripting languages like JS a struct is represented as an
+ * object. The details of that representation are described together
+ * with the proto support for the language.
+ * 
+ * The JSON representation for `Struct` is JSON object.
+ */
+export interface StructSDKType {
+  /** Unordered map of dynamically typed values. */
+  fields: {
+    [key: string]: ValueSDKType;
   };
 }
 
@@ -85,6 +106,34 @@ export interface Value {
 }
 
 /**
+ * `Value` represents a dynamically typed value which can be either
+ * null, a number, a string, a boolean, a recursive struct value, or a
+ * list of values. A producer of value is expected to set one of that
+ * variants, absence of any variant indicates an error.
+ * 
+ * The JSON representation for `Value` is JSON value.
+ */
+export interface ValueSDKType {
+  /** Represents a null value. */
+  null_value?: NullValueSDKType;
+
+  /** Represents a double value. */
+  number_value?: number;
+
+  /** Represents a string value. */
+  string_value?: string;
+
+  /** Represents a boolean value. */
+  bool_value?: boolean;
+
+  /** Represents a structured value. */
+  struct_value?: StructSDKType;
+
+  /** Represents a repeated `Value`. */
+  list_value?: ListValueSDKType;
+}
+
+/**
  * `ListValue` is a wrapper around a repeated field of values.
  * 
  * The JSON representation for `ListValue` is JSON array.
@@ -92,6 +141,16 @@ export interface Value {
 export interface ListValue {
   /** Repeated field of dynamically typed values. */
   values: Value[];
+}
+
+/**
+ * `ListValue` is a wrapper around a repeated field of values.
+ * 
+ * The JSON representation for `ListValue` is JSON array.
+ */
+export interface ListValueSDKType {
+  /** Repeated field of dynamically typed values. */
+  values: ValueSDKType[];
 }
 
 function createBaseStruct_FieldsEntry(): Struct_FieldsEntry {
@@ -159,6 +218,20 @@ export const Struct_FieldsEntry = {
     message.key = object.key ?? "";
     message.value = object.value !== undefined && object.value !== null ? Value.fromPartial(object.value) : undefined;
     return message;
+  },
+
+  fromSDK(object: Struct_FieldsEntrySDKType): Struct_FieldsEntry {
+    return {
+      key: isSet(object.key) ? object.key : "",
+      value: isSet(object.value) ? Value.fromSDK(object.value) : undefined
+    };
+  },
+
+  toSDK(message: Struct_FieldsEntry): Struct_FieldsEntrySDKType {
+    const obj: any = {};
+    message.key !== undefined && (obj.key = message.key);
+    message.value !== undefined && (obj.value = message.value ? Value.toSDK(message.value) : undefined);
+    return obj;
   }
 
 };
@@ -243,6 +316,30 @@ export const Struct = {
       return acc;
     }, {});
     return message;
+  },
+
+  fromSDK(object: StructSDKType): Struct {
+    return {
+      fields: isObject(object.fields) ? Object.entries(object.fields).reduce<{
+        [key: string]: Value;
+      }>((acc, [key, value]) => {
+        acc[key] = Value.fromSDK(value);
+        return acc;
+      }, {}) : {}
+    };
+  },
+
+  toSDK(message: Struct): StructSDKType {
+    const obj: any = {};
+    obj.fields = {};
+
+    if (message.fields) {
+      Object.entries(message.fields).forEach(([k, v]) => {
+        obj.fields[k] = Value.toSDK(v);
+      });
+    }
+
+    return obj;
   }
 
 };
@@ -360,6 +457,28 @@ export const Value = {
     message.structValue = object.structValue !== undefined && object.structValue !== null ? Struct.fromPartial(object.structValue) : undefined;
     message.listValue = object.listValue !== undefined && object.listValue !== null ? ListValue.fromPartial(object.listValue) : undefined;
     return message;
+  },
+
+  fromSDK(object: ValueSDKType): Value {
+    return {
+      nullValue: isSet(object.null_value) ? nullValueFromJSON(object.null_value) : undefined,
+      numberValue: isSet(object.number_value) ? object.number_value : undefined,
+      stringValue: isSet(object.string_value) ? object.string_value : undefined,
+      boolValue: isSet(object.bool_value) ? object.bool_value : undefined,
+      structValue: isSet(object.struct_value) ? Struct.fromSDK(object.struct_value) : undefined,
+      listValue: isSet(object.list_value) ? ListValue.fromSDK(object.list_value) : undefined
+    };
+  },
+
+  toSDK(message: Value): ValueSDKType {
+    const obj: any = {};
+    message.nullValue !== undefined && (obj.null_value = nullValueToJSON(message.nullValue));
+    message.numberValue !== undefined && (obj.number_value = message.numberValue);
+    message.stringValue !== undefined && (obj.string_value = message.stringValue);
+    message.boolValue !== undefined && (obj.bool_value = message.boolValue);
+    message.structValue !== undefined && (obj.struct_value = message.structValue ? Struct.toSDK(message.structValue) : undefined);
+    message.listValue !== undefined && (obj.list_value = message.listValue ? ListValue.toSDK(message.listValue) : undefined);
+    return obj;
   }
 
 };
@@ -423,6 +542,24 @@ export const ListValue = {
     const message = createBaseListValue();
     message.values = object.values?.map(e => Value.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: ListValueSDKType): ListValue {
+    return {
+      values: Array.isArray(object?.values) ? object.values.map((e: any) => Value.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: ListValue): ListValueSDKType {
+    const obj: any = {};
+
+    if (message.values) {
+      obj.values = message.values.map(e => e ? Value.toSDK(e) : undefined);
+    } else {
+      obj.values = [];
+    }
+
+    return obj;
   }
 
 };

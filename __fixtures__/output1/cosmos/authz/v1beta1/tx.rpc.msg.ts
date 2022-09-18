@@ -1,8 +1,8 @@
-import { Grant } from "./authz";
-import { Any } from "../../../google/protobuf/any";
+import { Grant, GrantSDKType } from "./authz";
+import { Any, AnySDKType } from "../../../google/protobuf/any";
 import { Rpc } from "@osmonauts/helpers";
 import * as _m0 from "protobufjs/minimal";
-import { MsgGrant, MsgGrantResponse, MsgExec, MsgExecResponse, MsgRevoke, MsgRevokeResponse } from "./tx";
+import { MsgGrant, MsgGrantSDKType, MsgGrantResponse, MsgGrantResponseSDKType, MsgExec, MsgExecSDKType, MsgExecResponse, MsgExecResponseSDKType, MsgRevoke, MsgRevokeSDKType, MsgRevokeResponse, MsgRevokeResponseSDKType } from "./tx";
 
 /** Msg defines the RPC service */
 export interface Msg {

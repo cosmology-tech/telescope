@@ -1,4 +1,4 @@
-import { Metadata } from "../../../cosmos/bank/v1beta1/bank";
+import { Metadata, MetadataSDKType } from "../../../cosmos/bank/v1beta1/bank";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "@osmonauts/helpers";
 export const protobufPackage = "evmos.erc20.v1";
@@ -70,6 +70,24 @@ export interface TokenPair {
 }
 
 /**
+ * TokenPair defines an instance that records a pairing consisting of a native
+ * Cosmos Coin and an ERC20 token address.
+ */
+export interface TokenPairSDKType {
+  /** address of ERC20 contract token */
+  erc20_address: string;
+
+  /** cosmos base denomination to be mapped to */
+  denom: string;
+
+  /** shows token mapping enable status */
+  enabled: boolean;
+
+  /** ERC20 owner address ENUM (0 invalid, 1 ModuleAccount, 2 external address) */
+  contract_owner: OwnerSDKType;
+}
+
+/**
  * RegisterCoinProposal is a gov Content type to register a token pair for a
  * native Cosmos coin.
  */
@@ -82,6 +100,21 @@ export interface RegisterCoinProposal {
 
   /** metadata of the native Cosmos coin */
   metadata: Metadata;
+}
+
+/**
+ * RegisterCoinProposal is a gov Content type to register a token pair for a
+ * native Cosmos coin.
+ */
+export interface RegisterCoinProposalSDKType {
+  /** title of the proposal */
+  title: string;
+
+  /** proposal description */
+  description: string;
+
+  /** metadata of the native Cosmos coin */
+  metadata: MetadataSDKType;
 }
 
 /**
@@ -100,10 +133,43 @@ export interface RegisterERC20Proposal {
 }
 
 /**
+ * RegisterERC20Proposal is a gov Content type to register a token pair for an
+ * ERC20 token
+ */
+export interface RegisterERC20ProposalSDKType {
+  /** title of the proposal */
+  title: string;
+
+  /** proposal description */
+  description: string;
+
+  /** contract address of ERC20 token */
+  erc20address: string;
+}
+
+/**
  * ToggleTokenConversionProposal is a gov Content type to toggle the conversion
  * of a token pair.
  */
 export interface ToggleTokenConversionProposal {
+  /** title of the proposal */
+  title: string;
+
+  /** proposal description */
+  description: string;
+
+  /**
+   * token identifier can be either the hex contract address of the ERC20 or the
+   * Cosmos base denomination
+   */
+  token: string;
+}
+
+/**
+ * ToggleTokenConversionProposal is a gov Content type to toggle the conversion
+ * of a token pair.
+ */
+export interface ToggleTokenConversionProposalSDKType {
   /** title of the proposal */
   title: string;
 
@@ -206,6 +272,24 @@ export const TokenPair = {
     message.enabled = object.enabled ?? false;
     message.contractOwner = object.contractOwner ?? 0;
     return message;
+  },
+
+  fromSDK(object: TokenPairSDKType): TokenPair {
+    return {
+      erc20Address: isSet(object.erc20_address) ? object.erc20_address : "",
+      denom: isSet(object.denom) ? object.denom : "",
+      enabled: isSet(object.enabled) ? object.enabled : false,
+      contractOwner: isSet(object.contract_owner) ? ownerFromJSON(object.contract_owner) : 0
+    };
+  },
+
+  toSDK(message: TokenPair): TokenPairSDKType {
+    const obj: any = {};
+    message.erc20Address !== undefined && (obj.erc20_address = message.erc20Address);
+    message.denom !== undefined && (obj.denom = message.denom);
+    message.enabled !== undefined && (obj.enabled = message.enabled);
+    message.contractOwner !== undefined && (obj.contract_owner = ownerToJSON(message.contractOwner));
+    return obj;
   }
 
 };
@@ -287,6 +371,22 @@ export const RegisterCoinProposal = {
     message.description = object.description ?? "";
     message.metadata = object.metadata !== undefined && object.metadata !== null ? Metadata.fromPartial(object.metadata) : undefined;
     return message;
+  },
+
+  fromSDK(object: RegisterCoinProposalSDKType): RegisterCoinProposal {
+    return {
+      title: isSet(object.title) ? object.title : "",
+      description: isSet(object.description) ? object.description : "",
+      metadata: isSet(object.metadata) ? Metadata.fromSDK(object.metadata) : undefined
+    };
+  },
+
+  toSDK(message: RegisterCoinProposal): RegisterCoinProposalSDKType {
+    const obj: any = {};
+    message.title !== undefined && (obj.title = message.title);
+    message.description !== undefined && (obj.description = message.description);
+    message.metadata !== undefined && (obj.metadata = message.metadata ? Metadata.toSDK(message.metadata) : undefined);
+    return obj;
   }
 
 };
@@ -368,6 +468,22 @@ export const RegisterERC20Proposal = {
     message.description = object.description ?? "";
     message.erc20address = object.erc20address ?? "";
     return message;
+  },
+
+  fromSDK(object: RegisterERC20ProposalSDKType): RegisterERC20Proposal {
+    return {
+      title: isSet(object.title) ? object.title : "",
+      description: isSet(object.description) ? object.description : "",
+      erc20address: isSet(object.erc20address) ? object.erc20address : ""
+    };
+  },
+
+  toSDK(message: RegisterERC20Proposal): RegisterERC20ProposalSDKType {
+    const obj: any = {};
+    message.title !== undefined && (obj.title = message.title);
+    message.description !== undefined && (obj.description = message.description);
+    message.erc20address !== undefined && (obj.erc20address = message.erc20address);
+    return obj;
   }
 
 };
@@ -449,6 +565,22 @@ export const ToggleTokenConversionProposal = {
     message.description = object.description ?? "";
     message.token = object.token ?? "";
     return message;
+  },
+
+  fromSDK(object: ToggleTokenConversionProposalSDKType): ToggleTokenConversionProposal {
+    return {
+      title: isSet(object.title) ? object.title : "",
+      description: isSet(object.description) ? object.description : "",
+      token: isSet(object.token) ? object.token : ""
+    };
+  },
+
+  toSDK(message: ToggleTokenConversionProposal): ToggleTokenConversionProposalSDKType {
+    const obj: any = {};
+    message.title !== undefined && (obj.title = message.title);
+    message.description !== undefined && (obj.description = message.description);
+    message.token !== undefined && (obj.token = message.token);
+    return obj;
   }
 
 };

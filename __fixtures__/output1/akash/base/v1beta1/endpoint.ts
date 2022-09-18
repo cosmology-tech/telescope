@@ -45,6 +45,11 @@ export interface Endpoint {
   kind: Endpoint_Kind;
 }
 
+/** Endpoint describes a publicly accessible IP service */
+export interface EndpointSDKType {
+  kind: Endpoint_KindSDKType;
+}
+
 function createBaseEndpoint(): Endpoint {
   return {
     kind: 0
@@ -98,6 +103,18 @@ export const Endpoint = {
     const message = createBaseEndpoint();
     message.kind = object.kind ?? 0;
     return message;
+  },
+
+  fromSDK(object: EndpointSDKType): Endpoint {
+    return {
+      kind: isSet(object.kind) ? endpoint_KindFromJSON(object.kind) : 0
+    };
+  },
+
+  toSDK(message: Endpoint): EndpointSDKType {
+    const obj: any = {};
+    message.kind !== undefined && (obj.kind = endpoint_KindToJSON(message.kind));
+    return obj;
   }
 
 };

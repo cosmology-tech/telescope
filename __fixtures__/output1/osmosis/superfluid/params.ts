@@ -11,6 +11,15 @@ export interface Params {
   minimumRiskFactor: string;
 }
 
+/** Params holds parameters for the superfluid module */
+export interface ParamsSDKType {
+  /**
+   * the risk_factor is to be cut on OSMO equivalent value of lp tokens for
+   * superfluid staking, default: 5%
+   */
+  minimum_risk_factor: string;
+}
+
 function createBaseParams(): Params {
   return {
     minimumRiskFactor: ""
@@ -64,6 +73,18 @@ export const Params = {
     const message = createBaseParams();
     message.minimumRiskFactor = object.minimumRiskFactor ?? "";
     return message;
+  },
+
+  fromSDK(object: ParamsSDKType): Params {
+    return {
+      minimumRiskFactor: isSet(object.minimum_risk_factor) ? object.minimum_risk_factor : ""
+    };
+  },
+
+  toSDK(message: Params): ParamsSDKType {
+    const obj: any = {};
+    message.minimumRiskFactor !== undefined && (obj.minimum_risk_factor = message.minimumRiskFactor);
+    return obj;
   }
 
 };

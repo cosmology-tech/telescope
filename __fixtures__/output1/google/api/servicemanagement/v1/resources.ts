@@ -1,5 +1,5 @@
-import { Timestamp } from "../../../protobuf/timestamp";
-import { ConfigChange } from "../../config_change";
+import { Timestamp, TimestampSDKType } from "../../../protobuf/timestamp";
+import { ConfigChange, ConfigChangeSDKType } from "../../config_change";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, toTimestamp, fromTimestamp, fromJsonTimestamp, bytesFromBase64, base64FromBytes, isObject } from "@osmonauts/helpers";
 export const protobufPackage = "google.api.servicemanagement.v1";
@@ -322,6 +322,21 @@ export interface ManagedService {
   producerProjectId: string;
 }
 
+/**
+ * The full representation of a Service that is managed by
+ * Google Service Management.
+ */
+export interface ManagedServiceSDKType {
+  /**
+   * The name of the service. See the [overview](/service-management/overview)
+   * for naming requirements.
+   */
+  service_name: string;
+
+  /** ID of the project that produces and owns this service. */
+  producer_project_id: string;
+}
+
 /** The metadata associated with a long running operation resource. */
 export interface OperationMetadata {
   /**
@@ -340,6 +355,24 @@ export interface OperationMetadata {
   startTime: Date;
 }
 
+/** The metadata associated with a long running operation resource. */
+export interface OperationMetadataSDKType {
+  /**
+   * The full name of the resources that this operation is directly
+   * associated with.
+   */
+  resource_names: string[];
+
+  /** Detailed status information for each step. The order is undetermined. */
+  steps: OperationMetadata_StepSDKType[];
+
+  /** Percentage of completion of this operation, ranging from 0 to 100. */
+  progress_percentage: number;
+
+  /** The start time of the operation. */
+  start_time: Date;
+}
+
 /** Represents the status of one operation step. */
 export interface OperationMetadata_Step {
   /** The short description of the step. */
@@ -349,6 +382,15 @@ export interface OperationMetadata_Step {
   status: OperationMetadata_Status;
 }
 
+/** Represents the status of one operation step. */
+export interface OperationMetadata_StepSDKType {
+  /** The short description of the step. */
+  description: string;
+
+  /** The status code. */
+  status: OperationMetadata_StatusSDKType;
+}
+
 /** Represents a diagnostic message (error or warning) */
 export interface Diagnostic {
   /** File name and line number of the error or warning. */
@@ -356,6 +398,18 @@ export interface Diagnostic {
 
   /** The kind of diagnostic information provided. */
   kind: Diagnostic_Kind;
+
+  /** Message describing the error or warning. */
+  message: string;
+}
+
+/** Represents a diagnostic message (error or warning) */
+export interface DiagnosticSDKType {
+  /** File name and line number of the error or warning. */
+  location: string;
+
+  /** The kind of diagnostic information provided. */
+  kind: Diagnostic_KindSDKType;
 
   /** Message describing the error or warning. */
   message: string;
@@ -380,6 +434,25 @@ export interface ConfigSource {
   files: ConfigFile[];
 }
 
+/**
+ * Represents a source file which is used to generate the service configuration
+ * defined by `google.api.Service`.
+ */
+export interface ConfigSourceSDKType {
+  /**
+   * A unique ID for a specific instance of this message, typically assigned
+   * by the client for tracking purpose. If empty, the server may choose to
+   * generate one instead.
+   */
+  id: string;
+
+  /**
+   * Set of source configuration files that are used to generate a service
+   * configuration (`google.api.Service`).
+   */
+  files: ConfigFileSDKType[];
+}
+
 /** Generic specification of a source configuration file */
 export interface ConfigFile {
   /** The file name of the configuration file (full or relative path). */
@@ -392,8 +465,29 @@ export interface ConfigFile {
   fileType: ConfigFile_FileType;
 }
 
+/** Generic specification of a source configuration file */
+export interface ConfigFileSDKType {
+  /** The file name of the configuration file (full or relative path). */
+  file_path: string;
+
+  /** The bytes that constitute the file. */
+  file_contents: Uint8Array;
+
+  /** The type of configuration file this represents. */
+  file_type: ConfigFile_FileTypeSDKType;
+}
+
 /** Represents a service configuration with its name and id. */
 export interface ConfigRef {
+  /**
+   * Resource name of a service config. It must have the following
+   * format: "services/{service name}/configs/{config id}".
+   */
+  name: string;
+}
+
+/** Represents a service configuration with its name and id. */
+export interface ConfigRefSDKType {
   /**
    * Resource name of a service config. It must have the following
    * format: "services/{service name}/configs/{config id}".
@@ -416,6 +510,23 @@ export interface ChangeReport {
    * Example: visibility.rules[selector='LibraryService.CreateBook'].restriction
    */
   configChanges: ConfigChange[];
+}
+
+/**
+ * Change report associated with a particular service configuration.
+ * 
+ * It contains a list of ConfigChanges based on the comparison between
+ * two service configurations.
+ */
+export interface ChangeReportSDKType {
+  /**
+   * List of changes between two service configurations.
+   * The changes will be alphabetically sorted based on the identifier
+   * of each change.
+   * A ConfigChange identifier is a dot separated path to the configuration.
+   * Example: visibility.rules[selector='LibraryService.CreateBook'].restriction
+   */
+  config_changes: ConfigChangeSDKType[];
 }
 
 /**
@@ -464,7 +575,58 @@ export interface Rollout {
   /** The name of the service associated with this Rollout. */
   serviceName: string;
 }
+
+/**
+ * A rollout resource that defines how service configuration versions are pushed
+ * to control plane systems. Typically, you create a new version of the
+ * service config, and then create a Rollout to push the service config.
+ */
+export interface RolloutSDKType {
+  /**
+   * Optional. Unique identifier of this Rollout. Must be no longer than 63 characters
+   * and only lower case letters, digits, '.', '_' and '-' are allowed.
+   * 
+   * If not specified by client, the server will generate one. The generated id
+   * will have the form of <date><revision number>, where "date" is the create
+   * date in ISO 8601 format.  "revision number" is a monotonically increasing
+   * positive number that is reset every day for each service.
+   * An example of the generated rollout_id is '2016-02-16r1'
+   */
+  rollout_id: string;
+
+  /** Creation time of the rollout. Readonly. */
+  create_time: Date;
+
+  /** The user who created the Rollout. Readonly. */
+  created_by: string;
+
+  /**
+   * The status of this rollout. Readonly. In case of a failed rollout,
+   * the system will automatically rollback to the current Rollout
+   * version. Readonly.
+   */
+  status: Rollout_RolloutStatusSDKType;
+
+  /**
+   * Google Service Control selects service configurations based on
+   * traffic percentage.
+   */
+  traffic_percent_strategy?: Rollout_TrafficPercentStrategySDKType;
+
+  /**
+   * The strategy associated with a rollout to delete a `ManagedService`.
+   * Readonly.
+   */
+  delete_service_strategy?: Rollout_DeleteServiceStrategySDKType;
+
+  /** The name of the service associated with this Rollout. */
+  service_name: string;
+}
 export interface Rollout_TrafficPercentStrategy_PercentagesEntry {
+  key: string;
+  value: number;
+}
+export interface Rollout_TrafficPercentStrategy_PercentagesEntrySDKType {
   key: string;
   value: number;
 }
@@ -513,10 +675,59 @@ export interface Rollout_TrafficPercentStrategy {
 }
 
 /**
+ * Strategy that specifies how clients of Google Service Controller want to
+ * send traffic to use different config versions. This is generally
+ * used by API proxy to split traffic based on your configured percentage for
+ * each config version.
+ * 
+ * One example of how to gradually rollout a new service configuration using
+ * this
+ * strategy:
+ * Day 1
+ * 
+ * Rollout {
+ * id: "example.googleapis.com/rollout_20160206"
+ * traffic_percent_strategy {
+ * percentages: {
+ * "example.googleapis.com/20160201": 70.00
+ * "example.googleapis.com/20160206": 30.00
+ * }
+ * }
+ * }
+ * 
+ * Day 2
+ * 
+ * Rollout {
+ * id: "example.googleapis.com/rollout_20160207"
+ * traffic_percent_strategy: {
+ * percentages: {
+ * "example.googleapis.com/20160206": 100.00
+ * }
+ * }
+ * }
+ */
+export interface Rollout_TrafficPercentStrategySDKType {
+  /**
+   * Maps service configuration IDs to their corresponding traffic percentage.
+   * Key is the service configuration ID, Value is the traffic percentage
+   * which must be greater than 0.0 and the sum must equal to 100.0.
+   */
+  percentages: {
+    [key: string]: number;
+  };
+}
+
+/**
  * Strategy used to delete a service. This strategy is a placeholder only
  * used by the system generated rollout to delete a service.
  */
 export interface Rollout_DeleteServiceStrategy {}
+
+/**
+ * Strategy used to delete a service. This strategy is a placeholder only
+ * used by the system generated rollout to delete a service.
+ */
+export interface Rollout_DeleteServiceStrategySDKType {}
 
 function createBaseManagedService(): ManagedService {
   return {
@@ -583,6 +794,20 @@ export const ManagedService = {
     message.serviceName = object.serviceName ?? "";
     message.producerProjectId = object.producerProjectId ?? "";
     return message;
+  },
+
+  fromSDK(object: ManagedServiceSDKType): ManagedService {
+    return {
+      serviceName: isSet(object.service_name) ? object.service_name : "",
+      producerProjectId: isSet(object.producer_project_id) ? object.producer_project_id : ""
+    };
+  },
+
+  toSDK(message: ManagedService): ManagedServiceSDKType {
+    const obj: any = {};
+    message.serviceName !== undefined && (obj.service_name = message.serviceName);
+    message.producerProjectId !== undefined && (obj.producer_project_id = message.producerProjectId);
+    return obj;
   }
 
 };
@@ -687,6 +912,35 @@ export const OperationMetadata = {
     message.progressPercentage = object.progressPercentage ?? 0;
     message.startTime = object.startTime ?? undefined;
     return message;
+  },
+
+  fromSDK(object: OperationMetadataSDKType): OperationMetadata {
+    return {
+      resourceNames: Array.isArray(object?.resource_names) ? object.resource_names.map((e: any) => e) : [],
+      steps: Array.isArray(object?.steps) ? object.steps.map((e: any) => OperationMetadata_Step.fromSDK(e)) : [],
+      progressPercentage: isSet(object.progress_percentage) ? object.progress_percentage : 0,
+      startTime: isSet(object.start_time) ? Timestamp.fromSDK(object.start_time) : undefined
+    };
+  },
+
+  toSDK(message: OperationMetadata): OperationMetadataSDKType {
+    const obj: any = {};
+
+    if (message.resourceNames) {
+      obj.resource_names = message.resourceNames.map(e => e);
+    } else {
+      obj.resource_names = [];
+    }
+
+    if (message.steps) {
+      obj.steps = message.steps.map(e => e ? OperationMetadata_Step.toSDK(e) : undefined);
+    } else {
+      obj.steps = [];
+    }
+
+    message.progressPercentage !== undefined && (obj.progress_percentage = message.progressPercentage);
+    message.startTime !== undefined && (obj.start_time = message.startTime ? Timestamp.toSDK(message.startTime) : undefined);
+    return obj;
   }
 
 };
@@ -756,6 +1010,20 @@ export const OperationMetadata_Step = {
     message.description = object.description ?? "";
     message.status = object.status ?? 0;
     return message;
+  },
+
+  fromSDK(object: OperationMetadata_StepSDKType): OperationMetadata_Step {
+    return {
+      description: isSet(object.description) ? object.description : "",
+      status: isSet(object.status) ? operationMetadata_StatusFromJSON(object.status) : 0
+    };
+  },
+
+  toSDK(message: OperationMetadata_Step): OperationMetadata_StepSDKType {
+    const obj: any = {};
+    message.description !== undefined && (obj.description = message.description);
+    message.status !== undefined && (obj.status = operationMetadata_StatusToJSON(message.status));
+    return obj;
   }
 
 };
@@ -837,6 +1105,22 @@ export const Diagnostic = {
     message.kind = object.kind ?? 0;
     message.message = object.message ?? "";
     return message;
+  },
+
+  fromSDK(object: DiagnosticSDKType): Diagnostic {
+    return {
+      location: isSet(object.location) ? object.location : "",
+      kind: isSet(object.kind) ? diagnostic_KindFromJSON(object.kind) : 0,
+      message: isSet(object.message) ? object.message : ""
+    };
+  },
+
+  toSDK(message: Diagnostic): DiagnosticSDKType {
+    const obj: any = {};
+    message.location !== undefined && (obj.location = message.location);
+    message.kind !== undefined && (obj.kind = diagnostic_KindToJSON(message.kind));
+    message.message !== undefined && (obj.message = message.message);
+    return obj;
   }
 
 };
@@ -912,6 +1196,26 @@ export const ConfigSource = {
     message.id = object.id ?? "";
     message.files = object.files?.map(e => ConfigFile.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: ConfigSourceSDKType): ConfigSource {
+    return {
+      id: isSet(object.id) ? object.id : "",
+      files: Array.isArray(object?.files) ? object.files.map((e: any) => ConfigFile.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: ConfigSource): ConfigSourceSDKType {
+    const obj: any = {};
+    message.id !== undefined && (obj.id = message.id);
+
+    if (message.files) {
+      obj.files = message.files.map(e => e ? ConfigFile.toSDK(e) : undefined);
+    } else {
+      obj.files = [];
+    }
+
+    return obj;
   }
 
 };
@@ -993,6 +1297,22 @@ export const ConfigFile = {
     message.fileContents = object.fileContents ?? new Uint8Array();
     message.fileType = object.fileType ?? 0;
     return message;
+  },
+
+  fromSDK(object: ConfigFileSDKType): ConfigFile {
+    return {
+      filePath: isSet(object.file_path) ? object.file_path : "",
+      fileContents: isSet(object.file_contents) ? object.file_contents : new Uint8Array(),
+      fileType: isSet(object.file_type) ? configFile_FileTypeFromJSON(object.file_type) : 0
+    };
+  },
+
+  toSDK(message: ConfigFile): ConfigFileSDKType {
+    const obj: any = {};
+    message.filePath !== undefined && (obj.file_path = message.filePath);
+    message.fileContents !== undefined && (obj.file_contents = message.fileContents);
+    message.fileType !== undefined && (obj.file_type = configFile_FileTypeToJSON(message.fileType));
+    return obj;
   }
 
 };
@@ -1050,6 +1370,18 @@ export const ConfigRef = {
     const message = createBaseConfigRef();
     message.name = object.name ?? "";
     return message;
+  },
+
+  fromSDK(object: ConfigRefSDKType): ConfigRef {
+    return {
+      name: isSet(object.name) ? object.name : ""
+    };
+  },
+
+  toSDK(message: ConfigRef): ConfigRefSDKType {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    return obj;
   }
 
 };
@@ -1113,6 +1445,24 @@ export const ChangeReport = {
     const message = createBaseChangeReport();
     message.configChanges = object.configChanges?.map(e => ConfigChange.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: ChangeReportSDKType): ChangeReport {
+    return {
+      configChanges: Array.isArray(object?.config_changes) ? object.config_changes.map((e: any) => ConfigChange.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: ChangeReport): ChangeReportSDKType {
+    const obj: any = {};
+
+    if (message.configChanges) {
+      obj.config_changes = message.configChanges.map(e => e ? ConfigChange.toSDK(e) : undefined);
+    } else {
+      obj.config_changes = [];
+    }
+
+    return obj;
   }
 
 };
@@ -1242,6 +1592,30 @@ export const Rollout = {
     message.deleteServiceStrategy = object.deleteServiceStrategy !== undefined && object.deleteServiceStrategy !== null ? Rollout_DeleteServiceStrategy.fromPartial(object.deleteServiceStrategy) : undefined;
     message.serviceName = object.serviceName ?? "";
     return message;
+  },
+
+  fromSDK(object: RolloutSDKType): Rollout {
+    return {
+      rolloutId: isSet(object.rollout_id) ? object.rollout_id : "",
+      createTime: isSet(object.create_time) ? Timestamp.fromSDK(object.create_time) : undefined,
+      createdBy: isSet(object.created_by) ? object.created_by : "",
+      status: isSet(object.status) ? rollout_RolloutStatusFromJSON(object.status) : 0,
+      trafficPercentStrategy: isSet(object.traffic_percent_strategy) ? Rollout_TrafficPercentStrategy.fromSDK(object.traffic_percent_strategy) : undefined,
+      deleteServiceStrategy: isSet(object.delete_service_strategy) ? Rollout_DeleteServiceStrategy.fromSDK(object.delete_service_strategy) : undefined,
+      serviceName: isSet(object.service_name) ? object.service_name : ""
+    };
+  },
+
+  toSDK(message: Rollout): RolloutSDKType {
+    const obj: any = {};
+    message.rolloutId !== undefined && (obj.rollout_id = message.rolloutId);
+    message.createTime !== undefined && (obj.create_time = message.createTime ? Timestamp.toSDK(message.createTime) : undefined);
+    message.createdBy !== undefined && (obj.created_by = message.createdBy);
+    message.status !== undefined && (obj.status = rollout_RolloutStatusToJSON(message.status));
+    message.trafficPercentStrategy !== undefined && (obj.traffic_percent_strategy = message.trafficPercentStrategy ? Rollout_TrafficPercentStrategy.toSDK(message.trafficPercentStrategy) : undefined);
+    message.deleteServiceStrategy !== undefined && (obj.delete_service_strategy = message.deleteServiceStrategy ? Rollout_DeleteServiceStrategy.toSDK(message.deleteServiceStrategy) : undefined);
+    message.serviceName !== undefined && (obj.service_name = message.serviceName);
+    return obj;
   }
 
 };
@@ -1311,6 +1685,20 @@ export const Rollout_TrafficPercentStrategy_PercentagesEntry = {
     message.key = object.key ?? "";
     message.value = object.value ?? 0;
     return message;
+  },
+
+  fromSDK(object: Rollout_TrafficPercentStrategy_PercentagesEntrySDKType): Rollout_TrafficPercentStrategy_PercentagesEntry {
+    return {
+      key: isSet(object.key) ? object.key : "",
+      value: isSet(object.value) ? object.value : 0
+    };
+  },
+
+  toSDK(message: Rollout_TrafficPercentStrategy_PercentagesEntry): Rollout_TrafficPercentStrategy_PercentagesEntrySDKType {
+    const obj: any = {};
+    message.key !== undefined && (obj.key = message.key);
+    message.value !== undefined && (obj.value = message.value);
+    return obj;
   }
 
 };
@@ -1395,6 +1783,30 @@ export const Rollout_TrafficPercentStrategy = {
       return acc;
     }, {});
     return message;
+  },
+
+  fromSDK(object: Rollout_TrafficPercentStrategySDKType): Rollout_TrafficPercentStrategy {
+    return {
+      percentages: isObject(object.percentages) ? Object.entries(object.percentages).reduce<{
+        [key: string]: double;
+      }>((acc, [key, value]) => {
+        acc[key] = double.fromSDK(value);
+        return acc;
+      }, {}) : {}
+    };
+  },
+
+  toSDK(message: Rollout_TrafficPercentStrategy): Rollout_TrafficPercentStrategySDKType {
+    const obj: any = {};
+    obj.percentages = {};
+
+    if (message.percentages) {
+      Object.entries(message.percentages).forEach(([k, v]) => {
+        obj.percentages[k] = double.toSDK(v);
+      });
+    }
+
+    return obj;
   }
 
 };
@@ -1438,6 +1850,15 @@ export const Rollout_DeleteServiceStrategy = {
   fromPartial(_: DeepPartial<Rollout_DeleteServiceStrategy>): Rollout_DeleteServiceStrategy {
     const message = createBaseRollout_DeleteServiceStrategy();
     return message;
+  },
+
+  fromSDK(_: Rollout_DeleteServiceStrategySDKType): Rollout_DeleteServiceStrategy {
+    return {};
+  },
+
+  toSDK(_: Rollout_DeleteServiceStrategy): Rollout_DeleteServiceStrategySDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };

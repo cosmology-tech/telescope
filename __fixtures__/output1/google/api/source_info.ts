@@ -1,4 +1,4 @@
-import { Any } from "../protobuf/any";
+import { Any, AnySDKType } from "../protobuf/any";
 import * as _m0 from "protobufjs/minimal";
 import { DeepPartial } from "@osmonauts/helpers";
 export const protobufPackage = "google.api";
@@ -7,6 +7,12 @@ export const protobufPackage = "google.api";
 export interface SourceInfo {
   /** All files used during config generation. */
   sourceFiles: Any[];
+}
+
+/** Source information used to create a Service Config */
+export interface SourceInfoSDKType {
+  /** All files used during config generation. */
+  source_files: Any[];
 }
 
 function createBaseSourceInfo(): SourceInfo {
@@ -68,6 +74,24 @@ export const SourceInfo = {
     const message = createBaseSourceInfo();
     message.sourceFiles = object.sourceFiles?.map(e => Any.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: SourceInfoSDKType): SourceInfo {
+    return {
+      sourceFiles: Array.isArray(object?.source_files) ? object.source_files.map((e: any) => Any.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: SourceInfo): SourceInfoSDKType {
+    const obj: any = {};
+
+    if (message.sourceFiles) {
+      obj.source_files = message.sourceFiles.map(e => e ? Any.toSDK(e) : undefined);
+    } else {
+      obj.source_files = [];
+    }
+
+    return obj;
   }
 
 };

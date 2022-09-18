@@ -79,6 +79,82 @@ export interface Monitoring {
 }
 
 /**
+ * Monitoring configuration of the service.
+ * 
+ * The example below shows how to configure monitored resources and metrics
+ * for monitoring. In the example, a monitored resource and two metrics are
+ * defined. The `library.googleapis.com/book/returned_count` metric is sent
+ * to both producer and consumer projects, whereas the
+ * `library.googleapis.com/book/num_overdue` metric is only sent to the
+ * consumer project.
+ * 
+ * monitored_resources:
+ * - type: library.googleapis.com/Branch
+ * display_name: "Library Branch"
+ * description: "A branch of a library."
+ * launch_stage: GA
+ * labels:
+ * - key: resource_container
+ * description: "The Cloud container (ie. project id) for the Branch."
+ * - key: location
+ * description: "The location of the library branch."
+ * - key: branch_id
+ * description: "The id of the branch."
+ * metrics:
+ * - name: library.googleapis.com/book/returned_count
+ * display_name: "Books Returned"
+ * description: "The count of books that have been returned."
+ * launch_stage: GA
+ * metric_kind: DELTA
+ * value_type: INT64
+ * unit: "1"
+ * labels:
+ * - key: customer_id
+ * description: "The id of the customer."
+ * - name: library.googleapis.com/book/num_overdue
+ * display_name: "Books Overdue"
+ * description: "The current number of overdue books."
+ * launch_stage: GA
+ * metric_kind: GAUGE
+ * value_type: INT64
+ * unit: "1"
+ * labels:
+ * - key: customer_id
+ * description: "The id of the customer."
+ * monitoring:
+ * producer_destinations:
+ * - monitored_resource: library.googleapis.com/Branch
+ * metrics:
+ * - library.googleapis.com/book/returned_count
+ * consumer_destinations:
+ * - monitored_resource: library.googleapis.com/Branch
+ * metrics:
+ * - library.googleapis.com/book/returned_count
+ * - library.googleapis.com/book/num_overdue
+ */
+export interface MonitoringSDKType {
+  /**
+   * Monitoring configurations for sending metrics to the producer project.
+   * There can be multiple producer destinations. A monitored resource type may
+   * appear in multiple monitoring destinations if different aggregations are
+   * needed for different sets of metrics associated with that monitored
+   * resource type. A monitored resource and metric pair may only be used once
+   * in the Monitoring configuration.
+   */
+  producer_destinations: Monitoring_MonitoringDestinationSDKType[];
+
+  /**
+   * Monitoring configurations for sending metrics to the consumer project.
+   * There can be multiple consumer destinations. A monitored resource type may
+   * appear in multiple monitoring destinations if different aggregations are
+   * needed for different sets of metrics associated with that monitored
+   * resource type. A monitored resource and metric pair may only be used once
+   * in the Monitoring configuration.
+   */
+  consumer_destinations: Monitoring_MonitoringDestinationSDKType[];
+}
+
+/**
  * Configuration of a specific monitoring destination (the producer project
  * or the consumer project).
  */
@@ -88,6 +164,24 @@ export interface Monitoring_MonitoringDestination {
    * [Service.monitored_resources][google.api.Service.monitored_resources] section.
    */
   monitoredResource: string;
+
+  /**
+   * Types of the metrics to report to this monitoring destination.
+   * Each type must be defined in [Service.metrics][google.api.Service.metrics] section.
+   */
+  metrics: string[];
+}
+
+/**
+ * Configuration of a specific monitoring destination (the producer project
+ * or the consumer project).
+ */
+export interface Monitoring_MonitoringDestinationSDKType {
+  /**
+   * The monitored resource type. The type must be defined in
+   * [Service.monitored_resources][google.api.Service.monitored_resources] section.
+   */
+  monitored_resource: string;
 
   /**
    * Types of the metrics to report to this monitoring destination.
@@ -172,6 +266,31 @@ export const Monitoring = {
     message.producerDestinations = object.producerDestinations?.map(e => Monitoring_MonitoringDestination.fromPartial(e)) || [];
     message.consumerDestinations = object.consumerDestinations?.map(e => Monitoring_MonitoringDestination.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: MonitoringSDKType): Monitoring {
+    return {
+      producerDestinations: Array.isArray(object?.producer_destinations) ? object.producer_destinations.map((e: any) => Monitoring_MonitoringDestination.fromSDK(e)) : [],
+      consumerDestinations: Array.isArray(object?.consumer_destinations) ? object.consumer_destinations.map((e: any) => Monitoring_MonitoringDestination.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: Monitoring): MonitoringSDKType {
+    const obj: any = {};
+
+    if (message.producerDestinations) {
+      obj.producer_destinations = message.producerDestinations.map(e => e ? Monitoring_MonitoringDestination.toSDK(e) : undefined);
+    } else {
+      obj.producer_destinations = [];
+    }
+
+    if (message.consumerDestinations) {
+      obj.consumer_destinations = message.consumerDestinations.map(e => e ? Monitoring_MonitoringDestination.toSDK(e) : undefined);
+    } else {
+      obj.consumer_destinations = [];
+    }
+
+    return obj;
   }
 
 };
@@ -247,6 +366,26 @@ export const Monitoring_MonitoringDestination = {
     message.monitoredResource = object.monitoredResource ?? "";
     message.metrics = object.metrics?.map(e => e) || [];
     return message;
+  },
+
+  fromSDK(object: Monitoring_MonitoringDestinationSDKType): Monitoring_MonitoringDestination {
+    return {
+      monitoredResource: isSet(object.monitored_resource) ? object.monitored_resource : "",
+      metrics: Array.isArray(object?.metrics) ? object.metrics.map((e: any) => e) : []
+    };
+  },
+
+  toSDK(message: Monitoring_MonitoringDestination): Monitoring_MonitoringDestinationSDKType {
+    const obj: any = {};
+    message.monitoredResource !== undefined && (obj.monitored_resource = message.monitoredResource);
+
+    if (message.metrics) {
+      obj.metrics = message.metrics.map(e => e);
+    } else {
+      obj.metrics = [];
+    }
+
+    return obj;
   }
 
 };

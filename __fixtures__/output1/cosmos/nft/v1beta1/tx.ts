@@ -17,8 +17,26 @@ export interface MsgSend {
   receiver: string;
 }
 
+/** MsgSend represents a message to send a nft from one account to another account. */
+export interface MsgSendSDKType {
+  /** class_id defines the unique identifier of the nft classification, similar to the contract address of ERC721 */
+  class_id: string;
+
+  /** id defines the unique identification of nft */
+  id: string;
+
+  /** sender is the address of the owner of nft */
+  sender: string;
+
+  /** receiver is the receiver address of nft */
+  receiver: string;
+}
+
 /** MsgSendResponse defines the Msg/Send response type. */
 export interface MsgSendResponse {}
+
+/** MsgSendResponse defines the Msg/Send response type. */
+export interface MsgSendResponseSDKType {}
 
 function createBaseMsgSend(): MsgSend {
   return {
@@ -109,6 +127,24 @@ export const MsgSend = {
     message.sender = object.sender ?? "";
     message.receiver = object.receiver ?? "";
     return message;
+  },
+
+  fromSDK(object: MsgSendSDKType): MsgSend {
+    return {
+      classId: isSet(object.class_id) ? object.class_id : "",
+      id: isSet(object.id) ? object.id : "",
+      sender: isSet(object.sender) ? object.sender : "",
+      receiver: isSet(object.receiver) ? object.receiver : ""
+    };
+  },
+
+  toSDK(message: MsgSend): MsgSendSDKType {
+    const obj: any = {};
+    message.classId !== undefined && (obj.class_id = message.classId);
+    message.id !== undefined && (obj.id = message.id);
+    message.sender !== undefined && (obj.sender = message.sender);
+    message.receiver !== undefined && (obj.receiver = message.receiver);
+    return obj;
   }
 
 };
@@ -152,6 +188,15 @@ export const MsgSendResponse = {
   fromPartial(_: DeepPartial<MsgSendResponse>): MsgSendResponse {
     const message = createBaseMsgSendResponse();
     return message;
+  },
+
+  fromSDK(_: MsgSendResponseSDKType): MsgSendResponse {
+    return {};
+  },
+
+  toSDK(_: MsgSendResponse): MsgSendResponseSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };

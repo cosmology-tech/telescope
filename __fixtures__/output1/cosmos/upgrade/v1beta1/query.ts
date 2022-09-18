@@ -1,4 +1,4 @@
-import { Plan, ModuleVersion } from "./upgrade";
+import { Plan, PlanSDKType, ModuleVersion, ModuleVersionSDKType } from "./upgrade";
 import * as _m0 from "protobufjs/minimal";
 import { DeepPartial, isSet, Long, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
 export const protobufPackage = "cosmos.upgrade.v1beta1";
@@ -10,12 +10,27 @@ export const protobufPackage = "cosmos.upgrade.v1beta1";
 export interface QueryCurrentPlanRequest {}
 
 /**
+ * QueryCurrentPlanRequest is the request type for the Query/CurrentPlan RPC
+ * method.
+ */
+export interface QueryCurrentPlanRequestSDKType {}
+
+/**
  * QueryCurrentPlanResponse is the response type for the Query/CurrentPlan RPC
  * method.
  */
 export interface QueryCurrentPlanResponse {
   /** plan is the current upgrade plan. */
   plan: Plan;
+}
+
+/**
+ * QueryCurrentPlanResponse is the response type for the Query/CurrentPlan RPC
+ * method.
+ */
+export interface QueryCurrentPlanResponseSDKType {
+  /** plan is the current upgrade plan. */
+  plan: PlanSDKType;
 }
 
 /**
@@ -28,10 +43,28 @@ export interface QueryAppliedPlanRequest {
 }
 
 /**
+ * QueryCurrentPlanRequest is the request type for the Query/AppliedPlan RPC
+ * method.
+ */
+export interface QueryAppliedPlanRequestSDKType {
+  /** name is the name of the applied plan to query for. */
+  name: string;
+}
+
+/**
  * QueryAppliedPlanResponse is the response type for the Query/AppliedPlan RPC
  * method.
  */
 export interface QueryAppliedPlanResponse {
+  /** height is the block height at which the plan was applied. */
+  height: Long;
+}
+
+/**
+ * QueryAppliedPlanResponse is the response type for the Query/AppliedPlan RPC
+ * method.
+ */
+export interface QueryAppliedPlanResponseSDKType {
   /** height is the block height at which the plan was applied. */
   height: Long;
 }
@@ -51,6 +84,20 @@ export interface QueryUpgradedConsensusStateRequest {
 }
 
 /**
+ * QueryUpgradedConsensusStateRequest is the request type for the Query/UpgradedConsensusState
+ * RPC method.
+ */
+
+/** @deprecated */
+export interface QueryUpgradedConsensusStateRequestSDKType {
+  /**
+   * last height of the current chain must be sent in request
+   * as this is the height under which next consensus state is stored
+   */
+  last_height: Long;
+}
+
+/**
  * QueryUpgradedConsensusStateResponse is the response type for the Query/UpgradedConsensusState
  * RPC method.
  */
@@ -59,6 +106,17 @@ export interface QueryUpgradedConsensusStateRequest {
 export interface QueryUpgradedConsensusStateResponse {
   /** Since: cosmos-sdk 0.43 */
   upgradedConsensusState: Uint8Array;
+}
+
+/**
+ * QueryUpgradedConsensusStateResponse is the response type for the Query/UpgradedConsensusState
+ * RPC method.
+ */
+
+/** @deprecated */
+export interface QueryUpgradedConsensusStateResponseSDKType {
+  /** Since: cosmos-sdk 0.43 */
+  upgraded_consensus_state: Uint8Array;
 }
 
 /**
@@ -77,6 +135,21 @@ export interface QueryModuleVersionsRequest {
 }
 
 /**
+ * QueryModuleVersionsRequest is the request type for the Query/ModuleVersions
+ * RPC method.
+ * 
+ * Since: cosmos-sdk 0.43
+ */
+export interface QueryModuleVersionsRequestSDKType {
+  /**
+   * module_name is a field to query a specific module
+   * consensus version from state. Leaving this empty will
+   * fetch the full list of module versions from state
+   */
+  module_name?: string;
+}
+
+/**
  * QueryModuleVersionsResponse is the response type for the Query/ModuleVersions
  * RPC method.
  * 
@@ -88,6 +161,17 @@ export interface QueryModuleVersionsResponse {
 }
 
 /**
+ * QueryModuleVersionsResponse is the response type for the Query/ModuleVersions
+ * RPC method.
+ * 
+ * Since: cosmos-sdk 0.43
+ */
+export interface QueryModuleVersionsResponseSDKType {
+  /** module_versions is a list of module names with their consensus versions. */
+  module_versions: ModuleVersionSDKType[];
+}
+
+/**
  * QueryAuthorityRequest is the request type for Query/Authority
  * 
  * Since: cosmos-sdk 0.46
@@ -95,11 +179,27 @@ export interface QueryModuleVersionsResponse {
 export interface QueryAuthorityRequest {}
 
 /**
+ * QueryAuthorityRequest is the request type for Query/Authority
+ * 
+ * Since: cosmos-sdk 0.46
+ */
+export interface QueryAuthorityRequestSDKType {}
+
+/**
  * QueryAuthorityResponse is the response type for Query/Authority
  * 
  * Since: cosmos-sdk 0.46
  */
 export interface QueryAuthorityResponse {
+  address: string;
+}
+
+/**
+ * QueryAuthorityResponse is the response type for Query/Authority
+ * 
+ * Since: cosmos-sdk 0.46
+ */
+export interface QueryAuthorityResponseSDKType {
   address: string;
 }
 
@@ -142,6 +242,15 @@ export const QueryCurrentPlanRequest = {
   fromPartial(_: DeepPartial<QueryCurrentPlanRequest>): QueryCurrentPlanRequest {
     const message = createBaseQueryCurrentPlanRequest();
     return message;
+  },
+
+  fromSDK(_: QueryCurrentPlanRequestSDKType): QueryCurrentPlanRequest {
+    return {};
+  },
+
+  toSDK(_: QueryCurrentPlanRequest): QueryCurrentPlanRequestSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -199,6 +308,18 @@ export const QueryCurrentPlanResponse = {
     const message = createBaseQueryCurrentPlanResponse();
     message.plan = object.plan !== undefined && object.plan !== null ? Plan.fromPartial(object.plan) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryCurrentPlanResponseSDKType): QueryCurrentPlanResponse {
+    return {
+      plan: isSet(object.plan) ? Plan.fromSDK(object.plan) : undefined
+    };
+  },
+
+  toSDK(message: QueryCurrentPlanResponse): QueryCurrentPlanResponseSDKType {
+    const obj: any = {};
+    message.plan !== undefined && (obj.plan = message.plan ? Plan.toSDK(message.plan) : undefined);
+    return obj;
   }
 
 };
@@ -256,6 +377,18 @@ export const QueryAppliedPlanRequest = {
     const message = createBaseQueryAppliedPlanRequest();
     message.name = object.name ?? "";
     return message;
+  },
+
+  fromSDK(object: QueryAppliedPlanRequestSDKType): QueryAppliedPlanRequest {
+    return {
+      name: isSet(object.name) ? object.name : ""
+    };
+  },
+
+  toSDK(message: QueryAppliedPlanRequest): QueryAppliedPlanRequestSDKType {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    return obj;
   }
 
 };
@@ -313,6 +446,18 @@ export const QueryAppliedPlanResponse = {
     const message = createBaseQueryAppliedPlanResponse();
     message.height = object.height !== undefined && object.height !== null ? Long.fromValue(object.height) : Long.ZERO;
     return message;
+  },
+
+  fromSDK(object: QueryAppliedPlanResponseSDKType): QueryAppliedPlanResponse {
+    return {
+      height: isSet(object.height) ? object.height : Long.ZERO
+    };
+  },
+
+  toSDK(message: QueryAppliedPlanResponse): QueryAppliedPlanResponseSDKType {
+    const obj: any = {};
+    message.height !== undefined && (obj.height = message.height);
+    return obj;
   }
 
 };
@@ -370,6 +515,18 @@ export const QueryUpgradedConsensusStateRequest = {
     const message = createBaseQueryUpgradedConsensusStateRequest();
     message.lastHeight = object.lastHeight !== undefined && object.lastHeight !== null ? Long.fromValue(object.lastHeight) : Long.ZERO;
     return message;
+  },
+
+  fromSDK(object: QueryUpgradedConsensusStateRequestSDKType): QueryUpgradedConsensusStateRequest {
+    return {
+      lastHeight: isSet(object.last_height) ? object.last_height : Long.ZERO
+    };
+  },
+
+  toSDK(message: QueryUpgradedConsensusStateRequest): QueryUpgradedConsensusStateRequestSDKType {
+    const obj: any = {};
+    message.lastHeight !== undefined && (obj.last_height = message.lastHeight);
+    return obj;
   }
 
 };
@@ -427,6 +584,18 @@ export const QueryUpgradedConsensusStateResponse = {
     const message = createBaseQueryUpgradedConsensusStateResponse();
     message.upgradedConsensusState = object.upgradedConsensusState ?? new Uint8Array();
     return message;
+  },
+
+  fromSDK(object: QueryUpgradedConsensusStateResponseSDKType): QueryUpgradedConsensusStateResponse {
+    return {
+      upgradedConsensusState: isSet(object.upgraded_consensus_state) ? object.upgraded_consensus_state : new Uint8Array()
+    };
+  },
+
+  toSDK(message: QueryUpgradedConsensusStateResponse): QueryUpgradedConsensusStateResponseSDKType {
+    const obj: any = {};
+    message.upgradedConsensusState !== undefined && (obj.upgraded_consensus_state = message.upgradedConsensusState);
+    return obj;
   }
 
 };
@@ -484,6 +653,18 @@ export const QueryModuleVersionsRequest = {
     const message = createBaseQueryModuleVersionsRequest();
     message.moduleName = object.moduleName ?? "";
     return message;
+  },
+
+  fromSDK(object: QueryModuleVersionsRequestSDKType): QueryModuleVersionsRequest {
+    return {
+      moduleName: isSet(object.module_name) ? object.module_name : ""
+    };
+  },
+
+  toSDK(message: QueryModuleVersionsRequest): QueryModuleVersionsRequestSDKType {
+    const obj: any = {};
+    message.moduleName !== undefined && (obj.module_name = message.moduleName);
+    return obj;
   }
 
 };
@@ -547,6 +728,24 @@ export const QueryModuleVersionsResponse = {
     const message = createBaseQueryModuleVersionsResponse();
     message.moduleVersions = object.moduleVersions?.map(e => ModuleVersion.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: QueryModuleVersionsResponseSDKType): QueryModuleVersionsResponse {
+    return {
+      moduleVersions: Array.isArray(object?.module_versions) ? object.module_versions.map((e: any) => ModuleVersion.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: QueryModuleVersionsResponse): QueryModuleVersionsResponseSDKType {
+    const obj: any = {};
+
+    if (message.moduleVersions) {
+      obj.module_versions = message.moduleVersions.map(e => e ? ModuleVersion.toSDK(e) : undefined);
+    } else {
+      obj.module_versions = [];
+    }
+
+    return obj;
   }
 
 };
@@ -590,6 +789,15 @@ export const QueryAuthorityRequest = {
   fromPartial(_: DeepPartial<QueryAuthorityRequest>): QueryAuthorityRequest {
     const message = createBaseQueryAuthorityRequest();
     return message;
+  },
+
+  fromSDK(_: QueryAuthorityRequestSDKType): QueryAuthorityRequest {
+    return {};
+  },
+
+  toSDK(_: QueryAuthorityRequest): QueryAuthorityRequestSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -647,6 +855,18 @@ export const QueryAuthorityResponse = {
     const message = createBaseQueryAuthorityResponse();
     message.address = object.address ?? "";
     return message;
+  },
+
+  fromSDK(object: QueryAuthorityResponseSDKType): QueryAuthorityResponse {
+    return {
+      address: isSet(object.address) ? object.address : ""
+    };
+  },
+
+  toSDK(message: QueryAuthorityResponse): QueryAuthorityResponseSDKType {
+    const obj: any = {};
+    message.address !== undefined && (obj.address = message.address);
+    return obj;
   }
 
 };

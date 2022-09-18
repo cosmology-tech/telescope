@@ -1,9 +1,13 @@
-import { Timestamp } from "../../../protobuf/timestamp";
-import { Distribution } from "./distribution";
+import { Timestamp, TimestampSDKType } from "../../../protobuf/timestamp";
+import { Distribution, DistributionSDKType } from "./distribution";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, toTimestamp, fromTimestamp, Long, isObject, fromJsonTimestamp } from "@osmonauts/helpers";
 export const protobufPackage = "google.api.servicecontrol.v1";
 export interface MetricValue_LabelsEntry {
+  key: string;
+  value: string;
+}
+export interface MetricValue_LabelsEntrySDKType {
   key: string;
   value: string;
 }
@@ -52,6 +56,50 @@ export interface MetricValue {
   distributionValue?: Distribution;
 }
 
+/** Represents a single metric value. */
+export interface MetricValueSDKType {
+  /**
+   * The labels describing the metric value.
+   * See comments on [google.api.servicecontrol.v1.Operation.labels][google.api.servicecontrol.v1.Operation.labels] for
+   * the overriding relationship.
+   * Note that this map must not contain monitored resource labels.
+   */
+  labels: {
+    [key: string]: string;
+  };
+
+  /**
+   * The start of the time period over which this metric value's measurement
+   * applies. The time period has different semantics for different metric
+   * types (cumulative, delta, and gauge). See the metric definition
+   * documentation in the service configuration for details. If not specified,
+   * [google.api.servicecontrol.v1.Operation.start_time][google.api.servicecontrol.v1.Operation.start_time] will be used.
+   */
+  start_time: Date;
+
+  /**
+   * The end of the time period over which this metric value's measurement
+   * applies.  If not specified,
+   * [google.api.servicecontrol.v1.Operation.end_time][google.api.servicecontrol.v1.Operation.end_time] will be used.
+   */
+  end_time: Date;
+
+  /** A boolean value. */
+  bool_value?: boolean;
+
+  /** A signed 64-bit integer value. */
+  int64_value?: Long;
+
+  /** A double precision floating point value. */
+  double_value?: number;
+
+  /** A text string value. */
+  string_value?: string;
+
+  /** A distribution value. */
+  distribution_value?: DistributionSDKType;
+}
+
 /**
  * Represents a set of metric values in the same metric.
  * Each metric value in the set should have a unique combination of start time,
@@ -63,6 +111,19 @@ export interface MetricValueSet {
 
   /** The values in this metric. */
   metricValues: MetricValue[];
+}
+
+/**
+ * Represents a set of metric values in the same metric.
+ * Each metric value in the set should have a unique combination of start time,
+ * end time, and label values.
+ */
+export interface MetricValueSetSDKType {
+  /** The metric name defined in the service configuration. */
+  metric_name: string;
+
+  /** The values in this metric. */
+  metric_values: MetricValueSDKType[];
 }
 
 function createBaseMetricValue_LabelsEntry(): MetricValue_LabelsEntry {
@@ -130,6 +191,20 @@ export const MetricValue_LabelsEntry = {
     message.key = object.key ?? "";
     message.value = object.value ?? "";
     return message;
+  },
+
+  fromSDK(object: MetricValue_LabelsEntrySDKType): MetricValue_LabelsEntry {
+    return {
+      key: isSet(object.key) ? object.key : "",
+      value: isSet(object.value) ? object.value : ""
+    };
+  },
+
+  toSDK(message: MetricValue_LabelsEntry): MetricValue_LabelsEntrySDKType {
+    const obj: any = {};
+    message.key !== undefined && (obj.key = message.key);
+    message.value !== undefined && (obj.value = message.value);
+    return obj;
   }
 
 };
@@ -299,6 +374,44 @@ export const MetricValue = {
     message.stringValue = object.stringValue ?? undefined;
     message.distributionValue = object.distributionValue !== undefined && object.distributionValue !== null ? Distribution.fromPartial(object.distributionValue) : undefined;
     return message;
+  },
+
+  fromSDK(object: MetricValueSDKType): MetricValue {
+    return {
+      labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
+        [key: string]: string;
+      }>((acc, [key, value]) => {
+        acc[key] = String(value);
+        return acc;
+      }, {}) : {},
+      startTime: isSet(object.start_time) ? Timestamp.fromSDK(object.start_time) : undefined,
+      endTime: isSet(object.end_time) ? Timestamp.fromSDK(object.end_time) : undefined,
+      boolValue: isSet(object.bool_value) ? object.bool_value : undefined,
+      int64Value: isSet(object.int64_value) ? object.int64_value : undefined,
+      doubleValue: isSet(object.double_value) ? object.double_value : undefined,
+      stringValue: isSet(object.string_value) ? object.string_value : undefined,
+      distributionValue: isSet(object.distribution_value) ? Distribution.fromSDK(object.distribution_value) : undefined
+    };
+  },
+
+  toSDK(message: MetricValue): MetricValueSDKType {
+    const obj: any = {};
+    obj.labels = {};
+
+    if (message.labels) {
+      Object.entries(message.labels).forEach(([k, v]) => {
+        obj.labels[k] = v;
+      });
+    }
+
+    message.startTime !== undefined && (obj.start_time = message.startTime ? Timestamp.toSDK(message.startTime) : undefined);
+    message.endTime !== undefined && (obj.end_time = message.endTime ? Timestamp.toSDK(message.endTime) : undefined);
+    message.boolValue !== undefined && (obj.bool_value = message.boolValue);
+    message.int64Value !== undefined && (obj.int64_value = message.int64Value);
+    message.doubleValue !== undefined && (obj.double_value = message.doubleValue);
+    message.stringValue !== undefined && (obj.string_value = message.stringValue);
+    message.distributionValue !== undefined && (obj.distribution_value = message.distributionValue ? Distribution.toSDK(message.distributionValue) : undefined);
+    return obj;
   }
 
 };
@@ -374,6 +487,26 @@ export const MetricValueSet = {
     message.metricName = object.metricName ?? "";
     message.metricValues = object.metricValues?.map(e => MetricValue.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: MetricValueSetSDKType): MetricValueSet {
+    return {
+      metricName: isSet(object.metric_name) ? object.metric_name : "",
+      metricValues: Array.isArray(object?.metric_values) ? object.metric_values.map((e: any) => MetricValue.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: MetricValueSet): MetricValueSetSDKType {
+    const obj: any = {};
+    message.metricName !== undefined && (obj.metric_name = message.metricName);
+
+    if (message.metricValues) {
+      obj.metric_values = message.metricValues.map(e => e ? MetricValue.toSDK(e) : undefined);
+    } else {
+      obj.metric_values = [];
+    }
+
+    return obj;
   }
 
 };

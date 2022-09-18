@@ -9,11 +9,28 @@ export interface ParameterChangeProposal {
   changes: ParamChange[];
 }
 
+/** ParameterChangeProposal defines a proposal to change one or more parameters. */
+export interface ParameterChangeProposalSDKType {
+  title: string;
+  description: string;
+  changes: ParamChangeSDKType[];
+}
+
 /**
  * ParamChange defines an individual parameter change, for use in
  * ParameterChangeProposal.
  */
 export interface ParamChange {
+  subspace: string;
+  key: string;
+  value: string;
+}
+
+/**
+ * ParamChange defines an individual parameter change, for use in
+ * ParameterChangeProposal.
+ */
+export interface ParamChangeSDKType {
   subspace: string;
   key: string;
   value: string;
@@ -102,6 +119,28 @@ export const ParameterChangeProposal = {
     message.description = object.description ?? "";
     message.changes = object.changes?.map(e => ParamChange.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: ParameterChangeProposalSDKType): ParameterChangeProposal {
+    return {
+      title: isSet(object.title) ? object.title : "",
+      description: isSet(object.description) ? object.description : "",
+      changes: Array.isArray(object?.changes) ? object.changes.map((e: any) => ParamChange.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: ParameterChangeProposal): ParameterChangeProposalSDKType {
+    const obj: any = {};
+    message.title !== undefined && (obj.title = message.title);
+    message.description !== undefined && (obj.description = message.description);
+
+    if (message.changes) {
+      obj.changes = message.changes.map(e => e ? ParamChange.toSDK(e) : undefined);
+    } else {
+      obj.changes = [];
+    }
+
+    return obj;
   }
 
 };
@@ -183,6 +222,22 @@ export const ParamChange = {
     message.key = object.key ?? "";
     message.value = object.value ?? "";
     return message;
+  },
+
+  fromSDK(object: ParamChangeSDKType): ParamChange {
+    return {
+      subspace: isSet(object.subspace) ? object.subspace : "",
+      key: isSet(object.key) ? object.key : "",
+      value: isSet(object.value) ? object.value : ""
+    };
+  },
+
+  toSDK(message: ParamChange): ParamChangeSDKType {
+    const obj: any = {};
+    message.subspace !== undefined && (obj.subspace = message.subspace);
+    message.key !== undefined && (obj.key = message.key);
+    message.value !== undefined && (obj.value = message.value);
+    return obj;
   }
 
 };

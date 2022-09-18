@@ -1,4 +1,4 @@
-import { SuperfluidAsset } from "./superfluid";
+import { SuperfluidAsset, SuperfluidAssetSDKType } from "./superfluid";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "@osmonauts/helpers";
 export const protobufPackage = "osmosis.superfluid.v1beta1";
@@ -14,6 +14,16 @@ export interface SetSuperfluidAssetsProposal {
 }
 
 /**
+ * SetSuperfluidAssetsProposal is a gov Content type to update the superfluid
+ * assets
+ */
+export interface SetSuperfluidAssetsProposalSDKType {
+  title: string;
+  description: string;
+  assets: SuperfluidAssetSDKType[];
+}
+
+/**
  * RemoveSuperfluidAssetsProposal is a gov Content type to remove the superfluid
  * assets by denom
  */
@@ -21,6 +31,16 @@ export interface RemoveSuperfluidAssetsProposal {
   title: string;
   description: string;
   superfluidAssetDenoms: string[];
+}
+
+/**
+ * RemoveSuperfluidAssetsProposal is a gov Content type to remove the superfluid
+ * assets by denom
+ */
+export interface RemoveSuperfluidAssetsProposalSDKType {
+  title: string;
+  description: string;
+  superfluid_asset_denoms: string[];
 }
 
 function createBaseSetSuperfluidAssetsProposal(): SetSuperfluidAssetsProposal {
@@ -106,6 +126,28 @@ export const SetSuperfluidAssetsProposal = {
     message.description = object.description ?? "";
     message.assets = object.assets?.map(e => SuperfluidAsset.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: SetSuperfluidAssetsProposalSDKType): SetSuperfluidAssetsProposal {
+    return {
+      title: isSet(object.title) ? object.title : "",
+      description: isSet(object.description) ? object.description : "",
+      assets: Array.isArray(object?.assets) ? object.assets.map((e: any) => SuperfluidAsset.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: SetSuperfluidAssetsProposal): SetSuperfluidAssetsProposalSDKType {
+    const obj: any = {};
+    message.title !== undefined && (obj.title = message.title);
+    message.description !== undefined && (obj.description = message.description);
+
+    if (message.assets) {
+      obj.assets = message.assets.map(e => e ? SuperfluidAsset.toSDK(e) : undefined);
+    } else {
+      obj.assets = [];
+    }
+
+    return obj;
   }
 
 };
@@ -193,6 +235,28 @@ export const RemoveSuperfluidAssetsProposal = {
     message.description = object.description ?? "";
     message.superfluidAssetDenoms = object.superfluidAssetDenoms?.map(e => e) || [];
     return message;
+  },
+
+  fromSDK(object: RemoveSuperfluidAssetsProposalSDKType): RemoveSuperfluidAssetsProposal {
+    return {
+      title: isSet(object.title) ? object.title : "",
+      description: isSet(object.description) ? object.description : "",
+      superfluidAssetDenoms: Array.isArray(object?.superfluid_asset_denoms) ? object.superfluid_asset_denoms.map((e: any) => e) : []
+    };
+  },
+
+  toSDK(message: RemoveSuperfluidAssetsProposal): RemoveSuperfluidAssetsProposalSDKType {
+    const obj: any = {};
+    message.title !== undefined && (obj.title = message.title);
+    message.description !== undefined && (obj.description = message.description);
+
+    if (message.superfluidAssetDenoms) {
+      obj.superfluid_asset_denoms = message.superfluidAssetDenoms.map(e => e);
+    } else {
+      obj.superfluid_asset_denoms = [];
+    }
+
+    return obj;
   }
 
 };

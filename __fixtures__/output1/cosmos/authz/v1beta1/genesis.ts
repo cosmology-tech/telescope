@@ -1,4 +1,4 @@
-import { GrantAuthorization } from "./authz";
+import { GrantAuthorization, GrantAuthorizationSDKType } from "./authz";
 import * as _m0 from "protobufjs/minimal";
 import { DeepPartial } from "@osmonauts/helpers";
 export const protobufPackage = "cosmos.authz.v1beta1";
@@ -6,6 +6,11 @@ export const protobufPackage = "cosmos.authz.v1beta1";
 /** GenesisState defines the authz module's genesis state. */
 export interface GenesisState {
   authorization: GrantAuthorization[];
+}
+
+/** GenesisState defines the authz module's genesis state. */
+export interface GenesisStateSDKType {
+  authorization: GrantAuthorizationSDKType[];
 }
 
 function createBaseGenesisState(): GenesisState {
@@ -67,6 +72,24 @@ export const GenesisState = {
     const message = createBaseGenesisState();
     message.authorization = object.authorization?.map(e => GrantAuthorization.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: GenesisStateSDKType): GenesisState {
+    return {
+      authorization: Array.isArray(object?.authorization) ? object.authorization.map((e: any) => GrantAuthorization.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: GenesisState): GenesisStateSDKType {
+    const obj: any = {};
+
+    if (message.authorization) {
+      obj.authorization = message.authorization.map(e => e ? GrantAuthorization.toSDK(e) : undefined);
+    } else {
+      obj.authorization = [];
+    }
+
+    return obj;
   }
 
 };

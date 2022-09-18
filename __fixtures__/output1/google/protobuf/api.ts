@@ -1,5 +1,5 @@
-import { Option, Syntax, syntaxFromJSON, syntaxToJSON } from "./type";
-import { SourceContext } from "./source_context";
+import { Option, OptionSDKType, Syntax, SyntaxSDKType, syntaxFromJSON, syntaxFromJSONSDKType, syntaxToJSON, syntaxToJSONSDKType } from "./type";
+import { SourceContext, SourceContextSDKType } from "./source_context";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "@osmonauts/helpers";
 export const protobufPackage = "google.protobuf";
@@ -64,6 +64,66 @@ export interface Api {
   syntax: Syntax;
 }
 
+/**
+ * Api is a light-weight descriptor for an API Interface.
+ * 
+ * Interfaces are also described as "protocol buffer services" in some contexts,
+ * such as by the "service" keyword in a .proto file, but they are different
+ * from API Services, which represent a concrete implementation of an interface
+ * as opposed to simply a description of methods and bindings. They are also
+ * sometimes simply referred to as "APIs" in other contexts, such as the name of
+ * this message itself. See https://cloud.google.com/apis/design/glossary for
+ * detailed terminology.
+ */
+export interface ApiSDKType {
+  /**
+   * The fully qualified name of this interface, including package name
+   * followed by the interface's simple name.
+   */
+  name: string;
+
+  /** The methods of this interface, in unspecified order. */
+  methods: MethodSDKType[];
+
+  /** Any metadata attached to the interface. */
+  options: OptionSDKType[];
+
+  /**
+   * A version string for this interface. If specified, must have the form
+   * `major-version.minor-version`, as in `1.10`. If the minor version is
+   * omitted, it defaults to zero. If the entire version field is empty, the
+   * major version is derived from the package name, as outlined below. If the
+   * field is not empty, the version in the package name will be verified to be
+   * consistent with what is provided here.
+   * 
+   * The versioning schema uses [semantic
+   * versioning](http://semver.org) where the major version number
+   * indicates a breaking change and the minor version an additive,
+   * non-breaking change. Both version numbers are signals to users
+   * what to expect from different versions, and should be carefully
+   * chosen based on the product plan.
+   * 
+   * The major version is also reflected in the package name of the
+   * interface, which must end in `v<major-version>`, as in
+   * `google.feature.v1`. For major versions 0 and 1, the suffix can
+   * be omitted. Zero major versions must only be used for
+   * experimental, non-GA interfaces.
+   */
+  version: string;
+
+  /**
+   * Source context for the protocol buffer service represented by this
+   * message.
+   */
+  source_context: SourceContextSDKType;
+
+  /** Included interfaces. See [Mixin][]. */
+  mixins: MixinSDKType[];
+
+  /** The source syntax of the service. */
+  syntax: SyntaxSDKType;
+}
+
 /** Method represents a method of an API interface. */
 export interface Method {
   /** The simple name of this method. */
@@ -86,6 +146,30 @@ export interface Method {
 
   /** The source syntax of this method. */
   syntax: Syntax;
+}
+
+/** Method represents a method of an API interface. */
+export interface MethodSDKType {
+  /** The simple name of this method. */
+  name: string;
+
+  /** A URL of the input message type. */
+  request_type_url: string;
+
+  /** If true, the request is streamed. */
+  request_streaming: boolean;
+
+  /** The URL of the output message type. */
+  response_type_url: string;
+
+  /** If true, the response is streamed. */
+  response_streaming: boolean;
+
+  /** Any metadata attached to the method. */
+  options: OptionSDKType[];
+
+  /** The source syntax of this method. */
+  syntax: SyntaxSDKType;
 }
 
 /**
@@ -169,6 +253,97 @@ export interface Method {
  * }
  */
 export interface Mixin {
+  /** The fully qualified name of the interface which is included. */
+  name: string;
+
+  /**
+   * If non-empty specifies a path under which inherited HTTP paths
+   * are rooted.
+   */
+  root: string;
+}
+
+/**
+ * Declares an API Interface to be included in this interface. The including
+ * interface must redeclare all the methods from the included interface, but
+ * documentation and options are inherited as follows:
+ * 
+ * - If after comment and whitespace stripping, the documentation
+ * string of the redeclared method is empty, it will be inherited
+ * from the original method.
+ * 
+ * - Each annotation belonging to the service config (http,
+ * visibility) which is not set in the redeclared method will be
+ * inherited.
+ * 
+ * - If an http annotation is inherited, the path pattern will be
+ * modified as follows. Any version prefix will be replaced by the
+ * version of the including interface plus the [root][] path if
+ * specified.
+ * 
+ * Example of a simple mixin:
+ * 
+ * package google.acl.v1;
+ * service AccessControl {
+ * // Get the underlying ACL object.
+ * rpc GetAcl(GetAclRequest) returns (Acl) {
+ * option (google.api.http).get = "/v1/{resource=**}:getAcl";
+ * }
+ * }
+ * 
+ * package google.storage.v2;
+ * service Storage {
+ * rpc GetAcl(GetAclRequest) returns (Acl);
+ * 
+ * // Get a data record.
+ * rpc GetData(GetDataRequest) returns (Data) {
+ * option (google.api.http).get = "/v2/{resource=**}";
+ * }
+ * }
+ * 
+ * Example of a mixin configuration:
+ * 
+ * apis:
+ * - name: google.storage.v2.Storage
+ * mixins:
+ * - name: google.acl.v1.AccessControl
+ * 
+ * The mixin construct implies that all methods in `AccessControl` are
+ * also declared with same name and request/response types in
+ * `Storage`. A documentation generator or annotation processor will
+ * see the effective `Storage.GetAcl` method after inherting
+ * documentation and annotations as follows:
+ * 
+ * service Storage {
+ * // Get the underlying ACL object.
+ * rpc GetAcl(GetAclRequest) returns (Acl) {
+ * option (google.api.http).get = "/v2/{resource=**}:getAcl";
+ * }
+ * ...
+ * }
+ * 
+ * Note how the version in the path pattern changed from `v1` to `v2`.
+ * 
+ * If the `root` field in the mixin is specified, it should be a
+ * relative path under which inherited HTTP paths are placed. Example:
+ * 
+ * apis:
+ * - name: google.storage.v2.Storage
+ * mixins:
+ * - name: google.acl.v1.AccessControl
+ * root: acls
+ * 
+ * This implies the following inherited HTTP annotation:
+ * 
+ * service Storage {
+ * // Get the underlying ACL object.
+ * rpc GetAcl(GetAclRequest) returns (Acl) {
+ * option (google.api.http).get = "/v2/acls/{resource=**}:getAcl";
+ * }
+ * ...
+ * }
+ */
+export interface MixinSDKType {
   /** The fully qualified name of the interface which is included. */
   name: string;
 
@@ -321,6 +496,47 @@ export const Api = {
     message.mixins = object.mixins?.map(e => Mixin.fromPartial(e)) || [];
     message.syntax = object.syntax ?? 0;
     return message;
+  },
+
+  fromSDK(object: ApiSDKType): Api {
+    return {
+      name: isSet(object.name) ? object.name : "",
+      methods: Array.isArray(object?.methods) ? object.methods.map((e: any) => Method.fromSDK(e)) : [],
+      options: Array.isArray(object?.options) ? object.options.map((e: any) => Option.fromSDK(e)) : [],
+      version: isSet(object.version) ? object.version : "",
+      sourceContext: isSet(object.source_context) ? SourceContext.fromSDK(object.source_context) : undefined,
+      mixins: Array.isArray(object?.mixins) ? object.mixins.map((e: any) => Mixin.fromSDK(e)) : [],
+      syntax: isSet(object.syntax) ? syntaxFromJSON(object.syntax) : 0
+    };
+  },
+
+  toSDK(message: Api): ApiSDKType {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+
+    if (message.methods) {
+      obj.methods = message.methods.map(e => e ? Method.toSDK(e) : undefined);
+    } else {
+      obj.methods = [];
+    }
+
+    if (message.options) {
+      obj.options = message.options.map(e => e ? Option.toSDK(e) : undefined);
+    } else {
+      obj.options = [];
+    }
+
+    message.version !== undefined && (obj.version = message.version);
+    message.sourceContext !== undefined && (obj.source_context = message.sourceContext ? SourceContext.toSDK(message.sourceContext) : undefined);
+
+    if (message.mixins) {
+      obj.mixins = message.mixins.map(e => e ? Mixin.toSDK(e) : undefined);
+    } else {
+      obj.mixins = [];
+    }
+
+    message.syntax !== undefined && (obj.syntax = syntaxToJSON(message.syntax));
+    return obj;
   }
 
 };
@@ -456,6 +672,36 @@ export const Method = {
     message.options = object.options?.map(e => Option.fromPartial(e)) || [];
     message.syntax = object.syntax ?? 0;
     return message;
+  },
+
+  fromSDK(object: MethodSDKType): Method {
+    return {
+      name: isSet(object.name) ? object.name : "",
+      requestTypeUrl: isSet(object.request_type_url) ? object.request_type_url : "",
+      requestStreaming: isSet(object.request_streaming) ? object.request_streaming : false,
+      responseTypeUrl: isSet(object.response_type_url) ? object.response_type_url : "",
+      responseStreaming: isSet(object.response_streaming) ? object.response_streaming : false,
+      options: Array.isArray(object?.options) ? object.options.map((e: any) => Option.fromSDK(e)) : [],
+      syntax: isSet(object.syntax) ? syntaxFromJSON(object.syntax) : 0
+    };
+  },
+
+  toSDK(message: Method): MethodSDKType {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    message.requestTypeUrl !== undefined && (obj.request_type_url = message.requestTypeUrl);
+    message.requestStreaming !== undefined && (obj.request_streaming = message.requestStreaming);
+    message.responseTypeUrl !== undefined && (obj.response_type_url = message.responseTypeUrl);
+    message.responseStreaming !== undefined && (obj.response_streaming = message.responseStreaming);
+
+    if (message.options) {
+      obj.options = message.options.map(e => e ? Option.toSDK(e) : undefined);
+    } else {
+      obj.options = [];
+    }
+
+    message.syntax !== undefined && (obj.syntax = syntaxToJSON(message.syntax));
+    return obj;
   }
 
 };
@@ -525,6 +771,20 @@ export const Mixin = {
     message.name = object.name ?? "";
     message.root = object.root ?? "";
     return message;
+  },
+
+  fromSDK(object: MixinSDKType): Mixin {
+    return {
+      name: isSet(object.name) ? object.name : "",
+      root: isSet(object.root) ? object.root : ""
+    };
+  },
+
+  toSDK(message: Mixin): MixinSDKType {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    message.root !== undefined && (obj.root = message.root);
+    return obj;
   }
 
 };

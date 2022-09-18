@@ -1,5 +1,5 @@
-import { PlacementRequirements } from "../../base/v1beta2/attribute";
-import { Resource } from "./resource";
+import { PlacementRequirements, PlacementRequirementsSDKType } from "../../base/v1beta2/attribute";
+import { Resource, ResourceSDKType } from "./resource";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, Exact } from "@osmonauts/helpers";
 export const protobufPackage = "akash.deployment.v1beta2";
@@ -9,6 +9,13 @@ export interface GroupSpec {
   name: string;
   requirements: PlacementRequirements;
   resources: Resource[];
+}
+
+/** GroupSpec stores group specifications */
+export interface GroupSpecSDKType {
+  name: string;
+  requirements: PlacementRequirementsSDKType;
+  resources: ResourceSDKType[];
 }
 
 function createBaseGroupSpec(): GroupSpec {
@@ -94,6 +101,28 @@ export const GroupSpec = {
     message.requirements = object.requirements !== undefined && object.requirements !== null ? PlacementRequirements.fromPartial(object.requirements) : undefined;
     message.resources = object.resources?.map(e => Resource.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: GroupSpecSDKType): GroupSpec {
+    return {
+      name: isSet(object.name) ? object.name : "",
+      requirements: isSet(object.requirements) ? PlacementRequirements.fromSDK(object.requirements) : undefined,
+      resources: Array.isArray(object?.resources) ? object.resources.map((e: any) => Resource.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: GroupSpec): GroupSpecSDKType {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    message.requirements !== undefined && (obj.requirements = message.requirements ? PlacementRequirements.toSDK(message.requirements) : undefined);
+
+    if (message.resources) {
+      obj.resources = message.resources.map(e => e ? Resource.toSDK(e) : undefined);
+    } else {
+      obj.resources = [];
+    }
+
+    return obj;
   }
 
 };

@@ -1,4 +1,4 @@
-import { ExponentialCalculation, InflationDistribution } from "./inflation";
+import { ExponentialCalculation, ExponentialCalculationSDKType, InflationDistribution, InflationDistributionSDKType } from "./inflation";
 import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, DeepPartial } from "@osmonauts/helpers";
 export const protobufPackage = "evmos.inflation.v1";
@@ -21,6 +21,24 @@ export interface GenesisState {
   skippedEpochs: Long;
 }
 
+/** GenesisState defines the inflation module's genesis state. */
+export interface GenesisStateSDKType {
+  /** params defines all the paramaters of the module. */
+  params: ParamsSDKType;
+
+  /** amount of past periods, based on the epochs per period param */
+  period: Long;
+
+  /** inflation epoch identifier */
+  epoch_identifier: string;
+
+  /** number of epochs after which inflation is recalculated */
+  epochs_per_period: Long;
+
+  /** number of epochs that have passed while inflation is disabled */
+  skipped_epochs: Long;
+}
+
 /** Params holds parameters for the inflation module. */
 export interface Params {
   /** type of coin to mint */
@@ -34,6 +52,21 @@ export interface Params {
 
   /** parameter to enable inflation and halt increasing the skipped_epochs */
   enableInflation: boolean;
+}
+
+/** Params holds parameters for the inflation module. */
+export interface ParamsSDKType {
+  /** type of coin to mint */
+  mint_denom: string;
+
+  /** variables to calculate exponential inflation */
+  exponential_calculation: ExponentialCalculationSDKType;
+
+  /** inflation distribution of the minted denom */
+  inflation_distribution: InflationDistributionSDKType;
+
+  /** parameter to enable inflation and halt increasing the skipped_epochs */
+  enable_inflation: boolean;
 }
 
 function createBaseGenesisState(): GenesisState {
@@ -137,6 +170,26 @@ export const GenesisState = {
     message.epochsPerPeriod = object.epochsPerPeriod !== undefined && object.epochsPerPeriod !== null ? Long.fromValue(object.epochsPerPeriod) : Long.ZERO;
     message.skippedEpochs = object.skippedEpochs !== undefined && object.skippedEpochs !== null ? Long.fromValue(object.skippedEpochs) : Long.UZERO;
     return message;
+  },
+
+  fromSDK(object: GenesisStateSDKType): GenesisState {
+    return {
+      params: isSet(object.params) ? Params.fromSDK(object.params) : undefined,
+      period: isSet(object.period) ? object.period : Long.UZERO,
+      epochIdentifier: isSet(object.epoch_identifier) ? object.epoch_identifier : "",
+      epochsPerPeriod: isSet(object.epochs_per_period) ? object.epochs_per_period : Long.ZERO,
+      skippedEpochs: isSet(object.skipped_epochs) ? object.skipped_epochs : Long.UZERO
+    };
+  },
+
+  toSDK(message: GenesisState): GenesisStateSDKType {
+    const obj: any = {};
+    message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
+    message.period !== undefined && (obj.period = message.period);
+    message.epochIdentifier !== undefined && (obj.epoch_identifier = message.epochIdentifier);
+    message.epochsPerPeriod !== undefined && (obj.epochs_per_period = message.epochsPerPeriod);
+    message.skippedEpochs !== undefined && (obj.skipped_epochs = message.skippedEpochs);
+    return obj;
   }
 
 };
@@ -230,6 +283,24 @@ export const Params = {
     message.inflationDistribution = object.inflationDistribution !== undefined && object.inflationDistribution !== null ? InflationDistribution.fromPartial(object.inflationDistribution) : undefined;
     message.enableInflation = object.enableInflation ?? false;
     return message;
+  },
+
+  fromSDK(object: ParamsSDKType): Params {
+    return {
+      mintDenom: isSet(object.mint_denom) ? object.mint_denom : "",
+      exponentialCalculation: isSet(object.exponential_calculation) ? ExponentialCalculation.fromSDK(object.exponential_calculation) : undefined,
+      inflationDistribution: isSet(object.inflation_distribution) ? InflationDistribution.fromSDK(object.inflation_distribution) : undefined,
+      enableInflation: isSet(object.enable_inflation) ? object.enable_inflation : false
+    };
+  },
+
+  toSDK(message: Params): ParamsSDKType {
+    const obj: any = {};
+    message.mintDenom !== undefined && (obj.mint_denom = message.mintDenom);
+    message.exponentialCalculation !== undefined && (obj.exponential_calculation = message.exponentialCalculation ? ExponentialCalculation.toSDK(message.exponentialCalculation) : undefined);
+    message.inflationDistribution !== undefined && (obj.inflation_distribution = message.inflationDistribution ? InflationDistribution.toSDK(message.inflationDistribution) : undefined);
+    message.enableInflation !== undefined && (obj.enable_inflation = message.enableInflation);
+    return obj;
   }
 
 };

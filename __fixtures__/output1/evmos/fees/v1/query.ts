@@ -1,6 +1,6 @@
-import { PageRequest, PageResponse } from "../../../cosmos/base/query/v1beta1/pagination";
-import { DevFeeInfo } from "./fees";
-import { Params } from "./genesis";
+import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
+import { DevFeeInfo, DevFeeInfoSDKType } from "./fees";
+import { Params, ParamsSDKType } from "./genesis";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "@osmonauts/helpers";
 export const protobufPackage = "evmos.fees.v1";
@@ -15,6 +15,15 @@ export interface QueryDevFeeInfosRequest {
 }
 
 /**
+ * QueryDevFeeInfosRequest is the request type for the Query/DevFeeInfos RPC
+ * method.
+ */
+export interface QueryDevFeeInfosRequestSDKType {
+  /** pagination defines an optional pagination for the request. */
+  pagination?: PageRequestSDKType;
+}
+
+/**
  * QueryDevFeeInfosResponse is the response type for the Query/DevFeeInfos
  * RPC method.
  */
@@ -23,6 +32,17 @@ export interface QueryDevFeeInfosResponse {
 
   /** pagination defines the pagination in the response. */
   pagination?: PageResponse;
+}
+
+/**
+ * QueryDevFeeInfosResponse is the response type for the Query/DevFeeInfos
+ * RPC method.
+ */
+export interface QueryDevFeeInfosResponseSDKType {
+  fees: DevFeeInfoSDKType[];
+
+  /** pagination defines the pagination in the response. */
+  pagination?: PageResponseSDKType;
 }
 
 /**
@@ -35,6 +55,15 @@ export interface QueryDevFeeInfoRequest {
 }
 
 /**
+ * QueryDevFeeInfoRequest is the request type for the Query/DevFeeInfo RPC
+ * method.
+ */
+export interface QueryDevFeeInfoRequestSDKType {
+  /** contract identifier is the hex contract address of a contract */
+  contract_address: string;
+}
+
+/**
  * QueryDevFeeInfoResponse is the response type for the Query/DevFeeInfo RPC
  * method.
  */
@@ -42,8 +71,19 @@ export interface QueryDevFeeInfoResponse {
   fee: DevFeeInfo;
 }
 
+/**
+ * QueryDevFeeInfoResponse is the response type for the Query/DevFeeInfo RPC
+ * method.
+ */
+export interface QueryDevFeeInfoResponseSDKType {
+  fee: DevFeeInfoSDKType;
+}
+
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequest {}
+
+/** QueryParamsRequest is the request type for the Query/Params RPC method. */
+export interface QueryParamsRequestSDKType {}
 
 /**
  * QueryParamsResponse is the response type for the Query/Params RPC
@@ -51,6 +91,14 @@ export interface QueryParamsRequest {}
  */
 export interface QueryParamsResponse {
   params: Params;
+}
+
+/**
+ * QueryParamsResponse is the response type for the Query/Params RPC
+ * method.
+ */
+export interface QueryParamsResponseSDKType {
+  params: ParamsSDKType;
 }
 
 /**
@@ -66,6 +114,18 @@ export interface QueryDevFeeInfosPerDeployerRequest {
 }
 
 /**
+ * QueryDevFeeInfosPerDeployerRequest is the request type for the
+ * Query/DevFeeInfosPerDeployer RPC method.
+ */
+export interface QueryDevFeeInfosPerDeployerRequestSDKType {
+  /** deployer bech32 address */
+  deployer_address: string;
+
+  /** pagination defines an optional pagination for the request. */
+  pagination?: PageRequestSDKType;
+}
+
+/**
  * QueryDevFeeInfosPerDeployerResponse is the response type for the
  * Query/DevFeeInfosPerDeployer RPC method.
  */
@@ -74,6 +134,17 @@ export interface QueryDevFeeInfosPerDeployerResponse {
 
   /** pagination defines the pagination in the response. */
   pagination?: PageResponse;
+}
+
+/**
+ * QueryDevFeeInfosPerDeployerResponse is the response type for the
+ * Query/DevFeeInfosPerDeployer RPC method.
+ */
+export interface QueryDevFeeInfosPerDeployerResponseSDKType {
+  fees: DevFeeInfoSDKType[];
+
+  /** pagination defines the pagination in the response. */
+  pagination?: PageResponseSDKType;
 }
 
 function createBaseQueryDevFeeInfosRequest(): QueryDevFeeInfosRequest {
@@ -129,6 +200,18 @@ export const QueryDevFeeInfosRequest = {
     const message = createBaseQueryDevFeeInfosRequest();
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryDevFeeInfosRequestSDKType): QueryDevFeeInfosRequest {
+    return {
+      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  toSDK(message: QueryDevFeeInfosRequest): QueryDevFeeInfosRequestSDKType {
+    const obj: any = {};
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
+    return obj;
   }
 
 };
@@ -204,6 +287,26 @@ export const QueryDevFeeInfosResponse = {
     message.fees = object.fees?.map(e => DevFeeInfo.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryDevFeeInfosResponseSDKType): QueryDevFeeInfosResponse {
+    return {
+      fees: Array.isArray(object?.fees) ? object.fees.map((e: any) => DevFeeInfo.fromSDK(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  toSDK(message: QueryDevFeeInfosResponse): QueryDevFeeInfosResponseSDKType {
+    const obj: any = {};
+
+    if (message.fees) {
+      obj.fees = message.fees.map(e => e ? DevFeeInfo.toSDK(e) : undefined);
+    } else {
+      obj.fees = [];
+    }
+
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
+    return obj;
   }
 
 };
@@ -261,6 +364,18 @@ export const QueryDevFeeInfoRequest = {
     const message = createBaseQueryDevFeeInfoRequest();
     message.contractAddress = object.contractAddress ?? "";
     return message;
+  },
+
+  fromSDK(object: QueryDevFeeInfoRequestSDKType): QueryDevFeeInfoRequest {
+    return {
+      contractAddress: isSet(object.contract_address) ? object.contract_address : ""
+    };
+  },
+
+  toSDK(message: QueryDevFeeInfoRequest): QueryDevFeeInfoRequestSDKType {
+    const obj: any = {};
+    message.contractAddress !== undefined && (obj.contract_address = message.contractAddress);
+    return obj;
   }
 
 };
@@ -318,6 +433,18 @@ export const QueryDevFeeInfoResponse = {
     const message = createBaseQueryDevFeeInfoResponse();
     message.fee = object.fee !== undefined && object.fee !== null ? DevFeeInfo.fromPartial(object.fee) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryDevFeeInfoResponseSDKType): QueryDevFeeInfoResponse {
+    return {
+      fee: isSet(object.fee) ? DevFeeInfo.fromSDK(object.fee) : undefined
+    };
+  },
+
+  toSDK(message: QueryDevFeeInfoResponse): QueryDevFeeInfoResponseSDKType {
+    const obj: any = {};
+    message.fee !== undefined && (obj.fee = message.fee ? DevFeeInfo.toSDK(message.fee) : undefined);
+    return obj;
   }
 
 };
@@ -361,6 +488,15 @@ export const QueryParamsRequest = {
   fromPartial(_: DeepPartial<QueryParamsRequest>): QueryParamsRequest {
     const message = createBaseQueryParamsRequest();
     return message;
+  },
+
+  fromSDK(_: QueryParamsRequestSDKType): QueryParamsRequest {
+    return {};
+  },
+
+  toSDK(_: QueryParamsRequest): QueryParamsRequestSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -418,6 +554,18 @@ export const QueryParamsResponse = {
     const message = createBaseQueryParamsResponse();
     message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryParamsResponseSDKType): QueryParamsResponse {
+    return {
+      params: isSet(object.params) ? Params.fromSDK(object.params) : undefined
+    };
+  },
+
+  toSDK(message: QueryParamsResponse): QueryParamsResponseSDKType {
+    const obj: any = {};
+    message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
+    return obj;
   }
 
 };
@@ -487,6 +635,20 @@ export const QueryDevFeeInfosPerDeployerRequest = {
     message.deployerAddress = object.deployerAddress ?? "";
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryDevFeeInfosPerDeployerRequestSDKType): QueryDevFeeInfosPerDeployerRequest {
+    return {
+      deployerAddress: isSet(object.deployer_address) ? object.deployer_address : "",
+      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  toSDK(message: QueryDevFeeInfosPerDeployerRequest): QueryDevFeeInfosPerDeployerRequestSDKType {
+    const obj: any = {};
+    message.deployerAddress !== undefined && (obj.deployer_address = message.deployerAddress);
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
+    return obj;
   }
 
 };
@@ -562,6 +724,26 @@ export const QueryDevFeeInfosPerDeployerResponse = {
     message.fees = object.fees?.map(e => DevFeeInfo.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryDevFeeInfosPerDeployerResponseSDKType): QueryDevFeeInfosPerDeployerResponse {
+    return {
+      fees: Array.isArray(object?.fees) ? object.fees.map((e: any) => DevFeeInfo.fromSDK(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  toSDK(message: QueryDevFeeInfosPerDeployerResponse): QueryDevFeeInfosPerDeployerResponseSDKType {
+    const obj: any = {};
+
+    if (message.fees) {
+      obj.fees = message.fees.map(e => e ? DevFeeInfo.toSDK(e) : undefined);
+    } else {
+      obj.fees = [];
+    }
+
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
+    return obj;
   }
 
 };

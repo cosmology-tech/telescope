@@ -63,7 +63,73 @@ export interface Quota {
    */
   metricRules: MetricRule[];
 }
+
+/**
+ * Quota configuration helps to achieve fairness and budgeting in service
+ * usage.
+ * 
+ * The metric based quota configuration works this way:
+ * - The service configuration defines a set of metrics.
+ * - For API calls, the quota.metric_rules maps methods to metrics with
+ * corresponding costs.
+ * - The quota.limits defines limits on the metrics, which will be used for
+ * quota checks at runtime.
+ * 
+ * An example quota configuration in yaml format:
+ * 
+ * quota:
+ * limits:
+ * 
+ * - name: apiWriteQpsPerProject
+ * metric: library.googleapis.com/write_calls
+ * unit: "1/min/{project}"  # rate limit for consumer projects
+ * values:
+ * STANDARD: 10000
+ * 
+ * 
+ * # The metric rules bind all methods to the read_calls metric,
+ * # except for the UpdateBook and DeleteBook methods. These two methods
+ * # are mapped to the write_calls metric, with the UpdateBook method
+ * # consuming at twice rate as the DeleteBook method.
+ * metric_rules:
+ * - selector: "*"
+ * metric_costs:
+ * library.googleapis.com/read_calls: 1
+ * - selector: google.example.library.v1.LibraryService.UpdateBook
+ * metric_costs:
+ * library.googleapis.com/write_calls: 2
+ * - selector: google.example.library.v1.LibraryService.DeleteBook
+ * metric_costs:
+ * library.googleapis.com/write_calls: 1
+ * 
+ * Corresponding Metric definition:
+ * 
+ * metrics:
+ * - name: library.googleapis.com/read_calls
+ * display_name: Read requests
+ * metric_kind: DELTA
+ * value_type: INT64
+ * 
+ * - name: library.googleapis.com/write_calls
+ * display_name: Write requests
+ * metric_kind: DELTA
+ * value_type: INT64
+ */
+export interface QuotaSDKType {
+  /** List of `QuotaLimit` definitions for the service. */
+  limits: QuotaLimitSDKType[];
+
+  /**
+   * List of `MetricRule` definitions, each one mapping a selected method to one
+   * or more metrics.
+   */
+  metric_rules: MetricRuleSDKType[];
+}
 export interface MetricRule_MetricCostsEntry {
+  key: string;
+  value: Long;
+}
+export interface MetricRule_MetricCostsEntrySDKType {
   key: string;
   value: Long;
 }
@@ -92,7 +158,36 @@ export interface MetricRule {
     [key: string]: Long;
   };
 }
+
+/**
+ * Bind API methods to metrics. Binding a method to a metric causes that
+ * metric's configured quota behaviors to apply to the method call.
+ */
+export interface MetricRuleSDKType {
+  /**
+   * Selects the methods to which this rule applies.
+   * 
+   * Refer to [selector][google.api.DocumentationRule.selector] for syntax details.
+   */
+  selector: string;
+
+  /**
+   * Metrics to update when the selected methods are called, and the associated
+   * cost applied to each metric.
+   * 
+   * The key of the map is the metric name, and the values are the amount
+   * increased for the metric against which the quota limits are defined.
+   * The value must not be negative.
+   */
+  metric_costs: {
+    [key: string]: Long;
+  };
+}
 export interface QuotaLimit_ValuesEntry {
+  key: string;
+  value: Long;
+}
+export interface QuotaLimit_ValuesEntrySDKType {
   key: string;
   value: Long;
 }
@@ -204,6 +299,113 @@ export interface QuotaLimit {
   displayName: string;
 }
 
+/**
+ * `QuotaLimit` defines a specific limit that applies over a specified duration
+ * for a limit type. There can be at most one limit for a duration and limit
+ * type combination defined within a `QuotaGroup`.
+ */
+export interface QuotaLimitSDKType {
+  /**
+   * Name of the quota limit.
+   * 
+   * The name must be provided, and it must be unique within the service. The
+   * name can only include alphanumeric characters as well as '-'.
+   * 
+   * The maximum length of the limit name is 64 characters.
+   */
+  name: string;
+
+  /**
+   * Optional. User-visible, extended description for this quota limit.
+   * Should be used only when more context is needed to understand this limit
+   * than provided by the limit's display name (see: `display_name`).
+   */
+  description: string;
+
+  /**
+   * Default number of tokens that can be consumed during the specified
+   * duration. This is the number of tokens assigned when a client
+   * application developer activates the service for his/her project.
+   * 
+   * Specifying a value of 0 will block all requests. This can be used if you
+   * are provisioning quota to selected consumers and blocking others.
+   * Similarly, a value of -1 will indicate an unlimited quota. No other
+   * negative values are allowed.
+   * 
+   * Used by group-based quotas only.
+   */
+  default_limit: Long;
+
+  /**
+   * Maximum number of tokens that can be consumed during the specified
+   * duration. Client application developers can override the default limit up
+   * to this maximum. If specified, this value cannot be set to a value less
+   * than the default limit. If not specified, it is set to the default limit.
+   * 
+   * To allow clients to apply overrides with no upper bound, set this to -1,
+   * indicating unlimited maximum quota.
+   * 
+   * Used by group-based quotas only.
+   */
+  max_limit: Long;
+
+  /**
+   * Free tier value displayed in the Developers Console for this limit.
+   * The free tier is the number of tokens that will be subtracted from the
+   * billed amount when billing is enabled.
+   * This field can only be set on a limit with duration "1d", in a billable
+   * group; it is invalid on any other limit. If this field is not set, it
+   * defaults to 0, indicating that there is no free tier for this service.
+   * 
+   * Used by group-based quotas only.
+   */
+  free_tier: Long;
+
+  /**
+   * Duration of this limit in textual notation. Must be "100s" or "1d".
+   * 
+   * Used by group-based quotas only.
+   */
+  duration: string;
+
+  /**
+   * The name of the metric this quota limit applies to. The quota limits with
+   * the same metric will be checked together during runtime. The metric must be
+   * defined within the service config.
+   */
+  metric: string;
+
+  /**
+   * Specify the unit of the quota limit. It uses the same syntax as
+   * [Metric.unit][]. The supported unit kinds are determined by the quota
+   * backend system.
+   * 
+   * Here are some examples:
+   * * "1/min/{project}" for quota per minute per project.
+   * 
+   * Note: the order of unit components is insignificant.
+   * The "1" at the beginning is required to follow the metric unit syntax.
+   */
+  unit: string;
+
+  /**
+   * Tiered limit values. You must specify this as a key:value pair, with an
+   * integer value that is the maximum number of requests allowed for the
+   * specified unit. Currently only STANDARD is supported.
+   */
+  values: {
+    [key: string]: Long;
+  };
+
+  /**
+   * User-visible display name for this limit.
+   * Optional. If not set, the UI will provide a default display name based on
+   * the quota configuration. This field can be used to override the default
+   * display name generated from the configuration.
+   */
+  display_name: string;
+}
+
 function createBaseQuota(): Quota {
   return {
     limits: [],
@@ -280,6 +482,31 @@ export const Quota = {
     message.limits = object.limits?.map(e => QuotaLimit.fromPartial(e)) || [];
     message.metricRules = object.metricRules?.map(e => MetricRule.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: QuotaSDKType): Quota {
+    return {
+      limits: Array.isArray(object?.limits) ? object.limits.map((e: any) => QuotaLimit.fromSDK(e)) : [],
+      metricRules: Array.isArray(object?.metric_rules) ? object.metric_rules.map((e: any) => MetricRule.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: Quota): QuotaSDKType {
+    const obj: any = {};
+
+    if (message.limits) {
+      obj.limits = message.limits.map(e => e ? QuotaLimit.toSDK(e) : undefined);
+    } else {
+      obj.limits = [];
+    }
+
+    if (message.metricRules) {
+      obj.metric_rules = message.metricRules.map(e => e ? MetricRule.toSDK(e) : undefined);
+    } else {
+      obj.metric_rules = [];
+    }
+
+    return obj;
   }
 
 };
@@ -349,6 +576,20 @@ export const MetricRule_MetricCostsEntry = {
     message.key = object.key ?? "";
     message.value = object.value !== undefined && object.value !== null ? Long.fromValue(object.value) : Long.ZERO;
     return message;
+  },
+
+  fromSDK(object: MetricRule_MetricCostsEntrySDKType): MetricRule_MetricCostsEntry {
+    return {
+      key: isSet(object.key) ? object.key : "",
+      value: isSet(object.value) ? object.value : Long.ZERO
+    };
+  },
+
+  toSDK(message: MetricRule_MetricCostsEntry): MetricRule_MetricCostsEntrySDKType {
+    const obj: any = {};
+    message.key !== undefined && (obj.key = message.key);
+    message.value !== undefined && (obj.value = message.value);
+    return obj;
   }
 
 };
@@ -445,6 +686,32 @@ export const MetricRule = {
       return acc;
     }, {});
     return message;
+  },
+
+  fromSDK(object: MetricRuleSDKType): MetricRule {
+    return {
+      selector: isSet(object.selector) ? object.selector : "",
+      metricCosts: isObject(object.metric_costs) ? Object.entries(object.metric_costs).reduce<{
+        [key: string]: Long;
+      }>((acc, [key, value]) => {
+        acc[key] = Long.fromValue((value as Long | string));
+        return acc;
+      }, {}) : {}
+    };
+  },
+
+  toSDK(message: MetricRule): MetricRuleSDKType {
+    const obj: any = {};
+    message.selector !== undefined && (obj.selector = message.selector);
+    obj.metric_costs = {};
+
+    if (message.metricCosts) {
+      Object.entries(message.metricCosts).forEach(([k, v]) => {
+        obj.metric_costs[k] = v.toString();
+      });
+    }
+
+    return obj;
   }
 
 };
@@ -514,6 +781,20 @@ export const QuotaLimit_ValuesEntry = {
     message.key = object.key ?? "";
     message.value = object.value !== undefined && object.value !== null ? Long.fromValue(object.value) : Long.ZERO;
     return message;
+  },
+
+  fromSDK(object: QuotaLimit_ValuesEntrySDKType): QuotaLimit_ValuesEntry {
+    return {
+      key: isSet(object.key) ? object.key : "",
+      value: isSet(object.value) ? object.value : Long.ZERO
+    };
+  },
+
+  toSDK(message: QuotaLimit_ValuesEntry): QuotaLimit_ValuesEntrySDKType {
+    const obj: any = {};
+    message.key !== undefined && (obj.key = message.key);
+    message.value !== undefined && (obj.value = message.value);
+    return obj;
   }
 
 };
@@ -707,6 +988,48 @@ export const QuotaLimit = {
     }, {});
     message.displayName = object.displayName ?? "";
     return message;
+  },
+
+  fromSDK(object: QuotaLimitSDKType): QuotaLimit {
+    return {
+      name: isSet(object.name) ? object.name : "",
+      description: isSet(object.description) ? object.description : "",
+      defaultLimit: isSet(object.default_limit) ? object.default_limit : Long.ZERO,
+      maxLimit: isSet(object.max_limit) ? object.max_limit : Long.ZERO,
+      freeTier: isSet(object.free_tier) ? object.free_tier : Long.ZERO,
+      duration: isSet(object.duration) ? object.duration : "",
+      metric: isSet(object.metric) ? object.metric : "",
+      unit: isSet(object.unit) ? object.unit : "",
+      values: isObject(object.values) ? Object.entries(object.values).reduce<{
+        [key: string]: Long;
+      }>((acc, [key, value]) => {
+        acc[key] = Long.fromValue((value as Long | string));
+        return acc;
+      }, {}) : {},
+      displayName: isSet(object.display_name) ? object.display_name : ""
+    };
+  },
+
+  toSDK(message: QuotaLimit): QuotaLimitSDKType {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    message.description !== undefined && (obj.description = message.description);
+    message.defaultLimit !== undefined && (obj.default_limit = message.defaultLimit);
+    message.maxLimit !== undefined && (obj.max_limit = message.maxLimit);
+    message.freeTier !== undefined && (obj.free_tier = message.freeTier);
+    message.duration !== undefined && (obj.duration = message.duration);
+    message.metric !== undefined && (obj.metric = message.metric);
+    message.unit !== undefined && (obj.unit = message.unit);
+    obj.values = {};
+
+    if (message.values) {
+      Object.entries(message.values).forEach(([k, v]) => {
+        obj.values[k] = v.toString();
+      });
+    }
+
+    message.displayName !== undefined && (obj.display_name = message.displayName);
+    return obj;
   }
 
 };

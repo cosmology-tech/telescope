@@ -1,6 +1,6 @@
-import { Action, ClaimRecord, actionFromJSON, actionToJSON } from "./claim";
-import { Coin } from "../../../cosmos/base/v1beta1/coin";
-import { Params } from "./params";
+import { Action, ActionSDKType, ClaimRecord, ClaimRecordSDKType, actionFromJSON, actionFromJSONSDKType, actionToJSON, actionToJSONSDKType } from "./claim";
+import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
+import { Params, ParamsSDKType } from "./params";
 import * as _m0 from "protobufjs/minimal";
 import { DeepPartial, isSet } from "@osmonauts/helpers";
 export const protobufPackage = "osmosis.claim.v1beta1";
@@ -8,38 +8,75 @@ export const protobufPackage = "osmosis.claim.v1beta1";
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryModuleAccountBalanceRequest {}
 
+/** QueryParamsRequest is the request type for the Query/Params RPC method. */
+export interface QueryModuleAccountBalanceRequestSDKType {}
+
 /** QueryParamsResponse is the response type for the Query/Params RPC method. */
 export interface QueryModuleAccountBalanceResponse {
   /** params defines the parameters of the module. */
   moduleAccountBalance: Coin[];
 }
 
+/** QueryParamsResponse is the response type for the Query/Params RPC method. */
+export interface QueryModuleAccountBalanceResponseSDKType {
+  /** params defines the parameters of the module. */
+  moduleAccountBalance: CoinSDKType[];
+}
+
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequest {}
+
+/** QueryParamsRequest is the request type for the Query/Params RPC method. */
+export interface QueryParamsRequestSDKType {}
 
 /** QueryParamsResponse is the response type for the Query/Params RPC method. */
 export interface QueryParamsResponse {
   /** params defines the parameters of the module. */
   params: Params;
 }
+
+/** QueryParamsResponse is the response type for the Query/Params RPC method. */
+export interface QueryParamsResponseSDKType {
+  /** params defines the parameters of the module. */
+  params: ParamsSDKType;
+}
 export interface QueryClaimRecordRequest {
+  address: string;
+}
+export interface QueryClaimRecordRequestSDKType {
   address: string;
 }
 export interface QueryClaimRecordResponse {
   claimRecord: ClaimRecord;
 }
+export interface QueryClaimRecordResponseSDKType {
+  claim_record: ClaimRecordSDKType;
+}
 export interface QueryClaimableForActionRequest {
   address: string;
   action: Action;
 }
+export interface QueryClaimableForActionRequestSDKType {
+  address: string;
+  action: ActionSDKType;
+}
 export interface QueryClaimableForActionResponse {
   coins: Coin[];
+}
+export interface QueryClaimableForActionResponseSDKType {
+  coins: CoinSDKType[];
 }
 export interface QueryTotalClaimableRequest {
   address: string;
 }
+export interface QueryTotalClaimableRequestSDKType {
+  address: string;
+}
 export interface QueryTotalClaimableResponse {
   coins: Coin[];
+}
+export interface QueryTotalClaimableResponseSDKType {
+  coins: CoinSDKType[];
 }
 
 function createBaseQueryModuleAccountBalanceRequest(): QueryModuleAccountBalanceRequest {
@@ -81,6 +118,15 @@ export const QueryModuleAccountBalanceRequest = {
   fromPartial(_: DeepPartial<QueryModuleAccountBalanceRequest>): QueryModuleAccountBalanceRequest {
     const message = createBaseQueryModuleAccountBalanceRequest();
     return message;
+  },
+
+  fromSDK(_: QueryModuleAccountBalanceRequestSDKType): QueryModuleAccountBalanceRequest {
+    return {};
+  },
+
+  toSDK(_: QueryModuleAccountBalanceRequest): QueryModuleAccountBalanceRequestSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -144,6 +190,24 @@ export const QueryModuleAccountBalanceResponse = {
     const message = createBaseQueryModuleAccountBalanceResponse();
     message.moduleAccountBalance = object.moduleAccountBalance?.map(e => Coin.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: QueryModuleAccountBalanceResponseSDKType): QueryModuleAccountBalanceResponse {
+    return {
+      moduleAccountBalance: Array.isArray(object?.moduleAccountBalance) ? object.moduleAccountBalance.map((e: any) => Coin.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: QueryModuleAccountBalanceResponse): QueryModuleAccountBalanceResponseSDKType {
+    const obj: any = {};
+
+    if (message.moduleAccountBalance) {
+      obj.moduleAccountBalance = message.moduleAccountBalance.map(e => e ? Coin.toSDK(e) : undefined);
+    } else {
+      obj.moduleAccountBalance = [];
+    }
+
+    return obj;
   }
 
 };
@@ -187,6 +251,15 @@ export const QueryParamsRequest = {
   fromPartial(_: DeepPartial<QueryParamsRequest>): QueryParamsRequest {
     const message = createBaseQueryParamsRequest();
     return message;
+  },
+
+  fromSDK(_: QueryParamsRequestSDKType): QueryParamsRequest {
+    return {};
+  },
+
+  toSDK(_: QueryParamsRequest): QueryParamsRequestSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -244,6 +317,18 @@ export const QueryParamsResponse = {
     const message = createBaseQueryParamsResponse();
     message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryParamsResponseSDKType): QueryParamsResponse {
+    return {
+      params: isSet(object.params) ? Params.fromSDK(object.params) : undefined
+    };
+  },
+
+  toSDK(message: QueryParamsResponse): QueryParamsResponseSDKType {
+    const obj: any = {};
+    message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
+    return obj;
   }
 
 };
@@ -301,6 +386,18 @@ export const QueryClaimRecordRequest = {
     const message = createBaseQueryClaimRecordRequest();
     message.address = object.address ?? "";
     return message;
+  },
+
+  fromSDK(object: QueryClaimRecordRequestSDKType): QueryClaimRecordRequest {
+    return {
+      address: isSet(object.address) ? object.address : ""
+    };
+  },
+
+  toSDK(message: QueryClaimRecordRequest): QueryClaimRecordRequestSDKType {
+    const obj: any = {};
+    message.address !== undefined && (obj.address = message.address);
+    return obj;
   }
 
 };
@@ -358,6 +455,18 @@ export const QueryClaimRecordResponse = {
     const message = createBaseQueryClaimRecordResponse();
     message.claimRecord = object.claimRecord !== undefined && object.claimRecord !== null ? ClaimRecord.fromPartial(object.claimRecord) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryClaimRecordResponseSDKType): QueryClaimRecordResponse {
+    return {
+      claimRecord: isSet(object.claim_record) ? ClaimRecord.fromSDK(object.claim_record) : undefined
+    };
+  },
+
+  toSDK(message: QueryClaimRecordResponse): QueryClaimRecordResponseSDKType {
+    const obj: any = {};
+    message.claimRecord !== undefined && (obj.claim_record = message.claimRecord ? ClaimRecord.toSDK(message.claimRecord) : undefined);
+    return obj;
   }
 
 };
@@ -427,6 +536,20 @@ export const QueryClaimableForActionRequest = {
     message.address = object.address ?? "";
     message.action = object.action ?? 0;
     return message;
+  },
+
+  fromSDK(object: QueryClaimableForActionRequestSDKType): QueryClaimableForActionRequest {
+    return {
+      address: isSet(object.address) ? object.address : "",
+      action: isSet(object.action) ? actionFromJSON(object.action) : 0
+    };
+  },
+
+  toSDK(message: QueryClaimableForActionRequest): QueryClaimableForActionRequestSDKType {
+    const obj: any = {};
+    message.address !== undefined && (obj.address = message.address);
+    message.action !== undefined && (obj.action = actionToJSON(message.action));
+    return obj;
   }
 
 };
@@ -490,6 +613,24 @@ export const QueryClaimableForActionResponse = {
     const message = createBaseQueryClaimableForActionResponse();
     message.coins = object.coins?.map(e => Coin.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: QueryClaimableForActionResponseSDKType): QueryClaimableForActionResponse {
+    return {
+      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: QueryClaimableForActionResponse): QueryClaimableForActionResponseSDKType {
+    const obj: any = {};
+
+    if (message.coins) {
+      obj.coins = message.coins.map(e => e ? Coin.toSDK(e) : undefined);
+    } else {
+      obj.coins = [];
+    }
+
+    return obj;
   }
 
 };
@@ -547,6 +688,18 @@ export const QueryTotalClaimableRequest = {
     const message = createBaseQueryTotalClaimableRequest();
     message.address = object.address ?? "";
     return message;
+  },
+
+  fromSDK(object: QueryTotalClaimableRequestSDKType): QueryTotalClaimableRequest {
+    return {
+      address: isSet(object.address) ? object.address : ""
+    };
+  },
+
+  toSDK(message: QueryTotalClaimableRequest): QueryTotalClaimableRequestSDKType {
+    const obj: any = {};
+    message.address !== undefined && (obj.address = message.address);
+    return obj;
   }
 
 };
@@ -610,6 +763,24 @@ export const QueryTotalClaimableResponse = {
     const message = createBaseQueryTotalClaimableResponse();
     message.coins = object.coins?.map(e => Coin.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: QueryTotalClaimableResponseSDKType): QueryTotalClaimableResponse {
+    return {
+      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: QueryTotalClaimableResponse): QueryTotalClaimableResponseSDKType {
+    const obj: any = {};
+
+    if (message.coins) {
+      obj.coins = message.coins.map(e => e ? Coin.toSDK(e) : undefined);
+    } else {
+      obj.coins = [];
+    }
+
+    return obj;
   }
 
 };

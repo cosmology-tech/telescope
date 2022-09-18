@@ -1,7 +1,7 @@
-import { Config } from "./config";
+import { Config, ConfigSDKType } from "./config";
 import { Rpc } from "@osmonauts/helpers";
 import * as _m0 from "protobufjs/minimal";
-import { QueryConfigRequest, QueryConfigResponse } from "./query";
+import { QueryConfigRequest, QueryConfigRequestSDKType, QueryConfigResponse, QueryConfigResponseSDKType } from "./query";
 
 /** Query defines the RPC service */
 export interface Query {

@@ -1,5 +1,5 @@
-import { OrderID } from "./order";
-import { DecCoin, Coin } from "../../../cosmos/base/v1beta1/coin";
+import { OrderID, OrderIDSDKType } from "./order";
+import { DecCoin, DecCoinSDKType, Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, Exact, Long } from "@osmonauts/helpers";
 export const protobufPackage = "akash.market.v1beta2";
@@ -80,22 +80,53 @@ export interface MsgCreateBid {
   deposit: Coin;
 }
 
+/** MsgCreateBid defines an SDK message for creating Bid */
+export interface MsgCreateBidSDKType {
+  order: OrderIDSDKType;
+  provider: string;
+  price: DecCoinSDKType;
+  deposit: CoinSDKType;
+}
+
 /** MsgCreateBidResponse defines the Msg/CreateBid response type. */
 export interface MsgCreateBidResponse {}
+
+/** MsgCreateBidResponse defines the Msg/CreateBid response type. */
+export interface MsgCreateBidResponseSDKType {}
 
 /** MsgCloseBid defines an SDK message for closing bid */
 export interface MsgCloseBid {
   bidId: BidID;
 }
 
+/** MsgCloseBid defines an SDK message for closing bid */
+export interface MsgCloseBidSDKType {
+  bid_id: BidIDSDKType;
+}
+
 /** MsgCloseBidResponse defines the Msg/CloseBid response type. */
 export interface MsgCloseBidResponse {}
+
+/** MsgCloseBidResponse defines the Msg/CloseBid response type. */
+export interface MsgCloseBidResponseSDKType {}
 
 /**
  * BidID stores owner and all other seq numbers
  * A successful bid becomes a Lease(ID).
  */
 export interface BidID {
+  owner: string;
+  dseq: Long;
+  gseq: number;
+  oseq: number;
+  provider: string;
+}
+
+/**
+ * BidID stores owner and all other seq numbers
+ * A successful bid becomes a Lease(ID).
+ */
+export interface BidIDSDKType {
   owner: string;
   dseq: Long;
   gseq: number;
@@ -111,8 +142,26 @@ export interface Bid {
   createdAt: Long;
 }
 
+/** Bid stores BidID, state of bid and price */
+export interface BidSDKType {
+  bid_id: BidIDSDKType;
+  state: Bid_StateSDKType;
+  price: DecCoinSDKType;
+  created_at: Long;
+}
+
 /** BidFilters defines flags for bid list filter */
 export interface BidFilters {
+  owner: string;
+  dseq: Long;
+  gseq: number;
+  oseq: number;
+  provider: string;
+  state: string;
+}
+
+/** BidFilters defines flags for bid list filter */
+export interface BidFiltersSDKType {
   owner: string;
   dseq: Long;
   gseq: number;
@@ -210,6 +259,24 @@ export const MsgCreateBid = {
     message.price = object.price !== undefined && object.price !== null ? DecCoin.fromPartial(object.price) : undefined;
     message.deposit = object.deposit !== undefined && object.deposit !== null ? Coin.fromPartial(object.deposit) : undefined;
     return message;
+  },
+
+  fromSDK(object: MsgCreateBidSDKType): MsgCreateBid {
+    return {
+      order: isSet(object.order) ? OrderID.fromSDK(object.order) : undefined,
+      provider: isSet(object.provider) ? object.provider : "",
+      price: isSet(object.price) ? DecCoin.fromSDK(object.price) : undefined,
+      deposit: isSet(object.deposit) ? Coin.fromSDK(object.deposit) : undefined
+    };
+  },
+
+  toSDK(message: MsgCreateBid): MsgCreateBidSDKType {
+    const obj: any = {};
+    message.order !== undefined && (obj.order = message.order ? OrderID.toSDK(message.order) : undefined);
+    message.provider !== undefined && (obj.provider = message.provider);
+    message.price !== undefined && (obj.price = message.price ? DecCoin.toSDK(message.price) : undefined);
+    message.deposit !== undefined && (obj.deposit = message.deposit ? Coin.toSDK(message.deposit) : undefined);
+    return obj;
   }
 
 };
@@ -253,6 +320,15 @@ export const MsgCreateBidResponse = {
   fromPartial<I extends Exact<DeepPartial<MsgCreateBidResponse>, I>>(_: I): MsgCreateBidResponse {
     const message = createBaseMsgCreateBidResponse();
     return message;
+  },
+
+  fromSDK(_: MsgCreateBidResponseSDKType): MsgCreateBidResponse {
+    return {};
+  },
+
+  toSDK(_: MsgCreateBidResponse): MsgCreateBidResponseSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -310,6 +386,18 @@ export const MsgCloseBid = {
     const message = createBaseMsgCloseBid();
     message.bidId = object.bidId !== undefined && object.bidId !== null ? BidID.fromPartial(object.bidId) : undefined;
     return message;
+  },
+
+  fromSDK(object: MsgCloseBidSDKType): MsgCloseBid {
+    return {
+      bidId: isSet(object.bid_id) ? BidID.fromSDK(object.bid_id) : undefined
+    };
+  },
+
+  toSDK(message: MsgCloseBid): MsgCloseBidSDKType {
+    const obj: any = {};
+    message.bidId !== undefined && (obj.bid_id = message.bidId ? BidID.toSDK(message.bidId) : undefined);
+    return obj;
   }
 
 };
@@ -353,6 +441,15 @@ export const MsgCloseBidResponse = {
   fromPartial<I extends Exact<DeepPartial<MsgCloseBidResponse>, I>>(_: I): MsgCloseBidResponse {
     const message = createBaseMsgCloseBidResponse();
     return message;
+  },
+
+  fromSDK(_: MsgCloseBidResponseSDKType): MsgCloseBidResponse {
+    return {};
+  },
+
+  toSDK(_: MsgCloseBidResponse): MsgCloseBidResponseSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -458,6 +555,26 @@ export const BidID = {
     message.oseq = object.oseq ?? 0;
     message.provider = object.provider ?? "";
     return message;
+  },
+
+  fromSDK(object: BidIDSDKType): BidID {
+    return {
+      owner: isSet(object.owner) ? object.owner : "",
+      dseq: isSet(object.dseq) ? object.dseq : Long.UZERO,
+      gseq: isSet(object.gseq) ? object.gseq : 0,
+      oseq: isSet(object.oseq) ? object.oseq : 0,
+      provider: isSet(object.provider) ? object.provider : ""
+    };
+  },
+
+  toSDK(message: BidID): BidIDSDKType {
+    const obj: any = {};
+    message.owner !== undefined && (obj.owner = message.owner);
+    message.dseq !== undefined && (obj.dseq = message.dseq);
+    message.gseq !== undefined && (obj.gseq = message.gseq);
+    message.oseq !== undefined && (obj.oseq = message.oseq);
+    message.provider !== undefined && (obj.provider = message.provider);
+    return obj;
   }
 
 };
@@ -551,6 +668,24 @@ export const Bid = {
     message.price = object.price !== undefined && object.price !== null ? DecCoin.fromPartial(object.price) : undefined;
     message.createdAt = object.createdAt !== undefined && object.createdAt !== null ? Long.fromValue(object.createdAt) : Long.ZERO;
     return message;
+  },
+
+  fromSDK(object: BidSDKType): Bid {
+    return {
+      bidId: isSet(object.bid_id) ? BidID.fromSDK(object.bid_id) : undefined,
+      state: isSet(object.state) ? bid_StateFromJSON(object.state) : 0,
+      price: isSet(object.price) ? DecCoin.fromSDK(object.price) : undefined,
+      createdAt: isSet(object.created_at) ? object.created_at : Long.ZERO
+    };
+  },
+
+  toSDK(message: Bid): BidSDKType {
+    const obj: any = {};
+    message.bidId !== undefined && (obj.bid_id = message.bidId ? BidID.toSDK(message.bidId) : undefined);
+    message.state !== undefined && (obj.state = bid_StateToJSON(message.state));
+    message.price !== undefined && (obj.price = message.price ? DecCoin.toSDK(message.price) : undefined);
+    message.createdAt !== undefined && (obj.created_at = message.createdAt);
+    return obj;
   }
 
 };
@@ -668,6 +803,28 @@ export const BidFilters = {
     message.provider = object.provider ?? "";
     message.state = object.state ?? "";
     return message;
+  },
+
+  fromSDK(object: BidFiltersSDKType): BidFilters {
+    return {
+      owner: isSet(object.owner) ? object.owner : "",
+      dseq: isSet(object.dseq) ? object.dseq : Long.UZERO,
+      gseq: isSet(object.gseq) ? object.gseq : 0,
+      oseq: isSet(object.oseq) ? object.oseq : 0,
+      provider: isSet(object.provider) ? object.provider : "",
+      state: isSet(object.state) ? object.state : ""
+    };
+  },
+
+  toSDK(message: BidFilters): BidFiltersSDKType {
+    const obj: any = {};
+    message.owner !== undefined && (obj.owner = message.owner);
+    message.dseq !== undefined && (obj.dseq = message.dseq);
+    message.gseq !== undefined && (obj.gseq = message.gseq);
+    message.oseq !== undefined && (obj.oseq = message.oseq);
+    message.provider !== undefined && (obj.provider = message.provider);
+    message.state !== undefined && (obj.state = message.state);
+    return obj;
   }
 
 };

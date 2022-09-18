@@ -1,4 +1,4 @@
-import { Height } from "../../client/v1/client";
+import { Height, HeightSDKType } from "../../client/v1/client";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, Long, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
 export const protobufPackage = "ibc.core.channel.v1";
@@ -157,6 +157,31 @@ export interface Channel {
 }
 
 /**
+ * Channel defines pipeline for exactly-once packet delivery between specific
+ * modules on separate blockchains, which has at least one end capable of
+ * sending packets and one end capable of receiving packets.
+ */
+export interface ChannelSDKType {
+  /** current state of the channel end */
+  state: StateSDKType;
+
+  /** whether the channel is ordered or unordered */
+  ordering: OrderSDKType;
+
+  /** counterparty channel end */
+  counterparty: CounterpartySDKType;
+
+  /**
+   * list of connection identifiers, in order, along which packets sent on
+   * this channel will travel
+   */
+  connection_hops: string[];
+
+  /** opaque channel version, which is agreed upon during the handshake */
+  version: string;
+}
+
+/**
  * IdentifiedChannel defines a channel with additional port and channel
  * identifier fields.
  */
@@ -186,6 +211,36 @@ export interface IdentifiedChannel {
   channelId: string;
 }
 
+/**
+ * IdentifiedChannel defines a channel with additional port and channel
+ * identifier fields.
+ */
+export interface IdentifiedChannelSDKType {
+  /** current state of the channel end */
+  state: StateSDKType;
+
+  /** whether the channel is ordered or unordered */
+  ordering: OrderSDKType;
+
+  /** counterparty channel end */
+  counterparty: CounterpartySDKType;
+
+  /**
+   * list of connection identifiers, in order, along which packets sent on
+   * this channel will travel
+   */
+  connection_hops: string[];
+
+  /** opaque channel version, which is agreed upon during the handshake */
+  version: string;
+
+  /** port identifier */
+  port_id: string;
+
+  /** channel identifier */
+  channel_id: string;
+}
+
 /** Counterparty defines a channel end counterparty */
 export interface Counterparty {
   /** port on the counterparty chain which owns the other end of the channel. */
@@ -193,6 +248,15 @@ export interface Counterparty {
 
   /** channel end on the counterparty chain */
   channelId: string;
+}
+
+/** Counterparty defines a channel end counterparty */
+export interface CounterpartySDKType {
+  /** port on the counterparty chain which owns the other end of the channel. */
+  port_id: string;
+
+  /** channel end on the counterparty chain */
+  channel_id: string;
 }
 
 /** Packet defines a type that carries data across different chains through IBC */
@@ -226,6 +290,37 @@ export interface Packet {
   timeoutTimestamp: Long;
 }
 
+/** Packet defines a type that carries data across different chains through IBC */
+export interface PacketSDKType {
+  /**
+   * number corresponds to the order of sends and receives, where a Packet
+   * with an earlier sequence number must be sent and received before a Packet
+   * with a later sequence number.
+   */
+  sequence: Long;
+
+  /** identifies the port on the sending chain. */
+  source_port: string;
+
+  /** identifies the channel end on the sending chain. */
+  source_channel: string;
+
+  /** identifies the port on the receiving chain. */
+  destination_port: string;
+
+  /** identifies the channel end on the receiving chain. */
+  destination_channel: string;
+
+  /** actual opaque bytes transferred directly to the application module */
+  data: Uint8Array;
+
+  /** block height after which the packet times out */
+  timeout_height: HeightSDKType;
+
+  /** block timestamp (in nanoseconds) after which the packet times out */
+  timeout_timestamp: Long;
+}
+
 /**
  * PacketState defines the generic type necessary to retrieve and store
  * packet commitments, acknowledgements, and receipts.
@@ -247,6 +342,26 @@ export interface PacketState {
 }
 
 /**
+ * PacketState defines the generic type necessary to retrieve and store
+ * packet commitments, acknowledgements, and receipts.
+ * Caller is responsible for knowing the context necessary to interpret this
+ * state as a commitment, acknowledgement, or a receipt.
+ */
+export interface PacketStateSDKType {
+  /** channel port identifier. */
+  port_id: string;
+
+  /** channel unique identifier. */
+  channel_id: string;
+
+  /** packet sequence. */
+  sequence: Long;
+
+  /** embedded data that represents packet state. */
+  data: Uint8Array;
+}
+
+/**
  * Acknowledgement is the recommended acknowledgement format to be used by
  * app-specific protocols.
  * NOTE: The field numbers 21 and 22 were explicitly chosen to avoid accidental
@@ -256,6 +371,20 @@ export interface PacketState {
  * https://github.com/cosmos/ibc/tree/master/spec/core/ics-004-channel-and-packet-semantics#acknowledgement-envelope
  */
 export interface Acknowledgement {
+  result?: Uint8Array;
+  error?: string;
+}
+
+/**
+ * Acknowledgement is the recommended acknowledgement format to be used by
+ * app-specific protocols.
+ * NOTE: The field numbers 21 and 22 were explicitly chosen to avoid accidental
+ * conflicts with other protobuf message formats used for acknowledgements.
+ * The first byte of any message with this format will be the non-ASCII values
+ * `0xaa` (result) or `0xb2` (error). Implemented as defined by ICS:
+ * https://github.com/cosmos/ibc/tree/master/spec/core/ics-004-channel-and-packet-semantics#acknowledgement-envelope
+ */
+export interface AcknowledgementSDKType {
   result?: Uint8Array;
   error?: string;
 }
@@ -367,6 +496,32 @@ export const Channel = {
     message.connectionHops = object.connectionHops?.map(e => e) || [];
     message.version = object.version ?? "";
     return message;
+  },
+
+  fromSDK(object: ChannelSDKType): Channel {
+    return {
+      state: isSet(object.state) ? stateFromJSON(object.state) : 0,
+      ordering: isSet(object.ordering) ? orderFromJSON(object.ordering) : 0,
+      counterparty: isSet(object.counterparty) ? Counterparty.fromSDK(object.counterparty) : undefined,
+      connectionHops: Array.isArray(object?.connection_hops) ? object.connection_hops.map((e: any) => e) : [],
+      version: isSet(object.version) ? object.version : ""
+    };
+  },
+
+  toSDK(message: Channel): ChannelSDKType {
+    const obj: any = {};
+    message.state !== undefined && (obj.state = stateToJSON(message.state));
+    message.ordering !== undefined && (obj.ordering = orderToJSON(message.ordering));
+    message.counterparty !== undefined && (obj.counterparty = message.counterparty ? Counterparty.toSDK(message.counterparty) : undefined);
+
+    if (message.connectionHops) {
+      obj.connection_hops = message.connectionHops.map(e => e);
+    } else {
+      obj.connection_hops = [];
+    }
+
+    message.version !== undefined && (obj.version = message.version);
+    return obj;
   }
 
 };
@@ -502,6 +657,36 @@ export const IdentifiedChannel = {
     message.portId = object.portId ?? "";
     message.channelId = object.channelId ?? "";
     return message;
+  },
+
+  fromSDK(object: IdentifiedChannelSDKType): IdentifiedChannel {
+    return {
+      state: isSet(object.state) ? stateFromJSON(object.state) : 0,
+      ordering: isSet(object.ordering) ? orderFromJSON(object.ordering) : 0,
+      counterparty: isSet(object.counterparty) ? Counterparty.fromSDK(object.counterparty) : undefined,
+      connectionHops: Array.isArray(object?.connection_hops) ? object.connection_hops.map((e: any) => e) : [],
+      version: isSet(object.version) ? object.version : "",
+      portId: isSet(object.port_id) ? object.port_id : "",
+      channelId: isSet(object.channel_id) ? object.channel_id : ""
+    };
+  },
+
+  toSDK(message: IdentifiedChannel): IdentifiedChannelSDKType {
+    const obj: any = {};
+    message.state !== undefined && (obj.state = stateToJSON(message.state));
+    message.ordering !== undefined && (obj.ordering = orderToJSON(message.ordering));
+    message.counterparty !== undefined && (obj.counterparty = message.counterparty ? Counterparty.toSDK(message.counterparty) : undefined);
+
+    if (message.connectionHops) {
+      obj.connection_hops = message.connectionHops.map(e => e);
+    } else {
+      obj.connection_hops = [];
+    }
+
+    message.version !== undefined && (obj.version = message.version);
+    message.portId !== undefined && (obj.port_id = message.portId);
+    message.channelId !== undefined && (obj.channel_id = message.channelId);
+    return obj;
   }
 
 };
@@ -571,6 +756,20 @@ export const Counterparty = {
     message.portId = object.portId ?? "";
     message.channelId = object.channelId ?? "";
     return message;
+  },
+
+  fromSDK(object: CounterpartySDKType): Counterparty {
+    return {
+      portId: isSet(object.port_id) ? object.port_id : "",
+      channelId: isSet(object.channel_id) ? object.channel_id : ""
+    };
+  },
+
+  toSDK(message: Counterparty): CounterpartySDKType {
+    const obj: any = {};
+    message.portId !== undefined && (obj.port_id = message.portId);
+    message.channelId !== undefined && (obj.channel_id = message.channelId);
+    return obj;
   }
 
 };
@@ -712,6 +911,32 @@ export const Packet = {
     message.timeoutHeight = object.timeoutHeight !== undefined && object.timeoutHeight !== null ? Height.fromPartial(object.timeoutHeight) : undefined;
     message.timeoutTimestamp = object.timeoutTimestamp !== undefined && object.timeoutTimestamp !== null ? Long.fromValue(object.timeoutTimestamp) : Long.UZERO;
     return message;
+  },
+
+  fromSDK(object: PacketSDKType): Packet {
+    return {
+      sequence: isSet(object.sequence) ? object.sequence : Long.UZERO,
+      sourcePort: isSet(object.source_port) ? object.source_port : "",
+      sourceChannel: isSet(object.source_channel) ? object.source_channel : "",
+      destinationPort: isSet(object.destination_port) ? object.destination_port : "",
+      destinationChannel: isSet(object.destination_channel) ? object.destination_channel : "",
+      data: isSet(object.data) ? object.data : new Uint8Array(),
+      timeoutHeight: isSet(object.timeout_height) ? Height.fromSDK(object.timeout_height) : undefined,
+      timeoutTimestamp: isSet(object.timeout_timestamp) ? object.timeout_timestamp : Long.UZERO
+    };
+  },
+
+  toSDK(message: Packet): PacketSDKType {
+    const obj: any = {};
+    message.sequence !== undefined && (obj.sequence = message.sequence);
+    message.sourcePort !== undefined && (obj.source_port = message.sourcePort);
+    message.sourceChannel !== undefined && (obj.source_channel = message.sourceChannel);
+    message.destinationPort !== undefined && (obj.destination_port = message.destinationPort);
+    message.destinationChannel !== undefined && (obj.destination_channel = message.destinationChannel);
+    message.data !== undefined && (obj.data = message.data);
+    message.timeoutHeight !== undefined && (obj.timeout_height = message.timeoutHeight ? Height.toSDK(message.timeoutHeight) : undefined);
+    message.timeoutTimestamp !== undefined && (obj.timeout_timestamp = message.timeoutTimestamp);
+    return obj;
   }
 
 };
@@ -805,6 +1030,24 @@ export const PacketState = {
     message.sequence = object.sequence !== undefined && object.sequence !== null ? Long.fromValue(object.sequence) : Long.UZERO;
     message.data = object.data ?? new Uint8Array();
     return message;
+  },
+
+  fromSDK(object: PacketStateSDKType): PacketState {
+    return {
+      portId: isSet(object.port_id) ? object.port_id : "",
+      channelId: isSet(object.channel_id) ? object.channel_id : "",
+      sequence: isSet(object.sequence) ? object.sequence : Long.UZERO,
+      data: isSet(object.data) ? object.data : new Uint8Array()
+    };
+  },
+
+  toSDK(message: PacketState): PacketStateSDKType {
+    const obj: any = {};
+    message.portId !== undefined && (obj.port_id = message.portId);
+    message.channelId !== undefined && (obj.channel_id = message.channelId);
+    message.sequence !== undefined && (obj.sequence = message.sequence);
+    message.data !== undefined && (obj.data = message.data);
+    return obj;
   }
 
 };
@@ -874,6 +1117,20 @@ export const Acknowledgement = {
     message.result = object.result ?? undefined;
     message.error = object.error ?? undefined;
     return message;
+  },
+
+  fromSDK(object: AcknowledgementSDKType): Acknowledgement {
+    return {
+      result: isSet(object.result) ? object.result : undefined,
+      error: isSet(object.error) ? object.error : undefined
+    };
+  },
+
+  toSDK(message: Acknowledgement): AcknowledgementSDKType {
+    const obj: any = {};
+    message.result !== undefined && (obj.result = message.result);
+    message.error !== undefined && (obj.error = message.error);
+    return obj;
   }
 
 };

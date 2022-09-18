@@ -1,4 +1,4 @@
-import { Duration } from "../../../protobuf/duration";
+import { Duration, DurationSDKType } from "../../../protobuf/duration";
 import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, DeepPartial } from "@osmonauts/helpers";
 export const protobufPackage = "google.api.servicecontrol.v1";
@@ -90,6 +90,98 @@ export interface HttpRequest {
    * cache fill was attempted.
    */
   cacheFillBytes: Long;
+
+  /** Protocol used for the request. Examples: "HTTP/1.1", "HTTP/2", "websocket" */
+  protocol: string;
+}
+
+/**
+ * A common proto for logging HTTP requests. Only contains semantics
+ * defined by the HTTP specification. Product-specific logging
+ * information MUST be defined in a separate message.
+ */
+export interface HttpRequestSDKType {
+  /** The request method. Examples: `"GET"`, `"HEAD"`, `"PUT"`, `"POST"`. */
+  request_method: string;
+
+  /**
+   * The scheme (http, https), the host name, the path, and the query
+   * portion of the URL that was requested.
+   * Example: `"http://example.com/some/info?color=red"`.
+   */
+  request_url: string;
+
+  /**
+   * The size of the HTTP request message in bytes, including the request
+   * headers and the request body.
+   */
+  request_size: Long;
+
+  /**
+   * The response code indicating the status of the response.
+   * Examples: 200, 404.
+   */
+  status: number;
+
+  /**
+   * The size of the HTTP response message sent back to the client, in bytes,
+   * including the response headers and the response body.
+   */
+  response_size: Long;
+
+  /**
+   * The user agent sent by the client. Example:
+   * `"Mozilla/4.0 (compatible; MSIE 6.0; Windows 98; Q312461; .NET
+   * CLR 1.0.3705)"`.
+   */
+  user_agent: string;
+
+  /**
+   * The IP address (IPv4 or IPv6) of the client that issued the HTTP
+   * request. Examples: `"192.168.1.1"`, `"FE80::0202:B3FF:FE1E:8329"`.
+   */
+  remote_ip: string;
+
+  /**
+   * The IP address (IPv4 or IPv6) of the origin server that the request was
+   * sent to.
+   */
+  server_ip: string;
+
+  /**
+   * The referer URL of the request, as defined in
+   * [HTTP/1.1 Header Field
+   * Definitions](http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html).
+   */
+  referer: string;
+
+  /**
+   * The request processing latency on the server, from the time the request was
+   * received until the response was sent.
+   */
+  latency: Duration;
+
+  /** Whether or not a cache lookup was attempted. */
+  cache_lookup: boolean;
+
+  /**
+   * Whether or not an entity was served from cache
+   * (with or without validation).
+   */
+  cache_hit: boolean;
+
+  /**
+   * Whether or not the response was validated with the origin server before
+   * being served from cache. This field is only meaningful if `cache_hit` is
+   * True.
+   */
+  cache_validated_with_origin_server: boolean;
+
+  /**
+   * The number of HTTP response bytes inserted into cache. Set only when a
+   * cache fill was attempted.
+   */
+  cache_fill_bytes: Long;
 
   /** Protocol used for the request. Examples: "HTTP/1.1", "HTTP/2", "websocket" */
   protocol: string;
@@ -316,6 +408,46 @@ export const HttpRequest = {
     message.cacheFillBytes = object.cacheFillBytes !== undefined && object.cacheFillBytes !== null ? Long.fromValue(object.cacheFillBytes) : Long.ZERO;
     message.protocol = object.protocol ?? "";
     return message;
+  },
+
+  fromSDK(object: HttpRequestSDKType): HttpRequest {
+    return {
+      requestMethod: isSet(object.request_method) ? object.request_method : "",
+      requestUrl: isSet(object.request_url) ? object.request_url : "",
+      requestSize: isSet(object.request_size) ? object.request_size : Long.ZERO,
+      status: isSet(object.status) ? object.status : 0,
+      responseSize: isSet(object.response_size) ? object.response_size : Long.ZERO,
+      userAgent: isSet(object.user_agent) ? object.user_agent : "",
+      remoteIp: isSet(object.remote_ip) ? object.remote_ip : "",
+      serverIp: isSet(object.server_ip) ? object.server_ip : "",
+      referer: isSet(object.referer) ? object.referer : "",
+      latency: isSet(object.latency) ? Duration.fromSDK(object.latency) : undefined,
+      cacheLookup: isSet(object.cache_lookup) ? object.cache_lookup : false,
+      cacheHit: isSet(object.cache_hit) ? object.cache_hit : false,
+      cacheValidatedWithOriginServer: isSet(object.cache_validated_with_origin_server) ? object.cache_validated_with_origin_server : false,
+      cacheFillBytes: isSet(object.cache_fill_bytes) ? object.cache_fill_bytes : Long.ZERO,
+      protocol: isSet(object.protocol) ? object.protocol : ""
+    };
+  },
+
+  toSDK(message: HttpRequest): HttpRequestSDKType {
+    const obj: any = {};
+    message.requestMethod !== undefined && (obj.request_method = message.requestMethod);
+    message.requestUrl !== undefined && (obj.request_url = message.requestUrl);
+    message.requestSize !== undefined && (obj.request_size = message.requestSize);
+    message.status !== undefined && (obj.status = message.status);
+    message.responseSize !== undefined && (obj.response_size = message.responseSize);
+    message.userAgent !== undefined && (obj.user_agent = message.userAgent);
+    message.remoteIp !== undefined && (obj.remote_ip = message.remoteIp);
+    message.serverIp !== undefined && (obj.server_ip = message.serverIp);
+    message.referer !== undefined && (obj.referer = message.referer);
+    message.latency !== undefined && (obj.latency = message.latency ? Duration.toSDK(message.latency) : undefined);
+    message.cacheLookup !== undefined && (obj.cache_lookup = message.cacheLookup);
+    message.cacheHit !== undefined && (obj.cache_hit = message.cacheHit);
+    message.cacheValidatedWithOriginServer !== undefined && (obj.cache_validated_with_origin_server = message.cacheValidatedWithOriginServer);
+    message.cacheFillBytes !== undefined && (obj.cache_fill_bytes = message.cacheFillBytes);
+    message.protocol !== undefined && (obj.protocol = message.protocol);
+    return obj;
   }
 
 };

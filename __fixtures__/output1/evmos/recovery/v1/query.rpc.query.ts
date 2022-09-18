@@ -1,7 +1,7 @@
-import { Params } from "./genesis";
+import { Params, ParamsSDKType } from "./genesis";
 import { Rpc } from "@osmonauts/helpers";
 import * as _m0 from "protobufjs/minimal";
-import { QueryParamsRequest, QueryParamsResponse } from "./query";
+import { QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType } from "./query";
 
 /** Query defines the RPC service */
 export interface Query {

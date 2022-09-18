@@ -7,6 +7,11 @@ export interface ResourceValue {
   val: Uint8Array;
 }
 
+/** Unit stores cpu, memory and storage metrics */
+export interface ResourceValueSDKType {
+  val: Uint8Array;
+}
+
 function createBaseResourceValue(): ResourceValue {
   return {
     val: new Uint8Array()
@@ -60,6 +65,18 @@ export const ResourceValue = {
     const message = createBaseResourceValue();
     message.val = object.val ?? new Uint8Array();
     return message;
+  },
+
+  fromSDK(object: ResourceValueSDKType): ResourceValue {
+    return {
+      val: isSet(object.val) ? object.val : new Uint8Array()
+    };
+  },
+
+  toSDK(message: ResourceValue): ResourceValueSDKType {
+    const obj: any = {};
+    message.val !== undefined && (obj.val = message.val);
+    return obj;
   }
 
 };

@@ -1,10 +1,10 @@
-import { Duration } from "../../../../google/protobuf/duration";
-import { Height } from "../../../core/client/v1/client";
-import { ProofSpec } from "../../../../confio/proofs";
-import { Timestamp } from "../../../../google/protobuf/timestamp";
-import { MerkleRoot } from "../../../core/commitment/v1/commitment";
-import { SignedHeader } from "../../../../tendermint/types/types";
-import { ValidatorSet } from "../../../../tendermint/types/validator";
+import { Duration, DurationSDKType } from "../../../../google/protobuf/duration";
+import { Height, HeightSDKType } from "../../../core/client/v1/client";
+import { ProofSpec, ProofSpecSDKType } from "../../../../confio/proofs";
+import { Timestamp, TimestampSDKType } from "../../../../google/protobuf/timestamp";
+import { MerkleRoot, MerkleRootSDKType } from "../../../core/commitment/v1/commitment";
+import { SignedHeader, SignedHeaderSDKType } from "../../../../tendermint/types/types";
+import { ValidatorSet, ValidatorSetSDKType } from "../../../../tendermint/types/validator";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, toTimestamp, fromTimestamp, fromJsonTimestamp, bytesFromBase64, base64FromBytes, Long } from "@osmonauts/helpers";
 export const protobufPackage = "ibc.lightclients.tendermint.v1";
@@ -62,6 +62,59 @@ export interface ClientState {
   allowUpdateAfterMisbehaviour: boolean;
 }
 
+/**
+ * ClientState from Tendermint tracks the current validator set, latest height,
+ * and a possible frozen height.
+ */
+export interface ClientStateSDKType {
+  chain_id: string;
+  trust_level: FractionSDKType;
+
+  /**
+   * duration of the period since the LastestTimestamp during which the
+   * submitted headers are valid for upgrade
+   */
+  trusting_period: Duration;
+
+  /** duration of the staking unbonding period */
+  unbonding_period: Duration;
+
+  /** defines how much new (untrusted) header's Time can drift into the future. */
+  max_clock_drift: Duration;
+
+  /** Block height when the client was frozen due to a misbehaviour */
+  frozen_height: HeightSDKType;
+
+  /** Latest height the client was updated to */
+  latest_height: HeightSDKType;
+
+  /** Proof specifications used in verifying counterparty state */
+  proof_specs: ProofSpecSDKType[];
+
+  /**
+   * Path at which next upgraded client will be committed.
+   * Each element corresponds to the key for a single CommitmentProof in the
+   * chained proof. NOTE: ClientState must stored under
+   * `{upgradePath}/{upgradeHeight}/clientState` ConsensusState must be stored
+   * under `{upgradepath}/{upgradeHeight}/consensusState` For SDK chains using
+   * the default upgrade module, upgrade_path should be []string{"upgrade",
+   * "upgradedIBCState"}`
+   */
+  upgrade_path: string[];
+
+  /**
+   * This flag, when set to true, will allow governance to recover a client
+   * which has expired
+   */
+  allow_update_after_expiry: boolean;
+
+  /**
+   * This flag, when set to true, will allow governance to unfreeze a client
+   * whose chain has experienced a misbehaviour event
+   */
+  allow_update_after_misbehaviour: boolean;
+}
+
 /** ConsensusState defines the consensus state from Tendermint. */
 export interface ConsensusState {
   /**
@@ -75,6 +128,19 @@ export interface ConsensusState {
   nextValidatorsHash: Uint8Array;
 }
 
+/** ConsensusState defines the consensus state from Tendermint. */
+export interface ConsensusStateSDKType {
+  /**
+   * timestamp that corresponds to the block height in which the ConsensusState
+   * was stored.
+   */
+  timestamp: Date;
+
+  /** commitment root (i.e app hash) */
+  root: MerkleRootSDKType;
+  next_validators_hash: Uint8Array;
+}
+
 /**
  * Misbehaviour is a wrapper over two conflicting Headers
  * that implements Misbehaviour interface expected by ICS-02
@@ -83,6 +149,16 @@ export interface Misbehaviour {
   clientId: string;
   header_1: Header;
   header_2: Header;
+}
+
+/**
+ * Misbehaviour is a wrapper over two conflicting Headers
+ * that implements Misbehaviour interface expected by ICS-02
+ */
+export interface MisbehaviourSDKType {
+  client_id: string;
+  header_1: HeaderSDKType;
+  header_2: HeaderSDKType;
 }
 
 /**
@@ -107,10 +183,40 @@ export interface Header {
 }
 
 /**
+ * Header defines the Tendermint client consensus Header.
+ * It encapsulates all the information necessary to update from a trusted
+ * Tendermint ConsensusState. The inclusion of TrustedHeight and
+ * TrustedValidators allows this update to process correctly, so long as the
+ * ConsensusState for the TrustedHeight exists, this removes race conditions
+ * among relayers The SignedHeader and ValidatorSet are the new untrusted update
+ * fields for the client. The TrustedHeight is the height of a stored
+ * ConsensusState on the client that will be used to verify the new untrusted
+ * header. The Trusted ConsensusState must be within the unbonding period of
+ * current time in order to correctly verify, and the TrustedValidators must
+ * hash to TrustedConsensusState.NextValidatorsHash since that is the last
+ * trusted validator set at the TrustedHeight.
+ */
+export interface HeaderSDKType {
+  signed_header: SignedHeaderSDKType;
+  validator_set: ValidatorSetSDKType;
+  trusted_height: HeightSDKType;
+  trusted_validators: ValidatorSetSDKType;
+}
+
+/**
  * Fraction defines the protobuf message type for tmmath.Fraction that only
  * supports positive values.
  */
 export interface Fraction {
+  numerator: Long;
+  denominator: Long;
+}
+
+/**
+ * Fraction defines the protobuf message type for tmmath.Fraction that only
+ * supports positive values.
+ */
+export interface FractionSDKType {
   numerator: Long;
   denominator: Long;
 }
@@ -299,6 +405,49 @@ export const ClientState = {
     message.allowUpdateAfterExpiry = object.allowUpdateAfterExpiry ?? false;
     message.allowUpdateAfterMisbehaviour = object.allowUpdateAfterMisbehaviour ?? false;
     return message;
+  },
+
+  fromSDK(object: ClientStateSDKType): ClientState {
+    return {
+      chainId: isSet(object.chain_id) ? object.chain_id : "",
+      trustLevel: isSet(object.trust_level) ? Fraction.fromSDK(object.trust_level) : undefined,
+      trustingPeriod: isSet(object.trusting_period) ? Duration.fromSDK(object.trusting_period) : undefined,
+      unbondingPeriod: isSet(object.unbonding_period) ? Duration.fromSDK(object.unbonding_period) : undefined,
+      maxClockDrift: isSet(object.max_clock_drift) ? Duration.fromSDK(object.max_clock_drift) : undefined,
+      frozenHeight: isSet(object.frozen_height) ? Height.fromSDK(object.frozen_height) : undefined,
+      latestHeight: isSet(object.latest_height) ? Height.fromSDK(object.latest_height) : undefined,
+      proofSpecs: Array.isArray(object?.proof_specs) ? object.proof_specs.map((e: any) => ProofSpec.fromSDK(e)) : [],
+      upgradePath: Array.isArray(object?.upgrade_path) ? object.upgrade_path.map((e: any) => e) : [],
+      allowUpdateAfterExpiry: isSet(object.allow_update_after_expiry) ? object.allow_update_after_expiry : false,
+      allowUpdateAfterMisbehaviour: isSet(object.allow_update_after_misbehaviour) ? object.allow_update_after_misbehaviour : false
+    };
+  },
+
+  toSDK(message: ClientState): ClientStateSDKType {
+    const obj: any = {};
+    message.chainId !== undefined && (obj.chain_id = message.chainId);
+    message.trustLevel !== undefined && (obj.trust_level = message.trustLevel ? Fraction.toSDK(message.trustLevel) : undefined);
+    message.trustingPeriod !== undefined && (obj.trusting_period = message.trustingPeriod ? Duration.toSDK(message.trustingPeriod) : undefined);
+    message.unbondingPeriod !== undefined && (obj.unbonding_period = message.unbondingPeriod ? Duration.toSDK(message.unbondingPeriod) : undefined);
+    message.maxClockDrift !== undefined && (obj.max_clock_drift = message.maxClockDrift ? Duration.toSDK(message.maxClockDrift) : undefined);
+    message.frozenHeight !== undefined && (obj.frozen_height = message.frozenHeight ? Height.toSDK(message.frozenHeight) : undefined);
+    message.latestHeight !== undefined && (obj.latest_height = message.latestHeight ? Height.toSDK(message.latestHeight) : undefined);
+
+    if (message.proofSpecs) {
+      obj.proof_specs = message.proofSpecs.map(e => e ? ProofSpec.toSDK(e) : undefined);
+    } else {
+      obj.proof_specs = [];
+    }
+
+    if (message.upgradePath) {
+      obj.upgrade_path = message.upgradePath.map(e => e);
+    } else {
+      obj.upgrade_path = [];
+    }
+
+    message.allowUpdateAfterExpiry !== undefined && (obj.allow_update_after_expiry = message.allowUpdateAfterExpiry);
+    message.allowUpdateAfterMisbehaviour !== undefined && (obj.allow_update_after_misbehaviour = message.allowUpdateAfterMisbehaviour);
+    return obj;
   }
 
 };
@@ -380,6 +529,22 @@ export const ConsensusState = {
     message.root = object.root !== undefined && object.root !== null ? MerkleRoot.fromPartial(object.root) : undefined;
     message.nextValidatorsHash = object.nextValidatorsHash ?? new Uint8Array();
     return message;
+  },
+
+  fromSDK(object: ConsensusStateSDKType): ConsensusState {
+    return {
+      timestamp: isSet(object.timestamp) ? Timestamp.fromSDK(object.timestamp) : undefined,
+      root: isSet(object.root) ? MerkleRoot.fromSDK(object.root) : undefined,
+      nextValidatorsHash: isSet(object.next_validators_hash) ? object.next_validators_hash : new Uint8Array()
+    };
+  },
+
+  toSDK(message: ConsensusState): ConsensusStateSDKType {
+    const obj: any = {};
+    message.timestamp !== undefined && (obj.timestamp = message.timestamp ? Timestamp.toSDK(message.timestamp) : undefined);
+    message.root !== undefined && (obj.root = message.root ? MerkleRoot.toSDK(message.root) : undefined);
+    message.nextValidatorsHash !== undefined && (obj.next_validators_hash = message.nextValidatorsHash);
+    return obj;
   }
 
 };
@@ -461,6 +626,22 @@ export const Misbehaviour = {
     message.header_1 = object.header_1 !== undefined && object.header_1 !== null ? Header.fromPartial(object.header_1) : undefined;
     message.header_2 = object.header_2 !== undefined && object.header_2 !== null ? Header.fromPartial(object.header_2) : undefined;
     return message;
+  },
+
+  fromSDK(object: MisbehaviourSDKType): Misbehaviour {
+    return {
+      clientId: isSet(object.client_id) ? object.client_id : "",
+      header_1: isSet(object.header_1) ? Header.fromSDK(object.header_1) : undefined,
+      header_2: isSet(object.header_2) ? Header.fromSDK(object.header_2) : undefined
+    };
+  },
+
+  toSDK(message: Misbehaviour): MisbehaviourSDKType {
+    const obj: any = {};
+    message.clientId !== undefined && (obj.client_id = message.clientId);
+    message.header_1 !== undefined && (obj.header_1 = message.header_1 ? Header.toSDK(message.header_1) : undefined);
+    message.header_2 !== undefined && (obj.header_2 = message.header_2 ? Header.toSDK(message.header_2) : undefined);
+    return obj;
   }
 
 };
@@ -554,6 +735,24 @@ export const Header = {
     message.trustedHeight = object.trustedHeight !== undefined && object.trustedHeight !== null ? Height.fromPartial(object.trustedHeight) : undefined;
     message.trustedValidators = object.trustedValidators !== undefined && object.trustedValidators !== null ? ValidatorSet.fromPartial(object.trustedValidators) : undefined;
     return message;
+  },
+
+  fromSDK(object: HeaderSDKType): Header {
+    return {
+      signedHeader: isSet(object.signed_header) ? SignedHeader.fromSDK(object.signed_header) : undefined,
+      validatorSet: isSet(object.validator_set) ? ValidatorSet.fromSDK(object.validator_set) : undefined,
+      trustedHeight: isSet(object.trusted_height) ? Height.fromSDK(object.trusted_height) : undefined,
+      trustedValidators: isSet(object.trusted_validators) ? ValidatorSet.fromSDK(object.trusted_validators) : undefined
+    };
+  },
+
+  toSDK(message: Header): HeaderSDKType {
+    const obj: any = {};
+    message.signedHeader !== undefined && (obj.signed_header = message.signedHeader ? SignedHeader.toSDK(message.signedHeader) : undefined);
+    message.validatorSet !== undefined && (obj.validator_set = message.validatorSet ? ValidatorSet.toSDK(message.validatorSet) : undefined);
+    message.trustedHeight !== undefined && (obj.trusted_height = message.trustedHeight ? Height.toSDK(message.trustedHeight) : undefined);
+    message.trustedValidators !== undefined && (obj.trusted_validators = message.trustedValidators ? ValidatorSet.toSDK(message.trustedValidators) : undefined);
+    return obj;
   }
 
 };
@@ -623,6 +822,20 @@ export const Fraction = {
     message.numerator = object.numerator !== undefined && object.numerator !== null ? Long.fromValue(object.numerator) : Long.UZERO;
     message.denominator = object.denominator !== undefined && object.denominator !== null ? Long.fromValue(object.denominator) : Long.UZERO;
     return message;
+  },
+
+  fromSDK(object: FractionSDKType): Fraction {
+    return {
+      numerator: isSet(object.numerator) ? object.numerator : Long.UZERO,
+      denominator: isSet(object.denominator) ? object.denominator : Long.UZERO
+    };
+  },
+
+  toSDK(message: Fraction): FractionSDKType {
+    const obj: any = {};
+    message.numerator !== undefined && (obj.numerator = message.numerator);
+    message.denominator !== undefined && (obj.denominator = message.denominator);
+    return obj;
   }
 
 };

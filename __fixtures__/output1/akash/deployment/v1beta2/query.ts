@@ -1,8 +1,8 @@
-import { DeploymentFilters, DeploymentID, Deployment } from "./deployment";
-import { PageRequest, PageResponse } from "../../../cosmos/base/query/v1beta1/pagination";
-import { GroupID } from "./groupid";
-import { Group } from "./group";
-import { Account } from "../../escrow/v1beta2/types";
+import { DeploymentFilters, DeploymentFiltersSDKType, DeploymentID, DeploymentIDSDKType, Deployment, DeploymentSDKType } from "./deployment";
+import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
+import { GroupID, GroupIDSDKType } from "./groupid";
+import { Group, GroupSDKType } from "./group";
+import { Account, AccountSDKType } from "../../escrow/v1beta2/types";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, Exact } from "@osmonauts/helpers";
 export const protobufPackage = "akash.deployment.v1beta2";
@@ -13,15 +13,32 @@ export interface QueryDeploymentsRequest {
   pagination?: PageRequest;
 }
 
+/** QueryDeploymentsRequest is request type for the Query/Deployments RPC method */
+export interface QueryDeploymentsRequestSDKType {
+  filters?: DeploymentFiltersSDKType;
+  pagination?: PageRequestSDKType;
+}
+
 /** QueryDeploymentsResponse is response type for the Query/Deployments RPC method */
 export interface QueryDeploymentsResponse {
   deployments: QueryDeploymentResponse[];
   pagination?: PageResponse;
 }
 
+/** QueryDeploymentsResponse is response type for the Query/Deployments RPC method */
+export interface QueryDeploymentsResponseSDKType {
+  deployments: QueryDeploymentResponseSDKType[];
+  pagination?: PageResponseSDKType;
+}
+
 /** QueryDeploymentRequest is request type for the Query/Deployment RPC method */
 export interface QueryDeploymentRequest {
   id?: DeploymentID;
+}
+
+/** QueryDeploymentRequest is request type for the Query/Deployment RPC method */
+export interface QueryDeploymentRequestSDKType {
+  id?: DeploymentIDSDKType;
 }
 
 /** QueryDeploymentResponse is response type for the Query/Deployment RPC method */
@@ -31,14 +48,31 @@ export interface QueryDeploymentResponse {
   escrowAccount: Account;
 }
 
+/** QueryDeploymentResponse is response type for the Query/Deployment RPC method */
+export interface QueryDeploymentResponseSDKType {
+  deployment: DeploymentSDKType;
+  groups: GroupSDKType[];
+  escrow_account: AccountSDKType;
+}
+
 /** QueryGroupRequest is request type for the Query/Group RPC method */
 export interface QueryGroupRequest {
   id?: GroupID;
 }
 
+/** QueryGroupRequest is request type for the Query/Group RPC method */
+export interface QueryGroupRequestSDKType {
+  id?: GroupIDSDKType;
+}
+
 /** QueryGroupResponse is response type for the Query/Group RPC method */
 export interface QueryGroupResponse {
   group: Group;
+}
+
+/** QueryGroupResponse is response type for the Query/Group RPC method */
+export interface QueryGroupResponseSDKType {
+  group: GroupSDKType;
 }
 
 function createBaseQueryDeploymentsRequest(): QueryDeploymentsRequest {
@@ -106,6 +140,20 @@ export const QueryDeploymentsRequest = {
     message.filters = object.filters !== undefined && object.filters !== null ? DeploymentFilters.fromPartial(object.filters) : undefined;
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryDeploymentsRequestSDKType): QueryDeploymentsRequest {
+    return {
+      filters: isSet(object.filters) ? DeploymentFilters.fromSDK(object.filters) : undefined,
+      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  toSDK(message: QueryDeploymentsRequest): QueryDeploymentsRequestSDKType {
+    const obj: any = {};
+    message.filters !== undefined && (obj.filters = message.filters ? DeploymentFilters.toSDK(message.filters) : undefined);
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
+    return obj;
   }
 
 };
@@ -181,6 +229,26 @@ export const QueryDeploymentsResponse = {
     message.deployments = object.deployments?.map(e => QueryDeploymentResponse.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryDeploymentsResponseSDKType): QueryDeploymentsResponse {
+    return {
+      deployments: Array.isArray(object?.deployments) ? object.deployments.map((e: any) => QueryDeploymentResponse.fromSDK(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  toSDK(message: QueryDeploymentsResponse): QueryDeploymentsResponseSDKType {
+    const obj: any = {};
+
+    if (message.deployments) {
+      obj.deployments = message.deployments.map(e => e ? QueryDeploymentResponse.toSDK(e) : undefined);
+    } else {
+      obj.deployments = [];
+    }
+
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
+    return obj;
   }
 
 };
@@ -238,6 +306,18 @@ export const QueryDeploymentRequest = {
     const message = createBaseQueryDeploymentRequest();
     message.id = object.id !== undefined && object.id !== null ? DeploymentID.fromPartial(object.id) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryDeploymentRequestSDKType): QueryDeploymentRequest {
+    return {
+      id: isSet(object.id) ? DeploymentID.fromSDK(object.id) : undefined
+    };
+  },
+
+  toSDK(message: QueryDeploymentRequest): QueryDeploymentRequestSDKType {
+    const obj: any = {};
+    message.id !== undefined && (obj.id = message.id ? DeploymentID.toSDK(message.id) : undefined);
+    return obj;
   }
 
 };
@@ -325,6 +405,28 @@ export const QueryDeploymentResponse = {
     message.groups = object.groups?.map(e => Group.fromPartial(e)) || [];
     message.escrowAccount = object.escrowAccount !== undefined && object.escrowAccount !== null ? Account.fromPartial(object.escrowAccount) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryDeploymentResponseSDKType): QueryDeploymentResponse {
+    return {
+      deployment: isSet(object.deployment) ? Deployment.fromSDK(object.deployment) : undefined,
+      groups: Array.isArray(object?.groups) ? object.groups.map((e: any) => Group.fromSDK(e)) : [],
+      escrowAccount: isSet(object.escrow_account) ? Account.fromSDK(object.escrow_account) : undefined
+    };
+  },
+
+  toSDK(message: QueryDeploymentResponse): QueryDeploymentResponseSDKType {
+    const obj: any = {};
+    message.deployment !== undefined && (obj.deployment = message.deployment ? Deployment.toSDK(message.deployment) : undefined);
+
+    if (message.groups) {
+      obj.groups = message.groups.map(e => e ? Group.toSDK(e) : undefined);
+    } else {
+      obj.groups = [];
+    }
+
+    message.escrowAccount !== undefined && (obj.escrow_account = message.escrowAccount ? Account.toSDK(message.escrowAccount) : undefined);
+    return obj;
   }
 
 };
@@ -382,6 +484,18 @@ export const QueryGroupRequest = {
     const message = createBaseQueryGroupRequest();
     message.id = object.id !== undefined && object.id !== null ? GroupID.fromPartial(object.id) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryGroupRequestSDKType): QueryGroupRequest {
+    return {
+      id: isSet(object.id) ? GroupID.fromSDK(object.id) : undefined
+    };
+  },
+
+  toSDK(message: QueryGroupRequest): QueryGroupRequestSDKType {
+    const obj: any = {};
+    message.id !== undefined && (obj.id = message.id ? GroupID.toSDK(message.id) : undefined);
+    return obj;
   }
 
 };
@@ -439,6 +553,18 @@ export const QueryGroupResponse = {
     const message = createBaseQueryGroupResponse();
     message.group = object.group !== undefined && object.group !== null ? Group.fromPartial(object.group) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryGroupResponseSDKType): QueryGroupResponse {
+    return {
+      group: isSet(object.group) ? Group.fromSDK(object.group) : undefined
+    };
+  },
+
+  toSDK(message: QueryGroupResponse): QueryGroupResponseSDKType {
+    const obj: any = {};
+    message.group !== undefined && (obj.group = message.group ? Group.toSDK(message.group) : undefined);
+    return obj;
   }
 
 };

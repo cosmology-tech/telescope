@@ -1,5 +1,5 @@
-import { MetricValueSet } from "./metric_value";
-import { Status } from "../../../rpc/status";
+import { MetricValueSet, MetricValueSetSDKType } from "./metric_value";
+import { Status, StatusSDKType } from "../../../rpc/status";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, isObject } from "@osmonauts/helpers";
 export const protobufPackage = "google.api.servicecontrol.v1";
@@ -224,7 +224,32 @@ export interface AllocateQuotaRequest {
    */
   serviceConfigId: string;
 }
+
+/** Request message for the AllocateQuota method. */
+export interface AllocateQuotaRequestSDKType {
+  /**
+   * Name of the service as specified in the service configuration. For example,
+   * `"pubsub.googleapis.com"`.
+   * 
+   * See [google.api.Service][google.api.Service] for the definition of a service name.
+   */
+  service_name: string;
+
+  /** Operation that describes the quota allocation. */
+  allocate_operation: QuotaOperationSDKType;
+
+  /**
+   * Specifies which version of service configuration should be used to process
+   * the request. If unspecified or no matching version can be found, the latest
+   * one will be used.
+   */
+  service_config_id: string;
+}
 export interface QuotaOperation_LabelsEntry {
+  key: string;
+  value: string;
+}
+export interface QuotaOperation_LabelsEntrySDKType {
   key: string;
   value: string;
 }
@@ -294,6 +319,71 @@ export interface QuotaOperation {
   quotaMode: QuotaOperation_QuotaMode;
 }
 
+/** Represents information regarding a quota operation. */
+export interface QuotaOperationSDKType {
+  /**
+   * Identity of the operation. This is expected to be unique within the scope
+   * of the service that generated the operation, and guarantees idempotency in
+   * case of retries.
+   * 
+   * In order to ensure best performance and latency in the Quota backends,
+   * operation_ids are optimally associated with time, so that related
+   * operations can be accessed fast in storage. For this reason, the
+   * recommended token for services that intend to operate at a high QPS is
+   * Unix time in nanos + UUID
+   */
+  operation_id: string;
+
+  /**
+   * Fully qualified name of the API method for which this quota operation is
+   * requested. This name is used for matching quota rules or metric rules and
+   * billing status rules defined in service configuration.
+   * 
+   * This field should not be set if any of the following is true:
+   * (1) the quota operation is performed on non-API resources.
+   * (2) quota_metrics is set because the caller is doing quota override.
+   * 
+   * 
+   * Example of an RPC method name:
+   * google.example.library.v1.LibraryService.CreateShelf
+   */
+  method_name: string;
+
+  /**
+   * Identity of the consumer for whom this quota operation is being performed.
+   * 
+   * This can be in one of the following formats:
+   * project:<project_id>,
+   * project_number:<project_number>,
+   * api_key:<api_key>.
+   */
+  consumer_id: string;
+
+  /** Labels describing the operation. */
+  labels: {
+    [key: string]: string;
+  };
+
+  /**
+   * Represents information about this operation. Each MetricValueSet
+   * corresponds to a metric defined in the service configuration.
+   * The data type used in the MetricValueSet must agree with
+   * the data type specified in the metric definition.
+   * 
+   * Within a single operation, it is not allowed to have more than one
+   * MetricValue instances that have the same metric names and identical
+   * label value combinations. If a request has such duplicated MetricValue
+   * instances, the entire request is rejected with
+   * an invalid argument error.
+   * 
+   * This field is mutually exclusive with method_name.
+   */
+  quota_metrics: MetricValueSetSDKType[];
+
+  /** Quota mode for this operation. */
+  quota_mode: QuotaOperation_QuotaModeSDKType;
+}
+
 /** Response message for the AllocateQuota method. */
 export interface AllocateQuotaResponse {
   /**
@@ -323,6 +413,35 @@ export interface AllocateQuotaResponse {
   serviceConfigId: string;
 }
 
+/** Response message for the AllocateQuota method. */
+export interface AllocateQuotaResponseSDKType {
+  /**
+   * The same operation_id value used in the AllocateQuotaRequest. Used for
+   * logging and diagnostics purposes.
+   */
+  operation_id: string;
+
+  /** Indicates the decision of the allocate. */
+  allocate_errors: QuotaErrorSDKType[];
+
+  /**
+   * Quota metrics to indicate the result of allocation. Depending on the
+   * request, one or more of the following metrics will be included:
+   * 
+   * 1. Per quota group or per quota metric incremental usage will be specified
+   * using the following delta metric :
+   * "serviceruntime.googleapis.com/api/consumer/quota_used_count"
+   * 
+   * 2. The quota limit reached condition will be specified using the following
+   * boolean metric :
+   * "serviceruntime.googleapis.com/quota/exceeded"
+   */
+  quota_metrics: MetricValueSetSDKType[];
+
+  /** ID of the actual config used to process the request. */
+  service_config_id: string;
+}
+
 /** Represents error information for [QuotaOperation][google.api.servicecontrol.v1.QuotaOperation]. */
 export interface QuotaError {
   /** Error code. */
@@ -343,6 +462,28 @@ export interface QuotaError {
    * If available, `status.code` will be non zero.
    */
   status: Status;
+}
+
+/** Represents error information for [QuotaOperation][google.api.servicecontrol.v1.QuotaOperation]. */
+export interface QuotaErrorSDKType {
+  /** Error code. */
+  code: QuotaError_CodeSDKType;
+
+  /**
+   * Subject to whom this error applies. See the specific enum for more details
+   * on this field. For example, "clientip:<ip address of client>" or
+   * "project:<Google developer project id>".
+   */
+  subject: string;
+
+  /** Free-form text that provides details on the cause of the error. */
+  description: string;
+
+  /**
+   * Contains additional information about the quota error.
+   * If available, `status.code` will be non zero.
+   */
+  status: StatusSDKType;
 }
 
 function createBaseAllocateQuotaRequest(): AllocateQuotaRequest {
@@ -422,6 +563,22 @@ export const AllocateQuotaRequest = {
     message.allocateOperation = object.allocateOperation !== undefined && object.allocateOperation !== null ? QuotaOperation.fromPartial(object.allocateOperation) : undefined;
     message.serviceConfigId = object.serviceConfigId ?? "";
     return message;
+  },
+
+  fromSDK(object: AllocateQuotaRequestSDKType): AllocateQuotaRequest {
+    return {
+      serviceName: isSet(object.service_name) ? object.service_name : "",
+      allocateOperation: isSet(object.allocate_operation) ? QuotaOperation.fromSDK(object.allocate_operation) : undefined,
+      serviceConfigId: isSet(object.service_config_id) ? object.service_config_id : ""
+    };
+  },
+
+  toSDK(message: AllocateQuotaRequest): AllocateQuotaRequestSDKType {
+    const obj: any = {};
+    message.serviceName !== undefined && (obj.service_name = message.serviceName);
+    message.allocateOperation !== undefined && (obj.allocate_operation = message.allocateOperation ? QuotaOperation.toSDK(message.allocateOperation) : undefined);
+    message.serviceConfigId !== undefined && (obj.service_config_id = message.serviceConfigId);
+    return obj;
   }
 
 };
@@ -491,6 +648,20 @@ export const QuotaOperation_LabelsEntry = {
     message.key = object.key ?? "";
     message.value = object.value ?? "";
     return message;
+  },
+
+  fromSDK(object: QuotaOperation_LabelsEntrySDKType): QuotaOperation_LabelsEntry {
+    return {
+      key: isSet(object.key) ? object.key : "",
+      value: isSet(object.value) ? object.value : ""
+    };
+  },
+
+  toSDK(message: QuotaOperation_LabelsEntry): QuotaOperation_LabelsEntrySDKType {
+    const obj: any = {};
+    message.key !== undefined && (obj.key = message.key);
+    message.value !== undefined && (obj.value = message.value);
+    return obj;
   }
 
 };
@@ -641,6 +812,45 @@ export const QuotaOperation = {
     message.quotaMetrics = object.quotaMetrics?.map(e => MetricValueSet.fromPartial(e)) || [];
     message.quotaMode = object.quotaMode ?? 0;
     return message;
+  },
+
+  fromSDK(object: QuotaOperationSDKType): QuotaOperation {
+    return {
+      operationId: isSet(object.operation_id) ? object.operation_id : "",
+      methodName: isSet(object.method_name) ? object.method_name : "",
+      consumerId: isSet(object.consumer_id) ? object.consumer_id : "",
+      labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
+        [key: string]: string;
+      }>((acc, [key, value]) => {
+        acc[key] = String(value);
+        return acc;
+      }, {}) : {},
+      quotaMetrics: Array.isArray(object?.quota_metrics) ? object.quota_metrics.map((e: any) => MetricValueSet.fromSDK(e)) : [],
+      quotaMode: isSet(object.quota_mode) ? quotaOperation_QuotaModeFromJSON(object.quota_mode) : 0
+    };
+  },
+
+  toSDK(message: QuotaOperation): QuotaOperationSDKType {
+    const obj: any = {};
+    message.operationId !== undefined && (obj.operation_id = message.operationId);
+    message.methodName !== undefined && (obj.method_name = message.methodName);
+    message.consumerId !== undefined && (obj.consumer_id = message.consumerId);
+    obj.labels = {};
+
+    if (message.labels) {
+      Object.entries(message.labels).forEach(([k, v]) => {
+        obj.labels[k] = v;
+      });
+    }
+
+    if (message.quotaMetrics) {
+      obj.quota_metrics = message.quotaMetrics.map(e => e ? MetricValueSet.toSDK(e) : undefined);
+    } else {
+      obj.quota_metrics = [];
+    }
+
+    message.quotaMode !== undefined && (obj.quota_mode = quotaOperation_QuotaModeToJSON(message.quotaMode));
+    return obj;
   }
 
 };
@@ -745,6 +955,35 @@ export const AllocateQuotaResponse = {
     message.quotaMetrics = object.quotaMetrics?.map(e => MetricValueSet.fromPartial(e)) || [];
     message.serviceConfigId = object.serviceConfigId ?? "";
     return message;
+  },
+
+  fromSDK(object: AllocateQuotaResponseSDKType): AllocateQuotaResponse {
+    return {
+      operationId: isSet(object.operation_id) ? object.operation_id : "",
+      allocateErrors: Array.isArray(object?.allocate_errors) ? object.allocate_errors.map((e: any) => QuotaError.fromSDK(e)) : [],
+      quotaMetrics: Array.isArray(object?.quota_metrics) ? object.quota_metrics.map((e: any) => MetricValueSet.fromSDK(e)) : [],
+      serviceConfigId: isSet(object.service_config_id) ? object.service_config_id : ""
+    };
+  },
+
+  toSDK(message: AllocateQuotaResponse): AllocateQuotaResponseSDKType {
+    const obj: any = {};
+    message.operationId !== undefined && (obj.operation_id = message.operationId);
+
+    if (message.allocateErrors) {
+      obj.allocate_errors = message.allocateErrors.map(e => e ? QuotaError.toSDK(e) : undefined);
+    } else {
+      obj.allocate_errors = [];
+    }
+
+    if (message.quotaMetrics) {
+      obj.quota_metrics = message.quotaMetrics.map(e => e ? MetricValueSet.toSDK(e) : undefined);
+    } else {
+      obj.quota_metrics = [];
+    }
+
+    message.serviceConfigId !== undefined && (obj.service_config_id = message.serviceConfigId);
+    return obj;
   }
 
 };
@@ -838,6 +1077,24 @@ export const QuotaError = {
     message.description = object.description ?? "";
     message.status = object.status !== undefined && object.status !== null ? Status.fromPartial(object.status) : undefined;
     return message;
+  },
+
+  fromSDK(object: QuotaErrorSDKType): QuotaError {
+    return {
+      code: isSet(object.code) ? quotaError_CodeFromJSON(object.code) : 0,
+      subject: isSet(object.subject) ? object.subject : "",
+      description: isSet(object.description) ? object.description : "",
+      status: isSet(object.status) ? Status.fromSDK(object.status) : undefined
+    };
+  },
+
+  toSDK(message: QuotaError): QuotaErrorSDKType {
+    const obj: any = {};
+    message.code !== undefined && (obj.code = quotaError_CodeToJSON(message.code));
+    message.subject !== undefined && (obj.subject = message.subject);
+    message.description !== undefined && (obj.description = message.description);
+    message.status !== undefined && (obj.status = message.status ? Status.toSDK(message.status) : undefined);
+    return obj;
   }
 
 };

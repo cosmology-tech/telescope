@@ -1,4 +1,4 @@
-import { Plan } from "./upgrade";
+import { Plan, PlanSDKType } from "./upgrade";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "@osmonauts/helpers";
 export const protobufPackage = "cosmos.upgrade.v1beta1";
@@ -17,11 +17,31 @@ export interface MsgSoftwareUpgrade {
 }
 
 /**
+ * MsgSoftwareUpgrade is the Msg/SoftwareUpgrade request type.
+ * 
+ * Since: cosmos-sdk 0.46
+ */
+export interface MsgSoftwareUpgradeSDKType {
+  /** authority is the address of the governance account. */
+  authority: string;
+
+  /** plan is the upgrade plan. */
+  plan: PlanSDKType;
+}
+
+/**
  * MsgSoftwareUpgradeResponse is the Msg/SoftwareUpgrade response type.
  * 
  * Since: cosmos-sdk 0.46
  */
 export interface MsgSoftwareUpgradeResponse {}
+
+/**
+ * MsgSoftwareUpgradeResponse is the Msg/SoftwareUpgrade response type.
+ * 
+ * Since: cosmos-sdk 0.46
+ */
+export interface MsgSoftwareUpgradeResponseSDKType {}
 
 /**
  * MsgCancelUpgrade is the Msg/CancelUpgrade request type.
@@ -34,11 +54,28 @@ export interface MsgCancelUpgrade {
 }
 
 /**
+ * MsgCancelUpgrade is the Msg/CancelUpgrade request type.
+ * 
+ * Since: cosmos-sdk 0.46
+ */
+export interface MsgCancelUpgradeSDKType {
+  /** authority is the address of the governance account. */
+  authority: string;
+}
+
+/**
  * MsgCancelUpgradeResponse is the Msg/CancelUpgrade response type.
  * 
  * Since: cosmos-sdk 0.46
  */
 export interface MsgCancelUpgradeResponse {}
+
+/**
+ * MsgCancelUpgradeResponse is the Msg/CancelUpgrade response type.
+ * 
+ * Since: cosmos-sdk 0.46
+ */
+export interface MsgCancelUpgradeResponseSDKType {}
 
 function createBaseMsgSoftwareUpgrade(): MsgSoftwareUpgrade {
   return {
@@ -105,6 +142,20 @@ export const MsgSoftwareUpgrade = {
     message.authority = object.authority ?? "";
     message.plan = object.plan !== undefined && object.plan !== null ? Plan.fromPartial(object.plan) : undefined;
     return message;
+  },
+
+  fromSDK(object: MsgSoftwareUpgradeSDKType): MsgSoftwareUpgrade {
+    return {
+      authority: isSet(object.authority) ? object.authority : "",
+      plan: isSet(object.plan) ? Plan.fromSDK(object.plan) : undefined
+    };
+  },
+
+  toSDK(message: MsgSoftwareUpgrade): MsgSoftwareUpgradeSDKType {
+    const obj: any = {};
+    message.authority !== undefined && (obj.authority = message.authority);
+    message.plan !== undefined && (obj.plan = message.plan ? Plan.toSDK(message.plan) : undefined);
+    return obj;
   }
 
 };
@@ -148,6 +199,15 @@ export const MsgSoftwareUpgradeResponse = {
   fromPartial(_: DeepPartial<MsgSoftwareUpgradeResponse>): MsgSoftwareUpgradeResponse {
     const message = createBaseMsgSoftwareUpgradeResponse();
     return message;
+  },
+
+  fromSDK(_: MsgSoftwareUpgradeResponseSDKType): MsgSoftwareUpgradeResponse {
+    return {};
+  },
+
+  toSDK(_: MsgSoftwareUpgradeResponse): MsgSoftwareUpgradeResponseSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -205,6 +265,18 @@ export const MsgCancelUpgrade = {
     const message = createBaseMsgCancelUpgrade();
     message.authority = object.authority ?? "";
     return message;
+  },
+
+  fromSDK(object: MsgCancelUpgradeSDKType): MsgCancelUpgrade {
+    return {
+      authority: isSet(object.authority) ? object.authority : ""
+    };
+  },
+
+  toSDK(message: MsgCancelUpgrade): MsgCancelUpgradeSDKType {
+    const obj: any = {};
+    message.authority !== undefined && (obj.authority = message.authority);
+    return obj;
   }
 
 };
@@ -248,6 +320,15 @@ export const MsgCancelUpgradeResponse = {
   fromPartial(_: DeepPartial<MsgCancelUpgradeResponse>): MsgCancelUpgradeResponse {
     const message = createBaseMsgCancelUpgradeResponse();
     return message;
+  },
+
+  fromSDK(_: MsgCancelUpgradeResponseSDKType): MsgCancelUpgradeResponse {
+    return {};
+  },
+
+  toSDK(_: MsgCancelUpgradeResponse): MsgCancelUpgradeResponseSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };

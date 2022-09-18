@@ -1,6 +1,6 @@
-import { ResourceValue } from "./resourcevalue";
-import { Attribute } from "./attribute";
-import { Endpoint } from "./endpoint";
+import { ResourceValue, ResourceValueSDKType } from "./resourcevalue";
+import { Attribute, AttributeSDKType } from "./attribute";
+import { Endpoint, EndpointSDKType } from "./endpoint";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, Exact } from "@osmonauts/helpers";
 export const protobufPackage = "akash.base.v1beta1";
@@ -11,16 +11,34 @@ export interface CPU {
   attributes: Attribute[];
 }
 
+/** CPU stores resource units and cpu config attributes */
+export interface CPUSDKType {
+  units: ResourceValueSDKType;
+  attributes: AttributeSDKType[];
+}
+
 /** Memory stores resource quantity and memory attributes */
 export interface Memory {
   quantity: ResourceValue;
   attributes: Attribute[];
 }
 
+/** Memory stores resource quantity and memory attributes */
+export interface MemorySDKType {
+  quantity: ResourceValueSDKType;
+  attributes: AttributeSDKType[];
+}
+
 /** Storage stores resource quantity and storage attributes */
 export interface Storage {
   quantity: ResourceValue;
   attributes: Attribute[];
+}
+
+/** Storage stores resource quantity and storage attributes */
+export interface StorageSDKType {
+  quantity: ResourceValueSDKType;
+  attributes: AttributeSDKType[];
 }
 
 /**
@@ -32,6 +50,17 @@ export interface ResourceUnits {
   memory?: Memory;
   storage?: Storage;
   endpoints: Endpoint[];
+}
+
+/**
+ * ResourceUnits describes all available resources types for deployment/node etc
+ * if field is nil resource is not present in the given data-structure
+ */
+export interface ResourceUnitsSDKType {
+  cpu?: CPUSDKType;
+  memory?: MemorySDKType;
+  storage?: StorageSDKType;
+  endpoints: EndpointSDKType[];
 }
 
 function createBaseCPU(): CPU {
@@ -105,6 +134,26 @@ export const CPU = {
     message.units = object.units !== undefined && object.units !== null ? ResourceValue.fromPartial(object.units) : undefined;
     message.attributes = object.attributes?.map(e => Attribute.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: CPUSDKType): CPU {
+    return {
+      units: isSet(object.units) ? ResourceValue.fromSDK(object.units) : undefined,
+      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: CPU): CPUSDKType {
+    const obj: any = {};
+    message.units !== undefined && (obj.units = message.units ? ResourceValue.toSDK(message.units) : undefined);
+
+    if (message.attributes) {
+      obj.attributes = message.attributes.map(e => e ? Attribute.toSDK(e) : undefined);
+    } else {
+      obj.attributes = [];
+    }
+
+    return obj;
   }
 
 };
@@ -180,6 +229,26 @@ export const Memory = {
     message.quantity = object.quantity !== undefined && object.quantity !== null ? ResourceValue.fromPartial(object.quantity) : undefined;
     message.attributes = object.attributes?.map(e => Attribute.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: MemorySDKType): Memory {
+    return {
+      quantity: isSet(object.quantity) ? ResourceValue.fromSDK(object.quantity) : undefined,
+      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: Memory): MemorySDKType {
+    const obj: any = {};
+    message.quantity !== undefined && (obj.quantity = message.quantity ? ResourceValue.toSDK(message.quantity) : undefined);
+
+    if (message.attributes) {
+      obj.attributes = message.attributes.map(e => e ? Attribute.toSDK(e) : undefined);
+    } else {
+      obj.attributes = [];
+    }
+
+    return obj;
   }
 
 };
@@ -255,6 +324,26 @@ export const Storage = {
     message.quantity = object.quantity !== undefined && object.quantity !== null ? ResourceValue.fromPartial(object.quantity) : undefined;
     message.attributes = object.attributes?.map(e => Attribute.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: StorageSDKType): Storage {
+    return {
+      quantity: isSet(object.quantity) ? ResourceValue.fromSDK(object.quantity) : undefined,
+      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: Storage): StorageSDKType {
+    const obj: any = {};
+    message.quantity !== undefined && (obj.quantity = message.quantity ? ResourceValue.toSDK(message.quantity) : undefined);
+
+    if (message.attributes) {
+      obj.attributes = message.attributes.map(e => e ? Attribute.toSDK(e) : undefined);
+    } else {
+      obj.attributes = [];
+    }
+
+    return obj;
   }
 
 };
@@ -354,6 +443,30 @@ export const ResourceUnits = {
     message.storage = object.storage !== undefined && object.storage !== null ? Storage.fromPartial(object.storage) : undefined;
     message.endpoints = object.endpoints?.map(e => Endpoint.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: ResourceUnitsSDKType): ResourceUnits {
+    return {
+      cpu: isSet(object.cpu) ? CPU.fromSDK(object.cpu) : undefined,
+      memory: isSet(object.memory) ? Memory.fromSDK(object.memory) : undefined,
+      storage: isSet(object.storage) ? Storage.fromSDK(object.storage) : undefined,
+      endpoints: Array.isArray(object?.endpoints) ? object.endpoints.map((e: any) => Endpoint.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: ResourceUnits): ResourceUnitsSDKType {
+    const obj: any = {};
+    message.cpu !== undefined && (obj.cpu = message.cpu ? CPU.toSDK(message.cpu) : undefined);
+    message.memory !== undefined && (obj.memory = message.memory ? Memory.toSDK(message.memory) : undefined);
+    message.storage !== undefined && (obj.storage = message.storage ? Storage.toSDK(message.storage) : undefined);
+
+    if (message.endpoints) {
+      obj.endpoints = message.endpoints.map(e => e ? Endpoint.toSDK(e) : undefined);
+    } else {
+      obj.endpoints = [];
+    }
+
+    return obj;
   }
 
 };

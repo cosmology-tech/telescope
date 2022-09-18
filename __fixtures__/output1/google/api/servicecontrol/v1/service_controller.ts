@@ -1,6 +1,6 @@
-import { Operation } from "./operation";
-import { CheckError } from "./check_error";
-import { Status } from "../../../rpc/status";
+import { Operation, OperationSDKType } from "./operation";
+import { CheckError, CheckErrorSDKType } from "./check_error";
+import { Status, StatusSDKType } from "../../../rpc/status";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, Long } from "@osmonauts/helpers";
 export const protobufPackage = "google.api.servicecontrol.v1";
@@ -105,6 +105,31 @@ export interface CheckRequest {
   serviceConfigId: string;
 }
 
+/** Request message for the Check method. */
+export interface CheckRequestSDKType {
+  /**
+   * The service name as specified in its service configuration. For example,
+   * `"pubsub.googleapis.com"`.
+   * 
+   * See
+   * [google.api.Service](https://cloud.google.com/service-management/reference/rpc/google.api#google.api.Service)
+   * for the definition of a service name.
+   */
+  service_name: string;
+
+  /** The operation to be checked. */
+  operation: OperationSDKType;
+
+  /**
+   * Specifies which version of service configuration should be used to process
+   * the request.
+   * 
+   * If unspecified or no matching version can be found, the
+   * latest one will be used.
+   */
+  service_config_id: string;
+}
+
 /** Response message for the Check method. */
 export interface CheckResponse {
   /**
@@ -133,6 +158,34 @@ export interface CheckResponse {
   checkInfo: CheckResponse_CheckInfo;
 }
 
+/** Response message for the Check method. */
+export interface CheckResponseSDKType {
+  /**
+   * The same operation_id value used in the
+   * [CheckRequest][google.api.servicecontrol.v1.CheckRequest]. Used for logging
+   * and diagnostics purposes.
+   */
+  operation_id: string;
+
+  /**
+   * Indicate the decision of the check.
+   * 
+   * If no check errors are present, the service should process the operation.
+   * Otherwise the service should use the list of errors to determine the
+   * appropriate action.
+   */
+  check_errors: CheckErrorSDKType[];
+
+  /** The actual config id used to process the request. */
+  service_config_id: string;
+
+  /** The current service rollout id used to process the request. */
+  service_rollout_id: string;
+
+  /** Feedback data returned from the server during processing a Check request. */
+  check_info: CheckResponse_CheckInfoSDKType;
+}
+
 /** Contains additional information about the check operation. */
 export interface CheckResponse_CheckInfo {
   /**
@@ -144,6 +197,19 @@ export interface CheckResponse_CheckInfo {
 
   /** Consumer info of this check. */
   consumerInfo: CheckResponse_ConsumerInfo;
+}
+
+/** Contains additional information about the check operation. */
+export interface CheckResponse_CheckInfoSDKType {
+  /**
+   * A list of fields and label keys that are ignored by the server.
+   * The client doesn't need to send them for following requests to improve
+   * performance and allow better aggregation.
+   */
+  unused_arguments: string[];
+
+  /** Consumer info of this check. */
+  consumer_info: CheckResponse_ConsumerInfoSDKType;
 }
 
 /** `ConsumerInfo` provides information about the consumer. */
@@ -169,6 +235,31 @@ export interface CheckResponse_ConsumerInfo {
    * consumer number is found.
    */
   consumerNumber: Long;
+}
+
+/** `ConsumerInfo` provides information about the consumer. */
+export interface CheckResponse_ConsumerInfoSDKType {
+  /**
+   * The Google cloud project number, e.g. 1234567890. A value of 0 indicates
+   * no project number is found.
+   * 
+   * NOTE: This field is deprecated after we support flexible consumer
+   * id. New code should not depend on this field anymore.
+   */
+  project_number: Long;
+
+  /**
+   * The type of the consumer which should have been defined in
+   * [Google Resource Manager](https://cloud.google.com/resource-manager/).
+   */
+  type: CheckResponse_ConsumerInfo_ConsumerTypeSDKType;
+
+  /**
+   * The consumer identity number, can be Google cloud project number, folder
+   * number or organization number e.g. 1234567890. A value of 0 indicates no
+   * consumer number is found.
+   */
+  consumer_number: Long;
 }
 
 /** Request message for the Report method. */
@@ -208,6 +299,43 @@ export interface ReportRequest {
   serviceConfigId: string;
 }
 
+/** Request message for the Report method. */
+export interface ReportRequestSDKType {
+  /**
+   * The service name as specified in its service configuration. For example,
+   * `"pubsub.googleapis.com"`.
+   * 
+   * See
+   * [google.api.Service](https://cloud.google.com/service-management/reference/rpc/google.api#google.api.Service)
+   * for the definition of a service name.
+   */
+  service_name: string;
+
+  /**
+   * Operations to be reported.
+   * 
+   * Typically the service should report one operation per request.
+   * Putting multiple operations into a single request is allowed, but should
+   * be used only when multiple operations are natually available at the time
+   * of the report.
+   * 
+   * There is no limit on the number of operations in the same ReportRequest,
+   * however the ReportRequest size should be no larger than 1MB. See
+   * [ReportResponse.report_errors][google.api.servicecontrol.v1.ReportResponse.report_errors]
+   * for partial failure behavior.
+   */
+  operations: OperationSDKType[];
+
+  /**
+   * Specifies which version of service config should be used to process the
+   * request.
+   * 
+   * If unspecified or no matching version can be found, the
+   * latest one will be used.
+   */
+  service_config_id: string;
+}
+
 /** Response message for the Report method. */
 export interface ReportResponse {
   /**
@@ -235,6 +363,33 @@ export interface ReportResponse {
   serviceRolloutId: string;
 }
 
+/** Response message for the Report method. */
+export interface ReportResponseSDKType {
+  /**
+   * Partial failures, one for each `Operation` in the request that failed
+   * processing. There are three possible combinations of the RPC status:
+   * 
+   * 1. The combination of a successful RPC status and an empty `report_errors`
+   * list indicates a complete success where all `Operations` in the
+   * request are processed successfully.
+   * 2. The combination of a successful RPC status and a non-empty
+   * `report_errors` list indicates a partial success where some
+   * `Operations` in the request succeeded. Each
+   * `Operation` that failed processing has a corresponding item
+   * in this list.
+   * 3. A failed RPC status indicates a general non-deterministic failure.
+   * When this happens, it's impossible to know which of the
+   * 'Operations' in the request succeeded or failed.
+   */
+  report_errors: ReportResponse_ReportErrorSDKType[];
+
+  /** The actual config id used to process the request. */
+  service_config_id: string;
+
+  /** The current service rollout id used to process the request. */
+  service_rollout_id: string;
+}
+
 /**
  * Represents the processing error of one
  * [Operation][google.api.servicecontrol.v1.Operation] in the request.
@@ -252,6 +407,25 @@ export interface ReportResponse_ReportError {
    * [Operation][google.api.servicecontrol.v1.Operation].
    */
   status: Status;
+}
+
+/**
+ * Represents the processing error of one
+ * [Operation][google.api.servicecontrol.v1.Operation] in the request.
+ */
+export interface ReportResponse_ReportErrorSDKType {
+  /**
+   * The
+   * [Operation.operation_id][google.api.servicecontrol.v1.Operation.operation_id]
+   * value from the request.
+   */
+  operation_id: string;
+
+  /**
+   * Details of the error when processing the
+   * [Operation][google.api.servicecontrol.v1.Operation].
+   */
+  status: StatusSDKType;
 }
 
 function createBaseCheckRequest(): CheckRequest {
@@ -331,6 +505,22 @@ export const CheckRequest = {
     message.operation = object.operation !== undefined && object.operation !== null ? Operation.fromPartial(object.operation) : undefined;
     message.serviceConfigId = object.serviceConfigId ?? "";
     return message;
+  },
+
+  fromSDK(object: CheckRequestSDKType): CheckRequest {
+    return {
+      serviceName: isSet(object.service_name) ? object.service_name : "",
+      operation: isSet(object.operation) ? Operation.fromSDK(object.operation) : undefined,
+      serviceConfigId: isSet(object.service_config_id) ? object.service_config_id : ""
+    };
+  },
+
+  toSDK(message: CheckRequest): CheckRequestSDKType {
+    const obj: any = {};
+    message.serviceName !== undefined && (obj.service_name = message.serviceName);
+    message.operation !== undefined && (obj.operation = message.operation ? Operation.toSDK(message.operation) : undefined);
+    message.serviceConfigId !== undefined && (obj.service_config_id = message.serviceConfigId);
+    return obj;
   }
 
 };
@@ -442,6 +632,32 @@ export const CheckResponse = {
     message.serviceRolloutId = object.serviceRolloutId ?? "";
     message.checkInfo = object.checkInfo !== undefined && object.checkInfo !== null ? CheckResponse_CheckInfo.fromPartial(object.checkInfo) : undefined;
     return message;
+  },
+
+  fromSDK(object: CheckResponseSDKType): CheckResponse {
+    return {
+      operationId: isSet(object.operation_id) ? object.operation_id : "",
+      checkErrors: Array.isArray(object?.check_errors) ? object.check_errors.map((e: any) => CheckError.fromSDK(e)) : [],
+      serviceConfigId: isSet(object.service_config_id) ? object.service_config_id : "",
+      serviceRolloutId: isSet(object.service_rollout_id) ? object.service_rollout_id : "",
+      checkInfo: isSet(object.check_info) ? CheckResponse_CheckInfo.fromSDK(object.check_info) : undefined
+    };
+  },
+
+  toSDK(message: CheckResponse): CheckResponseSDKType {
+    const obj: any = {};
+    message.operationId !== undefined && (obj.operation_id = message.operationId);
+
+    if (message.checkErrors) {
+      obj.check_errors = message.checkErrors.map(e => e ? CheckError.toSDK(e) : undefined);
+    } else {
+      obj.check_errors = [];
+    }
+
+    message.serviceConfigId !== undefined && (obj.service_config_id = message.serviceConfigId);
+    message.serviceRolloutId !== undefined && (obj.service_rollout_id = message.serviceRolloutId);
+    message.checkInfo !== undefined && (obj.check_info = message.checkInfo ? CheckResponse_CheckInfo.toSDK(message.checkInfo) : undefined);
+    return obj;
   }
 
 };
@@ -517,6 +733,26 @@ export const CheckResponse_CheckInfo = {
     message.unusedArguments = object.unusedArguments?.map(e => e) || [];
     message.consumerInfo = object.consumerInfo !== undefined && object.consumerInfo !== null ? CheckResponse_ConsumerInfo.fromPartial(object.consumerInfo) : undefined;
     return message;
+  },
+
+  fromSDK(object: CheckResponse_CheckInfoSDKType): CheckResponse_CheckInfo {
+    return {
+      unusedArguments: Array.isArray(object?.unused_arguments) ? object.unused_arguments.map((e: any) => e) : [],
+      consumerInfo: isSet(object.consumer_info) ? CheckResponse_ConsumerInfo.fromSDK(object.consumer_info) : undefined
+    };
+  },
+
+  toSDK(message: CheckResponse_CheckInfo): CheckResponse_CheckInfoSDKType {
+    const obj: any = {};
+
+    if (message.unusedArguments) {
+      obj.unused_arguments = message.unusedArguments.map(e => e);
+    } else {
+      obj.unused_arguments = [];
+    }
+
+    message.consumerInfo !== undefined && (obj.consumer_info = message.consumerInfo ? CheckResponse_ConsumerInfo.toSDK(message.consumerInfo) : undefined);
+    return obj;
   }
 
 };
@@ -598,6 +834,22 @@ export const CheckResponse_ConsumerInfo = {
     message.type = object.type ?? 0;
     message.consumerNumber = object.consumerNumber !== undefined && object.consumerNumber !== null ? Long.fromValue(object.consumerNumber) : Long.ZERO;
     return message;
+  },
+
+  fromSDK(object: CheckResponse_ConsumerInfoSDKType): CheckResponse_ConsumerInfo {
+    return {
+      projectNumber: isSet(object.project_number) ? object.project_number : Long.ZERO,
+      type: isSet(object.type) ? checkResponse_ConsumerInfo_ConsumerTypeFromJSON(object.type) : 0,
+      consumerNumber: isSet(object.consumer_number) ? object.consumer_number : Long.ZERO
+    };
+  },
+
+  toSDK(message: CheckResponse_ConsumerInfo): CheckResponse_ConsumerInfoSDKType {
+    const obj: any = {};
+    message.projectNumber !== undefined && (obj.project_number = message.projectNumber);
+    message.type !== undefined && (obj.type = checkResponse_ConsumerInfo_ConsumerTypeToJSON(message.type));
+    message.consumerNumber !== undefined && (obj.consumer_number = message.consumerNumber);
+    return obj;
   }
 
 };
@@ -685,6 +937,28 @@ export const ReportRequest = {
     message.operations = object.operations?.map(e => Operation.fromPartial(e)) || [];
     message.serviceConfigId = object.serviceConfigId ?? "";
     return message;
+  },
+
+  fromSDK(object: ReportRequestSDKType): ReportRequest {
+    return {
+      serviceName: isSet(object.service_name) ? object.service_name : "",
+      operations: Array.isArray(object?.operations) ? object.operations.map((e: any) => Operation.fromSDK(e)) : [],
+      serviceConfigId: isSet(object.service_config_id) ? object.service_config_id : ""
+    };
+  },
+
+  toSDK(message: ReportRequest): ReportRequestSDKType {
+    const obj: any = {};
+    message.serviceName !== undefined && (obj.service_name = message.serviceName);
+
+    if (message.operations) {
+      obj.operations = message.operations.map(e => e ? Operation.toSDK(e) : undefined);
+    } else {
+      obj.operations = [];
+    }
+
+    message.serviceConfigId !== undefined && (obj.service_config_id = message.serviceConfigId);
+    return obj;
   }
 
 };
@@ -772,6 +1046,28 @@ export const ReportResponse = {
     message.serviceConfigId = object.serviceConfigId ?? "";
     message.serviceRolloutId = object.serviceRolloutId ?? "";
     return message;
+  },
+
+  fromSDK(object: ReportResponseSDKType): ReportResponse {
+    return {
+      reportErrors: Array.isArray(object?.report_errors) ? object.report_errors.map((e: any) => ReportResponse_ReportError.fromSDK(e)) : [],
+      serviceConfigId: isSet(object.service_config_id) ? object.service_config_id : "",
+      serviceRolloutId: isSet(object.service_rollout_id) ? object.service_rollout_id : ""
+    };
+  },
+
+  toSDK(message: ReportResponse): ReportResponseSDKType {
+    const obj: any = {};
+
+    if (message.reportErrors) {
+      obj.report_errors = message.reportErrors.map(e => e ? ReportResponse_ReportError.toSDK(e) : undefined);
+    } else {
+      obj.report_errors = [];
+    }
+
+    message.serviceConfigId !== undefined && (obj.service_config_id = message.serviceConfigId);
+    message.serviceRolloutId !== undefined && (obj.service_rollout_id = message.serviceRolloutId);
+    return obj;
   }
 
 };
@@ -841,6 +1137,20 @@ export const ReportResponse_ReportError = {
     message.operationId = object.operationId ?? "";
     message.status = object.status !== undefined && object.status !== null ? Status.fromPartial(object.status) : undefined;
     return message;
+  },
+
+  fromSDK(object: ReportResponse_ReportErrorSDKType): ReportResponse_ReportError {
+    return {
+      operationId: isSet(object.operation_id) ? object.operation_id : "",
+      status: isSet(object.status) ? Status.fromSDK(object.status) : undefined
+    };
+  },
+
+  toSDK(message: ReportResponse_ReportError): ReportResponse_ReportErrorSDKType {
+    const obj: any = {};
+    message.operationId !== undefined && (obj.operation_id = message.operationId);
+    message.status !== undefined && (obj.status = message.status ? Status.toSDK(message.status) : undefined);
+    return obj;
   }
 
 };

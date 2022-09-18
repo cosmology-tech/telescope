@@ -1,5 +1,5 @@
-import { PageRequest, PageResponse } from "../../../cosmos/base/query/v1beta1/pagination";
-import { Account, Payment } from "./types";
+import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
+import { Account, AccountSDKType, Payment, PaymentSDKType } from "./types";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, Exact } from "@osmonauts/helpers";
 export const protobufPackage = "akash.escrow.v1beta1";
@@ -13,10 +13,25 @@ export interface QueryAccountsRequest {
   pagination?: PageRequest;
 }
 
+/** QueryAccountRequest is request type for the Query/Account RPC method */
+export interface QueryAccountsRequestSDKType {
+  scope: string;
+  xid: string;
+  owner: string;
+  state: string;
+  pagination?: PageRequestSDKType;
+}
+
 /** QueryProvidersResponse is response type for the Query/Providers RPC method */
 export interface QueryAccountsResponse {
   accounts: Account[];
   pagination?: PageResponse;
+}
+
+/** QueryProvidersResponse is response type for the Query/Providers RPC method */
+export interface QueryAccountsResponseSDKType {
+  accounts: AccountSDKType[];
+  pagination?: PageResponseSDKType;
 }
 
 /** QueryPaymentRequest is request type for the Query/Payment RPC method */
@@ -29,10 +44,26 @@ export interface QueryPaymentsRequest {
   pagination?: PageRequest;
 }
 
+/** QueryPaymentRequest is request type for the Query/Payment RPC method */
+export interface QueryPaymentsRequestSDKType {
+  scope?: string;
+  xid?: string;
+  id?: string;
+  owner?: string;
+  state?: string;
+  pagination?: PageRequestSDKType;
+}
+
 /** QueryProvidersResponse is response type for the Query/Providers RPC method */
 export interface QueryPaymentsResponse {
   payments: Payment[];
   pagination?: PageResponse;
+}
+
+/** QueryProvidersResponse is response type for the Query/Providers RPC method */
+export interface QueryPaymentsResponseSDKType {
+  payments: PaymentSDKType[];
+  pagination?: PageResponseSDKType;
 }
 
 function createBaseQueryAccountsRequest(): QueryAccountsRequest {
@@ -136,6 +167,26 @@ export const QueryAccountsRequest = {
     message.state = object.state ?? "";
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryAccountsRequestSDKType): QueryAccountsRequest {
+    return {
+      scope: isSet(object.scope) ? object.scope : "",
+      xid: isSet(object.xid) ? object.xid : "",
+      owner: isSet(object.owner) ? object.owner : "",
+      state: isSet(object.state) ? object.state : "",
+      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  toSDK(message: QueryAccountsRequest): QueryAccountsRequestSDKType {
+    const obj: any = {};
+    message.scope !== undefined && (obj.scope = message.scope);
+    message.xid !== undefined && (obj.xid = message.xid);
+    message.owner !== undefined && (obj.owner = message.owner);
+    message.state !== undefined && (obj.state = message.state);
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
+    return obj;
   }
 
 };
@@ -211,6 +262,26 @@ export const QueryAccountsResponse = {
     message.accounts = object.accounts?.map(e => Account.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryAccountsResponseSDKType): QueryAccountsResponse {
+    return {
+      accounts: Array.isArray(object?.accounts) ? object.accounts.map((e: any) => Account.fromSDK(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  toSDK(message: QueryAccountsResponse): QueryAccountsResponseSDKType {
+    const obj: any = {};
+
+    if (message.accounts) {
+      obj.accounts = message.accounts.map(e => e ? Account.toSDK(e) : undefined);
+    } else {
+      obj.accounts = [];
+    }
+
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
+    return obj;
   }
 
 };
@@ -328,6 +399,28 @@ export const QueryPaymentsRequest = {
     message.state = object.state ?? "";
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryPaymentsRequestSDKType): QueryPaymentsRequest {
+    return {
+      scope: isSet(object.scope) ? object.scope : "",
+      xid: isSet(object.xid) ? object.xid : "",
+      id: isSet(object.id) ? object.id : "",
+      owner: isSet(object.owner) ? object.owner : "",
+      state: isSet(object.state) ? object.state : "",
+      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  toSDK(message: QueryPaymentsRequest): QueryPaymentsRequestSDKType {
+    const obj: any = {};
+    message.scope !== undefined && (obj.scope = message.scope);
+    message.xid !== undefined && (obj.xid = message.xid);
+    message.id !== undefined && (obj.id = message.id);
+    message.owner !== undefined && (obj.owner = message.owner);
+    message.state !== undefined && (obj.state = message.state);
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
+    return obj;
   }
 
 };
@@ -403,6 +496,26 @@ export const QueryPaymentsResponse = {
     message.payments = object.payments?.map(e => Payment.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryPaymentsResponseSDKType): QueryPaymentsResponse {
+    return {
+      payments: Array.isArray(object?.payments) ? object.payments.map((e: any) => Payment.fromSDK(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  toSDK(message: QueryPaymentsResponse): QueryPaymentsResponseSDKType {
+    const obj: any = {};
+
+    if (message.payments) {
+      obj.payments = message.payments.map(e => e ? Payment.toSDK(e) : undefined);
+    } else {
+      obj.payments = [];
+    }
+
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
+    return obj;
   }
 
 };

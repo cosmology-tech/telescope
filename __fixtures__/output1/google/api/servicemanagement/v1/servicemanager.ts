@@ -1,6 +1,6 @@
-import { ManagedService, ConfigSource, Rollout, ChangeReport, Diagnostic } from "./resources";
-import { Service } from "../../service";
-import { Any } from "../../../protobuf/any";
+import { ManagedService, ManagedServiceSDKType, ConfigSource, ConfigSourceSDKType, Rollout, RolloutSDKType, ChangeReport, ChangeReportSDKType, Diagnostic, DiagnosticSDKType } from "./resources";
+import { Service, ServiceSDKType } from "../../service";
+import { Any, AnySDKType } from "../../../protobuf/any";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "@osmonauts/helpers";
 export const protobufPackage = "google.api.servicemanagement.v1";
@@ -75,6 +75,35 @@ export interface ListServicesRequest {
   consumerId: string;
 }
 
+/** Request message for `ListServices` method. */
+export interface ListServicesRequestSDKType {
+  /** Include services produced by the specified project. */
+  producer_project_id: string;
+
+  /**
+   * The max number of items to include in the response list. Page size is 50
+   * if not specified. Maximum value is 100.
+   */
+  page_size?: number;
+
+  /**
+   * Token identifying which result to start with; returned by a previous list
+   * call.
+   */
+  page_token?: string;
+
+  /**
+   * Include services consumed by the specified consumer.
+   * 
+   * The Google Service Management implementation accepts the following
+   * forms:
+   * - project:<project_id>
+   */
+
+  /** @deprecated */
+  consumer_id: string;
+}
+
 /** Response message for `ListServices` method. */
 export interface ListServicesResponse {
   /** The returned services will only have the name field set. */
@@ -82,6 +111,15 @@ export interface ListServicesResponse {
 
   /** Token that can be passed to `ListServices` to resume a paginated query. */
   nextPageToken: string;
+}
+
+/** Response message for `ListServices` method. */
+export interface ListServicesResponseSDKType {
+  /** The returned services will only have the name field set. */
+  services: ManagedServiceSDKType[];
+
+  /** Token that can be passed to `ListServices` to resume a paginated query. */
+  next_page_token: string;
 }
 
 /** Request message for `GetService` method. */
@@ -93,10 +131,25 @@ export interface GetServiceRequest {
   serviceName: string;
 }
 
+/** Request message for `GetService` method. */
+export interface GetServiceRequestSDKType {
+  /**
+   * Required. The name of the service.  See the `ServiceManager` overview for naming
+   * requirements.  For example: `example.googleapis.com`.
+   */
+  service_name: string;
+}
+
 /** Request message for CreateService method. */
 export interface CreateServiceRequest {
   /** Required. Initial values for the service resource. */
   service: ManagedService;
+}
+
+/** Request message for CreateService method. */
+export interface CreateServiceRequestSDKType {
+  /** Required. Initial values for the service resource. */
+  service: ManagedServiceSDKType;
 }
 
 /** Request message for DeleteService method. */
@@ -108,6 +161,15 @@ export interface DeleteServiceRequest {
   serviceName: string;
 }
 
+/** Request message for DeleteService method. */
+export interface DeleteServiceRequestSDKType {
+  /**
+   * Required. The name of the service.  See the [overview](/service-management/overview)
+   * for naming requirements.  For example: `example.googleapis.com`.
+   */
+  service_name: string;
+}
+
 /** Request message for UndeleteService method. */
 export interface UndeleteServiceRequest {
   /**
@@ -117,10 +179,25 @@ export interface UndeleteServiceRequest {
   serviceName: string;
 }
 
+/** Request message for UndeleteService method. */
+export interface UndeleteServiceRequestSDKType {
+  /**
+   * Required. The name of the service. See the [overview](/service-management/overview)
+   * for naming requirements. For example: `example.googleapis.com`.
+   */
+  service_name: string;
+}
+
 /** Response message for UndeleteService method. */
 export interface UndeleteServiceResponse {
   /** Revived service resource. */
   service: ManagedService;
+}
+
+/** Response message for UndeleteService method. */
+export interface UndeleteServiceResponseSDKType {
+  /** Revived service resource. */
+  service: ManagedServiceSDKType;
 }
 
 /** Request message for GetServiceConfig method. */
@@ -146,6 +223,29 @@ export interface GetServiceConfigRequest {
   view?: GetServiceConfigRequest_ConfigView;
 }
 
+/** Request message for GetServiceConfig method. */
+export interface GetServiceConfigRequestSDKType {
+  /**
+   * Required. The name of the service.  See the [overview](/service-management/overview)
+   * for naming requirements.  For example: `example.googleapis.com`.
+   */
+  service_name: string;
+
+  /**
+   * Required. The id of the service configuration resource.
+   * 
+   * This field must be specified for the server to return all fields, including
+   * `SourceInfo`.
+   */
+  config_id: string;
+
+  /**
+   * Specifies which parts of the Service Config should be returned in the
+   * response.
+   */
+  view?: GetServiceConfigRequest_ConfigViewSDKType;
+}
+
 /** Request message for ListServiceConfigs method. */
 export interface ListServiceConfigsRequest {
   /**
@@ -164,6 +264,24 @@ export interface ListServiceConfigsRequest {
   pageSize?: number;
 }
 
+/** Request message for ListServiceConfigs method. */
+export interface ListServiceConfigsRequestSDKType {
+  /**
+   * Required. The name of the service.  See the [overview](/service-management/overview)
+   * for naming requirements.  For example: `example.googleapis.com`.
+   */
+  service_name: string;
+
+  /** The token of the page to retrieve. */
+  page_token?: string;
+
+  /**
+   * The max number of items to include in the response list. Page size is 50
+   * if not specified. Maximum value is 100.
+   */
+  page_size?: number;
+}
+
 /** Response message for ListServiceConfigs method. */
 export interface ListServiceConfigsResponse {
   /** The list of service configuration resources. */
@@ -171,6 +289,15 @@ export interface ListServiceConfigsResponse {
 
   /** The token of the next page of results. */
   nextPageToken: string;
+}
+
+/** Response message for ListServiceConfigs method. */
+export interface ListServiceConfigsResponseSDKType {
+  /** The list of service configuration resources. */
+  service_configs: ServiceSDKType[];
+
+  /** The token of the next page of results. */
+  next_page_token: string;
 }
 
 /** Request message for CreateServiceConfig method. */
@@ -183,6 +310,18 @@ export interface CreateServiceConfigRequest {
 
   /** Required. The service configuration resource. */
   serviceConfig: Service;
+}
+
+/** Request message for CreateServiceConfig method. */
+export interface CreateServiceConfigRequestSDKType {
+  /**
+   * Required. The name of the service.  See the [overview](/service-management/overview)
+   * for naming requirements.  For example: `example.googleapis.com`.
+   */
+  service_name: string;
+
+  /** Required. The service configuration resource. */
+  service_config: ServiceSDKType;
 }
 
 /** Request message for SubmitConfigSource method. */
@@ -204,10 +343,35 @@ export interface SubmitConfigSourceRequest {
   validateOnly: boolean;
 }
 
+/** Request message for SubmitConfigSource method. */
+export interface SubmitConfigSourceRequestSDKType {
+  /**
+   * Required. The name of the service.  See the [overview](/service-management/overview)
+   * for naming requirements.  For example: `example.googleapis.com`.
+   */
+  service_name: string;
+
+  /** Required. The source configuration for the service. */
+  config_source: ConfigSourceSDKType;
+
+  /**
+   * Optional. If set, this will result in the generation of a
+   * `google.api.Service` configuration based on the `ConfigSource` provided,
+   * but the generated config and the sources will NOT be persisted.
+   */
+  validate_only: boolean;
+}
+
 /** Response message for SubmitConfigSource method. */
 export interface SubmitConfigSourceResponse {
   /** The generated service configuration. */
   serviceConfig: Service;
+}
+
+/** Response message for SubmitConfigSource method. */
+export interface SubmitConfigSourceResponseSDKType {
+  /** The generated service configuration. */
+  service_config: ServiceSDKType;
 }
 
 /** Request message for 'CreateServiceRollout' */
@@ -220,6 +384,18 @@ export interface CreateServiceRolloutRequest {
 
   /** Required. The rollout resource. The `service_name` field is output only. */
   rollout: Rollout;
+}
+
+/** Request message for 'CreateServiceRollout' */
+export interface CreateServiceRolloutRequestSDKType {
+  /**
+   * Required. The name of the service.  See the [overview](/service-management/overview)
+   * for naming requirements.  For example: `example.googleapis.com`.
+   */
+  service_name: string;
+
+  /** Required. The rollout resource. The `service_name` field is output only. */
+  rollout: RolloutSDKType;
 }
 
 /** Request message for 'ListServiceRollouts' */
@@ -252,6 +428,36 @@ export interface ListServiceRolloutsRequest {
   filter?: string;
 }
 
+/** Request message for 'ListServiceRollouts' */
+export interface ListServiceRolloutsRequestSDKType {
+  /**
+   * Required. The name of the service.  See the [overview](/service-management/overview)
+   * for naming requirements.  For example: `example.googleapis.com`.
+   */
+  service_name: string;
+
+  /** The token of the page to retrieve. */
+  page_token?: string;
+
+  /**
+   * The max number of items to include in the response list. Page size is 50
+   * if not specified. Maximum value is 100.
+   */
+  page_size?: number;
+
+  /**
+   * Required. Use `filter` to return subset of rollouts.
+   * The following filters are supported:
+   * -- To limit the results to only those in
+   * [status](google.api.servicemanagement.v1.RolloutStatus) 'SUCCESS',
+   * use filter='status=SUCCESS'
+   * -- To limit the results to those in
+   * [status](google.api.servicemanagement.v1.RolloutStatus) 'CANCELLED'
+   * or 'FAILED', use filter='status=CANCELLED OR status=FAILED'
+   */
+  filter?: string;
+}
+
 /** Response message for ListServiceRollouts method. */
 export interface ListServiceRolloutsResponse {
   /** The list of rollout resources. */
@@ -259,6 +465,15 @@ export interface ListServiceRolloutsResponse {
 
   /** The token of the next page of results. */
   nextPageToken: string;
+}
+
+/** Response message for ListServiceRollouts method. */
+export interface ListServiceRolloutsResponseSDKType {
+  /** The list of rollout resources. */
+  rollouts: RolloutSDKType[];
+
+  /** The token of the next page of results. */
+  next_page_token: string;
 }
 
 /** Request message for GetServiceRollout method. */
@@ -271,6 +486,18 @@ export interface GetServiceRolloutRequest {
 
   /** Required. The id of the rollout resource. */
   rolloutId: string;
+}
+
+/** Request message for GetServiceRollout method. */
+export interface GetServiceRolloutRequestSDKType {
+  /**
+   * Required. The name of the service.  See the [overview](/service-management/overview)
+   * for naming requirements.  For example: `example.googleapis.com`.
+   */
+  service_name: string;
+
+  /** Required. The id of the rollout resource. */
+  rollout_id: string;
 }
 
 /** Request message for GenerateConfigReport method. */
@@ -294,6 +521,27 @@ export interface GenerateConfigReportRequest {
   oldConfig: Any;
 }
 
+/** Request message for GenerateConfigReport method. */
+export interface GenerateConfigReportRequestSDKType {
+  /**
+   * Required. Service configuration for which we want to generate the report.
+   * For this version of API, the supported types are
+   * [google.api.servicemanagement.v1.ConfigRef][google.api.servicemanagement.v1.ConfigRef],
+   * [google.api.servicemanagement.v1.ConfigSource][google.api.servicemanagement.v1.ConfigSource],
+   * and [google.api.Service][google.api.Service]
+   */
+  new_config: Any;
+
+  /**
+   * Optional. Service configuration against which the comparison will be done.
+   * For this version of API, the supported types are
+   * [google.api.servicemanagement.v1.ConfigRef][google.api.servicemanagement.v1.ConfigRef],
+   * [google.api.servicemanagement.v1.ConfigSource][google.api.servicemanagement.v1.ConfigSource],
+   * and [google.api.Service][google.api.Service]
+   */
+  old_config: Any;
+}
+
 /** Response message for GenerateConfigReport method. */
 export interface GenerateConfigReportResponse {
   /** Name of the service this report belongs to. */
@@ -314,6 +562,28 @@ export interface GenerateConfigReportResponse {
    * belongs to.
    */
   diagnostics: Diagnostic[];
+}
+
+/** Response message for GenerateConfigReport method. */
+export interface GenerateConfigReportResponseSDKType {
+  /** Name of the service this report belongs to. */
+  service_name: string;
+
+  /** ID of the service configuration this report belongs to. */
+  id: string;
+
+  /**
+   * list of ChangeReport, each corresponding to comparison between two
+   * service configurations.
+   */
+  change_reports: ChangeReportSDKType[];
+
+  /**
+   * Errors / Linter warnings associated with the service definition this
+   * report
+   * belongs to.
+   */
+  diagnostics: DiagnosticSDKType[];
 }
 
 function createBaseListServicesRequest(): ListServicesRequest {
@@ -405,6 +675,24 @@ export const ListServicesRequest = {
     message.pageToken = object.pageToken ?? "";
     message.consumerId = object.consumerId ?? "";
     return message;
+  },
+
+  fromSDK(object: ListServicesRequestSDKType): ListServicesRequest {
+    return {
+      producerProjectId: isSet(object.producer_project_id) ? object.producer_project_id : "",
+      pageSize: isSet(object.page_size) ? object.page_size : 0,
+      pageToken: isSet(object.page_token) ? object.page_token : "",
+      consumerId: isSet(object.consumer_id) ? object.consumer_id : ""
+    };
+  },
+
+  toSDK(message: ListServicesRequest): ListServicesRequestSDKType {
+    const obj: any = {};
+    message.producerProjectId !== undefined && (obj.producer_project_id = message.producerProjectId);
+    message.pageSize !== undefined && (obj.page_size = message.pageSize);
+    message.pageToken !== undefined && (obj.page_token = message.pageToken);
+    message.consumerId !== undefined && (obj.consumer_id = message.consumerId);
+    return obj;
   }
 
 };
@@ -480,6 +768,26 @@ export const ListServicesResponse = {
     message.services = object.services?.map(e => ManagedService.fromPartial(e)) || [];
     message.nextPageToken = object.nextPageToken ?? "";
     return message;
+  },
+
+  fromSDK(object: ListServicesResponseSDKType): ListServicesResponse {
+    return {
+      services: Array.isArray(object?.services) ? object.services.map((e: any) => ManagedService.fromSDK(e)) : [],
+      nextPageToken: isSet(object.next_page_token) ? object.next_page_token : ""
+    };
+  },
+
+  toSDK(message: ListServicesResponse): ListServicesResponseSDKType {
+    const obj: any = {};
+
+    if (message.services) {
+      obj.services = message.services.map(e => e ? ManagedService.toSDK(e) : undefined);
+    } else {
+      obj.services = [];
+    }
+
+    message.nextPageToken !== undefined && (obj.next_page_token = message.nextPageToken);
+    return obj;
   }
 
 };
@@ -537,6 +845,18 @@ export const GetServiceRequest = {
     const message = createBaseGetServiceRequest();
     message.serviceName = object.serviceName ?? "";
     return message;
+  },
+
+  fromSDK(object: GetServiceRequestSDKType): GetServiceRequest {
+    return {
+      serviceName: isSet(object.service_name) ? object.service_name : ""
+    };
+  },
+
+  toSDK(message: GetServiceRequest): GetServiceRequestSDKType {
+    const obj: any = {};
+    message.serviceName !== undefined && (obj.service_name = message.serviceName);
+    return obj;
   }
 
 };
@@ -594,6 +914,18 @@ export const CreateServiceRequest = {
     const message = createBaseCreateServiceRequest();
     message.service = object.service !== undefined && object.service !== null ? ManagedService.fromPartial(object.service) : undefined;
     return message;
+  },
+
+  fromSDK(object: CreateServiceRequestSDKType): CreateServiceRequest {
+    return {
+      service: isSet(object.service) ? ManagedService.fromSDK(object.service) : undefined
+    };
+  },
+
+  toSDK(message: CreateServiceRequest): CreateServiceRequestSDKType {
+    const obj: any = {};
+    message.service !== undefined && (obj.service = message.service ? ManagedService.toSDK(message.service) : undefined);
+    return obj;
   }
 
 };
@@ -651,6 +983,18 @@ export const DeleteServiceRequest = {
     const message = createBaseDeleteServiceRequest();
     message.serviceName = object.serviceName ?? "";
     return message;
+  },
+
+  fromSDK(object: DeleteServiceRequestSDKType): DeleteServiceRequest {
+    return {
+      serviceName: isSet(object.service_name) ? object.service_name : ""
+    };
+  },
+
+  toSDK(message: DeleteServiceRequest): DeleteServiceRequestSDKType {
+    const obj: any = {};
+    message.serviceName !== undefined && (obj.service_name = message.serviceName);
+    return obj;
   }
 
 };
@@ -708,6 +1052,18 @@ export const UndeleteServiceRequest = {
     const message = createBaseUndeleteServiceRequest();
     message.serviceName = object.serviceName ?? "";
     return message;
+  },
+
+  fromSDK(object: UndeleteServiceRequestSDKType): UndeleteServiceRequest {
+    return {
+      serviceName: isSet(object.service_name) ? object.service_name : ""
+    };
+  },
+
+  toSDK(message: UndeleteServiceRequest): UndeleteServiceRequestSDKType {
+    const obj: any = {};
+    message.serviceName !== undefined && (obj.service_name = message.serviceName);
+    return obj;
   }
 
 };
@@ -765,6 +1121,18 @@ export const UndeleteServiceResponse = {
     const message = createBaseUndeleteServiceResponse();
     message.service = object.service !== undefined && object.service !== null ? ManagedService.fromPartial(object.service) : undefined;
     return message;
+  },
+
+  fromSDK(object: UndeleteServiceResponseSDKType): UndeleteServiceResponse {
+    return {
+      service: isSet(object.service) ? ManagedService.fromSDK(object.service) : undefined
+    };
+  },
+
+  toSDK(message: UndeleteServiceResponse): UndeleteServiceResponseSDKType {
+    const obj: any = {};
+    message.service !== undefined && (obj.service = message.service ? ManagedService.toSDK(message.service) : undefined);
+    return obj;
   }
 
 };
@@ -846,6 +1214,22 @@ export const GetServiceConfigRequest = {
     message.configId = object.configId ?? "";
     message.view = object.view ?? 0;
     return message;
+  },
+
+  fromSDK(object: GetServiceConfigRequestSDKType): GetServiceConfigRequest {
+    return {
+      serviceName: isSet(object.service_name) ? object.service_name : "",
+      configId: isSet(object.config_id) ? object.config_id : "",
+      view: isSet(object.view) ? getServiceConfigRequest_ConfigViewFromJSON(object.view) : 0
+    };
+  },
+
+  toSDK(message: GetServiceConfigRequest): GetServiceConfigRequestSDKType {
+    const obj: any = {};
+    message.serviceName !== undefined && (obj.service_name = message.serviceName);
+    message.configId !== undefined && (obj.config_id = message.configId);
+    message.view !== undefined && (obj.view = getServiceConfigRequest_ConfigViewToJSON(message.view));
+    return obj;
   }
 
 };
@@ -927,6 +1311,22 @@ export const ListServiceConfigsRequest = {
     message.pageToken = object.pageToken ?? "";
     message.pageSize = object.pageSize ?? 0;
     return message;
+  },
+
+  fromSDK(object: ListServiceConfigsRequestSDKType): ListServiceConfigsRequest {
+    return {
+      serviceName: isSet(object.service_name) ? object.service_name : "",
+      pageToken: isSet(object.page_token) ? object.page_token : "",
+      pageSize: isSet(object.page_size) ? object.page_size : 0
+    };
+  },
+
+  toSDK(message: ListServiceConfigsRequest): ListServiceConfigsRequestSDKType {
+    const obj: any = {};
+    message.serviceName !== undefined && (obj.service_name = message.serviceName);
+    message.pageToken !== undefined && (obj.page_token = message.pageToken);
+    message.pageSize !== undefined && (obj.page_size = message.pageSize);
+    return obj;
   }
 
 };
@@ -1002,6 +1402,26 @@ export const ListServiceConfigsResponse = {
     message.serviceConfigs = object.serviceConfigs?.map(e => Service.fromPartial(e)) || [];
     message.nextPageToken = object.nextPageToken ?? "";
     return message;
+  },
+
+  fromSDK(object: ListServiceConfigsResponseSDKType): ListServiceConfigsResponse {
+    return {
+      serviceConfigs: Array.isArray(object?.service_configs) ? object.service_configs.map((e: any) => Service.fromSDK(e)) : [],
+      nextPageToken: isSet(object.next_page_token) ? object.next_page_token : ""
+    };
+  },
+
+  toSDK(message: ListServiceConfigsResponse): ListServiceConfigsResponseSDKType {
+    const obj: any = {};
+
+    if (message.serviceConfigs) {
+      obj.service_configs = message.serviceConfigs.map(e => e ? Service.toSDK(e) : undefined);
+    } else {
+      obj.service_configs = [];
+    }
+
+    message.nextPageToken !== undefined && (obj.next_page_token = message.nextPageToken);
+    return obj;
   }
 
 };
@@ -1071,6 +1491,20 @@ export const CreateServiceConfigRequest = {
     message.serviceName = object.serviceName ?? "";
     message.serviceConfig = object.serviceConfig !== undefined && object.serviceConfig !== null ? Service.fromPartial(object.serviceConfig) : undefined;
     return message;
+  },
+
+  fromSDK(object: CreateServiceConfigRequestSDKType): CreateServiceConfigRequest {
+    return {
+      serviceName: isSet(object.service_name) ? object.service_name : "",
+      serviceConfig: isSet(object.service_config) ? Service.fromSDK(object.service_config) : undefined
+    };
+  },
+
+  toSDK(message: CreateServiceConfigRequest): CreateServiceConfigRequestSDKType {
+    const obj: any = {};
+    message.serviceName !== undefined && (obj.service_name = message.serviceName);
+    message.serviceConfig !== undefined && (obj.service_config = message.serviceConfig ? Service.toSDK(message.serviceConfig) : undefined);
+    return obj;
   }
 
 };
@@ -1152,6 +1586,22 @@ export const SubmitConfigSourceRequest = {
     message.configSource = object.configSource !== undefined && object.configSource !== null ? ConfigSource.fromPartial(object.configSource) : undefined;
     message.validateOnly = object.validateOnly ?? false;
     return message;
+  },
+
+  fromSDK(object: SubmitConfigSourceRequestSDKType): SubmitConfigSourceRequest {
+    return {
+      serviceName: isSet(object.service_name) ? object.service_name : "",
+      configSource: isSet(object.config_source) ? ConfigSource.fromSDK(object.config_source) : undefined,
+      validateOnly: isSet(object.validate_only) ? object.validate_only : false
+    };
+  },
+
+  toSDK(message: SubmitConfigSourceRequest): SubmitConfigSourceRequestSDKType {
+    const obj: any = {};
+    message.serviceName !== undefined && (obj.service_name = message.serviceName);
+    message.configSource !== undefined && (obj.config_source = message.configSource ? ConfigSource.toSDK(message.configSource) : undefined);
+    message.validateOnly !== undefined && (obj.validate_only = message.validateOnly);
+    return obj;
   }
 
 };
@@ -1209,6 +1659,18 @@ export const SubmitConfigSourceResponse = {
     const message = createBaseSubmitConfigSourceResponse();
     message.serviceConfig = object.serviceConfig !== undefined && object.serviceConfig !== null ? Service.fromPartial(object.serviceConfig) : undefined;
     return message;
+  },
+
+  fromSDK(object: SubmitConfigSourceResponseSDKType): SubmitConfigSourceResponse {
+    return {
+      serviceConfig: isSet(object.service_config) ? Service.fromSDK(object.service_config) : undefined
+    };
+  },
+
+  toSDK(message: SubmitConfigSourceResponse): SubmitConfigSourceResponseSDKType {
+    const obj: any = {};
+    message.serviceConfig !== undefined && (obj.service_config = message.serviceConfig ? Service.toSDK(message.serviceConfig) : undefined);
+    return obj;
   }
 
 };
@@ -1278,6 +1740,20 @@ export const CreateServiceRolloutRequest = {
     message.serviceName = object.serviceName ?? "";
     message.rollout = object.rollout !== undefined && object.rollout !== null ? Rollout.fromPartial(object.rollout) : undefined;
     return message;
+  },
+
+  fromSDK(object: CreateServiceRolloutRequestSDKType): CreateServiceRolloutRequest {
+    return {
+      serviceName: isSet(object.service_name) ? object.service_name : "",
+      rollout: isSet(object.rollout) ? Rollout.fromSDK(object.rollout) : undefined
+    };
+  },
+
+  toSDK(message: CreateServiceRolloutRequest): CreateServiceRolloutRequestSDKType {
+    const obj: any = {};
+    message.serviceName !== undefined && (obj.service_name = message.serviceName);
+    message.rollout !== undefined && (obj.rollout = message.rollout ? Rollout.toSDK(message.rollout) : undefined);
+    return obj;
   }
 
 };
@@ -1371,6 +1847,24 @@ export const ListServiceRolloutsRequest = {
     message.pageSize = object.pageSize ?? 0;
     message.filter = object.filter ?? "";
     return message;
+  },
+
+  fromSDK(object: ListServiceRolloutsRequestSDKType): ListServiceRolloutsRequest {
+    return {
+      serviceName: isSet(object.service_name) ? object.service_name : "",
+      pageToken: isSet(object.page_token) ? object.page_token : "",
+      pageSize: isSet(object.page_size) ? object.page_size : 0,
+      filter: isSet(object.filter) ? object.filter : ""
+    };
+  },
+
+  toSDK(message: ListServiceRolloutsRequest): ListServiceRolloutsRequestSDKType {
+    const obj: any = {};
+    message.serviceName !== undefined && (obj.service_name = message.serviceName);
+    message.pageToken !== undefined && (obj.page_token = message.pageToken);
+    message.pageSize !== undefined && (obj.page_size = message.pageSize);
+    message.filter !== undefined && (obj.filter = message.filter);
+    return obj;
   }
 
 };
@@ -1446,6 +1940,26 @@ export const ListServiceRolloutsResponse = {
     message.rollouts = object.rollouts?.map(e => Rollout.fromPartial(e)) || [];
     message.nextPageToken = object.nextPageToken ?? "";
     return message;
+  },
+
+  fromSDK(object: ListServiceRolloutsResponseSDKType): ListServiceRolloutsResponse {
+    return {
+      rollouts: Array.isArray(object?.rollouts) ? object.rollouts.map((e: any) => Rollout.fromSDK(e)) : [],
+      nextPageToken: isSet(object.next_page_token) ? object.next_page_token : ""
+    };
+  },
+
+  toSDK(message: ListServiceRolloutsResponse): ListServiceRolloutsResponseSDKType {
+    const obj: any = {};
+
+    if (message.rollouts) {
+      obj.rollouts = message.rollouts.map(e => e ? Rollout.toSDK(e) : undefined);
+    } else {
+      obj.rollouts = [];
+    }
+
+    message.nextPageToken !== undefined && (obj.next_page_token = message.nextPageToken);
+    return obj;
   }
 
 };
@@ -1515,6 +2029,20 @@ export const GetServiceRolloutRequest = {
     message.serviceName = object.serviceName ?? "";
     message.rolloutId = object.rolloutId ?? "";
     return message;
+  },
+
+  fromSDK(object: GetServiceRolloutRequestSDKType): GetServiceRolloutRequest {
+    return {
+      serviceName: isSet(object.service_name) ? object.service_name : "",
+      rolloutId: isSet(object.rollout_id) ? object.rollout_id : ""
+    };
+  },
+
+  toSDK(message: GetServiceRolloutRequest): GetServiceRolloutRequestSDKType {
+    const obj: any = {};
+    message.serviceName !== undefined && (obj.service_name = message.serviceName);
+    message.rolloutId !== undefined && (obj.rollout_id = message.rolloutId);
+    return obj;
   }
 
 };
@@ -1584,6 +2112,20 @@ export const GenerateConfigReportRequest = {
     message.newConfig = object.newConfig !== undefined && object.newConfig !== null ? Any.fromPartial(object.newConfig) : undefined;
     message.oldConfig = object.oldConfig !== undefined && object.oldConfig !== null ? Any.fromPartial(object.oldConfig) : undefined;
     return message;
+  },
+
+  fromSDK(object: GenerateConfigReportRequestSDKType): GenerateConfigReportRequest {
+    return {
+      newConfig: isSet(object.new_config) ? Any.fromSDK(object.new_config) : undefined,
+      oldConfig: isSet(object.old_config) ? Any.fromSDK(object.old_config) : undefined
+    };
+  },
+
+  toSDK(message: GenerateConfigReportRequest): GenerateConfigReportRequestSDKType {
+    const obj: any = {};
+    message.newConfig !== undefined && (obj.new_config = message.newConfig ? Any.toSDK(message.newConfig) : undefined);
+    message.oldConfig !== undefined && (obj.old_config = message.oldConfig ? Any.toSDK(message.oldConfig) : undefined);
+    return obj;
   }
 
 };
@@ -1688,6 +2230,35 @@ export const GenerateConfigReportResponse = {
     message.changeReports = object.changeReports?.map(e => ChangeReport.fromPartial(e)) || [];
     message.diagnostics = object.diagnostics?.map(e => Diagnostic.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: GenerateConfigReportResponseSDKType): GenerateConfigReportResponse {
+    return {
+      serviceName: isSet(object.service_name) ? object.service_name : "",
+      id: isSet(object.id) ? object.id : "",
+      changeReports: Array.isArray(object?.change_reports) ? object.change_reports.map((e: any) => ChangeReport.fromSDK(e)) : [],
+      diagnostics: Array.isArray(object?.diagnostics) ? object.diagnostics.map((e: any) => Diagnostic.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: GenerateConfigReportResponse): GenerateConfigReportResponseSDKType {
+    const obj: any = {};
+    message.serviceName !== undefined && (obj.service_name = message.serviceName);
+    message.id !== undefined && (obj.id = message.id);
+
+    if (message.changeReports) {
+      obj.change_reports = message.changeReports.map(e => e ? ChangeReport.toSDK(e) : undefined);
+    } else {
+      obj.change_reports = [];
+    }
+
+    if (message.diagnostics) {
+      obj.diagnostics = message.diagnostics.map(e => e ? Diagnostic.toSDK(e) : undefined);
+    } else {
+      obj.diagnostics = [];
+    }
+
+    return obj;
   }
 
 };

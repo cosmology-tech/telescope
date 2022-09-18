@@ -1,8 +1,8 @@
-import { Timestamp } from "../../../google/protobuf/timestamp";
-import { Period } from "../../../cosmos/vesting/v1beta1/vesting";
+import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
+import { Period, PeriodSDKType } from "../../../cosmos/vesting/v1beta1/vesting";
 import { Rpc } from "@osmonauts/helpers";
 import * as _m0 from "protobufjs/minimal";
-import { MsgCreateClawbackVestingAccount, MsgCreateClawbackVestingAccountResponse, MsgClawback, MsgClawbackResponse } from "./tx";
+import { MsgCreateClawbackVestingAccount, MsgCreateClawbackVestingAccountSDKType, MsgCreateClawbackVestingAccountResponse, MsgCreateClawbackVestingAccountResponseSDKType, MsgClawback, MsgClawbackSDKType, MsgClawbackResponse, MsgClawbackResponseSDKType } from "./tx";
 
 /** Msg defines the RPC service */
 export interface Msg {

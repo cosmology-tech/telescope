@@ -10,6 +10,14 @@ export interface EventSend {
   receiver: string;
 }
 
+/** EventSend is emitted on Msg/Send */
+export interface EventSendSDKType {
+  class_id: string;
+  id: string;
+  sender: string;
+  receiver: string;
+}
+
 /** EventMint is emitted on Mint */
 export interface EventMint {
   classId: string;
@@ -17,9 +25,23 @@ export interface EventMint {
   owner: string;
 }
 
+/** EventMint is emitted on Mint */
+export interface EventMintSDKType {
+  class_id: string;
+  id: string;
+  owner: string;
+}
+
 /** EventBurn is emitted on Burn */
 export interface EventBurn {
   classId: string;
+  id: string;
+  owner: string;
+}
+
+/** EventBurn is emitted on Burn */
+export interface EventBurnSDKType {
+  class_id: string;
   id: string;
   owner: string;
 }
@@ -113,6 +135,24 @@ export const EventSend = {
     message.sender = object.sender ?? "";
     message.receiver = object.receiver ?? "";
     return message;
+  },
+
+  fromSDK(object: EventSendSDKType): EventSend {
+    return {
+      classId: isSet(object.class_id) ? object.class_id : "",
+      id: isSet(object.id) ? object.id : "",
+      sender: isSet(object.sender) ? object.sender : "",
+      receiver: isSet(object.receiver) ? object.receiver : ""
+    };
+  },
+
+  toSDK(message: EventSend): EventSendSDKType {
+    const obj: any = {};
+    message.classId !== undefined && (obj.class_id = message.classId);
+    message.id !== undefined && (obj.id = message.id);
+    message.sender !== undefined && (obj.sender = message.sender);
+    message.receiver !== undefined && (obj.receiver = message.receiver);
+    return obj;
   }
 
 };
@@ -194,6 +234,22 @@ export const EventMint = {
     message.id = object.id ?? "";
     message.owner = object.owner ?? "";
     return message;
+  },
+
+  fromSDK(object: EventMintSDKType): EventMint {
+    return {
+      classId: isSet(object.class_id) ? object.class_id : "",
+      id: isSet(object.id) ? object.id : "",
+      owner: isSet(object.owner) ? object.owner : ""
+    };
+  },
+
+  toSDK(message: EventMint): EventMintSDKType {
+    const obj: any = {};
+    message.classId !== undefined && (obj.class_id = message.classId);
+    message.id !== undefined && (obj.id = message.id);
+    message.owner !== undefined && (obj.owner = message.owner);
+    return obj;
   }
 
 };
@@ -275,6 +331,22 @@ export const EventBurn = {
     message.id = object.id ?? "";
     message.owner = object.owner ?? "";
     return message;
+  },
+
+  fromSDK(object: EventBurnSDKType): EventBurn {
+    return {
+      classId: isSet(object.class_id) ? object.class_id : "",
+      id: isSet(object.id) ? object.id : "",
+      owner: isSet(object.owner) ? object.owner : ""
+    };
+  },
+
+  toSDK(message: EventBurn): EventBurnSDKType {
+    const obj: any = {};
+    message.classId !== undefined && (obj.class_id = message.classId);
+    message.id !== undefined && (obj.id = message.id);
+    message.owner !== undefined && (obj.owner = message.owner);
+    return obj;
   }
 
 };

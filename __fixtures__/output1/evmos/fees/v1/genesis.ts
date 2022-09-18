@@ -1,4 +1,4 @@
-import { DevFeeInfo } from "./fees";
+import { DevFeeInfo, DevFeeInfoSDKType } from "./fees";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, Long } from "@osmonauts/helpers";
 export const protobufPackage = "evmos.fees.v1";
@@ -10,6 +10,15 @@ export interface GenesisState {
 
   /** active registered contracts */
   devFeeInfos: DevFeeInfo[];
+}
+
+/** GenesisState defines the module's genesis state. */
+export interface GenesisStateSDKType {
+  /** module parameters */
+  params: ParamsSDKType;
+
+  /** active registered contracts */
+  dev_fee_infos: DevFeeInfoSDKType[];
 }
 
 /** Params defines the fees module params */
@@ -37,6 +46,33 @@ export interface Params {
 
   /** min_gas_price defines the minimum gas price value for cosmos and eth transactions */
   minGasPrice: string;
+}
+
+/** Params defines the fees module params */
+export interface ParamsSDKType {
+  /** parameter to enable fees */
+  enable_fees: boolean;
+
+  /**
+   * developer_shares defines the proportion of the transaction fees to be
+   * distributed to the registered contract owner
+   */
+  developer_shares: string;
+
+  /**
+   * developer_shares defines the proportion of the transaction fees to be
+   * distributed to validators
+   */
+  validator_shares: string;
+
+  /**
+   * addr_derivation_cost_create defines the cost of address derivation for
+   * verifying the contract deployer at fee registration
+   */
+  addr_derivation_cost_create: Long;
+
+  /** min_gas_price defines the minimum gas price value for cosmos and eth transactions */
+  min_gas_price: string;
 }
 
 function createBaseGenesisState(): GenesisState {
@@ -110,6 +146,26 @@ export const GenesisState = {
     message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     message.devFeeInfos = object.devFeeInfos?.map(e => DevFeeInfo.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: GenesisStateSDKType): GenesisState {
+    return {
+      params: isSet(object.params) ? Params.fromSDK(object.params) : undefined,
+      devFeeInfos: Array.isArray(object?.dev_fee_infos) ? object.dev_fee_infos.map((e: any) => DevFeeInfo.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: GenesisState): GenesisStateSDKType {
+    const obj: any = {};
+    message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
+
+    if (message.devFeeInfos) {
+      obj.dev_fee_infos = message.devFeeInfos.map(e => e ? DevFeeInfo.toSDK(e) : undefined);
+    } else {
+      obj.dev_fee_infos = [];
+    }
+
+    return obj;
   }
 
 };
@@ -215,6 +271,26 @@ export const Params = {
     message.addrDerivationCostCreate = object.addrDerivationCostCreate !== undefined && object.addrDerivationCostCreate !== null ? Long.fromValue(object.addrDerivationCostCreate) : Long.UZERO;
     message.minGasPrice = object.minGasPrice ?? "";
     return message;
+  },
+
+  fromSDK(object: ParamsSDKType): Params {
+    return {
+      enableFees: isSet(object.enable_fees) ? object.enable_fees : false,
+      developerShares: isSet(object.developer_shares) ? object.developer_shares : "",
+      validatorShares: isSet(object.validator_shares) ? object.validator_shares : "",
+      addrDerivationCostCreate: isSet(object.addr_derivation_cost_create) ? object.addr_derivation_cost_create : Long.UZERO,
+      minGasPrice: isSet(object.min_gas_price) ? object.min_gas_price : ""
+    };
+  },
+
+  toSDK(message: Params): ParamsSDKType {
+    const obj: any = {};
+    message.enableFees !== undefined && (obj.enable_fees = message.enableFees);
+    message.developerShares !== undefined && (obj.developer_shares = message.developerShares);
+    message.validatorShares !== undefined && (obj.validator_shares = message.validatorShares);
+    message.addrDerivationCostCreate !== undefined && (obj.addr_derivation_cost_create = message.addrDerivationCostCreate);
+    message.minGasPrice !== undefined && (obj.min_gas_price = message.minGasPrice);
+    return obj;
   }
 
 };

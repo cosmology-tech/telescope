@@ -1,5 +1,5 @@
-import { CPU, Memory, Storage } from "./resource";
-import { Endpoint } from "./endpoint";
+import { CPU, CPUSDKType, Memory, MemorySDKType, Storage, StorageSDKType } from "./resource";
+import { Endpoint, EndpointSDKType } from "./endpoint";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, Exact } from "@osmonauts/helpers";
 export const protobufPackage = "akash.base.v1beta2";
@@ -13,6 +13,17 @@ export interface ResourceUnits {
   memory?: Memory;
   storage: Storage[];
   endpoints: Endpoint[];
+}
+
+/**
+ * ResourceUnits describes all available resources types for deployment/node etc
+ * if field is nil resource is not present in the given data-structure
+ */
+export interface ResourceUnitsSDKType {
+  cpu?: CPUSDKType;
+  memory?: MemorySDKType;
+  storage: StorageSDKType[];
+  endpoints: EndpointSDKType[];
 }
 
 function createBaseResourceUnits(): ResourceUnits {
@@ -115,6 +126,35 @@ export const ResourceUnits = {
     message.storage = object.storage?.map(e => Storage.fromPartial(e)) || [];
     message.endpoints = object.endpoints?.map(e => Endpoint.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: ResourceUnitsSDKType): ResourceUnits {
+    return {
+      cpu: isSet(object.cpu) ? CPU.fromSDK(object.cpu) : undefined,
+      memory: isSet(object.memory) ? Memory.fromSDK(object.memory) : undefined,
+      storage: Array.isArray(object?.storage) ? object.storage.map((e: any) => Storage.fromSDK(e)) : [],
+      endpoints: Array.isArray(object?.endpoints) ? object.endpoints.map((e: any) => Endpoint.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: ResourceUnits): ResourceUnitsSDKType {
+    const obj: any = {};
+    message.cpu !== undefined && (obj.cpu = message.cpu ? CPU.toSDK(message.cpu) : undefined);
+    message.memory !== undefined && (obj.memory = message.memory ? Memory.toSDK(message.memory) : undefined);
+
+    if (message.storage) {
+      obj.storage = message.storage.map(e => e ? Storage.toSDK(e) : undefined);
+    } else {
+      obj.storage = [];
+    }
+
+    if (message.endpoints) {
+      obj.endpoints = message.endpoints.map(e => e ? Endpoint.toSDK(e) : undefined);
+    } else {
+      obj.endpoints = [];
+    }
+
+    return obj;
   }
 
 };

@@ -1,7 +1,7 @@
-import { PoolParams, PoolAsset } from "./balancerPool";
+import { PoolParams, PoolParamsSDKType, PoolAsset, PoolAssetSDKType } from "./balancerPool";
 import { Rpc } from "@osmonauts/helpers";
 import * as _m0 from "protobufjs/minimal";
-import { MsgCreateBalancerPool, MsgCreateBalancerPoolResponse } from "./tx";
+import { MsgCreateBalancerPool, MsgCreateBalancerPoolSDKType, MsgCreateBalancerPoolResponse, MsgCreateBalancerPoolResponseSDKType } from "./tx";
 
 /** Msg defines the RPC service */
 export interface Msg {

@@ -1,6 +1,6 @@
 import { Rpc } from "@osmonauts/helpers";
 import * as _m0 from "protobufjs/minimal";
-import { MsgRegisterDevFeeInfo, MsgRegisterDevFeeInfoResponse, MsgCancelDevFeeInfo, MsgCancelDevFeeInfoResponse, MsgUpdateDevFeeInfo, MsgUpdateDevFeeInfoResponse } from "./tx";
+import { MsgRegisterDevFeeInfo, MsgRegisterDevFeeInfoSDKType, MsgRegisterDevFeeInfoResponse, MsgRegisterDevFeeInfoResponseSDKType, MsgCancelDevFeeInfo, MsgCancelDevFeeInfoSDKType, MsgCancelDevFeeInfoResponse, MsgCancelDevFeeInfoResponseSDKType, MsgUpdateDevFeeInfo, MsgUpdateDevFeeInfoSDKType, MsgUpdateDevFeeInfoResponse, MsgUpdateDevFeeInfoResponseSDKType } from "./tx";
 
 /** Msg defines the RPC service */
 export interface Msg {

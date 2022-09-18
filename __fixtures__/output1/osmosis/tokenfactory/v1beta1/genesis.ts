@@ -1,5 +1,5 @@
-import { Params } from "./params";
-import { DenomAuthorityMetadata } from "./authorityMetadata";
+import { Params, ParamsSDKType } from "./params";
+import { DenomAuthorityMetadata, DenomAuthorityMetadataSDKType } from "./authorityMetadata";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "@osmonauts/helpers";
 export const protobufPackage = "osmosis.tokenfactory.v1beta1";
@@ -10,9 +10,20 @@ export interface GenesisState {
   params: Params;
   factoryDenoms: GenesisDenom[];
 }
+
+/** GenesisState defines the tokenfactory module's genesis state. */
+export interface GenesisStateSDKType {
+  /** params defines the paramaters of the module. */
+  params: ParamsSDKType;
+  factory_denoms: GenesisDenomSDKType[];
+}
 export interface GenesisDenom {
   denom: string;
   authorityMetadata: DenomAuthorityMetadata;
+}
+export interface GenesisDenomSDKType {
+  denom: string;
+  authority_metadata: DenomAuthorityMetadataSDKType;
 }
 
 function createBaseGenesisState(): GenesisState {
@@ -86,6 +97,26 @@ export const GenesisState = {
     message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     message.factoryDenoms = object.factoryDenoms?.map(e => GenesisDenom.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: GenesisStateSDKType): GenesisState {
+    return {
+      params: isSet(object.params) ? Params.fromSDK(object.params) : undefined,
+      factoryDenoms: Array.isArray(object?.factory_denoms) ? object.factory_denoms.map((e: any) => GenesisDenom.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: GenesisState): GenesisStateSDKType {
+    const obj: any = {};
+    message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
+
+    if (message.factoryDenoms) {
+      obj.factory_denoms = message.factoryDenoms.map(e => e ? GenesisDenom.toSDK(e) : undefined);
+    } else {
+      obj.factory_denoms = [];
+    }
+
+    return obj;
   }
 
 };
@@ -155,6 +186,20 @@ export const GenesisDenom = {
     message.denom = object.denom ?? "";
     message.authorityMetadata = object.authorityMetadata !== undefined && object.authorityMetadata !== null ? DenomAuthorityMetadata.fromPartial(object.authorityMetadata) : undefined;
     return message;
+  },
+
+  fromSDK(object: GenesisDenomSDKType): GenesisDenom {
+    return {
+      denom: isSet(object.denom) ? object.denom : "",
+      authorityMetadata: isSet(object.authority_metadata) ? DenomAuthorityMetadata.fromSDK(object.authority_metadata) : undefined
+    };
+  },
+
+  toSDK(message: GenesisDenom): GenesisDenomSDKType {
+    const obj: any = {};
+    message.denom !== undefined && (obj.denom = message.denom);
+    message.authorityMetadata !== undefined && (obj.authority_metadata = message.authorityMetadata ? DenomAuthorityMetadata.toSDK(message.authorityMetadata) : undefined);
+    return obj;
   }
 
 };

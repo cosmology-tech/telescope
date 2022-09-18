@@ -8,6 +8,12 @@ export interface PublicKey {
   secp256k1?: Uint8Array;
 }
 
+/** PublicKey defines the keys available for use with Tendermint Validators */
+export interface PublicKeySDKType {
+  ed25519?: Uint8Array;
+  secp256k1?: Uint8Array;
+}
+
 function createBasePublicKey(): PublicKey {
   return {
     ed25519: undefined,
@@ -73,6 +79,20 @@ export const PublicKey = {
     message.ed25519 = object.ed25519 ?? undefined;
     message.secp256k1 = object.secp256k1 ?? undefined;
     return message;
+  },
+
+  fromSDK(object: PublicKeySDKType): PublicKey {
+    return {
+      ed25519: isSet(object.ed25519) ? object.ed25519 : undefined,
+      secp256k1: isSet(object.secp256k1) ? object.secp256k1 : undefined
+    };
+  },
+
+  toSDK(message: PublicKey): PublicKeySDKType {
+    const obj: any = {};
+    message.ed25519 !== undefined && (obj.ed25519 = message.ed25519);
+    message.secp256k1 !== undefined && (obj.secp256k1 = message.secp256k1);
+    return obj;
   }
 
 };

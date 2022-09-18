@@ -1,4 +1,4 @@
-import { CommitmentProof } from "../../../../confio/proofs";
+import { CommitmentProof, CommitmentProofSDKType } from "../../../../confio/proofs";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "@osmonauts/helpers";
 export const protobufPackage = "ibc.core.commitment.v1";
@@ -12,12 +12,29 @@ export interface MerkleRoot {
 }
 
 /**
+ * MerkleRoot defines a merkle root hash.
+ * In the Cosmos SDK, the AppHash of a block header becomes the root.
+ */
+export interface MerkleRootSDKType {
+  hash: Uint8Array;
+}
+
+/**
  * MerklePrefix is merkle path prefixed to the key.
  * The constructed key from the Path and the key will be append(Path.KeyPath,
  * append(Path.KeyPrefix, key...))
  */
 export interface MerklePrefix {
   keyPrefix: Uint8Array;
+}
+
+/**
+ * MerklePrefix is merkle path prefixed to the key.
+ * The constructed key from the Path and the key will be append(Path.KeyPath,
+ * append(Path.KeyPrefix, key...))
+ */
+export interface MerklePrefixSDKType {
+  key_prefix: Uint8Array;
 }
 
 /**
@@ -30,6 +47,15 @@ export interface MerklePath {
 }
 
 /**
+ * MerklePath is the path used to verify commitment proofs, which can be an
+ * arbitrary structured object (defined by a commitment type).
+ * MerklePath is represented from root-to-leaf
+ */
+export interface MerklePathSDKType {
+  key_path: string[];
+}
+
+/**
  * MerkleProof is a wrapper type over a chain of CommitmentProofs.
  * It demonstrates membership or non-membership for an element or set of
  * elements, verifiable in conjunction with a known commitment root. Proofs
@@ -38,6 +64,17 @@ export interface MerklePath {
  */
 export interface MerkleProof {
   proofs: CommitmentProof[];
+}
+
+/**
+ * MerkleProof is a wrapper type over a chain of CommitmentProofs.
+ * It demonstrates membership or non-membership for an element or set of
+ * elements, verifiable in conjunction with a known commitment root. Proofs
+ * should be succinct.
+ * MerkleProofs are ordered from leaf-to-root
+ */
+export interface MerkleProofSDKType {
+  proofs: CommitmentProofSDKType[];
 }
 
 function createBaseMerkleRoot(): MerkleRoot {
@@ -93,6 +130,18 @@ export const MerkleRoot = {
     const message = createBaseMerkleRoot();
     message.hash = object.hash ?? new Uint8Array();
     return message;
+  },
+
+  fromSDK(object: MerkleRootSDKType): MerkleRoot {
+    return {
+      hash: isSet(object.hash) ? object.hash : new Uint8Array()
+    };
+  },
+
+  toSDK(message: MerkleRoot): MerkleRootSDKType {
+    const obj: any = {};
+    message.hash !== undefined && (obj.hash = message.hash);
+    return obj;
   }
 
 };
@@ -150,6 +199,18 @@ export const MerklePrefix = {
     const message = createBaseMerklePrefix();
     message.keyPrefix = object.keyPrefix ?? new Uint8Array();
     return message;
+  },
+
+  fromSDK(object: MerklePrefixSDKType): MerklePrefix {
+    return {
+      keyPrefix: isSet(object.key_prefix) ? object.key_prefix : new Uint8Array()
+    };
+  },
+
+  toSDK(message: MerklePrefix): MerklePrefixSDKType {
+    const obj: any = {};
+    message.keyPrefix !== undefined && (obj.key_prefix = message.keyPrefix);
+    return obj;
   }
 
 };
@@ -213,6 +274,24 @@ export const MerklePath = {
     const message = createBaseMerklePath();
     message.keyPath = object.keyPath?.map(e => e) || [];
     return message;
+  },
+
+  fromSDK(object: MerklePathSDKType): MerklePath {
+    return {
+      keyPath: Array.isArray(object?.key_path) ? object.key_path.map((e: any) => e) : []
+    };
+  },
+
+  toSDK(message: MerklePath): MerklePathSDKType {
+    const obj: any = {};
+
+    if (message.keyPath) {
+      obj.key_path = message.keyPath.map(e => e);
+    } else {
+      obj.key_path = [];
+    }
+
+    return obj;
   }
 
 };
@@ -276,6 +355,24 @@ export const MerkleProof = {
     const message = createBaseMerkleProof();
     message.proofs = object.proofs?.map(e => CommitmentProof.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: MerkleProofSDKType): MerkleProof {
+    return {
+      proofs: Array.isArray(object?.proofs) ? object.proofs.map((e: any) => CommitmentProof.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: MerkleProof): MerkleProofSDKType {
+    const obj: any = {};
+
+    if (message.proofs) {
+      obj.proofs = message.proofs.map(e => e ? CommitmentProof.toSDK(e) : undefined);
+    } else {
+      obj.proofs = [];
+    }
+
+    return obj;
   }
 
 };

@@ -20,6 +20,24 @@ export interface DevFeeInfo {
   withdrawAddress: string;
 }
 
+/**
+ * DevFeeInfo defines an instance that organizes fee distribution conditions
+ * for the owner of a given smart contract
+ */
+export interface DevFeeInfoSDKType {
+  /** hex address of registered contract */
+  contract_address: string;
+
+  /** bech32 address of contract deployer */
+  deployer_address: string;
+
+  /**
+   * bech32 address of account receiving the transaction fees
+   * it defaults to deployer_address
+   */
+  withdraw_address: string;
+}
+
 function createBaseDevFeeInfo(): DevFeeInfo {
   return {
     contractAddress: "",
@@ -97,6 +115,22 @@ export const DevFeeInfo = {
     message.deployerAddress = object.deployerAddress ?? "";
     message.withdrawAddress = object.withdrawAddress ?? "";
     return message;
+  },
+
+  fromSDK(object: DevFeeInfoSDKType): DevFeeInfo {
+    return {
+      contractAddress: isSet(object.contract_address) ? object.contract_address : "",
+      deployerAddress: isSet(object.deployer_address) ? object.deployer_address : "",
+      withdrawAddress: isSet(object.withdraw_address) ? object.withdraw_address : ""
+    };
+  },
+
+  toSDK(message: DevFeeInfo): DevFeeInfoSDKType {
+    const obj: any = {};
+    message.contractAddress !== undefined && (obj.contract_address = message.contractAddress);
+    message.deployerAddress !== undefined && (obj.deployer_address = message.deployerAddress);
+    message.withdrawAddress !== undefined && (obj.withdraw_address = message.withdrawAddress);
+    return obj;
   }
 
 };

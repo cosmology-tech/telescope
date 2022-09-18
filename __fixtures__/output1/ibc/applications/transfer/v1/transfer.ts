@@ -18,6 +18,21 @@ export interface DenomTrace {
 }
 
 /**
+ * DenomTrace contains the base denomination for ICS20 fungible tokens and the
+ * source tracing information path.
+ */
+export interface DenomTraceSDKType {
+  /**
+   * path defines the chain of port/channel identifiers used for tracing the
+   * source of the fungible token.
+   */
+  path: string;
+
+  /** base denomination of the relayed fungible token. */
+  base_denom: string;
+}
+
+/**
  * Params defines the set of IBC transfer parameters.
  * NOTE: To prevent a single token from being transferred, set the
  * TransfersEnabled parameter to true and then set the bank module's SendEnabled
@@ -35,6 +50,26 @@ export interface Params {
    * chain.
    */
   receiveEnabled: boolean;
+}
+
+/**
+ * Params defines the set of IBC transfer parameters.
+ * NOTE: To prevent a single token from being transferred, set the
+ * TransfersEnabled parameter to true and then set the bank module's SendEnabled
+ * parameter for the denomination to false.
+ */
+export interface ParamsSDKType {
+  /**
+   * send_enabled enables or disables all cross-chain token transfers from this
+   * chain.
+   */
+  send_enabled: boolean;
+
+  /**
+   * receive_enabled enables or disables all cross-chain token transfers to this
+   * chain.
+   */
+  receive_enabled: boolean;
 }
 
 function createBaseDenomTrace(): DenomTrace {
@@ -102,6 +137,20 @@ export const DenomTrace = {
     message.path = object.path ?? "";
     message.baseDenom = object.baseDenom ?? "";
     return message;
+  },
+
+  fromSDK(object: DenomTraceSDKType): DenomTrace {
+    return {
+      path: isSet(object.path) ? object.path : "",
+      baseDenom: isSet(object.base_denom) ? object.base_denom : ""
+    };
+  },
+
+  toSDK(message: DenomTrace): DenomTraceSDKType {
+    const obj: any = {};
+    message.path !== undefined && (obj.path = message.path);
+    message.baseDenom !== undefined && (obj.base_denom = message.baseDenom);
+    return obj;
   }
 
 };
@@ -171,6 +220,20 @@ export const Params = {
     message.sendEnabled = object.sendEnabled ?? false;
     message.receiveEnabled = object.receiveEnabled ?? false;
     return message;
+  },
+
+  fromSDK(object: ParamsSDKType): Params {
+    return {
+      sendEnabled: isSet(object.send_enabled) ? object.send_enabled : false,
+      receiveEnabled: isSet(object.receive_enabled) ? object.receive_enabled : false
+    };
+  },
+
+  toSDK(message: Params): ParamsSDKType {
+    const obj: any = {};
+    message.sendEnabled !== undefined && (obj.send_enabled = message.sendEnabled);
+    message.receiveEnabled !== undefined && (obj.receive_enabled = message.receiveEnabled);
+    return obj;
   }
 
 };

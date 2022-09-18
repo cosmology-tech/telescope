@@ -1,7 +1,7 @@
-import { PageRequest, PageResponse } from "../../../cosmos/base/query/v1beta1/pagination";
-import { Incentive, GasMeter } from "./incentives";
-import { DecCoin } from "../../../cosmos/base/v1beta1/coin";
-import { Params } from "./genesis";
+import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
+import { Incentive, IncentiveSDKType, GasMeter, GasMeterSDKType } from "./incentives";
+import { DecCoin, DecCoinSDKType } from "../../../cosmos/base/v1beta1/coin";
+import { Params, ParamsSDKType } from "./genesis";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, Long } from "@osmonauts/helpers";
 export const protobufPackage = "evmos.incentives.v1";
@@ -16,6 +16,15 @@ export interface QueryIncentivesRequest {
 }
 
 /**
+ * QueryIncentivesRequest is the request type for the Query/Incentives RPC
+ * method.
+ */
+export interface QueryIncentivesRequestSDKType {
+  /** pagination defines an optional pagination for the request. */
+  pagination?: PageRequestSDKType;
+}
+
+/**
  * QueryIncentivesResponse is the response type for the Query/Incentives RPC
  * method.
  */
@@ -26,8 +35,25 @@ export interface QueryIncentivesResponse {
   pagination?: PageResponse;
 }
 
+/**
+ * QueryIncentivesResponse is the response type for the Query/Incentives RPC
+ * method.
+ */
+export interface QueryIncentivesResponseSDKType {
+  incentives: IncentiveSDKType[];
+
+  /** pagination defines the pagination in the response. */
+  pagination?: PageResponseSDKType;
+}
+
 /** QueryIncentiveRequest is the request type for the Query/Incentive RPC method. */
 export interface QueryIncentiveRequest {
+  /** contract identifier is the hex contract address of a contract */
+  contract: string;
+}
+
+/** QueryIncentiveRequest is the request type for the Query/Incentive RPC method. */
+export interface QueryIncentiveRequestSDKType {
   /** contract identifier is the hex contract address of a contract */
   contract: string;
 }
@@ -38,6 +64,14 @@ export interface QueryIncentiveRequest {
  */
 export interface QueryIncentiveResponse {
   incentive: Incentive;
+}
+
+/**
+ * QueryIncentiveResponse is the response type for the Query/Incentive RPC
+ * method.
+ */
+export interface QueryIncentiveResponseSDKType {
+  incentive: IncentiveSDKType;
 }
 
 /**
@@ -53,6 +87,18 @@ export interface QueryGasMetersRequest {
 }
 
 /**
+ * QueryGasMetersRequest is the request type for the Query/Incentives RPC
+ * method.
+ */
+export interface QueryGasMetersRequestSDKType {
+  /** contract is the hex contract address of a incentivized smart contract */
+  contract: string;
+
+  /** pagination defines an optional pagination for the request. */
+  pagination?: PageRequestSDKType;
+}
+
+/**
  * QueryGasMetersResponse is the response type for the Query/Incentives RPC
  * method.
  */
@@ -63,8 +109,28 @@ export interface QueryGasMetersResponse {
   pagination?: PageResponse;
 }
 
+/**
+ * QueryGasMetersResponse is the response type for the Query/Incentives RPC
+ * method.
+ */
+export interface QueryGasMetersResponseSDKType {
+  gas_meters: GasMeterSDKType[];
+
+  /** pagination defines the pagination in the response. */
+  pagination?: PageResponseSDKType;
+}
+
 /** QueryGasMeterRequest is the request type for the Query/Incentive RPC method. */
 export interface QueryGasMeterRequest {
+  /** contract identifier is the hex contract address of a contract */
+  contract: string;
+
+  /** participant identifier is the hex address of a user */
+  participant: string;
+}
+
+/** QueryGasMeterRequest is the request type for the Query/Incentive RPC method. */
+export interface QueryGasMeterRequestSDKType {
   /** contract identifier is the hex contract address of a contract */
   contract: string;
 
@@ -85,12 +151,33 @@ export interface QueryGasMeterResponse {
 }
 
 /**
+ * QueryGasMeterResponse is the response type for the Query/Incentive RPC
+ * method.
+ */
+export interface QueryGasMeterResponseSDKType {
+  /**
+   * QueryGasMeterResponse is the response type for the Query/Incentive RPC
+   * method.
+   */
+  gas_meter: Long;
+}
+
+/**
  * QueryAllocationMetersRequest is the request type for the
  * Query/AllocationMeters RPC method.
  */
 export interface QueryAllocationMetersRequest {
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequest;
+}
+
+/**
+ * QueryAllocationMetersRequest is the request type for the
+ * Query/AllocationMeters RPC method.
+ */
+export interface QueryAllocationMetersRequestSDKType {
+  /** pagination defines an optional pagination for the request. */
+  pagination?: PageRequestSDKType;
 }
 
 /**
@@ -105,10 +192,30 @@ export interface QueryAllocationMetersResponse {
 }
 
 /**
+ * QueryAllocationMetersResponse is the response type for the
+ * Query/AllocationMeters RPC method.
+ */
+export interface QueryAllocationMetersResponseSDKType {
+  allocation_meters: DecCoinSDKType[];
+
+  /** pagination defines the pagination in the response. */
+  pagination?: PageResponseSDKType;
+}
+
+/**
  * QueryAllocationMeterRequest is the request type for the Query/AllocationMeter
  * RPC method.
  */
 export interface QueryAllocationMeterRequest {
+  /** denom is the coin denom to query an allocation meter for. */
+  denom: string;
+}
+
+/**
+ * QueryAllocationMeterRequest is the request type for the Query/AllocationMeter
+ * RPC method.
+ */
+export interface QueryAllocationMeterRequestSDKType {
   /** denom is the coin denom to query an allocation meter for. */
   denom: string;
 }
@@ -121,8 +228,19 @@ export interface QueryAllocationMeterResponse {
   allocationMeter: DecCoin;
 }
 
+/**
+ * QueryAllocationMeterResponse is the response type for the
+ * Query/AllocationMeter RPC method.
+ */
+export interface QueryAllocationMeterResponseSDKType {
+  allocation_meter: DecCoinSDKType;
+}
+
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequest {}
+
+/** QueryParamsRequest is the request type for the Query/Params RPC method. */
+export interface QueryParamsRequestSDKType {}
 
 /**
  * QueryParamsResponse is the response type for the Query/Params RPC
@@ -130,6 +248,14 @@ export interface QueryParamsRequest {}
  */
 export interface QueryParamsResponse {
   params: Params;
+}
+
+/**
+ * QueryParamsResponse is the response type for the Query/Params RPC
+ * method.
+ */
+export interface QueryParamsResponseSDKType {
+  params: ParamsSDKType;
 }
 
 function createBaseQueryIncentivesRequest(): QueryIncentivesRequest {
@@ -185,6 +311,18 @@ export const QueryIncentivesRequest = {
     const message = createBaseQueryIncentivesRequest();
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryIncentivesRequestSDKType): QueryIncentivesRequest {
+    return {
+      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  toSDK(message: QueryIncentivesRequest): QueryIncentivesRequestSDKType {
+    const obj: any = {};
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
+    return obj;
   }
 
 };
@@ -260,6 +398,26 @@ export const QueryIncentivesResponse = {
     message.incentives = object.incentives?.map(e => Incentive.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryIncentivesResponseSDKType): QueryIncentivesResponse {
+    return {
+      incentives: Array.isArray(object?.incentives) ? object.incentives.map((e: any) => Incentive.fromSDK(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  toSDK(message: QueryIncentivesResponse): QueryIncentivesResponseSDKType {
+    const obj: any = {};
+
+    if (message.incentives) {
+      obj.incentives = message.incentives.map(e => e ? Incentive.toSDK(e) : undefined);
+    } else {
+      obj.incentives = [];
+    }
+
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
+    return obj;
   }
 
 };
@@ -317,6 +475,18 @@ export const QueryIncentiveRequest = {
     const message = createBaseQueryIncentiveRequest();
     message.contract = object.contract ?? "";
     return message;
+  },
+
+  fromSDK(object: QueryIncentiveRequestSDKType): QueryIncentiveRequest {
+    return {
+      contract: isSet(object.contract) ? object.contract : ""
+    };
+  },
+
+  toSDK(message: QueryIncentiveRequest): QueryIncentiveRequestSDKType {
+    const obj: any = {};
+    message.contract !== undefined && (obj.contract = message.contract);
+    return obj;
   }
 
 };
@@ -374,6 +544,18 @@ export const QueryIncentiveResponse = {
     const message = createBaseQueryIncentiveResponse();
     message.incentive = object.incentive !== undefined && object.incentive !== null ? Incentive.fromPartial(object.incentive) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryIncentiveResponseSDKType): QueryIncentiveResponse {
+    return {
+      incentive: isSet(object.incentive) ? Incentive.fromSDK(object.incentive) : undefined
+    };
+  },
+
+  toSDK(message: QueryIncentiveResponse): QueryIncentiveResponseSDKType {
+    const obj: any = {};
+    message.incentive !== undefined && (obj.incentive = message.incentive ? Incentive.toSDK(message.incentive) : undefined);
+    return obj;
   }
 
 };
@@ -443,6 +625,20 @@ export const QueryGasMetersRequest = {
     message.contract = object.contract ?? "";
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryGasMetersRequestSDKType): QueryGasMetersRequest {
+    return {
+      contract: isSet(object.contract) ? object.contract : "",
+      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  toSDK(message: QueryGasMetersRequest): QueryGasMetersRequestSDKType {
+    const obj: any = {};
+    message.contract !== undefined && (obj.contract = message.contract);
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
+    return obj;
   }
 
 };
@@ -518,6 +714,26 @@ export const QueryGasMetersResponse = {
     message.gasMeters = object.gasMeters?.map(e => GasMeter.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryGasMetersResponseSDKType): QueryGasMetersResponse {
+    return {
+      gasMeters: Array.isArray(object?.gas_meters) ? object.gas_meters.map((e: any) => GasMeter.fromSDK(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  toSDK(message: QueryGasMetersResponse): QueryGasMetersResponseSDKType {
+    const obj: any = {};
+
+    if (message.gasMeters) {
+      obj.gas_meters = message.gasMeters.map(e => e ? GasMeter.toSDK(e) : undefined);
+    } else {
+      obj.gas_meters = [];
+    }
+
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
+    return obj;
   }
 
 };
@@ -587,6 +803,20 @@ export const QueryGasMeterRequest = {
     message.contract = object.contract ?? "";
     message.participant = object.participant ?? "";
     return message;
+  },
+
+  fromSDK(object: QueryGasMeterRequestSDKType): QueryGasMeterRequest {
+    return {
+      contract: isSet(object.contract) ? object.contract : "",
+      participant: isSet(object.participant) ? object.participant : ""
+    };
+  },
+
+  toSDK(message: QueryGasMeterRequest): QueryGasMeterRequestSDKType {
+    const obj: any = {};
+    message.contract !== undefined && (obj.contract = message.contract);
+    message.participant !== undefined && (obj.participant = message.participant);
+    return obj;
   }
 
 };
@@ -644,6 +874,18 @@ export const QueryGasMeterResponse = {
     const message = createBaseQueryGasMeterResponse();
     message.gasMeter = object.gasMeter !== undefined && object.gasMeter !== null ? Long.fromValue(object.gasMeter) : Long.UZERO;
     return message;
+  },
+
+  fromSDK(object: QueryGasMeterResponseSDKType): QueryGasMeterResponse {
+    return {
+      gasMeter: isSet(object.gas_meter) ? object.gas_meter : Long.UZERO
+    };
+  },
+
+  toSDK(message: QueryGasMeterResponse): QueryGasMeterResponseSDKType {
+    const obj: any = {};
+    message.gasMeter !== undefined && (obj.gas_meter = message.gasMeter);
+    return obj;
   }
 
 };
@@ -701,6 +943,18 @@ export const QueryAllocationMetersRequest = {
     const message = createBaseQueryAllocationMetersRequest();
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryAllocationMetersRequestSDKType): QueryAllocationMetersRequest {
+    return {
+      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  toSDK(message: QueryAllocationMetersRequest): QueryAllocationMetersRequestSDKType {
+    const obj: any = {};
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
+    return obj;
   }
 
 };
@@ -776,6 +1030,26 @@ export const QueryAllocationMetersResponse = {
     message.allocationMeters = object.allocationMeters?.map(e => DecCoin.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryAllocationMetersResponseSDKType): QueryAllocationMetersResponse {
+    return {
+      allocationMeters: Array.isArray(object?.allocation_meters) ? object.allocation_meters.map((e: any) => DecCoin.fromSDK(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  toSDK(message: QueryAllocationMetersResponse): QueryAllocationMetersResponseSDKType {
+    const obj: any = {};
+
+    if (message.allocationMeters) {
+      obj.allocation_meters = message.allocationMeters.map(e => e ? DecCoin.toSDK(e) : undefined);
+    } else {
+      obj.allocation_meters = [];
+    }
+
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
+    return obj;
   }
 
 };
@@ -833,6 +1107,18 @@ export const QueryAllocationMeterRequest = {
     const message = createBaseQueryAllocationMeterRequest();
     message.denom = object.denom ?? "";
     return message;
+  },
+
+  fromSDK(object: QueryAllocationMeterRequestSDKType): QueryAllocationMeterRequest {
+    return {
+      denom: isSet(object.denom) ? object.denom : ""
+    };
+  },
+
+  toSDK(message: QueryAllocationMeterRequest): QueryAllocationMeterRequestSDKType {
+    const obj: any = {};
+    message.denom !== undefined && (obj.denom = message.denom);
+    return obj;
   }
 
 };
@@ -890,6 +1176,18 @@ export const QueryAllocationMeterResponse = {
     const message = createBaseQueryAllocationMeterResponse();
     message.allocationMeter = object.allocationMeter !== undefined && object.allocationMeter !== null ? DecCoin.fromPartial(object.allocationMeter) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryAllocationMeterResponseSDKType): QueryAllocationMeterResponse {
+    return {
+      allocationMeter: isSet(object.allocation_meter) ? DecCoin.fromSDK(object.allocation_meter) : undefined
+    };
+  },
+
+  toSDK(message: QueryAllocationMeterResponse): QueryAllocationMeterResponseSDKType {
+    const obj: any = {};
+    message.allocationMeter !== undefined && (obj.allocation_meter = message.allocationMeter ? DecCoin.toSDK(message.allocationMeter) : undefined);
+    return obj;
   }
 
 };
@@ -933,6 +1231,15 @@ export const QueryParamsRequest = {
   fromPartial(_: DeepPartial<QueryParamsRequest>): QueryParamsRequest {
     const message = createBaseQueryParamsRequest();
     return message;
+  },
+
+  fromSDK(_: QueryParamsRequestSDKType): QueryParamsRequest {
+    return {};
+  },
+
+  toSDK(_: QueryParamsRequest): QueryParamsRequestSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -990,6 +1297,18 @@ export const QueryParamsResponse = {
     const message = createBaseQueryParamsResponse();
     message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryParamsResponseSDKType): QueryParamsResponse {
+    return {
+      params: isSet(object.params) ? Params.fromSDK(object.params) : undefined
+    };
+  },
+
+  toSDK(message: QueryParamsResponse): QueryParamsResponseSDKType {
+    const obj: any = {};
+    message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
+    return obj;
   }
 
 };

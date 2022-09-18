@@ -1,5 +1,5 @@
-import { QuotaView, QuotaOverride, QuotaSafetyCheck, OverrideInlineSource, Service, ConsumerQuotaMetric, AdminQuotaPolicy, ServiceIdentity, quotaViewFromJSON, quotaViewToJSON, quotaSafetyCheckFromJSON, quotaSafetyCheckToJSON } from "./resources";
-import { FieldMask } from "../../../protobuf/field_mask";
+import { QuotaView, QuotaViewSDKType, QuotaOverride, QuotaOverrideSDKType, QuotaSafetyCheck, QuotaSafetyCheckSDKType, OverrideInlineSource, OverrideInlineSourceSDKType, Service, ServiceSDKType, ConsumerQuotaMetric, ConsumerQuotaMetricSDKType, AdminQuotaPolicy, AdminQuotaPolicySDKType, ServiceIdentity, ServiceIdentitySDKType, quotaViewFromJSON, quotaViewFromJSONSDKType, quotaViewToJSON, quotaViewToJSONSDKType, quotaSafetyCheckFromJSON, quotaSafetyCheckFromJSONSDKType, quotaSafetyCheckToJSON, quotaSafetyCheckToJSONSDKType } from "./resources";
+import { FieldMask, FieldMaskSDKType } from "../../../protobuf/field_mask";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "@osmonauts/helpers";
 export const protobufPackage = "google.api.serviceusage.v1beta1";
@@ -63,6 +63,24 @@ export interface EnableServiceRequest {
   name: string;
 }
 
+/** Request message for the `EnableService` method. */
+export interface EnableServiceRequestSDKType {
+  /**
+   * Name of the consumer and service to enable the service on.
+   * 
+   * The `EnableService` and `DisableService` methods currently only support
+   * projects.
+   * 
+   * Enabling a service requires that the service is public or is shared with
+   * the user enabling the service.
+   * 
+   * An example name would be:
+   * `projects/123/services/serviceusage.googleapis.com`
+   * where `123` is the project number (not project ID).
+   */
+  name: string;
+}
+
 /** Request message for the `DisableService` method. */
 export interface DisableServiceRequest {
   /**
@@ -77,8 +95,34 @@ export interface DisableServiceRequest {
   name: string;
 }
 
+/** Request message for the `DisableService` method. */
+export interface DisableServiceRequestSDKType {
+  /**
+   * Name of the consumer and service to disable the service on.
+   * 
+   * The enable and disable methods currently only support projects.
+   * 
+   * An example name would be:
+   * `projects/123/services/serviceusage.googleapis.com`
+   * where `123` is the project number (not project ID).
+   */
+  name: string;
+}
+
 /** Request message for the `GetService` method. */
 export interface GetServiceRequest {
+  /**
+   * Name of the consumer and service to get the `ConsumerState` for.
+   * 
+   * An example name would be:
+   * `projects/123/services/serviceusage.googleapis.com`
+   * where `123` is the project number (not project ID).
+   */
+  name?: string;
+}
+
+/** Request message for the `GetService` method. */
+export interface GetServiceRequestSDKType {
   /**
    * Name of the consumer and service to get the `ConsumerState` for.
    * 
@@ -120,6 +164,37 @@ export interface ListServicesRequest {
   filter?: string;
 }
 
+/** Request message for the `ListServices` method. */
+export interface ListServicesRequestSDKType {
+  /**
+   * Parent to search for services on.
+   * 
+   * An example name would be:
+   * `projects/123`
+   * where `123` is the project number (not project ID).
+   */
+  parent?: string;
+
+  /**
+   * Requested size of the next page of data.
+   * Requested page size cannot exceed 200.
+   * If not set, the default page size is 50.
+   */
+  page_size?: number;
+
+  /**
+   * Token identifying which result to start with, which is returned by a
+   * previous list call.
+   */
+  page_token?: string;
+
+  /**
+   * Only list services that conform to the given filter.
+   * The allowed filter strings are `state:ENABLED` and `state:DISABLED`.
+   */
+  filter?: string;
+}
+
 /** Response message for the `ListServices` method. */
 export interface ListServicesResponse {
   /** The available services for the requested project. */
@@ -130,6 +205,18 @@ export interface ListServicesResponse {
    * query.
    */
   nextPageToken: string;
+}
+
+/** Response message for the `ListServices` method. */
+export interface ListServicesResponseSDKType {
+  /** The available services for the requested project. */
+  services: ServiceSDKType[];
+
+  /**
+   * Token that can be passed to `ListServices` to resume a paginated
+   * query.
+   */
+  next_page_token: string;
 }
 
 /** Request message for the `BatchEnableServices` method. */
@@ -164,6 +251,38 @@ export interface BatchEnableServicesRequest {
   serviceIds: string[];
 }
 
+/** Request message for the `BatchEnableServices` method. */
+export interface BatchEnableServicesRequestSDKType {
+  /**
+   * Parent to enable services on.
+   * 
+   * An example name would be:
+   * `projects/123`
+   * where `123` is the project number (not project ID).
+   * 
+   * The `BatchEnableServices` method currently only supports projects.
+   */
+  parent: string;
+
+  /**
+   * The identifiers of the services to enable on the project.
+   * 
+   * A valid identifier would be:
+   * serviceusage.googleapis.com
+   * 
+   * Enabling services requires that each service is public or is shared with
+   * the user enabling the service.
+   * 
+   * Two or more services must be specified. To enable a single service,
+   * use the `EnableService` method instead.
+   * 
+   * A single request can enable a maximum of 20 services at a time. If more
+   * than 20 services are specified, the request will fail, and no state changes
+   * will occur.
+   */
+  service_ids: string[];
+}
+
 /** Request message for ListConsumerQuotaMetrics */
 export interface ListConsumerQuotaMetricsRequest {
   /**
@@ -189,6 +308,31 @@ export interface ListConsumerQuotaMetricsRequest {
   view?: QuotaView;
 }
 
+/** Request message for ListConsumerQuotaMetrics */
+export interface ListConsumerQuotaMetricsRequestSDKType {
+  /**
+   * Parent of the quotas resource.
+   * 
+   * Some example names would be:
+   * `projects/123/services/serviceconsumermanagement.googleapis.com`
+   * `folders/345/services/serviceconsumermanagement.googleapis.com`
+   * `organizations/456/services/serviceconsumermanagement.googleapis.com`
+   */
+  parent?: string;
+
+  /** Requested size of the next page of data. */
+  page_size?: number;
+
+  /**
+   * Token identifying which result to start with; returned by a previous list
+   * call.
+   */
+  page_token?: string;
+
+  /** Specifies the level of detail for quota information in the response. */
+  view?: QuotaViewSDKType;
+}
+
 /** Response message for ListConsumerQuotaMetrics */
 export interface ListConsumerQuotaMetricsResponse {
   /** Quota settings for the consumer, organized by quota metric. */
@@ -199,6 +343,18 @@ export interface ListConsumerQuotaMetricsResponse {
    * call.
    */
   nextPageToken: string;
+}
+
+/** Response message for ListConsumerQuotaMetrics */
+export interface ListConsumerQuotaMetricsResponseSDKType {
+  /** Quota settings for the consumer, organized by quota metric. */
+  metrics: ConsumerQuotaMetricSDKType[];
+
+  /**
+   * Token identifying which result to start with; returned by a previous list
+   * call.
+   */
+  next_page_token: string;
 }
 
 /** Request message for GetConsumerQuotaMetric */
@@ -215,6 +371,20 @@ export interface GetConsumerQuotaMetricRequest {
   view?: QuotaView;
 }
 
+/** Request message for GetConsumerQuotaMetric */
+export interface GetConsumerQuotaMetricRequestSDKType {
+  /**
+   * The resource name of the quota limit.
+   * 
+   * An example name would be:
+   * `projects/123/services/serviceusage.googleapis.com/quotas/metrics/serviceusage.googleapis.com%2Fmutate_requests`
+   */
+  name?: string;
+
+  /** Specifies the level of detail for quota information in the response. */
+  view?: QuotaViewSDKType;
+}
+
 /** Request message for GetConsumerQuotaLimit */
 export interface GetConsumerQuotaLimitRequest {
   /**
@@ -227,6 +397,20 @@ export interface GetConsumerQuotaLimitRequest {
 
   /** Specifies the level of detail for quota information in the response. */
   view?: QuotaView;
+}
+
+/** Request message for GetConsumerQuotaLimit */
+export interface GetConsumerQuotaLimitRequestSDKType {
+  /**
+   * The resource name of the quota limit.
+   * 
+   * Use the quota limit resource name returned by previous
+   * ListConsumerQuotaMetrics and GetConsumerQuotaMetric API calls.
+   */
+  name?: string;
+
+  /** Specifies the level of detail for quota information in the response. */
+  view?: QuotaViewSDKType;
 }
 
 /** Request message for CreateAdminOverride. */
@@ -257,6 +441,36 @@ export interface CreateAdminOverrideRequest {
    * still enforced. The 'force' and 'force_only' fields cannot both be set.
    */
   forceOnly: QuotaSafetyCheck[];
+}
+
+/** Request message for CreateAdminOverride. */
+export interface CreateAdminOverrideRequestSDKType {
+  /**
+   * The resource name of the parent quota limit, returned by a
+   * ListConsumerQuotaMetrics or GetConsumerQuotaMetric call.
+   * 
+   * An example name would be:
+   * `projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion`
+   */
+  parent: string;
+
+  /** The admin override to create. */
+  override: QuotaOverrideSDKType;
+
+  /**
+   * Whether to force the creation of the quota override.
+   * Setting the force parameter to 'true' ignores all quota safety checks that
+   * would fail the request. QuotaSafetyCheck lists all such validations.
+   */
+  force: boolean;
+
+  /**
+   * The list of quota safety checks to ignore before the override mutation.
+   * Unlike 'force' field that ignores all the quota safety checks, the
+   * 'force_only' field ignores only the specified checks; other checks are
+   * still enforced. The 'force' and 'force_only' fields cannot both be set.
+   */
+  force_only: QuotaSafetyCheckSDKType[];
 }
 
 /** Request message for UpdateAdminOverride. */
@@ -297,6 +511,44 @@ export interface UpdateAdminOverrideRequest {
   forceOnly: QuotaSafetyCheck[];
 }
 
+/** Request message for UpdateAdminOverride. */
+export interface UpdateAdminOverrideRequestSDKType {
+  /**
+   * The resource name of the override to update.
+   * 
+   * An example name would be:
+   * `projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion/adminOverrides/4a3f2c1d`
+   */
+  name: string;
+
+  /**
+   * The new override.
+   * Only the override_value is updated; all other fields are ignored.
+   */
+  override: QuotaOverrideSDKType;
+
+  /**
+   * Whether to force the update of the quota override.
+   * Setting the force parameter to 'true' ignores all quota safety checks that
+   * would fail the request. QuotaSafetyCheck lists all such validations.
+   */
+  force: boolean;
+
+  /**
+   * Update only the specified fields of the override.
+   * If unset, all fields will be updated.
+   */
+  update_mask: FieldMaskSDKType;
+
+  /**
+   * The list of quota safety checks to ignore before the override mutation.
+   * Unlike 'force' field that ignores all the quota safety checks, the
+   * 'force_only' field ignores only the specified checks; other checks are
+   * still enforced. The 'force' and 'force_only' fields cannot both be set.
+   */
+  force_only: QuotaSafetyCheckSDKType[];
+}
+
 /** Request message for DeleteAdminOverride. */
 export interface DeleteAdminOverrideRequest {
   /**
@@ -323,6 +575,32 @@ export interface DeleteAdminOverrideRequest {
   forceOnly: QuotaSafetyCheck[];
 }
 
+/** Request message for DeleteAdminOverride. */
+export interface DeleteAdminOverrideRequestSDKType {
+  /**
+   * The resource name of the override to delete.
+   * 
+   * An example name would be:
+   * `projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion/adminOverrides/4a3f2c1d`
+   */
+  name: string;
+
+  /**
+   * Whether to force the deletion of the quota override.
+   * Setting the force parameter to 'true' ignores all quota safety checks that
+   * would fail the request. QuotaSafetyCheck lists all such validations.
+   */
+  force: boolean;
+
+  /**
+   * The list of quota safety checks to ignore before the override mutation.
+   * Unlike 'force' field that ignores all the quota safety checks, the
+   * 'force_only' field ignores only the specified checks; other checks are
+   * still enforced. The 'force' and 'force_only' fields cannot both be set.
+   */
+  force_only: QuotaSafetyCheckSDKType[];
+}
+
 /** Request message for ListAdminOverrides */
 export interface ListAdminOverridesRequest {
   /**
@@ -344,6 +622,27 @@ export interface ListAdminOverridesRequest {
   pageToken?: string;
 }
 
+/** Request message for ListAdminOverrides */
+export interface ListAdminOverridesRequestSDKType {
+  /**
+   * The resource name of the parent quota limit, returned by a
+   * ListConsumerQuotaMetrics or GetConsumerQuotaMetric call.
+   * 
+   * An example name would be:
+   * `projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion`
+   */
+  parent?: string;
+
+  /** Requested size of the next page of data. */
+  page_size?: number;
+
+  /**
+   * Token identifying which result to start with; returned by a previous list
+   * call.
+   */
+  page_token?: string;
+}
+
 /** Response message for ListAdminOverrides. */
 export interface ListAdminOverridesResponse {
   /** Admin overrides on this limit. */
@@ -356,10 +655,28 @@ export interface ListAdminOverridesResponse {
   nextPageToken: string;
 }
 
+/** Response message for ListAdminOverrides. */
+export interface ListAdminOverridesResponseSDKType {
+  /** Admin overrides on this limit. */
+  overrides: QuotaOverrideSDKType[];
+
+  /**
+   * Token identifying which result to start with; returned by a previous list
+   * call.
+   */
+  next_page_token: string;
+}
+
 /** Response message for BatchCreateAdminOverrides */
 export interface BatchCreateAdminOverridesResponse {
   /** The overrides that were created. */
   overrides: QuotaOverride[];
+}
+
+/** Response message for BatchCreateAdminOverrides */
+export interface BatchCreateAdminOverridesResponseSDKType {
+  /** The overrides that were created. */
+  overrides: QuotaOverrideSDKType[];
 }
 
 /** Request message for ImportAdminOverrides */
@@ -391,10 +708,45 @@ export interface ImportAdminOverridesRequest {
   forceOnly: QuotaSafetyCheck[];
 }
 
+/** Request message for ImportAdminOverrides */
+export interface ImportAdminOverridesRequestSDKType {
+  /**
+   * The resource name of the consumer.
+   * 
+   * An example name would be:
+   * `projects/123/services/compute.googleapis.com`
+   */
+  parent: string;
+
+  /** The import data is specified in the request message itself */
+  inline_source?: OverrideInlineSourceSDKType;
+
+  /**
+   * Whether to force the creation of the quota overrides.
+   * Setting the force parameter to 'true' ignores all quota safety checks that
+   * would fail the request. QuotaSafetyCheck lists all such validations.
+   */
+  force: boolean;
+
+  /**
+   * The list of quota safety checks to ignore before the override mutation.
+   * Unlike 'force' field that ignores all the quota safety checks, the
+   * 'force_only' field ignores only the specified checks; other checks are
+   * still enforced. The 'force' and 'force_only' fields cannot both be set.
+   */
+  force_only: QuotaSafetyCheckSDKType[];
+}
+
 /** Response message for ImportAdminOverrides */
 export interface ImportAdminOverridesResponse {
   /** The overrides that were created from the imported data. */
   overrides: QuotaOverride[];
+}
+
+/** Response message for ImportAdminOverrides */
+export interface ImportAdminOverridesResponseSDKType {
+  /** The overrides that were created from the imported data. */
+  overrides: QuotaOverrideSDKType[];
 }
 
 /**
@@ -403,6 +755,13 @@ export interface ImportAdminOverridesResponse {
  * of LRO returned by ImportAdminOverrides.
  */
 export interface ImportAdminOverridesMetadata {}
+
+/**
+ * Metadata message that provides information such as progress,
+ * partial failures, and similar information on each GetOperation call
+ * of LRO returned by ImportAdminOverrides.
+ */
+export interface ImportAdminOverridesMetadataSDKType {}
 
 /** Request message for CreateConsumerOverride. */
 export interface CreateConsumerOverrideRequest {
@@ -432,6 +791,36 @@ export interface CreateConsumerOverrideRequest {
    * still enforced. The 'force' and 'force_only' fields cannot both be set.
    */
   forceOnly: QuotaSafetyCheck[];
+}
+
+/** Request message for CreateConsumerOverride. */
+export interface CreateConsumerOverrideRequestSDKType {
+  /**
+   * The resource name of the parent quota limit, returned by a
+   * ListConsumerQuotaMetrics or GetConsumerQuotaMetric call.
+   * 
+   * An example name would be:
+   * `projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion`
+   */
+  parent: string;
+
+  /** The override to create. */
+  override: QuotaOverrideSDKType;
+
+  /**
+   * Whether to force the creation of the quota override.
+   * Setting the force parameter to 'true' ignores all quota safety checks that
+   * would fail the request. QuotaSafetyCheck lists all such validations.
+   */
+  force: boolean;
+
+  /**
+   * The list of quota safety checks to ignore before the override mutation.
+   * Unlike 'force' field that ignores all the quota safety checks, the
+   * 'force_only' field ignores only the specified checks; other checks are
+   * still enforced. The 'force' and 'force_only' fields cannot both be set.
+   */
+  force_only: QuotaSafetyCheckSDKType[];
 }
 
 /** Request message for UpdateConsumerOverride. */
@@ -472,6 +861,44 @@ export interface UpdateConsumerOverrideRequest {
   forceOnly: QuotaSafetyCheck[];
 }
 
+/** Request message for UpdateConsumerOverride. */
+export interface UpdateConsumerOverrideRequestSDKType {
+  /**
+   * The resource name of the override to update.
+   * 
+   * An example name would be:
+   * `projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion/consumerOverrides/4a3f2c1d`
+   */
+  name: string;
+
+  /**
+   * The new override.
+   * Only the override_value is updated; all other fields are ignored.
+   */
+  override: QuotaOverrideSDKType;
+
+  /**
+   * Whether to force the update of the quota override.
+   * Setting the force parameter to 'true' ignores all quota safety checks that
+   * would fail the request. QuotaSafetyCheck lists all such validations.
+   */
+  force: boolean;
+
+  /**
+   * Update only the specified fields of the override.
+   * If unset, all fields will be updated.
+   */
+  update_mask: FieldMaskSDKType;
+
+  /**
+   * The list of quota safety checks to ignore before the override mutation.
+   * Unlike 'force' field that ignores all the quota safety checks, the
+   * 'force_only' field ignores only the specified checks; other checks are
+   * still enforced. The 'force' and 'force_only' fields cannot both be set.
+   */
+  force_only: QuotaSafetyCheckSDKType[];
+}
+
 /** Request message for DeleteConsumerOverride. */
 export interface DeleteConsumerOverrideRequest {
   /**
@@ -498,6 +925,32 @@ export interface DeleteConsumerOverrideRequest {
   forceOnly: QuotaSafetyCheck[];
 }
 
+/** Request message for DeleteConsumerOverride. */
+export interface DeleteConsumerOverrideRequestSDKType {
+  /**
+   * The resource name of the override to delete.
+   * 
+   * An example name would be:
+   * `projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion/consumerOverrides/4a3f2c1d`
+   */
+  name: string;
+
+  /**
+   * Whether to force the deletion of the quota override.
+   * Setting the force parameter to 'true' ignores all quota safety checks that
+   * would fail the request. QuotaSafetyCheck lists all such validations.
+   */
+  force: boolean;
+
+  /**
+   * The list of quota safety checks to ignore before the override mutation.
+   * Unlike 'force' field that ignores all the quota safety checks, the
+   * 'force_only' field ignores only the specified checks; other checks are
+   * still enforced. The 'force' and 'force_only' fields cannot both be set.
+   */
+  force_only: QuotaSafetyCheckSDKType[];
+}
+
 /** Request message for ListConsumerOverrides */
 export interface ListConsumerOverridesRequest {
   /**
@@ -519,6 +972,27 @@ export interface ListConsumerOverridesRequest {
   pageToken?: string;
 }
 
+/** Request message for ListConsumerOverrides */
+export interface ListConsumerOverridesRequestSDKType {
+  /**
+   * The resource name of the parent quota limit, returned by a
+   * ListConsumerQuotaMetrics or GetConsumerQuotaMetric call.
+   * 
+   * An example name would be:
+   * `projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion`
+   */
+  parent?: string;
+
+  /** Requested size of the next page of data. */
+  page_size?: number;
+
+  /**
+   * Token identifying which result to start with; returned by a previous list
+   * call.
+   */
+  page_token?: string;
+}
+
 /** Response message for ListConsumerOverrides. */
 export interface ListConsumerOverridesResponse {
   /** Consumer overrides on this limit. */
@@ -531,10 +1005,28 @@ export interface ListConsumerOverridesResponse {
   nextPageToken: string;
 }
 
+/** Response message for ListConsumerOverrides. */
+export interface ListConsumerOverridesResponseSDKType {
+  /** Consumer overrides on this limit. */
+  overrides: QuotaOverrideSDKType[];
+
+  /**
+   * Token identifying which result to start with; returned by a previous list
+   * call.
+   */
+  next_page_token: string;
+}
+
 /** Response message for BatchCreateConsumerOverrides */
 export interface BatchCreateConsumerOverridesResponse {
   /** The overrides that were created. */
   overrides: QuotaOverride[];
+}
+
+/** Response message for BatchCreateConsumerOverrides */
+export interface BatchCreateConsumerOverridesResponseSDKType {
+  /** The overrides that were created. */
+  overrides: QuotaOverrideSDKType[];
 }
 
 /** Request message for ImportConsumerOverrides */
@@ -566,10 +1058,45 @@ export interface ImportConsumerOverridesRequest {
   forceOnly: QuotaSafetyCheck[];
 }
 
+/** Request message for ImportConsumerOverrides */
+export interface ImportConsumerOverridesRequestSDKType {
+  /**
+   * The resource name of the consumer.
+   * 
+   * An example name would be:
+   * `projects/123/services/compute.googleapis.com`
+   */
+  parent: string;
+
+  /** The import data is specified in the request message itself */
+  inline_source?: OverrideInlineSourceSDKType;
+
+  /**
+   * Whether to force the creation of the quota overrides.
+   * Setting the force parameter to 'true' ignores all quota safety checks that
+   * would fail the request. QuotaSafetyCheck lists all such validations.
+   */
+  force: boolean;
+
+  /**
+   * The list of quota safety checks to ignore before the override mutation.
+   * Unlike 'force' field that ignores all the quota safety checks, the
+   * 'force_only' field ignores only the specified checks; other checks are
+   * still enforced. The 'force' and 'force_only' fields cannot both be set.
+   */
+  force_only: QuotaSafetyCheckSDKType[];
+}
+
 /** Response message for ImportConsumerOverrides */
 export interface ImportConsumerOverridesResponse {
   /** The overrides that were created from the imported data. */
   overrides: QuotaOverride[];
+}
+
+/** Response message for ImportConsumerOverrides */
+export interface ImportConsumerOverridesResponseSDKType {
+  /** The overrides that were created from the imported data. */
+  overrides: QuotaOverrideSDKType[];
 }
 
 /**
@@ -579,10 +1106,23 @@ export interface ImportConsumerOverridesResponse {
  */
 export interface ImportConsumerOverridesMetadata {}
 
+/**
+ * Metadata message that provides information such as progress,
+ * partial failures, and similar information on each GetOperation call
+ * of LRO returned by ImportConsumerOverrides.
+ */
+export interface ImportConsumerOverridesMetadataSDKType {}
+
 /** Response message for ImportAdminQuotaPolicies */
 export interface ImportAdminQuotaPoliciesResponse {
   /** The policies that were created from the imported data. */
   policies: AdminQuotaPolicy[];
+}
+
+/** Response message for ImportAdminQuotaPolicies */
+export interface ImportAdminQuotaPoliciesResponseSDKType {
+  /** The policies that were created from the imported data. */
+  policies: AdminQuotaPolicySDKType[];
 }
 
 /**
@@ -595,9 +1135,23 @@ export interface ImportAdminQuotaPoliciesMetadata {}
 /**
  * Metadata message that provides information such as progress,
  * partial failures, and similar information on each GetOperation call
+ * of LRO returned by ImportAdminQuotaPolicies.
+ */
+export interface ImportAdminQuotaPoliciesMetadataSDKType {}
+
+/**
+ * Metadata message that provides information such as progress,
+ * partial failures, and similar information on each GetOperation call
  * of LRO returned by CreateAdminQuotaPolicy.
  */
 export interface CreateAdminQuotaPolicyMetadata {}
+
+/**
+ * Metadata message that provides information such as progress,
+ * partial failures, and similar information on each GetOperation call
+ * of LRO returned by CreateAdminQuotaPolicy.
+ */
+export interface CreateAdminQuotaPolicyMetadataSDKType {}
 
 /**
  * Metadata message that provides information such as progress,
@@ -609,12 +1163,40 @@ export interface UpdateAdminQuotaPolicyMetadata {}
 /**
  * Metadata message that provides information such as progress,
  * partial failures, and similar information on each GetOperation call
+ * of LRO returned by UpdateAdminQuotaPolicy.
+ */
+export interface UpdateAdminQuotaPolicyMetadataSDKType {}
+
+/**
+ * Metadata message that provides information such as progress,
+ * partial failures, and similar information on each GetOperation call
  * of LRO returned by DeleteAdminQuotaPolicy.
  */
 export interface DeleteAdminQuotaPolicyMetadata {}
 
+/**
+ * Metadata message that provides information such as progress,
+ * partial failures, and similar information on each GetOperation call
+ * of LRO returned by DeleteAdminQuotaPolicy.
+ */
+export interface DeleteAdminQuotaPolicyMetadataSDKType {}
+
 /** Request message for generating service identity. */
 export interface GenerateServiceIdentityRequest {
+  /**
+   * Name of the consumer and service to generate an identity for.
+   * 
+   * The `GenerateServiceIdentity` methods currently only support projects.
+   * 
+   * An example name would be:
+   * `projects/123/services/example.googleapis.com` where `123` is the
+   * project number.
+   */
+  parent: string;
+}
+
+/** Request message for generating service identity. */
+export interface GenerateServiceIdentityRequestSDKType {
   /**
    * Name of the consumer and service to generate an identity for.
    * 
@@ -640,8 +1222,24 @@ export interface GetServiceIdentityResponse {
   state: GetServiceIdentityResponse_IdentityState;
 }
 
+/** Response message for getting service identity. */
+export interface GetServiceIdentityResponseSDKType {
+  /**
+   * Service identity that service producer can use to access consumer
+   * resources. If exists is true, it contains email and unique_id. If exists is
+   * false, it contains pre-constructed email and empty unique_id.
+   */
+  identity: ServiceIdentitySDKType;
+
+  /** Service identity state. */
+  state: GetServiceIdentityResponse_IdentityStateSDKType;
+}
+
 /** Metadata for the `GetServiceIdentity` method. */
 export interface GetServiceIdentityMetadata {}
+
+/** Metadata for the `GetServiceIdentity` method. */
+export interface GetServiceIdentityMetadataSDKType {}
 
 function createBaseEnableServiceRequest(): EnableServiceRequest {
   return {
@@ -696,6 +1294,18 @@ export const EnableServiceRequest = {
     const message = createBaseEnableServiceRequest();
     message.name = object.name ?? "";
     return message;
+  },
+
+  fromSDK(object: EnableServiceRequestSDKType): EnableServiceRequest {
+    return {
+      name: isSet(object.name) ? object.name : ""
+    };
+  },
+
+  toSDK(message: EnableServiceRequest): EnableServiceRequestSDKType {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    return obj;
   }
 
 };
@@ -753,6 +1363,18 @@ export const DisableServiceRequest = {
     const message = createBaseDisableServiceRequest();
     message.name = object.name ?? "";
     return message;
+  },
+
+  fromSDK(object: DisableServiceRequestSDKType): DisableServiceRequest {
+    return {
+      name: isSet(object.name) ? object.name : ""
+    };
+  },
+
+  toSDK(message: DisableServiceRequest): DisableServiceRequestSDKType {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    return obj;
   }
 
 };
@@ -810,6 +1432,18 @@ export const GetServiceRequest = {
     const message = createBaseGetServiceRequest();
     message.name = object.name ?? "";
     return message;
+  },
+
+  fromSDK(object: GetServiceRequestSDKType): GetServiceRequest {
+    return {
+      name: isSet(object.name) ? object.name : ""
+    };
+  },
+
+  toSDK(message: GetServiceRequest): GetServiceRequestSDKType {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    return obj;
   }
 
 };
@@ -903,6 +1537,24 @@ export const ListServicesRequest = {
     message.pageToken = object.pageToken ?? "";
     message.filter = object.filter ?? "";
     return message;
+  },
+
+  fromSDK(object: ListServicesRequestSDKType): ListServicesRequest {
+    return {
+      parent: isSet(object.parent) ? object.parent : "",
+      pageSize: isSet(object.page_size) ? object.page_size : 0,
+      pageToken: isSet(object.page_token) ? object.page_token : "",
+      filter: isSet(object.filter) ? object.filter : ""
+    };
+  },
+
+  toSDK(message: ListServicesRequest): ListServicesRequestSDKType {
+    const obj: any = {};
+    message.parent !== undefined && (obj.parent = message.parent);
+    message.pageSize !== undefined && (obj.page_size = message.pageSize);
+    message.pageToken !== undefined && (obj.page_token = message.pageToken);
+    message.filter !== undefined && (obj.filter = message.filter);
+    return obj;
   }
 
 };
@@ -978,6 +1630,26 @@ export const ListServicesResponse = {
     message.services = object.services?.map(e => Service.fromPartial(e)) || [];
     message.nextPageToken = object.nextPageToken ?? "";
     return message;
+  },
+
+  fromSDK(object: ListServicesResponseSDKType): ListServicesResponse {
+    return {
+      services: Array.isArray(object?.services) ? object.services.map((e: any) => Service.fromSDK(e)) : [],
+      nextPageToken: isSet(object.next_page_token) ? object.next_page_token : ""
+    };
+  },
+
+  toSDK(message: ListServicesResponse): ListServicesResponseSDKType {
+    const obj: any = {};
+
+    if (message.services) {
+      obj.services = message.services.map(e => e ? Service.toSDK(e) : undefined);
+    } else {
+      obj.services = [];
+    }
+
+    message.nextPageToken !== undefined && (obj.next_page_token = message.nextPageToken);
+    return obj;
   }
 
 };
@@ -1053,6 +1725,26 @@ export const BatchEnableServicesRequest = {
     message.parent = object.parent ?? "";
     message.serviceIds = object.serviceIds?.map(e => e) || [];
     return message;
+  },
+
+  fromSDK(object: BatchEnableServicesRequestSDKType): BatchEnableServicesRequest {
+    return {
+      parent: isSet(object.parent) ? object.parent : "",
+      serviceIds: Array.isArray(object?.service_ids) ? object.service_ids.map((e: any) => e) : []
+    };
+  },
+
+  toSDK(message: BatchEnableServicesRequest): BatchEnableServicesRequestSDKType {
+    const obj: any = {};
+    message.parent !== undefined && (obj.parent = message.parent);
+
+    if (message.serviceIds) {
+      obj.service_ids = message.serviceIds.map(e => e);
+    } else {
+      obj.service_ids = [];
+    }
+
+    return obj;
   }
 
 };
@@ -1146,6 +1838,24 @@ export const ListConsumerQuotaMetricsRequest = {
     message.pageToken = object.pageToken ?? "";
     message.view = object.view ?? 0;
     return message;
+  },
+
+  fromSDK(object: ListConsumerQuotaMetricsRequestSDKType): ListConsumerQuotaMetricsRequest {
+    return {
+      parent: isSet(object.parent) ? object.parent : "",
+      pageSize: isSet(object.page_size) ? object.page_size : 0,
+      pageToken: isSet(object.page_token) ? object.page_token : "",
+      view: isSet(object.view) ? quotaViewFromJSON(object.view) : 0
+    };
+  },
+
+  toSDK(message: ListConsumerQuotaMetricsRequest): ListConsumerQuotaMetricsRequestSDKType {
+    const obj: any = {};
+    message.parent !== undefined && (obj.parent = message.parent);
+    message.pageSize !== undefined && (obj.page_size = message.pageSize);
+    message.pageToken !== undefined && (obj.page_token = message.pageToken);
+    message.view !== undefined && (obj.view = quotaViewToJSON(message.view));
+    return obj;
   }
 
 };
@@ -1221,6 +1931,26 @@ export const ListConsumerQuotaMetricsResponse = {
     message.metrics = object.metrics?.map(e => ConsumerQuotaMetric.fromPartial(e)) || [];
     message.nextPageToken = object.nextPageToken ?? "";
     return message;
+  },
+
+  fromSDK(object: ListConsumerQuotaMetricsResponseSDKType): ListConsumerQuotaMetricsResponse {
+    return {
+      metrics: Array.isArray(object?.metrics) ? object.metrics.map((e: any) => ConsumerQuotaMetric.fromSDK(e)) : [],
+      nextPageToken: isSet(object.next_page_token) ? object.next_page_token : ""
+    };
+  },
+
+  toSDK(message: ListConsumerQuotaMetricsResponse): ListConsumerQuotaMetricsResponseSDKType {
+    const obj: any = {};
+
+    if (message.metrics) {
+      obj.metrics = message.metrics.map(e => e ? ConsumerQuotaMetric.toSDK(e) : undefined);
+    } else {
+      obj.metrics = [];
+    }
+
+    message.nextPageToken !== undefined && (obj.next_page_token = message.nextPageToken);
+    return obj;
   }
 
 };
@@ -1290,6 +2020,20 @@ export const GetConsumerQuotaMetricRequest = {
     message.name = object.name ?? "";
     message.view = object.view ?? 0;
     return message;
+  },
+
+  fromSDK(object: GetConsumerQuotaMetricRequestSDKType): GetConsumerQuotaMetricRequest {
+    return {
+      name: isSet(object.name) ? object.name : "",
+      view: isSet(object.view) ? quotaViewFromJSON(object.view) : 0
+    };
+  },
+
+  toSDK(message: GetConsumerQuotaMetricRequest): GetConsumerQuotaMetricRequestSDKType {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    message.view !== undefined && (obj.view = quotaViewToJSON(message.view));
+    return obj;
   }
 
 };
@@ -1359,6 +2103,20 @@ export const GetConsumerQuotaLimitRequest = {
     message.name = object.name ?? "";
     message.view = object.view ?? 0;
     return message;
+  },
+
+  fromSDK(object: GetConsumerQuotaLimitRequestSDKType): GetConsumerQuotaLimitRequest {
+    return {
+      name: isSet(object.name) ? object.name : "",
+      view: isSet(object.view) ? quotaViewFromJSON(object.view) : 0
+    };
+  },
+
+  toSDK(message: GetConsumerQuotaLimitRequest): GetConsumerQuotaLimitRequestSDKType {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    message.view !== undefined && (obj.view = quotaViewToJSON(message.view));
+    return obj;
   }
 
 };
@@ -1470,6 +2228,30 @@ export const CreateAdminOverrideRequest = {
     message.force = object.force ?? false;
     message.forceOnly = object.forceOnly?.map(e => e) || [];
     return message;
+  },
+
+  fromSDK(object: CreateAdminOverrideRequestSDKType): CreateAdminOverrideRequest {
+    return {
+      parent: isSet(object.parent) ? object.parent : "",
+      override: isSet(object.override) ? QuotaOverride.fromSDK(object.override) : undefined,
+      force: isSet(object.force) ? object.force : false,
+      forceOnly: Array.isArray(object?.force_only) ? object.force_only.map((e: any) => quotaSafetyCheckFromJSON(e)) : []
+    };
+  },
+
+  toSDK(message: CreateAdminOverrideRequest): CreateAdminOverrideRequestSDKType {
+    const obj: any = {};
+    message.parent !== undefined && (obj.parent = message.parent);
+    message.override !== undefined && (obj.override = message.override ? QuotaOverride.toSDK(message.override) : undefined);
+    message.force !== undefined && (obj.force = message.force);
+
+    if (message.forceOnly) {
+      obj.force_only = message.forceOnly.map(e => quotaSafetyCheckToJSON(e));
+    } else {
+      obj.force_only = [];
+    }
+
+    return obj;
   }
 
 };
@@ -1593,6 +2375,32 @@ export const UpdateAdminOverrideRequest = {
     message.updateMask = object.updateMask !== undefined && object.updateMask !== null ? FieldMask.fromPartial(object.updateMask) : undefined;
     message.forceOnly = object.forceOnly?.map(e => e) || [];
     return message;
+  },
+
+  fromSDK(object: UpdateAdminOverrideRequestSDKType): UpdateAdminOverrideRequest {
+    return {
+      name: isSet(object.name) ? object.name : "",
+      override: isSet(object.override) ? QuotaOverride.fromSDK(object.override) : undefined,
+      force: isSet(object.force) ? object.force : false,
+      updateMask: isSet(object.update_mask) ? FieldMask.fromSDK(object.update_mask) : undefined,
+      forceOnly: Array.isArray(object?.force_only) ? object.force_only.map((e: any) => quotaSafetyCheckFromJSON(e)) : []
+    };
+  },
+
+  toSDK(message: UpdateAdminOverrideRequest): UpdateAdminOverrideRequestSDKType {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    message.override !== undefined && (obj.override = message.override ? QuotaOverride.toSDK(message.override) : undefined);
+    message.force !== undefined && (obj.force = message.force);
+    message.updateMask !== undefined && (obj.update_mask = message.updateMask ? FieldMask.toSDK(message.updateMask) : undefined);
+
+    if (message.forceOnly) {
+      obj.force_only = message.forceOnly.map(e => quotaSafetyCheckToJSON(e));
+    } else {
+      obj.force_only = [];
+    }
+
+    return obj;
   }
 
 };
@@ -1692,6 +2500,28 @@ export const DeleteAdminOverrideRequest = {
     message.force = object.force ?? false;
     message.forceOnly = object.forceOnly?.map(e => e) || [];
     return message;
+  },
+
+  fromSDK(object: DeleteAdminOverrideRequestSDKType): DeleteAdminOverrideRequest {
+    return {
+      name: isSet(object.name) ? object.name : "",
+      force: isSet(object.force) ? object.force : false,
+      forceOnly: Array.isArray(object?.force_only) ? object.force_only.map((e: any) => quotaSafetyCheckFromJSON(e)) : []
+    };
+  },
+
+  toSDK(message: DeleteAdminOverrideRequest): DeleteAdminOverrideRequestSDKType {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    message.force !== undefined && (obj.force = message.force);
+
+    if (message.forceOnly) {
+      obj.force_only = message.forceOnly.map(e => quotaSafetyCheckToJSON(e));
+    } else {
+      obj.force_only = [];
+    }
+
+    return obj;
   }
 
 };
@@ -1773,6 +2603,22 @@ export const ListAdminOverridesRequest = {
     message.pageSize = object.pageSize ?? 0;
     message.pageToken = object.pageToken ?? "";
     return message;
+  },
+
+  fromSDK(object: ListAdminOverridesRequestSDKType): ListAdminOverridesRequest {
+    return {
+      parent: isSet(object.parent) ? object.parent : "",
+      pageSize: isSet(object.page_size) ? object.page_size : 0,
+      pageToken: isSet(object.page_token) ? object.page_token : ""
+    };
+  },
+
+  toSDK(message: ListAdminOverridesRequest): ListAdminOverridesRequestSDKType {
+    const obj: any = {};
+    message.parent !== undefined && (obj.parent = message.parent);
+    message.pageSize !== undefined && (obj.page_size = message.pageSize);
+    message.pageToken !== undefined && (obj.page_token = message.pageToken);
+    return obj;
   }
 
 };
@@ -1848,6 +2694,26 @@ export const ListAdminOverridesResponse = {
     message.overrides = object.overrides?.map(e => QuotaOverride.fromPartial(e)) || [];
     message.nextPageToken = object.nextPageToken ?? "";
     return message;
+  },
+
+  fromSDK(object: ListAdminOverridesResponseSDKType): ListAdminOverridesResponse {
+    return {
+      overrides: Array.isArray(object?.overrides) ? object.overrides.map((e: any) => QuotaOverride.fromSDK(e)) : [],
+      nextPageToken: isSet(object.next_page_token) ? object.next_page_token : ""
+    };
+  },
+
+  toSDK(message: ListAdminOverridesResponse): ListAdminOverridesResponseSDKType {
+    const obj: any = {};
+
+    if (message.overrides) {
+      obj.overrides = message.overrides.map(e => e ? QuotaOverride.toSDK(e) : undefined);
+    } else {
+      obj.overrides = [];
+    }
+
+    message.nextPageToken !== undefined && (obj.next_page_token = message.nextPageToken);
+    return obj;
   }
 
 };
@@ -1911,6 +2777,24 @@ export const BatchCreateAdminOverridesResponse = {
     const message = createBaseBatchCreateAdminOverridesResponse();
     message.overrides = object.overrides?.map(e => QuotaOverride.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: BatchCreateAdminOverridesResponseSDKType): BatchCreateAdminOverridesResponse {
+    return {
+      overrides: Array.isArray(object?.overrides) ? object.overrides.map((e: any) => QuotaOverride.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: BatchCreateAdminOverridesResponse): BatchCreateAdminOverridesResponseSDKType {
+    const obj: any = {};
+
+    if (message.overrides) {
+      obj.overrides = message.overrides.map(e => e ? QuotaOverride.toSDK(e) : undefined);
+    } else {
+      obj.overrides = [];
+    }
+
+    return obj;
   }
 
 };
@@ -2022,6 +2906,30 @@ export const ImportAdminOverridesRequest = {
     message.force = object.force ?? false;
     message.forceOnly = object.forceOnly?.map(e => e) || [];
     return message;
+  },
+
+  fromSDK(object: ImportAdminOverridesRequestSDKType): ImportAdminOverridesRequest {
+    return {
+      parent: isSet(object.parent) ? object.parent : "",
+      inlineSource: isSet(object.inline_source) ? OverrideInlineSource.fromSDK(object.inline_source) : undefined,
+      force: isSet(object.force) ? object.force : false,
+      forceOnly: Array.isArray(object?.force_only) ? object.force_only.map((e: any) => quotaSafetyCheckFromJSON(e)) : []
+    };
+  },
+
+  toSDK(message: ImportAdminOverridesRequest): ImportAdminOverridesRequestSDKType {
+    const obj: any = {};
+    message.parent !== undefined && (obj.parent = message.parent);
+    message.inlineSource !== undefined && (obj.inline_source = message.inlineSource ? OverrideInlineSource.toSDK(message.inlineSource) : undefined);
+    message.force !== undefined && (obj.force = message.force);
+
+    if (message.forceOnly) {
+      obj.force_only = message.forceOnly.map(e => quotaSafetyCheckToJSON(e));
+    } else {
+      obj.force_only = [];
+    }
+
+    return obj;
   }
 
 };
@@ -2085,6 +2993,24 @@ export const ImportAdminOverridesResponse = {
     const message = createBaseImportAdminOverridesResponse();
     message.overrides = object.overrides?.map(e => QuotaOverride.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: ImportAdminOverridesResponseSDKType): ImportAdminOverridesResponse {
+    return {
+      overrides: Array.isArray(object?.overrides) ? object.overrides.map((e: any) => QuotaOverride.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: ImportAdminOverridesResponse): ImportAdminOverridesResponseSDKType {
+    const obj: any = {};
+
+    if (message.overrides) {
+      obj.overrides = message.overrides.map(e => e ? QuotaOverride.toSDK(e) : undefined);
+    } else {
+      obj.overrides = [];
+    }
+
+    return obj;
   }
 
 };
@@ -2128,6 +3054,15 @@ export const ImportAdminOverridesMetadata = {
   fromPartial(_: DeepPartial<ImportAdminOverridesMetadata>): ImportAdminOverridesMetadata {
     const message = createBaseImportAdminOverridesMetadata();
     return message;
+  },
+
+  fromSDK(_: ImportAdminOverridesMetadataSDKType): ImportAdminOverridesMetadata {
+    return {};
+  },
+
+  toSDK(_: ImportAdminOverridesMetadata): ImportAdminOverridesMetadataSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -2239,6 +3174,30 @@ export const CreateConsumerOverrideRequest = {
     message.force = object.force ?? false;
     message.forceOnly = object.forceOnly?.map(e => e) || [];
     return message;
+  },
+
+  fromSDK(object: CreateConsumerOverrideRequestSDKType): CreateConsumerOverrideRequest {
+    return {
+      parent: isSet(object.parent) ? object.parent : "",
+      override: isSet(object.override) ? QuotaOverride.fromSDK(object.override) : undefined,
+      force: isSet(object.force) ? object.force : false,
+      forceOnly: Array.isArray(object?.force_only) ? object.force_only.map((e: any) => quotaSafetyCheckFromJSON(e)) : []
+    };
+  },
+
+  toSDK(message: CreateConsumerOverrideRequest): CreateConsumerOverrideRequestSDKType {
+    const obj: any = {};
+    message.parent !== undefined && (obj.parent = message.parent);
+    message.override !== undefined && (obj.override = message.override ? QuotaOverride.toSDK(message.override) : undefined);
+    message.force !== undefined && (obj.force = message.force);
+
+    if (message.forceOnly) {
+      obj.force_only = message.forceOnly.map(e => quotaSafetyCheckToJSON(e));
+    } else {
+      obj.force_only = [];
+    }
+
+    return obj;
   }
 
 };
@@ -2362,6 +3321,32 @@ export const UpdateConsumerOverrideRequest = {
     message.updateMask = object.updateMask !== undefined && object.updateMask !== null ? FieldMask.fromPartial(object.updateMask) : undefined;
     message.forceOnly = object.forceOnly?.map(e => e) || [];
     return message;
+  },
+
+  fromSDK(object: UpdateConsumerOverrideRequestSDKType): UpdateConsumerOverrideRequest {
+    return {
+      name: isSet(object.name) ? object.name : "",
+      override: isSet(object.override) ? QuotaOverride.fromSDK(object.override) : undefined,
+      force: isSet(object.force) ? object.force : false,
+      updateMask: isSet(object.update_mask) ? FieldMask.fromSDK(object.update_mask) : undefined,
+      forceOnly: Array.isArray(object?.force_only) ? object.force_only.map((e: any) => quotaSafetyCheckFromJSON(e)) : []
+    };
+  },
+
+  toSDK(message: UpdateConsumerOverrideRequest): UpdateConsumerOverrideRequestSDKType {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    message.override !== undefined && (obj.override = message.override ? QuotaOverride.toSDK(message.override) : undefined);
+    message.force !== undefined && (obj.force = message.force);
+    message.updateMask !== undefined && (obj.update_mask = message.updateMask ? FieldMask.toSDK(message.updateMask) : undefined);
+
+    if (message.forceOnly) {
+      obj.force_only = message.forceOnly.map(e => quotaSafetyCheckToJSON(e));
+    } else {
+      obj.force_only = [];
+    }
+
+    return obj;
   }
 
 };
@@ -2461,6 +3446,28 @@ export const DeleteConsumerOverrideRequest = {
     message.force = object.force ?? false;
     message.forceOnly = object.forceOnly?.map(e => e) || [];
     return message;
+  },
+
+  fromSDK(object: DeleteConsumerOverrideRequestSDKType): DeleteConsumerOverrideRequest {
+    return {
+      name: isSet(object.name) ? object.name : "",
+      force: isSet(object.force) ? object.force : false,
+      forceOnly: Array.isArray(object?.force_only) ? object.force_only.map((e: any) => quotaSafetyCheckFromJSON(e)) : []
+    };
+  },
+
+  toSDK(message: DeleteConsumerOverrideRequest): DeleteConsumerOverrideRequestSDKType {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    message.force !== undefined && (obj.force = message.force);
+
+    if (message.forceOnly) {
+      obj.force_only = message.forceOnly.map(e => quotaSafetyCheckToJSON(e));
+    } else {
+      obj.force_only = [];
+    }
+
+    return obj;
   }
 
 };
@@ -2542,6 +3549,22 @@ export const ListConsumerOverridesRequest = {
     message.pageSize = object.pageSize ?? 0;
     message.pageToken = object.pageToken ?? "";
     return message;
+  },
+
+  fromSDK(object: ListConsumerOverridesRequestSDKType): ListConsumerOverridesRequest {
+    return {
+      parent: isSet(object.parent) ? object.parent : "",
+      pageSize: isSet(object.page_size) ? object.page_size : 0,
+      pageToken: isSet(object.page_token) ? object.page_token : ""
+    };
+  },
+
+  toSDK(message: ListConsumerOverridesRequest): ListConsumerOverridesRequestSDKType {
+    const obj: any = {};
+    message.parent !== undefined && (obj.parent = message.parent);
+    message.pageSize !== undefined && (obj.page_size = message.pageSize);
+    message.pageToken !== undefined && (obj.page_token = message.pageToken);
+    return obj;
   }
 
 };
@@ -2617,6 +3640,26 @@ export const ListConsumerOverridesResponse = {
     message.overrides = object.overrides?.map(e => QuotaOverride.fromPartial(e)) || [];
     message.nextPageToken = object.nextPageToken ?? "";
     return message;
+  },
+
+  fromSDK(object: ListConsumerOverridesResponseSDKType): ListConsumerOverridesResponse {
+    return {
+      overrides: Array.isArray(object?.overrides) ? object.overrides.map((e: any) => QuotaOverride.fromSDK(e)) : [],
+      nextPageToken: isSet(object.next_page_token) ? object.next_page_token : ""
+    };
+  },
+
+  toSDK(message: ListConsumerOverridesResponse): ListConsumerOverridesResponseSDKType {
+    const obj: any = {};
+
+    if (message.overrides) {
+      obj.overrides = message.overrides.map(e => e ? QuotaOverride.toSDK(e) : undefined);
+    } else {
+      obj.overrides = [];
+    }
+
+    message.nextPageToken !== undefined && (obj.next_page_token = message.nextPageToken);
+    return obj;
   }
 
 };
@@ -2680,6 +3723,24 @@ export const BatchCreateConsumerOverridesResponse = {
     const message = createBaseBatchCreateConsumerOverridesResponse();
     message.overrides = object.overrides?.map(e => QuotaOverride.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: BatchCreateConsumerOverridesResponseSDKType): BatchCreateConsumerOverridesResponse {
+    return {
+      overrides: Array.isArray(object?.overrides) ? object.overrides.map((e: any) => QuotaOverride.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: BatchCreateConsumerOverridesResponse): BatchCreateConsumerOverridesResponseSDKType {
+    const obj: any = {};
+
+    if (message.overrides) {
+      obj.overrides = message.overrides.map(e => e ? QuotaOverride.toSDK(e) : undefined);
+    } else {
+      obj.overrides = [];
+    }
+
+    return obj;
   }
 
 };
@@ -2791,6 +3852,30 @@ export const ImportConsumerOverridesRequest = {
     message.force = object.force ?? false;
     message.forceOnly = object.forceOnly?.map(e => e) || [];
     return message;
+  },
+
+  fromSDK(object: ImportConsumerOverridesRequestSDKType): ImportConsumerOverridesRequest {
+    return {
+      parent: isSet(object.parent) ? object.parent : "",
+      inlineSource: isSet(object.inline_source) ? OverrideInlineSource.fromSDK(object.inline_source) : undefined,
+      force: isSet(object.force) ? object.force : false,
+      forceOnly: Array.isArray(object?.force_only) ? object.force_only.map((e: any) => quotaSafetyCheckFromJSON(e)) : []
+    };
+  },
+
+  toSDK(message: ImportConsumerOverridesRequest): ImportConsumerOverridesRequestSDKType {
+    const obj: any = {};
+    message.parent !== undefined && (obj.parent = message.parent);
+    message.inlineSource !== undefined && (obj.inline_source = message.inlineSource ? OverrideInlineSource.toSDK(message.inlineSource) : undefined);
+    message.force !== undefined && (obj.force = message.force);
+
+    if (message.forceOnly) {
+      obj.force_only = message.forceOnly.map(e => quotaSafetyCheckToJSON(e));
+    } else {
+      obj.force_only = [];
+    }
+
+    return obj;
   }
 
 };
@@ -2854,6 +3939,24 @@ export const ImportConsumerOverridesResponse = {
     const message = createBaseImportConsumerOverridesResponse();
     message.overrides = object.overrides?.map(e => QuotaOverride.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: ImportConsumerOverridesResponseSDKType): ImportConsumerOverridesResponse {
+    return {
+      overrides: Array.isArray(object?.overrides) ? object.overrides.map((e: any) => QuotaOverride.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: ImportConsumerOverridesResponse): ImportConsumerOverridesResponseSDKType {
+    const obj: any = {};
+
+    if (message.overrides) {
+      obj.overrides = message.overrides.map(e => e ? QuotaOverride.toSDK(e) : undefined);
+    } else {
+      obj.overrides = [];
+    }
+
+    return obj;
   }
 
 };
@@ -2897,6 +4000,15 @@ export const ImportConsumerOverridesMetadata = {
   fromPartial(_: DeepPartial<ImportConsumerOverridesMetadata>): ImportConsumerOverridesMetadata {
     const message = createBaseImportConsumerOverridesMetadata();
     return message;
+  },
+
+  fromSDK(_: ImportConsumerOverridesMetadataSDKType): ImportConsumerOverridesMetadata {
+    return {};
+  },
+
+  toSDK(_: ImportConsumerOverridesMetadata): ImportConsumerOverridesMetadataSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -2960,6 +4072,24 @@ export const ImportAdminQuotaPoliciesResponse = {
     const message = createBaseImportAdminQuotaPoliciesResponse();
     message.policies = object.policies?.map(e => AdminQuotaPolicy.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: ImportAdminQuotaPoliciesResponseSDKType): ImportAdminQuotaPoliciesResponse {
+    return {
+      policies: Array.isArray(object?.policies) ? object.policies.map((e: any) => AdminQuotaPolicy.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: ImportAdminQuotaPoliciesResponse): ImportAdminQuotaPoliciesResponseSDKType {
+    const obj: any = {};
+
+    if (message.policies) {
+      obj.policies = message.policies.map(e => e ? AdminQuotaPolicy.toSDK(e) : undefined);
+    } else {
+      obj.policies = [];
+    }
+
+    return obj;
   }
 
 };
@@ -3003,6 +4133,15 @@ export const ImportAdminQuotaPoliciesMetadata = {
   fromPartial(_: DeepPartial<ImportAdminQuotaPoliciesMetadata>): ImportAdminQuotaPoliciesMetadata {
     const message = createBaseImportAdminQuotaPoliciesMetadata();
     return message;
+  },
+
+  fromSDK(_: ImportAdminQuotaPoliciesMetadataSDKType): ImportAdminQuotaPoliciesMetadata {
+    return {};
+  },
+
+  toSDK(_: ImportAdminQuotaPoliciesMetadata): ImportAdminQuotaPoliciesMetadataSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -3046,6 +4185,15 @@ export const CreateAdminQuotaPolicyMetadata = {
   fromPartial(_: DeepPartial<CreateAdminQuotaPolicyMetadata>): CreateAdminQuotaPolicyMetadata {
     const message = createBaseCreateAdminQuotaPolicyMetadata();
     return message;
+  },
+
+  fromSDK(_: CreateAdminQuotaPolicyMetadataSDKType): CreateAdminQuotaPolicyMetadata {
+    return {};
+  },
+
+  toSDK(_: CreateAdminQuotaPolicyMetadata): CreateAdminQuotaPolicyMetadataSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -3089,6 +4237,15 @@ export const UpdateAdminQuotaPolicyMetadata = {
   fromPartial(_: DeepPartial<UpdateAdminQuotaPolicyMetadata>): UpdateAdminQuotaPolicyMetadata {
     const message = createBaseUpdateAdminQuotaPolicyMetadata();
     return message;
+  },
+
+  fromSDK(_: UpdateAdminQuotaPolicyMetadataSDKType): UpdateAdminQuotaPolicyMetadata {
+    return {};
+  },
+
+  toSDK(_: UpdateAdminQuotaPolicyMetadata): UpdateAdminQuotaPolicyMetadataSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -3132,6 +4289,15 @@ export const DeleteAdminQuotaPolicyMetadata = {
   fromPartial(_: DeepPartial<DeleteAdminQuotaPolicyMetadata>): DeleteAdminQuotaPolicyMetadata {
     const message = createBaseDeleteAdminQuotaPolicyMetadata();
     return message;
+  },
+
+  fromSDK(_: DeleteAdminQuotaPolicyMetadataSDKType): DeleteAdminQuotaPolicyMetadata {
+    return {};
+  },
+
+  toSDK(_: DeleteAdminQuotaPolicyMetadata): DeleteAdminQuotaPolicyMetadataSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -3189,6 +4355,18 @@ export const GenerateServiceIdentityRequest = {
     const message = createBaseGenerateServiceIdentityRequest();
     message.parent = object.parent ?? "";
     return message;
+  },
+
+  fromSDK(object: GenerateServiceIdentityRequestSDKType): GenerateServiceIdentityRequest {
+    return {
+      parent: isSet(object.parent) ? object.parent : ""
+    };
+  },
+
+  toSDK(message: GenerateServiceIdentityRequest): GenerateServiceIdentityRequestSDKType {
+    const obj: any = {};
+    message.parent !== undefined && (obj.parent = message.parent);
+    return obj;
   }
 
 };
@@ -3258,6 +4436,20 @@ export const GetServiceIdentityResponse = {
     message.identity = object.identity !== undefined && object.identity !== null ? ServiceIdentity.fromPartial(object.identity) : undefined;
     message.state = object.state ?? 0;
     return message;
+  },
+
+  fromSDK(object: GetServiceIdentityResponseSDKType): GetServiceIdentityResponse {
+    return {
+      identity: isSet(object.identity) ? ServiceIdentity.fromSDK(object.identity) : undefined,
+      state: isSet(object.state) ? getServiceIdentityResponse_IdentityStateFromJSON(object.state) : 0
+    };
+  },
+
+  toSDK(message: GetServiceIdentityResponse): GetServiceIdentityResponseSDKType {
+    const obj: any = {};
+    message.identity !== undefined && (obj.identity = message.identity ? ServiceIdentity.toSDK(message.identity) : undefined);
+    message.state !== undefined && (obj.state = getServiceIdentityResponse_IdentityStateToJSON(message.state));
+    return obj;
   }
 
 };
@@ -3301,6 +4493,15 @@ export const GetServiceIdentityMetadata = {
   fromPartial(_: DeepPartial<GetServiceIdentityMetadata>): GetServiceIdentityMetadata {
     const message = createBaseGetServiceIdentityMetadata();
     return message;
+  },
+
+  fromSDK(_: GetServiceIdentityMetadataSDKType): GetServiceIdentityMetadata {
+    return {};
+  },
+
+  toSDK(_: GetServiceIdentityMetadata): GetServiceIdentityMetadataSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };

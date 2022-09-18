@@ -1,4 +1,4 @@
-import { LabelDescriptor } from "./label";
+import { LabelDescriptor, LabelDescriptorSDKType } from "./label";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "@osmonauts/helpers";
 export const protobufPackage = "google.api";
@@ -40,6 +40,45 @@ export interface LogDescriptor {
    * the user interface and should be concise.
    */
   displayName: string;
+}
+
+/**
+ * A description of a log type. Example in YAML format:
+ * 
+ * - name: library.googleapis.com/activity_history
+ * description: The history of borrowing and returning library items.
+ * display_name: Activity
+ * labels:
+ * - key: /customer_id
+ * description: Identifier of a library customer
+ */
+export interface LogDescriptorSDKType {
+  /**
+   * The name of the log. It must be less than 512 characters long and can
+   * include the following characters: upper- and lower-case alphanumeric
+   * characters [A-Za-z0-9], and punctuation characters including
+   * slash, underscore, hyphen, period [/_-.].
+   */
+  name: string;
+
+  /**
+   * The set of labels that are available to describe a specific log entry.
+   * Runtime requests that contain labels not specified here are
+   * considered invalid.
+   */
+  labels: LabelDescriptorSDKType[];
+
+  /**
+   * A human-readable description of this log. This information appears in
+   * the documentation and can contain details.
+   */
+  description: string;
+
+  /**
+   * The human-readable name for this log. This information appears on
+   * the user interface and should be concise.
+   */
+  display_name: string;
 }
 
 function createBaseLogDescriptor(): LogDescriptor {
@@ -137,6 +176,30 @@ export const LogDescriptor = {
     message.description = object.description ?? "";
     message.displayName = object.displayName ?? "";
     return message;
+  },
+
+  fromSDK(object: LogDescriptorSDKType): LogDescriptor {
+    return {
+      name: isSet(object.name) ? object.name : "",
+      labels: Array.isArray(object?.labels) ? object.labels.map((e: any) => LabelDescriptor.fromSDK(e)) : [],
+      description: isSet(object.description) ? object.description : "",
+      displayName: isSet(object.display_name) ? object.display_name : ""
+    };
+  },
+
+  toSDK(message: LogDescriptor): LogDescriptorSDKType {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+
+    if (message.labels) {
+      obj.labels = message.labels.map(e => e ? LabelDescriptor.toSDK(e) : undefined);
+    } else {
+      obj.labels = [];
+    }
+
+    message.description !== undefined && (obj.description = message.description);
+    message.displayName !== undefined && (obj.display_name = message.displayName);
+    return obj;
   }
 
 };

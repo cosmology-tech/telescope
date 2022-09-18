@@ -8,6 +8,12 @@ export interface Attribute {
   value: string;
 }
 
+/** Attribute represents key value pair */
+export interface AttributeSDKType {
+  key: string;
+  value: string;
+}
+
 /**
  * SignedBy represents validation accounts that tenant expects signatures for provider attributes
  * AllOf has precedence i.e. if there is at least one entry AnyOf is ignored regardless to how many
@@ -22,6 +28,20 @@ export interface SignedBy {
   anyOf: string[];
 }
 
+/**
+ * SignedBy represents validation accounts that tenant expects signatures for provider attributes
+ * AllOf has precedence i.e. if there is at least one entry AnyOf is ignored regardless to how many
+ * entries there
+ * this behaviour to be discussed
+ */
+export interface SignedBySDKType {
+  /** all_of all keys in this list must have signed attributes */
+  all_of: string[];
+
+  /** any_of at least of of the keys from the list must have signed attributes */
+  any_of: string[];
+}
+
 /** PlacementRequirements */
 export interface PlacementRequirements {
   /** SignedBy list of keys that tenants expect to have signatures from */
@@ -29,6 +49,15 @@ export interface PlacementRequirements {
 
   /** Attribute list of attributes tenant expects from the provider */
   attributes: Attribute[];
+}
+
+/** PlacementRequirements */
+export interface PlacementRequirementsSDKType {
+  /** SignedBy list of keys that tenants expect to have signatures from */
+  signed_by: SignedBySDKType;
+
+  /** Attribute list of attributes tenant expects from the provider */
+  attributes: AttributeSDKType[];
 }
 
 function createBaseAttribute(): Attribute {
@@ -96,6 +125,20 @@ export const Attribute = {
     message.key = object.key ?? "";
     message.value = object.value ?? "";
     return message;
+  },
+
+  fromSDK(object: AttributeSDKType): Attribute {
+    return {
+      key: isSet(object.key) ? object.key : "",
+      value: isSet(object.value) ? object.value : ""
+    };
+  },
+
+  toSDK(message: Attribute): AttributeSDKType {
+    const obj: any = {};
+    message.key !== undefined && (obj.key = message.key);
+    message.value !== undefined && (obj.value = message.value);
+    return obj;
   }
 
 };
@@ -176,6 +219,31 @@ export const SignedBy = {
     message.allOf = object.allOf?.map(e => e) || [];
     message.anyOf = object.anyOf?.map(e => e) || [];
     return message;
+  },
+
+  fromSDK(object: SignedBySDKType): SignedBy {
+    return {
+      allOf: Array.isArray(object?.all_of) ? object.all_of.map((e: any) => e) : [],
+      anyOf: Array.isArray(object?.any_of) ? object.any_of.map((e: any) => e) : []
+    };
+  },
+
+  toSDK(message: SignedBy): SignedBySDKType {
+    const obj: any = {};
+
+    if (message.allOf) {
+      obj.all_of = message.allOf.map(e => e);
+    } else {
+      obj.all_of = [];
+    }
+
+    if (message.anyOf) {
+      obj.any_of = message.anyOf.map(e => e);
+    } else {
+      obj.any_of = [];
+    }
+
+    return obj;
   }
 
 };
@@ -251,6 +319,26 @@ export const PlacementRequirements = {
     message.signedBy = object.signedBy !== undefined && object.signedBy !== null ? SignedBy.fromPartial(object.signedBy) : undefined;
     message.attributes = object.attributes?.map(e => Attribute.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: PlacementRequirementsSDKType): PlacementRequirements {
+    return {
+      signedBy: isSet(object.signed_by) ? SignedBy.fromSDK(object.signed_by) : undefined,
+      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: PlacementRequirements): PlacementRequirementsSDKType {
+    const obj: any = {};
+    message.signedBy !== undefined && (obj.signed_by = message.signedBy ? SignedBy.toSDK(message.signedBy) : undefined);
+
+    if (message.attributes) {
+      obj.attributes = message.attributes.map(e => e ? Attribute.toSDK(e) : undefined);
+    } else {
+      obj.attributes = [];
+    }
+
+    return obj;
   }
 
 };

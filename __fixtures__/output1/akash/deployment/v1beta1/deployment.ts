@@ -1,6 +1,6 @@
 //@ts-nocheck
-import { GroupSpec, GroupID } from "./group";
-import { Coin } from "../../../cosmos/base/v1beta1/coin";
+import { GroupSpec, GroupSpecSDKType, GroupID, GroupIDSDKType } from "./group";
+import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, bytesFromBase64, base64FromBytes, Exact, Long } from "@osmonauts/helpers";
 export const protobufPackage = "akash.deployment.v1beta1";
@@ -61,8 +61,19 @@ export interface MsgCreateDeployment {
   deposit: Coin | undefined;
 }
 
+/** MsgCreateDeployment defines an SDK message for creating deployment */
+export interface MsgCreateDeploymentSDKType {
+  id: DeploymentIDSDKType | undefined;
+  groups: GroupSpecSDKType[];
+  version: Uint8Array;
+  deposit: CoinSDKType | undefined;
+}
+
 /** MsgCreateDeploymentResponse defines the Msg/CreateDeployment response type. */
 export interface MsgCreateDeploymentResponse {}
+
+/** MsgCreateDeploymentResponse defines the Msg/CreateDeployment response type. */
+export interface MsgCreateDeploymentResponseSDKType {}
 
 /** MsgDepositDeployment deposits more funds into the deposit account */
 export interface MsgDepositDeployment {
@@ -70,8 +81,17 @@ export interface MsgDepositDeployment {
   amount: Coin | undefined;
 }
 
+/** MsgDepositDeployment deposits more funds into the deposit account */
+export interface MsgDepositDeploymentSDKType {
+  id: DeploymentIDSDKType | undefined;
+  amount: CoinSDKType | undefined;
+}
+
 /** MsgCreateDeploymentResponse defines the Msg/CreateDeployment response type. */
 export interface MsgDepositDeploymentResponse {}
+
+/** MsgCreateDeploymentResponse defines the Msg/CreateDeployment response type. */
+export interface MsgDepositDeploymentResponseSDKType {}
 
 /** MsgUpdateDeployment defines an SDK message for updating deployment */
 export interface MsgUpdateDeployment {
@@ -80,19 +100,43 @@ export interface MsgUpdateDeployment {
   version: Uint8Array;
 }
 
+/** MsgUpdateDeployment defines an SDK message for updating deployment */
+export interface MsgUpdateDeploymentSDKType {
+  id: DeploymentIDSDKType | undefined;
+  groups: GroupSpecSDKType[];
+  version: Uint8Array;
+}
+
 /** MsgUpdateDeploymentResponse defines the Msg/UpdateDeployment response type. */
 export interface MsgUpdateDeploymentResponse {}
+
+/** MsgUpdateDeploymentResponse defines the Msg/UpdateDeployment response type. */
+export interface MsgUpdateDeploymentResponseSDKType {}
 
 /** MsgCloseDeployment defines an SDK message for closing deployment */
 export interface MsgCloseDeployment {
   id: DeploymentID | undefined;
 }
 
+/** MsgCloseDeployment defines an SDK message for closing deployment */
+export interface MsgCloseDeploymentSDKType {
+  id: DeploymentIDSDKType | undefined;
+}
+
 /** MsgCloseDeploymentResponse defines the Msg/CloseDeployment response type. */
 export interface MsgCloseDeploymentResponse {}
 
+/** MsgCloseDeploymentResponse defines the Msg/CloseDeployment response type. */
+export interface MsgCloseDeploymentResponseSDKType {}
+
 /** DeploymentID stores owner and sequence number */
 export interface DeploymentID {
+  owner: string;
+  dseq: Long;
+}
+
+/** DeploymentID stores owner and sequence number */
+export interface DeploymentIDSDKType {
   owner: string;
   dseq: Long;
 }
@@ -105,8 +149,23 @@ export interface Deployment {
   createdAt: Long;
 }
 
+/** Deployment stores deploymentID, state and version details */
+export interface DeploymentSDKType {
+  deployment_id: DeploymentIDSDKType | undefined;
+  state: Deployment_StateSDKType;
+  version: Uint8Array;
+  created_at: Long;
+}
+
 /** DeploymentFilters defines filters used to filter deployments */
 export interface DeploymentFilters {
+  owner: string;
+  dseq: Long;
+  state: string;
+}
+
+/** DeploymentFilters defines filters used to filter deployments */
+export interface DeploymentFiltersSDKType {
   owner: string;
   dseq: Long;
   state: string;
@@ -207,6 +266,30 @@ export const MsgCreateDeployment = {
     message.version = object.version ?? new Uint8Array();
     message.deposit = object.deposit !== undefined && object.deposit !== null ? Coin.fromPartial(object.deposit) : undefined;
     return message;
+  },
+
+  fromSDK(object: MsgCreateDeploymentSDKType): MsgCreateDeployment {
+    return {
+      id: isSet(object.id) ? DeploymentID.fromSDK(object.id) : undefined,
+      groups: Array.isArray(object?.groups) ? object.groups.map((e: any) => GroupSpec.fromSDK(e)) : [],
+      version: isSet(object.version) ? object.version : new Uint8Array(),
+      deposit: isSet(object.deposit) ? Coin.fromSDK(object.deposit) : undefined
+    };
+  },
+
+  toSDK(message: MsgCreateDeployment): MsgCreateDeploymentSDKType {
+    const obj: any = {};
+    message.id !== undefined && (obj.id = message.id ? DeploymentID.toSDK(message.id) : undefined);
+
+    if (message.groups) {
+      obj.groups = message.groups.map(e => e ? GroupSpec.toSDK(e) : undefined);
+    } else {
+      obj.groups = [];
+    }
+
+    message.version !== undefined && (obj.version = message.version);
+    message.deposit !== undefined && (obj.deposit = message.deposit ? Coin.toSDK(message.deposit) : undefined);
+    return obj;
   }
 
 };
@@ -250,6 +333,15 @@ export const MsgCreateDeploymentResponse = {
   fromPartial<I extends Exact<Partial<MsgCreateDeploymentResponse>, I>>(_: I): MsgCreateDeploymentResponse {
     const message = createBaseMsgCreateDeploymentResponse();
     return message;
+  },
+
+  fromSDK(_: MsgCreateDeploymentResponseSDKType): MsgCreateDeploymentResponse {
+    return {};
+  },
+
+  toSDK(_: MsgCreateDeploymentResponse): MsgCreateDeploymentResponseSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -319,6 +411,20 @@ export const MsgDepositDeployment = {
     message.id = object.id !== undefined && object.id !== null ? DeploymentID.fromPartial(object.id) : undefined;
     message.amount = object.amount !== undefined && object.amount !== null ? Coin.fromPartial(object.amount) : undefined;
     return message;
+  },
+
+  fromSDK(object: MsgDepositDeploymentSDKType): MsgDepositDeployment {
+    return {
+      id: isSet(object.id) ? DeploymentID.fromSDK(object.id) : undefined,
+      amount: isSet(object.amount) ? Coin.fromSDK(object.amount) : undefined
+    };
+  },
+
+  toSDK(message: MsgDepositDeployment): MsgDepositDeploymentSDKType {
+    const obj: any = {};
+    message.id !== undefined && (obj.id = message.id ? DeploymentID.toSDK(message.id) : undefined);
+    message.amount !== undefined && (obj.amount = message.amount ? Coin.toSDK(message.amount) : undefined);
+    return obj;
   }
 
 };
@@ -362,6 +468,15 @@ export const MsgDepositDeploymentResponse = {
   fromPartial<I extends Exact<Partial<MsgDepositDeploymentResponse>, I>>(_: I): MsgDepositDeploymentResponse {
     const message = createBaseMsgDepositDeploymentResponse();
     return message;
+  },
+
+  fromSDK(_: MsgDepositDeploymentResponseSDKType): MsgDepositDeploymentResponse {
+    return {};
+  },
+
+  toSDK(_: MsgDepositDeploymentResponse): MsgDepositDeploymentResponseSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -449,6 +564,28 @@ export const MsgUpdateDeployment = {
     message.groups = object.groups?.map(e => GroupSpec.fromPartial(e)) || [];
     message.version = object.version ?? new Uint8Array();
     return message;
+  },
+
+  fromSDK(object: MsgUpdateDeploymentSDKType): MsgUpdateDeployment {
+    return {
+      id: isSet(object.id) ? DeploymentID.fromSDK(object.id) : undefined,
+      groups: Array.isArray(object?.groups) ? object.groups.map((e: any) => GroupSpec.fromSDK(e)) : [],
+      version: isSet(object.version) ? object.version : new Uint8Array()
+    };
+  },
+
+  toSDK(message: MsgUpdateDeployment): MsgUpdateDeploymentSDKType {
+    const obj: any = {};
+    message.id !== undefined && (obj.id = message.id ? DeploymentID.toSDK(message.id) : undefined);
+
+    if (message.groups) {
+      obj.groups = message.groups.map(e => e ? GroupSpec.toSDK(e) : undefined);
+    } else {
+      obj.groups = [];
+    }
+
+    message.version !== undefined && (obj.version = message.version);
+    return obj;
   }
 
 };
@@ -492,6 +629,15 @@ export const MsgUpdateDeploymentResponse = {
   fromPartial<I extends Exact<Partial<MsgUpdateDeploymentResponse>, I>>(_: I): MsgUpdateDeploymentResponse {
     const message = createBaseMsgUpdateDeploymentResponse();
     return message;
+  },
+
+  fromSDK(_: MsgUpdateDeploymentResponseSDKType): MsgUpdateDeploymentResponse {
+    return {};
+  },
+
+  toSDK(_: MsgUpdateDeploymentResponse): MsgUpdateDeploymentResponseSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -549,6 +695,18 @@ export const MsgCloseDeployment = {
     const message = createBaseMsgCloseDeployment();
     message.id = object.id !== undefined && object.id !== null ? DeploymentID.fromPartial(object.id) : undefined;
     return message;
+  },
+
+  fromSDK(object: MsgCloseDeploymentSDKType): MsgCloseDeployment {
+    return {
+      id: isSet(object.id) ? DeploymentID.fromSDK(object.id) : undefined
+    };
+  },
+
+  toSDK(message: MsgCloseDeployment): MsgCloseDeploymentSDKType {
+    const obj: any = {};
+    message.id !== undefined && (obj.id = message.id ? DeploymentID.toSDK(message.id) : undefined);
+    return obj;
   }
 
 };
@@ -592,6 +750,15 @@ export const MsgCloseDeploymentResponse = {
   fromPartial<I extends Exact<Partial<MsgCloseDeploymentResponse>, I>>(_: I): MsgCloseDeploymentResponse {
     const message = createBaseMsgCloseDeploymentResponse();
     return message;
+  },
+
+  fromSDK(_: MsgCloseDeploymentResponseSDKType): MsgCloseDeploymentResponse {
+    return {};
+  },
+
+  toSDK(_: MsgCloseDeploymentResponse): MsgCloseDeploymentResponseSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -661,6 +828,20 @@ export const DeploymentID = {
     message.owner = object.owner ?? "";
     message.dseq = object.dseq !== undefined && object.dseq !== null ? Long.fromValue(object.dseq) : Long.UZERO;
     return message;
+  },
+
+  fromSDK(object: DeploymentIDSDKType): DeploymentID {
+    return {
+      owner: isSet(object.owner) ? object.owner : "",
+      dseq: isSet(object.dseq) ? object.dseq : Long.UZERO
+    };
+  },
+
+  toSDK(message: DeploymentID): DeploymentIDSDKType {
+    const obj: any = {};
+    message.owner !== undefined && (obj.owner = message.owner);
+    message.dseq !== undefined && (obj.dseq = message.dseq);
+    return obj;
   }
 
 };
@@ -754,6 +935,24 @@ export const Deployment = {
     message.version = object.version ?? new Uint8Array();
     message.createdAt = object.createdAt !== undefined && object.createdAt !== null ? Long.fromValue(object.createdAt) : Long.ZERO;
     return message;
+  },
+
+  fromSDK(object: DeploymentSDKType): Deployment {
+    return {
+      deploymentId: isSet(object.deployment_id) ? DeploymentID.fromSDK(object.deployment_id) : undefined,
+      state: isSet(object.state) ? deployment_StateFromJSON(object.state) : 0,
+      version: isSet(object.version) ? object.version : new Uint8Array(),
+      createdAt: isSet(object.created_at) ? object.created_at : Long.ZERO
+    };
+  },
+
+  toSDK(message: Deployment): DeploymentSDKType {
+    const obj: any = {};
+    message.deploymentId !== undefined && (obj.deployment_id = message.deploymentId ? DeploymentID.toSDK(message.deploymentId) : undefined);
+    message.state !== undefined && (obj.state = deployment_StateToJSON(message.state));
+    message.version !== undefined && (obj.version = message.version);
+    message.createdAt !== undefined && (obj.created_at = message.createdAt);
+    return obj;
   }
 
 };
@@ -835,6 +1034,22 @@ export const DeploymentFilters = {
     message.dseq = object.dseq !== undefined && object.dseq !== null ? Long.fromValue(object.dseq) : Long.UZERO;
     message.state = object.state ?? "";
     return message;
+  },
+
+  fromSDK(object: DeploymentFiltersSDKType): DeploymentFilters {
+    return {
+      owner: isSet(object.owner) ? object.owner : "",
+      dseq: isSet(object.dseq) ? object.dseq : Long.UZERO,
+      state: isSet(object.state) ? object.state : ""
+    };
+  },
+
+  toSDK(message: DeploymentFilters): DeploymentFiltersSDKType {
+    const obj: any = {};
+    message.owner !== undefined && (obj.owner = message.owner);
+    message.dseq !== undefined && (obj.dseq = message.dseq);
+    message.state !== undefined && (obj.state = message.state);
+    return obj;
   }
 
 };

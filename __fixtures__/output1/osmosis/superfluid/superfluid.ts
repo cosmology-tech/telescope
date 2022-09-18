@@ -1,4 +1,4 @@
-import { Coin } from "../../cosmos/base/v1beta1/coin";
+import { Coin, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, Long } from "@osmonauts/helpers";
 export const protobufPackage = "osmosis.superfluid";
@@ -42,6 +42,12 @@ export interface SuperfluidAsset {
   assetType: SuperfluidAssetType;
 }
 
+/** SuperfluidAsset stores the pair of superfluid asset type and denom pair */
+export interface SuperfluidAssetSDKType {
+  denom: string;
+  asset_type: SuperfluidAssetTypeSDKType;
+}
+
 /**
  * SuperfluidIntermediaryAccount takes the role of intermediary between LP token
  * and OSMO tokens for superfluid staking
@@ -52,6 +58,18 @@ export interface SuperfluidIntermediaryAccount {
 
   /** perpetual gauge for rewards distribution */
   gaugeId: Long;
+}
+
+/**
+ * SuperfluidIntermediaryAccount takes the role of intermediary between LP token
+ * and OSMO tokens for superfluid staking
+ */
+export interface SuperfluidIntermediaryAccountSDKType {
+  denom: string;
+  val_addr: string;
+
+  /** perpetual gauge for rewards distribution */
+  gauge_id: Long;
 }
 
 /**
@@ -72,6 +90,23 @@ export interface OsmoEquivalentMultiplierRecord {
 }
 
 /**
+ * The Osmo-Equivalent-Multiplier Record for epoch N refers to the osmo worth we
+ * treat an LP share as having, for all of epoch N. Eventually this is intended
+ * to be set as the Time-weighted-average-osmo-backing for the entire duration
+ * of epoch N-1. (Thereby locking whats in use for epoch N as based on the prior
+ * epochs rewards) However for now, this is not the TWAP but instead the spot
+ * price at the boundary.  For different types of assets in the future, it could
+ * change.
+ */
+export interface OsmoEquivalentMultiplierRecordSDKType {
+  epoch_number: Long;
+
+  /** superfluid asset denom, can be LP token or native token */
+  denom: string;
+  multiplier: string;
+}
+
+/**
  * SuperfluidDelegationRecord takes the role of intermediary between LP token
  * and OSMO tokens for superfluid staking
  */
@@ -81,11 +116,29 @@ export interface SuperfluidDelegationRecord {
   delegationAmount: Coin;
   equivalentStakedAmount: Coin;
 }
+
+/**
+ * SuperfluidDelegationRecord takes the role of intermediary between LP token
+ * and OSMO tokens for superfluid staking
+ */
+export interface SuperfluidDelegationRecordSDKType {
+  delegator_address: string;
+  validator_address: string;
+  delegation_amount: CoinSDKType;
+  equivalent_staked_amount: CoinSDKType;
+}
 export interface LockIdIntermediaryAccountConnection {
   lockId: Long;
   intermediaryAccount: string;
 }
+export interface LockIdIntermediaryAccountConnectionSDKType {
+  lock_id: Long;
+  intermediary_account: string;
+}
 export interface UnpoolWhitelistedPools {
+  ids: Long[];
+}
+export interface UnpoolWhitelistedPoolsSDKType {
   ids: Long[];
 }
 
@@ -154,6 +207,20 @@ export const SuperfluidAsset = {
     message.denom = object.denom ?? "";
     message.assetType = object.assetType ?? 0;
     return message;
+  },
+
+  fromSDK(object: SuperfluidAssetSDKType): SuperfluidAsset {
+    return {
+      denom: isSet(object.denom) ? object.denom : "",
+      assetType: isSet(object.asset_type) ? superfluidAssetTypeFromJSON(object.asset_type) : 0
+    };
+  },
+
+  toSDK(message: SuperfluidAsset): SuperfluidAssetSDKType {
+    const obj: any = {};
+    message.denom !== undefined && (obj.denom = message.denom);
+    message.assetType !== undefined && (obj.asset_type = superfluidAssetTypeToJSON(message.assetType));
+    return obj;
   }
 
 };
@@ -235,6 +302,22 @@ export const SuperfluidIntermediaryAccount = {
     message.valAddr = object.valAddr ?? "";
     message.gaugeId = object.gaugeId !== undefined && object.gaugeId !== null ? Long.fromValue(object.gaugeId) : Long.UZERO;
     return message;
+  },
+
+  fromSDK(object: SuperfluidIntermediaryAccountSDKType): SuperfluidIntermediaryAccount {
+    return {
+      denom: isSet(object.denom) ? object.denom : "",
+      valAddr: isSet(object.val_addr) ? object.val_addr : "",
+      gaugeId: isSet(object.gauge_id) ? object.gauge_id : Long.UZERO
+    };
+  },
+
+  toSDK(message: SuperfluidIntermediaryAccount): SuperfluidIntermediaryAccountSDKType {
+    const obj: any = {};
+    message.denom !== undefined && (obj.denom = message.denom);
+    message.valAddr !== undefined && (obj.val_addr = message.valAddr);
+    message.gaugeId !== undefined && (obj.gauge_id = message.gaugeId);
+    return obj;
   }
 
 };
@@ -316,6 +399,22 @@ export const OsmoEquivalentMultiplierRecord = {
     message.denom = object.denom ?? "";
     message.multiplier = object.multiplier ?? "";
     return message;
+  },
+
+  fromSDK(object: OsmoEquivalentMultiplierRecordSDKType): OsmoEquivalentMultiplierRecord {
+    return {
+      epochNumber: isSet(object.epoch_number) ? object.epoch_number : Long.ZERO,
+      denom: isSet(object.denom) ? object.denom : "",
+      multiplier: isSet(object.multiplier) ? object.multiplier : ""
+    };
+  },
+
+  toSDK(message: OsmoEquivalentMultiplierRecord): OsmoEquivalentMultiplierRecordSDKType {
+    const obj: any = {};
+    message.epochNumber !== undefined && (obj.epoch_number = message.epochNumber);
+    message.denom !== undefined && (obj.denom = message.denom);
+    message.multiplier !== undefined && (obj.multiplier = message.multiplier);
+    return obj;
   }
 
 };
@@ -409,6 +508,24 @@ export const SuperfluidDelegationRecord = {
     message.delegationAmount = object.delegationAmount !== undefined && object.delegationAmount !== null ? Coin.fromPartial(object.delegationAmount) : undefined;
     message.equivalentStakedAmount = object.equivalentStakedAmount !== undefined && object.equivalentStakedAmount !== null ? Coin.fromPartial(object.equivalentStakedAmount) : undefined;
     return message;
+  },
+
+  fromSDK(object: SuperfluidDelegationRecordSDKType): SuperfluidDelegationRecord {
+    return {
+      delegatorAddress: isSet(object.delegator_address) ? object.delegator_address : "",
+      validatorAddress: isSet(object.validator_address) ? object.validator_address : "",
+      delegationAmount: isSet(object.delegation_amount) ? Coin.fromSDK(object.delegation_amount) : undefined,
+      equivalentStakedAmount: isSet(object.equivalent_staked_amount) ? Coin.fromSDK(object.equivalent_staked_amount) : undefined
+    };
+  },
+
+  toSDK(message: SuperfluidDelegationRecord): SuperfluidDelegationRecordSDKType {
+    const obj: any = {};
+    message.delegatorAddress !== undefined && (obj.delegator_address = message.delegatorAddress);
+    message.validatorAddress !== undefined && (obj.validator_address = message.validatorAddress);
+    message.delegationAmount !== undefined && (obj.delegation_amount = message.delegationAmount ? Coin.toSDK(message.delegationAmount) : undefined);
+    message.equivalentStakedAmount !== undefined && (obj.equivalent_staked_amount = message.equivalentStakedAmount ? Coin.toSDK(message.equivalentStakedAmount) : undefined);
+    return obj;
   }
 
 };
@@ -478,6 +595,20 @@ export const LockIdIntermediaryAccountConnection = {
     message.lockId = object.lockId !== undefined && object.lockId !== null ? Long.fromValue(object.lockId) : Long.UZERO;
     message.intermediaryAccount = object.intermediaryAccount ?? "";
     return message;
+  },
+
+  fromSDK(object: LockIdIntermediaryAccountConnectionSDKType): LockIdIntermediaryAccountConnection {
+    return {
+      lockId: isSet(object.lock_id) ? object.lock_id : Long.UZERO,
+      intermediaryAccount: isSet(object.intermediary_account) ? object.intermediary_account : ""
+    };
+  },
+
+  toSDK(message: LockIdIntermediaryAccountConnection): LockIdIntermediaryAccountConnectionSDKType {
+    const obj: any = {};
+    message.lockId !== undefined && (obj.lock_id = message.lockId);
+    message.intermediaryAccount !== undefined && (obj.intermediary_account = message.intermediaryAccount);
+    return obj;
   }
 
 };
@@ -553,6 +684,24 @@ export const UnpoolWhitelistedPools = {
     const message = createBaseUnpoolWhitelistedPools();
     message.ids = object.ids?.map(e => Long.fromValue(e)) || [];
     return message;
+  },
+
+  fromSDK(object: UnpoolWhitelistedPoolsSDKType): UnpoolWhitelistedPools {
+    return {
+      ids: Array.isArray(object?.ids) ? object.ids.map((e: any) => e) : []
+    };
+  },
+
+  toSDK(message: UnpoolWhitelistedPools): UnpoolWhitelistedPoolsSDKType {
+    const obj: any = {};
+
+    if (message.ids) {
+      obj.ids = message.ids.map(e => e);
+    } else {
+      obj.ids = [];
+    }
+
+    return obj;
   }
 
 };

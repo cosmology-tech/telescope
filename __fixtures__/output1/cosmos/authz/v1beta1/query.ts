@@ -1,5 +1,5 @@
-import { PageRequest, PageResponse } from "../../base/query/v1beta1/pagination";
-import { Grant, GrantAuthorization } from "./authz";
+import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../base/query/v1beta1/pagination";
+import { Grant, GrantSDKType, GrantAuthorization, GrantAuthorizationSDKType } from "./authz";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "@osmonauts/helpers";
 export const protobufPackage = "cosmos.authz.v1beta1";
@@ -16,6 +16,18 @@ export interface QueryGrantsRequest {
   pagination?: PageRequest;
 }
 
+/** QueryGrantsRequest is the request type for the Query/Grants RPC method. */
+export interface QueryGrantsRequestSDKType {
+  granter?: string;
+  grantee?: string;
+
+  /** Optional, msg_type_url, when set, will query only grants matching given msg type. */
+  msg_type_url?: string;
+
+  /** pagination defines an pagination for the request. */
+  pagination?: PageRequestSDKType;
+}
+
 /** QueryGrantsResponse is the response type for the Query/Authorizations RPC method. */
 export interface QueryGrantsResponse {
   /** authorizations is a list of grants granted for grantee by granter. */
@@ -25,12 +37,29 @@ export interface QueryGrantsResponse {
   pagination?: PageResponse;
 }
 
+/** QueryGrantsResponse is the response type for the Query/Authorizations RPC method. */
+export interface QueryGrantsResponseSDKType {
+  /** authorizations is a list of grants granted for grantee by granter. */
+  grants: GrantSDKType[];
+
+  /** pagination defines an pagination for the response. */
+  pagination?: PageResponseSDKType;
+}
+
 /** QueryGranterGrantsRequest is the request type for the Query/GranterGrants RPC method. */
 export interface QueryGranterGrantsRequest {
   granter: string;
 
   /** pagination defines an pagination for the request. */
   pagination?: PageRequest;
+}
+
+/** QueryGranterGrantsRequest is the request type for the Query/GranterGrants RPC method. */
+export interface QueryGranterGrantsRequestSDKType {
+  granter: string;
+
+  /** pagination defines an pagination for the request. */
+  pagination?: PageRequestSDKType;
 }
 
 /** QueryGranterGrantsResponse is the response type for the Query/GranterGrants RPC method. */
@@ -42,12 +71,29 @@ export interface QueryGranterGrantsResponse {
   pagination?: PageResponse;
 }
 
+/** QueryGranterGrantsResponse is the response type for the Query/GranterGrants RPC method. */
+export interface QueryGranterGrantsResponseSDKType {
+  /** grants is a list of grants granted by the granter. */
+  grants: GrantAuthorizationSDKType[];
+
+  /** pagination defines an pagination for the response. */
+  pagination?: PageResponseSDKType;
+}
+
 /** QueryGranteeGrantsRequest is the request type for the Query/IssuedGrants RPC method. */
 export interface QueryGranteeGrantsRequest {
   grantee: string;
 
   /** pagination defines an pagination for the request. */
   pagination?: PageRequest;
+}
+
+/** QueryGranteeGrantsRequest is the request type for the Query/IssuedGrants RPC method. */
+export interface QueryGranteeGrantsRequestSDKType {
+  grantee: string;
+
+  /** pagination defines an pagination for the request. */
+  pagination?: PageRequestSDKType;
 }
 
 /** QueryGranteeGrantsResponse is the response type for the Query/GranteeGrants RPC method. */
@@ -57,6 +103,15 @@ export interface QueryGranteeGrantsResponse {
 
   /** pagination defines an pagination for the response. */
   pagination?: PageResponse;
+}
+
+/** QueryGranteeGrantsResponse is the response type for the Query/GranteeGrants RPC method. */
+export interface QueryGranteeGrantsResponseSDKType {
+  /** grants is a list of grants granted to the grantee. */
+  grants: GrantAuthorizationSDKType[];
+
+  /** pagination defines an pagination for the response. */
+  pagination?: PageResponseSDKType;
 }
 
 function createBaseQueryGrantsRequest(): QueryGrantsRequest {
@@ -148,6 +203,24 @@ export const QueryGrantsRequest = {
     message.msgTypeUrl = object.msgTypeUrl ?? "";
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryGrantsRequestSDKType): QueryGrantsRequest {
+    return {
+      granter: isSet(object.granter) ? object.granter : "",
+      grantee: isSet(object.grantee) ? object.grantee : "",
+      msgTypeUrl: isSet(object.msg_type_url) ? object.msg_type_url : "",
+      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  toSDK(message: QueryGrantsRequest): QueryGrantsRequestSDKType {
+    const obj: any = {};
+    message.granter !== undefined && (obj.granter = message.granter);
+    message.grantee !== undefined && (obj.grantee = message.grantee);
+    message.msgTypeUrl !== undefined && (obj.msg_type_url = message.msgTypeUrl);
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
+    return obj;
   }
 
 };
@@ -223,6 +296,26 @@ export const QueryGrantsResponse = {
     message.grants = object.grants?.map(e => Grant.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryGrantsResponseSDKType): QueryGrantsResponse {
+    return {
+      grants: Array.isArray(object?.grants) ? object.grants.map((e: any) => Grant.fromSDK(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  toSDK(message: QueryGrantsResponse): QueryGrantsResponseSDKType {
+    const obj: any = {};
+
+    if (message.grants) {
+      obj.grants = message.grants.map(e => e ? Grant.toSDK(e) : undefined);
+    } else {
+      obj.grants = [];
+    }
+
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
+    return obj;
   }
 
 };
@@ -292,6 +385,20 @@ export const QueryGranterGrantsRequest = {
     message.granter = object.granter ?? "";
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryGranterGrantsRequestSDKType): QueryGranterGrantsRequest {
+    return {
+      granter: isSet(object.granter) ? object.granter : "",
+      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  toSDK(message: QueryGranterGrantsRequest): QueryGranterGrantsRequestSDKType {
+    const obj: any = {};
+    message.granter !== undefined && (obj.granter = message.granter);
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
+    return obj;
   }
 
 };
@@ -367,6 +474,26 @@ export const QueryGranterGrantsResponse = {
     message.grants = object.grants?.map(e => GrantAuthorization.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryGranterGrantsResponseSDKType): QueryGranterGrantsResponse {
+    return {
+      grants: Array.isArray(object?.grants) ? object.grants.map((e: any) => GrantAuthorization.fromSDK(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  toSDK(message: QueryGranterGrantsResponse): QueryGranterGrantsResponseSDKType {
+    const obj: any = {};
+
+    if (message.grants) {
+      obj.grants = message.grants.map(e => e ? GrantAuthorization.toSDK(e) : undefined);
+    } else {
+      obj.grants = [];
+    }
+
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
+    return obj;
   }
 
 };
@@ -436,6 +563,20 @@ export const QueryGranteeGrantsRequest = {
     message.grantee = object.grantee ?? "";
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryGranteeGrantsRequestSDKType): QueryGranteeGrantsRequest {
+    return {
+      grantee: isSet(object.grantee) ? object.grantee : "",
+      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  toSDK(message: QueryGranteeGrantsRequest): QueryGranteeGrantsRequestSDKType {
+    const obj: any = {};
+    message.grantee !== undefined && (obj.grantee = message.grantee);
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
+    return obj;
   }
 
 };
@@ -511,6 +652,26 @@ export const QueryGranteeGrantsResponse = {
     message.grants = object.grants?.map(e => GrantAuthorization.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryGranteeGrantsResponseSDKType): QueryGranteeGrantsResponse {
+    return {
+      grants: Array.isArray(object?.grants) ? object.grants.map((e: any) => GrantAuthorization.fromSDK(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  toSDK(message: QueryGranteeGrantsResponse): QueryGranteeGrantsResponseSDKType {
+    const obj: any = {};
+
+    if (message.grants) {
+      obj.grants = message.grants.map(e => e ? GrantAuthorization.toSDK(e) : undefined);
+    } else {
+      obj.grants = [];
+    }
+
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
+    return obj;
   }
 
 };

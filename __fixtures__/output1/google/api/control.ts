@@ -15,6 +15,19 @@ export interface Control {
   environment: string;
 }
 
+/**
+ * Selects and configures the service controller used by the service.  The
+ * service controller handles features like abuse, quota, billing, logging,
+ * monitoring, etc.
+ */
+export interface ControlSDKType {
+  /**
+   * The service control environment to use. If empty, no control plane
+   * feature (like quota and billing) will be enabled.
+   */
+  environment: string;
+}
+
 function createBaseControl(): Control {
   return {
     environment: ""
@@ -68,6 +81,18 @@ export const Control = {
     const message = createBaseControl();
     message.environment = object.environment ?? "";
     return message;
+  },
+
+  fromSDK(object: ControlSDKType): Control {
+    return {
+      environment: isSet(object.environment) ? object.environment : ""
+    };
+  },
+
+  toSDK(message: Control): ControlSDKType {
+    const obj: any = {};
+    message.environment !== undefined && (obj.environment = message.environment);
+    return obj;
   }
 
 };

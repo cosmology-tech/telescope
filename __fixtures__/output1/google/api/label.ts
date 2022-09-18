@@ -62,6 +62,18 @@ export interface LabelDescriptor {
   description: string;
 }
 
+/** A description of a label. */
+export interface LabelDescriptorSDKType {
+  /** The label key. */
+  key: string;
+
+  /** The type of data that can be assigned to the label. */
+  value_type: LabelDescriptor_ValueTypeSDKType;
+
+  /** A human-readable description for the label. */
+  description: string;
+}
+
 function createBaseLabelDescriptor(): LabelDescriptor {
   return {
     key: "",
@@ -139,6 +151,22 @@ export const LabelDescriptor = {
     message.valueType = object.valueType ?? 0;
     message.description = object.description ?? "";
     return message;
+  },
+
+  fromSDK(object: LabelDescriptorSDKType): LabelDescriptor {
+    return {
+      key: isSet(object.key) ? object.key : "",
+      valueType: isSet(object.value_type) ? labelDescriptor_ValueTypeFromJSON(object.value_type) : 0,
+      description: isSet(object.description) ? object.description : ""
+    };
+  },
+
+  toSDK(message: LabelDescriptor): LabelDescriptorSDKType {
+    const obj: any = {};
+    message.key !== undefined && (obj.key = message.key);
+    message.valueType !== undefined && (obj.value_type = labelDescriptor_ValueTypeToJSON(message.valueType));
+    message.description !== undefined && (obj.description = message.description);
+    return obj;
   }
 
 };

@@ -1,5 +1,5 @@
-import { Coin } from "../../base/v1beta1/coin";
-import { Input, Output } from "./bank";
+import { Coin, CoinSDKType } from "../../base/v1beta1/coin";
+import { Input, InputSDKType, Output, OutputSDKType } from "./bank";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "@osmonauts/helpers";
 export const protobufPackage = "cosmos.bank.v1beta1";
@@ -11,8 +11,18 @@ export interface MsgSend {
   amount: Coin[];
 }
 
+/** MsgSend represents a message to send coins from one account to another. */
+export interface MsgSendSDKType {
+  from_address: string;
+  to_address: string;
+  amount: CoinSDKType[];
+}
+
 /** MsgSendResponse defines the Msg/Send response type. */
 export interface MsgSendResponse {}
+
+/** MsgSendResponse defines the Msg/Send response type. */
+export interface MsgSendResponseSDKType {}
 
 /** MsgMultiSend represents an arbitrary multi-in, multi-out send message. */
 export interface MsgMultiSend {
@@ -20,8 +30,17 @@ export interface MsgMultiSend {
   outputs: Output[];
 }
 
+/** MsgMultiSend represents an arbitrary multi-in, multi-out send message. */
+export interface MsgMultiSendSDKType {
+  inputs: InputSDKType[];
+  outputs: OutputSDKType[];
+}
+
 /** MsgMultiSendResponse defines the Msg/MultiSend response type. */
 export interface MsgMultiSendResponse {}
+
+/** MsgMultiSendResponse defines the Msg/MultiSend response type. */
+export interface MsgMultiSendResponseSDKType {}
 
 function createBaseMsgSend(): MsgSend {
   return {
@@ -106,6 +125,28 @@ export const MsgSend = {
     message.toAddress = object.toAddress ?? "";
     message.amount = object.amount?.map(e => Coin.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: MsgSendSDKType): MsgSend {
+    return {
+      fromAddress: isSet(object.from_address) ? object.from_address : "",
+      toAddress: isSet(object.to_address) ? object.to_address : "",
+      amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: MsgSend): MsgSendSDKType {
+    const obj: any = {};
+    message.fromAddress !== undefined && (obj.from_address = message.fromAddress);
+    message.toAddress !== undefined && (obj.to_address = message.toAddress);
+
+    if (message.amount) {
+      obj.amount = message.amount.map(e => e ? Coin.toSDK(e) : undefined);
+    } else {
+      obj.amount = [];
+    }
+
+    return obj;
   }
 
 };
@@ -149,6 +190,15 @@ export const MsgSendResponse = {
   fromPartial(_: DeepPartial<MsgSendResponse>): MsgSendResponse {
     const message = createBaseMsgSendResponse();
     return message;
+  },
+
+  fromSDK(_: MsgSendResponseSDKType): MsgSendResponse {
+    return {};
+  },
+
+  toSDK(_: MsgSendResponse): MsgSendResponseSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -229,6 +279,31 @@ export const MsgMultiSend = {
     message.inputs = object.inputs?.map(e => Input.fromPartial(e)) || [];
     message.outputs = object.outputs?.map(e => Output.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: MsgMultiSendSDKType): MsgMultiSend {
+    return {
+      inputs: Array.isArray(object?.inputs) ? object.inputs.map((e: any) => Input.fromSDK(e)) : [],
+      outputs: Array.isArray(object?.outputs) ? object.outputs.map((e: any) => Output.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: MsgMultiSend): MsgMultiSendSDKType {
+    const obj: any = {};
+
+    if (message.inputs) {
+      obj.inputs = message.inputs.map(e => e ? Input.toSDK(e) : undefined);
+    } else {
+      obj.inputs = [];
+    }
+
+    if (message.outputs) {
+      obj.outputs = message.outputs.map(e => e ? Output.toSDK(e) : undefined);
+    } else {
+      obj.outputs = [];
+    }
+
+    return obj;
   }
 
 };
@@ -272,6 +347,15 @@ export const MsgMultiSendResponse = {
   fromPartial(_: DeepPartial<MsgMultiSendResponse>): MsgMultiSendResponse {
     const message = createBaseMsgMultiSendResponse();
     return message;
+  },
+
+  fromSDK(_: MsgMultiSendResponseSDKType): MsgMultiSendResponse {
+    return {};
+  },
+
+  toSDK(_: MsgMultiSendResponse): MsgMultiSendResponseSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };

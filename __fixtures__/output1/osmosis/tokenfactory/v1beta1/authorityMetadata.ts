@@ -12,6 +12,16 @@ export interface DenomAuthorityMetadata {
   Admin: string;
 }
 
+/**
+ * DenomAuthorityMetadata specifies metadata for addresses that have specific
+ * capabilities over a token factory denom. Right now there is only one Admin
+ * permission, but is planned to be extended to the future.
+ */
+export interface DenomAuthorityMetadataSDKType {
+  /** Can be empty for no admin, or a valid osmosis address */
+  Admin: string;
+}
+
 function createBaseDenomAuthorityMetadata(): DenomAuthorityMetadata {
   return {
     Admin: ""
@@ -65,6 +75,18 @@ export const DenomAuthorityMetadata = {
     const message = createBaseDenomAuthorityMetadata();
     message.Admin = object.Admin ?? "";
     return message;
+  },
+
+  fromSDK(object: DenomAuthorityMetadataSDKType): DenomAuthorityMetadata {
+    return {
+      Admin: isSet(object.Admin) ? object.Admin : ""
+    };
+  },
+
+  toSDK(message: DenomAuthorityMetadata): DenomAuthorityMetadataSDKType {
+    const obj: any = {};
+    message.Admin !== undefined && (obj.Admin = message.Admin);
+    return obj;
   }
 
 };

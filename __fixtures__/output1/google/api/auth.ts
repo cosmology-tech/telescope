@@ -35,6 +35,38 @@ export interface Authentication {
 }
 
 /**
+ * `Authentication` defines the authentication configuration for API methods
+ * provided by an API service.
+ * 
+ * Example:
+ * 
+ * name: calendar.googleapis.com
+ * authentication:
+ * providers:
+ * - id: google_calendar_auth
+ * jwks_uri: https://www.googleapis.com/oauth2/v1/certs
+ * issuer: https://securetoken.google.com
+ * rules:
+ * - selector: "*"
+ * requirements:
+ * provider_id: google_calendar_auth
+ * - selector: google.calendar.Delegate
+ * oauth:
+ * canonical_scopes: https://www.googleapis.com/auth/calendar.read
+ */
+export interface AuthenticationSDKType {
+  /**
+   * A list of authentication rules that apply to individual API methods.
+   * 
+   * **NOTE:** All service configuration rules follow "last one wins" order.
+   */
+  rules: AuthenticationRuleSDKType[];
+
+  /** Defines a set of authentication providers that a service supports. */
+  providers: AuthProviderSDKType[];
+}
+
+/**
  * Authentication rules for the service.
  * 
  * By default, if a method has any authentication requirements, every request
@@ -66,6 +98,38 @@ export interface AuthenticationRule {
   requirements: AuthRequirement[];
 }
 
+/**
+ * Authentication rules for the service.
+ * 
+ * By default, if a method has any authentication requirements, every request
+ * must include a valid credential matching one of the requirements.
+ * It's an error to include more than one kind of credential in a single
+ * request.
+ * 
+ * If a method doesn't have any auth requirements, request credentials will be
+ * ignored.
+ */
+export interface AuthenticationRuleSDKType {
+  /**
+   * Selects the methods to which this rule applies.
+   * 
+   * Refer to [selector][google.api.DocumentationRule.selector] for syntax details.
+   */
+  selector: string;
+
+  /** The requirements for OAuth credentials. */
+  oauth: OAuthRequirementsSDKType;
+
+  /**
+   * If true, the service accepts API keys without any other credential.
+   * This flag only applies to HTTP and gRPC requests.
+   */
+  allow_without_credential: boolean;
+
+  /** Requirements for additional authentication providers. */
+  requirements: AuthRequirementSDKType[];
+}
+
 /** Specifies a location to extract JWT from an API request. */
 export interface JwtLocation {
   /** Specifies HTTP header name to extract JWT token. */
@@ -85,6 +149,27 @@ export interface JwtLocation {
    * value_prefix="Bearer " with a space at the end.
    */
   valuePrefix: string;
+}
+
+/** Specifies a location to extract JWT from an API request. */
+export interface JwtLocationSDKType {
+  /** Specifies HTTP header name to extract JWT token. */
+  header?: string;
+
+  /** Specifies URL query parameter name to extract JWT token. */
+  query?: string;
+
+  /**
+   * The value prefix. The value format is "value_prefix{token}"
+   * Only applies to "in" header type. Must be empty for "in" query type.
+   * If not empty, the header value has to match (case sensitive) this prefix.
+   * If not matched, JWT will not be extracted. If matched, JWT will be
+   * extracted after the prefix is removed.
+   * 
+   * For example, for "Authorization: Bearer {JWT}",
+   * value_prefix="Bearer " with a space at the end.
+   */
+  value_prefix: string;
 }
 
 /**
@@ -177,6 +262,95 @@ export interface AuthProvider {
 }
 
 /**
+ * Configuration for an authentication provider, including support for
+ * [JSON Web Token
+ * (JWT)](https://tools.ietf.org/html/draft-ietf-oauth-json-web-token-32).
+ */
+export interface AuthProviderSDKType {
+  /**
+   * The unique identifier of the auth provider. It will be referred to by
+   * `AuthRequirement.provider_id`.
+   * 
+   * Example: "bookstore_auth".
+   */
+  id: string;
+
+  /**
+   * Identifies the principal that issued the JWT. See
+   * https://tools.ietf.org/html/draft-ietf-oauth-json-web-token-32#section-4.1.1
+   * Usually a URL or an email address.
+   * 
+   * Example: https://securetoken.google.com
+   * Example: 1234567-compute@developer.gserviceaccount.com
+   */
+  issuer: string;
+
+  /**
+   * URL of the provider's public key set to validate signature of the JWT. See
+   * [OpenID
+   * Discovery](https://openid.net/specs/openid-connect-discovery-1_0.html#ProviderMetadata).
+   * Optional if the key set document:
+   * - can be retrieved from
+   * [OpenID
+   * Discovery](https://openid.net/specs/openid-connect-discovery-1_0.html)
+   * of the issuer.
+   * - can be inferred from the email domain of the issuer (e.g. a Google
+   * service account).
+   * 
+   * Example: https://www.googleapis.com/oauth2/v1/certs
+   */
+  jwks_uri: string;
+
+  /**
+   * The list of JWT
+   * [audiences](https://tools.ietf.org/html/draft-ietf-oauth-json-web-token-32#section-4.1.3).
+   * that are allowed to access. A JWT containing any of these audiences will
+   * be accepted. When this setting is absent, JWTs with audiences:
+   * - "https://[service.name]/[google.protobuf.Api.name]"
+   * - "https://[service.name]/"
+   * will be accepted.
+   * For example, if no audiences are in the setting, LibraryService API will
+   * accept JWTs with the following audiences:
+   * -
+   * https://library-example.googleapis.com/google.example.library.v1.LibraryService
+   * - https://library-example.googleapis.com/
+   * 
+   * Example:
+   * 
+   * audiences: bookstore_android.apps.googleusercontent.com,
+   * bookstore_web.apps.googleusercontent.com
+   */
+  audiences: string;
+
+  /**
+   * Redirect URL if JWT token is required but not present or is expired.
+   * Implement authorizationUrl of securityDefinitions in OpenAPI spec.
+   */
+  authorization_url: string;
+
+  /**
+   * Defines the locations to extract the JWT.
+   * 
+   * JWT locations can be either from HTTP headers or URL query parameters.
+   * The rule is that the first match wins. The checking order is: checking
+   * all headers first, then URL query parameters.
+   * 
+   * If not specified,  default to use following 3 locations:
+   * 1) Authorization: Bearer
+   * 2) x-goog-iap-jwt-assertion
+   * 3) access_token query parameter
+   * 
+   * Default locations can be specified as followings:
+   * jwt_locations:
+   * - header: Authorization
+   * value_prefix: "Bearer "
+   * - header: x-goog-iap-jwt-assertion
+   * - query: access_token
+   */
+  jwt_locations: JwtLocationSDKType[];
+}
+
+/**
  * OAuth scopes are a way to define data and permissions on data. For example,
  * there are scopes defined for "Read-only access to Google Calendar" and
  * "Access to Cloud Platform". Users can consent to a scope for an application,
@@ -210,6 +384,39 @@ export interface OAuthRequirements {
 }
 
 /**
+ * OAuth scopes are a way to define data and permissions on data. For example,
+ * there are scopes defined for "Read-only access to Google Calendar" and
+ * "Access to Cloud Platform". Users can consent to a scope for an application,
+ * giving it permission to access that data on their behalf.
+ * 
+ * OAuth scope specifications should be fairly coarse grained; a user will need
+ * to see and understand the text description of what your scope means.
+ * 
+ * In most cases: use one or at most two OAuth scopes for an entire family of
+ * products. If your product has multiple APIs, you should probably be sharing
+ * the OAuth scope across all of those APIs.
+ * 
+ * When you need finer grained OAuth consent screens: talk with your product
+ * management about how developers will use them in practice.
+ * 
+ * Please note that even though each of the canonical scopes is enough for a
+ * request to be accepted and passed to the backend, a request can still fail
+ * due to the backend requiring additional scopes or permissions.
+ */
+export interface OAuthRequirementsSDKType {
+  /**
+   * The list of publicly documented OAuth scopes that are allowed access. An
+   * OAuth token containing any of these scopes will be accepted.
+   * 
+   * Example:
+   * 
+   * canonical_scopes: https://www.googleapis.com/auth/calendar,
+   * https://www.googleapis.com/auth/calendar.read
+   */
+  canonical_scopes: string;
+}
+
+/**
  * User-defined authentication requirements, including support for
  * [JSON Web Token
  * (JWT)](https://tools.ietf.org/html/draft-ietf-oauth-json-web-token-32).
@@ -223,6 +430,42 @@ export interface AuthRequirement {
    * provider_id: bookstore_auth
    */
   providerId: string;
+
+  /**
+   * NOTE: This will be deprecated soon, once AuthProvider.audiences is
+   * implemented and accepted in all the runtime components.
+   * 
+   * The list of JWT
+   * [audiences](https://tools.ietf.org/html/draft-ietf-oauth-json-web-token-32#section-4.1.3).
+   * that are allowed to access. A JWT containing any of these audiences will
+   * be accepted. When this setting is absent, only JWTs with audience
+   * "https://[Service_name][google.api.Service.name]/[API_name][google.protobuf.Api.name]"
+   * will be accepted. For example, if no audiences are in the setting,
+   * LibraryService API will only accept JWTs with the following audience
+   * "https://library-example.googleapis.com/google.example.library.v1.LibraryService".
+   * 
+   * Example:
+   * 
+   * audiences: bookstore_android.apps.googleusercontent.com,
+   * bookstore_web.apps.googleusercontent.com
+   */
+  audiences: string;
+}
+
+/**
+ * User-defined authentication requirements, including support for
+ * [JSON Web Token
+ * (JWT)](https://tools.ietf.org/html/draft-ietf-oauth-json-web-token-32).
+ */
+export interface AuthRequirementSDKType {
+  /**
+   * [id][google.api.AuthProvider.id] from authentication provider.
+   * 
+   * Example:
+   * 
+   * provider_id: bookstore_auth
+   */
+  provider_id: string;
 
   /**
    * NOTE: This will be deprecated soon, once AuthProvider.audiences is
@@ -321,6 +564,31 @@ export const Authentication = {
     message.rules = object.rules?.map(e => AuthenticationRule.fromPartial(e)) || [];
     message.providers = object.providers?.map(e => AuthProvider.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: AuthenticationSDKType): Authentication {
+    return {
+      rules: Array.isArray(object?.rules) ? object.rules.map((e: any) => AuthenticationRule.fromSDK(e)) : [],
+      providers: Array.isArray(object?.providers) ? object.providers.map((e: any) => AuthProvider.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: Authentication): AuthenticationSDKType {
+    const obj: any = {};
+
+    if (message.rules) {
+      obj.rules = message.rules.map(e => e ? AuthenticationRule.toSDK(e) : undefined);
+    } else {
+      obj.rules = [];
+    }
+
+    if (message.providers) {
+      obj.providers = message.providers.map(e => e ? AuthProvider.toSDK(e) : undefined);
+    } else {
+      obj.providers = [];
+    }
+
+    return obj;
   }
 
 };
@@ -420,6 +688,30 @@ export const AuthenticationRule = {
     message.allowWithoutCredential = object.allowWithoutCredential ?? false;
     message.requirements = object.requirements?.map(e => AuthRequirement.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: AuthenticationRuleSDKType): AuthenticationRule {
+    return {
+      selector: isSet(object.selector) ? object.selector : "",
+      oauth: isSet(object.oauth) ? OAuthRequirements.fromSDK(object.oauth) : undefined,
+      allowWithoutCredential: isSet(object.allow_without_credential) ? object.allow_without_credential : false,
+      requirements: Array.isArray(object?.requirements) ? object.requirements.map((e: any) => AuthRequirement.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: AuthenticationRule): AuthenticationRuleSDKType {
+    const obj: any = {};
+    message.selector !== undefined && (obj.selector = message.selector);
+    message.oauth !== undefined && (obj.oauth = message.oauth ? OAuthRequirements.toSDK(message.oauth) : undefined);
+    message.allowWithoutCredential !== undefined && (obj.allow_without_credential = message.allowWithoutCredential);
+
+    if (message.requirements) {
+      obj.requirements = message.requirements.map(e => e ? AuthRequirement.toSDK(e) : undefined);
+    } else {
+      obj.requirements = [];
+    }
+
+    return obj;
   }
 
 };
@@ -501,6 +793,22 @@ export const JwtLocation = {
     message.query = object.query ?? undefined;
     message.valuePrefix = object.valuePrefix ?? "";
     return message;
+  },
+
+  fromSDK(object: JwtLocationSDKType): JwtLocation {
+    return {
+      header: isSet(object.header) ? object.header : undefined,
+      query: isSet(object.query) ? object.query : undefined,
+      valuePrefix: isSet(object.value_prefix) ? object.value_prefix : ""
+    };
+  },
+
+  toSDK(message: JwtLocation): JwtLocationSDKType {
+    const obj: any = {};
+    message.header !== undefined && (obj.header = message.header);
+    message.query !== undefined && (obj.query = message.query);
+    message.valuePrefix !== undefined && (obj.value_prefix = message.valuePrefix);
+    return obj;
   }
 
 };
@@ -624,6 +932,34 @@ export const AuthProvider = {
     message.authorizationUrl = object.authorizationUrl ?? "";
     message.jwtLocations = object.jwtLocations?.map(e => JwtLocation.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: AuthProviderSDKType): AuthProvider {
+    return {
+      id: isSet(object.id) ? object.id : "",
+      issuer: isSet(object.issuer) ? object.issuer : "",
+      jwksUri: isSet(object.jwks_uri) ? object.jwks_uri : "",
+      audiences: isSet(object.audiences) ? object.audiences : "",
+      authorizationUrl: isSet(object.authorization_url) ? object.authorization_url : "",
+      jwtLocations: Array.isArray(object?.jwt_locations) ? object.jwt_locations.map((e: any) => JwtLocation.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: AuthProvider): AuthProviderSDKType {
+    const obj: any = {};
+    message.id !== undefined && (obj.id = message.id);
+    message.issuer !== undefined && (obj.issuer = message.issuer);
+    message.jwksUri !== undefined && (obj.jwks_uri = message.jwksUri);
+    message.audiences !== undefined && (obj.audiences = message.audiences);
+    message.authorizationUrl !== undefined && (obj.authorization_url = message.authorizationUrl);
+
+    if (message.jwtLocations) {
+      obj.jwt_locations = message.jwtLocations.map(e => e ? JwtLocation.toSDK(e) : undefined);
+    } else {
+      obj.jwt_locations = [];
+    }
+
+    return obj;
   }
 
 };
@@ -681,6 +1017,18 @@ export const OAuthRequirements = {
     const message = createBaseOAuthRequirements();
     message.canonicalScopes = object.canonicalScopes ?? "";
     return message;
+  },
+
+  fromSDK(object: OAuthRequirementsSDKType): OAuthRequirements {
+    return {
+      canonicalScopes: isSet(object.canonical_scopes) ? object.canonical_scopes : ""
+    };
+  },
+
+  toSDK(message: OAuthRequirements): OAuthRequirementsSDKType {
+    const obj: any = {};
+    message.canonicalScopes !== undefined && (obj.canonical_scopes = message.canonicalScopes);
+    return obj;
   }
 
 };
@@ -750,6 +1098,20 @@ export const AuthRequirement = {
     message.providerId = object.providerId ?? "";
     message.audiences = object.audiences ?? "";
     return message;
+  },
+
+  fromSDK(object: AuthRequirementSDKType): AuthRequirement {
+    return {
+      providerId: isSet(object.provider_id) ? object.provider_id : "",
+      audiences: isSet(object.audiences) ? object.audiences : ""
+    };
+  },
+
+  toSDK(message: AuthRequirement): AuthRequirementSDKType {
+    const obj: any = {};
+    message.providerId !== undefined && (obj.provider_id = message.providerId);
+    message.audiences !== undefined && (obj.audiences = message.audiences);
+    return obj;
   }
 
 };

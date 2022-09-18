@@ -1,7 +1,7 @@
-import { PageRequest, PageResponse } from "../../../cosmos/base/query/v1beta1/pagination";
-import { Coin } from "../../../cosmos/base/v1beta1/coin";
-import { Params } from "./genesis";
-import { ClaimsRecordAddress, Claim } from "./claims";
+import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
+import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
+import { Params, ParamsSDKType } from "./genesis";
+import { ClaimsRecordAddress, ClaimsRecordAddressSDKType, Claim, ClaimSDKType } from "./claims";
 import * as _m0 from "protobufjs/minimal";
 import { DeepPartial, isSet } from "@osmonauts/helpers";
 export const protobufPackage = "evmos.claims.v1";
@@ -13,6 +13,12 @@ export const protobufPackage = "evmos.claims.v1";
 export interface QueryTotalUnclaimedRequest {}
 
 /**
+ * QueryTotalUnclaimedRequest is the request type for the Query/TotalUnclaimed
+ * RPC method.
+ */
+export interface QueryTotalUnclaimedRequestSDKType {}
+
+/**
  * QueryTotalUnclaimedResponse is the response type for the Query/TotalUnclaimed
  * RPC method.
  */
@@ -21,13 +27,31 @@ export interface QueryTotalUnclaimedResponse {
   coins: Coin[];
 }
 
+/**
+ * QueryTotalUnclaimedResponse is the response type for the Query/TotalUnclaimed
+ * RPC method.
+ */
+export interface QueryTotalUnclaimedResponseSDKType {
+  /** coins defines the unclaimed coins */
+  coins: CoinSDKType[];
+}
+
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequest {}
+
+/** QueryParamsRequest is the request type for the Query/Params RPC method. */
+export interface QueryParamsRequestSDKType {}
 
 /** QueryParamsResponse is the response type for the Query/Params RPC method. */
 export interface QueryParamsResponse {
   /** params defines the parameters of the module. */
   params: Params;
+}
+
+/** QueryParamsResponse is the response type for the Query/Params RPC method. */
+export interface QueryParamsResponseSDKType {
+  /** params defines the parameters of the module. */
+  params: ParamsSDKType;
 }
 
 /**
@@ -37,6 +61,15 @@ export interface QueryParamsResponse {
 export interface QueryClaimsRecordsRequest {
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequest;
+}
+
+/**
+ * QueryClaimsRecordsRequest is the request type for the Query/ClaimsRecords RPC
+ * method.
+ */
+export interface QueryClaimsRecordsRequestSDKType {
+  /** pagination defines an optional pagination for the request. */
+  pagination?: PageRequestSDKType;
 }
 
 /**
@@ -52,10 +85,31 @@ export interface QueryClaimsRecordsResponse {
 }
 
 /**
+ * QueryClaimsRecordsResponse is the response type for the Query/ClaimsRecords
+ * RPC method.
+ */
+export interface QueryClaimsRecordsResponseSDKType {
+  /** claims defines all claims records */
+  claims: ClaimsRecordAddressSDKType[];
+
+  /** pagination defines the pagination in the response. */
+  pagination?: PageResponseSDKType;
+}
+
+/**
  * QueryClaimsRecordRequest is the request type for the Query/ClaimsRecord RPC
  * method.
  */
 export interface QueryClaimsRecordRequest {
+  /** address defines the user to query claims record for */
+  address: string;
+}
+
+/**
+ * QueryClaimsRecordRequest is the request type for the Query/ClaimsRecord RPC
+ * method.
+ */
+export interface QueryClaimsRecordRequestSDKType {
   /** address defines the user to query claims record for */
   address: string;
 }
@@ -70,6 +124,18 @@ export interface QueryClaimsRecordResponse {
 
   /** the claims of the user */
   claims: Claim[];
+}
+
+/**
+ * QueryClaimsRecordResponse is the response type for the Query/ClaimsRecord RPC
+ * method.
+ */
+export interface QueryClaimsRecordResponseSDKType {
+  /** total initial claimable amount for the user */
+  initial_claimable_amount: string;
+
+  /** the claims of the user */
+  claims: ClaimSDKType[];
 }
 
 function createBaseQueryTotalUnclaimedRequest(): QueryTotalUnclaimedRequest {
@@ -111,6 +177,15 @@ export const QueryTotalUnclaimedRequest = {
   fromPartial(_: DeepPartial<QueryTotalUnclaimedRequest>): QueryTotalUnclaimedRequest {
     const message = createBaseQueryTotalUnclaimedRequest();
     return message;
+  },
+
+  fromSDK(_: QueryTotalUnclaimedRequestSDKType): QueryTotalUnclaimedRequest {
+    return {};
+  },
+
+  toSDK(_: QueryTotalUnclaimedRequest): QueryTotalUnclaimedRequestSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -174,6 +249,24 @@ export const QueryTotalUnclaimedResponse = {
     const message = createBaseQueryTotalUnclaimedResponse();
     message.coins = object.coins?.map(e => Coin.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: QueryTotalUnclaimedResponseSDKType): QueryTotalUnclaimedResponse {
+    return {
+      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: QueryTotalUnclaimedResponse): QueryTotalUnclaimedResponseSDKType {
+    const obj: any = {};
+
+    if (message.coins) {
+      obj.coins = message.coins.map(e => e ? Coin.toSDK(e) : undefined);
+    } else {
+      obj.coins = [];
+    }
+
+    return obj;
   }
 
 };
@@ -217,6 +310,15 @@ export const QueryParamsRequest = {
   fromPartial(_: DeepPartial<QueryParamsRequest>): QueryParamsRequest {
     const message = createBaseQueryParamsRequest();
     return message;
+  },
+
+  fromSDK(_: QueryParamsRequestSDKType): QueryParamsRequest {
+    return {};
+  },
+
+  toSDK(_: QueryParamsRequest): QueryParamsRequestSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -274,6 +376,18 @@ export const QueryParamsResponse = {
     const message = createBaseQueryParamsResponse();
     message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryParamsResponseSDKType): QueryParamsResponse {
+    return {
+      params: isSet(object.params) ? Params.fromSDK(object.params) : undefined
+    };
+  },
+
+  toSDK(message: QueryParamsResponse): QueryParamsResponseSDKType {
+    const obj: any = {};
+    message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
+    return obj;
   }
 
 };
@@ -331,6 +445,18 @@ export const QueryClaimsRecordsRequest = {
     const message = createBaseQueryClaimsRecordsRequest();
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryClaimsRecordsRequestSDKType): QueryClaimsRecordsRequest {
+    return {
+      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  toSDK(message: QueryClaimsRecordsRequest): QueryClaimsRecordsRequestSDKType {
+    const obj: any = {};
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
+    return obj;
   }
 
 };
@@ -406,6 +532,26 @@ export const QueryClaimsRecordsResponse = {
     message.claims = object.claims?.map(e => ClaimsRecordAddress.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryClaimsRecordsResponseSDKType): QueryClaimsRecordsResponse {
+    return {
+      claims: Array.isArray(object?.claims) ? object.claims.map((e: any) => ClaimsRecordAddress.fromSDK(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  toSDK(message: QueryClaimsRecordsResponse): QueryClaimsRecordsResponseSDKType {
+    const obj: any = {};
+
+    if (message.claims) {
+      obj.claims = message.claims.map(e => e ? ClaimsRecordAddress.toSDK(e) : undefined);
+    } else {
+      obj.claims = [];
+    }
+
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
+    return obj;
   }
 
 };
@@ -463,6 +609,18 @@ export const QueryClaimsRecordRequest = {
     const message = createBaseQueryClaimsRecordRequest();
     message.address = object.address ?? "";
     return message;
+  },
+
+  fromSDK(object: QueryClaimsRecordRequestSDKType): QueryClaimsRecordRequest {
+    return {
+      address: isSet(object.address) ? object.address : ""
+    };
+  },
+
+  toSDK(message: QueryClaimsRecordRequest): QueryClaimsRecordRequestSDKType {
+    const obj: any = {};
+    message.address !== undefined && (obj.address = message.address);
+    return obj;
   }
 
 };
@@ -538,6 +696,26 @@ export const QueryClaimsRecordResponse = {
     message.initialClaimableAmount = object.initialClaimableAmount ?? "";
     message.claims = object.claims?.map(e => Claim.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: QueryClaimsRecordResponseSDKType): QueryClaimsRecordResponse {
+    return {
+      initialClaimableAmount: isSet(object.initial_claimable_amount) ? object.initial_claimable_amount : "",
+      claims: Array.isArray(object?.claims) ? object.claims.map((e: any) => Claim.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: QueryClaimsRecordResponse): QueryClaimsRecordResponseSDKType {
+    const obj: any = {};
+    message.initialClaimableAmount !== undefined && (obj.initial_claimable_amount = message.initialClaimableAmount);
+
+    if (message.claims) {
+      obj.claims = message.claims.map(e => e ? Claim.toSDK(e) : undefined);
+    } else {
+      obj.claims = [];
+    }
+
+    return obj;
   }
 
 };

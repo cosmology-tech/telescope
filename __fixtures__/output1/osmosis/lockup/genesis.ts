@@ -1,4 +1,4 @@
-import { PeriodLock, SyntheticLock } from "./lock";
+import { PeriodLock, PeriodLockSDKType, SyntheticLock, SyntheticLockSDKType } from "./lock";
 import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, DeepPartial } from "@osmonauts/helpers";
 export const protobufPackage = "osmosis.lockup";
@@ -8,6 +8,13 @@ export interface GenesisState {
   lastLockId: Long;
   locks: PeriodLock[];
   syntheticLocks: SyntheticLock[];
+}
+
+/** GenesisState defines the lockup module's genesis state. */
+export interface GenesisStateSDKType {
+  last_lock_id: Long;
+  locks: PeriodLockSDKType[];
+  synthetic_locks: SyntheticLockSDKType[];
 }
 
 function createBaseGenesisState(): GenesisState {
@@ -98,6 +105,33 @@ export const GenesisState = {
     message.locks = object.locks?.map(e => PeriodLock.fromPartial(e)) || [];
     message.syntheticLocks = object.syntheticLocks?.map(e => SyntheticLock.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: GenesisStateSDKType): GenesisState {
+    return {
+      lastLockId: isSet(object.last_lock_id) ? object.last_lock_id : Long.UZERO,
+      locks: Array.isArray(object?.locks) ? object.locks.map((e: any) => PeriodLock.fromSDK(e)) : [],
+      syntheticLocks: Array.isArray(object?.synthetic_locks) ? object.synthetic_locks.map((e: any) => SyntheticLock.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: GenesisState): GenesisStateSDKType {
+    const obj: any = {};
+    message.lastLockId !== undefined && (obj.last_lock_id = message.lastLockId);
+
+    if (message.locks) {
+      obj.locks = message.locks.map(e => e ? PeriodLock.toSDK(e) : undefined);
+    } else {
+      obj.locks = [];
+    }
+
+    if (message.syntheticLocks) {
+      obj.synthetic_locks = message.syntheticLocks.map(e => e ? SyntheticLock.toSDK(e) : undefined);
+    } else {
+      obj.synthetic_locks = [];
+    }
+
+    return obj;
   }
 
 };

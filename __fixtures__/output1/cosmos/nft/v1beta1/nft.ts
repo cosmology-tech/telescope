@@ -1,4 +1,4 @@
-import { Any } from "../../../google/protobuf/any";
+import { Any, AnySDKType } from "../../../google/protobuf/any";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "@osmonauts/helpers";
 export const protobufPackage = "cosmos.nft.v1beta1";
@@ -27,6 +27,30 @@ export interface Class {
   data: Any;
 }
 
+/** Class defines the class of the nft type. */
+export interface ClassSDKType {
+  /** id defines the unique identifier of the NFT classification, similar to the contract address of ERC721 */
+  id: string;
+
+  /** name defines the human-readable name of the NFT classification. Optional */
+  name: string;
+
+  /** symbol is an abbreviated name for nft classification. Optional */
+  symbol: string;
+
+  /** description is a brief description of nft classification. Optional */
+  description: string;
+
+  /** uri for the class metadata stored off chain. It can define schema for Class and NFT `Data` attributes. Optional */
+  uri: string;
+
+  /** uri_hash is a hash of the document pointed by uri. Optional */
+  uri_hash: string;
+
+  /** data is the app specific metadata of the NFT class. Optional */
+  data: Any;
+}
+
 /** NFT defines the NFT. */
 export interface NFT {
   /** class_id associated with the NFT, similar to the contract address of ERC721 */
@@ -40,6 +64,24 @@ export interface NFT {
 
   /** uri_hash is a hash of the document pointed by uri */
   uriHash: string;
+
+  /** data is an app specific data of the NFT. Optional */
+  data: Any;
+}
+
+/** NFT defines the NFT. */
+export interface NFTSDKType {
+  /** class_id associated with the NFT, similar to the contract address of ERC721 */
+  class_id: string;
+
+  /** id is a unique identifier of the NFT */
+  id: string;
+
+  /** uri for the NFT metadata stored off chain */
+  uri: string;
+
+  /** uri_hash is a hash of the document pointed by uri */
+  uri_hash: string;
 
   /** data is an app specific data of the NFT. Optional */
   data: Any;
@@ -170,6 +212,30 @@ export const Class = {
     message.uriHash = object.uriHash ?? "";
     message.data = object.data !== undefined && object.data !== null ? Any.fromPartial(object.data) : undefined;
     return message;
+  },
+
+  fromSDK(object: ClassSDKType): Class {
+    return {
+      id: isSet(object.id) ? object.id : "",
+      name: isSet(object.name) ? object.name : "",
+      symbol: isSet(object.symbol) ? object.symbol : "",
+      description: isSet(object.description) ? object.description : "",
+      uri: isSet(object.uri) ? object.uri : "",
+      uriHash: isSet(object.uri_hash) ? object.uri_hash : "",
+      data: isSet(object.data) ? Any.fromSDK(object.data) : undefined
+    };
+  },
+
+  toSDK(message: Class): ClassSDKType {
+    const obj: any = {};
+    message.id !== undefined && (obj.id = message.id);
+    message.name !== undefined && (obj.name = message.name);
+    message.symbol !== undefined && (obj.symbol = message.symbol);
+    message.description !== undefined && (obj.description = message.description);
+    message.uri !== undefined && (obj.uri = message.uri);
+    message.uriHash !== undefined && (obj.uri_hash = message.uriHash);
+    message.data !== undefined && (obj.data = message.data ? Any.toSDK(message.data) : undefined);
+    return obj;
   }
 
 };
@@ -275,6 +341,26 @@ export const NFT = {
     message.uriHash = object.uriHash ?? "";
     message.data = object.data !== undefined && object.data !== null ? Any.fromPartial(object.data) : undefined;
     return message;
+  },
+
+  fromSDK(object: NFTSDKType): NFT {
+    return {
+      classId: isSet(object.class_id) ? object.class_id : "",
+      id: isSet(object.id) ? object.id : "",
+      uri: isSet(object.uri) ? object.uri : "",
+      uriHash: isSet(object.uri_hash) ? object.uri_hash : "",
+      data: isSet(object.data) ? Any.fromSDK(object.data) : undefined
+    };
+  },
+
+  toSDK(message: NFT): NFTSDKType {
+    const obj: any = {};
+    message.classId !== undefined && (obj.class_id = message.classId);
+    message.id !== undefined && (obj.id = message.id);
+    message.uri !== undefined && (obj.uri = message.uri);
+    message.uriHash !== undefined && (obj.uri_hash = message.uriHash);
+    message.data !== undefined && (obj.data = message.data ? Any.toSDK(message.data) : undefined);
+    return obj;
   }
 
 };

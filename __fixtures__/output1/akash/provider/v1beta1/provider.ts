@@ -1,10 +1,16 @@
-import { Attribute } from "../../base/v1beta1/attribute";
+import { Attribute, AttributeSDKType } from "../../base/v1beta1/attribute";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, Exact } from "@osmonauts/helpers";
 export const protobufPackage = "akash.provider.v1beta1";
 
 /** ProviderInfo */
 export interface ProviderInfo {
+  email: string;
+  website: string;
+}
+
+/** ProviderInfo */
+export interface ProviderInfoSDKType {
   email: string;
   website: string;
 }
@@ -17,8 +23,19 @@ export interface MsgCreateProvider {
   info: ProviderInfo;
 }
 
+/** MsgCreateProvider defines an SDK message for creating a provider */
+export interface MsgCreateProviderSDKType {
+  owner: string;
+  host_uri: string;
+  attributes: AttributeSDKType[];
+  info: ProviderInfoSDKType;
+}
+
 /** MsgCreateProviderResponse defines the Msg/CreateProvider response type. */
 export interface MsgCreateProviderResponse {}
+
+/** MsgCreateProviderResponse defines the Msg/CreateProvider response type. */
+export interface MsgCreateProviderResponseSDKType {}
 
 /** MsgUpdateProvider defines an SDK message for updating a provider */
 export interface MsgUpdateProvider {
@@ -28,16 +45,35 @@ export interface MsgUpdateProvider {
   info: ProviderInfo;
 }
 
+/** MsgUpdateProvider defines an SDK message for updating a provider */
+export interface MsgUpdateProviderSDKType {
+  owner: string;
+  host_uri: string;
+  attributes: AttributeSDKType[];
+  info: ProviderInfoSDKType;
+}
+
 /** MsgUpdateProviderResponse defines the Msg/UpdateProvider response type. */
 export interface MsgUpdateProviderResponse {}
+
+/** MsgUpdateProviderResponse defines the Msg/UpdateProvider response type. */
+export interface MsgUpdateProviderResponseSDKType {}
 
 /** MsgDeleteProvider defines an SDK message for deleting a provider */
 export interface MsgDeleteProvider {
   owner: string;
 }
 
+/** MsgDeleteProvider defines an SDK message for deleting a provider */
+export interface MsgDeleteProviderSDKType {
+  owner: string;
+}
+
 /** MsgDeleteProviderResponse defines the Msg/DeleteProvider response type. */
 export interface MsgDeleteProviderResponse {}
+
+/** MsgDeleteProviderResponse defines the Msg/DeleteProvider response type. */
+export interface MsgDeleteProviderResponseSDKType {}
 
 /** Provider stores owner and host details */
 export interface Provider {
@@ -45,6 +81,14 @@ export interface Provider {
   hostUri: string;
   attributes: Attribute[];
   info: ProviderInfo;
+}
+
+/** Provider stores owner and host details */
+export interface ProviderSDKType {
+  owner: string;
+  host_uri: string;
+  attributes: AttributeSDKType[];
+  info: ProviderInfoSDKType;
 }
 
 function createBaseProviderInfo(): ProviderInfo {
@@ -112,6 +156,20 @@ export const ProviderInfo = {
     message.email = object.email ?? "";
     message.website = object.website ?? "";
     return message;
+  },
+
+  fromSDK(object: ProviderInfoSDKType): ProviderInfo {
+    return {
+      email: isSet(object.email) ? object.email : "",
+      website: isSet(object.website) ? object.website : ""
+    };
+  },
+
+  toSDK(message: ProviderInfo): ProviderInfoSDKType {
+    const obj: any = {};
+    message.email !== undefined && (obj.email = message.email);
+    message.website !== undefined && (obj.website = message.website);
+    return obj;
   }
 
 };
@@ -211,6 +269,30 @@ export const MsgCreateProvider = {
     message.attributes = object.attributes?.map(e => Attribute.fromPartial(e)) || [];
     message.info = object.info !== undefined && object.info !== null ? ProviderInfo.fromPartial(object.info) : undefined;
     return message;
+  },
+
+  fromSDK(object: MsgCreateProviderSDKType): MsgCreateProvider {
+    return {
+      owner: isSet(object.owner) ? object.owner : "",
+      hostUri: isSet(object.host_uri) ? object.host_uri : "",
+      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromSDK(e)) : [],
+      info: isSet(object.info) ? ProviderInfo.fromSDK(object.info) : undefined
+    };
+  },
+
+  toSDK(message: MsgCreateProvider): MsgCreateProviderSDKType {
+    const obj: any = {};
+    message.owner !== undefined && (obj.owner = message.owner);
+    message.hostUri !== undefined && (obj.host_uri = message.hostUri);
+
+    if (message.attributes) {
+      obj.attributes = message.attributes.map(e => e ? Attribute.toSDK(e) : undefined);
+    } else {
+      obj.attributes = [];
+    }
+
+    message.info !== undefined && (obj.info = message.info ? ProviderInfo.toSDK(message.info) : undefined);
+    return obj;
   }
 
 };
@@ -254,6 +336,15 @@ export const MsgCreateProviderResponse = {
   fromPartial<I extends Exact<DeepPartial<MsgCreateProviderResponse>, I>>(_: I): MsgCreateProviderResponse {
     const message = createBaseMsgCreateProviderResponse();
     return message;
+  },
+
+  fromSDK(_: MsgCreateProviderResponseSDKType): MsgCreateProviderResponse {
+    return {};
+  },
+
+  toSDK(_: MsgCreateProviderResponse): MsgCreateProviderResponseSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -353,6 +444,30 @@ export const MsgUpdateProvider = {
     message.attributes = object.attributes?.map(e => Attribute.fromPartial(e)) || [];
     message.info = object.info !== undefined && object.info !== null ? ProviderInfo.fromPartial(object.info) : undefined;
     return message;
+  },
+
+  fromSDK(object: MsgUpdateProviderSDKType): MsgUpdateProvider {
+    return {
+      owner: isSet(object.owner) ? object.owner : "",
+      hostUri: isSet(object.host_uri) ? object.host_uri : "",
+      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromSDK(e)) : [],
+      info: isSet(object.info) ? ProviderInfo.fromSDK(object.info) : undefined
+    };
+  },
+
+  toSDK(message: MsgUpdateProvider): MsgUpdateProviderSDKType {
+    const obj: any = {};
+    message.owner !== undefined && (obj.owner = message.owner);
+    message.hostUri !== undefined && (obj.host_uri = message.hostUri);
+
+    if (message.attributes) {
+      obj.attributes = message.attributes.map(e => e ? Attribute.toSDK(e) : undefined);
+    } else {
+      obj.attributes = [];
+    }
+
+    message.info !== undefined && (obj.info = message.info ? ProviderInfo.toSDK(message.info) : undefined);
+    return obj;
   }
 
 };
@@ -396,6 +511,15 @@ export const MsgUpdateProviderResponse = {
   fromPartial<I extends Exact<DeepPartial<MsgUpdateProviderResponse>, I>>(_: I): MsgUpdateProviderResponse {
     const message = createBaseMsgUpdateProviderResponse();
     return message;
+  },
+
+  fromSDK(_: MsgUpdateProviderResponseSDKType): MsgUpdateProviderResponse {
+    return {};
+  },
+
+  toSDK(_: MsgUpdateProviderResponse): MsgUpdateProviderResponseSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -453,6 +577,18 @@ export const MsgDeleteProvider = {
     const message = createBaseMsgDeleteProvider();
     message.owner = object.owner ?? "";
     return message;
+  },
+
+  fromSDK(object: MsgDeleteProviderSDKType): MsgDeleteProvider {
+    return {
+      owner: isSet(object.owner) ? object.owner : ""
+    };
+  },
+
+  toSDK(message: MsgDeleteProvider): MsgDeleteProviderSDKType {
+    const obj: any = {};
+    message.owner !== undefined && (obj.owner = message.owner);
+    return obj;
   }
 
 };
@@ -496,6 +632,15 @@ export const MsgDeleteProviderResponse = {
   fromPartial<I extends Exact<DeepPartial<MsgDeleteProviderResponse>, I>>(_: I): MsgDeleteProviderResponse {
     const message = createBaseMsgDeleteProviderResponse();
     return message;
+  },
+
+  fromSDK(_: MsgDeleteProviderResponseSDKType): MsgDeleteProviderResponse {
+    return {};
+  },
+
+  toSDK(_: MsgDeleteProviderResponse): MsgDeleteProviderResponseSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -595,6 +740,30 @@ export const Provider = {
     message.attributes = object.attributes?.map(e => Attribute.fromPartial(e)) || [];
     message.info = object.info !== undefined && object.info !== null ? ProviderInfo.fromPartial(object.info) : undefined;
     return message;
+  },
+
+  fromSDK(object: ProviderSDKType): Provider {
+    return {
+      owner: isSet(object.owner) ? object.owner : "",
+      hostUri: isSet(object.host_uri) ? object.host_uri : "",
+      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromSDK(e)) : [],
+      info: isSet(object.info) ? ProviderInfo.fromSDK(object.info) : undefined
+    };
+  },
+
+  toSDK(message: Provider): ProviderSDKType {
+    const obj: any = {};
+    message.owner !== undefined && (obj.owner = message.owner);
+    message.hostUri !== undefined && (obj.host_uri = message.hostUri);
+
+    if (message.attributes) {
+      obj.attributes = message.attributes.map(e => e ? Attribute.toSDK(e) : undefined);
+    } else {
+      obj.attributes = [];
+    }
+
+    message.info !== undefined && (obj.info = message.info ? ProviderInfo.toSDK(message.info) : undefined);
+    return obj;
   }
 
 };

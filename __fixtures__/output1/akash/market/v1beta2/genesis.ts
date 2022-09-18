@@ -1,6 +1,6 @@
-import { Order } from "./order";
-import { Lease } from "./lease";
-import { Params } from "./params";
+import { Order, OrderSDKType } from "./order";
+import { Lease, LeaseSDKType } from "./lease";
+import { Params, ParamsSDKType } from "./params";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, Exact } from "@osmonauts/helpers";
 export const protobufPackage = "akash.market.v1beta2";
@@ -10,6 +10,13 @@ export interface GenesisState {
   orders: Order[];
   leases: Lease[];
   params: Params;
+}
+
+/** GenesisState defines the basic genesis state used by market module */
+export interface GenesisStateSDKType {
+  orders: OrderSDKType[];
+  leases: LeaseSDKType[];
+  params: ParamsSDKType;
 }
 
 function createBaseGenesisState(): GenesisState {
@@ -100,6 +107,33 @@ export const GenesisState = {
     message.leases = object.leases?.map(e => Lease.fromPartial(e)) || [];
     message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     return message;
+  },
+
+  fromSDK(object: GenesisStateSDKType): GenesisState {
+    return {
+      orders: Array.isArray(object?.orders) ? object.orders.map((e: any) => Order.fromSDK(e)) : [],
+      leases: Array.isArray(object?.leases) ? object.leases.map((e: any) => Lease.fromSDK(e)) : [],
+      params: isSet(object.params) ? Params.fromSDK(object.params) : undefined
+    };
+  },
+
+  toSDK(message: GenesisState): GenesisStateSDKType {
+    const obj: any = {};
+
+    if (message.orders) {
+      obj.orders = message.orders.map(e => e ? Order.toSDK(e) : undefined);
+    } else {
+      obj.orders = [];
+    }
+
+    if (message.leases) {
+      obj.leases = message.leases.map(e => e ? Lease.toSDK(e) : undefined);
+    } else {
+      obj.leases = [];
+    }
+
+    message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
+    return obj;
   }
 
 };

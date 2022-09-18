@@ -1,20 +1,33 @@
-import { PageRequest, PageResponse } from "../../../cosmos/base/query/v1beta1/pagination";
-import { EpochInfo } from "./genesis";
+import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
+import { EpochInfo, EpochInfoSDKType } from "./genesis";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, Long } from "@osmonauts/helpers";
 export const protobufPackage = "evmos.epochs.v1";
 export interface QueryEpochsInfoRequest {
   pagination?: PageRequest;
 }
+export interface QueryEpochsInfoRequestSDKType {
+  pagination?: PageRequestSDKType;
+}
 export interface QueryEpochsInfoResponse {
   epochs: EpochInfo[];
   pagination?: PageResponse;
 }
+export interface QueryEpochsInfoResponseSDKType {
+  epochs: EpochInfoSDKType[];
+  pagination?: PageResponseSDKType;
+}
 export interface QueryCurrentEpochRequest {
+  identifier?: string;
+}
+export interface QueryCurrentEpochRequestSDKType {
   identifier?: string;
 }
 export interface QueryCurrentEpochResponse {
   currentEpoch: Long;
+}
+export interface QueryCurrentEpochResponseSDKType {
+  current_epoch: Long;
 }
 
 function createBaseQueryEpochsInfoRequest(): QueryEpochsInfoRequest {
@@ -70,6 +83,18 @@ export const QueryEpochsInfoRequest = {
     const message = createBaseQueryEpochsInfoRequest();
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryEpochsInfoRequestSDKType): QueryEpochsInfoRequest {
+    return {
+      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  toSDK(message: QueryEpochsInfoRequest): QueryEpochsInfoRequestSDKType {
+    const obj: any = {};
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
+    return obj;
   }
 
 };
@@ -145,6 +170,26 @@ export const QueryEpochsInfoResponse = {
     message.epochs = object.epochs?.map(e => EpochInfo.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryEpochsInfoResponseSDKType): QueryEpochsInfoResponse {
+    return {
+      epochs: Array.isArray(object?.epochs) ? object.epochs.map((e: any) => EpochInfo.fromSDK(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  toSDK(message: QueryEpochsInfoResponse): QueryEpochsInfoResponseSDKType {
+    const obj: any = {};
+
+    if (message.epochs) {
+      obj.epochs = message.epochs.map(e => e ? EpochInfo.toSDK(e) : undefined);
+    } else {
+      obj.epochs = [];
+    }
+
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
+    return obj;
   }
 
 };
@@ -202,6 +247,18 @@ export const QueryCurrentEpochRequest = {
     const message = createBaseQueryCurrentEpochRequest();
     message.identifier = object.identifier ?? "";
     return message;
+  },
+
+  fromSDK(object: QueryCurrentEpochRequestSDKType): QueryCurrentEpochRequest {
+    return {
+      identifier: isSet(object.identifier) ? object.identifier : ""
+    };
+  },
+
+  toSDK(message: QueryCurrentEpochRequest): QueryCurrentEpochRequestSDKType {
+    const obj: any = {};
+    message.identifier !== undefined && (obj.identifier = message.identifier);
+    return obj;
   }
 
 };
@@ -259,6 +316,18 @@ export const QueryCurrentEpochResponse = {
     const message = createBaseQueryCurrentEpochResponse();
     message.currentEpoch = object.currentEpoch !== undefined && object.currentEpoch !== null ? Long.fromValue(object.currentEpoch) : Long.ZERO;
     return message;
+  },
+
+  fromSDK(object: QueryCurrentEpochResponseSDKType): QueryCurrentEpochResponse {
+    return {
+      currentEpoch: isSet(object.current_epoch) ? object.current_epoch : Long.ZERO
+    };
+  },
+
+  toSDK(message: QueryCurrentEpochResponse): QueryCurrentEpochResponseSDKType {
+    const obj: any = {};
+    message.currentEpoch !== undefined && (obj.current_epoch = message.currentEpoch);
+    return obj;
   }
 
 };

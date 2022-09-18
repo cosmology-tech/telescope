@@ -1,5 +1,5 @@
-import { Any } from "../../../../google/protobuf/any";
-import { Plan } from "../../../../cosmos/upgrade/v1beta1/upgrade";
+import { Any, AnySDKType } from "../../../../google/protobuf/any";
+import { Plan, PlanSDKType } from "../../../../cosmos/upgrade/v1beta1/upgrade";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, Long } from "@osmonauts/helpers";
 export const protobufPackage = "ibc.core.client.v1";
@@ -17,6 +17,18 @@ export interface IdentifiedClientState {
 }
 
 /**
+ * IdentifiedClientState defines a client state with an additional client
+ * identifier field.
+ */
+export interface IdentifiedClientStateSDKType {
+  /** client identifier */
+  client_id: string;
+
+  /** client state */
+  client_state: Any;
+}
+
+/**
  * ConsensusStateWithHeight defines a consensus state with an additional height
  * field.
  */
@@ -29,6 +41,18 @@ export interface ConsensusStateWithHeight {
 }
 
 /**
+ * ConsensusStateWithHeight defines a consensus state with an additional height
+ * field.
+ */
+export interface ConsensusStateWithHeightSDKType {
+  /** consensus state height */
+  height: HeightSDKType;
+
+  /** consensus state */
+  consensus_state: Any;
+}
+
+/**
  * ClientConsensusStates defines all the stored consensus states for a given
  * client.
  */
@@ -38,6 +62,18 @@ export interface ClientConsensusStates {
 
   /** consensus states and their heights associated with the client */
   consensusStates: ConsensusStateWithHeight[];
+}
+
+/**
+ * ClientConsensusStates defines all the stored consensus states for a given
+ * client.
+ */
+export interface ClientConsensusStatesSDKType {
+  /** client identifier */
+  client_id: string;
+
+  /** consensus states and their heights associated with the client */
+  consensus_states: ConsensusStateWithHeightSDKType[];
 }
 
 /**
@@ -64,6 +100,29 @@ export interface ClientUpdateProposal {
 }
 
 /**
+ * ClientUpdateProposal is a governance proposal. If it passes, the substitute
+ * client's latest consensus state is copied over to the subject client. The proposal
+ * handler may fail if the subject and the substitute do not match in client and
+ * chain parameters (with exception to latest height, frozen height, and chain-id).
+ */
+export interface ClientUpdateProposalSDKType {
+  /** the title of the update proposal */
+  title: string;
+
+  /** the description of the proposal */
+  description: string;
+
+  /** the client identifier for the client to be updated if the proposal passes */
+  subject_client_id: string;
+
+  /**
+   * the substitute client identifier for the client standing in for the subject
+   * client
+   */
+  substitute_client_id: string;
+}
+
+/**
  * UpgradeProposal is a gov Content type for initiating an IBC breaking
  * upgrade.
  */
@@ -81,6 +140,26 @@ export interface UpgradeProposal {
    * planned chain upgrades
    */
   upgradedClientState: Any;
+}
+
+/**
+ * UpgradeProposal is a gov Content type for initiating an IBC breaking
+ * upgrade.
+ */
+export interface UpgradeProposalSDKType {
+  title: string;
+  description: string;
+  plan: PlanSDKType;
+
+  /**
+   * An UpgradedClientState must be provided to perform an IBC breaking upgrade.
+   * This will make the chain commit to the correct upgraded (self) client state
+   * before the upgrade occurs, so that connecting chains can verify that the
+   * new upgraded client is valid by verifying a proof on the previous version
+   * of the chain. This will allow IBC connections to persist smoothly across
+   * planned chain upgrades
+   */
+  upgraded_client_state: Any;
 }
 
 /**
@@ -103,10 +182,36 @@ export interface Height {
   revisionHeight: Long;
 }
 
+/**
+ * Height is a monotonically increasing data type
+ * that can be compared against another Height for the purposes of updating and
+ * freezing clients
+ * 
+ * Normally the RevisionHeight is incremented at each height while keeping
+ * RevisionNumber the same. However some consensus algorithms may choose to
+ * reset the height in certain conditions e.g. hard forks, state-machine
+ * breaking changes In these cases, the RevisionNumber is incremented so that
+ * height continues to be monitonically increasing even as the RevisionHeight
+ * gets reset
+ */
+export interface HeightSDKType {
+  /** the revision that the client is currently on */
+  revision_number: Long;
+
+  /** the height within the given revision */
+  revision_height: Long;
+}
+
 /** Params defines the set of IBC light client parameters. */
 export interface Params {
   /** allowed_clients defines the list of allowed client state types. */
   allowedClients: string[];
+}
+
+/** Params defines the set of IBC light client parameters. */
+export interface ParamsSDKType {
+  /** allowed_clients defines the list of allowed client state types. */
+  allowed_clients: string[];
 }
 
 function createBaseIdentifiedClientState(): IdentifiedClientState {
@@ -174,6 +279,20 @@ export const IdentifiedClientState = {
     message.clientId = object.clientId ?? "";
     message.clientState = object.clientState !== undefined && object.clientState !== null ? Any.fromPartial(object.clientState) : undefined;
     return message;
+  },
+
+  fromSDK(object: IdentifiedClientStateSDKType): IdentifiedClientState {
+    return {
+      clientId: isSet(object.client_id) ? object.client_id : "",
+      clientState: isSet(object.client_state) ? Any.fromSDK(object.client_state) : undefined
+    };
+  },
+
+  toSDK(message: IdentifiedClientState): IdentifiedClientStateSDKType {
+    const obj: any = {};
+    message.clientId !== undefined && (obj.client_id = message.clientId);
+    message.clientState !== undefined && (obj.client_state = message.clientState ? Any.toSDK(message.clientState) : undefined);
+    return obj;
   }
 
 };
@@ -243,6 +362,20 @@ export const ConsensusStateWithHeight = {
     message.height = object.height !== undefined && object.height !== null ? Height.fromPartial(object.height) : undefined;
     message.consensusState = object.consensusState !== undefined && object.consensusState !== null ? Any.fromPartial(object.consensusState) : undefined;
     return message;
+  },
+
+  fromSDK(object: ConsensusStateWithHeightSDKType): ConsensusStateWithHeight {
+    return {
+      height: isSet(object.height) ? Height.fromSDK(object.height) : undefined,
+      consensusState: isSet(object.consensus_state) ? Any.fromSDK(object.consensus_state) : undefined
+    };
+  },
+
+  toSDK(message: ConsensusStateWithHeight): ConsensusStateWithHeightSDKType {
+    const obj: any = {};
+    message.height !== undefined && (obj.height = message.height ? Height.toSDK(message.height) : undefined);
+    message.consensusState !== undefined && (obj.consensus_state = message.consensusState ? Any.toSDK(message.consensusState) : undefined);
+    return obj;
   }
 
 };
@@ -318,6 +451,26 @@ export const ClientConsensusStates = {
     message.clientId = object.clientId ?? "";
     message.consensusStates = object.consensusStates?.map(e => ConsensusStateWithHeight.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: ClientConsensusStatesSDKType): ClientConsensusStates {
+    return {
+      clientId: isSet(object.client_id) ? object.client_id : "",
+      consensusStates: Array.isArray(object?.consensus_states) ? object.consensus_states.map((e: any) => ConsensusStateWithHeight.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: ClientConsensusStates): ClientConsensusStatesSDKType {
+    const obj: any = {};
+    message.clientId !== undefined && (obj.client_id = message.clientId);
+
+    if (message.consensusStates) {
+      obj.consensus_states = message.consensusStates.map(e => e ? ConsensusStateWithHeight.toSDK(e) : undefined);
+    } else {
+      obj.consensus_states = [];
+    }
+
+    return obj;
   }
 
 };
@@ -411,6 +564,24 @@ export const ClientUpdateProposal = {
     message.subjectClientId = object.subjectClientId ?? "";
     message.substituteClientId = object.substituteClientId ?? "";
     return message;
+  },
+
+  fromSDK(object: ClientUpdateProposalSDKType): ClientUpdateProposal {
+    return {
+      title: isSet(object.title) ? object.title : "",
+      description: isSet(object.description) ? object.description : "",
+      subjectClientId: isSet(object.subject_client_id) ? object.subject_client_id : "",
+      substituteClientId: isSet(object.substitute_client_id) ? object.substitute_client_id : ""
+    };
+  },
+
+  toSDK(message: ClientUpdateProposal): ClientUpdateProposalSDKType {
+    const obj: any = {};
+    message.title !== undefined && (obj.title = message.title);
+    message.description !== undefined && (obj.description = message.description);
+    message.subjectClientId !== undefined && (obj.subject_client_id = message.subjectClientId);
+    message.substituteClientId !== undefined && (obj.substitute_client_id = message.substituteClientId);
+    return obj;
   }
 
 };
@@ -504,6 +675,24 @@ export const UpgradeProposal = {
     message.plan = object.plan !== undefined && object.plan !== null ? Plan.fromPartial(object.plan) : undefined;
     message.upgradedClientState = object.upgradedClientState !== undefined && object.upgradedClientState !== null ? Any.fromPartial(object.upgradedClientState) : undefined;
     return message;
+  },
+
+  fromSDK(object: UpgradeProposalSDKType): UpgradeProposal {
+    return {
+      title: isSet(object.title) ? object.title : "",
+      description: isSet(object.description) ? object.description : "",
+      plan: isSet(object.plan) ? Plan.fromSDK(object.plan) : undefined,
+      upgradedClientState: isSet(object.upgraded_client_state) ? Any.fromSDK(object.upgraded_client_state) : undefined
+    };
+  },
+
+  toSDK(message: UpgradeProposal): UpgradeProposalSDKType {
+    const obj: any = {};
+    message.title !== undefined && (obj.title = message.title);
+    message.description !== undefined && (obj.description = message.description);
+    message.plan !== undefined && (obj.plan = message.plan ? Plan.toSDK(message.plan) : undefined);
+    message.upgradedClientState !== undefined && (obj.upgraded_client_state = message.upgradedClientState ? Any.toSDK(message.upgradedClientState) : undefined);
+    return obj;
   }
 
 };
@@ -573,6 +762,20 @@ export const Height = {
     message.revisionNumber = object.revisionNumber !== undefined && object.revisionNumber !== null ? Long.fromValue(object.revisionNumber) : Long.UZERO;
     message.revisionHeight = object.revisionHeight !== undefined && object.revisionHeight !== null ? Long.fromValue(object.revisionHeight) : Long.UZERO;
     return message;
+  },
+
+  fromSDK(object: HeightSDKType): Height {
+    return {
+      revisionNumber: isSet(object.revision_number) ? object.revision_number : Long.UZERO,
+      revisionHeight: isSet(object.revision_height) ? object.revision_height : Long.UZERO
+    };
+  },
+
+  toSDK(message: Height): HeightSDKType {
+    const obj: any = {};
+    message.revisionNumber !== undefined && (obj.revision_number = message.revisionNumber);
+    message.revisionHeight !== undefined && (obj.revision_height = message.revisionHeight);
+    return obj;
   }
 
 };
@@ -636,6 +839,24 @@ export const Params = {
     const message = createBaseParams();
     message.allowedClients = object.allowedClients?.map(e => e) || [];
     return message;
+  },
+
+  fromSDK(object: ParamsSDKType): Params {
+    return {
+      allowedClients: Array.isArray(object?.allowed_clients) ? object.allowed_clients.map((e: any) => e) : []
+    };
+  },
+
+  toSDK(message: Params): ParamsSDKType {
+    const obj: any = {};
+
+    if (message.allowedClients) {
+      obj.allowed_clients = message.allowedClients.map(e => e);
+    } else {
+      obj.allowed_clients = [];
+    }
+
+    return obj;
   }
 
 };

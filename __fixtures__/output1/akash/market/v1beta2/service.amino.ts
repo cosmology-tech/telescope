@@ -1,7 +1,7 @@
-import { OrderID } from "./order";
-import { DecCoin, Coin } from "../../../cosmos/base/v1beta1/coin";
-import { BidID, MsgCreateBid, MsgCloseBid } from "./bid";
-import { LeaseID, MsgWithdrawLease, MsgCreateLease, MsgCloseLease } from "./lease";
+import { OrderID, OrderIDSDKType } from "./order";
+import { DecCoin, DecCoinSDKType, Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
+import { BidID, BidIDSDKType, MsgCreateBid, MsgCreateBidSDKType, MsgCloseBid, MsgCloseBidSDKType } from "./bid";
+import { LeaseID, LeaseIDSDKType, MsgWithdrawLease, MsgWithdrawLeaseSDKType, MsgCreateLease, MsgCreateLeaseSDKType, MsgCloseLease, MsgCloseLeaseSDKType } from "./lease";
 import { AminoMsg } from "@cosmjs/amino";
 import { Long } from "@osmonauts/helpers";
 export interface AminoMsgCreateBid extends AminoMsg {

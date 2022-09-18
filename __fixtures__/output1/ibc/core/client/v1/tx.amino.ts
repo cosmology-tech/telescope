@@ -1,6 +1,6 @@
-import { Any } from "../../../../google/protobuf/any";
+import { Any, AnySDKType } from "../../../../google/protobuf/any";
 import { AminoMsg } from "@cosmjs/amino";
-import { MsgCreateClient, MsgUpdateClient, MsgUpgradeClient, MsgSubmitMisbehaviour } from "./tx";
+import { MsgCreateClient, MsgCreateClientSDKType, MsgUpdateClient, MsgUpdateClientSDKType, MsgUpgradeClient, MsgUpgradeClientSDKType, MsgSubmitMisbehaviour, MsgSubmitMisbehaviourSDKType } from "./tx";
 export interface AminoMsgCreateClient extends AminoMsg {
   type: "cosmos-sdk/MsgCreateClient";
   value: {

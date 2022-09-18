@@ -1,4 +1,4 @@
-import { Duration } from "../../../google/protobuf/duration";
+import { Duration, DurationSDKType } from "../../../google/protobuf/duration";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, Long } from "@osmonauts/helpers";
 export const protobufPackage = "osmosis.poolincentives.v1beta1";
@@ -11,15 +11,35 @@ export interface Params {
    */
   mintedDenom: string;
 }
+export interface ParamsSDKType {
+  /**
+   * minted_denom is the denomination of the coin expected to be minted by the
+   * minting module. Pool-incentives module doesn’t actually mint the coin
+   * itself, but rather manages the distribution of coins that matches the
+   * defined minted_denom.
+   */
+  minted_denom: string;
+}
 export interface LockableDurationsInfo {
   lockableDurations: Duration[];
+}
+export interface LockableDurationsInfoSDKType {
+  lockable_durations: Duration[];
 }
 export interface DistrInfo {
   totalWeight: string;
   records: DistrRecord[];
 }
+export interface DistrInfoSDKType {
+  total_weight: string;
+  records: DistrRecordSDKType[];
+}
 export interface DistrRecord {
   gaugeId: Long;
+  weight: string;
+}
+export interface DistrRecordSDKType {
+  gauge_id: Long;
   weight: string;
 }
 
@@ -76,6 +96,18 @@ export const Params = {
     const message = createBaseParams();
     message.mintedDenom = object.mintedDenom ?? "";
     return message;
+  },
+
+  fromSDK(object: ParamsSDKType): Params {
+    return {
+      mintedDenom: isSet(object.minted_denom) ? object.minted_denom : ""
+    };
+  },
+
+  toSDK(message: Params): ParamsSDKType {
+    const obj: any = {};
+    message.mintedDenom !== undefined && (obj.minted_denom = message.mintedDenom);
+    return obj;
   }
 
 };
@@ -139,6 +171,24 @@ export const LockableDurationsInfo = {
     const message = createBaseLockableDurationsInfo();
     message.lockableDurations = object.lockableDurations?.map(e => Duration.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: LockableDurationsInfoSDKType): LockableDurationsInfo {
+    return {
+      lockableDurations: Array.isArray(object?.lockable_durations) ? object.lockable_durations.map((e: any) => Duration.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: LockableDurationsInfo): LockableDurationsInfoSDKType {
+    const obj: any = {};
+
+    if (message.lockableDurations) {
+      obj.lockable_durations = message.lockableDurations.map(e => e ? Duration.toSDK(e) : undefined);
+    } else {
+      obj.lockable_durations = [];
+    }
+
+    return obj;
   }
 
 };
@@ -214,6 +264,26 @@ export const DistrInfo = {
     message.totalWeight = object.totalWeight ?? "";
     message.records = object.records?.map(e => DistrRecord.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: DistrInfoSDKType): DistrInfo {
+    return {
+      totalWeight: isSet(object.total_weight) ? object.total_weight : "",
+      records: Array.isArray(object?.records) ? object.records.map((e: any) => DistrRecord.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: DistrInfo): DistrInfoSDKType {
+    const obj: any = {};
+    message.totalWeight !== undefined && (obj.total_weight = message.totalWeight);
+
+    if (message.records) {
+      obj.records = message.records.map(e => e ? DistrRecord.toSDK(e) : undefined);
+    } else {
+      obj.records = [];
+    }
+
+    return obj;
   }
 
 };
@@ -283,6 +353,20 @@ export const DistrRecord = {
     message.gaugeId = object.gaugeId !== undefined && object.gaugeId !== null ? Long.fromValue(object.gaugeId) : Long.UZERO;
     message.weight = object.weight ?? "";
     return message;
+  },
+
+  fromSDK(object: DistrRecordSDKType): DistrRecord {
+    return {
+      gaugeId: isSet(object.gauge_id) ? object.gauge_id : Long.UZERO,
+      weight: isSet(object.weight) ? object.weight : ""
+    };
+  },
+
+  toSDK(message: DistrRecord): DistrRecordSDKType {
+    const obj: any = {};
+    message.gaugeId !== undefined && (obj.gauge_id = message.gaugeId);
+    message.weight !== undefined && (obj.weight = message.weight);
+    return obj;
   }
 
 };

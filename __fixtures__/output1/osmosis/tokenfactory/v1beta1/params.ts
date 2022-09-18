@@ -1,4 +1,4 @@
-import { Coin } from "../../../cosmos/base/v1beta1/coin";
+import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import * as _m0 from "protobufjs/minimal";
 import { DeepPartial } from "@osmonauts/helpers";
 export const protobufPackage = "osmosis.tokenfactory.v1beta1";
@@ -6,6 +6,11 @@ export const protobufPackage = "osmosis.tokenfactory.v1beta1";
 /** Params holds parameters for the tokenfactory module */
 export interface Params {
   denomCreationFee: Coin[];
+}
+
+/** Params holds parameters for the tokenfactory module */
+export interface ParamsSDKType {
+  denom_creation_fee: CoinSDKType[];
 }
 
 function createBaseParams(): Params {
@@ -67,6 +72,24 @@ export const Params = {
     const message = createBaseParams();
     message.denomCreationFee = object.denomCreationFee?.map(e => Coin.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: ParamsSDKType): Params {
+    return {
+      denomCreationFee: Array.isArray(object?.denom_creation_fee) ? object.denom_creation_fee.map((e: any) => Coin.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: Params): ParamsSDKType {
+    const obj: any = {};
+
+    if (message.denomCreationFee) {
+      obj.denom_creation_fee = message.denomCreationFee.map(e => e ? Coin.toSDK(e) : undefined);
+    } else {
+      obj.denom_creation_fee = [];
+    }
+
+    return obj;
   }
 
 };
