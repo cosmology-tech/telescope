@@ -24,7 +24,7 @@ export interface ServiceMutation extends ServiceInfo {
 export interface ServiceQuery extends ServiceInfo {
 }
 export interface ImportObj {
-    type: 'import' | 'default' | 'namespace';
+    type: 'import' | 'default' | 'namespace' | string;
     name: string;
     path: string;
     importAs?: string;
