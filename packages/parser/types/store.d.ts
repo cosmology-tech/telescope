@@ -29,5 +29,6 @@ export declare class ProtoStore {
     getDeps(): ProtoDep[];
     traverseAll(): void;
     get(from: ProtoRef, name: string): import("./lookup").Lookup;
+    getImportFromRef(ref: ProtoRef, name: string): import("./lookup").Lookup;
 }
 export {};

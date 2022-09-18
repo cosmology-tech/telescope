@@ -26,9 +26,6 @@ export declare class GenericParseContext implements ParseContext {
     getTypeName(field: ProtoField): string;
 }
 export declare class AminoParseContext extends GenericParseContext implements ParseContext {
-    options: TelescopeOptions;
-    store: ProtoStore;
-    ref: ProtoRef;
     aminoCasingFn: Function;
     constructor(ref: ProtoRef, store: ProtoStore, options: TelescopeOptions);
     private setAminoCasingFn;
@@ -39,9 +36,6 @@ export declare class AminoParseContext extends GenericParseContext implements Pa
     lookupEnumToJson(field: ProtoField, currentProtoPath: string): string;
 }
 export declare class ProtoParseContext extends GenericParseContext implements ParseContext {
-    store: ProtoStore;
-    ref: ProtoRef;
-    options: TelescopeOptions;
     constructor(ref: ProtoRef, store: ProtoStore, options: TelescopeOptions);
     getToEnum(field: ProtoField): string;
     getFromEnum(field: ProtoField): string;

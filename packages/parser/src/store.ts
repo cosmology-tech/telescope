@@ -5,7 +5,7 @@ import { join, resolve as pathResolve } from 'path';
 import { ProtoDep, ProtoRef, ProtoServiceMethod, TelescopeOptions } from '@osmonauts/types';
 import { getNestedProto, getPackageAndNestedFromStr } from './utils';
 import { traverse } from './traverse';
-import { lookupAny } from './lookup';
+import { lookupAny, lookupAnyFromImports } from './lookup';
 import { defaultTelescopeOptions } from '@osmonauts/types';
 
 import google_any from './native/any';
@@ -187,6 +187,11 @@ export class ProtoStore {
     get(from: ProtoRef, name: string) {
         if (!this._traversed) throw new Error('get() requires traversal')
         return lookupAny(this, from, name);
+    }
+
+    getImportFromRef(ref: ProtoRef, name: string) {
+        if (!this._traversed) throw new Error('getImportFromRef() requires traversal')
+        return lookupAnyFromImports(this, ref, name);
     }
 
 }
