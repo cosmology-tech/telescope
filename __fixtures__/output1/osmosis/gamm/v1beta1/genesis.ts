@@ -23,7 +23,7 @@ export interface GenesisState {
 
 /** GenesisState defines the gamm module's genesis state. */
 export interface GenesisStateSDKType {
-  pools: Any[];
+  pools: AnySDKType[];
   next_pool_number: Long;
   params: ParamsSDKType;
 }

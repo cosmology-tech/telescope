@@ -23,7 +23,7 @@ export interface MsgSubmitProposal {
  * proposal Content.
  */
 export interface MsgSubmitProposalSDKType {
-  messages: Any[];
+  messages: AnySDKType[];
   initial_deposit: CoinSDKType[];
   proposer: string;
 
@@ -59,7 +59,7 @@ export interface MsgExecLegacyContent {
  */
 export interface MsgExecLegacyContentSDKType {
   /** content is the proposal's content. */
-  content: Any;
+  content: AnySDKType;
 
   /** authority must be the gov module address. */
   authority: string;

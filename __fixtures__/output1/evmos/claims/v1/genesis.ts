@@ -59,10 +59,10 @@ export interface ParamsSDKType {
   airdrop_start_time: Date;
 
   /** duration until decay of claimable tokens begin */
-  duration_until_decay: Duration;
+  duration_until_decay: DurationSDKType;
 
   /** duration of the token claim decay period */
-  duration_of_decay: Duration;
+  duration_of_decay: DurationSDKType;
 
   /** denom of claimable coin */
   claims_denom: string;

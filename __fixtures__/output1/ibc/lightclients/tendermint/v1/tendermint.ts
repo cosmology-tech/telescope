@@ -74,13 +74,13 @@ export interface ClientStateSDKType {
    * duration of the period since the LastestTimestamp during which the
    * submitted headers are valid for upgrade
    */
-  trusting_period: Duration;
+  trusting_period: DurationSDKType;
 
   /** duration of the staking unbonding period */
-  unbonding_period: Duration;
+  unbonding_period: DurationSDKType;
 
   /** defines how much new (untrusted) header's Time can drift into the future. */
-  max_clock_drift: Duration;
+  max_clock_drift: DurationSDKType;
 
   /** Block height when the client was frozen due to a misbehaviour */
   frozen_height: HeightSDKType;

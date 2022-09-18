@@ -121,7 +121,7 @@ export interface LockedDenomRequest {
 }
 export interface LockedDenomRequestSDKType {
   denom?: string;
-  duration?: Duration;
+  duration?: DurationSDKType;
 }
 export interface LockedDenomResponse {
   amount: string;
@@ -159,7 +159,7 @@ export interface AccountLockedLongerDurationRequest {
 }
 export interface AccountLockedLongerDurationRequestSDKType {
   owner: string;
-  duration?: Duration;
+  duration?: DurationSDKType;
 }
 export interface AccountLockedLongerDurationResponse {
   locks: PeriodLock[];
@@ -173,7 +173,7 @@ export interface AccountLockedDurationRequest {
 }
 export interface AccountLockedDurationRequestSDKType {
   owner: string;
-  duration?: Duration;
+  duration?: DurationSDKType;
 }
 export interface AccountLockedDurationResponse {
   locks: PeriodLock[];
@@ -187,7 +187,7 @@ export interface AccountLockedLongerDurationNotUnlockingOnlyRequest {
 }
 export interface AccountLockedLongerDurationNotUnlockingOnlyRequestSDKType {
   owner: string;
-  duration?: Duration;
+  duration?: DurationSDKType;
 }
 export interface AccountLockedLongerDurationNotUnlockingOnlyResponse {
   locks: PeriodLock[];
@@ -202,7 +202,7 @@ export interface AccountLockedLongerDurationDenomRequest {
 }
 export interface AccountLockedLongerDurationDenomRequestSDKType {
   owner: string;
-  duration?: Duration;
+  duration?: DurationSDKType;
   denom?: string;
 }
 export interface AccountLockedLongerDurationDenomResponse {

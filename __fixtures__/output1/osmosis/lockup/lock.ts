@@ -62,7 +62,7 @@ export interface PeriodLock {
 export interface PeriodLockSDKType {
   ID: Long;
   owner: string;
-  duration: Duration;
+  duration: DurationSDKType;
   end_time: Date;
   coins: CoinSDKType[];
 }
@@ -87,7 +87,7 @@ export interface QueryConditionSDKType {
   denom: string;
 
   /** valid when query condition is ByDuration */
-  duration: Duration;
+  duration: DurationSDKType;
 
   /** valid when query condition is ByTime */
   timestamp: Date;
@@ -148,7 +148,7 @@ export interface SyntheticLockSDKType {
    * value is set to uninitialized value
    */
   end_time: Date;
-  duration: Duration;
+  duration: DurationSDKType;
 }
 
 function createBasePeriodLock(): PeriodLock {

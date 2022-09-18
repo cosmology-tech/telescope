@@ -22,7 +22,7 @@ export interface QueryGaugeIdsResponse_GaugeIdWithDuration {
 }
 export interface QueryGaugeIdsResponse_GaugeIdWithDurationSDKType {
   gauge_id: Long;
-  duration: Duration;
+  duration: DurationSDKType;
 }
 export interface QueryDistrInfoRequest {}
 export interface QueryDistrInfoRequestSDKType {}
@@ -46,7 +46,7 @@ export interface QueryLockableDurationsResponse {
   lockableDurations: Duration[];
 }
 export interface QueryLockableDurationsResponseSDKType {
-  lockable_durations: Duration[];
+  lockable_durations: DurationSDKType[];
 }
 export interface QueryIncentivizedPoolsRequest {}
 export interface QueryIncentivizedPoolsRequestSDKType {}
@@ -57,7 +57,7 @@ export interface IncentivizedPool {
 }
 export interface IncentivizedPoolSDKType {
   pool_id: Long;
-  lockable_duration: Duration;
+  lockable_duration: DurationSDKType;
   gauge_id: Long;
 }
 export interface QueryIncentivizedPoolsResponse {

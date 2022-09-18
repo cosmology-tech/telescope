@@ -15,7 +15,7 @@ export interface EpochInfo {
 export interface EpochInfoSDKType {
   identifier: string;
   start_time: Date;
-  duration: Duration;
+  duration: DurationSDKType;
   current_epoch: Long;
   current_epoch_start_time: Date;
   epoch_counting_started: boolean;

@@ -140,7 +140,7 @@ export interface SignatureDescriptor {
  */
 export interface SignatureDescriptorSDKType {
   /** public_key is the public key of the signer */
-  public_key: Any;
+  public_key: AnySDKType;
   data: SignatureDescriptor_DataSDKType;
 
   /**

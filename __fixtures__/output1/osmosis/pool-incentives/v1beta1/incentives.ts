@@ -24,7 +24,7 @@ export interface LockableDurationsInfo {
   lockableDurations: Duration[];
 }
 export interface LockableDurationsInfoSDKType {
-  lockable_durations: Duration[];
+  lockable_durations: DurationSDKType[];
 }
 export interface DistrInfo {
   totalWeight: string;

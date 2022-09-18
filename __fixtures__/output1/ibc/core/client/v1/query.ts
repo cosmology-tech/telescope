@@ -46,7 +46,7 @@ export interface QueryClientStateResponse {
  */
 export interface QueryClientStateResponseSDKType {
   /** client state associated with the request identifier */
-  client_state: Any;
+  client_state: AnySDKType;
 
   /** merkle proof of existence */
   proof: Uint8Array;
@@ -162,7 +162,7 @@ export interface QueryConsensusStateResponse {
  */
 export interface QueryConsensusStateResponseSDKType {
   /** consensus state associated with the client identifier at the given height */
-  consensus_state: Any;
+  consensus_state: AnySDKType;
 
   /** merkle proof of existence */
   proof: Uint8Array;
@@ -310,7 +310,7 @@ export interface QueryUpgradedClientStateResponse {
  */
 export interface QueryUpgradedClientStateResponseSDKType {
   /** client state associated with the request identifier */
-  upgraded_client_state: Any;
+  upgraded_client_state: AnySDKType;
 }
 
 /**
@@ -340,7 +340,7 @@ export interface QueryUpgradedConsensusStateResponse {
  */
 export interface QueryUpgradedConsensusStateResponseSDKType {
   /** Consensus state associated with the request identifier */
-  upgraded_consensus_state: Any;
+  upgraded_consensus_state: AnySDKType;
 }
 
 function createBaseQueryClientStateRequest(): QueryClientStateRequest {

@@ -25,7 +25,7 @@ export interface IdentifiedClientStateSDKType {
   client_id: string;
 
   /** client state */
-  client_state: Any;
+  client_state: AnySDKType;
 }
 
 /**
@@ -49,7 +49,7 @@ export interface ConsensusStateWithHeightSDKType {
   height: HeightSDKType;
 
   /** consensus state */
-  consensus_state: Any;
+  consensus_state: AnySDKType;
 }
 
 /**
@@ -159,7 +159,7 @@ export interface UpgradeProposalSDKType {
    * of the chain. This will allow IBC connections to persist smoothly across
    * planned chain upgrades
    */
-  upgraded_client_state: Any;
+  upgraded_client_state: AnySDKType;
 }
 
 /**

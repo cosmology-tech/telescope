@@ -145,7 +145,7 @@ export interface LogEntrySDKType {
    * expressed as a JSON object. The only accepted type currently is
    * [AuditLog][google.cloud.audit.AuditLog].
    */
-  proto_payload?: Any;
+  proto_payload?: AnySDKType;
 
   /** The log entry payload, represented as a Unicode string (UTF-8). */
   text_payload?: string;

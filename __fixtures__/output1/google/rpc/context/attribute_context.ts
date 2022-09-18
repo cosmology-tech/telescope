@@ -125,7 +125,7 @@ export interface AttributeContextSDKType {
   api: AttributeContext_ApiSDKType;
 
   /** Supports extensions for advanced use cases, such as logs and metrics. */
-  extensions: Any[];
+  extensions: AnySDKType[];
 }
 export interface AttributeContext_Peer_LabelsEntry {
   key: string;
@@ -635,7 +635,7 @@ export interface AttributeContext_ResponseSDKType {
    * request to the backend until when the destination service receives the
    * complete response from the backend.
    */
-  backend_latency: Duration;
+  backend_latency: DurationSDKType;
 }
 export interface AttributeContext_Resource_LabelsEntry {
   key: string;

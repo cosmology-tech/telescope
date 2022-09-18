@@ -30,7 +30,7 @@ export interface ParamsSDKType {
   enable_recovery: boolean;
 
   /** duration added to timeout timestamp for balances recovered via IBC packets */
-  packet_timeout_duration: Duration;
+  packet_timeout_duration: DurationSDKType;
 }
 
 function createBaseGenesisState(): GenesisState {

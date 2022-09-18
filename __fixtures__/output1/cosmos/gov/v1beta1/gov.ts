@@ -247,7 +247,7 @@ export interface Proposal {
 /** Proposal defines the core field members of a governance proposal. */
 export interface ProposalSDKType {
   proposal_id: Long;
-  content: Any;
+  content: AnySDKType;
   status: ProposalStatusSDKType;
 
   /**
@@ -342,7 +342,7 @@ export interface DepositParamsSDKType {
    * Maximum period for Atom holders to deposit on a proposal. Initial value: 2
    * months.
    */
-  max_deposit_period: Duration;
+  max_deposit_period: DurationSDKType;
 }
 
 /** VotingParams defines the params for voting on governance proposals. */
@@ -354,7 +354,7 @@ export interface VotingParams {
 /** VotingParams defines the params for voting on governance proposals. */
 export interface VotingParamsSDKType {
   /** Length of the voting period. */
-  voting_period: Duration;
+  voting_period: DurationSDKType;
 }
 
 /** TallyParams defines the params for tallying votes on governance proposals. */

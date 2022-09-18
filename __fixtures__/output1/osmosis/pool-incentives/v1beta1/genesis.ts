@@ -16,7 +16,7 @@ export interface GenesisState {
 export interface GenesisStateSDKType {
   /** params defines all the paramaters of the module. */
   params: ParamsSDKType;
-  lockable_durations: Duration[];
+  lockable_durations: DurationSDKType[];
   distr_info?: DistrInfoSDKType;
 }
 

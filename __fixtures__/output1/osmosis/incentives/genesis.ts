@@ -19,7 +19,7 @@ export interface GenesisStateSDKType {
   /** params defines all the parameters of the module */
   params: ParamsSDKType;
   gauges: GaugeSDKType[];
-  lockable_durations: Duration[];
+  lockable_durations: DurationSDKType[];
   last_gauge_id: Long;
 }
 

@@ -86,7 +86,7 @@ export interface MsgConnectionOpenTrySDKType {
    * the connection identifier of the previous connection in state INIT
    */
   previous_connection_id: string;
-  client_state: Any;
+  client_state: AnySDKType;
   counterparty: CounterpartySDKType;
   delay_period: Long;
   counterparty_versions: VersionSDKType[];
@@ -147,7 +147,7 @@ export interface MsgConnectionOpenAckSDKType {
   connection_id: string;
   counterparty_connection_id: string;
   version: VersionSDKType;
-  client_state: Any;
+  client_state: AnySDKType;
   proof_height: HeightSDKType;
 
   /**

@@ -231,7 +231,7 @@ export interface ValidatorSDKType {
   operator_address: string;
 
   /** consensus_pubkey is the consensus public key of the validator, as a Protobuf Any. */
-  consensus_pubkey: Any;
+  consensus_pubkey: AnySDKType;
 
   /** jailed defined whether the validator has been jailed from bonded status or not. */
   jailed: boolean;
@@ -517,7 +517,7 @@ export interface Params {
 /** Params defines the parameters for the staking module. */
 export interface ParamsSDKType {
   /** unbonding_time is the time duration of unbonding. */
-  unbonding_time: Duration;
+  unbonding_time: DurationSDKType;
 
   /** max_validators is the maximum number of validators. */
   max_validators: number;

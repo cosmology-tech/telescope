@@ -54,7 +54,7 @@ export interface StatusSDKType {
    * A list of messages that carry the error details.  There is a common set of
    * message types for APIs to use.
    */
-  details: Any[];
+  details: AnySDKType[];
 }
 
 function createBaseStatus(): Status {

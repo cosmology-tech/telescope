@@ -25,7 +25,7 @@ export interface QueryEvidenceResponse {
 /** QueryEvidenceResponse is the response type for the Query/Evidence RPC method. */
 export interface QueryEvidenceResponseSDKType {
   /** evidence returns the requested evidence. */
-  evidence: Any;
+  evidence: AnySDKType;
 }
 
 /**
@@ -64,7 +64,7 @@ export interface QueryAllEvidenceResponse {
  */
 export interface QueryAllEvidenceResponseSDKType {
   /** evidence returns all evidences. */
-  evidence: Any[];
+  evidence: AnySDKType[];
 
   /** pagination defines the pagination in the response. */
   pagination?: PageResponseSDKType;

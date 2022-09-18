@@ -30,7 +30,7 @@ export interface MsgGrantAllowanceSDKType {
   grantee: string;
 
   /** allowance can be any of basic, periodic, allowed fee allowance. */
-  allowance: Any;
+  allowance: AnySDKType;
 }
 
 /** MsgGrantAllowanceResponse defines the Msg/GrantAllowanceResponse response type. */

@@ -19,7 +19,7 @@ export interface QueryPoolResponse {
   pool: Any;
 }
 export interface QueryPoolResponseSDKType {
-  pool: Any;
+  pool: AnySDKType;
 }
 
 /** =============================== Pools */
@@ -40,7 +40,7 @@ export interface QueryPoolsResponse {
   pagination?: PageResponse;
 }
 export interface QueryPoolsResponseSDKType {
-  pools: Any[];
+  pools: AnySDKType[];
 
   /** pagination defines the pagination in the response. */
   pagination?: PageResponseSDKType;
@@ -71,7 +71,7 @@ export interface QueryPoolParamsResponse {
   params: Any;
 }
 export interface QueryPoolParamsResponseSDKType {
-  params: Any;
+  params: AnySDKType;
 }
 
 /** =============================== PoolLiquidity */

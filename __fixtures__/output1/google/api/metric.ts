@@ -555,14 +555,14 @@ export interface MetricDescriptor_MetricDescriptorMetadataSDKType {
    * excluding data loss due to errors. Metrics with a higher granularity have
    * a smaller sampling period.
    */
-  sample_period: Duration;
+  sample_period: DurationSDKType;
 
   /**
    * The delay of data points caused by ingestion. Data points older than this
    * age are guaranteed to be ingested and available to be read, excluding
    * data loss due to errors.
    */
-  ingest_delay: Duration;
+  ingest_delay: DurationSDKType;
 }
 export interface Metric_LabelsEntry {
   key: string;

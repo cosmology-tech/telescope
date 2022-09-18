@@ -82,7 +82,7 @@ export interface Validator {
 /** Validator is the type for the validator-set. */
 export interface ValidatorSDKType {
   address: string;
-  pub_key: Any;
+  pub_key: AnySDKType;
   voting_power: Long;
   proposer_priority: Long;
 }

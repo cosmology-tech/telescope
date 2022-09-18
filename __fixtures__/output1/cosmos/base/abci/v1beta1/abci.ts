@@ -102,7 +102,7 @@ export interface TxResponseSDKType {
   gas_used: Long;
 
   /** The request transaction bytes. */
-  tx: Any;
+  tx: AnySDKType;
 
   /**
    * Time of the previous block. For heights > 1, it's the weighted median of
@@ -255,7 +255,7 @@ export interface ResultSDKType {
    * 
    * Since: cosmos-sdk 0.46
    */
-  msg_responses: Any[];
+  msg_responses: AnySDKType[];
 }
 
 /**
@@ -331,7 +331,7 @@ export interface TxMsgDataSDKType {
    * 
    * Since: cosmos-sdk 0.46
    */
-  msg_responses: Any[];
+  msg_responses: AnySDKType[];
 }
 
 /** SearchTxsResult defines a structure for querying txs pageable */

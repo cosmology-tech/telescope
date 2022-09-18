@@ -48,7 +48,7 @@ export interface ClassSDKType {
   uri_hash: string;
 
   /** data is the app specific metadata of the NFT class. Optional */
-  data: Any;
+  data: AnySDKType;
 }
 
 /** NFT defines the NFT. */
@@ -84,7 +84,7 @@ export interface NFTSDKType {
   uri_hash: string;
 
   /** data is an app specific data of the NFT. Optional */
-  data: Any;
+  data: AnySDKType;
 }
 
 function createBaseClass(): Class {

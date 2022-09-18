@@ -763,7 +763,7 @@ export interface TailLogEntriesRequestSDKType {
    * entries. Valid values are between 0-60000 milliseconds. Defaults to 2000
    * milliseconds.
    */
-  buffer_window: Duration;
+  buffer_window: DurationSDKType;
 }
 
 /** Result returned from `TailLogEntries`. */

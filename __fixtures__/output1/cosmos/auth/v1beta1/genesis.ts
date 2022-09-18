@@ -19,7 +19,7 @@ export interface GenesisStateSDKType {
   params: ParamsSDKType;
 
   /** accounts are the accounts present at genesis. */
-  accounts: Any[];
+  accounts: AnySDKType[];
 }
 
 function createBaseGenesisState(): GenesisState {

@@ -155,7 +155,7 @@ export interface QueryLockableDurationsResponse {
   lockableDurations: Duration[];
 }
 export interface QueryLockableDurationsResponseSDKType {
-  lockable_durations: Duration[];
+  lockable_durations: DurationSDKType[];
 }
 
 function createBaseModuleToDistributeCoinsRequest(): ModuleToDistributeCoinsRequest {

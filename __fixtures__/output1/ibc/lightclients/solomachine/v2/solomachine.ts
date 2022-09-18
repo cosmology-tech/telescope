@@ -189,7 +189,7 @@ export interface ConsensusState {
  */
 export interface ConsensusStateSDKType {
   /** public key of the solo machine */
-  public_key: Any;
+  public_key: AnySDKType;
 
   /**
    * diversifier allows the same public key to be re-used across different solo
@@ -216,7 +216,7 @@ export interface HeaderSDKType {
   sequence: Long;
   timestamp: Long;
   signature: Uint8Array;
-  new_public_key: Any;
+  new_public_key: AnySDKType;
   new_diversifier: string;
 }
 
@@ -320,7 +320,7 @@ export interface HeaderData {
 /** HeaderData returns the SignBytes data for update verification. */
 export interface HeaderDataSDKType {
   /** header public key */
-  new_pub_key: Any;
+  new_pub_key: AnySDKType;
 
   /** header diversifier */
   new_diversifier: string;
@@ -335,7 +335,7 @@ export interface ClientStateData {
 /** ClientStateData returns the SignBytes data for client state verification. */
 export interface ClientStateDataSDKType {
   path: Uint8Array;
-  client_state: Any;
+  client_state: AnySDKType;
 }
 
 /**
@@ -353,7 +353,7 @@ export interface ConsensusStateData {
  */
 export interface ConsensusStateDataSDKType {
   path: Uint8Array;
-  consensus_state: Any;
+  consensus_state: AnySDKType;
 }
 
 /**

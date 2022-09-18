@@ -11,7 +11,7 @@ export interface MsgLockTokens {
 }
 export interface MsgLockTokensSDKType {
   owner: string;
-  duration: Duration;
+  duration: DurationSDKType;
   coins: CoinSDKType[];
 }
 export interface MsgLockTokensResponse {
@@ -80,7 +80,7 @@ export interface MsgExtendLockupSDKType {
    * duration to be set. fails if lower than the current duration, or is
    * unlocking
    */
-  duration: Duration;
+  duration: DurationSDKType;
 }
 export interface MsgExtendLockupResponse {
   success: boolean;

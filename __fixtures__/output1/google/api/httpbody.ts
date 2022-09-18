@@ -118,7 +118,7 @@ export interface HttpBodySDKType {
    * Application specific response metadata. Must be set in the first response
    * for streaming APIs.
    */
-  extensions: Any[];
+  extensions: AnySDKType[];
 }
 
 function createBaseHttpBody(): HttpBody {

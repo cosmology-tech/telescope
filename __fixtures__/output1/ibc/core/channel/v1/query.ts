@@ -260,7 +260,7 @@ export interface QueryChannelConsensusStateResponse {
  */
 export interface QueryChannelConsensusStateResponseSDKType {
   /** consensus state associated with the channel */
-  consensus_state: Any;
+  consensus_state: AnySDKType;
 
   /** client ID associated with the consensus state */
   client_id: string;

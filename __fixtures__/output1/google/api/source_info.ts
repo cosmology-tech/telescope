@@ -12,7 +12,7 @@ export interface SourceInfo {
 /** Source information used to create a Service Config */
 export interface SourceInfoSDKType {
   /** All files used during config generation. */
-  source_files: Any[];
+  source_files: AnySDKType[];
 }
 
 function createBaseSourceInfo(): SourceInfo {

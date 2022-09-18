@@ -159,7 +159,7 @@ export interface HttpRequestSDKType {
    * The request processing latency on the server, from the time the request was
    * received until the response was sent.
    */
-  latency: Duration;
+  latency: DurationSDKType;
 
   /** Whether or not a cache lookup was attempted. */
   cache_lookup: boolean;

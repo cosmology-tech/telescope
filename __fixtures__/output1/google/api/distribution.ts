@@ -421,7 +421,7 @@ export interface Distribution_ExemplarSDKType {
    * There may be only a single attachment of any given message type in a
    * single exemplar, and this is enforced by the system.
    */
-  attachments: Any[];
+  attachments: AnySDKType[];
 }
 
 function createBaseDistribution(): Distribution {

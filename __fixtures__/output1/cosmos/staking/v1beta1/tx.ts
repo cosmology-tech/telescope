@@ -24,7 +24,7 @@ export interface MsgCreateValidatorSDKType {
   min_self_delegation: string;
   delegator_address: string;
   validator_address: string;
-  pubkey: Any;
+  pubkey: AnySDKType;
   value: CoinSDKType;
 }
 

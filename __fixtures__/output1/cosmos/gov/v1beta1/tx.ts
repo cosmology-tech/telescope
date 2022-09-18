@@ -20,7 +20,7 @@ export interface MsgSubmitProposal {
  * proposal Content.
  */
 export interface MsgSubmitProposalSDKType {
-  content: Any;
+  content: AnySDKType;
   initial_deposit: CoinSDKType[];
   proposer: string;
 }

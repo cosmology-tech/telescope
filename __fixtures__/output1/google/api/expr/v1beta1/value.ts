@@ -80,7 +80,7 @@ export interface ValueSDKType {
   enum_value?: EnumValueSDKType;
 
   /** The proto message backing an object value. */
-  object_value?: Any;
+  object_value?: AnySDKType;
 
   /** Map value. */
   map_value?: MapValueSDKType;

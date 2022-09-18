@@ -374,7 +374,7 @@ export interface DecisionPolicyWindowsSDKType {
    * voting_period is the duration from submission of a proposal to the end of voting period
    * Within this times votes can be submitted with MsgVote.
    */
-  voting_period: Duration;
+  voting_period: DurationSDKType;
 
   /**
    * min_execution_period is the minimum duration after the proposal submission
@@ -389,7 +389,7 @@ export interface DecisionPolicyWindowsSDKType {
    * is empty, meaning that all proposals created with this decision policy
    * won't be able to be executed.
    */
-  min_execution_period: Duration;
+  min_execution_period: DurationSDKType;
 }
 
 /** GroupInfo represents the high-level on-chain information for a group. */
@@ -510,7 +510,7 @@ export interface GroupPolicyInfoSDKType {
   version: Long;
 
   /** decision_policy specifies the group policy's decision policy. */
-  decision_policy: Any;
+  decision_policy: AnySDKType;
 
   /** created_at is a timestamp specifying when a group policy was created. */
   created_at: Date;
@@ -647,7 +647,7 @@ export interface ProposalSDKType {
   executor_result: ProposalExecutorResultSDKType;
 
   /** messages is a list of Msgs that will be executed if the proposal passes. */
-  messages: Any[];
+  messages: AnySDKType[];
 }
 
 /** TallyResult represents the sum of weighted votes for each vote option. */

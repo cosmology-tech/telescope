@@ -21,13 +21,13 @@ export interface MsgCreateClient {
 /** MsgCreateClient defines a message to create an IBC client */
 export interface MsgCreateClientSDKType {
   /** light client state */
-  client_state: Any;
+  client_state: AnySDKType;
 
   /**
    * consensus state associated with the client that corresponds to a given
    * height.
    */
-  consensus_state: Any;
+  consensus_state: AnySDKType;
 
   /** signer address */
   signer: string;
@@ -63,7 +63,7 @@ export interface MsgUpdateClientSDKType {
   client_id: string;
 
   /** header to update the light client */
-  header: Any;
+  header: AnySDKType;
 
   /** signer address */
   signer: string;
@@ -111,13 +111,13 @@ export interface MsgUpgradeClientSDKType {
   client_id: string;
 
   /** upgraded client state */
-  client_state: Any;
+  client_state: AnySDKType;
 
   /**
    * upgraded consensus state, only contains enough information to serve as a
    * basis of trust in update logic
    */
-  consensus_state: Any;
+  consensus_state: AnySDKType;
 
   /** proof that old chain committed to new client */
   proof_upgrade_client: Uint8Array;
@@ -159,7 +159,7 @@ export interface MsgSubmitMisbehaviourSDKType {
   client_id: string;
 
   /** misbehaviour used for freezing the light client */
-  misbehaviour: Any;
+  misbehaviour: AnySDKType;
 
   /** signer address */
   signer: string;

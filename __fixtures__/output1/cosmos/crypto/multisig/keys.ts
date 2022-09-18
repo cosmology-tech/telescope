@@ -20,7 +20,7 @@ export interface LegacyAminoPubKey {
  */
 export interface LegacyAminoPubKeySDKType {
   threshold: number;
-  public_keys: Any[];
+  public_keys: AnySDKType[];
 }
 
 function createBaseLegacyAminoPubKey(): LegacyAminoPubKey {

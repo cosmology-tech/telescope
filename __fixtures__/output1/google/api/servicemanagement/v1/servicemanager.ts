@@ -530,7 +530,7 @@ export interface GenerateConfigReportRequestSDKType {
    * [google.api.servicemanagement.v1.ConfigSource][google.api.servicemanagement.v1.ConfigSource],
    * and [google.api.Service][google.api.Service]
    */
-  new_config: Any;
+  new_config: AnySDKType;
 
   /**
    * Optional. Service configuration against which the comparison will be done.
@@ -539,7 +539,7 @@ export interface GenerateConfigReportRequestSDKType {
    * [google.api.servicemanagement.v1.ConfigSource][google.api.servicemanagement.v1.ConfigSource],
    * and [google.api.Service][google.api.Service]
    */
-  old_config: Any;
+  old_config: AnySDKType;
 }
 
 /** Response message for GenerateConfigReport method. */

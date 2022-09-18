@@ -553,7 +553,7 @@ export interface ConstantSDKType {
    */
 
   /** @deprecated */
-  duration_value?: Duration;
+  duration_value?: DurationSDKType;
 
   /**
    * protobuf.Timestamp value.

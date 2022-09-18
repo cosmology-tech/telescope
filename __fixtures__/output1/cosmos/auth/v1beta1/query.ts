@@ -45,7 +45,7 @@ export interface QueryAccountsResponse {
  */
 export interface QueryAccountsResponseSDKType {
   /** accounts are the existing accounts */
-  accounts: Any[];
+  accounts: AnySDKType[];
 
   /** pagination defines the pagination in the response. */
   pagination?: PageResponseSDKType;
@@ -90,7 +90,7 @@ export interface QueryAccountResponse {
 /** QueryAccountResponse is the response type for the Query/Account RPC method. */
 export interface QueryAccountResponseSDKType {
   /** account defines the account of the corresponding address. */
-  account: Any;
+  account: AnySDKType;
 }
 
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
@@ -106,7 +106,7 @@ export interface QueryModuleAccountsResponse {
 
 /** QueryModuleAccountsResponse is the response type for the Query/ModuleAccounts RPC method. */
 export interface QueryModuleAccountsResponseSDKType {
-  accounts: Any[];
+  accounts: AnySDKType[];
 }
 
 /** Bech32PrefixRequest is the request type for Bech32Prefix rpc method */

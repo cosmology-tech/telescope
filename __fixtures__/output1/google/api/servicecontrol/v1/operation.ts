@@ -240,7 +240,7 @@ export interface OperationSDKType {
   importance: Operation_ImportanceSDKType;
 
   /** Unimplemented. */
-  extensions: Any[];
+  extensions: AnySDKType[];
 }
 
 function createBaseOperation_LabelsEntry(): Operation_LabelsEntry {

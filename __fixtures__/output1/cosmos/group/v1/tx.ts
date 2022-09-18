@@ -209,7 +209,7 @@ export interface MsgCreateGroupPolicySDKType {
   metadata: string;
 
   /** decision_policy specifies the group policy's decision policy. */
-  decision_policy: Any;
+  decision_policy: AnySDKType;
 }
 
 /** MsgCreateGroupPolicyResponse is the Msg/CreateGroupPolicy response type. */
@@ -287,7 +287,7 @@ export interface MsgCreateGroupWithPolicySDKType {
   group_policy_as_admin: boolean;
 
   /** decision_policy specifies the group policy's decision policy. */
-  decision_policy: Any;
+  decision_policy: AnySDKType;
 }
 
 /** MsgCreateGroupWithPolicyResponse is the Msg/CreateGroupWithPolicy response type. */
@@ -335,7 +335,7 @@ export interface MsgUpdateGroupPolicyDecisionPolicySDKType {
   address: string;
 
   /** decision_policy is the updated group policy's decision policy. */
-  decision_policy: Any;
+  decision_policy: AnySDKType;
 }
 
 /** MsgUpdateGroupPolicyDecisionPolicyResponse is the Msg/UpdateGroupPolicyDecisionPolicy response type. */
@@ -414,7 +414,7 @@ export interface MsgSubmitProposalSDKType {
   metadata: string;
 
   /** messages is a list of `sdk.Msg`s that will be executed if the proposal passes. */
-  messages: Any[];
+  messages: AnySDKType[];
 
   /**
    * exec defines the mode of execution of the proposal,

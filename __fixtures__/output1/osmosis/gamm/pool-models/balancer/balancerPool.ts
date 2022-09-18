@@ -69,7 +69,7 @@ export interface SmoothWeightChangeParamsSDKType {
   start_time: Date;
 
   /** Duration for the weights to change over */
-  duration: Duration;
+  duration: DurationSDKType;
 
   /**
    * The initial pool weights. These are copied from the pool's settings

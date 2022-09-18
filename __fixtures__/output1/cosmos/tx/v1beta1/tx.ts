@@ -200,7 +200,7 @@ export interface SignDocDirectAuxSDKType {
   body_bytes: Uint8Array;
 
   /** public_key is the public key of the signing account. */
-  public_key: Any;
+  public_key: AnySDKType;
 
   /**
    * chain_id is the identifier of the chain this transaction targets.
@@ -274,7 +274,7 @@ export interface TxBodySDKType {
    * is referred to as the primary signer and pays the fee for the whole
    * transaction.
    */
-  messages: Any[];
+  messages: AnySDKType[];
 
   /**
    * memo is any arbitrary note/comment to be added to the transaction.
@@ -294,14 +294,14 @@ export interface TxBodySDKType {
    * when the default options are not sufficient. If any of these are present
    * and can't be handled, the transaction will be rejected
    */
-  extension_options: Any[];
+  extension_options: AnySDKType[];
 
   /**
    * extension_options are arbitrary options that can be added by chains
    * when the default options are not sufficient. If any of these are present
    * and can't be handled, they will be ignored
    */
-  non_critical_extension_options: Any[];
+  non_critical_extension_options: AnySDKType[];
 }
 
 /**
@@ -398,7 +398,7 @@ export interface SignerInfoSDKType {
    * that already exist in state. If unset, the verifier can use the required \
    * signer address for this position and lookup the public key.
    */
-  public_key: Any;
+  public_key: AnySDKType;
 
   /**
    * mode_info describes the signing mode of the signer and is a nested

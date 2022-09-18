@@ -234,7 +234,7 @@ export interface ContractInfoSDKType {
    * Extension is an extension point to store custom metadata within the
    * persistence model.
    */
-  extension: Any;
+  extension: AnySDKType;
 }
 
 /** ContractCodeHistoryEntry metadata to a contract. */

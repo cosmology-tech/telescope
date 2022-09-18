@@ -17,8 +17,8 @@ export interface Params {
 /** Params defines the claim module's parameters. */
 export interface ParamsSDKType {
   airdrop_start_time: Date;
-  duration_until_decay: Duration;
-  duration_of_decay: Duration;
+  duration_until_decay: DurationSDKType;
+  duration_of_decay: DurationSDKType;
 
   /** denom of claimable asset */
   claim_denom: string;

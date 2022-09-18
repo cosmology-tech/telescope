@@ -40,7 +40,7 @@ export interface RetryInfo {
  */
 export interface RetryInfoSDKType {
   /** Clients should wait at least this long between retrying the same request. */
-  retry_delay: Duration;
+  retry_delay: DurationSDKType;
 }
 
 /** Describes additional debugging info. */

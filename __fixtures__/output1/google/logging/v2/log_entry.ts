@@ -229,7 +229,7 @@ export interface LogEntrySDKType {
    * "type.googleapis.com/google.cloud.audit.AuditLog"
    * "type.googleapis.com/google.appengine.logging.v1.RequestLog"
    */
-  proto_payload?: Any;
+  proto_payload?: AnySDKType;
 
   /** The log entry payload, represented as a Unicode string (UTF-8). */
   text_payload?: string;

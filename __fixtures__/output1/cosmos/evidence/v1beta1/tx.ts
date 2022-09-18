@@ -18,7 +18,7 @@ export interface MsgSubmitEvidence {
  */
 export interface MsgSubmitEvidenceSDKType {
   submitter: string;
-  evidence: Any;
+  evidence: AnySDKType;
 }
 
 /** MsgSubmitEvidenceResponse defines the Msg/SubmitEvidence response type. */

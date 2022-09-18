@@ -22,7 +22,7 @@ export interface BaseAccount {
  */
 export interface BaseAccountSDKType {
   address: string;
-  pub_key: Any;
+  pub_key: AnySDKType;
   account_number: Long;
   sequence: Long;
 }

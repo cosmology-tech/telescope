@@ -89,7 +89,7 @@ export interface PlanSDKType {
    */
 
   /** @deprecated */
-  upgraded_client_state: Any;
+  upgraded_client_state: AnySDKType;
 }
 
 /**

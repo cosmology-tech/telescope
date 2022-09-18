@@ -81,7 +81,7 @@ export interface PeriodicAllowanceSDKType {
    * period specifies the time duration in which period_spend_limit coins can
    * be spent before that allowance is reset
    */
-  period: Duration;
+  period: DurationSDKType;
 
   /**
    * period_spend_limit specifies the maximum number of coins that can be spent
@@ -112,7 +112,7 @@ export interface AllowedMsgAllowance {
 /** AllowedMsgAllowance creates allowance only for specified message types. */
 export interface AllowedMsgAllowanceSDKType {
   /** allowance can be any of basic and periodic fee allowance. */
-  allowance: Any;
+  allowance: AnySDKType;
 
   /** allowed_messages are the messages for which the grantee has the access. */
   allowed_messages: string[];
@@ -139,7 +139,7 @@ export interface GrantSDKType {
   grantee: string;
 
   /** allowance can be any of basic, periodic, allowed fee allowance. */
-  allowance: Any;
+  allowance: AnySDKType;
 }
 
 function createBaseBasicAllowance(): BasicAllowance {

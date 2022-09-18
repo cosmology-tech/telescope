@@ -31,7 +31,7 @@ export interface RecordSDKType {
   name: string;
 
   /** pub_key represents a public key in any format */
-  pub_key: Any;
+  pub_key: AnySDKType;
 
   /** local stores the public information about a locally stored key */
   local?: Record_LocalSDKType;
@@ -60,7 +60,7 @@ export interface Record_Local {
  * Local item
  */
 export interface Record_LocalSDKType {
-  priv_key: Any;
+  priv_key: AnySDKType;
   priv_key_type: string;
 }
 

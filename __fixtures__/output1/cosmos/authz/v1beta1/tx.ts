@@ -63,7 +63,7 @@ export interface MsgExecSDKType {
    * The x/authz will try to find a grant matching (msg.signers[0], grantee, MsgTypeURL(msg))
    * triple and validate it.
    */
-  msgs: Any[];
+  msgs: AnySDKType[];
 }
 
 /** MsgGrantResponse defines the Msg/MsgGrant response type. */
