@@ -17,6 +17,19 @@ export enum GetServiceConfigRequest_ConfigView {
   FULL = 1,
   UNRECOGNIZED = -1,
 }
+export enum GetServiceConfigRequest_ConfigViewSDKType {
+  /** BASIC - Server response includes all fields except SourceInfo. */
+  BASIC = 0,
+
+  /**
+   * FULL - Server response includes all fields including SourceInfo.
+   * SourceFiles are of type 'google.api.servicemanagement.v1.ConfigFile'
+   * and are only available for configs created using the
+   * SubmitConfigSource method.
+   */
+  FULL = 1,
+  UNRECOGNIZED = -1,
+}
 export function getServiceConfigRequest_ConfigViewFromJSON(object: any): GetServiceConfigRequest_ConfigView {
   switch (object) {
     case 0:

@@ -9,7 +9,7 @@ import { Resource, ResourceSDKType } from "./resource";
 import { ResourceUnits, ResourceUnitsSDKType } from "../../base/v1beta2/resourceunits";
 import { CPU, CPUSDKType, Memory, MemorySDKType, Storage, StorageSDKType } from "../../base/v1beta2/resource";
 import { ResourceValue, ResourceValueSDKType } from "../../base/v1beta2/resourcevalue";
-import { Endpoint, EndpointSDKType, endpoint_KindFromJSON, endpoint_KindFromJSONSDKType } from "../../base/v1beta2/endpoint";
+import { Endpoint, EndpointSDKType, endpoint_KindFromJSON } from "../../base/v1beta2/endpoint";
 import { MsgCreateDeployment, MsgCreateDeploymentSDKType, MsgDepositDeployment, MsgDepositDeploymentSDKType, MsgUpdateDeployment, MsgUpdateDeploymentSDKType, MsgCloseDeployment, MsgCloseDeploymentSDKType } from "./deploymentmsg";
 import { MsgCloseGroup, MsgCloseGroupSDKType, MsgPauseGroup, MsgPauseGroupSDKType, MsgStartGroup, MsgStartGroupSDKType } from "./groupmsg";
 export interface AminoMsgCreateDeployment extends AminoMsg {

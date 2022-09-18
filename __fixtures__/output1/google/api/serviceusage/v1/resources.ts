@@ -29,6 +29,26 @@ export enum State {
   ENABLED = 2,
   UNRECOGNIZED = -1,
 }
+
+/** Whether or not a service has been enabled for use by a consumer. */
+export enum StateSDKType {
+  /**
+   * STATE_UNSPECIFIED - The default value, which indicates that the enabled state of the service
+   * is unspecified or not meaningful. Currently, all consumers other than
+   * projects (such as folders and organizations) are always in this state.
+   */
+  STATE_UNSPECIFIED = 0,
+
+  /**
+   * DISABLED - The service cannot be used by this consumer. It has either been explicitly
+   * disabled, or has never been enabled.
+   */
+  DISABLED = 1,
+
+  /** ENABLED - The service has been explicitly enabled for use by this consumer. */
+  ENABLED = 2,
+  UNRECOGNIZED = -1,
+}
 export function stateFromJSON(object: any): State {
   switch (object) {
     case 0:

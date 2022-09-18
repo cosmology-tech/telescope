@@ -1,5 +1,5 @@
 import { Timestamp, TimestampSDKType } from "../../../protobuf/timestamp";
-import { LogSeverity, LogSeveritySDKType, logSeverityFromJSON, logSeverityFromJSONSDKType, logSeverityToJSON, logSeverityToJSONSDKType } from "../../../logging/type/log_severity";
+import { LogSeverity, LogSeveritySDKType, logSeverityFromJSON, logSeverityToJSON } from "../../../logging/type/log_severity";
 import { HttpRequest, HttpRequestSDKType } from "./http_request";
 import { Any, AnySDKType } from "../../../protobuf/any";
 import { Struct, StructSDKType } from "../../../protobuf/struct";

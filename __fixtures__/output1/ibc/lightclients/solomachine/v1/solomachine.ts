@@ -41,6 +41,43 @@ export enum DataType {
   DATA_TYPE_HEADER = 9,
   UNRECOGNIZED = -1,
 }
+
+/**
+ * DataType defines the type of solo machine proof being created. This is done
+ * to preserve uniqueness of different data sign byte encodings.
+ */
+export enum DataTypeSDKType {
+  /** DATA_TYPE_UNINITIALIZED_UNSPECIFIED - Default State */
+  DATA_TYPE_UNINITIALIZED_UNSPECIFIED = 0,
+
+  /** DATA_TYPE_CLIENT_STATE - Data type for client state verification */
+  DATA_TYPE_CLIENT_STATE = 1,
+
+  /** DATA_TYPE_CONSENSUS_STATE - Data type for consensus state verification */
+  DATA_TYPE_CONSENSUS_STATE = 2,
+
+  /** DATA_TYPE_CONNECTION_STATE - Data type for connection state verification */
+  DATA_TYPE_CONNECTION_STATE = 3,
+
+  /** DATA_TYPE_CHANNEL_STATE - Data type for channel state verification */
+  DATA_TYPE_CHANNEL_STATE = 4,
+
+  /** DATA_TYPE_PACKET_COMMITMENT - Data type for packet commitment verification */
+  DATA_TYPE_PACKET_COMMITMENT = 5,
+
+  /** DATA_TYPE_PACKET_ACKNOWLEDGEMENT - Data type for packet acknowledgement verification */
+  DATA_TYPE_PACKET_ACKNOWLEDGEMENT = 6,
+
+  /** DATA_TYPE_PACKET_RECEIPT_ABSENCE - Data type for packet receipt absence verification */
+  DATA_TYPE_PACKET_RECEIPT_ABSENCE = 7,
+
+  /** DATA_TYPE_NEXT_SEQUENCE_RECV - Data type for next sequence recv verification */
+  DATA_TYPE_NEXT_SEQUENCE_RECV = 8,
+
+  /** DATA_TYPE_HEADER - Data type for header verification */
+  DATA_TYPE_HEADER = 9,
+  UNRECOGNIZED = -1,
+}
 export function dataTypeFromJSON(object: any): DataType {
   switch (object) {
     case 0:

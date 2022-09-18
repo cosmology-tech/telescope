@@ -18,7 +18,7 @@ export class LCDQueryClient extends LCDClient {
   }
 
   /* Orders queries orders with filters */
-  async orders(params: QueryOrdersRequest): Promise<QueryOrdersResponse> {
+  async orders(params: QueryOrdersRequest): Promise<QueryOrdersResponseSDKType> {
     const options: any = {
       params: {}
     };
@@ -36,7 +36,7 @@ export class LCDQueryClient extends LCDClient {
   }
 
   /* Order queries order details */
-  async order(params: QueryOrderRequest): Promise<QueryOrderResponse> {
+  async order(params: QueryOrderRequest): Promise<QueryOrderResponseSDKType> {
     const options: any = {
       params: {}
     };
@@ -50,7 +50,7 @@ export class LCDQueryClient extends LCDClient {
   }
 
   /* Bids queries bids with filters */
-  async bids(params: QueryBidsRequest): Promise<QueryBidsResponse> {
+  async bids(params: QueryBidsRequest): Promise<QueryBidsResponseSDKType> {
     const options: any = {
       params: {}
     };
@@ -68,7 +68,7 @@ export class LCDQueryClient extends LCDClient {
   }
 
   /* Bid queries bid details */
-  async bid(params: QueryBidRequest): Promise<QueryBidResponse> {
+  async bid(params: QueryBidRequest): Promise<QueryBidResponseSDKType> {
     const options: any = {
       params: {}
     };
@@ -82,7 +82,7 @@ export class LCDQueryClient extends LCDClient {
   }
 
   /* Leases queries leases with filters */
-  async leases(params: QueryLeasesRequest): Promise<QueryLeasesResponse> {
+  async leases(params: QueryLeasesRequest): Promise<QueryLeasesResponseSDKType> {
     const options: any = {
       params: {}
     };
@@ -100,7 +100,7 @@ export class LCDQueryClient extends LCDClient {
   }
 
   /* Lease queries lease details */
-  async lease(params: QueryLeaseRequest): Promise<QueryLeaseResponse> {
+  async lease(params: QueryLeaseRequest): Promise<QueryLeaseResponseSDKType> {
     const options: any = {
       params: {}
     };

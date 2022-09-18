@@ -7,22 +7,22 @@ import { QueryGaugeIdsRequest, QueryGaugeIdsRequestSDKType, QueryGaugeIdsRespons
 
 /** Query defines the RPC service */
 export interface Query {
-  gaugeIds(request: QueryGaugeIdsRequest): Promise<QueryGaugeIdsResponse>;
+  gaugeIds(request: QueryGaugeIdsRequest): Promise<QueryGaugeIdsResponseSDKType>;
   /*GaugeIds takes the pool id and returns the matching gauge ids and durations*/
 
-  distrInfo(request: QueryDistrInfoRequest): Promise<QueryDistrInfoResponse>;
+  distrInfo(request: QueryDistrInfoRequest): Promise<QueryDistrInfoResponseSDKType>;
   /*null*/
 
-  params(request: QueryParamsRequest): Promise<QueryParamsResponse>;
+  params(request: QueryParamsRequest): Promise<QueryParamsResponseSDKType>;
   /*null*/
 
-  lockableDurations(request: QueryLockableDurationsRequest): Promise<QueryLockableDurationsResponse>;
+  lockableDurations(request: QueryLockableDurationsRequest): Promise<QueryLockableDurationsResponseSDKType>;
   /*null*/
 
-  incentivizedPools(request: QueryIncentivizedPoolsRequest): Promise<QueryIncentivizedPoolsResponse>;
+  incentivizedPools(request: QueryIncentivizedPoolsRequest): Promise<QueryIncentivizedPoolsResponseSDKType>;
   /*null*/
 
-  externalIncentiveGauges(request: QueryExternalIncentiveGaugesRequest): Promise<QueryExternalIncentiveGaugesResponse>;
+  externalIncentiveGauges(request: QueryExternalIncentiveGaugesRequest): Promise<QueryExternalIncentiveGaugesResponseSDKType>;
   /*null*/
 
 }
@@ -39,37 +39,37 @@ export class QueryClientImpl implements Query {
     this.externalIncentiveGauges = this.externalIncentiveGauges.bind(this);
   }
 
-  gaugeIds(request: QueryGaugeIdsRequest): Promise<QueryGaugeIdsResponse> {
+  gaugeIds(request: QueryGaugeIdsRequest): Promise<QueryGaugeIdsResponseSDKType> {
     const data = QueryGaugeIdsRequest.encode(request).finish();
     const promise = this.rpc.request("osmosis.poolincentives.v1beta1.Query", "GaugeIds", data);
     return promise.then(data => QueryGaugeIdsResponse.decode(new _m0.Reader(data)));
   }
 
-  distrInfo(request: QueryDistrInfoRequest): Promise<QueryDistrInfoResponse> {
+  distrInfo(request: QueryDistrInfoRequest): Promise<QueryDistrInfoResponseSDKType> {
     const data = QueryDistrInfoRequest.encode(request).finish();
     const promise = this.rpc.request("osmosis.poolincentives.v1beta1.Query", "DistrInfo", data);
     return promise.then(data => QueryDistrInfoResponse.decode(new _m0.Reader(data)));
   }
 
-  params(request: QueryParamsRequest): Promise<QueryParamsResponse> {
+  params(request: QueryParamsRequest): Promise<QueryParamsResponseSDKType> {
     const data = QueryParamsRequest.encode(request).finish();
     const promise = this.rpc.request("osmosis.poolincentives.v1beta1.Query", "Params", data);
     return promise.then(data => QueryParamsResponse.decode(new _m0.Reader(data)));
   }
 
-  lockableDurations(request: QueryLockableDurationsRequest): Promise<QueryLockableDurationsResponse> {
+  lockableDurations(request: QueryLockableDurationsRequest): Promise<QueryLockableDurationsResponseSDKType> {
     const data = QueryLockableDurationsRequest.encode(request).finish();
     const promise = this.rpc.request("osmosis.poolincentives.v1beta1.Query", "LockableDurations", data);
     return promise.then(data => QueryLockableDurationsResponse.decode(new _m0.Reader(data)));
   }
 
-  incentivizedPools(request: QueryIncentivizedPoolsRequest): Promise<QueryIncentivizedPoolsResponse> {
+  incentivizedPools(request: QueryIncentivizedPoolsRequest): Promise<QueryIncentivizedPoolsResponseSDKType> {
     const data = QueryIncentivizedPoolsRequest.encode(request).finish();
     const promise = this.rpc.request("osmosis.poolincentives.v1beta1.Query", "IncentivizedPools", data);
     return promise.then(data => QueryIncentivizedPoolsResponse.decode(new _m0.Reader(data)));
   }
 
-  externalIncentiveGauges(request: QueryExternalIncentiveGaugesRequest): Promise<QueryExternalIncentiveGaugesResponse> {
+  externalIncentiveGauges(request: QueryExternalIncentiveGaugesRequest): Promise<QueryExternalIncentiveGaugesResponseSDKType> {
     const data = QueryExternalIncentiveGaugesRequest.encode(request).finish();
     const promise = this.rpc.request("osmosis.poolincentives.v1beta1.Query", "ExternalIncentiveGauges", data);
     return promise.then(data => QueryExternalIncentiveGaugesResponse.decode(new _m0.Reader(data)));

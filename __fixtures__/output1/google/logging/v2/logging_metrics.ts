@@ -1,5 +1,5 @@
 import { MetricDescriptor, MetricDescriptorSDKType } from "../../api/metric";
-import { Distribution_BucketOptions, Distribution_BucketOptionsSDKType } from "../../api/distribution";
+import { Distribution_BucketOptions } from "../../api/distribution";
 import { Timestamp, TimestampSDKType } from "../../protobuf/timestamp";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, toTimestamp, fromTimestamp, isObject, fromJsonTimestamp } from "@osmonauts/helpers";
@@ -7,6 +7,16 @@ export const protobufPackage = "google.logging.v2";
 
 /** Logging API version. */
 export enum LogMetric_ApiVersion {
+  /** V2 - Logging API v2. */
+  V2 = 0,
+
+  /** V1 - Logging API v1. */
+  V1 = 1,
+  UNRECOGNIZED = -1,
+}
+
+/** Logging API version. */
+export enum LogMetric_ApiVersionSDKType {
   /** V2 - Logging API v2. */
   V2 = 0,
 

@@ -7,6 +7,11 @@ export enum SuperfluidAssetType {
   SuperfluidAssetTypeLPShare = 1,
   UNRECOGNIZED = -1,
 }
+export enum SuperfluidAssetTypeSDKType {
+  SuperfluidAssetTypeNative = 0,
+  SuperfluidAssetTypeLPShare = 1,
+  UNRECOGNIZED = -1,
+}
 export function superfluidAssetTypeFromJSON(object: any): SuperfluidAssetType {
   switch (object) {
     case 0:

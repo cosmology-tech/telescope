@@ -2,7 +2,7 @@ import { MonitoredResource, MonitoredResourceSDKType } from "../../api/monitored
 import { Any, AnySDKType } from "../../protobuf/any";
 import { Struct, StructSDKType } from "../../protobuf/struct";
 import { Timestamp, TimestampSDKType } from "../../protobuf/timestamp";
-import { LogSeverity, LogSeveritySDKType, logSeverityFromJSON, logSeverityFromJSONSDKType, logSeverityToJSON, logSeverityToJSONSDKType } from "../type/log_severity";
+import { LogSeverity, LogSeveritySDKType, logSeverityFromJSON, logSeverityToJSON } from "../type/log_severity";
 import { HttpRequest, HttpRequestSDKType } from "../type/http_request";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, toTimestamp, fromTimestamp, fromJsonTimestamp, isObject, Long } from "@osmonauts/helpers";

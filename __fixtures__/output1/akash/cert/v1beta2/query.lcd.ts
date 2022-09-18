@@ -15,7 +15,7 @@ export class LCDQueryClient extends LCDClient {
   }
 
   /* Certificates queries certificates */
-  async certificates(params: QueryCertificatesRequest): Promise<QueryCertificatesResponse> {
+  async certificates(params: QueryCertificatesRequest): Promise<QueryCertificatesResponseSDKType> {
     const options: any = {
       params: {}
     };

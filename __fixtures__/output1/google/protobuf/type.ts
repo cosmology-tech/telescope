@@ -64,6 +64,67 @@ export enum Field_Kind {
   TYPE_SINT64 = 18,
   UNRECOGNIZED = -1,
 }
+
+/** Basic field types. */
+export enum Field_KindSDKType {
+  /** TYPE_UNKNOWN - Field type unknown. */
+  TYPE_UNKNOWN = 0,
+
+  /** TYPE_DOUBLE - Field type double. */
+  TYPE_DOUBLE = 1,
+
+  /** TYPE_FLOAT - Field type float. */
+  TYPE_FLOAT = 2,
+
+  /** TYPE_INT64 - Field type int64. */
+  TYPE_INT64 = 3,
+
+  /** TYPE_UINT64 - Field type uint64. */
+  TYPE_UINT64 = 4,
+
+  /** TYPE_INT32 - Field type int32. */
+  TYPE_INT32 = 5,
+
+  /** TYPE_FIXED64 - Field type fixed64. */
+  TYPE_FIXED64 = 6,
+
+  /** TYPE_FIXED32 - Field type fixed32. */
+  TYPE_FIXED32 = 7,
+
+  /** TYPE_BOOL - Field type bool. */
+  TYPE_BOOL = 8,
+
+  /** TYPE_STRING - Field type string. */
+  TYPE_STRING = 9,
+
+  /** TYPE_GROUP - Field type group. Proto2 syntax only, and deprecated. */
+  TYPE_GROUP = 10,
+
+  /** TYPE_MESSAGE - Field type message. */
+  TYPE_MESSAGE = 11,
+
+  /** TYPE_BYTES - Field type bytes. */
+  TYPE_BYTES = 12,
+
+  /** TYPE_UINT32 - Field type uint32. */
+  TYPE_UINT32 = 13,
+
+  /** TYPE_ENUM - Field type enum. */
+  TYPE_ENUM = 14,
+
+  /** TYPE_SFIXED32 - Field type sfixed32. */
+  TYPE_SFIXED32 = 15,
+
+  /** TYPE_SFIXED64 - Field type sfixed64. */
+  TYPE_SFIXED64 = 16,
+
+  /** TYPE_SINT32 - Field type sint32. */
+  TYPE_SINT32 = 17,
+
+  /** TYPE_SINT64 - Field type sint64. */
+  TYPE_SINT64 = 18,
+  UNRECOGNIZED = -1,
+}
 export function field_KindFromJSON(object: any): Field_Kind {
   switch (object) {
     case 0:
@@ -227,6 +288,22 @@ export enum Field_Cardinality {
   CARDINALITY_REPEATED = 3,
   UNRECOGNIZED = -1,
 }
+
+/** Whether a field is optional, required, or repeated. */
+export enum Field_CardinalitySDKType {
+  /** CARDINALITY_UNKNOWN - For fields with unknown cardinality. */
+  CARDINALITY_UNKNOWN = 0,
+
+  /** CARDINALITY_OPTIONAL - For optional fields. */
+  CARDINALITY_OPTIONAL = 1,
+
+  /** CARDINALITY_REQUIRED - For required fields. Proto2 syntax only. */
+  CARDINALITY_REQUIRED = 2,
+
+  /** CARDINALITY_REPEATED - For repeated fields. */
+  CARDINALITY_REPEATED = 3,
+  UNRECOGNIZED = -1,
+}
 export function field_CardinalityFromJSON(object: any): Field_Cardinality {
   switch (object) {
     case 0:
@@ -272,6 +349,16 @@ export function field_CardinalityToJSON(object: Field_Cardinality): string {
 
 /** The syntax in which a protocol buffer element is defined. */
 export enum Syntax {
+  /** SYNTAX_PROTO2 - Syntax `proto2`. */
+  SYNTAX_PROTO2 = 0,
+
+  /** SYNTAX_PROTO3 - Syntax `proto3`. */
+  SYNTAX_PROTO3 = 1,
+  UNRECOGNIZED = -1,
+}
+
+/** The syntax in which a protocol buffer element is defined. */
+export enum SyntaxSDKType {
   /** SYNTAX_PROTO2 - Syntax `proto2`. */
   SYNTAX_PROTO2 = 0,
 

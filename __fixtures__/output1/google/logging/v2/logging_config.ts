@@ -16,6 +16,19 @@ export enum LogSink_VersionFormat {
   V1 = 2,
   UNRECOGNIZED = -1,
 }
+
+/** Deprecated. This is unused. */
+export enum LogSink_VersionFormatSDKType {
+  /** VERSION_FORMAT_UNSPECIFIED - An unspecified format version that will default to V2. */
+  VERSION_FORMAT_UNSPECIFIED = 0,
+
+  /** V2 - `LogEntry` version 2 format. */
+  V2 = 1,
+
+  /** V1 - `LogEntry` version 1 format. */
+  V1 = 2,
+  UNRECOGNIZED = -1,
+}
 export function logSink_VersionFormatFromJSON(object: any): LogSink_VersionFormat {
   switch (object) {
     case 0:
@@ -54,6 +67,25 @@ export function logSink_VersionFormatToJSON(object: LogSink_VersionFormat): stri
 
 /** LogBucket lifecycle states. */
 export enum LifecycleState {
+  /**
+   * LIFECYCLE_STATE_UNSPECIFIED - Unspecified state. This is only used/useful for distinguishing unset
+   * values.
+   */
+  LIFECYCLE_STATE_UNSPECIFIED = 0,
+
+  /** ACTIVE - The normal and active state. */
+  ACTIVE = 1,
+
+  /**
+   * DELETE_REQUESTED - The resource has been marked for deletion by the user. For some resources
+   * (e.g. buckets), this can be reversed by an un-delete operation.
+   */
+  DELETE_REQUESTED = 2,
+  UNRECOGNIZED = -1,
+}
+
+/** LogBucket lifecycle states. */
+export enum LifecycleStateSDKType {
   /**
    * LIFECYCLE_STATE_UNSPECIFIED - Unspecified state. This is only used/useful for distinguishing unset
    * values.
@@ -114,6 +146,37 @@ export function lifecycleStateToJSON(object: LifecycleState): string {
  * operation is finished and the final result is available.
  */
 export enum OperationState {
+  /** OPERATION_STATE_UNSPECIFIED - Should not be used. */
+  OPERATION_STATE_UNSPECIFIED = 0,
+
+  /** OPERATION_STATE_SCHEDULED - The operation is scheduled. */
+  OPERATION_STATE_SCHEDULED = 1,
+
+  /** OPERATION_STATE_WAITING_FOR_PERMISSIONS - Waiting for necessary permissions. */
+  OPERATION_STATE_WAITING_FOR_PERMISSIONS = 2,
+
+  /** OPERATION_STATE_RUNNING - The operation is running. */
+  OPERATION_STATE_RUNNING = 3,
+
+  /** OPERATION_STATE_SUCCEEDED - The operation was completed successfully. */
+  OPERATION_STATE_SUCCEEDED = 4,
+
+  /** OPERATION_STATE_FAILED - The operation failed. */
+  OPERATION_STATE_FAILED = 5,
+
+  /** OPERATION_STATE_CANCELLED - The operation was cancelled by the user. */
+  OPERATION_STATE_CANCELLED = 6,
+  UNRECOGNIZED = -1,
+}
+
+/**
+ * List of different operation states.
+ * High level state of the operation. This is used to report the job's
+ * current state to the user. Once a long running operation is created,
+ * the current state of the operation can be queried even before the
+ * operation is finished and the final result is available.
+ */
+export enum OperationStateSDKType {
   /** OPERATION_STATE_UNSPECIFIED - Should not be used. */
   OPERATION_STATE_UNSPECIFIED = 0,
 

@@ -5,13 +5,13 @@ import { MsgCreateProvider, MsgCreateProviderSDKType, MsgCreateProviderResponse,
 
 /** Msg defines the RPC service */
 export interface Msg {
-  createProvider(request: MsgCreateProvider): Promise<MsgCreateProviderResponse>;
+  createProvider(request: MsgCreateProvider): Promise<MsgCreateProviderResponseSDKType>;
   /*CreateProvider defines a method that creates a provider given the proper inputs*/
 
-  updateProvider(request: MsgUpdateProvider): Promise<MsgUpdateProviderResponse>;
+  updateProvider(request: MsgUpdateProvider): Promise<MsgUpdateProviderResponseSDKType>;
   /*UpdateProvider defines a method that updates a provider given the proper inputs*/
 
-  deleteProvider(request: MsgDeleteProvider): Promise<MsgDeleteProviderResponse>;
+  deleteProvider(request: MsgDeleteProvider): Promise<MsgDeleteProviderResponseSDKType>;
   /*DeleteProvider defines a method that deletes a provider given the proper inputs*/
 
 }
@@ -25,19 +25,19 @@ export class MsgClientImpl implements Msg {
     this.deleteProvider = this.deleteProvider.bind(this);
   }
 
-  createProvider(request: MsgCreateProvider): Promise<MsgCreateProviderResponse> {
+  createProvider(request: MsgCreateProvider): Promise<MsgCreateProviderResponseSDKType> {
     const data = MsgCreateProvider.encode(request).finish();
     const promise = this.rpc.request("akash.provider.v1beta1.Msg", "CreateProvider", data);
     return promise.then(data => MsgCreateProviderResponse.decode(new _m0.Reader(data)));
   }
 
-  updateProvider(request: MsgUpdateProvider): Promise<MsgUpdateProviderResponse> {
+  updateProvider(request: MsgUpdateProvider): Promise<MsgUpdateProviderResponseSDKType> {
     const data = MsgUpdateProvider.encode(request).finish();
     const promise = this.rpc.request("akash.provider.v1beta1.Msg", "UpdateProvider", data);
     return promise.then(data => MsgUpdateProviderResponse.decode(new _m0.Reader(data)));
   }
 
-  deleteProvider(request: MsgDeleteProvider): Promise<MsgDeleteProviderResponse> {
+  deleteProvider(request: MsgDeleteProvider): Promise<MsgDeleteProviderResponseSDKType> {
     const data = MsgDeleteProvider.encode(request).finish();
     const promise = this.rpc.request("akash.provider.v1beta1.Msg", "DeleteProvider", data);
     return promise.then(data => MsgDeleteProviderResponse.decode(new _m0.Reader(data)));

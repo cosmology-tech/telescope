@@ -22,6 +22,25 @@ export enum Bid_State {
   closed = 4,
   UNRECOGNIZED = -1,
 }
+
+/** State is an enum which refers to state of bid */
+export enum Bid_StateSDKType {
+  /** invalid - Prefix should start with 0 in enum. So declaring dummy state */
+  invalid = 0,
+
+  /** open - BidOpen denotes state for bid open */
+  open = 1,
+
+  /** active - BidMatched denotes state for bid open */
+  active = 2,
+
+  /** lost - BidLost denotes state for bid lost */
+  lost = 3,
+
+  /** closed - BidClosed denotes state for bid closed */
+  closed = 4,
+  UNRECOGNIZED = -1,
+}
 export function bid_StateFromJSON(object: any): Bid_State {
   switch (object) {
     case 0:

@@ -24,6 +24,29 @@ export enum ResourceDescriptor_History {
   FUTURE_MULTI_PATTERN = 2,
   UNRECOGNIZED = -1,
 }
+
+/**
+ * A description of the historical or future-looking state of the
+ * resource pattern.
+ */
+export enum ResourceDescriptor_HistorySDKType {
+  /** HISTORY_UNSPECIFIED - The "unset" value. */
+  HISTORY_UNSPECIFIED = 0,
+
+  /**
+   * ORIGINALLY_SINGLE_PATTERN - The resource originally had one pattern and launched as such, and
+   * additional patterns were added later.
+   */
+  ORIGINALLY_SINGLE_PATTERN = 1,
+
+  /**
+   * FUTURE_MULTI_PATTERN - The resource has one pattern, but the API owner expects to add more
+   * later. (This is the inverse of ORIGINALLY_SINGLE_PATTERN, and prevents
+   * that from being necessary once there are multiple patterns.)
+   */
+  FUTURE_MULTI_PATTERN = 2,
+  UNRECOGNIZED = -1,
+}
 export function resourceDescriptor_HistoryFromJSON(object: any): ResourceDescriptor_History {
   switch (object) {
     case 0:
@@ -62,6 +85,25 @@ export function resourceDescriptor_HistoryToJSON(object: ResourceDescriptor_Hist
 
 /** A flag representing a specific style that a resource claims to conform to. */
 export enum ResourceDescriptor_Style {
+  /** STYLE_UNSPECIFIED - The unspecified value. Do not use. */
+  STYLE_UNSPECIFIED = 0,
+
+  /**
+   * DECLARATIVE_FRIENDLY - This resource is intended to be "declarative-friendly".
+   * 
+   * Declarative-friendly resources must be more strictly consistent, and
+   * setting this to true communicates to tools that this resource should
+   * adhere to declarative-friendly expectations.
+   * 
+   * Note: This is used by the API linter (linter.aip.dev) to enable
+   * additional checks.
+   */
+  DECLARATIVE_FRIENDLY = 1,
+  UNRECOGNIZED = -1,
+}
+
+/** A flag representing a specific style that a resource claims to conform to. */
+export enum ResourceDescriptor_StyleSDKType {
   /** STYLE_UNSPECIFIED - The unspecified value. Do not use. */
   STYLE_UNSPECIFIED = 0,
 

@@ -1,12 +1,49 @@
 import { SourceInfo, SourceInfoSDKType, Expr, ExprSDKType, Constant, ConstantSDKType } from "./syntax";
 import { Empty, EmptySDKType } from "../../../protobuf/empty";
-import { NullValue, NullValueSDKType, nullValueFromJSON, nullValueFromJSONSDKType, nullValueToJSON, nullValueToJSONSDKType } from "../../../protobuf/struct";
+import { NullValue, NullValueSDKType, nullValueFromJSON, nullValueToJSON } from "../../../protobuf/struct";
 import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, DeepPartial, isObject } from "@osmonauts/helpers";
 export const protobufPackage = "google.api.expr.v1alpha1";
 
 /** CEL primitive types. */
 export enum Type_PrimitiveType {
+  /** PRIMITIVE_TYPE_UNSPECIFIED - Unspecified type. */
+  PRIMITIVE_TYPE_UNSPECIFIED = 0,
+
+  /** BOOL - Boolean type. */
+  BOOL = 1,
+
+  /**
+   * INT64 - Int64 type.
+   * 
+   * Proto-based integer values are widened to int64.
+   */
+  INT64 = 2,
+
+  /**
+   * UINT64 - Uint64 type.
+   * 
+   * Proto-based unsigned integer values are widened to uint64.
+   */
+  UINT64 = 3,
+
+  /**
+   * DOUBLE - Double type.
+   * 
+   * Proto-based float values are widened to double values.
+   */
+  DOUBLE = 4,
+
+  /** STRING - String type. */
+  STRING = 5,
+
+  /** BYTES - Bytes type. */
+  BYTES = 6,
+  UNRECOGNIZED = -1,
+}
+
+/** CEL primitive types. */
+export enum Type_PrimitiveTypeSDKType {
   /** PRIMITIVE_TYPE_UNSPECIFIED - Unspecified type. */
   PRIMITIVE_TYPE_UNSPECIFIED = 0,
 
@@ -107,6 +144,28 @@ export function type_PrimitiveTypeToJSON(object: Type_PrimitiveType): string {
 
 /** Well-known protobuf types treated with first-class support in CEL. */
 export enum Type_WellKnownType {
+  /** WELL_KNOWN_TYPE_UNSPECIFIED - Unspecified type. */
+  WELL_KNOWN_TYPE_UNSPECIFIED = 0,
+
+  /**
+   * ANY - Well-known protobuf.Any type.
+   * 
+   * Any types are a polymorphic message type. During type-checking they are
+   * treated like `DYN` types, but at runtime they are resolved to a specific
+   * message type specified at evaluation time.
+   */
+  ANY = 1,
+
+  /** TIMESTAMP - Well-known protobuf.Timestamp type, internally referenced as `timestamp`. */
+  TIMESTAMP = 2,
+
+  /** DURATION - Well-known protobuf.Duration type, internally referenced as `duration`. */
+  DURATION = 3,
+  UNRECOGNIZED = -1,
+}
+
+/** Well-known protobuf types treated with first-class support in CEL. */
+export enum Type_WellKnownTypeSDKType {
   /** WELL_KNOWN_TYPE_UNSPECIFIED - Unspecified type. */
   WELL_KNOWN_TYPE_UNSPECIFIED = 0,
 

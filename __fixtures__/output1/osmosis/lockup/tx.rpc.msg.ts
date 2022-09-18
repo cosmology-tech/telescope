@@ -7,16 +7,16 @@ import { MsgLockTokens, MsgLockTokensSDKType, MsgLockTokensResponse, MsgLockToke
 
 /** Msg defines the RPC service */
 export interface Msg {
-  lockTokens(request: MsgLockTokens): Promise<MsgLockTokensResponse>;
+  lockTokens(request: MsgLockTokens): Promise<MsgLockTokensResponseSDKType>;
   /*LockTokens lock tokens*/
 
-  beginUnlockingAll(request: MsgBeginUnlockingAll): Promise<MsgBeginUnlockingAllResponse>;
+  beginUnlockingAll(request: MsgBeginUnlockingAll): Promise<MsgBeginUnlockingAllResponseSDKType>;
   /*BeginUnlockingAll begin unlocking all tokens*/
 
-  beginUnlocking(request: MsgBeginUnlocking): Promise<MsgBeginUnlockingResponse>;
+  beginUnlocking(request: MsgBeginUnlocking): Promise<MsgBeginUnlockingResponseSDKType>;
   /*MsgBeginUnlocking begins unlocking tokens by lock ID*/
 
-  extendLockup(request: MsgExtendLockup): Promise<MsgExtendLockupResponse>;
+  extendLockup(request: MsgExtendLockup): Promise<MsgExtendLockupResponseSDKType>;
   /*MsgEditLockup edits the existing lockups by lock ID*/
 
 }
@@ -31,25 +31,25 @@ export class MsgClientImpl implements Msg {
     this.extendLockup = this.extendLockup.bind(this);
   }
 
-  lockTokens(request: MsgLockTokens): Promise<MsgLockTokensResponse> {
+  lockTokens(request: MsgLockTokens): Promise<MsgLockTokensResponseSDKType> {
     const data = MsgLockTokens.encode(request).finish();
     const promise = this.rpc.request("osmosis.lockup.Msg", "LockTokens", data);
     return promise.then(data => MsgLockTokensResponse.decode(new _m0.Reader(data)));
   }
 
-  beginUnlockingAll(request: MsgBeginUnlockingAll): Promise<MsgBeginUnlockingAllResponse> {
+  beginUnlockingAll(request: MsgBeginUnlockingAll): Promise<MsgBeginUnlockingAllResponseSDKType> {
     const data = MsgBeginUnlockingAll.encode(request).finish();
     const promise = this.rpc.request("osmosis.lockup.Msg", "BeginUnlockingAll", data);
     return promise.then(data => MsgBeginUnlockingAllResponse.decode(new _m0.Reader(data)));
   }
 
-  beginUnlocking(request: MsgBeginUnlocking): Promise<MsgBeginUnlockingResponse> {
+  beginUnlocking(request: MsgBeginUnlocking): Promise<MsgBeginUnlockingResponseSDKType> {
     const data = MsgBeginUnlocking.encode(request).finish();
     const promise = this.rpc.request("osmosis.lockup.Msg", "BeginUnlocking", data);
     return promise.then(data => MsgBeginUnlockingResponse.decode(new _m0.Reader(data)));
   }
 
-  extendLockup(request: MsgExtendLockup): Promise<MsgExtendLockupResponse> {
+  extendLockup(request: MsgExtendLockup): Promise<MsgExtendLockupResponseSDKType> {
     const data = MsgExtendLockup.encode(request).finish();
     const promise = this.rpc.request("osmosis.lockup.Msg", "ExtendLockup", data);
     return promise.then(data => MsgExtendLockupResponse.decode(new _m0.Reader(data)));

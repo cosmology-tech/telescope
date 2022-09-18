@@ -17,7 +17,7 @@ export class LCDQueryClient extends LCDClient {
   /* EpochInfos provide running epochInfos */
   async epochInfos(params: QueryEpochsInfoRequest = {
     pagination: undefined
-  }): Promise<QueryEpochsInfoResponse> {
+  }): Promise<QueryEpochsInfoResponseSDKType> {
     const options: any = {
       params: {}
     };
@@ -31,7 +31,7 @@ export class LCDQueryClient extends LCDClient {
   }
 
   /* CurrentEpoch provide current epoch of specified identifier */
-  async currentEpoch(params: QueryCurrentEpochRequest): Promise<QueryCurrentEpochResponse> {
+  async currentEpoch(params: QueryCurrentEpochRequest): Promise<QueryCurrentEpochResponseSDKType> {
     const options: any = {
       params: {}
     };

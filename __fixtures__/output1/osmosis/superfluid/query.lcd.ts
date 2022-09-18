@@ -18,13 +18,13 @@ export class LCDQueryClient extends LCDClient {
   }
 
   /* Params returns the total set of minting parameters. */
-  async params(_params: QueryParamsRequest = {}): Promise<QueryParamsResponse> {
+  async params(_params: QueryParamsRequest = {}): Promise<QueryParamsResponseSDKType> {
     const endpoint = `osmosis/superfluid/v1beta1/params`;
     return await this.get<QueryParamsResponseSDKType>(endpoint);
   }
 
   /* Returns superfluid asset type */
-  async assetType(params: AssetTypeRequest): Promise<AssetTypeResponse> {
+  async assetType(params: AssetTypeRequest): Promise<AssetTypeResponseSDKType> {
     const options: any = {
       params: {}
     };
@@ -38,13 +38,13 @@ export class LCDQueryClient extends LCDClient {
   }
 
   /* Returns all superfluid asset types */
-  async allAssets(_params: AllAssetsRequest = {}): Promise<AllAssetsResponse> {
+  async allAssets(_params: AllAssetsRequest = {}): Promise<AllAssetsResponseSDKType> {
     const endpoint = `osmosis/superfluid/v1beta1/all_assets`;
     return await this.get<AllAssetsResponseSDKType>(endpoint);
   }
 
   /* Returns superfluid asset Multiplier */
-  async assetMultiplier(params: AssetMultiplierRequest): Promise<AssetMultiplierResponse> {
+  async assetMultiplier(params: AssetMultiplierRequest): Promise<AssetMultiplierResponseSDKType> {
     const options: any = {
       params: {}
     };
@@ -60,7 +60,7 @@ export class LCDQueryClient extends LCDClient {
   /* Returns all superfluid intermediary account */
   async allIntermediaryAccounts(params: AllIntermediaryAccountsRequest = {
     pagination: undefined
-  }): Promise<AllIntermediaryAccountsResponse> {
+  }): Promise<AllIntermediaryAccountsResponseSDKType> {
     const options: any = {
       params: {}
     };
@@ -74,21 +74,21 @@ export class LCDQueryClient extends LCDClient {
   }
 
   /* Returns intermediary account connected to a superfluid staked lock by id */
-  async connectedIntermediaryAccount(params: ConnectedIntermediaryAccountRequest): Promise<ConnectedIntermediaryAccountResponse> {
+  async connectedIntermediaryAccount(params: ConnectedIntermediaryAccountRequest): Promise<ConnectedIntermediaryAccountResponseSDKType> {
     const endpoint = `osmosis/superfluid/v1beta1/connected_intermediary_account/${params.lockId}`;
     return await this.get<ConnectedIntermediaryAccountResponseSDKType>(endpoint);
   }
 
   /* Returns the total amount of osmo superfluidly staked
   response denominated in uosmo */
-  async totalSuperfluidDelegations(_params: TotalSuperfluidDelegationsRequest = {}): Promise<TotalSuperfluidDelegationsResponse> {
+  async totalSuperfluidDelegations(_params: TotalSuperfluidDelegationsRequest = {}): Promise<TotalSuperfluidDelegationsResponseSDKType> {
     const endpoint = `osmosis/superfluid/v1beta1/all_superfluid_delegations`;
     return await this.get<TotalSuperfluidDelegationsResponseSDKType>(endpoint);
   }
 
   /* Returns the coins superfluid delegated for a delegator, validator, denom
   triplet */
-  async superfluidDelegationAmount(params: SuperfluidDelegationAmountRequest): Promise<SuperfluidDelegationAmountResponse> {
+  async superfluidDelegationAmount(params: SuperfluidDelegationAmountRequest): Promise<SuperfluidDelegationAmountResponseSDKType> {
     const options: any = {
       params: {}
     };
@@ -110,13 +110,13 @@ export class LCDQueryClient extends LCDClient {
   }
 
   /* Returns all the superfluid poistions for a specific delegator */
-  async superfluidDelegationsByDelegator(params: SuperfluidDelegationsByDelegatorRequest): Promise<SuperfluidDelegationsByDelegatorResponse> {
+  async superfluidDelegationsByDelegator(params: SuperfluidDelegationsByDelegatorRequest): Promise<SuperfluidDelegationsByDelegatorResponseSDKType> {
     const endpoint = `osmosis/superfluid/v1beta1/superfluid_delegations/${params.delegatorAddress}`;
     return await this.get<SuperfluidDelegationsByDelegatorResponseSDKType>(endpoint);
   }
 
   /* SuperfluidUndelegationsByDelegator */
-  async superfluidUndelegationsByDelegator(params: SuperfluidUndelegationsByDelegatorRequest): Promise<SuperfluidUndelegationsByDelegatorResponse> {
+  async superfluidUndelegationsByDelegator(params: SuperfluidUndelegationsByDelegatorRequest): Promise<SuperfluidUndelegationsByDelegatorResponseSDKType> {
     const options: any = {
       params: {}
     };
@@ -131,7 +131,7 @@ export class LCDQueryClient extends LCDClient {
 
   /* Returns all the superfluid positions of a specific denom delegated to one
   validator */
-  async superfluidDelegationsByValidatorDenom(params: SuperfluidDelegationsByValidatorDenomRequest): Promise<SuperfluidDelegationsByValidatorDenomResponse> {
+  async superfluidDelegationsByValidatorDenom(params: SuperfluidDelegationsByValidatorDenomRequest): Promise<SuperfluidDelegationsByValidatorDenomResponseSDKType> {
     const options: any = {
       params: {}
     };
@@ -151,7 +151,7 @@ export class LCDQueryClient extends LCDClient {
   /* Returns the amount of a specific denom delegated to a specific validator
   This is labeled an estimate, because the way it calculates the amount can
   lead rounding errors from the true delegated amount */
-  async estimateSuperfluidDelegatedAmountByValidatorDenom(params: EstimateSuperfluidDelegatedAmountByValidatorDenomRequest): Promise<EstimateSuperfluidDelegatedAmountByValidatorDenomResponse> {
+  async estimateSuperfluidDelegatedAmountByValidatorDenom(params: EstimateSuperfluidDelegatedAmountByValidatorDenomRequest): Promise<EstimateSuperfluidDelegatedAmountByValidatorDenomResponseSDKType> {
     const options: any = {
       params: {}
     };

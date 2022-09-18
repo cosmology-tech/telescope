@@ -22,6 +22,26 @@ export enum AuthorizationType {
   AUTHORIZATION_TYPE_REDELEGATE = 3,
   UNRECOGNIZED = -1,
 }
+
+/**
+ * AuthorizationType defines the type of staking module authorization type
+ * 
+ * Since: cosmos-sdk 0.43
+ */
+export enum AuthorizationTypeSDKType {
+  /** AUTHORIZATION_TYPE_UNSPECIFIED - AUTHORIZATION_TYPE_UNSPECIFIED specifies an unknown authorization type */
+  AUTHORIZATION_TYPE_UNSPECIFIED = 0,
+
+  /** AUTHORIZATION_TYPE_DELEGATE - AUTHORIZATION_TYPE_DELEGATE defines an authorization type for Msg/Delegate */
+  AUTHORIZATION_TYPE_DELEGATE = 1,
+
+  /** AUTHORIZATION_TYPE_UNDELEGATE - AUTHORIZATION_TYPE_UNDELEGATE defines an authorization type for Msg/Undelegate */
+  AUTHORIZATION_TYPE_UNDELEGATE = 2,
+
+  /** AUTHORIZATION_TYPE_REDELEGATE - AUTHORIZATION_TYPE_REDELEGATE defines an authorization type for Msg/BeginRedelegate */
+  AUTHORIZATION_TYPE_REDELEGATE = 3,
+  UNRECOGNIZED = -1,
+}
 export function authorizationTypeFromJSON(object: any): AuthorizationType {
   switch (object) {
     case 0:

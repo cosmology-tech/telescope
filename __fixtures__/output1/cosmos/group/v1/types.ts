@@ -23,6 +23,25 @@ export enum VoteOption {
   VOTE_OPTION_NO_WITH_VETO = 4,
   UNRECOGNIZED = -1,
 }
+
+/** VoteOption enumerates the valid vote options for a given proposal. */
+export enum VoteOptionSDKType {
+  /** VOTE_OPTION_UNSPECIFIED - VOTE_OPTION_UNSPECIFIED defines a no-op vote option. */
+  VOTE_OPTION_UNSPECIFIED = 0,
+
+  /** VOTE_OPTION_YES - VOTE_OPTION_YES defines a yes vote option. */
+  VOTE_OPTION_YES = 1,
+
+  /** VOTE_OPTION_ABSTAIN - VOTE_OPTION_ABSTAIN defines an abstain vote option. */
+  VOTE_OPTION_ABSTAIN = 2,
+
+  /** VOTE_OPTION_NO - VOTE_OPTION_NO defines a no vote option. */
+  VOTE_OPTION_NO = 3,
+
+  /** VOTE_OPTION_NO_WITH_VETO - VOTE_OPTION_NO_WITH_VETO defines a no with veto vote option. */
+  VOTE_OPTION_NO_WITH_VETO = 4,
+  UNRECOGNIZED = -1,
+}
 export function voteOptionFromJSON(object: any): VoteOption {
   switch (object) {
     case 0:
@@ -75,6 +94,28 @@ export function voteOptionToJSON(object: VoteOption): string {
 
 /** ProposalStatus defines proposal statuses. */
 export enum ProposalStatus {
+  /** PROPOSAL_STATUS_UNSPECIFIED - An empty value is invalid and not allowed. */
+  PROPOSAL_STATUS_UNSPECIFIED = 0,
+
+  /** PROPOSAL_STATUS_SUBMITTED - Initial status of a proposal when persisted. */
+  PROPOSAL_STATUS_SUBMITTED = 1,
+
+  /** PROPOSAL_STATUS_CLOSED - Final status of a proposal when the final tally was executed. */
+  PROPOSAL_STATUS_CLOSED = 2,
+
+  /** PROPOSAL_STATUS_ABORTED - Final status of a proposal when the group was modified before the final tally. */
+  PROPOSAL_STATUS_ABORTED = 3,
+
+  /**
+   * PROPOSAL_STATUS_WITHDRAWN - A proposal can be deleted before the voting start time by the owner. When this happens the final status
+   * is Withdrawn.
+   */
+  PROPOSAL_STATUS_WITHDRAWN = 4,
+  UNRECOGNIZED = -1,
+}
+
+/** ProposalStatus defines proposal statuses. */
+export enum ProposalStatusSDKType {
   /** PROPOSAL_STATUS_UNSPECIFIED - An empty value is invalid and not allowed. */
   PROPOSAL_STATUS_UNSPECIFIED = 0,
 
@@ -159,6 +200,22 @@ export enum ProposalResult {
   PROPOSAL_RESULT_REJECTED = 3,
   UNRECOGNIZED = -1,
 }
+
+/** ProposalResult defines types of proposal results. */
+export enum ProposalResultSDKType {
+  /** PROPOSAL_RESULT_UNSPECIFIED - An empty value is invalid and not allowed */
+  PROPOSAL_RESULT_UNSPECIFIED = 0,
+
+  /** PROPOSAL_RESULT_UNFINALIZED - Until a final tally has happened the status is unfinalized */
+  PROPOSAL_RESULT_UNFINALIZED = 1,
+
+  /** PROPOSAL_RESULT_ACCEPTED - Final result of the tally */
+  PROPOSAL_RESULT_ACCEPTED = 2,
+
+  /** PROPOSAL_RESULT_REJECTED - Final result of the tally */
+  PROPOSAL_RESULT_REJECTED = 3,
+  UNRECOGNIZED = -1,
+}
 export function proposalResultFromJSON(object: any): ProposalResult {
   switch (object) {
     case 0:
@@ -204,6 +261,22 @@ export function proposalResultToJSON(object: ProposalResult): string {
 
 /** ProposalExecutorResult defines types of proposal executor results. */
 export enum ProposalExecutorResult {
+  /** PROPOSAL_EXECUTOR_RESULT_UNSPECIFIED - An empty value is not allowed. */
+  PROPOSAL_EXECUTOR_RESULT_UNSPECIFIED = 0,
+
+  /** PROPOSAL_EXECUTOR_RESULT_NOT_RUN - We have not yet run the executor. */
+  PROPOSAL_EXECUTOR_RESULT_NOT_RUN = 1,
+
+  /** PROPOSAL_EXECUTOR_RESULT_SUCCESS - The executor was successful and proposed action updated state. */
+  PROPOSAL_EXECUTOR_RESULT_SUCCESS = 2,
+
+  /** PROPOSAL_EXECUTOR_RESULT_FAILURE - The executor returned an error and proposed action didn't update state. */
+  PROPOSAL_EXECUTOR_RESULT_FAILURE = 3,
+  UNRECOGNIZED = -1,
+}
+
+/** ProposalExecutorResult defines types of proposal executor results. */
+export enum ProposalExecutorResultSDKType {
   /** PROPOSAL_EXECUTOR_RESULT_UNSPECIFIED - An empty value is not allowed. */
   PROPOSAL_EXECUTOR_RESULT_UNSPECIFIED = 0,
 

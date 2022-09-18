@@ -6,13 +6,13 @@ import { QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, Que
 
 /** Query defines the RPC service */
 export interface Query {
-  params(request: QueryParamsRequest): Promise<QueryParamsResponse>;
+  params(request: QueryParamsRequest): Promise<QueryParamsResponseSDKType>;
   /*Params queries the parameters of slashing module*/
 
-  signingInfo(request: QuerySigningInfoRequest): Promise<QuerySigningInfoResponse>;
+  signingInfo(request: QuerySigningInfoRequest): Promise<QuerySigningInfoResponseSDKType>;
   /*SigningInfo queries the signing info of given cons address*/
 
-  signingInfos(request: QuerySigningInfosRequest): Promise<QuerySigningInfosResponse>;
+  signingInfos(request: QuerySigningInfosRequest): Promise<QuerySigningInfosResponseSDKType>;
   /*SigningInfos queries signing info of all validators*/
 
 }
@@ -26,19 +26,19 @@ export class QueryClientImpl implements Query {
     this.signingInfos = this.signingInfos.bind(this);
   }
 
-  params(request: QueryParamsRequest): Promise<QueryParamsResponse> {
+  params(request: QueryParamsRequest): Promise<QueryParamsResponseSDKType> {
     const data = QueryParamsRequest.encode(request).finish();
     const promise = this.rpc.request("cosmos.slashing.v1beta1.Query", "Params", data);
     return promise.then(data => QueryParamsResponse.decode(new _m0.Reader(data)));
   }
 
-  signingInfo(request: QuerySigningInfoRequest): Promise<QuerySigningInfoResponse> {
+  signingInfo(request: QuerySigningInfoRequest): Promise<QuerySigningInfoResponseSDKType> {
     const data = QuerySigningInfoRequest.encode(request).finish();
     const promise = this.rpc.request("cosmos.slashing.v1beta1.Query", "SigningInfo", data);
     return promise.then(data => QuerySigningInfoResponse.decode(new _m0.Reader(data)));
   }
 
-  signingInfos(request: QuerySigningInfosRequest): Promise<QuerySigningInfosResponse> {
+  signingInfos(request: QuerySigningInfosRequest): Promise<QuerySigningInfosResponseSDKType> {
     const data = QuerySigningInfosRequest.encode(request).finish();
     const promise = this.rpc.request("cosmos.slashing.v1beta1.Query", "SigningInfos", data);
     return promise.then(data => QuerySigningInfosResponse.decode(new _m0.Reader(data)));

@@ -11,6 +11,16 @@ export enum Endpoint_Kind {
   RANDOM_PORT = 1,
   UNRECOGNIZED = -1,
 }
+
+/** This describes how the endpoint is implemented when the lease is deployed */
+export enum Endpoint_KindSDKType {
+  /** SHARED_HTTP - Describes an endpoint that becomes a Kubernetes Ingress */
+  SHARED_HTTP = 0,
+
+  /** RANDOM_PORT - Describes an endpoint that becomes a Kubernetes NodePort */
+  RANDOM_PORT = 1,
+  UNRECOGNIZED = -1,
+}
 export function endpoint_KindFromJSON(object: any): Endpoint_Kind {
   switch (object) {
     case 0:

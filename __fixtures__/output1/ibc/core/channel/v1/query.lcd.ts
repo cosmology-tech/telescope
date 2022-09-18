@@ -17,7 +17,7 @@ export class LCDQueryClient extends LCDClient {
   }
 
   /* Channel queries an IBC Channel. */
-  async channel(params: QueryChannelRequest): Promise<QueryChannelResponse> {
+  async channel(params: QueryChannelRequest): Promise<QueryChannelResponseSDKType> {
     const endpoint = `ibc/core/channel/v1/channels/${params.channelId}ports/${params.portId}`;
     return await this.get<QueryChannelResponseSDKType>(endpoint);
   }
@@ -25,7 +25,7 @@ export class LCDQueryClient extends LCDClient {
   /* Channels queries all the IBC channels of a chain. */
   async channels(params: QueryChannelsRequest = {
     pagination: undefined
-  }): Promise<QueryChannelsResponse> {
+  }): Promise<QueryChannelsResponseSDKType> {
     const options: any = {
       params: {}
     };
@@ -40,7 +40,7 @@ export class LCDQueryClient extends LCDClient {
 
   /* ConnectionChannels queries all the channels associated with a connection
   end. */
-  async connectionChannels(params: QueryConnectionChannelsRequest): Promise<QueryConnectionChannelsResponse> {
+  async connectionChannels(params: QueryConnectionChannelsRequest): Promise<QueryConnectionChannelsResponseSDKType> {
     const options: any = {
       params: {}
     };
@@ -55,27 +55,27 @@ export class LCDQueryClient extends LCDClient {
 
   /* ChannelClientState queries for the client state for the channel associated
   with the provided channel identifiers. */
-  async channelClientState(params: QueryChannelClientStateRequest): Promise<QueryChannelClientStateResponse> {
+  async channelClientState(params: QueryChannelClientStateRequest): Promise<QueryChannelClientStateResponseSDKType> {
     const endpoint = `ibc/core/channel/v1/channels/${params.channelId}/ports/${params.portId}/client_state`;
     return await this.get<QueryChannelClientStateResponseSDKType>(endpoint);
   }
 
   /* ChannelConsensusState queries for the consensus state for the channel
   associated with the provided channel identifiers. */
-  async channelConsensusState(params: QueryChannelConsensusStateRequest): Promise<QueryChannelConsensusStateResponse> {
+  async channelConsensusState(params: QueryChannelConsensusStateRequest): Promise<QueryChannelConsensusStateResponseSDKType> {
     const endpoint = `ibc/core/channel/v1/channels/${params.channelId}/ports/${params.portId}/consensus_state/revision/${params.revisionNumber}height/${params.revisionHeight}`;
     return await this.get<QueryChannelConsensusStateResponseSDKType>(endpoint);
   }
 
   /* PacketCommitment queries a stored packet commitment hash. */
-  async packetCommitment(params: QueryPacketCommitmentRequest): Promise<QueryPacketCommitmentResponse> {
+  async packetCommitment(params: QueryPacketCommitmentRequest): Promise<QueryPacketCommitmentResponseSDKType> {
     const endpoint = `ibc/core/channel/v1/channels/${params.channelId}/ports/${params.portId}packet_commitments/${params.sequence}`;
     return await this.get<QueryPacketCommitmentResponseSDKType>(endpoint);
   }
 
   /* PacketCommitments returns all the packet commitments hashes associated
   with a channel. */
-  async packetCommitments(params: QueryPacketCommitmentsRequest): Promise<QueryPacketCommitmentsResponse> {
+  async packetCommitments(params: QueryPacketCommitmentsRequest): Promise<QueryPacketCommitmentsResponseSDKType> {
     const options: any = {
       params: {}
     };
@@ -90,20 +90,20 @@ export class LCDQueryClient extends LCDClient {
 
   /* PacketReceipt queries if a given packet sequence has been received on the
   queried chain */
-  async packetReceipt(params: QueryPacketReceiptRequest): Promise<QueryPacketReceiptResponse> {
+  async packetReceipt(params: QueryPacketReceiptRequest): Promise<QueryPacketReceiptResponseSDKType> {
     const endpoint = `ibc/core/channel/v1/channels/${params.channelId}/ports/${params.portId}packet_receipts/${params.sequence}`;
     return await this.get<QueryPacketReceiptResponseSDKType>(endpoint);
   }
 
   /* PacketAcknowledgement queries a stored packet acknowledgement hash. */
-  async packetAcknowledgement(params: QueryPacketAcknowledgementRequest): Promise<QueryPacketAcknowledgementResponse> {
+  async packetAcknowledgement(params: QueryPacketAcknowledgementRequest): Promise<QueryPacketAcknowledgementResponseSDKType> {
     const endpoint = `ibc/core/channel/v1/channels/${params.channelId}/ports/${params.portId}packet_acks/${params.sequence}`;
     return await this.get<QueryPacketAcknowledgementResponseSDKType>(endpoint);
   }
 
   /* PacketAcknowledgements returns all the packet acknowledgements associated
   with a channel. */
-  async packetAcknowledgements(params: QueryPacketAcknowledgementsRequest): Promise<QueryPacketAcknowledgementsResponse> {
+  async packetAcknowledgements(params: QueryPacketAcknowledgementsRequest): Promise<QueryPacketAcknowledgementsResponseSDKType> {
     const options: any = {
       params: {}
     };
@@ -122,20 +122,20 @@ export class LCDQueryClient extends LCDClient {
 
   /* UnreceivedPackets returns all the unreceived IBC packets associated with a
   channel and sequences. */
-  async unreceivedPackets(params: QueryUnreceivedPacketsRequest): Promise<QueryUnreceivedPacketsResponse> {
+  async unreceivedPackets(params: QueryUnreceivedPacketsRequest): Promise<QueryUnreceivedPacketsResponseSDKType> {
     const endpoint = `ibc/core/channel/v1/channels/${params.channelId}/ports/${params.portId}/packet_commitments/${params.packetCommitmentSequences}/unreceived_packets`;
     return await this.get<QueryUnreceivedPacketsResponseSDKType>(endpoint);
   }
 
   /* UnreceivedAcks returns all the unreceived IBC acknowledgements associated
   with a channel and sequences. */
-  async unreceivedAcks(params: QueryUnreceivedAcksRequest): Promise<QueryUnreceivedAcksResponse> {
+  async unreceivedAcks(params: QueryUnreceivedAcksRequest): Promise<QueryUnreceivedAcksResponseSDKType> {
     const endpoint = `ibc/core/channel/v1/channels/${params.channelId}/ports/${params.portId}/packet_commitments/${params.packetAckSequences}/unreceived_acks`;
     return await this.get<QueryUnreceivedAcksResponseSDKType>(endpoint);
   }
 
   /* NextSequenceReceive returns the next receive sequence for a given channel. */
-  async nextSequenceReceive(params: QueryNextSequenceReceiveRequest): Promise<QueryNextSequenceReceiveResponse> {
+  async nextSequenceReceive(params: QueryNextSequenceReceiveRequest): Promise<QueryNextSequenceReceiveResponseSDKType> {
     const endpoint = `ibc/core/channel/v1/channels/${params.channelId}/ports/${params.portId}/next_sequence`;
     return await this.get<QueryNextSequenceReceiveResponseSDKType>(endpoint);
   }

@@ -4,7 +4,7 @@ import { MsgUnjail, MsgUnjailSDKType, MsgUnjailResponse, MsgUnjailResponseSDKTyp
 
 /** Msg defines the RPC service */
 export interface Msg {
-  unjail(request: MsgUnjail): Promise<MsgUnjailResponse>;
+  unjail(request: MsgUnjail): Promise<MsgUnjailResponseSDKType>;
   /*Unjail defines a method for unjailing a jailed validator, thus returning
   them into the bonded validator set, so they can begin receiving provisions
   and rewards again.*/
@@ -18,7 +18,7 @@ export class MsgClientImpl implements Msg {
     this.unjail = this.unjail.bind(this);
   }
 
-  unjail(request: MsgUnjail): Promise<MsgUnjailResponse> {
+  unjail(request: MsgUnjail): Promise<MsgUnjailResponseSDKType> {
     const data = MsgUnjail.encode(request).finish();
     const promise = this.rpc.request("cosmos.slashing.v1beta1.Msg", "Unjail", data);
     return promise.then(data => MsgUnjailResponse.decode(new _m0.Reader(data)));

@@ -18,6 +18,22 @@ export enum Order_State {
   closed = 3,
   UNRECOGNIZED = -1,
 }
+
+/** State is an enum which refers to state of order */
+export enum Order_StateSDKType {
+  /** invalid - Prefix should start with 0 in enum. So declaring dummy state */
+  invalid = 0,
+
+  /** open - OrderOpen denotes state for order open */
+  open = 1,
+
+  /** active - OrderMatched denotes state for order matched */
+  active = 2,
+
+  /** closed - OrderClosed denotes state for order lost */
+  closed = 3,
+  UNRECOGNIZED = -1,
+}
 export function order_StateFromJSON(object: any): Order_State {
   switch (object) {
     case 0:

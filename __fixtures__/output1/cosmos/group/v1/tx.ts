@@ -1,4 +1,4 @@
-import { Member, MemberSDKType, VoteOption, VoteOptionSDKType, voteOptionFromJSON, voteOptionFromJSONSDKType, voteOptionToJSON, voteOptionToJSONSDKType } from "./types";
+import { Member, MemberSDKType, VoteOption, VoteOptionSDKType, voteOptionFromJSON, voteOptionToJSON } from "./types";
 import { Any, AnySDKType } from "../../../google/protobuf/any";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, Long } from "@osmonauts/helpers";
@@ -6,6 +6,24 @@ export const protobufPackage = "cosmos.group.v1";
 
 /** Exec defines modes of execution of a proposal on creation or on new vote. */
 export enum Exec {
+  /**
+   * EXEC_UNSPECIFIED - An empty value means that there should be a separate
+   * MsgExec request for the proposal to execute.
+   */
+  EXEC_UNSPECIFIED = 0,
+
+  /**
+   * EXEC_TRY - Try to execute the proposal immediately.
+   * If the proposal is not allowed per the DecisionPolicy,
+   * the proposal will still be open and could
+   * be executed at a later point.
+   */
+  EXEC_TRY = 1,
+  UNRECOGNIZED = -1,
+}
+
+/** Exec defines modes of execution of a proposal on creation or on new vote. */
+export enum ExecSDKType {
   /**
    * EXEC_UNSPECIFIED - An empty value means that there should be a separate
    * MsgExec request for the proposal to execute.

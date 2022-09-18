@@ -1,4 +1,4 @@
-import { QuotaView, QuotaViewSDKType, QuotaOverride, QuotaOverrideSDKType, QuotaSafetyCheck, QuotaSafetyCheckSDKType, OverrideInlineSource, OverrideInlineSourceSDKType, Service, ServiceSDKType, ConsumerQuotaMetric, ConsumerQuotaMetricSDKType, AdminQuotaPolicy, AdminQuotaPolicySDKType, ServiceIdentity, ServiceIdentitySDKType, quotaViewFromJSON, quotaViewFromJSONSDKType, quotaViewToJSON, quotaViewToJSONSDKType, quotaSafetyCheckFromJSON, quotaSafetyCheckFromJSONSDKType, quotaSafetyCheckToJSON, quotaSafetyCheckToJSONSDKType } from "./resources";
+import { QuotaView, QuotaViewSDKType, QuotaOverride, QuotaOverrideSDKType, QuotaSafetyCheck, QuotaSafetyCheckSDKType, OverrideInlineSource, OverrideInlineSourceSDKType, Service, ServiceSDKType, ConsumerQuotaMetric, ConsumerQuotaMetricSDKType, AdminQuotaPolicy, AdminQuotaPolicySDKType, ServiceIdentity, ServiceIdentitySDKType, quotaViewFromJSON, quotaViewToJSON, quotaSafetyCheckFromJSON, quotaSafetyCheckToJSON } from "./resources";
 import { FieldMask, FieldMaskSDKType } from "../../../protobuf/field_mask";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "@osmonauts/helpers";
@@ -6,6 +6,19 @@ export const protobufPackage = "google.api.serviceusage.v1beta1";
 
 /** Enum for service identity state. */
 export enum GetServiceIdentityResponse_IdentityState {
+  /**
+   * IDENTITY_STATE_UNSPECIFIED - Default service identity state. This value is used if the state is
+   * omitted.
+   */
+  IDENTITY_STATE_UNSPECIFIED = 0,
+
+  /** ACTIVE - Service identity has been created and can be used. */
+  ACTIVE = 1,
+  UNRECOGNIZED = -1,
+}
+
+/** Enum for service identity state. */
+export enum GetServiceIdentityResponse_IdentityStateSDKType {
   /**
    * IDENTITY_STATE_UNSPECIFIED - Default service identity state. This value is used if the state is
    * omitted.

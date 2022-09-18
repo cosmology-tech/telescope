@@ -29,6 +29,26 @@ export enum State {
   ENABLED = 2,
   UNRECOGNIZED = -1,
 }
+
+/** Whether or not a service has been enabled for use by a consumer. */
+export enum StateSDKType {
+  /**
+   * STATE_UNSPECIFIED - The default value, which indicates that the enabled state of the service
+   * is unspecified or not meaningful. Currently, all consumers other than
+   * projects (such as folders and organizations) are always in this state.
+   */
+  STATE_UNSPECIFIED = 0,
+
+  /**
+   * DISABLED - The service cannot be used by this consumer. It has either been explicitly
+   * disabled, or has never been enabled.
+   */
+  DISABLED = 1,
+
+  /** ENABLED - The service has been explicitly enabled for use by this consumer. */
+  ENABLED = 2,
+  UNRECOGNIZED = -1,
+}
 export function stateFromJSON(object: any): State {
   switch (object) {
     case 0:
@@ -90,6 +110,32 @@ export enum QuotaView {
   FULL = 2,
   UNRECOGNIZED = -1,
 }
+
+/**
+ * Selected view of quota. Can be used to request more detailed quota
+ * information when retrieving quota metrics and limits.
+ */
+export enum QuotaViewSDKType {
+  /**
+   * QUOTA_VIEW_UNSPECIFIED - No quota view specified. Requests that do not specify a quota view will
+   * typically default to the BASIC view.
+   */
+  QUOTA_VIEW_UNSPECIFIED = 0,
+
+  /** BASIC - Only buckets with overrides are shown in the response. */
+  BASIC = 1,
+
+  /**
+   * FULL - Include per-location buckets even if they do not have overrides.
+   * When the view is FULL, and a limit has regional or zonal quota, the limit
+   * will include buckets for all regions or zones that could support
+   * overrides, even if none are currently present. In some cases this will
+   * cause the response to become very large; callers that do not need this
+   * extra information should use the BASIC view instead.
+   */
+  FULL = 2,
+  UNRECOGNIZED = -1,
+}
 export function quotaViewFromJSON(object: any): QuotaView {
   switch (object) {
     case 0:
@@ -128,6 +174,25 @@ export function quotaViewToJSON(object: QuotaView): string {
 
 /** Enumerations of quota safety checks. */
 export enum QuotaSafetyCheck {
+  /** QUOTA_SAFETY_CHECK_UNSPECIFIED - Unspecified quota safety check. */
+  QUOTA_SAFETY_CHECK_UNSPECIFIED = 0,
+
+  /**
+   * LIMIT_DECREASE_BELOW_USAGE - Validates that a quota mutation would not cause the consumer's effective
+   * limit to be lower than the consumer's quota usage.
+   */
+  LIMIT_DECREASE_BELOW_USAGE = 1,
+
+  /**
+   * LIMIT_DECREASE_PERCENTAGE_TOO_HIGH - Validates that a quota mutation would not cause the consumer's effective
+   * limit to decrease by more than 10 percent.
+   */
+  LIMIT_DECREASE_PERCENTAGE_TOO_HIGH = 2,
+  UNRECOGNIZED = -1,
+}
+
+/** Enumerations of quota safety checks. */
+export enum QuotaSafetyCheckSDKType {
   /** QUOTA_SAFETY_CHECK_UNSPECIFIED - Unspecified quota safety check. */
   QUOTA_SAFETY_CHECK_UNSPECIFIED = 0,
 

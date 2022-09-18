@@ -1,4 +1,4 @@
-import { AccessConfig, AccessConfigSDKType, accessTypeFromJSON, accessTypeFromJSONSDKType } from "./types";
+import { AccessConfig, AccessConfigSDKType, accessTypeFromJSON } from "./types";
 import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { AminoMsg } from "@cosmjs/amino";
 import { toBase64, fromBase64, fromUtf8, toUtf8 } from "@cosmjs/encoding";

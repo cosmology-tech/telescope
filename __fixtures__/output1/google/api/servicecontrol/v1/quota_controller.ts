@@ -57,6 +57,60 @@ export enum QuotaOperation_QuotaMode {
   ADJUST_ONLY = 5,
   UNRECOGNIZED = -1,
 }
+
+/** Supported quota modes. */
+export enum QuotaOperation_QuotaModeSDKType {
+  /** UNSPECIFIED - Guard against implicit default. Must not be used. */
+  UNSPECIFIED = 0,
+
+  /**
+   * NORMAL - For AllocateQuota request, allocates quota for the amount specified in
+   * the service configuration or specified using the quota metrics. If the
+   * amount is higher than the available quota, allocation error will be
+   * returned and no quota will be allocated.
+   * If multiple quotas are part of the request, and one fails, none of the
+   * quotas are allocated or released.
+   */
+  NORMAL = 1,
+
+  /**
+   * BEST_EFFORT - The operation allocates quota for the amount specified in the service
+   * configuration or specified using the quota metrics. If the amount is
+   * higher than the available quota, request does not fail but all available
+   * quota will be allocated.
+   * For rate quota, BEST_EFFORT will continue to deduct from other groups
+   * even if one does not have enough quota. For allocation, it will find the
+   * minimum available amount across all groups and deduct that amount from
+   * all the affected groups.
+   */
+  BEST_EFFORT = 2,
+
+  /**
+   * CHECK_ONLY - For AllocateQuota request, only checks if there is enough quota
+   * available and does not change the available quota. No lock is placed on
+   * the available quota either.
+   */
+  CHECK_ONLY = 3,
+
+  /**
+   * QUERY_ONLY - Unimplemented. When used in AllocateQuotaRequest, this returns the
+   * effective quota limit(s) in the response, and no quota check will be
+   * performed. Not supported for other requests, and even for
+   * AllocateQuotaRequest, this is currently supported only for allowlisted
+   * services.
+   */
+  QUERY_ONLY = 4,
+
+  /**
+   * ADJUST_ONLY - The operation allocates quota for the amount specified in the service
+   * configuration or specified using the quota metrics. If the requested
+   * amount is higher than the available quota, request does not fail and
+   * remaining quota would become negative (going over the limit).
+   * Not supported for Rate Quota.
+   */
+  ADJUST_ONLY = 5,
+  UNRECOGNIZED = -1,
+}
 export function quotaOperation_QuotaModeFromJSON(object: any): QuotaOperation_QuotaMode {
   switch (object) {
     case 0:
@@ -122,6 +176,40 @@ export function quotaOperation_QuotaModeToJSON(object: QuotaOperation_QuotaMode)
  * methods check only for project deletion to be wipe out compliant.
  */
 export enum QuotaError_Code {
+  /** UNSPECIFIED - This is never used. */
+  UNSPECIFIED = 0,
+
+  /**
+   * RESOURCE_EXHAUSTED - Quota allocation failed.
+   * Same as [google.rpc.Code.RESOURCE_EXHAUSTED][google.rpc.Code.RESOURCE_EXHAUSTED].
+   */
+  RESOURCE_EXHAUSTED = 8,
+
+  /**
+   * BILLING_NOT_ACTIVE - Consumer cannot access the service because the service requires active
+   * billing.
+   */
+  BILLING_NOT_ACTIVE = 107,
+
+  /** PROJECT_DELETED - Consumer's project has been marked as deleted (soft deletion). */
+  PROJECT_DELETED = 108,
+
+  /** API_KEY_INVALID - Specified API key is invalid. */
+  API_KEY_INVALID = 105,
+
+  /** API_KEY_EXPIRED - Specified API Key has expired. */
+  API_KEY_EXPIRED = 112,
+  UNRECOGNIZED = -1,
+}
+
+/**
+ * Error codes related to project config validations are deprecated since the
+ * quota controller methods do not perform these validations. Instead services
+ * have to call the Check method, without quota_properties field, to perform
+ * these validations before calling the quota controller methods. These
+ * methods check only for project deletion to be wipe out compliant.
+ */
+export enum QuotaError_CodeSDKType {
   /** UNSPECIFIED - This is never used. */
   UNSPECIFIED = 0,
 

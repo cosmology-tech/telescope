@@ -13,6 +13,18 @@ export enum NullValue {
   NULL_VALUE = 0,
   UNRECOGNIZED = -1,
 }
+
+/**
+ * `NullValue` is a singleton enumeration to represent the null value for the
+ * `Value` type union.
+ * 
+ * The JSON representation for `NullValue` is JSON `null`.
+ */
+export enum NullValueSDKType {
+  /** NULL_VALUE - Null value. */
+  NULL_VALUE = 0,
+  UNRECOGNIZED = -1,
+}
 export function nullValueFromJSON(object: any): NullValue {
   switch (object) {
     case 0:

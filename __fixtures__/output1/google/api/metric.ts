@@ -1,4 +1,4 @@
-import { LaunchStage, LaunchStageSDKType, launchStageFromJSON, launchStageFromJSONSDKType, launchStageToJSON, launchStageToJSONSDKType } from "./launch_stage";
+import { LaunchStage, LaunchStageSDKType, launchStageFromJSON, launchStageToJSON } from "./launch_stage";
 import { Duration, DurationSDKType } from "../protobuf/duration";
 import { LabelDescriptor, LabelDescriptorSDKType } from "./label";
 import * as _m0 from "protobufjs/minimal";
@@ -11,6 +11,32 @@ export const protobufPackage = "google.api";
  * the MetricKind, see [TimeInterval][google.monitoring.v3.TimeInterval].
  */
 export enum MetricDescriptor_MetricKind {
+  /** METRIC_KIND_UNSPECIFIED - Do not use this default value. */
+  METRIC_KIND_UNSPECIFIED = 0,
+
+  /** GAUGE - An instantaneous measurement of a value. */
+  GAUGE = 1,
+
+  /** DELTA - The change in a value during a time interval. */
+  DELTA = 2,
+
+  /**
+   * CUMULATIVE - A value accumulated over a time interval.  Cumulative
+   * measurements in a time series should have the same start time
+   * and increasing end times, until an event resets the cumulative
+   * value to zero and sets a new start time for the following
+   * points.
+   */
+  CUMULATIVE = 3,
+  UNRECOGNIZED = -1,
+}
+
+/**
+ * The kind of measurement. It describes how the data is reported.
+ * For information on setting the start time and end time based on
+ * the MetricKind, see [TimeInterval][google.monitoring.v3.TimeInterval].
+ */
+export enum MetricDescriptor_MetricKindSDKType {
   /** METRIC_KIND_UNSPECIFIED - Do not use this default value. */
   METRIC_KIND_UNSPECIFIED = 0,
 
@@ -75,6 +101,37 @@ export function metricDescriptor_MetricKindToJSON(object: MetricDescriptor_Metri
 
 /** The value type of a metric. */
 export enum MetricDescriptor_ValueType {
+  /** VALUE_TYPE_UNSPECIFIED - Do not use this default value. */
+  VALUE_TYPE_UNSPECIFIED = 0,
+
+  /**
+   * BOOL - The value is a boolean.
+   * This value type can be used only if the metric kind is `GAUGE`.
+   */
+  BOOL = 1,
+
+  /** INT64 - The value is a signed 64-bit integer. */
+  INT64 = 2,
+
+  /** DOUBLE - The value is a double precision floating point number. */
+  DOUBLE = 3,
+
+  /**
+   * STRING - The value is a text string.
+   * This value type can be used only if the metric kind is `GAUGE`.
+   */
+  STRING = 4,
+
+  /** DISTRIBUTION - The value is a [`Distribution`][google.api.Distribution]. */
+  DISTRIBUTION = 5,
+
+  /** MONEY - The value is money. */
+  MONEY = 6,
+  UNRECOGNIZED = -1,
+}
+
+/** The value type of a metric. */
+export enum MetricDescriptor_ValueTypeSDKType {
   /** VALUE_TYPE_UNSPECIFIED - Do not use this default value. */
   VALUE_TYPE_UNSPECIFIED = 0,
 

@@ -7,16 +7,16 @@ import { QueryDevFeeInfosRequest, QueryDevFeeInfosRequestSDKType, QueryDevFeeInf
 
 /** Query defines the RPC service */
 export interface Query {
-  devFeeInfos(request: QueryDevFeeInfosRequest): Promise<QueryDevFeeInfosResponse>;
+  devFeeInfos(request: QueryDevFeeInfosRequest): Promise<QueryDevFeeInfosResponseSDKType>;
   /*DevFeeInfos retrieves all registered contracts for fee distribution*/
 
-  devFeeInfo(request: QueryDevFeeInfoRequest): Promise<QueryDevFeeInfoResponse>;
+  devFeeInfo(request: QueryDevFeeInfoRequest): Promise<QueryDevFeeInfoResponseSDKType>;
   /*DevFeeInfo retrieves a registered contract for fee distribution*/
 
-  params(request: QueryParamsRequest): Promise<QueryParamsResponse>;
+  params(request: QueryParamsRequest): Promise<QueryParamsResponseSDKType>;
   /*Params retrieves the fees module params*/
 
-  devFeeInfosPerDeployer(request: QueryDevFeeInfosPerDeployerRequest): Promise<QueryDevFeeInfosPerDeployerResponse>;
+  devFeeInfosPerDeployer(request: QueryDevFeeInfosPerDeployerRequest): Promise<QueryDevFeeInfosPerDeployerResponseSDKType>;
   /*DevFeeInfosPerDeployer retrieves all contracts that a deployer has
   registered for fee distribution*/
 
@@ -32,25 +32,25 @@ export class QueryClientImpl implements Query {
     this.devFeeInfosPerDeployer = this.devFeeInfosPerDeployer.bind(this);
   }
 
-  devFeeInfos(request: QueryDevFeeInfosRequest): Promise<QueryDevFeeInfosResponse> {
+  devFeeInfos(request: QueryDevFeeInfosRequest): Promise<QueryDevFeeInfosResponseSDKType> {
     const data = QueryDevFeeInfosRequest.encode(request).finish();
     const promise = this.rpc.request("evmos.fees.v1.Query", "DevFeeInfos", data);
     return promise.then(data => QueryDevFeeInfosResponse.decode(new _m0.Reader(data)));
   }
 
-  devFeeInfo(request: QueryDevFeeInfoRequest): Promise<QueryDevFeeInfoResponse> {
+  devFeeInfo(request: QueryDevFeeInfoRequest): Promise<QueryDevFeeInfoResponseSDKType> {
     const data = QueryDevFeeInfoRequest.encode(request).finish();
     const promise = this.rpc.request("evmos.fees.v1.Query", "DevFeeInfo", data);
     return promise.then(data => QueryDevFeeInfoResponse.decode(new _m0.Reader(data)));
   }
 
-  params(request: QueryParamsRequest): Promise<QueryParamsResponse> {
+  params(request: QueryParamsRequest): Promise<QueryParamsResponseSDKType> {
     const data = QueryParamsRequest.encode(request).finish();
     const promise = this.rpc.request("evmos.fees.v1.Query", "Params", data);
     return promise.then(data => QueryParamsResponse.decode(new _m0.Reader(data)));
   }
 
-  devFeeInfosPerDeployer(request: QueryDevFeeInfosPerDeployerRequest): Promise<QueryDevFeeInfosPerDeployerResponse> {
+  devFeeInfosPerDeployer(request: QueryDevFeeInfosPerDeployerRequest): Promise<QueryDevFeeInfosPerDeployerResponseSDKType> {
     const data = QueryDevFeeInfosPerDeployerRequest.encode(request).finish();
     const promise = this.rpc.request("evmos.fees.v1.Query", "DevFeeInfosPerDeployer", data);
     return promise.then(data => QueryDevFeeInfosPerDeployerResponse.decode(new _m0.Reader(data)));

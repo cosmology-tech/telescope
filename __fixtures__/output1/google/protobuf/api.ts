@@ -1,4 +1,4 @@
-import { Option, OptionSDKType, Syntax, SyntaxSDKType, syntaxFromJSON, syntaxFromJSONSDKType, syntaxToJSON, syntaxToJSONSDKType } from "./type";
+import { Option, OptionSDKType, Syntax, SyntaxSDKType, syntaxFromJSON, syntaxToJSON } from "./type";
 import { SourceContext, SourceContextSDKType } from "./source_context";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "@osmonauts/helpers";

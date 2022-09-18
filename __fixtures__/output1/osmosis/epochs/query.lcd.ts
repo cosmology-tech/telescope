@@ -13,13 +13,13 @@ export class LCDQueryClient extends LCDClient {
   }
 
   /* EpochInfos provide running epochInfos */
-  async epochInfos(_params: QueryEpochsInfoRequest = {}): Promise<QueryEpochsInfoResponse> {
+  async epochInfos(_params: QueryEpochsInfoRequest = {}): Promise<QueryEpochsInfoResponseSDKType> {
     const endpoint = `osmosis/epochs/v1beta1/epochs`;
     return await this.get<QueryEpochsInfoResponseSDKType>(endpoint);
   }
 
   /* CurrentEpoch provide current epoch of specified identifier */
-  async currentEpoch(params: QueryCurrentEpochRequest): Promise<QueryCurrentEpochResponse> {
+  async currentEpoch(params: QueryCurrentEpochRequest): Promise<QueryCurrentEpochResponseSDKType> {
     const options: any = {
       params: {}
     };

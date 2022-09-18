@@ -29,6 +29,34 @@ export enum ChangeType {
   MODIFIED = 3,
   UNRECOGNIZED = -1,
 }
+
+/**
+ * Classifies set of possible modifications to an object in the service
+ * configuration.
+ */
+export enum ChangeTypeSDKType {
+  /** CHANGE_TYPE_UNSPECIFIED - No value was provided. */
+  CHANGE_TYPE_UNSPECIFIED = 0,
+
+  /**
+   * ADDED - The changed object exists in the 'new' service configuration, but not
+   * in the 'old' service configuration.
+   */
+  ADDED = 1,
+
+  /**
+   * REMOVED - The changed object exists in the 'old' service configuration, but not
+   * in the 'new' service configuration.
+   */
+  REMOVED = 2,
+
+  /**
+   * MODIFIED - The changed object exists in both service configurations, but its value
+   * is different.
+   */
+  MODIFIED = 3,
+  UNRECOGNIZED = -1,
+}
 export function changeTypeFromJSON(object: any): ChangeType {
   switch (object) {
     case 0:

@@ -19,6 +19,19 @@ export enum OrderBy {
   ORDER_BY_DESC = 2,
   UNRECOGNIZED = -1,
 }
+
+/** OrderBy defines the sorting order */
+export enum OrderBySDKType {
+  /** ORDER_BY_UNSPECIFIED - ORDER_BY_UNSPECIFIED specifies an unknown sorting order. OrderBy defaults to ASC in this case. */
+  ORDER_BY_UNSPECIFIED = 0,
+
+  /** ORDER_BY_ASC - ORDER_BY_ASC defines ascending order */
+  ORDER_BY_ASC = 1,
+
+  /** ORDER_BY_DESC - ORDER_BY_DESC defines descending order */
+  ORDER_BY_DESC = 2,
+  UNRECOGNIZED = -1,
+}
 export function orderByFromJSON(object: any): OrderBy {
   switch (object) {
     case 0:
@@ -57,6 +70,31 @@ export function orderByToJSON(object: OrderBy): string {
 
 /** BroadcastMode specifies the broadcast mode for the TxService.Broadcast RPC method. */
 export enum BroadcastMode {
+  /** BROADCAST_MODE_UNSPECIFIED - zero-value for mode ordering */
+  BROADCAST_MODE_UNSPECIFIED = 0,
+
+  /**
+   * BROADCAST_MODE_BLOCK - BROADCAST_MODE_BLOCK defines a tx broadcasting mode where the client waits for
+   * the tx to be committed in a block.
+   */
+  BROADCAST_MODE_BLOCK = 1,
+
+  /**
+   * BROADCAST_MODE_SYNC - BROADCAST_MODE_SYNC defines a tx broadcasting mode where the client waits for
+   * a CheckTx execution response only.
+   */
+  BROADCAST_MODE_SYNC = 2,
+
+  /**
+   * BROADCAST_MODE_ASYNC - BROADCAST_MODE_ASYNC defines a tx broadcasting mode where the client returns
+   * immediately.
+   */
+  BROADCAST_MODE_ASYNC = 3,
+  UNRECOGNIZED = -1,
+}
+
+/** BroadcastMode specifies the broadcast mode for the TxService.Broadcast RPC method. */
+export enum BroadcastModeSDKType {
   /** BROADCAST_MODE_UNSPECIFIED - zero-value for mode ordering */
   BROADCAST_MODE_UNSPECIFIED = 0,
 

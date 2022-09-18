@@ -17,7 +17,7 @@ export class LCDQueryClient extends LCDClient {
   /* Providers queries providers */
   async providers(params: QueryProvidersRequest = {
     pagination: undefined
-  }): Promise<QueryProvidersResponse> {
+  }): Promise<QueryProvidersResponseSDKType> {
     const options: any = {
       params: {}
     };
@@ -31,7 +31,7 @@ export class LCDQueryClient extends LCDClient {
   }
 
   /* Provider queries provider details */
-  async provider(params: QueryProviderRequest): Promise<QueryProviderResponse> {
+  async provider(params: QueryProviderRequest): Promise<QueryProviderResponseSDKType> {
     const endpoint = `akash/provider/v1beta2/providers/${params.owner}`;
     return await this.get<QueryProviderResponseSDKType>(endpoint);
   }

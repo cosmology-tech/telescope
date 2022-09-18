@@ -4,7 +4,7 @@ import { MsgSend, MsgSendSDKType, MsgSendResponse, MsgSendResponseSDKType } from
 
 /** Msg defines the RPC service */
 export interface Msg {
-  send(request: MsgSend): Promise<MsgSendResponse>;
+  send(request: MsgSend): Promise<MsgSendResponseSDKType>;
   /*Send defines a method to send a nft from one account to another account.*/
 
 }
@@ -16,7 +16,7 @@ export class MsgClientImpl implements Msg {
     this.send = this.send.bind(this);
   }
 
-  send(request: MsgSend): Promise<MsgSendResponse> {
+  send(request: MsgSend): Promise<MsgSendResponseSDKType> {
     const data = MsgSend.encode(request).finish();
     const promise = this.rpc.request("cosmos.nft.v1beta1.Msg", "Send", data);
     return promise.then(data => MsgSendResponse.decode(new _m0.Reader(data)));

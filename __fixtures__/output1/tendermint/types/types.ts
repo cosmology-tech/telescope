@@ -14,6 +14,15 @@ export enum BlockIDFlag {
   BLOCK_ID_FLAG_NIL = 3,
   UNRECOGNIZED = -1,
 }
+
+/** BlockIdFlag indicates which BlcokID the signature is for */
+export enum BlockIDFlagSDKType {
+  BLOCK_ID_FLAG_UNKNOWN = 0,
+  BLOCK_ID_FLAG_ABSENT = 1,
+  BLOCK_ID_FLAG_COMMIT = 2,
+  BLOCK_ID_FLAG_NIL = 3,
+  UNRECOGNIZED = -1,
+}
 export function blockIDFlagFromJSON(object: any): BlockIDFlag {
   switch (object) {
     case 0:
@@ -59,6 +68,19 @@ export function blockIDFlagToJSON(object: BlockIDFlag): string {
 
 /** SignedMsgType is a type of signed message in the consensus. */
 export enum SignedMsgType {
+  SIGNED_MSG_TYPE_UNKNOWN = 0,
+
+  /** SIGNED_MSG_TYPE_PREVOTE - Votes */
+  SIGNED_MSG_TYPE_PREVOTE = 1,
+  SIGNED_MSG_TYPE_PRECOMMIT = 2,
+
+  /** SIGNED_MSG_TYPE_PROPOSAL - Proposals */
+  SIGNED_MSG_TYPE_PROPOSAL = 32,
+  UNRECOGNIZED = -1,
+}
+
+/** SignedMsgType is a type of signed message in the consensus. */
+export enum SignedMsgTypeSDKType {
   SIGNED_MSG_TYPE_UNKNOWN = 0,
 
   /** SIGNED_MSG_TYPE_PREVOTE - Votes */

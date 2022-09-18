@@ -17,19 +17,19 @@ export class LCDQueryClient extends LCDClient {
   }
 
   /* returns coins that is going to be distributed */
-  async moduleToDistributeCoins(_params: ModuleToDistributeCoinsRequest = {}): Promise<ModuleToDistributeCoinsResponse> {
+  async moduleToDistributeCoins(_params: ModuleToDistributeCoinsRequest = {}): Promise<ModuleToDistributeCoinsResponseSDKType> {
     const endpoint = `osmosis/incentives/v1beta1/module_to_distribute_coins`;
     return await this.get<ModuleToDistributeCoinsResponseSDKType>(endpoint);
   }
 
   /* returns coins that are distributed by module so far */
-  async moduleDistributedCoins(_params: ModuleDistributedCoinsRequest = {}): Promise<ModuleDistributedCoinsResponse> {
+  async moduleDistributedCoins(_params: ModuleDistributedCoinsRequest = {}): Promise<ModuleDistributedCoinsResponseSDKType> {
     const endpoint = `osmosis/incentives/v1beta1/module_distributed_coins`;
     return await this.get<ModuleDistributedCoinsResponseSDKType>(endpoint);
   }
 
   /* returns Gauge by id */
-  async gaugeByID(params: GaugeByIDRequest): Promise<GaugeByIDResponse> {
+  async gaugeByID(params: GaugeByIDRequest): Promise<GaugeByIDResponseSDKType> {
     const endpoint = `osmosis/incentives/v1beta1/gauge_by_id/${params.id}`;
     return await this.get<GaugeByIDResponseSDKType>(endpoint);
   }
@@ -37,7 +37,7 @@ export class LCDQueryClient extends LCDClient {
   /* returns gauges both upcoming and active */
   async gauges(params: GaugesRequest = {
     pagination: undefined
-  }): Promise<GaugesResponse> {
+  }): Promise<GaugesResponseSDKType> {
     const options: any = {
       params: {}
     };
@@ -53,7 +53,7 @@ export class LCDQueryClient extends LCDClient {
   /* returns active gauges */
   async activeGauges(params: ActiveGaugesRequest = {
     pagination: undefined
-  }): Promise<ActiveGaugesResponse> {
+  }): Promise<ActiveGaugesResponseSDKType> {
     const options: any = {
       params: {}
     };
@@ -67,7 +67,7 @@ export class LCDQueryClient extends LCDClient {
   }
 
   /* returns active gauges per denom */
-  async activeGaugesPerDenom(params: ActiveGaugesPerDenomRequest): Promise<ActiveGaugesPerDenomResponse> {
+  async activeGaugesPerDenom(params: ActiveGaugesPerDenomRequest): Promise<ActiveGaugesPerDenomResponseSDKType> {
     const options: any = {
       params: {}
     };
@@ -87,7 +87,7 @@ export class LCDQueryClient extends LCDClient {
   /* returns scheduled gauges */
   async upcomingGauges(params: UpcomingGaugesRequest = {
     pagination: undefined
-  }): Promise<UpcomingGaugesResponse> {
+  }): Promise<UpcomingGaugesResponseSDKType> {
     const options: any = {
       params: {}
     };
@@ -101,7 +101,7 @@ export class LCDQueryClient extends LCDClient {
   }
 
   /* returns scheduled gauges per denom */
-  async upcomingGaugesPerDenom(params: UpcomingGaugesPerDenomRequest): Promise<UpcomingGaugesPerDenomResponse> {
+  async upcomingGaugesPerDenom(params: UpcomingGaugesPerDenomRequest): Promise<UpcomingGaugesPerDenomResponseSDKType> {
     const options: any = {
       params: {}
     };
@@ -121,7 +121,7 @@ export class LCDQueryClient extends LCDClient {
   /* RewardsEst returns an estimate of the rewards at a future specific time.
   The querier either provides an address or a set of locks
   for which they want to find the associated rewards. */
-  async rewardsEst(params: RewardsEstRequest): Promise<RewardsEstResponse> {
+  async rewardsEst(params: RewardsEstRequest): Promise<RewardsEstResponseSDKType> {
     const options: any = {
       params: {}
     };
@@ -139,7 +139,7 @@ export class LCDQueryClient extends LCDClient {
   }
 
   /* returns lockable durations that are valid to give incentives */
-  async lockableDurations(_params: QueryLockableDurationsRequest = {}): Promise<QueryLockableDurationsResponse> {
+  async lockableDurations(_params: QueryLockableDurationsRequest = {}): Promise<QueryLockableDurationsResponseSDKType> {
     const endpoint = `osmosis/incentives/v1beta1/lockable_durations`;
     return await this.get<QueryLockableDurationsResponseSDKType>(endpoint);
   }

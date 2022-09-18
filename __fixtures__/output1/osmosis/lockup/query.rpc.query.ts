@@ -8,54 +8,54 @@ import { ModuleBalanceRequest, ModuleBalanceRequestSDKType, ModuleBalanceRespons
 
 /** Query defines the RPC service */
 export interface Query {
-  moduleBalance(request: ModuleBalanceRequest): Promise<ModuleBalanceResponse>;
+  moduleBalance(request: ModuleBalanceRequest): Promise<ModuleBalanceResponseSDKType>;
   /*Return full balance of the module*/
 
-  moduleLockedAmount(request: ModuleLockedAmountRequest): Promise<ModuleLockedAmountResponse>;
+  moduleLockedAmount(request: ModuleLockedAmountRequest): Promise<ModuleLockedAmountResponseSDKType>;
   /*Return locked balance of the module*/
 
-  accountUnlockableCoins(request: AccountUnlockableCoinsRequest): Promise<AccountUnlockableCoinsResponse>;
+  accountUnlockableCoins(request: AccountUnlockableCoinsRequest): Promise<AccountUnlockableCoinsResponseSDKType>;
   /*Returns unlockable coins which are not withdrawn yet*/
 
-  accountUnlockingCoins(request: AccountUnlockingCoinsRequest): Promise<AccountUnlockingCoinsResponse>;
+  accountUnlockingCoins(request: AccountUnlockingCoinsRequest): Promise<AccountUnlockingCoinsResponseSDKType>;
   /*Returns unlocking coins*/
 
-  accountLockedCoins(request: AccountLockedCoinsRequest): Promise<AccountLockedCoinsResponse>;
+  accountLockedCoins(request: AccountLockedCoinsRequest): Promise<AccountLockedCoinsResponseSDKType>;
   /*Return a locked coins that can't be withdrawn*/
 
-  accountLockedPastTime(request: AccountLockedPastTimeRequest): Promise<AccountLockedPastTimeResponse>;
+  accountLockedPastTime(request: AccountLockedPastTimeRequest): Promise<AccountLockedPastTimeResponseSDKType>;
   /*Returns locked records of an account with unlock time beyond timestamp*/
 
-  accountLockedPastTimeNotUnlockingOnly(request: AccountLockedPastTimeNotUnlockingOnlyRequest): Promise<AccountLockedPastTimeNotUnlockingOnlyResponse>;
+  accountLockedPastTimeNotUnlockingOnly(request: AccountLockedPastTimeNotUnlockingOnlyRequest): Promise<AccountLockedPastTimeNotUnlockingOnlyResponseSDKType>;
   /*Returns locked records of an account with unlock time beyond timestamp
   excluding tokens started unlocking*/
 
-  accountUnlockedBeforeTime(request: AccountUnlockedBeforeTimeRequest): Promise<AccountUnlockedBeforeTimeResponse>;
+  accountUnlockedBeforeTime(request: AccountUnlockedBeforeTimeRequest): Promise<AccountUnlockedBeforeTimeResponseSDKType>;
   /*Returns unlocked records with unlock time before timestamp*/
 
-  accountLockedPastTimeDenom(request: AccountLockedPastTimeDenomRequest): Promise<AccountLockedPastTimeDenomResponse>;
+  accountLockedPastTimeDenom(request: AccountLockedPastTimeDenomRequest): Promise<AccountLockedPastTimeDenomResponseSDKType>;
   /*Returns lock records by address, timestamp, denom*/
 
-  lockedDenom(request: LockedDenomRequest): Promise<LockedDenomResponse>;
+  lockedDenom(request: LockedDenomRequest): Promise<LockedDenomResponseSDKType>;
   /*Returns total locked per denom with longer past given time*/
 
-  lockedByID(request: LockedRequest): Promise<LockedResponse>;
+  lockedByID(request: LockedRequest): Promise<LockedResponseSDKType>;
   /*Returns lock record by id*/
 
-  syntheticLockupsByLockupID(request: SyntheticLockupsByLockupIDRequest): Promise<SyntheticLockupsByLockupIDResponse>;
+  syntheticLockupsByLockupID(request: SyntheticLockupsByLockupIDRequest): Promise<SyntheticLockupsByLockupIDResponseSDKType>;
   /*Returns synthetic lockups by native lockup id*/
 
-  accountLockedLongerDuration(request: AccountLockedLongerDurationRequest): Promise<AccountLockedLongerDurationResponse>;
+  accountLockedLongerDuration(request: AccountLockedLongerDurationRequest): Promise<AccountLockedLongerDurationResponseSDKType>;
   /*Returns account locked records with longer duration*/
 
-  accountLockedDuration(request: AccountLockedDurationRequest): Promise<AccountLockedDurationResponse>;
+  accountLockedDuration(request: AccountLockedDurationRequest): Promise<AccountLockedDurationResponseSDKType>;
   /*Returns account locked records with a specific duration*/
 
-  accountLockedLongerDurationNotUnlockingOnly(request: AccountLockedLongerDurationNotUnlockingOnlyRequest): Promise<AccountLockedLongerDurationNotUnlockingOnlyResponse>;
+  accountLockedLongerDurationNotUnlockingOnly(request: AccountLockedLongerDurationNotUnlockingOnlyRequest): Promise<AccountLockedLongerDurationNotUnlockingOnlyResponseSDKType>;
   /*Returns account locked records with longer duration excluding tokens
   started unlocking*/
 
-  accountLockedLongerDurationDenom(request: AccountLockedLongerDurationDenomRequest): Promise<AccountLockedLongerDurationDenomResponse>;
+  accountLockedLongerDurationDenom(request: AccountLockedLongerDurationDenomRequest): Promise<AccountLockedLongerDurationDenomResponseSDKType>;
   /*Returns account's locked records for a denom with longer duration*/
 
 }
@@ -82,97 +82,97 @@ export class QueryClientImpl implements Query {
     this.accountLockedLongerDurationDenom = this.accountLockedLongerDurationDenom.bind(this);
   }
 
-  moduleBalance(request: ModuleBalanceRequest): Promise<ModuleBalanceResponse> {
+  moduleBalance(request: ModuleBalanceRequest): Promise<ModuleBalanceResponseSDKType> {
     const data = ModuleBalanceRequest.encode(request).finish();
     const promise = this.rpc.request("osmosis.lockup.Query", "ModuleBalance", data);
     return promise.then(data => ModuleBalanceResponse.decode(new _m0.Reader(data)));
   }
 
-  moduleLockedAmount(request: ModuleLockedAmountRequest): Promise<ModuleLockedAmountResponse> {
+  moduleLockedAmount(request: ModuleLockedAmountRequest): Promise<ModuleLockedAmountResponseSDKType> {
     const data = ModuleLockedAmountRequest.encode(request).finish();
     const promise = this.rpc.request("osmosis.lockup.Query", "ModuleLockedAmount", data);
     return promise.then(data => ModuleLockedAmountResponse.decode(new _m0.Reader(data)));
   }
 
-  accountUnlockableCoins(request: AccountUnlockableCoinsRequest): Promise<AccountUnlockableCoinsResponse> {
+  accountUnlockableCoins(request: AccountUnlockableCoinsRequest): Promise<AccountUnlockableCoinsResponseSDKType> {
     const data = AccountUnlockableCoinsRequest.encode(request).finish();
     const promise = this.rpc.request("osmosis.lockup.Query", "AccountUnlockableCoins", data);
     return promise.then(data => AccountUnlockableCoinsResponse.decode(new _m0.Reader(data)));
   }
 
-  accountUnlockingCoins(request: AccountUnlockingCoinsRequest): Promise<AccountUnlockingCoinsResponse> {
+  accountUnlockingCoins(request: AccountUnlockingCoinsRequest): Promise<AccountUnlockingCoinsResponseSDKType> {
     const data = AccountUnlockingCoinsRequest.encode(request).finish();
     const promise = this.rpc.request("osmosis.lockup.Query", "AccountUnlockingCoins", data);
     return promise.then(data => AccountUnlockingCoinsResponse.decode(new _m0.Reader(data)));
   }
 
-  accountLockedCoins(request: AccountLockedCoinsRequest): Promise<AccountLockedCoinsResponse> {
+  accountLockedCoins(request: AccountLockedCoinsRequest): Promise<AccountLockedCoinsResponseSDKType> {
     const data = AccountLockedCoinsRequest.encode(request).finish();
     const promise = this.rpc.request("osmosis.lockup.Query", "AccountLockedCoins", data);
     return promise.then(data => AccountLockedCoinsResponse.decode(new _m0.Reader(data)));
   }
 
-  accountLockedPastTime(request: AccountLockedPastTimeRequest): Promise<AccountLockedPastTimeResponse> {
+  accountLockedPastTime(request: AccountLockedPastTimeRequest): Promise<AccountLockedPastTimeResponseSDKType> {
     const data = AccountLockedPastTimeRequest.encode(request).finish();
     const promise = this.rpc.request("osmosis.lockup.Query", "AccountLockedPastTime", data);
     return promise.then(data => AccountLockedPastTimeResponse.decode(new _m0.Reader(data)));
   }
 
-  accountLockedPastTimeNotUnlockingOnly(request: AccountLockedPastTimeNotUnlockingOnlyRequest): Promise<AccountLockedPastTimeNotUnlockingOnlyResponse> {
+  accountLockedPastTimeNotUnlockingOnly(request: AccountLockedPastTimeNotUnlockingOnlyRequest): Promise<AccountLockedPastTimeNotUnlockingOnlyResponseSDKType> {
     const data = AccountLockedPastTimeNotUnlockingOnlyRequest.encode(request).finish();
     const promise = this.rpc.request("osmosis.lockup.Query", "AccountLockedPastTimeNotUnlockingOnly", data);
     return promise.then(data => AccountLockedPastTimeNotUnlockingOnlyResponse.decode(new _m0.Reader(data)));
   }
 
-  accountUnlockedBeforeTime(request: AccountUnlockedBeforeTimeRequest): Promise<AccountUnlockedBeforeTimeResponse> {
+  accountUnlockedBeforeTime(request: AccountUnlockedBeforeTimeRequest): Promise<AccountUnlockedBeforeTimeResponseSDKType> {
     const data = AccountUnlockedBeforeTimeRequest.encode(request).finish();
     const promise = this.rpc.request("osmosis.lockup.Query", "AccountUnlockedBeforeTime", data);
     return promise.then(data => AccountUnlockedBeforeTimeResponse.decode(new _m0.Reader(data)));
   }
 
-  accountLockedPastTimeDenom(request: AccountLockedPastTimeDenomRequest): Promise<AccountLockedPastTimeDenomResponse> {
+  accountLockedPastTimeDenom(request: AccountLockedPastTimeDenomRequest): Promise<AccountLockedPastTimeDenomResponseSDKType> {
     const data = AccountLockedPastTimeDenomRequest.encode(request).finish();
     const promise = this.rpc.request("osmosis.lockup.Query", "AccountLockedPastTimeDenom", data);
     return promise.then(data => AccountLockedPastTimeDenomResponse.decode(new _m0.Reader(data)));
   }
 
-  lockedDenom(request: LockedDenomRequest): Promise<LockedDenomResponse> {
+  lockedDenom(request: LockedDenomRequest): Promise<LockedDenomResponseSDKType> {
     const data = LockedDenomRequest.encode(request).finish();
     const promise = this.rpc.request("osmosis.lockup.Query", "LockedDenom", data);
     return promise.then(data => LockedDenomResponse.decode(new _m0.Reader(data)));
   }
 
-  lockedByID(request: LockedRequest): Promise<LockedResponse> {
+  lockedByID(request: LockedRequest): Promise<LockedResponseSDKType> {
     const data = LockedRequest.encode(request).finish();
     const promise = this.rpc.request("osmosis.lockup.Query", "LockedByID", data);
     return promise.then(data => LockedResponse.decode(new _m0.Reader(data)));
   }
 
-  syntheticLockupsByLockupID(request: SyntheticLockupsByLockupIDRequest): Promise<SyntheticLockupsByLockupIDResponse> {
+  syntheticLockupsByLockupID(request: SyntheticLockupsByLockupIDRequest): Promise<SyntheticLockupsByLockupIDResponseSDKType> {
     const data = SyntheticLockupsByLockupIDRequest.encode(request).finish();
     const promise = this.rpc.request("osmosis.lockup.Query", "SyntheticLockupsByLockupID", data);
     return promise.then(data => SyntheticLockupsByLockupIDResponse.decode(new _m0.Reader(data)));
   }
 
-  accountLockedLongerDuration(request: AccountLockedLongerDurationRequest): Promise<AccountLockedLongerDurationResponse> {
+  accountLockedLongerDuration(request: AccountLockedLongerDurationRequest): Promise<AccountLockedLongerDurationResponseSDKType> {
     const data = AccountLockedLongerDurationRequest.encode(request).finish();
     const promise = this.rpc.request("osmosis.lockup.Query", "AccountLockedLongerDuration", data);
     return promise.then(data => AccountLockedLongerDurationResponse.decode(new _m0.Reader(data)));
   }
 
-  accountLockedDuration(request: AccountLockedDurationRequest): Promise<AccountLockedDurationResponse> {
+  accountLockedDuration(request: AccountLockedDurationRequest): Promise<AccountLockedDurationResponseSDKType> {
     const data = AccountLockedDurationRequest.encode(request).finish();
     const promise = this.rpc.request("osmosis.lockup.Query", "AccountLockedDuration", data);
     return promise.then(data => AccountLockedDurationResponse.decode(new _m0.Reader(data)));
   }
 
-  accountLockedLongerDurationNotUnlockingOnly(request: AccountLockedLongerDurationNotUnlockingOnlyRequest): Promise<AccountLockedLongerDurationNotUnlockingOnlyResponse> {
+  accountLockedLongerDurationNotUnlockingOnly(request: AccountLockedLongerDurationNotUnlockingOnlyRequest): Promise<AccountLockedLongerDurationNotUnlockingOnlyResponseSDKType> {
     const data = AccountLockedLongerDurationNotUnlockingOnlyRequest.encode(request).finish();
     const promise = this.rpc.request("osmosis.lockup.Query", "AccountLockedLongerDurationNotUnlockingOnly", data);
     return promise.then(data => AccountLockedLongerDurationNotUnlockingOnlyResponse.decode(new _m0.Reader(data)));
   }
 
-  accountLockedLongerDurationDenom(request: AccountLockedLongerDurationDenomRequest): Promise<AccountLockedLongerDurationDenomResponse> {
+  accountLockedLongerDurationDenom(request: AccountLockedLongerDurationDenomRequest): Promise<AccountLockedLongerDurationDenomResponseSDKType> {
     const data = AccountLockedLongerDurationDenomRequest.encode(request).finish();
     const promise = this.rpc.request("osmosis.lockup.Query", "AccountLockedLongerDurationDenom", data);
     return promise.then(data => AccountLockedLongerDurationDenomResponse.decode(new _m0.Reader(data)));

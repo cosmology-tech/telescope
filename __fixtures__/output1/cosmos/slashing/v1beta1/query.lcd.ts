@@ -15,13 +15,13 @@ export class LCDQueryClient extends LCDClient {
   }
 
   /* Params queries the parameters of slashing module */
-  async params(_params: QueryParamsRequest = {}): Promise<QueryParamsResponse> {
+  async params(_params: QueryParamsRequest = {}): Promise<QueryParamsResponseSDKType> {
     const endpoint = `cosmos/slashing/v1beta1/params`;
     return await this.get<QueryParamsResponseSDKType>(endpoint);
   }
 
   /* SigningInfo queries the signing info of given cons address */
-  async signingInfo(params: QuerySigningInfoRequest): Promise<QuerySigningInfoResponse> {
+  async signingInfo(params: QuerySigningInfoRequest): Promise<QuerySigningInfoResponseSDKType> {
     const endpoint = `cosmos/slashing/v1beta1/signing_infos/${params.consAddress}`;
     return await this.get<QuerySigningInfoResponseSDKType>(endpoint);
   }
@@ -29,7 +29,7 @@ export class LCDQueryClient extends LCDClient {
   /* SigningInfos queries signing info of all validators */
   async signingInfos(params: QuerySigningInfosRequest = {
     pagination: undefined
-  }): Promise<QuerySigningInfosResponse> {
+  }): Promise<QuerySigningInfosResponseSDKType> {
     const options: any = {
       params: {}
     };

@@ -1,4 +1,4 @@
-import { Channel, ChannelSDKType, Packet, PacketSDKType, Counterparty, CounterpartySDKType, stateFromJSON, stateFromJSONSDKType, orderFromJSON, orderFromJSONSDKType } from "./channel";
+import { Channel, ChannelSDKType, Packet, PacketSDKType, Counterparty, CounterpartySDKType, stateFromJSON, orderFromJSON } from "./channel";
 import { Height, HeightSDKType } from "../../client/v1/client";
 import { AminoMsg } from "@cosmjs/amino";
 import { AminoHeight, omitDefault, Long } from "@osmonauts/helpers";

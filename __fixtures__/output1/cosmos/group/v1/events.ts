@@ -1,4 +1,4 @@
-import { ProposalExecutorResult, ProposalExecutorResultSDKType, proposalExecutorResultFromJSON, proposalExecutorResultFromJSONSDKType, proposalExecutorResultToJSON, proposalExecutorResultToJSONSDKType } from "./types";
+import { ProposalExecutorResult, ProposalExecutorResultSDKType, proposalExecutorResultFromJSON, proposalExecutorResultToJSON } from "./types";
 import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, DeepPartial } from "@osmonauts/helpers";
 export const protobufPackage = "cosmos.group.v1";

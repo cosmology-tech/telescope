@@ -13,6 +13,18 @@ export enum HashOp {
   BITCOIN = 5,
   UNRECOGNIZED = -1,
 }
+export enum HashOpSDKType {
+  /** NO_HASH - NO_HASH is the default if no data passed. Note this is an illegal argument some places. */
+  NO_HASH = 0,
+  SHA256 = 1,
+  SHA512 = 2,
+  KECCAK = 3,
+  RIPEMD160 = 4,
+
+  /** BITCOIN - ripemd160(sha256(x)) */
+  BITCOIN = 5,
+  UNRECOGNIZED = -1,
+}
 export function hashOpFromJSON(object: any): HashOp {
   switch (object) {
     case 0:
@@ -77,6 +89,42 @@ export function hashOpToJSON(object: HashOp): string {
  * (Each one with it's own encoded length)
  */
 export enum LengthOp {
+  /** NO_PREFIX - NO_PREFIX don't include any length info */
+  NO_PREFIX = 0,
+
+  /** VAR_PROTO - VAR_PROTO uses protobuf (and go-amino) varint encoding of the length */
+  VAR_PROTO = 1,
+
+  /** VAR_RLP - VAR_RLP uses rlp int encoding of the length */
+  VAR_RLP = 2,
+
+  /** FIXED32_BIG - FIXED32_BIG uses big-endian encoding of the length as a 32 bit integer */
+  FIXED32_BIG = 3,
+
+  /** FIXED32_LITTLE - FIXED32_LITTLE uses little-endian encoding of the length as a 32 bit integer */
+  FIXED32_LITTLE = 4,
+
+  /** FIXED64_BIG - FIXED64_BIG uses big-endian encoding of the length as a 64 bit integer */
+  FIXED64_BIG = 5,
+
+  /** FIXED64_LITTLE - FIXED64_LITTLE uses little-endian encoding of the length as a 64 bit integer */
+  FIXED64_LITTLE = 6,
+
+  /** REQUIRE_32_BYTES - REQUIRE_32_BYTES is like NONE, but will fail if the input is not exactly 32 bytes (sha256 output) */
+  REQUIRE_32_BYTES = 7,
+
+  /** REQUIRE_64_BYTES - REQUIRE_64_BYTES is like NONE, but will fail if the input is not exactly 64 bytes (sha512 output) */
+  REQUIRE_64_BYTES = 8,
+  UNRECOGNIZED = -1,
+}
+
+/**
+ * LengthOp defines how to process the key and value of the LeafOp
+ * to include length information. After encoding the length with the given
+ * algorithm, the length will be prepended to the key and value bytes.
+ * (Each one with it's own encoded length)
+ */
+export enum LengthOpSDKType {
   /** NO_PREFIX - NO_PREFIX don't include any length info */
   NO_PREFIX = 0,
 

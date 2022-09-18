@@ -24,6 +24,25 @@ export enum IssueDetails_Severity {
   ERROR = 3,
   UNRECOGNIZED = -1,
 }
+
+/** Severities of issues. */
+export enum IssueDetails_SeveritySDKType {
+  /** SEVERITY_UNSPECIFIED - An unspecified severity. */
+  SEVERITY_UNSPECIFIED = 0,
+
+  /**
+   * DEPRECATION - Deprecation issue for statements and method that may no longer be
+   * supported or maintained.
+   */
+  DEPRECATION = 1,
+
+  /** WARNING - Warnings such as: unused variables. */
+  WARNING = 2,
+
+  /** ERROR - Errors such as: unmatched curly braces or variable redefinition. */
+  ERROR = 3,
+  UNRECOGNIZED = -1,
+}
 export function issueDetails_SeverityFromJSON(object: any): IssueDetails_Severity {
   switch (object) {
     case 0:

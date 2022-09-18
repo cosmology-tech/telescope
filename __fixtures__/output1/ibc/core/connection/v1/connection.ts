@@ -24,6 +24,28 @@ export enum State {
   STATE_OPEN = 3,
   UNRECOGNIZED = -1,
 }
+
+/**
+ * State defines if a connection is in one of the following states:
+ * INIT, TRYOPEN, OPEN or UNINITIALIZED.
+ */
+export enum StateSDKType {
+  /** STATE_UNINITIALIZED_UNSPECIFIED - Default State */
+  STATE_UNINITIALIZED_UNSPECIFIED = 0,
+
+  /** STATE_INIT - A connection end has just started the opening handshake. */
+  STATE_INIT = 1,
+
+  /**
+   * STATE_TRYOPEN - A connection end has acknowledged the handshake step on the counterparty
+   * chain.
+   */
+  STATE_TRYOPEN = 2,
+
+  /** STATE_OPEN - A connection end has completed the handshake. */
+  STATE_OPEN = 3,
+  UNRECOGNIZED = -1,
+}
 export function stateFromJSON(object: any): State {
   switch (object) {
     case 0:

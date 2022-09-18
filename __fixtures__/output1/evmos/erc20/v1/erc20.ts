@@ -15,6 +15,19 @@ export enum Owner {
   OWNER_EXTERNAL = 2,
   UNRECOGNIZED = -1,
 }
+
+/** Owner enumerates the ownership of a ERC20 contract. */
+export enum OwnerSDKType {
+  /** OWNER_UNSPECIFIED - OWNER_UNSPECIFIED defines an invalid/undefined owner. */
+  OWNER_UNSPECIFIED = 0,
+
+  /** OWNER_MODULE - OWNER_MODULE erc20 is owned by the erc20 module account. */
+  OWNER_MODULE = 1,
+
+  /** OWNER_EXTERNAL - EXTERNAL erc20 is owned by an external account. */
+  OWNER_EXTERNAL = 2,
+  UNRECOGNIZED = -1,
+}
 export function ownerFromJSON(object: any): Owner {
   switch (object) {
     case 0:

@@ -17,7 +17,7 @@ export class LCDQueryClient extends LCDClient {
   }
 
   /* Deployments queries deployments */
-  async deployments(params: QueryDeploymentsRequest): Promise<QueryDeploymentsResponse> {
+  async deployments(params: QueryDeploymentsRequest): Promise<QueryDeploymentsResponseSDKType> {
     const options: any = {
       params: {}
     };
@@ -35,7 +35,7 @@ export class LCDQueryClient extends LCDClient {
   }
 
   /* Deployment queries deployment details */
-  async deployment(params: QueryDeploymentRequest): Promise<QueryDeploymentResponse> {
+  async deployment(params: QueryDeploymentRequest): Promise<QueryDeploymentResponseSDKType> {
     const options: any = {
       params: {}
     };
@@ -49,7 +49,7 @@ export class LCDQueryClient extends LCDClient {
   }
 
   /* Group queries group details */
-  async group(params: QueryGroupRequest): Promise<QueryGroupResponse> {
+  async group(params: QueryGroupRequest): Promise<QueryGroupResponseSDKType> {
     const options: any = {
       params: {}
     };

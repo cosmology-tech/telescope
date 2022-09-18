@@ -11,6 +11,11 @@ export enum CheckTxType {
   RECHECK = 1,
   UNRECOGNIZED = -1,
 }
+export enum CheckTxTypeSDKType {
+  NEW = 0,
+  RECHECK = 1,
+  UNRECOGNIZED = -1,
+}
 export function checkTxTypeFromJSON(object: any): CheckTxType {
   switch (object) {
     case 0:
@@ -40,6 +45,26 @@ export function checkTxTypeToJSON(object: CheckTxType): string {
   }
 }
 export enum ResponseOfferSnapshot_Result {
+  /** UNKNOWN - Unknown result, abort all snapshot restoration */
+  UNKNOWN = 0,
+
+  /** ACCEPT - Snapshot accepted, apply chunks */
+  ACCEPT = 1,
+
+  /** ABORT - Abort all snapshot restoration */
+  ABORT = 2,
+
+  /** REJECT - Reject this specific snapshot, try others */
+  REJECT = 3,
+
+  /** REJECT_FORMAT - Reject all snapshots of this format, try others */
+  REJECT_FORMAT = 4,
+
+  /** REJECT_SENDER - Reject all snapshots from the sender(s), try others */
+  REJECT_SENDER = 5,
+  UNRECOGNIZED = -1,
+}
+export enum ResponseOfferSnapshot_ResultSDKType {
   /** UNKNOWN - Unknown result, abort all snapshot restoration */
   UNKNOWN = 0,
 
@@ -135,6 +160,26 @@ export enum ResponseApplySnapshotChunk_Result {
   REJECT_SNAPSHOT = 5,
   UNRECOGNIZED = -1,
 }
+export enum ResponseApplySnapshotChunk_ResultSDKType {
+  /** UNKNOWN - Unknown result, abort all snapshot restoration */
+  UNKNOWN = 0,
+
+  /** ACCEPT - Chunk successfully accepted */
+  ACCEPT = 1,
+
+  /** ABORT - Abort all snapshot restoration */
+  ABORT = 2,
+
+  /** RETRY - Retry chunk (combine with refetch and reject) */
+  RETRY = 3,
+
+  /** RETRY_SNAPSHOT - Retry snapshot (combine with refetch and reject) */
+  RETRY_SNAPSHOT = 4,
+
+  /** REJECT_SNAPSHOT - Reject this snapshot, try others */
+  REJECT_SNAPSHOT = 5,
+  UNRECOGNIZED = -1,
+}
 export function responseApplySnapshotChunk_ResultFromJSON(object: any): ResponseApplySnapshotChunk_Result {
   switch (object) {
     case 0:
@@ -192,6 +237,12 @@ export function responseApplySnapshotChunk_ResultToJSON(object: ResponseApplySna
   }
 }
 export enum EvidenceType {
+  UNKNOWN = 0,
+  DUPLICATE_VOTE = 1,
+  LIGHT_CLIENT_ATTACK = 2,
+  UNRECOGNIZED = -1,
+}
+export enum EvidenceTypeSDKType {
   UNKNOWN = 0,
   DUPLICATE_VOTE = 1,
   LIGHT_CLIENT_ATTACK = 2,

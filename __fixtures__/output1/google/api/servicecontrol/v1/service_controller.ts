@@ -30,6 +30,32 @@ export enum CheckResponse_ConsumerInfo_ConsumerType {
   SERVICE_SPECIFIC = 4,
   UNRECOGNIZED = -1,
 }
+
+/**
+ * The type of the consumer as defined in
+ * [Google Resource Manager](https://cloud.google.com/resource-manager/).
+ */
+export enum CheckResponse_ConsumerInfo_ConsumerTypeSDKType {
+  /** CONSUMER_TYPE_UNSPECIFIED - This is never used. */
+  CONSUMER_TYPE_UNSPECIFIED = 0,
+
+  /** PROJECT - The consumer is a Google Cloud Project. */
+  PROJECT = 1,
+
+  /** FOLDER - The consumer is a Google Cloud Folder. */
+  FOLDER = 2,
+
+  /** ORGANIZATION - The consumer is a Google Cloud Organization. */
+  ORGANIZATION = 3,
+
+  /**
+   * SERVICE_SPECIFIC - Service-specific resource container which is defined by the service
+   * producer to offer their users the ability to manage service control
+   * functionalities at a finer level of granularity than the PROJECT.
+   */
+  SERVICE_SPECIFIC = 4,
+  UNRECOGNIZED = -1,
+}
 export function checkResponse_ConsumerInfo_ConsumerTypeFromJSON(object: any): CheckResponse_ConsumerInfo_ConsumerType {
   switch (object) {
     case 0:

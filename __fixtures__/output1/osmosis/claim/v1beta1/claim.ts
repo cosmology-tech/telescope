@@ -9,6 +9,13 @@ export enum Action {
   ActionDelegateStake = 3,
   UNRECOGNIZED = -1,
 }
+export enum ActionSDKType {
+  ActionAddLiquidity = 0,
+  ActionSwap = 1,
+  ActionVote = 2,
+  ActionDelegateStake = 3,
+  UNRECOGNIZED = -1,
+}
 export function actionFromJSON(object: any): Action {
   switch (object) {
     case 0:

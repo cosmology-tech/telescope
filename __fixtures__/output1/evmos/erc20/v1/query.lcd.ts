@@ -18,7 +18,7 @@ export class LCDQueryClient extends LCDClient {
   /* TokenPairs retrieves registered token pairs */
   async tokenPairs(params: QueryTokenPairsRequest = {
     pagination: undefined
-  }): Promise<QueryTokenPairsResponse> {
+  }): Promise<QueryTokenPairsResponseSDKType> {
     const options: any = {
       params: {}
     };
@@ -32,13 +32,13 @@ export class LCDQueryClient extends LCDClient {
   }
 
   /* TokenPair retrieves a registered token pair */
-  async tokenPair(params: QueryTokenPairRequest): Promise<QueryTokenPairResponse> {
+  async tokenPair(params: QueryTokenPairRequest): Promise<QueryTokenPairResponseSDKType> {
     const endpoint = `evmos/erc20/v1/token_pairs/${params.token}`;
     return await this.get<QueryTokenPairResponseSDKType>(endpoint);
   }
 
   /* Params retrieves the erc20 module params */
-  async params(_params: QueryParamsRequest = {}): Promise<QueryParamsResponse> {
+  async params(_params: QueryParamsRequest = {}): Promise<QueryParamsResponseSDKType> {
     const endpoint = `evmos/erc20/v1/params`;
     return await this.get<QueryParamsResponseSDKType>(endpoint);
   }

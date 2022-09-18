@@ -15,13 +15,13 @@ export class LCDQueryClient extends LCDClient {
   /* FeeTokens returns a list of all the whitelisted fee tokens and their
   corresponding pools It does not include the BaseDenom, which has its own
   query endpoint */
-  async feeTokens(_params: QueryFeeTokensRequest = {}): Promise<QueryFeeTokensResponse> {
+  async feeTokens(_params: QueryFeeTokensRequest = {}): Promise<QueryFeeTokensResponseSDKType> {
     const endpoint = `osmosis/txfees/v1beta1/fee_tokens`;
     return await this.get<QueryFeeTokensResponseSDKType>(endpoint);
   }
 
   /* DenomSpotPrice */
-  async denomSpotPrice(params: QueryDenomSpotPriceRequest): Promise<QueryDenomSpotPriceResponse> {
+  async denomSpotPrice(params: QueryDenomSpotPriceRequest): Promise<QueryDenomSpotPriceResponseSDKType> {
     const options: any = {
       params: {}
     };
@@ -35,13 +35,13 @@ export class LCDQueryClient extends LCDClient {
   }
 
   /* DenomPoolId */
-  async denomPoolId(params: QueryDenomPoolIdRequest): Promise<QueryDenomPoolIdResponse> {
+  async denomPoolId(params: QueryDenomPoolIdRequest): Promise<QueryDenomPoolIdResponseSDKType> {
     const endpoint = `osmosis/txfees/v1beta1/denom_pool_id/${params.denom}`;
     return await this.get<QueryDenomPoolIdResponseSDKType>(endpoint);
   }
 
   /* BaseDenom */
-  async baseDenom(_params: QueryBaseDenomRequest = {}): Promise<QueryBaseDenomResponse> {
+  async baseDenom(_params: QueryBaseDenomRequest = {}): Promise<QueryBaseDenomResponseSDKType> {
     const endpoint = `osmosis/txfees/v1beta1/base_denom`;
     return await this.get<QueryBaseDenomResponseSDKType>(endpoint);
   }

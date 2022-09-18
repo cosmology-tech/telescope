@@ -1,4 +1,4 @@
-import { Distribution_Exemplar, Distribution_ExemplarSDKType } from "../../distribution";
+import { Distribution_Exemplar } from "../../distribution";
 import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, DeepPartial } from "@osmonauts/helpers";
 export const protobufPackage = "google.api.servicecontrol.v1";

@@ -18,6 +18,22 @@ export enum Account_State {
   overdrawn = 3,
   UNRECOGNIZED = -1,
 }
+
+/** State stores state for an escrow account */
+export enum Account_StateSDKType {
+  /** invalid - AccountStateInvalid is an invalid state */
+  invalid = 0,
+
+  /** open - AccountOpen is the state when an account is open */
+  open = 1,
+
+  /** closed - AccountClosed is the state when an account is closed */
+  closed = 2,
+
+  /** overdrawn - AccountOverdrawn is the state when an account is overdrawn */
+  overdrawn = 3,
+  UNRECOGNIZED = -1,
+}
 export function account_StateFromJSON(object: any): Account_State {
   switch (object) {
     case 0:
@@ -63,6 +79,22 @@ export function account_StateToJSON(object: Account_State): string {
 
 /** Payment State */
 export enum Payment_State {
+  /** invalid - PaymentStateInvalid is the state when the payment is invalid */
+  invalid = 0,
+
+  /** open - PaymentStateOpen is the state when the payment is open */
+  open = 1,
+
+  /** closed - PaymentStateClosed is the state when the payment is closed */
+  closed = 2,
+
+  /** overdrawn - PaymentStateOverdrawn is the state when the payment is overdrawn */
+  overdrawn = 3,
+  UNRECOGNIZED = -1,
+}
+
+/** Payment State */
+export enum Payment_StateSDKType {
   /** invalid - PaymentStateInvalid is the state when the payment is invalid */
   invalid = 0,
 

@@ -12,6 +12,14 @@ export enum LockQueryType {
   ByTime = 1,
   UNRECOGNIZED = -1,
 }
+export enum LockQueryTypeSDKType {
+  /** ByDuration - Queries for locks that are longer than a certain duration */
+  ByDuration = 0,
+
+  /** ByTime - Queries for lockups that started before a specific time */
+  ByTime = 1,
+  UNRECOGNIZED = -1,
+}
 export function lockQueryTypeFromJSON(object: any): LockQueryType {
   switch (object) {
     case 0:

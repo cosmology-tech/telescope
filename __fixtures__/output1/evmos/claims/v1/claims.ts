@@ -20,6 +20,25 @@ export enum Action {
   ACTION_IBC_TRANSFER = 4,
   UNRECOGNIZED = -1,
 }
+
+/** Action defines the list of available actions to claim the airdrop tokens. */
+export enum ActionSDKType {
+  /** ACTION_UNSPECIFIED - UNSPECIFIED defines an invalid action. */
+  ACTION_UNSPECIFIED = 0,
+
+  /** ACTION_VOTE - VOTE defines a proposal vote. */
+  ACTION_VOTE = 1,
+
+  /** ACTION_DELEGATE - DELEGATE defines an staking delegation. */
+  ACTION_DELEGATE = 2,
+
+  /** ACTION_EVM - EVM defines an EVM transaction. */
+  ACTION_EVM = 3,
+
+  /** ACTION_IBC_TRANSFER - IBC Transfer defines a fungible token transfer transaction via IBC. */
+  ACTION_IBC_TRANSFER = 4,
+  UNRECOGNIZED = -1,
+}
 export function actionFromJSON(object: any): Action {
   switch (object) {
     case 0:

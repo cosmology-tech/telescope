@@ -7,6 +7,12 @@ export enum ScalarType {
   SCALAR_TYPE_BYTES = 2,
   UNRECOGNIZED = -1,
 }
+export enum ScalarTypeSDKType {
+  SCALAR_TYPE_UNSPECIFIED = 0,
+  SCALAR_TYPE_STRING = 1,
+  SCALAR_TYPE_BYTES = 2,
+  UNRECOGNIZED = -1,
+}
 export function scalarTypeFromJSON(object: any): ScalarType {
   switch (object) {
     case 0:

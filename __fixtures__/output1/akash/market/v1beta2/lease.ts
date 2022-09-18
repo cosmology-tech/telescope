@@ -19,6 +19,22 @@ export enum Lease_State {
   closed = 3,
   UNRECOGNIZED = -1,
 }
+
+/** State is an enum which refers to state of lease */
+export enum Lease_StateSDKType {
+  /** invalid - Prefix should start with 0 in enum. So declaring dummy state */
+  invalid = 0,
+
+  /** active - LeaseActive denotes state for lease active */
+  active = 1,
+
+  /** insufficient_funds - LeaseInsufficientFunds denotes state for lease insufficient_funds */
+  insufficient_funds = 2,
+
+  /** closed - LeaseClosed denotes state for lease closed */
+  closed = 3,
+  UNRECOGNIZED = -1,
+}
 export function lease_StateFromJSON(object: any): Lease_State {
   switch (object) {
     case 0:

@@ -1,4 +1,4 @@
-import { Action, ActionSDKType, ClaimRecord, ClaimRecordSDKType, actionFromJSON, actionFromJSONSDKType, actionToJSON, actionToJSONSDKType } from "./claim";
+import { Action, ActionSDKType, ClaimRecord, ClaimRecordSDKType, actionFromJSON, actionToJSON } from "./claim";
 import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { Params, ParamsSDKType } from "./params";
 import * as _m0 from "protobufjs/minimal";

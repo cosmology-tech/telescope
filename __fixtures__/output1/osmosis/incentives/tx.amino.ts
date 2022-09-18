@@ -1,5 +1,5 @@
 //@ts-nocheck
-import { QueryCondition, QueryConditionSDKType, lockQueryTypeFromJSON, lockQueryTypeFromJSONSDKType } from "../lockup/lock";
+import { QueryCondition, QueryConditionSDKType, lockQueryTypeFromJSON } from "../lockup/lock";
 import { Coin, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
 import { Timestamp, TimestampSDKType } from "../../google/protobuf/timestamp";
 import { AminoMsg } from "@cosmjs/amino";

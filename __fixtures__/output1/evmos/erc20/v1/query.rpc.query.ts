@@ -7,13 +7,13 @@ import { QueryTokenPairsRequest, QueryTokenPairsRequestSDKType, QueryTokenPairsR
 
 /** Query defines the RPC service */
 export interface Query {
-  tokenPairs(request: QueryTokenPairsRequest): Promise<QueryTokenPairsResponse>;
+  tokenPairs(request: QueryTokenPairsRequest): Promise<QueryTokenPairsResponseSDKType>;
   /*TokenPairs retrieves registered token pairs*/
 
-  tokenPair(request: QueryTokenPairRequest): Promise<QueryTokenPairResponse>;
+  tokenPair(request: QueryTokenPairRequest): Promise<QueryTokenPairResponseSDKType>;
   /*TokenPair retrieves a registered token pair*/
 
-  params(request: QueryParamsRequest): Promise<QueryParamsResponse>;
+  params(request: QueryParamsRequest): Promise<QueryParamsResponseSDKType>;
   /*Params retrieves the erc20 module params*/
 
 }
@@ -27,19 +27,19 @@ export class QueryClientImpl implements Query {
     this.params = this.params.bind(this);
   }
 
-  tokenPairs(request: QueryTokenPairsRequest): Promise<QueryTokenPairsResponse> {
+  tokenPairs(request: QueryTokenPairsRequest): Promise<QueryTokenPairsResponseSDKType> {
     const data = QueryTokenPairsRequest.encode(request).finish();
     const promise = this.rpc.request("evmos.erc20.v1.Query", "TokenPairs", data);
     return promise.then(data => QueryTokenPairsResponse.decode(new _m0.Reader(data)));
   }
 
-  tokenPair(request: QueryTokenPairRequest): Promise<QueryTokenPairResponse> {
+  tokenPair(request: QueryTokenPairRequest): Promise<QueryTokenPairResponseSDKType> {
     const data = QueryTokenPairRequest.encode(request).finish();
     const promise = this.rpc.request("evmos.erc20.v1.Query", "TokenPair", data);
     return promise.then(data => QueryTokenPairResponse.decode(new _m0.Reader(data)));
   }
 
-  params(request: QueryParamsRequest): Promise<QueryParamsResponse> {
+  params(request: QueryParamsRequest): Promise<QueryParamsResponseSDKType> {
     const data = QueryParamsRequest.encode(request).finish();
     const promise = this.rpc.request("evmos.erc20.v1.Query", "Params", data);
     return promise.then(data => QueryParamsResponse.decode(new _m0.Reader(data)));

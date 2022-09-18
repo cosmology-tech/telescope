@@ -49,6 +49,54 @@ export enum FieldDescriptorProto_Type {
   TYPE_SINT64 = 18,
   UNRECOGNIZED = -1,
 }
+export enum FieldDescriptorProto_TypeSDKType {
+  /**
+   * TYPE_DOUBLE - 0 is reserved for errors.
+   * Order is weird for historical reasons.
+   */
+  TYPE_DOUBLE = 1,
+  TYPE_FLOAT = 2,
+
+  /**
+   * TYPE_INT64 - Not ZigZag encoded.  Negative numbers take 10 bytes.  Use TYPE_SINT64 if
+   * negative values are likely.
+   */
+  TYPE_INT64 = 3,
+  TYPE_UINT64 = 4,
+
+  /**
+   * TYPE_INT32 - Not ZigZag encoded.  Negative numbers take 10 bytes.  Use TYPE_SINT32 if
+   * negative values are likely.
+   */
+  TYPE_INT32 = 5,
+  TYPE_FIXED64 = 6,
+  TYPE_FIXED32 = 7,
+  TYPE_BOOL = 8,
+  TYPE_STRING = 9,
+
+  /**
+   * TYPE_GROUP - Tag-delimited aggregate.
+   * Group type is deprecated and not supported in proto3. However, Proto3
+   * implementations should still be able to parse the group wire format and
+   * treat group fields as unknown fields.
+   */
+  TYPE_GROUP = 10,
+  TYPE_MESSAGE = 11,
+
+  /** TYPE_BYTES - New in version 2. */
+  TYPE_BYTES = 12,
+  TYPE_UINT32 = 13,
+  TYPE_ENUM = 14,
+  TYPE_SFIXED32 = 15,
+  TYPE_SFIXED64 = 16,
+
+  /** TYPE_SINT32 - Uses ZigZag encoding. */
+  TYPE_SINT32 = 17,
+
+  /** TYPE_SINT64 - Uses ZigZag encoding. */
+  TYPE_SINT64 = 18,
+  UNRECOGNIZED = -1,
+}
 export function fieldDescriptorProto_TypeFromJSON(object: any): FieldDescriptorProto_Type {
   switch (object) {
     case 1:
@@ -196,6 +244,13 @@ export enum FieldDescriptorProto_Label {
   LABEL_REPEATED = 3,
   UNRECOGNIZED = -1,
 }
+export enum FieldDescriptorProto_LabelSDKType {
+  /** LABEL_OPTIONAL - 0 is reserved for errors */
+  LABEL_OPTIONAL = 1,
+  LABEL_REQUIRED = 2,
+  LABEL_REPEATED = 3,
+  UNRECOGNIZED = -1,
+}
 export function fieldDescriptorProto_LabelFromJSON(object: any): FieldDescriptorProto_Label {
   switch (object) {
     case 1:
@@ -234,6 +289,22 @@ export function fieldDescriptorProto_LabelToJSON(object: FieldDescriptorProto_La
 
 /** Generated classes can be optimized for speed or code size. */
 export enum FileOptions_OptimizeMode {
+  /**
+   * SPEED - Generate complete code for parsing, serialization,
+   * etc.
+   */
+  SPEED = 1,
+
+  /** CODE_SIZE - Use ReflectionOps to implement these methods. */
+  CODE_SIZE = 2,
+
+  /** LITE_RUNTIME - Generate code using MessageLite and the lite runtime. */
+  LITE_RUNTIME = 3,
+  UNRECOGNIZED = -1,
+}
+
+/** Generated classes can be optimized for speed or code size. */
+export enum FileOptions_OptimizeModeSDKType {
   /**
    * SPEED - Generate complete code for parsing, serialization,
    * etc.
@@ -289,6 +360,13 @@ export enum FieldOptions_CType {
   STRING_PIECE = 2,
   UNRECOGNIZED = -1,
 }
+export enum FieldOptions_CTypeSDKType {
+  /** STRING - Default mode. */
+  STRING = 0,
+  CORD = 1,
+  STRING_PIECE = 2,
+  UNRECOGNIZED = -1,
+}
 export function fieldOptions_CTypeFromJSON(object: any): FieldOptions_CType {
   switch (object) {
     case 0:
@@ -325,6 +403,17 @@ export function fieldOptions_CTypeToJSON(object: FieldOptions_CType): string {
   }
 }
 export enum FieldOptions_JSType {
+  /** JS_NORMAL - Use the default type. */
+  JS_NORMAL = 0,
+
+  /** JS_STRING - Use JavaScript strings. */
+  JS_STRING = 1,
+
+  /** JS_NUMBER - Use JavaScript numbers. */
+  JS_NUMBER = 2,
+  UNRECOGNIZED = -1,
+}
+export enum FieldOptions_JSTypeSDKType {
   /** JS_NORMAL - Use the default type. */
   JS_NORMAL = 0,
 
@@ -377,6 +466,22 @@ export function fieldOptions_JSTypeToJSON(object: FieldOptions_JSType): string {
  * methods, and PUT verb for idempotent methods instead of the default POST.
  */
 export enum MethodOptions_IdempotencyLevel {
+  IDEMPOTENCY_UNKNOWN = 0,
+
+  /** NO_SIDE_EFFECTS - implies idempotent */
+  NO_SIDE_EFFECTS = 1,
+
+  /** IDEMPOTENT - idempotent, but may have side effects */
+  IDEMPOTENT = 2,
+  UNRECOGNIZED = -1,
+}
+
+/**
+ * Is this method side-effect-free (or safe in HTTP parlance), or idempotent,
+ * or neither? HTTP based RPC implementation may choose GET verb for safe
+ * methods, and PUT verb for idempotent methods instead of the default POST.
+ */
+export enum MethodOptions_IdempotencyLevelSDKType {
   IDEMPOTENCY_UNKNOWN = 0,
 
   /** NO_SIDE_EFFECTS - implies idempotent */

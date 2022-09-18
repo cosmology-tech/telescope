@@ -6,43 +6,43 @@ import { QueryGroupInfoRequest, QueryGroupInfoRequestSDKType, QueryGroupInfoResp
 
 /** Query defines the RPC service */
 export interface Query {
-  groupInfo(request: QueryGroupInfoRequest): Promise<QueryGroupInfoResponse>;
+  groupInfo(request: QueryGroupInfoRequest): Promise<QueryGroupInfoResponseSDKType>;
   /*GroupInfo queries group info based on group id.*/
 
-  groupPolicyInfo(request: QueryGroupPolicyInfoRequest): Promise<QueryGroupPolicyInfoResponse>;
+  groupPolicyInfo(request: QueryGroupPolicyInfoRequest): Promise<QueryGroupPolicyInfoResponseSDKType>;
   /*GroupPolicyInfo queries group policy info based on account address of group policy.*/
 
-  groupMembers(request: QueryGroupMembersRequest): Promise<QueryGroupMembersResponse>;
+  groupMembers(request: QueryGroupMembersRequest): Promise<QueryGroupMembersResponseSDKType>;
   /*GroupMembers queries members of a group*/
 
-  groupsByAdmin(request: QueryGroupsByAdminRequest): Promise<QueryGroupsByAdminResponse>;
+  groupsByAdmin(request: QueryGroupsByAdminRequest): Promise<QueryGroupsByAdminResponseSDKType>;
   /*GroupsByAdmin queries groups by admin address.*/
 
-  groupPoliciesByGroup(request: QueryGroupPoliciesByGroupRequest): Promise<QueryGroupPoliciesByGroupResponse>;
+  groupPoliciesByGroup(request: QueryGroupPoliciesByGroupRequest): Promise<QueryGroupPoliciesByGroupResponseSDKType>;
   /*GroupPoliciesByGroup queries group policies by group id.*/
 
-  groupPoliciesByAdmin(request: QueryGroupPoliciesByAdminRequest): Promise<QueryGroupPoliciesByAdminResponse>;
+  groupPoliciesByAdmin(request: QueryGroupPoliciesByAdminRequest): Promise<QueryGroupPoliciesByAdminResponseSDKType>;
   /*GroupsByAdmin queries group policies by admin address.*/
 
-  proposal(request: QueryProposalRequest): Promise<QueryProposalResponse>;
+  proposal(request: QueryProposalRequest): Promise<QueryProposalResponseSDKType>;
   /*Proposal queries a proposal based on proposal id.*/
 
-  proposalsByGroupPolicy(request: QueryProposalsByGroupPolicyRequest): Promise<QueryProposalsByGroupPolicyResponse>;
+  proposalsByGroupPolicy(request: QueryProposalsByGroupPolicyRequest): Promise<QueryProposalsByGroupPolicyResponseSDKType>;
   /*ProposalsByGroupPolicy queries proposals based on account address of group policy.*/
 
-  voteByProposalVoter(request: QueryVoteByProposalVoterRequest): Promise<QueryVoteByProposalVoterResponse>;
+  voteByProposalVoter(request: QueryVoteByProposalVoterRequest): Promise<QueryVoteByProposalVoterResponseSDKType>;
   /*VoteByProposalVoter queries a vote by proposal id and voter.*/
 
-  votesByProposal(request: QueryVotesByProposalRequest): Promise<QueryVotesByProposalResponse>;
+  votesByProposal(request: QueryVotesByProposalRequest): Promise<QueryVotesByProposalResponseSDKType>;
   /*VotesByProposal queries a vote by proposal.*/
 
-  votesByVoter(request: QueryVotesByVoterRequest): Promise<QueryVotesByVoterResponse>;
+  votesByVoter(request: QueryVotesByVoterRequest): Promise<QueryVotesByVoterResponseSDKType>;
   /*VotesByVoter queries a vote by voter.*/
 
-  groupsByMember(request: QueryGroupsByMemberRequest): Promise<QueryGroupsByMemberResponse>;
+  groupsByMember(request: QueryGroupsByMemberRequest): Promise<QueryGroupsByMemberResponseSDKType>;
   /*GroupsByMember queries groups by member address.*/
 
-  tallyResult(request: QueryTallyResultRequest): Promise<QueryTallyResultResponse>;
+  tallyResult(request: QueryTallyResultRequest): Promise<QueryTallyResultResponseSDKType>;
   /*TallyResult queries the tally of a proposal votes.*/
 
 }
@@ -66,79 +66,79 @@ export class QueryClientImpl implements Query {
     this.tallyResult = this.tallyResult.bind(this);
   }
 
-  groupInfo(request: QueryGroupInfoRequest): Promise<QueryGroupInfoResponse> {
+  groupInfo(request: QueryGroupInfoRequest): Promise<QueryGroupInfoResponseSDKType> {
     const data = QueryGroupInfoRequest.encode(request).finish();
     const promise = this.rpc.request("cosmos.group.v1.Query", "GroupInfo", data);
     return promise.then(data => QueryGroupInfoResponse.decode(new _m0.Reader(data)));
   }
 
-  groupPolicyInfo(request: QueryGroupPolicyInfoRequest): Promise<QueryGroupPolicyInfoResponse> {
+  groupPolicyInfo(request: QueryGroupPolicyInfoRequest): Promise<QueryGroupPolicyInfoResponseSDKType> {
     const data = QueryGroupPolicyInfoRequest.encode(request).finish();
     const promise = this.rpc.request("cosmos.group.v1.Query", "GroupPolicyInfo", data);
     return promise.then(data => QueryGroupPolicyInfoResponse.decode(new _m0.Reader(data)));
   }
 
-  groupMembers(request: QueryGroupMembersRequest): Promise<QueryGroupMembersResponse> {
+  groupMembers(request: QueryGroupMembersRequest): Promise<QueryGroupMembersResponseSDKType> {
     const data = QueryGroupMembersRequest.encode(request).finish();
     const promise = this.rpc.request("cosmos.group.v1.Query", "GroupMembers", data);
     return promise.then(data => QueryGroupMembersResponse.decode(new _m0.Reader(data)));
   }
 
-  groupsByAdmin(request: QueryGroupsByAdminRequest): Promise<QueryGroupsByAdminResponse> {
+  groupsByAdmin(request: QueryGroupsByAdminRequest): Promise<QueryGroupsByAdminResponseSDKType> {
     const data = QueryGroupsByAdminRequest.encode(request).finish();
     const promise = this.rpc.request("cosmos.group.v1.Query", "GroupsByAdmin", data);
     return promise.then(data => QueryGroupsByAdminResponse.decode(new _m0.Reader(data)));
   }
 
-  groupPoliciesByGroup(request: QueryGroupPoliciesByGroupRequest): Promise<QueryGroupPoliciesByGroupResponse> {
+  groupPoliciesByGroup(request: QueryGroupPoliciesByGroupRequest): Promise<QueryGroupPoliciesByGroupResponseSDKType> {
     const data = QueryGroupPoliciesByGroupRequest.encode(request).finish();
     const promise = this.rpc.request("cosmos.group.v1.Query", "GroupPoliciesByGroup", data);
     return promise.then(data => QueryGroupPoliciesByGroupResponse.decode(new _m0.Reader(data)));
   }
 
-  groupPoliciesByAdmin(request: QueryGroupPoliciesByAdminRequest): Promise<QueryGroupPoliciesByAdminResponse> {
+  groupPoliciesByAdmin(request: QueryGroupPoliciesByAdminRequest): Promise<QueryGroupPoliciesByAdminResponseSDKType> {
     const data = QueryGroupPoliciesByAdminRequest.encode(request).finish();
     const promise = this.rpc.request("cosmos.group.v1.Query", "GroupPoliciesByAdmin", data);
     return promise.then(data => QueryGroupPoliciesByAdminResponse.decode(new _m0.Reader(data)));
   }
 
-  proposal(request: QueryProposalRequest): Promise<QueryProposalResponse> {
+  proposal(request: QueryProposalRequest): Promise<QueryProposalResponseSDKType> {
     const data = QueryProposalRequest.encode(request).finish();
     const promise = this.rpc.request("cosmos.group.v1.Query", "Proposal", data);
     return promise.then(data => QueryProposalResponse.decode(new _m0.Reader(data)));
   }
 
-  proposalsByGroupPolicy(request: QueryProposalsByGroupPolicyRequest): Promise<QueryProposalsByGroupPolicyResponse> {
+  proposalsByGroupPolicy(request: QueryProposalsByGroupPolicyRequest): Promise<QueryProposalsByGroupPolicyResponseSDKType> {
     const data = QueryProposalsByGroupPolicyRequest.encode(request).finish();
     const promise = this.rpc.request("cosmos.group.v1.Query", "ProposalsByGroupPolicy", data);
     return promise.then(data => QueryProposalsByGroupPolicyResponse.decode(new _m0.Reader(data)));
   }
 
-  voteByProposalVoter(request: QueryVoteByProposalVoterRequest): Promise<QueryVoteByProposalVoterResponse> {
+  voteByProposalVoter(request: QueryVoteByProposalVoterRequest): Promise<QueryVoteByProposalVoterResponseSDKType> {
     const data = QueryVoteByProposalVoterRequest.encode(request).finish();
     const promise = this.rpc.request("cosmos.group.v1.Query", "VoteByProposalVoter", data);
     return promise.then(data => QueryVoteByProposalVoterResponse.decode(new _m0.Reader(data)));
   }
 
-  votesByProposal(request: QueryVotesByProposalRequest): Promise<QueryVotesByProposalResponse> {
+  votesByProposal(request: QueryVotesByProposalRequest): Promise<QueryVotesByProposalResponseSDKType> {
     const data = QueryVotesByProposalRequest.encode(request).finish();
     const promise = this.rpc.request("cosmos.group.v1.Query", "VotesByProposal", data);
     return promise.then(data => QueryVotesByProposalResponse.decode(new _m0.Reader(data)));
   }
 
-  votesByVoter(request: QueryVotesByVoterRequest): Promise<QueryVotesByVoterResponse> {
+  votesByVoter(request: QueryVotesByVoterRequest): Promise<QueryVotesByVoterResponseSDKType> {
     const data = QueryVotesByVoterRequest.encode(request).finish();
     const promise = this.rpc.request("cosmos.group.v1.Query", "VotesByVoter", data);
     return promise.then(data => QueryVotesByVoterResponse.decode(new _m0.Reader(data)));
   }
 
-  groupsByMember(request: QueryGroupsByMemberRequest): Promise<QueryGroupsByMemberResponse> {
+  groupsByMember(request: QueryGroupsByMemberRequest): Promise<QueryGroupsByMemberResponseSDKType> {
     const data = QueryGroupsByMemberRequest.encode(request).finish();
     const promise = this.rpc.request("cosmos.group.v1.Query", "GroupsByMember", data);
     return promise.then(data => QueryGroupsByMemberResponse.decode(new _m0.Reader(data)));
   }
 
-  tallyResult(request: QueryTallyResultRequest): Promise<QueryTallyResultResponse> {
+  tallyResult(request: QueryTallyResultRequest): Promise<QueryTallyResultResponseSDKType> {
     const data = QueryTallyResultRequest.encode(request).finish();
     const promise = this.rpc.request("cosmos.group.v1.Query", "TallyResult", data);
     return promise.then(data => QueryTallyResultResponse.decode(new _m0.Reader(data)));

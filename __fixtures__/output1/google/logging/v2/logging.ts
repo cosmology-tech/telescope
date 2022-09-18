@@ -26,6 +26,27 @@ export enum TailLogEntriesResponse_SuppressionInfo_Reason {
   NOT_CONSUMED = 2,
   UNRECOGNIZED = -1,
 }
+
+/** An indicator of why entries were omitted. */
+export enum TailLogEntriesResponse_SuppressionInfo_ReasonSDKType {
+  /** REASON_UNSPECIFIED - Unexpected default. */
+  REASON_UNSPECIFIED = 0,
+
+  /**
+   * RATE_LIMIT - Indicates suppression occurred due to relevant entries being
+   * received in excess of rate limits. For quotas and limits, see
+   * [Logging API quotas and
+   * limits](https://cloud.google.com/logging/quotas#api-limits).
+   */
+  RATE_LIMIT = 1,
+
+  /**
+   * NOT_CONSUMED - Indicates suppression occurred due to the client not consuming
+   * responses quickly enough.
+   */
+  NOT_CONSUMED = 2,
+  UNRECOGNIZED = -1,
+}
 export function tailLogEntriesResponse_SuppressionInfo_ReasonFromJSON(object: any): TailLogEntriesResponse_SuppressionInfo_Reason {
   switch (object) {
     case 0:

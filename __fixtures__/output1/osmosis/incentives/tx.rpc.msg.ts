@@ -7,10 +7,10 @@ import { MsgCreateGauge, MsgCreateGaugeSDKType, MsgCreateGaugeResponse, MsgCreat
 
 /** Msg defines the RPC service */
 export interface Msg {
-  createGauge(request: MsgCreateGauge): Promise<MsgCreateGaugeResponse>;
+  createGauge(request: MsgCreateGauge): Promise<MsgCreateGaugeResponseSDKType>;
   /*null*/
 
-  addToGauge(request: MsgAddToGauge): Promise<MsgAddToGaugeResponse>;
+  addToGauge(request: MsgAddToGauge): Promise<MsgAddToGaugeResponseSDKType>;
   /*null*/
 
 }
@@ -23,13 +23,13 @@ export class MsgClientImpl implements Msg {
     this.addToGauge = this.addToGauge.bind(this);
   }
 
-  createGauge(request: MsgCreateGauge): Promise<MsgCreateGaugeResponse> {
+  createGauge(request: MsgCreateGauge): Promise<MsgCreateGaugeResponseSDKType> {
     const data = MsgCreateGauge.encode(request).finish();
     const promise = this.rpc.request("osmosis.incentives.Msg", "CreateGauge", data);
     return promise.then(data => MsgCreateGaugeResponse.decode(new _m0.Reader(data)));
   }
 
-  addToGauge(request: MsgAddToGauge): Promise<MsgAddToGaugeResponse> {
+  addToGauge(request: MsgAddToGauge): Promise<MsgAddToGaugeResponseSDKType> {
     const data = MsgAddToGauge.encode(request).finish();
     const promise = this.rpc.request("osmosis.incentives.Msg", "AddToGauge", data);
     return promise.then(data => MsgAddToGaugeResponse.decode(new _m0.Reader(data)));

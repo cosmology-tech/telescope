@@ -22,6 +22,25 @@ export enum Group_State {
   closed = 4,
   UNRECOGNIZED = -1,
 }
+
+/** State is an enum which refers to state of group */
+export enum Group_StateSDKType {
+  /** invalid - Prefix should start with 0 in enum. So declaring dummy state */
+  invalid = 0,
+
+  /** open - GroupOpen denotes state for group open */
+  open = 1,
+
+  /** paused - GroupOrdered denotes state for group ordered */
+  paused = 2,
+
+  /** insufficient_funds - GroupInsufficientFunds denotes state for group insufficient_funds */
+  insufficient_funds = 3,
+
+  /** closed - GroupClosed denotes state for group closed */
+  closed = 4,
+  UNRECOGNIZED = -1,
+}
 export function group_StateFromJSON(object: any): Group_State {
   switch (object) {
     case 0:

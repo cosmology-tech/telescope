@@ -8,21 +8,21 @@ import { QueryConnectionRequest, QueryConnectionRequestSDKType, QueryConnectionR
 
 /** Query defines the RPC service */
 export interface Query {
-  connection(request: QueryConnectionRequest): Promise<QueryConnectionResponse>;
+  connection(request: QueryConnectionRequest): Promise<QueryConnectionResponseSDKType>;
   /*Connection queries an IBC connection end.*/
 
-  connections(request: QueryConnectionsRequest): Promise<QueryConnectionsResponse>;
+  connections(request: QueryConnectionsRequest): Promise<QueryConnectionsResponseSDKType>;
   /*Connections queries all the IBC connections of a chain.*/
 
-  clientConnections(request: QueryClientConnectionsRequest): Promise<QueryClientConnectionsResponse>;
+  clientConnections(request: QueryClientConnectionsRequest): Promise<QueryClientConnectionsResponseSDKType>;
   /*ClientConnections queries the connection paths associated with a client
   state.*/
 
-  connectionClientState(request: QueryConnectionClientStateRequest): Promise<QueryConnectionClientStateResponse>;
+  connectionClientState(request: QueryConnectionClientStateRequest): Promise<QueryConnectionClientStateResponseSDKType>;
   /*ConnectionClientState queries the client state associated with the
   connection.*/
 
-  connectionConsensusState(request: QueryConnectionConsensusStateRequest): Promise<QueryConnectionConsensusStateResponse>;
+  connectionConsensusState(request: QueryConnectionConsensusStateRequest): Promise<QueryConnectionConsensusStateResponseSDKType>;
   /*ConnectionConsensusState queries the consensus state associated with the
   connection.*/
 
@@ -39,31 +39,31 @@ export class QueryClientImpl implements Query {
     this.connectionConsensusState = this.connectionConsensusState.bind(this);
   }
 
-  connection(request: QueryConnectionRequest): Promise<QueryConnectionResponse> {
+  connection(request: QueryConnectionRequest): Promise<QueryConnectionResponseSDKType> {
     const data = QueryConnectionRequest.encode(request).finish();
     const promise = this.rpc.request("ibc.core.connection.v1.Query", "Connection", data);
     return promise.then(data => QueryConnectionResponse.decode(new _m0.Reader(data)));
   }
 
-  connections(request: QueryConnectionsRequest): Promise<QueryConnectionsResponse> {
+  connections(request: QueryConnectionsRequest): Promise<QueryConnectionsResponseSDKType> {
     const data = QueryConnectionsRequest.encode(request).finish();
     const promise = this.rpc.request("ibc.core.connection.v1.Query", "Connections", data);
     return promise.then(data => QueryConnectionsResponse.decode(new _m0.Reader(data)));
   }
 
-  clientConnections(request: QueryClientConnectionsRequest): Promise<QueryClientConnectionsResponse> {
+  clientConnections(request: QueryClientConnectionsRequest): Promise<QueryClientConnectionsResponseSDKType> {
     const data = QueryClientConnectionsRequest.encode(request).finish();
     const promise = this.rpc.request("ibc.core.connection.v1.Query", "ClientConnections", data);
     return promise.then(data => QueryClientConnectionsResponse.decode(new _m0.Reader(data)));
   }
 
-  connectionClientState(request: QueryConnectionClientStateRequest): Promise<QueryConnectionClientStateResponse> {
+  connectionClientState(request: QueryConnectionClientStateRequest): Promise<QueryConnectionClientStateResponseSDKType> {
     const data = QueryConnectionClientStateRequest.encode(request).finish();
     const promise = this.rpc.request("ibc.core.connection.v1.Query", "ConnectionClientState", data);
     return promise.then(data => QueryConnectionClientStateResponse.decode(new _m0.Reader(data)));
   }
 
-  connectionConsensusState(request: QueryConnectionConsensusStateRequest): Promise<QueryConnectionConsensusStateResponse> {
+  connectionConsensusState(request: QueryConnectionConsensusStateRequest): Promise<QueryConnectionConsensusStateResponseSDKType> {
     const data = QueryConnectionConsensusStateRequest.encode(request).finish();
     const promise = this.rpc.request("ibc.core.connection.v1.Query", "ConnectionConsensusState", data);
     return promise.then(data => QueryConnectionConsensusStateResponse.decode(new _m0.Reader(data)));

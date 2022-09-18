@@ -16,37 +16,37 @@ export class LCDQueryClient extends LCDClient {
   }
 
   /* Return full balance of the module */
-  async moduleBalance(_params: ModuleBalanceRequest = {}): Promise<ModuleBalanceResponse> {
+  async moduleBalance(_params: ModuleBalanceRequest = {}): Promise<ModuleBalanceResponseSDKType> {
     const endpoint = `osmosis/lockup/v1beta1/module_balance`;
     return await this.get<ModuleBalanceResponseSDKType>(endpoint);
   }
 
   /* Return locked balance of the module */
-  async moduleLockedAmount(_params: ModuleLockedAmountRequest = {}): Promise<ModuleLockedAmountResponse> {
+  async moduleLockedAmount(_params: ModuleLockedAmountRequest = {}): Promise<ModuleLockedAmountResponseSDKType> {
     const endpoint = `osmosis/lockup/v1beta1/module_locked_amount`;
     return await this.get<ModuleLockedAmountResponseSDKType>(endpoint);
   }
 
   /* Returns unlockable coins which are not withdrawn yet */
-  async accountUnlockableCoins(params: AccountUnlockableCoinsRequest): Promise<AccountUnlockableCoinsResponse> {
+  async accountUnlockableCoins(params: AccountUnlockableCoinsRequest): Promise<AccountUnlockableCoinsResponseSDKType> {
     const endpoint = `osmosis/lockup/v1beta1/account_unlockable_coins/${params.owner}`;
     return await this.get<AccountUnlockableCoinsResponseSDKType>(endpoint);
   }
 
   /* Returns unlocking coins */
-  async accountUnlockingCoins(params: AccountUnlockingCoinsRequest): Promise<AccountUnlockingCoinsResponse> {
+  async accountUnlockingCoins(params: AccountUnlockingCoinsRequest): Promise<AccountUnlockingCoinsResponseSDKType> {
     const endpoint = `osmosis/lockup/v1beta1/account_unlocking_coins/${params.owner}`;
     return await this.get<AccountUnlockingCoinsResponseSDKType>(endpoint);
   }
 
   /* Return a locked coins that can't be withdrawn */
-  async accountLockedCoins(params: AccountLockedCoinsRequest): Promise<AccountLockedCoinsResponse> {
+  async accountLockedCoins(params: AccountLockedCoinsRequest): Promise<AccountLockedCoinsResponseSDKType> {
     const endpoint = `osmosis/lockup/v1beta1/account_locked_coins/${params.owner}`;
     return await this.get<AccountLockedCoinsResponseSDKType>(endpoint);
   }
 
   /* Returns locked records of an account with unlock time beyond timestamp */
-  async accountLockedPastTime(params: AccountLockedPastTimeRequest): Promise<AccountLockedPastTimeResponse> {
+  async accountLockedPastTime(params: AccountLockedPastTimeRequest): Promise<AccountLockedPastTimeResponseSDKType> {
     const options: any = {
       params: {}
     };
@@ -61,7 +61,7 @@ export class LCDQueryClient extends LCDClient {
 
   /* Returns locked records of an account with unlock time beyond timestamp
   excluding tokens started unlocking */
-  async accountLockedPastTimeNotUnlockingOnly(params: AccountLockedPastTimeNotUnlockingOnlyRequest): Promise<AccountLockedPastTimeNotUnlockingOnlyResponse> {
+  async accountLockedPastTimeNotUnlockingOnly(params: AccountLockedPastTimeNotUnlockingOnlyRequest): Promise<AccountLockedPastTimeNotUnlockingOnlyResponseSDKType> {
     const options: any = {
       params: {}
     };
@@ -75,7 +75,7 @@ export class LCDQueryClient extends LCDClient {
   }
 
   /* Returns unlocked records with unlock time before timestamp */
-  async accountUnlockedBeforeTime(params: AccountUnlockedBeforeTimeRequest): Promise<AccountUnlockedBeforeTimeResponse> {
+  async accountUnlockedBeforeTime(params: AccountUnlockedBeforeTimeRequest): Promise<AccountUnlockedBeforeTimeResponseSDKType> {
     const options: any = {
       params: {}
     };
@@ -89,7 +89,7 @@ export class LCDQueryClient extends LCDClient {
   }
 
   /* Returns lock records by address, timestamp, denom */
-  async accountLockedPastTimeDenom(params: AccountLockedPastTimeDenomRequest): Promise<AccountLockedPastTimeDenomResponse> {
+  async accountLockedPastTimeDenom(params: AccountLockedPastTimeDenomRequest): Promise<AccountLockedPastTimeDenomResponseSDKType> {
     const options: any = {
       params: {}
     };
@@ -107,7 +107,7 @@ export class LCDQueryClient extends LCDClient {
   }
 
   /* Returns total locked per denom with longer past given time */
-  async lockedDenom(params: LockedDenomRequest): Promise<LockedDenomResponse> {
+  async lockedDenom(params: LockedDenomRequest): Promise<LockedDenomResponseSDKType> {
     const options: any = {
       params: {}
     };
@@ -125,19 +125,19 @@ export class LCDQueryClient extends LCDClient {
   }
 
   /* Returns lock record by id */
-  async lockedByID(params: LockedRequest): Promise<LockedResponse> {
+  async lockedByID(params: LockedRequest): Promise<LockedResponseSDKType> {
     const endpoint = `osmosis/lockup/v1beta1/locked_by_id/${params.lockId}`;
     return await this.get<LockedResponseSDKType>(endpoint);
   }
 
   /* Returns synthetic lockups by native lockup id */
-  async syntheticLockupsByLockupID(params: SyntheticLockupsByLockupIDRequest): Promise<SyntheticLockupsByLockupIDResponse> {
+  async syntheticLockupsByLockupID(params: SyntheticLockupsByLockupIDRequest): Promise<SyntheticLockupsByLockupIDResponseSDKType> {
     const endpoint = `osmosis/lockup/v1beta1/synthetic_lockups_by_lock_id/${params.lockId}`;
     return await this.get<SyntheticLockupsByLockupIDResponseSDKType>(endpoint);
   }
 
   /* Returns account locked records with longer duration */
-  async accountLockedLongerDuration(params: AccountLockedLongerDurationRequest): Promise<AccountLockedLongerDurationResponse> {
+  async accountLockedLongerDuration(params: AccountLockedLongerDurationRequest): Promise<AccountLockedLongerDurationResponseSDKType> {
     const options: any = {
       params: {}
     };
@@ -151,7 +151,7 @@ export class LCDQueryClient extends LCDClient {
   }
 
   /* Returns account locked records with a specific duration */
-  async accountLockedDuration(params: AccountLockedDurationRequest): Promise<AccountLockedDurationResponse> {
+  async accountLockedDuration(params: AccountLockedDurationRequest): Promise<AccountLockedDurationResponseSDKType> {
     const options: any = {
       params: {}
     };
@@ -166,7 +166,7 @@ export class LCDQueryClient extends LCDClient {
 
   /* Returns account locked records with longer duration excluding tokens
   started unlocking */
-  async accountLockedLongerDurationNotUnlockingOnly(params: AccountLockedLongerDurationNotUnlockingOnlyRequest): Promise<AccountLockedLongerDurationNotUnlockingOnlyResponse> {
+  async accountLockedLongerDurationNotUnlockingOnly(params: AccountLockedLongerDurationNotUnlockingOnlyRequest): Promise<AccountLockedLongerDurationNotUnlockingOnlyResponseSDKType> {
     const options: any = {
       params: {}
     };
@@ -180,7 +180,7 @@ export class LCDQueryClient extends LCDClient {
   }
 
   /* Returns account's locked records for a denom with longer duration */
-  async accountLockedLongerDurationDenom(params: AccountLockedLongerDurationDenomRequest): Promise<AccountLockedLongerDurationDenomResponse> {
+  async accountLockedLongerDurationDenom(params: AccountLockedLongerDurationDenomRequest): Promise<AccountLockedLongerDurationDenomResponseSDKType> {
     const options: any = {
       params: {}
     };

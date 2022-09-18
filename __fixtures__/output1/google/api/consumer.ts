@@ -20,6 +20,25 @@ export enum Property_PropertyType {
   DOUBLE = 4,
   UNRECOGNIZED = -1,
 }
+
+/** Supported data type of the property values */
+export enum Property_PropertyTypeSDKType {
+  /** UNSPECIFIED - The type is unspecified, and will result in an error. */
+  UNSPECIFIED = 0,
+
+  /** INT64 - The type is `int64`. */
+  INT64 = 1,
+
+  /** BOOL - The type is `bool`. */
+  BOOL = 2,
+
+  /** STRING - The type is `string`. */
+  STRING = 3,
+
+  /** DOUBLE - The type is 'double'. */
+  DOUBLE = 4,
+  UNRECOGNIZED = -1,
+}
 export function property_PropertyTypeFromJSON(object: any): Property_PropertyType {
   switch (object) {
     case 0:

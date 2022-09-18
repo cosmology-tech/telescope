@@ -18,6 +18,22 @@ export enum AccessType {
   ACCESS_TYPE_EVERYBODY = 3,
   UNRECOGNIZED = -1,
 }
+
+/** AccessType permission types */
+export enum AccessTypeSDKType {
+  /** ACCESS_TYPE_UNSPECIFIED - AccessTypeUnspecified placeholder for empty value */
+  ACCESS_TYPE_UNSPECIFIED = 0,
+
+  /** ACCESS_TYPE_NOBODY - AccessTypeNobody forbidden */
+  ACCESS_TYPE_NOBODY = 1,
+
+  /** ACCESS_TYPE_ONLY_ADDRESS - AccessTypeOnlyAddress restricted to an address */
+  ACCESS_TYPE_ONLY_ADDRESS = 2,
+
+  /** ACCESS_TYPE_EVERYBODY - AccessTypeEverybody unrestricted */
+  ACCESS_TYPE_EVERYBODY = 3,
+  UNRECOGNIZED = -1,
+}
 export function accessTypeFromJSON(object: any): AccessType {
   switch (object) {
     case 0:
@@ -63,6 +79,22 @@ export function accessTypeToJSON(object: AccessType): string {
 
 /** ContractCodeHistoryOperationType actions that caused a code change */
 export enum ContractCodeHistoryOperationType {
+  /** CONTRACT_CODE_HISTORY_OPERATION_TYPE_UNSPECIFIED - ContractCodeHistoryOperationTypeUnspecified placeholder for empty value */
+  CONTRACT_CODE_HISTORY_OPERATION_TYPE_UNSPECIFIED = 0,
+
+  /** CONTRACT_CODE_HISTORY_OPERATION_TYPE_INIT - ContractCodeHistoryOperationTypeInit on chain contract instantiation */
+  CONTRACT_CODE_HISTORY_OPERATION_TYPE_INIT = 1,
+
+  /** CONTRACT_CODE_HISTORY_OPERATION_TYPE_MIGRATE - ContractCodeHistoryOperationTypeMigrate code migration */
+  CONTRACT_CODE_HISTORY_OPERATION_TYPE_MIGRATE = 2,
+
+  /** CONTRACT_CODE_HISTORY_OPERATION_TYPE_GENESIS - ContractCodeHistoryOperationTypeGenesis based on genesis data */
+  CONTRACT_CODE_HISTORY_OPERATION_TYPE_GENESIS = 3,
+  UNRECOGNIZED = -1,
+}
+
+/** ContractCodeHistoryOperationType actions that caused a code change */
+export enum ContractCodeHistoryOperationTypeSDKType {
   /** CONTRACT_CODE_HISTORY_OPERATION_TYPE_UNSPECIFIED - ContractCodeHistoryOperationTypeUnspecified placeholder for empty value */
   CONTRACT_CODE_HISTORY_OPERATION_TYPE_UNSPECIFIED = 0,
 

@@ -1,4 +1,4 @@
-import { NullValue, NullValueSDKType, nullValueFromJSON, nullValueFromJSONSDKType, nullValueToJSON, nullValueToJSONSDKType } from "../../../protobuf/struct";
+import { NullValue, NullValueSDKType, nullValueFromJSON, nullValueToJSON } from "../../../protobuf/struct";
 import { Any, AnySDKType } from "../../../protobuf/any";
 import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "@osmonauts/helpers";

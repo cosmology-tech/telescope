@@ -1,4 +1,4 @@
-import { Order, OrderSDKType, Counterparty, CounterpartySDKType, orderFromJSON, orderFromJSONSDKType, orderToJSON, orderToJSONSDKType } from "../../channel/v1/channel";
+import { Order, OrderSDKType, Counterparty, CounterpartySDKType, orderFromJSON, orderToJSON } from "../../channel/v1/channel";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "@osmonauts/helpers";
 export const protobufPackage = "ibc.core.port.v1";

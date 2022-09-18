@@ -14,6 +14,19 @@ export enum LabelDescriptor_ValueType {
   INT64 = 2,
   UNRECOGNIZED = -1,
 }
+
+/** Value types that can be used as label values. */
+export enum LabelDescriptor_ValueTypeSDKType {
+  /** STRING - A variable-length string. This is the default. */
+  STRING = 0,
+
+  /** BOOL - Boolean; true or false. */
+  BOOL = 1,
+
+  /** INT64 - A 64-bit signed integer. */
+  INT64 = 2,
+  UNRECOGNIZED = -1,
+}
 export function labelDescriptor_ValueTypeFromJSON(object: any): LabelDescriptor_ValueType {
   switch (object) {
     case 0:

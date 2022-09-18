@@ -17,7 +17,7 @@ export class LCDQueryClient extends LCDClient {
   /* buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
   buf:lint:ignore RPC_RESPONSE_STANDARD_NAME
   Accounts queries all accounts */
-  async accounts(params: QueryAccountsRequest): Promise<QueryAccountsResponse> {
+  async accounts(params: QueryAccountsRequest): Promise<QueryAccountsResponseSDKType> {
     const options: any = {
       params: {}
     };
@@ -49,7 +49,7 @@ export class LCDQueryClient extends LCDClient {
   /* buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
   buf:lint:ignore RPC_RESPONSE_STANDARD_NAME
   Payments queries all payments */
-  async payments(params: QueryPaymentsRequest): Promise<QueryPaymentsResponse> {
+  async payments(params: QueryPaymentsRequest): Promise<QueryPaymentsResponseSDKType> {
     const options: any = {
       params: {}
     };
