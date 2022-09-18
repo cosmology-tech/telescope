@@ -4,6 +4,8 @@ import { snake } from 'case';
 import { camel } from '@osmonauts/utils';
 interface TelescopeOpts {
 
+    removeUnusedImports?: boolean;
+
     prototypes?: {
         parser?: {
             keepCase?: boolean;
@@ -95,6 +97,8 @@ export type TelescopeOption = keyof TelescopeOpts;
 
 export const defaultTelescopeOptions: TelescopeOptions = {
     // global options (can be overridden through plugins)
+
+    removeUnusedImports: true,
 
     prototypes: {
         parser: {

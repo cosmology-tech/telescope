@@ -13,6 +13,8 @@ store.traverseAll();
 
 const options: TelescopeOptions = {
 
+  removeUnusedImports: false,
+
   tsDisable: {
     disableAll: false,
     patterns: [

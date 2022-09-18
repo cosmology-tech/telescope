@@ -1,10 +1,13 @@
 import * as t from '@babel/types';
+import { parse, ParserPlugin } from '@babel/parser';
 import { TelescopeOptions } from '@osmonauts/types';
 import { sync as mkdirp } from 'mkdirp';
 import { writeFileSync } from 'fs';
 import { dirname } from 'path';
 import minimatch from 'minimatch';
 import generate from '@babel/generator';
+import { unused } from './unused';
+import traverse from '@babel/traverse';
 
 export const writeAstToFile = (
     outPath: string,
@@ -14,7 +17,21 @@ export const writeAstToFile = (
 ) => {
     const ast = t.program(program);
     const content = generate(ast).code;
-    writeContentToFile(outPath, options, content, filename);
+
+    if (options.removeUnusedImports) {
+        const plugins: ParserPlugin[] = [
+            'typescript'
+        ];
+        const newAst = parse(content, {
+            sourceType: 'module',
+            plugins
+        });
+        traverse(newAst, unused);
+        const content2 = generate(newAst).code;
+        writeContentToFile(outPath, options, content2, filename);
+    } else {
+        writeContentToFile(outPath, options, content, filename);
+    }
 }
 
 
