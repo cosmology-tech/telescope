@@ -1,9 +1,8 @@
 import { createObjectWithMethods } from './object';
 import { traverse, getNestedProto } from '@osmonauts/proto-parser';
-import { defaultTelescopeOptions } from '@osmonauts/types';
 import { ProtoParseContext } from './context';
 import { createProtoType } from './proto';
-import { getTestProtoStore, expectCode } from '../../test-utils';
+import { getTestProtoStore, expectCode, defaultTelescopeOptions } from '../../test-utils';
 
 const store = getTestProtoStore();
 

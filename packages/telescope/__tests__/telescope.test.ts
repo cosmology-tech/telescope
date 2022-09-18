@@ -29,6 +29,15 @@ const options: TelescopeOptions = {
     parser: {
       keepCase: false
     },
+    methods: {
+      encode: true,
+      decode: true,
+      fromJSON: true,
+      toJSON: true,
+      fromPartial: true,
+      toSDK: true,
+      fromSDK: true
+    },
     includePackageVar: true,
     fieldDefaultIsOptional: false,
     useOptionalNullable: true,

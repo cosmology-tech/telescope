@@ -20,7 +20,17 @@ const defaultTelescopeOptionsForTesting = {
     prototypes: {
         parser: {
             keepCase: false // so we can test the camelCase
-        }
+        },
+        methods: {
+            encode: true,
+            decode: true,
+            fromJSON: true,
+            toJSON: true,
+            fromPartial: true,
+            toSDK: true,
+            fromSDK: true
+        },
+
     }
 };
 

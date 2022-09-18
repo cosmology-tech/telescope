@@ -8,6 +8,15 @@ interface TelescopeOpts {
             alternateCommentMode?: boolean;
             preferTrailingComment?: boolean;
         };
+        methods?: {
+            encode?: boolean;
+            decode?: boolean;
+            fromJSON?: boolean;
+            toJSON?: boolean;
+            fromPartial?: boolean;
+            toSDK?: boolean;
+            fromSDK?: boolean;
+        };
         includePackageVar?: boolean;
         fieldDefaultIsOptional?: boolean;
         useOptionalNullable?: boolean;
