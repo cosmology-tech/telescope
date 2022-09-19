@@ -118,3 +118,4 @@ export class QueryClientImpl implements Query {
   }
 
 }
+

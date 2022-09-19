@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RPC Query Client 1`] = `
+"export const createRpcQueryExtension = (base: QueryClient) => {
+  const rpc = createProtobufRpcClient(base);
+  const queryService = new QueryClientImpl(rpc);
+  return {
+    accounts(request: QueryAccountsRequest): Promise<QueryAccountsResponseSDKType> {
+      return queryService.accounts(request);
+    },
+
+    account(request: QueryAccountRequest): Promise<QueryAccountResponseSDKType> {
+      return queryService.account(request);
+    },
+
+    params(request: QueryParamsRequest): Promise<QueryParamsResponseSDKType> {
+      return queryService.params(request);
+    },
+
+    moduleAccounts(request: QueryModuleAccountsRequest): Promise<QueryModuleAccountsResponseSDKType> {
+      return queryService.moduleAccounts(request);
+    },
+
+    bech32Prefix(request: Bech32PrefixRequest): Promise<Bech32PrefixResponseSDKType> {
+      return queryService.bech32Prefix(request);
+    },
+
+    addressBytesToString(request: AddressBytesToStringRequest): Promise<AddressBytesToStringResponseSDKType> {
+      return queryService.addressBytesToString(request);
+    },
+
+    addressStringToBytes(request: AddressStringToBytesRequest): Promise<AddressStringToBytesResponseSDKType> {
+      return queryService.addressStringToBytes(request);
+    }
+
+  };
+};"
+`;
