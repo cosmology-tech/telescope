@@ -1,6 +1,6 @@
 {
   "name": "@osmonauts/proto-parser",
-  "version": "0.17.0",
+  "version": "0.17.1",
   "description": "A Parser for Cosmos Protobufs",
   "author": "Dan Lynch <pyramation@gmail.com>",
   "homepage": "https://github.com/osmosis-labs/telescope/tree/master/packages/parser#readme",
@@ -66,7 +66,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.18.9",
-    "@osmonauts/types": "^0.13.0",
+    "@osmonauts/types": "^0.13.1",
     "@pyramation/protobufjs": "6.11.4",
     "dotty": "0.1.2",
     "glob": "8.0.3",
