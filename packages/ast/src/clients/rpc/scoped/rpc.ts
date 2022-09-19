@@ -91,7 +91,7 @@ export const rpcNewTmAwaitImport = (
             false
         ),
         [
-            t.identifier('rpcEndpoint')
+            t.identifier('client')
         ]
     )
 
@@ -185,8 +185,7 @@ export const createScopedRpcFactory = (
 export const createScopedRpcTmFactory = (
     context: GenericParseContext,
     obj: object,
-    identifier: string,
-    className: string
+    identifier: string
 ) => {
 
     context.addUtil('Tendermint34Client');
@@ -253,11 +252,12 @@ export const createScopedRpcTmFactory = (
                             t.returnStatement(
                                 rpcTmNestedImportObject(
                                     obj,
-                                    className
+                                    'createRpcQueryExtension'
                                 )
                             )
 
-                        ])
+                        ]),
+                        true
                     )
                 )
             ]

@@ -45,7 +45,7 @@ const rpcExtensionMethod = (
     );
 }
 
-export const createRpcExtension = (
+export const createRpcQueryExtension = (
     context: GenericParseContext,
     service: ProtoService
 ) => {

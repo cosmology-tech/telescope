@@ -23,7 +23,7 @@ exports[`createScopedRpcFactory 1`] = `
 `;
 
 exports[`createScopedRpcTmFactory 1`] = `
-"export const createRpcFactorizzle = ({
+"export const createRpcFactorizzle = async ({
   rpcEndpoint
 }: {
   rpcEndpoint: string;
@@ -33,15 +33,15 @@ exports[`createScopedRpcTmFactory 1`] = `
   return {
     cosmos: {
       bank: {
-        v1beta1: (await import(\\"./proto/cosmos/bank/v1beta1/query.lcd\\")).createMyRPCQueryClient(rpcEndpoint)
+        v1beta1: (await import(\\"./proto/cosmos/bank/v1beta1/query.lcd\\")).createRpcQueryExtension(client)
       },
       gov: {
-        v1beta1: (await import(\\"./proto/cosmos/bank/v1beta1/query.lcd\\")).createMyRPCQueryClient(rpcEndpoint)
+        v1beta1: (await import(\\"./proto/cosmos/bank/v1beta1/query.lcd\\")).createRpcQueryExtension(client)
       }
     },
     osmosis: {
       gamm: {
-        v1beta1: (await import(\\"./proto/cosmos/bank/v1beta1/query.lcd\\")).createMyRPCQueryClient(rpcEndpoint)
+        v1beta1: (await import(\\"./proto/cosmos/bank/v1beta1/query.lcd\\")).createRpcQueryExtension(client)
       }
     }
   };

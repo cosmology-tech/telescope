@@ -2,7 +2,7 @@ import * as dotty from 'dotty';
 import { getNestedProto } from '@osmonauts/proto-parser';
 import { join } from 'path';
 import { TelescopeBuilder } from '../builder';
-import { createScopedRpcFactory } from '@osmonauts/ast';
+import { createScopedRpcFactory, createScopedRpcTmFactory } from '@osmonauts/ast';
 import { ProtoRef } from '@osmonauts/types';
 import { getRelativePath } from '../utils';
 import { Bundler } from '../bundler';
@@ -116,7 +116,8 @@ const makeRPC = (
     // TODO add addUtil to generic context
     ctx.proto.addUtil('Rpc');
 
-    const rpcast = createScopedRpcFactory(
+    const rpcast = createScopedRpcTmFactory(
+        ctx.proto,
         obj,
         methodName,
         'QueryClientImpl' // make option later

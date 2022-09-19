@@ -49,6 +49,5 @@ it('createScopedRpcTmFactory', async () => {
         }
     },
         'createRpcFactorizzle',
-        'createMyRPCQueryClient'
     ))
 });
