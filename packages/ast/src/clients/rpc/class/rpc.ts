@@ -159,34 +159,64 @@ const returnPromise = (name: string) => {
 const rpcClassMethod = (
     name: string,
     msg: string,
-    request: string,
-    response: string,
+    svc: ProtoServiceMethod,
     packageImport: string
 ) => {
+
+    const requestType = svc.requestType;
+    const responseType = svc.responseType;
+
+    let methodArgs: t.Identifier | t.AssignmentPattern = identifier(
+        'request',
+        t.tsTypeAnnotation(
+            t.tsTypeReference(
+                t.identifier(requestType)
+            )
+        )
+    );
+
+    const fieldNames = Object.keys(svc.fields ?? {})
+    const hasParams = fieldNames.length > 0;
+
+    // if no params, then let's default to empty object for cleaner API
+    if (!hasParams) {
+        methodArgs = t.assignmentPattern(
+            methodArgs,
+            t.objectExpression([])
+        )
+    } else if (hasParams && fieldNames.length === 1 && fieldNames.includes('pagination')) {
+        // if only argument "required" is pagination
+        // also default to empty
+        methodArgs = t.assignmentPattern(
+            methodArgs,
+            t.objectExpression([
+                t.objectProperty(
+                    t.identifier('pagination'),
+                    t.identifier('undefined'),
+                    false,
+                    false
+                )
+            ])
+        )
+    }
+
 
     return classMethod(
         'method',
         t.identifier(name),
         [
-            identifier(
-                'request',
-                t.tsTypeAnnotation(
-                    t.tsTypeReference(
-                        t.identifier(request)
-                    )
-                )
-            )
+            methodArgs
         ],
         t.blockStatement([
 
             // const data = QueryAccountsRequest.encode(request).finish();
-            encodeData(request),
+            encodeData(requestType),
 
             // const promise = this.rpc.request("cosmos.auth.v1beta1.Query", "Accounts", data);
             promiseRequest(msg, packageImport),
 
             // return promise.then((data) => QueryAccountsResponse.decode(new _m0.Reader(data)));                        
-            returnPromise(response)
+            returnPromise(responseType)
 
         ]),
         t.tsTypeAnnotation(
@@ -195,7 +225,7 @@ const rpcClassMethod = (
                 t.tsTypeParameterInstantiation(
                     [
                         t.tsTypeReference(
-                            t.identifier(response + 'SDKType')
+                            t.identifier(responseType + 'SDKType')
                         )
                     ]
                 )
@@ -283,7 +313,6 @@ const getRpcClassName = (service: ProtoService) => {
         case 'Query':
         default:
             return 'QueryClientImpl'
-
     }
 }
 
@@ -309,8 +338,7 @@ export const createRpcClientClass = (
             return rpcClassMethod(
                 name,
                 key,
-                method.requestType,
-                method.responseType,
+                method,
                 context.ref.proto.package + '.' + service.name
             )
         });

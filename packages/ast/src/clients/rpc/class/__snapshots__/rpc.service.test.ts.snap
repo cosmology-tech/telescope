@@ -38,19 +38,19 @@ exports[`RPC Service Client 2`] = `
     this.getValidatorSetByHeight = this.getValidatorSetByHeight.bind(this);
   }
 
-  getNodeInfo(request: GetNodeInfoRequest): Promise<GetNodeInfoResponseSDKType> {
+  getNodeInfo(request: GetNodeInfoRequest = {}): Promise<GetNodeInfoResponseSDKType> {
     const data = GetNodeInfoRequest.encode(request).finish();
     const promise = this.rpc.request(\\"cosmos.base.tendermint.v1beta1.Service\\", \\"GetNodeInfo\\", data);
     return promise.then(data => GetNodeInfoResponse.decode(new _m0.Reader(data)));
   }
 
-  getSyncing(request: GetSyncingRequest): Promise<GetSyncingResponseSDKType> {
+  getSyncing(request: GetSyncingRequest = {}): Promise<GetSyncingResponseSDKType> {
     const data = GetSyncingRequest.encode(request).finish();
     const promise = this.rpc.request(\\"cosmos.base.tendermint.v1beta1.Service\\", \\"GetSyncing\\", data);
     return promise.then(data => GetSyncingResponse.decode(new _m0.Reader(data)));
   }
 
-  getLatestBlock(request: GetLatestBlockRequest): Promise<GetLatestBlockResponseSDKType> {
+  getLatestBlock(request: GetLatestBlockRequest = {}): Promise<GetLatestBlockResponseSDKType> {
     const data = GetLatestBlockRequest.encode(request).finish();
     const promise = this.rpc.request(\\"cosmos.base.tendermint.v1beta1.Service\\", \\"GetLatestBlock\\", data);
     return promise.then(data => GetLatestBlockResponse.decode(new _m0.Reader(data)));
@@ -62,7 +62,9 @@ exports[`RPC Service Client 2`] = `
     return promise.then(data => GetBlockByHeightResponse.decode(new _m0.Reader(data)));
   }
 
-  getLatestValidatorSet(request: GetLatestValidatorSetRequest): Promise<GetLatestValidatorSetResponseSDKType> {
+  getLatestValidatorSet(request: GetLatestValidatorSetRequest = {
+    pagination: undefined
+  }): Promise<GetLatestValidatorSetResponseSDKType> {
     const data = GetLatestValidatorSetRequest.encode(request).finish();
     const promise = this.rpc.request(\\"cosmos.base.tendermint.v1beta1.Service\\", \\"GetLatestValidatorSet\\", data);
     return promise.then(data => GetLatestValidatorSetResponse.decode(new _m0.Reader(data)));

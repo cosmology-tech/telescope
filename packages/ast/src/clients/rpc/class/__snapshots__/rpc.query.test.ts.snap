@@ -44,7 +44,9 @@ exports[`RPC Query Client 2`] = `
     this.addressStringToBytes = this.addressStringToBytes.bind(this);
   }
 
-  accounts(request: QueryAccountsRequest): Promise<QueryAccountsResponseSDKType> {
+  accounts(request: QueryAccountsRequest = {
+    pagination: undefined
+  }): Promise<QueryAccountsResponseSDKType> {
     const data = QueryAccountsRequest.encode(request).finish();
     const promise = this.rpc.request(\\"cosmos.auth.v1beta1.Query\\", \\"Accounts\\", data);
     return promise.then(data => QueryAccountsResponse.decode(new _m0.Reader(data)));
@@ -56,19 +58,19 @@ exports[`RPC Query Client 2`] = `
     return promise.then(data => QueryAccountResponse.decode(new _m0.Reader(data)));
   }
 
-  params(request: QueryParamsRequest): Promise<QueryParamsResponseSDKType> {
+  params(request: QueryParamsRequest = {}): Promise<QueryParamsResponseSDKType> {
     const data = QueryParamsRequest.encode(request).finish();
     const promise = this.rpc.request(\\"cosmos.auth.v1beta1.Query\\", \\"Params\\", data);
     return promise.then(data => QueryParamsResponse.decode(new _m0.Reader(data)));
   }
 
-  moduleAccounts(request: QueryModuleAccountsRequest): Promise<QueryModuleAccountsResponseSDKType> {
+  moduleAccounts(request: QueryModuleAccountsRequest = {}): Promise<QueryModuleAccountsResponseSDKType> {
     const data = QueryModuleAccountsRequest.encode(request).finish();
     const promise = this.rpc.request(\\"cosmos.auth.v1beta1.Query\\", \\"ModuleAccounts\\", data);
     return promise.then(data => QueryModuleAccountsResponse.decode(new _m0.Reader(data)));
   }
 
-  bech32Prefix(request: Bech32PrefixRequest): Promise<Bech32PrefixResponseSDKType> {
+  bech32Prefix(request: Bech32PrefixRequest = {}): Promise<Bech32PrefixResponseSDKType> {
     const data = Bech32PrefixRequest.encode(request).finish();
     const promise = this.rpc.request(\\"cosmos.auth.v1beta1.Query\\", \\"Bech32Prefix\\", data);
     return promise.then(data => Bech32PrefixResponse.decode(new _m0.Reader(data)));
