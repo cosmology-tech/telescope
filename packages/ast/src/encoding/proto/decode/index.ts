@@ -136,6 +136,12 @@ export const decodeMethodFields = (context: ProtoParseContext, name: string, pro
 export const decodeMethod = (context: ProtoParseContext, name: string, proto: ProtoType) => {
     context.addUtil('_m0');
 
+    let returnType = name;
+    // decode can be coupled to API requests
+    if (context.store.responses[name]) {
+        returnType = name + 'SDKType';
+    }
+
     return objectMethod(
         'method',
         t.identifier('decode'),
@@ -240,6 +246,8 @@ export const decodeMethod = (context: ProtoParseContext, name: string, proto: Pr
                     t.variableDeclarator(
                         t.identifier('message'),
                         t.callExpression(
+
+                            // 
                             t.identifier(getBaseCreateTypeFuncName(name)),
                             []
                         )
@@ -334,7 +342,7 @@ export const decodeMethod = (context: ProtoParseContext, name: string, proto: Pr
         false,
         t.tsTypeAnnotation(
             t.tsTypeReference(
-                t.identifier(name)
+                t.identifier(returnType)
             )
         )
     )

@@ -13,13 +13,14 @@ export declare class ProtoStore {
     packages: string[];
     options: TelescopeOptions;
     requests: Record<string, ProtoServiceMethod>;
+    responses: Record<string, ProtoServiceMethod>;
     _traversed: boolean;
     constructor(protoDirs?: string[], options?: TelescopeOptions);
     findProto(filename: any): ProtoRef;
     findProtoWhere(fn: (ref: ProtoRef) => boolean): ProtoRef;
     filterProtoWhere(fn: (ref: ProtoRef) => boolean): ProtoRef[];
     findProtoObject(filename: any, name: any): any;
-    registerRequest(requestType: string, svc: ProtoServiceMethod): void;
+    registerRequest(svc: ProtoServiceMethod): void;
     getProtos(): ProtoRef[];
     getPackages(): string[];
     parseScope(type: string): {

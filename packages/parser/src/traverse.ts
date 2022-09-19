@@ -330,7 +330,6 @@ const traverseServiceMethod = (
     }
 
     store.registerRequest(
-        requestType,
         svc
     );
 

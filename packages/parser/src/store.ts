@@ -53,6 +53,7 @@ export class ProtoStore {
     options: TelescopeOptions;
 
     requests: Record<string, ProtoServiceMethod> = {};
+    responses: Record<string, ProtoServiceMethod> = {};
 
     _traversed: boolean = false;
 
@@ -84,8 +85,9 @@ export class ProtoStore {
         return getNestedProto(proto.traversed ?? proto.proto)[name];
     }
 
-    registerRequest(requestType: string, svc: ProtoServiceMethod): void {
-        this.requests[requestType] = svc;
+    registerRequest(svc: ProtoServiceMethod): void {
+        this.requests[svc.requestType] = svc;
+        this.responses[svc.responseType] = svc;
     };
 
     getProtos(): ProtoRef[] {
