@@ -2,6 +2,7 @@ import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } fr
 import { Provider, ProviderSDKType } from "./provider";
 import { Rpc } from "@osmonauts/helpers";
 import * as _m0 from "protobufjs/minimal";
+import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
 import { QueryProvidersRequest, QueryProvidersRequestSDKType, QueryProvidersResponse, QueryProvidersResponseSDKType, QueryProviderRequest, QueryProviderRequestSDKType, QueryProviderResponse, QueryProviderResponseSDKType } from "./query";
 
 /** Query defines the RPC service */
@@ -35,3 +36,17 @@ export class QueryClientImpl implements Query {
   }
 
 }
+export const createRpcQueryExtension = (base: QueryClient) => {
+  const rpc = createProtobufRpcClient(base);
+  const queryService = new QueryClientImpl(rpc);
+  return {
+    providers(request: QueryProvidersRequest): Promise<QueryProvidersResponseSDKType> {
+      return queryService.providers(request);
+    },
+
+    provider(request: QueryProviderRequest): Promise<QueryProviderResponseSDKType> {
+      return queryService.provider(request);
+    }
+
+  };
+};

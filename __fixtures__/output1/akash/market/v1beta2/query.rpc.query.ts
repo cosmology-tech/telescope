@@ -5,6 +5,7 @@ import { LeaseFilters, LeaseFiltersSDKType, LeaseID, LeaseIDSDKType, Lease, Leas
 import { Account, AccountSDKType, FractionalPayment, FractionalPaymentSDKType } from "../../escrow/v1beta2/types";
 import { Rpc } from "@osmonauts/helpers";
 import * as _m0 from "protobufjs/minimal";
+import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
 import { QueryOrdersRequest, QueryOrdersRequestSDKType, QueryOrdersResponse, QueryOrdersResponseSDKType, QueryOrderRequest, QueryOrderRequestSDKType, QueryOrderResponse, QueryOrderResponseSDKType, QueryBidsRequest, QueryBidsRequestSDKType, QueryBidsResponse, QueryBidsResponseSDKType, QueryBidRequest, QueryBidRequestSDKType, QueryBidResponse, QueryBidResponseSDKType, QueryLeasesRequest, QueryLeasesRequestSDKType, QueryLeasesResponse, QueryLeasesResponseSDKType, QueryLeaseRequest, QueryLeaseRequestSDKType, QueryLeaseResponse, QueryLeaseResponseSDKType } from "./query";
 
 /** Query defines the RPC service */
@@ -78,3 +79,33 @@ export class QueryClientImpl implements Query {
   }
 
 }
+export const createRpcQueryExtension = (base: QueryClient) => {
+  const rpc = createProtobufRpcClient(base);
+  const queryService = new QueryClientImpl(rpc);
+  return {
+    orders(request: QueryOrdersRequest): Promise<QueryOrdersResponseSDKType> {
+      return queryService.orders(request);
+    },
+
+    order(request: QueryOrderRequest): Promise<QueryOrderResponseSDKType> {
+      return queryService.order(request);
+    },
+
+    bids(request: QueryBidsRequest): Promise<QueryBidsResponseSDKType> {
+      return queryService.bids(request);
+    },
+
+    bid(request: QueryBidRequest): Promise<QueryBidResponseSDKType> {
+      return queryService.bid(request);
+    },
+
+    leases(request: QueryLeasesRequest): Promise<QueryLeasesResponseSDKType> {
+      return queryService.leases(request);
+    },
+
+    lease(request: QueryLeaseRequest): Promise<QueryLeaseResponseSDKType> {
+      return queryService.lease(request);
+    }
+
+  };
+};

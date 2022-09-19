@@ -4,6 +4,7 @@ import { Any, AnySDKType } from "../../../google/protobuf/any";
 import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { Rpc } from "@osmonauts/helpers";
 import * as _m0 from "protobufjs/minimal";
+import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
 import { QueryPoolsRequest, QueryPoolsRequestSDKType, QueryPoolsResponse, QueryPoolsResponseSDKType, QueryNumPoolsRequest, QueryNumPoolsRequestSDKType, QueryNumPoolsResponse, QueryNumPoolsResponseSDKType, QueryTotalLiquidityRequest, QueryTotalLiquidityRequestSDKType, QueryTotalLiquidityResponse, QueryTotalLiquidityResponseSDKType, QueryPoolRequest, QueryPoolRequestSDKType, QueryPoolResponse, QueryPoolResponseSDKType, QueryPoolParamsRequest, QueryPoolParamsRequestSDKType, QueryPoolParamsResponse, QueryPoolParamsResponseSDKType, QueryTotalPoolLiquidityRequest, QueryTotalPoolLiquidityRequestSDKType, QueryTotalPoolLiquidityResponse, QueryTotalPoolLiquidityResponseSDKType, QueryTotalSharesRequest, QueryTotalSharesRequestSDKType, QueryTotalSharesResponse, QueryTotalSharesResponseSDKType, QuerySpotPriceRequest, QuerySpotPriceRequestSDKType, QuerySpotPriceResponse, QuerySpotPriceResponseSDKType, QuerySwapExactAmountInRequest, QuerySwapExactAmountInRequestSDKType, QuerySwapExactAmountInResponse, QuerySwapExactAmountInResponseSDKType, QuerySwapExactAmountOutRequest, QuerySwapExactAmountOutRequestSDKType, QuerySwapExactAmountOutResponse, QuerySwapExactAmountOutResponseSDKType } from "./query";
 
 /** Query defines the RPC service */
@@ -118,3 +119,49 @@ export class QueryClientImpl implements Query {
   }
 
 }
+export const createRpcQueryExtension = (base: QueryClient) => {
+  const rpc = createProtobufRpcClient(base);
+  const queryService = new QueryClientImpl(rpc);
+  return {
+    pools(request: QueryPoolsRequest): Promise<QueryPoolsResponseSDKType> {
+      return queryService.pools(request);
+    },
+
+    numPools(request: QueryNumPoolsRequest): Promise<QueryNumPoolsResponseSDKType> {
+      return queryService.numPools(request);
+    },
+
+    totalLiquidity(request: QueryTotalLiquidityRequest): Promise<QueryTotalLiquidityResponseSDKType> {
+      return queryService.totalLiquidity(request);
+    },
+
+    pool(request: QueryPoolRequest): Promise<QueryPoolResponseSDKType> {
+      return queryService.pool(request);
+    },
+
+    poolParams(request: QueryPoolParamsRequest): Promise<QueryPoolParamsResponseSDKType> {
+      return queryService.poolParams(request);
+    },
+
+    totalPoolLiquidity(request: QueryTotalPoolLiquidityRequest): Promise<QueryTotalPoolLiquidityResponseSDKType> {
+      return queryService.totalPoolLiquidity(request);
+    },
+
+    totalShares(request: QueryTotalSharesRequest): Promise<QueryTotalSharesResponseSDKType> {
+      return queryService.totalShares(request);
+    },
+
+    spotPrice(request: QuerySpotPriceRequest): Promise<QuerySpotPriceResponseSDKType> {
+      return queryService.spotPrice(request);
+    },
+
+    estimateSwapExactAmountIn(request: QuerySwapExactAmountInRequest): Promise<QuerySwapExactAmountInResponseSDKType> {
+      return queryService.estimateSwapExactAmountIn(request);
+    },
+
+    estimateSwapExactAmountOut(request: QuerySwapExactAmountOutRequest): Promise<QuerySwapExactAmountOutResponseSDKType> {
+      return queryService.estimateSwapExactAmountOut(request);
+    }
+
+  };
+};

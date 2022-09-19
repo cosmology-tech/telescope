@@ -1,6 +1,7 @@
 import { Params, ParamsSDKType } from "./mint";
 import { Rpc } from "@osmonauts/helpers";
 import * as _m0 from "protobufjs/minimal";
+import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
 import { QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType, QueryInflationRequest, QueryInflationRequestSDKType, QueryInflationResponse, QueryInflationResponseSDKType, QueryAnnualProvisionsRequest, QueryAnnualProvisionsRequestSDKType, QueryAnnualProvisionsResponse, QueryAnnualProvisionsResponseSDKType } from "./query";
 
 /** Query defines the RPC service */
@@ -44,3 +45,21 @@ export class QueryClientImpl implements Query {
   }
 
 }
+export const createRpcQueryExtension = (base: QueryClient) => {
+  const rpc = createProtobufRpcClient(base);
+  const queryService = new QueryClientImpl(rpc);
+  return {
+    params(request: QueryParamsRequest): Promise<QueryParamsResponseSDKType> {
+      return queryService.params(request);
+    },
+
+    inflation(request: QueryInflationRequest): Promise<QueryInflationResponseSDKType> {
+      return queryService.inflation(request);
+    },
+
+    annualProvisions(request: QueryAnnualProvisionsRequest): Promise<QueryAnnualProvisionsResponseSDKType> {
+      return queryService.annualProvisions(request);
+    }
+
+  };
+};

@@ -2,6 +2,7 @@ import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } fr
 import { GroupInfo, GroupInfoSDKType, GroupPolicyInfo, GroupPolicyInfoSDKType, GroupMember, GroupMemberSDKType, Proposal, ProposalSDKType, Vote, VoteSDKType, TallyResult, TallyResultSDKType } from "./types";
 import { Rpc } from "@osmonauts/helpers";
 import * as _m0 from "protobufjs/minimal";
+import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
 import { QueryGroupInfoRequest, QueryGroupInfoRequestSDKType, QueryGroupInfoResponse, QueryGroupInfoResponseSDKType, QueryGroupPolicyInfoRequest, QueryGroupPolicyInfoRequestSDKType, QueryGroupPolicyInfoResponse, QueryGroupPolicyInfoResponseSDKType, QueryGroupMembersRequest, QueryGroupMembersRequestSDKType, QueryGroupMembersResponse, QueryGroupMembersResponseSDKType, QueryGroupsByAdminRequest, QueryGroupsByAdminRequestSDKType, QueryGroupsByAdminResponse, QueryGroupsByAdminResponseSDKType, QueryGroupPoliciesByGroupRequest, QueryGroupPoliciesByGroupRequestSDKType, QueryGroupPoliciesByGroupResponse, QueryGroupPoliciesByGroupResponseSDKType, QueryGroupPoliciesByAdminRequest, QueryGroupPoliciesByAdminRequestSDKType, QueryGroupPoliciesByAdminResponse, QueryGroupPoliciesByAdminResponseSDKType, QueryProposalRequest, QueryProposalRequestSDKType, QueryProposalResponse, QueryProposalResponseSDKType, QueryProposalsByGroupPolicyRequest, QueryProposalsByGroupPolicyRequestSDKType, QueryProposalsByGroupPolicyResponse, QueryProposalsByGroupPolicyResponseSDKType, QueryVoteByProposalVoterRequest, QueryVoteByProposalVoterRequestSDKType, QueryVoteByProposalVoterResponse, QueryVoteByProposalVoterResponseSDKType, QueryVotesByProposalRequest, QueryVotesByProposalRequestSDKType, QueryVotesByProposalResponse, QueryVotesByProposalResponseSDKType, QueryVotesByVoterRequest, QueryVotesByVoterRequestSDKType, QueryVotesByVoterResponse, QueryVotesByVoterResponseSDKType, QueryGroupsByMemberRequest, QueryGroupsByMemberRequestSDKType, QueryGroupsByMemberResponse, QueryGroupsByMemberResponseSDKType, QueryTallyResultRequest, QueryTallyResultRequestSDKType, QueryTallyResultResponse, QueryTallyResultResponseSDKType } from "./query";
 
 /** Query defines the RPC service */
@@ -145,3 +146,61 @@ export class QueryClientImpl implements Query {
   }
 
 }
+export const createRpcQueryExtension = (base: QueryClient) => {
+  const rpc = createProtobufRpcClient(base);
+  const queryService = new QueryClientImpl(rpc);
+  return {
+    groupInfo(request: QueryGroupInfoRequest): Promise<QueryGroupInfoResponseSDKType> {
+      return queryService.groupInfo(request);
+    },
+
+    groupPolicyInfo(request: QueryGroupPolicyInfoRequest): Promise<QueryGroupPolicyInfoResponseSDKType> {
+      return queryService.groupPolicyInfo(request);
+    },
+
+    groupMembers(request: QueryGroupMembersRequest): Promise<QueryGroupMembersResponseSDKType> {
+      return queryService.groupMembers(request);
+    },
+
+    groupsByAdmin(request: QueryGroupsByAdminRequest): Promise<QueryGroupsByAdminResponseSDKType> {
+      return queryService.groupsByAdmin(request);
+    },
+
+    groupPoliciesByGroup(request: QueryGroupPoliciesByGroupRequest): Promise<QueryGroupPoliciesByGroupResponseSDKType> {
+      return queryService.groupPoliciesByGroup(request);
+    },
+
+    groupPoliciesByAdmin(request: QueryGroupPoliciesByAdminRequest): Promise<QueryGroupPoliciesByAdminResponseSDKType> {
+      return queryService.groupPoliciesByAdmin(request);
+    },
+
+    proposal(request: QueryProposalRequest): Promise<QueryProposalResponseSDKType> {
+      return queryService.proposal(request);
+    },
+
+    proposalsByGroupPolicy(request: QueryProposalsByGroupPolicyRequest): Promise<QueryProposalsByGroupPolicyResponseSDKType> {
+      return queryService.proposalsByGroupPolicy(request);
+    },
+
+    voteByProposalVoter(request: QueryVoteByProposalVoterRequest): Promise<QueryVoteByProposalVoterResponseSDKType> {
+      return queryService.voteByProposalVoter(request);
+    },
+
+    votesByProposal(request: QueryVotesByProposalRequest): Promise<QueryVotesByProposalResponseSDKType> {
+      return queryService.votesByProposal(request);
+    },
+
+    votesByVoter(request: QueryVotesByVoterRequest): Promise<QueryVotesByVoterResponseSDKType> {
+      return queryService.votesByVoter(request);
+    },
+
+    groupsByMember(request: QueryGroupsByMemberRequest): Promise<QueryGroupsByMemberResponseSDKType> {
+      return queryService.groupsByMember(request);
+    },
+
+    tallyResult(request: QueryTallyResultRequest): Promise<QueryTallyResultResponseSDKType> {
+      return queryService.tallyResult(request);
+    }
+
+  };
+};

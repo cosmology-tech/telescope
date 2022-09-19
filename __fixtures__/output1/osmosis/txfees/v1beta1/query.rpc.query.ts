@@ -1,6 +1,7 @@
 import { FeeToken, FeeTokenSDKType } from "./feetoken";
 import { Rpc } from "@osmonauts/helpers";
 import * as _m0 from "protobufjs/minimal";
+import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
 import { QueryFeeTokensRequest, QueryFeeTokensRequestSDKType, QueryFeeTokensResponse, QueryFeeTokensResponseSDKType, QueryDenomSpotPriceRequest, QueryDenomSpotPriceRequestSDKType, QueryDenomSpotPriceResponse, QueryDenomSpotPriceResponseSDKType, QueryDenomPoolIdRequest, QueryDenomPoolIdRequestSDKType, QueryDenomPoolIdResponse, QueryDenomPoolIdResponseSDKType, QueryBaseDenomRequest, QueryBaseDenomRequestSDKType, QueryBaseDenomResponse, QueryBaseDenomResponseSDKType } from "./query";
 
 /** Query defines the RPC service */
@@ -56,3 +57,25 @@ export class QueryClientImpl implements Query {
   }
 
 }
+export const createRpcQueryExtension = (base: QueryClient) => {
+  const rpc = createProtobufRpcClient(base);
+  const queryService = new QueryClientImpl(rpc);
+  return {
+    feeTokens(request: QueryFeeTokensRequest): Promise<QueryFeeTokensResponseSDKType> {
+      return queryService.feeTokens(request);
+    },
+
+    denomSpotPrice(request: QueryDenomSpotPriceRequest): Promise<QueryDenomSpotPriceResponseSDKType> {
+      return queryService.denomSpotPrice(request);
+    },
+
+    denomPoolId(request: QueryDenomPoolIdRequest): Promise<QueryDenomPoolIdResponseSDKType> {
+      return queryService.denomPoolId(request);
+    },
+
+    baseDenom(request: QueryBaseDenomRequest): Promise<QueryBaseDenomResponseSDKType> {
+      return queryService.baseDenom(request);
+    }
+
+  };
+};

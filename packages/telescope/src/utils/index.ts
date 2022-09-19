@@ -26,6 +26,9 @@ export const UTILS = {
     isObject: '@osmonauts/helpers',
     Long: '@osmonauts/helpers', // exports Long and also calls the magic Long code
     // Long: { type: 'default', path: 'long', name: 'Long ' },
+    createProtobufRpcClient: '@cosmjs/stargate',
+    QueryClient: '@cosmjs/stargate',
+    Tendermint34Client: '@cosmjs/tendermint-rpc',
     OfflineSigner: '@cosmjs/proto-signing',
     omitDefault: '@osmonauts/helpers',
     Registry: '@cosmjs/proto-signing',

@@ -2,6 +2,7 @@ import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } fr
 import { ContractInfo, ContractInfoSDKType, ContractCodeHistoryEntry, ContractCodeHistoryEntrySDKType, Model, ModelSDKType } from "./types";
 import { Rpc } from "@osmonauts/helpers";
 import * as _m0 from "protobufjs/minimal";
+import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
 import { QueryContractInfoRequest, QueryContractInfoRequestSDKType, QueryContractInfoResponse, QueryContractInfoResponseSDKType, QueryContractHistoryRequest, QueryContractHistoryRequestSDKType, QueryContractHistoryResponse, QueryContractHistoryResponseSDKType, QueryContractsByCodeRequest, QueryContractsByCodeRequestSDKType, QueryContractsByCodeResponse, QueryContractsByCodeResponseSDKType, QueryAllContractStateRequest, QueryAllContractStateRequestSDKType, QueryAllContractStateResponse, QueryAllContractStateResponseSDKType, QueryRawContractStateRequest, QueryRawContractStateRequestSDKType, QueryRawContractStateResponse, QueryRawContractStateResponseSDKType, QuerySmartContractStateRequest, QuerySmartContractStateRequestSDKType, QuerySmartContractStateResponse, QuerySmartContractStateResponseSDKType, QueryCodeRequest, QueryCodeRequestSDKType, QueryCodeResponse, QueryCodeResponseSDKType, QueryCodesRequest, QueryCodesRequestSDKType, QueryCodesResponse, QueryCodesResponseSDKType, QueryPinnedCodesRequest, QueryPinnedCodesRequestSDKType, QueryPinnedCodesResponse, QueryPinnedCodesResponseSDKType } from "./query";
 
 /** Query defines the RPC service */
@@ -105,3 +106,45 @@ export class QueryClientImpl implements Query {
   }
 
 }
+export const createRpcQueryExtension = (base: QueryClient) => {
+  const rpc = createProtobufRpcClient(base);
+  const queryService = new QueryClientImpl(rpc);
+  return {
+    contractInfo(request: QueryContractInfoRequest): Promise<QueryContractInfoResponseSDKType> {
+      return queryService.contractInfo(request);
+    },
+
+    contractHistory(request: QueryContractHistoryRequest): Promise<QueryContractHistoryResponseSDKType> {
+      return queryService.contractHistory(request);
+    },
+
+    contractsByCode(request: QueryContractsByCodeRequest): Promise<QueryContractsByCodeResponseSDKType> {
+      return queryService.contractsByCode(request);
+    },
+
+    allContractState(request: QueryAllContractStateRequest): Promise<QueryAllContractStateResponseSDKType> {
+      return queryService.allContractState(request);
+    },
+
+    rawContractState(request: QueryRawContractStateRequest): Promise<QueryRawContractStateResponseSDKType> {
+      return queryService.rawContractState(request);
+    },
+
+    smartContractState(request: QuerySmartContractStateRequest): Promise<QuerySmartContractStateResponseSDKType> {
+      return queryService.smartContractState(request);
+    },
+
+    code(request: QueryCodeRequest): Promise<QueryCodeResponseSDKType> {
+      return queryService.code(request);
+    },
+
+    codes(request: QueryCodesRequest): Promise<QueryCodesResponseSDKType> {
+      return queryService.codes(request);
+    },
+
+    pinnedCodes(request: QueryPinnedCodesRequest): Promise<QueryPinnedCodesResponseSDKType> {
+      return queryService.pinnedCodes(request);
+    }
+
+  };
+};

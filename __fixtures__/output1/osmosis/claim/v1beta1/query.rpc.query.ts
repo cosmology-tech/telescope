@@ -3,6 +3,7 @@ import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { Params, ParamsSDKType } from "./params";
 import { Rpc } from "@osmonauts/helpers";
 import * as _m0 from "protobufjs/minimal";
+import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
 import { QueryModuleAccountBalanceRequest, QueryModuleAccountBalanceRequestSDKType, QueryModuleAccountBalanceResponse, QueryModuleAccountBalanceResponseSDKType, QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType, QueryClaimRecordRequest, QueryClaimRecordRequestSDKType, QueryClaimRecordResponse, QueryClaimRecordResponseSDKType, QueryClaimableForActionRequest, QueryClaimableForActionRequestSDKType, QueryClaimableForActionResponse, QueryClaimableForActionResponseSDKType, QueryTotalClaimableRequest, QueryTotalClaimableRequestSDKType, QueryTotalClaimableResponse, QueryTotalClaimableResponseSDKType } from "./query";
 
 /** Query defines the RPC service */
@@ -66,3 +67,29 @@ export class QueryClientImpl implements Query {
   }
 
 }
+export const createRpcQueryExtension = (base: QueryClient) => {
+  const rpc = createProtobufRpcClient(base);
+  const queryService = new QueryClientImpl(rpc);
+  return {
+    moduleAccountBalance(request: QueryModuleAccountBalanceRequest): Promise<QueryModuleAccountBalanceResponseSDKType> {
+      return queryService.moduleAccountBalance(request);
+    },
+
+    params(request: QueryParamsRequest): Promise<QueryParamsResponseSDKType> {
+      return queryService.params(request);
+    },
+
+    claimRecord(request: QueryClaimRecordRequest): Promise<QueryClaimRecordResponseSDKType> {
+      return queryService.claimRecord(request);
+    },
+
+    claimableForAction(request: QueryClaimableForActionRequest): Promise<QueryClaimableForActionResponseSDKType> {
+      return queryService.claimableForAction(request);
+    },
+
+    totalClaimable(request: QueryTotalClaimableRequest): Promise<QueryTotalClaimableResponseSDKType> {
+      return queryService.totalClaimable(request);
+    }
+
+  };
+};

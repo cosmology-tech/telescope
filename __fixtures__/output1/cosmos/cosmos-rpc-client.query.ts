@@ -1,15 +1,21 @@
 import { Rpc } from "@osmonauts/helpers";
+import { Tendermint34Client } from "@cosmjs/tendermint-rpc";
+import { QueryClient } from "@cosmjs/stargate";
 export const createCosmicRPCQueryClient = async ({
-  rpc
+  rpcEndpoint
 }: {
-  rpc: Rpc;
-}) => ({
-  cosmos: {
-    bank: {
-      v1beta1: new (await import("./bank/v1beta1/query.rpc.query")).QueryClientImpl(rpc)
-    },
-    gov: {
-      v1beta1: new (await import("./gov/v1beta1/query.rpc.query")).QueryClientImpl(rpc)
+  rpcEndpoint: string;
+}) => {
+  const tmClient = await Tendermint34Client.connect(rpcEndpoint);
+  const client = new QueryClient(tmClient);
+  return {
+    cosmos: {
+      bank: {
+        v1beta1: (await import("./bank/v1beta1/query.rpc.query")).createRpcQueryExtension(client)
+      },
+      gov: {
+        v1beta1: (await import("./gov/v1beta1/query.rpc.query")).createRpcQueryExtension(client)
+      }
     }
-  }
-});
+  };
+};

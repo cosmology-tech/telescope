@@ -4,6 +4,7 @@ import { DecCoin, DecCoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { Params, ParamsSDKType } from "./genesis";
 import { Rpc } from "@osmonauts/helpers";
 import * as _m0 from "protobufjs/minimal";
+import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
 import { QueryIncentivesRequest, QueryIncentivesRequestSDKType, QueryIncentivesResponse, QueryIncentivesResponseSDKType, QueryIncentiveRequest, QueryIncentiveRequestSDKType, QueryIncentiveResponse, QueryIncentiveResponseSDKType, QueryGasMetersRequest, QueryGasMetersRequestSDKType, QueryGasMetersResponse, QueryGasMetersResponseSDKType, QueryGasMeterRequest, QueryGasMeterRequestSDKType, QueryGasMeterResponse, QueryGasMeterResponseSDKType, QueryAllocationMetersRequest, QueryAllocationMetersRequestSDKType, QueryAllocationMetersResponse, QueryAllocationMetersResponseSDKType, QueryAllocationMeterRequest, QueryAllocationMeterRequestSDKType, QueryAllocationMeterResponse, QueryAllocationMeterResponseSDKType, QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType } from "./query";
 
 /** Query defines the RPC service */
@@ -88,3 +89,37 @@ export class QueryClientImpl implements Query {
   }
 
 }
+export const createRpcQueryExtension = (base: QueryClient) => {
+  const rpc = createProtobufRpcClient(base);
+  const queryService = new QueryClientImpl(rpc);
+  return {
+    incentives(request: QueryIncentivesRequest): Promise<QueryIncentivesResponseSDKType> {
+      return queryService.incentives(request);
+    },
+
+    incentive(request: QueryIncentiveRequest): Promise<QueryIncentiveResponseSDKType> {
+      return queryService.incentive(request);
+    },
+
+    gasMeters(request: QueryGasMetersRequest): Promise<QueryGasMetersResponseSDKType> {
+      return queryService.gasMeters(request);
+    },
+
+    gasMeter(request: QueryGasMeterRequest): Promise<QueryGasMeterResponseSDKType> {
+      return queryService.gasMeter(request);
+    },
+
+    allocationMeters(request: QueryAllocationMetersRequest): Promise<QueryAllocationMetersResponseSDKType> {
+      return queryService.allocationMeters(request);
+    },
+
+    allocationMeter(request: QueryAllocationMeterRequest): Promise<QueryAllocationMeterResponseSDKType> {
+      return queryService.allocationMeter(request);
+    },
+
+    params(request: QueryParamsRequest): Promise<QueryParamsResponseSDKType> {
+      return queryService.params(request);
+    }
+
+  };
+};

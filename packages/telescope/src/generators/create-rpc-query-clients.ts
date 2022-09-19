@@ -1,6 +1,6 @@
 import { buildAllImports, getDepsFromQueries } from '../imports';
 import { Bundler } from '../bundler';
-import { createRpcClientClass, createRpcClientInterface } from '@osmonauts/ast';
+import { createRpcQueryExtension, createRpcClientClass, createRpcClientInterface } from '@osmonauts/ast';
 import { getNestedProto } from '@osmonauts/proto-parser';
 import { parse } from '../parse';
 import { TelescopeBuilder } from '../builder';
@@ -53,12 +53,14 @@ export const plugin = (
 
         const asts = [];
         if (proto.Query) {
-            asts.push(createRpcClientInterface(ctx.generic, proto.Query))
-            asts.push(createRpcClientClass(ctx.generic, proto.Query))
+            asts.push(createRpcClientInterface(ctx.generic, proto.Query));
+            asts.push(createRpcClientClass(ctx.generic, proto.Query));
+            asts.push(createRpcQueryExtension(ctx.generic, proto.Query));
         }
         if (proto.Service) {
-            asts.push(createRpcClientInterface(ctx.generic, proto.Service))
-            asts.push(createRpcClientClass(ctx.generic, proto.Service))
+            asts.push(createRpcClientInterface(ctx.generic, proto.Service));
+            asts.push(createRpcClientClass(ctx.generic, proto.Service));
+            asts.push(createRpcQueryExtension(ctx.generic, proto.Service));
         }
 
         if (!asts.length) {
