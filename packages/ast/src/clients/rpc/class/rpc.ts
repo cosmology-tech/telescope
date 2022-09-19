@@ -275,6 +275,18 @@ export const createRpcClientInterface = (
 
 };
 
+const getRpcClassName = (service: ProtoService) => {
+    switch (service.name) {
+        case 'Msg':
+            return 'MsgClientImpl'
+        case 'Service':
+        case 'Query':
+        default:
+            return 'QueryClientImpl'
+
+    }
+}
+
 export const createRpcClientClass = (
     context: GenericParseContext,
     service: ProtoService
@@ -284,7 +296,7 @@ export const createRpcClientClass = (
     context.addUtil('_m0');
 
     const camelRpcMethods = context.pluginValue('rpcClients.camelCase');
-    const name = service.name + 'ClientImpl';
+    const name = getRpcClassName(service);
     const implementsName = service.name;
     const methodNames = Object.keys(service.methods ?? {})
         .map(key => {

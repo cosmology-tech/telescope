@@ -25,7 +25,7 @@ export interface Service {
 `;
 
 exports[`RPC Service Client 2`] = `
-"export class ServiceClientImpl implements Service {
+"export class QueryClientImpl implements Service {
   private readonly rpc: Rpc;
 
   constructor(rpc: Rpc) {

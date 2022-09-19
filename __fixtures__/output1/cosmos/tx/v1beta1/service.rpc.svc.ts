@@ -28,7 +28,7 @@ export interface Service {
   Since: cosmos-sdk 0.45.2*/
 
 }
-export class ServiceClientImpl implements Service {
+export class QueryClientImpl implements Service {
   private readonly rpc: Rpc;
 
   constructor(rpc: Rpc) {
