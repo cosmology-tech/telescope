@@ -3,19 +3,19 @@
 exports[`RPC Service Client 1`] = `
 "/** Service defines the RPC service */
 export interface Service {
-  getNodeInfo(request: GetNodeInfoRequest): Promise<GetNodeInfoResponseSDKType>;
+  getNodeInfo(request?: GetNodeInfoRequest): Promise<GetNodeInfoResponseSDKType>;
   /*GetNodeInfo queries the current node info.*/
 
-  getSyncing(request: GetSyncingRequest): Promise<GetSyncingResponseSDKType>;
+  getSyncing(request?: GetSyncingRequest): Promise<GetSyncingResponseSDKType>;
   /*GetSyncing queries node syncing.*/
 
-  getLatestBlock(request: GetLatestBlockRequest): Promise<GetLatestBlockResponseSDKType>;
+  getLatestBlock(request?: GetLatestBlockRequest): Promise<GetLatestBlockResponseSDKType>;
   /*GetLatestBlock returns the latest block.*/
 
   getBlockByHeight(request: GetBlockByHeightRequest): Promise<GetBlockByHeightResponseSDKType>;
   /*GetBlockByHeight queries block for given height.*/
 
-  getLatestValidatorSet(request: GetLatestValidatorSetRequest): Promise<GetLatestValidatorSetResponseSDKType>;
+  getLatestValidatorSet(request?: GetLatestValidatorSetRequest): Promise<GetLatestValidatorSetResponseSDKType>;
   /*GetLatestValidatorSet queries latest validator-set.*/
 
   getValidatorSetByHeight(request: GetValidatorSetByHeightRequest): Promise<GetValidatorSetByHeightResponseSDKType>;

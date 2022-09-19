@@ -4,25 +4,44 @@ import { ProtoService, ProtoServiceMethod } from '@osmonauts/types';
 import { GenericParseContext } from '../../../encoding';
 import { camel } from '@osmonauts/utils';
 
-const rpcMethod = (
+const rpcMethodDefinition = (
     name: string,
-    request: string,
-    response: string,
+    svc: ProtoServiceMethod,
     trailingComments?: t.CommentBlock[],
     leadingComments?: t.CommentBlock[]
 ) => {
+
+    const requestType = svc.requestType;
+    const responseType = svc.responseType;
+
+    const fieldNames = Object.keys(svc.fields ?? {})
+    const hasParams = fieldNames.length > 0;
+
+    let optional = false;
+    // // if no params, then let's default to empty object for cleaner API
+    if (!hasParams) {
+        optional = true;
+    } else if (hasParams && fieldNames.length === 1 && fieldNames.includes('pagination')) {
+        // if only argument "required" is pagination
+        // also default to empty
+        optional = true;
+    }
+
+    const methodArgs: t.Identifier = identifier(
+        'request',
+        t.tsTypeAnnotation(
+            t.tsTypeReference(
+                t.identifier(requestType)
+            )
+        ),
+        optional
+    );
+
     return tsMethodSignature(
         t.identifier(name),
         null,
         [
-            identifier(
-                'request',
-                t.tsTypeAnnotation(
-                    t.tsTypeReference(
-                        t.identifier(request)
-                    )
-                )
-            )
+            methodArgs
         ],
         t.tsTypeAnnotation(
             t.tsTypeReference(
@@ -30,7 +49,7 @@ const rpcMethod = (
                 t.tsTypeParameterInstantiation(
                     [
                         t.tsTypeReference(
-                            t.identifier(response + 'SDKType')
+                            t.identifier(responseType + 'SDKType')
                         )
                     ]
                 )
@@ -274,10 +293,9 @@ export const createRpcClientInterface = (
         .map(key => {
             const method = service.methods[key];
             const name = camelRpcMethods ? camel(key) : key;
-            return rpcMethod(
+            return rpcMethodDefinition(
                 name,
-                method.requestType,
-                method.responseType,
+                method,
                 [commentBlock('')],
                 [commentBlock(method.comment)]
                 // trailingComments
