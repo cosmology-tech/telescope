@@ -7,7 +7,7 @@ import { QueryProvidersRequest, QueryProvidersRequestSDKType, QueryProvidersResp
 
 /** Query defines the RPC service */
 export interface Query {
-  providers(request: QueryProvidersRequest): Promise<QueryProvidersResponseSDKType>;
+  providers(request?: QueryProvidersRequest): Promise<QueryProvidersResponseSDKType>;
   /*Providers queries providers*/
 
   provider(request: QueryProviderRequest): Promise<QueryProviderResponseSDKType>;

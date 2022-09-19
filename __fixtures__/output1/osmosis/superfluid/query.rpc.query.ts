@@ -10,25 +10,25 @@ import { QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, Que
 
 /** Query defines the RPC service */
 export interface Query {
-  params(request: QueryParamsRequest): Promise<QueryParamsResponseSDKType>;
+  params(request?: QueryParamsRequest): Promise<QueryParamsResponseSDKType>;
   /*Params returns the total set of minting parameters.*/
 
   assetType(request: AssetTypeRequest): Promise<AssetTypeResponseSDKType>;
   /*Returns superfluid asset type*/
 
-  allAssets(request: AllAssetsRequest): Promise<AllAssetsResponseSDKType>;
+  allAssets(request?: AllAssetsRequest): Promise<AllAssetsResponseSDKType>;
   /*Returns all superfluid asset types*/
 
   assetMultiplier(request: AssetMultiplierRequest): Promise<AssetMultiplierResponseSDKType>;
   /*Returns superfluid asset Multiplier*/
 
-  allIntermediaryAccounts(request: AllIntermediaryAccountsRequest): Promise<AllIntermediaryAccountsResponseSDKType>;
+  allIntermediaryAccounts(request?: AllIntermediaryAccountsRequest): Promise<AllIntermediaryAccountsResponseSDKType>;
   /*Returns all superfluid intermediary account*/
 
   connectedIntermediaryAccount(request: ConnectedIntermediaryAccountRequest): Promise<ConnectedIntermediaryAccountResponseSDKType>;
   /*Returns intermediary account connected to a superfluid staked lock by id*/
 
-  totalSuperfluidDelegations(request: TotalSuperfluidDelegationsRequest): Promise<TotalSuperfluidDelegationsResponseSDKType>;
+  totalSuperfluidDelegations(request?: TotalSuperfluidDelegationsRequest): Promise<TotalSuperfluidDelegationsResponseSDKType>;
   /*Returns the total amount of osmo superfluidly staked
   response denominated in uosmo*/
 

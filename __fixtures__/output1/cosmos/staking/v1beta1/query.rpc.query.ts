@@ -47,10 +47,10 @@ export interface Query {
   historicalInfo(request: QueryHistoricalInfoRequest): Promise<QueryHistoricalInfoResponseSDKType>;
   /*HistoricalInfo queries the historical info for given height.*/
 
-  pool(request: QueryPoolRequest): Promise<QueryPoolResponseSDKType>;
+  pool(request?: QueryPoolRequest): Promise<QueryPoolResponseSDKType>;
   /*Pool queries the pool info.*/
 
-  params(request: QueryParamsRequest): Promise<QueryParamsResponseSDKType>;
+  params(request?: QueryParamsRequest): Promise<QueryParamsResponseSDKType>;
   /*Parameters queries the staking parameters.*/
 
 }

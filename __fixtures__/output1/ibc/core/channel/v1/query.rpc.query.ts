@@ -12,7 +12,7 @@ export interface Query {
   channel(request: QueryChannelRequest): Promise<QueryChannelResponseSDKType>;
   /*Channel queries an IBC Channel.*/
 
-  channels(request: QueryChannelsRequest): Promise<QueryChannelsResponseSDKType>;
+  channels(request?: QueryChannelsRequest): Promise<QueryChannelsResponseSDKType>;
   /*Channels queries all the IBC channels of a chain.*/
 
   connectionChannels(request: QueryConnectionChannelsRequest): Promise<QueryConnectionChannelsResponseSDKType>;

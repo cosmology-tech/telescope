@@ -11,19 +11,19 @@ export interface Query {
   gaugeIds(request: QueryGaugeIdsRequest): Promise<QueryGaugeIdsResponseSDKType>;
   /*GaugeIds takes the pool id and returns the matching gauge ids and durations*/
 
-  distrInfo(request: QueryDistrInfoRequest): Promise<QueryDistrInfoResponseSDKType>;
+  distrInfo(request?: QueryDistrInfoRequest): Promise<QueryDistrInfoResponseSDKType>;
   /*null*/
 
-  params(request: QueryParamsRequest): Promise<QueryParamsResponseSDKType>;
+  params(request?: QueryParamsRequest): Promise<QueryParamsResponseSDKType>;
   /*null*/
 
-  lockableDurations(request: QueryLockableDurationsRequest): Promise<QueryLockableDurationsResponseSDKType>;
+  lockableDurations(request?: QueryLockableDurationsRequest): Promise<QueryLockableDurationsResponseSDKType>;
   /*null*/
 
-  incentivizedPools(request: QueryIncentivizedPoolsRequest): Promise<QueryIncentivizedPoolsResponseSDKType>;
+  incentivizedPools(request?: QueryIncentivizedPoolsRequest): Promise<QueryIncentivizedPoolsResponseSDKType>;
   /*null*/
 
-  externalIncentiveGauges(request: QueryExternalIncentiveGaugesRequest): Promise<QueryExternalIncentiveGaugesResponseSDKType>;
+  externalIncentiveGauges(request?: QueryExternalIncentiveGaugesRequest): Promise<QueryExternalIncentiveGaugesResponseSDKType>;
   /*null*/
 
 }

@@ -9,13 +9,13 @@ import { QueryTotalUnclaimedRequest, QueryTotalUnclaimedRequestSDKType, QueryTot
 
 /** Query defines the RPC service */
 export interface Query {
-  totalUnclaimed(request: QueryTotalUnclaimedRequest): Promise<QueryTotalUnclaimedResponseSDKType>;
+  totalUnclaimed(request?: QueryTotalUnclaimedRequest): Promise<QueryTotalUnclaimedResponseSDKType>;
   /*TotalUnclaimed queries the total unclaimed tokens from the airdrop*/
 
-  params(request: QueryParamsRequest): Promise<QueryParamsResponseSDKType>;
+  params(request?: QueryParamsRequest): Promise<QueryParamsResponseSDKType>;
   /*Params returns the claims module parameters*/
 
-  claimsRecords(request: QueryClaimsRecordsRequest): Promise<QueryClaimsRecordsResponseSDKType>;
+  claimsRecords(request?: QueryClaimsRecordsRequest): Promise<QueryClaimsRecordsResponseSDKType>;
   /*ClaimsRecords returns all claims records*/
 
   claimsRecord(request: QueryClaimsRecordRequest): Promise<QueryClaimsRecordResponseSDKType>;

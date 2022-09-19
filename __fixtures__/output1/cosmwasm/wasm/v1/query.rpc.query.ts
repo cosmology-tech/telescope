@@ -28,10 +28,10 @@ export interface Query {
   code(request: QueryCodeRequest): Promise<QueryCodeResponseSDKType>;
   /*Code gets the binary code and metadata for a singe wasm code*/
 
-  codes(request: QueryCodesRequest): Promise<QueryCodesResponseSDKType>;
+  codes(request?: QueryCodesRequest): Promise<QueryCodesResponseSDKType>;
   /*Codes gets the metadata for all stored wasm codes*/
 
-  pinnedCodes(request: QueryPinnedCodesRequest): Promise<QueryPinnedCodesResponseSDKType>;
+  pinnedCodes(request?: QueryPinnedCodesRequest): Promise<QueryPinnedCodesResponseSDKType>;
   /*PinnedCodes gets the pinned code ids*/
 
 }

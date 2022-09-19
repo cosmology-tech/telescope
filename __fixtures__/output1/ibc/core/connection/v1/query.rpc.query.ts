@@ -12,7 +12,7 @@ export interface Query {
   connection(request: QueryConnectionRequest): Promise<QueryConnectionResponseSDKType>;
   /*Connection queries an IBC connection end.*/
 
-  connections(request: QueryConnectionsRequest): Promise<QueryConnectionsResponseSDKType>;
+  connections(request?: QueryConnectionsRequest): Promise<QueryConnectionsResponseSDKType>;
   /*Connections queries all the IBC connections of a chain.*/
 
   clientConnections(request: QueryClientConnectionsRequest): Promise<QueryClientConnectionsResponseSDKType>;

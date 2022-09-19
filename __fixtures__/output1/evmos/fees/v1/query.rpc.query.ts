@@ -8,13 +8,13 @@ import { QueryDevFeeInfosRequest, QueryDevFeeInfosRequestSDKType, QueryDevFeeInf
 
 /** Query defines the RPC service */
 export interface Query {
-  devFeeInfos(request: QueryDevFeeInfosRequest): Promise<QueryDevFeeInfosResponseSDKType>;
+  devFeeInfos(request?: QueryDevFeeInfosRequest): Promise<QueryDevFeeInfosResponseSDKType>;
   /*DevFeeInfos retrieves all registered contracts for fee distribution*/
 
   devFeeInfo(request: QueryDevFeeInfoRequest): Promise<QueryDevFeeInfoResponseSDKType>;
   /*DevFeeInfo retrieves a registered contract for fee distribution*/
 
-  params(request: QueryParamsRequest): Promise<QueryParamsResponseSDKType>;
+  params(request?: QueryParamsRequest): Promise<QueryParamsResponseSDKType>;
   /*Params retrieves the fees module params*/
 
   devFeeInfosPerDeployer(request: QueryDevFeeInfosPerDeployerRequest): Promise<QueryDevFeeInfosPerDeployerResponseSDKType>;

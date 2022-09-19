@@ -10,7 +10,7 @@ export interface Query {
   evidence(request: QueryEvidenceRequest): Promise<QueryEvidenceResponseSDKType>;
   /*Evidence queries evidence based on evidence hash.*/
 
-  allEvidence(request: QueryAllEvidenceRequest): Promise<QueryAllEvidenceResponseSDKType>;
+  allEvidence(request?: QueryAllEvidenceRequest): Promise<QueryAllEvidenceResponseSDKType>;
   /*AllEvidence queries all evidence.*/
 
 }

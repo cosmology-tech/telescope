@@ -6,7 +6,7 @@ import { QueryEpochsInfoRequest, QueryEpochsInfoRequestSDKType, QueryEpochsInfoR
 
 /** Query defines the RPC service */
 export interface Query {
-  epochInfos(request: QueryEpochsInfoRequest): Promise<QueryEpochsInfoResponseSDKType>;
+  epochInfos(request?: QueryEpochsInfoRequest): Promise<QueryEpochsInfoResponseSDKType>;
   /*EpochInfos provide running epochInfos*/
 
   currentEpoch(request: QueryCurrentEpochRequest): Promise<QueryCurrentEpochResponseSDKType>;

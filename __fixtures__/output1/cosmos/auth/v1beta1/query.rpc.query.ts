@@ -8,7 +8,7 @@ import { QueryAccountsRequest, QueryAccountsRequestSDKType, QueryAccountsRespons
 
 /** Query defines the RPC service */
 export interface Query {
-  accounts(request: QueryAccountsRequest): Promise<QueryAccountsResponseSDKType>;
+  accounts(request?: QueryAccountsRequest): Promise<QueryAccountsResponseSDKType>;
   /*Accounts returns all the existing accounts
   
   Since: cosmos-sdk 0.43*/
@@ -16,13 +16,13 @@ export interface Query {
   account(request: QueryAccountRequest): Promise<QueryAccountResponseSDKType>;
   /*Account returns account details based on address.*/
 
-  params(request: QueryParamsRequest): Promise<QueryParamsResponseSDKType>;
+  params(request?: QueryParamsRequest): Promise<QueryParamsResponseSDKType>;
   /*Params queries all parameters.*/
 
-  moduleAccounts(request: QueryModuleAccountsRequest): Promise<QueryModuleAccountsResponseSDKType>;
+  moduleAccounts(request?: QueryModuleAccountsRequest): Promise<QueryModuleAccountsResponseSDKType>;
   /*ModuleAccounts returns all the existing module accounts.*/
 
-  bech32Prefix(request: Bech32PrefixRequest): Promise<Bech32PrefixResponseSDKType>;
+  bech32Prefix(request?: Bech32PrefixRequest): Promise<Bech32PrefixResponseSDKType>;
   /*Bech32 queries bech32Prefix*/
 
   addressBytesToString(request: AddressBytesToStringRequest): Promise<AddressBytesToStringResponseSDKType>;

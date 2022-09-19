@@ -9,25 +9,25 @@ import { ModuleToDistributeCoinsRequest, ModuleToDistributeCoinsRequestSDKType, 
 
 /** Query defines the RPC service */
 export interface Query {
-  moduleToDistributeCoins(request: ModuleToDistributeCoinsRequest): Promise<ModuleToDistributeCoinsResponseSDKType>;
+  moduleToDistributeCoins(request?: ModuleToDistributeCoinsRequest): Promise<ModuleToDistributeCoinsResponseSDKType>;
   /*returns coins that is going to be distributed*/
 
-  moduleDistributedCoins(request: ModuleDistributedCoinsRequest): Promise<ModuleDistributedCoinsResponseSDKType>;
+  moduleDistributedCoins(request?: ModuleDistributedCoinsRequest): Promise<ModuleDistributedCoinsResponseSDKType>;
   /*returns coins that are distributed by module so far*/
 
   gaugeByID(request: GaugeByIDRequest): Promise<GaugeByIDResponseSDKType>;
   /*returns Gauge by id*/
 
-  gauges(request: GaugesRequest): Promise<GaugesResponseSDKType>;
+  gauges(request?: GaugesRequest): Promise<GaugesResponseSDKType>;
   /*returns gauges both upcoming and active*/
 
-  activeGauges(request: ActiveGaugesRequest): Promise<ActiveGaugesResponseSDKType>;
+  activeGauges(request?: ActiveGaugesRequest): Promise<ActiveGaugesResponseSDKType>;
   /*returns active gauges*/
 
   activeGaugesPerDenom(request: ActiveGaugesPerDenomRequest): Promise<ActiveGaugesPerDenomResponseSDKType>;
   /*returns active gauges per denom*/
 
-  upcomingGauges(request: UpcomingGaugesRequest): Promise<UpcomingGaugesResponseSDKType>;
+  upcomingGauges(request?: UpcomingGaugesRequest): Promise<UpcomingGaugesResponseSDKType>;
   /*returns scheduled gauges*/
 
   upcomingGaugesPerDenom(request: UpcomingGaugesPerDenomRequest): Promise<UpcomingGaugesPerDenomResponseSDKType>;
@@ -38,7 +38,7 @@ export interface Query {
   The querier either provides an address or a set of locks
   for which they want to find the associated rewards.*/
 
-  lockableDurations(request: QueryLockableDurationsRequest): Promise<QueryLockableDurationsResponseSDKType>;
+  lockableDurations(request?: QueryLockableDurationsRequest): Promise<QueryLockableDurationsResponseSDKType>;
   /*returns lockable durations that are valid to give incentives*/
 
 }

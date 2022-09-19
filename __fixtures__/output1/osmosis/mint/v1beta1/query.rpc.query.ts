@@ -6,10 +6,10 @@ import { QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, Que
 
 /** Query defines the RPC service */
 export interface Query {
-  params(request: QueryParamsRequest): Promise<QueryParamsResponseSDKType>;
+  params(request?: QueryParamsRequest): Promise<QueryParamsResponseSDKType>;
   /*Params returns the total set of minting parameters.*/
 
-  epochProvisions(request: QueryEpochProvisionsRequest): Promise<QueryEpochProvisionsResponseSDKType>;
+  epochProvisions(request?: QueryEpochProvisionsRequest): Promise<QueryEpochProvisionsResponseSDKType>;
   /*EpochProvisions current minting epoch provisions value.*/
 
 }

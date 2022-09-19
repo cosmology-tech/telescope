@@ -10,10 +10,10 @@ export interface Query {
   denomTrace(request: QueryDenomTraceRequest): Promise<QueryDenomTraceResponseSDKType>;
   /*DenomTrace queries a denomination trace information.*/
 
-  denomTraces(request: QueryDenomTracesRequest): Promise<QueryDenomTracesResponseSDKType>;
+  denomTraces(request?: QueryDenomTracesRequest): Promise<QueryDenomTracesResponseSDKType>;
   /*DenomTraces queries all denomination traces.*/
 
-  params(request: QueryParamsRequest): Promise<QueryParamsResponseSDKType>;
+  params(request?: QueryParamsRequest): Promise<QueryParamsResponseSDKType>;
   /*Params queries all parameters of the ibc-transfer module.*/
 
 }

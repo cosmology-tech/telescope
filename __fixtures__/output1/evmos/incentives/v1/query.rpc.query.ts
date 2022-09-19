@@ -9,7 +9,7 @@ import { QueryIncentivesRequest, QueryIncentivesRequestSDKType, QueryIncentivesR
 
 /** Query defines the RPC service */
 export interface Query {
-  incentives(request: QueryIncentivesRequest): Promise<QueryIncentivesResponseSDKType>;
+  incentives(request?: QueryIncentivesRequest): Promise<QueryIncentivesResponseSDKType>;
   /*Incentives retrieves registered incentives*/
 
   incentive(request: QueryIncentiveRequest): Promise<QueryIncentiveResponseSDKType>;
@@ -21,14 +21,14 @@ export interface Query {
   gasMeter(request: QueryGasMeterRequest): Promise<QueryGasMeterResponseSDKType>;
   /*GasMeter Retrieves a active gas meter*/
 
-  allocationMeters(request: QueryAllocationMetersRequest): Promise<QueryAllocationMetersResponseSDKType>;
+  allocationMeters(request?: QueryAllocationMetersRequest): Promise<QueryAllocationMetersResponseSDKType>;
   /*AllocationMeters retrieves active allocation meters for a given
   denomination*/
 
   allocationMeter(request: QueryAllocationMeterRequest): Promise<QueryAllocationMeterResponseSDKType>;
   /*AllocationMeter Retrieves a active gas meter*/
 
-  params(request: QueryParamsRequest): Promise<QueryParamsResponseSDKType>;
+  params(request?: QueryParamsRequest): Promise<QueryParamsResponseSDKType>;
   /*Params retrieves the incentives module params*/
 
 }

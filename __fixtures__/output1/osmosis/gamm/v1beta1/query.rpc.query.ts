@@ -9,13 +9,13 @@ import { QueryPoolsRequest, QueryPoolsRequestSDKType, QueryPoolsResponse, QueryP
 
 /** Query defines the RPC service */
 export interface Query {
-  pools(request: QueryPoolsRequest): Promise<QueryPoolsResponseSDKType>;
+  pools(request?: QueryPoolsRequest): Promise<QueryPoolsResponseSDKType>;
   /*null*/
 
-  numPools(request: QueryNumPoolsRequest): Promise<QueryNumPoolsResponseSDKType>;
+  numPools(request?: QueryNumPoolsRequest): Promise<QueryNumPoolsResponseSDKType>;
   /*null*/
 
-  totalLiquidity(request: QueryTotalLiquidityRequest): Promise<QueryTotalLiquidityResponseSDKType>;
+  totalLiquidity(request?: QueryTotalLiquidityRequest): Promise<QueryTotalLiquidityResponseSDKType>;
   /*null*/
 
   pool(request: QueryPoolRequest): Promise<QueryPoolResponseSDKType>;

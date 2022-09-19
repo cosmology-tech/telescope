@@ -7,7 +7,7 @@ import { QueryAllProvidersAttributesRequest, QueryAllProvidersAttributesRequestS
 
 /** Query defines the RPC service */
 export interface Query {
-  allProvidersAttributes(request: QueryAllProvidersAttributesRequest): Promise<QueryProvidersResponseSDKType>;
+  allProvidersAttributes(request?: QueryAllProvidersAttributesRequest): Promise<QueryProvidersResponseSDKType>;
   /*AllProvidersAttributes queries all providers
   buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
   buf:lint:ignore RPC_RESPONSE_STANDARD_NAME*/

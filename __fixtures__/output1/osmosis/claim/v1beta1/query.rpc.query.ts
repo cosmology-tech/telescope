@@ -8,10 +8,10 @@ import { QueryModuleAccountBalanceRequest, QueryModuleAccountBalanceRequestSDKTy
 
 /** Query defines the RPC service */
 export interface Query {
-  moduleAccountBalance(request: QueryModuleAccountBalanceRequest): Promise<QueryModuleAccountBalanceResponseSDKType>;
+  moduleAccountBalance(request?: QueryModuleAccountBalanceRequest): Promise<QueryModuleAccountBalanceResponseSDKType>;
   /*null*/
 
-  params(request: QueryParamsRequest): Promise<QueryParamsResponseSDKType>;
+  params(request?: QueryParamsRequest): Promise<QueryParamsResponseSDKType>;
   /*null*/
 
   claimRecord(request: QueryClaimRecordRequest): Promise<QueryClaimRecordResponseSDKType>;

@@ -10,7 +10,7 @@ export interface Query {
   /*Params queries a specific parameter of a module, given its subspace and
   key.*/
 
-  subspaces(request: QuerySubspacesRequest): Promise<QuerySubspacesResponseSDKType>;
+  subspaces(request?: QuerySubspacesRequest): Promise<QuerySubspacesResponseSDKType>;
   /*Subspaces queries for all registered subspaces and all keys for a subspace.*/
 
 }

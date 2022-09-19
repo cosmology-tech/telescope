@@ -18,19 +18,19 @@ export interface Query {
   /*SpendableBalances queries the spenable balance of all coins for a single
   account.*/
 
-  totalSupply(request: QueryTotalSupplyRequest): Promise<QueryTotalSupplyResponseSDKType>;
+  totalSupply(request?: QueryTotalSupplyRequest): Promise<QueryTotalSupplyResponseSDKType>;
   /*TotalSupply queries the total supply of all coins.*/
 
   supplyOf(request: QuerySupplyOfRequest): Promise<QuerySupplyOfResponseSDKType>;
   /*SupplyOf queries the supply of a single coin.*/
 
-  params(request: QueryParamsRequest): Promise<QueryParamsResponseSDKType>;
+  params(request?: QueryParamsRequest): Promise<QueryParamsResponseSDKType>;
   /*Params queries the parameters of x/bank module.*/
 
   denomMetadata(request: QueryDenomMetadataRequest): Promise<QueryDenomMetadataResponseSDKType>;
   /*DenomsMetadata queries the client metadata of a given coin denomination.*/
 
-  denomsMetadata(request: QueryDenomsMetadataRequest): Promise<QueryDenomsMetadataResponseSDKType>;
+  denomsMetadata(request?: QueryDenomsMetadataRequest): Promise<QueryDenomsMetadataResponseSDKType>;
   /*DenomsMetadata queries the client metadata for all registered coin
   denominations.*/
 

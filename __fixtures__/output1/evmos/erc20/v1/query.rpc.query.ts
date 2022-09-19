@@ -8,13 +8,13 @@ import { QueryTokenPairsRequest, QueryTokenPairsRequestSDKType, QueryTokenPairsR
 
 /** Query defines the RPC service */
 export interface Query {
-  tokenPairs(request: QueryTokenPairsRequest): Promise<QueryTokenPairsResponseSDKType>;
+  tokenPairs(request?: QueryTokenPairsRequest): Promise<QueryTokenPairsResponseSDKType>;
   /*TokenPairs retrieves registered token pairs*/
 
   tokenPair(request: QueryTokenPairRequest): Promise<QueryTokenPairResponseSDKType>;
   /*TokenPair retrieves a registered token pair*/
 
-  params(request: QueryParamsRequest): Promise<QueryParamsResponseSDKType>;
+  params(request?: QueryParamsRequest): Promise<QueryParamsResponseSDKType>;
   /*Params retrieves the erc20 module params*/
 
 }

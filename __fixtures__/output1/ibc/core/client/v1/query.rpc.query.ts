@@ -11,7 +11,7 @@ export interface Query {
   clientState(request: QueryClientStateRequest): Promise<QueryClientStateResponseSDKType>;
   /*ClientState queries an IBC light client.*/
 
-  clientStates(request: QueryClientStatesRequest): Promise<QueryClientStatesResponseSDKType>;
+  clientStates(request?: QueryClientStatesRequest): Promise<QueryClientStatesResponseSDKType>;
   /*ClientStates queries all the IBC light clients of a chain.*/
 
   consensusState(request: QueryConsensusStateRequest): Promise<QueryConsensusStateResponseSDKType>;
@@ -25,13 +25,13 @@ export interface Query {
   clientStatus(request: QueryClientStatusRequest): Promise<QueryClientStatusResponseSDKType>;
   /*Status queries the status of an IBC client.*/
 
-  clientParams(request: QueryClientParamsRequest): Promise<QueryClientParamsResponseSDKType>;
+  clientParams(request?: QueryClientParamsRequest): Promise<QueryClientParamsResponseSDKType>;
   /*ClientParams queries all parameters of the ibc client.*/
 
-  upgradedClientState(request: QueryUpgradedClientStateRequest): Promise<QueryUpgradedClientStateResponseSDKType>;
+  upgradedClientState(request?: QueryUpgradedClientStateRequest): Promise<QueryUpgradedClientStateResponseSDKType>;
   /*UpgradedClientState queries an Upgraded IBC light client.*/
 
-  upgradedConsensusState(request: QueryUpgradedConsensusStateRequest): Promise<QueryUpgradedConsensusStateResponseSDKType>;
+  upgradedConsensusState(request?: QueryUpgradedConsensusStateRequest): Promise<QueryUpgradedConsensusStateResponseSDKType>;
   /*UpgradedConsensusState queries an Upgraded IBC consensus state.*/
 
 }

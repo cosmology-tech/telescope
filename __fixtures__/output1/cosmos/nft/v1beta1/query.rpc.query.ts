@@ -26,7 +26,7 @@ export interface Query {
   class(request: QueryClassRequest): Promise<QueryClassResponseSDKType>;
   /*Class queries an NFT class based on its id*/
 
-  classes(request: QueryClassesRequest): Promise<QueryClassesResponseSDKType>;
+  classes(request?: QueryClassesRequest): Promise<QueryClassesResponseSDKType>;
   /*Classes queries all NFT classes*/
 
 }

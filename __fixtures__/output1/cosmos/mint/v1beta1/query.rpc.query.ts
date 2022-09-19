@@ -6,13 +6,13 @@ import { QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, Que
 
 /** Query defines the RPC service */
 export interface Query {
-  params(request: QueryParamsRequest): Promise<QueryParamsResponseSDKType>;
+  params(request?: QueryParamsRequest): Promise<QueryParamsResponseSDKType>;
   /*Params returns the total set of minting parameters.*/
 
-  inflation(request: QueryInflationRequest): Promise<QueryInflationResponseSDKType>;
+  inflation(request?: QueryInflationRequest): Promise<QueryInflationResponseSDKType>;
   /*Inflation returns the current minting inflation value.*/
 
-  annualProvisions(request: QueryAnnualProvisionsRequest): Promise<QueryAnnualProvisionsResponseSDKType>;
+  annualProvisions(request?: QueryAnnualProvisionsRequest): Promise<QueryAnnualProvisionsResponseSDKType>;
   /*AnnualProvisions current minting annual provisions value.*/
 
 }

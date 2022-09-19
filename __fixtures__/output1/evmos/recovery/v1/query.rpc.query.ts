@@ -6,7 +6,7 @@ import { QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, Que
 
 /** Query defines the RPC service */
 export interface Query {
-  params(request: QueryParamsRequest): Promise<QueryParamsResponseSDKType>;
+  params(request?: QueryParamsRequest): Promise<QueryParamsResponseSDKType>;
   /*Params retrieves the total set of recovery parameters.*/
 
 }

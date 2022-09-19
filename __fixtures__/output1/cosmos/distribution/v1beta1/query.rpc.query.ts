@@ -8,7 +8,7 @@ import { QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, Que
 
 /** Query defines the RPC service */
 export interface Query {
-  params(request: QueryParamsRequest): Promise<QueryParamsResponseSDKType>;
+  params(request?: QueryParamsRequest): Promise<QueryParamsResponseSDKType>;
   /*Params queries params of the distribution module.*/
 
   validatorOutstandingRewards(request: QueryValidatorOutstandingRewardsRequest): Promise<QueryValidatorOutstandingRewardsResponseSDKType>;
@@ -33,7 +33,7 @@ export interface Query {
   delegatorWithdrawAddress(request: QueryDelegatorWithdrawAddressRequest): Promise<QueryDelegatorWithdrawAddressResponseSDKType>;
   /*DelegatorWithdrawAddress queries withdraw address of a delegator.*/
 
-  communityPool(request: QueryCommunityPoolRequest): Promise<QueryCommunityPoolResponseSDKType>;
+  communityPool(request?: QueryCommunityPoolRequest): Promise<QueryCommunityPoolResponseSDKType>;
   /*CommunityPool queries the community pool coins.*/
 
 }

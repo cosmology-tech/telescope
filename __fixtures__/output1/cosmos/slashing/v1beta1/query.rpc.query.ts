@@ -7,13 +7,13 @@ import { QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, Que
 
 /** Query defines the RPC service */
 export interface Query {
-  params(request: QueryParamsRequest): Promise<QueryParamsResponseSDKType>;
+  params(request?: QueryParamsRequest): Promise<QueryParamsResponseSDKType>;
   /*Params queries the parameters of slashing module*/
 
   signingInfo(request: QuerySigningInfoRequest): Promise<QuerySigningInfoResponseSDKType>;
   /*SigningInfo queries the signing info of given cons address*/
 
-  signingInfos(request: QuerySigningInfosRequest): Promise<QuerySigningInfosResponseSDKType>;
+  signingInfos(request?: QuerySigningInfosRequest): Promise<QuerySigningInfosResponseSDKType>;
   /*SigningInfos queries signing info of all validators*/
 
 }
