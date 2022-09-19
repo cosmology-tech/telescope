@@ -97,7 +97,7 @@ export const createRpcQueryExtension = (base: QueryClient) => {
   const rpc = createProtobufRpcClient(base);
   const queryService = new QueryClientImpl(rpc);
   return {
-    incentives(request: QueryIncentivesRequest): Promise<QueryIncentivesResponseSDKType> {
+    incentives(request?: QueryIncentivesRequest): Promise<QueryIncentivesResponseSDKType> {
       return queryService.incentives(request);
     },
 
@@ -113,7 +113,7 @@ export const createRpcQueryExtension = (base: QueryClient) => {
       return queryService.gasMeter(request);
     },
 
-    allocationMeters(request: QueryAllocationMetersRequest): Promise<QueryAllocationMetersResponseSDKType> {
+    allocationMeters(request?: QueryAllocationMetersRequest): Promise<QueryAllocationMetersResponseSDKType> {
       return queryService.allocationMeters(request);
     },
 
@@ -121,7 +121,7 @@ export const createRpcQueryExtension = (base: QueryClient) => {
       return queryService.allocationMeter(request);
     },
 
-    params(request: QueryParamsRequest): Promise<QueryParamsResponseSDKType> {
+    params(request?: QueryParamsRequest): Promise<QueryParamsResponseSDKType> {
       return queryService.params(request);
     }
 

@@ -64,7 +64,7 @@ export const createRpcQueryExtension = (base: QueryClient) => {
   const rpc = createProtobufRpcClient(base);
   const queryService = new QueryClientImpl(rpc);
   return {
-    devFeeInfos(request: QueryDevFeeInfosRequest): Promise<QueryDevFeeInfosResponseSDKType> {
+    devFeeInfos(request?: QueryDevFeeInfosRequest): Promise<QueryDevFeeInfosResponseSDKType> {
       return queryService.devFeeInfos(request);
     },
 
@@ -72,7 +72,7 @@ export const createRpcQueryExtension = (base: QueryClient) => {
       return queryService.devFeeInfo(request);
     },
 
-    params(request: QueryParamsRequest): Promise<QueryParamsResponseSDKType> {
+    params(request?: QueryParamsRequest): Promise<QueryParamsResponseSDKType> {
       return queryService.params(request);
     },
 

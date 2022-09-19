@@ -52,7 +52,7 @@ export const createRpcQueryExtension = (base: QueryClient) => {
   const rpc = createProtobufRpcClient(base);
   const queryService = new QueryClientImpl(rpc);
   return {
-    params(request: QueryParamsRequest): Promise<QueryParamsResponseSDKType> {
+    params(request?: QueryParamsRequest): Promise<QueryParamsResponseSDKType> {
       return queryService.params(request);
     },
 
@@ -60,7 +60,7 @@ export const createRpcQueryExtension = (base: QueryClient) => {
       return queryService.signingInfo(request);
     },
 
-    signingInfos(request: QuerySigningInfosRequest): Promise<QuerySigningInfosResponseSDKType> {
+    signingInfos(request?: QuerySigningInfosRequest): Promise<QuerySigningInfosResponseSDKType> {
       return queryService.signingInfos(request);
     }
 

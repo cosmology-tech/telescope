@@ -81,27 +81,27 @@ export const createRpcQueryExtension = (base: QueryClient) => {
   const rpc = createProtobufRpcClient(base);
   const queryService = new QueryClientImpl(rpc);
   return {
-    period(request: QueryPeriodRequest): Promise<QueryPeriodResponseSDKType> {
+    period(request?: QueryPeriodRequest): Promise<QueryPeriodResponseSDKType> {
       return queryService.period(request);
     },
 
-    epochMintProvision(request: QueryEpochMintProvisionRequest): Promise<QueryEpochMintProvisionResponseSDKType> {
+    epochMintProvision(request?: QueryEpochMintProvisionRequest): Promise<QueryEpochMintProvisionResponseSDKType> {
       return queryService.epochMintProvision(request);
     },
 
-    skippedEpochs(request: QuerySkippedEpochsRequest): Promise<QuerySkippedEpochsResponseSDKType> {
+    skippedEpochs(request?: QuerySkippedEpochsRequest): Promise<QuerySkippedEpochsResponseSDKType> {
       return queryService.skippedEpochs(request);
     },
 
-    circulatingSupply(request: QueryCirculatingSupplyRequest): Promise<QueryCirculatingSupplyResponseSDKType> {
+    circulatingSupply(request?: QueryCirculatingSupplyRequest): Promise<QueryCirculatingSupplyResponseSDKType> {
       return queryService.circulatingSupply(request);
     },
 
-    inflationRate(request: QueryInflationRateRequest): Promise<QueryInflationRateResponseSDKType> {
+    inflationRate(request?: QueryInflationRateRequest): Promise<QueryInflationRateResponseSDKType> {
       return queryService.inflationRate(request);
     },
 
-    params(request: QueryParamsRequest): Promise<QueryParamsResponseSDKType> {
+    params(request?: QueryParamsRequest): Promise<QueryParamsResponseSDKType> {
       return queryService.params(request);
     }
 

@@ -42,7 +42,7 @@ export const createRpcQueryExtension = (base: QueryClient) => {
   const rpc = createProtobufRpcClient(base);
   const queryService = new QueryClientImpl(rpc);
   return {
-    providers(request: QueryProvidersRequest): Promise<QueryProvidersResponseSDKType> {
+    providers(request?: QueryProvidersRequest): Promise<QueryProvidersResponseSDKType> {
       return queryService.providers(request);
     },
 

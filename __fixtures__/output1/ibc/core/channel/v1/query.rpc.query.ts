@@ -166,7 +166,7 @@ export const createRpcQueryExtension = (base: QueryClient) => {
       return queryService.channel(request);
     },
 
-    channels(request: QueryChannelsRequest): Promise<QueryChannelsResponseSDKType> {
+    channels(request?: QueryChannelsRequest): Promise<QueryChannelsResponseSDKType> {
       return queryService.channels(request);
     },
 

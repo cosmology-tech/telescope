@@ -46,7 +46,7 @@ export const createRpcQueryExtension = (base: QueryClient) => {
       return queryService.evidence(request);
     },
 
-    allEvidence(request: QueryAllEvidenceRequest): Promise<QueryAllEvidenceResponseSDKType> {
+    allEvidence(request?: QueryAllEvidenceRequest): Promise<QueryAllEvidenceResponseSDKType> {
       return queryService.allEvidence(request);
     }
 

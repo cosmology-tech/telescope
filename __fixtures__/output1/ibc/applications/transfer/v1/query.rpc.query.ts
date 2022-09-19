@@ -56,11 +56,11 @@ export const createRpcQueryExtension = (base: QueryClient) => {
       return queryService.denomTrace(request);
     },
 
-    denomTraces(request: QueryDenomTracesRequest): Promise<QueryDenomTracesResponseSDKType> {
+    denomTraces(request?: QueryDenomTracesRequest): Promise<QueryDenomTracesResponseSDKType> {
       return queryService.denomTraces(request);
     },
 
-    params(request: QueryParamsRequest): Promise<QueryParamsResponseSDKType> {
+    params(request?: QueryParamsRequest): Promise<QueryParamsResponseSDKType> {
       return queryService.params(request);
     }
 

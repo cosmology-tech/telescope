@@ -95,7 +95,7 @@ export const createRpcQueryExtension = (base: QueryClient) => {
   const rpc = createProtobufRpcClient(base);
   const queryService = new QueryClientImpl(rpc);
   return {
-    accounts(request: QueryAccountsRequest): Promise<QueryAccountsResponseSDKType> {
+    accounts(request?: QueryAccountsRequest): Promise<QueryAccountsResponseSDKType> {
       return queryService.accounts(request);
     },
 
@@ -103,15 +103,15 @@ export const createRpcQueryExtension = (base: QueryClient) => {
       return queryService.account(request);
     },
 
-    params(request: QueryParamsRequest): Promise<QueryParamsResponseSDKType> {
+    params(request?: QueryParamsRequest): Promise<QueryParamsResponseSDKType> {
       return queryService.params(request);
     },
 
-    moduleAccounts(request: QueryModuleAccountsRequest): Promise<QueryModuleAccountsResponseSDKType> {
+    moduleAccounts(request?: QueryModuleAccountsRequest): Promise<QueryModuleAccountsResponseSDKType> {
       return queryService.moduleAccounts(request);
     },
 
-    bech32Prefix(request: Bech32PrefixRequest): Promise<Bech32PrefixResponseSDKType> {
+    bech32Prefix(request?: Bech32PrefixRequest): Promise<Bech32PrefixResponseSDKType> {
       return queryService.bech32Prefix(request);
     },
 

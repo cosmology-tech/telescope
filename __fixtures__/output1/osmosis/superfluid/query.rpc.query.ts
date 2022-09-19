@@ -150,7 +150,7 @@ export const createRpcQueryExtension = (base: QueryClient) => {
   const rpc = createProtobufRpcClient(base);
   const queryService = new QueryClientImpl(rpc);
   return {
-    params(request: QueryParamsRequest): Promise<QueryParamsResponseSDKType> {
+    params(request?: QueryParamsRequest): Promise<QueryParamsResponseSDKType> {
       return queryService.params(request);
     },
 
@@ -158,7 +158,7 @@ export const createRpcQueryExtension = (base: QueryClient) => {
       return queryService.assetType(request);
     },
 
-    allAssets(request: AllAssetsRequest): Promise<AllAssetsResponseSDKType> {
+    allAssets(request?: AllAssetsRequest): Promise<AllAssetsResponseSDKType> {
       return queryService.allAssets(request);
     },
 
@@ -166,7 +166,7 @@ export const createRpcQueryExtension = (base: QueryClient) => {
       return queryService.assetMultiplier(request);
     },
 
-    allIntermediaryAccounts(request: AllIntermediaryAccountsRequest): Promise<AllIntermediaryAccountsResponseSDKType> {
+    allIntermediaryAccounts(request?: AllIntermediaryAccountsRequest): Promise<AllIntermediaryAccountsResponseSDKType> {
       return queryService.allIntermediaryAccounts(request);
     },
 
@@ -174,7 +174,7 @@ export const createRpcQueryExtension = (base: QueryClient) => {
       return queryService.connectedIntermediaryAccount(request);
     },
 
-    totalSuperfluidDelegations(request: TotalSuperfluidDelegationsRequest): Promise<TotalSuperfluidDelegationsResponseSDKType> {
+    totalSuperfluidDelegations(request?: TotalSuperfluidDelegationsRequest): Promise<TotalSuperfluidDelegationsResponseSDKType> {
       return queryService.totalSuperfluidDelegations(request);
     },
 

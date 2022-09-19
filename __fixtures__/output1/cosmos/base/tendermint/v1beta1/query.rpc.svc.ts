@@ -85,15 +85,15 @@ export const createRpcQueryExtension = (base: QueryClient) => {
   const rpc = createProtobufRpcClient(base);
   const queryService = new QueryClientImpl(rpc);
   return {
-    getNodeInfo(request: GetNodeInfoRequest): Promise<GetNodeInfoResponseSDKType> {
+    getNodeInfo(request?: GetNodeInfoRequest): Promise<GetNodeInfoResponseSDKType> {
       return queryService.getNodeInfo(request);
     },
 
-    getSyncing(request: GetSyncingRequest): Promise<GetSyncingResponseSDKType> {
+    getSyncing(request?: GetSyncingRequest): Promise<GetSyncingResponseSDKType> {
       return queryService.getSyncing(request);
     },
 
-    getLatestBlock(request: GetLatestBlockRequest): Promise<GetLatestBlockResponseSDKType> {
+    getLatestBlock(request?: GetLatestBlockRequest): Promise<GetLatestBlockResponseSDKType> {
       return queryService.getLatestBlock(request);
     },
 
@@ -101,7 +101,7 @@ export const createRpcQueryExtension = (base: QueryClient) => {
       return queryService.getBlockByHeight(request);
     },
 
-    getLatestValidatorSet(request: GetLatestValidatorSetRequest): Promise<GetLatestValidatorSetResponseSDKType> {
+    getLatestValidatorSet(request?: GetLatestValidatorSetRequest): Promise<GetLatestValidatorSetResponseSDKType> {
       return queryService.getLatestValidatorSet(request);
     },
 

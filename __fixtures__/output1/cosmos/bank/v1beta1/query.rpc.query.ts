@@ -130,7 +130,7 @@ export const createRpcQueryExtension = (base: QueryClient) => {
       return queryService.spendableBalances(request);
     },
 
-    totalSupply(request: QueryTotalSupplyRequest): Promise<QueryTotalSupplyResponseSDKType> {
+    totalSupply(request?: QueryTotalSupplyRequest): Promise<QueryTotalSupplyResponseSDKType> {
       return queryService.totalSupply(request);
     },
 
@@ -138,7 +138,7 @@ export const createRpcQueryExtension = (base: QueryClient) => {
       return queryService.supplyOf(request);
     },
 
-    params(request: QueryParamsRequest): Promise<QueryParamsResponseSDKType> {
+    params(request?: QueryParamsRequest): Promise<QueryParamsResponseSDKType> {
       return queryService.params(request);
     },
 
@@ -146,7 +146,7 @@ export const createRpcQueryExtension = (base: QueryClient) => {
       return queryService.denomMetadata(request);
     },
 
-    denomsMetadata(request: QueryDenomsMetadataRequest): Promise<QueryDenomsMetadataResponseSDKType> {
+    denomsMetadata(request?: QueryDenomsMetadataRequest): Promise<QueryDenomsMetadataResponseSDKType> {
       return queryService.denomsMetadata(request);
     },
 

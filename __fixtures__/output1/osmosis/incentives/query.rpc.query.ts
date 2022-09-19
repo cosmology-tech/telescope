@@ -130,11 +130,11 @@ export const createRpcQueryExtension = (base: QueryClient) => {
   const rpc = createProtobufRpcClient(base);
   const queryService = new QueryClientImpl(rpc);
   return {
-    moduleToDistributeCoins(request: ModuleToDistributeCoinsRequest): Promise<ModuleToDistributeCoinsResponseSDKType> {
+    moduleToDistributeCoins(request?: ModuleToDistributeCoinsRequest): Promise<ModuleToDistributeCoinsResponseSDKType> {
       return queryService.moduleToDistributeCoins(request);
     },
 
-    moduleDistributedCoins(request: ModuleDistributedCoinsRequest): Promise<ModuleDistributedCoinsResponseSDKType> {
+    moduleDistributedCoins(request?: ModuleDistributedCoinsRequest): Promise<ModuleDistributedCoinsResponseSDKType> {
       return queryService.moduleDistributedCoins(request);
     },
 
@@ -142,11 +142,11 @@ export const createRpcQueryExtension = (base: QueryClient) => {
       return queryService.gaugeByID(request);
     },
 
-    gauges(request: GaugesRequest): Promise<GaugesResponseSDKType> {
+    gauges(request?: GaugesRequest): Promise<GaugesResponseSDKType> {
       return queryService.gauges(request);
     },
 
-    activeGauges(request: ActiveGaugesRequest): Promise<ActiveGaugesResponseSDKType> {
+    activeGauges(request?: ActiveGaugesRequest): Promise<ActiveGaugesResponseSDKType> {
       return queryService.activeGauges(request);
     },
 
@@ -154,7 +154,7 @@ export const createRpcQueryExtension = (base: QueryClient) => {
       return queryService.activeGaugesPerDenom(request);
     },
 
-    upcomingGauges(request: UpcomingGaugesRequest): Promise<UpcomingGaugesResponseSDKType> {
+    upcomingGauges(request?: UpcomingGaugesRequest): Promise<UpcomingGaugesResponseSDKType> {
       return queryService.upcomingGauges(request);
     },
 
@@ -166,7 +166,7 @@ export const createRpcQueryExtension = (base: QueryClient) => {
       return queryService.rewardsEst(request);
     },
 
-    lockableDurations(request: QueryLockableDurationsRequest): Promise<QueryLockableDurationsResponseSDKType> {
+    lockableDurations(request?: QueryLockableDurationsRequest): Promise<QueryLockableDurationsResponseSDKType> {
       return queryService.lockableDurations(request);
     }
 

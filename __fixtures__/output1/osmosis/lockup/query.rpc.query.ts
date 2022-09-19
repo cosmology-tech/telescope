@@ -184,11 +184,11 @@ export const createRpcQueryExtension = (base: QueryClient) => {
   const rpc = createProtobufRpcClient(base);
   const queryService = new QueryClientImpl(rpc);
   return {
-    moduleBalance(request: ModuleBalanceRequest): Promise<ModuleBalanceResponseSDKType> {
+    moduleBalance(request?: ModuleBalanceRequest): Promise<ModuleBalanceResponseSDKType> {
       return queryService.moduleBalance(request);
     },
 
-    moduleLockedAmount(request: ModuleLockedAmountRequest): Promise<ModuleLockedAmountResponseSDKType> {
+    moduleLockedAmount(request?: ModuleLockedAmountRequest): Promise<ModuleLockedAmountResponseSDKType> {
       return queryService.moduleLockedAmount(request);
     },
 

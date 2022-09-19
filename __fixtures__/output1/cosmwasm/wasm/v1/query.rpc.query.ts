@@ -142,11 +142,11 @@ export const createRpcQueryExtension = (base: QueryClient) => {
       return queryService.code(request);
     },
 
-    codes(request: QueryCodesRequest): Promise<QueryCodesResponseSDKType> {
+    codes(request?: QueryCodesRequest): Promise<QueryCodesResponseSDKType> {
       return queryService.codes(request);
     },
 
-    pinnedCodes(request: QueryPinnedCodesRequest): Promise<QueryPinnedCodesResponseSDKType> {
+    pinnedCodes(request?: QueryPinnedCodesRequest): Promise<QueryPinnedCodesResponseSDKType> {
       return queryService.pinnedCodes(request);
     }
 

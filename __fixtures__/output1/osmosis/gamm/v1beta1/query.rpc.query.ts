@@ -125,15 +125,15 @@ export const createRpcQueryExtension = (base: QueryClient) => {
   const rpc = createProtobufRpcClient(base);
   const queryService = new QueryClientImpl(rpc);
   return {
-    pools(request: QueryPoolsRequest): Promise<QueryPoolsResponseSDKType> {
+    pools(request?: QueryPoolsRequest): Promise<QueryPoolsResponseSDKType> {
       return queryService.pools(request);
     },
 
-    numPools(request: QueryNumPoolsRequest): Promise<QueryNumPoolsResponseSDKType> {
+    numPools(request?: QueryNumPoolsRequest): Promise<QueryNumPoolsResponseSDKType> {
       return queryService.numPools(request);
     },
 
-    totalLiquidity(request: QueryTotalLiquidityRequest): Promise<QueryTotalLiquidityResponseSDKType> {
+    totalLiquidity(request?: QueryTotalLiquidityRequest): Promise<QueryTotalLiquidityResponseSDKType> {
       return queryService.totalLiquidity(request);
     },
 

@@ -42,7 +42,7 @@ export const createRpcQueryExtension = (base: QueryClient) => {
   const rpc = createProtobufRpcClient(base);
   const queryService = new QueryClientImpl(rpc);
   return {
-    epochInfos(request: QueryEpochsInfoRequest): Promise<QueryEpochsInfoResponseSDKType> {
+    epochInfos(request?: QueryEpochsInfoRequest): Promise<QueryEpochsInfoResponseSDKType> {
       return queryService.epochInfos(request);
     },
 

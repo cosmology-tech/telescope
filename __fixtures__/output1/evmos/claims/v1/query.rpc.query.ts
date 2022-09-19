@@ -64,15 +64,15 @@ export const createRpcQueryExtension = (base: QueryClient) => {
   const rpc = createProtobufRpcClient(base);
   const queryService = new QueryClientImpl(rpc);
   return {
-    totalUnclaimed(request: QueryTotalUnclaimedRequest): Promise<QueryTotalUnclaimedResponseSDKType> {
+    totalUnclaimed(request?: QueryTotalUnclaimedRequest): Promise<QueryTotalUnclaimedResponseSDKType> {
       return queryService.totalUnclaimed(request);
     },
 
-    params(request: QueryParamsRequest): Promise<QueryParamsResponseSDKType> {
+    params(request?: QueryParamsRequest): Promise<QueryParamsResponseSDKType> {
       return queryService.params(request);
     },
 
-    claimsRecords(request: QueryClaimsRecordsRequest): Promise<QueryClaimsRecordsResponseSDKType> {
+    claimsRecords(request?: QueryClaimsRecordsRequest): Promise<QueryClaimsRecordsResponseSDKType> {
       return queryService.claimsRecords(request);
     },
 

@@ -81,7 +81,7 @@ export const createRpcQueryExtension = (base: QueryClient) => {
       return queryService.connection(request);
     },
 
-    connections(request: QueryConnectionsRequest): Promise<QueryConnectionsResponseSDKType> {
+    connections(request?: QueryConnectionsRequest): Promise<QueryConnectionsResponseSDKType> {
       return queryService.connections(request);
     },
 

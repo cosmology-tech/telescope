@@ -61,7 +61,7 @@ export const createRpcQueryExtension = (base: QueryClient) => {
   const rpc = createProtobufRpcClient(base);
   const queryService = new QueryClientImpl(rpc);
   return {
-    feeTokens(request: QueryFeeTokensRequest): Promise<QueryFeeTokensResponseSDKType> {
+    feeTokens(request?: QueryFeeTokensRequest): Promise<QueryFeeTokensResponseSDKType> {
       return queryService.feeTokens(request);
     },
 
@@ -73,7 +73,7 @@ export const createRpcQueryExtension = (base: QueryClient) => {
       return queryService.denomPoolId(request);
     },
 
-    baseDenom(request: QueryBaseDenomRequest): Promise<QueryBaseDenomResponseSDKType> {
+    baseDenom(request?: QueryBaseDenomRequest): Promise<QueryBaseDenomResponseSDKType> {
       return queryService.baseDenom(request);
     }
 

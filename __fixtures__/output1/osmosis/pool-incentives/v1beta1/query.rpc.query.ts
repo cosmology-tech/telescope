@@ -85,23 +85,23 @@ export const createRpcQueryExtension = (base: QueryClient) => {
       return queryService.gaugeIds(request);
     },
 
-    distrInfo(request: QueryDistrInfoRequest): Promise<QueryDistrInfoResponseSDKType> {
+    distrInfo(request?: QueryDistrInfoRequest): Promise<QueryDistrInfoResponseSDKType> {
       return queryService.distrInfo(request);
     },
 
-    params(request: QueryParamsRequest): Promise<QueryParamsResponseSDKType> {
+    params(request?: QueryParamsRequest): Promise<QueryParamsResponseSDKType> {
       return queryService.params(request);
     },
 
-    lockableDurations(request: QueryLockableDurationsRequest): Promise<QueryLockableDurationsResponseSDKType> {
+    lockableDurations(request?: QueryLockableDurationsRequest): Promise<QueryLockableDurationsResponseSDKType> {
       return queryService.lockableDurations(request);
     },
 
-    incentivizedPools(request: QueryIncentivizedPoolsRequest): Promise<QueryIncentivizedPoolsResponseSDKType> {
+    incentivizedPools(request?: QueryIncentivizedPoolsRequest): Promise<QueryIncentivizedPoolsResponseSDKType> {
       return queryService.incentivizedPools(request);
     },
 
-    externalIncentiveGauges(request: QueryExternalIncentiveGaugesRequest): Promise<QueryExternalIncentiveGaugesResponseSDKType> {
+    externalIncentiveGauges(request?: QueryExternalIncentiveGaugesRequest): Promise<QueryExternalIncentiveGaugesResponseSDKType> {
       return queryService.externalIncentiveGauges(request);
     }
 

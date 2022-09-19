@@ -53,7 +53,7 @@ export const createRpcQueryExtension = (base: QueryClient) => {
   const rpc = createProtobufRpcClient(base);
   const queryService = new QueryClientImpl(rpc);
   return {
-    tokenPairs(request: QueryTokenPairsRequest): Promise<QueryTokenPairsResponseSDKType> {
+    tokenPairs(request?: QueryTokenPairsRequest): Promise<QueryTokenPairsResponseSDKType> {
       return queryService.tokenPairs(request);
     },
 
@@ -61,7 +61,7 @@ export const createRpcQueryExtension = (base: QueryClient) => {
       return queryService.tokenPair(request);
     },
 
-    params(request: QueryParamsRequest): Promise<QueryParamsResponseSDKType> {
+    params(request?: QueryParamsRequest): Promise<QueryParamsResponseSDKType> {
       return queryService.params(request);
     }
 

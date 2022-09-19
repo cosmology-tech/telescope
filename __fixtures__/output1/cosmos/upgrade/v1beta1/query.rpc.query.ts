@@ -76,7 +76,7 @@ export const createRpcQueryExtension = (base: QueryClient) => {
   const rpc = createProtobufRpcClient(base);
   const queryService = new QueryClientImpl(rpc);
   return {
-    currentPlan(request: QueryCurrentPlanRequest): Promise<QueryCurrentPlanResponseSDKType> {
+    currentPlan(request?: QueryCurrentPlanRequest): Promise<QueryCurrentPlanResponseSDKType> {
       return queryService.currentPlan(request);
     },
 
@@ -92,7 +92,7 @@ export const createRpcQueryExtension = (base: QueryClient) => {
       return queryService.moduleVersions(request);
     },
 
-    authority(request: QueryAuthorityRequest): Promise<QueryAuthorityResponseSDKType> {
+    authority(request?: QueryAuthorityRequest): Promise<QueryAuthorityResponseSDKType> {
       return queryService.authority(request);
     }
 

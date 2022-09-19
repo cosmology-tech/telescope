@@ -212,11 +212,11 @@ export const createRpcQueryExtension = (base: QueryClient) => {
       return queryService.historicalInfo(request);
     },
 
-    pool(request: QueryPoolRequest): Promise<QueryPoolResponseSDKType> {
+    pool(request?: QueryPoolRequest): Promise<QueryPoolResponseSDKType> {
       return queryService.pool(request);
     },
 
-    params(request: QueryParamsRequest): Promise<QueryParamsResponseSDKType> {
+    params(request?: QueryParamsRequest): Promise<QueryParamsResponseSDKType> {
       return queryService.params(request);
     }
 
