@@ -179,12 +179,6 @@ telescope({
 
 ## Options
 
-### Bundle
-
-| option                         | description                                                     | defaults   |
-| ------------------------------ | --------------------------------------------------------------  | ---------- |
-| `bundle.enabled`               | bundle all files into a scoped index file                       | `true`     |
-
 ### Amino Encoding
 
 | option                         | description                                                     | defaults   |
@@ -204,6 +198,17 @@ telescope({
 | `prototypes.fieldDefaultIsOptional`       | boolean value representing default optionality of field         | `false`|
 | `prototypes.useOptionalNullable`          | use `(gogoproto.nullable)` values in determining optionality    | `true`|
 | `prototypes.allowUndefinedTypes`          | boolean value allowing `Type`s to be `undefined`                | `false`|
+
+### Prototypes Methods
+
+| option                             | description                                                        | defaults|
+| `prototypes.methods.encode`        | boolean to enable `encode` method on proto objects                 | `true`  |
+| `prototypes.methods.decode`        | boolean to enable `decode` method on proto objects                 | `true`  |
+| `prototypes.methods.fromJSON`      | boolean to enable `fromJSON` method on proto objects               | `true`  |
+| `prototypes.methods.toJSON`        | boolean to enable `toJSON` method on proto objects                 | `true`  |
+| `prototypes.methods.fromPartial`   | boolean to enable `fromPartial` method on proto objects            | `true`  |
+| `prototypes.methods.fromSDK`       | boolean to enable `fromSDK` method on proto objects                | `false` |
+| `prototypes.methods.toSDK`         | boolean to enable `toSDK` method on proto objects                  | `false` |
 
 ### LCD Client Options
 
@@ -257,6 +262,19 @@ See [RPC Clients](#rpc-clients) for more info.
 | `tsDisable.disableAll`                       | if true, will include `//@ts-nocheck` on every output file      | `false`  |
 | `tsDisable.patterns`                         | if set, will include `//@ts-nocheck` on matched patterns        | `[]`     |
 | `tsDisable.files`                            | if set, will include `//@ts-nocheck` on matched files           | `[]`     |
+
+### Bundle
+
+| option                         | description                                                     | defaults   |
+| ------------------------------ | --------------------------------------------------------------  | ---------- |
+| `bundle.enabled`               | bundle all files into a scoped index file                       | `true`     |
+
+### Output
+
+| option                         | description                                                     | defaults   |
+| ------------------------------ | --------------------------------------------------------------  | ---------- |
+| `removeUnusedImports`          | removes unused imports                                          | `true`     |
+
 
 ## Types
 
