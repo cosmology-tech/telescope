@@ -10,7 +10,7 @@ const returnReponseType = (ResponseType: string) => {
             t.tsTypeParameterInstantiation(
                 [
                     t.tsTypeReference(
-                        t.identifier(ResponseType)
+                        t.identifier(ResponseType + 'SDKType')
                     )
                 ]
             )
@@ -47,7 +47,7 @@ const returnAwaitRequest = (
                 args,
                 t.tsTypeParameterInstantiation([
                     t.tsTypeReference(
-                        t.identifier(responseType)
+                        t.identifier(responseType + 'SDKType')
                     )
                 ])
             )

@@ -1,4 +1,4 @@
-import { Duration } from "../../../google/protobuf/duration";
+import { Duration, DurationSDKType } from "../../../google/protobuf/duration";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "@osmonauts/helpers";
 export const protobufPackage = "evmos.recovery.v1";
@@ -9,6 +9,12 @@ export interface GenesisState {
   params: Params;
 }
 
+/** GenesisState defines the recovery module's genesis state. */
+export interface GenesisStateSDKType {
+  /** params defines all the paramaters of the module. */
+  params: ParamsSDKType;
+}
+
 /** Params holds parameters for the recovery module */
 export interface Params {
   /** enable recovery IBC middleware */
@@ -16,6 +22,15 @@ export interface Params {
 
   /** duration added to timeout timestamp for balances recovered via IBC packets */
   packetTimeoutDuration: Duration;
+}
+
+/** Params holds parameters for the recovery module */
+export interface ParamsSDKType {
+  /** enable recovery IBC middleware */
+  enable_recovery: boolean;
+
+  /** duration added to timeout timestamp for balances recovered via IBC packets */
+  packet_timeout_duration: DurationSDKType;
 }
 
 function createBaseGenesisState(): GenesisState {
@@ -71,6 +86,18 @@ export const GenesisState = {
     const message = createBaseGenesisState();
     message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     return message;
+  },
+
+  fromSDK(object: GenesisStateSDKType): GenesisState {
+    return {
+      params: isSet(object.params) ? Params.fromSDK(object.params) : undefined
+    };
+  },
+
+  toSDK(message: GenesisState): GenesisStateSDKType {
+    const obj: any = {};
+    message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
+    return obj;
   }
 
 };
@@ -140,6 +167,20 @@ export const Params = {
     message.enableRecovery = object.enableRecovery ?? false;
     message.packetTimeoutDuration = object.packetTimeoutDuration ?? undefined;
     return message;
+  },
+
+  fromSDK(object: ParamsSDKType): Params {
+    return {
+      enableRecovery: isSet(object.enable_recovery) ? object.enable_recovery : undefined,
+      packetTimeoutDuration: isSet(object.packet_timeout_duration) ? Duration.fromSDK(object.packet_timeout_duration) : undefined
+    };
+  },
+
+  toSDK(message: Params): ParamsSDKType {
+    const obj: any = {};
+    message.enableRecovery !== undefined && (obj.enable_recovery = message.enableRecovery);
+    message.packetTimeoutDuration !== undefined && (obj.packet_timeout_duration = message.packetTimeoutDuration ? Duration.toSDK(message.packetTimeoutDuration) : undefined);
+    return obj;
   }
 
 };

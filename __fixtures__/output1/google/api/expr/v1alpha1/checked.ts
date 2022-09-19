@@ -1,12 +1,49 @@
-import { SourceInfo, Expr, Constant } from "./syntax";
-import { Empty } from "../../../protobuf/empty";
-import { NullValue, nullValueFromJSON, nullValueToJSON } from "../../../protobuf/struct";
+import { SourceInfo, SourceInfoSDKType, Expr, ExprSDKType, Constant, ConstantSDKType } from "./syntax";
+import { Empty, EmptySDKType } from "../../../protobuf/empty";
+import { NullValue, NullValueSDKType, nullValueFromJSON, nullValueToJSON } from "../../../protobuf/struct";
 import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, DeepPartial, isObject } from "@osmonauts/helpers";
 export const protobufPackage = "google.api.expr.v1alpha1";
 
 /** CEL primitive types. */
 export enum Type_PrimitiveType {
+  /** PRIMITIVE_TYPE_UNSPECIFIED - Unspecified type. */
+  PRIMITIVE_TYPE_UNSPECIFIED = 0,
+
+  /** BOOL - Boolean type. */
+  BOOL = 1,
+
+  /**
+   * INT64 - Int64 type.
+   * 
+   * Proto-based integer values are widened to int64.
+   */
+  INT64 = 2,
+
+  /**
+   * UINT64 - Uint64 type.
+   * 
+   * Proto-based unsigned integer values are widened to uint64.
+   */
+  UINT64 = 3,
+
+  /**
+   * DOUBLE - Double type.
+   * 
+   * Proto-based float values are widened to double values.
+   */
+  DOUBLE = 4,
+
+  /** STRING - String type. */
+  STRING = 5,
+
+  /** BYTES - Bytes type. */
+  BYTES = 6,
+  UNRECOGNIZED = -1,
+}
+
+/** CEL primitive types. */
+export enum Type_PrimitiveTypeSDKType {
   /** PRIMITIVE_TYPE_UNSPECIFIED - Unspecified type. */
   PRIMITIVE_TYPE_UNSPECIFIED = 0,
 
@@ -126,6 +163,28 @@ export enum Type_WellKnownType {
   DURATION = 3,
   UNRECOGNIZED = -1,
 }
+
+/** Well-known protobuf types treated with first-class support in CEL. */
+export enum Type_WellKnownTypeSDKType {
+  /** WELL_KNOWN_TYPE_UNSPECIFIED - Unspecified type. */
+  WELL_KNOWN_TYPE_UNSPECIFIED = 0,
+
+  /**
+   * ANY - Well-known protobuf.Any type.
+   * 
+   * Any types are a polymorphic message type. During type-checking they are
+   * treated like `DYN` types, but at runtime they are resolved to a specific
+   * message type specified at evaluation time.
+   */
+  ANY = 1,
+
+  /** TIMESTAMP - Well-known protobuf.Timestamp type, internally referenced as `timestamp`. */
+  TIMESTAMP = 2,
+
+  /** DURATION - Well-known protobuf.Duration type, internally referenced as `duration`. */
+  DURATION = 3,
+  UNRECOGNIZED = -1,
+}
 export function type_WellKnownTypeFromJSON(object: any): Type_WellKnownType {
   switch (object) {
     case 0:
@@ -172,9 +231,17 @@ export interface CheckedExpr_ReferenceMapEntry {
   key: Long;
   value: Reference;
 }
+export interface CheckedExpr_ReferenceMapEntrySDKType {
+  key: Long;
+  value: ReferenceSDKType;
+}
 export interface CheckedExpr_TypeMapEntry {
   key: Long;
   value: Type;
+}
+export interface CheckedExpr_TypeMapEntrySDKType {
+  key: Long;
+  value: TypeSDKType;
 }
 
 /** A CEL expression which has been successfully type checked. */
@@ -233,6 +300,64 @@ export interface CheckedExpr {
    * may have structural differences.
    */
   expr: Expr;
+}
+
+/** A CEL expression which has been successfully type checked. */
+export interface CheckedExprSDKType {
+  /**
+   * A map from expression ids to resolved references.
+   * 
+   * The following entries are in this table:
+   * 
+   * - An Ident or Select expression is represented here if it resolves to a
+   * declaration. For instance, if `a.b.c` is represented by
+   * `select(select(id(a), b), c)`, and `a.b` resolves to a declaration,
+   * while `c` is a field selection, then the reference is attached to the
+   * nested select expression (but not to the id or or the outer select).
+   * In turn, if `a` resolves to a declaration and `b.c` are field selections,
+   * the reference is attached to the ident expression.
+   * - Every Call expression has an entry here, identifying the function being
+   * called.
+   * - Every CreateStruct expression for a message has an entry, identifying
+   * the message.
+   */
+  reference_map: {
+    [key: Long]: ReferenceSDKType;
+  };
+
+  /**
+   * A map from expression ids to types.
+   * 
+   * Every expression node which has a type different than DYN has a mapping
+   * here. If an expression has type DYN, it is omitted from this map to save
+   * space.
+   */
+  type_map: {
+    [key: Long]: TypeSDKType;
+  };
+
+  /**
+   * The source info derived from input that generated the parsed `expr` and
+   * any optimizations made during the type-checking pass.
+   */
+  source_info: SourceInfoSDKType;
+
+  /**
+   * The expr version indicates the major / minor version number of the `expr`
+   * representation.
+   * 
+   * The most common reason for a version change will be to indicate to the CEL
+   * runtimes that transformations have been performed on the expr during static
+   * analysis. In some cases, this will save the runtime the work of applying
+   * the same or similar transformations prior to evaluation.
+   */
+  expr_version: string;
+
+  /**
+   * The checked expression. Semantically equivalent to the parsed `expr`, but
+   * may have structural differences.
+   */
+  expr: ExprSDKType;
 }
 
 /** Represents a CEL type. */
@@ -299,10 +424,80 @@ export interface Type {
   abstractType?: Type_AbstractType;
 }
 
+/** Represents a CEL type. */
+export interface TypeSDKType {
+  /** Dynamic type. */
+  dyn?: EmptySDKType;
+
+  /** Null value. */
+  null?: NullValueSDKType;
+
+  /** Primitive types: `true`, `1u`, `-2.0`, `'string'`, `b'bytes'`. */
+  primitive?: Type_PrimitiveTypeSDKType;
+
+  /** Wrapper of a primitive type, e.g. `google.protobuf.Int64Value`. */
+  wrapper?: Type_PrimitiveTypeSDKType;
+
+  /** Well-known protobuf type such as `google.protobuf.Timestamp`. */
+  well_known?: Type_WellKnownTypeSDKType;
+
+  /** Parameterized list with elements of `list_type`, e.g. `list<timestamp>`. */
+  list_type?: Type_ListTypeSDKType;
+
+  /** Parameterized map with typed keys and values. */
+  map_type?: Type_MapTypeSDKType;
+
+  /** Function type. */
+  function?: Type_FunctionTypeSDKType;
+
+  /**
+   * Protocol buffer message type.
+   * 
+   * The `message_type` string specifies the qualified message type name. For
+   * example, `google.plus.Profile`.
+   */
+  message_type?: string;
+
+  /**
+   * Type param type.
+   * 
+   * The `type_param` string specifies the type parameter name, e.g. `list<E>`
+   * would be a `list_type` whose element type was a `type_param` type
+   * named `E`.
+   */
+  type_param?: string;
+
+  /**
+   * Type type.
+   * 
+   * The `type` value specifies the target type. e.g. int is type with a
+   * target type of `Primitive.INT`.
+   */
+  type?: TypeSDKType;
+
+  /**
+   * Error type.
+   * 
+   * During type-checking if an expression is an error, its type is propagated
+   * as the `ERROR` type. This permits the type-checker to discover other
+   * errors present in the expression.
+   */
+  error?: EmptySDKType;
+
+  /** Abstract, application defined type. */
+  abstract_type?: Type_AbstractTypeSDKType;
+}
+
 /** List type with typed elements, e.g. `list<example.proto.MyMessage>`. */
 export interface Type_ListType {
   /** The element type. */
   elemType: Type;
+}
+
+/** List type with typed elements, e.g. `list<example.proto.MyMessage>`. */
+export interface Type_ListTypeSDKType {
+  /** The element type. */
+  elem_type: TypeSDKType;
 }
 
 /** Map type with parameterized key and value types, e.g. `map<string, int>`. */
@@ -314,6 +509,15 @@ export interface Type_MapType {
   valueType: Type;
 }
 
+/** Map type with parameterized key and value types, e.g. `map<string, int>`. */
+export interface Type_MapTypeSDKType {
+  /** The type of the key. */
+  key_type: TypeSDKType;
+
+  /** The type of the value. */
+  value_type: TypeSDKType;
+}
+
 /** Function type with result and arg types. */
 export interface Type_FunctionType {
   /** Result type of the function. */
@@ -323,6 +527,15 @@ export interface Type_FunctionType {
   argTypes: Type[];
 }
 
+/** Function type with result and arg types. */
+export interface Type_FunctionTypeSDKType {
+  /** Result type of the function. */
+  result_type: TypeSDKType;
+
+  /** Argument types of the function. */
+  arg_types: TypeSDKType[];
+}
+
 /** Application defined abstract type. */
 export interface Type_AbstractType {
   /** The fully qualified name of this abstract type. */
@@ -330,6 +543,15 @@ export interface Type_AbstractType {
 
   /** Parameter types for this abstract type. */
   parameterTypes: Type[];
+}
+
+/** Application defined abstract type. */
+export interface Type_AbstractTypeSDKType {
+  /** The fully qualified name of this abstract type. */
+  name: string;
+
+  /** Parameter types for this abstract type. */
+  parameter_types: TypeSDKType[];
 }
 
 /**
@@ -359,6 +581,32 @@ export interface Decl {
 }
 
 /**
+ * Represents a declaration of a named value or function.
+ * 
+ * A declaration is part of the contract between the expression, the agent
+ * evaluating that expression, and the caller requesting evaluation.
+ */
+export interface DeclSDKType {
+  /**
+   * The fully qualified name of the declaration.
+   * 
+   * Declarations are organized in containers and this represents the full path
+   * to the declaration in its container, as in `google.api.expr.Decl`.
+   * 
+   * Declarations used as [FunctionDecl.Overload][google.api.expr.v1alpha1.Decl.FunctionDecl.Overload] parameters may or may not
+   * have a name depending on whether the overload is function declaration or a
+   * function definition containing a result [Expr][google.api.expr.v1alpha1.Expr].
+   */
+  name: string;
+
+  /** Identifier declaration. */
+  ident?: Decl_IdentDeclSDKType;
+
+  /** Function declaration. */
+  function?: Decl_FunctionDeclSDKType;
+}
+
+/**
  * Identifier declaration which specifies its type and optional `Expr` value.
  * 
  * An identifier without a value is a declaration that must be provided at
@@ -381,6 +629,28 @@ export interface Decl_IdentDecl {
 }
 
 /**
+ * Identifier declaration which specifies its type and optional `Expr` value.
+ * 
+ * An identifier without a value is a declaration that must be provided at
+ * evaluation time. An identifier with a value should resolve to a constant,
+ * but may be used in conjunction with other identifiers bound at evaluation
+ * time.
+ */
+export interface Decl_IdentDeclSDKType {
+  /** Required. The type of the identifier. */
+  type: TypeSDKType;
+
+  /**
+   * The constant value of the identifier. If not specified, the identifier
+   * must be supplied at evaluation time.
+   */
+  value: ConstantSDKType;
+
+  /** Documentation string for the identifier. */
+  doc: string;
+}
+
+/**
  * Function declaration specifies one or more overloads which indicate the
  * function's parameter types and return type.
  * 
@@ -390,6 +660,18 @@ export interface Decl_IdentDecl {
 export interface Decl_FunctionDecl {
   /** Required. List of function overloads, must contain at least one overload. */
   overloads: Decl_FunctionDecl_Overload[];
+}
+
+/**
+ * Function declaration specifies one or more overloads which indicate the
+ * function's parameter types and return type.
+ * 
+ * Functions have no observable side-effects (there may be side-effects like
+ * logging which are not observable from CEL).
+ */
+export interface Decl_FunctionDeclSDKType {
+  /** Required. List of function overloads, must contain at least one overload. */
+  overloads: Decl_FunctionDecl_OverloadSDKType[];
 }
 
 /**
@@ -455,6 +737,69 @@ export interface Decl_FunctionDecl_Overload {
   doc: string;
 }
 
+/**
+ * An overload indicates a function's parameter types and return type, and
+ * may optionally include a function body described in terms of [Expr][google.api.expr.v1alpha1.Expr]
+ * values.
+ * 
+ * Functions overloads are declared in either a function or method
+ * call-style. For methods, the `params[0]` is the expected type of the
+ * target receiver.
+ * 
+ * Overloads must have non-overlapping argument types after erasure of all
+ * parameterized type variables (similar as type erasure in Java).
+ */
+export interface Decl_FunctionDecl_OverloadSDKType {
+  /**
+   * Required. Globally unique overload name of the function which reflects
+   * the function name and argument types.
+   * 
+   * This will be used by a [Reference][google.api.expr.v1alpha1.Reference] to indicate the `overload_id` that
+   * was resolved for the function `name`.
+   */
+  overload_id: string;
+
+  /**
+   * List of function parameter [Type][google.api.expr.v1alpha1.Type] values.
+   * 
+   * Param types are disjoint after generic type parameters have been
+   * replaced with the type `DYN`. Since the `DYN` type is compatible with
+   * any other type, this means that if `A` is a type parameter, the
+   * function types `int<A>` and `int<int>` are not disjoint. Likewise,
+   * `map<string, string>` is not disjoint from `map<K, V>`.
+   * 
+   * When the `result_type` of a function is a generic type param, the
+   * type param name also appears as the `type` of on at least one params.
+   */
+  params: TypeSDKType[];
+
+  /**
+   * The type param names associated with the function declaration.
+   * 
+   * For example, `function ex<K,V>(K key, map<K, V> map) : V` would yield
+   * the type params of `K, V`.
+   */
+  type_params: string[];
+
+  /**
+   * Required. The result type of the function. For example, the operator
+   * `string.isEmpty()` would have `result_type` of `kind: BOOL`.
+   */
+  result_type: TypeSDKType;
+
+  /**
+   * Whether the function is to be used in a method call-style `x.f(...)`
+   * of a function call-style `f(x, ...)`.
+   * 
+   * For methods, the first parameter declaration, `params[0]` is the
+   * expected type of the target receiver.
+   */
+  is_instance_function: boolean;
+
+  /** Documentation string for the overload. */
+  doc: string;
+}
+
 /** Describes a resolved reference to a declaration. */
 export interface Reference {
   /** The fully qualified name of the declaration. */
@@ -477,6 +822,30 @@ export interface Reference {
    * constant if known at compile time.
    */
   value: Constant;
+}
+
+/** Describes a resolved reference to a declaration. */
+export interface ReferenceSDKType {
+  /** The fully qualified name of the declaration. */
+  name: string;
+
+  /**
+   * For references to functions, this is a list of `Overload.overload_id`
+   * values which match according to typing rules.
+   * 
+   * If the list has more than one element, overload resolution among the
+   * presented candidates must happen at runtime because of dynamic types. The
+   * type checker attempts to narrow down this list as much as possible.
+   * 
+   * Empty if this is not a reference to a [Decl.FunctionDecl][google.api.expr.v1alpha1.Decl.FunctionDecl].
+   */
+  overload_id: string[];
+
+  /**
+   * For references to constants, this may contain the value of the
+   * constant if known at compile time.
+   */
+  value: ConstantSDKType;
 }
 
 function createBaseCheckedExpr_ReferenceMapEntry(): CheckedExpr_ReferenceMapEntry {
@@ -544,6 +913,20 @@ export const CheckedExpr_ReferenceMapEntry = {
     message.key = object.key !== undefined && object.key !== null ? Long.fromValue(object.key) : Long.ZERO;
     message.value = object.value !== undefined && object.value !== null ? Reference.fromPartial(object.value) : undefined;
     return message;
+  },
+
+  fromSDK(object: CheckedExpr_ReferenceMapEntrySDKType): CheckedExpr_ReferenceMapEntry {
+    return {
+      key: isSet(object.key) ? object.key : undefined,
+      value: isSet(object.value) ? Reference.fromSDK(object.value) : undefined
+    };
+  },
+
+  toSDK(message: CheckedExpr_ReferenceMapEntry): CheckedExpr_ReferenceMapEntrySDKType {
+    const obj: any = {};
+    message.key !== undefined && (obj.key = message.key);
+    message.value !== undefined && (obj.value = message.value ? Reference.toSDK(message.value) : undefined);
+    return obj;
   }
 
 };
@@ -613,6 +996,20 @@ export const CheckedExpr_TypeMapEntry = {
     message.key = object.key !== undefined && object.key !== null ? Long.fromValue(object.key) : Long.ZERO;
     message.value = object.value !== undefined && object.value !== null ? Type.fromPartial(object.value) : undefined;
     return message;
+  },
+
+  fromSDK(object: CheckedExpr_TypeMapEntrySDKType): CheckedExpr_TypeMapEntry {
+    return {
+      key: isSet(object.key) ? object.key : undefined,
+      value: isSet(object.value) ? Type.fromSDK(object.value) : undefined
+    };
+  },
+
+  toSDK(message: CheckedExpr_TypeMapEntry): CheckedExpr_TypeMapEntrySDKType {
+    const obj: any = {};
+    message.key !== undefined && (obj.key = message.key);
+    message.value !== undefined && (obj.value = message.value ? Type.toSDK(message.value) : undefined);
+    return obj;
   }
 
 };
@@ -773,6 +1170,50 @@ export const CheckedExpr = {
     message.exprVersion = object.exprVersion ?? "";
     message.expr = object.expr !== undefined && object.expr !== null ? Expr.fromPartial(object.expr) : undefined;
     return message;
+  },
+
+  fromSDK(object: CheckedExprSDKType): CheckedExpr {
+    return {
+      referenceMap: isObject(object.reference_map) ? Object.entries(object.reference_map).reduce<{
+        [key: Long]: Reference;
+      }>((acc, [key, value]) => {
+        acc[Number(key)] = Reference.fromSDK(value);
+        return acc;
+      }, {}) : {},
+      typeMap: isObject(object.type_map) ? Object.entries(object.type_map).reduce<{
+        [key: Long]: Type;
+      }>((acc, [key, value]) => {
+        acc[Number(key)] = Type.fromSDK(value);
+        return acc;
+      }, {}) : {},
+      sourceInfo: isSet(object.source_info) ? SourceInfo.fromSDK(object.source_info) : undefined,
+      exprVersion: isSet(object.expr_version) ? object.expr_version : undefined,
+      expr: isSet(object.expr) ? Expr.fromSDK(object.expr) : undefined
+    };
+  },
+
+  toSDK(message: CheckedExpr): CheckedExprSDKType {
+    const obj: any = {};
+    obj.reference_map = {};
+
+    if (message.referenceMap) {
+      Object.entries(message.referenceMap).forEach(([k, v]) => {
+        obj.reference_map[k] = Reference.toSDK(v);
+      });
+    }
+
+    obj.type_map = {};
+
+    if (message.typeMap) {
+      Object.entries(message.typeMap).forEach(([k, v]) => {
+        obj.type_map[k] = Type.toSDK(v);
+      });
+    }
+
+    message.sourceInfo !== undefined && (obj.source_info = message.sourceInfo ? SourceInfo.toSDK(message.sourceInfo) : undefined);
+    message.exprVersion !== undefined && (obj.expr_version = message.exprVersion);
+    message.expr !== undefined && (obj.expr = message.expr ? Expr.toSDK(message.expr) : undefined);
+    return obj;
   }
 
 };
@@ -974,6 +1415,42 @@ export const Type = {
     message.error = object.error !== undefined && object.error !== null ? Empty.fromPartial(object.error) : undefined;
     message.abstractType = object.abstractType !== undefined && object.abstractType !== null ? Type_AbstractType.fromPartial(object.abstractType) : undefined;
     return message;
+  },
+
+  fromSDK(object: TypeSDKType): Type {
+    return {
+      dyn: isSet(object.dyn) ? Empty.fromSDK(object.dyn) : undefined,
+      null: isSet(object.null) ? nullValueFromJSON(object.null) : undefined,
+      primitive: isSet(object.primitive) ? type_PrimitiveTypeFromJSON(object.primitive) : undefined,
+      wrapper: isSet(object.wrapper) ? type_PrimitiveTypeFromJSON(object.wrapper) : undefined,
+      wellKnown: isSet(object.well_known) ? type_WellKnownTypeFromJSON(object.well_known) : undefined,
+      listType: isSet(object.list_type) ? Type_ListType.fromSDK(object.list_type) : undefined,
+      mapType: isSet(object.map_type) ? Type_MapType.fromSDK(object.map_type) : undefined,
+      function: isSet(object.function) ? Type_FunctionType.fromSDK(object.function) : undefined,
+      messageType: isSet(object.message_type) ? object.message_type : undefined,
+      typeParam: isSet(object.type_param) ? object.type_param : undefined,
+      type: isSet(object.type) ? Type.fromSDK(object.type) : undefined,
+      error: isSet(object.error) ? Empty.fromSDK(object.error) : undefined,
+      abstractType: isSet(object.abstract_type) ? Type_AbstractType.fromSDK(object.abstract_type) : undefined
+    };
+  },
+
+  toSDK(message: Type): TypeSDKType {
+    const obj: any = {};
+    message.dyn !== undefined && (obj.dyn = message.dyn ? Empty.toSDK(message.dyn) : undefined);
+    message.null !== undefined && (obj.null = nullValueToJSON(message.null));
+    message.primitive !== undefined && (obj.primitive = type_PrimitiveTypeToJSON(message.primitive));
+    message.wrapper !== undefined && (obj.wrapper = type_PrimitiveTypeToJSON(message.wrapper));
+    message.wellKnown !== undefined && (obj.well_known = type_WellKnownTypeToJSON(message.wellKnown));
+    message.listType !== undefined && (obj.list_type = message.listType ? Type_ListType.toSDK(message.listType) : undefined);
+    message.mapType !== undefined && (obj.map_type = message.mapType ? Type_MapType.toSDK(message.mapType) : undefined);
+    message.function !== undefined && (obj.function = message.function ? Type_FunctionType.toSDK(message.function) : undefined);
+    message.messageType !== undefined && (obj.message_type = message.messageType);
+    message.typeParam !== undefined && (obj.type_param = message.typeParam);
+    message.type !== undefined && (obj.type = message.type ? Type.toSDK(message.type) : undefined);
+    message.error !== undefined && (obj.error = message.error ? Empty.toSDK(message.error) : undefined);
+    message.abstractType !== undefined && (obj.abstract_type = message.abstractType ? Type_AbstractType.toSDK(message.abstractType) : undefined);
+    return obj;
   }
 
 };
@@ -1031,6 +1508,18 @@ export const Type_ListType = {
     const message = createBaseType_ListType();
     message.elemType = object.elemType !== undefined && object.elemType !== null ? Type.fromPartial(object.elemType) : undefined;
     return message;
+  },
+
+  fromSDK(object: Type_ListTypeSDKType): Type_ListType {
+    return {
+      elemType: isSet(object.elem_type) ? Type.fromSDK(object.elem_type) : undefined
+    };
+  },
+
+  toSDK(message: Type_ListType): Type_ListTypeSDKType {
+    const obj: any = {};
+    message.elemType !== undefined && (obj.elem_type = message.elemType ? Type.toSDK(message.elemType) : undefined);
+    return obj;
   }
 
 };
@@ -1100,6 +1589,20 @@ export const Type_MapType = {
     message.keyType = object.keyType !== undefined && object.keyType !== null ? Type.fromPartial(object.keyType) : undefined;
     message.valueType = object.valueType !== undefined && object.valueType !== null ? Type.fromPartial(object.valueType) : undefined;
     return message;
+  },
+
+  fromSDK(object: Type_MapTypeSDKType): Type_MapType {
+    return {
+      keyType: isSet(object.key_type) ? Type.fromSDK(object.key_type) : undefined,
+      valueType: isSet(object.value_type) ? Type.fromSDK(object.value_type) : undefined
+    };
+  },
+
+  toSDK(message: Type_MapType): Type_MapTypeSDKType {
+    const obj: any = {};
+    message.keyType !== undefined && (obj.key_type = message.keyType ? Type.toSDK(message.keyType) : undefined);
+    message.valueType !== undefined && (obj.value_type = message.valueType ? Type.toSDK(message.valueType) : undefined);
+    return obj;
   }
 
 };
@@ -1175,6 +1678,26 @@ export const Type_FunctionType = {
     message.resultType = object.resultType !== undefined && object.resultType !== null ? Type.fromPartial(object.resultType) : undefined;
     message.argTypes = object.argTypes?.map(e => Type.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: Type_FunctionTypeSDKType): Type_FunctionType {
+    return {
+      resultType: isSet(object.result_type) ? Type.fromSDK(object.result_type) : undefined,
+      argTypes: Array.isArray(object?.arg_types) ? object.arg_types.map((e: any) => Type.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: Type_FunctionType): Type_FunctionTypeSDKType {
+    const obj: any = {};
+    message.resultType !== undefined && (obj.result_type = message.resultType ? Type.toSDK(message.resultType) : undefined);
+
+    if (message.argTypes) {
+      obj.arg_types = message.argTypes.map(e => e ? Type.toSDK(e) : undefined);
+    } else {
+      obj.arg_types = [];
+    }
+
+    return obj;
   }
 
 };
@@ -1250,6 +1773,26 @@ export const Type_AbstractType = {
     message.name = object.name ?? "";
     message.parameterTypes = object.parameterTypes?.map(e => Type.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: Type_AbstractTypeSDKType): Type_AbstractType {
+    return {
+      name: isSet(object.name) ? object.name : undefined,
+      parameterTypes: Array.isArray(object?.parameter_types) ? object.parameter_types.map((e: any) => Type.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: Type_AbstractType): Type_AbstractTypeSDKType {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+
+    if (message.parameterTypes) {
+      obj.parameter_types = message.parameterTypes.map(e => e ? Type.toSDK(e) : undefined);
+    } else {
+      obj.parameter_types = [];
+    }
+
+    return obj;
   }
 
 };
@@ -1331,6 +1874,22 @@ export const Decl = {
     message.ident = object.ident !== undefined && object.ident !== null ? Decl_IdentDecl.fromPartial(object.ident) : undefined;
     message.function = object.function !== undefined && object.function !== null ? Decl_FunctionDecl.fromPartial(object.function) : undefined;
     return message;
+  },
+
+  fromSDK(object: DeclSDKType): Decl {
+    return {
+      name: isSet(object.name) ? object.name : undefined,
+      ident: isSet(object.ident) ? Decl_IdentDecl.fromSDK(object.ident) : undefined,
+      function: isSet(object.function) ? Decl_FunctionDecl.fromSDK(object.function) : undefined
+    };
+  },
+
+  toSDK(message: Decl): DeclSDKType {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    message.ident !== undefined && (obj.ident = message.ident ? Decl_IdentDecl.toSDK(message.ident) : undefined);
+    message.function !== undefined && (obj.function = message.function ? Decl_FunctionDecl.toSDK(message.function) : undefined);
+    return obj;
   }
 
 };
@@ -1412,6 +1971,22 @@ export const Decl_IdentDecl = {
     message.value = object.value !== undefined && object.value !== null ? Constant.fromPartial(object.value) : undefined;
     message.doc = object.doc ?? "";
     return message;
+  },
+
+  fromSDK(object: Decl_IdentDeclSDKType): Decl_IdentDecl {
+    return {
+      type: isSet(object.type) ? Type.fromSDK(object.type) : undefined,
+      value: isSet(object.value) ? Constant.fromSDK(object.value) : undefined,
+      doc: isSet(object.doc) ? object.doc : undefined
+    };
+  },
+
+  toSDK(message: Decl_IdentDecl): Decl_IdentDeclSDKType {
+    const obj: any = {};
+    message.type !== undefined && (obj.type = message.type ? Type.toSDK(message.type) : undefined);
+    message.value !== undefined && (obj.value = message.value ? Constant.toSDK(message.value) : undefined);
+    message.doc !== undefined && (obj.doc = message.doc);
+    return obj;
   }
 
 };
@@ -1475,6 +2050,24 @@ export const Decl_FunctionDecl = {
     const message = createBaseDecl_FunctionDecl();
     message.overloads = object.overloads?.map(e => Decl_FunctionDecl_Overload.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: Decl_FunctionDeclSDKType): Decl_FunctionDecl {
+    return {
+      overloads: Array.isArray(object?.overloads) ? object.overloads.map((e: any) => Decl_FunctionDecl_Overload.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: Decl_FunctionDecl): Decl_FunctionDeclSDKType {
+    const obj: any = {};
+
+    if (message.overloads) {
+      obj.overloads = message.overloads.map(e => e ? Decl_FunctionDecl_Overload.toSDK(e) : undefined);
+    } else {
+      obj.overloads = [];
+    }
+
+    return obj;
   }
 
 };
@@ -1603,6 +2196,39 @@ export const Decl_FunctionDecl_Overload = {
     message.isInstanceFunction = object.isInstanceFunction ?? false;
     message.doc = object.doc ?? "";
     return message;
+  },
+
+  fromSDK(object: Decl_FunctionDecl_OverloadSDKType): Decl_FunctionDecl_Overload {
+    return {
+      overloadId: isSet(object.overload_id) ? object.overload_id : undefined,
+      params: Array.isArray(object?.params) ? object.params.map((e: any) => Type.fromSDK(e)) : [],
+      typeParams: Array.isArray(object?.type_params) ? object.type_params.map((e: any) => e) : [],
+      resultType: isSet(object.result_type) ? Type.fromSDK(object.result_type) : undefined,
+      isInstanceFunction: isSet(object.is_instance_function) ? object.is_instance_function : undefined,
+      doc: isSet(object.doc) ? object.doc : undefined
+    };
+  },
+
+  toSDK(message: Decl_FunctionDecl_Overload): Decl_FunctionDecl_OverloadSDKType {
+    const obj: any = {};
+    message.overloadId !== undefined && (obj.overload_id = message.overloadId);
+
+    if (message.params) {
+      obj.params = message.params.map(e => e ? Type.toSDK(e) : undefined);
+    } else {
+      obj.params = [];
+    }
+
+    if (message.typeParams) {
+      obj.type_params = message.typeParams.map(e => e);
+    } else {
+      obj.type_params = [];
+    }
+
+    message.resultType !== undefined && (obj.result_type = message.resultType ? Type.toSDK(message.resultType) : undefined);
+    message.isInstanceFunction !== undefined && (obj.is_instance_function = message.isInstanceFunction);
+    message.doc !== undefined && (obj.doc = message.doc);
+    return obj;
   }
 
 };
@@ -1690,6 +2316,28 @@ export const Reference = {
     message.overloadId = object.overloadId?.map(e => e) || [];
     message.value = object.value !== undefined && object.value !== null ? Constant.fromPartial(object.value) : undefined;
     return message;
+  },
+
+  fromSDK(object: ReferenceSDKType): Reference {
+    return {
+      name: isSet(object.name) ? object.name : undefined,
+      overloadId: Array.isArray(object?.overload_id) ? object.overload_id.map((e: any) => e) : [],
+      value: isSet(object.value) ? Constant.fromSDK(object.value) : undefined
+    };
+  },
+
+  toSDK(message: Reference): ReferenceSDKType {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+
+    if (message.overloadId) {
+      obj.overload_id = message.overloadId.map(e => e);
+    } else {
+      obj.overload_id = [];
+    }
+
+    message.value !== undefined && (obj.value = message.value ? Constant.toSDK(message.value) : undefined);
+    return obj;
   }
 
 };

@@ -1,8 +1,8 @@
-import { PageRequest, PageResponse } from "../../../cosmos/base/query/v1beta1/pagination";
-import { Account, Payment } from "./types";
+import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
+import { Account, AccountSDKType, Payment, PaymentSDKType } from "./types";
 import { setPaginationParams } from "@osmonauts/helpers";
 import { LCDClient } from "@osmonauts/lcd";
-import { QueryAccountsRequest, QueryAccountsResponse, QueryPaymentsRequest, QueryPaymentsResponse } from "./query";
+import { QueryAccountsRequest, QueryAccountsRequestSDKType, QueryAccountsResponse, QueryAccountsResponseSDKType, QueryPaymentsRequest, QueryPaymentsRequestSDKType, QueryPaymentsResponse, QueryPaymentsResponseSDKType } from "./query";
 export class LCDQueryClient extends LCDClient {
   constructor({
     restEndpoint
@@ -17,7 +17,7 @@ export class LCDQueryClient extends LCDClient {
   /* buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
   buf:lint:ignore RPC_RESPONSE_STANDARD_NAME
   Accounts queries all accounts */
-  async accounts(params: QueryAccountsRequest): Promise<QueryAccountsResponse> {
+  async accounts(params: QueryAccountsRequest): Promise<QueryAccountsResponseSDKType> {
     const options: any = {
       params: {}
     };
@@ -43,13 +43,13 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `akash/escrow/v1beta1/types/accounts/list`;
-    return await this.get<QueryAccountsResponse>(endpoint, options);
+    return await this.get<QueryAccountsResponseSDKType>(endpoint, options);
   }
 
   /* buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
   buf:lint:ignore RPC_RESPONSE_STANDARD_NAME
   Payments queries all payments */
-  async payments(params: QueryPaymentsRequest): Promise<QueryPaymentsResponse> {
+  async payments(params: QueryPaymentsRequest): Promise<QueryPaymentsResponseSDKType> {
     const options: any = {
       params: {}
     };
@@ -79,7 +79,7 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `akash/escrow/v1beta1/types/payments/list`;
-    return await this.get<QueryPaymentsResponse>(endpoint, options);
+    return await this.get<QueryPaymentsResponseSDKType>(endpoint, options);
   }
 
 }

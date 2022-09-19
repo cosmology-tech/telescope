@@ -4,12 +4,22 @@ export const protobufPackage = "osmosis.store.v1beta1";
 export interface Node {
   children: Child[];
 }
+export interface NodeSDKType {
+  children: ChildSDKType[];
+}
 export interface Child {
+  index: Uint8Array;
+  accumulation: string;
+}
+export interface ChildSDKType {
   index: Uint8Array;
   accumulation: string;
 }
 export interface Leaf {
   leaf: Child;
+}
+export interface LeafSDKType {
+  leaf: ChildSDKType;
 }
 
 function createBaseNode(): Node {
@@ -71,6 +81,24 @@ export const Node = {
     const message = createBaseNode();
     message.children = object.children?.map(e => Child.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: NodeSDKType): Node {
+    return {
+      children: Array.isArray(object?.children) ? object.children.map((e: any) => Child.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: Node): NodeSDKType {
+    const obj: any = {};
+
+    if (message.children) {
+      obj.children = message.children.map(e => e ? Child.toSDK(e) : undefined);
+    } else {
+      obj.children = [];
+    }
+
+    return obj;
   }
 
 };
@@ -140,6 +168,20 @@ export const Child = {
     message.index = object.index ?? new Uint8Array();
     message.accumulation = object.accumulation ?? "";
     return message;
+  },
+
+  fromSDK(object: ChildSDKType): Child {
+    return {
+      index: isSet(object.index) ? object.index : undefined,
+      accumulation: isSet(object.accumulation) ? object.accumulation : undefined
+    };
+  },
+
+  toSDK(message: Child): ChildSDKType {
+    const obj: any = {};
+    message.index !== undefined && (obj.index = message.index);
+    message.accumulation !== undefined && (obj.accumulation = message.accumulation);
+    return obj;
   }
 
 };
@@ -197,6 +239,18 @@ export const Leaf = {
     const message = createBaseLeaf();
     message.leaf = object.leaf !== undefined && object.leaf !== null ? Child.fromPartial(object.leaf) : undefined;
     return message;
+  },
+
+  fromSDK(object: LeafSDKType): Leaf {
+    return {
+      leaf: isSet(object.leaf) ? Child.fromSDK(object.leaf) : undefined
+    };
+  },
+
+  toSDK(message: Leaf): LeafSDKType {
+    const obj: any = {};
+    message.leaf !== undefined && (obj.leaf = message.leaf ? Child.toSDK(message.leaf) : undefined);
+    return obj;
   }
 
 };

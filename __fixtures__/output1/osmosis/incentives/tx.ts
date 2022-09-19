@@ -1,6 +1,6 @@
-import { QueryCondition } from "../lockup/lock";
-import { Coin } from "../../cosmos/base/v1beta1/coin";
-import { Timestamp } from "../../google/protobuf/timestamp";
+import { QueryCondition, QueryConditionSDKType } from "../lockup/lock";
+import { Coin, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
+import { Timestamp, TimestampSDKType } from "../../google/protobuf/timestamp";
 import * as _m0 from "protobufjs/minimal";
 import { toTimestamp, fromTimestamp, Long, isSet, fromJsonTimestamp, DeepPartial } from "@osmonauts/helpers";
 export const protobufPackage = "osmosis.incentives";
@@ -24,13 +24,40 @@ export interface MsgCreateGauge {
   /** number of epochs distribution will be done */
   numEpochsPaidOver: Long;
 }
+export interface MsgCreateGaugeSDKType {
+  /**
+   * flag to show if it's perpetual or multi-epoch
+   * distribution incentives by third party
+   */
+  is_perpetual: boolean;
+  owner: string;
+
+  /** distribute condition of a lock which meet one of these conditions */
+  distribute_to: QueryConditionSDKType;
+
+  /** can distribute multiple coins */
+  coins: CoinSDKType[];
+
+  /** distribution start time */
+  start_time: Date;
+
+  /** number of epochs distribution will be done */
+  num_epochs_paid_over: Long;
+}
 export interface MsgCreateGaugeResponse {}
+export interface MsgCreateGaugeResponseSDKType {}
 export interface MsgAddToGauge {
   owner: string;
   gaugeId: Long;
   rewards: Coin[];
 }
+export interface MsgAddToGaugeSDKType {
+  owner: string;
+  gauge_id: Long;
+  rewards: CoinSDKType[];
+}
 export interface MsgAddToGaugeResponse {}
+export interface MsgAddToGaugeResponseSDKType {}
 
 function createBaseMsgCreateGauge(): MsgCreateGauge {
   return {
@@ -151,6 +178,34 @@ export const MsgCreateGauge = {
     message.startTime = object.startTime ?? undefined;
     message.numEpochsPaidOver = object.numEpochsPaidOver !== undefined && object.numEpochsPaidOver !== null ? Long.fromValue(object.numEpochsPaidOver) : Long.UZERO;
     return message;
+  },
+
+  fromSDK(object: MsgCreateGaugeSDKType): MsgCreateGauge {
+    return {
+      isPerpetual: isSet(object.is_perpetual) ? object.is_perpetual : undefined,
+      owner: isSet(object.owner) ? object.owner : undefined,
+      distributeTo: isSet(object.distribute_to) ? QueryCondition.fromSDK(object.distribute_to) : undefined,
+      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDK(e)) : [],
+      startTime: isSet(object.start_time) ? Timestamp.fromSDK(object.start_time) : undefined,
+      numEpochsPaidOver: isSet(object.num_epochs_paid_over) ? object.num_epochs_paid_over : undefined
+    };
+  },
+
+  toSDK(message: MsgCreateGauge): MsgCreateGaugeSDKType {
+    const obj: any = {};
+    message.isPerpetual !== undefined && (obj.is_perpetual = message.isPerpetual);
+    message.owner !== undefined && (obj.owner = message.owner);
+    message.distributeTo !== undefined && (obj.distribute_to = message.distributeTo ? QueryCondition.toSDK(message.distributeTo) : undefined);
+
+    if (message.coins) {
+      obj.coins = message.coins.map(e => e ? Coin.toSDK(e) : undefined);
+    } else {
+      obj.coins = [];
+    }
+
+    message.startTime !== undefined && (obj.start_time = message.startTime ? Timestamp.toSDK(message.startTime) : undefined);
+    message.numEpochsPaidOver !== undefined && (obj.num_epochs_paid_over = message.numEpochsPaidOver);
+    return obj;
   }
 
 };
@@ -164,7 +219,7 @@ export const MsgCreateGaugeResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateGaugeResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateGaugeResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateGaugeResponse();
@@ -194,6 +249,15 @@ export const MsgCreateGaugeResponse = {
   fromPartial(_: DeepPartial<MsgCreateGaugeResponse>): MsgCreateGaugeResponse {
     const message = createBaseMsgCreateGaugeResponse();
     return message;
+  },
+
+  fromSDK(_: MsgCreateGaugeResponseSDKType): MsgCreateGaugeResponse {
+    return {};
+  },
+
+  toSDK(_: MsgCreateGaugeResponse): MsgCreateGaugeResponseSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -281,6 +345,28 @@ export const MsgAddToGauge = {
     message.gaugeId = object.gaugeId !== undefined && object.gaugeId !== null ? Long.fromValue(object.gaugeId) : Long.UZERO;
     message.rewards = object.rewards?.map(e => Coin.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: MsgAddToGaugeSDKType): MsgAddToGauge {
+    return {
+      owner: isSet(object.owner) ? object.owner : undefined,
+      gaugeId: isSet(object.gauge_id) ? object.gauge_id : undefined,
+      rewards: Array.isArray(object?.rewards) ? object.rewards.map((e: any) => Coin.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: MsgAddToGauge): MsgAddToGaugeSDKType {
+    const obj: any = {};
+    message.owner !== undefined && (obj.owner = message.owner);
+    message.gaugeId !== undefined && (obj.gauge_id = message.gaugeId);
+
+    if (message.rewards) {
+      obj.rewards = message.rewards.map(e => e ? Coin.toSDK(e) : undefined);
+    } else {
+      obj.rewards = [];
+    }
+
+    return obj;
   }
 
 };
@@ -294,7 +380,7 @@ export const MsgAddToGaugeResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgAddToGaugeResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgAddToGaugeResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgAddToGaugeResponse();
@@ -324,6 +410,15 @@ export const MsgAddToGaugeResponse = {
   fromPartial(_: DeepPartial<MsgAddToGaugeResponse>): MsgAddToGaugeResponse {
     const message = createBaseMsgAddToGaugeResponse();
     return message;
+  },
+
+  fromSDK(_: MsgAddToGaugeResponseSDKType): MsgAddToGaugeResponse {
+    return {};
+  },
+
+  toSDK(_: MsgAddToGaugeResponse): MsgAddToGaugeResponseSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };

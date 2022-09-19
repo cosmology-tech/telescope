@@ -1,4 +1,4 @@
-import { Account, Payment } from "./types";
+import { Account, AccountSDKType, Payment, PaymentSDKType } from "./types";
 import * as _m0 from "protobufjs/minimal";
 import { DeepPartial, Exact } from "@osmonauts/helpers";
 export const protobufPackage = "akash.escrow.v1beta1";
@@ -7,6 +7,12 @@ export const protobufPackage = "akash.escrow.v1beta1";
 export interface GenesisState {
   accounts: Account[];
   payments: Payment[];
+}
+
+/** GenesisState defines the basic genesis state used by escrow module */
+export interface GenesisStateSDKType {
+  accounts: AccountSDKType[];
+  payments: PaymentSDKType[];
 }
 
 function createBaseGenesisState(): GenesisState {
@@ -85,6 +91,31 @@ export const GenesisState = {
     message.accounts = object.accounts?.map(e => Account.fromPartial(e)) || [];
     message.payments = object.payments?.map(e => Payment.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: GenesisStateSDKType): GenesisState {
+    return {
+      accounts: Array.isArray(object?.accounts) ? object.accounts.map((e: any) => Account.fromSDK(e)) : [],
+      payments: Array.isArray(object?.payments) ? object.payments.map((e: any) => Payment.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: GenesisState): GenesisStateSDKType {
+    const obj: any = {};
+
+    if (message.accounts) {
+      obj.accounts = message.accounts.map(e => e ? Account.toSDK(e) : undefined);
+    } else {
+      obj.accounts = [];
+    }
+
+    if (message.payments) {
+      obj.payments = message.payments.map(e => e ? Payment.toSDK(e) : undefined);
+    } else {
+      obj.payments = [];
+    }
+
+    return obj;
   }
 
 };

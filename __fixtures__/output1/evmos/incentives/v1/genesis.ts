@@ -1,4 +1,4 @@
-import { Incentive, GasMeter } from "./incentives";
+import { Incentive, IncentiveSDKType, GasMeter, GasMeterSDKType } from "./incentives";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "@osmonauts/helpers";
 export const protobufPackage = "evmos.incentives.v1";
@@ -15,6 +15,18 @@ export interface GenesisState {
   gasMeters: GasMeter[];
 }
 
+/** GenesisState defines the module's genesis state. */
+export interface GenesisStateSDKType {
+  /** module parameters */
+  params: ParamsSDKType;
+
+  /** active incentives */
+  incentives: IncentiveSDKType[];
+
+  /** active Gasmeters */
+  gas_meters: GasMeterSDKType[];
+}
+
 /** Params defines the incentives module params */
 export interface Params {
   /** parameter to enable incentives */
@@ -28,6 +40,21 @@ export interface Params {
 
   /** scaling factor for capping rewards */
   rewardScaler: string;
+}
+
+/** Params defines the incentives module params */
+export interface ParamsSDKType {
+  /** parameter to enable incentives */
+  enable_incentives: boolean;
+
+  /** maximum percentage an incentive can allocate per denomination */
+  allocation_limit: string;
+
+  /** identifier for the epochs module hooks */
+  incentives_epoch_identifier: string;
+
+  /** scaling factor for capping rewards */
+  reward_scaler: string;
 }
 
 function createBaseGenesisState(): GenesisState {
@@ -118,6 +145,33 @@ export const GenesisState = {
     message.incentives = object.incentives?.map(e => Incentive.fromPartial(e)) || [];
     message.gasMeters = object.gasMeters?.map(e => GasMeter.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: GenesisStateSDKType): GenesisState {
+    return {
+      params: isSet(object.params) ? Params.fromSDK(object.params) : undefined,
+      incentives: Array.isArray(object?.incentives) ? object.incentives.map((e: any) => Incentive.fromSDK(e)) : [],
+      gasMeters: Array.isArray(object?.gas_meters) ? object.gas_meters.map((e: any) => GasMeter.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: GenesisState): GenesisStateSDKType {
+    const obj: any = {};
+    message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
+
+    if (message.incentives) {
+      obj.incentives = message.incentives.map(e => e ? Incentive.toSDK(e) : undefined);
+    } else {
+      obj.incentives = [];
+    }
+
+    if (message.gasMeters) {
+      obj.gas_meters = message.gasMeters.map(e => e ? GasMeter.toSDK(e) : undefined);
+    } else {
+      obj.gas_meters = [];
+    }
+
+    return obj;
   }
 
 };
@@ -211,6 +265,24 @@ export const Params = {
     message.incentivesEpochIdentifier = object.incentivesEpochIdentifier ?? "";
     message.rewardScaler = object.rewardScaler ?? "";
     return message;
+  },
+
+  fromSDK(object: ParamsSDKType): Params {
+    return {
+      enableIncentives: isSet(object.enable_incentives) ? object.enable_incentives : undefined,
+      allocationLimit: isSet(object.allocation_limit) ? object.allocation_limit : undefined,
+      incentivesEpochIdentifier: isSet(object.incentives_epoch_identifier) ? object.incentives_epoch_identifier : undefined,
+      rewardScaler: isSet(object.reward_scaler) ? object.reward_scaler : undefined
+    };
+  },
+
+  toSDK(message: Params): ParamsSDKType {
+    const obj: any = {};
+    message.enableIncentives !== undefined && (obj.enable_incentives = message.enableIncentives);
+    message.allocationLimit !== undefined && (obj.allocation_limit = message.allocationLimit);
+    message.incentivesEpochIdentifier !== undefined && (obj.incentives_epoch_identifier = message.incentivesEpochIdentifier);
+    message.rewardScaler !== undefined && (obj.reward_scaler = message.rewardScaler);
+    return obj;
   }
 
 };

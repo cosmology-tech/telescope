@@ -1,4 +1,4 @@
-import { TokenPair } from "./erc20";
+import { TokenPair, TokenPairSDKType } from "./erc20";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "@osmonauts/helpers";
 export const protobufPackage = "evmos.erc20.v1";
@@ -12,6 +12,15 @@ export interface GenesisState {
   tokenPairs: TokenPair[];
 }
 
+/** GenesisState defines the module's genesis state. */
+export interface GenesisStateSDKType {
+  /** module parameters */
+  params: ParamsSDKType;
+
+  /** registered token pairs */
+  token_pairs: TokenPairSDKType[];
+}
+
 /** Params defines the erc20 module params */
 export interface Params {
   /** parameter to enable the conversion of Cosmos coins <--> ERC20 tokens. */
@@ -23,6 +32,19 @@ export interface Params {
    * ModuleAddress Ethereum address.
    */
   enableEvmHook: boolean;
+}
+
+/** Params defines the erc20 module params */
+export interface ParamsSDKType {
+  /** parameter to enable the conversion of Cosmos coins <--> ERC20 tokens. */
+  enable_erc20: boolean;
+
+  /**
+   * parameter to enable the EVM hook that converts an ERC20 token to a Cosmos
+   * Coin by transferring the Tokens through a MsgEthereumTx to the
+   * ModuleAddress Ethereum address.
+   */
+  enable_evm_hook: boolean;
 }
 
 function createBaseGenesisState(): GenesisState {
@@ -96,6 +118,26 @@ export const GenesisState = {
     message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     message.tokenPairs = object.tokenPairs?.map(e => TokenPair.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: GenesisStateSDKType): GenesisState {
+    return {
+      params: isSet(object.params) ? Params.fromSDK(object.params) : undefined,
+      tokenPairs: Array.isArray(object?.token_pairs) ? object.token_pairs.map((e: any) => TokenPair.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: GenesisState): GenesisStateSDKType {
+    const obj: any = {};
+    message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
+
+    if (message.tokenPairs) {
+      obj.token_pairs = message.tokenPairs.map(e => e ? TokenPair.toSDK(e) : undefined);
+    } else {
+      obj.token_pairs = [];
+    }
+
+    return obj;
   }
 
 };
@@ -165,6 +207,20 @@ export const Params = {
     message.enableErc20 = object.enableErc20 ?? false;
     message.enableEvmHook = object.enableEvmHook ?? false;
     return message;
+  },
+
+  fromSDK(object: ParamsSDKType): Params {
+    return {
+      enableErc20: isSet(object.enable_erc20) ? object.enable_erc20 : undefined,
+      enableEvmHook: isSet(object.enable_evm_hook) ? object.enable_evm_hook : undefined
+    };
+  },
+
+  toSDK(message: Params): ParamsSDKType {
+    const obj: any = {};
+    message.enableErc20 !== undefined && (obj.enable_erc20 = message.enableErc20);
+    message.enableEvmHook !== undefined && (obj.enable_evm_hook = message.enableEvmHook);
+    return obj;
   }
 
 };

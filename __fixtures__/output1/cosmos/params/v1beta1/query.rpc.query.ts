@@ -1,15 +1,15 @@
-import { ParamChange } from "./params";
+import { ParamChange, ParamChangeSDKType } from "./params";
 import { Rpc } from "@osmonauts/helpers";
 import * as _m0 from "protobufjs/minimal";
-import { QueryParamsRequest, QueryParamsResponse, QuerySubspacesRequest, QuerySubspacesResponse } from "./query";
+import { QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType, QuerySubspacesRequest, QuerySubspacesRequestSDKType, QuerySubspacesResponse, QuerySubspacesResponseSDKType } from "./query";
 
 /** Query defines the RPC service */
 export interface Query {
-  params(request: QueryParamsRequest): Promise<QueryParamsResponse>;
+  params(request: QueryParamsRequest): Promise<QueryParamsResponseSDKType>;
   /*Params queries a specific parameter of a module, given its subspace and
   key.*/
 
-  subspaces(request: QuerySubspacesRequest): Promise<QuerySubspacesResponse>;
+  subspaces(request: QuerySubspacesRequest): Promise<QuerySubspacesResponseSDKType>;
   /*Subspaces queries for all registered subspaces and all keys for a subspace.*/
 
 }
@@ -22,13 +22,13 @@ export class QueryClientImpl implements Query {
     this.subspaces = this.subspaces.bind(this);
   }
 
-  params(request: QueryParamsRequest): Promise<QueryParamsResponse> {
+  params(request: QueryParamsRequest): Promise<QueryParamsResponseSDKType> {
     const data = QueryParamsRequest.encode(request).finish();
     const promise = this.rpc.request("cosmos.params.v1beta1.Query", "Params", data);
     return promise.then(data => QueryParamsResponse.decode(new _m0.Reader(data)));
   }
 
-  subspaces(request: QuerySubspacesRequest): Promise<QuerySubspacesResponse> {
+  subspaces(request: QuerySubspacesRequest): Promise<QuerySubspacesResponseSDKType> {
     const data = QuerySubspacesRequest.encode(request).finish();
     const promise = this.rpc.request("cosmos.params.v1beta1.Query", "Subspaces", data);
     return promise.then(data => QuerySubspacesResponse.decode(new _m0.Reader(data)));

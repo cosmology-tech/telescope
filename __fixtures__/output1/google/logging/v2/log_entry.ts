@@ -1,13 +1,17 @@
-import { MonitoredResource } from "../../api/monitored_resource";
-import { Any } from "../../protobuf/any";
-import { Struct } from "../../protobuf/struct";
-import { Timestamp } from "../../protobuf/timestamp";
-import { LogSeverity, logSeverityFromJSON, logSeverityToJSON } from "../type/log_severity";
-import { HttpRequest } from "../type/http_request";
+import { MonitoredResource, MonitoredResourceSDKType } from "../../api/monitored_resource";
+import { Any, AnySDKType } from "../../protobuf/any";
+import { Struct, StructSDKType } from "../../protobuf/struct";
+import { Timestamp, TimestampSDKType } from "../../protobuf/timestamp";
+import { LogSeverity, LogSeveritySDKType, logSeverityFromJSON, logSeverityToJSON } from "../type/log_severity";
+import { HttpRequest, HttpRequestSDKType } from "../type/http_request";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, toTimestamp, fromTimestamp, fromJsonTimestamp, isObject, Long } from "@osmonauts/helpers";
 export const protobufPackage = "google.logging.v2";
 export interface LogEntry_LabelsEntry {
+  key: string;
+  value: string;
+}
+export interface LogEntry_LabelsEntrySDKType {
   key: string;
   value: string;
 }
@@ -177,11 +181,201 @@ export interface LogEntry {
   split: LogSplit;
 }
 
+/** An individual entry in a log. */
+export interface LogEntrySDKType {
+  /**
+   * Required. The resource name of the log to which this log entry belongs:
+   * 
+   * "projects/[PROJECT_ID]/logs/[LOG_ID]"
+   * "organizations/[ORGANIZATION_ID]/logs/[LOG_ID]"
+   * "billingAccounts/[BILLING_ACCOUNT_ID]/logs/[LOG_ID]"
+   * "folders/[FOLDER_ID]/logs/[LOG_ID]"
+   * 
+   * A project number may be used in place of PROJECT_ID. The project number is
+   * translated to its corresponding PROJECT_ID internally and the `log_name`
+   * field will contain PROJECT_ID in queries and exports.
+   * 
+   * `[LOG_ID]` must be URL-encoded within `log_name`. Example:
+   * `"organizations/1234567890/logs/cloudresourcemanager.googleapis.com%2Factivity"`.
+   * 
+   * `[LOG_ID]` must be less than 512 characters long and can only include the
+   * following characters: upper and lower case alphanumeric characters,
+   * forward-slash, underscore, hyphen, and period.
+   * 
+   * For backward compatibility, if `log_name` begins with a forward-slash, such
+   * as `/projects/...`, then the log entry is ingested as usual, but the
+   * forward-slash is removed. Listing the log entry will not show the leading
+   * slash and filtering for a log name with a leading slash will never return
+   * any results.
+   */
+  log_name: string;
+
+  /**
+   * Required. The monitored resource that produced this log entry.
+   * 
+   * Example: a log entry that reports a database error would be associated with
+   * the monitored resource designating the particular database that reported
+   * the error.
+   */
+  resource: MonitoredResourceSDKType;
+
+  /**
+   * The log entry payload, represented as a protocol buffer. Some Google
+   * Cloud Platform services use this field for their log entry payloads.
+   * 
+   * The following protocol buffer types are supported; user-defined types
+   * are not supported:
+   * 
+   * "type.googleapis.com/google.cloud.audit.AuditLog"
+   * "type.googleapis.com/google.appengine.logging.v1.RequestLog"
+   */
+  proto_payload?: AnySDKType;
+
+  /** The log entry payload, represented as a Unicode string (UTF-8). */
+  text_payload?: string;
+
+  /**
+   * The log entry payload, represented as a structure that is
+   * expressed as a JSON object.
+   */
+  json_payload?: StructSDKType;
+
+  /**
+   * Optional. The time the event described by the log entry occurred. This time is used
+   * to compute the log entry's age and to enforce the logs retention period.
+   * If this field is omitted in a new log entry, then Logging assigns it the
+   * current time. Timestamps have nanosecond accuracy, but trailing zeros in
+   * the fractional seconds might be omitted when the timestamp is displayed.
+   * 
+   * Incoming log entries must have timestamps that don't exceed the
+   * [logs retention
+   * period](https://cloud.google.com/logging/quotas#logs_retention_periods) in
+   * the past, and that don't exceed 24 hours in the future. Log entries outside
+   * those time boundaries aren't ingested by Logging.
+   */
+  timestamp: Date;
+
+  /** Output only. The time the log entry was received by Logging. */
+  receive_timestamp: Date;
+
+  /** Optional. The severity of the log entry. The default value is `LogSeverity.DEFAULT`. */
+  severity: LogSeveritySDKType;
+
+  /**
+   * Optional. A unique identifier for the log entry. If you provide a value, then
+   * Logging considers other log entries in the same project, with the same
+   * `timestamp`, and with the same `insert_id` to be duplicates which are
+   * removed in a single query result. However, there are no guarantees of
+   * de-duplication in the export of logs.
+   * 
+   * If the `insert_id` is omitted when writing a log entry, the Logging API
+   * assigns its own unique identifier in this field.
+   * 
+   * In queries, the `insert_id` is also used to order log entries that have
+   * the same `log_name` and `timestamp` values.
+   */
+  insert_id: string;
+
+  /**
+   * Optional. Information about the HTTP request associated with this log entry, if
+   * applicable.
+   */
+  http_request: HttpRequestSDKType;
+
+  /**
+   * Optional. A map of key, value pairs that provides additional information about the
+   * log entry. The labels can be user-defined or system-defined.
+   * 
+   * User-defined labels are arbitrary key, value pairs that you can use to
+   * classify logs.
+   * 
+   * System-defined labels are defined by GCP services for platform logs.
+   * They have two components - a service namespace component and the
+   * attribute name. For example: `compute.googleapis.com/resource_name`.
+   * 
+   * Cloud Logging truncates label keys that exceed 512 B and label
+   * values that exceed 64 KB upon their associated log entry being
+   * written. The truncation is indicated by an ellipsis at the
+   * end of the character string.
+   */
+  labels: {
+    [key: string]: string;
+  };
+
+  /**
+   * Optional. Information about an operation associated with the log entry, if
+   * applicable.
+   */
+  operation: LogEntryOperationSDKType;
+
+  /**
+   * Optional. Resource name of the trace associated with the log entry, if any. If it
+   * contains a relative resource name, the name is assumed to be relative to
+   * `//tracing.googleapis.com`. Example:
+   * `projects/my-projectid/traces/06796866738c859f2f19b7cfb3214824`
+   */
+  trace: string;
+
+  /**
+   * Optional. The span ID within the trace associated with the log entry.
+   * 
+   * For Trace spans, this is the same format that the Trace API v2 uses: a
+   * 16-character hexadecimal encoding of an 8-byte array, such as
+   * `000000000000004a`.
+   */
+  span_id: string;
+
+  /**
+   * Optional. The sampling decision of the trace associated with the log entry.
+   * 
+   * True means that the trace resource name in the `trace` field was sampled
+   * for storage in a trace backend. False means that the trace was not sampled
+   * for storage when this log entry was written, or the sampling decision was
+   * unknown at the time. A non-sampled `trace` value is still useful as a
+   * request correlation identifier. The default is False.
+   */
+  trace_sampled: boolean;
+
+  /** Optional. Source code location information associated with the log entry, if any. */
+  source_location: LogEntrySourceLocationSDKType;
+
+  /**
+   * Optional. Information indicating this LogEntry is part of a sequence of multiple log
+   * entries split from a single LogEntry.
+   */
+  split: LogSplitSDKType;
+}
+
 /**
  * Additional information about a potentially long-running operation with which
  * a log entry is associated.
  */
 export interface LogEntryOperation {
+  /**
+   * Optional. An arbitrary operation identifier. Log entries with the same
+   * identifier are assumed to be part of the same operation.
+   */
+  id: string;
+
+  /**
+   * Optional. An arbitrary producer identifier. The combination of `id` and
+   * `producer` must be globally unique. Examples for `producer`:
+   * `"MyDivision.MyBigCompany.com"`, `"github.com/MyProject/MyApplication"`.
+   */
+  producer: string;
+
+  /** Optional. Set this to True if this is the first log entry in the operation. */
+  first: boolean;
+
+  /** Optional. Set this to True if this is the last log entry in the operation. */
+  last: boolean;
+}
+
+/**
+ * Additional information about a potentially long-running operation with which
+ * a log entry is associated.
+ */
+export interface LogEntryOperationSDKType {
   /**
    * Optional. An arbitrary operation identifier. Log entries with the same
    * identifier are assumed to be part of the same operation.
@@ -231,6 +425,34 @@ export interface LogEntrySourceLocation {
 }
 
 /**
+ * Additional information about the source code location that produced the log
+ * entry.
+ */
+export interface LogEntrySourceLocationSDKType {
+  /**
+   * Optional. Source file name. Depending on the runtime environment, this
+   * might be a simple name or a fully-qualified name.
+   */
+  file: string;
+
+  /**
+   * Optional. Line within the source file. 1-based; 0 indicates no line number
+   * available.
+   */
+  line: Long;
+
+  /**
+   * Optional. Human-readable name of the function or method being invoked, with
+   * optional context such as the class or package name. This information may be
+   * used in contexts such as the logs viewer, where a file and line number are
+   * less meaningful. The format can vary by language. For example:
+   * `qual.if.ied.Class.method` (Java), `dir/package.func` (Go), `function`
+   * (Python).
+   */
+  function: string;
+}
+
+/**
  * Additional information used to correlate multiple log entries. Used when a
  * single LogEntry would exceed the Google Cloud Logging size limit and is
  * split across multiple log entries.
@@ -252,6 +474,30 @@ export interface LogSplit {
 
   /** The total number of log entries that the original LogEntry was split into. */
   totalSplits: number;
+}
+
+/**
+ * Additional information used to correlate multiple log entries. Used when a
+ * single LogEntry would exceed the Google Cloud Logging size limit and is
+ * split across multiple log entries.
+ */
+export interface LogSplitSDKType {
+  /**
+   * A globally unique identifier for all log entries in a sequence of split log
+   * entries. All log entries with the same |LogSplit.uid| are assumed to be
+   * part of the same sequence of split log entries.
+   */
+  uid: string;
+
+  /**
+   * The index of this LogEntry in the sequence of split log entries. Log
+   * entries are given |index| values 0, 1, ..., n-1 for a sequence of n log
+   * entries.
+   */
+  index: number;
+
+  /** The total number of log entries that the original LogEntry was split into. */
+  total_splits: number;
 }
 
 function createBaseLogEntry_LabelsEntry(): LogEntry_LabelsEntry {
@@ -319,6 +565,20 @@ export const LogEntry_LabelsEntry = {
     message.key = object.key ?? "";
     message.value = object.value ?? "";
     return message;
+  },
+
+  fromSDK(object: LogEntry_LabelsEntrySDKType): LogEntry_LabelsEntry {
+    return {
+      key: isSet(object.key) ? object.key : undefined,
+      value: isSet(object.value) ? object.value : undefined
+    };
+  },
+
+  toSDK(message: LogEntry_LabelsEntry): LogEntry_LabelsEntrySDKType {
+    const obj: any = {};
+    message.key !== undefined && (obj.key = message.key);
+    message.value !== undefined && (obj.value = message.value);
+    return obj;
   }
 
 };
@@ -596,6 +856,62 @@ export const LogEntry = {
     message.sourceLocation = object.sourceLocation !== undefined && object.sourceLocation !== null ? LogEntrySourceLocation.fromPartial(object.sourceLocation) : undefined;
     message.split = object.split !== undefined && object.split !== null ? LogSplit.fromPartial(object.split) : undefined;
     return message;
+  },
+
+  fromSDK(object: LogEntrySDKType): LogEntry {
+    return {
+      logName: isSet(object.log_name) ? object.log_name : undefined,
+      resource: isSet(object.resource) ? MonitoredResource.fromSDK(object.resource) : undefined,
+      protoPayload: isSet(object.proto_payload) ? Any.fromSDK(object.proto_payload) : undefined,
+      textPayload: isSet(object.text_payload) ? object.text_payload : undefined,
+      jsonPayload: isSet(object.json_payload) ? Struct.fromSDK(object.json_payload) : undefined,
+      timestamp: isSet(object.timestamp) ? Timestamp.fromSDK(object.timestamp) : undefined,
+      receiveTimestamp: isSet(object.receive_timestamp) ? Timestamp.fromSDK(object.receive_timestamp) : undefined,
+      severity: isSet(object.severity) ? logSeverityFromJSON(object.severity) : 0,
+      insertId: isSet(object.insert_id) ? object.insert_id : undefined,
+      httpRequest: isSet(object.http_request) ? HttpRequest.fromSDK(object.http_request) : undefined,
+      labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
+        [key: string]: string;
+      }>((acc, [key, value]) => {
+        acc[key] = String(value);
+        return acc;
+      }, {}) : {},
+      operation: isSet(object.operation) ? LogEntryOperation.fromSDK(object.operation) : undefined,
+      trace: isSet(object.trace) ? object.trace : undefined,
+      spanId: isSet(object.span_id) ? object.span_id : undefined,
+      traceSampled: isSet(object.trace_sampled) ? object.trace_sampled : undefined,
+      sourceLocation: isSet(object.source_location) ? LogEntrySourceLocation.fromSDK(object.source_location) : undefined,
+      split: isSet(object.split) ? LogSplit.fromSDK(object.split) : undefined
+    };
+  },
+
+  toSDK(message: LogEntry): LogEntrySDKType {
+    const obj: any = {};
+    message.logName !== undefined && (obj.log_name = message.logName);
+    message.resource !== undefined && (obj.resource = message.resource ? MonitoredResource.toSDK(message.resource) : undefined);
+    message.protoPayload !== undefined && (obj.proto_payload = message.protoPayload ? Any.toSDK(message.protoPayload) : undefined);
+    message.textPayload !== undefined && (obj.text_payload = message.textPayload);
+    message.jsonPayload !== undefined && (obj.json_payload = message.jsonPayload ? Struct.toSDK(message.jsonPayload) : undefined);
+    message.timestamp !== undefined && (obj.timestamp = message.timestamp ? Timestamp.toSDK(message.timestamp) : undefined);
+    message.receiveTimestamp !== undefined && (obj.receive_timestamp = message.receiveTimestamp ? Timestamp.toSDK(message.receiveTimestamp) : undefined);
+    message.severity !== undefined && (obj.severity = logSeverityToJSON(message.severity));
+    message.insertId !== undefined && (obj.insert_id = message.insertId);
+    message.httpRequest !== undefined && (obj.http_request = message.httpRequest ? HttpRequest.toSDK(message.httpRequest) : undefined);
+    obj.labels = {};
+
+    if (message.labels) {
+      Object.entries(message.labels).forEach(([k, v]) => {
+        obj.labels[k] = v;
+      });
+    }
+
+    message.operation !== undefined && (obj.operation = message.operation ? LogEntryOperation.toSDK(message.operation) : undefined);
+    message.trace !== undefined && (obj.trace = message.trace);
+    message.spanId !== undefined && (obj.span_id = message.spanId);
+    message.traceSampled !== undefined && (obj.trace_sampled = message.traceSampled);
+    message.sourceLocation !== undefined && (obj.source_location = message.sourceLocation ? LogEntrySourceLocation.toSDK(message.sourceLocation) : undefined);
+    message.split !== undefined && (obj.split = message.split ? LogSplit.toSDK(message.split) : undefined);
+    return obj;
   }
 
 };
@@ -689,6 +1005,24 @@ export const LogEntryOperation = {
     message.first = object.first ?? false;
     message.last = object.last ?? false;
     return message;
+  },
+
+  fromSDK(object: LogEntryOperationSDKType): LogEntryOperation {
+    return {
+      id: isSet(object.id) ? object.id : undefined,
+      producer: isSet(object.producer) ? object.producer : undefined,
+      first: isSet(object.first) ? object.first : undefined,
+      last: isSet(object.last) ? object.last : undefined
+    };
+  },
+
+  toSDK(message: LogEntryOperation): LogEntryOperationSDKType {
+    const obj: any = {};
+    message.id !== undefined && (obj.id = message.id);
+    message.producer !== undefined && (obj.producer = message.producer);
+    message.first !== undefined && (obj.first = message.first);
+    message.last !== undefined && (obj.last = message.last);
+    return obj;
   }
 
 };
@@ -770,6 +1104,22 @@ export const LogEntrySourceLocation = {
     message.line = object.line !== undefined && object.line !== null ? Long.fromValue(object.line) : Long.ZERO;
     message.function = object.function ?? "";
     return message;
+  },
+
+  fromSDK(object: LogEntrySourceLocationSDKType): LogEntrySourceLocation {
+    return {
+      file: isSet(object.file) ? object.file : undefined,
+      line: isSet(object.line) ? object.line : undefined,
+      function: isSet(object.function) ? object.function : undefined
+    };
+  },
+
+  toSDK(message: LogEntrySourceLocation): LogEntrySourceLocationSDKType {
+    const obj: any = {};
+    message.file !== undefined && (obj.file = message.file);
+    message.line !== undefined && (obj.line = message.line);
+    message.function !== undefined && (obj.function = message.function);
+    return obj;
   }
 
 };
@@ -851,6 +1201,22 @@ export const LogSplit = {
     message.index = object.index ?? 0;
     message.totalSplits = object.totalSplits ?? 0;
     return message;
+  },
+
+  fromSDK(object: LogSplitSDKType): LogSplit {
+    return {
+      uid: isSet(object.uid) ? object.uid : undefined,
+      index: isSet(object.index) ? object.index : undefined,
+      totalSplits: isSet(object.total_splits) ? object.total_splits : undefined
+    };
+  },
+
+  toSDK(message: LogSplit): LogSplitSDKType {
+    const obj: any = {};
+    message.uid !== undefined && (obj.uid = message.uid);
+    message.index !== undefined && (obj.index = message.index);
+    message.totalSplits !== undefined && (obj.total_splits = message.totalSplits);
+    return obj;
   }
 
 };

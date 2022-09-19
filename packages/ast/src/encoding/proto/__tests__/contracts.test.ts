@@ -1,6 +1,5 @@
 import { getNestedProto } from '@osmonauts/proto-parser';
-import { defaultTelescopeOptions } from '@osmonauts/types';
-import { expectCode, getTestProtoStore } from '../../../../test-utils/'
+import { defaultTelescopeOptions, expectCode, getTestProtoStore } from '../../../../test-utils/'
 import { ProtoParseContext } from '../../context';
 import { createProtoType } from '..';
 import { createObjectWithMethods } from '../../object';

@@ -14,6 +14,19 @@ export enum Certificate_State {
   revoked = 2,
   UNRECOGNIZED = -1,
 }
+
+/** State is an enum which refers to state of deployment */
+export enum Certificate_StateSDKType {
+  /** invalid - Prefix should start with 0 in enum. So declaring dummy state */
+  invalid = 0,
+
+  /** valid - CertificateValid denotes state for deployment active */
+  valid = 1,
+
+  /** revoked - CertificateRevoked denotes state for deployment closed */
+  revoked = 2,
+  UNRECOGNIZED = -1,
+}
 export function certificate_StateFromJSON(object: any): Certificate_State {
   switch (object) {
     case 0:
@@ -56,6 +69,12 @@ export interface CertificateID {
   serial: string;
 }
 
+/** CertificateID stores owner and sequence number */
+export interface CertificateIDSDKType {
+  owner: string;
+  serial: string;
+}
+
 /** Certificate stores state, certificate and it's public key */
 export interface Certificate {
   state: Certificate_State;
@@ -63,8 +82,22 @@ export interface Certificate {
   pubkey: Uint8Array;
 }
 
+/** Certificate stores state, certificate and it's public key */
+export interface CertificateSDKType {
+  state: Certificate_StateSDKType;
+  cert: Uint8Array;
+  pubkey: Uint8Array;
+}
+
 /** CertificateFilter defines filters used to filter certificates */
 export interface CertificateFilter {
+  owner: string;
+  serial: string;
+  state: string;
+}
+
+/** CertificateFilter defines filters used to filter certificates */
+export interface CertificateFilterSDKType {
   owner: string;
   serial: string;
   state: string;
@@ -77,16 +110,34 @@ export interface MsgCreateCertificate {
   pubkey: Uint8Array;
 }
 
+/** MsgCreateCertificate defines an SDK message for creating certificate */
+export interface MsgCreateCertificateSDKType {
+  owner: string;
+  cert: Uint8Array;
+  pubkey: Uint8Array;
+}
+
 /** MsgCreateCertificateResponse defines the Msg/CreateCertificate response type. */
 export interface MsgCreateCertificateResponse {}
+
+/** MsgCreateCertificateResponse defines the Msg/CreateCertificate response type. */
+export interface MsgCreateCertificateResponseSDKType {}
 
 /** MsgRevokeCertificate defines an SDK message for revoking certificate */
 export interface MsgRevokeCertificate {
   id: CertificateID;
 }
 
+/** MsgRevokeCertificate defines an SDK message for revoking certificate */
+export interface MsgRevokeCertificateSDKType {
+  id: CertificateIDSDKType;
+}
+
 /** MsgRevokeCertificateResponse defines the Msg/RevokeCertificate response type. */
 export interface MsgRevokeCertificateResponse {}
+
+/** MsgRevokeCertificateResponse defines the Msg/RevokeCertificate response type. */
+export interface MsgRevokeCertificateResponseSDKType {}
 
 function createBaseCertificateID(): CertificateID {
   return {
@@ -153,6 +204,20 @@ export const CertificateID = {
     message.owner = object.owner ?? "";
     message.serial = object.serial ?? "";
     return message;
+  },
+
+  fromSDK(object: CertificateIDSDKType): CertificateID {
+    return {
+      owner: isSet(object.owner) ? object.owner : undefined,
+      serial: isSet(object.serial) ? object.serial : undefined
+    };
+  },
+
+  toSDK(message: CertificateID): CertificateIDSDKType {
+    const obj: any = {};
+    message.owner !== undefined && (obj.owner = message.owner);
+    message.serial !== undefined && (obj.serial = message.serial);
+    return obj;
   }
 
 };
@@ -234,6 +299,22 @@ export const Certificate = {
     message.cert = object.cert ?? new Uint8Array();
     message.pubkey = object.pubkey ?? new Uint8Array();
     return message;
+  },
+
+  fromSDK(object: CertificateSDKType): Certificate {
+    return {
+      state: isSet(object.state) ? certificate_StateFromJSON(object.state) : 0,
+      cert: isSet(object.cert) ? object.cert : undefined,
+      pubkey: isSet(object.pubkey) ? object.pubkey : undefined
+    };
+  },
+
+  toSDK(message: Certificate): CertificateSDKType {
+    const obj: any = {};
+    message.state !== undefined && (obj.state = certificate_StateToJSON(message.state));
+    message.cert !== undefined && (obj.cert = message.cert);
+    message.pubkey !== undefined && (obj.pubkey = message.pubkey);
+    return obj;
   }
 
 };
@@ -315,6 +396,22 @@ export const CertificateFilter = {
     message.serial = object.serial ?? "";
     message.state = object.state ?? "";
     return message;
+  },
+
+  fromSDK(object: CertificateFilterSDKType): CertificateFilter {
+    return {
+      owner: isSet(object.owner) ? object.owner : undefined,
+      serial: isSet(object.serial) ? object.serial : undefined,
+      state: isSet(object.state) ? object.state : undefined
+    };
+  },
+
+  toSDK(message: CertificateFilter): CertificateFilterSDKType {
+    const obj: any = {};
+    message.owner !== undefined && (obj.owner = message.owner);
+    message.serial !== undefined && (obj.serial = message.serial);
+    message.state !== undefined && (obj.state = message.state);
+    return obj;
   }
 
 };
@@ -396,6 +493,22 @@ export const MsgCreateCertificate = {
     message.cert = object.cert ?? new Uint8Array();
     message.pubkey = object.pubkey ?? new Uint8Array();
     return message;
+  },
+
+  fromSDK(object: MsgCreateCertificateSDKType): MsgCreateCertificate {
+    return {
+      owner: isSet(object.owner) ? object.owner : undefined,
+      cert: isSet(object.cert) ? object.cert : undefined,
+      pubkey: isSet(object.pubkey) ? object.pubkey : undefined
+    };
+  },
+
+  toSDK(message: MsgCreateCertificate): MsgCreateCertificateSDKType {
+    const obj: any = {};
+    message.owner !== undefined && (obj.owner = message.owner);
+    message.cert !== undefined && (obj.cert = message.cert);
+    message.pubkey !== undefined && (obj.pubkey = message.pubkey);
+    return obj;
   }
 
 };
@@ -409,7 +522,7 @@ export const MsgCreateCertificateResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateCertificateResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateCertificateResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateCertificateResponse();
@@ -439,6 +552,15 @@ export const MsgCreateCertificateResponse = {
   fromPartial<I extends Exact<DeepPartial<MsgCreateCertificateResponse>, I>>(_: I): MsgCreateCertificateResponse {
     const message = createBaseMsgCreateCertificateResponse();
     return message;
+  },
+
+  fromSDK(_: MsgCreateCertificateResponseSDKType): MsgCreateCertificateResponse {
+    return {};
+  },
+
+  toSDK(_: MsgCreateCertificateResponse): MsgCreateCertificateResponseSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -496,6 +618,18 @@ export const MsgRevokeCertificate = {
     const message = createBaseMsgRevokeCertificate();
     message.id = object.id !== undefined && object.id !== null ? CertificateID.fromPartial(object.id) : undefined;
     return message;
+  },
+
+  fromSDK(object: MsgRevokeCertificateSDKType): MsgRevokeCertificate {
+    return {
+      id: isSet(object.id) ? CertificateID.fromSDK(object.id) : undefined
+    };
+  },
+
+  toSDK(message: MsgRevokeCertificate): MsgRevokeCertificateSDKType {
+    const obj: any = {};
+    message.id !== undefined && (obj.id = message.id ? CertificateID.toSDK(message.id) : undefined);
+    return obj;
   }
 
 };
@@ -509,7 +643,7 @@ export const MsgRevokeCertificateResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgRevokeCertificateResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgRevokeCertificateResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgRevokeCertificateResponse();
@@ -539,6 +673,15 @@ export const MsgRevokeCertificateResponse = {
   fromPartial<I extends Exact<DeepPartial<MsgRevokeCertificateResponse>, I>>(_: I): MsgRevokeCertificateResponse {
     const message = createBaseMsgRevokeCertificateResponse();
     return message;
+  },
+
+  fromSDK(_: MsgRevokeCertificateResponseSDKType): MsgRevokeCertificateResponse {
+    return {};
+  },
+
+  toSDK(_: MsgRevokeCertificateResponse): MsgRevokeCertificateResponseSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };

@@ -1,17 +1,37 @@
-import { Api } from "../../../protobuf/api";
-import { Documentation } from "../../documentation";
-import { Quota } from "../../quota";
-import { Authentication } from "../../auth";
-import { Usage } from "../../usage";
-import { Endpoint } from "../../endpoint";
-import { MonitoredResourceDescriptor } from "../../monitored_resource";
-import { Monitoring } from "../../monitoring";
+import { Api, ApiSDKType } from "../../../protobuf/api";
+import { Documentation, DocumentationSDKType } from "../../documentation";
+import { Quota, QuotaSDKType } from "../../quota";
+import { Authentication, AuthenticationSDKType } from "../../auth";
+import { Usage, UsageSDKType } from "../../usage";
+import { Endpoint, EndpointSDKType } from "../../endpoint";
+import { MonitoredResourceDescriptor, MonitoredResourceDescriptorSDKType } from "../../monitored_resource";
+import { Monitoring, MonitoringSDKType } from "../../monitoring";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, Long, isObject } from "@osmonauts/helpers";
 export const protobufPackage = "google.api.serviceusage.v1beta1";
 
 /** Whether or not a service has been enabled for use by a consumer. */
 export enum State {
+  /**
+   * STATE_UNSPECIFIED - The default value, which indicates that the enabled state of the service
+   * is unspecified or not meaningful. Currently, all consumers other than
+   * projects (such as folders and organizations) are always in this state.
+   */
+  STATE_UNSPECIFIED = 0,
+
+  /**
+   * DISABLED - The service cannot be used by this consumer. It has either been explicitly
+   * disabled, or has never been enabled.
+   */
+  DISABLED = 1,
+
+  /** ENABLED - The service has been explicitly enabled for use by this consumer. */
+  ENABLED = 2,
+  UNRECOGNIZED = -1,
+}
+
+/** Whether or not a service has been enabled for use by a consumer. */
+export enum StateSDKType {
   /**
    * STATE_UNSPECIFIED - The default value, which indicates that the enabled state of the service
    * is unspecified or not meaningful. Currently, all consumers other than
@@ -90,6 +110,32 @@ export enum QuotaView {
   FULL = 2,
   UNRECOGNIZED = -1,
 }
+
+/**
+ * Selected view of quota. Can be used to request more detailed quota
+ * information when retrieving quota metrics and limits.
+ */
+export enum QuotaViewSDKType {
+  /**
+   * QUOTA_VIEW_UNSPECIFIED - No quota view specified. Requests that do not specify a quota view will
+   * typically default to the BASIC view.
+   */
+  QUOTA_VIEW_UNSPECIFIED = 0,
+
+  /** BASIC - Only buckets with overrides are shown in the response. */
+  BASIC = 1,
+
+  /**
+   * FULL - Include per-location buckets even if they do not have overrides.
+   * When the view is FULL, and a limit has regional or zonal quota, the limit
+   * will include buckets for all regions or zones that could support
+   * overrides, even if none are currently present. In some cases this will
+   * cause the response to become very large; callers that do not need this
+   * extra information should use the BASIC view instead.
+   */
+  FULL = 2,
+  UNRECOGNIZED = -1,
+}
 export function quotaViewFromJSON(object: any): QuotaView {
   switch (object) {
     case 0:
@@ -128,6 +174,25 @@ export function quotaViewToJSON(object: QuotaView): string {
 
 /** Enumerations of quota safety checks. */
 export enum QuotaSafetyCheck {
+  /** QUOTA_SAFETY_CHECK_UNSPECIFIED - Unspecified quota safety check. */
+  QUOTA_SAFETY_CHECK_UNSPECIFIED = 0,
+
+  /**
+   * LIMIT_DECREASE_BELOW_USAGE - Validates that a quota mutation would not cause the consumer's effective
+   * limit to be lower than the consumer's quota usage.
+   */
+  LIMIT_DECREASE_BELOW_USAGE = 1,
+
+  /**
+   * LIMIT_DECREASE_PERCENTAGE_TOO_HIGH - Validates that a quota mutation would not cause the consumer's effective
+   * limit to decrease by more than 10 percent.
+   */
+  LIMIT_DECREASE_PERCENTAGE_TOO_HIGH = 2,
+  UNRECOGNIZED = -1,
+}
+
+/** Enumerations of quota safety checks. */
+export enum QuotaSafetyCheckSDKType {
   /** QUOTA_SAFETY_CHECK_UNSPECIFIED - Unspecified quota safety check. */
   QUOTA_SAFETY_CHECK_UNSPECIFIED = 0,
 
@@ -210,6 +275,36 @@ export interface Service {
   state: State;
 }
 
+/** A service that is available for use by the consumer. */
+export interface ServiceSDKType {
+  /**
+   * The resource name of the consumer and service.
+   * 
+   * A valid name would be:
+   * - `projects/123/services/serviceusage.googleapis.com`
+   */
+  name: string;
+
+  /**
+   * The resource name of the consumer.
+   * 
+   * A valid name would be:
+   * - `projects/123`
+   */
+  parent: string;
+
+  /**
+   * The service configuration of the available service.
+   * Some fields may be filtered out of the configuration in responses to
+   * the `ListServices` method. These fields are present only in responses to
+   * the `GetService` method.
+   */
+  config: ServiceConfigSDKType;
+
+  /** Whether or not the service has been enabled for use by the consumer. */
+  state: StateSDKType;
+}
+
 /** The configuration of the service. */
 export interface ServiceConfig {
   /**
@@ -263,6 +358,59 @@ export interface ServiceConfig {
   monitoring: Monitoring;
 }
 
+/** The configuration of the service. */
+export interface ServiceConfigSDKType {
+  /**
+   * The DNS address at which this service is available.
+   * 
+   * An example DNS address would be:
+   * `calendar.googleapis.com`.
+   */
+  name: string;
+
+  /** The product title for this service. */
+  title: string;
+
+  /**
+   * A list of API interfaces exported by this service. Contains only the names,
+   * versions, and method names of the interfaces.
+   */
+  apis: ApiSDKType[];
+
+  /**
+   * Additional API documentation. Contains only the summary and the
+   * documentation URL.
+   */
+  documentation: DocumentationSDKType;
+
+  /** Quota configuration. */
+  quota: QuotaSDKType;
+
+  /** Auth configuration. Contains only the OAuth rules. */
+  authentication: AuthenticationSDKType;
+
+  /** Configuration controlling usage of this service. */
+  usage: UsageSDKType;
+
+  /**
+   * Configuration for network endpoints. Contains only the names and aliases
+   * of the endpoints.
+   */
+  endpoints: EndpointSDKType[];
+
+  /**
+   * Defines the monitored resources used by this service. This is required
+   * by the [Service.monitoring][google.api.Service.monitoring] and [Service.logging][google.api.Service.logging] configurations.
+   */
+  monitored_resources: MonitoredResourceDescriptorSDKType[];
+
+  /**
+   * Monitoring configuration.
+   * This should not include the 'producer_destinations' field.
+   */
+  monitoring: MonitoringSDKType;
+}
+
 /** The operation metadata returned for the batchend services operation. */
 export interface OperationMetadata {
   /**
@@ -270,6 +418,15 @@ export interface OperationMetadata {
    * associated with.
    */
   resourceNames: string[];
+}
+
+/** The operation metadata returned for the batchend services operation. */
+export interface OperationMetadataSDKType {
+  /**
+   * The full name of the resources that this operation is directly
+   * associated with.
+   */
+  resource_names: string[];
 }
 
 /** Consumer quota settings for a quota metric. */
@@ -321,6 +478,55 @@ export interface ConsumerQuotaMetric {
   unit: string;
 }
 
+/** Consumer quota settings for a quota metric. */
+export interface ConsumerQuotaMetricSDKType {
+  /**
+   * The resource name of the quota settings on this metric for this consumer.
+   * 
+   * An example name would be:
+   * `projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus`
+   * 
+   * The resource name is intended to be opaque and should not be parsed for
+   * its component strings, since its representation could change in the future.
+   */
+  name: string;
+
+  /**
+   * The name of the metric.
+   * 
+   * An example name would be:
+   * `compute.googleapis.com/cpus`
+   */
+  metric: string;
+
+  /**
+   * The display name of the metric.
+   * 
+   * An example name would be:
+   * `CPUs`
+   */
+  display_name: string;
+
+  /** The consumer quota for each quota limit defined on the metric. */
+  consumer_quota_limits: ConsumerQuotaLimitSDKType[];
+
+  /**
+   * The quota limits targeting the descendant containers of the
+   * consumer in request.
+   * 
+   * If the consumer in request is of type `organizations`
+   * or `folders`, the field will list per-project limits in the metric; if the
+   * consumer in request is of type `project`, the field will be empty.
+   * 
+   * The `quota_buckets` field of each descendant consumer quota limit will not
+   * be populated.
+   */
+  descendant_consumer_quota_limits: ConsumerQuotaLimitSDKType[];
+
+  /** The units in which the metric value is reported. */
+  unit: string;
+}
+
 /** Consumer quota settings for a quota limit. */
 export interface ConsumerQuotaLimit {
   /**
@@ -365,7 +571,56 @@ export interface ConsumerQuotaLimit {
    */
   quotaBuckets: QuotaBucket[];
 }
+
+/** Consumer quota settings for a quota limit. */
+export interface ConsumerQuotaLimitSDKType {
+  /**
+   * The resource name of the quota limit.
+   * 
+   * An example name would be:
+   * `projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion`
+   * 
+   * The resource name is intended to be opaque and should not be parsed for
+   * its component strings, since its representation could change in the future.
+   */
+  name: string;
+
+  /**
+   * The name of the parent metric of this limit.
+   * 
+   * An example name would be:
+   * `compute.googleapis.com/cpus`
+   */
+  metric: string;
+
+  /**
+   * The limit unit.
+   * 
+   * An example unit would be
+   * `1/{project}/{region}`
+   * Note that `{project}` and `{region}` are not placeholders in this example;
+   * the literal characters `{` and `}` occur in the string.
+   */
+  unit: string;
+
+  /** Whether this limit is precise or imprecise. */
+  is_precise: boolean;
+
+  /** Whether admin overrides are allowed on this limit */
+  allows_admin_overrides: boolean;
+
+  /**
+   * Summary of the enforced quota buckets, organized by quota dimension,
+   * ordered from least specific to most specific (for example, the global
+   * default bucket, with no quota dimensions, will always appear first).
+   */
+  quota_buckets: QuotaBucketSDKType[];
+}
 export interface QuotaBucket_DimensionsEntry {
+  key: string;
+  value: string;
+}
+export interface QuotaBucket_DimensionsEntrySDKType {
   key: string;
   value: string;
 }
@@ -410,7 +665,52 @@ export interface QuotaBucket {
     [key: string]: string;
   };
 }
+
+/** A quota bucket is a quota provisioning unit for a specific set of dimensions. */
+export interface QuotaBucketSDKType {
+  /**
+   * The effective limit of this quota bucket. Equal to default_limit if there
+   * are no overrides.
+   */
+  effective_limit: Long;
+
+  /**
+   * The default limit of this quota bucket, as specified by the service
+   * configuration.
+   */
+  default_limit: Long;
+
+  /** Producer override on this quota bucket. */
+  producer_override: QuotaOverrideSDKType;
+
+  /** Consumer override on this quota bucket. */
+  consumer_override: QuotaOverrideSDKType;
+
+  /** Admin override on this quota bucket. */
+  admin_override: QuotaOverrideSDKType;
+
+  /**
+   * The dimensions of this quota bucket.
+   * 
+   * If this map is empty, this is the global bucket, which is the default quota
+   * value applied to all requests that do not have a more specific override.
+   * 
+   * If this map is nonempty, the default limit, effective limit, and quota
+   * overrides apply only to requests that have the dimensions given in the map.
+   * 
+   * For example, if the map has key `region` and value `us-east-1`, then the
+   * specified effective limit is only effective in that region, and the
+   * specified overrides apply only in that region.
+   */
+  dimensions: {
+    [key: string]: string;
+  };
+}
 export interface QuotaOverride_DimensionsEntry {
+  key: string;
+  value: string;
+}
+export interface QuotaOverride_DimensionsEntrySDKType {
   key: string;
   value: string;
 }
@@ -490,6 +790,81 @@ export interface QuotaOverride {
   adminOverrideAncestor: string;
 }
 
+/** A quota override */
+export interface QuotaOverrideSDKType {
+  /**
+   * The resource name of the override.
+   * This name is generated by the server when the override is created.
+   * 
+   * Example names would be:
+   * `projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion/adminOverrides/4a3f2c1d`
+   * `projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion/consumerOverrides/4a3f2c1d`
+   * 
+   * The resource name is intended to be opaque and should not be parsed for
+   * its component strings, since its representation could change in the future.
+   */
+  name: string;
+
+  /**
+   * The overriding quota limit value.
+   * Can be any nonnegative integer, or -1 (unlimited quota).
+   */
+  override_value: Long;
+
+  /**
+   * If this map is nonempty, then this override applies only to specific values
+   * for dimensions defined in the limit unit.
+   * 
+   * For example, an override on a limit with the unit `1/{project}/{region}`
+   * could contain an entry with the key `region` and the value `us-east-1`;
+   * the override is only applied to quota consumed in that region.
+   * 
+   * This map has the following restrictions:
+   * 
+   * *   Keys that are not defined in the limit's unit are not valid keys.
+   * Any string appearing in `{brackets}` in the unit (besides `{project}`
+   * or
+   * `{user}`) is a defined key.
+   * *   `project` is not a valid key; the project is already specified in
+   * the parent resource name.
+   * *   `user` is not a valid key; the API does not support quota overrides
+   * that apply only to a specific user.
+   * *   If `region` appears as a key, its value must be a valid Cloud region.
+   * *   If `zone` appears as a key, its value must be a valid Cloud zone.
+   * *   If any valid key other than `region` or `zone` appears in the map, then
+   * all valid keys other than `region` or `zone` must also appear in the
+   * map.
+   */
+  dimensions: {
+    [key: string]: string;
+  };
+
+  /**
+   * The name of the metric to which this override applies.
+   * 
+   * An example name would be:
+   * `compute.googleapis.com/cpus`
+   */
+  metric: string;
+
+  /**
+   * The limit unit of the limit to which this override applies.
+   * 
+   * An example unit would be:
+   * `1/{project}/{region}`
+   * Note that `{project}` and `{region}` are not placeholders in this example;
+   * the literal characters `{` and `}` occur in the string.
+   */
+  unit: string;
+
+  /**
+   * The resource name of the ancestor that requested the override. For example:
+   * `organizations/12345` or `folders/67890`.
+   * Used by admin overrides only.
+   */
+  admin_override_ancestor: string;
+}
+
 /** Import data embedded in the request message */
 export interface OverrideInlineSource {
   /**
@@ -500,7 +875,22 @@ export interface OverrideInlineSource {
    */
   overrides: QuotaOverride[];
 }
+
+/** Import data embedded in the request message */
+export interface OverrideInlineSourceSDKType {
+  /**
+   * The overrides to create.
+   * Each override must have a value for 'metric' and 'unit', to specify
+   * which metric and which limit the override should be applied to.
+   * The 'name' field of the override does not need to be set; it is ignored.
+   */
+  overrides: QuotaOverrideSDKType[];
+}
 export interface AdminQuotaPolicy_DimensionsEntry {
+  key: string;
+  value: string;
+}
+export interface AdminQuotaPolicy_DimensionsEntrySDKType {
   key: string;
   value: string;
 }
@@ -565,6 +955,66 @@ export interface AdminQuotaPolicy {
   container: string;
 }
 
+/** Quota policy created by quota administrator. */
+export interface AdminQuotaPolicySDKType {
+  /**
+   * The resource name of the policy.
+   * This name is generated by the server when the policy is created.
+   * 
+   * Example names would be:
+   * `organizations/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion/adminQuotaPolicies/4a3f2c1d`
+   */
+  name: string;
+
+  /**
+   * The quota policy value.
+   * Can be any nonnegative integer, or -1 (unlimited quota).
+   */
+  policy_value: Long;
+
+  /**
+   * If this map is nonempty, then this policy applies only to specific values
+   * for dimensions defined in the limit unit.
+   * 
+   * For example, an policy on a limit with the unit `1/{project}/{region}`
+   * could contain an entry with the key `region` and the value `us-east-1`;
+   * the policy is only applied to quota consumed in that region.
+   * 
+   * This map has the following restrictions:
+   * 
+   * *   If `region` appears as a key, its value must be a valid Cloud region.
+   * *   If `zone` appears as a key, its value must be a valid Cloud zone.
+   * *   Keys other than `region` or `zone` are not valid.
+   */
+  dimensions: {
+    [key: string]: string;
+  };
+
+  /**
+   * The name of the metric to which this policy applies.
+   * 
+   * An example name would be:
+   * `compute.googleapis.com/cpus`
+   */
+  metric: string;
+
+  /**
+   * The limit unit of the limit to which this policy applies.
+   * 
+   * An example unit would be:
+   * `1/{project}/{region}`
+   * Note that `{project}` and `{region}` are not placeholders in this example;
+   * the literal characters `{` and `}` occur in the string.
+   */
+  unit: string;
+
+  /**
+   * The cloud resource container at which the quota policy is created. The
+   * format is `{container_type}/{container_number}`
+   */
+  container: string;
+}
+
 /**
  * Service identity for a service. This is the identity that service producer
  * should use to access consumer resources.
@@ -581,6 +1031,24 @@ export interface ServiceIdentity {
    * https://cloud.google.com/iam/reference/rest/v1/projects.serviceAccounts#ServiceAccount
    */
   uniqueId: string;
+}
+
+/**
+ * Service identity for a service. This is the identity that service producer
+ * should use to access consumer resources.
+ */
+export interface ServiceIdentitySDKType {
+  /**
+   * The email address of the service account that a service producer would use
+   * to access consumer resources.
+   */
+  email: string;
+
+  /**
+   * The unique and stable id of the service account.
+   * https://cloud.google.com/iam/reference/rest/v1/projects.serviceAccounts#ServiceAccount
+   */
+  unique_id: string;
 }
 
 function createBaseService(): Service {
@@ -613,7 +1081,7 @@ export const Service = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): Service {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ServiceSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseService();
@@ -672,6 +1140,24 @@ export const Service = {
     message.config = object.config !== undefined && object.config !== null ? ServiceConfig.fromPartial(object.config) : undefined;
     message.state = object.state ?? 0;
     return message;
+  },
+
+  fromSDK(object: ServiceSDKType): Service {
+    return {
+      name: isSet(object.name) ? object.name : undefined,
+      parent: isSet(object.parent) ? object.parent : undefined,
+      config: isSet(object.config) ? ServiceConfig.fromSDK(object.config) : undefined,
+      state: isSet(object.state) ? stateFromJSON(object.state) : 0
+    };
+  },
+
+  toSDK(message: Service): ServiceSDKType {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    message.parent !== undefined && (obj.parent = message.parent);
+    message.config !== undefined && (obj.config = message.config ? ServiceConfig.toSDK(message.config) : undefined);
+    message.state !== undefined && (obj.state = stateToJSON(message.state));
+    return obj;
   }
 
 };
@@ -854,6 +1340,53 @@ export const ServiceConfig = {
     message.monitoredResources = object.monitoredResources?.map(e => MonitoredResourceDescriptor.fromPartial(e)) || [];
     message.monitoring = object.monitoring !== undefined && object.monitoring !== null ? Monitoring.fromPartial(object.monitoring) : undefined;
     return message;
+  },
+
+  fromSDK(object: ServiceConfigSDKType): ServiceConfig {
+    return {
+      name: isSet(object.name) ? object.name : undefined,
+      title: isSet(object.title) ? object.title : undefined,
+      apis: Array.isArray(object?.apis) ? object.apis.map((e: any) => Api.fromSDK(e)) : [],
+      documentation: isSet(object.documentation) ? Documentation.fromSDK(object.documentation) : undefined,
+      quota: isSet(object.quota) ? Quota.fromSDK(object.quota) : undefined,
+      authentication: isSet(object.authentication) ? Authentication.fromSDK(object.authentication) : undefined,
+      usage: isSet(object.usage) ? Usage.fromSDK(object.usage) : undefined,
+      endpoints: Array.isArray(object?.endpoints) ? object.endpoints.map((e: any) => Endpoint.fromSDK(e)) : [],
+      monitoredResources: Array.isArray(object?.monitored_resources) ? object.monitored_resources.map((e: any) => MonitoredResourceDescriptor.fromSDK(e)) : [],
+      monitoring: isSet(object.monitoring) ? Monitoring.fromSDK(object.monitoring) : undefined
+    };
+  },
+
+  toSDK(message: ServiceConfig): ServiceConfigSDKType {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    message.title !== undefined && (obj.title = message.title);
+
+    if (message.apis) {
+      obj.apis = message.apis.map(e => e ? Api.toSDK(e) : undefined);
+    } else {
+      obj.apis = [];
+    }
+
+    message.documentation !== undefined && (obj.documentation = message.documentation ? Documentation.toSDK(message.documentation) : undefined);
+    message.quota !== undefined && (obj.quota = message.quota ? Quota.toSDK(message.quota) : undefined);
+    message.authentication !== undefined && (obj.authentication = message.authentication ? Authentication.toSDK(message.authentication) : undefined);
+    message.usage !== undefined && (obj.usage = message.usage ? Usage.toSDK(message.usage) : undefined);
+
+    if (message.endpoints) {
+      obj.endpoints = message.endpoints.map(e => e ? Endpoint.toSDK(e) : undefined);
+    } else {
+      obj.endpoints = [];
+    }
+
+    if (message.monitoredResources) {
+      obj.monitored_resources = message.monitoredResources.map(e => e ? MonitoredResourceDescriptor.toSDK(e) : undefined);
+    } else {
+      obj.monitored_resources = [];
+    }
+
+    message.monitoring !== undefined && (obj.monitoring = message.monitoring ? Monitoring.toSDK(message.monitoring) : undefined);
+    return obj;
   }
 
 };
@@ -917,6 +1450,24 @@ export const OperationMetadata = {
     const message = createBaseOperationMetadata();
     message.resourceNames = object.resourceNames?.map(e => e) || [];
     return message;
+  },
+
+  fromSDK(object: OperationMetadataSDKType): OperationMetadata {
+    return {
+      resourceNames: Array.isArray(object?.resource_names) ? object.resource_names.map((e: any) => e) : []
+    };
+  },
+
+  toSDK(message: OperationMetadata): OperationMetadataSDKType {
+    const obj: any = {};
+
+    if (message.resourceNames) {
+      obj.resource_names = message.resourceNames.map(e => e);
+    } else {
+      obj.resource_names = [];
+    }
+
+    return obj;
   }
 
 };
@@ -961,7 +1512,7 @@ export const ConsumerQuotaMetric = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ConsumerQuotaMetric {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ConsumerQuotaMetricSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseConsumerQuotaMetric();
@@ -1045,6 +1596,39 @@ export const ConsumerQuotaMetric = {
     message.descendantConsumerQuotaLimits = object.descendantConsumerQuotaLimits?.map(e => ConsumerQuotaLimit.fromPartial(e)) || [];
     message.unit = object.unit ?? "";
     return message;
+  },
+
+  fromSDK(object: ConsumerQuotaMetricSDKType): ConsumerQuotaMetric {
+    return {
+      name: isSet(object.name) ? object.name : undefined,
+      metric: isSet(object.metric) ? object.metric : undefined,
+      displayName: isSet(object.display_name) ? object.display_name : undefined,
+      consumerQuotaLimits: Array.isArray(object?.consumer_quota_limits) ? object.consumer_quota_limits.map((e: any) => ConsumerQuotaLimit.fromSDK(e)) : [],
+      descendantConsumerQuotaLimits: Array.isArray(object?.descendant_consumer_quota_limits) ? object.descendant_consumer_quota_limits.map((e: any) => ConsumerQuotaLimit.fromSDK(e)) : [],
+      unit: isSet(object.unit) ? object.unit : undefined
+    };
+  },
+
+  toSDK(message: ConsumerQuotaMetric): ConsumerQuotaMetricSDKType {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    message.metric !== undefined && (obj.metric = message.metric);
+    message.displayName !== undefined && (obj.display_name = message.displayName);
+
+    if (message.consumerQuotaLimits) {
+      obj.consumer_quota_limits = message.consumerQuotaLimits.map(e => e ? ConsumerQuotaLimit.toSDK(e) : undefined);
+    } else {
+      obj.consumer_quota_limits = [];
+    }
+
+    if (message.descendantConsumerQuotaLimits) {
+      obj.descendant_consumer_quota_limits = message.descendantConsumerQuotaLimits.map(e => e ? ConsumerQuotaLimit.toSDK(e) : undefined);
+    } else {
+      obj.descendant_consumer_quota_limits = [];
+    }
+
+    message.unit !== undefined && (obj.unit = message.unit);
+    return obj;
   }
 
 };
@@ -1089,7 +1673,7 @@ export const ConsumerQuotaLimit = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ConsumerQuotaLimit {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ConsumerQuotaLimitSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseConsumerQuotaLimit();
@@ -1168,6 +1752,34 @@ export const ConsumerQuotaLimit = {
     message.allowsAdminOverrides = object.allowsAdminOverrides ?? false;
     message.quotaBuckets = object.quotaBuckets?.map(e => QuotaBucket.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: ConsumerQuotaLimitSDKType): ConsumerQuotaLimit {
+    return {
+      name: isSet(object.name) ? object.name : undefined,
+      metric: isSet(object.metric) ? object.metric : undefined,
+      unit: isSet(object.unit) ? object.unit : undefined,
+      isPrecise: isSet(object.is_precise) ? object.is_precise : undefined,
+      allowsAdminOverrides: isSet(object.allows_admin_overrides) ? object.allows_admin_overrides : undefined,
+      quotaBuckets: Array.isArray(object?.quota_buckets) ? object.quota_buckets.map((e: any) => QuotaBucket.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: ConsumerQuotaLimit): ConsumerQuotaLimitSDKType {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    message.metric !== undefined && (obj.metric = message.metric);
+    message.unit !== undefined && (obj.unit = message.unit);
+    message.isPrecise !== undefined && (obj.is_precise = message.isPrecise);
+    message.allowsAdminOverrides !== undefined && (obj.allows_admin_overrides = message.allowsAdminOverrides);
+
+    if (message.quotaBuckets) {
+      obj.quota_buckets = message.quotaBuckets.map(e => e ? QuotaBucket.toSDK(e) : undefined);
+    } else {
+      obj.quota_buckets = [];
+    }
+
+    return obj;
   }
 
 };
@@ -1237,6 +1849,20 @@ export const QuotaBucket_DimensionsEntry = {
     message.key = object.key ?? "";
     message.value = object.value ?? "";
     return message;
+  },
+
+  fromSDK(object: QuotaBucket_DimensionsEntrySDKType): QuotaBucket_DimensionsEntry {
+    return {
+      key: isSet(object.key) ? object.key : undefined,
+      value: isSet(object.value) ? object.value : undefined
+    };
+  },
+
+  toSDK(message: QuotaBucket_DimensionsEntry): QuotaBucket_DimensionsEntrySDKType {
+    const obj: any = {};
+    message.key !== undefined && (obj.key = message.key);
+    message.value !== undefined && (obj.value = message.value);
+    return obj;
   }
 
 };
@@ -1381,6 +2007,40 @@ export const QuotaBucket = {
       return acc;
     }, {});
     return message;
+  },
+
+  fromSDK(object: QuotaBucketSDKType): QuotaBucket {
+    return {
+      effectiveLimit: isSet(object.effective_limit) ? object.effective_limit : undefined,
+      defaultLimit: isSet(object.default_limit) ? object.default_limit : undefined,
+      producerOverride: isSet(object.producer_override) ? QuotaOverride.fromSDK(object.producer_override) : undefined,
+      consumerOverride: isSet(object.consumer_override) ? QuotaOverride.fromSDK(object.consumer_override) : undefined,
+      adminOverride: isSet(object.admin_override) ? QuotaOverride.fromSDK(object.admin_override) : undefined,
+      dimensions: isObject(object.dimensions) ? Object.entries(object.dimensions).reduce<{
+        [key: string]: string;
+      }>((acc, [key, value]) => {
+        acc[key] = String(value);
+        return acc;
+      }, {}) : {}
+    };
+  },
+
+  toSDK(message: QuotaBucket): QuotaBucketSDKType {
+    const obj: any = {};
+    message.effectiveLimit !== undefined && (obj.effective_limit = message.effectiveLimit);
+    message.defaultLimit !== undefined && (obj.default_limit = message.defaultLimit);
+    message.producerOverride !== undefined && (obj.producer_override = message.producerOverride ? QuotaOverride.toSDK(message.producerOverride) : undefined);
+    message.consumerOverride !== undefined && (obj.consumer_override = message.consumerOverride ? QuotaOverride.toSDK(message.consumerOverride) : undefined);
+    message.adminOverride !== undefined && (obj.admin_override = message.adminOverride ? QuotaOverride.toSDK(message.adminOverride) : undefined);
+    obj.dimensions = {};
+
+    if (message.dimensions) {
+      Object.entries(message.dimensions).forEach(([k, v]) => {
+        obj.dimensions[k] = v;
+      });
+    }
+
+    return obj;
   }
 
 };
@@ -1450,6 +2110,20 @@ export const QuotaOverride_DimensionsEntry = {
     message.key = object.key ?? "";
     message.value = object.value ?? "";
     return message;
+  },
+
+  fromSDK(object: QuotaOverride_DimensionsEntrySDKType): QuotaOverride_DimensionsEntry {
+    return {
+      key: isSet(object.key) ? object.key : undefined,
+      value: isSet(object.value) ? object.value : undefined
+    };
+  },
+
+  toSDK(message: QuotaOverride_DimensionsEntry): QuotaOverride_DimensionsEntrySDKType {
+    const obj: any = {};
+    message.key !== undefined && (obj.key = message.key);
+    message.value !== undefined && (obj.value = message.value);
+    return obj;
   }
 
 };
@@ -1595,6 +2269,40 @@ export const QuotaOverride = {
     message.unit = object.unit ?? "";
     message.adminOverrideAncestor = object.adminOverrideAncestor ?? "";
     return message;
+  },
+
+  fromSDK(object: QuotaOverrideSDKType): QuotaOverride {
+    return {
+      name: isSet(object.name) ? object.name : undefined,
+      overrideValue: isSet(object.override_value) ? object.override_value : undefined,
+      dimensions: isObject(object.dimensions) ? Object.entries(object.dimensions).reduce<{
+        [key: string]: string;
+      }>((acc, [key, value]) => {
+        acc[key] = String(value);
+        return acc;
+      }, {}) : {},
+      metric: isSet(object.metric) ? object.metric : undefined,
+      unit: isSet(object.unit) ? object.unit : undefined,
+      adminOverrideAncestor: isSet(object.admin_override_ancestor) ? object.admin_override_ancestor : undefined
+    };
+  },
+
+  toSDK(message: QuotaOverride): QuotaOverrideSDKType {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    message.overrideValue !== undefined && (obj.override_value = message.overrideValue);
+    obj.dimensions = {};
+
+    if (message.dimensions) {
+      Object.entries(message.dimensions).forEach(([k, v]) => {
+        obj.dimensions[k] = v;
+      });
+    }
+
+    message.metric !== undefined && (obj.metric = message.metric);
+    message.unit !== undefined && (obj.unit = message.unit);
+    message.adminOverrideAncestor !== undefined && (obj.admin_override_ancestor = message.adminOverrideAncestor);
+    return obj;
   }
 
 };
@@ -1658,6 +2366,24 @@ export const OverrideInlineSource = {
     const message = createBaseOverrideInlineSource();
     message.overrides = object.overrides?.map(e => QuotaOverride.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: OverrideInlineSourceSDKType): OverrideInlineSource {
+    return {
+      overrides: Array.isArray(object?.overrides) ? object.overrides.map((e: any) => QuotaOverride.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: OverrideInlineSource): OverrideInlineSourceSDKType {
+    const obj: any = {};
+
+    if (message.overrides) {
+      obj.overrides = message.overrides.map(e => e ? QuotaOverride.toSDK(e) : undefined);
+    } else {
+      obj.overrides = [];
+    }
+
+    return obj;
   }
 
 };
@@ -1727,6 +2453,20 @@ export const AdminQuotaPolicy_DimensionsEntry = {
     message.key = object.key ?? "";
     message.value = object.value ?? "";
     return message;
+  },
+
+  fromSDK(object: AdminQuotaPolicy_DimensionsEntrySDKType): AdminQuotaPolicy_DimensionsEntry {
+    return {
+      key: isSet(object.key) ? object.key : undefined,
+      value: isSet(object.value) ? object.value : undefined
+    };
+  },
+
+  toSDK(message: AdminQuotaPolicy_DimensionsEntry): AdminQuotaPolicy_DimensionsEntrySDKType {
+    const obj: any = {};
+    message.key !== undefined && (obj.key = message.key);
+    message.value !== undefined && (obj.value = message.value);
+    return obj;
   }
 
 };
@@ -1872,6 +2612,40 @@ export const AdminQuotaPolicy = {
     message.unit = object.unit ?? "";
     message.container = object.container ?? "";
     return message;
+  },
+
+  fromSDK(object: AdminQuotaPolicySDKType): AdminQuotaPolicy {
+    return {
+      name: isSet(object.name) ? object.name : undefined,
+      policyValue: isSet(object.policy_value) ? object.policy_value : undefined,
+      dimensions: isObject(object.dimensions) ? Object.entries(object.dimensions).reduce<{
+        [key: string]: string;
+      }>((acc, [key, value]) => {
+        acc[key] = String(value);
+        return acc;
+      }, {}) : {},
+      metric: isSet(object.metric) ? object.metric : undefined,
+      unit: isSet(object.unit) ? object.unit : undefined,
+      container: isSet(object.container) ? object.container : undefined
+    };
+  },
+
+  toSDK(message: AdminQuotaPolicy): AdminQuotaPolicySDKType {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    message.policyValue !== undefined && (obj.policy_value = message.policyValue);
+    obj.dimensions = {};
+
+    if (message.dimensions) {
+      Object.entries(message.dimensions).forEach(([k, v]) => {
+        obj.dimensions[k] = v;
+      });
+    }
+
+    message.metric !== undefined && (obj.metric = message.metric);
+    message.unit !== undefined && (obj.unit = message.unit);
+    message.container !== undefined && (obj.container = message.container);
+    return obj;
   }
 
 };
@@ -1941,6 +2715,20 @@ export const ServiceIdentity = {
     message.email = object.email ?? "";
     message.uniqueId = object.uniqueId ?? "";
     return message;
+  },
+
+  fromSDK(object: ServiceIdentitySDKType): ServiceIdentity {
+    return {
+      email: isSet(object.email) ? object.email : undefined,
+      uniqueId: isSet(object.unique_id) ? object.unique_id : undefined
+    };
+  },
+
+  toSDK(message: ServiceIdentity): ServiceIdentitySDKType {
+    const obj: any = {};
+    message.email !== undefined && (obj.email = message.email);
+    message.uniqueId !== undefined && (obj.unique_id = message.uniqueId);
+    return obj;
   }
 
 };

@@ -30,7 +30,7 @@ const rpcMethod = (
                 t.tsTypeParameterInstantiation(
                     [
                         t.tsTypeReference(
-                            t.identifier(response)
+                            t.identifier(response + 'SDKType')
                         )
                     ]
                 )
@@ -195,7 +195,7 @@ const rpcClassMethod = (
                 t.tsTypeParameterInstantiation(
                     [
                         t.tsTypeReference(
-                            t.identifier(response)
+                            t.identifier(response + 'SDKType')
                         )
                     ]
                 )

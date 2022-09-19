@@ -5,6 +5,10 @@ export interface SourceInfo_PositionsEntry {
   key: number;
   value: number;
 }
+export interface SourceInfo_PositionsEntrySDKType {
+  key: number;
+  value: number;
+}
 
 /** Source information collected at parse time. */
 export interface SourceInfo {
@@ -35,8 +39,58 @@ export interface SourceInfo {
   };
 }
 
+/** Source information collected at parse time. */
+export interface SourceInfoSDKType {
+  /**
+   * The location name. All position information attached to an expression is
+   * relative to this location.
+   * 
+   * The location could be a file, UI element, or similar. For example,
+   * `acme/app/AnvilPolicy.cel`.
+   */
+  location: string;
+
+  /**
+   * Monotonically increasing list of character offsets where newlines appear.
+   * 
+   * The line number of a given position is the index `i` where for a given
+   * `id` the `line_offsets[i] < id_positions[id] < line_offsets[i+1]`. The
+   * column may be derivd from `id_positions[id] - line_offsets[i]`.
+   */
+  line_offsets: number[];
+
+  /**
+   * A map from the parse node id (e.g. `Expr.id`) to the character offset
+   * within source.
+   */
+  positions: {
+    [key: number]: number;
+  };
+}
+
 /** A specific position in source. */
 export interface SourcePosition {
+  /** The soucre location name (e.g. file name). */
+  location: string;
+
+  /** The character offset. */
+  offset: number;
+
+  /**
+   * The 1-based index of the starting line in the source text
+   * where the issue occurs, or 0 if unknown.
+   */
+  line: number;
+
+  /**
+   * The 0-based index of the starting position within the line of source text
+   * where the issue occurs.  Only meaningful if line is nonzer..
+   */
+  column: number;
+}
+
+/** A specific position in source. */
+export interface SourcePositionSDKType {
   /** The soucre location name (e.g. file name). */
   location: string;
 
@@ -121,6 +175,20 @@ export const SourceInfo_PositionsEntry = {
     message.key = object.key ?? 0;
     message.value = object.value ?? 0;
     return message;
+  },
+
+  fromSDK(object: SourceInfo_PositionsEntrySDKType): SourceInfo_PositionsEntry {
+    return {
+      key: isSet(object.key) ? object.key : undefined,
+      value: isSet(object.value) ? object.value : undefined
+    };
+  },
+
+  toSDK(message: SourceInfo_PositionsEntry): SourceInfo_PositionsEntrySDKType {
+    const obj: any = {};
+    message.key !== undefined && (obj.key = message.key);
+    message.value !== undefined && (obj.value = message.value);
+    return obj;
   }
 
 };
@@ -247,6 +315,40 @@ export const SourceInfo = {
       return acc;
     }, {});
     return message;
+  },
+
+  fromSDK(object: SourceInfoSDKType): SourceInfo {
+    return {
+      location: isSet(object.location) ? object.location : undefined,
+      lineOffsets: Array.isArray(object?.line_offsets) ? object.line_offsets.map((e: any) => e) : [],
+      positions: isObject(object.positions) ? Object.entries(object.positions).reduce<{
+        [key: number]: number;
+      }>((acc, [key, value]) => {
+        acc[Number(key)] = Number(value);
+        return acc;
+      }, {}) : {}
+    };
+  },
+
+  toSDK(message: SourceInfo): SourceInfoSDKType {
+    const obj: any = {};
+    message.location !== undefined && (obj.location = message.location);
+
+    if (message.lineOffsets) {
+      obj.line_offsets = message.lineOffsets.map(e => e);
+    } else {
+      obj.line_offsets = [];
+    }
+
+    obj.positions = {};
+
+    if (message.positions) {
+      Object.entries(message.positions).forEach(([k, v]) => {
+        obj.positions[k] = Math.round(v);
+      });
+    }
+
+    return obj;
   }
 
 };
@@ -340,6 +442,24 @@ export const SourcePosition = {
     message.line = object.line ?? 0;
     message.column = object.column ?? 0;
     return message;
+  },
+
+  fromSDK(object: SourcePositionSDKType): SourcePosition {
+    return {
+      location: isSet(object.location) ? object.location : undefined,
+      offset: isSet(object.offset) ? object.offset : undefined,
+      line: isSet(object.line) ? object.line : undefined,
+      column: isSet(object.column) ? object.column : undefined
+    };
+  },
+
+  toSDK(message: SourcePosition): SourcePositionSDKType {
+    const obj: any = {};
+    message.location !== undefined && (obj.location = message.location);
+    message.offset !== undefined && (obj.offset = message.offset);
+    message.line !== undefined && (obj.line = message.line);
+    message.column !== undefined && (obj.column = message.column);
+    return obj;
   }
 
 };

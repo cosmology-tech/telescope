@@ -1,10 +1,16 @@
-import { Coin } from "../../../cosmos/base/v1beta1/coin";
+import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "@osmonauts/helpers";
 export const protobufPackage = "evmos.vesting.v1";
 
 /** QueryBalancesRequest is the request type for the Query/Balances RPC method. */
 export interface QueryBalancesRequest {
+  /** address of the clawback vesting account */
+  address: string;
+}
+
+/** QueryBalancesRequest is the request type for the Query/Balances RPC method. */
+export interface QueryBalancesRequestSDKType {
   /** address of the clawback vesting account */
   address: string;
 }
@@ -22,6 +28,21 @@ export interface QueryBalancesResponse {
 
   /** current amount of vested tokens */
   vested: Coin[];
+}
+
+/**
+ * QueryBalancesResponse is the response type for the Query/Balances RPC
+ * method.
+ */
+export interface QueryBalancesResponseSDKType {
+  /** current amount of locked tokens */
+  locked: CoinSDKType[];
+
+  /** current amount of unvested tokens */
+  unvested: CoinSDKType[];
+
+  /** current amount of vested tokens */
+  vested: CoinSDKType[];
 }
 
 function createBaseQueryBalancesRequest(): QueryBalancesRequest {
@@ -77,6 +98,18 @@ export const QueryBalancesRequest = {
     const message = createBaseQueryBalancesRequest();
     message.address = object.address ?? "";
     return message;
+  },
+
+  fromSDK(object: QueryBalancesRequestSDKType): QueryBalancesRequest {
+    return {
+      address: isSet(object.address) ? object.address : undefined
+    };
+  },
+
+  toSDK(message: QueryBalancesRequest): QueryBalancesRequestSDKType {
+    const obj: any = {};
+    message.address !== undefined && (obj.address = message.address);
+    return obj;
   }
 
 };
@@ -106,7 +139,7 @@ export const QueryBalancesResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryBalancesResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryBalancesResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryBalancesResponse();
@@ -174,6 +207,38 @@ export const QueryBalancesResponse = {
     message.unvested = object.unvested?.map(e => Coin.fromPartial(e)) || [];
     message.vested = object.vested?.map(e => Coin.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: QueryBalancesResponseSDKType): QueryBalancesResponse {
+    return {
+      locked: Array.isArray(object?.locked) ? object.locked.map((e: any) => Coin.fromSDK(e)) : [],
+      unvested: Array.isArray(object?.unvested) ? object.unvested.map((e: any) => Coin.fromSDK(e)) : [],
+      vested: Array.isArray(object?.vested) ? object.vested.map((e: any) => Coin.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: QueryBalancesResponse): QueryBalancesResponseSDKType {
+    const obj: any = {};
+
+    if (message.locked) {
+      obj.locked = message.locked.map(e => e ? Coin.toSDK(e) : undefined);
+    } else {
+      obj.locked = [];
+    }
+
+    if (message.unvested) {
+      obj.unvested = message.unvested.map(e => e ? Coin.toSDK(e) : undefined);
+    } else {
+      obj.unvested = [];
+    }
+
+    if (message.vested) {
+      obj.vested = message.vested.map(e => e ? Coin.toSDK(e) : undefined);
+    } else {
+      obj.vested = [];
+    }
+
+    return obj;
   }
 
 };

@@ -1,6 +1,6 @@
-import { PageRequest, PageResponse } from "../../base/query/v1beta1/pagination";
-import { Any } from "../../../google/protobuf/any";
-import { Params } from "./auth";
+import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../base/query/v1beta1/pagination";
+import { Any, AnySDKType } from "../../../google/protobuf/any";
+import { Params, ParamsSDKType } from "./auth";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
 export const protobufPackage = "cosmos.auth.v1beta1";
@@ -16,6 +16,16 @@ export interface QueryAccountsRequest {
 }
 
 /**
+ * QueryAccountsRequest is the request type for the Query/Accounts RPC method.
+ * 
+ * Since: cosmos-sdk 0.43
+ */
+export interface QueryAccountsRequestSDKType {
+  /** pagination defines an optional pagination for the request. */
+  pagination?: PageRequestSDKType;
+}
+
+/**
  * QueryAccountsResponse is the response type for the Query/Accounts RPC method.
  * 
  * Since: cosmos-sdk 0.43
@@ -28,8 +38,27 @@ export interface QueryAccountsResponse {
   pagination?: PageResponse;
 }
 
+/**
+ * QueryAccountsResponse is the response type for the Query/Accounts RPC method.
+ * 
+ * Since: cosmos-sdk 0.43
+ */
+export interface QueryAccountsResponseSDKType {
+  /** accounts are the existing accounts */
+  accounts: AnySDKType[];
+
+  /** pagination defines the pagination in the response. */
+  pagination?: PageResponseSDKType;
+}
+
 /** QueryAccountRequest is the request type for the Query/Account RPC method. */
 export interface QueryAccountRequest {
+  /** address defines the address to query for. */
+  address: string;
+}
+
+/** QueryAccountRequest is the request type for the Query/Account RPC method. */
+export interface QueryAccountRequestSDKType {
   /** address defines the address to query for. */
   address: string;
 }
@@ -37,10 +66,19 @@ export interface QueryAccountRequest {
 /** QueryModuleAccountsRequest is the request type for the Query/ModuleAccounts RPC method. */
 export interface QueryModuleAccountsRequest {}
 
+/** QueryModuleAccountsRequest is the request type for the Query/ModuleAccounts RPC method. */
+export interface QueryModuleAccountsRequestSDKType {}
+
 /** QueryParamsResponse is the response type for the Query/Params RPC method. */
 export interface QueryParamsResponse {
   /** params defines the parameters of the module. */
   params: Params;
+}
+
+/** QueryParamsResponse is the response type for the Query/Params RPC method. */
+export interface QueryParamsResponseSDKType {
+  /** params defines the parameters of the module. */
+  params: ParamsSDKType;
 }
 
 /** QueryAccountResponse is the response type for the Query/Account RPC method. */
@@ -49,20 +87,42 @@ export interface QueryAccountResponse {
   account: Any;
 }
 
+/** QueryAccountResponse is the response type for the Query/Account RPC method. */
+export interface QueryAccountResponseSDKType {
+  /** account defines the account of the corresponding address. */
+  account: AnySDKType;
+}
+
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequest {}
+
+/** QueryParamsRequest is the request type for the Query/Params RPC method. */
+export interface QueryParamsRequestSDKType {}
 
 /** QueryModuleAccountsResponse is the response type for the Query/ModuleAccounts RPC method. */
 export interface QueryModuleAccountsResponse {
   accounts: Any[];
 }
 
+/** QueryModuleAccountsResponse is the response type for the Query/ModuleAccounts RPC method. */
+export interface QueryModuleAccountsResponseSDKType {
+  accounts: AnySDKType[];
+}
+
 /** Bech32PrefixRequest is the request type for Bech32Prefix rpc method */
 export interface Bech32PrefixRequest {}
+
+/** Bech32PrefixRequest is the request type for Bech32Prefix rpc method */
+export interface Bech32PrefixRequestSDKType {}
 
 /** Bech32PrefixResponse is the response type for Bech32Prefix rpc method */
 export interface Bech32PrefixResponse {
   bech32Prefix: string;
+}
+
+/** Bech32PrefixResponse is the response type for Bech32Prefix rpc method */
+export interface Bech32PrefixResponseSDKType {
+  bech32_prefix: string;
 }
 
 /** AddressBytesToStringRequest is the request type for AddressString rpc method */
@@ -70,9 +130,19 @@ export interface AddressBytesToStringRequest {
   addressBytes: Uint8Array;
 }
 
+/** AddressBytesToStringRequest is the request type for AddressString rpc method */
+export interface AddressBytesToStringRequestSDKType {
+  address_bytes: Uint8Array;
+}
+
 /** AddressBytesToStringResponse is the response type for AddressString rpc method */
 export interface AddressBytesToStringResponse {
   addressString: string;
+}
+
+/** AddressBytesToStringResponse is the response type for AddressString rpc method */
+export interface AddressBytesToStringResponseSDKType {
+  address_string: string;
 }
 
 /** AddressStringToBytesRequest is the request type for AccountBytes rpc method */
@@ -80,9 +150,19 @@ export interface AddressStringToBytesRequest {
   addressString: string;
 }
 
+/** AddressStringToBytesRequest is the request type for AccountBytes rpc method */
+export interface AddressStringToBytesRequestSDKType {
+  address_string: string;
+}
+
 /** AddressStringToBytesResponse is the response type for AddressBytes rpc method */
 export interface AddressStringToBytesResponse {
   addressBytes: Uint8Array;
+}
+
+/** AddressStringToBytesResponse is the response type for AddressBytes rpc method */
+export interface AddressStringToBytesResponseSDKType {
+  address_bytes: Uint8Array;
 }
 
 function createBaseQueryAccountsRequest(): QueryAccountsRequest {
@@ -138,6 +218,18 @@ export const QueryAccountsRequest = {
     const message = createBaseQueryAccountsRequest();
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryAccountsRequestSDKType): QueryAccountsRequest {
+    return {
+      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  toSDK(message: QueryAccountsRequest): QueryAccountsRequestSDKType {
+    const obj: any = {};
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
+    return obj;
   }
 
 };
@@ -162,7 +254,7 @@ export const QueryAccountsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryAccountsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryAccountsResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryAccountsResponse();
@@ -213,6 +305,26 @@ export const QueryAccountsResponse = {
     message.accounts = object.accounts?.map(e => Any.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryAccountsResponseSDKType): QueryAccountsResponse {
+    return {
+      accounts: Array.isArray(object?.accounts) ? object.accounts.map((e: any) => Any.fromSDK(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  toSDK(message: QueryAccountsResponse): QueryAccountsResponseSDKType {
+    const obj: any = {};
+
+    if (message.accounts) {
+      obj.accounts = message.accounts.map(e => e ? Any.toSDK(e) : undefined);
+    } else {
+      obj.accounts = [];
+    }
+
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
+    return obj;
   }
 
 };
@@ -270,6 +382,18 @@ export const QueryAccountRequest = {
     const message = createBaseQueryAccountRequest();
     message.address = object.address ?? "";
     return message;
+  },
+
+  fromSDK(object: QueryAccountRequestSDKType): QueryAccountRequest {
+    return {
+      address: isSet(object.address) ? object.address : undefined
+    };
+  },
+
+  toSDK(message: QueryAccountRequest): QueryAccountRequestSDKType {
+    const obj: any = {};
+    message.address !== undefined && (obj.address = message.address);
+    return obj;
   }
 
 };
@@ -313,6 +437,15 @@ export const QueryModuleAccountsRequest = {
   fromPartial(_: DeepPartial<QueryModuleAccountsRequest>): QueryModuleAccountsRequest {
     const message = createBaseQueryModuleAccountsRequest();
     return message;
+  },
+
+  fromSDK(_: QueryModuleAccountsRequestSDKType): QueryModuleAccountsRequest {
+    return {};
+  },
+
+  toSDK(_: QueryModuleAccountsRequest): QueryModuleAccountsRequestSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -332,7 +465,7 @@ export const QueryParamsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryParamsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryParamsResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryParamsResponse();
@@ -370,6 +503,18 @@ export const QueryParamsResponse = {
     const message = createBaseQueryParamsResponse();
     message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryParamsResponseSDKType): QueryParamsResponse {
+    return {
+      params: isSet(object.params) ? Params.fromSDK(object.params) : undefined
+    };
+  },
+
+  toSDK(message: QueryParamsResponse): QueryParamsResponseSDKType {
+    const obj: any = {};
+    message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
+    return obj;
   }
 
 };
@@ -389,7 +534,7 @@ export const QueryAccountResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryAccountResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryAccountResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryAccountResponse();
@@ -427,6 +572,18 @@ export const QueryAccountResponse = {
     const message = createBaseQueryAccountResponse();
     message.account = object.account !== undefined && object.account !== null ? Any.fromPartial(object.account) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryAccountResponseSDKType): QueryAccountResponse {
+    return {
+      account: isSet(object.account) ? Any.fromSDK(object.account) : undefined
+    };
+  },
+
+  toSDK(message: QueryAccountResponse): QueryAccountResponseSDKType {
+    const obj: any = {};
+    message.account !== undefined && (obj.account = message.account ? Any.toSDK(message.account) : undefined);
+    return obj;
   }
 
 };
@@ -470,6 +627,15 @@ export const QueryParamsRequest = {
   fromPartial(_: DeepPartial<QueryParamsRequest>): QueryParamsRequest {
     const message = createBaseQueryParamsRequest();
     return message;
+  },
+
+  fromSDK(_: QueryParamsRequestSDKType): QueryParamsRequest {
+    return {};
+  },
+
+  toSDK(_: QueryParamsRequest): QueryParamsRequestSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -489,7 +655,7 @@ export const QueryModuleAccountsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryModuleAccountsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryModuleAccountsResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryModuleAccountsResponse();
@@ -533,6 +699,24 @@ export const QueryModuleAccountsResponse = {
     const message = createBaseQueryModuleAccountsResponse();
     message.accounts = object.accounts?.map(e => Any.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: QueryModuleAccountsResponseSDKType): QueryModuleAccountsResponse {
+    return {
+      accounts: Array.isArray(object?.accounts) ? object.accounts.map((e: any) => Any.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: QueryModuleAccountsResponse): QueryModuleAccountsResponseSDKType {
+    const obj: any = {};
+
+    if (message.accounts) {
+      obj.accounts = message.accounts.map(e => e ? Any.toSDK(e) : undefined);
+    } else {
+      obj.accounts = [];
+    }
+
+    return obj;
   }
 
 };
@@ -576,6 +760,15 @@ export const Bech32PrefixRequest = {
   fromPartial(_: DeepPartial<Bech32PrefixRequest>): Bech32PrefixRequest {
     const message = createBaseBech32PrefixRequest();
     return message;
+  },
+
+  fromSDK(_: Bech32PrefixRequestSDKType): Bech32PrefixRequest {
+    return {};
+  },
+
+  toSDK(_: Bech32PrefixRequest): Bech32PrefixRequestSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -595,7 +788,7 @@ export const Bech32PrefixResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): Bech32PrefixResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Bech32PrefixResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBech32PrefixResponse();
@@ -633,6 +826,18 @@ export const Bech32PrefixResponse = {
     const message = createBaseBech32PrefixResponse();
     message.bech32Prefix = object.bech32Prefix ?? "";
     return message;
+  },
+
+  fromSDK(object: Bech32PrefixResponseSDKType): Bech32PrefixResponse {
+    return {
+      bech32Prefix: isSet(object.bech32_prefix) ? object.bech32_prefix : undefined
+    };
+  },
+
+  toSDK(message: Bech32PrefixResponse): Bech32PrefixResponseSDKType {
+    const obj: any = {};
+    message.bech32Prefix !== undefined && (obj.bech32_prefix = message.bech32Prefix);
+    return obj;
   }
 
 };
@@ -690,6 +895,18 @@ export const AddressBytesToStringRequest = {
     const message = createBaseAddressBytesToStringRequest();
     message.addressBytes = object.addressBytes ?? new Uint8Array();
     return message;
+  },
+
+  fromSDK(object: AddressBytesToStringRequestSDKType): AddressBytesToStringRequest {
+    return {
+      addressBytes: isSet(object.address_bytes) ? object.address_bytes : undefined
+    };
+  },
+
+  toSDK(message: AddressBytesToStringRequest): AddressBytesToStringRequestSDKType {
+    const obj: any = {};
+    message.addressBytes !== undefined && (obj.address_bytes = message.addressBytes);
+    return obj;
   }
 
 };
@@ -709,7 +926,7 @@ export const AddressBytesToStringResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): AddressBytesToStringResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): AddressBytesToStringResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAddressBytesToStringResponse();
@@ -747,6 +964,18 @@ export const AddressBytesToStringResponse = {
     const message = createBaseAddressBytesToStringResponse();
     message.addressString = object.addressString ?? "";
     return message;
+  },
+
+  fromSDK(object: AddressBytesToStringResponseSDKType): AddressBytesToStringResponse {
+    return {
+      addressString: isSet(object.address_string) ? object.address_string : undefined
+    };
+  },
+
+  toSDK(message: AddressBytesToStringResponse): AddressBytesToStringResponseSDKType {
+    const obj: any = {};
+    message.addressString !== undefined && (obj.address_string = message.addressString);
+    return obj;
   }
 
 };
@@ -804,6 +1033,18 @@ export const AddressStringToBytesRequest = {
     const message = createBaseAddressStringToBytesRequest();
     message.addressString = object.addressString ?? "";
     return message;
+  },
+
+  fromSDK(object: AddressStringToBytesRequestSDKType): AddressStringToBytesRequest {
+    return {
+      addressString: isSet(object.address_string) ? object.address_string : undefined
+    };
+  },
+
+  toSDK(message: AddressStringToBytesRequest): AddressStringToBytesRequestSDKType {
+    const obj: any = {};
+    message.addressString !== undefined && (obj.address_string = message.addressString);
+    return obj;
   }
 
 };
@@ -823,7 +1064,7 @@ export const AddressStringToBytesResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): AddressStringToBytesResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): AddressStringToBytesResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAddressStringToBytesResponse();
@@ -861,6 +1102,18 @@ export const AddressStringToBytesResponse = {
     const message = createBaseAddressStringToBytesResponse();
     message.addressBytes = object.addressBytes ?? new Uint8Array();
     return message;
+  },
+
+  fromSDK(object: AddressStringToBytesResponseSDKType): AddressStringToBytesResponse {
+    return {
+      addressBytes: isSet(object.address_bytes) ? object.address_bytes : undefined
+    };
+  },
+
+  toSDK(message: AddressStringToBytesResponse): AddressStringToBytesResponseSDKType {
+    const obj: any = {};
+    message.addressBytes !== undefined && (obj.address_bytes = message.addressBytes);
+    return obj;
   }
 
 };

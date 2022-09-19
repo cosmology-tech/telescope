@@ -1,16 +1,26 @@
-import { EpochInfo } from "./genesis";
+import { EpochInfo, EpochInfoSDKType } from "./genesis";
 import * as _m0 from "protobufjs/minimal";
 import { DeepPartial, isSet, Long } from "@osmonauts/helpers";
 export const protobufPackage = "osmosis.epochs.v1beta1";
 export interface QueryEpochsInfoRequest {}
+export interface QueryEpochsInfoRequestSDKType {}
 export interface QueryEpochsInfoResponse {
   epochs: EpochInfo[];
+}
+export interface QueryEpochsInfoResponseSDKType {
+  epochs: EpochInfoSDKType[];
 }
 export interface QueryCurrentEpochRequest {
   identifier?: string;
 }
+export interface QueryCurrentEpochRequestSDKType {
+  identifier?: string;
+}
 export interface QueryCurrentEpochResponse {
   currentEpoch: Long;
+}
+export interface QueryCurrentEpochResponseSDKType {
+  current_epoch: Long;
 }
 
 function createBaseQueryEpochsInfoRequest(): QueryEpochsInfoRequest {
@@ -52,6 +62,15 @@ export const QueryEpochsInfoRequest = {
   fromPartial(_: DeepPartial<QueryEpochsInfoRequest>): QueryEpochsInfoRequest {
     const message = createBaseQueryEpochsInfoRequest();
     return message;
+  },
+
+  fromSDK(_: QueryEpochsInfoRequestSDKType): QueryEpochsInfoRequest {
+    return {};
+  },
+
+  toSDK(_: QueryEpochsInfoRequest): QueryEpochsInfoRequestSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -71,7 +90,7 @@ export const QueryEpochsInfoResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryEpochsInfoResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryEpochsInfoResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryEpochsInfoResponse();
@@ -115,6 +134,24 @@ export const QueryEpochsInfoResponse = {
     const message = createBaseQueryEpochsInfoResponse();
     message.epochs = object.epochs?.map(e => EpochInfo.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: QueryEpochsInfoResponseSDKType): QueryEpochsInfoResponse {
+    return {
+      epochs: Array.isArray(object?.epochs) ? object.epochs.map((e: any) => EpochInfo.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: QueryEpochsInfoResponse): QueryEpochsInfoResponseSDKType {
+    const obj: any = {};
+
+    if (message.epochs) {
+      obj.epochs = message.epochs.map(e => e ? EpochInfo.toSDK(e) : undefined);
+    } else {
+      obj.epochs = [];
+    }
+
+    return obj;
   }
 
 };
@@ -172,6 +209,18 @@ export const QueryCurrentEpochRequest = {
     const message = createBaseQueryCurrentEpochRequest();
     message.identifier = object.identifier ?? "";
     return message;
+  },
+
+  fromSDK(object: QueryCurrentEpochRequestSDKType): QueryCurrentEpochRequest {
+    return {
+      identifier: isSet(object.identifier) ? object.identifier : undefined
+    };
+  },
+
+  toSDK(message: QueryCurrentEpochRequest): QueryCurrentEpochRequestSDKType {
+    const obj: any = {};
+    message.identifier !== undefined && (obj.identifier = message.identifier);
+    return obj;
   }
 
 };
@@ -191,7 +240,7 @@ export const QueryCurrentEpochResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryCurrentEpochResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryCurrentEpochResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryCurrentEpochResponse();
@@ -229,6 +278,18 @@ export const QueryCurrentEpochResponse = {
     const message = createBaseQueryCurrentEpochResponse();
     message.currentEpoch = object.currentEpoch !== undefined && object.currentEpoch !== null ? Long.fromValue(object.currentEpoch) : Long.ZERO;
     return message;
+  },
+
+  fromSDK(object: QueryCurrentEpochResponseSDKType): QueryCurrentEpochResponse {
+    return {
+      currentEpoch: isSet(object.current_epoch) ? object.current_epoch : undefined
+    };
+  },
+
+  toSDK(message: QueryCurrentEpochResponse): QueryCurrentEpochResponseSDKType {
+    const obj: any = {};
+    message.currentEpoch !== undefined && (obj.current_epoch = message.currentEpoch);
+    return obj;
   }
 
 };

@@ -4,8 +4,38 @@ import { getProtoFieldTypeName } from '../utils';
 import { GenericParseContext, ProtoParseContext } from './context';
 import { GOOGLE_TYPES, SCALAR_TYPES } from './proto';
 
+export const getFieldNames = (field: ProtoField) => {
+    const propName = field.options?.['(telescope:name)'] ?? field.name;
+    const origName = field.options?.['(telescope:orig)'] ?? field.name;
+    return {
+        propName,
+        origName
+    };
+}
 
-export const getFieldTypeReference = (context: ProtoParseContext, field: ProtoField) => {
+export interface CreateProtoTypeOptions {
+    useOriginalCase: boolean;
+    typeNamePrefix?: string;
+    typeNameSuffix?: string;
+};
+
+export const createProtoTypeOptionsDefaults = {
+    useOriginalCase: false
+};
+
+export const getMessageName = (
+    name: string,
+    options: CreateProtoTypeOptions = createProtoTypeOptionsDefaults
+) => {
+    const MsgName = [options.typeNamePrefix, name, options.typeNameSuffix].filter(Boolean).join('');
+    return MsgName;
+}
+
+export const getFieldTypeReference = (
+    context: ProtoParseContext,
+    field: ProtoField,
+    options: CreateProtoTypeOptions = createProtoTypeOptionsDefaults
+) => {
     let ast: any = null;
     let typ: any = null;
 
@@ -16,9 +46,11 @@ export const getFieldTypeReference = (context: ProtoParseContext, field: ProtoFi
         return typ;
 
     } else if (GOOGLE_TYPES.includes(field.type)) {
-        typ = getTSTypeFromGoogleType(context, field.type);
+        typ = getTSTypeFromGoogleType(context, field.type, options);
     } else {
-        typ = t.tsTypeReference(t.identifier(getProtoFieldTypeName(context, field)));
+        const propName = getProtoFieldTypeName(context, field);
+        const MsgName = getMessageName(propName, options);
+        typ = t.tsTypeReference(t.identifier(MsgName));
     }
 
     if (
@@ -67,12 +99,21 @@ export const getTSType = (context: GenericParseContext, type: string) => {
     };
 };
 
-export const getTSTypeFromGoogleType = (context: GenericParseContext, type: string) => {
+export const getTSTypeFromGoogleType = (
+    context: GenericParseContext,
+    type: string,
+    options: CreateProtoTypeOptions = createProtoTypeOptionsDefaults
+) => {
+
+    const identifier = (str) => {
+        return t.identifier(getMessageName(str, options));
+    };
+
     switch (type) {
         case 'google.protobuf.Timestamp':
             switch (context.pluginValue('prototypes.typingsFormat.timestamp')) {
                 case 'timestamp':
-                    return t.tsTypeReference(t.identifier('Timestamp'));
+                    return t.tsTypeReference(identifier('Timestamp'));
                 case 'date':
                 default:
                     return t.tsTypeReference(t.identifier('Date'));
@@ -80,13 +121,13 @@ export const getTSTypeFromGoogleType = (context: GenericParseContext, type: stri
         case 'google.protobuf.Duration':
             switch (context.pluginValue('prototypes.typingsFormat.duration')) {
                 case 'duration':
-                    return t.tsTypeReference(t.identifier('Duration'));
+                    return t.tsTypeReference(identifier('Duration'));
                 case 'string':
                 default:
                     return t.tsStringKeyword();
             }
         case 'google.protobuf.Any':
-            return t.tsTypeReference(t.identifier('Any'));
+            return t.tsTypeReference(identifier('Any'));
         default:
             throw new Error('getTSTypeFromGoogleType() type not found');
     };

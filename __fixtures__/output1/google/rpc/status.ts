@@ -1,4 +1,4 @@
-import { Any } from "../protobuf/any";
+import { Any, AnySDKType } from "../protobuf/any";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "@osmonauts/helpers";
 export const protobufPackage = "google.rpc";
@@ -28,6 +28,33 @@ export interface Status {
    * message types for APIs to use.
    */
   details: Any[];
+}
+
+/**
+ * The `Status` type defines a logical error model that is suitable for
+ * different programming environments, including REST APIs and RPC APIs. It is
+ * used by [gRPC](https://github.com/grpc). Each `Status` message contains
+ * three pieces of data: error code, error message, and error details.
+ * 
+ * You can find out more about this error model and how to work with it in the
+ * [API Design Guide](https://cloud.google.com/apis/design/errors).
+ */
+export interface StatusSDKType {
+  /** The status code, which should be an enum value of [google.rpc.Code][google.rpc.Code]. */
+  code: number;
+
+  /**
+   * A developer-facing error message, which should be in English. Any
+   * user-facing error message should be localized and sent in the
+   * [google.rpc.Status.details][google.rpc.Status.details] field, or localized by the client.
+   */
+  message: string;
+
+  /**
+   * A list of messages that carry the error details.  There is a common set of
+   * message types for APIs to use.
+   */
+  details: AnySDKType[];
 }
 
 function createBaseStatus(): Status {
@@ -113,6 +140,28 @@ export const Status = {
     message.message = object.message ?? "";
     message.details = object.details?.map(e => Any.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: StatusSDKType): Status {
+    return {
+      code: isSet(object.code) ? object.code : undefined,
+      message: isSet(object.message) ? object.message : undefined,
+      details: Array.isArray(object?.details) ? object.details.map((e: any) => Any.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: Status): StatusSDKType {
+    const obj: any = {};
+    message.code !== undefined && (obj.code = message.code);
+    message.message !== undefined && (obj.message = message.message);
+
+    if (message.details) {
+      obj.details = message.details.map(e => e ? Any.toSDK(e) : undefined);
+    } else {
+      obj.details = [];
+    }
+
+    return obj;
   }
 
 };

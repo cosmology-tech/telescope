@@ -19,12 +19,22 @@ const defaultTelescopeOptionsForTesting = {
     prototypes: {
         parser: {
             keepCase: false // so we can test the camelCase
-        }
+        },
+        methods: {
+            encode: true,
+            decode: true,
+            fromJSON: true,
+            toJSON: true,
+            fromPartial: true,
+            toSDK: true,
+            fromSDK: true
+        },
+
     }
 };
 
 // deepmerge: If an element at the same key is present for both x and y, the value from y will appear in the result.
-const defaultTelescopeOptions = deepmerge(teleDefaults, defaultTelescopeOptionsForTesting);
+export const defaultTelescopeOptions = deepmerge(teleDefaults, defaultTelescopeOptionsForTesting);
 
 export const getTestProtoStore = (options?: TelescopeOptions) => {
     const store = new ProtoStore([__dirname + '/../../../__fixtures__/chain1'], options ? deepmerge(defaultTelescopeOptions, options) : defaultTelescopeOptions);

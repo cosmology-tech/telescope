@@ -1,11 +1,27 @@
-import { DecCoin } from "../../../cosmos/base/v1beta1/coin";
-import { BidID } from "./bid";
+import { DecCoin, DecCoinSDKType } from "../../../cosmos/base/v1beta1/coin";
+import { BidID, BidIDSDKType } from "./bid";
 import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, DeepPartial, Exact } from "@osmonauts/helpers";
 export const protobufPackage = "akash.market.v1beta2";
 
 /** State is an enum which refers to state of lease */
 export enum Lease_State {
+  /** invalid - Prefix should start with 0 in enum. So declaring dummy state */
+  invalid = 0,
+
+  /** active - LeaseActive denotes state for lease active */
+  active = 1,
+
+  /** insufficient_funds - LeaseInsufficientFunds denotes state for lease insufficient_funds */
+  insufficient_funds = 2,
+
+  /** closed - LeaseClosed denotes state for lease closed */
+  closed = 3,
+  UNRECOGNIZED = -1,
+}
+
+/** State is an enum which refers to state of lease */
+export enum Lease_StateSDKType {
   /** invalid - Prefix should start with 0 in enum. So declaring dummy state */
   invalid = 0,
 
@@ -71,6 +87,15 @@ export interface LeaseID {
   provider: string;
 }
 
+/** LeaseID stores bid details of lease */
+export interface LeaseIDSDKType {
+  owner: string;
+  dseq: Long;
+  gseq: number;
+  oseq: number;
+  provider: string;
+}
+
 /** Lease stores LeaseID, state of lease and price */
 export interface Lease {
   leaseId: LeaseID;
@@ -80,8 +105,27 @@ export interface Lease {
   closedOn: Long;
 }
 
+/** Lease stores LeaseID, state of lease and price */
+export interface LeaseSDKType {
+  lease_id: LeaseIDSDKType;
+  state: Lease_StateSDKType;
+  price: DecCoinSDKType;
+  created_at: Long;
+  closed_on: Long;
+}
+
 /** LeaseFilters defines flags for lease list filter */
 export interface LeaseFilters {
+  owner: string;
+  dseq: Long;
+  gseq: number;
+  oseq: number;
+  provider: string;
+  state: string;
+}
+
+/** LeaseFilters defines flags for lease list filter */
+export interface LeaseFiltersSDKType {
   owner: string;
   dseq: Long;
   gseq: number;
@@ -95,24 +139,48 @@ export interface MsgCreateLease {
   bidId: BidID;
 }
 
+/** MsgCreateLease is sent to create a lease */
+export interface MsgCreateLeaseSDKType {
+  bid_id: BidIDSDKType;
+}
+
 /** MsgCreateLeaseResponse is the response from creating a lease */
 export interface MsgCreateLeaseResponse {}
+
+/** MsgCreateLeaseResponse is the response from creating a lease */
+export interface MsgCreateLeaseResponseSDKType {}
 
 /** MsgWithdrawLease defines an SDK message for closing bid */
 export interface MsgWithdrawLease {
   bidId: LeaseID;
 }
 
+/** MsgWithdrawLease defines an SDK message for closing bid */
+export interface MsgWithdrawLeaseSDKType {
+  bid_id: LeaseIDSDKType;
+}
+
 /** MsgWithdrawLeaseResponse defines the Msg/WithdrawLease response type. */
 export interface MsgWithdrawLeaseResponse {}
+
+/** MsgWithdrawLeaseResponse defines the Msg/WithdrawLease response type. */
+export interface MsgWithdrawLeaseResponseSDKType {}
 
 /** MsgCloseLease defines an SDK message for closing order */
 export interface MsgCloseLease {
   leaseId: LeaseID;
 }
 
+/** MsgCloseLease defines an SDK message for closing order */
+export interface MsgCloseLeaseSDKType {
+  lease_id: LeaseIDSDKType;
+}
+
 /** MsgCloseLeaseResponse defines the Msg/CloseLease response type. */
 export interface MsgCloseLeaseResponse {}
+
+/** MsgCloseLeaseResponse defines the Msg/CloseLease response type. */
+export interface MsgCloseLeaseResponseSDKType {}
 
 function createBaseLeaseID(): LeaseID {
   return {
@@ -215,6 +283,26 @@ export const LeaseID = {
     message.oseq = object.oseq ?? 0;
     message.provider = object.provider ?? "";
     return message;
+  },
+
+  fromSDK(object: LeaseIDSDKType): LeaseID {
+    return {
+      owner: isSet(object.owner) ? object.owner : undefined,
+      dseq: isSet(object.dseq) ? object.dseq : undefined,
+      gseq: isSet(object.gseq) ? object.gseq : undefined,
+      oseq: isSet(object.oseq) ? object.oseq : undefined,
+      provider: isSet(object.provider) ? object.provider : undefined
+    };
+  },
+
+  toSDK(message: LeaseID): LeaseIDSDKType {
+    const obj: any = {};
+    message.owner !== undefined && (obj.owner = message.owner);
+    message.dseq !== undefined && (obj.dseq = message.dseq);
+    message.gseq !== undefined && (obj.gseq = message.gseq);
+    message.oseq !== undefined && (obj.oseq = message.oseq);
+    message.provider !== undefined && (obj.provider = message.provider);
+    return obj;
   }
 
 };
@@ -320,6 +408,26 @@ export const Lease = {
     message.createdAt = object.createdAt !== undefined && object.createdAt !== null ? Long.fromValue(object.createdAt) : Long.ZERO;
     message.closedOn = object.closedOn !== undefined && object.closedOn !== null ? Long.fromValue(object.closedOn) : Long.ZERO;
     return message;
+  },
+
+  fromSDK(object: LeaseSDKType): Lease {
+    return {
+      leaseId: isSet(object.lease_id) ? LeaseID.fromSDK(object.lease_id) : undefined,
+      state: isSet(object.state) ? lease_StateFromJSON(object.state) : 0,
+      price: isSet(object.price) ? DecCoin.fromSDK(object.price) : undefined,
+      createdAt: isSet(object.created_at) ? object.created_at : undefined,
+      closedOn: isSet(object.closed_on) ? object.closed_on : undefined
+    };
+  },
+
+  toSDK(message: Lease): LeaseSDKType {
+    const obj: any = {};
+    message.leaseId !== undefined && (obj.lease_id = message.leaseId ? LeaseID.toSDK(message.leaseId) : undefined);
+    message.state !== undefined && (obj.state = lease_StateToJSON(message.state));
+    message.price !== undefined && (obj.price = message.price ? DecCoin.toSDK(message.price) : undefined);
+    message.createdAt !== undefined && (obj.created_at = message.createdAt);
+    message.closedOn !== undefined && (obj.closed_on = message.closedOn);
+    return obj;
   }
 
 };
@@ -437,6 +545,28 @@ export const LeaseFilters = {
     message.provider = object.provider ?? "";
     message.state = object.state ?? "";
     return message;
+  },
+
+  fromSDK(object: LeaseFiltersSDKType): LeaseFilters {
+    return {
+      owner: isSet(object.owner) ? object.owner : undefined,
+      dseq: isSet(object.dseq) ? object.dseq : undefined,
+      gseq: isSet(object.gseq) ? object.gseq : undefined,
+      oseq: isSet(object.oseq) ? object.oseq : undefined,
+      provider: isSet(object.provider) ? object.provider : undefined,
+      state: isSet(object.state) ? object.state : undefined
+    };
+  },
+
+  toSDK(message: LeaseFilters): LeaseFiltersSDKType {
+    const obj: any = {};
+    message.owner !== undefined && (obj.owner = message.owner);
+    message.dseq !== undefined && (obj.dseq = message.dseq);
+    message.gseq !== undefined && (obj.gseq = message.gseq);
+    message.oseq !== undefined && (obj.oseq = message.oseq);
+    message.provider !== undefined && (obj.provider = message.provider);
+    message.state !== undefined && (obj.state = message.state);
+    return obj;
   }
 
 };
@@ -494,6 +624,18 @@ export const MsgCreateLease = {
     const message = createBaseMsgCreateLease();
     message.bidId = object.bidId !== undefined && object.bidId !== null ? BidID.fromPartial(object.bidId) : undefined;
     return message;
+  },
+
+  fromSDK(object: MsgCreateLeaseSDKType): MsgCreateLease {
+    return {
+      bidId: isSet(object.bid_id) ? BidID.fromSDK(object.bid_id) : undefined
+    };
+  },
+
+  toSDK(message: MsgCreateLease): MsgCreateLeaseSDKType {
+    const obj: any = {};
+    message.bidId !== undefined && (obj.bid_id = message.bidId ? BidID.toSDK(message.bidId) : undefined);
+    return obj;
   }
 
 };
@@ -507,7 +649,7 @@ export const MsgCreateLeaseResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateLeaseResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateLeaseResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateLeaseResponse();
@@ -537,6 +679,15 @@ export const MsgCreateLeaseResponse = {
   fromPartial<I extends Exact<DeepPartial<MsgCreateLeaseResponse>, I>>(_: I): MsgCreateLeaseResponse {
     const message = createBaseMsgCreateLeaseResponse();
     return message;
+  },
+
+  fromSDK(_: MsgCreateLeaseResponseSDKType): MsgCreateLeaseResponse {
+    return {};
+  },
+
+  toSDK(_: MsgCreateLeaseResponse): MsgCreateLeaseResponseSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -594,6 +745,18 @@ export const MsgWithdrawLease = {
     const message = createBaseMsgWithdrawLease();
     message.bidId = object.bidId !== undefined && object.bidId !== null ? LeaseID.fromPartial(object.bidId) : undefined;
     return message;
+  },
+
+  fromSDK(object: MsgWithdrawLeaseSDKType): MsgWithdrawLease {
+    return {
+      bidId: isSet(object.bid_id) ? LeaseID.fromSDK(object.bid_id) : undefined
+    };
+  },
+
+  toSDK(message: MsgWithdrawLease): MsgWithdrawLeaseSDKType {
+    const obj: any = {};
+    message.bidId !== undefined && (obj.bid_id = message.bidId ? LeaseID.toSDK(message.bidId) : undefined);
+    return obj;
   }
 
 };
@@ -607,7 +770,7 @@ export const MsgWithdrawLeaseResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgWithdrawLeaseResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgWithdrawLeaseResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgWithdrawLeaseResponse();
@@ -637,6 +800,15 @@ export const MsgWithdrawLeaseResponse = {
   fromPartial<I extends Exact<DeepPartial<MsgWithdrawLeaseResponse>, I>>(_: I): MsgWithdrawLeaseResponse {
     const message = createBaseMsgWithdrawLeaseResponse();
     return message;
+  },
+
+  fromSDK(_: MsgWithdrawLeaseResponseSDKType): MsgWithdrawLeaseResponse {
+    return {};
+  },
+
+  toSDK(_: MsgWithdrawLeaseResponse): MsgWithdrawLeaseResponseSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -694,6 +866,18 @@ export const MsgCloseLease = {
     const message = createBaseMsgCloseLease();
     message.leaseId = object.leaseId !== undefined && object.leaseId !== null ? LeaseID.fromPartial(object.leaseId) : undefined;
     return message;
+  },
+
+  fromSDK(object: MsgCloseLeaseSDKType): MsgCloseLease {
+    return {
+      leaseId: isSet(object.lease_id) ? LeaseID.fromSDK(object.lease_id) : undefined
+    };
+  },
+
+  toSDK(message: MsgCloseLease): MsgCloseLeaseSDKType {
+    const obj: any = {};
+    message.leaseId !== undefined && (obj.lease_id = message.leaseId ? LeaseID.toSDK(message.leaseId) : undefined);
+    return obj;
   }
 
 };
@@ -707,7 +891,7 @@ export const MsgCloseLeaseResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCloseLeaseResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCloseLeaseResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCloseLeaseResponse();
@@ -737,6 +921,15 @@ export const MsgCloseLeaseResponse = {
   fromPartial<I extends Exact<DeepPartial<MsgCloseLeaseResponse>, I>>(_: I): MsgCloseLeaseResponse {
     const message = createBaseMsgCloseLeaseResponse();
     return message;
+  },
+
+  fromSDK(_: MsgCloseLeaseResponseSDKType): MsgCloseLeaseResponse {
+    return {};
+  },
+
+  toSDK(_: MsgCloseLeaseResponse): MsgCloseLeaseResponseSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };

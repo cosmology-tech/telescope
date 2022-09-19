@@ -76,6 +76,20 @@ exports[`cosmos/authz/v1beta1/authz date 2`] = `
     message.authorization = object.authorization !== undefined && object.authorization !== null ? Any.fromPartial(object.authorization) : undefined;
     message.expiration = object.expiration ?? undefined;
     return message;
+  },
+
+  fromSDK(object: GrantSDKType): Grant {
+    return {
+      authorization: isSet(object.authorization) ? Any.fromSDK(object.authorization) : undefined,
+      expiration: isSet(object.expiration) ? Timestamp.fromSDK(object.expiration) : undefined
+    };
+  },
+
+  toSDK(message: Grant): GrantSDKType {
+    const obj: any = {};
+    message.authorization !== undefined && (obj.authorization = message.authorization ? Any.toSDK(message.authorization) : undefined);
+    message.expiration !== undefined && (obj.expiration = message.expiration ? Timestamp.toSDK(message.expiration) : undefined);
+    return obj;
   }
 
 };"
@@ -205,6 +219,20 @@ exports[`cosmos/authz/v1beta1/authz timestamp 2`] = `
     message.authorization = object.authorization !== undefined && object.authorization !== null ? Any.fromPartial(object.authorization) : undefined;
     message.expiration = object.expiration !== undefined && object.expiration !== null ? Timestamp.fromPartial(object.expiration) : undefined;
     return message;
+  },
+
+  fromSDK(object: GrantSDKType): Grant {
+    return {
+      authorization: isSet(object.authorization) ? Any.fromSDK(object.authorization) : undefined,
+      expiration: isSet(object.expiration) ? Timestamp.fromSDK(object.expiration) : undefined
+    };
+  },
+
+  toSDK(message: Grant): GrantSDKType {
+    const obj: any = {};
+    message.authorization !== undefined && (obj.authorization = message.authorization ? Any.toSDK(message.authorization) : undefined);
+    message.expiration !== undefined && (obj.expiration = message.expiration ? Timestamp.toSDK(message.expiration) : undefined);
+    return obj;
   }
 
 };"

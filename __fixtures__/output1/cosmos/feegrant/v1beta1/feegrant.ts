@@ -1,7 +1,7 @@
-import { Coin } from "../../base/v1beta1/coin";
-import { Timestamp } from "../../../google/protobuf/timestamp";
-import { Duration } from "../../../google/protobuf/duration";
-import { Any } from "../../../google/protobuf/any";
+import { Coin, CoinSDKType } from "../../base/v1beta1/coin";
+import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
+import { Duration, DurationSDKType } from "../../../google/protobuf/duration";
+import { Any, AnySDKType } from "../../../google/protobuf/any";
 import * as _m0 from "protobufjs/minimal";
 import { toTimestamp, fromTimestamp, isSet, fromJsonTimestamp, DeepPartial } from "@osmonauts/helpers";
 export const protobufPackage = "cosmos.feegrant.v1beta1";
@@ -17,6 +17,22 @@ export interface BasicAllowance {
    * empty, there is no spend limit and any amount of coins can be spent.
    */
   spendLimit: Coin[];
+
+  /** expiration specifies an optional time when this allowance expires */
+  expiration: Date;
+}
+
+/**
+ * BasicAllowance implements Allowance with a one-time grant of tokens
+ * that optionally expires. The grantee can use up to SpendLimit to cover fees.
+ */
+export interface BasicAllowanceSDKType {
+  /**
+   * spend_limit specifies the maximum amount of tokens that can be spent
+   * by this allowance and will be updated as tokens are spent. If it is
+   * empty, there is no spend limit and any amount of coins can be spent.
+   */
+  spend_limit: CoinSDKType[];
 
   /** expiration specifies an optional time when this allowance expires */
   expiration: Date;
@@ -53,6 +69,37 @@ export interface PeriodicAllowance {
   periodReset: Date;
 }
 
+/**
+ * PeriodicAllowance extends Allowance to allow for both a maximum cap,
+ * as well as a limit per time period.
+ */
+export interface PeriodicAllowanceSDKType {
+  /** basic specifies a struct of `BasicAllowance` */
+  basic: BasicAllowanceSDKType;
+
+  /**
+   * period specifies the time duration in which period_spend_limit coins can
+   * be spent before that allowance is reset
+   */
+  period: DurationSDKType;
+
+  /**
+   * period_spend_limit specifies the maximum number of coins that can be spent
+   * in the period
+   */
+  period_spend_limit: CoinSDKType[];
+
+  /** period_can_spend is the number of coins left to be spent before the period_reset time */
+  period_can_spend: CoinSDKType[];
+
+  /**
+   * period_reset is the time at which this period resets and a new one begins,
+   * it is calculated from the start time of the first transaction after the
+   * last period ended
+   */
+  period_reset: Date;
+}
+
 /** AllowedMsgAllowance creates allowance only for specified message types. */
 export interface AllowedMsgAllowance {
   /** allowance can be any of basic and periodic fee allowance. */
@@ -60,6 +107,15 @@ export interface AllowedMsgAllowance {
 
   /** allowed_messages are the messages for which the grantee has the access. */
   allowedMessages: string[];
+}
+
+/** AllowedMsgAllowance creates allowance only for specified message types. */
+export interface AllowedMsgAllowanceSDKType {
+  /** allowance can be any of basic and periodic fee allowance. */
+  allowance: AnySDKType;
+
+  /** allowed_messages are the messages for which the grantee has the access. */
+  allowed_messages: string[];
 }
 
 /** Grant is stored in the KVStore to record a grant with full context */
@@ -72,6 +128,18 @@ export interface Grant {
 
   /** allowance can be any of basic, periodic, allowed fee allowance. */
   allowance: Any;
+}
+
+/** Grant is stored in the KVStore to record a grant with full context */
+export interface GrantSDKType {
+  /** granter is the address of the user granting an allowance of their funds. */
+  granter: string;
+
+  /** grantee is the address of the user being granted an allowance of another user's funds. */
+  grantee: string;
+
+  /** allowance can be any of basic, periodic, allowed fee allowance. */
+  allowance: AnySDKType;
 }
 
 function createBaseBasicAllowance(): BasicAllowance {
@@ -145,6 +213,26 @@ export const BasicAllowance = {
     message.spendLimit = object.spendLimit?.map(e => Coin.fromPartial(e)) || [];
     message.expiration = object.expiration ?? undefined;
     return message;
+  },
+
+  fromSDK(object: BasicAllowanceSDKType): BasicAllowance {
+    return {
+      spendLimit: Array.isArray(object?.spend_limit) ? object.spend_limit.map((e: any) => Coin.fromSDK(e)) : [],
+      expiration: isSet(object.expiration) ? Timestamp.fromSDK(object.expiration) : undefined
+    };
+  },
+
+  toSDK(message: BasicAllowance): BasicAllowanceSDKType {
+    const obj: any = {};
+
+    if (message.spendLimit) {
+      obj.spend_limit = message.spendLimit.map(e => e ? Coin.toSDK(e) : undefined);
+    } else {
+      obj.spend_limit = [];
+    }
+
+    message.expiration !== undefined && (obj.expiration = message.expiration ? Timestamp.toSDK(message.expiration) : undefined);
+    return obj;
   }
 
 };
@@ -261,6 +349,37 @@ export const PeriodicAllowance = {
     message.periodCanSpend = object.periodCanSpend?.map(e => Coin.fromPartial(e)) || [];
     message.periodReset = object.periodReset ?? undefined;
     return message;
+  },
+
+  fromSDK(object: PeriodicAllowanceSDKType): PeriodicAllowance {
+    return {
+      basic: isSet(object.basic) ? BasicAllowance.fromSDK(object.basic) : undefined,
+      period: isSet(object.period) ? Duration.fromSDK(object.period) : undefined,
+      periodSpendLimit: Array.isArray(object?.period_spend_limit) ? object.period_spend_limit.map((e: any) => Coin.fromSDK(e)) : [],
+      periodCanSpend: Array.isArray(object?.period_can_spend) ? object.period_can_spend.map((e: any) => Coin.fromSDK(e)) : [],
+      periodReset: isSet(object.period_reset) ? Timestamp.fromSDK(object.period_reset) : undefined
+    };
+  },
+
+  toSDK(message: PeriodicAllowance): PeriodicAllowanceSDKType {
+    const obj: any = {};
+    message.basic !== undefined && (obj.basic = message.basic ? BasicAllowance.toSDK(message.basic) : undefined);
+    message.period !== undefined && (obj.period = message.period ? Duration.toSDK(message.period) : undefined);
+
+    if (message.periodSpendLimit) {
+      obj.period_spend_limit = message.periodSpendLimit.map(e => e ? Coin.toSDK(e) : undefined);
+    } else {
+      obj.period_spend_limit = [];
+    }
+
+    if (message.periodCanSpend) {
+      obj.period_can_spend = message.periodCanSpend.map(e => e ? Coin.toSDK(e) : undefined);
+    } else {
+      obj.period_can_spend = [];
+    }
+
+    message.periodReset !== undefined && (obj.period_reset = message.periodReset ? Timestamp.toSDK(message.periodReset) : undefined);
+    return obj;
   }
 
 };
@@ -336,6 +455,26 @@ export const AllowedMsgAllowance = {
     message.allowance = object.allowance !== undefined && object.allowance !== null ? Any.fromPartial(object.allowance) : undefined;
     message.allowedMessages = object.allowedMessages?.map(e => e) || [];
     return message;
+  },
+
+  fromSDK(object: AllowedMsgAllowanceSDKType): AllowedMsgAllowance {
+    return {
+      allowance: isSet(object.allowance) ? Any.fromSDK(object.allowance) : undefined,
+      allowedMessages: Array.isArray(object?.allowed_messages) ? object.allowed_messages.map((e: any) => e) : []
+    };
+  },
+
+  toSDK(message: AllowedMsgAllowance): AllowedMsgAllowanceSDKType {
+    const obj: any = {};
+    message.allowance !== undefined && (obj.allowance = message.allowance ? Any.toSDK(message.allowance) : undefined);
+
+    if (message.allowedMessages) {
+      obj.allowed_messages = message.allowedMessages.map(e => e);
+    } else {
+      obj.allowed_messages = [];
+    }
+
+    return obj;
   }
 
 };
@@ -417,6 +556,22 @@ export const Grant = {
     message.grantee = object.grantee ?? "";
     message.allowance = object.allowance !== undefined && object.allowance !== null ? Any.fromPartial(object.allowance) : undefined;
     return message;
+  },
+
+  fromSDK(object: GrantSDKType): Grant {
+    return {
+      granter: isSet(object.granter) ? object.granter : undefined,
+      grantee: isSet(object.grantee) ? object.grantee : undefined,
+      allowance: isSet(object.allowance) ? Any.fromSDK(object.allowance) : undefined
+    };
+  },
+
+  toSDK(message: Grant): GrantSDKType {
+    const obj: any = {};
+    message.granter !== undefined && (obj.granter = message.granter);
+    message.grantee !== undefined && (obj.grantee = message.grantee);
+    message.allowance !== undefined && (obj.allowance = message.allowance ? Any.toSDK(message.allowance) : undefined);
+    return obj;
   }
 
 };

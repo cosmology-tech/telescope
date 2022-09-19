@@ -1,4 +1,4 @@
-import { IdentifiedChannel, PacketState } from "./channel";
+import { IdentifiedChannel, IdentifiedChannelSDKType, PacketState, PacketStateSDKType } from "./channel";
 import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, DeepPartial } from "@osmonauts/helpers";
 export const protobufPackage = "ibc.core.channel.v1";
@@ -17,6 +17,20 @@ export interface GenesisState {
   nextChannelSequence: Long;
 }
 
+/** GenesisState defines the ibc channel submodule's genesis state. */
+export interface GenesisStateSDKType {
+  channels: IdentifiedChannelSDKType[];
+  acknowledgements: PacketStateSDKType[];
+  commitments: PacketStateSDKType[];
+  receipts: PacketStateSDKType[];
+  send_sequences: PacketSequenceSDKType[];
+  recv_sequences: PacketSequenceSDKType[];
+  ack_sequences: PacketSequenceSDKType[];
+
+  /** the sequence for the next generated channel identifier */
+  next_channel_sequence: Long;
+}
+
 /**
  * PacketSequence defines the genesis type necessary to retrieve and store
  * next send and receive sequences.
@@ -24,6 +38,16 @@ export interface GenesisState {
 export interface PacketSequence {
   portId: string;
   channelId: string;
+  sequence: Long;
+}
+
+/**
+ * PacketSequence defines the genesis type necessary to retrieve and store
+ * next send and receive sequences.
+ */
+export interface PacketSequenceSDKType {
+  port_id: string;
+  channel_id: string;
   sequence: Long;
 }
 
@@ -200,6 +224,68 @@ export const GenesisState = {
     message.ackSequences = object.ackSequences?.map(e => PacketSequence.fromPartial(e)) || [];
     message.nextChannelSequence = object.nextChannelSequence !== undefined && object.nextChannelSequence !== null ? Long.fromValue(object.nextChannelSequence) : Long.UZERO;
     return message;
+  },
+
+  fromSDK(object: GenesisStateSDKType): GenesisState {
+    return {
+      channels: Array.isArray(object?.channels) ? object.channels.map((e: any) => IdentifiedChannel.fromSDK(e)) : [],
+      acknowledgements: Array.isArray(object?.acknowledgements) ? object.acknowledgements.map((e: any) => PacketState.fromSDK(e)) : [],
+      commitments: Array.isArray(object?.commitments) ? object.commitments.map((e: any) => PacketState.fromSDK(e)) : [],
+      receipts: Array.isArray(object?.receipts) ? object.receipts.map((e: any) => PacketState.fromSDK(e)) : [],
+      sendSequences: Array.isArray(object?.send_sequences) ? object.send_sequences.map((e: any) => PacketSequence.fromSDK(e)) : [],
+      recvSequences: Array.isArray(object?.recv_sequences) ? object.recv_sequences.map((e: any) => PacketSequence.fromSDK(e)) : [],
+      ackSequences: Array.isArray(object?.ack_sequences) ? object.ack_sequences.map((e: any) => PacketSequence.fromSDK(e)) : [],
+      nextChannelSequence: isSet(object.next_channel_sequence) ? object.next_channel_sequence : undefined
+    };
+  },
+
+  toSDK(message: GenesisState): GenesisStateSDKType {
+    const obj: any = {};
+
+    if (message.channels) {
+      obj.channels = message.channels.map(e => e ? IdentifiedChannel.toSDK(e) : undefined);
+    } else {
+      obj.channels = [];
+    }
+
+    if (message.acknowledgements) {
+      obj.acknowledgements = message.acknowledgements.map(e => e ? PacketState.toSDK(e) : undefined);
+    } else {
+      obj.acknowledgements = [];
+    }
+
+    if (message.commitments) {
+      obj.commitments = message.commitments.map(e => e ? PacketState.toSDK(e) : undefined);
+    } else {
+      obj.commitments = [];
+    }
+
+    if (message.receipts) {
+      obj.receipts = message.receipts.map(e => e ? PacketState.toSDK(e) : undefined);
+    } else {
+      obj.receipts = [];
+    }
+
+    if (message.sendSequences) {
+      obj.send_sequences = message.sendSequences.map(e => e ? PacketSequence.toSDK(e) : undefined);
+    } else {
+      obj.send_sequences = [];
+    }
+
+    if (message.recvSequences) {
+      obj.recv_sequences = message.recvSequences.map(e => e ? PacketSequence.toSDK(e) : undefined);
+    } else {
+      obj.recv_sequences = [];
+    }
+
+    if (message.ackSequences) {
+      obj.ack_sequences = message.ackSequences.map(e => e ? PacketSequence.toSDK(e) : undefined);
+    } else {
+      obj.ack_sequences = [];
+    }
+
+    message.nextChannelSequence !== undefined && (obj.next_channel_sequence = message.nextChannelSequence);
+    return obj;
   }
 
 };
@@ -281,6 +367,22 @@ export const PacketSequence = {
     message.channelId = object.channelId ?? "";
     message.sequence = object.sequence !== undefined && object.sequence !== null ? Long.fromValue(object.sequence) : Long.UZERO;
     return message;
+  },
+
+  fromSDK(object: PacketSequenceSDKType): PacketSequence {
+    return {
+      portId: isSet(object.port_id) ? object.port_id : undefined,
+      channelId: isSet(object.channel_id) ? object.channel_id : undefined,
+      sequence: isSet(object.sequence) ? object.sequence : undefined
+    };
+  },
+
+  toSDK(message: PacketSequence): PacketSequenceSDKType {
+    const obj: any = {};
+    message.portId !== undefined && (obj.port_id = message.portId);
+    message.channelId !== undefined && (obj.channel_id = message.channelId);
+    message.sequence !== undefined && (obj.sequence = message.sequence);
+    return obj;
   }
 
 };

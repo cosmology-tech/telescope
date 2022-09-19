@@ -1,5 +1,5 @@
-import { PageRequest, PageResponse } from "../../base/query/v1beta1/pagination";
-import { GroupInfo, GroupPolicyInfo, GroupMember, Proposal, Vote, TallyResult } from "./types";
+import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../base/query/v1beta1/pagination";
+import { GroupInfo, GroupInfoSDKType, GroupPolicyInfo, GroupPolicyInfoSDKType, GroupMember, GroupMemberSDKType, Proposal, ProposalSDKType, Vote, VoteSDKType, TallyResult, TallyResultSDKType } from "./types";
 import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, DeepPartial } from "@osmonauts/helpers";
 export const protobufPackage = "cosmos.group.v1";
@@ -10,10 +10,22 @@ export interface QueryGroupInfoRequest {
   groupId: Long;
 }
 
+/** QueryGroupInfoRequest is the Query/GroupInfo request type. */
+export interface QueryGroupInfoRequestSDKType {
+  /** group_id is the unique ID of the group. */
+  group_id: Long;
+}
+
 /** QueryGroupInfoResponse is the Query/GroupInfo response type. */
 export interface QueryGroupInfoResponse {
   /** info is the GroupInfo for the group. */
   info: GroupInfo;
+}
+
+/** QueryGroupInfoResponse is the Query/GroupInfo response type. */
+export interface QueryGroupInfoResponseSDKType {
+  /** info is the GroupInfo for the group. */
+  info: GroupInfoSDKType;
 }
 
 /** QueryGroupPolicyInfoRequest is the Query/GroupPolicyInfo request type. */
@@ -22,10 +34,22 @@ export interface QueryGroupPolicyInfoRequest {
   address: string;
 }
 
+/** QueryGroupPolicyInfoRequest is the Query/GroupPolicyInfo request type. */
+export interface QueryGroupPolicyInfoRequestSDKType {
+  /** address is the account address of the group policy. */
+  address: string;
+}
+
 /** QueryGroupPolicyInfoResponse is the Query/GroupPolicyInfo response type. */
 export interface QueryGroupPolicyInfoResponse {
   /** info is the GroupPolicyInfo for the group policy. */
   info: GroupPolicyInfo;
+}
+
+/** QueryGroupPolicyInfoResponse is the Query/GroupPolicyInfo response type. */
+export interface QueryGroupPolicyInfoResponseSDKType {
+  /** info is the GroupPolicyInfo for the group policy. */
+  info: GroupPolicyInfoSDKType;
 }
 
 /** QueryGroupMembersRequest is the Query/GroupMembers request type. */
@@ -37,6 +61,15 @@ export interface QueryGroupMembersRequest {
   pagination?: PageRequest;
 }
 
+/** QueryGroupMembersRequest is the Query/GroupMembers request type. */
+export interface QueryGroupMembersRequestSDKType {
+  /** group_id is the unique ID of the group. */
+  group_id: Long;
+
+  /** pagination defines an optional pagination for the request. */
+  pagination?: PageRequestSDKType;
+}
+
 /** QueryGroupMembersResponse is the Query/GroupMembersResponse response type. */
 export interface QueryGroupMembersResponse {
   /** members are the members of the group with given group_id. */
@@ -44,6 +77,15 @@ export interface QueryGroupMembersResponse {
 
   /** pagination defines the pagination in the response. */
   pagination?: PageResponse;
+}
+
+/** QueryGroupMembersResponse is the Query/GroupMembersResponse response type. */
+export interface QueryGroupMembersResponseSDKType {
+  /** members are the members of the group with given group_id. */
+  members: GroupMemberSDKType[];
+
+  /** pagination defines the pagination in the response. */
+  pagination?: PageResponseSDKType;
 }
 
 /** QueryGroupsByAdminRequest is the Query/GroupsByAdmin request type. */
@@ -55,6 +97,15 @@ export interface QueryGroupsByAdminRequest {
   pagination?: PageRequest;
 }
 
+/** QueryGroupsByAdminRequest is the Query/GroupsByAdmin request type. */
+export interface QueryGroupsByAdminRequestSDKType {
+  /** admin is the account address of a group's admin. */
+  admin: string;
+
+  /** pagination defines an optional pagination for the request. */
+  pagination?: PageRequestSDKType;
+}
+
 /** QueryGroupsByAdminResponse is the Query/GroupsByAdminResponse response type. */
 export interface QueryGroupsByAdminResponse {
   /** groups are the groups info with the provided admin. */
@@ -62,6 +113,15 @@ export interface QueryGroupsByAdminResponse {
 
   /** pagination defines the pagination in the response. */
   pagination?: PageResponse;
+}
+
+/** QueryGroupsByAdminResponse is the Query/GroupsByAdminResponse response type. */
+export interface QueryGroupsByAdminResponseSDKType {
+  /** groups are the groups info with the provided admin. */
+  groups: GroupInfoSDKType[];
+
+  /** pagination defines the pagination in the response. */
+  pagination?: PageResponseSDKType;
 }
 
 /** QueryGroupPoliciesByGroupRequest is the Query/GroupPoliciesByGroup request type. */
@@ -73,6 +133,15 @@ export interface QueryGroupPoliciesByGroupRequest {
   pagination?: PageRequest;
 }
 
+/** QueryGroupPoliciesByGroupRequest is the Query/GroupPoliciesByGroup request type. */
+export interface QueryGroupPoliciesByGroupRequestSDKType {
+  /** group_id is the unique ID of the group policy's group. */
+  group_id: Long;
+
+  /** pagination defines an optional pagination for the request. */
+  pagination?: PageRequestSDKType;
+}
+
 /** QueryGroupPoliciesByGroupResponse is the Query/GroupPoliciesByGroup response type. */
 export interface QueryGroupPoliciesByGroupResponse {
   /** group_policies are the group policies info associated with the provided group. */
@@ -80,6 +149,15 @@ export interface QueryGroupPoliciesByGroupResponse {
 
   /** pagination defines the pagination in the response. */
   pagination?: PageResponse;
+}
+
+/** QueryGroupPoliciesByGroupResponse is the Query/GroupPoliciesByGroup response type. */
+export interface QueryGroupPoliciesByGroupResponseSDKType {
+  /** group_policies are the group policies info associated with the provided group. */
+  group_policies: GroupPolicyInfoSDKType[];
+
+  /** pagination defines the pagination in the response. */
+  pagination?: PageResponseSDKType;
 }
 
 /** QueryGroupPoliciesByAdminRequest is the Query/GroupPoliciesByAdmin request type. */
@@ -91,6 +169,15 @@ export interface QueryGroupPoliciesByAdminRequest {
   pagination?: PageRequest;
 }
 
+/** QueryGroupPoliciesByAdminRequest is the Query/GroupPoliciesByAdmin request type. */
+export interface QueryGroupPoliciesByAdminRequestSDKType {
+  /** admin is the admin address of the group policy. */
+  admin: string;
+
+  /** pagination defines an optional pagination for the request. */
+  pagination?: PageRequestSDKType;
+}
+
 /** QueryGroupPoliciesByAdminResponse is the Query/GroupPoliciesByAdmin response type. */
 export interface QueryGroupPoliciesByAdminResponse {
   /** group_policies are the group policies info with provided admin. */
@@ -100,16 +187,37 @@ export interface QueryGroupPoliciesByAdminResponse {
   pagination?: PageResponse;
 }
 
+/** QueryGroupPoliciesByAdminResponse is the Query/GroupPoliciesByAdmin response type. */
+export interface QueryGroupPoliciesByAdminResponseSDKType {
+  /** group_policies are the group policies info with provided admin. */
+  group_policies: GroupPolicyInfoSDKType[];
+
+  /** pagination defines the pagination in the response. */
+  pagination?: PageResponseSDKType;
+}
+
 /** QueryProposalRequest is the Query/Proposal request type. */
 export interface QueryProposalRequest {
   /** proposal_id is the unique ID of a proposal. */
   proposalId: Long;
 }
 
+/** QueryProposalRequest is the Query/Proposal request type. */
+export interface QueryProposalRequestSDKType {
+  /** proposal_id is the unique ID of a proposal. */
+  proposal_id: Long;
+}
+
 /** QueryProposalResponse is the Query/Proposal response type. */
 export interface QueryProposalResponse {
   /** proposal is the proposal info. */
   proposal: Proposal;
+}
+
+/** QueryProposalResponse is the Query/Proposal response type. */
+export interface QueryProposalResponseSDKType {
+  /** proposal is the proposal info. */
+  proposal: ProposalSDKType;
 }
 
 /** QueryProposalsByGroupPolicyRequest is the Query/ProposalByGroupPolicy request type. */
@@ -121,6 +229,15 @@ export interface QueryProposalsByGroupPolicyRequest {
   pagination?: PageRequest;
 }
 
+/** QueryProposalsByGroupPolicyRequest is the Query/ProposalByGroupPolicy request type. */
+export interface QueryProposalsByGroupPolicyRequestSDKType {
+  /** address is the account address of the group policy related to proposals. */
+  address: string;
+
+  /** pagination defines an optional pagination for the request. */
+  pagination?: PageRequestSDKType;
+}
+
 /** QueryProposalsByGroupPolicyResponse is the Query/ProposalByGroupPolicy response type. */
 export interface QueryProposalsByGroupPolicyResponse {
   /** proposals are the proposals with given group policy. */
@@ -128,6 +245,15 @@ export interface QueryProposalsByGroupPolicyResponse {
 
   /** pagination defines the pagination in the response. */
   pagination?: PageResponse;
+}
+
+/** QueryProposalsByGroupPolicyResponse is the Query/ProposalByGroupPolicy response type. */
+export interface QueryProposalsByGroupPolicyResponseSDKType {
+  /** proposals are the proposals with given group policy. */
+  proposals: ProposalSDKType[];
+
+  /** pagination defines the pagination in the response. */
+  pagination?: PageResponseSDKType;
 }
 
 /** QueryVoteByProposalVoterRequest is the Query/VoteByProposalVoter request type. */
@@ -139,10 +265,25 @@ export interface QueryVoteByProposalVoterRequest {
   voter: string;
 }
 
+/** QueryVoteByProposalVoterRequest is the Query/VoteByProposalVoter request type. */
+export interface QueryVoteByProposalVoterRequestSDKType {
+  /** proposal_id is the unique ID of a proposal. */
+  proposal_id: Long;
+
+  /** voter is a proposal voter account address. */
+  voter: string;
+}
+
 /** QueryVoteByProposalVoterResponse is the Query/VoteByProposalVoter response type. */
 export interface QueryVoteByProposalVoterResponse {
   /** vote is the vote with given proposal_id and voter. */
   vote: Vote;
+}
+
+/** QueryVoteByProposalVoterResponse is the Query/VoteByProposalVoter response type. */
+export interface QueryVoteByProposalVoterResponseSDKType {
+  /** vote is the vote with given proposal_id and voter. */
+  vote: VoteSDKType;
 }
 
 /** QueryVotesByProposalRequest is the Query/VotesByProposal request type. */
@@ -154,6 +295,15 @@ export interface QueryVotesByProposalRequest {
   pagination?: PageRequest;
 }
 
+/** QueryVotesByProposalRequest is the Query/VotesByProposal request type. */
+export interface QueryVotesByProposalRequestSDKType {
+  /** proposal_id is the unique ID of a proposal. */
+  proposal_id: Long;
+
+  /** pagination defines an optional pagination for the request. */
+  pagination?: PageRequestSDKType;
+}
+
 /** QueryVotesByProposalResponse is the Query/VotesByProposal response type. */
 export interface QueryVotesByProposalResponse {
   /** votes are the list of votes for given proposal_id. */
@@ -161,6 +311,15 @@ export interface QueryVotesByProposalResponse {
 
   /** pagination defines the pagination in the response. */
   pagination?: PageResponse;
+}
+
+/** QueryVotesByProposalResponse is the Query/VotesByProposal response type. */
+export interface QueryVotesByProposalResponseSDKType {
+  /** votes are the list of votes for given proposal_id. */
+  votes: VoteSDKType[];
+
+  /** pagination defines the pagination in the response. */
+  pagination?: PageResponseSDKType;
 }
 
 /** QueryVotesByVoterRequest is the Query/VotesByVoter request type. */
@@ -172,6 +331,15 @@ export interface QueryVotesByVoterRequest {
   pagination?: PageRequest;
 }
 
+/** QueryVotesByVoterRequest is the Query/VotesByVoter request type. */
+export interface QueryVotesByVoterRequestSDKType {
+  /** voter is a proposal voter account address. */
+  voter: string;
+
+  /** pagination defines an optional pagination for the request. */
+  pagination?: PageRequestSDKType;
+}
+
 /** QueryVotesByVoterResponse is the Query/VotesByVoter response type. */
 export interface QueryVotesByVoterResponse {
   /** votes are the list of votes by given voter. */
@@ -179,6 +347,15 @@ export interface QueryVotesByVoterResponse {
 
   /** pagination defines the pagination in the response. */
   pagination?: PageResponse;
+}
+
+/** QueryVotesByVoterResponse is the Query/VotesByVoter response type. */
+export interface QueryVotesByVoterResponseSDKType {
+  /** votes are the list of votes by given voter. */
+  votes: VoteSDKType[];
+
+  /** pagination defines the pagination in the response. */
+  pagination?: PageResponseSDKType;
 }
 
 /** QueryGroupsByMemberRequest is the Query/GroupsByMember request type. */
@@ -190,6 +367,15 @@ export interface QueryGroupsByMemberRequest {
   pagination?: PageRequest;
 }
 
+/** QueryGroupsByMemberRequest is the Query/GroupsByMember request type. */
+export interface QueryGroupsByMemberRequestSDKType {
+  /** address is the group member address. */
+  address: string;
+
+  /** pagination defines an optional pagination for the request. */
+  pagination?: PageRequestSDKType;
+}
+
 /** QueryGroupsByMemberResponse is the Query/GroupsByMember response type. */
 export interface QueryGroupsByMemberResponse {
   /** groups are the groups info with the provided group member. */
@@ -199,16 +385,37 @@ export interface QueryGroupsByMemberResponse {
   pagination?: PageResponse;
 }
 
+/** QueryGroupsByMemberResponse is the Query/GroupsByMember response type. */
+export interface QueryGroupsByMemberResponseSDKType {
+  /** groups are the groups info with the provided group member. */
+  groups: GroupInfoSDKType[];
+
+  /** pagination defines the pagination in the response. */
+  pagination?: PageResponseSDKType;
+}
+
 /** QueryTallyResultRequest is the Query/TallyResult request type. */
 export interface QueryTallyResultRequest {
   /** proposal_id is the unique id of a proposal. */
   proposalId: Long;
 }
 
+/** QueryTallyResultRequest is the Query/TallyResult request type. */
+export interface QueryTallyResultRequestSDKType {
+  /** proposal_id is the unique id of a proposal. */
+  proposal_id: Long;
+}
+
 /** QueryTallyResultResponse is the Query/TallyResult response type. */
 export interface QueryTallyResultResponse {
   /** tally defines the requested tally. */
   tally: TallyResult;
+}
+
+/** QueryTallyResultResponse is the Query/TallyResult response type. */
+export interface QueryTallyResultResponseSDKType {
+  /** tally defines the requested tally. */
+  tally: TallyResultSDKType;
 }
 
 function createBaseQueryGroupInfoRequest(): QueryGroupInfoRequest {
@@ -264,6 +471,18 @@ export const QueryGroupInfoRequest = {
     const message = createBaseQueryGroupInfoRequest();
     message.groupId = object.groupId !== undefined && object.groupId !== null ? Long.fromValue(object.groupId) : Long.UZERO;
     return message;
+  },
+
+  fromSDK(object: QueryGroupInfoRequestSDKType): QueryGroupInfoRequest {
+    return {
+      groupId: isSet(object.group_id) ? object.group_id : undefined
+    };
+  },
+
+  toSDK(message: QueryGroupInfoRequest): QueryGroupInfoRequestSDKType {
+    const obj: any = {};
+    message.groupId !== undefined && (obj.group_id = message.groupId);
+    return obj;
   }
 
 };
@@ -283,7 +502,7 @@ export const QueryGroupInfoResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryGroupInfoResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryGroupInfoResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryGroupInfoResponse();
@@ -321,6 +540,18 @@ export const QueryGroupInfoResponse = {
     const message = createBaseQueryGroupInfoResponse();
     message.info = object.info !== undefined && object.info !== null ? GroupInfo.fromPartial(object.info) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryGroupInfoResponseSDKType): QueryGroupInfoResponse {
+    return {
+      info: isSet(object.info) ? GroupInfo.fromSDK(object.info) : undefined
+    };
+  },
+
+  toSDK(message: QueryGroupInfoResponse): QueryGroupInfoResponseSDKType {
+    const obj: any = {};
+    message.info !== undefined && (obj.info = message.info ? GroupInfo.toSDK(message.info) : undefined);
+    return obj;
   }
 
 };
@@ -378,6 +609,18 @@ export const QueryGroupPolicyInfoRequest = {
     const message = createBaseQueryGroupPolicyInfoRequest();
     message.address = object.address ?? "";
     return message;
+  },
+
+  fromSDK(object: QueryGroupPolicyInfoRequestSDKType): QueryGroupPolicyInfoRequest {
+    return {
+      address: isSet(object.address) ? object.address : undefined
+    };
+  },
+
+  toSDK(message: QueryGroupPolicyInfoRequest): QueryGroupPolicyInfoRequestSDKType {
+    const obj: any = {};
+    message.address !== undefined && (obj.address = message.address);
+    return obj;
   }
 
 };
@@ -397,7 +640,7 @@ export const QueryGroupPolicyInfoResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryGroupPolicyInfoResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryGroupPolicyInfoResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryGroupPolicyInfoResponse();
@@ -435,6 +678,18 @@ export const QueryGroupPolicyInfoResponse = {
     const message = createBaseQueryGroupPolicyInfoResponse();
     message.info = object.info !== undefined && object.info !== null ? GroupPolicyInfo.fromPartial(object.info) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryGroupPolicyInfoResponseSDKType): QueryGroupPolicyInfoResponse {
+    return {
+      info: isSet(object.info) ? GroupPolicyInfo.fromSDK(object.info) : undefined
+    };
+  },
+
+  toSDK(message: QueryGroupPolicyInfoResponse): QueryGroupPolicyInfoResponseSDKType {
+    const obj: any = {};
+    message.info !== undefined && (obj.info = message.info ? GroupPolicyInfo.toSDK(message.info) : undefined);
+    return obj;
   }
 
 };
@@ -504,6 +759,20 @@ export const QueryGroupMembersRequest = {
     message.groupId = object.groupId !== undefined && object.groupId !== null ? Long.fromValue(object.groupId) : Long.UZERO;
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryGroupMembersRequestSDKType): QueryGroupMembersRequest {
+    return {
+      groupId: isSet(object.group_id) ? object.group_id : undefined,
+      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  toSDK(message: QueryGroupMembersRequest): QueryGroupMembersRequestSDKType {
+    const obj: any = {};
+    message.groupId !== undefined && (obj.group_id = message.groupId);
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
+    return obj;
   }
 
 };
@@ -528,7 +797,7 @@ export const QueryGroupMembersResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryGroupMembersResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryGroupMembersResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryGroupMembersResponse();
@@ -579,6 +848,26 @@ export const QueryGroupMembersResponse = {
     message.members = object.members?.map(e => GroupMember.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryGroupMembersResponseSDKType): QueryGroupMembersResponse {
+    return {
+      members: Array.isArray(object?.members) ? object.members.map((e: any) => GroupMember.fromSDK(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  toSDK(message: QueryGroupMembersResponse): QueryGroupMembersResponseSDKType {
+    const obj: any = {};
+
+    if (message.members) {
+      obj.members = message.members.map(e => e ? GroupMember.toSDK(e) : undefined);
+    } else {
+      obj.members = [];
+    }
+
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
+    return obj;
   }
 
 };
@@ -648,6 +937,20 @@ export const QueryGroupsByAdminRequest = {
     message.admin = object.admin ?? "";
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryGroupsByAdminRequestSDKType): QueryGroupsByAdminRequest {
+    return {
+      admin: isSet(object.admin) ? object.admin : undefined,
+      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  toSDK(message: QueryGroupsByAdminRequest): QueryGroupsByAdminRequestSDKType {
+    const obj: any = {};
+    message.admin !== undefined && (obj.admin = message.admin);
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
+    return obj;
   }
 
 };
@@ -672,7 +975,7 @@ export const QueryGroupsByAdminResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryGroupsByAdminResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryGroupsByAdminResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryGroupsByAdminResponse();
@@ -723,6 +1026,26 @@ export const QueryGroupsByAdminResponse = {
     message.groups = object.groups?.map(e => GroupInfo.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryGroupsByAdminResponseSDKType): QueryGroupsByAdminResponse {
+    return {
+      groups: Array.isArray(object?.groups) ? object.groups.map((e: any) => GroupInfo.fromSDK(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  toSDK(message: QueryGroupsByAdminResponse): QueryGroupsByAdminResponseSDKType {
+    const obj: any = {};
+
+    if (message.groups) {
+      obj.groups = message.groups.map(e => e ? GroupInfo.toSDK(e) : undefined);
+    } else {
+      obj.groups = [];
+    }
+
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
+    return obj;
   }
 
 };
@@ -792,6 +1115,20 @@ export const QueryGroupPoliciesByGroupRequest = {
     message.groupId = object.groupId !== undefined && object.groupId !== null ? Long.fromValue(object.groupId) : Long.UZERO;
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryGroupPoliciesByGroupRequestSDKType): QueryGroupPoliciesByGroupRequest {
+    return {
+      groupId: isSet(object.group_id) ? object.group_id : undefined,
+      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  toSDK(message: QueryGroupPoliciesByGroupRequest): QueryGroupPoliciesByGroupRequestSDKType {
+    const obj: any = {};
+    message.groupId !== undefined && (obj.group_id = message.groupId);
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
+    return obj;
   }
 
 };
@@ -816,7 +1153,7 @@ export const QueryGroupPoliciesByGroupResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryGroupPoliciesByGroupResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryGroupPoliciesByGroupResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryGroupPoliciesByGroupResponse();
@@ -867,6 +1204,26 @@ export const QueryGroupPoliciesByGroupResponse = {
     message.groupPolicies = object.groupPolicies?.map(e => GroupPolicyInfo.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryGroupPoliciesByGroupResponseSDKType): QueryGroupPoliciesByGroupResponse {
+    return {
+      groupPolicies: Array.isArray(object?.group_policies) ? object.group_policies.map((e: any) => GroupPolicyInfo.fromSDK(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  toSDK(message: QueryGroupPoliciesByGroupResponse): QueryGroupPoliciesByGroupResponseSDKType {
+    const obj: any = {};
+
+    if (message.groupPolicies) {
+      obj.group_policies = message.groupPolicies.map(e => e ? GroupPolicyInfo.toSDK(e) : undefined);
+    } else {
+      obj.group_policies = [];
+    }
+
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
+    return obj;
   }
 
 };
@@ -936,6 +1293,20 @@ export const QueryGroupPoliciesByAdminRequest = {
     message.admin = object.admin ?? "";
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryGroupPoliciesByAdminRequestSDKType): QueryGroupPoliciesByAdminRequest {
+    return {
+      admin: isSet(object.admin) ? object.admin : undefined,
+      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  toSDK(message: QueryGroupPoliciesByAdminRequest): QueryGroupPoliciesByAdminRequestSDKType {
+    const obj: any = {};
+    message.admin !== undefined && (obj.admin = message.admin);
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
+    return obj;
   }
 
 };
@@ -960,7 +1331,7 @@ export const QueryGroupPoliciesByAdminResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryGroupPoliciesByAdminResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryGroupPoliciesByAdminResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryGroupPoliciesByAdminResponse();
@@ -1011,6 +1382,26 @@ export const QueryGroupPoliciesByAdminResponse = {
     message.groupPolicies = object.groupPolicies?.map(e => GroupPolicyInfo.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryGroupPoliciesByAdminResponseSDKType): QueryGroupPoliciesByAdminResponse {
+    return {
+      groupPolicies: Array.isArray(object?.group_policies) ? object.group_policies.map((e: any) => GroupPolicyInfo.fromSDK(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  toSDK(message: QueryGroupPoliciesByAdminResponse): QueryGroupPoliciesByAdminResponseSDKType {
+    const obj: any = {};
+
+    if (message.groupPolicies) {
+      obj.group_policies = message.groupPolicies.map(e => e ? GroupPolicyInfo.toSDK(e) : undefined);
+    } else {
+      obj.group_policies = [];
+    }
+
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
+    return obj;
   }
 
 };
@@ -1068,6 +1459,18 @@ export const QueryProposalRequest = {
     const message = createBaseQueryProposalRequest();
     message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? Long.fromValue(object.proposalId) : Long.UZERO;
     return message;
+  },
+
+  fromSDK(object: QueryProposalRequestSDKType): QueryProposalRequest {
+    return {
+      proposalId: isSet(object.proposal_id) ? object.proposal_id : undefined
+    };
+  },
+
+  toSDK(message: QueryProposalRequest): QueryProposalRequestSDKType {
+    const obj: any = {};
+    message.proposalId !== undefined && (obj.proposal_id = message.proposalId);
+    return obj;
   }
 
 };
@@ -1087,7 +1490,7 @@ export const QueryProposalResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryProposalResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryProposalResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryProposalResponse();
@@ -1125,6 +1528,18 @@ export const QueryProposalResponse = {
     const message = createBaseQueryProposalResponse();
     message.proposal = object.proposal !== undefined && object.proposal !== null ? Proposal.fromPartial(object.proposal) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryProposalResponseSDKType): QueryProposalResponse {
+    return {
+      proposal: isSet(object.proposal) ? Proposal.fromSDK(object.proposal) : undefined
+    };
+  },
+
+  toSDK(message: QueryProposalResponse): QueryProposalResponseSDKType {
+    const obj: any = {};
+    message.proposal !== undefined && (obj.proposal = message.proposal ? Proposal.toSDK(message.proposal) : undefined);
+    return obj;
   }
 
 };
@@ -1194,6 +1609,20 @@ export const QueryProposalsByGroupPolicyRequest = {
     message.address = object.address ?? "";
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryProposalsByGroupPolicyRequestSDKType): QueryProposalsByGroupPolicyRequest {
+    return {
+      address: isSet(object.address) ? object.address : undefined,
+      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  toSDK(message: QueryProposalsByGroupPolicyRequest): QueryProposalsByGroupPolicyRequestSDKType {
+    const obj: any = {};
+    message.address !== undefined && (obj.address = message.address);
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
+    return obj;
   }
 
 };
@@ -1218,7 +1647,7 @@ export const QueryProposalsByGroupPolicyResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryProposalsByGroupPolicyResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryProposalsByGroupPolicyResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryProposalsByGroupPolicyResponse();
@@ -1269,6 +1698,26 @@ export const QueryProposalsByGroupPolicyResponse = {
     message.proposals = object.proposals?.map(e => Proposal.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryProposalsByGroupPolicyResponseSDKType): QueryProposalsByGroupPolicyResponse {
+    return {
+      proposals: Array.isArray(object?.proposals) ? object.proposals.map((e: any) => Proposal.fromSDK(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  toSDK(message: QueryProposalsByGroupPolicyResponse): QueryProposalsByGroupPolicyResponseSDKType {
+    const obj: any = {};
+
+    if (message.proposals) {
+      obj.proposals = message.proposals.map(e => e ? Proposal.toSDK(e) : undefined);
+    } else {
+      obj.proposals = [];
+    }
+
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
+    return obj;
   }
 
 };
@@ -1338,6 +1787,20 @@ export const QueryVoteByProposalVoterRequest = {
     message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? Long.fromValue(object.proposalId) : Long.UZERO;
     message.voter = object.voter ?? "";
     return message;
+  },
+
+  fromSDK(object: QueryVoteByProposalVoterRequestSDKType): QueryVoteByProposalVoterRequest {
+    return {
+      proposalId: isSet(object.proposal_id) ? object.proposal_id : undefined,
+      voter: isSet(object.voter) ? object.voter : undefined
+    };
+  },
+
+  toSDK(message: QueryVoteByProposalVoterRequest): QueryVoteByProposalVoterRequestSDKType {
+    const obj: any = {};
+    message.proposalId !== undefined && (obj.proposal_id = message.proposalId);
+    message.voter !== undefined && (obj.voter = message.voter);
+    return obj;
   }
 
 };
@@ -1357,7 +1820,7 @@ export const QueryVoteByProposalVoterResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryVoteByProposalVoterResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryVoteByProposalVoterResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryVoteByProposalVoterResponse();
@@ -1395,6 +1858,18 @@ export const QueryVoteByProposalVoterResponse = {
     const message = createBaseQueryVoteByProposalVoterResponse();
     message.vote = object.vote !== undefined && object.vote !== null ? Vote.fromPartial(object.vote) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryVoteByProposalVoterResponseSDKType): QueryVoteByProposalVoterResponse {
+    return {
+      vote: isSet(object.vote) ? Vote.fromSDK(object.vote) : undefined
+    };
+  },
+
+  toSDK(message: QueryVoteByProposalVoterResponse): QueryVoteByProposalVoterResponseSDKType {
+    const obj: any = {};
+    message.vote !== undefined && (obj.vote = message.vote ? Vote.toSDK(message.vote) : undefined);
+    return obj;
   }
 
 };
@@ -1464,6 +1939,20 @@ export const QueryVotesByProposalRequest = {
     message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? Long.fromValue(object.proposalId) : Long.UZERO;
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryVotesByProposalRequestSDKType): QueryVotesByProposalRequest {
+    return {
+      proposalId: isSet(object.proposal_id) ? object.proposal_id : undefined,
+      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  toSDK(message: QueryVotesByProposalRequest): QueryVotesByProposalRequestSDKType {
+    const obj: any = {};
+    message.proposalId !== undefined && (obj.proposal_id = message.proposalId);
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
+    return obj;
   }
 
 };
@@ -1488,7 +1977,7 @@ export const QueryVotesByProposalResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryVotesByProposalResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryVotesByProposalResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryVotesByProposalResponse();
@@ -1539,6 +2028,26 @@ export const QueryVotesByProposalResponse = {
     message.votes = object.votes?.map(e => Vote.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryVotesByProposalResponseSDKType): QueryVotesByProposalResponse {
+    return {
+      votes: Array.isArray(object?.votes) ? object.votes.map((e: any) => Vote.fromSDK(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  toSDK(message: QueryVotesByProposalResponse): QueryVotesByProposalResponseSDKType {
+    const obj: any = {};
+
+    if (message.votes) {
+      obj.votes = message.votes.map(e => e ? Vote.toSDK(e) : undefined);
+    } else {
+      obj.votes = [];
+    }
+
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
+    return obj;
   }
 
 };
@@ -1608,6 +2117,20 @@ export const QueryVotesByVoterRequest = {
     message.voter = object.voter ?? "";
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryVotesByVoterRequestSDKType): QueryVotesByVoterRequest {
+    return {
+      voter: isSet(object.voter) ? object.voter : undefined,
+      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  toSDK(message: QueryVotesByVoterRequest): QueryVotesByVoterRequestSDKType {
+    const obj: any = {};
+    message.voter !== undefined && (obj.voter = message.voter);
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
+    return obj;
   }
 
 };
@@ -1632,7 +2155,7 @@ export const QueryVotesByVoterResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryVotesByVoterResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryVotesByVoterResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryVotesByVoterResponse();
@@ -1683,6 +2206,26 @@ export const QueryVotesByVoterResponse = {
     message.votes = object.votes?.map(e => Vote.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryVotesByVoterResponseSDKType): QueryVotesByVoterResponse {
+    return {
+      votes: Array.isArray(object?.votes) ? object.votes.map((e: any) => Vote.fromSDK(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  toSDK(message: QueryVotesByVoterResponse): QueryVotesByVoterResponseSDKType {
+    const obj: any = {};
+
+    if (message.votes) {
+      obj.votes = message.votes.map(e => e ? Vote.toSDK(e) : undefined);
+    } else {
+      obj.votes = [];
+    }
+
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
+    return obj;
   }
 
 };
@@ -1752,6 +2295,20 @@ export const QueryGroupsByMemberRequest = {
     message.address = object.address ?? "";
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryGroupsByMemberRequestSDKType): QueryGroupsByMemberRequest {
+    return {
+      address: isSet(object.address) ? object.address : undefined,
+      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  toSDK(message: QueryGroupsByMemberRequest): QueryGroupsByMemberRequestSDKType {
+    const obj: any = {};
+    message.address !== undefined && (obj.address = message.address);
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
+    return obj;
   }
 
 };
@@ -1776,7 +2333,7 @@ export const QueryGroupsByMemberResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryGroupsByMemberResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryGroupsByMemberResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryGroupsByMemberResponse();
@@ -1827,6 +2384,26 @@ export const QueryGroupsByMemberResponse = {
     message.groups = object.groups?.map(e => GroupInfo.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryGroupsByMemberResponseSDKType): QueryGroupsByMemberResponse {
+    return {
+      groups: Array.isArray(object?.groups) ? object.groups.map((e: any) => GroupInfo.fromSDK(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  toSDK(message: QueryGroupsByMemberResponse): QueryGroupsByMemberResponseSDKType {
+    const obj: any = {};
+
+    if (message.groups) {
+      obj.groups = message.groups.map(e => e ? GroupInfo.toSDK(e) : undefined);
+    } else {
+      obj.groups = [];
+    }
+
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
+    return obj;
   }
 
 };
@@ -1884,6 +2461,18 @@ export const QueryTallyResultRequest = {
     const message = createBaseQueryTallyResultRequest();
     message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? Long.fromValue(object.proposalId) : Long.UZERO;
     return message;
+  },
+
+  fromSDK(object: QueryTallyResultRequestSDKType): QueryTallyResultRequest {
+    return {
+      proposalId: isSet(object.proposal_id) ? object.proposal_id : undefined
+    };
+  },
+
+  toSDK(message: QueryTallyResultRequest): QueryTallyResultRequestSDKType {
+    const obj: any = {};
+    message.proposalId !== undefined && (obj.proposal_id = message.proposalId);
+    return obj;
   }
 
 };
@@ -1903,7 +2492,7 @@ export const QueryTallyResultResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryTallyResultResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryTallyResultResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryTallyResultResponse();
@@ -1941,6 +2530,18 @@ export const QueryTallyResultResponse = {
     const message = createBaseQueryTallyResultResponse();
     message.tally = object.tally !== undefined && object.tally !== null ? TallyResult.fromPartial(object.tally) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryTallyResultResponseSDKType): QueryTallyResultResponse {
+    return {
+      tally: isSet(object.tally) ? TallyResult.fromSDK(object.tally) : undefined
+    };
+  },
+
+  toSDK(message: QueryTallyResultResponse): QueryTallyResultResponseSDKType {
+    const obj: any = {};
+    message.tally !== undefined && (obj.tally = message.tally ? TallyResult.toSDK(message.tally) : undefined);
+    return obj;
   }
 
 };

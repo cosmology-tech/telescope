@@ -1,5 +1,5 @@
 import { AminoMsg } from "@cosmjs/amino";
-import { MsgSend } from "./tx";
+import { MsgSend, MsgSendSDKType } from "./tx";
 export interface AminoMsgSend extends AminoMsg {
   type: "cosmos-sdk/MsgNFTSend";
   value: {

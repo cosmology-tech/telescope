@@ -1,12 +1,10 @@
 import { getNestedProto } from '@osmonauts/proto-parser';
-import { defaultTelescopeOptions } from '@osmonauts/types';
-import { expectCode, getTestProtoStore } from '../../../test-utils/'
+import { defaultTelescopeOptions, expectCode, getTestProtoStore } from '../../../test-utils/'
 import { AminoParseContext, ProtoParseContext } from '../context';
 import { createProtoType } from '..';
 import { createObjectWithMethods } from '../object';
 import { createAminoConverter, makeAminoTypeInterface } from '../amino/index';
 import cases from 'jest-in-case';
-
 const store = getTestProtoStore();
 store.traverseAll();
 

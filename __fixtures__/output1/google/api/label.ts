@@ -14,6 +14,19 @@ export enum LabelDescriptor_ValueType {
   INT64 = 2,
   UNRECOGNIZED = -1,
 }
+
+/** Value types that can be used as label values. */
+export enum LabelDescriptor_ValueTypeSDKType {
+  /** STRING - A variable-length string. This is the default. */
+  STRING = 0,
+
+  /** BOOL - Boolean; true or false. */
+  BOOL = 1,
+
+  /** INT64 - A 64-bit signed integer. */
+  INT64 = 2,
+  UNRECOGNIZED = -1,
+}
 export function labelDescriptor_ValueTypeFromJSON(object: any): LabelDescriptor_ValueType {
   switch (object) {
     case 0:
@@ -57,6 +70,18 @@ export interface LabelDescriptor {
 
   /** The type of data that can be assigned to the label. */
   valueType: LabelDescriptor_ValueType;
+
+  /** A human-readable description for the label. */
+  description: string;
+}
+
+/** A description of a label. */
+export interface LabelDescriptorSDKType {
+  /** The label key. */
+  key: string;
+
+  /** The type of data that can be assigned to the label. */
+  value_type: LabelDescriptor_ValueTypeSDKType;
 
   /** A human-readable description for the label. */
   description: string;
@@ -139,6 +164,22 @@ export const LabelDescriptor = {
     message.valueType = object.valueType ?? 0;
     message.description = object.description ?? "";
     return message;
+  },
+
+  fromSDK(object: LabelDescriptorSDKType): LabelDescriptor {
+    return {
+      key: isSet(object.key) ? object.key : undefined,
+      valueType: isSet(object.value_type) ? labelDescriptor_ValueTypeFromJSON(object.value_type) : 0,
+      description: isSet(object.description) ? object.description : undefined
+    };
+  },
+
+  toSDK(message: LabelDescriptor): LabelDescriptorSDKType {
+    const obj: any = {};
+    message.key !== undefined && (obj.key = message.key);
+    message.valueType !== undefined && (obj.value_type = labelDescriptor_ValueTypeToJSON(message.valueType));
+    message.description !== undefined && (obj.description = message.description);
+    return obj;
   }
 
 };

@@ -7,8 +7,19 @@ export interface Pairs {
   pairs: Pair[];
 }
 
+/** Pairs defines a repeated slice of Pair objects. */
+export interface PairsSDKType {
+  pairs: PairSDKType[];
+}
+
 /** Pair defines a key/value bytes tuple. */
 export interface Pair {
+  key: Uint8Array;
+  value: Uint8Array;
+}
+
+/** Pair defines a key/value bytes tuple. */
+export interface PairSDKType {
   key: Uint8Array;
   value: Uint8Array;
 }
@@ -72,6 +83,24 @@ export const Pairs = {
     const message = createBasePairs();
     message.pairs = object.pairs?.map(e => Pair.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: PairsSDKType): Pairs {
+    return {
+      pairs: Array.isArray(object?.pairs) ? object.pairs.map((e: any) => Pair.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: Pairs): PairsSDKType {
+    const obj: any = {};
+
+    if (message.pairs) {
+      obj.pairs = message.pairs.map(e => e ? Pair.toSDK(e) : undefined);
+    } else {
+      obj.pairs = [];
+    }
+
+    return obj;
   }
 
 };
@@ -141,6 +170,20 @@ export const Pair = {
     message.key = object.key ?? new Uint8Array();
     message.value = object.value ?? new Uint8Array();
     return message;
+  },
+
+  fromSDK(object: PairSDKType): Pair {
+    return {
+      key: isSet(object.key) ? object.key : undefined,
+      value: isSet(object.value) ? object.value : undefined
+    };
+  },
+
+  toSDK(message: Pair): PairSDKType {
+    const obj: any = {};
+    message.key !== undefined && (obj.key = message.key);
+    message.value !== undefined && (obj.value = message.value);
+    return obj;
   }
 
 };

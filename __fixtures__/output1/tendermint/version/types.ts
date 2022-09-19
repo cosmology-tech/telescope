@@ -13,11 +13,31 @@ export interface App {
 }
 
 /**
+ * App includes the protocol and software version for the application.
+ * This information is included in ResponseInfo. The App.Protocol can be
+ * updated in ResponseEndBlock.
+ */
+export interface AppSDKType {
+  protocol: Long;
+  software: string;
+}
+
+/**
  * Consensus captures the consensus rules for processing a block in the blockchain,
  * including all blockchain data structures and the rules of the application's
  * state transition machine.
  */
 export interface Consensus {
+  block: Long;
+  app: Long;
+}
+
+/**
+ * Consensus captures the consensus rules for processing a block in the blockchain,
+ * including all blockchain data structures and the rules of the application's
+ * state transition machine.
+ */
+export interface ConsensusSDKType {
   block: Long;
   app: Long;
 }
@@ -87,6 +107,20 @@ export const App = {
     message.protocol = object.protocol !== undefined && object.protocol !== null ? Long.fromValue(object.protocol) : Long.UZERO;
     message.software = object.software ?? "";
     return message;
+  },
+
+  fromSDK(object: AppSDKType): App {
+    return {
+      protocol: isSet(object.protocol) ? object.protocol : undefined,
+      software: isSet(object.software) ? object.software : undefined
+    };
+  },
+
+  toSDK(message: App): AppSDKType {
+    const obj: any = {};
+    message.protocol !== undefined && (obj.protocol = message.protocol);
+    message.software !== undefined && (obj.software = message.software);
+    return obj;
   }
 
 };
@@ -156,6 +190,20 @@ export const Consensus = {
     message.block = object.block !== undefined && object.block !== null ? Long.fromValue(object.block) : Long.UZERO;
     message.app = object.app !== undefined && object.app !== null ? Long.fromValue(object.app) : Long.UZERO;
     return message;
+  },
+
+  fromSDK(object: ConsensusSDKType): Consensus {
+    return {
+      block: isSet(object.block) ? object.block : undefined,
+      app: isSet(object.app) ? object.app : undefined
+    };
+  },
+
+  toSDK(message: Consensus): ConsensusSDKType {
+    const obj: any = {};
+    message.block !== undefined && (obj.block = message.block);
+    message.app !== undefined && (obj.app = message.app);
+    return obj;
   }
 
 };

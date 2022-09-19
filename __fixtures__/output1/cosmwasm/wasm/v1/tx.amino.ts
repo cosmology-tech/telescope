@@ -1,9 +1,9 @@
-import { AccessConfig, accessTypeFromJSON } from "./types";
-import { Coin } from "../../../cosmos/base/v1beta1/coin";
+import { AccessConfig, AccessConfigSDKType, accessTypeFromJSON } from "./types";
+import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { AminoMsg } from "@cosmjs/amino";
 import { toBase64, fromBase64, fromUtf8, toUtf8 } from "@cosmjs/encoding";
 import { Long } from "@osmonauts/helpers";
-import { MsgStoreCode, MsgInstantiateContract, MsgExecuteContract, MsgMigrateContract, MsgUpdateAdmin, MsgClearAdmin } from "./tx";
+import { MsgStoreCode, MsgStoreCodeSDKType, MsgInstantiateContract, MsgInstantiateContractSDKType, MsgExecuteContract, MsgExecuteContractSDKType, MsgMigrateContract, MsgMigrateContractSDKType, MsgUpdateAdmin, MsgUpdateAdminSDKType, MsgClearAdmin, MsgClearAdminSDKType } from "./tx";
 export interface AminoMsgStoreCode extends AminoMsg {
   type: "wasm/MsgStoreCode";
   value: {

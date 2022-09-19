@@ -1,5 +1,5 @@
-import { SourceInfo } from "./source";
-import { NullValue, nullValueFromJSON, nullValueToJSON } from "../../../protobuf/struct";
+import { SourceInfo, SourceInfoSDKType } from "./source";
+import { NullValue, NullValueSDKType, nullValueFromJSON, nullValueToJSON } from "../../../protobuf/struct";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, Long, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
 export const protobufPackage = "google.api.expr.v1beta1";
@@ -14,6 +14,18 @@ export interface ParsedExpr {
 
   /** The syntax version of the source, e.g. `cel1`. */
   syntaxVersion: string;
+}
+
+/** An expression together with source information as returned by the parser. */
+export interface ParsedExprSDKType {
+  /** The parsed expression. */
+  expr: ExprSDKType;
+
+  /** The source info derived from input that generated the parsed `expr`. */
+  source_info: SourceInfoSDKType;
+
+  /** The syntax version of the source, e.g. `cel1`. */
+  syntax_version: string;
 }
 
 /**
@@ -63,8 +75,66 @@ export interface Expr {
   comprehensionExpr?: Expr_Comprehension;
 }
 
+/**
+ * An abstract representation of a common expression.
+ * 
+ * Expressions are abstractly represented as a collection of identifiers,
+ * select statements, function calls, literals, and comprehensions. All
+ * operators with the exception of the '.' operator are modelled as function
+ * calls. This makes it easy to represent new operators into the existing AST.
+ * 
+ * All references within expressions must resolve to a [Decl][google.api.expr.v1beta1.Decl] provided at
+ * type-check for an expression to be valid. A reference may either be a bare
+ * identifier `name` or a qualified identifier `google.api.name`. References
+ * may either refer to a value or a function declaration.
+ * 
+ * For example, the expression `google.api.name.startsWith('expr')` references
+ * the declaration `google.api.name` within a [Expr.Select][google.api.expr.v1beta1.Expr.Select] expression, and
+ * the function declaration `startsWith`.
+ */
+export interface ExprSDKType {
+  /**
+   * Required. An id assigned to this node by the parser which is unique in a
+   * given expression tree. This is used to associate type information and other
+   * attributes to a node in the parse tree.
+   */
+  id: number;
+
+  /** A literal expression. */
+  literal_expr?: LiteralSDKType;
+
+  /** An identifier expression. */
+  ident_expr?: Expr_IdentSDKType;
+
+  /** A field selection expression, e.g. `request.auth`. */
+  select_expr?: Expr_SelectSDKType;
+
+  /** A call expression, including calls to predefined functions and operators. */
+  call_expr?: Expr_CallSDKType;
+
+  /** A list creation expression. */
+  list_expr?: Expr_CreateListSDKType;
+
+  /** A map or object creation expression. */
+  struct_expr?: Expr_CreateStructSDKType;
+
+  /** A comprehension expression. */
+  comprehension_expr?: Expr_ComprehensionSDKType;
+}
+
 /** An identifier expression. e.g. `request`. */
 export interface Expr_Ident {
+  /**
+   * Required. Holds a single, unqualified identifier, possibly preceded by a
+   * '.'.
+   * 
+   * Qualified names are represented by the [Expr.Select][google.api.expr.v1beta1.Expr.Select] expression.
+   */
+  name: string;
+}
+
+/** An identifier expression. e.g. `request`. */
+export interface Expr_IdentSDKType {
   /**
    * Required. Holds a single, unqualified identifier, possibly preceded by a
    * '.'.
@@ -100,6 +170,32 @@ export interface Expr_Select {
   testOnly: boolean;
 }
 
+/** A field selection expression. e.g. `request.auth`. */
+export interface Expr_SelectSDKType {
+  /**
+   * Required. The target of the selection expression.
+   * 
+   * For example, in the select expression `request.auth`, the `request`
+   * portion of the expression is the `operand`.
+   */
+  operand: ExprSDKType;
+
+  /**
+   * Required. The name of the field to select.
+   * 
+   * For example, in the select expression `request.auth`, the `auth` portion
+   * of the expression would be the `field`.
+   */
+  field: string;
+
+  /**
+   * Whether the select is to be interpreted as a field presence test.
+   * 
+   * This results from the macro `has(request.auth)`.
+   */
+  test_only: boolean;
+}
+
 /**
  * A call expression, including calls to predefined functions and operators.
  * 
@@ -120,6 +216,25 @@ export interface Expr_Call {
 }
 
 /**
+ * A call expression, including calls to predefined functions and operators.
+ * 
+ * For example, `value == 10`, `size(map_value)`.
+ */
+export interface Expr_CallSDKType {
+  /**
+   * The target of an method call-style expression. For example, `x` in
+   * `x.f()`.
+   */
+  target: ExprSDKType;
+
+  /** Required. The name of the function or method being called. */
+  function: string;
+
+  /** The arguments. */
+  args: ExprSDKType[];
+}
+
+/**
  * A list creation expression.
  * 
  * Lists may either be homogenous, e.g. `[1, 2, 3]`, or heterogenous, e.g.
@@ -128,6 +243,17 @@ export interface Expr_Call {
 export interface Expr_CreateList {
   /** The elements part of the list. */
   elements: Expr[];
+}
+
+/**
+ * A list creation expression.
+ * 
+ * Lists may either be homogenous, e.g. `[1, 2, 3]`, or heterogenous, e.g.
+ * `dyn([1, 'hello', 2.0])`
+ */
+export interface Expr_CreateListSDKType {
+  /** The elements part of the list. */
+  elements: ExprSDKType[];
 }
 
 /**
@@ -148,6 +274,24 @@ export interface Expr_CreateStruct {
   entries: Expr_CreateStruct_Entry[];
 }
 
+/**
+ * A map or message creation expression.
+ * 
+ * Maps are constructed as `{'key_name': 'value'}`. Message construction is
+ * similar, but prefixed with a type name and composed of field ids:
+ * `types.MyType{field_id: 'value'}`.
+ */
+export interface Expr_CreateStructSDKType {
+  /**
+   * The type name of the message to be created, empty when creating map
+   * literals.
+   */
+  type: string;
+
+  /** The entries in the creation expression. */
+  entries: Expr_CreateStruct_EntrySDKType[];
+}
+
 /** Represents an entry. */
 export interface Expr_CreateStruct_Entry {
   /**
@@ -165,6 +309,25 @@ export interface Expr_CreateStruct_Entry {
 
   /** Required. The value assigned to the key. */
   value: Expr;
+}
+
+/** Represents an entry. */
+export interface Expr_CreateStruct_EntrySDKType {
+  /**
+   * Required. An id assigned to this node by the parser which is unique
+   * in a given expression tree. This is used to associate type
+   * information and other attributes to the node.
+   */
+  id: number;
+
+  /** The field key for a message creator statement. */
+  field_key?: string;
+
+  /** The key expression for a map creation statement. */
+  map_key?: ExprSDKType;
+
+  /** Required. The value assigned to the key. */
+  value: ExprSDKType;
 }
 
 /**
@@ -232,6 +395,70 @@ export interface Expr_Comprehension {
 }
 
 /**
+ * A comprehension expression applied to a list or map.
+ * 
+ * Comprehensions are not part of the core syntax, but enabled with macros.
+ * A macro matches a specific call signature within a parsed AST and replaces
+ * the call with an alternate AST block. Macro expansion happens at parse
+ * time.
+ * 
+ * The following macros are supported within CEL:
+ * 
+ * Aggregate type macros may be applied to all elements in a list or all keys
+ * in a map:
+ * 
+ * *  `all`, `exists`, `exists_one` -  test a predicate expression against
+ * the inputs and return `true` if the predicate is satisfied for all,
+ * any, or only one value `list.all(x, x < 10)`.
+ * *  `filter` - test a predicate expression against the inputs and return
+ * the subset of elements which satisfy the predicate:
+ * `payments.filter(p, p > 1000)`.
+ * *  `map` - apply an expression to all elements in the input and return the
+ * output aggregate type: `[1, 2, 3].map(i, i * i)`.
+ * 
+ * The `has(m.x)` macro tests whether the property `x` is present in struct
+ * `m`. The semantics of this macro depend on the type of `m`. For proto2
+ * messages `has(m.x)` is defined as 'defined, but not set`. For proto3, the
+ * macro tests whether the property is set to its default. For map and struct
+ * types, the macro tests whether the property `x` is defined on `m`.
+ */
+export interface Expr_ComprehensionSDKType {
+  /** The name of the iteration variable. */
+  iter_var: string;
+
+  /** The range over which var iterates. */
+  iter_range: ExprSDKType;
+
+  /** The name of the variable used for accumulation of the result. */
+  accu_var: string;
+
+  /** The initial value of the accumulator. */
+  accu_init: ExprSDKType;
+
+  /**
+   * An expression which can contain iter_var and accu_var.
+   * 
+   * Returns false when the result has been computed and may be used as
+   * a hint to short-circuit the remainder of the comprehension.
+   */
+  loop_condition: ExprSDKType;
+
+  /**
+   * An expression which can contain iter_var and accu_var.
+   * 
+   * Computes the next value of accu_var.
+   */
+  loop_step: ExprSDKType;
+
+  /**
+   * An expression which can contain accu_var.
+   * 
+   * Computes the result.
+   */
+  result: ExprSDKType;
+}
+
+/**
  * Represents a primitive literal.
  * 
  * This is similar to the primitives supported in the well-known type
@@ -265,6 +492,42 @@ export interface Literal {
 
   /** bytes value. */
   bytesValue?: Uint8Array;
+}
+
+/**
+ * Represents a primitive literal.
+ * 
+ * This is similar to the primitives supported in the well-known type
+ * `google.protobuf.Value`, but richer so it can represent CEL's full range of
+ * primitives.
+ * 
+ * Lists and structs are not included as constants as these aggregate types may
+ * contain [Expr][google.api.expr.v1beta1.Expr] elements which require evaluation and are thus not constant.
+ * 
+ * Examples of literals include: `"hello"`, `b'bytes'`, `1u`, `4.2`, `-2`,
+ * `true`, `null`.
+ */
+export interface LiteralSDKType {
+  /** null value. */
+  null_value?: NullValueSDKType;
+
+  /** boolean value. */
+  bool_value?: boolean;
+
+  /** int64 value. */
+  int64_value?: Long;
+
+  /** uint64 value. */
+  uint64_value?: Long;
+
+  /** double value. */
+  double_value?: number;
+
+  /** string value. */
+  string_value?: string;
+
+  /** bytes value. */
+  bytes_value?: Uint8Array;
 }
 
 function createBaseParsedExpr(): ParsedExpr {
@@ -344,6 +607,22 @@ export const ParsedExpr = {
     message.sourceInfo = object.sourceInfo !== undefined && object.sourceInfo !== null ? SourceInfo.fromPartial(object.sourceInfo) : undefined;
     message.syntaxVersion = object.syntaxVersion ?? "";
     return message;
+  },
+
+  fromSDK(object: ParsedExprSDKType): ParsedExpr {
+    return {
+      expr: isSet(object.expr) ? Expr.fromSDK(object.expr) : undefined,
+      sourceInfo: isSet(object.source_info) ? SourceInfo.fromSDK(object.source_info) : undefined,
+      syntaxVersion: isSet(object.syntax_version) ? object.syntax_version : undefined
+    };
+  },
+
+  toSDK(message: ParsedExpr): ParsedExprSDKType {
+    const obj: any = {};
+    message.expr !== undefined && (obj.expr = message.expr ? Expr.toSDK(message.expr) : undefined);
+    message.sourceInfo !== undefined && (obj.source_info = message.sourceInfo ? SourceInfo.toSDK(message.sourceInfo) : undefined);
+    message.syntaxVersion !== undefined && (obj.syntax_version = message.syntaxVersion);
+    return obj;
   }
 
 };
@@ -485,6 +764,32 @@ export const Expr = {
     message.structExpr = object.structExpr !== undefined && object.structExpr !== null ? Expr_CreateStruct.fromPartial(object.structExpr) : undefined;
     message.comprehensionExpr = object.comprehensionExpr !== undefined && object.comprehensionExpr !== null ? Expr_Comprehension.fromPartial(object.comprehensionExpr) : undefined;
     return message;
+  },
+
+  fromSDK(object: ExprSDKType): Expr {
+    return {
+      id: isSet(object.id) ? object.id : undefined,
+      literalExpr: isSet(object.literal_expr) ? Literal.fromSDK(object.literal_expr) : undefined,
+      identExpr: isSet(object.ident_expr) ? Expr_Ident.fromSDK(object.ident_expr) : undefined,
+      selectExpr: isSet(object.select_expr) ? Expr_Select.fromSDK(object.select_expr) : undefined,
+      callExpr: isSet(object.call_expr) ? Expr_Call.fromSDK(object.call_expr) : undefined,
+      listExpr: isSet(object.list_expr) ? Expr_CreateList.fromSDK(object.list_expr) : undefined,
+      structExpr: isSet(object.struct_expr) ? Expr_CreateStruct.fromSDK(object.struct_expr) : undefined,
+      comprehensionExpr: isSet(object.comprehension_expr) ? Expr_Comprehension.fromSDK(object.comprehension_expr) : undefined
+    };
+  },
+
+  toSDK(message: Expr): ExprSDKType {
+    const obj: any = {};
+    message.id !== undefined && (obj.id = message.id);
+    message.literalExpr !== undefined && (obj.literal_expr = message.literalExpr ? Literal.toSDK(message.literalExpr) : undefined);
+    message.identExpr !== undefined && (obj.ident_expr = message.identExpr ? Expr_Ident.toSDK(message.identExpr) : undefined);
+    message.selectExpr !== undefined && (obj.select_expr = message.selectExpr ? Expr_Select.toSDK(message.selectExpr) : undefined);
+    message.callExpr !== undefined && (obj.call_expr = message.callExpr ? Expr_Call.toSDK(message.callExpr) : undefined);
+    message.listExpr !== undefined && (obj.list_expr = message.listExpr ? Expr_CreateList.toSDK(message.listExpr) : undefined);
+    message.structExpr !== undefined && (obj.struct_expr = message.structExpr ? Expr_CreateStruct.toSDK(message.structExpr) : undefined);
+    message.comprehensionExpr !== undefined && (obj.comprehension_expr = message.comprehensionExpr ? Expr_Comprehension.toSDK(message.comprehensionExpr) : undefined);
+    return obj;
   }
 
 };
@@ -542,6 +847,18 @@ export const Expr_Ident = {
     const message = createBaseExpr_Ident();
     message.name = object.name ?? "";
     return message;
+  },
+
+  fromSDK(object: Expr_IdentSDKType): Expr_Ident {
+    return {
+      name: isSet(object.name) ? object.name : undefined
+    };
+  },
+
+  toSDK(message: Expr_Ident): Expr_IdentSDKType {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    return obj;
   }
 
 };
@@ -623,6 +940,22 @@ export const Expr_Select = {
     message.field = object.field ?? "";
     message.testOnly = object.testOnly ?? false;
     return message;
+  },
+
+  fromSDK(object: Expr_SelectSDKType): Expr_Select {
+    return {
+      operand: isSet(object.operand) ? Expr.fromSDK(object.operand) : undefined,
+      field: isSet(object.field) ? object.field : undefined,
+      testOnly: isSet(object.test_only) ? object.test_only : undefined
+    };
+  },
+
+  toSDK(message: Expr_Select): Expr_SelectSDKType {
+    const obj: any = {};
+    message.operand !== undefined && (obj.operand = message.operand ? Expr.toSDK(message.operand) : undefined);
+    message.field !== undefined && (obj.field = message.field);
+    message.testOnly !== undefined && (obj.test_only = message.testOnly);
+    return obj;
   }
 
 };
@@ -710,6 +1043,28 @@ export const Expr_Call = {
     message.function = object.function ?? "";
     message.args = object.args?.map(e => Expr.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: Expr_CallSDKType): Expr_Call {
+    return {
+      target: isSet(object.target) ? Expr.fromSDK(object.target) : undefined,
+      function: isSet(object.function) ? object.function : undefined,
+      args: Array.isArray(object?.args) ? object.args.map((e: any) => Expr.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: Expr_Call): Expr_CallSDKType {
+    const obj: any = {};
+    message.target !== undefined && (obj.target = message.target ? Expr.toSDK(message.target) : undefined);
+    message.function !== undefined && (obj.function = message.function);
+
+    if (message.args) {
+      obj.args = message.args.map(e => e ? Expr.toSDK(e) : undefined);
+    } else {
+      obj.args = [];
+    }
+
+    return obj;
   }
 
 };
@@ -773,6 +1128,24 @@ export const Expr_CreateList = {
     const message = createBaseExpr_CreateList();
     message.elements = object.elements?.map(e => Expr.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: Expr_CreateListSDKType): Expr_CreateList {
+    return {
+      elements: Array.isArray(object?.elements) ? object.elements.map((e: any) => Expr.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: Expr_CreateList): Expr_CreateListSDKType {
+    const obj: any = {};
+
+    if (message.elements) {
+      obj.elements = message.elements.map(e => e ? Expr.toSDK(e) : undefined);
+    } else {
+      obj.elements = [];
+    }
+
+    return obj;
   }
 
 };
@@ -848,6 +1221,26 @@ export const Expr_CreateStruct = {
     message.type = object.type ?? "";
     message.entries = object.entries?.map(e => Expr_CreateStruct_Entry.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: Expr_CreateStructSDKType): Expr_CreateStruct {
+    return {
+      type: isSet(object.type) ? object.type : undefined,
+      entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => Expr_CreateStruct_Entry.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: Expr_CreateStruct): Expr_CreateStructSDKType {
+    const obj: any = {};
+    message.type !== undefined && (obj.type = message.type);
+
+    if (message.entries) {
+      obj.entries = message.entries.map(e => e ? Expr_CreateStruct_Entry.toSDK(e) : undefined);
+    } else {
+      obj.entries = [];
+    }
+
+    return obj;
   }
 
 };
@@ -941,6 +1334,24 @@ export const Expr_CreateStruct_Entry = {
     message.mapKey = object.mapKey !== undefined && object.mapKey !== null ? Expr.fromPartial(object.mapKey) : undefined;
     message.value = object.value !== undefined && object.value !== null ? Expr.fromPartial(object.value) : undefined;
     return message;
+  },
+
+  fromSDK(object: Expr_CreateStruct_EntrySDKType): Expr_CreateStruct_Entry {
+    return {
+      id: isSet(object.id) ? object.id : undefined,
+      fieldKey: isSet(object.field_key) ? object.field_key : undefined,
+      mapKey: isSet(object.map_key) ? Expr.fromSDK(object.map_key) : undefined,
+      value: isSet(object.value) ? Expr.fromSDK(object.value) : undefined
+    };
+  },
+
+  toSDK(message: Expr_CreateStruct_Entry): Expr_CreateStruct_EntrySDKType {
+    const obj: any = {};
+    message.id !== undefined && (obj.id = message.id);
+    message.fieldKey !== undefined && (obj.field_key = message.fieldKey);
+    message.mapKey !== undefined && (obj.map_key = message.mapKey ? Expr.toSDK(message.mapKey) : undefined);
+    message.value !== undefined && (obj.value = message.value ? Expr.toSDK(message.value) : undefined);
+    return obj;
   }
 
 };
@@ -1070,6 +1481,30 @@ export const Expr_Comprehension = {
     message.loopStep = object.loopStep !== undefined && object.loopStep !== null ? Expr.fromPartial(object.loopStep) : undefined;
     message.result = object.result !== undefined && object.result !== null ? Expr.fromPartial(object.result) : undefined;
     return message;
+  },
+
+  fromSDK(object: Expr_ComprehensionSDKType): Expr_Comprehension {
+    return {
+      iterVar: isSet(object.iter_var) ? object.iter_var : undefined,
+      iterRange: isSet(object.iter_range) ? Expr.fromSDK(object.iter_range) : undefined,
+      accuVar: isSet(object.accu_var) ? object.accu_var : undefined,
+      accuInit: isSet(object.accu_init) ? Expr.fromSDK(object.accu_init) : undefined,
+      loopCondition: isSet(object.loop_condition) ? Expr.fromSDK(object.loop_condition) : undefined,
+      loopStep: isSet(object.loop_step) ? Expr.fromSDK(object.loop_step) : undefined,
+      result: isSet(object.result) ? Expr.fromSDK(object.result) : undefined
+    };
+  },
+
+  toSDK(message: Expr_Comprehension): Expr_ComprehensionSDKType {
+    const obj: any = {};
+    message.iterVar !== undefined && (obj.iter_var = message.iterVar);
+    message.iterRange !== undefined && (obj.iter_range = message.iterRange ? Expr.toSDK(message.iterRange) : undefined);
+    message.accuVar !== undefined && (obj.accu_var = message.accuVar);
+    message.accuInit !== undefined && (obj.accu_init = message.accuInit ? Expr.toSDK(message.accuInit) : undefined);
+    message.loopCondition !== undefined && (obj.loop_condition = message.loopCondition ? Expr.toSDK(message.loopCondition) : undefined);
+    message.loopStep !== undefined && (obj.loop_step = message.loopStep ? Expr.toSDK(message.loopStep) : undefined);
+    message.result !== undefined && (obj.result = message.result ? Expr.toSDK(message.result) : undefined);
+    return obj;
   }
 
 };
@@ -1199,6 +1634,30 @@ export const Literal = {
     message.stringValue = object.stringValue ?? undefined;
     message.bytesValue = object.bytesValue ?? undefined;
     return message;
+  },
+
+  fromSDK(object: LiteralSDKType): Literal {
+    return {
+      nullValue: isSet(object.null_value) ? nullValueFromJSON(object.null_value) : undefined,
+      boolValue: isSet(object.bool_value) ? object.bool_value : undefined,
+      int64Value: isSet(object.int64_value) ? object.int64_value : undefined,
+      uint64Value: isSet(object.uint64_value) ? object.uint64_value : undefined,
+      doubleValue: isSet(object.double_value) ? object.double_value : undefined,
+      stringValue: isSet(object.string_value) ? object.string_value : undefined,
+      bytesValue: isSet(object.bytes_value) ? object.bytes_value : undefined
+    };
+  },
+
+  toSDK(message: Literal): LiteralSDKType {
+    const obj: any = {};
+    message.nullValue !== undefined && (obj.null_value = nullValueToJSON(message.nullValue));
+    message.boolValue !== undefined && (obj.bool_value = message.boolValue);
+    message.int64Value !== undefined && (obj.int64_value = message.int64Value);
+    message.uint64Value !== undefined && (obj.uint64_value = message.uint64Value);
+    message.doubleValue !== undefined && (obj.double_value = message.doubleValue);
+    message.stringValue !== undefined && (obj.string_value = message.stringValue);
+    message.bytesValue !== undefined && (obj.bytes_value = message.bytesValue);
+    return obj;
   }
 
 };

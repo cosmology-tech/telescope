@@ -1,11 +1,11 @@
-import { Order, Counterparty } from "../../channel/v1/channel";
+import { Order, OrderSDKType, Counterparty, CounterpartySDKType } from "../../channel/v1/channel";
 import { Rpc } from "@osmonauts/helpers";
 import * as _m0 from "protobufjs/minimal";
-import { QueryAppVersionRequest, QueryAppVersionResponse } from "./query";
+import { QueryAppVersionRequest, QueryAppVersionRequestSDKType, QueryAppVersionResponse, QueryAppVersionResponseSDKType } from "./query";
 
 /** Query defines the RPC service */
 export interface Query {
-  appVersion(request: QueryAppVersionRequest): Promise<QueryAppVersionResponse>;
+  appVersion(request: QueryAppVersionRequest): Promise<QueryAppVersionResponseSDKType>;
   /*AppVersion queries an IBC Port and determines the appropriate application version to be used*/
 
 }
@@ -17,7 +17,7 @@ export class QueryClientImpl implements Query {
     this.appVersion = this.appVersion.bind(this);
   }
 
-  appVersion(request: QueryAppVersionRequest): Promise<QueryAppVersionResponse> {
+  appVersion(request: QueryAppVersionRequest): Promise<QueryAppVersionResponseSDKType> {
     const data = QueryAppVersionRequest.encode(request).finish();
     const promise = this.rpc.request("ibc.core.port.v1.Query", "AppVersion", data);
     return promise.then(data => QueryAppVersionResponse.decode(new _m0.Reader(data)));

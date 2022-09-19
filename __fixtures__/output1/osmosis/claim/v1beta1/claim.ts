@@ -1,8 +1,15 @@
-import { Coin } from "../../../cosmos/base/v1beta1/coin";
+import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "@osmonauts/helpers";
 export const protobufPackage = "osmosis.claim.v1beta1";
 export enum Action {
+  ActionAddLiquidity = 0,
+  ActionSwap = 1,
+  ActionVote = 2,
+  ActionDelegateStake = 3,
+  UNRECOGNIZED = -1,
+}
+export enum ActionSDKType {
   ActionAddLiquidity = 0,
   ActionSwap = 1,
   ActionVote = 2,
@@ -65,6 +72,21 @@ export interface ClaimRecord {
    * index of bool in array refers to action enum #
    */
   actionCompleted: boolean[];
+}
+
+/** A Claim Records is the metadata of claim data per address */
+export interface ClaimRecordSDKType {
+  /** address of claim user */
+  address: string;
+
+  /** total initial claimable amount for the user */
+  initial_claimable_amount: CoinSDKType[];
+
+  /**
+   * true if action is completed
+   * index of bool in array refers to action enum #
+   */
+  action_completed: boolean[];
 }
 
 function createBaseClaimRecord(): ClaimRecord {
@@ -167,6 +189,33 @@ export const ClaimRecord = {
     message.initialClaimableAmount = object.initialClaimableAmount?.map(e => Coin.fromPartial(e)) || [];
     message.actionCompleted = object.actionCompleted?.map(e => e) || [];
     return message;
+  },
+
+  fromSDK(object: ClaimRecordSDKType): ClaimRecord {
+    return {
+      address: isSet(object.address) ? object.address : undefined,
+      initialClaimableAmount: Array.isArray(object?.initial_claimable_amount) ? object.initial_claimable_amount.map((e: any) => Coin.fromSDK(e)) : [],
+      actionCompleted: Array.isArray(object?.action_completed) ? object.action_completed.map((e: any) => e) : []
+    };
+  },
+
+  toSDK(message: ClaimRecord): ClaimRecordSDKType {
+    const obj: any = {};
+    message.address !== undefined && (obj.address = message.address);
+
+    if (message.initialClaimableAmount) {
+      obj.initial_claimable_amount = message.initialClaimableAmount.map(e => e ? Coin.toSDK(e) : undefined);
+    } else {
+      obj.initial_claimable_amount = [];
+    }
+
+    if (message.actionCompleted) {
+      obj.action_completed = message.actionCompleted.map(e => e);
+    } else {
+      obj.action_completed = [];
+    }
+
+    return obj;
   }
 
 };

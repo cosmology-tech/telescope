@@ -84,6 +84,28 @@ exports[`osmosis/lockup/tx duration 2`] = `
     message.duration = object.duration ?? undefined;
     message.coins = object.coins?.map(e => Coin.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: MsgLockTokensSDKType): MsgLockTokens {
+    return {
+      owner: isSet(object.owner) ? object.owner : undefined,
+      duration: isSet(object.duration) ? Duration.fromSDK(object.duration) : undefined,
+      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: MsgLockTokens): MsgLockTokensSDKType {
+    const obj: any = {};
+    message.owner !== undefined && (obj.owner = message.owner);
+    message.duration !== undefined && (obj.duration = message.duration ? Duration.toSDK(message.duration) : undefined);
+
+    if (message.coins) {
+      obj.coins = message.coins.map(e => e ? Coin.toSDK(e) : undefined);
+    } else {
+      obj.coins = [];
+    }
+
+    return obj;
   }
 
 };"
@@ -229,6 +251,28 @@ exports[`osmosis/lockup/tx string 2`] = `
     message.duration = object.duration ?? undefined;
     message.coins = object.coins?.map(e => Coin.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: MsgLockTokensSDKType): MsgLockTokens {
+    return {
+      owner: isSet(object.owner) ? object.owner : undefined,
+      duration: isSet(object.duration) ? Duration.fromSDK(object.duration) : undefined,
+      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: MsgLockTokens): MsgLockTokensSDKType {
+    const obj: any = {};
+    message.owner !== undefined && (obj.owner = message.owner);
+    message.duration !== undefined && (obj.duration = message.duration ? Duration.toSDK(message.duration) : undefined);
+
+    if (message.coins) {
+      obj.coins = message.coins.map(e => e ? Coin.toSDK(e) : undefined);
+    } else {
+      obj.coins = [];
+    }
+
+    return obj;
   }
 
 };"

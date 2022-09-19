@@ -1,30 +1,30 @@
-import { OrderFilters, OrderID, Order } from "./order";
-import { PageRequest, PageResponse } from "../../../cosmos/base/query/v1beta1/pagination";
-import { BidFilters, BidID, Bid } from "./bid";
-import { LeaseFilters, LeaseID, Lease } from "./lease";
-import { Account, FractionalPayment } from "../../escrow/v1beta2/types";
+import { OrderFilters, OrderFiltersSDKType, OrderID, OrderIDSDKType, Order, OrderSDKType } from "./order";
+import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
+import { BidFilters, BidFiltersSDKType, BidID, BidIDSDKType, Bid, BidSDKType } from "./bid";
+import { LeaseFilters, LeaseFiltersSDKType, LeaseID, LeaseIDSDKType, Lease, LeaseSDKType } from "./lease";
+import { Account, AccountSDKType, FractionalPayment, FractionalPaymentSDKType } from "../../escrow/v1beta2/types";
 import { Rpc } from "@osmonauts/helpers";
 import * as _m0 from "protobufjs/minimal";
-import { QueryOrdersRequest, QueryOrdersResponse, QueryOrderRequest, QueryOrderResponse, QueryBidsRequest, QueryBidsResponse, QueryBidRequest, QueryBidResponse, QueryLeasesRequest, QueryLeasesResponse, QueryLeaseRequest, QueryLeaseResponse } from "./query";
+import { QueryOrdersRequest, QueryOrdersRequestSDKType, QueryOrdersResponse, QueryOrdersResponseSDKType, QueryOrderRequest, QueryOrderRequestSDKType, QueryOrderResponse, QueryOrderResponseSDKType, QueryBidsRequest, QueryBidsRequestSDKType, QueryBidsResponse, QueryBidsResponseSDKType, QueryBidRequest, QueryBidRequestSDKType, QueryBidResponse, QueryBidResponseSDKType, QueryLeasesRequest, QueryLeasesRequestSDKType, QueryLeasesResponse, QueryLeasesResponseSDKType, QueryLeaseRequest, QueryLeaseRequestSDKType, QueryLeaseResponse, QueryLeaseResponseSDKType } from "./query";
 
 /** Query defines the RPC service */
 export interface Query {
-  orders(request: QueryOrdersRequest): Promise<QueryOrdersResponse>;
+  orders(request: QueryOrdersRequest): Promise<QueryOrdersResponseSDKType>;
   /*Orders queries orders with filters*/
 
-  order(request: QueryOrderRequest): Promise<QueryOrderResponse>;
+  order(request: QueryOrderRequest): Promise<QueryOrderResponseSDKType>;
   /*Order queries order details*/
 
-  bids(request: QueryBidsRequest): Promise<QueryBidsResponse>;
+  bids(request: QueryBidsRequest): Promise<QueryBidsResponseSDKType>;
   /*Bids queries bids with filters*/
 
-  bid(request: QueryBidRequest): Promise<QueryBidResponse>;
+  bid(request: QueryBidRequest): Promise<QueryBidResponseSDKType>;
   /*Bid queries bid details*/
 
-  leases(request: QueryLeasesRequest): Promise<QueryLeasesResponse>;
+  leases(request: QueryLeasesRequest): Promise<QueryLeasesResponseSDKType>;
   /*Leases queries leases with filters*/
 
-  lease(request: QueryLeaseRequest): Promise<QueryLeaseResponse>;
+  lease(request: QueryLeaseRequest): Promise<QueryLeaseResponseSDKType>;
   /*Lease queries lease details*/
 
 }
@@ -41,37 +41,37 @@ export class QueryClientImpl implements Query {
     this.lease = this.lease.bind(this);
   }
 
-  orders(request: QueryOrdersRequest): Promise<QueryOrdersResponse> {
+  orders(request: QueryOrdersRequest): Promise<QueryOrdersResponseSDKType> {
     const data = QueryOrdersRequest.encode(request).finish();
     const promise = this.rpc.request("akash.market.v1beta2.Query", "Orders", data);
     return promise.then(data => QueryOrdersResponse.decode(new _m0.Reader(data)));
   }
 
-  order(request: QueryOrderRequest): Promise<QueryOrderResponse> {
+  order(request: QueryOrderRequest): Promise<QueryOrderResponseSDKType> {
     const data = QueryOrderRequest.encode(request).finish();
     const promise = this.rpc.request("akash.market.v1beta2.Query", "Order", data);
     return promise.then(data => QueryOrderResponse.decode(new _m0.Reader(data)));
   }
 
-  bids(request: QueryBidsRequest): Promise<QueryBidsResponse> {
+  bids(request: QueryBidsRequest): Promise<QueryBidsResponseSDKType> {
     const data = QueryBidsRequest.encode(request).finish();
     const promise = this.rpc.request("akash.market.v1beta2.Query", "Bids", data);
     return promise.then(data => QueryBidsResponse.decode(new _m0.Reader(data)));
   }
 
-  bid(request: QueryBidRequest): Promise<QueryBidResponse> {
+  bid(request: QueryBidRequest): Promise<QueryBidResponseSDKType> {
     const data = QueryBidRequest.encode(request).finish();
     const promise = this.rpc.request("akash.market.v1beta2.Query", "Bid", data);
     return promise.then(data => QueryBidResponse.decode(new _m0.Reader(data)));
   }
 
-  leases(request: QueryLeasesRequest): Promise<QueryLeasesResponse> {
+  leases(request: QueryLeasesRequest): Promise<QueryLeasesResponseSDKType> {
     const data = QueryLeasesRequest.encode(request).finish();
     const promise = this.rpc.request("akash.market.v1beta2.Query", "Leases", data);
     return promise.then(data => QueryLeasesResponse.decode(new _m0.Reader(data)));
   }
 
-  lease(request: QueryLeaseRequest): Promise<QueryLeaseResponse> {
+  lease(request: QueryLeaseRequest): Promise<QueryLeaseResponseSDKType> {
     const data = QueryLeaseRequest.encode(request).finish();
     const promise = this.rpc.request("akash.market.v1beta2.Query", "Lease", data);
     return promise.then(data => QueryLeaseResponse.decode(new _m0.Reader(data)));

@@ -1,24 +1,31 @@
 import * as t from '@babel/types';
 import { ProtoType, ProtoField } from '@osmonauts/types';
-import { identifier, tsPropertySignature, functionDeclaration, makeCommentBlock } from '../../utils';
-import { ProtoParseContext } from '../context';
+import { identifier, tsPropertySignature, functionDeclaration, makeCommentBlock } from '../../../utils';
+import { ProtoParseContext } from '../../context';
 
 import {
     getBaseCreateTypeFuncName,
     getFieldOptionality,
     getOneOfs
-} from './types';
-
-import {
-    getDefaultTSTypeFromProtoType,
-    getFieldTypeReference,
-    getTSType
 } from '../types';
 
-const getProtoField = (context: ProtoParseContext, field: ProtoField) => {
+import {
+    CreateProtoTypeOptions,
+    createProtoTypeOptionsDefaults,
+    getDefaultTSTypeFromProtoType,
+    getFieldTypeReference,
+    getMessageName,
+    getTSType
+} from '../../types';
+
+const getProtoField = (
+    context: ProtoParseContext,
+    field: ProtoField,
+    options: CreateProtoTypeOptions = createProtoTypeOptionsDefaults
+) => {
     let ast: any = null;
 
-    ast = getFieldTypeReference(context, field);
+    ast = getFieldTypeReference(context, field, options);
 
     if (field.rule === 'repeated') {
         ast = t.tsArrayType(ast);
@@ -43,44 +50,53 @@ const getProtoField = (context: ProtoParseContext, field: ProtoField) => {
     return ast;
 };
 
-
-
 export const createProtoType = (
     context: ProtoParseContext,
     name: string,
-    proto: ProtoType
+    proto: ProtoType,
+    options: CreateProtoTypeOptions = createProtoTypeOptionsDefaults
 ) => {
     const oneOfs = getOneOfs(proto);
 
+    // MARKED AS COSMOS SDK specific code
+    // optionalityMap is coupled to API requests
+    // if a param is found to be a route parameter, we assume it's required
+    // if a param is found to be a query parameter, we assume it's optional
     const optionalityMap = {};
     if (context.store.requests[name]) {
         const svc = context.store.requests[name];
         if (svc.info) {
-            // console.log('svc.info', svc.info);
-            // const reverseObj = Object.keys(svc.info.paramMap)
             svc.info.queryParams.map(param => {
                 optionalityMap[param] = true;
             })
         }
     }
 
+    const MsgName = getMessageName(name, options);
+
+    // declaration
     const declaration = t.exportNamedDeclaration(t.tsInterfaceDeclaration(
-        t.identifier(name),
+        t.identifier(MsgName),
         null,
         [],
         t.tsInterfaceBody(
             Object.keys(proto.fields).reduce((m, fieldName) => {
                 const isOneOf = oneOfs.includes(fieldName);
                 const field = proto.fields[fieldName];
-                const orig = field.options?.['(telescope:orig)'];
+
+                // optionalityMap is coupled to API requests
+                const orig = field.options?.['(telescope:orig)'] ?? fieldName;
                 let optional = false;
                 if (optionalityMap[orig]) {
                     optional = true;
                 }
+
+                const fieldNameWithCase = options.useOriginalCase ? orig : fieldName;
+
                 const propSig = tsPropertySignature(
-                    t.identifier(fieldName),
+                    t.identifier(fieldNameWithCase),
                     t.tsTypeAnnotation(
-                        getProtoField(context, field)
+                        getProtoField(context, field, options)
                     ),
                     optional || getFieldOptionality(context, field, isOneOf)
                 );

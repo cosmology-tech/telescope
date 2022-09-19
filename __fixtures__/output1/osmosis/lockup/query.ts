@@ -1,58 +1,110 @@
-import { Timestamp } from "../../google/protobuf/timestamp";
-import { Duration } from "../../google/protobuf/duration";
-import { Coin } from "../../cosmos/base/v1beta1/coin";
-import { PeriodLock, SyntheticLock } from "./lock";
+import { Timestamp, TimestampSDKType } from "../../google/protobuf/timestamp";
+import { Duration, DurationSDKType } from "../../google/protobuf/duration";
+import { Coin, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
+import { PeriodLock, PeriodLockSDKType, SyntheticLock, SyntheticLockSDKType } from "./lock";
 import * as _m0 from "protobufjs/minimal";
 import { DeepPartial, isSet, toTimestamp, fromTimestamp, fromJsonTimestamp, Long } from "@osmonauts/helpers";
 export const protobufPackage = "osmosis.lockup";
 export interface ModuleBalanceRequest {}
+export interface ModuleBalanceRequestSDKType {}
 export interface ModuleBalanceResponse {
   coins: Coin[];
 }
+export interface ModuleBalanceResponseSDKType {
+  coins: CoinSDKType[];
+}
 export interface ModuleLockedAmountRequest {}
+export interface ModuleLockedAmountRequestSDKType {}
 export interface ModuleLockedAmountResponse {
   coins: Coin[];
 }
+export interface ModuleLockedAmountResponseSDKType {
+  coins: CoinSDKType[];
+}
 export interface AccountUnlockableCoinsRequest {
+  owner: string;
+}
+export interface AccountUnlockableCoinsRequestSDKType {
   owner: string;
 }
 export interface AccountUnlockableCoinsResponse {
   coins: Coin[];
 }
+export interface AccountUnlockableCoinsResponseSDKType {
+  coins: CoinSDKType[];
+}
 export interface AccountUnlockingCoinsRequest {
+  owner: string;
+}
+export interface AccountUnlockingCoinsRequestSDKType {
   owner: string;
 }
 export interface AccountUnlockingCoinsResponse {
   coins: Coin[];
 }
+export interface AccountUnlockingCoinsResponseSDKType {
+  coins: CoinSDKType[];
+}
 export interface AccountLockedCoinsRequest {
+  owner: string;
+}
+export interface AccountLockedCoinsRequestSDKType {
   owner: string;
 }
 export interface AccountLockedCoinsResponse {
   coins: Coin[];
 }
+export interface AccountLockedCoinsResponseSDKType {
+  coins: CoinSDKType[];
+}
 export interface AccountLockedPastTimeRequest {
+  owner: string;
+  timestamp?: Date;
+}
+export interface AccountLockedPastTimeRequestSDKType {
   owner: string;
   timestamp?: Date;
 }
 export interface AccountLockedPastTimeResponse {
   locks: PeriodLock[];
 }
+export interface AccountLockedPastTimeResponseSDKType {
+  locks: PeriodLockSDKType[];
+}
 export interface AccountLockedPastTimeNotUnlockingOnlyRequest {
+  owner: string;
+  timestamp?: Date;
+}
+export interface AccountLockedPastTimeNotUnlockingOnlyRequestSDKType {
   owner: string;
   timestamp?: Date;
 }
 export interface AccountLockedPastTimeNotUnlockingOnlyResponse {
   locks: PeriodLock[];
 }
+export interface AccountLockedPastTimeNotUnlockingOnlyResponseSDKType {
+  locks: PeriodLockSDKType[];
+}
 export interface AccountUnlockedBeforeTimeRequest {
+  owner: string;
+  timestamp?: Date;
+}
+export interface AccountUnlockedBeforeTimeRequestSDKType {
   owner: string;
   timestamp?: Date;
 }
 export interface AccountUnlockedBeforeTimeResponse {
   locks: PeriodLock[];
 }
+export interface AccountUnlockedBeforeTimeResponseSDKType {
+  locks: PeriodLockSDKType[];
+}
 export interface AccountLockedPastTimeDenomRequest {
+  owner: string;
+  timestamp?: Date;
+  denom?: string;
+}
+export interface AccountLockedPastTimeDenomRequestSDKType {
   owner: string;
   timestamp?: Date;
   denom?: string;
@@ -60,53 +112,104 @@ export interface AccountLockedPastTimeDenomRequest {
 export interface AccountLockedPastTimeDenomResponse {
   locks: PeriodLock[];
 }
+export interface AccountLockedPastTimeDenomResponseSDKType {
+  locks: PeriodLockSDKType[];
+}
 export interface LockedDenomRequest {
   denom?: string;
   duration?: Duration;
 }
+export interface LockedDenomRequestSDKType {
+  denom?: string;
+  duration?: DurationSDKType;
+}
 export interface LockedDenomResponse {
+  amount: string;
+}
+export interface LockedDenomResponseSDKType {
   amount: string;
 }
 export interface LockedRequest {
   lockId: Long;
 }
+export interface LockedRequestSDKType {
+  lock_id: Long;
+}
 export interface LockedResponse {
   lock: PeriodLock;
+}
+export interface LockedResponseSDKType {
+  lock: PeriodLockSDKType;
 }
 export interface SyntheticLockupsByLockupIDRequest {
   lockId: Long;
 }
+export interface SyntheticLockupsByLockupIDRequestSDKType {
+  lock_id: Long;
+}
 export interface SyntheticLockupsByLockupIDResponse {
   syntheticLocks: SyntheticLock[];
+}
+export interface SyntheticLockupsByLockupIDResponseSDKType {
+  synthetic_locks: SyntheticLockSDKType[];
 }
 export interface AccountLockedLongerDurationRequest {
   owner: string;
   duration?: Duration;
 }
+export interface AccountLockedLongerDurationRequestSDKType {
+  owner: string;
+  duration?: DurationSDKType;
+}
 export interface AccountLockedLongerDurationResponse {
   locks: PeriodLock[];
+}
+export interface AccountLockedLongerDurationResponseSDKType {
+  locks: PeriodLockSDKType[];
 }
 export interface AccountLockedDurationRequest {
   owner: string;
   duration?: Duration;
 }
+export interface AccountLockedDurationRequestSDKType {
+  owner: string;
+  duration?: DurationSDKType;
+}
 export interface AccountLockedDurationResponse {
   locks: PeriodLock[];
+}
+export interface AccountLockedDurationResponseSDKType {
+  locks: PeriodLockSDKType[];
 }
 export interface AccountLockedLongerDurationNotUnlockingOnlyRequest {
   owner: string;
   duration?: Duration;
 }
+export interface AccountLockedLongerDurationNotUnlockingOnlyRequestSDKType {
+  owner: string;
+  duration?: DurationSDKType;
+}
 export interface AccountLockedLongerDurationNotUnlockingOnlyResponse {
   locks: PeriodLock[];
+}
+export interface AccountLockedLongerDurationNotUnlockingOnlyResponseSDKType {
+  locks: PeriodLockSDKType[];
 }
 export interface AccountLockedLongerDurationDenomRequest {
   owner: string;
   duration?: Duration;
   denom?: string;
 }
+export interface AccountLockedLongerDurationDenomRequestSDKType {
+  owner: string;
+  duration?: DurationSDKType;
+  denom?: string;
+}
 export interface AccountLockedLongerDurationDenomResponse {
   locks: PeriodLock[];
+}
+export interface AccountLockedLongerDurationDenomResponseSDKType {
+  locks: PeriodLockSDKType[];
 }
 
 function createBaseModuleBalanceRequest(): ModuleBalanceRequest {
@@ -148,6 +251,15 @@ export const ModuleBalanceRequest = {
   fromPartial(_: DeepPartial<ModuleBalanceRequest>): ModuleBalanceRequest {
     const message = createBaseModuleBalanceRequest();
     return message;
+  },
+
+  fromSDK(_: ModuleBalanceRequestSDKType): ModuleBalanceRequest {
+    return {};
+  },
+
+  toSDK(_: ModuleBalanceRequest): ModuleBalanceRequestSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -167,7 +279,7 @@ export const ModuleBalanceResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ModuleBalanceResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ModuleBalanceResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseModuleBalanceResponse();
@@ -211,6 +323,24 @@ export const ModuleBalanceResponse = {
     const message = createBaseModuleBalanceResponse();
     message.coins = object.coins?.map(e => Coin.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: ModuleBalanceResponseSDKType): ModuleBalanceResponse {
+    return {
+      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: ModuleBalanceResponse): ModuleBalanceResponseSDKType {
+    const obj: any = {};
+
+    if (message.coins) {
+      obj.coins = message.coins.map(e => e ? Coin.toSDK(e) : undefined);
+    } else {
+      obj.coins = [];
+    }
+
+    return obj;
   }
 
 };
@@ -254,6 +384,15 @@ export const ModuleLockedAmountRequest = {
   fromPartial(_: DeepPartial<ModuleLockedAmountRequest>): ModuleLockedAmountRequest {
     const message = createBaseModuleLockedAmountRequest();
     return message;
+  },
+
+  fromSDK(_: ModuleLockedAmountRequestSDKType): ModuleLockedAmountRequest {
+    return {};
+  },
+
+  toSDK(_: ModuleLockedAmountRequest): ModuleLockedAmountRequestSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -273,7 +412,7 @@ export const ModuleLockedAmountResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ModuleLockedAmountResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ModuleLockedAmountResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseModuleLockedAmountResponse();
@@ -317,6 +456,24 @@ export const ModuleLockedAmountResponse = {
     const message = createBaseModuleLockedAmountResponse();
     message.coins = object.coins?.map(e => Coin.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: ModuleLockedAmountResponseSDKType): ModuleLockedAmountResponse {
+    return {
+      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: ModuleLockedAmountResponse): ModuleLockedAmountResponseSDKType {
+    const obj: any = {};
+
+    if (message.coins) {
+      obj.coins = message.coins.map(e => e ? Coin.toSDK(e) : undefined);
+    } else {
+      obj.coins = [];
+    }
+
+    return obj;
   }
 
 };
@@ -374,6 +531,18 @@ export const AccountUnlockableCoinsRequest = {
     const message = createBaseAccountUnlockableCoinsRequest();
     message.owner = object.owner ?? "";
     return message;
+  },
+
+  fromSDK(object: AccountUnlockableCoinsRequestSDKType): AccountUnlockableCoinsRequest {
+    return {
+      owner: isSet(object.owner) ? object.owner : undefined
+    };
+  },
+
+  toSDK(message: AccountUnlockableCoinsRequest): AccountUnlockableCoinsRequestSDKType {
+    const obj: any = {};
+    message.owner !== undefined && (obj.owner = message.owner);
+    return obj;
   }
 
 };
@@ -393,7 +562,7 @@ export const AccountUnlockableCoinsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): AccountUnlockableCoinsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): AccountUnlockableCoinsResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAccountUnlockableCoinsResponse();
@@ -437,6 +606,24 @@ export const AccountUnlockableCoinsResponse = {
     const message = createBaseAccountUnlockableCoinsResponse();
     message.coins = object.coins?.map(e => Coin.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: AccountUnlockableCoinsResponseSDKType): AccountUnlockableCoinsResponse {
+    return {
+      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: AccountUnlockableCoinsResponse): AccountUnlockableCoinsResponseSDKType {
+    const obj: any = {};
+
+    if (message.coins) {
+      obj.coins = message.coins.map(e => e ? Coin.toSDK(e) : undefined);
+    } else {
+      obj.coins = [];
+    }
+
+    return obj;
   }
 
 };
@@ -494,6 +681,18 @@ export const AccountUnlockingCoinsRequest = {
     const message = createBaseAccountUnlockingCoinsRequest();
     message.owner = object.owner ?? "";
     return message;
+  },
+
+  fromSDK(object: AccountUnlockingCoinsRequestSDKType): AccountUnlockingCoinsRequest {
+    return {
+      owner: isSet(object.owner) ? object.owner : undefined
+    };
+  },
+
+  toSDK(message: AccountUnlockingCoinsRequest): AccountUnlockingCoinsRequestSDKType {
+    const obj: any = {};
+    message.owner !== undefined && (obj.owner = message.owner);
+    return obj;
   }
 
 };
@@ -513,7 +712,7 @@ export const AccountUnlockingCoinsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): AccountUnlockingCoinsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): AccountUnlockingCoinsResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAccountUnlockingCoinsResponse();
@@ -557,6 +756,24 @@ export const AccountUnlockingCoinsResponse = {
     const message = createBaseAccountUnlockingCoinsResponse();
     message.coins = object.coins?.map(e => Coin.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: AccountUnlockingCoinsResponseSDKType): AccountUnlockingCoinsResponse {
+    return {
+      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: AccountUnlockingCoinsResponse): AccountUnlockingCoinsResponseSDKType {
+    const obj: any = {};
+
+    if (message.coins) {
+      obj.coins = message.coins.map(e => e ? Coin.toSDK(e) : undefined);
+    } else {
+      obj.coins = [];
+    }
+
+    return obj;
   }
 
 };
@@ -614,6 +831,18 @@ export const AccountLockedCoinsRequest = {
     const message = createBaseAccountLockedCoinsRequest();
     message.owner = object.owner ?? "";
     return message;
+  },
+
+  fromSDK(object: AccountLockedCoinsRequestSDKType): AccountLockedCoinsRequest {
+    return {
+      owner: isSet(object.owner) ? object.owner : undefined
+    };
+  },
+
+  toSDK(message: AccountLockedCoinsRequest): AccountLockedCoinsRequestSDKType {
+    const obj: any = {};
+    message.owner !== undefined && (obj.owner = message.owner);
+    return obj;
   }
 
 };
@@ -633,7 +862,7 @@ export const AccountLockedCoinsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): AccountLockedCoinsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): AccountLockedCoinsResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAccountLockedCoinsResponse();
@@ -677,6 +906,24 @@ export const AccountLockedCoinsResponse = {
     const message = createBaseAccountLockedCoinsResponse();
     message.coins = object.coins?.map(e => Coin.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: AccountLockedCoinsResponseSDKType): AccountLockedCoinsResponse {
+    return {
+      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: AccountLockedCoinsResponse): AccountLockedCoinsResponseSDKType {
+    const obj: any = {};
+
+    if (message.coins) {
+      obj.coins = message.coins.map(e => e ? Coin.toSDK(e) : undefined);
+    } else {
+      obj.coins = [];
+    }
+
+    return obj;
   }
 
 };
@@ -746,6 +993,20 @@ export const AccountLockedPastTimeRequest = {
     message.owner = object.owner ?? "";
     message.timestamp = object.timestamp ?? undefined;
     return message;
+  },
+
+  fromSDK(object: AccountLockedPastTimeRequestSDKType): AccountLockedPastTimeRequest {
+    return {
+      owner: isSet(object.owner) ? object.owner : undefined,
+      timestamp: isSet(object.timestamp) ? Timestamp.fromSDK(object.timestamp) : undefined
+    };
+  },
+
+  toSDK(message: AccountLockedPastTimeRequest): AccountLockedPastTimeRequestSDKType {
+    const obj: any = {};
+    message.owner !== undefined && (obj.owner = message.owner);
+    message.timestamp !== undefined && (obj.timestamp = message.timestamp ? Timestamp.toSDK(message.timestamp) : undefined);
+    return obj;
   }
 
 };
@@ -765,7 +1026,7 @@ export const AccountLockedPastTimeResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): AccountLockedPastTimeResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): AccountLockedPastTimeResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAccountLockedPastTimeResponse();
@@ -809,6 +1070,24 @@ export const AccountLockedPastTimeResponse = {
     const message = createBaseAccountLockedPastTimeResponse();
     message.locks = object.locks?.map(e => PeriodLock.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: AccountLockedPastTimeResponseSDKType): AccountLockedPastTimeResponse {
+    return {
+      locks: Array.isArray(object?.locks) ? object.locks.map((e: any) => PeriodLock.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: AccountLockedPastTimeResponse): AccountLockedPastTimeResponseSDKType {
+    const obj: any = {};
+
+    if (message.locks) {
+      obj.locks = message.locks.map(e => e ? PeriodLock.toSDK(e) : undefined);
+    } else {
+      obj.locks = [];
+    }
+
+    return obj;
   }
 
 };
@@ -878,6 +1157,20 @@ export const AccountLockedPastTimeNotUnlockingOnlyRequest = {
     message.owner = object.owner ?? "";
     message.timestamp = object.timestamp ?? undefined;
     return message;
+  },
+
+  fromSDK(object: AccountLockedPastTimeNotUnlockingOnlyRequestSDKType): AccountLockedPastTimeNotUnlockingOnlyRequest {
+    return {
+      owner: isSet(object.owner) ? object.owner : undefined,
+      timestamp: isSet(object.timestamp) ? Timestamp.fromSDK(object.timestamp) : undefined
+    };
+  },
+
+  toSDK(message: AccountLockedPastTimeNotUnlockingOnlyRequest): AccountLockedPastTimeNotUnlockingOnlyRequestSDKType {
+    const obj: any = {};
+    message.owner !== undefined && (obj.owner = message.owner);
+    message.timestamp !== undefined && (obj.timestamp = message.timestamp ? Timestamp.toSDK(message.timestamp) : undefined);
+    return obj;
   }
 
 };
@@ -897,7 +1190,7 @@ export const AccountLockedPastTimeNotUnlockingOnlyResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): AccountLockedPastTimeNotUnlockingOnlyResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): AccountLockedPastTimeNotUnlockingOnlyResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAccountLockedPastTimeNotUnlockingOnlyResponse();
@@ -941,6 +1234,24 @@ export const AccountLockedPastTimeNotUnlockingOnlyResponse = {
     const message = createBaseAccountLockedPastTimeNotUnlockingOnlyResponse();
     message.locks = object.locks?.map(e => PeriodLock.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: AccountLockedPastTimeNotUnlockingOnlyResponseSDKType): AccountLockedPastTimeNotUnlockingOnlyResponse {
+    return {
+      locks: Array.isArray(object?.locks) ? object.locks.map((e: any) => PeriodLock.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: AccountLockedPastTimeNotUnlockingOnlyResponse): AccountLockedPastTimeNotUnlockingOnlyResponseSDKType {
+    const obj: any = {};
+
+    if (message.locks) {
+      obj.locks = message.locks.map(e => e ? PeriodLock.toSDK(e) : undefined);
+    } else {
+      obj.locks = [];
+    }
+
+    return obj;
   }
 
 };
@@ -1010,6 +1321,20 @@ export const AccountUnlockedBeforeTimeRequest = {
     message.owner = object.owner ?? "";
     message.timestamp = object.timestamp ?? undefined;
     return message;
+  },
+
+  fromSDK(object: AccountUnlockedBeforeTimeRequestSDKType): AccountUnlockedBeforeTimeRequest {
+    return {
+      owner: isSet(object.owner) ? object.owner : undefined,
+      timestamp: isSet(object.timestamp) ? Timestamp.fromSDK(object.timestamp) : undefined
+    };
+  },
+
+  toSDK(message: AccountUnlockedBeforeTimeRequest): AccountUnlockedBeforeTimeRequestSDKType {
+    const obj: any = {};
+    message.owner !== undefined && (obj.owner = message.owner);
+    message.timestamp !== undefined && (obj.timestamp = message.timestamp ? Timestamp.toSDK(message.timestamp) : undefined);
+    return obj;
   }
 
 };
@@ -1029,7 +1354,7 @@ export const AccountUnlockedBeforeTimeResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): AccountUnlockedBeforeTimeResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): AccountUnlockedBeforeTimeResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAccountUnlockedBeforeTimeResponse();
@@ -1073,6 +1398,24 @@ export const AccountUnlockedBeforeTimeResponse = {
     const message = createBaseAccountUnlockedBeforeTimeResponse();
     message.locks = object.locks?.map(e => PeriodLock.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: AccountUnlockedBeforeTimeResponseSDKType): AccountUnlockedBeforeTimeResponse {
+    return {
+      locks: Array.isArray(object?.locks) ? object.locks.map((e: any) => PeriodLock.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: AccountUnlockedBeforeTimeResponse): AccountUnlockedBeforeTimeResponseSDKType {
+    const obj: any = {};
+
+    if (message.locks) {
+      obj.locks = message.locks.map(e => e ? PeriodLock.toSDK(e) : undefined);
+    } else {
+      obj.locks = [];
+    }
+
+    return obj;
   }
 
 };
@@ -1154,6 +1497,22 @@ export const AccountLockedPastTimeDenomRequest = {
     message.timestamp = object.timestamp ?? undefined;
     message.denom = object.denom ?? "";
     return message;
+  },
+
+  fromSDK(object: AccountLockedPastTimeDenomRequestSDKType): AccountLockedPastTimeDenomRequest {
+    return {
+      owner: isSet(object.owner) ? object.owner : undefined,
+      timestamp: isSet(object.timestamp) ? Timestamp.fromSDK(object.timestamp) : undefined,
+      denom: isSet(object.denom) ? object.denom : undefined
+    };
+  },
+
+  toSDK(message: AccountLockedPastTimeDenomRequest): AccountLockedPastTimeDenomRequestSDKType {
+    const obj: any = {};
+    message.owner !== undefined && (obj.owner = message.owner);
+    message.timestamp !== undefined && (obj.timestamp = message.timestamp ? Timestamp.toSDK(message.timestamp) : undefined);
+    message.denom !== undefined && (obj.denom = message.denom);
+    return obj;
   }
 
 };
@@ -1173,7 +1532,7 @@ export const AccountLockedPastTimeDenomResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): AccountLockedPastTimeDenomResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): AccountLockedPastTimeDenomResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAccountLockedPastTimeDenomResponse();
@@ -1217,6 +1576,24 @@ export const AccountLockedPastTimeDenomResponse = {
     const message = createBaseAccountLockedPastTimeDenomResponse();
     message.locks = object.locks?.map(e => PeriodLock.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: AccountLockedPastTimeDenomResponseSDKType): AccountLockedPastTimeDenomResponse {
+    return {
+      locks: Array.isArray(object?.locks) ? object.locks.map((e: any) => PeriodLock.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: AccountLockedPastTimeDenomResponse): AccountLockedPastTimeDenomResponseSDKType {
+    const obj: any = {};
+
+    if (message.locks) {
+      obj.locks = message.locks.map(e => e ? PeriodLock.toSDK(e) : undefined);
+    } else {
+      obj.locks = [];
+    }
+
+    return obj;
   }
 
 };
@@ -1286,6 +1663,20 @@ export const LockedDenomRequest = {
     message.denom = object.denom ?? "";
     message.duration = object.duration ?? undefined;
     return message;
+  },
+
+  fromSDK(object: LockedDenomRequestSDKType): LockedDenomRequest {
+    return {
+      denom: isSet(object.denom) ? object.denom : undefined,
+      duration: isSet(object.duration) ? Duration.fromSDK(object.duration) : undefined
+    };
+  },
+
+  toSDK(message: LockedDenomRequest): LockedDenomRequestSDKType {
+    const obj: any = {};
+    message.denom !== undefined && (obj.denom = message.denom);
+    message.duration !== undefined && (obj.duration = message.duration ? Duration.toSDK(message.duration) : undefined);
+    return obj;
   }
 
 };
@@ -1305,7 +1696,7 @@ export const LockedDenomResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): LockedDenomResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): LockedDenomResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLockedDenomResponse();
@@ -1343,6 +1734,18 @@ export const LockedDenomResponse = {
     const message = createBaseLockedDenomResponse();
     message.amount = object.amount ?? "";
     return message;
+  },
+
+  fromSDK(object: LockedDenomResponseSDKType): LockedDenomResponse {
+    return {
+      amount: isSet(object.amount) ? object.amount : undefined
+    };
+  },
+
+  toSDK(message: LockedDenomResponse): LockedDenomResponseSDKType {
+    const obj: any = {};
+    message.amount !== undefined && (obj.amount = message.amount);
+    return obj;
   }
 
 };
@@ -1400,6 +1803,18 @@ export const LockedRequest = {
     const message = createBaseLockedRequest();
     message.lockId = object.lockId !== undefined && object.lockId !== null ? Long.fromValue(object.lockId) : Long.UZERO;
     return message;
+  },
+
+  fromSDK(object: LockedRequestSDKType): LockedRequest {
+    return {
+      lockId: isSet(object.lock_id) ? object.lock_id : undefined
+    };
+  },
+
+  toSDK(message: LockedRequest): LockedRequestSDKType {
+    const obj: any = {};
+    message.lockId !== undefined && (obj.lock_id = message.lockId);
+    return obj;
   }
 
 };
@@ -1419,7 +1834,7 @@ export const LockedResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): LockedResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): LockedResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLockedResponse();
@@ -1457,6 +1872,18 @@ export const LockedResponse = {
     const message = createBaseLockedResponse();
     message.lock = object.lock !== undefined && object.lock !== null ? PeriodLock.fromPartial(object.lock) : undefined;
     return message;
+  },
+
+  fromSDK(object: LockedResponseSDKType): LockedResponse {
+    return {
+      lock: isSet(object.lock) ? PeriodLock.fromSDK(object.lock) : undefined
+    };
+  },
+
+  toSDK(message: LockedResponse): LockedResponseSDKType {
+    const obj: any = {};
+    message.lock !== undefined && (obj.lock = message.lock ? PeriodLock.toSDK(message.lock) : undefined);
+    return obj;
   }
 
 };
@@ -1514,6 +1941,18 @@ export const SyntheticLockupsByLockupIDRequest = {
     const message = createBaseSyntheticLockupsByLockupIDRequest();
     message.lockId = object.lockId !== undefined && object.lockId !== null ? Long.fromValue(object.lockId) : Long.UZERO;
     return message;
+  },
+
+  fromSDK(object: SyntheticLockupsByLockupIDRequestSDKType): SyntheticLockupsByLockupIDRequest {
+    return {
+      lockId: isSet(object.lock_id) ? object.lock_id : undefined
+    };
+  },
+
+  toSDK(message: SyntheticLockupsByLockupIDRequest): SyntheticLockupsByLockupIDRequestSDKType {
+    const obj: any = {};
+    message.lockId !== undefined && (obj.lock_id = message.lockId);
+    return obj;
   }
 
 };
@@ -1533,7 +1972,7 @@ export const SyntheticLockupsByLockupIDResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): SyntheticLockupsByLockupIDResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): SyntheticLockupsByLockupIDResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSyntheticLockupsByLockupIDResponse();
@@ -1577,6 +2016,24 @@ export const SyntheticLockupsByLockupIDResponse = {
     const message = createBaseSyntheticLockupsByLockupIDResponse();
     message.syntheticLocks = object.syntheticLocks?.map(e => SyntheticLock.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: SyntheticLockupsByLockupIDResponseSDKType): SyntheticLockupsByLockupIDResponse {
+    return {
+      syntheticLocks: Array.isArray(object?.synthetic_locks) ? object.synthetic_locks.map((e: any) => SyntheticLock.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: SyntheticLockupsByLockupIDResponse): SyntheticLockupsByLockupIDResponseSDKType {
+    const obj: any = {};
+
+    if (message.syntheticLocks) {
+      obj.synthetic_locks = message.syntheticLocks.map(e => e ? SyntheticLock.toSDK(e) : undefined);
+    } else {
+      obj.synthetic_locks = [];
+    }
+
+    return obj;
   }
 
 };
@@ -1646,6 +2103,20 @@ export const AccountLockedLongerDurationRequest = {
     message.owner = object.owner ?? "";
     message.duration = object.duration ?? undefined;
     return message;
+  },
+
+  fromSDK(object: AccountLockedLongerDurationRequestSDKType): AccountLockedLongerDurationRequest {
+    return {
+      owner: isSet(object.owner) ? object.owner : undefined,
+      duration: isSet(object.duration) ? Duration.fromSDK(object.duration) : undefined
+    };
+  },
+
+  toSDK(message: AccountLockedLongerDurationRequest): AccountLockedLongerDurationRequestSDKType {
+    const obj: any = {};
+    message.owner !== undefined && (obj.owner = message.owner);
+    message.duration !== undefined && (obj.duration = message.duration ? Duration.toSDK(message.duration) : undefined);
+    return obj;
   }
 
 };
@@ -1665,7 +2136,7 @@ export const AccountLockedLongerDurationResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): AccountLockedLongerDurationResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): AccountLockedLongerDurationResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAccountLockedLongerDurationResponse();
@@ -1709,6 +2180,24 @@ export const AccountLockedLongerDurationResponse = {
     const message = createBaseAccountLockedLongerDurationResponse();
     message.locks = object.locks?.map(e => PeriodLock.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: AccountLockedLongerDurationResponseSDKType): AccountLockedLongerDurationResponse {
+    return {
+      locks: Array.isArray(object?.locks) ? object.locks.map((e: any) => PeriodLock.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: AccountLockedLongerDurationResponse): AccountLockedLongerDurationResponseSDKType {
+    const obj: any = {};
+
+    if (message.locks) {
+      obj.locks = message.locks.map(e => e ? PeriodLock.toSDK(e) : undefined);
+    } else {
+      obj.locks = [];
+    }
+
+    return obj;
   }
 
 };
@@ -1778,6 +2267,20 @@ export const AccountLockedDurationRequest = {
     message.owner = object.owner ?? "";
     message.duration = object.duration ?? undefined;
     return message;
+  },
+
+  fromSDK(object: AccountLockedDurationRequestSDKType): AccountLockedDurationRequest {
+    return {
+      owner: isSet(object.owner) ? object.owner : undefined,
+      duration: isSet(object.duration) ? Duration.fromSDK(object.duration) : undefined
+    };
+  },
+
+  toSDK(message: AccountLockedDurationRequest): AccountLockedDurationRequestSDKType {
+    const obj: any = {};
+    message.owner !== undefined && (obj.owner = message.owner);
+    message.duration !== undefined && (obj.duration = message.duration ? Duration.toSDK(message.duration) : undefined);
+    return obj;
   }
 
 };
@@ -1797,7 +2300,7 @@ export const AccountLockedDurationResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): AccountLockedDurationResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): AccountLockedDurationResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAccountLockedDurationResponse();
@@ -1841,6 +2344,24 @@ export const AccountLockedDurationResponse = {
     const message = createBaseAccountLockedDurationResponse();
     message.locks = object.locks?.map(e => PeriodLock.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: AccountLockedDurationResponseSDKType): AccountLockedDurationResponse {
+    return {
+      locks: Array.isArray(object?.locks) ? object.locks.map((e: any) => PeriodLock.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: AccountLockedDurationResponse): AccountLockedDurationResponseSDKType {
+    const obj: any = {};
+
+    if (message.locks) {
+      obj.locks = message.locks.map(e => e ? PeriodLock.toSDK(e) : undefined);
+    } else {
+      obj.locks = [];
+    }
+
+    return obj;
   }
 
 };
@@ -1910,6 +2431,20 @@ export const AccountLockedLongerDurationNotUnlockingOnlyRequest = {
     message.owner = object.owner ?? "";
     message.duration = object.duration ?? undefined;
     return message;
+  },
+
+  fromSDK(object: AccountLockedLongerDurationNotUnlockingOnlyRequestSDKType): AccountLockedLongerDurationNotUnlockingOnlyRequest {
+    return {
+      owner: isSet(object.owner) ? object.owner : undefined,
+      duration: isSet(object.duration) ? Duration.fromSDK(object.duration) : undefined
+    };
+  },
+
+  toSDK(message: AccountLockedLongerDurationNotUnlockingOnlyRequest): AccountLockedLongerDurationNotUnlockingOnlyRequestSDKType {
+    const obj: any = {};
+    message.owner !== undefined && (obj.owner = message.owner);
+    message.duration !== undefined && (obj.duration = message.duration ? Duration.toSDK(message.duration) : undefined);
+    return obj;
   }
 
 };
@@ -1929,7 +2464,7 @@ export const AccountLockedLongerDurationNotUnlockingOnlyResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): AccountLockedLongerDurationNotUnlockingOnlyResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): AccountLockedLongerDurationNotUnlockingOnlyResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAccountLockedLongerDurationNotUnlockingOnlyResponse();
@@ -1973,6 +2508,24 @@ export const AccountLockedLongerDurationNotUnlockingOnlyResponse = {
     const message = createBaseAccountLockedLongerDurationNotUnlockingOnlyResponse();
     message.locks = object.locks?.map(e => PeriodLock.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: AccountLockedLongerDurationNotUnlockingOnlyResponseSDKType): AccountLockedLongerDurationNotUnlockingOnlyResponse {
+    return {
+      locks: Array.isArray(object?.locks) ? object.locks.map((e: any) => PeriodLock.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: AccountLockedLongerDurationNotUnlockingOnlyResponse): AccountLockedLongerDurationNotUnlockingOnlyResponseSDKType {
+    const obj: any = {};
+
+    if (message.locks) {
+      obj.locks = message.locks.map(e => e ? PeriodLock.toSDK(e) : undefined);
+    } else {
+      obj.locks = [];
+    }
+
+    return obj;
   }
 
 };
@@ -2054,6 +2607,22 @@ export const AccountLockedLongerDurationDenomRequest = {
     message.duration = object.duration ?? undefined;
     message.denom = object.denom ?? "";
     return message;
+  },
+
+  fromSDK(object: AccountLockedLongerDurationDenomRequestSDKType): AccountLockedLongerDurationDenomRequest {
+    return {
+      owner: isSet(object.owner) ? object.owner : undefined,
+      duration: isSet(object.duration) ? Duration.fromSDK(object.duration) : undefined,
+      denom: isSet(object.denom) ? object.denom : undefined
+    };
+  },
+
+  toSDK(message: AccountLockedLongerDurationDenomRequest): AccountLockedLongerDurationDenomRequestSDKType {
+    const obj: any = {};
+    message.owner !== undefined && (obj.owner = message.owner);
+    message.duration !== undefined && (obj.duration = message.duration ? Duration.toSDK(message.duration) : undefined);
+    message.denom !== undefined && (obj.denom = message.denom);
+    return obj;
   }
 
 };
@@ -2073,7 +2642,7 @@ export const AccountLockedLongerDurationDenomResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): AccountLockedLongerDurationDenomResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): AccountLockedLongerDurationDenomResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAccountLockedLongerDurationDenomResponse();
@@ -2117,6 +2686,24 @@ export const AccountLockedLongerDurationDenomResponse = {
     const message = createBaseAccountLockedLongerDurationDenomResponse();
     message.locks = object.locks?.map(e => PeriodLock.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: AccountLockedLongerDurationDenomResponseSDKType): AccountLockedLongerDurationDenomResponse {
+    return {
+      locks: Array.isArray(object?.locks) ? object.locks.map((e: any) => PeriodLock.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: AccountLockedLongerDurationDenomResponse): AccountLockedLongerDurationDenomResponseSDKType {
+    const obj: any = {};
+
+    if (message.locks) {
+      obj.locks = message.locks.map(e => e ? PeriodLock.toSDK(e) : undefined);
+    } else {
+      obj.locks = [];
+    }
+
+    return obj;
   }
 
 };

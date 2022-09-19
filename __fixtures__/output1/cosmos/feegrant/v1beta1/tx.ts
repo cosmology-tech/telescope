@@ -1,4 +1,4 @@
-import { Any } from "../../../google/protobuf/any";
+import { Any, AnySDKType } from "../../../google/protobuf/any";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "@osmonauts/helpers";
 export const protobufPackage = "cosmos.feegrant.v1beta1";
@@ -18,8 +18,26 @@ export interface MsgGrantAllowance {
   allowance: Any;
 }
 
+/**
+ * MsgGrantAllowance adds permission for Grantee to spend up to Allowance
+ * of fees from the account of Granter.
+ */
+export interface MsgGrantAllowanceSDKType {
+  /** granter is the address of the user granting an allowance of their funds. */
+  granter: string;
+
+  /** grantee is the address of the user being granted an allowance of another user's funds. */
+  grantee: string;
+
+  /** allowance can be any of basic, periodic, allowed fee allowance. */
+  allowance: AnySDKType;
+}
+
 /** MsgGrantAllowanceResponse defines the Msg/GrantAllowanceResponse response type. */
 export interface MsgGrantAllowanceResponse {}
+
+/** MsgGrantAllowanceResponse defines the Msg/GrantAllowanceResponse response type. */
+export interface MsgGrantAllowanceResponseSDKType {}
 
 /** MsgRevokeAllowance removes any existing Allowance from Granter to Grantee. */
 export interface MsgRevokeAllowance {
@@ -30,8 +48,20 @@ export interface MsgRevokeAllowance {
   grantee: string;
 }
 
+/** MsgRevokeAllowance removes any existing Allowance from Granter to Grantee. */
+export interface MsgRevokeAllowanceSDKType {
+  /** granter is the address of the user granting an allowance of their funds. */
+  granter: string;
+
+  /** grantee is the address of the user being granted an allowance of another user's funds. */
+  grantee: string;
+}
+
 /** MsgRevokeAllowanceResponse defines the Msg/RevokeAllowanceResponse response type. */
 export interface MsgRevokeAllowanceResponse {}
+
+/** MsgRevokeAllowanceResponse defines the Msg/RevokeAllowanceResponse response type. */
+export interface MsgRevokeAllowanceResponseSDKType {}
 
 function createBaseMsgGrantAllowance(): MsgGrantAllowance {
   return {
@@ -110,6 +140,22 @@ export const MsgGrantAllowance = {
     message.grantee = object.grantee ?? "";
     message.allowance = object.allowance !== undefined && object.allowance !== null ? Any.fromPartial(object.allowance) : undefined;
     return message;
+  },
+
+  fromSDK(object: MsgGrantAllowanceSDKType): MsgGrantAllowance {
+    return {
+      granter: isSet(object.granter) ? object.granter : undefined,
+      grantee: isSet(object.grantee) ? object.grantee : undefined,
+      allowance: isSet(object.allowance) ? Any.fromSDK(object.allowance) : undefined
+    };
+  },
+
+  toSDK(message: MsgGrantAllowance): MsgGrantAllowanceSDKType {
+    const obj: any = {};
+    message.granter !== undefined && (obj.granter = message.granter);
+    message.grantee !== undefined && (obj.grantee = message.grantee);
+    message.allowance !== undefined && (obj.allowance = message.allowance ? Any.toSDK(message.allowance) : undefined);
+    return obj;
   }
 
 };
@@ -123,7 +169,7 @@ export const MsgGrantAllowanceResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgGrantAllowanceResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgGrantAllowanceResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgGrantAllowanceResponse();
@@ -153,6 +199,15 @@ export const MsgGrantAllowanceResponse = {
   fromPartial(_: DeepPartial<MsgGrantAllowanceResponse>): MsgGrantAllowanceResponse {
     const message = createBaseMsgGrantAllowanceResponse();
     return message;
+  },
+
+  fromSDK(_: MsgGrantAllowanceResponseSDKType): MsgGrantAllowanceResponse {
+    return {};
+  },
+
+  toSDK(_: MsgGrantAllowanceResponse): MsgGrantAllowanceResponseSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -222,6 +277,20 @@ export const MsgRevokeAllowance = {
     message.granter = object.granter ?? "";
     message.grantee = object.grantee ?? "";
     return message;
+  },
+
+  fromSDK(object: MsgRevokeAllowanceSDKType): MsgRevokeAllowance {
+    return {
+      granter: isSet(object.granter) ? object.granter : undefined,
+      grantee: isSet(object.grantee) ? object.grantee : undefined
+    };
+  },
+
+  toSDK(message: MsgRevokeAllowance): MsgRevokeAllowanceSDKType {
+    const obj: any = {};
+    message.granter !== undefined && (obj.granter = message.granter);
+    message.grantee !== undefined && (obj.grantee = message.grantee);
+    return obj;
   }
 
 };
@@ -235,7 +304,7 @@ export const MsgRevokeAllowanceResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgRevokeAllowanceResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgRevokeAllowanceResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgRevokeAllowanceResponse();
@@ -265,6 +334,15 @@ export const MsgRevokeAllowanceResponse = {
   fromPartial(_: DeepPartial<MsgRevokeAllowanceResponse>): MsgRevokeAllowanceResponse {
     const message = createBaseMsgRevokeAllowanceResponse();
     return message;
+  },
+
+  fromSDK(_: MsgRevokeAllowanceResponseSDKType): MsgRevokeAllowanceResponse {
+    return {};
+  },
+
+  toSDK(_: MsgRevokeAllowanceResponse): MsgRevokeAllowanceResponseSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };

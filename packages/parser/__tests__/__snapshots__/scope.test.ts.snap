@@ -402,6 +402,11 @@ evaluating that expression, and the caller requesting evaluation.",
           "referenceMap": Object {
             "id": 2,
             "keyType": "int64",
+            "options": Object {
+              "(telescope:camel)": "referenceMap",
+              "(telescope:name)": "referenceMap",
+              "(telescope:orig)": "reference_map",
+            },
             "type": "Reference",
           },
           "sourceInfo": Object {
@@ -416,6 +421,11 @@ evaluating that expression, and the caller requesting evaluation.",
           "typeMap": Object {
             "id": 3,
             "keyType": "int64",
+            "options": Object {
+              "(telescope:camel)": "typeMap",
+              "(telescope:name)": "typeMap",
+              "(telescope:orig)": "type_map",
+            },
             "type": "Type",
           },
         },

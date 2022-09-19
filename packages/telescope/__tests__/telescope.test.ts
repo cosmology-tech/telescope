@@ -13,6 +13,8 @@ store.traverseAll();
 
 const options: TelescopeOptions = {
 
+  removeUnusedImports: false,
+
   tsDisable: {
     disableAll: false,
     patterns: [
@@ -26,6 +28,15 @@ const options: TelescopeOptions = {
   prototypes: {
     parser: {
       keepCase: false
+    },
+    methods: {
+      encode: true,
+      decode: true,
+      fromJSON: true,
+      toJSON: true,
+      fromPartial: true,
+      toSDK: true,
+      fromSDK: true
     },
     includePackageVar: true,
     fieldDefaultIsOptional: false,

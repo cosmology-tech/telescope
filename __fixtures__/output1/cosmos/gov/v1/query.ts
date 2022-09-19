@@ -1,5 +1,5 @@
-import { ProposalStatus, Proposal, Vote, VotingParams, DepositParams, TallyParams, Deposit, TallyResult, proposalStatusFromJSON, proposalStatusToJSON } from "./gov";
-import { PageRequest, PageResponse } from "../../base/query/v1beta1/pagination";
+import { ProposalStatus, ProposalStatusSDKType, Proposal, ProposalSDKType, Vote, VoteSDKType, VotingParams, VotingParamsSDKType, DepositParams, DepositParamsSDKType, TallyParams, TallyParamsSDKType, Deposit, DepositSDKType, TallyResult, TallyResultSDKType, proposalStatusFromJSON, proposalStatusToJSON } from "./gov";
+import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../base/query/v1beta1/pagination";
 import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, DeepPartial } from "@osmonauts/helpers";
 export const protobufPackage = "cosmos.gov.v1";
@@ -10,9 +10,20 @@ export interface QueryProposalRequest {
   proposalId: Long;
 }
 
+/** QueryProposalRequest is the request type for the Query/Proposal RPC method. */
+export interface QueryProposalRequestSDKType {
+  /** proposal_id defines the unique id of the proposal. */
+  proposal_id: Long;
+}
+
 /** QueryProposalResponse is the response type for the Query/Proposal RPC method. */
 export interface QueryProposalResponse {
   proposal: Proposal;
+}
+
+/** QueryProposalResponse is the response type for the Query/Proposal RPC method. */
+export interface QueryProposalResponseSDKType {
+  proposal: ProposalSDKType;
 }
 
 /** QueryProposalsRequest is the request type for the Query/Proposals RPC method. */
@@ -30,6 +41,21 @@ export interface QueryProposalsRequest {
   pagination?: PageRequest;
 }
 
+/** QueryProposalsRequest is the request type for the Query/Proposals RPC method. */
+export interface QueryProposalsRequestSDKType {
+  /** proposal_status defines the status of the proposals. */
+  proposal_status?: ProposalStatusSDKType;
+
+  /** voter defines the voter address for the proposals. */
+  voter?: string;
+
+  /** depositor defines the deposit addresses from the proposals. */
+  depositor?: string;
+
+  /** pagination defines an optional pagination for the request. */
+  pagination?: PageRequestSDKType;
+}
+
 /**
  * QueryProposalsResponse is the response type for the Query/Proposals RPC
  * method.
@@ -41,10 +67,30 @@ export interface QueryProposalsResponse {
   pagination?: PageResponse;
 }
 
+/**
+ * QueryProposalsResponse is the response type for the Query/Proposals RPC
+ * method.
+ */
+export interface QueryProposalsResponseSDKType {
+  proposals: ProposalSDKType[];
+
+  /** pagination defines the pagination in the response. */
+  pagination?: PageResponseSDKType;
+}
+
 /** QueryVoteRequest is the request type for the Query/Vote RPC method. */
 export interface QueryVoteRequest {
   /** proposal_id defines the unique id of the proposal. */
   proposalId: Long;
+
+  /** voter defines the oter address for the proposals. */
+  voter: string;
+}
+
+/** QueryVoteRequest is the request type for the Query/Vote RPC method. */
+export interface QueryVoteRequestSDKType {
+  /** proposal_id defines the unique id of the proposal. */
+  proposal_id: Long;
 
   /** voter defines the oter address for the proposals. */
   voter: string;
@@ -56,6 +102,12 @@ export interface QueryVoteResponse {
   vote: Vote;
 }
 
+/** QueryVoteResponse is the response type for the Query/Vote RPC method. */
+export interface QueryVoteResponseSDKType {
+  /** vote defined the queried vote. */
+  vote: VoteSDKType;
+}
+
 /** QueryVotesRequest is the request type for the Query/Votes RPC method. */
 export interface QueryVotesRequest {
   /** proposal_id defines the unique id of the proposal. */
@@ -63,6 +115,15 @@ export interface QueryVotesRequest {
 
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequest;
+}
+
+/** QueryVotesRequest is the request type for the Query/Votes RPC method. */
+export interface QueryVotesRequestSDKType {
+  /** proposal_id defines the unique id of the proposal. */
+  proposal_id: Long;
+
+  /** pagination defines an optional pagination for the request. */
+  pagination?: PageRequestSDKType;
 }
 
 /** QueryVotesResponse is the response type for the Query/Votes RPC method. */
@@ -74,6 +135,15 @@ export interface QueryVotesResponse {
   pagination?: PageResponse;
 }
 
+/** QueryVotesResponse is the response type for the Query/Votes RPC method. */
+export interface QueryVotesResponseSDKType {
+  /** votes defined the queried votes. */
+  votes: VoteSDKType[];
+
+  /** pagination defines the pagination in the response. */
+  pagination?: PageResponseSDKType;
+}
+
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequest {
   /**
@@ -81,6 +151,15 @@ export interface QueryParamsRequest {
    * "tallying" or "deposit".
    */
   paramsType: string;
+}
+
+/** QueryParamsRequest is the request type for the Query/Params RPC method. */
+export interface QueryParamsRequestSDKType {
+  /**
+   * params_type defines which parameters to query for, can be one of "voting",
+   * "tallying" or "deposit".
+   */
+  params_type: string;
 }
 
 /** QueryParamsResponse is the response type for the Query/Params RPC method. */
@@ -95,10 +174,31 @@ export interface QueryParamsResponse {
   tallyParams: TallyParams;
 }
 
+/** QueryParamsResponse is the response type for the Query/Params RPC method. */
+export interface QueryParamsResponseSDKType {
+  /** voting_params defines the parameters related to voting. */
+  voting_params: VotingParamsSDKType;
+
+  /** deposit_params defines the parameters related to deposit. */
+  deposit_params: DepositParamsSDKType;
+
+  /** tally_params defines the parameters related to tally. */
+  tally_params: TallyParamsSDKType;
+}
+
 /** QueryDepositRequest is the request type for the Query/Deposit RPC method. */
 export interface QueryDepositRequest {
   /** proposal_id defines the unique id of the proposal. */
   proposalId: Long;
+
+  /** depositor defines the deposit addresses from the proposals. */
+  depositor: string;
+}
+
+/** QueryDepositRequest is the request type for the Query/Deposit RPC method. */
+export interface QueryDepositRequestSDKType {
+  /** proposal_id defines the unique id of the proposal. */
+  proposal_id: Long;
 
   /** depositor defines the deposit addresses from the proposals. */
   depositor: string;
@@ -110,6 +210,12 @@ export interface QueryDepositResponse {
   deposit: Deposit;
 }
 
+/** QueryDepositResponse is the response type for the Query/Deposit RPC method. */
+export interface QueryDepositResponseSDKType {
+  /** deposit defines the requested deposit. */
+  deposit: DepositSDKType;
+}
+
 /** QueryDepositsRequest is the request type for the Query/Deposits RPC method. */
 export interface QueryDepositsRequest {
   /** proposal_id defines the unique id of the proposal. */
@@ -117,6 +223,15 @@ export interface QueryDepositsRequest {
 
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequest;
+}
+
+/** QueryDepositsRequest is the request type for the Query/Deposits RPC method. */
+export interface QueryDepositsRequestSDKType {
+  /** proposal_id defines the unique id of the proposal. */
+  proposal_id: Long;
+
+  /** pagination defines an optional pagination for the request. */
+  pagination?: PageRequestSDKType;
 }
 
 /** QueryDepositsResponse is the response type for the Query/Deposits RPC method. */
@@ -127,16 +242,36 @@ export interface QueryDepositsResponse {
   pagination?: PageResponse;
 }
 
+/** QueryDepositsResponse is the response type for the Query/Deposits RPC method. */
+export interface QueryDepositsResponseSDKType {
+  deposits: DepositSDKType[];
+
+  /** pagination defines the pagination in the response. */
+  pagination?: PageResponseSDKType;
+}
+
 /** QueryTallyResultRequest is the request type for the Query/Tally RPC method. */
 export interface QueryTallyResultRequest {
   /** proposal_id defines the unique id of the proposal. */
   proposalId: Long;
 }
 
+/** QueryTallyResultRequest is the request type for the Query/Tally RPC method. */
+export interface QueryTallyResultRequestSDKType {
+  /** proposal_id defines the unique id of the proposal. */
+  proposal_id: Long;
+}
+
 /** QueryTallyResultResponse is the response type for the Query/Tally RPC method. */
 export interface QueryTallyResultResponse {
   /** tally defines the requested tally. */
   tally: TallyResult;
+}
+
+/** QueryTallyResultResponse is the response type for the Query/Tally RPC method. */
+export interface QueryTallyResultResponseSDKType {
+  /** tally defines the requested tally. */
+  tally: TallyResultSDKType;
 }
 
 function createBaseQueryProposalRequest(): QueryProposalRequest {
@@ -192,6 +327,18 @@ export const QueryProposalRequest = {
     const message = createBaseQueryProposalRequest();
     message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? Long.fromValue(object.proposalId) : Long.UZERO;
     return message;
+  },
+
+  fromSDK(object: QueryProposalRequestSDKType): QueryProposalRequest {
+    return {
+      proposalId: isSet(object.proposal_id) ? object.proposal_id : undefined
+    };
+  },
+
+  toSDK(message: QueryProposalRequest): QueryProposalRequestSDKType {
+    const obj: any = {};
+    message.proposalId !== undefined && (obj.proposal_id = message.proposalId);
+    return obj;
   }
 
 };
@@ -211,7 +358,7 @@ export const QueryProposalResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryProposalResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryProposalResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryProposalResponse();
@@ -249,6 +396,18 @@ export const QueryProposalResponse = {
     const message = createBaseQueryProposalResponse();
     message.proposal = object.proposal !== undefined && object.proposal !== null ? Proposal.fromPartial(object.proposal) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryProposalResponseSDKType): QueryProposalResponse {
+    return {
+      proposal: isSet(object.proposal) ? Proposal.fromSDK(object.proposal) : undefined
+    };
+  },
+
+  toSDK(message: QueryProposalResponse): QueryProposalResponseSDKType {
+    const obj: any = {};
+    message.proposal !== undefined && (obj.proposal = message.proposal ? Proposal.toSDK(message.proposal) : undefined);
+    return obj;
   }
 
 };
@@ -342,6 +501,24 @@ export const QueryProposalsRequest = {
     message.depositor = object.depositor ?? "";
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryProposalsRequestSDKType): QueryProposalsRequest {
+    return {
+      proposalStatus: isSet(object.proposal_status) ? proposalStatusFromJSON(object.proposal_status) : 0,
+      voter: isSet(object.voter) ? object.voter : undefined,
+      depositor: isSet(object.depositor) ? object.depositor : undefined,
+      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  toSDK(message: QueryProposalsRequest): QueryProposalsRequestSDKType {
+    const obj: any = {};
+    message.proposalStatus !== undefined && (obj.proposal_status = proposalStatusToJSON(message.proposalStatus));
+    message.voter !== undefined && (obj.voter = message.voter);
+    message.depositor !== undefined && (obj.depositor = message.depositor);
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
+    return obj;
   }
 
 };
@@ -366,7 +543,7 @@ export const QueryProposalsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryProposalsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryProposalsResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryProposalsResponse();
@@ -417,6 +594,26 @@ export const QueryProposalsResponse = {
     message.proposals = object.proposals?.map(e => Proposal.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryProposalsResponseSDKType): QueryProposalsResponse {
+    return {
+      proposals: Array.isArray(object?.proposals) ? object.proposals.map((e: any) => Proposal.fromSDK(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  toSDK(message: QueryProposalsResponse): QueryProposalsResponseSDKType {
+    const obj: any = {};
+
+    if (message.proposals) {
+      obj.proposals = message.proposals.map(e => e ? Proposal.toSDK(e) : undefined);
+    } else {
+      obj.proposals = [];
+    }
+
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
+    return obj;
   }
 
 };
@@ -486,6 +683,20 @@ export const QueryVoteRequest = {
     message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? Long.fromValue(object.proposalId) : Long.UZERO;
     message.voter = object.voter ?? "";
     return message;
+  },
+
+  fromSDK(object: QueryVoteRequestSDKType): QueryVoteRequest {
+    return {
+      proposalId: isSet(object.proposal_id) ? object.proposal_id : undefined,
+      voter: isSet(object.voter) ? object.voter : undefined
+    };
+  },
+
+  toSDK(message: QueryVoteRequest): QueryVoteRequestSDKType {
+    const obj: any = {};
+    message.proposalId !== undefined && (obj.proposal_id = message.proposalId);
+    message.voter !== undefined && (obj.voter = message.voter);
+    return obj;
   }
 
 };
@@ -505,7 +716,7 @@ export const QueryVoteResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryVoteResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryVoteResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryVoteResponse();
@@ -543,6 +754,18 @@ export const QueryVoteResponse = {
     const message = createBaseQueryVoteResponse();
     message.vote = object.vote !== undefined && object.vote !== null ? Vote.fromPartial(object.vote) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryVoteResponseSDKType): QueryVoteResponse {
+    return {
+      vote: isSet(object.vote) ? Vote.fromSDK(object.vote) : undefined
+    };
+  },
+
+  toSDK(message: QueryVoteResponse): QueryVoteResponseSDKType {
+    const obj: any = {};
+    message.vote !== undefined && (obj.vote = message.vote ? Vote.toSDK(message.vote) : undefined);
+    return obj;
   }
 
 };
@@ -612,6 +835,20 @@ export const QueryVotesRequest = {
     message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? Long.fromValue(object.proposalId) : Long.UZERO;
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryVotesRequestSDKType): QueryVotesRequest {
+    return {
+      proposalId: isSet(object.proposal_id) ? object.proposal_id : undefined,
+      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  toSDK(message: QueryVotesRequest): QueryVotesRequestSDKType {
+    const obj: any = {};
+    message.proposalId !== undefined && (obj.proposal_id = message.proposalId);
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
+    return obj;
   }
 
 };
@@ -636,7 +873,7 @@ export const QueryVotesResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryVotesResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryVotesResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryVotesResponse();
@@ -687,6 +924,26 @@ export const QueryVotesResponse = {
     message.votes = object.votes?.map(e => Vote.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryVotesResponseSDKType): QueryVotesResponse {
+    return {
+      votes: Array.isArray(object?.votes) ? object.votes.map((e: any) => Vote.fromSDK(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  toSDK(message: QueryVotesResponse): QueryVotesResponseSDKType {
+    const obj: any = {};
+
+    if (message.votes) {
+      obj.votes = message.votes.map(e => e ? Vote.toSDK(e) : undefined);
+    } else {
+      obj.votes = [];
+    }
+
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
+    return obj;
   }
 
 };
@@ -744,6 +1001,18 @@ export const QueryParamsRequest = {
     const message = createBaseQueryParamsRequest();
     message.paramsType = object.paramsType ?? "";
     return message;
+  },
+
+  fromSDK(object: QueryParamsRequestSDKType): QueryParamsRequest {
+    return {
+      paramsType: isSet(object.params_type) ? object.params_type : undefined
+    };
+  },
+
+  toSDK(message: QueryParamsRequest): QueryParamsRequestSDKType {
+    const obj: any = {};
+    message.paramsType !== undefined && (obj.params_type = message.paramsType);
+    return obj;
   }
 
 };
@@ -773,7 +1042,7 @@ export const QueryParamsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryParamsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryParamsResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryParamsResponse();
@@ -825,6 +1094,22 @@ export const QueryParamsResponse = {
     message.depositParams = object.depositParams !== undefined && object.depositParams !== null ? DepositParams.fromPartial(object.depositParams) : undefined;
     message.tallyParams = object.tallyParams !== undefined && object.tallyParams !== null ? TallyParams.fromPartial(object.tallyParams) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryParamsResponseSDKType): QueryParamsResponse {
+    return {
+      votingParams: isSet(object.voting_params) ? VotingParams.fromSDK(object.voting_params) : undefined,
+      depositParams: isSet(object.deposit_params) ? DepositParams.fromSDK(object.deposit_params) : undefined,
+      tallyParams: isSet(object.tally_params) ? TallyParams.fromSDK(object.tally_params) : undefined
+    };
+  },
+
+  toSDK(message: QueryParamsResponse): QueryParamsResponseSDKType {
+    const obj: any = {};
+    message.votingParams !== undefined && (obj.voting_params = message.votingParams ? VotingParams.toSDK(message.votingParams) : undefined);
+    message.depositParams !== undefined && (obj.deposit_params = message.depositParams ? DepositParams.toSDK(message.depositParams) : undefined);
+    message.tallyParams !== undefined && (obj.tally_params = message.tallyParams ? TallyParams.toSDK(message.tallyParams) : undefined);
+    return obj;
   }
 
 };
@@ -894,6 +1179,20 @@ export const QueryDepositRequest = {
     message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? Long.fromValue(object.proposalId) : Long.UZERO;
     message.depositor = object.depositor ?? "";
     return message;
+  },
+
+  fromSDK(object: QueryDepositRequestSDKType): QueryDepositRequest {
+    return {
+      proposalId: isSet(object.proposal_id) ? object.proposal_id : undefined,
+      depositor: isSet(object.depositor) ? object.depositor : undefined
+    };
+  },
+
+  toSDK(message: QueryDepositRequest): QueryDepositRequestSDKType {
+    const obj: any = {};
+    message.proposalId !== undefined && (obj.proposal_id = message.proposalId);
+    message.depositor !== undefined && (obj.depositor = message.depositor);
+    return obj;
   }
 
 };
@@ -913,7 +1212,7 @@ export const QueryDepositResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryDepositResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryDepositResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDepositResponse();
@@ -951,6 +1250,18 @@ export const QueryDepositResponse = {
     const message = createBaseQueryDepositResponse();
     message.deposit = object.deposit !== undefined && object.deposit !== null ? Deposit.fromPartial(object.deposit) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryDepositResponseSDKType): QueryDepositResponse {
+    return {
+      deposit: isSet(object.deposit) ? Deposit.fromSDK(object.deposit) : undefined
+    };
+  },
+
+  toSDK(message: QueryDepositResponse): QueryDepositResponseSDKType {
+    const obj: any = {};
+    message.deposit !== undefined && (obj.deposit = message.deposit ? Deposit.toSDK(message.deposit) : undefined);
+    return obj;
   }
 
 };
@@ -1020,6 +1331,20 @@ export const QueryDepositsRequest = {
     message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? Long.fromValue(object.proposalId) : Long.UZERO;
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryDepositsRequestSDKType): QueryDepositsRequest {
+    return {
+      proposalId: isSet(object.proposal_id) ? object.proposal_id : undefined,
+      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  toSDK(message: QueryDepositsRequest): QueryDepositsRequestSDKType {
+    const obj: any = {};
+    message.proposalId !== undefined && (obj.proposal_id = message.proposalId);
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
+    return obj;
   }
 
 };
@@ -1044,7 +1369,7 @@ export const QueryDepositsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryDepositsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryDepositsResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDepositsResponse();
@@ -1095,6 +1420,26 @@ export const QueryDepositsResponse = {
     message.deposits = object.deposits?.map(e => Deposit.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryDepositsResponseSDKType): QueryDepositsResponse {
+    return {
+      deposits: Array.isArray(object?.deposits) ? object.deposits.map((e: any) => Deposit.fromSDK(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  toSDK(message: QueryDepositsResponse): QueryDepositsResponseSDKType {
+    const obj: any = {};
+
+    if (message.deposits) {
+      obj.deposits = message.deposits.map(e => e ? Deposit.toSDK(e) : undefined);
+    } else {
+      obj.deposits = [];
+    }
+
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
+    return obj;
   }
 
 };
@@ -1152,6 +1497,18 @@ export const QueryTallyResultRequest = {
     const message = createBaseQueryTallyResultRequest();
     message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? Long.fromValue(object.proposalId) : Long.UZERO;
     return message;
+  },
+
+  fromSDK(object: QueryTallyResultRequestSDKType): QueryTallyResultRequest {
+    return {
+      proposalId: isSet(object.proposal_id) ? object.proposal_id : undefined
+    };
+  },
+
+  toSDK(message: QueryTallyResultRequest): QueryTallyResultRequestSDKType {
+    const obj: any = {};
+    message.proposalId !== undefined && (obj.proposal_id = message.proposalId);
+    return obj;
   }
 
 };
@@ -1171,7 +1528,7 @@ export const QueryTallyResultResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryTallyResultResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryTallyResultResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryTallyResultResponse();
@@ -1209,6 +1566,18 @@ export const QueryTallyResultResponse = {
     const message = createBaseQueryTallyResultResponse();
     message.tally = object.tally !== undefined && object.tally !== null ? TallyResult.fromPartial(object.tally) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryTallyResultResponseSDKType): QueryTallyResultResponse {
+    return {
+      tally: isSet(object.tally) ? TallyResult.fromSDK(object.tally) : undefined
+    };
+  },
+
+  toSDK(message: QueryTallyResultResponse): QueryTallyResultResponseSDKType {
+    const obj: any = {};
+    message.tally !== undefined && (obj.tally = message.tally ? TallyResult.toSDK(message.tally) : undefined);
+    return obj;
   }
 
 };

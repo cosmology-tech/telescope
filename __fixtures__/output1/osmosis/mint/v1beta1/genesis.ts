@@ -1,4 +1,4 @@
-import { Minter, Params } from "./mint";
+import { Minter, MinterSDKType, Params, ParamsSDKType } from "./mint";
 import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, DeepPartial } from "@osmonauts/helpers";
 export const protobufPackage = "osmosis.mint.v1beta1";
@@ -13,6 +13,18 @@ export interface GenesisState {
 
   /** current halven period start epoch */
   halvenStartedEpoch: Long;
+}
+
+/** GenesisState defines the mint module's genesis state. */
+export interface GenesisStateSDKType {
+  /** minter is a space for holding current rewards information. */
+  minter: MinterSDKType;
+
+  /** params defines all the paramaters of the module. */
+  params: ParamsSDKType;
+
+  /** current halven period start epoch */
+  halven_started_epoch: Long;
 }
 
 function createBaseGenesisState(): GenesisState {
@@ -92,6 +104,22 @@ export const GenesisState = {
     message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     message.halvenStartedEpoch = object.halvenStartedEpoch !== undefined && object.halvenStartedEpoch !== null ? Long.fromValue(object.halvenStartedEpoch) : Long.ZERO;
     return message;
+  },
+
+  fromSDK(object: GenesisStateSDKType): GenesisState {
+    return {
+      minter: isSet(object.minter) ? Minter.fromSDK(object.minter) : undefined,
+      params: isSet(object.params) ? Params.fromSDK(object.params) : undefined,
+      halvenStartedEpoch: isSet(object.halven_started_epoch) ? object.halven_started_epoch : undefined
+    };
+  },
+
+  toSDK(message: GenesisState): GenesisStateSDKType {
+    const obj: any = {};
+    message.minter !== undefined && (obj.minter = message.minter ? Minter.toSDK(message.minter) : undefined);
+    message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
+    message.halvenStartedEpoch !== undefined && (obj.halven_started_epoch = message.halvenStartedEpoch);
+    return obj;
   }
 
 };

@@ -8,6 +8,12 @@ export interface Params {
   distrEpochIdentifier: string;
 }
 
+/** Params holds parameters for the incentives module */
+export interface ParamsSDKType {
+  /** distribution epoch identifier */
+  distr_epoch_identifier: string;
+}
+
 function createBaseParams(): Params {
   return {
     distrEpochIdentifier: ""
@@ -61,6 +67,18 @@ export const Params = {
     const message = createBaseParams();
     message.distrEpochIdentifier = object.distrEpochIdentifier ?? "";
     return message;
+  },
+
+  fromSDK(object: ParamsSDKType): Params {
+    return {
+      distrEpochIdentifier: isSet(object.distr_epoch_identifier) ? object.distr_epoch_identifier : undefined
+    };
+  },
+
+  toSDK(message: Params): ParamsSDKType {
+    const obj: any = {};
+    message.distrEpochIdentifier !== undefined && (obj.distr_epoch_identifier = message.distrEpochIdentifier);
+    return obj;
   }
 
 };

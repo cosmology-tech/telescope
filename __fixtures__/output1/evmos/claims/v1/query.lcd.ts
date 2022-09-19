@@ -1,10 +1,10 @@
-import { PageRequest, PageResponse } from "../../../cosmos/base/query/v1beta1/pagination";
-import { Coin } from "../../../cosmos/base/v1beta1/coin";
-import { Params } from "./genesis";
-import { ClaimsRecordAddress, Claim } from "./claims";
+import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
+import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
+import { Params, ParamsSDKType } from "./genesis";
+import { ClaimsRecordAddress, ClaimsRecordAddressSDKType, Claim, ClaimSDKType } from "./claims";
 import { setPaginationParams } from "@osmonauts/helpers";
 import { LCDClient } from "@osmonauts/lcd";
-import { QueryTotalUnclaimedRequest, QueryTotalUnclaimedResponse, QueryParamsRequest, QueryParamsResponse, QueryClaimsRecordsRequest, QueryClaimsRecordsResponse, QueryClaimsRecordRequest, QueryClaimsRecordResponse } from "./query";
+import { QueryTotalUnclaimedRequest, QueryTotalUnclaimedRequestSDKType, QueryTotalUnclaimedResponse, QueryTotalUnclaimedResponseSDKType, QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType, QueryClaimsRecordsRequest, QueryClaimsRecordsRequestSDKType, QueryClaimsRecordsResponse, QueryClaimsRecordsResponseSDKType, QueryClaimsRecordRequest, QueryClaimsRecordRequestSDKType, QueryClaimsRecordResponse, QueryClaimsRecordResponseSDKType } from "./query";
 export class LCDQueryClient extends LCDClient {
   constructor({
     restEndpoint
@@ -17,21 +17,21 @@ export class LCDQueryClient extends LCDClient {
   }
 
   /* TotalUnclaimed queries the total unclaimed tokens from the airdrop */
-  async totalUnclaimed(_params: QueryTotalUnclaimedRequest = {}): Promise<QueryTotalUnclaimedResponse> {
+  async totalUnclaimed(_params: QueryTotalUnclaimedRequest = {}): Promise<QueryTotalUnclaimedResponseSDKType> {
     const endpoint = `evmos/claims/v1/total_unclaimed`;
-    return await this.get<QueryTotalUnclaimedResponse>(endpoint);
+    return await this.get<QueryTotalUnclaimedResponseSDKType>(endpoint);
   }
 
   /* Params returns the claims module parameters */
-  async params(_params: QueryParamsRequest = {}): Promise<QueryParamsResponse> {
+  async params(_params: QueryParamsRequest = {}): Promise<QueryParamsResponseSDKType> {
     const endpoint = `evmos/claims/v1/params`;
-    return await this.get<QueryParamsResponse>(endpoint);
+    return await this.get<QueryParamsResponseSDKType>(endpoint);
   }
 
   /* ClaimsRecords returns all claims records */
   async claimsRecords(params: QueryClaimsRecordsRequest = {
     pagination: undefined
-  }): Promise<QueryClaimsRecordsResponse> {
+  }): Promise<QueryClaimsRecordsResponseSDKType> {
     const options: any = {
       params: {}
     };
@@ -41,13 +41,13 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `evmos/claims/v1/claims_records`;
-    return await this.get<QueryClaimsRecordsResponse>(endpoint, options);
+    return await this.get<QueryClaimsRecordsResponseSDKType>(endpoint, options);
   }
 
   /* ClaimsRecord returns the claims record for a given address */
-  async claimsRecord(params: QueryClaimsRecordRequest): Promise<QueryClaimsRecordResponse> {
+  async claimsRecord(params: QueryClaimsRecordRequest): Promise<QueryClaimsRecordResponseSDKType> {
     const endpoint = `evmos/claims/v1/claims_records/${params.address}`;
-    return await this.get<QueryClaimsRecordResponse>(endpoint);
+    return await this.get<QueryClaimsRecordResponseSDKType>(endpoint);
   }
 
 }

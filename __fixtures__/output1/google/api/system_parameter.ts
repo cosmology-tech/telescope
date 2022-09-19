@@ -46,6 +46,49 @@ export interface SystemParameters {
 }
 
 /**
+ * ### System parameter configuration
+ * 
+ * A system parameter is a special kind of parameter defined by the API
+ * system, not by an individual API. It is typically mapped to an HTTP header
+ * and/or a URL query parameter. This configuration specifies which methods
+ * change the names of the system parameters.
+ */
+export interface SystemParametersSDKType {
+  /**
+   * Define system parameters.
+   * 
+   * The parameters defined here will override the default parameters
+   * implemented by the system. If this field is missing from the service
+   * config, default system parameters will be used. Default system parameters
+   * and names is implementation-dependent.
+   * 
+   * Example: define api key for all methods
+   * 
+   * system_parameters
+   * rules:
+   * - selector: "*"
+   * parameters:
+   * - name: api_key
+   * url_query_parameter: api_key
+   * 
+   * 
+   * Example: define 2 api key names for a specific method.
+   * 
+   * system_parameters
+   * rules:
+   * - selector: "/ListShelves"
+   * parameters:
+   * - name: api_key
+   * http_header: Api-Key1
+   * - name: api_key
+   * http_header: Api-Key2
+   * 
+   * **NOTE:** All service configuration rules follow "last one wins" order.
+   */
+  rules: SystemParameterRuleSDKType[];
+}
+
+/**
  * Define a system parameter rule mapping system parameter definitions to
  * methods.
  */
@@ -69,6 +112,29 @@ export interface SystemParameterRule {
 }
 
 /**
+ * Define a system parameter rule mapping system parameter definitions to
+ * methods.
+ */
+export interface SystemParameterRuleSDKType {
+  /**
+   * Selects the methods to which this rule applies. Use '*' to indicate all
+   * methods in all APIs.
+   * 
+   * Refer to [selector][google.api.DocumentationRule.selector] for syntax details.
+   */
+  selector: string;
+
+  /**
+   * Define parameters. Multiple names may be defined for a parameter.
+   * For a given method call, only one of them should be used. If multiple
+   * names are used the behavior is implementation-dependent.
+   * If none of the specified names are present the behavior is
+   * parameter-dependent.
+   */
+  parameters: SystemParameterSDKType[];
+}
+
+/**
  * Define a parameter's name and location. The parameter may be passed as either
  * an HTTP header or a URL query parameter, and if both are passed the behavior
  * is implementation-dependent.
@@ -88,6 +154,28 @@ export interface SystemParameter {
    * sensitive.
    */
   urlQueryParameter: string;
+}
+
+/**
+ * Define a parameter's name and location. The parameter may be passed as either
+ * an HTTP header or a URL query parameter, and if both are passed the behavior
+ * is implementation-dependent.
+ */
+export interface SystemParameterSDKType {
+  /** Define the name of the parameter, such as "api_key" . It is case sensitive. */
+  name: string;
+
+  /**
+   * Define the HTTP header name to use for the parameter. It is case
+   * insensitive.
+   */
+  http_header: string;
+
+  /**
+   * Define the URL query parameter name to use for the parameter. It is case
+   * sensitive.
+   */
+  url_query_parameter: string;
 }
 
 function createBaseSystemParameters(): SystemParameters {
@@ -149,6 +237,24 @@ export const SystemParameters = {
     const message = createBaseSystemParameters();
     message.rules = object.rules?.map(e => SystemParameterRule.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: SystemParametersSDKType): SystemParameters {
+    return {
+      rules: Array.isArray(object?.rules) ? object.rules.map((e: any) => SystemParameterRule.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: SystemParameters): SystemParametersSDKType {
+    const obj: any = {};
+
+    if (message.rules) {
+      obj.rules = message.rules.map(e => e ? SystemParameterRule.toSDK(e) : undefined);
+    } else {
+      obj.rules = [];
+    }
+
+    return obj;
   }
 
 };
@@ -224,6 +330,26 @@ export const SystemParameterRule = {
     message.selector = object.selector ?? "";
     message.parameters = object.parameters?.map(e => SystemParameter.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: SystemParameterRuleSDKType): SystemParameterRule {
+    return {
+      selector: isSet(object.selector) ? object.selector : undefined,
+      parameters: Array.isArray(object?.parameters) ? object.parameters.map((e: any) => SystemParameter.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: SystemParameterRule): SystemParameterRuleSDKType {
+    const obj: any = {};
+    message.selector !== undefined && (obj.selector = message.selector);
+
+    if (message.parameters) {
+      obj.parameters = message.parameters.map(e => e ? SystemParameter.toSDK(e) : undefined);
+    } else {
+      obj.parameters = [];
+    }
+
+    return obj;
   }
 
 };
@@ -305,6 +431,22 @@ export const SystemParameter = {
     message.httpHeader = object.httpHeader ?? "";
     message.urlQueryParameter = object.urlQueryParameter ?? "";
     return message;
+  },
+
+  fromSDK(object: SystemParameterSDKType): SystemParameter {
+    return {
+      name: isSet(object.name) ? object.name : undefined,
+      httpHeader: isSet(object.http_header) ? object.http_header : undefined,
+      urlQueryParameter: isSet(object.url_query_parameter) ? object.url_query_parameter : undefined
+    };
+  },
+
+  toSDK(message: SystemParameter): SystemParameterSDKType {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    message.httpHeader !== undefined && (obj.http_header = message.httpHeader);
+    message.urlQueryParameter !== undefined && (obj.url_query_parameter = message.urlQueryParameter);
+    return obj;
   }
 
 };

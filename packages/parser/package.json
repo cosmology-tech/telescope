@@ -67,7 +67,7 @@
   "dependencies": {
     "@babel/runtime": "^7.18.9",
     "@osmonauts/types": "^0.12.0",
-    "@pyramation/protobufjs": "6.11.3",
+    "@pyramation/protobufjs": "6.11.4",
     "dotty": "0.1.2",
     "glob": "8.0.3",
     "mkdirp": "1.0.4"

@@ -1,23 +1,23 @@
-import { Api } from "../protobuf/api";
-import { Type, Enum } from "../protobuf/type";
-import { Documentation } from "./documentation";
-import { Backend } from "./backend";
-import { Http } from "./http";
-import { Quota } from "./quota";
-import { Authentication } from "./auth";
-import { Context } from "./context";
-import { Usage } from "./usage";
-import { Endpoint } from "./endpoint";
-import { Control } from "./control";
-import { LogDescriptor } from "./log";
-import { MetricDescriptor } from "./metric";
-import { MonitoredResourceDescriptor } from "./monitored_resource";
-import { Billing } from "./billing";
-import { Logging } from "./logging";
-import { Monitoring } from "./monitoring";
-import { SystemParameters } from "./system_parameter";
-import { SourceInfo } from "./source_info";
-import { UInt32Value } from "../protobuf/wrappers";
+import { Api, ApiSDKType } from "../protobuf/api";
+import { Type, TypeSDKType, Enum, EnumSDKType } from "../protobuf/type";
+import { Documentation, DocumentationSDKType } from "./documentation";
+import { Backend, BackendSDKType } from "./backend";
+import { Http, HttpSDKType } from "./http";
+import { Quota, QuotaSDKType } from "./quota";
+import { Authentication, AuthenticationSDKType } from "./auth";
+import { Context, ContextSDKType } from "./context";
+import { Usage, UsageSDKType } from "./usage";
+import { Endpoint, EndpointSDKType } from "./endpoint";
+import { Control, ControlSDKType } from "./control";
+import { LogDescriptor, LogDescriptorSDKType } from "./log";
+import { MetricDescriptor, MetricDescriptorSDKType } from "./metric";
+import { MonitoredResourceDescriptor, MonitoredResourceDescriptorSDKType } from "./monitored_resource";
+import { Billing, BillingSDKType } from "./billing";
+import { Logging, LoggingSDKType } from "./logging";
+import { Monitoring, MonitoringSDKType } from "./monitoring";
+import { SystemParameters, SystemParametersSDKType } from "./system_parameter";
+import { SourceInfo, SourceInfoSDKType } from "./source_info";
+import { UInt32Value, UInt32ValueSDKType } from "../protobuf/wrappers";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "@osmonauts/helpers";
 export const protobufPackage = "google.api";
@@ -170,6 +170,154 @@ export interface Service {
   configVersion: UInt32Value;
 }
 
+/**
+ * `Service` is the root object of Google service configuration schema. It
+ * describes basic information about a service, such as the name and the
+ * title, and delegates other aspects to sub-sections. Each sub-section is
+ * either a proto message or a repeated proto message that configures a
+ * specific aspect, such as auth. See each proto message definition for details.
+ * 
+ * Example:
+ * 
+ * type: google.api.Service
+ * name: calendar.googleapis.com
+ * title: Google Calendar API
+ * apis:
+ * - name: google.calendar.v3.Calendar
+ * authentication:
+ * providers:
+ * - id: google_calendar_auth
+ * jwks_uri: https://www.googleapis.com/oauth2/v1/certs
+ * issuer: https://securetoken.google.com
+ * rules:
+ * - selector: "*"
+ * requirements:
+ * provider_id: google_calendar_auth
+ */
+export interface ServiceSDKType {
+  /**
+   * The service name, which is a DNS-like logical identifier for the
+   * service, such as `calendar.googleapis.com`. The service name
+   * typically goes through DNS verification to make sure the owner
+   * of the service also owns the DNS name.
+   */
+  name: string;
+
+  /** The product title for this service. */
+  title: string;
+
+  /** The Google project that owns this service. */
+  producer_project_id: string;
+
+  /**
+   * A unique ID for a specific instance of this message, typically assigned
+   * by the client for tracking purpose. Must be no longer than 63 characters
+   * and only lower case letters, digits, '.', '_' and '-' are allowed. If
+   * empty, the server may choose to generate one instead.
+   */
+  id: string;
+
+  /**
+   * A list of API interfaces exported by this service. Only the `name` field
+   * of the [google.protobuf.Api][google.protobuf.Api] needs to be provided by the configuration
+   * author, as the remaining fields will be derived from the IDL during the
+   * normalization process. It is an error to specify an API interface here
+   * which cannot be resolved against the associated IDL files.
+   */
+  apis: ApiSDKType[];
+
+  /**
+   * A list of all proto message types included in this API service.
+   * Types referenced directly or indirectly by the `apis` are
+   * automatically included.  Messages which are not referenced but
+   * shall be included, such as types used by the `google.protobuf.Any` type,
+   * should be listed here by name. Example:
+   * 
+   * types:
+   * - name: google.protobuf.Int32
+   */
+  types: TypeSDKType[];
+
+  /**
+   * A list of all enum types included in this API service.  Enums
+   * referenced directly or indirectly by the `apis` are automatically
+   * included.  Enums which are not referenced but shall be included
+   * should be listed here by name. Example:
+   * 
+   * enums:
+   * - name: google.someapi.v1.SomeEnum
+   */
+  enums: EnumSDKType[];
+
+  /** Additional API documentation. */
+  documentation: DocumentationSDKType;
+
+  /** API backend configuration. */
+  backend: BackendSDKType;
+
+  /** HTTP configuration. */
+  http: HttpSDKType;
+
+  /** Quota configuration. */
+  quota: QuotaSDKType;
+
+  /** Auth configuration. */
+  authentication: AuthenticationSDKType;
+
+  /** Context configuration. */
+  context: ContextSDKType;
+
+  /** Configuration controlling usage of this service. */
+  usage: UsageSDKType;
+
+  /**
+   * Configuration for network endpoints.  If this is empty, then an endpoint
+   * with the same name as the service is automatically generated to service all
+   * defined APIs.
+   */
+  endpoints: EndpointSDKType[];
+
+  /** Configuration for the service control plane. */
+  control: ControlSDKType;
+
+  /** Defines the logs used by this service. */
+  logs: LogDescriptorSDKType[];
+
+  /** Defines the metrics used by this service. */
+  metrics: MetricDescriptorSDKType[];
+
+  /**
+   * Defines the monitored resources used by this service. This is required
+   * by the [Service.monitoring][google.api.Service.monitoring] and [Service.logging][google.api.Service.logging] configurations.
+   */
+  monitored_resources: MonitoredResourceDescriptorSDKType[];
+
+  /** Billing configuration. */
+  billing: BillingSDKType;
+
+  /** Logging configuration. */
+  logging: LoggingSDKType;
+
+  /** Monitoring configuration. */
+  monitoring: MonitoringSDKType;
+
+  /** System parameter configuration. */
+  system_parameters: SystemParametersSDKType;
+
+  /** Output only. The source information for this configuration if available. */
+  source_info: SourceInfoSDKType;
+
+  /**
+   * Obsolete. Do not use.
+   * 
+   * This field has no semantic meaning. The service config compiler always
+   * sets this field to `3`.
+   */
+
+  /** @deprecated */
+  config_version: UInt32ValueSDKType;
+}
+
 function createBaseService(): Service {
   return {
     name: "",
@@ -305,7 +453,7 @@ export const Service = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): Service {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ServiceSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseService();
@@ -549,6 +697,104 @@ export const Service = {
     message.sourceInfo = object.sourceInfo !== undefined && object.sourceInfo !== null ? SourceInfo.fromPartial(object.sourceInfo) : undefined;
     message.configVersion = object.configVersion !== undefined && object.configVersion !== null ? UInt32Value.fromPartial(object.configVersion) : undefined;
     return message;
+  },
+
+  fromSDK(object: ServiceSDKType): Service {
+    return {
+      name: isSet(object.name) ? object.name : undefined,
+      title: isSet(object.title) ? object.title : undefined,
+      producerProjectId: isSet(object.producer_project_id) ? object.producer_project_id : undefined,
+      id: isSet(object.id) ? object.id : undefined,
+      apis: Array.isArray(object?.apis) ? object.apis.map((e: any) => Api.fromSDK(e)) : [],
+      types: Array.isArray(object?.types) ? object.types.map((e: any) => Type.fromSDK(e)) : [],
+      enums: Array.isArray(object?.enums) ? object.enums.map((e: any) => Enum.fromSDK(e)) : [],
+      documentation: isSet(object.documentation) ? Documentation.fromSDK(object.documentation) : undefined,
+      backend: isSet(object.backend) ? Backend.fromSDK(object.backend) : undefined,
+      http: isSet(object.http) ? Http.fromSDK(object.http) : undefined,
+      quota: isSet(object.quota) ? Quota.fromSDK(object.quota) : undefined,
+      authentication: isSet(object.authentication) ? Authentication.fromSDK(object.authentication) : undefined,
+      context: isSet(object.context) ? Context.fromSDK(object.context) : undefined,
+      usage: isSet(object.usage) ? Usage.fromSDK(object.usage) : undefined,
+      endpoints: Array.isArray(object?.endpoints) ? object.endpoints.map((e: any) => Endpoint.fromSDK(e)) : [],
+      control: isSet(object.control) ? Control.fromSDK(object.control) : undefined,
+      logs: Array.isArray(object?.logs) ? object.logs.map((e: any) => LogDescriptor.fromSDK(e)) : [],
+      metrics: Array.isArray(object?.metrics) ? object.metrics.map((e: any) => MetricDescriptor.fromSDK(e)) : [],
+      monitoredResources: Array.isArray(object?.monitored_resources) ? object.monitored_resources.map((e: any) => MonitoredResourceDescriptor.fromSDK(e)) : [],
+      billing: isSet(object.billing) ? Billing.fromSDK(object.billing) : undefined,
+      logging: isSet(object.logging) ? Logging.fromSDK(object.logging) : undefined,
+      monitoring: isSet(object.monitoring) ? Monitoring.fromSDK(object.monitoring) : undefined,
+      systemParameters: isSet(object.system_parameters) ? SystemParameters.fromSDK(object.system_parameters) : undefined,
+      sourceInfo: isSet(object.source_info) ? SourceInfo.fromSDK(object.source_info) : undefined,
+      configVersion: isSet(object.config_version) ? UInt32Value.fromSDK(object.config_version) : undefined
+    };
+  },
+
+  toSDK(message: Service): ServiceSDKType {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    message.title !== undefined && (obj.title = message.title);
+    message.producerProjectId !== undefined && (obj.producer_project_id = message.producerProjectId);
+    message.id !== undefined && (obj.id = message.id);
+
+    if (message.apis) {
+      obj.apis = message.apis.map(e => e ? Api.toSDK(e) : undefined);
+    } else {
+      obj.apis = [];
+    }
+
+    if (message.types) {
+      obj.types = message.types.map(e => e ? Type.toSDK(e) : undefined);
+    } else {
+      obj.types = [];
+    }
+
+    if (message.enums) {
+      obj.enums = message.enums.map(e => e ? Enum.toSDK(e) : undefined);
+    } else {
+      obj.enums = [];
+    }
+
+    message.documentation !== undefined && (obj.documentation = message.documentation ? Documentation.toSDK(message.documentation) : undefined);
+    message.backend !== undefined && (obj.backend = message.backend ? Backend.toSDK(message.backend) : undefined);
+    message.http !== undefined && (obj.http = message.http ? Http.toSDK(message.http) : undefined);
+    message.quota !== undefined && (obj.quota = message.quota ? Quota.toSDK(message.quota) : undefined);
+    message.authentication !== undefined && (obj.authentication = message.authentication ? Authentication.toSDK(message.authentication) : undefined);
+    message.context !== undefined && (obj.context = message.context ? Context.toSDK(message.context) : undefined);
+    message.usage !== undefined && (obj.usage = message.usage ? Usage.toSDK(message.usage) : undefined);
+
+    if (message.endpoints) {
+      obj.endpoints = message.endpoints.map(e => e ? Endpoint.toSDK(e) : undefined);
+    } else {
+      obj.endpoints = [];
+    }
+
+    message.control !== undefined && (obj.control = message.control ? Control.toSDK(message.control) : undefined);
+
+    if (message.logs) {
+      obj.logs = message.logs.map(e => e ? LogDescriptor.toSDK(e) : undefined);
+    } else {
+      obj.logs = [];
+    }
+
+    if (message.metrics) {
+      obj.metrics = message.metrics.map(e => e ? MetricDescriptor.toSDK(e) : undefined);
+    } else {
+      obj.metrics = [];
+    }
+
+    if (message.monitoredResources) {
+      obj.monitored_resources = message.monitoredResources.map(e => e ? MonitoredResourceDescriptor.toSDK(e) : undefined);
+    } else {
+      obj.monitored_resources = [];
+    }
+
+    message.billing !== undefined && (obj.billing = message.billing ? Billing.toSDK(message.billing) : undefined);
+    message.logging !== undefined && (obj.logging = message.logging ? Logging.toSDK(message.logging) : undefined);
+    message.monitoring !== undefined && (obj.monitoring = message.monitoring ? Monitoring.toSDK(message.monitoring) : undefined);
+    message.systemParameters !== undefined && (obj.system_parameters = message.systemParameters ? SystemParameters.toSDK(message.systemParameters) : undefined);
+    message.sourceInfo !== undefined && (obj.source_info = message.sourceInfo ? SourceInfo.toSDK(message.sourceInfo) : undefined);
+    message.configVersion !== undefined && (obj.config_version = message.configVersion ? UInt32Value.toSDK(message.configVersion) : undefined);
+    return obj;
   }
 
 };

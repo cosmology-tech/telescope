@@ -7,8 +7,16 @@ export interface MsgUnjail {
   validatorAddr: string;
 }
 
+/** MsgUnjail defines the Msg/Unjail request type */
+export interface MsgUnjailSDKType {
+  validator_addr: string;
+}
+
 /** MsgUnjailResponse defines the Msg/Unjail response type */
 export interface MsgUnjailResponse {}
+
+/** MsgUnjailResponse defines the Msg/Unjail response type */
+export interface MsgUnjailResponseSDKType {}
 
 function createBaseMsgUnjail(): MsgUnjail {
   return {
@@ -63,6 +71,18 @@ export const MsgUnjail = {
     const message = createBaseMsgUnjail();
     message.validatorAddr = object.validatorAddr ?? "";
     return message;
+  },
+
+  fromSDK(object: MsgUnjailSDKType): MsgUnjail {
+    return {
+      validatorAddr: isSet(object.validator_addr) ? object.validator_addr : undefined
+    };
+  },
+
+  toSDK(message: MsgUnjail): MsgUnjailSDKType {
+    const obj: any = {};
+    message.validatorAddr !== undefined && (obj.validator_addr = message.validatorAddr);
+    return obj;
   }
 
 };
@@ -76,7 +96,7 @@ export const MsgUnjailResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUnjailResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUnjailResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUnjailResponse();
@@ -106,6 +126,15 @@ export const MsgUnjailResponse = {
   fromPartial(_: DeepPartial<MsgUnjailResponse>): MsgUnjailResponse {
     const message = createBaseMsgUnjailResponse();
     return message;
+  },
+
+  fromSDK(_: MsgUnjailResponseSDKType): MsgUnjailResponse {
+    return {};
+  },
+
+  toSDK(_: MsgUnjailResponse): MsgUnjailResponseSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };

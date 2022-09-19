@@ -1,6 +1,6 @@
-import { LabelDescriptor } from "./label";
-import { LaunchStage, launchStageFromJSON, launchStageToJSON } from "./launch_stage";
-import { Struct } from "../protobuf/struct";
+import { LabelDescriptor, LabelDescriptorSDKType } from "./label";
+import { LaunchStage, LaunchStageSDKType, launchStageFromJSON, launchStageToJSON } from "./launch_stage";
+import { Struct, StructSDKType } from "../protobuf/struct";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, isObject } from "@osmonauts/helpers";
 export const protobufPackage = "google.api";
@@ -57,7 +57,64 @@ export interface MonitoredResourceDescriptor {
   /** Optional. The launch stage of the monitored resource definition. */
   launchStage: LaunchStage;
 }
+
+/**
+ * An object that describes the schema of a [MonitoredResource][google.api.MonitoredResource] object using a
+ * type name and a set of labels.  For example, the monitored resource
+ * descriptor for Google Compute Engine VM instances has a type of
+ * `"gce_instance"` and specifies the use of the labels `"instance_id"` and
+ * `"zone"` to identify particular VM instances.
+ * 
+ * Different APIs can support different monitored resource types. APIs generally
+ * provide a `list` method that returns the monitored resource descriptors used
+ * by the API.
+ */
+export interface MonitoredResourceDescriptorSDKType {
+  /**
+   * Optional. The resource name of the monitored resource descriptor:
+   * `"projects/{project_id}/monitoredResourceDescriptors/{type}"` where
+   * {type} is the value of the `type` field in this object and
+   * {project_id} is a project ID that provides API-specific context for
+   * accessing the type.  APIs that do not use project information can use the
+   * resource name format `"monitoredResourceDescriptors/{type}"`.
+   */
+  name: string;
+
+  /**
+   * Required. The monitored resource type. For example, the type
+   * `"cloudsql_database"` represents databases in Google Cloud SQL.
+   */
+  type: string;
+
+  /**
+   * Optional. A concise name for the monitored resource type that might be
+   * displayed in user interfaces. It should be a Title Cased Noun Phrase,
+   * without any article or other determiners. For example,
+   * `"Google Cloud SQL Database"`.
+   */
+  display_name: string;
+
+  /**
+   * Optional. A detailed description of the monitored resource type that might
+   * be used in documentation.
+   */
+  description: string;
+
+  /**
+   * Required. A set of labels used to describe instances of this monitored
+   * resource type. For example, an individual Google Cloud SQL database is
+   * identified by values for the labels `"database_id"` and `"zone"`.
+   */
+  labels: LabelDescriptorSDKType[];
+
+  /** Optional. The launch stage of the monitored resource definition. */
+  launch_stage: LaunchStageSDKType;
+}
 export interface MonitoredResource_LabelsEntry {
+  key: string;
+  value: string;
+}
+export interface MonitoredResource_LabelsEntrySDKType {
   key: string;
   value: string;
 }
@@ -94,7 +151,44 @@ export interface MonitoredResource {
     [key: string]: string;
   };
 }
+
+/**
+ * An object representing a resource that can be used for monitoring, logging,
+ * billing, or other purposes. Examples include virtual machine instances,
+ * databases, and storage devices such as disks. The `type` field identifies a
+ * [MonitoredResourceDescriptor][google.api.MonitoredResourceDescriptor] object that describes the resource's
+ * schema. Information in the `labels` field identifies the actual resource and
+ * its attributes according to the schema. For example, a particular Compute
+ * Engine VM instance could be represented by the following object, because the
+ * [MonitoredResourceDescriptor][google.api.MonitoredResourceDescriptor] for `"gce_instance"` has labels
+ * `"instance_id"` and `"zone"`:
+ * 
+ * { "type": "gce_instance",
+ * "labels": { "instance_id": "12345678901234",
+ * "zone": "us-central1-a" }}
+ */
+export interface MonitoredResourceSDKType {
+  /**
+   * Required. The monitored resource type. This field must match
+   * the `type` field of a [MonitoredResourceDescriptor][google.api.MonitoredResourceDescriptor] object. For
+   * example, the type of a Compute Engine VM instance is `gce_instance`.
+   */
+  type: string;
+
+  /**
+   * Required. Values for all of the labels listed in the associated monitored
+   * resource descriptor. For example, Compute Engine VM instances use the
+   * labels `"project_id"`, `"instance_id"`, and `"zone"`.
+   */
+  labels: {
+    [key: string]: string;
+  };
+}
 export interface MonitoredResourceMetadata_UserLabelsEntry {
+  key: string;
+  value: string;
+}
+export interface MonitoredResourceMetadata_UserLabelsEntrySDKType {
   key: string;
   value: string;
 }
@@ -124,6 +218,35 @@ export interface MonitoredResourceMetadata {
 
   /** Output only. A map of user-defined metadata labels. */
   userLabels: {
+    [key: string]: string;
+  };
+}
+
+/**
+ * Auxiliary metadata for a [MonitoredResource][google.api.MonitoredResource] object.
+ * [MonitoredResource][google.api.MonitoredResource] objects contain the minimum set of information to
+ * uniquely identify a monitored resource instance. There is some other useful
+ * auxiliary metadata. Monitoring and Logging use an ingestion
+ * pipeline to extract metadata for cloud resources of all types, and store
+ * the metadata in this message.
+ */
+export interface MonitoredResourceMetadataSDKType {
+  /**
+   * Output only. Values for predefined system metadata labels.
+   * System labels are a kind of metadata extracted by Google, including
+   * "machine_image", "vpc", "subnet_id",
+   * "security_group", "name", etc.
+   * System label values can be only strings, Boolean values, or a list of
+   * strings. For example:
+   * 
+   * { "name": "my-test-instance",
+   * "security_group": ["a", "b", "c"],
+   * "spot_instance": false }
+   */
+  system_labels: StructSDKType;
+
+  /** Output only. A map of user-defined metadata labels. */
+  user_labels: {
     [key: string]: string;
   };
 }
@@ -247,6 +370,34 @@ export const MonitoredResourceDescriptor = {
     message.labels = object.labels?.map(e => LabelDescriptor.fromPartial(e)) || [];
     message.launchStage = object.launchStage ?? 0;
     return message;
+  },
+
+  fromSDK(object: MonitoredResourceDescriptorSDKType): MonitoredResourceDescriptor {
+    return {
+      name: isSet(object.name) ? object.name : undefined,
+      type: isSet(object.type) ? object.type : undefined,
+      displayName: isSet(object.display_name) ? object.display_name : undefined,
+      description: isSet(object.description) ? object.description : undefined,
+      labels: Array.isArray(object?.labels) ? object.labels.map((e: any) => LabelDescriptor.fromSDK(e)) : [],
+      launchStage: isSet(object.launch_stage) ? launchStageFromJSON(object.launch_stage) : 0
+    };
+  },
+
+  toSDK(message: MonitoredResourceDescriptor): MonitoredResourceDescriptorSDKType {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    message.type !== undefined && (obj.type = message.type);
+    message.displayName !== undefined && (obj.display_name = message.displayName);
+    message.description !== undefined && (obj.description = message.description);
+
+    if (message.labels) {
+      obj.labels = message.labels.map(e => e ? LabelDescriptor.toSDK(e) : undefined);
+    } else {
+      obj.labels = [];
+    }
+
+    message.launchStage !== undefined && (obj.launch_stage = launchStageToJSON(message.launchStage));
+    return obj;
   }
 
 };
@@ -316,6 +467,20 @@ export const MonitoredResource_LabelsEntry = {
     message.key = object.key ?? "";
     message.value = object.value ?? "";
     return message;
+  },
+
+  fromSDK(object: MonitoredResource_LabelsEntrySDKType): MonitoredResource_LabelsEntry {
+    return {
+      key: isSet(object.key) ? object.key : undefined,
+      value: isSet(object.value) ? object.value : undefined
+    };
+  },
+
+  toSDK(message: MonitoredResource_LabelsEntry): MonitoredResource_LabelsEntrySDKType {
+    const obj: any = {};
+    message.key !== undefined && (obj.key = message.key);
+    message.value !== undefined && (obj.value = message.value);
+    return obj;
   }
 
 };
@@ -412,6 +577,32 @@ export const MonitoredResource = {
       return acc;
     }, {});
     return message;
+  },
+
+  fromSDK(object: MonitoredResourceSDKType): MonitoredResource {
+    return {
+      type: isSet(object.type) ? object.type : undefined,
+      labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
+        [key: string]: string;
+      }>((acc, [key, value]) => {
+        acc[key] = String(value);
+        return acc;
+      }, {}) : {}
+    };
+  },
+
+  toSDK(message: MonitoredResource): MonitoredResourceSDKType {
+    const obj: any = {};
+    message.type !== undefined && (obj.type = message.type);
+    obj.labels = {};
+
+    if (message.labels) {
+      Object.entries(message.labels).forEach(([k, v]) => {
+        obj.labels[k] = v;
+      });
+    }
+
+    return obj;
   }
 
 };
@@ -481,6 +672,20 @@ export const MonitoredResourceMetadata_UserLabelsEntry = {
     message.key = object.key ?? "";
     message.value = object.value ?? "";
     return message;
+  },
+
+  fromSDK(object: MonitoredResourceMetadata_UserLabelsEntrySDKType): MonitoredResourceMetadata_UserLabelsEntry {
+    return {
+      key: isSet(object.key) ? object.key : undefined,
+      value: isSet(object.value) ? object.value : undefined
+    };
+  },
+
+  toSDK(message: MonitoredResourceMetadata_UserLabelsEntry): MonitoredResourceMetadata_UserLabelsEntrySDKType {
+    const obj: any = {};
+    message.key !== undefined && (obj.key = message.key);
+    message.value !== undefined && (obj.value = message.value);
+    return obj;
   }
 
 };
@@ -577,6 +782,32 @@ export const MonitoredResourceMetadata = {
       return acc;
     }, {});
     return message;
+  },
+
+  fromSDK(object: MonitoredResourceMetadataSDKType): MonitoredResourceMetadata {
+    return {
+      systemLabels: isSet(object.system_labels) ? Struct.fromSDK(object.system_labels) : undefined,
+      userLabels: isObject(object.user_labels) ? Object.entries(object.user_labels).reduce<{
+        [key: string]: string;
+      }>((acc, [key, value]) => {
+        acc[key] = String(value);
+        return acc;
+      }, {}) : {}
+    };
+  },
+
+  toSDK(message: MonitoredResourceMetadata): MonitoredResourceMetadataSDKType {
+    const obj: any = {};
+    message.systemLabels !== undefined && (obj.system_labels = message.systemLabels ? Struct.toSDK(message.systemLabels) : undefined);
+    obj.user_labels = {};
+
+    if (message.userLabels) {
+      Object.entries(message.userLabels).forEach(([k, v]) => {
+        obj.user_labels[k] = v;
+      });
+    }
+
+    return obj;
   }
 
 };

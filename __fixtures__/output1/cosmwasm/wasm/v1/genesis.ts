@@ -1,5 +1,5 @@
-import { MsgStoreCode, MsgInstantiateContract, MsgExecuteContract } from "./tx";
-import { Params, CodeInfo, ContractInfo, Model } from "./types";
+import { MsgStoreCode, MsgStoreCodeSDKType, MsgInstantiateContract, MsgInstantiateContractSDKType, MsgExecuteContract, MsgExecuteContractSDKType } from "./tx";
+import { Params, ParamsSDKType, CodeInfo, CodeInfoSDKType, ContractInfo, ContractInfoSDKType, Model, ModelSDKType } from "./types";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, Long, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
 export const protobufPackage = "cosmwasm.wasm.v1";
@@ -13,6 +13,15 @@ export interface GenesisState {
   genMsgs: GenesisState_GenMsgs[];
 }
 
+/** GenesisState - genesis state of x/wasm */
+export interface GenesisStateSDKType {
+  params: ParamsSDKType;
+  codes: CodeSDKType[];
+  contracts: ContractSDKType[];
+  sequences: SequenceSDKType[];
+  gen_msgs: GenesisState_GenMsgsSDKType[];
+}
+
 /**
  * GenMsgs define the messages that can be executed during genesis phase in
  * order. The intention is to have more human readable data that is auditable.
@@ -21,6 +30,16 @@ export interface GenesisState_GenMsgs {
   storeCode?: MsgStoreCode;
   instantiateContract?: MsgInstantiateContract;
   executeContract?: MsgExecuteContract;
+}
+
+/**
+ * GenMsgs define the messages that can be executed during genesis phase in
+ * order. The intention is to have more human readable data that is auditable.
+ */
+export interface GenesisState_GenMsgsSDKType {
+  store_code?: MsgStoreCodeSDKType;
+  instantiate_contract?: MsgInstantiateContractSDKType;
+  execute_contract?: MsgExecuteContractSDKType;
 }
 
 /** Code struct encompasses CodeInfo and CodeBytes */
@@ -33,6 +52,16 @@ export interface Code {
   pinned: boolean;
 }
 
+/** Code struct encompasses CodeInfo and CodeBytes */
+export interface CodeSDKType {
+  code_id: Long;
+  code_info: CodeInfoSDKType;
+  code_bytes: Uint8Array;
+
+  /** Pinned to wasmvm cache */
+  pinned: boolean;
+}
+
 /** Contract struct encompasses ContractAddress, ContractInfo, and ContractState */
 export interface Contract {
   contractAddress: string;
@@ -40,9 +69,22 @@ export interface Contract {
   contractState: Model[];
 }
 
+/** Contract struct encompasses ContractAddress, ContractInfo, and ContractState */
+export interface ContractSDKType {
+  contract_address: string;
+  contract_info: ContractInfoSDKType;
+  contract_state: ModelSDKType[];
+}
+
 /** Sequence key and value of an id generation counter */
 export interface Sequence {
   idKey: Uint8Array;
+  value: Long;
+}
+
+/** Sequence key and value of an id generation counter */
+export interface SequenceSDKType {
+  id_key: Uint8Array;
   value: Long;
 }
 
@@ -168,6 +210,47 @@ export const GenesisState = {
     message.sequences = object.sequences?.map(e => Sequence.fromPartial(e)) || [];
     message.genMsgs = object.genMsgs?.map(e => GenesisState_GenMsgs.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: GenesisStateSDKType): GenesisState {
+    return {
+      params: isSet(object.params) ? Params.fromSDK(object.params) : undefined,
+      codes: Array.isArray(object?.codes) ? object.codes.map((e: any) => Code.fromSDK(e)) : [],
+      contracts: Array.isArray(object?.contracts) ? object.contracts.map((e: any) => Contract.fromSDK(e)) : [],
+      sequences: Array.isArray(object?.sequences) ? object.sequences.map((e: any) => Sequence.fromSDK(e)) : [],
+      genMsgs: Array.isArray(object?.gen_msgs) ? object.gen_msgs.map((e: any) => GenesisState_GenMsgs.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: GenesisState): GenesisStateSDKType {
+    const obj: any = {};
+    message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
+
+    if (message.codes) {
+      obj.codes = message.codes.map(e => e ? Code.toSDK(e) : undefined);
+    } else {
+      obj.codes = [];
+    }
+
+    if (message.contracts) {
+      obj.contracts = message.contracts.map(e => e ? Contract.toSDK(e) : undefined);
+    } else {
+      obj.contracts = [];
+    }
+
+    if (message.sequences) {
+      obj.sequences = message.sequences.map(e => e ? Sequence.toSDK(e) : undefined);
+    } else {
+      obj.sequences = [];
+    }
+
+    if (message.genMsgs) {
+      obj.gen_msgs = message.genMsgs.map(e => e ? GenesisState_GenMsgs.toSDK(e) : undefined);
+    } else {
+      obj.gen_msgs = [];
+    }
+
+    return obj;
   }
 
 };
@@ -249,6 +332,22 @@ export const GenesisState_GenMsgs = {
     message.instantiateContract = object.instantiateContract !== undefined && object.instantiateContract !== null ? MsgInstantiateContract.fromPartial(object.instantiateContract) : undefined;
     message.executeContract = object.executeContract !== undefined && object.executeContract !== null ? MsgExecuteContract.fromPartial(object.executeContract) : undefined;
     return message;
+  },
+
+  fromSDK(object: GenesisState_GenMsgsSDKType): GenesisState_GenMsgs {
+    return {
+      storeCode: isSet(object.store_code) ? MsgStoreCode.fromSDK(object.store_code) : undefined,
+      instantiateContract: isSet(object.instantiate_contract) ? MsgInstantiateContract.fromSDK(object.instantiate_contract) : undefined,
+      executeContract: isSet(object.execute_contract) ? MsgExecuteContract.fromSDK(object.execute_contract) : undefined
+    };
+  },
+
+  toSDK(message: GenesisState_GenMsgs): GenesisState_GenMsgsSDKType {
+    const obj: any = {};
+    message.storeCode !== undefined && (obj.store_code = message.storeCode ? MsgStoreCode.toSDK(message.storeCode) : undefined);
+    message.instantiateContract !== undefined && (obj.instantiate_contract = message.instantiateContract ? MsgInstantiateContract.toSDK(message.instantiateContract) : undefined);
+    message.executeContract !== undefined && (obj.execute_contract = message.executeContract ? MsgExecuteContract.toSDK(message.executeContract) : undefined);
+    return obj;
   }
 
 };
@@ -342,6 +441,24 @@ export const Code = {
     message.codeBytes = object.codeBytes ?? new Uint8Array();
     message.pinned = object.pinned ?? false;
     return message;
+  },
+
+  fromSDK(object: CodeSDKType): Code {
+    return {
+      codeId: isSet(object.code_id) ? object.code_id : undefined,
+      codeInfo: isSet(object.code_info) ? CodeInfo.fromSDK(object.code_info) : undefined,
+      codeBytes: isSet(object.code_bytes) ? object.code_bytes : undefined,
+      pinned: isSet(object.pinned) ? object.pinned : undefined
+    };
+  },
+
+  toSDK(message: Code): CodeSDKType {
+    const obj: any = {};
+    message.codeId !== undefined && (obj.code_id = message.codeId);
+    message.codeInfo !== undefined && (obj.code_info = message.codeInfo ? CodeInfo.toSDK(message.codeInfo) : undefined);
+    message.codeBytes !== undefined && (obj.code_bytes = message.codeBytes);
+    message.pinned !== undefined && (obj.pinned = message.pinned);
+    return obj;
   }
 
 };
@@ -429,6 +546,28 @@ export const Contract = {
     message.contractInfo = object.contractInfo !== undefined && object.contractInfo !== null ? ContractInfo.fromPartial(object.contractInfo) : undefined;
     message.contractState = object.contractState?.map(e => Model.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: ContractSDKType): Contract {
+    return {
+      contractAddress: isSet(object.contract_address) ? object.contract_address : undefined,
+      contractInfo: isSet(object.contract_info) ? ContractInfo.fromSDK(object.contract_info) : undefined,
+      contractState: Array.isArray(object?.contract_state) ? object.contract_state.map((e: any) => Model.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: Contract): ContractSDKType {
+    const obj: any = {};
+    message.contractAddress !== undefined && (obj.contract_address = message.contractAddress);
+    message.contractInfo !== undefined && (obj.contract_info = message.contractInfo ? ContractInfo.toSDK(message.contractInfo) : undefined);
+
+    if (message.contractState) {
+      obj.contract_state = message.contractState.map(e => e ? Model.toSDK(e) : undefined);
+    } else {
+      obj.contract_state = [];
+    }
+
+    return obj;
   }
 
 };
@@ -498,6 +637,20 @@ export const Sequence = {
     message.idKey = object.idKey ?? new Uint8Array();
     message.value = object.value !== undefined && object.value !== null ? Long.fromValue(object.value) : Long.UZERO;
     return message;
+  },
+
+  fromSDK(object: SequenceSDKType): Sequence {
+    return {
+      idKey: isSet(object.id_key) ? object.id_key : undefined,
+      value: isSet(object.value) ? object.value : undefined
+    };
+  },
+
+  toSDK(message: Sequence): SequenceSDKType {
+    const obj: any = {};
+    message.idKey !== undefined && (obj.id_key = message.idKey);
+    message.value !== undefined && (obj.value = message.value);
+    return obj;
   }
 
 };

@@ -1,11 +1,24 @@
-import { FieldMask } from "../../protobuf/field_mask";
-import { Timestamp } from "../../protobuf/timestamp";
+import { FieldMask, FieldMaskSDKType } from "../../protobuf/field_mask";
+import { Timestamp, TimestampSDKType } from "../../protobuf/timestamp";
 import * as _m0 from "protobufjs/minimal";
 import { toTimestamp, fromTimestamp, isSet, fromJsonTimestamp, DeepPartial, Long } from "@osmonauts/helpers";
 export const protobufPackage = "google.logging.v2";
 
 /** Deprecated. This is unused. */
 export enum LogSink_VersionFormat {
+  /** VERSION_FORMAT_UNSPECIFIED - An unspecified format version that will default to V2. */
+  VERSION_FORMAT_UNSPECIFIED = 0,
+
+  /** V2 - `LogEntry` version 2 format. */
+  V2 = 1,
+
+  /** V1 - `LogEntry` version 1 format. */
+  V1 = 2,
+  UNRECOGNIZED = -1,
+}
+
+/** Deprecated. This is unused. */
+export enum LogSink_VersionFormatSDKType {
   /** VERSION_FORMAT_UNSPECIFIED - An unspecified format version that will default to V2. */
   VERSION_FORMAT_UNSPECIFIED = 0,
 
@@ -70,6 +83,25 @@ export enum LifecycleState {
   DELETE_REQUESTED = 2,
   UNRECOGNIZED = -1,
 }
+
+/** LogBucket lifecycle states. */
+export enum LifecycleStateSDKType {
+  /**
+   * LIFECYCLE_STATE_UNSPECIFIED - Unspecified state. This is only used/useful for distinguishing unset
+   * values.
+   */
+  LIFECYCLE_STATE_UNSPECIFIED = 0,
+
+  /** ACTIVE - The normal and active state. */
+  ACTIVE = 1,
+
+  /**
+   * DELETE_REQUESTED - The resource has been marked for deletion by the user. For some resources
+   * (e.g. buckets), this can be reversed by an un-delete operation.
+   */
+  DELETE_REQUESTED = 2,
+  UNRECOGNIZED = -1,
+}
 export function lifecycleStateFromJSON(object: any): LifecycleState {
   switch (object) {
     case 0:
@@ -114,6 +146,37 @@ export function lifecycleStateToJSON(object: LifecycleState): string {
  * operation is finished and the final result is available.
  */
 export enum OperationState {
+  /** OPERATION_STATE_UNSPECIFIED - Should not be used. */
+  OPERATION_STATE_UNSPECIFIED = 0,
+
+  /** OPERATION_STATE_SCHEDULED - The operation is scheduled. */
+  OPERATION_STATE_SCHEDULED = 1,
+
+  /** OPERATION_STATE_WAITING_FOR_PERMISSIONS - Waiting for necessary permissions. */
+  OPERATION_STATE_WAITING_FOR_PERMISSIONS = 2,
+
+  /** OPERATION_STATE_RUNNING - The operation is running. */
+  OPERATION_STATE_RUNNING = 3,
+
+  /** OPERATION_STATE_SUCCEEDED - The operation was completed successfully. */
+  OPERATION_STATE_SUCCEEDED = 4,
+
+  /** OPERATION_STATE_FAILED - The operation failed. */
+  OPERATION_STATE_FAILED = 5,
+
+  /** OPERATION_STATE_CANCELLED - The operation was cancelled by the user. */
+  OPERATION_STATE_CANCELLED = 6,
+  UNRECOGNIZED = -1,
+}
+
+/**
+ * List of different operation states.
+ * High level state of the operation. This is used to report the job's
+ * current state to the user. Once a long running operation is created,
+ * the current state of the operation can be queried even before the
+ * operation is finished and the final result is available.
+ */
+export enum OperationStateSDKType {
   /** OPERATION_STATE_UNSPECIFIED - Should not be used. */
   OPERATION_STATE_UNSPECIFIED = 0,
 
@@ -271,6 +334,77 @@ export interface LogBucket {
   cmekSettings: CmekSettings;
 }
 
+/** Describes a repository in which log entries are stored. */
+export interface LogBucketSDKType {
+  /**
+   * Output only. The resource name of the bucket.
+   * 
+   * For example:
+   * 
+   * `projects/my-project/locations/global/buckets/my-bucket`
+   * 
+   * For a list of supported locations, see [Supported
+   * Regions](https://cloud.google.com/logging/docs/region-support)
+   * 
+   * For the location of `global` it is unspecified where log entries are
+   * actually stored.
+   * 
+   * After a bucket has been created, the location cannot be changed.
+   */
+  name: string;
+
+  /** Describes this bucket. */
+  description: string;
+
+  /**
+   * Output only. The creation timestamp of the bucket. This is not set for any of the
+   * default buckets.
+   */
+  create_time: Date;
+
+  /** Output only. The last update timestamp of the bucket. */
+  update_time: Date;
+
+  /**
+   * Logs will be retained by default for this amount of time, after which they
+   * will automatically be deleted. The minimum retention period is 1 day. If
+   * this value is set to zero at bucket creation time, the default time of 30
+   * days will be used.
+   */
+  retention_days: number;
+
+  /**
+   * Whether the bucket is locked.
+   * 
+   * The retention period on a locked bucket cannot be changed. Locked buckets
+   * may only be deleted if they are empty.
+   */
+  locked: boolean;
+
+  /** Output only. The bucket lifecycle state. */
+  lifecycle_state: LifecycleStateSDKType;
+
+  /**
+   * Log entry field paths that are denied access in this bucket.
+   * 
+   * The following fields and their children are eligible: `textPayload`,
+   * `jsonPayload`, `protoPayload`, `httpRequest`, `labels`, `sourceLocation`.
+   * 
+   * Restricting a repeated field will restrict all values. Adding a parent will
+   * block all child fields. (e.g. `foo.bar` will block `foo.bar.baz`)
+   */
+  restricted_fields: string[];
+
+  /**
+   * The CMEK settings of the log bucket. If present, new log entries written to
+   * this log bucket are encrypted using the CMEK key provided in this
+   * configuration. If a log bucket has CMEK settings, the CMEK settings cannot
+   * be disabled later by updating the log bucket. Changing the KMS key is
+   * allowed.
+   */
+  cmek_settings: CmekSettingsSDKType;
+}
+
 /** Describes a view over log entries in a bucket. */
 export interface LogView {
   /**
@@ -290,6 +424,45 @@ export interface LogView {
 
   /** Output only. The last update timestamp of the view. */
   updateTime: Date;
+
+  /**
+   * Filter that restricts which log entries in a bucket are visible in this
+   * view.
+   * 
+   * Filters are restricted to be a logical AND of ==/!= of any of the
+   * following:
+   * 
+   * - originating project/folder/organization/billing account.
+   * - resource type
+   * - log id
+   * 
+   * For example:
+   * 
+   * SOURCE("projects/myproject") AND resource.type = "gce_instance"
+   * AND LOG_ID("stdout")
+   */
+  filter: string;
+}
+
+/** Describes a view over log entries in a bucket. */
+export interface LogViewSDKType {
+  /**
+   * The resource name of the view.
+   * 
+   * For example:
+   * 
+   * `projects/my-project/locations/global/buckets/my-bucket/views/my-view`
+   */
+  name: string;
+
+  /** Describes this view. */
+  description: string;
+
+  /** Output only. The creation timestamp of the view. */
+  create_time: Date;
+
+  /** Output only. The last update timestamp of the view. */
+  update_time: Date;
 
   /**
    * Filter that restricts which log entries in a bucket are visible in this
@@ -441,6 +614,137 @@ export interface LogSink {
   updateTime: Date;
 }
 
+/**
+ * Describes a sink used to export log entries to one of the following
+ * destinations in any project: a Cloud Storage bucket, a BigQuery dataset, a
+ * Pub/Sub topic or a Cloud Logging log bucket. A logs filter controls which log
+ * entries are exported. The sink must be created within a project,
+ * organization, billing account, or folder.
+ */
+export interface LogSinkSDKType {
+  /**
+   * Required. The client-assigned sink identifier, unique within the project.
+   * 
+   * For example: `"my-syslog-errors-to-pubsub"`. Sink identifiers are limited
+   * to 100 characters and can include only the following characters: upper and
+   * lower-case alphanumeric characters, underscores, hyphens, and periods.
+   * First character has to be alphanumeric.
+   */
+  name: string;
+
+  /**
+   * Required. The export destination:
+   * 
+   * "storage.googleapis.com/[GCS_BUCKET]"
+   * "bigquery.googleapis.com/projects/[PROJECT_ID]/datasets/[DATASET]"
+   * "pubsub.googleapis.com/projects/[PROJECT_ID]/topics/[TOPIC_ID]"
+   * 
+   * The sink's `writer_identity`, set when the sink is created, must have
+   * permission to write to the destination or else the log entries are not
+   * exported. For more information, see
+   * [Exporting Logs with
+   * Sinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
+   */
+  destination: string;
+
+  /**
+   * Optional. An [advanced logs
+   * filter](https://cloud.google.com/logging/docs/view/advanced-queries). The
+   * only exported log entries are those that are in the resource owning the
+   * sink and that match the filter.
+   * 
+   * For example:
+   * 
+   * `logName="projects/[PROJECT_ID]/logs/[LOG_ID]" AND severity>=ERROR`
+   */
+  filter: string;
+
+  /**
+   * Optional. A description of this sink.
+   * 
+   * The maximum length of the description is 8000 characters.
+   */
+  description: string;
+
+  /**
+   * Optional. If set to true, then this sink is disabled and it does not export any log
+   * entries.
+   */
+  disabled: boolean;
+
+  /**
+   * Optional. Log entries that match any of these exclusion filters will not be exported.
+   * 
+   * If a log entry is matched by both `filter` and one of `exclusion_filters`
+   * it will not be exported.
+   */
+  exclusions: LogExclusionSDKType[];
+
+  /** Deprecated. This field is unused. */
+
+  /** @deprecated */
+  output_version_format: LogSink_VersionFormatSDKType;
+
+  /**
+   * Output only. An IAM identity&mdash;a service account or group&mdash;under which Cloud
+   * Logging writes the exported log entries to the sink's destination. This
+   * field is set by
+   * [sinks.create][google.logging.v2.ConfigServiceV2.CreateSink] and
+   * [sinks.update][google.logging.v2.ConfigServiceV2.UpdateSink] based on the
+   * value of `unique_writer_identity` in those methods.
+   * 
+   * Until you grant this identity write-access to the destination, log entry
+   * exports from this sink will fail. For more information, see [Granting
+   * Access for a
+   * Resource](https://cloud.google.com/iam/docs/granting-roles-to-service-accounts#granting_access_to_a_service_account_for_a_resource).
+   * Consult the destination service's documentation to determine the
+   * appropriate IAM roles to assign to the identity.
+   * 
+   * Sinks that have a destination that is a log bucket in the same project as
+   * the sink do not have a writer_identity and no additional permissions are
+   * required.
+   */
+  writer_identity: string;
+
+  /**
+   * Optional. This field applies only to sinks owned by organizations and folders. If the
+   * field is false, the default, only the logs owned by the sink's parent
+   * resource are available for export. If the field is true, then log entries
+   * from all the projects, folders, and billing accounts contained in the
+   * sink's parent resource are also available for export. Whether a particular
+   * log entry from the children is exported depends on the sink's filter
+   * expression.
+   * 
+   * For example, if this field is true, then the filter
+   * `resource.type=gce_instance` would export all Compute Engine VM instance
+   * log entries from all projects in the sink's parent.
+   * 
+   * To only export entries from certain child projects, filter on the project
+   * part of the log name:
+   * 
+   * logName:("projects/test-project1/" OR "projects/test-project2/") AND
+   * resource.type=gce_instance
+   */
+  include_children: boolean;
+
+  /** Optional. Options that affect sinks exporting data to BigQuery. */
+  bigquery_options?: BigQueryOptionsSDKType;
+
+  /**
+   * Output only. The creation timestamp of the sink.
+   * 
+   * This field may not be present for older sinks.
+   */
+  create_time: Date;
+
+  /**
+   * Output only. The last update timestamp of the sink.
+   * 
+   * This field may not be present for older sinks.
+   */
+  update_time: Date;
+}
+
 /** Options that change functionality of a sink exporting data to BigQuery. */
 export interface BigQueryOptions {
   /**
@@ -465,6 +769,32 @@ export interface BigQueryOptions {
    * this field set to false.
    */
   usesTimestampColumnPartitioning: boolean;
+}
+
+/** Options that change functionality of a sink exporting data to BigQuery. */
+export interface BigQueryOptionsSDKType {
+  /**
+   * Optional. Whether to use [BigQuery's partition
+   * tables](https://cloud.google.com/bigquery/docs/partitioned-tables). By
+   * default, Cloud Logging creates dated tables based on the log entries'
+   * timestamps, e.g. syslog_20170523. With partitioned tables the date suffix
+   * is no longer present and [special query
+   * syntax](https://cloud.google.com/bigquery/docs/querying-partitioned-tables)
+   * has to be used instead. In both cases, tables are sharded based on UTC
+   * timezone.
+   */
+  use_partitioned_tables: boolean;
+
+  /**
+   * Output only. True if new timestamp column based partitioning is in use, false if legacy
+   * ingestion-time partitioning is in use.
+   * 
+   * All new sinks will have this field set true and will use timestamp column
+   * based partitioning. If use_partitioned_tables is false, this value has no
+   * meaning and will be false. Legacy sinks using partitioned tables will have
+   * this field set to false.
+   */
+  uses_timestamp_column_partitioning: boolean;
 }
 
 /** The parameters to `ListBuckets`. */
@@ -499,6 +829,38 @@ export interface ListBucketsRequest {
   pageSize?: number;
 }
 
+/** The parameters to `ListBuckets`. */
+export interface ListBucketsRequestSDKType {
+  /**
+   * Required. The parent resource whose buckets are to be listed:
+   * 
+   * "projects/[PROJECT_ID]/locations/[LOCATION_ID]"
+   * "organizations/[ORGANIZATION_ID]/locations/[LOCATION_ID]"
+   * "billingAccounts/[BILLING_ACCOUNT_ID]/locations/[LOCATION_ID]"
+   * "folders/[FOLDER_ID]/locations/[LOCATION_ID]"
+   * 
+   * Note: The locations portion of the resource must be specified, but
+   * supplying the character `-` in place of [LOCATION_ID] will return all
+   * buckets.
+   */
+  parent?: string;
+
+  /**
+   * Optional. If present, then retrieve the next batch of results from the preceding call
+   * to this method. `pageToken` must be the value of `nextPageToken` from the
+   * previous response. The values of other method parameters should be
+   * identical to those in the previous call.
+   */
+  page_token?: string;
+
+  /**
+   * Optional. The maximum number of results to return from this request. Non-positive
+   * values are ignored. The presence of `nextPageToken` in the response
+   * indicates that more results might be available.
+   */
+  page_size?: number;
+}
+
 /** The response from ListBuckets. */
 export interface ListBucketsResponse {
   /** A list of buckets. */
@@ -510,6 +872,19 @@ export interface ListBucketsResponse {
    * method again using the value of `nextPageToken` as `pageToken`.
    */
   nextPageToken: string;
+}
+
+/** The response from ListBuckets. */
+export interface ListBucketsResponseSDKType {
+  /** A list of buckets. */
+  buckets: LogBucketSDKType[];
+
+  /**
+   * If there might be more results than appear in this response, then
+   * `nextPageToken` is included. To get the next set of results, call the same
+   * method again using the value of `nextPageToken` as `pageToken`.
+   */
+  next_page_token: string;
 }
 
 /** The parameters to `CreateBucket`. */
@@ -538,6 +913,34 @@ export interface CreateBucketRequest {
    * ignored.
    */
   bucket: LogBucket;
+}
+
+/** The parameters to `CreateBucket`. */
+export interface CreateBucketRequestSDKType {
+  /**
+   * Required. The resource in which to create the log bucket:
+   * 
+   * "projects/[PROJECT_ID]/locations/[LOCATION_ID]"
+   * 
+   * For example:
+   * 
+   * `"projects/my-project/locations/global"`
+   */
+  parent: string;
+
+  /**
+   * Required. A client-assigned identifier such as `"my-bucket"`. Identifiers are limited
+   * to 100 characters and can include only letters, digits, underscores,
+   * hyphens, and periods.
+   */
+  bucket_id: string;
+
+  /**
+   * Required. The new bucket. The region specified in the new bucket must be compliant
+   * with any Location Restriction Org Policy. The name field in the bucket is
+   * ignored.
+   */
+  bucket: LogBucketSDKType;
 }
 
 /** The parameters to `UpdateBucket`. */
@@ -572,8 +975,57 @@ export interface UpdateBucketRequest {
   updateMask: FieldMask;
 }
 
+/** The parameters to `UpdateBucket`. */
+export interface UpdateBucketRequestSDKType {
+  /**
+   * Required. The full resource name of the bucket to update.
+   * 
+   * "projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
+   * "organizations/[ORGANIZATION_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
+   * "billingAccounts/[BILLING_ACCOUNT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
+   * "folders/[FOLDER_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
+   * 
+   * For example:
+   * 
+   * `"projects/my-project/locations/global/buckets/my-bucket"`
+   */
+  name: string;
+
+  /** Required. The updated bucket. */
+  bucket: LogBucketSDKType;
+
+  /**
+   * Required. Field mask that specifies the fields in `bucket` that need an update. A
+   * bucket field will be overwritten if, and only if, it is in the update mask.
+   * `name` and output only fields cannot be updated.
+   * 
+   * For a detailed `FieldMask` definition, see:
+   * https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask
+   * 
+   * For example: `updateMask=retention_days`
+   */
+  update_mask: FieldMaskSDKType;
+}
+
 /** The parameters to `GetBucket`. */
 export interface GetBucketRequest {
+  /**
+   * Required. The resource name of the bucket:
+   * 
+   * "projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
+   * "organizations/[ORGANIZATION_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
+   * "billingAccounts/[BILLING_ACCOUNT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
+   * "folders/[FOLDER_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
+   * 
+   * For example:
+   * 
+   * `"projects/my-project/locations/global/buckets/my-bucket"`
+   */
+  name?: string;
+}
+
+/** The parameters to `GetBucket`. */
+export interface GetBucketRequestSDKType {
   /**
    * Required. The resource name of the bucket:
    * 
@@ -606,8 +1058,42 @@ export interface DeleteBucketRequest {
   name: string;
 }
 
+/** The parameters to `DeleteBucket`. */
+export interface DeleteBucketRequestSDKType {
+  /**
+   * Required. The full resource name of the bucket to delete.
+   * 
+   * "projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
+   * "organizations/[ORGANIZATION_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
+   * "billingAccounts/[BILLING_ACCOUNT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
+   * "folders/[FOLDER_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
+   * 
+   * For example:
+   * 
+   * `"projects/my-project/locations/global/buckets/my-bucket"`
+   */
+  name: string;
+}
+
 /** The parameters to `UndeleteBucket`. */
 export interface UndeleteBucketRequest {
+  /**
+   * Required. The full resource name of the bucket to undelete.
+   * 
+   * "projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
+   * "organizations/[ORGANIZATION_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
+   * "billingAccounts/[BILLING_ACCOUNT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
+   * "folders/[FOLDER_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
+   * 
+   * For example:
+   * 
+   * `"projects/my-project/locations/global/buckets/my-bucket"`
+   */
+  name: string;
+}
+
+/** The parameters to `UndeleteBucket`. */
+export interface UndeleteBucketRequestSDKType {
   /**
    * Required. The full resource name of the bucket to undelete.
    * 
@@ -649,6 +1135,32 @@ export interface ListViewsRequest {
   pageSize?: number;
 }
 
+/** The parameters to `ListViews`. */
+export interface ListViewsRequestSDKType {
+  /**
+   * Required. The bucket whose views are to be listed:
+   * 
+   * "projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
+   */
+  parent?: string;
+
+  /**
+   * Optional. If present, then retrieve the next batch of results from the preceding call
+   * to this method. `pageToken` must be the value of `nextPageToken` from the
+   * previous response. The values of other method parameters should be
+   * identical to those in the previous call.
+   */
+  page_token?: string;
+
+  /**
+   * Optional. The maximum number of results to return from this request.
+   * 
+   * Non-positive values are ignored. The presence of `nextPageToken` in the
+   * response indicates that more results might be available.
+   */
+  page_size?: number;
+}
+
 /** The response from ListViews. */
 export interface ListViewsResponse {
   /** A list of views. */
@@ -660,6 +1172,19 @@ export interface ListViewsResponse {
    * method again using the value of `nextPageToken` as `pageToken`.
    */
   nextPageToken: string;
+}
+
+/** The response from ListViews. */
+export interface ListViewsResponseSDKType {
+  /** A list of views. */
+  views: LogViewSDKType[];
+
+  /**
+   * If there might be more results than appear in this response, then
+   * `nextPageToken` is included. To get the next set of results, call the same
+   * method again using the value of `nextPageToken` as `pageToken`.
+   */
+  next_page_token: string;
 }
 
 /** The parameters to `CreateView`. */
@@ -680,6 +1205,26 @@ export interface CreateViewRequest {
 
   /** Required. The new view. */
   view: LogView;
+}
+
+/** The parameters to `CreateView`. */
+export interface CreateViewRequestSDKType {
+  /**
+   * Required. The bucket in which to create the view
+   * 
+   * `"projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"`
+   * 
+   * For example:
+   * 
+   * `"projects/my-project/locations/global/buckets/my-bucket"`
+   */
+  parent: string;
+
+  /** Required. The id to use for this view. */
+  view_id: string;
+
+  /** Required. The new view. */
+  view: LogViewSDKType;
 }
 
 /** The parameters to `UpdateView`. */
@@ -711,6 +1256,35 @@ export interface UpdateViewRequest {
   updateMask: FieldMask;
 }
 
+/** The parameters to `UpdateView`. */
+export interface UpdateViewRequestSDKType {
+  /**
+   * Required. The full resource name of the view to update
+   * 
+   * "projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]"
+   * 
+   * For example:
+   * 
+   * `"projects/my-project/locations/global/buckets/my-bucket/views/my-view"`
+   */
+  name: string;
+
+  /** Required. The updated view. */
+  view: LogViewSDKType;
+
+  /**
+   * Optional. Field mask that specifies the fields in `view` that need
+   * an update. A field will be overwritten if, and only if, it is
+   * in the update mask. `name` and output only fields cannot be updated.
+   * 
+   * For a detailed `FieldMask` definition, see
+   * https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask
+   * 
+   * For example: `updateMask=filter`
+   */
+  update_mask: FieldMaskSDKType;
+}
+
 /** The parameters to `GetView`. */
 export interface GetViewRequest {
   /**
@@ -725,8 +1299,36 @@ export interface GetViewRequest {
   name?: string;
 }
 
+/** The parameters to `GetView`. */
+export interface GetViewRequestSDKType {
+  /**
+   * Required. The resource name of the policy:
+   * 
+   * "projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]"
+   * 
+   * For example:
+   * 
+   * `"projects/my-project/locations/global/buckets/my-bucket/views/my-view"`
+   */
+  name?: string;
+}
+
 /** The parameters to `DeleteView`. */
 export interface DeleteViewRequest {
+  /**
+   * Required. The full resource name of the view to delete:
+   * 
+   * "projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]"
+   * 
+   * For example:
+   * 
+   * `"projects/my-project/locations/global/buckets/my-bucket/views/my-view"`
+   */
+  name: string;
+}
+
+/** The parameters to `DeleteView`. */
+export interface DeleteViewRequestSDKType {
   /**
    * Required. The full resource name of the view to delete:
    * 
@@ -767,6 +1369,34 @@ export interface ListSinksRequest {
   pageSize?: number;
 }
 
+/** The parameters to `ListSinks`. */
+export interface ListSinksRequestSDKType {
+  /**
+   * Required. The parent resource whose sinks are to be listed:
+   * 
+   * "projects/[PROJECT_ID]"
+   * "organizations/[ORGANIZATION_ID]"
+   * "billingAccounts/[BILLING_ACCOUNT_ID]"
+   * "folders/[FOLDER_ID]"
+   */
+  parent?: string;
+
+  /**
+   * Optional. If present, then retrieve the next batch of results from the
+   * preceding call to this method. `pageToken` must be the value of
+   * `nextPageToken` from the previous response. The values of other method
+   * parameters should be identical to those in the previous call.
+   */
+  page_token?: string;
+
+  /**
+   * Optional. The maximum number of results to return from this request.
+   * Non-positive values are ignored. The presence of `nextPageToken` in the
+   * response indicates that more results might be available.
+   */
+  page_size?: number;
+}
+
 /** Result returned from `ListSinks`. */
 export interface ListSinksResponse {
   /** A list of sinks. */
@@ -778,6 +1408,19 @@ export interface ListSinksResponse {
    * method again using the value of `nextPageToken` as `pageToken`.
    */
   nextPageToken: string;
+}
+
+/** Result returned from `ListSinks`. */
+export interface ListSinksResponseSDKType {
+  /** A list of sinks. */
+  sinks: LogSinkSDKType[];
+
+  /**
+   * If there might be more results than appear in this response, then
+   * `nextPageToken` is included. To get the next set of results, call the same
+   * method again using the value of `nextPageToken` as `pageToken`.
+   */
+  next_page_token: string;
 }
 
 /** The parameters to `GetSink`. */
@@ -795,6 +1438,23 @@ export interface GetSinkRequest {
    * `"projects/my-project/sinks/my-sink"`
    */
   sinkName?: string;
+}
+
+/** The parameters to `GetSink`. */
+export interface GetSinkRequestSDKType {
+  /**
+   * Required. The resource name of the sink:
+   * 
+   * "projects/[PROJECT_ID]/sinks/[SINK_ID]"
+   * "organizations/[ORGANIZATION_ID]/sinks/[SINK_ID]"
+   * "billingAccounts/[BILLING_ACCOUNT_ID]/sinks/[SINK_ID]"
+   * "folders/[FOLDER_ID]/sinks/[SINK_ID]"
+   * 
+   * For example:
+   * 
+   * `"projects/my-project/sinks/my-sink"`
+   */
+  sink_name?: string;
 }
 
 /** The parameters to `CreateSink`. */
@@ -834,6 +1494,45 @@ export interface CreateSinkRequest {
    * more information, see `writer_identity` in [LogSink][google.logging.v2.LogSink].
    */
   uniqueWriterIdentity: boolean;
+}
+
+/** The parameters to `CreateSink`. */
+export interface CreateSinkRequestSDKType {
+  /**
+   * Required. The resource in which to create the sink:
+   * 
+   * "projects/[PROJECT_ID]"
+   * "organizations/[ORGANIZATION_ID]"
+   * "billingAccounts/[BILLING_ACCOUNT_ID]"
+   * "folders/[FOLDER_ID]"
+   * 
+   * For examples:
+   * 
+   * `"projects/my-project"`
+   * `"organizations/123456789"`
+   */
+  parent: string;
+
+  /**
+   * Required. The new sink, whose `name` parameter is a sink identifier that
+   * is not already in use.
+   */
+  sink: LogSinkSDKType;
+
+  /**
+   * Optional. Determines the kind of IAM identity returned as `writer_identity`
+   * in the new sink. If this value is omitted or set to false, and if the
+   * sink's parent is a project, then the value returned as `writer_identity` is
+   * the same group or service account used by Cloud Logging before the addition
+   * of writer identities to this API. The sink's destination must be in the
+   * same project as the sink itself.
+   * 
+   * If this field is set to true, or if the sink is owned by a non-project
+   * resource such as an organization, then the value of `writer_identity` will
+   * be a unique service account used only for exports from the new sink. For
+   * more information, see `writer_identity` in [LogSink][google.logging.v2.LogSink].
+   */
+  unique_writer_identity: boolean;
 }
 
 /** The parameters to `UpdateSink`. */
@@ -895,6 +1594,65 @@ export interface UpdateSinkRequest {
   updateMask: FieldMask;
 }
 
+/** The parameters to `UpdateSink`. */
+export interface UpdateSinkRequestSDKType {
+  /**
+   * Required. The full resource name of the sink to update, including the parent
+   * resource and the sink identifier:
+   * 
+   * "projects/[PROJECT_ID]/sinks/[SINK_ID]"
+   * "organizations/[ORGANIZATION_ID]/sinks/[SINK_ID]"
+   * "billingAccounts/[BILLING_ACCOUNT_ID]/sinks/[SINK_ID]"
+   * "folders/[FOLDER_ID]/sinks/[SINK_ID]"
+   * 
+   * For example:
+   * 
+   * `"projects/my-project/sinks/my-sink"`
+   */
+  sink_name: string;
+
+  /**
+   * Required. The updated sink, whose name is the same identifier that appears as part
+   * of `sink_name`.
+   */
+  sink: LogSinkSDKType;
+
+  /**
+   * Optional. See [sinks.create][google.logging.v2.ConfigServiceV2.CreateSink]
+   * for a description of this field. When updating a sink, the effect of this
+   * field on the value of `writer_identity` in the updated sink depends on both
+   * the old and new values of this field:
+   * 
+   * +   If the old and new values of this field are both false or both true,
+   * then there is no change to the sink's `writer_identity`.
+   * +   If the old value is false and the new value is true, then
+   * `writer_identity` is changed to a unique service account.
+   * +   It is an error if the old value is true and the new value is
+   * set to false or defaulted to false.
+   */
+  unique_writer_identity: boolean;
+
+  /**
+   * Optional. Field mask that specifies the fields in `sink` that need
+   * an update. A sink field will be overwritten if, and only if, it is
+   * in the update mask. `name` and output only fields cannot be updated.
+   * 
+   * An empty `updateMask` is temporarily treated as using the following mask
+   * for backwards compatibility purposes:
+   * 
+   * `destination,filter,includeChildren`
+   * 
+   * At some point in the future, behavior will be removed and specifying an
+   * empty `updateMask` will be an error.
+   * 
+   * For a detailed `FieldMask` definition, see
+   * https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask
+   * 
+   * For example: `updateMask=filter`
+   */
+  update_mask: FieldMaskSDKType;
+}
+
 /** The parameters to `DeleteSink`. */
 export interface DeleteSinkRequest {
   /**
@@ -911,6 +1669,24 @@ export interface DeleteSinkRequest {
    * `"projects/my-project/sinks/my-sink"`
    */
   sinkName: string;
+}
+
+/** The parameters to `DeleteSink`. */
+export interface DeleteSinkRequestSDKType {
+  /**
+   * Required. The full resource name of the sink to delete, including the parent
+   * resource and the sink identifier:
+   * 
+   * "projects/[PROJECT_ID]/sinks/[SINK_ID]"
+   * "organizations/[ORGANIZATION_ID]/sinks/[SINK_ID]"
+   * "billingAccounts/[BILLING_ACCOUNT_ID]/sinks/[SINK_ID]"
+   * "folders/[FOLDER_ID]/sinks/[SINK_ID]"
+   * 
+   * For example:
+   * 
+   * `"projects/my-project/sinks/my-sink"`
+   */
+  sink_name: string;
 }
 
 /**
@@ -969,6 +1745,62 @@ export interface LogExclusion {
   updateTime: Date;
 }
 
+/**
+ * Specifies a set of log entries that are filtered out by a sink. If
+ * your Google Cloud resource receives a large volume of log entries, you can
+ * use exclusions to reduce your chargeable logs. Note that exclusions on
+ * organization-level and folder-level sinks don't apply to child resources.
+ * Note also that you cannot modify the _Required sink or exclude logs from it.
+ */
+export interface LogExclusionSDKType {
+  /**
+   * Required. A client-assigned identifier, such as `"load-balancer-exclusion"`.
+   * Identifiers are limited to 100 characters and can include only letters,
+   * digits, underscores, hyphens, and periods. First character has to be
+   * alphanumeric.
+   */
+  name: string;
+
+  /** Optional. A description of this exclusion. */
+  description: string;
+
+  /**
+   * Required. An [advanced logs
+   * filter](https://cloud.google.com/logging/docs/view/advanced-queries) that
+   * matches the log entries to be excluded. By using the [sample
+   * function](https://cloud.google.com/logging/docs/view/advanced-queries#sample),
+   * you can exclude less than 100% of the matching log entries.
+   * 
+   * For example, the following query matches 99% of low-severity log entries
+   * from Google Cloud Storage buckets:
+   * 
+   * `resource.type=gcs_bucket severity<ERROR sample(insertId, 0.99)`
+   */
+  filter: string;
+
+  /**
+   * Optional. If set to True, then this exclusion is disabled and it does not
+   * exclude any log entries. You can [update an
+   * exclusion][google.logging.v2.ConfigServiceV2.UpdateExclusion] to change the
+   * value of this field.
+   */
+  disabled: boolean;
+
+  /**
+   * Output only. The creation timestamp of the exclusion.
+   * 
+   * This field may not be present for older exclusions.
+   */
+  create_time: Date;
+
+  /**
+   * Output only. The last update timestamp of the exclusion.
+   * 
+   * This field may not be present for older exclusions.
+   */
+  update_time: Date;
+}
+
 /** The parameters to `ListExclusions`. */
 export interface ListExclusionsRequest {
   /**
@@ -997,6 +1829,34 @@ export interface ListExclusionsRequest {
   pageSize?: number;
 }
 
+/** The parameters to `ListExclusions`. */
+export interface ListExclusionsRequestSDKType {
+  /**
+   * Required. The parent resource whose exclusions are to be listed.
+   * 
+   * "projects/[PROJECT_ID]"
+   * "organizations/[ORGANIZATION_ID]"
+   * "billingAccounts/[BILLING_ACCOUNT_ID]"
+   * "folders/[FOLDER_ID]"
+   */
+  parent?: string;
+
+  /**
+   * Optional. If present, then retrieve the next batch of results from the
+   * preceding call to this method. `pageToken` must be the value of
+   * `nextPageToken` from the previous response. The values of other method
+   * parameters should be identical to those in the previous call.
+   */
+  page_token?: string;
+
+  /**
+   * Optional. The maximum number of results to return from this request.
+   * Non-positive values are ignored. The presence of `nextPageToken` in the
+   * response indicates that more results might be available.
+   */
+  page_size?: number;
+}
+
 /** Result returned from `ListExclusions`. */
 export interface ListExclusionsResponse {
   /** A list of exclusions. */
@@ -1010,8 +1870,38 @@ export interface ListExclusionsResponse {
   nextPageToken: string;
 }
 
+/** Result returned from `ListExclusions`. */
+export interface ListExclusionsResponseSDKType {
+  /** A list of exclusions. */
+  exclusions: LogExclusionSDKType[];
+
+  /**
+   * If there might be more results than appear in this response, then
+   * `nextPageToken` is included. To get the next set of results, call the same
+   * method again using the value of `nextPageToken` as `pageToken`.
+   */
+  next_page_token: string;
+}
+
 /** The parameters to `GetExclusion`. */
 export interface GetExclusionRequest {
+  /**
+   * Required. The resource name of an existing exclusion:
+   * 
+   * "projects/[PROJECT_ID]/exclusions/[EXCLUSION_ID]"
+   * "organizations/[ORGANIZATION_ID]/exclusions/[EXCLUSION_ID]"
+   * "billingAccounts/[BILLING_ACCOUNT_ID]/exclusions/[EXCLUSION_ID]"
+   * "folders/[FOLDER_ID]/exclusions/[EXCLUSION_ID]"
+   * 
+   * For example:
+   * 
+   * `"projects/my-project/exclusions/my-exclusion"`
+   */
+  name?: string;
+}
+
+/** The parameters to `GetExclusion`. */
+export interface GetExclusionRequestSDKType {
   /**
    * Required. The resource name of an existing exclusion:
    * 
@@ -1051,6 +1941,30 @@ export interface CreateExclusionRequest {
   exclusion: LogExclusion;
 }
 
+/** The parameters to `CreateExclusion`. */
+export interface CreateExclusionRequestSDKType {
+  /**
+   * Required. The parent resource in which to create the exclusion:
+   * 
+   * "projects/[PROJECT_ID]"
+   * "organizations/[ORGANIZATION_ID]"
+   * "billingAccounts/[BILLING_ACCOUNT_ID]"
+   * "folders/[FOLDER_ID]"
+   * 
+   * For examples:
+   * 
+   * `"projects/my-logging-project"`
+   * `"organizations/123456789"`
+   */
+  parent: string;
+
+  /**
+   * Required. The new exclusion, whose `name` parameter is an exclusion name
+   * that is not already used in the parent resource.
+   */
+  exclusion: LogExclusionSDKType;
+}
+
 /** The parameters to `UpdateExclusion`. */
 export interface UpdateExclusionRequest {
   /**
@@ -1085,8 +1999,59 @@ export interface UpdateExclusionRequest {
   updateMask: FieldMask;
 }
 
+/** The parameters to `UpdateExclusion`. */
+export interface UpdateExclusionRequestSDKType {
+  /**
+   * Required. The resource name of the exclusion to update:
+   * 
+   * "projects/[PROJECT_ID]/exclusions/[EXCLUSION_ID]"
+   * "organizations/[ORGANIZATION_ID]/exclusions/[EXCLUSION_ID]"
+   * "billingAccounts/[BILLING_ACCOUNT_ID]/exclusions/[EXCLUSION_ID]"
+   * "folders/[FOLDER_ID]/exclusions/[EXCLUSION_ID]"
+   * 
+   * For example:
+   * 
+   * `"projects/my-project/exclusions/my-exclusion"`
+   */
+  name: string;
+
+  /**
+   * Required. New values for the existing exclusion. Only the fields specified in
+   * `update_mask` are relevant.
+   */
+  exclusion: LogExclusionSDKType;
+
+  /**
+   * Required. A non-empty list of fields to change in the existing exclusion. New values
+   * for the fields are taken from the corresponding fields in the
+   * [LogExclusion][google.logging.v2.LogExclusion] included in this request. Fields not mentioned in
+   * `update_mask` are not changed and are ignored in the request.
+   * 
+   * For example, to change the filter and description of an exclusion,
+   * specify an `update_mask` of `"filter,description"`.
+   */
+  update_mask: FieldMaskSDKType;
+}
+
 /** The parameters to `DeleteExclusion`. */
 export interface DeleteExclusionRequest {
+  /**
+   * Required. The resource name of an existing exclusion to delete:
+   * 
+   * "projects/[PROJECT_ID]/exclusions/[EXCLUSION_ID]"
+   * "organizations/[ORGANIZATION_ID]/exclusions/[EXCLUSION_ID]"
+   * "billingAccounts/[BILLING_ACCOUNT_ID]/exclusions/[EXCLUSION_ID]"
+   * "folders/[FOLDER_ID]/exclusions/[EXCLUSION_ID]"
+   * 
+   * For example:
+   * 
+   * `"projects/my-project/exclusions/my-exclusion"`
+   */
+  name: string;
+}
+
+/** The parameters to `DeleteExclusion`. */
+export interface DeleteExclusionRequestSDKType {
   /**
    * Required. The resource name of an existing exclusion to delete:
    * 
@@ -1111,6 +2076,35 @@ export interface DeleteExclusionRequest {
  * more information.
  */
 export interface GetCmekSettingsRequest {
+  /**
+   * Required. The resource for which to retrieve CMEK settings.
+   * 
+   * "projects/[PROJECT_ID]/cmekSettings"
+   * "organizations/[ORGANIZATION_ID]/cmekSettings"
+   * "billingAccounts/[BILLING_ACCOUNT_ID]/cmekSettings"
+   * "folders/[FOLDER_ID]/cmekSettings"
+   * 
+   * For example:
+   * 
+   * `"organizations/12345/cmekSettings"`
+   * 
+   * Note: CMEK for the Log Router can be configured for Google Cloud projects,
+   * folders, organizations and billing accounts. Once configured for an
+   * organization, it applies to all projects and folders in the Google Cloud
+   * organization.
+   */
+  name?: string;
+}
+
+/**
+ * The parameters to
+ * [GetCmekSettings][google.logging.v2.ConfigServiceV2.GetCmekSettings].
+ * 
+ * See [Enabling CMEK for Log
+ * Router](https://cloud.google.com/logging/docs/routing/managed-encryption) for
+ * more information.
+ */
+export interface GetCmekSettingsRequestSDKType {
   /**
    * Required. The resource for which to retrieve CMEK settings.
    * 
@@ -1180,6 +2174,54 @@ export interface UpdateCmekSettingsRequest {
 }
 
 /**
+ * The parameters to
+ * [UpdateCmekSettings][google.logging.v2.ConfigServiceV2.UpdateCmekSettings].
+ * 
+ * See [Enabling CMEK for Log
+ * Router](https://cloud.google.com/logging/docs/routing/managed-encryption) for
+ * more information.
+ */
+export interface UpdateCmekSettingsRequestSDKType {
+  /**
+   * Required. The resource name for the CMEK settings to update.
+   * 
+   * "projects/[PROJECT_ID]/cmekSettings"
+   * "organizations/[ORGANIZATION_ID]/cmekSettings"
+   * "billingAccounts/[BILLING_ACCOUNT_ID]/cmekSettings"
+   * "folders/[FOLDER_ID]/cmekSettings"
+   * 
+   * For example:
+   * 
+   * `"organizations/12345/cmekSettings"`
+   * 
+   * Note: CMEK for the Log Router can currently only be configured for Google
+   * Cloud organizations. Once configured, it applies to all projects and
+   * folders in the Google Cloud organization.
+   */
+  name: string;
+
+  /**
+   * Required. The CMEK settings to update.
+   * 
+   * See [Enabling CMEK for Log
+   * Router](https://cloud.google.com/logging/docs/routing/managed-encryption)
+   * for more information.
+   */
+  cmek_settings: CmekSettingsSDKType;
+
+  /**
+   * Optional. Field mask identifying which fields from `cmek_settings` should
+   * be updated. A field will be overwritten if and only if it is in the update
+   * mask. Output only fields cannot be updated.
+   * 
+   * See [FieldMask][google.protobuf.FieldMask] for more information.
+   * 
+   * For example: `"updateMask=kmsKeyName"`
+   */
+  update_mask: FieldMaskSDKType;
+}
+
+/**
  * Describes the customer-managed encryption key (CMEK) settings associated with
  * a project, folder, organization, billing account, or flexible resource.
  * 
@@ -1245,6 +2287,71 @@ export interface CmekSettings {
 }
 
 /**
+ * Describes the customer-managed encryption key (CMEK) settings associated with
+ * a project, folder, organization, billing account, or flexible resource.
+ * 
+ * Note: CMEK for the Log Router can currently only be configured for Google
+ * Cloud organizations. Once configured, it applies to all projects and folders
+ * in the Google Cloud organization.
+ * 
+ * See [Enabling CMEK for Log
+ * Router](https://cloud.google.com/logging/docs/routing/managed-encryption) for
+ * more information.
+ */
+export interface CmekSettingsSDKType {
+  /** Output only. The resource name of the CMEK settings. */
+  name: string;
+
+  /**
+   * The resource name for the configured Cloud KMS key.
+   * 
+   * KMS key name format:
+   * 
+   * "projects/[PROJECT_ID]/locations/[LOCATION]/keyRings/[KEYRING]/cryptoKeys/[KEY]"
+   * 
+   * For example:
+   * 
+   * `"projects/my-project/locations/us-central1/keyRings/my-ring/cryptoKeys/my-key"`
+   * 
+   * 
+   * 
+   * To enable CMEK for the Log Router, set this field to a valid
+   * `kms_key_name` for which the associated service account has the required
+   * cloudkms.cryptoKeyEncrypterDecrypter roles assigned for the key.
+   * 
+   * The Cloud KMS key used by the Log Router can be updated by changing the
+   * `kms_key_name` to a new valid key name or disabled by setting the key name
+   * to an empty string. Encryption operations that are in progress will be
+   * completed with the key that was in use when they started. Decryption
+   * operations will be completed using the key that was used at the time of
+   * encryption unless access to that key has been revoked.
+   * 
+   * To disable CMEK for the Log Router, set this field to an empty string.
+   * 
+   * See [Enabling CMEK for Log
+   * Router](https://cloud.google.com/logging/docs/routing/managed-encryption)
+   * for more information.
+   */
+  kms_key_name: string;
+
+  /**
+   * Output only. The service account that will be used by the Log Router to access your
+   * Cloud KMS key.
+   * 
+   * Before enabling CMEK for Log Router, you must first assign the
+   * cloudkms.cryptoKeyEncrypterDecrypter role to the service account that
+   * the Log Router will use to access your Cloud KMS key. Use
+   * [GetCmekSettings][google.logging.v2.ConfigServiceV2.GetCmekSettings] to
+   * obtain the service account ID.
+   * 
+   * See [Enabling CMEK for Log
+   * Router](https://cloud.google.com/logging/docs/routing/managed-encryption)
+   * for more information.
+   */
+  service_account_id: string;
+}
+
+/**
  * The parameters to
  * [GetSettings][google.logging.v2.ConfigServiceV2.GetSettings].
  * 
@@ -1253,6 +2360,35 @@ export interface CmekSettings {
  * more information.
  */
 export interface GetSettingsRequest {
+  /**
+   * Required. The resource for which to retrieve settings.
+   * 
+   * "projects/[PROJECT_ID]/settings"
+   * "organizations/[ORGANIZATION_ID]/settings"
+   * "billingAccounts/[BILLING_ACCOUNT_ID]/settings"
+   * "folders/[FOLDER_ID]/settings"
+   * 
+   * For example:
+   * 
+   * `"organizations/12345/settings"`
+   * 
+   * Note: Settings for the Log Router can be get for Google Cloud projects,
+   * folders, organizations and billing accounts. Currently it can only be
+   * configured for organizations. Once configured for an organization, it
+   * applies to all projects and folders in the Google Cloud organization.
+   */
+  name?: string;
+}
+
+/**
+ * The parameters to
+ * [GetSettings][google.logging.v2.ConfigServiceV2.GetSettings].
+ * 
+ * See [Enabling CMEK for Log
+ * Router](https://cloud.google.com/logging/docs/routing/managed-encryption) for
+ * more information.
+ */
+export interface GetSettingsRequestSDKType {
   /**
    * Required. The resource for which to retrieve settings.
    * 
@@ -1316,6 +2452,51 @@ export interface UpdateSettingsRequest {
    * For example: `"updateMask=kmsKeyName"`
    */
   updateMask: FieldMask;
+}
+
+/**
+ * The parameters to
+ * [UpdateSettings][google.logging.v2.ConfigServiceV2.UpdateSettings].
+ * 
+ * See [Enabling CMEK for Log
+ * Router](https://cloud.google.com/logging/docs/routing/managed-encryption) for
+ * more information.
+ */
+export interface UpdateSettingsRequestSDKType {
+  /**
+   * Required. The resource name for the settings to update.
+   * 
+   * "organizations/[ORGANIZATION_ID]/settings"
+   * 
+   * For example:
+   * 
+   * `"organizations/12345/settings"`
+   * 
+   * Note: Settings for the Log Router can currently only be configured for
+   * Google Cloud organizations. Once configured, it applies to all projects and
+   * folders in the Google Cloud organization.
+   */
+  name: string;
+
+  /**
+   * Required. The settings to update.
+   * 
+   * See [Enabling CMEK for Log
+   * Router](https://cloud.google.com/logging/docs/routing/managed-encryption)
+   * for more information.
+   */
+  settings: SettingsSDKType;
+
+  /**
+   * Optional. Field mask identifying which fields from `settings` should
+   * be updated. A field will be overwritten if and only if it is in the update
+   * mask. Output only fields cannot be updated.
+   * 
+   * See [FieldMask][google.protobuf.FieldMask] for more information.
+   * 
+   * For example: `"updateMask=kmsKeyName"`
+   */
+  update_mask: FieldMaskSDKType;
 }
 
 /**
@@ -1389,8 +2570,100 @@ export interface Settings {
   disableDefaultSink: boolean;
 }
 
+/**
+ * Describes the settings associated with a project, folder, organization,
+ * billing account, or flexible resource.
+ */
+export interface SettingsSDKType {
+  /** Output only. The resource name of the settings. */
+  name: string;
+
+  /**
+   * Optional. The resource name for the configured Cloud KMS key.
+   * 
+   * KMS key name format:
+   * 
+   * "projects/[PROJECT_ID]/locations/[LOCATION]/keyRings/[KEYRING]/cryptoKeys/[KEY]"
+   * 
+   * For example:
+   * 
+   * `"projects/my-project/locations/us-central1/keyRings/my-ring/cryptoKeys/my-key"`
+   * 
+   * 
+   * 
+   * To enable CMEK for the Log Router, set this field to a valid
+   * `kms_key_name` for which the associated service account has the required
+   * `roles/cloudkms.cryptoKeyEncrypterDecrypter` role assigned for the key.
+   * 
+   * The Cloud KMS key used by the Log Router can be updated by changing the
+   * `kms_key_name` to a new valid key name. Encryption operations that are in
+   * progress will be completed with the key that was in use when they started.
+   * Decryption operations will be completed using the key that was used at the
+   * time of encryption unless access to that key has been revoked.
+   * 
+   * To disable CMEK for the Log Router, set this field to an empty string.
+   * 
+   * See [Enabling CMEK for Log
+   * Router](https://cloud.google.com/logging/docs/routing/managed-encryption)
+   * for more information.
+   */
+  kms_key_name: string;
+
+  /**
+   * Output only. The service account that will be used by the Log Router to access your
+   * Cloud KMS key.
+   * 
+   * Before enabling CMEK for Log Router, you must first assign the role
+   * `roles/cloudkms.cryptoKeyEncrypterDecrypter` to the service account that
+   * the Log Router will use to access your Cloud KMS key. Use
+   * [GetSettings][google.logging.v2.ConfigServiceV2.GetSettings] to
+   * obtain the service account ID.
+   * 
+   * See [Enabling CMEK for Log
+   * Router](https://cloud.google.com/logging/docs/routing/managed-encryption)
+   * for more information.
+   */
+  kms_service_account_id: string;
+
+  /**
+   * Optional. The Cloud region that will be used for _Default and _Required log buckets
+   * for newly created projects and folders. For example `europe-west1`.
+   * This setting does not affect the location of custom log buckets.
+   */
+  storage_location: string;
+
+  /**
+   * Optional. If set to true, the _Default sink in newly created projects and folders
+   * will created in a disabled state. This can be used to automatically disable
+   * log ingestion if there is already an aggregated sink configured in the
+   * hierarchy. The _Default sink can be re-enabled manually if needed.
+   */
+  disable_default_sink: boolean;
+}
+
 /** The parameters to CopyLogEntries. */
 export interface CopyLogEntriesRequest {
+  /**
+   * Required. Log bucket from which to copy log entries.
+   * 
+   * For example:
+   * 
+   * `"projects/my-project/locations/global/buckets/my-source-bucket"`
+   */
+  name: string;
+
+  /**
+   * Optional. A filter specifying which log entries to copy. The filter must be no more
+   * than 20k characters. An empty filter matches all log entries.
+   */
+  filter: string;
+
+  /** Required. Destination to which to copy log entries. */
+  destination: string;
+}
+
+/** The parameters to CopyLogEntries. */
+export interface CopyLogEntriesRequestSDKType {
   /**
    * Required. Log bucket from which to copy log entries.
    * 
@@ -1442,10 +2715,48 @@ export interface CopyLogEntriesMetadata {
   writerIdentity: string;
 }
 
+/** Metadata for CopyLogEntries long running operations. */
+export interface CopyLogEntriesMetadataSDKType {
+  /** The create time of an operation. */
+  start_time: Date;
+
+  /** The end time of an operation. */
+  end_time: Date;
+
+  /** State of an operation. */
+  state: OperationStateSDKType;
+
+  /** Identifies whether the user has requested cancellation of the operation. */
+  cancellation_requested: boolean;
+
+  /** CopyLogEntries RPC request. */
+  request: CopyLogEntriesRequestSDKType;
+
+  /** Estimated progress of the operation (0 - 100%). */
+  progress: number;
+
+  /**
+   * The IAM identity of a service account that must be granted access to the
+   * destination.
+   * 
+   * If the service account is not granted permission to the destination within
+   * an hour, the operation will be cancelled.
+   * 
+   * For example: `"serviceAccount:foo@bar.com"`
+   */
+  writer_identity: string;
+}
+
 /** Response type for CopyLogEntries long running operations. */
 export interface CopyLogEntriesResponse {
   /** Number of log entries copied. */
   logEntriesCopiedCount: Long;
+}
+
+/** Response type for CopyLogEntries long running operations. */
+export interface CopyLogEntriesResponseSDKType {
+  /** Number of log entries copied. */
+  log_entries_copied_count: Long;
 }
 
 function createBaseLogBucket(): LogBucket {
@@ -1503,7 +2814,7 @@ export const LogBucket = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): LogBucket {
+  decode(input: _m0.Reader | Uint8Array, length?: number): LogBucketSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLogBucket();
@@ -1603,6 +2914,40 @@ export const LogBucket = {
     message.restrictedFields = object.restrictedFields?.map(e => e) || [];
     message.cmekSettings = object.cmekSettings !== undefined && object.cmekSettings !== null ? CmekSettings.fromPartial(object.cmekSettings) : undefined;
     return message;
+  },
+
+  fromSDK(object: LogBucketSDKType): LogBucket {
+    return {
+      name: isSet(object.name) ? object.name : undefined,
+      description: isSet(object.description) ? object.description : undefined,
+      createTime: isSet(object.create_time) ? Timestamp.fromSDK(object.create_time) : undefined,
+      updateTime: isSet(object.update_time) ? Timestamp.fromSDK(object.update_time) : undefined,
+      retentionDays: isSet(object.retention_days) ? object.retention_days : undefined,
+      locked: isSet(object.locked) ? object.locked : undefined,
+      lifecycleState: isSet(object.lifecycle_state) ? lifecycleStateFromJSON(object.lifecycle_state) : 0,
+      restrictedFields: Array.isArray(object?.restricted_fields) ? object.restricted_fields.map((e: any) => e) : [],
+      cmekSettings: isSet(object.cmek_settings) ? CmekSettings.fromSDK(object.cmek_settings) : undefined
+    };
+  },
+
+  toSDK(message: LogBucket): LogBucketSDKType {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    message.description !== undefined && (obj.description = message.description);
+    message.createTime !== undefined && (obj.create_time = message.createTime ? Timestamp.toSDK(message.createTime) : undefined);
+    message.updateTime !== undefined && (obj.update_time = message.updateTime ? Timestamp.toSDK(message.updateTime) : undefined);
+    message.retentionDays !== undefined && (obj.retention_days = message.retentionDays);
+    message.locked !== undefined && (obj.locked = message.locked);
+    message.lifecycleState !== undefined && (obj.lifecycle_state = lifecycleStateToJSON(message.lifecycleState));
+
+    if (message.restrictedFields) {
+      obj.restricted_fields = message.restrictedFields.map(e => e);
+    } else {
+      obj.restricted_fields = [];
+    }
+
+    message.cmekSettings !== undefined && (obj.cmek_settings = message.cmekSettings ? CmekSettings.toSDK(message.cmekSettings) : undefined);
+    return obj;
   }
 
 };
@@ -1642,7 +2987,7 @@ export const LogView = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): LogView {
+  decode(input: _m0.Reader | Uint8Array, length?: number): LogViewSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLogView();
@@ -1708,6 +3053,26 @@ export const LogView = {
     message.updateTime = object.updateTime ?? undefined;
     message.filter = object.filter ?? "";
     return message;
+  },
+
+  fromSDK(object: LogViewSDKType): LogView {
+    return {
+      name: isSet(object.name) ? object.name : undefined,
+      description: isSet(object.description) ? object.description : undefined,
+      createTime: isSet(object.create_time) ? Timestamp.fromSDK(object.create_time) : undefined,
+      updateTime: isSet(object.update_time) ? Timestamp.fromSDK(object.update_time) : undefined,
+      filter: isSet(object.filter) ? object.filter : undefined
+    };
+  },
+
+  toSDK(message: LogView): LogViewSDKType {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    message.description !== undefined && (obj.description = message.description);
+    message.createTime !== undefined && (obj.create_time = message.createTime ? Timestamp.toSDK(message.createTime) : undefined);
+    message.updateTime !== undefined && (obj.update_time = message.updateTime ? Timestamp.toSDK(message.updateTime) : undefined);
+    message.filter !== undefined && (obj.filter = message.filter);
+    return obj;
   }
 
 };
@@ -1782,7 +3147,7 @@ export const LogSink = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): LogSink {
+  decode(input: _m0.Reader | Uint8Array, length?: number): LogSinkSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLogSink();
@@ -1903,6 +3268,46 @@ export const LogSink = {
     message.createTime = object.createTime ?? undefined;
     message.updateTime = object.updateTime ?? undefined;
     return message;
+  },
+
+  fromSDK(object: LogSinkSDKType): LogSink {
+    return {
+      name: isSet(object.name) ? object.name : undefined,
+      destination: isSet(object.destination) ? object.destination : undefined,
+      filter: isSet(object.filter) ? object.filter : undefined,
+      description: isSet(object.description) ? object.description : undefined,
+      disabled: isSet(object.disabled) ? object.disabled : undefined,
+      exclusions: Array.isArray(object?.exclusions) ? object.exclusions.map((e: any) => LogExclusion.fromSDK(e)) : [],
+      outputVersionFormat: isSet(object.output_version_format) ? logSink_VersionFormatFromJSON(object.output_version_format) : 0,
+      writerIdentity: isSet(object.writer_identity) ? object.writer_identity : undefined,
+      includeChildren: isSet(object.include_children) ? object.include_children : undefined,
+      bigqueryOptions: isSet(object.bigquery_options) ? BigQueryOptions.fromSDK(object.bigquery_options) : undefined,
+      createTime: isSet(object.create_time) ? Timestamp.fromSDK(object.create_time) : undefined,
+      updateTime: isSet(object.update_time) ? Timestamp.fromSDK(object.update_time) : undefined
+    };
+  },
+
+  toSDK(message: LogSink): LogSinkSDKType {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    message.destination !== undefined && (obj.destination = message.destination);
+    message.filter !== undefined && (obj.filter = message.filter);
+    message.description !== undefined && (obj.description = message.description);
+    message.disabled !== undefined && (obj.disabled = message.disabled);
+
+    if (message.exclusions) {
+      obj.exclusions = message.exclusions.map(e => e ? LogExclusion.toSDK(e) : undefined);
+    } else {
+      obj.exclusions = [];
+    }
+
+    message.outputVersionFormat !== undefined && (obj.output_version_format = logSink_VersionFormatToJSON(message.outputVersionFormat));
+    message.writerIdentity !== undefined && (obj.writer_identity = message.writerIdentity);
+    message.includeChildren !== undefined && (obj.include_children = message.includeChildren);
+    message.bigqueryOptions !== undefined && (obj.bigquery_options = message.bigqueryOptions ? BigQueryOptions.toSDK(message.bigqueryOptions) : undefined);
+    message.createTime !== undefined && (obj.create_time = message.createTime ? Timestamp.toSDK(message.createTime) : undefined);
+    message.updateTime !== undefined && (obj.update_time = message.updateTime ? Timestamp.toSDK(message.updateTime) : undefined);
+    return obj;
   }
 
 };
@@ -1972,6 +3377,20 @@ export const BigQueryOptions = {
     message.usePartitionedTables = object.usePartitionedTables ?? false;
     message.usesTimestampColumnPartitioning = object.usesTimestampColumnPartitioning ?? false;
     return message;
+  },
+
+  fromSDK(object: BigQueryOptionsSDKType): BigQueryOptions {
+    return {
+      usePartitionedTables: isSet(object.use_partitioned_tables) ? object.use_partitioned_tables : undefined,
+      usesTimestampColumnPartitioning: isSet(object.uses_timestamp_column_partitioning) ? object.uses_timestamp_column_partitioning : undefined
+    };
+  },
+
+  toSDK(message: BigQueryOptions): BigQueryOptionsSDKType {
+    const obj: any = {};
+    message.usePartitionedTables !== undefined && (obj.use_partitioned_tables = message.usePartitionedTables);
+    message.usesTimestampColumnPartitioning !== undefined && (obj.uses_timestamp_column_partitioning = message.usesTimestampColumnPartitioning);
+    return obj;
   }
 
 };
@@ -2053,6 +3472,22 @@ export const ListBucketsRequest = {
     message.pageToken = object.pageToken ?? "";
     message.pageSize = object.pageSize ?? 0;
     return message;
+  },
+
+  fromSDK(object: ListBucketsRequestSDKType): ListBucketsRequest {
+    return {
+      parent: isSet(object.parent) ? object.parent : undefined,
+      pageToken: isSet(object.page_token) ? object.page_token : undefined,
+      pageSize: isSet(object.page_size) ? object.page_size : undefined
+    };
+  },
+
+  toSDK(message: ListBucketsRequest): ListBucketsRequestSDKType {
+    const obj: any = {};
+    message.parent !== undefined && (obj.parent = message.parent);
+    message.pageToken !== undefined && (obj.page_token = message.pageToken);
+    message.pageSize !== undefined && (obj.page_size = message.pageSize);
+    return obj;
   }
 
 };
@@ -2077,7 +3512,7 @@ export const ListBucketsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ListBucketsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ListBucketsResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListBucketsResponse();
@@ -2128,6 +3563,26 @@ export const ListBucketsResponse = {
     message.buckets = object.buckets?.map(e => LogBucket.fromPartial(e)) || [];
     message.nextPageToken = object.nextPageToken ?? "";
     return message;
+  },
+
+  fromSDK(object: ListBucketsResponseSDKType): ListBucketsResponse {
+    return {
+      buckets: Array.isArray(object?.buckets) ? object.buckets.map((e: any) => LogBucket.fromSDK(e)) : [],
+      nextPageToken: isSet(object.next_page_token) ? object.next_page_token : undefined
+    };
+  },
+
+  toSDK(message: ListBucketsResponse): ListBucketsResponseSDKType {
+    const obj: any = {};
+
+    if (message.buckets) {
+      obj.buckets = message.buckets.map(e => e ? LogBucket.toSDK(e) : undefined);
+    } else {
+      obj.buckets = [];
+    }
+
+    message.nextPageToken !== undefined && (obj.next_page_token = message.nextPageToken);
+    return obj;
   }
 
 };
@@ -2209,6 +3664,22 @@ export const CreateBucketRequest = {
     message.bucketId = object.bucketId ?? "";
     message.bucket = object.bucket !== undefined && object.bucket !== null ? LogBucket.fromPartial(object.bucket) : undefined;
     return message;
+  },
+
+  fromSDK(object: CreateBucketRequestSDKType): CreateBucketRequest {
+    return {
+      parent: isSet(object.parent) ? object.parent : undefined,
+      bucketId: isSet(object.bucket_id) ? object.bucket_id : undefined,
+      bucket: isSet(object.bucket) ? LogBucket.fromSDK(object.bucket) : undefined
+    };
+  },
+
+  toSDK(message: CreateBucketRequest): CreateBucketRequestSDKType {
+    const obj: any = {};
+    message.parent !== undefined && (obj.parent = message.parent);
+    message.bucketId !== undefined && (obj.bucket_id = message.bucketId);
+    message.bucket !== undefined && (obj.bucket = message.bucket ? LogBucket.toSDK(message.bucket) : undefined);
+    return obj;
   }
 
 };
@@ -2290,6 +3761,22 @@ export const UpdateBucketRequest = {
     message.bucket = object.bucket !== undefined && object.bucket !== null ? LogBucket.fromPartial(object.bucket) : undefined;
     message.updateMask = object.updateMask !== undefined && object.updateMask !== null ? FieldMask.fromPartial(object.updateMask) : undefined;
     return message;
+  },
+
+  fromSDK(object: UpdateBucketRequestSDKType): UpdateBucketRequest {
+    return {
+      name: isSet(object.name) ? object.name : undefined,
+      bucket: isSet(object.bucket) ? LogBucket.fromSDK(object.bucket) : undefined,
+      updateMask: isSet(object.update_mask) ? FieldMask.fromSDK(object.update_mask) : undefined
+    };
+  },
+
+  toSDK(message: UpdateBucketRequest): UpdateBucketRequestSDKType {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    message.bucket !== undefined && (obj.bucket = message.bucket ? LogBucket.toSDK(message.bucket) : undefined);
+    message.updateMask !== undefined && (obj.update_mask = message.updateMask ? FieldMask.toSDK(message.updateMask) : undefined);
+    return obj;
   }
 
 };
@@ -2347,6 +3834,18 @@ export const GetBucketRequest = {
     const message = createBaseGetBucketRequest();
     message.name = object.name ?? "";
     return message;
+  },
+
+  fromSDK(object: GetBucketRequestSDKType): GetBucketRequest {
+    return {
+      name: isSet(object.name) ? object.name : undefined
+    };
+  },
+
+  toSDK(message: GetBucketRequest): GetBucketRequestSDKType {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    return obj;
   }
 
 };
@@ -2404,6 +3903,18 @@ export const DeleteBucketRequest = {
     const message = createBaseDeleteBucketRequest();
     message.name = object.name ?? "";
     return message;
+  },
+
+  fromSDK(object: DeleteBucketRequestSDKType): DeleteBucketRequest {
+    return {
+      name: isSet(object.name) ? object.name : undefined
+    };
+  },
+
+  toSDK(message: DeleteBucketRequest): DeleteBucketRequestSDKType {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    return obj;
   }
 
 };
@@ -2461,6 +3972,18 @@ export const UndeleteBucketRequest = {
     const message = createBaseUndeleteBucketRequest();
     message.name = object.name ?? "";
     return message;
+  },
+
+  fromSDK(object: UndeleteBucketRequestSDKType): UndeleteBucketRequest {
+    return {
+      name: isSet(object.name) ? object.name : undefined
+    };
+  },
+
+  toSDK(message: UndeleteBucketRequest): UndeleteBucketRequestSDKType {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    return obj;
   }
 
 };
@@ -2542,6 +4065,22 @@ export const ListViewsRequest = {
     message.pageToken = object.pageToken ?? "";
     message.pageSize = object.pageSize ?? 0;
     return message;
+  },
+
+  fromSDK(object: ListViewsRequestSDKType): ListViewsRequest {
+    return {
+      parent: isSet(object.parent) ? object.parent : undefined,
+      pageToken: isSet(object.page_token) ? object.page_token : undefined,
+      pageSize: isSet(object.page_size) ? object.page_size : undefined
+    };
+  },
+
+  toSDK(message: ListViewsRequest): ListViewsRequestSDKType {
+    const obj: any = {};
+    message.parent !== undefined && (obj.parent = message.parent);
+    message.pageToken !== undefined && (obj.page_token = message.pageToken);
+    message.pageSize !== undefined && (obj.page_size = message.pageSize);
+    return obj;
   }
 
 };
@@ -2566,7 +4105,7 @@ export const ListViewsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ListViewsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ListViewsResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListViewsResponse();
@@ -2617,6 +4156,26 @@ export const ListViewsResponse = {
     message.views = object.views?.map(e => LogView.fromPartial(e)) || [];
     message.nextPageToken = object.nextPageToken ?? "";
     return message;
+  },
+
+  fromSDK(object: ListViewsResponseSDKType): ListViewsResponse {
+    return {
+      views: Array.isArray(object?.views) ? object.views.map((e: any) => LogView.fromSDK(e)) : [],
+      nextPageToken: isSet(object.next_page_token) ? object.next_page_token : undefined
+    };
+  },
+
+  toSDK(message: ListViewsResponse): ListViewsResponseSDKType {
+    const obj: any = {};
+
+    if (message.views) {
+      obj.views = message.views.map(e => e ? LogView.toSDK(e) : undefined);
+    } else {
+      obj.views = [];
+    }
+
+    message.nextPageToken !== undefined && (obj.next_page_token = message.nextPageToken);
+    return obj;
   }
 
 };
@@ -2698,6 +4257,22 @@ export const CreateViewRequest = {
     message.viewId = object.viewId ?? "";
     message.view = object.view !== undefined && object.view !== null ? LogView.fromPartial(object.view) : undefined;
     return message;
+  },
+
+  fromSDK(object: CreateViewRequestSDKType): CreateViewRequest {
+    return {
+      parent: isSet(object.parent) ? object.parent : undefined,
+      viewId: isSet(object.view_id) ? object.view_id : undefined,
+      view: isSet(object.view) ? LogView.fromSDK(object.view) : undefined
+    };
+  },
+
+  toSDK(message: CreateViewRequest): CreateViewRequestSDKType {
+    const obj: any = {};
+    message.parent !== undefined && (obj.parent = message.parent);
+    message.viewId !== undefined && (obj.view_id = message.viewId);
+    message.view !== undefined && (obj.view = message.view ? LogView.toSDK(message.view) : undefined);
+    return obj;
   }
 
 };
@@ -2779,6 +4354,22 @@ export const UpdateViewRequest = {
     message.view = object.view !== undefined && object.view !== null ? LogView.fromPartial(object.view) : undefined;
     message.updateMask = object.updateMask !== undefined && object.updateMask !== null ? FieldMask.fromPartial(object.updateMask) : undefined;
     return message;
+  },
+
+  fromSDK(object: UpdateViewRequestSDKType): UpdateViewRequest {
+    return {
+      name: isSet(object.name) ? object.name : undefined,
+      view: isSet(object.view) ? LogView.fromSDK(object.view) : undefined,
+      updateMask: isSet(object.update_mask) ? FieldMask.fromSDK(object.update_mask) : undefined
+    };
+  },
+
+  toSDK(message: UpdateViewRequest): UpdateViewRequestSDKType {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    message.view !== undefined && (obj.view = message.view ? LogView.toSDK(message.view) : undefined);
+    message.updateMask !== undefined && (obj.update_mask = message.updateMask ? FieldMask.toSDK(message.updateMask) : undefined);
+    return obj;
   }
 
 };
@@ -2836,6 +4427,18 @@ export const GetViewRequest = {
     const message = createBaseGetViewRequest();
     message.name = object.name ?? "";
     return message;
+  },
+
+  fromSDK(object: GetViewRequestSDKType): GetViewRequest {
+    return {
+      name: isSet(object.name) ? object.name : undefined
+    };
+  },
+
+  toSDK(message: GetViewRequest): GetViewRequestSDKType {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    return obj;
   }
 
 };
@@ -2893,6 +4496,18 @@ export const DeleteViewRequest = {
     const message = createBaseDeleteViewRequest();
     message.name = object.name ?? "";
     return message;
+  },
+
+  fromSDK(object: DeleteViewRequestSDKType): DeleteViewRequest {
+    return {
+      name: isSet(object.name) ? object.name : undefined
+    };
+  },
+
+  toSDK(message: DeleteViewRequest): DeleteViewRequestSDKType {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    return obj;
   }
 
 };
@@ -2974,6 +4589,22 @@ export const ListSinksRequest = {
     message.pageToken = object.pageToken ?? "";
     message.pageSize = object.pageSize ?? 0;
     return message;
+  },
+
+  fromSDK(object: ListSinksRequestSDKType): ListSinksRequest {
+    return {
+      parent: isSet(object.parent) ? object.parent : undefined,
+      pageToken: isSet(object.page_token) ? object.page_token : undefined,
+      pageSize: isSet(object.page_size) ? object.page_size : undefined
+    };
+  },
+
+  toSDK(message: ListSinksRequest): ListSinksRequestSDKType {
+    const obj: any = {};
+    message.parent !== undefined && (obj.parent = message.parent);
+    message.pageToken !== undefined && (obj.page_token = message.pageToken);
+    message.pageSize !== undefined && (obj.page_size = message.pageSize);
+    return obj;
   }
 
 };
@@ -2998,7 +4629,7 @@ export const ListSinksResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ListSinksResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ListSinksResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListSinksResponse();
@@ -3049,6 +4680,26 @@ export const ListSinksResponse = {
     message.sinks = object.sinks?.map(e => LogSink.fromPartial(e)) || [];
     message.nextPageToken = object.nextPageToken ?? "";
     return message;
+  },
+
+  fromSDK(object: ListSinksResponseSDKType): ListSinksResponse {
+    return {
+      sinks: Array.isArray(object?.sinks) ? object.sinks.map((e: any) => LogSink.fromSDK(e)) : [],
+      nextPageToken: isSet(object.next_page_token) ? object.next_page_token : undefined
+    };
+  },
+
+  toSDK(message: ListSinksResponse): ListSinksResponseSDKType {
+    const obj: any = {};
+
+    if (message.sinks) {
+      obj.sinks = message.sinks.map(e => e ? LogSink.toSDK(e) : undefined);
+    } else {
+      obj.sinks = [];
+    }
+
+    message.nextPageToken !== undefined && (obj.next_page_token = message.nextPageToken);
+    return obj;
   }
 
 };
@@ -3106,6 +4757,18 @@ export const GetSinkRequest = {
     const message = createBaseGetSinkRequest();
     message.sinkName = object.sinkName ?? "";
     return message;
+  },
+
+  fromSDK(object: GetSinkRequestSDKType): GetSinkRequest {
+    return {
+      sinkName: isSet(object.sink_name) ? object.sink_name : undefined
+    };
+  },
+
+  toSDK(message: GetSinkRequest): GetSinkRequestSDKType {
+    const obj: any = {};
+    message.sinkName !== undefined && (obj.sink_name = message.sinkName);
+    return obj;
   }
 
 };
@@ -3187,6 +4850,22 @@ export const CreateSinkRequest = {
     message.sink = object.sink !== undefined && object.sink !== null ? LogSink.fromPartial(object.sink) : undefined;
     message.uniqueWriterIdentity = object.uniqueWriterIdentity ?? false;
     return message;
+  },
+
+  fromSDK(object: CreateSinkRequestSDKType): CreateSinkRequest {
+    return {
+      parent: isSet(object.parent) ? object.parent : undefined,
+      sink: isSet(object.sink) ? LogSink.fromSDK(object.sink) : undefined,
+      uniqueWriterIdentity: isSet(object.unique_writer_identity) ? object.unique_writer_identity : undefined
+    };
+  },
+
+  toSDK(message: CreateSinkRequest): CreateSinkRequestSDKType {
+    const obj: any = {};
+    message.parent !== undefined && (obj.parent = message.parent);
+    message.sink !== undefined && (obj.sink = message.sink ? LogSink.toSDK(message.sink) : undefined);
+    message.uniqueWriterIdentity !== undefined && (obj.unique_writer_identity = message.uniqueWriterIdentity);
+    return obj;
   }
 
 };
@@ -3280,6 +4959,24 @@ export const UpdateSinkRequest = {
     message.uniqueWriterIdentity = object.uniqueWriterIdentity ?? false;
     message.updateMask = object.updateMask !== undefined && object.updateMask !== null ? FieldMask.fromPartial(object.updateMask) : undefined;
     return message;
+  },
+
+  fromSDK(object: UpdateSinkRequestSDKType): UpdateSinkRequest {
+    return {
+      sinkName: isSet(object.sink_name) ? object.sink_name : undefined,
+      sink: isSet(object.sink) ? LogSink.fromSDK(object.sink) : undefined,
+      uniqueWriterIdentity: isSet(object.unique_writer_identity) ? object.unique_writer_identity : undefined,
+      updateMask: isSet(object.update_mask) ? FieldMask.fromSDK(object.update_mask) : undefined
+    };
+  },
+
+  toSDK(message: UpdateSinkRequest): UpdateSinkRequestSDKType {
+    const obj: any = {};
+    message.sinkName !== undefined && (obj.sink_name = message.sinkName);
+    message.sink !== undefined && (obj.sink = message.sink ? LogSink.toSDK(message.sink) : undefined);
+    message.uniqueWriterIdentity !== undefined && (obj.unique_writer_identity = message.uniqueWriterIdentity);
+    message.updateMask !== undefined && (obj.update_mask = message.updateMask ? FieldMask.toSDK(message.updateMask) : undefined);
+    return obj;
   }
 
 };
@@ -3337,6 +5034,18 @@ export const DeleteSinkRequest = {
     const message = createBaseDeleteSinkRequest();
     message.sinkName = object.sinkName ?? "";
     return message;
+  },
+
+  fromSDK(object: DeleteSinkRequestSDKType): DeleteSinkRequest {
+    return {
+      sinkName: isSet(object.sink_name) ? object.sink_name : undefined
+    };
+  },
+
+  toSDK(message: DeleteSinkRequest): DeleteSinkRequestSDKType {
+    const obj: any = {};
+    message.sinkName !== undefined && (obj.sink_name = message.sinkName);
+    return obj;
   }
 
 };
@@ -3381,7 +5090,7 @@ export const LogExclusion = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): LogExclusion {
+  decode(input: _m0.Reader | Uint8Array, length?: number): LogExclusionSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLogExclusion();
@@ -3454,6 +5163,28 @@ export const LogExclusion = {
     message.createTime = object.createTime ?? undefined;
     message.updateTime = object.updateTime ?? undefined;
     return message;
+  },
+
+  fromSDK(object: LogExclusionSDKType): LogExclusion {
+    return {
+      name: isSet(object.name) ? object.name : undefined,
+      description: isSet(object.description) ? object.description : undefined,
+      filter: isSet(object.filter) ? object.filter : undefined,
+      disabled: isSet(object.disabled) ? object.disabled : undefined,
+      createTime: isSet(object.create_time) ? Timestamp.fromSDK(object.create_time) : undefined,
+      updateTime: isSet(object.update_time) ? Timestamp.fromSDK(object.update_time) : undefined
+    };
+  },
+
+  toSDK(message: LogExclusion): LogExclusionSDKType {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    message.description !== undefined && (obj.description = message.description);
+    message.filter !== undefined && (obj.filter = message.filter);
+    message.disabled !== undefined && (obj.disabled = message.disabled);
+    message.createTime !== undefined && (obj.create_time = message.createTime ? Timestamp.toSDK(message.createTime) : undefined);
+    message.updateTime !== undefined && (obj.update_time = message.updateTime ? Timestamp.toSDK(message.updateTime) : undefined);
+    return obj;
   }
 
 };
@@ -3535,6 +5266,22 @@ export const ListExclusionsRequest = {
     message.pageToken = object.pageToken ?? "";
     message.pageSize = object.pageSize ?? 0;
     return message;
+  },
+
+  fromSDK(object: ListExclusionsRequestSDKType): ListExclusionsRequest {
+    return {
+      parent: isSet(object.parent) ? object.parent : undefined,
+      pageToken: isSet(object.page_token) ? object.page_token : undefined,
+      pageSize: isSet(object.page_size) ? object.page_size : undefined
+    };
+  },
+
+  toSDK(message: ListExclusionsRequest): ListExclusionsRequestSDKType {
+    const obj: any = {};
+    message.parent !== undefined && (obj.parent = message.parent);
+    message.pageToken !== undefined && (obj.page_token = message.pageToken);
+    message.pageSize !== undefined && (obj.page_size = message.pageSize);
+    return obj;
   }
 
 };
@@ -3559,7 +5306,7 @@ export const ListExclusionsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ListExclusionsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ListExclusionsResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListExclusionsResponse();
@@ -3610,6 +5357,26 @@ export const ListExclusionsResponse = {
     message.exclusions = object.exclusions?.map(e => LogExclusion.fromPartial(e)) || [];
     message.nextPageToken = object.nextPageToken ?? "";
     return message;
+  },
+
+  fromSDK(object: ListExclusionsResponseSDKType): ListExclusionsResponse {
+    return {
+      exclusions: Array.isArray(object?.exclusions) ? object.exclusions.map((e: any) => LogExclusion.fromSDK(e)) : [],
+      nextPageToken: isSet(object.next_page_token) ? object.next_page_token : undefined
+    };
+  },
+
+  toSDK(message: ListExclusionsResponse): ListExclusionsResponseSDKType {
+    const obj: any = {};
+
+    if (message.exclusions) {
+      obj.exclusions = message.exclusions.map(e => e ? LogExclusion.toSDK(e) : undefined);
+    } else {
+      obj.exclusions = [];
+    }
+
+    message.nextPageToken !== undefined && (obj.next_page_token = message.nextPageToken);
+    return obj;
   }
 
 };
@@ -3667,6 +5434,18 @@ export const GetExclusionRequest = {
     const message = createBaseGetExclusionRequest();
     message.name = object.name ?? "";
     return message;
+  },
+
+  fromSDK(object: GetExclusionRequestSDKType): GetExclusionRequest {
+    return {
+      name: isSet(object.name) ? object.name : undefined
+    };
+  },
+
+  toSDK(message: GetExclusionRequest): GetExclusionRequestSDKType {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    return obj;
   }
 
 };
@@ -3736,6 +5515,20 @@ export const CreateExclusionRequest = {
     message.parent = object.parent ?? "";
     message.exclusion = object.exclusion !== undefined && object.exclusion !== null ? LogExclusion.fromPartial(object.exclusion) : undefined;
     return message;
+  },
+
+  fromSDK(object: CreateExclusionRequestSDKType): CreateExclusionRequest {
+    return {
+      parent: isSet(object.parent) ? object.parent : undefined,
+      exclusion: isSet(object.exclusion) ? LogExclusion.fromSDK(object.exclusion) : undefined
+    };
+  },
+
+  toSDK(message: CreateExclusionRequest): CreateExclusionRequestSDKType {
+    const obj: any = {};
+    message.parent !== undefined && (obj.parent = message.parent);
+    message.exclusion !== undefined && (obj.exclusion = message.exclusion ? LogExclusion.toSDK(message.exclusion) : undefined);
+    return obj;
   }
 
 };
@@ -3817,6 +5610,22 @@ export const UpdateExclusionRequest = {
     message.exclusion = object.exclusion !== undefined && object.exclusion !== null ? LogExclusion.fromPartial(object.exclusion) : undefined;
     message.updateMask = object.updateMask !== undefined && object.updateMask !== null ? FieldMask.fromPartial(object.updateMask) : undefined;
     return message;
+  },
+
+  fromSDK(object: UpdateExclusionRequestSDKType): UpdateExclusionRequest {
+    return {
+      name: isSet(object.name) ? object.name : undefined,
+      exclusion: isSet(object.exclusion) ? LogExclusion.fromSDK(object.exclusion) : undefined,
+      updateMask: isSet(object.update_mask) ? FieldMask.fromSDK(object.update_mask) : undefined
+    };
+  },
+
+  toSDK(message: UpdateExclusionRequest): UpdateExclusionRequestSDKType {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    message.exclusion !== undefined && (obj.exclusion = message.exclusion ? LogExclusion.toSDK(message.exclusion) : undefined);
+    message.updateMask !== undefined && (obj.update_mask = message.updateMask ? FieldMask.toSDK(message.updateMask) : undefined);
+    return obj;
   }
 
 };
@@ -3874,6 +5683,18 @@ export const DeleteExclusionRequest = {
     const message = createBaseDeleteExclusionRequest();
     message.name = object.name ?? "";
     return message;
+  },
+
+  fromSDK(object: DeleteExclusionRequestSDKType): DeleteExclusionRequest {
+    return {
+      name: isSet(object.name) ? object.name : undefined
+    };
+  },
+
+  toSDK(message: DeleteExclusionRequest): DeleteExclusionRequestSDKType {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    return obj;
   }
 
 };
@@ -3931,6 +5752,18 @@ export const GetCmekSettingsRequest = {
     const message = createBaseGetCmekSettingsRequest();
     message.name = object.name ?? "";
     return message;
+  },
+
+  fromSDK(object: GetCmekSettingsRequestSDKType): GetCmekSettingsRequest {
+    return {
+      name: isSet(object.name) ? object.name : undefined
+    };
+  },
+
+  toSDK(message: GetCmekSettingsRequest): GetCmekSettingsRequestSDKType {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    return obj;
   }
 
 };
@@ -4012,6 +5845,22 @@ export const UpdateCmekSettingsRequest = {
     message.cmekSettings = object.cmekSettings !== undefined && object.cmekSettings !== null ? CmekSettings.fromPartial(object.cmekSettings) : undefined;
     message.updateMask = object.updateMask !== undefined && object.updateMask !== null ? FieldMask.fromPartial(object.updateMask) : undefined;
     return message;
+  },
+
+  fromSDK(object: UpdateCmekSettingsRequestSDKType): UpdateCmekSettingsRequest {
+    return {
+      name: isSet(object.name) ? object.name : undefined,
+      cmekSettings: isSet(object.cmek_settings) ? CmekSettings.fromSDK(object.cmek_settings) : undefined,
+      updateMask: isSet(object.update_mask) ? FieldMask.fromSDK(object.update_mask) : undefined
+    };
+  },
+
+  toSDK(message: UpdateCmekSettingsRequest): UpdateCmekSettingsRequestSDKType {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    message.cmekSettings !== undefined && (obj.cmek_settings = message.cmekSettings ? CmekSettings.toSDK(message.cmekSettings) : undefined);
+    message.updateMask !== undefined && (obj.update_mask = message.updateMask ? FieldMask.toSDK(message.updateMask) : undefined);
+    return obj;
   }
 
 };
@@ -4041,7 +5890,7 @@ export const CmekSettings = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): CmekSettings {
+  decode(input: _m0.Reader | Uint8Array, length?: number): CmekSettingsSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCmekSettings();
@@ -4093,6 +5942,22 @@ export const CmekSettings = {
     message.kmsKeyName = object.kmsKeyName ?? "";
     message.serviceAccountId = object.serviceAccountId ?? "";
     return message;
+  },
+
+  fromSDK(object: CmekSettingsSDKType): CmekSettings {
+    return {
+      name: isSet(object.name) ? object.name : undefined,
+      kmsKeyName: isSet(object.kms_key_name) ? object.kms_key_name : undefined,
+      serviceAccountId: isSet(object.service_account_id) ? object.service_account_id : undefined
+    };
+  },
+
+  toSDK(message: CmekSettings): CmekSettingsSDKType {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    message.kmsKeyName !== undefined && (obj.kms_key_name = message.kmsKeyName);
+    message.serviceAccountId !== undefined && (obj.service_account_id = message.serviceAccountId);
+    return obj;
   }
 
 };
@@ -4150,6 +6015,18 @@ export const GetSettingsRequest = {
     const message = createBaseGetSettingsRequest();
     message.name = object.name ?? "";
     return message;
+  },
+
+  fromSDK(object: GetSettingsRequestSDKType): GetSettingsRequest {
+    return {
+      name: isSet(object.name) ? object.name : undefined
+    };
+  },
+
+  toSDK(message: GetSettingsRequest): GetSettingsRequestSDKType {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    return obj;
   }
 
 };
@@ -4231,6 +6108,22 @@ export const UpdateSettingsRequest = {
     message.settings = object.settings !== undefined && object.settings !== null ? Settings.fromPartial(object.settings) : undefined;
     message.updateMask = object.updateMask !== undefined && object.updateMask !== null ? FieldMask.fromPartial(object.updateMask) : undefined;
     return message;
+  },
+
+  fromSDK(object: UpdateSettingsRequestSDKType): UpdateSettingsRequest {
+    return {
+      name: isSet(object.name) ? object.name : undefined,
+      settings: isSet(object.settings) ? Settings.fromSDK(object.settings) : undefined,
+      updateMask: isSet(object.update_mask) ? FieldMask.fromSDK(object.update_mask) : undefined
+    };
+  },
+
+  toSDK(message: UpdateSettingsRequest): UpdateSettingsRequestSDKType {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    message.settings !== undefined && (obj.settings = message.settings ? Settings.toSDK(message.settings) : undefined);
+    message.updateMask !== undefined && (obj.update_mask = message.updateMask ? FieldMask.toSDK(message.updateMask) : undefined);
+    return obj;
   }
 
 };
@@ -4270,7 +6163,7 @@ export const Settings = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): Settings {
+  decode(input: _m0.Reader | Uint8Array, length?: number): SettingsSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSettings();
@@ -4336,6 +6229,26 @@ export const Settings = {
     message.storageLocation = object.storageLocation ?? "";
     message.disableDefaultSink = object.disableDefaultSink ?? false;
     return message;
+  },
+
+  fromSDK(object: SettingsSDKType): Settings {
+    return {
+      name: isSet(object.name) ? object.name : undefined,
+      kmsKeyName: isSet(object.kms_key_name) ? object.kms_key_name : undefined,
+      kmsServiceAccountId: isSet(object.kms_service_account_id) ? object.kms_service_account_id : undefined,
+      storageLocation: isSet(object.storage_location) ? object.storage_location : undefined,
+      disableDefaultSink: isSet(object.disable_default_sink) ? object.disable_default_sink : undefined
+    };
+  },
+
+  toSDK(message: Settings): SettingsSDKType {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    message.kmsKeyName !== undefined && (obj.kms_key_name = message.kmsKeyName);
+    message.kmsServiceAccountId !== undefined && (obj.kms_service_account_id = message.kmsServiceAccountId);
+    message.storageLocation !== undefined && (obj.storage_location = message.storageLocation);
+    message.disableDefaultSink !== undefined && (obj.disable_default_sink = message.disableDefaultSink);
+    return obj;
   }
 
 };
@@ -4417,6 +6330,22 @@ export const CopyLogEntriesRequest = {
     message.filter = object.filter ?? "";
     message.destination = object.destination ?? "";
     return message;
+  },
+
+  fromSDK(object: CopyLogEntriesRequestSDKType): CopyLogEntriesRequest {
+    return {
+      name: isSet(object.name) ? object.name : undefined,
+      filter: isSet(object.filter) ? object.filter : undefined,
+      destination: isSet(object.destination) ? object.destination : undefined
+    };
+  },
+
+  toSDK(message: CopyLogEntriesRequest): CopyLogEntriesRequestSDKType {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    message.filter !== undefined && (obj.filter = message.filter);
+    message.destination !== undefined && (obj.destination = message.destination);
+    return obj;
   }
 
 };
@@ -4546,6 +6475,30 @@ export const CopyLogEntriesMetadata = {
     message.progress = object.progress ?? 0;
     message.writerIdentity = object.writerIdentity ?? "";
     return message;
+  },
+
+  fromSDK(object: CopyLogEntriesMetadataSDKType): CopyLogEntriesMetadata {
+    return {
+      startTime: isSet(object.start_time) ? Timestamp.fromSDK(object.start_time) : undefined,
+      endTime: isSet(object.end_time) ? Timestamp.fromSDK(object.end_time) : undefined,
+      state: isSet(object.state) ? operationStateFromJSON(object.state) : 0,
+      cancellationRequested: isSet(object.cancellation_requested) ? object.cancellation_requested : undefined,
+      request: isSet(object.request) ? CopyLogEntriesRequest.fromSDK(object.request) : undefined,
+      progress: isSet(object.progress) ? object.progress : undefined,
+      writerIdentity: isSet(object.writer_identity) ? object.writer_identity : undefined
+    };
+  },
+
+  toSDK(message: CopyLogEntriesMetadata): CopyLogEntriesMetadataSDKType {
+    const obj: any = {};
+    message.startTime !== undefined && (obj.start_time = message.startTime ? Timestamp.toSDK(message.startTime) : undefined);
+    message.endTime !== undefined && (obj.end_time = message.endTime ? Timestamp.toSDK(message.endTime) : undefined);
+    message.state !== undefined && (obj.state = operationStateToJSON(message.state));
+    message.cancellationRequested !== undefined && (obj.cancellation_requested = message.cancellationRequested);
+    message.request !== undefined && (obj.request = message.request ? CopyLogEntriesRequest.toSDK(message.request) : undefined);
+    message.progress !== undefined && (obj.progress = message.progress);
+    message.writerIdentity !== undefined && (obj.writer_identity = message.writerIdentity);
+    return obj;
   }
 
 };
@@ -4603,6 +6556,18 @@ export const CopyLogEntriesResponse = {
     const message = createBaseCopyLogEntriesResponse();
     message.logEntriesCopiedCount = object.logEntriesCopiedCount !== undefined && object.logEntriesCopiedCount !== null ? Long.fromValue(object.logEntriesCopiedCount) : Long.ZERO;
     return message;
+  },
+
+  fromSDK(object: CopyLogEntriesResponseSDKType): CopyLogEntriesResponse {
+    return {
+      logEntriesCopiedCount: isSet(object.log_entries_copied_count) ? object.log_entries_copied_count : undefined
+    };
+  },
+
+  toSDK(message: CopyLogEntriesResponse): CopyLogEntriesResponseSDKType {
+    const obj: any = {};
+    message.logEntriesCopiedCount !== undefined && (obj.log_entries_copied_count = message.logEntriesCopiedCount);
+    return obj;
   }
 
 };

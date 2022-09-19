@@ -1,5 +1,5 @@
-import { NullValue, nullValueFromJSON, nullValueToJSON } from "../../../protobuf/struct";
-import { Any } from "../../../protobuf/any";
+import { NullValue, NullValueSDKType, nullValueFromJSON, nullValueToJSON } from "../../../protobuf/struct";
+import { Any, AnySDKType } from "../../../protobuf/any";
 import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "@osmonauts/helpers";
 export const protobufPackage = "google.api.expr.v1alpha1";
@@ -48,8 +48,61 @@ export interface Value {
   typeValue?: string;
 }
 
+/**
+ * Represents a CEL value.
+ * 
+ * This is similar to `google.protobuf.Value`, but can represent CEL's full
+ * range of values.
+ */
+export interface ValueSDKType {
+  /** Null value. */
+  null_value?: NullValueSDKType;
+
+  /** Boolean value. */
+  bool_value?: boolean;
+
+  /** Signed integer value. */
+  int64_value?: Long;
+
+  /** Unsigned integer value. */
+  uint64_value?: Long;
+
+  /** Floating point value. */
+  double_value?: number;
+
+  /** UTF-8 string value. */
+  string_value?: string;
+
+  /** Byte string value. */
+  bytes_value?: Uint8Array;
+
+  /** An enum value. */
+  enum_value?: EnumValueSDKType;
+
+  /** The proto message backing an object value. */
+  object_value?: AnySDKType;
+
+  /** Map value. */
+  map_value?: MapValueSDKType;
+
+  /** List value. */
+  list_value?: ListValueSDKType;
+
+  /** Type value. */
+  type_value?: string;
+}
+
 /** An enum value. */
 export interface EnumValue {
+  /** The fully qualified name of the enum type. */
+  type: string;
+
+  /** The value of the enum. */
+  value: number;
+}
+
+/** An enum value. */
+export interface EnumValueSDKType {
   /** The fully qualified name of the enum type. */
   type: string;
 
@@ -69,6 +122,17 @@ export interface ListValue {
 }
 
 /**
+ * A list.
+ * 
+ * Wrapped in a message so 'not set' and empty can be differentiated, which is
+ * required for use in a 'oneof'.
+ */
+export interface ListValueSDKType {
+  /** The ordered values in the list. */
+  values: ValueSDKType[];
+}
+
+/**
  * A map.
  * 
  * Wrapped in a message so 'not set' and empty can be differentiated, which is
@@ -84,6 +148,22 @@ export interface MapValue {
   entries: MapValue_Entry[];
 }
 
+/**
+ * A map.
+ * 
+ * Wrapped in a message so 'not set' and empty can be differentiated, which is
+ * required for use in a 'oneof'.
+ */
+export interface MapValueSDKType {
+  /**
+   * The set of map entries.
+   * 
+   * CEL has fewer restrictions on keys, so a protobuf map represenation
+   * cannot be used.
+   */
+  entries: MapValue_EntrySDKType[];
+}
+
 /** An entry in the map. */
 export interface MapValue_Entry {
   /**
@@ -96,6 +176,20 @@ export interface MapValue_Entry {
 
   /** The value. */
   value: Value;
+}
+
+/** An entry in the map. */
+export interface MapValue_EntrySDKType {
+  /**
+   * The key.
+   * 
+   * Must be unique with in the map.
+   * Currently only boolean, int, uint, and string values can be keys.
+   */
+  key: ValueSDKType;
+
+  /** The value. */
+  value: ValueSDKType;
 }
 
 function createBaseValue(): Value {
@@ -283,6 +377,40 @@ export const Value = {
     message.listValue = object.listValue !== undefined && object.listValue !== null ? ListValue.fromPartial(object.listValue) : undefined;
     message.typeValue = object.typeValue ?? undefined;
     return message;
+  },
+
+  fromSDK(object: ValueSDKType): Value {
+    return {
+      nullValue: isSet(object.null_value) ? nullValueFromJSON(object.null_value) : undefined,
+      boolValue: isSet(object.bool_value) ? object.bool_value : undefined,
+      int64Value: isSet(object.int64_value) ? object.int64_value : undefined,
+      uint64Value: isSet(object.uint64_value) ? object.uint64_value : undefined,
+      doubleValue: isSet(object.double_value) ? object.double_value : undefined,
+      stringValue: isSet(object.string_value) ? object.string_value : undefined,
+      bytesValue: isSet(object.bytes_value) ? object.bytes_value : undefined,
+      enumValue: isSet(object.enum_value) ? EnumValue.fromSDK(object.enum_value) : undefined,
+      objectValue: isSet(object.object_value) ? Any.fromSDK(object.object_value) : undefined,
+      mapValue: isSet(object.map_value) ? MapValue.fromSDK(object.map_value) : undefined,
+      listValue: isSet(object.list_value) ? ListValue.fromSDK(object.list_value) : undefined,
+      typeValue: isSet(object.type_value) ? object.type_value : undefined
+    };
+  },
+
+  toSDK(message: Value): ValueSDKType {
+    const obj: any = {};
+    message.nullValue !== undefined && (obj.null_value = nullValueToJSON(message.nullValue));
+    message.boolValue !== undefined && (obj.bool_value = message.boolValue);
+    message.int64Value !== undefined && (obj.int64_value = message.int64Value);
+    message.uint64Value !== undefined && (obj.uint64_value = message.uint64Value);
+    message.doubleValue !== undefined && (obj.double_value = message.doubleValue);
+    message.stringValue !== undefined && (obj.string_value = message.stringValue);
+    message.bytesValue !== undefined && (obj.bytes_value = message.bytesValue);
+    message.enumValue !== undefined && (obj.enum_value = message.enumValue ? EnumValue.toSDK(message.enumValue) : undefined);
+    message.objectValue !== undefined && (obj.object_value = message.objectValue ? Any.toSDK(message.objectValue) : undefined);
+    message.mapValue !== undefined && (obj.map_value = message.mapValue ? MapValue.toSDK(message.mapValue) : undefined);
+    message.listValue !== undefined && (obj.list_value = message.listValue ? ListValue.toSDK(message.listValue) : undefined);
+    message.typeValue !== undefined && (obj.type_value = message.typeValue);
+    return obj;
   }
 
 };
@@ -352,6 +480,20 @@ export const EnumValue = {
     message.type = object.type ?? "";
     message.value = object.value ?? 0;
     return message;
+  },
+
+  fromSDK(object: EnumValueSDKType): EnumValue {
+    return {
+      type: isSet(object.type) ? object.type : undefined,
+      value: isSet(object.value) ? object.value : undefined
+    };
+  },
+
+  toSDK(message: EnumValue): EnumValueSDKType {
+    const obj: any = {};
+    message.type !== undefined && (obj.type = message.type);
+    message.value !== undefined && (obj.value = message.value);
+    return obj;
   }
 
 };
@@ -415,6 +557,24 @@ export const ListValue = {
     const message = createBaseListValue();
     message.values = object.values?.map(e => Value.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: ListValueSDKType): ListValue {
+    return {
+      values: Array.isArray(object?.values) ? object.values.map((e: any) => Value.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: ListValue): ListValueSDKType {
+    const obj: any = {};
+
+    if (message.values) {
+      obj.values = message.values.map(e => e ? Value.toSDK(e) : undefined);
+    } else {
+      obj.values = [];
+    }
+
+    return obj;
   }
 
 };
@@ -478,6 +638,24 @@ export const MapValue = {
     const message = createBaseMapValue();
     message.entries = object.entries?.map(e => MapValue_Entry.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: MapValueSDKType): MapValue {
+    return {
+      entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => MapValue_Entry.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: MapValue): MapValueSDKType {
+    const obj: any = {};
+
+    if (message.entries) {
+      obj.entries = message.entries.map(e => e ? MapValue_Entry.toSDK(e) : undefined);
+    } else {
+      obj.entries = [];
+    }
+
+    return obj;
   }
 
 };
@@ -547,6 +725,20 @@ export const MapValue_Entry = {
     message.key = object.key !== undefined && object.key !== null ? Value.fromPartial(object.key) : undefined;
     message.value = object.value !== undefined && object.value !== null ? Value.fromPartial(object.value) : undefined;
     return message;
+  },
+
+  fromSDK(object: MapValue_EntrySDKType): MapValue_Entry {
+    return {
+      key: isSet(object.key) ? Value.fromSDK(object.key) : undefined,
+      value: isSet(object.value) ? Value.fromSDK(object.value) : undefined
+    };
+  },
+
+  toSDK(message: MapValue_Entry): MapValue_EntrySDKType {
+    const obj: any = {};
+    message.key !== undefined && (obj.key = message.key ? Value.toSDK(message.key) : undefined);
+    message.value !== undefined && (obj.value = message.value ? Value.toSDK(message.value) : undefined);
+    return obj;
   }
 
 };

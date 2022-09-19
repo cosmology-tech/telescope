@@ -23,6 +23,27 @@ export interface BIP44Params {
   addressIndex: number;
 }
 
+/** BIP44Params is used as path field in ledger item in Record. */
+export interface BIP44ParamsSDKType {
+  /** purpose is a constant set to 44' (or 0x8000002C) following the BIP43 recommendation */
+  purpose: number;
+
+  /** coin_type is a constant that improves privacy */
+  coin_type: number;
+
+  /** account splits the key space into independent user identities */
+  account: number;
+
+  /**
+   * change is a constant used for public derivation. Constant 0 is used for external chain and constant 1 for internal
+   * chain.
+   */
+  change: boolean;
+
+  /** address_index is used as child index in BIP32 derivation */
+  address_index: number;
+}
+
 function createBaseBIP44Params(): BIP44Params {
   return {
     purpose: 0,
@@ -124,6 +145,26 @@ export const BIP44Params = {
     message.change = object.change ?? false;
     message.addressIndex = object.addressIndex ?? 0;
     return message;
+  },
+
+  fromSDK(object: BIP44ParamsSDKType): BIP44Params {
+    return {
+      purpose: isSet(object.purpose) ? object.purpose : undefined,
+      coinType: isSet(object.coin_type) ? object.coin_type : undefined,
+      account: isSet(object.account) ? object.account : undefined,
+      change: isSet(object.change) ? object.change : undefined,
+      addressIndex: isSet(object.address_index) ? object.address_index : undefined
+    };
+  },
+
+  toSDK(message: BIP44Params): BIP44ParamsSDKType {
+    const obj: any = {};
+    message.purpose !== undefined && (obj.purpose = message.purpose);
+    message.coinType !== undefined && (obj.coin_type = message.coinType);
+    message.account !== undefined && (obj.account = message.account);
+    message.change !== undefined && (obj.change = message.change);
+    message.addressIndex !== undefined && (obj.address_index = message.addressIndex);
+    return obj;
   }
 
 };

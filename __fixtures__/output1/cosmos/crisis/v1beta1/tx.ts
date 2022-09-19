@@ -9,8 +9,18 @@ export interface MsgVerifyInvariant {
   invariantRoute: string;
 }
 
+/** MsgVerifyInvariant represents a message to verify a particular invariance. */
+export interface MsgVerifyInvariantSDKType {
+  sender: string;
+  invariant_module_name: string;
+  invariant_route: string;
+}
+
 /** MsgVerifyInvariantResponse defines the Msg/VerifyInvariant response type. */
 export interface MsgVerifyInvariantResponse {}
+
+/** MsgVerifyInvariantResponse defines the Msg/VerifyInvariant response type. */
+export interface MsgVerifyInvariantResponseSDKType {}
 
 function createBaseMsgVerifyInvariant(): MsgVerifyInvariant {
   return {
@@ -89,6 +99,22 @@ export const MsgVerifyInvariant = {
     message.invariantModuleName = object.invariantModuleName ?? "";
     message.invariantRoute = object.invariantRoute ?? "";
     return message;
+  },
+
+  fromSDK(object: MsgVerifyInvariantSDKType): MsgVerifyInvariant {
+    return {
+      sender: isSet(object.sender) ? object.sender : undefined,
+      invariantModuleName: isSet(object.invariant_module_name) ? object.invariant_module_name : undefined,
+      invariantRoute: isSet(object.invariant_route) ? object.invariant_route : undefined
+    };
+  },
+
+  toSDK(message: MsgVerifyInvariant): MsgVerifyInvariantSDKType {
+    const obj: any = {};
+    message.sender !== undefined && (obj.sender = message.sender);
+    message.invariantModuleName !== undefined && (obj.invariant_module_name = message.invariantModuleName);
+    message.invariantRoute !== undefined && (obj.invariant_route = message.invariantRoute);
+    return obj;
   }
 
 };
@@ -102,7 +128,7 @@ export const MsgVerifyInvariantResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgVerifyInvariantResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgVerifyInvariantResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgVerifyInvariantResponse();
@@ -132,6 +158,15 @@ export const MsgVerifyInvariantResponse = {
   fromPartial(_: DeepPartial<MsgVerifyInvariantResponse>): MsgVerifyInvariantResponse {
     const message = createBaseMsgVerifyInvariantResponse();
     return message;
+  },
+
+  fromSDK(_: MsgVerifyInvariantResponseSDKType): MsgVerifyInvariantResponse {
+    return {};
+  },
+
+  toSDK(_: MsgVerifyInvariantResponse): MsgVerifyInvariantResponseSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };

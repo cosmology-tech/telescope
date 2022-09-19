@@ -1,7 +1,7 @@
-import { Description, CommissionRates } from "./staking";
-import { Any } from "../../../google/protobuf/any";
-import { Coin } from "../../base/v1beta1/coin";
-import { Timestamp } from "../../../google/protobuf/timestamp";
+import { Description, DescriptionSDKType, CommissionRates, CommissionRatesSDKType } from "./staking";
+import { Any, AnySDKType } from "../../../google/protobuf/any";
+import { Coin, CoinSDKType } from "../../base/v1beta1/coin";
+import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, toTimestamp, fromTimestamp, fromJsonTimestamp } from "@osmonauts/helpers";
 export const protobufPackage = "cosmos.staking.v1beta1";
@@ -17,8 +17,22 @@ export interface MsgCreateValidator {
   value: Coin;
 }
 
+/** MsgCreateValidator defines a SDK message for creating a new validator. */
+export interface MsgCreateValidatorSDKType {
+  description: DescriptionSDKType;
+  commission: CommissionRatesSDKType;
+  min_self_delegation: string;
+  delegator_address: string;
+  validator_address: string;
+  pubkey: AnySDKType;
+  value: CoinSDKType;
+}
+
 /** MsgCreateValidatorResponse defines the Msg/CreateValidator response type. */
 export interface MsgCreateValidatorResponse {}
+
+/** MsgCreateValidatorResponse defines the Msg/CreateValidator response type. */
+export interface MsgCreateValidatorResponseSDKType {}
 
 /** MsgEditValidator defines a SDK message for editing an existing validator. */
 export interface MsgEditValidator {
@@ -35,8 +49,26 @@ export interface MsgEditValidator {
   minSelfDelegation: string;
 }
 
+/** MsgEditValidator defines a SDK message for editing an existing validator. */
+export interface MsgEditValidatorSDKType {
+  description: DescriptionSDKType;
+  validator_address: string;
+
+  /**
+   * We pass a reference to the new commission rate and min self delegation as
+   * it's not mandatory to update. If not updated, the deserialized rate will be
+   * zero with no way to distinguish if an update was intended.
+   * REF: #2373
+   */
+  commission_rate: string;
+  min_self_delegation: string;
+}
+
 /** MsgEditValidatorResponse defines the Msg/EditValidator response type. */
 export interface MsgEditValidatorResponse {}
+
+/** MsgEditValidatorResponse defines the Msg/EditValidator response type. */
+export interface MsgEditValidatorResponseSDKType {}
 
 /**
  * MsgDelegate defines a SDK message for performing a delegation of coins
@@ -48,8 +80,21 @@ export interface MsgDelegate {
   amount: Coin;
 }
 
+/**
+ * MsgDelegate defines a SDK message for performing a delegation of coins
+ * from a delegator to a validator.
+ */
+export interface MsgDelegateSDKType {
+  delegator_address: string;
+  validator_address: string;
+  amount: CoinSDKType;
+}
+
 /** MsgDelegateResponse defines the Msg/Delegate response type. */
 export interface MsgDelegateResponse {}
+
+/** MsgDelegateResponse defines the Msg/Delegate response type. */
+export interface MsgDelegateResponseSDKType {}
 
 /**
  * MsgBeginRedelegate defines a SDK message for performing a redelegation
@@ -62,9 +107,25 @@ export interface MsgBeginRedelegate {
   amount: Coin;
 }
 
+/**
+ * MsgBeginRedelegate defines a SDK message for performing a redelegation
+ * of coins from a delegator and source validator to a destination validator.
+ */
+export interface MsgBeginRedelegateSDKType {
+  delegator_address: string;
+  validator_src_address: string;
+  validator_dst_address: string;
+  amount: CoinSDKType;
+}
+
 /** MsgBeginRedelegateResponse defines the Msg/BeginRedelegate response type. */
 export interface MsgBeginRedelegateResponse {
   completionTime: Date;
+}
+
+/** MsgBeginRedelegateResponse defines the Msg/BeginRedelegate response type. */
+export interface MsgBeginRedelegateResponseSDKType {
+  completion_time: Date;
 }
 
 /**
@@ -77,9 +138,24 @@ export interface MsgUndelegate {
   amount: Coin;
 }
 
+/**
+ * MsgUndelegate defines a SDK message for performing an undelegation from a
+ * delegate and a validator.
+ */
+export interface MsgUndelegateSDKType {
+  delegator_address: string;
+  validator_address: string;
+  amount: CoinSDKType;
+}
+
 /** MsgUndelegateResponse defines the Msg/Undelegate response type. */
 export interface MsgUndelegateResponse {
   completionTime: Date;
+}
+
+/** MsgUndelegateResponse defines the Msg/Undelegate response type. */
+export interface MsgUndelegateResponseSDKType {
+  completion_time: Date;
 }
 
 function createBaseMsgCreateValidator(): MsgCreateValidator {
@@ -207,6 +283,30 @@ export const MsgCreateValidator = {
     message.pubkey = object.pubkey !== undefined && object.pubkey !== null ? Any.fromPartial(object.pubkey) : undefined;
     message.value = object.value !== undefined && object.value !== null ? Coin.fromPartial(object.value) : undefined;
     return message;
+  },
+
+  fromSDK(object: MsgCreateValidatorSDKType): MsgCreateValidator {
+    return {
+      description: isSet(object.description) ? Description.fromSDK(object.description) : undefined,
+      commission: isSet(object.commission) ? CommissionRates.fromSDK(object.commission) : undefined,
+      minSelfDelegation: isSet(object.min_self_delegation) ? object.min_self_delegation : undefined,
+      delegatorAddress: isSet(object.delegator_address) ? object.delegator_address : undefined,
+      validatorAddress: isSet(object.validator_address) ? object.validator_address : undefined,
+      pubkey: isSet(object.pubkey) ? Any.fromSDK(object.pubkey) : undefined,
+      value: isSet(object.value) ? Coin.fromSDK(object.value) : undefined
+    };
+  },
+
+  toSDK(message: MsgCreateValidator): MsgCreateValidatorSDKType {
+    const obj: any = {};
+    message.description !== undefined && (obj.description = message.description ? Description.toSDK(message.description) : undefined);
+    message.commission !== undefined && (obj.commission = message.commission ? CommissionRates.toSDK(message.commission) : undefined);
+    message.minSelfDelegation !== undefined && (obj.min_self_delegation = message.minSelfDelegation);
+    message.delegatorAddress !== undefined && (obj.delegator_address = message.delegatorAddress);
+    message.validatorAddress !== undefined && (obj.validator_address = message.validatorAddress);
+    message.pubkey !== undefined && (obj.pubkey = message.pubkey ? Any.toSDK(message.pubkey) : undefined);
+    message.value !== undefined && (obj.value = message.value ? Coin.toSDK(message.value) : undefined);
+    return obj;
   }
 
 };
@@ -220,7 +320,7 @@ export const MsgCreateValidatorResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateValidatorResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateValidatorResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateValidatorResponse();
@@ -250,6 +350,15 @@ export const MsgCreateValidatorResponse = {
   fromPartial(_: DeepPartial<MsgCreateValidatorResponse>): MsgCreateValidatorResponse {
     const message = createBaseMsgCreateValidatorResponse();
     return message;
+  },
+
+  fromSDK(_: MsgCreateValidatorResponseSDKType): MsgCreateValidatorResponse {
+    return {};
+  },
+
+  toSDK(_: MsgCreateValidatorResponse): MsgCreateValidatorResponseSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -343,6 +452,24 @@ export const MsgEditValidator = {
     message.commissionRate = object.commissionRate ?? "";
     message.minSelfDelegation = object.minSelfDelegation ?? "";
     return message;
+  },
+
+  fromSDK(object: MsgEditValidatorSDKType): MsgEditValidator {
+    return {
+      description: isSet(object.description) ? Description.fromSDK(object.description) : undefined,
+      validatorAddress: isSet(object.validator_address) ? object.validator_address : undefined,
+      commissionRate: isSet(object.commission_rate) ? object.commission_rate : undefined,
+      minSelfDelegation: isSet(object.min_self_delegation) ? object.min_self_delegation : undefined
+    };
+  },
+
+  toSDK(message: MsgEditValidator): MsgEditValidatorSDKType {
+    const obj: any = {};
+    message.description !== undefined && (obj.description = message.description ? Description.toSDK(message.description) : undefined);
+    message.validatorAddress !== undefined && (obj.validator_address = message.validatorAddress);
+    message.commissionRate !== undefined && (obj.commission_rate = message.commissionRate);
+    message.minSelfDelegation !== undefined && (obj.min_self_delegation = message.minSelfDelegation);
+    return obj;
   }
 
 };
@@ -356,7 +483,7 @@ export const MsgEditValidatorResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgEditValidatorResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgEditValidatorResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgEditValidatorResponse();
@@ -386,6 +513,15 @@ export const MsgEditValidatorResponse = {
   fromPartial(_: DeepPartial<MsgEditValidatorResponse>): MsgEditValidatorResponse {
     const message = createBaseMsgEditValidatorResponse();
     return message;
+  },
+
+  fromSDK(_: MsgEditValidatorResponseSDKType): MsgEditValidatorResponse {
+    return {};
+  },
+
+  toSDK(_: MsgEditValidatorResponse): MsgEditValidatorResponseSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -467,6 +603,22 @@ export const MsgDelegate = {
     message.validatorAddress = object.validatorAddress ?? "";
     message.amount = object.amount !== undefined && object.amount !== null ? Coin.fromPartial(object.amount) : undefined;
     return message;
+  },
+
+  fromSDK(object: MsgDelegateSDKType): MsgDelegate {
+    return {
+      delegatorAddress: isSet(object.delegator_address) ? object.delegator_address : undefined,
+      validatorAddress: isSet(object.validator_address) ? object.validator_address : undefined,
+      amount: isSet(object.amount) ? Coin.fromSDK(object.amount) : undefined
+    };
+  },
+
+  toSDK(message: MsgDelegate): MsgDelegateSDKType {
+    const obj: any = {};
+    message.delegatorAddress !== undefined && (obj.delegator_address = message.delegatorAddress);
+    message.validatorAddress !== undefined && (obj.validator_address = message.validatorAddress);
+    message.amount !== undefined && (obj.amount = message.amount ? Coin.toSDK(message.amount) : undefined);
+    return obj;
   }
 
 };
@@ -480,7 +632,7 @@ export const MsgDelegateResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgDelegateResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgDelegateResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgDelegateResponse();
@@ -510,6 +662,15 @@ export const MsgDelegateResponse = {
   fromPartial(_: DeepPartial<MsgDelegateResponse>): MsgDelegateResponse {
     const message = createBaseMsgDelegateResponse();
     return message;
+  },
+
+  fromSDK(_: MsgDelegateResponseSDKType): MsgDelegateResponse {
+    return {};
+  },
+
+  toSDK(_: MsgDelegateResponse): MsgDelegateResponseSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -603,6 +764,24 @@ export const MsgBeginRedelegate = {
     message.validatorDstAddress = object.validatorDstAddress ?? "";
     message.amount = object.amount !== undefined && object.amount !== null ? Coin.fromPartial(object.amount) : undefined;
     return message;
+  },
+
+  fromSDK(object: MsgBeginRedelegateSDKType): MsgBeginRedelegate {
+    return {
+      delegatorAddress: isSet(object.delegator_address) ? object.delegator_address : undefined,
+      validatorSrcAddress: isSet(object.validator_src_address) ? object.validator_src_address : undefined,
+      validatorDstAddress: isSet(object.validator_dst_address) ? object.validator_dst_address : undefined,
+      amount: isSet(object.amount) ? Coin.fromSDK(object.amount) : undefined
+    };
+  },
+
+  toSDK(message: MsgBeginRedelegate): MsgBeginRedelegateSDKType {
+    const obj: any = {};
+    message.delegatorAddress !== undefined && (obj.delegator_address = message.delegatorAddress);
+    message.validatorSrcAddress !== undefined && (obj.validator_src_address = message.validatorSrcAddress);
+    message.validatorDstAddress !== undefined && (obj.validator_dst_address = message.validatorDstAddress);
+    message.amount !== undefined && (obj.amount = message.amount ? Coin.toSDK(message.amount) : undefined);
+    return obj;
   }
 
 };
@@ -622,7 +801,7 @@ export const MsgBeginRedelegateResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgBeginRedelegateResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgBeginRedelegateResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgBeginRedelegateResponse();
@@ -660,6 +839,18 @@ export const MsgBeginRedelegateResponse = {
     const message = createBaseMsgBeginRedelegateResponse();
     message.completionTime = object.completionTime ?? undefined;
     return message;
+  },
+
+  fromSDK(object: MsgBeginRedelegateResponseSDKType): MsgBeginRedelegateResponse {
+    return {
+      completionTime: isSet(object.completion_time) ? Timestamp.fromSDK(object.completion_time) : undefined
+    };
+  },
+
+  toSDK(message: MsgBeginRedelegateResponse): MsgBeginRedelegateResponseSDKType {
+    const obj: any = {};
+    message.completionTime !== undefined && (obj.completion_time = message.completionTime ? Timestamp.toSDK(message.completionTime) : undefined);
+    return obj;
   }
 
 };
@@ -741,6 +932,22 @@ export const MsgUndelegate = {
     message.validatorAddress = object.validatorAddress ?? "";
     message.amount = object.amount !== undefined && object.amount !== null ? Coin.fromPartial(object.amount) : undefined;
     return message;
+  },
+
+  fromSDK(object: MsgUndelegateSDKType): MsgUndelegate {
+    return {
+      delegatorAddress: isSet(object.delegator_address) ? object.delegator_address : undefined,
+      validatorAddress: isSet(object.validator_address) ? object.validator_address : undefined,
+      amount: isSet(object.amount) ? Coin.fromSDK(object.amount) : undefined
+    };
+  },
+
+  toSDK(message: MsgUndelegate): MsgUndelegateSDKType {
+    const obj: any = {};
+    message.delegatorAddress !== undefined && (obj.delegator_address = message.delegatorAddress);
+    message.validatorAddress !== undefined && (obj.validator_address = message.validatorAddress);
+    message.amount !== undefined && (obj.amount = message.amount ? Coin.toSDK(message.amount) : undefined);
+    return obj;
   }
 
 };
@@ -760,7 +967,7 @@ export const MsgUndelegateResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUndelegateResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUndelegateResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUndelegateResponse();
@@ -798,6 +1005,18 @@ export const MsgUndelegateResponse = {
     const message = createBaseMsgUndelegateResponse();
     message.completionTime = object.completionTime ?? undefined;
     return message;
+  },
+
+  fromSDK(object: MsgUndelegateResponseSDKType): MsgUndelegateResponse {
+    return {
+      completionTime: isSet(object.completion_time) ? Timestamp.fromSDK(object.completion_time) : undefined
+    };
+  },
+
+  toSDK(message: MsgUndelegateResponse): MsgUndelegateResponseSDKType {
+    const obj: any = {};
+    message.completionTime !== undefined && (obj.completion_time = message.completionTime ? Timestamp.toSDK(message.completionTime) : undefined);
+    return obj;
   }
 
 };

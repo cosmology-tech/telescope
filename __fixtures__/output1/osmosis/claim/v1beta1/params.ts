@@ -1,5 +1,5 @@
-import { Timestamp } from "../../../google/protobuf/timestamp";
-import { Duration } from "../../../google/protobuf/duration";
+import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
+import { Duration, DurationSDKType } from "../../../google/protobuf/duration";
 import * as _m0 from "protobufjs/minimal";
 import { toTimestamp, fromTimestamp, isSet, fromJsonTimestamp, DeepPartial } from "@osmonauts/helpers";
 export const protobufPackage = "osmosis.claim.v1beta1";
@@ -12,6 +12,16 @@ export interface Params {
 
   /** denom of claimable asset */
   claimDenom: string;
+}
+
+/** Params defines the claim module's parameters. */
+export interface ParamsSDKType {
+  airdrop_start_time: Date;
+  duration_until_decay: DurationSDKType;
+  duration_of_decay: DurationSDKType;
+
+  /** denom of claimable asset */
+  claim_denom: string;
 }
 
 function createBaseParams(): Params {
@@ -103,6 +113,24 @@ export const Params = {
     message.durationOfDecay = object.durationOfDecay ?? undefined;
     message.claimDenom = object.claimDenom ?? "";
     return message;
+  },
+
+  fromSDK(object: ParamsSDKType): Params {
+    return {
+      airdropStartTime: isSet(object.airdrop_start_time) ? Timestamp.fromSDK(object.airdrop_start_time) : undefined,
+      durationUntilDecay: isSet(object.duration_until_decay) ? Duration.fromSDK(object.duration_until_decay) : undefined,
+      durationOfDecay: isSet(object.duration_of_decay) ? Duration.fromSDK(object.duration_of_decay) : undefined,
+      claimDenom: isSet(object.claim_denom) ? object.claim_denom : undefined
+    };
+  },
+
+  toSDK(message: Params): ParamsSDKType {
+    const obj: any = {};
+    message.airdropStartTime !== undefined && (obj.airdrop_start_time = message.airdropStartTime ? Timestamp.toSDK(message.airdropStartTime) : undefined);
+    message.durationUntilDecay !== undefined && (obj.duration_until_decay = message.durationUntilDecay ? Duration.toSDK(message.durationUntilDecay) : undefined);
+    message.durationOfDecay !== undefined && (obj.duration_of_decay = message.durationOfDecay ? Duration.toSDK(message.durationOfDecay) : undefined);
+    message.claimDenom !== undefined && (obj.claim_denom = message.claimDenom);
+    return obj;
   }
 
 };

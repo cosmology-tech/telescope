@@ -20,6 +20,25 @@ export enum Property_PropertyType {
   DOUBLE = 4,
   UNRECOGNIZED = -1,
 }
+
+/** Supported data type of the property values */
+export enum Property_PropertyTypeSDKType {
+  /** UNSPECIFIED - The type is unspecified, and will result in an error. */
+  UNSPECIFIED = 0,
+
+  /** INT64 - The type is `int64`. */
+  INT64 = 1,
+
+  /** BOOL - The type is `bool`. */
+  BOOL = 2,
+
+  /** STRING - The type is `string`. */
+  STRING = 3,
+
+  /** DOUBLE - The type is 'double'. */
+  DOUBLE = 4,
+  UNRECOGNIZED = -1,
+}
 export function property_PropertyTypeFromJSON(object: any): Property_PropertyType {
   switch (object) {
     case 0:
@@ -94,6 +113,29 @@ export interface ProjectProperties {
 }
 
 /**
+ * A descriptor for defining project properties for a service. One service may
+ * have many consumer projects, and the service may want to behave differently
+ * depending on some properties on the project. For example, a project may be
+ * associated with a school, or a business, or a government agency, a business
+ * type property on the project may affect how a service responds to the client.
+ * This descriptor defines which properties are allowed to be set on a project.
+ * 
+ * Example:
+ * 
+ * project_properties:
+ * properties:
+ * - name: NO_WATERMARK
+ * type: BOOL
+ * description: Allows usage of the API without watermarks.
+ * - name: EXTENDED_TILE_CACHE_PERIOD
+ * type: INT64
+ */
+export interface ProjectPropertiesSDKType {
+  /** List of per consumer project-specific properties. */
+  properties: PropertySDKType[];
+}
+
+/**
  * Defines project properties.
  * 
  * API services can define properties that can be assigned to consumer projects
@@ -111,6 +153,29 @@ export interface Property {
 
   /** The type of this property. */
   type: Property_PropertyType;
+
+  /** The description of the property */
+  description: string;
+}
+
+/**
+ * Defines project properties.
+ * 
+ * API services can define properties that can be assigned to consumer projects
+ * so that backends can perform response customization without having to make
+ * additional calls or maintain additional storage. For example, Maps API
+ * defines properties that controls map tile cache period, or whether to embed a
+ * watermark in a result.
+ * 
+ * These values can be set via API producer console. Only API providers can
+ * define and set these properties.
+ */
+export interface PropertySDKType {
+  /** The name of the property (a.k.a key). */
+  name: string;
+
+  /** The type of this property. */
+  type: Property_PropertyTypeSDKType;
 
   /** The description of the property */
   description: string;
@@ -175,6 +240,24 @@ export const ProjectProperties = {
     const message = createBaseProjectProperties();
     message.properties = object.properties?.map(e => Property.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: ProjectPropertiesSDKType): ProjectProperties {
+    return {
+      properties: Array.isArray(object?.properties) ? object.properties.map((e: any) => Property.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: ProjectProperties): ProjectPropertiesSDKType {
+    const obj: any = {};
+
+    if (message.properties) {
+      obj.properties = message.properties.map(e => e ? Property.toSDK(e) : undefined);
+    } else {
+      obj.properties = [];
+    }
+
+    return obj;
   }
 
 };
@@ -256,6 +339,22 @@ export const Property = {
     message.type = object.type ?? 0;
     message.description = object.description ?? "";
     return message;
+  },
+
+  fromSDK(object: PropertySDKType): Property {
+    return {
+      name: isSet(object.name) ? object.name : undefined,
+      type: isSet(object.type) ? property_PropertyTypeFromJSON(object.type) : 0,
+      description: isSet(object.description) ? object.description : undefined
+    };
+  },
+
+  toSDK(message: Property): PropertySDKType {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    message.type !== undefined && (obj.type = property_PropertyTypeToJSON(message.type));
+    message.description !== undefined && (obj.description = message.description);
+    return obj;
   }
 
 };

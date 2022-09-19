@@ -1,4 +1,4 @@
-import { Provider } from "./provider";
+import { Provider, ProviderSDKType } from "./provider";
 import * as _m0 from "protobufjs/minimal";
 import { DeepPartial, Exact } from "@osmonauts/helpers";
 export const protobufPackage = "akash.provider.v1beta2";
@@ -6,6 +6,11 @@ export const protobufPackage = "akash.provider.v1beta2";
 /** GenesisState defines the basic genesis state used by provider module */
 export interface GenesisState {
   providers: Provider[];
+}
+
+/** GenesisState defines the basic genesis state used by provider module */
+export interface GenesisStateSDKType {
+  providers: ProviderSDKType[];
 }
 
 function createBaseGenesisState(): GenesisState {
@@ -67,6 +72,24 @@ export const GenesisState = {
     const message = createBaseGenesisState();
     message.providers = object.providers?.map(e => Provider.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: GenesisStateSDKType): GenesisState {
+    return {
+      providers: Array.isArray(object?.providers) ? object.providers.map((e: any) => Provider.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: GenesisState): GenesisStateSDKType {
+    const obj: any = {};
+
+    if (message.providers) {
+      obj.providers = message.providers.map(e => e ? Provider.toSDK(e) : undefined);
+    } else {
+      obj.providers = [];
+    }
+
+    return obj;
   }
 
 };

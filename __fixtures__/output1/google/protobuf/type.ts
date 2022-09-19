@@ -1,11 +1,72 @@
-import { SourceContext } from "./source_context";
-import { Any } from "./any";
+import { SourceContext, SourceContextSDKType } from "./source_context";
+import { Any, AnySDKType } from "./any";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "@osmonauts/helpers";
 export const protobufPackage = "google.protobuf";
 
 /** Basic field types. */
 export enum Field_Kind {
+  /** TYPE_UNKNOWN - Field type unknown. */
+  TYPE_UNKNOWN = 0,
+
+  /** TYPE_DOUBLE - Field type double. */
+  TYPE_DOUBLE = 1,
+
+  /** TYPE_FLOAT - Field type float. */
+  TYPE_FLOAT = 2,
+
+  /** TYPE_INT64 - Field type int64. */
+  TYPE_INT64 = 3,
+
+  /** TYPE_UINT64 - Field type uint64. */
+  TYPE_UINT64 = 4,
+
+  /** TYPE_INT32 - Field type int32. */
+  TYPE_INT32 = 5,
+
+  /** TYPE_FIXED64 - Field type fixed64. */
+  TYPE_FIXED64 = 6,
+
+  /** TYPE_FIXED32 - Field type fixed32. */
+  TYPE_FIXED32 = 7,
+
+  /** TYPE_BOOL - Field type bool. */
+  TYPE_BOOL = 8,
+
+  /** TYPE_STRING - Field type string. */
+  TYPE_STRING = 9,
+
+  /** TYPE_GROUP - Field type group. Proto2 syntax only, and deprecated. */
+  TYPE_GROUP = 10,
+
+  /** TYPE_MESSAGE - Field type message. */
+  TYPE_MESSAGE = 11,
+
+  /** TYPE_BYTES - Field type bytes. */
+  TYPE_BYTES = 12,
+
+  /** TYPE_UINT32 - Field type uint32. */
+  TYPE_UINT32 = 13,
+
+  /** TYPE_ENUM - Field type enum. */
+  TYPE_ENUM = 14,
+
+  /** TYPE_SFIXED32 - Field type sfixed32. */
+  TYPE_SFIXED32 = 15,
+
+  /** TYPE_SFIXED64 - Field type sfixed64. */
+  TYPE_SFIXED64 = 16,
+
+  /** TYPE_SINT32 - Field type sint32. */
+  TYPE_SINT32 = 17,
+
+  /** TYPE_SINT64 - Field type sint64. */
+  TYPE_SINT64 = 18,
+  UNRECOGNIZED = -1,
+}
+
+/** Basic field types. */
+export enum Field_KindSDKType {
   /** TYPE_UNKNOWN - Field type unknown. */
   TYPE_UNKNOWN = 0,
 
@@ -227,6 +288,22 @@ export enum Field_Cardinality {
   CARDINALITY_REPEATED = 3,
   UNRECOGNIZED = -1,
 }
+
+/** Whether a field is optional, required, or repeated. */
+export enum Field_CardinalitySDKType {
+  /** CARDINALITY_UNKNOWN - For fields with unknown cardinality. */
+  CARDINALITY_UNKNOWN = 0,
+
+  /** CARDINALITY_OPTIONAL - For optional fields. */
+  CARDINALITY_OPTIONAL = 1,
+
+  /** CARDINALITY_REQUIRED - For required fields. Proto2 syntax only. */
+  CARDINALITY_REQUIRED = 2,
+
+  /** CARDINALITY_REPEATED - For repeated fields. */
+  CARDINALITY_REPEATED = 3,
+  UNRECOGNIZED = -1,
+}
 export function field_CardinalityFromJSON(object: any): Field_Cardinality {
   switch (object) {
     case 0:
@@ -272,6 +349,16 @@ export function field_CardinalityToJSON(object: Field_Cardinality): string {
 
 /** The syntax in which a protocol buffer element is defined. */
 export enum Syntax {
+  /** SYNTAX_PROTO2 - Syntax `proto2`. */
+  SYNTAX_PROTO2 = 0,
+
+  /** SYNTAX_PROTO3 - Syntax `proto3`. */
+  SYNTAX_PROTO3 = 1,
+  UNRECOGNIZED = -1,
+}
+
+/** The syntax in which a protocol buffer element is defined. */
+export enum SyntaxSDKType {
   /** SYNTAX_PROTO2 - Syntax `proto2`. */
   SYNTAX_PROTO2 = 0,
 
@@ -329,6 +416,27 @@ export interface Type {
   syntax: Syntax;
 }
 
+/** A protocol buffer message type. */
+export interface TypeSDKType {
+  /** The fully qualified message name. */
+  name: string;
+
+  /** The list of fields. */
+  fields: FieldSDKType[];
+
+  /** The list of types appearing in `oneof` definitions in this type. */
+  oneofs: string[];
+
+  /** The protocol buffer options. */
+  options: OptionSDKType[];
+
+  /** The source context. */
+  source_context: SourceContextSDKType;
+
+  /** The source syntax. */
+  syntax: SyntaxSDKType;
+}
+
 /** A single field of a message type. */
 export interface Field {
   /** The field type. */
@@ -368,6 +476,45 @@ export interface Field {
   defaultValue: string;
 }
 
+/** A single field of a message type. */
+export interface FieldSDKType {
+  /** The field type. */
+  kind: Field_KindSDKType;
+
+  /** The field cardinality. */
+  cardinality: Field_CardinalitySDKType;
+
+  /** The field number. */
+  number: number;
+
+  /** The field name. */
+  name: string;
+
+  /**
+   * The field type URL, without the scheme, for message or enumeration
+   * types. Example: `"type.googleapis.com/google.protobuf.Timestamp"`.
+   */
+  type_url: string;
+
+  /**
+   * The index of the field type in `Type.oneofs`, for message or enumeration
+   * types. The first type has index 1; zero means the type is not in the list.
+   */
+  oneof_index: number;
+
+  /** Whether to use alternative packed wire representation. */
+  packed: boolean;
+
+  /** The protocol buffer options. */
+  options: OptionSDKType[];
+
+  /** The field JSON name. */
+  json_name: string;
+
+  /** The string value of the default value of this field. Proto2 syntax only. */
+  default_value: string;
+}
+
 /** Enum type definition. */
 export interface Enum {
   /** Enum type name. */
@@ -386,6 +533,24 @@ export interface Enum {
   syntax: Syntax;
 }
 
+/** Enum type definition. */
+export interface EnumSDKType {
+  /** Enum type name. */
+  name: string;
+
+  /** Enum value definitions. */
+  enumvalue: EnumValueSDKType[];
+
+  /** Protocol buffer options. */
+  options: OptionSDKType[];
+
+  /** The source context. */
+  source_context: SourceContextSDKType;
+
+  /** The source syntax. */
+  syntax: SyntaxSDKType;
+}
+
 /** Enum value definition. */
 export interface EnumValue {
   /** Enum value name. */
@@ -396,6 +561,18 @@ export interface EnumValue {
 
   /** Protocol buffer options. */
   options: Option[];
+}
+
+/** Enum value definition. */
+export interface EnumValueSDKType {
+  /** Enum value name. */
+  name: string;
+
+  /** Enum value number. */
+  number: number;
+
+  /** Protocol buffer options. */
+  options: OptionSDKType[];
 }
 
 /**
@@ -418,6 +595,28 @@ export interface Option {
    * value using the google.protobuf.Int32Value type.
    */
   value: Any;
+}
+
+/**
+ * A protocol buffer option, which can be attached to a message, field,
+ * enumeration, etc.
+ */
+export interface OptionSDKType {
+  /**
+   * The option's name. For protobuf built-in options (options defined in
+   * descriptor.proto), this is the short name. For example, `"map_entry"`.
+   * For custom options, it should be the fully-qualified name. For example,
+   * `"google.api.http"`.
+   */
+  name: string;
+
+  /**
+   * The option's value packed in an Any message. If the value is a primitive,
+   * the corresponding wrapper type defined in google/protobuf/wrappers.proto
+   * should be used. If the value is an enum, it should be stored as an int32
+   * value using the google.protobuf.Int32Value type.
+   */
+  value: AnySDKType;
 }
 
 function createBaseType(): Type {
@@ -549,6 +748,44 @@ export const Type = {
     message.sourceContext = object.sourceContext !== undefined && object.sourceContext !== null ? SourceContext.fromPartial(object.sourceContext) : undefined;
     message.syntax = object.syntax ?? 0;
     return message;
+  },
+
+  fromSDK(object: TypeSDKType): Type {
+    return {
+      name: isSet(object.name) ? object.name : undefined,
+      fields: Array.isArray(object?.fields) ? object.fields.map((e: any) => Field.fromSDK(e)) : [],
+      oneofs: Array.isArray(object?.oneofs) ? object.oneofs.map((e: any) => e) : [],
+      options: Array.isArray(object?.options) ? object.options.map((e: any) => Option.fromSDK(e)) : [],
+      sourceContext: isSet(object.source_context) ? SourceContext.fromSDK(object.source_context) : undefined,
+      syntax: isSet(object.syntax) ? syntaxFromJSON(object.syntax) : 0
+    };
+  },
+
+  toSDK(message: Type): TypeSDKType {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+
+    if (message.fields) {
+      obj.fields = message.fields.map(e => e ? Field.toSDK(e) : undefined);
+    } else {
+      obj.fields = [];
+    }
+
+    if (message.oneofs) {
+      obj.oneofs = message.oneofs.map(e => e);
+    } else {
+      obj.oneofs = [];
+    }
+
+    if (message.options) {
+      obj.options = message.options.map(e => e ? Option.toSDK(e) : undefined);
+    } else {
+      obj.options = [];
+    }
+
+    message.sourceContext !== undefined && (obj.source_context = message.sourceContext ? SourceContext.toSDK(message.sourceContext) : undefined);
+    message.syntax !== undefined && (obj.syntax = syntaxToJSON(message.syntax));
+    return obj;
   }
 
 };
@@ -720,6 +957,42 @@ export const Field = {
     message.jsonName = object.jsonName ?? "";
     message.defaultValue = object.defaultValue ?? "";
     return message;
+  },
+
+  fromSDK(object: FieldSDKType): Field {
+    return {
+      kind: isSet(object.kind) ? field_KindFromJSON(object.kind) : 0,
+      cardinality: isSet(object.cardinality) ? field_CardinalityFromJSON(object.cardinality) : 0,
+      number: isSet(object.number) ? object.number : undefined,
+      name: isSet(object.name) ? object.name : undefined,
+      typeUrl: isSet(object.type_url) ? object.type_url : undefined,
+      oneofIndex: isSet(object.oneof_index) ? object.oneof_index : undefined,
+      packed: isSet(object.packed) ? object.packed : undefined,
+      options: Array.isArray(object?.options) ? object.options.map((e: any) => Option.fromSDK(e)) : [],
+      jsonName: isSet(object.json_name) ? object.json_name : undefined,
+      defaultValue: isSet(object.default_value) ? object.default_value : undefined
+    };
+  },
+
+  toSDK(message: Field): FieldSDKType {
+    const obj: any = {};
+    message.kind !== undefined && (obj.kind = field_KindToJSON(message.kind));
+    message.cardinality !== undefined && (obj.cardinality = field_CardinalityToJSON(message.cardinality));
+    message.number !== undefined && (obj.number = message.number);
+    message.name !== undefined && (obj.name = message.name);
+    message.typeUrl !== undefined && (obj.type_url = message.typeUrl);
+    message.oneofIndex !== undefined && (obj.oneof_index = message.oneofIndex);
+    message.packed !== undefined && (obj.packed = message.packed);
+
+    if (message.options) {
+      obj.options = message.options.map(e => e ? Option.toSDK(e) : undefined);
+    } else {
+      obj.options = [];
+    }
+
+    message.jsonName !== undefined && (obj.json_name = message.jsonName);
+    message.defaultValue !== undefined && (obj.default_value = message.defaultValue);
+    return obj;
   }
 
 };
@@ -836,6 +1109,37 @@ export const Enum = {
     message.sourceContext = object.sourceContext !== undefined && object.sourceContext !== null ? SourceContext.fromPartial(object.sourceContext) : undefined;
     message.syntax = object.syntax ?? 0;
     return message;
+  },
+
+  fromSDK(object: EnumSDKType): Enum {
+    return {
+      name: isSet(object.name) ? object.name : undefined,
+      enumvalue: Array.isArray(object?.enumvalue) ? object.enumvalue.map((e: any) => EnumValue.fromSDK(e)) : [],
+      options: Array.isArray(object?.options) ? object.options.map((e: any) => Option.fromSDK(e)) : [],
+      sourceContext: isSet(object.source_context) ? SourceContext.fromSDK(object.source_context) : undefined,
+      syntax: isSet(object.syntax) ? syntaxFromJSON(object.syntax) : 0
+    };
+  },
+
+  toSDK(message: Enum): EnumSDKType {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+
+    if (message.enumvalue) {
+      obj.enumvalue = message.enumvalue.map(e => e ? EnumValue.toSDK(e) : undefined);
+    } else {
+      obj.enumvalue = [];
+    }
+
+    if (message.options) {
+      obj.options = message.options.map(e => e ? Option.toSDK(e) : undefined);
+    } else {
+      obj.options = [];
+    }
+
+    message.sourceContext !== undefined && (obj.source_context = message.sourceContext ? SourceContext.toSDK(message.sourceContext) : undefined);
+    message.syntax !== undefined && (obj.syntax = syntaxToJSON(message.syntax));
+    return obj;
   }
 
 };
@@ -923,6 +1227,28 @@ export const EnumValue = {
     message.number = object.number ?? 0;
     message.options = object.options?.map(e => Option.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: EnumValueSDKType): EnumValue {
+    return {
+      name: isSet(object.name) ? object.name : undefined,
+      number: isSet(object.number) ? object.number : undefined,
+      options: Array.isArray(object?.options) ? object.options.map((e: any) => Option.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: EnumValue): EnumValueSDKType {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    message.number !== undefined && (obj.number = message.number);
+
+    if (message.options) {
+      obj.options = message.options.map(e => e ? Option.toSDK(e) : undefined);
+    } else {
+      obj.options = [];
+    }
+
+    return obj;
   }
 
 };
@@ -992,6 +1318,20 @@ export const Option = {
     message.name = object.name ?? "";
     message.value = object.value !== undefined && object.value !== null ? Any.fromPartial(object.value) : undefined;
     return message;
+  },
+
+  fromSDK(object: OptionSDKType): Option {
+    return {
+      name: isSet(object.name) ? object.name : undefined,
+      value: isSet(object.value) ? Any.fromSDK(object.value) : undefined
+    };
+  },
+
+  toSDK(message: Option): OptionSDKType {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    message.value !== undefined && (obj.value = message.value ? Any.toSDK(message.value) : undefined);
+    return obj;
   }
 
 };

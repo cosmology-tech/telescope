@@ -1,10 +1,14 @@
-import { FeeToken } from "./feetoken";
+import { FeeToken, FeeTokenSDKType } from "./feetoken";
 import * as _m0 from "protobufjs/minimal";
 import { DeepPartial, isSet, Long } from "@osmonauts/helpers";
 export const protobufPackage = "osmosis.txfees.v1beta1";
 export interface QueryFeeTokensRequest {}
+export interface QueryFeeTokensRequestSDKType {}
 export interface QueryFeeTokensResponse {
   feeTokens: FeeToken[];
+}
+export interface QueryFeeTokensResponseSDKType {
+  fee_tokens: FeeTokenSDKType[];
 }
 
 /**
@@ -16,6 +20,14 @@ export interface QueryDenomSpotPriceRequest {
 }
 
 /**
+ * QueryDenomSpotPriceRequest defines grpc request structure for querying spot
+ * price for the specified tx fee denom
+ */
+export interface QueryDenomSpotPriceRequestSDKType {
+  denom?: string;
+}
+
+/**
  * QueryDenomSpotPriceRequest defines grpc response structure for querying spot
  * price for the specified tx fee denom
  */
@@ -23,15 +35,34 @@ export interface QueryDenomSpotPriceResponse {
   poolID: Long;
   spotPrice: string;
 }
+
+/**
+ * QueryDenomSpotPriceRequest defines grpc response structure for querying spot
+ * price for the specified tx fee denom
+ */
+export interface QueryDenomSpotPriceResponseSDKType {
+  poolID: Long;
+  spot_price: string;
+}
 export interface QueryDenomPoolIdRequest {
+  denom: string;
+}
+export interface QueryDenomPoolIdRequestSDKType {
   denom: string;
 }
 export interface QueryDenomPoolIdResponse {
   poolID: Long;
 }
+export interface QueryDenomPoolIdResponseSDKType {
+  poolID: Long;
+}
 export interface QueryBaseDenomRequest {}
+export interface QueryBaseDenomRequestSDKType {}
 export interface QueryBaseDenomResponse {
   baseDenom: string;
+}
+export interface QueryBaseDenomResponseSDKType {
+  base_denom: string;
 }
 
 function createBaseQueryFeeTokensRequest(): QueryFeeTokensRequest {
@@ -73,6 +104,15 @@ export const QueryFeeTokensRequest = {
   fromPartial(_: DeepPartial<QueryFeeTokensRequest>): QueryFeeTokensRequest {
     const message = createBaseQueryFeeTokensRequest();
     return message;
+  },
+
+  fromSDK(_: QueryFeeTokensRequestSDKType): QueryFeeTokensRequest {
+    return {};
+  },
+
+  toSDK(_: QueryFeeTokensRequest): QueryFeeTokensRequestSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -92,7 +132,7 @@ export const QueryFeeTokensResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryFeeTokensResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryFeeTokensResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryFeeTokensResponse();
@@ -136,6 +176,24 @@ export const QueryFeeTokensResponse = {
     const message = createBaseQueryFeeTokensResponse();
     message.feeTokens = object.feeTokens?.map(e => FeeToken.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: QueryFeeTokensResponseSDKType): QueryFeeTokensResponse {
+    return {
+      feeTokens: Array.isArray(object?.fee_tokens) ? object.fee_tokens.map((e: any) => FeeToken.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: QueryFeeTokensResponse): QueryFeeTokensResponseSDKType {
+    const obj: any = {};
+
+    if (message.feeTokens) {
+      obj.fee_tokens = message.feeTokens.map(e => e ? FeeToken.toSDK(e) : undefined);
+    } else {
+      obj.fee_tokens = [];
+    }
+
+    return obj;
   }
 
 };
@@ -193,6 +251,18 @@ export const QueryDenomSpotPriceRequest = {
     const message = createBaseQueryDenomSpotPriceRequest();
     message.denom = object.denom ?? "";
     return message;
+  },
+
+  fromSDK(object: QueryDenomSpotPriceRequestSDKType): QueryDenomSpotPriceRequest {
+    return {
+      denom: isSet(object.denom) ? object.denom : undefined
+    };
+  },
+
+  toSDK(message: QueryDenomSpotPriceRequest): QueryDenomSpotPriceRequestSDKType {
+    const obj: any = {};
+    message.denom !== undefined && (obj.denom = message.denom);
+    return obj;
   }
 
 };
@@ -217,7 +287,7 @@ export const QueryDenomSpotPriceResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryDenomSpotPriceResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryDenomSpotPriceResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDenomSpotPriceResponse();
@@ -262,6 +332,20 @@ export const QueryDenomSpotPriceResponse = {
     message.poolID = object.poolID !== undefined && object.poolID !== null ? Long.fromValue(object.poolID) : Long.UZERO;
     message.spotPrice = object.spotPrice ?? "";
     return message;
+  },
+
+  fromSDK(object: QueryDenomSpotPriceResponseSDKType): QueryDenomSpotPriceResponse {
+    return {
+      poolID: isSet(object.poolID) ? object.poolID : undefined,
+      spotPrice: isSet(object.spot_price) ? object.spot_price : undefined
+    };
+  },
+
+  toSDK(message: QueryDenomSpotPriceResponse): QueryDenomSpotPriceResponseSDKType {
+    const obj: any = {};
+    message.poolID !== undefined && (obj.poolID = message.poolID);
+    message.spotPrice !== undefined && (obj.spot_price = message.spotPrice);
+    return obj;
   }
 
 };
@@ -319,6 +403,18 @@ export const QueryDenomPoolIdRequest = {
     const message = createBaseQueryDenomPoolIdRequest();
     message.denom = object.denom ?? "";
     return message;
+  },
+
+  fromSDK(object: QueryDenomPoolIdRequestSDKType): QueryDenomPoolIdRequest {
+    return {
+      denom: isSet(object.denom) ? object.denom : undefined
+    };
+  },
+
+  toSDK(message: QueryDenomPoolIdRequest): QueryDenomPoolIdRequestSDKType {
+    const obj: any = {};
+    message.denom !== undefined && (obj.denom = message.denom);
+    return obj;
   }
 
 };
@@ -338,7 +434,7 @@ export const QueryDenomPoolIdResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryDenomPoolIdResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryDenomPoolIdResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDenomPoolIdResponse();
@@ -376,6 +472,18 @@ export const QueryDenomPoolIdResponse = {
     const message = createBaseQueryDenomPoolIdResponse();
     message.poolID = object.poolID !== undefined && object.poolID !== null ? Long.fromValue(object.poolID) : Long.UZERO;
     return message;
+  },
+
+  fromSDK(object: QueryDenomPoolIdResponseSDKType): QueryDenomPoolIdResponse {
+    return {
+      poolID: isSet(object.poolID) ? object.poolID : undefined
+    };
+  },
+
+  toSDK(message: QueryDenomPoolIdResponse): QueryDenomPoolIdResponseSDKType {
+    const obj: any = {};
+    message.poolID !== undefined && (obj.poolID = message.poolID);
+    return obj;
   }
 
 };
@@ -419,6 +527,15 @@ export const QueryBaseDenomRequest = {
   fromPartial(_: DeepPartial<QueryBaseDenomRequest>): QueryBaseDenomRequest {
     const message = createBaseQueryBaseDenomRequest();
     return message;
+  },
+
+  fromSDK(_: QueryBaseDenomRequestSDKType): QueryBaseDenomRequest {
+    return {};
+  },
+
+  toSDK(_: QueryBaseDenomRequest): QueryBaseDenomRequestSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -438,7 +555,7 @@ export const QueryBaseDenomResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryBaseDenomResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryBaseDenomResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryBaseDenomResponse();
@@ -476,6 +593,18 @@ export const QueryBaseDenomResponse = {
     const message = createBaseQueryBaseDenomResponse();
     message.baseDenom = object.baseDenom ?? "";
     return message;
+  },
+
+  fromSDK(object: QueryBaseDenomResponseSDKType): QueryBaseDenomResponse {
+    return {
+      baseDenom: isSet(object.base_denom) ? object.base_denom : undefined
+    };
+  },
+
+  toSDK(message: QueryBaseDenomResponse): QueryBaseDenomResponseSDKType {
+    const obj: any = {};
+    message.baseDenom !== undefined && (obj.base_denom = message.baseDenom);
+    return obj;
   }
 
 };

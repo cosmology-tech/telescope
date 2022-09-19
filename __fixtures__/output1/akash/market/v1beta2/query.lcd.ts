@@ -1,11 +1,11 @@
-import { OrderFilters, OrderID, Order } from "./order";
-import { PageRequest, PageResponse } from "../../../cosmos/base/query/v1beta1/pagination";
-import { BidFilters, BidID, Bid } from "./bid";
-import { LeaseFilters, LeaseID, Lease } from "./lease";
-import { Account, FractionalPayment } from "../../escrow/v1beta2/types";
+import { OrderFilters, OrderFiltersSDKType, OrderID, OrderIDSDKType, Order, OrderSDKType } from "./order";
+import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
+import { BidFilters, BidFiltersSDKType, BidID, BidIDSDKType, Bid, BidSDKType } from "./bid";
+import { LeaseFilters, LeaseFiltersSDKType, LeaseID, LeaseIDSDKType, Lease, LeaseSDKType } from "./lease";
+import { Account, AccountSDKType, FractionalPayment, FractionalPaymentSDKType } from "../../escrow/v1beta2/types";
 import { setPaginationParams } from "@osmonauts/helpers";
 import { LCDClient } from "@osmonauts/lcd";
-import { QueryOrdersRequest, QueryOrdersResponse, QueryOrderRequest, QueryOrderResponse, QueryBidsRequest, QueryBidsResponse, QueryBidRequest, QueryBidResponse, QueryLeasesRequest, QueryLeasesResponse, QueryLeaseRequest, QueryLeaseResponse } from "./query";
+import { QueryOrdersRequest, QueryOrdersRequestSDKType, QueryOrdersResponse, QueryOrdersResponseSDKType, QueryOrderRequest, QueryOrderRequestSDKType, QueryOrderResponse, QueryOrderResponseSDKType, QueryBidsRequest, QueryBidsRequestSDKType, QueryBidsResponse, QueryBidsResponseSDKType, QueryBidRequest, QueryBidRequestSDKType, QueryBidResponse, QueryBidResponseSDKType, QueryLeasesRequest, QueryLeasesRequestSDKType, QueryLeasesResponse, QueryLeasesResponseSDKType, QueryLeaseRequest, QueryLeaseRequestSDKType, QueryLeaseResponse, QueryLeaseResponseSDKType } from "./query";
 export class LCDQueryClient extends LCDClient {
   constructor({
     restEndpoint
@@ -18,7 +18,7 @@ export class LCDQueryClient extends LCDClient {
   }
 
   /* Orders queries orders with filters */
-  async orders(params: QueryOrdersRequest): Promise<QueryOrdersResponse> {
+  async orders(params: QueryOrdersRequest): Promise<QueryOrdersResponseSDKType> {
     const options: any = {
       params: {}
     };
@@ -32,11 +32,11 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `akash/market/v1beta2/orders/list`;
-    return await this.get<QueryOrdersResponse>(endpoint, options);
+    return await this.get<QueryOrdersResponseSDKType>(endpoint, options);
   }
 
   /* Order queries order details */
-  async order(params: QueryOrderRequest): Promise<QueryOrderResponse> {
+  async order(params: QueryOrderRequest): Promise<QueryOrderResponseSDKType> {
     const options: any = {
       params: {}
     };
@@ -46,11 +46,11 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `akash/market/v1beta2/orders/info`;
-    return await this.get<QueryOrderResponse>(endpoint, options);
+    return await this.get<QueryOrderResponseSDKType>(endpoint, options);
   }
 
   /* Bids queries bids with filters */
-  async bids(params: QueryBidsRequest): Promise<QueryBidsResponse> {
+  async bids(params: QueryBidsRequest): Promise<QueryBidsResponseSDKType> {
     const options: any = {
       params: {}
     };
@@ -64,11 +64,11 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `akash/market/v1beta2/bids/list`;
-    return await this.get<QueryBidsResponse>(endpoint, options);
+    return await this.get<QueryBidsResponseSDKType>(endpoint, options);
   }
 
   /* Bid queries bid details */
-  async bid(params: QueryBidRequest): Promise<QueryBidResponse> {
+  async bid(params: QueryBidRequest): Promise<QueryBidResponseSDKType> {
     const options: any = {
       params: {}
     };
@@ -78,11 +78,11 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `akash/market/v1beta2/bids/info`;
-    return await this.get<QueryBidResponse>(endpoint, options);
+    return await this.get<QueryBidResponseSDKType>(endpoint, options);
   }
 
   /* Leases queries leases with filters */
-  async leases(params: QueryLeasesRequest): Promise<QueryLeasesResponse> {
+  async leases(params: QueryLeasesRequest): Promise<QueryLeasesResponseSDKType> {
     const options: any = {
       params: {}
     };
@@ -96,11 +96,11 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `akash/market/v1beta2/leases/list`;
-    return await this.get<QueryLeasesResponse>(endpoint, options);
+    return await this.get<QueryLeasesResponseSDKType>(endpoint, options);
   }
 
   /* Lease queries lease details */
-  async lease(params: QueryLeaseRequest): Promise<QueryLeaseResponse> {
+  async lease(params: QueryLeaseRequest): Promise<QueryLeaseResponseSDKType> {
     const options: any = {
       params: {}
     };
@@ -110,7 +110,7 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `akash/market/v1beta2/leases/info`;
-    return await this.get<QueryLeaseResponse>(endpoint, options);
+    return await this.get<QueryLeaseResponseSDKType>(endpoint, options);
   }
 
 }

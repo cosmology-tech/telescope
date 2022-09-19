@@ -1,10 +1,26 @@
-import { GroupSpec } from "../../deployment/v1beta2/groupspec";
+import { GroupSpec, GroupSpecSDKType } from "../../deployment/v1beta2/groupspec";
 import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, DeepPartial, Exact } from "@osmonauts/helpers";
 export const protobufPackage = "akash.market.v1beta2";
 
 /** State is an enum which refers to state of order */
 export enum Order_State {
+  /** invalid - Prefix should start with 0 in enum. So declaring dummy state */
+  invalid = 0,
+
+  /** open - OrderOpen denotes state for order open */
+  open = 1,
+
+  /** active - OrderMatched denotes state for order matched */
+  active = 2,
+
+  /** closed - OrderClosed denotes state for order lost */
+  closed = 3,
+  UNRECOGNIZED = -1,
+}
+
+/** State is an enum which refers to state of order */
+export enum Order_StateSDKType {
   /** invalid - Prefix should start with 0 in enum. So declaring dummy state */
   invalid = 0,
 
@@ -69,6 +85,14 @@ export interface OrderID {
   oseq: number;
 }
 
+/** OrderID stores owner and all other seq numbers */
+export interface OrderIDSDKType {
+  owner: string;
+  dseq: Long;
+  gseq: number;
+  oseq: number;
+}
+
 /** Order stores orderID, state of order and other details */
 export interface Order {
   orderId: OrderID;
@@ -77,8 +101,25 @@ export interface Order {
   createdAt: Long;
 }
 
+/** Order stores orderID, state of order and other details */
+export interface OrderSDKType {
+  order_id: OrderIDSDKType;
+  state: Order_StateSDKType;
+  spec: GroupSpecSDKType;
+  created_at: Long;
+}
+
 /** OrderFilters defines flags for order list filter */
 export interface OrderFilters {
+  owner: string;
+  dseq: Long;
+  gseq: number;
+  oseq: number;
+  state: string;
+}
+
+/** OrderFilters defines flags for order list filter */
+export interface OrderFiltersSDKType {
   owner: string;
   dseq: Long;
   gseq: number;
@@ -175,6 +216,24 @@ export const OrderID = {
     message.gseq = object.gseq ?? 0;
     message.oseq = object.oseq ?? 0;
     return message;
+  },
+
+  fromSDK(object: OrderIDSDKType): OrderID {
+    return {
+      owner: isSet(object.owner) ? object.owner : undefined,
+      dseq: isSet(object.dseq) ? object.dseq : undefined,
+      gseq: isSet(object.gseq) ? object.gseq : undefined,
+      oseq: isSet(object.oseq) ? object.oseq : undefined
+    };
+  },
+
+  toSDK(message: OrderID): OrderIDSDKType {
+    const obj: any = {};
+    message.owner !== undefined && (obj.owner = message.owner);
+    message.dseq !== undefined && (obj.dseq = message.dseq);
+    message.gseq !== undefined && (obj.gseq = message.gseq);
+    message.oseq !== undefined && (obj.oseq = message.oseq);
+    return obj;
   }
 
 };
@@ -268,6 +327,24 @@ export const Order = {
     message.spec = object.spec !== undefined && object.spec !== null ? GroupSpec.fromPartial(object.spec) : undefined;
     message.createdAt = object.createdAt !== undefined && object.createdAt !== null ? Long.fromValue(object.createdAt) : Long.ZERO;
     return message;
+  },
+
+  fromSDK(object: OrderSDKType): Order {
+    return {
+      orderId: isSet(object.order_id) ? OrderID.fromSDK(object.order_id) : undefined,
+      state: isSet(object.state) ? order_StateFromJSON(object.state) : 0,
+      spec: isSet(object.spec) ? GroupSpec.fromSDK(object.spec) : undefined,
+      createdAt: isSet(object.created_at) ? object.created_at : undefined
+    };
+  },
+
+  toSDK(message: Order): OrderSDKType {
+    const obj: any = {};
+    message.orderId !== undefined && (obj.order_id = message.orderId ? OrderID.toSDK(message.orderId) : undefined);
+    message.state !== undefined && (obj.state = order_StateToJSON(message.state));
+    message.spec !== undefined && (obj.spec = message.spec ? GroupSpec.toSDK(message.spec) : undefined);
+    message.createdAt !== undefined && (obj.created_at = message.createdAt);
+    return obj;
   }
 
 };
@@ -373,6 +450,26 @@ export const OrderFilters = {
     message.oseq = object.oseq ?? 0;
     message.state = object.state ?? "";
     return message;
+  },
+
+  fromSDK(object: OrderFiltersSDKType): OrderFilters {
+    return {
+      owner: isSet(object.owner) ? object.owner : undefined,
+      dseq: isSet(object.dseq) ? object.dseq : undefined,
+      gseq: isSet(object.gseq) ? object.gseq : undefined,
+      oseq: isSet(object.oseq) ? object.oseq : undefined,
+      state: isSet(object.state) ? object.state : undefined
+    };
+  },
+
+  toSDK(message: OrderFilters): OrderFiltersSDKType {
+    const obj: any = {};
+    message.owner !== undefined && (obj.owner = message.owner);
+    message.dseq !== undefined && (obj.dseq = message.dseq);
+    message.gseq !== undefined && (obj.gseq = message.gseq);
+    message.oseq !== undefined && (obj.oseq = message.oseq);
+    message.state !== undefined && (obj.state = message.state);
+    return obj;
   }
 
 };

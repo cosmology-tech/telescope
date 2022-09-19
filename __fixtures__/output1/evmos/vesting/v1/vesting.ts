@@ -1,5 +1,5 @@
-import { BaseVestingAccount, Period } from "../../../cosmos/vesting/v1beta1/vesting";
-import { Timestamp } from "../../../google/protobuf/timestamp";
+import { BaseVestingAccount, BaseVestingAccountSDKType, Period, PeriodSDKType } from "../../../cosmos/vesting/v1beta1/vesting";
+import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
 import * as _m0 from "protobufjs/minimal";
 import { toTimestamp, fromTimestamp, isSet, fromJsonTimestamp, DeepPartial } from "@osmonauts/helpers";
 export const protobufPackage = "evmos.vesting.v1";
@@ -28,6 +28,32 @@ export interface ClawbackVestingAccount {
 
   /** vesting_periods defines the vesting schedule relative to the start_time */
   vestingPeriods: Period[];
+}
+
+/**
+ * ClawbackVestingAccount implements the VestingAccount interface. It provides
+ * an account that can hold contributions subject to "lockup" (like a
+ * PeriodicVestingAccount), or vesting which is subject to clawback
+ * of unvested tokens, or a combination (tokens vest, but are still locked).
+ */
+export interface ClawbackVestingAccountSDKType {
+  /**
+   * base_vesting_account implements the VestingAccount interface. It contains
+   * all the necessary fields needed for any vesting account implementation
+   */
+  base_vesting_account: BaseVestingAccountSDKType;
+
+  /** funder_address specifies the account which can perform clawback */
+  funder_address: string;
+
+  /** start_time defines the time at which the vesting period begins */
+  start_time: Date;
+
+  /** lockup_periods defines the unlocking schedule relative to the start_time */
+  lockup_periods: PeriodSDKType[];
+
+  /** vesting_periods defines the vesting schedule relative to the start_time */
+  vesting_periods: PeriodSDKType[];
 }
 
 function createBaseClawbackVestingAccount(): ClawbackVestingAccount {
@@ -142,6 +168,37 @@ export const ClawbackVestingAccount = {
     message.lockupPeriods = object.lockupPeriods?.map(e => Period.fromPartial(e)) || [];
     message.vestingPeriods = object.vestingPeriods?.map(e => Period.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: ClawbackVestingAccountSDKType): ClawbackVestingAccount {
+    return {
+      baseVestingAccount: isSet(object.base_vesting_account) ? BaseVestingAccount.fromSDK(object.base_vesting_account) : undefined,
+      funderAddress: isSet(object.funder_address) ? object.funder_address : undefined,
+      startTime: isSet(object.start_time) ? Timestamp.fromSDK(object.start_time) : undefined,
+      lockupPeriods: Array.isArray(object?.lockup_periods) ? object.lockup_periods.map((e: any) => Period.fromSDK(e)) : [],
+      vestingPeriods: Array.isArray(object?.vesting_periods) ? object.vesting_periods.map((e: any) => Period.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: ClawbackVestingAccount): ClawbackVestingAccountSDKType {
+    const obj: any = {};
+    message.baseVestingAccount !== undefined && (obj.base_vesting_account = message.baseVestingAccount ? BaseVestingAccount.toSDK(message.baseVestingAccount) : undefined);
+    message.funderAddress !== undefined && (obj.funder_address = message.funderAddress);
+    message.startTime !== undefined && (obj.start_time = message.startTime ? Timestamp.toSDK(message.startTime) : undefined);
+
+    if (message.lockupPeriods) {
+      obj.lockup_periods = message.lockupPeriods.map(e => e ? Period.toSDK(e) : undefined);
+    } else {
+      obj.lockup_periods = [];
+    }
+
+    if (message.vestingPeriods) {
+      obj.vesting_periods = message.vestingPeriods.map(e => e ? Period.toSDK(e) : undefined);
+    } else {
+      obj.vesting_periods = [];
+    }
+
+    return obj;
   }
 
 };

@@ -11,6 +11,16 @@ export enum Endpoint_Kind {
   RANDOM_PORT = 1,
   UNRECOGNIZED = -1,
 }
+
+/** This describes how the endpoint is implemented when the lease is deployed */
+export enum Endpoint_KindSDKType {
+  /** SHARED_HTTP - Describes an endpoint that becomes a Kubernetes Ingress */
+  SHARED_HTTP = 0,
+
+  /** RANDOM_PORT - Describes an endpoint that becomes a Kubernetes NodePort */
+  RANDOM_PORT = 1,
+  UNRECOGNIZED = -1,
+}
 export function endpoint_KindFromJSON(object: any): Endpoint_Kind {
   switch (object) {
     case 0:
@@ -43,6 +53,11 @@ export function endpoint_KindToJSON(object: Endpoint_Kind): string {
 /** Endpoint describes a publicly accessible IP service */
 export interface Endpoint {
   kind: Endpoint_Kind;
+}
+
+/** Endpoint describes a publicly accessible IP service */
+export interface EndpointSDKType {
+  kind: Endpoint_KindSDKType;
 }
 
 function createBaseEndpoint(): Endpoint {
@@ -98,6 +113,18 @@ export const Endpoint = {
     const message = createBaseEndpoint();
     message.kind = object.kind ?? 0;
     return message;
+  },
+
+  fromSDK(object: EndpointSDKType): Endpoint {
+    return {
+      kind: isSet(object.kind) ? endpoint_KindFromJSON(object.kind) : 0
+    };
+  },
+
+  toSDK(message: Endpoint): EndpointSDKType {
+    const obj: any = {};
+    message.kind !== undefined && (obj.kind = endpoint_KindToJSON(message.kind));
+    return obj;
   }
 
 };

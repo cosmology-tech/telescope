@@ -65,6 +65,68 @@ export interface Distribution {
   exemplars: Distribution_Exemplar[];
 }
 
+/**
+ * Distribution represents a frequency distribution of double-valued sample
+ * points. It contains the size of the population of sample points plus
+ * additional optional information:
+ * 
+ * * the arithmetic mean of the samples
+ * * the minimum and maximum of the samples
+ * * the sum-squared-deviation of the samples, used to compute variance
+ * * a histogram of the values of the sample points
+ */
+export interface DistributionSDKType {
+  /** The total number of samples in the distribution. Must be >= 0. */
+  count: Long;
+
+  /**
+   * The arithmetic mean of the samples in the distribution. If `count` is
+   * zero then this field must be zero.
+   */
+  mean: number;
+
+  /** The minimum of the population of values. Ignored if `count` is zero. */
+  minimum: number;
+
+  /** The maximum of the population of values. Ignored if `count` is zero. */
+  maximum: number;
+
+  /**
+   * The sum of squared deviations from the mean:
+   * Sum[i=1..count]((x_i - mean)^2)
+   * where each x_i is a sample values. If `count` is zero then this field
+   * must be zero, otherwise validation of the request fails.
+   */
+  sum_of_squared_deviation: number;
+
+  /**
+   * The number of samples in each histogram bucket. `bucket_counts` are
+   * optional. If present, they must sum to the `count` value.
+   * 
+   * The buckets are defined below in `bucket_option`. There are N buckets.
+   * `bucket_counts[0]` is the number of samples in the underflow bucket.
+   * `bucket_counts[1]` to `bucket_counts[N-1]` are the numbers of samples
+   * in each of the finite buckets. And `bucket_counts[N] is the number
+   * of samples in the overflow bucket. See the comments of `bucket_option`
+   * below for more details.
+   * 
+   * Any suffix of trailing zeros may be omitted.
+   */
+  bucket_counts: Long[];
+
+  /** Buckets with constant width. */
+  linear_buckets?: Distribution_LinearBucketsSDKType;
+
+  /** Buckets with exponentially growing width. */
+  exponential_buckets?: Distribution_ExponentialBucketsSDKType;
+
+  /** Buckets with arbitrary user-provided width. */
+  explicit_buckets?: Distribution_ExplicitBucketsSDKType;
+
+  /** Example points. Must be in increasing order of `value` field. */
+  exemplars: Distribution_ExemplarSDKType[];
+}
+
 /** Describing buckets with constant width. */
 export interface Distribution_LinearBuckets {
   /**
@@ -73,6 +135,31 @@ export interface Distribution_LinearBuckets {
    * See comments on `bucket_options` for details.
    */
   numFiniteBuckets: number;
+
+  /**
+   * The i'th linear bucket covers the interval
+   * [offset + (i-1) * width, offset + i * width)
+   * where i ranges from 1 to num_finite_buckets, inclusive.
+   * Must be strictly positive.
+   */
+  width: number;
+
+  /**
+   * The i'th linear bucket covers the interval
+   * [offset + (i-1) * width, offset + i * width)
+   * where i ranges from 1 to num_finite_buckets, inclusive.
+   */
+  offset: number;
+}
+
+/** Describing buckets with constant width. */
+export interface Distribution_LinearBucketsSDKType {
+  /**
+   * The number of finite buckets. With the underflow and overflow buckets,
+   * the total number of buckets is `num_finite_buckets` + 2.
+   * See comments on `bucket_options` for details.
+   */
+  num_finite_buckets: number;
 
   /**
    * The i'th linear bucket covers the interval
@@ -116,8 +203,56 @@ export interface Distribution_ExponentialBuckets {
   scale: number;
 }
 
+/** Describing buckets with exponentially growing width. */
+export interface Distribution_ExponentialBucketsSDKType {
+  /**
+   * The number of finite buckets. With the underflow and overflow buckets,
+   * the total number of buckets is `num_finite_buckets` + 2.
+   * See comments on `bucket_options` for details.
+   */
+  num_finite_buckets: number;
+
+  /**
+   * The i'th exponential bucket covers the interval
+   * [scale * growth_factor^(i-1), scale * growth_factor^i)
+   * where i ranges from 1 to num_finite_buckets inclusive.
+   * Must be larger than 1.0.
+   */
+  growth_factor: number;
+
+  /**
+   * The i'th exponential bucket covers the interval
+   * [scale * growth_factor^(i-1), scale * growth_factor^i)
+   * where i ranges from 1 to num_finite_buckets inclusive.
+   * Must be > 0.
+   */
+  scale: number;
+}
+
 /** Describing buckets with arbitrary user-provided width. */
 export interface Distribution_ExplicitBuckets {
+  /**
+   * 'bound' is a list of strictly increasing boundaries between
+   * buckets. Note that a list of length N-1 defines N buckets because
+   * of fenceposting. See comments on `bucket_options` for details.
+   * 
+   * The i'th finite bucket covers the interval
+   * [bound[i-1], bound[i])
+   * where i ranges from 1 to bound_size() - 1. Note that there are no
+   * finite buckets at all if 'bound' only contains a single element; in
+   * that special case the single bound defines the boundary between the
+   * underflow and overflow buckets.
+   * 
+   * bucket number                   lower bound    upper bound
+   * i == 0 (underflow)              -inf           bound[i]
+   * 0 < i < bound_size()            bound[i-1]     bound[i]
+   * i == bound_size() (overflow)    bound[i-1]     +inf
+   */
+  bounds: number[];
+}
+
+/** Describing buckets with arbitrary user-provided width. */
+export interface Distribution_ExplicitBucketsSDKType {
   /**
    * 'bound' is a list of strictly increasing boundaries between
    * buckets. Note that a list of length N-1 defines N buckets because
@@ -324,6 +459,48 @@ export const Distribution = {
     message.explicitBuckets = object.explicitBuckets !== undefined && object.explicitBuckets !== null ? Distribution_ExplicitBuckets.fromPartial(object.explicitBuckets) : undefined;
     message.exemplars = object.exemplars?.map(e => Distribution_Exemplar.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: DistributionSDKType): Distribution {
+    return {
+      count: isSet(object.count) ? object.count : undefined,
+      mean: isSet(object.mean) ? object.mean : undefined,
+      minimum: isSet(object.minimum) ? object.minimum : undefined,
+      maximum: isSet(object.maximum) ? object.maximum : undefined,
+      sumOfSquaredDeviation: isSet(object.sum_of_squared_deviation) ? object.sum_of_squared_deviation : undefined,
+      bucketCounts: Array.isArray(object?.bucket_counts) ? object.bucket_counts.map((e: any) => e) : [],
+      linearBuckets: isSet(object.linear_buckets) ? Distribution_LinearBuckets.fromSDK(object.linear_buckets) : undefined,
+      exponentialBuckets: isSet(object.exponential_buckets) ? Distribution_ExponentialBuckets.fromSDK(object.exponential_buckets) : undefined,
+      explicitBuckets: isSet(object.explicit_buckets) ? Distribution_ExplicitBuckets.fromSDK(object.explicit_buckets) : undefined,
+      exemplars: Array.isArray(object?.exemplars) ? object.exemplars.map((e: any) => Distribution_Exemplar.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: Distribution): DistributionSDKType {
+    const obj: any = {};
+    message.count !== undefined && (obj.count = message.count);
+    message.mean !== undefined && (obj.mean = message.mean);
+    message.minimum !== undefined && (obj.minimum = message.minimum);
+    message.maximum !== undefined && (obj.maximum = message.maximum);
+    message.sumOfSquaredDeviation !== undefined && (obj.sum_of_squared_deviation = message.sumOfSquaredDeviation);
+
+    if (message.bucketCounts) {
+      obj.bucket_counts = message.bucketCounts.map(e => e);
+    } else {
+      obj.bucket_counts = [];
+    }
+
+    message.linearBuckets !== undefined && (obj.linear_buckets = message.linearBuckets ? Distribution_LinearBuckets.toSDK(message.linearBuckets) : undefined);
+    message.exponentialBuckets !== undefined && (obj.exponential_buckets = message.exponentialBuckets ? Distribution_ExponentialBuckets.toSDK(message.exponentialBuckets) : undefined);
+    message.explicitBuckets !== undefined && (obj.explicit_buckets = message.explicitBuckets ? Distribution_ExplicitBuckets.toSDK(message.explicitBuckets) : undefined);
+
+    if (message.exemplars) {
+      obj.exemplars = message.exemplars.map(e => e ? Distribution_Exemplar.toSDK(e) : undefined);
+    } else {
+      obj.exemplars = [];
+    }
+
+    return obj;
   }
 
 };
@@ -405,6 +582,22 @@ export const Distribution_LinearBuckets = {
     message.width = object.width ?? 0;
     message.offset = object.offset ?? 0;
     return message;
+  },
+
+  fromSDK(object: Distribution_LinearBucketsSDKType): Distribution_LinearBuckets {
+    return {
+      numFiniteBuckets: isSet(object.num_finite_buckets) ? object.num_finite_buckets : undefined,
+      width: isSet(object.width) ? object.width : undefined,
+      offset: isSet(object.offset) ? object.offset : undefined
+    };
+  },
+
+  toSDK(message: Distribution_LinearBuckets): Distribution_LinearBucketsSDKType {
+    const obj: any = {};
+    message.numFiniteBuckets !== undefined && (obj.num_finite_buckets = message.numFiniteBuckets);
+    message.width !== undefined && (obj.width = message.width);
+    message.offset !== undefined && (obj.offset = message.offset);
+    return obj;
   }
 
 };
@@ -486,6 +679,22 @@ export const Distribution_ExponentialBuckets = {
     message.growthFactor = object.growthFactor ?? 0;
     message.scale = object.scale ?? 0;
     return message;
+  },
+
+  fromSDK(object: Distribution_ExponentialBucketsSDKType): Distribution_ExponentialBuckets {
+    return {
+      numFiniteBuckets: isSet(object.num_finite_buckets) ? object.num_finite_buckets : undefined,
+      growthFactor: isSet(object.growth_factor) ? object.growth_factor : undefined,
+      scale: isSet(object.scale) ? object.scale : undefined
+    };
+  },
+
+  toSDK(message: Distribution_ExponentialBuckets): Distribution_ExponentialBucketsSDKType {
+    const obj: any = {};
+    message.numFiniteBuckets !== undefined && (obj.num_finite_buckets = message.numFiniteBuckets);
+    message.growthFactor !== undefined && (obj.growth_factor = message.growthFactor);
+    message.scale !== undefined && (obj.scale = message.scale);
+    return obj;
   }
 
 };
@@ -561,6 +770,24 @@ export const Distribution_ExplicitBuckets = {
     const message = createBaseDistribution_ExplicitBuckets();
     message.bounds = object.bounds?.map(e => e) || [];
     return message;
+  },
+
+  fromSDK(object: Distribution_ExplicitBucketsSDKType): Distribution_ExplicitBuckets {
+    return {
+      bounds: Array.isArray(object?.bounds) ? object.bounds.map((e: any) => e) : []
+    };
+  },
+
+  toSDK(message: Distribution_ExplicitBuckets): Distribution_ExplicitBucketsSDKType {
+    const obj: any = {};
+
+    if (message.bounds) {
+      obj.bounds = message.bounds.map(e => e);
+    } else {
+      obj.bounds = [];
+    }
+
+    return obj;
   }
 
 };

@@ -1,6 +1,6 @@
-import { Any } from "../../../google/protobuf/any";
+import { Any, AnySDKType } from "../../../google/protobuf/any";
 import { AminoMsg } from "@cosmjs/amino";
-import { MsgSubmitEvidence } from "./tx";
+import { MsgSubmitEvidence, MsgSubmitEvidenceSDKType } from "./tx";
 export interface AminoMsgSubmitEvidence extends AminoMsg {
   type: "cosmos-sdk/MsgSubmitEvidence";
   value: {

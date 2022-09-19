@@ -1,6 +1,6 @@
-import { PageRequest, PageResponse } from "../../../../cosmos/base/query/v1beta1/pagination";
-import { Any } from "../../../../google/protobuf/any";
-import { Height, IdentifiedClientState, ConsensusStateWithHeight, Params } from "./client";
+import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../../cosmos/base/query/v1beta1/pagination";
+import { Any, AnySDKType } from "../../../../google/protobuf/any";
+import { Height, HeightSDKType, IdentifiedClientState, IdentifiedClientStateSDKType, ConsensusStateWithHeight, ConsensusStateWithHeightSDKType, Params, ParamsSDKType } from "./client";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, bytesFromBase64, base64FromBytes, Long } from "@osmonauts/helpers";
 export const protobufPackage = "ibc.core.client.v1";
@@ -12,6 +12,15 @@ export const protobufPackage = "ibc.core.client.v1";
 export interface QueryClientStateRequest {
   /** client state unique identifier */
   clientId: string;
+}
+
+/**
+ * QueryClientStateRequest is the request type for the Query/ClientState RPC
+ * method
+ */
+export interface QueryClientStateRequestSDKType {
+  /** client state unique identifier */
+  client_id: string;
 }
 
 /**
@@ -31,12 +40,37 @@ export interface QueryClientStateResponse {
 }
 
 /**
+ * QueryClientStateResponse is the response type for the Query/ClientState RPC
+ * method. Besides the client state, it includes a proof and the height from
+ * which the proof was retrieved.
+ */
+export interface QueryClientStateResponseSDKType {
+  /** client state associated with the request identifier */
+  client_state: AnySDKType;
+
+  /** merkle proof of existence */
+  proof: Uint8Array;
+
+  /** height at which the proof was retrieved */
+  proof_height: HeightSDKType;
+}
+
+/**
  * QueryClientStatesRequest is the request type for the Query/ClientStates RPC
  * method
  */
 export interface QueryClientStatesRequest {
   /** pagination request */
   pagination?: PageRequest;
+}
+
+/**
+ * QueryClientStatesRequest is the request type for the Query/ClientStates RPC
+ * method
+ */
+export interface QueryClientStatesRequestSDKType {
+  /** pagination request */
+  pagination?: PageRequestSDKType;
 }
 
 /**
@@ -49,6 +83,18 @@ export interface QueryClientStatesResponse {
 
   /** pagination response */
   pagination?: PageResponse;
+}
+
+/**
+ * QueryClientStatesResponse is the response type for the Query/ClientStates RPC
+ * method.
+ */
+export interface QueryClientStatesResponseSDKType {
+  /** list of stored ClientStates of the chain. */
+  client_states: IdentifiedClientStateSDKType[];
+
+  /** pagination response */
+  pagination?: PageResponseSDKType;
 }
 
 /**
@@ -74,6 +120,28 @@ export interface QueryConsensusStateRequest {
 }
 
 /**
+ * QueryConsensusStateRequest is the request type for the Query/ConsensusState
+ * RPC method. Besides the consensus state, it includes a proof and the height
+ * from which the proof was retrieved.
+ */
+export interface QueryConsensusStateRequestSDKType {
+  /** client identifier */
+  client_id: string;
+
+  /** consensus state revision number */
+  revision_number: Long;
+
+  /** consensus state revision height */
+  revision_height: Long;
+
+  /**
+   * latest_height overrrides the height field and queries the latest stored
+   * ConsensusState
+   */
+  latest_height?: boolean;
+}
+
+/**
  * QueryConsensusStateResponse is the response type for the Query/ConsensusState
  * RPC method
  */
@@ -89,6 +157,21 @@ export interface QueryConsensusStateResponse {
 }
 
 /**
+ * QueryConsensusStateResponse is the response type for the Query/ConsensusState
+ * RPC method
+ */
+export interface QueryConsensusStateResponseSDKType {
+  /** consensus state associated with the client identifier at the given height */
+  consensus_state: AnySDKType;
+
+  /** merkle proof of existence */
+  proof: Uint8Array;
+
+  /** height at which the proof was retrieved */
+  proof_height: HeightSDKType;
+}
+
+/**
  * QueryConsensusStatesRequest is the request type for the Query/ConsensusStates
  * RPC method.
  */
@@ -98,6 +181,18 @@ export interface QueryConsensusStatesRequest {
 
   /** pagination request */
   pagination?: PageRequest;
+}
+
+/**
+ * QueryConsensusStatesRequest is the request type for the Query/ConsensusStates
+ * RPC method.
+ */
+export interface QueryConsensusStatesRequestSDKType {
+  /** client identifier */
+  client_id: string;
+
+  /** pagination request */
+  pagination?: PageRequestSDKType;
 }
 
 /**
@@ -113,12 +208,33 @@ export interface QueryConsensusStatesResponse {
 }
 
 /**
+ * QueryConsensusStatesResponse is the response type for the
+ * Query/ConsensusStates RPC method
+ */
+export interface QueryConsensusStatesResponseSDKType {
+  /** consensus states associated with the identifier */
+  consensus_states: ConsensusStateWithHeightSDKType[];
+
+  /** pagination response */
+  pagination?: PageResponseSDKType;
+}
+
+/**
  * QueryClientStatusRequest is the request type for the Query/ClientStatus RPC
  * method
  */
 export interface QueryClientStatusRequest {
   /** client unique identifier */
   clientId: string;
+}
+
+/**
+ * QueryClientStatusRequest is the request type for the Query/ClientStatus RPC
+ * method
+ */
+export interface QueryClientStatusRequestSDKType {
+  /** client unique identifier */
+  client_id: string;
 }
 
 /**
@@ -130,10 +246,24 @@ export interface QueryClientStatusResponse {
 }
 
 /**
+ * QueryClientStatusResponse is the response type for the Query/ClientStatus RPC
+ * method. It returns the current status of the IBC client.
+ */
+export interface QueryClientStatusResponseSDKType {
+  status: string;
+}
+
+/**
  * QueryClientParamsRequest is the request type for the Query/ClientParams RPC
  * method.
  */
 export interface QueryClientParamsRequest {}
+
+/**
+ * QueryClientParamsRequest is the request type for the Query/ClientParams RPC
+ * method.
+ */
+export interface QueryClientParamsRequestSDKType {}
 
 /**
  * QueryClientParamsResponse is the response type for the Query/ClientParams RPC
@@ -145,10 +275,25 @@ export interface QueryClientParamsResponse {
 }
 
 /**
+ * QueryClientParamsResponse is the response type for the Query/ClientParams RPC
+ * method.
+ */
+export interface QueryClientParamsResponseSDKType {
+  /** params defines the parameters of the module. */
+  params: ParamsSDKType;
+}
+
+/**
  * QueryUpgradedClientStateRequest is the request type for the
  * Query/UpgradedClientState RPC method
  */
 export interface QueryUpgradedClientStateRequest {}
+
+/**
+ * QueryUpgradedClientStateRequest is the request type for the
+ * Query/UpgradedClientState RPC method
+ */
+export interface QueryUpgradedClientStateRequestSDKType {}
 
 /**
  * QueryUpgradedClientStateResponse is the response type for the
@@ -160,10 +305,25 @@ export interface QueryUpgradedClientStateResponse {
 }
 
 /**
+ * QueryUpgradedClientStateResponse is the response type for the
+ * Query/UpgradedClientState RPC method.
+ */
+export interface QueryUpgradedClientStateResponseSDKType {
+  /** client state associated with the request identifier */
+  upgraded_client_state: AnySDKType;
+}
+
+/**
  * QueryUpgradedConsensusStateRequest is the request type for the
  * Query/UpgradedConsensusState RPC method
  */
 export interface QueryUpgradedConsensusStateRequest {}
+
+/**
+ * QueryUpgradedConsensusStateRequest is the request type for the
+ * Query/UpgradedConsensusState RPC method
+ */
+export interface QueryUpgradedConsensusStateRequestSDKType {}
 
 /**
  * QueryUpgradedConsensusStateResponse is the response type for the
@@ -172,6 +332,15 @@ export interface QueryUpgradedConsensusStateRequest {}
 export interface QueryUpgradedConsensusStateResponse {
   /** Consensus state associated with the request identifier */
   upgradedConsensusState: Any;
+}
+
+/**
+ * QueryUpgradedConsensusStateResponse is the response type for the
+ * Query/UpgradedConsensusState RPC method.
+ */
+export interface QueryUpgradedConsensusStateResponseSDKType {
+  /** Consensus state associated with the request identifier */
+  upgraded_consensus_state: AnySDKType;
 }
 
 function createBaseQueryClientStateRequest(): QueryClientStateRequest {
@@ -227,6 +396,18 @@ export const QueryClientStateRequest = {
     const message = createBaseQueryClientStateRequest();
     message.clientId = object.clientId ?? "";
     return message;
+  },
+
+  fromSDK(object: QueryClientStateRequestSDKType): QueryClientStateRequest {
+    return {
+      clientId: isSet(object.client_id) ? object.client_id : undefined
+    };
+  },
+
+  toSDK(message: QueryClientStateRequest): QueryClientStateRequestSDKType {
+    const obj: any = {};
+    message.clientId !== undefined && (obj.client_id = message.clientId);
+    return obj;
   }
 
 };
@@ -256,7 +437,7 @@ export const QueryClientStateResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryClientStateResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryClientStateResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryClientStateResponse();
@@ -308,6 +489,22 @@ export const QueryClientStateResponse = {
     message.proof = object.proof ?? new Uint8Array();
     message.proofHeight = object.proofHeight !== undefined && object.proofHeight !== null ? Height.fromPartial(object.proofHeight) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryClientStateResponseSDKType): QueryClientStateResponse {
+    return {
+      clientState: isSet(object.client_state) ? Any.fromSDK(object.client_state) : undefined,
+      proof: isSet(object.proof) ? object.proof : undefined,
+      proofHeight: isSet(object.proof_height) ? Height.fromSDK(object.proof_height) : undefined
+    };
+  },
+
+  toSDK(message: QueryClientStateResponse): QueryClientStateResponseSDKType {
+    const obj: any = {};
+    message.clientState !== undefined && (obj.client_state = message.clientState ? Any.toSDK(message.clientState) : undefined);
+    message.proof !== undefined && (obj.proof = message.proof);
+    message.proofHeight !== undefined && (obj.proof_height = message.proofHeight ? Height.toSDK(message.proofHeight) : undefined);
+    return obj;
   }
 
 };
@@ -365,6 +562,18 @@ export const QueryClientStatesRequest = {
     const message = createBaseQueryClientStatesRequest();
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryClientStatesRequestSDKType): QueryClientStatesRequest {
+    return {
+      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  toSDK(message: QueryClientStatesRequest): QueryClientStatesRequestSDKType {
+    const obj: any = {};
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
+    return obj;
   }
 
 };
@@ -389,7 +598,7 @@ export const QueryClientStatesResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryClientStatesResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryClientStatesResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryClientStatesResponse();
@@ -440,6 +649,26 @@ export const QueryClientStatesResponse = {
     message.clientStates = object.clientStates?.map(e => IdentifiedClientState.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryClientStatesResponseSDKType): QueryClientStatesResponse {
+    return {
+      clientStates: Array.isArray(object?.client_states) ? object.client_states.map((e: any) => IdentifiedClientState.fromSDK(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  toSDK(message: QueryClientStatesResponse): QueryClientStatesResponseSDKType {
+    const obj: any = {};
+
+    if (message.clientStates) {
+      obj.client_states = message.clientStates.map(e => e ? IdentifiedClientState.toSDK(e) : undefined);
+    } else {
+      obj.client_states = [];
+    }
+
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
+    return obj;
   }
 
 };
@@ -533,6 +762,24 @@ export const QueryConsensusStateRequest = {
     message.revisionHeight = object.revisionHeight !== undefined && object.revisionHeight !== null ? Long.fromValue(object.revisionHeight) : Long.UZERO;
     message.latestHeight = object.latestHeight ?? false;
     return message;
+  },
+
+  fromSDK(object: QueryConsensusStateRequestSDKType): QueryConsensusStateRequest {
+    return {
+      clientId: isSet(object.client_id) ? object.client_id : undefined,
+      revisionNumber: isSet(object.revision_number) ? object.revision_number : undefined,
+      revisionHeight: isSet(object.revision_height) ? object.revision_height : undefined,
+      latestHeight: isSet(object.latest_height) ? object.latest_height : undefined
+    };
+  },
+
+  toSDK(message: QueryConsensusStateRequest): QueryConsensusStateRequestSDKType {
+    const obj: any = {};
+    message.clientId !== undefined && (obj.client_id = message.clientId);
+    message.revisionNumber !== undefined && (obj.revision_number = message.revisionNumber);
+    message.revisionHeight !== undefined && (obj.revision_height = message.revisionHeight);
+    message.latestHeight !== undefined && (obj.latest_height = message.latestHeight);
+    return obj;
   }
 
 };
@@ -562,7 +809,7 @@ export const QueryConsensusStateResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryConsensusStateResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryConsensusStateResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryConsensusStateResponse();
@@ -614,6 +861,22 @@ export const QueryConsensusStateResponse = {
     message.proof = object.proof ?? new Uint8Array();
     message.proofHeight = object.proofHeight !== undefined && object.proofHeight !== null ? Height.fromPartial(object.proofHeight) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryConsensusStateResponseSDKType): QueryConsensusStateResponse {
+    return {
+      consensusState: isSet(object.consensus_state) ? Any.fromSDK(object.consensus_state) : undefined,
+      proof: isSet(object.proof) ? object.proof : undefined,
+      proofHeight: isSet(object.proof_height) ? Height.fromSDK(object.proof_height) : undefined
+    };
+  },
+
+  toSDK(message: QueryConsensusStateResponse): QueryConsensusStateResponseSDKType {
+    const obj: any = {};
+    message.consensusState !== undefined && (obj.consensus_state = message.consensusState ? Any.toSDK(message.consensusState) : undefined);
+    message.proof !== undefined && (obj.proof = message.proof);
+    message.proofHeight !== undefined && (obj.proof_height = message.proofHeight ? Height.toSDK(message.proofHeight) : undefined);
+    return obj;
   }
 
 };
@@ -683,6 +946,20 @@ export const QueryConsensusStatesRequest = {
     message.clientId = object.clientId ?? "";
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryConsensusStatesRequestSDKType): QueryConsensusStatesRequest {
+    return {
+      clientId: isSet(object.client_id) ? object.client_id : undefined,
+      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  toSDK(message: QueryConsensusStatesRequest): QueryConsensusStatesRequestSDKType {
+    const obj: any = {};
+    message.clientId !== undefined && (obj.client_id = message.clientId);
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
+    return obj;
   }
 
 };
@@ -707,7 +984,7 @@ export const QueryConsensusStatesResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryConsensusStatesResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryConsensusStatesResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryConsensusStatesResponse();
@@ -758,6 +1035,26 @@ export const QueryConsensusStatesResponse = {
     message.consensusStates = object.consensusStates?.map(e => ConsensusStateWithHeight.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryConsensusStatesResponseSDKType): QueryConsensusStatesResponse {
+    return {
+      consensusStates: Array.isArray(object?.consensus_states) ? object.consensus_states.map((e: any) => ConsensusStateWithHeight.fromSDK(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  toSDK(message: QueryConsensusStatesResponse): QueryConsensusStatesResponseSDKType {
+    const obj: any = {};
+
+    if (message.consensusStates) {
+      obj.consensus_states = message.consensusStates.map(e => e ? ConsensusStateWithHeight.toSDK(e) : undefined);
+    } else {
+      obj.consensus_states = [];
+    }
+
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
+    return obj;
   }
 
 };
@@ -815,6 +1112,18 @@ export const QueryClientStatusRequest = {
     const message = createBaseQueryClientStatusRequest();
     message.clientId = object.clientId ?? "";
     return message;
+  },
+
+  fromSDK(object: QueryClientStatusRequestSDKType): QueryClientStatusRequest {
+    return {
+      clientId: isSet(object.client_id) ? object.client_id : undefined
+    };
+  },
+
+  toSDK(message: QueryClientStatusRequest): QueryClientStatusRequestSDKType {
+    const obj: any = {};
+    message.clientId !== undefined && (obj.client_id = message.clientId);
+    return obj;
   }
 
 };
@@ -834,7 +1143,7 @@ export const QueryClientStatusResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryClientStatusResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryClientStatusResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryClientStatusResponse();
@@ -872,6 +1181,18 @@ export const QueryClientStatusResponse = {
     const message = createBaseQueryClientStatusResponse();
     message.status = object.status ?? "";
     return message;
+  },
+
+  fromSDK(object: QueryClientStatusResponseSDKType): QueryClientStatusResponse {
+    return {
+      status: isSet(object.status) ? object.status : undefined
+    };
+  },
+
+  toSDK(message: QueryClientStatusResponse): QueryClientStatusResponseSDKType {
+    const obj: any = {};
+    message.status !== undefined && (obj.status = message.status);
+    return obj;
   }
 
 };
@@ -915,6 +1236,15 @@ export const QueryClientParamsRequest = {
   fromPartial(_: DeepPartial<QueryClientParamsRequest>): QueryClientParamsRequest {
     const message = createBaseQueryClientParamsRequest();
     return message;
+  },
+
+  fromSDK(_: QueryClientParamsRequestSDKType): QueryClientParamsRequest {
+    return {};
+  },
+
+  toSDK(_: QueryClientParamsRequest): QueryClientParamsRequestSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -934,7 +1264,7 @@ export const QueryClientParamsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryClientParamsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryClientParamsResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryClientParamsResponse();
@@ -972,6 +1302,18 @@ export const QueryClientParamsResponse = {
     const message = createBaseQueryClientParamsResponse();
     message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryClientParamsResponseSDKType): QueryClientParamsResponse {
+    return {
+      params: isSet(object.params) ? Params.fromSDK(object.params) : undefined
+    };
+  },
+
+  toSDK(message: QueryClientParamsResponse): QueryClientParamsResponseSDKType {
+    const obj: any = {};
+    message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
+    return obj;
   }
 
 };
@@ -1015,6 +1357,15 @@ export const QueryUpgradedClientStateRequest = {
   fromPartial(_: DeepPartial<QueryUpgradedClientStateRequest>): QueryUpgradedClientStateRequest {
     const message = createBaseQueryUpgradedClientStateRequest();
     return message;
+  },
+
+  fromSDK(_: QueryUpgradedClientStateRequestSDKType): QueryUpgradedClientStateRequest {
+    return {};
+  },
+
+  toSDK(_: QueryUpgradedClientStateRequest): QueryUpgradedClientStateRequestSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -1034,7 +1385,7 @@ export const QueryUpgradedClientStateResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryUpgradedClientStateResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryUpgradedClientStateResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryUpgradedClientStateResponse();
@@ -1072,6 +1423,18 @@ export const QueryUpgradedClientStateResponse = {
     const message = createBaseQueryUpgradedClientStateResponse();
     message.upgradedClientState = object.upgradedClientState !== undefined && object.upgradedClientState !== null ? Any.fromPartial(object.upgradedClientState) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryUpgradedClientStateResponseSDKType): QueryUpgradedClientStateResponse {
+    return {
+      upgradedClientState: isSet(object.upgraded_client_state) ? Any.fromSDK(object.upgraded_client_state) : undefined
+    };
+  },
+
+  toSDK(message: QueryUpgradedClientStateResponse): QueryUpgradedClientStateResponseSDKType {
+    const obj: any = {};
+    message.upgradedClientState !== undefined && (obj.upgraded_client_state = message.upgradedClientState ? Any.toSDK(message.upgradedClientState) : undefined);
+    return obj;
   }
 
 };
@@ -1115,6 +1478,15 @@ export const QueryUpgradedConsensusStateRequest = {
   fromPartial(_: DeepPartial<QueryUpgradedConsensusStateRequest>): QueryUpgradedConsensusStateRequest {
     const message = createBaseQueryUpgradedConsensusStateRequest();
     return message;
+  },
+
+  fromSDK(_: QueryUpgradedConsensusStateRequestSDKType): QueryUpgradedConsensusStateRequest {
+    return {};
+  },
+
+  toSDK(_: QueryUpgradedConsensusStateRequest): QueryUpgradedConsensusStateRequestSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -1134,7 +1506,7 @@ export const QueryUpgradedConsensusStateResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryUpgradedConsensusStateResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryUpgradedConsensusStateResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryUpgradedConsensusStateResponse();
@@ -1172,6 +1544,18 @@ export const QueryUpgradedConsensusStateResponse = {
     const message = createBaseQueryUpgradedConsensusStateResponse();
     message.upgradedConsensusState = object.upgradedConsensusState !== undefined && object.upgradedConsensusState !== null ? Any.fromPartial(object.upgradedConsensusState) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryUpgradedConsensusStateResponseSDKType): QueryUpgradedConsensusStateResponse {
+    return {
+      upgradedConsensusState: isSet(object.upgraded_consensus_state) ? Any.fromSDK(object.upgraded_consensus_state) : undefined
+    };
+  },
+
+  toSDK(message: QueryUpgradedConsensusStateResponse): QueryUpgradedConsensusStateResponseSDKType {
+    const obj: any = {};
+    message.upgradedConsensusState !== undefined && (obj.upgraded_consensus_state = message.upgradedConsensusState ? Any.toSDK(message.upgradedConsensusState) : undefined);
+    return obj;
   }
 
 };

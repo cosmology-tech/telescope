@@ -26,8 +26,37 @@ export interface MsgIBCSend {
   data: Uint8Array;
 }
 
+/** MsgIBCSend */
+export interface MsgIBCSendSDKType {
+  /** the channel by which the packet will be sent */
+  channel: string;
+
+  /**
+   * Timeout height relative to the current block height.
+   * The timeout is disabled when set to 0.
+   */
+  timeout_height: Long;
+
+  /**
+   * Timeout timestamp (in nanoseconds) relative to the current block timestamp.
+   * The timeout is disabled when set to 0.
+   */
+  timeout_timestamp: Long;
+
+  /**
+   * Data is the payload to transfer. We must not make assumption what format or
+   * content is in here.
+   */
+  data: Uint8Array;
+}
+
 /** MsgIBCCloseChannel port and channel need to be owned by the contract */
 export interface MsgIBCCloseChannel {
+  channel: string;
+}
+
+/** MsgIBCCloseChannel port and channel need to be owned by the contract */
+export interface MsgIBCCloseChannelSDKType {
   channel: string;
 }
 
@@ -120,6 +149,24 @@ export const MsgIBCSend = {
     message.timeoutTimestamp = object.timeoutTimestamp !== undefined && object.timeoutTimestamp !== null ? Long.fromValue(object.timeoutTimestamp) : Long.UZERO;
     message.data = object.data ?? new Uint8Array();
     return message;
+  },
+
+  fromSDK(object: MsgIBCSendSDKType): MsgIBCSend {
+    return {
+      channel: isSet(object.channel) ? object.channel : undefined,
+      timeoutHeight: isSet(object.timeout_height) ? object.timeout_height : undefined,
+      timeoutTimestamp: isSet(object.timeout_timestamp) ? object.timeout_timestamp : undefined,
+      data: isSet(object.data) ? object.data : undefined
+    };
+  },
+
+  toSDK(message: MsgIBCSend): MsgIBCSendSDKType {
+    const obj: any = {};
+    message.channel !== undefined && (obj.channel = message.channel);
+    message.timeoutHeight !== undefined && (obj.timeout_height = message.timeoutHeight);
+    message.timeoutTimestamp !== undefined && (obj.timeout_timestamp = message.timeoutTimestamp);
+    message.data !== undefined && (obj.data = message.data);
+    return obj;
   }
 
 };
@@ -177,6 +224,18 @@ export const MsgIBCCloseChannel = {
     const message = createBaseMsgIBCCloseChannel();
     message.channel = object.channel ?? "";
     return message;
+  },
+
+  fromSDK(object: MsgIBCCloseChannelSDKType): MsgIBCCloseChannel {
+    return {
+      channel: isSet(object.channel) ? object.channel : undefined
+    };
+  },
+
+  toSDK(message: MsgIBCCloseChannel): MsgIBCCloseChannelSDKType {
+    const obj: any = {};
+    message.channel !== undefined && (obj.channel = message.channel);
+    return obj;
   }
 
 };

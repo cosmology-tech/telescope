@@ -79,9 +79,6 @@ export class GenericParseContext implements ParseContext {
 }
 
 export class AminoParseContext extends GenericParseContext implements ParseContext {
-    options: TelescopeOptions;
-    store: ProtoStore;
-    ref: ProtoRef;
 
     aminoCasingFn: Function;
 
@@ -110,11 +107,7 @@ export class AminoParseContext extends GenericParseContext implements ParseConte
     }
 
     aminoCaseField(field: ProtoField) {
-        const orig = field.options['(telescope:orig)'];
-        // const name = field.options['(telescope:name)'];
-        // const camel = field.options['(telescope:camel)'];
-        // return this.aminoCasingFn(field.name);
-        return orig;
+        return field.options['(telescope:orig)'];
     }
 
     private lookupTypeFromCurrentPath(field: ProtoField, currentProtoPath: string) {
@@ -194,9 +187,6 @@ export class AminoParseContext extends GenericParseContext implements ParseConte
 
 }
 export class ProtoParseContext extends GenericParseContext implements ParseContext {
-    store: ProtoStore;
-    ref: ProtoRef;
-    options: TelescopeOptions;
 
     constructor(
         ref: ProtoRef,

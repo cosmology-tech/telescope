@@ -1,4 +1,4 @@
-import { Coin } from "../../../../cosmos/base/v1beta1/coin";
+import { Coin, CoinSDKType } from "../../../../cosmos/base/v1beta1/coin";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, Long } from "@osmonauts/helpers";
 export const protobufPackage = "osmosis.gamm.poolmodels.stableswap.v1beta1";
@@ -10,6 +10,17 @@ export const protobufPackage = "osmosis.gamm.poolmodels.stableswap.v1beta1";
  * The pool's token holders are specified in future_pool_governor.
  */
 export interface PoolParams {
+  swapFee: string;
+  exitFee: string;
+}
+
+/**
+ * PoolParams defined the parameters that will be managed by the pool
+ * governance in the future. This params are not managed by the chain
+ * governance. Instead they will be managed by the token holders of the pool.
+ * The pool's token holders are specified in future_pool_governor.
+ */
+export interface PoolParamsSDKType {
   swapFee: string;
   exitFee: string;
 }
@@ -43,6 +54,37 @@ export interface Pool {
 
   /** scaling_factor_governor is the address can adjust pool scaling factors */
   scalingFactorGovernor: string;
+}
+
+/** Pool is the stableswap Pool struct */
+export interface PoolSDKType {
+  address: string;
+  id: Long;
+  poolParams: PoolParamsSDKType;
+
+  /**
+   * This string specifies who will govern the pool in the future.
+   * Valid forms of this are:
+   * {token name},{duration}
+   * {duration}
+   * where {token name} if specified is the token which determines the
+   * governor, and if not specified is the LP token for this pool.duration is
+   * a time specified as 0w,1w,2w, etc. which specifies how long the token
+   * would need to be locked up to count in governance. 0w means no lockup.
+   */
+  future_pool_governor: string;
+
+  /** sum of all LP shares */
+  totalShares: CoinSDKType;
+
+  /** assets in the pool */
+  poolLiquidity: CoinSDKType[];
+
+  /** for calculation amognst assets with different precisions */
+  scaling_factor: Long[];
+
+  /** scaling_factor_governor is the address can adjust pool scaling factors */
+  scaling_factor_governor: string;
 }
 
 function createBasePoolParams(): PoolParams {
@@ -110,6 +152,20 @@ export const PoolParams = {
     message.swapFee = object.swapFee ?? "";
     message.exitFee = object.exitFee ?? "";
     return message;
+  },
+
+  fromSDK(object: PoolParamsSDKType): PoolParams {
+    return {
+      swapFee: isSet(object.swapFee) ? object.swapFee : undefined,
+      exitFee: isSet(object.exitFee) ? object.exitFee : undefined
+    };
+  },
+
+  toSDK(message: PoolParams): PoolParamsSDKType {
+    const obj: any = {};
+    message.swapFee !== undefined && (obj.swapFee = message.swapFee);
+    message.exitFee !== undefined && (obj.exitFee = message.exitFee);
+    return obj;
   }
 
 };
@@ -275,6 +331,43 @@ export const Pool = {
     message.scalingFactor = object.scalingFactor?.map(e => Long.fromValue(e)) || [];
     message.scalingFactorGovernor = object.scalingFactorGovernor ?? "";
     return message;
+  },
+
+  fromSDK(object: PoolSDKType): Pool {
+    return {
+      address: isSet(object.address) ? object.address : undefined,
+      id: isSet(object.id) ? object.id : undefined,
+      poolParams: isSet(object.poolParams) ? PoolParams.fromSDK(object.poolParams) : undefined,
+      futurePoolGovernor: isSet(object.future_pool_governor) ? object.future_pool_governor : undefined,
+      totalShares: isSet(object.totalShares) ? Coin.fromSDK(object.totalShares) : undefined,
+      poolLiquidity: Array.isArray(object?.poolLiquidity) ? object.poolLiquidity.map((e: any) => Coin.fromSDK(e)) : [],
+      scalingFactor: Array.isArray(object?.scaling_factor) ? object.scaling_factor.map((e: any) => e) : [],
+      scalingFactorGovernor: isSet(object.scaling_factor_governor) ? object.scaling_factor_governor : undefined
+    };
+  },
+
+  toSDK(message: Pool): PoolSDKType {
+    const obj: any = {};
+    message.address !== undefined && (obj.address = message.address);
+    message.id !== undefined && (obj.id = message.id);
+    message.poolParams !== undefined && (obj.poolParams = message.poolParams ? PoolParams.toSDK(message.poolParams) : undefined);
+    message.futurePoolGovernor !== undefined && (obj.future_pool_governor = message.futurePoolGovernor);
+    message.totalShares !== undefined && (obj.totalShares = message.totalShares ? Coin.toSDK(message.totalShares) : undefined);
+
+    if (message.poolLiquidity) {
+      obj.poolLiquidity = message.poolLiquidity.map(e => e ? Coin.toSDK(e) : undefined);
+    } else {
+      obj.poolLiquidity = [];
+    }
+
+    if (message.scalingFactor) {
+      obj.scaling_factor = message.scalingFactor.map(e => e);
+    } else {
+      obj.scaling_factor = [];
+    }
+
+    message.scalingFactorGovernor !== undefined && (obj.scaling_factor_governor = message.scalingFactorGovernor);
+    return obj;
   }
 
 };

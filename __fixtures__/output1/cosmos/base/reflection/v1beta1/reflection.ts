@@ -5,10 +5,19 @@ export const protobufPackage = "cosmos.base.reflection.v1beta1";
 /** ListAllInterfacesRequest is the request type of the ListAllInterfaces RPC. */
 export interface ListAllInterfacesRequest {}
 
+/** ListAllInterfacesRequest is the request type of the ListAllInterfaces RPC. */
+export interface ListAllInterfacesRequestSDKType {}
+
 /** ListAllInterfacesResponse is the response type of the ListAllInterfaces RPC. */
 export interface ListAllInterfacesResponse {
   /** interface_names is an array of all the registered interfaces. */
   interfaceNames: string[];
+}
+
+/** ListAllInterfacesResponse is the response type of the ListAllInterfaces RPC. */
+export interface ListAllInterfacesResponseSDKType {
+  /** interface_names is an array of all the registered interfaces. */
+  interface_names: string[];
 }
 
 /**
@@ -21,11 +30,28 @@ export interface ListImplementationsRequest {
 }
 
 /**
+ * ListImplementationsRequest is the request type of the ListImplementations
+ * RPC.
+ */
+export interface ListImplementationsRequestSDKType {
+  /** interface_name defines the interface to query the implementations for. */
+  interface_name: string;
+}
+
+/**
  * ListImplementationsResponse is the response type of the ListImplementations
  * RPC.
  */
 export interface ListImplementationsResponse {
   implementationMessageNames: string[];
+}
+
+/**
+ * ListImplementationsResponse is the response type of the ListImplementations
+ * RPC.
+ */
+export interface ListImplementationsResponseSDKType {
+  implementation_message_names: string[];
 }
 
 function createBaseListAllInterfacesRequest(): ListAllInterfacesRequest {
@@ -67,6 +93,15 @@ export const ListAllInterfacesRequest = {
   fromPartial(_: DeepPartial<ListAllInterfacesRequest>): ListAllInterfacesRequest {
     const message = createBaseListAllInterfacesRequest();
     return message;
+  },
+
+  fromSDK(_: ListAllInterfacesRequestSDKType): ListAllInterfacesRequest {
+    return {};
+  },
+
+  toSDK(_: ListAllInterfacesRequest): ListAllInterfacesRequestSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -86,7 +121,7 @@ export const ListAllInterfacesResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ListAllInterfacesResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ListAllInterfacesResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListAllInterfacesResponse();
@@ -130,6 +165,24 @@ export const ListAllInterfacesResponse = {
     const message = createBaseListAllInterfacesResponse();
     message.interfaceNames = object.interfaceNames?.map(e => e) || [];
     return message;
+  },
+
+  fromSDK(object: ListAllInterfacesResponseSDKType): ListAllInterfacesResponse {
+    return {
+      interfaceNames: Array.isArray(object?.interface_names) ? object.interface_names.map((e: any) => e) : []
+    };
+  },
+
+  toSDK(message: ListAllInterfacesResponse): ListAllInterfacesResponseSDKType {
+    const obj: any = {};
+
+    if (message.interfaceNames) {
+      obj.interface_names = message.interfaceNames.map(e => e);
+    } else {
+      obj.interface_names = [];
+    }
+
+    return obj;
   }
 
 };
@@ -187,6 +240,18 @@ export const ListImplementationsRequest = {
     const message = createBaseListImplementationsRequest();
     message.interfaceName = object.interfaceName ?? "";
     return message;
+  },
+
+  fromSDK(object: ListImplementationsRequestSDKType): ListImplementationsRequest {
+    return {
+      interfaceName: isSet(object.interface_name) ? object.interface_name : undefined
+    };
+  },
+
+  toSDK(message: ListImplementationsRequest): ListImplementationsRequestSDKType {
+    const obj: any = {};
+    message.interfaceName !== undefined && (obj.interface_name = message.interfaceName);
+    return obj;
   }
 
 };
@@ -206,7 +271,7 @@ export const ListImplementationsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ListImplementationsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ListImplementationsResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListImplementationsResponse();
@@ -250,6 +315,24 @@ export const ListImplementationsResponse = {
     const message = createBaseListImplementationsResponse();
     message.implementationMessageNames = object.implementationMessageNames?.map(e => e) || [];
     return message;
+  },
+
+  fromSDK(object: ListImplementationsResponseSDKType): ListImplementationsResponse {
+    return {
+      implementationMessageNames: Array.isArray(object?.implementation_message_names) ? object.implementation_message_names.map((e: any) => e) : []
+    };
+  },
+
+  toSDK(message: ListImplementationsResponse): ListImplementationsResponseSDKType {
+    const obj: any = {};
+
+    if (message.implementationMessageNames) {
+      obj.implementation_message_names = message.implementationMessageNames.map(e => e);
+    } else {
+      obj.implementation_message_names = [];
+    }
+
+    return obj;
   }
 
 };

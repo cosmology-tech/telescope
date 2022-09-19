@@ -4,11 +4,22 @@ import { snake } from 'case';
 import { camel } from '@osmonauts/utils';
 interface TelescopeOpts {
 
+    removeUnusedImports?: boolean;
+
     prototypes?: {
         parser?: {
             keepCase?: boolean;
             alternateCommentMode?: boolean;
             preferTrailingComment?: boolean;
+        },
+        methods?: {
+            encode?: boolean;
+            decode?: boolean;
+            fromJSON?: boolean;
+            toJSON?: boolean;
+            fromPartial?: boolean;
+            toSDK?: boolean;
+            fromSDK?: boolean;
         },
         includePackageVar?: boolean;
         fieldDefaultIsOptional?: boolean;
@@ -96,11 +107,22 @@ export type TelescopeOption = keyof TelescopeOpts;
 export const defaultTelescopeOptions: TelescopeOptions = {
     // global options (can be overridden through plugins)
 
+    removeUnusedImports: true,
+
     prototypes: {
         parser: {
             keepCase: true,
             alternateCommentMode: true,
             preferTrailingComment: false
+        },
+        methods: {
+            encode: true,
+            decode: true,
+            fromJSON: true,
+            toJSON: true,
+            fromPartial: true,
+            toSDK: false,
+            fromSDK: false
         },
         includePackageVar: false,
         fieldDefaultIsOptional: false,

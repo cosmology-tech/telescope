@@ -1,4 +1,4 @@
-import { Coin } from "../../base/v1beta1/coin";
+import { Coin, CoinSDKType } from "../../base/v1beta1/coin";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "@osmonauts/helpers";
 export const protobufPackage = "cosmos.staking.v1beta1";
@@ -9,6 +9,26 @@ export const protobufPackage = "cosmos.staking.v1beta1";
  * Since: cosmos-sdk 0.43
  */
 export enum AuthorizationType {
+  /** AUTHORIZATION_TYPE_UNSPECIFIED - AUTHORIZATION_TYPE_UNSPECIFIED specifies an unknown authorization type */
+  AUTHORIZATION_TYPE_UNSPECIFIED = 0,
+
+  /** AUTHORIZATION_TYPE_DELEGATE - AUTHORIZATION_TYPE_DELEGATE defines an authorization type for Msg/Delegate */
+  AUTHORIZATION_TYPE_DELEGATE = 1,
+
+  /** AUTHORIZATION_TYPE_UNDELEGATE - AUTHORIZATION_TYPE_UNDELEGATE defines an authorization type for Msg/Undelegate */
+  AUTHORIZATION_TYPE_UNDELEGATE = 2,
+
+  /** AUTHORIZATION_TYPE_REDELEGATE - AUTHORIZATION_TYPE_REDELEGATE defines an authorization type for Msg/BeginRedelegate */
+  AUTHORIZATION_TYPE_REDELEGATE = 3,
+  UNRECOGNIZED = -1,
+}
+
+/**
+ * AuthorizationType defines the type of staking module authorization type
+ * 
+ * Since: cosmos-sdk 0.43
+ */
+export enum AuthorizationTypeSDKType {
   /** AUTHORIZATION_TYPE_UNSPECIFIED - AUTHORIZATION_TYPE_UNSPECIFIED specifies an unknown authorization type */
   AUTHORIZATION_TYPE_UNSPECIFIED = 0,
 
@@ -90,8 +110,38 @@ export interface StakeAuthorization {
   authorizationType: AuthorizationType;
 }
 
+/**
+ * StakeAuthorization defines authorization for delegate/undelegate/redelegate.
+ * 
+ * Since: cosmos-sdk 0.43
+ */
+export interface StakeAuthorizationSDKType {
+  /**
+   * max_tokens specifies the maximum amount of tokens can be delegate to a validator. If it is
+   * empty, there is no spend limit and any amount of coins can be delegated.
+   */
+  max_tokens: CoinSDKType;
+
+  /**
+   * allow_list specifies list of validator addresses to whom grantee can delegate tokens on behalf of granter's
+   * account.
+   */
+  allow_list?: StakeAuthorization_ValidatorsSDKType;
+
+  /** deny_list specifies list of validator addresses to whom grantee can not delegate tokens. */
+  deny_list?: StakeAuthorization_ValidatorsSDKType;
+
+  /** authorization_type defines one of AuthorizationType. */
+  authorization_type: AuthorizationTypeSDKType;
+}
+
 /** Validators defines list of validator addresses. */
 export interface StakeAuthorization_Validators {
+  address: string[];
+}
+
+/** Validators defines list of validator addresses. */
+export interface StakeAuthorization_ValidatorsSDKType {
   address: string[];
 }
 
@@ -184,6 +234,24 @@ export const StakeAuthorization = {
     message.denyList = object.denyList !== undefined && object.denyList !== null ? StakeAuthorization_Validators.fromPartial(object.denyList) : undefined;
     message.authorizationType = object.authorizationType ?? 0;
     return message;
+  },
+
+  fromSDK(object: StakeAuthorizationSDKType): StakeAuthorization {
+    return {
+      maxTokens: isSet(object.max_tokens) ? Coin.fromSDK(object.max_tokens) : undefined,
+      allowList: isSet(object.allow_list) ? StakeAuthorization_Validators.fromSDK(object.allow_list) : undefined,
+      denyList: isSet(object.deny_list) ? StakeAuthorization_Validators.fromSDK(object.deny_list) : undefined,
+      authorizationType: isSet(object.authorization_type) ? authorizationTypeFromJSON(object.authorization_type) : 0
+    };
+  },
+
+  toSDK(message: StakeAuthorization): StakeAuthorizationSDKType {
+    const obj: any = {};
+    message.maxTokens !== undefined && (obj.max_tokens = message.maxTokens ? Coin.toSDK(message.maxTokens) : undefined);
+    message.allowList !== undefined && (obj.allow_list = message.allowList ? StakeAuthorization_Validators.toSDK(message.allowList) : undefined);
+    message.denyList !== undefined && (obj.deny_list = message.denyList ? StakeAuthorization_Validators.toSDK(message.denyList) : undefined);
+    message.authorizationType !== undefined && (obj.authorization_type = authorizationTypeToJSON(message.authorizationType));
+    return obj;
   }
 
 };
@@ -247,6 +315,24 @@ export const StakeAuthorization_Validators = {
     const message = createBaseStakeAuthorization_Validators();
     message.address = object.address?.map(e => e) || [];
     return message;
+  },
+
+  fromSDK(object: StakeAuthorization_ValidatorsSDKType): StakeAuthorization_Validators {
+    return {
+      address: Array.isArray(object?.address) ? object.address.map((e: any) => e) : []
+    };
+  },
+
+  toSDK(message: StakeAuthorization_Validators): StakeAuthorization_ValidatorsSDKType {
+    const obj: any = {};
+
+    if (message.address) {
+      obj.address = message.address.map(e => e);
+    } else {
+      obj.address = [];
+    }
+
+    return obj;
   }
 
 };

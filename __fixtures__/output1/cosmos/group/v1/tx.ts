@@ -1,11 +1,29 @@
-import { Member, VoteOption, voteOptionFromJSON, voteOptionToJSON } from "./types";
-import { Any } from "../../../google/protobuf/any";
+import { Member, MemberSDKType, VoteOption, VoteOptionSDKType, voteOptionFromJSON, voteOptionToJSON } from "./types";
+import { Any, AnySDKType } from "../../../google/protobuf/any";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, Long } from "@osmonauts/helpers";
 export const protobufPackage = "cosmos.group.v1";
 
 /** Exec defines modes of execution of a proposal on creation or on new vote. */
 export enum Exec {
+  /**
+   * EXEC_UNSPECIFIED - An empty value means that there should be a separate
+   * MsgExec request for the proposal to execute.
+   */
+  EXEC_UNSPECIFIED = 0,
+
+  /**
+   * EXEC_TRY - Try to execute the proposal immediately.
+   * If the proposal is not allowed per the DecisionPolicy,
+   * the proposal will still be open and could
+   * be executed at a later point.
+   */
+  EXEC_TRY = 1,
+  UNRECOGNIZED = -1,
+}
+
+/** Exec defines modes of execution of a proposal on creation or on new vote. */
+export enum ExecSDKType {
   /**
    * EXEC_UNSPECIFIED - An empty value means that there should be a separate
    * MsgExec request for the proposal to execute.
@@ -62,10 +80,28 @@ export interface MsgCreateGroup {
   metadata: string;
 }
 
+/** MsgCreateGroup is the Msg/CreateGroup request type. */
+export interface MsgCreateGroupSDKType {
+  /** admin is the account address of the group admin. */
+  admin: string;
+
+  /** members defines the group members. */
+  members: MemberSDKType[];
+
+  /** metadata is any arbitrary metadata to attached to the group. */
+  metadata: string;
+}
+
 /** MsgCreateGroupResponse is the Msg/CreateGroup response type. */
 export interface MsgCreateGroupResponse {
   /** group_id is the unique ID of the newly created group. */
   groupId: Long;
+}
+
+/** MsgCreateGroupResponse is the Msg/CreateGroup response type. */
+export interface MsgCreateGroupResponseSDKType {
+  /** group_id is the unique ID of the newly created group. */
+  group_id: Long;
 }
 
 /** MsgUpdateGroupMembers is the Msg/UpdateGroupMembers request type. */
@@ -83,8 +119,26 @@ export interface MsgUpdateGroupMembers {
   memberUpdates: Member[];
 }
 
+/** MsgUpdateGroupMembers is the Msg/UpdateGroupMembers request type. */
+export interface MsgUpdateGroupMembersSDKType {
+  /** admin is the account address of the group admin. */
+  admin: string;
+
+  /** group_id is the unique ID of the group. */
+  group_id: Long;
+
+  /**
+   * member_updates is the list of members to update,
+   * set weight to 0 to remove a member.
+   */
+  member_updates: MemberSDKType[];
+}
+
 /** MsgUpdateGroupMembersResponse is the Msg/UpdateGroupMembers response type. */
 export interface MsgUpdateGroupMembersResponse {}
+
+/** MsgUpdateGroupMembersResponse is the Msg/UpdateGroupMembers response type. */
+export interface MsgUpdateGroupMembersResponseSDKType {}
 
 /** MsgUpdateGroupAdmin is the Msg/UpdateGroupAdmin request type. */
 export interface MsgUpdateGroupAdmin {
@@ -98,8 +152,23 @@ export interface MsgUpdateGroupAdmin {
   newAdmin: string;
 }
 
+/** MsgUpdateGroupAdmin is the Msg/UpdateGroupAdmin request type. */
+export interface MsgUpdateGroupAdminSDKType {
+  /** admin is the current account address of the group admin. */
+  admin: string;
+
+  /** group_id is the unique ID of the group. */
+  group_id: Long;
+
+  /** new_admin is the group new admin account address. */
+  new_admin: string;
+}
+
 /** MsgUpdateGroupAdminResponse is the Msg/UpdateGroupAdmin response type. */
 export interface MsgUpdateGroupAdminResponse {}
+
+/** MsgUpdateGroupAdminResponse is the Msg/UpdateGroupAdmin response type. */
+export interface MsgUpdateGroupAdminResponseSDKType {}
 
 /** MsgUpdateGroupMetadata is the Msg/UpdateGroupMetadata request type. */
 export interface MsgUpdateGroupMetadata {
@@ -113,8 +182,23 @@ export interface MsgUpdateGroupMetadata {
   metadata: string;
 }
 
+/** MsgUpdateGroupMetadata is the Msg/UpdateGroupMetadata request type. */
+export interface MsgUpdateGroupMetadataSDKType {
+  /** admin is the account address of the group admin. */
+  admin: string;
+
+  /** group_id is the unique ID of the group. */
+  group_id: Long;
+
+  /** metadata is the updated group's metadata. */
+  metadata: string;
+}
+
 /** MsgUpdateGroupMetadataResponse is the Msg/UpdateGroupMetadata response type. */
 export interface MsgUpdateGroupMetadataResponse {}
+
+/** MsgUpdateGroupMetadataResponse is the Msg/UpdateGroupMetadata response type. */
+export interface MsgUpdateGroupMetadataResponseSDKType {}
 
 /** MsgCreateGroupPolicy is the Msg/CreateGroupPolicy request type. */
 export interface MsgCreateGroupPolicy {
@@ -131,8 +215,29 @@ export interface MsgCreateGroupPolicy {
   decisionPolicy: Any;
 }
 
+/** MsgCreateGroupPolicy is the Msg/CreateGroupPolicy request type. */
+export interface MsgCreateGroupPolicySDKType {
+  /** admin is the account address of the group admin. */
+  admin: string;
+
+  /** group_id is the unique ID of the group. */
+  group_id: Long;
+
+  /** metadata is any arbitrary metadata attached to the group policy. */
+  metadata: string;
+
+  /** decision_policy specifies the group policy's decision policy. */
+  decision_policy: AnySDKType;
+}
+
 /** MsgCreateGroupPolicyResponse is the Msg/CreateGroupPolicy response type. */
 export interface MsgCreateGroupPolicyResponse {
+  /** address is the account address of the newly created group policy. */
+  address: string;
+}
+
+/** MsgCreateGroupPolicyResponse is the Msg/CreateGroupPolicy response type. */
+export interface MsgCreateGroupPolicyResponseSDKType {
   /** address is the account address of the newly created group policy. */
   address: string;
 }
@@ -147,6 +252,18 @@ export interface MsgUpdateGroupPolicyAdmin {
 
   /** new_admin is the new group policy admin. */
   newAdmin: string;
+}
+
+/** MsgUpdateGroupPolicyAdmin is the Msg/UpdateGroupPolicyAdmin request type. */
+export interface MsgUpdateGroupPolicyAdminSDKType {
+  /** admin is the account address of the group admin. */
+  admin: string;
+
+  /** address is the account address of the group policy. */
+  address: string;
+
+  /** new_admin is the new group policy admin. */
+  new_admin: string;
 }
 
 /** MsgCreateGroupWithPolicy is the Msg/CreateGroupWithPolicy request type. */
@@ -170,6 +287,27 @@ export interface MsgCreateGroupWithPolicy {
   decisionPolicy: Any;
 }
 
+/** MsgCreateGroupWithPolicy is the Msg/CreateGroupWithPolicy request type. */
+export interface MsgCreateGroupWithPolicySDKType {
+  /** admin is the account address of the group and group policy admin. */
+  admin: string;
+
+  /** members defines the group members. */
+  members: MemberSDKType[];
+
+  /** group_metadata is any arbitrary metadata attached to the group. */
+  group_metadata: string;
+
+  /** group_policy_metadata is any arbitrary metadata attached to the group policy. */
+  group_policy_metadata: string;
+
+  /** group_policy_as_admin is a boolean field, if set to true, the group policy account address will be used as group and group policy admin. */
+  group_policy_as_admin: boolean;
+
+  /** decision_policy specifies the group policy's decision policy. */
+  decision_policy: AnySDKType;
+}
+
 /** MsgCreateGroupWithPolicyResponse is the Msg/CreateGroupWithPolicy response type. */
 export interface MsgCreateGroupWithPolicyResponse {
   /** group_id is the unique ID of the newly created group with policy. */
@@ -179,8 +317,20 @@ export interface MsgCreateGroupWithPolicyResponse {
   groupPolicyAddress: string;
 }
 
+/** MsgCreateGroupWithPolicyResponse is the Msg/CreateGroupWithPolicy response type. */
+export interface MsgCreateGroupWithPolicyResponseSDKType {
+  /** group_id is the unique ID of the newly created group with policy. */
+  group_id: Long;
+
+  /** group_policy_address is the account address of the newly created group policy. */
+  group_policy_address: string;
+}
+
 /** MsgUpdateGroupPolicyAdminResponse is the Msg/UpdateGroupPolicyAdmin response type. */
 export interface MsgUpdateGroupPolicyAdminResponse {}
+
+/** MsgUpdateGroupPolicyAdminResponse is the Msg/UpdateGroupPolicyAdmin response type. */
+export interface MsgUpdateGroupPolicyAdminResponseSDKType {}
 
 /** MsgUpdateGroupPolicyDecisionPolicy is the Msg/UpdateGroupPolicyDecisionPolicy request type. */
 export interface MsgUpdateGroupPolicyDecisionPolicy {
@@ -194,8 +344,23 @@ export interface MsgUpdateGroupPolicyDecisionPolicy {
   decisionPolicy: Any;
 }
 
+/** MsgUpdateGroupPolicyDecisionPolicy is the Msg/UpdateGroupPolicyDecisionPolicy request type. */
+export interface MsgUpdateGroupPolicyDecisionPolicySDKType {
+  /** admin is the account address of the group admin. */
+  admin: string;
+
+  /** address is the account address of group policy. */
+  address: string;
+
+  /** decision_policy is the updated group policy's decision policy. */
+  decision_policy: AnySDKType;
+}
+
 /** MsgUpdateGroupPolicyDecisionPolicyResponse is the Msg/UpdateGroupPolicyDecisionPolicy response type. */
 export interface MsgUpdateGroupPolicyDecisionPolicyResponse {}
+
+/** MsgUpdateGroupPolicyDecisionPolicyResponse is the Msg/UpdateGroupPolicyDecisionPolicy response type. */
+export interface MsgUpdateGroupPolicyDecisionPolicyResponseSDKType {}
 
 /** MsgUpdateGroupPolicyMetadata is the Msg/UpdateGroupPolicyMetadata request type. */
 export interface MsgUpdateGroupPolicyMetadata {
@@ -209,8 +374,23 @@ export interface MsgUpdateGroupPolicyMetadata {
   metadata: string;
 }
 
+/** MsgUpdateGroupPolicyMetadata is the Msg/UpdateGroupPolicyMetadata request type. */
+export interface MsgUpdateGroupPolicyMetadataSDKType {
+  /** admin is the account address of the group admin. */
+  admin: string;
+
+  /** address is the account address of group policy. */
+  address: string;
+
+  /** metadata is the updated group policy metadata. */
+  metadata: string;
+}
+
 /** MsgUpdateGroupPolicyMetadataResponse is the Msg/UpdateGroupPolicyMetadata response type. */
 export interface MsgUpdateGroupPolicyMetadataResponse {}
+
+/** MsgUpdateGroupPolicyMetadataResponse is the Msg/UpdateGroupPolicyMetadata response type. */
+export interface MsgUpdateGroupPolicyMetadataResponseSDKType {}
 
 /** MsgSubmitProposal is the Msg/SubmitProposal request type. */
 export interface MsgSubmitProposal {
@@ -237,10 +417,41 @@ export interface MsgSubmitProposal {
   exec: Exec;
 }
 
+/** MsgSubmitProposal is the Msg/SubmitProposal request type. */
+export interface MsgSubmitProposalSDKType {
+  /** address is the account address of group policy. */
+  address: string;
+
+  /**
+   * proposers are the account addresses of the proposers.
+   * Proposers signatures will be counted as yes votes.
+   */
+  proposers: string[];
+
+  /** metadata is any arbitrary metadata to attached to the proposal. */
+  metadata: string;
+
+  /** messages is a list of `sdk.Msg`s that will be executed if the proposal passes. */
+  messages: AnySDKType[];
+
+  /**
+   * exec defines the mode of execution of the proposal,
+   * whether it should be executed immediately on creation or not.
+   * If so, proposers signatures are considered as Yes votes.
+   */
+  exec: ExecSDKType;
+}
+
 /** MsgSubmitProposalResponse is the Msg/SubmitProposal response type. */
 export interface MsgSubmitProposalResponse {
   /** proposal is the unique ID of the proposal. */
   proposalId: Long;
+}
+
+/** MsgSubmitProposalResponse is the Msg/SubmitProposal response type. */
+export interface MsgSubmitProposalResponseSDKType {
+  /** proposal is the unique ID of the proposal. */
+  proposal_id: Long;
 }
 
 /** MsgWithdrawProposal is the Msg/WithdrawProposal request type. */
@@ -252,8 +463,20 @@ export interface MsgWithdrawProposal {
   address: string;
 }
 
+/** MsgWithdrawProposal is the Msg/WithdrawProposal request type. */
+export interface MsgWithdrawProposalSDKType {
+  /** proposal is the unique ID of the proposal. */
+  proposal_id: Long;
+
+  /** address is the admin of the group policy or one of the proposer of the proposal. */
+  address: string;
+}
+
 /** MsgWithdrawProposalResponse is the Msg/WithdrawProposal response type. */
 export interface MsgWithdrawProposalResponse {}
+
+/** MsgWithdrawProposalResponse is the Msg/WithdrawProposal response type. */
+export interface MsgWithdrawProposalResponseSDKType {}
 
 /** MsgVote is the Msg/Vote request type. */
 export interface MsgVote {
@@ -276,8 +499,32 @@ export interface MsgVote {
   exec: Exec;
 }
 
+/** MsgVote is the Msg/Vote request type. */
+export interface MsgVoteSDKType {
+  /** proposal is the unique ID of the proposal. */
+  proposal_id: Long;
+
+  /** voter is the voter account address. */
+  voter: string;
+
+  /** option is the voter's choice on the proposal. */
+  option: VoteOptionSDKType;
+
+  /** metadata is any arbitrary metadata to attached to the vote. */
+  metadata: string;
+
+  /**
+   * exec defines whether the proposal should be executed
+   * immediately after voting or not.
+   */
+  exec: ExecSDKType;
+}
+
 /** MsgVoteResponse is the Msg/Vote response type. */
 export interface MsgVoteResponse {}
+
+/** MsgVoteResponse is the Msg/Vote response type. */
+export interface MsgVoteResponseSDKType {}
 
 /** MsgExec is the Msg/Exec request type. */
 export interface MsgExec {
@@ -288,8 +535,20 @@ export interface MsgExec {
   signer: string;
 }
 
+/** MsgExec is the Msg/Exec request type. */
+export interface MsgExecSDKType {
+  /** proposal is the unique ID of the proposal. */
+  proposal_id: Long;
+
+  /** signer is the account address used to execute the proposal. */
+  signer: string;
+}
+
 /** MsgExecResponse is the Msg/Exec request type. */
 export interface MsgExecResponse {}
+
+/** MsgExecResponse is the Msg/Exec request type. */
+export interface MsgExecResponseSDKType {}
 
 /** MsgLeaveGroup is the Msg/LeaveGroup request type. */
 export interface MsgLeaveGroup {
@@ -300,8 +559,20 @@ export interface MsgLeaveGroup {
   groupId: Long;
 }
 
+/** MsgLeaveGroup is the Msg/LeaveGroup request type. */
+export interface MsgLeaveGroupSDKType {
+  /** address is the account address of the group member. */
+  address: string;
+
+  /** group_id is the unique ID of the group. */
+  group_id: Long;
+}
+
 /** MsgLeaveGroupResponse is the Msg/LeaveGroup response type. */
 export interface MsgLeaveGroupResponse {}
+
+/** MsgLeaveGroupResponse is the Msg/LeaveGroup response type. */
+export interface MsgLeaveGroupResponseSDKType {}
 
 function createBaseMsgCreateGroup(): MsgCreateGroup {
   return {
@@ -386,6 +657,28 @@ export const MsgCreateGroup = {
     message.members = object.members?.map(e => Member.fromPartial(e)) || [];
     message.metadata = object.metadata ?? "";
     return message;
+  },
+
+  fromSDK(object: MsgCreateGroupSDKType): MsgCreateGroup {
+    return {
+      admin: isSet(object.admin) ? object.admin : undefined,
+      members: Array.isArray(object?.members) ? object.members.map((e: any) => Member.fromSDK(e)) : [],
+      metadata: isSet(object.metadata) ? object.metadata : undefined
+    };
+  },
+
+  toSDK(message: MsgCreateGroup): MsgCreateGroupSDKType {
+    const obj: any = {};
+    message.admin !== undefined && (obj.admin = message.admin);
+
+    if (message.members) {
+      obj.members = message.members.map(e => e ? Member.toSDK(e) : undefined);
+    } else {
+      obj.members = [];
+    }
+
+    message.metadata !== undefined && (obj.metadata = message.metadata);
+    return obj;
   }
 
 };
@@ -405,7 +698,7 @@ export const MsgCreateGroupResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateGroupResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateGroupResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateGroupResponse();
@@ -443,6 +736,18 @@ export const MsgCreateGroupResponse = {
     const message = createBaseMsgCreateGroupResponse();
     message.groupId = object.groupId !== undefined && object.groupId !== null ? Long.fromValue(object.groupId) : Long.UZERO;
     return message;
+  },
+
+  fromSDK(object: MsgCreateGroupResponseSDKType): MsgCreateGroupResponse {
+    return {
+      groupId: isSet(object.group_id) ? object.group_id : undefined
+    };
+  },
+
+  toSDK(message: MsgCreateGroupResponse): MsgCreateGroupResponseSDKType {
+    const obj: any = {};
+    message.groupId !== undefined && (obj.group_id = message.groupId);
+    return obj;
   }
 
 };
@@ -530,6 +835,28 @@ export const MsgUpdateGroupMembers = {
     message.groupId = object.groupId !== undefined && object.groupId !== null ? Long.fromValue(object.groupId) : Long.UZERO;
     message.memberUpdates = object.memberUpdates?.map(e => Member.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: MsgUpdateGroupMembersSDKType): MsgUpdateGroupMembers {
+    return {
+      admin: isSet(object.admin) ? object.admin : undefined,
+      groupId: isSet(object.group_id) ? object.group_id : undefined,
+      memberUpdates: Array.isArray(object?.member_updates) ? object.member_updates.map((e: any) => Member.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: MsgUpdateGroupMembers): MsgUpdateGroupMembersSDKType {
+    const obj: any = {};
+    message.admin !== undefined && (obj.admin = message.admin);
+    message.groupId !== undefined && (obj.group_id = message.groupId);
+
+    if (message.memberUpdates) {
+      obj.member_updates = message.memberUpdates.map(e => e ? Member.toSDK(e) : undefined);
+    } else {
+      obj.member_updates = [];
+    }
+
+    return obj;
   }
 
 };
@@ -543,7 +870,7 @@ export const MsgUpdateGroupMembersResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateGroupMembersResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateGroupMembersResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpdateGroupMembersResponse();
@@ -573,6 +900,15 @@ export const MsgUpdateGroupMembersResponse = {
   fromPartial(_: DeepPartial<MsgUpdateGroupMembersResponse>): MsgUpdateGroupMembersResponse {
     const message = createBaseMsgUpdateGroupMembersResponse();
     return message;
+  },
+
+  fromSDK(_: MsgUpdateGroupMembersResponseSDKType): MsgUpdateGroupMembersResponse {
+    return {};
+  },
+
+  toSDK(_: MsgUpdateGroupMembersResponse): MsgUpdateGroupMembersResponseSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -654,6 +990,22 @@ export const MsgUpdateGroupAdmin = {
     message.groupId = object.groupId !== undefined && object.groupId !== null ? Long.fromValue(object.groupId) : Long.UZERO;
     message.newAdmin = object.newAdmin ?? "";
     return message;
+  },
+
+  fromSDK(object: MsgUpdateGroupAdminSDKType): MsgUpdateGroupAdmin {
+    return {
+      admin: isSet(object.admin) ? object.admin : undefined,
+      groupId: isSet(object.group_id) ? object.group_id : undefined,
+      newAdmin: isSet(object.new_admin) ? object.new_admin : undefined
+    };
+  },
+
+  toSDK(message: MsgUpdateGroupAdmin): MsgUpdateGroupAdminSDKType {
+    const obj: any = {};
+    message.admin !== undefined && (obj.admin = message.admin);
+    message.groupId !== undefined && (obj.group_id = message.groupId);
+    message.newAdmin !== undefined && (obj.new_admin = message.newAdmin);
+    return obj;
   }
 
 };
@@ -667,7 +1019,7 @@ export const MsgUpdateGroupAdminResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateGroupAdminResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateGroupAdminResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpdateGroupAdminResponse();
@@ -697,6 +1049,15 @@ export const MsgUpdateGroupAdminResponse = {
   fromPartial(_: DeepPartial<MsgUpdateGroupAdminResponse>): MsgUpdateGroupAdminResponse {
     const message = createBaseMsgUpdateGroupAdminResponse();
     return message;
+  },
+
+  fromSDK(_: MsgUpdateGroupAdminResponseSDKType): MsgUpdateGroupAdminResponse {
+    return {};
+  },
+
+  toSDK(_: MsgUpdateGroupAdminResponse): MsgUpdateGroupAdminResponseSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -778,6 +1139,22 @@ export const MsgUpdateGroupMetadata = {
     message.groupId = object.groupId !== undefined && object.groupId !== null ? Long.fromValue(object.groupId) : Long.UZERO;
     message.metadata = object.metadata ?? "";
     return message;
+  },
+
+  fromSDK(object: MsgUpdateGroupMetadataSDKType): MsgUpdateGroupMetadata {
+    return {
+      admin: isSet(object.admin) ? object.admin : undefined,
+      groupId: isSet(object.group_id) ? object.group_id : undefined,
+      metadata: isSet(object.metadata) ? object.metadata : undefined
+    };
+  },
+
+  toSDK(message: MsgUpdateGroupMetadata): MsgUpdateGroupMetadataSDKType {
+    const obj: any = {};
+    message.admin !== undefined && (obj.admin = message.admin);
+    message.groupId !== undefined && (obj.group_id = message.groupId);
+    message.metadata !== undefined && (obj.metadata = message.metadata);
+    return obj;
   }
 
 };
@@ -791,7 +1168,7 @@ export const MsgUpdateGroupMetadataResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateGroupMetadataResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateGroupMetadataResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpdateGroupMetadataResponse();
@@ -821,6 +1198,15 @@ export const MsgUpdateGroupMetadataResponse = {
   fromPartial(_: DeepPartial<MsgUpdateGroupMetadataResponse>): MsgUpdateGroupMetadataResponse {
     const message = createBaseMsgUpdateGroupMetadataResponse();
     return message;
+  },
+
+  fromSDK(_: MsgUpdateGroupMetadataResponseSDKType): MsgUpdateGroupMetadataResponse {
+    return {};
+  },
+
+  toSDK(_: MsgUpdateGroupMetadataResponse): MsgUpdateGroupMetadataResponseSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -914,6 +1300,24 @@ export const MsgCreateGroupPolicy = {
     message.metadata = object.metadata ?? "";
     message.decisionPolicy = object.decisionPolicy !== undefined && object.decisionPolicy !== null ? Any.fromPartial(object.decisionPolicy) : undefined;
     return message;
+  },
+
+  fromSDK(object: MsgCreateGroupPolicySDKType): MsgCreateGroupPolicy {
+    return {
+      admin: isSet(object.admin) ? object.admin : undefined,
+      groupId: isSet(object.group_id) ? object.group_id : undefined,
+      metadata: isSet(object.metadata) ? object.metadata : undefined,
+      decisionPolicy: isSet(object.decision_policy) ? Any.fromSDK(object.decision_policy) : undefined
+    };
+  },
+
+  toSDK(message: MsgCreateGroupPolicy): MsgCreateGroupPolicySDKType {
+    const obj: any = {};
+    message.admin !== undefined && (obj.admin = message.admin);
+    message.groupId !== undefined && (obj.group_id = message.groupId);
+    message.metadata !== undefined && (obj.metadata = message.metadata);
+    message.decisionPolicy !== undefined && (obj.decision_policy = message.decisionPolicy ? Any.toSDK(message.decisionPolicy) : undefined);
+    return obj;
   }
 
 };
@@ -933,7 +1337,7 @@ export const MsgCreateGroupPolicyResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateGroupPolicyResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateGroupPolicyResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateGroupPolicyResponse();
@@ -971,6 +1375,18 @@ export const MsgCreateGroupPolicyResponse = {
     const message = createBaseMsgCreateGroupPolicyResponse();
     message.address = object.address ?? "";
     return message;
+  },
+
+  fromSDK(object: MsgCreateGroupPolicyResponseSDKType): MsgCreateGroupPolicyResponse {
+    return {
+      address: isSet(object.address) ? object.address : undefined
+    };
+  },
+
+  toSDK(message: MsgCreateGroupPolicyResponse): MsgCreateGroupPolicyResponseSDKType {
+    const obj: any = {};
+    message.address !== undefined && (obj.address = message.address);
+    return obj;
   }
 
 };
@@ -1052,6 +1468,22 @@ export const MsgUpdateGroupPolicyAdmin = {
     message.address = object.address ?? "";
     message.newAdmin = object.newAdmin ?? "";
     return message;
+  },
+
+  fromSDK(object: MsgUpdateGroupPolicyAdminSDKType): MsgUpdateGroupPolicyAdmin {
+    return {
+      admin: isSet(object.admin) ? object.admin : undefined,
+      address: isSet(object.address) ? object.address : undefined,
+      newAdmin: isSet(object.new_admin) ? object.new_admin : undefined
+    };
+  },
+
+  toSDK(message: MsgUpdateGroupPolicyAdmin): MsgUpdateGroupPolicyAdminSDKType {
+    const obj: any = {};
+    message.admin !== undefined && (obj.admin = message.admin);
+    message.address !== undefined && (obj.address = message.address);
+    message.newAdmin !== undefined && (obj.new_admin = message.newAdmin);
+    return obj;
   }
 
 };
@@ -1175,6 +1607,34 @@ export const MsgCreateGroupWithPolicy = {
     message.groupPolicyAsAdmin = object.groupPolicyAsAdmin ?? false;
     message.decisionPolicy = object.decisionPolicy !== undefined && object.decisionPolicy !== null ? Any.fromPartial(object.decisionPolicy) : undefined;
     return message;
+  },
+
+  fromSDK(object: MsgCreateGroupWithPolicySDKType): MsgCreateGroupWithPolicy {
+    return {
+      admin: isSet(object.admin) ? object.admin : undefined,
+      members: Array.isArray(object?.members) ? object.members.map((e: any) => Member.fromSDK(e)) : [],
+      groupMetadata: isSet(object.group_metadata) ? object.group_metadata : undefined,
+      groupPolicyMetadata: isSet(object.group_policy_metadata) ? object.group_policy_metadata : undefined,
+      groupPolicyAsAdmin: isSet(object.group_policy_as_admin) ? object.group_policy_as_admin : undefined,
+      decisionPolicy: isSet(object.decision_policy) ? Any.fromSDK(object.decision_policy) : undefined
+    };
+  },
+
+  toSDK(message: MsgCreateGroupWithPolicy): MsgCreateGroupWithPolicySDKType {
+    const obj: any = {};
+    message.admin !== undefined && (obj.admin = message.admin);
+
+    if (message.members) {
+      obj.members = message.members.map(e => e ? Member.toSDK(e) : undefined);
+    } else {
+      obj.members = [];
+    }
+
+    message.groupMetadata !== undefined && (obj.group_metadata = message.groupMetadata);
+    message.groupPolicyMetadata !== undefined && (obj.group_policy_metadata = message.groupPolicyMetadata);
+    message.groupPolicyAsAdmin !== undefined && (obj.group_policy_as_admin = message.groupPolicyAsAdmin);
+    message.decisionPolicy !== undefined && (obj.decision_policy = message.decisionPolicy ? Any.toSDK(message.decisionPolicy) : undefined);
+    return obj;
   }
 
 };
@@ -1199,7 +1659,7 @@ export const MsgCreateGroupWithPolicyResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateGroupWithPolicyResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateGroupWithPolicyResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateGroupWithPolicyResponse();
@@ -1244,6 +1704,20 @@ export const MsgCreateGroupWithPolicyResponse = {
     message.groupId = object.groupId !== undefined && object.groupId !== null ? Long.fromValue(object.groupId) : Long.UZERO;
     message.groupPolicyAddress = object.groupPolicyAddress ?? "";
     return message;
+  },
+
+  fromSDK(object: MsgCreateGroupWithPolicyResponseSDKType): MsgCreateGroupWithPolicyResponse {
+    return {
+      groupId: isSet(object.group_id) ? object.group_id : undefined,
+      groupPolicyAddress: isSet(object.group_policy_address) ? object.group_policy_address : undefined
+    };
+  },
+
+  toSDK(message: MsgCreateGroupWithPolicyResponse): MsgCreateGroupWithPolicyResponseSDKType {
+    const obj: any = {};
+    message.groupId !== undefined && (obj.group_id = message.groupId);
+    message.groupPolicyAddress !== undefined && (obj.group_policy_address = message.groupPolicyAddress);
+    return obj;
   }
 
 };
@@ -1257,7 +1731,7 @@ export const MsgUpdateGroupPolicyAdminResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateGroupPolicyAdminResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateGroupPolicyAdminResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpdateGroupPolicyAdminResponse();
@@ -1287,6 +1761,15 @@ export const MsgUpdateGroupPolicyAdminResponse = {
   fromPartial(_: DeepPartial<MsgUpdateGroupPolicyAdminResponse>): MsgUpdateGroupPolicyAdminResponse {
     const message = createBaseMsgUpdateGroupPolicyAdminResponse();
     return message;
+  },
+
+  fromSDK(_: MsgUpdateGroupPolicyAdminResponseSDKType): MsgUpdateGroupPolicyAdminResponse {
+    return {};
+  },
+
+  toSDK(_: MsgUpdateGroupPolicyAdminResponse): MsgUpdateGroupPolicyAdminResponseSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -1368,6 +1851,22 @@ export const MsgUpdateGroupPolicyDecisionPolicy = {
     message.address = object.address ?? "";
     message.decisionPolicy = object.decisionPolicy !== undefined && object.decisionPolicy !== null ? Any.fromPartial(object.decisionPolicy) : undefined;
     return message;
+  },
+
+  fromSDK(object: MsgUpdateGroupPolicyDecisionPolicySDKType): MsgUpdateGroupPolicyDecisionPolicy {
+    return {
+      admin: isSet(object.admin) ? object.admin : undefined,
+      address: isSet(object.address) ? object.address : undefined,
+      decisionPolicy: isSet(object.decision_policy) ? Any.fromSDK(object.decision_policy) : undefined
+    };
+  },
+
+  toSDK(message: MsgUpdateGroupPolicyDecisionPolicy): MsgUpdateGroupPolicyDecisionPolicySDKType {
+    const obj: any = {};
+    message.admin !== undefined && (obj.admin = message.admin);
+    message.address !== undefined && (obj.address = message.address);
+    message.decisionPolicy !== undefined && (obj.decision_policy = message.decisionPolicy ? Any.toSDK(message.decisionPolicy) : undefined);
+    return obj;
   }
 
 };
@@ -1381,7 +1880,7 @@ export const MsgUpdateGroupPolicyDecisionPolicyResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateGroupPolicyDecisionPolicyResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateGroupPolicyDecisionPolicyResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpdateGroupPolicyDecisionPolicyResponse();
@@ -1411,6 +1910,15 @@ export const MsgUpdateGroupPolicyDecisionPolicyResponse = {
   fromPartial(_: DeepPartial<MsgUpdateGroupPolicyDecisionPolicyResponse>): MsgUpdateGroupPolicyDecisionPolicyResponse {
     const message = createBaseMsgUpdateGroupPolicyDecisionPolicyResponse();
     return message;
+  },
+
+  fromSDK(_: MsgUpdateGroupPolicyDecisionPolicyResponseSDKType): MsgUpdateGroupPolicyDecisionPolicyResponse {
+    return {};
+  },
+
+  toSDK(_: MsgUpdateGroupPolicyDecisionPolicyResponse): MsgUpdateGroupPolicyDecisionPolicyResponseSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -1492,6 +2000,22 @@ export const MsgUpdateGroupPolicyMetadata = {
     message.address = object.address ?? "";
     message.metadata = object.metadata ?? "";
     return message;
+  },
+
+  fromSDK(object: MsgUpdateGroupPolicyMetadataSDKType): MsgUpdateGroupPolicyMetadata {
+    return {
+      admin: isSet(object.admin) ? object.admin : undefined,
+      address: isSet(object.address) ? object.address : undefined,
+      metadata: isSet(object.metadata) ? object.metadata : undefined
+    };
+  },
+
+  toSDK(message: MsgUpdateGroupPolicyMetadata): MsgUpdateGroupPolicyMetadataSDKType {
+    const obj: any = {};
+    message.admin !== undefined && (obj.admin = message.admin);
+    message.address !== undefined && (obj.address = message.address);
+    message.metadata !== undefined && (obj.metadata = message.metadata);
+    return obj;
   }
 
 };
@@ -1505,7 +2029,7 @@ export const MsgUpdateGroupPolicyMetadataResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateGroupPolicyMetadataResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateGroupPolicyMetadataResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpdateGroupPolicyMetadataResponse();
@@ -1535,6 +2059,15 @@ export const MsgUpdateGroupPolicyMetadataResponse = {
   fromPartial(_: DeepPartial<MsgUpdateGroupPolicyMetadataResponse>): MsgUpdateGroupPolicyMetadataResponse {
     const message = createBaseMsgUpdateGroupPolicyMetadataResponse();
     return message;
+  },
+
+  fromSDK(_: MsgUpdateGroupPolicyMetadataResponseSDKType): MsgUpdateGroupPolicyMetadataResponse {
+    return {};
+  },
+
+  toSDK(_: MsgUpdateGroupPolicyMetadataResponse): MsgUpdateGroupPolicyMetadataResponseSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -1652,6 +2185,38 @@ export const MsgSubmitProposal = {
     message.messages = object.messages?.map(e => Any.fromPartial(e)) || [];
     message.exec = object.exec ?? 0;
     return message;
+  },
+
+  fromSDK(object: MsgSubmitProposalSDKType): MsgSubmitProposal {
+    return {
+      address: isSet(object.address) ? object.address : undefined,
+      proposers: Array.isArray(object?.proposers) ? object.proposers.map((e: any) => e) : [],
+      metadata: isSet(object.metadata) ? object.metadata : undefined,
+      messages: Array.isArray(object?.messages) ? object.messages.map((e: any) => Any.fromSDK(e)) : [],
+      exec: isSet(object.exec) ? execFromJSON(object.exec) : 0
+    };
+  },
+
+  toSDK(message: MsgSubmitProposal): MsgSubmitProposalSDKType {
+    const obj: any = {};
+    message.address !== undefined && (obj.address = message.address);
+
+    if (message.proposers) {
+      obj.proposers = message.proposers.map(e => e);
+    } else {
+      obj.proposers = [];
+    }
+
+    message.metadata !== undefined && (obj.metadata = message.metadata);
+
+    if (message.messages) {
+      obj.messages = message.messages.map(e => e ? Any.toSDK(e) : undefined);
+    } else {
+      obj.messages = [];
+    }
+
+    message.exec !== undefined && (obj.exec = execToJSON(message.exec));
+    return obj;
   }
 
 };
@@ -1671,7 +2236,7 @@ export const MsgSubmitProposalResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgSubmitProposalResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgSubmitProposalResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSubmitProposalResponse();
@@ -1709,6 +2274,18 @@ export const MsgSubmitProposalResponse = {
     const message = createBaseMsgSubmitProposalResponse();
     message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? Long.fromValue(object.proposalId) : Long.UZERO;
     return message;
+  },
+
+  fromSDK(object: MsgSubmitProposalResponseSDKType): MsgSubmitProposalResponse {
+    return {
+      proposalId: isSet(object.proposal_id) ? object.proposal_id : undefined
+    };
+  },
+
+  toSDK(message: MsgSubmitProposalResponse): MsgSubmitProposalResponseSDKType {
+    const obj: any = {};
+    message.proposalId !== undefined && (obj.proposal_id = message.proposalId);
+    return obj;
   }
 
 };
@@ -1778,6 +2355,20 @@ export const MsgWithdrawProposal = {
     message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? Long.fromValue(object.proposalId) : Long.UZERO;
     message.address = object.address ?? "";
     return message;
+  },
+
+  fromSDK(object: MsgWithdrawProposalSDKType): MsgWithdrawProposal {
+    return {
+      proposalId: isSet(object.proposal_id) ? object.proposal_id : undefined,
+      address: isSet(object.address) ? object.address : undefined
+    };
+  },
+
+  toSDK(message: MsgWithdrawProposal): MsgWithdrawProposalSDKType {
+    const obj: any = {};
+    message.proposalId !== undefined && (obj.proposal_id = message.proposalId);
+    message.address !== undefined && (obj.address = message.address);
+    return obj;
   }
 
 };
@@ -1791,7 +2382,7 @@ export const MsgWithdrawProposalResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgWithdrawProposalResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgWithdrawProposalResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgWithdrawProposalResponse();
@@ -1821,6 +2412,15 @@ export const MsgWithdrawProposalResponse = {
   fromPartial(_: DeepPartial<MsgWithdrawProposalResponse>): MsgWithdrawProposalResponse {
     const message = createBaseMsgWithdrawProposalResponse();
     return message;
+  },
+
+  fromSDK(_: MsgWithdrawProposalResponseSDKType): MsgWithdrawProposalResponse {
+    return {};
+  },
+
+  toSDK(_: MsgWithdrawProposalResponse): MsgWithdrawProposalResponseSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -1926,6 +2526,26 @@ export const MsgVote = {
     message.metadata = object.metadata ?? "";
     message.exec = object.exec ?? 0;
     return message;
+  },
+
+  fromSDK(object: MsgVoteSDKType): MsgVote {
+    return {
+      proposalId: isSet(object.proposal_id) ? object.proposal_id : undefined,
+      voter: isSet(object.voter) ? object.voter : undefined,
+      option: isSet(object.option) ? voteOptionFromJSON(object.option) : 0,
+      metadata: isSet(object.metadata) ? object.metadata : undefined,
+      exec: isSet(object.exec) ? execFromJSON(object.exec) : 0
+    };
+  },
+
+  toSDK(message: MsgVote): MsgVoteSDKType {
+    const obj: any = {};
+    message.proposalId !== undefined && (obj.proposal_id = message.proposalId);
+    message.voter !== undefined && (obj.voter = message.voter);
+    message.option !== undefined && (obj.option = voteOptionToJSON(message.option));
+    message.metadata !== undefined && (obj.metadata = message.metadata);
+    message.exec !== undefined && (obj.exec = execToJSON(message.exec));
+    return obj;
   }
 
 };
@@ -1939,7 +2559,7 @@ export const MsgVoteResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgVoteResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgVoteResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgVoteResponse();
@@ -1969,6 +2589,15 @@ export const MsgVoteResponse = {
   fromPartial(_: DeepPartial<MsgVoteResponse>): MsgVoteResponse {
     const message = createBaseMsgVoteResponse();
     return message;
+  },
+
+  fromSDK(_: MsgVoteResponseSDKType): MsgVoteResponse {
+    return {};
+  },
+
+  toSDK(_: MsgVoteResponse): MsgVoteResponseSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -2038,6 +2667,20 @@ export const MsgExec = {
     message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? Long.fromValue(object.proposalId) : Long.UZERO;
     message.signer = object.signer ?? "";
     return message;
+  },
+
+  fromSDK(object: MsgExecSDKType): MsgExec {
+    return {
+      proposalId: isSet(object.proposal_id) ? object.proposal_id : undefined,
+      signer: isSet(object.signer) ? object.signer : undefined
+    };
+  },
+
+  toSDK(message: MsgExec): MsgExecSDKType {
+    const obj: any = {};
+    message.proposalId !== undefined && (obj.proposal_id = message.proposalId);
+    message.signer !== undefined && (obj.signer = message.signer);
+    return obj;
   }
 
 };
@@ -2051,7 +2694,7 @@ export const MsgExecResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgExecResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgExecResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgExecResponse();
@@ -2081,6 +2724,15 @@ export const MsgExecResponse = {
   fromPartial(_: DeepPartial<MsgExecResponse>): MsgExecResponse {
     const message = createBaseMsgExecResponse();
     return message;
+  },
+
+  fromSDK(_: MsgExecResponseSDKType): MsgExecResponse {
+    return {};
+  },
+
+  toSDK(_: MsgExecResponse): MsgExecResponseSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -2150,6 +2802,20 @@ export const MsgLeaveGroup = {
     message.address = object.address ?? "";
     message.groupId = object.groupId !== undefined && object.groupId !== null ? Long.fromValue(object.groupId) : Long.UZERO;
     return message;
+  },
+
+  fromSDK(object: MsgLeaveGroupSDKType): MsgLeaveGroup {
+    return {
+      address: isSet(object.address) ? object.address : undefined,
+      groupId: isSet(object.group_id) ? object.group_id : undefined
+    };
+  },
+
+  toSDK(message: MsgLeaveGroup): MsgLeaveGroupSDKType {
+    const obj: any = {};
+    message.address !== undefined && (obj.address = message.address);
+    message.groupId !== undefined && (obj.group_id = message.groupId);
+    return obj;
   }
 
 };
@@ -2163,7 +2829,7 @@ export const MsgLeaveGroupResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgLeaveGroupResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgLeaveGroupResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgLeaveGroupResponse();
@@ -2193,6 +2859,15 @@ export const MsgLeaveGroupResponse = {
   fromPartial(_: DeepPartial<MsgLeaveGroupResponse>): MsgLeaveGroupResponse {
     const message = createBaseMsgLeaveGroupResponse();
     return message;
+  },
+
+  fromSDK(_: MsgLeaveGroupResponseSDKType): MsgLeaveGroupResponse {
+    return {};
+  },
+
+  toSDK(_: MsgLeaveGroupResponse): MsgLeaveGroupResponseSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };

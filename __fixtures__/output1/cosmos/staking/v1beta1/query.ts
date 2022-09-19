@@ -1,5 +1,5 @@
-import { PageRequest, PageResponse } from "../../base/query/v1beta1/pagination";
-import { Validator, DelegationResponse, UnbondingDelegation, RedelegationResponse, HistoricalInfo, Pool, Params } from "./staking";
+import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../base/query/v1beta1/pagination";
+import { Validator, ValidatorSDKType, DelegationResponse, DelegationResponseSDKType, UnbondingDelegation, UnbondingDelegationSDKType, RedelegationResponse, RedelegationResponseSDKType, HistoricalInfo, HistoricalInfoSDKType, Pool, PoolSDKType, Params, ParamsSDKType } from "./staking";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, Long } from "@osmonauts/helpers";
 export const protobufPackage = "cosmos.staking.v1beta1";
@@ -13,6 +13,15 @@ export interface QueryValidatorsRequest {
   pagination?: PageRequest;
 }
 
+/** QueryValidatorsRequest is request type for Query/Validators RPC method. */
+export interface QueryValidatorsRequestSDKType {
+  /** status enables to query for validators matching a given status. */
+  status?: string;
+
+  /** pagination defines an optional pagination for the request. */
+  pagination?: PageRequestSDKType;
+}
+
 /** QueryValidatorsResponse is response type for the Query/Validators RPC method */
 export interface QueryValidatorsResponse {
   /** validators contains all the queried validators. */
@@ -22,16 +31,37 @@ export interface QueryValidatorsResponse {
   pagination?: PageResponse;
 }
 
+/** QueryValidatorsResponse is response type for the Query/Validators RPC method */
+export interface QueryValidatorsResponseSDKType {
+  /** validators contains all the queried validators. */
+  validators: ValidatorSDKType[];
+
+  /** pagination defines the pagination in the response. */
+  pagination?: PageResponseSDKType;
+}
+
 /** QueryValidatorRequest is response type for the Query/Validator RPC method */
 export interface QueryValidatorRequest {
   /** validator_addr defines the validator address to query for. */
   validatorAddr: string;
 }
 
+/** QueryValidatorRequest is response type for the Query/Validator RPC method */
+export interface QueryValidatorRequestSDKType {
+  /** validator_addr defines the validator address to query for. */
+  validator_addr: string;
+}
+
 /** QueryValidatorResponse is response type for the Query/Validator RPC method */
 export interface QueryValidatorResponse {
   /** validator defines the the validator info. */
   validator: Validator;
+}
+
+/** QueryValidatorResponse is response type for the Query/Validator RPC method */
+export interface QueryValidatorResponseSDKType {
+  /** validator defines the the validator info. */
+  validator: ValidatorSDKType;
 }
 
 /**
@@ -47,6 +77,18 @@ export interface QueryValidatorDelegationsRequest {
 }
 
 /**
+ * QueryValidatorDelegationsRequest is request type for the
+ * Query/ValidatorDelegations RPC method
+ */
+export interface QueryValidatorDelegationsRequestSDKType {
+  /** validator_addr defines the validator address to query for. */
+  validator_addr: string;
+
+  /** pagination defines an optional pagination for the request. */
+  pagination?: PageRequestSDKType;
+}
+
+/**
  * QueryValidatorDelegationsResponse is response type for the
  * Query/ValidatorDelegations RPC method
  */
@@ -55,6 +97,17 @@ export interface QueryValidatorDelegationsResponse {
 
   /** pagination defines the pagination in the response. */
   pagination?: PageResponse;
+}
+
+/**
+ * QueryValidatorDelegationsResponse is response type for the
+ * Query/ValidatorDelegations RPC method
+ */
+export interface QueryValidatorDelegationsResponseSDKType {
+  delegation_responses: DelegationResponseSDKType[];
+
+  /** pagination defines the pagination in the response. */
+  pagination?: PageResponseSDKType;
 }
 
 /**
@@ -70,6 +123,18 @@ export interface QueryValidatorUnbondingDelegationsRequest {
 }
 
 /**
+ * QueryValidatorUnbondingDelegationsRequest is required type for the
+ * Query/ValidatorUnbondingDelegations RPC method
+ */
+export interface QueryValidatorUnbondingDelegationsRequestSDKType {
+  /** validator_addr defines the validator address to query for. */
+  validator_addr: string;
+
+  /** pagination defines an optional pagination for the request. */
+  pagination?: PageRequestSDKType;
+}
+
+/**
  * QueryValidatorUnbondingDelegationsResponse is response type for the
  * Query/ValidatorUnbondingDelegations RPC method.
  */
@@ -78,6 +143,17 @@ export interface QueryValidatorUnbondingDelegationsResponse {
 
   /** pagination defines the pagination in the response. */
   pagination?: PageResponse;
+}
+
+/**
+ * QueryValidatorUnbondingDelegationsResponse is response type for the
+ * Query/ValidatorUnbondingDelegations RPC method.
+ */
+export interface QueryValidatorUnbondingDelegationsResponseSDKType {
+  unbonding_responses: UnbondingDelegationSDKType[];
+
+  /** pagination defines the pagination in the response. */
+  pagination?: PageResponseSDKType;
 }
 
 /** QueryDelegationRequest is request type for the Query/Delegation RPC method. */
@@ -89,10 +165,25 @@ export interface QueryDelegationRequest {
   validatorAddr: string;
 }
 
+/** QueryDelegationRequest is request type for the Query/Delegation RPC method. */
+export interface QueryDelegationRequestSDKType {
+  /** delegator_addr defines the delegator address to query for. */
+  delegator_addr: string;
+
+  /** validator_addr defines the validator address to query for. */
+  validator_addr: string;
+}
+
 /** QueryDelegationResponse is response type for the Query/Delegation RPC method. */
 export interface QueryDelegationResponse {
   /** delegation_responses defines the delegation info of a delegation. */
   delegationResponse: DelegationResponse;
+}
+
+/** QueryDelegationResponse is response type for the Query/Delegation RPC method. */
+export interface QueryDelegationResponseSDKType {
+  /** delegation_responses defines the delegation info of a delegation. */
+  delegation_response: DelegationResponseSDKType;
 }
 
 /**
@@ -108,12 +199,33 @@ export interface QueryUnbondingDelegationRequest {
 }
 
 /**
+ * QueryUnbondingDelegationRequest is request type for the
+ * Query/UnbondingDelegation RPC method.
+ */
+export interface QueryUnbondingDelegationRequestSDKType {
+  /** delegator_addr defines the delegator address to query for. */
+  delegator_addr: string;
+
+  /** validator_addr defines the validator address to query for. */
+  validator_addr: string;
+}
+
+/**
  * QueryDelegationResponse is response type for the Query/UnbondingDelegation
  * RPC method.
  */
 export interface QueryUnbondingDelegationResponse {
   /** unbond defines the unbonding information of a delegation. */
   unbond: UnbondingDelegation;
+}
+
+/**
+ * QueryDelegationResponse is response type for the Query/UnbondingDelegation
+ * RPC method.
+ */
+export interface QueryUnbondingDelegationResponseSDKType {
+  /** unbond defines the unbonding information of a delegation. */
+  unbond: UnbondingDelegationSDKType;
 }
 
 /**
@@ -129,6 +241,18 @@ export interface QueryDelegatorDelegationsRequest {
 }
 
 /**
+ * QueryDelegatorDelegationsRequest is request type for the
+ * Query/DelegatorDelegations RPC method.
+ */
+export interface QueryDelegatorDelegationsRequestSDKType {
+  /** delegator_addr defines the delegator address to query for. */
+  delegator_addr: string;
+
+  /** pagination defines an optional pagination for the request. */
+  pagination?: PageRequestSDKType;
+}
+
+/**
  * QueryDelegatorDelegationsResponse is response type for the
  * Query/DelegatorDelegations RPC method.
  */
@@ -138,6 +262,18 @@ export interface QueryDelegatorDelegationsResponse {
 
   /** pagination defines the pagination in the response. */
   pagination?: PageResponse;
+}
+
+/**
+ * QueryDelegatorDelegationsResponse is response type for the
+ * Query/DelegatorDelegations RPC method.
+ */
+export interface QueryDelegatorDelegationsResponseSDKType {
+  /** delegation_responses defines all the delegations' info of a delegator. */
+  delegation_responses: DelegationResponseSDKType[];
+
+  /** pagination defines the pagination in the response. */
+  pagination?: PageResponseSDKType;
 }
 
 /**
@@ -153,6 +289,18 @@ export interface QueryDelegatorUnbondingDelegationsRequest {
 }
 
 /**
+ * QueryDelegatorUnbondingDelegationsRequest is request type for the
+ * Query/DelegatorUnbondingDelegations RPC method.
+ */
+export interface QueryDelegatorUnbondingDelegationsRequestSDKType {
+  /** delegator_addr defines the delegator address to query for. */
+  delegator_addr: string;
+
+  /** pagination defines an optional pagination for the request. */
+  pagination?: PageRequestSDKType;
+}
+
+/**
  * QueryUnbondingDelegatorDelegationsResponse is response type for the
  * Query/UnbondingDelegatorDelegations RPC method.
  */
@@ -161,6 +309,17 @@ export interface QueryDelegatorUnbondingDelegationsResponse {
 
   /** pagination defines the pagination in the response. */
   pagination?: PageResponse;
+}
+
+/**
+ * QueryUnbondingDelegatorDelegationsResponse is response type for the
+ * Query/UnbondingDelegatorDelegations RPC method.
+ */
+export interface QueryDelegatorUnbondingDelegationsResponseSDKType {
+  unbonding_responses: UnbondingDelegationSDKType[];
+
+  /** pagination defines the pagination in the response. */
+  pagination?: PageResponseSDKType;
 }
 
 /**
@@ -182,6 +341,24 @@ export interface QueryRedelegationsRequest {
 }
 
 /**
+ * QueryRedelegationsRequest is request type for the Query/Redelegations RPC
+ * method.
+ */
+export interface QueryRedelegationsRequestSDKType {
+  /** delegator_addr defines the delegator address to query for. */
+  delegator_addr: string;
+
+  /** src_validator_addr defines the validator address to redelegate from. */
+  src_validator_addr?: string;
+
+  /** dst_validator_addr defines the validator address to redelegate to. */
+  dst_validator_addr?: string;
+
+  /** pagination defines an optional pagination for the request. */
+  pagination?: PageRequestSDKType;
+}
+
+/**
  * QueryRedelegationsResponse is response type for the Query/Redelegations RPC
  * method.
  */
@@ -190,6 +367,17 @@ export interface QueryRedelegationsResponse {
 
   /** pagination defines the pagination in the response. */
   pagination?: PageResponse;
+}
+
+/**
+ * QueryRedelegationsResponse is response type for the Query/Redelegations RPC
+ * method.
+ */
+export interface QueryRedelegationsResponseSDKType {
+  redelegation_responses: RedelegationResponseSDKType[];
+
+  /** pagination defines the pagination in the response. */
+  pagination?: PageResponseSDKType;
 }
 
 /**
@@ -205,6 +393,18 @@ export interface QueryDelegatorValidatorsRequest {
 }
 
 /**
+ * QueryDelegatorValidatorsRequest is request type for the
+ * Query/DelegatorValidators RPC method.
+ */
+export interface QueryDelegatorValidatorsRequestSDKType {
+  /** delegator_addr defines the delegator address to query for. */
+  delegator_addr: string;
+
+  /** pagination defines an optional pagination for the request. */
+  pagination?: PageRequestSDKType;
+}
+
+/**
  * QueryDelegatorValidatorsResponse is response type for the
  * Query/DelegatorValidators RPC method.
  */
@@ -214,6 +414,18 @@ export interface QueryDelegatorValidatorsResponse {
 
   /** pagination defines the pagination in the response. */
   pagination?: PageResponse;
+}
+
+/**
+ * QueryDelegatorValidatorsResponse is response type for the
+ * Query/DelegatorValidators RPC method.
+ */
+export interface QueryDelegatorValidatorsResponseSDKType {
+  /** validators defines the the validators' info of a delegator. */
+  validators: ValidatorSDKType[];
+
+  /** pagination defines the pagination in the response. */
+  pagination?: PageResponseSDKType;
 }
 
 /**
@@ -229,6 +441,18 @@ export interface QueryDelegatorValidatorRequest {
 }
 
 /**
+ * QueryDelegatorValidatorRequest is request type for the
+ * Query/DelegatorValidator RPC method.
+ */
+export interface QueryDelegatorValidatorRequestSDKType {
+  /** delegator_addr defines the delegator address to query for. */
+  delegator_addr: string;
+
+  /** validator_addr defines the validator address to query for. */
+  validator_addr: string;
+}
+
+/**
  * QueryDelegatorValidatorResponse response type for the
  * Query/DelegatorValidator RPC method.
  */
@@ -238,10 +462,28 @@ export interface QueryDelegatorValidatorResponse {
 }
 
 /**
+ * QueryDelegatorValidatorResponse response type for the
+ * Query/DelegatorValidator RPC method.
+ */
+export interface QueryDelegatorValidatorResponseSDKType {
+  /** validator defines the the validator info. */
+  validator: ValidatorSDKType;
+}
+
+/**
  * QueryHistoricalInfoRequest is request type for the Query/HistoricalInfo RPC
  * method.
  */
 export interface QueryHistoricalInfoRequest {
+  /** height defines at which height to query the historical info. */
+  height: Long;
+}
+
+/**
+ * QueryHistoricalInfoRequest is request type for the Query/HistoricalInfo RPC
+ * method.
+ */
+export interface QueryHistoricalInfoRequestSDKType {
   /** height defines at which height to query the historical info. */
   height: Long;
 }
@@ -255,8 +497,20 @@ export interface QueryHistoricalInfoResponse {
   hist: HistoricalInfo;
 }
 
+/**
+ * QueryHistoricalInfoResponse is response type for the Query/HistoricalInfo RPC
+ * method.
+ */
+export interface QueryHistoricalInfoResponseSDKType {
+  /** hist defines the historical info at the given height. */
+  hist: HistoricalInfoSDKType;
+}
+
 /** QueryPoolRequest is request type for the Query/Pool RPC method. */
 export interface QueryPoolRequest {}
+
+/** QueryPoolRequest is request type for the Query/Pool RPC method. */
+export interface QueryPoolRequestSDKType {}
 
 /** QueryPoolResponse is response type for the Query/Pool RPC method. */
 export interface QueryPoolResponse {
@@ -264,13 +518,28 @@ export interface QueryPoolResponse {
   pool: Pool;
 }
 
+/** QueryPoolResponse is response type for the Query/Pool RPC method. */
+export interface QueryPoolResponseSDKType {
+  /** pool defines the pool info. */
+  pool: PoolSDKType;
+}
+
 /** QueryParamsRequest is request type for the Query/Params RPC method. */
 export interface QueryParamsRequest {}
+
+/** QueryParamsRequest is request type for the Query/Params RPC method. */
+export interface QueryParamsRequestSDKType {}
 
 /** QueryParamsResponse is response type for the Query/Params RPC method. */
 export interface QueryParamsResponse {
   /** params holds all the parameters of this module. */
   params: Params;
+}
+
+/** QueryParamsResponse is response type for the Query/Params RPC method. */
+export interface QueryParamsResponseSDKType {
+  /** params holds all the parameters of this module. */
+  params: ParamsSDKType;
 }
 
 function createBaseQueryValidatorsRequest(): QueryValidatorsRequest {
@@ -338,6 +607,20 @@ export const QueryValidatorsRequest = {
     message.status = object.status ?? "";
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryValidatorsRequestSDKType): QueryValidatorsRequest {
+    return {
+      status: isSet(object.status) ? object.status : undefined,
+      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  toSDK(message: QueryValidatorsRequest): QueryValidatorsRequestSDKType {
+    const obj: any = {};
+    message.status !== undefined && (obj.status = message.status);
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
+    return obj;
   }
 
 };
@@ -362,7 +645,7 @@ export const QueryValidatorsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryValidatorsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryValidatorsResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryValidatorsResponse();
@@ -413,6 +696,26 @@ export const QueryValidatorsResponse = {
     message.validators = object.validators?.map(e => Validator.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryValidatorsResponseSDKType): QueryValidatorsResponse {
+    return {
+      validators: Array.isArray(object?.validators) ? object.validators.map((e: any) => Validator.fromSDK(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  toSDK(message: QueryValidatorsResponse): QueryValidatorsResponseSDKType {
+    const obj: any = {};
+
+    if (message.validators) {
+      obj.validators = message.validators.map(e => e ? Validator.toSDK(e) : undefined);
+    } else {
+      obj.validators = [];
+    }
+
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
+    return obj;
   }
 
 };
@@ -470,6 +773,18 @@ export const QueryValidatorRequest = {
     const message = createBaseQueryValidatorRequest();
     message.validatorAddr = object.validatorAddr ?? "";
     return message;
+  },
+
+  fromSDK(object: QueryValidatorRequestSDKType): QueryValidatorRequest {
+    return {
+      validatorAddr: isSet(object.validator_addr) ? object.validator_addr : undefined
+    };
+  },
+
+  toSDK(message: QueryValidatorRequest): QueryValidatorRequestSDKType {
+    const obj: any = {};
+    message.validatorAddr !== undefined && (obj.validator_addr = message.validatorAddr);
+    return obj;
   }
 
 };
@@ -489,7 +804,7 @@ export const QueryValidatorResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryValidatorResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryValidatorResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryValidatorResponse();
@@ -527,6 +842,18 @@ export const QueryValidatorResponse = {
     const message = createBaseQueryValidatorResponse();
     message.validator = object.validator !== undefined && object.validator !== null ? Validator.fromPartial(object.validator) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryValidatorResponseSDKType): QueryValidatorResponse {
+    return {
+      validator: isSet(object.validator) ? Validator.fromSDK(object.validator) : undefined
+    };
+  },
+
+  toSDK(message: QueryValidatorResponse): QueryValidatorResponseSDKType {
+    const obj: any = {};
+    message.validator !== undefined && (obj.validator = message.validator ? Validator.toSDK(message.validator) : undefined);
+    return obj;
   }
 
 };
@@ -596,6 +923,20 @@ export const QueryValidatorDelegationsRequest = {
     message.validatorAddr = object.validatorAddr ?? "";
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryValidatorDelegationsRequestSDKType): QueryValidatorDelegationsRequest {
+    return {
+      validatorAddr: isSet(object.validator_addr) ? object.validator_addr : undefined,
+      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  toSDK(message: QueryValidatorDelegationsRequest): QueryValidatorDelegationsRequestSDKType {
+    const obj: any = {};
+    message.validatorAddr !== undefined && (obj.validator_addr = message.validatorAddr);
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
+    return obj;
   }
 
 };
@@ -620,7 +961,7 @@ export const QueryValidatorDelegationsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryValidatorDelegationsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryValidatorDelegationsResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryValidatorDelegationsResponse();
@@ -671,6 +1012,26 @@ export const QueryValidatorDelegationsResponse = {
     message.delegationResponses = object.delegationResponses?.map(e => DelegationResponse.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryValidatorDelegationsResponseSDKType): QueryValidatorDelegationsResponse {
+    return {
+      delegationResponses: Array.isArray(object?.delegation_responses) ? object.delegation_responses.map((e: any) => DelegationResponse.fromSDK(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  toSDK(message: QueryValidatorDelegationsResponse): QueryValidatorDelegationsResponseSDKType {
+    const obj: any = {};
+
+    if (message.delegationResponses) {
+      obj.delegation_responses = message.delegationResponses.map(e => e ? DelegationResponse.toSDK(e) : undefined);
+    } else {
+      obj.delegation_responses = [];
+    }
+
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
+    return obj;
   }
 
 };
@@ -740,6 +1101,20 @@ export const QueryValidatorUnbondingDelegationsRequest = {
     message.validatorAddr = object.validatorAddr ?? "";
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryValidatorUnbondingDelegationsRequestSDKType): QueryValidatorUnbondingDelegationsRequest {
+    return {
+      validatorAddr: isSet(object.validator_addr) ? object.validator_addr : undefined,
+      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  toSDK(message: QueryValidatorUnbondingDelegationsRequest): QueryValidatorUnbondingDelegationsRequestSDKType {
+    const obj: any = {};
+    message.validatorAddr !== undefined && (obj.validator_addr = message.validatorAddr);
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
+    return obj;
   }
 
 };
@@ -764,7 +1139,7 @@ export const QueryValidatorUnbondingDelegationsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryValidatorUnbondingDelegationsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryValidatorUnbondingDelegationsResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryValidatorUnbondingDelegationsResponse();
@@ -815,6 +1190,26 @@ export const QueryValidatorUnbondingDelegationsResponse = {
     message.unbondingResponses = object.unbondingResponses?.map(e => UnbondingDelegation.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryValidatorUnbondingDelegationsResponseSDKType): QueryValidatorUnbondingDelegationsResponse {
+    return {
+      unbondingResponses: Array.isArray(object?.unbonding_responses) ? object.unbonding_responses.map((e: any) => UnbondingDelegation.fromSDK(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  toSDK(message: QueryValidatorUnbondingDelegationsResponse): QueryValidatorUnbondingDelegationsResponseSDKType {
+    const obj: any = {};
+
+    if (message.unbondingResponses) {
+      obj.unbonding_responses = message.unbondingResponses.map(e => e ? UnbondingDelegation.toSDK(e) : undefined);
+    } else {
+      obj.unbonding_responses = [];
+    }
+
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
+    return obj;
   }
 
 };
@@ -884,6 +1279,20 @@ export const QueryDelegationRequest = {
     message.delegatorAddr = object.delegatorAddr ?? "";
     message.validatorAddr = object.validatorAddr ?? "";
     return message;
+  },
+
+  fromSDK(object: QueryDelegationRequestSDKType): QueryDelegationRequest {
+    return {
+      delegatorAddr: isSet(object.delegator_addr) ? object.delegator_addr : undefined,
+      validatorAddr: isSet(object.validator_addr) ? object.validator_addr : undefined
+    };
+  },
+
+  toSDK(message: QueryDelegationRequest): QueryDelegationRequestSDKType {
+    const obj: any = {};
+    message.delegatorAddr !== undefined && (obj.delegator_addr = message.delegatorAddr);
+    message.validatorAddr !== undefined && (obj.validator_addr = message.validatorAddr);
+    return obj;
   }
 
 };
@@ -903,7 +1312,7 @@ export const QueryDelegationResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryDelegationResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryDelegationResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDelegationResponse();
@@ -941,6 +1350,18 @@ export const QueryDelegationResponse = {
     const message = createBaseQueryDelegationResponse();
     message.delegationResponse = object.delegationResponse !== undefined && object.delegationResponse !== null ? DelegationResponse.fromPartial(object.delegationResponse) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryDelegationResponseSDKType): QueryDelegationResponse {
+    return {
+      delegationResponse: isSet(object.delegation_response) ? DelegationResponse.fromSDK(object.delegation_response) : undefined
+    };
+  },
+
+  toSDK(message: QueryDelegationResponse): QueryDelegationResponseSDKType {
+    const obj: any = {};
+    message.delegationResponse !== undefined && (obj.delegation_response = message.delegationResponse ? DelegationResponse.toSDK(message.delegationResponse) : undefined);
+    return obj;
   }
 
 };
@@ -1010,6 +1431,20 @@ export const QueryUnbondingDelegationRequest = {
     message.delegatorAddr = object.delegatorAddr ?? "";
     message.validatorAddr = object.validatorAddr ?? "";
     return message;
+  },
+
+  fromSDK(object: QueryUnbondingDelegationRequestSDKType): QueryUnbondingDelegationRequest {
+    return {
+      delegatorAddr: isSet(object.delegator_addr) ? object.delegator_addr : undefined,
+      validatorAddr: isSet(object.validator_addr) ? object.validator_addr : undefined
+    };
+  },
+
+  toSDK(message: QueryUnbondingDelegationRequest): QueryUnbondingDelegationRequestSDKType {
+    const obj: any = {};
+    message.delegatorAddr !== undefined && (obj.delegator_addr = message.delegatorAddr);
+    message.validatorAddr !== undefined && (obj.validator_addr = message.validatorAddr);
+    return obj;
   }
 
 };
@@ -1029,7 +1464,7 @@ export const QueryUnbondingDelegationResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryUnbondingDelegationResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryUnbondingDelegationResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryUnbondingDelegationResponse();
@@ -1067,6 +1502,18 @@ export const QueryUnbondingDelegationResponse = {
     const message = createBaseQueryUnbondingDelegationResponse();
     message.unbond = object.unbond !== undefined && object.unbond !== null ? UnbondingDelegation.fromPartial(object.unbond) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryUnbondingDelegationResponseSDKType): QueryUnbondingDelegationResponse {
+    return {
+      unbond: isSet(object.unbond) ? UnbondingDelegation.fromSDK(object.unbond) : undefined
+    };
+  },
+
+  toSDK(message: QueryUnbondingDelegationResponse): QueryUnbondingDelegationResponseSDKType {
+    const obj: any = {};
+    message.unbond !== undefined && (obj.unbond = message.unbond ? UnbondingDelegation.toSDK(message.unbond) : undefined);
+    return obj;
   }
 
 };
@@ -1136,6 +1583,20 @@ export const QueryDelegatorDelegationsRequest = {
     message.delegatorAddr = object.delegatorAddr ?? "";
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryDelegatorDelegationsRequestSDKType): QueryDelegatorDelegationsRequest {
+    return {
+      delegatorAddr: isSet(object.delegator_addr) ? object.delegator_addr : undefined,
+      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  toSDK(message: QueryDelegatorDelegationsRequest): QueryDelegatorDelegationsRequestSDKType {
+    const obj: any = {};
+    message.delegatorAddr !== undefined && (obj.delegator_addr = message.delegatorAddr);
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
+    return obj;
   }
 
 };
@@ -1160,7 +1621,7 @@ export const QueryDelegatorDelegationsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryDelegatorDelegationsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryDelegatorDelegationsResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDelegatorDelegationsResponse();
@@ -1211,6 +1672,26 @@ export const QueryDelegatorDelegationsResponse = {
     message.delegationResponses = object.delegationResponses?.map(e => DelegationResponse.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryDelegatorDelegationsResponseSDKType): QueryDelegatorDelegationsResponse {
+    return {
+      delegationResponses: Array.isArray(object?.delegation_responses) ? object.delegation_responses.map((e: any) => DelegationResponse.fromSDK(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  toSDK(message: QueryDelegatorDelegationsResponse): QueryDelegatorDelegationsResponseSDKType {
+    const obj: any = {};
+
+    if (message.delegationResponses) {
+      obj.delegation_responses = message.delegationResponses.map(e => e ? DelegationResponse.toSDK(e) : undefined);
+    } else {
+      obj.delegation_responses = [];
+    }
+
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
+    return obj;
   }
 
 };
@@ -1280,6 +1761,20 @@ export const QueryDelegatorUnbondingDelegationsRequest = {
     message.delegatorAddr = object.delegatorAddr ?? "";
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryDelegatorUnbondingDelegationsRequestSDKType): QueryDelegatorUnbondingDelegationsRequest {
+    return {
+      delegatorAddr: isSet(object.delegator_addr) ? object.delegator_addr : undefined,
+      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  toSDK(message: QueryDelegatorUnbondingDelegationsRequest): QueryDelegatorUnbondingDelegationsRequestSDKType {
+    const obj: any = {};
+    message.delegatorAddr !== undefined && (obj.delegator_addr = message.delegatorAddr);
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
+    return obj;
   }
 
 };
@@ -1304,7 +1799,7 @@ export const QueryDelegatorUnbondingDelegationsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryDelegatorUnbondingDelegationsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryDelegatorUnbondingDelegationsResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDelegatorUnbondingDelegationsResponse();
@@ -1355,6 +1850,26 @@ export const QueryDelegatorUnbondingDelegationsResponse = {
     message.unbondingResponses = object.unbondingResponses?.map(e => UnbondingDelegation.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryDelegatorUnbondingDelegationsResponseSDKType): QueryDelegatorUnbondingDelegationsResponse {
+    return {
+      unbondingResponses: Array.isArray(object?.unbonding_responses) ? object.unbonding_responses.map((e: any) => UnbondingDelegation.fromSDK(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  toSDK(message: QueryDelegatorUnbondingDelegationsResponse): QueryDelegatorUnbondingDelegationsResponseSDKType {
+    const obj: any = {};
+
+    if (message.unbondingResponses) {
+      obj.unbonding_responses = message.unbondingResponses.map(e => e ? UnbondingDelegation.toSDK(e) : undefined);
+    } else {
+      obj.unbonding_responses = [];
+    }
+
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
+    return obj;
   }
 
 };
@@ -1448,6 +1963,24 @@ export const QueryRedelegationsRequest = {
     message.dstValidatorAddr = object.dstValidatorAddr ?? "";
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryRedelegationsRequestSDKType): QueryRedelegationsRequest {
+    return {
+      delegatorAddr: isSet(object.delegator_addr) ? object.delegator_addr : undefined,
+      srcValidatorAddr: isSet(object.src_validator_addr) ? object.src_validator_addr : undefined,
+      dstValidatorAddr: isSet(object.dst_validator_addr) ? object.dst_validator_addr : undefined,
+      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  toSDK(message: QueryRedelegationsRequest): QueryRedelegationsRequestSDKType {
+    const obj: any = {};
+    message.delegatorAddr !== undefined && (obj.delegator_addr = message.delegatorAddr);
+    message.srcValidatorAddr !== undefined && (obj.src_validator_addr = message.srcValidatorAddr);
+    message.dstValidatorAddr !== undefined && (obj.dst_validator_addr = message.dstValidatorAddr);
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
+    return obj;
   }
 
 };
@@ -1472,7 +2005,7 @@ export const QueryRedelegationsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryRedelegationsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryRedelegationsResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryRedelegationsResponse();
@@ -1523,6 +2056,26 @@ export const QueryRedelegationsResponse = {
     message.redelegationResponses = object.redelegationResponses?.map(e => RedelegationResponse.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryRedelegationsResponseSDKType): QueryRedelegationsResponse {
+    return {
+      redelegationResponses: Array.isArray(object?.redelegation_responses) ? object.redelegation_responses.map((e: any) => RedelegationResponse.fromSDK(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  toSDK(message: QueryRedelegationsResponse): QueryRedelegationsResponseSDKType {
+    const obj: any = {};
+
+    if (message.redelegationResponses) {
+      obj.redelegation_responses = message.redelegationResponses.map(e => e ? RedelegationResponse.toSDK(e) : undefined);
+    } else {
+      obj.redelegation_responses = [];
+    }
+
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
+    return obj;
   }
 
 };
@@ -1592,6 +2145,20 @@ export const QueryDelegatorValidatorsRequest = {
     message.delegatorAddr = object.delegatorAddr ?? "";
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryDelegatorValidatorsRequestSDKType): QueryDelegatorValidatorsRequest {
+    return {
+      delegatorAddr: isSet(object.delegator_addr) ? object.delegator_addr : undefined,
+      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  toSDK(message: QueryDelegatorValidatorsRequest): QueryDelegatorValidatorsRequestSDKType {
+    const obj: any = {};
+    message.delegatorAddr !== undefined && (obj.delegator_addr = message.delegatorAddr);
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
+    return obj;
   }
 
 };
@@ -1616,7 +2183,7 @@ export const QueryDelegatorValidatorsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryDelegatorValidatorsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryDelegatorValidatorsResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDelegatorValidatorsResponse();
@@ -1667,6 +2234,26 @@ export const QueryDelegatorValidatorsResponse = {
     message.validators = object.validators?.map(e => Validator.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryDelegatorValidatorsResponseSDKType): QueryDelegatorValidatorsResponse {
+    return {
+      validators: Array.isArray(object?.validators) ? object.validators.map((e: any) => Validator.fromSDK(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  toSDK(message: QueryDelegatorValidatorsResponse): QueryDelegatorValidatorsResponseSDKType {
+    const obj: any = {};
+
+    if (message.validators) {
+      obj.validators = message.validators.map(e => e ? Validator.toSDK(e) : undefined);
+    } else {
+      obj.validators = [];
+    }
+
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
+    return obj;
   }
 
 };
@@ -1736,6 +2323,20 @@ export const QueryDelegatorValidatorRequest = {
     message.delegatorAddr = object.delegatorAddr ?? "";
     message.validatorAddr = object.validatorAddr ?? "";
     return message;
+  },
+
+  fromSDK(object: QueryDelegatorValidatorRequestSDKType): QueryDelegatorValidatorRequest {
+    return {
+      delegatorAddr: isSet(object.delegator_addr) ? object.delegator_addr : undefined,
+      validatorAddr: isSet(object.validator_addr) ? object.validator_addr : undefined
+    };
+  },
+
+  toSDK(message: QueryDelegatorValidatorRequest): QueryDelegatorValidatorRequestSDKType {
+    const obj: any = {};
+    message.delegatorAddr !== undefined && (obj.delegator_addr = message.delegatorAddr);
+    message.validatorAddr !== undefined && (obj.validator_addr = message.validatorAddr);
+    return obj;
   }
 
 };
@@ -1755,7 +2356,7 @@ export const QueryDelegatorValidatorResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryDelegatorValidatorResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryDelegatorValidatorResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDelegatorValidatorResponse();
@@ -1793,6 +2394,18 @@ export const QueryDelegatorValidatorResponse = {
     const message = createBaseQueryDelegatorValidatorResponse();
     message.validator = object.validator !== undefined && object.validator !== null ? Validator.fromPartial(object.validator) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryDelegatorValidatorResponseSDKType): QueryDelegatorValidatorResponse {
+    return {
+      validator: isSet(object.validator) ? Validator.fromSDK(object.validator) : undefined
+    };
+  },
+
+  toSDK(message: QueryDelegatorValidatorResponse): QueryDelegatorValidatorResponseSDKType {
+    const obj: any = {};
+    message.validator !== undefined && (obj.validator = message.validator ? Validator.toSDK(message.validator) : undefined);
+    return obj;
   }
 
 };
@@ -1850,6 +2463,18 @@ export const QueryHistoricalInfoRequest = {
     const message = createBaseQueryHistoricalInfoRequest();
     message.height = object.height !== undefined && object.height !== null ? Long.fromValue(object.height) : Long.ZERO;
     return message;
+  },
+
+  fromSDK(object: QueryHistoricalInfoRequestSDKType): QueryHistoricalInfoRequest {
+    return {
+      height: isSet(object.height) ? object.height : undefined
+    };
+  },
+
+  toSDK(message: QueryHistoricalInfoRequest): QueryHistoricalInfoRequestSDKType {
+    const obj: any = {};
+    message.height !== undefined && (obj.height = message.height);
+    return obj;
   }
 
 };
@@ -1869,7 +2494,7 @@ export const QueryHistoricalInfoResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryHistoricalInfoResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryHistoricalInfoResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryHistoricalInfoResponse();
@@ -1907,6 +2532,18 @@ export const QueryHistoricalInfoResponse = {
     const message = createBaseQueryHistoricalInfoResponse();
     message.hist = object.hist !== undefined && object.hist !== null ? HistoricalInfo.fromPartial(object.hist) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryHistoricalInfoResponseSDKType): QueryHistoricalInfoResponse {
+    return {
+      hist: isSet(object.hist) ? HistoricalInfo.fromSDK(object.hist) : undefined
+    };
+  },
+
+  toSDK(message: QueryHistoricalInfoResponse): QueryHistoricalInfoResponseSDKType {
+    const obj: any = {};
+    message.hist !== undefined && (obj.hist = message.hist ? HistoricalInfo.toSDK(message.hist) : undefined);
+    return obj;
   }
 
 };
@@ -1950,6 +2587,15 @@ export const QueryPoolRequest = {
   fromPartial(_: DeepPartial<QueryPoolRequest>): QueryPoolRequest {
     const message = createBaseQueryPoolRequest();
     return message;
+  },
+
+  fromSDK(_: QueryPoolRequestSDKType): QueryPoolRequest {
+    return {};
+  },
+
+  toSDK(_: QueryPoolRequest): QueryPoolRequestSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -1969,7 +2615,7 @@ export const QueryPoolResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryPoolResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryPoolResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryPoolResponse();
@@ -2007,6 +2653,18 @@ export const QueryPoolResponse = {
     const message = createBaseQueryPoolResponse();
     message.pool = object.pool !== undefined && object.pool !== null ? Pool.fromPartial(object.pool) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryPoolResponseSDKType): QueryPoolResponse {
+    return {
+      pool: isSet(object.pool) ? Pool.fromSDK(object.pool) : undefined
+    };
+  },
+
+  toSDK(message: QueryPoolResponse): QueryPoolResponseSDKType {
+    const obj: any = {};
+    message.pool !== undefined && (obj.pool = message.pool ? Pool.toSDK(message.pool) : undefined);
+    return obj;
   }
 
 };
@@ -2050,6 +2708,15 @@ export const QueryParamsRequest = {
   fromPartial(_: DeepPartial<QueryParamsRequest>): QueryParamsRequest {
     const message = createBaseQueryParamsRequest();
     return message;
+  },
+
+  fromSDK(_: QueryParamsRequestSDKType): QueryParamsRequest {
+    return {};
+  },
+
+  toSDK(_: QueryParamsRequest): QueryParamsRequestSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -2069,7 +2736,7 @@ export const QueryParamsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryParamsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryParamsResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryParamsResponse();
@@ -2107,6 +2774,18 @@ export const QueryParamsResponse = {
     const message = createBaseQueryParamsResponse();
     message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryParamsResponseSDKType): QueryParamsResponse {
+    return {
+      params: isSet(object.params) ? Params.fromSDK(object.params) : undefined
+    };
+  },
+
+  toSDK(message: QueryParamsResponse): QueryParamsResponseSDKType {
+    const obj: any = {};
+    message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
+    return obj;
   }
 
 };

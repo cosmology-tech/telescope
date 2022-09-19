@@ -11,10 +11,27 @@ export interface Capability {
 }
 
 /**
+ * Capability defines an implementation of an object capability. The index
+ * provided to a Capability must be globally unique.
+ */
+export interface CapabilitySDKType {
+  index: Long;
+}
+
+/**
  * Owner defines a single capability owner. An owner is defined by the name of
  * capability and the module name.
  */
 export interface Owner {
+  module: string;
+  name: string;
+}
+
+/**
+ * Owner defines a single capability owner. An owner is defined by the name of
+ * capability and the module name.
+ */
+export interface OwnerSDKType {
   module: string;
   name: string;
 }
@@ -25,6 +42,14 @@ export interface Owner {
  */
 export interface CapabilityOwners {
   owners: Owner[];
+}
+
+/**
+ * CapabilityOwners defines a set of owners of a single Capability. The set of
+ * owners must be unique.
+ */
+export interface CapabilityOwnersSDKType {
+  owners: OwnerSDKType[];
 }
 
 function createBaseCapability(): Capability {
@@ -80,6 +105,18 @@ export const Capability = {
     const message = createBaseCapability();
     message.index = object.index !== undefined && object.index !== null ? Long.fromValue(object.index) : Long.UZERO;
     return message;
+  },
+
+  fromSDK(object: CapabilitySDKType): Capability {
+    return {
+      index: isSet(object.index) ? object.index : undefined
+    };
+  },
+
+  toSDK(message: Capability): CapabilitySDKType {
+    const obj: any = {};
+    message.index !== undefined && (obj.index = message.index);
+    return obj;
   }
 
 };
@@ -149,6 +186,20 @@ export const Owner = {
     message.module = object.module ?? "";
     message.name = object.name ?? "";
     return message;
+  },
+
+  fromSDK(object: OwnerSDKType): Owner {
+    return {
+      module: isSet(object.module) ? object.module : undefined,
+      name: isSet(object.name) ? object.name : undefined
+    };
+  },
+
+  toSDK(message: Owner): OwnerSDKType {
+    const obj: any = {};
+    message.module !== undefined && (obj.module = message.module);
+    message.name !== undefined && (obj.name = message.name);
+    return obj;
   }
 
 };
@@ -212,6 +263,24 @@ export const CapabilityOwners = {
     const message = createBaseCapabilityOwners();
     message.owners = object.owners?.map(e => Owner.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: CapabilityOwnersSDKType): CapabilityOwners {
+    return {
+      owners: Array.isArray(object?.owners) ? object.owners.map((e: any) => Owner.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: CapabilityOwners): CapabilityOwnersSDKType {
+    const obj: any = {};
+
+    if (message.owners) {
+      obj.owners = message.owners.map(e => e ? Owner.toSDK(e) : undefined);
+    } else {
+      obj.owners = [];
+    }
+
+    return obj;
   }
 
 };

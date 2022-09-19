@@ -14,6 +14,18 @@ export interface SourceContext {
   fileName: string;
 }
 
+/**
+ * `SourceContext` represents information about the source of a
+ * protobuf element, like the file in which it is defined.
+ */
+export interface SourceContextSDKType {
+  /**
+   * The path-qualified name of the .proto file that contained the associated
+   * protobuf element.  For example: `"google/protobuf/source_context.proto"`.
+   */
+  file_name: string;
+}
+
 function createBaseSourceContext(): SourceContext {
   return {
     fileName: ""
@@ -67,6 +79,18 @@ export const SourceContext = {
     const message = createBaseSourceContext();
     message.fileName = object.fileName ?? "";
     return message;
+  },
+
+  fromSDK(object: SourceContextSDKType): SourceContext {
+    return {
+      fileName: isSet(object.file_name) ? object.file_name : undefined
+    };
+  },
+
+  toSDK(message: SourceContext): SourceContextSDKType {
+    const obj: any = {};
+    message.fileName !== undefined && (obj.file_name = message.fileName);
+    return obj;
   }
 
 };

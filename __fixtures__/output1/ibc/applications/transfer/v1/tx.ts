@@ -1,5 +1,5 @@
-import { Coin } from "../../../../cosmos/base/v1beta1/coin";
-import { Height } from "../../../core/client/v1/client";
+import { Coin, CoinSDKType } from "../../../../cosmos/base/v1beta1/coin";
+import { Height, HeightSDKType } from "../../../core/client/v1/client";
 import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, DeepPartial } from "@osmonauts/helpers";
 export const protobufPackage = "ibc.applications.transfer.v1";
@@ -38,8 +38,45 @@ export interface MsgTransfer {
   timeoutTimestamp: Long;
 }
 
+/**
+ * MsgTransfer defines a msg to transfer fungible tokens (i.e Coins) between
+ * ICS20 enabled chains. See ICS Spec here:
+ * https://github.com/cosmos/ibc/tree/master/spec/app/ics-020-fungible-token-transfer#data-structures
+ */
+export interface MsgTransferSDKType {
+  /** the port on which the packet will be sent */
+  source_port: string;
+
+  /** the channel by which the packet will be sent */
+  source_channel: string;
+
+  /** the tokens to be transferred */
+  token: CoinSDKType;
+
+  /** the sender address */
+  sender: string;
+
+  /** the recipient address on the destination chain */
+  receiver: string;
+
+  /**
+   * Timeout height relative to the current block height.
+   * The timeout is disabled when set to 0.
+   */
+  timeout_height: HeightSDKType;
+
+  /**
+   * Timeout timestamp (in nanoseconds) relative to the current block timestamp.
+   * The timeout is disabled when set to 0.
+   */
+  timeout_timestamp: Long;
+}
+
 /** MsgTransferResponse defines the Msg/Transfer response type. */
 export interface MsgTransferResponse {}
+
+/** MsgTransferResponse defines the Msg/Transfer response type. */
+export interface MsgTransferResponseSDKType {}
 
 function createBaseMsgTransfer(): MsgTransfer {
   return {
@@ -166,6 +203,30 @@ export const MsgTransfer = {
     message.timeoutHeight = object.timeoutHeight !== undefined && object.timeoutHeight !== null ? Height.fromPartial(object.timeoutHeight) : undefined;
     message.timeoutTimestamp = object.timeoutTimestamp !== undefined && object.timeoutTimestamp !== null ? Long.fromValue(object.timeoutTimestamp) : Long.UZERO;
     return message;
+  },
+
+  fromSDK(object: MsgTransferSDKType): MsgTransfer {
+    return {
+      sourcePort: isSet(object.source_port) ? object.source_port : undefined,
+      sourceChannel: isSet(object.source_channel) ? object.source_channel : undefined,
+      token: isSet(object.token) ? Coin.fromSDK(object.token) : undefined,
+      sender: isSet(object.sender) ? object.sender : undefined,
+      receiver: isSet(object.receiver) ? object.receiver : undefined,
+      timeoutHeight: isSet(object.timeout_height) ? Height.fromSDK(object.timeout_height) : undefined,
+      timeoutTimestamp: isSet(object.timeout_timestamp) ? object.timeout_timestamp : undefined
+    };
+  },
+
+  toSDK(message: MsgTransfer): MsgTransferSDKType {
+    const obj: any = {};
+    message.sourcePort !== undefined && (obj.source_port = message.sourcePort);
+    message.sourceChannel !== undefined && (obj.source_channel = message.sourceChannel);
+    message.token !== undefined && (obj.token = message.token ? Coin.toSDK(message.token) : undefined);
+    message.sender !== undefined && (obj.sender = message.sender);
+    message.receiver !== undefined && (obj.receiver = message.receiver);
+    message.timeoutHeight !== undefined && (obj.timeout_height = message.timeoutHeight ? Height.toSDK(message.timeoutHeight) : undefined);
+    message.timeoutTimestamp !== undefined && (obj.timeout_timestamp = message.timeoutTimestamp);
+    return obj;
   }
 
 };
@@ -179,7 +240,7 @@ export const MsgTransferResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgTransferResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgTransferResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgTransferResponse();
@@ -209,6 +270,15 @@ export const MsgTransferResponse = {
   fromPartial(_: DeepPartial<MsgTransferResponse>): MsgTransferResponse {
     const message = createBaseMsgTransferResponse();
     return message;
+  },
+
+  fromSDK(_: MsgTransferResponseSDKType): MsgTransferResponse {
+    return {};
+  },
+
+  toSDK(_: MsgTransferResponse): MsgTransferResponseSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };

@@ -1,6 +1,6 @@
-import { Deployment } from "./deployment";
-import { Group } from "./group";
-import { Params } from "./params";
+import { Deployment, DeploymentSDKType } from "./deployment";
+import { Group, GroupSDKType } from "./group";
+import { Params, ParamsSDKType } from "./params";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, Exact } from "@osmonauts/helpers";
 export const protobufPackage = "akash.deployment.v1beta2";
@@ -11,10 +11,22 @@ export interface GenesisDeployment {
   groups: Group[];
 }
 
+/** GenesisDeployment defines the basic genesis state used by deployment module */
+export interface GenesisDeploymentSDKType {
+  deployment: DeploymentSDKType;
+  groups: GroupSDKType[];
+}
+
 /** GenesisState stores slice of genesis deployment instance */
 export interface GenesisState {
   deployments: GenesisDeployment[];
   params: Params;
+}
+
+/** GenesisState stores slice of genesis deployment instance */
+export interface GenesisStateSDKType {
+  deployments: GenesisDeploymentSDKType[];
+  params: ParamsSDKType;
 }
 
 function createBaseGenesisDeployment(): GenesisDeployment {
@@ -88,6 +100,26 @@ export const GenesisDeployment = {
     message.deployment = object.deployment !== undefined && object.deployment !== null ? Deployment.fromPartial(object.deployment) : undefined;
     message.groups = object.groups?.map(e => Group.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: GenesisDeploymentSDKType): GenesisDeployment {
+    return {
+      deployment: isSet(object.deployment) ? Deployment.fromSDK(object.deployment) : undefined,
+      groups: Array.isArray(object?.groups) ? object.groups.map((e: any) => Group.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: GenesisDeployment): GenesisDeploymentSDKType {
+    const obj: any = {};
+    message.deployment !== undefined && (obj.deployment = message.deployment ? Deployment.toSDK(message.deployment) : undefined);
+
+    if (message.groups) {
+      obj.groups = message.groups.map(e => e ? Group.toSDK(e) : undefined);
+    } else {
+      obj.groups = [];
+    }
+
+    return obj;
   }
 
 };
@@ -163,6 +195,26 @@ export const GenesisState = {
     message.deployments = object.deployments?.map(e => GenesisDeployment.fromPartial(e)) || [];
     message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     return message;
+  },
+
+  fromSDK(object: GenesisStateSDKType): GenesisState {
+    return {
+      deployments: Array.isArray(object?.deployments) ? object.deployments.map((e: any) => GenesisDeployment.fromSDK(e)) : [],
+      params: isSet(object.params) ? Params.fromSDK(object.params) : undefined
+    };
+  },
+
+  toSDK(message: GenesisState): GenesisStateSDKType {
+    const obj: any = {};
+
+    if (message.deployments) {
+      obj.deployments = message.deployments.map(e => e ? GenesisDeployment.toSDK(e) : undefined);
+    } else {
+      obj.deployments = [];
+    }
+
+    message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
+    return obj;
   }
 
 };

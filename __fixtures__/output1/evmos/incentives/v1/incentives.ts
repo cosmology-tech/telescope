@@ -1,5 +1,5 @@
-import { DecCoin } from "../../../cosmos/base/v1beta1/coin";
-import { Timestamp } from "../../../google/protobuf/timestamp";
+import { DecCoin, DecCoinSDKType } from "../../../cosmos/base/v1beta1/coin";
+import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
 import * as _m0 from "protobufjs/minimal";
 import { toTimestamp, fromTimestamp, Long, isSet, fromJsonTimestamp, DeepPartial } from "@osmonauts/helpers";
 export const protobufPackage = "evmos.incentives.v1";
@@ -25,6 +25,27 @@ export interface Incentive {
   totalGas: Long;
 }
 
+/**
+ * Incentive defines an instance that organizes distribution conditions for a
+ * given smart contract
+ */
+export interface IncentiveSDKType {
+  /** contract address */
+  contract: string;
+
+  /** denoms and percentage of rewards to be allocated */
+  allocations: DecCoinSDKType[];
+
+  /** number of remaining epochs */
+  epochs: number;
+
+  /** distribution start time */
+  start_time: Date;
+
+  /** cumulative gas spent by all gasmeters of the incentive during the epoch */
+  total_gas: Long;
+}
+
 /** GasMeter tracks the cumulative gas spent per participant in one epoch */
 export interface GasMeter {
   /** hex address of the incentivized contract */
@@ -35,6 +56,18 @@ export interface GasMeter {
 
   /** cumulative gas spent during the epoch */
   cumulativeGas: Long;
+}
+
+/** GasMeter tracks the cumulative gas spent per participant in one epoch */
+export interface GasMeterSDKType {
+  /** hex address of the incentivized contract */
+  contract: string;
+
+  /** participant address that interacts with the incentive */
+  participant: string;
+
+  /** cumulative gas spent during the epoch */
+  cumulative_gas: Long;
 }
 
 /** RegisterIncentiveProposal is a gov Content type to register an incentive */
@@ -55,8 +88,38 @@ export interface RegisterIncentiveProposal {
   epochs: number;
 }
 
+/** RegisterIncentiveProposal is a gov Content type to register an incentive */
+export interface RegisterIncentiveProposalSDKType {
+  /** title of the proposal */
+  title: string;
+
+  /** proposal description */
+  description: string;
+
+  /** contract address */
+  contract: string;
+
+  /** denoms and percentage of rewards to be allocated */
+  allocations: DecCoinSDKType[];
+
+  /** number of remaining epochs */
+  epochs: number;
+}
+
 /** CancelIncentiveProposal is a gov Content type to cancel an incentive */
 export interface CancelIncentiveProposal {
+  /** title of the proposal */
+  title: string;
+
+  /** proposal description */
+  description: string;
+
+  /** contract address */
+  contract: string;
+}
+
+/** CancelIncentiveProposal is a gov Content type to cancel an incentive */
+export interface CancelIncentiveProposalSDKType {
   /** title of the proposal */
   title: string;
 
@@ -174,6 +237,32 @@ export const Incentive = {
     message.startTime = object.startTime ?? undefined;
     message.totalGas = object.totalGas !== undefined && object.totalGas !== null ? Long.fromValue(object.totalGas) : Long.UZERO;
     return message;
+  },
+
+  fromSDK(object: IncentiveSDKType): Incentive {
+    return {
+      contract: isSet(object.contract) ? object.contract : undefined,
+      allocations: Array.isArray(object?.allocations) ? object.allocations.map((e: any) => DecCoin.fromSDK(e)) : [],
+      epochs: isSet(object.epochs) ? object.epochs : undefined,
+      startTime: isSet(object.start_time) ? Timestamp.fromSDK(object.start_time) : undefined,
+      totalGas: isSet(object.total_gas) ? object.total_gas : undefined
+    };
+  },
+
+  toSDK(message: Incentive): IncentiveSDKType {
+    const obj: any = {};
+    message.contract !== undefined && (obj.contract = message.contract);
+
+    if (message.allocations) {
+      obj.allocations = message.allocations.map(e => e ? DecCoin.toSDK(e) : undefined);
+    } else {
+      obj.allocations = [];
+    }
+
+    message.epochs !== undefined && (obj.epochs = message.epochs);
+    message.startTime !== undefined && (obj.start_time = message.startTime ? Timestamp.toSDK(message.startTime) : undefined);
+    message.totalGas !== undefined && (obj.total_gas = message.totalGas);
+    return obj;
   }
 
 };
@@ -255,6 +344,22 @@ export const GasMeter = {
     message.participant = object.participant ?? "";
     message.cumulativeGas = object.cumulativeGas !== undefined && object.cumulativeGas !== null ? Long.fromValue(object.cumulativeGas) : Long.UZERO;
     return message;
+  },
+
+  fromSDK(object: GasMeterSDKType): GasMeter {
+    return {
+      contract: isSet(object.contract) ? object.contract : undefined,
+      participant: isSet(object.participant) ? object.participant : undefined,
+      cumulativeGas: isSet(object.cumulative_gas) ? object.cumulative_gas : undefined
+    };
+  },
+
+  toSDK(message: GasMeter): GasMeterSDKType {
+    const obj: any = {};
+    message.contract !== undefined && (obj.contract = message.contract);
+    message.participant !== undefined && (obj.participant = message.participant);
+    message.cumulativeGas !== undefined && (obj.cumulative_gas = message.cumulativeGas);
+    return obj;
   }
 
 };
@@ -366,6 +471,32 @@ export const RegisterIncentiveProposal = {
     message.allocations = object.allocations?.map(e => DecCoin.fromPartial(e)) || [];
     message.epochs = object.epochs ?? 0;
     return message;
+  },
+
+  fromSDK(object: RegisterIncentiveProposalSDKType): RegisterIncentiveProposal {
+    return {
+      title: isSet(object.title) ? object.title : undefined,
+      description: isSet(object.description) ? object.description : undefined,
+      contract: isSet(object.contract) ? object.contract : undefined,
+      allocations: Array.isArray(object?.allocations) ? object.allocations.map((e: any) => DecCoin.fromSDK(e)) : [],
+      epochs: isSet(object.epochs) ? object.epochs : undefined
+    };
+  },
+
+  toSDK(message: RegisterIncentiveProposal): RegisterIncentiveProposalSDKType {
+    const obj: any = {};
+    message.title !== undefined && (obj.title = message.title);
+    message.description !== undefined && (obj.description = message.description);
+    message.contract !== undefined && (obj.contract = message.contract);
+
+    if (message.allocations) {
+      obj.allocations = message.allocations.map(e => e ? DecCoin.toSDK(e) : undefined);
+    } else {
+      obj.allocations = [];
+    }
+
+    message.epochs !== undefined && (obj.epochs = message.epochs);
+    return obj;
   }
 
 };
@@ -447,6 +578,22 @@ export const CancelIncentiveProposal = {
     message.description = object.description ?? "";
     message.contract = object.contract ?? "";
     return message;
+  },
+
+  fromSDK(object: CancelIncentiveProposalSDKType): CancelIncentiveProposal {
+    return {
+      title: isSet(object.title) ? object.title : undefined,
+      description: isSet(object.description) ? object.description : undefined,
+      contract: isSet(object.contract) ? object.contract : undefined
+    };
+  },
+
+  toSDK(message: CancelIncentiveProposal): CancelIncentiveProposalSDKType {
+    const obj: any = {};
+    message.title !== undefined && (obj.title = message.title);
+    message.description !== undefined && (obj.description = message.description);
+    message.contract !== undefined && (obj.contract = message.contract);
+    return obj;
   }
 
 };

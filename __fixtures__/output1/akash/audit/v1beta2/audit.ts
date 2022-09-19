@@ -1,4 +1,4 @@
-import { Attribute } from "../../base/v1beta2/attribute";
+import { Attribute, AttributeSDKType } from "../../base/v1beta2/attribute";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, Exact } from "@osmonauts/helpers";
 export const protobufPackage = "akash.audit.v1beta2";
@@ -10,6 +10,13 @@ export interface Provider {
   attributes: Attribute[];
 }
 
+/** Provider stores owner auditor and attributes details */
+export interface ProviderSDKType {
+  owner: string;
+  auditor: string;
+  attributes: AttributeSDKType[];
+}
+
 /** Attributes */
 export interface AuditedAttributes {
   owner: string;
@@ -17,13 +24,31 @@ export interface AuditedAttributes {
   attributes: Attribute[];
 }
 
+/** Attributes */
+export interface AuditedAttributesSDKType {
+  owner: string;
+  auditor: string;
+  attributes: AttributeSDKType[];
+}
+
 /** AttributesResponse represents details of deployment along with group details */
 export interface AttributesResponse {
   attributes: AuditedAttributes[];
 }
 
+/** AttributesResponse represents details of deployment along with group details */
+export interface AttributesResponseSDKType {
+  attributes: AuditedAttributesSDKType[];
+}
+
 /** AttributesFilters defines filters used to filter deployments */
 export interface AttributesFilters {
+  auditors: string[];
+  owners: string[];
+}
+
+/** AttributesFilters defines filters used to filter deployments */
+export interface AttributesFiltersSDKType {
   auditors: string[];
   owners: string[];
 }
@@ -35,8 +60,18 @@ export interface MsgSignProviderAttributes {
   attributes: Attribute[];
 }
 
+/** MsgSignProviderAttributes defines an SDK message for signing a provider attributes */
+export interface MsgSignProviderAttributesSDKType {
+  owner: string;
+  auditor: string;
+  attributes: AttributeSDKType[];
+}
+
 /** MsgSignProviderAttributesResponse defines the Msg/CreateProvider response type. */
 export interface MsgSignProviderAttributesResponse {}
+
+/** MsgSignProviderAttributesResponse defines the Msg/CreateProvider response type. */
+export interface MsgSignProviderAttributesResponseSDKType {}
 
 /** MsgDeleteProviderAttributes defined the Msg/DeleteProviderAttributes */
 export interface MsgDeleteProviderAttributes {
@@ -45,8 +80,18 @@ export interface MsgDeleteProviderAttributes {
   keys: string[];
 }
 
+/** MsgDeleteProviderAttributes defined the Msg/DeleteProviderAttributes */
+export interface MsgDeleteProviderAttributesSDKType {
+  owner: string;
+  auditor: string;
+  keys: string[];
+}
+
 /** MsgDeleteProviderAttributesResponse defines the Msg/ProviderAttributes response type. */
 export interface MsgDeleteProviderAttributesResponse {}
+
+/** MsgDeleteProviderAttributesResponse defines the Msg/ProviderAttributes response type. */
+export interface MsgDeleteProviderAttributesResponseSDKType {}
 
 function createBaseProvider(): Provider {
   return {
@@ -131,6 +176,28 @@ export const Provider = {
     message.auditor = object.auditor ?? "";
     message.attributes = object.attributes?.map(e => Attribute.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: ProviderSDKType): Provider {
+    return {
+      owner: isSet(object.owner) ? object.owner : undefined,
+      auditor: isSet(object.auditor) ? object.auditor : undefined,
+      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: Provider): ProviderSDKType {
+    const obj: any = {};
+    message.owner !== undefined && (obj.owner = message.owner);
+    message.auditor !== undefined && (obj.auditor = message.auditor);
+
+    if (message.attributes) {
+      obj.attributes = message.attributes.map(e => e ? Attribute.toSDK(e) : undefined);
+    } else {
+      obj.attributes = [];
+    }
+
+    return obj;
   }
 
 };
@@ -218,6 +285,28 @@ export const AuditedAttributes = {
     message.auditor = object.auditor ?? "";
     message.attributes = object.attributes?.map(e => Attribute.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: AuditedAttributesSDKType): AuditedAttributes {
+    return {
+      owner: isSet(object.owner) ? object.owner : undefined,
+      auditor: isSet(object.auditor) ? object.auditor : undefined,
+      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: AuditedAttributes): AuditedAttributesSDKType {
+    const obj: any = {};
+    message.owner !== undefined && (obj.owner = message.owner);
+    message.auditor !== undefined && (obj.auditor = message.auditor);
+
+    if (message.attributes) {
+      obj.attributes = message.attributes.map(e => e ? Attribute.toSDK(e) : undefined);
+    } else {
+      obj.attributes = [];
+    }
+
+    return obj;
   }
 
 };
@@ -281,6 +370,24 @@ export const AttributesResponse = {
     const message = createBaseAttributesResponse();
     message.attributes = object.attributes?.map(e => AuditedAttributes.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: AttributesResponseSDKType): AttributesResponse {
+    return {
+      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => AuditedAttributes.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: AttributesResponse): AttributesResponseSDKType {
+    const obj: any = {};
+
+    if (message.attributes) {
+      obj.attributes = message.attributes.map(e => e ? AuditedAttributes.toSDK(e) : undefined);
+    } else {
+      obj.attributes = [];
+    }
+
+    return obj;
   }
 
 };
@@ -361,6 +468,31 @@ export const AttributesFilters = {
     message.auditors = object.auditors?.map(e => e) || [];
     message.owners = object.owners?.map(e => e) || [];
     return message;
+  },
+
+  fromSDK(object: AttributesFiltersSDKType): AttributesFilters {
+    return {
+      auditors: Array.isArray(object?.auditors) ? object.auditors.map((e: any) => e) : [],
+      owners: Array.isArray(object?.owners) ? object.owners.map((e: any) => e) : []
+    };
+  },
+
+  toSDK(message: AttributesFilters): AttributesFiltersSDKType {
+    const obj: any = {};
+
+    if (message.auditors) {
+      obj.auditors = message.auditors.map(e => e);
+    } else {
+      obj.auditors = [];
+    }
+
+    if (message.owners) {
+      obj.owners = message.owners.map(e => e);
+    } else {
+      obj.owners = [];
+    }
+
+    return obj;
   }
 
 };
@@ -448,6 +580,28 @@ export const MsgSignProviderAttributes = {
     message.auditor = object.auditor ?? "";
     message.attributes = object.attributes?.map(e => Attribute.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: MsgSignProviderAttributesSDKType): MsgSignProviderAttributes {
+    return {
+      owner: isSet(object.owner) ? object.owner : undefined,
+      auditor: isSet(object.auditor) ? object.auditor : undefined,
+      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: MsgSignProviderAttributes): MsgSignProviderAttributesSDKType {
+    const obj: any = {};
+    message.owner !== undefined && (obj.owner = message.owner);
+    message.auditor !== undefined && (obj.auditor = message.auditor);
+
+    if (message.attributes) {
+      obj.attributes = message.attributes.map(e => e ? Attribute.toSDK(e) : undefined);
+    } else {
+      obj.attributes = [];
+    }
+
+    return obj;
   }
 
 };
@@ -461,7 +615,7 @@ export const MsgSignProviderAttributesResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgSignProviderAttributesResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgSignProviderAttributesResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSignProviderAttributesResponse();
@@ -491,6 +645,15 @@ export const MsgSignProviderAttributesResponse = {
   fromPartial<I extends Exact<DeepPartial<MsgSignProviderAttributesResponse>, I>>(_: I): MsgSignProviderAttributesResponse {
     const message = createBaseMsgSignProviderAttributesResponse();
     return message;
+  },
+
+  fromSDK(_: MsgSignProviderAttributesResponseSDKType): MsgSignProviderAttributesResponse {
+    return {};
+  },
+
+  toSDK(_: MsgSignProviderAttributesResponse): MsgSignProviderAttributesResponseSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -578,6 +741,28 @@ export const MsgDeleteProviderAttributes = {
     message.auditor = object.auditor ?? "";
     message.keys = object.keys?.map(e => e) || [];
     return message;
+  },
+
+  fromSDK(object: MsgDeleteProviderAttributesSDKType): MsgDeleteProviderAttributes {
+    return {
+      owner: isSet(object.owner) ? object.owner : undefined,
+      auditor: isSet(object.auditor) ? object.auditor : undefined,
+      keys: Array.isArray(object?.keys) ? object.keys.map((e: any) => e) : []
+    };
+  },
+
+  toSDK(message: MsgDeleteProviderAttributes): MsgDeleteProviderAttributesSDKType {
+    const obj: any = {};
+    message.owner !== undefined && (obj.owner = message.owner);
+    message.auditor !== undefined && (obj.auditor = message.auditor);
+
+    if (message.keys) {
+      obj.keys = message.keys.map(e => e);
+    } else {
+      obj.keys = [];
+    }
+
+    return obj;
   }
 
 };
@@ -591,7 +776,7 @@ export const MsgDeleteProviderAttributesResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgDeleteProviderAttributesResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgDeleteProviderAttributesResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgDeleteProviderAttributesResponse();
@@ -621,6 +806,15 @@ export const MsgDeleteProviderAttributesResponse = {
   fromPartial<I extends Exact<DeepPartial<MsgDeleteProviderAttributesResponse>, I>>(_: I): MsgDeleteProviderAttributesResponse {
     const message = createBaseMsgDeleteProviderAttributesResponse();
     return message;
+  },
+
+  fromSDK(_: MsgDeleteProviderAttributesResponseSDKType): MsgDeleteProviderAttributesResponse {
+    return {};
+  },
+
+  toSDK(_: MsgDeleteProviderAttributesResponse): MsgDeleteProviderAttributesResponseSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };

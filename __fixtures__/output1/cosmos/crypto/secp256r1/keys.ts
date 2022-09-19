@@ -11,8 +11,23 @@ export interface PubKey {
   key: Uint8Array;
 }
 
+/** PubKey defines a secp256r1 ECDSA public key. */
+export interface PubKeySDKType {
+  /**
+   * Point on secp256r1 curve in a compressed representation as specified in section
+   * 4.3.6 of ANSI X9.62: https://webstore.ansi.org/standards/ascx9/ansix9621998
+   */
+  key: Uint8Array;
+}
+
 /** PrivKey defines a secp256r1 ECDSA private key. */
 export interface PrivKey {
+  /** secret number serialized using big-endian encoding */
+  secret: Uint8Array;
+}
+
+/** PrivKey defines a secp256r1 ECDSA private key. */
+export interface PrivKeySDKType {
   /** secret number serialized using big-endian encoding */
   secret: Uint8Array;
 }
@@ -70,6 +85,18 @@ export const PubKey = {
     const message = createBasePubKey();
     message.key = object.key ?? new Uint8Array();
     return message;
+  },
+
+  fromSDK(object: PubKeySDKType): PubKey {
+    return {
+      key: isSet(object.key) ? object.key : undefined
+    };
+  },
+
+  toSDK(message: PubKey): PubKeySDKType {
+    const obj: any = {};
+    message.key !== undefined && (obj.key = message.key);
+    return obj;
   }
 
 };
@@ -127,6 +154,18 @@ export const PrivKey = {
     const message = createBasePrivKey();
     message.secret = object.secret ?? new Uint8Array();
     return message;
+  },
+
+  fromSDK(object: PrivKeySDKType): PrivKey {
+    return {
+      secret: isSet(object.secret) ? object.secret : undefined
+    };
+  },
+
+  toSDK(message: PrivKey): PrivKeySDKType {
+    const obj: any = {};
+    message.secret !== undefined && (obj.secret = message.secret);
+    return obj;
   }
 
 };

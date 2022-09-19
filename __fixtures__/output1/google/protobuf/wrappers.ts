@@ -13,11 +13,31 @@ export interface DoubleValue {
 }
 
 /**
+ * Wrapper message for `double`.
+ * 
+ * The JSON representation for `DoubleValue` is JSON number.
+ */
+export interface DoubleValueSDKType {
+  /** The double value. */
+  value: number;
+}
+
+/**
  * Wrapper message for `float`.
  * 
  * The JSON representation for `FloatValue` is JSON number.
  */
 export interface FloatValue {
+  /** The float value. */
+  value: number;
+}
+
+/**
+ * Wrapper message for `float`.
+ * 
+ * The JSON representation for `FloatValue` is JSON number.
+ */
+export interface FloatValueSDKType {
   /** The float value. */
   value: number;
 }
@@ -33,11 +53,31 @@ export interface Int64Value {
 }
 
 /**
+ * Wrapper message for `int64`.
+ * 
+ * The JSON representation for `Int64Value` is JSON string.
+ */
+export interface Int64ValueSDKType {
+  /** The int64 value. */
+  value: Long;
+}
+
+/**
  * Wrapper message for `uint64`.
  * 
  * The JSON representation for `UInt64Value` is JSON string.
  */
 export interface UInt64Value {
+  /** The uint64 value. */
+  value: Long;
+}
+
+/**
+ * Wrapper message for `uint64`.
+ * 
+ * The JSON representation for `UInt64Value` is JSON string.
+ */
+export interface UInt64ValueSDKType {
   /** The uint64 value. */
   value: Long;
 }
@@ -53,11 +93,31 @@ export interface Int32Value {
 }
 
 /**
+ * Wrapper message for `int32`.
+ * 
+ * The JSON representation for `Int32Value` is JSON number.
+ */
+export interface Int32ValueSDKType {
+  /** The int32 value. */
+  value: number;
+}
+
+/**
  * Wrapper message for `uint32`.
  * 
  * The JSON representation for `UInt32Value` is JSON number.
  */
 export interface UInt32Value {
+  /** The uint32 value. */
+  value: number;
+}
+
+/**
+ * Wrapper message for `uint32`.
+ * 
+ * The JSON representation for `UInt32Value` is JSON number.
+ */
+export interface UInt32ValueSDKType {
   /** The uint32 value. */
   value: number;
 }
@@ -73,6 +133,16 @@ export interface BoolValue {
 }
 
 /**
+ * Wrapper message for `bool`.
+ * 
+ * The JSON representation for `BoolValue` is JSON `true` and `false`.
+ */
+export interface BoolValueSDKType {
+  /** The bool value. */
+  value: boolean;
+}
+
+/**
  * Wrapper message for `string`.
  * 
  * The JSON representation for `StringValue` is JSON string.
@@ -83,11 +153,31 @@ export interface StringValue {
 }
 
 /**
+ * Wrapper message for `string`.
+ * 
+ * The JSON representation for `StringValue` is JSON string.
+ */
+export interface StringValueSDKType {
+  /** The string value. */
+  value: string;
+}
+
+/**
  * Wrapper message for `bytes`.
  * 
  * The JSON representation for `BytesValue` is JSON string.
  */
 export interface BytesValue {
+  /** The bytes value. */
+  value: Uint8Array;
+}
+
+/**
+ * Wrapper message for `bytes`.
+ * 
+ * The JSON representation for `BytesValue` is JSON string.
+ */
+export interface BytesValueSDKType {
   /** The bytes value. */
   value: Uint8Array;
 }
@@ -145,6 +235,18 @@ export const DoubleValue = {
     const message = createBaseDoubleValue();
     message.value = object.value ?? 0;
     return message;
+  },
+
+  fromSDK(object: DoubleValueSDKType): DoubleValue {
+    return {
+      value: isSet(object.value) ? object.value : undefined
+    };
+  },
+
+  toSDK(message: DoubleValue): DoubleValueSDKType {
+    const obj: any = {};
+    message.value !== undefined && (obj.value = message.value);
+    return obj;
   }
 
 };
@@ -202,6 +304,18 @@ export const FloatValue = {
     const message = createBaseFloatValue();
     message.value = object.value ?? 0;
     return message;
+  },
+
+  fromSDK(object: FloatValueSDKType): FloatValue {
+    return {
+      value: isSet(object.value) ? object.value : undefined
+    };
+  },
+
+  toSDK(message: FloatValue): FloatValueSDKType {
+    const obj: any = {};
+    message.value !== undefined && (obj.value = message.value);
+    return obj;
   }
 
 };
@@ -259,6 +373,18 @@ export const Int64Value = {
     const message = createBaseInt64Value();
     message.value = object.value !== undefined && object.value !== null ? Long.fromValue(object.value) : Long.ZERO;
     return message;
+  },
+
+  fromSDK(object: Int64ValueSDKType): Int64Value {
+    return {
+      value: isSet(object.value) ? object.value : undefined
+    };
+  },
+
+  toSDK(message: Int64Value): Int64ValueSDKType {
+    const obj: any = {};
+    message.value !== undefined && (obj.value = message.value);
+    return obj;
   }
 
 };
@@ -316,6 +442,18 @@ export const UInt64Value = {
     const message = createBaseUInt64Value();
     message.value = object.value !== undefined && object.value !== null ? Long.fromValue(object.value) : Long.UZERO;
     return message;
+  },
+
+  fromSDK(object: UInt64ValueSDKType): UInt64Value {
+    return {
+      value: isSet(object.value) ? object.value : undefined
+    };
+  },
+
+  toSDK(message: UInt64Value): UInt64ValueSDKType {
+    const obj: any = {};
+    message.value !== undefined && (obj.value = message.value);
+    return obj;
   }
 
 };
@@ -373,6 +511,18 @@ export const Int32Value = {
     const message = createBaseInt32Value();
     message.value = object.value ?? 0;
     return message;
+  },
+
+  fromSDK(object: Int32ValueSDKType): Int32Value {
+    return {
+      value: isSet(object.value) ? object.value : undefined
+    };
+  },
+
+  toSDK(message: Int32Value): Int32ValueSDKType {
+    const obj: any = {};
+    message.value !== undefined && (obj.value = message.value);
+    return obj;
   }
 
 };
@@ -430,6 +580,18 @@ export const UInt32Value = {
     const message = createBaseUInt32Value();
     message.value = object.value ?? 0;
     return message;
+  },
+
+  fromSDK(object: UInt32ValueSDKType): UInt32Value {
+    return {
+      value: isSet(object.value) ? object.value : undefined
+    };
+  },
+
+  toSDK(message: UInt32Value): UInt32ValueSDKType {
+    const obj: any = {};
+    message.value !== undefined && (obj.value = message.value);
+    return obj;
   }
 
 };
@@ -487,6 +649,18 @@ export const BoolValue = {
     const message = createBaseBoolValue();
     message.value = object.value ?? false;
     return message;
+  },
+
+  fromSDK(object: BoolValueSDKType): BoolValue {
+    return {
+      value: isSet(object.value) ? object.value : undefined
+    };
+  },
+
+  toSDK(message: BoolValue): BoolValueSDKType {
+    const obj: any = {};
+    message.value !== undefined && (obj.value = message.value);
+    return obj;
   }
 
 };
@@ -544,6 +718,18 @@ export const StringValue = {
     const message = createBaseStringValue();
     message.value = object.value ?? "";
     return message;
+  },
+
+  fromSDK(object: StringValueSDKType): StringValue {
+    return {
+      value: isSet(object.value) ? object.value : undefined
+    };
+  },
+
+  toSDK(message: StringValue): StringValueSDKType {
+    const obj: any = {};
+    message.value !== undefined && (obj.value = message.value);
+    return obj;
   }
 
 };
@@ -601,6 +787,18 @@ export const BytesValue = {
     const message = createBaseBytesValue();
     message.value = object.value ?? new Uint8Array();
     return message;
+  },
+
+  fromSDK(object: BytesValueSDKType): BytesValue {
+    return {
+      value: isSet(object.value) ? object.value : undefined
+    };
+  },
+
+  toSDK(message: BytesValue): BytesValueSDKType {
+    const obj: any = {};
+    message.value !== undefined && (obj.value = message.value);
+    return obj;
   }
 
 };

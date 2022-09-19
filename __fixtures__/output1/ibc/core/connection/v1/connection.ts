@@ -1,4 +1,4 @@
-import { MerklePrefix } from "../../commitment/v1/commitment";
+import { MerklePrefix, MerklePrefixSDKType } from "../../commitment/v1/commitment";
 import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, DeepPartial } from "@osmonauts/helpers";
 export const protobufPackage = "ibc.core.connection.v1";
@@ -8,6 +8,28 @@ export const protobufPackage = "ibc.core.connection.v1";
  * INIT, TRYOPEN, OPEN or UNINITIALIZED.
  */
 export enum State {
+  /** STATE_UNINITIALIZED_UNSPECIFIED - Default State */
+  STATE_UNINITIALIZED_UNSPECIFIED = 0,
+
+  /** STATE_INIT - A connection end has just started the opening handshake. */
+  STATE_INIT = 1,
+
+  /**
+   * STATE_TRYOPEN - A connection end has acknowledged the handshake step on the counterparty
+   * chain.
+   */
+  STATE_TRYOPEN = 2,
+
+  /** STATE_OPEN - A connection end has completed the handshake. */
+  STATE_OPEN = 3,
+  UNRECOGNIZED = -1,
+}
+
+/**
+ * State defines if a connection is in one of the following states:
+ * INIT, TRYOPEN, OPEN or UNINITIALIZED.
+ */
+export enum StateSDKType {
   /** STATE_UNINITIALIZED_UNSPECIFIED - Default State */
   STATE_UNINITIALIZED_UNSPECIFIED = 0,
 
@@ -98,6 +120,36 @@ export interface ConnectionEnd {
 }
 
 /**
+ * ConnectionEnd defines a stateful object on a chain connected to another
+ * separate one.
+ * NOTE: there must only be 2 defined ConnectionEnds to establish
+ * a connection between two chains.
+ */
+export interface ConnectionEndSDKType {
+  /** client associated with this connection. */
+  client_id: string;
+
+  /**
+   * IBC version which can be utilised to determine encodings or protocols for
+   * channels or packets utilising this connection.
+   */
+  versions: VersionSDKType[];
+
+  /** current state of the connection end. */
+  state: StateSDKType;
+
+  /** counterparty chain associated with this connection. */
+  counterparty: CounterpartySDKType;
+
+  /**
+   * delay period that must pass before a consensus state can be used for
+   * packet-verification NOTE: delay period logic is only implemented by some
+   * clients.
+   */
+  delay_period: Long;
+}
+
+/**
  * IdentifiedConnection defines a connection with additional connection
  * identifier field.
  */
@@ -124,6 +176,33 @@ export interface IdentifiedConnection {
   delayPeriod: Long;
 }
 
+/**
+ * IdentifiedConnection defines a connection with additional connection
+ * identifier field.
+ */
+export interface IdentifiedConnectionSDKType {
+  /** connection identifier. */
+  id: string;
+
+  /** client associated with this connection. */
+  client_id: string;
+
+  /**
+   * IBC version which can be utilised to determine encodings or protocols for
+   * channels or packets utilising this connection
+   */
+  versions: VersionSDKType[];
+
+  /** current state of the connection end. */
+  state: StateSDKType;
+
+  /** counterparty chain associated with this connection. */
+  counterparty: CounterpartySDKType;
+
+  /** delay period associated with this connection. */
+  delay_period: Long;
+}
+
 /** Counterparty defines the counterparty chain associated with a connection end. */
 export interface Counterparty {
   /**
@@ -142,8 +221,32 @@ export interface Counterparty {
   prefix: MerklePrefix;
 }
 
+/** Counterparty defines the counterparty chain associated with a connection end. */
+export interface CounterpartySDKType {
+  /**
+   * identifies the client on the counterparty chain associated with a given
+   * connection.
+   */
+  client_id: string;
+
+  /**
+   * identifies the connection end on the counterparty chain associated with a
+   * given connection.
+   */
+  connection_id: string;
+
+  /** commitment merkle prefix of the counterparty chain. */
+  prefix: MerklePrefixSDKType;
+}
+
 /** ClientPaths define all the connection paths for a client state. */
 export interface ClientPaths {
+  /** list of connection paths */
+  paths: string[];
+}
+
+/** ClientPaths define all the connection paths for a client state. */
+export interface ClientPathsSDKType {
   /** list of connection paths */
   paths: string[];
 }
@@ -152,6 +255,15 @@ export interface ClientPaths {
 export interface ConnectionPaths {
   /** client state unique identifier */
   clientId: string;
+
+  /** list of connection paths */
+  paths: string[];
+}
+
+/** ConnectionPaths define all the connection paths for a given client state. */
+export interface ConnectionPathsSDKType {
+  /** client state unique identifier */
+  client_id: string;
 
   /** list of connection paths */
   paths: string[];
@@ -169,6 +281,18 @@ export interface Version {
   features: string[];
 }
 
+/**
+ * Version defines the versioning scheme used to negotiate the IBC verison in
+ * the connection handshake.
+ */
+export interface VersionSDKType {
+  /** unique version identifier */
+  identifier: string;
+
+  /** list of features compatible with the specified identifier */
+  features: string[];
+}
+
 /** Params defines the set of Connection parameters. */
 export interface Params {
   /**
@@ -177,6 +301,16 @@ export interface Params {
    * conditions. A safe choice is 3-5x the expected time per block.
    */
   maxExpectedTimePerBlock: Long;
+}
+
+/** Params defines the set of Connection parameters. */
+export interface ParamsSDKType {
+  /**
+   * maximum expected time per block (in nanoseconds), used to enforce block delay. This parameter should reflect the
+   * largest amount of time that the chain might reasonably take to produce the next block under normal operating
+   * conditions. A safe choice is 3-5x the expected time per block.
+   */
+  max_expected_time_per_block: Long;
 }
 
 function createBaseConnectionEnd(): ConnectionEnd {
@@ -286,6 +420,32 @@ export const ConnectionEnd = {
     message.counterparty = object.counterparty !== undefined && object.counterparty !== null ? Counterparty.fromPartial(object.counterparty) : undefined;
     message.delayPeriod = object.delayPeriod !== undefined && object.delayPeriod !== null ? Long.fromValue(object.delayPeriod) : Long.UZERO;
     return message;
+  },
+
+  fromSDK(object: ConnectionEndSDKType): ConnectionEnd {
+    return {
+      clientId: isSet(object.client_id) ? object.client_id : undefined,
+      versions: Array.isArray(object?.versions) ? object.versions.map((e: any) => Version.fromSDK(e)) : [],
+      state: isSet(object.state) ? stateFromJSON(object.state) : 0,
+      counterparty: isSet(object.counterparty) ? Counterparty.fromSDK(object.counterparty) : undefined,
+      delayPeriod: isSet(object.delay_period) ? object.delay_period : undefined
+    };
+  },
+
+  toSDK(message: ConnectionEnd): ConnectionEndSDKType {
+    const obj: any = {};
+    message.clientId !== undefined && (obj.client_id = message.clientId);
+
+    if (message.versions) {
+      obj.versions = message.versions.map(e => e ? Version.toSDK(e) : undefined);
+    } else {
+      obj.versions = [];
+    }
+
+    message.state !== undefined && (obj.state = stateToJSON(message.state));
+    message.counterparty !== undefined && (obj.counterparty = message.counterparty ? Counterparty.toSDK(message.counterparty) : undefined);
+    message.delayPeriod !== undefined && (obj.delay_period = message.delayPeriod);
+    return obj;
   }
 
 };
@@ -409,6 +569,34 @@ export const IdentifiedConnection = {
     message.counterparty = object.counterparty !== undefined && object.counterparty !== null ? Counterparty.fromPartial(object.counterparty) : undefined;
     message.delayPeriod = object.delayPeriod !== undefined && object.delayPeriod !== null ? Long.fromValue(object.delayPeriod) : Long.UZERO;
     return message;
+  },
+
+  fromSDK(object: IdentifiedConnectionSDKType): IdentifiedConnection {
+    return {
+      id: isSet(object.id) ? object.id : undefined,
+      clientId: isSet(object.client_id) ? object.client_id : undefined,
+      versions: Array.isArray(object?.versions) ? object.versions.map((e: any) => Version.fromSDK(e)) : [],
+      state: isSet(object.state) ? stateFromJSON(object.state) : 0,
+      counterparty: isSet(object.counterparty) ? Counterparty.fromSDK(object.counterparty) : undefined,
+      delayPeriod: isSet(object.delay_period) ? object.delay_period : undefined
+    };
+  },
+
+  toSDK(message: IdentifiedConnection): IdentifiedConnectionSDKType {
+    const obj: any = {};
+    message.id !== undefined && (obj.id = message.id);
+    message.clientId !== undefined && (obj.client_id = message.clientId);
+
+    if (message.versions) {
+      obj.versions = message.versions.map(e => e ? Version.toSDK(e) : undefined);
+    } else {
+      obj.versions = [];
+    }
+
+    message.state !== undefined && (obj.state = stateToJSON(message.state));
+    message.counterparty !== undefined && (obj.counterparty = message.counterparty ? Counterparty.toSDK(message.counterparty) : undefined);
+    message.delayPeriod !== undefined && (obj.delay_period = message.delayPeriod);
+    return obj;
   }
 
 };
@@ -490,6 +678,22 @@ export const Counterparty = {
     message.connectionId = object.connectionId ?? "";
     message.prefix = object.prefix !== undefined && object.prefix !== null ? MerklePrefix.fromPartial(object.prefix) : undefined;
     return message;
+  },
+
+  fromSDK(object: CounterpartySDKType): Counterparty {
+    return {
+      clientId: isSet(object.client_id) ? object.client_id : undefined,
+      connectionId: isSet(object.connection_id) ? object.connection_id : undefined,
+      prefix: isSet(object.prefix) ? MerklePrefix.fromSDK(object.prefix) : undefined
+    };
+  },
+
+  toSDK(message: Counterparty): CounterpartySDKType {
+    const obj: any = {};
+    message.clientId !== undefined && (obj.client_id = message.clientId);
+    message.connectionId !== undefined && (obj.connection_id = message.connectionId);
+    message.prefix !== undefined && (obj.prefix = message.prefix ? MerklePrefix.toSDK(message.prefix) : undefined);
+    return obj;
   }
 
 };
@@ -553,6 +757,24 @@ export const ClientPaths = {
     const message = createBaseClientPaths();
     message.paths = object.paths?.map(e => e) || [];
     return message;
+  },
+
+  fromSDK(object: ClientPathsSDKType): ClientPaths {
+    return {
+      paths: Array.isArray(object?.paths) ? object.paths.map((e: any) => e) : []
+    };
+  },
+
+  toSDK(message: ClientPaths): ClientPathsSDKType {
+    const obj: any = {};
+
+    if (message.paths) {
+      obj.paths = message.paths.map(e => e);
+    } else {
+      obj.paths = [];
+    }
+
+    return obj;
   }
 
 };
@@ -628,6 +850,26 @@ export const ConnectionPaths = {
     message.clientId = object.clientId ?? "";
     message.paths = object.paths?.map(e => e) || [];
     return message;
+  },
+
+  fromSDK(object: ConnectionPathsSDKType): ConnectionPaths {
+    return {
+      clientId: isSet(object.client_id) ? object.client_id : undefined,
+      paths: Array.isArray(object?.paths) ? object.paths.map((e: any) => e) : []
+    };
+  },
+
+  toSDK(message: ConnectionPaths): ConnectionPathsSDKType {
+    const obj: any = {};
+    message.clientId !== undefined && (obj.client_id = message.clientId);
+
+    if (message.paths) {
+      obj.paths = message.paths.map(e => e);
+    } else {
+      obj.paths = [];
+    }
+
+    return obj;
   }
 
 };
@@ -703,6 +945,26 @@ export const Version = {
     message.identifier = object.identifier ?? "";
     message.features = object.features?.map(e => e) || [];
     return message;
+  },
+
+  fromSDK(object: VersionSDKType): Version {
+    return {
+      identifier: isSet(object.identifier) ? object.identifier : undefined,
+      features: Array.isArray(object?.features) ? object.features.map((e: any) => e) : []
+    };
+  },
+
+  toSDK(message: Version): VersionSDKType {
+    const obj: any = {};
+    message.identifier !== undefined && (obj.identifier = message.identifier);
+
+    if (message.features) {
+      obj.features = message.features.map(e => e);
+    } else {
+      obj.features = [];
+    }
+
+    return obj;
   }
 
 };
@@ -760,6 +1022,18 @@ export const Params = {
     const message = createBaseParams();
     message.maxExpectedTimePerBlock = object.maxExpectedTimePerBlock !== undefined && object.maxExpectedTimePerBlock !== null ? Long.fromValue(object.maxExpectedTimePerBlock) : Long.UZERO;
     return message;
+  },
+
+  fromSDK(object: ParamsSDKType): Params {
+    return {
+      maxExpectedTimePerBlock: isSet(object.max_expected_time_per_block) ? object.max_expected_time_per_block : undefined
+    };
+  },
+
+  toSDK(message: Params): ParamsSDKType {
+    const obj: any = {};
+    message.maxExpectedTimePerBlock !== undefined && (obj.max_expected_time_per_block = message.maxExpectedTimePerBlock);
+    return obj;
   }
 
 };

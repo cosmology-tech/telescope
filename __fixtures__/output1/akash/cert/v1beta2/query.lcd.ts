@@ -1,8 +1,8 @@
-import { CertificateFilter, Certificate } from "./cert";
-import { PageRequest, PageResponse } from "../../../cosmos/base/query/v1beta1/pagination";
+import { CertificateFilter, CertificateFilterSDKType, Certificate, CertificateSDKType } from "./cert";
+import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
 import { setPaginationParams } from "@osmonauts/helpers";
 import { LCDClient } from "@osmonauts/lcd";
-import { QueryCertificatesRequest, QueryCertificatesResponse } from "./query";
+import { QueryCertificatesRequest, QueryCertificatesRequestSDKType, QueryCertificatesResponse, QueryCertificatesResponseSDKType } from "./query";
 export class LCDQueryClient extends LCDClient {
   constructor({
     restEndpoint
@@ -15,7 +15,7 @@ export class LCDQueryClient extends LCDClient {
   }
 
   /* Certificates queries certificates */
-  async certificates(params: QueryCertificatesRequest): Promise<QueryCertificatesResponse> {
+  async certificates(params: QueryCertificatesRequest): Promise<QueryCertificatesResponseSDKType> {
     const options: any = {
       params: {}
     };
@@ -29,7 +29,7 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `akash/cert/v1beta2/certificates/list`;
-    return await this.get<QueryCertificatesResponse>(endpoint, options);
+    return await this.get<QueryCertificatesResponseSDKType>(endpoint, options);
   }
 
 }

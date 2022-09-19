@@ -1,11 +1,11 @@
-import { Coin } from "../../../cosmos/base/v1beta1/coin";
+import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { Rpc } from "@osmonauts/helpers";
 import * as _m0 from "protobufjs/minimal";
-import { QueryBalancesRequest, QueryBalancesResponse } from "./query";
+import { QueryBalancesRequest, QueryBalancesRequestSDKType, QueryBalancesResponse, QueryBalancesResponseSDKType } from "./query";
 
 /** Query defines the RPC service */
 export interface Query {
-  balances(request: QueryBalancesRequest): Promise<QueryBalancesResponse>;
+  balances(request: QueryBalancesRequest): Promise<QueryBalancesResponseSDKType>;
   /*Retrieves the unvested, vested and locked tokens for a vesting account*/
 
 }
@@ -17,7 +17,7 @@ export class QueryClientImpl implements Query {
     this.balances = this.balances.bind(this);
   }
 
-  balances(request: QueryBalancesRequest): Promise<QueryBalancesResponse> {
+  balances(request: QueryBalancesRequest): Promise<QueryBalancesResponseSDKType> {
     const data = QueryBalancesRequest.encode(request).finish();
     const promise = this.rpc.request("evmos.vesting.v1.Query", "Balances", data);
     return promise.then(data => QueryBalancesResponse.decode(new _m0.Reader(data)));

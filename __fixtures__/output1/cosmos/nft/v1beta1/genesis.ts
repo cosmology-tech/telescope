@@ -1,4 +1,4 @@
-import { Class, NFT } from "./nft";
+import { Class, ClassSDKType, NFT, NFTSDKType } from "./nft";
 import * as _m0 from "protobufjs/minimal";
 import { DeepPartial, isSet } from "@osmonauts/helpers";
 export const protobufPackage = "cosmos.nft.v1beta1";
@@ -10,6 +10,13 @@ export interface GenesisState {
   entries: Entry[];
 }
 
+/** GenesisState defines the nft module's genesis state. */
+export interface GenesisStateSDKType {
+  /** class defines the class of the nft type. */
+  classes: ClassSDKType[];
+  entries: EntrySDKType[];
+}
+
 /** Entry Defines all nft owned by a person */
 export interface Entry {
   /** owner is the owner address of the following nft */
@@ -17,6 +24,15 @@ export interface Entry {
 
   /** nfts is a group of nfts of the same owner */
   nfts: NFT[];
+}
+
+/** Entry Defines all nft owned by a person */
+export interface EntrySDKType {
+  /** owner is the owner address of the following nft */
+  owner: string;
+
+  /** nfts is a group of nfts of the same owner */
+  nfts: NFTSDKType[];
 }
 
 function createBaseGenesisState(): GenesisState {
@@ -95,6 +111,31 @@ export const GenesisState = {
     message.classes = object.classes?.map(e => Class.fromPartial(e)) || [];
     message.entries = object.entries?.map(e => Entry.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: GenesisStateSDKType): GenesisState {
+    return {
+      classes: Array.isArray(object?.classes) ? object.classes.map((e: any) => Class.fromSDK(e)) : [],
+      entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => Entry.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: GenesisState): GenesisStateSDKType {
+    const obj: any = {};
+
+    if (message.classes) {
+      obj.classes = message.classes.map(e => e ? Class.toSDK(e) : undefined);
+    } else {
+      obj.classes = [];
+    }
+
+    if (message.entries) {
+      obj.entries = message.entries.map(e => e ? Entry.toSDK(e) : undefined);
+    } else {
+      obj.entries = [];
+    }
+
+    return obj;
   }
 
 };
@@ -170,6 +211,26 @@ export const Entry = {
     message.owner = object.owner ?? "";
     message.nfts = object.nfts?.map(e => NFT.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: EntrySDKType): Entry {
+    return {
+      owner: isSet(object.owner) ? object.owner : undefined,
+      nfts: Array.isArray(object?.nfts) ? object.nfts.map((e: any) => NFT.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: Entry): EntrySDKType {
+    const obj: any = {};
+    message.owner !== undefined && (obj.owner = message.owner);
+
+    if (message.nfts) {
+      obj.nfts = message.nfts.map(e => e ? NFT.toSDK(e) : undefined);
+    } else {
+      obj.nfts = [];
+    }
+
+    return obj;
   }
 
 };

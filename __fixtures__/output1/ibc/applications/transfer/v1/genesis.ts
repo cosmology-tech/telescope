@@ -1,4 +1,4 @@
-import { DenomTrace, Params } from "./transfer";
+import { DenomTrace, DenomTraceSDKType, Params, ParamsSDKType } from "./transfer";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "@osmonauts/helpers";
 export const protobufPackage = "ibc.applications.transfer.v1";
@@ -8,6 +8,13 @@ export interface GenesisState {
   portId: string;
   denomTraces: DenomTrace[];
   params: Params;
+}
+
+/** GenesisState defines the ibc-transfer genesis state */
+export interface GenesisStateSDKType {
+  port_id: string;
+  denom_traces: DenomTraceSDKType[];
+  params: ParamsSDKType;
 }
 
 function createBaseGenesisState(): GenesisState {
@@ -93,6 +100,28 @@ export const GenesisState = {
     message.denomTraces = object.denomTraces?.map(e => DenomTrace.fromPartial(e)) || [];
     message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     return message;
+  },
+
+  fromSDK(object: GenesisStateSDKType): GenesisState {
+    return {
+      portId: isSet(object.port_id) ? object.port_id : undefined,
+      denomTraces: Array.isArray(object?.denom_traces) ? object.denom_traces.map((e: any) => DenomTrace.fromSDK(e)) : [],
+      params: isSet(object.params) ? Params.fromSDK(object.params) : undefined
+    };
+  },
+
+  toSDK(message: GenesisState): GenesisStateSDKType {
+    const obj: any = {};
+    message.portId !== undefined && (obj.port_id = message.portId);
+
+    if (message.denomTraces) {
+      obj.denom_traces = message.denomTraces.map(e => e ? DenomTrace.toSDK(e) : undefined);
+    } else {
+      obj.denom_traces = [];
+    }
+
+    message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
+    return obj;
   }
 
 };

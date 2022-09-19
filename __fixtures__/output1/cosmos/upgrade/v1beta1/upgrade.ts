@@ -1,5 +1,5 @@
-import { Timestamp } from "../../../google/protobuf/timestamp";
-import { Any } from "../../../google/protobuf/any";
+import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
+import { Any, AnySDKType } from "../../../google/protobuf/any";
 import * as _m0 from "protobufjs/minimal";
 import { toTimestamp, fromTimestamp, Long, isSet, fromJsonTimestamp, DeepPartial } from "@osmonauts/helpers";
 export const protobufPackage = "cosmos.upgrade.v1beta1";
@@ -48,6 +48,50 @@ export interface Plan {
   upgradedClientState: Any;
 }
 
+/** Plan specifies information about a planned upgrade and when it should occur. */
+export interface PlanSDKType {
+  /**
+   * Sets the name for the upgrade. This name will be used by the upgraded
+   * version of the software to apply any special "on-upgrade" commands during
+   * the first BeginBlock method after the upgrade is applied. It is also used
+   * to detect whether a software version can handle a given upgrade. If no
+   * upgrade handler with this name has been set in the software, it will be
+   * assumed that the software is out-of-date when the upgrade Time or Height is
+   * reached and the software will exit.
+   */
+  name: string;
+
+  /**
+   * Deprecated: Time based upgrades have been deprecated. Time based upgrade logic
+   * has been removed from the SDK.
+   * If this field is not empty, an error will be thrown.
+   */
+
+  /** @deprecated */
+  time: Date;
+
+  /**
+   * The height at which the upgrade must be performed.
+   * Only used if Time is not set.
+   */
+  height: Long;
+
+  /**
+   * Any application specific upgrade info to be included on-chain
+   * such as a git commit that validators could automatically upgrade to
+   */
+  info: string;
+
+  /**
+   * Deprecated: UpgradedClientState field has been deprecated. IBC upgrade logic has been
+   * moved to the IBC module in the sub module 02-client.
+   * If this field is not empty, an error will be thrown.
+   */
+
+  /** @deprecated */
+  upgraded_client_state: AnySDKType;
+}
+
 /**
  * SoftwareUpgradeProposal is a gov Content type for initiating a software
  * upgrade.
@@ -60,6 +104,20 @@ export interface SoftwareUpgradeProposal {
   title: string;
   description: string;
   plan: Plan;
+}
+
+/**
+ * SoftwareUpgradeProposal is a gov Content type for initiating a software
+ * upgrade.
+ * Deprecated: This legacy proposal is deprecated in favor of Msg-based gov
+ * proposals, see MsgSoftwareUpgrade.
+ */
+
+/** @deprecated */
+export interface SoftwareUpgradeProposalSDKType {
+  title: string;
+  description: string;
+  plan: PlanSDKType;
 }
 
 /**
@@ -76,11 +134,37 @@ export interface CancelSoftwareUpgradeProposal {
 }
 
 /**
+ * CancelSoftwareUpgradeProposal is a gov Content type for cancelling a software
+ * upgrade.
+ * Deprecated: This legacy proposal is deprecated in favor of Msg-based gov
+ * proposals, see MsgCancelUpgrade.
+ */
+
+/** @deprecated */
+export interface CancelSoftwareUpgradeProposalSDKType {
+  title: string;
+  description: string;
+}
+
+/**
  * ModuleVersion specifies a module and its consensus version.
  * 
  * Since: cosmos-sdk 0.43
  */
 export interface ModuleVersion {
+  /** name of the app module */
+  name: string;
+
+  /** consensus version of the app module */
+  version: Long;
+}
+
+/**
+ * ModuleVersion specifies a module and its consensus version.
+ * 
+ * Since: cosmos-sdk 0.43
+ */
+export interface ModuleVersionSDKType {
   /** name of the app module */
   name: string;
 
@@ -189,6 +273,26 @@ export const Plan = {
     message.info = object.info ?? "";
     message.upgradedClientState = object.upgradedClientState !== undefined && object.upgradedClientState !== null ? Any.fromPartial(object.upgradedClientState) : undefined;
     return message;
+  },
+
+  fromSDK(object: PlanSDKType): Plan {
+    return {
+      name: isSet(object.name) ? object.name : undefined,
+      time: isSet(object.time) ? Timestamp.fromSDK(object.time) : undefined,
+      height: isSet(object.height) ? object.height : undefined,
+      info: isSet(object.info) ? object.info : undefined,
+      upgradedClientState: isSet(object.upgraded_client_state) ? Any.fromSDK(object.upgraded_client_state) : undefined
+    };
+  },
+
+  toSDK(message: Plan): PlanSDKType {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    message.time !== undefined && (obj.time = message.time ? Timestamp.toSDK(message.time) : undefined);
+    message.height !== undefined && (obj.height = message.height);
+    message.info !== undefined && (obj.info = message.info);
+    message.upgradedClientState !== undefined && (obj.upgraded_client_state = message.upgradedClientState ? Any.toSDK(message.upgradedClientState) : undefined);
+    return obj;
   }
 
 };
@@ -270,6 +374,22 @@ export const SoftwareUpgradeProposal = {
     message.description = object.description ?? "";
     message.plan = object.plan !== undefined && object.plan !== null ? Plan.fromPartial(object.plan) : undefined;
     return message;
+  },
+
+  fromSDK(object: SoftwareUpgradeProposalSDKType): SoftwareUpgradeProposal {
+    return {
+      title: isSet(object.title) ? object.title : undefined,
+      description: isSet(object.description) ? object.description : undefined,
+      plan: isSet(object.plan) ? Plan.fromSDK(object.plan) : undefined
+    };
+  },
+
+  toSDK(message: SoftwareUpgradeProposal): SoftwareUpgradeProposalSDKType {
+    const obj: any = {};
+    message.title !== undefined && (obj.title = message.title);
+    message.description !== undefined && (obj.description = message.description);
+    message.plan !== undefined && (obj.plan = message.plan ? Plan.toSDK(message.plan) : undefined);
+    return obj;
   }
 
 };
@@ -339,6 +459,20 @@ export const CancelSoftwareUpgradeProposal = {
     message.title = object.title ?? "";
     message.description = object.description ?? "";
     return message;
+  },
+
+  fromSDK(object: CancelSoftwareUpgradeProposalSDKType): CancelSoftwareUpgradeProposal {
+    return {
+      title: isSet(object.title) ? object.title : undefined,
+      description: isSet(object.description) ? object.description : undefined
+    };
+  },
+
+  toSDK(message: CancelSoftwareUpgradeProposal): CancelSoftwareUpgradeProposalSDKType {
+    const obj: any = {};
+    message.title !== undefined && (obj.title = message.title);
+    message.description !== undefined && (obj.description = message.description);
+    return obj;
   }
 
 };
@@ -408,6 +542,20 @@ export const ModuleVersion = {
     message.name = object.name ?? "";
     message.version = object.version !== undefined && object.version !== null ? Long.fromValue(object.version) : Long.UZERO;
     return message;
+  },
+
+  fromSDK(object: ModuleVersionSDKType): ModuleVersion {
+    return {
+      name: isSet(object.name) ? object.name : undefined,
+      version: isSet(object.version) ? object.version : undefined
+    };
+  },
+
+  toSDK(message: ModuleVersion): ModuleVersionSDKType {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    message.version !== undefined && (obj.version = message.version);
+    return obj;
   }
 
 };

@@ -1,6 +1,6 @@
-import { Coin } from "../../../cosmos/base/v1beta1/coin";
-import { Params } from "./params";
-import { ClaimRecord } from "./claim";
+import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
+import { Params, ParamsSDKType } from "./params";
+import { ClaimRecord, ClaimRecordSDKType } from "./claim";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "@osmonauts/helpers";
 export const protobufPackage = "osmosis.claim.v1beta1";
@@ -15,6 +15,18 @@ export interface GenesisState {
 
   /** list of claim records, one for every airdrop recipient */
   claimRecords: ClaimRecord[];
+}
+
+/** GenesisState defines the claim module's genesis state. */
+export interface GenesisStateSDKType {
+  /** balance of the claim module's account */
+  module_account_balance: CoinSDKType;
+
+  /** params defines all the parameters of the module. */
+  params: ParamsSDKType;
+
+  /** list of claim records, one for every airdrop recipient */
+  claim_records: ClaimRecordSDKType[];
 }
 
 function createBaseGenesisState(): GenesisState {
@@ -100,6 +112,28 @@ export const GenesisState = {
     message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     message.claimRecords = object.claimRecords?.map(e => ClaimRecord.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: GenesisStateSDKType): GenesisState {
+    return {
+      moduleAccountBalance: isSet(object.module_account_balance) ? Coin.fromSDK(object.module_account_balance) : undefined,
+      params: isSet(object.params) ? Params.fromSDK(object.params) : undefined,
+      claimRecords: Array.isArray(object?.claim_records) ? object.claim_records.map((e: any) => ClaimRecord.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: GenesisState): GenesisStateSDKType {
+    const obj: any = {};
+    message.moduleAccountBalance !== undefined && (obj.module_account_balance = message.moduleAccountBalance ? Coin.toSDK(message.moduleAccountBalance) : undefined);
+    message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
+
+    if (message.claimRecords) {
+      obj.claim_records = message.claimRecords.map(e => e ? ClaimRecord.toSDK(e) : undefined);
+    } else {
+      obj.claim_records = [];
+    }
+
+    return obj;
   }
 
 };

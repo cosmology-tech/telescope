@@ -1,4 +1,4 @@
-import { Height } from "../../../core/client/v1/client";
+import { Height, HeightSDKType } from "../../../core/client/v1/client";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "@osmonauts/helpers";
 export const protobufPackage = "ibc.lightclients.localhost.v1";
@@ -13,6 +13,18 @@ export interface ClientState {
 
   /** self latest block height */
   height: Height;
+}
+
+/**
+ * ClientState defines a loopback (localhost) client. It requires (read-only)
+ * access to keys outside the client prefix.
+ */
+export interface ClientStateSDKType {
+  /** self chain ID */
+  chain_id: string;
+
+  /** self latest block height */
+  height: HeightSDKType;
 }
 
 function createBaseClientState(): ClientState {
@@ -80,6 +92,20 @@ export const ClientState = {
     message.chainId = object.chainId ?? "";
     message.height = object.height !== undefined && object.height !== null ? Height.fromPartial(object.height) : undefined;
     return message;
+  },
+
+  fromSDK(object: ClientStateSDKType): ClientState {
+    return {
+      chainId: isSet(object.chain_id) ? object.chain_id : undefined,
+      height: isSet(object.height) ? Height.fromSDK(object.height) : undefined
+    };
+  },
+
+  toSDK(message: ClientState): ClientStateSDKType {
+    const obj: any = {};
+    message.chainId !== undefined && (obj.chain_id = message.chainId);
+    message.height !== undefined && (obj.height = message.height ? Height.toSDK(message.height) : undefined);
+    return obj;
   }
 
 };

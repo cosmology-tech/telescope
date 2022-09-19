@@ -1,13 +1,30 @@
-import { Timestamp } from "../../../protobuf/timestamp";
-import { MetricValueSet } from "./metric_value";
-import { LogEntry } from "./log_entry";
-import { Any } from "../../../protobuf/any";
+import { Timestamp, TimestampSDKType } from "../../../protobuf/timestamp";
+import { MetricValueSet, MetricValueSetSDKType } from "./metric_value";
+import { LogEntry, LogEntrySDKType } from "./log_entry";
+import { Any, AnySDKType } from "../../../protobuf/any";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, toTimestamp, fromTimestamp, fromJsonTimestamp, isObject } from "@osmonauts/helpers";
 export const protobufPackage = "google.api.servicecontrol.v1";
 
 /** Defines the importance of the data contained in the operation. */
 export enum Operation_Importance {
+  /**
+   * LOW - Allows data caching, batching, and aggregation. It provides
+   * higher performance with higher data loss risk.
+   */
+  LOW = 0,
+
+  /**
+   * HIGH - Disables data aggregation to minimize data loss. It is for operations
+   * that contains significant monetary value or audit trail. This feature
+   * only applies to the client libraries.
+   */
+  HIGH = 1,
+  UNRECOGNIZED = -1,
+}
+
+/** Defines the importance of the data contained in the operation. */
+export enum Operation_ImportanceSDKType {
   /**
    * LOW - Allows data caching, batching, and aggregation. It provides
    * higher performance with higher data loss risk.
@@ -51,6 +68,10 @@ export function operation_ImportanceToJSON(object: Operation_Importance): string
   }
 }
 export interface Operation_LabelsEntry {
+  key: string;
+  value: string;
+}
+export interface Operation_LabelsEntrySDKType {
   key: string;
   value: string;
 }
@@ -147,6 +168,98 @@ export interface Operation {
   extensions: Any[];
 }
 
+/** Represents information regarding an operation. */
+export interface OperationSDKType {
+  /**
+   * Identity of the operation. This must be unique within the scope of the
+   * service that generated the operation. If the service calls
+   * Check() and Report() on the same operation, the two calls should carry
+   * the same id.
+   * 
+   * UUID version 4 is recommended, though not required.
+   * In scenarios where an operation is computed from existing information
+   * and an idempotent id is desirable for deduplication purpose, UUID version 5
+   * is recommended. See RFC 4122 for details.
+   */
+  operation_id: string;
+
+  /** Fully qualified name of the operation. Reserved for future use. */
+  operation_name: string;
+
+  /**
+   * Identity of the consumer who is using the service.
+   * This field should be filled in for the operations initiated by a
+   * consumer, but not for service-initiated operations that are
+   * not related to a specific consumer.
+   * 
+   * - This can be in one of the following formats:
+   * - project:PROJECT_ID,
+   * - project`_`number:PROJECT_NUMBER,
+   * - projects/PROJECT_ID or PROJECT_NUMBER,
+   * - folders/FOLDER_NUMBER,
+   * - organizations/ORGANIZATION_NUMBER,
+   * - api`_`key:API_KEY.
+   */
+  consumer_id: string;
+
+  /** Required. Start time of the operation. */
+  start_time: Date;
+
+  /**
+   * End time of the operation.
+   * Required when the operation is used in
+   * [ServiceController.Report][google.api.servicecontrol.v1.ServiceController.Report],
+   * but optional when the operation is used in
+   * [ServiceController.Check][google.api.servicecontrol.v1.ServiceController.Check].
+   */
+  end_time: Date;
+
+  /**
+   * Labels describing the operation. Only the following labels are allowed:
+   * 
+   * - Labels describing monitored resources as defined in
+   * the service configuration.
+   * - Default labels of metric values. When specified, labels defined in the
+   * metric value override these default.
+   * - The following labels defined by Google Cloud Platform:
+   * - `cloud.googleapis.com/location` describing the location where the
+   * operation happened,
+   * - `servicecontrol.googleapis.com/user_agent` describing the user agent
+   * of the API request,
+   * - `servicecontrol.googleapis.com/service_agent` describing the service
+   * used to handle the API request (e.g. ESP),
+   * - `servicecontrol.googleapis.com/platform` describing the platform
+   * where the API is served, such as App Engine, Compute Engine, or
+   * Kubernetes Engine.
+   */
+  labels: {
+    [key: string]: string;
+  };
+
+  /**
+   * Represents information about this operation. Each MetricValueSet
+   * corresponds to a metric defined in the service configuration.
+   * The data type used in the MetricValueSet must agree with
+   * the data type specified in the metric definition.
+   * 
+   * Within a single operation, it is not allowed to have more than one
+   * MetricValue instances that have the same metric names and identical
+   * label value combinations. If a request has such duplicated MetricValue
+   * instances, the entire request is rejected with
+   * an invalid argument error.
+   */
+  metric_value_sets: MetricValueSetSDKType[];
+
+  /** Represents information to be logged. */
+  log_entries: LogEntrySDKType[];
+
+  /** DO NOT USE. This is an experimental field. */
+  importance: Operation_ImportanceSDKType;
+
+  /** Unimplemented. */
+  extensions: AnySDKType[];
+}
+
 function createBaseOperation_LabelsEntry(): Operation_LabelsEntry {
   return {
     key: "",
@@ -212,6 +325,20 @@ export const Operation_LabelsEntry = {
     message.key = object.key ?? "";
     message.value = object.value ?? "";
     return message;
+  },
+
+  fromSDK(object: Operation_LabelsEntrySDKType): Operation_LabelsEntry {
+    return {
+      key: isSet(object.key) ? object.key : undefined,
+      value: isSet(object.value) ? object.value : undefined
+    };
+  },
+
+  toSDK(message: Operation_LabelsEntry): Operation_LabelsEntrySDKType {
+    const obj: any = {};
+    message.key !== undefined && (obj.key = message.key);
+    message.value !== undefined && (obj.value = message.value);
+    return obj;
   }
 
 };
@@ -279,7 +406,7 @@ export const Operation = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): Operation {
+  decode(input: _m0.Reader | Uint8Array, length?: number): OperationSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseOperation();
@@ -421,6 +548,64 @@ export const Operation = {
     message.importance = object.importance ?? 0;
     message.extensions = object.extensions?.map(e => Any.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: OperationSDKType): Operation {
+    return {
+      operationId: isSet(object.operation_id) ? object.operation_id : undefined,
+      operationName: isSet(object.operation_name) ? object.operation_name : undefined,
+      consumerId: isSet(object.consumer_id) ? object.consumer_id : undefined,
+      startTime: isSet(object.start_time) ? Timestamp.fromSDK(object.start_time) : undefined,
+      endTime: isSet(object.end_time) ? Timestamp.fromSDK(object.end_time) : undefined,
+      labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
+        [key: string]: string;
+      }>((acc, [key, value]) => {
+        acc[key] = String(value);
+        return acc;
+      }, {}) : {},
+      metricValueSets: Array.isArray(object?.metric_value_sets) ? object.metric_value_sets.map((e: any) => MetricValueSet.fromSDK(e)) : [],
+      logEntries: Array.isArray(object?.log_entries) ? object.log_entries.map((e: any) => LogEntry.fromSDK(e)) : [],
+      importance: isSet(object.importance) ? operation_ImportanceFromJSON(object.importance) : 0,
+      extensions: Array.isArray(object?.extensions) ? object.extensions.map((e: any) => Any.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: Operation): OperationSDKType {
+    const obj: any = {};
+    message.operationId !== undefined && (obj.operation_id = message.operationId);
+    message.operationName !== undefined && (obj.operation_name = message.operationName);
+    message.consumerId !== undefined && (obj.consumer_id = message.consumerId);
+    message.startTime !== undefined && (obj.start_time = message.startTime ? Timestamp.toSDK(message.startTime) : undefined);
+    message.endTime !== undefined && (obj.end_time = message.endTime ? Timestamp.toSDK(message.endTime) : undefined);
+    obj.labels = {};
+
+    if (message.labels) {
+      Object.entries(message.labels).forEach(([k, v]) => {
+        obj.labels[k] = v;
+      });
+    }
+
+    if (message.metricValueSets) {
+      obj.metric_value_sets = message.metricValueSets.map(e => e ? MetricValueSet.toSDK(e) : undefined);
+    } else {
+      obj.metric_value_sets = [];
+    }
+
+    if (message.logEntries) {
+      obj.log_entries = message.logEntries.map(e => e ? LogEntry.toSDK(e) : undefined);
+    } else {
+      obj.log_entries = [];
+    }
+
+    message.importance !== undefined && (obj.importance = operation_ImportanceToJSON(message.importance));
+
+    if (message.extensions) {
+      obj.extensions = message.extensions.map(e => e ? Any.toSDK(e) : undefined);
+    } else {
+      obj.extensions = [];
+    }
+
+    return obj;
   }
 
 };

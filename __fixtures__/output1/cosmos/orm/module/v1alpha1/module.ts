@@ -9,6 +9,13 @@ export const protobufPackage = "cosmos.orm.module.v1alpha1";
  */
 export interface Module {}
 
+/**
+ * Module defines the ORM module which adds providers to the app container for
+ * module-scoped DB's. In the future it may provide gRPC services for interacting
+ * with ORM data.
+ */
+export interface ModuleSDKType {}
+
 function createBaseModule(): Module {
   return {};
 }
@@ -48,6 +55,15 @@ export const Module = {
   fromPartial(_: DeepPartial<Module>): Module {
     const message = createBaseModule();
     return message;
+  },
+
+  fromSDK(_: ModuleSDKType): Module {
+    return {};
+  },
+
+  toSDK(_: Module): ModuleSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };

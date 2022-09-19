@@ -1,12 +1,22 @@
-import { MetricDescriptor } from "../../api/metric";
+import { MetricDescriptor, MetricDescriptorSDKType } from "../../api/metric";
 import { Distribution_BucketOptions } from "../../api/distribution";
-import { Timestamp } from "../../protobuf/timestamp";
+import { Timestamp, TimestampSDKType } from "../../protobuf/timestamp";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, toTimestamp, fromTimestamp, isObject, fromJsonTimestamp } from "@osmonauts/helpers";
 export const protobufPackage = "google.logging.v2";
 
 /** Logging API version. */
 export enum LogMetric_ApiVersion {
+  /** V2 - Logging API v2. */
+  V2 = 0,
+
+  /** V1 - Logging API v1. */
+  V1 = 1,
+  UNRECOGNIZED = -1,
+}
+
+/** Logging API version. */
+export enum LogMetric_ApiVersionSDKType {
   /** V2 - Logging API v2. */
   V2 = 0,
 
@@ -43,6 +53,10 @@ export function logMetric_ApiVersionToJSON(object: LogMetric_ApiVersion): string
   }
 }
 export interface LogMetric_LabelExtractorsEntry {
+  key: string;
+  value: string;
+}
+export interface LogMetric_LabelExtractorsEntrySDKType {
   key: string;
   value: string;
 }
@@ -195,6 +209,154 @@ export interface LogMetric {
   version: LogMetric_ApiVersion;
 }
 
+/**
+ * Describes a logs-based metric. The value of the metric is the number of log
+ * entries that match a logs filter in a given time interval.
+ * 
+ * Logs-based metrics can also be used to extract values from logs and create a
+ * distribution of the values. The distribution records the statistics of the
+ * extracted values along with an optional histogram of the values as specified
+ * by the bucket options.
+ */
+export interface LogMetricSDKType {
+  /**
+   * Required. The client-assigned metric identifier.
+   * Examples: `"error_count"`, `"nginx/requests"`.
+   * 
+   * Metric identifiers are limited to 100 characters and can include only the
+   * following characters: `A-Z`, `a-z`, `0-9`, and the special characters
+   * `_-.,+!*',()%/`. The forward-slash character (`/`) denotes a hierarchy of
+   * name pieces, and it cannot be the first character of the name.
+   * 
+   * This field is the `[METRIC_ID]` part of a metric resource name in the
+   * format "projects/[PROJECT_ID]/metrics/[METRIC_ID]". Example: If the
+   * resource name of a metric is
+   * `"projects/my-project/metrics/nginx%2Frequests"`, this field's value is
+   * `"nginx/requests"`.
+   */
+  name: string;
+
+  /**
+   * Optional. A description of this metric, which is used in documentation.
+   * The maximum length of the description is 8000 characters.
+   */
+  description: string;
+
+  /**
+   * Required. An [advanced logs
+   * filter](https://cloud.google.com/logging/docs/view/advanced_filters) which
+   * is used to match log entries. Example:
+   * 
+   * "resource.type=gae_app AND severity>=ERROR"
+   * 
+   * The maximum length of the filter is 20000 characters.
+   */
+  filter: string;
+
+  /**
+   * Optional. If set to True, then this metric is disabled and it does not
+   * generate any points.
+   */
+  disabled: boolean;
+
+  /**
+   * Optional. The metric descriptor associated with the logs-based metric.
+   * If unspecified, it uses a default metric descriptor with a DELTA metric
+   * kind, INT64 value type, with no labels and a unit of "1". Such a metric
+   * counts the number of log entries matching the `filter` expression.
+   * 
+   * The `name`, `type`, and `description` fields in the `metric_descriptor`
+   * are output only, and is constructed using the `name` and `description`
+   * field in the LogMetric.
+   * 
+   * To create a logs-based metric that records a distribution of log values, a
+   * DELTA metric kind with a DISTRIBUTION value type must be used along with
+   * a `value_extractor` expression in the LogMetric.
+   * 
+   * Each label in the metric descriptor must have a matching label
+   * name as the key and an extractor expression as the value in the
+   * `label_extractors` map.
+   * 
+   * The `metric_kind` and `value_type` fields in the `metric_descriptor` cannot
+   * be updated once initially configured. New labels can be added in the
+   * `metric_descriptor`, but existing labels cannot be modified except for
+   * their description.
+   */
+  metric_descriptor: MetricDescriptorSDKType;
+
+  /**
+   * Optional. A `value_extractor` is required when using a distribution
+   * logs-based metric to extract the values to record from a log entry.
+   * Two functions are supported for value extraction: `EXTRACT(field)` or
+   * `REGEXP_EXTRACT(field, regex)`. The argument are:
+   * 1. field: The name of the log entry field from which the value is to be
+   * extracted.
+   * 2. regex: A regular expression using the Google RE2 syntax
+   * (https://github.com/google/re2/wiki/Syntax) with a single capture
+   * group to extract data from the specified log entry field. The value
+   * of the field is converted to a string before applying the regex.
+   * It is an error to specify a regex that does not include exactly one
+   * capture group.
+   * 
+   * The result of the extraction must be convertible to a double type, as the
+   * distribution always records double values. If either the extraction or
+   * the conversion to double fails, then those values are not recorded in the
+   * distribution.
+   * 
+   * Example: `REGEXP_EXTRACT(jsonPayload.request, ".*quantity=(\d+).*")`
+   */
+  value_extractor: string;
+
+  /**
+   * Optional. A map from a label key string to an extractor expression which is
+   * used to extract data from a log entry field and assign as the label value.
+   * Each label key specified in the LabelDescriptor must have an associated
+   * extractor expression in this map. The syntax of the extractor expression
+   * is the same as for the `value_extractor` field.
+   * 
+   * The extracted value is converted to the type defined in the label
+   * descriptor. If the either the extraction or the type conversion fails,
+   * the label will have a default value. The default value for a string
+   * label is an empty string, for an integer label its 0, and for a boolean
+   * label its `false`.
+   * 
+   * Note that there are upper bounds on the maximum number of labels and the
+   * number of active time series that are allowed in a project.
+   */
+  label_extractors: {
+    [key: string]: string;
+  };
+
+  /**
+   * Optional. The `bucket_options` are required when the logs-based metric is
+   * using a DISTRIBUTION value type and it describes the bucket boundaries
+   * used to create a histogram of the extracted values.
+   */
+  bucket_options: Distribution_BucketOptionsSDKType;
+
+  /**
+   * Output only. The creation timestamp of the metric.
+   * 
+   * This field may not be present for older metrics.
+   */
+  create_time: Date;
+
+  /**
+   * Output only. The last update timestamp of the metric.
+   * 
+   * This field may not be present for older metrics.
+   */
+  update_time: Date;
+
+  /**
+   * Deprecated. The API version that created or updated this metric.
+   * The v2 format is used by default and cannot be changed.
+   */
+
+  /** @deprecated */
+  version: LogMetric_ApiVersionSDKType;
+}
+
 /** The parameters to ListLogMetrics. */
 export interface ListLogMetricsRequest {
   /**
@@ -220,6 +382,31 @@ export interface ListLogMetricsRequest {
   pageSize?: number;
 }
 
+/** The parameters to ListLogMetrics. */
+export interface ListLogMetricsRequestSDKType {
+  /**
+   * Required. The name of the project containing the metrics:
+   * 
+   * "projects/[PROJECT_ID]"
+   */
+  parent?: string;
+
+  /**
+   * Optional. If present, then retrieve the next batch of results from the
+   * preceding call to this method. `pageToken` must be the value of
+   * `nextPageToken` from the previous response. The values of other method
+   * parameters should be identical to those in the previous call.
+   */
+  page_token?: string;
+
+  /**
+   * Optional. The maximum number of results to return from this request.
+   * Non-positive values are ignored. The presence of `nextPageToken` in the
+   * response indicates that more results might be available.
+   */
+  page_size?: number;
+}
+
 /** Result returned from ListLogMetrics. */
 export interface ListLogMetricsResponse {
   /** A list of logs-based metrics. */
@@ -233,6 +420,19 @@ export interface ListLogMetricsResponse {
   nextPageToken: string;
 }
 
+/** Result returned from ListLogMetrics. */
+export interface ListLogMetricsResponseSDKType {
+  /** A list of logs-based metrics. */
+  metrics: LogMetricSDKType[];
+
+  /**
+   * If there might be more results than appear in this response, then
+   * `nextPageToken` is included. To get the next set of results, call this
+   * method again using the value of `nextPageToken` as `pageToken`.
+   */
+  next_page_token: string;
+}
+
 /** The parameters to GetLogMetric. */
 export interface GetLogMetricRequest {
   /**
@@ -241,6 +441,16 @@ export interface GetLogMetricRequest {
    * "projects/[PROJECT_ID]/metrics/[METRIC_ID]"
    */
   metricName?: string;
+}
+
+/** The parameters to GetLogMetric. */
+export interface GetLogMetricRequestSDKType {
+  /**
+   * Required. The resource name of the desired metric:
+   * 
+   * "projects/[PROJECT_ID]/metrics/[METRIC_ID]"
+   */
+  metric_name?: string;
 }
 
 /** The parameters to CreateLogMetric. */
@@ -261,6 +471,24 @@ export interface CreateLogMetricRequest {
   metric: LogMetric;
 }
 
+/** The parameters to CreateLogMetric. */
+export interface CreateLogMetricRequestSDKType {
+  /**
+   * Required. The resource name of the project in which to create the metric:
+   * 
+   * "projects/[PROJECT_ID]"
+   * 
+   * The new metric must be provided in the request.
+   */
+  parent: string;
+
+  /**
+   * Required. The new logs-based metric, which must not have an identifier that
+   * already exists.
+   */
+  metric: LogMetricSDKType;
+}
+
 /** The parameters to UpdateLogMetric. */
 export interface UpdateLogMetricRequest {
   /**
@@ -278,6 +506,23 @@ export interface UpdateLogMetricRequest {
   metric: LogMetric;
 }
 
+/** The parameters to UpdateLogMetric. */
+export interface UpdateLogMetricRequestSDKType {
+  /**
+   * Required. The resource name of the metric to update:
+   * 
+   * "projects/[PROJECT_ID]/metrics/[METRIC_ID]"
+   * 
+   * The updated metric must be provided in the request and it's
+   * `name` field must be the same as `[METRIC_ID]` If the metric
+   * does not exist in `[PROJECT_ID]`, then a new metric is created.
+   */
+  metric_name: string;
+
+  /** Required. The updated metric. */
+  metric: LogMetricSDKType;
+}
+
 /** The parameters to DeleteLogMetric. */
 export interface DeleteLogMetricRequest {
   /**
@@ -286,6 +531,16 @@ export interface DeleteLogMetricRequest {
    * "projects/[PROJECT_ID]/metrics/[METRIC_ID]"
    */
   metricName: string;
+}
+
+/** The parameters to DeleteLogMetric. */
+export interface DeleteLogMetricRequestSDKType {
+  /**
+   * Required. The resource name of the metric to delete:
+   * 
+   * "projects/[PROJECT_ID]/metrics/[METRIC_ID]"
+   */
+  metric_name: string;
 }
 
 function createBaseLogMetric_LabelExtractorsEntry(): LogMetric_LabelExtractorsEntry {
@@ -353,6 +608,20 @@ export const LogMetric_LabelExtractorsEntry = {
     message.key = object.key ?? "";
     message.value = object.value ?? "";
     return message;
+  },
+
+  fromSDK(object: LogMetric_LabelExtractorsEntrySDKType): LogMetric_LabelExtractorsEntry {
+    return {
+      key: isSet(object.key) ? object.key : undefined,
+      value: isSet(object.value) ? object.value : undefined
+    };
+  },
+
+  toSDK(message: LogMetric_LabelExtractorsEntry): LogMetric_LabelExtractorsEntrySDKType {
+    const obj: any = {};
+    message.key !== undefined && (obj.key = message.key);
+    message.value !== undefined && (obj.value = message.value);
+    return obj;
   }
 
 };
@@ -425,7 +694,7 @@ export const LogMetric = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): LogMetric {
+  decode(input: _m0.Reader | Uint8Array, length?: number): LogMetricSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLogMetric();
@@ -558,6 +827,50 @@ export const LogMetric = {
     message.updateTime = object.updateTime ?? undefined;
     message.version = object.version ?? 0;
     return message;
+  },
+
+  fromSDK(object: LogMetricSDKType): LogMetric {
+    return {
+      name: isSet(object.name) ? object.name : undefined,
+      description: isSet(object.description) ? object.description : undefined,
+      filter: isSet(object.filter) ? object.filter : undefined,
+      disabled: isSet(object.disabled) ? object.disabled : undefined,
+      metricDescriptor: isSet(object.metric_descriptor) ? MetricDescriptor.fromSDK(object.metric_descriptor) : undefined,
+      valueExtractor: isSet(object.value_extractor) ? object.value_extractor : undefined,
+      labelExtractors: isObject(object.label_extractors) ? Object.entries(object.label_extractors).reduce<{
+        [key: string]: string;
+      }>((acc, [key, value]) => {
+        acc[key] = String(value);
+        return acc;
+      }, {}) : {},
+      bucketOptions: isSet(object.bucket_options) ? Distribution_BucketOptions.fromSDK(object.bucket_options) : undefined,
+      createTime: isSet(object.create_time) ? Timestamp.fromSDK(object.create_time) : undefined,
+      updateTime: isSet(object.update_time) ? Timestamp.fromSDK(object.update_time) : undefined,
+      version: isSet(object.version) ? logMetric_ApiVersionFromJSON(object.version) : 0
+    };
+  },
+
+  toSDK(message: LogMetric): LogMetricSDKType {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    message.description !== undefined && (obj.description = message.description);
+    message.filter !== undefined && (obj.filter = message.filter);
+    message.disabled !== undefined && (obj.disabled = message.disabled);
+    message.metricDescriptor !== undefined && (obj.metric_descriptor = message.metricDescriptor ? MetricDescriptor.toSDK(message.metricDescriptor) : undefined);
+    message.valueExtractor !== undefined && (obj.value_extractor = message.valueExtractor);
+    obj.label_extractors = {};
+
+    if (message.labelExtractors) {
+      Object.entries(message.labelExtractors).forEach(([k, v]) => {
+        obj.label_extractors[k] = v;
+      });
+    }
+
+    message.bucketOptions !== undefined && (obj.bucket_options = message.bucketOptions ? Distribution_BucketOptions.toSDK(message.bucketOptions) : undefined);
+    message.createTime !== undefined && (obj.create_time = message.createTime ? Timestamp.toSDK(message.createTime) : undefined);
+    message.updateTime !== undefined && (obj.update_time = message.updateTime ? Timestamp.toSDK(message.updateTime) : undefined);
+    message.version !== undefined && (obj.version = logMetric_ApiVersionToJSON(message.version));
+    return obj;
   }
 
 };
@@ -639,6 +952,22 @@ export const ListLogMetricsRequest = {
     message.pageToken = object.pageToken ?? "";
     message.pageSize = object.pageSize ?? 0;
     return message;
+  },
+
+  fromSDK(object: ListLogMetricsRequestSDKType): ListLogMetricsRequest {
+    return {
+      parent: isSet(object.parent) ? object.parent : undefined,
+      pageToken: isSet(object.page_token) ? object.page_token : undefined,
+      pageSize: isSet(object.page_size) ? object.page_size : undefined
+    };
+  },
+
+  toSDK(message: ListLogMetricsRequest): ListLogMetricsRequestSDKType {
+    const obj: any = {};
+    message.parent !== undefined && (obj.parent = message.parent);
+    message.pageToken !== undefined && (obj.page_token = message.pageToken);
+    message.pageSize !== undefined && (obj.page_size = message.pageSize);
+    return obj;
   }
 
 };
@@ -663,7 +992,7 @@ export const ListLogMetricsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ListLogMetricsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ListLogMetricsResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListLogMetricsResponse();
@@ -714,6 +1043,26 @@ export const ListLogMetricsResponse = {
     message.metrics = object.metrics?.map(e => LogMetric.fromPartial(e)) || [];
     message.nextPageToken = object.nextPageToken ?? "";
     return message;
+  },
+
+  fromSDK(object: ListLogMetricsResponseSDKType): ListLogMetricsResponse {
+    return {
+      metrics: Array.isArray(object?.metrics) ? object.metrics.map((e: any) => LogMetric.fromSDK(e)) : [],
+      nextPageToken: isSet(object.next_page_token) ? object.next_page_token : undefined
+    };
+  },
+
+  toSDK(message: ListLogMetricsResponse): ListLogMetricsResponseSDKType {
+    const obj: any = {};
+
+    if (message.metrics) {
+      obj.metrics = message.metrics.map(e => e ? LogMetric.toSDK(e) : undefined);
+    } else {
+      obj.metrics = [];
+    }
+
+    message.nextPageToken !== undefined && (obj.next_page_token = message.nextPageToken);
+    return obj;
   }
 
 };
@@ -771,6 +1120,18 @@ export const GetLogMetricRequest = {
     const message = createBaseGetLogMetricRequest();
     message.metricName = object.metricName ?? "";
     return message;
+  },
+
+  fromSDK(object: GetLogMetricRequestSDKType): GetLogMetricRequest {
+    return {
+      metricName: isSet(object.metric_name) ? object.metric_name : undefined
+    };
+  },
+
+  toSDK(message: GetLogMetricRequest): GetLogMetricRequestSDKType {
+    const obj: any = {};
+    message.metricName !== undefined && (obj.metric_name = message.metricName);
+    return obj;
   }
 
 };
@@ -840,6 +1201,20 @@ export const CreateLogMetricRequest = {
     message.parent = object.parent ?? "";
     message.metric = object.metric !== undefined && object.metric !== null ? LogMetric.fromPartial(object.metric) : undefined;
     return message;
+  },
+
+  fromSDK(object: CreateLogMetricRequestSDKType): CreateLogMetricRequest {
+    return {
+      parent: isSet(object.parent) ? object.parent : undefined,
+      metric: isSet(object.metric) ? LogMetric.fromSDK(object.metric) : undefined
+    };
+  },
+
+  toSDK(message: CreateLogMetricRequest): CreateLogMetricRequestSDKType {
+    const obj: any = {};
+    message.parent !== undefined && (obj.parent = message.parent);
+    message.metric !== undefined && (obj.metric = message.metric ? LogMetric.toSDK(message.metric) : undefined);
+    return obj;
   }
 
 };
@@ -909,6 +1284,20 @@ export const UpdateLogMetricRequest = {
     message.metricName = object.metricName ?? "";
     message.metric = object.metric !== undefined && object.metric !== null ? LogMetric.fromPartial(object.metric) : undefined;
     return message;
+  },
+
+  fromSDK(object: UpdateLogMetricRequestSDKType): UpdateLogMetricRequest {
+    return {
+      metricName: isSet(object.metric_name) ? object.metric_name : undefined,
+      metric: isSet(object.metric) ? LogMetric.fromSDK(object.metric) : undefined
+    };
+  },
+
+  toSDK(message: UpdateLogMetricRequest): UpdateLogMetricRequestSDKType {
+    const obj: any = {};
+    message.metricName !== undefined && (obj.metric_name = message.metricName);
+    message.metric !== undefined && (obj.metric = message.metric ? LogMetric.toSDK(message.metric) : undefined);
+    return obj;
   }
 
 };
@@ -966,6 +1355,18 @@ export const DeleteLogMetricRequest = {
     const message = createBaseDeleteLogMetricRequest();
     message.metricName = object.metricName ?? "";
     return message;
+  },
+
+  fromSDK(object: DeleteLogMetricRequestSDKType): DeleteLogMetricRequest {
+    return {
+      metricName: isSet(object.metric_name) ? object.metric_name : undefined
+    };
+  },
+
+  toSDK(message: DeleteLogMetricRequest): DeleteLogMetricRequestSDKType {
+    const obj: any = {};
+    message.metricName !== undefined && (obj.metric_name = message.metricName);
+    return obj;
   }
 
 };

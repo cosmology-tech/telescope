@@ -1,6 +1,6 @@
-import { PageRequest, PageResponse } from "../../../cosmos/base/query/v1beta1/pagination";
-import { TokenPair } from "./erc20";
-import { Params } from "./genesis";
+import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
+import { TokenPair, TokenPairSDKType } from "./erc20";
+import { Params, ParamsSDKType } from "./genesis";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "@osmonauts/helpers";
 export const protobufPackage = "evmos.erc20.v1";
@@ -15,6 +15,15 @@ export interface QueryTokenPairsRequest {
 }
 
 /**
+ * QueryTokenPairsRequest is the request type for the Query/TokenPairs RPC
+ * method.
+ */
+export interface QueryTokenPairsRequestSDKType {
+  /** pagination defines an optional pagination for the request. */
+  pagination?: PageRequestSDKType;
+}
+
+/**
  * QueryTokenPairsResponse is the response type for the Query/TokenPairs RPC
  * method.
  */
@@ -25,8 +34,28 @@ export interface QueryTokenPairsResponse {
   pagination?: PageResponse;
 }
 
+/**
+ * QueryTokenPairsResponse is the response type for the Query/TokenPairs RPC
+ * method.
+ */
+export interface QueryTokenPairsResponseSDKType {
+  token_pairs: TokenPairSDKType[];
+
+  /** pagination defines the pagination in the response. */
+  pagination?: PageResponseSDKType;
+}
+
 /** QueryTokenPairRequest is the request type for the Query/TokenPair RPC method. */
 export interface QueryTokenPairRequest {
+  /**
+   * token identifier can be either the hex contract address of the ERC20 or the
+   * Cosmos base denomination
+   */
+  token: string;
+}
+
+/** QueryTokenPairRequest is the request type for the Query/TokenPair RPC method. */
+export interface QueryTokenPairRequestSDKType {
   /**
    * token identifier can be either the hex contract address of the ERC20 or the
    * Cosmos base denomination
@@ -42,8 +71,19 @@ export interface QueryTokenPairResponse {
   tokenPair: TokenPair;
 }
 
+/**
+ * QueryTokenPairResponse is the response type for the Query/TokenPair RPC
+ * method.
+ */
+export interface QueryTokenPairResponseSDKType {
+  token_pair: TokenPairSDKType;
+}
+
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequest {}
+
+/** QueryParamsRequest is the request type for the Query/Params RPC method. */
+export interface QueryParamsRequestSDKType {}
 
 /**
  * QueryParamsResponse is the response type for the Query/Params RPC
@@ -51,6 +91,14 @@ export interface QueryParamsRequest {}
  */
 export interface QueryParamsResponse {
   params: Params;
+}
+
+/**
+ * QueryParamsResponse is the response type for the Query/Params RPC
+ * method.
+ */
+export interface QueryParamsResponseSDKType {
+  params: ParamsSDKType;
 }
 
 function createBaseQueryTokenPairsRequest(): QueryTokenPairsRequest {
@@ -106,6 +154,18 @@ export const QueryTokenPairsRequest = {
     const message = createBaseQueryTokenPairsRequest();
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryTokenPairsRequestSDKType): QueryTokenPairsRequest {
+    return {
+      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  toSDK(message: QueryTokenPairsRequest): QueryTokenPairsRequestSDKType {
+    const obj: any = {};
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
+    return obj;
   }
 
 };
@@ -130,7 +190,7 @@ export const QueryTokenPairsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryTokenPairsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryTokenPairsResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryTokenPairsResponse();
@@ -181,6 +241,26 @@ export const QueryTokenPairsResponse = {
     message.tokenPairs = object.tokenPairs?.map(e => TokenPair.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryTokenPairsResponseSDKType): QueryTokenPairsResponse {
+    return {
+      tokenPairs: Array.isArray(object?.token_pairs) ? object.token_pairs.map((e: any) => TokenPair.fromSDK(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  toSDK(message: QueryTokenPairsResponse): QueryTokenPairsResponseSDKType {
+    const obj: any = {};
+
+    if (message.tokenPairs) {
+      obj.token_pairs = message.tokenPairs.map(e => e ? TokenPair.toSDK(e) : undefined);
+    } else {
+      obj.token_pairs = [];
+    }
+
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
+    return obj;
   }
 
 };
@@ -238,6 +318,18 @@ export const QueryTokenPairRequest = {
     const message = createBaseQueryTokenPairRequest();
     message.token = object.token ?? "";
     return message;
+  },
+
+  fromSDK(object: QueryTokenPairRequestSDKType): QueryTokenPairRequest {
+    return {
+      token: isSet(object.token) ? object.token : undefined
+    };
+  },
+
+  toSDK(message: QueryTokenPairRequest): QueryTokenPairRequestSDKType {
+    const obj: any = {};
+    message.token !== undefined && (obj.token = message.token);
+    return obj;
   }
 
 };
@@ -257,7 +349,7 @@ export const QueryTokenPairResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryTokenPairResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryTokenPairResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryTokenPairResponse();
@@ -295,6 +387,18 @@ export const QueryTokenPairResponse = {
     const message = createBaseQueryTokenPairResponse();
     message.tokenPair = object.tokenPair !== undefined && object.tokenPair !== null ? TokenPair.fromPartial(object.tokenPair) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryTokenPairResponseSDKType): QueryTokenPairResponse {
+    return {
+      tokenPair: isSet(object.token_pair) ? TokenPair.fromSDK(object.token_pair) : undefined
+    };
+  },
+
+  toSDK(message: QueryTokenPairResponse): QueryTokenPairResponseSDKType {
+    const obj: any = {};
+    message.tokenPair !== undefined && (obj.token_pair = message.tokenPair ? TokenPair.toSDK(message.tokenPair) : undefined);
+    return obj;
   }
 
 };
@@ -338,6 +442,15 @@ export const QueryParamsRequest = {
   fromPartial(_: DeepPartial<QueryParamsRequest>): QueryParamsRequest {
     const message = createBaseQueryParamsRequest();
     return message;
+  },
+
+  fromSDK(_: QueryParamsRequestSDKType): QueryParamsRequest {
+    return {};
+  },
+
+  toSDK(_: QueryParamsRequest): QueryParamsRequestSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -357,7 +470,7 @@ export const QueryParamsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryParamsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryParamsResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryParamsResponse();
@@ -395,6 +508,18 @@ export const QueryParamsResponse = {
     const message = createBaseQueryParamsResponse();
     message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryParamsResponseSDKType): QueryParamsResponse {
+    return {
+      params: isSet(object.params) ? Params.fromSDK(object.params) : undefined
+    };
+  },
+
+  toSDK(message: QueryParamsResponse): QueryParamsResponseSDKType {
+    const obj: any = {};
+    message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
+    return obj;
   }
 
 };

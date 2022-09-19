@@ -12,6 +12,15 @@ export interface CommitInfo {
 }
 
 /**
+ * CommitInfo defines commit information used by the multi-store when committing
+ * a version/height.
+ */
+export interface CommitInfoSDKType {
+  version: Long;
+  store_infos: StoreInfoSDKType[];
+}
+
+/**
  * StoreInfo defines store-specific commit information. It contains a reference
  * between a store name and the commit ID.
  */
@@ -21,10 +30,28 @@ export interface StoreInfo {
 }
 
 /**
+ * StoreInfo defines store-specific commit information. It contains a reference
+ * between a store name and the commit ID.
+ */
+export interface StoreInfoSDKType {
+  name: string;
+  commit_id: CommitIDSDKType;
+}
+
+/**
  * CommitID defines the committment information when a specific store is
  * committed.
  */
 export interface CommitID {
+  version: Long;
+  hash: Uint8Array;
+}
+
+/**
+ * CommitID defines the committment information when a specific store is
+ * committed.
+ */
+export interface CommitIDSDKType {
   version: Long;
   hash: Uint8Array;
 }
@@ -100,6 +127,26 @@ export const CommitInfo = {
     message.version = object.version !== undefined && object.version !== null ? Long.fromValue(object.version) : Long.ZERO;
     message.storeInfos = object.storeInfos?.map(e => StoreInfo.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: CommitInfoSDKType): CommitInfo {
+    return {
+      version: isSet(object.version) ? object.version : undefined,
+      storeInfos: Array.isArray(object?.store_infos) ? object.store_infos.map((e: any) => StoreInfo.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: CommitInfo): CommitInfoSDKType {
+    const obj: any = {};
+    message.version !== undefined && (obj.version = message.version);
+
+    if (message.storeInfos) {
+      obj.store_infos = message.storeInfos.map(e => e ? StoreInfo.toSDK(e) : undefined);
+    } else {
+      obj.store_infos = [];
+    }
+
+    return obj;
   }
 
 };
@@ -169,6 +216,20 @@ export const StoreInfo = {
     message.name = object.name ?? "";
     message.commitId = object.commitId !== undefined && object.commitId !== null ? CommitID.fromPartial(object.commitId) : undefined;
     return message;
+  },
+
+  fromSDK(object: StoreInfoSDKType): StoreInfo {
+    return {
+      name: isSet(object.name) ? object.name : undefined,
+      commitId: isSet(object.commit_id) ? CommitID.fromSDK(object.commit_id) : undefined
+    };
+  },
+
+  toSDK(message: StoreInfo): StoreInfoSDKType {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    message.commitId !== undefined && (obj.commit_id = message.commitId ? CommitID.toSDK(message.commitId) : undefined);
+    return obj;
   }
 
 };
@@ -238,6 +299,20 @@ export const CommitID = {
     message.version = object.version !== undefined && object.version !== null ? Long.fromValue(object.version) : Long.ZERO;
     message.hash = object.hash ?? new Uint8Array();
     return message;
+  },
+
+  fromSDK(object: CommitIDSDKType): CommitID {
+    return {
+      version: isSet(object.version) ? object.version : undefined,
+      hash: isSet(object.hash) ? object.hash : undefined
+    };
+  },
+
+  toSDK(message: CommitID): CommitIDSDKType {
+    const obj: any = {};
+    message.version !== undefined && (obj.version = message.version);
+    message.hash !== undefined && (obj.hash = message.hash);
+    return obj;
   }
 
 };

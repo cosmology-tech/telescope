@@ -1,4 +1,4 @@
-import { Value } from "./value";
+import { Value, ValueSDKType } from "./value";
 import * as _m0 from "protobufjs/minimal";
 import { DeepPartial, Long, isSet } from "@osmonauts/helpers";
 export const protobufPackage = "google.api.expr.v1alpha1";
@@ -28,6 +28,31 @@ export interface Explain {
   exprSteps: Explain_ExprStep[];
 }
 
+/**
+ * Values of intermediate expressions produced when evaluating expression.
+ * Deprecated, use `EvalState` instead.
+ */
+
+/** @deprecated */
+export interface ExplainSDKType {
+  /**
+   * All of the observed values.
+   * 
+   * The field value_index is an index in the values list.
+   * Separating values from steps is needed to remove redundant values.
+   */
+  values: ValueSDKType[];
+
+  /**
+   * List of steps.
+   * 
+   * Repeated evaluations of the same expression generate new ExprStep
+   * instances. The order of such ExprStep instances matches the order of
+   * elements returned by Comprehension.iter_range.
+   */
+  expr_steps: Explain_ExprStepSDKType[];
+}
+
 /** ID and value index of one step. */
 export interface Explain_ExprStep {
   /** ID of corresponding Expr node. */
@@ -35,6 +60,15 @@ export interface Explain_ExprStep {
 
   /** Index of the value in the values list. */
   valueIndex: number;
+}
+
+/** ID and value index of one step. */
+export interface Explain_ExprStepSDKType {
+  /** ID of corresponding Expr node. */
+  id: Long;
+
+  /** Index of the value in the values list. */
+  value_index: number;
 }
 
 function createBaseExplain(): Explain {
@@ -113,6 +147,31 @@ export const Explain = {
     message.values = object.values?.map(e => Value.fromPartial(e)) || [];
     message.exprSteps = object.exprSteps?.map(e => Explain_ExprStep.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: ExplainSDKType): Explain {
+    return {
+      values: Array.isArray(object?.values) ? object.values.map((e: any) => Value.fromSDK(e)) : [],
+      exprSteps: Array.isArray(object?.expr_steps) ? object.expr_steps.map((e: any) => Explain_ExprStep.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: Explain): ExplainSDKType {
+    const obj: any = {};
+
+    if (message.values) {
+      obj.values = message.values.map(e => e ? Value.toSDK(e) : undefined);
+    } else {
+      obj.values = [];
+    }
+
+    if (message.exprSteps) {
+      obj.expr_steps = message.exprSteps.map(e => e ? Explain_ExprStep.toSDK(e) : undefined);
+    } else {
+      obj.expr_steps = [];
+    }
+
+    return obj;
   }
 
 };
@@ -182,6 +241,20 @@ export const Explain_ExprStep = {
     message.id = object.id !== undefined && object.id !== null ? Long.fromValue(object.id) : Long.ZERO;
     message.valueIndex = object.valueIndex ?? 0;
     return message;
+  },
+
+  fromSDK(object: Explain_ExprStepSDKType): Explain_ExprStep {
+    return {
+      id: isSet(object.id) ? object.id : undefined,
+      valueIndex: isSet(object.value_index) ? object.value_index : undefined
+    };
+  },
+
+  toSDK(message: Explain_ExprStep): Explain_ExprStepSDKType {
+    const obj: any = {};
+    message.id !== undefined && (obj.id = message.id);
+    message.valueIndex !== undefined && (obj.value_index = message.valueIndex);
+    return obj;
   }
 
 };

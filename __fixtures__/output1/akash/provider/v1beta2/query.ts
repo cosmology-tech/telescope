@@ -1,5 +1,5 @@
-import { PageRequest, PageResponse } from "../../../cosmos/base/query/v1beta1/pagination";
-import { Provider } from "./provider";
+import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
+import { Provider, ProviderSDKType } from "./provider";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, Exact } from "@osmonauts/helpers";
 export const protobufPackage = "akash.provider.v1beta2";
@@ -9,10 +9,21 @@ export interface QueryProvidersRequest {
   pagination?: PageRequest;
 }
 
+/** QueryProvidersRequest is request type for the Query/Providers RPC method */
+export interface QueryProvidersRequestSDKType {
+  pagination?: PageRequestSDKType;
+}
+
 /** QueryProvidersResponse is response type for the Query/Providers RPC method */
 export interface QueryProvidersResponse {
   providers: Provider[];
   pagination?: PageResponse;
+}
+
+/** QueryProvidersResponse is response type for the Query/Providers RPC method */
+export interface QueryProvidersResponseSDKType {
+  providers: ProviderSDKType[];
+  pagination?: PageResponseSDKType;
 }
 
 /** QueryProviderRequest is request type for the Query/Provider RPC method */
@@ -20,9 +31,19 @@ export interface QueryProviderRequest {
   owner: string;
 }
 
+/** QueryProviderRequest is request type for the Query/Provider RPC method */
+export interface QueryProviderRequestSDKType {
+  owner: string;
+}
+
 /** QueryProviderResponse is response type for the Query/Provider RPC method */
 export interface QueryProviderResponse {
   provider: Provider;
+}
+
+/** QueryProviderResponse is response type for the Query/Provider RPC method */
+export interface QueryProviderResponseSDKType {
+  provider: ProviderSDKType;
 }
 
 function createBaseQueryProvidersRequest(): QueryProvidersRequest {
@@ -78,6 +99,18 @@ export const QueryProvidersRequest = {
     const message = createBaseQueryProvidersRequest();
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryProvidersRequestSDKType): QueryProvidersRequest {
+    return {
+      pagination: isSet(object.pagination) ? PageRequest.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  toSDK(message: QueryProvidersRequest): QueryProvidersRequestSDKType {
+    const obj: any = {};
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
+    return obj;
   }
 
 };
@@ -102,7 +135,7 @@ export const QueryProvidersResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryProvidersResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryProvidersResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryProvidersResponse();
@@ -153,6 +186,26 @@ export const QueryProvidersResponse = {
     message.providers = object.providers?.map(e => Provider.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryProvidersResponseSDKType): QueryProvidersResponse {
+    return {
+      providers: Array.isArray(object?.providers) ? object.providers.map((e: any) => Provider.fromSDK(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDK(object.pagination) : undefined
+    };
+  },
+
+  toSDK(message: QueryProvidersResponse): QueryProvidersResponseSDKType {
+    const obj: any = {};
+
+    if (message.providers) {
+      obj.providers = message.providers.map(e => e ? Provider.toSDK(e) : undefined);
+    } else {
+      obj.providers = [];
+    }
+
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
+    return obj;
   }
 
 };
@@ -210,6 +263,18 @@ export const QueryProviderRequest = {
     const message = createBaseQueryProviderRequest();
     message.owner = object.owner ?? "";
     return message;
+  },
+
+  fromSDK(object: QueryProviderRequestSDKType): QueryProviderRequest {
+    return {
+      owner: isSet(object.owner) ? object.owner : undefined
+    };
+  },
+
+  toSDK(message: QueryProviderRequest): QueryProviderRequestSDKType {
+    const obj: any = {};
+    message.owner !== undefined && (obj.owner = message.owner);
+    return obj;
   }
 
 };
@@ -229,7 +294,7 @@ export const QueryProviderResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryProviderResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryProviderResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryProviderResponse();
@@ -267,6 +332,18 @@ export const QueryProviderResponse = {
     const message = createBaseQueryProviderResponse();
     message.provider = object.provider !== undefined && object.provider !== null ? Provider.fromPartial(object.provider) : undefined;
     return message;
+  },
+
+  fromSDK(object: QueryProviderResponseSDKType): QueryProviderResponse {
+    return {
+      provider: isSet(object.provider) ? Provider.fromSDK(object.provider) : undefined
+    };
+  },
+
+  toSDK(message: QueryProviderResponse): QueryProviderResponseSDKType {
+    const obj: any = {};
+    message.provider !== undefined && (obj.provider = message.provider ? Provider.toSDK(message.provider) : undefined);
+    return obj;
   }
 
 };

@@ -14,6 +14,19 @@ export enum Deployment_State {
   closed = 2,
   UNRECOGNIZED = -1,
 }
+
+/** State is an enum which refers to state of deployment */
+export enum Deployment_StateSDKType {
+  /** invalid - Prefix should start with 0 in enum. So declaring dummy state */
+  invalid = 0,
+
+  /** active - DeploymentActive denotes state for deployment active */
+  active = 1,
+
+  /** closed - DeploymentClosed denotes state for deployment closed */
+  closed = 2,
+  UNRECOGNIZED = -1,
+}
 export function deployment_StateFromJSON(object: any): Deployment_State {
   switch (object) {
     case 0:
@@ -56,6 +69,12 @@ export interface DeploymentID {
   dseq: Long;
 }
 
+/** DeploymentID stores owner and sequence number */
+export interface DeploymentIDSDKType {
+  owner: string;
+  dseq: Long;
+}
+
 /** Deployment stores deploymentID, state and version details */
 export interface Deployment {
   deploymentId: DeploymentID;
@@ -64,8 +83,23 @@ export interface Deployment {
   createdAt: Long;
 }
 
+/** Deployment stores deploymentID, state and version details */
+export interface DeploymentSDKType {
+  deployment_id: DeploymentIDSDKType;
+  state: Deployment_StateSDKType;
+  version: Uint8Array;
+  created_at: Long;
+}
+
 /** DeploymentFilters defines filters used to filter deployments */
 export interface DeploymentFilters {
+  owner: string;
+  dseq: Long;
+  state: string;
+}
+
+/** DeploymentFilters defines filters used to filter deployments */
+export interface DeploymentFiltersSDKType {
   owner: string;
   dseq: Long;
   state: string;
@@ -136,6 +170,20 @@ export const DeploymentID = {
     message.owner = object.owner ?? "";
     message.dseq = object.dseq !== undefined && object.dseq !== null ? Long.fromValue(object.dseq) : Long.UZERO;
     return message;
+  },
+
+  fromSDK(object: DeploymentIDSDKType): DeploymentID {
+    return {
+      owner: isSet(object.owner) ? object.owner : undefined,
+      dseq: isSet(object.dseq) ? object.dseq : undefined
+    };
+  },
+
+  toSDK(message: DeploymentID): DeploymentIDSDKType {
+    const obj: any = {};
+    message.owner !== undefined && (obj.owner = message.owner);
+    message.dseq !== undefined && (obj.dseq = message.dseq);
+    return obj;
   }
 
 };
@@ -229,6 +277,24 @@ export const Deployment = {
     message.version = object.version ?? new Uint8Array();
     message.createdAt = object.createdAt !== undefined && object.createdAt !== null ? Long.fromValue(object.createdAt) : Long.ZERO;
     return message;
+  },
+
+  fromSDK(object: DeploymentSDKType): Deployment {
+    return {
+      deploymentId: isSet(object.deployment_id) ? DeploymentID.fromSDK(object.deployment_id) : undefined,
+      state: isSet(object.state) ? deployment_StateFromJSON(object.state) : 0,
+      version: isSet(object.version) ? object.version : undefined,
+      createdAt: isSet(object.created_at) ? object.created_at : undefined
+    };
+  },
+
+  toSDK(message: Deployment): DeploymentSDKType {
+    const obj: any = {};
+    message.deploymentId !== undefined && (obj.deployment_id = message.deploymentId ? DeploymentID.toSDK(message.deploymentId) : undefined);
+    message.state !== undefined && (obj.state = deployment_StateToJSON(message.state));
+    message.version !== undefined && (obj.version = message.version);
+    message.createdAt !== undefined && (obj.created_at = message.createdAt);
+    return obj;
   }
 
 };
@@ -310,6 +376,22 @@ export const DeploymentFilters = {
     message.dseq = object.dseq !== undefined && object.dseq !== null ? Long.fromValue(object.dseq) : Long.UZERO;
     message.state = object.state ?? "";
     return message;
+  },
+
+  fromSDK(object: DeploymentFiltersSDKType): DeploymentFilters {
+    return {
+      owner: isSet(object.owner) ? object.owner : undefined,
+      dseq: isSet(object.dseq) ? object.dseq : undefined,
+      state: isSet(object.state) ? object.state : undefined
+    };
+  },
+
+  toSDK(message: DeploymentFilters): DeploymentFiltersSDKType {
+    const obj: any = {};
+    message.owner !== undefined && (obj.owner = message.owner);
+    message.dseq !== undefined && (obj.dseq = message.dseq);
+    message.state !== undefined && (obj.state = message.state);
+    return obj;
   }
 
 };

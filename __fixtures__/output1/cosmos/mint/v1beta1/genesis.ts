@@ -1,4 +1,4 @@
-import { Minter, Params } from "./mint";
+import { Minter, MinterSDKType, Params, ParamsSDKType } from "./mint";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "@osmonauts/helpers";
 export const protobufPackage = "cosmos.mint.v1beta1";
@@ -10,6 +10,15 @@ export interface GenesisState {
 
   /** params defines all the paramaters of the module. */
   params: Params;
+}
+
+/** GenesisState defines the mint module's genesis state. */
+export interface GenesisStateSDKType {
+  /** minter is a space for holding current inflation information. */
+  minter: MinterSDKType;
+
+  /** params defines all the paramaters of the module. */
+  params: ParamsSDKType;
 }
 
 function createBaseGenesisState(): GenesisState {
@@ -77,6 +86,20 @@ export const GenesisState = {
     message.minter = object.minter !== undefined && object.minter !== null ? Minter.fromPartial(object.minter) : undefined;
     message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     return message;
+  },
+
+  fromSDK(object: GenesisStateSDKType): GenesisState {
+    return {
+      minter: isSet(object.minter) ? Minter.fromSDK(object.minter) : undefined,
+      params: isSet(object.params) ? Params.fromSDK(object.params) : undefined
+    };
+  },
+
+  toSDK(message: GenesisState): GenesisStateSDKType {
+    const obj: any = {};
+    message.minter !== undefined && (obj.minter = message.minter ? Minter.toSDK(message.minter) : undefined);
+    message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
+    return obj;
   }
 
 };

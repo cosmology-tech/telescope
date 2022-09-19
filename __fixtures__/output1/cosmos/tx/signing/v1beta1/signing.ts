@@ -1,5 +1,5 @@
-import { CompactBitArray } from "../../../crypto/multisig/v1beta1/multisig";
-import { Any } from "../../../../google/protobuf/any";
+import { CompactBitArray, CompactBitArraySDKType } from "../../../crypto/multisig/v1beta1/multisig";
+import { Any, AnySDKType } from "../../../../google/protobuf/any";
 import * as _m0 from "protobufjs/minimal";
 import { DeepPartial, Long, isSet, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
 export const protobufPackage = "cosmos.tx.signing.v1beta1";
@@ -15,6 +15,54 @@ export const protobufPackage = "cosmos.tx.signing.v1beta1";
  * apps have a consistent version of this enum.
  */
 export enum SignMode {
+  /**
+   * SIGN_MODE_UNSPECIFIED - SIGN_MODE_UNSPECIFIED specifies an unknown signing mode and will be
+   * rejected.
+   */
+  SIGN_MODE_UNSPECIFIED = 0,
+
+  /**
+   * SIGN_MODE_DIRECT - SIGN_MODE_DIRECT specifies a signing mode which uses SignDoc and is
+   * verified with raw bytes from Tx.
+   */
+  SIGN_MODE_DIRECT = 1,
+
+  /**
+   * SIGN_MODE_TEXTUAL - SIGN_MODE_TEXTUAL is a future signing mode that will verify some
+   * human-readable textual representation on top of the binary representation
+   * from SIGN_MODE_DIRECT. It is currently not supported.
+   */
+  SIGN_MODE_TEXTUAL = 2,
+
+  /**
+   * SIGN_MODE_DIRECT_AUX - SIGN_MODE_DIRECT_AUX specifies a signing mode which uses
+   * SignDocDirectAux. As opposed to SIGN_MODE_DIRECT, this sign mode does not
+   * require signers signing over other signers' `signer_info`. It also allows
+   * for adding Tips in transactions.
+   * 
+   * Since: cosmos-sdk 0.46
+   */
+  SIGN_MODE_DIRECT_AUX = 3,
+
+  /**
+   * SIGN_MODE_LEGACY_AMINO_JSON - SIGN_MODE_LEGACY_AMINO_JSON is a backwards compatibility mode which uses
+   * Amino JSON and will be removed in the future.
+   */
+  SIGN_MODE_LEGACY_AMINO_JSON = 127,
+  UNRECOGNIZED = -1,
+}
+
+/**
+ * SignMode represents a signing mode with its own security guarantees.
+ * 
+ * This enum should be considered a registry of all known sign modes
+ * in the Cosmos ecosystem. Apps are not expected to support all known
+ * sign modes. Apps that would like to support custom  sign modes are
+ * encouraged to open a small PR against this file to add a new case
+ * to this SignMode enum describing their sign mode so that different
+ * apps have a consistent version of this enum.
+ */
+export enum SignModeSDKType {
   /**
    * SIGN_MODE_UNSPECIFIED - SIGN_MODE_UNSPECIFIED specifies an unknown signing mode and will be
    * rejected.
@@ -107,6 +155,12 @@ export interface SignatureDescriptors {
   signatures: SignatureDescriptor[];
 }
 
+/** SignatureDescriptors wraps multiple SignatureDescriptor's. */
+export interface SignatureDescriptorsSDKType {
+  /** signatures are the signature descriptors */
+  signatures: SignatureDescriptorSDKType[];
+}
+
 /**
  * SignatureDescriptor is a convenience type which represents the full data for
  * a signature including the public key of the signer, signing modes and the
@@ -126,6 +180,25 @@ export interface SignatureDescriptor {
   sequence: Long;
 }
 
+/**
+ * SignatureDescriptor is a convenience type which represents the full data for
+ * a signature including the public key of the signer, signing modes and the
+ * signature itself. It is primarily used for coordinating signatures between
+ * clients.
+ */
+export interface SignatureDescriptorSDKType {
+  /** public_key is the public key of the signer */
+  public_key: AnySDKType;
+  data: SignatureDescriptor_DataSDKType;
+
+  /**
+   * sequence is the sequence of the account, which describes the
+   * number of committed transactions signed by a given address. It is used to prevent
+   * replay attacks.
+   */
+  sequence: Long;
+}
+
 /** Data represents signature data */
 export interface SignatureDescriptor_Data {
   /** single represents a single signer */
@@ -135,10 +208,28 @@ export interface SignatureDescriptor_Data {
   multi?: SignatureDescriptor_Data_Multi;
 }
 
+/** Data represents signature data */
+export interface SignatureDescriptor_DataSDKType {
+  /** single represents a single signer */
+  single?: SignatureDescriptor_Data_SingleSDKType;
+
+  /** multi represents a multisig signer */
+  multi?: SignatureDescriptor_Data_MultiSDKType;
+}
+
 /** Single is the signature data for a single signer */
 export interface SignatureDescriptor_Data_Single {
   /** mode is the signing mode of the single signer */
   mode: SignMode;
+
+  /** signature is the raw signature bytes */
+  signature: Uint8Array;
+}
+
+/** Single is the signature data for a single signer */
+export interface SignatureDescriptor_Data_SingleSDKType {
+  /** mode is the signing mode of the single signer */
+  mode: SignModeSDKType;
 
   /** signature is the raw signature bytes */
   signature: Uint8Array;
@@ -151,6 +242,15 @@ export interface SignatureDescriptor_Data_Multi {
 
   /** signatures is the signatures of the multi-signature */
   signatures: SignatureDescriptor_Data[];
+}
+
+/** Multi is the signature data for a multisig public key */
+export interface SignatureDescriptor_Data_MultiSDKType {
+  /** bitarray specifies which keys within the multisig are signing */
+  bitarray: CompactBitArraySDKType;
+
+  /** signatures is the signatures of the multi-signature */
+  signatures: SignatureDescriptor_DataSDKType[];
 }
 
 function createBaseSignatureDescriptors(): SignatureDescriptors {
@@ -212,6 +312,24 @@ export const SignatureDescriptors = {
     const message = createBaseSignatureDescriptors();
     message.signatures = object.signatures?.map(e => SignatureDescriptor.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: SignatureDescriptorsSDKType): SignatureDescriptors {
+    return {
+      signatures: Array.isArray(object?.signatures) ? object.signatures.map((e: any) => SignatureDescriptor.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: SignatureDescriptors): SignatureDescriptorsSDKType {
+    const obj: any = {};
+
+    if (message.signatures) {
+      obj.signatures = message.signatures.map(e => e ? SignatureDescriptor.toSDK(e) : undefined);
+    } else {
+      obj.signatures = [];
+    }
+
+    return obj;
   }
 
 };
@@ -293,6 +411,22 @@ export const SignatureDescriptor = {
     message.data = object.data !== undefined && object.data !== null ? SignatureDescriptor_Data.fromPartial(object.data) : undefined;
     message.sequence = object.sequence !== undefined && object.sequence !== null ? Long.fromValue(object.sequence) : Long.UZERO;
     return message;
+  },
+
+  fromSDK(object: SignatureDescriptorSDKType): SignatureDescriptor {
+    return {
+      publicKey: isSet(object.public_key) ? Any.fromSDK(object.public_key) : undefined,
+      data: isSet(object.data) ? SignatureDescriptor_Data.fromSDK(object.data) : undefined,
+      sequence: isSet(object.sequence) ? object.sequence : undefined
+    };
+  },
+
+  toSDK(message: SignatureDescriptor): SignatureDescriptorSDKType {
+    const obj: any = {};
+    message.publicKey !== undefined && (obj.public_key = message.publicKey ? Any.toSDK(message.publicKey) : undefined);
+    message.data !== undefined && (obj.data = message.data ? SignatureDescriptor_Data.toSDK(message.data) : undefined);
+    message.sequence !== undefined && (obj.sequence = message.sequence);
+    return obj;
   }
 
 };
@@ -362,6 +496,20 @@ export const SignatureDescriptor_Data = {
     message.single = object.single !== undefined && object.single !== null ? SignatureDescriptor_Data_Single.fromPartial(object.single) : undefined;
     message.multi = object.multi !== undefined && object.multi !== null ? SignatureDescriptor_Data_Multi.fromPartial(object.multi) : undefined;
     return message;
+  },
+
+  fromSDK(object: SignatureDescriptor_DataSDKType): SignatureDescriptor_Data {
+    return {
+      single: isSet(object.single) ? SignatureDescriptor_Data_Single.fromSDK(object.single) : undefined,
+      multi: isSet(object.multi) ? SignatureDescriptor_Data_Multi.fromSDK(object.multi) : undefined
+    };
+  },
+
+  toSDK(message: SignatureDescriptor_Data): SignatureDescriptor_DataSDKType {
+    const obj: any = {};
+    message.single !== undefined && (obj.single = message.single ? SignatureDescriptor_Data_Single.toSDK(message.single) : undefined);
+    message.multi !== undefined && (obj.multi = message.multi ? SignatureDescriptor_Data_Multi.toSDK(message.multi) : undefined);
+    return obj;
   }
 
 };
@@ -431,6 +579,20 @@ export const SignatureDescriptor_Data_Single = {
     message.mode = object.mode ?? 0;
     message.signature = object.signature ?? new Uint8Array();
     return message;
+  },
+
+  fromSDK(object: SignatureDescriptor_Data_SingleSDKType): SignatureDescriptor_Data_Single {
+    return {
+      mode: isSet(object.mode) ? signModeFromJSON(object.mode) : 0,
+      signature: isSet(object.signature) ? object.signature : undefined
+    };
+  },
+
+  toSDK(message: SignatureDescriptor_Data_Single): SignatureDescriptor_Data_SingleSDKType {
+    const obj: any = {};
+    message.mode !== undefined && (obj.mode = signModeToJSON(message.mode));
+    message.signature !== undefined && (obj.signature = message.signature);
+    return obj;
   }
 
 };
@@ -506,6 +668,26 @@ export const SignatureDescriptor_Data_Multi = {
     message.bitarray = object.bitarray !== undefined && object.bitarray !== null ? CompactBitArray.fromPartial(object.bitarray) : undefined;
     message.signatures = object.signatures?.map(e => SignatureDescriptor_Data.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: SignatureDescriptor_Data_MultiSDKType): SignatureDescriptor_Data_Multi {
+    return {
+      bitarray: isSet(object.bitarray) ? CompactBitArray.fromSDK(object.bitarray) : undefined,
+      signatures: Array.isArray(object?.signatures) ? object.signatures.map((e: any) => SignatureDescriptor_Data.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: SignatureDescriptor_Data_Multi): SignatureDescriptor_Data_MultiSDKType {
+    const obj: any = {};
+    message.bitarray !== undefined && (obj.bitarray = message.bitarray ? CompactBitArray.toSDK(message.bitarray) : undefined);
+
+    if (message.signatures) {
+      obj.signatures = message.signatures.map(e => e ? SignatureDescriptor_Data.toSDK(e) : undefined);
+    } else {
+      obj.signatures = [];
+    }
+
+    return obj;
   }
 
 };

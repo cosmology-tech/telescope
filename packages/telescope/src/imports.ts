@@ -3,6 +3,8 @@ import { importStmt } from '@osmonauts/ast';
 import { ImportHash, ImportObj, ServiceMutation } from './types';
 import { UTILS, getRelativePath } from './utils';
 import { TelescopeParseContext } from './build';
+import { ProtoStore } from '@osmonauts/proto-parser';
+import { ProtoRef } from '@osmonauts/types';
 
 const importHashToArray = (hash: ImportHash): ImportObj[] => {
     return Object.entries(hash ?? {})
@@ -111,17 +113,22 @@ const importAs = (name: string, importAs: string, importPath: string) => {
     )
 }
 
-export const getImportStatements = (list: ImportObj[]) => {
+export const getImportStatements = (
+    list: ImportObj[]
+) => {
     const imports = list.reduce((m, obj) => {
         m[obj.path] = m[obj.path] || [];
-        const exists = m[obj.path].find(el => el.type === obj.type && el.path === obj.path && el.name === obj.name);
+        const exists = m[obj.path].find(el =>
+            el.type === obj.type && el.path === obj.path && el.name === obj.name);
 
         // TODO some have google.protobuf.Any shows up... figure out the better way to handle this
         if (/\./.test(obj.name)) {
             obj.name = obj.name.split('.')[obj.name.split('.').length - 1];
         }
 
-        if (!exists) m[obj.path].push(obj);
+        if (!exists) {
+            m[obj.path].push(obj);
+        }
         return m;
     }, {})
 
@@ -198,7 +205,43 @@ export const buildAllImports = (context: TelescopeParseContext, allImports: Impo
     return importStmts;
 }
 
-export const aggregateImports = (context: TelescopeParseContext, allImports: ImportHash, filepath: string) => {
+const addSDKTypesToImports = (
+    context: TelescopeParseContext,
+    imports: ImportObj[]
+) => {
+    const ref = context.ref;
+    return imports.reduce((m, obj) => {
+        // SDKType
+        // probably wont need this until we start generating osmonauts/helpers inline
+        if (obj.type === 'import' && obj.path.startsWith('.')) {
+            let lookup = null;
+            try {
+                lookup = context.store.getImportFromRef(ref, obj.name);
+            } catch (e) { }
+            const SDKTypeObject = {
+                ...obj,
+                name: obj.name + 'SDKType',
+                importAs: (obj.importAs ?? obj.name) + 'SDKType',
+            };
+            if (lookup && ['Type', 'Enum'].includes(lookup.obj.type)) {
+                return [
+                    ...m,
+                    obj,
+                    SDKTypeObject
+                ];
+            }
+        }
+        return [
+            ...m,
+            obj
+        ];
+    }, []);
+
+}
+
+export const aggregateImports = (
+    context: TelescopeParseContext,
+    allImports: ImportHash, filepath: string) => {
 
     const protoImports: ImportObj[] = getProtoImports(context, filepath);
     const aminoImports: ImportObj[] = getAminoImports(context, filepath);
@@ -215,7 +258,9 @@ export const aggregateImports = (context: TelescopeParseContext, allImports: Imp
         .concat(genericImports)
         .concat(additionalImports);
 
-    return list;
+    return addSDKTypesToImports(context, list);
+
+    // return list;
 }
 
 

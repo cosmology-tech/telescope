@@ -1,8 +1,8 @@
-import { Duration } from "../../../google/protobuf/duration";
-import { DistrInfo, Params } from "./incentives";
-import { Gauge } from "../../incentives/gauge";
+import { Duration, DurationSDKType } from "../../../google/protobuf/duration";
+import { DistrInfo, DistrInfoSDKType, Params, ParamsSDKType } from "./incentives";
+import { Gauge, GaugeSDKType } from "../../incentives/gauge";
 import { LCDClient } from "@osmonauts/lcd";
-import { QueryGaugeIdsRequest, QueryGaugeIdsResponse, QueryDistrInfoRequest, QueryDistrInfoResponse, QueryParamsRequest, QueryParamsResponse, QueryLockableDurationsRequest, QueryLockableDurationsResponse, QueryIncentivizedPoolsRequest, QueryIncentivizedPoolsResponse, QueryExternalIncentiveGaugesRequest, QueryExternalIncentiveGaugesResponse } from "./query";
+import { QueryGaugeIdsRequest, QueryGaugeIdsRequestSDKType, QueryGaugeIdsResponse, QueryGaugeIdsResponseSDKType, QueryDistrInfoRequest, QueryDistrInfoRequestSDKType, QueryDistrInfoResponse, QueryDistrInfoResponseSDKType, QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType, QueryLockableDurationsRequest, QueryLockableDurationsRequestSDKType, QueryLockableDurationsResponse, QueryLockableDurationsResponseSDKType, QueryIncentivizedPoolsRequest, QueryIncentivizedPoolsRequestSDKType, QueryIncentivizedPoolsResponse, QueryIncentivizedPoolsResponseSDKType, QueryExternalIncentiveGaugesRequest, QueryExternalIncentiveGaugesRequestSDKType, QueryExternalIncentiveGaugesResponse, QueryExternalIncentiveGaugesResponseSDKType } from "./query";
 export class LCDQueryClient extends LCDClient {
   constructor({
     restEndpoint
@@ -15,39 +15,39 @@ export class LCDQueryClient extends LCDClient {
   }
 
   /* GaugeIds takes the pool id and returns the matching gauge ids and durations */
-  async gaugeIds(params: QueryGaugeIdsRequest): Promise<QueryGaugeIdsResponse> {
+  async gaugeIds(params: QueryGaugeIdsRequest): Promise<QueryGaugeIdsResponseSDKType> {
     const endpoint = `osmosis/pool-incentives/v1beta1/gauge-ids/${params.poolId}`;
-    return await this.get<QueryGaugeIdsResponse>(endpoint);
+    return await this.get<QueryGaugeIdsResponseSDKType>(endpoint);
   }
 
   /* DistrInfo */
-  async distrInfo(_params: QueryDistrInfoRequest = {}): Promise<QueryDistrInfoResponse> {
+  async distrInfo(_params: QueryDistrInfoRequest = {}): Promise<QueryDistrInfoResponseSDKType> {
     const endpoint = `osmosis/pool-incentives/v1beta1/distr_info`;
-    return await this.get<QueryDistrInfoResponse>(endpoint);
+    return await this.get<QueryDistrInfoResponseSDKType>(endpoint);
   }
 
   /* Params */
-  async params(_params: QueryParamsRequest = {}): Promise<QueryParamsResponse> {
+  async params(_params: QueryParamsRequest = {}): Promise<QueryParamsResponseSDKType> {
     const endpoint = `osmosis/pool-incentives/v1beta1/params`;
-    return await this.get<QueryParamsResponse>(endpoint);
+    return await this.get<QueryParamsResponseSDKType>(endpoint);
   }
 
   /* LockableDurations */
-  async lockableDurations(_params: QueryLockableDurationsRequest = {}): Promise<QueryLockableDurationsResponse> {
+  async lockableDurations(_params: QueryLockableDurationsRequest = {}): Promise<QueryLockableDurationsResponseSDKType> {
     const endpoint = `osmosis/pool-incentives/v1beta1/lockable_durations`;
-    return await this.get<QueryLockableDurationsResponse>(endpoint);
+    return await this.get<QueryLockableDurationsResponseSDKType>(endpoint);
   }
 
   /* IncentivizedPools */
-  async incentivizedPools(_params: QueryIncentivizedPoolsRequest = {}): Promise<QueryIncentivizedPoolsResponse> {
+  async incentivizedPools(_params: QueryIncentivizedPoolsRequest = {}): Promise<QueryIncentivizedPoolsResponseSDKType> {
     const endpoint = `osmosis/pool-incentives/v1beta1/incentivized_pools`;
-    return await this.get<QueryIncentivizedPoolsResponse>(endpoint);
+    return await this.get<QueryIncentivizedPoolsResponseSDKType>(endpoint);
   }
 
   /* ExternalIncentiveGauges */
-  async externalIncentiveGauges(_params: QueryExternalIncentiveGaugesRequest = {}): Promise<QueryExternalIncentiveGaugesResponse> {
+  async externalIncentiveGauges(_params: QueryExternalIncentiveGaugesRequest = {}): Promise<QueryExternalIncentiveGaugesResponseSDKType> {
     const endpoint = `osmosis/pool-incentives/v1beta1/external_incentive_gauges`;
-    return await this.get<QueryExternalIncentiveGaugesResponse>(endpoint);
+    return await this.get<QueryExternalIncentiveGaugesResponseSDKType>(endpoint);
   }
 
 }

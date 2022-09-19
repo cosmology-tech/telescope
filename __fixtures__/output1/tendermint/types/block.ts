@@ -1,5 +1,5 @@
-import { Header, Data, Commit } from "./types";
-import { EvidenceList } from "./evidence";
+import { Header, HeaderSDKType, Data, DataSDKType, Commit, CommitSDKType } from "./types";
+import { EvidenceList, EvidenceListSDKType } from "./evidence";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "@osmonauts/helpers";
 export const protobufPackage = "tendermint.types";
@@ -8,6 +8,12 @@ export interface Block {
   data: Data;
   evidence: EvidenceList;
   lastCommit: Commit;
+}
+export interface BlockSDKType {
+  header: HeaderSDKType;
+  data: DataSDKType;
+  evidence: EvidenceListSDKType;
+  last_commit: CommitSDKType;
 }
 
 function createBaseBlock(): Block {
@@ -99,6 +105,24 @@ export const Block = {
     message.evidence = object.evidence !== undefined && object.evidence !== null ? EvidenceList.fromPartial(object.evidence) : undefined;
     message.lastCommit = object.lastCommit !== undefined && object.lastCommit !== null ? Commit.fromPartial(object.lastCommit) : undefined;
     return message;
+  },
+
+  fromSDK(object: BlockSDKType): Block {
+    return {
+      header: isSet(object.header) ? Header.fromSDK(object.header) : undefined,
+      data: isSet(object.data) ? Data.fromSDK(object.data) : undefined,
+      evidence: isSet(object.evidence) ? EvidenceList.fromSDK(object.evidence) : undefined,
+      lastCommit: isSet(object.last_commit) ? Commit.fromSDK(object.last_commit) : undefined
+    };
+  },
+
+  toSDK(message: Block): BlockSDKType {
+    const obj: any = {};
+    message.header !== undefined && (obj.header = message.header ? Header.toSDK(message.header) : undefined);
+    message.data !== undefined && (obj.data = message.data ? Data.toSDK(message.data) : undefined);
+    message.evidence !== undefined && (obj.evidence = message.evidence ? EvidenceList.toSDK(message.evidence) : undefined);
+    message.lastCommit !== undefined && (obj.last_commit = message.lastCommit ? Commit.toSDK(message.lastCommit) : undefined);
+    return obj;
   }
 
 };

@@ -1,4 +1,4 @@
-import { Certificate } from "./cert";
+import { Certificate, CertificateSDKType } from "./cert";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, Exact } from "@osmonauts/helpers";
 export const protobufPackage = "akash.cert.v1beta2";
@@ -9,9 +9,20 @@ export interface GenesisCertificate {
   certificate: Certificate;
 }
 
+/** GenesisCertificate defines certificate entry at genesis */
+export interface GenesisCertificateSDKType {
+  owner: string;
+  certificate: CertificateSDKType;
+}
+
 /** GenesisState defines the basic genesis state used by cert module */
 export interface GenesisState {
   certificates: GenesisCertificate[];
+}
+
+/** GenesisState defines the basic genesis state used by cert module */
+export interface GenesisStateSDKType {
+  certificates: GenesisCertificateSDKType[];
 }
 
 function createBaseGenesisCertificate(): GenesisCertificate {
@@ -79,6 +90,20 @@ export const GenesisCertificate = {
     message.owner = object.owner ?? "";
     message.certificate = object.certificate !== undefined && object.certificate !== null ? Certificate.fromPartial(object.certificate) : undefined;
     return message;
+  },
+
+  fromSDK(object: GenesisCertificateSDKType): GenesisCertificate {
+    return {
+      owner: isSet(object.owner) ? object.owner : undefined,
+      certificate: isSet(object.certificate) ? Certificate.fromSDK(object.certificate) : undefined
+    };
+  },
+
+  toSDK(message: GenesisCertificate): GenesisCertificateSDKType {
+    const obj: any = {};
+    message.owner !== undefined && (obj.owner = message.owner);
+    message.certificate !== undefined && (obj.certificate = message.certificate ? Certificate.toSDK(message.certificate) : undefined);
+    return obj;
   }
 
 };
@@ -142,6 +167,24 @@ export const GenesisState = {
     const message = createBaseGenesisState();
     message.certificates = object.certificates?.map(e => GenesisCertificate.fromPartial(e)) || [];
     return message;
+  },
+
+  fromSDK(object: GenesisStateSDKType): GenesisState {
+    return {
+      certificates: Array.isArray(object?.certificates) ? object.certificates.map((e: any) => GenesisCertificate.fromSDK(e)) : []
+    };
+  },
+
+  toSDK(message: GenesisState): GenesisStateSDKType {
+    const obj: any = {};
+
+    if (message.certificates) {
+      obj.certificates = message.certificates.map(e => e ? GenesisCertificate.toSDK(e) : undefined);
+    } else {
+      obj.certificates = [];
+    }
+
+    return obj;
   }
 
 };

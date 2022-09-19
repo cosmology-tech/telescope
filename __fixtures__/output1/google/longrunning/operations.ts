@@ -1,6 +1,6 @@
-import { Duration } from "../protobuf/duration";
-import { Any } from "../protobuf/any";
-import { Status } from "../rpc/status";
+import { Duration, DurationSDKType } from "../protobuf/duration";
+import { Any, AnySDKType } from "../protobuf/any";
+import { Status, StatusSDKType } from "../rpc/status";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "@osmonauts/helpers";
 export const protobufPackage = "google.longrunning";
@@ -48,8 +48,57 @@ export interface Operation {
   response?: Any;
 }
 
+/**
+ * This resource represents a long-running operation that is the result of a
+ * network API call.
+ */
+export interface OperationSDKType {
+  /**
+   * The server-assigned name, which is only unique within the same service that
+   * originally returns it. If you use the default HTTP mapping, the
+   * `name` should be a resource name ending with `operations/{unique_id}`.
+   */
+  name: string;
+
+  /**
+   * Service-specific metadata associated with the operation.  It typically
+   * contains progress information and common metadata such as create time.
+   * Some services might not provide such metadata.  Any method that returns a
+   * long-running operation should document the metadata type, if any.
+   */
+  metadata: AnySDKType;
+
+  /**
+   * If the value is `false`, it means the operation is still in progress.
+   * If `true`, the operation is completed, and either `error` or `response` is
+   * available.
+   */
+  done: boolean;
+
+  /** The error result of the operation in case of failure or cancellation. */
+  error?: StatusSDKType;
+
+  /**
+   * The normal response of the operation in case of success.  If the original
+   * method returns no data on success, such as `Delete`, the response is
+   * `google.protobuf.Empty`.  If the original method is standard
+   * `Get`/`Create`/`Update`, the response should be the resource.  For other
+   * methods, the response should have the type `XxxResponse`, where `Xxx`
+   * is the original method name.  For example, if the original method name
+   * is `TakeSnapshot()`, the inferred response type is
+   * `TakeSnapshotResponse`.
+   */
+  response?: AnySDKType;
+}
+
 /** The request message for [Operations.GetOperation][google.longrunning.Operations.GetOperation]. */
 export interface GetOperationRequest {
+  /** The name of the operation resource. */
+  name?: string;
+}
+
+/** The request message for [Operations.GetOperation][google.longrunning.Operations.GetOperation]. */
+export interface GetOperationRequestSDKType {
   /** The name of the operation resource. */
   name?: string;
 }
@@ -69,6 +118,21 @@ export interface ListOperationsRequest {
   pageToken?: string;
 }
 
+/** The request message for [Operations.ListOperations][google.longrunning.Operations.ListOperations]. */
+export interface ListOperationsRequestSDKType {
+  /** The name of the operation's parent resource. */
+  name?: string;
+
+  /** The standard list filter. */
+  filter?: string;
+
+  /** The standard list page size. */
+  page_size?: number;
+
+  /** The standard list page token. */
+  page_token?: string;
+}
+
 /** The response message for [Operations.ListOperations][google.longrunning.Operations.ListOperations]. */
 export interface ListOperationsResponse {
   /** A list of operations that matches the specified filter in the request. */
@@ -78,14 +142,35 @@ export interface ListOperationsResponse {
   nextPageToken: string;
 }
 
+/** The response message for [Operations.ListOperations][google.longrunning.Operations.ListOperations]. */
+export interface ListOperationsResponseSDKType {
+  /** A list of operations that matches the specified filter in the request. */
+  operations: OperationSDKType[];
+
+  /** The standard List next-page token. */
+  next_page_token: string;
+}
+
 /** The request message for [Operations.CancelOperation][google.longrunning.Operations.CancelOperation]. */
 export interface CancelOperationRequest {
   /** The name of the operation resource to be cancelled. */
   name: string;
 }
 
+/** The request message for [Operations.CancelOperation][google.longrunning.Operations.CancelOperation]. */
+export interface CancelOperationRequestSDKType {
+  /** The name of the operation resource to be cancelled. */
+  name: string;
+}
+
 /** The request message for [Operations.DeleteOperation][google.longrunning.Operations.DeleteOperation]. */
 export interface DeleteOperationRequest {
+  /** The name of the operation resource to be deleted. */
+  name: string;
+}
+
+/** The request message for [Operations.DeleteOperation][google.longrunning.Operations.DeleteOperation]. */
+export interface DeleteOperationRequestSDKType {
   /** The name of the operation resource to be deleted. */
   name: string;
 }
@@ -101,6 +186,19 @@ export interface WaitOperationRequest {
    * If RPC context deadline is also specified, the shorter one will be used.
    */
   timeout: Duration;
+}
+
+/** The request message for [Operations.WaitOperation][google.longrunning.Operations.WaitOperation]. */
+export interface WaitOperationRequestSDKType {
+  /** The name of the operation resource to wait on. */
+  name: string;
+
+  /**
+   * The maximum duration to wait before timing out. If left blank, the wait
+   * will be at most the time permitted by the underlying HTTP/RPC protocol.
+   * If RPC context deadline is also specified, the shorter one will be used.
+   */
+  timeout: DurationSDKType;
 }
 
 /**
@@ -141,6 +239,44 @@ export interface OperationInfo {
   metadataType: string;
 }
 
+/**
+ * A message representing the message types used by a long-running operation.
+ * 
+ * Example:
+ * 
+ * rpc LongRunningRecognize(LongRunningRecognizeRequest)
+ * returns (google.longrunning.Operation) {
+ * option (google.longrunning.operation_info) = {
+ * response_type: "LongRunningRecognizeResponse"
+ * metadata_type: "LongRunningRecognizeMetadata"
+ * };
+ * }
+ */
+export interface OperationInfoSDKType {
+  /**
+   * Required. The message name of the primary return type for this
+   * long-running operation.
+   * This type will be used to deserialize the LRO's response.
+   * 
+   * If the response is in a different package from the rpc, a fully-qualified
+   * message name must be used (e.g. `google.protobuf.Struct`).
+   * 
+   * Note: Altering this value constitutes a breaking change.
+   */
+  response_type: string;
+
+  /**
+   * Required. The message name of the metadata type for this long-running
+   * operation.
+   * 
+   * If the response is in a different package from the rpc, a fully-qualified
+   * message name must be used (e.g. `google.protobuf.Struct`).
+   * 
+   * Note: Altering this value constitutes a breaking change.
+   */
+  metadata_type: string;
+}
+
 function createBaseOperation(): Operation {
   return {
     name: "",
@@ -176,7 +312,7 @@ export const Operation = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): Operation {
+  decode(input: _m0.Reader | Uint8Array, length?: number): OperationSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseOperation();
@@ -242,6 +378,26 @@ export const Operation = {
     message.error = object.error !== undefined && object.error !== null ? Status.fromPartial(object.error) : undefined;
     message.response = object.response !== undefined && object.response !== null ? Any.fromPartial(object.response) : undefined;
     return message;
+  },
+
+  fromSDK(object: OperationSDKType): Operation {
+    return {
+      name: isSet(object.name) ? object.name : undefined,
+      metadata: isSet(object.metadata) ? Any.fromSDK(object.metadata) : undefined,
+      done: isSet(object.done) ? object.done : undefined,
+      error: isSet(object.error) ? Status.fromSDK(object.error) : undefined,
+      response: isSet(object.response) ? Any.fromSDK(object.response) : undefined
+    };
+  },
+
+  toSDK(message: Operation): OperationSDKType {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    message.metadata !== undefined && (obj.metadata = message.metadata ? Any.toSDK(message.metadata) : undefined);
+    message.done !== undefined && (obj.done = message.done);
+    message.error !== undefined && (obj.error = message.error ? Status.toSDK(message.error) : undefined);
+    message.response !== undefined && (obj.response = message.response ? Any.toSDK(message.response) : undefined);
+    return obj;
   }
 
 };
@@ -299,6 +455,18 @@ export const GetOperationRequest = {
     const message = createBaseGetOperationRequest();
     message.name = object.name ?? "";
     return message;
+  },
+
+  fromSDK(object: GetOperationRequestSDKType): GetOperationRequest {
+    return {
+      name: isSet(object.name) ? object.name : undefined
+    };
+  },
+
+  toSDK(message: GetOperationRequest): GetOperationRequestSDKType {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    return obj;
   }
 
 };
@@ -392,6 +560,24 @@ export const ListOperationsRequest = {
     message.pageSize = object.pageSize ?? 0;
     message.pageToken = object.pageToken ?? "";
     return message;
+  },
+
+  fromSDK(object: ListOperationsRequestSDKType): ListOperationsRequest {
+    return {
+      name: isSet(object.name) ? object.name : undefined,
+      filter: isSet(object.filter) ? object.filter : undefined,
+      pageSize: isSet(object.page_size) ? object.page_size : undefined,
+      pageToken: isSet(object.page_token) ? object.page_token : undefined
+    };
+  },
+
+  toSDK(message: ListOperationsRequest): ListOperationsRequestSDKType {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    message.filter !== undefined && (obj.filter = message.filter);
+    message.pageSize !== undefined && (obj.page_size = message.pageSize);
+    message.pageToken !== undefined && (obj.page_token = message.pageToken);
+    return obj;
   }
 
 };
@@ -416,7 +602,7 @@ export const ListOperationsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ListOperationsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ListOperationsResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListOperationsResponse();
@@ -467,6 +653,26 @@ export const ListOperationsResponse = {
     message.operations = object.operations?.map(e => Operation.fromPartial(e)) || [];
     message.nextPageToken = object.nextPageToken ?? "";
     return message;
+  },
+
+  fromSDK(object: ListOperationsResponseSDKType): ListOperationsResponse {
+    return {
+      operations: Array.isArray(object?.operations) ? object.operations.map((e: any) => Operation.fromSDK(e)) : [],
+      nextPageToken: isSet(object.next_page_token) ? object.next_page_token : undefined
+    };
+  },
+
+  toSDK(message: ListOperationsResponse): ListOperationsResponseSDKType {
+    const obj: any = {};
+
+    if (message.operations) {
+      obj.operations = message.operations.map(e => e ? Operation.toSDK(e) : undefined);
+    } else {
+      obj.operations = [];
+    }
+
+    message.nextPageToken !== undefined && (obj.next_page_token = message.nextPageToken);
+    return obj;
   }
 
 };
@@ -524,6 +730,18 @@ export const CancelOperationRequest = {
     const message = createBaseCancelOperationRequest();
     message.name = object.name ?? "";
     return message;
+  },
+
+  fromSDK(object: CancelOperationRequestSDKType): CancelOperationRequest {
+    return {
+      name: isSet(object.name) ? object.name : undefined
+    };
+  },
+
+  toSDK(message: CancelOperationRequest): CancelOperationRequestSDKType {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    return obj;
   }
 
 };
@@ -581,6 +799,18 @@ export const DeleteOperationRequest = {
     const message = createBaseDeleteOperationRequest();
     message.name = object.name ?? "";
     return message;
+  },
+
+  fromSDK(object: DeleteOperationRequestSDKType): DeleteOperationRequest {
+    return {
+      name: isSet(object.name) ? object.name : undefined
+    };
+  },
+
+  toSDK(message: DeleteOperationRequest): DeleteOperationRequestSDKType {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    return obj;
   }
 
 };
@@ -650,6 +880,20 @@ export const WaitOperationRequest = {
     message.name = object.name ?? "";
     message.timeout = object.timeout ?? undefined;
     return message;
+  },
+
+  fromSDK(object: WaitOperationRequestSDKType): WaitOperationRequest {
+    return {
+      name: isSet(object.name) ? object.name : undefined,
+      timeout: isSet(object.timeout) ? Duration.fromSDK(object.timeout) : undefined
+    };
+  },
+
+  toSDK(message: WaitOperationRequest): WaitOperationRequestSDKType {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    message.timeout !== undefined && (obj.timeout = message.timeout ? Duration.toSDK(message.timeout) : undefined);
+    return obj;
   }
 
 };
@@ -719,6 +963,20 @@ export const OperationInfo = {
     message.responseType = object.responseType ?? "";
     message.metadataType = object.metadataType ?? "";
     return message;
+  },
+
+  fromSDK(object: OperationInfoSDKType): OperationInfo {
+    return {
+      responseType: isSet(object.response_type) ? object.response_type : undefined,
+      metadataType: isSet(object.metadata_type) ? object.metadata_type : undefined
+    };
+  },
+
+  toSDK(message: OperationInfo): OperationInfoSDKType {
+    const obj: any = {};
+    message.responseType !== undefined && (obj.response_type = message.responseType);
+    message.metadataType !== undefined && (obj.metadata_type = message.metadataType);
+    return obj;
   }
 
 };

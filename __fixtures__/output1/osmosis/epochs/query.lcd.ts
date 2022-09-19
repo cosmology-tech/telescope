@@ -1,6 +1,6 @@
-import { EpochInfo } from "./genesis";
+import { EpochInfo, EpochInfoSDKType } from "./genesis";
 import { LCDClient } from "@osmonauts/lcd";
-import { QueryEpochsInfoRequest, QueryEpochsInfoResponse, QueryCurrentEpochRequest, QueryCurrentEpochResponse } from "./query";
+import { QueryEpochsInfoRequest, QueryEpochsInfoRequestSDKType, QueryEpochsInfoResponse, QueryEpochsInfoResponseSDKType, QueryCurrentEpochRequest, QueryCurrentEpochRequestSDKType, QueryCurrentEpochResponse, QueryCurrentEpochResponseSDKType } from "./query";
 export class LCDQueryClient extends LCDClient {
   constructor({
     restEndpoint
@@ -13,13 +13,13 @@ export class LCDQueryClient extends LCDClient {
   }
 
   /* EpochInfos provide running epochInfos */
-  async epochInfos(_params: QueryEpochsInfoRequest = {}): Promise<QueryEpochsInfoResponse> {
+  async epochInfos(_params: QueryEpochsInfoRequest = {}): Promise<QueryEpochsInfoResponseSDKType> {
     const endpoint = `osmosis/epochs/v1beta1/epochs`;
-    return await this.get<QueryEpochsInfoResponse>(endpoint);
+    return await this.get<QueryEpochsInfoResponseSDKType>(endpoint);
   }
 
   /* CurrentEpoch provide current epoch of specified identifier */
-  async currentEpoch(params: QueryCurrentEpochRequest): Promise<QueryCurrentEpochResponse> {
+  async currentEpoch(params: QueryCurrentEpochRequest): Promise<QueryCurrentEpochResponseSDKType> {
     const options: any = {
       params: {}
     };
@@ -29,7 +29,7 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `osmosis/epochs/v1beta1/current_epoch`;
-    return await this.get<QueryCurrentEpochResponse>(endpoint, options);
+    return await this.get<QueryCurrentEpochResponseSDKType>(endpoint, options);
   }
 
 }

@@ -245,6 +245,24 @@ export const lookupAny = (
 
 };
 
+// recursively look at all imports and find what you're looking for...
+export const lookupAnyFromImports = (
+    store: ProtoStore,
+    ref: ProtoRef,
+    name: string
+): Lookup => {
+    let refObject = lookupAny(store, ref, name);
+    if (refObject) return refObject;
+    const imports = Object.keys(ref.traversed?.parsedImports ?? {});
+    for (let i = 0; i < imports.length; i++) {
+        const ref = store.findProto(imports[i]);
+        refObject = lookupAnyFromImports(store, ref, name);
+        if (refObject) return refObject;
+    }
+
+    return refObject;
+};
+
 export const lookupLocal = (
     store: ProtoStore,
     ref: ProtoRef,

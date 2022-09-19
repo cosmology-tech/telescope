@@ -4,6 +4,106 @@ import { AminoParseContext } from '../src/encoding/context';
 import { GenericParseContext } from '../src/encoding';
 export declare const expectCode: (ast: any) => void;
 export declare const printCode: (ast: any) => void;
+export declare const defaultTelescopeOptions: {
+    removeUnusedImports: boolean;
+    prototypes: {
+        parser?: {
+            keepCase?: boolean;
+            alternateCommentMode?: boolean;
+            preferTrailingComment?: boolean;
+        };
+        methods?: {
+            encode?: boolean;
+            decode?: boolean;
+            fromJSON?: boolean;
+            toJSON?: boolean;
+            fromPartial?: boolean;
+            toSDK?: boolean;
+            fromSDK?: boolean;
+        };
+        includePackageVar?: boolean;
+        fieldDefaultIsOptional?: boolean;
+        useOptionalNullable?: boolean;
+        allowUndefinedTypes?: boolean;
+        excluded?: {
+            packages?: string[];
+            protos?: string[];
+        };
+        typingsFormat?: {
+            useDeepPartial?: boolean;
+            useExact?: boolean;
+            timestamp?: "date" | "timestamp";
+            duration?: "string" | "duration";
+        };
+    };
+    tsDisable: {
+        files?: string[];
+        disableAll?: boolean;
+        patterns?: string[];
+    };
+    bundle: {
+        enabled: boolean;
+    };
+    cosmwasm: import("@cosmwasm/ts-codegen").TSBuilderInput;
+    aggregatedLCD: {
+        dir: string;
+        filename: string;
+        packages: string[];
+        addToBundle: boolean;
+    };
+    stargateClients: {
+        enabled: boolean;
+        includeCosmosDefaultTypes?: boolean;
+    };
+    aminoEncoding: {
+        enabled: boolean;
+        casingFn?: Function;
+        exceptions?: import("@osmonauts/types").AminoExceptions;
+        typeUrlToAmino?: (typeUrl: string) => string;
+    };
+    lcdClients: {
+        enabled: boolean;
+        scopedIsExclusive?: boolean;
+        bundle?: boolean;
+        scoped?: {
+            dir: string;
+            filename?: string;
+            packages: string[];
+            addToBundle: boolean;
+            methodName?: string;
+        }[];
+    };
+    rpcClients: {
+        enabled: boolean;
+        camelCase?: boolean;
+        scopedIsExclusive?: boolean;
+        bundle?: boolean;
+        scoped?: {
+            dir: string;
+            filename?: string;
+            packages: string[];
+            addToBundle: boolean;
+            methodNameQuery?: string;
+            methodNameTx?: string;
+        }[];
+    };
+    packages: Record<string, any>;
+} & {
+    prototypes: {
+        parser: {
+            keepCase: boolean;
+        };
+        methods: {
+            encode: boolean;
+            decode: boolean;
+            fromJSON: boolean;
+            toJSON: boolean;
+            fromPartial: boolean;
+            toSDK: boolean;
+            fromSDK: boolean;
+        };
+    };
+};
 export declare const getTestProtoStore: (options?: TelescopeOptions) => ProtoStore;
 export declare const prepareContext: (store: ProtoStore, protoFile: string) => {
     context: AminoParseContext;
