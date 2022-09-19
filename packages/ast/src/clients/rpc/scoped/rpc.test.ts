@@ -1,8 +1,9 @@
-import { expectCode, printCode } from '../../../../test-utils'
+import { expectCode, getGenericParseContext, printCode } from '../../../../test-utils'
 
 import {
     rpcRecursiveObjectProps,
-    createScopedRpcFactory
+    createScopedRpcFactory,
+    createScopedRpcTmFactory
 } from './rpc';
 
 it('rpcRecursiveObjectProps', async () => {
@@ -27,5 +28,27 @@ it('createScopedRpcFactory', async () => {
     },
         'createRpc',
         'RPCQueryClient'
+    ))
+});
+
+it('createScopedRpcTmFactory', async () => {
+    const context = getGenericParseContext();
+    expectCode(createScopedRpcTmFactory(context, {
+        cosmos: {
+            bank: {
+                v1beta1: "./proto/cosmos/bank/v1beta1/query.lcd"
+            },
+            gov: {
+                v1beta1: "./proto/cosmos/bank/v1beta1/query.lcd"
+            },
+        },
+        osmosis: {
+            gamm: {
+                v1beta1: "./proto/cosmos/bank/v1beta1/query.lcd"
+            }
+        }
+    },
+        'createRpcFactorizzle',
+        'createMyRPCQueryClient'
     ))
 });

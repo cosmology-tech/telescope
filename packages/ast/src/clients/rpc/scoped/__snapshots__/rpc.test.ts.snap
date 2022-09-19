@@ -22,6 +22,32 @@ exports[`createScopedRpcFactory 1`] = `
 });"
 `;
 
+exports[`createScopedRpcTmFactory 1`] = `
+"export const createRpcFactorizzle = ({
+  rpcEndpoint
+}: {
+  rpcEndpoint: string;
+}) => {
+  const tmClient = await Tendermint34Client.connect(rpcEndpoint);
+  const client = new QueryClient(tmClient);
+  return {
+    cosmos: {
+      bank: {
+        v1beta1: (await import(\\"./proto/cosmos/bank/v1beta1/query.lcd\\")).createMyRPCQueryClient(rpcEndpoint)
+      },
+      gov: {
+        v1beta1: (await import(\\"./proto/cosmos/bank/v1beta1/query.lcd\\")).createMyRPCQueryClient(rpcEndpoint)
+      }
+    },
+    osmosis: {
+      gamm: {
+        v1beta1: (await import(\\"./proto/cosmos/bank/v1beta1/query.lcd\\")).createMyRPCQueryClient(rpcEndpoint)
+      }
+    }
+  };
+};"
+`;
+
 exports[`rpcRecursiveObjectProps 1`] = `
 "{
   cosmos: {
