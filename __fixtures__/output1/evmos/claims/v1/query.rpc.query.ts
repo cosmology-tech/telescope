@@ -4,6 +4,7 @@ import { Params, ParamsSDKType } from "./genesis";
 import { ClaimsRecordAddress, ClaimsRecordAddressSDKType, Claim, ClaimSDKType } from "./claims";
 import { Rpc } from "@osmonauts/helpers";
 import * as _m0 from "protobufjs/minimal";
+import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
 import { QueryTotalUnclaimedRequest, QueryTotalUnclaimedRequestSDKType, QueryTotalUnclaimedResponse, QueryTotalUnclaimedResponseSDKType, QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType, QueryClaimsRecordsRequest, QueryClaimsRecordsRequestSDKType, QueryClaimsRecordsResponse, QueryClaimsRecordsResponseSDKType, QueryClaimsRecordRequest, QueryClaimsRecordRequestSDKType, QueryClaimsRecordResponse, QueryClaimsRecordResponseSDKType } from "./query";
 
 /** Query defines the RPC service */
@@ -57,3 +58,25 @@ export class QueryClientImpl implements Query {
   }
 
 }
+export const createRpcQueryExtension = (base: QueryClient) => {
+  const rpc = createProtobufRpcClient(base);
+  const queryService = new QueryClientImpl(rpc);
+  return {
+    totalUnclaimed(request: QueryTotalUnclaimedRequest): Promise<QueryTotalUnclaimedResponseSDKType> {
+      return queryService.totalUnclaimed(request);
+    },
+
+    params(request: QueryParamsRequest): Promise<QueryParamsResponseSDKType> {
+      return queryService.params(request);
+    },
+
+    claimsRecords(request: QueryClaimsRecordsRequest): Promise<QueryClaimsRecordsResponseSDKType> {
+      return queryService.claimsRecords(request);
+    },
+
+    claimsRecord(request: QueryClaimsRecordRequest): Promise<QueryClaimsRecordResponseSDKType> {
+      return queryService.claimsRecord(request);
+    }
+
+  };
+};

@@ -2,6 +2,7 @@ import { DecCoin, DecCoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { Params, ParamsSDKType } from "./genesis";
 import { Rpc } from "@osmonauts/helpers";
 import * as _m0 from "protobufjs/minimal";
+import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
 import { QueryPeriodRequest, QueryPeriodRequestSDKType, QueryPeriodResponse, QueryPeriodResponseSDKType, QueryEpochMintProvisionRequest, QueryEpochMintProvisionRequestSDKType, QueryEpochMintProvisionResponse, QueryEpochMintProvisionResponseSDKType, QuerySkippedEpochsRequest, QuerySkippedEpochsRequestSDKType, QuerySkippedEpochsResponse, QuerySkippedEpochsResponseSDKType, QueryCirculatingSupplyRequest, QueryCirculatingSupplyRequestSDKType, QueryCirculatingSupplyResponse, QueryCirculatingSupplyResponseSDKType, QueryInflationRateRequest, QueryInflationRateRequestSDKType, QueryInflationRateResponse, QueryInflationRateResponseSDKType, QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType } from "./query";
 
 /** Query defines the RPC service */
@@ -76,3 +77,33 @@ export class QueryClientImpl implements Query {
   }
 
 }
+export const createRpcQueryExtension = (base: QueryClient) => {
+  const rpc = createProtobufRpcClient(base);
+  const queryService = new QueryClientImpl(rpc);
+  return {
+    period(request: QueryPeriodRequest): Promise<QueryPeriodResponseSDKType> {
+      return queryService.period(request);
+    },
+
+    epochMintProvision(request: QueryEpochMintProvisionRequest): Promise<QueryEpochMintProvisionResponseSDKType> {
+      return queryService.epochMintProvision(request);
+    },
+
+    skippedEpochs(request: QuerySkippedEpochsRequest): Promise<QuerySkippedEpochsResponseSDKType> {
+      return queryService.skippedEpochs(request);
+    },
+
+    circulatingSupply(request: QueryCirculatingSupplyRequest): Promise<QueryCirculatingSupplyResponseSDKType> {
+      return queryService.circulatingSupply(request);
+    },
+
+    inflationRate(request: QueryInflationRateRequest): Promise<QueryInflationRateResponseSDKType> {
+      return queryService.inflationRate(request);
+    },
+
+    params(request: QueryParamsRequest): Promise<QueryParamsResponseSDKType> {
+      return queryService.params(request);
+    }
+
+  };
+};

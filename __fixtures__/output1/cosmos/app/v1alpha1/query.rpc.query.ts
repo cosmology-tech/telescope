@@ -1,6 +1,7 @@
 import { Config, ConfigSDKType } from "./config";
 import { Rpc } from "@osmonauts/helpers";
 import * as _m0 from "protobufjs/minimal";
+import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
 import { QueryConfigRequest, QueryConfigRequestSDKType, QueryConfigResponse, QueryConfigResponseSDKType } from "./query";
 
 /** Query defines the RPC service */
@@ -24,3 +25,13 @@ export class QueryClientImpl implements Query {
   }
 
 }
+export const createRpcQueryExtension = (base: QueryClient) => {
+  const rpc = createProtobufRpcClient(base);
+  const queryService = new QueryClientImpl(rpc);
+  return {
+    config(request: QueryConfigRequest): Promise<QueryConfigResponseSDKType> {
+      return queryService.config(request);
+    }
+
+  };
+};

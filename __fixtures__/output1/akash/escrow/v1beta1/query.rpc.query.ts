@@ -2,6 +2,7 @@ import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } fr
 import { Account, AccountSDKType, Payment, PaymentSDKType } from "./types";
 import { Rpc } from "@osmonauts/helpers";
 import * as _m0 from "protobufjs/minimal";
+import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
 import { QueryAccountsRequest, QueryAccountsRequestSDKType, QueryAccountsResponse, QueryAccountsResponseSDKType, QueryPaymentsRequest, QueryPaymentsRequestSDKType, QueryPaymentsResponse, QueryPaymentsResponseSDKType } from "./query";
 
 /** Query defines the RPC service */
@@ -39,3 +40,17 @@ export class QueryClientImpl implements Query {
   }
 
 }
+export const createRpcQueryExtension = (base: QueryClient) => {
+  const rpc = createProtobufRpcClient(base);
+  const queryService = new QueryClientImpl(rpc);
+  return {
+    accounts(request: QueryAccountsRequest): Promise<QueryAccountsResponseSDKType> {
+      return queryService.accounts(request);
+    },
+
+    payments(request: QueryPaymentsRequest): Promise<QueryPaymentsResponseSDKType> {
+      return queryService.payments(request);
+    }
+
+  };
+};

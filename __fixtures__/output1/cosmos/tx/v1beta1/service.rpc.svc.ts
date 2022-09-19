@@ -5,6 +5,7 @@ import { BlockID, BlockIDSDKType } from "../../../tendermint/types/types";
 import { Block, BlockSDKType } from "../../../tendermint/types/block";
 import { Rpc } from "@osmonauts/helpers";
 import * as _m0 from "protobufjs/minimal";
+import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
 import { SimulateRequest, SimulateRequestSDKType, SimulateResponse, SimulateResponseSDKType, GetTxRequest, GetTxRequestSDKType, GetTxResponse, GetTxResponseSDKType, BroadcastTxRequest, BroadcastTxRequestSDKType, BroadcastTxResponse, BroadcastTxResponseSDKType, GetTxsEventRequest, GetTxsEventRequestSDKType, GetTxsEventResponse, GetTxsEventResponseSDKType, GetBlockWithTxsRequest, GetBlockWithTxsRequestSDKType, GetBlockWithTxsResponse, GetBlockWithTxsResponseSDKType } from "./service";
 
 /** Service defines the RPC service */
@@ -70,3 +71,29 @@ export class ServiceClientImpl implements Service {
   }
 
 }
+export const createRpcQueryExtension = (base: QueryClient) => {
+  const rpc = createProtobufRpcClient(base);
+  const queryService = new QueryClientImpl(rpc);
+  return {
+    simulate(request: SimulateRequest): Promise<SimulateResponseSDKType> {
+      return queryService.simulate(request);
+    },
+
+    getTx(request: GetTxRequest): Promise<GetTxResponseSDKType> {
+      return queryService.getTx(request);
+    },
+
+    broadcastTx(request: BroadcastTxRequest): Promise<BroadcastTxResponseSDKType> {
+      return queryService.broadcastTx(request);
+    },
+
+    getTxsEvent(request: GetTxsEventRequest): Promise<GetTxsEventResponseSDKType> {
+      return queryService.getTxsEvent(request);
+    },
+
+    getBlockWithTxs(request: GetBlockWithTxsRequest): Promise<GetBlockWithTxsResponseSDKType> {
+      return queryService.getBlockWithTxs(request);
+    }
+
+  };
+};

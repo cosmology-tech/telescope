@@ -3,6 +3,7 @@ import { Any, AnySDKType } from "../../../../google/protobuf/any";
 import { Height, HeightSDKType, IdentifiedClientState, IdentifiedClientStateSDKType, ConsensusStateWithHeight, ConsensusStateWithHeightSDKType, Params, ParamsSDKType } from "./client";
 import { Rpc } from "@osmonauts/helpers";
 import * as _m0 from "protobufjs/minimal";
+import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
 import { QueryClientStateRequest, QueryClientStateRequestSDKType, QueryClientStateResponse, QueryClientStateResponseSDKType, QueryClientStatesRequest, QueryClientStatesRequestSDKType, QueryClientStatesResponse, QueryClientStatesResponseSDKType, QueryConsensusStateRequest, QueryConsensusStateRequestSDKType, QueryConsensusStateResponse, QueryConsensusStateResponseSDKType, QueryConsensusStatesRequest, QueryConsensusStatesRequestSDKType, QueryConsensusStatesResponse, QueryConsensusStatesResponseSDKType, QueryClientStatusRequest, QueryClientStatusRequestSDKType, QueryClientStatusResponse, QueryClientStatusResponseSDKType, QueryClientParamsRequest, QueryClientParamsRequestSDKType, QueryClientParamsResponse, QueryClientParamsResponseSDKType, QueryUpgradedClientStateRequest, QueryUpgradedClientStateRequestSDKType, QueryUpgradedClientStateResponse, QueryUpgradedClientStateResponseSDKType, QueryUpgradedConsensusStateRequest, QueryUpgradedConsensusStateRequestSDKType, QueryUpgradedConsensusStateResponse, QueryUpgradedConsensusStateResponseSDKType } from "./query";
 
 /** Query defines the RPC service */
@@ -98,3 +99,41 @@ export class QueryClientImpl implements Query {
   }
 
 }
+export const createRpcQueryExtension = (base: QueryClient) => {
+  const rpc = createProtobufRpcClient(base);
+  const queryService = new QueryClientImpl(rpc);
+  return {
+    clientState(request: QueryClientStateRequest): Promise<QueryClientStateResponseSDKType> {
+      return queryService.clientState(request);
+    },
+
+    clientStates(request: QueryClientStatesRequest): Promise<QueryClientStatesResponseSDKType> {
+      return queryService.clientStates(request);
+    },
+
+    consensusState(request: QueryConsensusStateRequest): Promise<QueryConsensusStateResponseSDKType> {
+      return queryService.consensusState(request);
+    },
+
+    consensusStates(request: QueryConsensusStatesRequest): Promise<QueryConsensusStatesResponseSDKType> {
+      return queryService.consensusStates(request);
+    },
+
+    clientStatus(request: QueryClientStatusRequest): Promise<QueryClientStatusResponseSDKType> {
+      return queryService.clientStatus(request);
+    },
+
+    clientParams(request: QueryClientParamsRequest): Promise<QueryClientParamsResponseSDKType> {
+      return queryService.clientParams(request);
+    },
+
+    upgradedClientState(request: QueryUpgradedClientStateRequest): Promise<QueryUpgradedClientStateResponseSDKType> {
+      return queryService.upgradedClientState(request);
+    },
+
+    upgradedConsensusState(request: QueryUpgradedConsensusStateRequest): Promise<QueryUpgradedConsensusStateResponseSDKType> {
+      return queryService.upgradedConsensusState(request);
+    }
+
+  };
+};

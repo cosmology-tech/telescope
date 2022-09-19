@@ -3,6 +3,7 @@ import { Any, AnySDKType } from "../../../google/protobuf/any";
 import { Params, ParamsSDKType } from "./auth";
 import { Rpc } from "@osmonauts/helpers";
 import * as _m0 from "protobufjs/minimal";
+import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
 import { QueryAccountsRequest, QueryAccountsRequestSDKType, QueryAccountsResponse, QueryAccountsResponseSDKType, QueryAccountRequest, QueryAccountRequestSDKType, QueryAccountResponse, QueryAccountResponseSDKType, QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType, QueryModuleAccountsRequest, QueryModuleAccountsRequestSDKType, QueryModuleAccountsResponse, QueryModuleAccountsResponseSDKType, Bech32PrefixRequest, Bech32PrefixRequestSDKType, Bech32PrefixResponse, Bech32PrefixResponseSDKType, AddressBytesToStringRequest, AddressBytesToStringRequestSDKType, AddressBytesToStringResponse, AddressBytesToStringResponseSDKType, AddressStringToBytesRequest, AddressStringToBytesRequestSDKType, AddressStringToBytesResponse, AddressStringToBytesResponseSDKType } from "./query";
 
 /** Query defines the RPC service */
@@ -88,3 +89,37 @@ export class QueryClientImpl implements Query {
   }
 
 }
+export const createRpcQueryExtension = (base: QueryClient) => {
+  const rpc = createProtobufRpcClient(base);
+  const queryService = new QueryClientImpl(rpc);
+  return {
+    accounts(request: QueryAccountsRequest): Promise<QueryAccountsResponseSDKType> {
+      return queryService.accounts(request);
+    },
+
+    account(request: QueryAccountRequest): Promise<QueryAccountResponseSDKType> {
+      return queryService.account(request);
+    },
+
+    params(request: QueryParamsRequest): Promise<QueryParamsResponseSDKType> {
+      return queryService.params(request);
+    },
+
+    moduleAccounts(request: QueryModuleAccountsRequest): Promise<QueryModuleAccountsResponseSDKType> {
+      return queryService.moduleAccounts(request);
+    },
+
+    bech32Prefix(request: Bech32PrefixRequest): Promise<Bech32PrefixResponseSDKType> {
+      return queryService.bech32Prefix(request);
+    },
+
+    addressBytesToString(request: AddressBytesToStringRequest): Promise<AddressBytesToStringResponseSDKType> {
+      return queryService.addressBytesToString(request);
+    },
+
+    addressStringToBytes(request: AddressStringToBytesRequest): Promise<AddressStringToBytesResponseSDKType> {
+      return queryService.addressStringToBytes(request);
+    }
+
+  };
+};

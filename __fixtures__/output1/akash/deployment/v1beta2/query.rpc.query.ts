@@ -5,6 +5,7 @@ import { Group, GroupSDKType } from "./group";
 import { Account, AccountSDKType } from "../../escrow/v1beta2/types";
 import { Rpc } from "@osmonauts/helpers";
 import * as _m0 from "protobufjs/minimal";
+import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
 import { QueryDeploymentsRequest, QueryDeploymentsRequestSDKType, QueryDeploymentsResponse, QueryDeploymentsResponseSDKType, QueryDeploymentRequest, QueryDeploymentRequestSDKType, QueryDeploymentResponse, QueryDeploymentResponseSDKType, QueryGroupRequest, QueryGroupRequestSDKType, QueryGroupResponse, QueryGroupResponseSDKType } from "./query";
 
 /** Query defines the RPC service */
@@ -48,3 +49,21 @@ export class QueryClientImpl implements Query {
   }
 
 }
+export const createRpcQueryExtension = (base: QueryClient) => {
+  const rpc = createProtobufRpcClient(base);
+  const queryService = new QueryClientImpl(rpc);
+  return {
+    deployments(request: QueryDeploymentsRequest): Promise<QueryDeploymentsResponseSDKType> {
+      return queryService.deployments(request);
+    },
+
+    deployment(request: QueryDeploymentRequest): Promise<QueryDeploymentResponseSDKType> {
+      return queryService.deployment(request);
+    },
+
+    group(request: QueryGroupRequest): Promise<QueryGroupResponseSDKType> {
+      return queryService.group(request);
+    }
+
+  };
+};

@@ -4,6 +4,7 @@ import { Height, HeightSDKType, IdentifiedClientState, IdentifiedClientStateSDKT
 import { Any, AnySDKType } from "../../../../google/protobuf/any";
 import { Rpc } from "@osmonauts/helpers";
 import * as _m0 from "protobufjs/minimal";
+import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
 import { QueryChannelRequest, QueryChannelRequestSDKType, QueryChannelResponse, QueryChannelResponseSDKType, QueryChannelsRequest, QueryChannelsRequestSDKType, QueryChannelsResponse, QueryChannelsResponseSDKType, QueryConnectionChannelsRequest, QueryConnectionChannelsRequestSDKType, QueryConnectionChannelsResponse, QueryConnectionChannelsResponseSDKType, QueryChannelClientStateRequest, QueryChannelClientStateRequestSDKType, QueryChannelClientStateResponse, QueryChannelClientStateResponseSDKType, QueryChannelConsensusStateRequest, QueryChannelConsensusStateRequestSDKType, QueryChannelConsensusStateResponse, QueryChannelConsensusStateResponseSDKType, QueryPacketCommitmentRequest, QueryPacketCommitmentRequestSDKType, QueryPacketCommitmentResponse, QueryPacketCommitmentResponseSDKType, QueryPacketCommitmentsRequest, QueryPacketCommitmentsRequestSDKType, QueryPacketCommitmentsResponse, QueryPacketCommitmentsResponseSDKType, QueryPacketReceiptRequest, QueryPacketReceiptRequestSDKType, QueryPacketReceiptResponse, QueryPacketReceiptResponseSDKType, QueryPacketAcknowledgementRequest, QueryPacketAcknowledgementRequestSDKType, QueryPacketAcknowledgementResponse, QueryPacketAcknowledgementResponseSDKType, QueryPacketAcknowledgementsRequest, QueryPacketAcknowledgementsRequestSDKType, QueryPacketAcknowledgementsResponse, QueryPacketAcknowledgementsResponseSDKType, QueryUnreceivedPacketsRequest, QueryUnreceivedPacketsRequestSDKType, QueryUnreceivedPacketsResponse, QueryUnreceivedPacketsResponseSDKType, QueryUnreceivedAcksRequest, QueryUnreceivedAcksRequestSDKType, QueryUnreceivedAcksResponse, QueryUnreceivedAcksResponseSDKType, QueryNextSequenceReceiveRequest, QueryNextSequenceReceiveRequestSDKType, QueryNextSequenceReceiveResponse, QueryNextSequenceReceiveResponseSDKType } from "./query";
 
 /** Query defines the RPC service */
@@ -155,3 +156,61 @@ export class QueryClientImpl implements Query {
   }
 
 }
+export const createRpcQueryExtension = (base: QueryClient) => {
+  const rpc = createProtobufRpcClient(base);
+  const queryService = new QueryClientImpl(rpc);
+  return {
+    channel(request: QueryChannelRequest): Promise<QueryChannelResponseSDKType> {
+      return queryService.channel(request);
+    },
+
+    channels(request: QueryChannelsRequest): Promise<QueryChannelsResponseSDKType> {
+      return queryService.channels(request);
+    },
+
+    connectionChannels(request: QueryConnectionChannelsRequest): Promise<QueryConnectionChannelsResponseSDKType> {
+      return queryService.connectionChannels(request);
+    },
+
+    channelClientState(request: QueryChannelClientStateRequest): Promise<QueryChannelClientStateResponseSDKType> {
+      return queryService.channelClientState(request);
+    },
+
+    channelConsensusState(request: QueryChannelConsensusStateRequest): Promise<QueryChannelConsensusStateResponseSDKType> {
+      return queryService.channelConsensusState(request);
+    },
+
+    packetCommitment(request: QueryPacketCommitmentRequest): Promise<QueryPacketCommitmentResponseSDKType> {
+      return queryService.packetCommitment(request);
+    },
+
+    packetCommitments(request: QueryPacketCommitmentsRequest): Promise<QueryPacketCommitmentsResponseSDKType> {
+      return queryService.packetCommitments(request);
+    },
+
+    packetReceipt(request: QueryPacketReceiptRequest): Promise<QueryPacketReceiptResponseSDKType> {
+      return queryService.packetReceipt(request);
+    },
+
+    packetAcknowledgement(request: QueryPacketAcknowledgementRequest): Promise<QueryPacketAcknowledgementResponseSDKType> {
+      return queryService.packetAcknowledgement(request);
+    },
+
+    packetAcknowledgements(request: QueryPacketAcknowledgementsRequest): Promise<QueryPacketAcknowledgementsResponseSDKType> {
+      return queryService.packetAcknowledgements(request);
+    },
+
+    unreceivedPackets(request: QueryUnreceivedPacketsRequest): Promise<QueryUnreceivedPacketsResponseSDKType> {
+      return queryService.unreceivedPackets(request);
+    },
+
+    unreceivedAcks(request: QueryUnreceivedAcksRequest): Promise<QueryUnreceivedAcksResponseSDKType> {
+      return queryService.unreceivedAcks(request);
+    },
+
+    nextSequenceReceive(request: QueryNextSequenceReceiveRequest): Promise<QueryNextSequenceReceiveResponseSDKType> {
+      return queryService.nextSequenceReceive(request);
+    }
+
+  };
+};

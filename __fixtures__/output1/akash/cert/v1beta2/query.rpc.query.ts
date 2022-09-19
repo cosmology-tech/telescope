@@ -2,6 +2,7 @@ import { CertificateFilter, CertificateFilterSDKType, Certificate, CertificateSD
 import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
 import { Rpc } from "@osmonauts/helpers";
 import * as _m0 from "protobufjs/minimal";
+import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
 import { QueryCertificatesRequest, QueryCertificatesRequestSDKType, QueryCertificatesResponse, QueryCertificatesResponseSDKType } from "./query";
 
 /** Query defines the RPC service */
@@ -25,3 +26,13 @@ export class QueryClientImpl implements Query {
   }
 
 }
+export const createRpcQueryExtension = (base: QueryClient) => {
+  const rpc = createProtobufRpcClient(base);
+  const queryService = new QueryClientImpl(rpc);
+  return {
+    certificates(request: QueryCertificatesRequest): Promise<QueryCertificatesResponseSDKType> {
+      return queryService.certificates(request);
+    }
+
+  };
+};

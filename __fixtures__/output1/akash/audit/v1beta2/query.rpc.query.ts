@@ -2,6 +2,7 @@ import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } fr
 import { Provider, ProviderSDKType } from "./audit";
 import { Rpc } from "@osmonauts/helpers";
 import * as _m0 from "protobufjs/minimal";
+import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
 import { QueryAllProvidersAttributesRequest, QueryAllProvidersAttributesRequestSDKType, QueryProvidersResponse, QueryProvidersResponseSDKType, QueryProviderAttributesRequest, QueryProviderAttributesRequestSDKType, QueryProviderAuditorRequest, QueryProviderAuditorRequestSDKType, QueryAuditorAttributesRequest, QueryAuditorAttributesRequestSDKType } from "./query";
 
 /** Query defines the RPC service */
@@ -63,3 +64,25 @@ export class QueryClientImpl implements Query {
   }
 
 }
+export const createRpcQueryExtension = (base: QueryClient) => {
+  const rpc = createProtobufRpcClient(base);
+  const queryService = new QueryClientImpl(rpc);
+  return {
+    allProvidersAttributes(request: QueryAllProvidersAttributesRequest): Promise<QueryProvidersResponseSDKType> {
+      return queryService.allProvidersAttributes(request);
+    },
+
+    providerAttributes(request: QueryProviderAttributesRequest): Promise<QueryProvidersResponseSDKType> {
+      return queryService.providerAttributes(request);
+    },
+
+    providerAuditorAttributes(request: QueryProviderAuditorRequest): Promise<QueryProvidersResponseSDKType> {
+      return queryService.providerAuditorAttributes(request);
+    },
+
+    auditorAttributes(request: QueryAuditorAttributesRequest): Promise<QueryProvidersResponseSDKType> {
+      return queryService.auditorAttributes(request);
+    }
+
+  };
+};
