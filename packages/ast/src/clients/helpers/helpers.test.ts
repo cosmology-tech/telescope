@@ -46,5 +46,17 @@ it('addJsonMethod', async () => {
 
 it('createHelperObject', async () => {
     const context = getGenericParseContext()
-    expectCode(createHelperObject({ context, name: 'MessageComposer', mutations }));
+    context.ref = {
+        proto: {
+            package: 'a.b.c',
+            imports: [],
+            root: {},
+            importNames: {}
+        }
+    };
+    expectCode(createHelperObject({
+        context,
+        name: 'MessageComposer',
+        mutations
+    }));
 });

@@ -118,8 +118,8 @@ export const defaultTelescopeOptions: TelescopeOptions = {
         methods: {
             encode: true,
             decode: true,
-            fromJSON: true,
-            toJSON: true,
+            fromJSON: false,
+            toJSON: false,
             fromPartial: true,
             toSDK: false,
             fromSDK: false

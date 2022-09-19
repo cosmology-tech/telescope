@@ -150,44 +150,46 @@ export const createHelperObject = ({
         }
     });
 
+    const methods = [
+        context.pluginValue('prototypes.methods.encode') && (t.objectProperty(
+            t.identifier('encoded'),
+            t.objectExpression(
+                mutations.map(mutation => addEncodedMethod(mutation))
+            )
+        )),
+        t.objectProperty(
+            t.identifier('withTypeUrl'),
+            t.objectExpression(
+                mutations.map(mutation => addJsonMethod(mutation))
+            )
+        ),
+        context.pluginValue('prototypes.methods.toJSON') && (t.objectProperty(
+            t.identifier('toJSON'),
+            t.objectExpression(
+                mutations.map(mutation => addToJSONMethod(mutation))
+            )
+        )),
+        context.pluginValue('prototypes.methods.fromJSON') && (t.objectProperty(
+            t.identifier('fromJSON'),
+            t.objectExpression(
+                mutations.map(mutation => addFromJSONMethod(mutation))
+            )
+        )),
+        context.pluginValue('prototypes.methods.fromPartial') && (t.objectProperty(
+            t.identifier('fromPartial'),
+            t.objectExpression(
+                mutations.map(mutation => addFromPartialMethod(mutation))
+            )
+        ))
+    ].filter(Boolean);
+
     return t.exportNamedDeclaration(
         t.variableDeclaration(
             'const',
             [
                 t.variableDeclarator(
                     t.identifier(name),
-                    t.objectExpression([
-                        t.objectProperty(
-                            t.identifier('encoded'),
-                            t.objectExpression(
-                                mutations.map(mutation => addEncodedMethod(mutation))
-                            )
-                        ),
-                        t.objectProperty(
-                            t.identifier('withTypeUrl'),
-                            t.objectExpression(
-                                mutations.map(mutation => addJsonMethod(mutation))
-                            )
-                        ),
-                        t.objectProperty(
-                            t.identifier('toJSON'),
-                            t.objectExpression(
-                                mutations.map(mutation => addToJSONMethod(mutation))
-                            )
-                        ),
-                        t.objectProperty(
-                            t.identifier('fromJSON'),
-                            t.objectExpression(
-                                mutations.map(mutation => addFromJSONMethod(mutation))
-                            )
-                        ),
-                        t.objectProperty(
-                            t.identifier('fromPartial'),
-                            t.objectExpression(
-                                mutations.map(mutation => addFromPartialMethod(mutation))
-                            )
-                        )
-                    ])
+                    t.objectExpression(methods)
                 )
             ]
         )
