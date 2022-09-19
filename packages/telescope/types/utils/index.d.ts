@@ -18,6 +18,9 @@ export declare const UTILS: {
     isSet: string;
     isObject: string;
     Long: string;
+    createProtobufRpcClient: string;
+    QueryClient: string;
+    Tendermint34Client: string;
     OfflineSigner: string;
     omitDefault: string;
     Registry: string;
