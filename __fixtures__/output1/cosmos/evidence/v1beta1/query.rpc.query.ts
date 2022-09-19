@@ -29,7 +29,9 @@ export class QueryClientImpl implements Query {
     return promise.then(data => QueryEvidenceResponse.decode(new _m0.Reader(data)));
   }
 
-  allEvidence(request: QueryAllEvidenceRequest): Promise<QueryAllEvidenceResponseSDKType> {
+  allEvidence(request: QueryAllEvidenceRequest = {
+    pagination: undefined
+  }): Promise<QueryAllEvidenceResponseSDKType> {
     const data = QueryAllEvidenceRequest.encode(request).finish();
     const promise = this.rpc.request("cosmos.evidence.v1beta1.Query", "AllEvidence", data);
     return promise.then(data => QueryAllEvidenceResponse.decode(new _m0.Reader(data)));

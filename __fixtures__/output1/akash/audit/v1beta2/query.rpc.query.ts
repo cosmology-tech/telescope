@@ -39,7 +39,9 @@ export class QueryClientImpl implements Query {
     this.auditorAttributes = this.auditorAttributes.bind(this);
   }
 
-  allProvidersAttributes(request: QueryAllProvidersAttributesRequest): Promise<QueryProvidersResponseSDKType> {
+  allProvidersAttributes(request: QueryAllProvidersAttributesRequest = {
+    pagination: undefined
+  }): Promise<QueryProvidersResponseSDKType> {
     const data = QueryAllProvidersAttributesRequest.encode(request).finish();
     const promise = this.rpc.request("akash.audit.v1beta2.Query", "AllProvidersAttributes", data);
     return promise.then(data => QueryProvidersResponse.decode(new _m0.Reader(data)));

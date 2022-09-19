@@ -26,19 +26,19 @@ export class QueryClientImpl implements Query {
     this.annualProvisions = this.annualProvisions.bind(this);
   }
 
-  params(request: QueryParamsRequest): Promise<QueryParamsResponseSDKType> {
+  params(request: QueryParamsRequest = {}): Promise<QueryParamsResponseSDKType> {
     const data = QueryParamsRequest.encode(request).finish();
     const promise = this.rpc.request("cosmos.mint.v1beta1.Query", "Params", data);
     return promise.then(data => QueryParamsResponse.decode(new _m0.Reader(data)));
   }
 
-  inflation(request: QueryInflationRequest): Promise<QueryInflationResponseSDKType> {
+  inflation(request: QueryInflationRequest = {}): Promise<QueryInflationResponseSDKType> {
     const data = QueryInflationRequest.encode(request).finish();
     const promise = this.rpc.request("cosmos.mint.v1beta1.Query", "Inflation", data);
     return promise.then(data => QueryInflationResponse.decode(new _m0.Reader(data)));
   }
 
-  annualProvisions(request: QueryAnnualProvisionsRequest): Promise<QueryAnnualProvisionsResponseSDKType> {
+  annualProvisions(request: QueryAnnualProvisionsRequest = {}): Promise<QueryAnnualProvisionsResponseSDKType> {
     const data = QueryAnnualProvisionsRequest.encode(request).finish();
     const promise = this.rpc.request("cosmos.mint.v1beta1.Query", "AnnualProvisions", data);
     return promise.then(data => QueryAnnualProvisionsResponse.decode(new _m0.Reader(data)));

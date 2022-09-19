@@ -46,7 +46,9 @@ export class QueryClientImpl implements Query {
     return promise.then(data => QueryConnectionResponse.decode(new _m0.Reader(data)));
   }
 
-  connections(request: QueryConnectionsRequest): Promise<QueryConnectionsResponseSDKType> {
+  connections(request: QueryConnectionsRequest = {
+    pagination: undefined
+  }): Promise<QueryConnectionsResponseSDKType> {
     const data = QueryConnectionsRequest.encode(request).finish();
     const promise = this.rpc.request("ibc.core.connection.v1.Query", "Connections", data);
     return promise.then(data => QueryConnectionsResponse.decode(new _m0.Reader(data)));

@@ -29,7 +29,7 @@ export class QueryClientImpl implements Query {
     return promise.then(data => QueryParamsResponse.decode(new _m0.Reader(data)));
   }
 
-  subspaces(request: QuerySubspacesRequest): Promise<QuerySubspacesResponseSDKType> {
+  subspaces(request: QuerySubspacesRequest = {}): Promise<QuerySubspacesResponseSDKType> {
     const data = QuerySubspacesRequest.encode(request).finish();
     const promise = this.rpc.request("cosmos.params.v1beta1.Query", "Subspaces", data);
     return promise.then(data => QuerySubspacesResponse.decode(new _m0.Reader(data)));

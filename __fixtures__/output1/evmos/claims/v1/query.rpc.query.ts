@@ -33,19 +33,21 @@ export class QueryClientImpl implements Query {
     this.claimsRecord = this.claimsRecord.bind(this);
   }
 
-  totalUnclaimed(request: QueryTotalUnclaimedRequest): Promise<QueryTotalUnclaimedResponseSDKType> {
+  totalUnclaimed(request: QueryTotalUnclaimedRequest = {}): Promise<QueryTotalUnclaimedResponseSDKType> {
     const data = QueryTotalUnclaimedRequest.encode(request).finish();
     const promise = this.rpc.request("evmos.claims.v1.Query", "TotalUnclaimed", data);
     return promise.then(data => QueryTotalUnclaimedResponse.decode(new _m0.Reader(data)));
   }
 
-  params(request: QueryParamsRequest): Promise<QueryParamsResponseSDKType> {
+  params(request: QueryParamsRequest = {}): Promise<QueryParamsResponseSDKType> {
     const data = QueryParamsRequest.encode(request).finish();
     const promise = this.rpc.request("evmos.claims.v1.Query", "Params", data);
     return promise.then(data => QueryParamsResponse.decode(new _m0.Reader(data)));
   }
 
-  claimsRecords(request: QueryClaimsRecordsRequest): Promise<QueryClaimsRecordsResponseSDKType> {
+  claimsRecords(request: QueryClaimsRecordsRequest = {
+    pagination: undefined
+  }): Promise<QueryClaimsRecordsResponseSDKType> {
     const data = QueryClaimsRecordsRequest.encode(request).finish();
     const promise = this.rpc.request("evmos.claims.v1.Query", "ClaimsRecords", data);
     return promise.then(data => QueryClaimsRecordsResponse.decode(new _m0.Reader(data)));

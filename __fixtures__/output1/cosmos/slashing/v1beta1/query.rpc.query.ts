@@ -27,7 +27,7 @@ export class QueryClientImpl implements Query {
     this.signingInfos = this.signingInfos.bind(this);
   }
 
-  params(request: QueryParamsRequest): Promise<QueryParamsResponseSDKType> {
+  params(request: QueryParamsRequest = {}): Promise<QueryParamsResponseSDKType> {
     const data = QueryParamsRequest.encode(request).finish();
     const promise = this.rpc.request("cosmos.slashing.v1beta1.Query", "Params", data);
     return promise.then(data => QueryParamsResponse.decode(new _m0.Reader(data)));
@@ -39,7 +39,9 @@ export class QueryClientImpl implements Query {
     return promise.then(data => QuerySigningInfoResponse.decode(new _m0.Reader(data)));
   }
 
-  signingInfos(request: QuerySigningInfosRequest): Promise<QuerySigningInfosResponseSDKType> {
+  signingInfos(request: QuerySigningInfosRequest = {
+    pagination: undefined
+  }): Promise<QuerySigningInfosResponseSDKType> {
     const data = QuerySigningInfosRequest.encode(request).finish();
     const promise = this.rpc.request("cosmos.slashing.v1beta1.Query", "SigningInfos", data);
     return promise.then(data => QuerySigningInfosResponse.decode(new _m0.Reader(data)));

@@ -83,7 +83,9 @@ export class QueryClientImpl implements Query {
     return promise.then(data => QueryChannelResponse.decode(new _m0.Reader(data)));
   }
 
-  channels(request: QueryChannelsRequest): Promise<QueryChannelsResponseSDKType> {
+  channels(request: QueryChannelsRequest = {
+    pagination: undefined
+  }): Promise<QueryChannelsResponseSDKType> {
     const data = QueryChannelsRequest.encode(request).finish();
     const promise = this.rpc.request("ibc.core.channel.v1.Query", "Channels", data);
     return promise.then(data => QueryChannelsResponse.decode(new _m0.Reader(data)));

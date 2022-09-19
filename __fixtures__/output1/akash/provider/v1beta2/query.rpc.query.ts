@@ -23,7 +23,9 @@ export class QueryClientImpl implements Query {
     this.provider = this.provider.bind(this);
   }
 
-  providers(request: QueryProvidersRequest): Promise<QueryProvidersResponseSDKType> {
+  providers(request: QueryProvidersRequest = {
+    pagination: undefined
+  }): Promise<QueryProvidersResponseSDKType> {
     const data = QueryProvidersRequest.encode(request).finish();
     const promise = this.rpc.request("akash.provider.v1beta2.Query", "Providers", data);
     return promise.then(data => QueryProvidersResponse.decode(new _m0.Reader(data)));

@@ -53,7 +53,7 @@ export class QueryClientImpl implements Query {
     this.communityPool = this.communityPool.bind(this);
   }
 
-  params(request: QueryParamsRequest): Promise<QueryParamsResponseSDKType> {
+  params(request: QueryParamsRequest = {}): Promise<QueryParamsResponseSDKType> {
     const data = QueryParamsRequest.encode(request).finish();
     const promise = this.rpc.request("cosmos.distribution.v1beta1.Query", "Params", data);
     return promise.then(data => QueryParamsResponse.decode(new _m0.Reader(data)));
@@ -101,7 +101,7 @@ export class QueryClientImpl implements Query {
     return promise.then(data => QueryDelegatorWithdrawAddressResponse.decode(new _m0.Reader(data)));
   }
 
-  communityPool(request: QueryCommunityPoolRequest): Promise<QueryCommunityPoolResponseSDKType> {
+  communityPool(request: QueryCommunityPoolRequest = {}): Promise<QueryCommunityPoolResponseSDKType> {
     const data = QueryCommunityPoolRequest.encode(request).finish();
     const promise = this.rpc.request("cosmos.distribution.v1beta1.Query", "CommunityPool", data);
     return promise.then(data => QueryCommunityPoolResponse.decode(new _m0.Reader(data)));

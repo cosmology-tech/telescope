@@ -22,7 +22,7 @@ export class QueryClientImpl implements Query {
     this.currentEpoch = this.currentEpoch.bind(this);
   }
 
-  epochInfos(request: QueryEpochsInfoRequest): Promise<QueryEpochsInfoResponseSDKType> {
+  epochInfos(request: QueryEpochsInfoRequest = {}): Promise<QueryEpochsInfoResponseSDKType> {
     const data = QueryEpochsInfoRequest.encode(request).finish();
     const promise = this.rpc.request("osmosis.epochs.v1beta1.Query", "EpochInfos", data);
     return promise.then(data => QueryEpochsInfoResponse.decode(new _m0.Reader(data)));

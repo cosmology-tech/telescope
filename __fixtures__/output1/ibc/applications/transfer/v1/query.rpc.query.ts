@@ -33,13 +33,15 @@ export class QueryClientImpl implements Query {
     return promise.then(data => QueryDenomTraceResponse.decode(new _m0.Reader(data)));
   }
 
-  denomTraces(request: QueryDenomTracesRequest): Promise<QueryDenomTracesResponseSDKType> {
+  denomTraces(request: QueryDenomTracesRequest = {
+    pagination: undefined
+  }): Promise<QueryDenomTracesResponseSDKType> {
     const data = QueryDenomTracesRequest.encode(request).finish();
     const promise = this.rpc.request("ibc.applications.transfer.v1.Query", "DenomTraces", data);
     return promise.then(data => QueryDenomTracesResponse.decode(new _m0.Reader(data)));
   }
 
-  params(request: QueryParamsRequest): Promise<QueryParamsResponseSDKType> {
+  params(request: QueryParamsRequest = {}): Promise<QueryParamsResponseSDKType> {
     const data = QueryParamsRequest.encode(request).finish();
     const promise = this.rpc.request("ibc.applications.transfer.v1.Query", "Params", data);
     return promise.then(data => QueryParamsResponse.decode(new _m0.Reader(data)));

@@ -28,7 +28,9 @@ export class QueryClientImpl implements Query {
     this.params = this.params.bind(this);
   }
 
-  tokenPairs(request: QueryTokenPairsRequest): Promise<QueryTokenPairsResponseSDKType> {
+  tokenPairs(request: QueryTokenPairsRequest = {
+    pagination: undefined
+  }): Promise<QueryTokenPairsResponseSDKType> {
     const data = QueryTokenPairsRequest.encode(request).finish();
     const promise = this.rpc.request("evmos.erc20.v1.Query", "TokenPairs", data);
     return promise.then(data => QueryTokenPairsResponse.decode(new _m0.Reader(data)));
@@ -40,7 +42,7 @@ export class QueryClientImpl implements Query {
     return promise.then(data => QueryTokenPairResponse.decode(new _m0.Reader(data)));
   }
 
-  params(request: QueryParamsRequest): Promise<QueryParamsResponseSDKType> {
+  params(request: QueryParamsRequest = {}): Promise<QueryParamsResponseSDKType> {
     const data = QueryParamsRequest.encode(request).finish();
     const promise = this.rpc.request("evmos.erc20.v1.Query", "Params", data);
     return promise.then(data => QueryParamsResponse.decode(new _m0.Reader(data)));

@@ -58,19 +58,21 @@ export class QueryClientImpl implements Query {
     this.estimateSwapExactAmountOut = this.estimateSwapExactAmountOut.bind(this);
   }
 
-  pools(request: QueryPoolsRequest): Promise<QueryPoolsResponseSDKType> {
+  pools(request: QueryPoolsRequest = {
+    pagination: undefined
+  }): Promise<QueryPoolsResponseSDKType> {
     const data = QueryPoolsRequest.encode(request).finish();
     const promise = this.rpc.request("osmosis.gamm.v1beta1.Query", "Pools", data);
     return promise.then(data => QueryPoolsResponse.decode(new _m0.Reader(data)));
   }
 
-  numPools(request: QueryNumPoolsRequest): Promise<QueryNumPoolsResponseSDKType> {
+  numPools(request: QueryNumPoolsRequest = {}): Promise<QueryNumPoolsResponseSDKType> {
     const data = QueryNumPoolsRequest.encode(request).finish();
     const promise = this.rpc.request("osmosis.gamm.v1beta1.Query", "NumPools", data);
     return promise.then(data => QueryNumPoolsResponse.decode(new _m0.Reader(data)));
   }
 
-  totalLiquidity(request: QueryTotalLiquidityRequest): Promise<QueryTotalLiquidityResponseSDKType> {
+  totalLiquidity(request: QueryTotalLiquidityRequest = {}): Promise<QueryTotalLiquidityResponseSDKType> {
     const data = QueryTotalLiquidityRequest.encode(request).finish();
     const promise = this.rpc.request("osmosis.gamm.v1beta1.Query", "TotalLiquidity", data);
     return promise.then(data => QueryTotalLiquidityResponse.decode(new _m0.Reader(data)));

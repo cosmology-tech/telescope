@@ -46,7 +46,9 @@ export class QueryClientImpl implements Query {
     this.params = this.params.bind(this);
   }
 
-  incentives(request: QueryIncentivesRequest): Promise<QueryIncentivesResponseSDKType> {
+  incentives(request: QueryIncentivesRequest = {
+    pagination: undefined
+  }): Promise<QueryIncentivesResponseSDKType> {
     const data = QueryIncentivesRequest.encode(request).finish();
     const promise = this.rpc.request("evmos.incentives.v1.Query", "Incentives", data);
     return promise.then(data => QueryIncentivesResponse.decode(new _m0.Reader(data)));
@@ -70,7 +72,9 @@ export class QueryClientImpl implements Query {
     return promise.then(data => QueryGasMeterResponse.decode(new _m0.Reader(data)));
   }
 
-  allocationMeters(request: QueryAllocationMetersRequest): Promise<QueryAllocationMetersResponseSDKType> {
+  allocationMeters(request: QueryAllocationMetersRequest = {
+    pagination: undefined
+  }): Promise<QueryAllocationMetersResponseSDKType> {
     const data = QueryAllocationMetersRequest.encode(request).finish();
     const promise = this.rpc.request("evmos.incentives.v1.Query", "AllocationMeters", data);
     return promise.then(data => QueryAllocationMetersResponse.decode(new _m0.Reader(data)));
@@ -82,7 +86,7 @@ export class QueryClientImpl implements Query {
     return promise.then(data => QueryAllocationMeterResponse.decode(new _m0.Reader(data)));
   }
 
-  params(request: QueryParamsRequest): Promise<QueryParamsResponseSDKType> {
+  params(request: QueryParamsRequest = {}): Promise<QueryParamsResponseSDKType> {
     const data = QueryParamsRequest.encode(request).finish();
     const promise = this.rpc.request("evmos.incentives.v1.Query", "Params", data);
     return promise.then(data => QueryParamsResponse.decode(new _m0.Reader(data)));

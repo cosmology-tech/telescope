@@ -33,7 +33,9 @@ export class QueryClientImpl implements Query {
     this.devFeeInfosPerDeployer = this.devFeeInfosPerDeployer.bind(this);
   }
 
-  devFeeInfos(request: QueryDevFeeInfosRequest): Promise<QueryDevFeeInfosResponseSDKType> {
+  devFeeInfos(request: QueryDevFeeInfosRequest = {
+    pagination: undefined
+  }): Promise<QueryDevFeeInfosResponseSDKType> {
     const data = QueryDevFeeInfosRequest.encode(request).finish();
     const promise = this.rpc.request("evmos.fees.v1.Query", "DevFeeInfos", data);
     return promise.then(data => QueryDevFeeInfosResponse.decode(new _m0.Reader(data)));
@@ -45,7 +47,7 @@ export class QueryClientImpl implements Query {
     return promise.then(data => QueryDevFeeInfoResponse.decode(new _m0.Reader(data)));
   }
 
-  params(request: QueryParamsRequest): Promise<QueryParamsResponseSDKType> {
+  params(request: QueryParamsRequest = {}): Promise<QueryParamsResponseSDKType> {
     const data = QueryParamsRequest.encode(request).finish();
     const promise = this.rpc.request("evmos.fees.v1.Query", "Params", data);
     return promise.then(data => QueryParamsResponse.decode(new _m0.Reader(data)));

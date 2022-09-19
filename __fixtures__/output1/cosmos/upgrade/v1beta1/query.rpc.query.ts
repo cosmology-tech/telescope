@@ -41,7 +41,7 @@ export class QueryClientImpl implements Query {
     this.authority = this.authority.bind(this);
   }
 
-  currentPlan(request: QueryCurrentPlanRequest): Promise<QueryCurrentPlanResponseSDKType> {
+  currentPlan(request: QueryCurrentPlanRequest = {}): Promise<QueryCurrentPlanResponseSDKType> {
     const data = QueryCurrentPlanRequest.encode(request).finish();
     const promise = this.rpc.request("cosmos.upgrade.v1beta1.Query", "CurrentPlan", data);
     return promise.then(data => QueryCurrentPlanResponse.decode(new _m0.Reader(data)));
@@ -65,7 +65,7 @@ export class QueryClientImpl implements Query {
     return promise.then(data => QueryModuleVersionsResponse.decode(new _m0.Reader(data)));
   }
 
-  authority(request: QueryAuthorityRequest): Promise<QueryAuthorityResponseSDKType> {
+  authority(request: QueryAuthorityRequest = {}): Promise<QueryAuthorityResponseSDKType> {
     const data = QueryAuthorityRequest.encode(request).finish();
     const promise = this.rpc.request("cosmos.upgrade.v1beta1.Query", "Authority", data);
     return promise.then(data => QueryAuthorityResponse.decode(new _m0.Reader(data)));

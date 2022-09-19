@@ -59,13 +59,13 @@ export class QueryClientImpl implements Query {
     this.lockableDurations = this.lockableDurations.bind(this);
   }
 
-  moduleToDistributeCoins(request: ModuleToDistributeCoinsRequest): Promise<ModuleToDistributeCoinsResponseSDKType> {
+  moduleToDistributeCoins(request: ModuleToDistributeCoinsRequest = {}): Promise<ModuleToDistributeCoinsResponseSDKType> {
     const data = ModuleToDistributeCoinsRequest.encode(request).finish();
     const promise = this.rpc.request("osmosis.incentives.Query", "ModuleToDistributeCoins", data);
     return promise.then(data => ModuleToDistributeCoinsResponse.decode(new _m0.Reader(data)));
   }
 
-  moduleDistributedCoins(request: ModuleDistributedCoinsRequest): Promise<ModuleDistributedCoinsResponseSDKType> {
+  moduleDistributedCoins(request: ModuleDistributedCoinsRequest = {}): Promise<ModuleDistributedCoinsResponseSDKType> {
     const data = ModuleDistributedCoinsRequest.encode(request).finish();
     const promise = this.rpc.request("osmosis.incentives.Query", "ModuleDistributedCoins", data);
     return promise.then(data => ModuleDistributedCoinsResponse.decode(new _m0.Reader(data)));
@@ -77,13 +77,17 @@ export class QueryClientImpl implements Query {
     return promise.then(data => GaugeByIDResponse.decode(new _m0.Reader(data)));
   }
 
-  gauges(request: GaugesRequest): Promise<GaugesResponseSDKType> {
+  gauges(request: GaugesRequest = {
+    pagination: undefined
+  }): Promise<GaugesResponseSDKType> {
     const data = GaugesRequest.encode(request).finish();
     const promise = this.rpc.request("osmosis.incentives.Query", "Gauges", data);
     return promise.then(data => GaugesResponse.decode(new _m0.Reader(data)));
   }
 
-  activeGauges(request: ActiveGaugesRequest): Promise<ActiveGaugesResponseSDKType> {
+  activeGauges(request: ActiveGaugesRequest = {
+    pagination: undefined
+  }): Promise<ActiveGaugesResponseSDKType> {
     const data = ActiveGaugesRequest.encode(request).finish();
     const promise = this.rpc.request("osmosis.incentives.Query", "ActiveGauges", data);
     return promise.then(data => ActiveGaugesResponse.decode(new _m0.Reader(data)));
@@ -95,7 +99,9 @@ export class QueryClientImpl implements Query {
     return promise.then(data => ActiveGaugesPerDenomResponse.decode(new _m0.Reader(data)));
   }
 
-  upcomingGauges(request: UpcomingGaugesRequest): Promise<UpcomingGaugesResponseSDKType> {
+  upcomingGauges(request: UpcomingGaugesRequest = {
+    pagination: undefined
+  }): Promise<UpcomingGaugesResponseSDKType> {
     const data = UpcomingGaugesRequest.encode(request).finish();
     const promise = this.rpc.request("osmosis.incentives.Query", "UpcomingGauges", data);
     return promise.then(data => UpcomingGaugesResponse.decode(new _m0.Reader(data)));
@@ -113,7 +119,7 @@ export class QueryClientImpl implements Query {
     return promise.then(data => RewardsEstResponse.decode(new _m0.Reader(data)));
   }
 
-  lockableDurations(request: QueryLockableDurationsRequest): Promise<QueryLockableDurationsResponseSDKType> {
+  lockableDurations(request: QueryLockableDurationsRequest = {}): Promise<QueryLockableDurationsResponseSDKType> {
     const data = QueryLockableDurationsRequest.encode(request).finish();
     const promise = this.rpc.request("osmosis.incentives.Query", "LockableDurations", data);
     return promise.then(data => QueryLockableDurationsResponse.decode(new _m0.Reader(data)));

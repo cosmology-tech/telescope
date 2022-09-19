@@ -147,13 +147,13 @@ export class QueryClientImpl implements Query {
     return promise.then(data => QueryHistoricalInfoResponse.decode(new _m0.Reader(data)));
   }
 
-  pool(request: QueryPoolRequest): Promise<QueryPoolResponseSDKType> {
+  pool(request: QueryPoolRequest = {}): Promise<QueryPoolResponseSDKType> {
     const data = QueryPoolRequest.encode(request).finish();
     const promise = this.rpc.request("cosmos.staking.v1beta1.Query", "Pool", data);
     return promise.then(data => QueryPoolResponse.decode(new _m0.Reader(data)));
   }
 
-  params(request: QueryParamsRequest): Promise<QueryParamsResponseSDKType> {
+  params(request: QueryParamsRequest = {}): Promise<QueryParamsResponseSDKType> {
     const data = QueryParamsRequest.encode(request).finish();
     const promise = this.rpc.request("cosmos.staking.v1beta1.Query", "Params", data);
     return promise.then(data => QueryParamsResponse.decode(new _m0.Reader(data)));

@@ -83,13 +83,13 @@ export class QueryClientImpl implements Query {
     this.accountLockedLongerDurationDenom = this.accountLockedLongerDurationDenom.bind(this);
   }
 
-  moduleBalance(request: ModuleBalanceRequest): Promise<ModuleBalanceResponseSDKType> {
+  moduleBalance(request: ModuleBalanceRequest = {}): Promise<ModuleBalanceResponseSDKType> {
     const data = ModuleBalanceRequest.encode(request).finish();
     const promise = this.rpc.request("osmosis.lockup.Query", "ModuleBalance", data);
     return promise.then(data => ModuleBalanceResponse.decode(new _m0.Reader(data)));
   }
 
-  moduleLockedAmount(request: ModuleLockedAmountRequest): Promise<ModuleLockedAmountResponseSDKType> {
+  moduleLockedAmount(request: ModuleLockedAmountRequest = {}): Promise<ModuleLockedAmountResponseSDKType> {
     const data = ModuleLockedAmountRequest.encode(request).finish();
     const promise = this.rpc.request("osmosis.lockup.Query", "ModuleLockedAmount", data);
     return promise.then(data => ModuleLockedAmountResponse.decode(new _m0.Reader(data)));

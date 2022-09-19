@@ -40,37 +40,37 @@ export class QueryClientImpl implements Query {
     this.params = this.params.bind(this);
   }
 
-  period(request: QueryPeriodRequest): Promise<QueryPeriodResponseSDKType> {
+  period(request: QueryPeriodRequest = {}): Promise<QueryPeriodResponseSDKType> {
     const data = QueryPeriodRequest.encode(request).finish();
     const promise = this.rpc.request("evmos.inflation.v1.Query", "Period", data);
     return promise.then(data => QueryPeriodResponse.decode(new _m0.Reader(data)));
   }
 
-  epochMintProvision(request: QueryEpochMintProvisionRequest): Promise<QueryEpochMintProvisionResponseSDKType> {
+  epochMintProvision(request: QueryEpochMintProvisionRequest = {}): Promise<QueryEpochMintProvisionResponseSDKType> {
     const data = QueryEpochMintProvisionRequest.encode(request).finish();
     const promise = this.rpc.request("evmos.inflation.v1.Query", "EpochMintProvision", data);
     return promise.then(data => QueryEpochMintProvisionResponse.decode(new _m0.Reader(data)));
   }
 
-  skippedEpochs(request: QuerySkippedEpochsRequest): Promise<QuerySkippedEpochsResponseSDKType> {
+  skippedEpochs(request: QuerySkippedEpochsRequest = {}): Promise<QuerySkippedEpochsResponseSDKType> {
     const data = QuerySkippedEpochsRequest.encode(request).finish();
     const promise = this.rpc.request("evmos.inflation.v1.Query", "SkippedEpochs", data);
     return promise.then(data => QuerySkippedEpochsResponse.decode(new _m0.Reader(data)));
   }
 
-  circulatingSupply(request: QueryCirculatingSupplyRequest): Promise<QueryCirculatingSupplyResponseSDKType> {
+  circulatingSupply(request: QueryCirculatingSupplyRequest = {}): Promise<QueryCirculatingSupplyResponseSDKType> {
     const data = QueryCirculatingSupplyRequest.encode(request).finish();
     const promise = this.rpc.request("evmos.inflation.v1.Query", "CirculatingSupply", data);
     return promise.then(data => QueryCirculatingSupplyResponse.decode(new _m0.Reader(data)));
   }
 
-  inflationRate(request: QueryInflationRateRequest): Promise<QueryInflationRateResponseSDKType> {
+  inflationRate(request: QueryInflationRateRequest = {}): Promise<QueryInflationRateResponseSDKType> {
     const data = QueryInflationRateRequest.encode(request).finish();
     const promise = this.rpc.request("evmos.inflation.v1.Query", "InflationRate", data);
     return promise.then(data => QueryInflationRateResponse.decode(new _m0.Reader(data)));
   }
 
-  params(request: QueryParamsRequest): Promise<QueryParamsResponseSDKType> {
+  params(request: QueryParamsRequest = {}): Promise<QueryParamsResponseSDKType> {
     const data = QueryParamsRequest.encode(request).finish();
     const promise = this.rpc.request("evmos.inflation.v1.Query", "Params", data);
     return promise.then(data => QueryParamsResponse.decode(new _m0.Reader(data)));
