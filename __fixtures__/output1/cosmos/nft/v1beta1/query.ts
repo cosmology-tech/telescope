@@ -258,7 +258,7 @@ export const QueryBalanceResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryBalanceResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryBalanceResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryBalanceResponse();
@@ -410,7 +410,7 @@ export const QueryOwnerResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryOwnerResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryOwnerResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryOwnerResponse();
@@ -548,7 +548,7 @@ export const QuerySupplyResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QuerySupplyResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QuerySupplyResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQuerySupplyResponse();
@@ -719,7 +719,7 @@ export const QueryNFTsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryNFTsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryNFTsResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryNFTsResponse();
@@ -892,7 +892,7 @@ export const QueryNFTResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryNFTResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryNFTResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryNFTResponse();
@@ -1030,7 +1030,7 @@ export const QueryClassResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryClassResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryClassResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryClassResponse();
@@ -1173,7 +1173,7 @@ export const QueryClassesResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryClassesResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryClassesResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryClassesResponse();

@@ -90,7 +90,7 @@ export const QueryEpochsInfoResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryEpochsInfoResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryEpochsInfoResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryEpochsInfoResponse();
@@ -240,7 +240,7 @@ export const QueryCurrentEpochResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryCurrentEpochResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryCurrentEpochResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryCurrentEpochResponse();

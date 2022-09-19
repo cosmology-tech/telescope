@@ -290,7 +290,7 @@ export const MsgCreateClawbackVestingAccountResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateClawbackVestingAccountResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateClawbackVestingAccountResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateClawbackVestingAccountResponse();
@@ -439,7 +439,7 @@ export const MsgClawbackResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgClawbackResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgClawbackResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgClawbackResponse();

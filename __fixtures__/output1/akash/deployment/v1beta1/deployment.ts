@@ -316,7 +316,7 @@ export const MsgCreateDeploymentResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateDeploymentResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateDeploymentResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateDeploymentResponse();
@@ -451,7 +451,7 @@ export const MsgDepositDeploymentResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgDepositDeploymentResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgDepositDeploymentResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgDepositDeploymentResponse();
@@ -612,7 +612,7 @@ export const MsgUpdateDeploymentResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateDeploymentResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateDeploymentResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpdateDeploymentResponse();
@@ -733,7 +733,7 @@ export const MsgCloseDeploymentResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCloseDeploymentResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCloseDeploymentResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCloseDeploymentResponse();

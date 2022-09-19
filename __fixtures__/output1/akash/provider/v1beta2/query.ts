@@ -135,7 +135,7 @@ export const QueryProvidersResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryProvidersResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryProvidersResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryProvidersResponse();
@@ -294,7 +294,7 @@ export const QueryProviderResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryProviderResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryProviderResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryProviderResponse();

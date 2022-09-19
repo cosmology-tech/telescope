@@ -178,7 +178,7 @@ export const QueryDeploymentsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryDeploymentsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryDeploymentsResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDeploymentsResponse();
@@ -347,7 +347,7 @@ export const QueryDeploymentResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryDeploymentResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryDeploymentResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDeploymentResponse();
@@ -515,7 +515,7 @@ export const QueryGroupResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryGroupResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryGroupResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryGroupResponse();

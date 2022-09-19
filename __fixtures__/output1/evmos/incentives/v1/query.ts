@@ -347,7 +347,7 @@ export const QueryIncentivesResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryIncentivesResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryIncentivesResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryIncentivesResponse();
@@ -506,7 +506,7 @@ export const QueryIncentiveResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryIncentiveResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryIncentiveResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryIncentiveResponse();
@@ -663,7 +663,7 @@ export const QueryGasMetersResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryGasMetersResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryGasMetersResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryGasMetersResponse();
@@ -836,7 +836,7 @@ export const QueryGasMeterResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryGasMeterResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryGasMeterResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryGasMeterResponse();
@@ -979,7 +979,7 @@ export const QueryAllocationMetersResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryAllocationMetersResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryAllocationMetersResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryAllocationMetersResponse();
@@ -1138,7 +1138,7 @@ export const QueryAllocationMeterResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryAllocationMeterResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryAllocationMeterResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryAllocationMeterResponse();
@@ -1259,7 +1259,7 @@ export const QueryParamsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryParamsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryParamsResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryParamsResponse();

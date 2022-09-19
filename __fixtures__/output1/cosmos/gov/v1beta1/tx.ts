@@ -235,7 +235,7 @@ export const MsgSubmitProposalResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgSubmitProposalResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgSubmitProposalResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSubmitProposalResponse();
@@ -395,7 +395,7 @@ export const MsgVoteResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgVoteResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgVoteResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgVoteResponse();
@@ -556,7 +556,7 @@ export const MsgVoteWeightedResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgVoteWeightedResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgVoteWeightedResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgVoteWeightedResponse();
@@ -717,7 +717,7 @@ export const MsgDepositResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgDepositResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgDepositResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgDepositResponse();

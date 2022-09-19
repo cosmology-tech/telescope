@@ -197,7 +197,7 @@ export const MsgSetWithdrawAddressResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgSetWithdrawAddressResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgSetWithdrawAddressResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSetWithdrawAddressResponse();
@@ -338,7 +338,7 @@ export const MsgWithdrawDelegatorRewardResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgWithdrawDelegatorRewardResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgWithdrawDelegatorRewardResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgWithdrawDelegatorRewardResponse();
@@ -488,7 +488,7 @@ export const MsgWithdrawValidatorCommissionResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgWithdrawValidatorCommissionResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgWithdrawValidatorCommissionResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgWithdrawValidatorCommissionResponse();
@@ -658,7 +658,7 @@ export const MsgFundCommunityPoolResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgFundCommunityPoolResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgFundCommunityPoolResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgFundCommunityPoolResponse();

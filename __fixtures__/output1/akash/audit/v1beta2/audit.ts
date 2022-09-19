@@ -615,7 +615,7 @@ export const MsgSignProviderAttributesResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgSignProviderAttributesResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgSignProviderAttributesResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSignProviderAttributesResponse();
@@ -776,7 +776,7 @@ export const MsgDeleteProviderAttributesResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgDeleteProviderAttributesResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgDeleteProviderAttributesResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgDeleteProviderAttributesResponse();

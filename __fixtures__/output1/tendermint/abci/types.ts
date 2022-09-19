@@ -2850,7 +2850,7 @@ export const ResponseEcho = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ResponseEcho {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ResponseEchoSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseResponseEcho();
@@ -2913,7 +2913,7 @@ export const ResponseFlush = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ResponseFlush {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ResponseFlushSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseResponseFlush();
@@ -2991,7 +2991,7 @@ export const ResponseInfo = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ResponseInfo {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ResponseInfoSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseResponseInfo();
@@ -3106,7 +3106,7 @@ export const ResponseSetOption = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ResponseSetOption {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ResponseSetOptionSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseResponseSetOption();
@@ -3203,7 +3203,7 @@ export const ResponseInitChain = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ResponseInitChain {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ResponseInitChainSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseResponseInitChain();
@@ -3342,7 +3342,7 @@ export const ResponseQuery = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ResponseQuery {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ResponseQuerySDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseResponseQuery();
@@ -3483,7 +3483,7 @@ export const ResponseBeginBlock = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ResponseBeginBlock {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ResponseBeginBlockSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseResponseBeginBlock();
@@ -3599,7 +3599,7 @@ export const ResponseCheckTx = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ResponseCheckTx {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ResponseCheckTxSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseResponseCheckTx();
@@ -3778,7 +3778,7 @@ export const ResponseDeliverTx = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ResponseDeliverTx {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ResponseDeliverTxSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseResponseDeliverTx();
@@ -3932,7 +3932,7 @@ export const ResponseEndBlock = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ResponseEndBlock {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ResponseEndBlockSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseResponseEndBlock();
@@ -4048,7 +4048,7 @@ export const ResponseCommit = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ResponseCommit {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ResponseCommitSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseResponseCommit();
@@ -4126,7 +4126,7 @@ export const ResponseListSnapshots = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ResponseListSnapshots {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ResponseListSnapshotsSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseResponseListSnapshots();
@@ -4207,7 +4207,7 @@ export const ResponseOfferSnapshot = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ResponseOfferSnapshot {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ResponseOfferSnapshotSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseResponseOfferSnapshot();
@@ -4276,7 +4276,7 @@ export const ResponseLoadSnapshotChunk = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ResponseLoadSnapshotChunk {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ResponseLoadSnapshotChunkSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseResponseLoadSnapshotChunk();
@@ -4359,7 +4359,7 @@ export const ResponseApplySnapshotChunk = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ResponseApplySnapshotChunk {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ResponseApplySnapshotChunkSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseResponseApplySnapshotChunk();

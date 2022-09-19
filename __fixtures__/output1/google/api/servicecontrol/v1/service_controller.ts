@@ -586,7 +586,7 @@ export const CheckResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): CheckResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): CheckResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCheckResponse();
@@ -1014,7 +1014,7 @@ export const ReportResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ReportResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ReportResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseReportResponse();

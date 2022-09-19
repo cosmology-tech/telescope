@@ -219,7 +219,7 @@ export const MsgCreateGaugeResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateGaugeResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateGaugeResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateGaugeResponse();
@@ -380,7 +380,7 @@ export const MsgAddToGaugeResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgAddToGaugeResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgAddToGaugeResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgAddToGaugeResponse();

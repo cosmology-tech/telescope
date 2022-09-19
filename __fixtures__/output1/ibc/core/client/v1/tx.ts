@@ -283,7 +283,7 @@ export const MsgCreateClientResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateClientResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateClientResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateClientResponse();
@@ -432,7 +432,7 @@ export const MsgUpdateClientResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateClientResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateClientResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpdateClientResponse();
@@ -623,7 +623,7 @@ export const MsgUpgradeClientResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpgradeClientResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpgradeClientResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpgradeClientResponse();
@@ -772,7 +772,7 @@ export const MsgSubmitMisbehaviourResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgSubmitMisbehaviourResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgSubmitMisbehaviourResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSubmitMisbehaviourResponse();

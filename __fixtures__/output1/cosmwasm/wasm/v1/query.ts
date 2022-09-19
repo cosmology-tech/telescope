@@ -459,7 +459,7 @@ export const QueryContractInfoResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryContractInfoResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryContractInfoResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryContractInfoResponse();
@@ -625,7 +625,7 @@ export const QueryContractHistoryResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryContractHistoryResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryContractHistoryResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryContractHistoryResponse();
@@ -803,7 +803,7 @@ export const QueryContractsByCodeResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryContractsByCodeResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryContractsByCodeResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryContractsByCodeResponse();
@@ -981,7 +981,7 @@ export const QueryAllContractStateResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryAllContractStateResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryAllContractStateResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryAllContractStateResponse();
@@ -1154,7 +1154,7 @@ export const QueryRawContractStateResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryRawContractStateResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryRawContractStateResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryRawContractStateResponse();
@@ -1306,7 +1306,7 @@ export const QuerySmartContractStateResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QuerySmartContractStateResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QuerySmartContractStateResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQuerySmartContractStateResponse();
@@ -1546,7 +1546,7 @@ export const QueryCodeResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryCodeResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryCodeResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryCodeResponse();
@@ -1698,7 +1698,7 @@ export const QueryCodesResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryCodesResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryCodesResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryCodesResponse();
@@ -1866,7 +1866,7 @@ export const QueryPinnedCodesResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryPinnedCodesResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryPinnedCodesResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryPinnedCodesResponse();

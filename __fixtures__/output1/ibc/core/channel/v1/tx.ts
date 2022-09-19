@@ -408,7 +408,7 @@ export const MsgChannelOpenInitResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgChannelOpenInitResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgChannelOpenInitResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgChannelOpenInitResponse();
@@ -613,7 +613,7 @@ export const MsgChannelOpenTryResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgChannelOpenTryResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgChannelOpenTryResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgChannelOpenTryResponse();
@@ -818,7 +818,7 @@ export const MsgChannelOpenAckResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgChannelOpenAckResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgChannelOpenAckResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgChannelOpenAckResponse();
@@ -995,7 +995,7 @@ export const MsgChannelOpenConfirmResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgChannelOpenConfirmResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgChannelOpenConfirmResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgChannelOpenConfirmResponse();
@@ -1144,7 +1144,7 @@ export const MsgChannelCloseInitResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgChannelCloseInitResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgChannelCloseInitResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgChannelCloseInitResponse();
@@ -1321,7 +1321,7 @@ export const MsgChannelCloseConfirmResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgChannelCloseConfirmResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgChannelCloseConfirmResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgChannelCloseConfirmResponse();
@@ -1484,7 +1484,7 @@ export const MsgRecvPacketResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgRecvPacketResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgRecvPacketResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgRecvPacketResponse();
@@ -1661,7 +1661,7 @@ export const MsgTimeoutResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgTimeoutResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgTimeoutResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgTimeoutResponse();
@@ -1852,7 +1852,7 @@ export const MsgTimeoutOnCloseResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgTimeoutOnCloseResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgTimeoutOnCloseResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgTimeoutOnCloseResponse();
@@ -2029,7 +2029,7 @@ export const MsgAcknowledgementResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgAcknowledgementResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgAcknowledgementResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgAcknowledgementResponse();

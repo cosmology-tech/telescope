@@ -980,7 +980,7 @@ export const ListServicesResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ListServicesResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ListServicesResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListServicesResponse();
@@ -1448,7 +1448,7 @@ export const BatchGetServicesResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): BatchGetServicesResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): BatchGetServicesResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBatchGetServicesResponse();

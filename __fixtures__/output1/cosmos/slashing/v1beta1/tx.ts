@@ -96,7 +96,7 @@ export const MsgUnjailResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUnjailResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUnjailResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUnjailResponse();

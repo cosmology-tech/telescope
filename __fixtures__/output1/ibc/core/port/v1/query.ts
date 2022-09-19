@@ -202,7 +202,7 @@ export const QueryAppVersionResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryAppVersionResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryAppVersionResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryAppVersionResponse();

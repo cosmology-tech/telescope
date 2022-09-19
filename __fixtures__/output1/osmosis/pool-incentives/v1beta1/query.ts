@@ -159,7 +159,7 @@ export const QueryGaugeIdsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryGaugeIdsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryGaugeIdsResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryGaugeIdsResponse();
@@ -375,7 +375,7 @@ export const QueryDistrInfoResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryDistrInfoResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryDistrInfoResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDistrInfoResponse();
@@ -496,7 +496,7 @@ export const QueryParamsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryParamsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryParamsResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryParamsResponse();
@@ -617,7 +617,7 @@ export const QueryLockableDurationsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryLockableDurationsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryLockableDurationsResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryLockableDurationsResponse();
@@ -847,7 +847,7 @@ export const QueryIncentivizedPoolsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryIncentivizedPoolsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryIncentivizedPoolsResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryIncentivizedPoolsResponse();
@@ -980,7 +980,7 @@ export const QueryExternalIncentiveGaugesResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryExternalIncentiveGaugesResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryExternalIncentiveGaugesResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryExternalIncentiveGaugesResponse();

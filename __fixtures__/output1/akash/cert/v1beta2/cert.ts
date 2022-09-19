@@ -522,7 +522,7 @@ export const MsgCreateCertificateResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateCertificateResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateCertificateResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateCertificateResponse();
@@ -643,7 +643,7 @@ export const MsgRevokeCertificateResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgRevokeCertificateResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgRevokeCertificateResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgRevokeCertificateResponse();

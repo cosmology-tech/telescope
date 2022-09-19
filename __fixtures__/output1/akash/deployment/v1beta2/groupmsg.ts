@@ -129,7 +129,7 @@ export const MsgCloseGroupResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCloseGroupResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCloseGroupResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCloseGroupResponse();
@@ -250,7 +250,7 @@ export const MsgPauseGroupResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgPauseGroupResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgPauseGroupResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgPauseGroupResponse();
@@ -371,7 +371,7 @@ export const MsgStartGroupResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgStartGroupResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgStartGroupResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgStartGroupResponse();

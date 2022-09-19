@@ -121,7 +121,7 @@ export const ListAllInterfacesResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ListAllInterfacesResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ListAllInterfacesResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListAllInterfacesResponse();
@@ -271,7 +271,7 @@ export const ListImplementationsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ListImplementationsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ListImplementationsResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListImplementationsResponse();

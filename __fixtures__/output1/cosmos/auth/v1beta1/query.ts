@@ -254,7 +254,7 @@ export const QueryAccountsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryAccountsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryAccountsResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryAccountsResponse();
@@ -465,7 +465,7 @@ export const QueryParamsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryParamsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryParamsResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryParamsResponse();
@@ -534,7 +534,7 @@ export const QueryAccountResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryAccountResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryAccountResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryAccountResponse();
@@ -655,7 +655,7 @@ export const QueryModuleAccountsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryModuleAccountsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryModuleAccountsResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryModuleAccountsResponse();
@@ -788,7 +788,7 @@ export const Bech32PrefixResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): Bech32PrefixResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Bech32PrefixResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBech32PrefixResponse();
@@ -926,7 +926,7 @@ export const AddressBytesToStringResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): AddressBytesToStringResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): AddressBytesToStringResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAddressBytesToStringResponse();
@@ -1064,7 +1064,7 @@ export const AddressStringToBytesResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): AddressStringToBytesResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): AddressStringToBytesResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAddressStringToBytesResponse();

@@ -245,7 +245,7 @@ export const QueryGrantsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryGrantsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryGrantsResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryGrantsResponse();
@@ -423,7 +423,7 @@ export const QueryGranterGrantsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryGranterGrantsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryGranterGrantsResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryGranterGrantsResponse();
@@ -601,7 +601,7 @@ export const QueryGranteeGrantsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryGranteeGrantsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryGranteeGrantsResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryGranteeGrantsResponse();

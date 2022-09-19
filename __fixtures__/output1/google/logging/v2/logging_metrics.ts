@@ -694,7 +694,7 @@ export const LogMetric = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): LogMetric {
+  decode(input: _m0.Reader | Uint8Array, length?: number): LogMetricSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLogMetric();
@@ -992,7 +992,7 @@ export const ListLogMetricsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ListLogMetricsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ListLogMetricsResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListLogMetricsResponse();

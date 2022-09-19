@@ -169,7 +169,7 @@ export const MsgGrantAllowanceResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgGrantAllowanceResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgGrantAllowanceResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgGrantAllowanceResponse();
@@ -304,7 +304,7 @@ export const MsgRevokeAllowanceResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgRevokeAllowanceResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgRevokeAllowanceResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgRevokeAllowanceResponse();

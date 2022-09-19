@@ -1081,7 +1081,7 @@ export const Service = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): Service {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ServiceSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseService();
@@ -1512,7 +1512,7 @@ export const ConsumerQuotaMetric = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ConsumerQuotaMetric {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ConsumerQuotaMetricSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseConsumerQuotaMetric();
@@ -1673,7 +1673,7 @@ export const ConsumerQuotaLimit = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ConsumerQuotaLimit {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ConsumerQuotaLimitSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseConsumerQuotaLimit();

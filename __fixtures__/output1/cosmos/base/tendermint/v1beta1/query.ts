@@ -321,7 +321,7 @@ export const GetValidatorSetByHeightResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): GetValidatorSetByHeightResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): GetValidatorSetByHeightResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetValidatorSetByHeightResponse();
@@ -499,7 +499,7 @@ export const GetLatestValidatorSetResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): GetLatestValidatorSetResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): GetLatestValidatorSetResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetLatestValidatorSetResponse();
@@ -783,7 +783,7 @@ export const GetBlockByHeightResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): GetBlockByHeightResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): GetBlockByHeightResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetBlockByHeightResponse();
@@ -918,7 +918,7 @@ export const GetLatestBlockResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): GetLatestBlockResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): GetLatestBlockResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetLatestBlockResponse();
@@ -1048,7 +1048,7 @@ export const GetSyncingResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): GetSyncingResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): GetSyncingResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetSyncingResponse();
@@ -1174,7 +1174,7 @@ export const GetNodeInfoResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): GetNodeInfoResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): GetNodeInfoResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetNodeInfoResponse();

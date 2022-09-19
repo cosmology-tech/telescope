@@ -350,7 +350,7 @@ export const QueryConnectionResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryConnectionResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryConnectionResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryConnectionResponse();
@@ -516,7 +516,7 @@ export const QueryConnectionsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryConnectionsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryConnectionsResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryConnectionsResponse();
@@ -694,7 +694,7 @@ export const QueryClientConnectionsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryClientConnectionsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryClientConnectionsResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryClientConnectionsResponse();
@@ -872,7 +872,7 @@ export const QueryConnectionClientStateResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryConnectionClientStateResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryConnectionClientStateResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryConnectionClientStateResponse();
@@ -1071,7 +1071,7 @@ export const QueryConnectionConsensusStateResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryConnectionConsensusStateResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryConnectionConsensusStateResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryConnectionConsensusStateResponse();

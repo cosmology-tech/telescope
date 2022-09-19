@@ -1518,7 +1518,7 @@ export const GetAuthnDescriptorResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): GetAuthnDescriptorResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): GetAuthnDescriptorResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetAuthnDescriptorResponse();
@@ -1639,7 +1639,7 @@ export const GetChainDescriptorResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): GetChainDescriptorResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): GetChainDescriptorResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetChainDescriptorResponse();
@@ -1760,7 +1760,7 @@ export const GetCodecDescriptorResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): GetCodecDescriptorResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): GetCodecDescriptorResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetCodecDescriptorResponse();
@@ -1881,7 +1881,7 @@ export const GetConfigurationDescriptorResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): GetConfigurationDescriptorResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): GetConfigurationDescriptorResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetConfigurationDescriptorResponse();
@@ -2002,7 +2002,7 @@ export const GetQueryServicesDescriptorResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): GetQueryServicesDescriptorResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): GetQueryServicesDescriptorResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetQueryServicesDescriptorResponse();
@@ -2123,7 +2123,7 @@ export const GetTxDescriptorResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): GetTxDescriptorResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): GetTxDescriptorResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetTxDescriptorResponse();

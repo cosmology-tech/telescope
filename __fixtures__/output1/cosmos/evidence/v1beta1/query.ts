@@ -154,7 +154,7 @@ export const QueryEvidenceResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryEvidenceResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryEvidenceResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryEvidenceResponse();
@@ -297,7 +297,7 @@ export const QueryAllEvidenceResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryAllEvidenceResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryAllEvidenceResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryAllEvidenceResponse();

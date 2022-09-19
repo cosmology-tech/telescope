@@ -88,7 +88,7 @@ export const QueryConfigResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryConfigResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryConfigResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryConfigResponse();

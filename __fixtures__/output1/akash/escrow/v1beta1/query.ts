@@ -211,7 +211,7 @@ export const QueryAccountsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryAccountsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryAccountsResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryAccountsResponse();
@@ -445,7 +445,7 @@ export const QueryPaymentsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryPaymentsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryPaymentsResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryPaymentsResponse();

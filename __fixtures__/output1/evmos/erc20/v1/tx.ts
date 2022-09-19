@@ -187,7 +187,7 @@ export const MsgConvertCoinResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgConvertCoinResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgConvertCoinResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgConvertCoinResponse();
@@ -350,7 +350,7 @@ export const MsgConvertERC20Response = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgConvertERC20Response {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgConvertERC20ResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgConvertERC20Response();

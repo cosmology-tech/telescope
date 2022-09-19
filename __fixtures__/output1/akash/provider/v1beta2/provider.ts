@@ -306,7 +306,7 @@ export const MsgCreateProviderResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateProviderResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateProviderResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateProviderResponse();
@@ -481,7 +481,7 @@ export const MsgUpdateProviderResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateProviderResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateProviderResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpdateProviderResponse();
@@ -602,7 +602,7 @@ export const MsgDeleteProviderResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgDeleteProviderResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgDeleteProviderResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgDeleteProviderResponse();

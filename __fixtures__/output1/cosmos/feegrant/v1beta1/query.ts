@@ -200,7 +200,7 @@ export const QueryAllowanceResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryAllowanceResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryAllowanceResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryAllowanceResponse();
@@ -357,7 +357,7 @@ export const QueryAllowancesResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryAllowancesResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryAllowancesResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryAllowancesResponse();
@@ -535,7 +535,7 @@ export const QueryAllowancesByGranterResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryAllowancesByGranterResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryAllowancesByGranterResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryAllowancesByGranterResponse();

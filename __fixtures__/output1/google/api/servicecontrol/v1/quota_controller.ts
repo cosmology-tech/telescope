@@ -973,7 +973,7 @@ export const AllocateQuotaResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): AllocateQuotaResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): AllocateQuotaResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAllocateQuotaResponse();

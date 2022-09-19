@@ -236,7 +236,7 @@ export const QueryDevFeeInfosResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryDevFeeInfosResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryDevFeeInfosResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDevFeeInfosResponse();
@@ -395,7 +395,7 @@ export const QueryDevFeeInfoResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryDevFeeInfoResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryDevFeeInfoResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDevFeeInfoResponse();
@@ -516,7 +516,7 @@ export const QueryParamsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryParamsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryParamsResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryParamsResponse();
@@ -673,7 +673,7 @@ export const QueryDevFeeInfosPerDeployerResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryDevFeeInfosPerDeployerResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryDevFeeInfosPerDeployerResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDevFeeInfosPerDeployerResponse();

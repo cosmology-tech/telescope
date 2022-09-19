@@ -849,7 +849,7 @@ export const ManagedService = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ManagedService {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ManagedServiceSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseManagedService();
@@ -1612,7 +1612,7 @@ export const Rollout = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): Rollout {
+  decode(input: _m0.Reader | Uint8Array, length?: number): RolloutSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseRollout();

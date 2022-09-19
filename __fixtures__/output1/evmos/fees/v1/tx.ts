@@ -268,7 +268,7 @@ export const MsgRegisterDevFeeInfoResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgRegisterDevFeeInfoResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgRegisterDevFeeInfoResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgRegisterDevFeeInfoResponse();
@@ -403,7 +403,7 @@ export const MsgCancelDevFeeInfoResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCancelDevFeeInfoResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCancelDevFeeInfoResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCancelDevFeeInfoResponse();
@@ -552,7 +552,7 @@ export const MsgUpdateDevFeeInfoResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateDevFeeInfoResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateDevFeeInfoResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpdateDevFeeInfoResponse();

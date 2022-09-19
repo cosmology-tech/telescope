@@ -1592,7 +1592,7 @@ export const ListServicesResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ListServicesResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ListServicesResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListServicesResponse();
@@ -1893,7 +1893,7 @@ export const ListConsumerQuotaMetricsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ListConsumerQuotaMetricsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ListConsumerQuotaMetricsResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListConsumerQuotaMetricsResponse();
@@ -2656,7 +2656,7 @@ export const ListAdminOverridesResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ListAdminOverridesResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ListAdminOverridesResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListAdminOverridesResponse();
@@ -3602,7 +3602,7 @@ export const ListConsumerOverridesResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ListConsumerOverridesResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ListConsumerOverridesResponseSDKType {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListConsumerOverridesResponse();
