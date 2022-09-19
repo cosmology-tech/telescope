@@ -1,21 +1,41 @@
 
 import * as t from '@babel/types';
 import { identifier, objectMethod } from '../../../utils';
-import { ProtoService } from '@osmonauts/types';
+import { ProtoService, ProtoServiceMethod } from '@osmonauts/types';
 import { GenericParseContext } from '../../../encoding';
 import { camel } from '@osmonauts/utils';
 
 const rpcExtensionMethod = (
     name: string,
-    requestType: string,
-    responseType: string
+    svc: ProtoServiceMethod
 ) => {
-    return objectMethod('method', t.identifier(name), [
-        identifier('request', t.tsTypeAnnotation(
+    const requestType = svc.requestType;
+    const responseType = svc.responseType;
+    const fieldNames = Object.keys(svc.fields ?? {})
+    const hasParams = fieldNames.length > 0;
+
+    let optional = false;
+    // // if no params, then let's default to empty object for cleaner API
+    if (!hasParams) {
+        optional = true;
+    } else if (hasParams && fieldNames.length === 1 && fieldNames.includes('pagination')) {
+        // if only argument "required" is pagination
+        // also default to empty
+        optional = true;
+    }
+
+    const methodArgs: t.Identifier = identifier(
+        'request',
+        t.tsTypeAnnotation(
             t.tsTypeReference(
                 t.identifier(requestType)
             )
-        ))
+        ),
+        optional
+    );
+
+    return objectMethod('method', t.identifier(name), [
+        methodArgs
     ], t.blockStatement([
         t.returnStatement(
             t.callExpression(
@@ -66,8 +86,7 @@ export const createRpcQueryExtension = (
             const name = camelRpcMethods ? camel(key) : key;
             return rpcExtensionMethod(
                 name,
-                method.requestType,
-                method.responseType
+                method
             )
         });
 
