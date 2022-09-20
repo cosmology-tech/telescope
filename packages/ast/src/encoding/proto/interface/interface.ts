@@ -75,6 +75,7 @@ export const createProtoType = (
     // hard-code optionality for pagination
     if (context.ref.proto.package === 'cosmos.base.query.v1beta1') {
         if (name === 'PageRequest') {
+            optionalityMap['key'] = true;
             optionalityMap['offset'] = true;
             optionalityMap['limit'] = true;
             optionalityMap['count_total'] = true;

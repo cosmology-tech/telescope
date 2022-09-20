@@ -16,4 +16,4 @@ export interface PageRequestParams {
 export interface Params {
     params: PageRequestParams;
 }
-export declare const setPaginationParams: (options: Params, pagination: PageRequest) => Params;
+export declare const setPaginationParams: (options: Params, pagination?: PageRequest) => Params;

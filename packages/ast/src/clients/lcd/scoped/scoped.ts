@@ -1,11 +1,12 @@
 import * as t from '@babel/types';
+import { GenericParseContext } from '../../../encoding';
 import { objectPattern } from '../../../utils';
 
 export const lcdArguments = (): t.ObjectProperty[] => {
     return [
         t.objectProperty(
-            t.identifier('restEndpoint'),
-            t.identifier('restEndpoint'),
+            t.identifier('requestClient'),
+            t.identifier('requestClient'),
             false,
             true
         )
@@ -15,7 +16,14 @@ export const lcdArguments = (): t.ObjectProperty[] => {
 export const lcdFuncArguments = (): t.ObjectPattern[] => {
     return [
         objectPattern(
-            lcdArguments(),
+            [
+                t.objectProperty(
+                    t.identifier('restEndpoint'),
+                    t.identifier('restEndpoint'),
+                    false,
+                    true
+                )
+            ],
             t.tsTypeAnnotation(
                 t.tsTypeLiteral([
                     t.tsPropertySignature(
@@ -104,10 +112,14 @@ export const lcdNestedImportObject = (
 };
 
 export const createScopedLCDFactory = (
+    context: GenericParseContext,
     obj: object,
     identifier: string,
     className: string
 ) => {
+
+    context.addUtil('LCDClient');
+
     return t.exportNamedDeclaration(
         t.variableDeclaration(
             'const',
@@ -117,11 +129,45 @@ export const createScopedLCDFactory = (
                     t.arrowFunctionExpression(
                         lcdFuncArguments(),
                         //
-                        lcdNestedImportObject(
-                            obj,
-                            className,
-                            lcdClassArguments()
-                        ),
+
+                        t.blockStatement([
+                            t.variableDeclaration(
+                                'const',
+                                [
+                                    t.variableDeclarator(
+                                        t.identifier('requestClient'),
+                                        t.newExpression(
+                                            t.identifier('LCDClient'),
+                                            [
+                                                t.objectExpression(
+                                                    [
+                                                        t.objectProperty(
+                                                            t.identifier('restEndpoint'),
+                                                            t.identifier('restEndpoint'),
+                                                            false,
+                                                            true
+                                                        )
+                                                    ]
+                                                )
+                                            ]
+                                        )
+                                    )
+                                ]
+                            ),
+                            ////
+                            t.returnStatement(
+                                lcdNestedImportObject(
+                                    obj,
+                                    className,
+                                    lcdClassArguments()
+                                )
+                            ),
+                        ]),
+                        // lcdNestedImportObject(
+                        //     obj,
+                        //     className,
+                        //     lcdClassArguments()
+                        // ),
                         true
                     )
                 )

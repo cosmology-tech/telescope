@@ -20,7 +20,7 @@ export interface Params {
     params: PageRequestParams;
 }
 
-export const setPaginationParams = (options: Params, pagination: PageRequest) => {
+export const setPaginationParams = (options: Params, pagination?: PageRequest) => {
 
     if (!pagination) {
         return options;

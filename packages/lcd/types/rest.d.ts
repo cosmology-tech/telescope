@@ -1,6 +1,6 @@
 export declare class LCDClient {
     restEndpoint: string;
-    instance: any;
+    private instance;
     constructor({ restEndpoint }: {
         restEndpoint: any;
     });

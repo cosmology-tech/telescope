@@ -1,7 +1,7 @@
 import axios from 'axios';
 export class LCDClient {
     restEndpoint: string;
-    instance: any;
+    private instance: any;
 
     constructor({ restEndpoint }) {
         this.restEndpoint = restEndpoint.endsWith('/') ? restEndpoint : `${restEndpoint}/`;

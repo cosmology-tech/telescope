@@ -41,7 +41,10 @@ const returnAwaitRequest = (
         t.awaitExpression(
             callExpression(
                 t.memberExpression(
-                    t.thisExpression(),
+                    t.memberExpression(
+                        t.thisExpression(),
+                        t.identifier('req')
+                    ),
                     t.identifier('get')
                 ),
                 args,
@@ -402,19 +405,29 @@ const createLCDClientClassBody = (
 
     let boundMethods = [];
     // until the super() issue is figured out, we have to remove this
-    // if (service) {
-    //     boundMethods = Object.keys(service.methods).map(key => {
-    //         const method: ProtoServiceMethod = service.methods[key];
-    //         const methodName = firstLower(method.name);
-    //         return bindThis(methodName)
-    //     })
-    // }
+    if (service) {
+        boundMethods = Object.keys(service.methods).map(key => {
+            const method: ProtoServiceMethod = service.methods[key];
+            const methodName = firstLower(method.name);
+            return bindThis(methodName)
+        })
+    }
 
     return t.exportNamedDeclaration(
         t.classDeclaration(
             t.identifier(clientName),
-            t.identifier('LCDClient'),
+            null,
             t.classBody([
+
+                t.classProperty(
+                    t.identifier('req'),
+                    null,
+                    t.tsTypeAnnotation(
+                        t.tsTypeReference(
+                            t.identifier('LCDClient')
+                        )
+                    )
+                ),
                 // constructor
                 t.classMethod(
                     'constructor',
@@ -422,17 +435,19 @@ const createLCDClientClassBody = (
                     [
                         objectPattern([
                             t.objectProperty(
-                                t.identifier('restEndpoint'),
-                                t.identifier('restEndpoint'),
+                                t.identifier('requestClient'),
+                                t.identifier('requestClient'),
                                 false,
                                 true
                             )],
                             t.tsTypeAnnotation(
                                 t.tsTypeLiteral([
                                     t.tsPropertySignature(
-                                        t.identifier('restEndpoint'),
+                                        t.identifier('requestClient'),
                                         t.tsTypeAnnotation(
-                                            t.tsStringKeyword()
+                                            t.tsTypeReference(
+                                                t.identifier('LCDClient')
+                                            )
                                         )
                                     )
                                 ])
@@ -440,22 +455,14 @@ const createLCDClientClassBody = (
                         )
                     ],
                     t.blockStatement([
-                        //
                         t.expressionStatement(
-                            t.callExpression(
-                                t.super(),
-                                [
-                                    t.objectExpression(
-                                        [
-                                            t.objectProperty(
-                                                t.identifier('restEndpoint'),
-                                                t.identifier('restEndpoint'),
-                                                false,
-                                                true
-                                            )
-                                        ]
-                                    )
-                                ]
+                            t.assignmentExpression(
+                                '=',
+                                t.memberExpression(
+                                    t.thisExpression(),
+                                    t.identifier('req')
+                                ),
+                                t.identifier('requestClient')
                             )
                         ),
                         /// methods

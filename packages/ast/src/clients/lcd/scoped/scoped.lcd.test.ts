@@ -1,4 +1,4 @@
-import { expectCode } from '../../../../test-utils'
+import { expectCode, getGenericParseContext } from '../../../../test-utils'
 
 import {
     lcdRecursiveObjectProps,
@@ -10,7 +10,8 @@ it('lcdRecursiveObjectProps', async () => {
 });
 
 it('createScopedLCDFactory', async () => {
-    expectCode(createScopedLCDFactory({
+    const context = getGenericParseContext();
+    expectCode(createScopedLCDFactory(context, {
         cosmos: {
             bank: {
                 v1beta1: "./proto/cosmos/bank/v1beta1/query.lcd"

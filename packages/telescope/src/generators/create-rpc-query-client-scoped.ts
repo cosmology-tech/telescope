@@ -119,8 +119,8 @@ const makeRPC = (
     const rpcast = createScopedRpcTmFactory(
         ctx.proto,
         obj,
-        methodName,
-        'QueryClientImpl' // make option later
+        methodName
+        // 'QueryClientImpl' // make option later
     );
 
     const serviceImports = getDepsFromQueries(
