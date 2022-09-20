@@ -12,9 +12,6 @@ export class LCDQueryClient extends LCDClient {
     super({
       restEndpoint
     });
-    this.allowance = this.allowance.bind(this);
-    this.allowances = this.allowances.bind(this);
-    this.allowancesByGranter = this.allowancesByGranter.bind(this);
   }
 
   /* Allowance returns fee granted to the grantee by the granter. */

@@ -13,22 +13,6 @@ export class LCDQueryClient extends LCDClient {
     super({
       restEndpoint
     });
-    this.moduleBalance = this.moduleBalance.bind(this);
-    this.moduleLockedAmount = this.moduleLockedAmount.bind(this);
-    this.accountUnlockableCoins = this.accountUnlockableCoins.bind(this);
-    this.accountUnlockingCoins = this.accountUnlockingCoins.bind(this);
-    this.accountLockedCoins = this.accountLockedCoins.bind(this);
-    this.accountLockedPastTime = this.accountLockedPastTime.bind(this);
-    this.accountLockedPastTimeNotUnlockingOnly = this.accountLockedPastTimeNotUnlockingOnly.bind(this);
-    this.accountUnlockedBeforeTime = this.accountUnlockedBeforeTime.bind(this);
-    this.accountLockedPastTimeDenom = this.accountLockedPastTimeDenom.bind(this);
-    this.lockedDenom = this.lockedDenom.bind(this);
-    this.lockedByID = this.lockedByID.bind(this);
-    this.syntheticLockupsByLockupID = this.syntheticLockupsByLockupID.bind(this);
-    this.accountLockedLongerDuration = this.accountLockedLongerDuration.bind(this);
-    this.accountLockedDuration = this.accountLockedDuration.bind(this);
-    this.accountLockedLongerDurationNotUnlockingOnly = this.accountLockedLongerDurationNotUnlockingOnly.bind(this);
-    this.accountLockedLongerDurationDenom = this.accountLockedLongerDurationDenom.bind(this);
   }
 
   /* Return full balance of the module */

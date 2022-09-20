@@ -12,20 +12,6 @@ export class LCDQueryClient extends LCDClient {
     super({
       restEndpoint
     });
-    this.validators = this.validators.bind(this);
-    this.validator = this.validator.bind(this);
-    this.validatorDelegations = this.validatorDelegations.bind(this);
-    this.validatorUnbondingDelegations = this.validatorUnbondingDelegations.bind(this);
-    this.delegation = this.delegation.bind(this);
-    this.unbondingDelegation = this.unbondingDelegation.bind(this);
-    this.delegatorDelegations = this.delegatorDelegations.bind(this);
-    this.delegatorUnbondingDelegations = this.delegatorUnbondingDelegations.bind(this);
-    this.redelegations = this.redelegations.bind(this);
-    this.delegatorValidators = this.delegatorValidators.bind(this);
-    this.delegatorValidator = this.delegatorValidator.bind(this);
-    this.historicalInfo = this.historicalInfo.bind(this);
-    this.pool = this.pool.bind(this);
-    this.params = this.params.bind(this);
   }
 
   /* Validators queries all validators that match the given status. */

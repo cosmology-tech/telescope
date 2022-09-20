@@ -10,7 +10,6 @@ export class LCDQueryClient extends LCDClient {
     super({
       restEndpoint
     });
-    this.params = this.params.bind(this);
   }
 
   /* Params retrieves the total set of recovery parameters. */

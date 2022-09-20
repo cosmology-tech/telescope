@@ -12,14 +12,6 @@ export class LCDQueryClient extends LCDClient {
     super({
       restEndpoint
     });
-    this.proposal = this.proposal.bind(this);
-    this.proposals = this.proposals.bind(this);
-    this.vote = this.vote.bind(this);
-    this.votes = this.votes.bind(this);
-    this.params = this.params.bind(this);
-    this.deposit = this.deposit.bind(this);
-    this.deposits = this.deposits.bind(this);
-    this.tallyResult = this.tallyResult.bind(this);
   }
 
   /* Proposal queries proposal details based on ProposalID. */

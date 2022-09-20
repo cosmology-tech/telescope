@@ -11,12 +11,6 @@ export class LCDQueryClient extends LCDClient {
     super({
       restEndpoint
     });
-    this.period = this.period.bind(this);
-    this.epochMintProvision = this.epochMintProvision.bind(this);
-    this.skippedEpochs = this.skippedEpochs.bind(this);
-    this.circulatingSupply = this.circulatingSupply.bind(this);
-    this.inflationRate = this.inflationRate.bind(this);
-    this.params = this.params.bind(this);
   }
 
   /* Period retrieves current period. */

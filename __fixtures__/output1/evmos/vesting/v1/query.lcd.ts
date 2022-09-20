@@ -10,7 +10,6 @@ export class LCDQueryClient extends LCDClient {
     super({
       restEndpoint
     });
-    this.balances = this.balances.bind(this);
   }
 
   /* Retrieves the unvested, vested and locked tokens for a vesting account */

@@ -10,11 +10,6 @@ export class LCDQueryClient extends LCDClient {
     super({
       restEndpoint
     });
-    this.currentPlan = this.currentPlan.bind(this);
-    this.appliedPlan = this.appliedPlan.bind(this);
-    this.upgradedConsensusState = this.upgradedConsensusState.bind(this);
-    this.moduleVersions = this.moduleVersions.bind(this);
-    this.authority = this.authority.bind(this);
   }
 
   /* CurrentPlan queries the current upgrade plan. */

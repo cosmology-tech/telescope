@@ -12,19 +12,6 @@ export class LCDQueryClient extends LCDClient {
     super({
       restEndpoint
     });
-    this.groupInfo = this.groupInfo.bind(this);
-    this.groupPolicyInfo = this.groupPolicyInfo.bind(this);
-    this.groupMembers = this.groupMembers.bind(this);
-    this.groupsByAdmin = this.groupsByAdmin.bind(this);
-    this.groupPoliciesByGroup = this.groupPoliciesByGroup.bind(this);
-    this.groupPoliciesByAdmin = this.groupPoliciesByAdmin.bind(this);
-    this.proposal = this.proposal.bind(this);
-    this.proposalsByGroupPolicy = this.proposalsByGroupPolicy.bind(this);
-    this.voteByProposalVoter = this.voteByProposalVoter.bind(this);
-    this.votesByProposal = this.votesByProposal.bind(this);
-    this.votesByVoter = this.votesByVoter.bind(this);
-    this.groupsByMember = this.groupsByMember.bind(this);
-    this.tallyResult = this.tallyResult.bind(this);
   }
 
   /* GroupInfo queries group info based on group id. */

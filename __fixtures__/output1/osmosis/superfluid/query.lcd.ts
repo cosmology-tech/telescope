@@ -15,18 +15,6 @@ export class LCDQueryClient extends LCDClient {
     super({
       restEndpoint
     });
-    this.params = this.params.bind(this);
-    this.assetType = this.assetType.bind(this);
-    this.allAssets = this.allAssets.bind(this);
-    this.assetMultiplier = this.assetMultiplier.bind(this);
-    this.allIntermediaryAccounts = this.allIntermediaryAccounts.bind(this);
-    this.connectedIntermediaryAccount = this.connectedIntermediaryAccount.bind(this);
-    this.totalSuperfluidDelegations = this.totalSuperfluidDelegations.bind(this);
-    this.superfluidDelegationAmount = this.superfluidDelegationAmount.bind(this);
-    this.superfluidDelegationsByDelegator = this.superfluidDelegationsByDelegator.bind(this);
-    this.superfluidUndelegationsByDelegator = this.superfluidUndelegationsByDelegator.bind(this);
-    this.superfluidDelegationsByValidatorDenom = this.superfluidDelegationsByValidatorDenom.bind(this);
-    this.estimateSuperfluidDelegatedAmountByValidatorDenom = this.estimateSuperfluidDelegatedAmountByValidatorDenom.bind(this);
   }
 
   /* Params returns the total set of minting parameters. */

@@ -14,10 +14,6 @@ export class LCDQueryClient extends LCDClient {
     super({
       restEndpoint
     });
-    this.totalUnclaimed = this.totalUnclaimed.bind(this);
-    this.params = this.params.bind(this);
-    this.claimsRecords = this.claimsRecords.bind(this);
-    this.claimsRecord = this.claimsRecord.bind(this);
   }
 
   /* TotalUnclaimed queries the total unclaimed tokens from the airdrop */

@@ -12,9 +12,6 @@ export class LCDQueryClient extends LCDClient {
     super({
       restEndpoint
     });
-    this.params = this.params.bind(this);
-    this.signingInfo = this.signingInfo.bind(this);
-    this.signingInfos = this.signingInfos.bind(this);
   }
 
   /* Params queries the parameters of slashing module */

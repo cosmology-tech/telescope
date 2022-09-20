@@ -13,15 +13,6 @@ export class LCDQueryClient extends LCDClient {
     super({
       restEndpoint
     });
-    this.params = this.params.bind(this);
-    this.validatorOutstandingRewards = this.validatorOutstandingRewards.bind(this);
-    this.validatorCommission = this.validatorCommission.bind(this);
-    this.validatorSlashes = this.validatorSlashes.bind(this);
-    this.delegationRewards = this.delegationRewards.bind(this);
-    this.delegationTotalRewards = this.delegationTotalRewards.bind(this);
-    this.delegatorValidators = this.delegatorValidators.bind(this);
-    this.delegatorWithdrawAddress = this.delegatorWithdrawAddress.bind(this);
-    this.communityPool = this.communityPool.bind(this);
   }
 
   /* Params queries params of the distribution module. */

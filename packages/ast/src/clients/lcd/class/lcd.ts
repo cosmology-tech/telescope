@@ -401,13 +401,14 @@ const createLCDClientClassBody = (
 ) => {
 
     let boundMethods = [];
-    if (service) {
-        boundMethods = Object.keys(service.methods).map(key => {
-            const method: ProtoServiceMethod = service.methods[key];
-            const methodName = firstLower(method.name);
-            return bindThis(methodName)
-        })
-    }
+    // until the super() issue is figured out, we have to remove this
+    // if (service) {
+    //     boundMethods = Object.keys(service.methods).map(key => {
+    //         const method: ProtoServiceMethod = service.methods[key];
+    //         const methodName = firstLower(method.name);
+    //         return bindThis(methodName)
+    //     })
+    // }
 
     return t.exportNamedDeclaration(
         t.classDeclaration(

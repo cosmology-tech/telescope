@@ -12,10 +12,6 @@ export class LCDQueryClient extends LCDClient {
     super({
       restEndpoint
     });
-    this.allProvidersAttributes = this.allProvidersAttributes.bind(this);
-    this.providerAttributes = this.providerAttributes.bind(this);
-    this.providerAuditorAttributes = this.providerAuditorAttributes.bind(this);
-    this.auditorAttributes = this.auditorAttributes.bind(this);
   }
 
   /* AllProvidersAttributes queries all providers

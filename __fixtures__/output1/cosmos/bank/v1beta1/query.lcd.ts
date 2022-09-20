@@ -13,15 +13,6 @@ export class LCDQueryClient extends LCDClient {
     super({
       restEndpoint
     });
-    this.balance = this.balance.bind(this);
-    this.allBalances = this.allBalances.bind(this);
-    this.spendableBalances = this.spendableBalances.bind(this);
-    this.totalSupply = this.totalSupply.bind(this);
-    this.supplyOf = this.supplyOf.bind(this);
-    this.params = this.params.bind(this);
-    this.denomMetadata = this.denomMetadata.bind(this);
-    this.denomsMetadata = this.denomsMetadata.bind(this);
-    this.denomOwners = this.denomOwners.bind(this);
   }
 
   /* Balance queries the balance of a single coin for a single account. */

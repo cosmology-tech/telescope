@@ -13,13 +13,6 @@ export class LCDQueryClient extends LCDClient {
     super({
       restEndpoint
     });
-    this.accounts = this.accounts.bind(this);
-    this.account = this.account.bind(this);
-    this.params = this.params.bind(this);
-    this.moduleAccounts = this.moduleAccounts.bind(this);
-    this.bech32Prefix = this.bech32Prefix.bind(this);
-    this.addressBytesToString = this.addressBytesToString.bind(this);
-    this.addressStringToBytes = this.addressStringToBytes.bind(this);
   }
 
   /* Accounts returns all the existing accounts

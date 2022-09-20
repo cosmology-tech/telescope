@@ -15,12 +15,6 @@ export class LCDQueryClient extends LCDClient {
     super({
       restEndpoint
     });
-    this.getNodeInfo = this.getNodeInfo.bind(this);
-    this.getSyncing = this.getSyncing.bind(this);
-    this.getLatestBlock = this.getLatestBlock.bind(this);
-    this.getBlockByHeight = this.getBlockByHeight.bind(this);
-    this.getLatestValidatorSet = this.getLatestValidatorSet.bind(this);
-    this.getValidatorSetByHeight = this.getValidatorSetByHeight.bind(this);
   }
 
   /* GetNodeInfo queries the current node info. */

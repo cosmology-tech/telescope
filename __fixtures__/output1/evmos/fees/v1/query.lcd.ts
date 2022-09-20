@@ -13,10 +13,6 @@ export class LCDQueryClient extends LCDClient {
     super({
       restEndpoint
     });
-    this.devFeeInfos = this.devFeeInfos.bind(this);
-    this.devFeeInfo = this.devFeeInfo.bind(this);
-    this.params = this.params.bind(this);
-    this.devFeeInfosPerDeployer = this.devFeeInfosPerDeployer.bind(this);
   }
 
   /* DevFeeInfos retrieves all registered contracts for fee distribution */

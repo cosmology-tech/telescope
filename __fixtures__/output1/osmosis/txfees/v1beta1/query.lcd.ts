@@ -10,10 +10,6 @@ export class LCDQueryClient extends LCDClient {
     super({
       restEndpoint
     });
-    this.feeTokens = this.feeTokens.bind(this);
-    this.denomSpotPrice = this.denomSpotPrice.bind(this);
-    this.denomPoolId = this.denomPoolId.bind(this);
-    this.baseDenom = this.baseDenom.bind(this);
   }
 
   /* FeeTokens returns a list of all the whitelisted fee tokens and their

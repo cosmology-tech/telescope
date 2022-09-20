@@ -12,7 +12,6 @@ export class LCDQueryClient extends LCDClient {
     super({
       restEndpoint
     });
-    this.certificates = this.certificates.bind(this);
   }
 
   /* Certificates queries certificates */

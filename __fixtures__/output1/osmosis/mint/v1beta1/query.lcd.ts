@@ -10,8 +10,6 @@ export class LCDQueryClient extends LCDClient {
     super({
       restEndpoint
     });
-    this.params = this.params.bind(this);
-    this.epochProvisions = this.epochProvisions.bind(this);
   }
 
   /* Params returns the total set of minting parameters. */

@@ -12,13 +12,6 @@ export class LCDQueryClient extends LCDClient {
     super({
       restEndpoint
     });
-    this.balance = this.balance.bind(this);
-    this.owner = this.owner.bind(this);
-    this.supply = this.supply.bind(this);
-    this.nFTs = this.nFTs.bind(this);
-    this.nFT = this.nFT.bind(this);
-    this.class = this.class.bind(this);
-    this.classes = this.classes.bind(this);
   }
 
   /* Balance queries the number of NFTs of a given class owned by the owner, same as balanceOf in ERC721 */

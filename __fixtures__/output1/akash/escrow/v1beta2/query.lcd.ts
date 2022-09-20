@@ -12,8 +12,6 @@ export class LCDQueryClient extends LCDClient {
     super({
       restEndpoint
     });
-    this.accounts = this.accounts.bind(this);
-    this.payments = this.payments.bind(this);
   }
 
   /* buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
