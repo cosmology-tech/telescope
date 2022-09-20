@@ -3,15 +3,17 @@ import { Account, AccountSDKType, Payment, PaymentSDKType } from "./types";
 import { setPaginationParams } from "@osmonauts/helpers";
 import { LCDClient } from "@osmonauts/lcd";
 import { QueryAccountsRequest, QueryAccountsRequestSDKType, QueryAccountsResponse, QueryAccountsResponseSDKType, QueryPaymentsRequest, QueryPaymentsRequestSDKType, QueryPaymentsResponse, QueryPaymentsResponseSDKType } from "./query";
-export class LCDQueryClient extends LCDClient {
+export class LCDQueryClient {
+  req: LCDClient;
+
   constructor({
-    restEndpoint
+    requestClient
   }: {
-    restEndpoint: string;
+    requestClient: LCDClient;
   }) {
-    super({
-      restEndpoint
-    });
+    this.req = requestClient;
+    this.accounts = this.accounts.bind(this);
+    this.payments = this.payments.bind(this);
   }
 
   /* buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
@@ -43,7 +45,7 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `akash/escrow/v1beta1/types/accounts/list`;
-    return await this.get<QueryAccountsResponseSDKType>(endpoint, options);
+    return await this.req.get<QueryAccountsResponseSDKType>(endpoint, options);
   }
 
   /* buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
@@ -79,7 +81,7 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `akash/escrow/v1beta1/types/payments/list`;
-    return await this.get<QueryPaymentsResponseSDKType>(endpoint, options);
+    return await this.req.get<QueryPaymentsResponseSDKType>(endpoint, options);
   }
 
 }
