@@ -62,6 +62,7 @@ const rpcMethodDefinition = (
 }
 
 // this.Accounts = this.Accounts.bind(this);
+// MARKED AS NOT DRY (used in rpc/lcd)
 const bindThis = (name: string) => {
     return t.expressionStatement(
         t.assignmentExpression(
