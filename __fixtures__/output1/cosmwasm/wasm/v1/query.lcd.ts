@@ -12,6 +12,15 @@ export class LCDQueryClient extends LCDClient {
     super({
       restEndpoint
     });
+    this.contractInfo = this.contractInfo.bind(this);
+    this.contractHistory = this.contractHistory.bind(this);
+    this.contractsByCode = this.contractsByCode.bind(this);
+    this.allContractState = this.allContractState.bind(this);
+    this.rawContractState = this.rawContractState.bind(this);
+    this.smartContractState = this.smartContractState.bind(this);
+    this.code = this.code.bind(this);
+    this.codes = this.codes.bind(this);
+    this.pinnedCodes = this.pinnedCodes.bind(this);
   }
 
   /* ContractInfo gets the contract meta data */

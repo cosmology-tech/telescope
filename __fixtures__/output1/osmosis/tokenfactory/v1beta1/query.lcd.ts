@@ -11,6 +11,9 @@ export class LCDQueryClient extends LCDClient {
     super({
       restEndpoint
     });
+    this.params = this.params.bind(this);
+    this.denomAuthorityMetadata = this.denomAuthorityMetadata.bind(this);
+    this.denomsFromCreator = this.denomsFromCreator.bind(this);
   }
 
   /* Params returns the total set of minting parameters. */

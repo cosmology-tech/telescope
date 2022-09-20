@@ -13,6 +13,14 @@ export class LCDQueryClient extends LCDClient {
     super({
       restEndpoint
     });
+    this.clientState = this.clientState.bind(this);
+    this.clientStates = this.clientStates.bind(this);
+    this.consensusState = this.consensusState.bind(this);
+    this.consensusStates = this.consensusStates.bind(this);
+    this.clientStatus = this.clientStatus.bind(this);
+    this.clientParams = this.clientParams.bind(this);
+    this.upgradedClientState = this.upgradedClientState.bind(this);
+    this.upgradedConsensusState = this.upgradedConsensusState.bind(this);
   }
 
   /* ClientState queries an IBC light client. */

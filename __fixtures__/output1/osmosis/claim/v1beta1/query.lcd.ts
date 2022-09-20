@@ -12,6 +12,11 @@ export class LCDQueryClient extends LCDClient {
     super({
       restEndpoint
     });
+    this.moduleAccountBalance = this.moduleAccountBalance.bind(this);
+    this.params = this.params.bind(this);
+    this.claimRecord = this.claimRecord.bind(this);
+    this.claimableForAction = this.claimableForAction.bind(this);
+    this.totalClaimable = this.totalClaimable.bind(this);
   }
 
   /* ModuleAccountBalance */

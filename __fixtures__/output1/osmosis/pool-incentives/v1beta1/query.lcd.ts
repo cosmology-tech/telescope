@@ -12,6 +12,12 @@ export class LCDQueryClient extends LCDClient {
     super({
       restEndpoint
     });
+    this.gaugeIds = this.gaugeIds.bind(this);
+    this.distrInfo = this.distrInfo.bind(this);
+    this.params = this.params.bind(this);
+    this.lockableDurations = this.lockableDurations.bind(this);
+    this.incentivizedPools = this.incentivizedPools.bind(this);
+    this.externalIncentiveGauges = this.externalIncentiveGauges.bind(this);
   }
 
   /* GaugeIds takes the pool id and returns the matching gauge ids and durations */

@@ -12,6 +12,9 @@ export class LCDQueryClient extends LCDClient {
     super({
       restEndpoint
     });
+    this.grants = this.grants.bind(this);
+    this.granterGrants = this.granterGrants.bind(this);
+    this.granteeGrants = this.granteeGrants.bind(this);
   }
 
   /* Returns list of `Authorization`, granted to the grantee by the granter. */

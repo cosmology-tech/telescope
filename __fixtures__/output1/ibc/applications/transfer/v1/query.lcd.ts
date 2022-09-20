@@ -12,6 +12,9 @@ export class LCDQueryClient extends LCDClient {
     super({
       restEndpoint
     });
+    this.denomTrace = this.denomTrace.bind(this);
+    this.denomTraces = this.denomTraces.bind(this);
+    this.params = this.params.bind(this);
   }
 
   /* DenomTrace queries a denomination trace information. */

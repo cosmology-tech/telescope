@@ -14,6 +14,9 @@ export class LCDQueryClient extends LCDClient {
     super({
       restEndpoint
     });
+    this.deployments = this.deployments.bind(this);
+    this.deployment = this.deployment.bind(this);
+    this.group = this.group.bind(this);
   }
 
   /* Deployments queries deployments */

@@ -14,6 +14,13 @@ export class LCDQueryClient extends LCDClient {
     super({
       restEndpoint
     });
+    this.incentives = this.incentives.bind(this);
+    this.incentive = this.incentive.bind(this);
+    this.gasMeters = this.gasMeters.bind(this);
+    this.gasMeter = this.gasMeter.bind(this);
+    this.allocationMeters = this.allocationMeters.bind(this);
+    this.allocationMeter = this.allocationMeter.bind(this);
+    this.params = this.params.bind(this);
   }
 
   /* Incentives retrieves registered incentives */

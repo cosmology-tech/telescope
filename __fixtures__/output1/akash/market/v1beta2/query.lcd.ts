@@ -15,6 +15,12 @@ export class LCDQueryClient extends LCDClient {
     super({
       restEndpoint
     });
+    this.orders = this.orders.bind(this);
+    this.order = this.order.bind(this);
+    this.bids = this.bids.bind(this);
+    this.bid = this.bid.bind(this);
+    this.leases = this.leases.bind(this);
+    this.lease = this.lease.bind(this);
   }
 
   /* Orders queries orders with filters */

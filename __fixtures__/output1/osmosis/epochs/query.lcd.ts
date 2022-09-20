@@ -10,6 +10,8 @@ export class LCDQueryClient extends LCDClient {
     super({
       restEndpoint
     });
+    this.epochInfos = this.epochInfos.bind(this);
+    this.currentEpoch = this.currentEpoch.bind(this);
   }
 
   /* EpochInfos provide running epochInfos */

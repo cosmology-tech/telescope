@@ -14,6 +14,16 @@ export class LCDQueryClient extends LCDClient {
     super({
       restEndpoint
     });
+    this.moduleToDistributeCoins = this.moduleToDistributeCoins.bind(this);
+    this.moduleDistributedCoins = this.moduleDistributedCoins.bind(this);
+    this.gaugeByID = this.gaugeByID.bind(this);
+    this.gauges = this.gauges.bind(this);
+    this.activeGauges = this.activeGauges.bind(this);
+    this.activeGaugesPerDenom = this.activeGaugesPerDenom.bind(this);
+    this.upcomingGauges = this.upcomingGauges.bind(this);
+    this.upcomingGaugesPerDenom = this.upcomingGaugesPerDenom.bind(this);
+    this.rewardsEst = this.rewardsEst.bind(this);
+    this.lockableDurations = this.lockableDurations.bind(this);
   }
 
   /* returns coins that is going to be distributed */

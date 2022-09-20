@@ -12,6 +12,8 @@ export class LCDQueryClient extends LCDClient {
     super({
       restEndpoint
     });
+    this.providers = this.providers.bind(this);
+    this.provider = this.provider.bind(this);
   }
 
   /* Providers queries providers */

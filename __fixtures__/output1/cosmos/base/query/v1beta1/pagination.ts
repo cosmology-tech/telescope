@@ -24,13 +24,13 @@ export interface PageRequest {
    * It is less efficient than using key. Only one of offset or key should
    * be set.
    */
-  offset: Long;
+  offset?: Long;
 
   /**
    * limit is the total number of results to be returned in the result page.
    * If left empty it will default to a value to be set by each app.
    */
-  limit: Long;
+  limit?: Long;
 
   /**
    * count_total is set to true  to indicate that the result set should include
@@ -38,14 +38,14 @@ export interface PageRequest {
    * count_total is only respected when offset is used. It is ignored when key
    * is set.
    */
-  countTotal: boolean;
+  countTotal?: boolean;
 
   /**
    * reverse is set to true if results are to be returned in the descending order.
    * 
    * Since: cosmos-sdk 0.43
    */
-  reverse: boolean;
+  reverse?: boolean;
 }
 
 /**
@@ -70,13 +70,13 @@ export interface PageRequestSDKType {
    * It is less efficient than using key. Only one of offset or key should
    * be set.
    */
-  offset: Long;
+  offset?: Long;
 
   /**
    * limit is the total number of results to be returned in the result page.
    * If left empty it will default to a value to be set by each app.
    */
-  limit: Long;
+  limit?: Long;
 
   /**
    * count_total is set to true  to indicate that the result set should include
@@ -84,14 +84,14 @@ export interface PageRequestSDKType {
    * count_total is only respected when offset is used. It is ignored when key
    * is set.
    */
-  count_total: boolean;
+  count_total?: boolean;
 
   /**
    * reverse is set to true if results are to be returned in the descending order.
    * 
    * Since: cosmos-sdk 0.43
    */
-  reverse: boolean;
+  reverse?: boolean;
 }
 
 /**
@@ -109,7 +109,7 @@ export interface PageResponse {
    * query the next page most efficiently. It will be empty if
    * there are no more results.
    */
-  nextKey: Uint8Array;
+  nextKey?: Uint8Array;
 
   /**
    * total is total number of results available if PageRequest.count_total
@@ -133,7 +133,7 @@ export interface PageResponseSDKType {
    * query the next page most efficiently. It will be empty if
    * there are no more results.
    */
-  next_key: Uint8Array;
+  next_key?: Uint8Array;
 
   /**
    * total is total number of results available if PageRequest.count_total

@@ -14,6 +14,11 @@ export class LCDQueryClient extends LCDClient {
     super({
       restEndpoint
     });
+    this.connection = this.connection.bind(this);
+    this.connections = this.connections.bind(this);
+    this.clientConnections = this.clientConnections.bind(this);
+    this.connectionClientState = this.connectionClientState.bind(this);
+    this.connectionConsensusState = this.connectionConsensusState.bind(this);
   }
 
   /* Connection queries an IBC connection end. */

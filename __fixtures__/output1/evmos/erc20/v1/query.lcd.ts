@@ -13,6 +13,9 @@ export class LCDQueryClient extends LCDClient {
     super({
       restEndpoint
     });
+    this.tokenPairs = this.tokenPairs.bind(this);
+    this.tokenPair = this.tokenPair.bind(this);
+    this.params = this.params.bind(this);
   }
 
   /* TokenPairs retrieves registered token pairs */

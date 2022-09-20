@@ -14,6 +14,16 @@ export class LCDQueryClient extends LCDClient {
     super({
       restEndpoint
     });
+    this.pools = this.pools.bind(this);
+    this.numPools = this.numPools.bind(this);
+    this.totalLiquidity = this.totalLiquidity.bind(this);
+    this.pool = this.pool.bind(this);
+    this.poolParams = this.poolParams.bind(this);
+    this.totalPoolLiquidity = this.totalPoolLiquidity.bind(this);
+    this.totalShares = this.totalShares.bind(this);
+    this.spotPrice = this.spotPrice.bind(this);
+    this.estimateSwapExactAmountIn = this.estimateSwapExactAmountIn.bind(this);
+    this.estimateSwapExactAmountOut = this.estimateSwapExactAmountOut.bind(this);
   }
 
   /* Pools */

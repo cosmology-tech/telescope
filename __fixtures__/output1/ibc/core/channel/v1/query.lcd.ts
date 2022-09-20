@@ -14,6 +14,19 @@ export class LCDQueryClient extends LCDClient {
     super({
       restEndpoint
     });
+    this.channel = this.channel.bind(this);
+    this.channels = this.channels.bind(this);
+    this.connectionChannels = this.connectionChannels.bind(this);
+    this.channelClientState = this.channelClientState.bind(this);
+    this.channelConsensusState = this.channelConsensusState.bind(this);
+    this.packetCommitment = this.packetCommitment.bind(this);
+    this.packetCommitments = this.packetCommitments.bind(this);
+    this.packetReceipt = this.packetReceipt.bind(this);
+    this.packetAcknowledgement = this.packetAcknowledgement.bind(this);
+    this.packetAcknowledgements = this.packetAcknowledgements.bind(this);
+    this.unreceivedPackets = this.unreceivedPackets.bind(this);
+    this.unreceivedAcks = this.unreceivedAcks.bind(this);
+    this.nextSequenceReceive = this.nextSequenceReceive.bind(this);
   }
 
   /* Channel queries an IBC Channel. */

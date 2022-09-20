@@ -15,6 +15,11 @@ export class LCDQueryClient extends LCDClient {
     super({
       restEndpoint
     });
+    this.simulate = this.simulate.bind(this);
+    this.getTx = this.getTx.bind(this);
+    this.broadcastTx = this.broadcastTx.bind(this);
+    this.getTxsEvent = this.getTxsEvent.bind(this);
+    this.getBlockWithTxs = this.getBlockWithTxs.bind(this);
   }
 
   /* GetTx fetches a tx by hash. */
