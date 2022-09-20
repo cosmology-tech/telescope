@@ -10,6 +10,15 @@ exports[`cosmos LCDClient 1`] = `
     super({
       restEndpoint
     });
+    this.balance = this.balance.bind(this);
+    this.allBalances = this.allBalances.bind(this);
+    this.spendableBalances = this.spendableBalances.bind(this);
+    this.totalSupply = this.totalSupply.bind(this);
+    this.supplyOf = this.supplyOf.bind(this);
+    this.params = this.params.bind(this);
+    this.denomMetadata = this.denomMetadata.bind(this);
+    this.denomsMetadata = this.denomsMetadata.bind(this);
+    this.denomOwners = this.denomOwners.bind(this);
   }
 
   /* Balance queries the balance of a single coin for a single account. */
@@ -142,6 +151,9 @@ exports[`cosmos fee LCDClient 1`] = `
     super({
       restEndpoint
     });
+    this.allowance = this.allowance.bind(this);
+    this.allowances = this.allowances.bind(this);
+    this.allowancesByGranter = this.allowancesByGranter.bind(this);
   }
 
   /* Allowance returns fee granted to the grantee by the granter. */
@@ -194,6 +206,19 @@ exports[`cosmos/group/v1/query.proto 1`] = `
     super({
       restEndpoint
     });
+    this.groupInfo = this.groupInfo.bind(this);
+    this.groupPolicyInfo = this.groupPolicyInfo.bind(this);
+    this.groupMembers = this.groupMembers.bind(this);
+    this.groupsByAdmin = this.groupsByAdmin.bind(this);
+    this.groupPoliciesByGroup = this.groupPoliciesByGroup.bind(this);
+    this.groupPoliciesByAdmin = this.groupPoliciesByAdmin.bind(this);
+    this.proposal = this.proposal.bind(this);
+    this.proposalsByGroupPolicy = this.proposalsByGroupPolicy.bind(this);
+    this.voteByProposalVoter = this.voteByProposalVoter.bind(this);
+    this.votesByProposal = this.votesByProposal.bind(this);
+    this.votesByVoter = this.votesByVoter.bind(this);
+    this.groupsByMember = this.groupsByMember.bind(this);
+    this.tallyResult = this.tallyResult.bind(this);
   }
 
   /* GroupInfo queries group info based on group id. */
@@ -351,6 +376,20 @@ exports[`cosmos/staking/v1beta1/query.proto 1`] = `
     super({
       restEndpoint
     });
+    this.validators = this.validators.bind(this);
+    this.validator = this.validator.bind(this);
+    this.validatorDelegations = this.validatorDelegations.bind(this);
+    this.validatorUnbondingDelegations = this.validatorUnbondingDelegations.bind(this);
+    this.delegation = this.delegation.bind(this);
+    this.unbondingDelegation = this.unbondingDelegation.bind(this);
+    this.delegatorDelegations = this.delegatorDelegations.bind(this);
+    this.delegatorUnbondingDelegations = this.delegatorUnbondingDelegations.bind(this);
+    this.redelegations = this.redelegations.bind(this);
+    this.delegatorValidators = this.delegatorValidators.bind(this);
+    this.delegatorValidator = this.delegatorValidator.bind(this);
+    this.historicalInfo = this.historicalInfo.bind(this);
+    this.pool = this.pool.bind(this);
+    this.params = this.params.bind(this);
   }
 
   /* Validators queries all validators that match the given status. */
@@ -522,6 +561,16 @@ exports[`osmosis LCDClient 1`] = `
     super({
       restEndpoint
     });
+    this.pools = this.pools.bind(this);
+    this.numPools = this.numPools.bind(this);
+    this.totalLiquidity = this.totalLiquidity.bind(this);
+    this.pool = this.pool.bind(this);
+    this.poolParams = this.poolParams.bind(this);
+    this.totalPoolLiquidity = this.totalPoolLiquidity.bind(this);
+    this.totalShares = this.totalShares.bind(this);
+    this.spotPrice = this.spotPrice.bind(this);
+    this.estimateSwapExactAmountIn = this.estimateSwapExactAmountIn.bind(this);
+    this.estimateSwapExactAmountOut = this.estimateSwapExactAmountOut.bind(this);
   }
 
   /* Pools */
