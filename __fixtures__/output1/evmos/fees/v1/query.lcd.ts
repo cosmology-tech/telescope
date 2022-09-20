@@ -4,15 +4,19 @@ import { Params, ParamsSDKType } from "./genesis";
 import { setPaginationParams } from "@osmonauts/helpers";
 import { LCDClient } from "@osmonauts/lcd";
 import { QueryDevFeeInfosRequest, QueryDevFeeInfosRequestSDKType, QueryDevFeeInfosResponse, QueryDevFeeInfosResponseSDKType, QueryDevFeeInfoRequest, QueryDevFeeInfoRequestSDKType, QueryDevFeeInfoResponse, QueryDevFeeInfoResponseSDKType, QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType, QueryDevFeeInfosPerDeployerRequest, QueryDevFeeInfosPerDeployerRequestSDKType, QueryDevFeeInfosPerDeployerResponse, QueryDevFeeInfosPerDeployerResponseSDKType } from "./query";
-export class LCDQueryClient extends LCDClient {
+export class LCDQueryClient {
+  req: LCDClient;
+
   constructor({
-    restEndpoint
+    requestClient
   }: {
-    restEndpoint: string;
+    requestClient: LCDClient;
   }) {
-    super({
-      restEndpoint
-    });
+    this.req = requestClient;
+    this.devFeeInfos = this.devFeeInfos.bind(this);
+    this.devFeeInfo = this.devFeeInfo.bind(this);
+    this.params = this.params.bind(this);
+    this.devFeeInfosPerDeployer = this.devFeeInfosPerDeployer.bind(this);
   }
 
   /* DevFeeInfos retrieves all registered contracts for fee distribution */
@@ -28,19 +32,19 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `evmos/fees/v1/fees`;
-    return await this.get<QueryDevFeeInfosResponseSDKType>(endpoint, options);
+    return await this.req.get<QueryDevFeeInfosResponseSDKType>(endpoint, options);
   }
 
   /* DevFeeInfo retrieves a registered contract for fee distribution */
   async devFeeInfo(params: QueryDevFeeInfoRequest): Promise<QueryDevFeeInfoResponseSDKType> {
     const endpoint = `evmos/fees/v1/fees/${params.contractAddress}`;
-    return await this.get<QueryDevFeeInfoResponseSDKType>(endpoint);
+    return await this.req.get<QueryDevFeeInfoResponseSDKType>(endpoint);
   }
 
   /* Params retrieves the fees module params */
   async params(_params: QueryParamsRequest = {}): Promise<QueryParamsResponseSDKType> {
     const endpoint = `evmos/fees/v1/params`;
-    return await this.get<QueryParamsResponseSDKType>(endpoint);
+    return await this.req.get<QueryParamsResponseSDKType>(endpoint);
   }
 
   /* DevFeeInfosPerDeployer retrieves all contracts that a deployer has
@@ -55,7 +59,7 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `evmos/fees/v1/fees/${params.deployerAddress}`;
-    return await this.get<QueryDevFeeInfosPerDeployerResponseSDKType>(endpoint, options);
+    return await this.req.get<QueryDevFeeInfosPerDeployerResponseSDKType>(endpoint, options);
   }
 
 }

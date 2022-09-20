@@ -17,7 +17,7 @@ export interface PageRequest {
    * querying the next page most efficiently. Only one of offset or key
    * should be set.
    */
-  key: Uint8Array;
+  key?: Uint8Array;
 
   /**
    * offset is a numeric offset that can be used when key is unavailable.
@@ -63,7 +63,7 @@ export interface PageRequestSDKType {
    * querying the next page most efficiently. Only one of offset or key
    * should be set.
    */
-  key: Uint8Array;
+  key?: Uint8Array;
 
   /**
    * offset is a numeric offset that can be used when key is unavailable.

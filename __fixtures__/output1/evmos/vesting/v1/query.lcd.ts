@@ -1,21 +1,22 @@
 import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { LCDClient } from "@osmonauts/lcd";
 import { QueryBalancesRequest, QueryBalancesRequestSDKType, QueryBalancesResponse, QueryBalancesResponseSDKType } from "./query";
-export class LCDQueryClient extends LCDClient {
+export class LCDQueryClient {
+  req: LCDClient;
+
   constructor({
-    restEndpoint
+    requestClient
   }: {
-    restEndpoint: string;
+    requestClient: LCDClient;
   }) {
-    super({
-      restEndpoint
-    });
+    this.req = requestClient;
+    this.balances = this.balances.bind(this);
   }
 
   /* Retrieves the unvested, vested and locked tokens for a vesting account */
   async balances(params: QueryBalancesRequest): Promise<QueryBalancesResponseSDKType> {
     const endpoint = `evmos/vesting/v1/balances/${params.address}`;
-    return await this.get<QueryBalancesResponseSDKType>(endpoint);
+    return await this.req.get<QueryBalancesResponseSDKType>(endpoint);
   }
 
 }

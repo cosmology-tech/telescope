@@ -3,15 +3,18 @@ import { Grant, GrantSDKType, GrantAuthorization, GrantAuthorizationSDKType } fr
 import { setPaginationParams } from "@osmonauts/helpers";
 import { LCDClient } from "@osmonauts/lcd";
 import { QueryGrantsRequest, QueryGrantsRequestSDKType, QueryGrantsResponse, QueryGrantsResponseSDKType, QueryGranterGrantsRequest, QueryGranterGrantsRequestSDKType, QueryGranterGrantsResponse, QueryGranterGrantsResponseSDKType, QueryGranteeGrantsRequest, QueryGranteeGrantsRequestSDKType, QueryGranteeGrantsResponse, QueryGranteeGrantsResponseSDKType } from "./query";
-export class LCDQueryClient extends LCDClient {
+export class LCDQueryClient {
+  req: LCDClient;
+
   constructor({
-    restEndpoint
+    requestClient
   }: {
-    restEndpoint: string;
+    requestClient: LCDClient;
   }) {
-    super({
-      restEndpoint
-    });
+    this.req = requestClient;
+    this.grants = this.grants.bind(this);
+    this.granterGrants = this.granterGrants.bind(this);
+    this.granteeGrants = this.granteeGrants.bind(this);
   }
 
   /* Returns list of `Authorization`, granted to the grantee by the granter. */
@@ -37,7 +40,7 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `cosmos/authz/v1beta1/grants`;
-    return await this.get<QueryGrantsResponseSDKType>(endpoint, options);
+    return await this.req.get<QueryGrantsResponseSDKType>(endpoint, options);
   }
 
   /* GranterGrants returns list of `GrantAuthorization`, granted by granter.
@@ -53,7 +56,7 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `cosmos/authz/v1beta1/grants/granter/${params.granter}`;
-    return await this.get<QueryGranterGrantsResponseSDKType>(endpoint, options);
+    return await this.req.get<QueryGranterGrantsResponseSDKType>(endpoint, options);
   }
 
   /* GranteeGrants returns a list of `GrantAuthorization` by grantee.
@@ -69,7 +72,7 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `cosmos/authz/v1beta1/grants/grantee/${params.grantee}`;
-    return await this.get<QueryGranteeGrantsResponseSDKType>(endpoint, options);
+    return await this.req.get<QueryGranteeGrantsResponseSDKType>(endpoint, options);
   }
 
 }

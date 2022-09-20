@@ -5,33 +5,43 @@ import { Duration, DurationSDKType } from "../../google/protobuf/duration";
 import { setPaginationParams } from "@osmonauts/helpers";
 import { LCDClient } from "@osmonauts/lcd";
 import { ModuleToDistributeCoinsRequest, ModuleToDistributeCoinsRequestSDKType, ModuleToDistributeCoinsResponse, ModuleToDistributeCoinsResponseSDKType, ModuleDistributedCoinsRequest, ModuleDistributedCoinsRequestSDKType, ModuleDistributedCoinsResponse, ModuleDistributedCoinsResponseSDKType, GaugeByIDRequest, GaugeByIDRequestSDKType, GaugeByIDResponse, GaugeByIDResponseSDKType, GaugesRequest, GaugesRequestSDKType, GaugesResponse, GaugesResponseSDKType, ActiveGaugesRequest, ActiveGaugesRequestSDKType, ActiveGaugesResponse, ActiveGaugesResponseSDKType, ActiveGaugesPerDenomRequest, ActiveGaugesPerDenomRequestSDKType, ActiveGaugesPerDenomResponse, ActiveGaugesPerDenomResponseSDKType, UpcomingGaugesRequest, UpcomingGaugesRequestSDKType, UpcomingGaugesResponse, UpcomingGaugesResponseSDKType, UpcomingGaugesPerDenomRequest, UpcomingGaugesPerDenomRequestSDKType, UpcomingGaugesPerDenomResponse, UpcomingGaugesPerDenomResponseSDKType, RewardsEstRequest, RewardsEstRequestSDKType, RewardsEstResponse, RewardsEstResponseSDKType, QueryLockableDurationsRequest, QueryLockableDurationsRequestSDKType, QueryLockableDurationsResponse, QueryLockableDurationsResponseSDKType } from "./query";
-export class LCDQueryClient extends LCDClient {
+export class LCDQueryClient {
+  req: LCDClient;
+
   constructor({
-    restEndpoint
+    requestClient
   }: {
-    restEndpoint: string;
+    requestClient: LCDClient;
   }) {
-    super({
-      restEndpoint
-    });
+    this.req = requestClient;
+    this.moduleToDistributeCoins = this.moduleToDistributeCoins.bind(this);
+    this.moduleDistributedCoins = this.moduleDistributedCoins.bind(this);
+    this.gaugeByID = this.gaugeByID.bind(this);
+    this.gauges = this.gauges.bind(this);
+    this.activeGauges = this.activeGauges.bind(this);
+    this.activeGaugesPerDenom = this.activeGaugesPerDenom.bind(this);
+    this.upcomingGauges = this.upcomingGauges.bind(this);
+    this.upcomingGaugesPerDenom = this.upcomingGaugesPerDenom.bind(this);
+    this.rewardsEst = this.rewardsEst.bind(this);
+    this.lockableDurations = this.lockableDurations.bind(this);
   }
 
   /* returns coins that is going to be distributed */
   async moduleToDistributeCoins(_params: ModuleToDistributeCoinsRequest = {}): Promise<ModuleToDistributeCoinsResponseSDKType> {
     const endpoint = `osmosis/incentives/v1beta1/module_to_distribute_coins`;
-    return await this.get<ModuleToDistributeCoinsResponseSDKType>(endpoint);
+    return await this.req.get<ModuleToDistributeCoinsResponseSDKType>(endpoint);
   }
 
   /* returns coins that are distributed by module so far */
   async moduleDistributedCoins(_params: ModuleDistributedCoinsRequest = {}): Promise<ModuleDistributedCoinsResponseSDKType> {
     const endpoint = `osmosis/incentives/v1beta1/module_distributed_coins`;
-    return await this.get<ModuleDistributedCoinsResponseSDKType>(endpoint);
+    return await this.req.get<ModuleDistributedCoinsResponseSDKType>(endpoint);
   }
 
   /* returns Gauge by id */
   async gaugeByID(params: GaugeByIDRequest): Promise<GaugeByIDResponseSDKType> {
     const endpoint = `osmosis/incentives/v1beta1/gauge_by_id/${params.id}`;
-    return await this.get<GaugeByIDResponseSDKType>(endpoint);
+    return await this.req.get<GaugeByIDResponseSDKType>(endpoint);
   }
 
   /* returns gauges both upcoming and active */
@@ -47,7 +57,7 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `osmosis/incentives/v1beta1/gauges`;
-    return await this.get<GaugesResponseSDKType>(endpoint, options);
+    return await this.req.get<GaugesResponseSDKType>(endpoint, options);
   }
 
   /* returns active gauges */
@@ -63,7 +73,7 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `osmosis/incentives/v1beta1/active_gauges`;
-    return await this.get<ActiveGaugesResponseSDKType>(endpoint, options);
+    return await this.req.get<ActiveGaugesResponseSDKType>(endpoint, options);
   }
 
   /* returns active gauges per denom */
@@ -81,7 +91,7 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `osmosis/incentives/v1beta1/active_gauges_per_denom`;
-    return await this.get<ActiveGaugesPerDenomResponseSDKType>(endpoint, options);
+    return await this.req.get<ActiveGaugesPerDenomResponseSDKType>(endpoint, options);
   }
 
   /* returns scheduled gauges */
@@ -97,7 +107,7 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `osmosis/incentives/v1beta1/upcoming_gauges`;
-    return await this.get<UpcomingGaugesResponseSDKType>(endpoint, options);
+    return await this.req.get<UpcomingGaugesResponseSDKType>(endpoint, options);
   }
 
   /* returns scheduled gauges per denom */
@@ -115,7 +125,7 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `osmosis/incentives/v1beta1/upcoming_gauges_per_denom`;
-    return await this.get<UpcomingGaugesPerDenomResponseSDKType>(endpoint, options);
+    return await this.req.get<UpcomingGaugesPerDenomResponseSDKType>(endpoint, options);
   }
 
   /* RewardsEst returns an estimate of the rewards at a future specific time.
@@ -135,13 +145,13 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `osmosis/incentives/v1beta1/rewards_est/${params.owner}`;
-    return await this.get<RewardsEstResponseSDKType>(endpoint, options);
+    return await this.req.get<RewardsEstResponseSDKType>(endpoint, options);
   }
 
   /* returns lockable durations that are valid to give incentives */
   async lockableDurations(_params: QueryLockableDurationsRequest = {}): Promise<QueryLockableDurationsResponseSDKType> {
     const endpoint = `osmosis/incentives/v1beta1/lockable_durations`;
-    return await this.get<QueryLockableDurationsResponseSDKType>(endpoint);
+    return await this.req.get<QueryLockableDurationsResponseSDKType>(endpoint);
   }
 
 }

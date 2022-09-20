@@ -3,51 +3,57 @@ import { DistrInfo, DistrInfoSDKType, Params, ParamsSDKType } from "./incentives
 import { Gauge, GaugeSDKType } from "../../incentives/gauge";
 import { LCDClient } from "@osmonauts/lcd";
 import { QueryGaugeIdsRequest, QueryGaugeIdsRequestSDKType, QueryGaugeIdsResponse, QueryGaugeIdsResponseSDKType, QueryDistrInfoRequest, QueryDistrInfoRequestSDKType, QueryDistrInfoResponse, QueryDistrInfoResponseSDKType, QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType, QueryLockableDurationsRequest, QueryLockableDurationsRequestSDKType, QueryLockableDurationsResponse, QueryLockableDurationsResponseSDKType, QueryIncentivizedPoolsRequest, QueryIncentivizedPoolsRequestSDKType, QueryIncentivizedPoolsResponse, QueryIncentivizedPoolsResponseSDKType, QueryExternalIncentiveGaugesRequest, QueryExternalIncentiveGaugesRequestSDKType, QueryExternalIncentiveGaugesResponse, QueryExternalIncentiveGaugesResponseSDKType } from "./query";
-export class LCDQueryClient extends LCDClient {
+export class LCDQueryClient {
+  req: LCDClient;
+
   constructor({
-    restEndpoint
+    requestClient
   }: {
-    restEndpoint: string;
+    requestClient: LCDClient;
   }) {
-    super({
-      restEndpoint
-    });
+    this.req = requestClient;
+    this.gaugeIds = this.gaugeIds.bind(this);
+    this.distrInfo = this.distrInfo.bind(this);
+    this.params = this.params.bind(this);
+    this.lockableDurations = this.lockableDurations.bind(this);
+    this.incentivizedPools = this.incentivizedPools.bind(this);
+    this.externalIncentiveGauges = this.externalIncentiveGauges.bind(this);
   }
 
   /* GaugeIds takes the pool id and returns the matching gauge ids and durations */
   async gaugeIds(params: QueryGaugeIdsRequest): Promise<QueryGaugeIdsResponseSDKType> {
     const endpoint = `osmosis/pool-incentives/v1beta1/gauge-ids/${params.poolId}`;
-    return await this.get<QueryGaugeIdsResponseSDKType>(endpoint);
+    return await this.req.get<QueryGaugeIdsResponseSDKType>(endpoint);
   }
 
   /* DistrInfo */
   async distrInfo(_params: QueryDistrInfoRequest = {}): Promise<QueryDistrInfoResponseSDKType> {
     const endpoint = `osmosis/pool-incentives/v1beta1/distr_info`;
-    return await this.get<QueryDistrInfoResponseSDKType>(endpoint);
+    return await this.req.get<QueryDistrInfoResponseSDKType>(endpoint);
   }
 
   /* Params */
   async params(_params: QueryParamsRequest = {}): Promise<QueryParamsResponseSDKType> {
     const endpoint = `osmosis/pool-incentives/v1beta1/params`;
-    return await this.get<QueryParamsResponseSDKType>(endpoint);
+    return await this.req.get<QueryParamsResponseSDKType>(endpoint);
   }
 
   /* LockableDurations */
   async lockableDurations(_params: QueryLockableDurationsRequest = {}): Promise<QueryLockableDurationsResponseSDKType> {
     const endpoint = `osmosis/pool-incentives/v1beta1/lockable_durations`;
-    return await this.get<QueryLockableDurationsResponseSDKType>(endpoint);
+    return await this.req.get<QueryLockableDurationsResponseSDKType>(endpoint);
   }
 
   /* IncentivizedPools */
   async incentivizedPools(_params: QueryIncentivizedPoolsRequest = {}): Promise<QueryIncentivizedPoolsResponseSDKType> {
     const endpoint = `osmosis/pool-incentives/v1beta1/incentivized_pools`;
-    return await this.get<QueryIncentivizedPoolsResponseSDKType>(endpoint);
+    return await this.req.get<QueryIncentivizedPoolsResponseSDKType>(endpoint);
   }
 
   /* ExternalIncentiveGauges */
   async externalIncentiveGauges(_params: QueryExternalIncentiveGaugesRequest = {}): Promise<QueryExternalIncentiveGaugesResponseSDKType> {
     const endpoint = `osmosis/pool-incentives/v1beta1/external_incentive_gauges`;
-    return await this.get<QueryExternalIncentiveGaugesResponseSDKType>(endpoint);
+    return await this.req.get<QueryExternalIncentiveGaugesResponseSDKType>(endpoint);
   }
 
 }

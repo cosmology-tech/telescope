@@ -5,15 +5,25 @@ import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { setPaginationParams } from "@osmonauts/helpers";
 import { LCDClient } from "@osmonauts/lcd";
 import { QueryPoolsRequest, QueryPoolsRequestSDKType, QueryPoolsResponse, QueryPoolsResponseSDKType, QueryNumPoolsRequest, QueryNumPoolsRequestSDKType, QueryNumPoolsResponse, QueryNumPoolsResponseSDKType, QueryTotalLiquidityRequest, QueryTotalLiquidityRequestSDKType, QueryTotalLiquidityResponse, QueryTotalLiquidityResponseSDKType, QueryPoolRequest, QueryPoolRequestSDKType, QueryPoolResponse, QueryPoolResponseSDKType, QueryPoolParamsRequest, QueryPoolParamsRequestSDKType, QueryPoolParamsResponse, QueryPoolParamsResponseSDKType, QueryTotalPoolLiquidityRequest, QueryTotalPoolLiquidityRequestSDKType, QueryTotalPoolLiquidityResponse, QueryTotalPoolLiquidityResponseSDKType, QueryTotalSharesRequest, QueryTotalSharesRequestSDKType, QueryTotalSharesResponse, QueryTotalSharesResponseSDKType, QuerySpotPriceRequest, QuerySpotPriceRequestSDKType, QuerySpotPriceResponse, QuerySpotPriceResponseSDKType, QuerySwapExactAmountInRequest, QuerySwapExactAmountInRequestSDKType, QuerySwapExactAmountInResponse, QuerySwapExactAmountInResponseSDKType, QuerySwapExactAmountOutRequest, QuerySwapExactAmountOutRequestSDKType, QuerySwapExactAmountOutResponse, QuerySwapExactAmountOutResponseSDKType } from "./query";
-export class LCDQueryClient extends LCDClient {
+export class LCDQueryClient {
+  req: LCDClient;
+
   constructor({
-    restEndpoint
+    requestClient
   }: {
-    restEndpoint: string;
+    requestClient: LCDClient;
   }) {
-    super({
-      restEndpoint
-    });
+    this.req = requestClient;
+    this.pools = this.pools.bind(this);
+    this.numPools = this.numPools.bind(this);
+    this.totalLiquidity = this.totalLiquidity.bind(this);
+    this.pool = this.pool.bind(this);
+    this.poolParams = this.poolParams.bind(this);
+    this.totalPoolLiquidity = this.totalPoolLiquidity.bind(this);
+    this.totalShares = this.totalShares.bind(this);
+    this.spotPrice = this.spotPrice.bind(this);
+    this.estimateSwapExactAmountIn = this.estimateSwapExactAmountIn.bind(this);
+    this.estimateSwapExactAmountOut = this.estimateSwapExactAmountOut.bind(this);
   }
 
   /* Pools */
@@ -29,43 +39,43 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `osmosis/gamm/v1beta1/pools`;
-    return await this.get<QueryPoolsResponseSDKType>(endpoint, options);
+    return await this.req.get<QueryPoolsResponseSDKType>(endpoint, options);
   }
 
   /* NumPools */
   async numPools(_params: QueryNumPoolsRequest = {}): Promise<QueryNumPoolsResponseSDKType> {
     const endpoint = `osmosis/gamm/v1beta1/num_pools`;
-    return await this.get<QueryNumPoolsResponseSDKType>(endpoint);
+    return await this.req.get<QueryNumPoolsResponseSDKType>(endpoint);
   }
 
   /* TotalLiquidity */
   async totalLiquidity(_params: QueryTotalLiquidityRequest = {}): Promise<QueryTotalLiquidityResponseSDKType> {
     const endpoint = `osmosis/gamm/v1beta1/total_liquidity`;
-    return await this.get<QueryTotalLiquidityResponseSDKType>(endpoint);
+    return await this.req.get<QueryTotalLiquidityResponseSDKType>(endpoint);
   }
 
   /* Per Pool gRPC Endpoints */
   async pool(params: QueryPoolRequest): Promise<QueryPoolResponseSDKType> {
     const endpoint = `osmosis/gamm/v1beta1/pools/${params.poolId}`;
-    return await this.get<QueryPoolResponseSDKType>(endpoint);
+    return await this.req.get<QueryPoolResponseSDKType>(endpoint);
   }
 
   /* PoolParams */
   async poolParams(params: QueryPoolParamsRequest): Promise<QueryPoolParamsResponseSDKType> {
     const endpoint = `osmosis/gamm/v1beta1/pools/${params.poolId}/params`;
-    return await this.get<QueryPoolParamsResponseSDKType>(endpoint);
+    return await this.req.get<QueryPoolParamsResponseSDKType>(endpoint);
   }
 
   /* TotalPoolLiquidity */
   async totalPoolLiquidity(params: QueryTotalPoolLiquidityRequest): Promise<QueryTotalPoolLiquidityResponseSDKType> {
     const endpoint = `osmosis/gamm/v1beta1/pools/${params.poolId}/total_pool_liquidity`;
-    return await this.get<QueryTotalPoolLiquidityResponseSDKType>(endpoint);
+    return await this.req.get<QueryTotalPoolLiquidityResponseSDKType>(endpoint);
   }
 
   /* TotalShares */
   async totalShares(params: QueryTotalSharesRequest): Promise<QueryTotalSharesResponseSDKType> {
     const endpoint = `osmosis/gamm/v1beta1/pools/${params.poolId}/total_shares`;
-    return await this.get<QueryTotalSharesResponseSDKType>(endpoint);
+    return await this.req.get<QueryTotalSharesResponseSDKType>(endpoint);
   }
 
   /* SpotPrice defines a gRPC query handler that returns the spot price given
@@ -84,7 +94,7 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `osmosis/gamm/v1beta1/pools/${params.poolId}/prices`;
-    return await this.get<QuerySpotPriceResponseSDKType>(endpoint, options);
+    return await this.req.get<QuerySpotPriceResponseSDKType>(endpoint, options);
   }
 
   /* Estimate the swap. */
@@ -106,7 +116,7 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `osmosis/gamm/v1beta1/${params.poolId}/estimate/swap_exact_amount_in`;
-    return await this.get<QuerySwapExactAmountInResponseSDKType>(endpoint, options);
+    return await this.req.get<QuerySwapExactAmountInResponseSDKType>(endpoint, options);
   }
 
   /* EstimateSwapExactAmountOut */
@@ -128,7 +138,7 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `osmosis/gamm/v1beta1/${params.poolId}/estimate/swap_exact_amount_out`;
-    return await this.get<QuerySwapExactAmountOutResponseSDKType>(endpoint, options);
+    return await this.req.get<QuerySwapExactAmountOutResponseSDKType>(endpoint, options);
   }
 
 }

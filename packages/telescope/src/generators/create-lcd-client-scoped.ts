@@ -6,6 +6,8 @@ import { createScopedLCDFactory } from '@osmonauts/ast';
 import { ProtoRef } from '@osmonauts/types';
 import { getRelativePath } from '../utils';
 import { Bundler } from '../bundler';
+import { TelescopeParseContext } from '../build';
+import { aggregateImports, getImportStatements } from '../imports';
 
 export const plugin = (
     builder: TelescopeBuilder,
@@ -89,13 +91,53 @@ const makeLCD = (
         const importPath = getRelativePath(f, f2);
         dotty.put(obj, file.package, importPath);
     });
+
+
+    const ctx = new TelescopeParseContext(
+        {
+            absolute: '',
+            filename: localname,
+            proto: {
+                package: dir,
+                imports: null,
+                root: {},
+                importNames: null
+            },
+            traversed: {
+                package: dir,
+                imports: null,
+                root: {},
+                importNames: null
+            }
+        },
+        builder.store,
+        builder.options
+    );
+
     const lcdast = createScopedLCDFactory(
+        ctx.proto,
         obj,
         methodName,
         'LCDQueryClient' // make option later
     );
 
+    const imports = aggregateImports(ctx, {}, localname);
+
+    const fixlocalpaths = imports.map(imp => {
+        return {
+            ...imp,
+            path: (imp.path.startsWith('.') || imp.path.startsWith('@')) ?
+                imp.path : `./${imp.path}`
+        };
+    });
+
+    const importStmts = getImportStatements(
+        [...fixlocalpaths]
+    );
+
+
     const prog = []
+        .concat(importStmts)
         .concat(lcdast);
 
     const filename = bundler.getFilename(localname);

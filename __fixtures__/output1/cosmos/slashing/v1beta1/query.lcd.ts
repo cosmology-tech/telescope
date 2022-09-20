@@ -3,27 +3,30 @@ import { Params, ParamsSDKType, ValidatorSigningInfo, ValidatorSigningInfoSDKTyp
 import { setPaginationParams } from "@osmonauts/helpers";
 import { LCDClient } from "@osmonauts/lcd";
 import { QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType, QuerySigningInfoRequest, QuerySigningInfoRequestSDKType, QuerySigningInfoResponse, QuerySigningInfoResponseSDKType, QuerySigningInfosRequest, QuerySigningInfosRequestSDKType, QuerySigningInfosResponse, QuerySigningInfosResponseSDKType } from "./query";
-export class LCDQueryClient extends LCDClient {
+export class LCDQueryClient {
+  req: LCDClient;
+
   constructor({
-    restEndpoint
+    requestClient
   }: {
-    restEndpoint: string;
+    requestClient: LCDClient;
   }) {
-    super({
-      restEndpoint
-    });
+    this.req = requestClient;
+    this.params = this.params.bind(this);
+    this.signingInfo = this.signingInfo.bind(this);
+    this.signingInfos = this.signingInfos.bind(this);
   }
 
   /* Params queries the parameters of slashing module */
   async params(_params: QueryParamsRequest = {}): Promise<QueryParamsResponseSDKType> {
     const endpoint = `cosmos/slashing/v1beta1/params`;
-    return await this.get<QueryParamsResponseSDKType>(endpoint);
+    return await this.req.get<QueryParamsResponseSDKType>(endpoint);
   }
 
   /* SigningInfo queries the signing info of given cons address */
   async signingInfo(params: QuerySigningInfoRequest): Promise<QuerySigningInfoResponseSDKType> {
     const endpoint = `cosmos/slashing/v1beta1/signing_infos/${params.consAddress}`;
-    return await this.get<QuerySigningInfoResponseSDKType>(endpoint);
+    return await this.req.get<QuerySigningInfoResponseSDKType>(endpoint);
   }
 
   /* SigningInfos queries signing info of all validators */
@@ -39,7 +42,7 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `cosmos/slashing/v1beta1/signing_infos`;
-    return await this.get<QuerySigningInfosResponseSDKType>(endpoint, options);
+    return await this.req.get<QuerySigningInfosResponseSDKType>(endpoint, options);
   }
 
 }

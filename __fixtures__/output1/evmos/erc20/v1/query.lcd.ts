@@ -4,15 +4,18 @@ import { Params, ParamsSDKType } from "./genesis";
 import { setPaginationParams } from "@osmonauts/helpers";
 import { LCDClient } from "@osmonauts/lcd";
 import { QueryTokenPairsRequest, QueryTokenPairsRequestSDKType, QueryTokenPairsResponse, QueryTokenPairsResponseSDKType, QueryTokenPairRequest, QueryTokenPairRequestSDKType, QueryTokenPairResponse, QueryTokenPairResponseSDKType, QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType } from "./query";
-export class LCDQueryClient extends LCDClient {
+export class LCDQueryClient {
+  req: LCDClient;
+
   constructor({
-    restEndpoint
+    requestClient
   }: {
-    restEndpoint: string;
+    requestClient: LCDClient;
   }) {
-    super({
-      restEndpoint
-    });
+    this.req = requestClient;
+    this.tokenPairs = this.tokenPairs.bind(this);
+    this.tokenPair = this.tokenPair.bind(this);
+    this.params = this.params.bind(this);
   }
 
   /* TokenPairs retrieves registered token pairs */
@@ -28,19 +31,19 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `evmos/erc20/v1/token_pairs`;
-    return await this.get<QueryTokenPairsResponseSDKType>(endpoint, options);
+    return await this.req.get<QueryTokenPairsResponseSDKType>(endpoint, options);
   }
 
   /* TokenPair retrieves a registered token pair */
   async tokenPair(params: QueryTokenPairRequest): Promise<QueryTokenPairResponseSDKType> {
     const endpoint = `evmos/erc20/v1/token_pairs/${params.token}`;
-    return await this.get<QueryTokenPairResponseSDKType>(endpoint);
+    return await this.req.get<QueryTokenPairResponseSDKType>(endpoint);
   }
 
   /* Params retrieves the erc20 module params */
   async params(_params: QueryParamsRequest = {}): Promise<QueryParamsResponseSDKType> {
     const endpoint = `evmos/erc20/v1/params`;
-    return await this.get<QueryParamsResponseSDKType>(endpoint);
+    return await this.req.get<QueryParamsResponseSDKType>(endpoint);
   }
 
 }

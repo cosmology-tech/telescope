@@ -5,27 +5,31 @@ import { ClaimsRecordAddress, ClaimsRecordAddressSDKType, Claim, ClaimSDKType } 
 import { setPaginationParams } from "@osmonauts/helpers";
 import { LCDClient } from "@osmonauts/lcd";
 import { QueryTotalUnclaimedRequest, QueryTotalUnclaimedRequestSDKType, QueryTotalUnclaimedResponse, QueryTotalUnclaimedResponseSDKType, QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType, QueryClaimsRecordsRequest, QueryClaimsRecordsRequestSDKType, QueryClaimsRecordsResponse, QueryClaimsRecordsResponseSDKType, QueryClaimsRecordRequest, QueryClaimsRecordRequestSDKType, QueryClaimsRecordResponse, QueryClaimsRecordResponseSDKType } from "./query";
-export class LCDQueryClient extends LCDClient {
+export class LCDQueryClient {
+  req: LCDClient;
+
   constructor({
-    restEndpoint
+    requestClient
   }: {
-    restEndpoint: string;
+    requestClient: LCDClient;
   }) {
-    super({
-      restEndpoint
-    });
+    this.req = requestClient;
+    this.totalUnclaimed = this.totalUnclaimed.bind(this);
+    this.params = this.params.bind(this);
+    this.claimsRecords = this.claimsRecords.bind(this);
+    this.claimsRecord = this.claimsRecord.bind(this);
   }
 
   /* TotalUnclaimed queries the total unclaimed tokens from the airdrop */
   async totalUnclaimed(_params: QueryTotalUnclaimedRequest = {}): Promise<QueryTotalUnclaimedResponseSDKType> {
     const endpoint = `evmos/claims/v1/total_unclaimed`;
-    return await this.get<QueryTotalUnclaimedResponseSDKType>(endpoint);
+    return await this.req.get<QueryTotalUnclaimedResponseSDKType>(endpoint);
   }
 
   /* Params returns the claims module parameters */
   async params(_params: QueryParamsRequest = {}): Promise<QueryParamsResponseSDKType> {
     const endpoint = `evmos/claims/v1/params`;
-    return await this.get<QueryParamsResponseSDKType>(endpoint);
+    return await this.req.get<QueryParamsResponseSDKType>(endpoint);
   }
 
   /* ClaimsRecords returns all claims records */
@@ -41,13 +45,13 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `evmos/claims/v1/claims_records`;
-    return await this.get<QueryClaimsRecordsResponseSDKType>(endpoint, options);
+    return await this.req.get<QueryClaimsRecordsResponseSDKType>(endpoint, options);
   }
 
   /* ClaimsRecord returns the claims record for a given address */
   async claimsRecord(params: QueryClaimsRecordRequest): Promise<QueryClaimsRecordResponseSDKType> {
     const endpoint = `evmos/claims/v1/claims_records/${params.address}`;
-    return await this.get<QueryClaimsRecordResponseSDKType>(endpoint);
+    return await this.req.get<QueryClaimsRecordResponseSDKType>(endpoint);
   }
 
 }

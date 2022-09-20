@@ -3,21 +3,23 @@ import { Any, AnySDKType } from "../../../google/protobuf/any";
 import { setPaginationParams } from "@osmonauts/helpers";
 import { LCDClient } from "@osmonauts/lcd";
 import { QueryEvidenceRequest, QueryEvidenceRequestSDKType, QueryEvidenceResponse, QueryEvidenceResponseSDKType, QueryAllEvidenceRequest, QueryAllEvidenceRequestSDKType, QueryAllEvidenceResponse, QueryAllEvidenceResponseSDKType } from "./query";
-export class LCDQueryClient extends LCDClient {
+export class LCDQueryClient {
+  req: LCDClient;
+
   constructor({
-    restEndpoint
+    requestClient
   }: {
-    restEndpoint: string;
+    requestClient: LCDClient;
   }) {
-    super({
-      restEndpoint
-    });
+    this.req = requestClient;
+    this.evidence = this.evidence.bind(this);
+    this.allEvidence = this.allEvidence.bind(this);
   }
 
   /* Evidence queries evidence based on evidence hash. */
   async evidence(params: QueryEvidenceRequest): Promise<QueryEvidenceResponseSDKType> {
     const endpoint = `cosmos/evidence/v1beta1/evidence/${params.evidenceHash}`;
-    return await this.get<QueryEvidenceResponseSDKType>(endpoint);
+    return await this.req.get<QueryEvidenceResponseSDKType>(endpoint);
   }
 
   /* AllEvidence queries all evidence. */
@@ -33,7 +35,7 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `cosmos/evidence/v1beta1/evidence`;
-    return await this.get<QueryAllEvidenceResponseSDKType>(endpoint, options);
+    return await this.req.get<QueryAllEvidenceResponseSDKType>(endpoint, options);
   }
 
 }

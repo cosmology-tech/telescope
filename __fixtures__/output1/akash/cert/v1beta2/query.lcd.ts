@@ -3,15 +3,16 @@ import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } fr
 import { setPaginationParams } from "@osmonauts/helpers";
 import { LCDClient } from "@osmonauts/lcd";
 import { QueryCertificatesRequest, QueryCertificatesRequestSDKType, QueryCertificatesResponse, QueryCertificatesResponseSDKType } from "./query";
-export class LCDQueryClient extends LCDClient {
+export class LCDQueryClient {
+  req: LCDClient;
+
   constructor({
-    restEndpoint
+    requestClient
   }: {
-    restEndpoint: string;
+    requestClient: LCDClient;
   }) {
-    super({
-      restEndpoint
-    });
+    this.req = requestClient;
+    this.certificates = this.certificates.bind(this);
   }
 
   /* Certificates queries certificates */
@@ -29,7 +30,7 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `akash/cert/v1beta2/certificates/list`;
-    return await this.get<QueryCertificatesResponseSDKType>(endpoint, options);
+    return await this.req.get<QueryCertificatesResponseSDKType>(endpoint, options);
   }
 
 }

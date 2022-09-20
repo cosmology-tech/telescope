@@ -3,15 +3,17 @@ import { Provider, ProviderSDKType } from "./provider";
 import { setPaginationParams } from "@osmonauts/helpers";
 import { LCDClient } from "@osmonauts/lcd";
 import { QueryProvidersRequest, QueryProvidersRequestSDKType, QueryProvidersResponse, QueryProvidersResponseSDKType, QueryProviderRequest, QueryProviderRequestSDKType, QueryProviderResponse, QueryProviderResponseSDKType } from "./query";
-export class LCDQueryClient extends LCDClient {
+export class LCDQueryClient {
+  req: LCDClient;
+
   constructor({
-    restEndpoint
+    requestClient
   }: {
-    restEndpoint: string;
+    requestClient: LCDClient;
   }) {
-    super({
-      restEndpoint
-    });
+    this.req = requestClient;
+    this.providers = this.providers.bind(this);
+    this.provider = this.provider.bind(this);
   }
 
   /* Providers queries providers */
@@ -27,13 +29,13 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `akash/provider/v1beta2/providers`;
-    return await this.get<QueryProvidersResponseSDKType>(endpoint, options);
+    return await this.req.get<QueryProvidersResponseSDKType>(endpoint, options);
   }
 
   /* Provider queries provider details */
   async provider(params: QueryProviderRequest): Promise<QueryProviderResponseSDKType> {
     const endpoint = `akash/provider/v1beta2/providers/${params.owner}`;
-    return await this.get<QueryProviderResponseSDKType>(endpoint);
+    return await this.req.get<QueryProviderResponseSDKType>(endpoint);
   }
 
 }

@@ -6,21 +6,26 @@ import { Block, BlockSDKType } from "../../../tendermint/types/block";
 import { setPaginationParams } from "@osmonauts/helpers";
 import { LCDClient } from "@osmonauts/lcd";
 import { SimulateRequest, SimulateRequestSDKType, SimulateResponse, SimulateResponseSDKType, GetTxRequest, GetTxRequestSDKType, GetTxResponse, GetTxResponseSDKType, BroadcastTxRequest, BroadcastTxRequestSDKType, BroadcastTxResponse, BroadcastTxResponseSDKType, GetTxsEventRequest, GetTxsEventRequestSDKType, GetTxsEventResponse, GetTxsEventResponseSDKType, GetBlockWithTxsRequest, GetBlockWithTxsRequestSDKType, GetBlockWithTxsResponse, GetBlockWithTxsResponseSDKType } from "./service";
-export class LCDQueryClient extends LCDClient {
+export class LCDQueryClient {
+  req: LCDClient;
+
   constructor({
-    restEndpoint
+    requestClient
   }: {
-    restEndpoint: string;
+    requestClient: LCDClient;
   }) {
-    super({
-      restEndpoint
-    });
+    this.req = requestClient;
+    this.simulate = this.simulate.bind(this);
+    this.getTx = this.getTx.bind(this);
+    this.broadcastTx = this.broadcastTx.bind(this);
+    this.getTxsEvent = this.getTxsEvent.bind(this);
+    this.getBlockWithTxs = this.getBlockWithTxs.bind(this);
   }
 
   /* GetTx fetches a tx by hash. */
   async getTx(params: GetTxRequest): Promise<GetTxResponseSDKType> {
     const endpoint = `cosmos/tx/v1beta1/txs/${params.hash}`;
-    return await this.get<GetTxResponseSDKType>(endpoint);
+    return await this.req.get<GetTxResponseSDKType>(endpoint);
   }
 
   /* GetTxsEvent fetches txs by event. */
@@ -42,7 +47,7 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `cosmos/tx/v1beta1/txs`;
-    return await this.get<GetTxsEventResponseSDKType>(endpoint, options);
+    return await this.req.get<GetTxsEventResponseSDKType>(endpoint, options);
   }
 
   /* GetBlockWithTxs fetches a block with decoded txs.
@@ -58,7 +63,7 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `cosmos/tx/v1beta1/txs/block/${params.height}`;
-    return await this.get<GetBlockWithTxsResponseSDKType>(endpoint, options);
+    return await this.req.get<GetBlockWithTxsResponseSDKType>(endpoint, options);
   }
 
 }

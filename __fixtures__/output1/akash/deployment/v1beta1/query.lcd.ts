@@ -5,15 +5,18 @@ import { Account, AccountSDKType } from "../../escrow/v1beta1/types";
 import { setPaginationParams } from "@osmonauts/helpers";
 import { LCDClient } from "@osmonauts/lcd";
 import { QueryDeploymentsRequest, QueryDeploymentsRequestSDKType, QueryDeploymentsResponse, QueryDeploymentsResponseSDKType, QueryDeploymentRequest, QueryDeploymentRequestSDKType, QueryDeploymentResponse, QueryDeploymentResponseSDKType, QueryGroupRequest, QueryGroupRequestSDKType, QueryGroupResponse, QueryGroupResponseSDKType } from "./query";
-export class LCDQueryClient extends LCDClient {
+export class LCDQueryClient {
+  req: LCDClient;
+
   constructor({
-    restEndpoint
+    requestClient
   }: {
-    restEndpoint: string;
+    requestClient: LCDClient;
   }) {
-    super({
-      restEndpoint
-    });
+    this.req = requestClient;
+    this.deployments = this.deployments.bind(this);
+    this.deployment = this.deployment.bind(this);
+    this.group = this.group.bind(this);
   }
 
   /* Deployments queries deployments */
@@ -31,7 +34,7 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `akash/deployment/v1beta1/deployments/list`;
-    return await this.get<QueryDeploymentsResponseSDKType>(endpoint, options);
+    return await this.req.get<QueryDeploymentsResponseSDKType>(endpoint, options);
   }
 
   /* Deployment queries deployment details */
@@ -45,7 +48,7 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `akash/deployment/v1beta1/deployments/info`;
-    return await this.get<QueryDeploymentResponseSDKType>(endpoint, options);
+    return await this.req.get<QueryDeploymentResponseSDKType>(endpoint, options);
   }
 
   /* Group queries group details */
@@ -59,7 +62,7 @@ export class LCDQueryClient extends LCDClient {
     }
 
     const endpoint = `akash/deployment/v1beta1/groups/info`;
-    return await this.get<QueryGroupResponseSDKType>(endpoint, options);
+    return await this.req.get<QueryGroupResponseSDKType>(endpoint, options);
   }
 
 }
