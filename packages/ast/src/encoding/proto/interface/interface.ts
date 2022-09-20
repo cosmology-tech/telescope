@@ -72,6 +72,21 @@ export const createProtoType = (
         }
     }
 
+    // hard-code optionality for pagination
+    if (context.ref.proto.package === 'cosmos.base.query.v1beta1') {
+        if (name === 'PageRequest') {
+            optionalityMap['offset'] = true;
+            optionalityMap['limit'] = true;
+            optionalityMap['count_total'] = true;
+            optionalityMap['countTotal'] = true;
+            optionalityMap['reverse'] = true;
+        }
+        if (name === 'PageResponse') {
+            optionalityMap['next_key'] = true;
+            optionalityMap['nextKey'] = true;
+        }
+    }
+
     const MsgName = getMessageName(name, options);
 
     // declaration

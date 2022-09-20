@@ -26,3 +26,33 @@ describe('MsgSend', () => {
     //     ));
     // });
 });
+
+describe('PageRequest', () => {
+    const ref = store.findProto('cosmos/base/query/v1beta1/pagination.proto');
+    const context = new ProtoParseContext(ref, store, defaultTelescopeOptions);
+    it('interface', () => {
+        expectCode(createProtoType(context, 'PageRequest',
+            getNestedProto(ref.traversed).PageRequest
+        ));
+    });
+    it('api interface', () => {
+        expectCode(createSDKType(context, 'PageRequest',
+            getNestedProto(ref.traversed).PageRequest
+        ));
+    });
+});
+
+describe('PageResponse', () => {
+    const ref = store.findProto('cosmos/base/query/v1beta1/pagination.proto');
+    const context = new ProtoParseContext(ref, store, defaultTelescopeOptions);
+    it('interface', () => {
+        expectCode(createProtoType(context, 'PageResponse',
+            getNestedProto(ref.traversed).PageResponse
+        ));
+    });
+    it('api interface', () => {
+        expectCode(createSDKType(context, 'PageResponse',
+            getNestedProto(ref.traversed).PageResponse
+        ));
+    });
+});
