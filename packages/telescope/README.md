@@ -475,7 +475,7 @@ const main = async () => {
    const client = await osmosis.ClientFactory.createLCDClient({ restEndpoint: REST_ENDPOINT });
 
    // now you can query the modules
-   const poolInfo = await client.osmosis.gamm.v1beta1.pool({ poolId: "1" });
+   const pool = await client.osmosis.gamm.v1beta1.pool({ poolId: "1" });
    const balance = await client.cosmos.bank.v1beta1.allBalances({ address: 'osmo1addresshere' });
 };
 ```
@@ -488,8 +488,8 @@ If you want to instantiate a single client, for any module that has a `Query` ty
 import { osmosis } from "osmojs";
 
 export const main = async () => {
-    const LCDClient = osmosis.gamm.v1beta1.LCDQueryClient;
-    const client = new LCDClient({ restEndpoint: REST_ENDPOINT });
+    const requestClient = new LCDClient({ restEndpoint: REST_ENDPOINT });
+    const client = new osmosis.gamm.v1beta1.LCDQueryClient({ requestClient });
     const pools = await client.pools();
     console.log(pools);
 };
@@ -541,8 +541,11 @@ This will generate helpers `createRPCQueryClient` and `createRPCTxClient` in the
 import { osmosis } from './proto';
 
 const main = async () => {
-   const query = await osmosis.ClientFactory.createRPCQueryClient({ rpc });
-   const tx = await osmosis.ClientFactory.createRPCMsgClient({ rpc });
+  const client = await osmosis.ClientFactory.createRPCQueryClient({ rpcEndpoint });
+
+  // now you can query the modules
+  const pool = await client.osmosis.gamm.v1beta1.pool({ poolId: "1" });
+  const balance = await client.cosmos.bank.v1beta1.allBalances({ address: 'osmo1addresshere' });
 };
 ```
 
@@ -560,7 +563,7 @@ const QueryClient = osmosis.gamm.v1beta1.QueryClientImpl;
 const ServiceClient = cosmos.base.tendermint.v1beta1.ServiceClientImpl;
 ```
 
-Here is an example of making a query
+Here is an example of making a query if you want to use the RPC client classes manually:
 
 ```js
 import { osmosis } from "osmojs";
