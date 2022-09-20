@@ -10,6 +10,8 @@ export class LCDClient {
             timeout: 10000,
             headers: {}
         });
+        this.get = this.get.bind(this);
+        this.post = this.post.bind(this);
     }
 
     get<ResponseType = unknown>(endpoint, opts = {}) {

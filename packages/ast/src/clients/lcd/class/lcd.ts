@@ -369,7 +369,46 @@ const requestMethod = (
     );
 }
 
-const createLCDClientClassBody = (clientName: string, methods: t.ClassMethod[]) => {
+// MARKED AS NOT DRY (used in rpc/lcd)
+const bindThis = (name: string) => {
+    return t.expressionStatement(
+        t.assignmentExpression(
+            '=',
+            t.memberExpression(
+                t.thisExpression(),
+                t.identifier(name)
+            ),
+            t.callExpression(
+                t.memberExpression(
+                    t.memberExpression(
+                        t.thisExpression(),
+                        t.identifier(name)
+                    ),
+                    t.identifier('bind')
+                ),
+                [
+                    t.thisExpression()
+                ]
+            )
+        )
+    );
+};
+
+const createLCDClientClassBody = (
+    clientName: string,
+    methods: t.ClassMethod[],
+    service?: ProtoService
+) => {
+
+    let boundMethods = [];
+    if (service) {
+        boundMethods = Object.keys(service.methods).map(key => {
+            const method: ProtoServiceMethod = service.methods[key];
+            const methodName = firstLower(method.name);
+            return bindThis(methodName)
+        })
+    }
+
     return t.exportNamedDeclaration(
         t.classDeclaration(
             t.identifier(clientName),
@@ -400,6 +439,7 @@ const createLCDClientClassBody = (clientName: string, methods: t.ClassMethod[]) 
                         )
                     ],
                     t.blockStatement([
+                        //
                         t.expressionStatement(
                             t.callExpression(
                                 t.super(),
@@ -416,7 +456,10 @@ const createLCDClientClassBody = (clientName: string, methods: t.ClassMethod[]) 
                                     )
                                 ]
                             )
-                        )
+                        ),
+                        /// methods
+                        ...boundMethods
+
                     ])
                 ),
                 ...methods
@@ -440,7 +483,11 @@ export const createLCDClient = (
     context.addUtil('LCDClient');
     if (methods.length) {
         const clientName = 'LCDQueryClient'
-        return createLCDClientClassBody(clientName, methods);
+        return createLCDClientClassBody(
+            clientName,
+            methods,
+            service
+        );
     }
 };
 
