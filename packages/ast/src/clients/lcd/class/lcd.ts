@@ -485,7 +485,7 @@ export const createLCDClient = (
     const methods = Object.keys(service.methods).map(key => {
         const method: ProtoServiceMethod = service.methods[key];
         if (method.info &&
-            (method.options['(google.api.http).get'] || method.options['(google.api.http)'])
+            (typeof method.options['(google.api.http).get'] !== 'undefined')
         ) {
             return requestMethod(context, method);
         }
