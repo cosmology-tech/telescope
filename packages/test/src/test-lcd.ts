@@ -1,12 +1,10 @@
-import { LCDClient } from "@osmonauts/lcd";
 import { osmosis } from "./codegen";
 
 const REST_ENDPOINT = 'https://rest.cosmos.directory/osmosis'
 
 export const main = async () => {
-    const requestClient = new LCDClient({ restEndpoint: REST_ENDPOINT });
-    const client = new osmosis.gamm.v1beta1.LCDQueryClient({ requestClient });
-    const pools = await client.pools();
+    const client = await osmosis.ClientFactory.createLCDClient({ restEndpoint: REST_ENDPOINT });
+    const pools = await client.osmosis.gamm.v1beta1.pools()
     console.log(pools);
 };
 

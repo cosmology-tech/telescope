@@ -408,9 +408,11 @@ const createLCDClientClassBody = (
     if (service) {
         boundMethods = Object.keys(service.methods).map(key => {
             const method: ProtoServiceMethod = service.methods[key];
-            const methodName = firstLower(method.name);
-            return bindThis(methodName)
-        })
+            if (typeof method.options['(google.api.http).get'] !== 'undefined') {
+                const methodName = firstLower(method.name);
+                return bindThis(methodName)
+            }
+        }).filter(Boolean);
     }
 
     return t.exportNamedDeclaration(
