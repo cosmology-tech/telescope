@@ -115,7 +115,7 @@ export const defaultTelescopeOptions: TelescopeOptions = {
     prototypes: {
         enabled: true,
         parser: {
-            keepCase: true,
+            keepCase: false,
             alternateCommentMode: true,
             preferTrailingComment: false
         },
