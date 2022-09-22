@@ -14,6 +14,9 @@ export class LCDQueryClient {
     this.req = requestClient;
   }
 
+  /* buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
+  buf:lint:ignore RPC_RESPONSE_STANDARD_NAME
+  Accounts queries all accounts */
   accounts = async (params: QueryAccountsRequest): Promise<QueryAccountsResponseSDKType> => {
     const options: any = {
       params: {}
@@ -42,6 +45,10 @@ export class LCDQueryClient {
     const endpoint = `akash/escrow/v1beta1/types/accounts/list`;
     return await this.req.get<QueryAccountsResponseSDKType>(endpoint, options);
   };
+
+  /* buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
+  buf:lint:ignore RPC_RESPONSE_STANDARD_NAME
+  Payments queries all payments */
   payments = async (params: QueryPaymentsRequest): Promise<QueryPaymentsResponseSDKType> => {
     const options: any = {
       params: {}

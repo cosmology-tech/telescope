@@ -17,6 +17,7 @@ export class LCDQueryClient {
     this.req = requestClient;
   }
 
+  /* Orders queries orders with filters */
   orders = async (params: QueryOrdersRequest): Promise<QueryOrdersResponseSDKType> => {
     const options: any = {
       params: {}
@@ -33,6 +34,8 @@ export class LCDQueryClient {
     const endpoint = `akash/market/v1beta2/orders/list`;
     return await this.req.get<QueryOrdersResponseSDKType>(endpoint, options);
   };
+
+  /* Order queries order details */
   order = async (params: QueryOrderRequest): Promise<QueryOrderResponseSDKType> => {
     const options: any = {
       params: {}
@@ -45,6 +48,8 @@ export class LCDQueryClient {
     const endpoint = `akash/market/v1beta2/orders/info`;
     return await this.req.get<QueryOrderResponseSDKType>(endpoint, options);
   };
+
+  /* Bids queries bids with filters */
   bids = async (params: QueryBidsRequest): Promise<QueryBidsResponseSDKType> => {
     const options: any = {
       params: {}
@@ -61,6 +66,8 @@ export class LCDQueryClient {
     const endpoint = `akash/market/v1beta2/bids/list`;
     return await this.req.get<QueryBidsResponseSDKType>(endpoint, options);
   };
+
+  /* Bid queries bid details */
   bid = async (params: QueryBidRequest): Promise<QueryBidResponseSDKType> => {
     const options: any = {
       params: {}
@@ -73,6 +80,8 @@ export class LCDQueryClient {
     const endpoint = `akash/market/v1beta2/bids/info`;
     return await this.req.get<QueryBidResponseSDKType>(endpoint, options);
   };
+
+  /* Leases queries leases with filters */
   leases = async (params: QueryLeasesRequest): Promise<QueryLeasesResponseSDKType> => {
     const options: any = {
       params: {}
@@ -89,6 +98,8 @@ export class LCDQueryClient {
     const endpoint = `akash/market/v1beta2/leases/list`;
     return await this.req.get<QueryLeasesResponseSDKType>(endpoint, options);
   };
+
+  /* Lease queries lease details */
   lease = async (params: QueryLeaseRequest): Promise<QueryLeaseResponseSDKType> => {
     const options: any = {
       params: {}

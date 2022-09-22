@@ -14,6 +14,7 @@ export class LCDQueryClient {
     this.req = requestClient;
   }
 
+  /* Certificates queries certificates */
   certificates = async (params: QueryCertificatesRequest): Promise<QueryCertificatesResponseSDKType> => {
     const options: any = {
       params: {}
