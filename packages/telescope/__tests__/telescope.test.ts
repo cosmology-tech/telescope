@@ -27,6 +27,7 @@ const options: TelescopeOptions = {
   },
 
   prototypes: {
+    enabled: true,
     parser: {
       keepCase: false
     },

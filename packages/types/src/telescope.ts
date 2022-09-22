@@ -8,6 +8,7 @@ interface TelescopeOpts {
     classesUseArrowFunctions?: boolean;
 
     prototypes?: {
+        enabled?: boolean;
         parser?: {
             keepCase?: boolean;
             alternateCommentMode?: boolean;
@@ -112,6 +113,7 @@ export const defaultTelescopeOptions: TelescopeOptions = {
     classesUseArrowFunctions: false,
 
     prototypes: {
+        enabled: true,
         parser: {
             keepCase: true,
             alternateCommentMode: true,

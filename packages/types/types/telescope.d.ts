@@ -4,6 +4,7 @@ interface TelescopeOpts {
     removeUnusedImports?: boolean;
     classesUseArrowFunctions?: boolean;
     prototypes?: {
+        enabled?: boolean;
         parser?: {
             keepCase?: boolean;
             alternateCommentMode?: boolean;

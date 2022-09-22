@@ -44,8 +44,10 @@ export const buildBaseTypeScriptClass = (
     name: string,
     obj: any
 ) => {
-    context.body.push(createCreateProtoType(context.proto, name, obj));
-    context.body.push(createObjectWithMethods(context.proto, name, obj));
+    if (context.options.prototypes.enabled) {
+        context.body.push(createCreateProtoType(context.proto, name, obj));
+        context.body.push(createObjectWithMethods(context.proto, name, obj));
+    }
 };
 
 export const buildBaseTypeScriptInterface = (
