@@ -361,7 +361,14 @@ const buildRequestMethod = (
                     )
                 ),
                 true
-            )
+            ),
+            undefined,
+            undefined,
+            undefined,
+            undefined,
+            undefined,
+            undefined,
+            makeComment(comment) as t.CommentLine[],
         );
     }
 
