@@ -8,6 +8,7 @@ export declare const defaultTelescopeOptions: {
     removeUnusedImports: boolean;
     classesUseArrowFunctions: boolean;
     prototypes: {
+        enabled?: boolean;
         parser?: {
             keepCase?: boolean;
             alternateCommentMode?: boolean;
