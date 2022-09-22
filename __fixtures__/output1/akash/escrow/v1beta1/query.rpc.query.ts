@@ -23,22 +23,18 @@ export class QueryClientImpl implements Query {
 
   constructor(rpc: Rpc) {
     this.rpc = rpc;
-    this.accounts = this.accounts.bind(this);
-    this.payments = this.payments.bind(this);
   }
 
-  accounts(request: QueryAccountsRequest): Promise<QueryAccountsResponseSDKType> {
+  accounts = async (request: QueryAccountsRequest): Promise<QueryAccountsResponseSDKType> => {
     const data = QueryAccountsRequest.encode(request).finish();
     const promise = this.rpc.request("akash.escrow.v1beta1.Query", "Accounts", data);
     return promise.then(data => QueryAccountsResponse.decode(new _m0.Reader(data)));
-  }
-
-  payments(request: QueryPaymentsRequest): Promise<QueryPaymentsResponseSDKType> {
+  };
+  payments = async (request: QueryPaymentsRequest): Promise<QueryPaymentsResponseSDKType> => {
     const data = QueryPaymentsRequest.encode(request).finish();
     const promise = this.rpc.request("akash.escrow.v1beta1.Query", "Payments", data);
     return promise.then(data => QueryPaymentsResponse.decode(new _m0.Reader(data)));
-  }
-
+  };
 }
 export const createRpcQueryExtension = (base: QueryClient) => {
   const rpc = createProtobufRpcClient(base);

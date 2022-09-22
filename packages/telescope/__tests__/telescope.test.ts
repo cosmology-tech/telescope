@@ -14,6 +14,7 @@ store.traverseAll();
 const options: TelescopeOptions = {
 
   removeUnusedImports: false,
+  classesUseArrowFunctions: false,
 
   tsDisable: {
     disableAll: false,
@@ -201,6 +202,7 @@ const options: TelescopeOptions = {
   },
   packages: {
     akash: {
+      classesUseArrowFunctions: true,
       deployment: {
         v1beta1: {
           prototypes: {

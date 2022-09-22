@@ -28,41 +28,31 @@ export class MsgClientImpl implements Msg {
 
   constructor(rpc: Rpc) {
     this.rpc = rpc;
-    this.createBid = this.createBid.bind(this);
-    this.closeBid = this.closeBid.bind(this);
-    this.withdrawLease = this.withdrawLease.bind(this);
-    this.createLease = this.createLease.bind(this);
-    this.closeLease = this.closeLease.bind(this);
   }
 
-  createBid(request: MsgCreateBid): Promise<MsgCreateBidResponseSDKType> {
+  createBid = async (request: MsgCreateBid): Promise<MsgCreateBidResponseSDKType> => {
     const data = MsgCreateBid.encode(request).finish();
     const promise = this.rpc.request("akash.market.v1beta2.Msg", "CreateBid", data);
     return promise.then(data => MsgCreateBidResponse.decode(new _m0.Reader(data)));
-  }
-
-  closeBid(request: MsgCloseBid): Promise<MsgCloseBidResponseSDKType> {
+  };
+  closeBid = async (request: MsgCloseBid): Promise<MsgCloseBidResponseSDKType> => {
     const data = MsgCloseBid.encode(request).finish();
     const promise = this.rpc.request("akash.market.v1beta2.Msg", "CloseBid", data);
     return promise.then(data => MsgCloseBidResponse.decode(new _m0.Reader(data)));
-  }
-
-  withdrawLease(request: MsgWithdrawLease): Promise<MsgWithdrawLeaseResponseSDKType> {
+  };
+  withdrawLease = async (request: MsgWithdrawLease): Promise<MsgWithdrawLeaseResponseSDKType> => {
     const data = MsgWithdrawLease.encode(request).finish();
     const promise = this.rpc.request("akash.market.v1beta2.Msg", "WithdrawLease", data);
     return promise.then(data => MsgWithdrawLeaseResponse.decode(new _m0.Reader(data)));
-  }
-
-  createLease(request: MsgCreateLease): Promise<MsgCreateLeaseResponseSDKType> {
+  };
+  createLease = async (request: MsgCreateLease): Promise<MsgCreateLeaseResponseSDKType> => {
     const data = MsgCreateLease.encode(request).finish();
     const promise = this.rpc.request("akash.market.v1beta2.Msg", "CreateLease", data);
     return promise.then(data => MsgCreateLeaseResponse.decode(new _m0.Reader(data)));
-  }
-
-  closeLease(request: MsgCloseLease): Promise<MsgCloseLeaseResponseSDKType> {
+  };
+  closeLease = async (request: MsgCloseLease): Promise<MsgCloseLeaseResponseSDKType> => {
     const data = MsgCloseLease.encode(request).finish();
     const promise = this.rpc.request("akash.market.v1beta2.Msg", "CloseLease", data);
     return promise.then(data => MsgCloseLeaseResponse.decode(new _m0.Reader(data)));
-  }
-
+  };
 }

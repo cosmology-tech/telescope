@@ -21,6 +21,7 @@
     "prepare": "npm run build",
     "test:rpc": "cross-env NODE_ENV=development babel-node src/test-rpc --extensions \".tsx,.ts,.js\"",
     "test:lcd": "cross-env NODE_ENV=development babel-node src/test-lcd --extensions \".tsx,.ts,.js\"",
+    "test:lcd-balance": "cross-env NODE_ENV=development babel-node src/test-lcd-balance --extensions \".tsx,.ts,.js\"",
     "test:lcd-client": "cross-env NODE_ENV=development babel-node src/test-lcd-client --extensions \".tsx,.ts,.js\"",
     "lint": "eslint .",
     "format": "eslint . --fix",

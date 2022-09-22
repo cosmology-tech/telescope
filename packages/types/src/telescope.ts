@@ -5,6 +5,7 @@ import { camel } from '@osmonauts/utils';
 interface TelescopeOpts {
 
     removeUnusedImports?: boolean;
+    classesUseArrowFunctions?: boolean;
 
     prototypes?: {
         parser?: {
@@ -108,6 +109,7 @@ export const defaultTelescopeOptions: TelescopeOptions = {
     // global options (can be overridden through plugins)
 
     removeUnusedImports: true,
+    classesUseArrowFunctions: false,
 
     prototypes: {
         parser: {

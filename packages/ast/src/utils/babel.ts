@@ -138,10 +138,12 @@ export function classProperty(
     _static: boolean = false,
     _readonly: boolean = false,
     accessibility?: 'private' | 'protected' | 'public',
+    leadingComments: t.CommentLine[] = []
 ): t.ClassProperty {
     const obj = t.classProperty(key, value, typeAnnotation, decorators, computed, _static);
     if (accessibility) obj.accessibility = accessibility;
     if (_readonly) obj.readonly = _readonly;
+    if (leadingComments.length) obj.leadingComments = leadingComments;
     return obj;
 };
 

@@ -25,29 +25,23 @@ export class QueryClientImpl implements Query {
 
   constructor(rpc: Rpc) {
     this.rpc = rpc;
-    this.deployments = this.deployments.bind(this);
-    this.deployment = this.deployment.bind(this);
-    this.group = this.group.bind(this);
   }
 
-  deployments(request: QueryDeploymentsRequest): Promise<QueryDeploymentsResponseSDKType> {
+  deployments = async (request: QueryDeploymentsRequest): Promise<QueryDeploymentsResponseSDKType> => {
     const data = QueryDeploymentsRequest.encode(request).finish();
     const promise = this.rpc.request("akash.deployment.v1beta2.Query", "Deployments", data);
     return promise.then(data => QueryDeploymentsResponse.decode(new _m0.Reader(data)));
-  }
-
-  deployment(request: QueryDeploymentRequest): Promise<QueryDeploymentResponseSDKType> {
+  };
+  deployment = async (request: QueryDeploymentRequest): Promise<QueryDeploymentResponseSDKType> => {
     const data = QueryDeploymentRequest.encode(request).finish();
     const promise = this.rpc.request("akash.deployment.v1beta2.Query", "Deployment", data);
     return promise.then(data => QueryDeploymentResponse.decode(new _m0.Reader(data)));
-  }
-
-  group(request: QueryGroupRequest): Promise<QueryGroupResponseSDKType> {
+  };
+  group = async (request: QueryGroupRequest): Promise<QueryGroupResponseSDKType> => {
     const data = QueryGroupRequest.encode(request).finish();
     const promise = this.rpc.request("akash.deployment.v1beta2.Query", "Group", data);
     return promise.then(data => QueryGroupResponse.decode(new _m0.Reader(data)));
-  }
-
+  };
 }
 export const createRpcQueryExtension = (base: QueryClient) => {
   const rpc = createProtobufRpcClient(base);
