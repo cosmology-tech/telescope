@@ -36,55 +36,41 @@ export class MsgClientImpl implements Msg {
 
   constructor(rpc: Rpc) {
     this.rpc = rpc;
-    this.createDeployment = this.createDeployment.bind(this);
-    this.depositDeployment = this.depositDeployment.bind(this);
-    this.updateDeployment = this.updateDeployment.bind(this);
-    this.closeDeployment = this.closeDeployment.bind(this);
-    this.closeGroup = this.closeGroup.bind(this);
-    this.pauseGroup = this.pauseGroup.bind(this);
-    this.startGroup = this.startGroup.bind(this);
   }
 
-  createDeployment(request: MsgCreateDeployment): Promise<MsgCreateDeploymentResponseSDKType> {
+  createDeployment = async (request: MsgCreateDeployment): Promise<MsgCreateDeploymentResponseSDKType> => {
     const data = MsgCreateDeployment.encode(request).finish();
     const promise = this.rpc.request("akash.deployment.v1beta2.Msg", "CreateDeployment", data);
     return promise.then(data => MsgCreateDeploymentResponse.decode(new _m0.Reader(data)));
-  }
-
-  depositDeployment(request: MsgDepositDeployment): Promise<MsgDepositDeploymentResponseSDKType> {
+  };
+  depositDeployment = async (request: MsgDepositDeployment): Promise<MsgDepositDeploymentResponseSDKType> => {
     const data = MsgDepositDeployment.encode(request).finish();
     const promise = this.rpc.request("akash.deployment.v1beta2.Msg", "DepositDeployment", data);
     return promise.then(data => MsgDepositDeploymentResponse.decode(new _m0.Reader(data)));
-  }
-
-  updateDeployment(request: MsgUpdateDeployment): Promise<MsgUpdateDeploymentResponseSDKType> {
+  };
+  updateDeployment = async (request: MsgUpdateDeployment): Promise<MsgUpdateDeploymentResponseSDKType> => {
     const data = MsgUpdateDeployment.encode(request).finish();
     const promise = this.rpc.request("akash.deployment.v1beta2.Msg", "UpdateDeployment", data);
     return promise.then(data => MsgUpdateDeploymentResponse.decode(new _m0.Reader(data)));
-  }
-
-  closeDeployment(request: MsgCloseDeployment): Promise<MsgCloseDeploymentResponseSDKType> {
+  };
+  closeDeployment = async (request: MsgCloseDeployment): Promise<MsgCloseDeploymentResponseSDKType> => {
     const data = MsgCloseDeployment.encode(request).finish();
     const promise = this.rpc.request("akash.deployment.v1beta2.Msg", "CloseDeployment", data);
     return promise.then(data => MsgCloseDeploymentResponse.decode(new _m0.Reader(data)));
-  }
-
-  closeGroup(request: MsgCloseGroup): Promise<MsgCloseGroupResponseSDKType> {
+  };
+  closeGroup = async (request: MsgCloseGroup): Promise<MsgCloseGroupResponseSDKType> => {
     const data = MsgCloseGroup.encode(request).finish();
     const promise = this.rpc.request("akash.deployment.v1beta2.Msg", "CloseGroup", data);
     return promise.then(data => MsgCloseGroupResponse.decode(new _m0.Reader(data)));
-  }
-
-  pauseGroup(request: MsgPauseGroup): Promise<MsgPauseGroupResponseSDKType> {
+  };
+  pauseGroup = async (request: MsgPauseGroup): Promise<MsgPauseGroupResponseSDKType> => {
     const data = MsgPauseGroup.encode(request).finish();
     const promise = this.rpc.request("akash.deployment.v1beta2.Msg", "PauseGroup", data);
     return promise.then(data => MsgPauseGroupResponse.decode(new _m0.Reader(data)));
-  }
-
-  startGroup(request: MsgStartGroup): Promise<MsgStartGroupResponseSDKType> {
+  };
+  startGroup = async (request: MsgStartGroup): Promise<MsgStartGroupResponseSDKType> => {
     const data = MsgStartGroup.encode(request).finish();
     const promise = this.rpc.request("akash.deployment.v1beta2.Msg", "StartGroup", data);
     return promise.then(data => MsgStartGroupResponse.decode(new _m0.Reader(data)));
-  }
-
+  };
 }

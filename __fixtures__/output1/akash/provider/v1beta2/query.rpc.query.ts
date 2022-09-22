@@ -19,24 +19,20 @@ export class QueryClientImpl implements Query {
 
   constructor(rpc: Rpc) {
     this.rpc = rpc;
-    this.providers = this.providers.bind(this);
-    this.provider = this.provider.bind(this);
   }
 
-  providers(request: QueryProvidersRequest = {
+  providers = async (request: QueryProvidersRequest = {
     pagination: undefined
-  }): Promise<QueryProvidersResponseSDKType> {
+  }): Promise<QueryProvidersResponseSDKType> => {
     const data = QueryProvidersRequest.encode(request).finish();
     const promise = this.rpc.request("akash.provider.v1beta2.Query", "Providers", data);
     return promise.then(data => QueryProvidersResponse.decode(new _m0.Reader(data)));
-  }
-
-  provider(request: QueryProviderRequest): Promise<QueryProviderResponseSDKType> {
+  };
+  provider = async (request: QueryProviderRequest): Promise<QueryProviderResponseSDKType> => {
     const data = QueryProviderRequest.encode(request).finish();
     const promise = this.rpc.request("akash.provider.v1beta2.Query", "Provider", data);
     return promise.then(data => QueryProviderResponse.decode(new _m0.Reader(data)));
-  }
-
+  };
 }
 export const createRpcQueryExtension = (base: QueryClient) => {
   const rpc = createProtobufRpcClient(base);

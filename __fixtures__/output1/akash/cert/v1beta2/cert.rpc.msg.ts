@@ -16,20 +16,16 @@ export class MsgClientImpl implements Msg {
 
   constructor(rpc: Rpc) {
     this.rpc = rpc;
-    this.createCertificate = this.createCertificate.bind(this);
-    this.revokeCertificate = this.revokeCertificate.bind(this);
   }
 
-  createCertificate(request: MsgCreateCertificate): Promise<MsgCreateCertificateResponseSDKType> {
+  createCertificate = async (request: MsgCreateCertificate): Promise<MsgCreateCertificateResponseSDKType> => {
     const data = MsgCreateCertificate.encode(request).finish();
     const promise = this.rpc.request("akash.cert.v1beta2.Msg", "CreateCertificate", data);
     return promise.then(data => MsgCreateCertificateResponse.decode(new _m0.Reader(data)));
-  }
-
-  revokeCertificate(request: MsgRevokeCertificate): Promise<MsgRevokeCertificateResponseSDKType> {
+  };
+  revokeCertificate = async (request: MsgRevokeCertificate): Promise<MsgRevokeCertificateResponseSDKType> => {
     const data = MsgRevokeCertificate.encode(request).finish();
     const promise = this.rpc.request("akash.cert.v1beta2.Msg", "RevokeCertificate", data);
     return promise.then(data => MsgRevokeCertificateResponse.decode(new _m0.Reader(data)));
-  }
-
+  };
 }
