@@ -272,10 +272,10 @@ See [RPC Clients](#rpc-clients) for more info.
 
 ### Output
 
-| option                         | description                                                     | defaults   |
-| ------------------------------ | --------------------------------------------------------------  | ---------- |
-| `removeUnusedImports`          | removes unused imports                                          | `true`     |
-
+| option                         | description                                                        | defaults   |
+| ------------------------------ | -----------------------------------------------------------------  | ---------- |
+| `removeUnusedImports`          | removes unused imports                                             | `true`     |
+| `classesUseArrowFunctions`     | classes use arrow functions instead of `bind()`ing in constructors | `false`    |
 
 ## Types
 

@@ -39,6 +39,11 @@ telescope({
     rpcClients: {
       enabled: true,
       camelCase: true
+    },
+    packages: {
+      osmosis: {
+        classesUseArrowFunctions: true
+      }
     }
   }
 }).then(()=>{
