@@ -179,6 +179,10 @@ const returnPromise = (name: string) => {
     )
 };
 
+const makeComment = (comment: string) => {
+    return [{ type: 'CommentBlock', value: ` ${comment} ` }]
+}
+
 const rpcClassMethod = (
     context: GenericParseContext,
     name: string,
@@ -189,6 +193,7 @@ const rpcClassMethod = (
 
     const requestType = svc.requestType;
     const responseType = svc.responseType;
+    const comment = svc.comment ?? svc.name;
 
     let methodArgs: t.Identifier | t.AssignmentPattern = identifier(
         'request',
@@ -252,7 +257,7 @@ const rpcClassMethod = (
             undefined,
             undefined,
             undefined,
-            // makeComment(comment) as t.CommentLine[],
+            makeComment(comment) as t.CommentLine[],
         );
     }
 
