@@ -1,8 +1,23 @@
 import * as t from '@babel/types';
-import { classDeclaration, classMethod, classProperty, commentBlock, identifier, tsMethodSignature } from '../../../utils';
+import { arrowFunctionExpression, classDeclaration, classMethod, classProperty, commentBlock, identifier, tsMethodSignature } from '../../../utils';
 import { ProtoService, ProtoServiceMethod } from '@osmonauts/types';
 import { GenericParseContext } from '../../../encoding';
 import { camel } from '@osmonauts/utils';
+
+const returnReponseType = (ResponseType: string) => {
+    return t.tsTypeAnnotation(
+        t.tsTypeReference(
+            t.identifier('Promise'),
+            t.tsTypeParameterInstantiation(
+                [
+                    t.tsTypeReference(
+                        t.identifier(ResponseType + 'SDKType')
+                    )
+                ]
+            )
+        )
+    );
+};
 
 const rpcMethodDefinition = (
     name: string,
@@ -43,19 +58,7 @@ const rpcMethodDefinition = (
         [
             methodArgs
         ],
-        t.tsTypeAnnotation(
-            t.tsTypeReference(
-                t.identifier('Promise'),
-                t.tsTypeParameterInstantiation(
-                    [
-                        t.tsTypeReference(
-                            t.identifier(responseType + 'SDKType')
-                        )
-                    ]
-                )
-
-            )
-        ),
+        returnReponseType(responseType),
         trailingComments, // seemingly not working?
         leadingComments
     );
@@ -177,6 +180,7 @@ const returnPromise = (name: string) => {
 };
 
 const rpcClassMethod = (
+    context: GenericParseContext,
     name: string,
     msg: string,
     svc: ProtoServiceMethod,
@@ -220,6 +224,37 @@ const rpcClassMethod = (
         )
     }
 
+    const body = t.blockStatement([
+
+        // const data = QueryAccountsRequest.encode(request).finish();
+        encodeData(requestType),
+
+        // const promise = this.rpc.request("cosmos.auth.v1beta1.Query", "Accounts", data);
+        promiseRequest(msg, packageImport),
+
+        // return promise.then((data) => QueryAccountsResponse.decode(new _m0.Reader(data)));                        
+        returnPromise(responseType)
+
+    ]);
+
+    if (context.pluginValue('classesUseArrowFunctions')) {
+        return classProperty(
+            t.identifier(name),
+            arrowFunctionExpression(
+                [methodArgs],
+                body,
+                returnReponseType(responseType),
+                true
+            ),
+            undefined,
+            undefined,
+            undefined,
+            undefined,
+            undefined,
+            undefined,
+            // makeComment(comment) as t.CommentLine[],
+        );
+    }
 
     return classMethod(
         'method',
@@ -227,34 +262,21 @@ const rpcClassMethod = (
         [
             methodArgs
         ],
-        t.blockStatement([
-
-            // const data = QueryAccountsRequest.encode(request).finish();
-            encodeData(requestType),
-
-            // const promise = this.rpc.request("cosmos.auth.v1beta1.Query", "Accounts", data);
-            promiseRequest(msg, packageImport),
-
-            // return promise.then((data) => QueryAccountsResponse.decode(new _m0.Reader(data)));                        
-            returnPromise(responseType)
-
-        ]),
-        t.tsTypeAnnotation(
-            t.tsTypeReference(
-                t.identifier('Promise'),
-                t.tsTypeParameterInstantiation(
-                    [
-                        t.tsTypeReference(
-                            t.identifier(responseType + 'SDKType')
-                        )
-                    ]
-                )
-            )
-        )
+        body,
+        returnReponseType(responseType)
     );
 };
 
-const rpcClassConstructor = (methods: string[]) => {
+const rpcClassConstructor = (
+    context: GenericParseContext,
+    methods: string[]
+) => {
+
+    let bound = [];
+    if (!context.pluginValue('classesUseArrowFunctions')) {
+        bound = methods.map(method => bindThis(method));
+    }
+
     return classMethod(
         'constructor',
         t.identifier('constructor'),
@@ -280,7 +302,7 @@ const rpcClassConstructor = (methods: string[]) => {
                 )
             ),
             /// methods
-            ...methods.map(method => bindThis(method))
+            ...bound
         ])
     );
 };
@@ -355,6 +377,7 @@ export const createRpcClientClass = (
             const method = service.methods[key];
             const name = camelRpcMethods ? camel(key) : key;
             return rpcClassMethod(
+                context,
                 name,
                 key,
                 method,
@@ -383,7 +406,7 @@ export const createRpcClientClass = (
                 ),
 
                 // CONSTRUCTOR
-                rpcClassConstructor(methodNames),
+                rpcClassConstructor(context, methodNames),
 
                 // METHODS
                 ...methods

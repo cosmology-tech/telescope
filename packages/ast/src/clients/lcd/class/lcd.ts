@@ -341,7 +341,6 @@ const buildRequestMethod = (
         )
     ]);
 
-
     if (context.pluginValue('classesUseArrowFunctions')) {
         return classProperty(
             t.identifier(methodName),

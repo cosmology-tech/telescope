@@ -1,18 +1,19 @@
-import { createLCDClient } from './lcd';
 import { traverse, getNestedProto } from '@osmonauts/proto-parser'
 import { ProtoService } from '@osmonauts/types';
+import { expectCode, getTestProtoStore, printCode } from '../../../../test-utils';
 import { GenericParseContext } from '../../../encoding';
-import { getTestProtoStore, expectCode } from '../../../../test-utils';
+import { createRpcInterface, createRpcClientClass, createRpcClientInterface } from './rpc';
 const store = getTestProtoStore({
     classesUseArrowFunctions: true
 });
 store.traverseAll();
 
-it('cosmos/group/v1/query.proto', () => {
-    const ref = store.findProto('cosmos/group/v1/query.proto');
+it('RPC Query Client', () => {
+    const ref = store.findProto('cosmos/auth/v1beta1/query.proto');
     const res = traverse(store, ref);
     const service: ProtoService = getNestedProto(res).Query;
     const context = new GenericParseContext(ref, store, store.options);
-    const ast = createLCDClient(context, service);
-    expectCode(ast);
+    expectCode(createRpcClientInterface(context, service))
+    expectCode(createRpcClientClass(context, service))
+    expectCode(createRpcInterface(context, service))
 });
