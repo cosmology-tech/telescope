@@ -18,11 +18,14 @@ export class MsgClientImpl implements Msg {
     this.rpc = rpc;
   }
 
+  /* CreateCertificate defines a method to create new certificate given proper inputs. */
   createCertificate = async (request: MsgCreateCertificate): Promise<MsgCreateCertificateResponseSDKType> => {
     const data = MsgCreateCertificate.encode(request).finish();
     const promise = this.rpc.request("akash.cert.v1beta2.Msg", "CreateCertificate", data);
     return promise.then(data => MsgCreateCertificateResponse.decode(new _m0.Reader(data)));
   };
+
+  /* RevokeCertificate defines a method to revoke the certificate */
   revokeCertificate = async (request: MsgRevokeCertificate): Promise<MsgRevokeCertificateResponseSDKType> => {
     const data = MsgRevokeCertificate.encode(request).finish();
     const promise = this.rpc.request("akash.cert.v1beta2.Msg", "RevokeCertificate", data);

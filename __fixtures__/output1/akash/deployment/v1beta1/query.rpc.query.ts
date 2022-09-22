@@ -26,16 +26,21 @@ export class QueryClientImpl implements Query {
     this.rpc = rpc;
   }
 
+  /* Deployments queries deployments */
   deployments = async (request: QueryDeploymentsRequest): Promise<QueryDeploymentsResponseSDKType> => {
     const data = QueryDeploymentsRequest.encode(request).finish();
     const promise = this.rpc.request("akash.deployment.v1beta1.Query", "Deployments", data);
     return promise.then(data => QueryDeploymentsResponse.decode(new _m0.Reader(data)));
   };
+
+  /* Deployment queries deployment details */
   deployment = async (request: QueryDeploymentRequest): Promise<QueryDeploymentResponseSDKType> => {
     const data = QueryDeploymentRequest.encode(request).finish();
     const promise = this.rpc.request("akash.deployment.v1beta1.Query", "Deployment", data);
     return promise.then(data => QueryDeploymentResponse.decode(new _m0.Reader(data)));
   };
+
+  /* Group queries group details */
   group = async (request: QueryGroupRequest): Promise<QueryGroupResponseSDKType> => {
     const data = QueryGroupRequest.encode(request).finish();
     const promise = this.rpc.request("akash.deployment.v1beta1.Query", "Group", data);

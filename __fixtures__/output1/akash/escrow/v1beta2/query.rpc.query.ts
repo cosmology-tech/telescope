@@ -25,11 +25,18 @@ export class QueryClientImpl implements Query {
     this.rpc = rpc;
   }
 
+  /* buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
+  buf:lint:ignore RPC_RESPONSE_STANDARD_NAME
+  Accounts queries all accounts */
   accounts = async (request: QueryAccountsRequest): Promise<QueryAccountsResponseSDKType> => {
     const data = QueryAccountsRequest.encode(request).finish();
     const promise = this.rpc.request("akash.escrow.v1beta2.Query", "Accounts", data);
     return promise.then(data => QueryAccountsResponse.decode(new _m0.Reader(data)));
   };
+
+  /* buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
+  buf:lint:ignore RPC_RESPONSE_STANDARD_NAME
+  Payments queries all payments */
   payments = async (request: QueryPaymentsRequest): Promise<QueryPaymentsResponseSDKType> => {
     const data = QueryPaymentsRequest.encode(request).finish();
     const promise = this.rpc.request("akash.escrow.v1beta2.Query", "Payments", data);

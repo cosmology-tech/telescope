@@ -36,31 +36,42 @@ export class QueryClientImpl implements Query {
     this.rpc = rpc;
   }
 
+  /* Orders queries orders with filters */
   orders = async (request: QueryOrdersRequest): Promise<QueryOrdersResponseSDKType> => {
     const data = QueryOrdersRequest.encode(request).finish();
     const promise = this.rpc.request("akash.market.v1beta2.Query", "Orders", data);
     return promise.then(data => QueryOrdersResponse.decode(new _m0.Reader(data)));
   };
+
+  /* Order queries order details */
   order = async (request: QueryOrderRequest): Promise<QueryOrderResponseSDKType> => {
     const data = QueryOrderRequest.encode(request).finish();
     const promise = this.rpc.request("akash.market.v1beta2.Query", "Order", data);
     return promise.then(data => QueryOrderResponse.decode(new _m0.Reader(data)));
   };
+
+  /* Bids queries bids with filters */
   bids = async (request: QueryBidsRequest): Promise<QueryBidsResponseSDKType> => {
     const data = QueryBidsRequest.encode(request).finish();
     const promise = this.rpc.request("akash.market.v1beta2.Query", "Bids", data);
     return promise.then(data => QueryBidsResponse.decode(new _m0.Reader(data)));
   };
+
+  /* Bid queries bid details */
   bid = async (request: QueryBidRequest): Promise<QueryBidResponseSDKType> => {
     const data = QueryBidRequest.encode(request).finish();
     const promise = this.rpc.request("akash.market.v1beta2.Query", "Bid", data);
     return promise.then(data => QueryBidResponse.decode(new _m0.Reader(data)));
   };
+
+  /* Leases queries leases with filters */
   leases = async (request: QueryLeasesRequest): Promise<QueryLeasesResponseSDKType> => {
     const data = QueryLeasesRequest.encode(request).finish();
     const promise = this.rpc.request("akash.market.v1beta2.Query", "Leases", data);
     return promise.then(data => QueryLeasesResponse.decode(new _m0.Reader(data)));
   };
+
+  /* Lease queries lease details */
   lease = async (request: QueryLeaseRequest): Promise<QueryLeaseResponseSDKType> => {
     const data = QueryLeaseRequest.encode(request).finish();
     const promise = this.rpc.request("akash.market.v1beta2.Query", "Lease", data);

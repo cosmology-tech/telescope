@@ -35,6 +35,9 @@ export class QueryClientImpl implements Query {
     this.rpc = rpc;
   }
 
+  /* AllProvidersAttributes queries all providers
+  buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
+  buf:lint:ignore RPC_RESPONSE_STANDARD_NAME */
   allProvidersAttributes = async (request: QueryAllProvidersAttributesRequest = {
     pagination: undefined
   }): Promise<QueryProvidersResponseSDKType> => {
@@ -42,16 +45,28 @@ export class QueryClientImpl implements Query {
     const promise = this.rpc.request("akash.audit.v1beta2.Query", "AllProvidersAttributes", data);
     return promise.then(data => QueryProvidersResponse.decode(new _m0.Reader(data)));
   };
+
+  /* ProviderAttributes queries all provider signed attributes
+  buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
+  buf:lint:ignore RPC_RESPONSE_STANDARD_NAME */
   providerAttributes = async (request: QueryProviderAttributesRequest): Promise<QueryProvidersResponseSDKType> => {
     const data = QueryProviderAttributesRequest.encode(request).finish();
     const promise = this.rpc.request("akash.audit.v1beta2.Query", "ProviderAttributes", data);
     return promise.then(data => QueryProvidersResponse.decode(new _m0.Reader(data)));
   };
+
+  /* ProviderAuditorAttributes queries provider signed attributes by specific auditor
+  buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
+  buf:lint:ignore RPC_RESPONSE_STANDARD_NAME */
   providerAuditorAttributes = async (request: QueryProviderAuditorRequest): Promise<QueryProvidersResponseSDKType> => {
     const data = QueryProviderAuditorRequest.encode(request).finish();
     const promise = this.rpc.request("akash.audit.v1beta2.Query", "ProviderAuditorAttributes", data);
     return promise.then(data => QueryProvidersResponse.decode(new _m0.Reader(data)));
   };
+
+  /* AuditorAttributes queries all providers signed by this auditor
+  buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
+  buf:lint:ignore RPC_RESPONSE_STANDARD_NAME */
   auditorAttributes = async (request: QueryAuditorAttributesRequest): Promise<QueryProvidersResponseSDKType> => {
     const data = QueryAuditorAttributesRequest.encode(request).finish();
     const promise = this.rpc.request("akash.audit.v1beta2.Query", "AuditorAttributes", data);

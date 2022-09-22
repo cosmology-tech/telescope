@@ -21,6 +21,7 @@ export class QueryClientImpl implements Query {
     this.rpc = rpc;
   }
 
+  /* Providers queries providers */
   providers = async (request: QueryProvidersRequest = {
     pagination: undefined
   }): Promise<QueryProvidersResponseSDKType> => {
@@ -28,6 +29,8 @@ export class QueryClientImpl implements Query {
     const promise = this.rpc.request("akash.provider.v1beta2.Query", "Providers", data);
     return promise.then(data => QueryProvidersResponse.decode(new _m0.Reader(data)));
   };
+
+  /* Provider queries provider details */
   provider = async (request: QueryProviderRequest): Promise<QueryProviderResponseSDKType> => {
     const data = QueryProviderRequest.encode(request).finish();
     const promise = this.rpc.request("akash.provider.v1beta2.Query", "Provider", data);

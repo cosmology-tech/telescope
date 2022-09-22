@@ -18,6 +18,7 @@ export class QueryClientImpl implements Query {
     this.rpc = rpc;
   }
 
+  /* Certificates queries certificates */
   certificates = async (request: QueryCertificatesRequest): Promise<QueryCertificatesResponseSDKType> => {
     const data = QueryCertificatesRequest.encode(request).finish();
     const promise = this.rpc.request("akash.cert.v1beta2.Query", "Certificates", data);
