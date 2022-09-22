@@ -1,7 +1,7 @@
 import * as t from '@babel/types';
 import { ProtoService, ProtoServiceMethod, ProtoServiceMethodInfo } from '@osmonauts/types';
 import { GenericParseContext } from '../../../encoding';
-import { callExpression, classMethod, identifier, objectPattern } from '../../../utils';
+import { arrowFunctionExpression, callExpression, classMethod, classProperty, identifier, objectPattern } from '../../../utils';
 
 const returnReponseType = (ResponseType: string) => {
     return t.tsTypeAnnotation(
@@ -247,7 +247,7 @@ const makeComment = (comment: string) => {
     return [{ type: 'CommentBlock', value: ` ${comment} ` }]
 }
 
-const requestMethod = (
+const buildRequestMethod = (
     context: GenericParseContext,
     serviceMethod: ProtoServiceMethod
 ) => {
@@ -314,19 +314,58 @@ const requestMethod = (
         )
     }
 
-    const body = [];
-    // if (serviceMethod.info.method === 'post') {
-    //     body.push(t.variableDeclaration(
-    //         'const',
-    //         [
-    //             t.variableDeclarator
-    //                 (
-    //                     t.identifier('body'),
-    //                     t.objectExpression([])
-    //                 )
-    //         ]
-    //     ));
-    // }
+    const body = t.blockStatement([
+
+        ...optionsAst,
+
+        // if optional params not undefined
+        ...queryParams,
+
+        // endpoint
+        t.variableDeclaration(
+            'const',
+            [
+                t.variableDeclarator
+                    (
+                        t.identifier('endpoint'),
+                        makeTemplateTag(serviceMethod.info)
+                    )
+            ]
+        ),
+
+        // return 
+        returnAwaitRequest(
+            serviceMethod.responseType,
+            // serviceMethod.info.method,
+            serviceMethod.info.queryParams.length > 0
+        )
+    ]);
+
+
+    if (context.pluginValue('classesUseArrowFunctions')) {
+        return classProperty(
+            t.identifier(methodName),
+            arrowFunctionExpression(
+                [methodArgs],
+                body,
+                t.tsTypeAnnotation(
+                    t.tsTypeReference(
+                        t.identifier('Promise'),
+                        t.tsTypeParameterInstantiation(
+                            [
+                                t.tsTypeReference(
+                                    t.identifier(serviceMethod.responseType + 'SDKType')
+                                )
+                            ]
+                        )
+                    )
+                ),
+                true
+            )
+        );
+    }
+
+
 
     return classMethod(
         'method',
@@ -334,37 +373,9 @@ const requestMethod = (
         [
             methodArgs
         ],
-        t.blockStatement([
-
-            ...optionsAst,
-
-            // if optional params not undefined
-            ...queryParams,
-
-            // body
-            ...body,
-
-            // endpoint
-            t.variableDeclaration(
-                'const',
-                [
-                    t.variableDeclarator
-                        (
-                            t.identifier('endpoint'),
-                            makeTemplateTag(serviceMethod.info)
-                        )
-                ]
-            ),
-
-            // return 
-            returnAwaitRequest(
-                serviceMethod.responseType,
-                // serviceMethod.info.method,
-                serviceMethod.info.queryParams.length > 0
-            )
-        ]),
+        body,
         returnReponseType(serviceMethod.responseType),
-        makeComment(comment),
+        makeComment(comment) as t.CommentLine[],
         false,
         false,
         false,
@@ -398,14 +409,15 @@ const bindThis = (name: string) => {
 };
 
 const createLCDClientClassBody = (
+    context: GenericParseContext,
     clientName: string,
-    methods: t.ClassMethod[],
+    methods: (t.ClassMethod | t.ClassProperty)[],
     service?: ProtoService
 ) => {
 
     let boundMethods = [];
     // until the super() issue is figured out, we have to remove this
-    if (service) {
+    if (service && !context.pluginValue('classesUseArrowFunctions')) {
         boundMethods = Object.keys(service.methods).map(key => {
             const method: ProtoServiceMethod = service.methods[key];
             if (typeof method.options['(google.api.http).get'] !== 'undefined') {
@@ -487,13 +499,14 @@ export const createLCDClient = (
         if (method.info &&
             (typeof method.options['(google.api.http).get'] !== 'undefined')
         ) {
-            return requestMethod(context, method);
+            return buildRequestMethod(context, method);
         }
     }).filter(Boolean);
     context.addUtil('LCDClient');
     if (methods.length) {
         const clientName = 'LCDQueryClient'
         return createLCDClientClassBody(
+            context,
             clientName,
             methods,
             service
@@ -510,9 +523,9 @@ export const createAggregatedLCDClient = (
     const methods = services.reduce((m, service) => {
         const innerMethods = Object.keys(service.methods).map(key => {
             const method: ProtoServiceMethod = service.methods[key];
-            return requestMethod(context, method);
+            return buildRequestMethod(context, method);
         });
         return [...m, ...innerMethods];
     }, []);
-    return createLCDClientClassBody(clientName, methods);
+    return createLCDClientClassBody(context, clientName, methods);
 };

@@ -2,6 +2,7 @@ import { TSBuilderInput } from '@cosmwasm/ts-codegen';
 import { AminoExceptions } from "./aminos";
 interface TelescopeOpts {
     removeUnusedImports?: boolean;
+    classesUseArrowFunctions?: boolean;
     prototypes?: {
         parser?: {
             keepCase?: boolean;
