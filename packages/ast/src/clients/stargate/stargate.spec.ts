@@ -40,6 +40,8 @@ it('createStargateClientOptions', async () => {
     context.options.stargateClients.includeCosmosDefaultTypes = true;
     expectCode(createStargateClientOptions({
         context,
+        aminoConverters: 'aminoConverters',
+        protoTypeRegistry: 'protoTypeRegistry',
         name: 'getSigningOsmosisClientOptions'
     }));
     expect(context.utils).toMatchSnapshot();
@@ -59,6 +61,7 @@ it('createStargateClientAminoRegistry', async () => {
     context.options.stargateClients.includeCosmosDefaultTypes = true;
     expectCode(createStargateClientAminoRegistry({
         context,
+        aminoConverters: 'aminoConverters',
         aminos: [
             'somepackage1.gamm.v1beta1',
             'somepackage1.superfluid.v1beta1',
@@ -82,6 +85,7 @@ it('createStargateClientProtoRegistry', async () => {
     context.options.stargateClients.includeCosmosDefaultTypes = true;
     expectCode(createStargateClientProtoRegistry({
         context,
+        protoTypeRegistry: 'protoTypeRegistry',
         registries: [
             'somepackage1.gamm.v1beta1',
             'somepackage1.superfluid.v1beta1',
@@ -111,16 +115,8 @@ it('createStargateClient w/o defaults', async () => {
     expectCode(createStargateClientOptions({
         context,
         name: 'getSigningOsmosisClientOptions',
-        registries: [
-            'otherpackage1.gamm.v1beta1',
-            'otherpackage1.superfluid.v1beta1',
-            'otherpackage1.lockup'
-        ],
-        aminos: [
-            'otherpackage1.gamm.v1beta1',
-            'otherpackage1.superfluid.v1beta1',
-            'otherpackage1.lockup'
-        ]
+        aminoConverters: 'aminoConverters',
+        protoTypeRegistry: 'protoTypeRegistry'
     }));
     expect(context.utils).toMatchSnapshot();
 });

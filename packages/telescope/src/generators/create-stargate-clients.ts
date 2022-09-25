@@ -11,7 +11,7 @@ import {
     createStargateClientAminoRegistry
 } from '@osmonauts/ast';
 import { ProtoRef } from '@osmonauts/types';
-import { pascal } from 'case';
+import { camel, pascal } from 'case';
 import { variableSlug } from '../utils';
 
 export const plugin = (
@@ -60,17 +60,22 @@ export const plugin = (
     });
 
     const name = 'getSigning' + pascal(bundler.bundle.base + 'Client');
+    const prefix = camel(bundler.bundle.base);
     const aminos = createStargateClientAminoRegistry({
         context: ctx,
-        aminos: converterVariables
+        aminos: converterVariables,
+        aminoConverters: prefix + 'AminoConverters'
     });
     const protos = createStargateClientProtoRegistry({
         context: ctx,
-        registries: registryVariables
+        registries: registryVariables,
+        protoTypeRegistry: prefix + 'ProtoRegistry'
     });
     const clientOptions = createStargateClientOptions({
         context: ctx,
-        name: name + 'Options'
+        name: name + 'Options',
+        protoTypeRegistry: prefix + 'ProtoRegistry',
+        aminoConverters: prefix + 'AminoConverters'
     });
     const clientBody = createStargateClient({
         context: ctx,

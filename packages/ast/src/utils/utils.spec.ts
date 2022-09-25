@@ -18,16 +18,8 @@ it('recursiveNamespace', async () => {
             createStargateClientOptions({
                 context: getGenericParseContextWithRef(ref),
                 name: 'getSigningOsmosisClientOptions',
-                registries: [
-                    'osmosis.gamm.v1beta1',
-                    'osmosis.superfluid.v1beta1',
-                    'osmosis.lockup'
-                ],
-                aminos: [
-                    'osmosis.gamm.v1beta1',
-                    'osmosis.superfluid.v1beta1',
-                    'osmosis.lockup'
-                ]
+                aminoConverters: 'aminoConverters',
+                protoTypeRegistry: 'protoTypeRegistry'
             })
         ])[0]
     );

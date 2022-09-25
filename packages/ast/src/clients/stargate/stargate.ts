@@ -10,15 +10,19 @@ interface CreateStargateClient {
 
 interface CreateStargateClientProtoRegistry {
   registries: string[];
+  protoTypeRegistry: string;
   context: GenericParseContext;
 }
 
 interface CreateStargateClientOptions {
   name: string;
+  aminoConverters: string;
+  protoTypeRegistry: string;
   context: GenericParseContext;
 }
 interface CreateStargateClientAminoConverters {
   aminos: string[];
+  aminoConverters: string;
   context: GenericParseContext;
 }
 
@@ -195,13 +199,17 @@ export const createStargateClient = ({ name, options, context }: CreateStargateC
   )
 };
 
-export const createStargateClientAminoRegistry = ({ aminos, context }: CreateStargateClientAminoConverters) => {
+export const createStargateClientAminoRegistry = ({
+  aminos,
+  aminoConverters,
+  context
+}: CreateStargateClientAminoConverters) => {
   return t.exportNamedDeclaration(
     t.variableDeclaration(
       'const',
       [
         t.variableDeclarator(
-          t.identifier('aminoConverters'),
+          t.identifier(aminoConverters),
           t.objectExpression([
             ...aminos.map(pkg =>
               t.spreadElement(
@@ -217,7 +225,7 @@ export const createStargateClientAminoRegistry = ({ aminos, context }: CreateSta
   );
 };
 
-export const createStargateClientProtoRegistry = ({ registries, context }: CreateStargateClientProtoRegistry) => {
+export const createStargateClientProtoRegistry = ({ registries, protoTypeRegistry, context }: CreateStargateClientProtoRegistry) => {
 
   context.addUtil('GeneratedType')
   context.addUtil('ReadonlyArray')
@@ -227,7 +235,7 @@ export const createStargateClientProtoRegistry = ({ registries, context }: Creat
       'const',
       [
         t.variableDeclarator(
-          identifier('protoTypeRegistry',
+          identifier(protoTypeRegistry,
             t.tsTypeAnnotation(
               t.tsTypeReference(
                 t.identifier('ReadonlyArray'),
@@ -259,7 +267,12 @@ export const createStargateClientProtoRegistry = ({ registries, context }: Creat
   );
 };
 
-export const createStargateClientOptions = ({ name, context }: CreateStargateClientOptions) => {
+export const createStargateClientOptions = ({
+  name,
+  aminoConverters,
+  protoTypeRegistry,
+  context
+}: CreateStargateClientOptions) => {
 
   const includeDefaults = context.pluginValue('stargateClients.includeCosmosDefaultTypes');
 
@@ -349,7 +362,7 @@ export const createStargateClientOptions = ({ name, context }: CreateStargateCli
                                 t.identifier('defaultTypes')
                               ),
                               t.spreadElement(
-                                t.identifier('protoTypeRegistry')
+                                t.identifier(protoTypeRegistry)
                               )
                             ].filter(Boolean)
                           )
@@ -370,7 +383,7 @@ export const createStargateClientOptions = ({ name, context }: CreateStargateCli
                           t.objectExpression(
                             [
                               t.spreadElement(
-                                t.identifier('aminoConverters')
+                                t.identifier(aminoConverters)
                               )
                             ]
                           )
