@@ -61,10 +61,8 @@ exports[`createStargateClient w/o defaults 2`] = `
   registry: Registry;
   aminoTypes: AminoTypes;
 } => {
-  const registry = new Registry([...otherpackage1.gamm.v1beta1.registry, ...otherpackage1.superfluid.v1beta1.registry, ...otherpackage1.lockup.registry]);
-  const aminoTypes = new AminoTypes({ ...otherpackage1.gamm.v1beta1.AminoConverter,
-    ...otherpackage1.superfluid.v1beta1.AminoConverter,
-    ...otherpackage1.lockup.AminoConverter
+  const registry = new Registry([...protoTypeRegistry]);
+  const aminoTypes = new AminoTypes({ ...aminoConverters
   });
   return {
     registry,
@@ -84,6 +82,15 @@ Object {
 }
 `;
 
+exports[`createStargateClientAminoRegistry 1`] = `
+"export const aminoConverters = { ...somepackage1.gamm.v1beta1.AminoConverter,
+  ...somepackage1.superfluid.v1beta1.AminoConverter,
+  ...somepackage1.lockup.AminoConverter
+};"
+`;
+
+exports[`createStargateClientAminoRegistry 2`] = `Object {}`;
+
 exports[`createStargateClientOptions 1`] = `
 "export const getSigningOsmosisClientOptions = ({
   defaultTypes = defaultRegistryTypes
@@ -93,10 +100,8 @@ exports[`createStargateClientOptions 1`] = `
   registry: Registry;
   aminoTypes: AminoTypes;
 } => {
-  const registry = new Registry([...defaultTypes, ...somepackage1.gamm.v1beta1.registry, ...somepackage1.superfluid.v1beta1.registry, ...somepackage1.lockup.registry]);
-  const aminoTypes = new AminoTypes({ ...somepackage1.gamm.v1beta1.AminoConverter,
-    ...somepackage1.superfluid.v1beta1.AminoConverter,
-    ...somepackage1.lockup.AminoConverter
+  const registry = new Registry([...defaultTypes, ...protoTypeRegistry]);
+  const aminoTypes = new AminoTypes({ ...aminoConverters
   });
   return {
     registry,
@@ -113,5 +118,14 @@ Object {
   "Registry": true,
   "SigningStargateClient": true,
   "defaultRegistryTypes": true,
+}
+`;
+
+exports[`createStargateClientProtoRegistry 1`] = `"export const protoTypeRegistry: ReadonlyArray<[string, GeneratedType]> = [...somepackage1.gamm.v1beta1.registry, ...somepackage1.superfluid.v1beta1.registry, ...somepackage1.lockup.registry];"`;
+
+exports[`createStargateClientProtoRegistry 2`] = `
+Object {
+  "GeneratedType": true,
+  "ReadonlyArray": true,
 }
 `;

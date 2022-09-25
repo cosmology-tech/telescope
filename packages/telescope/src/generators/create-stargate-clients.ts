@@ -6,7 +6,9 @@ import {
     importStmt,
     GenericParseContext,
     createStargateClient,
-    createStargateClientOptions
+    createStargateClientOptions,
+    createStargateClientProtoRegistry,
+    createStargateClientAminoRegistry
 } from '@osmonauts/ast';
 import { ProtoRef } from '@osmonauts/types';
 import { pascal } from 'case';
@@ -58,11 +60,17 @@ export const plugin = (
     });
 
     const name = 'getSigning' + pascal(bundler.bundle.base + 'Client');
+    const aminos = createStargateClientAminoRegistry({
+        context: ctx,
+        aminos: converterVariables
+    });
+    const protos = createStargateClientProtoRegistry({
+        context: ctx,
+        registries: registryVariables
+    });
     const clientOptions = createStargateClientOptions({
         context: ctx,
-        name: name + 'Options',
-        registries: registryVariables,
-        aminos: converterVariables
+        name: name + 'Options'
     });
     const clientBody = createStargateClient({
         context: ctx,
@@ -74,9 +82,12 @@ export const plugin = (
         // TODO why not use import system via context?
         importStmt(['OfflineSigner', 'GeneratedType', 'Registry'], '@cosmjs/proto-signing'),
         importStmt(['defaultRegistryTypes', 'AminoTypes', 'SigningStargateClient'], '@cosmjs/stargate'),
+        ...registryImports,
+        ...converterImports,
+
     ]
-        .concat(registryImports)
-        .concat(converterImports)
+        .concat(aminos)
+        .concat(protos)
         .concat(clientOptions)
         .concat(clientBody);
 

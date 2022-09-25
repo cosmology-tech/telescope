@@ -5,12 +5,20 @@ interface CreateStargateClient {
     options: string;
     context: GenericParseContext;
 }
-export declare const createStargateClient: ({ name, options, context }: CreateStargateClient) => t.ExportNamedDeclaration;
+interface CreateStargateClientProtoRegistry {
+    registries: string[];
+    context: GenericParseContext;
+}
 interface CreateStargateClientOptions {
     name: string;
-    registries: string[];
+    context: GenericParseContext;
+}
+interface CreateStargateClientAminoConverters {
     aminos: string[];
     context: GenericParseContext;
 }
-export declare const createStargateClientOptions: ({ name, registries, aminos, context }: CreateStargateClientOptions) => t.ExportNamedDeclaration;
+export declare const createStargateClient: ({ name, options, context }: CreateStargateClient) => t.ExportNamedDeclaration;
+export declare const createStargateClientAminoRegistry: ({ aminos, context }: CreateStargateClientAminoConverters) => t.ExportNamedDeclaration;
+export declare const createStargateClientProtoRegistry: ({ registries, context }: CreateStargateClientProtoRegistry) => t.ExportNamedDeclaration;
+export declare const createStargateClientOptions: ({ name, context }: CreateStargateClientOptions) => t.ExportNamedDeclaration;
 export {};

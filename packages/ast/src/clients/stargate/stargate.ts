@@ -1,12 +1,27 @@
 import * as t from '@babel/types';
 import { GenericParseContext } from '../../encoding';
-import { arrowFunctionExpression, memberExpressionOrIdentifier, objectPattern } from '../../utils';
+import { arrowFunctionExpression, identifier, memberExpressionOrIdentifier, objectPattern } from '../../utils';
 
 interface CreateStargateClient {
   name: string;
   options: string;
   context: GenericParseContext;
 }
+
+interface CreateStargateClientProtoRegistry {
+  registries: string[];
+  context: GenericParseContext;
+}
+
+interface CreateStargateClientOptions {
+  name: string;
+  context: GenericParseContext;
+}
+interface CreateStargateClientAminoConverters {
+  aminos: string[];
+  context: GenericParseContext;
+}
+
 
 export const createStargateClient = ({ name, options, context }: CreateStargateClient) => {
 
@@ -180,15 +195,71 @@ export const createStargateClient = ({ name, options, context }: CreateStargateC
   )
 };
 
-interface CreateStargateClientOptions {
-  name: string;
-  registries: string[];
-  aminos: string[];
-  context: GenericParseContext;
-}
+export const createStargateClientAminoRegistry = ({ aminos, context }: CreateStargateClientAminoConverters) => {
+  return t.exportNamedDeclaration(
+    t.variableDeclaration(
+      'const',
+      [
+        t.variableDeclarator(
+          t.identifier('aminoConverters'),
+          t.objectExpression([
+            ...aminos.map(pkg =>
+              t.spreadElement(
+                memberExpressionOrIdentifier(
+                  `${pkg}.AminoConverter`.split('.').reverse()
+                )
+              )
+            )
+          ])
+        )
+      ]
+    )
+  );
+};
 
+export const createStargateClientProtoRegistry = ({ registries, context }: CreateStargateClientProtoRegistry) => {
 
-export const createStargateClientOptions = ({ name, registries, aminos, context }: CreateStargateClientOptions) => {
+  context.addUtil('GeneratedType')
+  context.addUtil('ReadonlyArray')
+
+  return t.exportNamedDeclaration(
+    t.variableDeclaration(
+      'const',
+      [
+        t.variableDeclarator(
+          identifier('protoTypeRegistry',
+            t.tsTypeAnnotation(
+              t.tsTypeReference(
+                t.identifier('ReadonlyArray'),
+                t.tsTypeParameterInstantiation(
+                  [
+                    t.tsTupleType([
+                      t.tsStringKeyword(),
+                      t.tsTypeReference(
+                        t.identifier('GeneratedType')
+                      )
+                    ])
+                  ]
+                )
+              )
+            )
+          ),
+          t.arrayExpression([
+            ...registries.map(pkg =>
+              t.spreadElement(
+                memberExpressionOrIdentifier(
+                  `${pkg}.registry`.split('.').reverse()
+                )
+              )
+            )
+          ])
+        )
+      ]
+    )
+  );
+};
+
+export const createStargateClientOptions = ({ name, context }: CreateStargateClientOptions) => {
 
   const includeDefaults = context.pluginValue('stargateClients.includeCosmosDefaultTypes');
 
@@ -277,12 +348,8 @@ export const createStargateClientOptions = ({ name, registries, aminos, context 
                               includeDefaults && t.spreadElement(
                                 t.identifier('defaultTypes')
                               ),
-                              ...registries.map(pkg =>
-                                t.spreadElement(
-                                  memberExpressionOrIdentifier(
-                                    `${pkg}.registry`.split('.').reverse()
-                                  )
-                                )
+                              t.spreadElement(
+                                t.identifier('protoTypeRegistry')
                               )
                             ].filter(Boolean)
                           )
@@ -302,12 +369,8 @@ export const createStargateClientOptions = ({ name, registries, aminos, context 
                         [
                           t.objectExpression(
                             [
-                              ...aminos.map(pkg =>
-                                t.spreadElement(
-                                  memberExpressionOrIdentifier(
-                                    `${pkg}.AminoConverter`.split('.').reverse()
-                                  )
-                                )
+                              t.spreadElement(
+                                t.identifier('aminoConverters')
                               )
                             ]
                           )

@@ -6,6 +6,11 @@ import * as evmosVestingV1TxRegistry from "./vesting/v1/tx.registry";
 import * as evmosErc20V1TxAmino from "./erc20/v1/tx.amino";
 import * as evmosFeesV1TxAmino from "./fees/v1/tx.amino";
 import * as evmosVestingV1TxAmino from "./vesting/v1/tx.amino";
+export const aminoConverters = { ...evmosErc20V1TxAmino.AminoConverter,
+  ...evmosFeesV1TxAmino.AminoConverter,
+  ...evmosVestingV1TxAmino.AminoConverter
+};
+export const protoTypeRegistry: ReadonlyArray<[string, GeneratedType]> = [...evmosErc20V1TxRegistry.registry, ...evmosFeesV1TxRegistry.registry, ...evmosVestingV1TxRegistry.registry];
 export const getSigningEvmosClientOptions = ({
   defaultTypes = defaultRegistryTypes
 }: {
@@ -14,10 +19,8 @@ export const getSigningEvmosClientOptions = ({
   registry: Registry;
   aminoTypes: AminoTypes;
 } => {
-  const registry = new Registry([...defaultTypes, ...evmosErc20V1TxRegistry.registry, ...evmosFeesV1TxRegistry.registry, ...evmosVestingV1TxRegistry.registry]);
-  const aminoTypes = new AminoTypes({ ...evmosErc20V1TxAmino.AminoConverter,
-    ...evmosFeesV1TxAmino.AminoConverter,
-    ...evmosVestingV1TxAmino.AminoConverter
+  const registry = new Registry([...defaultTypes, ...protoTypeRegistry]);
+  const aminoTypes = new AminoTypes({ ...aminoConverters
   });
   return {
     registry,
