@@ -13,10 +13,8 @@ exports[`recursiveNamespace 1`] = `
           registry: Registry;
           aminoTypes: AminoTypes;
         } => {
-          const registry = new Registry([...defaultTypes, ...osmosis.gamm.v1beta1.registry, ...osmosis.superfluid.v1beta1.registry, ...osmosis.lockup.registry]);
-          const aminoTypes = new AminoTypes({ ...osmosis.gamm.v1beta1.AminoConverter,
-            ...osmosis.superfluid.v1beta1.AminoConverter,
-            ...osmosis.lockup.AminoConverter
+          const registry = new Registry([...defaultTypes, ...protoTypeRegistry]);
+          const aminoTypes = new AminoTypes({ ...aminoConverters
           });
           return {
             registry,
