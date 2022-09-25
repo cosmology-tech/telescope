@@ -14,7 +14,7 @@ import * as osmosisIncentivesTxAmino from "./incentives/tx.amino";
 import * as osmosisLockupTxAmino from "./lockup/tx.amino";
 import * as osmosisSuperfluidTxAmino from "./superfluid/tx.amino";
 import * as osmosisTokenfactoryV1beta1TxAmino from "./tokenfactory/v1beta1/tx.amino";
-export const aminoConverters = { ...osmosisGammPoolmodelsBalancerTxAmino.AminoConverter,
+export const osmosisAminoConverters = { ...osmosisGammPoolmodelsBalancerTxAmino.AminoConverter,
   ...osmosisGammPoolmodelsStableswapTxAmino.AminoConverter,
   ...osmosisGammV1beta1TxAmino.AminoConverter,
   ...osmosisIncentivesTxAmino.AminoConverter,
@@ -22,7 +22,7 @@ export const aminoConverters = { ...osmosisGammPoolmodelsBalancerTxAmino.AminoCo
   ...osmosisSuperfluidTxAmino.AminoConverter,
   ...osmosisTokenfactoryV1beta1TxAmino.AminoConverter
 };
-export const protoTypeRegistry: ReadonlyArray<[string, GeneratedType]> = [...osmosisGammPoolmodelsBalancerTxRegistry.registry, ...osmosisGammPoolmodelsStableswapTxRegistry.registry, ...osmosisGammV1beta1TxRegistry.registry, ...osmosisIncentivesTxRegistry.registry, ...osmosisLockupTxRegistry.registry, ...osmosisSuperfluidTxRegistry.registry, ...osmosisTokenfactoryV1beta1TxRegistry.registry];
+export const osmosisProtoRegistry: ReadonlyArray<[string, GeneratedType]> = [...osmosisGammPoolmodelsBalancerTxRegistry.registry, ...osmosisGammPoolmodelsStableswapTxRegistry.registry, ...osmosisGammV1beta1TxRegistry.registry, ...osmosisIncentivesTxRegistry.registry, ...osmosisLockupTxRegistry.registry, ...osmosisSuperfluidTxRegistry.registry, ...osmosisTokenfactoryV1beta1TxRegistry.registry];
 export const getSigningOsmosisClientOptions = ({
   defaultTypes = defaultRegistryTypes
 }: {
@@ -31,8 +31,8 @@ export const getSigningOsmosisClientOptions = ({
   registry: Registry;
   aminoTypes: AminoTypes;
 } => {
-  const registry = new Registry([...defaultTypes, ...protoTypeRegistry]);
-  const aminoTypes = new AminoTypes({ ...aminoConverters
+  const registry = new Registry([...defaultTypes, ...osmosisProtoRegistry]);
+  const aminoTypes = new AminoTypes({ ...osmosisAminoConverters
   });
   return {
     registry,

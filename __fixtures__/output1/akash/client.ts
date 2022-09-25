@@ -14,7 +14,7 @@ import * as akashDeploymentV1beta2ServiceAmino from "./deployment/v1beta2/servic
 import * as akashMarketV1beta2ServiceAmino from "./market/v1beta2/service.amino";
 import * as akashProviderV1beta1ProviderAmino from "./provider/v1beta1/provider.amino";
 import * as akashProviderV1beta2ProviderAmino from "./provider/v1beta2/provider.amino";
-export const aminoConverters = { ...akashAuditV1beta1AuditAmino.AminoConverter,
+export const akashAminoConverters = { ...akashAuditV1beta1AuditAmino.AminoConverter,
   ...akashAuditV1beta2AuditAmino.AminoConverter,
   ...akashCertV1beta2CertAmino.AminoConverter,
   ...akashDeploymentV1beta2ServiceAmino.AminoConverter,
@@ -22,7 +22,7 @@ export const aminoConverters = { ...akashAuditV1beta1AuditAmino.AminoConverter,
   ...akashProviderV1beta1ProviderAmino.AminoConverter,
   ...akashProviderV1beta2ProviderAmino.AminoConverter
 };
-export const protoTypeRegistry: ReadonlyArray<[string, GeneratedType]> = [...akashAuditV1beta1AuditRegistry.registry, ...akashAuditV1beta2AuditRegistry.registry, ...akashCertV1beta2CertRegistry.registry, ...akashDeploymentV1beta2ServiceRegistry.registry, ...akashMarketV1beta2ServiceRegistry.registry, ...akashProviderV1beta1ProviderRegistry.registry, ...akashProviderV1beta2ProviderRegistry.registry];
+export const akashProtoRegistry: ReadonlyArray<[string, GeneratedType]> = [...akashAuditV1beta1AuditRegistry.registry, ...akashAuditV1beta2AuditRegistry.registry, ...akashCertV1beta2CertRegistry.registry, ...akashDeploymentV1beta2ServiceRegistry.registry, ...akashMarketV1beta2ServiceRegistry.registry, ...akashProviderV1beta1ProviderRegistry.registry, ...akashProviderV1beta2ProviderRegistry.registry];
 export const getSigningAkashClientOptions = ({
   defaultTypes = defaultRegistryTypes
 }: {
@@ -31,8 +31,8 @@ export const getSigningAkashClientOptions = ({
   registry: Registry;
   aminoTypes: AminoTypes;
 } => {
-  const registry = new Registry([...defaultTypes, ...protoTypeRegistry]);
-  const aminoTypes = new AminoTypes({ ...aminoConverters
+  const registry = new Registry([...defaultTypes, ...akashProtoRegistry]);
+  const aminoTypes = new AminoTypes({ ...akashAminoConverters
   });
   return {
     registry,
