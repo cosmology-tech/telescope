@@ -1,5 +1,10 @@
 import { getGenericParseContextWithRef, expectCode, printCode } from '../../../test-utils'
-import { createStargateClient, createStargateClientOptions } from './stargate';
+import {
+    createStargateClient,
+    createStargateClientOptions,
+    createStargateClientAminoRegistry,
+    createStargateClientProtoRegistry
+} from './stargate';
 import { ProtoRef } from '@osmonauts/types';
 
 it('createStargateClient', async () => {
@@ -35,13 +40,49 @@ it('createStargateClientOptions', async () => {
     context.options.stargateClients.includeCosmosDefaultTypes = true;
     expectCode(createStargateClientOptions({
         context,
-        name: 'getSigningOsmosisClientOptions',
-        registries: [
+        name: 'getSigningOsmosisClientOptions'
+    }));
+    expect(context.utils).toMatchSnapshot();
+});
+
+it('createStargateClientAminoRegistry', async () => {
+    const ref: ProtoRef = {
+        absolute: '/',
+        filename: '/',
+        proto: {
+            imports: [],
+            package: 'somepackage1.gamm.yolo',
+            root: {},
+        }
+    }
+    const context = getGenericParseContextWithRef(ref);
+    context.options.stargateClients.includeCosmosDefaultTypes = true;
+    expectCode(createStargateClientAminoRegistry({
+        context,
+        aminos: [
             'somepackage1.gamm.v1beta1',
             'somepackage1.superfluid.v1beta1',
             'somepackage1.lockup'
-        ],
-        aminos: [
+        ]
+    }));
+    expect(context.utils).toMatchSnapshot();
+});
+
+it('createStargateClientProtoRegistry', async () => {
+    const ref: ProtoRef = {
+        absolute: '/',
+        filename: '/',
+        proto: {
+            imports: [],
+            package: 'somepackage1.gamm.yolo',
+            root: {},
+        }
+    }
+    const context = getGenericParseContextWithRef(ref);
+    context.options.stargateClients.includeCosmosDefaultTypes = true;
+    expectCode(createStargateClientProtoRegistry({
+        context,
+        registries: [
             'somepackage1.gamm.v1beta1',
             'somepackage1.superfluid.v1beta1',
             'somepackage1.lockup'
