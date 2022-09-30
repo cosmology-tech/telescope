@@ -223,6 +223,13 @@ const addSDKTypesToImports = (
                 name: obj.name + 'SDKType',
                 importAs: (obj.importAs ?? obj.name) + 'SDKType',
             };
+
+            // TODO some have google.protobuf.Any shows up... figure out the better way to handle this
+            if (/\./.test(SDKTypeObject.name)) {
+                SDKTypeObject.name = SDKTypeObject.name.split('.')[SDKTypeObject.name.split('.').length - 1];
+                SDKTypeObject.importAs = SDKTypeObject.importAs.split('.')[SDKTypeObject.importAs.split('.').length - 1];
+            }
+
             if (lookup && ['Type', 'Enum'].includes(lookup.obj.type)) {
                 return [
                     ...m,
