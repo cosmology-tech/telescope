@@ -7,23 +7,23 @@ import { QueryPeriodRequest, QueryPeriodRequestSDKType, QueryPeriodResponse, Que
 
 /** Query defines the RPC service */
 export interface Query {
-  period(request?: QueryPeriodRequest): Promise<QueryPeriodResponseSDKType>;
+  period(request?: QueryPeriodRequest): Promise<QueryPeriodResponse>;
   /*Period retrieves current period.*/
 
-  epochMintProvision(request?: QueryEpochMintProvisionRequest): Promise<QueryEpochMintProvisionResponseSDKType>;
+  epochMintProvision(request?: QueryEpochMintProvisionRequest): Promise<QueryEpochMintProvisionResponse>;
   /*EpochMintProvision retrieves current minting epoch provision value.*/
 
-  skippedEpochs(request?: QuerySkippedEpochsRequest): Promise<QuerySkippedEpochsResponseSDKType>;
+  skippedEpochs(request?: QuerySkippedEpochsRequest): Promise<QuerySkippedEpochsResponse>;
   /*SkippedEpochs retrieves the total number of skipped epochs.*/
 
-  circulatingSupply(request?: QueryCirculatingSupplyRequest): Promise<QueryCirculatingSupplyResponseSDKType>;
+  circulatingSupply(request?: QueryCirculatingSupplyRequest): Promise<QueryCirculatingSupplyResponse>;
   /*CirculatingSupply retrieves the total number of tokens that are in
   circulation (i.e. excluding unvested tokens).*/
 
-  inflationRate(request?: QueryInflationRateRequest): Promise<QueryInflationRateResponseSDKType>;
+  inflationRate(request?: QueryInflationRateRequest): Promise<QueryInflationRateResponse>;
   /*InflationRate retrieves the inflation rate of the current period.*/
 
-  params(request?: QueryParamsRequest): Promise<QueryParamsResponseSDKType>;
+  params(request?: QueryParamsRequest): Promise<QueryParamsResponse>;
   /*Params retrieves the total set of minting parameters.*/
 
 }
@@ -40,37 +40,37 @@ export class QueryClientImpl implements Query {
     this.params = this.params.bind(this);
   }
 
-  period(request: QueryPeriodRequest = {}): Promise<QueryPeriodResponseSDKType> {
+  period(request: QueryPeriodRequest = {}): Promise<QueryPeriodResponse> {
     const data = QueryPeriodRequest.encode(request).finish();
     const promise = this.rpc.request("evmos.inflation.v1.Query", "Period", data);
     return promise.then(data => QueryPeriodResponse.decode(new _m0.Reader(data)));
   }
 
-  epochMintProvision(request: QueryEpochMintProvisionRequest = {}): Promise<QueryEpochMintProvisionResponseSDKType> {
+  epochMintProvision(request: QueryEpochMintProvisionRequest = {}): Promise<QueryEpochMintProvisionResponse> {
     const data = QueryEpochMintProvisionRequest.encode(request).finish();
     const promise = this.rpc.request("evmos.inflation.v1.Query", "EpochMintProvision", data);
     return promise.then(data => QueryEpochMintProvisionResponse.decode(new _m0.Reader(data)));
   }
 
-  skippedEpochs(request: QuerySkippedEpochsRequest = {}): Promise<QuerySkippedEpochsResponseSDKType> {
+  skippedEpochs(request: QuerySkippedEpochsRequest = {}): Promise<QuerySkippedEpochsResponse> {
     const data = QuerySkippedEpochsRequest.encode(request).finish();
     const promise = this.rpc.request("evmos.inflation.v1.Query", "SkippedEpochs", data);
     return promise.then(data => QuerySkippedEpochsResponse.decode(new _m0.Reader(data)));
   }
 
-  circulatingSupply(request: QueryCirculatingSupplyRequest = {}): Promise<QueryCirculatingSupplyResponseSDKType> {
+  circulatingSupply(request: QueryCirculatingSupplyRequest = {}): Promise<QueryCirculatingSupplyResponse> {
     const data = QueryCirculatingSupplyRequest.encode(request).finish();
     const promise = this.rpc.request("evmos.inflation.v1.Query", "CirculatingSupply", data);
     return promise.then(data => QueryCirculatingSupplyResponse.decode(new _m0.Reader(data)));
   }
 
-  inflationRate(request: QueryInflationRateRequest = {}): Promise<QueryInflationRateResponseSDKType> {
+  inflationRate(request: QueryInflationRateRequest = {}): Promise<QueryInflationRateResponse> {
     const data = QueryInflationRateRequest.encode(request).finish();
     const promise = this.rpc.request("evmos.inflation.v1.Query", "InflationRate", data);
     return promise.then(data => QueryInflationRateResponse.decode(new _m0.Reader(data)));
   }
 
-  params(request: QueryParamsRequest = {}): Promise<QueryParamsResponseSDKType> {
+  params(request: QueryParamsRequest = {}): Promise<QueryParamsResponse> {
     const data = QueryParamsRequest.encode(request).finish();
     const promise = this.rpc.request("evmos.inflation.v1.Query", "Params", data);
     return promise.then(data => QueryParamsResponse.decode(new _m0.Reader(data)));
@@ -81,27 +81,27 @@ export const createRpcQueryExtension = (base: QueryClient) => {
   const rpc = createProtobufRpcClient(base);
   const queryService = new QueryClientImpl(rpc);
   return {
-    period(request?: QueryPeriodRequest): Promise<QueryPeriodResponseSDKType> {
+    period(request?: QueryPeriodRequest): Promise<QueryPeriodResponse> {
       return queryService.period(request);
     },
 
-    epochMintProvision(request?: QueryEpochMintProvisionRequest): Promise<QueryEpochMintProvisionResponseSDKType> {
+    epochMintProvision(request?: QueryEpochMintProvisionRequest): Promise<QueryEpochMintProvisionResponse> {
       return queryService.epochMintProvision(request);
     },
 
-    skippedEpochs(request?: QuerySkippedEpochsRequest): Promise<QuerySkippedEpochsResponseSDKType> {
+    skippedEpochs(request?: QuerySkippedEpochsRequest): Promise<QuerySkippedEpochsResponse> {
       return queryService.skippedEpochs(request);
     },
 
-    circulatingSupply(request?: QueryCirculatingSupplyRequest): Promise<QueryCirculatingSupplyResponseSDKType> {
+    circulatingSupply(request?: QueryCirculatingSupplyRequest): Promise<QueryCirculatingSupplyResponse> {
       return queryService.circulatingSupply(request);
     },
 
-    inflationRate(request?: QueryInflationRateRequest): Promise<QueryInflationRateResponseSDKType> {
+    inflationRate(request?: QueryInflationRateRequest): Promise<QueryInflationRateResponse> {
       return queryService.inflationRate(request);
     },
 
-    params(request?: QueryParamsRequest): Promise<QueryParamsResponseSDKType> {
+    params(request?: QueryParamsRequest): Promise<QueryParamsResponse> {
       return queryService.params(request);
     }
 

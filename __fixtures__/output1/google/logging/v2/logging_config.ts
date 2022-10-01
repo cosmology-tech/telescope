@@ -2814,7 +2814,7 @@ export const LogBucket = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): LogBucketSDKType {
+  decode(input: _m0.Reader | Uint8Array, length?: number): LogBucket {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLogBucket();
@@ -2987,7 +2987,7 @@ export const LogView = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): LogViewSDKType {
+  decode(input: _m0.Reader | Uint8Array, length?: number): LogView {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLogView();
@@ -3147,7 +3147,7 @@ export const LogSink = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): LogSinkSDKType {
+  decode(input: _m0.Reader | Uint8Array, length?: number): LogSink {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLogSink();
@@ -3512,7 +3512,7 @@ export const ListBucketsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ListBucketsResponseSDKType {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ListBucketsResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListBucketsResponse();
@@ -4105,7 +4105,7 @@ export const ListViewsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ListViewsResponseSDKType {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ListViewsResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListViewsResponse();
@@ -4629,7 +4629,7 @@ export const ListSinksResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ListSinksResponseSDKType {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ListSinksResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListSinksResponse();
@@ -5090,7 +5090,7 @@ export const LogExclusion = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): LogExclusionSDKType {
+  decode(input: _m0.Reader | Uint8Array, length?: number): LogExclusion {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLogExclusion();
@@ -5306,7 +5306,7 @@ export const ListExclusionsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ListExclusionsResponseSDKType {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ListExclusionsResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListExclusionsResponse();
@@ -5890,7 +5890,7 @@ export const CmekSettings = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): CmekSettingsSDKType {
+  decode(input: _m0.Reader | Uint8Array, length?: number): CmekSettings {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCmekSettings();
@@ -6163,7 +6163,7 @@ export const Settings = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): SettingsSDKType {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Settings {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSettings();

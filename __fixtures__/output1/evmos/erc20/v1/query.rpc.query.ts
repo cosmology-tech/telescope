@@ -8,13 +8,13 @@ import { QueryTokenPairsRequest, QueryTokenPairsRequestSDKType, QueryTokenPairsR
 
 /** Query defines the RPC service */
 export interface Query {
-  tokenPairs(request?: QueryTokenPairsRequest): Promise<QueryTokenPairsResponseSDKType>;
+  tokenPairs(request?: QueryTokenPairsRequest): Promise<QueryTokenPairsResponse>;
   /*TokenPairs retrieves registered token pairs*/
 
-  tokenPair(request: QueryTokenPairRequest): Promise<QueryTokenPairResponseSDKType>;
+  tokenPair(request: QueryTokenPairRequest): Promise<QueryTokenPairResponse>;
   /*TokenPair retrieves a registered token pair*/
 
-  params(request?: QueryParamsRequest): Promise<QueryParamsResponseSDKType>;
+  params(request?: QueryParamsRequest): Promise<QueryParamsResponse>;
   /*Params retrieves the erc20 module params*/
 
 }
@@ -30,19 +30,19 @@ export class QueryClientImpl implements Query {
 
   tokenPairs(request: QueryTokenPairsRequest = {
     pagination: undefined
-  }): Promise<QueryTokenPairsResponseSDKType> {
+  }): Promise<QueryTokenPairsResponse> {
     const data = QueryTokenPairsRequest.encode(request).finish();
     const promise = this.rpc.request("evmos.erc20.v1.Query", "TokenPairs", data);
     return promise.then(data => QueryTokenPairsResponse.decode(new _m0.Reader(data)));
   }
 
-  tokenPair(request: QueryTokenPairRequest): Promise<QueryTokenPairResponseSDKType> {
+  tokenPair(request: QueryTokenPairRequest): Promise<QueryTokenPairResponse> {
     const data = QueryTokenPairRequest.encode(request).finish();
     const promise = this.rpc.request("evmos.erc20.v1.Query", "TokenPair", data);
     return promise.then(data => QueryTokenPairResponse.decode(new _m0.Reader(data)));
   }
 
-  params(request: QueryParamsRequest = {}): Promise<QueryParamsResponseSDKType> {
+  params(request: QueryParamsRequest = {}): Promise<QueryParamsResponse> {
     const data = QueryParamsRequest.encode(request).finish();
     const promise = this.rpc.request("evmos.erc20.v1.Query", "Params", data);
     return promise.then(data => QueryParamsResponse.decode(new _m0.Reader(data)));
@@ -53,15 +53,15 @@ export const createRpcQueryExtension = (base: QueryClient) => {
   const rpc = createProtobufRpcClient(base);
   const queryService = new QueryClientImpl(rpc);
   return {
-    tokenPairs(request?: QueryTokenPairsRequest): Promise<QueryTokenPairsResponseSDKType> {
+    tokenPairs(request?: QueryTokenPairsRequest): Promise<QueryTokenPairsResponse> {
       return queryService.tokenPairs(request);
     },
 
-    tokenPair(request: QueryTokenPairRequest): Promise<QueryTokenPairResponseSDKType> {
+    tokenPair(request: QueryTokenPairRequest): Promise<QueryTokenPairResponse> {
       return queryService.tokenPair(request);
     },
 
-    params(request?: QueryParamsRequest): Promise<QueryParamsResponseSDKType> {
+    params(request?: QueryParamsRequest): Promise<QueryParamsResponse> {
       return queryService.params(request);
     }
 

@@ -11,7 +11,8 @@ const returnReponseType = (ResponseType: string) => {
             t.tsTypeParameterInstantiation(
                 [
                     t.tsTypeReference(
-                        t.identifier(ResponseType + 'SDKType')
+                        t.identifier(ResponseType)
+                        // t.identifier(ResponseType + 'SDKType')
                     )
                 ]
             )

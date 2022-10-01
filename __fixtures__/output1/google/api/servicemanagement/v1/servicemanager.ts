@@ -730,7 +730,7 @@ export const ListServicesResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ListServicesResponseSDKType {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ListServicesResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListServicesResponse();
@@ -1364,7 +1364,7 @@ export const ListServiceConfigsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ListServiceConfigsResponseSDKType {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ListServiceConfigsResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListServiceConfigsResponse();
@@ -1902,7 +1902,7 @@ export const ListServiceRolloutsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ListServiceRolloutsResponseSDKType {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ListServiceRolloutsResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListServiceRolloutsResponse();
@@ -2173,7 +2173,7 @@ export const GenerateConfigReportResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): GenerateConfigReportResponseSDKType {
+  decode(input: _m0.Reader | Uint8Array, length?: number): GenerateConfigReportResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGenerateConfigReportResponse();

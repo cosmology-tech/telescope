@@ -649,7 +649,7 @@ export const MsgCreateLeaseResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateLeaseResponseSDKType {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateLeaseResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateLeaseResponse();
@@ -770,7 +770,7 @@ export const MsgWithdrawLeaseResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgWithdrawLeaseResponseSDKType {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgWithdrawLeaseResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgWithdrawLeaseResponse();
@@ -891,7 +891,7 @@ export const MsgCloseLeaseResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCloseLeaseResponseSDKType {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCloseLeaseResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCloseLeaseResponse();

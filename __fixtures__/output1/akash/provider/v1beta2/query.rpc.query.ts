@@ -7,10 +7,10 @@ import { QueryProvidersRequest, QueryProvidersRequestSDKType, QueryProvidersResp
 
 /** Query defines the RPC service */
 export interface Query {
-  providers(request?: QueryProvidersRequest): Promise<QueryProvidersResponseSDKType>;
+  providers(request?: QueryProvidersRequest): Promise<QueryProvidersResponse>;
   /*Providers queries providers*/
 
-  provider(request: QueryProviderRequest): Promise<QueryProviderResponseSDKType>;
+  provider(request: QueryProviderRequest): Promise<QueryProviderResponse>;
   /*Provider queries provider details*/
 
 }
@@ -24,14 +24,14 @@ export class QueryClientImpl implements Query {
   /* Providers queries providers */
   providers = async (request: QueryProvidersRequest = {
     pagination: undefined
-  }): Promise<QueryProvidersResponseSDKType> => {
+  }): Promise<QueryProvidersResponse> => {
     const data = QueryProvidersRequest.encode(request).finish();
     const promise = this.rpc.request("akash.provider.v1beta2.Query", "Providers", data);
     return promise.then(data => QueryProvidersResponse.decode(new _m0.Reader(data)));
   };
 
   /* Provider queries provider details */
-  provider = async (request: QueryProviderRequest): Promise<QueryProviderResponseSDKType> => {
+  provider = async (request: QueryProviderRequest): Promise<QueryProviderResponse> => {
     const data = QueryProviderRequest.encode(request).finish();
     const promise = this.rpc.request("akash.provider.v1beta2.Query", "Provider", data);
     return promise.then(data => QueryProviderResponse.decode(new _m0.Reader(data)));
@@ -41,11 +41,11 @@ export const createRpcQueryExtension = (base: QueryClient) => {
   const rpc = createProtobufRpcClient(base);
   const queryService = new QueryClientImpl(rpc);
   return {
-    providers(request?: QueryProvidersRequest): Promise<QueryProvidersResponseSDKType> {
+    providers(request?: QueryProvidersRequest): Promise<QueryProvidersResponse> {
       return queryService.providers(request);
     },
 
-    provider(request: QueryProviderRequest): Promise<QueryProviderResponseSDKType> {
+    provider(request: QueryProviderRequest): Promise<QueryProviderResponse> {
       return queryService.provider(request);
     }
 

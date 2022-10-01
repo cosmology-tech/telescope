@@ -9,26 +9,26 @@ import { QueryIncentivesRequest, QueryIncentivesRequestSDKType, QueryIncentivesR
 
 /** Query defines the RPC service */
 export interface Query {
-  incentives(request?: QueryIncentivesRequest): Promise<QueryIncentivesResponseSDKType>;
+  incentives(request?: QueryIncentivesRequest): Promise<QueryIncentivesResponse>;
   /*Incentives retrieves registered incentives*/
 
-  incentive(request: QueryIncentiveRequest): Promise<QueryIncentiveResponseSDKType>;
+  incentive(request: QueryIncentiveRequest): Promise<QueryIncentiveResponse>;
   /*Incentive retrieves a registered incentive*/
 
-  gasMeters(request: QueryGasMetersRequest): Promise<QueryGasMetersResponseSDKType>;
+  gasMeters(request: QueryGasMetersRequest): Promise<QueryGasMetersResponse>;
   /*GasMeters retrieves active gas meters for a given contract*/
 
-  gasMeter(request: QueryGasMeterRequest): Promise<QueryGasMeterResponseSDKType>;
+  gasMeter(request: QueryGasMeterRequest): Promise<QueryGasMeterResponse>;
   /*GasMeter Retrieves a active gas meter*/
 
-  allocationMeters(request?: QueryAllocationMetersRequest): Promise<QueryAllocationMetersResponseSDKType>;
+  allocationMeters(request?: QueryAllocationMetersRequest): Promise<QueryAllocationMetersResponse>;
   /*AllocationMeters retrieves active allocation meters for a given
   denomination*/
 
-  allocationMeter(request: QueryAllocationMeterRequest): Promise<QueryAllocationMeterResponseSDKType>;
+  allocationMeter(request: QueryAllocationMeterRequest): Promise<QueryAllocationMeterResponse>;
   /*AllocationMeter Retrieves a active gas meter*/
 
-  params(request?: QueryParamsRequest): Promise<QueryParamsResponseSDKType>;
+  params(request?: QueryParamsRequest): Promise<QueryParamsResponse>;
   /*Params retrieves the incentives module params*/
 
 }
@@ -48,25 +48,25 @@ export class QueryClientImpl implements Query {
 
   incentives(request: QueryIncentivesRequest = {
     pagination: undefined
-  }): Promise<QueryIncentivesResponseSDKType> {
+  }): Promise<QueryIncentivesResponse> {
     const data = QueryIncentivesRequest.encode(request).finish();
     const promise = this.rpc.request("evmos.incentives.v1.Query", "Incentives", data);
     return promise.then(data => QueryIncentivesResponse.decode(new _m0.Reader(data)));
   }
 
-  incentive(request: QueryIncentiveRequest): Promise<QueryIncentiveResponseSDKType> {
+  incentive(request: QueryIncentiveRequest): Promise<QueryIncentiveResponse> {
     const data = QueryIncentiveRequest.encode(request).finish();
     const promise = this.rpc.request("evmos.incentives.v1.Query", "Incentive", data);
     return promise.then(data => QueryIncentiveResponse.decode(new _m0.Reader(data)));
   }
 
-  gasMeters(request: QueryGasMetersRequest): Promise<QueryGasMetersResponseSDKType> {
+  gasMeters(request: QueryGasMetersRequest): Promise<QueryGasMetersResponse> {
     const data = QueryGasMetersRequest.encode(request).finish();
     const promise = this.rpc.request("evmos.incentives.v1.Query", "GasMeters", data);
     return promise.then(data => QueryGasMetersResponse.decode(new _m0.Reader(data)));
   }
 
-  gasMeter(request: QueryGasMeterRequest): Promise<QueryGasMeterResponseSDKType> {
+  gasMeter(request: QueryGasMeterRequest): Promise<QueryGasMeterResponse> {
     const data = QueryGasMeterRequest.encode(request).finish();
     const promise = this.rpc.request("evmos.incentives.v1.Query", "GasMeter", data);
     return promise.then(data => QueryGasMeterResponse.decode(new _m0.Reader(data)));
@@ -74,19 +74,19 @@ export class QueryClientImpl implements Query {
 
   allocationMeters(request: QueryAllocationMetersRequest = {
     pagination: undefined
-  }): Promise<QueryAllocationMetersResponseSDKType> {
+  }): Promise<QueryAllocationMetersResponse> {
     const data = QueryAllocationMetersRequest.encode(request).finish();
     const promise = this.rpc.request("evmos.incentives.v1.Query", "AllocationMeters", data);
     return promise.then(data => QueryAllocationMetersResponse.decode(new _m0.Reader(data)));
   }
 
-  allocationMeter(request: QueryAllocationMeterRequest): Promise<QueryAllocationMeterResponseSDKType> {
+  allocationMeter(request: QueryAllocationMeterRequest): Promise<QueryAllocationMeterResponse> {
     const data = QueryAllocationMeterRequest.encode(request).finish();
     const promise = this.rpc.request("evmos.incentives.v1.Query", "AllocationMeter", data);
     return promise.then(data => QueryAllocationMeterResponse.decode(new _m0.Reader(data)));
   }
 
-  params(request: QueryParamsRequest = {}): Promise<QueryParamsResponseSDKType> {
+  params(request: QueryParamsRequest = {}): Promise<QueryParamsResponse> {
     const data = QueryParamsRequest.encode(request).finish();
     const promise = this.rpc.request("evmos.incentives.v1.Query", "Params", data);
     return promise.then(data => QueryParamsResponse.decode(new _m0.Reader(data)));
@@ -97,31 +97,31 @@ export const createRpcQueryExtension = (base: QueryClient) => {
   const rpc = createProtobufRpcClient(base);
   const queryService = new QueryClientImpl(rpc);
   return {
-    incentives(request?: QueryIncentivesRequest): Promise<QueryIncentivesResponseSDKType> {
+    incentives(request?: QueryIncentivesRequest): Promise<QueryIncentivesResponse> {
       return queryService.incentives(request);
     },
 
-    incentive(request: QueryIncentiveRequest): Promise<QueryIncentiveResponseSDKType> {
+    incentive(request: QueryIncentiveRequest): Promise<QueryIncentiveResponse> {
       return queryService.incentive(request);
     },
 
-    gasMeters(request: QueryGasMetersRequest): Promise<QueryGasMetersResponseSDKType> {
+    gasMeters(request: QueryGasMetersRequest): Promise<QueryGasMetersResponse> {
       return queryService.gasMeters(request);
     },
 
-    gasMeter(request: QueryGasMeterRequest): Promise<QueryGasMeterResponseSDKType> {
+    gasMeter(request: QueryGasMeterRequest): Promise<QueryGasMeterResponse> {
       return queryService.gasMeter(request);
     },
 
-    allocationMeters(request?: QueryAllocationMetersRequest): Promise<QueryAllocationMetersResponseSDKType> {
+    allocationMeters(request?: QueryAllocationMetersRequest): Promise<QueryAllocationMetersResponse> {
       return queryService.allocationMeters(request);
     },
 
-    allocationMeter(request: QueryAllocationMeterRequest): Promise<QueryAllocationMeterResponseSDKType> {
+    allocationMeter(request: QueryAllocationMeterRequest): Promise<QueryAllocationMeterResponse> {
       return queryService.allocationMeter(request);
     },
 
-    params(request?: QueryParamsRequest): Promise<QueryParamsResponseSDKType> {
+    params(request?: QueryParamsRequest): Promise<QueryParamsResponse> {
       return queryService.params(request);
     }
 

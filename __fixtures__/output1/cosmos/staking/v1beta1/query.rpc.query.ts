@@ -7,50 +7,50 @@ import { QueryValidatorsRequest, QueryValidatorsRequestSDKType, QueryValidatorsR
 
 /** Query defines the RPC service */
 export interface Query {
-  validators(request: QueryValidatorsRequest): Promise<QueryValidatorsResponseSDKType>;
+  validators(request: QueryValidatorsRequest): Promise<QueryValidatorsResponse>;
   /*Validators queries all validators that match the given status.*/
 
-  validator(request: QueryValidatorRequest): Promise<QueryValidatorResponseSDKType>;
+  validator(request: QueryValidatorRequest): Promise<QueryValidatorResponse>;
   /*Validator queries validator info for given validator address.*/
 
-  validatorDelegations(request: QueryValidatorDelegationsRequest): Promise<QueryValidatorDelegationsResponseSDKType>;
+  validatorDelegations(request: QueryValidatorDelegationsRequest): Promise<QueryValidatorDelegationsResponse>;
   /*ValidatorDelegations queries delegate info for given validator.*/
 
-  validatorUnbondingDelegations(request: QueryValidatorUnbondingDelegationsRequest): Promise<QueryValidatorUnbondingDelegationsResponseSDKType>;
+  validatorUnbondingDelegations(request: QueryValidatorUnbondingDelegationsRequest): Promise<QueryValidatorUnbondingDelegationsResponse>;
   /*ValidatorUnbondingDelegations queries unbonding delegations of a validator.*/
 
-  delegation(request: QueryDelegationRequest): Promise<QueryDelegationResponseSDKType>;
+  delegation(request: QueryDelegationRequest): Promise<QueryDelegationResponse>;
   /*Delegation queries delegate info for given validator delegator pair.*/
 
-  unbondingDelegation(request: QueryUnbondingDelegationRequest): Promise<QueryUnbondingDelegationResponseSDKType>;
+  unbondingDelegation(request: QueryUnbondingDelegationRequest): Promise<QueryUnbondingDelegationResponse>;
   /*UnbondingDelegation queries unbonding info for given validator delegator
   pair.*/
 
-  delegatorDelegations(request: QueryDelegatorDelegationsRequest): Promise<QueryDelegatorDelegationsResponseSDKType>;
+  delegatorDelegations(request: QueryDelegatorDelegationsRequest): Promise<QueryDelegatorDelegationsResponse>;
   /*DelegatorDelegations queries all delegations of a given delegator address.*/
 
-  delegatorUnbondingDelegations(request: QueryDelegatorUnbondingDelegationsRequest): Promise<QueryDelegatorUnbondingDelegationsResponseSDKType>;
+  delegatorUnbondingDelegations(request: QueryDelegatorUnbondingDelegationsRequest): Promise<QueryDelegatorUnbondingDelegationsResponse>;
   /*DelegatorUnbondingDelegations queries all unbonding delegations of a given
   delegator address.*/
 
-  redelegations(request: QueryRedelegationsRequest): Promise<QueryRedelegationsResponseSDKType>;
+  redelegations(request: QueryRedelegationsRequest): Promise<QueryRedelegationsResponse>;
   /*Redelegations queries redelegations of given address.*/
 
-  delegatorValidators(request: QueryDelegatorValidatorsRequest): Promise<QueryDelegatorValidatorsResponseSDKType>;
+  delegatorValidators(request: QueryDelegatorValidatorsRequest): Promise<QueryDelegatorValidatorsResponse>;
   /*DelegatorValidators queries all validators info for given delegator
   address.*/
 
-  delegatorValidator(request: QueryDelegatorValidatorRequest): Promise<QueryDelegatorValidatorResponseSDKType>;
+  delegatorValidator(request: QueryDelegatorValidatorRequest): Promise<QueryDelegatorValidatorResponse>;
   /*DelegatorValidator queries validator info for given delegator validator
   pair.*/
 
-  historicalInfo(request: QueryHistoricalInfoRequest): Promise<QueryHistoricalInfoResponseSDKType>;
+  historicalInfo(request: QueryHistoricalInfoRequest): Promise<QueryHistoricalInfoResponse>;
   /*HistoricalInfo queries the historical info for given height.*/
 
-  pool(request?: QueryPoolRequest): Promise<QueryPoolResponseSDKType>;
+  pool(request?: QueryPoolRequest): Promise<QueryPoolResponse>;
   /*Pool queries the pool info.*/
 
-  params(request?: QueryParamsRequest): Promise<QueryParamsResponseSDKType>;
+  params(request?: QueryParamsRequest): Promise<QueryParamsResponse>;
   /*Parameters queries the staking parameters.*/
 
 }
@@ -75,85 +75,85 @@ export class QueryClientImpl implements Query {
     this.params = this.params.bind(this);
   }
 
-  validators(request: QueryValidatorsRequest): Promise<QueryValidatorsResponseSDKType> {
+  validators(request: QueryValidatorsRequest): Promise<QueryValidatorsResponse> {
     const data = QueryValidatorsRequest.encode(request).finish();
     const promise = this.rpc.request("cosmos.staking.v1beta1.Query", "Validators", data);
     return promise.then(data => QueryValidatorsResponse.decode(new _m0.Reader(data)));
   }
 
-  validator(request: QueryValidatorRequest): Promise<QueryValidatorResponseSDKType> {
+  validator(request: QueryValidatorRequest): Promise<QueryValidatorResponse> {
     const data = QueryValidatorRequest.encode(request).finish();
     const promise = this.rpc.request("cosmos.staking.v1beta1.Query", "Validator", data);
     return promise.then(data => QueryValidatorResponse.decode(new _m0.Reader(data)));
   }
 
-  validatorDelegations(request: QueryValidatorDelegationsRequest): Promise<QueryValidatorDelegationsResponseSDKType> {
+  validatorDelegations(request: QueryValidatorDelegationsRequest): Promise<QueryValidatorDelegationsResponse> {
     const data = QueryValidatorDelegationsRequest.encode(request).finish();
     const promise = this.rpc.request("cosmos.staking.v1beta1.Query", "ValidatorDelegations", data);
     return promise.then(data => QueryValidatorDelegationsResponse.decode(new _m0.Reader(data)));
   }
 
-  validatorUnbondingDelegations(request: QueryValidatorUnbondingDelegationsRequest): Promise<QueryValidatorUnbondingDelegationsResponseSDKType> {
+  validatorUnbondingDelegations(request: QueryValidatorUnbondingDelegationsRequest): Promise<QueryValidatorUnbondingDelegationsResponse> {
     const data = QueryValidatorUnbondingDelegationsRequest.encode(request).finish();
     const promise = this.rpc.request("cosmos.staking.v1beta1.Query", "ValidatorUnbondingDelegations", data);
     return promise.then(data => QueryValidatorUnbondingDelegationsResponse.decode(new _m0.Reader(data)));
   }
 
-  delegation(request: QueryDelegationRequest): Promise<QueryDelegationResponseSDKType> {
+  delegation(request: QueryDelegationRequest): Promise<QueryDelegationResponse> {
     const data = QueryDelegationRequest.encode(request).finish();
     const promise = this.rpc.request("cosmos.staking.v1beta1.Query", "Delegation", data);
     return promise.then(data => QueryDelegationResponse.decode(new _m0.Reader(data)));
   }
 
-  unbondingDelegation(request: QueryUnbondingDelegationRequest): Promise<QueryUnbondingDelegationResponseSDKType> {
+  unbondingDelegation(request: QueryUnbondingDelegationRequest): Promise<QueryUnbondingDelegationResponse> {
     const data = QueryUnbondingDelegationRequest.encode(request).finish();
     const promise = this.rpc.request("cosmos.staking.v1beta1.Query", "UnbondingDelegation", data);
     return promise.then(data => QueryUnbondingDelegationResponse.decode(new _m0.Reader(data)));
   }
 
-  delegatorDelegations(request: QueryDelegatorDelegationsRequest): Promise<QueryDelegatorDelegationsResponseSDKType> {
+  delegatorDelegations(request: QueryDelegatorDelegationsRequest): Promise<QueryDelegatorDelegationsResponse> {
     const data = QueryDelegatorDelegationsRequest.encode(request).finish();
     const promise = this.rpc.request("cosmos.staking.v1beta1.Query", "DelegatorDelegations", data);
     return promise.then(data => QueryDelegatorDelegationsResponse.decode(new _m0.Reader(data)));
   }
 
-  delegatorUnbondingDelegations(request: QueryDelegatorUnbondingDelegationsRequest): Promise<QueryDelegatorUnbondingDelegationsResponseSDKType> {
+  delegatorUnbondingDelegations(request: QueryDelegatorUnbondingDelegationsRequest): Promise<QueryDelegatorUnbondingDelegationsResponse> {
     const data = QueryDelegatorUnbondingDelegationsRequest.encode(request).finish();
     const promise = this.rpc.request("cosmos.staking.v1beta1.Query", "DelegatorUnbondingDelegations", data);
     return promise.then(data => QueryDelegatorUnbondingDelegationsResponse.decode(new _m0.Reader(data)));
   }
 
-  redelegations(request: QueryRedelegationsRequest): Promise<QueryRedelegationsResponseSDKType> {
+  redelegations(request: QueryRedelegationsRequest): Promise<QueryRedelegationsResponse> {
     const data = QueryRedelegationsRequest.encode(request).finish();
     const promise = this.rpc.request("cosmos.staking.v1beta1.Query", "Redelegations", data);
     return promise.then(data => QueryRedelegationsResponse.decode(new _m0.Reader(data)));
   }
 
-  delegatorValidators(request: QueryDelegatorValidatorsRequest): Promise<QueryDelegatorValidatorsResponseSDKType> {
+  delegatorValidators(request: QueryDelegatorValidatorsRequest): Promise<QueryDelegatorValidatorsResponse> {
     const data = QueryDelegatorValidatorsRequest.encode(request).finish();
     const promise = this.rpc.request("cosmos.staking.v1beta1.Query", "DelegatorValidators", data);
     return promise.then(data => QueryDelegatorValidatorsResponse.decode(new _m0.Reader(data)));
   }
 
-  delegatorValidator(request: QueryDelegatorValidatorRequest): Promise<QueryDelegatorValidatorResponseSDKType> {
+  delegatorValidator(request: QueryDelegatorValidatorRequest): Promise<QueryDelegatorValidatorResponse> {
     const data = QueryDelegatorValidatorRequest.encode(request).finish();
     const promise = this.rpc.request("cosmos.staking.v1beta1.Query", "DelegatorValidator", data);
     return promise.then(data => QueryDelegatorValidatorResponse.decode(new _m0.Reader(data)));
   }
 
-  historicalInfo(request: QueryHistoricalInfoRequest): Promise<QueryHistoricalInfoResponseSDKType> {
+  historicalInfo(request: QueryHistoricalInfoRequest): Promise<QueryHistoricalInfoResponse> {
     const data = QueryHistoricalInfoRequest.encode(request).finish();
     const promise = this.rpc.request("cosmos.staking.v1beta1.Query", "HistoricalInfo", data);
     return promise.then(data => QueryHistoricalInfoResponse.decode(new _m0.Reader(data)));
   }
 
-  pool(request: QueryPoolRequest = {}): Promise<QueryPoolResponseSDKType> {
+  pool(request: QueryPoolRequest = {}): Promise<QueryPoolResponse> {
     const data = QueryPoolRequest.encode(request).finish();
     const promise = this.rpc.request("cosmos.staking.v1beta1.Query", "Pool", data);
     return promise.then(data => QueryPoolResponse.decode(new _m0.Reader(data)));
   }
 
-  params(request: QueryParamsRequest = {}): Promise<QueryParamsResponseSDKType> {
+  params(request: QueryParamsRequest = {}): Promise<QueryParamsResponse> {
     const data = QueryParamsRequest.encode(request).finish();
     const promise = this.rpc.request("cosmos.staking.v1beta1.Query", "Params", data);
     return promise.then(data => QueryParamsResponse.decode(new _m0.Reader(data)));
@@ -164,59 +164,59 @@ export const createRpcQueryExtension = (base: QueryClient) => {
   const rpc = createProtobufRpcClient(base);
   const queryService = new QueryClientImpl(rpc);
   return {
-    validators(request: QueryValidatorsRequest): Promise<QueryValidatorsResponseSDKType> {
+    validators(request: QueryValidatorsRequest): Promise<QueryValidatorsResponse> {
       return queryService.validators(request);
     },
 
-    validator(request: QueryValidatorRequest): Promise<QueryValidatorResponseSDKType> {
+    validator(request: QueryValidatorRequest): Promise<QueryValidatorResponse> {
       return queryService.validator(request);
     },
 
-    validatorDelegations(request: QueryValidatorDelegationsRequest): Promise<QueryValidatorDelegationsResponseSDKType> {
+    validatorDelegations(request: QueryValidatorDelegationsRequest): Promise<QueryValidatorDelegationsResponse> {
       return queryService.validatorDelegations(request);
     },
 
-    validatorUnbondingDelegations(request: QueryValidatorUnbondingDelegationsRequest): Promise<QueryValidatorUnbondingDelegationsResponseSDKType> {
+    validatorUnbondingDelegations(request: QueryValidatorUnbondingDelegationsRequest): Promise<QueryValidatorUnbondingDelegationsResponse> {
       return queryService.validatorUnbondingDelegations(request);
     },
 
-    delegation(request: QueryDelegationRequest): Promise<QueryDelegationResponseSDKType> {
+    delegation(request: QueryDelegationRequest): Promise<QueryDelegationResponse> {
       return queryService.delegation(request);
     },
 
-    unbondingDelegation(request: QueryUnbondingDelegationRequest): Promise<QueryUnbondingDelegationResponseSDKType> {
+    unbondingDelegation(request: QueryUnbondingDelegationRequest): Promise<QueryUnbondingDelegationResponse> {
       return queryService.unbondingDelegation(request);
     },
 
-    delegatorDelegations(request: QueryDelegatorDelegationsRequest): Promise<QueryDelegatorDelegationsResponseSDKType> {
+    delegatorDelegations(request: QueryDelegatorDelegationsRequest): Promise<QueryDelegatorDelegationsResponse> {
       return queryService.delegatorDelegations(request);
     },
 
-    delegatorUnbondingDelegations(request: QueryDelegatorUnbondingDelegationsRequest): Promise<QueryDelegatorUnbondingDelegationsResponseSDKType> {
+    delegatorUnbondingDelegations(request: QueryDelegatorUnbondingDelegationsRequest): Promise<QueryDelegatorUnbondingDelegationsResponse> {
       return queryService.delegatorUnbondingDelegations(request);
     },
 
-    redelegations(request: QueryRedelegationsRequest): Promise<QueryRedelegationsResponseSDKType> {
+    redelegations(request: QueryRedelegationsRequest): Promise<QueryRedelegationsResponse> {
       return queryService.redelegations(request);
     },
 
-    delegatorValidators(request: QueryDelegatorValidatorsRequest): Promise<QueryDelegatorValidatorsResponseSDKType> {
+    delegatorValidators(request: QueryDelegatorValidatorsRequest): Promise<QueryDelegatorValidatorsResponse> {
       return queryService.delegatorValidators(request);
     },
 
-    delegatorValidator(request: QueryDelegatorValidatorRequest): Promise<QueryDelegatorValidatorResponseSDKType> {
+    delegatorValidator(request: QueryDelegatorValidatorRequest): Promise<QueryDelegatorValidatorResponse> {
       return queryService.delegatorValidator(request);
     },
 
-    historicalInfo(request: QueryHistoricalInfoRequest): Promise<QueryHistoricalInfoResponseSDKType> {
+    historicalInfo(request: QueryHistoricalInfoRequest): Promise<QueryHistoricalInfoResponse> {
       return queryService.historicalInfo(request);
     },
 
-    pool(request?: QueryPoolRequest): Promise<QueryPoolResponseSDKType> {
+    pool(request?: QueryPoolRequest): Promise<QueryPoolResponse> {
       return queryService.pool(request);
     },
 
-    params(request?: QueryParamsRequest): Promise<QueryParamsResponseSDKType> {
+    params(request?: QueryParamsRequest): Promise<QueryParamsResponse> {
       return queryService.params(request);
     }
 

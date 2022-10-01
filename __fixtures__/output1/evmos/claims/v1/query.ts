@@ -205,7 +205,7 @@ export const QueryTotalUnclaimedResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryTotalUnclaimedResponseSDKType {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryTotalUnclaimedResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryTotalUnclaimedResponse();
@@ -338,7 +338,7 @@ export const QueryParamsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryParamsResponseSDKType {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryParamsResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryParamsResponse();
@@ -481,7 +481,7 @@ export const QueryClaimsRecordsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryClaimsRecordsResponseSDKType {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryClaimsRecordsResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryClaimsRecordsResponse();
@@ -645,7 +645,7 @@ export const QueryClaimsRecordResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryClaimsRecordResponseSDKType {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryClaimsRecordResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryClaimsRecordResponse();

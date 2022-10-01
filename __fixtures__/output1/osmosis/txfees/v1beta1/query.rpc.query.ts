@@ -6,18 +6,18 @@ import { QueryFeeTokensRequest, QueryFeeTokensRequestSDKType, QueryFeeTokensResp
 
 /** Query defines the RPC service */
 export interface Query {
-  feeTokens(request?: QueryFeeTokensRequest): Promise<QueryFeeTokensResponseSDKType>;
+  feeTokens(request?: QueryFeeTokensRequest): Promise<QueryFeeTokensResponse>;
   /*FeeTokens returns a list of all the whitelisted fee tokens and their
   corresponding pools It does not include the BaseDenom, which has its own
   query endpoint*/
 
-  denomSpotPrice(request: QueryDenomSpotPriceRequest): Promise<QueryDenomSpotPriceResponseSDKType>;
+  denomSpotPrice(request: QueryDenomSpotPriceRequest): Promise<QueryDenomSpotPriceResponse>;
   /*null*/
 
-  denomPoolId(request: QueryDenomPoolIdRequest): Promise<QueryDenomPoolIdResponseSDKType>;
+  denomPoolId(request: QueryDenomPoolIdRequest): Promise<QueryDenomPoolIdResponse>;
   /*null*/
 
-  baseDenom(request?: QueryBaseDenomRequest): Promise<QueryBaseDenomResponseSDKType>;
+  baseDenom(request?: QueryBaseDenomRequest): Promise<QueryBaseDenomResponse>;
   /*null*/
 
 }
@@ -32,25 +32,25 @@ export class QueryClientImpl implements Query {
     this.baseDenom = this.baseDenom.bind(this);
   }
 
-  feeTokens(request: QueryFeeTokensRequest = {}): Promise<QueryFeeTokensResponseSDKType> {
+  feeTokens(request: QueryFeeTokensRequest = {}): Promise<QueryFeeTokensResponse> {
     const data = QueryFeeTokensRequest.encode(request).finish();
     const promise = this.rpc.request("osmosis.txfees.v1beta1.Query", "FeeTokens", data);
     return promise.then(data => QueryFeeTokensResponse.decode(new _m0.Reader(data)));
   }
 
-  denomSpotPrice(request: QueryDenomSpotPriceRequest): Promise<QueryDenomSpotPriceResponseSDKType> {
+  denomSpotPrice(request: QueryDenomSpotPriceRequest): Promise<QueryDenomSpotPriceResponse> {
     const data = QueryDenomSpotPriceRequest.encode(request).finish();
     const promise = this.rpc.request("osmosis.txfees.v1beta1.Query", "DenomSpotPrice", data);
     return promise.then(data => QueryDenomSpotPriceResponse.decode(new _m0.Reader(data)));
   }
 
-  denomPoolId(request: QueryDenomPoolIdRequest): Promise<QueryDenomPoolIdResponseSDKType> {
+  denomPoolId(request: QueryDenomPoolIdRequest): Promise<QueryDenomPoolIdResponse> {
     const data = QueryDenomPoolIdRequest.encode(request).finish();
     const promise = this.rpc.request("osmosis.txfees.v1beta1.Query", "DenomPoolId", data);
     return promise.then(data => QueryDenomPoolIdResponse.decode(new _m0.Reader(data)));
   }
 
-  baseDenom(request: QueryBaseDenomRequest = {}): Promise<QueryBaseDenomResponseSDKType> {
+  baseDenom(request: QueryBaseDenomRequest = {}): Promise<QueryBaseDenomResponse> {
     const data = QueryBaseDenomRequest.encode(request).finish();
     const promise = this.rpc.request("osmosis.txfees.v1beta1.Query", "BaseDenom", data);
     return promise.then(data => QueryBaseDenomResponse.decode(new _m0.Reader(data)));
@@ -61,19 +61,19 @@ export const createRpcQueryExtension = (base: QueryClient) => {
   const rpc = createProtobufRpcClient(base);
   const queryService = new QueryClientImpl(rpc);
   return {
-    feeTokens(request?: QueryFeeTokensRequest): Promise<QueryFeeTokensResponseSDKType> {
+    feeTokens(request?: QueryFeeTokensRequest): Promise<QueryFeeTokensResponse> {
       return queryService.feeTokens(request);
     },
 
-    denomSpotPrice(request: QueryDenomSpotPriceRequest): Promise<QueryDenomSpotPriceResponseSDKType> {
+    denomSpotPrice(request: QueryDenomSpotPriceRequest): Promise<QueryDenomSpotPriceResponse> {
       return queryService.denomSpotPrice(request);
     },
 
-    denomPoolId(request: QueryDenomPoolIdRequest): Promise<QueryDenomPoolIdResponseSDKType> {
+    denomPoolId(request: QueryDenomPoolIdRequest): Promise<QueryDenomPoolIdResponse> {
       return queryService.denomPoolId(request);
     },
 
-    baseDenom(request?: QueryBaseDenomRequest): Promise<QueryBaseDenomResponseSDKType> {
+    baseDenom(request?: QueryBaseDenomRequest): Promise<QueryBaseDenomResponse> {
       return queryService.baseDenom(request);
     }
 

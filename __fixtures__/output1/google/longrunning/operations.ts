@@ -312,7 +312,7 @@ export const Operation = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): OperationSDKType {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Operation {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseOperation();
@@ -602,7 +602,7 @@ export const ListOperationsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ListOperationsResponseSDKType {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ListOperationsResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListOperationsResponse();

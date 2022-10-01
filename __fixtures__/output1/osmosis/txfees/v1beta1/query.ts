@@ -132,7 +132,7 @@ export const QueryFeeTokensResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryFeeTokensResponseSDKType {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryFeeTokensResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryFeeTokensResponse();
@@ -287,7 +287,7 @@ export const QueryDenomSpotPriceResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryDenomSpotPriceResponseSDKType {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryDenomSpotPriceResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDenomSpotPriceResponse();
@@ -434,7 +434,7 @@ export const QueryDenomPoolIdResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryDenomPoolIdResponseSDKType {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryDenomPoolIdResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDenomPoolIdResponse();
@@ -555,7 +555,7 @@ export const QueryBaseDenomResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryBaseDenomResponseSDKType {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryBaseDenomResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryBaseDenomResponse();

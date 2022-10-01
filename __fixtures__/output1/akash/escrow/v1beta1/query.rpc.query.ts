@@ -7,12 +7,12 @@ import { QueryAccountsRequest, QueryAccountsRequestSDKType, QueryAccountsRespons
 
 /** Query defines the RPC service */
 export interface Query {
-  accounts(request: QueryAccountsRequest): Promise<QueryAccountsResponseSDKType>;
+  accounts(request: QueryAccountsRequest): Promise<QueryAccountsResponse>;
   /*buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
   buf:lint:ignore RPC_RESPONSE_STANDARD_NAME
   Accounts queries all accounts*/
 
-  payments(request: QueryPaymentsRequest): Promise<QueryPaymentsResponseSDKType>;
+  payments(request: QueryPaymentsRequest): Promise<QueryPaymentsResponse>;
   /*buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
   buf:lint:ignore RPC_RESPONSE_STANDARD_NAME
   Payments queries all payments*/
@@ -28,7 +28,7 @@ export class QueryClientImpl implements Query {
   /* buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
   buf:lint:ignore RPC_RESPONSE_STANDARD_NAME
   Accounts queries all accounts */
-  accounts = async (request: QueryAccountsRequest): Promise<QueryAccountsResponseSDKType> => {
+  accounts = async (request: QueryAccountsRequest): Promise<QueryAccountsResponse> => {
     const data = QueryAccountsRequest.encode(request).finish();
     const promise = this.rpc.request("akash.escrow.v1beta1.Query", "Accounts", data);
     return promise.then(data => QueryAccountsResponse.decode(new _m0.Reader(data)));
@@ -37,7 +37,7 @@ export class QueryClientImpl implements Query {
   /* buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
   buf:lint:ignore RPC_RESPONSE_STANDARD_NAME
   Payments queries all payments */
-  payments = async (request: QueryPaymentsRequest): Promise<QueryPaymentsResponseSDKType> => {
+  payments = async (request: QueryPaymentsRequest): Promise<QueryPaymentsResponse> => {
     const data = QueryPaymentsRequest.encode(request).finish();
     const promise = this.rpc.request("akash.escrow.v1beta1.Query", "Payments", data);
     return promise.then(data => QueryPaymentsResponse.decode(new _m0.Reader(data)));
@@ -47,11 +47,11 @@ export const createRpcQueryExtension = (base: QueryClient) => {
   const rpc = createProtobufRpcClient(base);
   const queryService = new QueryClientImpl(rpc);
   return {
-    accounts(request: QueryAccountsRequest): Promise<QueryAccountsResponseSDKType> {
+    accounts(request: QueryAccountsRequest): Promise<QueryAccountsResponse> {
       return queryService.accounts(request);
     },
 
-    payments(request: QueryPaymentsRequest): Promise<QueryPaymentsResponseSDKType> {
+    payments(request: QueryPaymentsRequest): Promise<QueryPaymentsResponse> {
       return queryService.payments(request);
     }
 

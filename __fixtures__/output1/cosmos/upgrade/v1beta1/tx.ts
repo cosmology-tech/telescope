@@ -169,7 +169,7 @@ export const MsgSoftwareUpgradeResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgSoftwareUpgradeResponseSDKType {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgSoftwareUpgradeResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSoftwareUpgradeResponse();
@@ -290,7 +290,7 @@ export const MsgCancelUpgradeResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCancelUpgradeResponseSDKType {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCancelUpgradeResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCancelUpgradeResponse();

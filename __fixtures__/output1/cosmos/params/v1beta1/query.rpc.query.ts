@@ -6,11 +6,11 @@ import { QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, Que
 
 /** Query defines the RPC service */
 export interface Query {
-  params(request: QueryParamsRequest): Promise<QueryParamsResponseSDKType>;
+  params(request: QueryParamsRequest): Promise<QueryParamsResponse>;
   /*Params queries a specific parameter of a module, given its subspace and
   key.*/
 
-  subspaces(request?: QuerySubspacesRequest): Promise<QuerySubspacesResponseSDKType>;
+  subspaces(request?: QuerySubspacesRequest): Promise<QuerySubspacesResponse>;
   /*Subspaces queries for all registered subspaces and all keys for a subspace.*/
 
 }
@@ -23,13 +23,13 @@ export class QueryClientImpl implements Query {
     this.subspaces = this.subspaces.bind(this);
   }
 
-  params(request: QueryParamsRequest): Promise<QueryParamsResponseSDKType> {
+  params(request: QueryParamsRequest): Promise<QueryParamsResponse> {
     const data = QueryParamsRequest.encode(request).finish();
     const promise = this.rpc.request("cosmos.params.v1beta1.Query", "Params", data);
     return promise.then(data => QueryParamsResponse.decode(new _m0.Reader(data)));
   }
 
-  subspaces(request: QuerySubspacesRequest = {}): Promise<QuerySubspacesResponseSDKType> {
+  subspaces(request: QuerySubspacesRequest = {}): Promise<QuerySubspacesResponse> {
     const data = QuerySubspacesRequest.encode(request).finish();
     const promise = this.rpc.request("cosmos.params.v1beta1.Query", "Subspaces", data);
     return promise.then(data => QuerySubspacesResponse.decode(new _m0.Reader(data)));
@@ -40,11 +40,11 @@ export const createRpcQueryExtension = (base: QueryClient) => {
   const rpc = createProtobufRpcClient(base);
   const queryService = new QueryClientImpl(rpc);
   return {
-    params(request: QueryParamsRequest): Promise<QueryParamsResponseSDKType> {
+    params(request: QueryParamsRequest): Promise<QueryParamsResponse> {
       return queryService.params(request);
     },
 
-    subspaces(request?: QuerySubspacesRequest): Promise<QuerySubspacesResponseSDKType> {
+    subspaces(request?: QuerySubspacesRequest): Promise<QuerySubspacesResponse> {
       return queryService.subspaces(request);
     }
 

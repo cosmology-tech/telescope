@@ -227,7 +227,7 @@ export const QueryPeriodResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryPeriodResponseSDKType {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryPeriodResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryPeriodResponse();
@@ -348,7 +348,7 @@ export const QueryEpochMintProvisionResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryEpochMintProvisionResponseSDKType {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryEpochMintProvisionResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryEpochMintProvisionResponse();
@@ -469,7 +469,7 @@ export const QuerySkippedEpochsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QuerySkippedEpochsResponseSDKType {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QuerySkippedEpochsResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQuerySkippedEpochsResponse();
@@ -590,7 +590,7 @@ export const QueryCirculatingSupplyResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryCirculatingSupplyResponseSDKType {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryCirculatingSupplyResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryCirculatingSupplyResponse();
@@ -711,7 +711,7 @@ export const QueryInflationRateResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryInflationRateResponseSDKType {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryInflationRateResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryInflationRateResponse();
@@ -832,7 +832,7 @@ export const QueryParamsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryParamsResponseSDKType {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryParamsResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryParamsResponse();

@@ -139,7 +139,8 @@ export const decodeMethod = (context: ProtoParseContext, name: string, proto: Pr
     let returnType = name;
     // decode can be coupled to API requests
     if (context.store.responses[name]) {
-        returnType = name + 'SDKType';
+        // returnType = name + 'SDKType';
+        returnType = name;
     }
 
     return objectMethod(

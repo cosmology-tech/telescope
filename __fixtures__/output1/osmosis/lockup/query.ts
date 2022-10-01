@@ -279,7 +279,7 @@ export const ModuleBalanceResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ModuleBalanceResponseSDKType {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ModuleBalanceResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseModuleBalanceResponse();
@@ -412,7 +412,7 @@ export const ModuleLockedAmountResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ModuleLockedAmountResponseSDKType {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ModuleLockedAmountResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseModuleLockedAmountResponse();
@@ -562,7 +562,7 @@ export const AccountUnlockableCoinsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): AccountUnlockableCoinsResponseSDKType {
+  decode(input: _m0.Reader | Uint8Array, length?: number): AccountUnlockableCoinsResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAccountUnlockableCoinsResponse();
@@ -712,7 +712,7 @@ export const AccountUnlockingCoinsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): AccountUnlockingCoinsResponseSDKType {
+  decode(input: _m0.Reader | Uint8Array, length?: number): AccountUnlockingCoinsResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAccountUnlockingCoinsResponse();
@@ -862,7 +862,7 @@ export const AccountLockedCoinsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): AccountLockedCoinsResponseSDKType {
+  decode(input: _m0.Reader | Uint8Array, length?: number): AccountLockedCoinsResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAccountLockedCoinsResponse();
@@ -1026,7 +1026,7 @@ export const AccountLockedPastTimeResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): AccountLockedPastTimeResponseSDKType {
+  decode(input: _m0.Reader | Uint8Array, length?: number): AccountLockedPastTimeResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAccountLockedPastTimeResponse();
@@ -1190,7 +1190,7 @@ export const AccountLockedPastTimeNotUnlockingOnlyResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): AccountLockedPastTimeNotUnlockingOnlyResponseSDKType {
+  decode(input: _m0.Reader | Uint8Array, length?: number): AccountLockedPastTimeNotUnlockingOnlyResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAccountLockedPastTimeNotUnlockingOnlyResponse();
@@ -1354,7 +1354,7 @@ export const AccountUnlockedBeforeTimeResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): AccountUnlockedBeforeTimeResponseSDKType {
+  decode(input: _m0.Reader | Uint8Array, length?: number): AccountUnlockedBeforeTimeResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAccountUnlockedBeforeTimeResponse();
@@ -1532,7 +1532,7 @@ export const AccountLockedPastTimeDenomResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): AccountLockedPastTimeDenomResponseSDKType {
+  decode(input: _m0.Reader | Uint8Array, length?: number): AccountLockedPastTimeDenomResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAccountLockedPastTimeDenomResponse();
@@ -1696,7 +1696,7 @@ export const LockedDenomResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): LockedDenomResponseSDKType {
+  decode(input: _m0.Reader | Uint8Array, length?: number): LockedDenomResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLockedDenomResponse();
@@ -1834,7 +1834,7 @@ export const LockedResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): LockedResponseSDKType {
+  decode(input: _m0.Reader | Uint8Array, length?: number): LockedResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLockedResponse();
@@ -1972,7 +1972,7 @@ export const SyntheticLockupsByLockupIDResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): SyntheticLockupsByLockupIDResponseSDKType {
+  decode(input: _m0.Reader | Uint8Array, length?: number): SyntheticLockupsByLockupIDResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSyntheticLockupsByLockupIDResponse();
@@ -2136,7 +2136,7 @@ export const AccountLockedLongerDurationResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): AccountLockedLongerDurationResponseSDKType {
+  decode(input: _m0.Reader | Uint8Array, length?: number): AccountLockedLongerDurationResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAccountLockedLongerDurationResponse();
@@ -2300,7 +2300,7 @@ export const AccountLockedDurationResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): AccountLockedDurationResponseSDKType {
+  decode(input: _m0.Reader | Uint8Array, length?: number): AccountLockedDurationResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAccountLockedDurationResponse();
@@ -2464,7 +2464,7 @@ export const AccountLockedLongerDurationNotUnlockingOnlyResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): AccountLockedLongerDurationNotUnlockingOnlyResponseSDKType {
+  decode(input: _m0.Reader | Uint8Array, length?: number): AccountLockedLongerDurationNotUnlockingOnlyResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAccountLockedLongerDurationNotUnlockingOnlyResponse();
@@ -2642,7 +2642,7 @@ export const AccountLockedLongerDurationDenomResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): AccountLockedLongerDurationDenomResponseSDKType {
+  decode(input: _m0.Reader | Uint8Array, length?: number): AccountLockedLongerDurationDenomResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAccountLockedLongerDurationDenomResponse();

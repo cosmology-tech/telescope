@@ -6,7 +6,7 @@ import { QueryBalancesRequest, QueryBalancesRequestSDKType, QueryBalancesRespons
 
 /** Query defines the RPC service */
 export interface Query {
-  balances(request: QueryBalancesRequest): Promise<QueryBalancesResponseSDKType>;
+  balances(request: QueryBalancesRequest): Promise<QueryBalancesResponse>;
   /*Retrieves the unvested, vested and locked tokens for a vesting account*/
 
 }
@@ -18,7 +18,7 @@ export class QueryClientImpl implements Query {
     this.balances = this.balances.bind(this);
   }
 
-  balances(request: QueryBalancesRequest): Promise<QueryBalancesResponseSDKType> {
+  balances(request: QueryBalancesRequest): Promise<QueryBalancesResponse> {
     const data = QueryBalancesRequest.encode(request).finish();
     const promise = this.rpc.request("evmos.vesting.v1.Query", "Balances", data);
     return promise.then(data => QueryBalancesResponse.decode(new _m0.Reader(data)));
@@ -29,7 +29,7 @@ export const createRpcQueryExtension = (base: QueryClient) => {
   const rpc = createProtobufRpcClient(base);
   const queryService = new QueryClientImpl(rpc);
   return {
-    balances(request: QueryBalancesRequest): Promise<QueryBalancesResponseSDKType> {
+    balances(request: QueryBalancesRequest): Promise<QueryBalancesResponse> {
       return queryService.balances(request);
     }
 

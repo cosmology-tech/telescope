@@ -10,13 +10,13 @@ import { QueryDeploymentsRequest, QueryDeploymentsRequestSDKType, QueryDeploymen
 
 /** Query defines the RPC service */
 export interface Query {
-  deployments(request: QueryDeploymentsRequest): Promise<QueryDeploymentsResponseSDKType>;
+  deployments(request: QueryDeploymentsRequest): Promise<QueryDeploymentsResponse>;
   /*Deployments queries deployments*/
 
-  deployment(request: QueryDeploymentRequest): Promise<QueryDeploymentResponseSDKType>;
+  deployment(request: QueryDeploymentRequest): Promise<QueryDeploymentResponse>;
   /*Deployment queries deployment details*/
 
-  group(request: QueryGroupRequest): Promise<QueryGroupResponseSDKType>;
+  group(request: QueryGroupRequest): Promise<QueryGroupResponse>;
   /*Group queries group details*/
 
 }
@@ -28,21 +28,21 @@ export class QueryClientImpl implements Query {
   }
 
   /* Deployments queries deployments */
-  deployments = async (request: QueryDeploymentsRequest): Promise<QueryDeploymentsResponseSDKType> => {
+  deployments = async (request: QueryDeploymentsRequest): Promise<QueryDeploymentsResponse> => {
     const data = QueryDeploymentsRequest.encode(request).finish();
     const promise = this.rpc.request("akash.deployment.v1beta2.Query", "Deployments", data);
     return promise.then(data => QueryDeploymentsResponse.decode(new _m0.Reader(data)));
   };
 
   /* Deployment queries deployment details */
-  deployment = async (request: QueryDeploymentRequest): Promise<QueryDeploymentResponseSDKType> => {
+  deployment = async (request: QueryDeploymentRequest): Promise<QueryDeploymentResponse> => {
     const data = QueryDeploymentRequest.encode(request).finish();
     const promise = this.rpc.request("akash.deployment.v1beta2.Query", "Deployment", data);
     return promise.then(data => QueryDeploymentResponse.decode(new _m0.Reader(data)));
   };
 
   /* Group queries group details */
-  group = async (request: QueryGroupRequest): Promise<QueryGroupResponseSDKType> => {
+  group = async (request: QueryGroupRequest): Promise<QueryGroupResponse> => {
     const data = QueryGroupRequest.encode(request).finish();
     const promise = this.rpc.request("akash.deployment.v1beta2.Query", "Group", data);
     return promise.then(data => QueryGroupResponse.decode(new _m0.Reader(data)));
@@ -52,15 +52,15 @@ export const createRpcQueryExtension = (base: QueryClient) => {
   const rpc = createProtobufRpcClient(base);
   const queryService = new QueryClientImpl(rpc);
   return {
-    deployments(request: QueryDeploymentsRequest): Promise<QueryDeploymentsResponseSDKType> {
+    deployments(request: QueryDeploymentsRequest): Promise<QueryDeploymentsResponse> {
       return queryService.deployments(request);
     },
 
-    deployment(request: QueryDeploymentRequest): Promise<QueryDeploymentResponseSDKType> {
+    deployment(request: QueryDeploymentRequest): Promise<QueryDeploymentResponse> {
       return queryService.deployment(request);
     },
 
-    group(request: QueryGroupRequest): Promise<QueryGroupResponseSDKType> {
+    group(request: QueryGroupRequest): Promise<QueryGroupResponse> {
       return queryService.group(request);
     }
 

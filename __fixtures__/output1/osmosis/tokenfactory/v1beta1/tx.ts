@@ -211,7 +211,7 @@ export const MsgCreateDenomResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateDenomResponseSDKType {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateDenomResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateDenomResponse();
@@ -357,7 +357,7 @@ export const MsgMintResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgMintResponseSDKType {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgMintResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgMintResponse();
@@ -492,7 +492,7 @@ export const MsgBurnResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgBurnResponseSDKType {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgBurnResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgBurnResponse();
@@ -641,7 +641,7 @@ export const MsgChangeAdminResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgChangeAdminResponseSDKType {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgChangeAdminResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgChangeAdminResponse();

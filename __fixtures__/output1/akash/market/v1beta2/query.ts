@@ -246,7 +246,7 @@ export const QueryOrdersResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryOrdersResponseSDKType {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryOrdersResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryOrdersResponse();
@@ -405,7 +405,7 @@ export const QueryOrderResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryOrderResponseSDKType {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryOrderResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryOrderResponse();
@@ -562,7 +562,7 @@ export const QueryBidsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryBidsResponseSDKType {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryBidsResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryBidsResponse();
@@ -726,7 +726,7 @@ export const QueryBidResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryBidResponseSDKType {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryBidResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryBidResponse();
@@ -892,7 +892,7 @@ export const QueryLeasesResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryLeasesResponseSDKType {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryLeasesResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryLeasesResponse();
@@ -1056,7 +1056,7 @@ export const QueryLeaseResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryLeaseResponseSDKType {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryLeaseResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryLeaseResponse();

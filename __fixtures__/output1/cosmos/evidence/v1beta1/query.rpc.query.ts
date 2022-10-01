@@ -7,10 +7,10 @@ import { QueryEvidenceRequest, QueryEvidenceRequestSDKType, QueryEvidenceRespons
 
 /** Query defines the RPC service */
 export interface Query {
-  evidence(request: QueryEvidenceRequest): Promise<QueryEvidenceResponseSDKType>;
+  evidence(request: QueryEvidenceRequest): Promise<QueryEvidenceResponse>;
   /*Evidence queries evidence based on evidence hash.*/
 
-  allEvidence(request?: QueryAllEvidenceRequest): Promise<QueryAllEvidenceResponseSDKType>;
+  allEvidence(request?: QueryAllEvidenceRequest): Promise<QueryAllEvidenceResponse>;
   /*AllEvidence queries all evidence.*/
 
 }
@@ -23,7 +23,7 @@ export class QueryClientImpl implements Query {
     this.allEvidence = this.allEvidence.bind(this);
   }
 
-  evidence(request: QueryEvidenceRequest): Promise<QueryEvidenceResponseSDKType> {
+  evidence(request: QueryEvidenceRequest): Promise<QueryEvidenceResponse> {
     const data = QueryEvidenceRequest.encode(request).finish();
     const promise = this.rpc.request("cosmos.evidence.v1beta1.Query", "Evidence", data);
     return promise.then(data => QueryEvidenceResponse.decode(new _m0.Reader(data)));
@@ -31,7 +31,7 @@ export class QueryClientImpl implements Query {
 
   allEvidence(request: QueryAllEvidenceRequest = {
     pagination: undefined
-  }): Promise<QueryAllEvidenceResponseSDKType> {
+  }): Promise<QueryAllEvidenceResponse> {
     const data = QueryAllEvidenceRequest.encode(request).finish();
     const promise = this.rpc.request("cosmos.evidence.v1beta1.Query", "AllEvidence", data);
     return promise.then(data => QueryAllEvidenceResponse.decode(new _m0.Reader(data)));
@@ -42,11 +42,11 @@ export const createRpcQueryExtension = (base: QueryClient) => {
   const rpc = createProtobufRpcClient(base);
   const queryService = new QueryClientImpl(rpc);
   return {
-    evidence(request: QueryEvidenceRequest): Promise<QueryEvidenceResponseSDKType> {
+    evidence(request: QueryEvidenceRequest): Promise<QueryEvidenceResponse> {
       return queryService.evidence(request);
     },
 
-    allEvidence(request?: QueryAllEvidenceRequest): Promise<QueryAllEvidenceResponseSDKType> {
+    allEvidence(request?: QueryAllEvidenceRequest): Promise<QueryAllEvidenceResponse> {
       return queryService.allEvidence(request);
     }
 

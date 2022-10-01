@@ -57,7 +57,8 @@ const rpcExtensionMethod = (
                 t.identifier('Promise'),
                 t.tsTypeParameterInstantiation([
                     t.tsTypeReference(
-                        t.identifier(responseType + 'SDKType')
+                        // t.identifier(responseType + 'SDKType')
+                        t.identifier(responseType)
                     )
                 ])
             )

@@ -139,7 +139,7 @@ export const QueryBalancesResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryBalancesResponseSDKType {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryBalancesResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryBalancesResponse();

@@ -1193,7 +1193,7 @@ export const WriteLogEntriesResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): WriteLogEntriesResponseSDKType {
+  decode(input: _m0.Reader | Uint8Array, length?: number): WriteLogEntriesResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseWriteLogEntriesResponse();
@@ -1584,7 +1584,7 @@ export const ListLogEntriesResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ListLogEntriesResponseSDKType {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ListLogEntriesResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListLogEntriesResponse();
@@ -1762,7 +1762,7 @@ export const ListMonitoredResourceDescriptorsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ListMonitoredResourceDescriptorsResponseSDKType {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ListMonitoredResourceDescriptorsResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListMonitoredResourceDescriptorsResponse();
@@ -1980,7 +1980,7 @@ export const ListLogsResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ListLogsResponseSDKType {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ListLogsResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListLogsResponse();
@@ -2184,7 +2184,7 @@ export const TailLogEntriesResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): TailLogEntriesResponseSDKType {
+  decode(input: _m0.Reader | Uint8Array, length?: number): TailLogEntriesResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseTailLogEntriesResponse();

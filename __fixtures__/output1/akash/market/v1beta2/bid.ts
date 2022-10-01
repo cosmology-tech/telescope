@@ -309,7 +309,7 @@ export const MsgCreateBidResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateBidResponseSDKType {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateBidResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateBidResponse();
@@ -430,7 +430,7 @@ export const MsgCloseBidResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCloseBidResponseSDKType {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCloseBidResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCloseBidResponse();

@@ -7,7 +7,7 @@ import { QueryCertificatesRequest, QueryCertificatesRequestSDKType, QueryCertifi
 
 /** Query defines the RPC service */
 export interface Query {
-  certificates(request: QueryCertificatesRequest): Promise<QueryCertificatesResponseSDKType>;
+  certificates(request: QueryCertificatesRequest): Promise<QueryCertificatesResponse>;
   /*Certificates queries certificates*/
 
 }
@@ -19,7 +19,7 @@ export class QueryClientImpl implements Query {
   }
 
   /* Certificates queries certificates */
-  certificates = async (request: QueryCertificatesRequest): Promise<QueryCertificatesResponseSDKType> => {
+  certificates = async (request: QueryCertificatesRequest): Promise<QueryCertificatesResponse> => {
     const data = QueryCertificatesRequest.encode(request).finish();
     const promise = this.rpc.request("akash.cert.v1beta2.Query", "Certificates", data);
     return promise.then(data => QueryCertificatesResponse.decode(new _m0.Reader(data)));
@@ -29,7 +29,7 @@ export const createRpcQueryExtension = (base: QueryClient) => {
   const rpc = createProtobufRpcClient(base);
   const queryService = new QueryClientImpl(rpc);
   return {
-    certificates(request: QueryCertificatesRequest): Promise<QueryCertificatesResponseSDKType> {
+    certificates(request: QueryCertificatesRequest): Promise<QueryCertificatesResponse> {
       return queryService.certificates(request);
     }
 

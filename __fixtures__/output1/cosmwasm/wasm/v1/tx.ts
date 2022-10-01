@@ -368,7 +368,7 @@ export const MsgStoreCodeResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgStoreCodeResponseSDKType {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgStoreCodeResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgStoreCodeResponse();
@@ -593,7 +593,7 @@ export const MsgInstantiateContractResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgInstantiateContractResponseSDKType {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgInstantiateContractResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgInstantiateContractResponse();
@@ -794,7 +794,7 @@ export const MsgExecuteContractResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgExecuteContractResponseSDKType {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgExecuteContractResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgExecuteContractResponse();
@@ -974,7 +974,7 @@ export const MsgMigrateContractResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgMigrateContractResponseSDKType {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgMigrateContractResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgMigrateContractResponse();
@@ -1134,7 +1134,7 @@ export const MsgUpdateAdminResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateAdminResponseSDKType {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateAdminResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpdateAdminResponse();
@@ -1269,7 +1269,7 @@ export const MsgClearAdminResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgClearAdminResponseSDKType {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgClearAdminResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgClearAdminResponse();

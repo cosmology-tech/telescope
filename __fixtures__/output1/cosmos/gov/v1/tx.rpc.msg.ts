@@ -7,20 +7,20 @@ import { MsgSubmitProposal, MsgSubmitProposalSDKType, MsgSubmitProposalResponse,
 
 /** Msg defines the RPC service */
 export interface Msg {
-  submitProposal(request: MsgSubmitProposal): Promise<MsgSubmitProposalResponseSDKType>;
+  submitProposal(request: MsgSubmitProposal): Promise<MsgSubmitProposalResponse>;
   /*SubmitProposal defines a method to create new proposal given a content.*/
 
-  execLegacyContent(request: MsgExecLegacyContent): Promise<MsgExecLegacyContentResponseSDKType>;
+  execLegacyContent(request: MsgExecLegacyContent): Promise<MsgExecLegacyContentResponse>;
   /*ExecLegacyContent defines a Msg to be in included in a MsgSubmitProposal
   to execute a legacy content-based proposal.*/
 
-  vote(request: MsgVote): Promise<MsgVoteResponseSDKType>;
+  vote(request: MsgVote): Promise<MsgVoteResponse>;
   /*Vote defines a method to add a vote on a specific proposal.*/
 
-  voteWeighted(request: MsgVoteWeighted): Promise<MsgVoteWeightedResponseSDKType>;
+  voteWeighted(request: MsgVoteWeighted): Promise<MsgVoteWeightedResponse>;
   /*VoteWeighted defines a method to add a weighted vote on a specific proposal.*/
 
-  deposit(request: MsgDeposit): Promise<MsgDepositResponseSDKType>;
+  deposit(request: MsgDeposit): Promise<MsgDepositResponse>;
   /*Deposit defines a method to add deposit on a specific proposal.*/
 
 }
@@ -36,31 +36,31 @@ export class MsgClientImpl implements Msg {
     this.deposit = this.deposit.bind(this);
   }
 
-  submitProposal(request: MsgSubmitProposal): Promise<MsgSubmitProposalResponseSDKType> {
+  submitProposal(request: MsgSubmitProposal): Promise<MsgSubmitProposalResponse> {
     const data = MsgSubmitProposal.encode(request).finish();
     const promise = this.rpc.request("cosmos.gov.v1.Msg", "SubmitProposal", data);
     return promise.then(data => MsgSubmitProposalResponse.decode(new _m0.Reader(data)));
   }
 
-  execLegacyContent(request: MsgExecLegacyContent): Promise<MsgExecLegacyContentResponseSDKType> {
+  execLegacyContent(request: MsgExecLegacyContent): Promise<MsgExecLegacyContentResponse> {
     const data = MsgExecLegacyContent.encode(request).finish();
     const promise = this.rpc.request("cosmos.gov.v1.Msg", "ExecLegacyContent", data);
     return promise.then(data => MsgExecLegacyContentResponse.decode(new _m0.Reader(data)));
   }
 
-  vote(request: MsgVote): Promise<MsgVoteResponseSDKType> {
+  vote(request: MsgVote): Promise<MsgVoteResponse> {
     const data = MsgVote.encode(request).finish();
     const promise = this.rpc.request("cosmos.gov.v1.Msg", "Vote", data);
     return promise.then(data => MsgVoteResponse.decode(new _m0.Reader(data)));
   }
 
-  voteWeighted(request: MsgVoteWeighted): Promise<MsgVoteWeightedResponseSDKType> {
+  voteWeighted(request: MsgVoteWeighted): Promise<MsgVoteWeightedResponse> {
     const data = MsgVoteWeighted.encode(request).finish();
     const promise = this.rpc.request("cosmos.gov.v1.Msg", "VoteWeighted", data);
     return promise.then(data => MsgVoteWeightedResponse.decode(new _m0.Reader(data)));
   }
 
-  deposit(request: MsgDeposit): Promise<MsgDepositResponseSDKType> {
+  deposit(request: MsgDeposit): Promise<MsgDepositResponse> {
     const data = MsgDeposit.encode(request).finish();
     const promise = this.rpc.request("cosmos.gov.v1.Msg", "Deposit", data);
     return promise.then(data => MsgDepositResponse.decode(new _m0.Reader(data)));
