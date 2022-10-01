@@ -426,7 +426,7 @@ const createLCDClientClassBody = (
     if (service && !context.pluginValue('classesUseArrowFunctions')) {
         boundMethods = Object.keys(service.methods).map(key => {
             const method: ProtoServiceMethod = service.methods[key];
-            if (typeof method.options['(google.api.http).get'] !== 'undefined') {
+            if (typeof method.options?.['(google.api.http).get'] !== 'undefined') {
                 const methodName = firstLower(method.name);
                 return bindThis(methodName)
             }
@@ -503,7 +503,7 @@ export const createLCDClient = (
     const methods = Object.keys(service.methods).map(key => {
         const method: ProtoServiceMethod = service.methods[key];
         if (method.info &&
-            (typeof method.options['(google.api.http).get'] !== 'undefined')
+            (typeof method.options?.['(google.api.http).get'] !== 'undefined')
         ) {
             return buildRequestMethod(context, method);
         }
