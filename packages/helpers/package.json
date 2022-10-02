@@ -73,10 +73,10 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.18.9",
-    "@cosmjs/amino": "0.28.13",
-    "@cosmjs/crypto": "0.28.13",
-    "@cosmjs/proto-signing": "0.28.13",
-    "@cosmjs/stargate": "0.28.13",
+    "@cosmjs/amino": "0.29.0",
+    "@cosmjs/crypto": "0.29.0",
+    "@cosmjs/proto-signing": "0.29.0",
+    "@cosmjs/stargate": "0.29.0",
     "cosmjs-types": "0.5.1",
     "long": "^5.2.0",
     "protobufjs": "^6.11.3"

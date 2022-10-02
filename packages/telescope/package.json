@@ -76,7 +76,7 @@
     "@babel/runtime": "^7.18.9",
     "@babel/traverse": "7.18.13",
     "@babel/types": "7.18.13",
-    "@cosmwasm/ts-codegen": "0.16.1",
+    "@cosmwasm/ts-codegen": "0.17.0",
     "@osmonauts/ast": "^0.31.0",
     "@osmonauts/proto-parser": "^0.19.1",
     "@osmonauts/types": "^0.15.1",
