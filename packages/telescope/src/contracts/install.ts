@@ -44,11 +44,14 @@ export default async (argv) => {
             message:
                 'which chain contracts do you want to support?',
             choices: [
-                'stargaze-claim',
-                'stargaze-ics721',
-                'stargaze-minter',
-                'stargaze-royalty-group',
-                'stargaze-sg721',
+                'stargaze-base-factory',
+                'stargaze-base-minter',
+                'stargaze-sg721-base',
+                'stargaze-sg721-metdata-onchain',
+                'stargaze-sg721-nt',
+                'stargaze-splits',
+                'stargaze-vending-factory',
+                'stargaze-vending-minter',
                 'stargaze-whitelist',
                 'wasmswap',
             ].map(name => {
