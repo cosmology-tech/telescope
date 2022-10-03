@@ -9,6 +9,7 @@ import { lookupAny, lookupAnyFromImports } from './lookup';
 import { defaultTelescopeOptions } from '@osmonauts/types';
 
 import google_any from './native/any';
+import google_descriptor from './native/descriptor';
 import google_duration from './native/duration';
 import google_timestamp from './native/timestamp';
 import google_empty from './native/empty';
@@ -19,6 +20,7 @@ import google_wrappers from './native/wrappers';
 const GOOGLE_PROTOS = [
     ['google/protobuf/any.proto', google_any],
     ['google/protobuf/duration.proto', google_duration],
+    ['google/protobuf/descriptor.proto', google_descriptor],
     ['google/protobuf/timestamp.proto', google_timestamp],
     ['google/protobuf/empty.proto', google_empty],
     ['google/protobuf/struct.proto', google_struct],
@@ -90,32 +92,8 @@ export class ProtoStore {
         this.responses[svc.responseType] = svc;
     };
 
-    getProtos(): ProtoRef[] {
-        if (this.protos) return this.protos;
-        const contents = this.protoDirs.reduce((m, protoDir) => {
-            const protoSplat = join(protoDir, '/**/*.proto');
-            const protoFiles = glob(protoSplat);
-            const contents = protoFiles.map(filename => ({
-                absolute: filename,
-                filename: filename.split(protoDir)[1].replace(/^\//, ''),
-                content: readFileSync(filename, 'utf-8')
-            }));
-            return [...m, ...contents];
-        }, []);
-
-        // if they don't got it, let's give it to 'em!
-        GOOGLE_PROTOS.map(([f, v]) => {
-            const found = contents.find(file => file.filename === f);
-            if (!found) {
-                contents.push({
-                    absolute: f,
-                    filename: f,
-                    content: v
-                });
-            }
-        });
-
-        const protos = contents.map(({ absolute, filename, content }) => {
+    processProtos(contents: { absolute: string, filename: string, content: string }[]) {
+        return contents.map(({ absolute, filename, content }) => {
             try {
                 const proto = parseProto(content, this.options.prototypes.parser);
                 return {
@@ -129,7 +107,44 @@ export class ProtoStore {
             }
         });
 
-        this.protos = protos;
+    }
+
+    getProtos(): ProtoRef[] {
+        if (this.protos) return this.protos;
+        const contents = this.protoDirs.reduce((m, protoDir) => {
+            const protoSplat = join(protoDir, '/**/*.proto');
+            const protoFiles = glob(protoSplat);
+            const contents = protoFiles.map(filename => ({
+                absolute: filename,
+                filename: filename.split(protoDir)[1].replace(/^\//, ''),
+                content: readFileSync(filename, 'utf-8')
+            }));
+            return [...m, ...contents];
+        }, []);
+
+        const protos = this.processProtos(contents);
+        const neededFromGoogle = [];
+        this.getDependencies(protos).map(dep => {
+            const google = dep.imports?.filter(imp => imp.startsWith('google/protobuf')) ?? []
+            if (google.length) {
+                google.forEach(goog => {
+                    // if they don't got it, let's give it to 'em!
+                    GOOGLE_PROTOS.forEach(([f, v]) => {
+                        if (goog !== f) return;
+                        const found = contents.find(file => file.filename === f);
+                        if (!found && !neededFromGoogle.find(file => file.filename === f)) {
+                            neededFromGoogle.push({
+                                absolute: f,
+                                filename: f,
+                                content: v
+                            });
+                        }
+                    });
+                });
+            }
+        });
+        const missingProtos = this.processProtos(neededFromGoogle);
+        this.protos = [...protos, ...missingProtos];
         return protos;
     }
 
@@ -155,7 +170,12 @@ export class ProtoStore {
 
     getDeps(): ProtoDep[] {
         if (this.deps) return this.deps;
-        const deps = this.getProtos().map(el => {
+        this.deps = this.getDependencies(this.getProtos());
+        return this.deps;
+    }
+
+    getDependencies(protos: ProtoRef[]): ProtoDep[] {
+        return protos.map(el => {
             const {
                 filename,
                 proto: {
@@ -169,8 +189,6 @@ export class ProtoStore {
                 imports
             }
         });
-        this.deps = deps;
-        return deps;
     }
 
     traverseAll(): void {

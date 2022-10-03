@@ -21,6 +21,15 @@ export declare class ProtoStore {
     filterProtoWhere(fn: (ref: ProtoRef) => boolean): ProtoRef[];
     findProtoObject(filename: any, name: any): any;
     registerRequest(svc: ProtoServiceMethod): void;
+    processProtos(contents: {
+        absolute: string;
+        filename: string;
+        content: string;
+    }[]): {
+        absolute: string;
+        filename: string;
+        proto: import("@pyramation/protobufjs").IParserResult;
+    }[];
     getProtos(): ProtoRef[];
     getPackages(): string[];
     parseScope(type: string): {
@@ -28,6 +37,7 @@ export declare class ProtoStore {
         package: string;
     };
     getDeps(): ProtoDep[];
+    getDependencies(protos: ProtoRef[]): ProtoDep[];
     traverseAll(): void;
     get(from: ProtoRef, name: string): import("./lookup").Lookup;
     getImportFromRef(ref: ProtoRef, name: string): import("./lookup").Lookup;
