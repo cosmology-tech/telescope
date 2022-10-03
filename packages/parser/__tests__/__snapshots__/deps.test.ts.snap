@@ -345,6 +345,19 @@ Array [
 ]
 `;
 
+exports[`cosmos/gov/v1beta1/gov.proto 1`] = `
+Array [
+  "google/protobuf/descriptor.proto",
+  "gogoproto/gogo.proto",
+  "cosmos_proto/cosmos.proto",
+  "cosmos/base/v1beta1/coin.proto",
+  "google/protobuf/timestamp.proto",
+  "google/protobuf/any.proto",
+  "google/protobuf/duration.proto",
+  "cosmos/gov/v1beta1/gov.proto",
+]
+`;
+
 exports[`cosmos/tx/signing/v1beta1/signing.proto 1`] = `
 Array [
   "google/protobuf/descriptor.proto",

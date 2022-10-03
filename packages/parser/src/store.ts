@@ -129,17 +129,21 @@ export class ProtoStore {
             if (google.length) {
                 google.forEach(goog => {
                     // if they don't got it, let's give it to 'em!
-                    GOOGLE_PROTOS.forEach(([f, v]) => {
-                        if (goog !== f) return;
-                        const found = contents.find(file => file.filename === f);
-                        if (!found && !neededFromGoogle.find(file => file.filename === f)) {
-                            neededFromGoogle.push({
-                                absolute: f,
-                                filename: f,
-                                content: v
-                            });
-                        }
-                    });
+                    const found = contents.find(file => file.filename === goog);
+                    if (found) return;
+
+                    // NOT FOUND
+                    const filler = GOOGLE_PROTOS.find(([f, v]) => { return f === goog });
+                    if (!filler) return; // technically an error should be thrown 
+
+                    // we have the filler
+                    if (!neededFromGoogle.find(file => file.filename === goog)) {
+                        neededFromGoogle.push({
+                            absolute: filler[0],
+                            filename: filler[0],
+                            content: filler[1]
+                        });
+                    }
                 });
             }
         });
