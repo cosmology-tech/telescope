@@ -9,6 +9,7 @@ import { lookupAny, lookupAnyFromImports } from './lookup';
 import { defaultTelescopeOptions } from '@osmonauts/types';
 
 import google_any from './native/any';
+import google_descriptor from './native/descriptor';
 import google_duration from './native/duration';
 import google_timestamp from './native/timestamp';
 import google_empty from './native/empty';
@@ -19,6 +20,7 @@ import google_wrappers from './native/wrappers';
 const GOOGLE_PROTOS = [
     ['google/protobuf/any.proto', google_any],
     ['google/protobuf/duration.proto', google_duration],
+    ['google/protobuf/descriptor.proto', google_descriptor],
     ['google/protobuf/timestamp.proto', google_timestamp],
     ['google/protobuf/empty.proto', google_empty],
     ['google/protobuf/struct.proto', google_struct],
