@@ -2111,7 +2111,7 @@ export const AttributeContext_Response = {
       return acc;
     }, {});
     message.time = object.time ?? undefined;
-    message.backendLatency = object.backendLatency ?? undefined;
+    message.backendLatency = object.backendLatency !== undefined && object.backendLatency !== null ? Duration.fromPartial(object.backendLatency) : undefined;
     return message;
   },
 

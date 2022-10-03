@@ -977,8 +977,8 @@ export const MetricDescriptor_MetricDescriptorMetadata = {
   fromPartial(object: DeepPartial<MetricDescriptor_MetricDescriptorMetadata>): MetricDescriptor_MetricDescriptorMetadata {
     const message = createBaseMetricDescriptor_MetricDescriptorMetadata();
     message.launchStage = object.launchStage ?? 0;
-    message.samplePeriod = object.samplePeriod ?? undefined;
-    message.ingestDelay = object.ingestDelay ?? undefined;
+    message.samplePeriod = object.samplePeriod !== undefined && object.samplePeriod !== null ? Duration.fromPartial(object.samplePeriod) : undefined;
+    message.ingestDelay = object.ingestDelay !== undefined && object.ingestDelay !== null ? Duration.fromPartial(object.ingestDelay) : undefined;
     return message;
   },
 

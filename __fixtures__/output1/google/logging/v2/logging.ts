@@ -2136,7 +2136,7 @@ export const TailLogEntriesRequest = {
     const message = createBaseTailLogEntriesRequest();
     message.resourceNames = object.resourceNames?.map(e => e) || [];
     message.filter = object.filter ?? "";
-    message.bufferWindow = object.bufferWindow ?? undefined;
+    message.bufferWindow = object.bufferWindow !== undefined && object.bufferWindow !== null ? Duration.fromPartial(object.bufferWindow) : undefined;
     return message;
   },
 

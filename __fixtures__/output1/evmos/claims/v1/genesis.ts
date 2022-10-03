@@ -302,8 +302,8 @@ export const Params = {
     const message = createBaseParams();
     message.enableClaims = object.enableClaims ?? false;
     message.airdropStartTime = object.airdropStartTime ?? undefined;
-    message.durationUntilDecay = object.durationUntilDecay ?? undefined;
-    message.durationOfDecay = object.durationOfDecay ?? undefined;
+    message.durationUntilDecay = object.durationUntilDecay !== undefined && object.durationUntilDecay !== null ? Duration.fromPartial(object.durationUntilDecay) : undefined;
+    message.durationOfDecay = object.durationOfDecay !== undefined && object.durationOfDecay !== null ? Duration.fromPartial(object.durationOfDecay) : undefined;
     message.claimsDenom = object.claimsDenom ?? "";
     message.authorizedChannels = object.authorizedChannels?.map(e => e) || [];
     message.evmChannels = object.evmChannels?.map(e => e) || [];

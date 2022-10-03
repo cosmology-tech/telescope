@@ -1828,7 +1828,7 @@ export const Constant = {
     message.doubleValue = object.doubleValue ?? undefined;
     message.stringValue = object.stringValue ?? undefined;
     message.bytesValue = object.bytesValue ?? undefined;
-    message.durationValue = object.durationValue ?? undefined;
+    message.durationValue = object.durationValue !== undefined && object.durationValue !== null ? Duration.fromPartial(object.durationValue) : undefined;
     message.timestampValue = object.timestampValue ?? undefined;
     return message;
   },

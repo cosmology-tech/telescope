@@ -878,7 +878,7 @@ export const WaitOperationRequest = {
   fromPartial(object: DeepPartial<WaitOperationRequest>): WaitOperationRequest {
     const message = createBaseWaitOperationRequest();
     message.name = object.name ?? "";
-    message.timeout = object.timeout ?? undefined;
+    message.timeout = object.timeout !== undefined && object.timeout !== null ? Duration.fromPartial(object.timeout) : undefined;
     return message;
   },
 
