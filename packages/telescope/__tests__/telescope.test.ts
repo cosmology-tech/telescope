@@ -26,6 +26,16 @@ const options: TelescopeOptions = {
     ]
   },
 
+  eslintDisable: {
+    disableAll: false,
+    patterns: [
+      'akash/**/*amino.ts',
+    ],
+    files: [
+      'akash/deployment/v1beta1/deployment.ts'
+    ]
+  },
+
   prototypes: {
     enabled: true,
     parser: {

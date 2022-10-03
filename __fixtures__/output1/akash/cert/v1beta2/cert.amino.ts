@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { AminoMsg } from "@cosmjs/amino";
 import { CertificateID, CertificateIDSDKType, MsgCreateCertificate, MsgCreateCertificateSDKType, MsgRevokeCertificate, MsgRevokeCertificateSDKType } from "./cert";
 export interface AminoMsgCreateCertificate extends AminoMsg {

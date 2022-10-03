@@ -268,6 +268,14 @@ See [RPC Clients](#rpc-clients) for more info.
 | `tsDisable.patterns`                         | if set, will include `//@ts-nocheck` on matched patterns        | `[]`     |
 | `tsDisable.files`                            | if set, will include `//@ts-nocheck` on matched files           | `[]`     |
 
+### ESLint Disabling
+
+| option                                       | description                                                       | defaults |
+| -------------------------------------------- | ----------------------------------------------------------------  | ---------|
+| `eslintDisable.disableAll`                   | if true, will include `/* eslint-disable */` on every output file | `false`  |
+| `eslintDisable.patterns`                     | if set, will include `/* eslint-disable */` on matched patterns   | `[]`     |
+| `eslintDisable.files`                        | if set, will include `/* eslint-disable */` on matched files      | `[]`     |
+
 ### Bundle
 
 | option                         | description                                                     | defaults   |

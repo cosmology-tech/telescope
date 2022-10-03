@@ -52,12 +52,24 @@ export const writeContentToFile = (
             prefix = `//@ts-nocheck\n`;
         }
     });
+    options.eslintDisable.patterns.forEach(pattern => {
+        if (minimatch(nameWithoutPath, pattern)) {
+            prefix = `/* eslint-disable */\n`;
+        }
+    });
 
     if (
         options.tsDisable.files.includes(nameWithoutPath) ||
         options.tsDisable.disableAll
     ) {
         prefix = `//@ts-nocheck\n`;
+    }
+
+    if (
+        options.eslintDisable.files.includes(nameWithoutPath) ||
+        options.eslintDisable.disableAll
+    ) {
+        prefix = `/* eslint-disable */\n`;
     }
 
     const text = prefix + content;

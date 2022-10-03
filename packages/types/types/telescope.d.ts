@@ -40,6 +40,11 @@ interface TelescopeOpts {
         disableAll?: boolean;
         patterns?: string[];
     };
+    eslintDisable?: {
+        files?: string[];
+        disableAll?: boolean;
+        patterns?: string[];
+    };
     bundle?: {
         enabled: boolean;
     };
