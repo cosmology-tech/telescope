@@ -26,8 +26,9 @@ export const makeCommentBlock = (comment: string): t.CommentBlock => {
     lines = ['*', ...lines, ' '];
     const comments = lines.map((line, i) => {
         if (i == 0) return line;
+        if (i == 1) return ` * ${cleanComment(line)}`;
         if (i == (lines.length - 1)) return cleanComment(line);
-        return ` * ${cleanComment(line)}`
+        return ` *${cleanComment(line)}`
     });
 
     return {
