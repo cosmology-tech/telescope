@@ -2,7 +2,7 @@ import { Operation, OperationSDKType } from "./operation";
 import { CheckError, CheckErrorSDKType } from "./check_error";
 import { Status, StatusSDKType } from "../../../rpc/status";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, Long } from "@osmonauts/helpers";
+import { isSet, DeepPartial, Long } from "../../../../helpers";
 export const protobufPackage = "google.api.servicecontrol.v1";
 
 /**

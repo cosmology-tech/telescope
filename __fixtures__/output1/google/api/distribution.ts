@@ -1,7 +1,7 @@
 import { Timestamp, TimestampSDKType } from "../protobuf/timestamp";
 import { Any, AnySDKType } from "../protobuf/any";
 import * as _m0 from "protobufjs/minimal";
-import { Long, isSet, DeepPartial, toTimestamp, fromTimestamp, fromJsonTimestamp } from "@osmonauts/helpers";
+import { Long, isSet, DeepPartial, toTimestamp, fromTimestamp, fromJsonTimestamp } from "../../helpers";
 export const protobufPackage = "google.api";
 
 /**

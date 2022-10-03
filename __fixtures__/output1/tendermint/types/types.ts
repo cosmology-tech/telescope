@@ -3,7 +3,7 @@ import { Consensus, ConsensusSDKType } from "../version/types";
 import { Timestamp, TimestampSDKType } from "../../google/protobuf/timestamp";
 import { ValidatorSet, ValidatorSetSDKType } from "./validator";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, bytesFromBase64, base64FromBytes, DeepPartial, toTimestamp, Long, fromTimestamp, fromJsonTimestamp } from "@osmonauts/helpers";
+import { isSet, bytesFromBase64, base64FromBytes, DeepPartial, toTimestamp, Long, fromTimestamp, fromJsonTimestamp } from "../../helpers";
 export const protobufPackage = "tendermint.types";
 
 /** BlockIdFlag indicates which BlcokID the signature is for */

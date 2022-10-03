@@ -4,7 +4,7 @@ import { join } from 'path';
 import { TelescopeBuilder } from '../builder';
 import { createScopedRpcFactory } from '@osmonauts/ast';
 import { ProtoRef } from '@osmonauts/types';
-import { getRelativePath } from '../utils';
+import { fixlocalpaths, getRelativePath } from '../utils';
 import { Bundler } from '../bundler';
 import { aggregateImports, getDepsFromQueries, getImportStatements } from '../imports';
 import { TelescopeParseContext } from '../build';
@@ -133,16 +133,9 @@ const makeRPC = (
 
     const imports = aggregateImports(ctx, serviceImports, localname);
 
-    const fixlocalpaths = imports.map(imp => {
-        return {
-            ...imp,
-            path: (imp.path.startsWith('.') || imp.path.startsWith('@')) ?
-                imp.path : `./${imp.path}`
-        };
-    });
-
     const importStmts = getImportStatements(
-        [...fixlocalpaths]
+        localname,
+        [...fixlocalpaths(imports)]
     );
 
     const prog = []

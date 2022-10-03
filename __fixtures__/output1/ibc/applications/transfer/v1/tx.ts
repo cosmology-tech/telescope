@@ -1,7 +1,7 @@
 import { Coin, CoinSDKType } from "../../../../cosmos/base/v1beta1/coin";
 import { Height, HeightSDKType } from "../../../core/client/v1/client";
 import * as _m0 from "protobufjs/minimal";
-import { Long, isSet, DeepPartial } from "@osmonauts/helpers";
+import { Long, isSet, DeepPartial } from "../../../../helpers";
 export const protobufPackage = "ibc.applications.transfer.v1";
 
 /**

@@ -2,7 +2,7 @@ import { Duration, DurationSDKType } from "../../google/protobuf/duration";
 import { Coin, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
 import { PeriodLock, PeriodLockSDKType } from "./lock";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, Long } from "@osmonauts/helpers";
+import { isSet, DeepPartial, Long } from "../../helpers";
 export const protobufPackage = "osmosis.lockup";
 export interface MsgLockTokens {
   owner: string;

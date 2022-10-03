@@ -1,7 +1,7 @@
 import { Params, ParamsSDKType } from "./auth";
 import { Any, AnySDKType } from "../../../google/protobuf/any";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial } from "@osmonauts/helpers";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "cosmos.auth.v1beta1";
 
 /** GenesisState defines the auth module's genesis state. */

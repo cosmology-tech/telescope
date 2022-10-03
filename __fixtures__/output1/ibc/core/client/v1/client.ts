@@ -1,7 +1,7 @@
 import { Any, AnySDKType } from "../../../../google/protobuf/any";
 import { Plan, PlanSDKType } from "../../../../cosmos/upgrade/v1beta1/upgrade";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, Long } from "@osmonauts/helpers";
+import { isSet, DeepPartial, Long } from "../../../../helpers";
 export const protobufPackage = "ibc.core.client.v1";
 
 /**

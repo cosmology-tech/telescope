@@ -1,6 +1,6 @@
 import { Plan, PlanSDKType, ModuleVersion, ModuleVersionSDKType } from "./upgrade";
 import * as _m0 from "protobufjs/minimal";
-import { DeepPartial, isSet, Long, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
+import { DeepPartial, isSet, Long, bytesFromBase64, base64FromBytes } from "../../../helpers";
 export const protobufPackage = "cosmos.upgrade.v1beta1";
 
 /**

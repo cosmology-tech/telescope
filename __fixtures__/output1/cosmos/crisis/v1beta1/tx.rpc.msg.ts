@@ -1,4 +1,4 @@
-import { Rpc } from "@osmonauts/helpers";
+import { Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 import { MsgVerifyInvariant, MsgVerifyInvariantSDKType, MsgVerifyInvariantResponse, MsgVerifyInvariantResponseSDKType } from "./tx";
 

@@ -1,6 +1,6 @@
 import { DenomTrace, DenomTraceSDKType, Params, ParamsSDKType } from "./transfer";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial } from "@osmonauts/helpers";
+import { isSet, DeepPartial } from "../../../../helpers";
 export const protobufPackage = "ibc.applications.transfer.v1";
 
 /** GenesisState defines the ibc-transfer genesis state */

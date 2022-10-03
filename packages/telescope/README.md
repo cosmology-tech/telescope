@@ -385,12 +385,12 @@ To broadcast messages, you'll want to use either [keplr](https://docs.keplr.app/
 Likely you'll want to use the Amino, so unless you need proto, you should use this one:
 
 ```js
-import { getOfflineSigner as getOfflineSignerAmino } from '@osmonauts/helpers';
+import { getOfflineSigner as getOfflineSignerAmino } from 'cosmjs-utils';
 ```
 ### Proto Signer
 
 ```js
-import { getOfflineSigner as getOfflineSignerProto } from '@osmonauts/helpers';
+import { getOfflineSigner as getOfflineSignerProto } from 'cosmjs-utils';
 ```
 
 WARNING: NOT RECOMMENDED TO USE PLAIN-TEXT MNEMONICS. Please take care of your security and use best practices such as AES encryption and/or methods from 12factor applications.
@@ -657,14 +657,13 @@ const options: TelescopeOptions = {
 
 If you don't use the boilerplate, you will need to manually install
 
-- `@osmonauts/helpers`
 - `@cosmjs/amino`
 - `@cosmjs/proto-signing`
 - `@cosmjs/stargate`
 - `@cosmjs/tendermint-rpc`
 
 ```sh
-yarn add @osmonauts/helpers @cosmjs/amino @cosmjs/proto-signing @cosmjs/stargate @cosmjs/tendermint-rpc
+yarn add @cosmjs/amino @cosmjs/proto-signing @cosmjs/stargate @cosmjs/tendermint-rpc
 ```
 
 If you use the LCD Client generation, you'll need to add

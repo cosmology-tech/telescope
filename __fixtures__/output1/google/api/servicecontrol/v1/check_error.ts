@@ -1,6 +1,6 @@
 import { Status, StatusSDKType } from "../../../rpc/status";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial } from "@osmonauts/helpers";
+import { isSet, DeepPartial } from "../../../../helpers";
 export const protobufPackage = "google.api.servicecontrol.v1";
 
 /** Error codes for Check responses. */

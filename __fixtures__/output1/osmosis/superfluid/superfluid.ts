@@ -1,6 +1,6 @@
 import { Coin, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, Long } from "@osmonauts/helpers";
+import { isSet, DeepPartial, Long } from "../../helpers";
 export const protobufPackage = "osmosis.superfluid";
 export enum SuperfluidAssetType {
   SuperfluidAssetTypeNative = 0,

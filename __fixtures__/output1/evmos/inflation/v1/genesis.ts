@@ -1,6 +1,6 @@
 import { ExponentialCalculation, ExponentialCalculationSDKType, InflationDistribution, InflationDistributionSDKType } from "./inflation";
 import * as _m0 from "protobufjs/minimal";
-import { Long, isSet, DeepPartial } from "@osmonauts/helpers";
+import { Long, isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "evmos.inflation.v1";
 
 /** GenesisState defines the inflation module's genesis state. */

@@ -4,7 +4,7 @@ import { BidFilters, BidFiltersSDKType, BidID, BidIDSDKType, Bid, BidSDKType } f
 import { LeaseFilters, LeaseFiltersSDKType, LeaseID, LeaseIDSDKType, Lease, LeaseSDKType } from "./lease";
 import { Account, AccountSDKType, FractionalPayment, FractionalPaymentSDKType } from "../../escrow/v1beta2/types";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, Exact } from "@osmonauts/helpers";
+import { isSet, DeepPartial, Exact } from "../../../helpers";
 export const protobufPackage = "akash.market.v1beta2";
 
 /** QueryOrdersRequest is request type for the Query/Orders RPC method */

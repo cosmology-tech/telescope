@@ -2,7 +2,7 @@ import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } fr
 import { Params, ParamsSDKType, ValidatorOutstandingRewards, ValidatorOutstandingRewardsSDKType, ValidatorAccumulatedCommission, ValidatorAccumulatedCommissionSDKType, ValidatorSlashEvent, ValidatorSlashEventSDKType, DelegationDelegatorReward, DelegationDelegatorRewardSDKType } from "./distribution";
 import { DecCoin, DecCoinSDKType } from "../../base/v1beta1/coin";
 import * as _m0 from "protobufjs/minimal";
-import { DeepPartial, isSet, Long } from "@osmonauts/helpers";
+import { DeepPartial, isSet, Long } from "../../../helpers";
 export const protobufPackage = "cosmos.distribution.v1beta1";
 
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */

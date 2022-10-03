@@ -1,5 +1,5 @@
 import * as _m0 from "protobufjs/minimal";
-import { DeepPartial } from "@osmonauts/helpers";
+import { DeepPartial } from "../../../../helpers";
 export const protobufPackage = "cosmos.orm.module.v1alpha1";
 
 /**

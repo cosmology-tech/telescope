@@ -1,6 +1,6 @@
 import { Coin, CoinSDKType } from "../../../../cosmos/base/v1beta1/coin";
 import { Height, HeightSDKType } from "../../../core/client/v1/client";
-import { Rpc } from "@osmonauts/helpers";
+import { Rpc } from "../../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 import { MsgTransfer, MsgTransferSDKType, MsgTransferResponse, MsgTransferResponseSDKType } from "./tx";
 

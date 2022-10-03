@@ -1,6 +1,6 @@
 import { IdentifiedChannel, IdentifiedChannelSDKType, PacketState, PacketStateSDKType } from "./channel";
 import * as _m0 from "protobufjs/minimal";
-import { Long, isSet, DeepPartial } from "@osmonauts/helpers";
+import { Long, isSet, DeepPartial } from "../../../../helpers";
 export const protobufPackage = "ibc.core.channel.v1";
 
 /** GenesisState defines the ibc channel submodule's genesis state. */

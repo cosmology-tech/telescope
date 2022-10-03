@@ -1,7 +1,7 @@
 import { DecCoin, DecCoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { BidID, BidIDSDKType } from "./bid";
 import * as _m0 from "protobufjs/minimal";
-import { Long, isSet, DeepPartial, Exact } from "@osmonauts/helpers";
+import { Long, isSet, DeepPartial, Exact } from "../../../helpers";
 export const protobufPackage = "akash.market.v1beta2";
 
 /** State is an enum which refers to state of lease */

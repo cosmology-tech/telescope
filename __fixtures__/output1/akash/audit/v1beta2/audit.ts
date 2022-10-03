@@ -1,6 +1,6 @@
 import { Attribute, AttributeSDKType } from "../../base/v1beta2/attribute";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, Exact } from "@osmonauts/helpers";
+import { isSet, DeepPartial, Exact } from "../../../helpers";
 export const protobufPackage = "akash.audit.v1beta2";
 
 /** Provider stores owner auditor and attributes details */

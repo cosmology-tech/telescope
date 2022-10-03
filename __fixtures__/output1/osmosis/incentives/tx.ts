@@ -2,7 +2,7 @@ import { QueryCondition, QueryConditionSDKType } from "../lockup/lock";
 import { Coin, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
 import { Timestamp, TimestampSDKType } from "../../google/protobuf/timestamp";
 import * as _m0 from "protobufjs/minimal";
-import { toTimestamp, fromTimestamp, Long, isSet, fromJsonTimestamp, DeepPartial } from "@osmonauts/helpers";
+import { toTimestamp, fromTimestamp, Long, isSet, fromJsonTimestamp, DeepPartial } from "../../helpers";
 export const protobufPackage = "osmosis.incentives";
 export interface MsgCreateGauge {
   /**

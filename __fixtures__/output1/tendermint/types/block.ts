@@ -1,7 +1,7 @@
 import { Header, HeaderSDKType, Data, DataSDKType, Commit, CommitSDKType } from "./types";
 import { EvidenceList, EvidenceListSDKType } from "./evidence";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial } from "@osmonauts/helpers";
+import { isSet, DeepPartial } from "../../helpers";
 export const protobufPackage = "tendermint.types";
 export interface Block {
   header: Header;

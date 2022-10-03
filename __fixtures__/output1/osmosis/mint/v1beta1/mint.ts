@@ -1,5 +1,5 @@
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, Long } from "@osmonauts/helpers";
+import { isSet, DeepPartial, Long } from "../../../helpers";
 export const protobufPackage = "osmosis.mint.v1beta1";
 
 /** Minter represents the minting state. */

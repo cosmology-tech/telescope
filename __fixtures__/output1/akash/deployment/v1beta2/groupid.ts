@@ -1,5 +1,5 @@
 import * as _m0 from "protobufjs/minimal";
-import { Long, isSet, DeepPartial, Exact } from "@osmonauts/helpers";
+import { Long, isSet, DeepPartial, Exact } from "../../../helpers";
 export const protobufPackage = "akash.deployment.v1beta2";
 
 /** GroupID stores owner, deployment sequence number and group sequence number */

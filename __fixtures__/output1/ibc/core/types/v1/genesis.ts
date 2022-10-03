@@ -5,7 +5,7 @@ import { GenesisStateSDKType as GenesisState2SDKType } from "../../connection/v1
 import { GenesisState as GenesisState3 } from "../../channel/v1/genesis";
 import { GenesisStateSDKType as GenesisState3SDKType } from "../../channel/v1/genesis";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial } from "@osmonauts/helpers";
+import { isSet, DeepPartial } from "../../../../helpers";
 export const protobufPackage = "ibc.core.types.v1";
 
 /** GenesisState defines the ibc module's genesis state. */

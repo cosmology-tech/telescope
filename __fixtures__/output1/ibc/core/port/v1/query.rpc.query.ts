@@ -1,5 +1,5 @@
 import { Order, OrderSDKType, Counterparty, CounterpartySDKType } from "../../channel/v1/channel";
-import { Rpc } from "@osmonauts/helpers";
+import { Rpc } from "../../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
 import { QueryAppVersionRequest, QueryAppVersionRequestSDKType, QueryAppVersionResponse, QueryAppVersionResponseSDKType } from "./query";

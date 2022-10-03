@@ -2,7 +2,7 @@ import { Any, AnySDKType } from "../../../../google/protobuf/any";
 import { ConnectionEnd, ConnectionEndSDKType } from "../../../core/connection/v1/connection";
 import { Channel, ChannelSDKType } from "../../../core/channel/v1/channel";
 import * as _m0 from "protobufjs/minimal";
-import { Long, isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
+import { Long, isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../../helpers";
 export const protobufPackage = "ibc.lightclients.solomachine.v1";
 
 /**

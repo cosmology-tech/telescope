@@ -1,7 +1,7 @@
 import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
 import { Account, AccountSDKType, Payment, PaymentSDKType } from "./types";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, Exact } from "@osmonauts/helpers";
+import { isSet, DeepPartial, Exact } from "../../../helpers";
 export const protobufPackage = "akash.escrow.v1beta1";
 
 /** QueryAccountRequest is request type for the Query/Account RPC method */

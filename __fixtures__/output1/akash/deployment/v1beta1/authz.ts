@@ -1,6 +1,6 @@
 import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, Exact } from "@osmonauts/helpers";
+import { isSet, Exact } from "../../../helpers";
 export const protobufPackage = "akash.deployment.v1beta1";
 
 /**

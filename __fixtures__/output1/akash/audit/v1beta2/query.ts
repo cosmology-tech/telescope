@@ -1,7 +1,7 @@
 import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
 import { Provider, ProviderSDKType } from "./audit";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, Exact } from "@osmonauts/helpers";
+import { isSet, DeepPartial, Exact } from "../../../helpers";
 export const protobufPackage = "akash.audit.v1beta2";
 
 /** QueryProvidersResponse is response type for the Query/Providers RPC method */

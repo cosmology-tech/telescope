@@ -1,5 +1,5 @@
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial } from "@osmonauts/helpers";
+import { isSet, DeepPartial } from "../../../../helpers";
 export const protobufPackage = "cosmos.crypto.hd.v1";
 
 /** BIP44Params is used as path field in ledger item in Record. */

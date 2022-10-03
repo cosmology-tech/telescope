@@ -113,10 +113,26 @@ const importAs = (name: string, importAs: string, importPath: string) => {
     )
 }
 
+
+
+// __helpers__
 export const getImportStatements = (
+    filepath: string,
     list: ImportObj[]
 ) => {
-    const imports = list.reduce((m, obj) => {
+
+    // swap helpers with helpers file...
+    const modifiedImports = list.map(imp => {
+        if (imp.path === '__helpers__') {
+            return {
+                ...imp,
+                path: getRelativePath(filepath, './helpers')
+            }
+        }
+        return imp;
+    });
+
+    const imports = modifiedImports.reduce((m, obj) => {
         m[obj.path] = m[obj.path] || [];
         const exists = m[obj.path].find(el =>
             el.type === obj.type && el.path === obj.path && el.name === obj.name);
@@ -199,11 +215,15 @@ const convertUtilsToImports = (context: TelescopeParseContext): ImportObj[] => {
     return list;
 };
 
-export const buildAllImports = (context: TelescopeParseContext, allImports: ImportHash, filepath: string) => {
+export const buildAllImports = (
+    context: TelescopeParseContext,
+    allImports: ImportHash,
+    filepath: string
+) => {
     const imports = aggregateImports(context, allImports, filepath);
-    const importStmts = getImportStatements(imports);
+    const importStmts = getImportStatements(filepath, imports);
     return importStmts;
-}
+};
 
 const addSDKTypesToImports = (
     context: TelescopeParseContext,
@@ -249,7 +269,9 @@ const addSDKTypesToImports = (
 
 export const aggregateImports = (
     context: TelescopeParseContext,
-    allImports: ImportHash, filepath: string) => {
+    allImports: ImportHash,
+    filepath: string
+): ImportObj[] => {
 
     const protoImports: ImportObj[] = getProtoImports(context, filepath);
     const aminoImports: ImportObj[] = getAminoImports(context, filepath);

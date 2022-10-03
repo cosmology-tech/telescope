@@ -1,4 +1,4 @@
-import { Rpc } from "@osmonauts/helpers";
+import { Rpc } from "../helpers";
 export const createEvmosRPCTxClient = async ({
   rpc
 }: {

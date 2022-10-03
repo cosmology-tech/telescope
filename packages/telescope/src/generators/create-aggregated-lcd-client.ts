@@ -7,6 +7,7 @@ import { createAggregatedLCDClient } from '@osmonauts/ast';
 import { ProtoRef, ProtoService } from '@osmonauts/types';
 import { TelescopeParseContext } from '../build';
 import { writeAstToFile } from '../utils/files';
+import { fixlocalpaths } from '../utils';
 
 const isExcluded = (builder: TelescopeBuilder, ref: ProtoRef) => {
     return builder.options.prototypes?.excluded?.protos?.includes(ref.filename) ||
@@ -106,18 +107,11 @@ export const plugin = (
 
         const imports = aggregateImports(ctx, serviceImports, localname);
 
-        const fixlocalpaths = imports.map(imp => {
-            return {
-                ...imp,
-                path: (imp.path.startsWith('.') || imp.path.startsWith('@')) ?
-                    imp.path : `./${imp.path}`
-            };
-        });
-
-        return [...m, ...fixlocalpaths]
+        return [...m, ...fixlocalpaths(imports)]
     }, []);
 
     const importStmts = getImportStatements(
+        localname,
         [...importsForAggregator, ...progImports]
     );
 

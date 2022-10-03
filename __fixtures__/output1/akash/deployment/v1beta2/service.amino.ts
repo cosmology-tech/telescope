@@ -3,7 +3,7 @@ import { GroupSpec, GroupSpecSDKType } from "./groupspec";
 import { Coin, CoinSDKType, DecCoin, DecCoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { GroupID, GroupIDSDKType } from "./groupid";
 import { AminoMsg } from "@cosmjs/amino";
-import { Long } from "@osmonauts/helpers";
+import { Long } from "../../../helpers";
 import { PlacementRequirements, PlacementRequirementsSDKType, SignedBy, SignedBySDKType, Attribute, AttributeSDKType } from "../../base/v1beta2/attribute";
 import { Resource, ResourceSDKType } from "./resource";
 import { ResourceUnits, ResourceUnitsSDKType } from "../../base/v1beta2/resourceunits";

@@ -1,6 +1,6 @@
 import { Coin, CoinSDKType } from "../../base/v1beta1/coin";
 import { Input, InputSDKType, Output, OutputSDKType } from "./bank";
-import { Rpc } from "@osmonauts/helpers";
+import { Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 import { MsgSend, MsgSendSDKType, MsgSendResponse, MsgSendResponseSDKType, MsgMultiSend, MsgMultiSendSDKType, MsgMultiSendResponse, MsgMultiSendResponseSDKType } from "./tx";
 

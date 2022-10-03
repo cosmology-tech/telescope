@@ -1,7 +1,7 @@
 import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
 import { Period, PeriodSDKType } from "../../../cosmos/vesting/v1beta1/vesting";
 import { AminoMsg } from "@cosmjs/amino";
-import { Long } from "@osmonauts/helpers";
+import { Long } from "../../../helpers";
 import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { MsgCreateClawbackVestingAccount, MsgCreateClawbackVestingAccountSDKType, MsgClawback, MsgClawbackSDKType } from "./tx";
 export interface AminoMsgCreateClawbackVestingAccount extends AminoMsg {

@@ -3,7 +3,7 @@ import { Channel, ChannelSDKType, IdentifiedChannel, IdentifiedChannelSDKType, P
 import { Height, HeightSDKType, IdentifiedClientState, IdentifiedClientStateSDKType } from "../../client/v1/client";
 import { Any, AnySDKType } from "../../../../google/protobuf/any";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, bytesFromBase64, base64FromBytes, Long } from "@osmonauts/helpers";
+import { isSet, DeepPartial, bytesFromBase64, base64FromBytes, Long } from "../../../../helpers";
 export const protobufPackage = "ibc.core.channel.v1";
 
 /** QueryChannelRequest is the request type for the Query/Channel RPC method */

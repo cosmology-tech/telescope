@@ -3,7 +3,7 @@ import { Timestamp, TimestampSDKType } from "../../protobuf/timestamp";
 import { Duration, DurationSDKType } from "../../protobuf/duration";
 import { Any, AnySDKType } from "../../protobuf/any";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, Long, isObject, toTimestamp, fromTimestamp, fromJsonTimestamp } from "@osmonauts/helpers";
+import { isSet, DeepPartial, Long, isObject, toTimestamp, fromTimestamp, fromJsonTimestamp } from "../../../helpers";
 export const protobufPackage = "google.rpc.context";
 
 /**

@@ -1,6 +1,6 @@
 import { Duration, DurationSDKType } from "../../../google/protobuf/duration";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial } from "@osmonauts/helpers";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "evmos.recovery.v1";
 
 /** GenesisState defines the recovery module's genesis state. */

@@ -2,7 +2,7 @@ import { PlacementRequirements, PlacementRequirementsSDKType } from "../../base/
 import { ResourceUnits, ResourceUnitsSDKType } from "../../base/v1beta1/resource";
 import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, Exact, Long } from "@osmonauts/helpers";
+import { isSet, Exact, Long } from "../../../helpers";
 export const protobufPackage = "akash.deployment.v1beta1";
 
 /** State is an enum which refers to state of group */

@@ -4,7 +4,7 @@ import { SuperfluidAssetType, SuperfluidAssetTypeSDKType, SuperfluidAsset, Super
 import { Coin, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
 import { SyntheticLock, SyntheticLockSDKType } from "../lockup/lock";
 import * as _m0 from "protobufjs/minimal";
-import { DeepPartial, isSet, Long } from "@osmonauts/helpers";
+import { DeepPartial, isSet, Long } from "../../helpers";
 export const protobufPackage = "osmosis.superfluid";
 export interface QueryParamsRequest {}
 export interface QueryParamsRequestSDKType {}

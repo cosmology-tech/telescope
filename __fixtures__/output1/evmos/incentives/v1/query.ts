@@ -3,7 +3,7 @@ import { Incentive, IncentiveSDKType, GasMeter, GasMeterSDKType } from "./incent
 import { DecCoin, DecCoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { Params, ParamsSDKType } from "./genesis";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, Long } from "@osmonauts/helpers";
+import { isSet, DeepPartial, Long } from "../../../helpers";
 export const protobufPackage = "evmos.incentives.v1";
 
 /**

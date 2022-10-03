@@ -2,7 +2,7 @@ import { Counterparty, CounterpartySDKType, Version, VersionSDKType } from "./co
 import { Any, AnySDKType } from "../../../../google/protobuf/any";
 import { Height, HeightSDKType } from "../../client/v1/client";
 import { AminoMsg } from "@cosmjs/amino";
-import { AminoHeight, Long, omitDefault } from "@osmonauts/helpers";
+import { AminoHeight, Long, omitDefault } from "../../../../helpers";
 import { MerklePrefix, MerklePrefixSDKType } from "../../commitment/v1/commitment";
 import { MsgConnectionOpenInit, MsgConnectionOpenInitSDKType, MsgConnectionOpenTry, MsgConnectionOpenTrySDKType, MsgConnectionOpenAck, MsgConnectionOpenAckSDKType, MsgConnectionOpenConfirm, MsgConnectionOpenConfirmSDKType } from "./tx";
 export interface AminoMsgConnectionOpenInit extends AminoMsg {

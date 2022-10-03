@@ -2,7 +2,7 @@ import { ManagedService, ManagedServiceSDKType, ConfigSource, ConfigSourceSDKTyp
 import { Service, ServiceSDKType } from "../../service";
 import { Any, AnySDKType } from "../../../protobuf/any";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial } from "@osmonauts/helpers";
+import { isSet, DeepPartial } from "../../../../helpers";
 export const protobufPackage = "google.api.servicemanagement.v1";
 export enum GetServiceConfigRequest_ConfigView {
   /** BASIC - Server response includes all fields except SourceInfo. */

@@ -1,7 +1,7 @@
 import { Option, OptionSDKType, Syntax, SyntaxSDKType, syntaxFromJSON, syntaxToJSON } from "./type";
 import { SourceContext, SourceContextSDKType } from "./source_context";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial } from "@osmonauts/helpers";
+import { isSet, DeepPartial } from "../../helpers";
 export const protobufPackage = "google.protobuf";
 
 /**

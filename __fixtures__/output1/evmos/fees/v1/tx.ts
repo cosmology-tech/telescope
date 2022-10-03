@@ -1,5 +1,5 @@
 import * as _m0 from "protobufjs/minimal";
-import { Long, isSet, DeepPartial } from "@osmonauts/helpers";
+import { Long, isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "evmos.fees.v1";
 
 /** MsgRegisterFeesContract defines a message that registers a DevFeeInfo */

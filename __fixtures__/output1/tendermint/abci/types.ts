@@ -4,7 +4,7 @@ import { ProofOps, ProofOpsSDKType } from "../crypto/proof";
 import { EvidenceParams, EvidenceParamsSDKType, ValidatorParams, ValidatorParamsSDKType, VersionParams, VersionParamsSDKType } from "../types/params";
 import { PublicKey, PublicKeySDKType } from "../crypto/keys";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, Long, toTimestamp, fromTimestamp, fromJsonTimestamp, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
+import { isSet, DeepPartial, Long, toTimestamp, fromTimestamp, fromJsonTimestamp, bytesFromBase64, base64FromBytes } from "../../helpers";
 export const protobufPackage = "tendermint.abci";
 export enum CheckTxType {
   NEW = 0,

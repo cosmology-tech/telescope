@@ -1,7 +1,7 @@
 //@ts-nocheck
 import { PoolParams, PoolParamsSDKType, PoolAsset, PoolAssetSDKType, SmoothWeightChangeParams, SmoothWeightChangeParamsSDKType } from "./balancerPool";
 import { AminoMsg } from "@cosmjs/amino";
-import { Long } from "@osmonauts/helpers";
+import { Long } from "../../../../helpers";
 import { Timestamp, TimestampSDKType } from "../../../../google/protobuf/timestamp";
 import { Duration, DurationSDKType } from "../../../../google/protobuf/duration";
 import { Coin, CoinSDKType } from "../../../../cosmos/base/v1beta1/coin";

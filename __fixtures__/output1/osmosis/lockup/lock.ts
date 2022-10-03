@@ -2,7 +2,7 @@ import { Duration, DurationSDKType } from "../../google/protobuf/duration";
 import { Timestamp, TimestampSDKType } from "../../google/protobuf/timestamp";
 import { Coin, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
 import * as _m0 from "protobufjs/minimal";
-import { toTimestamp, Long, fromTimestamp, isSet, fromJsonTimestamp, DeepPartial } from "@osmonauts/helpers";
+import { toTimestamp, Long, fromTimestamp, isSet, fromJsonTimestamp, DeepPartial } from "../../helpers";
 export const protobufPackage = "osmosis.lockup";
 export enum LockQueryType {
   /** ByDuration - Queries for locks that are longer than a certain duration */

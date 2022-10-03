@@ -1,7 +1,7 @@
 import { CompactBitArray, CompactBitArraySDKType } from "../../../crypto/multisig/v1beta1/multisig";
 import { Any, AnySDKType } from "../../../../google/protobuf/any";
 import * as _m0 from "protobufjs/minimal";
-import { DeepPartial, Long, isSet, bytesFromBase64, base64FromBytes } from "@osmonauts/helpers";
+import { DeepPartial, Long, isSet, bytesFromBase64, base64FromBytes } from "../../../../helpers";
 export const protobufPackage = "cosmos.tx.signing.v1beta1";
 
 /**

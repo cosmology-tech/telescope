@@ -2,7 +2,7 @@ import { Order, OrderSDKType } from "./order";
 import { Lease, LeaseSDKType } from "./lease";
 import { Params, ParamsSDKType } from "./params";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, Exact } from "@osmonauts/helpers";
+import { isSet, DeepPartial, Exact } from "../../../helpers";
 export const protobufPackage = "akash.market.v1beta2";
 
 /** GenesisState defines the basic genesis state used by market module */

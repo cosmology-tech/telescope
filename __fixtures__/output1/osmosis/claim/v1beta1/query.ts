@@ -2,7 +2,7 @@ import { Action, ActionSDKType, ClaimRecord, ClaimRecordSDKType, actionFromJSON,
 import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { Params, ParamsSDKType } from "./params";
 import * as _m0 from "protobufjs/minimal";
-import { DeepPartial, isSet } from "@osmonauts/helpers";
+import { DeepPartial, isSet } from "../../../helpers";
 export const protobufPackage = "osmosis.claim.v1beta1";
 
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */

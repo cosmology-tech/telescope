@@ -2,7 +2,7 @@ import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } fr
 import { Coin, CoinSDKType } from "../../base/v1beta1/coin";
 import { Params, ParamsSDKType, Metadata, MetadataSDKType } from "./bank";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial } from "@osmonauts/helpers";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "cosmos.bank.v1beta1";
 
 /** QueryBalanceRequest is the request type for the Query/Balance RPC method. */

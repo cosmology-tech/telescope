@@ -4,7 +4,7 @@ import { Coin, CoinSDKType } from "../../base/v1beta1/coin";
 import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
 import { AminoMsg, decodeBech32Pubkey, encodeBech32Pubkey } from "@cosmjs/amino";
 import { fromBase64, toBase64 } from "@cosmjs/encoding";
-import { Long } from "@osmonauts/helpers";
+import { Long } from "../../../helpers";
 import { MsgCreateValidator, MsgCreateValidatorSDKType, MsgEditValidator, MsgEditValidatorSDKType, MsgDelegate, MsgDelegateSDKType, MsgBeginRedelegate, MsgBeginRedelegateSDKType, MsgUndelegate, MsgUndelegateSDKType } from "./tx";
 export interface AminoMsgCreateValidator extends AminoMsg {
   type: "cosmos-sdk/MsgCreateValidator";

@@ -1,7 +1,7 @@
 import { PlacementRequirements, PlacementRequirementsSDKType } from "../../base/v1beta2/attribute";
 import { Resource, ResourceSDKType } from "./resource";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, Exact } from "@osmonauts/helpers";
+import { isSet, DeepPartial, Exact } from "../../../helpers";
 export const protobufPackage = "akash.deployment.v1beta2";
 
 /** GroupSpec stores group specifications */

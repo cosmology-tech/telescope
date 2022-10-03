@@ -1,7 +1,7 @@
 import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
 import { Any, AnySDKType } from "../../../google/protobuf/any";
 import * as _m0 from "protobufjs/minimal";
-import { toTimestamp, fromTimestamp, Long, isSet, fromJsonTimestamp, DeepPartial } from "@osmonauts/helpers";
+import { toTimestamp, fromTimestamp, Long, isSet, fromJsonTimestamp, DeepPartial } from "../../../helpers";
 export const protobufPackage = "cosmos.upgrade.v1beta1";
 
 /** Plan specifies information about a planned upgrade and when it should occur. */

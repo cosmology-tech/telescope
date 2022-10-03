@@ -1,6 +1,7 @@
 import { ProtoRoot, ProtoRef } from '@osmonauts/types';
 import { camel } from '@osmonauts/utils';
 import { relative, dirname, extname } from 'path';
+import { ImportObj } from '../types';
 
 export const getRoot = (ref: ProtoRef): ProtoRoot => {
     if (ref.traversed) return ref.traversed;
@@ -8,7 +9,7 @@ export const getRoot = (ref: ProtoRef): ProtoRoot => {
 };
 
 export const UTILS = {
-    AminoHeight: '@osmonauts/helpers',
+    AminoHeight: '__helpers__',
     AminoMsg: '@cosmjs/amino',
     AminoTypes: '@cosmjs/stargate',
     decodeBech32Pubkey: '@cosmjs/amino',
@@ -16,35 +17,46 @@ export const UTILS = {
     encodeBech32Pubkey: '@cosmjs/amino',
     fromBase64: '@cosmjs/encoding',
     fromBech32: '@cosmjs/encoding',
-    fromDuration: '@osmonauts/helpers',
+    fromDuration: '__helpers__',
     fromHex: '@cosmjs/encoding',
     fromUtf8: '@cosmjs/encoding',
-    fromJsonTimestamp: '@osmonauts/helpers',
-    fromTimestamp: '@osmonauts/helpers',
+    fromJsonTimestamp: '__helpers__',
+    fromTimestamp: '__helpers__',
     GeneratedType: '@cosmjs/proto-signing',
-    isSet: '@osmonauts/helpers',
-    isObject: '@osmonauts/helpers',
-    Long: '@osmonauts/helpers', // exports Long and also calls the magic Long code
+    isSet: '__helpers__',
+    isObject: '__helpers__',
+    Long: '__helpers__', // exports Long and also calls the magic Long code
     // Long: { type: 'default', path: 'long', name: 'Long ' },
     createProtobufRpcClient: '@cosmjs/stargate',
     QueryClient: '@cosmjs/stargate',
     Tendermint34Client: '@cosmjs/tendermint-rpc',
     OfflineSigner: '@cosmjs/proto-signing',
-    omitDefault: '@osmonauts/helpers',
+    omitDefault: '__helpers__',
     Registry: '@cosmjs/proto-signing',
     SigningStargateClient: '@cosmjs/stargate',
     toBase64: '@cosmjs/encoding',
     toUtf8: '@cosmjs/encoding',
-    toDuration: '@osmonauts/helpers',
-    toTimestamp: '@osmonauts/helpers',
-    bytesFromBase64: '@osmonauts/helpers',
-    base64FromBytes: '@osmonauts/helpers',
-    setPaginationParams: '@osmonauts/helpers',
+    toDuration: '__helpers__',
+    toTimestamp: '__helpers__',
+    bytesFromBase64: '__helpers__',
+    base64FromBytes: '__helpers__',
+    setPaginationParams: '__helpers__',
     _m0: { type: 'namespace', path: 'protobufjs/minimal', name: '_m0' },
-    Exact: '@osmonauts/helpers',
-    Rpc: '@osmonauts/helpers',
+    Exact: '__helpers__',
+    Rpc: '__helpers__',
     LCDClient: '@osmonauts/lcd',
-    DeepPartial: '@osmonauts/helpers'
+    DeepPartial: '__helpers__'
+};
+
+
+export const fixlocalpaths = (imports: ImportObj[]) => {
+    return imports.map(imp => {
+        return {
+            ...imp,
+            path: (imp.path === '__helpers__' || imp.path.startsWith('.') || imp.path.startsWith('@')) ?
+                imp.path : `./${imp.path}`
+        };
+    })
 };
 
 

@@ -1,6 +1,6 @@
 import { GrantAuthorization, GrantAuthorizationSDKType } from "./authz";
 import * as _m0 from "protobufjs/minimal";
-import { DeepPartial } from "@osmonauts/helpers";
+import { DeepPartial } from "../../../helpers";
 export const protobufPackage = "cosmos.authz.v1beta1";
 
 /** GenesisState defines the authz module's genesis state. */

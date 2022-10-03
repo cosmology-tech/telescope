@@ -1,4 +1,5 @@
 import { ProtoRoot, ProtoRef } from '@osmonauts/types';
+import { ImportObj } from '../types';
 export declare const getRoot: (ref: ProtoRef) => ProtoRoot;
 export declare const UTILS: {
     AminoHeight: string;
@@ -42,5 +43,11 @@ export declare const UTILS: {
     LCDClient: string;
     DeepPartial: string;
 };
+export declare const fixlocalpaths: (imports: ImportObj[]) => {
+    path: string;
+    type: string;
+    name: string;
+    importAs?: string;
+}[];
 export declare const getRelativePath: (f1: string, f2: string) => string;
 export declare const variableSlug: (str: any) => any;
