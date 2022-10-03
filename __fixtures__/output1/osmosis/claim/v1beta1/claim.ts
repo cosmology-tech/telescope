@@ -69,7 +69,7 @@ export interface ClaimRecord {
 
   /**
    * true if action is completed
-   *  index of bool in array refers to action enum #
+   * index of bool in array refers to action enum #
    */
   actionCompleted: boolean[];
 }
@@ -84,7 +84,7 @@ export interface ClaimRecordSDKType {
 
   /**
    * true if action is completed
-   *  index of bool in array refers to action enum #
+   * index of bool in array refers to action enum #
    */
   action_completed: boolean[];
 }

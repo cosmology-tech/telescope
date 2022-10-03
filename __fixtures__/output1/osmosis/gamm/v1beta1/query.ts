@@ -108,7 +108,7 @@ export interface QueryTotalSharesResponseSDKType {
 
 /**
  * QuerySpotPriceRequest defines the gRPC request structure for a SpotPrice
- *  query.
+ * query.
  */
 export interface QuerySpotPriceRequest {
   poolId: Long;
@@ -118,7 +118,7 @@ export interface QuerySpotPriceRequest {
 
 /**
  * QuerySpotPriceRequest defines the gRPC request structure for a SpotPrice
- *  query.
+ * query.
  */
 export interface QuerySpotPriceRequestSDKType {
   poolId: Long;
@@ -128,7 +128,7 @@ export interface QuerySpotPriceRequestSDKType {
 
 /**
  * QuerySpotPriceResponse defines the gRPC response structure for a SpotPrice
- *  query.
+ * query.
  */
 export interface QuerySpotPriceResponse {
   /** String of the Dec. Ex) 10.203uatom */
@@ -137,7 +137,7 @@ export interface QuerySpotPriceResponse {
 
 /**
  * QuerySpotPriceResponse defines the gRPC response structure for a SpotPrice
- *  query.
+ * query.
  */
 export interface QuerySpotPriceResponseSDKType {
   /** String of the Dec. Ex) 10.203uatom */

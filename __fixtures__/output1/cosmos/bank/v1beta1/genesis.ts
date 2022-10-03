@@ -14,7 +14,7 @@ export interface GenesisState {
 
   /**
    * supply represents the total supply. If it is left empty, then supply will be calculated based on the provided
-   *  balances. Otherwise, it will be used to validate that the sum of the balances equals this amount.
+   * balances. Otherwise, it will be used to validate that the sum of the balances equals this amount.
    */
   supply: Coin[];
 
@@ -32,7 +32,7 @@ export interface GenesisStateSDKType {
 
   /**
    * supply represents the total supply. If it is left empty, then supply will be calculated based on the provided
-   *  balances. Otherwise, it will be used to validate that the sum of the balances equals this amount.
+   * balances. Otherwise, it will be used to validate that the sum of the balances equals this amount.
    */
   supply: CoinSDKType[];
 
@@ -42,7 +42,7 @@ export interface GenesisStateSDKType {
 
 /**
  * Balance defines an account address and balance pair used in the bank module's
- *  genesis state.
+ * genesis state.
  */
 export interface Balance {
   /** address is the address of the balance holder. */
@@ -54,7 +54,7 @@ export interface Balance {
 
 /**
  * Balance defines an account address and balance pair used in the bank module's
- *  genesis state.
+ * genesis state.
  */
 export interface BalanceSDKType {
   /** address is the address of the balance holder. */

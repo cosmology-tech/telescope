@@ -2,7 +2,7 @@ export const protobufPackage = "google.api";
 
 /**
  * The launch stage as defined by [Google Cloud Platform
- *  Launch Stages](http://cloud.google.com/terms/launch-stages).
+ * Launch Stages](http://cloud.google.com/terms/launch-stages).
  */
 export enum LaunchStage {
   /** LAUNCH_STAGE_UNSPECIFIED - Do not use this default value. */
@@ -64,7 +64,7 @@ export enum LaunchStage {
 
 /**
  * The launch stage as defined by [Google Cloud Platform
- *  Launch Stages](http://cloud.google.com/terms/launch-stages).
+ * Launch Stages](http://cloud.google.com/terms/launch-stages).
  */
 export enum LaunchStageSDKType {
   /** LAUNCH_STAGE_UNSPECIFIED - Do not use this default value. */

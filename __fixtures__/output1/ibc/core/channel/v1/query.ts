@@ -26,8 +26,8 @@ export interface QueryChannelRequestSDKType {
 
 /**
  * QueryChannelResponse is the response type for the Query/Channel RPC method.
- *  Besides the Channel end, it includes a proof and the height from which the
- *  proof was retrieved.
+ * Besides the Channel end, it includes a proof and the height from which the
+ * proof was retrieved.
  */
 export interface QueryChannelResponse {
   /** channel associated with the request identifiers */
@@ -42,8 +42,8 @@ export interface QueryChannelResponse {
 
 /**
  * QueryChannelResponse is the response type for the Query/Channel RPC method.
- *  Besides the Channel end, it includes a proof and the height from which the
- *  proof was retrieved.
+ * Besides the Channel end, it includes a proof and the height from which the
+ * proof was retrieved.
  */
 export interface QueryChannelResponseSDKType {
   /** channel associated with the request identifiers */
@@ -94,7 +94,7 @@ export interface QueryChannelsResponseSDKType {
 
 /**
  * QueryConnectionChannelsRequest is the request type for the
- *  Query/QueryConnectionChannels RPC method
+ * Query/QueryConnectionChannels RPC method
  */
 export interface QueryConnectionChannelsRequest {
   /** connection unique identifier */
@@ -106,7 +106,7 @@ export interface QueryConnectionChannelsRequest {
 
 /**
  * QueryConnectionChannelsRequest is the request type for the
- *  Query/QueryConnectionChannels RPC method
+ * Query/QueryConnectionChannels RPC method
  */
 export interface QueryConnectionChannelsRequestSDKType {
   /** connection unique identifier */
@@ -118,7 +118,7 @@ export interface QueryConnectionChannelsRequestSDKType {
 
 /**
  * QueryConnectionChannelsResponse is the Response type for the
- *  Query/QueryConnectionChannels RPC method
+ * Query/QueryConnectionChannels RPC method
  */
 export interface QueryConnectionChannelsResponse {
   /** list of channels associated with a connection. */
@@ -133,7 +133,7 @@ export interface QueryConnectionChannelsResponse {
 
 /**
  * QueryConnectionChannelsResponse is the Response type for the
- *  Query/QueryConnectionChannels RPC method
+ * Query/QueryConnectionChannels RPC method
  */
 export interface QueryConnectionChannelsResponseSDKType {
   /** list of channels associated with a connection. */
@@ -148,7 +148,7 @@ export interface QueryConnectionChannelsResponseSDKType {
 
 /**
  * QueryChannelClientStateRequest is the request type for the Query/ClientState
- *  RPC method
+ * RPC method
  */
 export interface QueryChannelClientStateRequest {
   /** port unique identifier */
@@ -160,7 +160,7 @@ export interface QueryChannelClientStateRequest {
 
 /**
  * QueryChannelClientStateRequest is the request type for the Query/ClientState
- *  RPC method
+ * RPC method
  */
 export interface QueryChannelClientStateRequestSDKType {
   /** port unique identifier */
@@ -172,7 +172,7 @@ export interface QueryChannelClientStateRequestSDKType {
 
 /**
  * QueryChannelClientStateResponse is the Response type for the
- *  Query/QueryChannelClientState RPC method
+ * Query/QueryChannelClientState RPC method
  */
 export interface QueryChannelClientStateResponse {
   /** client state associated with the channel */
@@ -187,7 +187,7 @@ export interface QueryChannelClientStateResponse {
 
 /**
  * QueryChannelClientStateResponse is the Response type for the
- *  Query/QueryChannelClientState RPC method
+ * Query/QueryChannelClientState RPC method
  */
 export interface QueryChannelClientStateResponseSDKType {
   /** client state associated with the channel */
@@ -202,7 +202,7 @@ export interface QueryChannelClientStateResponseSDKType {
 
 /**
  * QueryChannelConsensusStateRequest is the request type for the
- *  Query/ConsensusState RPC method
+ * Query/ConsensusState RPC method
  */
 export interface QueryChannelConsensusStateRequest {
   /** port unique identifier */
@@ -220,7 +220,7 @@ export interface QueryChannelConsensusStateRequest {
 
 /**
  * QueryChannelConsensusStateRequest is the request type for the
- *  Query/ConsensusState RPC method
+ * Query/ConsensusState RPC method
  */
 export interface QueryChannelConsensusStateRequestSDKType {
   /** port unique identifier */
@@ -238,7 +238,7 @@ export interface QueryChannelConsensusStateRequestSDKType {
 
 /**
  * QueryChannelClientStateResponse is the Response type for the
- *  Query/QueryChannelClientState RPC method
+ * Query/QueryChannelClientState RPC method
  */
 export interface QueryChannelConsensusStateResponse {
   /** consensus state associated with the channel */
@@ -256,7 +256,7 @@ export interface QueryChannelConsensusStateResponse {
 
 /**
  * QueryChannelClientStateResponse is the Response type for the
- *  Query/QueryChannelClientState RPC method
+ * Query/QueryChannelClientState RPC method
  */
 export interface QueryChannelConsensusStateResponseSDKType {
   /** consensus state associated with the channel */
@@ -274,7 +274,7 @@ export interface QueryChannelConsensusStateResponseSDKType {
 
 /**
  * QueryPacketCommitmentRequest is the request type for the
- *  Query/PacketCommitment RPC method
+ * Query/PacketCommitment RPC method
  */
 export interface QueryPacketCommitmentRequest {
   /** port unique identifier */
@@ -289,7 +289,7 @@ export interface QueryPacketCommitmentRequest {
 
 /**
  * QueryPacketCommitmentRequest is the request type for the
- *  Query/PacketCommitment RPC method
+ * Query/PacketCommitment RPC method
  */
 export interface QueryPacketCommitmentRequestSDKType {
   /** port unique identifier */
@@ -304,8 +304,8 @@ export interface QueryPacketCommitmentRequestSDKType {
 
 /**
  * QueryPacketCommitmentResponse defines the client query response for a packet
- *  which also includes a proof and the height from which the proof was
- *  retrieved
+ * which also includes a proof and the height from which the proof was
+ * retrieved
  */
 export interface QueryPacketCommitmentResponse {
   /** packet associated with the request fields */
@@ -320,8 +320,8 @@ export interface QueryPacketCommitmentResponse {
 
 /**
  * QueryPacketCommitmentResponse defines the client query response for a packet
- *  which also includes a proof and the height from which the proof was
- *  retrieved
+ * which also includes a proof and the height from which the proof was
+ * retrieved
  */
 export interface QueryPacketCommitmentResponseSDKType {
   /** packet associated with the request fields */
@@ -336,7 +336,7 @@ export interface QueryPacketCommitmentResponseSDKType {
 
 /**
  * QueryPacketCommitmentsRequest is the request type for the
- *  Query/QueryPacketCommitments RPC method
+ * Query/QueryPacketCommitments RPC method
  */
 export interface QueryPacketCommitmentsRequest {
   /** port unique identifier */
@@ -351,7 +351,7 @@ export interface QueryPacketCommitmentsRequest {
 
 /**
  * QueryPacketCommitmentsRequest is the request type for the
- *  Query/QueryPacketCommitments RPC method
+ * Query/QueryPacketCommitments RPC method
  */
 export interface QueryPacketCommitmentsRequestSDKType {
   /** port unique identifier */
@@ -366,7 +366,7 @@ export interface QueryPacketCommitmentsRequestSDKType {
 
 /**
  * QueryPacketCommitmentsResponse is the request type for the
- *  Query/QueryPacketCommitments RPC method
+ * Query/QueryPacketCommitments RPC method
  */
 export interface QueryPacketCommitmentsResponse {
   commitments: PacketState[];
@@ -380,7 +380,7 @@ export interface QueryPacketCommitmentsResponse {
 
 /**
  * QueryPacketCommitmentsResponse is the request type for the
- *  Query/QueryPacketCommitments RPC method
+ * Query/QueryPacketCommitments RPC method
  */
 export interface QueryPacketCommitmentsResponseSDKType {
   commitments: PacketStateSDKType[];
@@ -394,7 +394,7 @@ export interface QueryPacketCommitmentsResponseSDKType {
 
 /**
  * QueryPacketReceiptRequest is the request type for the
- *  Query/PacketReceipt RPC method
+ * Query/PacketReceipt RPC method
  */
 export interface QueryPacketReceiptRequest {
   /** port unique identifier */
@@ -409,7 +409,7 @@ export interface QueryPacketReceiptRequest {
 
 /**
  * QueryPacketReceiptRequest is the request type for the
- *  Query/PacketReceipt RPC method
+ * Query/PacketReceipt RPC method
  */
 export interface QueryPacketReceiptRequestSDKType {
   /** port unique identifier */
@@ -424,8 +424,8 @@ export interface QueryPacketReceiptRequestSDKType {
 
 /**
  * QueryPacketReceiptResponse defines the client query response for a packet
- *  receipt which also includes a proof, and the height from which the proof was
- *  retrieved
+ * receipt which also includes a proof, and the height from which the proof was
+ * retrieved
  */
 export interface QueryPacketReceiptResponse {
   /** success flag for if receipt exists */
@@ -440,8 +440,8 @@ export interface QueryPacketReceiptResponse {
 
 /**
  * QueryPacketReceiptResponse defines the client query response for a packet
- *  receipt which also includes a proof, and the height from which the proof was
- *  retrieved
+ * receipt which also includes a proof, and the height from which the proof was
+ * retrieved
  */
 export interface QueryPacketReceiptResponseSDKType {
   /** success flag for if receipt exists */
@@ -456,7 +456,7 @@ export interface QueryPacketReceiptResponseSDKType {
 
 /**
  * QueryPacketAcknowledgementRequest is the request type for the
- *  Query/PacketAcknowledgement RPC method
+ * Query/PacketAcknowledgement RPC method
  */
 export interface QueryPacketAcknowledgementRequest {
   /** port unique identifier */
@@ -471,7 +471,7 @@ export interface QueryPacketAcknowledgementRequest {
 
 /**
  * QueryPacketAcknowledgementRequest is the request type for the
- *  Query/PacketAcknowledgement RPC method
+ * Query/PacketAcknowledgement RPC method
  */
 export interface QueryPacketAcknowledgementRequestSDKType {
   /** port unique identifier */
@@ -486,8 +486,8 @@ export interface QueryPacketAcknowledgementRequestSDKType {
 
 /**
  * QueryPacketAcknowledgementResponse defines the client query response for a
- *  packet which also includes a proof and the height from which the
- *  proof was retrieved
+ * packet which also includes a proof and the height from which the
+ * proof was retrieved
  */
 export interface QueryPacketAcknowledgementResponse {
   /** packet associated with the request fields */
@@ -502,8 +502,8 @@ export interface QueryPacketAcknowledgementResponse {
 
 /**
  * QueryPacketAcknowledgementResponse defines the client query response for a
- *  packet which also includes a proof and the height from which the
- *  proof was retrieved
+ * packet which also includes a proof and the height from which the
+ * proof was retrieved
  */
 export interface QueryPacketAcknowledgementResponseSDKType {
   /** packet associated with the request fields */
@@ -518,7 +518,7 @@ export interface QueryPacketAcknowledgementResponseSDKType {
 
 /**
  * QueryPacketAcknowledgementsRequest is the request type for the
- *  Query/QueryPacketCommitments RPC method
+ * Query/QueryPacketCommitments RPC method
  */
 export interface QueryPacketAcknowledgementsRequest {
   /** port unique identifier */
@@ -536,7 +536,7 @@ export interface QueryPacketAcknowledgementsRequest {
 
 /**
  * QueryPacketAcknowledgementsRequest is the request type for the
- *  Query/QueryPacketCommitments RPC method
+ * Query/QueryPacketCommitments RPC method
  */
 export interface QueryPacketAcknowledgementsRequestSDKType {
   /** port unique identifier */
@@ -554,7 +554,7 @@ export interface QueryPacketAcknowledgementsRequestSDKType {
 
 /**
  * QueryPacketAcknowledgemetsResponse is the request type for the
- *  Query/QueryPacketAcknowledgements RPC method
+ * Query/QueryPacketAcknowledgements RPC method
  */
 export interface QueryPacketAcknowledgementsResponse {
   acknowledgements: PacketState[];
@@ -568,7 +568,7 @@ export interface QueryPacketAcknowledgementsResponse {
 
 /**
  * QueryPacketAcknowledgemetsResponse is the request type for the
- *  Query/QueryPacketAcknowledgements RPC method
+ * Query/QueryPacketAcknowledgements RPC method
  */
 export interface QueryPacketAcknowledgementsResponseSDKType {
   acknowledgements: PacketStateSDKType[];
@@ -582,7 +582,7 @@ export interface QueryPacketAcknowledgementsResponseSDKType {
 
 /**
  * QueryUnreceivedPacketsRequest is the request type for the
- *  Query/UnreceivedPackets RPC method
+ * Query/UnreceivedPackets RPC method
  */
 export interface QueryUnreceivedPacketsRequest {
   /** port unique identifier */
@@ -597,7 +597,7 @@ export interface QueryUnreceivedPacketsRequest {
 
 /**
  * QueryUnreceivedPacketsRequest is the request type for the
- *  Query/UnreceivedPackets RPC method
+ * Query/UnreceivedPackets RPC method
  */
 export interface QueryUnreceivedPacketsRequestSDKType {
   /** port unique identifier */
@@ -612,7 +612,7 @@ export interface QueryUnreceivedPacketsRequestSDKType {
 
 /**
  * QueryUnreceivedPacketsResponse is the response type for the
- *  Query/UnreceivedPacketCommitments RPC method
+ * Query/UnreceivedPacketCommitments RPC method
  */
 export interface QueryUnreceivedPacketsResponse {
   /** list of unreceived packet sequences */
@@ -624,7 +624,7 @@ export interface QueryUnreceivedPacketsResponse {
 
 /**
  * QueryUnreceivedPacketsResponse is the response type for the
- *  Query/UnreceivedPacketCommitments RPC method
+ * Query/UnreceivedPacketCommitments RPC method
  */
 export interface QueryUnreceivedPacketsResponseSDKType {
   /** list of unreceived packet sequences */
@@ -636,7 +636,7 @@ export interface QueryUnreceivedPacketsResponseSDKType {
 
 /**
  * QueryUnreceivedAcks is the request type for the
- *  Query/UnreceivedAcks RPC method
+ * Query/UnreceivedAcks RPC method
  */
 export interface QueryUnreceivedAcksRequest {
   /** port unique identifier */
@@ -651,7 +651,7 @@ export interface QueryUnreceivedAcksRequest {
 
 /**
  * QueryUnreceivedAcks is the request type for the
- *  Query/UnreceivedAcks RPC method
+ * Query/UnreceivedAcks RPC method
  */
 export interface QueryUnreceivedAcksRequestSDKType {
   /** port unique identifier */
@@ -666,7 +666,7 @@ export interface QueryUnreceivedAcksRequestSDKType {
 
 /**
  * QueryUnreceivedAcksResponse is the response type for the
- *  Query/UnreceivedAcks RPC method
+ * Query/UnreceivedAcks RPC method
  */
 export interface QueryUnreceivedAcksResponse {
   /** list of unreceived acknowledgement sequences */
@@ -678,7 +678,7 @@ export interface QueryUnreceivedAcksResponse {
 
 /**
  * QueryUnreceivedAcksResponse is the response type for the
- *  Query/UnreceivedAcks RPC method
+ * Query/UnreceivedAcks RPC method
  */
 export interface QueryUnreceivedAcksResponseSDKType {
   /** list of unreceived acknowledgement sequences */
@@ -690,7 +690,7 @@ export interface QueryUnreceivedAcksResponseSDKType {
 
 /**
  * QueryNextSequenceReceiveRequest is the request type for the
- *  Query/QueryNextSequenceReceiveRequest RPC method
+ * Query/QueryNextSequenceReceiveRequest RPC method
  */
 export interface QueryNextSequenceReceiveRequest {
   /** port unique identifier */
@@ -702,7 +702,7 @@ export interface QueryNextSequenceReceiveRequest {
 
 /**
  * QueryNextSequenceReceiveRequest is the request type for the
- *  Query/QueryNextSequenceReceiveRequest RPC method
+ * Query/QueryNextSequenceReceiveRequest RPC method
  */
 export interface QueryNextSequenceReceiveRequestSDKType {
   /** port unique identifier */
@@ -714,7 +714,7 @@ export interface QueryNextSequenceReceiveRequestSDKType {
 
 /**
  * QuerySequenceResponse is the request type for the
- *  Query/QueryNextSequenceReceiveResponse RPC method
+ * Query/QueryNextSequenceReceiveResponse RPC method
  */
 export interface QueryNextSequenceReceiveResponse {
   /** next sequence receive number */
@@ -729,7 +729,7 @@ export interface QueryNextSequenceReceiveResponse {
 
 /**
  * QuerySequenceResponse is the request type for the
- *  Query/QueryNextSequenceReceiveResponse RPC method
+ * Query/QueryNextSequenceReceiveResponse RPC method
  */
 export interface QueryNextSequenceReceiveResponseSDKType {
   /** next sequence receive number */

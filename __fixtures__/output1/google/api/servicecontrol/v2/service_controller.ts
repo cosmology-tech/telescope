@@ -8,18 +8,18 @@ export const protobufPackage = "google.api.servicecontrol.v2";
 export interface CheckRequest {
   /**
    * The service name as specified in its service configuration. For example,
-   *  `"pubsub.googleapis.com"`.
-   * 
-   *  See
-   *  [google.api.Service](https://cloud.google.com/service-management/reference/rpc/google.api#google.api.Service)
-   *  for the definition of a service name.
+   * `"pubsub.googleapis.com"`.
+   *
+   * See
+   * [google.api.Service](https://cloud.google.com/service-management/reference/rpc/google.api#google.api.Service)
+   * for the definition of a service name.
    */
   serviceName: string;
 
   /**
    * Specifies the version of the service configuration that should be used to
-   *  process the request. Must not be empty. Set this field to 'latest' to
-   *  specify using the latest configuration.
+   * process the request. Must not be empty. Set this field to 'latest' to
+   * specify using the latest configuration.
    */
   serviceConfigId: string;
 
@@ -37,18 +37,18 @@ export interface CheckRequest {
 export interface CheckRequestSDKType {
   /**
    * The service name as specified in its service configuration. For example,
-   *  `"pubsub.googleapis.com"`.
-   * 
-   *  See
-   *  [google.api.Service](https://cloud.google.com/service-management/reference/rpc/google.api#google.api.Service)
-   *  for the definition of a service name.
+   * `"pubsub.googleapis.com"`.
+   *
+   * See
+   * [google.api.Service](https://cloud.google.com/service-management/reference/rpc/google.api#google.api.Service)
+   * for the definition of a service name.
    */
   service_name: string;
 
   /**
    * Specifies the version of the service configuration that should be used to
-   *  process the request. Must not be empty. Set this field to 'latest' to
-   *  specify using the latest configuration.
+   * process the request. Must not be empty. Set this field to 'latest' to
+   * specify using the latest configuration.
    */
   service_config_id: string;
 
@@ -72,26 +72,26 @@ export interface ResourceInfo {
 
   /**
    * The resource permission needed for this request.
-   *  The format must be "{service}/{plural}.{verb}".
+   * The format must be "{service}/{plural}.{verb}".
    */
   permission: string;
 
   /**
    * Optional. The identifier of the container of this resource. For Google
-   *  Cloud APIs, the resource container must be one of the following formats:
-   *      - `projects/<project-id or project-number>`
-   *      - `folders/<folder-id>`
-   *      - `organizations/<organization-id>`
-   *  For the policy enforcement on the container level (VPCSC and Location
-   *  Policy check), this field takes precedence on the container extracted from
-   *  name when presents.
+   * Cloud APIs, the resource container must be one of the following formats:
+   *     - `projects/<project-id or project-number>`
+   *     - `folders/<folder-id>`
+   *     - `organizations/<organization-id>`
+   * For the policy enforcement on the container level (VPCSC and Location
+   * Policy check), this field takes precedence on the container extracted from
+   * name when presents.
    */
   container: string;
 
   /**
    * Optional. The location of the resource. The value must be a valid zone,
-   *  region or multiregion. For example: "europe-west4" or
-   *  "northamerica-northeast1-a"
+   * region or multiregion. For example: "europe-west4" or
+   * "northamerica-northeast1-a"
    */
   location: string;
 }
@@ -106,26 +106,26 @@ export interface ResourceInfoSDKType {
 
   /**
    * The resource permission needed for this request.
-   *  The format must be "{service}/{plural}.{verb}".
+   * The format must be "{service}/{plural}.{verb}".
    */
   permission: string;
 
   /**
    * Optional. The identifier of the container of this resource. For Google
-   *  Cloud APIs, the resource container must be one of the following formats:
-   *      - `projects/<project-id or project-number>`
-   *      - `folders/<folder-id>`
-   *      - `organizations/<organization-id>`
-   *  For the policy enforcement on the container level (VPCSC and Location
-   *  Policy check), this field takes precedence on the container extracted from
-   *  name when presents.
+   * Cloud APIs, the resource container must be one of the following formats:
+   *     - `projects/<project-id or project-number>`
+   *     - `folders/<folder-id>`
+   *     - `organizations/<organization-id>`
+   * For the policy enforcement on the container level (VPCSC and Location
+   * Policy check), this field takes precedence on the container extracted from
+   * name when presents.
    */
   container: string;
 
   /**
    * Optional. The location of the resource. The value must be a valid zone,
-   *  region or multiregion. For example: "europe-west4" or
-   *  "northamerica-northeast1-a"
+   * region or multiregion. For example: "europe-west4" or
+   * "northamerica-northeast1-a"
    */
   location: string;
 }
@@ -142,8 +142,8 @@ export interface CheckResponse_HeadersEntrySDKType {
 export interface CheckResponse {
   /**
    * Operation is allowed when this field is not set. Any non-'OK' status
-   *  indicates a denial; [google.rpc.Status.details][google.rpc.Status.details]
-   *  would contain additional details about the denial.
+   * indicates a denial; [google.rpc.Status.details][google.rpc.Status.details]
+   * would contain additional details about the denial.
    */
   status: Status;
 
@@ -157,8 +157,8 @@ export interface CheckResponse {
 export interface CheckResponseSDKType {
   /**
    * Operation is allowed when this field is not set. Any non-'OK' status
-   *  indicates a denial; [google.rpc.Status.details][google.rpc.Status.details]
-   *  would contain additional details about the denial.
+   * indicates a denial; [google.rpc.Status.details][google.rpc.Status.details]
+   * would contain additional details about the denial.
    */
   status: StatusSDKType;
 
@@ -172,25 +172,25 @@ export interface CheckResponseSDKType {
 export interface ReportRequest {
   /**
    * The service name as specified in its service configuration. For example,
-   *  `"pubsub.googleapis.com"`.
-   * 
-   *  See
-   *  [google.api.Service](https://cloud.google.com/service-management/reference/rpc/google.api#google.api.Service)
-   *  for the definition of a service name.
+   * `"pubsub.googleapis.com"`.
+   *
+   * See
+   * [google.api.Service](https://cloud.google.com/service-management/reference/rpc/google.api#google.api.Service)
+   * for the definition of a service name.
    */
   serviceName: string;
 
   /**
    * Specifies the version of the service configuration that should be used to
-   *  process the request. Must not be empty. Set this field to 'latest' to
-   *  specify using the latest configuration.
+   * process the request. Must not be empty. Set this field to 'latest' to
+   * specify using the latest configuration.
    */
   serviceConfigId: string;
 
   /**
    * Describes the list of operations to be reported. Each operation is
-   *  represented as an AttributeContext, and contains all attributes around an
-   *  API access.
+   * represented as an AttributeContext, and contains all attributes around an
+   * API access.
    */
   operations: AttributeContext[];
 }
@@ -199,38 +199,38 @@ export interface ReportRequest {
 export interface ReportRequestSDKType {
   /**
    * The service name as specified in its service configuration. For example,
-   *  `"pubsub.googleapis.com"`.
-   * 
-   *  See
-   *  [google.api.Service](https://cloud.google.com/service-management/reference/rpc/google.api#google.api.Service)
-   *  for the definition of a service name.
+   * `"pubsub.googleapis.com"`.
+   *
+   * See
+   * [google.api.Service](https://cloud.google.com/service-management/reference/rpc/google.api#google.api.Service)
+   * for the definition of a service name.
    */
   service_name: string;
 
   /**
    * Specifies the version of the service configuration that should be used to
-   *  process the request. Must not be empty. Set this field to 'latest' to
-   *  specify using the latest configuration.
+   * process the request. Must not be empty. Set this field to 'latest' to
+   * specify using the latest configuration.
    */
   service_config_id: string;
 
   /**
    * Describes the list of operations to be reported. Each operation is
-   *  represented as an AttributeContext, and contains all attributes around an
-   *  API access.
+   * represented as an AttributeContext, and contains all attributes around an
+   * API access.
    */
   operations: AttributeContextSDKType[];
 }
 
 /**
  * Response message for the Report method.
- *  If the request contains any invalid data, the server returns an RPC error.
+ * If the request contains any invalid data, the server returns an RPC error.
  */
 export interface ReportResponse {}
 
 /**
  * Response message for the Report method.
- *  If the request contains any invalid data, the server returns an RPC error.
+ * If the request contains any invalid data, the server returns an RPC error.
  */
 export interface ReportResponseSDKType {}
 

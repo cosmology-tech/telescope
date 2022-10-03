@@ -17,7 +17,7 @@ export interface QueryBalancesRequestSDKType {
 
 /**
  * QueryBalancesResponse is the response type for the Query/Balances RPC
- *  method.
+ * method.
  */
 export interface QueryBalancesResponse {
   /** current amount of locked tokens */
@@ -32,7 +32,7 @@ export interface QueryBalancesResponse {
 
 /**
  * QueryBalancesResponse is the response type for the Query/Balances RPC
- *  method.
+ * method.
  */
 export interface QueryBalancesResponseSDKType {
   /** current amount of locked tokens */

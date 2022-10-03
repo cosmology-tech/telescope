@@ -4,12 +4,12 @@ export const protobufPackage = "google.api";
 
 /**
  * Path Translation specifies how to combine the backend address with the
- *  request path in order to produce the appropriate forwarding URL for the
- *  request.
- * 
- *  Path Translation is applicable only to HTTP-based backends. Backends which
- *  do not accept requests over HTTP/HTTPS should leave `path_translation`
- *  unspecified.
+ * request path in order to produce the appropriate forwarding URL for the
+ * request.
+ *
+ * Path Translation is applicable only to HTTP-based backends. Backends which
+ * do not accept requests over HTTP/HTTPS should leave `path_translation`
+ * unspecified.
  */
 export enum BackendRule_PathTranslation {
   PATH_TRANSLATION_UNSPECIFIED = 0,
@@ -68,12 +68,12 @@ export enum BackendRule_PathTranslation {
 
 /**
  * Path Translation specifies how to combine the backend address with the
- *  request path in order to produce the appropriate forwarding URL for the
- *  request.
- * 
- *  Path Translation is applicable only to HTTP-based backends. Backends which
- *  do not accept requests over HTTP/HTTPS should leave `path_translation`
- *  unspecified.
+ * request path in order to produce the appropriate forwarding URL for the
+ * request.
+ *
+ * Path Translation is applicable only to HTTP-based backends. Backends which
+ * do not accept requests over HTTP/HTTPS should leave `path_translation`
+ * unspecified.
  */
 export enum BackendRule_PathTranslationSDKType {
   PATH_TRANSLATION_UNSPECIFIED = 0,
@@ -169,8 +169,8 @@ export function backendRule_PathTranslationToJSON(object: BackendRule_PathTransl
 export interface Backend {
   /**
    * A list of API backend rules that apply to individual API methods.
-   * 
-   *  **NOTE:** All service configuration rules follow "last one wins" order.
+   *
+   * **NOTE:** All service configuration rules follow "last one wins" order.
    */
   rules: BackendRule[];
 }
@@ -179,8 +179,8 @@ export interface Backend {
 export interface BackendSDKType {
   /**
    * A list of API backend rules that apply to individual API methods.
-   * 
-   *  **NOTE:** All service configuration rules follow "last one wins" order.
+   *
+   * **NOTE:** All service configuration rules follow "last one wins" order.
    */
   rules: BackendRuleSDKType[];
 }
@@ -189,91 +189,91 @@ export interface BackendSDKType {
 export interface BackendRule {
   /**
    * Selects the methods to which this rule applies.
-   * 
-   *  Refer to [selector][google.api.DocumentationRule.selector] for syntax details.
+   *
+   * Refer to [selector][google.api.DocumentationRule.selector] for syntax details.
    */
   selector: string;
 
   /**
    * The address of the API backend.
-   * 
-   *  The scheme is used to determine the backend protocol and security.
-   *  The following schemes are accepted:
-   * 
-   *     SCHEME        PROTOCOL    SECURITY
-   *     http://       HTTP        None
-   *     https://      HTTP        TLS
-   *     grpc://       gRPC        None
-   *     grpcs://      gRPC        TLS
-   * 
-   *  It is recommended to explicitly include a scheme. Leaving out the scheme
-   *  may cause constrasting behaviors across platforms.
-   * 
-   *  If the port is unspecified, the default is:
-   *  - 80 for schemes without TLS
-   *  - 443 for schemes with TLS
-   * 
-   *  For HTTP backends, use [protocol][google.api.BackendRule.protocol]
-   *  to specify the protocol version.
+   *
+   * The scheme is used to determine the backend protocol and security.
+   * The following schemes are accepted:
+   *
+   *    SCHEME        PROTOCOL    SECURITY
+   *    http://       HTTP        None
+   *    https://      HTTP        TLS
+   *    grpc://       gRPC        None
+   *    grpcs://      gRPC        TLS
+   *
+   * It is recommended to explicitly include a scheme. Leaving out the scheme
+   * may cause constrasting behaviors across platforms.
+   *
+   * If the port is unspecified, the default is:
+   * - 80 for schemes without TLS
+   * - 443 for schemes with TLS
+   *
+   * For HTTP backends, use [protocol][google.api.BackendRule.protocol]
+   * to specify the protocol version.
    */
   address: string;
 
   /**
    * The number of seconds to wait for a response from a request. The default
-   *  varies based on the request protocol and deployment environment.
+   * varies based on the request protocol and deployment environment.
    */
   deadline: number;
 
   /**
    * Minimum deadline in seconds needed for this method. Calls having deadline
-   *  value lower than this will be rejected.
+   * value lower than this will be rejected.
    */
   minDeadline: number;
 
   /**
    * The number of seconds to wait for the completion of a long running
-   *  operation. The default is no deadline.
+   * operation. The default is no deadline.
    */
   operationDeadline: number;
   pathTranslation: BackendRule_PathTranslation;
 
   /**
    * The JWT audience is used when generating a JWT ID token for the backend.
-   *  This ID token will be added in the HTTP "authorization" header, and sent
-   *  to the backend.
+   * This ID token will be added in the HTTP "authorization" header, and sent
+   * to the backend.
    */
   jwtAudience?: string;
 
   /**
    * When disable_auth is true, a JWT ID token won't be generated and the
-   *  original "Authorization" HTTP header will be preserved. If the header is
-   *  used to carry the original token and is expected by the backend, this
-   *  field must be set to true to preserve the header.
+   * original "Authorization" HTTP header will be preserved. If the header is
+   * used to carry the original token and is expected by the backend, this
+   * field must be set to true to preserve the header.
    */
   disableAuth?: boolean;
 
   /**
    * The protocol used for sending a request to the backend.
-   *  The supported values are "http/1.1" and "h2".
-   * 
-   *  The default value is inferred from the scheme in the
-   *  [address][google.api.BackendRule.address] field:
-   * 
-   *     SCHEME        PROTOCOL
-   *     http://       http/1.1
-   *     https://      http/1.1
-   *     grpc://       h2
-   *     grpcs://      h2
-   * 
-   *  For secure HTTP backends (https://) that support HTTP/2, set this field
-   *  to "h2" for improved performance.
-   * 
-   *  Configuring this field to non-default values is only supported for secure
-   *  HTTP backends. This field will be ignored for all other backends.
-   * 
-   *  See
-   *  https://www.iana.org/assignments/tls-extensiontype-values/tls-extensiontype-values.xhtml#alpn-protocol-ids
-   *  for more details on the supported values.
+   * The supported values are "http/1.1" and "h2".
+   *
+   * The default value is inferred from the scheme in the
+   * [address][google.api.BackendRule.address] field:
+   *
+   *    SCHEME        PROTOCOL
+   *    http://       http/1.1
+   *    https://      http/1.1
+   *    grpc://       h2
+   *    grpcs://      h2
+   *
+   * For secure HTTP backends (https://) that support HTTP/2, set this field
+   * to "h2" for improved performance.
+   *
+   * Configuring this field to non-default values is only supported for secure
+   * HTTP backends. This field will be ignored for all other backends.
+   *
+   * See
+   * https://www.iana.org/assignments/tls-extensiontype-values/tls-extensiontype-values.xhtml#alpn-protocol-ids
+   * for more details on the supported values.
    */
   protocol: string;
 }
@@ -282,91 +282,91 @@ export interface BackendRule {
 export interface BackendRuleSDKType {
   /**
    * Selects the methods to which this rule applies.
-   * 
-   *  Refer to [selector][google.api.DocumentationRule.selector] for syntax details.
+   *
+   * Refer to [selector][google.api.DocumentationRule.selector] for syntax details.
    */
   selector: string;
 
   /**
    * The address of the API backend.
-   * 
-   *  The scheme is used to determine the backend protocol and security.
-   *  The following schemes are accepted:
-   * 
-   *     SCHEME        PROTOCOL    SECURITY
-   *     http://       HTTP        None
-   *     https://      HTTP        TLS
-   *     grpc://       gRPC        None
-   *     grpcs://      gRPC        TLS
-   * 
-   *  It is recommended to explicitly include a scheme. Leaving out the scheme
-   *  may cause constrasting behaviors across platforms.
-   * 
-   *  If the port is unspecified, the default is:
-   *  - 80 for schemes without TLS
-   *  - 443 for schemes with TLS
-   * 
-   *  For HTTP backends, use [protocol][google.api.BackendRule.protocol]
-   *  to specify the protocol version.
+   *
+   * The scheme is used to determine the backend protocol and security.
+   * The following schemes are accepted:
+   *
+   *    SCHEME        PROTOCOL    SECURITY
+   *    http://       HTTP        None
+   *    https://      HTTP        TLS
+   *    grpc://       gRPC        None
+   *    grpcs://      gRPC        TLS
+   *
+   * It is recommended to explicitly include a scheme. Leaving out the scheme
+   * may cause constrasting behaviors across platforms.
+   *
+   * If the port is unspecified, the default is:
+   * - 80 for schemes without TLS
+   * - 443 for schemes with TLS
+   *
+   * For HTTP backends, use [protocol][google.api.BackendRule.protocol]
+   * to specify the protocol version.
    */
   address: string;
 
   /**
    * The number of seconds to wait for a response from a request. The default
-   *  varies based on the request protocol and deployment environment.
+   * varies based on the request protocol and deployment environment.
    */
   deadline: number;
 
   /**
    * Minimum deadline in seconds needed for this method. Calls having deadline
-   *  value lower than this will be rejected.
+   * value lower than this will be rejected.
    */
   min_deadline: number;
 
   /**
    * The number of seconds to wait for the completion of a long running
-   *  operation. The default is no deadline.
+   * operation. The default is no deadline.
    */
   operation_deadline: number;
   path_translation: BackendRule_PathTranslationSDKType;
 
   /**
    * The JWT audience is used when generating a JWT ID token for the backend.
-   *  This ID token will be added in the HTTP "authorization" header, and sent
-   *  to the backend.
+   * This ID token will be added in the HTTP "authorization" header, and sent
+   * to the backend.
    */
   jwt_audience?: string;
 
   /**
    * When disable_auth is true, a JWT ID token won't be generated and the
-   *  original "Authorization" HTTP header will be preserved. If the header is
-   *  used to carry the original token and is expected by the backend, this
-   *  field must be set to true to preserve the header.
+   * original "Authorization" HTTP header will be preserved. If the header is
+   * used to carry the original token and is expected by the backend, this
+   * field must be set to true to preserve the header.
    */
   disable_auth?: boolean;
 
   /**
    * The protocol used for sending a request to the backend.
-   *  The supported values are "http/1.1" and "h2".
-   * 
-   *  The default value is inferred from the scheme in the
-   *  [address][google.api.BackendRule.address] field:
-   * 
-   *     SCHEME        PROTOCOL
-   *     http://       http/1.1
-   *     https://      http/1.1
-   *     grpc://       h2
-   *     grpcs://      h2
-   * 
-   *  For secure HTTP backends (https://) that support HTTP/2, set this field
-   *  to "h2" for improved performance.
-   * 
-   *  Configuring this field to non-default values is only supported for secure
-   *  HTTP backends. This field will be ignored for all other backends.
-   * 
-   *  See
-   *  https://www.iana.org/assignments/tls-extensiontype-values/tls-extensiontype-values.xhtml#alpn-protocol-ids
-   *  for more details on the supported values.
+   * The supported values are "http/1.1" and "h2".
+   *
+   * The default value is inferred from the scheme in the
+   * [address][google.api.BackendRule.address] field:
+   *
+   *    SCHEME        PROTOCOL
+   *    http://       http/1.1
+   *    https://      http/1.1
+   *    grpc://       h2
+   *    grpcs://      h2
+   *
+   * For secure HTTP backends (https://) that support HTTP/2, set this field
+   * to "h2" for improved performance.
+   *
+   * Configuring this field to non-default values is only supported for secure
+   * HTTP backends. This field will be ignored for all other backends.
+   *
+   * See
+   * https://www.iana.org/assignments/tls-extensiontype-values/tls-extensiontype-values.xhtml#alpn-protocol-ids
+   * for more details on the supported values.
    */
   protocol: string;
 }

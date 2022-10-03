@@ -4,68 +4,68 @@ export const protobufPackage = "evmos.inflation.v1";
 
 /**
  * InflationDistribution defines the distribution in which inflation is
- *  allocated through minting on each epoch (staking, incentives, community). It
- *  excludes the team vesting distribution, as this is minted once at genesis.
- *  The initial InflationDistribution can be calculated from the Evmos Token
- *  Model like this:
- *  mintDistribution1 = distribution1 / (1 - teamVestingDistribution)
- *  0.5333333         = 40%           / (1 - 25%)
+ * allocated through minting on each epoch (staking, incentives, community). It
+ * excludes the team vesting distribution, as this is minted once at genesis.
+ * The initial InflationDistribution can be calculated from the Evmos Token
+ * Model like this:
+ * mintDistribution1 = distribution1 / (1 - teamVestingDistribution)
+ * 0.5333333         = 40%           / (1 - 25%)
  */
 export interface InflationDistribution {
   /**
    * staking_rewards defines the proportion of the minted minted_denom that is
-   *  to be allocated as staking rewards
+   * to be allocated as staking rewards
    */
   stakingRewards: string;
 
   /**
    * usage_incentives defines the proportion of the minted minted_denom that is
-   *  to be allocated to the incentives module address
+   * to be allocated to the incentives module address
    */
   usageIncentives: string;
 
   /**
    * community_pool defines the proportion of the minted minted_denom that is to
-   *  be allocated to the community pool
+   * be allocated to the community pool
    */
   communityPool: string;
 }
 
 /**
  * InflationDistribution defines the distribution in which inflation is
- *  allocated through minting on each epoch (staking, incentives, community). It
- *  excludes the team vesting distribution, as this is minted once at genesis.
- *  The initial InflationDistribution can be calculated from the Evmos Token
- *  Model like this:
- *  mintDistribution1 = distribution1 / (1 - teamVestingDistribution)
- *  0.5333333         = 40%           / (1 - 25%)
+ * allocated through minting on each epoch (staking, incentives, community). It
+ * excludes the team vesting distribution, as this is minted once at genesis.
+ * The initial InflationDistribution can be calculated from the Evmos Token
+ * Model like this:
+ * mintDistribution1 = distribution1 / (1 - teamVestingDistribution)
+ * 0.5333333         = 40%           / (1 - 25%)
  */
 export interface InflationDistributionSDKType {
   /**
    * staking_rewards defines the proportion of the minted minted_denom that is
-   *  to be allocated as staking rewards
+   * to be allocated as staking rewards
    */
   staking_rewards: string;
 
   /**
    * usage_incentives defines the proportion of the minted minted_denom that is
-   *  to be allocated to the incentives module address
+   * to be allocated to the incentives module address
    */
   usage_incentives: string;
 
   /**
    * community_pool defines the proportion of the minted minted_denom that is to
-   *  be allocated to the community pool
+   * be allocated to the community pool
    */
   community_pool: string;
 }
 
 /**
  * ExponentialCalculation holds factors to calculate exponential inflation on
- *  each period. Calculation reference:
- *  periodProvision = exponentialDecay       *  bondingIncentive
- *  f(x)            = (a * (1 - r) ^ x + c)  *  (1 + max_variance - bondedRatio *
- *  (max_variance / bonding_target))
+ * each period. Calculation reference:
+ * periodProvision = exponentialDecay       *  bondingIncentive
+ * f(x)            = (a * (1 - r) ^ x + c)  *  (1 + max_variance - bondedRatio *
+ * (max_variance / bonding_target))
  */
 export interface ExponentialCalculation {
   /** initial value */
@@ -86,10 +86,10 @@ export interface ExponentialCalculation {
 
 /**
  * ExponentialCalculation holds factors to calculate exponential inflation on
- *  each period. Calculation reference:
- *  periodProvision = exponentialDecay       *  bondingIncentive
- *  f(x)            = (a * (1 - r) ^ x + c)  *  (1 + max_variance - bondedRatio *
- *  (max_variance / bonding_target))
+ * each period. Calculation reference:
+ * periodProvision = exponentialDecay       *  bondingIncentive
+ * f(x)            = (a * (1 - r) ^ x + c)  *  (1 + max_variance - bondedRatio *
+ * (max_variance / bonding_target))
  */
 export interface ExponentialCalculationSDKType {
   /** initial value */

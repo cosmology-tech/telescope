@@ -242,8 +242,8 @@ export interface HeaderSDKType {
 export interface Data {
   /**
    * Txs that will be applied by state @ block.Height+1.
-   *  NOTE: not all txs here are valid.  We're just agreeing on the order first.
-   *  This means that block.AppHash does not include these txs.
+   * NOTE: not all txs here are valid.  We're just agreeing on the order first.
+   * This means that block.AppHash does not include these txs.
    */
   txs: Uint8Array[];
 }
@@ -252,15 +252,15 @@ export interface Data {
 export interface DataSDKType {
   /**
    * Txs that will be applied by state @ block.Height+1.
-   *  NOTE: not all txs here are valid.  We're just agreeing on the order first.
-   *  This means that block.AppHash does not include these txs.
+   * NOTE: not all txs here are valid.  We're just agreeing on the order first.
+   * This means that block.AppHash does not include these txs.
    */
   txs: Uint8Array[];
 }
 
 /**
  * Vote represents a prevote, precommit, or commit vote from validators for
- *  consensus.
+ * consensus.
  */
 export interface Vote {
   type: SignedMsgType;
@@ -277,7 +277,7 @@ export interface Vote {
 
 /**
  * Vote represents a prevote, precommit, or commit vote from validators for
- *  consensus.
+ * consensus.
  */
 export interface VoteSDKType {
   type: SignedMsgTypeSDKType;

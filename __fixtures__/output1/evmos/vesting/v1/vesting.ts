@@ -6,14 +6,14 @@ export const protobufPackage = "evmos.vesting.v1";
 
 /**
  * ClawbackVestingAccount implements the VestingAccount interface. It provides
- *  an account that can hold contributions subject to "lockup" (like a
- *  PeriodicVestingAccount), or vesting which is subject to clawback
- *  of unvested tokens, or a combination (tokens vest, but are still locked).
+ * an account that can hold contributions subject to "lockup" (like a
+ * PeriodicVestingAccount), or vesting which is subject to clawback
+ * of unvested tokens, or a combination (tokens vest, but are still locked).
  */
 export interface ClawbackVestingAccount {
   /**
    * base_vesting_account implements the VestingAccount interface. It contains
-   *  all the necessary fields needed for any vesting account implementation
+   * all the necessary fields needed for any vesting account implementation
    */
   baseVestingAccount: BaseVestingAccount;
 
@@ -32,14 +32,14 @@ export interface ClawbackVestingAccount {
 
 /**
  * ClawbackVestingAccount implements the VestingAccount interface. It provides
- *  an account that can hold contributions subject to "lockup" (like a
- *  PeriodicVestingAccount), or vesting which is subject to clawback
- *  of unvested tokens, or a combination (tokens vest, but are still locked).
+ * an account that can hold contributions subject to "lockup" (like a
+ * PeriodicVestingAccount), or vesting which is subject to clawback
+ * of unvested tokens, or a combination (tokens vest, but are still locked).
  */
 export interface ClawbackVestingAccountSDKType {
   /**
    * base_vesting_account implements the VestingAccount interface. It contains
-   *  all the necessary fields needed for any vesting account implementation
+   * all the necessary fields needed for any vesting account implementation
    */
   base_vesting_account: BaseVestingAccountSDKType;
 

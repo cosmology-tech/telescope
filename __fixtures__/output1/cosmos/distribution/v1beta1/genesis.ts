@@ -6,8 +6,8 @@ export const protobufPackage = "cosmos.distribution.v1beta1";
 
 /**
  * DelegatorWithdrawInfo is the address for where distributions rewards are
- *  withdrawn to by default this struct is only used at genesis to feed in
- *  default withdraw addresses.
+ * withdrawn to by default this struct is only used at genesis to feed in
+ * default withdraw addresses.
  */
 export interface DelegatorWithdrawInfo {
   /** delegator_address is the address of the delegator. */
@@ -19,8 +19,8 @@ export interface DelegatorWithdrawInfo {
 
 /**
  * DelegatorWithdrawInfo is the address for where distributions rewards are
- *  withdrawn to by default this struct is only used at genesis to feed in
- *  default withdraw addresses.
+ * withdrawn to by default this struct is only used at genesis to feed in
+ * default withdraw addresses.
  */
 export interface DelegatorWithdrawInfoSDKType {
   /** delegator_address is the address of the delegator. */
@@ -50,7 +50,7 @@ export interface ValidatorOutstandingRewardsRecordSDKType {
 
 /**
  * ValidatorAccumulatedCommissionRecord is used for import / export via genesis
- *  json.
+ * json.
  */
 export interface ValidatorAccumulatedCommissionRecord {
   /** validator_address is the address of the validator. */
@@ -62,7 +62,7 @@ export interface ValidatorAccumulatedCommissionRecord {
 
 /**
  * ValidatorAccumulatedCommissionRecord is used for import / export via genesis
- *  json.
+ * json.
  */
 export interface ValidatorAccumulatedCommissionRecordSDKType {
   /** validator_address is the address of the validator. */
@@ -74,7 +74,7 @@ export interface ValidatorAccumulatedCommissionRecordSDKType {
 
 /**
  * ValidatorHistoricalRewardsRecord is used for import / export via genesis
- *  json.
+ * json.
  */
 export interface ValidatorHistoricalRewardsRecord {
   /** validator_address is the address of the validator. */
@@ -89,7 +89,7 @@ export interface ValidatorHistoricalRewardsRecord {
 
 /**
  * ValidatorHistoricalRewardsRecord is used for import / export via genesis
- *  json.
+ * json.
  */
 export interface ValidatorHistoricalRewardsRecordSDKType {
   /** validator_address is the address of the validator. */

@@ -30,7 +30,7 @@ export interface QueryEvidenceResponseSDKType {
 
 /**
  * QueryEvidenceRequest is the request type for the Query/AllEvidence RPC
- *  method.
+ * method.
  */
 export interface QueryAllEvidenceRequest {
   /** pagination defines an optional pagination for the request. */
@@ -39,7 +39,7 @@ export interface QueryAllEvidenceRequest {
 
 /**
  * QueryEvidenceRequest is the request type for the Query/AllEvidence RPC
- *  method.
+ * method.
  */
 export interface QueryAllEvidenceRequestSDKType {
   /** pagination defines an optional pagination for the request. */
@@ -48,7 +48,7 @@ export interface QueryAllEvidenceRequestSDKType {
 
 /**
  * QueryAllEvidenceResponse is the response type for the Query/AllEvidence RPC
- *  method.
+ * method.
  */
 export interface QueryAllEvidenceResponse {
   /** evidence returns all evidences. */
@@ -60,7 +60,7 @@ export interface QueryAllEvidenceResponse {
 
 /**
  * QueryAllEvidenceResponse is the response type for the Query/AllEvidence RPC
- *  method.
+ * method.
  */
 export interface QueryAllEvidenceResponseSDKType {
   /** evidence returns all evidences. */

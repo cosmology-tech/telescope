@@ -19,45 +19,45 @@ export interface LogEntry_LabelsEntrySDKType {
 export interface LogEntry {
   /**
    * Required. The log to which this log entry belongs. Examples: `"syslog"`,
-   *  `"book_log"`.
+   * `"book_log"`.
    */
   name: string;
 
   /**
    * The time the event described by the log entry occurred. If
-   *  omitted, defaults to operation start time.
+   * omitted, defaults to operation start time.
    */
   timestamp: Date;
 
   /**
    * The severity of the log entry. The default value is
-   *  `LogSeverity.DEFAULT`.
+   * `LogSeverity.DEFAULT`.
    */
   severity: LogSeverity;
 
   /**
    * Optional. Information about the HTTP request associated with this
-   *  log entry, if applicable.
+   * log entry, if applicable.
    */
   httpRequest: HttpRequest;
 
   /**
    * Optional. Resource name of the trace associated with the log entry, if any.
-   *  If this field contains a relative resource name, you can assume the name is
-   *  relative to `//tracing.googleapis.com`. Example:
-   *  `projects/my-projectid/traces/06796866738c859f2f19b7cfb3214824`
+   * If this field contains a relative resource name, you can assume the name is
+   * relative to `//tracing.googleapis.com`. Example:
+   * `projects/my-projectid/traces/06796866738c859f2f19b7cfb3214824`
    */
   trace: string;
 
   /**
    * A unique ID for the log entry used for deduplication. If omitted,
-   *  the implementation will generate one based on operation_id.
+   * the implementation will generate one based on operation_id.
    */
   insertId: string;
 
   /**
    * A set of user-defined (key, value) data that provides additional
-   *  information about the log entry.
+   * information about the log entry.
    */
   labels: {
     [key: string]: string;
@@ -65,8 +65,8 @@ export interface LogEntry {
 
   /**
    * The log entry payload, represented as a protocol buffer that is
-   *  expressed as a JSON object. The only accepted type currently is
-   *  [AuditLog][google.cloud.audit.AuditLog].
+   * expressed as a JSON object. The only accepted type currently is
+   * [AuditLog][google.cloud.audit.AuditLog].
    */
   protoPayload?: Any;
 
@@ -75,19 +75,19 @@ export interface LogEntry {
 
   /**
    * The log entry payload, represented as a structure that
-   *  is expressed as a JSON object.
+   * is expressed as a JSON object.
    */
   structPayload?: Struct;
 
   /**
    * Optional. Information about an operation associated with the log entry, if
-   *  applicable.
+   * applicable.
    */
   operation: LogEntryOperation;
 
   /**
    * Optional. Source code location information associated with the log entry,
-   *  if any.
+   * if any.
    */
   sourceLocation: LogEntrySourceLocation;
 }
@@ -96,45 +96,45 @@ export interface LogEntry {
 export interface LogEntrySDKType {
   /**
    * Required. The log to which this log entry belongs. Examples: `"syslog"`,
-   *  `"book_log"`.
+   * `"book_log"`.
    */
   name: string;
 
   /**
    * The time the event described by the log entry occurred. If
-   *  omitted, defaults to operation start time.
+   * omitted, defaults to operation start time.
    */
   timestamp: Date;
 
   /**
    * The severity of the log entry. The default value is
-   *  `LogSeverity.DEFAULT`.
+   * `LogSeverity.DEFAULT`.
    */
   severity: LogSeveritySDKType;
 
   /**
    * Optional. Information about the HTTP request associated with this
-   *  log entry, if applicable.
+   * log entry, if applicable.
    */
   http_request: HttpRequestSDKType;
 
   /**
    * Optional. Resource name of the trace associated with the log entry, if any.
-   *  If this field contains a relative resource name, you can assume the name is
-   *  relative to `//tracing.googleapis.com`. Example:
-   *  `projects/my-projectid/traces/06796866738c859f2f19b7cfb3214824`
+   * If this field contains a relative resource name, you can assume the name is
+   * relative to `//tracing.googleapis.com`. Example:
+   * `projects/my-projectid/traces/06796866738c859f2f19b7cfb3214824`
    */
   trace: string;
 
   /**
    * A unique ID for the log entry used for deduplication. If omitted,
-   *  the implementation will generate one based on operation_id.
+   * the implementation will generate one based on operation_id.
    */
   insert_id: string;
 
   /**
    * A set of user-defined (key, value) data that provides additional
-   *  information about the log entry.
+   * information about the log entry.
    */
   labels: {
     [key: string]: string;
@@ -142,8 +142,8 @@ export interface LogEntrySDKType {
 
   /**
    * The log entry payload, represented as a protocol buffer that is
-   *  expressed as a JSON object. The only accepted type currently is
-   *  [AuditLog][google.cloud.audit.AuditLog].
+   * expressed as a JSON object. The only accepted type currently is
+   * [AuditLog][google.cloud.audit.AuditLog].
    */
   proto_payload?: AnySDKType;
 
@@ -152,38 +152,38 @@ export interface LogEntrySDKType {
 
   /**
    * The log entry payload, represented as a structure that
-   *  is expressed as a JSON object.
+   * is expressed as a JSON object.
    */
   struct_payload?: StructSDKType;
 
   /**
    * Optional. Information about an operation associated with the log entry, if
-   *  applicable.
+   * applicable.
    */
   operation: LogEntryOperationSDKType;
 
   /**
    * Optional. Source code location information associated with the log entry,
-   *  if any.
+   * if any.
    */
   source_location: LogEntrySourceLocationSDKType;
 }
 
 /**
  * Additional information about a potentially long-running operation with which
- *  a log entry is associated.
+ * a log entry is associated.
  */
 export interface LogEntryOperation {
   /**
    * Optional. An arbitrary operation identifier. Log entries with the
-   *  same identifier are assumed to be part of the same operation.
+   * same identifier are assumed to be part of the same operation.
    */
   id: string;
 
   /**
    * Optional. An arbitrary producer identifier. The combination of
-   *  `id` and `producer` must be globally unique.  Examples for `producer`:
-   *  `"MyDivision.MyBigCompany.com"`, `"github.com/MyProject/MyApplication"`.
+   * `id` and `producer` must be globally unique.  Examples for `producer`:
+   * `"MyDivision.MyBigCompany.com"`, `"github.com/MyProject/MyApplication"`.
    */
   producer: string;
 
@@ -196,19 +196,19 @@ export interface LogEntryOperation {
 
 /**
  * Additional information about a potentially long-running operation with which
- *  a log entry is associated.
+ * a log entry is associated.
  */
 export interface LogEntryOperationSDKType {
   /**
    * Optional. An arbitrary operation identifier. Log entries with the
-   *  same identifier are assumed to be part of the same operation.
+   * same identifier are assumed to be part of the same operation.
    */
   id: string;
 
   /**
    * Optional. An arbitrary producer identifier. The combination of
-   *  `id` and `producer` must be globally unique.  Examples for `producer`:
-   *  `"MyDivision.MyBigCompany.com"`, `"github.com/MyProject/MyApplication"`.
+   * `id` and `producer` must be globally unique.  Examples for `producer`:
+   * `"MyDivision.MyBigCompany.com"`, `"github.com/MyProject/MyApplication"`.
    */
   producer: string;
 
@@ -221,56 +221,56 @@ export interface LogEntryOperationSDKType {
 
 /**
  * Additional information about the source code location that produced the log
- *  entry.
+ * entry.
  */
 export interface LogEntrySourceLocation {
   /**
    * Optional. Source file name. Depending on the runtime environment, this
-   *  might be a simple name or a fully-qualified name.
+   * might be a simple name or a fully-qualified name.
    */
   file: string;
 
   /**
    * Optional. Line within the source file. 1-based; 0 indicates no line number
-   *  available.
+   * available.
    */
   line: Long;
 
   /**
    * Optional. Human-readable name of the function or method being invoked, with
-   *  optional context such as the class or package name. This information may be
-   *  used in contexts such as the logs viewer, where a file and line number are
-   *  less meaningful. The format can vary by language. For example:
-   *  `qual.if.ied.Class.method` (Java), `dir/package.func` (Go), `function`
-   *  (Python).
+   * optional context such as the class or package name. This information may be
+   * used in contexts such as the logs viewer, where a file and line number are
+   * less meaningful. The format can vary by language. For example:
+   * `qual.if.ied.Class.method` (Java), `dir/package.func` (Go), `function`
+   * (Python).
    */
   function: string;
 }
 
 /**
  * Additional information about the source code location that produced the log
- *  entry.
+ * entry.
  */
 export interface LogEntrySourceLocationSDKType {
   /**
    * Optional. Source file name. Depending on the runtime environment, this
-   *  might be a simple name or a fully-qualified name.
+   * might be a simple name or a fully-qualified name.
    */
   file: string;
 
   /**
    * Optional. Line within the source file. 1-based; 0 indicates no line number
-   *  available.
+   * available.
    */
   line: Long;
 
   /**
    * Optional. Human-readable name of the function or method being invoked, with
-   *  optional context such as the class or package name. This information may be
-   *  used in contexts such as the logs viewer, where a file and line number are
-   *  less meaningful. The format can vary by language. For example:
-   *  `qual.if.ied.Class.method` (Java), `dir/package.func` (Go), `function`
-   *  (Python).
+   * optional context such as the class or package name. This information may be
+   * used in contexts such as the logs viewer, where a file and line number are
+   * less meaningful. The format can vary by language. For example:
+   * `qual.if.ied.Class.method` (Java), `dir/package.func` (Go), `function`
+   * (Python).
    */
   function: string;
 }

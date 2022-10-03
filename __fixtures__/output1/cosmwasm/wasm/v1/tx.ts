@@ -14,7 +14,7 @@ export interface MsgStoreCode {
 
   /**
    * InstantiatePermission access control to apply on contract creation,
-   *  optional
+   * optional
    */
   instantiatePermission: AccessConfig;
 }
@@ -29,7 +29,7 @@ export interface MsgStoreCodeSDKType {
 
   /**
    * InstantiatePermission access control to apply on contract creation,
-   *  optional
+   * optional
    */
   instantiate_permission: AccessConfigSDKType;
 }
@@ -48,7 +48,7 @@ export interface MsgStoreCodeResponseSDKType {
 
 /**
  * MsgInstantiateContract create a new smart contract instance for the given
- *  code id.
+ * code id.
  */
 export interface MsgInstantiateContract {
   /** Sender is the that actor that signed the messages */
@@ -72,7 +72,7 @@ export interface MsgInstantiateContract {
 
 /**
  * MsgInstantiateContract create a new smart contract instance for the given
- *  code id.
+ * code id.
  */
 export interface MsgInstantiateContractSDKType {
   /** Sender is the that actor that signed the messages */
@@ -188,7 +188,7 @@ export interface MsgMigrateContractSDKType {
 export interface MsgMigrateContractResponse {
   /**
    * Data contains same raw bytes returned as data from the wasm contract.
-   *  (May be empty)
+   * (May be empty)
    */
   data: Uint8Array;
 }
@@ -197,7 +197,7 @@ export interface MsgMigrateContractResponse {
 export interface MsgMigrateContractResponseSDKType {
   /**
    * Data contains same raw bytes returned as data from the wasm contract.
-   *  (May be empty)
+   * (May be empty)
    */
   data: Uint8Array;
 }

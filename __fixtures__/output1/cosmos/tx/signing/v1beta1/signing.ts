@@ -6,13 +6,13 @@ export const protobufPackage = "cosmos.tx.signing.v1beta1";
 
 /**
  * SignMode represents a signing mode with its own security guarantees.
- * 
- *  This enum should be considered a registry of all known sign modes
- *  in the Cosmos ecosystem. Apps are not expected to support all known
- *  sign modes. Apps that would like to support custom  sign modes are
- *  encouraged to open a small PR against this file to add a new case
- *  to this SignMode enum describing their sign mode so that different
- *  apps have a consistent version of this enum.
+ *
+ * This enum should be considered a registry of all known sign modes
+ * in the Cosmos ecosystem. Apps are not expected to support all known
+ * sign modes. Apps that would like to support custom  sign modes are
+ * encouraged to open a small PR against this file to add a new case
+ * to this SignMode enum describing their sign mode so that different
+ * apps have a consistent version of this enum.
  */
 export enum SignMode {
   /**
@@ -54,13 +54,13 @@ export enum SignMode {
 
 /**
  * SignMode represents a signing mode with its own security guarantees.
- * 
- *  This enum should be considered a registry of all known sign modes
- *  in the Cosmos ecosystem. Apps are not expected to support all known
- *  sign modes. Apps that would like to support custom  sign modes are
- *  encouraged to open a small PR against this file to add a new case
- *  to this SignMode enum describing their sign mode so that different
- *  apps have a consistent version of this enum.
+ *
+ * This enum should be considered a registry of all known sign modes
+ * in the Cosmos ecosystem. Apps are not expected to support all known
+ * sign modes. Apps that would like to support custom  sign modes are
+ * encouraged to open a small PR against this file to add a new case
+ * to this SignMode enum describing their sign mode so that different
+ * apps have a consistent version of this enum.
  */
 export enum SignModeSDKType {
   /**
@@ -163,9 +163,9 @@ export interface SignatureDescriptorsSDKType {
 
 /**
  * SignatureDescriptor is a convenience type which represents the full data for
- *  a signature including the public key of the signer, signing modes and the
- *  signature itself. It is primarily used for coordinating signatures between
- *  clients.
+ * a signature including the public key of the signer, signing modes and the
+ * signature itself. It is primarily used for coordinating signatures between
+ * clients.
  */
 export interface SignatureDescriptor {
   /** public_key is the public key of the signer */
@@ -174,17 +174,17 @@ export interface SignatureDescriptor {
 
   /**
    * sequence is the sequence of the account, which describes the
-   *  number of committed transactions signed by a given address. It is used to prevent
-   *  replay attacks.
+   * number of committed transactions signed by a given address. It is used to prevent
+   * replay attacks.
    */
   sequence: Long;
 }
 
 /**
  * SignatureDescriptor is a convenience type which represents the full data for
- *  a signature including the public key of the signer, signing modes and the
- *  signature itself. It is primarily used for coordinating signatures between
- *  clients.
+ * a signature including the public key of the signer, signing modes and the
+ * signature itself. It is primarily used for coordinating signatures between
+ * clients.
  */
 export interface SignatureDescriptorSDKType {
   /** public_key is the public key of the signer */
@@ -193,8 +193,8 @@ export interface SignatureDescriptorSDKType {
 
   /**
    * sequence is the sequence of the account, which describes the
-   *  number of committed transactions signed by a given address. It is used to prevent
-   *  replay attacks.
+   * number of committed transactions signed by a given address. It is used to prevent
+   * replay attacks.
    */
   sequence: Long;
 }

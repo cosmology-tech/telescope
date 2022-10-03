@@ -29,7 +29,7 @@ export interface QueryInflationRequestSDKType {}
 
 /**
  * QueryInflationResponse is the response type for the Query/Inflation RPC
- *  method.
+ * method.
  */
 export interface QueryInflationResponse {
   /** inflation is the current minting inflation value. */
@@ -38,7 +38,7 @@ export interface QueryInflationResponse {
 
 /**
  * QueryInflationResponse is the response type for the Query/Inflation RPC
- *  method.
+ * method.
  */
 export interface QueryInflationResponseSDKType {
   /** inflation is the current minting inflation value. */
@@ -47,19 +47,19 @@ export interface QueryInflationResponseSDKType {
 
 /**
  * QueryAnnualProvisionsRequest is the request type for the
- *  Query/AnnualProvisions RPC method.
+ * Query/AnnualProvisions RPC method.
  */
 export interface QueryAnnualProvisionsRequest {}
 
 /**
  * QueryAnnualProvisionsRequest is the request type for the
- *  Query/AnnualProvisions RPC method.
+ * Query/AnnualProvisions RPC method.
  */
 export interface QueryAnnualProvisionsRequestSDKType {}
 
 /**
  * QueryAnnualProvisionsResponse is the response type for the
- *  Query/AnnualProvisions RPC method.
+ * Query/AnnualProvisions RPC method.
  */
 export interface QueryAnnualProvisionsResponse {
   /** annual_provisions is the current minting annual provisions value. */
@@ -68,7 +68,7 @@ export interface QueryAnnualProvisionsResponse {
 
 /**
  * QueryAnnualProvisionsResponse is the response type for the
- *  Query/AnnualProvisions RPC method.
+ * Query/AnnualProvisions RPC method.
  */
 export interface QueryAnnualProvisionsResponseSDKType {
   /** annual_provisions is the current minting annual provisions value. */

@@ -40,8 +40,8 @@ export interface DominoOpSDKType {
 
 /**
  * ProofOp defines an operation used for calculating Merkle root
- *  The data could be arbitrary format, providing nessecary data
- *  for example neighbouring node hash
+ * The data could be arbitrary format, providing nessecary data
+ * for example neighbouring node hash
  */
 export interface ProofOp {
   type: string;
@@ -51,8 +51,8 @@ export interface ProofOp {
 
 /**
  * ProofOp defines an operation used for calculating Merkle root
- *  The data could be arbitrary format, providing nessecary data
- *  for example neighbouring node hash
+ * The data could be arbitrary format, providing nessecary data
+ * for example neighbouring node hash
  */
 export interface ProofOpSDKType {
   type: string;

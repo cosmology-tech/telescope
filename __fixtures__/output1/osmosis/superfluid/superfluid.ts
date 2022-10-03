@@ -55,7 +55,7 @@ export interface SuperfluidAssetSDKType {
 
 /**
  * SuperfluidIntermediaryAccount takes the role of intermediary between LP token
- *  and OSMO tokens for superfluid staking
+ * and OSMO tokens for superfluid staking
  */
 export interface SuperfluidIntermediaryAccount {
   denom: string;
@@ -67,7 +67,7 @@ export interface SuperfluidIntermediaryAccount {
 
 /**
  * SuperfluidIntermediaryAccount takes the role of intermediary between LP token
- *  and OSMO tokens for superfluid staking
+ * and OSMO tokens for superfluid staking
  */
 export interface SuperfluidIntermediaryAccountSDKType {
   denom: string;
@@ -79,12 +79,12 @@ export interface SuperfluidIntermediaryAccountSDKType {
 
 /**
  * The Osmo-Equivalent-Multiplier Record for epoch N refers to the osmo worth we
- *  treat an LP share as having, for all of epoch N. Eventually this is intended
- *  to be set as the Time-weighted-average-osmo-backing for the entire duration
- *  of epoch N-1. (Thereby locking whats in use for epoch N as based on the prior
- *  epochs rewards) However for now, this is not the TWAP but instead the spot
- *  price at the boundary.  For different types of assets in the future, it could
- *  change.
+ * treat an LP share as having, for all of epoch N. Eventually this is intended
+ * to be set as the Time-weighted-average-osmo-backing for the entire duration
+ * of epoch N-1. (Thereby locking whats in use for epoch N as based on the prior
+ * epochs rewards) However for now, this is not the TWAP but instead the spot
+ * price at the boundary.  For different types of assets in the future, it could
+ * change.
  */
 export interface OsmoEquivalentMultiplierRecord {
   epochNumber: Long;
@@ -96,12 +96,12 @@ export interface OsmoEquivalentMultiplierRecord {
 
 /**
  * The Osmo-Equivalent-Multiplier Record for epoch N refers to the osmo worth we
- *  treat an LP share as having, for all of epoch N. Eventually this is intended
- *  to be set as the Time-weighted-average-osmo-backing for the entire duration
- *  of epoch N-1. (Thereby locking whats in use for epoch N as based on the prior
- *  epochs rewards) However for now, this is not the TWAP but instead the spot
- *  price at the boundary.  For different types of assets in the future, it could
- *  change.
+ * treat an LP share as having, for all of epoch N. Eventually this is intended
+ * to be set as the Time-weighted-average-osmo-backing for the entire duration
+ * of epoch N-1. (Thereby locking whats in use for epoch N as based on the prior
+ * epochs rewards) However for now, this is not the TWAP but instead the spot
+ * price at the boundary.  For different types of assets in the future, it could
+ * change.
  */
 export interface OsmoEquivalentMultiplierRecordSDKType {
   epoch_number: Long;
@@ -113,7 +113,7 @@ export interface OsmoEquivalentMultiplierRecordSDKType {
 
 /**
  * SuperfluidDelegationRecord takes the role of intermediary between LP token
- *  and OSMO tokens for superfluid staking
+ * and OSMO tokens for superfluid staking
  */
 export interface SuperfluidDelegationRecord {
   delegatorAddress: string;
@@ -124,7 +124,7 @@ export interface SuperfluidDelegationRecord {
 
 /**
  * SuperfluidDelegationRecord takes the role of intermediary between LP token
- *  and OSMO tokens for superfluid staking
+ * and OSMO tokens for superfluid staking
  */
 export interface SuperfluidDelegationRecordSDKType {
   delegator_address: string;

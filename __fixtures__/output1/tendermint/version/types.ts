@@ -4,8 +4,8 @@ export const protobufPackage = "tendermint.version";
 
 /**
  * App includes the protocol and software version for the application.
- *  This information is included in ResponseInfo. The App.Protocol can be
- *  updated in ResponseEndBlock.
+ * This information is included in ResponseInfo. The App.Protocol can be
+ * updated in ResponseEndBlock.
  */
 export interface App {
   protocol: Long;
@@ -14,8 +14,8 @@ export interface App {
 
 /**
  * App includes the protocol and software version for the application.
- *  This information is included in ResponseInfo. The App.Protocol can be
- *  updated in ResponseEndBlock.
+ * This information is included in ResponseInfo. The App.Protocol can be
+ * updated in ResponseEndBlock.
  */
 export interface AppSDKType {
   protocol: Long;
@@ -24,8 +24,8 @@ export interface AppSDKType {
 
 /**
  * Consensus captures the consensus rules for processing a block in the blockchain,
- *  including all blockchain data structures and the rules of the application's
- *  state transition machine.
+ * including all blockchain data structures and the rules of the application's
+ * state transition machine.
  */
 export interface Consensus {
   block: Long;
@@ -34,8 +34,8 @@ export interface Consensus {
 
 /**
  * Consensus captures the consensus rules for processing a block in the blockchain,
- *  including all blockchain data structures and the rules of the application's
- *  state transition machine.
+ * including all blockchain data structures and the rules of the application's
+ * state transition machine.
  */
 export interface ConsensusSDKType {
   block: Long;

@@ -7,7 +7,7 @@ export const protobufPackage = "ibc.lightclients.solomachine.v2";
 
 /**
  * DataType defines the type of solo machine proof being created. This is done
- *  to preserve uniqueness of different data sign byte encodings.
+ * to preserve uniqueness of different data sign byte encodings.
  */
 export enum DataType {
   /** DATA_TYPE_UNINITIALIZED_UNSPECIFIED - Default State */
@@ -44,7 +44,7 @@ export enum DataType {
 
 /**
  * DataType defines the type of solo machine proof being created. This is done
- *  to preserve uniqueness of different data sign byte encodings.
+ * to preserve uniqueness of different data sign byte encodings.
  */
 export enum DataTypeSDKType {
   /** DATA_TYPE_UNINITIALIZED_UNSPECIFIED - Default State */
@@ -165,7 +165,7 @@ export function dataTypeToJSON(object: DataType): string {
 
 /**
  * ClientState defines a solo machine client that tracks the current consensus
- *  state and if the client is frozen.
+ * state and if the client is frozen.
  */
 export interface ClientState {
   /** latest sequence of the client state */
@@ -177,14 +177,14 @@ export interface ClientState {
 
   /**
    * when set to true, will allow governance to update a solo machine client.
-   *  The client will be unfrozen if it is frozen.
+   * The client will be unfrozen if it is frozen.
    */
   allowUpdateAfterProposal: boolean;
 }
 
 /**
  * ClientState defines a solo machine client that tracks the current consensus
- *  state and if the client is frozen.
+ * state and if the client is frozen.
  */
 export interface ClientStateSDKType {
   /** latest sequence of the client state */
@@ -196,15 +196,15 @@ export interface ClientStateSDKType {
 
   /**
    * when set to true, will allow governance to update a solo machine client.
-   *  The client will be unfrozen if it is frozen.
+   * The client will be unfrozen if it is frozen.
    */
   allow_update_after_proposal: boolean;
 }
 
 /**
  * ConsensusState defines a solo machine consensus state. The sequence of a
- *  consensus state is contained in the "height" key used in storing the
- *  consensus state.
+ * consensus state is contained in the "height" key used in storing the
+ * consensus state.
  */
 export interface ConsensusState {
   /** public key of the solo machine */
@@ -212,8 +212,8 @@ export interface ConsensusState {
 
   /**
    * diversifier allows the same public key to be re-used across different solo
-   *  machine clients (potentially on different chains) without being considered
-   *  misbehaviour.
+   * machine clients (potentially on different chains) without being considered
+   * misbehaviour.
    */
   diversifier: string;
   timestamp: Long;
@@ -221,8 +221,8 @@ export interface ConsensusState {
 
 /**
  * ConsensusState defines a solo machine consensus state. The sequence of a
- *  consensus state is contained in the "height" key used in storing the
- *  consensus state.
+ * consensus state is contained in the "height" key used in storing the
+ * consensus state.
  */
 export interface ConsensusStateSDKType {
   /** public key of the solo machine */
@@ -230,8 +230,8 @@ export interface ConsensusStateSDKType {
 
   /**
    * diversifier allows the same public key to be re-used across different solo
-   *  machine clients (potentially on different chains) without being considered
-   *  misbehaviour.
+   * machine clients (potentially on different chains) without being considered
+   * misbehaviour.
    */
   diversifier: string;
   timestamp: Long;
@@ -259,7 +259,7 @@ export interface HeaderSDKType {
 
 /**
  * Misbehaviour defines misbehaviour for a solo machine which consists
- *  of a sequence and two signatures over different messages at that sequence.
+ * of a sequence and two signatures over different messages at that sequence.
  */
 export interface Misbehaviour {
   clientId: string;
@@ -270,7 +270,7 @@ export interface Misbehaviour {
 
 /**
  * Misbehaviour defines misbehaviour for a solo machine which consists
- *  of a sequence and two signatures over different messages at that sequence.
+ * of a sequence and two signatures over different messages at that sequence.
  */
 export interface MisbehaviourSDKType {
   client_id: string;
@@ -281,7 +281,7 @@ export interface MisbehaviourSDKType {
 
 /**
  * SignatureAndData contains a signature and the data signed over to create that
- *  signature.
+ * signature.
  */
 export interface SignatureAndData {
   signature: Uint8Array;
@@ -292,7 +292,7 @@ export interface SignatureAndData {
 
 /**
  * SignatureAndData contains a signature and the data signed over to create that
- *  signature.
+ * signature.
  */
 export interface SignatureAndDataSDKType {
   signature: Uint8Array;
@@ -303,7 +303,7 @@ export interface SignatureAndDataSDKType {
 
 /**
  * TimestampedSignatureData contains the signature data and the timestamp of the
- *  signature.
+ * signature.
  */
 export interface TimestampedSignatureData {
   signatureData: Uint8Array;
@@ -312,7 +312,7 @@ export interface TimestampedSignatureData {
 
 /**
  * TimestampedSignatureData contains the signature data and the timestamp of the
- *  signature.
+ * signature.
  */
 export interface TimestampedSignatureDataSDKType {
   signature_data: Uint8Array;
@@ -377,7 +377,7 @@ export interface ClientStateDataSDKType {
 
 /**
  * ConsensusStateData returns the SignBytes data for consensus state
- *  verification.
+ * verification.
  */
 export interface ConsensusStateData {
   path: Uint8Array;
@@ -386,7 +386,7 @@ export interface ConsensusStateData {
 
 /**
  * ConsensusStateData returns the SignBytes data for consensus state
- *  verification.
+ * verification.
  */
 export interface ConsensusStateDataSDKType {
   path: Uint8Array;
@@ -395,7 +395,7 @@ export interface ConsensusStateDataSDKType {
 
 /**
  * ConnectionStateData returns the SignBytes data for connection state
- *  verification.
+ * verification.
  */
 export interface ConnectionStateData {
   path: Uint8Array;
@@ -404,7 +404,7 @@ export interface ConnectionStateData {
 
 /**
  * ConnectionStateData returns the SignBytes data for connection state
- *  verification.
+ * verification.
  */
 export interface ConnectionStateDataSDKType {
   path: Uint8Array;
@@ -413,7 +413,7 @@ export interface ConnectionStateDataSDKType {
 
 /**
  * ChannelStateData returns the SignBytes data for channel state
- *  verification.
+ * verification.
  */
 export interface ChannelStateData {
   path: Uint8Array;
@@ -422,7 +422,7 @@ export interface ChannelStateData {
 
 /**
  * ChannelStateData returns the SignBytes data for channel state
- *  verification.
+ * verification.
  */
 export interface ChannelStateDataSDKType {
   path: Uint8Array;
@@ -431,7 +431,7 @@ export interface ChannelStateDataSDKType {
 
 /**
  * PacketCommitmentData returns the SignBytes data for packet commitment
- *  verification.
+ * verification.
  */
 export interface PacketCommitmentData {
   path: Uint8Array;
@@ -440,7 +440,7 @@ export interface PacketCommitmentData {
 
 /**
  * PacketCommitmentData returns the SignBytes data for packet commitment
- *  verification.
+ * verification.
  */
 export interface PacketCommitmentDataSDKType {
   path: Uint8Array;
@@ -449,7 +449,7 @@ export interface PacketCommitmentDataSDKType {
 
 /**
  * PacketAcknowledgementData returns the SignBytes data for acknowledgement
- *  verification.
+ * verification.
  */
 export interface PacketAcknowledgementData {
   path: Uint8Array;
@@ -458,7 +458,7 @@ export interface PacketAcknowledgementData {
 
 /**
  * PacketAcknowledgementData returns the SignBytes data for acknowledgement
- *  verification.
+ * verification.
  */
 export interface PacketAcknowledgementDataSDKType {
   path: Uint8Array;
@@ -467,7 +467,7 @@ export interface PacketAcknowledgementDataSDKType {
 
 /**
  * PacketReceiptAbsenceData returns the SignBytes data for
- *  packet receipt absence verification.
+ * packet receipt absence verification.
  */
 export interface PacketReceiptAbsenceData {
   path: Uint8Array;
@@ -475,7 +475,7 @@ export interface PacketReceiptAbsenceData {
 
 /**
  * PacketReceiptAbsenceData returns the SignBytes data for
- *  packet receipt absence verification.
+ * packet receipt absence verification.
  */
 export interface PacketReceiptAbsenceDataSDKType {
   path: Uint8Array;
@@ -483,7 +483,7 @@ export interface PacketReceiptAbsenceDataSDKType {
 
 /**
  * NextSequenceRecvData returns the SignBytes data for verification of the next
- *  sequence to be received.
+ * sequence to be received.
  */
 export interface NextSequenceRecvData {
   path: Uint8Array;
@@ -492,7 +492,7 @@ export interface NextSequenceRecvData {
 
 /**
  * NextSequenceRecvData returns the SignBytes data for verification of the next
- *  sequence to be received.
+ * sequence to be received.
  */
 export interface NextSequenceRecvDataSDKType {
   path: Uint8Array;

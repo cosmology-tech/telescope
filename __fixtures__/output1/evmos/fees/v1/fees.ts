@@ -4,7 +4,7 @@ export const protobufPackage = "evmos.fees.v1";
 
 /**
  * DevFeeInfo defines an instance that organizes fee distribution conditions
- *  for the owner of a given smart contract
+ * for the owner of a given smart contract
  */
 export interface DevFeeInfo {
   /** hex address of registered contract */
@@ -15,14 +15,14 @@ export interface DevFeeInfo {
 
   /**
    * bech32 address of account receiving the transaction fees
-   *  it defaults to deployer_address
+   * it defaults to deployer_address
    */
   withdrawAddress: string;
 }
 
 /**
  * DevFeeInfo defines an instance that organizes fee distribution conditions
- *  for the owner of a given smart contract
+ * for the owner of a given smart contract
  */
 export interface DevFeeInfoSDKType {
   /** hex address of registered contract */
@@ -33,7 +33,7 @@ export interface DevFeeInfoSDKType {
 
   /**
    * bech32 address of account receiving the transaction fees
-   *  it defaults to deployer_address
+   * it defaults to deployer_address
    */
   withdraw_address: string;
 }

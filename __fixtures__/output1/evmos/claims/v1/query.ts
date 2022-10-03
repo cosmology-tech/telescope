@@ -8,19 +8,19 @@ export const protobufPackage = "evmos.claims.v1";
 
 /**
  * QueryTotalUnclaimedRequest is the request type for the Query/TotalUnclaimed
- *  RPC method.
+ * RPC method.
  */
 export interface QueryTotalUnclaimedRequest {}
 
 /**
  * QueryTotalUnclaimedRequest is the request type for the Query/TotalUnclaimed
- *  RPC method.
+ * RPC method.
  */
 export interface QueryTotalUnclaimedRequestSDKType {}
 
 /**
  * QueryTotalUnclaimedResponse is the response type for the Query/TotalUnclaimed
- *  RPC method.
+ * RPC method.
  */
 export interface QueryTotalUnclaimedResponse {
   /** coins defines the unclaimed coins */
@@ -29,7 +29,7 @@ export interface QueryTotalUnclaimedResponse {
 
 /**
  * QueryTotalUnclaimedResponse is the response type for the Query/TotalUnclaimed
- *  RPC method.
+ * RPC method.
  */
 export interface QueryTotalUnclaimedResponseSDKType {
   /** coins defines the unclaimed coins */
@@ -56,7 +56,7 @@ export interface QueryParamsResponseSDKType {
 
 /**
  * QueryClaimsRecordsRequest is the request type for the Query/ClaimsRecords RPC
- *  method.
+ * method.
  */
 export interface QueryClaimsRecordsRequest {
   /** pagination defines an optional pagination for the request. */
@@ -65,7 +65,7 @@ export interface QueryClaimsRecordsRequest {
 
 /**
  * QueryClaimsRecordsRequest is the request type for the Query/ClaimsRecords RPC
- *  method.
+ * method.
  */
 export interface QueryClaimsRecordsRequestSDKType {
   /** pagination defines an optional pagination for the request. */
@@ -74,7 +74,7 @@ export interface QueryClaimsRecordsRequestSDKType {
 
 /**
  * QueryClaimsRecordsResponse is the response type for the Query/ClaimsRecords
- *  RPC method.
+ * RPC method.
  */
 export interface QueryClaimsRecordsResponse {
   /** claims defines all claims records */
@@ -86,7 +86,7 @@ export interface QueryClaimsRecordsResponse {
 
 /**
  * QueryClaimsRecordsResponse is the response type for the Query/ClaimsRecords
- *  RPC method.
+ * RPC method.
  */
 export interface QueryClaimsRecordsResponseSDKType {
   /** claims defines all claims records */
@@ -98,7 +98,7 @@ export interface QueryClaimsRecordsResponseSDKType {
 
 /**
  * QueryClaimsRecordRequest is the request type for the Query/ClaimsRecord RPC
- *  method.
+ * method.
  */
 export interface QueryClaimsRecordRequest {
   /** address defines the user to query claims record for */
@@ -107,7 +107,7 @@ export interface QueryClaimsRecordRequest {
 
 /**
  * QueryClaimsRecordRequest is the request type for the Query/ClaimsRecord RPC
- *  method.
+ * method.
  */
 export interface QueryClaimsRecordRequestSDKType {
   /** address defines the user to query claims record for */
@@ -116,7 +116,7 @@ export interface QueryClaimsRecordRequestSDKType {
 
 /**
  * QueryClaimsRecordResponse is the response type for the Query/ClaimsRecord RPC
- *  method.
+ * method.
  */
 export interface QueryClaimsRecordResponse {
   /** total initial claimable amount for the user */
@@ -128,7 +128,7 @@ export interface QueryClaimsRecordResponse {
 
 /**
  * QueryClaimsRecordResponse is the response type for the Query/ClaimsRecord RPC
- *  method.
+ * method.
  */
 export interface QueryClaimsRecordResponseSDKType {
   /** total initial claimable amount for the user */

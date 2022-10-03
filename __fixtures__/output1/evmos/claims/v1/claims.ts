@@ -91,7 +91,7 @@ export function actionToJSON(object: Action): string {
 
 /**
  * Claim defines the action, completed flag and the remaining claimable amount
- *  for a given user. This is only used during client queries.
+ * for a given user. This is only used during client queries.
  */
 export interface Claim {
   /** action enum */
@@ -106,7 +106,7 @@ export interface Claim {
 
 /**
  * Claim defines the action, completed flag and the remaining claimable amount
- *  for a given user. This is only used during client queries.
+ * for a given user. This is only used during client queries.
  */
 export interface ClaimSDKType {
   /** action enum */
@@ -145,7 +145,7 @@ export interface ClaimsRecordAddressSDKType {
 
 /**
  * ClaimsRecord defines the initial claimable airdrop amount and the list of
- *  completed actions to claim the tokens.
+ * completed actions to claim the tokens.
  */
 export interface ClaimsRecord {
   /** total initial claimable amount for the user */
@@ -157,7 +157,7 @@ export interface ClaimsRecord {
 
 /**
  * ClaimsRecord defines the initial claimable airdrop amount and the list of
- *  completed actions to claim the tokens.
+ * completed actions to claim the tokens.
  */
 export interface ClaimsRecordSDKType {
   /** total initial claimable amount for the user */

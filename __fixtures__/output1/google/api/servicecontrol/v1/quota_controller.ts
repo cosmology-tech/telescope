@@ -170,10 +170,10 @@ export function quotaOperation_QuotaModeToJSON(object: QuotaOperation_QuotaMode)
 
 /**
  * Error codes related to project config validations are deprecated since the
- *  quota controller methods do not perform these validations. Instead services
- *  have to call the Check method, without quota_properties field, to perform
- *  these validations before calling the quota controller methods. These
- *  methods check only for project deletion to be wipe out compliant.
+ * quota controller methods do not perform these validations. Instead services
+ * have to call the Check method, without quota_properties field, to perform
+ * these validations before calling the quota controller methods. These
+ * methods check only for project deletion to be wipe out compliant.
  */
 export enum QuotaError_Code {
   /** UNSPECIFIED - This is never used. */
@@ -204,10 +204,10 @@ export enum QuotaError_Code {
 
 /**
  * Error codes related to project config validations are deprecated since the
- *  quota controller methods do not perform these validations. Instead services
- *  have to call the Check method, without quota_properties field, to perform
- *  these validations before calling the quota controller methods. These
- *  methods check only for project deletion to be wipe out compliant.
+ * quota controller methods do not perform these validations. Instead services
+ * have to call the Check method, without quota_properties field, to perform
+ * these validations before calling the quota controller methods. These
+ * methods check only for project deletion to be wipe out compliant.
  */
 export enum QuotaError_CodeSDKType {
   /** UNSPECIFIED - This is never used. */
@@ -296,9 +296,9 @@ export function quotaError_CodeToJSON(object: QuotaError_Code): string {
 export interface AllocateQuotaRequest {
   /**
    * Name of the service as specified in the service configuration. For example,
-   *  `"pubsub.googleapis.com"`.
-   * 
-   *  See [google.api.Service][google.api.Service] for the definition of a service name.
+   * `"pubsub.googleapis.com"`.
+   *
+   * See [google.api.Service][google.api.Service] for the definition of a service name.
    */
   serviceName: string;
 
@@ -307,8 +307,8 @@ export interface AllocateQuotaRequest {
 
   /**
    * Specifies which version of service configuration should be used to process
-   *  the request. If unspecified or no matching version can be found, the latest
-   *  one will be used.
+   * the request. If unspecified or no matching version can be found, the latest
+   * one will be used.
    */
   serviceConfigId: string;
 }
@@ -317,9 +317,9 @@ export interface AllocateQuotaRequest {
 export interface AllocateQuotaRequestSDKType {
   /**
    * Name of the service as specified in the service configuration. For example,
-   *  `"pubsub.googleapis.com"`.
-   * 
-   *  See [google.api.Service][google.api.Service] for the definition of a service name.
+   * `"pubsub.googleapis.com"`.
+   *
+   * See [google.api.Service][google.api.Service] for the definition of a service name.
    */
   service_name: string;
 
@@ -328,8 +328,8 @@ export interface AllocateQuotaRequestSDKType {
 
   /**
    * Specifies which version of service configuration should be used to process
-   *  the request. If unspecified or no matching version can be found, the latest
-   *  one will be used.
+   * the request. If unspecified or no matching version can be found, the latest
+   * one will be used.
    */
   service_config_id: string;
 }
@@ -346,39 +346,39 @@ export interface QuotaOperation_LabelsEntrySDKType {
 export interface QuotaOperation {
   /**
    * Identity of the operation. This is expected to be unique within the scope
-   *  of the service that generated the operation, and guarantees idempotency in
-   *  case of retries.
-   * 
-   *  In order to ensure best performance and latency in the Quota backends,
-   *  operation_ids are optimally associated with time, so that related
-   *  operations can be accessed fast in storage. For this reason, the
-   *  recommended token for services that intend to operate at a high QPS is
-   *  Unix time in nanos + UUID
+   * of the service that generated the operation, and guarantees idempotency in
+   * case of retries.
+   *
+   * In order to ensure best performance and latency in the Quota backends,
+   * operation_ids are optimally associated with time, so that related
+   * operations can be accessed fast in storage. For this reason, the
+   * recommended token for services that intend to operate at a high QPS is
+   * Unix time in nanos + UUID
    */
   operationId: string;
 
   /**
    * Fully qualified name of the API method for which this quota operation is
-   *  requested. This name is used for matching quota rules or metric rules and
-   *  billing status rules defined in service configuration.
-   * 
-   *  This field should not be set if any of the following is true:
-   *  (1) the quota operation is performed on non-API resources.
-   *  (2) quota_metrics is set because the caller is doing quota override.
-   * 
-   * 
-   *  Example of an RPC method name:
-   *      google.example.library.v1.LibraryService.CreateShelf
+   * requested. This name is used for matching quota rules or metric rules and
+   * billing status rules defined in service configuration.
+   *
+   * This field should not be set if any of the following is true:
+   * (1) the quota operation is performed on non-API resources.
+   * (2) quota_metrics is set because the caller is doing quota override.
+   *
+   *
+   * Example of an RPC method name:
+   *     google.example.library.v1.LibraryService.CreateShelf
    */
   methodName: string;
 
   /**
    * Identity of the consumer for whom this quota operation is being performed.
-   * 
-   *  This can be in one of the following formats:
-   *    project:<project_id>,
-   *    project_number:<project_number>,
-   *    api_key:<api_key>.
+   *
+   * This can be in one of the following formats:
+   *   project:<project_id>,
+   *   project_number:<project_number>,
+   *   api_key:<api_key>.
    */
   consumerId: string;
 
@@ -389,17 +389,17 @@ export interface QuotaOperation {
 
   /**
    * Represents information about this operation. Each MetricValueSet
-   *  corresponds to a metric defined in the service configuration.
-   *  The data type used in the MetricValueSet must agree with
-   *  the data type specified in the metric definition.
-   * 
-   *  Within a single operation, it is not allowed to have more than one
-   *  MetricValue instances that have the same metric names and identical
-   *  label value combinations. If a request has such duplicated MetricValue
-   *  instances, the entire request is rejected with
-   *  an invalid argument error.
-   * 
-   *  This field is mutually exclusive with method_name.
+   * corresponds to a metric defined in the service configuration.
+   * The data type used in the MetricValueSet must agree with
+   * the data type specified in the metric definition.
+   *
+   * Within a single operation, it is not allowed to have more than one
+   * MetricValue instances that have the same metric names and identical
+   * label value combinations. If a request has such duplicated MetricValue
+   * instances, the entire request is rejected with
+   * an invalid argument error.
+   *
+   * This field is mutually exclusive with method_name.
    */
   quotaMetrics: MetricValueSet[];
 
@@ -411,39 +411,39 @@ export interface QuotaOperation {
 export interface QuotaOperationSDKType {
   /**
    * Identity of the operation. This is expected to be unique within the scope
-   *  of the service that generated the operation, and guarantees idempotency in
-   *  case of retries.
-   * 
-   *  In order to ensure best performance and latency in the Quota backends,
-   *  operation_ids are optimally associated with time, so that related
-   *  operations can be accessed fast in storage. For this reason, the
-   *  recommended token for services that intend to operate at a high QPS is
-   *  Unix time in nanos + UUID
+   * of the service that generated the operation, and guarantees idempotency in
+   * case of retries.
+   *
+   * In order to ensure best performance and latency in the Quota backends,
+   * operation_ids are optimally associated with time, so that related
+   * operations can be accessed fast in storage. For this reason, the
+   * recommended token for services that intend to operate at a high QPS is
+   * Unix time in nanos + UUID
    */
   operation_id: string;
 
   /**
    * Fully qualified name of the API method for which this quota operation is
-   *  requested. This name is used for matching quota rules or metric rules and
-   *  billing status rules defined in service configuration.
-   * 
-   *  This field should not be set if any of the following is true:
-   *  (1) the quota operation is performed on non-API resources.
-   *  (2) quota_metrics is set because the caller is doing quota override.
-   * 
-   * 
-   *  Example of an RPC method name:
-   *      google.example.library.v1.LibraryService.CreateShelf
+   * requested. This name is used for matching quota rules or metric rules and
+   * billing status rules defined in service configuration.
+   *
+   * This field should not be set if any of the following is true:
+   * (1) the quota operation is performed on non-API resources.
+   * (2) quota_metrics is set because the caller is doing quota override.
+   *
+   *
+   * Example of an RPC method name:
+   *     google.example.library.v1.LibraryService.CreateShelf
    */
   method_name: string;
 
   /**
    * Identity of the consumer for whom this quota operation is being performed.
-   * 
-   *  This can be in one of the following formats:
-   *    project:<project_id>,
-   *    project_number:<project_number>,
-   *    api_key:<api_key>.
+   *
+   * This can be in one of the following formats:
+   *   project:<project_id>,
+   *   project_number:<project_number>,
+   *   api_key:<api_key>.
    */
   consumer_id: string;
 
@@ -454,17 +454,17 @@ export interface QuotaOperationSDKType {
 
   /**
    * Represents information about this operation. Each MetricValueSet
-   *  corresponds to a metric defined in the service configuration.
-   *  The data type used in the MetricValueSet must agree with
-   *  the data type specified in the metric definition.
-   * 
-   *  Within a single operation, it is not allowed to have more than one
-   *  MetricValue instances that have the same metric names and identical
-   *  label value combinations. If a request has such duplicated MetricValue
-   *  instances, the entire request is rejected with
-   *  an invalid argument error.
-   * 
-   *  This field is mutually exclusive with method_name.
+   * corresponds to a metric defined in the service configuration.
+   * The data type used in the MetricValueSet must agree with
+   * the data type specified in the metric definition.
+   *
+   * Within a single operation, it is not allowed to have more than one
+   * MetricValue instances that have the same metric names and identical
+   * label value combinations. If a request has such duplicated MetricValue
+   * instances, the entire request is rejected with
+   * an invalid argument error.
+   *
+   * This field is mutually exclusive with method_name.
    */
   quota_metrics: MetricValueSetSDKType[];
 
@@ -476,7 +476,7 @@ export interface QuotaOperationSDKType {
 export interface AllocateQuotaResponse {
   /**
    * The same operation_id value used in the AllocateQuotaRequest. Used for
-   *  logging and diagnostics purposes.
+   * logging and diagnostics purposes.
    */
   operationId: string;
 
@@ -485,15 +485,15 @@ export interface AllocateQuotaResponse {
 
   /**
    * Quota metrics to indicate the result of allocation. Depending on the
-   *  request, one or more of the following metrics will be included:
-   * 
-   *  1. Per quota group or per quota metric incremental usage will be specified
-   *  using the following delta metric :
-   *    "serviceruntime.googleapis.com/api/consumer/quota_used_count"
-   * 
-   *  2. The quota limit reached condition will be specified using the following
-   *  boolean metric :
-   *    "serviceruntime.googleapis.com/quota/exceeded"
+   * request, one or more of the following metrics will be included:
+   *
+   * 1. Per quota group or per quota metric incremental usage will be specified
+   * using the following delta metric :
+   *   "serviceruntime.googleapis.com/api/consumer/quota_used_count"
+   *
+   * 2. The quota limit reached condition will be specified using the following
+   * boolean metric :
+   *   "serviceruntime.googleapis.com/quota/exceeded"
    */
   quotaMetrics: MetricValueSet[];
 
@@ -505,7 +505,7 @@ export interface AllocateQuotaResponse {
 export interface AllocateQuotaResponseSDKType {
   /**
    * The same operation_id value used in the AllocateQuotaRequest. Used for
-   *  logging and diagnostics purposes.
+   * logging and diagnostics purposes.
    */
   operation_id: string;
 
@@ -514,15 +514,15 @@ export interface AllocateQuotaResponseSDKType {
 
   /**
    * Quota metrics to indicate the result of allocation. Depending on the
-   *  request, one or more of the following metrics will be included:
-   * 
-   *  1. Per quota group or per quota metric incremental usage will be specified
-   *  using the following delta metric :
-   *    "serviceruntime.googleapis.com/api/consumer/quota_used_count"
-   * 
-   *  2. The quota limit reached condition will be specified using the following
-   *  boolean metric :
-   *    "serviceruntime.googleapis.com/quota/exceeded"
+   * request, one or more of the following metrics will be included:
+   *
+   * 1. Per quota group or per quota metric incremental usage will be specified
+   * using the following delta metric :
+   *   "serviceruntime.googleapis.com/api/consumer/quota_used_count"
+   *
+   * 2. The quota limit reached condition will be specified using the following
+   * boolean metric :
+   *   "serviceruntime.googleapis.com/quota/exceeded"
    */
   quota_metrics: MetricValueSetSDKType[];
 
@@ -537,8 +537,8 @@ export interface QuotaError {
 
   /**
    * Subject to whom this error applies. See the specific enum for more details
-   *  on this field. For example, "clientip:<ip address of client>" or
-   *  "project:<Google developer project id>".
+   * on this field. For example, "clientip:<ip address of client>" or
+   * "project:<Google developer project id>".
    */
   subject: string;
 
@@ -547,7 +547,7 @@ export interface QuotaError {
 
   /**
    * Contains additional information about the quota error.
-   *  If available, `status.code` will be non zero.
+   * If available, `status.code` will be non zero.
    */
   status: Status;
 }
@@ -559,8 +559,8 @@ export interface QuotaErrorSDKType {
 
   /**
    * Subject to whom this error applies. See the specific enum for more details
-   *  on this field. For example, "clientip:<ip address of client>" or
-   *  "project:<Google developer project id>".
+   * on this field. For example, "clientip:<ip address of client>" or
+   * "project:<Google developer project id>".
    */
   subject: string;
 
@@ -569,7 +569,7 @@ export interface QuotaErrorSDKType {
 
   /**
    * Contains additional information about the quota error.
-   *  If available, `status.code` will be non zero.
+   * If available, `status.code` will be non zero.
    */
   status: StatusSDKType;
 }

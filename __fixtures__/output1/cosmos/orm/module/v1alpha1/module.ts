@@ -4,15 +4,15 @@ export const protobufPackage = "cosmos.orm.module.v1alpha1";
 
 /**
  * Module defines the ORM module which adds providers to the app container for
- *  module-scoped DB's. In the future it may provide gRPC services for interacting
- *  with ORM data.
+ * module-scoped DB's. In the future it may provide gRPC services for interacting
+ * with ORM data.
  */
 export interface Module {}
 
 /**
  * Module defines the ORM module which adds providers to the app container for
- *  module-scoped DB's. In the future it may provide gRPC services for interacting
- *  with ORM data.
+ * module-scoped DB's. In the future it may provide gRPC services for interacting
+ * with ORM data.
  */
 export interface ModuleSDKType {}
 

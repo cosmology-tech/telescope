@@ -6,7 +6,7 @@ export const protobufPackage = "evmos.incentives.v1";
 
 /**
  * Incentive defines an instance that organizes distribution conditions for a
- *  given smart contract
+ * given smart contract
  */
 export interface Incentive {
   /** contract address */
@@ -27,7 +27,7 @@ export interface Incentive {
 
 /**
  * Incentive defines an instance that organizes distribution conditions for a
- *  given smart contract
+ * given smart contract
  */
 export interface IncentiveSDKType {
   /** contract address */

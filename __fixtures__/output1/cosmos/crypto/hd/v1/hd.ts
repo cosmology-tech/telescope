@@ -15,7 +15,7 @@ export interface BIP44Params {
 
   /**
    * change is a constant used for public derivation. Constant 0 is used for external chain and constant 1 for internal
-   *  chain.
+   * chain.
    */
   change: boolean;
 
@@ -36,7 +36,7 @@ export interface BIP44ParamsSDKType {
 
   /**
    * change is a constant used for public derivation. Constant 0 is used for external chain and constant 1 for internal
-   *  chain.
+   * chain.
    */
   change: boolean;
 

@@ -24,7 +24,7 @@ export interface GenesisStateSDKType {
 
 /**
  * GenMsgs define the messages that can be executed during genesis phase in
- *  order. The intention is to have more human readable data that is auditable.
+ * order. The intention is to have more human readable data that is auditable.
  */
 export interface GenesisState_GenMsgs {
   storeCode?: MsgStoreCode;
@@ -34,7 +34,7 @@ export interface GenesisState_GenMsgs {
 
 /**
  * GenMsgs define the messages that can be executed during genesis phase in
- *  order. The intention is to have more human readable data that is auditable.
+ * order. The intention is to have more human readable data that is auditable.
  */
 export interface GenesisState_GenMsgsSDKType {
   store_code?: MsgStoreCodeSDKType;

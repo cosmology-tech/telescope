@@ -4,7 +4,7 @@ export const protobufPackage = "cosmos.capability.v1beta1";
 
 /**
  * Capability defines an implementation of an object capability. The index
- *  provided to a Capability must be globally unique.
+ * provided to a Capability must be globally unique.
  */
 export interface Capability {
   index: Long;
@@ -12,7 +12,7 @@ export interface Capability {
 
 /**
  * Capability defines an implementation of an object capability. The index
- *  provided to a Capability must be globally unique.
+ * provided to a Capability must be globally unique.
  */
 export interface CapabilitySDKType {
   index: Long;
@@ -20,7 +20,7 @@ export interface CapabilitySDKType {
 
 /**
  * Owner defines a single capability owner. An owner is defined by the name of
- *  capability and the module name.
+ * capability and the module name.
  */
 export interface Owner {
   module: string;
@@ -29,7 +29,7 @@ export interface Owner {
 
 /**
  * Owner defines a single capability owner. An owner is defined by the name of
- *  capability and the module name.
+ * capability and the module name.
  */
 export interface OwnerSDKType {
   module: string;
@@ -38,7 +38,7 @@ export interface OwnerSDKType {
 
 /**
  * CapabilityOwners defines a set of owners of a single Capability. The set of
- *  owners must be unique.
+ * owners must be unique.
  */
 export interface CapabilityOwners {
   owners: Owner[];
@@ -46,7 +46,7 @@ export interface CapabilityOwners {
 
 /**
  * CapabilityOwners defines a set of owners of a single Capability. The set of
- *  owners must be unique.
+ * owners must be unique.
  */
 export interface CapabilityOwnersSDKType {
   owners: OwnerSDKType[];

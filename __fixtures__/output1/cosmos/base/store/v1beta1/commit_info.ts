@@ -4,7 +4,7 @@ export const protobufPackage = "cosmos.base.store.v1beta1";
 
 /**
  * CommitInfo defines commit information used by the multi-store when committing
- *  a version/height.
+ * a version/height.
  */
 export interface CommitInfo {
   version: Long;
@@ -13,7 +13,7 @@ export interface CommitInfo {
 
 /**
  * CommitInfo defines commit information used by the multi-store when committing
- *  a version/height.
+ * a version/height.
  */
 export interface CommitInfoSDKType {
   version: Long;
@@ -22,7 +22,7 @@ export interface CommitInfoSDKType {
 
 /**
  * StoreInfo defines store-specific commit information. It contains a reference
- *  between a store name and the commit ID.
+ * between a store name and the commit ID.
  */
 export interface StoreInfo {
   name: string;
@@ -31,7 +31,7 @@ export interface StoreInfo {
 
 /**
  * StoreInfo defines store-specific commit information. It contains a reference
- *  between a store name and the commit ID.
+ * between a store name and the commit ID.
  */
 export interface StoreInfoSDKType {
   name: string;
@@ -40,7 +40,7 @@ export interface StoreInfoSDKType {
 
 /**
  * CommitID defines the committment information when a specific store is
- *  committed.
+ * committed.
  */
 export interface CommitID {
   version: Long;
@@ -49,7 +49,7 @@ export interface CommitID {
 
 /**
  * CommitID defines the committment information when a specific store is
- *  committed.
+ * committed.
  */
 export interface CommitIDSDKType {
   version: Long;

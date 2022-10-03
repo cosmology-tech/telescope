@@ -10,13 +10,13 @@ export interface GenesisState {
 
   /**
    * last_total_power tracks the total amounts of bonded tokens recorded during
-   *  the previous end block.
+   * the previous end block.
    */
   lastTotalPower: Uint8Array;
 
   /**
    * last_validator_powers is a special index that provides a historical list
-   *  of the last-block's bonded validators.
+   * of the last-block's bonded validators.
    */
   lastValidatorPowers: LastValidatorPower[];
 
@@ -41,13 +41,13 @@ export interface GenesisStateSDKType {
 
   /**
    * last_total_power tracks the total amounts of bonded tokens recorded during
-   *  the previous end block.
+   * the previous end block.
    */
   last_total_power: Uint8Array;
 
   /**
    * last_validator_powers is a special index that provides a historical list
-   *  of the last-block's bonded validators.
+   * of the last-block's bonded validators.
    */
   last_validator_powers: LastValidatorPowerSDKType[];
 

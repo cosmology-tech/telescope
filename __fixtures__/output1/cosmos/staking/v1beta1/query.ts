@@ -66,7 +66,7 @@ export interface QueryValidatorResponseSDKType {
 
 /**
  * QueryValidatorDelegationsRequest is request type for the
- *  Query/ValidatorDelegations RPC method
+ * Query/ValidatorDelegations RPC method
  */
 export interface QueryValidatorDelegationsRequest {
   /** validator_addr defines the validator address to query for. */
@@ -78,7 +78,7 @@ export interface QueryValidatorDelegationsRequest {
 
 /**
  * QueryValidatorDelegationsRequest is request type for the
- *  Query/ValidatorDelegations RPC method
+ * Query/ValidatorDelegations RPC method
  */
 export interface QueryValidatorDelegationsRequestSDKType {
   /** validator_addr defines the validator address to query for. */
@@ -90,7 +90,7 @@ export interface QueryValidatorDelegationsRequestSDKType {
 
 /**
  * QueryValidatorDelegationsResponse is response type for the
- *  Query/ValidatorDelegations RPC method
+ * Query/ValidatorDelegations RPC method
  */
 export interface QueryValidatorDelegationsResponse {
   delegationResponses: DelegationResponse[];
@@ -101,7 +101,7 @@ export interface QueryValidatorDelegationsResponse {
 
 /**
  * QueryValidatorDelegationsResponse is response type for the
- *  Query/ValidatorDelegations RPC method
+ * Query/ValidatorDelegations RPC method
  */
 export interface QueryValidatorDelegationsResponseSDKType {
   delegation_responses: DelegationResponseSDKType[];
@@ -112,7 +112,7 @@ export interface QueryValidatorDelegationsResponseSDKType {
 
 /**
  * QueryValidatorUnbondingDelegationsRequest is required type for the
- *  Query/ValidatorUnbondingDelegations RPC method
+ * Query/ValidatorUnbondingDelegations RPC method
  */
 export interface QueryValidatorUnbondingDelegationsRequest {
   /** validator_addr defines the validator address to query for. */
@@ -124,7 +124,7 @@ export interface QueryValidatorUnbondingDelegationsRequest {
 
 /**
  * QueryValidatorUnbondingDelegationsRequest is required type for the
- *  Query/ValidatorUnbondingDelegations RPC method
+ * Query/ValidatorUnbondingDelegations RPC method
  */
 export interface QueryValidatorUnbondingDelegationsRequestSDKType {
   /** validator_addr defines the validator address to query for. */
@@ -136,7 +136,7 @@ export interface QueryValidatorUnbondingDelegationsRequestSDKType {
 
 /**
  * QueryValidatorUnbondingDelegationsResponse is response type for the
- *  Query/ValidatorUnbondingDelegations RPC method.
+ * Query/ValidatorUnbondingDelegations RPC method.
  */
 export interface QueryValidatorUnbondingDelegationsResponse {
   unbondingResponses: UnbondingDelegation[];
@@ -147,7 +147,7 @@ export interface QueryValidatorUnbondingDelegationsResponse {
 
 /**
  * QueryValidatorUnbondingDelegationsResponse is response type for the
- *  Query/ValidatorUnbondingDelegations RPC method.
+ * Query/ValidatorUnbondingDelegations RPC method.
  */
 export interface QueryValidatorUnbondingDelegationsResponseSDKType {
   unbonding_responses: UnbondingDelegationSDKType[];
@@ -188,7 +188,7 @@ export interface QueryDelegationResponseSDKType {
 
 /**
  * QueryUnbondingDelegationRequest is request type for the
- *  Query/UnbondingDelegation RPC method.
+ * Query/UnbondingDelegation RPC method.
  */
 export interface QueryUnbondingDelegationRequest {
   /** delegator_addr defines the delegator address to query for. */
@@ -200,7 +200,7 @@ export interface QueryUnbondingDelegationRequest {
 
 /**
  * QueryUnbondingDelegationRequest is request type for the
- *  Query/UnbondingDelegation RPC method.
+ * Query/UnbondingDelegation RPC method.
  */
 export interface QueryUnbondingDelegationRequestSDKType {
   /** delegator_addr defines the delegator address to query for. */
@@ -212,7 +212,7 @@ export interface QueryUnbondingDelegationRequestSDKType {
 
 /**
  * QueryDelegationResponse is response type for the Query/UnbondingDelegation
- *  RPC method.
+ * RPC method.
  */
 export interface QueryUnbondingDelegationResponse {
   /** unbond defines the unbonding information of a delegation. */
@@ -221,7 +221,7 @@ export interface QueryUnbondingDelegationResponse {
 
 /**
  * QueryDelegationResponse is response type for the Query/UnbondingDelegation
- *  RPC method.
+ * RPC method.
  */
 export interface QueryUnbondingDelegationResponseSDKType {
   /** unbond defines the unbonding information of a delegation. */
@@ -230,7 +230,7 @@ export interface QueryUnbondingDelegationResponseSDKType {
 
 /**
  * QueryDelegatorDelegationsRequest is request type for the
- *  Query/DelegatorDelegations RPC method.
+ * Query/DelegatorDelegations RPC method.
  */
 export interface QueryDelegatorDelegationsRequest {
   /** delegator_addr defines the delegator address to query for. */
@@ -242,7 +242,7 @@ export interface QueryDelegatorDelegationsRequest {
 
 /**
  * QueryDelegatorDelegationsRequest is request type for the
- *  Query/DelegatorDelegations RPC method.
+ * Query/DelegatorDelegations RPC method.
  */
 export interface QueryDelegatorDelegationsRequestSDKType {
   /** delegator_addr defines the delegator address to query for. */
@@ -254,7 +254,7 @@ export interface QueryDelegatorDelegationsRequestSDKType {
 
 /**
  * QueryDelegatorDelegationsResponse is response type for the
- *  Query/DelegatorDelegations RPC method.
+ * Query/DelegatorDelegations RPC method.
  */
 export interface QueryDelegatorDelegationsResponse {
   /** delegation_responses defines all the delegations' info of a delegator. */
@@ -266,7 +266,7 @@ export interface QueryDelegatorDelegationsResponse {
 
 /**
  * QueryDelegatorDelegationsResponse is response type for the
- *  Query/DelegatorDelegations RPC method.
+ * Query/DelegatorDelegations RPC method.
  */
 export interface QueryDelegatorDelegationsResponseSDKType {
   /** delegation_responses defines all the delegations' info of a delegator. */
@@ -278,7 +278,7 @@ export interface QueryDelegatorDelegationsResponseSDKType {
 
 /**
  * QueryDelegatorUnbondingDelegationsRequest is request type for the
- *  Query/DelegatorUnbondingDelegations RPC method.
+ * Query/DelegatorUnbondingDelegations RPC method.
  */
 export interface QueryDelegatorUnbondingDelegationsRequest {
   /** delegator_addr defines the delegator address to query for. */
@@ -290,7 +290,7 @@ export interface QueryDelegatorUnbondingDelegationsRequest {
 
 /**
  * QueryDelegatorUnbondingDelegationsRequest is request type for the
- *  Query/DelegatorUnbondingDelegations RPC method.
+ * Query/DelegatorUnbondingDelegations RPC method.
  */
 export interface QueryDelegatorUnbondingDelegationsRequestSDKType {
   /** delegator_addr defines the delegator address to query for. */
@@ -302,7 +302,7 @@ export interface QueryDelegatorUnbondingDelegationsRequestSDKType {
 
 /**
  * QueryUnbondingDelegatorDelegationsResponse is response type for the
- *  Query/UnbondingDelegatorDelegations RPC method.
+ * Query/UnbondingDelegatorDelegations RPC method.
  */
 export interface QueryDelegatorUnbondingDelegationsResponse {
   unbondingResponses: UnbondingDelegation[];
@@ -313,7 +313,7 @@ export interface QueryDelegatorUnbondingDelegationsResponse {
 
 /**
  * QueryUnbondingDelegatorDelegationsResponse is response type for the
- *  Query/UnbondingDelegatorDelegations RPC method.
+ * Query/UnbondingDelegatorDelegations RPC method.
  */
 export interface QueryDelegatorUnbondingDelegationsResponseSDKType {
   unbonding_responses: UnbondingDelegationSDKType[];
@@ -324,7 +324,7 @@ export interface QueryDelegatorUnbondingDelegationsResponseSDKType {
 
 /**
  * QueryRedelegationsRequest is request type for the Query/Redelegations RPC
- *  method.
+ * method.
  */
 export interface QueryRedelegationsRequest {
   /** delegator_addr defines the delegator address to query for. */
@@ -342,7 +342,7 @@ export interface QueryRedelegationsRequest {
 
 /**
  * QueryRedelegationsRequest is request type for the Query/Redelegations RPC
- *  method.
+ * method.
  */
 export interface QueryRedelegationsRequestSDKType {
   /** delegator_addr defines the delegator address to query for. */
@@ -360,7 +360,7 @@ export interface QueryRedelegationsRequestSDKType {
 
 /**
  * QueryRedelegationsResponse is response type for the Query/Redelegations RPC
- *  method.
+ * method.
  */
 export interface QueryRedelegationsResponse {
   redelegationResponses: RedelegationResponse[];
@@ -371,7 +371,7 @@ export interface QueryRedelegationsResponse {
 
 /**
  * QueryRedelegationsResponse is response type for the Query/Redelegations RPC
- *  method.
+ * method.
  */
 export interface QueryRedelegationsResponseSDKType {
   redelegation_responses: RedelegationResponseSDKType[];
@@ -382,7 +382,7 @@ export interface QueryRedelegationsResponseSDKType {
 
 /**
  * QueryDelegatorValidatorsRequest is request type for the
- *  Query/DelegatorValidators RPC method.
+ * Query/DelegatorValidators RPC method.
  */
 export interface QueryDelegatorValidatorsRequest {
   /** delegator_addr defines the delegator address to query for. */
@@ -394,7 +394,7 @@ export interface QueryDelegatorValidatorsRequest {
 
 /**
  * QueryDelegatorValidatorsRequest is request type for the
- *  Query/DelegatorValidators RPC method.
+ * Query/DelegatorValidators RPC method.
  */
 export interface QueryDelegatorValidatorsRequestSDKType {
   /** delegator_addr defines the delegator address to query for. */
@@ -406,7 +406,7 @@ export interface QueryDelegatorValidatorsRequestSDKType {
 
 /**
  * QueryDelegatorValidatorsResponse is response type for the
- *  Query/DelegatorValidators RPC method.
+ * Query/DelegatorValidators RPC method.
  */
 export interface QueryDelegatorValidatorsResponse {
   /** validators defines the the validators' info of a delegator. */
@@ -418,7 +418,7 @@ export interface QueryDelegatorValidatorsResponse {
 
 /**
  * QueryDelegatorValidatorsResponse is response type for the
- *  Query/DelegatorValidators RPC method.
+ * Query/DelegatorValidators RPC method.
  */
 export interface QueryDelegatorValidatorsResponseSDKType {
   /** validators defines the the validators' info of a delegator. */
@@ -430,7 +430,7 @@ export interface QueryDelegatorValidatorsResponseSDKType {
 
 /**
  * QueryDelegatorValidatorRequest is request type for the
- *  Query/DelegatorValidator RPC method.
+ * Query/DelegatorValidator RPC method.
  */
 export interface QueryDelegatorValidatorRequest {
   /** delegator_addr defines the delegator address to query for. */
@@ -442,7 +442,7 @@ export interface QueryDelegatorValidatorRequest {
 
 /**
  * QueryDelegatorValidatorRequest is request type for the
- *  Query/DelegatorValidator RPC method.
+ * Query/DelegatorValidator RPC method.
  */
 export interface QueryDelegatorValidatorRequestSDKType {
   /** delegator_addr defines the delegator address to query for. */
@@ -454,7 +454,7 @@ export interface QueryDelegatorValidatorRequestSDKType {
 
 /**
  * QueryDelegatorValidatorResponse response type for the
- *  Query/DelegatorValidator RPC method.
+ * Query/DelegatorValidator RPC method.
  */
 export interface QueryDelegatorValidatorResponse {
   /** validator defines the the validator info. */
@@ -463,7 +463,7 @@ export interface QueryDelegatorValidatorResponse {
 
 /**
  * QueryDelegatorValidatorResponse response type for the
- *  Query/DelegatorValidator RPC method.
+ * Query/DelegatorValidator RPC method.
  */
 export interface QueryDelegatorValidatorResponseSDKType {
   /** validator defines the the validator info. */
@@ -472,7 +472,7 @@ export interface QueryDelegatorValidatorResponseSDKType {
 
 /**
  * QueryHistoricalInfoRequest is request type for the Query/HistoricalInfo RPC
- *  method.
+ * method.
  */
 export interface QueryHistoricalInfoRequest {
   /** height defines at which height to query the historical info. */
@@ -481,7 +481,7 @@ export interface QueryHistoricalInfoRequest {
 
 /**
  * QueryHistoricalInfoRequest is request type for the Query/HistoricalInfo RPC
- *  method.
+ * method.
  */
 export interface QueryHistoricalInfoRequestSDKType {
   /** height defines at which height to query the historical info. */
@@ -490,7 +490,7 @@ export interface QueryHistoricalInfoRequestSDKType {
 
 /**
  * QueryHistoricalInfoResponse is response type for the Query/HistoricalInfo RPC
- *  method.
+ * method.
  */
 export interface QueryHistoricalInfoResponse {
   /** hist defines the historical info at the given height. */
@@ -499,7 +499,7 @@ export interface QueryHistoricalInfoResponse {
 
 /**
  * QueryHistoricalInfoResponse is response type for the Query/HistoricalInfo RPC
- *  method.
+ * method.
  */
 export interface QueryHistoricalInfoResponseSDKType {
   /** hist defines the historical info at the given height. */

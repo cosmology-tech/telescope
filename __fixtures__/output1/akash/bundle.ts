@@ -75,29 +75,27 @@ import * as _329 from "./market/v1beta2/query.lcd";
 import * as _330 from "./provider/v1beta2/query.lcd";
 import * as _331 from "./audit/v1beta2/query.rpc.query";
 import * as _332 from "./cert/v1beta2/query.rpc.query";
-import * as _333 from "./deployment/v1beta1/query.rpc.query";
-import * as _334 from "./deployment/v1beta2/query.rpc.query";
-import * as _335 from "./escrow/v1beta1/query.rpc.query";
-import * as _336 from "./escrow/v1beta2/query.rpc.query";
-import * as _337 from "./market/v1beta2/query.rpc.query";
-import * as _338 from "./provider/v1beta2/query.rpc.query";
-import * as _339 from "./audit/v1beta1/audit.rpc.msg";
-import * as _340 from "./audit/v1beta2/audit.rpc.msg";
-import * as _341 from "./cert/v1beta2/cert.rpc.msg";
-import * as _342 from "./deployment/v1beta1/deployment.rpc.msg";
-import * as _343 from "./deployment/v1beta2/service.rpc.msg";
-import * as _344 from "./market/v1beta2/service.rpc.msg";
-import * as _345 from "./provider/v1beta1/provider.rpc.msg";
-import * as _346 from "./provider/v1beta2/provider.rpc.msg";
-import * as _516 from "./lcd";
-import * as _517 from "./rpc.query";
-import * as _518 from "./rpc.tx";
+import * as _333 from "./deployment/v1beta2/query.rpc.query";
+import * as _334 from "./escrow/v1beta1/query.rpc.query";
+import * as _335 from "./escrow/v1beta2/query.rpc.query";
+import * as _336 from "./market/v1beta2/query.rpc.query";
+import * as _337 from "./provider/v1beta2/query.rpc.query";
+import * as _338 from "./audit/v1beta1/audit.rpc.msg";
+import * as _339 from "./audit/v1beta2/audit.rpc.msg";
+import * as _340 from "./cert/v1beta2/cert.rpc.msg";
+import * as _341 from "./deployment/v1beta2/service.rpc.msg";
+import * as _342 from "./market/v1beta2/service.rpc.msg";
+import * as _343 from "./provider/v1beta1/provider.rpc.msg";
+import * as _344 from "./provider/v1beta2/provider.rpc.msg";
+import * as _514 from "./lcd";
+import * as _515 from "./rpc.query";
+import * as _516 from "./rpc.tx";
 export namespace akash {
   export namespace audit {
     export const v1beta1 = { ..._0,
       ..._309,
       ..._316,
-      ..._339
+      ..._338
     };
     export const v1beta2 = { ..._1,
       ..._2,
@@ -106,7 +104,7 @@ export namespace akash {
       ..._317,
       ..._323,
       ..._331,
-      ..._340
+      ..._339
     };
   }
   export namespace base {
@@ -130,7 +128,7 @@ export namespace akash {
       ..._318,
       ..._324,
       ..._332,
-      ..._341
+      ..._340
     };
   }
   export namespace deployment {
@@ -140,9 +138,7 @@ export namespace akash {
       ..._19,
       ..._20,
       ..._21,
-      ..._325,
-      ..._333,
-      ..._342
+      ..._325
     };
     export const v1beta2 = { ..._22,
       ..._23,
@@ -159,8 +155,8 @@ export namespace akash {
       ..._312,
       ..._319,
       ..._326,
-      ..._334,
-      ..._343
+      ..._333,
+      ..._341
     };
   }
   export namespace escrow {
@@ -168,13 +164,13 @@ export namespace akash {
       ..._35,
       ..._36,
       ..._327,
-      ..._335
+      ..._334
     };
     export const v1beta2 = { ..._37,
       ..._38,
       ..._39,
       ..._328,
-      ..._336
+      ..._335
     };
   }
   export namespace inflation {
@@ -193,15 +189,15 @@ export namespace akash {
       ..._313,
       ..._320,
       ..._329,
-      ..._337,
-      ..._344
+      ..._336,
+      ..._342
     };
   }
   export namespace provider {
     export const v1beta1 = { ..._49,
       ..._314,
       ..._321,
-      ..._345
+      ..._343
     };
     export const v1beta2 = { ..._50,
       ..._51,
@@ -209,12 +205,12 @@ export namespace akash {
       ..._315,
       ..._322,
       ..._330,
-      ..._338,
-      ..._346
+      ..._337,
+      ..._344
     };
   }
-  export const ClientFactory = { ..._516,
-    ..._517,
-    ..._518
+  export const ClientFactory = { ..._514,
+    ..._515,
+    ..._516
   };
 }

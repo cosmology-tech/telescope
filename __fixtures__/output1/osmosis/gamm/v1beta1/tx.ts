@@ -5,7 +5,7 @@ export const protobufPackage = "osmosis.gamm.v1beta1";
 
 /**
  * ===================== MsgJoinPool
- *  This is really MsgJoinPoolNoSwap
+ * This is really MsgJoinPoolNoSwap
  */
 export interface MsgJoinPool {
   sender: string;
@@ -16,7 +16,7 @@ export interface MsgJoinPool {
 
 /**
  * ===================== MsgJoinPool
- *  This is really MsgJoinPoolNoSwap
+ * This is really MsgJoinPoolNoSwap
  */
 export interface MsgJoinPoolSDKType {
   sender: string;
@@ -107,7 +107,7 @@ export interface MsgSwapExactAmountOutResponseSDKType {
 
 /**
  * ===================== MsgJoinSwapExternAmountIn
- *  TODO: Rename to MsgJoinSwapExactAmountIn
+ * TODO: Rename to MsgJoinSwapExactAmountIn
  */
 export interface MsgJoinSwapExternAmountIn {
   sender: string;
@@ -118,7 +118,7 @@ export interface MsgJoinSwapExternAmountIn {
 
 /**
  * ===================== MsgJoinSwapExternAmountIn
- *  TODO: Rename to MsgJoinSwapExactAmountIn
+ * TODO: Rename to MsgJoinSwapExactAmountIn
  */
 export interface MsgJoinSwapExternAmountInSDKType {
   sender: string;

@@ -237,7 +237,7 @@ export interface WeightedVoteOptionSDKType {
 
 /**
  * Deposit defines an amount deposited by an account address to an active
- *  proposal.
+ * proposal.
  */
 export interface Deposit {
   proposalId: Long;
@@ -247,7 +247,7 @@ export interface Deposit {
 
 /**
  * Deposit defines an amount deposited by an account address to an active
- *  proposal.
+ * proposal.
  */
 export interface DepositSDKType {
   proposal_id: Long;
@@ -263,8 +263,8 @@ export interface Proposal {
 
   /**
    * final_tally_result is the final tally result of the proposal. When
-   *  querying a proposal via gRPC, this field is not populated until the
-   *  proposal's voting period has ended.
+   * querying a proposal via gRPC, this field is not populated until the
+   * proposal's voting period has ended.
    */
   finalTallyResult: TallyResult;
   submitTime: Date;
@@ -285,8 +285,8 @@ export interface ProposalSDKType {
 
   /**
    * final_tally_result is the final tally result of the proposal. When
-   *  querying a proposal via gRPC, this field is not populated until the
-   *  proposal's voting period has ended.
+   * querying a proposal via gRPC, this field is not populated until the
+   * proposal's voting period has ended.
    */
   final_tally_result: TallyResultSDKType;
   submit_time: Date;
@@ -317,7 +317,7 @@ export interface TallyResultSDKType {
 
 /**
  * Vote defines a vote on a governance proposal.
- *  A Vote consists of a proposal ID, the voter, and the vote option.
+ * A Vote consists of a proposal ID, the voter, and the vote option.
  */
 export interface Vote {
   proposalId: Long;
@@ -330,7 +330,7 @@ export interface Vote {
 
 /**
  * Vote defines a vote on a governance proposal.
- *  A Vote consists of a proposal ID, the voter, and the vote option.
+ * A Vote consists of a proposal ID, the voter, and the vote option.
  */
 export interface VoteSDKType {
   proposal_id: Long;
@@ -348,7 +348,7 @@ export interface DepositParams {
 
   /**
    * Maximum period for Atom holders to deposit on a proposal. Initial value: 2
-   *   months.
+   *  months.
    */
   maxDepositPeriod: Duration;
 }
@@ -360,7 +360,7 @@ export interface DepositParamsSDKType {
 
   /**
    * Maximum period for Atom holders to deposit on a proposal. Initial value: 2
-   *   months.
+   *  months.
    */
   max_deposit_period: DurationSDKType;
 }
@@ -381,7 +381,7 @@ export interface VotingParamsSDKType {
 export interface TallyParams {
   /**
    * Minimum percentage of total stake needed to vote for a result to be
-   *   considered valid.
+   *  considered valid.
    */
   quorum: string;
 
@@ -390,7 +390,7 @@ export interface TallyParams {
 
   /**
    * Minimum value of Veto votes to Total votes ratio for proposal to be
-   *   vetoed. Default value: 1/3.
+   *  vetoed. Default value: 1/3.
    */
   vetoThreshold: string;
 }
@@ -399,7 +399,7 @@ export interface TallyParams {
 export interface TallyParamsSDKType {
   /**
    * Minimum percentage of total stake needed to vote for a result to be
-   *   considered valid.
+   *  considered valid.
    */
   quorum: string;
 
@@ -408,7 +408,7 @@ export interface TallyParamsSDKType {
 
   /**
    * Minimum value of Veto votes to Total votes ratio for proposal to be
-   *   vetoed. Default value: 1/3.
+   *  vetoed. Default value: 1/3.
    */
   veto_threshold: string;
 }

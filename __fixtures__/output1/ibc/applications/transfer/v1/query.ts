@@ -6,7 +6,7 @@ export const protobufPackage = "ibc.applications.transfer.v1";
 
 /**
  * QueryDenomTraceRequest is the request type for the Query/DenomTrace RPC
- *  method
+ * method
  */
 export interface QueryDenomTraceRequest {
   /** hash (in hex format) of the denomination trace information. */
@@ -15,7 +15,7 @@ export interface QueryDenomTraceRequest {
 
 /**
  * QueryDenomTraceRequest is the request type for the Query/DenomTrace RPC
- *  method
+ * method
  */
 export interface QueryDenomTraceRequestSDKType {
   /** hash (in hex format) of the denomination trace information. */
@@ -24,7 +24,7 @@ export interface QueryDenomTraceRequestSDKType {
 
 /**
  * QueryDenomTraceResponse is the response type for the Query/DenomTrace RPC
- *  method.
+ * method.
  */
 export interface QueryDenomTraceResponse {
   /** denom_trace returns the requested denomination trace information. */
@@ -33,7 +33,7 @@ export interface QueryDenomTraceResponse {
 
 /**
  * QueryDenomTraceResponse is the response type for the Query/DenomTrace RPC
- *  method.
+ * method.
  */
 export interface QueryDenomTraceResponseSDKType {
   /** denom_trace returns the requested denomination trace information. */
@@ -42,7 +42,7 @@ export interface QueryDenomTraceResponseSDKType {
 
 /**
  * QueryConnectionsRequest is the request type for the Query/DenomTraces RPC
- *  method
+ * method
  */
 export interface QueryDenomTracesRequest {
   /** pagination defines an optional pagination for the request. */
@@ -51,7 +51,7 @@ export interface QueryDenomTracesRequest {
 
 /**
  * QueryConnectionsRequest is the request type for the Query/DenomTraces RPC
- *  method
+ * method
  */
 export interface QueryDenomTracesRequestSDKType {
   /** pagination defines an optional pagination for the request. */
@@ -60,7 +60,7 @@ export interface QueryDenomTracesRequestSDKType {
 
 /**
  * QueryConnectionsResponse is the response type for the Query/DenomTraces RPC
- *  method.
+ * method.
  */
 export interface QueryDenomTracesResponse {
   /** denom_traces returns all denominations trace information. */
@@ -72,7 +72,7 @@ export interface QueryDenomTracesResponse {
 
 /**
  * QueryConnectionsResponse is the response type for the Query/DenomTraces RPC
- *  method.
+ * method.
  */
 export interface QueryDenomTracesResponseSDKType {
   /** denom_traces returns all denominations trace information. */

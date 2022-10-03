@@ -4,24 +4,24 @@ export const protobufPackage = "google.protobuf";
 
 /**
  * `SourceContext` represents information about the source of a
- *  protobuf element, like the file in which it is defined.
+ * protobuf element, like the file in which it is defined.
  */
 export interface SourceContext {
   /**
    * The path-qualified name of the .proto file that contained the associated
-   *  protobuf element.  For example: `"google/protobuf/source_context.proto"`.
+   * protobuf element.  For example: `"google/protobuf/source_context.proto"`.
    */
   fileName: string;
 }
 
 /**
  * `SourceContext` represents information about the source of a
- *  protobuf element, like the file in which it is defined.
+ * protobuf element, like the file in which it is defined.
  */
 export interface SourceContextSDKType {
   /**
    * The path-qualified name of the .proto file that contained the associated
-   *  protobuf element.  For example: `"google/protobuf/source_context.proto"`.
+   * protobuf element.  For example: `"google/protobuf/source_context.proto"`.
    */
   file_name: string;
 }

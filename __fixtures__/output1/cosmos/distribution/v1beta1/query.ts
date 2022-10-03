@@ -25,7 +25,7 @@ export interface QueryParamsResponseSDKType {
 
 /**
  * QueryValidatorOutstandingRewardsRequest is the request type for the
- *  Query/ValidatorOutstandingRewards RPC method.
+ * Query/ValidatorOutstandingRewards RPC method.
  */
 export interface QueryValidatorOutstandingRewardsRequest {
   /** validator_address defines the validator address to query for. */
@@ -34,7 +34,7 @@ export interface QueryValidatorOutstandingRewardsRequest {
 
 /**
  * QueryValidatorOutstandingRewardsRequest is the request type for the
- *  Query/ValidatorOutstandingRewards RPC method.
+ * Query/ValidatorOutstandingRewards RPC method.
  */
 export interface QueryValidatorOutstandingRewardsRequestSDKType {
   /** validator_address defines the validator address to query for. */
@@ -43,7 +43,7 @@ export interface QueryValidatorOutstandingRewardsRequestSDKType {
 
 /**
  * QueryValidatorOutstandingRewardsResponse is the response type for the
- *  Query/ValidatorOutstandingRewards RPC method.
+ * Query/ValidatorOutstandingRewards RPC method.
  */
 export interface QueryValidatorOutstandingRewardsResponse {
   rewards: ValidatorOutstandingRewards;
@@ -51,7 +51,7 @@ export interface QueryValidatorOutstandingRewardsResponse {
 
 /**
  * QueryValidatorOutstandingRewardsResponse is the response type for the
- *  Query/ValidatorOutstandingRewards RPC method.
+ * Query/ValidatorOutstandingRewards RPC method.
  */
 export interface QueryValidatorOutstandingRewardsResponseSDKType {
   rewards: ValidatorOutstandingRewardsSDKType;
@@ -59,7 +59,7 @@ export interface QueryValidatorOutstandingRewardsResponseSDKType {
 
 /**
  * QueryValidatorCommissionRequest is the request type for the
- *  Query/ValidatorCommission RPC method
+ * Query/ValidatorCommission RPC method
  */
 export interface QueryValidatorCommissionRequest {
   /** validator_address defines the validator address to query for. */
@@ -68,7 +68,7 @@ export interface QueryValidatorCommissionRequest {
 
 /**
  * QueryValidatorCommissionRequest is the request type for the
- *  Query/ValidatorCommission RPC method
+ * Query/ValidatorCommission RPC method
  */
 export interface QueryValidatorCommissionRequestSDKType {
   /** validator_address defines the validator address to query for. */
@@ -77,7 +77,7 @@ export interface QueryValidatorCommissionRequestSDKType {
 
 /**
  * QueryValidatorCommissionResponse is the response type for the
- *  Query/ValidatorCommission RPC method
+ * Query/ValidatorCommission RPC method
  */
 export interface QueryValidatorCommissionResponse {
   /** commission defines the commision the validator received. */
@@ -86,7 +86,7 @@ export interface QueryValidatorCommissionResponse {
 
 /**
  * QueryValidatorCommissionResponse is the response type for the
- *  Query/ValidatorCommission RPC method
+ * Query/ValidatorCommission RPC method
  */
 export interface QueryValidatorCommissionResponseSDKType {
   /** commission defines the commision the validator received. */
@@ -95,7 +95,7 @@ export interface QueryValidatorCommissionResponseSDKType {
 
 /**
  * QueryValidatorSlashesRequest is the request type for the
- *  Query/ValidatorSlashes RPC method
+ * Query/ValidatorSlashes RPC method
  */
 export interface QueryValidatorSlashesRequest {
   /** validator_address defines the validator address to query for. */
@@ -113,7 +113,7 @@ export interface QueryValidatorSlashesRequest {
 
 /**
  * QueryValidatorSlashesRequest is the request type for the
- *  Query/ValidatorSlashes RPC method
+ * Query/ValidatorSlashes RPC method
  */
 export interface QueryValidatorSlashesRequestSDKType {
   /** validator_address defines the validator address to query for. */
@@ -131,7 +131,7 @@ export interface QueryValidatorSlashesRequestSDKType {
 
 /**
  * QueryValidatorSlashesResponse is the response type for the
- *  Query/ValidatorSlashes RPC method.
+ * Query/ValidatorSlashes RPC method.
  */
 export interface QueryValidatorSlashesResponse {
   /** slashes defines the slashes the validator received. */
@@ -143,7 +143,7 @@ export interface QueryValidatorSlashesResponse {
 
 /**
  * QueryValidatorSlashesResponse is the response type for the
- *  Query/ValidatorSlashes RPC method.
+ * Query/ValidatorSlashes RPC method.
  */
 export interface QueryValidatorSlashesResponseSDKType {
   /** slashes defines the slashes the validator received. */
@@ -155,7 +155,7 @@ export interface QueryValidatorSlashesResponseSDKType {
 
 /**
  * QueryDelegationRewardsRequest is the request type for the
- *  Query/DelegationRewards RPC method.
+ * Query/DelegationRewards RPC method.
  */
 export interface QueryDelegationRewardsRequest {
   /** delegator_address defines the delegator address to query for. */
@@ -167,7 +167,7 @@ export interface QueryDelegationRewardsRequest {
 
 /**
  * QueryDelegationRewardsRequest is the request type for the
- *  Query/DelegationRewards RPC method.
+ * Query/DelegationRewards RPC method.
  */
 export interface QueryDelegationRewardsRequestSDKType {
   /** delegator_address defines the delegator address to query for. */
@@ -179,7 +179,7 @@ export interface QueryDelegationRewardsRequestSDKType {
 
 /**
  * QueryDelegationRewardsResponse is the response type for the
- *  Query/DelegationRewards RPC method.
+ * Query/DelegationRewards RPC method.
  */
 export interface QueryDelegationRewardsResponse {
   /** rewards defines the rewards accrued by a delegation. */
@@ -188,7 +188,7 @@ export interface QueryDelegationRewardsResponse {
 
 /**
  * QueryDelegationRewardsResponse is the response type for the
- *  Query/DelegationRewards RPC method.
+ * Query/DelegationRewards RPC method.
  */
 export interface QueryDelegationRewardsResponseSDKType {
   /** rewards defines the rewards accrued by a delegation. */
@@ -197,7 +197,7 @@ export interface QueryDelegationRewardsResponseSDKType {
 
 /**
  * QueryDelegationTotalRewardsRequest is the request type for the
- *  Query/DelegationTotalRewards RPC method.
+ * Query/DelegationTotalRewards RPC method.
  */
 export interface QueryDelegationTotalRewardsRequest {
   /** delegator_address defines the delegator address to query for. */
@@ -206,7 +206,7 @@ export interface QueryDelegationTotalRewardsRequest {
 
 /**
  * QueryDelegationTotalRewardsRequest is the request type for the
- *  Query/DelegationTotalRewards RPC method.
+ * Query/DelegationTotalRewards RPC method.
  */
 export interface QueryDelegationTotalRewardsRequestSDKType {
   /** delegator_address defines the delegator address to query for. */
@@ -215,7 +215,7 @@ export interface QueryDelegationTotalRewardsRequestSDKType {
 
 /**
  * QueryDelegationTotalRewardsResponse is the response type for the
- *  Query/DelegationTotalRewards RPC method.
+ * Query/DelegationTotalRewards RPC method.
  */
 export interface QueryDelegationTotalRewardsResponse {
   /** rewards defines all the rewards accrued by a delegator. */
@@ -227,7 +227,7 @@ export interface QueryDelegationTotalRewardsResponse {
 
 /**
  * QueryDelegationTotalRewardsResponse is the response type for the
- *  Query/DelegationTotalRewards RPC method.
+ * Query/DelegationTotalRewards RPC method.
  */
 export interface QueryDelegationTotalRewardsResponseSDKType {
   /** rewards defines all the rewards accrued by a delegator. */
@@ -239,7 +239,7 @@ export interface QueryDelegationTotalRewardsResponseSDKType {
 
 /**
  * QueryDelegatorValidatorsRequest is the request type for the
- *  Query/DelegatorValidators RPC method.
+ * Query/DelegatorValidators RPC method.
  */
 export interface QueryDelegatorValidatorsRequest {
   /** delegator_address defines the delegator address to query for. */
@@ -248,7 +248,7 @@ export interface QueryDelegatorValidatorsRequest {
 
 /**
  * QueryDelegatorValidatorsRequest is the request type for the
- *  Query/DelegatorValidators RPC method.
+ * Query/DelegatorValidators RPC method.
  */
 export interface QueryDelegatorValidatorsRequestSDKType {
   /** delegator_address defines the delegator address to query for. */
@@ -257,7 +257,7 @@ export interface QueryDelegatorValidatorsRequestSDKType {
 
 /**
  * QueryDelegatorValidatorsResponse is the response type for the
- *  Query/DelegatorValidators RPC method.
+ * Query/DelegatorValidators RPC method.
  */
 export interface QueryDelegatorValidatorsResponse {
   /** validators defines the validators a delegator is delegating for. */
@@ -266,7 +266,7 @@ export interface QueryDelegatorValidatorsResponse {
 
 /**
  * QueryDelegatorValidatorsResponse is the response type for the
- *  Query/DelegatorValidators RPC method.
+ * Query/DelegatorValidators RPC method.
  */
 export interface QueryDelegatorValidatorsResponseSDKType {
   /** validators defines the validators a delegator is delegating for. */
@@ -275,7 +275,7 @@ export interface QueryDelegatorValidatorsResponseSDKType {
 
 /**
  * QueryDelegatorWithdrawAddressRequest is the request type for the
- *  Query/DelegatorWithdrawAddress RPC method.
+ * Query/DelegatorWithdrawAddress RPC method.
  */
 export interface QueryDelegatorWithdrawAddressRequest {
   /** delegator_address defines the delegator address to query for. */
@@ -284,7 +284,7 @@ export interface QueryDelegatorWithdrawAddressRequest {
 
 /**
  * QueryDelegatorWithdrawAddressRequest is the request type for the
- *  Query/DelegatorWithdrawAddress RPC method.
+ * Query/DelegatorWithdrawAddress RPC method.
  */
 export interface QueryDelegatorWithdrawAddressRequestSDKType {
   /** delegator_address defines the delegator address to query for. */
@@ -293,7 +293,7 @@ export interface QueryDelegatorWithdrawAddressRequestSDKType {
 
 /**
  * QueryDelegatorWithdrawAddressResponse is the response type for the
- *  Query/DelegatorWithdrawAddress RPC method.
+ * Query/DelegatorWithdrawAddress RPC method.
  */
 export interface QueryDelegatorWithdrawAddressResponse {
   /** withdraw_address defines the delegator address to query for. */
@@ -302,7 +302,7 @@ export interface QueryDelegatorWithdrawAddressResponse {
 
 /**
  * QueryDelegatorWithdrawAddressResponse is the response type for the
- *  Query/DelegatorWithdrawAddress RPC method.
+ * Query/DelegatorWithdrawAddress RPC method.
  */
 export interface QueryDelegatorWithdrawAddressResponseSDKType {
   /** withdraw_address defines the delegator address to query for. */
@@ -311,19 +311,19 @@ export interface QueryDelegatorWithdrawAddressResponseSDKType {
 
 /**
  * QueryCommunityPoolRequest is the request type for the Query/CommunityPool RPC
- *  method.
+ * method.
  */
 export interface QueryCommunityPoolRequest {}
 
 /**
  * QueryCommunityPoolRequest is the request type for the Query/CommunityPool RPC
- *  method.
+ * method.
  */
 export interface QueryCommunityPoolRequestSDKType {}
 
 /**
  * QueryCommunityPoolResponse is the response type for the Query/CommunityPool
- *  RPC method.
+ * RPC method.
  */
 export interface QueryCommunityPoolResponse {
   /** pool defines community pool's coins. */
@@ -332,7 +332,7 @@ export interface QueryCommunityPoolResponse {
 
 /**
  * QueryCommunityPoolResponse is the response type for the Query/CommunityPool
- *  RPC method.
+ * RPC method.
  */
 export interface QueryCommunityPoolResponseSDKType {
   /** pool defines community pool's coins. */

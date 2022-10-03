@@ -7,7 +7,7 @@ export const protobufPackage = "cosmos.crisis.v1beta1";
 export interface GenesisState {
   /**
    * constant_fee is the fee used to verify the invariant in the crisis
-   *  module.
+   * module.
    */
   constantFee: Coin;
 }
@@ -16,7 +16,7 @@ export interface GenesisState {
 export interface GenesisStateSDKType {
   /**
    * constant_fee is the fee used to verify the invariant in the crisis
-   *  module.
+   * module.
    */
   constant_fee: CoinSDKType;
 }

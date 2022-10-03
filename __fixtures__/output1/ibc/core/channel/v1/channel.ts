@@ -5,7 +5,7 @@ export const protobufPackage = "ibc.core.channel.v1";
 
 /**
  * State defines if a channel is in one of the following states:
- *  CLOSED, INIT, TRYOPEN, OPEN or UNINITIALIZED.
+ * CLOSED, INIT, TRYOPEN, OPEN or UNINITIALIZED.
  */
 export enum State {
   /** STATE_UNINITIALIZED_UNSPECIFIED - Default State */
@@ -33,7 +33,7 @@ export enum State {
 
 /**
  * State defines if a channel is in one of the following states:
- *  CLOSED, INIT, TRYOPEN, OPEN or UNINITIALIZED.
+ * CLOSED, INIT, TRYOPEN, OPEN or UNINITIALIZED.
  */
 export enum StateSDKType {
   /** STATE_UNINITIALIZED_UNSPECIFIED - Default State */
@@ -177,8 +177,8 @@ export function orderToJSON(object: Order): string {
 
 /**
  * Channel defines pipeline for exactly-once packet delivery between specific
- *  modules on separate blockchains, which has at least one end capable of
- *  sending packets and one end capable of receiving packets.
+ * modules on separate blockchains, which has at least one end capable of
+ * sending packets and one end capable of receiving packets.
  */
 export interface Channel {
   /** current state of the channel end */
@@ -192,7 +192,7 @@ export interface Channel {
 
   /**
    * list of connection identifiers, in order, along which packets sent on
-   *  this channel will travel
+   * this channel will travel
    */
   connectionHops: string[];
 
@@ -202,8 +202,8 @@ export interface Channel {
 
 /**
  * Channel defines pipeline for exactly-once packet delivery between specific
- *  modules on separate blockchains, which has at least one end capable of
- *  sending packets and one end capable of receiving packets.
+ * modules on separate blockchains, which has at least one end capable of
+ * sending packets and one end capable of receiving packets.
  */
 export interface ChannelSDKType {
   /** current state of the channel end */
@@ -217,7 +217,7 @@ export interface ChannelSDKType {
 
   /**
    * list of connection identifiers, in order, along which packets sent on
-   *  this channel will travel
+   * this channel will travel
    */
   connection_hops: string[];
 
@@ -227,7 +227,7 @@ export interface ChannelSDKType {
 
 /**
  * IdentifiedChannel defines a channel with additional port and channel
- *  identifier fields.
+ * identifier fields.
  */
 export interface IdentifiedChannel {
   /** current state of the channel end */
@@ -241,7 +241,7 @@ export interface IdentifiedChannel {
 
   /**
    * list of connection identifiers, in order, along which packets sent on
-   *  this channel will travel
+   * this channel will travel
    */
   connectionHops: string[];
 
@@ -257,7 +257,7 @@ export interface IdentifiedChannel {
 
 /**
  * IdentifiedChannel defines a channel with additional port and channel
- *  identifier fields.
+ * identifier fields.
  */
 export interface IdentifiedChannelSDKType {
   /** current state of the channel end */
@@ -271,7 +271,7 @@ export interface IdentifiedChannelSDKType {
 
   /**
    * list of connection identifiers, in order, along which packets sent on
-   *  this channel will travel
+   * this channel will travel
    */
   connection_hops: string[];
 
@@ -307,8 +307,8 @@ export interface CounterpartySDKType {
 export interface Packet {
   /**
    * number corresponds to the order of sends and receives, where a Packet
-   *  with an earlier sequence number must be sent and received before a Packet
-   *  with a later sequence number.
+   * with an earlier sequence number must be sent and received before a Packet
+   * with a later sequence number.
    */
   sequence: Long;
 
@@ -338,8 +338,8 @@ export interface Packet {
 export interface PacketSDKType {
   /**
    * number corresponds to the order of sends and receives, where a Packet
-   *  with an earlier sequence number must be sent and received before a Packet
-   *  with a later sequence number.
+   * with an earlier sequence number must be sent and received before a Packet
+   * with a later sequence number.
    */
   sequence: Long;
 
@@ -367,9 +367,9 @@ export interface PacketSDKType {
 
 /**
  * PacketState defines the generic type necessary to retrieve and store
- *  packet commitments, acknowledgements, and receipts.
- *  Caller is responsible for knowing the context necessary to interpret this
- *  state as a commitment, acknowledgement, or a receipt.
+ * packet commitments, acknowledgements, and receipts.
+ * Caller is responsible for knowing the context necessary to interpret this
+ * state as a commitment, acknowledgement, or a receipt.
  */
 export interface PacketState {
   /** channel port identifier. */
@@ -387,9 +387,9 @@ export interface PacketState {
 
 /**
  * PacketState defines the generic type necessary to retrieve and store
- *  packet commitments, acknowledgements, and receipts.
- *  Caller is responsible for knowing the context necessary to interpret this
- *  state as a commitment, acknowledgement, or a receipt.
+ * packet commitments, acknowledgements, and receipts.
+ * Caller is responsible for knowing the context necessary to interpret this
+ * state as a commitment, acknowledgement, or a receipt.
  */
 export interface PacketStateSDKType {
   /** channel port identifier. */
@@ -407,12 +407,12 @@ export interface PacketStateSDKType {
 
 /**
  * Acknowledgement is the recommended acknowledgement format to be used by
- *  app-specific protocols.
- *  NOTE: The field numbers 21 and 22 were explicitly chosen to avoid accidental
- *  conflicts with other protobuf message formats used for acknowledgements.
- *  The first byte of any message with this format will be the non-ASCII values
- *  `0xaa` (result) or `0xb2` (error). Implemented as defined by ICS:
- *  https://github.com/cosmos/ibc/tree/master/spec/core/ics-004-channel-and-packet-semantics#acknowledgement-envelope
+ * app-specific protocols.
+ * NOTE: The field numbers 21 and 22 were explicitly chosen to avoid accidental
+ * conflicts with other protobuf message formats used for acknowledgements.
+ * The first byte of any message with this format will be the non-ASCII values
+ * `0xaa` (result) or `0xb2` (error). Implemented as defined by ICS:
+ * https://github.com/cosmos/ibc/tree/master/spec/core/ics-004-channel-and-packet-semantics#acknowledgement-envelope
  */
 export interface Acknowledgement {
   result?: Uint8Array;
@@ -421,12 +421,12 @@ export interface Acknowledgement {
 
 /**
  * Acknowledgement is the recommended acknowledgement format to be used by
- *  app-specific protocols.
- *  NOTE: The field numbers 21 and 22 were explicitly chosen to avoid accidental
- *  conflicts with other protobuf message formats used for acknowledgements.
- *  The first byte of any message with this format will be the non-ASCII values
- *  `0xaa` (result) or `0xb2` (error). Implemented as defined by ICS:
- *  https://github.com/cosmos/ibc/tree/master/spec/core/ics-004-channel-and-packet-semantics#acknowledgement-envelope
+ * app-specific protocols.
+ * NOTE: The field numbers 21 and 22 were explicitly chosen to avoid accidental
+ * conflicts with other protobuf message formats used for acknowledgements.
+ * The first byte of any message with this format will be the non-ASCII values
+ * `0xaa` (result) or `0xb2` (error). Implemented as defined by ICS:
+ * https://github.com/cosmos/ibc/tree/master/spec/core/ics-004-channel-and-packet-semantics#acknowledgement-envelope
  */
 export interface AcknowledgementSDKType {
   result?: Uint8Array;

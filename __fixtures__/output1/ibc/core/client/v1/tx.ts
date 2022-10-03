@@ -10,7 +10,7 @@ export interface MsgCreateClient {
 
   /**
    * consensus state associated with the client that corresponds to a given
-   *  height.
+   * height.
    */
   consensusState: Any;
 
@@ -25,7 +25,7 @@ export interface MsgCreateClientSDKType {
 
   /**
    * consensus state associated with the client that corresponds to a given
-   *  height.
+   * height.
    */
   consensus_state: AnySDKType;
 
@@ -41,7 +41,7 @@ export interface MsgCreateClientResponseSDKType {}
 
 /**
  * MsgUpdateClient defines an sdk.Msg to update a IBC client state using
- *  the given header.
+ * the given header.
  */
 export interface MsgUpdateClient {
   /** client unique identifier */
@@ -56,7 +56,7 @@ export interface MsgUpdateClient {
 
 /**
  * MsgUpdateClient defines an sdk.Msg to update a IBC client state using
- *  the given header.
+ * the given header.
  */
 export interface MsgUpdateClientSDKType {
   /** client unique identifier */
@@ -77,7 +77,7 @@ export interface MsgUpdateClientResponseSDKType {}
 
 /**
  * MsgUpgradeClient defines an sdk.Msg to upgrade an IBC client to a new client
- *  state
+ * state
  */
 export interface MsgUpgradeClient {
   /** client unique identifier */
@@ -88,7 +88,7 @@ export interface MsgUpgradeClient {
 
   /**
    * upgraded consensus state, only contains enough information to serve as a
-   *  basis of trust in update logic
+   * basis of trust in update logic
    */
   consensusState: Any;
 
@@ -104,7 +104,7 @@ export interface MsgUpgradeClient {
 
 /**
  * MsgUpgradeClient defines an sdk.Msg to upgrade an IBC client to a new client
- *  state
+ * state
  */
 export interface MsgUpgradeClientSDKType {
   /** client unique identifier */
@@ -115,7 +115,7 @@ export interface MsgUpgradeClientSDKType {
 
   /**
    * upgraded consensus state, only contains enough information to serve as a
-   *  basis of trust in update logic
+   * basis of trust in update logic
    */
   consensus_state: AnySDKType;
 
@@ -137,7 +137,7 @@ export interface MsgUpgradeClientResponseSDKType {}
 
 /**
  * MsgSubmitMisbehaviour defines an sdk.Msg type that submits Evidence for
- *  light client misbehaviour.
+ * light client misbehaviour.
  */
 export interface MsgSubmitMisbehaviour {
   /** client unique identifier */
@@ -152,7 +152,7 @@ export interface MsgSubmitMisbehaviour {
 
 /**
  * MsgSubmitMisbehaviour defines an sdk.Msg type that submits Evidence for
- *  light client misbehaviour.
+ * light client misbehaviour.
  */
 export interface MsgSubmitMisbehaviourSDKType {
   /** client unique identifier */
@@ -167,13 +167,13 @@ export interface MsgSubmitMisbehaviourSDKType {
 
 /**
  * MsgSubmitMisbehaviourResponse defines the Msg/SubmitMisbehaviour response
- *  type.
+ * type.
  */
 export interface MsgSubmitMisbehaviourResponse {}
 
 /**
  * MsgSubmitMisbehaviourResponse defines the Msg/SubmitMisbehaviour response
- *  type.
+ * type.
  */
 export interface MsgSubmitMisbehaviourResponseSDKType {}
 

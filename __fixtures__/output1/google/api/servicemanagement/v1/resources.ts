@@ -409,12 +409,12 @@ export function rollout_RolloutStatusToJSON(object: Rollout_RolloutStatus): stri
 
 /**
  * The full representation of a Service that is managed by
- *  Google Service Management.
+ * Google Service Management.
  */
 export interface ManagedService {
   /**
    * The name of the service. See the [overview](/service-management/overview)
-   *  for naming requirements.
+   * for naming requirements.
    */
   serviceName: string;
 
@@ -424,12 +424,12 @@ export interface ManagedService {
 
 /**
  * The full representation of a Service that is managed by
- *  Google Service Management.
+ * Google Service Management.
  */
 export interface ManagedServiceSDKType {
   /**
    * The name of the service. See the [overview](/service-management/overview)
-   *  for naming requirements.
+   * for naming requirements.
    */
   service_name: string;
 
@@ -441,7 +441,7 @@ export interface ManagedServiceSDKType {
 export interface OperationMetadata {
   /**
    * The full name of the resources that this operation is directly
-   *  associated with.
+   * associated with.
    */
   resourceNames: string[];
 
@@ -459,7 +459,7 @@ export interface OperationMetadata {
 export interface OperationMetadataSDKType {
   /**
    * The full name of the resources that this operation is directly
-   *  associated with.
+   * associated with.
    */
   resource_names: string[];
 
@@ -517,38 +517,38 @@ export interface DiagnosticSDKType {
 
 /**
  * Represents a source file which is used to generate the service configuration
- *  defined by `google.api.Service`.
+ * defined by `google.api.Service`.
  */
 export interface ConfigSource {
   /**
    * A unique ID for a specific instance of this message, typically assigned
-   *  by the client for tracking purpose. If empty, the server may choose to
-   *  generate one instead.
+   * by the client for tracking purpose. If empty, the server may choose to
+   * generate one instead.
    */
   id: string;
 
   /**
    * Set of source configuration files that are used to generate a service
-   *  configuration (`google.api.Service`).
+   * configuration (`google.api.Service`).
    */
   files: ConfigFile[];
 }
 
 /**
  * Represents a source file which is used to generate the service configuration
- *  defined by `google.api.Service`.
+ * defined by `google.api.Service`.
  */
 export interface ConfigSourceSDKType {
   /**
    * A unique ID for a specific instance of this message, typically assigned
-   *  by the client for tracking purpose. If empty, the server may choose to
-   *  generate one instead.
+   * by the client for tracking purpose. If empty, the server may choose to
+   * generate one instead.
    */
   id: string;
 
   /**
    * Set of source configuration files that are used to generate a service
-   *  configuration (`google.api.Service`).
+   * configuration (`google.api.Service`).
    */
   files: ConfigFileSDKType[];
 }
@@ -581,7 +581,7 @@ export interface ConfigFileSDKType {
 export interface ConfigRef {
   /**
    * Resource name of a service config. It must have the following
-   *  format: "services/{service name}/configs/{config id}".
+   * format: "services/{service name}/configs/{config id}".
    */
   name: string;
 }
@@ -590,60 +590,60 @@ export interface ConfigRef {
 export interface ConfigRefSDKType {
   /**
    * Resource name of a service config. It must have the following
-   *  format: "services/{service name}/configs/{config id}".
+   * format: "services/{service name}/configs/{config id}".
    */
   name: string;
 }
 
 /**
  * Change report associated with a particular service configuration.
- * 
- *  It contains a list of ConfigChanges based on the comparison between
- *  two service configurations.
+ *
+ * It contains a list of ConfigChanges based on the comparison between
+ * two service configurations.
  */
 export interface ChangeReport {
   /**
    * List of changes between two service configurations.
-   *  The changes will be alphabetically sorted based on the identifier
-   *  of each change.
-   *  A ConfigChange identifier is a dot separated path to the configuration.
-   *  Example: visibility.rules[selector='LibraryService.CreateBook'].restriction
+   * The changes will be alphabetically sorted based on the identifier
+   * of each change.
+   * A ConfigChange identifier is a dot separated path to the configuration.
+   * Example: visibility.rules[selector='LibraryService.CreateBook'].restriction
    */
   configChanges: ConfigChange[];
 }
 
 /**
  * Change report associated with a particular service configuration.
- * 
- *  It contains a list of ConfigChanges based on the comparison between
- *  two service configurations.
+ *
+ * It contains a list of ConfigChanges based on the comparison between
+ * two service configurations.
  */
 export interface ChangeReportSDKType {
   /**
    * List of changes between two service configurations.
-   *  The changes will be alphabetically sorted based on the identifier
-   *  of each change.
-   *  A ConfigChange identifier is a dot separated path to the configuration.
-   *  Example: visibility.rules[selector='LibraryService.CreateBook'].restriction
+   * The changes will be alphabetically sorted based on the identifier
+   * of each change.
+   * A ConfigChange identifier is a dot separated path to the configuration.
+   * Example: visibility.rules[selector='LibraryService.CreateBook'].restriction
    */
   config_changes: ConfigChangeSDKType[];
 }
 
 /**
  * A rollout resource that defines how service configuration versions are pushed
- *  to control plane systems. Typically, you create a new version of the
- *  service config, and then create a Rollout to push the service config.
+ * to control plane systems. Typically, you create a new version of the
+ * service config, and then create a Rollout to push the service config.
  */
 export interface Rollout {
   /**
    * Optional. Unique identifier of this Rollout. Must be no longer than 63 characters
-   *  and only lower case letters, digits, '.', '_' and '-' are allowed.
-   * 
-   *  If not specified by client, the server will generate one. The generated id
-   *  will have the form of <date><revision number>, where "date" is the create
-   *  date in ISO 8601 format.  "revision number" is a monotonically increasing
-   *  positive number that is reset every day for each service.
-   *  An example of the generated rollout_id is '2016-02-16r1'
+   * and only lower case letters, digits, '.', '_' and '-' are allowed.
+   *
+   * If not specified by client, the server will generate one. The generated id
+   * will have the form of <date><revision number>, where "date" is the create
+   * date in ISO 8601 format.  "revision number" is a monotonically increasing
+   * positive number that is reset every day for each service.
+   * An example of the generated rollout_id is '2016-02-16r1'
    */
   rolloutId: string;
 
@@ -655,20 +655,20 @@ export interface Rollout {
 
   /**
    * The status of this rollout. Readonly. In case of a failed rollout,
-   *  the system will automatically rollback to the current Rollout
-   *  version. Readonly.
+   * the system will automatically rollback to the current Rollout
+   * version. Readonly.
    */
   status: Rollout_RolloutStatus;
 
   /**
    * Google Service Control selects service configurations based on
-   *  traffic percentage.
+   * traffic percentage.
    */
   trafficPercentStrategy?: Rollout_TrafficPercentStrategy;
 
   /**
    * The strategy associated with a rollout to delete a `ManagedService`.
-   *  Readonly.
+   * Readonly.
    */
   deleteServiceStrategy?: Rollout_DeleteServiceStrategy;
 
@@ -678,19 +678,19 @@ export interface Rollout {
 
 /**
  * A rollout resource that defines how service configuration versions are pushed
- *  to control plane systems. Typically, you create a new version of the
- *  service config, and then create a Rollout to push the service config.
+ * to control plane systems. Typically, you create a new version of the
+ * service config, and then create a Rollout to push the service config.
  */
 export interface RolloutSDKType {
   /**
    * Optional. Unique identifier of this Rollout. Must be no longer than 63 characters
-   *  and only lower case letters, digits, '.', '_' and '-' are allowed.
-   * 
-   *  If not specified by client, the server will generate one. The generated id
-   *  will have the form of <date><revision number>, where "date" is the create
-   *  date in ISO 8601 format.  "revision number" is a monotonically increasing
-   *  positive number that is reset every day for each service.
-   *  An example of the generated rollout_id is '2016-02-16r1'
+   * and only lower case letters, digits, '.', '_' and '-' are allowed.
+   *
+   * If not specified by client, the server will generate one. The generated id
+   * will have the form of <date><revision number>, where "date" is the create
+   * date in ISO 8601 format.  "revision number" is a monotonically increasing
+   * positive number that is reset every day for each service.
+   * An example of the generated rollout_id is '2016-02-16r1'
    */
   rollout_id: string;
 
@@ -702,20 +702,20 @@ export interface RolloutSDKType {
 
   /**
    * The status of this rollout. Readonly. In case of a failed rollout,
-   *  the system will automatically rollback to the current Rollout
-   *  version. Readonly.
+   * the system will automatically rollback to the current Rollout
+   * version. Readonly.
    */
   status: Rollout_RolloutStatusSDKType;
 
   /**
    * Google Service Control selects service configurations based on
-   *  traffic percentage.
+   * traffic percentage.
    */
   traffic_percent_strategy?: Rollout_TrafficPercentStrategySDKType;
 
   /**
    * The strategy associated with a rollout to delete a `ManagedService`.
-   *  Readonly.
+   * Readonly.
    */
   delete_service_strategy?: Rollout_DeleteServiceStrategySDKType;
 
@@ -733,41 +733,41 @@ export interface Rollout_TrafficPercentStrategy_PercentagesEntrySDKType {
 
 /**
  * Strategy that specifies how clients of Google Service Controller want to
- *  send traffic to use different config versions. This is generally
- *  used by API proxy to split traffic based on your configured percentage for
- *  each config version.
- * 
- *  One example of how to gradually rollout a new service configuration using
- *  this
- *  strategy:
- *  Day 1
- * 
- *      Rollout {
- *        id: "example.googleapis.com/rollout_20160206"
- *        traffic_percent_strategy {
- *          percentages: {
- *            "example.googleapis.com/20160201": 70.00
- *            "example.googleapis.com/20160206": 30.00
- *          }
- *        }
- *      }
- * 
- *  Day 2
- * 
- *      Rollout {
- *        id: "example.googleapis.com/rollout_20160207"
- *        traffic_percent_strategy: {
- *          percentages: {
- *            "example.googleapis.com/20160206": 100.00
- *          }
- *        }
- *      }
+ * send traffic to use different config versions. This is generally
+ * used by API proxy to split traffic based on your configured percentage for
+ * each config version.
+ *
+ * One example of how to gradually rollout a new service configuration using
+ * this
+ * strategy:
+ * Day 1
+ *
+ *     Rollout {
+ *       id: "example.googleapis.com/rollout_20160206"
+ *       traffic_percent_strategy {
+ *         percentages: {
+ *           "example.googleapis.com/20160201": 70.00
+ *           "example.googleapis.com/20160206": 30.00
+ *         }
+ *       }
+ *     }
+ *
+ * Day 2
+ *
+ *     Rollout {
+ *       id: "example.googleapis.com/rollout_20160207"
+ *       traffic_percent_strategy: {
+ *         percentages: {
+ *           "example.googleapis.com/20160206": 100.00
+ *         }
+ *       }
+ *     }
  */
 export interface Rollout_TrafficPercentStrategy {
   /**
    * Maps service configuration IDs to their corresponding traffic percentage.
-   *  Key is the service configuration ID, Value is the traffic percentage
-   *  which must be greater than 0.0 and the sum must equal to 100.0.
+   * Key is the service configuration ID, Value is the traffic percentage
+   * which must be greater than 0.0 and the sum must equal to 100.0.
    */
   percentages: {
     [key: string]: number;
@@ -776,41 +776,41 @@ export interface Rollout_TrafficPercentStrategy {
 
 /**
  * Strategy that specifies how clients of Google Service Controller want to
- *  send traffic to use different config versions. This is generally
- *  used by API proxy to split traffic based on your configured percentage for
- *  each config version.
- * 
- *  One example of how to gradually rollout a new service configuration using
- *  this
- *  strategy:
- *  Day 1
- * 
- *      Rollout {
- *        id: "example.googleapis.com/rollout_20160206"
- *        traffic_percent_strategy {
- *          percentages: {
- *            "example.googleapis.com/20160201": 70.00
- *            "example.googleapis.com/20160206": 30.00
- *          }
- *        }
- *      }
- * 
- *  Day 2
- * 
- *      Rollout {
- *        id: "example.googleapis.com/rollout_20160207"
- *        traffic_percent_strategy: {
- *          percentages: {
- *            "example.googleapis.com/20160206": 100.00
- *          }
- *        }
- *      }
+ * send traffic to use different config versions. This is generally
+ * used by API proxy to split traffic based on your configured percentage for
+ * each config version.
+ *
+ * One example of how to gradually rollout a new service configuration using
+ * this
+ * strategy:
+ * Day 1
+ *
+ *     Rollout {
+ *       id: "example.googleapis.com/rollout_20160206"
+ *       traffic_percent_strategy {
+ *         percentages: {
+ *           "example.googleapis.com/20160201": 70.00
+ *           "example.googleapis.com/20160206": 30.00
+ *         }
+ *       }
+ *     }
+ *
+ * Day 2
+ *
+ *     Rollout {
+ *       id: "example.googleapis.com/rollout_20160207"
+ *       traffic_percent_strategy: {
+ *         percentages: {
+ *           "example.googleapis.com/20160206": 100.00
+ *         }
+ *       }
+ *     }
  */
 export interface Rollout_TrafficPercentStrategySDKType {
   /**
    * Maps service configuration IDs to their corresponding traffic percentage.
-   *  Key is the service configuration ID, Value is the traffic percentage
-   *  which must be greater than 0.0 and the sum must equal to 100.0.
+   * Key is the service configuration ID, Value is the traffic percentage
+   * which must be greater than 0.0 and the sum must equal to 100.0.
    */
   percentages: {
     [key: string]: number;
@@ -819,13 +819,13 @@ export interface Rollout_TrafficPercentStrategySDKType {
 
 /**
  * Strategy used to delete a service. This strategy is a placeholder only
- *  used by the system generated rollout to delete a service.
+ * used by the system generated rollout to delete a service.
  */
 export interface Rollout_DeleteServiceStrategy {}
 
 /**
  * Strategy used to delete a service. This strategy is a placeholder only
- *  used by the system generated rollout to delete a service.
+ * used by the system generated rollout to delete a service.
  */
 export interface Rollout_DeleteServiceStrategySDKType {}
 

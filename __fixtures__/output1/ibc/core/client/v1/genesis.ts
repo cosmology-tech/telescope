@@ -43,7 +43,7 @@ export interface GenesisStateSDKType {
 
 /**
  * GenesisMetadata defines the genesis type for metadata that clients may return
- *  with ExportMetadata
+ * with ExportMetadata
  */
 export interface GenesisMetadata {
   /** store key of metadata without clientID-prefix */
@@ -55,7 +55,7 @@ export interface GenesisMetadata {
 
 /**
  * GenesisMetadata defines the genesis type for metadata that clients may return
- *  with ExportMetadata
+ * with ExportMetadata
  */
 export interface GenesisMetadataSDKType {
   /** store key of metadata without clientID-prefix */
@@ -67,7 +67,7 @@ export interface GenesisMetadataSDKType {
 
 /**
  * IdentifiedGenesisMetadata has the client metadata with the corresponding
- *  client id.
+ * client id.
  */
 export interface IdentifiedGenesisMetadata {
   clientId: string;
@@ -76,7 +76,7 @@ export interface IdentifiedGenesisMetadata {
 
 /**
  * IdentifiedGenesisMetadata has the client metadata with the corresponding
- *  client id.
+ * client id.
  */
 export interface IdentifiedGenesisMetadataSDKType {
   client_id: string;

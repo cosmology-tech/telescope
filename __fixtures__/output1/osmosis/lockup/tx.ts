@@ -55,7 +55,7 @@ export interface MsgBeginUnlockingResponseSDKType {
 
 /**
  * MsgExtendLockup extends the existing lockup's duration.
- *  The new duration is longer than the original.
+ * The new duration is longer than the original.
  */
 export interface MsgExtendLockup {
   owner: string;
@@ -63,14 +63,14 @@ export interface MsgExtendLockup {
 
   /**
    * duration to be set. fails if lower than the current duration, or is
-   *  unlocking
+   * unlocking
    */
   duration: Duration;
 }
 
 /**
  * MsgExtendLockup extends the existing lockup's duration.
- *  The new duration is longer than the original.
+ * The new duration is longer than the original.
  */
 export interface MsgExtendLockupSDKType {
   owner: string;
@@ -78,7 +78,7 @@ export interface MsgExtendLockupSDKType {
 
   /**
    * duration to be set. fails if lower than the current duration, or is
-   *  unlocking
+   * unlocking
    */
   duration: DurationSDKType;
 }

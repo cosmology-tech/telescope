@@ -6,7 +6,7 @@ export const protobufPackage = "cosmos.vesting.v1beta1";
 
 /**
  * MsgCreateVestingAccount defines a message that enables creating a vesting
- *  account.
+ * account.
  */
 export interface MsgCreateVestingAccount {
   fromAddress: string;
@@ -18,7 +18,7 @@ export interface MsgCreateVestingAccount {
 
 /**
  * MsgCreateVestingAccount defines a message that enables creating a vesting
- *  account.
+ * account.
  */
 export interface MsgCreateVestingAccountSDKType {
   from_address: string;
@@ -36,7 +36,7 @@ export interface MsgCreateVestingAccountResponseSDKType {}
 
 /**
  * MsgCreatePermanentLockedAccount defines a message that enables creating a permanent
- *  locked account.
+ * locked account.
  */
 export interface MsgCreatePermanentLockedAccount {
   fromAddress: string;
@@ -46,7 +46,7 @@ export interface MsgCreatePermanentLockedAccount {
 
 /**
  * MsgCreatePermanentLockedAccount defines a message that enables creating a permanent
- *  locked account.
+ * locked account.
  */
 export interface MsgCreatePermanentLockedAccountSDKType {
   from_address: string;
@@ -62,7 +62,7 @@ export interface MsgCreatePermanentLockedAccountResponseSDKType {}
 
 /**
  * MsgCreateVestingAccount defines a message that enables creating a vesting
- *  account.
+ * account.
  */
 export interface MsgCreatePeriodicVestingAccount {
   fromAddress: string;
@@ -73,7 +73,7 @@ export interface MsgCreatePeriodicVestingAccount {
 
 /**
  * MsgCreateVestingAccount defines a message that enables creating a vesting
- *  account.
+ * account.
  */
 export interface MsgCreatePeriodicVestingAccountSDKType {
   from_address: string;
@@ -84,13 +84,13 @@ export interface MsgCreatePeriodicVestingAccountSDKType {
 
 /**
  * MsgCreateVestingAccountResponse defines the Msg/CreatePeriodicVestingAccount
- *  response type.
+ * response type.
  */
 export interface MsgCreatePeriodicVestingAccountResponse {}
 
 /**
  * MsgCreateVestingAccountResponse defines the Msg/CreatePeriodicVestingAccount
- *  response type.
+ * response type.
  */
 export interface MsgCreatePeriodicVestingAccountResponseSDKType {}
 

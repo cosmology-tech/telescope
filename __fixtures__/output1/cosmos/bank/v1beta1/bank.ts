@@ -17,7 +17,7 @@ export interface ParamsSDKType {
 
 /**
  * SendEnabled maps coin denom to a send_enabled status (whether a denom is
- *  sendable).
+ * sendable).
  */
 export interface SendEnabled {
   denom: string;
@@ -26,7 +26,7 @@ export interface SendEnabled {
 
 /**
  * SendEnabled maps coin denom to a send_enabled status (whether a denom is
- *  sendable).
+ * sendable).
  */
 export interface SendEnabledSDKType {
   denom: string;
@@ -59,8 +59,8 @@ export interface OutputSDKType {
 
 /**
  * Supply represents a struct that passively keeps track of the total supply
- *  amounts in the network.
- *  This message is deprecated now that supply is indexed by denom.
+ * amounts in the network.
+ * This message is deprecated now that supply is indexed by denom.
  */
 
 /** @deprecated */
@@ -70,8 +70,8 @@ export interface Supply {
 
 /**
  * Supply represents a struct that passively keeps track of the total supply
- *  amounts in the network.
- *  This message is deprecated now that supply is indexed by denom.
+ * amounts in the network.
+ * This message is deprecated now that supply is indexed by denom.
  */
 
 /** @deprecated */
@@ -81,7 +81,7 @@ export interface SupplySDKType {
 
 /**
  * DenomUnit represents a struct that describes a given
- *  denomination unit of the basic token.
+ * denomination unit of the basic token.
  */
 export interface DenomUnit {
   /** denom represents the string name of the given denom unit (e.g uatom). */
@@ -89,10 +89,10 @@ export interface DenomUnit {
 
   /**
    * exponent represents power of 10 exponent that one must
-   *  raise the base_denom to in order to equal the given DenomUnit's denom
-   *  1 denom = 10^exponent base_denom
-   *  (e.g. with a base_denom of uatom, one can create a DenomUnit of 'atom' with
-   *  exponent = 6, thus: 1 atom = 10^6 uatom).
+   * raise the base_denom to in order to equal the given DenomUnit's denom
+   * 1 denom = 10^exponent base_denom
+   * (e.g. with a base_denom of uatom, one can create a DenomUnit of 'atom' with
+   * exponent = 6, thus: 1 atom = 10^6 uatom).
    */
   exponent: number;
 
@@ -102,7 +102,7 @@ export interface DenomUnit {
 
 /**
  * DenomUnit represents a struct that describes a given
- *  denomination unit of the basic token.
+ * denomination unit of the basic token.
  */
 export interface DenomUnitSDKType {
   /** denom represents the string name of the given denom unit (e.g uatom). */
@@ -110,10 +110,10 @@ export interface DenomUnitSDKType {
 
   /**
    * exponent represents power of 10 exponent that one must
-   *  raise the base_denom to in order to equal the given DenomUnit's denom
-   *  1 denom = 10^exponent base_denom
-   *  (e.g. with a base_denom of uatom, one can create a DenomUnit of 'atom' with
-   *  exponent = 6, thus: 1 atom = 10^6 uatom).
+   * raise the base_denom to in order to equal the given DenomUnit's denom
+   * 1 denom = 10^exponent base_denom
+   * (e.g. with a base_denom of uatom, one can create a DenomUnit of 'atom' with
+   * exponent = 6, thus: 1 atom = 10^6 uatom).
    */
   exponent: number;
 
@@ -123,7 +123,7 @@ export interface DenomUnitSDKType {
 
 /**
  * Metadata represents a struct that describes
- *  a basic token.
+ * a basic token.
  */
 export interface Metadata {
   description: string;
@@ -136,44 +136,44 @@ export interface Metadata {
 
   /**
    * display indicates the suggested denom that should be
-   *  displayed in clients.
+   * displayed in clients.
    */
   display: string;
 
   /**
    * name defines the name of the token (eg: Cosmos Atom)
-   * 
-   *  Since: cosmos-sdk 0.43
+   *
+   * Since: cosmos-sdk 0.43
    */
   name: string;
 
   /**
    * symbol is the token symbol usually shown on exchanges (eg: ATOM). This can
-   *  be the same as the display.
-   * 
-   *  Since: cosmos-sdk 0.43
+   * be the same as the display.
+   *
+   * Since: cosmos-sdk 0.43
    */
   symbol: string;
 
   /**
    * URI to a document (on or off-chain) that contains additional information. Optional.
-   * 
-   *  Since: cosmos-sdk 0.46
+   *
+   * Since: cosmos-sdk 0.46
    */
   uri: string;
 
   /**
    * URIHash is a sha256 hash of a document pointed by URI. It's used to verify that
-   *  the document didn't change. Optional.
-   * 
-   *  Since: cosmos-sdk 0.46
+   * the document didn't change. Optional.
+   *
+   * Since: cosmos-sdk 0.46
    */
   uriHash: string;
 }
 
 /**
  * Metadata represents a struct that describes
- *  a basic token.
+ * a basic token.
  */
 export interface MetadataSDKType {
   description: string;
@@ -186,37 +186,37 @@ export interface MetadataSDKType {
 
   /**
    * display indicates the suggested denom that should be
-   *  displayed in clients.
+   * displayed in clients.
    */
   display: string;
 
   /**
    * name defines the name of the token (eg: Cosmos Atom)
-   * 
-   *  Since: cosmos-sdk 0.43
+   *
+   * Since: cosmos-sdk 0.43
    */
   name: string;
 
   /**
    * symbol is the token symbol usually shown on exchanges (eg: ATOM). This can
-   *  be the same as the display.
-   * 
-   *  Since: cosmos-sdk 0.43
+   * be the same as the display.
+   *
+   * Since: cosmos-sdk 0.43
    */
   symbol: string;
 
   /**
    * URI to a document (on or off-chain) that contains additional information. Optional.
-   * 
-   *  Since: cosmos-sdk 0.46
+   *
+   * Since: cosmos-sdk 0.46
    */
   uri: string;
 
   /**
    * URIHash is a sha256 hash of a document pointed by URI. It's used to verify that
-   *  the document didn't change. Optional.
-   * 
-   *  Since: cosmos-sdk 0.46
+   * the document didn't change. Optional.
+   *
+   * Since: cosmos-sdk 0.46
    */
   uri_hash: string;
 }

@@ -708,7 +708,7 @@ export interface ResponseApplySnapshotChunkSDKType {
 
 /**
  * ConsensusParams contains all consensus-relevant parameters
- *  that can be adjusted by the abci app
+ * that can be adjusted by the abci app
  */
 export interface ConsensusParams {
   block: BlockParams;
@@ -719,7 +719,7 @@ export interface ConsensusParams {
 
 /**
  * ConsensusParams contains all consensus-relevant parameters
- *  that can be adjusted by the abci app
+ * that can be adjusted by the abci app
  */
 export interface ConsensusParamsSDKType {
   block: BlockParamsSDKType;
@@ -756,8 +756,8 @@ export interface LastCommitInfoSDKType {
 
 /**
  * Event allows application developers to attach additional information to
- *  ResponseBeginBlock, ResponseEndBlock, ResponseCheckTx and ResponseDeliverTx.
- *  Later, transactions may be queried using these events.
+ * ResponseBeginBlock, ResponseEndBlock, ResponseCheckTx and ResponseDeliverTx.
+ * Later, transactions may be queried using these events.
  */
 export interface Event {
   type: string;
@@ -766,8 +766,8 @@ export interface Event {
 
 /**
  * Event allows application developers to attach additional information to
- *  ResponseBeginBlock, ResponseEndBlock, ResponseCheckTx and ResponseDeliverTx.
- *  Later, transactions may be queried using these events.
+ * ResponseBeginBlock, ResponseEndBlock, ResponseCheckTx and ResponseDeliverTx.
+ * Later, transactions may be queried using these events.
  */
 export interface EventSDKType {
   type: string;
@@ -794,8 +794,8 @@ export interface EventAttributeSDKType {
 
 /**
  * TxResult contains results of executing the transaction.
- * 
- *  One usage is indexing transaction results.
+ *
+ * One usage is indexing transaction results.
  */
 export interface TxResult {
   height: Long;
@@ -806,8 +806,8 @@ export interface TxResult {
 
 /**
  * TxResult contains results of executing the transaction.
- * 
- *  One usage is indexing transaction results.
+ *
+ * One usage is indexing transaction results.
  */
 export interface TxResultSDKType {
   height: Long;
@@ -820,7 +820,7 @@ export interface TxResultSDKType {
 export interface Validator {
   /**
    * The first 20 bytes of SHA256(public key)
-   *  PubKey pub_key = 2 [(gogoproto.nullable)=false];
+   * PubKey pub_key = 2 [(gogoproto.nullable)=false];
    */
   address: Uint8Array;
 
@@ -832,7 +832,7 @@ export interface Validator {
 export interface ValidatorSDKType {
   /**
    * The first 20 bytes of SHA256(public key)
-   *  PubKey pub_key = 2 [(gogoproto.nullable)=false];
+   * PubKey pub_key = 2 [(gogoproto.nullable)=false];
    */
   address: Uint8Array;
 
@@ -877,8 +877,8 @@ export interface Evidence {
 
   /**
    * Total voting power of the validator set in case the ABCI application does
-   *  not store historical validators.
-   *  https://github.com/tendermint/tendermint/issues/4581
+   * not store historical validators.
+   * https://github.com/tendermint/tendermint/issues/4581
    */
   totalVotingPower: Long;
 }
@@ -896,8 +896,8 @@ export interface EvidenceSDKType {
 
   /**
    * Total voting power of the validator set in case the ABCI application does
-   *  not store historical validators.
-   *  https://github.com/tendermint/tendermint/issues/4581
+   * not store historical validators.
+   * https://github.com/tendermint/tendermint/issues/4581
    */
   total_voting_power: Long;
 }

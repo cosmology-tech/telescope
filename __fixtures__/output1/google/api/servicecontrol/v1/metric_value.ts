@@ -16,9 +16,9 @@ export interface MetricValue_LabelsEntrySDKType {
 export interface MetricValue {
   /**
    * The labels describing the metric value.
-   *  See comments on [google.api.servicecontrol.v1.Operation.labels][google.api.servicecontrol.v1.Operation.labels] for
-   *  the overriding relationship.
-   *  Note that this map must not contain monitored resource labels.
+   * See comments on [google.api.servicecontrol.v1.Operation.labels][google.api.servicecontrol.v1.Operation.labels] for
+   * the overriding relationship.
+   * Note that this map must not contain monitored resource labels.
    */
   labels: {
     [key: string]: string;
@@ -26,17 +26,17 @@ export interface MetricValue {
 
   /**
    * The start of the time period over which this metric value's measurement
-   *  applies. The time period has different semantics for different metric
-   *  types (cumulative, delta, and gauge). See the metric definition
-   *  documentation in the service configuration for details. If not specified,
-   *  [google.api.servicecontrol.v1.Operation.start_time][google.api.servicecontrol.v1.Operation.start_time] will be used.
+   * applies. The time period has different semantics for different metric
+   * types (cumulative, delta, and gauge). See the metric definition
+   * documentation in the service configuration for details. If not specified,
+   * [google.api.servicecontrol.v1.Operation.start_time][google.api.servicecontrol.v1.Operation.start_time] will be used.
    */
   startTime: Date;
 
   /**
    * The end of the time period over which this metric value's measurement
-   *  applies.  If not specified,
-   *  [google.api.servicecontrol.v1.Operation.end_time][google.api.servicecontrol.v1.Operation.end_time] will be used.
+   * applies.  If not specified,
+   * [google.api.servicecontrol.v1.Operation.end_time][google.api.servicecontrol.v1.Operation.end_time] will be used.
    */
   endTime: Date;
 
@@ -60,9 +60,9 @@ export interface MetricValue {
 export interface MetricValueSDKType {
   /**
    * The labels describing the metric value.
-   *  See comments on [google.api.servicecontrol.v1.Operation.labels][google.api.servicecontrol.v1.Operation.labels] for
-   *  the overriding relationship.
-   *  Note that this map must not contain monitored resource labels.
+   * See comments on [google.api.servicecontrol.v1.Operation.labels][google.api.servicecontrol.v1.Operation.labels] for
+   * the overriding relationship.
+   * Note that this map must not contain monitored resource labels.
    */
   labels: {
     [key: string]: string;
@@ -70,17 +70,17 @@ export interface MetricValueSDKType {
 
   /**
    * The start of the time period over which this metric value's measurement
-   *  applies. The time period has different semantics for different metric
-   *  types (cumulative, delta, and gauge). See the metric definition
-   *  documentation in the service configuration for details. If not specified,
-   *  [google.api.servicecontrol.v1.Operation.start_time][google.api.servicecontrol.v1.Operation.start_time] will be used.
+   * applies. The time period has different semantics for different metric
+   * types (cumulative, delta, and gauge). See the metric definition
+   * documentation in the service configuration for details. If not specified,
+   * [google.api.servicecontrol.v1.Operation.start_time][google.api.servicecontrol.v1.Operation.start_time] will be used.
    */
   start_time: Date;
 
   /**
    * The end of the time period over which this metric value's measurement
-   *  applies.  If not specified,
-   *  [google.api.servicecontrol.v1.Operation.end_time][google.api.servicecontrol.v1.Operation.end_time] will be used.
+   * applies.  If not specified,
+   * [google.api.servicecontrol.v1.Operation.end_time][google.api.servicecontrol.v1.Operation.end_time] will be used.
    */
   end_time: Date;
 
@@ -102,8 +102,8 @@ export interface MetricValueSDKType {
 
 /**
  * Represents a set of metric values in the same metric.
- *  Each metric value in the set should have a unique combination of start time,
- *  end time, and label values.
+ * Each metric value in the set should have a unique combination of start time,
+ * end time, and label values.
  */
 export interface MetricValueSet {
   /** The metric name defined in the service configuration. */
@@ -115,8 +115,8 @@ export interface MetricValueSet {
 
 /**
  * Represents a set of metric values in the same metric.
- *  Each metric value in the set should have a unique combination of start time,
- *  end time, and label values.
+ * Each metric value in the set should have a unique combination of start time,
+ * end time, and label values.
  */
 export interface MetricValueSetSDKType {
   /** The metric name defined in the service configuration. */

@@ -11,19 +11,19 @@ export interface Gauge {
 
   /**
    * flag to show if it's perpetual or multi-epoch
-   *  distribution incentives by third party
+   * distribution incentives by third party
    */
   isPerpetual: boolean;
 
   /**
    * Rewards are distributed to lockups that are are returned by at least one of
-   *  these queries
+   * these queries
    */
   distributeTo: QueryCondition;
 
   /**
    * total amount of Coins that has been in the gauge.
-   *  can distribute multiple coins
+   * can distribute multiple coins
    */
   coins: Coin[];
 
@@ -45,19 +45,19 @@ export interface GaugeSDKType {
 
   /**
    * flag to show if it's perpetual or multi-epoch
-   *  distribution incentives by third party
+   * distribution incentives by third party
    */
   is_perpetual: boolean;
 
   /**
    * Rewards are distributed to lockups that are are returned by at least one of
-   *  these queries
+   * these queries
    */
   distribute_to: QueryConditionSDKType;
 
   /**
    * total amount of Coins that has been in the gauge.
-   *  can distribute multiple coins
+   * can distribute multiple coins
    */
   coins: CoinSDKType[];
 

@@ -227,15 +227,15 @@ export interface ContractInfo {
 
   /**
    * Created Tx position when the contract was instantiated.
-   *  This data should kept internal and not be exposed via query results. Just
-   *  use for sorting
+   * This data should kept internal and not be exposed via query results. Just
+   * use for sorting
    */
   created: AbsoluteTxPosition;
   ibcPortId: string;
 
   /**
    * Extension is an extension point to store custom metadata within the
-   *  persistence model.
+   * persistence model.
    */
   extension: Any;
 }
@@ -256,15 +256,15 @@ export interface ContractInfoSDKType {
 
   /**
    * Created Tx position when the contract was instantiated.
-   *  This data should kept internal and not be exposed via query results. Just
-   *  use for sorting
+   * This data should kept internal and not be exposed via query results. Just
+   * use for sorting
    */
   created: AbsoluteTxPositionSDKType;
   ibc_port_id: string;
 
   /**
    * Extension is an extension point to store custom metadata within the
-   *  persistence model.
+   * persistence model.
    */
   extension: AnySDKType;
 }
@@ -295,7 +295,7 @@ export interface ContractCodeHistoryEntrySDKType {
 
 /**
  * AbsoluteTxPosition is a unique transaction position that allows for global
- *  ordering of transactions.
+ * ordering of transactions.
  */
 export interface AbsoluteTxPosition {
   /** BlockHeight is the block the contract was created at */
@@ -303,14 +303,14 @@ export interface AbsoluteTxPosition {
 
   /**
    * TxIndex is a monotonic counter within the block (actual transaction index,
-   *  or gas consumed)
+   * or gas consumed)
    */
   txIndex: Long;
 }
 
 /**
  * AbsoluteTxPosition is a unique transaction position that allows for global
- *  ordering of transactions.
+ * ordering of transactions.
  */
 export interface AbsoluteTxPositionSDKType {
   /** BlockHeight is the block the contract was created at */
@@ -318,7 +318,7 @@ export interface AbsoluteTxPositionSDKType {
 
   /**
    * TxIndex is a monotonic counter within the block (actual transaction index,
-   *  or gas consumed)
+   * or gas consumed)
    */
   tx_index: Long;
 }

@@ -114,7 +114,7 @@ export interface MsgUpdateGroupMembers {
 
   /**
    * member_updates is the list of members to update,
-   *  set weight to 0 to remove a member.
+   * set weight to 0 to remove a member.
    */
   memberUpdates: Member[];
 }
@@ -129,7 +129,7 @@ export interface MsgUpdateGroupMembersSDKType {
 
   /**
    * member_updates is the list of members to update,
-   *  set weight to 0 to remove a member.
+   * set weight to 0 to remove a member.
    */
   member_updates: MemberSDKType[];
 }
@@ -399,7 +399,7 @@ export interface MsgSubmitProposal {
 
   /**
    * proposers are the account addresses of the proposers.
-   *  Proposers signatures will be counted as yes votes.
+   * Proposers signatures will be counted as yes votes.
    */
   proposers: string[];
 
@@ -411,8 +411,8 @@ export interface MsgSubmitProposal {
 
   /**
    * exec defines the mode of execution of the proposal,
-   *  whether it should be executed immediately on creation or not.
-   *  If so, proposers signatures are considered as Yes votes.
+   * whether it should be executed immediately on creation or not.
+   * If so, proposers signatures are considered as Yes votes.
    */
   exec: Exec;
 }
@@ -424,7 +424,7 @@ export interface MsgSubmitProposalSDKType {
 
   /**
    * proposers are the account addresses of the proposers.
-   *  Proposers signatures will be counted as yes votes.
+   * Proposers signatures will be counted as yes votes.
    */
   proposers: string[];
 
@@ -436,8 +436,8 @@ export interface MsgSubmitProposalSDKType {
 
   /**
    * exec defines the mode of execution of the proposal,
-   *  whether it should be executed immediately on creation or not.
-   *  If so, proposers signatures are considered as Yes votes.
+   * whether it should be executed immediately on creation or not.
+   * If so, proposers signatures are considered as Yes votes.
    */
   exec: ExecSDKType;
 }
@@ -494,7 +494,7 @@ export interface MsgVote {
 
   /**
    * exec defines whether the proposal should be executed
-   *  immediately after voting or not.
+   * immediately after voting or not.
    */
   exec: Exec;
 }
@@ -515,7 +515,7 @@ export interface MsgVoteSDKType {
 
   /**
    * exec defines whether the proposal should be executed
-   *  immediately after voting or not.
+   * immediately after voting or not.
    */
   exec: ExecSDKType;
 }

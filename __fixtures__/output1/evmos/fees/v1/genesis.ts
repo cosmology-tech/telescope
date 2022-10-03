@@ -28,19 +28,19 @@ export interface Params {
 
   /**
    * developer_shares defines the proportion of the transaction fees to be
-   *  distributed to the registered contract owner
+   * distributed to the registered contract owner
    */
   developerShares: string;
 
   /**
    * developer_shares defines the proportion of the transaction fees to be
-   *  distributed to validators
+   * distributed to validators
    */
   validatorShares: string;
 
   /**
    * addr_derivation_cost_create defines the cost of address derivation for
-   *  verifying the contract deployer at fee registration
+   * verifying the contract deployer at fee registration
    */
   addrDerivationCostCreate: Long;
 
@@ -55,19 +55,19 @@ export interface ParamsSDKType {
 
   /**
    * developer_shares defines the proportion of the transaction fees to be
-   *  distributed to the registered contract owner
+   * distributed to the registered contract owner
    */
   developer_shares: string;
 
   /**
    * developer_shares defines the proportion of the transaction fees to be
-   *  distributed to validators
+   * distributed to validators
    */
   validator_shares: string;
 
   /**
    * addr_derivation_cost_create defines the cost of address derivation for
-   *  verifying the contract deployer at fee registration
+   * verifying the contract deployer at fee registration
    */
   addr_derivation_cost_create: Long;
 

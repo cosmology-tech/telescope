@@ -5,8 +5,8 @@ export const protobufPackage = "cosmos.staking.v1beta1";
 
 /**
  * AuthorizationType defines the type of staking module authorization type
- * 
- *  Since: cosmos-sdk 0.43
+ *
+ * Since: cosmos-sdk 0.43
  */
 export enum AuthorizationType {
   /** AUTHORIZATION_TYPE_UNSPECIFIED - AUTHORIZATION_TYPE_UNSPECIFIED specifies an unknown authorization type */
@@ -25,8 +25,8 @@ export enum AuthorizationType {
 
 /**
  * AuthorizationType defines the type of staking module authorization type
- * 
- *  Since: cosmos-sdk 0.43
+ *
+ * Since: cosmos-sdk 0.43
  */
 export enum AuthorizationTypeSDKType {
   /** AUTHORIZATION_TYPE_UNSPECIFIED - AUTHORIZATION_TYPE_UNSPECIFIED specifies an unknown authorization type */
@@ -87,19 +87,19 @@ export function authorizationTypeToJSON(object: AuthorizationType): string {
 
 /**
  * StakeAuthorization defines authorization for delegate/undelegate/redelegate.
- * 
- *  Since: cosmos-sdk 0.43
+ *
+ * Since: cosmos-sdk 0.43
  */
 export interface StakeAuthorization {
   /**
    * max_tokens specifies the maximum amount of tokens can be delegate to a validator. If it is
-   *  empty, there is no spend limit and any amount of coins can be delegated.
+   * empty, there is no spend limit and any amount of coins can be delegated.
    */
   maxTokens: Coin;
 
   /**
    * allow_list specifies list of validator addresses to whom grantee can delegate tokens on behalf of granter's
-   *  account.
+   * account.
    */
   allowList?: StakeAuthorization_Validators;
 
@@ -112,19 +112,19 @@ export interface StakeAuthorization {
 
 /**
  * StakeAuthorization defines authorization for delegate/undelegate/redelegate.
- * 
- *  Since: cosmos-sdk 0.43
+ *
+ * Since: cosmos-sdk 0.43
  */
 export interface StakeAuthorizationSDKType {
   /**
    * max_tokens specifies the maximum amount of tokens can be delegate to a validator. If it is
-   *  empty, there is no spend limit and any amount of coins can be delegated.
+   * empty, there is no spend limit and any amount of coins can be delegated.
    */
   max_tokens: CoinSDKType;
 
   /**
    * allow_list specifies list of validator addresses to whom grantee can delegate tokens on behalf of granter's
-   *  account.
+   * account.
    */
   allow_list?: StakeAuthorization_ValidatorsSDKType;
 

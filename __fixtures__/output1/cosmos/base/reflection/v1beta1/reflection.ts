@@ -22,7 +22,7 @@ export interface ListAllInterfacesResponseSDKType {
 
 /**
  * ListImplementationsRequest is the request type of the ListImplementations
- *  RPC.
+ * RPC.
  */
 export interface ListImplementationsRequest {
   /** interface_name defines the interface to query the implementations for. */
@@ -31,7 +31,7 @@ export interface ListImplementationsRequest {
 
 /**
  * ListImplementationsRequest is the request type of the ListImplementations
- *  RPC.
+ * RPC.
  */
 export interface ListImplementationsRequestSDKType {
   /** interface_name defines the interface to query the implementations for. */
@@ -40,7 +40,7 @@ export interface ListImplementationsRequestSDKType {
 
 /**
  * ListImplementationsResponse is the response type of the ListImplementations
- *  RPC.
+ * RPC.
  */
 export interface ListImplementationsResponse {
   implementationMessageNames: string[];
@@ -48,7 +48,7 @@ export interface ListImplementationsResponse {
 
 /**
  * ListImplementationsResponse is the response type of the ListImplementations
- *  RPC.
+ * RPC.
  */
 export interface ListImplementationsResponseSDKType {
   implementation_message_names: string[];

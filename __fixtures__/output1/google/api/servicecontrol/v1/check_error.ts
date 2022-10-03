@@ -342,7 +342,7 @@ export function checkError_CodeToJSON(object: CheckError_Code): string {
 
 /**
  * Defines the errors to be returned in
- *  [google.api.servicecontrol.v1.CheckResponse.check_errors][google.api.servicecontrol.v1.CheckResponse.check_errors].
+ * [google.api.servicecontrol.v1.CheckResponse.check_errors][google.api.servicecontrol.v1.CheckResponse.check_errors].
  */
 export interface CheckError {
   /** The error code. */
@@ -350,11 +350,11 @@ export interface CheckError {
 
   /**
    * Subject to whom this error applies. See the specific code enum for more
-   *  details on this field. For example:
-   * 
-   *  - "project:<project-id or project-number>"
-   *  - "folder:<folder-id>"
-   *  - "organization:<organization-id>"
+   * details on this field. For example:
+   *
+   * - "project:<project-id or project-number>"
+   * - "folder:<folder-id>"
+   * - "organization:<organization-id>"
    */
   subject: string;
 
@@ -363,15 +363,15 @@ export interface CheckError {
 
   /**
    * Contains public information about the check error. If available,
-   *  `status.code` will be non zero and client can propagate it out as public
-   *  error.
+   * `status.code` will be non zero and client can propagate it out as public
+   * error.
    */
   status: Status;
 }
 
 /**
  * Defines the errors to be returned in
- *  [google.api.servicecontrol.v1.CheckResponse.check_errors][google.api.servicecontrol.v1.CheckResponse.check_errors].
+ * [google.api.servicecontrol.v1.CheckResponse.check_errors][google.api.servicecontrol.v1.CheckResponse.check_errors].
  */
 export interface CheckErrorSDKType {
   /** The error code. */
@@ -379,11 +379,11 @@ export interface CheckErrorSDKType {
 
   /**
    * Subject to whom this error applies. See the specific code enum for more
-   *  details on this field. For example:
-   * 
-   *  - "project:<project-id or project-number>"
-   *  - "folder:<folder-id>"
-   *  - "organization:<organization-id>"
+   * details on this field. For example:
+   *
+   * - "project:<project-id or project-number>"
+   * - "folder:<folder-id>"
+   * - "organization:<organization-id>"
    */
   subject: string;
 
@@ -392,8 +392,8 @@ export interface CheckErrorSDKType {
 
   /**
    * Contains public information about the check error. If available,
-   *  `status.code` will be non zero and client can propagate it out as public
-   *  error.
+   * `status.code` will be non zero and client can propagate it out as public
+   * error.
    */
   status: StatusSDKType;
 }

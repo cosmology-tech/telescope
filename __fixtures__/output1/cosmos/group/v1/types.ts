@@ -335,7 +335,7 @@ export function proposalExecutorResultToJSON(object: ProposalExecutorResult): st
 
 /**
  * Member represents a group member with an account address,
- *  non-zero weight and metadata.
+ * non-zero weight and metadata.
  */
 export interface Member {
   /** address is the member's account address. */
@@ -353,7 +353,7 @@ export interface Member {
 
 /**
  * Member represents a group member with an account address,
- *  non-zero weight and metadata.
+ * non-zero weight and metadata.
  */
 export interface MemberSDKType {
   /** address is the member's account address. */
@@ -421,22 +421,22 @@ export interface PercentageDecisionPolicySDKType {
 export interface DecisionPolicyWindows {
   /**
    * voting_period is the duration from submission of a proposal to the end of voting period
-   *  Within this times votes can be submitted with MsgVote.
+   * Within this times votes can be submitted with MsgVote.
    */
   votingPeriod: Duration;
 
   /**
    * min_execution_period is the minimum duration after the proposal submission
-   *  where members can start sending MsgExec. This means that the window for
-   *  sending a MsgExec transaction is:
-   *  `[ submission + min_execution_period ; submission + voting_period + max_execution_period]`
-   *  where max_execution_period is a app-specific config, defined in the keeper.
-   *  If not set, min_execution_period will default to 0.
-   * 
-   *  Please make sure to set a `min_execution_period` that is smaller than
-   *  `voting_period + max_execution_period`, or else the above execution window
-   *  is empty, meaning that all proposals created with this decision policy
-   *  won't be able to be executed.
+   * where members can start sending MsgExec. This means that the window for
+   * sending a MsgExec transaction is:
+   * `[ submission + min_execution_period ; submission + voting_period + max_execution_period]`
+   * where max_execution_period is a app-specific config, defined in the keeper.
+   * If not set, min_execution_period will default to 0.
+   *
+   * Please make sure to set a `min_execution_period` that is smaller than
+   * `voting_period + max_execution_period`, or else the above execution window
+   * is empty, meaning that all proposals created with this decision policy
+   * won't be able to be executed.
    */
   minExecutionPeriod: Duration;
 }
@@ -445,22 +445,22 @@ export interface DecisionPolicyWindows {
 export interface DecisionPolicyWindowsSDKType {
   /**
    * voting_period is the duration from submission of a proposal to the end of voting period
-   *  Within this times votes can be submitted with MsgVote.
+   * Within this times votes can be submitted with MsgVote.
    */
   voting_period: DurationSDKType;
 
   /**
    * min_execution_period is the minimum duration after the proposal submission
-   *  where members can start sending MsgExec. This means that the window for
-   *  sending a MsgExec transaction is:
-   *  `[ submission + min_execution_period ; submission + voting_period + max_execution_period]`
-   *  where max_execution_period is a app-specific config, defined in the keeper.
-   *  If not set, min_execution_period will default to 0.
-   * 
-   *  Please make sure to set a `min_execution_period` that is smaller than
-   *  `voting_period + max_execution_period`, or else the above execution window
-   *  is empty, meaning that all proposals created with this decision policy
-   *  won't be able to be executed.
+   * where members can start sending MsgExec. This means that the window for
+   * sending a MsgExec transaction is:
+   * `[ submission + min_execution_period ; submission + voting_period + max_execution_period]`
+   * where max_execution_period is a app-specific config, defined in the keeper.
+   * If not set, min_execution_period will default to 0.
+   *
+   * Please make sure to set a `min_execution_period` that is smaller than
+   * `voting_period + max_execution_period`, or else the above execution window
+   * is empty, meaning that all proposals created with this decision policy
+   * won't be able to be executed.
    */
   min_execution_period: DurationSDKType;
 }
@@ -478,9 +478,9 @@ export interface GroupInfo {
 
   /**
    * version is used to track changes to a group's membership structure that
-   *  would break existing proposals. Whenever any members weight is changed,
-   *  or any member is added or removed this version is incremented and will
-   *  cause proposals based on older versions of this group to fail
+   * would break existing proposals. Whenever any members weight is changed,
+   * or any member is added or removed this version is incremented and will
+   * cause proposals based on older versions of this group to fail
    */
   version: Long;
 
@@ -504,9 +504,9 @@ export interface GroupInfoSDKType {
 
   /**
    * version is used to track changes to a group's membership structure that
-   *  would break existing proposals. Whenever any members weight is changed,
-   *  or any member is added or removed this version is incremented and will
-   *  cause proposals based on older versions of this group to fail
+   * would break existing proposals. Whenever any members weight is changed,
+   * or any member is added or removed this version is incremented and will
+   * cause proposals based on older versions of this group to fail
    */
   version: Long;
 
@@ -551,7 +551,7 @@ export interface GroupPolicyInfo {
 
   /**
    * version is used to track changes to a group's GroupPolicyInfo structure that
-   *  would create a different result on a running proposal.
+   * would create a different result on a running proposal.
    */
   version: Long;
 
@@ -578,7 +578,7 @@ export interface GroupPolicyInfoSDKType {
 
   /**
    * version is used to track changes to a group's GroupPolicyInfo structure that
-   *  would create a different result on a running proposal.
+   * would create a different result on a running proposal.
    */
   version: Long;
 
@@ -591,9 +591,9 @@ export interface GroupPolicyInfoSDKType {
 
 /**
  * Proposal defines a group proposal. Any member of a group can submit a proposal
- *  for a group policy to decide upon.
- *  A proposal consists of a set of `sdk.Msg`s that will be executed if the proposal
- *  passes as well as some optional metadata associated with the proposal.
+ * for a group policy to decide upon.
+ * A proposal consists of a set of `sdk.Msg`s that will be executed if the proposal
+ * passes as well as some optional metadata associated with the proposal.
  */
 export interface Proposal {
   /** id is the unique id of the proposal. */
@@ -613,13 +613,13 @@ export interface Proposal {
 
   /**
    * group_version tracks the version of the group that this proposal corresponds to.
-   *  When group membership is changed, existing proposals from previous group versions will become invalid.
+   * When group membership is changed, existing proposals from previous group versions will become invalid.
    */
   groupVersion: Long;
 
   /**
    * group_policy_version tracks the version of the group policy that this proposal corresponds to.
-   *  When a decision policy is changed, existing proposals from previous policy versions will become invalid.
+   * When a decision policy is changed, existing proposals from previous policy versions will become invalid.
    */
   groupPolicyVersion: Long;
 
@@ -628,24 +628,24 @@ export interface Proposal {
 
   /**
    * result is the final result based on the votes and election rule. Initial value is unfinalized.
-   *  The result is persisted so that clients can always rely on this state and not have to replicate the logic.
+   * The result is persisted so that clients can always rely on this state and not have to replicate the logic.
    */
   result: ProposalResult;
 
   /**
    * final_tally_result contains the sums of all weighted votes for this
-   *  proposal for each vote option, after tallying. When querying a proposal
-   *  via gRPC, this field is not populated until the proposal's voting period
-   *  has ended.
+   * proposal for each vote option, after tallying. When querying a proposal
+   * via gRPC, this field is not populated until the proposal's voting period
+   * has ended.
    */
   finalTallyResult: TallyResult;
 
   /**
    * voting_period_end is the timestamp before which voting must be done.
-   *  Unless a successfull MsgExec is called before (to execute a proposal whose
-   *  tally is successful before the voting period ends), tallying will be done
-   *  at this point, and the `final_tally_result`, as well
-   *  as `status` and `result` fields will be accordingly updated.
+   * Unless a successfull MsgExec is called before (to execute a proposal whose
+   * tally is successful before the voting period ends), tallying will be done
+   * at this point, and the `final_tally_result`, as well
+   * as `status` and `result` fields will be accordingly updated.
    */
   votingPeriodEnd: Date;
 
@@ -658,9 +658,9 @@ export interface Proposal {
 
 /**
  * Proposal defines a group proposal. Any member of a group can submit a proposal
- *  for a group policy to decide upon.
- *  A proposal consists of a set of `sdk.Msg`s that will be executed if the proposal
- *  passes as well as some optional metadata associated with the proposal.
+ * for a group policy to decide upon.
+ * A proposal consists of a set of `sdk.Msg`s that will be executed if the proposal
+ * passes as well as some optional metadata associated with the proposal.
  */
 export interface ProposalSDKType {
   /** id is the unique id of the proposal. */
@@ -680,13 +680,13 @@ export interface ProposalSDKType {
 
   /**
    * group_version tracks the version of the group that this proposal corresponds to.
-   *  When group membership is changed, existing proposals from previous group versions will become invalid.
+   * When group membership is changed, existing proposals from previous group versions will become invalid.
    */
   group_version: Long;
 
   /**
    * group_policy_version tracks the version of the group policy that this proposal corresponds to.
-   *  When a decision policy is changed, existing proposals from previous policy versions will become invalid.
+   * When a decision policy is changed, existing proposals from previous policy versions will become invalid.
    */
   group_policy_version: Long;
 
@@ -695,24 +695,24 @@ export interface ProposalSDKType {
 
   /**
    * result is the final result based on the votes and election rule. Initial value is unfinalized.
-   *  The result is persisted so that clients can always rely on this state and not have to replicate the logic.
+   * The result is persisted so that clients can always rely on this state and not have to replicate the logic.
    */
   result: ProposalResultSDKType;
 
   /**
    * final_tally_result contains the sums of all weighted votes for this
-   *  proposal for each vote option, after tallying. When querying a proposal
-   *  via gRPC, this field is not populated until the proposal's voting period
-   *  has ended.
+   * proposal for each vote option, after tallying. When querying a proposal
+   * via gRPC, this field is not populated until the proposal's voting period
+   * has ended.
    */
   final_tally_result: TallyResultSDKType;
 
   /**
    * voting_period_end is the timestamp before which voting must be done.
-   *  Unless a successfull MsgExec is called before (to execute a proposal whose
-   *  tally is successful before the voting period ends), tallying will be done
-   *  at this point, and the `final_tally_result`, as well
-   *  as `status` and `result` fields will be accordingly updated.
+   * Unless a successfull MsgExec is called before (to execute a proposal whose
+   * tally is successful before the voting period ends), tallying will be done
+   * at this point, and the `final_tally_result`, as well
+   * as `status` and `result` fields will be accordingly updated.
    */
   voting_period_end: Date;
 

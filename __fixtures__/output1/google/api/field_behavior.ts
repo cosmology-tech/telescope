@@ -2,11 +2,11 @@ export const protobufPackage = "google.api";
 
 /**
  * An indicator of the behavior of a given field (for example, that a field
- *  is required in requests, or given as output but ignored as input).
- *  This **does not** change the behavior in protocol buffers itself; it only
- *  denotes the behavior and may affect how API tooling handles the field.
- * 
- *  Note: This enum **may** receive new values in the future.
+ * is required in requests, or given as output but ignored as input).
+ * This **does not** change the behavior in protocol buffers itself; it only
+ * denotes the behavior and may affect how API tooling handles the field.
+ *
+ * Note: This enum **may** receive new values in the future.
  */
 export enum FieldBehavior {
   /** FIELD_BEHAVIOR_UNSPECIFIED - Conventional default for enums. Do not use this. */
@@ -68,11 +68,11 @@ export enum FieldBehavior {
 
 /**
  * An indicator of the behavior of a given field (for example, that a field
- *  is required in requests, or given as output but ignored as input).
- *  This **does not** change the behavior in protocol buffers itself; it only
- *  denotes the behavior and may affect how API tooling handles the field.
- * 
- *  Note: This enum **may** receive new values in the future.
+ * is required in requests, or given as output but ignored as input).
+ * This **does not** change the behavior in protocol buffers itself; it only
+ * denotes the behavior and may affect how API tooling handles the field.
+ *
+ * Note: This enum **may** receive new values in the future.
  */
 export enum FieldBehaviorSDKType {
   /** FIELD_BEHAVIOR_UNSPECIFIED - Conventional default for enums. Do not use this. */

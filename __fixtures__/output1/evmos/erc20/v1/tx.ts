@@ -7,7 +7,7 @@ export const protobufPackage = "evmos.erc20.v1";
 export interface MsgConvertCoin {
   /**
    * Cosmos coin which denomination is registered in a token pair. The coin
-   *  amount defines the amount of coins to convert.
+   * amount defines the amount of coins to convert.
    */
   coin?: Coin;
 
@@ -22,7 +22,7 @@ export interface MsgConvertCoin {
 export interface MsgConvertCoinSDKType {
   /**
    * Cosmos coin which denomination is registered in a token pair. The coin
-   *  amount defines the amount of coins to convert.
+   * amount defines the amount of coins to convert.
    */
   coin?: CoinSDKType;
 
@@ -41,7 +41,7 @@ export interface MsgConvertCoinResponseSDKType {}
 
 /**
  * MsgConvertERC20 defines a Msg to convert a ERC20 token to a native Cosmos
- *  coin.
+ * coin.
  */
 export interface MsgConvertERC20 {
   /** ERC20 token contract address registered in a token pair */
@@ -59,7 +59,7 @@ export interface MsgConvertERC20 {
 
 /**
  * MsgConvertERC20 defines a Msg to convert a ERC20 token to a native Cosmos
- *  coin.
+ * coin.
  */
 export interface MsgConvertERC20SDKType {
   /** ERC20 token contract address registered in a token pair */

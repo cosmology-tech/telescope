@@ -42,7 +42,7 @@ export interface Params {
 
   /**
    * list of authorized channel identifiers that can perform address
-   *  attestations via IBC.
+   * attestations via IBC.
    */
   authorizedChannels: string[];
 
@@ -69,7 +69,7 @@ export interface ParamsSDKType {
 
   /**
    * list of authorized channel identifiers that can perform address
-   *  attestations via IBC.
+   * attestations via IBC.
    */
   authorized_channels: string[];
 

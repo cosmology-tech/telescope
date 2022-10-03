@@ -2,15 +2,15 @@ export const protobufPackage = "google.api";
 
 /**
  * Defines the supported values for `google.rpc.ErrorInfo.reason` for the
- *  `googleapis.com` error domain. This error domain is reserved for [Service
- *  Infrastructure](https://cloud.google.com/service-infrastructure/docs/overview).
- *  For each error info of this domain, the metadata key "service" refers to the
- *  logical identifier of an API service, such as "pubsub.googleapis.com". The
- *  "consumer" refers to the entity that consumes an API Service. It typically is
- *  a Google project that owns the client application or the server resource,
- *  such as "projects/123". Other metadata keys are specific to each error
- *  reason. For more information, see the definition of the specific error
- *  reason.
+ * `googleapis.com` error domain. This error domain is reserved for [Service
+ * Infrastructure](https://cloud.google.com/service-infrastructure/docs/overview).
+ * For each error info of this domain, the metadata key "service" refers to the
+ * logical identifier of an API service, such as "pubsub.googleapis.com". The
+ * "consumer" refers to the entity that consumes an API Service. It typically is
+ * a Google project that owns the client application or the server resource,
+ * such as "projects/123". Other metadata keys are specific to each error
+ * reason. For more information, see the definition of the specific error
+ * reason.
  */
 export enum ErrorReason {
   /** ERROR_REASON_UNSPECIFIED - Do not use this default value. */
@@ -417,15 +417,15 @@ export enum ErrorReason {
 
 /**
  * Defines the supported values for `google.rpc.ErrorInfo.reason` for the
- *  `googleapis.com` error domain. This error domain is reserved for [Service
- *  Infrastructure](https://cloud.google.com/service-infrastructure/docs/overview).
- *  For each error info of this domain, the metadata key "service" refers to the
- *  logical identifier of an API service, such as "pubsub.googleapis.com". The
- *  "consumer" refers to the entity that consumes an API Service. It typically is
- *  a Google project that owns the client application or the server resource,
- *  such as "projects/123". Other metadata keys are specific to each error
- *  reason. For more information, see the definition of the specific error
- *  reason.
+ * `googleapis.com` error domain. This error domain is reserved for [Service
+ * Infrastructure](https://cloud.google.com/service-infrastructure/docs/overview).
+ * For each error info of this domain, the metadata key "service" refers to the
+ * logical identifier of an API service, such as "pubsub.googleapis.com". The
+ * "consumer" refers to the entity that consumes an API Service. It typically is
+ * a Google project that owns the client application or the server resource,
+ * such as "projects/123". Other metadata keys are specific to each error
+ * reason. For more information, see the definition of the specific error
+ * reason.
  */
 export enum ErrorReasonSDKType {
   /** ERROR_REASON_UNSPECIFIED - Do not use this default value. */

@@ -6,7 +6,7 @@ export const protobufPackage = "cosmos.authz.v1beta1";
 
 /**
  * MsgGrant is a request type for Grant method. It declares authorization to the grantee
- *  on behalf of the granter with the provided expiration time.
+ * on behalf of the granter with the provided expiration time.
  */
 export interface MsgGrant {
   granter: string;
@@ -16,7 +16,7 @@ export interface MsgGrant {
 
 /**
  * MsgGrant is a request type for Grant method. It declares authorization to the grantee
- *  on behalf of the granter with the provided expiration time.
+ * on behalf of the granter with the provided expiration time.
  */
 export interface MsgGrantSDKType {
   granter: string;
@@ -36,32 +36,32 @@ export interface MsgExecResponseSDKType {
 
 /**
  * MsgExec attempts to execute the provided messages using
- *  authorizations granted to the grantee. Each message should have only
- *  one signer corresponding to the granter of the authorization.
+ * authorizations granted to the grantee. Each message should have only
+ * one signer corresponding to the granter of the authorization.
  */
 export interface MsgExec {
   grantee: string;
 
   /**
    * Authorization Msg requests to execute. Each msg must implement Authorization interface
-   *  The x/authz will try to find a grant matching (msg.signers[0], grantee, MsgTypeURL(msg))
-   *  triple and validate it.
+   * The x/authz will try to find a grant matching (msg.signers[0], grantee, MsgTypeURL(msg))
+   * triple and validate it.
    */
   msgs: Any[];
 }
 
 /**
  * MsgExec attempts to execute the provided messages using
- *  authorizations granted to the grantee. Each message should have only
- *  one signer corresponding to the granter of the authorization.
+ * authorizations granted to the grantee. Each message should have only
+ * one signer corresponding to the granter of the authorization.
  */
 export interface MsgExecSDKType {
   grantee: string;
 
   /**
    * Authorization Msg requests to execute. Each msg must implement Authorization interface
-   *  The x/authz will try to find a grant matching (msg.signers[0], grantee, MsgTypeURL(msg))
-   *  triple and validate it.
+   * The x/authz will try to find a grant matching (msg.signers[0], grantee, MsgTypeURL(msg))
+   * triple and validate it.
    */
   msgs: AnySDKType[];
 }
@@ -74,7 +74,7 @@ export interface MsgGrantResponseSDKType {}
 
 /**
  * MsgRevoke revokes any authorization with the provided sdk.Msg type on the
- *  granter's account with that has been granted to the grantee.
+ * granter's account with that has been granted to the grantee.
  */
 export interface MsgRevoke {
   granter: string;
@@ -84,7 +84,7 @@ export interface MsgRevoke {
 
 /**
  * MsgRevoke revokes any authorization with the provided sdk.Msg type on the
- *  granter's account with that has been granted to the grantee.
+ * granter's account with that has been granted to the grantee.
  */
 export interface MsgRevokeSDKType {
   granter: string;

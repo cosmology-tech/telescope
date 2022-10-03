@@ -6,7 +6,7 @@ export const protobufPackage = "cosmos.slashing.v1beta1";
 
 /**
  * ValidatorSigningInfo defines a validator's signing info for monitoring their
- *  liveness activity.
+ * liveness activity.
  */
 export interface ValidatorSigningInfo {
   address: string;
@@ -16,8 +16,8 @@ export interface ValidatorSigningInfo {
 
   /**
    * Index which is incremented each time the validator was a bonded
-   *  in a block and may have signed a precommit or not. This in conjunction with the
-   *  `SignedBlocksWindow` param determines the index in the `MissedBlocksBitArray`.
+   * in a block and may have signed a precommit or not. This in conjunction with the
+   * `SignedBlocksWindow` param determines the index in the `MissedBlocksBitArray`.
    */
   indexOffset: Long;
 
@@ -26,20 +26,20 @@ export interface ValidatorSigningInfo {
 
   /**
    * Whether or not a validator has been tombstoned (killed out of validator set). It is set
-   *  once the validator commits an equivocation or for any other configured misbehiavor.
+   * once the validator commits an equivocation or for any other configured misbehiavor.
    */
   tombstoned: boolean;
 
   /**
    * A counter kept to avoid unnecessary array reads.
-   *  Note that `Sum(MissedBlocksBitArray)` always equals `MissedBlocksCounter`.
+   * Note that `Sum(MissedBlocksBitArray)` always equals `MissedBlocksCounter`.
    */
   missedBlocksCounter: Long;
 }
 
 /**
  * ValidatorSigningInfo defines a validator's signing info for monitoring their
- *  liveness activity.
+ * liveness activity.
  */
 export interface ValidatorSigningInfoSDKType {
   address: string;
@@ -49,8 +49,8 @@ export interface ValidatorSigningInfoSDKType {
 
   /**
    * Index which is incremented each time the validator was a bonded
-   *  in a block and may have signed a precommit or not. This in conjunction with the
-   *  `SignedBlocksWindow` param determines the index in the `MissedBlocksBitArray`.
+   * in a block and may have signed a precommit or not. This in conjunction with the
+   * `SignedBlocksWindow` param determines the index in the `MissedBlocksBitArray`.
    */
   index_offset: Long;
 
@@ -59,13 +59,13 @@ export interface ValidatorSigningInfoSDKType {
 
   /**
    * Whether or not a validator has been tombstoned (killed out of validator set). It is set
-   *  once the validator commits an equivocation or for any other configured misbehiavor.
+   * once the validator commits an equivocation or for any other configured misbehiavor.
    */
   tombstoned: boolean;
 
   /**
    * A counter kept to avoid unnecessary array reads.
-   *  Note that `Sum(MissedBlocksBitArray)` always equals `MissedBlocksCounter`.
+   * Note that `Sum(MissedBlocksBitArray)` always equals `MissedBlocksCounter`.
    */
   missed_blocks_counter: Long;
 }

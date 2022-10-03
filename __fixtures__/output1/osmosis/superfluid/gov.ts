@@ -5,7 +5,7 @@ export const protobufPackage = "osmosis.superfluid.v1beta1";
 
 /**
  * SetSuperfluidAssetsProposal is a gov Content type to update the superfluid
- *  assets
+ * assets
  */
 export interface SetSuperfluidAssetsProposal {
   title: string;
@@ -15,7 +15,7 @@ export interface SetSuperfluidAssetsProposal {
 
 /**
  * SetSuperfluidAssetsProposal is a gov Content type to update the superfluid
- *  assets
+ * assets
  */
 export interface SetSuperfluidAssetsProposalSDKType {
   title: string;
@@ -25,7 +25,7 @@ export interface SetSuperfluidAssetsProposalSDKType {
 
 /**
  * RemoveSuperfluidAssetsProposal is a gov Content type to remove the superfluid
- *  assets by denom
+ * assets by denom
  */
 export interface RemoveSuperfluidAssetsProposal {
   title: string;
@@ -35,7 +35,7 @@ export interface RemoveSuperfluidAssetsProposal {
 
 /**
  * RemoveSuperfluidAssetsProposal is a gov Content type to remove the superfluid
- *  assets by denom
+ * assets by denom
  */
 export interface RemoveSuperfluidAssetsProposalSDKType {
   title: string;

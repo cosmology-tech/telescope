@@ -23,19 +23,19 @@ export interface QueryParamsResponseSDKType {
 
 /**
  * QueryEpochProvisionsRequest is the request type for the
- *  Query/EpochProvisions RPC method.
+ * Query/EpochProvisions RPC method.
  */
 export interface QueryEpochProvisionsRequest {}
 
 /**
  * QueryEpochProvisionsRequest is the request type for the
- *  Query/EpochProvisions RPC method.
+ * Query/EpochProvisions RPC method.
  */
 export interface QueryEpochProvisionsRequestSDKType {}
 
 /**
  * QueryEpochProvisionsResponse is the response type for the
- *  Query/EpochProvisions RPC method.
+ * Query/EpochProvisions RPC method.
  */
 export interface QueryEpochProvisionsResponse {
   /** epoch_provisions is the current minting per epoch provisions value. */
@@ -44,7 +44,7 @@ export interface QueryEpochProvisionsResponse {
 
 /**
  * QueryEpochProvisionsResponse is the response type for the
- *  Query/EpochProvisions RPC method.
+ * Query/EpochProvisions RPC method.
  */
 export interface QueryEpochProvisionsResponseSDKType {
   /** epoch_provisions is the current minting per epoch provisions value. */

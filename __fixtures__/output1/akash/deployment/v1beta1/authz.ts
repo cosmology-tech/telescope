@@ -5,24 +5,24 @@ export const protobufPackage = "akash.deployment.v1beta1";
 
 /**
  * DepositDeploymentAuthorization allows the grantee to deposit up to spend_limit coins from
- *  the granter's account for a deployment.
+ * the granter's account for a deployment.
  */
 export interface DepositDeploymentAuthorization {
   /**
    * SpendLimit is the amount the grantee is authorized to spend from the granter's account for
-   *  the purpose of deployment.
+   * the purpose of deployment.
    */
   spendLimit: Coin | undefined;
 }
 
 /**
  * DepositDeploymentAuthorization allows the grantee to deposit up to spend_limit coins from
- *  the granter's account for a deployment.
+ * the granter's account for a deployment.
  */
 export interface DepositDeploymentAuthorizationSDKType {
   /**
    * SpendLimit is the amount the grantee is authorized to spend from the granter's account for
-   *  the purpose of deployment.
+   * the purpose of deployment.
    */
   spend_limit: CoinSDKType | undefined;
 }

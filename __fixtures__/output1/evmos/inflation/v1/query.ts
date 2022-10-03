@@ -24,19 +24,19 @@ export interface QueryPeriodResponseSDKType {
 
 /**
  * QueryEpochMintProvisionRequest is the request type for the
- *  Query/EpochMintProvision RPC method.
+ * Query/EpochMintProvision RPC method.
  */
 export interface QueryEpochMintProvisionRequest {}
 
 /**
  * QueryEpochMintProvisionRequest is the request type for the
- *  Query/EpochMintProvision RPC method.
+ * Query/EpochMintProvision RPC method.
  */
 export interface QueryEpochMintProvisionRequestSDKType {}
 
 /**
  * QueryEpochMintProvisionResponse is the response type for the
- *  Query/EpochMintProvision RPC method.
+ * Query/EpochMintProvision RPC method.
  */
 export interface QueryEpochMintProvisionResponse {
   /** epoch_mint_provision is the current minting per epoch provision value. */
@@ -45,7 +45,7 @@ export interface QueryEpochMintProvisionResponse {
 
 /**
  * QueryEpochMintProvisionResponse is the response type for the
- *  Query/EpochMintProvision RPC method.
+ * Query/EpochMintProvision RPC method.
  */
 export interface QueryEpochMintProvisionResponseSDKType {
   /** epoch_mint_provision is the current minting per epoch provision value. */
@@ -54,19 +54,19 @@ export interface QueryEpochMintProvisionResponseSDKType {
 
 /**
  * QuerySkippedEpochsRequest is the request type for the Query/SkippedEpochs RPC
- *  method.
+ * method.
  */
 export interface QuerySkippedEpochsRequest {}
 
 /**
  * QuerySkippedEpochsRequest is the request type for the Query/SkippedEpochs RPC
- *  method.
+ * method.
  */
 export interface QuerySkippedEpochsRequestSDKType {}
 
 /**
  * QuerySkippedEpochsResponse is the response type for the Query/SkippedEpochs
- *  RPC method.
+ * RPC method.
  */
 export interface QuerySkippedEpochsResponse {
   /** number of epochs that the inflation module has been disabled. */
@@ -75,7 +75,7 @@ export interface QuerySkippedEpochsResponse {
 
 /**
  * QuerySkippedEpochsResponse is the response type for the Query/SkippedEpochs
- *  RPC method.
+ * RPC method.
  */
 export interface QuerySkippedEpochsResponseSDKType {
   /** number of epochs that the inflation module has been disabled. */
@@ -84,19 +84,19 @@ export interface QuerySkippedEpochsResponseSDKType {
 
 /**
  * QueryCirculatingSupplyRequest is the request type for the
- *  Query/CirculatingSupply RPC method.
+ * Query/CirculatingSupply RPC method.
  */
 export interface QueryCirculatingSupplyRequest {}
 
 /**
  * QueryCirculatingSupplyRequest is the request type for the
- *  Query/CirculatingSupply RPC method.
+ * Query/CirculatingSupply RPC method.
  */
 export interface QueryCirculatingSupplyRequestSDKType {}
 
 /**
  * QueryCirculatingSupplyResponse is the response type for the
- *  Query/CirculatingSupply RPC method.
+ * Query/CirculatingSupply RPC method.
  */
 export interface QueryCirculatingSupplyResponse {
   /** total amount of coins in circulation */
@@ -105,7 +105,7 @@ export interface QueryCirculatingSupplyResponse {
 
 /**
  * QueryCirculatingSupplyResponse is the response type for the
- *  Query/CirculatingSupply RPC method.
+ * Query/CirculatingSupply RPC method.
  */
 export interface QueryCirculatingSupplyResponseSDKType {
   /** total amount of coins in circulation */
@@ -114,19 +114,19 @@ export interface QueryCirculatingSupplyResponseSDKType {
 
 /**
  * QueryInflationRateRequest is the request type for the Query/InflationRate RPC
- *  method.
+ * method.
  */
 export interface QueryInflationRateRequest {}
 
 /**
  * QueryInflationRateRequest is the request type for the Query/InflationRate RPC
- *  method.
+ * method.
  */
 export interface QueryInflationRateRequestSDKType {}
 
 /**
  * QueryInflationRateResponse is the response type for the Query/InflationRate
- *  RPC method.
+ * RPC method.
  */
 export interface QueryInflationRateResponse {
   /** rate by which the total supply increases within one period */
@@ -135,7 +135,7 @@ export interface QueryInflationRateResponse {
 
 /**
  * QueryInflationRateResponse is the response type for the Query/InflationRate
- *  RPC method.
+ * RPC method.
  */
 export interface QueryInflationRateResponseSDKType {
   /** rate by which the total supply increases within one period */
