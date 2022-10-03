@@ -28,6 +28,7 @@ const sanitizeOptions = (options): TelescopeOptions => {
     options = deepmerge(defaultTelescopeOptions, options ?? {});
     // strip off leading slashes
     options.tsDisable.files = options.tsDisable.files.map(file => file.startsWith('/') ? file : file.replace(/^\//, ''));
+    options.eslintDisable.files = options.eslintDisable.files.map(file => file.startsWith('/') ? file : file.replace(/^\//, ''));
     return options;
 };
 

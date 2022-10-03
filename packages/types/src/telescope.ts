@@ -46,6 +46,12 @@ interface TelescopeOpts {
         patterns?: string[];
     },
 
+    eslintDisable?: {
+        files?: string[];
+        disableAll?: boolean;
+        patterns?: string[];
+    },
+
     bundle?: {
         enabled: boolean;
     };
@@ -149,6 +155,12 @@ export const defaultTelescopeOptions: TelescopeOptions = {
     },
 
     tsDisable: {
+        files: [],
+        patterns: [],
+        disableAll: false
+    },
+
+    eslintDisable: {
         files: [],
         patterns: [],
         disableAll: false
