@@ -336,7 +336,7 @@ export const DistrRecord = {
 
   fromJSON(object: any): DistrRecord {
     return {
-      gaugeId: isSet(object.gaugeId) ? Long.fromString(object.gaugeId) : Long.UZERO,
+      gaugeId: isSet(object.gaugeId) ? Long.fromValue(object.gaugeId) : Long.UZERO,
       weight: isSet(object.weight) ? String(object.weight) : ""
     };
   },

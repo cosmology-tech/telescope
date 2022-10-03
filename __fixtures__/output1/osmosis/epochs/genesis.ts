@@ -128,10 +128,10 @@ export const EpochInfo = {
       identifier: isSet(object.identifier) ? String(object.identifier) : "",
       startTime: isSet(object.startTime) ? fromJsonTimestamp(object.startTime) : undefined,
       duration: isSet(object.duration) ? Duration.fromJSON(object.duration) : undefined,
-      currentEpoch: isSet(object.currentEpoch) ? Long.fromString(object.currentEpoch) : Long.ZERO,
+      currentEpoch: isSet(object.currentEpoch) ? Long.fromValue(object.currentEpoch) : Long.ZERO,
       currentEpochStartTime: isSet(object.currentEpochStartTime) ? fromJsonTimestamp(object.currentEpochStartTime) : undefined,
       epochCountingStarted: isSet(object.epochCountingStarted) ? Boolean(object.epochCountingStarted) : false,
-      currentEpochStartHeight: isSet(object.currentEpochStartHeight) ? Long.fromString(object.currentEpochStartHeight) : Long.ZERO
+      currentEpochStartHeight: isSet(object.currentEpochStartHeight) ? Long.fromValue(object.currentEpochStartHeight) : Long.ZERO
     };
   },
 

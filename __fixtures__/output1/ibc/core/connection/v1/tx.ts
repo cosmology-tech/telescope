@@ -287,7 +287,7 @@ export const MsgConnectionOpenInit = {
       clientId: isSet(object.clientId) ? String(object.clientId) : "",
       counterparty: isSet(object.counterparty) ? Counterparty.fromJSON(object.counterparty) : undefined,
       version: isSet(object.version) ? Version.fromJSON(object.version) : undefined,
-      delayPeriod: isSet(object.delayPeriod) ? Long.fromString(object.delayPeriod) : Long.UZERO,
+      delayPeriod: isSet(object.delayPeriod) ? Long.fromValue(object.delayPeriod) : Long.UZERO,
       signer: isSet(object.signer) ? String(object.signer) : ""
     };
   },
@@ -528,7 +528,7 @@ export const MsgConnectionOpenTry = {
       previousConnectionId: isSet(object.previousConnectionId) ? String(object.previousConnectionId) : "",
       clientState: isSet(object.clientState) ? Any.fromJSON(object.clientState) : undefined,
       counterparty: isSet(object.counterparty) ? Counterparty.fromJSON(object.counterparty) : undefined,
-      delayPeriod: isSet(object.delayPeriod) ? Long.fromString(object.delayPeriod) : Long.UZERO,
+      delayPeriod: isSet(object.delayPeriod) ? Long.fromValue(object.delayPeriod) : Long.UZERO,
       counterpartyVersions: Array.isArray(object?.counterpartyVersions) ? object.counterpartyVersions.map((e: any) => Version.fromJSON(e)) : [],
       proofHeight: isSet(object.proofHeight) ? Height.fromJSON(object.proofHeight) : undefined,
       proofInit: isSet(object.proofInit) ? bytesFromBase64(object.proofInit) : new Uint8Array(),

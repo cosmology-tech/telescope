@@ -494,11 +494,11 @@ export const Params = {
       mintDenom: isSet(object.mintDenom) ? String(object.mintDenom) : "",
       genesisEpochProvisions: isSet(object.genesisEpochProvisions) ? String(object.genesisEpochProvisions) : "",
       epochIdentifier: isSet(object.epochIdentifier) ? String(object.epochIdentifier) : "",
-      reductionPeriodInEpochs: isSet(object.reductionPeriodInEpochs) ? Long.fromString(object.reductionPeriodInEpochs) : Long.ZERO,
+      reductionPeriodInEpochs: isSet(object.reductionPeriodInEpochs) ? Long.fromValue(object.reductionPeriodInEpochs) : Long.ZERO,
       reductionFactor: isSet(object.reductionFactor) ? String(object.reductionFactor) : "",
       distributionProportions: isSet(object.distributionProportions) ? DistributionProportions.fromJSON(object.distributionProportions) : undefined,
       weightedDeveloperRewardsReceivers: Array.isArray(object?.weightedDeveloperRewardsReceivers) ? object.weightedDeveloperRewardsReceivers.map((e: any) => WeightedAddress.fromJSON(e)) : [],
-      mintingRewardsDistributionStartEpoch: isSet(object.mintingRewardsDistributionStartEpoch) ? Long.fromString(object.mintingRewardsDistributionStartEpoch) : Long.ZERO
+      mintingRewardsDistributionStartEpoch: isSet(object.mintingRewardsDistributionStartEpoch) ? Long.fromValue(object.mintingRewardsDistributionStartEpoch) : Long.ZERO
     };
   },
 

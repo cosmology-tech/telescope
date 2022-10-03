@@ -248,7 +248,7 @@ export const Params = {
       enableFees: isSet(object.enableFees) ? Boolean(object.enableFees) : false,
       developerShares: isSet(object.developerShares) ? String(object.developerShares) : "",
       validatorShares: isSet(object.validatorShares) ? String(object.validatorShares) : "",
-      addrDerivationCostCreate: isSet(object.addrDerivationCostCreate) ? Long.fromString(object.addrDerivationCostCreate) : Long.UZERO,
+      addrDerivationCostCreate: isSet(object.addrDerivationCostCreate) ? Long.fromValue(object.addrDerivationCostCreate) : Long.UZERO,
       minGasPrice: isSet(object.minGasPrice) ? String(object.minGasPrice) : ""
     };
   },

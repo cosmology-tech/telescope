@@ -909,7 +909,7 @@ export const SignDoc = {
       bodyBytes: isSet(object.bodyBytes) ? bytesFromBase64(object.bodyBytes) : new Uint8Array(),
       authInfoBytes: isSet(object.authInfoBytes) ? bytesFromBase64(object.authInfoBytes) : new Uint8Array(),
       chainId: isSet(object.chainId) ? String(object.chainId) : "",
-      accountNumber: isSet(object.accountNumber) ? Long.fromString(object.accountNumber) : Long.UZERO
+      accountNumber: isSet(object.accountNumber) ? Long.fromValue(object.accountNumber) : Long.UZERO
     };
   },
 
@@ -1038,8 +1038,8 @@ export const SignDocDirectAux = {
       bodyBytes: isSet(object.bodyBytes) ? bytesFromBase64(object.bodyBytes) : new Uint8Array(),
       publicKey: isSet(object.publicKey) ? Any.fromJSON(object.publicKey) : undefined,
       chainId: isSet(object.chainId) ? String(object.chainId) : "",
-      accountNumber: isSet(object.accountNumber) ? Long.fromString(object.accountNumber) : Long.UZERO,
-      sequence: isSet(object.sequence) ? Long.fromString(object.sequence) : Long.UZERO,
+      accountNumber: isSet(object.accountNumber) ? Long.fromValue(object.accountNumber) : Long.UZERO,
+      sequence: isSet(object.sequence) ? Long.fromValue(object.sequence) : Long.UZERO,
       tip: isSet(object.tip) ? Tip.fromJSON(object.tip) : undefined
     };
   },
@@ -1167,7 +1167,7 @@ export const TxBody = {
     return {
       messages: Array.isArray(object?.messages) ? object.messages.map((e: any) => Any.fromJSON(e)) : [],
       memo: isSet(object.memo) ? String(object.memo) : "",
-      timeoutHeight: isSet(object.timeoutHeight) ? Long.fromString(object.timeoutHeight) : Long.UZERO,
+      timeoutHeight: isSet(object.timeoutHeight) ? Long.fromValue(object.timeoutHeight) : Long.UZERO,
       extensionOptions: Array.isArray(object?.extensionOptions) ? object.extensionOptions.map((e: any) => Any.fromJSON(e)) : [],
       nonCriticalExtensionOptions: Array.isArray(object?.nonCriticalExtensionOptions) ? object.nonCriticalExtensionOptions.map((e: any) => Any.fromJSON(e)) : []
     };
@@ -1417,7 +1417,7 @@ export const SignerInfo = {
     return {
       publicKey: isSet(object.publicKey) ? Any.fromJSON(object.publicKey) : undefined,
       modeInfo: isSet(object.modeInfo) ? ModeInfo.fromJSON(object.modeInfo) : undefined,
-      sequence: isSet(object.sequence) ? Long.fromString(object.sequence) : Long.UZERO
+      sequence: isSet(object.sequence) ? Long.fromValue(object.sequence) : Long.UZERO
     };
   },
 
@@ -1769,7 +1769,7 @@ export const Fee = {
   fromJSON(object: any): Fee {
     return {
       amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromJSON(e)) : [],
-      gasLimit: isSet(object.gasLimit) ? Long.fromString(object.gasLimit) : Long.UZERO,
+      gasLimit: isSet(object.gasLimit) ? Long.fromValue(object.gasLimit) : Long.UZERO,
       payer: isSet(object.payer) ? String(object.payer) : "",
       granter: isSet(object.granter) ? String(object.granter) : ""
     };

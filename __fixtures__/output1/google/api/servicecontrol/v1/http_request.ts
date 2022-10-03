@@ -354,9 +354,9 @@ export const HttpRequest = {
     return {
       requestMethod: isSet(object.requestMethod) ? String(object.requestMethod) : "",
       requestUrl: isSet(object.requestUrl) ? String(object.requestUrl) : "",
-      requestSize: isSet(object.requestSize) ? Long.fromString(object.requestSize) : Long.ZERO,
+      requestSize: isSet(object.requestSize) ? Long.fromValue(object.requestSize) : Long.ZERO,
       status: isSet(object.status) ? Number(object.status) : 0,
-      responseSize: isSet(object.responseSize) ? Long.fromString(object.responseSize) : Long.ZERO,
+      responseSize: isSet(object.responseSize) ? Long.fromValue(object.responseSize) : Long.ZERO,
       userAgent: isSet(object.userAgent) ? String(object.userAgent) : "",
       remoteIp: isSet(object.remoteIp) ? String(object.remoteIp) : "",
       serverIp: isSet(object.serverIp) ? String(object.serverIp) : "",
@@ -365,7 +365,7 @@ export const HttpRequest = {
       cacheLookup: isSet(object.cacheLookup) ? Boolean(object.cacheLookup) : false,
       cacheHit: isSet(object.cacheHit) ? Boolean(object.cacheHit) : false,
       cacheValidatedWithOriginServer: isSet(object.cacheValidatedWithOriginServer) ? Boolean(object.cacheValidatedWithOriginServer) : false,
-      cacheFillBytes: isSet(object.cacheFillBytes) ? Long.fromString(object.cacheFillBytes) : Long.ZERO,
+      cacheFillBytes: isSet(object.cacheFillBytes) ? Long.fromValue(object.cacheFillBytes) : Long.ZERO,
       protocol: isSet(object.protocol) ? String(object.protocol) : ""
     };
   },

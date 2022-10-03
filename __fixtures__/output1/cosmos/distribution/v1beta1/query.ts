@@ -803,8 +803,8 @@ export const QueryValidatorSlashesRequest = {
   fromJSON(object: any): QueryValidatorSlashesRequest {
     return {
       validatorAddress: isSet(object.validatorAddress) ? String(object.validatorAddress) : "",
-      startingHeight: isSet(object.startingHeight) ? Long.fromString(object.startingHeight) : Long.UZERO,
-      endingHeight: isSet(object.endingHeight) ? Long.fromString(object.endingHeight) : Long.UZERO,
+      startingHeight: isSet(object.startingHeight) ? Long.fromValue(object.startingHeight) : Long.UZERO,
+      endingHeight: isSet(object.endingHeight) ? Long.fromValue(object.endingHeight) : Long.UZERO,
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
     };
   },

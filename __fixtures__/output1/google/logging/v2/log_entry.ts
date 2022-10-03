@@ -1085,7 +1085,7 @@ export const LogEntrySourceLocation = {
   fromJSON(object: any): LogEntrySourceLocation {
     return {
       file: isSet(object.file) ? String(object.file) : "",
-      line: isSet(object.line) ? Long.fromString(object.line) : Long.ZERO,
+      line: isSet(object.line) ? Long.fromValue(object.line) : Long.ZERO,
       function: isSet(object.function) ? String(object.function) : ""
     };
   },

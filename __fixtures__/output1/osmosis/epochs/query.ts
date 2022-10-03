@@ -264,7 +264,7 @@ export const QueryCurrentEpochResponse = {
 
   fromJSON(object: any): QueryCurrentEpochResponse {
     return {
-      currentEpoch: isSet(object.currentEpoch) ? Long.fromString(object.currentEpoch) : Long.ZERO
+      currentEpoch: isSet(object.currentEpoch) ? Long.fromValue(object.currentEpoch) : Long.ZERO
     };
   },
 

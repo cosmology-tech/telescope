@@ -444,7 +444,7 @@ export const MissedBlock = {
 
   fromJSON(object: any): MissedBlock {
     return {
-      index: isSet(object.index) ? Long.fromString(object.index) : Long.ZERO,
+      index: isSet(object.index) ? Long.fromValue(object.index) : Long.ZERO,
       missed: isSet(object.missed) ? Boolean(object.missed) : false
     };
   },

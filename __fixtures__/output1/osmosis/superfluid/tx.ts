@@ -157,7 +157,7 @@ export const MsgSuperfluidDelegate = {
   fromJSON(object: any): MsgSuperfluidDelegate {
     return {
       sender: isSet(object.sender) ? String(object.sender) : "",
-      lockId: isSet(object.lockId) ? Long.fromString(object.lockId) : Long.UZERO,
+      lockId: isSet(object.lockId) ? Long.fromValue(object.lockId) : Long.UZERO,
       valAddr: isSet(object.valAddr) ? String(object.valAddr) : ""
     };
   },
@@ -297,7 +297,7 @@ export const MsgSuperfluidUndelegate = {
   fromJSON(object: any): MsgSuperfluidUndelegate {
     return {
       sender: isSet(object.sender) ? String(object.sender) : "",
-      lockId: isSet(object.lockId) ? Long.fromString(object.lockId) : Long.UZERO
+      lockId: isSet(object.lockId) ? Long.fromValue(object.lockId) : Long.UZERO
     };
   },
 
@@ -432,7 +432,7 @@ export const MsgSuperfluidUnbondLock = {
   fromJSON(object: any): MsgSuperfluidUnbondLock {
     return {
       sender: isSet(object.sender) ? String(object.sender) : "",
-      lockId: isSet(object.lockId) ? Long.fromString(object.lockId) : Long.UZERO
+      lockId: isSet(object.lockId) ? Long.fromValue(object.lockId) : Long.UZERO
     };
   },
 
@@ -666,7 +666,7 @@ export const MsgLockAndSuperfluidDelegateResponse = {
 
   fromJSON(object: any): MsgLockAndSuperfluidDelegateResponse {
     return {
-      ID: isSet(object.ID) ? Long.fromString(object.ID) : Long.UZERO
+      ID: isSet(object.ID) ? Long.fromValue(object.ID) : Long.UZERO
     };
   },
 
@@ -745,7 +745,7 @@ export const MsgUnPoolWhitelistedPool = {
   fromJSON(object: any): MsgUnPoolWhitelistedPool {
     return {
       sender: isSet(object.sender) ? String(object.sender) : "",
-      poolId: isSet(object.poolId) ? Long.fromString(object.poolId) : Long.UZERO
+      poolId: isSet(object.poolId) ? Long.fromValue(object.poolId) : Long.UZERO
     };
   },
 
@@ -830,7 +830,7 @@ export const MsgUnPoolWhitelistedPoolResponse = {
 
   fromJSON(object: any): MsgUnPoolWhitelistedPoolResponse {
     return {
-      exitedLockIds: Array.isArray(object?.exitedLockIds) ? object.exitedLockIds.map((e: any) => Long.fromString(e)) : []
+      exitedLockIds: Array.isArray(object?.exitedLockIds) ? object.exitedLockIds.map((e: any) => Long.fromValue(e)) : []
     };
   },
 

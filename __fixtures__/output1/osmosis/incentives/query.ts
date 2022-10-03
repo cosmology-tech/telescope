@@ -463,7 +463,7 @@ export const GaugeByIDRequest = {
 
   fromJSON(object: any): GaugeByIDRequest {
     return {
-      id: isSet(object.id) ? Long.fromString(object.id) : Long.UZERO
+      id: isSet(object.id) ? Long.fromValue(object.id) : Long.UZERO
     };
   },
 
@@ -1481,8 +1481,8 @@ export const RewardsEstRequest = {
   fromJSON(object: any): RewardsEstRequest {
     return {
       owner: isSet(object.owner) ? String(object.owner) : "",
-      lockIds: Array.isArray(object?.lockIds) ? object.lockIds.map((e: any) => Long.fromString(e)) : [],
-      endEpoch: isSet(object.endEpoch) ? Long.fromString(object.endEpoch) : Long.ZERO
+      lockIds: Array.isArray(object?.lockIds) ? object.lockIds.map((e: any) => Long.fromValue(e)) : [],
+      endEpoch: isSet(object.endEpoch) ? Long.fromValue(object.endEpoch) : Long.ZERO
     };
   },
 

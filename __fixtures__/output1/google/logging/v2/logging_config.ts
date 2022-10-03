@@ -6542,7 +6542,7 @@ export const CopyLogEntriesResponse = {
 
   fromJSON(object: any): CopyLogEntriesResponse {
     return {
-      logEntriesCopiedCount: isSet(object.logEntriesCopiedCount) ? Long.fromString(object.logEntriesCopiedCount) : Long.ZERO
+      logEntriesCopiedCount: isSet(object.logEntriesCopiedCount) ? Long.fromValue(object.logEntriesCopiedCount) : Long.ZERO
     };
   },
 

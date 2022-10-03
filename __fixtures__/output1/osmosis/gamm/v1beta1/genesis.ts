@@ -167,7 +167,7 @@ export const GenesisState = {
   fromJSON(object: any): GenesisState {
     return {
       pools: Array.isArray(object?.pools) ? object.pools.map((e: any) => Any.fromJSON(e)) : [],
-      nextPoolNumber: isSet(object.nextPoolNumber) ? Long.fromString(object.nextPoolNumber) : Long.UZERO,
+      nextPoolNumber: isSet(object.nextPoolNumber) ? Long.fromValue(object.nextPoolNumber) : Long.UZERO,
       params: isSet(object.params) ? Params.fromJSON(object.params) : undefined
     };
   },

@@ -91,7 +91,7 @@ export const Capability = {
 
   fromJSON(object: any): Capability {
     return {
-      index: isSet(object.index) ? Long.fromString(object.index) : Long.UZERO
+      index: isSet(object.index) ? Long.fromValue(object.index) : Long.UZERO
     };
   },
 

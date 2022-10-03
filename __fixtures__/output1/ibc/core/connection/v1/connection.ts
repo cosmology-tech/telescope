@@ -392,7 +392,7 @@ export const ConnectionEnd = {
       versions: Array.isArray(object?.versions) ? object.versions.map((e: any) => Version.fromJSON(e)) : [],
       state: isSet(object.state) ? stateFromJSON(object.state) : 0,
       counterparty: isSet(object.counterparty) ? Counterparty.fromJSON(object.counterparty) : undefined,
-      delayPeriod: isSet(object.delayPeriod) ? Long.fromString(object.delayPeriod) : Long.UZERO
+      delayPeriod: isSet(object.delayPeriod) ? Long.fromValue(object.delayPeriod) : Long.UZERO
     };
   },
 
@@ -539,7 +539,7 @@ export const IdentifiedConnection = {
       versions: Array.isArray(object?.versions) ? object.versions.map((e: any) => Version.fromJSON(e)) : [],
       state: isSet(object.state) ? stateFromJSON(object.state) : 0,
       counterparty: isSet(object.counterparty) ? Counterparty.fromJSON(object.counterparty) : undefined,
-      delayPeriod: isSet(object.delayPeriod) ? Long.fromString(object.delayPeriod) : Long.UZERO
+      delayPeriod: isSet(object.delayPeriod) ? Long.fromValue(object.delayPeriod) : Long.UZERO
     };
   },
 
@@ -1008,7 +1008,7 @@ export const Params = {
 
   fromJSON(object: any): Params {
     return {
-      maxExpectedTimePerBlock: isSet(object.maxExpectedTimePerBlock) ? Long.fromString(object.maxExpectedTimePerBlock) : Long.UZERO
+      maxExpectedTimePerBlock: isSet(object.maxExpectedTimePerBlock) ? Long.fromValue(object.maxExpectedTimePerBlock) : Long.UZERO
     };
   },
 

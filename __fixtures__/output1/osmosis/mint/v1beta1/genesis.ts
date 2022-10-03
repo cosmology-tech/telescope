@@ -86,7 +86,7 @@ export const GenesisState = {
     return {
       minter: isSet(object.minter) ? Minter.fromJSON(object.minter) : undefined,
       params: isSet(object.params) ? Params.fromJSON(object.params) : undefined,
-      halvenStartedEpoch: isSet(object.halvenStartedEpoch) ? Long.fromString(object.halvenStartedEpoch) : Long.ZERO
+      halvenStartedEpoch: isSet(object.halvenStartedEpoch) ? Long.fromValue(object.halvenStartedEpoch) : Long.ZERO
     };
   },
 

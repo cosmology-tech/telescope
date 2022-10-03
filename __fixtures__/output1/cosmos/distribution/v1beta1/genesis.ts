@@ -559,7 +559,7 @@ export const ValidatorHistoricalRewardsRecord = {
   fromJSON(object: any): ValidatorHistoricalRewardsRecord {
     return {
       validatorAddress: isSet(object.validatorAddress) ? String(object.validatorAddress) : "",
-      period: isSet(object.period) ? Long.fromString(object.period) : Long.UZERO,
+      period: isSet(object.period) ? Long.fromValue(object.period) : Long.UZERO,
       rewards: isSet(object.rewards) ? ValidatorHistoricalRewards.fromJSON(object.rewards) : undefined
     };
   },
@@ -845,8 +845,8 @@ export const ValidatorSlashEventRecord = {
   fromJSON(object: any): ValidatorSlashEventRecord {
     return {
       validatorAddress: isSet(object.validatorAddress) ? String(object.validatorAddress) : "",
-      height: isSet(object.height) ? Long.fromString(object.height) : Long.UZERO,
-      period: isSet(object.period) ? Long.fromString(object.period) : Long.UZERO,
+      height: isSet(object.height) ? Long.fromValue(object.height) : Long.UZERO,
+      period: isSet(object.period) ? Long.fromValue(object.period) : Long.UZERO,
       validatorSlashEvent: isSet(object.validatorSlashEvent) ? ValidatorSlashEvent.fromJSON(object.validatorSlashEvent) : undefined
     };
   },

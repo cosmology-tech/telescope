@@ -392,7 +392,7 @@ export const MsgStoreCodeResponse = {
 
   fromJSON(object: any): MsgStoreCodeResponse {
     return {
-      codeId: isSet(object.codeId) ? Long.fromString(object.codeId) : Long.UZERO
+      codeId: isSet(object.codeId) ? Long.fromValue(object.codeId) : Long.UZERO
     };
   },
 
@@ -508,7 +508,7 @@ export const MsgInstantiateContract = {
     return {
       sender: isSet(object.sender) ? String(object.sender) : "",
       admin: isSet(object.admin) ? String(object.admin) : "",
-      codeId: isSet(object.codeId) ? Long.fromString(object.codeId) : Long.UZERO,
+      codeId: isSet(object.codeId) ? Long.fromValue(object.codeId) : Long.UZERO,
       label: isSet(object.label) ? String(object.label) : "",
       msg: isSet(object.msg) ? bytesFromBase64(object.msg) : new Uint8Array(),
       funds: Array.isArray(object?.funds) ? object.funds.map((e: any) => Coin.fromJSON(e)) : []
@@ -916,7 +916,7 @@ export const MsgMigrateContract = {
     return {
       sender: isSet(object.sender) ? String(object.sender) : "",
       contract: isSet(object.contract) ? String(object.contract) : "",
-      codeId: isSet(object.codeId) ? Long.fromString(object.codeId) : Long.UZERO,
+      codeId: isSet(object.codeId) ? Long.fromValue(object.codeId) : Long.UZERO,
       msg: isSet(object.msg) ? bytesFromBase64(object.msg) : new Uint8Array()
     };
   },

@@ -565,7 +565,7 @@ export const ClientState = {
 
   fromJSON(object: any): ClientState {
     return {
-      sequence: isSet(object.sequence) ? Long.fromString(object.sequence) : Long.UZERO,
+      sequence: isSet(object.sequence) ? Long.fromValue(object.sequence) : Long.UZERO,
       isFrozen: isSet(object.isFrozen) ? Boolean(object.isFrozen) : false,
       consensusState: isSet(object.consensusState) ? ConsensusState.fromJSON(object.consensusState) : undefined,
       allowUpdateAfterProposal: isSet(object.allowUpdateAfterProposal) ? Boolean(object.allowUpdateAfterProposal) : false
@@ -669,7 +669,7 @@ export const ConsensusState = {
     return {
       publicKey: isSet(object.publicKey) ? Any.fromJSON(object.publicKey) : undefined,
       diversifier: isSet(object.diversifier) ? String(object.diversifier) : "",
-      timestamp: isSet(object.timestamp) ? Long.fromString(object.timestamp) : Long.UZERO
+      timestamp: isSet(object.timestamp) ? Long.fromValue(object.timestamp) : Long.UZERO
     };
   },
 
@@ -782,8 +782,8 @@ export const Header = {
 
   fromJSON(object: any): Header {
     return {
-      sequence: isSet(object.sequence) ? Long.fromString(object.sequence) : Long.UZERO,
-      timestamp: isSet(object.timestamp) ? Long.fromString(object.timestamp) : Long.UZERO,
+      sequence: isSet(object.sequence) ? Long.fromValue(object.sequence) : Long.UZERO,
+      timestamp: isSet(object.timestamp) ? Long.fromValue(object.timestamp) : Long.UZERO,
       signature: isSet(object.signature) ? bytesFromBase64(object.signature) : new Uint8Array(),
       newPublicKey: isSet(object.newPublicKey) ? Any.fromJSON(object.newPublicKey) : undefined,
       newDiversifier: isSet(object.newDiversifier) ? String(object.newDiversifier) : ""
@@ -899,7 +899,7 @@ export const Misbehaviour = {
   fromJSON(object: any): Misbehaviour {
     return {
       clientId: isSet(object.clientId) ? String(object.clientId) : "",
-      sequence: isSet(object.sequence) ? Long.fromString(object.sequence) : Long.UZERO,
+      sequence: isSet(object.sequence) ? Long.fromValue(object.sequence) : Long.UZERO,
       signatureOne: isSet(object.signatureOne) ? SignatureAndData.fromJSON(object.signatureOne) : undefined,
       signatureTwo: isSet(object.signatureTwo) ? SignatureAndData.fromJSON(object.signatureTwo) : undefined
     };
@@ -1012,7 +1012,7 @@ export const SignatureAndData = {
       signature: isSet(object.signature) ? bytesFromBase64(object.signature) : new Uint8Array(),
       dataType: isSet(object.dataType) ? dataTypeFromJSON(object.dataType) : 0,
       data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array(),
-      timestamp: isSet(object.timestamp) ? Long.fromString(object.timestamp) : Long.UZERO
+      timestamp: isSet(object.timestamp) ? Long.fromValue(object.timestamp) : Long.UZERO
     };
   },
 
@@ -1103,7 +1103,7 @@ export const TimestampedSignatureData = {
   fromJSON(object: any): TimestampedSignatureData {
     return {
       signatureData: isSet(object.signatureData) ? bytesFromBase64(object.signatureData) : new Uint8Array(),
-      timestamp: isSet(object.timestamp) ? Long.fromString(object.timestamp) : Long.UZERO
+      timestamp: isSet(object.timestamp) ? Long.fromValue(object.timestamp) : Long.UZERO
     };
   },
 
@@ -1212,8 +1212,8 @@ export const SignBytes = {
 
   fromJSON(object: any): SignBytes {
     return {
-      sequence: isSet(object.sequence) ? Long.fromString(object.sequence) : Long.UZERO,
-      timestamp: isSet(object.timestamp) ? Long.fromString(object.timestamp) : Long.UZERO,
+      sequence: isSet(object.sequence) ? Long.fromValue(object.sequence) : Long.UZERO,
+      timestamp: isSet(object.timestamp) ? Long.fromValue(object.timestamp) : Long.UZERO,
       diversifier: isSet(object.diversifier) ? String(object.diversifier) : "",
       dataType: isSet(object.dataType) ? dataTypeFromJSON(object.dataType) : 0,
       data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array()
@@ -1961,7 +1961,7 @@ export const NextSequenceRecvData = {
   fromJSON(object: any): NextSequenceRecvData {
     return {
       path: isSet(object.path) ? bytesFromBase64(object.path) : new Uint8Array(),
-      nextSeqRecv: isSet(object.nextSeqRecv) ? Long.fromString(object.nextSeqRecv) : Long.UZERO
+      nextSeqRecv: isSet(object.nextSeqRecv) ? Long.fromValue(object.nextSeqRecv) : Long.UZERO
     };
   },
 

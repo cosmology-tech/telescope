@@ -218,8 +218,8 @@ export const PageRequest = {
   fromJSON(object: any): PageRequest {
     return {
       key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array(),
-      offset: isSet(object.offset) ? Long.fromString(object.offset) : Long.UZERO,
-      limit: isSet(object.limit) ? Long.fromString(object.limit) : Long.UZERO,
+      offset: isSet(object.offset) ? Long.fromValue(object.offset) : Long.UZERO,
+      limit: isSet(object.limit) ? Long.fromValue(object.limit) : Long.UZERO,
       countTotal: isSet(object.countTotal) ? Boolean(object.countTotal) : false,
       reverse: isSet(object.reverse) ? Boolean(object.reverse) : false
     };
@@ -316,7 +316,7 @@ export const PageResponse = {
   fromJSON(object: any): PageResponse {
     return {
       nextKey: isSet(object.nextKey) ? bytesFromBase64(object.nextKey) : new Uint8Array(),
-      total: isSet(object.total) ? Long.fromString(object.total) : Long.UZERO
+      total: isSet(object.total) ? Long.fromValue(object.total) : Long.UZERO
     };
   },
 

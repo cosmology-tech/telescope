@@ -393,7 +393,7 @@ export const SignatureDescriptor = {
     return {
       publicKey: isSet(object.publicKey) ? Any.fromJSON(object.publicKey) : undefined,
       data: isSet(object.data) ? SignatureDescriptor_Data.fromJSON(object.data) : undefined,
-      sequence: isSet(object.sequence) ? Long.fromString(object.sequence) : Long.UZERO
+      sequence: isSet(object.sequence) ? Long.fromValue(object.sequence) : Long.UZERO
     };
   },
 

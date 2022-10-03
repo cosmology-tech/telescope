@@ -92,7 +92,7 @@ export const GenesisState = {
       params: isSet(object.params) ? Params.fromJSON(object.params) : undefined,
       gauges: Array.isArray(object?.gauges) ? object.gauges.map((e: any) => Gauge.fromJSON(e)) : [],
       lockableDurations: Array.isArray(object?.lockableDurations) ? object.lockableDurations.map((e: any) => Duration.fromJSON(e)) : [],
-      lastGaugeId: isSet(object.lastGaugeId) ? Long.fromString(object.lastGaugeId) : Long.UZERO
+      lastGaugeId: isSet(object.lastGaugeId) ? Long.fromValue(object.lastGaugeId) : Long.UZERO
     };
   },
 

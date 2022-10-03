@@ -328,7 +328,7 @@ export const MetricValue = {
       startTime: isSet(object.startTime) ? fromJsonTimestamp(object.startTime) : undefined,
       endTime: isSet(object.endTime) ? fromJsonTimestamp(object.endTime) : undefined,
       boolValue: isSet(object.boolValue) ? Boolean(object.boolValue) : undefined,
-      int64Value: isSet(object.int64Value) ? Long.fromString(object.int64Value) : undefined,
+      int64Value: isSet(object.int64Value) ? Long.fromValue(object.int64Value) : undefined,
       doubleValue: isSet(object.doubleValue) ? Number(object.doubleValue) : undefined,
       stringValue: isSet(object.stringValue) ? String(object.stringValue) : undefined,
       distributionValue: isSet(object.distributionValue) ? Distribution.fromJSON(object.distributionValue) : undefined

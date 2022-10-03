@@ -549,7 +549,7 @@ export const BidID = {
   fromJSON(object: any): BidID {
     return {
       owner: isSet(object.owner) ? String(object.owner) : "",
-      dseq: isSet(object.dseq) ? Long.fromString(object.dseq) : Long.UZERO,
+      dseq: isSet(object.dseq) ? Long.fromValue(object.dseq) : Long.UZERO,
       gseq: isSet(object.gseq) ? Number(object.gseq) : 0,
       oseq: isSet(object.oseq) ? Number(object.oseq) : 0,
       provider: isSet(object.provider) ? String(object.provider) : ""
@@ -667,7 +667,7 @@ export const Bid = {
       bidId: isSet(object.bidId) ? BidID.fromJSON(object.bidId) : undefined,
       state: isSet(object.state) ? bid_StateFromJSON(object.state) : 0,
       price: isSet(object.price) ? DecCoin.fromJSON(object.price) : undefined,
-      createdAt: isSet(object.createdAt) ? Long.fromString(object.createdAt) : Long.ZERO
+      createdAt: isSet(object.createdAt) ? Long.fromValue(object.createdAt) : Long.ZERO
     };
   },
 
@@ -794,7 +794,7 @@ export const BidFilters = {
   fromJSON(object: any): BidFilters {
     return {
       owner: isSet(object.owner) ? String(object.owner) : "",
-      dseq: isSet(object.dseq) ? Long.fromString(object.dseq) : Long.UZERO,
+      dseq: isSet(object.dseq) ? Long.fromValue(object.dseq) : Long.UZERO,
       gseq: isSet(object.gseq) ? Number(object.gseq) : 0,
       oseq: isSet(object.oseq) ? Number(object.oseq) : 0,
       provider: isSet(object.provider) ? String(object.provider) : "",

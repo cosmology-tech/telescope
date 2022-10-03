@@ -91,7 +91,7 @@ export const GenesisState = {
     return {
       connections: Array.isArray(object?.connections) ? object.connections.map((e: any) => IdentifiedConnection.fromJSON(e)) : [],
       clientConnectionPaths: Array.isArray(object?.clientConnectionPaths) ? object.clientConnectionPaths.map((e: any) => ConnectionPaths.fromJSON(e)) : [],
-      nextConnectionSequence: isSet(object.nextConnectionSequence) ? Long.fromString(object.nextConnectionSequence) : Long.UZERO,
+      nextConnectionSequence: isSet(object.nextConnectionSequence) ? Long.fromValue(object.nextConnectionSequence) : Long.UZERO,
       params: isSet(object.params) ? Params.fromJSON(object.params) : undefined
     };
   },

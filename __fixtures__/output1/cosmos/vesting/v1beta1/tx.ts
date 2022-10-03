@@ -172,7 +172,7 @@ export const MsgCreateVestingAccount = {
       fromAddress: isSet(object.fromAddress) ? String(object.fromAddress) : "",
       toAddress: isSet(object.toAddress) ? String(object.toAddress) : "",
       amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromJSON(e)) : [],
-      endTime: isSet(object.endTime) ? Long.fromString(object.endTime) : Long.ZERO,
+      endTime: isSet(object.endTime) ? Long.fromValue(object.endTime) : Long.ZERO,
       delayed: isSet(object.delayed) ? Boolean(object.delayed) : false
     };
   },
@@ -512,7 +512,7 @@ export const MsgCreatePeriodicVestingAccount = {
     return {
       fromAddress: isSet(object.fromAddress) ? String(object.fromAddress) : "",
       toAddress: isSet(object.toAddress) ? String(object.toAddress) : "",
-      startTime: isSet(object.startTime) ? Long.fromString(object.startTime) : Long.ZERO,
+      startTime: isSet(object.startTime) ? Long.fromValue(object.startTime) : Long.ZERO,
       vestingPeriods: Array.isArray(object?.vestingPeriods) ? object.vestingPeriods.map((e: any) => Period.fromJSON(e)) : []
     };
   },

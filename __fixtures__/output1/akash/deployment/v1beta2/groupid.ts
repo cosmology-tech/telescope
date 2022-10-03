@@ -74,7 +74,7 @@ export const GroupID = {
   fromJSON(object: any): GroupID {
     return {
       owner: isSet(object.owner) ? String(object.owner) : "",
-      dseq: isSet(object.dseq) ? Long.fromString(object.dseq) : Long.UZERO,
+      dseq: isSet(object.dseq) ? Long.fromValue(object.dseq) : Long.UZERO,
       gseq: isSet(object.gseq) ? Number(object.gseq) : 0
     };
   },

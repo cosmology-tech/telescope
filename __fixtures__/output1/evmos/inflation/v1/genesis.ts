@@ -145,10 +145,10 @@ export const GenesisState = {
   fromJSON(object: any): GenesisState {
     return {
       params: isSet(object.params) ? Params.fromJSON(object.params) : undefined,
-      period: isSet(object.period) ? Long.fromString(object.period) : Long.UZERO,
+      period: isSet(object.period) ? Long.fromValue(object.period) : Long.UZERO,
       epochIdentifier: isSet(object.epochIdentifier) ? String(object.epochIdentifier) : "",
-      epochsPerPeriod: isSet(object.epochsPerPeriod) ? Long.fromString(object.epochsPerPeriod) : Long.ZERO,
-      skippedEpochs: isSet(object.skippedEpochs) ? Long.fromString(object.skippedEpochs) : Long.UZERO
+      epochsPerPeriod: isSet(object.epochsPerPeriod) ? Long.fromValue(object.epochsPerPeriod) : Long.ZERO,
+      skippedEpochs: isSet(object.skippedEpochs) ? Long.fromValue(object.skippedEpochs) : Long.UZERO
     };
   },
 

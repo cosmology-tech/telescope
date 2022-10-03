@@ -282,7 +282,7 @@ export const QueryBalanceResponse = {
 
   fromJSON(object: any): QueryBalanceResponse {
     return {
-      amount: isSet(object.amount) ? Long.fromString(object.amount) : Long.UZERO
+      amount: isSet(object.amount) ? Long.fromValue(object.amount) : Long.UZERO
     };
   },
 
@@ -572,7 +572,7 @@ export const QuerySupplyResponse = {
 
   fromJSON(object: any): QuerySupplyResponse {
     return {
-      amount: isSet(object.amount) ? Long.fromString(object.amount) : Long.UZERO
+      amount: isSet(object.amount) ? Long.fromValue(object.amount) : Long.UZERO
     };
   },
 

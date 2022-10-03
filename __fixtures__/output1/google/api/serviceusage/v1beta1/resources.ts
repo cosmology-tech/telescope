@@ -1958,8 +1958,8 @@ export const QuotaBucket = {
 
   fromJSON(object: any): QuotaBucket {
     return {
-      effectiveLimit: isSet(object.effectiveLimit) ? Long.fromString(object.effectiveLimit) : Long.ZERO,
-      defaultLimit: isSet(object.defaultLimit) ? Long.fromString(object.defaultLimit) : Long.ZERO,
+      effectiveLimit: isSet(object.effectiveLimit) ? Long.fromValue(object.effectiveLimit) : Long.ZERO,
+      defaultLimit: isSet(object.defaultLimit) ? Long.fromValue(object.defaultLimit) : Long.ZERO,
       producerOverride: isSet(object.producerOverride) ? QuotaOverride.fromJSON(object.producerOverride) : undefined,
       consumerOverride: isSet(object.consumerOverride) ? QuotaOverride.fromJSON(object.consumerOverride) : undefined,
       adminOverride: isSet(object.adminOverride) ? QuotaOverride.fromJSON(object.adminOverride) : undefined,
@@ -2221,7 +2221,7 @@ export const QuotaOverride = {
   fromJSON(object: any): QuotaOverride {
     return {
       name: isSet(object.name) ? String(object.name) : "",
-      overrideValue: isSet(object.overrideValue) ? Long.fromString(object.overrideValue) : Long.ZERO,
+      overrideValue: isSet(object.overrideValue) ? Long.fromValue(object.overrideValue) : Long.ZERO,
       dimensions: isObject(object.dimensions) ? Object.entries(object.dimensions).reduce<{
         [key: string]: string;
       }>((acc, [key, value]) => {
@@ -2564,7 +2564,7 @@ export const AdminQuotaPolicy = {
   fromJSON(object: any): AdminQuotaPolicy {
     return {
       name: isSet(object.name) ? String(object.name) : "",
-      policyValue: isSet(object.policyValue) ? Long.fromString(object.policyValue) : Long.ZERO,
+      policyValue: isSet(object.policyValue) ? Long.fromValue(object.policyValue) : Long.ZERO,
       dimensions: isObject(object.dimensions) ? Object.entries(object.dimensions).reduce<{
         [key: string]: string;
       }>((acc, [key, value]) => {

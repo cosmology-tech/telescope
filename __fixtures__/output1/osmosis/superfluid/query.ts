@@ -771,7 +771,7 @@ export const SuperfluidIntermediaryAccountInfo = {
     return {
       denom: isSet(object.denom) ? String(object.denom) : "",
       valAddr: isSet(object.valAddr) ? String(object.valAddr) : "",
-      gaugeId: isSet(object.gaugeId) ? Long.fromString(object.gaugeId) : Long.UZERO,
+      gaugeId: isSet(object.gaugeId) ? Long.fromValue(object.gaugeId) : Long.UZERO,
       address: isSet(object.address) ? String(object.address) : ""
     };
   },
@@ -1017,7 +1017,7 @@ export const ConnectedIntermediaryAccountRequest = {
 
   fromJSON(object: any): ConnectedIntermediaryAccountRequest {
     return {
-      lockId: isSet(object.lockId) ? Long.fromString(object.lockId) : Long.UZERO
+      lockId: isSet(object.lockId) ? Long.fromValue(object.lockId) : Long.UZERO
     };
   },
 

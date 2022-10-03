@@ -104,7 +104,7 @@ export const CommitInfo = {
 
   fromJSON(object: any): CommitInfo {
     return {
-      version: isSet(object.version) ? Long.fromString(object.version) : Long.ZERO,
+      version: isSet(object.version) ? Long.fromValue(object.version) : Long.ZERO,
       storeInfos: Array.isArray(object?.storeInfos) ? object.storeInfos.map((e: any) => StoreInfo.fromJSON(e)) : []
     };
   },
@@ -282,7 +282,7 @@ export const CommitID = {
 
   fromJSON(object: any): CommitID {
     return {
-      version: isSet(object.version) ? Long.fromString(object.version) : Long.ZERO,
+      version: isSet(object.version) ? Long.fromValue(object.version) : Long.ZERO,
       hash: isSet(object.hash) ? bytesFromBase64(object.hash) : new Uint8Array()
     };
   },

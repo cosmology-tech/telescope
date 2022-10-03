@@ -197,7 +197,7 @@ export const BaseVestingAccount = {
       originalVesting: Array.isArray(object?.originalVesting) ? object.originalVesting.map((e: any) => Coin.fromJSON(e)) : [],
       delegatedFree: Array.isArray(object?.delegatedFree) ? object.delegatedFree.map((e: any) => Coin.fromJSON(e)) : [],
       delegatedVesting: Array.isArray(object?.delegatedVesting) ? object.delegatedVesting.map((e: any) => Coin.fromJSON(e)) : [],
-      endTime: isSet(object.endTime) ? Long.fromString(object.endTime) : Long.ZERO
+      endTime: isSet(object.endTime) ? Long.fromValue(object.endTime) : Long.ZERO
     };
   },
 
@@ -324,7 +324,7 @@ export const ContinuousVestingAccount = {
   fromJSON(object: any): ContinuousVestingAccount {
     return {
       baseVestingAccount: isSet(object.baseVestingAccount) ? BaseVestingAccount.fromJSON(object.baseVestingAccount) : undefined,
-      startTime: isSet(object.startTime) ? Long.fromString(object.startTime) : Long.ZERO
+      startTime: isSet(object.startTime) ? Long.fromValue(object.startTime) : Long.ZERO
     };
   },
 
@@ -475,7 +475,7 @@ export const Period = {
 
   fromJSON(object: any): Period {
     return {
-      length: isSet(object.length) ? Long.fromString(object.length) : Long.ZERO,
+      length: isSet(object.length) ? Long.fromValue(object.length) : Long.ZERO,
       amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromJSON(e)) : []
     };
   },
@@ -580,7 +580,7 @@ export const PeriodicVestingAccount = {
   fromJSON(object: any): PeriodicVestingAccount {
     return {
       baseVestingAccount: isSet(object.baseVestingAccount) ? BaseVestingAccount.fromJSON(object.baseVestingAccount) : undefined,
-      startTime: isSet(object.startTime) ? Long.fromString(object.startTime) : Long.ZERO,
+      startTime: isSet(object.startTime) ? Long.fromValue(object.startTime) : Long.ZERO,
       vestingPeriods: Array.isArray(object?.vestingPeriods) ? object.vestingPeriods.map((e: any) => Period.fromJSON(e)) : []
     };
   },

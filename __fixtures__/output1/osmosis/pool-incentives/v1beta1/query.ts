@@ -114,7 +114,7 @@ export const QueryGaugeIdsRequest = {
 
   fromJSON(object: any): QueryGaugeIdsRequest {
     return {
-      poolId: isSet(object.poolId) ? Long.fromString(object.poolId) : Long.UZERO
+      poolId: isSet(object.poolId) ? Long.fromValue(object.poolId) : Long.UZERO
     };
   },
 
@@ -273,7 +273,7 @@ export const QueryGaugeIdsResponse_GaugeIdWithDuration = {
 
   fromJSON(object: any): QueryGaugeIdsResponse_GaugeIdWithDuration {
     return {
-      gaugeId: isSet(object.gaugeId) ? Long.fromString(object.gaugeId) : Long.UZERO,
+      gaugeId: isSet(object.gaugeId) ? Long.fromValue(object.gaugeId) : Long.UZERO,
       duration: isSet(object.duration) ? Duration.fromJSON(object.duration) : undefined
     };
   },
@@ -792,9 +792,9 @@ export const IncentivizedPool = {
 
   fromJSON(object: any): IncentivizedPool {
     return {
-      poolId: isSet(object.poolId) ? Long.fromString(object.poolId) : Long.UZERO,
+      poolId: isSet(object.poolId) ? Long.fromValue(object.poolId) : Long.UZERO,
       lockableDuration: isSet(object.lockableDuration) ? Duration.fromJSON(object.lockableDuration) : undefined,
-      gaugeId: isSet(object.gaugeId) ? Long.fromString(object.gaugeId) : Long.UZERO
+      gaugeId: isSet(object.gaugeId) ? Long.fromValue(object.gaugeId) : Long.UZERO
     };
   },
 

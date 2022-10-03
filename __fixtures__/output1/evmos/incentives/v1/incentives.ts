@@ -209,7 +209,7 @@ export const Incentive = {
       allocations: Array.isArray(object?.allocations) ? object.allocations.map((e: any) => DecCoin.fromJSON(e)) : [],
       epochs: isSet(object.epochs) ? Number(object.epochs) : 0,
       startTime: isSet(object.startTime) ? fromJsonTimestamp(object.startTime) : undefined,
-      totalGas: isSet(object.totalGas) ? Long.fromString(object.totalGas) : Long.UZERO
+      totalGas: isSet(object.totalGas) ? Long.fromValue(object.totalGas) : Long.UZERO
     };
   },
 
@@ -326,7 +326,7 @@ export const GasMeter = {
     return {
       contract: isSet(object.contract) ? String(object.contract) : "",
       participant: isSet(object.participant) ? String(object.participant) : "",
-      cumulativeGas: isSet(object.cumulativeGas) ? Long.fromString(object.cumulativeGas) : Long.UZERO
+      cumulativeGas: isSet(object.cumulativeGas) ? Long.fromValue(object.cumulativeGas) : Long.UZERO
     };
   },
 

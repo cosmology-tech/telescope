@@ -672,7 +672,7 @@ export const Deposit = {
 
   fromJSON(object: any): Deposit {
     return {
-      proposalId: isSet(object.proposalId) ? Long.fromString(object.proposalId) : Long.UZERO,
+      proposalId: isSet(object.proposalId) ? Long.fromValue(object.proposalId) : Long.UZERO,
       depositor: isSet(object.depositor) ? String(object.depositor) : "",
       amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromJSON(e)) : []
     };
@@ -835,7 +835,7 @@ export const Proposal = {
 
   fromJSON(object: any): Proposal {
     return {
-      proposalId: isSet(object.proposalId) ? Long.fromString(object.proposalId) : Long.UZERO,
+      proposalId: isSet(object.proposalId) ? Long.fromValue(object.proposalId) : Long.UZERO,
       content: isSet(object.content) ? Any.fromJSON(object.content) : undefined,
       status: isSet(object.status) ? proposalStatusFromJSON(object.status) : 0,
       finalTallyResult: isSet(object.finalTallyResult) ? TallyResult.fromJSON(object.finalTallyResult) : undefined,
@@ -1094,7 +1094,7 @@ export const Vote = {
 
   fromJSON(object: any): Vote {
     return {
-      proposalId: isSet(object.proposalId) ? Long.fromString(object.proposalId) : Long.UZERO,
+      proposalId: isSet(object.proposalId) ? Long.fromValue(object.proposalId) : Long.UZERO,
       voter: isSet(object.voter) ? String(object.voter) : "",
       option: isSet(object.option) ? voteOptionFromJSON(object.option) : 0,
       options: Array.isArray(object?.options) ? object.options.map((e: any) => WeightedVoteOption.fromJSON(e)) : []

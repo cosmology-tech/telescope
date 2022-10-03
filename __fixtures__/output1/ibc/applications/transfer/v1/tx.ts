@@ -177,7 +177,7 @@ export const MsgTransfer = {
       sender: isSet(object.sender) ? String(object.sender) : "",
       receiver: isSet(object.receiver) ? String(object.receiver) : "",
       timeoutHeight: isSet(object.timeoutHeight) ? Height.fromJSON(object.timeoutHeight) : undefined,
-      timeoutTimestamp: isSet(object.timeoutTimestamp) ? Long.fromString(object.timeoutTimestamp) : Long.UZERO
+      timeoutTimestamp: isSet(object.timeoutTimestamp) ? Long.fromValue(object.timeoutTimestamp) : Long.UZERO
     };
   },
 

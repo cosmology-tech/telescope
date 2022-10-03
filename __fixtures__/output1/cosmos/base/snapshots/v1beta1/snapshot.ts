@@ -205,7 +205,7 @@ export const Snapshot = {
 
   fromJSON(object: any): Snapshot {
     return {
-      height: isSet(object.height) ? Long.fromString(object.height) : Long.UZERO,
+      height: isSet(object.height) ? Long.fromValue(object.height) : Long.UZERO,
       format: isSet(object.format) ? Number(object.format) : 0,
       chunks: isSet(object.chunks) ? Number(object.chunks) : 0,
       hash: isSet(object.hash) ? bytesFromBase64(object.hash) : new Uint8Array(),
@@ -612,7 +612,7 @@ export const SnapshotIAVLItem = {
     return {
       key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array(),
       value: isSet(object.value) ? bytesFromBase64(object.value) : new Uint8Array(),
-      version: isSet(object.version) ? Long.fromString(object.version) : Long.ZERO,
+      version: isSet(object.version) ? Long.fromValue(object.version) : Long.ZERO,
       height: isSet(object.height) ? Number(object.height) : 0
     };
   },

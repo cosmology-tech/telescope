@@ -840,9 +840,9 @@ export const CheckResponse_ConsumerInfo = {
 
   fromJSON(object: any): CheckResponse_ConsumerInfo {
     return {
-      projectNumber: isSet(object.projectNumber) ? Long.fromString(object.projectNumber) : Long.ZERO,
+      projectNumber: isSet(object.projectNumber) ? Long.fromValue(object.projectNumber) : Long.ZERO,
       type: isSet(object.type) ? checkResponse_ConsumerInfo_ConsumerTypeFromJSON(object.type) : 0,
-      consumerNumber: isSet(object.consumerNumber) ? Long.fromString(object.consumerNumber) : Long.ZERO
+      consumerNumber: isSet(object.consumerNumber) ? Long.fromValue(object.consumerNumber) : Long.ZERO
     };
   },
 

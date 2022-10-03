@@ -251,7 +251,7 @@ export const QueryPeriodResponse = {
 
   fromJSON(object: any): QueryPeriodResponse {
     return {
-      period: isSet(object.period) ? Long.fromString(object.period) : Long.UZERO
+      period: isSet(object.period) ? Long.fromValue(object.period) : Long.UZERO
     };
   },
 
@@ -493,7 +493,7 @@ export const QuerySkippedEpochsResponse = {
 
   fromJSON(object: any): QuerySkippedEpochsResponse {
     return {
-      skippedEpochs: isSet(object.skippedEpochs) ? Long.fromString(object.skippedEpochs) : Long.UZERO
+      skippedEpochs: isSet(object.skippedEpochs) ? Long.fromValue(object.skippedEpochs) : Long.UZERO
     };
   },
 

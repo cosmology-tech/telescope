@@ -74,7 +74,7 @@ export const GenesisState = {
 
   fromJSON(object: any): GenesisState {
     return {
-      lastLockId: isSet(object.lastLockId) ? Long.fromString(object.lastLockId) : Long.UZERO,
+      lastLockId: isSet(object.lastLockId) ? Long.fromValue(object.lastLockId) : Long.UZERO,
       locks: Array.isArray(object?.locks) ? object.locks.map((e: any) => PeriodLock.fromJSON(e)) : [],
       syntheticLocks: Array.isArray(object?.syntheticLocks) ? object.syntheticLocks.map((e: any) => SyntheticLock.fromJSON(e)) : []
     };

@@ -187,7 +187,7 @@ export const MsgCreateBalancerPoolResponse = {
 
   fromJSON(object: any): MsgCreateBalancerPoolResponse {
     return {
-      poolId: isSet(object.poolId) ? Long.fromString(object.poolId) : Long.UZERO
+      poolId: isSet(object.poolId) ? Long.fromValue(object.poolId) : Long.UZERO
     };
   },
 

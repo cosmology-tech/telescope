@@ -90,7 +90,7 @@ export const App = {
 
   fromJSON(object: any): App {
     return {
-      protocol: isSet(object.protocol) ? Long.fromString(object.protocol) : Long.UZERO,
+      protocol: isSet(object.protocol) ? Long.fromValue(object.protocol) : Long.UZERO,
       software: isSet(object.software) ? String(object.software) : ""
     };
   },
@@ -173,8 +173,8 @@ export const Consensus = {
 
   fromJSON(object: any): Consensus {
     return {
-      block: isSet(object.block) ? Long.fromString(object.block) : Long.UZERO,
-      app: isSet(object.app) ? Long.fromString(object.app) : Long.UZERO
+      block: isSet(object.block) ? Long.fromValue(object.block) : Long.UZERO,
+      app: isSet(object.app) ? Long.fromValue(object.app) : Long.UZERO
     };
   },
 

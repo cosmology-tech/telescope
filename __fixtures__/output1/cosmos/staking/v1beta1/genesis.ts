@@ -351,7 +351,7 @@ export const LastValidatorPower = {
   fromJSON(object: any): LastValidatorPower {
     return {
       address: isSet(object.address) ? String(object.address) : "",
-      power: isSet(object.power) ? Long.fromString(object.power) : Long.ZERO
+      power: isSet(object.power) ? Long.fromValue(object.power) : Long.ZERO
     };
   },
 

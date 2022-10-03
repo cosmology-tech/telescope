@@ -1160,7 +1160,7 @@ export const GetBlockWithTxsRequest = {
 
   fromJSON(object: any): GetBlockWithTxsRequest {
     return {
-      height: isSet(object.height) ? Long.fromString(object.height) : Long.ZERO,
+      height: isSet(object.height) ? Long.fromValue(object.height) : Long.ZERO,
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
     };
   },

@@ -176,7 +176,7 @@ export const Group = {
       groupId: isSet(object.groupId) ? GroupID.fromJSON(object.groupId) : undefined,
       state: isSet(object.state) ? group_StateFromJSON(object.state) : 0,
       groupSpec: isSet(object.groupSpec) ? GroupSpec.fromJSON(object.groupSpec) : undefined,
-      createdAt: isSet(object.createdAt) ? Long.fromString(object.createdAt) : Long.ZERO
+      createdAt: isSet(object.createdAt) ? Long.fromValue(object.createdAt) : Long.ZERO
     };
   },
 

@@ -1789,7 +1789,7 @@ export const LockedRequest = {
 
   fromJSON(object: any): LockedRequest {
     return {
-      lockId: isSet(object.lockId) ? Long.fromString(object.lockId) : Long.UZERO
+      lockId: isSet(object.lockId) ? Long.fromValue(object.lockId) : Long.UZERO
     };
   },
 
@@ -1927,7 +1927,7 @@ export const SyntheticLockupsByLockupIDRequest = {
 
   fromJSON(object: any): SyntheticLockupsByLockupIDRequest {
     return {
-      lockId: isSet(object.lockId) ? Long.fromString(object.lockId) : Long.UZERO
+      lockId: isSet(object.lockId) ? Long.fromValue(object.lockId) : Long.UZERO
     };
   },
 

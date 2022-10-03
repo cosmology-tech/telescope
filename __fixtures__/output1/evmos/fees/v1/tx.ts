@@ -205,7 +205,7 @@ export const MsgRegisterDevFeeInfo = {
       contractAddress: isSet(object.contractAddress) ? String(object.contractAddress) : "",
       deployerAddress: isSet(object.deployerAddress) ? String(object.deployerAddress) : "",
       withdrawAddress: isSet(object.withdrawAddress) ? String(object.withdrawAddress) : "",
-      nonces: Array.isArray(object?.nonces) ? object.nonces.map((e: any) => Long.fromString(e)) : []
+      nonces: Array.isArray(object?.nonces) ? object.nonces.map((e: any) => Long.fromValue(e)) : []
     };
   },
 

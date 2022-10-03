@@ -1604,8 +1604,8 @@ export const Literal = {
     return {
       nullValue: isSet(object.nullValue) ? nullValueFromJSON(object.nullValue) : undefined,
       boolValue: isSet(object.boolValue) ? Boolean(object.boolValue) : undefined,
-      int64Value: isSet(object.int64Value) ? Long.fromString(object.int64Value) : undefined,
-      uint64Value: isSet(object.uint64Value) ? Long.fromString(object.uint64Value) : undefined,
+      int64Value: isSet(object.int64Value) ? Long.fromValue(object.int64Value) : undefined,
+      uint64Value: isSet(object.uint64Value) ? Long.fromValue(object.uint64Value) : undefined,
       doubleValue: isSet(object.doubleValue) ? Number(object.doubleValue) : undefined,
       stringValue: isSet(object.stringValue) ? String(object.stringValue) : undefined,
       bytesValue: isSet(object.bytesValue) ? bytesFromBase64(object.bytesValue) : undefined

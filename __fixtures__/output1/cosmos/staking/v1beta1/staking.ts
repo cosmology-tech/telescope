@@ -1163,7 +1163,7 @@ export const Validator = {
       tokens: isSet(object.tokens) ? String(object.tokens) : "",
       delegatorShares: isSet(object.delegatorShares) ? String(object.delegatorShares) : "",
       description: isSet(object.description) ? Description.fromJSON(object.description) : undefined,
-      unbondingHeight: isSet(object.unbondingHeight) ? Long.fromString(object.unbondingHeight) : Long.ZERO,
+      unbondingHeight: isSet(object.unbondingHeight) ? Long.fromValue(object.unbondingHeight) : Long.ZERO,
       unbondingTime: isSet(object.unbondingTime) ? fromJsonTimestamp(object.unbondingTime) : undefined,
       commission: isSet(object.commission) ? Commission.fromJSON(object.commission) : undefined,
       minSelfDelegation: isSet(object.minSelfDelegation) ? String(object.minSelfDelegation) : ""
@@ -1931,7 +1931,7 @@ export const UnbondingDelegationEntry = {
 
   fromJSON(object: any): UnbondingDelegationEntry {
     return {
-      creationHeight: isSet(object.creationHeight) ? Long.fromString(object.creationHeight) : Long.ZERO,
+      creationHeight: isSet(object.creationHeight) ? Long.fromValue(object.creationHeight) : Long.ZERO,
       completionTime: isSet(object.completionTime) ? fromJsonTimestamp(object.completionTime) : undefined,
       initialBalance: isSet(object.initialBalance) ? String(object.initialBalance) : "",
       balance: isSet(object.balance) ? String(object.balance) : ""
@@ -2042,7 +2042,7 @@ export const RedelegationEntry = {
 
   fromJSON(object: any): RedelegationEntry {
     return {
-      creationHeight: isSet(object.creationHeight) ? Long.fromString(object.creationHeight) : Long.ZERO,
+      creationHeight: isSet(object.creationHeight) ? Long.fromValue(object.creationHeight) : Long.ZERO,
       completionTime: isSet(object.completionTime) ? fromJsonTimestamp(object.completionTime) : undefined,
       initialBalance: isSet(object.initialBalance) ? String(object.initialBalance) : "",
       sharesDst: isSet(object.sharesDst) ? String(object.sharesDst) : ""

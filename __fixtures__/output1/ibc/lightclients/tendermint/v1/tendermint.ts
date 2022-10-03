@@ -805,8 +805,8 @@ export const Fraction = {
 
   fromJSON(object: any): Fraction {
     return {
-      numerator: isSet(object.numerator) ? Long.fromString(object.numerator) : Long.UZERO,
-      denominator: isSet(object.denominator) ? Long.fromString(object.denominator) : Long.UZERO
+      numerator: isSet(object.numerator) ? Long.fromValue(object.numerator) : Long.UZERO,
+      denominator: isSet(object.denominator) ? Long.fromValue(object.denominator) : Long.UZERO
     };
   },
 

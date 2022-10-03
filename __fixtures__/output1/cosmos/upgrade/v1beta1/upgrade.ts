@@ -249,7 +249,7 @@ export const Plan = {
     return {
       name: isSet(object.name) ? String(object.name) : "",
       time: isSet(object.time) ? fromJsonTimestamp(object.time) : undefined,
-      height: isSet(object.height) ? Long.fromString(object.height) : Long.ZERO,
+      height: isSet(object.height) ? Long.fromValue(object.height) : Long.ZERO,
       info: isSet(object.info) ? String(object.info) : "",
       upgradedClientState: isSet(object.upgradedClientState) ? Any.fromJSON(object.upgradedClientState) : undefined
     };
@@ -526,7 +526,7 @@ export const ModuleVersion = {
   fromJSON(object: any): ModuleVersion {
     return {
       name: isSet(object.name) ? String(object.name) : "",
-      version: isSet(object.version) ? Long.fromString(object.version) : Long.UZERO
+      version: isSet(object.version) ? Long.fromValue(object.version) : Long.UZERO
     };
   },
 

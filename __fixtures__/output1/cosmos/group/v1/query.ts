@@ -457,7 +457,7 @@ export const QueryGroupInfoRequest = {
 
   fromJSON(object: any): QueryGroupInfoRequest {
     return {
-      groupId: isSet(object.groupId) ? Long.fromString(object.groupId) : Long.UZERO
+      groupId: isSet(object.groupId) ? Long.fromValue(object.groupId) : Long.UZERO
     };
   },
 
@@ -742,7 +742,7 @@ export const QueryGroupMembersRequest = {
 
   fromJSON(object: any): QueryGroupMembersRequest {
     return {
-      groupId: isSet(object.groupId) ? Long.fromString(object.groupId) : Long.UZERO,
+      groupId: isSet(object.groupId) ? Long.fromValue(object.groupId) : Long.UZERO,
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
     };
   },
@@ -1098,7 +1098,7 @@ export const QueryGroupPoliciesByGroupRequest = {
 
   fromJSON(object: any): QueryGroupPoliciesByGroupRequest {
     return {
-      groupId: isSet(object.groupId) ? Long.fromString(object.groupId) : Long.UZERO,
+      groupId: isSet(object.groupId) ? Long.fromValue(object.groupId) : Long.UZERO,
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
     };
   },
@@ -1445,7 +1445,7 @@ export const QueryProposalRequest = {
 
   fromJSON(object: any): QueryProposalRequest {
     return {
-      proposalId: isSet(object.proposalId) ? Long.fromString(object.proposalId) : Long.UZERO
+      proposalId: isSet(object.proposalId) ? Long.fromValue(object.proposalId) : Long.UZERO
     };
   },
 
@@ -1770,7 +1770,7 @@ export const QueryVoteByProposalVoterRequest = {
 
   fromJSON(object: any): QueryVoteByProposalVoterRequest {
     return {
-      proposalId: isSet(object.proposalId) ? Long.fromString(object.proposalId) : Long.UZERO,
+      proposalId: isSet(object.proposalId) ? Long.fromValue(object.proposalId) : Long.UZERO,
       voter: isSet(object.voter) ? String(object.voter) : ""
     };
   },
@@ -1922,7 +1922,7 @@ export const QueryVotesByProposalRequest = {
 
   fromJSON(object: any): QueryVotesByProposalRequest {
     return {
-      proposalId: isSet(object.proposalId) ? Long.fromString(object.proposalId) : Long.UZERO,
+      proposalId: isSet(object.proposalId) ? Long.fromValue(object.proposalId) : Long.UZERO,
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
     };
   },
@@ -2447,7 +2447,7 @@ export const QueryTallyResultRequest = {
 
   fromJSON(object: any): QueryTallyResultRequest {
     return {
-      proposalId: isSet(object.proposalId) ? Long.fromString(object.proposalId) : Long.UZERO
+      proposalId: isSet(object.proposalId) ? Long.fromValue(object.proposalId) : Long.UZERO
     };
   },
 

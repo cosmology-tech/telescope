@@ -825,7 +825,7 @@ export const DeploymentID = {
   fromJSON(object: any): DeploymentID {
     return {
       owner: isSet(object.owner) ? String(object.owner) : "",
-      dseq: isSet(object.dseq) ? Long.fromString(object.dseq) : Long.UZERO
+      dseq: isSet(object.dseq) ? Long.fromValue(object.dseq) : Long.UZERO
     };
   },
 
@@ -928,7 +928,7 @@ export const Deployment = {
       deploymentId: isSet(object.deploymentId) ? DeploymentID.fromJSON(object.deploymentId) : undefined,
       state: isSet(object.state) ? deployment_StateFromJSON(object.state) : 0,
       version: isSet(object.version) ? bytesFromBase64(object.version) : new Uint8Array(),
-      createdAt: isSet(object.createdAt) ? Long.fromString(object.createdAt) : Long.ZERO
+      createdAt: isSet(object.createdAt) ? Long.fromValue(object.createdAt) : Long.ZERO
     };
   },
 
@@ -1028,7 +1028,7 @@ export const DeploymentFilters = {
   fromJSON(object: any): DeploymentFilters {
     return {
       owner: isSet(object.owner) ? String(object.owner) : "",
-      dseq: isSet(object.dseq) ? Long.fromString(object.dseq) : Long.UZERO,
+      dseq: isSet(object.dseq) ? Long.fromValue(object.dseq) : Long.UZERO,
       state: isSet(object.state) ? String(object.state) : ""
     };
   },

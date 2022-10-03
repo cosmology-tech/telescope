@@ -160,7 +160,7 @@ export const GenesisState = {
       sendSequences: Array.isArray(object?.sendSequences) ? object.sendSequences.map((e: any) => PacketSequence.fromJSON(e)) : [],
       recvSequences: Array.isArray(object?.recvSequences) ? object.recvSequences.map((e: any) => PacketSequence.fromJSON(e)) : [],
       ackSequences: Array.isArray(object?.ackSequences) ? object.ackSequences.map((e: any) => PacketSequence.fromJSON(e)) : [],
-      nextChannelSequence: isSet(object.nextChannelSequence) ? Long.fromString(object.nextChannelSequence) : Long.UZERO
+      nextChannelSequence: isSet(object.nextChannelSequence) ? Long.fromValue(object.nextChannelSequence) : Long.UZERO
     };
   },
 
@@ -349,7 +349,7 @@ export const PacketSequence = {
     return {
       portId: isSet(object.portId) ? String(object.portId) : "",
       channelId: isSet(object.channelId) ? String(object.channelId) : "",
-      sequence: isSet(object.sequence) ? Long.fromString(object.sequence) : Long.UZERO
+      sequence: isSet(object.sequence) ? Long.fromValue(object.sequence) : Long.UZERO
     };
   },
 

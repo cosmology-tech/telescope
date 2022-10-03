@@ -860,7 +860,7 @@ export const QueryGasMeterResponse = {
 
   fromJSON(object: any): QueryGasMeterResponse {
     return {
-      gasMeter: isSet(object.gasMeter) ? Long.fromString(object.gasMeter) : Long.UZERO
+      gasMeter: isSet(object.gasMeter) ? Long.fromValue(object.gasMeter) : Long.UZERO
     };
   },
 

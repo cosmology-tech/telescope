@@ -127,8 +127,8 @@ export const BaseAccount = {
     return {
       address: isSet(object.address) ? String(object.address) : "",
       pubKey: isSet(object.pubKey) ? Any.fromJSON(object.pubKey) : undefined,
-      accountNumber: isSet(object.accountNumber) ? Long.fromString(object.accountNumber) : Long.UZERO,
-      sequence: isSet(object.sequence) ? Long.fromString(object.sequence) : Long.UZERO
+      accountNumber: isSet(object.accountNumber) ? Long.fromValue(object.accountNumber) : Long.UZERO,
+      sequence: isSet(object.sequence) ? Long.fromValue(object.sequence) : Long.UZERO
     };
   },
 
@@ -354,11 +354,11 @@ export const Params = {
 
   fromJSON(object: any): Params {
     return {
-      maxMemoCharacters: isSet(object.maxMemoCharacters) ? Long.fromString(object.maxMemoCharacters) : Long.UZERO,
-      txSigLimit: isSet(object.txSigLimit) ? Long.fromString(object.txSigLimit) : Long.UZERO,
-      txSizeCostPerByte: isSet(object.txSizeCostPerByte) ? Long.fromString(object.txSizeCostPerByte) : Long.UZERO,
-      sigVerifyCostEd25519: isSet(object.sigVerifyCostEd25519) ? Long.fromString(object.sigVerifyCostEd25519) : Long.UZERO,
-      sigVerifyCostSecp256k1: isSet(object.sigVerifyCostSecp256k1) ? Long.fromString(object.sigVerifyCostSecp256k1) : Long.UZERO
+      maxMemoCharacters: isSet(object.maxMemoCharacters) ? Long.fromValue(object.maxMemoCharacters) : Long.UZERO,
+      txSigLimit: isSet(object.txSigLimit) ? Long.fromValue(object.txSigLimit) : Long.UZERO,
+      txSizeCostPerByte: isSet(object.txSizeCostPerByte) ? Long.fromValue(object.txSizeCostPerByte) : Long.UZERO,
+      sigVerifyCostEd25519: isSet(object.sigVerifyCostEd25519) ? Long.fromValue(object.sigVerifyCostEd25519) : Long.UZERO,
+      sigVerifyCostSecp256k1: isSet(object.sigVerifyCostSecp256k1) ? Long.fromValue(object.sigVerifyCostSecp256k1) : Long.UZERO
     };
   },
 

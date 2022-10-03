@@ -406,12 +406,12 @@ export const Distribution = {
 
   fromJSON(object: any): Distribution {
     return {
-      count: isSet(object.count) ? Long.fromString(object.count) : Long.ZERO,
+      count: isSet(object.count) ? Long.fromValue(object.count) : Long.ZERO,
       mean: isSet(object.mean) ? Number(object.mean) : 0,
       minimum: isSet(object.minimum) ? Number(object.minimum) : 0,
       maximum: isSet(object.maximum) ? Number(object.maximum) : 0,
       sumOfSquaredDeviation: isSet(object.sumOfSquaredDeviation) ? Number(object.sumOfSquaredDeviation) : 0,
-      bucketCounts: Array.isArray(object?.bucketCounts) ? object.bucketCounts.map((e: any) => Long.fromString(e)) : [],
+      bucketCounts: Array.isArray(object?.bucketCounts) ? object.bucketCounts.map((e: any) => Long.fromValue(e)) : [],
       linearBuckets: isSet(object.linearBuckets) ? Distribution_LinearBuckets.fromJSON(object.linearBuckets) : undefined,
       exponentialBuckets: isSet(object.exponentialBuckets) ? Distribution_ExponentialBuckets.fromJSON(object.exponentialBuckets) : undefined,
       explicitBuckets: isSet(object.explicitBuckets) ? Distribution_ExplicitBuckets.fromJSON(object.explicitBuckets) : undefined,

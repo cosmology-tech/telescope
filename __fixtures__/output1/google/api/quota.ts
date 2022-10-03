@@ -560,7 +560,7 @@ export const MetricRule_MetricCostsEntry = {
   fromJSON(object: any): MetricRule_MetricCostsEntry {
     return {
       key: isSet(object.key) ? String(object.key) : "",
-      value: isSet(object.value) ? Long.fromString(object.value) : Long.ZERO
+      value: isSet(object.value) ? Long.fromValue(object.value) : Long.ZERO
     };
   },
 
@@ -765,7 +765,7 @@ export const QuotaLimit_ValuesEntry = {
   fromJSON(object: any): QuotaLimit_ValuesEntry {
     return {
       key: isSet(object.key) ? String(object.key) : "",
-      value: isSet(object.value) ? Long.fromString(object.value) : Long.ZERO
+      value: isSet(object.value) ? Long.fromValue(object.value) : Long.ZERO
     };
   },
 
@@ -929,9 +929,9 @@ export const QuotaLimit = {
     return {
       name: isSet(object.name) ? String(object.name) : "",
       description: isSet(object.description) ? String(object.description) : "",
-      defaultLimit: isSet(object.defaultLimit) ? Long.fromString(object.defaultLimit) : Long.ZERO,
-      maxLimit: isSet(object.maxLimit) ? Long.fromString(object.maxLimit) : Long.ZERO,
-      freeTier: isSet(object.freeTier) ? Long.fromString(object.freeTier) : Long.ZERO,
+      defaultLimit: isSet(object.defaultLimit) ? Long.fromValue(object.defaultLimit) : Long.ZERO,
+      maxLimit: isSet(object.maxLimit) ? Long.fromValue(object.maxLimit) : Long.ZERO,
+      freeTier: isSet(object.freeTier) ? Long.fromValue(object.freeTier) : Long.ZERO,
       duration: isSet(object.duration) ? String(object.duration) : "",
       metric: isSet(object.metric) ? String(object.metric) : "",
       unit: isSet(object.unit) ? String(object.unit) : "",

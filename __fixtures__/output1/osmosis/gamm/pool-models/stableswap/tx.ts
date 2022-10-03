@@ -204,7 +204,7 @@ export const MsgCreateStableswapPoolResponse = {
 
   fromJSON(object: any): MsgCreateStableswapPoolResponse {
     return {
-      poolId: isSet(object.poolId) ? Long.fromString(object.poolId) : Long.UZERO
+      poolId: isSet(object.poolId) ? Long.fromValue(object.poolId) : Long.UZERO
     };
   },
 
@@ -304,8 +304,8 @@ export const MsgStableSwapAdjustScalingFactors = {
   fromJSON(object: any): MsgStableSwapAdjustScalingFactors {
     return {
       sender: isSet(object.sender) ? String(object.sender) : "",
-      poolId: isSet(object.poolId) ? Long.fromString(object.poolId) : Long.UZERO,
-      scalingFactors: Array.isArray(object?.scalingFactors) ? object.scalingFactors.map((e: any) => Long.fromString(e)) : []
+      poolId: isSet(object.poolId) ? Long.fromValue(object.poolId) : Long.UZERO,
+      scalingFactors: Array.isArray(object?.scalingFactors) ? object.scalingFactors.map((e: any) => Long.fromValue(e)) : []
     };
   },
 

@@ -258,7 +258,7 @@ export const LeaseID = {
   fromJSON(object: any): LeaseID {
     return {
       owner: isSet(object.owner) ? String(object.owner) : "",
-      dseq: isSet(object.dseq) ? Long.fromString(object.dseq) : Long.UZERO,
+      dseq: isSet(object.dseq) ? Long.fromValue(object.dseq) : Long.UZERO,
       gseq: isSet(object.gseq) ? Number(object.gseq) : 0,
       oseq: isSet(object.oseq) ? Number(object.oseq) : 0,
       provider: isSet(object.provider) ? String(object.provider) : ""
@@ -385,8 +385,8 @@ export const Lease = {
       leaseId: isSet(object.leaseId) ? LeaseID.fromJSON(object.leaseId) : undefined,
       state: isSet(object.state) ? lease_StateFromJSON(object.state) : 0,
       price: isSet(object.price) ? DecCoin.fromJSON(object.price) : undefined,
-      createdAt: isSet(object.createdAt) ? Long.fromString(object.createdAt) : Long.ZERO,
-      closedOn: isSet(object.closedOn) ? Long.fromString(object.closedOn) : Long.ZERO
+      createdAt: isSet(object.createdAt) ? Long.fromValue(object.createdAt) : Long.ZERO,
+      closedOn: isSet(object.closedOn) ? Long.fromValue(object.closedOn) : Long.ZERO
     };
   },
 
@@ -517,7 +517,7 @@ export const LeaseFilters = {
   fromJSON(object: any): LeaseFilters {
     return {
       owner: isSet(object.owner) ? String(object.owner) : "",
-      dseq: isSet(object.dseq) ? Long.fromString(object.dseq) : Long.UZERO,
+      dseq: isSet(object.dseq) ? Long.fromValue(object.dseq) : Long.UZERO,
       gseq: isSet(object.gseq) ? Number(object.gseq) : 0,
       oseq: isSet(object.oseq) ? Number(object.oseq) : 0,
       provider: isSet(object.provider) ? String(object.provider) : "",

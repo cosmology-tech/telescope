@@ -91,9 +91,9 @@ export const Equivocation = {
 
   fromJSON(object: any): Equivocation {
     return {
-      height: isSet(object.height) ? Long.fromString(object.height) : Long.ZERO,
+      height: isSet(object.height) ? Long.fromValue(object.height) : Long.ZERO,
       time: isSet(object.time) ? fromJsonTimestamp(object.time) : undefined,
-      power: isSet(object.power) ? Long.fromString(object.power) : Long.ZERO,
+      power: isSet(object.power) ? Long.fromValue(object.power) : Long.ZERO,
       consensusAddress: isSet(object.consensusAddress) ? String(object.consensusAddress) : ""
     };
   },

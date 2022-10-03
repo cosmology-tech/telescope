@@ -270,7 +270,7 @@ export const MsgJoinPool = {
   fromJSON(object: any): MsgJoinPool {
     return {
       sender: isSet(object.sender) ? String(object.sender) : "",
-      poolId: isSet(object.poolId) ? Long.fromString(object.poolId) : Long.UZERO,
+      poolId: isSet(object.poolId) ? Long.fromValue(object.poolId) : Long.UZERO,
       shareOutAmount: isSet(object.shareOutAmount) ? String(object.shareOutAmount) : "",
       tokenInMaxs: Array.isArray(object?.tokenInMaxs) ? object.tokenInMaxs.map((e: any) => Coin.fromJSON(e)) : []
     };
@@ -445,7 +445,7 @@ export const MsgExitPool = {
   fromJSON(object: any): MsgExitPool {
     return {
       sender: isSet(object.sender) ? String(object.sender) : "",
-      poolId: isSet(object.poolId) ? Long.fromString(object.poolId) : Long.UZERO,
+      poolId: isSet(object.poolId) ? Long.fromValue(object.poolId) : Long.UZERO,
       shareInAmount: isSet(object.shareInAmount) ? String(object.shareInAmount) : "",
       tokenOutMins: Array.isArray(object?.tokenOutMins) ? object.tokenOutMins.map((e: any) => Coin.fromJSON(e)) : []
     };
@@ -601,7 +601,7 @@ export const SwapAmountInRoute = {
 
   fromJSON(object: any): SwapAmountInRoute {
     return {
-      poolId: isSet(object.poolId) ? Long.fromString(object.poolId) : Long.UZERO,
+      poolId: isSet(object.poolId) ? Long.fromValue(object.poolId) : Long.UZERO,
       tokenOutDenom: isSet(object.tokenOutDenom) ? String(object.tokenOutDenom) : ""
     };
   },
@@ -876,7 +876,7 @@ export const SwapAmountOutRoute = {
 
   fromJSON(object: any): SwapAmountOutRoute {
     return {
-      poolId: isSet(object.poolId) ? Long.fromString(object.poolId) : Long.UZERO,
+      poolId: isSet(object.poolId) ? Long.fromValue(object.poolId) : Long.UZERO,
       tokenInDenom: isSet(object.tokenInDenom) ? String(object.tokenInDenom) : ""
     };
   },
@@ -1170,7 +1170,7 @@ export const MsgJoinSwapExternAmountIn = {
   fromJSON(object: any): MsgJoinSwapExternAmountIn {
     return {
       sender: isSet(object.sender) ? String(object.sender) : "",
-      poolId: isSet(object.poolId) ? Long.fromString(object.poolId) : Long.UZERO,
+      poolId: isSet(object.poolId) ? Long.fromValue(object.poolId) : Long.UZERO,
       tokenIn: isSet(object.tokenIn) ? Coin.fromJSON(object.tokenIn) : undefined,
       shareOutMinAmount: isSet(object.shareOutMinAmount) ? String(object.shareOutMinAmount) : ""
     };
@@ -1359,7 +1359,7 @@ export const MsgJoinSwapShareAmountOut = {
   fromJSON(object: any): MsgJoinSwapShareAmountOut {
     return {
       sender: isSet(object.sender) ? String(object.sender) : "",
-      poolId: isSet(object.poolId) ? Long.fromString(object.poolId) : Long.UZERO,
+      poolId: isSet(object.poolId) ? Long.fromValue(object.poolId) : Long.UZERO,
       tokenInDenom: isSet(object.tokenInDenom) ? String(object.tokenInDenom) : "",
       shareOutAmount: isSet(object.shareOutAmount) ? String(object.shareOutAmount) : "",
       tokenInMaxAmount: isSet(object.tokenInMaxAmount) ? String(object.tokenInMaxAmount) : ""
@@ -1553,7 +1553,7 @@ export const MsgExitSwapShareAmountIn = {
   fromJSON(object: any): MsgExitSwapShareAmountIn {
     return {
       sender: isSet(object.sender) ? String(object.sender) : "",
-      poolId: isSet(object.poolId) ? Long.fromString(object.poolId) : Long.UZERO,
+      poolId: isSet(object.poolId) ? Long.fromValue(object.poolId) : Long.UZERO,
       tokenOutDenom: isSet(object.tokenOutDenom) ? String(object.tokenOutDenom) : "",
       shareInAmount: isSet(object.shareInAmount) ? String(object.shareInAmount) : "",
       tokenOutMinAmount: isSet(object.tokenOutMinAmount) ? String(object.tokenOutMinAmount) : ""
@@ -1738,7 +1738,7 @@ export const MsgExitSwapExternAmountOut = {
   fromJSON(object: any): MsgExitSwapExternAmountOut {
     return {
       sender: isSet(object.sender) ? String(object.sender) : "",
-      poolId: isSet(object.poolId) ? Long.fromString(object.poolId) : Long.UZERO,
+      poolId: isSet(object.poolId) ? Long.fromValue(object.poolId) : Long.UZERO,
       tokenOut: isSet(object.tokenOut) ? Coin.fromJSON(object.tokenOut) : undefined,
       shareInMaxAmount: isSet(object.shareInMaxAmount) ? String(object.shareInMaxAmount) : ""
     };

@@ -235,7 +235,7 @@ export const QueryPoolRequest = {
 
   fromJSON(object: any): QueryPoolRequest {
     return {
-      poolId: isSet(object.poolId) ? Long.fromString(object.poolId) : Long.UZERO
+      poolId: isSet(object.poolId) ? Long.fromValue(object.poolId) : Long.UZERO
     };
   },
 
@@ -589,7 +589,7 @@ export const QueryNumPoolsResponse = {
 
   fromJSON(object: any): QueryNumPoolsResponse {
     return {
-      numPools: isSet(object.numPools) ? Long.fromString(object.numPools) : Long.UZERO
+      numPools: isSet(object.numPools) ? Long.fromValue(object.numPools) : Long.UZERO
     };
   },
 
@@ -658,7 +658,7 @@ export const QueryPoolParamsRequest = {
 
   fromJSON(object: any): QueryPoolParamsRequest {
     return {
-      poolId: isSet(object.poolId) ? Long.fromString(object.poolId) : Long.UZERO
+      poolId: isSet(object.poolId) ? Long.fromValue(object.poolId) : Long.UZERO
     };
   },
 
@@ -796,7 +796,7 @@ export const QueryTotalPoolLiquidityRequest = {
 
   fromJSON(object: any): QueryTotalPoolLiquidityRequest {
     return {
-      poolId: isSet(object.poolId) ? Long.fromString(object.poolId) : Long.UZERO
+      poolId: isSet(object.poolId) ? Long.fromValue(object.poolId) : Long.UZERO
     };
   },
 
@@ -946,7 +946,7 @@ export const QueryTotalSharesRequest = {
 
   fromJSON(object: any): QueryTotalSharesRequest {
     return {
-      poolId: isSet(object.poolId) ? Long.fromString(object.poolId) : Long.UZERO
+      poolId: isSet(object.poolId) ? Long.fromValue(object.poolId) : Long.UZERO
     };
   },
 
@@ -1102,7 +1102,7 @@ export const QuerySpotPriceRequest = {
 
   fromJSON(object: any): QuerySpotPriceRequest {
     return {
-      poolId: isSet(object.poolId) ? Long.fromString(object.poolId) : Long.UZERO,
+      poolId: isSet(object.poolId) ? Long.fromValue(object.poolId) : Long.UZERO,
       baseAssetDenom: isSet(object.baseAssetDenom) ? String(object.baseAssetDenom) : "",
       quoteAssetDenom: isSet(object.quoteAssetDenom) ? String(object.quoteAssetDenom) : ""
     };
@@ -1278,7 +1278,7 @@ export const QuerySwapExactAmountInRequest = {
   fromJSON(object: any): QuerySwapExactAmountInRequest {
     return {
       sender: isSet(object.sender) ? String(object.sender) : "",
-      poolId: isSet(object.poolId) ? Long.fromString(object.poolId) : Long.UZERO,
+      poolId: isSet(object.poolId) ? Long.fromValue(object.poolId) : Long.UZERO,
       tokenIn: isSet(object.tokenIn) ? String(object.tokenIn) : "",
       routes: Array.isArray(object?.routes) ? object.routes.map((e: any) => SwapAmountInRoute.fromJSON(e)) : []
     };
@@ -1470,7 +1470,7 @@ export const QuerySwapExactAmountOutRequest = {
   fromJSON(object: any): QuerySwapExactAmountOutRequest {
     return {
       sender: isSet(object.sender) ? String(object.sender) : "",
-      poolId: isSet(object.poolId) ? Long.fromString(object.poolId) : Long.UZERO,
+      poolId: isSet(object.poolId) ? Long.fromValue(object.poolId) : Long.UZERO,
       routes: Array.isArray(object?.routes) ? object.routes.map((e: any) => SwapAmountOutRoute.fromJSON(e)) : [],
       tokenOut: isSet(object.tokenOut) ? String(object.tokenOut) : ""
     };

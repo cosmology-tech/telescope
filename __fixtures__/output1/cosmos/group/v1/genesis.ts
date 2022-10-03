@@ -177,12 +177,12 @@ export const GenesisState = {
 
   fromJSON(object: any): GenesisState {
     return {
-      groupSeq: isSet(object.groupSeq) ? Long.fromString(object.groupSeq) : Long.UZERO,
+      groupSeq: isSet(object.groupSeq) ? Long.fromValue(object.groupSeq) : Long.UZERO,
       groups: Array.isArray(object?.groups) ? object.groups.map((e: any) => GroupInfo.fromJSON(e)) : [],
       groupMembers: Array.isArray(object?.groupMembers) ? object.groupMembers.map((e: any) => GroupMember.fromJSON(e)) : [],
-      groupPolicySeq: isSet(object.groupPolicySeq) ? Long.fromString(object.groupPolicySeq) : Long.UZERO,
+      groupPolicySeq: isSet(object.groupPolicySeq) ? Long.fromValue(object.groupPolicySeq) : Long.UZERO,
       groupPolicies: Array.isArray(object?.groupPolicies) ? object.groupPolicies.map((e: any) => GroupPolicyInfo.fromJSON(e)) : [],
-      proposalSeq: isSet(object.proposalSeq) ? Long.fromString(object.proposalSeq) : Long.UZERO,
+      proposalSeq: isSet(object.proposalSeq) ? Long.fromValue(object.proposalSeq) : Long.UZERO,
       proposals: Array.isArray(object?.proposals) ? object.proposals.map((e: any) => Proposal.fromJSON(e)) : [],
       votes: Array.isArray(object?.votes) ? object.votes.map((e: any) => Vote.fromJSON(e)) : []
     };

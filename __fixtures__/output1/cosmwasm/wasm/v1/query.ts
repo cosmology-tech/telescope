@@ -748,7 +748,7 @@ export const QueryContractsByCodeRequest = {
 
   fromJSON(object: any): QueryContractsByCodeRequest {
     return {
-      codeId: isSet(object.codeId) ? Long.fromString(object.codeId) : Long.UZERO,
+      codeId: isSet(object.codeId) ? Long.fromValue(object.codeId) : Long.UZERO,
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
     };
   },
@@ -1399,7 +1399,7 @@ export const QueryCodeRequest = {
 
   fromJSON(object: any): QueryCodeRequest {
     return {
-      codeId: isSet(object.codeId) ? Long.fromString(object.codeId) : Long.UZERO
+      codeId: isSet(object.codeId) ? Long.fromValue(object.codeId) : Long.UZERO
     };
   },
 
@@ -1486,7 +1486,7 @@ export const CodeInfoResponse = {
 
   fromJSON(object: any): CodeInfoResponse {
     return {
-      codeId: isSet(object.codeId) ? Long.fromString(object.codeId) : Long.UZERO,
+      codeId: isSet(object.codeId) ? Long.fromValue(object.codeId) : Long.UZERO,
       creator: isSet(object.creator) ? String(object.creator) : "",
       dataHash: isSet(object.dataHash) ? bytesFromBase64(object.dataHash) : new Uint8Array()
     };
@@ -1903,7 +1903,7 @@ export const QueryPinnedCodesResponse = {
 
   fromJSON(object: any): QueryPinnedCodesResponse {
     return {
-      codeIds: Array.isArray(object?.codeIds) ? object.codeIds.map((e: any) => Long.fromString(e)) : [],
+      codeIds: Array.isArray(object?.codeIds) ? object.codeIds.map((e: any) => Long.fromValue(e)) : [],
       pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined
     };
   },

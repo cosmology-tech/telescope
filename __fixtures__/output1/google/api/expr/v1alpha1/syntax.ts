@@ -902,7 +902,7 @@ export const Expr = {
 
   fromJSON(object: any): Expr {
     return {
-      id: isSet(object.id) ? Long.fromString(object.id) : Long.ZERO,
+      id: isSet(object.id) ? Long.fromValue(object.id) : Long.ZERO,
       constExpr: isSet(object.constExpr) ? Constant.fromJSON(object.constExpr) : undefined,
       identExpr: isSet(object.identExpr) ? Expr_Ident.fromJSON(object.identExpr) : undefined,
       selectExpr: isSet(object.selectExpr) ? Expr_Select.fromJSON(object.selectExpr) : undefined,
@@ -1484,7 +1484,7 @@ export const Expr_CreateStruct_Entry = {
 
   fromJSON(object: any): Expr_CreateStruct_Entry {
     return {
-      id: isSet(object.id) ? Long.fromString(object.id) : Long.ZERO,
+      id: isSet(object.id) ? Long.fromValue(object.id) : Long.ZERO,
       fieldKey: isSet(object.fieldKey) ? String(object.fieldKey) : undefined,
       mapKey: isSet(object.mapKey) ? Expr.fromJSON(object.mapKey) : undefined,
       value: isSet(object.value) ? Expr.fromJSON(object.value) : undefined
@@ -1795,8 +1795,8 @@ export const Constant = {
     return {
       nullValue: isSet(object.nullValue) ? nullValueFromJSON(object.nullValue) : undefined,
       boolValue: isSet(object.boolValue) ? Boolean(object.boolValue) : undefined,
-      int64Value: isSet(object.int64Value) ? Long.fromString(object.int64Value) : undefined,
-      uint64Value: isSet(object.uint64Value) ? Long.fromString(object.uint64Value) : undefined,
+      int64Value: isSet(object.int64Value) ? Long.fromValue(object.int64Value) : undefined,
+      uint64Value: isSet(object.uint64Value) ? Long.fromValue(object.uint64Value) : undefined,
       doubleValue: isSet(object.doubleValue) ? Number(object.doubleValue) : undefined,
       stringValue: isSet(object.stringValue) ? String(object.stringValue) : undefined,
       bytesValue: isSet(object.bytesValue) ? bytesFromBase64(object.bytesValue) : undefined,
@@ -1911,7 +1911,7 @@ export const SourceInfo_PositionsEntry = {
 
   fromJSON(object: any): SourceInfo_PositionsEntry {
     return {
-      key: isSet(object.key) ? Long.fromString(object.key) : Long.ZERO,
+      key: isSet(object.key) ? Long.fromValue(object.key) : Long.ZERO,
       value: isSet(object.value) ? Number(object.value) : 0
     };
   },
@@ -1994,7 +1994,7 @@ export const SourceInfo_MacroCallsEntry = {
 
   fromJSON(object: any): SourceInfo_MacroCallsEntry {
     return {
-      key: isSet(object.key) ? Long.fromString(object.key) : Long.ZERO,
+      key: isSet(object.key) ? Long.fromValue(object.key) : Long.ZERO,
       value: isSet(object.value) ? Expr.fromJSON(object.value) : undefined
     };
   },

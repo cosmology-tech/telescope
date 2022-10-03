@@ -1002,8 +1002,8 @@ export const QueryConnectionConsensusStateRequest = {
   fromJSON(object: any): QueryConnectionConsensusStateRequest {
     return {
       connectionId: isSet(object.connectionId) ? String(object.connectionId) : "",
-      revisionNumber: isSet(object.revisionNumber) ? Long.fromString(object.revisionNumber) : Long.UZERO,
-      revisionHeight: isSet(object.revisionHeight) ? Long.fromString(object.revisionHeight) : Long.UZERO
+      revisionNumber: isSet(object.revisionNumber) ? Long.fromValue(object.revisionNumber) : Long.UZERO,
+      revisionHeight: isSet(object.revisionHeight) ? Long.fromValue(object.revisionHeight) : Long.UZERO
     };
   },
 

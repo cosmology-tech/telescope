@@ -92,7 +92,7 @@ export const ValidatorSet = {
     return {
       validators: Array.isArray(object?.validators) ? object.validators.map((e: any) => Validator.fromJSON(e)) : [],
       proposer: isSet(object.proposer) ? Validator.fromJSON(object.proposer) : undefined,
-      totalVotingPower: isSet(object.totalVotingPower) ? Long.fromString(object.totalVotingPower) : Long.ZERO
+      totalVotingPower: isSet(object.totalVotingPower) ? Long.fromValue(object.totalVotingPower) : Long.ZERO
     };
   },
 
@@ -210,8 +210,8 @@ export const Validator = {
     return {
       address: isSet(object.address) ? bytesFromBase64(object.address) : new Uint8Array(),
       pubKey: isSet(object.pubKey) ? PublicKey.fromJSON(object.pubKey) : undefined,
-      votingPower: isSet(object.votingPower) ? Long.fromString(object.votingPower) : Long.ZERO,
-      proposerPriority: isSet(object.proposerPriority) ? Long.fromString(object.proposerPriority) : Long.ZERO
+      votingPower: isSet(object.votingPower) ? Long.fromValue(object.votingPower) : Long.ZERO,
+      proposerPriority: isSet(object.proposerPriority) ? Long.fromValue(object.proposerPriority) : Long.ZERO
     };
   },
 
@@ -302,7 +302,7 @@ export const SimpleValidator = {
   fromJSON(object: any): SimpleValidator {
     return {
       pubKey: isSet(object.pubKey) ? PublicKey.fromJSON(object.pubKey) : undefined,
-      votingPower: isSet(object.votingPower) ? Long.fromString(object.votingPower) : Long.ZERO
+      votingPower: isSet(object.votingPower) ? Long.fromValue(object.votingPower) : Long.ZERO
     };
   },
 

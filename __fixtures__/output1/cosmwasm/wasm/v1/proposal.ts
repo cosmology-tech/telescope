@@ -565,7 +565,7 @@ export const InstantiateContractProposal = {
       description: isSet(object.description) ? String(object.description) : "",
       runAs: isSet(object.runAs) ? String(object.runAs) : "",
       admin: isSet(object.admin) ? String(object.admin) : "",
-      codeId: isSet(object.codeId) ? Long.fromString(object.codeId) : Long.UZERO,
+      codeId: isSet(object.codeId) ? Long.fromValue(object.codeId) : Long.UZERO,
       label: isSet(object.label) ? String(object.label) : "",
       msg: isSet(object.msg) ? bytesFromBase64(object.msg) : new Uint8Array(),
       funds: Array.isArray(object?.funds) ? object.funds.map((e: any) => Coin.fromJSON(e)) : []
@@ -716,7 +716,7 @@ export const MigrateContractProposal = {
       title: isSet(object.title) ? String(object.title) : "",
       description: isSet(object.description) ? String(object.description) : "",
       contract: isSet(object.contract) ? String(object.contract) : "",
-      codeId: isSet(object.codeId) ? Long.fromString(object.codeId) : Long.UZERO,
+      codeId: isSet(object.codeId) ? Long.fromValue(object.codeId) : Long.UZERO,
       msg: isSet(object.msg) ? bytesFromBase64(object.msg) : new Uint8Array()
     };
   },
@@ -1304,7 +1304,7 @@ export const PinCodesProposal = {
     return {
       title: isSet(object.title) ? String(object.title) : "",
       description: isSet(object.description) ? String(object.description) : "",
-      codeIds: Array.isArray(object?.codeIds) ? object.codeIds.map((e: any) => Long.fromString(e)) : []
+      codeIds: Array.isArray(object?.codeIds) ? object.codeIds.map((e: any) => Long.fromValue(e)) : []
     };
   },
 
@@ -1425,7 +1425,7 @@ export const UnpinCodesProposal = {
     return {
       title: isSet(object.title) ? String(object.title) : "",
       description: isSet(object.description) ? String(object.description) : "",
-      codeIds: Array.isArray(object?.codeIds) ? object.codeIds.map((e: any) => Long.fromString(e)) : []
+      codeIds: Array.isArray(object?.codeIds) ? object.codeIds.map((e: any) => Long.fromValue(e)) : []
     };
   },
 

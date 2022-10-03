@@ -162,7 +162,7 @@ export const EventCreateGroup = {
 
   fromJSON(object: any): EventCreateGroup {
     return {
-      groupId: isSet(object.groupId) ? Long.fromString(object.groupId) : Long.UZERO
+      groupId: isSet(object.groupId) ? Long.fromValue(object.groupId) : Long.UZERO
     };
   },
 
@@ -231,7 +231,7 @@ export const EventUpdateGroup = {
 
   fromJSON(object: any): EventUpdateGroup {
     return {
-      groupId: isSet(object.groupId) ? Long.fromString(object.groupId) : Long.UZERO
+      groupId: isSet(object.groupId) ? Long.fromValue(object.groupId) : Long.UZERO
     };
   },
 
@@ -438,7 +438,7 @@ export const EventSubmitProposal = {
 
   fromJSON(object: any): EventSubmitProposal {
     return {
-      proposalId: isSet(object.proposalId) ? Long.fromString(object.proposalId) : Long.UZERO
+      proposalId: isSet(object.proposalId) ? Long.fromValue(object.proposalId) : Long.UZERO
     };
   },
 
@@ -507,7 +507,7 @@ export const EventWithdrawProposal = {
 
   fromJSON(object: any): EventWithdrawProposal {
     return {
-      proposalId: isSet(object.proposalId) ? Long.fromString(object.proposalId) : Long.UZERO
+      proposalId: isSet(object.proposalId) ? Long.fromValue(object.proposalId) : Long.UZERO
     };
   },
 
@@ -576,7 +576,7 @@ export const EventVote = {
 
   fromJSON(object: any): EventVote {
     return {
-      proposalId: isSet(object.proposalId) ? Long.fromString(object.proposalId) : Long.UZERO
+      proposalId: isSet(object.proposalId) ? Long.fromValue(object.proposalId) : Long.UZERO
     };
   },
 
@@ -654,7 +654,7 @@ export const EventExec = {
 
   fromJSON(object: any): EventExec {
     return {
-      proposalId: isSet(object.proposalId) ? Long.fromString(object.proposalId) : Long.UZERO,
+      proposalId: isSet(object.proposalId) ? Long.fromValue(object.proposalId) : Long.UZERO,
       result: isSet(object.result) ? proposalExecutorResultFromJSON(object.result) : 0
     };
   },
@@ -737,7 +737,7 @@ export const EventLeaveGroup = {
 
   fromJSON(object: any): EventLeaveGroup {
     return {
-      groupId: isSet(object.groupId) ? Long.fromString(object.groupId) : Long.UZERO,
+      groupId: isSet(object.groupId) ? Long.fromValue(object.groupId) : Long.UZERO,
       address: isSet(object.address) ? String(object.address) : ""
     };
   },

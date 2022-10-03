@@ -182,13 +182,13 @@ export const Gauge = {
 
   fromJSON(object: any): Gauge {
     return {
-      id: isSet(object.id) ? Long.fromString(object.id) : Long.UZERO,
+      id: isSet(object.id) ? Long.fromValue(object.id) : Long.UZERO,
       isPerpetual: isSet(object.isPerpetual) ? Boolean(object.isPerpetual) : false,
       distributeTo: isSet(object.distributeTo) ? QueryCondition.fromJSON(object.distributeTo) : undefined,
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromJSON(e)) : [],
       startTime: isSet(object.startTime) ? fromJsonTimestamp(object.startTime) : undefined,
-      numEpochsPaidOver: isSet(object.numEpochsPaidOver) ? Long.fromString(object.numEpochsPaidOver) : Long.UZERO,
-      filledEpochs: isSet(object.filledEpochs) ? Long.fromString(object.filledEpochs) : Long.UZERO,
+      numEpochsPaidOver: isSet(object.numEpochsPaidOver) ? Long.fromValue(object.numEpochsPaidOver) : Long.UZERO,
+      filledEpochs: isSet(object.filledEpochs) ? Long.fromValue(object.filledEpochs) : Long.UZERO,
       distributedCoins: Array.isArray(object?.distributedCoins) ? object.distributedCoins.map((e: any) => Coin.fromJSON(e)) : []
     };
   },

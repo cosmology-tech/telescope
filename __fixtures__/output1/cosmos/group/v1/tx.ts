@@ -722,7 +722,7 @@ export const MsgCreateGroupResponse = {
 
   fromJSON(object: any): MsgCreateGroupResponse {
     return {
-      groupId: isSet(object.groupId) ? Long.fromString(object.groupId) : Long.UZERO
+      groupId: isSet(object.groupId) ? Long.fromValue(object.groupId) : Long.UZERO
     };
   },
 
@@ -810,7 +810,7 @@ export const MsgUpdateGroupMembers = {
   fromJSON(object: any): MsgUpdateGroupMembers {
     return {
       admin: isSet(object.admin) ? String(object.admin) : "",
-      groupId: isSet(object.groupId) ? Long.fromString(object.groupId) : Long.UZERO,
+      groupId: isSet(object.groupId) ? Long.fromValue(object.groupId) : Long.UZERO,
       memberUpdates: Array.isArray(object?.memberUpdates) ? object.memberUpdates.map((e: any) => Member.fromJSON(e)) : []
     };
   },
@@ -971,7 +971,7 @@ export const MsgUpdateGroupAdmin = {
   fromJSON(object: any): MsgUpdateGroupAdmin {
     return {
       admin: isSet(object.admin) ? String(object.admin) : "",
-      groupId: isSet(object.groupId) ? Long.fromString(object.groupId) : Long.UZERO,
+      groupId: isSet(object.groupId) ? Long.fromValue(object.groupId) : Long.UZERO,
       newAdmin: isSet(object.newAdmin) ? String(object.newAdmin) : ""
     };
   },
@@ -1120,7 +1120,7 @@ export const MsgUpdateGroupMetadata = {
   fromJSON(object: any): MsgUpdateGroupMetadata {
     return {
       admin: isSet(object.admin) ? String(object.admin) : "",
-      groupId: isSet(object.groupId) ? Long.fromString(object.groupId) : Long.UZERO,
+      groupId: isSet(object.groupId) ? Long.fromValue(object.groupId) : Long.UZERO,
       metadata: isSet(object.metadata) ? String(object.metadata) : ""
     };
   },
@@ -1278,7 +1278,7 @@ export const MsgCreateGroupPolicy = {
   fromJSON(object: any): MsgCreateGroupPolicy {
     return {
       admin: isSet(object.admin) ? String(object.admin) : "",
-      groupId: isSet(object.groupId) ? Long.fromString(object.groupId) : Long.UZERO,
+      groupId: isSet(object.groupId) ? Long.fromValue(object.groupId) : Long.UZERO,
       metadata: isSet(object.metadata) ? String(object.metadata) : "",
       decisionPolicy: isSet(object.decisionPolicy) ? Any.fromJSON(object.decisionPolicy) : undefined
     };
@@ -1687,7 +1687,7 @@ export const MsgCreateGroupWithPolicyResponse = {
 
   fromJSON(object: any): MsgCreateGroupWithPolicyResponse {
     return {
-      groupId: isSet(object.groupId) ? Long.fromString(object.groupId) : Long.UZERO,
+      groupId: isSet(object.groupId) ? Long.fromValue(object.groupId) : Long.UZERO,
       groupPolicyAddress: isSet(object.groupPolicyAddress) ? String(object.groupPolicyAddress) : ""
     };
   },
@@ -2260,7 +2260,7 @@ export const MsgSubmitProposalResponse = {
 
   fromJSON(object: any): MsgSubmitProposalResponse {
     return {
-      proposalId: isSet(object.proposalId) ? Long.fromString(object.proposalId) : Long.UZERO
+      proposalId: isSet(object.proposalId) ? Long.fromValue(object.proposalId) : Long.UZERO
     };
   },
 
@@ -2338,7 +2338,7 @@ export const MsgWithdrawProposal = {
 
   fromJSON(object: any): MsgWithdrawProposal {
     return {
-      proposalId: isSet(object.proposalId) ? Long.fromString(object.proposalId) : Long.UZERO,
+      proposalId: isSet(object.proposalId) ? Long.fromValue(object.proposalId) : Long.UZERO,
       address: isSet(object.address) ? String(object.address) : ""
     };
   },
@@ -2500,7 +2500,7 @@ export const MsgVote = {
 
   fromJSON(object: any): MsgVote {
     return {
-      proposalId: isSet(object.proposalId) ? Long.fromString(object.proposalId) : Long.UZERO,
+      proposalId: isSet(object.proposalId) ? Long.fromValue(object.proposalId) : Long.UZERO,
       voter: isSet(object.voter) ? String(object.voter) : "",
       option: isSet(object.option) ? voteOptionFromJSON(object.option) : 0,
       metadata: isSet(object.metadata) ? String(object.metadata) : "",
@@ -2650,7 +2650,7 @@ export const MsgExec = {
 
   fromJSON(object: any): MsgExec {
     return {
-      proposalId: isSet(object.proposalId) ? Long.fromString(object.proposalId) : Long.UZERO,
+      proposalId: isSet(object.proposalId) ? Long.fromValue(object.proposalId) : Long.UZERO,
       signer: isSet(object.signer) ? String(object.signer) : ""
     };
   },
@@ -2786,7 +2786,7 @@ export const MsgLeaveGroup = {
   fromJSON(object: any): MsgLeaveGroup {
     return {
       address: isSet(object.address) ? String(object.address) : "",
-      groupId: isSet(object.groupId) ? Long.fromString(object.groupId) : Long.UZERO
+      groupId: isSet(object.groupId) ? Long.fromValue(object.groupId) : Long.UZERO
     };
   },
 

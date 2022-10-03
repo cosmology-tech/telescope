@@ -237,7 +237,7 @@ export const MsgLockTokensResponse = {
 
   fromJSON(object: any): MsgLockTokensResponse {
     return {
-      ID: isSet(object.ID) ? Long.fromString(object.ID) : Long.UZERO
+      ID: isSet(object.ID) ? Long.fromValue(object.ID) : Long.UZERO
     };
   },
 
@@ -475,7 +475,7 @@ export const MsgBeginUnlocking = {
   fromJSON(object: any): MsgBeginUnlocking {
     return {
       owner: isSet(object.owner) ? String(object.owner) : "",
-      ID: isSet(object.ID) ? Long.fromString(object.ID) : Long.UZERO,
+      ID: isSet(object.ID) ? Long.fromValue(object.ID) : Long.UZERO,
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromJSON(e)) : []
     };
   },
@@ -653,7 +653,7 @@ export const MsgExtendLockup = {
   fromJSON(object: any): MsgExtendLockup {
     return {
       owner: isSet(object.owner) ? String(object.owner) : "",
-      ID: isSet(object.ID) ? Long.fromString(object.ID) : Long.UZERO,
+      ID: isSet(object.ID) ? Long.fromValue(object.ID) : Long.UZERO,
       duration: isSet(object.duration) ? Duration.fromJSON(object.duration) : undefined
     };
   },

@@ -523,7 +523,7 @@ export const TxResponse = {
 
   fromJSON(object: any): TxResponse {
     return {
-      height: isSet(object.height) ? Long.fromString(object.height) : Long.ZERO,
+      height: isSet(object.height) ? Long.fromValue(object.height) : Long.ZERO,
       txhash: isSet(object.txhash) ? String(object.txhash) : "",
       codespace: isSet(object.codespace) ? String(object.codespace) : "",
       code: isSet(object.code) ? Number(object.code) : 0,
@@ -531,8 +531,8 @@ export const TxResponse = {
       rawLog: isSet(object.rawLog) ? String(object.rawLog) : "",
       logs: Array.isArray(object?.logs) ? object.logs.map((e: any) => ABCIMessageLog.fromJSON(e)) : [],
       info: isSet(object.info) ? String(object.info) : "",
-      gasWanted: isSet(object.gasWanted) ? Long.fromString(object.gasWanted) : Long.ZERO,
-      gasUsed: isSet(object.gasUsed) ? Long.fromString(object.gasUsed) : Long.ZERO,
+      gasWanted: isSet(object.gasWanted) ? Long.fromValue(object.gasWanted) : Long.ZERO,
+      gasUsed: isSet(object.gasUsed) ? Long.fromValue(object.gasUsed) : Long.ZERO,
       tx: isSet(object.tx) ? Any.fromJSON(object.tx) : undefined,
       timestamp: isSet(object.timestamp) ? String(object.timestamp) : "",
       events: Array.isArray(object?.events) ? object.events.map((e: any) => Event.fromJSON(e)) : []
@@ -972,8 +972,8 @@ export const GasInfo = {
 
   fromJSON(object: any): GasInfo {
     return {
-      gasWanted: isSet(object.gasWanted) ? Long.fromString(object.gasWanted) : Long.UZERO,
-      gasUsed: isSet(object.gasUsed) ? Long.fromString(object.gasUsed) : Long.UZERO
+      gasWanted: isSet(object.gasWanted) ? Long.fromValue(object.gasWanted) : Long.UZERO,
+      gasUsed: isSet(object.gasUsed) ? Long.fromValue(object.gasUsed) : Long.UZERO
     };
   },
 
@@ -1495,11 +1495,11 @@ export const SearchTxsResult = {
 
   fromJSON(object: any): SearchTxsResult {
     return {
-      totalCount: isSet(object.totalCount) ? Long.fromString(object.totalCount) : Long.UZERO,
-      count: isSet(object.count) ? Long.fromString(object.count) : Long.UZERO,
-      pageNumber: isSet(object.pageNumber) ? Long.fromString(object.pageNumber) : Long.UZERO,
-      pageTotal: isSet(object.pageTotal) ? Long.fromString(object.pageTotal) : Long.UZERO,
-      limit: isSet(object.limit) ? Long.fromString(object.limit) : Long.UZERO,
+      totalCount: isSet(object.totalCount) ? Long.fromValue(object.totalCount) : Long.UZERO,
+      count: isSet(object.count) ? Long.fromValue(object.count) : Long.UZERO,
+      pageNumber: isSet(object.pageNumber) ? Long.fromValue(object.pageNumber) : Long.UZERO,
+      pageTotal: isSet(object.pageTotal) ? Long.fromValue(object.pageTotal) : Long.UZERO,
+      limit: isSet(object.limit) ? Long.fromValue(object.limit) : Long.UZERO,
       txs: Array.isArray(object?.txs) ? object.txs.map((e: any) => TxResponse.fromJSON(e)) : []
     };
   },

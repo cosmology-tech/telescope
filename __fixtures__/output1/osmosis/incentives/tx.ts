@@ -148,7 +148,7 @@ export const MsgCreateGauge = {
       distributeTo: isSet(object.distributeTo) ? QueryCondition.fromJSON(object.distributeTo) : undefined,
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromJSON(e)) : [],
       startTime: isSet(object.startTime) ? fromJsonTimestamp(object.startTime) : undefined,
-      numEpochsPaidOver: isSet(object.numEpochsPaidOver) ? Long.fromString(object.numEpochsPaidOver) : Long.UZERO
+      numEpochsPaidOver: isSet(object.numEpochsPaidOver) ? Long.fromValue(object.numEpochsPaidOver) : Long.UZERO
     };
   },
 
@@ -320,7 +320,7 @@ export const MsgAddToGauge = {
   fromJSON(object: any): MsgAddToGauge {
     return {
       owner: isSet(object.owner) ? String(object.owner) : "",
-      gaugeId: isSet(object.gaugeId) ? Long.fromString(object.gaugeId) : Long.UZERO,
+      gaugeId: isSet(object.gaugeId) ? Long.fromValue(object.gaugeId) : Long.UZERO,
       rewards: Array.isArray(object?.rewards) ? object.rewards.map((e: any) => Coin.fromJSON(e)) : []
     };
   },

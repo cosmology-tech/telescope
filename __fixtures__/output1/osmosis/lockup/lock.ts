@@ -234,7 +234,7 @@ export const PeriodLock = {
 
   fromJSON(object: any): PeriodLock {
     return {
-      ID: isSet(object.ID) ? Long.fromString(object.ID) : Long.UZERO,
+      ID: isSet(object.ID) ? Long.fromValue(object.ID) : Long.UZERO,
       owner: isSet(object.owner) ? String(object.owner) : "",
       duration: isSet(object.duration) ? Duration.fromJSON(object.duration) : undefined,
       endTime: isSet(object.endTime) ? fromJsonTimestamp(object.endTime) : undefined,
@@ -473,7 +473,7 @@ export const SyntheticLock = {
 
   fromJSON(object: any): SyntheticLock {
     return {
-      underlyingLockId: isSet(object.underlyingLockId) ? Long.fromString(object.underlyingLockId) : Long.UZERO,
+      underlyingLockId: isSet(object.underlyingLockId) ? Long.fromValue(object.underlyingLockId) : Long.UZERO,
       synthDenom: isSet(object.synthDenom) ? String(object.synthDenom) : "",
       endTime: isSet(object.endTime) ? fromJsonTimestamp(object.endTime) : undefined,
       duration: isSet(object.duration) ? Duration.fromJSON(object.duration) : undefined

@@ -552,7 +552,7 @@ export const Params = {
     return {
       codeUploadAccess: isSet(object.codeUploadAccess) ? AccessConfig.fromJSON(object.codeUploadAccess) : undefined,
       instantiateDefaultPermission: isSet(object.instantiateDefaultPermission) ? accessTypeFromJSON(object.instantiateDefaultPermission) : 0,
-      maxWasmCodeSize: isSet(object.maxWasmCodeSize) ? Long.fromString(object.maxWasmCodeSize) : Long.UZERO
+      maxWasmCodeSize: isSet(object.maxWasmCodeSize) ? Long.fromValue(object.maxWasmCodeSize) : Long.UZERO
     };
   },
 
@@ -780,7 +780,7 @@ export const ContractInfo = {
 
   fromJSON(object: any): ContractInfo {
     return {
-      codeId: isSet(object.codeId) ? Long.fromString(object.codeId) : Long.UZERO,
+      codeId: isSet(object.codeId) ? Long.fromValue(object.codeId) : Long.UZERO,
       creator: isSet(object.creator) ? String(object.creator) : "",
       admin: isSet(object.admin) ? String(object.admin) : "",
       label: isSet(object.label) ? String(object.label) : "",
@@ -907,7 +907,7 @@ export const ContractCodeHistoryEntry = {
   fromJSON(object: any): ContractCodeHistoryEntry {
     return {
       operation: isSet(object.operation) ? contractCodeHistoryOperationTypeFromJSON(object.operation) : 0,
-      codeId: isSet(object.codeId) ? Long.fromString(object.codeId) : Long.UZERO,
+      codeId: isSet(object.codeId) ? Long.fromValue(object.codeId) : Long.UZERO,
       updated: isSet(object.updated) ? AbsoluteTxPosition.fromJSON(object.updated) : undefined,
       msg: isSet(object.msg) ? bytesFromBase64(object.msg) : new Uint8Array()
     };
@@ -999,8 +999,8 @@ export const AbsoluteTxPosition = {
 
   fromJSON(object: any): AbsoluteTxPosition {
     return {
-      blockHeight: isSet(object.blockHeight) ? Long.fromString(object.blockHeight) : Long.UZERO,
-      txIndex: isSet(object.txIndex) ? Long.fromString(object.txIndex) : Long.UZERO
+      blockHeight: isSet(object.blockHeight) ? Long.fromValue(object.blockHeight) : Long.UZERO,
+      txIndex: isSet(object.txIndex) ? Long.fromValue(object.txIndex) : Long.UZERO
     };
   },
 

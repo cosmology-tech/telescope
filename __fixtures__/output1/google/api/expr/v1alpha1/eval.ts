@@ -359,8 +359,8 @@ export const EvalState_Result = {
 
   fromJSON(object: any): EvalState_Result {
     return {
-      expr: isSet(object.expr) ? Long.fromString(object.expr) : Long.ZERO,
-      value: isSet(object.value) ? Long.fromString(object.value) : Long.ZERO
+      expr: isSet(object.expr) ? Long.fromValue(object.expr) : Long.ZERO,
+      value: isSet(object.value) ? Long.fromValue(object.value) : Long.ZERO
     };
   },
 
@@ -623,7 +623,7 @@ export const UnknownSet = {
 
   fromJSON(object: any): UnknownSet {
     return {
-      exprs: Array.isArray(object?.exprs) ? object.exprs.map((e: any) => Long.fromString(e)) : []
+      exprs: Array.isArray(object?.exprs) ? object.exprs.map((e: any) => Long.fromValue(e)) : []
     };
   },
 

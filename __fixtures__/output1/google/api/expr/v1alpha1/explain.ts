@@ -224,7 +224,7 @@ export const Explain_ExprStep = {
 
   fromJSON(object: any): Explain_ExprStep {
     return {
-      id: isSet(object.id) ? Long.fromString(object.id) : Long.ZERO,
+      id: isSet(object.id) ? Long.fromValue(object.id) : Long.ZERO,
       valueIndex: isSet(object.valueIndex) ? Number(object.valueIndex) : 0
     };
   },

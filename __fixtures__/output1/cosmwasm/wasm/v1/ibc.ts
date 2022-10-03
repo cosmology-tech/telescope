@@ -127,8 +127,8 @@ export const MsgIBCSend = {
   fromJSON(object: any): MsgIBCSend {
     return {
       channel: isSet(object.channel) ? String(object.channel) : "",
-      timeoutHeight: isSet(object.timeoutHeight) ? Long.fromString(object.timeoutHeight) : Long.UZERO,
-      timeoutTimestamp: isSet(object.timeoutTimestamp) ? Long.fromString(object.timeoutTimestamp) : Long.UZERO,
+      timeoutHeight: isSet(object.timeoutHeight) ? Long.fromValue(object.timeoutHeight) : Long.UZERO,
+      timeoutTimestamp: isSet(object.timeoutTimestamp) ? Long.fromValue(object.timeoutTimestamp) : Long.UZERO,
       data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array()
     };
   },

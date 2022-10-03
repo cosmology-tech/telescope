@@ -120,9 +120,9 @@ export const ProtocolVersion = {
 
   fromJSON(object: any): ProtocolVersion {
     return {
-      p2p: isSet(object.p2p) ? Long.fromString(object.p2p) : Long.UZERO,
-      block: isSet(object.block) ? Long.fromString(object.block) : Long.UZERO,
-      app: isSet(object.app) ? Long.fromString(object.app) : Long.UZERO
+      p2p: isSet(object.p2p) ? Long.fromValue(object.p2p) : Long.UZERO,
+      block: isSet(object.block) ? Long.fromValue(object.block) : Long.UZERO,
+      app: isSet(object.app) ? Long.fromValue(object.app) : Long.UZERO
     };
   },
 

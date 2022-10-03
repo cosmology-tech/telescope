@@ -172,7 +172,7 @@ export const GenesisState = {
       clientsMetadata: Array.isArray(object?.clientsMetadata) ? object.clientsMetadata.map((e: any) => IdentifiedGenesisMetadata.fromJSON(e)) : [],
       params: isSet(object.params) ? Params.fromJSON(object.params) : undefined,
       createLocalhost: isSet(object.createLocalhost) ? Boolean(object.createLocalhost) : false,
-      nextClientSequence: isSet(object.nextClientSequence) ? Long.fromString(object.nextClientSequence) : Long.UZERO
+      nextClientSequence: isSet(object.nextClientSequence) ? Long.fromValue(object.nextClientSequence) : Long.UZERO
     };
   },
 

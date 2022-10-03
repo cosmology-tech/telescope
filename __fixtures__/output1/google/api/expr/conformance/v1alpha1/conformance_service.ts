@@ -1124,7 +1124,7 @@ export const IssueDetails = {
     return {
       severity: isSet(object.severity) ? issueDetails_SeverityFromJSON(object.severity) : 0,
       position: isSet(object.position) ? SourcePosition.fromJSON(object.position) : undefined,
-      id: isSet(object.id) ? Long.fromString(object.id) : Long.ZERO
+      id: isSet(object.id) ? Long.fromValue(object.id) : Long.ZERO
     };
   },
 

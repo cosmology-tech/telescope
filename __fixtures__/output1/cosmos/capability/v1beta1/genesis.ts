@@ -93,7 +93,7 @@ export const GenesisOwners = {
 
   fromJSON(object: any): GenesisOwners {
     return {
-      index: isSet(object.index) ? Long.fromString(object.index) : Long.UZERO,
+      index: isSet(object.index) ? Long.fromValue(object.index) : Long.UZERO,
       indexOwners: isSet(object.indexOwners) ? CapabilityOwners.fromJSON(object.indexOwners) : undefined
     };
   },
@@ -176,7 +176,7 @@ export const GenesisState = {
 
   fromJSON(object: any): GenesisState {
     return {
-      index: isSet(object.index) ? Long.fromString(object.index) : Long.UZERO,
+      index: isSet(object.index) ? Long.fromValue(object.index) : Long.UZERO,
       owners: Array.isArray(object?.owners) ? object.owners.map((e: any) => GenesisOwners.fromJSON(e)) : []
     };
   },

@@ -194,7 +194,7 @@ export const OrderID = {
   fromJSON(object: any): OrderID {
     return {
       owner: isSet(object.owner) ? String(object.owner) : "",
-      dseq: isSet(object.dseq) ? Long.fromString(object.dseq) : Long.UZERO,
+      dseq: isSet(object.dseq) ? Long.fromValue(object.dseq) : Long.UZERO,
       gseq: isSet(object.gseq) ? Number(object.gseq) : 0,
       oseq: isSet(object.oseq) ? Number(object.oseq) : 0
     };
@@ -307,7 +307,7 @@ export const Order = {
       orderId: isSet(object.orderId) ? OrderID.fromJSON(object.orderId) : undefined,
       state: isSet(object.state) ? order_StateFromJSON(object.state) : 0,
       spec: isSet(object.spec) ? GroupSpec.fromJSON(object.spec) : undefined,
-      createdAt: isSet(object.createdAt) ? Long.fromString(object.createdAt) : Long.ZERO
+      createdAt: isSet(object.createdAt) ? Long.fromValue(object.createdAt) : Long.ZERO
     };
   },
 
@@ -425,7 +425,7 @@ export const OrderFilters = {
   fromJSON(object: any): OrderFilters {
     return {
       owner: isSet(object.owner) ? String(object.owner) : "",
-      dseq: isSet(object.dseq) ? Long.fromString(object.dseq) : Long.UZERO,
+      dseq: isSet(object.dseq) ? Long.fromValue(object.dseq) : Long.UZERO,
       gseq: isSet(object.gseq) ? Number(object.gseq) : 0,
       oseq: isSet(object.oseq) ? Number(object.oseq) : 0,
       state: isSet(object.state) ? String(object.state) : ""

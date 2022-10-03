@@ -1314,10 +1314,10 @@ export const GroupInfo = {
 
   fromJSON(object: any): GroupInfo {
     return {
-      id: isSet(object.id) ? Long.fromString(object.id) : Long.UZERO,
+      id: isSet(object.id) ? Long.fromValue(object.id) : Long.UZERO,
       admin: isSet(object.admin) ? String(object.admin) : "",
       metadata: isSet(object.metadata) ? String(object.metadata) : "",
-      version: isSet(object.version) ? Long.fromString(object.version) : Long.UZERO,
+      version: isSet(object.version) ? Long.fromValue(object.version) : Long.UZERO,
       totalWeight: isSet(object.totalWeight) ? String(object.totalWeight) : "",
       createdAt: isSet(object.createdAt) ? fromJsonTimestamp(object.createdAt) : undefined
     };
@@ -1417,7 +1417,7 @@ export const GroupMember = {
 
   fromJSON(object: any): GroupMember {
     return {
-      groupId: isSet(object.groupId) ? Long.fromString(object.groupId) : Long.UZERO,
+      groupId: isSet(object.groupId) ? Long.fromValue(object.groupId) : Long.UZERO,
       member: isSet(object.member) ? Member.fromJSON(object.member) : undefined
     };
   },
@@ -1546,10 +1546,10 @@ export const GroupPolicyInfo = {
   fromJSON(object: any): GroupPolicyInfo {
     return {
       address: isSet(object.address) ? String(object.address) : "",
-      groupId: isSet(object.groupId) ? Long.fromString(object.groupId) : Long.UZERO,
+      groupId: isSet(object.groupId) ? Long.fromValue(object.groupId) : Long.UZERO,
       admin: isSet(object.admin) ? String(object.admin) : "",
       metadata: isSet(object.metadata) ? String(object.metadata) : "",
-      version: isSet(object.version) ? Long.fromString(object.version) : Long.UZERO,
+      version: isSet(object.version) ? Long.fromValue(object.version) : Long.UZERO,
       decisionPolicy: isSet(object.decisionPolicy) ? Any.fromJSON(object.decisionPolicy) : undefined,
       createdAt: isSet(object.createdAt) ? fromJsonTimestamp(object.createdAt) : undefined
     };
@@ -1752,13 +1752,13 @@ export const Proposal = {
 
   fromJSON(object: any): Proposal {
     return {
-      id: isSet(object.id) ? Long.fromString(object.id) : Long.UZERO,
+      id: isSet(object.id) ? Long.fromValue(object.id) : Long.UZERO,
       address: isSet(object.address) ? String(object.address) : "",
       metadata: isSet(object.metadata) ? String(object.metadata) : "",
       proposers: Array.isArray(object?.proposers) ? object.proposers.map((e: any) => String(e)) : [],
       submitTime: isSet(object.submitTime) ? fromJsonTimestamp(object.submitTime) : undefined,
-      groupVersion: isSet(object.groupVersion) ? Long.fromString(object.groupVersion) : Long.UZERO,
-      groupPolicyVersion: isSet(object.groupPolicyVersion) ? Long.fromString(object.groupPolicyVersion) : Long.UZERO,
+      groupVersion: isSet(object.groupVersion) ? Long.fromValue(object.groupVersion) : Long.UZERO,
+      groupPolicyVersion: isSet(object.groupPolicyVersion) ? Long.fromValue(object.groupPolicyVersion) : Long.UZERO,
       status: isSet(object.status) ? proposalStatusFromJSON(object.status) : 0,
       result: isSet(object.result) ? proposalResultFromJSON(object.result) : 0,
       finalTallyResult: isSet(object.finalTallyResult) ? TallyResult.fromJSON(object.finalTallyResult) : undefined,
@@ -2052,7 +2052,7 @@ export const Vote = {
 
   fromJSON(object: any): Vote {
     return {
-      proposalId: isSet(object.proposalId) ? Long.fromString(object.proposalId) : Long.UZERO,
+      proposalId: isSet(object.proposalId) ? Long.fromValue(object.proposalId) : Long.UZERO,
       voter: isSet(object.voter) ? String(object.voter) : "",
       option: isSet(object.option) ? voteOptionFromJSON(object.option) : 0,
       metadata: isSet(object.metadata) ? String(object.metadata) : "",

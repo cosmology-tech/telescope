@@ -234,7 +234,7 @@ export const Params = {
       inflationMax: isSet(object.inflationMax) ? String(object.inflationMax) : "",
       inflationMin: isSet(object.inflationMin) ? String(object.inflationMin) : "",
       goalBonded: isSet(object.goalBonded) ? String(object.goalBonded) : "",
-      blocksPerYear: isSet(object.blocksPerYear) ? Long.fromString(object.blocksPerYear) : Long.UZERO
+      blocksPerYear: isSet(object.blocksPerYear) ? Long.fromValue(object.blocksPerYear) : Long.UZERO
     };
   },
 

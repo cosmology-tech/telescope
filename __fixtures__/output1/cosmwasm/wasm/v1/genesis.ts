@@ -418,7 +418,7 @@ export const Code = {
 
   fromJSON(object: any): Code {
     return {
-      codeId: isSet(object.codeId) ? Long.fromString(object.codeId) : Long.UZERO,
+      codeId: isSet(object.codeId) ? Long.fromValue(object.codeId) : Long.UZERO,
       codeInfo: isSet(object.codeInfo) ? CodeInfo.fromJSON(object.codeInfo) : undefined,
       codeBytes: isSet(object.codeBytes) ? bytesFromBase64(object.codeBytes) : new Uint8Array(),
       pinned: isSet(object.pinned) ? Boolean(object.pinned) : false
@@ -621,7 +621,7 @@ export const Sequence = {
   fromJSON(object: any): Sequence {
     return {
       idKey: isSet(object.idKey) ? bytesFromBase64(object.idKey) : new Uint8Array(),
-      value: isSet(object.value) ? Long.fromString(object.value) : Long.UZERO
+      value: isSet(object.value) ? Long.fromValue(object.value) : Long.UZERO
     };
   },
 

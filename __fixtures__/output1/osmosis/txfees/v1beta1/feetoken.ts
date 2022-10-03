@@ -73,7 +73,7 @@ export const FeeToken = {
   fromJSON(object: any): FeeToken {
     return {
       denom: isSet(object.denom) ? String(object.denom) : "",
-      poolID: isSet(object.poolID) ? Long.fromString(object.poolID) : Long.UZERO
+      poolID: isSet(object.poolID) ? Long.fromValue(object.poolID) : Long.UZERO
     };
   },
 

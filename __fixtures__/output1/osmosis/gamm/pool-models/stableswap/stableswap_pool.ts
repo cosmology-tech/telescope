@@ -286,12 +286,12 @@ export const Pool = {
   fromJSON(object: any): Pool {
     return {
       address: isSet(object.address) ? String(object.address) : "",
-      id: isSet(object.id) ? Long.fromString(object.id) : Long.UZERO,
+      id: isSet(object.id) ? Long.fromValue(object.id) : Long.UZERO,
       poolParams: isSet(object.poolParams) ? PoolParams.fromJSON(object.poolParams) : undefined,
       futurePoolGovernor: isSet(object.futurePoolGovernor) ? String(object.futurePoolGovernor) : "",
       totalShares: isSet(object.totalShares) ? Coin.fromJSON(object.totalShares) : undefined,
       poolLiquidity: Array.isArray(object?.poolLiquidity) ? object.poolLiquidity.map((e: any) => Coin.fromJSON(e)) : [],
-      scalingFactor: Array.isArray(object?.scalingFactor) ? object.scalingFactor.map((e: any) => Long.fromString(e)) : [],
+      scalingFactor: Array.isArray(object?.scalingFactor) ? object.scalingFactor.map((e: any) => Long.fromValue(e)) : [],
       scalingFactorGovernor: isSet(object.scalingFactorGovernor) ? String(object.scalingFactorGovernor) : ""
     };
   },

@@ -896,7 +896,7 @@ export const CheckedExpr_ReferenceMapEntry = {
 
   fromJSON(object: any): CheckedExpr_ReferenceMapEntry {
     return {
-      key: isSet(object.key) ? Long.fromString(object.key) : Long.ZERO,
+      key: isSet(object.key) ? Long.fromValue(object.key) : Long.ZERO,
       value: isSet(object.value) ? Reference.fromJSON(object.value) : undefined
     };
   },
@@ -979,7 +979,7 @@ export const CheckedExpr_TypeMapEntry = {
 
   fromJSON(object: any): CheckedExpr_TypeMapEntry {
     return {
-      key: isSet(object.key) ? Long.fromString(object.key) : Long.ZERO,
+      key: isSet(object.key) ? Long.fromValue(object.key) : Long.ZERO,
       value: isSet(object.value) ? Type.fromJSON(object.value) : undefined
     };
   },

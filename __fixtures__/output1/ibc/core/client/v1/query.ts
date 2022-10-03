@@ -740,8 +740,8 @@ export const QueryConsensusStateRequest = {
   fromJSON(object: any): QueryConsensusStateRequest {
     return {
       clientId: isSet(object.clientId) ? String(object.clientId) : "",
-      revisionNumber: isSet(object.revisionNumber) ? Long.fromString(object.revisionNumber) : Long.UZERO,
-      revisionHeight: isSet(object.revisionHeight) ? Long.fromString(object.revisionHeight) : Long.UZERO,
+      revisionNumber: isSet(object.revisionNumber) ? Long.fromValue(object.revisionNumber) : Long.UZERO,
+      revisionHeight: isSet(object.revisionHeight) ? Long.fromValue(object.revisionHeight) : Long.UZERO,
       latestHeight: isSet(object.latestHeight) ? Boolean(object.latestHeight) : false
     };
   },

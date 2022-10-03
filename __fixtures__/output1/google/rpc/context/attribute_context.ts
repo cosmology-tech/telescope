@@ -1214,7 +1214,7 @@ export const AttributeContext_Peer = {
   fromJSON(object: any): AttributeContext_Peer {
     return {
       ip: isSet(object.ip) ? String(object.ip) : "",
-      port: isSet(object.port) ? Long.fromString(object.port) : Long.ZERO,
+      port: isSet(object.port) ? Long.fromValue(object.port) : Long.ZERO,
       labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
         [key: string]: string;
       }>((acc, [key, value]) => {
@@ -1797,7 +1797,7 @@ export const AttributeContext_Request = {
       scheme: isSet(object.scheme) ? String(object.scheme) : "",
       query: isSet(object.query) ? String(object.query) : "",
       time: isSet(object.time) ? fromJsonTimestamp(object.time) : undefined,
-      size: isSet(object.size) ? Long.fromString(object.size) : Long.ZERO,
+      size: isSet(object.size) ? Long.fromValue(object.size) : Long.ZERO,
       protocol: isSet(object.protocol) ? String(object.protocol) : "",
       reason: isSet(object.reason) ? String(object.reason) : "",
       auth: isSet(object.auth) ? AttributeContext_Auth.fromJSON(object.auth) : undefined
@@ -2067,8 +2067,8 @@ export const AttributeContext_Response = {
 
   fromJSON(object: any): AttributeContext_Response {
     return {
-      code: isSet(object.code) ? Long.fromString(object.code) : Long.ZERO,
-      size: isSet(object.size) ? Long.fromString(object.size) : Long.ZERO,
+      code: isSet(object.code) ? Long.fromValue(object.code) : Long.ZERO,
+      size: isSet(object.size) ? Long.fromValue(object.size) : Long.ZERO,
       headers: isObject(object.headers) ? Object.entries(object.headers).reduce<{
         [key: string]: string;
       }>((acc, [key, value]) => {

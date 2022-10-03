@@ -443,7 +443,7 @@ export const Account = {
       state: isSet(object.state) ? account_StateFromJSON(object.state) : 0,
       balance: isSet(object.balance) ? DecCoin.fromJSON(object.balance) : undefined,
       transferred: isSet(object.transferred) ? DecCoin.fromJSON(object.transferred) : undefined,
-      settledAt: isSet(object.settledAt) ? Long.fromString(object.settledAt) : Long.ZERO,
+      settledAt: isSet(object.settledAt) ? Long.fromValue(object.settledAt) : Long.ZERO,
       depositor: isSet(object.depositor) ? String(object.depositor) : "",
       funds: isSet(object.funds) ? DecCoin.fromJSON(object.funds) : undefined
     };

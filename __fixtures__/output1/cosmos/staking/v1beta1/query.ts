@@ -2449,7 +2449,7 @@ export const QueryHistoricalInfoRequest = {
 
   fromJSON(object: any): QueryHistoricalInfoRequest {
     return {
-      height: isSet(object.height) ? Long.fromString(object.height) : Long.ZERO
+      height: isSet(object.height) ? Long.fromValue(object.height) : Long.ZERO
     };
   },
 

@@ -289,7 +289,7 @@ export const SuperfluidIntermediaryAccount = {
     return {
       denom: isSet(object.denom) ? String(object.denom) : "",
       valAddr: isSet(object.valAddr) ? String(object.valAddr) : "",
-      gaugeId: isSet(object.gaugeId) ? Long.fromString(object.gaugeId) : Long.UZERO
+      gaugeId: isSet(object.gaugeId) ? Long.fromValue(object.gaugeId) : Long.UZERO
     };
   },
 
@@ -384,7 +384,7 @@ export const OsmoEquivalentMultiplierRecord = {
 
   fromJSON(object: any): OsmoEquivalentMultiplierRecord {
     return {
-      epochNumber: isSet(object.epochNumber) ? Long.fromString(object.epochNumber) : Long.ZERO,
+      epochNumber: isSet(object.epochNumber) ? Long.fromValue(object.epochNumber) : Long.ZERO,
       denom: isSet(object.denom) ? String(object.denom) : "",
       multiplier: isSet(object.multiplier) ? String(object.multiplier) : ""
     };
@@ -583,7 +583,7 @@ export const LockIdIntermediaryAccountConnection = {
 
   fromJSON(object: any): LockIdIntermediaryAccountConnection {
     return {
-      lockId: isSet(object.lockId) ? Long.fromString(object.lockId) : Long.UZERO,
+      lockId: isSet(object.lockId) ? Long.fromValue(object.lockId) : Long.UZERO,
       intermediaryAccount: isSet(object.intermediaryAccount) ? String(object.intermediaryAccount) : ""
     };
   },
@@ -669,7 +669,7 @@ export const UnpoolWhitelistedPools = {
 
   fromJSON(object: any): UnpoolWhitelistedPools {
     return {
-      ids: Array.isArray(object?.ids) ? object.ids.map((e: any) => Long.fromString(e)) : []
+      ids: Array.isArray(object?.ids) ? object.ids.map((e: any) => Long.fromValue(e)) : []
     };
   },
 

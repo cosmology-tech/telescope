@@ -805,7 +805,7 @@ export const Header = {
     return {
       version: isSet(object.version) ? Consensus.fromJSON(object.version) : undefined,
       chainId: isSet(object.chainId) ? String(object.chainId) : "",
-      height: isSet(object.height) ? Long.fromString(object.height) : Long.ZERO,
+      height: isSet(object.height) ? Long.fromValue(object.height) : Long.ZERO,
       time: isSet(object.time) ? fromJsonTimestamp(object.time) : undefined,
       lastBlockId: isSet(object.lastBlockId) ? BlockID.fromJSON(object.lastBlockId) : undefined,
       lastCommitHash: isSet(object.lastCommitHash) ? bytesFromBase64(object.lastCommitHash) : new Uint8Array(),
@@ -1082,7 +1082,7 @@ export const Vote = {
   fromJSON(object: any): Vote {
     return {
       type: isSet(object.type) ? signedMsgTypeFromJSON(object.type) : 0,
-      height: isSet(object.height) ? Long.fromString(object.height) : Long.ZERO,
+      height: isSet(object.height) ? Long.fromValue(object.height) : Long.ZERO,
       round: isSet(object.round) ? Number(object.round) : 0,
       blockId: isSet(object.blockId) ? BlockID.fromJSON(object.blockId) : undefined,
       timestamp: isSet(object.timestamp) ? fromJsonTimestamp(object.timestamp) : undefined,
@@ -1212,7 +1212,7 @@ export const Commit = {
 
   fromJSON(object: any): Commit {
     return {
-      height: isSet(object.height) ? Long.fromString(object.height) : Long.ZERO,
+      height: isSet(object.height) ? Long.fromValue(object.height) : Long.ZERO,
       round: isSet(object.round) ? Number(object.round) : 0,
       blockId: isSet(object.blockId) ? BlockID.fromJSON(object.blockId) : undefined,
       signatures: Array.isArray(object?.signatures) ? object.signatures.map((e: any) => CommitSig.fromJSON(e)) : []
@@ -1474,7 +1474,7 @@ export const Proposal = {
   fromJSON(object: any): Proposal {
     return {
       type: isSet(object.type) ? signedMsgTypeFromJSON(object.type) : 0,
-      height: isSet(object.height) ? Long.fromString(object.height) : Long.ZERO,
+      height: isSet(object.height) ? Long.fromValue(object.height) : Long.ZERO,
       round: isSet(object.round) ? Number(object.round) : 0,
       polRound: isSet(object.polRound) ? Number(object.polRound) : 0,
       blockId: isSet(object.blockId) ? BlockID.fromJSON(object.blockId) : undefined,
@@ -1766,9 +1766,9 @@ export const BlockMeta = {
   fromJSON(object: any): BlockMeta {
     return {
       blockId: isSet(object.blockId) ? BlockID.fromJSON(object.blockId) : undefined,
-      blockSize: isSet(object.blockSize) ? Long.fromString(object.blockSize) : Long.ZERO,
+      blockSize: isSet(object.blockSize) ? Long.fromValue(object.blockSize) : Long.ZERO,
       header: isSet(object.header) ? Header.fromJSON(object.header) : undefined,
-      numTxs: isSet(object.numTxs) ? Long.fromString(object.numTxs) : Long.ZERO
+      numTxs: isSet(object.numTxs) ? Long.fromValue(object.numTxs) : Long.ZERO
     };
   },
 

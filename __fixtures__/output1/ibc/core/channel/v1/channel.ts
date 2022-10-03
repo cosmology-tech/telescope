@@ -920,14 +920,14 @@ export const Packet = {
 
   fromJSON(object: any): Packet {
     return {
-      sequence: isSet(object.sequence) ? Long.fromString(object.sequence) : Long.UZERO,
+      sequence: isSet(object.sequence) ? Long.fromValue(object.sequence) : Long.UZERO,
       sourcePort: isSet(object.sourcePort) ? String(object.sourcePort) : "",
       sourceChannel: isSet(object.sourceChannel) ? String(object.sourceChannel) : "",
       destinationPort: isSet(object.destinationPort) ? String(object.destinationPort) : "",
       destinationChannel: isSet(object.destinationChannel) ? String(object.destinationChannel) : "",
       data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array(),
       timeoutHeight: isSet(object.timeoutHeight) ? Height.fromJSON(object.timeoutHeight) : undefined,
-      timeoutTimestamp: isSet(object.timeoutTimestamp) ? Long.fromString(object.timeoutTimestamp) : Long.UZERO
+      timeoutTimestamp: isSet(object.timeoutTimestamp) ? Long.fromValue(object.timeoutTimestamp) : Long.UZERO
     };
   },
 
@@ -1053,7 +1053,7 @@ export const PacketState = {
     return {
       portId: isSet(object.portId) ? String(object.portId) : "",
       channelId: isSet(object.channelId) ? String(object.channelId) : "",
-      sequence: isSet(object.sequence) ? Long.fromString(object.sequence) : Long.UZERO,
+      sequence: isSet(object.sequence) ? Long.fromValue(object.sequence) : Long.UZERO,
       data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array()
     };
   },

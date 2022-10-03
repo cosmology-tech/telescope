@@ -315,7 +315,7 @@ export const QueryDenomSpotPriceResponse = {
 
   fromJSON(object: any): QueryDenomSpotPriceResponse {
     return {
-      poolID: isSet(object.poolID) ? Long.fromString(object.poolID) : Long.UZERO,
+      poolID: isSet(object.poolID) ? Long.fromValue(object.poolID) : Long.UZERO,
       spotPrice: isSet(object.spotPrice) ? String(object.spotPrice) : ""
     };
   },
@@ -458,7 +458,7 @@ export const QueryDenomPoolIdResponse = {
 
   fromJSON(object: any): QueryDenomPoolIdResponse {
     return {
-      poolID: isSet(object.poolID) ? Long.fromString(object.poolID) : Long.UZERO
+      poolID: isSet(object.poolID) ? Long.fromValue(object.poolID) : Long.UZERO
     };
   },
 
