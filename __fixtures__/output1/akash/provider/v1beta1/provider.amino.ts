@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { Attribute, AttributeSDKType } from "../../base/v1beta1/attribute";
 import { AminoMsg } from "@cosmjs/amino";
 import { ProviderInfo, ProviderInfoSDKType, MsgCreateProvider, MsgCreateProviderSDKType, MsgUpdateProvider, MsgUpdateProviderSDKType, MsgDeleteProvider, MsgDeleteProviderSDKType } from "./provider";
