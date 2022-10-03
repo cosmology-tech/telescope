@@ -19,7 +19,7 @@ import { SystemParameters, SystemParametersSDKType } from "./system_parameter";
 import { SourceInfo, SourceInfoSDKType } from "./source_info";
 import { UInt32Value, UInt32ValueSDKType } from "../protobuf/wrappers";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial } from "@osmonauts/helpers";
+import { isSet, DeepPartial } from "../../helpers";
 export const protobufPackage = "google.api";
 
 /**

@@ -88,7 +88,6 @@
     "@cosmjs/proto-signing": "0.29.0",
     "@cosmjs/stargate": "0.29.0",
     "@cosmjs/tendermint-rpc": "^0.29.0",
-    "@osmonauts/helpers": "^0.7.0",
     "@osmonauts/lcd": "^0.6.0",
     "long": "^5.2.0",
     "protobufjs": "^6.11.3"

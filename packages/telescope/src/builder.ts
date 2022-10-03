@@ -20,6 +20,7 @@ import { plugin as createRPCMsgClients } from './generators/create-rpc-msg-clien
 import { plugin as createStargateClients } from './generators/create-stargate-clients';
 import { plugin as createBundle } from './generators/create-bundle';
 import { plugin as createIndex } from './generators/create-index';
+import { plugin as createHelpers } from './generators/create-helpers';
 import { plugin as createCosmWasmBundle } from './generators/create-cosmwasm-bundle';
 
 const sanitizeOptions = (options): TelescopeOptions => {
@@ -120,6 +121,8 @@ export class TelescopeBuilder {
 
         createAggregatedLCDClient(this);
         await createCosmWasmBundle(this);
+
+        createHelpers(this);
 
         // finally, write one index file with all files, exported
         createIndex(this);

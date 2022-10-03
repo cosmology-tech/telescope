@@ -1,6 +1,6 @@
 import { Account, AccountSDKType, Payment, PaymentSDKType } from "./types";
 import * as _m0 from "protobufjs/minimal";
-import { DeepPartial, Exact } from "@osmonauts/helpers";
+import { DeepPartial, Exact } from "../../../helpers";
 export const protobufPackage = "akash.escrow.v1beta1";
 
 /** GenesisState defines the basic genesis state used by escrow module */

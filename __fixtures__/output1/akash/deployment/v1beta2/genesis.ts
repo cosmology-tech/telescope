@@ -2,7 +2,7 @@ import { Deployment, DeploymentSDKType } from "./deployment";
 import { Group, GroupSDKType } from "./group";
 import { Params, ParamsSDKType } from "./params";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, Exact } from "@osmonauts/helpers";
+import { isSet, DeepPartial, Exact } from "../../../helpers";
 export const protobufPackage = "akash.deployment.v1beta2";
 
 /** GenesisDeployment defines the basic genesis state used by deployment module */

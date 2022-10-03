@@ -1,6 +1,6 @@
 import { Config, ConfigSDKType } from "./config";
 import * as _m0 from "protobufjs/minimal";
-import { DeepPartial, isSet } from "@osmonauts/helpers";
+import { DeepPartial, isSet } from "../../../helpers";
 export const protobufPackage = "cosmos.app.v1alpha1";
 
 /** QueryConfigRequest is the Query/Config request type. */

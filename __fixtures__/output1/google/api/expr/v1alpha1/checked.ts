@@ -2,7 +2,7 @@ import { SourceInfo, SourceInfoSDKType, Expr, ExprSDKType, Constant, ConstantSDK
 import { Empty, EmptySDKType } from "../../../protobuf/empty";
 import { NullValue, NullValueSDKType, nullValueFromJSON, nullValueToJSON } from "../../../protobuf/struct";
 import * as _m0 from "protobufjs/minimal";
-import { Long, isSet, DeepPartial, isObject } from "@osmonauts/helpers";
+import { Long, isSet, DeepPartial, isObject } from "../../../../helpers";
 export const protobufPackage = "google.api.expr.v1alpha1";
 
 /** CEL primitive types. */

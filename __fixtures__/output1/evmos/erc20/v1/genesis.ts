@@ -1,6 +1,6 @@
 import { TokenPair, TokenPairSDKType } from "./erc20";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial } from "@osmonauts/helpers";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "evmos.erc20.v1";
 
 /** GenesisState defines the module's genesis state. */

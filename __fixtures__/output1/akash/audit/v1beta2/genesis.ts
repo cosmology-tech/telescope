@@ -1,6 +1,6 @@
 import { AuditedAttributes, AuditedAttributesSDKType } from "./audit";
 import * as _m0 from "protobufjs/minimal";
-import { DeepPartial, Exact } from "@osmonauts/helpers";
+import { DeepPartial, Exact } from "../../../helpers";
 export const protobufPackage = "akash.audit.v1beta2";
 
 /** GenesisState defines the basic genesis state used by audit module */

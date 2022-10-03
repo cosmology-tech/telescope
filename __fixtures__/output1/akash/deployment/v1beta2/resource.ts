@@ -1,7 +1,7 @@
 import { ResourceUnits, ResourceUnitsSDKType } from "../../base/v1beta2/resourceunits";
 import { DecCoin, DecCoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, Exact } from "@osmonauts/helpers";
+import { isSet, DeepPartial, Exact } from "../../../helpers";
 export const protobufPackage = "akash.deployment.v1beta2";
 
 /** Resource stores unit, total count and price of resource */

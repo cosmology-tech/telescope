@@ -2,7 +2,7 @@ import { LabelDescriptor, LabelDescriptorSDKType } from "./label";
 import { LaunchStage, LaunchStageSDKType, launchStageFromJSON, launchStageToJSON } from "./launch_stage";
 import { Struct, StructSDKType } from "../protobuf/struct";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, isObject } from "@osmonauts/helpers";
+import { isSet, DeepPartial, isObject } from "../../helpers";
 export const protobufPackage = "google.api";
 
 /**

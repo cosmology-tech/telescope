@@ -2,7 +2,7 @@ import { ResourceValue, ResourceValueSDKType } from "./resourcevalue";
 import { Attribute, AttributeSDKType } from "./attribute";
 import { Endpoint, EndpointSDKType } from "./endpoint";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, Exact } from "@osmonauts/helpers";
+import { isSet, DeepPartial, Exact } from "../../../helpers";
 export const protobufPackage = "akash.base.v1beta1";
 
 /** CPU stores resource units and cpu config attributes */

@@ -1,7 +1,7 @@
 import { Value, ValueSDKType } from "./value";
 import { Status, StatusSDKType } from "../../../rpc/status";
 import * as _m0 from "protobufjs/minimal";
-import { DeepPartial, Long, isSet } from "@osmonauts/helpers";
+import { DeepPartial, Long, isSet } from "../../../../helpers";
 export const protobufPackage = "google.api.expr.v1alpha1";
 
 /**

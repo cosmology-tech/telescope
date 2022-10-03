@@ -3,7 +3,7 @@ import { MetricValueSet, MetricValueSetSDKType } from "./metric_value";
 import { LogEntry, LogEntrySDKType } from "./log_entry";
 import { Any, AnySDKType } from "../../../protobuf/any";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, toTimestamp, fromTimestamp, fromJsonTimestamp, isObject } from "@osmonauts/helpers";
+import { isSet, DeepPartial, toTimestamp, fromTimestamp, fromJsonTimestamp, isObject } from "../../../../helpers";
 export const protobufPackage = "google.api.servicecontrol.v1";
 
 /** Defines the importance of the data contained in the operation. */

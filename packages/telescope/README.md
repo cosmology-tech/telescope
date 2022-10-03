@@ -657,14 +657,13 @@ const options: TelescopeOptions = {
 
 If you don't use the boilerplate, you will need to manually install
 
-- `@osmonauts/helpers`
 - `@cosmjs/amino`
 - `@cosmjs/proto-signing`
 - `@cosmjs/stargate`
 - `@cosmjs/tendermint-rpc`
 
 ```sh
-yarn add @osmonauts/helpers @cosmjs/amino @cosmjs/proto-signing @cosmjs/stargate @cosmjs/tendermint-rpc
+yarn add @cosmjs/amino @cosmjs/proto-signing @cosmjs/stargate @cosmjs/tendermint-rpc
 ```
 
 If you use the LCD Client generation, you'll need to add

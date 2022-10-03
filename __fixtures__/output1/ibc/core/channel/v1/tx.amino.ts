@@ -1,7 +1,7 @@
 import { Channel, ChannelSDKType, Packet, PacketSDKType, Counterparty, CounterpartySDKType, stateFromJSON, orderFromJSON } from "./channel";
 import { Height, HeightSDKType } from "../../client/v1/client";
 import { AminoMsg } from "@cosmjs/amino";
-import { AminoHeight, omitDefault, Long } from "@osmonauts/helpers";
+import { AminoHeight, omitDefault, Long } from "../../../../helpers";
 import { MsgChannelOpenInit, MsgChannelOpenInitSDKType, MsgChannelOpenTry, MsgChannelOpenTrySDKType, MsgChannelOpenAck, MsgChannelOpenAckSDKType, MsgChannelOpenConfirm, MsgChannelOpenConfirmSDKType, MsgChannelCloseInit, MsgChannelCloseInitSDKType, MsgChannelCloseConfirm, MsgChannelCloseConfirmSDKType, MsgRecvPacket, MsgRecvPacketSDKType, MsgTimeout, MsgTimeoutSDKType, MsgTimeoutOnClose, MsgTimeoutOnCloseSDKType, MsgAcknowledgement, MsgAcknowledgementSDKType } from "./tx";
 export interface AminoMsgChannelOpenInit extends AminoMsg {
   type: "cosmos-sdk/MsgChannelOpenInit";

@@ -3,7 +3,7 @@ import { LogEntry, LogEntrySDKType } from "./log_entry";
 import { Duration, DurationSDKType } from "../../protobuf/duration";
 import { Status, StatusSDKType } from "../../rpc/status";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, isObject } from "@osmonauts/helpers";
+import { isSet, DeepPartial, isObject } from "../../../helpers";
 export const protobufPackage = "google.logging.v2";
 
 /** An indicator of why entries were omitted. */

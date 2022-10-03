@@ -2,7 +2,7 @@ import { Params, ParamsSDKType } from "./params";
 import { Gauge, GaugeSDKType } from "./gauge";
 import { Duration, DurationSDKType } from "../../google/protobuf/duration";
 import * as _m0 from "protobufjs/minimal";
-import { Long, isSet, DeepPartial } from "@osmonauts/helpers";
+import { Long, isSet, DeepPartial } from "../../helpers";
 export const protobufPackage = "osmosis.incentives";
 
 /** GenesisState defines the incentives module's genesis state. */
