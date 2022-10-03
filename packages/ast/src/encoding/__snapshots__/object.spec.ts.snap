@@ -52,7 +52,7 @@ exports[`cosmos/tx/signing/v1beta1/signing SignatureDescriptor 1`] = `
     return {
       publicKey: isSet(object.publicKey) ? Any.fromJSON(object.publicKey) : undefined,
       data: isSet(object.data) ? SignatureDescriptor_Data.fromJSON(object.data) : undefined,
-      sequence: isSet(object.sequence) ? Long.fromString(object.sequence) : Long.UZERO
+      sequence: isSet(object.sequence) ? Long.fromValue(object.sequence) : Long.UZERO
     };
   },
 
@@ -414,7 +414,7 @@ exports[`cosmwasm/wasm/v1/proposal 1`] = `
     return {
       title: isSet(object.title) ? String(object.title) : \\"\\",
       description: isSet(object.description) ? String(object.description) : \\"\\",
-      codeIds: Array.isArray(object?.codeIds) ? object.codeIds.map((e: any) => Long.fromString(e)) : []
+      codeIds: Array.isArray(object?.codeIds) ? object.codeIds.map((e: any) => Long.fromValue(e)) : []
     };
   },
 
@@ -529,7 +529,7 @@ exports[`cosmwasm/wasm/v1/proposal 2`] = `
     return {
       title: isSet(object.title) ? String(object.title) : \\"\\",
       description: isSet(object.description) ? String(object.description) : \\"\\",
-      codeIds: Array.isArray(object?.codeIds) ? object.codeIds.map((e: any) => Long.fromString(e)) : []
+      codeIds: Array.isArray(object?.codeIds) ? object.codeIds.map((e: any) => Long.fromValue(e)) : []
     };
   },
 
@@ -731,7 +731,7 @@ exports[`evmos/fees/v1/tx 1`] = `
       contractAddress: isSet(object.contractAddress) ? String(object.contractAddress) : \\"\\",
       deployerAddress: isSet(object.deployerAddress) ? String(object.deployerAddress) : \\"\\",
       withdrawAddress: isSet(object.withdrawAddress) ? String(object.withdrawAddress) : \\"\\",
-      nonces: Array.isArray(object?.nonces) ? object.nonces.map((e: any) => Long.fromString(e)) : []
+      nonces: Array.isArray(object?.nonces) ? object.nonces.map((e: any) => Long.fromValue(e)) : []
     };
   },
 
@@ -1637,8 +1637,8 @@ exports[`google/api/expr/v1alpha1/syntax Constant 1`] = `
     return {
       nullValue: isSet(object.nullValue) ? nullValueFromJSON(object.nullValue) : undefined,
       boolValue: isSet(object.boolValue) ? Boolean(object.boolValue) : undefined,
-      int64Value: isSet(object.int64Value) ? Long.fromString(object.int64Value) : undefined,
-      uint64Value: isSet(object.uint64Value) ? Long.fromString(object.uint64Value) : undefined,
+      int64Value: isSet(object.int64Value) ? Long.fromValue(object.int64Value) : undefined,
+      uint64Value: isSet(object.uint64Value) ? Long.fromValue(object.uint64Value) : undefined,
       doubleValue: isSet(object.doubleValue) ? Number(object.doubleValue) : undefined,
       stringValue: isSet(object.stringValue) ? String(object.stringValue) : undefined,
       bytesValue: isSet(object.bytesValue) ? bytesFromBase64(object.bytesValue) : undefined,
@@ -1670,7 +1670,7 @@ exports[`google/api/expr/v1alpha1/syntax Constant 1`] = `
     message.doubleValue = object.doubleValue ?? undefined;
     message.stringValue = object.stringValue ?? undefined;
     message.bytesValue = object.bytesValue ?? undefined;
-    message.durationValue = object.durationValue ?? undefined;
+    message.durationValue = object.durationValue !== undefined && object.durationValue !== null ? Duration.fromPartial(object.durationValue) : undefined;
     message.timestampValue = object.timestampValue ?? undefined;
     return message;
   },
@@ -2950,7 +2950,7 @@ exports[`osmosis/gamm/v1beta1/tx MsgJoinPool 1`] = `
   fromJSON(object: any): MsgJoinPool {
     return {
       sender: isSet(object.sender) ? String(object.sender) : \\"\\",
-      poolId: isSet(object.poolId) ? Long.fromString(object.poolId) : Long.UZERO,
+      poolId: isSet(object.poolId) ? Long.fromValue(object.poolId) : Long.UZERO,
       shareOutAmount: isSet(object.shareOutAmount) ? String(object.shareOutAmount) : \\"\\",
       tokenInMaxs: Array.isArray(object?.tokenInMaxs) ? object.tokenInMaxs.map((e: any) => Coin.fromJSON(e)) : []
     };

@@ -202,12 +202,25 @@ export const fromPartial = {
     // message.period = object.period ?? undefined;
 
     duration(args: FromPartialMethod) {
+        const durationFormat = args.context.pluginValue('prototypes.typingsFormat.duration');
+        switch (durationFormat) {
+            case 'string':
+                return fromPartial.durationString(args);
+            case 'duration':
+            default:
+                return fromPartial.type(args);
+        }
+
+    },
+
+    durationString(args: FromPartialMethod) {
         const prop = args.field.name;
         return setNullishCoalescing(
             prop,
             t.identifier('undefined')
         );
     },
+
 
     timestamp(args: FromPartialMethod) {
         const timestampFormat = args.context.pluginValue('prototypes.typingsFormat.timestamp')

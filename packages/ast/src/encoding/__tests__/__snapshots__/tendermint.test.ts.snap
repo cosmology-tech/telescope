@@ -214,9 +214,9 @@ exports[`ibc/lightclients/tendermint/v1/tendermint duration 2`] = `
     const message = createBaseClientState();
     message.chainId = object.chainId ?? \\"\\";
     message.trustLevel = object.trustLevel !== undefined && object.trustLevel !== null ? Fraction.fromPartial(object.trustLevel) : undefined;
-    message.trustingPeriod = object.trustingPeriod ?? undefined;
-    message.unbondingPeriod = object.unbondingPeriod ?? undefined;
-    message.maxClockDrift = object.maxClockDrift ?? undefined;
+    message.trustingPeriod = object.trustingPeriod !== undefined && object.trustingPeriod !== null ? Duration.fromPartial(object.trustingPeriod) : undefined;
+    message.unbondingPeriod = object.unbondingPeriod !== undefined && object.unbondingPeriod !== null ? Duration.fromPartial(object.unbondingPeriod) : undefined;
+    message.maxClockDrift = object.maxClockDrift !== undefined && object.maxClockDrift !== null ? Duration.fromPartial(object.maxClockDrift) : undefined;
     message.frozenHeight = object.frozenHeight !== undefined && object.frozenHeight !== null ? Height.fromPartial(object.frozenHeight) : undefined;
     message.latestHeight = object.latestHeight !== undefined && object.latestHeight !== null ? Height.fromPartial(object.latestHeight) : undefined;
     message.proofSpecs = object.proofSpecs?.map(e => ProofSpec.fromPartial(e)) || [];
