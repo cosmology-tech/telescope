@@ -86,6 +86,8 @@ interface TelescopeOpts {
 
     rpcClients?: {
         enabled: boolean;
+        inline?: boolean;
+        extensions?: boolean;
         camelCase?: boolean;
         scopedIsExclusive?: boolean;
         bundle?: boolean;
@@ -171,6 +173,8 @@ export const defaultTelescopeOptions: TelescopeOptions = {
     },
     rpcClients: {
         enabled: true,
+        extensions: true,
+        inline: false,
         bundle: true,
         camelCase: true,
         scopedIsExclusive: true

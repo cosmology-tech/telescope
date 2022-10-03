@@ -74,6 +74,8 @@ interface TelescopeOpts {
     };
     rpcClients?: {
         enabled: boolean;
+        inline?: boolean;
+        extensions?: boolean;
         camelCase?: boolean;
         scopedIsExclusive?: boolean;
         bundle?: boolean;

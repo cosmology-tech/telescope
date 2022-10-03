@@ -22,6 +22,9 @@ export const plugin = (
         const enabled = c.proto.pluginValue('rpcClients.enabled');
         if (!enabled) return;
 
+        const inline = c.proto.pluginValue('rpcClients.inline');
+        if (inline) return;
+
         if (c.proto.isExcluded()) return;
 
         const localname = bundler.getLocalFilename(c.ref, 'rpc.msg');

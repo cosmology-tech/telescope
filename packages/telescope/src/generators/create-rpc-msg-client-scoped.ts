@@ -18,6 +18,10 @@ export const plugin = (
         return;
     }
 
+    if (builder.options?.rpcClients?.inline) {
+        return;
+    }
+
     // if no scopes, do them all!
     if (
         !builder.options.rpcClients.scoped ||

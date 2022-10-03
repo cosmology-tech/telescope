@@ -214,6 +214,9 @@ const options: TelescopeOptions = {
           },
           aminoEncoding: {
             enabled: false
+          },
+          rpcClients: {
+            inline: true
           }
         }
       },

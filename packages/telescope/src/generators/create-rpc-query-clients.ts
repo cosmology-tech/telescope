@@ -10,14 +10,13 @@ export const plugin = (
     bundler: Bundler
 ) => {
 
-    // if (!builder.options.rpcClients.enabled) {
-    //     return;
-    // }
-
     const clients = bundler.contexts.map(c => {
 
         const enabled = c.proto.pluginValue('rpcClients.enabled');
         if (!enabled) return;
+
+        const inline = c.proto.pluginValue('rpcClients.inline');
+        if (inline) return;
 
         if (c.proto.isExcluded()) return;
 
@@ -55,12 +54,16 @@ export const plugin = (
         if (proto.Query) {
             asts.push(createRpcClientInterface(ctx.generic, proto.Query));
             asts.push(createRpcClientClass(ctx.generic, proto.Query));
-            asts.push(createRpcQueryExtension(ctx.generic, proto.Query));
+            if (c.proto.pluginValue('rpcClients.extensions')) {
+                asts.push(createRpcQueryExtension(ctx.generic, proto.Query));
+            }
         }
         if (proto.Service) {
             asts.push(createRpcClientInterface(ctx.generic, proto.Service));
             asts.push(createRpcClientClass(ctx.generic, proto.Service));
-            asts.push(createRpcQueryExtension(ctx.generic, proto.Service));
+            if (c.proto.pluginValue('rpcClients.extensions')) {
+                asts.push(createRpcQueryExtension(ctx.generic, proto.Service));
+            }
         }
 
         if (!asts.length) {

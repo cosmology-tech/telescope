@@ -7,6 +7,8 @@ import { writeFileSync } from 'fs';
 import { dirname } from 'path';
 import { sync as mkdirp } from 'mkdirp';
 import { ProtoRef } from '@osmonauts/types';
+import { getNestedProto } from '@osmonauts/proto-parser';
+import { createRpcClientClass, createRpcClientInterface, createRpcQueryExtension } from '@osmonauts/ast';
 
 const isExcluded = (builder: TelescopeBuilder, ref: ProtoRef) => {
     return builder.options.prototypes?.excluded?.protos?.includes(ref.filename) ||
@@ -45,6 +47,28 @@ export const plugin = (
                     t.stringLiteral(context.ref.proto.package)
                 )
             ])))
+        }
+
+        if (context.proto.pluginValue('rpcClients.inline')) {
+            const proto = getNestedProto(context.ref.traversed);
+            if (proto.Query) {
+                context.body.push(createRpcClientInterface(context.generic, proto.Query));
+                context.body.push(createRpcClientClass(context.generic, proto.Query));
+                if (context.proto.pluginValue('rpcClients.extensions')) {
+                    context.body.push(createRpcQueryExtension(context.generic, proto.Query));
+                }
+            }
+            if (proto.Service) {
+                context.body.push(createRpcClientInterface(context.generic, proto.Service));
+                context.body.push(createRpcClientClass(context.generic, proto.Service));
+                if (context.proto.pluginValue('rpcClients.extensions')) {
+                    context.body.push(createRpcQueryExtension(context.generic, proto.Service));
+                }
+            }
+            if (proto.Msg) {
+                context.body.push(createRpcClientInterface(context.generic, proto.Msg))
+                context.body.push(createRpcClientClass(context.generic, proto.Msg))
+            }
         }
 
         // body
