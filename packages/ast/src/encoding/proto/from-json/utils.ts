@@ -119,7 +119,7 @@ export const fromJSON = {
         )
     },
 
-    // int64Value: isSet(object.int64Value) ? Long.fromString(object.int64Value) : Long.UZERO,
+    // int64Value: isSet(object.int64Value) ? Long.fromValue(object.int64Value) : Long.UZERO,
     long(args: FromJSONMethod) {
         const prop = args.field.name;
         args.context.addUtil('isSet');
@@ -140,7 +140,7 @@ export const fromJSON = {
                 t.callExpression(
                     t.memberExpression(
                         t.identifier('Long'),
-                        t.identifier('fromString')
+                        t.identifier('fromValue')
                     ),
                     [
                         t.memberExpression(
@@ -624,12 +624,12 @@ export const arrayTypes = {
             ]
         );
     },
-    // codeIds: Array.isArray(object?.codeIds) ? object.codeIds.map((e: any) => Long.fromString(e)) : [],
+    // codeIds: Array.isArray(object?.codeIds) ? object.codeIds.map((e: any) => Long.fromValue(e)) : [],
     long() {
         return t.callExpression(
             t.memberExpression(
                 t.identifier('Long'),
-                t.identifier('fromString')
+                t.identifier('fromValue')
             ),
             [
                 t.identifier('e')
