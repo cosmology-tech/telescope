@@ -3,14 +3,24 @@ import { ProtoService, ProtoServiceMethod, ProtoServiceMethodInfo } from '@osmon
 import { GenericParseContext } from '../../../encoding';
 import { arrowFunctionExpression, callExpression, classMethod, classProperty, identifier, objectPattern } from '../../../utils';
 
-const returnReponseType = (ResponseType: string) => {
+const getResponseTypeName = (
+    context: GenericParseContext,
+    name: string
+) => {
+    return name + (context.options.useSDKTypes ? 'SDKType' : '');
+};
+
+const returnReponseType = (
+    context: GenericParseContext,
+    name: string
+) => {
     return t.tsTypeAnnotation(
         t.tsTypeReference(
             t.identifier('Promise'),
             t.tsTypeParameterInstantiation(
                 [
                     t.tsTypeReference(
-                        t.identifier(ResponseType + 'SDKType')
+                        t.identifier(getResponseTypeName(context, name))
                     )
                 ]
             )
@@ -22,6 +32,7 @@ const firstLower = (s: string) => s = s.charAt(0).toLowerCase() + s.slice(1);
 const firstUpper = (s: string) => s = s.charAt(0).toUpperCase() + s.slice(1);
 
 const returnAwaitRequest = (
+    context: GenericParseContext,
     responseType: string,
     // method: 'get' | 'post',
     hasOptions: boolean = false
@@ -50,7 +61,7 @@ const returnAwaitRequest = (
                 args,
                 t.tsTypeParameterInstantiation([
                     t.tsTypeReference(
-                        t.identifier(responseType + 'SDKType')
+                        t.identifier(getResponseTypeName(context, responseType))
                     )
                 ])
             )
@@ -335,6 +346,7 @@ const buildRequestMethod = (
 
         // return 
         returnAwaitRequest(
+            context,
             serviceMethod.responseType,
             // serviceMethod.info.method,
             serviceMethod.info.queryParams.length > 0
@@ -342,6 +354,7 @@ const buildRequestMethod = (
     ]);
 
     if (context.pluginValue('classesUseArrowFunctions')) {
+
         return classProperty(
             t.identifier(methodName),
             arrowFunctionExpression(
@@ -353,7 +366,7 @@ const buildRequestMethod = (
                         t.tsTypeParameterInstantiation(
                             [
                                 t.tsTypeReference(
-                                    t.identifier(serviceMethod.responseType + 'SDKType')
+                                    t.identifier(getResponseTypeName(context, serviceMethod.responseType))
                                 )
                             ]
                         )
@@ -380,7 +393,7 @@ const buildRequestMethod = (
             methodArgs
         ],
         body,
-        returnReponseType(serviceMethod.responseType),
+        returnReponseType(context, serviceMethod.responseType),
         makeComment(comment) as t.CommentLine[],
         false,
         false,

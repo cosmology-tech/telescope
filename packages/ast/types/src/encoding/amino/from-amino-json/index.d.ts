@@ -10,7 +10,7 @@ export interface FromAminoParseField {
     nested: number;
     isOptional: boolean;
 }
-export declare const fromAminoParseField: ({ context, field, currentProtoPath, scope, fieldPath, nested, isOptional }: FromAminoParseField) => any;
+export declare const fromAminoParseField: ({ context, field, currentProtoPath, scope: previousScope, fieldPath: previousFieldPath, nested, isOptional }: FromAminoParseField) => any;
 interface fromAminoJSON {
     context: AminoParseContext;
     proto: ProtoType;

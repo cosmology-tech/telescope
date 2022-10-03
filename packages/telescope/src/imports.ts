@@ -236,6 +236,7 @@ const addSDKTypesToImports = (
                     obj,
                     SDKTypeObject
                 ];
+
             }
         }
         return [
@@ -265,9 +266,11 @@ export const aggregateImports = (
         .concat(genericImports)
         .concat(additionalImports);
 
-    return addSDKTypesToImports(context, list);
-
-    // return list;
+    if (context.options.useSDKTypes) {
+        return addSDKTypesToImports(context, list);
+    } else {
+        return list;
+    }
 }
 
 

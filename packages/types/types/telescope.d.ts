@@ -3,6 +3,7 @@ import { AminoExceptions } from "./aminos";
 interface TelescopeOpts {
     removeUnusedImports?: boolean;
     classesUseArrowFunctions?: boolean;
+    useSDKTypes?: boolean;
     prototypes?: {
         enabled?: boolean;
         parser?: {

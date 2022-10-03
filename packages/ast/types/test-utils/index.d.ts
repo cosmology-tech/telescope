@@ -7,6 +7,7 @@ export declare const printCode: (ast: any) => void;
 export declare const defaultTelescopeOptions: {
     removeUnusedImports: boolean;
     classesUseArrowFunctions: boolean;
+    useSDKTypes: boolean;
     prototypes: {
         enabled?: boolean;
         parser?: {

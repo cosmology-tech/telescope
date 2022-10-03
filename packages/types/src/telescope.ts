@@ -6,6 +6,7 @@ interface TelescopeOpts {
 
     removeUnusedImports?: boolean;
     classesUseArrowFunctions?: boolean;
+    useSDKTypes?: boolean;
 
     prototypes?: {
         enabled?: boolean;
@@ -111,6 +112,7 @@ export const defaultTelescopeOptions: TelescopeOptions = {
 
     removeUnusedImports: true,
     classesUseArrowFunctions: false,
+    useSDKTypes: true,
 
     prototypes: {
         enabled: true,
