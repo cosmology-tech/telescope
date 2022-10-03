@@ -6,7 +6,7 @@ export const protobufPackage = "ibc.core.channel.v1";
 
 /**
  * MsgChannelOpenInit defines an sdk.Msg to initialize a channel handshake. It
- * is called by a relayer on Chain A.
+ *  is called by a relayer on Chain A.
  */
 export interface MsgChannelOpenInit {
   portId: string;
@@ -16,7 +16,7 @@ export interface MsgChannelOpenInit {
 
 /**
  * MsgChannelOpenInit defines an sdk.Msg to initialize a channel handshake. It
- * is called by a relayer on Chain A.
+ *  is called by a relayer on Chain A.
  */
 export interface MsgChannelOpenInitSDKType {
   port_id: string;
@@ -32,14 +32,14 @@ export interface MsgChannelOpenInitResponseSDKType {}
 
 /**
  * MsgChannelOpenInit defines a msg sent by a Relayer to try to open a channel
- * on Chain B.
+ *  on Chain B.
  */
 export interface MsgChannelOpenTry {
   portId: string;
 
   /**
    * in the case of crossing hello's, when both chains call OpenInit, we need
-   * the channel identifier of the previous channel in state INIT
+   *  the channel identifier of the previous channel in state INIT
    */
   previousChannelId: string;
   channel: Channel;
@@ -51,14 +51,14 @@ export interface MsgChannelOpenTry {
 
 /**
  * MsgChannelOpenInit defines a msg sent by a Relayer to try to open a channel
- * on Chain B.
+ *  on Chain B.
  */
 export interface MsgChannelOpenTrySDKType {
   port_id: string;
 
   /**
    * in the case of crossing hello's, when both chains call OpenInit, we need
-   * the channel identifier of the previous channel in state INIT
+   *  the channel identifier of the previous channel in state INIT
    */
   previous_channel_id: string;
   channel: ChannelSDKType;
@@ -76,7 +76,7 @@ export interface MsgChannelOpenTryResponseSDKType {}
 
 /**
  * MsgChannelOpenAck defines a msg sent by a Relayer to Chain A to acknowledge
- * the change of channel state to TRYOPEN on Chain B.
+ *  the change of channel state to TRYOPEN on Chain B.
  */
 export interface MsgChannelOpenAck {
   portId: string;
@@ -90,7 +90,7 @@ export interface MsgChannelOpenAck {
 
 /**
  * MsgChannelOpenAck defines a msg sent by a Relayer to Chain A to acknowledge
- * the change of channel state to TRYOPEN on Chain B.
+ *  the change of channel state to TRYOPEN on Chain B.
  */
 export interface MsgChannelOpenAckSDKType {
   port_id: string;
@@ -110,7 +110,7 @@ export interface MsgChannelOpenAckResponseSDKType {}
 
 /**
  * MsgChannelOpenConfirm defines a msg sent by a Relayer to Chain B to
- * acknowledge the change of channel state to OPEN on Chain A.
+ *  acknowledge the change of channel state to OPEN on Chain A.
  */
 export interface MsgChannelOpenConfirm {
   portId: string;
@@ -122,7 +122,7 @@ export interface MsgChannelOpenConfirm {
 
 /**
  * MsgChannelOpenConfirm defines a msg sent by a Relayer to Chain B to
- * acknowledge the change of channel state to OPEN on Chain A.
+ *  acknowledge the change of channel state to OPEN on Chain A.
  */
 export interface MsgChannelOpenConfirmSDKType {
   port_id: string;
@@ -134,19 +134,19 @@ export interface MsgChannelOpenConfirmSDKType {
 
 /**
  * MsgChannelOpenConfirmResponse defines the Msg/ChannelOpenConfirm response
- * type.
+ *  type.
  */
 export interface MsgChannelOpenConfirmResponse {}
 
 /**
  * MsgChannelOpenConfirmResponse defines the Msg/ChannelOpenConfirm response
- * type.
+ *  type.
  */
 export interface MsgChannelOpenConfirmResponseSDKType {}
 
 /**
  * MsgChannelCloseInit defines a msg sent by a Relayer to Chain A
- * to close a channel with Chain B.
+ *  to close a channel with Chain B.
  */
 export interface MsgChannelCloseInit {
   portId: string;
@@ -156,7 +156,7 @@ export interface MsgChannelCloseInit {
 
 /**
  * MsgChannelCloseInit defines a msg sent by a Relayer to Chain A
- * to close a channel with Chain B.
+ *  to close a channel with Chain B.
  */
 export interface MsgChannelCloseInitSDKType {
   port_id: string;
@@ -172,7 +172,7 @@ export interface MsgChannelCloseInitResponseSDKType {}
 
 /**
  * MsgChannelCloseConfirm defines a msg sent by a Relayer to Chain B
- * to acknowledge the change of channel state to CLOSED on Chain A.
+ *  to acknowledge the change of channel state to CLOSED on Chain A.
  */
 export interface MsgChannelCloseConfirm {
   portId: string;
@@ -184,7 +184,7 @@ export interface MsgChannelCloseConfirm {
 
 /**
  * MsgChannelCloseConfirm defines a msg sent by a Relayer to Chain B
- * to acknowledge the change of channel state to CLOSED on Chain A.
+ *  to acknowledge the change of channel state to CLOSED on Chain A.
  */
 export interface MsgChannelCloseConfirmSDKType {
   port_id: string;
@@ -196,13 +196,13 @@ export interface MsgChannelCloseConfirmSDKType {
 
 /**
  * MsgChannelCloseConfirmResponse defines the Msg/ChannelCloseConfirm response
- * type.
+ *  type.
  */
 export interface MsgChannelCloseConfirmResponse {}
 
 /**
  * MsgChannelCloseConfirmResponse defines the Msg/ChannelCloseConfirm response
- * type.
+ *  type.
  */
 export interface MsgChannelCloseConfirmResponseSDKType {}
 

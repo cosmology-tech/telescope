@@ -9,19 +9,19 @@ export interface MsgIBCSend {
 
   /**
    * Timeout height relative to the current block height.
-   * The timeout is disabled when set to 0.
+   *  The timeout is disabled when set to 0.
    */
   timeoutHeight: Long;
 
   /**
    * Timeout timestamp (in nanoseconds) relative to the current block timestamp.
-   * The timeout is disabled when set to 0.
+   *  The timeout is disabled when set to 0.
    */
   timeoutTimestamp: Long;
 
   /**
    * Data is the payload to transfer. We must not make assumption what format or
-   * content is in here.
+   *  content is in here.
    */
   data: Uint8Array;
 }
@@ -33,19 +33,19 @@ export interface MsgIBCSendSDKType {
 
   /**
    * Timeout height relative to the current block height.
-   * The timeout is disabled when set to 0.
+   *  The timeout is disabled when set to 0.
    */
   timeout_height: Long;
 
   /**
    * Timeout timestamp (in nanoseconds) relative to the current block timestamp.
-   * The timeout is disabled when set to 0.
+   *  The timeout is disabled when set to 0.
    */
   timeout_timestamp: Long;
 
   /**
    * Data is the payload to transfer. We must not make assumption what format or
-   * content is in here.
+   *  content is in here.
    */
   data: Uint8Array;
 }

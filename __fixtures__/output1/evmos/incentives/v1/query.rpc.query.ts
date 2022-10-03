@@ -23,7 +23,7 @@ export interface Query {
 
   allocationMeters(request?: QueryAllocationMetersRequest): Promise<QueryAllocationMetersResponse>;
   /*AllocationMeters retrieves active allocation meters for a given
-  denomination*/
+   denomination*/
 
   allocationMeter(request: QueryAllocationMeterRequest): Promise<QueryAllocationMeterResponse>;
   /*AllocationMeter Retrieves a active gas meter*/

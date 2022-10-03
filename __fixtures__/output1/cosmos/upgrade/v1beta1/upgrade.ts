@@ -8,19 +8,19 @@ export const protobufPackage = "cosmos.upgrade.v1beta1";
 export interface Plan {
   /**
    * Sets the name for the upgrade. This name will be used by the upgraded
-   * version of the software to apply any special "on-upgrade" commands during
-   * the first BeginBlock method after the upgrade is applied. It is also used
-   * to detect whether a software version can handle a given upgrade. If no
-   * upgrade handler with this name has been set in the software, it will be
-   * assumed that the software is out-of-date when the upgrade Time or Height is
-   * reached and the software will exit.
+   *  version of the software to apply any special "on-upgrade" commands during
+   *  the first BeginBlock method after the upgrade is applied. It is also used
+   *  to detect whether a software version can handle a given upgrade. If no
+   *  upgrade handler with this name has been set in the software, it will be
+   *  assumed that the software is out-of-date when the upgrade Time or Height is
+   *  reached and the software will exit.
    */
   name: string;
 
   /**
    * Deprecated: Time based upgrades have been deprecated. Time based upgrade logic
-   * has been removed from the SDK.
-   * If this field is not empty, an error will be thrown.
+   *  has been removed from the SDK.
+   *  If this field is not empty, an error will be thrown.
    */
 
   /** @deprecated */
@@ -28,20 +28,20 @@ export interface Plan {
 
   /**
    * The height at which the upgrade must be performed.
-   * Only used if Time is not set.
+   *  Only used if Time is not set.
    */
   height: Long;
 
   /**
    * Any application specific upgrade info to be included on-chain
-   * such as a git commit that validators could automatically upgrade to
+   *  such as a git commit that validators could automatically upgrade to
    */
   info: string;
 
   /**
    * Deprecated: UpgradedClientState field has been deprecated. IBC upgrade logic has been
-   * moved to the IBC module in the sub module 02-client.
-   * If this field is not empty, an error will be thrown.
+   *  moved to the IBC module in the sub module 02-client.
+   *  If this field is not empty, an error will be thrown.
    */
 
   /** @deprecated */
@@ -52,19 +52,19 @@ export interface Plan {
 export interface PlanSDKType {
   /**
    * Sets the name for the upgrade. This name will be used by the upgraded
-   * version of the software to apply any special "on-upgrade" commands during
-   * the first BeginBlock method after the upgrade is applied. It is also used
-   * to detect whether a software version can handle a given upgrade. If no
-   * upgrade handler with this name has been set in the software, it will be
-   * assumed that the software is out-of-date when the upgrade Time or Height is
-   * reached and the software will exit.
+   *  version of the software to apply any special "on-upgrade" commands during
+   *  the first BeginBlock method after the upgrade is applied. It is also used
+   *  to detect whether a software version can handle a given upgrade. If no
+   *  upgrade handler with this name has been set in the software, it will be
+   *  assumed that the software is out-of-date when the upgrade Time or Height is
+   *  reached and the software will exit.
    */
   name: string;
 
   /**
    * Deprecated: Time based upgrades have been deprecated. Time based upgrade logic
-   * has been removed from the SDK.
-   * If this field is not empty, an error will be thrown.
+   *  has been removed from the SDK.
+   *  If this field is not empty, an error will be thrown.
    */
 
   /** @deprecated */
@@ -72,20 +72,20 @@ export interface PlanSDKType {
 
   /**
    * The height at which the upgrade must be performed.
-   * Only used if Time is not set.
+   *  Only used if Time is not set.
    */
   height: Long;
 
   /**
    * Any application specific upgrade info to be included on-chain
-   * such as a git commit that validators could automatically upgrade to
+   *  such as a git commit that validators could automatically upgrade to
    */
   info: string;
 
   /**
    * Deprecated: UpgradedClientState field has been deprecated. IBC upgrade logic has been
-   * moved to the IBC module in the sub module 02-client.
-   * If this field is not empty, an error will be thrown.
+   *  moved to the IBC module in the sub module 02-client.
+   *  If this field is not empty, an error will be thrown.
    */
 
   /** @deprecated */
@@ -94,9 +94,9 @@ export interface PlanSDKType {
 
 /**
  * SoftwareUpgradeProposal is a gov Content type for initiating a software
- * upgrade.
- * Deprecated: This legacy proposal is deprecated in favor of Msg-based gov
- * proposals, see MsgSoftwareUpgrade.
+ *  upgrade.
+ *  Deprecated: This legacy proposal is deprecated in favor of Msg-based gov
+ *  proposals, see MsgSoftwareUpgrade.
  */
 
 /** @deprecated */
@@ -108,9 +108,9 @@ export interface SoftwareUpgradeProposal {
 
 /**
  * SoftwareUpgradeProposal is a gov Content type for initiating a software
- * upgrade.
- * Deprecated: This legacy proposal is deprecated in favor of Msg-based gov
- * proposals, see MsgSoftwareUpgrade.
+ *  upgrade.
+ *  Deprecated: This legacy proposal is deprecated in favor of Msg-based gov
+ *  proposals, see MsgSoftwareUpgrade.
  */
 
 /** @deprecated */
@@ -122,9 +122,9 @@ export interface SoftwareUpgradeProposalSDKType {
 
 /**
  * CancelSoftwareUpgradeProposal is a gov Content type for cancelling a software
- * upgrade.
- * Deprecated: This legacy proposal is deprecated in favor of Msg-based gov
- * proposals, see MsgCancelUpgrade.
+ *  upgrade.
+ *  Deprecated: This legacy proposal is deprecated in favor of Msg-based gov
+ *  proposals, see MsgCancelUpgrade.
  */
 
 /** @deprecated */
@@ -135,9 +135,9 @@ export interface CancelSoftwareUpgradeProposal {
 
 /**
  * CancelSoftwareUpgradeProposal is a gov Content type for cancelling a software
- * upgrade.
- * Deprecated: This legacy proposal is deprecated in favor of Msg-based gov
- * proposals, see MsgCancelUpgrade.
+ *  upgrade.
+ *  Deprecated: This legacy proposal is deprecated in favor of Msg-based gov
+ *  proposals, see MsgCancelUpgrade.
  */
 
 /** @deprecated */
@@ -149,7 +149,7 @@ export interface CancelSoftwareUpgradeProposalSDKType {
 /**
  * ModuleVersion specifies a module and its consensus version.
  * 
- * Since: cosmos-sdk 0.43
+ *  Since: cosmos-sdk 0.43
  */
 export interface ModuleVersion {
   /** name of the app module */
@@ -162,7 +162,7 @@ export interface ModuleVersion {
 /**
  * ModuleVersion specifies a module and its consensus version.
  * 
- * Since: cosmos-sdk 0.43
+ *  Since: cosmos-sdk 0.43
  */
 export interface ModuleVersionSDKType {
   /** name of the app module */

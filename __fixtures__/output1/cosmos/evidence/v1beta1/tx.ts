@@ -5,7 +5,7 @@ export const protobufPackage = "cosmos.evidence.v1beta1";
 
 /**
  * MsgSubmitEvidence represents a message that supports submitting arbitrary
- * Evidence of misbehavior such as equivocation or counterfactual signing.
+ *  Evidence of misbehavior such as equivocation or counterfactual signing.
  */
 export interface MsgSubmitEvidence {
   submitter: string;
@@ -14,7 +14,7 @@ export interface MsgSubmitEvidence {
 
 /**
  * MsgSubmitEvidence represents a message that supports submitting arbitrary
- * Evidence of misbehavior such as equivocation or counterfactual signing.
+ *  Evidence of misbehavior such as equivocation or counterfactual signing.
  */
 export interface MsgSubmitEvidenceSDKType {
   submitter: string;

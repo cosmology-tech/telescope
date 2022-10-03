@@ -137,7 +137,7 @@ Object {
       },
       "DelegatorUnbondingDelegations": Object {
         "comment": "DelegatorUnbondingDelegations queries all unbonding delegations of a given
-delegator address.",
+ delegator address.",
         "fields": Object {
           "delegatorAddr": Object {
             "comment": "delegator_addr defines the delegator address to query for.",
@@ -205,7 +205,7 @@ delegator address.",
       },
       "DelegatorValidator": Object {
         "comment": "DelegatorValidator queries validator info for given delegator validator
-pair.",
+ pair.",
         "fields": Object {
           "delegatorAddr": Object {
             "comment": "delegator_addr defines the delegator address to query for.",
@@ -269,7 +269,7 @@ pair.",
       },
       "DelegatorValidators": Object {
         "comment": "DelegatorValidators queries all validators info for given delegator
-address.",
+ address.",
         "fields": Object {
           "delegatorAddr": Object {
             "comment": "delegator_addr defines the delegator address to query for.",
@@ -524,7 +524,7 @@ address.",
       },
       "UnbondingDelegation": Object {
         "comment": "UnbondingDelegation queries unbonding info for given validator delegator
-pair.",
+ pair.",
         "fields": Object {
           "delegatorAddr": Object {
             "comment": "delegator_addr defines the delegator address to query for.",
@@ -916,7 +916,7 @@ pair.",
   },
   "QueryDelegatorDelegationsRequest": Object {
     "comment": "QueryDelegatorDelegationsRequest is request type for the
-Query/DelegatorDelegations RPC method.",
+ Query/DelegatorDelegations RPC method.",
     "fields": Object {
       "delegatorAddr": Object {
         "comment": "delegator_addr defines the delegator address to query for.",
@@ -968,7 +968,7 @@ Query/DelegatorDelegations RPC method.",
   },
   "QueryDelegatorDelegationsResponse": Object {
     "comment": "QueryDelegatorDelegationsResponse is response type for the
-Query/DelegatorDelegations RPC method.",
+ Query/DelegatorDelegations RPC method.",
     "fields": Object {
       "delegationResponses": Object {
         "comment": "delegation_responses defines all the delegations' info of a delegator.",
@@ -1024,7 +1024,7 @@ Query/DelegatorDelegations RPC method.",
   },
   "QueryDelegatorUnbondingDelegationsRequest": Object {
     "comment": "QueryDelegatorUnbondingDelegationsRequest is request type for the
-Query/DelegatorUnbondingDelegations RPC method.",
+ Query/DelegatorUnbondingDelegations RPC method.",
     "fields": Object {
       "delegatorAddr": Object {
         "comment": "delegator_addr defines the delegator address to query for.",
@@ -1076,7 +1076,7 @@ Query/DelegatorUnbondingDelegations RPC method.",
   },
   "QueryDelegatorUnbondingDelegationsResponse": Object {
     "comment": "QueryUnbondingDelegatorDelegationsResponse is response type for the
-Query/UnbondingDelegatorDelegations RPC method.",
+ Query/UnbondingDelegatorDelegations RPC method.",
     "fields": Object {
       "pagination": Object {
         "comment": "pagination defines the pagination in the response.",
@@ -1132,7 +1132,7 @@ Query/UnbondingDelegatorDelegations RPC method.",
   },
   "QueryDelegatorValidatorRequest": Object {
     "comment": "QueryDelegatorValidatorRequest is request type for the
-Query/DelegatorValidator RPC method.",
+ Query/DelegatorValidator RPC method.",
     "fields": Object {
       "delegatorAddr": Object {
         "comment": "delegator_addr defines the delegator address to query for.",
@@ -1181,7 +1181,7 @@ Query/DelegatorValidator RPC method.",
   },
   "QueryDelegatorValidatorResponse": Object {
     "comment": "QueryDelegatorValidatorResponse response type for the
-Query/DelegatorValidator RPC method.",
+ Query/DelegatorValidator RPC method.",
     "fields": Object {
       "validator": Object {
         "comment": "validator defines the the validator info.",
@@ -1216,7 +1216,7 @@ Query/DelegatorValidator RPC method.",
   },
   "QueryDelegatorValidatorsRequest": Object {
     "comment": "QueryDelegatorValidatorsRequest is request type for the
-Query/DelegatorValidators RPC method.",
+ Query/DelegatorValidators RPC method.",
     "fields": Object {
       "delegatorAddr": Object {
         "comment": "delegator_addr defines the delegator address to query for.",
@@ -1268,7 +1268,7 @@ Query/DelegatorValidators RPC method.",
   },
   "QueryDelegatorValidatorsResponse": Object {
     "comment": "QueryDelegatorValidatorsResponse is response type for the
-Query/DelegatorValidators RPC method.",
+ Query/DelegatorValidators RPC method.",
     "fields": Object {
       "pagination": Object {
         "comment": "pagination defines the pagination in the response.",
@@ -1324,7 +1324,7 @@ Query/DelegatorValidators RPC method.",
   },
   "QueryHistoricalInfoRequest": Object {
     "comment": "QueryHistoricalInfoRequest is request type for the Query/HistoricalInfo RPC
-method.",
+ method.",
     "fields": Object {
       "height": Object {
         "comment": "height defines at which height to query the historical info.",
@@ -1352,7 +1352,7 @@ method.",
   },
   "QueryHistoricalInfoResponse": Object {
     "comment": "QueryHistoricalInfoResponse is response type for the Query/HistoricalInfo RPC
-method.",
+ method.",
     "fields": Object {
       "hist": Object {
         "comment": "hist defines the historical info at the given height.",
@@ -1474,7 +1474,7 @@ method.",
   },
   "QueryRedelegationsRequest": Object {
     "comment": "QueryRedelegationsRequest is request type for the Query/Redelegations RPC
-method.",
+ method.",
     "fields": Object {
       "delegatorAddr": Object {
         "comment": "delegator_addr defines the delegator address to query for.",
@@ -1560,7 +1560,7 @@ method.",
   },
   "QueryRedelegationsResponse": Object {
     "comment": "QueryRedelegationsResponse is response type for the Query/Redelegations RPC
-method.",
+ method.",
     "fields": Object {
       "pagination": Object {
         "comment": "pagination defines the pagination in the response.",
@@ -1616,7 +1616,7 @@ method.",
   },
   "QueryUnbondingDelegationRequest": Object {
     "comment": "QueryUnbondingDelegationRequest is request type for the
-Query/UnbondingDelegation RPC method.",
+ Query/UnbondingDelegation RPC method.",
     "fields": Object {
       "delegatorAddr": Object {
         "comment": "delegator_addr defines the delegator address to query for.",
@@ -1665,7 +1665,7 @@ Query/UnbondingDelegation RPC method.",
   },
   "QueryUnbondingDelegationResponse": Object {
     "comment": "QueryDelegationResponse is response type for the Query/UnbondingDelegation
-RPC method.",
+ RPC method.",
     "fields": Object {
       "unbond": Object {
         "comment": "unbond defines the unbonding information of a delegation.",
@@ -1700,7 +1700,7 @@ RPC method.",
   },
   "QueryValidatorDelegationsRequest": Object {
     "comment": "QueryValidatorDelegationsRequest is request type for the
-Query/ValidatorDelegations RPC method",
+ Query/ValidatorDelegations RPC method",
     "fields": Object {
       "pagination": Object {
         "comment": "pagination defines an optional pagination for the request.",
@@ -1749,7 +1749,7 @@ Query/ValidatorDelegations RPC method",
   },
   "QueryValidatorDelegationsResponse": Object {
     "comment": "QueryValidatorDelegationsResponse is response type for the
-Query/ValidatorDelegations RPC method",
+ Query/ValidatorDelegations RPC method",
     "fields": Object {
       "delegationResponses": Object {
         "comment": null,
@@ -1868,7 +1868,7 @@ Query/ValidatorDelegations RPC method",
   },
   "QueryValidatorUnbondingDelegationsRequest": Object {
     "comment": "QueryValidatorUnbondingDelegationsRequest is required type for the
-Query/ValidatorUnbondingDelegations RPC method",
+ Query/ValidatorUnbondingDelegations RPC method",
     "fields": Object {
       "pagination": Object {
         "comment": "pagination defines an optional pagination for the request.",
@@ -1917,7 +1917,7 @@ Query/ValidatorUnbondingDelegations RPC method",
   },
   "QueryValidatorUnbondingDelegationsResponse": Object {
     "comment": "QueryValidatorUnbondingDelegationsResponse is response type for the
-Query/ValidatorUnbondingDelegations RPC method.",
+ Query/ValidatorUnbondingDelegations RPC method.",
     "fields": Object {
       "pagination": Object {
         "comment": "pagination defines the pagination in the response.",

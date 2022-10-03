@@ -48,7 +48,7 @@ export class LCDQueryClient {
   }
 
   /* DevFeeInfosPerDeployer retrieves all contracts that a deployer has
-  registered for fee distribution */
+   registered for fee distribution */
   async devFeeInfosPerDeployer(params: QueryDevFeeInfosPerDeployerRequest): Promise<QueryDevFeeInfosPerDeployerResponseSDKType> {
     const options: any = {
       params: {}

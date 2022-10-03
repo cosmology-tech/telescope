@@ -8,8 +8,8 @@ import { QueryFeeTokensRequest, QueryFeeTokensRequestSDKType, QueryFeeTokensResp
 export interface Query {
   feeTokens(request?: QueryFeeTokensRequest): Promise<QueryFeeTokensResponse>;
   /*FeeTokens returns a list of all the whitelisted fee tokens and their
-  corresponding pools It does not include the BaseDenom, which has its own
-  query endpoint*/
+   corresponding pools It does not include the BaseDenom, which has its own
+   query endpoint*/
 
   denomSpotPrice(request: QueryDenomSpotPriceRequest): Promise<QueryDenomSpotPriceResponse>;
   /*null*/

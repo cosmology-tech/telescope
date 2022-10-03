@@ -4,7 +4,7 @@ exports[`google/api/expr/conformance/v1alpha1/conformance_service CheckRequest 1
 Object {
   "container": Object {
     "comment": "The protocol buffer context.  See \\"Name Resolution\\" in the
-Language Definition.",
+ Language Definition.",
     "id": 3,
     "isScalar": true,
     "options": Object {
@@ -21,8 +21,8 @@ Language Definition.",
   },
   "noStdEnv": Object {
     "comment": "If true, use only the declarations in [type_env][google.api.expr.conformance.v1alpha1.CheckRequest.type_env].  If false (default),
-add declarations for the standard definitions to the type environment.  See
-\\"Standard Definitions\\" in the Language Definition.",
+ add declarations for the standard definitions to the type environment.  See
+ \\"Standard Definitions\\" in the Language Definition.",
     "id": 4,
     "isScalar": true,
     "options": Object {
@@ -59,8 +59,8 @@ add declarations for the standard definitions to the type environment.  See
   },
   "typeEnv": Object {
     "comment": "Declarations of types for external variables and functions.
-Required if program uses external variables or functions
-not in the default environment.",
+ Required if program uses external variables or functions
+ not in the default environment.",
     "id": 2,
     "import": "google/api/expr/v1alpha1/checked.proto",
     "importedName": "google.api.expr.v1alpha1.Decl",
@@ -124,12 +124,12 @@ Object {
   "name": Object {
     "comment": "The fully qualified name of the declaration.
 
-Declarations are organized in containers and this represents the full path
-to the declaration in its container, as in \`google.api.expr.Decl\`.
+ Declarations are organized in containers and this represents the full path
+ to the declaration in its container, as in \`google.api.expr.Decl\`.
 
-Declarations used as [FunctionDecl.Overload][google.api.expr.v1alpha1.Decl.FunctionDecl.Overload] parameters may or may not
-have a name depending on whether the overload is function declaration or a
-function definition containing a result [Expr][google.api.expr.v1alpha1.Expr].",
+ Declarations used as [FunctionDecl.Overload][google.api.expr.v1alpha1.Decl.FunctionDecl.Overload] parameters may or may not
+ have a name depending on whether the overload is function declaration or a
+ function definition containing a result [Expr][google.api.expr.v1alpha1.Expr].",
     "id": 1,
     "isScalar": true,
     "options": Object {
@@ -184,7 +184,7 @@ Object {
   },
   "value": Object {
     "comment": "The constant value of the identifier. If not specified, the identifier
-must be supplied at evaluation time.",
+ must be supplied at evaluation time.",
     "id": 2,
     "import": "google/api/expr/v1alpha1/syntax.proto",
     "importedName": "Constant",

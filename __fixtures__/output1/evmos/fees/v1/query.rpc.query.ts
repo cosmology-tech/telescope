@@ -19,7 +19,7 @@ export interface Query {
 
   devFeeInfosPerDeployer(request: QueryDevFeeInfosPerDeployerRequest): Promise<QueryDevFeeInfosPerDeployerResponse>;
   /*DevFeeInfosPerDeployer retrieves all contracts that a deployer has
-  registered for fee distribution*/
+   registered for fee distribution*/
 
 }
 export class QueryClientImpl implements Query {

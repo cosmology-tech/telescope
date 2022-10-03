@@ -8,7 +8,7 @@ export const protobufPackage = "evmos.incentives.v1";
 
 /**
  * QueryIncentivesRequest is the request type for the Query/Incentives RPC
- * method.
+ *  method.
  */
 export interface QueryIncentivesRequest {
   /** pagination defines an optional pagination for the request. */
@@ -17,7 +17,7 @@ export interface QueryIncentivesRequest {
 
 /**
  * QueryIncentivesRequest is the request type for the Query/Incentives RPC
- * method.
+ *  method.
  */
 export interface QueryIncentivesRequestSDKType {
   /** pagination defines an optional pagination for the request. */
@@ -26,7 +26,7 @@ export interface QueryIncentivesRequestSDKType {
 
 /**
  * QueryIncentivesResponse is the response type for the Query/Incentives RPC
- * method.
+ *  method.
  */
 export interface QueryIncentivesResponse {
   incentives: Incentive[];
@@ -37,7 +37,7 @@ export interface QueryIncentivesResponse {
 
 /**
  * QueryIncentivesResponse is the response type for the Query/Incentives RPC
- * method.
+ *  method.
  */
 export interface QueryIncentivesResponseSDKType {
   incentives: IncentiveSDKType[];
@@ -60,7 +60,7 @@ export interface QueryIncentiveRequestSDKType {
 
 /**
  * QueryIncentiveResponse is the response type for the Query/Incentive RPC
- * method.
+ *  method.
  */
 export interface QueryIncentiveResponse {
   incentive: Incentive;
@@ -68,7 +68,7 @@ export interface QueryIncentiveResponse {
 
 /**
  * QueryIncentiveResponse is the response type for the Query/Incentive RPC
- * method.
+ *  method.
  */
 export interface QueryIncentiveResponseSDKType {
   incentive: IncentiveSDKType;
@@ -76,7 +76,7 @@ export interface QueryIncentiveResponseSDKType {
 
 /**
  * QueryGasMetersRequest is the request type for the Query/Incentives RPC
- * method.
+ *  method.
  */
 export interface QueryGasMetersRequest {
   /** contract is the hex contract address of a incentivized smart contract */
@@ -88,7 +88,7 @@ export interface QueryGasMetersRequest {
 
 /**
  * QueryGasMetersRequest is the request type for the Query/Incentives RPC
- * method.
+ *  method.
  */
 export interface QueryGasMetersRequestSDKType {
   /** contract is the hex contract address of a incentivized smart contract */
@@ -100,7 +100,7 @@ export interface QueryGasMetersRequestSDKType {
 
 /**
  * QueryGasMetersResponse is the response type for the Query/Incentives RPC
- * method.
+ *  method.
  */
 export interface QueryGasMetersResponse {
   gasMeters: GasMeter[];
@@ -111,7 +111,7 @@ export interface QueryGasMetersResponse {
 
 /**
  * QueryGasMetersResponse is the response type for the Query/Incentives RPC
- * method.
+ *  method.
  */
 export interface QueryGasMetersResponseSDKType {
   gas_meters: GasMeterSDKType[];
@@ -140,31 +140,31 @@ export interface QueryGasMeterRequestSDKType {
 
 /**
  * QueryGasMeterResponse is the response type for the Query/Incentive RPC
- * method.
+ *  method.
  */
 export interface QueryGasMeterResponse {
   /**
    * QueryGasMeterResponse is the response type for the Query/Incentive RPC
-   * method.
+   *  method.
    */
   gasMeter: Long;
 }
 
 /**
  * QueryGasMeterResponse is the response type for the Query/Incentive RPC
- * method.
+ *  method.
  */
 export interface QueryGasMeterResponseSDKType {
   /**
    * QueryGasMeterResponse is the response type for the Query/Incentive RPC
-   * method.
+   *  method.
    */
   gas_meter: Long;
 }
 
 /**
  * QueryAllocationMetersRequest is the request type for the
- * Query/AllocationMeters RPC method.
+ *  Query/AllocationMeters RPC method.
  */
 export interface QueryAllocationMetersRequest {
   /** pagination defines an optional pagination for the request. */
@@ -173,7 +173,7 @@ export interface QueryAllocationMetersRequest {
 
 /**
  * QueryAllocationMetersRequest is the request type for the
- * Query/AllocationMeters RPC method.
+ *  Query/AllocationMeters RPC method.
  */
 export interface QueryAllocationMetersRequestSDKType {
   /** pagination defines an optional pagination for the request. */
@@ -182,7 +182,7 @@ export interface QueryAllocationMetersRequestSDKType {
 
 /**
  * QueryAllocationMetersResponse is the response type for the
- * Query/AllocationMeters RPC method.
+ *  Query/AllocationMeters RPC method.
  */
 export interface QueryAllocationMetersResponse {
   allocationMeters: DecCoin[];
@@ -193,7 +193,7 @@ export interface QueryAllocationMetersResponse {
 
 /**
  * QueryAllocationMetersResponse is the response type for the
- * Query/AllocationMeters RPC method.
+ *  Query/AllocationMeters RPC method.
  */
 export interface QueryAllocationMetersResponseSDKType {
   allocation_meters: DecCoinSDKType[];
@@ -204,7 +204,7 @@ export interface QueryAllocationMetersResponseSDKType {
 
 /**
  * QueryAllocationMeterRequest is the request type for the Query/AllocationMeter
- * RPC method.
+ *  RPC method.
  */
 export interface QueryAllocationMeterRequest {
   /** denom is the coin denom to query an allocation meter for. */
@@ -213,7 +213,7 @@ export interface QueryAllocationMeterRequest {
 
 /**
  * QueryAllocationMeterRequest is the request type for the Query/AllocationMeter
- * RPC method.
+ *  RPC method.
  */
 export interface QueryAllocationMeterRequestSDKType {
   /** denom is the coin denom to query an allocation meter for. */
@@ -222,7 +222,7 @@ export interface QueryAllocationMeterRequestSDKType {
 
 /**
  * QueryAllocationMeterResponse is the response type for the
- * Query/AllocationMeter RPC method.
+ *  Query/AllocationMeter RPC method.
  */
 export interface QueryAllocationMeterResponse {
   allocationMeter: DecCoin;
@@ -230,7 +230,7 @@ export interface QueryAllocationMeterResponse {
 
 /**
  * QueryAllocationMeterResponse is the response type for the
- * Query/AllocationMeter RPC method.
+ *  Query/AllocationMeter RPC method.
  */
 export interface QueryAllocationMeterResponseSDKType {
   allocation_meter: DecCoinSDKType;
@@ -244,7 +244,7 @@ export interface QueryParamsRequestSDKType {}
 
 /**
  * QueryParamsResponse is the response type for the Query/Params RPC
- * method.
+ *  method.
  */
 export interface QueryParamsResponse {
   params: Params;
@@ -252,7 +252,7 @@ export interface QueryParamsResponse {
 
 /**
  * QueryParamsResponse is the response type for the Query/Params RPC
- * method.
+ *  method.
  */
 export interface QueryParamsResponseSDKType {
   params: ParamsSDKType;

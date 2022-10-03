@@ -51,8 +51,8 @@ export function lockQueryTypeToJSON(object: LockQueryType): string {
 
 /**
  * PeriodLock is a single unit of lock by period. It's a record of locked coin
- * at a specific time. It stores owner, duration, unlock time and the amount of
- * coins locked.
+ *  at a specific time. It stores owner, duration, unlock time and the amount of
+ *  coins locked.
  */
 export interface PeriodLock {
   ID: Long;
@@ -64,8 +64,8 @@ export interface PeriodLock {
 
 /**
  * PeriodLock is a single unit of lock by period. It's a record of locked coin
- * at a specific time. It stores owner, duration, unlock time and the amount of
- * coins locked.
+ *  at a specific time. It stores owner, duration, unlock time and the amount of
+ *  coins locked.
  */
 export interface PeriodLockSDKType {
   ID: Long;
@@ -103,19 +103,19 @@ export interface QueryConditionSDKType {
 
 /**
  * SyntheticLock is a single unit of synthetic lockup
- * TODO: Change this to have
- * * underlying_lock_id
- * * synthetic_coin
- * * end_time
- * * duration
- * * owner
- * We then index synthetic locks by the denom, just like we do with normal
- * locks. Ideally we even get an interface, so we can re-use that same logic.
- * I currently have no idea how reward distribution is supposed to be working...
- * EVENTUALLY
- * we make a "constrained_coin" field, which is what the current "coins" field
- * is. Constrained coin field can be a #post-v7 feature, since we aren't
- * allowing partial unlocks of synthetic lockups.
+ *  TODO: Change this to have
+ *  * underlying_lock_id
+ *  * synthetic_coin
+ *  * end_time
+ *  * duration
+ *  * owner
+ *  We then index synthetic locks by the denom, just like we do with normal
+ *  locks. Ideally we even get an interface, so we can re-use that same logic.
+ *  I currently have no idea how reward distribution is supposed to be working...
+ *  EVENTUALLY
+ *  we make a "constrained_coin" field, which is what the current "coins" field
+ *  is. Constrained coin field can be a #post-v7 feature, since we aren't
+ *  allowing partial unlocks of synthetic lockups.
  */
 export interface SyntheticLock {
   /** underlying native lockup id for this synthetic lockup */
@@ -124,7 +124,7 @@ export interface SyntheticLock {
 
   /**
    * used for unbonding synthetic lockups, for active synthetic lockups, this
-   * value is set to uninitialized value
+   *  value is set to uninitialized value
    */
   endTime: Date;
   duration: Duration;
@@ -132,19 +132,19 @@ export interface SyntheticLock {
 
 /**
  * SyntheticLock is a single unit of synthetic lockup
- * TODO: Change this to have
- * * underlying_lock_id
- * * synthetic_coin
- * * end_time
- * * duration
- * * owner
- * We then index synthetic locks by the denom, just like we do with normal
- * locks. Ideally we even get an interface, so we can re-use that same logic.
- * I currently have no idea how reward distribution is supposed to be working...
- * EVENTUALLY
- * we make a "constrained_coin" field, which is what the current "coins" field
- * is. Constrained coin field can be a #post-v7 feature, since we aren't
- * allowing partial unlocks of synthetic lockups.
+ *  TODO: Change this to have
+ *  * underlying_lock_id
+ *  * synthetic_coin
+ *  * end_time
+ *  * duration
+ *  * owner
+ *  We then index synthetic locks by the denom, just like we do with normal
+ *  locks. Ideally we even get an interface, so we can re-use that same logic.
+ *  I currently have no idea how reward distribution is supposed to be working...
+ *  EVENTUALLY
+ *  we make a "constrained_coin" field, which is what the current "coins" field
+ *  is. Constrained coin field can be a #post-v7 feature, since we aren't
+ *  allowing partial unlocks of synthetic lockups.
  */
 export interface SyntheticLockSDKType {
   /** underlying native lockup id for this synthetic lockup */
@@ -153,7 +153,7 @@ export interface SyntheticLockSDKType {
 
   /**
    * used for unbonding synthetic lockups, for active synthetic lockups, this
-   * value is set to uninitialized value
+   *  value is set to uninitialized value
    */
   end_time: Date;
   duration: DurationSDKType;

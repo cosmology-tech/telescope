@@ -4,8 +4,8 @@ export const protobufPackage = "ibc.applications.transfer.v2";
 
 /**
  * FungibleTokenPacketData defines a struct for the packet payload
- * See FungibleTokenPacketData spec:
- * https://github.com/cosmos/ibc/tree/master/spec/app/ics-020-fungible-token-transfer#data-structures
+ *  See FungibleTokenPacketData spec:
+ *  https://github.com/cosmos/ibc/tree/master/spec/app/ics-020-fungible-token-transfer#data-structures
  */
 export interface FungibleTokenPacketData {
   /** the token denomination to be transferred */
@@ -23,8 +23,8 @@ export interface FungibleTokenPacketData {
 
 /**
  * FungibleTokenPacketData defines a struct for the packet payload
- * See FungibleTokenPacketData spec:
- * https://github.com/cosmos/ibc/tree/master/spec/app/ics-020-fungible-token-transfer#data-structures
+ *  See FungibleTokenPacketData spec:
+ *  https://github.com/cosmos/ibc/tree/master/spec/app/ics-020-fungible-token-transfer#data-structures
  */
 export interface FungibleTokenPacketDataSDKType {
   /** the token denomination to be transferred */

@@ -66,7 +66,7 @@ export class LCDQueryClient {
   }
 
   /* AllocationMeters retrieves active allocation meters for a given
-  denomination */
+   denomination */
   async allocationMeters(params: QueryAllocationMetersRequest = {
     pagination: undefined
   }): Promise<QueryAllocationMetersResponseSDKType> {

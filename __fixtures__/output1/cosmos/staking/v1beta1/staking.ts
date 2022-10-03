@@ -83,9 +83,9 @@ export function bondStatusToJSON(object: BondStatus): string {
 
 /**
  * HistoricalInfo contains header and validator information for a given block.
- * It is stored as part of staking module's state, which persists the `n` most
- * recent HistoricalInfo
- * (`n` is set by the staking module's `historical_entries` parameter).
+ *  It is stored as part of staking module's state, which persists the `n` most
+ *  recent HistoricalInfo
+ *  (`n` is set by the staking module's `historical_entries` parameter).
  */
 export interface HistoricalInfo {
   header: Header;
@@ -94,9 +94,9 @@ export interface HistoricalInfo {
 
 /**
  * HistoricalInfo contains header and validator information for a given block.
- * It is stored as part of staking module's state, which persists the `n` most
- * recent HistoricalInfo
- * (`n` is set by the staking module's `historical_entries` parameter).
+ *  It is stored as part of staking module's state, which persists the `n` most
+ *  recent HistoricalInfo
+ *  (`n` is set by the staking module's `historical_entries` parameter).
  */
 export interface HistoricalInfoSDKType {
   header: HeaderSDKType;
@@ -105,7 +105,7 @@ export interface HistoricalInfoSDKType {
 
 /**
  * CommissionRates defines the initial commission rates to be used for creating
- * a validator.
+ *  a validator.
  */
 export interface CommissionRates {
   /** rate is the commission rate charged to delegators, as a fraction. */
@@ -120,7 +120,7 @@ export interface CommissionRates {
 
 /**
  * CommissionRates defines the initial commission rates to be used for creating
- * a validator.
+ *  a validator.
  */
 export interface CommissionRatesSDKType {
   /** rate is the commission rate charged to delegators, as a fraction. */
@@ -189,13 +189,13 @@ export interface DescriptionSDKType {
 
 /**
  * Validator defines a validator, together with the total amount of the
- * Validator's bond shares and their exchange rate to coins. Slashing results in
- * a decrease in the exchange rate, allowing correct calculation of future
- * undelegations without iterating over delegators. When coins are delegated to
- * this validator, the validator is credited with a delegation whose number of
- * bond shares is based on the amount of coins delegated divided by the current
- * exchange rate. Voting power can be calculated as total bonded shares
- * multiplied by exchange rate.
+ *  Validator's bond shares and their exchange rate to coins. Slashing results in
+ *  a decrease in the exchange rate, allowing correct calculation of future
+ *  undelegations without iterating over delegators. When coins are delegated to
+ *  this validator, the validator is credited with a delegation whose number of
+ *  bond shares is based on the amount of coins delegated divided by the current
+ *  exchange rate. Voting power can be calculated as total bonded shares
+ *  multiplied by exchange rate.
  */
 export interface Validator {
   /** operator_address defines the address of the validator's operator; bech encoded in JSON. */
@@ -234,13 +234,13 @@ export interface Validator {
 
 /**
  * Validator defines a validator, together with the total amount of the
- * Validator's bond shares and their exchange rate to coins. Slashing results in
- * a decrease in the exchange rate, allowing correct calculation of future
- * undelegations without iterating over delegators. When coins are delegated to
- * this validator, the validator is credited with a delegation whose number of
- * bond shares is based on the amount of coins delegated divided by the current
- * exchange rate. Voting power can be calculated as total bonded shares
- * multiplied by exchange rate.
+ *  Validator's bond shares and their exchange rate to coins. Slashing results in
+ *  a decrease in the exchange rate, allowing correct calculation of future
+ *  undelegations without iterating over delegators. When coins are delegated to
+ *  this validator, the validator is credited with a delegation whose number of
+ *  bond shares is based on the amount of coins delegated divided by the current
+ *  exchange rate. Voting power can be calculated as total bonded shares
+ *  multiplied by exchange rate.
  */
 export interface ValidatorSDKType {
   /** operator_address defines the address of the validator's operator; bech encoded in JSON. */
@@ -289,8 +289,8 @@ export interface ValAddressesSDKType {
 
 /**
  * DVPair is struct that just has a delegator-validator pair with no other data.
- * It is intended to be used as a marshalable pointer. For example, a DVPair can
- * be used to construct the key to getting an UnbondingDelegation from state.
+ *  It is intended to be used as a marshalable pointer. For example, a DVPair can
+ *  be used to construct the key to getting an UnbondingDelegation from state.
  */
 export interface DVPair {
   delegatorAddress: string;
@@ -299,8 +299,8 @@ export interface DVPair {
 
 /**
  * DVPair is struct that just has a delegator-validator pair with no other data.
- * It is intended to be used as a marshalable pointer. For example, a DVPair can
- * be used to construct the key to getting an UnbondingDelegation from state.
+ *  It is intended to be used as a marshalable pointer. For example, a DVPair can
+ *  be used to construct the key to getting an UnbondingDelegation from state.
  */
 export interface DVPairSDKType {
   delegator_address: string;
@@ -319,9 +319,9 @@ export interface DVPairsSDKType {
 
 /**
  * DVVTriplet is struct that just has a delegator-validator-validator triplet
- * with no other data. It is intended to be used as a marshalable pointer. For
- * example, a DVVTriplet can be used to construct the key to getting a
- * Redelegation from state.
+ *  with no other data. It is intended to be used as a marshalable pointer. For
+ *  example, a DVVTriplet can be used to construct the key to getting a
+ *  Redelegation from state.
  */
 export interface DVVTriplet {
   delegatorAddress: string;
@@ -331,9 +331,9 @@ export interface DVVTriplet {
 
 /**
  * DVVTriplet is struct that just has a delegator-validator-validator triplet
- * with no other data. It is intended to be used as a marshalable pointer. For
- * example, a DVVTriplet can be used to construct the key to getting a
- * Redelegation from state.
+ *  with no other data. It is intended to be used as a marshalable pointer. For
+ *  example, a DVVTriplet can be used to construct the key to getting a
+ *  Redelegation from state.
  */
 export interface DVVTripletSDKType {
   delegator_address: string;
@@ -353,8 +353,8 @@ export interface DVVTripletsSDKType {
 
 /**
  * Delegation represents the bond with tokens held by an account. It is
- * owned by one delegator, and is associated with the voting power of one
- * validator.
+ *  owned by one delegator, and is associated with the voting power of one
+ *  validator.
  */
 export interface Delegation {
   /** delegator_address is the bech32-encoded address of the delegator. */
@@ -369,8 +369,8 @@ export interface Delegation {
 
 /**
  * Delegation represents the bond with tokens held by an account. It is
- * owned by one delegator, and is associated with the voting power of one
- * validator.
+ *  owned by one delegator, and is associated with the voting power of one
+ *  validator.
  */
 export interface DelegationSDKType {
   /** delegator_address is the bech32-encoded address of the delegator. */
@@ -385,7 +385,7 @@ export interface DelegationSDKType {
 
 /**
  * UnbondingDelegation stores all of a single delegator's unbonding bonds
- * for a single validator in an time-ordered list.
+ *  for a single validator in an time-ordered list.
  */
 export interface UnbondingDelegation {
   /** delegator_address is the bech32-encoded address of the delegator. */
@@ -400,7 +400,7 @@ export interface UnbondingDelegation {
 
 /**
  * UnbondingDelegation stores all of a single delegator's unbonding bonds
- * for a single validator in an time-ordered list.
+ *  for a single validator in an time-ordered list.
  */
 export interface UnbondingDelegationSDKType {
   /** delegator_address is the bech32-encoded address of the delegator. */
@@ -475,7 +475,7 @@ export interface RedelegationEntrySDKType {
 
 /**
  * Redelegation contains the list of a particular delegator's redelegating bonds
- * from a particular source validator to a particular destination validator.
+ *  from a particular source validator to a particular destination validator.
  */
 export interface Redelegation {
   /** delegator_address is the bech32-encoded address of the delegator. */
@@ -493,7 +493,7 @@ export interface Redelegation {
 
 /**
  * Redelegation contains the list of a particular delegator's redelegating bonds
- * from a particular source validator to a particular destination validator.
+ *  from a particular source validator to a particular destination validator.
  */
 export interface RedelegationSDKType {
   /** delegator_address is the bech32-encoded address of the delegator. */
@@ -553,7 +553,7 @@ export interface ParamsSDKType {
 
 /**
  * DelegationResponse is equivalent to Delegation except that it contains a
- * balance in addition to shares which is more suitable for client responses.
+ *  balance in addition to shares which is more suitable for client responses.
  */
 export interface DelegationResponse {
   delegation: Delegation;
@@ -562,7 +562,7 @@ export interface DelegationResponse {
 
 /**
  * DelegationResponse is equivalent to Delegation except that it contains a
- * balance in addition to shares which is more suitable for client responses.
+ *  balance in addition to shares which is more suitable for client responses.
  */
 export interface DelegationResponseSDKType {
   delegation: DelegationSDKType;
@@ -571,8 +571,8 @@ export interface DelegationResponseSDKType {
 
 /**
  * RedelegationEntryResponse is equivalent to a RedelegationEntry except that it
- * contains a balance in addition to shares which is more suitable for client
- * responses.
+ *  contains a balance in addition to shares which is more suitable for client
+ *  responses.
  */
 export interface RedelegationEntryResponse {
   redelegationEntry: RedelegationEntry;
@@ -581,8 +581,8 @@ export interface RedelegationEntryResponse {
 
 /**
  * RedelegationEntryResponse is equivalent to a RedelegationEntry except that it
- * contains a balance in addition to shares which is more suitable for client
- * responses.
+ *  contains a balance in addition to shares which is more suitable for client
+ *  responses.
  */
 export interface RedelegationEntryResponseSDKType {
   redelegation_entry: RedelegationEntrySDKType;
@@ -591,8 +591,8 @@ export interface RedelegationEntryResponseSDKType {
 
 /**
  * RedelegationResponse is equivalent to a Redelegation except that its entries
- * contain a balance in addition to shares which is more suitable for client
- * responses.
+ *  contain a balance in addition to shares which is more suitable for client
+ *  responses.
  */
 export interface RedelegationResponse {
   redelegation: Redelegation;
@@ -601,8 +601,8 @@ export interface RedelegationResponse {
 
 /**
  * RedelegationResponse is equivalent to a Redelegation except that its entries
- * contain a balance in addition to shares which is more suitable for client
- * responses.
+ *  contain a balance in addition to shares which is more suitable for client
+ *  responses.
  */
 export interface RedelegationResponseSDKType {
   redelegation: RedelegationSDKType;
@@ -611,7 +611,7 @@ export interface RedelegationResponseSDKType {
 
 /**
  * Pool is used for tracking bonded and not-bonded token supply of the bond
- * denomination.
+ *  denomination.
  */
 export interface Pool {
   notBondedTokens: string;
@@ -620,7 +620,7 @@ export interface Pool {
 
 /**
  * Pool is used for tracking bonded and not-bonded token supply of the bond
- * denomination.
+ *  denomination.
  */
 export interface PoolSDKType {
   not_bonded_tokens: string;

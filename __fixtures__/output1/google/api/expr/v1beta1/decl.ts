@@ -42,8 +42,8 @@ export interface DeclSDKType {
 /**
  * The declared type of a variable.
  * 
- * Extends runtime type values with extra information used for type checking
- * and dispatching.
+ *  Extends runtime type values with extra information used for type checking
+ *  and dispatching.
  */
 export interface DeclType {
   /** The expression id of the declared type, if applicable. */
@@ -54,7 +54,7 @@ export interface DeclType {
 
   /**
    * An ordered list of type parameters, e.g. `<string, int>`.
-   * Only applies to a subset of types, e.g. `map`, `list`.
+   *  Only applies to a subset of types, e.g. `map`, `list`.
    */
   typeParams: DeclType[];
 }
@@ -62,8 +62,8 @@ export interface DeclType {
 /**
  * The declared type of a variable.
  * 
- * Extends runtime type values with extra information used for type checking
- * and dispatching.
+ *  Extends runtime type values with extra information used for type checking
+ *  and dispatching.
  */
 export interface DeclTypeSDKType {
   /** The expression id of the declared type, if applicable. */
@@ -74,7 +74,7 @@ export interface DeclTypeSDKType {
 
   /**
    * An ordered list of type parameters, e.g. `<string, int>`.
-   * Only applies to a subset of types, e.g. `map`, `list`.
+   *  Only applies to a subset of types, e.g. `map`, `list`.
    */
   type_params: DeclTypeSDKType[];
 }

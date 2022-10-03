@@ -13,7 +13,7 @@ export interface Msg {
 
   superfluidUnbondLock(request: MsgSuperfluidUnbondLock): Promise<MsgSuperfluidUnbondLockResponse>;
   /*For a given lock that is being superfluidly undelegated,
-  also unbond the underlying lock.*/
+   also unbond the underlying lock.*/
 
   lockAndSuperfluidDelegate(request: MsgLockAndSuperfluidDelegate): Promise<MsgLockAndSuperfluidDelegateResponse>;
   /*Execute lockup lock and superfluid delegation in a single msg*/

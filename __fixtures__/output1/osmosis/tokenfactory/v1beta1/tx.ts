@@ -5,12 +5,12 @@ export const protobufPackage = "osmosis.tokenfactory.v1beta1";
 
 /**
  * MsgCreateDenom is the sdk.Msg type for allowing an account to create
- * a new denom. It requires a sender address and a subdenomination.
- * The (sender_address, sub_denomination) pair must be unique and cannot be
- * re-used. The resulting denom created is `factory/{creator
- * address}/{subdenom}`. The resultant denom's admin is originally set to be the
- * creator, but this can be changed later. The token denom does not indicate the
- * current admin.
+ *  a new denom. It requires a sender address and a subdenomination.
+ *  The (sender_address, sub_denomination) pair must be unique and cannot be
+ *  re-used. The resulting denom created is `factory/{creator
+ *  address}/{subdenom}`. The resultant denom's admin is originally set to be the
+ *  creator, but this can be changed later. The token denom does not indicate the
+ *  current admin.
  */
 export interface MsgCreateDenom {
   sender: string;
@@ -21,12 +21,12 @@ export interface MsgCreateDenom {
 
 /**
  * MsgCreateDenom is the sdk.Msg type for allowing an account to create
- * a new denom. It requires a sender address and a subdenomination.
- * The (sender_address, sub_denomination) pair must be unique and cannot be
- * re-used. The resulting denom created is `factory/{creator
- * address}/{subdenom}`. The resultant denom's admin is originally set to be the
- * creator, but this can be changed later. The token denom does not indicate the
- * current admin.
+ *  a new denom. It requires a sender address and a subdenomination.
+ *  The (sender_address, sub_denomination) pair must be unique and cannot be
+ *  re-used. The resulting denom created is `factory/{creator
+ *  address}/{subdenom}`. The resultant denom's admin is originally set to be the
+ *  creator, but this can be changed later. The token denom does not indicate the
+ *  current admin.
  */
 export interface MsgCreateDenomSDKType {
   sender: string;
@@ -37,7 +37,7 @@ export interface MsgCreateDenomSDKType {
 
 /**
  * MsgCreateDenomResponse is the return value of MsgCreateDenom
- * It returns the full string of the newly created denom
+ *  It returns the full string of the newly created denom
  */
 export interface MsgCreateDenomResponse {
   newTokenDenom: string;
@@ -45,7 +45,7 @@ export interface MsgCreateDenomResponse {
 
 /**
  * MsgCreateDenomResponse is the return value of MsgCreateDenom
- * It returns the full string of the newly created denom
+ *  It returns the full string of the newly created denom
  */
 export interface MsgCreateDenomResponseSDKType {
   new_token_denom: string;
@@ -53,7 +53,7 @@ export interface MsgCreateDenomResponseSDKType {
 
 /**
  * MsgMint is the sdk.Msg type for allowing an admin account to mint
- * more of a token.  For now, we only support minting to the sender account
+ *  more of a token.  For now, we only support minting to the sender account
  */
 export interface MsgMint {
   sender: string;
@@ -62,7 +62,7 @@ export interface MsgMint {
 
 /**
  * MsgMint is the sdk.Msg type for allowing an admin account to mint
- * more of a token.  For now, we only support minting to the sender account
+ *  more of a token.  For now, we only support minting to the sender account
  */
 export interface MsgMintSDKType {
   sender: string;
@@ -73,7 +73,7 @@ export interface MsgMintResponseSDKType {}
 
 /**
  * MsgBurn is the sdk.Msg type for allowing an admin account to burn
- * a token.  For now, we only support burning from the sender account.
+ *  a token.  For now, we only support burning from the sender account.
  */
 export interface MsgBurn {
   sender: string;
@@ -82,7 +82,7 @@ export interface MsgBurn {
 
 /**
  * MsgBurn is the sdk.Msg type for allowing an admin account to burn
- * a token.  For now, we only support burning from the sender account.
+ *  a token.  For now, we only support burning from the sender account.
  */
 export interface MsgBurnSDKType {
   sender: string;
@@ -93,7 +93,7 @@ export interface MsgBurnResponseSDKType {}
 
 /**
  * MsgChangeAdmin is the sdk.Msg type for allowing an admin account to reassign
- * adminship of a denom to a new account
+ *  adminship of a denom to a new account
  */
 export interface MsgChangeAdmin {
   sender: string;
@@ -103,7 +103,7 @@ export interface MsgChangeAdmin {
 
 /**
  * MsgChangeAdmin is the sdk.Msg type for allowing an admin account to reassign
- * adminship of a denom to a new account
+ *  adminship of a denom to a new account
  */
 export interface MsgChangeAdminSDKType {
   sender: string;

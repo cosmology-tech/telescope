@@ -3,15 +3,15 @@
 exports[`cosmos/authz/v1beta1/authz date 1`] = `
 "/**
  * Grant gives permissions to execute
- * the provide method with expiration time.
+ *  the provide method with expiration time.
  */
 export interface Grant {
   authorization: Any;
 
   /**
    * time when the grant will expire and will be pruned. If null, then the grant
-   * doesn't have a time expiration (other conditions  in \`authorization\`
-   * may apply to invalidate the grant)
+   *  doesn't have a time expiration (other conditions  in \`authorization\`
+   *  may apply to invalidate the grant)
    */
   expiration?: Date;
 }"
@@ -146,15 +146,15 @@ exports[`cosmos/authz/v1beta1/authz date 4`] = `
 exports[`cosmos/authz/v1beta1/authz timestamp 1`] = `
 "/**
  * Grant gives permissions to execute
- * the provide method with expiration time.
+ *  the provide method with expiration time.
  */
 export interface Grant {
   authorization: Any;
 
   /**
    * time when the grant will expire and will be pruned. If null, then the grant
-   * doesn't have a time expiration (other conditions  in \`authorization\`
-   * may apply to invalidate the grant)
+   *  doesn't have a time expiration (other conditions  in \`authorization\`
+   *  may apply to invalidate the grant)
    */
   expiration?: Timestamp;
 }"

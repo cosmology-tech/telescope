@@ -28,7 +28,7 @@ export interface GenesisState {
 
   /**
    * owners represents a map from index to owners of the capability index
-   * index key is string to allow amino marshalling.
+   *  index key is string to allow amino marshalling.
    */
   owners: GenesisOwners[];
 }
@@ -40,7 +40,7 @@ export interface GenesisStateSDKType {
 
   /**
    * owners represents a map from index to owners of the capability index
-   * index key is string to allow amino marshalling.
+   *  index key is string to allow amino marshalling.
    */
   owners: GenesisOwnersSDKType[];
 }

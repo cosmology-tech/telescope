@@ -3583,10 +3583,10 @@
     mz "^2.7.0"
     prettier "^2.6.2"
 
-"@pyramation/protobufjs@6.11.4":
-  version "6.11.4"
-  resolved "https://registry.npmjs.org/@pyramation/protobufjs/-/protobufjs-6.11.4.tgz#3d7f39181e6d922597b23db96d88fbcda5d24a0b"
-  integrity sha512-SvWDkDSo3XOBCzLtjC36QYZOoeCw3/HGAi8wuVj6aM3HrFp6lKgYtxsQ0QymbnagDD582k/roGg3CcXfxeM2Hg==
+"@pyramation/protobufjs@6.11.5":
+  version "6.11.5"
+  resolved "https://registry.npmjs.org/@pyramation/protobufjs/-/protobufjs-6.11.5.tgz#c64904a7214f2d061de53eed166c882a369731c4"
+  integrity sha512-gr+Iv6d7Iwq3PmNsTeQtL6TUONJs0WqbHFikett4zLquRK7egWuifZSKsqV8+o1UBNZcv52Z1HhgwTqNJe75Ag==
   dependencies:
     "@protobufjs/aspromise" "^1.1.2"
     "@protobufjs/base64" "^1.1.2"

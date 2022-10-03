@@ -7,7 +7,7 @@ export const protobufPackage = "cosmos.gov.v1";
 
 /**
  * MsgSubmitProposal defines an sdk.Msg type that supports submitting arbitrary
- * proposal Content.
+ *  proposal Content.
  */
 export interface MsgSubmitProposal {
   messages: Any[];
@@ -20,7 +20,7 @@ export interface MsgSubmitProposal {
 
 /**
  * MsgSubmitProposal defines an sdk.Msg type that supports submitting arbitrary
- * proposal Content.
+ *  proposal Content.
  */
 export interface MsgSubmitProposalSDKType {
   messages: AnySDKType[];
@@ -43,7 +43,7 @@ export interface MsgSubmitProposalResponseSDKType {
 
 /**
  * MsgExecLegacyContent is used to wrap the legacy content field into a message.
- * This ensures backwards compatibility with v1beta1.MsgSubmitProposal.
+ *  This ensures backwards compatibility with v1beta1.MsgSubmitProposal.
  */
 export interface MsgExecLegacyContent {
   /** content is the proposal's content. */
@@ -55,7 +55,7 @@ export interface MsgExecLegacyContent {
 
 /**
  * MsgExecLegacyContent is used to wrap the legacy content field into a message.
- * This ensures backwards compatibility with v1beta1.MsgSubmitProposal.
+ *  This ensures backwards compatibility with v1beta1.MsgSubmitProposal.
  */
 export interface MsgExecLegacyContentSDKType {
   /** content is the proposal's content. */

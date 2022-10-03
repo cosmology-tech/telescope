@@ -30,11 +30,11 @@ export interface Query {
 
   totalSuperfluidDelegations(request?: TotalSuperfluidDelegationsRequest): Promise<TotalSuperfluidDelegationsResponse>;
   /*Returns the total amount of osmo superfluidly staked
-  response denominated in uosmo*/
+   response denominated in uosmo*/
 
   superfluidDelegationAmount(request: SuperfluidDelegationAmountRequest): Promise<SuperfluidDelegationAmountResponse>;
   /*Returns the coins superfluid delegated for a delegator, validator, denom
-  triplet*/
+   triplet*/
 
   superfluidDelegationsByDelegator(request: SuperfluidDelegationsByDelegatorRequest): Promise<SuperfluidDelegationsByDelegatorResponse>;
   /*Returns all the superfluid poistions for a specific delegator*/
@@ -44,12 +44,12 @@ export interface Query {
 
   superfluidDelegationsByValidatorDenom(request: SuperfluidDelegationsByValidatorDenomRequest): Promise<SuperfluidDelegationsByValidatorDenomResponse>;
   /*Returns all the superfluid positions of a specific denom delegated to one
-  validator*/
+   validator*/
 
   estimateSuperfluidDelegatedAmountByValidatorDenom(request: EstimateSuperfluidDelegatedAmountByValidatorDenomRequest): Promise<EstimateSuperfluidDelegatedAmountByValidatorDenomResponse>;
   /*Returns the amount of a specific denom delegated to a specific validator
-  This is labeled an estimate, because the way it calculates the amount can
-  lead rounding errors from the true delegated amount*/
+   This is labeled an estimate, because the way it calculates the amount can
+   lead rounding errors from the true delegated amount*/
 
 }
 export class QueryClientImpl implements Query {

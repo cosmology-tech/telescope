@@ -16,8 +16,8 @@ export interface Msg {
 
   changeAdmin(request: MsgChangeAdmin): Promise<MsgChangeAdminResponse>;
   /*ForceTransfer is deactivated for now because we need to think through edge
-  cases rpc ForceTransfer(MsgForceTransfer) returns
-  (MsgForceTransferResponse);*/
+   cases rpc ForceTransfer(MsgForceTransfer) returns
+   (MsgForceTransferResponse);*/
 
 }
 export class MsgClientImpl implements Msg {

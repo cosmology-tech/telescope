@@ -75,19 +75,19 @@ export enum BroadcastMode {
 
   /**
    * BROADCAST_MODE_BLOCK - BROADCAST_MODE_BLOCK defines a tx broadcasting mode where the client waits for
-   * the tx to be committed in a block.
+   *  the tx to be committed in a block.
    */
   BROADCAST_MODE_BLOCK = 1,
 
   /**
    * BROADCAST_MODE_SYNC - BROADCAST_MODE_SYNC defines a tx broadcasting mode where the client waits for
-   * a CheckTx execution response only.
+   *  a CheckTx execution response only.
    */
   BROADCAST_MODE_SYNC = 2,
 
   /**
    * BROADCAST_MODE_ASYNC - BROADCAST_MODE_ASYNC defines a tx broadcasting mode where the client returns
-   * immediately.
+   *  immediately.
    */
   BROADCAST_MODE_ASYNC = 3,
   UNRECOGNIZED = -1,
@@ -100,19 +100,19 @@ export enum BroadcastModeSDKType {
 
   /**
    * BROADCAST_MODE_BLOCK - BROADCAST_MODE_BLOCK defines a tx broadcasting mode where the client waits for
-   * the tx to be committed in a block.
+   *  the tx to be committed in a block.
    */
   BROADCAST_MODE_BLOCK = 1,
 
   /**
    * BROADCAST_MODE_SYNC - BROADCAST_MODE_SYNC defines a tx broadcasting mode where the client waits for
-   * a CheckTx execution response only.
+   *  a CheckTx execution response only.
    */
   BROADCAST_MODE_SYNC = 2,
 
   /**
    * BROADCAST_MODE_ASYNC - BROADCAST_MODE_ASYNC defines a tx broadcasting mode where the client returns
-   * immediately.
+   *  immediately.
    */
   BROADCAST_MODE_ASYNC = 3,
   UNRECOGNIZED = -1,
@@ -162,7 +162,7 @@ export function broadcastModeToJSON(object: BroadcastMode): string {
 
 /**
  * GetTxsEventRequest is the request type for the Service.TxsByEvents
- * RPC method.
+ *  RPC method.
  */
 export interface GetTxsEventRequest {
   /** events is the list of transaction event type. */
@@ -175,7 +175,7 @@ export interface GetTxsEventRequest {
 
 /**
  * GetTxsEventRequest is the request type for the Service.TxsByEvents
- * RPC method.
+ *  RPC method.
  */
 export interface GetTxsEventRequestSDKType {
   /** events is the list of transaction event type. */
@@ -188,7 +188,7 @@ export interface GetTxsEventRequestSDKType {
 
 /**
  * GetTxsEventResponse is the response type for the Service.TxsByEvents
- * RPC method.
+ *  RPC method.
  */
 export interface GetTxsEventResponse {
   /** txs is the list of queried transactions. */
@@ -203,7 +203,7 @@ export interface GetTxsEventResponse {
 
 /**
  * GetTxsEventResponse is the response type for the Service.TxsByEvents
- * RPC method.
+ *  RPC method.
  */
 export interface GetTxsEventResponseSDKType {
   /** txs is the list of queried transactions. */
@@ -218,7 +218,7 @@ export interface GetTxsEventResponseSDKType {
 
 /**
  * BroadcastTxRequest is the request type for the Service.BroadcastTxRequest
- * RPC method.
+ *  RPC method.
  */
 export interface BroadcastTxRequest {
   /** tx_bytes is the raw transaction. */
@@ -228,7 +228,7 @@ export interface BroadcastTxRequest {
 
 /**
  * BroadcastTxRequest is the request type for the Service.BroadcastTxRequest
- * RPC method.
+ *  RPC method.
  */
 export interface BroadcastTxRequestSDKType {
   /** tx_bytes is the raw transaction. */
@@ -238,7 +238,7 @@ export interface BroadcastTxRequestSDKType {
 
 /**
  * BroadcastTxResponse is the response type for the
- * Service.BroadcastTx method.
+ *  Service.BroadcastTx method.
  */
 export interface BroadcastTxResponse {
   /** tx_response is the queried TxResponses. */
@@ -247,7 +247,7 @@ export interface BroadcastTxResponse {
 
 /**
  * BroadcastTxResponse is the response type for the
- * Service.BroadcastTx method.
+ *  Service.BroadcastTx method.
  */
 export interface BroadcastTxResponseSDKType {
   /** tx_response is the queried TxResponses. */
@@ -256,12 +256,12 @@ export interface BroadcastTxResponseSDKType {
 
 /**
  * SimulateRequest is the request type for the Service.Simulate
- * RPC method.
+ *  RPC method.
  */
 export interface SimulateRequest {
   /**
    * tx is the transaction to simulate.
-   * Deprecated. Send raw tx bytes instead.
+   *  Deprecated. Send raw tx bytes instead.
    */
 
   /** @deprecated */
@@ -270,19 +270,19 @@ export interface SimulateRequest {
   /**
    * tx_bytes is the raw transaction.
    * 
-   * Since: cosmos-sdk 0.43
+   *  Since: cosmos-sdk 0.43
    */
   txBytes: Uint8Array;
 }
 
 /**
  * SimulateRequest is the request type for the Service.Simulate
- * RPC method.
+ *  RPC method.
  */
 export interface SimulateRequestSDKType {
   /**
    * tx is the transaction to simulate.
-   * Deprecated. Send raw tx bytes instead.
+   *  Deprecated. Send raw tx bytes instead.
    */
 
   /** @deprecated */
@@ -291,14 +291,14 @@ export interface SimulateRequestSDKType {
   /**
    * tx_bytes is the raw transaction.
    * 
-   * Since: cosmos-sdk 0.43
+   *  Since: cosmos-sdk 0.43
    */
   tx_bytes: Uint8Array;
 }
 
 /**
  * SimulateResponse is the response type for the
- * Service.SimulateRPC method.
+ *  Service.SimulateRPC method.
  */
 export interface SimulateResponse {
   /** gas_info is the information about gas used in the simulation. */
@@ -310,7 +310,7 @@ export interface SimulateResponse {
 
 /**
  * SimulateResponse is the response type for the
- * Service.SimulateRPC method.
+ *  Service.SimulateRPC method.
  */
 export interface SimulateResponseSDKType {
   /** gas_info is the information about gas used in the simulation. */
@@ -322,7 +322,7 @@ export interface SimulateResponseSDKType {
 
 /**
  * GetTxRequest is the request type for the Service.GetTx
- * RPC method.
+ *  RPC method.
  */
 export interface GetTxRequest {
   /** hash is the tx hash to query, encoded as a hex string. */
@@ -331,7 +331,7 @@ export interface GetTxRequest {
 
 /**
  * GetTxRequest is the request type for the Service.GetTx
- * RPC method.
+ *  RPC method.
  */
 export interface GetTxRequestSDKType {
   /** hash is the tx hash to query, encoded as a hex string. */
@@ -358,9 +358,9 @@ export interface GetTxResponseSDKType {
 
 /**
  * GetBlockWithTxsRequest is the request type for the Service.GetBlockWithTxs
- * RPC method.
+ *  RPC method.
  * 
- * Since: cosmos-sdk 0.45.2
+ *  Since: cosmos-sdk 0.45.2
  */
 export interface GetBlockWithTxsRequest {
   /** height is the height of the block to query. */
@@ -372,9 +372,9 @@ export interface GetBlockWithTxsRequest {
 
 /**
  * GetBlockWithTxsRequest is the request type for the Service.GetBlockWithTxs
- * RPC method.
+ *  RPC method.
  * 
- * Since: cosmos-sdk 0.45.2
+ *  Since: cosmos-sdk 0.45.2
  */
 export interface GetBlockWithTxsRequestSDKType {
   /** height is the height of the block to query. */
@@ -387,7 +387,7 @@ export interface GetBlockWithTxsRequestSDKType {
 /**
  * GetBlockWithTxsResponse is the response type for the Service.GetBlockWithTxs method.
  * 
- * Since: cosmos-sdk 0.45.2
+ *  Since: cosmos-sdk 0.45.2
  */
 export interface GetBlockWithTxsResponse {
   /** txs are the transactions in the block. */
@@ -402,7 +402,7 @@ export interface GetBlockWithTxsResponse {
 /**
  * GetBlockWithTxsResponse is the response type for the Service.GetBlockWithTxs method.
  * 
- * Since: cosmos-sdk 0.45.2
+ *  Since: cosmos-sdk 0.45.2
  */
 export interface GetBlockWithTxsResponseSDKType {
   /** txs are the transactions in the block. */

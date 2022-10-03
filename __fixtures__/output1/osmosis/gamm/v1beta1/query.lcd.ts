@@ -79,7 +79,7 @@ export class LCDQueryClient {
   }
 
   /* SpotPrice defines a gRPC query handler that returns the spot price given
-  a base denomination and a quote denomination. */
+   a base denomination and a quote denomination. */
   async spotPrice(params: QuerySpotPriceRequest): Promise<QuerySpotPriceResponseSDKType> {
     const options: any = {
       params: {}

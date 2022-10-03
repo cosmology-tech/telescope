@@ -11,7 +11,7 @@ export interface Query {
   accounts(request?: QueryAccountsRequest): Promise<QueryAccountsResponse>;
   /*Accounts returns all the existing accounts
   
-  Since: cosmos-sdk 0.43*/
+   Since: cosmos-sdk 0.43*/
 
   account(request: QueryAccountRequest): Promise<QueryAccountResponse>;
   /*Account returns account details based on address.*/

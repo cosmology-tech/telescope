@@ -4,10 +4,10 @@ export const protobufPackage = "cosmos.base.store.v1beta1";
 
 /**
  * StoreKVPair is a KVStore KVPair used for listening to state changes (Sets and Deletes)
- * It optionally includes the StoreKey for the originating KVStore and a Boolean flag to distinguish between Sets and
- * Deletes
+ *  It optionally includes the StoreKey for the originating KVStore and a Boolean flag to distinguish between Sets and
+ *  Deletes
  * 
- * Since: cosmos-sdk 0.43
+ *  Since: cosmos-sdk 0.43
  */
 export interface StoreKVPair {
   /** the store key for the KVStore this pair originates from */
@@ -21,10 +21,10 @@ export interface StoreKVPair {
 
 /**
  * StoreKVPair is a KVStore KVPair used for listening to state changes (Sets and Deletes)
- * It optionally includes the StoreKey for the originating KVStore and a Boolean flag to distinguish between Sets and
- * Deletes
+ *  It optionally includes the StoreKey for the originating KVStore and a Boolean flag to distinguish between Sets and
+ *  Deletes
  * 
- * Since: cosmos-sdk 0.43
+ *  Since: cosmos-sdk 0.43
  */
 export interface StoreKVPairSDKType {
   /** the store key for the KVStore this pair originates from */

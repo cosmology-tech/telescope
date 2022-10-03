@@ -25,7 +25,7 @@ export interface Service {
   getBlockWithTxs(request: GetBlockWithTxsRequest): Promise<GetBlockWithTxsResponse>;
   /*GetBlockWithTxs fetches a block with decoded txs.
   
-  Since: cosmos-sdk 0.45.2*/
+   Since: cosmos-sdk 0.45.2*/
 
 }
 export class QueryClientImpl implements Service {

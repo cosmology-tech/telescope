@@ -25,7 +25,7 @@ export interface Query {
 
   delegationTotalRewards(request: QueryDelegationTotalRewardsRequest): Promise<QueryDelegationTotalRewardsResponse>;
   /*DelegationTotalRewards queries the total rewards accrued by a each
-  validator.*/
+   validator.*/
 
   delegatorValidators(request: QueryDelegatorValidatorsRequest): Promise<QueryDelegatorValidatorsResponse>;
   /*DelegatorValidators queries the validators of a delegator.*/

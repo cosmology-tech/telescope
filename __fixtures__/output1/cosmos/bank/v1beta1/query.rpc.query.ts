@@ -16,7 +16,7 @@ export interface Query {
 
   spendableBalances(request: QuerySpendableBalancesRequest): Promise<QuerySpendableBalancesResponse>;
   /*SpendableBalances queries the spenable balance of all coins for a single
-  account.*/
+   account.*/
 
   totalSupply(request?: QueryTotalSupplyRequest): Promise<QueryTotalSupplyResponse>;
   /*TotalSupply queries the total supply of all coins.*/
@@ -32,11 +32,11 @@ export interface Query {
 
   denomsMetadata(request?: QueryDenomsMetadataRequest): Promise<QueryDenomsMetadataResponse>;
   /*DenomsMetadata queries the client metadata for all registered coin
-  denominations.*/
+   denominations.*/
 
   denomOwners(request: QueryDenomOwnersRequest): Promise<QueryDenomOwnersResponse>;
   /*DenomOwners queries for all account addresses that own a particular token
-  denomination.*/
+   denomination.*/
 
 }
 export class QueryClientImpl implements Query {

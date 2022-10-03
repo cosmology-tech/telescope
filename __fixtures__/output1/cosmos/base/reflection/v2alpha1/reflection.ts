@@ -6,7 +6,7 @@ export const protobufPackage = "cosmos.base.reflection.v2alpha1";
 export interface AppDescriptor {
   /**
    * AuthnDescriptor provides information on how to authenticate transactions on the application
-   * NOTE: experimental and subject to change in future releases.
+   *  NOTE: experimental and subject to change in future releases.
    */
   authn: AuthnDescriptor;
 
@@ -30,7 +30,7 @@ export interface AppDescriptor {
 export interface AppDescriptorSDKType {
   /**
    * AuthnDescriptor provides information on how to authenticate transactions on the application
-   * NOTE: experimental and subject to change in future releases.
+   *  NOTE: experimental and subject to change in future releases.
    */
   authn: AuthnDescriptorSDKType;
 
@@ -54,8 +54,8 @@ export interface AppDescriptorSDKType {
 export interface TxDescriptor {
   /**
    * fullname is the protobuf fullname of the raw transaction type (for instance the tx.Tx type)
-   * it is not meant to support polymorphism of transaction types, it is supposed to be used by
-   * reflection clients to understand if they can handle a specific transaction type in an application.
+   *  it is not meant to support polymorphism of transaction types, it is supposed to be used by
+   *  reflection clients to understand if they can handle a specific transaction type in an application.
    */
   fullname: string;
 
@@ -67,8 +67,8 @@ export interface TxDescriptor {
 export interface TxDescriptorSDKType {
   /**
    * fullname is the protobuf fullname of the raw transaction type (for instance the tx.Tx type)
-   * it is not meant to support polymorphism of transaction types, it is supposed to be used by
-   * reflection clients to understand if they can handle a specific transaction type in an application.
+   *  it is not meant to support polymorphism of transaction types, it is supposed to be used by
+   *  reflection clients to understand if they can handle a specific transaction type in an application.
    */
   fullname: string;
 
@@ -78,7 +78,7 @@ export interface TxDescriptorSDKType {
 
 /**
  * AuthnDescriptor provides information on how to sign transactions without relying
- * on the online RPCs GetTxMetadata and CombineUnsignedTxAndSignatures
+ *  on the online RPCs GetTxMetadata and CombineUnsignedTxAndSignatures
  */
 export interface AuthnDescriptor {
   /** sign_modes defines the supported signature algorithm */
@@ -87,7 +87,7 @@ export interface AuthnDescriptor {
 
 /**
  * AuthnDescriptor provides information on how to sign transactions without relying
- * on the online RPCs GetTxMetadata and CombineUnsignedTxAndSignatures
+ *  on the online RPCs GetTxMetadata and CombineUnsignedTxAndSignatures
  */
 export interface AuthnDescriptorSDKType {
   /** sign_modes defines the supported signature algorithm */
@@ -96,9 +96,9 @@ export interface AuthnDescriptorSDKType {
 
 /**
  * SigningModeDescriptor provides information on a signing flow of the application
- * NOTE(fdymylja): here we could go as far as providing an entire flow on how
- * to sign a message given a SigningModeDescriptor, but it's better to think about
- * this another time
+ *  NOTE(fdymylja): here we could go as far as providing an entire flow on how
+ *  to sign a message given a SigningModeDescriptor, but it's better to think about
+ *  this another time
  */
 export interface SigningModeDescriptor {
   /** name defines the unique name of the signing mode */
@@ -109,16 +109,16 @@ export interface SigningModeDescriptor {
 
   /**
    * authn_info_provider_method_fullname defines the fullname of the method to call to get
-   * the metadata required to authenticate using the provided sign_modes
+   *  the metadata required to authenticate using the provided sign_modes
    */
   authnInfoProviderMethodFullname: string;
 }
 
 /**
  * SigningModeDescriptor provides information on a signing flow of the application
- * NOTE(fdymylja): here we could go as far as providing an entire flow on how
- * to sign a message given a SigningModeDescriptor, but it's better to think about
- * this another time
+ *  NOTE(fdymylja): here we could go as far as providing an entire flow on how
+ *  to sign a message given a SigningModeDescriptor, but it's better to think about
+ *  this another time
  */
 export interface SigningModeDescriptorSDKType {
   /** name defines the unique name of the signing mode */
@@ -129,7 +129,7 @@ export interface SigningModeDescriptorSDKType {
 
   /**
    * authn_info_provider_method_fullname defines the fullname of the method to call to get
-   * the metadata required to authenticate using the provided sign_modes
+   *  the metadata required to authenticate using the provided sign_modes
    */
   authn_info_provider_method_fullname: string;
 }
@@ -165,7 +165,7 @@ export interface InterfaceDescriptor {
 
   /**
    * interface_accepting_messages contains information regarding the proto messages which contain the interface as
-   * google.protobuf.Any field
+   *  google.protobuf.Any field
    */
   interfaceAcceptingMessages: InterfaceAcceptingMessageDescriptor[];
 
@@ -180,7 +180,7 @@ export interface InterfaceDescriptorSDKType {
 
   /**
    * interface_accepting_messages contains information regarding the proto messages which contain the interface as
-   * google.protobuf.Any field
+   *  google.protobuf.Any field
    */
   interface_accepting_messages: InterfaceAcceptingMessageDescriptorSDKType[];
 
@@ -195,9 +195,9 @@ export interface InterfaceImplementerDescriptor {
 
   /**
    * type_url defines the type URL used when marshalling the type as any
-   * this is required so we can provide type safe google.protobuf.Any marshalling and
-   * unmarshalling, making sure that we don't accept just 'any' type
-   * in our interface fields
+   *  this is required so we can provide type safe google.protobuf.Any marshalling and
+   *  unmarshalling, making sure that we don't accept just 'any' type
+   *  in our interface fields
    */
   typeUrl: string;
 }
@@ -209,16 +209,16 @@ export interface InterfaceImplementerDescriptorSDKType {
 
   /**
    * type_url defines the type URL used when marshalling the type as any
-   * this is required so we can provide type safe google.protobuf.Any marshalling and
-   * unmarshalling, making sure that we don't accept just 'any' type
-   * in our interface fields
+   *  this is required so we can provide type safe google.protobuf.Any marshalling and
+   *  unmarshalling, making sure that we don't accept just 'any' type
+   *  in our interface fields
    */
   type_url: string;
 }
 
 /**
  * InterfaceAcceptingMessageDescriptor describes a protobuf message which contains
- * an interface represented as a google.protobuf.Any
+ *  an interface represented as a google.protobuf.Any
  */
 export interface InterfaceAcceptingMessageDescriptor {
   /** fullname is the protobuf fullname of the type containing the interface */
@@ -226,15 +226,15 @@ export interface InterfaceAcceptingMessageDescriptor {
 
   /**
    * field_descriptor_names is a list of the protobuf name (not fullname) of the field
-   * which contains the interface as google.protobuf.Any (the interface is the same, but
-   * it can be in multiple fields of the same proto message)
+   *  which contains the interface as google.protobuf.Any (the interface is the same, but
+   *  it can be in multiple fields of the same proto message)
    */
   fieldDescriptorNames: string[];
 }
 
 /**
  * InterfaceAcceptingMessageDescriptor describes a protobuf message which contains
- * an interface represented as a google.protobuf.Any
+ *  an interface represented as a google.protobuf.Any
  */
 export interface InterfaceAcceptingMessageDescriptorSDKType {
   /** fullname is the protobuf fullname of the type containing the interface */
@@ -242,8 +242,8 @@ export interface InterfaceAcceptingMessageDescriptorSDKType {
 
   /**
    * field_descriptor_names is a list of the protobuf name (not fullname) of the field
-   * which contains the interface as google.protobuf.Any (the interface is the same, but
-   * it can be in multiple fields of the same proto message)
+   *  which contains the interface as google.protobuf.Any (the interface is the same, but
+   *  it can be in multiple fields of the same proto message)
    */
   field_descriptor_names: string[];
 }
@@ -372,7 +372,7 @@ export interface GetTxDescriptorRequestSDKType {}
 export interface GetTxDescriptorResponse {
   /**
    * tx provides information on msgs that can be forwarded to the application
-   * alongside the accepted transaction protobuf type
+   *  alongside the accepted transaction protobuf type
    */
   tx: TxDescriptor;
 }
@@ -381,7 +381,7 @@ export interface GetTxDescriptorResponse {
 export interface GetTxDescriptorResponseSDKType {
   /**
    * tx provides information on msgs that can be forwarded to the application
-   * alongside the accepted transaction protobuf type
+   *  alongside the accepted transaction protobuf type
    */
   tx: TxDescriptorSDKType;
 }
@@ -424,8 +424,8 @@ export interface QueryServiceDescriptorSDKType {
 
 /**
  * QueryMethodDescriptor describes a queryable method of a query service
- * no other info is provided beside method name and tendermint queryable path
- * because it would be redundant with the grpc reflection service
+ *  no other info is provided beside method name and tendermint queryable path
+ *  because it would be redundant with the grpc reflection service
  */
 export interface QueryMethodDescriptor {
   /** name is the protobuf name (not fullname) of the method */
@@ -433,15 +433,15 @@ export interface QueryMethodDescriptor {
 
   /**
    * full_query_path is the path that can be used to query
-   * this method via tendermint abci.Query
+   *  this method via tendermint abci.Query
    */
   fullQueryPath: string;
 }
 
 /**
  * QueryMethodDescriptor describes a queryable method of a query service
- * no other info is provided beside method name and tendermint queryable path
- * because it would be redundant with the grpc reflection service
+ *  no other info is provided beside method name and tendermint queryable path
+ *  because it would be redundant with the grpc reflection service
  */
 export interface QueryMethodDescriptorSDKType {
   /** name is the protobuf name (not fullname) of the method */
@@ -449,7 +449,7 @@ export interface QueryMethodDescriptorSDKType {
 
   /**
    * full_query_path is the path that can be used to query
-   * this method via tendermint abci.Query
+   *  this method via tendermint abci.Query
    */
   full_query_path: string;
 }

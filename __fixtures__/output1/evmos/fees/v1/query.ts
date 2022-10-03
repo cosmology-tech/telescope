@@ -7,7 +7,7 @@ export const protobufPackage = "evmos.fees.v1";
 
 /**
  * QueryDevFeeInfosRequest is the request type for the Query/DevFeeInfos RPC
- * method.
+ *  method.
  */
 export interface QueryDevFeeInfosRequest {
   /** pagination defines an optional pagination for the request. */
@@ -16,7 +16,7 @@ export interface QueryDevFeeInfosRequest {
 
 /**
  * QueryDevFeeInfosRequest is the request type for the Query/DevFeeInfos RPC
- * method.
+ *  method.
  */
 export interface QueryDevFeeInfosRequestSDKType {
   /** pagination defines an optional pagination for the request. */
@@ -25,7 +25,7 @@ export interface QueryDevFeeInfosRequestSDKType {
 
 /**
  * QueryDevFeeInfosResponse is the response type for the Query/DevFeeInfos
- * RPC method.
+ *  RPC method.
  */
 export interface QueryDevFeeInfosResponse {
   fees: DevFeeInfo[];
@@ -36,7 +36,7 @@ export interface QueryDevFeeInfosResponse {
 
 /**
  * QueryDevFeeInfosResponse is the response type for the Query/DevFeeInfos
- * RPC method.
+ *  RPC method.
  */
 export interface QueryDevFeeInfosResponseSDKType {
   fees: DevFeeInfoSDKType[];
@@ -47,7 +47,7 @@ export interface QueryDevFeeInfosResponseSDKType {
 
 /**
  * QueryDevFeeInfoRequest is the request type for the Query/DevFeeInfo RPC
- * method.
+ *  method.
  */
 export interface QueryDevFeeInfoRequest {
   /** contract identifier is the hex contract address of a contract */
@@ -56,7 +56,7 @@ export interface QueryDevFeeInfoRequest {
 
 /**
  * QueryDevFeeInfoRequest is the request type for the Query/DevFeeInfo RPC
- * method.
+ *  method.
  */
 export interface QueryDevFeeInfoRequestSDKType {
   /** contract identifier is the hex contract address of a contract */
@@ -65,7 +65,7 @@ export interface QueryDevFeeInfoRequestSDKType {
 
 /**
  * QueryDevFeeInfoResponse is the response type for the Query/DevFeeInfo RPC
- * method.
+ *  method.
  */
 export interface QueryDevFeeInfoResponse {
   fee: DevFeeInfo;
@@ -73,7 +73,7 @@ export interface QueryDevFeeInfoResponse {
 
 /**
  * QueryDevFeeInfoResponse is the response type for the Query/DevFeeInfo RPC
- * method.
+ *  method.
  */
 export interface QueryDevFeeInfoResponseSDKType {
   fee: DevFeeInfoSDKType;
@@ -87,7 +87,7 @@ export interface QueryParamsRequestSDKType {}
 
 /**
  * QueryParamsResponse is the response type for the Query/Params RPC
- * method.
+ *  method.
  */
 export interface QueryParamsResponse {
   params: Params;
@@ -95,7 +95,7 @@ export interface QueryParamsResponse {
 
 /**
  * QueryParamsResponse is the response type for the Query/Params RPC
- * method.
+ *  method.
  */
 export interface QueryParamsResponseSDKType {
   params: ParamsSDKType;
@@ -103,7 +103,7 @@ export interface QueryParamsResponseSDKType {
 
 /**
  * QueryDevFeeInfosPerDeployerRequest is the request type for the
- * Query/DevFeeInfosPerDeployer RPC method.
+ *  Query/DevFeeInfosPerDeployer RPC method.
  */
 export interface QueryDevFeeInfosPerDeployerRequest {
   /** deployer bech32 address */
@@ -115,7 +115,7 @@ export interface QueryDevFeeInfosPerDeployerRequest {
 
 /**
  * QueryDevFeeInfosPerDeployerRequest is the request type for the
- * Query/DevFeeInfosPerDeployer RPC method.
+ *  Query/DevFeeInfosPerDeployer RPC method.
  */
 export interface QueryDevFeeInfosPerDeployerRequestSDKType {
   /** deployer bech32 address */
@@ -127,7 +127,7 @@ export interface QueryDevFeeInfosPerDeployerRequestSDKType {
 
 /**
  * QueryDevFeeInfosPerDeployerResponse is the response type for the
- * Query/DevFeeInfosPerDeployer RPC method.
+ *  Query/DevFeeInfosPerDeployer RPC method.
  */
 export interface QueryDevFeeInfosPerDeployerResponse {
   fees: DevFeeInfo[];
@@ -138,7 +138,7 @@ export interface QueryDevFeeInfosPerDeployerResponse {
 
 /**
  * QueryDevFeeInfosPerDeployerResponse is the response type for the
- * Query/DevFeeInfosPerDeployer RPC method.
+ *  Query/DevFeeInfosPerDeployer RPC method.
  */
 export interface QueryDevFeeInfosPerDeployerResponseSDKType {
   fees: DevFeeInfoSDKType[];

@@ -24,50 +24,50 @@ export interface WeightedAddressSDKType {
 export interface DistributionProportions {
   /**
    * staking defines the proportion of the minted minted_denom that is to be
-   * allocated as staking rewards.
+   *  allocated as staking rewards.
    */
   staking: string;
 
   /**
    * pool_incentives defines the proportion of the minted minted_denom that is
-   * to be allocated as pool incentives.
+   *  to be allocated as pool incentives.
    */
   poolIncentives: string;
 
   /**
    * developer_rewards defines the proportion of the minted minted_denom that is
-   * to be allocated to developer rewards address.
+   *  to be allocated to developer rewards address.
    */
   developerRewards: string;
 
   /**
    * community_pool defines the proportion of the minted minted_denom that is
-   * to be allocated to the community pool.
+   *  to be allocated to the community pool.
    */
   communityPool: string;
 }
 export interface DistributionProportionsSDKType {
   /**
    * staking defines the proportion of the minted minted_denom that is to be
-   * allocated as staking rewards.
+   *  allocated as staking rewards.
    */
   staking: string;
 
   /**
    * pool_incentives defines the proportion of the minted minted_denom that is
-   * to be allocated as pool incentives.
+   *  to be allocated as pool incentives.
    */
   pool_incentives: string;
 
   /**
    * developer_rewards defines the proportion of the minted minted_denom that is
-   * to be allocated to developer rewards address.
+   *  to be allocated to developer rewards address.
    */
   developer_rewards: string;
 
   /**
    * community_pool defines the proportion of the minted minted_denom that is
-   * to be allocated to the community pool.
+   *  to be allocated to the community pool.
    */
   community_pool: string;
 }

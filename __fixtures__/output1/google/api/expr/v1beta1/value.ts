@@ -7,8 +7,8 @@ export const protobufPackage = "google.api.expr.v1beta1";
 /**
  * Represents a CEL value.
  * 
- * This is similar to `google.protobuf.Value`, but can represent CEL's full
- * range of values.
+ *  This is similar to `google.protobuf.Value`, but can represent CEL's full
+ *  range of values.
  */
 export interface Value {
   /** Null value. */
@@ -51,8 +51,8 @@ export interface Value {
 /**
  * Represents a CEL value.
  * 
- * This is similar to `google.protobuf.Value`, but can represent CEL's full
- * range of values.
+ *  This is similar to `google.protobuf.Value`, but can represent CEL's full
+ *  range of values.
  */
 export interface ValueSDKType {
   /** Null value. */
@@ -113,8 +113,8 @@ export interface EnumValueSDKType {
 /**
  * A list.
  * 
- * Wrapped in a message so 'not set' and empty can be differentiated, which is
- * required for use in a 'oneof'.
+ *  Wrapped in a message so 'not set' and empty can be differentiated, which is
+ *  required for use in a 'oneof'.
  */
 export interface ListValue {
   /** The ordered values in the list. */
@@ -124,8 +124,8 @@ export interface ListValue {
 /**
  * A list.
  * 
- * Wrapped in a message so 'not set' and empty can be differentiated, which is
- * required for use in a 'oneof'.
+ *  Wrapped in a message so 'not set' and empty can be differentiated, which is
+ *  required for use in a 'oneof'.
  */
 export interface ListValueSDKType {
   /** The ordered values in the list. */
@@ -135,15 +135,15 @@ export interface ListValueSDKType {
 /**
  * A map.
  * 
- * Wrapped in a message so 'not set' and empty can be differentiated, which is
- * required for use in a 'oneof'.
+ *  Wrapped in a message so 'not set' and empty can be differentiated, which is
+ *  required for use in a 'oneof'.
  */
 export interface MapValue {
   /**
    * The set of map entries.
    * 
-   * CEL has fewer restrictions on keys, so a protobuf map represenation
-   * cannot be used.
+   *  CEL has fewer restrictions on keys, so a protobuf map represenation
+   *  cannot be used.
    */
   entries: MapValue_Entry[];
 }
@@ -151,15 +151,15 @@ export interface MapValue {
 /**
  * A map.
  * 
- * Wrapped in a message so 'not set' and empty can be differentiated, which is
- * required for use in a 'oneof'.
+ *  Wrapped in a message so 'not set' and empty can be differentiated, which is
+ *  required for use in a 'oneof'.
  */
 export interface MapValueSDKType {
   /**
    * The set of map entries.
    * 
-   * CEL has fewer restrictions on keys, so a protobuf map represenation
-   * cannot be used.
+   *  CEL has fewer restrictions on keys, so a protobuf map represenation
+   *  cannot be used.
    */
   entries: MapValue_EntrySDKType[];
 }
@@ -169,8 +169,8 @@ export interface MapValue_Entry {
   /**
    * The key.
    * 
-   * Must be unique with in the map.
-   * Currently only boolean, int, uint, and string values can be keys.
+   *  Must be unique with in the map.
+   *  Currently only boolean, int, uint, and string values can be keys.
    */
   key: Value;
 
@@ -183,8 +183,8 @@ export interface MapValue_EntrySDKType {
   /**
    * The key.
    * 
-   * Must be unique with in the map.
-   * Currently only boolean, int, uint, and string values can be keys.
+   *  Must be unique with in the map.
+   *  Currently only boolean, int, uint, and string values can be keys.
    */
   key: ValueSDKType;
 

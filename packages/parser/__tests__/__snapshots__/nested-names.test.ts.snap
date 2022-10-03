@@ -4,9 +4,9 @@ exports[`google/rpc/error_details 1`] = `
 Object {
   "comment": "Describes what preconditions have failed.
 
-For example, if an RPC failed because it required the Terms of Service to be
-acknowledged, it could list the terms of service violation in the
-PreconditionFailure message.",
+ For example, if an RPC failed because it required the Terms of Service to be
+ acknowledged, it could list the terms of service violation in the
+ PreconditionFailure message.",
   "fields": Object {
     "violations": Object {
       "comment": "Describes all precondition violations.",
@@ -36,9 +36,9 @@ PreconditionFailure message.",
       "fields": Object {
         "description": Object {
           "comment": "A description of how the precondition failed. Developers can use this
-description to understand how to fix the failure.
+ description to understand how to fix the failure.
 
-For example: \\"Terms of service not accepted\\".",
+ For example: \\"Terms of service not accepted\\".",
           "id": 3,
           "isScalar": true,
           "options": Object {
@@ -55,8 +55,8 @@ For example: \\"Terms of service not accepted\\".",
         },
         "subject": Object {
           "comment": "The subject, relative to the type, that failed.
-For example, \\"google.com/cloud\\" relative to the \\"TOS\\" type would indicate
-which terms of service is being referenced.",
+ For example, \\"google.com/cloud\\" relative to the \\"TOS\\" type would indicate
+ which terms of service is being referenced.",
           "id": 2,
           "isScalar": true,
           "options": Object {
@@ -73,8 +73,8 @@ which terms of service is being referenced.",
         },
         "type": Object {
           "comment": "The type of PreconditionFailure. We recommend using a service-specific
-enum type to define the supported precondition violation subjects. For
-example, \\"TOS\\" for \\"Terms of Service violation\\".",
+ enum type to define the supported precondition violation subjects. For
+ example, \\"TOS\\" for \\"Terms of Service violation\\".",
           "id": 1,
           "isScalar": true,
           "options": Object {

@@ -53,7 +53,7 @@ export class LCDQueryClient {
   }
 
   /* SpendableBalances queries the spenable balance of all coins for a single
-  account. */
+   account. */
   async spendableBalances(params: QuerySpendableBalancesRequest): Promise<QuerySpendableBalancesResponseSDKType> {
     const options: any = {
       params: {}
@@ -110,7 +110,7 @@ export class LCDQueryClient {
   }
 
   /* DenomsMetadata queries the client metadata for all registered coin
-  denominations. */
+   denominations. */
   async denomsMetadata(params: QueryDenomsMetadataRequest = {
     pagination: undefined
   }): Promise<QueryDenomsMetadataResponseSDKType> {
@@ -127,7 +127,7 @@ export class LCDQueryClient {
   }
 
   /* DenomOwners queries for all account addresses that own a particular token
-  denomination. */
+   denomination. */
   async denomOwners(params: QueryDenomOwnersRequest): Promise<QueryDenomOwnersResponseSDKType> {
     const options: any = {
       params: {}

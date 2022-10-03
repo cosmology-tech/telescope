@@ -5,13 +5,13 @@ export const protobufPackage = "google.api.servicecontrol.v1";
 
 /**
  * Distribution represents a frequency distribution of double-valued sample
- * points. It contains the size of the population of sample points plus
- * additional optional information:
+ *  points. It contains the size of the population of sample points plus
+ *  additional optional information:
  * 
- * * the arithmetic mean of the samples
- * * the minimum and maximum of the samples
- * * the sum-squared-deviation of the samples, used to compute variance
- * * a histogram of the values of the sample points
+ *  * the arithmetic mean of the samples
+ *  * the minimum and maximum of the samples
+ *  * the sum-squared-deviation of the samples, used to compute variance
+ *  * a histogram of the values of the sample points
  */
 export interface Distribution {
   /** The total number of samples in the distribution. Must be >= 0. */
@@ -19,7 +19,7 @@ export interface Distribution {
 
   /**
    * The arithmetic mean of the samples in the distribution. If `count` is
-   * zero then this field must be zero.
+   *  zero then this field must be zero.
    */
   mean: number;
 
@@ -31,24 +31,24 @@ export interface Distribution {
 
   /**
    * The sum of squared deviations from the mean:
-   * Sum[i=1..count]((x_i - mean)^2)
-   * where each x_i is a sample values. If `count` is zero then this field
-   * must be zero, otherwise validation of the request fails.
+   *    Sum[i=1..count]((x_i - mean)^2)
+   *  where each x_i is a sample values. If `count` is zero then this field
+   *  must be zero, otherwise validation of the request fails.
    */
   sumOfSquaredDeviation: number;
 
   /**
    * The number of samples in each histogram bucket. `bucket_counts` are
-   * optional. If present, they must sum to the `count` value.
+   *  optional. If present, they must sum to the `count` value.
    * 
-   * The buckets are defined below in `bucket_option`. There are N buckets.
-   * `bucket_counts[0]` is the number of samples in the underflow bucket.
-   * `bucket_counts[1]` to `bucket_counts[N-1]` are the numbers of samples
-   * in each of the finite buckets. And `bucket_counts[N] is the number
-   * of samples in the overflow bucket. See the comments of `bucket_option`
-   * below for more details.
+   *  The buckets are defined below in `bucket_option`. There are N buckets.
+   *  `bucket_counts[0]` is the number of samples in the underflow bucket.
+   *  `bucket_counts[1]` to `bucket_counts[N-1]` are the numbers of samples
+   *  in each of the finite buckets. And `bucket_counts[N] is the number
+   *  of samples in the overflow bucket. See the comments of `bucket_option`
+   *  below for more details.
    * 
-   * Any suffix of trailing zeros may be omitted.
+   *  Any suffix of trailing zeros may be omitted.
    */
   bucketCounts: Long[];
 
@@ -67,13 +67,13 @@ export interface Distribution {
 
 /**
  * Distribution represents a frequency distribution of double-valued sample
- * points. It contains the size of the population of sample points plus
- * additional optional information:
+ *  points. It contains the size of the population of sample points plus
+ *  additional optional information:
  * 
- * * the arithmetic mean of the samples
- * * the minimum and maximum of the samples
- * * the sum-squared-deviation of the samples, used to compute variance
- * * a histogram of the values of the sample points
+ *  * the arithmetic mean of the samples
+ *  * the minimum and maximum of the samples
+ *  * the sum-squared-deviation of the samples, used to compute variance
+ *  * a histogram of the values of the sample points
  */
 export interface DistributionSDKType {
   /** The total number of samples in the distribution. Must be >= 0. */
@@ -81,7 +81,7 @@ export interface DistributionSDKType {
 
   /**
    * The arithmetic mean of the samples in the distribution. If `count` is
-   * zero then this field must be zero.
+   *  zero then this field must be zero.
    */
   mean: number;
 
@@ -93,24 +93,24 @@ export interface DistributionSDKType {
 
   /**
    * The sum of squared deviations from the mean:
-   * Sum[i=1..count]((x_i - mean)^2)
-   * where each x_i is a sample values. If `count` is zero then this field
-   * must be zero, otherwise validation of the request fails.
+   *    Sum[i=1..count]((x_i - mean)^2)
+   *  where each x_i is a sample values. If `count` is zero then this field
+   *  must be zero, otherwise validation of the request fails.
    */
   sum_of_squared_deviation: number;
 
   /**
    * The number of samples in each histogram bucket. `bucket_counts` are
-   * optional. If present, they must sum to the `count` value.
+   *  optional. If present, they must sum to the `count` value.
    * 
-   * The buckets are defined below in `bucket_option`. There are N buckets.
-   * `bucket_counts[0]` is the number of samples in the underflow bucket.
-   * `bucket_counts[1]` to `bucket_counts[N-1]` are the numbers of samples
-   * in each of the finite buckets. And `bucket_counts[N] is the number
-   * of samples in the overflow bucket. See the comments of `bucket_option`
-   * below for more details.
+   *  The buckets are defined below in `bucket_option`. There are N buckets.
+   *  `bucket_counts[0]` is the number of samples in the underflow bucket.
+   *  `bucket_counts[1]` to `bucket_counts[N-1]` are the numbers of samples
+   *  in each of the finite buckets. And `bucket_counts[N] is the number
+   *  of samples in the overflow bucket. See the comments of `bucket_option`
+   *  below for more details.
    * 
-   * Any suffix of trailing zeros may be omitted.
+   *  Any suffix of trailing zeros may be omitted.
    */
   bucket_counts: Long[];
 
@@ -131,23 +131,23 @@ export interface DistributionSDKType {
 export interface Distribution_LinearBuckets {
   /**
    * The number of finite buckets. With the underflow and overflow buckets,
-   * the total number of buckets is `num_finite_buckets` + 2.
-   * See comments on `bucket_options` for details.
+   *  the total number of buckets is `num_finite_buckets` + 2.
+   *  See comments on `bucket_options` for details.
    */
   numFiniteBuckets: number;
 
   /**
    * The i'th linear bucket covers the interval
-   * [offset + (i-1) * width, offset + i * width)
-   * where i ranges from 1 to num_finite_buckets, inclusive.
-   * Must be strictly positive.
+   *    [offset + (i-1) * width, offset + i * width)
+   *  where i ranges from 1 to num_finite_buckets, inclusive.
+   *  Must be strictly positive.
    */
   width: number;
 
   /**
    * The i'th linear bucket covers the interval
-   * [offset + (i-1) * width, offset + i * width)
-   * where i ranges from 1 to num_finite_buckets, inclusive.
+   *    [offset + (i-1) * width, offset + i * width)
+   *  where i ranges from 1 to num_finite_buckets, inclusive.
    */
   offset: number;
 }
@@ -156,23 +156,23 @@ export interface Distribution_LinearBuckets {
 export interface Distribution_LinearBucketsSDKType {
   /**
    * The number of finite buckets. With the underflow and overflow buckets,
-   * the total number of buckets is `num_finite_buckets` + 2.
-   * See comments on `bucket_options` for details.
+   *  the total number of buckets is `num_finite_buckets` + 2.
+   *  See comments on `bucket_options` for details.
    */
   num_finite_buckets: number;
 
   /**
    * The i'th linear bucket covers the interval
-   * [offset + (i-1) * width, offset + i * width)
-   * where i ranges from 1 to num_finite_buckets, inclusive.
-   * Must be strictly positive.
+   *    [offset + (i-1) * width, offset + i * width)
+   *  where i ranges from 1 to num_finite_buckets, inclusive.
+   *  Must be strictly positive.
    */
   width: number;
 
   /**
    * The i'th linear bucket covers the interval
-   * [offset + (i-1) * width, offset + i * width)
-   * where i ranges from 1 to num_finite_buckets, inclusive.
+   *    [offset + (i-1) * width, offset + i * width)
+   *  where i ranges from 1 to num_finite_buckets, inclusive.
    */
   offset: number;
 }
@@ -181,24 +181,24 @@ export interface Distribution_LinearBucketsSDKType {
 export interface Distribution_ExponentialBuckets {
   /**
    * The number of finite buckets. With the underflow and overflow buckets,
-   * the total number of buckets is `num_finite_buckets` + 2.
-   * See comments on `bucket_options` for details.
+   *  the total number of buckets is `num_finite_buckets` + 2.
+   *  See comments on `bucket_options` for details.
    */
   numFiniteBuckets: number;
 
   /**
    * The i'th exponential bucket covers the interval
-   * [scale * growth_factor^(i-1), scale * growth_factor^i)
-   * where i ranges from 1 to num_finite_buckets inclusive.
-   * Must be larger than 1.0.
+   *    [scale * growth_factor^(i-1), scale * growth_factor^i)
+   *  where i ranges from 1 to num_finite_buckets inclusive.
+   *  Must be larger than 1.0.
    */
   growthFactor: number;
 
   /**
    * The i'th exponential bucket covers the interval
-   * [scale * growth_factor^(i-1), scale * growth_factor^i)
-   * where i ranges from 1 to num_finite_buckets inclusive.
-   * Must be > 0.
+   *    [scale * growth_factor^(i-1), scale * growth_factor^i)
+   *  where i ranges from 1 to num_finite_buckets inclusive.
+   *  Must be > 0.
    */
   scale: number;
 }
@@ -207,24 +207,24 @@ export interface Distribution_ExponentialBuckets {
 export interface Distribution_ExponentialBucketsSDKType {
   /**
    * The number of finite buckets. With the underflow and overflow buckets,
-   * the total number of buckets is `num_finite_buckets` + 2.
-   * See comments on `bucket_options` for details.
+   *  the total number of buckets is `num_finite_buckets` + 2.
+   *  See comments on `bucket_options` for details.
    */
   num_finite_buckets: number;
 
   /**
    * The i'th exponential bucket covers the interval
-   * [scale * growth_factor^(i-1), scale * growth_factor^i)
-   * where i ranges from 1 to num_finite_buckets inclusive.
-   * Must be larger than 1.0.
+   *    [scale * growth_factor^(i-1), scale * growth_factor^i)
+   *  where i ranges from 1 to num_finite_buckets inclusive.
+   *  Must be larger than 1.0.
    */
   growth_factor: number;
 
   /**
    * The i'th exponential bucket covers the interval
-   * [scale * growth_factor^(i-1), scale * growth_factor^i)
-   * where i ranges from 1 to num_finite_buckets inclusive.
-   * Must be > 0.
+   *    [scale * growth_factor^(i-1), scale * growth_factor^i)
+   *  where i ranges from 1 to num_finite_buckets inclusive.
+   *  Must be > 0.
    */
   scale: number;
 }
@@ -233,20 +233,20 @@ export interface Distribution_ExponentialBucketsSDKType {
 export interface Distribution_ExplicitBuckets {
   /**
    * 'bound' is a list of strictly increasing boundaries between
-   * buckets. Note that a list of length N-1 defines N buckets because
-   * of fenceposting. See comments on `bucket_options` for details.
+   *  buckets. Note that a list of length N-1 defines N buckets because
+   *  of fenceposting. See comments on `bucket_options` for details.
    * 
-   * The i'th finite bucket covers the interval
-   * [bound[i-1], bound[i])
-   * where i ranges from 1 to bound_size() - 1. Note that there are no
-   * finite buckets at all if 'bound' only contains a single element; in
-   * that special case the single bound defines the boundary between the
-   * underflow and overflow buckets.
+   *  The i'th finite bucket covers the interval
+   *    [bound[i-1], bound[i])
+   *  where i ranges from 1 to bound_size() - 1. Note that there are no
+   *  finite buckets at all if 'bound' only contains a single element; in
+   *  that special case the single bound defines the boundary between the
+   *  underflow and overflow buckets.
    * 
-   * bucket number                   lower bound    upper bound
-   * i == 0 (underflow)              -inf           bound[i]
-   * 0 < i < bound_size()            bound[i-1]     bound[i]
-   * i == bound_size() (overflow)    bound[i-1]     +inf
+   *  bucket number                   lower bound    upper bound
+   *   i == 0 (underflow)              -inf           bound[i]
+   *   0 < i < bound_size()            bound[i-1]     bound[i]
+   *   i == bound_size() (overflow)    bound[i-1]     +inf
    */
   bounds: number[];
 }
@@ -255,20 +255,20 @@ export interface Distribution_ExplicitBuckets {
 export interface Distribution_ExplicitBucketsSDKType {
   /**
    * 'bound' is a list of strictly increasing boundaries between
-   * buckets. Note that a list of length N-1 defines N buckets because
-   * of fenceposting. See comments on `bucket_options` for details.
+   *  buckets. Note that a list of length N-1 defines N buckets because
+   *  of fenceposting. See comments on `bucket_options` for details.
    * 
-   * The i'th finite bucket covers the interval
-   * [bound[i-1], bound[i])
-   * where i ranges from 1 to bound_size() - 1. Note that there are no
-   * finite buckets at all if 'bound' only contains a single element; in
-   * that special case the single bound defines the boundary between the
-   * underflow and overflow buckets.
+   *  The i'th finite bucket covers the interval
+   *    [bound[i-1], bound[i])
+   *  where i ranges from 1 to bound_size() - 1. Note that there are no
+   *  finite buckets at all if 'bound' only contains a single element; in
+   *  that special case the single bound defines the boundary between the
+   *  underflow and overflow buckets.
    * 
-   * bucket number                   lower bound    upper bound
-   * i == 0 (underflow)              -inf           bound[i]
-   * 0 < i < bound_size()            bound[i-1]     bound[i]
-   * i == bound_size() (overflow)    bound[i-1]     +inf
+   *  bucket number                   lower bound    upper bound
+   *   i == 0 (underflow)              -inf           bound[i]
+   *   0 < i < bound_size()            bound[i-1]     bound[i]
+   *   i == bound_size() (overflow)    bound[i-1]     +inf
    */
   bounds: number[];
 }

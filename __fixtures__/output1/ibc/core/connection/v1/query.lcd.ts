@@ -44,21 +44,21 @@ export class LCDQueryClient {
   }
 
   /* ClientConnections queries the connection paths associated with a client
-  state. */
+   state. */
   async clientConnections(params: QueryClientConnectionsRequest): Promise<QueryClientConnectionsResponseSDKType> {
     const endpoint = `ibc/core/connection/v1/client_connections/${params.clientId}`;
     return await this.req.get<QueryClientConnectionsResponseSDKType>(endpoint);
   }
 
   /* ConnectionClientState queries the client state associated with the
-  connection. */
+   connection. */
   async connectionClientState(params: QueryConnectionClientStateRequest): Promise<QueryConnectionClientStateResponseSDKType> {
     const endpoint = `ibc/core/connection/v1/connections/${params.connectionId}/client_state`;
     return await this.req.get<QueryConnectionClientStateResponseSDKType>(endpoint);
   }
 
   /* ConnectionConsensusState queries the consensus state associated with the
-  connection. */
+   connection. */
   async connectionConsensusState(params: QueryConnectionConsensusStateRequest): Promise<QueryConnectionConsensusStateResponseSDKType> {
     const endpoint = `ibc/core/connection/v1/connections/${params.connectionId}/consensus_state/revision/${params.revisionNumber}height/${params.revisionHeight}`;
     return await this.req.get<QueryConnectionConsensusStateResponseSDKType>(endpoint);

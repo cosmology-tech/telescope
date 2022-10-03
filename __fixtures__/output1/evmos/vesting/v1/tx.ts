@@ -8,7 +8,7 @@ export const protobufPackage = "evmos.vesting.v1";
 export interface MsgCreateClawbackVestingAccount {
   /**
    * from_address specifies the account to provide the funds and sign the
-   * clawback request
+   *  clawback request
    */
   fromAddress?: string;
 
@@ -26,10 +26,10 @@ export interface MsgCreateClawbackVestingAccount {
 
   /**
    * merge specifies a the creation mechanism for existing
-   * ClawbackVestingAccounts. If true, merge this new grant into an existing
-   * ClawbackVestingAccount, or create it if it does not exist. If false,
-   * creates a new account. New grants to an existing account must be from the
-   * same from_address.
+   *  ClawbackVestingAccounts. If true, merge this new grant into an existing
+   *  ClawbackVestingAccount, or create it if it does not exist. If false,
+   *  creates a new account. New grants to an existing account must be from the
+   *  same from_address.
    */
   merge?: boolean;
 }
@@ -38,7 +38,7 @@ export interface MsgCreateClawbackVestingAccount {
 export interface MsgCreateClawbackVestingAccountSDKType {
   /**
    * from_address specifies the account to provide the funds and sign the
-   * clawback request
+   *  clawback request
    */
   from_address?: string;
 
@@ -56,29 +56,29 @@ export interface MsgCreateClawbackVestingAccountSDKType {
 
   /**
    * merge specifies a the creation mechanism for existing
-   * ClawbackVestingAccounts. If true, merge this new grant into an existing
-   * ClawbackVestingAccount, or create it if it does not exist. If false,
-   * creates a new account. New grants to an existing account must be from the
-   * same from_address.
+   *  ClawbackVestingAccounts. If true, merge this new grant into an existing
+   *  ClawbackVestingAccount, or create it if it does not exist. If false,
+   *  creates a new account. New grants to an existing account must be from the
+   *  same from_address.
    */
   merge?: boolean;
 }
 
 /**
  * MsgCreateClawbackVestingAccountResponse defines the
- * MsgCreateClawbackVestingAccount response type.
+ *  MsgCreateClawbackVestingAccount response type.
  */
 export interface MsgCreateClawbackVestingAccountResponse {}
 
 /**
  * MsgCreateClawbackVestingAccountResponse defines the
- * MsgCreateClawbackVestingAccount response type.
+ *  MsgCreateClawbackVestingAccount response type.
  */
 export interface MsgCreateClawbackVestingAccountResponseSDKType {}
 
 /**
  * MsgClawback defines a message that removes unvested tokens from a
- * ClawbackVestingAccount.
+ *  ClawbackVestingAccount.
  */
 export interface MsgClawback {
   /** funder_address is the address which funded the account */
@@ -89,15 +89,15 @@ export interface MsgClawback {
 
   /**
    * dest_address specifies where the clawed-back tokens should be transferred
-   * to. If empty, the tokens will be transferred back to the original funder of
-   * the account.
+   *  to. If empty, the tokens will be transferred back to the original funder of
+   *  the account.
    */
   destAddress?: string;
 }
 
 /**
  * MsgClawback defines a message that removes unvested tokens from a
- * ClawbackVestingAccount.
+ *  ClawbackVestingAccount.
  */
 export interface MsgClawbackSDKType {
   /** funder_address is the address which funded the account */
@@ -108,8 +108,8 @@ export interface MsgClawbackSDKType {
 
   /**
    * dest_address specifies where the clawed-back tokens should be transferred
-   * to. If empty, the tokens will be transferred back to the original funder of
-   * the account.
+   *  to. If empty, the tokens will be transferred back to the original funder of
+   *  the account.
    */
   dest_address?: string;
 }

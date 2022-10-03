@@ -9,13 +9,13 @@ export interface Params {
 
   /**
    * InitialInflation is the rate at which inflation starts at genesis.
-   * It is a decimal value in the range [0.0, 100.0].
+   *  It is a decimal value in the range [0.0, 100.0].
    */
   initialInflation: string;
 
   /**
    * Variance defines the fraction by which inflation can vary from ideal inflation in a block.
-   * It is a decimal value in the range [0.0, 1.0].
+   *  It is a decimal value in the range [0.0, 1.0].
    */
   variance: string;
 }
@@ -27,13 +27,13 @@ export interface ParamsSDKType {
 
   /**
    * InitialInflation is the rate at which inflation starts at genesis.
-   * It is a decimal value in the range [0.0, 100.0].
+   *  It is a decimal value in the range [0.0, 100.0].
    */
   initial_inflation: string;
 
   /**
    * Variance defines the fraction by which inflation can vary from ideal inflation in a block.
-   * It is a decimal value in the range [0.0, 1.0].
+   *  It is a decimal value in the range [0.0, 1.0].
    */
   variance: string;
 }

@@ -58,7 +58,7 @@ export interface QueryProposalsRequestSDKType {
 
 /**
  * QueryProposalsResponse is the response type for the Query/Proposals RPC
- * method.
+ *  method.
  */
 export interface QueryProposalsResponse {
   proposals: Proposal[];
@@ -69,7 +69,7 @@ export interface QueryProposalsResponse {
 
 /**
  * QueryProposalsResponse is the response type for the Query/Proposals RPC
- * method.
+ *  method.
  */
 export interface QueryProposalsResponseSDKType {
   proposals: ProposalSDKType[];
@@ -148,7 +148,7 @@ export interface QueryVotesResponseSDKType {
 export interface QueryParamsRequest {
   /**
    * params_type defines which parameters to query for, can be one of "voting",
-   * "tallying" or "deposit".
+   *  "tallying" or "deposit".
    */
   paramsType: string;
 }
@@ -157,7 +157,7 @@ export interface QueryParamsRequest {
 export interface QueryParamsRequestSDKType {
   /**
    * params_type defines which parameters to query for, can be one of "voting",
-   * "tallying" or "deposit".
+   *  "tallying" or "deposit".
    */
   params_type: string;
 }

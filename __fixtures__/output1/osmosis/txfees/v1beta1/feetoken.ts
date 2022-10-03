@@ -4,9 +4,9 @@ export const protobufPackage = "osmosis.txfees.v1beta1";
 
 /**
  * FeeToken is a struct that specifies a coin denom, and pool ID pair.
- * This marks the token as eligible for use as a tx fee asset in Osmosis.
- * Its price in osmo is derived through looking at the provided pool ID.
- * The pool ID must have osmo as one of its assets.
+ *  This marks the token as eligible for use as a tx fee asset in Osmosis.
+ *  Its price in osmo is derived through looking at the provided pool ID.
+ *  The pool ID must have osmo as one of its assets.
  */
 export interface FeeToken {
   denom: string;
@@ -15,9 +15,9 @@ export interface FeeToken {
 
 /**
  * FeeToken is a struct that specifies a coin denom, and pool ID pair.
- * This marks the token as eligible for use as a tx fee asset in Osmosis.
- * Its price in osmo is derived through looking at the provided pool ID.
- * The pool ID must have osmo as one of its assets.
+ *  This marks the token as eligible for use as a tx fee asset in Osmosis.
+ *  Its price in osmo is derived through looking at the provided pool ID.
+ *  The pool ID must have osmo as one of its assets.
  */
 export interface FeeTokenSDKType {
   denom: string;

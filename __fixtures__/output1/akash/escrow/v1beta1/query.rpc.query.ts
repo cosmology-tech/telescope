@@ -9,13 +9,13 @@ import { QueryAccountsRequest, QueryAccountsRequestSDKType, QueryAccountsRespons
 export interface Query {
   accounts(request: QueryAccountsRequest): Promise<QueryAccountsResponse>;
   /*buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
-  buf:lint:ignore RPC_RESPONSE_STANDARD_NAME
-  Accounts queries all accounts*/
+   buf:lint:ignore RPC_RESPONSE_STANDARD_NAME
+   Accounts queries all accounts*/
 
   payments(request: QueryPaymentsRequest): Promise<QueryPaymentsResponse>;
   /*buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
-  buf:lint:ignore RPC_RESPONSE_STANDARD_NAME
-  Payments queries all payments*/
+   buf:lint:ignore RPC_RESPONSE_STANDARD_NAME
+   Payments queries all payments*/
 
 }
 export class QueryClientImpl implements Query {
@@ -26,8 +26,8 @@ export class QueryClientImpl implements Query {
   }
 
   /* buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
-  buf:lint:ignore RPC_RESPONSE_STANDARD_NAME
-  Accounts queries all accounts */
+   buf:lint:ignore RPC_RESPONSE_STANDARD_NAME
+   Accounts queries all accounts */
   accounts = async (request: QueryAccountsRequest): Promise<QueryAccountsResponse> => {
     const data = QueryAccountsRequest.encode(request).finish();
     const promise = this.rpc.request("akash.escrow.v1beta1.Query", "Accounts", data);
@@ -35,8 +35,8 @@ export class QueryClientImpl implements Query {
   };
 
   /* buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
-  buf:lint:ignore RPC_RESPONSE_STANDARD_NAME
-  Payments queries all payments */
+   buf:lint:ignore RPC_RESPONSE_STANDARD_NAME
+   Payments queries all payments */
   payments = async (request: QueryPaymentsRequest): Promise<QueryPaymentsResponse> => {
     const data = QueryPaymentsRequest.encode(request).finish();
     const promise = this.rpc.request("akash.escrow.v1beta1.Query", "Payments", data);

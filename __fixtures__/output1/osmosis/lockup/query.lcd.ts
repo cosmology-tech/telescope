@@ -76,7 +76,7 @@ export class LCDQueryClient {
   }
 
   /* Returns locked records of an account with unlock time beyond timestamp
-  excluding tokens started unlocking */
+   excluding tokens started unlocking */
   async accountLockedPastTimeNotUnlockingOnly(params: AccountLockedPastTimeNotUnlockingOnlyRequest): Promise<AccountLockedPastTimeNotUnlockingOnlyResponseSDKType> {
     const options: any = {
       params: {}
@@ -181,7 +181,7 @@ export class LCDQueryClient {
   }
 
   /* Returns account locked records with longer duration excluding tokens
-  started unlocking */
+   started unlocking */
   async accountLockedLongerDurationNotUnlockingOnly(params: AccountLockedLongerDurationNotUnlockingOnlyRequest): Promise<AccountLockedLongerDurationNotUnlockingOnlyResponseSDKType> {
     const options: any = {
       params: {}

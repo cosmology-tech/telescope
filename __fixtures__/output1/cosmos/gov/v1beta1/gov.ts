@@ -100,31 +100,31 @@ export enum ProposalStatus {
 
   /**
    * PROPOSAL_STATUS_DEPOSIT_PERIOD - PROPOSAL_STATUS_DEPOSIT_PERIOD defines a proposal status during the deposit
-   * period.
+   *  period.
    */
   PROPOSAL_STATUS_DEPOSIT_PERIOD = 1,
 
   /**
    * PROPOSAL_STATUS_VOTING_PERIOD - PROPOSAL_STATUS_VOTING_PERIOD defines a proposal status during the voting
-   * period.
+   *  period.
    */
   PROPOSAL_STATUS_VOTING_PERIOD = 2,
 
   /**
    * PROPOSAL_STATUS_PASSED - PROPOSAL_STATUS_PASSED defines a proposal status of a proposal that has
-   * passed.
+   *  passed.
    */
   PROPOSAL_STATUS_PASSED = 3,
 
   /**
    * PROPOSAL_STATUS_REJECTED - PROPOSAL_STATUS_REJECTED defines a proposal status of a proposal that has
-   * been rejected.
+   *  been rejected.
    */
   PROPOSAL_STATUS_REJECTED = 4,
 
   /**
    * PROPOSAL_STATUS_FAILED - PROPOSAL_STATUS_FAILED defines a proposal status of a proposal that has
-   * failed.
+   *  failed.
    */
   PROPOSAL_STATUS_FAILED = 5,
   UNRECOGNIZED = -1,
@@ -137,31 +137,31 @@ export enum ProposalStatusSDKType {
 
   /**
    * PROPOSAL_STATUS_DEPOSIT_PERIOD - PROPOSAL_STATUS_DEPOSIT_PERIOD defines a proposal status during the deposit
-   * period.
+   *  period.
    */
   PROPOSAL_STATUS_DEPOSIT_PERIOD = 1,
 
   /**
    * PROPOSAL_STATUS_VOTING_PERIOD - PROPOSAL_STATUS_VOTING_PERIOD defines a proposal status during the voting
-   * period.
+   *  period.
    */
   PROPOSAL_STATUS_VOTING_PERIOD = 2,
 
   /**
    * PROPOSAL_STATUS_PASSED - PROPOSAL_STATUS_PASSED defines a proposal status of a proposal that has
-   * passed.
+   *  passed.
    */
   PROPOSAL_STATUS_PASSED = 3,
 
   /**
    * PROPOSAL_STATUS_REJECTED - PROPOSAL_STATUS_REJECTED defines a proposal status of a proposal that has
-   * been rejected.
+   *  been rejected.
    */
   PROPOSAL_STATUS_REJECTED = 4,
 
   /**
    * PROPOSAL_STATUS_FAILED - PROPOSAL_STATUS_FAILED defines a proposal status of a proposal that has
-   * failed.
+   *  failed.
    */
   PROPOSAL_STATUS_FAILED = 5,
   UNRECOGNIZED = -1,
@@ -226,7 +226,7 @@ export function proposalStatusToJSON(object: ProposalStatus): string {
 /**
  * WeightedVoteOption defines a unit of vote for vote split.
  * 
- * Since: cosmos-sdk 0.43
+ *  Since: cosmos-sdk 0.43
  */
 export interface WeightedVoteOption {
   option: VoteOption;
@@ -236,7 +236,7 @@ export interface WeightedVoteOption {
 /**
  * WeightedVoteOption defines a unit of vote for vote split.
  * 
- * Since: cosmos-sdk 0.43
+ *  Since: cosmos-sdk 0.43
  */
 export interface WeightedVoteOptionSDKType {
   option: VoteOptionSDKType;
@@ -245,7 +245,7 @@ export interface WeightedVoteOptionSDKType {
 
 /**
  * TextProposal defines a standard text proposal whose changes need to be
- * manually updated in case of approval.
+ *  manually updated in case of approval.
  */
 export interface TextProposal {
   title: string;
@@ -254,7 +254,7 @@ export interface TextProposal {
 
 /**
  * TextProposal defines a standard text proposal whose changes need to be
- * manually updated in case of approval.
+ *  manually updated in case of approval.
  */
 export interface TextProposalSDKType {
   title: string;
@@ -263,7 +263,7 @@ export interface TextProposalSDKType {
 
 /**
  * Deposit defines an amount deposited by an account address to an active
- * proposal.
+ *  proposal.
  */
 export interface Deposit {
   proposalId: Long;
@@ -273,7 +273,7 @@ export interface Deposit {
 
 /**
  * Deposit defines an amount deposited by an account address to an active
- * proposal.
+ *  proposal.
  */
 export interface DepositSDKType {
   proposal_id: Long;
@@ -289,8 +289,8 @@ export interface Proposal {
 
   /**
    * final_tally_result is the final tally result of the proposal. When
-   * querying a proposal via gRPC, this field is not populated until the
-   * proposal's voting period has ended.
+   *  querying a proposal via gRPC, this field is not populated until the
+   *  proposal's voting period has ended.
    */
   finalTallyResult: TallyResult;
   submitTime: Date;
@@ -308,8 +308,8 @@ export interface ProposalSDKType {
 
   /**
    * final_tally_result is the final tally result of the proposal. When
-   * querying a proposal via gRPC, this field is not populated until the
-   * proposal's voting period has ended.
+   *  querying a proposal via gRPC, this field is not populated until the
+   *  proposal's voting period has ended.
    */
   final_tally_result: TallyResultSDKType;
   submit_time: Date;
@@ -337,7 +337,7 @@ export interface TallyResultSDKType {
 
 /**
  * Vote defines a vote on a governance proposal.
- * A Vote consists of a proposal ID, the voter, and the vote option.
+ *  A Vote consists of a proposal ID, the voter, and the vote option.
  */
 export interface Vote {
   proposalId: Long;
@@ -345,8 +345,8 @@ export interface Vote {
 
   /**
    * Deprecated: Prefer to use `options` instead. This field is set in queries
-   * if and only if `len(options) == 1` and that option has weight 1. In all
-   * other cases, this field will default to VOTE_OPTION_UNSPECIFIED.
+   *  if and only if `len(options) == 1` and that option has weight 1. In all
+   *  other cases, this field will default to VOTE_OPTION_UNSPECIFIED.
    */
 
   /** @deprecated */
@@ -358,7 +358,7 @@ export interface Vote {
 
 /**
  * Vote defines a vote on a governance proposal.
- * A Vote consists of a proposal ID, the voter, and the vote option.
+ *  A Vote consists of a proposal ID, the voter, and the vote option.
  */
 export interface VoteSDKType {
   proposal_id: Long;
@@ -366,8 +366,8 @@ export interface VoteSDKType {
 
   /**
    * Deprecated: Prefer to use `options` instead. This field is set in queries
-   * if and only if `len(options) == 1` and that option has weight 1. In all
-   * other cases, this field will default to VOTE_OPTION_UNSPECIFIED.
+   *  if and only if `len(options) == 1` and that option has weight 1. In all
+   *  other cases, this field will default to VOTE_OPTION_UNSPECIFIED.
    */
 
   /** @deprecated */
@@ -384,7 +384,7 @@ export interface DepositParams {
 
   /**
    * Maximum period for Atom holders to deposit on a proposal. Initial value: 2
-   * months.
+   *   months.
    */
   maxDepositPeriod: Duration;
 }
@@ -396,7 +396,7 @@ export interface DepositParamsSDKType {
 
   /**
    * Maximum period for Atom holders to deposit on a proposal. Initial value: 2
-   * months.
+   *   months.
    */
   max_deposit_period: DurationSDKType;
 }
@@ -417,7 +417,7 @@ export interface VotingParamsSDKType {
 export interface TallyParams {
   /**
    * Minimum percentage of total stake needed to vote for a result to be
-   * considered valid.
+   *   considered valid.
    */
   quorum: Uint8Array;
 
@@ -426,7 +426,7 @@ export interface TallyParams {
 
   /**
    * Minimum value of Veto votes to Total votes ratio for proposal to be
-   * vetoed. Default value: 1/3.
+   *   vetoed. Default value: 1/3.
    */
   vetoThreshold: Uint8Array;
 }
@@ -435,7 +435,7 @@ export interface TallyParams {
 export interface TallyParamsSDKType {
   /**
    * Minimum percentage of total stake needed to vote for a result to be
-   * considered valid.
+   *   considered valid.
    */
   quorum: Uint8Array;
 
@@ -444,7 +444,7 @@ export interface TallyParamsSDKType {
 
   /**
    * Minimum value of Veto votes to Total votes ratio for proposal to be
-   * vetoed. Default value: 1/3.
+   *   vetoed. Default value: 1/3.
    */
   veto_threshold: Uint8Array;
 }

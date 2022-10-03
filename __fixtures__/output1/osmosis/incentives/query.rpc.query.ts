@@ -35,8 +35,8 @@ export interface Query {
 
   rewardsEst(request: RewardsEstRequest): Promise<RewardsEstResponse>;
   /*RewardsEst returns an estimate of the rewards at a future specific time.
-  The querier either provides an address or a set of locks
-  for which they want to find the associated rewards.*/
+   The querier either provides an address or a set of locks
+   for which they want to find the associated rewards.*/
 
   lockableDurations(request?: QueryLockableDurationsRequest): Promise<QueryLockableDurationsResponse>;
   /*returns lockable durations that are valid to give incentives*/

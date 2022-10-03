@@ -5,12 +5,12 @@ export const protobufPackage = "cosmos.app.v1alpha1";
 
 /**
  * Config represents the configuration for a Cosmos SDK ABCI app.
- * It is intended that all state machine logic including the version of
- * baseapp and tx handlers (and possibly even Tendermint) that an app needs
- * can be described in a config object. For compatibility, the framework should
- * allow a mixture of declarative and imperative app wiring, however, apps
- * that strive for the maximum ease of maintainability should be able to describe
- * their state machine with a config object alone.
+ *  It is intended that all state machine logic including the version of
+ *  baseapp and tx handlers (and possibly even Tendermint) that an app needs
+ *  can be described in a config object. For compatibility, the framework should
+ *  allow a mixture of declarative and imperative app wiring, however, apps
+ *  that strive for the maximum ease of maintainability should be able to describe
+ *  their state machine with a config object alone.
  */
 export interface Config {
   /** modules are the module configurations for the app. */
@@ -19,12 +19,12 @@ export interface Config {
 
 /**
  * Config represents the configuration for a Cosmos SDK ABCI app.
- * It is intended that all state machine logic including the version of
- * baseapp and tx handlers (and possibly even Tendermint) that an app needs
- * can be described in a config object. For compatibility, the framework should
- * allow a mixture of declarative and imperative app wiring, however, apps
- * that strive for the maximum ease of maintainability should be able to describe
- * their state machine with a config object alone.
+ *  It is intended that all state machine logic including the version of
+ *  baseapp and tx handlers (and possibly even Tendermint) that an app needs
+ *  can be described in a config object. For compatibility, the framework should
+ *  allow a mixture of declarative and imperative app wiring, however, apps
+ *  that strive for the maximum ease of maintainability should be able to describe
+ *  their state machine with a config object alone.
  */
 export interface ConfigSDKType {
   /** modules are the module configurations for the app. */
@@ -35,21 +35,21 @@ export interface ConfigSDKType {
 export interface ModuleConfig {
   /**
    * name is the unique name of the module within the app. It should be a name
-   * that persists between different versions of a module so that modules
-   * can be smoothly upgraded to new versions.
+   *  that persists between different versions of a module so that modules
+   *  can be smoothly upgraded to new versions.
    * 
-   * For example, for the module cosmos.bank.module.v1.Module, we may chose
-   * to simply name the module "bank" in the app. When we upgrade to
-   * cosmos.bank.module.v2.Module, the app-specific name "bank" stays the same
-   * and the framework knows that the v2 module should receive all the same state
-   * that the v1 module had. Note: modules should provide info on which versions
-   * they can migrate from in the ModuleDescriptor.can_migration_from field.
+   *  For example, for the module cosmos.bank.module.v1.Module, we may chose
+   *  to simply name the module "bank" in the app. When we upgrade to
+   *  cosmos.bank.module.v2.Module, the app-specific name "bank" stays the same
+   *  and the framework knows that the v2 module should receive all the same state
+   *  that the v1 module had. Note: modules should provide info on which versions
+   *  they can migrate from in the ModuleDescriptor.can_migration_from field.
    */
   name: string;
 
   /**
    * config is the config object for the module. Module config messages should
-   * define a ModuleDescriptor using the cosmos.app.v1alpha1.is_module extension.
+   *  define a ModuleDescriptor using the cosmos.app.v1alpha1.is_module extension.
    */
   config: Any;
 }
@@ -58,21 +58,21 @@ export interface ModuleConfig {
 export interface ModuleConfigSDKType {
   /**
    * name is the unique name of the module within the app. It should be a name
-   * that persists between different versions of a module so that modules
-   * can be smoothly upgraded to new versions.
+   *  that persists between different versions of a module so that modules
+   *  can be smoothly upgraded to new versions.
    * 
-   * For example, for the module cosmos.bank.module.v1.Module, we may chose
-   * to simply name the module "bank" in the app. When we upgrade to
-   * cosmos.bank.module.v2.Module, the app-specific name "bank" stays the same
-   * and the framework knows that the v2 module should receive all the same state
-   * that the v1 module had. Note: modules should provide info on which versions
-   * they can migrate from in the ModuleDescriptor.can_migration_from field.
+   *  For example, for the module cosmos.bank.module.v1.Module, we may chose
+   *  to simply name the module "bank" in the app. When we upgrade to
+   *  cosmos.bank.module.v2.Module, the app-specific name "bank" stays the same
+   *  and the framework knows that the v2 module should receive all the same state
+   *  that the v1 module had. Note: modules should provide info on which versions
+   *  they can migrate from in the ModuleDescriptor.can_migration_from field.
    */
   name: string;
 
   /**
    * config is the config object for the module. Module config messages should
-   * define a ModuleDescriptor using the cosmos.app.v1alpha1.is_module extension.
+   *  define a ModuleDescriptor using the cosmos.app.v1alpha1.is_module extension.
    */
   config: AnySDKType;
 }

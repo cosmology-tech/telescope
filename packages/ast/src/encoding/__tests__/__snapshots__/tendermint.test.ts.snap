@@ -3,7 +3,7 @@
 exports[`ibc/lightclients/tendermint/v1/tendermint duration 1`] = `
 "/**
  * ClientState from Tendermint tracks the current validator set, latest height,
- * and a possible frozen height.
+ *  and a possible frozen height.
  */
 export interface ClientState {
   chainId: string;
@@ -11,7 +11,7 @@ export interface ClientState {
 
   /**
    * duration of the period since the LastestTimestamp during which the
-   * submitted headers are valid for upgrade
+   *  submitted headers are valid for upgrade
    */
   trustingPeriod: Duration;
 
@@ -32,24 +32,24 @@ export interface ClientState {
 
   /**
    * Path at which next upgraded client will be committed.
-   * Each element corresponds to the key for a single CommitmentProof in the
-   * chained proof. NOTE: ClientState must stored under
-   * \`{upgradePath}/{upgradeHeight}/clientState\` ConsensusState must be stored
-   * under \`{upgradepath}/{upgradeHeight}/consensusState\` For SDK chains using
-   * the default upgrade module, upgrade_path should be []string{\\"upgrade\\",
-   * \\"upgradedIBCState\\"}\`
+   *  Each element corresponds to the key for a single CommitmentProof in the
+   *  chained proof. NOTE: ClientState must stored under
+   *  \`{upgradePath}/{upgradeHeight}/clientState\` ConsensusState must be stored
+   *  under \`{upgradepath}/{upgradeHeight}/consensusState\` For SDK chains using
+   *  the default upgrade module, upgrade_path should be []string{\\"upgrade\\",
+   *  \\"upgradedIBCState\\"}\`
    */
   upgradePath: string[];
 
   /**
    * This flag, when set to true, will allow governance to recover a client
-   * which has expired
+   *  which has expired
    */
   allowUpdateAfterExpiry: boolean;
 
   /**
    * This flag, when set to true, will allow governance to unfreeze a client
-   * whose chain has experienced a misbehaviour event
+   *  whose chain has experienced a misbehaviour event
    */
   allowUpdateAfterMisbehaviour: boolean;
 }"
@@ -449,7 +449,7 @@ exports[`ibc/lightclients/tendermint/v1/tendermint duration 4`] = `
 exports[`ibc/lightclients/tendermint/v1/tendermint string 1`] = `
 "/**
  * ClientState from Tendermint tracks the current validator set, latest height,
- * and a possible frozen height.
+ *  and a possible frozen height.
  */
 export interface ClientState {
   chainId: string;
@@ -457,7 +457,7 @@ export interface ClientState {
 
   /**
    * duration of the period since the LastestTimestamp during which the
-   * submitted headers are valid for upgrade
+   *  submitted headers are valid for upgrade
    */
   trustingPeriod: string;
 
@@ -478,24 +478,24 @@ export interface ClientState {
 
   /**
    * Path at which next upgraded client will be committed.
-   * Each element corresponds to the key for a single CommitmentProof in the
-   * chained proof. NOTE: ClientState must stored under
-   * \`{upgradePath}/{upgradeHeight}/clientState\` ConsensusState must be stored
-   * under \`{upgradepath}/{upgradeHeight}/consensusState\` For SDK chains using
-   * the default upgrade module, upgrade_path should be []string{\\"upgrade\\",
-   * \\"upgradedIBCState\\"}\`
+   *  Each element corresponds to the key for a single CommitmentProof in the
+   *  chained proof. NOTE: ClientState must stored under
+   *  \`{upgradePath}/{upgradeHeight}/clientState\` ConsensusState must be stored
+   *  under \`{upgradepath}/{upgradeHeight}/consensusState\` For SDK chains using
+   *  the default upgrade module, upgrade_path should be []string{\\"upgrade\\",
+   *  \\"upgradedIBCState\\"}\`
    */
   upgradePath: string[];
 
   /**
    * This flag, when set to true, will allow governance to recover a client
-   * which has expired
+   *  which has expired
    */
   allowUpdateAfterExpiry: boolean;
 
   /**
    * This flag, when set to true, will allow governance to unfreeze a client
-   * whose chain has experienced a misbehaviour event
+   *  whose chain has experienced a misbehaviour event
    */
   allowUpdateAfterMisbehaviour: boolean;
 }"

@@ -42,7 +42,7 @@ export interface StoreCodeProposalSDKType {
 
 /**
  * InstantiateContractProposal gov proposal content type to instantiate a
- * contract.
+ *  contract.
  */
 export interface InstantiateContractProposal {
   /** Title is a short summary */
@@ -72,7 +72,7 @@ export interface InstantiateContractProposal {
 
 /**
  * InstantiateContractProposal gov proposal content type to instantiate a
- * contract.
+ *  contract.
  */
 export interface InstantiateContractProposalSDKType {
   /** Title is a short summary */
@@ -168,7 +168,7 @@ export interface SudoContractProposalSDKType {
 
 /**
  * ExecuteContractProposal gov proposal content type to call execute on a
- * contract.
+ *  contract.
  */
 export interface ExecuteContractProposal {
   /** Title is a short summary */
@@ -192,7 +192,7 @@ export interface ExecuteContractProposal {
 
 /**
  * ExecuteContractProposal gov proposal content type to call execute on a
- * contract.
+ *  contract.
  */
 export interface ExecuteContractProposalSDKType {
   /** Title is a short summary */
@@ -246,7 +246,7 @@ export interface UpdateAdminProposalSDKType {
 
 /**
  * ClearAdminProposal gov proposal content type to clear the admin of a
- * contract.
+ *  contract.
  */
 export interface ClearAdminProposal {
   /** Title is a short summary */
@@ -261,7 +261,7 @@ export interface ClearAdminProposal {
 
 /**
  * ClearAdminProposal gov proposal content type to clear the admin of a
- * contract.
+ *  contract.
  */
 export interface ClearAdminProposalSDKType {
   /** Title is a short summary */
@@ -276,7 +276,7 @@ export interface ClearAdminProposalSDKType {
 
 /**
  * PinCodesProposal gov proposal content type to pin a set of code ids in the
- * wasmvm cache.
+ *  wasmvm cache.
  */
 export interface PinCodesProposal {
   /** Title is a short summary */
@@ -291,7 +291,7 @@ export interface PinCodesProposal {
 
 /**
  * PinCodesProposal gov proposal content type to pin a set of code ids in the
- * wasmvm cache.
+ *  wasmvm cache.
  */
 export interface PinCodesProposalSDKType {
   /** Title is a short summary */
@@ -306,7 +306,7 @@ export interface PinCodesProposalSDKType {
 
 /**
  * UnpinCodesProposal gov proposal content type to unpin a set of code ids in
- * the wasmvm cache.
+ *  the wasmvm cache.
  */
 export interface UnpinCodesProposal {
   /** Title is a short summary */
@@ -321,7 +321,7 @@ export interface UnpinCodesProposal {
 
 /**
  * UnpinCodesProposal gov proposal content type to unpin a set of code ids in
- * the wasmvm cache.
+ *  the wasmvm cache.
  */
 export interface UnpinCodesProposalSDKType {
   /** Title is a short summary */

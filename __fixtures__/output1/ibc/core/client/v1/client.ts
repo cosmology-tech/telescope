@@ -6,7 +6,7 @@ export const protobufPackage = "ibc.core.client.v1";
 
 /**
  * IdentifiedClientState defines a client state with an additional client
- * identifier field.
+ *  identifier field.
  */
 export interface IdentifiedClientState {
   /** client identifier */
@@ -18,7 +18,7 @@ export interface IdentifiedClientState {
 
 /**
  * IdentifiedClientState defines a client state with an additional client
- * identifier field.
+ *  identifier field.
  */
 export interface IdentifiedClientStateSDKType {
   /** client identifier */
@@ -30,7 +30,7 @@ export interface IdentifiedClientStateSDKType {
 
 /**
  * ConsensusStateWithHeight defines a consensus state with an additional height
- * field.
+ *  field.
  */
 export interface ConsensusStateWithHeight {
   /** consensus state height */
@@ -42,7 +42,7 @@ export interface ConsensusStateWithHeight {
 
 /**
  * ConsensusStateWithHeight defines a consensus state with an additional height
- * field.
+ *  field.
  */
 export interface ConsensusStateWithHeightSDKType {
   /** consensus state height */
@@ -54,7 +54,7 @@ export interface ConsensusStateWithHeightSDKType {
 
 /**
  * ClientConsensusStates defines all the stored consensus states for a given
- * client.
+ *  client.
  */
 export interface ClientConsensusStates {
   /** client identifier */
@@ -66,7 +66,7 @@ export interface ClientConsensusStates {
 
 /**
  * ClientConsensusStates defines all the stored consensus states for a given
- * client.
+ *  client.
  */
 export interface ClientConsensusStatesSDKType {
   /** client identifier */
@@ -78,9 +78,9 @@ export interface ClientConsensusStatesSDKType {
 
 /**
  * ClientUpdateProposal is a governance proposal. If it passes, the substitute
- * client's latest consensus state is copied over to the subject client. The proposal
- * handler may fail if the subject and the substitute do not match in client and
- * chain parameters (with exception to latest height, frozen height, and chain-id).
+ *  client's latest consensus state is copied over to the subject client. The proposal
+ *  handler may fail if the subject and the substitute do not match in client and
+ *  chain parameters (with exception to latest height, frozen height, and chain-id).
  */
 export interface ClientUpdateProposal {
   /** the title of the update proposal */
@@ -94,16 +94,16 @@ export interface ClientUpdateProposal {
 
   /**
    * the substitute client identifier for the client standing in for the subject
-   * client
+   *  client
    */
   substituteClientId: string;
 }
 
 /**
  * ClientUpdateProposal is a governance proposal. If it passes, the substitute
- * client's latest consensus state is copied over to the subject client. The proposal
- * handler may fail if the subject and the substitute do not match in client and
- * chain parameters (with exception to latest height, frozen height, and chain-id).
+ *  client's latest consensus state is copied over to the subject client. The proposal
+ *  handler may fail if the subject and the substitute do not match in client and
+ *  chain parameters (with exception to latest height, frozen height, and chain-id).
  */
 export interface ClientUpdateProposalSDKType {
   /** the title of the update proposal */
@@ -117,14 +117,14 @@ export interface ClientUpdateProposalSDKType {
 
   /**
    * the substitute client identifier for the client standing in for the subject
-   * client
+   *  client
    */
   substitute_client_id: string;
 }
 
 /**
  * UpgradeProposal is a gov Content type for initiating an IBC breaking
- * upgrade.
+ *  upgrade.
  */
 export interface UpgradeProposal {
   title: string;
@@ -133,18 +133,18 @@ export interface UpgradeProposal {
 
   /**
    * An UpgradedClientState must be provided to perform an IBC breaking upgrade.
-   * This will make the chain commit to the correct upgraded (self) client state
-   * before the upgrade occurs, so that connecting chains can verify that the
-   * new upgraded client is valid by verifying a proof on the previous version
-   * of the chain. This will allow IBC connections to persist smoothly across
-   * planned chain upgrades
+   *  This will make the chain commit to the correct upgraded (self) client state
+   *  before the upgrade occurs, so that connecting chains can verify that the
+   *  new upgraded client is valid by verifying a proof on the previous version
+   *  of the chain. This will allow IBC connections to persist smoothly across
+   *  planned chain upgrades
    */
   upgradedClientState: Any;
 }
 
 /**
  * UpgradeProposal is a gov Content type for initiating an IBC breaking
- * upgrade.
+ *  upgrade.
  */
 export interface UpgradeProposalSDKType {
   title: string;
@@ -153,26 +153,26 @@ export interface UpgradeProposalSDKType {
 
   /**
    * An UpgradedClientState must be provided to perform an IBC breaking upgrade.
-   * This will make the chain commit to the correct upgraded (self) client state
-   * before the upgrade occurs, so that connecting chains can verify that the
-   * new upgraded client is valid by verifying a proof on the previous version
-   * of the chain. This will allow IBC connections to persist smoothly across
-   * planned chain upgrades
+   *  This will make the chain commit to the correct upgraded (self) client state
+   *  before the upgrade occurs, so that connecting chains can verify that the
+   *  new upgraded client is valid by verifying a proof on the previous version
+   *  of the chain. This will allow IBC connections to persist smoothly across
+   *  planned chain upgrades
    */
   upgraded_client_state: AnySDKType;
 }
 
 /**
  * Height is a monotonically increasing data type
- * that can be compared against another Height for the purposes of updating and
- * freezing clients
+ *  that can be compared against another Height for the purposes of updating and
+ *  freezing clients
  * 
- * Normally the RevisionHeight is incremented at each height while keeping
- * RevisionNumber the same. However some consensus algorithms may choose to
- * reset the height in certain conditions e.g. hard forks, state-machine
- * breaking changes In these cases, the RevisionNumber is incremented so that
- * height continues to be monitonically increasing even as the RevisionHeight
- * gets reset
+ *  Normally the RevisionHeight is incremented at each height while keeping
+ *  RevisionNumber the same. However some consensus algorithms may choose to
+ *  reset the height in certain conditions e.g. hard forks, state-machine
+ *  breaking changes In these cases, the RevisionNumber is incremented so that
+ *  height continues to be monitonically increasing even as the RevisionHeight
+ *  gets reset
  */
 export interface Height {
   /** the revision that the client is currently on */
@@ -184,15 +184,15 @@ export interface Height {
 
 /**
  * Height is a monotonically increasing data type
- * that can be compared against another Height for the purposes of updating and
- * freezing clients
+ *  that can be compared against another Height for the purposes of updating and
+ *  freezing clients
  * 
- * Normally the RevisionHeight is incremented at each height while keeping
- * RevisionNumber the same. However some consensus algorithms may choose to
- * reset the height in certain conditions e.g. hard forks, state-machine
- * breaking changes In these cases, the RevisionNumber is incremented so that
- * height continues to be monitonically increasing even as the RevisionHeight
- * gets reset
+ *  Normally the RevisionHeight is incremented at each height while keeping
+ *  RevisionNumber the same. However some consensus algorithms may choose to
+ *  reset the height in certain conditions e.g. hard forks, state-machine
+ *  breaking changes In these cases, the RevisionNumber is incremented so that
+ *  height continues to be monitonically increasing even as the RevisionHeight
+ *  gets reset
  */
 export interface HeightSDKType {
   /** the revision that the client is currently on */

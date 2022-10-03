@@ -6,7 +6,7 @@ export const protobufPackage = "cosmwasm.wasm.v1";
 
 /**
  * QueryContractInfoRequest is the request type for the Query/ContractInfo RPC
- * method
+ *  method
  */
 export interface QueryContractInfoRequest {
   /** address is the address of the contract to query */
@@ -15,7 +15,7 @@ export interface QueryContractInfoRequest {
 
 /**
  * QueryContractInfoRequest is the request type for the Query/ContractInfo RPC
- * method
+ *  method
  */
 export interface QueryContractInfoRequestSDKType {
   /** address is the address of the contract to query */
@@ -24,7 +24,7 @@ export interface QueryContractInfoRequestSDKType {
 
 /**
  * QueryContractInfoResponse is the response type for the Query/ContractInfo RPC
- * method
+ *  method
  */
 export interface QueryContractInfoResponse {
   /** address is the address of the contract */
@@ -34,7 +34,7 @@ export interface QueryContractInfoResponse {
 
 /**
  * QueryContractInfoResponse is the response type for the Query/ContractInfo RPC
- * method
+ *  method
  */
 export interface QueryContractInfoResponseSDKType {
   /** address is the address of the contract */
@@ -44,7 +44,7 @@ export interface QueryContractInfoResponseSDKType {
 
 /**
  * QueryContractHistoryRequest is the request type for the Query/ContractHistory
- * RPC method
+ *  RPC method
  */
 export interface QueryContractHistoryRequest {
   /** address is the address of the contract to query */
@@ -56,7 +56,7 @@ export interface QueryContractHistoryRequest {
 
 /**
  * QueryContractHistoryRequest is the request type for the Query/ContractHistory
- * RPC method
+ *  RPC method
  */
 export interface QueryContractHistoryRequestSDKType {
   /** address is the address of the contract to query */
@@ -68,7 +68,7 @@ export interface QueryContractHistoryRequestSDKType {
 
 /**
  * QueryContractHistoryResponse is the response type for the
- * Query/ContractHistory RPC method
+ *  Query/ContractHistory RPC method
  */
 export interface QueryContractHistoryResponse {
   entries: ContractCodeHistoryEntry[];
@@ -79,7 +79,7 @@ export interface QueryContractHistoryResponse {
 
 /**
  * QueryContractHistoryResponse is the response type for the
- * Query/ContractHistory RPC method
+ *  Query/ContractHistory RPC method
  */
 export interface QueryContractHistoryResponseSDKType {
   entries: ContractCodeHistoryEntrySDKType[];
@@ -90,12 +90,12 @@ export interface QueryContractHistoryResponseSDKType {
 
 /**
  * QueryContractsByCodeRequest is the request type for the Query/ContractsByCode
- * RPC method
+ *  RPC method
  */
 export interface QueryContractsByCodeRequest {
   /**
    * grpc-gateway_out does not support Go style CodID
-   * pagination defines an optional pagination for the request.
+   *  pagination defines an optional pagination for the request.
    */
   codeId: Long;
   pagination?: PageRequest;
@@ -103,12 +103,12 @@ export interface QueryContractsByCodeRequest {
 
 /**
  * QueryContractsByCodeRequest is the request type for the Query/ContractsByCode
- * RPC method
+ *  RPC method
  */
 export interface QueryContractsByCodeRequestSDKType {
   /**
    * grpc-gateway_out does not support Go style CodID
-   * pagination defines an optional pagination for the request.
+   *  pagination defines an optional pagination for the request.
    */
   code_id: Long;
   pagination?: PageRequestSDKType;
@@ -116,7 +116,7 @@ export interface QueryContractsByCodeRequestSDKType {
 
 /**
  * QueryContractsByCodeResponse is the response type for the
- * Query/ContractsByCode RPC method
+ *  Query/ContractsByCode RPC method
  */
 export interface QueryContractsByCodeResponse {
   /** contracts are a set of contract addresses */
@@ -128,7 +128,7 @@ export interface QueryContractsByCodeResponse {
 
 /**
  * QueryContractsByCodeResponse is the response type for the
- * Query/ContractsByCode RPC method
+ *  Query/ContractsByCode RPC method
  */
 export interface QueryContractsByCodeResponseSDKType {
   /** contracts are a set of contract addresses */
@@ -140,7 +140,7 @@ export interface QueryContractsByCodeResponseSDKType {
 
 /**
  * QueryAllContractStateRequest is the request type for the
- * Query/AllContractState RPC method
+ *  Query/AllContractState RPC method
  */
 export interface QueryAllContractStateRequest {
   /** address is the address of the contract */
@@ -152,7 +152,7 @@ export interface QueryAllContractStateRequest {
 
 /**
  * QueryAllContractStateRequest is the request type for the
- * Query/AllContractState RPC method
+ *  Query/AllContractState RPC method
  */
 export interface QueryAllContractStateRequestSDKType {
   /** address is the address of the contract */
@@ -164,7 +164,7 @@ export interface QueryAllContractStateRequestSDKType {
 
 /**
  * QueryAllContractStateResponse is the response type for the
- * Query/AllContractState RPC method
+ *  Query/AllContractState RPC method
  */
 export interface QueryAllContractStateResponse {
   models: Model[];
@@ -175,7 +175,7 @@ export interface QueryAllContractStateResponse {
 
 /**
  * QueryAllContractStateResponse is the response type for the
- * Query/AllContractState RPC method
+ *  Query/AllContractState RPC method
  */
 export interface QueryAllContractStateResponseSDKType {
   models: ModelSDKType[];
@@ -186,7 +186,7 @@ export interface QueryAllContractStateResponseSDKType {
 
 /**
  * QueryRawContractStateRequest is the request type for the
- * Query/RawContractState RPC method
+ *  Query/RawContractState RPC method
  */
 export interface QueryRawContractStateRequest {
   /** address is the address of the contract */
@@ -196,7 +196,7 @@ export interface QueryRawContractStateRequest {
 
 /**
  * QueryRawContractStateRequest is the request type for the
- * Query/RawContractState RPC method
+ *  Query/RawContractState RPC method
  */
 export interface QueryRawContractStateRequestSDKType {
   /** address is the address of the contract */
@@ -206,7 +206,7 @@ export interface QueryRawContractStateRequestSDKType {
 
 /**
  * QueryRawContractStateResponse is the response type for the
- * Query/RawContractState RPC method
+ *  Query/RawContractState RPC method
  */
 export interface QueryRawContractStateResponse {
   /** Data contains the raw store data */
@@ -215,7 +215,7 @@ export interface QueryRawContractStateResponse {
 
 /**
  * QueryRawContractStateResponse is the response type for the
- * Query/RawContractState RPC method
+ *  Query/RawContractState RPC method
  */
 export interface QueryRawContractStateResponseSDKType {
   /** Data contains the raw store data */
@@ -224,7 +224,7 @@ export interface QueryRawContractStateResponseSDKType {
 
 /**
  * QuerySmartContractStateRequest is the request type for the
- * Query/SmartContractState RPC method
+ *  Query/SmartContractState RPC method
  */
 export interface QuerySmartContractStateRequest {
   /** address is the address of the contract */
@@ -236,7 +236,7 @@ export interface QuerySmartContractStateRequest {
 
 /**
  * QuerySmartContractStateRequest is the request type for the
- * Query/SmartContractState RPC method
+ *  Query/SmartContractState RPC method
  */
 export interface QuerySmartContractStateRequestSDKType {
   /** address is the address of the contract */
@@ -248,7 +248,7 @@ export interface QuerySmartContractStateRequestSDKType {
 
 /**
  * QuerySmartContractStateResponse is the response type for the
- * Query/SmartContractState RPC method
+ *  Query/SmartContractState RPC method
  */
 export interface QuerySmartContractStateResponse {
   /** Data contains the json data returned from the smart contract */
@@ -257,7 +257,7 @@ export interface QuerySmartContractStateResponse {
 
 /**
  * QuerySmartContractStateResponse is the response type for the
- * Query/SmartContractState RPC method
+ *  Query/SmartContractState RPC method
  */
 export interface QuerySmartContractStateResponseSDKType {
   /** Data contains the json data returned from the smart contract */
@@ -332,7 +332,7 @@ export interface QueryCodesResponseSDKType {
 
 /**
  * QueryPinnedCodesRequest is the request type for the Query/PinnedCodes
- * RPC method
+ *  RPC method
  */
 export interface QueryPinnedCodesRequest {
   /** pagination defines an optional pagination for the request. */
@@ -341,7 +341,7 @@ export interface QueryPinnedCodesRequest {
 
 /**
  * QueryPinnedCodesRequest is the request type for the Query/PinnedCodes
- * RPC method
+ *  RPC method
  */
 export interface QueryPinnedCodesRequestSDKType {
   /** pagination defines an optional pagination for the request. */
@@ -350,7 +350,7 @@ export interface QueryPinnedCodesRequestSDKType {
 
 /**
  * QueryPinnedCodesResponse is the response type for the
- * Query/PinnedCodes RPC method
+ *  Query/PinnedCodes RPC method
  */
 export interface QueryPinnedCodesResponse {
   codeIds: Long[];
@@ -361,7 +361,7 @@ export interface QueryPinnedCodesResponse {
 
 /**
  * QueryPinnedCodesResponse is the response type for the
- * Query/PinnedCodes RPC method
+ *  Query/PinnedCodes RPC method
  */
 export interface QueryPinnedCodesResponseSDKType {
   code_ids: Long[];

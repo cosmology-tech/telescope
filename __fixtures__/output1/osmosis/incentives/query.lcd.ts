@@ -129,8 +129,8 @@ export class LCDQueryClient {
   }
 
   /* RewardsEst returns an estimate of the rewards at a future specific time.
-  The querier either provides an address or a set of locks
-  for which they want to find the associated rewards. */
+   The querier either provides an address or a set of locks
+   for which they want to find the associated rewards. */
   async rewardsEst(params: RewardsEstRequest): Promise<RewardsEstResponseSDKType> {
     const options: any = {
       params: {}

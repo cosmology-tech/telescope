@@ -13,7 +13,7 @@ export enum IssueDetails_Severity {
 
   /**
    * DEPRECATION - Deprecation issue for statements and method that may no longer be
-   * supported or maintained.
+   *  supported or maintained.
    */
   DEPRECATION = 1,
 
@@ -32,7 +32,7 @@ export enum IssueDetails_SeveritySDKType {
 
   /**
    * DEPRECATION - Deprecation issue for statements and method that may no longer be
-   * supported or maintained.
+   *  supported or maintained.
    */
   DEPRECATION = 1,
 
@@ -141,21 +141,21 @@ export interface CheckRequest {
 
   /**
    * Declarations of types for external variables and functions.
-   * Required if program uses external variables or functions
-   * not in the default environment.
+   *  Required if program uses external variables or functions
+   *  not in the default environment.
    */
   typeEnv: Decl[];
 
   /**
    * The protocol buffer context.  See "Name Resolution" in the
-   * Language Definition.
+   *  Language Definition.
    */
   container: string;
 
   /**
    * If true, use only the declarations in [type_env][google.api.expr.conformance.v1alpha1.CheckRequest.type_env].  If false (default),
-   * add declarations for the standard definitions to the type environment.  See
-   * "Standard Definitions" in the Language Definition.
+   *  add declarations for the standard definitions to the type environment.  See
+   *  "Standard Definitions" in the Language Definition.
    */
   noStdEnv: boolean;
 }
@@ -167,21 +167,21 @@ export interface CheckRequestSDKType {
 
   /**
    * Declarations of types for external variables and functions.
-   * Required if program uses external variables or functions
-   * not in the default environment.
+   *  Required if program uses external variables or functions
+   *  not in the default environment.
    */
   type_env: DeclSDKType[];
 
   /**
    * The protocol buffer context.  See "Name Resolution" in the
-   * Language Definition.
+   *  Language Definition.
    */
   container: string;
 
   /**
    * If true, use only the declarations in [type_env][google.api.expr.conformance.v1alpha1.CheckRequest.type_env].  If false (default),
-   * add declarations for the standard definitions to the type environment.  See
-   * "Standard Definitions" in the Language Definition.
+   *  add declarations for the standard definitions to the type environment.  See
+   *  "Standard Definitions" in the Language Definition.
    */
   no_std_env: boolean;
 }
@@ -222,7 +222,7 @@ export interface EvalRequest {
 
   /**
    * Bindings for the external variables.  The types SHOULD be compatible
-   * with the type environment in [CheckRequest][google.api.expr.conformance.v1alpha1.CheckRequest], if checked.
+   *  with the type environment in [CheckRequest][google.api.expr.conformance.v1alpha1.CheckRequest], if checked.
    */
   bindings: {
     [key: string]: ExprValue;
@@ -242,7 +242,7 @@ export interface EvalRequestSDKType {
 
   /**
    * Bindings for the external variables.  The types SHOULD be compatible
-   * with the type environment in [CheckRequest][google.api.expr.conformance.v1alpha1.CheckRequest], if checked.
+   *  with the type environment in [CheckRequest][google.api.expr.conformance.v1alpha1.CheckRequest], if checked.
    */
   bindings: {
     [key: string]: ExprValueSDKType;
@@ -259,9 +259,9 @@ export interface EvalResponse {
 
   /**
    * Any number of issues with [StatusDetails][] as the details.
-   * Note that CEL execution errors are reified into [ExprValue][].
-   * Nevertheless, we'll allow out-of-band issues to be raised,
-   * which also makes the replies more regular.
+   *  Note that CEL execution errors are reified into [ExprValue][].
+   *  Nevertheless, we'll allow out-of-band issues to be raised,
+   *  which also makes the replies more regular.
    */
   issues: Status[];
 }
@@ -273,17 +273,17 @@ export interface EvalResponseSDKType {
 
   /**
    * Any number of issues with [StatusDetails][] as the details.
-   * Note that CEL execution errors are reified into [ExprValue][].
-   * Nevertheless, we'll allow out-of-band issues to be raised,
-   * which also makes the replies more regular.
+   *  Note that CEL execution errors are reified into [ExprValue][].
+   *  Nevertheless, we'll allow out-of-band issues to be raised,
+   *  which also makes the replies more regular.
    */
   issues: StatusSDKType[];
 }
 
 /**
  * Warnings or errors in service execution are represented by
- * [google.rpc.Status][google.rpc.Status] messages, with the following message
- * in the details field.
+ *  [google.rpc.Status][google.rpc.Status] messages, with the following message
+ *  in the details field.
  */
 export interface IssueDetails {
   /** The severity of the issue. */
@@ -298,8 +298,8 @@ export interface IssueDetails {
 
 /**
  * Warnings or errors in service execution are represented by
- * [google.rpc.Status][google.rpc.Status] messages, with the following message
- * in the details field.
+ *  [google.rpc.Status][google.rpc.Status] messages, with the following message
+ *  in the details field.
  */
 export interface IssueDetailsSDKType {
   /** The severity of the issue. */

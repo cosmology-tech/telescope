@@ -48,7 +48,7 @@ export interface RecordSDKType {
 
 /**
  * Item is a keyring item stored in a keyring backend.
- * Local item
+ *  Local item
  */
 export interface Record_Local {
   privKey: Any;
@@ -57,7 +57,7 @@ export interface Record_Local {
 
 /**
  * Item is a keyring item stored in a keyring backend.
- * Local item
+ *  Local item
  */
 export interface Record_LocalSDKType {
   priv_key: AnySDKType;

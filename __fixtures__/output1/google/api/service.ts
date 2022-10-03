@@ -24,34 +24,34 @@ export const protobufPackage = "google.api";
 
 /**
  * `Service` is the root object of Google service configuration schema. It
- * describes basic information about a service, such as the name and the
- * title, and delegates other aspects to sub-sections. Each sub-section is
- * either a proto message or a repeated proto message that configures a
- * specific aspect, such as auth. See each proto message definition for details.
+ *  describes basic information about a service, such as the name and the
+ *  title, and delegates other aspects to sub-sections. Each sub-section is
+ *  either a proto message or a repeated proto message that configures a
+ *  specific aspect, such as auth. See each proto message definition for details.
  * 
- * Example:
+ *  Example:
  * 
- * type: google.api.Service
- * name: calendar.googleapis.com
- * title: Google Calendar API
- * apis:
- * - name: google.calendar.v3.Calendar
- * authentication:
- * providers:
- * - id: google_calendar_auth
- * jwks_uri: https://www.googleapis.com/oauth2/v1/certs
- * issuer: https://securetoken.google.com
- * rules:
- * - selector: "*"
- * requirements:
- * provider_id: google_calendar_auth
+ *      type: google.api.Service
+ *      name: calendar.googleapis.com
+ *      title: Google Calendar API
+ *      apis:
+ *      - name: google.calendar.v3.Calendar
+ *      authentication:
+ *        providers:
+ *        - id: google_calendar_auth
+ *          jwks_uri: https://www.googleapis.com/oauth2/v1/certs
+ *          issuer: https://securetoken.google.com
+ *        rules:
+ *        - selector: "*"
+ *          requirements:
+ *            provider_id: google_calendar_auth
  */
 export interface Service {
   /**
    * The service name, which is a DNS-like logical identifier for the
-   * service, such as `calendar.googleapis.com`. The service name
-   * typically goes through DNS verification to make sure the owner
-   * of the service also owns the DNS name.
+   *  service, such as `calendar.googleapis.com`. The service name
+   *  typically goes through DNS verification to make sure the owner
+   *  of the service also owns the DNS name.
    */
   name: string;
 
@@ -63,41 +63,41 @@ export interface Service {
 
   /**
    * A unique ID for a specific instance of this message, typically assigned
-   * by the client for tracking purpose. Must be no longer than 63 characters
-   * and only lower case letters, digits, '.', '_' and '-' are allowed. If
-   * empty, the server may choose to generate one instead.
+   *  by the client for tracking purpose. Must be no longer than 63 characters
+   *  and only lower case letters, digits, '.', '_' and '-' are allowed. If
+   *  empty, the server may choose to generate one instead.
    */
   id: string;
 
   /**
    * A list of API interfaces exported by this service. Only the `name` field
-   * of the [google.protobuf.Api][google.protobuf.Api] needs to be provided by the configuration
-   * author, as the remaining fields will be derived from the IDL during the
-   * normalization process. It is an error to specify an API interface here
-   * which cannot be resolved against the associated IDL files.
+   *  of the [google.protobuf.Api][google.protobuf.Api] needs to be provided by the configuration
+   *  author, as the remaining fields will be derived from the IDL during the
+   *  normalization process. It is an error to specify an API interface here
+   *  which cannot be resolved against the associated IDL files.
    */
   apis: Api[];
 
   /**
    * A list of all proto message types included in this API service.
-   * Types referenced directly or indirectly by the `apis` are
-   * automatically included.  Messages which are not referenced but
-   * shall be included, such as types used by the `google.protobuf.Any` type,
-   * should be listed here by name. Example:
+   *  Types referenced directly or indirectly by the `apis` are
+   *  automatically included.  Messages which are not referenced but
+   *  shall be included, such as types used by the `google.protobuf.Any` type,
+   *  should be listed here by name. Example:
    * 
-   * types:
-   * - name: google.protobuf.Int32
+   *      types:
+   *      - name: google.protobuf.Int32
    */
   types: Type[];
 
   /**
    * A list of all enum types included in this API service.  Enums
-   * referenced directly or indirectly by the `apis` are automatically
-   * included.  Enums which are not referenced but shall be included
-   * should be listed here by name. Example:
+   *  referenced directly or indirectly by the `apis` are automatically
+   *  included.  Enums which are not referenced but shall be included
+   *  should be listed here by name. Example:
    * 
-   * enums:
-   * - name: google.someapi.v1.SomeEnum
+   *      enums:
+   *      - name: google.someapi.v1.SomeEnum
    */
   enums: Enum[];
 
@@ -124,8 +124,8 @@ export interface Service {
 
   /**
    * Configuration for network endpoints.  If this is empty, then an endpoint
-   * with the same name as the service is automatically generated to service all
-   * defined APIs.
+   *  with the same name as the service is automatically generated to service all
+   *  defined APIs.
    */
   endpoints: Endpoint[];
 
@@ -140,7 +140,7 @@ export interface Service {
 
   /**
    * Defines the monitored resources used by this service. This is required
-   * by the [Service.monitoring][google.api.Service.monitoring] and [Service.logging][google.api.Service.logging] configurations.
+   *  by the [Service.monitoring][google.api.Service.monitoring] and [Service.logging][google.api.Service.logging] configurations.
    */
   monitoredResources: MonitoredResourceDescriptor[];
 
@@ -162,8 +162,8 @@ export interface Service {
   /**
    * Obsolete. Do not use.
    * 
-   * This field has no semantic meaning. The service config compiler always
-   * sets this field to `3`.
+   *  This field has no semantic meaning. The service config compiler always
+   *  sets this field to `3`.
    */
 
   /** @deprecated */
@@ -172,34 +172,34 @@ export interface Service {
 
 /**
  * `Service` is the root object of Google service configuration schema. It
- * describes basic information about a service, such as the name and the
- * title, and delegates other aspects to sub-sections. Each sub-section is
- * either a proto message or a repeated proto message that configures a
- * specific aspect, such as auth. See each proto message definition for details.
+ *  describes basic information about a service, such as the name and the
+ *  title, and delegates other aspects to sub-sections. Each sub-section is
+ *  either a proto message or a repeated proto message that configures a
+ *  specific aspect, such as auth. See each proto message definition for details.
  * 
- * Example:
+ *  Example:
  * 
- * type: google.api.Service
- * name: calendar.googleapis.com
- * title: Google Calendar API
- * apis:
- * - name: google.calendar.v3.Calendar
- * authentication:
- * providers:
- * - id: google_calendar_auth
- * jwks_uri: https://www.googleapis.com/oauth2/v1/certs
- * issuer: https://securetoken.google.com
- * rules:
- * - selector: "*"
- * requirements:
- * provider_id: google_calendar_auth
+ *      type: google.api.Service
+ *      name: calendar.googleapis.com
+ *      title: Google Calendar API
+ *      apis:
+ *      - name: google.calendar.v3.Calendar
+ *      authentication:
+ *        providers:
+ *        - id: google_calendar_auth
+ *          jwks_uri: https://www.googleapis.com/oauth2/v1/certs
+ *          issuer: https://securetoken.google.com
+ *        rules:
+ *        - selector: "*"
+ *          requirements:
+ *            provider_id: google_calendar_auth
  */
 export interface ServiceSDKType {
   /**
    * The service name, which is a DNS-like logical identifier for the
-   * service, such as `calendar.googleapis.com`. The service name
-   * typically goes through DNS verification to make sure the owner
-   * of the service also owns the DNS name.
+   *  service, such as `calendar.googleapis.com`. The service name
+   *  typically goes through DNS verification to make sure the owner
+   *  of the service also owns the DNS name.
    */
   name: string;
 
@@ -211,41 +211,41 @@ export interface ServiceSDKType {
 
   /**
    * A unique ID for a specific instance of this message, typically assigned
-   * by the client for tracking purpose. Must be no longer than 63 characters
-   * and only lower case letters, digits, '.', '_' and '-' are allowed. If
-   * empty, the server may choose to generate one instead.
+   *  by the client for tracking purpose. Must be no longer than 63 characters
+   *  and only lower case letters, digits, '.', '_' and '-' are allowed. If
+   *  empty, the server may choose to generate one instead.
    */
   id: string;
 
   /**
    * A list of API interfaces exported by this service. Only the `name` field
-   * of the [google.protobuf.Api][google.protobuf.Api] needs to be provided by the configuration
-   * author, as the remaining fields will be derived from the IDL during the
-   * normalization process. It is an error to specify an API interface here
-   * which cannot be resolved against the associated IDL files.
+   *  of the [google.protobuf.Api][google.protobuf.Api] needs to be provided by the configuration
+   *  author, as the remaining fields will be derived from the IDL during the
+   *  normalization process. It is an error to specify an API interface here
+   *  which cannot be resolved against the associated IDL files.
    */
   apis: ApiSDKType[];
 
   /**
    * A list of all proto message types included in this API service.
-   * Types referenced directly or indirectly by the `apis` are
-   * automatically included.  Messages which are not referenced but
-   * shall be included, such as types used by the `google.protobuf.Any` type,
-   * should be listed here by name. Example:
+   *  Types referenced directly or indirectly by the `apis` are
+   *  automatically included.  Messages which are not referenced but
+   *  shall be included, such as types used by the `google.protobuf.Any` type,
+   *  should be listed here by name. Example:
    * 
-   * types:
-   * - name: google.protobuf.Int32
+   *      types:
+   *      - name: google.protobuf.Int32
    */
   types: TypeSDKType[];
 
   /**
    * A list of all enum types included in this API service.  Enums
-   * referenced directly or indirectly by the `apis` are automatically
-   * included.  Enums which are not referenced but shall be included
-   * should be listed here by name. Example:
+   *  referenced directly or indirectly by the `apis` are automatically
+   *  included.  Enums which are not referenced but shall be included
+   *  should be listed here by name. Example:
    * 
-   * enums:
-   * - name: google.someapi.v1.SomeEnum
+   *      enums:
+   *      - name: google.someapi.v1.SomeEnum
    */
   enums: EnumSDKType[];
 
@@ -272,8 +272,8 @@ export interface ServiceSDKType {
 
   /**
    * Configuration for network endpoints.  If this is empty, then an endpoint
-   * with the same name as the service is automatically generated to service all
-   * defined APIs.
+   *  with the same name as the service is automatically generated to service all
+   *  defined APIs.
    */
   endpoints: EndpointSDKType[];
 
@@ -288,7 +288,7 @@ export interface ServiceSDKType {
 
   /**
    * Defines the monitored resources used by this service. This is required
-   * by the [Service.monitoring][google.api.Service.monitoring] and [Service.logging][google.api.Service.logging] configurations.
+   *  by the [Service.monitoring][google.api.Service.monitoring] and [Service.logging][google.api.Service.logging] configurations.
    */
   monitored_resources: MonitoredResourceDescriptorSDKType[];
 
@@ -310,8 +310,8 @@ export interface ServiceSDKType {
   /**
    * Obsolete. Do not use.
    * 
-   * This field has no semantic meaning. The service config compiler always
-   * sets this field to `3`.
+   *  This field has no semantic meaning. The service config compiler always
+   *  sets this field to `3`.
    */
 
   /** @deprecated */

@@ -6,11 +6,11 @@ import { MsgRegisterDevFeeInfo, MsgRegisterDevFeeInfoSDKType, MsgRegisterDevFeeI
 export interface Msg {
   registerDevFeeInfo(request: MsgRegisterDevFeeInfo): Promise<MsgRegisterDevFeeInfoResponse>;
   /*RegisterDevFeeInfo is used by a deployer to register a new contract for
-  receiving transaction fees*/
+   receiving transaction fees*/
 
   cancelDevFeeInfo(request: MsgCancelDevFeeInfo): Promise<MsgCancelDevFeeInfoResponse>;
   /*CancelDevFeeInfo is used by a deployer to cancel a registered contract
-  and stop receiving transaction fees*/
+   and stop receiving transaction fees*/
 
   updateDevFeeInfo(request: MsgUpdateDevFeeInfo): Promise<MsgUpdateDevFeeInfoResponse>;
   /*UpdateDevFeeInfo is used by a deployer to update the withdraw address*/

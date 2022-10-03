@@ -8,15 +8,15 @@ import { MsgCreateVestingAccount, MsgCreateVestingAccountSDKType, MsgCreateVesti
 export interface Msg {
   createVestingAccount(request: MsgCreateVestingAccount): Promise<MsgCreateVestingAccountResponse>;
   /*CreateVestingAccount defines a method that enables creating a vesting
-  account.*/
+   account.*/
 
   createPermanentLockedAccount(request: MsgCreatePermanentLockedAccount): Promise<MsgCreatePermanentLockedAccountResponse>;
   /*CreatePermanentLockedAccount defines a method that enables creating a permanent
-  locked account.*/
+   locked account.*/
 
   createPeriodicVestingAccount(request: MsgCreatePeriodicVestingAccount): Promise<MsgCreatePeriodicVestingAccountResponse>;
   /*CreatePeriodicVestingAccount defines a method that enables creating a
-  periodic vesting account.*/
+   periodic vesting account.*/
 
 }
 export class MsgClientImpl implements Msg {

@@ -16,11 +16,11 @@ export interface Query {
 
   consensusState(request: QueryConsensusStateRequest): Promise<QueryConsensusStateResponse>;
   /*ConsensusState queries a consensus state associated with a client state at
-  a given height.*/
+   a given height.*/
 
   consensusStates(request: QueryConsensusStatesRequest): Promise<QueryConsensusStatesResponse>;
   /*ConsensusStates queries all the consensus state associated with a given
-  client.*/
+   client.*/
 
   clientStatus(request: QueryClientStatusRequest): Promise<QueryClientStatusResponse>;
   /*Status queries the status of an IBC client.*/

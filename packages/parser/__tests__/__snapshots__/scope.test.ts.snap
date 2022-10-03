@@ -224,8 +224,8 @@ Object {
   "_oneofsArray": null,
   "comment": "Represents a declaration of a named value or function.
 
-A declaration is part of the contract between the expression, the agent
-evaluating that expression, and the caller requesting evaluation.",
+ A declaration is part of the contract between the expression, the agent
+ evaluating that expression, and the caller requesting evaluation.",
   "extensions": undefined,
   "fields": Object {
     "function": Object {
@@ -907,10 +907,10 @@ Object {
   "_oneofsArray": Array [],
   "comment": "Identifier declaration which specifies its type and optional \`Expr\` value.
 
-An identifier without a value is a declaration that must be provided at
-evaluation time. An identifier with a value should resolve to a constant,
-but may be used in conjunction with other identifiers bound at evaluation
-time.",
+ An identifier without a value is a declaration that must be provided at
+ evaluation time. An identifier with a value should resolve to a constant,
+ but may be used in conjunction with other identifiers bound at evaluation
+ time.",
   "extensions": undefined,
   "fields": Object {
     "doc": Object {
@@ -1170,15 +1170,15 @@ Object {
   "_nestedArray": Array [],
   "_oneofsArray": Array [],
   "comment": "An overload indicates a function's parameter types and return type, and
-may optionally include a function body described in terms of [Expr][google.api.expr.v1alpha1.Expr]
-values.
+ may optionally include a function body described in terms of [Expr][google.api.expr.v1alpha1.Expr]
+ values.
 
-Functions overloads are declared in either a function or method
-call-style. For methods, the \`params[0]\` is the expected type of the
-target receiver.
+ Functions overloads are declared in either a function or method
+ call-style. For methods, the \`params[0]\` is the expected type of the
+ target receiver.
 
-Overloads must have non-overlapping argument types after erasure of all
-parameterized type variables (similar as type erasure in Java).",
+ Overloads must have non-overlapping argument types after erasure of all
+ parameterized type variables (similar as type erasure in Java).",
   "extensions": undefined,
   "fields": Object {
     "doc": Object {
@@ -1336,7 +1336,7 @@ Object {
   "comment": "Severities of issues.",
   "comments": Object {
     "DEPRECATION": "Deprecation issue for statements and method that may no longer be
-supported or maintained.",
+ supported or maintained.",
     "ERROR": "Errors such as: unmatched curly braces or variable redefinition.",
     "SEVERITY_UNSPECIFIED": "An unspecified severity.",
     "WARNING": "Warnings such as: unused variables.",

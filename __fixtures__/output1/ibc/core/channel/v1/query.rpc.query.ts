@@ -17,41 +17,41 @@ export interface Query {
 
   connectionChannels(request: QueryConnectionChannelsRequest): Promise<QueryConnectionChannelsResponse>;
   /*ConnectionChannels queries all the channels associated with a connection
-  end.*/
+   end.*/
 
   channelClientState(request: QueryChannelClientStateRequest): Promise<QueryChannelClientStateResponse>;
   /*ChannelClientState queries for the client state for the channel associated
-  with the provided channel identifiers.*/
+   with the provided channel identifiers.*/
 
   channelConsensusState(request: QueryChannelConsensusStateRequest): Promise<QueryChannelConsensusStateResponse>;
   /*ChannelConsensusState queries for the consensus state for the channel
-  associated with the provided channel identifiers.*/
+   associated with the provided channel identifiers.*/
 
   packetCommitment(request: QueryPacketCommitmentRequest): Promise<QueryPacketCommitmentResponse>;
   /*PacketCommitment queries a stored packet commitment hash.*/
 
   packetCommitments(request: QueryPacketCommitmentsRequest): Promise<QueryPacketCommitmentsResponse>;
   /*PacketCommitments returns all the packet commitments hashes associated
-  with a channel.*/
+   with a channel.*/
 
   packetReceipt(request: QueryPacketReceiptRequest): Promise<QueryPacketReceiptResponse>;
   /*PacketReceipt queries if a given packet sequence has been received on the
-  queried chain*/
+   queried chain*/
 
   packetAcknowledgement(request: QueryPacketAcknowledgementRequest): Promise<QueryPacketAcknowledgementResponse>;
   /*PacketAcknowledgement queries a stored packet acknowledgement hash.*/
 
   packetAcknowledgements(request: QueryPacketAcknowledgementsRequest): Promise<QueryPacketAcknowledgementsResponse>;
   /*PacketAcknowledgements returns all the packet acknowledgements associated
-  with a channel.*/
+   with a channel.*/
 
   unreceivedPackets(request: QueryUnreceivedPacketsRequest): Promise<QueryUnreceivedPacketsResponse>;
   /*UnreceivedPackets returns all the unreceived IBC packets associated with a
-  channel and sequences.*/
+   channel and sequences.*/
 
   unreceivedAcks(request: QueryUnreceivedAcksRequest): Promise<QueryUnreceivedAcksResponse>;
   /*UnreceivedAcks returns all the unreceived IBC acknowledgements associated
-  with a channel and sequences.*/
+   with a channel and sequences.*/
 
   nextSequenceReceive(request: QueryNextSequenceReceiveRequest): Promise<QueryNextSequenceReceiveResponse>;
   /*NextSequenceReceive returns the next receive sequence for a given channel.*/

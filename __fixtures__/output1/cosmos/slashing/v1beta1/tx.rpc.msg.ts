@@ -6,8 +6,8 @@ import { MsgUnjail, MsgUnjailSDKType, MsgUnjailResponse, MsgUnjailResponseSDKTyp
 export interface Msg {
   unjail(request: MsgUnjail): Promise<MsgUnjailResponse>;
   /*Unjail defines a method for unjailing a jailed validator, thus returning
-  them into the bonded validator set, so they can begin receiving provisions
-  and rewards again.*/
+   them into the bonded validator set, so they can begin receiving provisions
+   and rewards again.*/
 
 }
 export class MsgClientImpl implements Msg {

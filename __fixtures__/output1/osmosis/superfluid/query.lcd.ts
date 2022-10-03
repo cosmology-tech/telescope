@@ -92,14 +92,14 @@ export class LCDQueryClient {
   }
 
   /* Returns the total amount of osmo superfluidly staked
-  response denominated in uosmo */
+   response denominated in uosmo */
   async totalSuperfluidDelegations(_params: TotalSuperfluidDelegationsRequest = {}): Promise<TotalSuperfluidDelegationsResponseSDKType> {
     const endpoint = `osmosis/superfluid/v1beta1/all_superfluid_delegations`;
     return await this.req.get<TotalSuperfluidDelegationsResponseSDKType>(endpoint);
   }
 
   /* Returns the coins superfluid delegated for a delegator, validator, denom
-  triplet */
+   triplet */
   async superfluidDelegationAmount(params: SuperfluidDelegationAmountRequest): Promise<SuperfluidDelegationAmountResponseSDKType> {
     const options: any = {
       params: {}
@@ -142,7 +142,7 @@ export class LCDQueryClient {
   }
 
   /* Returns all the superfluid positions of a specific denom delegated to one
-  validator */
+   validator */
   async superfluidDelegationsByValidatorDenom(params: SuperfluidDelegationsByValidatorDenomRequest): Promise<SuperfluidDelegationsByValidatorDenomResponseSDKType> {
     const options: any = {
       params: {}
@@ -161,8 +161,8 @@ export class LCDQueryClient {
   }
 
   /* Returns the amount of a specific denom delegated to a specific validator
-  This is labeled an estimate, because the way it calculates the amount can
-  lead rounding errors from the true delegated amount */
+   This is labeled an estimate, because the way it calculates the amount can
+   lead rounding errors from the true delegated amount */
   async estimateSuperfluidDelegatedAmountByValidatorDenom(params: EstimateSuperfluidDelegatedAmountByValidatorDenomRequest): Promise<EstimateSuperfluidDelegatedAmountByValidatorDenomResponseSDKType> {
     const options: any = {
       params: {}

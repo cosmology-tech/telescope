@@ -11,7 +11,7 @@ export const protobufPackage = "ibc.lightclients.tendermint.v1";
 
 /**
  * ClientState from Tendermint tracks the current validator set, latest height,
- * and a possible frozen height.
+ *  and a possible frozen height.
  */
 export interface ClientState {
   chainId: string;
@@ -19,7 +19,7 @@ export interface ClientState {
 
   /**
    * duration of the period since the LastestTimestamp during which the
-   * submitted headers are valid for upgrade
+   *  submitted headers are valid for upgrade
    */
   trustingPeriod: Duration;
 
@@ -40,31 +40,31 @@ export interface ClientState {
 
   /**
    * Path at which next upgraded client will be committed.
-   * Each element corresponds to the key for a single CommitmentProof in the
-   * chained proof. NOTE: ClientState must stored under
-   * `{upgradePath}/{upgradeHeight}/clientState` ConsensusState must be stored
-   * under `{upgradepath}/{upgradeHeight}/consensusState` For SDK chains using
-   * the default upgrade module, upgrade_path should be []string{"upgrade",
-   * "upgradedIBCState"}`
+   *  Each element corresponds to the key for a single CommitmentProof in the
+   *  chained proof. NOTE: ClientState must stored under
+   *  `{upgradePath}/{upgradeHeight}/clientState` ConsensusState must be stored
+   *  under `{upgradepath}/{upgradeHeight}/consensusState` For SDK chains using
+   *  the default upgrade module, upgrade_path should be []string{"upgrade",
+   *  "upgradedIBCState"}`
    */
   upgradePath: string[];
 
   /**
    * This flag, when set to true, will allow governance to recover a client
-   * which has expired
+   *  which has expired
    */
   allowUpdateAfterExpiry: boolean;
 
   /**
    * This flag, when set to true, will allow governance to unfreeze a client
-   * whose chain has experienced a misbehaviour event
+   *  whose chain has experienced a misbehaviour event
    */
   allowUpdateAfterMisbehaviour: boolean;
 }
 
 /**
  * ClientState from Tendermint tracks the current validator set, latest height,
- * and a possible frozen height.
+ *  and a possible frozen height.
  */
 export interface ClientStateSDKType {
   chain_id: string;
@@ -72,7 +72,7 @@ export interface ClientStateSDKType {
 
   /**
    * duration of the period since the LastestTimestamp during which the
-   * submitted headers are valid for upgrade
+   *  submitted headers are valid for upgrade
    */
   trusting_period: DurationSDKType;
 
@@ -93,24 +93,24 @@ export interface ClientStateSDKType {
 
   /**
    * Path at which next upgraded client will be committed.
-   * Each element corresponds to the key for a single CommitmentProof in the
-   * chained proof. NOTE: ClientState must stored under
-   * `{upgradePath}/{upgradeHeight}/clientState` ConsensusState must be stored
-   * under `{upgradepath}/{upgradeHeight}/consensusState` For SDK chains using
-   * the default upgrade module, upgrade_path should be []string{"upgrade",
-   * "upgradedIBCState"}`
+   *  Each element corresponds to the key for a single CommitmentProof in the
+   *  chained proof. NOTE: ClientState must stored under
+   *  `{upgradePath}/{upgradeHeight}/clientState` ConsensusState must be stored
+   *  under `{upgradepath}/{upgradeHeight}/consensusState` For SDK chains using
+   *  the default upgrade module, upgrade_path should be []string{"upgrade",
+   *  "upgradedIBCState"}`
    */
   upgrade_path: string[];
 
   /**
    * This flag, when set to true, will allow governance to recover a client
-   * which has expired
+   *  which has expired
    */
   allow_update_after_expiry: boolean;
 
   /**
    * This flag, when set to true, will allow governance to unfreeze a client
-   * whose chain has experienced a misbehaviour event
+   *  whose chain has experienced a misbehaviour event
    */
   allow_update_after_misbehaviour: boolean;
 }
@@ -119,7 +119,7 @@ export interface ClientStateSDKType {
 export interface ConsensusState {
   /**
    * timestamp that corresponds to the block height in which the ConsensusState
-   * was stored.
+   *  was stored.
    */
   timestamp: Date;
 
@@ -132,7 +132,7 @@ export interface ConsensusState {
 export interface ConsensusStateSDKType {
   /**
    * timestamp that corresponds to the block height in which the ConsensusState
-   * was stored.
+   *  was stored.
    */
   timestamp: Date;
 
@@ -143,7 +143,7 @@ export interface ConsensusStateSDKType {
 
 /**
  * Misbehaviour is a wrapper over two conflicting Headers
- * that implements Misbehaviour interface expected by ICS-02
+ *  that implements Misbehaviour interface expected by ICS-02
  */
 export interface Misbehaviour {
   clientId: string;
@@ -153,7 +153,7 @@ export interface Misbehaviour {
 
 /**
  * Misbehaviour is a wrapper over two conflicting Headers
- * that implements Misbehaviour interface expected by ICS-02
+ *  that implements Misbehaviour interface expected by ICS-02
  */
 export interface MisbehaviourSDKType {
   client_id: string;
@@ -163,17 +163,17 @@ export interface MisbehaviourSDKType {
 
 /**
  * Header defines the Tendermint client consensus Header.
- * It encapsulates all the information necessary to update from a trusted
- * Tendermint ConsensusState. The inclusion of TrustedHeight and
- * TrustedValidators allows this update to process correctly, so long as the
- * ConsensusState for the TrustedHeight exists, this removes race conditions
- * among relayers The SignedHeader and ValidatorSet are the new untrusted update
- * fields for the client. The TrustedHeight is the height of a stored
- * ConsensusState on the client that will be used to verify the new untrusted
- * header. The Trusted ConsensusState must be within the unbonding period of
- * current time in order to correctly verify, and the TrustedValidators must
- * hash to TrustedConsensusState.NextValidatorsHash since that is the last
- * trusted validator set at the TrustedHeight.
+ *  It encapsulates all the information necessary to update from a trusted
+ *  Tendermint ConsensusState. The inclusion of TrustedHeight and
+ *  TrustedValidators allows this update to process correctly, so long as the
+ *  ConsensusState for the TrustedHeight exists, this removes race conditions
+ *  among relayers The SignedHeader and ValidatorSet are the new untrusted update
+ *  fields for the client. The TrustedHeight is the height of a stored
+ *  ConsensusState on the client that will be used to verify the new untrusted
+ *  header. The Trusted ConsensusState must be within the unbonding period of
+ *  current time in order to correctly verify, and the TrustedValidators must
+ *  hash to TrustedConsensusState.NextValidatorsHash since that is the last
+ *  trusted validator set at the TrustedHeight.
  */
 export interface Header {
   signedHeader: SignedHeader;
@@ -184,17 +184,17 @@ export interface Header {
 
 /**
  * Header defines the Tendermint client consensus Header.
- * It encapsulates all the information necessary to update from a trusted
- * Tendermint ConsensusState. The inclusion of TrustedHeight and
- * TrustedValidators allows this update to process correctly, so long as the
- * ConsensusState for the TrustedHeight exists, this removes race conditions
- * among relayers The SignedHeader and ValidatorSet are the new untrusted update
- * fields for the client. The TrustedHeight is the height of a stored
- * ConsensusState on the client that will be used to verify the new untrusted
- * header. The Trusted ConsensusState must be within the unbonding period of
- * current time in order to correctly verify, and the TrustedValidators must
- * hash to TrustedConsensusState.NextValidatorsHash since that is the last
- * trusted validator set at the TrustedHeight.
+ *  It encapsulates all the information necessary to update from a trusted
+ *  Tendermint ConsensusState. The inclusion of TrustedHeight and
+ *  TrustedValidators allows this update to process correctly, so long as the
+ *  ConsensusState for the TrustedHeight exists, this removes race conditions
+ *  among relayers The SignedHeader and ValidatorSet are the new untrusted update
+ *  fields for the client. The TrustedHeight is the height of a stored
+ *  ConsensusState on the client that will be used to verify the new untrusted
+ *  header. The Trusted ConsensusState must be within the unbonding period of
+ *  current time in order to correctly verify, and the TrustedValidators must
+ *  hash to TrustedConsensusState.NextValidatorsHash since that is the last
+ *  trusted validator set at the TrustedHeight.
  */
 export interface HeaderSDKType {
   signed_header: SignedHeaderSDKType;
@@ -205,7 +205,7 @@ export interface HeaderSDKType {
 
 /**
  * Fraction defines the protobuf message type for tmmath.Fraction that only
- * supports positive values.
+ *  supports positive values.
  */
 export interface Fraction {
   numerator: Long;
@@ -214,7 +214,7 @@ export interface Fraction {
 
 /**
  * Fraction defines the protobuf message type for tmmath.Fraction that only
- * supports positive values.
+ *  supports positive values.
  */
 export interface FractionSDKType {
   numerator: Long;

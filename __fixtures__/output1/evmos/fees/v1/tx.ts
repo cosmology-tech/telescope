@@ -9,7 +9,7 @@ export interface MsgRegisterDevFeeInfo {
 
   /**
    * bech32 address of message sender, must be the same as the origin EOA
-   * sending the transaction which deploys the contract
+   *  sending the transaction which deploys the contract
    */
   deployerAddress: string;
 
@@ -18,8 +18,8 @@ export interface MsgRegisterDevFeeInfo {
 
   /**
    * array of nonces from the address path, where the last nonce is
-   * the nonce that determines the contract's address - it can be an EOA nonce
-   * or a factory contract nonce
+   *  the nonce that determines the contract's address - it can be an EOA nonce
+   *  or a factory contract nonce
    */
   nonces: Long[];
 }
@@ -31,7 +31,7 @@ export interface MsgRegisterDevFeeInfoSDKType {
 
   /**
    * bech32 address of message sender, must be the same as the origin EOA
-   * sending the transaction which deploys the contract
+   *  sending the transaction which deploys the contract
    */
   deployer_address: string;
 
@@ -40,27 +40,27 @@ export interface MsgRegisterDevFeeInfoSDKType {
 
   /**
    * array of nonces from the address path, where the last nonce is
-   * the nonce that determines the contract's address - it can be an EOA nonce
-   * or a factory contract nonce
+   *  the nonce that determines the contract's address - it can be an EOA nonce
+   *  or a factory contract nonce
    */
   nonces: Long[];
 }
 
 /**
  * MsgRegisterDevFeeInfoResponse defines the MsgRegisterDevFeeInfo response
- * type
+ *  type
  */
 export interface MsgRegisterDevFeeInfoResponse {}
 
 /**
  * MsgRegisterDevFeeInfoResponse defines the MsgRegisterDevFeeInfo response
- * type
+ *  type
  */
 export interface MsgRegisterDevFeeInfoResponseSDKType {}
 
 /**
  * MsgCancelDevFeeInfo defines a message that cancels a registered a
- * DevFeeInfo
+ *  DevFeeInfo
  */
 export interface MsgCancelDevFeeInfo {
   /** contract hex address */
@@ -72,7 +72,7 @@ export interface MsgCancelDevFeeInfo {
 
 /**
  * MsgCancelDevFeeInfo defines a message that cancels a registered a
- * DevFeeInfo
+ *  DevFeeInfo
  */
 export interface MsgCancelDevFeeInfoSDKType {
   /** contract hex address */
@@ -90,7 +90,7 @@ export interface MsgCancelDevFeeInfoResponseSDKType {}
 
 /**
  * MsgUpdateDevFeeInfo defines a message that updates the withdraw address for
- * a registered DevFeeInfo
+ *  a registered DevFeeInfo
  */
 export interface MsgUpdateDevFeeInfo {
   /** contract hex address */
@@ -105,7 +105,7 @@ export interface MsgUpdateDevFeeInfo {
 
 /**
  * MsgUpdateDevFeeInfo defines a message that updates the withdraw address for
- * a registered DevFeeInfo
+ *  a registered DevFeeInfo
  */
 export interface MsgUpdateDevFeeInfoSDKType {
   /** contract hex address */

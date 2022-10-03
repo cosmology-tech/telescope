@@ -7,7 +7,7 @@ export const protobufPackage = "cosmos.gov.v1beta1";
 
 /**
  * MsgSubmitProposal defines an sdk.Msg type that supports submitting arbitrary
- * proposal Content.
+ *  proposal Content.
  */
 export interface MsgSubmitProposal {
   content: Any;
@@ -17,7 +17,7 @@ export interface MsgSubmitProposal {
 
 /**
  * MsgSubmitProposal defines an sdk.Msg type that supports submitting arbitrary
- * proposal Content.
+ *  proposal Content.
  */
 export interface MsgSubmitProposalSDKType {
   content: AnySDKType;
@@ -58,7 +58,7 @@ export interface MsgVoteResponseSDKType {}
 /**
  * MsgVoteWeighted defines a message to cast a vote.
  * 
- * Since: cosmos-sdk 0.43
+ *  Since: cosmos-sdk 0.43
  */
 export interface MsgVoteWeighted {
   proposalId: Long;
@@ -69,7 +69,7 @@ export interface MsgVoteWeighted {
 /**
  * MsgVoteWeighted defines a message to cast a vote.
  * 
- * Since: cosmos-sdk 0.43
+ *  Since: cosmos-sdk 0.43
  */
 export interface MsgVoteWeightedSDKType {
   proposal_id: Long;
@@ -80,14 +80,14 @@ export interface MsgVoteWeightedSDKType {
 /**
  * MsgVoteWeightedResponse defines the Msg/VoteWeighted response type.
  * 
- * Since: cosmos-sdk 0.43
+ *  Since: cosmos-sdk 0.43
  */
 export interface MsgVoteWeightedResponse {}
 
 /**
  * MsgVoteWeightedResponse defines the Msg/VoteWeighted response type.
  * 
- * Since: cosmos-sdk 0.43
+ *  Since: cosmos-sdk 0.43
  */
 export interface MsgVoteWeightedResponseSDKType {}
 

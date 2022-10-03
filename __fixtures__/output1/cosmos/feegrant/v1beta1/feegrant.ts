@@ -8,13 +8,13 @@ export const protobufPackage = "cosmos.feegrant.v1beta1";
 
 /**
  * BasicAllowance implements Allowance with a one-time grant of tokens
- * that optionally expires. The grantee can use up to SpendLimit to cover fees.
+ *  that optionally expires. The grantee can use up to SpendLimit to cover fees.
  */
 export interface BasicAllowance {
   /**
    * spend_limit specifies the maximum amount of tokens that can be spent
-   * by this allowance and will be updated as tokens are spent. If it is
-   * empty, there is no spend limit and any amount of coins can be spent.
+   *  by this allowance and will be updated as tokens are spent. If it is
+   *  empty, there is no spend limit and any amount of coins can be spent.
    */
   spendLimit: Coin[];
 
@@ -24,13 +24,13 @@ export interface BasicAllowance {
 
 /**
  * BasicAllowance implements Allowance with a one-time grant of tokens
- * that optionally expires. The grantee can use up to SpendLimit to cover fees.
+ *  that optionally expires. The grantee can use up to SpendLimit to cover fees.
  */
 export interface BasicAllowanceSDKType {
   /**
    * spend_limit specifies the maximum amount of tokens that can be spent
-   * by this allowance and will be updated as tokens are spent. If it is
-   * empty, there is no spend limit and any amount of coins can be spent.
+   *  by this allowance and will be updated as tokens are spent. If it is
+   *  empty, there is no spend limit and any amount of coins can be spent.
    */
   spend_limit: CoinSDKType[];
 
@@ -40,7 +40,7 @@ export interface BasicAllowanceSDKType {
 
 /**
  * PeriodicAllowance extends Allowance to allow for both a maximum cap,
- * as well as a limit per time period.
+ *  as well as a limit per time period.
  */
 export interface PeriodicAllowance {
   /** basic specifies a struct of `BasicAllowance` */
@@ -48,13 +48,13 @@ export interface PeriodicAllowance {
 
   /**
    * period specifies the time duration in which period_spend_limit coins can
-   * be spent before that allowance is reset
+   *  be spent before that allowance is reset
    */
   period: Duration;
 
   /**
    * period_spend_limit specifies the maximum number of coins that can be spent
-   * in the period
+   *  in the period
    */
   periodSpendLimit: Coin[];
 
@@ -63,15 +63,15 @@ export interface PeriodicAllowance {
 
   /**
    * period_reset is the time at which this period resets and a new one begins,
-   * it is calculated from the start time of the first transaction after the
-   * last period ended
+   *  it is calculated from the start time of the first transaction after the
+   *  last period ended
    */
   periodReset: Date;
 }
 
 /**
  * PeriodicAllowance extends Allowance to allow for both a maximum cap,
- * as well as a limit per time period.
+ *  as well as a limit per time period.
  */
 export interface PeriodicAllowanceSDKType {
   /** basic specifies a struct of `BasicAllowance` */
@@ -79,13 +79,13 @@ export interface PeriodicAllowanceSDKType {
 
   /**
    * period specifies the time duration in which period_spend_limit coins can
-   * be spent before that allowance is reset
+   *  be spent before that allowance is reset
    */
   period: DurationSDKType;
 
   /**
    * period_spend_limit specifies the maximum number of coins that can be spent
-   * in the period
+   *  in the period
    */
   period_spend_limit: CoinSDKType[];
 
@@ -94,8 +94,8 @@ export interface PeriodicAllowanceSDKType {
 
   /**
    * period_reset is the time at which this period resets and a new one begins,
-   * it is calculated from the start time of the first transaction after the
-   * last period ended
+   *  it is calculated from the start time of the first transaction after the
+   *  last period ended
    */
   period_reset: Date;
 }

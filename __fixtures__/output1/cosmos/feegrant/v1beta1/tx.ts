@@ -5,7 +5,7 @@ export const protobufPackage = "cosmos.feegrant.v1beta1";
 
 /**
  * MsgGrantAllowance adds permission for Grantee to spend up to Allowance
- * of fees from the account of Granter.
+ *  of fees from the account of Granter.
  */
 export interface MsgGrantAllowance {
   /** granter is the address of the user granting an allowance of their funds. */
@@ -20,7 +20,7 @@ export interface MsgGrantAllowance {
 
 /**
  * MsgGrantAllowance adds permission for Grantee to spend up to Allowance
- * of fees from the account of Granter.
+ *  of fees from the account of Granter.
  */
 export interface MsgGrantAllowanceSDKType {
   /** granter is the address of the user granting an allowance of their funds. */

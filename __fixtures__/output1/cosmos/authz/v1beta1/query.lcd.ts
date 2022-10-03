@@ -45,7 +45,7 @@ export class LCDQueryClient {
 
   /* GranterGrants returns list of `GrantAuthorization`, granted by granter.
   
-  Since: cosmos-sdk 0.46 */
+   Since: cosmos-sdk 0.46 */
   async granterGrants(params: QueryGranterGrantsRequest): Promise<QueryGranterGrantsResponseSDKType> {
     const options: any = {
       params: {}
@@ -61,7 +61,7 @@ export class LCDQueryClient {
 
   /* GranteeGrants returns a list of `GrantAuthorization` by grantee.
   
-  Since: cosmos-sdk 0.46 */
+   Since: cosmos-sdk 0.46 */
   async granteeGrants(params: QueryGranteeGrantsRequest): Promise<QueryGranteeGrantsResponseSDKType> {
     const options: any = {
       params: {}

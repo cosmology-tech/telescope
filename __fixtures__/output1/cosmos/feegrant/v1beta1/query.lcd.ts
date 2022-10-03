@@ -38,7 +38,7 @@ export class LCDQueryClient {
   }
 
   /* AllowancesByGranter returns all the grants given by an address
-  Since v0.46 */
+   Since v0.46 */
   async allowancesByGranter(params: QueryAllowancesByGranterRequest): Promise<QueryAllowancesByGranterResponseSDKType> {
     const options: any = {
       params: {}

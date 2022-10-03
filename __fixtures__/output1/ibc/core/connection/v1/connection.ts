@@ -5,7 +5,7 @@ export const protobufPackage = "ibc.core.connection.v1";
 
 /**
  * State defines if a connection is in one of the following states:
- * INIT, TRYOPEN, OPEN or UNINITIALIZED.
+ *  INIT, TRYOPEN, OPEN or UNINITIALIZED.
  */
 export enum State {
   /** STATE_UNINITIALIZED_UNSPECIFIED - Default State */
@@ -16,7 +16,7 @@ export enum State {
 
   /**
    * STATE_TRYOPEN - A connection end has acknowledged the handshake step on the counterparty
-   * chain.
+   *  chain.
    */
   STATE_TRYOPEN = 2,
 
@@ -27,7 +27,7 @@ export enum State {
 
 /**
  * State defines if a connection is in one of the following states:
- * INIT, TRYOPEN, OPEN or UNINITIALIZED.
+ *  INIT, TRYOPEN, OPEN or UNINITIALIZED.
  */
 export enum StateSDKType {
   /** STATE_UNINITIALIZED_UNSPECIFIED - Default State */
@@ -38,7 +38,7 @@ export enum StateSDKType {
 
   /**
    * STATE_TRYOPEN - A connection end has acknowledged the handshake step on the counterparty
-   * chain.
+   *  chain.
    */
   STATE_TRYOPEN = 2,
 
@@ -91,9 +91,9 @@ export function stateToJSON(object: State): string {
 
 /**
  * ConnectionEnd defines a stateful object on a chain connected to another
- * separate one.
- * NOTE: there must only be 2 defined ConnectionEnds to establish
- * a connection between two chains.
+ *  separate one.
+ *  NOTE: there must only be 2 defined ConnectionEnds to establish
+ *  a connection between two chains.
  */
 export interface ConnectionEnd {
   /** client associated with this connection. */
@@ -101,7 +101,7 @@ export interface ConnectionEnd {
 
   /**
    * IBC version which can be utilised to determine encodings or protocols for
-   * channels or packets utilising this connection.
+   *  channels or packets utilising this connection.
    */
   versions: Version[];
 
@@ -113,17 +113,17 @@ export interface ConnectionEnd {
 
   /**
    * delay period that must pass before a consensus state can be used for
-   * packet-verification NOTE: delay period logic is only implemented by some
-   * clients.
+   *  packet-verification NOTE: delay period logic is only implemented by some
+   *  clients.
    */
   delayPeriod: Long;
 }
 
 /**
  * ConnectionEnd defines a stateful object on a chain connected to another
- * separate one.
- * NOTE: there must only be 2 defined ConnectionEnds to establish
- * a connection between two chains.
+ *  separate one.
+ *  NOTE: there must only be 2 defined ConnectionEnds to establish
+ *  a connection between two chains.
  */
 export interface ConnectionEndSDKType {
   /** client associated with this connection. */
@@ -131,7 +131,7 @@ export interface ConnectionEndSDKType {
 
   /**
    * IBC version which can be utilised to determine encodings or protocols for
-   * channels or packets utilising this connection.
+   *  channels or packets utilising this connection.
    */
   versions: VersionSDKType[];
 
@@ -143,15 +143,15 @@ export interface ConnectionEndSDKType {
 
   /**
    * delay period that must pass before a consensus state can be used for
-   * packet-verification NOTE: delay period logic is only implemented by some
-   * clients.
+   *  packet-verification NOTE: delay period logic is only implemented by some
+   *  clients.
    */
   delay_period: Long;
 }
 
 /**
  * IdentifiedConnection defines a connection with additional connection
- * identifier field.
+ *  identifier field.
  */
 export interface IdentifiedConnection {
   /** connection identifier. */
@@ -162,7 +162,7 @@ export interface IdentifiedConnection {
 
   /**
    * IBC version which can be utilised to determine encodings or protocols for
-   * channels or packets utilising this connection
+   *  channels or packets utilising this connection
    */
   versions: Version[];
 
@@ -178,7 +178,7 @@ export interface IdentifiedConnection {
 
 /**
  * IdentifiedConnection defines a connection with additional connection
- * identifier field.
+ *  identifier field.
  */
 export interface IdentifiedConnectionSDKType {
   /** connection identifier. */
@@ -189,7 +189,7 @@ export interface IdentifiedConnectionSDKType {
 
   /**
    * IBC version which can be utilised to determine encodings or protocols for
-   * channels or packets utilising this connection
+   *  channels or packets utilising this connection
    */
   versions: VersionSDKType[];
 
@@ -207,13 +207,13 @@ export interface IdentifiedConnectionSDKType {
 export interface Counterparty {
   /**
    * identifies the client on the counterparty chain associated with a given
-   * connection.
+   *  connection.
    */
   clientId: string;
 
   /**
    * identifies the connection end on the counterparty chain associated with a
-   * given connection.
+   *  given connection.
    */
   connectionId: string;
 
@@ -225,13 +225,13 @@ export interface Counterparty {
 export interface CounterpartySDKType {
   /**
    * identifies the client on the counterparty chain associated with a given
-   * connection.
+   *  connection.
    */
   client_id: string;
 
   /**
    * identifies the connection end on the counterparty chain associated with a
-   * given connection.
+   *  given connection.
    */
   connection_id: string;
 
@@ -271,7 +271,7 @@ export interface ConnectionPathsSDKType {
 
 /**
  * Version defines the versioning scheme used to negotiate the IBC verison in
- * the connection handshake.
+ *  the connection handshake.
  */
 export interface Version {
   /** unique version identifier */
@@ -283,7 +283,7 @@ export interface Version {
 
 /**
  * Version defines the versioning scheme used to negotiate the IBC verison in
- * the connection handshake.
+ *  the connection handshake.
  */
 export interface VersionSDKType {
   /** unique version identifier */
@@ -297,8 +297,8 @@ export interface VersionSDKType {
 export interface Params {
   /**
    * maximum expected time per block (in nanoseconds), used to enforce block delay. This parameter should reflect the
-   * largest amount of time that the chain might reasonably take to produce the next block under normal operating
-   * conditions. A safe choice is 3-5x the expected time per block.
+   *  largest amount of time that the chain might reasonably take to produce the next block under normal operating
+   *  conditions. A safe choice is 3-5x the expected time per block.
    */
   maxExpectedTimePerBlock: Long;
 }
@@ -307,8 +307,8 @@ export interface Params {
 export interface ParamsSDKType {
   /**
    * maximum expected time per block (in nanoseconds), used to enforce block delay. This parameter should reflect the
-   * largest amount of time that the chain might reasonably take to produce the next block under normal operating
-   * conditions. A safe choice is 3-5x the expected time per block.
+   *  largest amount of time that the chain might reasonably take to produce the next block under normal operating
+   *  conditions. A safe choice is 3-5x the expected time per block.
    */
   max_expected_time_per_block: Long;
 }

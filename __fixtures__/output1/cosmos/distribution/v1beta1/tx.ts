@@ -5,7 +5,7 @@ export const protobufPackage = "cosmos.distribution.v1beta1";
 
 /**
  * MsgSetWithdrawAddress sets the withdraw address for
- * a delegator (or validator self-delegation).
+ *  a delegator (or validator self-delegation).
  */
 export interface MsgSetWithdrawAddress {
   delegatorAddress: string;
@@ -14,7 +14,7 @@ export interface MsgSetWithdrawAddress {
 
 /**
  * MsgSetWithdrawAddress sets the withdraw address for
- * a delegator (or validator self-delegation).
+ *  a delegator (or validator self-delegation).
  */
 export interface MsgSetWithdrawAddressSDKType {
   delegator_address: string;
@@ -29,7 +29,7 @@ export interface MsgSetWithdrawAddressResponseSDKType {}
 
 /**
  * MsgWithdrawDelegatorReward represents delegation withdrawal to a delegator
- * from a single validator.
+ *  from a single validator.
  */
 export interface MsgWithdrawDelegatorReward {
   delegatorAddress: string;
@@ -38,7 +38,7 @@ export interface MsgWithdrawDelegatorReward {
 
 /**
  * MsgWithdrawDelegatorReward represents delegation withdrawal to a delegator
- * from a single validator.
+ *  from a single validator.
  */
 export interface MsgWithdrawDelegatorRewardSDKType {
   delegator_address: string;
@@ -57,7 +57,7 @@ export interface MsgWithdrawDelegatorRewardResponseSDKType {
 
 /**
  * MsgWithdrawValidatorCommission withdraws the full commission to the validator
- * address.
+ *  address.
  */
 export interface MsgWithdrawValidatorCommission {
   validatorAddress: string;
@@ -65,7 +65,7 @@ export interface MsgWithdrawValidatorCommission {
 
 /**
  * MsgWithdrawValidatorCommission withdraws the full commission to the validator
- * address.
+ *  address.
  */
 export interface MsgWithdrawValidatorCommissionSDKType {
   validator_address: string;
@@ -83,7 +83,7 @@ export interface MsgWithdrawValidatorCommissionResponseSDKType {
 
 /**
  * MsgFundCommunityPool allows an account to directly
- * fund the community pool.
+ *  fund the community pool.
  */
 export interface MsgFundCommunityPool {
   amount: Coin[];
@@ -92,7 +92,7 @@ export interface MsgFundCommunityPool {
 
 /**
  * MsgFundCommunityPool allows an account to directly
- * fund the community pool.
+ *  fund the community pool.
  */
 export interface MsgFundCommunityPoolSDKType {
   amount: CoinSDKType[];

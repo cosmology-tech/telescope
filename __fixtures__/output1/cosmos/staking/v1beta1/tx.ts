@@ -41,9 +41,9 @@ export interface MsgEditValidator {
 
   /**
    * We pass a reference to the new commission rate and min self delegation as
-   * it's not mandatory to update. If not updated, the deserialized rate will be
-   * zero with no way to distinguish if an update was intended.
-   * REF: #2373
+   *  it's not mandatory to update. If not updated, the deserialized rate will be
+   *  zero with no way to distinguish if an update was intended.
+   *  REF: #2373
    */
   commissionRate: string;
   minSelfDelegation: string;
@@ -56,9 +56,9 @@ export interface MsgEditValidatorSDKType {
 
   /**
    * We pass a reference to the new commission rate and min self delegation as
-   * it's not mandatory to update. If not updated, the deserialized rate will be
-   * zero with no way to distinguish if an update was intended.
-   * REF: #2373
+   *  it's not mandatory to update. If not updated, the deserialized rate will be
+   *  zero with no way to distinguish if an update was intended.
+   *  REF: #2373
    */
   commission_rate: string;
   min_self_delegation: string;
@@ -72,7 +72,7 @@ export interface MsgEditValidatorResponseSDKType {}
 
 /**
  * MsgDelegate defines a SDK message for performing a delegation of coins
- * from a delegator to a validator.
+ *  from a delegator to a validator.
  */
 export interface MsgDelegate {
   delegatorAddress: string;
@@ -82,7 +82,7 @@ export interface MsgDelegate {
 
 /**
  * MsgDelegate defines a SDK message for performing a delegation of coins
- * from a delegator to a validator.
+ *  from a delegator to a validator.
  */
 export interface MsgDelegateSDKType {
   delegator_address: string;
@@ -98,7 +98,7 @@ export interface MsgDelegateResponseSDKType {}
 
 /**
  * MsgBeginRedelegate defines a SDK message for performing a redelegation
- * of coins from a delegator and source validator to a destination validator.
+ *  of coins from a delegator and source validator to a destination validator.
  */
 export interface MsgBeginRedelegate {
   delegatorAddress: string;
@@ -109,7 +109,7 @@ export interface MsgBeginRedelegate {
 
 /**
  * MsgBeginRedelegate defines a SDK message for performing a redelegation
- * of coins from a delegator and source validator to a destination validator.
+ *  of coins from a delegator and source validator to a destination validator.
  */
 export interface MsgBeginRedelegateSDKType {
   delegator_address: string;
@@ -130,7 +130,7 @@ export interface MsgBeginRedelegateResponseSDKType {
 
 /**
  * MsgUndelegate defines a SDK message for performing an undelegation from a
- * delegate and a validator.
+ *  delegate and a validator.
  */
 export interface MsgUndelegate {
   delegatorAddress: string;
@@ -140,7 +140,7 @@ export interface MsgUndelegate {
 
 /**
  * MsgUndelegate defines a SDK message for performing an undelegation from a
- * delegate and a validator.
+ *  delegate and a validator.
  */
 export interface MsgUndelegateSDKType {
   delegator_address: string;

@@ -351,7 +351,7 @@ export interface LeafOp {
 
   /**
    * prefix is a fixed bytes that may optionally be included at the beginning to differentiate
-   * a leaf node from an inner node.
+   *  a leaf node from an inner node.
    */
   prefix: Uint8Array;
 }
@@ -380,7 +380,7 @@ export interface LeafOpSDKType {
 
   /**
    * prefix is a fixed bytes that may optionally be included at the beginning to differentiate
-   * a leaf node from an inner node.
+   *  a leaf node from an inner node.
    */
   prefix: Uint8Array;
 }
@@ -446,7 +446,7 @@ export interface InnerOpSDKType {
 export interface ProofSpec {
   /**
    * any field in the ExistenceProof must be the same as in this spec.
-   * except Prefix, which is just the first bytes of prefix (spec can be longer)
+   *  except Prefix, which is just the first bytes of prefix (spec can be longer)
    */
   leafSpec: LeafOp;
   innerSpec: InnerSpec;
@@ -473,7 +473,7 @@ export interface ProofSpec {
 export interface ProofSpecSDKType {
   /**
    * any field in the ExistenceProof must be the same as in this spec.
-   * except Prefix, which is just the first bytes of prefix (spec can be longer)
+   *  except Prefix, which is just the first bytes of prefix (spec can be longer)
    */
   leaf_spec: LeafOpSDKType;
   inner_spec: InnerSpecSDKType;
@@ -498,8 +498,8 @@ export interface ProofSpecSDKType {
 export interface InnerSpec {
   /**
    * Child order is the ordering of the children node, must count from 0
-   * iavl tree is [0, 1] (left then right)
-   * merk is [0, 2, 1] (left, right, here)
+   *  iavl tree is [0, 1] (left then right)
+   *  merk is [0, 2, 1] (left, right, here)
    */
   childOrder: number[];
   childSize: number;
@@ -526,8 +526,8 @@ export interface InnerSpec {
 export interface InnerSpecSDKType {
   /**
    * Child order is the ordering of the children node, must count from 0
-   * iavl tree is [0, 1] (left then right)
-   * merk is [0, 2, 1] (left, right, here)
+   *  iavl tree is [0, 1] (left then right)
+   *  merk is [0, 2, 1] (left, right, here)
    */
   child_order: number[];
   child_size: number;

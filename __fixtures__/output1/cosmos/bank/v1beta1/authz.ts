@@ -5,9 +5,9 @@ export const protobufPackage = "cosmos.bank.v1beta1";
 
 /**
  * SendAuthorization allows the grantee to spend up to spend_limit coins from
- * the granter's account.
+ *  the granter's account.
  * 
- * Since: cosmos-sdk 0.43
+ *  Since: cosmos-sdk 0.43
  */
 export interface SendAuthorization {
   spendLimit: Coin[];
@@ -15,9 +15,9 @@ export interface SendAuthorization {
 
 /**
  * SendAuthorization allows the grantee to spend up to spend_limit coins from
- * the granter's account.
+ *  the granter's account.
  * 
- * Since: cosmos-sdk 0.43
+ *  Since: cosmos-sdk 0.43
  */
 export interface SendAuthorizationSDKType {
   spend_limit: CoinSDKType[];

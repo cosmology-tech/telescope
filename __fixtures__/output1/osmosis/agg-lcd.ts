@@ -47,7 +47,7 @@ export class QueryClient {
   }
 
   /* SpendableBalances queries the spenable balance of all coins for a single
-  account. */
+   account. */
   async spendableBalances(params: QuerySpendableBalancesRequest): Promise<QuerySpendableBalancesResponseSDKType> {
     const options: any = {
       params: {}
@@ -104,7 +104,7 @@ export class QueryClient {
   }
 
   /* DenomsMetadata queries the client metadata for all registered coin
-  denominations. */
+   denominations. */
   async denomsMetadata(params: QueryDenomsMetadataRequest = {
     pagination: undefined
   }): Promise<QueryDenomsMetadataResponseSDKType> {
@@ -121,7 +121,7 @@ export class QueryClient {
   }
 
   /* DenomOwners queries for all account addresses that own a particular token
-  denomination. */
+   denomination. */
   async denomOwners(params: QueryDenomOwnersRequest): Promise<QueryDenomOwnersResponseSDKType> {
     const options: any = {
       params: {}
@@ -188,7 +188,7 @@ export class QueryClient {
   }
 
   /* SpotPrice defines a gRPC query handler that returns the spot price given
-  a base denomination and a quote denomination. */
+   a base denomination and a quote denomination. */
   async spotPrice(params: QuerySpotPriceRequest): Promise<QuerySpotPriceResponseSDKType> {
     const options: any = {
       params: {}

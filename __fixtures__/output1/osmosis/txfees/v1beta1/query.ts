@@ -13,7 +13,7 @@ export interface QueryFeeTokensResponseSDKType {
 
 /**
  * QueryDenomSpotPriceRequest defines grpc request structure for querying spot
- * price for the specified tx fee denom
+ *  price for the specified tx fee denom
  */
 export interface QueryDenomSpotPriceRequest {
   denom?: string;
@@ -21,7 +21,7 @@ export interface QueryDenomSpotPriceRequest {
 
 /**
  * QueryDenomSpotPriceRequest defines grpc request structure for querying spot
- * price for the specified tx fee denom
+ *  price for the specified tx fee denom
  */
 export interface QueryDenomSpotPriceRequestSDKType {
   denom?: string;
@@ -29,7 +29,7 @@ export interface QueryDenomSpotPriceRequestSDKType {
 
 /**
  * QueryDenomSpotPriceRequest defines grpc response structure for querying spot
- * price for the specified tx fee denom
+ *  price for the specified tx fee denom
  */
 export interface QueryDenomSpotPriceResponse {
   poolID: Long;
@@ -38,7 +38,7 @@ export interface QueryDenomSpotPriceResponse {
 
 /**
  * QueryDenomSpotPriceRequest defines grpc response structure for querying spot
- * price for the specified tx fee denom
+ *  price for the specified tx fee denom
  */
 export interface QueryDenomSpotPriceResponseSDKType {
   poolID: Long;

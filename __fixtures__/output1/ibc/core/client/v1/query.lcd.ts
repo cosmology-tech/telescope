@@ -46,7 +46,7 @@ export class LCDQueryClient {
   }
 
   /* ConsensusState queries a consensus state associated with a client state at
-  a given height. */
+   a given height. */
   async consensusState(params: QueryConsensusStateRequest): Promise<QueryConsensusStateResponseSDKType> {
     const options: any = {
       params: {}
@@ -61,7 +61,7 @@ export class LCDQueryClient {
   }
 
   /* ConsensusStates queries all the consensus state associated with a given
-  client. */
+   client. */
   async consensusStates(params: QueryConsensusStatesRequest): Promise<QueryConsensusStatesResponseSDKType> {
     const options: any = {
       params: {}

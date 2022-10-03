@@ -8,7 +8,7 @@ export const protobufPackage = "ibc.core.connection.v1";
 
 /**
  * QueryConnectionRequest is the request type for the Query/Connection RPC
- * method
+ *  method
  */
 export interface QueryConnectionRequest {
   /** connection unique identifier */
@@ -17,7 +17,7 @@ export interface QueryConnectionRequest {
 
 /**
  * QueryConnectionRequest is the request type for the Query/Connection RPC
- * method
+ *  method
  */
 export interface QueryConnectionRequestSDKType {
   /** connection unique identifier */
@@ -26,8 +26,8 @@ export interface QueryConnectionRequestSDKType {
 
 /**
  * QueryConnectionResponse is the response type for the Query/Connection RPC
- * method. Besides the connection end, it includes a proof and the height from
- * which the proof was retrieved.
+ *  method. Besides the connection end, it includes a proof and the height from
+ *  which the proof was retrieved.
  */
 export interface QueryConnectionResponse {
   /** connection associated with the request identifier */
@@ -42,8 +42,8 @@ export interface QueryConnectionResponse {
 
 /**
  * QueryConnectionResponse is the response type for the Query/Connection RPC
- * method. Besides the connection end, it includes a proof and the height from
- * which the proof was retrieved.
+ *  method. Besides the connection end, it includes a proof and the height from
+ *  which the proof was retrieved.
  */
 export interface QueryConnectionResponseSDKType {
   /** connection associated with the request identifier */
@@ -58,7 +58,7 @@ export interface QueryConnectionResponseSDKType {
 
 /**
  * QueryConnectionsRequest is the request type for the Query/Connections RPC
- * method
+ *  method
  */
 export interface QueryConnectionsRequest {
   pagination?: PageRequest;
@@ -66,7 +66,7 @@ export interface QueryConnectionsRequest {
 
 /**
  * QueryConnectionsRequest is the request type for the Query/Connections RPC
- * method
+ *  method
  */
 export interface QueryConnectionsRequestSDKType {
   pagination?: PageRequestSDKType;
@@ -74,7 +74,7 @@ export interface QueryConnectionsRequestSDKType {
 
 /**
  * QueryConnectionsResponse is the response type for the Query/Connections RPC
- * method.
+ *  method.
  */
 export interface QueryConnectionsResponse {
   /** list of stored connections of the chain. */
@@ -89,7 +89,7 @@ export interface QueryConnectionsResponse {
 
 /**
  * QueryConnectionsResponse is the response type for the Query/Connections RPC
- * method.
+ *  method.
  */
 export interface QueryConnectionsResponseSDKType {
   /** list of stored connections of the chain. */
@@ -104,7 +104,7 @@ export interface QueryConnectionsResponseSDKType {
 
 /**
  * QueryClientConnectionsRequest is the request type for the
- * Query/ClientConnections RPC method
+ *  Query/ClientConnections RPC method
  */
 export interface QueryClientConnectionsRequest {
   /** client identifier associated with a connection */
@@ -113,7 +113,7 @@ export interface QueryClientConnectionsRequest {
 
 /**
  * QueryClientConnectionsRequest is the request type for the
- * Query/ClientConnections RPC method
+ *  Query/ClientConnections RPC method
  */
 export interface QueryClientConnectionsRequestSDKType {
   /** client identifier associated with a connection */
@@ -122,7 +122,7 @@ export interface QueryClientConnectionsRequestSDKType {
 
 /**
  * QueryClientConnectionsResponse is the response type for the
- * Query/ClientConnections RPC method
+ *  Query/ClientConnections RPC method
  */
 export interface QueryClientConnectionsResponse {
   /** slice of all the connection paths associated with a client. */
@@ -137,7 +137,7 @@ export interface QueryClientConnectionsResponse {
 
 /**
  * QueryClientConnectionsResponse is the response type for the
- * Query/ClientConnections RPC method
+ *  Query/ClientConnections RPC method
  */
 export interface QueryClientConnectionsResponseSDKType {
   /** slice of all the connection paths associated with a client. */
@@ -152,7 +152,7 @@ export interface QueryClientConnectionsResponseSDKType {
 
 /**
  * QueryConnectionClientStateRequest is the request type for the
- * Query/ConnectionClientState RPC method
+ *  Query/ConnectionClientState RPC method
  */
 export interface QueryConnectionClientStateRequest {
   /** connection identifier */
@@ -161,7 +161,7 @@ export interface QueryConnectionClientStateRequest {
 
 /**
  * QueryConnectionClientStateRequest is the request type for the
- * Query/ConnectionClientState RPC method
+ *  Query/ConnectionClientState RPC method
  */
 export interface QueryConnectionClientStateRequestSDKType {
   /** connection identifier */
@@ -170,7 +170,7 @@ export interface QueryConnectionClientStateRequestSDKType {
 
 /**
  * QueryConnectionClientStateResponse is the response type for the
- * Query/ConnectionClientState RPC method
+ *  Query/ConnectionClientState RPC method
  */
 export interface QueryConnectionClientStateResponse {
   /** client state associated with the channel */
@@ -185,7 +185,7 @@ export interface QueryConnectionClientStateResponse {
 
 /**
  * QueryConnectionClientStateResponse is the response type for the
- * Query/ConnectionClientState RPC method
+ *  Query/ConnectionClientState RPC method
  */
 export interface QueryConnectionClientStateResponseSDKType {
   /** client state associated with the channel */
@@ -200,7 +200,7 @@ export interface QueryConnectionClientStateResponseSDKType {
 
 /**
  * QueryConnectionConsensusStateRequest is the request type for the
- * Query/ConnectionConsensusState RPC method
+ *  Query/ConnectionConsensusState RPC method
  */
 export interface QueryConnectionConsensusStateRequest {
   /** connection identifier */
@@ -211,7 +211,7 @@ export interface QueryConnectionConsensusStateRequest {
 
 /**
  * QueryConnectionConsensusStateRequest is the request type for the
- * Query/ConnectionConsensusState RPC method
+ *  Query/ConnectionConsensusState RPC method
  */
 export interface QueryConnectionConsensusStateRequestSDKType {
   /** connection identifier */
@@ -222,7 +222,7 @@ export interface QueryConnectionConsensusStateRequestSDKType {
 
 /**
  * QueryConnectionConsensusStateResponse is the response type for the
- * Query/ConnectionConsensusState RPC method
+ *  Query/ConnectionConsensusState RPC method
  */
 export interface QueryConnectionConsensusStateResponse {
   /** consensus state associated with the channel */
@@ -240,7 +240,7 @@ export interface QueryConnectionConsensusStateResponse {
 
 /**
  * QueryConnectionConsensusStateResponse is the response type for the
- * Query/ConnectionConsensusState RPC method
+ *  Query/ConnectionConsensusState RPC method
  */
 export interface QueryConnectionConsensusStateResponseSDKType {
   /** consensus state associated with the channel */

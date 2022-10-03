@@ -6,7 +6,7 @@ export const protobufPackage = "akash.base.v1beta2";
 
 /**
  * ResourceUnits describes all available resources types for deployment/node etc
- * if field is nil resource is not present in the given data-structure
+ *  if field is nil resource is not present in the given data-structure
  */
 export interface ResourceUnits {
   cpu?: CPU;
@@ -17,7 +17,7 @@ export interface ResourceUnits {
 
 /**
  * ResourceUnits describes all available resources types for deployment/node etc
- * if field is nil resource is not present in the given data-structure
+ *  if field is nil resource is not present in the given data-structure
  */
 export interface ResourceUnitsSDKType {
   cpu?: CPUSDKType;

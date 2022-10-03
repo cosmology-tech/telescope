@@ -5,7 +5,7 @@ export const protobufPackage = "ibc.lightclients.localhost.v1";
 
 /**
  * ClientState defines a loopback (localhost) client. It requires (read-only)
- * access to keys outside the client prefix.
+ *  access to keys outside the client prefix.
  */
 export interface ClientState {
   /** self chain ID */
@@ -17,7 +17,7 @@ export interface ClientState {
 
 /**
  * ClientState defines a loopback (localhost) client. It requires (read-only)
- * access to keys outside the client prefix.
+ *  access to keys outside the client prefix.
  */
 export interface ClientStateSDKType {
   /** self chain ID */

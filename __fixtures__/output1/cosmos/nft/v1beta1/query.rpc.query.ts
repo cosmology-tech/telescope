@@ -18,7 +18,7 @@ export interface Query {
 
   nFTs(request: QueryNFTsRequest): Promise<QueryNFTsResponse>;
   /*NFTs queries all NFTs of a given class or owner,choose at least one of the two, similar to tokenByIndex in
-  ERC721Enumerable*/
+   ERC721Enumerable*/
 
   nFT(request: QueryNFTRequest): Promise<QueryNFTResponse>;
   /*NFT queries an NFT based on its class and id.*/

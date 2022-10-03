@@ -6,8 +6,8 @@ export const protobufPackage = "ibc.applications.transfer.v1";
 
 /**
  * MsgTransfer defines a msg to transfer fungible tokens (i.e Coins) between
- * ICS20 enabled chains. See ICS Spec here:
- * https://github.com/cosmos/ibc/tree/master/spec/app/ics-020-fungible-token-transfer#data-structures
+ *  ICS20 enabled chains. See ICS Spec here:
+ *  https://github.com/cosmos/ibc/tree/master/spec/app/ics-020-fungible-token-transfer#data-structures
  */
 export interface MsgTransfer {
   /** the port on which the packet will be sent */
@@ -27,21 +27,21 @@ export interface MsgTransfer {
 
   /**
    * Timeout height relative to the current block height.
-   * The timeout is disabled when set to 0.
+   *  The timeout is disabled when set to 0.
    */
   timeoutHeight: Height;
 
   /**
    * Timeout timestamp (in nanoseconds) relative to the current block timestamp.
-   * The timeout is disabled when set to 0.
+   *  The timeout is disabled when set to 0.
    */
   timeoutTimestamp: Long;
 }
 
 /**
  * MsgTransfer defines a msg to transfer fungible tokens (i.e Coins) between
- * ICS20 enabled chains. See ICS Spec here:
- * https://github.com/cosmos/ibc/tree/master/spec/app/ics-020-fungible-token-transfer#data-structures
+ *  ICS20 enabled chains. See ICS Spec here:
+ *  https://github.com/cosmos/ibc/tree/master/spec/app/ics-020-fungible-token-transfer#data-structures
  */
 export interface MsgTransferSDKType {
   /** the port on which the packet will be sent */
@@ -61,13 +61,13 @@ export interface MsgTransferSDKType {
 
   /**
    * Timeout height relative to the current block height.
-   * The timeout is disabled when set to 0.
+   *  The timeout is disabled when set to 0.
    */
   timeout_height: HeightSDKType;
 
   /**
    * Timeout timestamp (in nanoseconds) relative to the current block timestamp.
-   * The timeout is disabled when set to 0.
+   *  The timeout is disabled when set to 0.
    */
   timeout_timestamp: Long;
 }

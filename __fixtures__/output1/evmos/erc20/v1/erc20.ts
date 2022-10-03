@@ -66,7 +66,7 @@ export function ownerToJSON(object: Owner): string {
 
 /**
  * TokenPair defines an instance that records a pairing consisting of a native
- * Cosmos Coin and an ERC20 token address.
+ *   Cosmos Coin and an ERC20 token address.
  */
 export interface TokenPair {
   /** address of ERC20 contract token */
@@ -84,7 +84,7 @@ export interface TokenPair {
 
 /**
  * TokenPair defines an instance that records a pairing consisting of a native
- * Cosmos Coin and an ERC20 token address.
+ *   Cosmos Coin and an ERC20 token address.
  */
 export interface TokenPairSDKType {
   /** address of ERC20 contract token */
@@ -102,7 +102,7 @@ export interface TokenPairSDKType {
 
 /**
  * RegisterCoinProposal is a gov Content type to register a token pair for a
- * native Cosmos coin.
+ *  native Cosmos coin.
  */
 export interface RegisterCoinProposal {
   /** title of the proposal */
@@ -117,7 +117,7 @@ export interface RegisterCoinProposal {
 
 /**
  * RegisterCoinProposal is a gov Content type to register a token pair for a
- * native Cosmos coin.
+ *  native Cosmos coin.
  */
 export interface RegisterCoinProposalSDKType {
   /** title of the proposal */
@@ -132,7 +132,7 @@ export interface RegisterCoinProposalSDKType {
 
 /**
  * RegisterERC20Proposal is a gov Content type to register a token pair for an
- * ERC20 token
+ *  ERC20 token
  */
 export interface RegisterERC20Proposal {
   /** title of the proposal */
@@ -147,7 +147,7 @@ export interface RegisterERC20Proposal {
 
 /**
  * RegisterERC20Proposal is a gov Content type to register a token pair for an
- * ERC20 token
+ *  ERC20 token
  */
 export interface RegisterERC20ProposalSDKType {
   /** title of the proposal */
@@ -162,7 +162,7 @@ export interface RegisterERC20ProposalSDKType {
 
 /**
  * ToggleTokenConversionProposal is a gov Content type to toggle the conversion
- * of a token pair.
+ *  of a token pair.
  */
 export interface ToggleTokenConversionProposal {
   /** title of the proposal */
@@ -173,14 +173,14 @@ export interface ToggleTokenConversionProposal {
 
   /**
    * token identifier can be either the hex contract address of the ERC20 or the
-   * Cosmos base denomination
+   *  Cosmos base denomination
    */
   token: string;
 }
 
 /**
  * ToggleTokenConversionProposal is a gov Content type to toggle the conversion
- * of a token pair.
+ *  of a token pair.
  */
 export interface ToggleTokenConversionProposalSDKType {
   /** title of the proposal */
@@ -191,7 +191,7 @@ export interface ToggleTokenConversionProposalSDKType {
 
   /**
    * token identifier can be either the hex contract address of the ERC20 or the
-   * Cosmos base denomination
+   *  Cosmos base denomination
    */
   token: string;
 }

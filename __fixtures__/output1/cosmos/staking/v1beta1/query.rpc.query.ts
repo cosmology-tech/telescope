@@ -24,25 +24,25 @@ export interface Query {
 
   unbondingDelegation(request: QueryUnbondingDelegationRequest): Promise<QueryUnbondingDelegationResponse>;
   /*UnbondingDelegation queries unbonding info for given validator delegator
-  pair.*/
+   pair.*/
 
   delegatorDelegations(request: QueryDelegatorDelegationsRequest): Promise<QueryDelegatorDelegationsResponse>;
   /*DelegatorDelegations queries all delegations of a given delegator address.*/
 
   delegatorUnbondingDelegations(request: QueryDelegatorUnbondingDelegationsRequest): Promise<QueryDelegatorUnbondingDelegationsResponse>;
   /*DelegatorUnbondingDelegations queries all unbonding delegations of a given
-  delegator address.*/
+   delegator address.*/
 
   redelegations(request: QueryRedelegationsRequest): Promise<QueryRedelegationsResponse>;
   /*Redelegations queries redelegations of given address.*/
 
   delegatorValidators(request: QueryDelegatorValidatorsRequest): Promise<QueryDelegatorValidatorsResponse>;
   /*DelegatorValidators queries all validators info for given delegator
-  address.*/
+   address.*/
 
   delegatorValidator(request: QueryDelegatorValidatorRequest): Promise<QueryDelegatorValidatorResponse>;
   /*DelegatorValidator queries validator info for given delegator validator
-  pair.*/
+   pair.*/
 
   historicalInfo(request: QueryHistoricalInfoRequest): Promise<QueryHistoricalInfoResponse>;
   /*HistoricalInfo queries the historical info for given height.*/

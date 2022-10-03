@@ -15,7 +15,7 @@ export class LCDQueryClient {
   }
 
   /* Params queries a specific parameter of a module, given its subspace and
-  key. */
+   key. */
   async params(params: QueryParamsRequest): Promise<QueryParamsResponseSDKType> {
     const options: any = {
       params: {}

@@ -28,8 +28,8 @@ export interface Params {
 
   /**
    * parameter to enable the EVM hook that converts an ERC20 token to a Cosmos
-   * Coin by transferring the Tokens through a MsgEthereumTx to the
-   * ModuleAddress Ethereum address.
+   *  Coin by transferring the Tokens through a MsgEthereumTx to the
+   *  ModuleAddress Ethereum address.
    */
   enableEvmHook: boolean;
 }
@@ -41,8 +41,8 @@ export interface ParamsSDKType {
 
   /**
    * parameter to enable the EVM hook that converts an ERC20 token to a Cosmos
-   * Coin by transferring the Tokens through a MsgEthereumTx to the
-   * ModuleAddress Ethereum address.
+   *  Coin by transferring the Tokens through a MsgEthereumTx to the
+   *  ModuleAddress Ethereum address.
    */
   enable_evm_hook: boolean;
 }

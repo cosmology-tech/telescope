@@ -33,7 +33,7 @@ export interface GenesisStateSDKType {
 
 /**
  * PacketSequence defines the genesis type necessary to retrieve and store
- * next send and receive sequences.
+ *  next send and receive sequences.
  */
 export interface PacketSequence {
   portId: string;
@@ -43,7 +43,7 @@ export interface PacketSequence {
 
 /**
  * PacketSequence defines the genesis type necessary to retrieve and store
- * next send and receive sequences.
+ *  next send and receive sequences.
  */
 export interface PacketSequenceSDKType {
   port_id: string;

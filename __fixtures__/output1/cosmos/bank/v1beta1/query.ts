@@ -55,7 +55,7 @@ export interface QueryAllBalancesRequestSDKType {
 
 /**
  * QueryAllBalancesResponse is the response type for the Query/AllBalances RPC
- * method.
+ *  method.
  */
 export interface QueryAllBalancesResponse {
   /** balances is the balances of all the coins. */
@@ -67,7 +67,7 @@ export interface QueryAllBalancesResponse {
 
 /**
  * QueryAllBalancesResponse is the response type for the Query/AllBalances RPC
- * method.
+ *  method.
  */
 export interface QueryAllBalancesResponseSDKType {
   /** balances is the balances of all the coins. */
@@ -79,7 +79,7 @@ export interface QueryAllBalancesResponseSDKType {
 
 /**
  * QuerySpendableBalancesRequest defines the gRPC request structure for querying
- * an account's spendable balances.
+ *  an account's spendable balances.
  */
 export interface QuerySpendableBalancesRequest {
   /** address is the address to query spendable balances for. */
@@ -91,7 +91,7 @@ export interface QuerySpendableBalancesRequest {
 
 /**
  * QuerySpendableBalancesRequest defines the gRPC request structure for querying
- * an account's spendable balances.
+ *  an account's spendable balances.
  */
 export interface QuerySpendableBalancesRequestSDKType {
   /** address is the address to query spendable balances for. */
@@ -103,7 +103,7 @@ export interface QuerySpendableBalancesRequestSDKType {
 
 /**
  * QuerySpendableBalancesResponse defines the gRPC response structure for querying
- * an account's spendable balances.
+ *  an account's spendable balances.
  */
 export interface QuerySpendableBalancesResponse {
   /** balances is the spendable balances of all the coins. */
@@ -115,7 +115,7 @@ export interface QuerySpendableBalancesResponse {
 
 /**
  * QuerySpendableBalancesResponse defines the gRPC response structure for querying
- * an account's spendable balances.
+ *  an account's spendable balances.
  */
 export interface QuerySpendableBalancesResponseSDKType {
   /** balances is the spendable balances of all the coins. */
@@ -127,33 +127,33 @@ export interface QuerySpendableBalancesResponseSDKType {
 
 /**
  * QueryTotalSupplyRequest is the request type for the Query/TotalSupply RPC
- * method.
+ *  method.
  */
 export interface QueryTotalSupplyRequest {
   /**
    * pagination defines an optional pagination for the request.
    * 
-   * Since: cosmos-sdk 0.43
+   *  Since: cosmos-sdk 0.43
    */
   pagination?: PageRequest;
 }
 
 /**
  * QueryTotalSupplyRequest is the request type for the Query/TotalSupply RPC
- * method.
+ *  method.
  */
 export interface QueryTotalSupplyRequestSDKType {
   /**
    * pagination defines an optional pagination for the request.
    * 
-   * Since: cosmos-sdk 0.43
+   *  Since: cosmos-sdk 0.43
    */
   pagination?: PageRequestSDKType;
 }
 
 /**
  * QueryTotalSupplyResponse is the response type for the Query/TotalSupply RPC
- * method
+ *  method
  */
 export interface QueryTotalSupplyResponse {
   /** supply is the supply of the coins */
@@ -162,14 +162,14 @@ export interface QueryTotalSupplyResponse {
   /**
    * pagination defines the pagination in the response.
    * 
-   * Since: cosmos-sdk 0.43
+   *  Since: cosmos-sdk 0.43
    */
   pagination?: PageResponse;
 }
 
 /**
  * QueryTotalSupplyResponse is the response type for the Query/TotalSupply RPC
- * method
+ *  method
  */
 export interface QueryTotalSupplyResponseSDKType {
   /** supply is the supply of the coins */
@@ -178,7 +178,7 @@ export interface QueryTotalSupplyResponseSDKType {
   /**
    * pagination defines the pagination in the response.
    * 
-   * Since: cosmos-sdk 0.43
+   *  Since: cosmos-sdk 0.43
    */
   pagination?: PageResponseSDKType;
 }
@@ -237,7 +237,7 @@ export interface QueryDenomsMetadataRequestSDKType {
 
 /**
  * QueryDenomsMetadataResponse is the response type for the Query/DenomsMetadata RPC
- * method.
+ *  method.
  */
 export interface QueryDenomsMetadataResponse {
   /** metadata provides the client information for all the registered tokens. */
@@ -249,7 +249,7 @@ export interface QueryDenomsMetadataResponse {
 
 /**
  * QueryDenomsMetadataResponse is the response type for the Query/DenomsMetadata RPC
- * method.
+ *  method.
  */
 export interface QueryDenomsMetadataResponseSDKType {
   /** metadata provides the client information for all the registered tokens. */
@@ -273,7 +273,7 @@ export interface QueryDenomMetadataRequestSDKType {
 
 /**
  * QueryDenomMetadataResponse is the response type for the Query/DenomMetadata RPC
- * method.
+ *  method.
  */
 export interface QueryDenomMetadataResponse {
   /** metadata describes and provides all the client information for the requested token. */
@@ -282,7 +282,7 @@ export interface QueryDenomMetadataResponse {
 
 /**
  * QueryDenomMetadataResponse is the response type for the Query/DenomMetadata RPC
- * method.
+ *  method.
  */
 export interface QueryDenomMetadataResponseSDKType {
   /** metadata describes and provides all the client information for the requested token. */
@@ -291,8 +291,8 @@ export interface QueryDenomMetadataResponseSDKType {
 
 /**
  * QueryDenomOwnersRequest defines the request type for the DenomOwners RPC query,
- * which queries for a paginated set of all account holders of a particular
- * denomination.
+ *  which queries for a paginated set of all account holders of a particular
+ *  denomination.
  */
 export interface QueryDenomOwnersRequest {
   /** denom defines the coin denomination to query all account holders for. */
@@ -304,8 +304,8 @@ export interface QueryDenomOwnersRequest {
 
 /**
  * QueryDenomOwnersRequest defines the request type for the DenomOwners RPC query,
- * which queries for a paginated set of all account holders of a particular
- * denomination.
+ *  which queries for a paginated set of all account holders of a particular
+ *  denomination.
  */
 export interface QueryDenomOwnersRequestSDKType {
   /** denom defines the coin denomination to query all account holders for. */
@@ -317,8 +317,8 @@ export interface QueryDenomOwnersRequestSDKType {
 
 /**
  * DenomOwner defines structure representing an account that owns or holds a
- * particular denominated token. It contains the account address and account
- * balance of the denominated token.
+ *  particular denominated token. It contains the account address and account
+ *  balance of the denominated token.
  */
 export interface DenomOwner {
   /** address defines the address that owns a particular denomination. */
@@ -330,8 +330,8 @@ export interface DenomOwner {
 
 /**
  * DenomOwner defines structure representing an account that owns or holds a
- * particular denominated token. It contains the account address and account
- * balance of the denominated token.
+ *  particular denominated token. It contains the account address and account
+ *  balance of the denominated token.
  */
 export interface DenomOwnerSDKType {
   /** address defines the address that owns a particular denomination. */

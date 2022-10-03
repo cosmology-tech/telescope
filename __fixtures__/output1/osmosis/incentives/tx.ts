@@ -7,7 +7,7 @@ export const protobufPackage = "osmosis.incentives";
 export interface MsgCreateGauge {
   /**
    * flag to show if it's perpetual or multi-epoch
-   * distribution incentives by third party
+   *  distribution incentives by third party
    */
   isPerpetual: boolean;
   owner: string;
@@ -27,7 +27,7 @@ export interface MsgCreateGauge {
 export interface MsgCreateGaugeSDKType {
   /**
    * flag to show if it's perpetual or multi-epoch
-   * distribution incentives by third party
+   *  distribution incentives by third party
    */
   is_perpetual: boolean;
   owner: string;

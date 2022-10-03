@@ -382,7 +382,7 @@ Object {
       },
       "SpotPrice": Object {
         "comment": "SpotPrice defines a gRPC query handler that returns the spot price given
-a base denomination and a quote denomination.",
+ a base denomination and a quote denomination.",
         "fields": Object {
           "baseAssetDenom": Object {
             "comment": null,
@@ -818,7 +818,7 @@ a base denomination and a quote denomination.",
   },
   "QuerySpotPriceRequest": Object {
     "comment": "QuerySpotPriceRequest defines the gRPC request structure for a SpotPrice
-query.",
+ query.",
     "fields": Object {
       "baseAssetDenom": Object {
         "comment": null,
@@ -881,7 +881,7 @@ query.",
   },
   "QuerySpotPriceResponse": Object {
     "comment": "QuerySpotPriceResponse defines the gRPC response structure for a SpotPrice
-query.",
+ query.",
     "fields": Object {
       "spotPrice": Object {
         "comment": "String of the Dec. Ex) 10.203uatom",

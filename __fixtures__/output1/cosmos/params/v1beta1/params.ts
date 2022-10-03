@@ -18,7 +18,7 @@ export interface ParameterChangeProposalSDKType {
 
 /**
  * ParamChange defines an individual parameter change, for use in
- * ParameterChangeProposal.
+ *  ParameterChangeProposal.
  */
 export interface ParamChange {
   subspace: string;
@@ -28,7 +28,7 @@ export interface ParamChange {
 
 /**
  * ParamChange defines an individual parameter change, for use in
- * ParameterChangeProposal.
+ *  ParameterChangeProposal.
  */
 export interface ParamChangeSDKType {
   subspace: string;

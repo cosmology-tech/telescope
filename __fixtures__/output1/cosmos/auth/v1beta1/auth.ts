@@ -5,8 +5,8 @@ export const protobufPackage = "cosmos.auth.v1beta1";
 
 /**
  * BaseAccount defines a base account type. It contains all the necessary fields
- * for basic account functionality. Any custom account type should extend this
- * type for additional functionality (e.g. vesting).
+ *  for basic account functionality. Any custom account type should extend this
+ *  type for additional functionality (e.g. vesting).
  */
 export interface BaseAccount {
   address: string;
@@ -17,8 +17,8 @@ export interface BaseAccount {
 
 /**
  * BaseAccount defines a base account type. It contains all the necessary fields
- * for basic account functionality. Any custom account type should extend this
- * type for additional functionality (e.g. vesting).
+ *  for basic account functionality. Any custom account type should extend this
+ *  type for additional functionality (e.g. vesting).
  */
 export interface BaseAccountSDKType {
   address: string;

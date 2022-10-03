@@ -50,7 +50,7 @@ exports[`cosmos LCDClient 1`] = `
   }
 
   /* SpendableBalances queries the spenable balance of all coins for a single
-  account. */
+   account. */
   async spendableBalances(params: QuerySpendableBalancesRequest): Promise<QuerySpendableBalancesResponseSDKType> {
     const options: any = {
       params: {}
@@ -107,7 +107,7 @@ exports[`cosmos LCDClient 1`] = `
   }
 
   /* DenomsMetadata queries the client metadata for all registered coin
-  denominations. */
+   denominations. */
   async denomsMetadata(params: QueryDenomsMetadataRequest = {
     pagination: undefined
   }): Promise<QueryDenomsMetadataResponseSDKType> {
@@ -124,7 +124,7 @@ exports[`cosmos LCDClient 1`] = `
   }
 
   /* DenomOwners queries for all account addresses that own a particular token
-  denomination. */
+   denomination. */
   async denomOwners(params: QueryDenomOwnersRequest): Promise<QueryDenomOwnersResponseSDKType> {
     const options: any = {
       params: {}
@@ -177,7 +177,7 @@ exports[`cosmos fee LCDClient 1`] = `
   }
 
   /* AllowancesByGranter returns all the grants given by an address
-  Since v0.46 */
+   Since v0.46 */
   async allowancesByGranter(params: QueryAllowancesByGranterRequest): Promise<QueryAllowancesByGranterResponseSDKType> {
     const options: any = {
       params: {}
@@ -451,7 +451,7 @@ exports[`cosmos/staking/v1beta1/query.proto 1`] = `
   }
 
   /* UnbondingDelegation queries unbonding info for given validator delegator
-  pair. */
+   pair. */
   async unbondingDelegation(params: QueryUnbondingDelegationRequest): Promise<QueryUnbondingDelegationResponseSDKType> {
     const endpoint = \`cosmos/staking/v1beta1/validators/\${params.validatorAddr}/delegations/\${params.delegatorAddr}/unbonding_delegation\`;
     return await this.req.get<QueryUnbondingDelegationResponseSDKType>(endpoint);
@@ -472,7 +472,7 @@ exports[`cosmos/staking/v1beta1/query.proto 1`] = `
   }
 
   /* DelegatorUnbondingDelegations queries all unbonding delegations of a given
-  delegator address. */
+   delegator address. */
   async delegatorUnbondingDelegations(params: QueryDelegatorUnbondingDelegationsRequest): Promise<QueryDelegatorUnbondingDelegationsResponseSDKType> {
     const options: any = {
       params: {}
@@ -509,7 +509,7 @@ exports[`cosmos/staking/v1beta1/query.proto 1`] = `
   }
 
   /* DelegatorValidators queries all validators info for given delegator
-  address. */
+   address. */
   async delegatorValidators(params: QueryDelegatorValidatorsRequest): Promise<QueryDelegatorValidatorsResponseSDKType> {
     const options: any = {
       params: {}
@@ -524,7 +524,7 @@ exports[`cosmos/staking/v1beta1/query.proto 1`] = `
   }
 
   /* DelegatorValidator queries validator info for given delegator validator
-  pair. */
+   pair. */
   async delegatorValidator(params: QueryDelegatorValidatorRequest): Promise<QueryDelegatorValidatorResponseSDKType> {
     const endpoint = \`cosmos/staking/v1beta1/delegators/\${params.delegatorAddr}validators/\${params.validatorAddr}\`;
     return await this.req.get<QueryDelegatorValidatorResponseSDKType>(endpoint);
@@ -626,7 +626,7 @@ exports[`osmosis LCDClient 1`] = `
   }
 
   /* SpotPrice defines a gRPC query handler that returns the spot price given
-  a base denomination and a quote denomination. */
+   a base denomination and a quote denomination. */
   async spotPrice(params: QuerySpotPriceRequest): Promise<QuerySpotPriceResponseSDKType> {
     const options: any = {
       params: {}

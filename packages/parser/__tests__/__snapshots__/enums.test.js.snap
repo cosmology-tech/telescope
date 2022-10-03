@@ -5,7 +5,7 @@ Object {
   "comment": "Severities of issues.",
   "comments": Object {
     "DEPRECATION": "Deprecation issue for statements and method that may no longer be
-supported or maintained.",
+ supported or maintained.",
     "ERROR": "Errors such as: unmatched curly braces or variable redefinition.",
     "SEVERITY_UNSPECIFIED": "An unspecified severity.",
     "WARNING": "Warnings such as: unused variables.",

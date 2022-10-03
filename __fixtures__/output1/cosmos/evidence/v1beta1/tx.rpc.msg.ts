@@ -7,7 +7,7 @@ import { MsgSubmitEvidence, MsgSubmitEvidenceSDKType, MsgSubmitEvidenceResponse,
 export interface Msg {
   submitEvidence(request: MsgSubmitEvidence): Promise<MsgSubmitEvidenceResponse>;
   /*SubmitEvidence submits an arbitrary Evidence of misbehavior such as equivocation or
-  counterfactual signing.*/
+   counterfactual signing.*/
 
 }
 export class MsgClientImpl implements Msg {

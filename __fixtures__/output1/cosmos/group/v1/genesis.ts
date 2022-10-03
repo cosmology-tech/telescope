@@ -7,7 +7,7 @@ export const protobufPackage = "cosmos.group.v1";
 export interface GenesisState {
   /**
    * group_seq is the group table orm.Sequence,
-   * it is used to get the next group ID.
+   *  it is used to get the next group ID.
    */
   groupSeq: Long;
 
@@ -19,7 +19,7 @@ export interface GenesisState {
 
   /**
    * group_policy_seq is the group policy table orm.Sequence,
-   * it is used to generate the next group policy account address.
+   *  it is used to generate the next group policy account address.
    */
   groupPolicySeq: Long;
 
@@ -28,7 +28,7 @@ export interface GenesisState {
 
   /**
    * proposal_seq is the proposal table orm.Sequence,
-   * it is used to get the next proposal ID.
+   *  it is used to get the next proposal ID.
    */
   proposalSeq: Long;
 
@@ -43,7 +43,7 @@ export interface GenesisState {
 export interface GenesisStateSDKType {
   /**
    * group_seq is the group table orm.Sequence,
-   * it is used to get the next group ID.
+   *  it is used to get the next group ID.
    */
   group_seq: Long;
 
@@ -55,7 +55,7 @@ export interface GenesisStateSDKType {
 
   /**
    * group_policy_seq is the group policy table orm.Sequence,
-   * it is used to generate the next group policy account address.
+   *  it is used to generate the next group policy account address.
    */
   group_policy_seq: Long;
 
@@ -64,7 +64,7 @@ export interface GenesisStateSDKType {
 
   /**
    * proposal_seq is the proposal table orm.Sequence,
-   * it is used to get the next proposal ID.
+   *  it is used to get the next proposal ID.
    */
   proposal_seq: Long;
 

@@ -7,11 +7,11 @@ import { MsgGrantAllowance, MsgGrantAllowanceSDKType, MsgGrantAllowanceResponse,
 export interface Msg {
   grantAllowance(request: MsgGrantAllowance): Promise<MsgGrantAllowanceResponse>;
   /*GrantAllowance grants fee allowance to the grantee on the granter's
-  account with the provided expiration time.*/
+   account with the provided expiration time.*/
 
   revokeAllowance(request: MsgRevokeAllowance): Promise<MsgRevokeAllowanceResponse>;
   /*RevokeAllowance revokes any fee allowance of granter's account that
-  has been granted to the grantee.*/
+   has been granted to the grantee.*/
 
 }
 export class MsgClientImpl implements Msg {

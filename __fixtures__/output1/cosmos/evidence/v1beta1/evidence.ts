@@ -5,7 +5,7 @@ export const protobufPackage = "cosmos.evidence.v1beta1";
 
 /**
  * Equivocation implements the Evidence interface and defines evidence of double
- * signing misbehavior.
+ *  signing misbehavior.
  */
 export interface Equivocation {
   height: Long;
@@ -16,7 +16,7 @@ export interface Equivocation {
 
 /**
  * Equivocation implements the Evidence interface and defines evidence of double
- * signing misbehavior.
+ *  signing misbehavior.
  */
 export interface EquivocationSDKType {
   height: Long;

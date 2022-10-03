@@ -38,7 +38,7 @@ export class LCDQueryClient {
   }
 
   /* CirculatingSupply retrieves the total number of tokens that are in
-  circulation (i.e. excluding unvested tokens). */
+   circulation (i.e. excluding unvested tokens). */
   async circulatingSupply(_params: QueryCirculatingSupplyRequest = {}): Promise<QueryCirculatingSupplyResponseSDKType> {
     const endpoint = `evmos/inflation/v1/circulating_supply`;
     return await this.req.get<QueryCirculatingSupplyResponseSDKType>(endpoint);

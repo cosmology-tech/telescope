@@ -7,46 +7,46 @@ export const protobufPackage = "cosmos.tx.signing.v1beta1";
 /**
  * SignMode represents a signing mode with its own security guarantees.
  * 
- * This enum should be considered a registry of all known sign modes
- * in the Cosmos ecosystem. Apps are not expected to support all known
- * sign modes. Apps that would like to support custom  sign modes are
- * encouraged to open a small PR against this file to add a new case
- * to this SignMode enum describing their sign mode so that different
- * apps have a consistent version of this enum.
+ *  This enum should be considered a registry of all known sign modes
+ *  in the Cosmos ecosystem. Apps are not expected to support all known
+ *  sign modes. Apps that would like to support custom  sign modes are
+ *  encouraged to open a small PR against this file to add a new case
+ *  to this SignMode enum describing their sign mode so that different
+ *  apps have a consistent version of this enum.
  */
 export enum SignMode {
   /**
    * SIGN_MODE_UNSPECIFIED - SIGN_MODE_UNSPECIFIED specifies an unknown signing mode and will be
-   * rejected.
+   *  rejected.
    */
   SIGN_MODE_UNSPECIFIED = 0,
 
   /**
    * SIGN_MODE_DIRECT - SIGN_MODE_DIRECT specifies a signing mode which uses SignDoc and is
-   * verified with raw bytes from Tx.
+   *  verified with raw bytes from Tx.
    */
   SIGN_MODE_DIRECT = 1,
 
   /**
    * SIGN_MODE_TEXTUAL - SIGN_MODE_TEXTUAL is a future signing mode that will verify some
-   * human-readable textual representation on top of the binary representation
-   * from SIGN_MODE_DIRECT. It is currently not supported.
+   *  human-readable textual representation on top of the binary representation
+   *  from SIGN_MODE_DIRECT. It is currently not supported.
    */
   SIGN_MODE_TEXTUAL = 2,
 
   /**
    * SIGN_MODE_DIRECT_AUX - SIGN_MODE_DIRECT_AUX specifies a signing mode which uses
-   * SignDocDirectAux. As opposed to SIGN_MODE_DIRECT, this sign mode does not
-   * require signers signing over other signers' `signer_info`. It also allows
-   * for adding Tips in transactions.
+   *  SignDocDirectAux. As opposed to SIGN_MODE_DIRECT, this sign mode does not
+   *  require signers signing over other signers' `signer_info`. It also allows
+   *  for adding Tips in transactions.
    * 
-   * Since: cosmos-sdk 0.46
+   *  Since: cosmos-sdk 0.46
    */
   SIGN_MODE_DIRECT_AUX = 3,
 
   /**
    * SIGN_MODE_LEGACY_AMINO_JSON - SIGN_MODE_LEGACY_AMINO_JSON is a backwards compatibility mode which uses
-   * Amino JSON and will be removed in the future.
+   *  Amino JSON and will be removed in the future.
    */
   SIGN_MODE_LEGACY_AMINO_JSON = 127,
   UNRECOGNIZED = -1,
@@ -55,46 +55,46 @@ export enum SignMode {
 /**
  * SignMode represents a signing mode with its own security guarantees.
  * 
- * This enum should be considered a registry of all known sign modes
- * in the Cosmos ecosystem. Apps are not expected to support all known
- * sign modes. Apps that would like to support custom  sign modes are
- * encouraged to open a small PR against this file to add a new case
- * to this SignMode enum describing their sign mode so that different
- * apps have a consistent version of this enum.
+ *  This enum should be considered a registry of all known sign modes
+ *  in the Cosmos ecosystem. Apps are not expected to support all known
+ *  sign modes. Apps that would like to support custom  sign modes are
+ *  encouraged to open a small PR against this file to add a new case
+ *  to this SignMode enum describing their sign mode so that different
+ *  apps have a consistent version of this enum.
  */
 export enum SignModeSDKType {
   /**
    * SIGN_MODE_UNSPECIFIED - SIGN_MODE_UNSPECIFIED specifies an unknown signing mode and will be
-   * rejected.
+   *  rejected.
    */
   SIGN_MODE_UNSPECIFIED = 0,
 
   /**
    * SIGN_MODE_DIRECT - SIGN_MODE_DIRECT specifies a signing mode which uses SignDoc and is
-   * verified with raw bytes from Tx.
+   *  verified with raw bytes from Tx.
    */
   SIGN_MODE_DIRECT = 1,
 
   /**
    * SIGN_MODE_TEXTUAL - SIGN_MODE_TEXTUAL is a future signing mode that will verify some
-   * human-readable textual representation on top of the binary representation
-   * from SIGN_MODE_DIRECT. It is currently not supported.
+   *  human-readable textual representation on top of the binary representation
+   *  from SIGN_MODE_DIRECT. It is currently not supported.
    */
   SIGN_MODE_TEXTUAL = 2,
 
   /**
    * SIGN_MODE_DIRECT_AUX - SIGN_MODE_DIRECT_AUX specifies a signing mode which uses
-   * SignDocDirectAux. As opposed to SIGN_MODE_DIRECT, this sign mode does not
-   * require signers signing over other signers' `signer_info`. It also allows
-   * for adding Tips in transactions.
+   *  SignDocDirectAux. As opposed to SIGN_MODE_DIRECT, this sign mode does not
+   *  require signers signing over other signers' `signer_info`. It also allows
+   *  for adding Tips in transactions.
    * 
-   * Since: cosmos-sdk 0.46
+   *  Since: cosmos-sdk 0.46
    */
   SIGN_MODE_DIRECT_AUX = 3,
 
   /**
    * SIGN_MODE_LEGACY_AMINO_JSON - SIGN_MODE_LEGACY_AMINO_JSON is a backwards compatibility mode which uses
-   * Amino JSON and will be removed in the future.
+   *  Amino JSON and will be removed in the future.
    */
   SIGN_MODE_LEGACY_AMINO_JSON = 127,
   UNRECOGNIZED = -1,
@@ -163,9 +163,9 @@ export interface SignatureDescriptorsSDKType {
 
 /**
  * SignatureDescriptor is a convenience type which represents the full data for
- * a signature including the public key of the signer, signing modes and the
- * signature itself. It is primarily used for coordinating signatures between
- * clients.
+ *  a signature including the public key of the signer, signing modes and the
+ *  signature itself. It is primarily used for coordinating signatures between
+ *  clients.
  */
 export interface SignatureDescriptor {
   /** public_key is the public key of the signer */
@@ -174,17 +174,17 @@ export interface SignatureDescriptor {
 
   /**
    * sequence is the sequence of the account, which describes the
-   * number of committed transactions signed by a given address. It is used to prevent
-   * replay attacks.
+   *  number of committed transactions signed by a given address. It is used to prevent
+   *  replay attacks.
    */
   sequence: Long;
 }
 
 /**
  * SignatureDescriptor is a convenience type which represents the full data for
- * a signature including the public key of the signer, signing modes and the
- * signature itself. It is primarily used for coordinating signatures between
- * clients.
+ *  a signature including the public key of the signer, signing modes and the
+ *  signature itself. It is primarily used for coordinating signatures between
+ *  clients.
  */
 export interface SignatureDescriptorSDKType {
   /** public_key is the public key of the signer */
@@ -193,8 +193,8 @@ export interface SignatureDescriptorSDKType {
 
   /**
    * sequence is the sequence of the account, which describes the
-   * number of committed transactions signed by a given address. It is used to prevent
-   * replay attacks.
+   *  number of committed transactions signed by a given address. It is used to prevent
+   *  replay attacks.
    */
   sequence: Long;
 }

@@ -7,7 +7,7 @@ export const protobufPackage = "evmos.erc20.v1";
 
 /**
  * QueryTokenPairsRequest is the request type for the Query/TokenPairs RPC
- * method.
+ *  method.
  */
 export interface QueryTokenPairsRequest {
   /** pagination defines an optional pagination for the request. */
@@ -16,7 +16,7 @@ export interface QueryTokenPairsRequest {
 
 /**
  * QueryTokenPairsRequest is the request type for the Query/TokenPairs RPC
- * method.
+ *  method.
  */
 export interface QueryTokenPairsRequestSDKType {
   /** pagination defines an optional pagination for the request. */
@@ -25,7 +25,7 @@ export interface QueryTokenPairsRequestSDKType {
 
 /**
  * QueryTokenPairsResponse is the response type for the Query/TokenPairs RPC
- * method.
+ *  method.
  */
 export interface QueryTokenPairsResponse {
   tokenPairs: TokenPair[];
@@ -36,7 +36,7 @@ export interface QueryTokenPairsResponse {
 
 /**
  * QueryTokenPairsResponse is the response type for the Query/TokenPairs RPC
- * method.
+ *  method.
  */
 export interface QueryTokenPairsResponseSDKType {
   token_pairs: TokenPairSDKType[];
@@ -49,7 +49,7 @@ export interface QueryTokenPairsResponseSDKType {
 export interface QueryTokenPairRequest {
   /**
    * token identifier can be either the hex contract address of the ERC20 or the
-   * Cosmos base denomination
+   *  Cosmos base denomination
    */
   token: string;
 }
@@ -58,14 +58,14 @@ export interface QueryTokenPairRequest {
 export interface QueryTokenPairRequestSDKType {
   /**
    * token identifier can be either the hex contract address of the ERC20 or the
-   * Cosmos base denomination
+   *  Cosmos base denomination
    */
   token: string;
 }
 
 /**
  * QueryTokenPairResponse is the response type for the Query/TokenPair RPC
- * method.
+ *  method.
  */
 export interface QueryTokenPairResponse {
   tokenPair: TokenPair;
@@ -73,7 +73,7 @@ export interface QueryTokenPairResponse {
 
 /**
  * QueryTokenPairResponse is the response type for the Query/TokenPair RPC
- * method.
+ *  method.
  */
 export interface QueryTokenPairResponseSDKType {
   token_pair: TokenPairSDKType;
@@ -87,7 +87,7 @@ export interface QueryParamsRequestSDKType {}
 
 /**
  * QueryParamsResponse is the response type for the Query/Params RPC
- * method.
+ *  method.
  */
 export interface QueryParamsResponse {
   params: Params;
@@ -95,7 +95,7 @@ export interface QueryParamsResponse {
 
 /**
  * QueryParamsResponse is the response type for the Query/Params RPC
- * method.
+ *  method.
  */
 export interface QueryParamsResponseSDKType {
   params: ParamsSDKType;

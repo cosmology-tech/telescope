@@ -40,7 +40,7 @@ export class LCDQueryClient {
   }
 
   /* NFTs queries all NFTs of a given class or owner,choose at least one of the two, similar to tokenByIndex in
-  ERC721Enumerable */
+   ERC721Enumerable */
   async nFTs(params: QueryNFTsRequest): Promise<QueryNFTsResponseSDKType> {
     const options: any = {
       params: {}

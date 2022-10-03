@@ -8,7 +8,7 @@ import { QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, Que
 export interface Query {
   params(request: QueryParamsRequest): Promise<QueryParamsResponse>;
   /*Params queries a specific parameter of a module, given its subspace and
-  key.*/
+   key.*/
 
   subspaces(request?: QuerySubspacesRequest): Promise<QuerySubspacesResponse>;
   /*Subspaces queries for all registered subspaces and all keys for a subspace.*/

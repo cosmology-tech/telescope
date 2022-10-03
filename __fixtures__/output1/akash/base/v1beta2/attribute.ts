@@ -16,9 +16,9 @@ export interface AttributeSDKType {
 
 /**
  * SignedBy represents validation accounts that tenant expects signatures for provider attributes
- * AllOf has precedence i.e. if there is at least one entry AnyOf is ignored regardless to how many
- * entries there
- * this behaviour to be discussed
+ *  AllOf has precedence i.e. if there is at least one entry AnyOf is ignored regardless to how many
+ *  entries there
+ *  this behaviour to be discussed
  */
 export interface SignedBy {
   /** all_of all keys in this list must have signed attributes */
@@ -30,9 +30,9 @@ export interface SignedBy {
 
 /**
  * SignedBy represents validation accounts that tenant expects signatures for provider attributes
- * AllOf has precedence i.e. if there is at least one entry AnyOf is ignored regardless to how many
- * entries there
- * this behaviour to be discussed
+ *  AllOf has precedence i.e. if there is at least one entry AnyOf is ignored regardless to how many
+ *  entries there
+ *  this behaviour to be discussed
  */
 export interface SignedBySDKType {
   /** all_of all keys in this list must have signed attributes */

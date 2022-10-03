@@ -50,7 +50,7 @@ export class LCDQueryClient {
 
   /* GetBlockWithTxs fetches a block with decoded txs.
   
-  Since: cosmos-sdk 0.45.2 */
+   Since: cosmos-sdk 0.45.2 */
   async getBlockWithTxs(params: GetBlockWithTxsRequest): Promise<GetBlockWithTxsResponseSDKType> {
     const options: any = {
       params: {}

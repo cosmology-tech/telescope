@@ -15,7 +15,7 @@ export interface Query {
 
   allowancesByGranter(request: QueryAllowancesByGranterRequest): Promise<QueryAllowancesByGranterResponse>;
   /*AllowancesByGranter returns all the grants given by an address
-  Since v0.46*/
+   Since v0.46*/
 
 }
 export class QueryClientImpl implements Query {

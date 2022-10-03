@@ -18,7 +18,7 @@ export interface Query {
 
   circulatingSupply(request?: QueryCirculatingSupplyRequest): Promise<QueryCirculatingSupplyResponse>;
   /*CirculatingSupply retrieves the total number of tokens that are in
-  circulation (i.e. excluding unvested tokens).*/
+   circulation (i.e. excluding unvested tokens).*/
 
   inflationRate(request?: QueryInflationRateRequest): Promise<QueryInflationRateResponse>;
   /*InflationRate retrieves the inflation rate of the current period.*/

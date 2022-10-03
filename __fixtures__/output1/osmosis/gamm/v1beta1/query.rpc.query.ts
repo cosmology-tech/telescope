@@ -32,7 +32,7 @@ export interface Query {
 
   spotPrice(request: QuerySpotPriceRequest): Promise<QuerySpotPriceResponse>;
   /*SpotPrice defines a gRPC query handler that returns the spot price given
-  a base denomination and a quote denomination.*/
+   a base denomination and a quote denomination.*/
 
   estimateSwapExactAmountIn(request: QuerySwapExactAmountInRequest): Promise<QuerySwapExactAmountInResponse>;
   /*Estimate the swap.*/

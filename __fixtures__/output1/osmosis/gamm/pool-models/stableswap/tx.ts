@@ -24,7 +24,7 @@ export interface MsgCreateStableswapPoolResponseSDKType {
 export interface MsgStableSwapAdjustScalingFactors {
   /**
    * Sender must be the pool's scaling_factor_governor in order for the tx to
-   * succeed
+   *  succeed
    */
   sender: string;
   poolId: Long;
@@ -33,7 +33,7 @@ export interface MsgStableSwapAdjustScalingFactors {
 export interface MsgStableSwapAdjustScalingFactorsSDKType {
   /**
    * Sender must be the pool's scaling_factor_governor in order for the tx to
-   * succeed
+   *  succeed
    */
   sender: string;
   pool_id: Long;

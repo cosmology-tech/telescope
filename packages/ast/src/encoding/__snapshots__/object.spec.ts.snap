@@ -2390,9 +2390,9 @@ exports[`google/rpc/error_details name collisions 1`] = `
 "/**
  * Describes what preconditions have failed.
  * 
- * For example, if an RPC failed because it required the Terms of Service to be
- * acknowledged, it could list the terms of service violation in the
- * PreconditionFailure message.
+ *  For example, if an RPC failed because it required the Terms of Service to be
+ *  acknowledged, it could list the terms of service violation in the
+ *  PreconditionFailure message.
  */
 export interface PreconditionFailure {
   /** Describes all precondition violations. */

@@ -7,7 +7,7 @@ export const protobufPackage = "ibc.core.connection.v1";
 
 /**
  * MsgConnectionOpenInit defines the msg sent by an account on Chain A to
- * initialize a connection with Chain B.
+ *  initialize a connection with Chain B.
  */
 export interface MsgConnectionOpenInit {
   clientId: string;
@@ -19,7 +19,7 @@ export interface MsgConnectionOpenInit {
 
 /**
  * MsgConnectionOpenInit defines the msg sent by an account on Chain A to
- * initialize a connection with Chain B.
+ *  initialize a connection with Chain B.
  */
 export interface MsgConnectionOpenInitSDKType {
   client_id: string;
@@ -31,26 +31,26 @@ export interface MsgConnectionOpenInitSDKType {
 
 /**
  * MsgConnectionOpenInitResponse defines the Msg/ConnectionOpenInit response
- * type.
+ *  type.
  */
 export interface MsgConnectionOpenInitResponse {}
 
 /**
  * MsgConnectionOpenInitResponse defines the Msg/ConnectionOpenInit response
- * type.
+ *  type.
  */
 export interface MsgConnectionOpenInitResponseSDKType {}
 
 /**
  * MsgConnectionOpenTry defines a msg sent by a Relayer to try to open a
- * connection on Chain B.
+ *  connection on Chain B.
  */
 export interface MsgConnectionOpenTry {
   clientId: string;
 
   /**
    * in the case of crossing hello's, when both chains call OpenInit, we need
-   * the connection identifier of the previous connection in state INIT
+   *  the connection identifier of the previous connection in state INIT
    */
   previousConnectionId: string;
   clientState: Any;
@@ -61,7 +61,7 @@ export interface MsgConnectionOpenTry {
 
   /**
    * proof of the initialization the connection on Chain A: `UNITIALIZED ->
-   * INIT`
+   *  INIT`
    */
   proofInit: Uint8Array;
 
@@ -76,14 +76,14 @@ export interface MsgConnectionOpenTry {
 
 /**
  * MsgConnectionOpenTry defines a msg sent by a Relayer to try to open a
- * connection on Chain B.
+ *  connection on Chain B.
  */
 export interface MsgConnectionOpenTrySDKType {
   client_id: string;
 
   /**
    * in the case of crossing hello's, when both chains call OpenInit, we need
-   * the connection identifier of the previous connection in state INIT
+   *  the connection identifier of the previous connection in state INIT
    */
   previous_connection_id: string;
   client_state: AnySDKType;
@@ -94,7 +94,7 @@ export interface MsgConnectionOpenTrySDKType {
 
   /**
    * proof of the initialization the connection on Chain A: `UNITIALIZED ->
-   * INIT`
+   *  INIT`
    */
   proof_init: Uint8Array;
 
@@ -115,7 +115,7 @@ export interface MsgConnectionOpenTryResponseSDKType {}
 
 /**
  * MsgConnectionOpenAck defines a msg sent by a Relayer to Chain A to
- * acknowledge the change of connection state to TRYOPEN on Chain B.
+ *  acknowledge the change of connection state to TRYOPEN on Chain B.
  */
 export interface MsgConnectionOpenAck {
   connectionId: string;
@@ -126,7 +126,7 @@ export interface MsgConnectionOpenAck {
 
   /**
    * proof of the initialization the connection on Chain B: `UNITIALIZED ->
-   * TRYOPEN`
+   *  TRYOPEN`
    */
   proofTry: Uint8Array;
 
@@ -141,7 +141,7 @@ export interface MsgConnectionOpenAck {
 
 /**
  * MsgConnectionOpenAck defines a msg sent by a Relayer to Chain A to
- * acknowledge the change of connection state to TRYOPEN on Chain B.
+ *  acknowledge the change of connection state to TRYOPEN on Chain B.
  */
 export interface MsgConnectionOpenAckSDKType {
   connection_id: string;
@@ -152,7 +152,7 @@ export interface MsgConnectionOpenAckSDKType {
 
   /**
    * proof of the initialization the connection on Chain B: `UNITIALIZED ->
-   * TRYOPEN`
+   *  TRYOPEN`
    */
   proof_try: Uint8Array;
 
@@ -173,7 +173,7 @@ export interface MsgConnectionOpenAckResponseSDKType {}
 
 /**
  * MsgConnectionOpenConfirm defines a msg sent by a Relayer to Chain B to
- * acknowledge the change of connection state to OPEN on Chain A.
+ *  acknowledge the change of connection state to OPEN on Chain A.
  */
 export interface MsgConnectionOpenConfirm {
   connectionId: string;
@@ -186,7 +186,7 @@ export interface MsgConnectionOpenConfirm {
 
 /**
  * MsgConnectionOpenConfirm defines a msg sent by a Relayer to Chain B to
- * acknowledge the change of connection state to OPEN on Chain A.
+ *  acknowledge the change of connection state to OPEN on Chain A.
  */
 export interface MsgConnectionOpenConfirmSDKType {
   connection_id: string;
@@ -199,13 +199,13 @@ export interface MsgConnectionOpenConfirmSDKType {
 
 /**
  * MsgConnectionOpenConfirmResponse defines the Msg/ConnectionOpenConfirm
- * response type.
+ *  response type.
  */
 export interface MsgConnectionOpenConfirmResponse {}
 
 /**
  * MsgConnectionOpenConfirmResponse defines the Msg/ConnectionOpenConfirm
- * response type.
+ *  response type.
  */
 export interface MsgConnectionOpenConfirmResponseSDKType {}
 

@@ -185,14 +185,14 @@ export interface Account {
 
   /**
    * bech32 encoded account address of the depositor.
-   * If depositor is same as the owner, then any incoming coins are added to the Balance.
-   * If depositor isn't same as the owner, then any incoming coins are added to the Funds.
+   *  If depositor is same as the owner, then any incoming coins are added to the Balance.
+   *  If depositor isn't same as the owner, then any incoming coins are added to the Funds.
    */
   depositor: string;
 
   /**
    * Funds are unspent coins received from the (non-Owner) Depositor's wallet.
-   * If there are any funds, they should be spent before spending the Balance.
+   *  If there are any funds, they should be spent before spending the Balance.
    */
   funds: DecCoin;
 }
@@ -219,14 +219,14 @@ export interface AccountSDKType {
 
   /**
    * bech32 encoded account address of the depositor.
-   * If depositor is same as the owner, then any incoming coins are added to the Balance.
-   * If depositor isn't same as the owner, then any incoming coins are added to the Funds.
+   *  If depositor is same as the owner, then any incoming coins are added to the Balance.
+   *  If depositor isn't same as the owner, then any incoming coins are added to the Funds.
    */
   depositor: string;
 
   /**
    * Funds are unspent coins received from the (non-Owner) Depositor's wallet.
-   * If there are any funds, they should be spent before spending the Balance.
+   *  If there are any funds, they should be spent before spending the Balance.
    */
   funds: DecCoinSDKType;
 }

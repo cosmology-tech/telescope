@@ -22,7 +22,7 @@ export interface QueryParamsResponseSDKType {
 
 /**
  * QuerySigningInfoRequest is the request type for the Query/SigningInfo RPC
- * method
+ *  method
  */
 export interface QuerySigningInfoRequest {
   /** cons_address is the address to query signing info of */
@@ -31,7 +31,7 @@ export interface QuerySigningInfoRequest {
 
 /**
  * QuerySigningInfoRequest is the request type for the Query/SigningInfo RPC
- * method
+ *  method
  */
 export interface QuerySigningInfoRequestSDKType {
   /** cons_address is the address to query signing info of */
@@ -40,7 +40,7 @@ export interface QuerySigningInfoRequestSDKType {
 
 /**
  * QuerySigningInfoResponse is the response type for the Query/SigningInfo RPC
- * method
+ *  method
  */
 export interface QuerySigningInfoResponse {
   /** val_signing_info is the signing info of requested val cons address */
@@ -49,7 +49,7 @@ export interface QuerySigningInfoResponse {
 
 /**
  * QuerySigningInfoResponse is the response type for the Query/SigningInfo RPC
- * method
+ *  method
  */
 export interface QuerySigningInfoResponseSDKType {
   /** val_signing_info is the signing info of requested val cons address */
@@ -58,7 +58,7 @@ export interface QuerySigningInfoResponseSDKType {
 
 /**
  * QuerySigningInfosRequest is the request type for the Query/SigningInfos RPC
- * method
+ *  method
  */
 export interface QuerySigningInfosRequest {
   pagination?: PageRequest;
@@ -66,7 +66,7 @@ export interface QuerySigningInfosRequest {
 
 /**
  * QuerySigningInfosRequest is the request type for the Query/SigningInfos RPC
- * method
+ *  method
  */
 export interface QuerySigningInfosRequestSDKType {
   pagination?: PageRequestSDKType;
@@ -74,7 +74,7 @@ export interface QuerySigningInfosRequestSDKType {
 
 /**
  * QuerySigningInfosResponse is the response type for the Query/SigningInfos RPC
- * method
+ *  method
  */
 export interface QuerySigningInfosResponse {
   /** info is the signing info of all validators */
@@ -84,7 +84,7 @@ export interface QuerySigningInfosResponse {
 
 /**
  * QuerySigningInfosResponse is the response type for the Query/SigningInfos RPC
- * method
+ *  method
  */
 export interface QuerySigningInfosResponseSDKType {
   /** info is the signing info of all validators */

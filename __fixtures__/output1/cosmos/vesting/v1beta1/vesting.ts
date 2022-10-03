@@ -6,7 +6,7 @@ export const protobufPackage = "cosmos.vesting.v1beta1";
 
 /**
  * BaseVestingAccount implements the VestingAccount interface. It contains all
- * the necessary fields needed for any vesting account implementation.
+ *  the necessary fields needed for any vesting account implementation.
  */
 export interface BaseVestingAccount {
   baseAccount: BaseAccount;
@@ -18,7 +18,7 @@ export interface BaseVestingAccount {
 
 /**
  * BaseVestingAccount implements the VestingAccount interface. It contains all
- * the necessary fields needed for any vesting account implementation.
+ *  the necessary fields needed for any vesting account implementation.
  */
 export interface BaseVestingAccountSDKType {
   base_account: BaseAccountSDKType;
@@ -30,7 +30,7 @@ export interface BaseVestingAccountSDKType {
 
 /**
  * ContinuousVestingAccount implements the VestingAccount interface. It
- * continuously vests by unlocking coins linearly with respect to time.
+ *  continuously vests by unlocking coins linearly with respect to time.
  */
 export interface ContinuousVestingAccount {
   baseVestingAccount: BaseVestingAccount;
@@ -39,7 +39,7 @@ export interface ContinuousVestingAccount {
 
 /**
  * ContinuousVestingAccount implements the VestingAccount interface. It
- * continuously vests by unlocking coins linearly with respect to time.
+ *  continuously vests by unlocking coins linearly with respect to time.
  */
 export interface ContinuousVestingAccountSDKType {
   base_vesting_account: BaseVestingAccountSDKType;
@@ -48,8 +48,8 @@ export interface ContinuousVestingAccountSDKType {
 
 /**
  * DelayedVestingAccount implements the VestingAccount interface. It vests all
- * coins after a specific time, but non prior. In other words, it keeps them
- * locked until a specified time.
+ *  coins after a specific time, but non prior. In other words, it keeps them
+ *  locked until a specified time.
  */
 export interface DelayedVestingAccount {
   baseVestingAccount: BaseVestingAccount;
@@ -57,8 +57,8 @@ export interface DelayedVestingAccount {
 
 /**
  * DelayedVestingAccount implements the VestingAccount interface. It vests all
- * coins after a specific time, but non prior. In other words, it keeps them
- * locked until a specified time.
+ *  coins after a specific time, but non prior. In other words, it keeps them
+ *  locked until a specified time.
  */
 export interface DelayedVestingAccountSDKType {
   base_vesting_account: BaseVestingAccountSDKType;
@@ -78,7 +78,7 @@ export interface PeriodSDKType {
 
 /**
  * PeriodicVestingAccount implements the VestingAccount interface. It
- * periodically vests by unlocking coins during each specified period.
+ *  periodically vests by unlocking coins during each specified period.
  */
 export interface PeriodicVestingAccount {
   baseVestingAccount: BaseVestingAccount;
@@ -88,7 +88,7 @@ export interface PeriodicVestingAccount {
 
 /**
  * PeriodicVestingAccount implements the VestingAccount interface. It
- * periodically vests by unlocking coins during each specified period.
+ *  periodically vests by unlocking coins during each specified period.
  */
 export interface PeriodicVestingAccountSDKType {
   base_vesting_account: BaseVestingAccountSDKType;
@@ -98,10 +98,10 @@ export interface PeriodicVestingAccountSDKType {
 
 /**
  * PermanentLockedAccount implements the VestingAccount interface. It does
- * not ever release coins, locking them indefinitely. Coins in this account can
- * still be used for delegating and for governance votes even while locked.
+ *  not ever release coins, locking them indefinitely. Coins in this account can
+ *  still be used for delegating and for governance votes even while locked.
  * 
- * Since: cosmos-sdk 0.43
+ *  Since: cosmos-sdk 0.43
  */
 export interface PermanentLockedAccount {
   baseVestingAccount: BaseVestingAccount;
@@ -109,10 +109,10 @@ export interface PermanentLockedAccount {
 
 /**
  * PermanentLockedAccount implements the VestingAccount interface. It does
- * not ever release coins, locking them indefinitely. Coins in this account can
- * still be used for delegating and for governance votes even while locked.
+ *  not ever release coins, locking them indefinitely. Coins in this account can
+ *  still be used for delegating and for governance votes even while locked.
  * 
- * Since: cosmos-sdk 0.43
+ *  Since: cosmos-sdk 0.43
  */
 export interface PermanentLockedAccountSDKType {
   base_vesting_account: BaseVestingAccountSDKType;

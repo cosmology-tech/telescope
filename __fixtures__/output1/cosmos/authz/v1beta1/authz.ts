@@ -6,7 +6,7 @@ export const protobufPackage = "cosmos.authz.v1beta1";
 
 /**
  * GenericAuthorization gives the grantee unrestricted permissions to execute
- * the provided method on behalf of the granter's account.
+ *  the provided method on behalf of the granter's account.
  */
 export interface GenericAuthorization {
   /** Msg, identified by it's type URL, to grant unrestricted permissions to execute */
@@ -15,7 +15,7 @@ export interface GenericAuthorization {
 
 /**
  * GenericAuthorization gives the grantee unrestricted permissions to execute
- * the provided method on behalf of the granter's account.
+ *  the provided method on behalf of the granter's account.
  */
 export interface GenericAuthorizationSDKType {
   /** Msg, identified by it's type URL, to grant unrestricted permissions to execute */
@@ -24,37 +24,37 @@ export interface GenericAuthorizationSDKType {
 
 /**
  * Grant gives permissions to execute
- * the provide method with expiration time.
+ *  the provide method with expiration time.
  */
 export interface Grant {
   authorization: Any;
 
   /**
    * time when the grant will expire and will be pruned. If null, then the grant
-   * doesn't have a time expiration (other conditions  in `authorization`
-   * may apply to invalidate the grant)
+   *  doesn't have a time expiration (other conditions  in `authorization`
+   *  may apply to invalidate the grant)
    */
   expiration?: Date;
 }
 
 /**
  * Grant gives permissions to execute
- * the provide method with expiration time.
+ *  the provide method with expiration time.
  */
 export interface GrantSDKType {
   authorization: AnySDKType;
 
   /**
    * time when the grant will expire and will be pruned. If null, then the grant
-   * doesn't have a time expiration (other conditions  in `authorization`
-   * may apply to invalidate the grant)
+   *  doesn't have a time expiration (other conditions  in `authorization`
+   *  may apply to invalidate the grant)
    */
   expiration?: Date;
 }
 
 /**
  * GrantAuthorization extends a grant with both the addresses of the grantee and granter.
- * It is used in genesis.proto and query.proto
+ *  It is used in genesis.proto and query.proto
  */
 export interface GrantAuthorization {
   granter: string;
@@ -65,7 +65,7 @@ export interface GrantAuthorization {
 
 /**
  * GrantAuthorization extends a grant with both the addresses of the grantee and granter.
- * It is used in genesis.proto and query.proto
+ *  It is used in genesis.proto and query.proto
  */
 export interface GrantAuthorizationSDKType {
   granter: string;

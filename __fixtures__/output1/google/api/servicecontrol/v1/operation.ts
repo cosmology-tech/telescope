@@ -10,14 +10,14 @@ export const protobufPackage = "google.api.servicecontrol.v1";
 export enum Operation_Importance {
   /**
    * LOW - Allows data caching, batching, and aggregation. It provides
-   * higher performance with higher data loss risk.
+   *  higher performance with higher data loss risk.
    */
   LOW = 0,
 
   /**
    * HIGH - Disables data aggregation to minimize data loss. It is for operations
-   * that contains significant monetary value or audit trail. This feature
-   * only applies to the client libraries.
+   *  that contains significant monetary value or audit trail. This feature
+   *  only applies to the client libraries.
    */
   HIGH = 1,
   UNRECOGNIZED = -1,
@@ -27,14 +27,14 @@ export enum Operation_Importance {
 export enum Operation_ImportanceSDKType {
   /**
    * LOW - Allows data caching, batching, and aggregation. It provides
-   * higher performance with higher data loss risk.
+   *  higher performance with higher data loss risk.
    */
   LOW = 0,
 
   /**
    * HIGH - Disables data aggregation to minimize data loss. It is for operations
-   * that contains significant monetary value or audit trail. This feature
-   * only applies to the client libraries.
+   *  that contains significant monetary value or audit trail. This feature
+   *  only applies to the client libraries.
    */
   HIGH = 1,
   UNRECOGNIZED = -1,
@@ -80,14 +80,14 @@ export interface Operation_LabelsEntrySDKType {
 export interface Operation {
   /**
    * Identity of the operation. This must be unique within the scope of the
-   * service that generated the operation. If the service calls
-   * Check() and Report() on the same operation, the two calls should carry
-   * the same id.
+   *  service that generated the operation. If the service calls
+   *  Check() and Report() on the same operation, the two calls should carry
+   *  the same id.
    * 
-   * UUID version 4 is recommended, though not required.
-   * In scenarios where an operation is computed from existing information
-   * and an idempotent id is desirable for deduplication purpose, UUID version 5
-   * is recommended. See RFC 4122 for details.
+   *  UUID version 4 is recommended, though not required.
+   *  In scenarios where an operation is computed from existing information
+   *  and an idempotent id is desirable for deduplication purpose, UUID version 5
+   *  is recommended. See RFC 4122 for details.
    */
   operationId: string;
 
@@ -96,17 +96,17 @@ export interface Operation {
 
   /**
    * Identity of the consumer who is using the service.
-   * This field should be filled in for the operations initiated by a
-   * consumer, but not for service-initiated operations that are
-   * not related to a specific consumer.
+   *  This field should be filled in for the operations initiated by a
+   *  consumer, but not for service-initiated operations that are
+   *  not related to a specific consumer.
    * 
-   * - This can be in one of the following formats:
-   * - project:PROJECT_ID,
-   * - project`_`number:PROJECT_NUMBER,
-   * - projects/PROJECT_ID or PROJECT_NUMBER,
-   * - folders/FOLDER_NUMBER,
-   * - organizations/ORGANIZATION_NUMBER,
-   * - api`_`key:API_KEY.
+   *  - This can be in one of the following formats:
+   *      - project:PROJECT_ID,
+   *      - project`_`number:PROJECT_NUMBER,
+   *      - projects/PROJECT_ID or PROJECT_NUMBER,
+   *      - folders/FOLDER_NUMBER,
+   *      - organizations/ORGANIZATION_NUMBER,
+   *      - api`_`key:API_KEY.
    */
   consumerId: string;
 
@@ -115,30 +115,30 @@ export interface Operation {
 
   /**
    * End time of the operation.
-   * Required when the operation is used in
-   * [ServiceController.Report][google.api.servicecontrol.v1.ServiceController.Report],
-   * but optional when the operation is used in
-   * [ServiceController.Check][google.api.servicecontrol.v1.ServiceController.Check].
+   *  Required when the operation is used in
+   *  [ServiceController.Report][google.api.servicecontrol.v1.ServiceController.Report],
+   *  but optional when the operation is used in
+   *  [ServiceController.Check][google.api.servicecontrol.v1.ServiceController.Check].
    */
   endTime: Date;
 
   /**
    * Labels describing the operation. Only the following labels are allowed:
    * 
-   * - Labels describing monitored resources as defined in
-   * the service configuration.
-   * - Default labels of metric values. When specified, labels defined in the
-   * metric value override these default.
-   * - The following labels defined by Google Cloud Platform:
-   * - `cloud.googleapis.com/location` describing the location where the
-   * operation happened,
-   * - `servicecontrol.googleapis.com/user_agent` describing the user agent
-   * of the API request,
-   * - `servicecontrol.googleapis.com/service_agent` describing the service
-   * used to handle the API request (e.g. ESP),
-   * - `servicecontrol.googleapis.com/platform` describing the platform
-   * where the API is served, such as App Engine, Compute Engine, or
-   * Kubernetes Engine.
+   *  - Labels describing monitored resources as defined in
+   *    the service configuration.
+   *  - Default labels of metric values. When specified, labels defined in the
+   *    metric value override these default.
+   *  - The following labels defined by Google Cloud Platform:
+   *      - `cloud.googleapis.com/location` describing the location where the
+   *         operation happened,
+   *      - `servicecontrol.googleapis.com/user_agent` describing the user agent
+   *         of the API request,
+   *      - `servicecontrol.googleapis.com/service_agent` describing the service
+   *         used to handle the API request (e.g. ESP),
+   *      - `servicecontrol.googleapis.com/platform` describing the platform
+   *         where the API is served, such as App Engine, Compute Engine, or
+   *         Kubernetes Engine.
    */
   labels: {
     [key: string]: string;
@@ -146,15 +146,15 @@ export interface Operation {
 
   /**
    * Represents information about this operation. Each MetricValueSet
-   * corresponds to a metric defined in the service configuration.
-   * The data type used in the MetricValueSet must agree with
-   * the data type specified in the metric definition.
+   *  corresponds to a metric defined in the service configuration.
+   *  The data type used in the MetricValueSet must agree with
+   *  the data type specified in the metric definition.
    * 
-   * Within a single operation, it is not allowed to have more than one
-   * MetricValue instances that have the same metric names and identical
-   * label value combinations. If a request has such duplicated MetricValue
-   * instances, the entire request is rejected with
-   * an invalid argument error.
+   *  Within a single operation, it is not allowed to have more than one
+   *  MetricValue instances that have the same metric names and identical
+   *  label value combinations. If a request has such duplicated MetricValue
+   *  instances, the entire request is rejected with
+   *  an invalid argument error.
    */
   metricValueSets: MetricValueSet[];
 
@@ -172,14 +172,14 @@ export interface Operation {
 export interface OperationSDKType {
   /**
    * Identity of the operation. This must be unique within the scope of the
-   * service that generated the operation. If the service calls
-   * Check() and Report() on the same operation, the two calls should carry
-   * the same id.
+   *  service that generated the operation. If the service calls
+   *  Check() and Report() on the same operation, the two calls should carry
+   *  the same id.
    * 
-   * UUID version 4 is recommended, though not required.
-   * In scenarios where an operation is computed from existing information
-   * and an idempotent id is desirable for deduplication purpose, UUID version 5
-   * is recommended. See RFC 4122 for details.
+   *  UUID version 4 is recommended, though not required.
+   *  In scenarios where an operation is computed from existing information
+   *  and an idempotent id is desirable for deduplication purpose, UUID version 5
+   *  is recommended. See RFC 4122 for details.
    */
   operation_id: string;
 
@@ -188,17 +188,17 @@ export interface OperationSDKType {
 
   /**
    * Identity of the consumer who is using the service.
-   * This field should be filled in for the operations initiated by a
-   * consumer, but not for service-initiated operations that are
-   * not related to a specific consumer.
+   *  This field should be filled in for the operations initiated by a
+   *  consumer, but not for service-initiated operations that are
+   *  not related to a specific consumer.
    * 
-   * - This can be in one of the following formats:
-   * - project:PROJECT_ID,
-   * - project`_`number:PROJECT_NUMBER,
-   * - projects/PROJECT_ID or PROJECT_NUMBER,
-   * - folders/FOLDER_NUMBER,
-   * - organizations/ORGANIZATION_NUMBER,
-   * - api`_`key:API_KEY.
+   *  - This can be in one of the following formats:
+   *      - project:PROJECT_ID,
+   *      - project`_`number:PROJECT_NUMBER,
+   *      - projects/PROJECT_ID or PROJECT_NUMBER,
+   *      - folders/FOLDER_NUMBER,
+   *      - organizations/ORGANIZATION_NUMBER,
+   *      - api`_`key:API_KEY.
    */
   consumer_id: string;
 
@@ -207,30 +207,30 @@ export interface OperationSDKType {
 
   /**
    * End time of the operation.
-   * Required when the operation is used in
-   * [ServiceController.Report][google.api.servicecontrol.v1.ServiceController.Report],
-   * but optional when the operation is used in
-   * [ServiceController.Check][google.api.servicecontrol.v1.ServiceController.Check].
+   *  Required when the operation is used in
+   *  [ServiceController.Report][google.api.servicecontrol.v1.ServiceController.Report],
+   *  but optional when the operation is used in
+   *  [ServiceController.Check][google.api.servicecontrol.v1.ServiceController.Check].
    */
   end_time: Date;
 
   /**
    * Labels describing the operation. Only the following labels are allowed:
    * 
-   * - Labels describing monitored resources as defined in
-   * the service configuration.
-   * - Default labels of metric values. When specified, labels defined in the
-   * metric value override these default.
-   * - The following labels defined by Google Cloud Platform:
-   * - `cloud.googleapis.com/location` describing the location where the
-   * operation happened,
-   * - `servicecontrol.googleapis.com/user_agent` describing the user agent
-   * of the API request,
-   * - `servicecontrol.googleapis.com/service_agent` describing the service
-   * used to handle the API request (e.g. ESP),
-   * - `servicecontrol.googleapis.com/platform` describing the platform
-   * where the API is served, such as App Engine, Compute Engine, or
-   * Kubernetes Engine.
+   *  - Labels describing monitored resources as defined in
+   *    the service configuration.
+   *  - Default labels of metric values. When specified, labels defined in the
+   *    metric value override these default.
+   *  - The following labels defined by Google Cloud Platform:
+   *      - `cloud.googleapis.com/location` describing the location where the
+   *         operation happened,
+   *      - `servicecontrol.googleapis.com/user_agent` describing the user agent
+   *         of the API request,
+   *      - `servicecontrol.googleapis.com/service_agent` describing the service
+   *         used to handle the API request (e.g. ESP),
+   *      - `servicecontrol.googleapis.com/platform` describing the platform
+   *         where the API is served, such as App Engine, Compute Engine, or
+   *         Kubernetes Engine.
    */
   labels: {
     [key: string]: string;
@@ -238,15 +238,15 @@ export interface OperationSDKType {
 
   /**
    * Represents information about this operation. Each MetricValueSet
-   * corresponds to a metric defined in the service configuration.
-   * The data type used in the MetricValueSet must agree with
-   * the data type specified in the metric definition.
+   *  corresponds to a metric defined in the service configuration.
+   *  The data type used in the MetricValueSet must agree with
+   *  the data type specified in the metric definition.
    * 
-   * Within a single operation, it is not allowed to have more than one
-   * MetricValue instances that have the same metric names and identical
-   * label value combinations. If a request has such duplicated MetricValue
-   * instances, the entire request is rejected with
-   * an invalid argument error.
+   *  Within a single operation, it is not allowed to have more than one
+   *  MetricValue instances that have the same metric names and identical
+   *  label value combinations. If a request has such duplicated MetricValue
+   *  instances, the entire request is rejected with
+   *  an invalid argument error.
    */
   metric_value_sets: MetricValueSetSDKType[];
 

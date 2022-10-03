@@ -16,7 +16,7 @@ export interface Msg {
   voteWeighted(request: MsgVoteWeighted): Promise<MsgVoteWeightedResponse>;
   /*VoteWeighted defines a method to add a weighted vote on a specific proposal.
   
-  Since: cosmos-sdk 0.43*/
+   Since: cosmos-sdk 0.43*/
 
   deposit(request: MsgDeposit): Promise<MsgDepositResponse>;
   /*Deposit defines a method to add deposit on a specific proposal.*/

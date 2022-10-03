@@ -37,8 +37,8 @@ export interface MsgSuperfluidUnbondLockResponseSDKType {}
 
 /**
  * MsgLockAndSuperfluidDelegate locks coins with the unbonding period duration,
- * and then does a superfluid lock from the newly created lockup, to the
- * specified validator addr.
+ *  and then does a superfluid lock from the newly created lockup, to the
+ *  specified validator addr.
  */
 export interface MsgLockAndSuperfluidDelegate {
   sender: string;
@@ -48,8 +48,8 @@ export interface MsgLockAndSuperfluidDelegate {
 
 /**
  * MsgLockAndSuperfluidDelegate locks coins with the unbonding period duration,
- * and then does a superfluid lock from the newly created lockup, to the
- * specified validator addr.
+ *  and then does a superfluid lock from the newly created lockup, to the
+ *  specified validator addr.
  */
 export interface MsgLockAndSuperfluidDelegateSDKType {
   sender: string;
@@ -65,13 +65,13 @@ export interface MsgLockAndSuperfluidDelegateResponseSDKType {
 
 /**
  * MsgUnPoolWhitelistedPool Unpools every lock the sender has, that is
- * associated with pool pool_id. If pool_id is not approved for unpooling by
- * governance, this is a no-op. Unpooling takes the locked gamm shares, and runs
- * "ExitPool" on it, to get the constituent tokens. e.g. z gamm/pool/1 tokens
- * ExitPools into constituent tokens x uatom, y uosmo. Then it creates a new
- * lock for every constituent token, with the duration associated with the lock.
- * If the lock was unbonding, the new lockup durations should be the time left
- * until unbond completion.
+ *  associated with pool pool_id. If pool_id is not approved for unpooling by
+ *  governance, this is a no-op. Unpooling takes the locked gamm shares, and runs
+ *  "ExitPool" on it, to get the constituent tokens. e.g. z gamm/pool/1 tokens
+ *  ExitPools into constituent tokens x uatom, y uosmo. Then it creates a new
+ *  lock for every constituent token, with the duration associated with the lock.
+ *  If the lock was unbonding, the new lockup durations should be the time left
+ *  until unbond completion.
  */
 export interface MsgUnPoolWhitelistedPool {
   sender: string;
@@ -80,13 +80,13 @@ export interface MsgUnPoolWhitelistedPool {
 
 /**
  * MsgUnPoolWhitelistedPool Unpools every lock the sender has, that is
- * associated with pool pool_id. If pool_id is not approved for unpooling by
- * governance, this is a no-op. Unpooling takes the locked gamm shares, and runs
- * "ExitPool" on it, to get the constituent tokens. e.g. z gamm/pool/1 tokens
- * ExitPools into constituent tokens x uatom, y uosmo. Then it creates a new
- * lock for every constituent token, with the duration associated with the lock.
- * If the lock was unbonding, the new lockup durations should be the time left
- * until unbond completion.
+ *  associated with pool pool_id. If pool_id is not approved for unpooling by
+ *  governance, this is a no-op. Unpooling takes the locked gamm shares, and runs
+ *  "ExitPool" on it, to get the constituent tokens. e.g. z gamm/pool/1 tokens
+ *  ExitPools into constituent tokens x uatom, y uosmo. Then it creates a new
+ *  lock for every constituent token, with the duration associated with the lock.
+ *  If the lock was unbonding, the new lockup durations should be the time left
+ *  until unbond completion.
  */
 export interface MsgUnPoolWhitelistedPoolSDKType {
   sender: string;

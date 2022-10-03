@@ -18,7 +18,7 @@ export interface Msg {
 
   connectionOpenConfirm(request: MsgConnectionOpenConfirm): Promise<MsgConnectionOpenConfirmResponse>;
   /*ConnectionOpenConfirm defines a rpc handler method for
-  MsgConnectionOpenConfirm.*/
+   MsgConnectionOpenConfirm.*/
 
 }
 export class MsgClientImpl implements Msg {

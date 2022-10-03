@@ -23,7 +23,7 @@ export interface Msg {
 
   channelCloseConfirm(request: MsgChannelCloseConfirm): Promise<MsgChannelCloseConfirmResponse>;
   /*ChannelCloseConfirm defines a rpc handler method for
-  MsgChannelCloseConfirm.*/
+   MsgChannelCloseConfirm.*/
 
   recvPacket(request: MsgRecvPacket): Promise<MsgRecvPacketResponse>;
   /*RecvPacket defines a rpc handler method for MsgRecvPacket.*/

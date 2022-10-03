@@ -6,7 +6,7 @@ export const protobufPackage = "osmosis.superfluid";
 export interface Params {
   /**
    * the risk_factor is to be cut on OSMO equivalent value of lp tokens for
-   * superfluid staking, default: 5%
+   *  superfluid staking, default: 5%
    */
   minimumRiskFactor: string;
 }
@@ -15,7 +15,7 @@ export interface Params {
 export interface ParamsSDKType {
   /**
    * the risk_factor is to be cut on OSMO equivalent value of lp tokens for
-   * superfluid staking, default: 5%
+   *  superfluid staking, default: 5%
    */
   minimum_risk_factor: string;
 }

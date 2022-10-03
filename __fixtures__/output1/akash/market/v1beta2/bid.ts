@@ -131,7 +131,7 @@ export interface MsgCloseBidResponseSDKType {}
 
 /**
  * BidID stores owner and all other seq numbers
- * A successful bid becomes a Lease(ID).
+ *  A successful bid becomes a Lease(ID).
  */
 export interface BidID {
   owner: string;
@@ -143,7 +143,7 @@ export interface BidID {
 
 /**
  * BidID stores owner and all other seq numbers
- * A successful bid becomes a Lease(ID).
+ *  A successful bid becomes a Lease(ID).
  */
 export interface BidIDSDKType {
   owner: string;
