@@ -385,12 +385,12 @@ To broadcast messages, you'll want to use either [keplr](https://docs.keplr.app/
 Likely you'll want to use the Amino, so unless you need proto, you should use this one:
 
 ```js
-import { getOfflineSigner as getOfflineSignerAmino } from '@osmonauts/helpers';
+import { getOfflineSigner as getOfflineSignerAmino } from 'cosmjs-utils';
 ```
 ### Proto Signer
 
 ```js
-import { getOfflineSigner as getOfflineSignerProto } from '@osmonauts/helpers';
+import { getOfflineSigner as getOfflineSignerProto } from 'cosmjs-utils';
 ```
 
 WARNING: NOT RECOMMENDED TO USE PLAIN-TEXT MNEMONICS. Please take care of your security and use best practices such as AES encryption and/or methods from 12factor applications.
