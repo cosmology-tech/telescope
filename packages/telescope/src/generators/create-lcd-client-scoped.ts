@@ -4,7 +4,7 @@ import { join } from 'path';
 import { TelescopeBuilder } from '../builder';
 import { createScopedLCDFactory } from '@osmonauts/ast';
 import { ProtoRef } from '@osmonauts/types';
-import { getRelativePath } from '../utils';
+import { fixlocalpaths, getRelativePath } from '../utils';
 import { Bundler } from '../bundler';
 import { TelescopeParseContext } from '../build';
 import { aggregateImports, getImportStatements } from '../imports';
@@ -123,18 +123,10 @@ const makeLCD = (
 
     const imports = aggregateImports(ctx, {}, localname);
 
-    const fixlocalpaths = imports.map(imp => {
-        return {
-            ...imp,
-            path: (imp.path.startsWith('.') || imp.path.startsWith('@')) ?
-                imp.path : `./${imp.path}`
-        };
-    });
-
     const importStmts = getImportStatements(
-        [...fixlocalpaths]
+        localname,
+        [...fixlocalpaths(imports)]
     );
-
 
     const prog = []
         .concat(importStmts)
