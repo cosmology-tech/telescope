@@ -3,7 +3,8 @@ import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } fr
 import { GroupID, GroupIDSDKType, Group, GroupSDKType } from "./group";
 import { Account, AccountSDKType } from "../../escrow/v1beta1/types";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, Exact } from "@osmonauts/helpers";
+import { isSet, Exact, Rpc } from "@osmonauts/helpers";
+import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
 export const protobufPackage = "akash.deployment.v1beta1";
 
 /** QueryDeploymentsRequest is request type for the Query/Deployments RPC method */

@@ -33,22 +33,6 @@ export const plugin = (
         parse(context);
         context.buildBase();
 
-        // build BASE file
-        const importStmts = buildAllImports(context, null, context.ref.filename);
-        const prog = []
-            .concat(importStmts)
-            ;
-
-        // package var
-        if (context.proto.pluginValue('prototypes.includePackageVar')) {
-            prog.push(t.exportNamedDeclaration(t.variableDeclaration('const', [
-                t.variableDeclarator(
-                    t.identifier('protobufPackage'),
-                    t.stringLiteral(context.ref.proto.package)
-                )
-            ])))
-        }
-
         if (context.proto.pluginValue('rpcClients.inline')) {
             const proto = getNestedProto(context.ref.traversed);
             if (proto.Query) {
@@ -69,6 +53,22 @@ export const plugin = (
                 context.body.push(createRpcClientInterface(context.generic, proto.Msg))
                 context.body.push(createRpcClientClass(context.generic, proto.Msg))
             }
+        }
+
+        // build BASE file
+        const importStmts = buildAllImports(context, null, context.ref.filename);
+        const prog = []
+            .concat(importStmts)
+            ;
+
+        // package var
+        if (context.proto.pluginValue('prototypes.includePackageVar')) {
+            prog.push(t.exportNamedDeclaration(t.variableDeclaration('const', [
+                t.variableDeclarator(
+                    t.identifier('protobufPackage'),
+                    t.stringLiteral(context.ref.proto.package)
+                )
+            ])))
         }
 
         // body
