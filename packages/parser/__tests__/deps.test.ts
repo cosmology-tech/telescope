@@ -12,7 +12,6 @@ it('osmosis/gamm/v1beta1/tx.proto', () => {
 });
 
 it('cosmos/gov/v1beta1/gov.proto', () => {
-    console.log(resolver.resolve('cosmos/gov/v1beta1/gov.proto'));
     expect(resolver.resolve('cosmos/gov/v1beta1/gov.proto')).toMatchSnapshot();
 });
 

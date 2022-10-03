@@ -149,6 +149,7 @@ export class ProtoStore {
         });
         const missingProtos = this.processProtos(neededFromGoogle);
         this.protos = [...protos, ...missingProtos];
+
         return this.protos;
     }
 
