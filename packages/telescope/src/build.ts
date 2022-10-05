@@ -66,12 +66,12 @@ export const buildEnums = (
     name: string,
     obj: any
 ) => {
-    context.body.push(createProtoEnum(name, obj));
+    context.body.push(createProtoEnum(context.proto, name, obj));
     if (context.options.useSDKTypes) {
-        context.body.push(createEnumSDKType(name, obj));
+        context.body.push(createEnumSDKType(context.proto, name, obj));
     }
-    context.body.push(createProtoEnumFromJSON(name, obj));
-    context.body.push(createProtoEnumToJSON(name, obj));
+    context.body.push(createProtoEnumFromJSON(context.proto, name, obj));
+    context.body.push(createProtoEnumToJSON(context.proto, name, obj));
 };
 export interface TelescopeParseContext {
     options: TelescopeOptions;

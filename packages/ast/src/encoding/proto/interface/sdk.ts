@@ -20,9 +20,12 @@ export const createSDKType = (
 };
 
 export const createEnumSDKType = (
-    name: string, proto: ProtoEnum
+    context: ProtoParseContext,
+    name: string,
+    proto: ProtoEnum
 ) => {
     return createProtoEnum(
+        context,
         name + "SDKType",
         proto
     );

@@ -5,27 +5,26 @@ import {
 } from './enums';
 import struct from '../../../../../__fixtures__/proto-json/google/protobuf/struct.json'
 import { getNestedProto } from '@osmonauts/proto-parser';
-import generate from '@babel/generator';
+import { ProtoParseContext } from '@osmonauts/ast';
+import { expectCode, getTestProtoStore, defaultTelescopeOptions } from '../../../test-utils';
 
-const expectCode = (ast) => {
-    expect(
-        generate(ast).code
-    ).toMatchSnapshot();
-}
-const printCode = (ast) => {
-    console.log(
-        generate(ast).code
-    );
-}
+const store = getTestProtoStore();
+store.traverseAll();
 
 it('createProtoEnum', async () => {
-    expectCode(createProtoEnum('NullValue', getNestedProto(struct).NullValue));
+    const ref = store.findProto('google/protobuf/struct.proto');
+    const context = new ProtoParseContext(ref, store, defaultTelescopeOptions);
+    expectCode(createProtoEnum(context, 'NullValue', getNestedProto(struct).NullValue));
 });
 
 it('createProtoEnumFromJSON', async () => {
-    expectCode(createProtoEnumFromJSON('NullValue', getNestedProto(struct).NullValue));
+    const ref = store.findProto('google/protobuf/struct.proto');
+    const context = new ProtoParseContext(ref, store, defaultTelescopeOptions);
+    expectCode(createProtoEnumFromJSON(context, 'NullValue', getNestedProto(struct).NullValue));
 });
 
 it('createProtoEnumToJSON', async () => {
-    expectCode(createProtoEnumToJSON('NullValue', getNestedProto(struct).NullValue));
+    const ref = store.findProto('google/protobuf/struct.proto');
+    const context = new ProtoParseContext(ref, store, defaultTelescopeOptions);
+    expectCode(createProtoEnumToJSON(context, 'NullValue', getNestedProto(struct).NullValue));
 });

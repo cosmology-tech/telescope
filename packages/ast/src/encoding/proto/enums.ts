@@ -2,6 +2,7 @@ import * as t from '@babel/types';
 import { getEnumFromJsonName, getEnumToJsonName } from './types';
 import { identifier, tsEnumMember, functionDeclaration, makeCommentBlock, cleanComment } from '../../utils';
 import { ProtoEnum } from '@osmonauts/types';
+import { ProtoParseContext } from '../context';
 
 const getEnumValues = (proto: ProtoEnum) => {
     const enums = Object.keys(proto.values).map(key => {
@@ -38,7 +39,11 @@ const processEnumComment = (e: ProtoEnum) => {
     return comments.join('\n');
 };
 
-export const createProtoEnum = (name: string, proto: ProtoEnum) => {
+export const createProtoEnum = (
+    context: ProtoParseContext,
+    name: string,
+    proto: ProtoEnum
+) => {
     const enums = getEnumValues(proto);
     const values = enums.map(e => {
         return tsEnumMember(
@@ -74,7 +79,11 @@ export const createProtoEnum = (name: string, proto: ProtoEnum) => {
     return declaration;
 };
 
-export const createProtoEnumFromJSON = (name: string, proto: ProtoEnum) => {
+export const createProtoEnumFromJSON = (
+    context: ProtoParseContext,
+    name: string,
+    proto: ProtoEnum
+) => {
 
     const enums = getEnumValues(proto);
     const switches = enums.reduce((m, e) => {
@@ -87,6 +96,10 @@ export const createProtoEnumFromJSON = (name: string, proto: ProtoEnum) => {
         ]));
         return m;
     }, []);
+
+    const unrecognizedEnums = [
+        t.switchCase(t.stringLiteral('UNRECOGNIZED'), [])
+    ];
 
     return t.exportNamedDeclaration(
         functionDeclaration(
@@ -101,7 +114,7 @@ export const createProtoEnumFromJSON = (name: string, proto: ProtoEnum) => {
                         ...switches,
                         // default
                         t.switchCase(t.unaryExpression('-', t.numericLiteral(1)), []),
-                        t.switchCase(t.stringLiteral('UNRECOGNIZED'), []),
+                        ...unrecognizedEnums,
                         t.switchCase(
                             null, [
                             t.returnStatement(t.memberExpression(
@@ -121,7 +134,11 @@ export const createProtoEnumFromJSON = (name: string, proto: ProtoEnum) => {
     )
 };
 
-export const createProtoEnumToJSON = (name: string, proto: ProtoEnum) => {
+export const createProtoEnumToJSON = (
+    context: ProtoParseContext,
+    name: string,
+    proto: ProtoEnum
+) => {
 
     const enums = getEnumValues(proto);
     const switches = enums.map(e => {
@@ -138,6 +155,16 @@ export const createProtoEnumToJSON = (name: string, proto: ProtoEnum) => {
         );
     });
 
+    const unrecognizedEnums = [
+        t.switchCase(
+            t.memberExpression(
+                t.identifier(name),
+                t.identifier('UNRECOGNIZED')
+            ),
+            []
+        )
+    ];
+
     return t.exportNamedDeclaration(
         functionDeclaration(
             t.identifier(getEnumToJsonName(name)),
@@ -152,13 +179,7 @@ export const createProtoEnumToJSON = (name: string, proto: ProtoEnum) => {
                     [
                         ...switches,
                         // unrecognized
-                        t.switchCase(
-                            t.memberExpression(
-                                t.identifier(name),
-                                t.identifier('UNRECOGNIZED')
-                            ),
-                            []
-                        ),
+                        ...unrecognizedEnums,
                         // default
                         t.switchCase(
                             null,
