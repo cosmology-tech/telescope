@@ -79,7 +79,7 @@ export interface ListServicesRequest {
 
   /**
    * Include services consumed by the specified consumer.
-   *
+   * 
    * The Google Service Management implementation accepts the following
    * forms:
    * - project:<project_id>
@@ -108,7 +108,7 @@ export interface ListServicesRequestSDKType {
 
   /**
    * Include services consumed by the specified consumer.
-   *
+   * 
    * The Google Service Management implementation accepts the following
    * forms:
    * - project:<project_id>
@@ -224,7 +224,7 @@ export interface GetServiceConfigRequest {
 
   /**
    * Required. The id of the service configuration resource.
-   *
+   * 
    * This field must be specified for the server to return all fields, including
    * `SourceInfo`.
    */
@@ -247,7 +247,7 @@ export interface GetServiceConfigRequestSDKType {
 
   /**
    * Required. The id of the service configuration resource.
-   *
+   * 
    * This field must be specified for the server to return all fields, including
    * `SourceInfo`.
    */

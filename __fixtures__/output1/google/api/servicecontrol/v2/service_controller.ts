@@ -9,7 +9,7 @@ export interface CheckRequest {
   /**
    * The service name as specified in its service configuration. For example,
    * `"pubsub.googleapis.com"`.
-   *
+   * 
    * See
    * [google.api.Service](https://cloud.google.com/service-management/reference/rpc/google.api#google.api.Service)
    * for the definition of a service name.
@@ -38,7 +38,7 @@ export interface CheckRequestSDKType {
   /**
    * The service name as specified in its service configuration. For example,
    * `"pubsub.googleapis.com"`.
-   *
+   * 
    * See
    * [google.api.Service](https://cloud.google.com/service-management/reference/rpc/google.api#google.api.Service)
    * for the definition of a service name.
@@ -173,7 +173,7 @@ export interface ReportRequest {
   /**
    * The service name as specified in its service configuration. For example,
    * `"pubsub.googleapis.com"`.
-   *
+   * 
    * See
    * [google.api.Service](https://cloud.google.com/service-management/reference/rpc/google.api#google.api.Service)
    * for the definition of a service name.
@@ -200,7 +200,7 @@ export interface ReportRequestSDKType {
   /**
    * The service name as specified in its service configuration. For example,
    * `"pubsub.googleapis.com"`.
-   *
+   * 
    * See
    * [google.api.Service](https://cloud.google.com/service-management/reference/rpc/google.api#google.api.Service)
    * for the definition of a service name.

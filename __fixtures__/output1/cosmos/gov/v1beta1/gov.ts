@@ -227,7 +227,7 @@ export function proposalStatusToJSON(object: ProposalStatus): string {
 
 /**
  * WeightedVoteOption defines a unit of vote for vote split.
- *
+ * 
  * Since: cosmos-sdk 0.43
  */
 export interface WeightedVoteOption {
@@ -237,7 +237,7 @@ export interface WeightedVoteOption {
 
 /**
  * WeightedVoteOption defines a unit of vote for vote split.
- *
+ * 
  * Since: cosmos-sdk 0.43
  */
 export interface WeightedVoteOptionSDKType {

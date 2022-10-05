@@ -132,7 +132,7 @@ export interface QuerySpendableBalancesResponseSDKType {
 export interface QueryTotalSupplyRequest {
   /**
    * pagination defines an optional pagination for the request.
-   *
+   * 
    * Since: cosmos-sdk 0.43
    */
   pagination?: PageRequest;
@@ -145,7 +145,7 @@ export interface QueryTotalSupplyRequest {
 export interface QueryTotalSupplyRequestSDKType {
   /**
    * pagination defines an optional pagination for the request.
-   *
+   * 
    * Since: cosmos-sdk 0.43
    */
   pagination?: PageRequestSDKType;
@@ -161,7 +161,7 @@ export interface QueryTotalSupplyResponse {
 
   /**
    * pagination defines the pagination in the response.
-   *
+   * 
    * Since: cosmos-sdk 0.43
    */
   pagination?: PageResponse;
@@ -177,7 +177,7 @@ export interface QueryTotalSupplyResponseSDKType {
 
   /**
    * pagination defines the pagination in the response.
-   *
+   * 
    * Since: cosmos-sdk 0.43
    */
   pagination?: PageResponseSDKType;

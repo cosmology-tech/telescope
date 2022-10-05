@@ -5,7 +5,7 @@ export const protobufPackage = "cosmos.base.query.v1beta1";
 /**
  * PageRequest is to be embedded in gRPC request messages for efficient
  * pagination. Ex:
- *
+ * 
  *  message SomeRequest {
  *          Foo some_parameter = 1;
  *          PageRequest pagination = 2;
@@ -42,7 +42,7 @@ export interface PageRequest {
 
   /**
    * reverse is set to true if results are to be returned in the descending order.
-   *
+   * 
    * Since: cosmos-sdk 0.43
    */
   reverse?: boolean;
@@ -51,7 +51,7 @@ export interface PageRequest {
 /**
  * PageRequest is to be embedded in gRPC request messages for efficient
  * pagination. Ex:
- *
+ * 
  *  message SomeRequest {
  *          Foo some_parameter = 1;
  *          PageRequest pagination = 2;
@@ -88,7 +88,7 @@ export interface PageRequestSDKType {
 
   /**
    * reverse is set to true if results are to be returned in the descending order.
-   *
+   * 
    * Since: cosmos-sdk 0.43
    */
   reverse?: boolean;
@@ -97,7 +97,7 @@ export interface PageRequestSDKType {
 /**
  * PageResponse is to be embedded in gRPC response messages where the
  * corresponding request message has used PageRequest.
- *
+ * 
  *  message SomeResponse {
  *          repeated Bar results = 1;
  *          PageResponse page = 2;
@@ -121,7 +121,7 @@ export interface PageResponse {
 /**
  * PageResponse is to be embedded in gRPC response messages where the
  * corresponding request message has used PageRequest.
- *
+ * 
  *  message SomeResponse {
  *          repeated Bar results = 1;
  *          PageResponse page = 2;

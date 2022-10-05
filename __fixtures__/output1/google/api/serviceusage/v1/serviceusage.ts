@@ -83,13 +83,13 @@ export function disableServiceRequest_CheckIfServiceHasUsageToJSON(object: Disab
 export interface EnableServiceRequest {
   /**
    * Name of the consumer and service to enable the service on.
-   *
+   * 
    * The `EnableService` and `DisableService` methods currently only support
    * projects.
-   *
+   * 
    * Enabling a service requires that the service is public or is shared with
    * the user enabling the service.
-   *
+   * 
    * An example name would be:
    * `projects/123/services/serviceusage.googleapis.com` where `123` is the
    * project number.
@@ -101,13 +101,13 @@ export interface EnableServiceRequest {
 export interface EnableServiceRequestSDKType {
   /**
    * Name of the consumer and service to enable the service on.
-   *
+   * 
    * The `EnableService` and `DisableService` methods currently only support
    * projects.
-   *
+   * 
    * Enabling a service requires that the service is public or is shared with
    * the user enabling the service.
-   *
+   * 
    * An example name would be:
    * `projects/123/services/serviceusage.googleapis.com` where `123` is the
    * project number.
@@ -139,9 +139,9 @@ export interface EnableServiceResponseSDKType {
 export interface DisableServiceRequest {
   /**
    * Name of the consumer and service to disable the service on.
-   *
+   * 
    * The enable and disable methods currently only support projects.
-   *
+   * 
    * An example name would be:
    * `projects/123/services/serviceusage.googleapis.com` where `123` is the
    * project number.
@@ -165,9 +165,9 @@ export interface DisableServiceRequest {
 export interface DisableServiceRequestSDKType {
   /**
    * Name of the consumer and service to disable the service on.
-   *
+   * 
    * The enable and disable methods currently only support projects.
-   *
+   * 
    * An example name would be:
    * `projects/123/services/serviceusage.googleapis.com` where `123` is the
    * project number.
@@ -211,7 +211,7 @@ export interface DisableServiceResponseSDKType {
 export interface GetServiceRequest {
   /**
    * Name of the consumer and service to get the `ConsumerState` for.
-   *
+   * 
    * An example name would be:
    * `projects/123/services/serviceusage.googleapis.com` where `123` is the
    * project number.
@@ -223,7 +223,7 @@ export interface GetServiceRequest {
 export interface GetServiceRequestSDKType {
   /**
    * Name of the consumer and service to get the `ConsumerState` for.
-   *
+   * 
    * An example name would be:
    * `projects/123/services/serviceusage.googleapis.com` where `123` is the
    * project number.
@@ -235,7 +235,7 @@ export interface GetServiceRequestSDKType {
 export interface ListServicesRequest {
   /**
    * Parent to search for services on.
-   *
+   * 
    * An example name would be:
    * `projects/123` where `123` is the project number.
    */
@@ -265,7 +265,7 @@ export interface ListServicesRequest {
 export interface ListServicesRequestSDKType {
   /**
    * Parent to search for services on.
-   *
+   * 
    * An example name would be:
    * `projects/123` where `123` is the project number.
    */
@@ -319,23 +319,23 @@ export interface ListServicesResponseSDKType {
 export interface BatchEnableServicesRequest {
   /**
    * Parent to enable services on.
-   *
+   * 
    * An example name would be:
    * `projects/123` where `123` is the project number.
-   *
+   * 
    * The `BatchEnableServices` method currently only supports projects.
    */
   parent: string;
 
   /**
    * The identifiers of the services to enable on the project.
-   *
+   * 
    * A valid identifier would be:
    * serviceusage.googleapis.com
-   *
+   * 
    * Enabling services requires that each service is public or is shared with
    * the user enabling the service.
-   *
+   * 
    * A single request can enable a maximum of 20 services at a time. If more
    * than 20 services are specified, the request will fail, and no state changes
    * will occur.
@@ -347,23 +347,23 @@ export interface BatchEnableServicesRequest {
 export interface BatchEnableServicesRequestSDKType {
   /**
    * Parent to enable services on.
-   *
+   * 
    * An example name would be:
    * `projects/123` where `123` is the project number.
-   *
+   * 
    * The `BatchEnableServices` method currently only supports projects.
    */
   parent: string;
 
   /**
    * The identifiers of the services to enable on the project.
-   *
+   * 
    * A valid identifier would be:
    * serviceusage.googleapis.com
-   *
+   * 
    * Enabling services requires that each service is public or is shared with
    * the user enabling the service.
-   *
+   * 
    * A single request can enable a maximum of 20 services at a time. If more
    * than 20 services are specified, the request will fail, and no state changes
    * will occur.
@@ -434,7 +434,7 @@ export interface BatchGetServicesRequest {
 
   /**
    * Names of the services to retrieve.
-   *
+   * 
    * An example name would be:
    * `projects/123/services/serviceusage.googleapis.com` where `123` is the
    * project number.
@@ -456,7 +456,7 @@ export interface BatchGetServicesRequestSDKType {
 
   /**
    * Names of the services to retrieve.
-   *
+   * 
    * An example name would be:
    * `projects/123/services/serviceusage.googleapis.com` where `123` is the
    * project number.

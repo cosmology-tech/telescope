@@ -112,7 +112,7 @@ export interface CheckRequest {
   /**
    * The service name as specified in its service configuration. For example,
    * `"pubsub.googleapis.com"`.
-   *
+   * 
    * See
    * [google.api.Service](https://cloud.google.com/service-management/reference/rpc/google.api#google.api.Service)
    * for the definition of a service name.
@@ -125,7 +125,7 @@ export interface CheckRequest {
   /**
    * Specifies which version of service configuration should be used to process
    * the request.
-   *
+   * 
    * If unspecified or no matching version can be found, the
    * latest one will be used.
    */
@@ -137,7 +137,7 @@ export interface CheckRequestSDKType {
   /**
    * The service name as specified in its service configuration. For example,
    * `"pubsub.googleapis.com"`.
-   *
+   * 
    * See
    * [google.api.Service](https://cloud.google.com/service-management/reference/rpc/google.api#google.api.Service)
    * for the definition of a service name.
@@ -150,7 +150,7 @@ export interface CheckRequestSDKType {
   /**
    * Specifies which version of service configuration should be used to process
    * the request.
-   *
+   * 
    * If unspecified or no matching version can be found, the
    * latest one will be used.
    */
@@ -168,7 +168,7 @@ export interface CheckResponse {
 
   /**
    * Indicate the decision of the check.
-   *
+   * 
    * If no check errors are present, the service should process the operation.
    * Otherwise the service should use the list of errors to determine the
    * appropriate action.
@@ -196,7 +196,7 @@ export interface CheckResponseSDKType {
 
   /**
    * Indicate the decision of the check.
-   *
+   * 
    * If no check errors are present, the service should process the operation.
    * Otherwise the service should use the list of errors to determine the
    * appropriate action.
@@ -244,7 +244,7 @@ export interface CheckResponse_ConsumerInfo {
   /**
    * The Google cloud project number, e.g. 1234567890. A value of 0 indicates
    * no project number is found.
-   *
+   * 
    * NOTE: This field is deprecated after we support flexible consumer
    * id. New code should not depend on this field anymore.
    */
@@ -269,7 +269,7 @@ export interface CheckResponse_ConsumerInfoSDKType {
   /**
    * The Google cloud project number, e.g. 1234567890. A value of 0 indicates
    * no project number is found.
-   *
+   * 
    * NOTE: This field is deprecated after we support flexible consumer
    * id. New code should not depend on this field anymore.
    */
@@ -294,7 +294,7 @@ export interface ReportRequest {
   /**
    * The service name as specified in its service configuration. For example,
    * `"pubsub.googleapis.com"`.
-   *
+   * 
    * See
    * [google.api.Service](https://cloud.google.com/service-management/reference/rpc/google.api#google.api.Service)
    * for the definition of a service name.
@@ -303,12 +303,12 @@ export interface ReportRequest {
 
   /**
    * Operations to be reported.
-   *
+   * 
    * Typically the service should report one operation per request.
    * Putting multiple operations into a single request is allowed, but should
    * be used only when multiple operations are natually available at the time
    * of the report.
-   *
+   * 
    * There is no limit on the number of operations in the same ReportRequest,
    * however the ReportRequest size should be no larger than 1MB. See
    * [ReportResponse.report_errors][google.api.servicecontrol.v1.ReportResponse.report_errors]
@@ -319,7 +319,7 @@ export interface ReportRequest {
   /**
    * Specifies which version of service config should be used to process the
    * request.
-   *
+   * 
    * If unspecified or no matching version can be found, the
    * latest one will be used.
    */
@@ -331,7 +331,7 @@ export interface ReportRequestSDKType {
   /**
    * The service name as specified in its service configuration. For example,
    * `"pubsub.googleapis.com"`.
-   *
+   * 
    * See
    * [google.api.Service](https://cloud.google.com/service-management/reference/rpc/google.api#google.api.Service)
    * for the definition of a service name.
@@ -340,12 +340,12 @@ export interface ReportRequestSDKType {
 
   /**
    * Operations to be reported.
-   *
+   * 
    * Typically the service should report one operation per request.
    * Putting multiple operations into a single request is allowed, but should
    * be used only when multiple operations are natually available at the time
    * of the report.
-   *
+   * 
    * There is no limit on the number of operations in the same ReportRequest,
    * however the ReportRequest size should be no larger than 1MB. See
    * [ReportResponse.report_errors][google.api.servicecontrol.v1.ReportResponse.report_errors]
@@ -356,7 +356,7 @@ export interface ReportRequestSDKType {
   /**
    * Specifies which version of service config should be used to process the
    * request.
-   *
+   * 
    * If unspecified or no matching version can be found, the
    * latest one will be used.
    */
@@ -368,7 +368,7 @@ export interface ReportResponse {
   /**
    * Partial failures, one for each `Operation` in the request that failed
    * processing. There are three possible combinations of the RPC status:
-   *
+   * 
    * 1. The combination of a successful RPC status and an empty `report_errors`
    *    list indicates a complete success where all `Operations` in the
    *    request are processed successfully.
@@ -395,7 +395,7 @@ export interface ReportResponseSDKType {
   /**
    * Partial failures, one for each `Operation` in the request that failed
    * processing. There are three possible combinations of the RPC status:
-   *
+   * 
    * 1. The combination of a successful RPC status and an empty `report_errors`
    *    list indicates a complete success where all `Operations` in the
    *    request are processed successfully.

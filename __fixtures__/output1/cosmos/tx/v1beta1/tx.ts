@@ -153,7 +153,7 @@ export interface SignDocSDKType {
 /**
  * SignDocDirectAux is the type used for generating sign bytes for
  * SIGN_MODE_DIRECT_AUX.
- *
+ * 
  * Since: cosmos-sdk 0.46
  */
 export interface SignDocDirectAux {
@@ -189,7 +189,7 @@ export interface SignDocDirectAux {
 /**
  * SignDocDirectAux is the type used for generating sign bytes for
  * SIGN_MODE_DIRECT_AUX.
- *
+ * 
  * Since: cosmos-sdk 0.46
  */
 export interface SignDocDirectAuxSDKType {
@@ -327,7 +327,7 @@ export interface AuthInfo {
 
   /**
    * Tip is the optional tip used for meta-transactions.
-   *
+   * 
    * Since: cosmos-sdk 0.46
    */
   tip: Tip;
@@ -356,7 +356,7 @@ export interface AuthInfoSDKType {
 
   /**
    * Tip is the optional tip used for meta-transactions.
-   *
+   * 
    * Since: cosmos-sdk 0.46
    */
   tip: TipSDKType;
@@ -538,7 +538,7 @@ export interface FeeSDKType {
 
 /**
  * Tip is the tip used for meta-transactions.
- *
+ * 
  * Since: cosmos-sdk 0.46
  */
 export interface Tip {
@@ -551,7 +551,7 @@ export interface Tip {
 
 /**
  * Tip is the tip used for meta-transactions.
- *
+ * 
  * Since: cosmos-sdk 0.46
  */
 export interface TipSDKType {
@@ -567,7 +567,7 @@ export interface TipSDKType {
  * tipper) builds and sends to the fee payer (who will build and broadcast the
  * actual tx). AuxSignerData is not a valid tx in itself, and will be rejected
  * by the node if sent directly as-is.
- *
+ * 
  * Since: cosmos-sdk 0.46
  */
 export interface AuxSignerData {
@@ -597,7 +597,7 @@ export interface AuxSignerData {
  * tipper) builds and sends to the fee payer (who will build and broadcast the
  * actual tx). AuxSignerData is not a valid tx in itself, and will be rejected
  * by the node if sent directly as-is.
- *
+ * 
  * Since: cosmos-sdk 0.46
  */
 export interface AuxSignerDataSDKType {

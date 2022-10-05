@@ -63,13 +63,13 @@ export function getServiceIdentityResponse_IdentityStateToJSON(object: GetServic
 export interface EnableServiceRequest {
   /**
    * Name of the consumer and service to enable the service on.
-   *
+   * 
    * The `EnableService` and `DisableService` methods currently only support
    * projects.
-   *
+   * 
    * Enabling a service requires that the service is public or is shared with
    * the user enabling the service.
-   *
+   * 
    * An example name would be:
    * `projects/123/services/serviceusage.googleapis.com`
    * where `123` is the project number (not project ID).
@@ -81,13 +81,13 @@ export interface EnableServiceRequest {
 export interface EnableServiceRequestSDKType {
   /**
    * Name of the consumer and service to enable the service on.
-   *
+   * 
    * The `EnableService` and `DisableService` methods currently only support
    * projects.
-   *
+   * 
    * Enabling a service requires that the service is public or is shared with
    * the user enabling the service.
-   *
+   * 
    * An example name would be:
    * `projects/123/services/serviceusage.googleapis.com`
    * where `123` is the project number (not project ID).
@@ -99,9 +99,9 @@ export interface EnableServiceRequestSDKType {
 export interface DisableServiceRequest {
   /**
    * Name of the consumer and service to disable the service on.
-   *
+   * 
    * The enable and disable methods currently only support projects.
-   *
+   * 
    * An example name would be:
    * `projects/123/services/serviceusage.googleapis.com`
    * where `123` is the project number (not project ID).
@@ -113,9 +113,9 @@ export interface DisableServiceRequest {
 export interface DisableServiceRequestSDKType {
   /**
    * Name of the consumer and service to disable the service on.
-   *
+   * 
    * The enable and disable methods currently only support projects.
-   *
+   * 
    * An example name would be:
    * `projects/123/services/serviceusage.googleapis.com`
    * where `123` is the project number (not project ID).
@@ -127,7 +127,7 @@ export interface DisableServiceRequestSDKType {
 export interface GetServiceRequest {
   /**
    * Name of the consumer and service to get the `ConsumerState` for.
-   *
+   * 
    * An example name would be:
    * `projects/123/services/serviceusage.googleapis.com`
    * where `123` is the project number (not project ID).
@@ -139,7 +139,7 @@ export interface GetServiceRequest {
 export interface GetServiceRequestSDKType {
   /**
    * Name of the consumer and service to get the `ConsumerState` for.
-   *
+   * 
    * An example name would be:
    * `projects/123/services/serviceusage.googleapis.com`
    * where `123` is the project number (not project ID).
@@ -151,7 +151,7 @@ export interface GetServiceRequestSDKType {
 export interface ListServicesRequest {
   /**
    * Parent to search for services on.
-   *
+   * 
    * An example name would be:
    * `projects/123`
    * where `123` is the project number (not project ID).
@@ -182,7 +182,7 @@ export interface ListServicesRequest {
 export interface ListServicesRequestSDKType {
   /**
    * Parent to search for services on.
-   *
+   * 
    * An example name would be:
    * `projects/123`
    * where `123` is the project number (not project ID).
@@ -237,27 +237,27 @@ export interface ListServicesResponseSDKType {
 export interface BatchEnableServicesRequest {
   /**
    * Parent to enable services on.
-   *
+   * 
    * An example name would be:
    * `projects/123`
    * where `123` is the project number (not project ID).
-   *
+   * 
    * The `BatchEnableServices` method currently only supports projects.
    */
   parent: string;
 
   /**
    * The identifiers of the services to enable on the project.
-   *
+   * 
    * A valid identifier would be:
    * serviceusage.googleapis.com
-   *
+   * 
    * Enabling services requires that each service is public or is shared with
    * the user enabling the service.
-   *
+   * 
    * Two or more services must be specified. To enable a single service,
    * use the `EnableService` method instead.
-   *
+   * 
    * A single request can enable a maximum of 20 services at a time. If more
    * than 20 services are specified, the request will fail, and no state changes
    * will occur.
@@ -269,27 +269,27 @@ export interface BatchEnableServicesRequest {
 export interface BatchEnableServicesRequestSDKType {
   /**
    * Parent to enable services on.
-   *
+   * 
    * An example name would be:
    * `projects/123`
    * where `123` is the project number (not project ID).
-   *
+   * 
    * The `BatchEnableServices` method currently only supports projects.
    */
   parent: string;
 
   /**
    * The identifiers of the services to enable on the project.
-   *
+   * 
    * A valid identifier would be:
    * serviceusage.googleapis.com
-   *
+   * 
    * Enabling services requires that each service is public or is shared with
    * the user enabling the service.
-   *
+   * 
    * Two or more services must be specified. To enable a single service,
    * use the `EnableService` method instead.
-   *
+   * 
    * A single request can enable a maximum of 20 services at a time. If more
    * than 20 services are specified, the request will fail, and no state changes
    * will occur.
@@ -301,7 +301,7 @@ export interface BatchEnableServicesRequestSDKType {
 export interface ListConsumerQuotaMetricsRequest {
   /**
    * Parent of the quotas resource.
-   *
+   * 
    * Some example names would be:
    * `projects/123/services/serviceconsumermanagement.googleapis.com`
    * `folders/345/services/serviceconsumermanagement.googleapis.com`
@@ -326,7 +326,7 @@ export interface ListConsumerQuotaMetricsRequest {
 export interface ListConsumerQuotaMetricsRequestSDKType {
   /**
    * Parent of the quotas resource.
-   *
+   * 
    * Some example names would be:
    * `projects/123/services/serviceconsumermanagement.googleapis.com`
    * `folders/345/services/serviceconsumermanagement.googleapis.com`
@@ -375,7 +375,7 @@ export interface ListConsumerQuotaMetricsResponseSDKType {
 export interface GetConsumerQuotaMetricRequest {
   /**
    * The resource name of the quota limit.
-   *
+   * 
    * An example name would be:
    * `projects/123/services/serviceusage.googleapis.com/quotas/metrics/serviceusage.googleapis.com%2Fmutate_requests`
    */
@@ -389,7 +389,7 @@ export interface GetConsumerQuotaMetricRequest {
 export interface GetConsumerQuotaMetricRequestSDKType {
   /**
    * The resource name of the quota limit.
-   *
+   * 
    * An example name would be:
    * `projects/123/services/serviceusage.googleapis.com/quotas/metrics/serviceusage.googleapis.com%2Fmutate_requests`
    */
@@ -403,7 +403,7 @@ export interface GetConsumerQuotaMetricRequestSDKType {
 export interface GetConsumerQuotaLimitRequest {
   /**
    * The resource name of the quota limit.
-   *
+   * 
    * Use the quota limit resource name returned by previous
    * ListConsumerQuotaMetrics and GetConsumerQuotaMetric API calls.
    */
@@ -417,7 +417,7 @@ export interface GetConsumerQuotaLimitRequest {
 export interface GetConsumerQuotaLimitRequestSDKType {
   /**
    * The resource name of the quota limit.
-   *
+   * 
    * Use the quota limit resource name returned by previous
    * ListConsumerQuotaMetrics and GetConsumerQuotaMetric API calls.
    */
@@ -432,7 +432,7 @@ export interface CreateAdminOverrideRequest {
   /**
    * The resource name of the parent quota limit, returned by a
    * ListConsumerQuotaMetrics or GetConsumerQuotaMetric call.
-   *
+   * 
    * An example name would be:
    * `projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion`
    */
@@ -462,7 +462,7 @@ export interface CreateAdminOverrideRequestSDKType {
   /**
    * The resource name of the parent quota limit, returned by a
    * ListConsumerQuotaMetrics or GetConsumerQuotaMetric call.
-   *
+   * 
    * An example name would be:
    * `projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion`
    */
@@ -491,7 +491,7 @@ export interface CreateAdminOverrideRequestSDKType {
 export interface UpdateAdminOverrideRequest {
   /**
    * The resource name of the override to update.
-   *
+   * 
    * An example name would be:
    * `projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion/adminOverrides/4a3f2c1d`
    */
@@ -529,7 +529,7 @@ export interface UpdateAdminOverrideRequest {
 export interface UpdateAdminOverrideRequestSDKType {
   /**
    * The resource name of the override to update.
-   *
+   * 
    * An example name would be:
    * `projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion/adminOverrides/4a3f2c1d`
    */
@@ -567,7 +567,7 @@ export interface UpdateAdminOverrideRequestSDKType {
 export interface DeleteAdminOverrideRequest {
   /**
    * The resource name of the override to delete.
-   *
+   * 
    * An example name would be:
    * `projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion/adminOverrides/4a3f2c1d`
    */
@@ -593,7 +593,7 @@ export interface DeleteAdminOverrideRequest {
 export interface DeleteAdminOverrideRequestSDKType {
   /**
    * The resource name of the override to delete.
-   *
+   * 
    * An example name would be:
    * `projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion/adminOverrides/4a3f2c1d`
    */
@@ -620,7 +620,7 @@ export interface ListAdminOverridesRequest {
   /**
    * The resource name of the parent quota limit, returned by a
    * ListConsumerQuotaMetrics or GetConsumerQuotaMetric call.
-   *
+   * 
    * An example name would be:
    * `projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion`
    */
@@ -641,7 +641,7 @@ export interface ListAdminOverridesRequestSDKType {
   /**
    * The resource name of the parent quota limit, returned by a
    * ListConsumerQuotaMetrics or GetConsumerQuotaMetric call.
-   *
+   * 
    * An example name would be:
    * `projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion`
    */
@@ -697,7 +697,7 @@ export interface BatchCreateAdminOverridesResponseSDKType {
 export interface ImportAdminOverridesRequest {
   /**
    * The resource name of the consumer.
-   *
+   * 
    * An example name would be:
    * `projects/123/services/compute.googleapis.com`
    */
@@ -726,7 +726,7 @@ export interface ImportAdminOverridesRequest {
 export interface ImportAdminOverridesRequestSDKType {
   /**
    * The resource name of the consumer.
-   *
+   * 
    * An example name would be:
    * `projects/123/services/compute.googleapis.com`
    */
@@ -782,7 +782,7 @@ export interface CreateConsumerOverrideRequest {
   /**
    * The resource name of the parent quota limit, returned by a
    * ListConsumerQuotaMetrics or GetConsumerQuotaMetric call.
-   *
+   * 
    * An example name would be:
    * `projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion`
    */
@@ -812,7 +812,7 @@ export interface CreateConsumerOverrideRequestSDKType {
   /**
    * The resource name of the parent quota limit, returned by a
    * ListConsumerQuotaMetrics or GetConsumerQuotaMetric call.
-   *
+   * 
    * An example name would be:
    * `projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion`
    */
@@ -841,7 +841,7 @@ export interface CreateConsumerOverrideRequestSDKType {
 export interface UpdateConsumerOverrideRequest {
   /**
    * The resource name of the override to update.
-   *
+   * 
    * An example name would be:
    * `projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion/consumerOverrides/4a3f2c1d`
    */
@@ -879,7 +879,7 @@ export interface UpdateConsumerOverrideRequest {
 export interface UpdateConsumerOverrideRequestSDKType {
   /**
    * The resource name of the override to update.
-   *
+   * 
    * An example name would be:
    * `projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion/consumerOverrides/4a3f2c1d`
    */
@@ -917,7 +917,7 @@ export interface UpdateConsumerOverrideRequestSDKType {
 export interface DeleteConsumerOverrideRequest {
   /**
    * The resource name of the override to delete.
-   *
+   * 
    * An example name would be:
    * `projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion/consumerOverrides/4a3f2c1d`
    */
@@ -943,7 +943,7 @@ export interface DeleteConsumerOverrideRequest {
 export interface DeleteConsumerOverrideRequestSDKType {
   /**
    * The resource name of the override to delete.
-   *
+   * 
    * An example name would be:
    * `projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion/consumerOverrides/4a3f2c1d`
    */
@@ -970,7 +970,7 @@ export interface ListConsumerOverridesRequest {
   /**
    * The resource name of the parent quota limit, returned by a
    * ListConsumerQuotaMetrics or GetConsumerQuotaMetric call.
-   *
+   * 
    * An example name would be:
    * `projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion`
    */
@@ -991,7 +991,7 @@ export interface ListConsumerOverridesRequestSDKType {
   /**
    * The resource name of the parent quota limit, returned by a
    * ListConsumerQuotaMetrics or GetConsumerQuotaMetric call.
-   *
+   * 
    * An example name would be:
    * `projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion`
    */
@@ -1047,7 +1047,7 @@ export interface BatchCreateConsumerOverridesResponseSDKType {
 export interface ImportConsumerOverridesRequest {
   /**
    * The resource name of the consumer.
-   *
+   * 
    * An example name would be:
    * `projects/123/services/compute.googleapis.com`
    */
@@ -1076,7 +1076,7 @@ export interface ImportConsumerOverridesRequest {
 export interface ImportConsumerOverridesRequestSDKType {
   /**
    * The resource name of the consumer.
-   *
+   * 
    * An example name would be:
    * `projects/123/services/compute.googleapis.com`
    */
@@ -1199,9 +1199,9 @@ export interface DeleteAdminQuotaPolicyMetadataSDKType {}
 export interface GenerateServiceIdentityRequest {
   /**
    * Name of the consumer and service to generate an identity for.
-   *
+   * 
    * The `GenerateServiceIdentity` methods currently only support projects.
-   *
+   * 
    * An example name would be:
    * `projects/123/services/example.googleapis.com` where `123` is the
    * project number.
@@ -1213,9 +1213,9 @@ export interface GenerateServiceIdentityRequest {
 export interface GenerateServiceIdentityRequestSDKType {
   /**
    * Name of the consumer and service to generate an identity for.
-   *
+   * 
    * The `GenerateServiceIdentity` methods currently only support projects.
-   *
+   * 
    * An example name would be:
    * `projects/123/services/example.googleapis.com` where `123` is the
    * project number.

@@ -4,12 +4,12 @@ export const protobufPackage = "google.api";
 
 /**
  * Logging configuration of the service.
- *
+ * 
  * The following example shows how to configure logs to be sent to the
  * producer and consumer projects. In the example, the `activity_history`
  * log is sent to both the producer and consumer projects, whereas the
  * `purchase_history` log is only sent to the producer project.
- *
+ * 
  *     monitored_resources:
  *     - type: library.googleapis.com/branch
  *       labels:
@@ -53,12 +53,12 @@ export interface Logging {
 
 /**
  * Logging configuration of the service.
- *
+ * 
  * The following example shows how to configure logs to be sent to the
  * producer and consumer projects. In the example, the `activity_history`
  * log is sent to both the producer and consumer projects, whereas the
  * `purchase_history` log is only sent to the producer project.
- *
+ * 
  *     monitored_resources:
  *     - type: library.googleapis.com/branch
  *       labels:

@@ -122,7 +122,7 @@ export interface QueryUpgradedConsensusStateResponseSDKType {
 /**
  * QueryModuleVersionsRequest is the request type for the Query/ModuleVersions
  * RPC method.
- *
+ * 
  * Since: cosmos-sdk 0.43
  */
 export interface QueryModuleVersionsRequest {
@@ -137,7 +137,7 @@ export interface QueryModuleVersionsRequest {
 /**
  * QueryModuleVersionsRequest is the request type for the Query/ModuleVersions
  * RPC method.
- *
+ * 
  * Since: cosmos-sdk 0.43
  */
 export interface QueryModuleVersionsRequestSDKType {
@@ -152,7 +152,7 @@ export interface QueryModuleVersionsRequestSDKType {
 /**
  * QueryModuleVersionsResponse is the response type for the Query/ModuleVersions
  * RPC method.
- *
+ * 
  * Since: cosmos-sdk 0.43
  */
 export interface QueryModuleVersionsResponse {
@@ -163,7 +163,7 @@ export interface QueryModuleVersionsResponse {
 /**
  * QueryModuleVersionsResponse is the response type for the Query/ModuleVersions
  * RPC method.
- *
+ * 
  * Since: cosmos-sdk 0.43
  */
 export interface QueryModuleVersionsResponseSDKType {
@@ -173,21 +173,21 @@ export interface QueryModuleVersionsResponseSDKType {
 
 /**
  * QueryAuthorityRequest is the request type for Query/Authority
- *
+ * 
  * Since: cosmos-sdk 0.46
  */
 export interface QueryAuthorityRequest {}
 
 /**
  * QueryAuthorityRequest is the request type for Query/Authority
- *
+ * 
  * Since: cosmos-sdk 0.46
  */
 export interface QueryAuthorityRequestSDKType {}
 
 /**
  * QueryAuthorityResponse is the response type for Query/Authority
- *
+ * 
  * Since: cosmos-sdk 0.46
  */
 export interface QueryAuthorityResponse {
@@ -196,7 +196,7 @@ export interface QueryAuthorityResponse {
 
 /**
  * QueryAuthorityResponse is the response type for Query/Authority
- *
+ * 
  * Since: cosmos-sdk 0.46
  */
 export interface QueryAuthorityResponseSDKType {

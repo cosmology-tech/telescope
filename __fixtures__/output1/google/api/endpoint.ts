@@ -7,9 +7,9 @@ export const protobufPackage = "google.api";
  * APIs. It is commonly known as a service endpoint. A service may expose
  * any number of service endpoints, and all service endpoints share the same
  * service definition, such as quota limits and monitoring metrics.
- *
+ * 
  * Example service configuration:
- *
+ * 
  *     name: library-example.googleapis.com
  *     endpoints:
  *       # Below entry makes 'google.example.library.v1.Library'
@@ -26,11 +26,11 @@ export interface Endpoint {
 
   /**
    * Unimplemented. Dot not use.
-   *
+   * 
    * DEPRECATED: This field is no longer supported. Instead of using aliases,
    * please specify multiple [google.api.Endpoint][google.api.Endpoint] for each of the intended
    * aliases.
-   *
+   * 
    * Additional names that this endpoint will be hosted on.
    */
 
@@ -62,9 +62,9 @@ export interface Endpoint {
  * APIs. It is commonly known as a service endpoint. A service may expose
  * any number of service endpoints, and all service endpoints share the same
  * service definition, such as quota limits and monitoring metrics.
- *
+ * 
  * Example service configuration:
- *
+ * 
  *     name: library-example.googleapis.com
  *     endpoints:
  *       # Below entry makes 'google.example.library.v1.Library'
@@ -81,11 +81,11 @@ export interface EndpointSDKType {
 
   /**
    * Unimplemented. Dot not use.
-   *
+   * 
    * DEPRECATED: This field is no longer supported. Instead of using aliases,
    * please specify multiple [google.api.Endpoint][google.api.Endpoint] for each of the intended
    * aliases.
-   *
+   * 
    * Additional names that this endpoint will be hosted on.
    */
 

@@ -4,7 +4,7 @@ export const protobufPackage = "google.protobuf";
 
 /**
  * Wrapper message for `double`.
- *
+ * 
  * The JSON representation for `DoubleValue` is JSON number.
  */
 export interface DoubleValue {
@@ -14,7 +14,7 @@ export interface DoubleValue {
 
 /**
  * Wrapper message for `double`.
- *
+ * 
  * The JSON representation for `DoubleValue` is JSON number.
  */
 export interface DoubleValueSDKType {
@@ -24,7 +24,7 @@ export interface DoubleValueSDKType {
 
 /**
  * Wrapper message for `float`.
- *
+ * 
  * The JSON representation for `FloatValue` is JSON number.
  */
 export interface FloatValue {
@@ -34,7 +34,7 @@ export interface FloatValue {
 
 /**
  * Wrapper message for `float`.
- *
+ * 
  * The JSON representation for `FloatValue` is JSON number.
  */
 export interface FloatValueSDKType {
@@ -44,7 +44,7 @@ export interface FloatValueSDKType {
 
 /**
  * Wrapper message for `int64`.
- *
+ * 
  * The JSON representation for `Int64Value` is JSON string.
  */
 export interface Int64Value {
@@ -54,7 +54,7 @@ export interface Int64Value {
 
 /**
  * Wrapper message for `int64`.
- *
+ * 
  * The JSON representation for `Int64Value` is JSON string.
  */
 export interface Int64ValueSDKType {
@@ -64,7 +64,7 @@ export interface Int64ValueSDKType {
 
 /**
  * Wrapper message for `uint64`.
- *
+ * 
  * The JSON representation for `UInt64Value` is JSON string.
  */
 export interface UInt64Value {
@@ -74,7 +74,7 @@ export interface UInt64Value {
 
 /**
  * Wrapper message for `uint64`.
- *
+ * 
  * The JSON representation for `UInt64Value` is JSON string.
  */
 export interface UInt64ValueSDKType {
@@ -84,7 +84,7 @@ export interface UInt64ValueSDKType {
 
 /**
  * Wrapper message for `int32`.
- *
+ * 
  * The JSON representation for `Int32Value` is JSON number.
  */
 export interface Int32Value {
@@ -94,7 +94,7 @@ export interface Int32Value {
 
 /**
  * Wrapper message for `int32`.
- *
+ * 
  * The JSON representation for `Int32Value` is JSON number.
  */
 export interface Int32ValueSDKType {
@@ -104,7 +104,7 @@ export interface Int32ValueSDKType {
 
 /**
  * Wrapper message for `uint32`.
- *
+ * 
  * The JSON representation for `UInt32Value` is JSON number.
  */
 export interface UInt32Value {
@@ -114,7 +114,7 @@ export interface UInt32Value {
 
 /**
  * Wrapper message for `uint32`.
- *
+ * 
  * The JSON representation for `UInt32Value` is JSON number.
  */
 export interface UInt32ValueSDKType {
@@ -124,7 +124,7 @@ export interface UInt32ValueSDKType {
 
 /**
  * Wrapper message for `bool`.
- *
+ * 
  * The JSON representation for `BoolValue` is JSON `true` and `false`.
  */
 export interface BoolValue {
@@ -134,7 +134,7 @@ export interface BoolValue {
 
 /**
  * Wrapper message for `bool`.
- *
+ * 
  * The JSON representation for `BoolValue` is JSON `true` and `false`.
  */
 export interface BoolValueSDKType {
@@ -144,7 +144,7 @@ export interface BoolValueSDKType {
 
 /**
  * Wrapper message for `string`.
- *
+ * 
  * The JSON representation for `StringValue` is JSON string.
  */
 export interface StringValue {
@@ -154,7 +154,7 @@ export interface StringValue {
 
 /**
  * Wrapper message for `string`.
- *
+ * 
  * The JSON representation for `StringValue` is JSON string.
  */
 export interface StringValueSDKType {
@@ -164,7 +164,7 @@ export interface StringValueSDKType {
 
 /**
  * Wrapper message for `bytes`.
- *
+ * 
  * The JSON representation for `BytesValue` is JSON string.
  */
 export interface BytesValue {
@@ -174,7 +174,7 @@ export interface BytesValue {
 
 /**
  * Wrapper message for `bytes`.
- *
+ * 
  * The JSON representation for `BytesValue` is JSON string.
  */
 export interface BytesValueSDKType {

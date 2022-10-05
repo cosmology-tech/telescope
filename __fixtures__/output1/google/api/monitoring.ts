@@ -4,14 +4,14 @@ export const protobufPackage = "google.api";
 
 /**
  * Monitoring configuration of the service.
- *
+ * 
  * The example below shows how to configure monitored resources and metrics
  * for monitoring. In the example, a monitored resource and two metrics are
  * defined. The `library.googleapis.com/book/returned_count` metric is sent
  * to both producer and consumer projects, whereas the
  * `library.googleapis.com/book/num_overdue` metric is only sent to the
  * consumer project.
- *
+ * 
  *     monitored_resources:
  *     - type: library.googleapis.com/Branch
  *       display_name: "Library Branch"
@@ -80,14 +80,14 @@ export interface Monitoring {
 
 /**
  * Monitoring configuration of the service.
- *
+ * 
  * The example below shows how to configure monitored resources and metrics
  * for monitoring. In the example, a monitored resource and two metrics are
  * defined. The `library.googleapis.com/book/returned_count` metric is sent
  * to both producer and consumer projects, whereas the
  * `library.googleapis.com/book/num_overdue` metric is only sent to the
  * consumer project.
- *
+ * 
  *     monitored_resources:
  *     - type: library.googleapis.com/Branch
  *       display_name: "Library Branch"

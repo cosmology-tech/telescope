@@ -11,7 +11,7 @@ export const protobufPackage = "google.api";
  * descriptor for Google Compute Engine VM instances has a type of
  * `"gce_instance"` and specifies the use of the labels `"instance_id"` and
  * `"zone"` to identify particular VM instances.
- *
+ * 
  * Different APIs can support different monitored resource types. APIs generally
  * provide a `list` method that returns the monitored resource descriptors used
  * by the API.
@@ -64,7 +64,7 @@ export interface MonitoredResourceDescriptor {
  * descriptor for Google Compute Engine VM instances has a type of
  * `"gce_instance"` and specifies the use of the labels `"instance_id"` and
  * `"zone"` to identify particular VM instances.
- *
+ * 
  * Different APIs can support different monitored resource types. APIs generally
  * provide a `list` method that returns the monitored resource descriptors used
  * by the API.
@@ -129,7 +129,7 @@ export interface MonitoredResource_LabelsEntrySDKType {
  * Engine VM instance could be represented by the following object, because the
  * [MonitoredResourceDescriptor][google.api.MonitoredResourceDescriptor] for `"gce_instance"` has labels
  * `"instance_id"` and `"zone"`:
- *
+ * 
  *     { "type": "gce_instance",
  *       "labels": { "instance_id": "12345678901234",
  *                   "zone": "us-central1-a" }}
@@ -162,7 +162,7 @@ export interface MonitoredResource {
  * Engine VM instance could be represented by the following object, because the
  * [MonitoredResourceDescriptor][google.api.MonitoredResourceDescriptor] for `"gce_instance"` has labels
  * `"instance_id"` and `"zone"`:
- *
+ * 
  *     { "type": "gce_instance",
  *       "labels": { "instance_id": "12345678901234",
  *                   "zone": "us-central1-a" }}
@@ -209,7 +209,7 @@ export interface MonitoredResourceMetadata {
    * "security_group", "name", etc.
    * System label values can be only strings, Boolean values, or a list of
    * strings. For example:
-   *
+   * 
    *     { "name": "my-test-instance",
    *       "security_group": ["a", "b", "c"],
    *       "spot_instance": false }
@@ -238,7 +238,7 @@ export interface MonitoredResourceMetadataSDKType {
    * "security_group", "name", etc.
    * System label values can be only strings, Boolean values, or a list of
    * strings. For example:
-   *
+   * 
    *     { "name": "my-test-instance",
    *       "security_group": ["a", "b", "c"],
    *       "spot_instance": false }

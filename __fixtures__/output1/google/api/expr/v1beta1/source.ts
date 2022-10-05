@@ -15,7 +15,7 @@ export interface SourceInfo {
   /**
    * The location name. All position information attached to an expression is
    * relative to this location.
-   *
+   * 
    * The location could be a file, UI element, or similar. For example,
    * `acme/app/AnvilPolicy.cel`.
    */
@@ -23,7 +23,7 @@ export interface SourceInfo {
 
   /**
    * Monotonically increasing list of character offsets where newlines appear.
-   *
+   * 
    * The line number of a given position is the index `i` where for a given
    * `id` the `line_offsets[i] < id_positions[id] < line_offsets[i+1]`. The
    * column may be derivd from `id_positions[id] - line_offsets[i]`.
@@ -44,7 +44,7 @@ export interface SourceInfoSDKType {
   /**
    * The location name. All position information attached to an expression is
    * relative to this location.
-   *
+   * 
    * The location could be a file, UI element, or similar. For example,
    * `acme/app/AnvilPolicy.cel`.
    */
@@ -52,7 +52,7 @@ export interface SourceInfoSDKType {
 
   /**
    * Monotonically increasing list of character offsets where newlines appear.
-   *
+   * 
    * The line number of a given position is the index `i` where for a given
    * `id` the `line_offsets[i] < id_positions[id] < line_offsets[i+1]`. The
    * column may be derivd from `id_positions[id] - line_offsets[i]`.

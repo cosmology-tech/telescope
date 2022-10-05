@@ -4,31 +4,31 @@ export const protobufPackage = "google.api";
 
 /**
  * `Context` defines which contexts an API requests.
- *
+ * 
  * Example:
- *
+ * 
  *     context:
  *       rules:
  *       - selector: "*"
  *         requested:
  *         - google.rpc.context.ProjectContext
  *         - google.rpc.context.OriginContext
- *
+ * 
  * The above specifies that all methods in the API request
  * `google.rpc.context.ProjectContext` and
  * `google.rpc.context.OriginContext`.
- *
+ * 
  * Available context types are defined in package
  * `google.rpc.context`.
- *
+ * 
  * This also provides mechanism to allowlist any protobuf message extension that
  * can be sent in grpc metadata using “x-goog-ext-<extension_id>-bin” and
  * “x-goog-ext-<extension_id>-jspb” format. For example, list any service
  * specific protobuf types that can appear in grpc metadata as follows in your
  * yaml file:
- *
+ * 
  * Example:
- *
+ * 
  *     context:
  *       rules:
  *        - selector: "google.example.library.v1.LibraryService.CreateBook"
@@ -36,14 +36,14 @@ export const protobufPackage = "google.api";
  *          - google.foo.v1.NewExtension
  *          allowed_response_extensions:
  *          - google.foo.v1.NewExtension
- *
+ * 
  * You can also specify extension ID instead of fully qualified extension name
  * here.
  */
 export interface Context {
   /**
    * A list of RPC context rules that apply to individual API methods.
-   *
+   * 
    * **NOTE:** All service configuration rules follow "last one wins" order.
    */
   rules: ContextRule[];
@@ -51,31 +51,31 @@ export interface Context {
 
 /**
  * `Context` defines which contexts an API requests.
- *
+ * 
  * Example:
- *
+ * 
  *     context:
  *       rules:
  *       - selector: "*"
  *         requested:
  *         - google.rpc.context.ProjectContext
  *         - google.rpc.context.OriginContext
- *
+ * 
  * The above specifies that all methods in the API request
  * `google.rpc.context.ProjectContext` and
  * `google.rpc.context.OriginContext`.
- *
+ * 
  * Available context types are defined in package
  * `google.rpc.context`.
- *
+ * 
  * This also provides mechanism to allowlist any protobuf message extension that
  * can be sent in grpc metadata using “x-goog-ext-<extension_id>-bin” and
  * “x-goog-ext-<extension_id>-jspb” format. For example, list any service
  * specific protobuf types that can appear in grpc metadata as follows in your
  * yaml file:
- *
+ * 
  * Example:
- *
+ * 
  *     context:
  *       rules:
  *        - selector: "google.example.library.v1.LibraryService.CreateBook"
@@ -83,14 +83,14 @@ export interface Context {
  *          - google.foo.v1.NewExtension
  *          allowed_response_extensions:
  *          - google.foo.v1.NewExtension
- *
+ * 
  * You can also specify extension ID instead of fully qualified extension name
  * here.
  */
 export interface ContextSDKType {
   /**
    * A list of RPC context rules that apply to individual API methods.
-   *
+   * 
    * **NOTE:** All service configuration rules follow "last one wins" order.
    */
   rules: ContextRuleSDKType[];
@@ -103,7 +103,7 @@ export interface ContextSDKType {
 export interface ContextRule {
   /**
    * Selects the methods to which this rule applies.
-   *
+   * 
    * Refer to [selector][google.api.DocumentationRule.selector] for syntax details.
    */
   selector: string;
@@ -134,7 +134,7 @@ export interface ContextRule {
 export interface ContextRuleSDKType {
   /**
    * Selects the methods to which this rule applies.
-   *
+   * 
    * Refer to [selector][google.api.DocumentationRule.selector] for syntax details.
    */
   selector: string;

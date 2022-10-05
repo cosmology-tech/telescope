@@ -252,7 +252,7 @@ export function quotaSafetyCheckToJSON(object: QuotaSafetyCheck): string {
 export interface Service {
   /**
    * The resource name of the consumer and service.
-   *
+   * 
    * A valid name would be:
    * - `projects/123/services/serviceusage.googleapis.com`
    */
@@ -260,7 +260,7 @@ export interface Service {
 
   /**
    * The resource name of the consumer.
-   *
+   * 
    * A valid name would be:
    * - `projects/123`
    */
@@ -282,7 +282,7 @@ export interface Service {
 export interface ServiceSDKType {
   /**
    * The resource name of the consumer and service.
-   *
+   * 
    * A valid name would be:
    * - `projects/123/services/serviceusage.googleapis.com`
    */
@@ -290,7 +290,7 @@ export interface ServiceSDKType {
 
   /**
    * The resource name of the consumer.
-   *
+   * 
    * A valid name would be:
    * - `projects/123`
    */
@@ -312,7 +312,7 @@ export interface ServiceSDKType {
 export interface ServiceConfig {
   /**
    * The DNS address at which this service is available.
-   *
+   * 
    * An example DNS address would be:
    * `calendar.googleapis.com`.
    */
@@ -365,7 +365,7 @@ export interface ServiceConfig {
 export interface ServiceConfigSDKType {
   /**
    * The DNS address at which this service is available.
-   *
+   * 
    * An example DNS address would be:
    * `calendar.googleapis.com`.
    */
@@ -436,10 +436,10 @@ export interface OperationMetadataSDKType {
 export interface ConsumerQuotaMetric {
   /**
    * The resource name of the quota settings on this metric for this consumer.
-   *
+   * 
    * An example name would be:
    * `projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus`
-   *
+   * 
    * The resource name is intended to be opaque and should not be parsed for
    * its component strings, since its representation could change in the future.
    */
@@ -447,7 +447,7 @@ export interface ConsumerQuotaMetric {
 
   /**
    * The name of the metric.
-   *
+   * 
    * An example name would be:
    * `compute.googleapis.com/cpus`
    */
@@ -455,7 +455,7 @@ export interface ConsumerQuotaMetric {
 
   /**
    * The display name of the metric.
-   *
+   * 
    * An example name would be:
    * `CPUs`
    */
@@ -467,11 +467,11 @@ export interface ConsumerQuotaMetric {
   /**
    * The quota limits targeting the descendant containers of the
    * consumer in request.
-   *
+   * 
    * If the consumer in request is of type `organizations`
    * or `folders`, the field will list per-project limits in the metric; if the
    * consumer in request is of type `project`, the field will be empty.
-   *
+   * 
    * The `quota_buckets` field of each descendant consumer quota limit will not
    * be populated.
    */
@@ -485,10 +485,10 @@ export interface ConsumerQuotaMetric {
 export interface ConsumerQuotaMetricSDKType {
   /**
    * The resource name of the quota settings on this metric for this consumer.
-   *
+   * 
    * An example name would be:
    * `projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus`
-   *
+   * 
    * The resource name is intended to be opaque and should not be parsed for
    * its component strings, since its representation could change in the future.
    */
@@ -496,7 +496,7 @@ export interface ConsumerQuotaMetricSDKType {
 
   /**
    * The name of the metric.
-   *
+   * 
    * An example name would be:
    * `compute.googleapis.com/cpus`
    */
@@ -504,7 +504,7 @@ export interface ConsumerQuotaMetricSDKType {
 
   /**
    * The display name of the metric.
-   *
+   * 
    * An example name would be:
    * `CPUs`
    */
@@ -516,11 +516,11 @@ export interface ConsumerQuotaMetricSDKType {
   /**
    * The quota limits targeting the descendant containers of the
    * consumer in request.
-   *
+   * 
    * If the consumer in request is of type `organizations`
    * or `folders`, the field will list per-project limits in the metric; if the
    * consumer in request is of type `project`, the field will be empty.
-   *
+   * 
    * The `quota_buckets` field of each descendant consumer quota limit will not
    * be populated.
    */
@@ -534,10 +534,10 @@ export interface ConsumerQuotaMetricSDKType {
 export interface ConsumerQuotaLimit {
   /**
    * The resource name of the quota limit.
-   *
+   * 
    * An example name would be:
    * `projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion`
-   *
+   * 
    * The resource name is intended to be opaque and should not be parsed for
    * its component strings, since its representation could change in the future.
    */
@@ -545,7 +545,7 @@ export interface ConsumerQuotaLimit {
 
   /**
    * The name of the parent metric of this limit.
-   *
+   * 
    * An example name would be:
    * `compute.googleapis.com/cpus`
    */
@@ -553,7 +553,7 @@ export interface ConsumerQuotaLimit {
 
   /**
    * The limit unit.
-   *
+   * 
    * An example unit would be
    * `1/{project}/{region}`
    * Note that `{project}` and `{region}` are not placeholders in this example;
@@ -579,10 +579,10 @@ export interface ConsumerQuotaLimit {
 export interface ConsumerQuotaLimitSDKType {
   /**
    * The resource name of the quota limit.
-   *
+   * 
    * An example name would be:
    * `projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion`
-   *
+   * 
    * The resource name is intended to be opaque and should not be parsed for
    * its component strings, since its representation could change in the future.
    */
@@ -590,7 +590,7 @@ export interface ConsumerQuotaLimitSDKType {
 
   /**
    * The name of the parent metric of this limit.
-   *
+   * 
    * An example name would be:
    * `compute.googleapis.com/cpus`
    */
@@ -598,7 +598,7 @@ export interface ConsumerQuotaLimitSDKType {
 
   /**
    * The limit unit.
-   *
+   * 
    * An example unit would be
    * `1/{project}/{region}`
    * Note that `{project}` and `{region}` are not placeholders in this example;
@@ -653,13 +653,13 @@ export interface QuotaBucket {
 
   /**
    * The dimensions of this quota bucket.
-   *
+   * 
    * If this map is empty, this is the global bucket, which is the default quota
    * value applied to all requests that do not have a more specific override.
-   *
+   * 
    * If this map is nonempty, the default limit, effective limit, and quota
    * overrides apply only to requests that have the dimensions given in the map.
-   *
+   * 
    * For example, if the map has key `region` and value `us-east-1`, then the
    * specified effective limit is only effective in that region, and the
    * specified overrides apply only in that region.
@@ -694,13 +694,13 @@ export interface QuotaBucketSDKType {
 
   /**
    * The dimensions of this quota bucket.
-   *
+   * 
    * If this map is empty, this is the global bucket, which is the default quota
    * value applied to all requests that do not have a more specific override.
-   *
+   * 
    * If this map is nonempty, the default limit, effective limit, and quota
    * overrides apply only to requests that have the dimensions given in the map.
-   *
+   * 
    * For example, if the map has key `region` and value `us-east-1`, then the
    * specified effective limit is only effective in that region, and the
    * specified overrides apply only in that region.
@@ -723,11 +723,11 @@ export interface QuotaOverride {
   /**
    * The resource name of the override.
    * This name is generated by the server when the override is created.
-   *
+   * 
    * Example names would be:
    * `projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion/adminOverrides/4a3f2c1d`
    * `projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion/consumerOverrides/4a3f2c1d`
-   *
+   * 
    * The resource name is intended to be opaque and should not be parsed for
    * its component strings, since its representation could change in the future.
    */
@@ -742,13 +742,13 @@ export interface QuotaOverride {
   /**
    * If this map is nonempty, then this override applies only to specific values
    * for dimensions defined in the limit unit.
-   *
+   * 
    * For example, an override on a limit with the unit `1/{project}/{region}`
    * could contain an entry with the key `region` and the value `us-east-1`;
    * the override is only applied to quota consumed in that region.
-   *
+   * 
    * This map has the following restrictions:
-   *
+   * 
    * *   Keys that are not defined in the limit's unit are not valid keys.
    *     Any string appearing in `{brackets}` in the unit (besides `{project}`
    *     or
@@ -769,7 +769,7 @@ export interface QuotaOverride {
 
   /**
    * The name of the metric to which this override applies.
-   *
+   * 
    * An example name would be:
    * `compute.googleapis.com/cpus`
    */
@@ -777,7 +777,7 @@ export interface QuotaOverride {
 
   /**
    * The limit unit of the limit to which this override applies.
-   *
+   * 
    * An example unit would be:
    * `1/{project}/{region}`
    * Note that `{project}` and `{region}` are not placeholders in this example;
@@ -798,11 +798,11 @@ export interface QuotaOverrideSDKType {
   /**
    * The resource name of the override.
    * This name is generated by the server when the override is created.
-   *
+   * 
    * Example names would be:
    * `projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion/adminOverrides/4a3f2c1d`
    * `projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion/consumerOverrides/4a3f2c1d`
-   *
+   * 
    * The resource name is intended to be opaque and should not be parsed for
    * its component strings, since its representation could change in the future.
    */
@@ -817,13 +817,13 @@ export interface QuotaOverrideSDKType {
   /**
    * If this map is nonempty, then this override applies only to specific values
    * for dimensions defined in the limit unit.
-   *
+   * 
    * For example, an override on a limit with the unit `1/{project}/{region}`
    * could contain an entry with the key `region` and the value `us-east-1`;
    * the override is only applied to quota consumed in that region.
-   *
+   * 
    * This map has the following restrictions:
-   *
+   * 
    * *   Keys that are not defined in the limit's unit are not valid keys.
    *     Any string appearing in `{brackets}` in the unit (besides `{project}`
    *     or
@@ -844,7 +844,7 @@ export interface QuotaOverrideSDKType {
 
   /**
    * The name of the metric to which this override applies.
-   *
+   * 
    * An example name would be:
    * `compute.googleapis.com/cpus`
    */
@@ -852,7 +852,7 @@ export interface QuotaOverrideSDKType {
 
   /**
    * The limit unit of the limit to which this override applies.
-   *
+   * 
    * An example unit would be:
    * `1/{project}/{region}`
    * Note that `{project}` and `{region}` are not placeholders in this example;
@@ -903,7 +903,7 @@ export interface AdminQuotaPolicy {
   /**
    * The resource name of the policy.
    * This name is generated by the server when the policy is created.
-   *
+   * 
    * Example names would be:
    * `organizations/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion/adminQuotaPolicies/4a3f2c1d`
    */
@@ -918,13 +918,13 @@ export interface AdminQuotaPolicy {
   /**
    * If this map is nonempty, then this policy applies only to specific values
    * for dimensions defined in the limit unit.
-   *
+   * 
    * For example, an policy on a limit with the unit `1/{project}/{region}`
    * could contain an entry with the key `region` and the value `us-east-1`;
    * the policy is only applied to quota consumed in that region.
-   *
+   * 
    * This map has the following restrictions:
-   *
+   * 
    * *   If `region` appears as a key, its value must be a valid Cloud region.
    * *   If `zone` appears as a key, its value must be a valid Cloud zone.
    * *   Keys other than `region` or `zone` are not valid.
@@ -935,7 +935,7 @@ export interface AdminQuotaPolicy {
 
   /**
    * The name of the metric to which this policy applies.
-   *
+   * 
    * An example name would be:
    * `compute.googleapis.com/cpus`
    */
@@ -943,7 +943,7 @@ export interface AdminQuotaPolicy {
 
   /**
    * The limit unit of the limit to which this policy applies.
-   *
+   * 
    * An example unit would be:
    * `1/{project}/{region}`
    * Note that `{project}` and `{region}` are not placeholders in this example;
@@ -963,7 +963,7 @@ export interface AdminQuotaPolicySDKType {
   /**
    * The resource name of the policy.
    * This name is generated by the server when the policy is created.
-   *
+   * 
    * Example names would be:
    * `organizations/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion/adminQuotaPolicies/4a3f2c1d`
    */
@@ -978,13 +978,13 @@ export interface AdminQuotaPolicySDKType {
   /**
    * If this map is nonempty, then this policy applies only to specific values
    * for dimensions defined in the limit unit.
-   *
+   * 
    * For example, an policy on a limit with the unit `1/{project}/{region}`
    * could contain an entry with the key `region` and the value `us-east-1`;
    * the policy is only applied to quota consumed in that region.
-   *
+   * 
    * This map has the following restrictions:
-   *
+   * 
    * *   If `region` appears as a key, its value must be a valid Cloud region.
    * *   If `zone` appears as a key, its value must be a valid Cloud zone.
    * *   Keys other than `region` or `zone` are not valid.
@@ -995,7 +995,7 @@ export interface AdminQuotaPolicySDKType {
 
   /**
    * The name of the metric to which this policy applies.
-   *
+   * 
    * An example name would be:
    * `compute.googleapis.com/cpus`
    */
@@ -1003,7 +1003,7 @@ export interface AdminQuotaPolicySDKType {
 
   /**
    * The limit unit of the limit to which this policy applies.
-   *
+   * 
    * An example unit would be:
    * `1/{project}/{region}`
    * Note that `{project}` and `{region}` are not placeholders in this example;

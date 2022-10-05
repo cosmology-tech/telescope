@@ -104,7 +104,7 @@ export function changeTypeToJSON(object: ChangeType): string {
 /**
  * Output generated from semantically comparing two versions of a service
  * configuration.
- *
+ * 
  * Includes detailed information about a field that have changed with
  * applicable advice about potential consequences for the change, such as
  * backwards-incompatibility.
@@ -148,7 +148,7 @@ export interface ConfigChange {
 /**
  * Output generated from semantically comparing two versions of a service
  * configuration.
- *
+ * 
  * Includes detailed information about a field that have changed with
  * applicable advice about potential consequences for the change, such as
  * backwards-incompatibility.

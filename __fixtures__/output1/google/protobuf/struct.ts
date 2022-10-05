@@ -5,7 +5,7 @@ export const protobufPackage = "google.protobuf";
 /**
  * `NullValue` is a singleton enumeration to represent the null value for the
  * `Value` type union.
- *
+ * 
  *  The JSON representation for `NullValue` is JSON `null`.
  */
 export enum NullValue {
@@ -17,7 +17,7 @@ export enum NullValue {
 /**
  * `NullValue` is a singleton enumeration to represent the null value for the
  * `Value` type union.
- *
+ * 
  *  The JSON representation for `NullValue` is JSON `null`.
  */
 export enum NullValueSDKType {
@@ -63,7 +63,7 @@ export interface Struct_FieldsEntrySDKType {
  * scripting languages like JS a struct is represented as an
  * object. The details of that representation are described together
  * with the proto support for the language.
- *
+ * 
  * The JSON representation for `Struct` is JSON object.
  */
 export interface Struct {
@@ -80,7 +80,7 @@ export interface Struct {
  * scripting languages like JS a struct is represented as an
  * object. The details of that representation are described together
  * with the proto support for the language.
- *
+ * 
  * The JSON representation for `Struct` is JSON object.
  */
 export interface StructSDKType {
@@ -95,7 +95,7 @@ export interface StructSDKType {
  * null, a number, a string, a boolean, a recursive struct value, or a
  * list of values. A producer of value is expected to set one of that
  * variants, absence of any variant indicates an error.
- *
+ * 
  * The JSON representation for `Value` is JSON value.
  */
 export interface Value {
@@ -123,7 +123,7 @@ export interface Value {
  * null, a number, a string, a boolean, a recursive struct value, or a
  * list of values. A producer of value is expected to set one of that
  * variants, absence of any variant indicates an error.
- *
+ * 
  * The JSON representation for `Value` is JSON value.
  */
 export interface ValueSDKType {
@@ -148,7 +148,7 @@ export interface ValueSDKType {
 
 /**
  * `ListValue` is a wrapper around a repeated field of values.
- *
+ * 
  * The JSON representation for `ListValue` is JSON array.
  */
 export interface ListValue {
@@ -158,7 +158,7 @@ export interface ListValue {
 
 /**
  * `ListValue` is a wrapper around a repeated field of values.
- *
+ * 
  * The JSON representation for `ListValue` is JSON array.
  */
 export interface ListValueSDKType {

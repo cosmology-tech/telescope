@@ -7,7 +7,7 @@ export const protobufPackage = "cosmos.auth.v1beta1";
 
 /**
  * QueryAccountsRequest is the request type for the Query/Accounts RPC method.
- *
+ * 
  * Since: cosmos-sdk 0.43
  */
 export interface QueryAccountsRequest {
@@ -17,7 +17,7 @@ export interface QueryAccountsRequest {
 
 /**
  * QueryAccountsRequest is the request type for the Query/Accounts RPC method.
- *
+ * 
  * Since: cosmos-sdk 0.43
  */
 export interface QueryAccountsRequestSDKType {
@@ -27,7 +27,7 @@ export interface QueryAccountsRequestSDKType {
 
 /**
  * QueryAccountsResponse is the response type for the Query/Accounts RPC method.
- *
+ * 
  * Since: cosmos-sdk 0.43
  */
 export interface QueryAccountsResponse {
@@ -40,7 +40,7 @@ export interface QueryAccountsResponse {
 
 /**
  * QueryAccountsResponse is the response type for the Query/Accounts RPC method.
- *
+ * 
  * Since: cosmos-sdk 0.43
  */
 export interface QueryAccountsResponseSDKType {

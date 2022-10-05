@@ -6,7 +6,7 @@ export const protobufPackage = "google.api.expr.v1alpha1";
 
 /**
  * Represents a CEL value.
- *
+ * 
  * This is similar to `google.protobuf.Value`, but can represent CEL's full
  * range of values.
  */
@@ -50,7 +50,7 @@ export interface Value {
 
 /**
  * Represents a CEL value.
- *
+ * 
  * This is similar to `google.protobuf.Value`, but can represent CEL's full
  * range of values.
  */
@@ -112,7 +112,7 @@ export interface EnumValueSDKType {
 
 /**
  * A list.
- *
+ * 
  * Wrapped in a message so 'not set' and empty can be differentiated, which is
  * required for use in a 'oneof'.
  */
@@ -123,7 +123,7 @@ export interface ListValue {
 
 /**
  * A list.
- *
+ * 
  * Wrapped in a message so 'not set' and empty can be differentiated, which is
  * required for use in a 'oneof'.
  */
@@ -134,14 +134,14 @@ export interface ListValueSDKType {
 
 /**
  * A map.
- *
+ * 
  * Wrapped in a message so 'not set' and empty can be differentiated, which is
  * required for use in a 'oneof'.
  */
 export interface MapValue {
   /**
    * The set of map entries.
-   *
+   * 
    * CEL has fewer restrictions on keys, so a protobuf map represenation
    * cannot be used.
    */
@@ -150,14 +150,14 @@ export interface MapValue {
 
 /**
  * A map.
- *
+ * 
  * Wrapped in a message so 'not set' and empty can be differentiated, which is
  * required for use in a 'oneof'.
  */
 export interface MapValueSDKType {
   /**
    * The set of map entries.
-   *
+   * 
    * CEL has fewer restrictions on keys, so a protobuf map represenation
    * cannot be used.
    */
@@ -168,7 +168,7 @@ export interface MapValueSDKType {
 export interface MapValue_Entry {
   /**
    * The key.
-   *
+   * 
    * Must be unique with in the map.
    * Currently only boolean, int, uint, and string values can be keys.
    */
@@ -182,7 +182,7 @@ export interface MapValue_Entry {
 export interface MapValue_EntrySDKType {
   /**
    * The key.
-   *
+   * 
    * Must be unique with in the map.
    * Currently only boolean, int, uint, and string values can be keys.
    */

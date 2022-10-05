@@ -250,9 +250,9 @@ export interface CheckedExpr_TypeMapEntrySDKType {
 export interface CheckedExpr {
   /**
    * A map from expression ids to resolved references.
-   *
+   * 
    * The following entries are in this table:
-   *
+   * 
    * - An Ident or Select expression is represented here if it resolves to a
    *   declaration. For instance, if `a.b.c` is represented by
    *   `select(select(id(a), b), c)`, and `a.b` resolves to a declaration,
@@ -271,7 +271,7 @@ export interface CheckedExpr {
 
   /**
    * A map from expression ids to types.
-   *
+   * 
    * Every expression node which has a type different than DYN has a mapping
    * here. If an expression has type DYN, it is omitted from this map to save
    * space.
@@ -289,7 +289,7 @@ export interface CheckedExpr {
   /**
    * The expr version indicates the major / minor version number of the `expr`
    * representation.
-   *
+   * 
    * The most common reason for a version change will be to indicate to the CEL
    * runtimes that transformations have been performed on the expr during static
    * analysis. In some cases, this will save the runtime the work of applying
@@ -308,9 +308,9 @@ export interface CheckedExpr {
 export interface CheckedExprSDKType {
   /**
    * A map from expression ids to resolved references.
-   *
+   * 
    * The following entries are in this table:
-   *
+   * 
    * - An Ident or Select expression is represented here if it resolves to a
    *   declaration. For instance, if `a.b.c` is represented by
    *   `select(select(id(a), b), c)`, and `a.b` resolves to a declaration,
@@ -329,7 +329,7 @@ export interface CheckedExprSDKType {
 
   /**
    * A map from expression ids to types.
-   *
+   * 
    * Every expression node which has a type different than DYN has a mapping
    * here. If an expression has type DYN, it is omitted from this map to save
    * space.
@@ -347,7 +347,7 @@ export interface CheckedExprSDKType {
   /**
    * The expr version indicates the major / minor version number of the `expr`
    * representation.
-   *
+   * 
    * The most common reason for a version change will be to indicate to the CEL
    * runtimes that transformations have been performed on the expr during static
    * analysis. In some cases, this will save the runtime the work of applying
@@ -390,7 +390,7 @@ export interface Type {
 
   /**
    * Protocol buffer message type.
-   *
+   * 
    * The `message_type` string specifies the qualified message type name. For
    * example, `google.plus.Profile`.
    */
@@ -398,7 +398,7 @@ export interface Type {
 
   /**
    * Type param type.
-   *
+   * 
    * The `type_param` string specifies the type parameter name, e.g. `list<E>`
    * would be a `list_type` whose element type was a `type_param` type
    * named `E`.
@@ -407,7 +407,7 @@ export interface Type {
 
   /**
    * Type type.
-   *
+   * 
    * The `type` value specifies the target type. e.g. int is type with a
    * target type of `Primitive.INT`.
    */
@@ -415,7 +415,7 @@ export interface Type {
 
   /**
    * Error type.
-   *
+   * 
    * During type-checking if an expression is an error, its type is propagated
    * as the `ERROR` type. This permits the type-checker to discover other
    * errors present in the expression.
@@ -454,7 +454,7 @@ export interface TypeSDKType {
 
   /**
    * Protocol buffer message type.
-   *
+   * 
    * The `message_type` string specifies the qualified message type name. For
    * example, `google.plus.Profile`.
    */
@@ -462,7 +462,7 @@ export interface TypeSDKType {
 
   /**
    * Type param type.
-   *
+   * 
    * The `type_param` string specifies the type parameter name, e.g. `list<E>`
    * would be a `list_type` whose element type was a `type_param` type
    * named `E`.
@@ -471,7 +471,7 @@ export interface TypeSDKType {
 
   /**
    * Type type.
-   *
+   * 
    * The `type` value specifies the target type. e.g. int is type with a
    * target type of `Primitive.INT`.
    */
@@ -479,7 +479,7 @@ export interface TypeSDKType {
 
   /**
    * Error type.
-   *
+   * 
    * During type-checking if an expression is an error, its type is propagated
    * as the `ERROR` type. This permits the type-checker to discover other
    * errors present in the expression.
@@ -558,17 +558,17 @@ export interface Type_AbstractTypeSDKType {
 
 /**
  * Represents a declaration of a named value or function.
- *
+ * 
  * A declaration is part of the contract between the expression, the agent
  * evaluating that expression, and the caller requesting evaluation.
  */
 export interface Decl {
   /**
    * The fully qualified name of the declaration.
-   *
+   * 
    * Declarations are organized in containers and this represents the full path
    * to the declaration in its container, as in `google.api.expr.Decl`.
-   *
+   * 
    * Declarations used as [FunctionDecl.Overload][google.api.expr.v1alpha1.Decl.FunctionDecl.Overload] parameters may or may not
    * have a name depending on whether the overload is function declaration or a
    * function definition containing a result [Expr][google.api.expr.v1alpha1.Expr].
@@ -584,17 +584,17 @@ export interface Decl {
 
 /**
  * Represents a declaration of a named value or function.
- *
+ * 
  * A declaration is part of the contract between the expression, the agent
  * evaluating that expression, and the caller requesting evaluation.
  */
 export interface DeclSDKType {
   /**
    * The fully qualified name of the declaration.
-   *
+   * 
    * Declarations are organized in containers and this represents the full path
    * to the declaration in its container, as in `google.api.expr.Decl`.
-   *
+   * 
    * Declarations used as [FunctionDecl.Overload][google.api.expr.v1alpha1.Decl.FunctionDecl.Overload] parameters may or may not
    * have a name depending on whether the overload is function declaration or a
    * function definition containing a result [Expr][google.api.expr.v1alpha1.Expr].
@@ -610,7 +610,7 @@ export interface DeclSDKType {
 
 /**
  * Identifier declaration which specifies its type and optional `Expr` value.
- *
+ * 
  * An identifier without a value is a declaration that must be provided at
  * evaluation time. An identifier with a value should resolve to a constant,
  * but may be used in conjunction with other identifiers bound at evaluation
@@ -632,7 +632,7 @@ export interface Decl_IdentDecl {
 
 /**
  * Identifier declaration which specifies its type and optional `Expr` value.
- *
+ * 
  * An identifier without a value is a declaration that must be provided at
  * evaluation time. An identifier with a value should resolve to a constant,
  * but may be used in conjunction with other identifiers bound at evaluation
@@ -655,7 +655,7 @@ export interface Decl_IdentDeclSDKType {
 /**
  * Function declaration specifies one or more overloads which indicate the
  * function's parameter types and return type.
- *
+ * 
  * Functions have no observable side-effects (there may be side-effects like
  * logging which are not observable from CEL).
  */
@@ -667,7 +667,7 @@ export interface Decl_FunctionDecl {
 /**
  * Function declaration specifies one or more overloads which indicate the
  * function's parameter types and return type.
- *
+ * 
  * Functions have no observable side-effects (there may be side-effects like
  * logging which are not observable from CEL).
  */
@@ -680,11 +680,11 @@ export interface Decl_FunctionDeclSDKType {
  * An overload indicates a function's parameter types and return type, and
  * may optionally include a function body described in terms of [Expr][google.api.expr.v1alpha1.Expr]
  * values.
- *
+ * 
  * Functions overloads are declared in either a function or method
  * call-style. For methods, the `params[0]` is the expected type of the
  * target receiver.
- *
+ * 
  * Overloads must have non-overlapping argument types after erasure of all
  * parameterized type variables (similar as type erasure in Java).
  */
@@ -692,7 +692,7 @@ export interface Decl_FunctionDecl_Overload {
   /**
    * Required. Globally unique overload name of the function which reflects
    * the function name and argument types.
-   *
+   * 
    * This will be used by a [Reference][google.api.expr.v1alpha1.Reference] to indicate the `overload_id` that
    * was resolved for the function `name`.
    */
@@ -700,13 +700,13 @@ export interface Decl_FunctionDecl_Overload {
 
   /**
    * List of function parameter [Type][google.api.expr.v1alpha1.Type] values.
-   *
+   * 
    * Param types are disjoint after generic type parameters have been
    * replaced with the type `DYN`. Since the `DYN` type is compatible with
    * any other type, this means that if `A` is a type parameter, the
    * function types `int<A>` and `int<int>` are not disjoint. Likewise,
    * `map<string, string>` is not disjoint from `map<K, V>`.
-   *
+   * 
    * When the `result_type` of a function is a generic type param, the
    * type param name also appears as the `type` of on at least one params.
    */
@@ -714,7 +714,7 @@ export interface Decl_FunctionDecl_Overload {
 
   /**
    * The type param names associated with the function declaration.
-   *
+   * 
    * For example, `function ex<K,V>(K key, map<K, V> map) : V` would yield
    * the type params of `K, V`.
    */
@@ -729,7 +729,7 @@ export interface Decl_FunctionDecl_Overload {
   /**
    * Whether the function is to be used in a method call-style `x.f(...)`
    * of a function call-style `f(x, ...)`.
-   *
+   * 
    * For methods, the first parameter declaration, `params[0]` is the
    * expected type of the target receiver.
    */
@@ -743,11 +743,11 @@ export interface Decl_FunctionDecl_Overload {
  * An overload indicates a function's parameter types and return type, and
  * may optionally include a function body described in terms of [Expr][google.api.expr.v1alpha1.Expr]
  * values.
- *
+ * 
  * Functions overloads are declared in either a function or method
  * call-style. For methods, the `params[0]` is the expected type of the
  * target receiver.
- *
+ * 
  * Overloads must have non-overlapping argument types after erasure of all
  * parameterized type variables (similar as type erasure in Java).
  */
@@ -755,7 +755,7 @@ export interface Decl_FunctionDecl_OverloadSDKType {
   /**
    * Required. Globally unique overload name of the function which reflects
    * the function name and argument types.
-   *
+   * 
    * This will be used by a [Reference][google.api.expr.v1alpha1.Reference] to indicate the `overload_id` that
    * was resolved for the function `name`.
    */
@@ -763,13 +763,13 @@ export interface Decl_FunctionDecl_OverloadSDKType {
 
   /**
    * List of function parameter [Type][google.api.expr.v1alpha1.Type] values.
-   *
+   * 
    * Param types are disjoint after generic type parameters have been
    * replaced with the type `DYN`. Since the `DYN` type is compatible with
    * any other type, this means that if `A` is a type parameter, the
    * function types `int<A>` and `int<int>` are not disjoint. Likewise,
    * `map<string, string>` is not disjoint from `map<K, V>`.
-   *
+   * 
    * When the `result_type` of a function is a generic type param, the
    * type param name also appears as the `type` of on at least one params.
    */
@@ -777,7 +777,7 @@ export interface Decl_FunctionDecl_OverloadSDKType {
 
   /**
    * The type param names associated with the function declaration.
-   *
+   * 
    * For example, `function ex<K,V>(K key, map<K, V> map) : V` would yield
    * the type params of `K, V`.
    */
@@ -792,7 +792,7 @@ export interface Decl_FunctionDecl_OverloadSDKType {
   /**
    * Whether the function is to be used in a method call-style `x.f(...)`
    * of a function call-style `f(x, ...)`.
-   *
+   * 
    * For methods, the first parameter declaration, `params[0]` is the
    * expected type of the target receiver.
    */
@@ -810,11 +810,11 @@ export interface Reference {
   /**
    * For references to functions, this is a list of `Overload.overload_id`
    * values which match according to typing rules.
-   *
+   * 
    * If the list has more than one element, overload resolution among the
    * presented candidates must happen at runtime because of dynamic types. The
    * type checker attempts to narrow down this list as much as possible.
-   *
+   * 
    * Empty if this is not a reference to a [Decl.FunctionDecl][google.api.expr.v1alpha1.Decl.FunctionDecl].
    */
   overloadId: string[];
@@ -834,11 +834,11 @@ export interface ReferenceSDKType {
   /**
    * For references to functions, this is a list of `Overload.overload_id`
    * values which match according to typing rules.
-   *
+   * 
    * If the list has more than one element, overload resolution among the
    * presented candidates must happen at runtime because of dynamic types. The
    * type checker attempts to narrow down this list as much as possible.
-   *
+   * 
    * Empty if this is not a reference to a [Decl.FunctionDecl][google.api.expr.v1alpha1.Decl.FunctionDecl].
    */
   overload_id: string[];

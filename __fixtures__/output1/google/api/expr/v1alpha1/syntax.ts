@@ -25,17 +25,17 @@ export interface ParsedExprSDKType {
 
 /**
  * An abstract representation of a common expression.
- *
+ * 
  * Expressions are abstractly represented as a collection of identifiers,
  * select statements, function calls, literals, and comprehensions. All
  * operators with the exception of the '.' operator are modelled as function
  * calls. This makes it easy to represent new operators into the existing AST.
- *
+ * 
  * All references within expressions must resolve to a [Decl][google.api.expr.v1alpha1.Decl] provided at
  * type-check for an expression to be valid. A reference may either be a bare
  * identifier `name` or a qualified identifier `google.api.name`. References
  * may either refer to a value or a function declaration.
- *
+ * 
  * For example, the expression `google.api.name.startsWith('expr')` references
  * the declaration `google.api.name` within a [Expr.Select][google.api.expr.v1alpha1.Expr.Select] expression, and
  * the function declaration `startsWith`.
@@ -72,17 +72,17 @@ export interface Expr {
 
 /**
  * An abstract representation of a common expression.
- *
+ * 
  * Expressions are abstractly represented as a collection of identifiers,
  * select statements, function calls, literals, and comprehensions. All
  * operators with the exception of the '.' operator are modelled as function
  * calls. This makes it easy to represent new operators into the existing AST.
- *
+ * 
  * All references within expressions must resolve to a [Decl][google.api.expr.v1alpha1.Decl] provided at
  * type-check for an expression to be valid. A reference may either be a bare
  * identifier `name` or a qualified identifier `google.api.name`. References
  * may either refer to a value or a function declaration.
- *
+ * 
  * For example, the expression `google.api.name.startsWith('expr')` references
  * the declaration `google.api.name` within a [Expr.Select][google.api.expr.v1alpha1.Expr.Select] expression, and
  * the function declaration `startsWith`.
@@ -122,7 +122,7 @@ export interface Expr_Ident {
   /**
    * Required. Holds a single, unqualified identifier, possibly preceded by a
    * '.'.
-   *
+   * 
    * Qualified names are represented by the [Expr.Select][google.api.expr.v1alpha1.Expr.Select] expression.
    */
   name: string;
@@ -133,7 +133,7 @@ export interface Expr_IdentSDKType {
   /**
    * Required. Holds a single, unqualified identifier, possibly preceded by a
    * '.'.
-   *
+   * 
    * Qualified names are represented by the [Expr.Select][google.api.expr.v1alpha1.Expr.Select] expression.
    */
   name: string;
@@ -143,7 +143,7 @@ export interface Expr_IdentSDKType {
 export interface Expr_Select {
   /**
    * Required. The target of the selection expression.
-   *
+   * 
    * For example, in the select expression `request.auth`, the `request`
    * portion of the expression is the `operand`.
    */
@@ -151,7 +151,7 @@ export interface Expr_Select {
 
   /**
    * Required. The name of the field to select.
-   *
+   * 
    * For example, in the select expression `request.auth`, the `auth` portion
    * of the expression would be the `field`.
    */
@@ -159,7 +159,7 @@ export interface Expr_Select {
 
   /**
    * Whether the select is to be interpreted as a field presence test.
-   *
+   * 
    * This results from the macro `has(request.auth)`.
    */
   testOnly: boolean;
@@ -169,7 +169,7 @@ export interface Expr_Select {
 export interface Expr_SelectSDKType {
   /**
    * Required. The target of the selection expression.
-   *
+   * 
    * For example, in the select expression `request.auth`, the `request`
    * portion of the expression is the `operand`.
    */
@@ -177,7 +177,7 @@ export interface Expr_SelectSDKType {
 
   /**
    * Required. The name of the field to select.
-   *
+   * 
    * For example, in the select expression `request.auth`, the `auth` portion
    * of the expression would be the `field`.
    */
@@ -185,7 +185,7 @@ export interface Expr_SelectSDKType {
 
   /**
    * Whether the select is to be interpreted as a field presence test.
-   *
+   * 
    * This results from the macro `has(request.auth)`.
    */
   test_only: boolean;
@@ -193,7 +193,7 @@ export interface Expr_SelectSDKType {
 
 /**
  * A call expression, including calls to predefined functions and operators.
- *
+ * 
  * For example, `value == 10`, `size(map_value)`.
  */
 export interface Expr_Call {
@@ -212,7 +212,7 @@ export interface Expr_Call {
 
 /**
  * A call expression, including calls to predefined functions and operators.
- *
+ * 
  * For example, `value == 10`, `size(map_value)`.
  */
 export interface Expr_CallSDKType {
@@ -231,7 +231,7 @@ export interface Expr_CallSDKType {
 
 /**
  * A list creation expression.
- *
+ * 
  * Lists may either be homogenous, e.g. `[1, 2, 3]`, or heterogeneous, e.g.
  * `dyn([1, 'hello', 2.0])`
  */
@@ -242,7 +242,7 @@ export interface Expr_CreateList {
 
 /**
  * A list creation expression.
- *
+ * 
  * Lists may either be homogenous, e.g. `[1, 2, 3]`, or heterogeneous, e.g.
  * `dyn([1, 'hello', 2.0])`
  */
@@ -253,7 +253,7 @@ export interface Expr_CreateListSDKType {
 
 /**
  * A map or message creation expression.
- *
+ * 
  * Maps are constructed as `{'key_name': 'value'}`. Message construction is
  * similar, but prefixed with a type name and composed of field ids:
  * `types.MyType{field_id: 'value'}`.
@@ -271,7 +271,7 @@ export interface Expr_CreateStruct {
 
 /**
  * A map or message creation expression.
- *
+ * 
  * Maps are constructed as `{'key_name': 'value'}`. Message construction is
  * similar, but prefixed with a type name and composed of field ids:
  * `types.MyType{field_id: 'value'}`.
@@ -327,17 +327,17 @@ export interface Expr_CreateStruct_EntrySDKType {
 
 /**
  * A comprehension expression applied to a list or map.
- *
+ * 
  * Comprehensions are not part of the core syntax, but enabled with macros.
  * A macro matches a specific call signature within a parsed AST and replaces
  * the call with an alternate AST block. Macro expansion happens at parse
  * time.
- *
+ * 
  * The following macros are supported within CEL:
- *
+ * 
  * Aggregate type macros may be applied to all elements in a list or all keys
  * in a map:
- *
+ * 
  * *  `all`, `exists`, `exists_one` -  test a predicate expression against
  *    the inputs and return `true` if the predicate is satisfied for all,
  *    any, or only one value `list.all(x, x < 10)`.
@@ -346,7 +346,7 @@ export interface Expr_CreateStruct_EntrySDKType {
  *    `payments.filter(p, p > 1000)`.
  * *  `map` - apply an expression to all elements in the input and return the
  *    output aggregate type: `[1, 2, 3].map(i, i * i)`.
- *
+ * 
  * The `has(m.x)` macro tests whether the property `x` is present in struct
  * `m`. The semantics of this macro depend on the type of `m`. For proto2
  * messages `has(m.x)` is defined as 'defined, but not set`. For proto3, the
@@ -368,7 +368,7 @@ export interface Expr_Comprehension {
 
   /**
    * An expression which can contain iter_var and accu_var.
-   *
+   * 
    * Returns false when the result has been computed and may be used as
    * a hint to short-circuit the remainder of the comprehension.
    */
@@ -376,14 +376,14 @@ export interface Expr_Comprehension {
 
   /**
    * An expression which can contain iter_var and accu_var.
-   *
+   * 
    * Computes the next value of accu_var.
    */
   loopStep: Expr;
 
   /**
    * An expression which can contain accu_var.
-   *
+   * 
    * Computes the result.
    */
   result: Expr;
@@ -391,17 +391,17 @@ export interface Expr_Comprehension {
 
 /**
  * A comprehension expression applied to a list or map.
- *
+ * 
  * Comprehensions are not part of the core syntax, but enabled with macros.
  * A macro matches a specific call signature within a parsed AST and replaces
  * the call with an alternate AST block. Macro expansion happens at parse
  * time.
- *
+ * 
  * The following macros are supported within CEL:
- *
+ * 
  * Aggregate type macros may be applied to all elements in a list or all keys
  * in a map:
- *
+ * 
  * *  `all`, `exists`, `exists_one` -  test a predicate expression against
  *    the inputs and return `true` if the predicate is satisfied for all,
  *    any, or only one value `list.all(x, x < 10)`.
@@ -410,7 +410,7 @@ export interface Expr_Comprehension {
  *    `payments.filter(p, p > 1000)`.
  * *  `map` - apply an expression to all elements in the input and return the
  *    output aggregate type: `[1, 2, 3].map(i, i * i)`.
- *
+ * 
  * The `has(m.x)` macro tests whether the property `x` is present in struct
  * `m`. The semantics of this macro depend on the type of `m`. For proto2
  * messages `has(m.x)` is defined as 'defined, but not set`. For proto3, the
@@ -432,7 +432,7 @@ export interface Expr_ComprehensionSDKType {
 
   /**
    * An expression which can contain iter_var and accu_var.
-   *
+   * 
    * Returns false when the result has been computed and may be used as
    * a hint to short-circuit the remainder of the comprehension.
    */
@@ -440,14 +440,14 @@ export interface Expr_ComprehensionSDKType {
 
   /**
    * An expression which can contain iter_var and accu_var.
-   *
+   * 
    * Computes the next value of accu_var.
    */
   loop_step: ExprSDKType;
 
   /**
    * An expression which can contain accu_var.
-   *
+   * 
    * Computes the result.
    */
   result: ExprSDKType;
@@ -455,16 +455,16 @@ export interface Expr_ComprehensionSDKType {
 
 /**
  * Represents a primitive literal.
- *
+ * 
  * Named 'Constant' here for backwards compatibility.
- *
+ * 
  * This is similar as the primitives supported in the well-known type
  * `google.protobuf.Value`, but richer so it can represent CEL's full range of
  * primitives.
- *
+ * 
  * Lists and structs are not included as constants as these aggregate types may
  * contain [Expr][google.api.expr.v1alpha1.Expr] elements which require evaluation and are thus not constant.
- *
+ * 
  * Examples of literals include: `"hello"`, `b'bytes'`, `1u`, `4.2`, `-2`,
  * `true`, `null`.
  */
@@ -492,7 +492,7 @@ export interface Constant {
 
   /**
    * protobuf.Duration value.
-   *
+   * 
    * Deprecated: duration is no longer considered a builtin cel type.
    */
 
@@ -501,7 +501,7 @@ export interface Constant {
 
   /**
    * protobuf.Timestamp value.
-   *
+   * 
    * Deprecated: timestamp is no longer considered a builtin cel type.
    */
 
@@ -511,16 +511,16 @@ export interface Constant {
 
 /**
  * Represents a primitive literal.
- *
+ * 
  * Named 'Constant' here for backwards compatibility.
- *
+ * 
  * This is similar as the primitives supported in the well-known type
  * `google.protobuf.Value`, but richer so it can represent CEL's full range of
  * primitives.
- *
+ * 
  * Lists and structs are not included as constants as these aggregate types may
  * contain [Expr][google.api.expr.v1alpha1.Expr] elements which require evaluation and are thus not constant.
- *
+ * 
  * Examples of literals include: `"hello"`, `b'bytes'`, `1u`, `4.2`, `-2`,
  * `true`, `null`.
  */
@@ -548,7 +548,7 @@ export interface ConstantSDKType {
 
   /**
    * protobuf.Duration value.
-   *
+   * 
    * Deprecated: duration is no longer considered a builtin cel type.
    */
 
@@ -557,7 +557,7 @@ export interface ConstantSDKType {
 
   /**
    * protobuf.Timestamp value.
-   *
+   * 
    * Deprecated: timestamp is no longer considered a builtin cel type.
    */
 
@@ -589,7 +589,7 @@ export interface SourceInfo {
   /**
    * The location name. All position information attached to an expression is
    * relative to this location.
-   *
+   * 
    * The location could be a file, UI element, or similar. For example,
    * `acme/app/AnvilPolicy.cel`.
    */
@@ -598,7 +598,7 @@ export interface SourceInfo {
   /**
    * Monotonically increasing list of code point offsets where newlines
    * `\n` appear.
-   *
+   * 
    * The line number of a given position is the index `i` where for a given
    * `id` the `line_offsets[i] < id_positions[id] < line_offsets[i+1]`. The
    * column may be derivd from `id_positions[id] - line_offsets[i]`.
@@ -616,7 +616,7 @@ export interface SourceInfo {
   /**
    * A map from the parse node id where a macro replacement was made to the
    * call `Expr` that resulted in a macro expansion.
-   *
+   * 
    * For example, `has(value.field)` is a function call that is replaced by a
    * `test_only` field selection in the AST. Likewise, the call
    * `list.exists(e, e > 10)` translates to a comprehension expression. The key
@@ -636,7 +636,7 @@ export interface SourceInfoSDKType {
   /**
    * The location name. All position information attached to an expression is
    * relative to this location.
-   *
+   * 
    * The location could be a file, UI element, or similar. For example,
    * `acme/app/AnvilPolicy.cel`.
    */
@@ -645,7 +645,7 @@ export interface SourceInfoSDKType {
   /**
    * Monotonically increasing list of code point offsets where newlines
    * `\n` appear.
-   *
+   * 
    * The line number of a given position is the index `i` where for a given
    * `id` the `line_offsets[i] < id_positions[id] < line_offsets[i+1]`. The
    * column may be derivd from `id_positions[id] - line_offsets[i]`.
@@ -663,7 +663,7 @@ export interface SourceInfoSDKType {
   /**
    * A map from the parse node id where a macro replacement was made to the
    * call `Expr` that resulted in a macro expansion.
-   *
+   * 
    * For example, `has(value.field)` is a function call that is replaced by a
    * `test_only` field selection in the AST. Likewise, the call
    * `list.exists(e, e > 10)` translates to a comprehension expression. The key

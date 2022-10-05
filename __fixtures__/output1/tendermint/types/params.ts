@@ -42,7 +42,7 @@ export interface BlockParams {
   /**
    * Minimum time increment between consecutive blocks (in milliseconds) If the
    * block header timestamp is ahead of the system clock, decrease this value.
-   *
+   * 
    * Not exposed to the application.
    */
   timeIotaMs: Long;
@@ -65,7 +65,7 @@ export interface BlockParamsSDKType {
   /**
    * Minimum time increment between consecutive blocks (in milliseconds) If the
    * block header timestamp is ahead of the system clock, decrease this value.
-   *
+   * 
    * Not exposed to the application.
    */
   time_iota_ms: Long;
@@ -75,7 +75,7 @@ export interface BlockParamsSDKType {
 export interface EvidenceParams {
   /**
    * Max age of evidence, in blocks.
-   *
+   * 
    * The basic formula for calculating this is: MaxAgeDuration / {average block
    * time}.
    */
@@ -83,7 +83,7 @@ export interface EvidenceParams {
 
   /**
    * Max age of evidence, in time.
-   *
+   * 
    * It should correspond with an app's "unbonding period" or other similar
    * mechanism for handling [Nothing-At-Stake
    * attacks](https://github.com/ethereum/wiki/wiki/Proof-of-Stake-FAQ#what-is-the-nothing-at-stake-problem-and-how-can-it-be-fixed).
@@ -102,7 +102,7 @@ export interface EvidenceParams {
 export interface EvidenceParamsSDKType {
   /**
    * Max age of evidence, in blocks.
-   *
+   * 
    * The basic formula for calculating this is: MaxAgeDuration / {average block
    * time}.
    */
@@ -110,7 +110,7 @@ export interface EvidenceParamsSDKType {
 
   /**
    * Max age of evidence, in time.
-   *
+   * 
    * It should correspond with an app's "unbonding period" or other similar
    * mechanism for handling [Nothing-At-Stake
    * attacks](https://github.com/ethereum/wiki/wiki/Proof-of-Stake-FAQ#what-is-the-nothing-at-stake-problem-and-how-can-it-be-fixed).
@@ -153,7 +153,7 @@ export interface VersionParamsSDKType {
 
 /**
  * HashedParams is a subset of ConsensusParams.
- *
+ * 
  * It is hashed into the Header.ConsensusHash.
  */
 export interface HashedParams {
@@ -163,7 +163,7 @@ export interface HashedParams {
 
 /**
  * HashedParams is a subset of ConsensusParams.
- *
+ * 
  * It is hashed into the Header.ConsensusHash.
  */
 export interface HashedParamsSDKType {

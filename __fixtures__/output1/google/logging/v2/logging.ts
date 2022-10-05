@@ -88,16 +88,16 @@ export function tailLogEntriesResponse_SuppressionInfo_ReasonToJSON(object: Tail
 export interface DeleteLogRequest {
   /**
    * Required. The resource name of the log to delete:
-   *
+   * 
    * * `projects/[PROJECT_ID]/logs/[LOG_ID]`
    * * `organizations/[ORGANIZATION_ID]/logs/[LOG_ID]`
    * * `billingAccounts/[BILLING_ACCOUNT_ID]/logs/[LOG_ID]`
    * * `folders/[FOLDER_ID]/logs/[LOG_ID]`
-   *
+   * 
    * `[LOG_ID]` must be URL-encoded. For example,
    * `"projects/my-project-id/logs/syslog"`,
    * `"organizations/123/logs/cloudaudit.googleapis.com%2Factivity"`.
-   *
+   * 
    * For more information about log names, see
    * [LogEntry][google.logging.v2.LogEntry].
    */
@@ -108,16 +108,16 @@ export interface DeleteLogRequest {
 export interface DeleteLogRequestSDKType {
   /**
    * Required. The resource name of the log to delete:
-   *
+   * 
    * * `projects/[PROJECT_ID]/logs/[LOG_ID]`
    * * `organizations/[ORGANIZATION_ID]/logs/[LOG_ID]`
    * * `billingAccounts/[BILLING_ACCOUNT_ID]/logs/[LOG_ID]`
    * * `folders/[FOLDER_ID]/logs/[LOG_ID]`
-   *
+   * 
    * `[LOG_ID]` must be URL-encoded. For example,
    * `"projects/my-project-id/logs/syslog"`,
    * `"organizations/123/logs/cloudaudit.googleapis.com%2Factivity"`.
-   *
+   * 
    * For more information about log names, see
    * [LogEntry][google.logging.v2.LogEntry].
    */
@@ -137,17 +137,17 @@ export interface WriteLogEntriesRequest {
   /**
    * Optional. A default log resource name that is assigned to all log entries
    * in `entries` that do not specify a value for `log_name`:
-   *
+   * 
    * * `projects/[PROJECT_ID]/logs/[LOG_ID]`
    * * `organizations/[ORGANIZATION_ID]/logs/[LOG_ID]`
    * * `billingAccounts/[BILLING_ACCOUNT_ID]/logs/[LOG_ID]`
    * * `folders/[FOLDER_ID]/logs/[LOG_ID]`
-   *
+   * 
    * `[LOG_ID]` must be URL-encoded. For example:
-   *
+   * 
    *     "projects/my-project-id/logs/syslog"
    *     "organizations/123/logs/cloudaudit.googleapis.com%2Factivity"
-   *
+   * 
    * The permission `logging.logEntries.create` is needed on each project,
    * organization, billing account, or folder that is receiving new log
    * entries, whether the resource is specified in `logName` or in an
@@ -158,11 +158,11 @@ export interface WriteLogEntriesRequest {
   /**
    * Optional. A default monitored resource object that is assigned to all log
    * entries in `entries` that do not specify a value for `resource`. Example:
-   *
+   * 
    *     { "type": "gce_instance",
    *       "labels": {
    *         "zone": "us-central1-a", "instance_id": "00000000000000000000" }}
-   *
+   * 
    * See [LogEntry][google.logging.v2.LogEntry].
    */
   resource: MonitoredResource;
@@ -184,20 +184,20 @@ export interface WriteLogEntriesRequest {
    * entries in this list that do not include values for their corresponding
    * fields. For more information, see the
    * [LogEntry][google.logging.v2.LogEntry] type.
-   *
+   * 
    * If the `timestamp` or `insert_id` fields are missing in log entries, then
    * this method supplies the current time or a unique identifier, respectively.
    * The supplied values are chosen so that, among the log entries that did not
    * supply their own values, the entries earlier in the list will sort before
    * the entries later in the list. See the `entries.list` method.
-   *
+   * 
    * Log entries with timestamps that are more than the
    * [logs retention period](https://cloud.google.com/logging/quotas) in
    * the past or more than 24 hours in the future will not be available when
    * calling `entries.list`. However, those log entries can still be [exported
    * with
    * LogSinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
-   *
+   * 
    * To improve throughput and to avoid exceeding the
    * [quota limit](https://cloud.google.com/logging/quotas) for calls to
    * `entries.write`, you should try to include several log entries in this
@@ -227,17 +227,17 @@ export interface WriteLogEntriesRequestSDKType {
   /**
    * Optional. A default log resource name that is assigned to all log entries
    * in `entries` that do not specify a value for `log_name`:
-   *
+   * 
    * * `projects/[PROJECT_ID]/logs/[LOG_ID]`
    * * `organizations/[ORGANIZATION_ID]/logs/[LOG_ID]`
    * * `billingAccounts/[BILLING_ACCOUNT_ID]/logs/[LOG_ID]`
    * * `folders/[FOLDER_ID]/logs/[LOG_ID]`
-   *
+   * 
    * `[LOG_ID]` must be URL-encoded. For example:
-   *
+   * 
    *     "projects/my-project-id/logs/syslog"
    *     "organizations/123/logs/cloudaudit.googleapis.com%2Factivity"
-   *
+   * 
    * The permission `logging.logEntries.create` is needed on each project,
    * organization, billing account, or folder that is receiving new log
    * entries, whether the resource is specified in `logName` or in an
@@ -248,11 +248,11 @@ export interface WriteLogEntriesRequestSDKType {
   /**
    * Optional. A default monitored resource object that is assigned to all log
    * entries in `entries` that do not specify a value for `resource`. Example:
-   *
+   * 
    *     { "type": "gce_instance",
    *       "labels": {
    *         "zone": "us-central1-a", "instance_id": "00000000000000000000" }}
-   *
+   * 
    * See [LogEntry][google.logging.v2.LogEntry].
    */
   resource: MonitoredResourceSDKType;
@@ -274,20 +274,20 @@ export interface WriteLogEntriesRequestSDKType {
    * entries in this list that do not include values for their corresponding
    * fields. For more information, see the
    * [LogEntry][google.logging.v2.LogEntry] type.
-   *
+   * 
    * If the `timestamp` or `insert_id` fields are missing in log entries, then
    * this method supplies the current time or a unique identifier, respectively.
    * The supplied values are chosen so that, among the log entries that did not
    * supply their own values, the entries earlier in the list will sort before
    * the entries later in the list. See the `entries.list` method.
-   *
+   * 
    * Log entries with timestamps that are more than the
    * [logs retention period](https://cloud.google.com/logging/quotas) in
    * the past or more than 24 hours in the future will not be available when
    * calling `entries.list`. However, those log entries can still be [exported
    * with
    * LogSinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
-   *
+   * 
    * To improve throughput and to avoid exceeding the
    * [quota limit](https://cloud.google.com/logging/quotas) for calls to
    * `entries.write`, you should try to include several log entries in this
@@ -332,7 +332,7 @@ export interface WriteLogEntriesPartialErrors {
    * When `WriteLogEntriesRequest.partial_success` is true, records the error
    * status for entries that were not written due to a permanent error, keyed
    * by the entry's zero-based index in `WriteLogEntriesRequest.entries`.
-   *
+   * 
    * Failed requests for which no entries are written will not include
    * per-entry errors.
    */
@@ -347,7 +347,7 @@ export interface WriteLogEntriesPartialErrorsSDKType {
    * When `WriteLogEntriesRequest.partial_success` is true, records the error
    * status for entries that were not written due to a permanent error, keyed
    * by the entry's zero-based index in `WriteLogEntriesRequest.entries`.
-   *
+   * 
    * Failed requests for which no entries are written will not include
    * per-entry errors.
    */
@@ -361,19 +361,19 @@ export interface ListLogEntriesRequest {
   /**
    * Required. Names of one or more parent resources from which to
    * retrieve log entries:
-   *
+   * 
    * *  `projects/[PROJECT_ID]`
    * *  `organizations/[ORGANIZATION_ID]`
    * *  `billingAccounts/[BILLING_ACCOUNT_ID]`
    * *  `folders/[FOLDER_ID]`
-   *
+   * 
    * May alternatively be one or more views:
-   *
+   * 
    *  * `projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]`
    *  * `organizations/[ORGANIZATION_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]`
    *  * `billingAccounts/[BILLING_ACCOUNT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]`
    *  * `folders/[FOLDER_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]`
-   *
+   * 
    * Projects listed in the `project_ids` field are added to this list.
    */
   resourceNames: string[];
@@ -421,19 +421,19 @@ export interface ListLogEntriesRequestSDKType {
   /**
    * Required. Names of one or more parent resources from which to
    * retrieve log entries:
-   *
+   * 
    * *  `projects/[PROJECT_ID]`
    * *  `organizations/[ORGANIZATION_ID]`
    * *  `billingAccounts/[BILLING_ACCOUNT_ID]`
    * *  `folders/[FOLDER_ID]`
-   *
+   * 
    * May alternatively be one or more views:
-   *
+   * 
    *  * `projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]`
    *  * `organizations/[ORGANIZATION_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]`
    *  * `billingAccounts/[BILLING_ACCOUNT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]`
    *  * `folders/[FOLDER_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]`
-   *
+   * 
    * Projects listed in the `project_ids` field are added to this list.
    */
   resource_names: string[];
@@ -489,7 +489,7 @@ export interface ListLogEntriesResponse {
    * If there might be more results than those appearing in this response, then
    * `nextPageToken` is included.  To get the next set of results, call this
    * method again using the value of `nextPageToken` as `pageToken`.
-   *
+   * 
    * If a value for `next_page_token` appears and the `entries` field is empty,
    * it means that the search found no log entries so far but it did not have
    * time to search all the possible log entries.  Retry the method with this
@@ -513,7 +513,7 @@ export interface ListLogEntriesResponseSDKType {
    * If there might be more results than those appearing in this response, then
    * `nextPageToken` is included.  To get the next set of results, call this
    * method again using the value of `nextPageToken` as `pageToken`.
-   *
+   * 
    * If a value for `next_page_token` appears and the `entries` field is empty,
    * it means that the search found no log entries so far but it did not have
    * time to search all the possible log entries.  Retry the method with this
@@ -590,7 +590,7 @@ export interface ListMonitoredResourceDescriptorsResponseSDKType {
 export interface ListLogsRequest {
   /**
    * Required. The resource name that owns the logs:
-   *
+   * 
    * *  `projects/[PROJECT_ID]`
    * *  `organizations/[ORGANIZATION_ID]`
    * *  `billingAccounts/[BILLING_ACCOUNT_ID]`
@@ -615,14 +615,14 @@ export interface ListLogsRequest {
 
   /**
    * Optional. The resource name that owns the logs:
-   *
+   * 
    *  * `projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]`
    *  * `organizations/[ORGANIZATION_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]`
    *  * `billingAccounts/[BILLING_ACCOUNT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]`
    *  * `folders/[FOLDER_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]`
-   *
+   * 
    * To support legacy queries, it could also be:
-   *
+   * 
    * *  `projects/[PROJECT_ID]`
    * *  `organizations/[ORGANIZATION_ID]`
    * *  `billingAccounts/[BILLING_ACCOUNT_ID]`
@@ -635,7 +635,7 @@ export interface ListLogsRequest {
 export interface ListLogsRequestSDKType {
   /**
    * Required. The resource name that owns the logs:
-   *
+   * 
    * *  `projects/[PROJECT_ID]`
    * *  `organizations/[ORGANIZATION_ID]`
    * *  `billingAccounts/[BILLING_ACCOUNT_ID]`
@@ -660,14 +660,14 @@ export interface ListLogsRequestSDKType {
 
   /**
    * Optional. The resource name that owns the logs:
-   *
+   * 
    *  * `projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]`
    *  * `organizations/[ORGANIZATION_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]`
    *  * `billingAccounts/[BILLING_ACCOUNT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]`
    *  * `folders/[FOLDER_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]`
-   *
+   * 
    * To support legacy queries, it could also be:
-   *
+   * 
    * *  `projects/[PROJECT_ID]`
    * *  `organizations/[ORGANIZATION_ID]`
    * *  `billingAccounts/[BILLING_ACCOUNT_ID]`
@@ -714,14 +714,14 @@ export interface ListLogsResponseSDKType {
 export interface TailLogEntriesRequest {
   /**
    * Required. Name of a parent resource from which to retrieve log entries:
-   *
+   * 
    * *  `projects/[PROJECT_ID]`
    * *  `organizations/[ORGANIZATION_ID]`
    * *  `billingAccounts/[BILLING_ACCOUNT_ID]`
    * *  `folders/[FOLDER_ID]`
-   *
+   * 
    * May alternatively be one or more views:
-   *
+   * 
    *  * `projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]`
    *  * `organizations/[ORGANIZATION_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]`
    *  * `billingAccounts/[BILLING_ACCOUNT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]`
@@ -753,14 +753,14 @@ export interface TailLogEntriesRequest {
 export interface TailLogEntriesRequestSDKType {
   /**
    * Required. Name of a parent resource from which to retrieve log entries:
-   *
+   * 
    * *  `projects/[PROJECT_ID]`
    * *  `organizations/[ORGANIZATION_ID]`
    * *  `billingAccounts/[BILLING_ACCOUNT_ID]`
    * *  `folders/[FOLDER_ID]`
-   *
+   * 
    * May alternatively be one or more views:
-   *
+   * 
    *  * `projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]`
    *  * `organizations/[ORGANIZATION_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]`
    *  * `billingAccounts/[BILLING_ACCOUNT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]`

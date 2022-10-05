@@ -37,7 +37,7 @@ export interface ModuleConfig {
    * name is the unique name of the module within the app. It should be a name
    * that persists between different versions of a module so that modules
    * can be smoothly upgraded to new versions.
-   *
+   * 
    * For example, for the module cosmos.bank.module.v1.Module, we may chose
    * to simply name the module "bank" in the app. When we upgrade to
    * cosmos.bank.module.v2.Module, the app-specific name "bank" stays the same
@@ -60,7 +60,7 @@ export interface ModuleConfigSDKType {
    * name is the unique name of the module within the app. It should be a name
    * that persists between different versions of a module so that modules
    * can be smoothly upgraded to new versions.
-   *
+   * 
    * For example, for the module cosmos.bank.module.v1.Module, we may chose
    * to simply name the module "bank" in the app. When we upgrade to
    * cosmos.bank.module.v2.Module, the app-specific name "bank" stays the same

@@ -352,7 +352,7 @@ export interface CheckError {
   /**
    * Subject to whom this error applies. See the specific code enum for more
    * details on this field. For example:
-   *
+   * 
    * - "project:<project-id or project-number>"
    * - "folder:<folder-id>"
    * - "organization:<organization-id>"
@@ -381,7 +381,7 @@ export interface CheckErrorSDKType {
   /**
    * Subject to whom this error applies. See the specific code enum for more
    * details on this field. For example:
-   *
+   * 
    * - "project:<project-id or project-number>"
    * - "folder:<folder-id>"
    * - "organization:<organization-id>"

@@ -8,19 +8,19 @@ export const protobufPackage = "google.rpc.context";
 
 /**
  * This message defines the standard attribute vocabulary for Google APIs.
- *
+ * 
  * An attribute is a piece of metadata that describes an activity on a network
  * service. For example, the size of an HTTP request, or the status code of
  * an HTTP response.
- *
+ * 
  * Each attribute has a type and a name, which is logically defined as
  * a proto message field in `AttributeContext`. The field type becomes the
  * attribute type, and the field path becomes the attribute name. For example,
  * the attribute `source.ip` maps to field `AttributeContext.source.ip`.
- *
+ * 
  * This message definition is guaranteed not to have any wire breaking change.
  * So you can use it directly for passing attributes across different systems.
- *
+ * 
  * NOTE: Different system may generate different subset of attributes. Please
  * verify the system specification before relying on an attribute generated
  * a system.
@@ -69,19 +69,19 @@ export interface AttributeContext {
 
 /**
  * This message defines the standard attribute vocabulary for Google APIs.
- *
+ * 
  * An attribute is a piece of metadata that describes an activity on a network
  * service. For example, the size of an HTTP request, or the status code of
  * an HTTP response.
- *
+ * 
  * Each attribute has a type and a name, which is logically defined as
  * a proto message field in `AttributeContext`. The field type becomes the
  * attribute type, and the field path becomes the attribute name. For example,
  * the attribute `source.ip` maps to field `AttributeContext.source.ip`.
- *
+ * 
  * This message definition is guaranteed not to have any wire breaking change.
  * So you can use it directly for passing attributes across different systems.
- *
+ * 
  * NOTE: Different system may generate different subset of attributes. Please
  * verify the system specification before relying on an attribute generated
  * a system.
@@ -288,14 +288,14 @@ export interface AttributeContext_Auth {
    * the audience (`aud`) claim within a JWT. The audience
    * value(s) depends on the `issuer`, but typically include one or more of
    * the following pieces of information:
-   *
+   * 
    * *  The services intended to receive the credential. For example,
    *    ["https://pubsub.googleapis.com/", "https://storage.googleapis.com/"].
    * *  A set of service-based scopes. For example,
    *    ["https://www.googleapis.com/auth/cloud-platform"].
    * *  The client id of an app, such as the Firebase project id for JWTs
    *    from Firebase Auth.
-   *
+   * 
    * Consult the documentation for the credential issuer to determine the
    * information provided.
    */
@@ -314,7 +314,7 @@ export interface AttributeContext_Auth {
    * `{key: value}` pairs for standard and private claims. The following
    * is a subset of the standard required and optional claims that would
    * typically be presented for a Google-based JWT:
-   *
+   * 
    *    {'iss': 'accounts.google.com',
    *     'sub': '113289723416554971153',
    *     'aud': ['123456789012', 'pubsub.googleapis.com'],
@@ -322,7 +322,7 @@ export interface AttributeContext_Auth {
    *     'email': 'jsmith@example.com',
    *     'iat': 1353601026,
    *     'exp': 1353604926}
-   *
+   * 
    * SAML assertions are similarly specified, but with an identity provider
    * dependent structure.
    */
@@ -333,7 +333,7 @@ export interface AttributeContext_Auth {
    * accessed by authenticated requester. It is part of Secure GCP processing
    * for the incoming request. An access level string has the format:
    * "//{api_service_name}/accessPolicies/{policy_id}/accessLevels/{short_name}"
-   *
+   * 
    * Example:
    * "//accesscontextmanager.googleapis.com/accessPolicies/MY_POLICY_ID/accessLevels/MY_LEVEL"
    */
@@ -360,14 +360,14 @@ export interface AttributeContext_AuthSDKType {
    * the audience (`aud`) claim within a JWT. The audience
    * value(s) depends on the `issuer`, but typically include one or more of
    * the following pieces of information:
-   *
+   * 
    * *  The services intended to receive the credential. For example,
    *    ["https://pubsub.googleapis.com/", "https://storage.googleapis.com/"].
    * *  A set of service-based scopes. For example,
    *    ["https://www.googleapis.com/auth/cloud-platform"].
    * *  The client id of an app, such as the Firebase project id for JWTs
    *    from Firebase Auth.
-   *
+   * 
    * Consult the documentation for the credential issuer to determine the
    * information provided.
    */
@@ -386,7 +386,7 @@ export interface AttributeContext_AuthSDKType {
    * `{key: value}` pairs for standard and private claims. The following
    * is a subset of the standard required and optional claims that would
    * typically be presented for a Google-based JWT:
-   *
+   * 
    *    {'iss': 'accounts.google.com',
    *     'sub': '113289723416554971153',
    *     'aud': ['123456789012', 'pubsub.googleapis.com'],
@@ -394,7 +394,7 @@ export interface AttributeContext_AuthSDKType {
    *     'email': 'jsmith@example.com',
    *     'iat': 1353601026,
    *     'exp': 1353604926}
-   *
+   * 
    * SAML assertions are similarly specified, but with an identity provider
    * dependent structure.
    */
@@ -405,7 +405,7 @@ export interface AttributeContext_AuthSDKType {
    * accessed by authenticated requester. It is part of Secure GCP processing
    * for the incoming request. An access level string has the format:
    * "//{api_service_name}/accessPolicies/{policy_id}/accessLevels/{short_name}"
-   *
+   * 
    * Example:
    * "//accesscontextmanager.googleapis.com/accessPolicies/MY_POLICY_ID/accessLevels/MY_LEVEL"
    */
@@ -671,14 +671,14 @@ export interface AttributeContext_Resource {
    * The stable identifier (name) of a resource on the `service`. A resource
    * can be logically identified as "//{resource.service}/{resource.name}".
    * The differences between a resource name and a URI are:
-   *
+   * 
    * *   Resource name is a logical identifier, independent of network
    *     protocol and API version. For example,
    *     `//pubsub.googleapis.com/projects/123/topics/news-feed`.
    * *   URI often includes protocol and version information, so it can
    *     be used directly by applications. For example,
    *     `https://pubsub.googleapis.com/v1/projects/123/topics/news-feed`.
-   *
+   * 
    * See https://cloud.google.com/apis/design/resource_names for details.
    */
   name: string;
@@ -686,7 +686,7 @@ export interface AttributeContext_Resource {
   /**
    * The type of the resource. The syntax is platform-specific because
    * different platforms define their resources differently.
-   *
+   * 
    * For Google APIs, the type format must be "{service}/{kind}".
    */
   type: string;
@@ -712,7 +712,7 @@ export interface AttributeContext_Resource {
    * Annotations is an unstructured key-value map stored with a resource that
    * may be set by external tools to store and retrieve arbitrary metadata.
    * They are not queryable and should be preserved when modifying objects.
-   *
+   * 
    * More info: https://kubernetes.io/docs/user-guide/annotations
    */
   annotations: {
@@ -752,7 +752,7 @@ export interface AttributeContext_Resource {
    * Immutable. The location of the resource. The location encoding is
    * specific to the service provider, and new encoding may be introduced
    * as the service evolves.
-   *
+   * 
    * For Google Cloud products, the encoding is what is used by Google Cloud
    * APIs, such as `us-east1`, `aws-us-east-1`, and `azure-eastus2`. The
    * semantics of `location` is identical to the
@@ -778,14 +778,14 @@ export interface AttributeContext_ResourceSDKType {
    * The stable identifier (name) of a resource on the `service`. A resource
    * can be logically identified as "//{resource.service}/{resource.name}".
    * The differences between a resource name and a URI are:
-   *
+   * 
    * *   Resource name is a logical identifier, independent of network
    *     protocol and API version. For example,
    *     `//pubsub.googleapis.com/projects/123/topics/news-feed`.
    * *   URI often includes protocol and version information, so it can
    *     be used directly by applications. For example,
    *     `https://pubsub.googleapis.com/v1/projects/123/topics/news-feed`.
-   *
+   * 
    * See https://cloud.google.com/apis/design/resource_names for details.
    */
   name: string;
@@ -793,7 +793,7 @@ export interface AttributeContext_ResourceSDKType {
   /**
    * The type of the resource. The syntax is platform-specific because
    * different platforms define their resources differently.
-   *
+   * 
    * For Google APIs, the type format must be "{service}/{kind}".
    */
   type: string;
@@ -819,7 +819,7 @@ export interface AttributeContext_ResourceSDKType {
    * Annotations is an unstructured key-value map stored with a resource that
    * may be set by external tools to store and retrieve arbitrary metadata.
    * They are not queryable and should be preserved when modifying objects.
-   *
+   * 
    * More info: https://kubernetes.io/docs/user-guide/annotations
    */
   annotations: {
@@ -859,7 +859,7 @@ export interface AttributeContext_ResourceSDKType {
    * Immutable. The location of the resource. The location encoding is
    * specific to the service provider, and new encoding may be introduced
    * as the service evolves.
-   *
+   * 
    * For Google Cloud products, the encoding is what is used by Google Cloud
    * APIs, such as `us-east1`, `aws-us-east-1`, and `azure-eastus2`. The
    * semantics of `location` is identical to the

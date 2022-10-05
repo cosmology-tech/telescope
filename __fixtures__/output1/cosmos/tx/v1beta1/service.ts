@@ -271,7 +271,7 @@ export interface SimulateRequest {
 
   /**
    * tx_bytes is the raw transaction.
-   *
+   * 
    * Since: cosmos-sdk 0.43
    */
   txBytes: Uint8Array;
@@ -292,7 +292,7 @@ export interface SimulateRequestSDKType {
 
   /**
    * tx_bytes is the raw transaction.
-   *
+   * 
    * Since: cosmos-sdk 0.43
    */
   tx_bytes: Uint8Array;
@@ -361,7 +361,7 @@ export interface GetTxResponseSDKType {
 /**
  * GetBlockWithTxsRequest is the request type for the Service.GetBlockWithTxs
  * RPC method.
- *
+ * 
  * Since: cosmos-sdk 0.45.2
  */
 export interface GetBlockWithTxsRequest {
@@ -375,7 +375,7 @@ export interface GetBlockWithTxsRequest {
 /**
  * GetBlockWithTxsRequest is the request type for the Service.GetBlockWithTxs
  * RPC method.
- *
+ * 
  * Since: cosmos-sdk 0.45.2
  */
 export interface GetBlockWithTxsRequestSDKType {
@@ -388,7 +388,7 @@ export interface GetBlockWithTxsRequestSDKType {
 
 /**
  * GetBlockWithTxsResponse is the response type for the Service.GetBlockWithTxs method.
- *
+ * 
  * Since: cosmos-sdk 0.45.2
  */
 export interface GetBlockWithTxsResponse {
@@ -403,7 +403,7 @@ export interface GetBlockWithTxsResponse {
 
 /**
  * GetBlockWithTxsResponse is the response type for the Service.GetBlockWithTxs method.
- *
+ * 
  * Since: cosmos-sdk 0.45.2
  */
 export interface GetBlockWithTxsResponseSDKType {

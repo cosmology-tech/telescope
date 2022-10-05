@@ -6,7 +6,7 @@ export const protobufPackage = "cosmos.tx.signing.v1beta1";
 
 /**
  * SignMode represents a signing mode with its own security guarantees.
- *
+ * 
  * This enum should be considered a registry of all known sign modes
  * in the Cosmos ecosystem. Apps are not expected to support all known
  * sign modes. Apps that would like to support custom  sign modes are
@@ -54,7 +54,7 @@ export enum SignMode {
 
 /**
  * SignMode represents a signing mode with its own security guarantees.
- *
+ * 
  * This enum should be considered a registry of all known sign modes
  * in the Cosmos ecosystem. Apps are not expected to support all known
  * sign modes. Apps that would like to support custom  sign modes are

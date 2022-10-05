@@ -166,7 +166,7 @@ export interface UpgradeProposalSDKType {
  * Height is a monotonically increasing data type
  * that can be compared against another Height for the purposes of updating and
  * freezing clients
- *
+ * 
  * Normally the RevisionHeight is incremented at each height while keeping
  * RevisionNumber the same. However some consensus algorithms may choose to
  * reset the height in certain conditions e.g. hard forks, state-machine
@@ -186,7 +186,7 @@ export interface Height {
  * Height is a monotonically increasing data type
  * that can be compared against another Height for the purposes of updating and
  * freezing clients
- *
+ * 
  * Normally the RevisionHeight is incremented at each height while keeping
  * RevisionNumber the same. However some consensus algorithms may choose to
  * reset the height in certain conditions e.g. hard forks, state-machine

@@ -798,7 +798,7 @@ export interface EventAttributeSDKType {
 
 /**
  * TxResult contains results of executing the transaction.
- *
+ * 
  * One usage is indexing transaction results.
  */
 export interface TxResult {
@@ -810,7 +810,7 @@ export interface TxResult {
 
 /**
  * TxResult contains results of executing the transaction.
- *
+ * 
  * One usage is indexing transaction results.
  */
 export interface TxResultSDKType {

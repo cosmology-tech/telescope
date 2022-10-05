@@ -28,9 +28,9 @@ export const protobufPackage = "google.api";
  * title, and delegates other aspects to sub-sections. Each sub-section is
  * either a proto message or a repeated proto message that configures a
  * specific aspect, such as auth. See each proto message definition for details.
- *
+ * 
  * Example:
- *
+ * 
  *     type: google.api.Service
  *     name: calendar.googleapis.com
  *     title: Google Calendar API
@@ -84,7 +84,7 @@ export interface Service {
    * automatically included.  Messages which are not referenced but
    * shall be included, such as types used by the `google.protobuf.Any` type,
    * should be listed here by name. Example:
-   *
+   * 
    *     types:
    *     - name: google.protobuf.Int32
    */
@@ -95,7 +95,7 @@ export interface Service {
    * referenced directly or indirectly by the `apis` are automatically
    * included.  Enums which are not referenced but shall be included
    * should be listed here by name. Example:
-   *
+   * 
    *     enums:
    *     - name: google.someapi.v1.SomeEnum
    */
@@ -161,7 +161,7 @@ export interface Service {
 
   /**
    * Obsolete. Do not use.
-   *
+   * 
    * This field has no semantic meaning. The service config compiler always
    * sets this field to `3`.
    */
@@ -176,9 +176,9 @@ export interface Service {
  * title, and delegates other aspects to sub-sections. Each sub-section is
  * either a proto message or a repeated proto message that configures a
  * specific aspect, such as auth. See each proto message definition for details.
- *
+ * 
  * Example:
- *
+ * 
  *     type: google.api.Service
  *     name: calendar.googleapis.com
  *     title: Google Calendar API
@@ -232,7 +232,7 @@ export interface ServiceSDKType {
    * automatically included.  Messages which are not referenced but
    * shall be included, such as types used by the `google.protobuf.Any` type,
    * should be listed here by name. Example:
-   *
+   * 
    *     types:
    *     - name: google.protobuf.Int32
    */
@@ -243,7 +243,7 @@ export interface ServiceSDKType {
    * referenced directly or indirectly by the `apis` are automatically
    * included.  Enums which are not referenced but shall be included
    * should be listed here by name. Example:
-   *
+   * 
    *     enums:
    *     - name: google.someapi.v1.SomeEnum
    */
@@ -309,7 +309,7 @@ export interface ServiceSDKType {
 
   /**
    * Obsolete. Do not use.
-   *
+   * 
    * This field has no semantic meaning. The service config compiler always
    * sets this field to `3`.
    */

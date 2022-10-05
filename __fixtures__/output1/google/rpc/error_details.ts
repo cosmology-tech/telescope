@@ -7,10 +7,10 @@ export const protobufPackage = "google.rpc";
  * Describes when the clients can retry a failed request. Clients could ignore
  * the recommendation here or retry when this information is missing from error
  * responses.
- *
+ * 
  * It's always recommended that clients should use exponential backoff when
  * retrying.
- *
+ * 
  * Clients should wait until `retry_delay` amount of time has passed since
  * receiving the error response before retrying.  If retrying requests also
  * fail, clients should use an exponential backoff scheme to gradually increase
@@ -27,10 +27,10 @@ export interface RetryInfo {
  * Describes when the clients can retry a failed request. Clients could ignore
  * the recommendation here or retry when this information is missing from error
  * responses.
- *
+ * 
  * It's always recommended that clients should use exponential backoff when
  * retrying.
- *
+ * 
  * Clients should wait until `retry_delay` amount of time has passed since
  * receiving the error response before retrying.  If retrying requests also
  * fail, clients should use an exponential backoff scheme to gradually increase
@@ -63,14 +63,14 @@ export interface DebugInfoSDKType {
 
 /**
  * Describes how a quota check failed.
- *
+ * 
  * For example if a daily limit was exceeded for the calling project,
  * a service could respond with a QuotaFailure detail containing the project
  * id and the description of the quota limit that was exceeded.  If the
  * calling project hasn't enabled the service in the developer console, then
  * a service could respond with the project id and set `service_disabled`
  * to true.
- *
+ * 
  * Also see RetryInfo and Help types for other details about handling a
  * quota failure.
  */
@@ -81,14 +81,14 @@ export interface QuotaFailure {
 
 /**
  * Describes how a quota check failed.
- *
+ * 
  * For example if a daily limit was exceeded for the calling project,
  * a service could respond with a QuotaFailure detail containing the project
  * id and the description of the quota limit that was exceeded.  If the
  * calling project hasn't enabled the service in the developer console, then
  * a service could respond with the project id and set `service_disabled`
  * to true.
- *
+ * 
  * Also see RetryInfo and Help types for other details about handling a
  * quota failure.
  */
@@ -114,7 +114,7 @@ export interface QuotaFailure_Violation {
    * description to find more about the quota configuration in the service's
    * public documentation, or find the relevant quota limit to adjust through
    * developer console.
-   *
+   * 
    * For example: "Service disabled" or "Daily Limit for read operations
    * exceeded".
    */
@@ -138,7 +138,7 @@ export interface QuotaFailure_ViolationSDKType {
    * description to find more about the quota configuration in the service's
    * public documentation, or find the relevant quota limit to adjust through
    * developer console.
-   *
+   * 
    * For example: "Service disabled" or "Daily Limit for read operations
    * exceeded".
    */
@@ -155,10 +155,10 @@ export interface ErrorInfo_MetadataEntrySDKType {
 
 /**
  * Describes the cause of the error with structured details.
- *
+ * 
  * Example of an error when contacting the "pubsub.googleapis.com" API when it
  * is not enabled:
- *
+ * 
  *     { "reason": "API_DISABLED"
  *       "domain": "googleapis.com"
  *       "metadata": {
@@ -166,12 +166,12 @@ export interface ErrorInfo_MetadataEntrySDKType {
  *         "service": "pubsub.googleapis.com"
  *       }
  *     }
- *
+ * 
  * This response indicates that the pubsub.googleapis.com API is not enabled.
- *
+ * 
  * Example of an error that is returned when attempting to create a Spanner
  * instance in a region that is out of stock:
- *
+ * 
  *     { "reason": "STOCKOUT"
  *       "domain": "spanner.googleapis.com",
  *       "metadata": {
@@ -200,7 +200,7 @@ export interface ErrorInfo {
 
   /**
    * Additional structured details about this error.
-   *
+   * 
    * Keys should match /[a-zA-Z0-9-_]/ and be limited to 64 characters in
    * length. When identifying the current value of an exceeded limit, the units
    * should be contained in the key, not the value.  For example, rather than
@@ -215,10 +215,10 @@ export interface ErrorInfo {
 
 /**
  * Describes the cause of the error with structured details.
- *
+ * 
  * Example of an error when contacting the "pubsub.googleapis.com" API when it
  * is not enabled:
- *
+ * 
  *     { "reason": "API_DISABLED"
  *       "domain": "googleapis.com"
  *       "metadata": {
@@ -226,12 +226,12 @@ export interface ErrorInfo {
  *         "service": "pubsub.googleapis.com"
  *       }
  *     }
- *
+ * 
  * This response indicates that the pubsub.googleapis.com API is not enabled.
- *
+ * 
  * Example of an error that is returned when attempting to create a Spanner
  * instance in a region that is out of stock:
- *
+ * 
  *     { "reason": "STOCKOUT"
  *       "domain": "spanner.googleapis.com",
  *       "metadata": {
@@ -260,7 +260,7 @@ export interface ErrorInfoSDKType {
 
   /**
    * Additional structured details about this error.
-   *
+   * 
    * Keys should match /[a-zA-Z0-9-_]/ and be limited to 64 characters in
    * length. When identifying the current value of an exceeded limit, the units
    * should be contained in the key, not the value.  For example, rather than
@@ -275,7 +275,7 @@ export interface ErrorInfoSDKType {
 
 /**
  * Describes what preconditions have failed.
- *
+ * 
  * For example, if an RPC failed because it required the Terms of Service to be
  * acknowledged, it could list the terms of service violation in the
  * PreconditionFailure message.
@@ -287,7 +287,7 @@ export interface PreconditionFailure {
 
 /**
  * Describes what preconditions have failed.
- *
+ * 
  * For example, if an RPC failed because it required the Terms of Service to be
  * acknowledged, it could list the terms of service violation in the
  * PreconditionFailure message.
@@ -316,7 +316,7 @@ export interface PreconditionFailure_Violation {
   /**
    * A description of how the precondition failed. Developers can use this
    * description to understand how to fix the failure.
-   *
+   * 
    * For example: "Terms of service not accepted".
    */
   description: string;
@@ -341,7 +341,7 @@ export interface PreconditionFailure_ViolationSDKType {
   /**
    * A description of how the precondition failed. Developers can use this
    * description to understand how to fix the failure.
-   *
+   * 
    * For example: "Terms of service not accepted".
    */
   description: string;
@@ -491,7 +491,7 @@ export interface ResourceInfoSDKType {
 
 /**
  * Provides links to documentation or for performing an out of band action.
- *
+ * 
  * For example, if a quota check failed with an error indicating the calling
  * project hasn't enabled the accessed service, this can contain a URL pointing
  * directly to the right place in the developer console to flip the bit.
@@ -503,7 +503,7 @@ export interface Help {
 
 /**
  * Provides links to documentation or for performing an out of band action.
- *
+ * 
  * For example, if a quota check failed with an error indicating the calling
  * project hasn't enabled the accessed service, this can contain a URL pointing
  * directly to the right place in the developer console to flip the bit.

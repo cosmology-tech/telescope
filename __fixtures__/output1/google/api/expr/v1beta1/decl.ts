@@ -41,7 +41,7 @@ export interface DeclSDKType {
 
 /**
  * The declared type of a variable.
- *
+ * 
  * Extends runtime type values with extra information used for type checking
  * and dispatching.
  */
@@ -61,7 +61,7 @@ export interface DeclType {
 
 /**
  * The declared type of a variable.
- *
+ * 
  * Extends runtime type values with extra information used for type checking
  * and dispatching.
  */

@@ -5,7 +5,7 @@ export const protobufPackage = "cosmos.staking.v1beta1";
 
 /**
  * AuthorizationType defines the type of staking module authorization type
- *
+ * 
  * Since: cosmos-sdk 0.43
  */
 export enum AuthorizationType {
@@ -25,7 +25,7 @@ export enum AuthorizationType {
 
 /**
  * AuthorizationType defines the type of staking module authorization type
- *
+ * 
  * Since: cosmos-sdk 0.43
  */
 export enum AuthorizationTypeSDKType {
@@ -88,7 +88,7 @@ export function authorizationTypeToJSON(object: AuthorizationType): string {
 
 /**
  * StakeAuthorization defines authorization for delegate/undelegate/redelegate.
- *
+ * 
  * Since: cosmos-sdk 0.43
  */
 export interface StakeAuthorization {
@@ -113,7 +113,7 @@ export interface StakeAuthorization {
 
 /**
  * StakeAuthorization defines authorization for delegate/undelegate/redelegate.
- *
+ * 
  * Since: cosmos-sdk 0.43
  */
 export interface StakeAuthorizationSDKType {

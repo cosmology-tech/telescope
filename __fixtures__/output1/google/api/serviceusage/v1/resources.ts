@@ -90,7 +90,7 @@ export function stateToJSON(object: State): string {
 export interface Service {
   /**
    * The resource name of the consumer and service.
-   *
+   * 
    * A valid name would be:
    * - projects/123/services/serviceusage.googleapis.com
    */
@@ -98,7 +98,7 @@ export interface Service {
 
   /**
    * The resource name of the consumer.
-   *
+   * 
    * A valid name would be:
    * - projects/123
    */
@@ -120,7 +120,7 @@ export interface Service {
 export interface ServiceSDKType {
   /**
    * The resource name of the consumer and service.
-   *
+   * 
    * A valid name would be:
    * - projects/123/services/serviceusage.googleapis.com
    */
@@ -128,7 +128,7 @@ export interface ServiceSDKType {
 
   /**
    * The resource name of the consumer.
-   *
+   * 
    * A valid name would be:
    * - projects/123
    */
@@ -150,7 +150,7 @@ export interface ServiceSDKType {
 export interface ServiceConfig {
   /**
    * The DNS address at which this service is available.
-   *
+   * 
    * An example DNS address would be:
    * `calendar.googleapis.com`.
    */
@@ -203,7 +203,7 @@ export interface ServiceConfig {
 export interface ServiceConfigSDKType {
   /**
    * The DNS address at which this service is available.
-   *
+   * 
    * An example DNS address would be:
    * `calendar.googleapis.com`.
    */

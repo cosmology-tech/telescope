@@ -601,7 +601,7 @@ export interface ConfigRefSDKType {
 
 /**
  * Change report associated with a particular service configuration.
- *
+ * 
  * It contains a list of ConfigChanges based on the comparison between
  * two service configurations.
  */
@@ -618,7 +618,7 @@ export interface ChangeReport {
 
 /**
  * Change report associated with a particular service configuration.
- *
+ * 
  * It contains a list of ConfigChanges based on the comparison between
  * two service configurations.
  */
@@ -642,7 +642,7 @@ export interface Rollout {
   /**
    * Optional. Unique identifier of this Rollout. Must be no longer than 63 characters
    * and only lower case letters, digits, '.', '_' and '-' are allowed.
-   *
+   * 
    * If not specified by client, the server will generate one. The generated id
    * will have the form of <date><revision number>, where "date" is the create
    * date in ISO 8601 format.  "revision number" is a monotonically increasing
@@ -689,7 +689,7 @@ export interface RolloutSDKType {
   /**
    * Optional. Unique identifier of this Rollout. Must be no longer than 63 characters
    * and only lower case letters, digits, '.', '_' and '-' are allowed.
-   *
+   * 
    * If not specified by client, the server will generate one. The generated id
    * will have the form of <date><revision number>, where "date" is the create
    * date in ISO 8601 format.  "revision number" is a monotonically increasing
@@ -740,12 +740,12 @@ export interface Rollout_TrafficPercentStrategy_PercentagesEntrySDKType {
  * send traffic to use different config versions. This is generally
  * used by API proxy to split traffic based on your configured percentage for
  * each config version.
- *
+ * 
  * One example of how to gradually rollout a new service configuration using
  * this
  * strategy:
  * Day 1
- *
+ * 
  *     Rollout {
  *       id: "example.googleapis.com/rollout_20160206"
  *       traffic_percent_strategy {
@@ -755,9 +755,9 @@ export interface Rollout_TrafficPercentStrategy_PercentagesEntrySDKType {
  *         }
  *       }
  *     }
- *
+ * 
  * Day 2
- *
+ * 
  *     Rollout {
  *       id: "example.googleapis.com/rollout_20160207"
  *       traffic_percent_strategy: {
@@ -783,12 +783,12 @@ export interface Rollout_TrafficPercentStrategy {
  * send traffic to use different config versions. This is generally
  * used by API proxy to split traffic based on your configured percentage for
  * each config version.
- *
+ * 
  * One example of how to gradually rollout a new service configuration using
  * this
  * strategy:
  * Day 1
- *
+ * 
  *     Rollout {
  *       id: "example.googleapis.com/rollout_20160206"
  *       traffic_percent_strategy {
@@ -798,9 +798,9 @@ export interface Rollout_TrafficPercentStrategy {
  *         }
  *       }
  *     }
- *
+ * 
  * Day 2
- *
+ * 
  *     Rollout {
  *       id: "example.googleapis.com/rollout_20160207"
  *       traffic_percent_strategy: {

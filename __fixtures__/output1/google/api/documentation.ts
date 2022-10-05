@@ -4,7 +4,7 @@ export const protobufPackage = "google.api";
 
 /**
  * `Documentation` provides the information for describing a service.
- *
+ * 
  * Example:
  * <pre><code>documentation:
  *   summary: >
@@ -31,14 +31,14 @@ export const protobufPackage = "google.api";
  * code blocks are supported. Section headers can be provided and are
  * interpreted relative to the section nesting of the context where
  * a documentation fragment is embedded.
- *
+ * 
  * Documentation from the IDL is merged with documentation defined
  * via the config at normalization time, where documentation provided
  * by config rules overrides IDL provided.
- *
+ * 
  * A number of constructs specific to the API platform are supported
  * in documentation text.
- *
+ * 
  * In order to reference a proto element, the following
  * notation can be used:
  * <pre><code>&#91;fully.qualified.proto.name]&#91;]</code></pre>
@@ -46,7 +46,7 @@ export const protobufPackage = "google.api";
  * <pre><code>&#91;display text]&#91;fully.qualified.proto.name]</code></pre>
  * Text can be excluded from doc using the following notation:
  * <pre><code>&#40;-- internal comment --&#41;</code></pre>
- *
+ * 
  * A few directives are available in documentation. Note that
  * directives must appear on a single line to be properly
  * identified. The `include` directive includes a markdown file from
@@ -71,7 +71,7 @@ export interface Documentation {
 
   /**
    * A list of documentation rules that apply to individual API elements.
-   *
+   * 
    * **NOTE:** All service configuration rules follow "last one wins" order.
    */
   rules: DocumentationRule[];
@@ -107,7 +107,7 @@ export interface Documentation {
 
 /**
  * `Documentation` provides the information for describing a service.
- *
+ * 
  * Example:
  * <pre><code>documentation:
  *   summary: >
@@ -134,14 +134,14 @@ export interface Documentation {
  * code blocks are supported. Section headers can be provided and are
  * interpreted relative to the section nesting of the context where
  * a documentation fragment is embedded.
- *
+ * 
  * Documentation from the IDL is merged with documentation defined
  * via the config at normalization time, where documentation provided
  * by config rules overrides IDL provided.
- *
+ * 
  * A number of constructs specific to the API platform are supported
  * in documentation text.
- *
+ * 
  * In order to reference a proto element, the following
  * notation can be used:
  * <pre><code>&#91;fully.qualified.proto.name]&#91;]</code></pre>
@@ -149,7 +149,7 @@ export interface Documentation {
  * <pre><code>&#91;display text]&#91;fully.qualified.proto.name]</code></pre>
  * Text can be excluded from doc using the following notation:
  * <pre><code>&#40;-- internal comment --&#41;</code></pre>
- *
+ * 
  * A few directives are available in documentation. Note that
  * directives must appear on a single line to be properly
  * identified. The `include` directive includes a markdown file from
@@ -174,7 +174,7 @@ export interface DocumentationSDKType {
 
   /**
    * A list of documentation rules that apply to individual API elements.
-   *
+   * 
    * **NOTE:** All service configuration rules follow "last one wins" order.
    */
   rules: DocumentationRuleSDKType[];

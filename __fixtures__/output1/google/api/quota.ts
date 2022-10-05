@@ -5,26 +5,26 @@ export const protobufPackage = "google.api";
 /**
  * Quota configuration helps to achieve fairness and budgeting in service
  * usage.
- *
+ * 
  * The metric based quota configuration works this way:
  * - The service configuration defines a set of metrics.
  * - For API calls, the quota.metric_rules maps methods to metrics with
  *   corresponding costs.
  * - The quota.limits defines limits on the metrics, which will be used for
  *   quota checks at runtime.
- *
+ * 
  * An example quota configuration in yaml format:
- *
+ * 
  *    quota:
  *      limits:
- *
+ * 
  *      - name: apiWriteQpsPerProject
  *        metric: library.googleapis.com/write_calls
  *        unit: "1/min/{project}"  # rate limit for consumer projects
  *        values:
  *          STANDARD: 10000
- *
- *
+ * 
+ * 
  *      # The metric rules bind all methods to the read_calls metric,
  *      # except for the UpdateBook and DeleteBook methods. These two methods
  *      # are mapped to the write_calls metric, with the UpdateBook method
@@ -39,15 +39,15 @@ export const protobufPackage = "google.api";
  *      - selector: google.example.library.v1.LibraryService.DeleteBook
  *        metric_costs:
  *          library.googleapis.com/write_calls: 1
- *
+ * 
  *  Corresponding Metric definition:
- *
+ * 
  *      metrics:
  *      - name: library.googleapis.com/read_calls
  *        display_name: Read requests
  *        metric_kind: DELTA
  *        value_type: INT64
- *
+ * 
  *      - name: library.googleapis.com/write_calls
  *        display_name: Write requests
  *        metric_kind: DELTA
@@ -67,26 +67,26 @@ export interface Quota {
 /**
  * Quota configuration helps to achieve fairness and budgeting in service
  * usage.
- *
+ * 
  * The metric based quota configuration works this way:
  * - The service configuration defines a set of metrics.
  * - For API calls, the quota.metric_rules maps methods to metrics with
  *   corresponding costs.
  * - The quota.limits defines limits on the metrics, which will be used for
  *   quota checks at runtime.
- *
+ * 
  * An example quota configuration in yaml format:
- *
+ * 
  *    quota:
  *      limits:
- *
+ * 
  *      - name: apiWriteQpsPerProject
  *        metric: library.googleapis.com/write_calls
  *        unit: "1/min/{project}"  # rate limit for consumer projects
  *        values:
  *          STANDARD: 10000
- *
- *
+ * 
+ * 
  *      # The metric rules bind all methods to the read_calls metric,
  *      # except for the UpdateBook and DeleteBook methods. These two methods
  *      # are mapped to the write_calls metric, with the UpdateBook method
@@ -101,15 +101,15 @@ export interface Quota {
  *      - selector: google.example.library.v1.LibraryService.DeleteBook
  *        metric_costs:
  *          library.googleapis.com/write_calls: 1
- *
+ * 
  *  Corresponding Metric definition:
- *
+ * 
  *      metrics:
  *      - name: library.googleapis.com/read_calls
  *        display_name: Read requests
  *        metric_kind: DELTA
  *        value_type: INT64
- *
+ * 
  *      - name: library.googleapis.com/write_calls
  *        display_name: Write requests
  *        metric_kind: DELTA
@@ -141,7 +141,7 @@ export interface MetricRule_MetricCostsEntrySDKType {
 export interface MetricRule {
   /**
    * Selects the methods to which this rule applies.
-   *
+   * 
    * Refer to [selector][google.api.DocumentationRule.selector] for syntax details.
    */
   selector: string;
@@ -149,7 +149,7 @@ export interface MetricRule {
   /**
    * Metrics to update when the selected methods are called, and the associated
    * cost applied to each metric.
-   *
+   * 
    * The key of the map is the metric name, and the values are the amount
    * increased for the metric against which the quota limits are defined.
    * The value must not be negative.
@@ -166,7 +166,7 @@ export interface MetricRule {
 export interface MetricRuleSDKType {
   /**
    * Selects the methods to which this rule applies.
-   *
+   * 
    * Refer to [selector][google.api.DocumentationRule.selector] for syntax details.
    */
   selector: string;
@@ -174,7 +174,7 @@ export interface MetricRuleSDKType {
   /**
    * Metrics to update when the selected methods are called, and the associated
    * cost applied to each metric.
-   *
+   * 
    * The key of the map is the metric name, and the values are the amount
    * increased for the metric against which the quota limits are defined.
    * The value must not be negative.
@@ -200,10 +200,10 @@ export interface QuotaLimit_ValuesEntrySDKType {
 export interface QuotaLimit {
   /**
    * Name of the quota limit.
-   *
+   * 
    * The name must be provided, and it must be unique within the service. The
    * name can only include alphanumeric characters as well as '-'.
-   *
+   * 
    * The maximum length of the limit name is 64 characters.
    */
   name: string;
@@ -219,12 +219,12 @@ export interface QuotaLimit {
    * Default number of tokens that can be consumed during the specified
    * duration. This is the number of tokens assigned when a client
    * application developer activates the service for his/her project.
-   *
+   * 
    * Specifying a value of 0 will block all requests. This can be used if you
    * are provisioning quota to selected consumers and blocking others.
    * Similarly, a value of -1 will indicate an unlimited quota. No other
    * negative values are allowed.
-   *
+   * 
    * Used by group-based quotas only.
    */
   defaultLimit: Long;
@@ -234,10 +234,10 @@ export interface QuotaLimit {
    * duration. Client application developers can override the default limit up
    * to this maximum. If specified, this value cannot be set to a value less
    * than the default limit. If not specified, it is set to the default limit.
-   *
+   * 
    * To allow clients to apply overrides with no upper bound, set this to -1,
    * indicating unlimited maximum quota.
-   *
+   * 
    * Used by group-based quotas only.
    */
   maxLimit: Long;
@@ -249,14 +249,14 @@ export interface QuotaLimit {
    * This field can only be set on a limit with duration "1d", in a billable
    * group; it is invalid on any other limit. If this field is not set, it
    * defaults to 0, indicating that there is no free tier for this service.
-   *
+   * 
    * Used by group-based quotas only.
    */
   freeTier: Long;
 
   /**
    * Duration of this limit in textual notation. Must be "100s" or "1d".
-   *
+   * 
    * Used by group-based quotas only.
    */
   duration: string;
@@ -272,10 +272,10 @@ export interface QuotaLimit {
    * Specify the unit of the quota limit. It uses the same syntax as
    * [Metric.unit][]. The supported unit kinds are determined by the quota
    * backend system.
-   *
+   * 
    * Here are some examples:
    * * "1/min/{project}" for quota per minute per project.
-   *
+   * 
    * Note: the order of unit components is insignificant.
    * The "1" at the beginning is required to follow the metric unit syntax.
    */
@@ -307,10 +307,10 @@ export interface QuotaLimit {
 export interface QuotaLimitSDKType {
   /**
    * Name of the quota limit.
-   *
+   * 
    * The name must be provided, and it must be unique within the service. The
    * name can only include alphanumeric characters as well as '-'.
-   *
+   * 
    * The maximum length of the limit name is 64 characters.
    */
   name: string;
@@ -326,12 +326,12 @@ export interface QuotaLimitSDKType {
    * Default number of tokens that can be consumed during the specified
    * duration. This is the number of tokens assigned when a client
    * application developer activates the service for his/her project.
-   *
+   * 
    * Specifying a value of 0 will block all requests. This can be used if you
    * are provisioning quota to selected consumers and blocking others.
    * Similarly, a value of -1 will indicate an unlimited quota. No other
    * negative values are allowed.
-   *
+   * 
    * Used by group-based quotas only.
    */
   default_limit: Long;
@@ -341,10 +341,10 @@ export interface QuotaLimitSDKType {
    * duration. Client application developers can override the default limit up
    * to this maximum. If specified, this value cannot be set to a value less
    * than the default limit. If not specified, it is set to the default limit.
-   *
+   * 
    * To allow clients to apply overrides with no upper bound, set this to -1,
    * indicating unlimited maximum quota.
-   *
+   * 
    * Used by group-based quotas only.
    */
   max_limit: Long;
@@ -356,14 +356,14 @@ export interface QuotaLimitSDKType {
    * This field can only be set on a limit with duration "1d", in a billable
    * group; it is invalid on any other limit. If this field is not set, it
    * defaults to 0, indicating that there is no free tier for this service.
-   *
+   * 
    * Used by group-based quotas only.
    */
   free_tier: Long;
 
   /**
    * Duration of this limit in textual notation. Must be "100s" or "1d".
-   *
+   * 
    * Used by group-based quotas only.
    */
   duration: string;
@@ -379,10 +379,10 @@ export interface QuotaLimitSDKType {
    * Specify the unit of the quota limit. It uses the same syntax as
    * [Metric.unit][]. The supported unit kinds are determined by the quota
    * backend system.
-   *
+   * 
    * Here are some examples:
    * * "1/min/{project}" for quota per minute per project.
-   *
+   * 
    * Note: the order of unit components is insignificant.
    * The "1" at the beginning is required to follow the metric unit syntax.
    */

@@ -45,7 +45,7 @@ export interface CodeGeneratorRequest {
    * FileDescriptorProtos for all files in files_to_generate and everything
    * they import.  The files will appear in topological order, so each file
    * appears before any file that imports it.
-   *
+   * 
    * protoc guarantees that all proto_files will be written after
    * the fields above, even though this is not technically guaranteed by the
    * protobuf wire format.  This theoretically could allow a plugin to stream
@@ -53,7 +53,7 @@ export interface CodeGeneratorRequest {
    * the entire set into memory at once.  However, as of this writing, this
    * is not similarly optimized on protoc's end -- it will store all fields in
    * memory at once before sending them to the plugin.
-   *
+   * 
    * Type names of fields and extensions in the FileDescriptorProto are always
    * fully qualified.
    */
@@ -79,7 +79,7 @@ export interface CodeGeneratorRequestSDKType {
    * FileDescriptorProtos for all files in files_to_generate and everything
    * they import.  The files will appear in topological order, so each file
    * appears before any file that imports it.
-   *
+   * 
    * protoc guarantees that all proto_files will be written after
    * the fields above, even though this is not technically guaranteed by the
    * protobuf wire format.  This theoretically could allow a plugin to stream
@@ -87,7 +87,7 @@ export interface CodeGeneratorRequestSDKType {
    * the entire set into memory at once.  However, as of this writing, this
    * is not similarly optimized on protoc's end -- it will store all fields in
    * memory at once before sending them to the plugin.
-   *
+   * 
    * Type names of fields and extensions in the FileDescriptorProto are always
    * fully qualified.
    */
@@ -102,7 +102,7 @@ export interface CodeGeneratorResponse {
   /**
    * Error message.  If non-empty, code generation failed.  The plugin process
    * should exit with status code zero even if it reports an error in this way.
-   *
+   * 
    * This should be used to indicate errors in .proto files which prevent the
    * code generator from generating correct code.  Errors which indicate a
    * problem in protoc itself -- such as the input CodeGeneratorRequest being
@@ -118,7 +118,7 @@ export interface CodeGeneratorResponseSDKType {
   /**
    * Error message.  If non-empty, code generation failed.  The plugin process
    * should exit with status code zero even if it reports an error in this way.
-   *
+   * 
    * This should be used to indicate errors in .proto files which prevent the
    * code generator from generating correct code.  Errors which indicate a
    * problem in protoc itself -- such as the input CodeGeneratorRequest being
@@ -136,7 +136,7 @@ export interface CodeGeneratorResponse_File {
    * contain "." or ".." components and must be relative, not be absolute (so,
    * the file cannot lie outside the output directory).  "/" must be used as
    * the path separator, not "\".
-   *
+   * 
    * If the name is omitted, the content will be appended to the previous
    * file.  This allows the generator to break large files into small chunks,
    * and allows the generated text to be streamed back to protoc so that large
@@ -162,7 +162,7 @@ export interface CodeGeneratorResponse_File {
    * insertions to the same point will come out in the order they were added).
    * The double-@ is intended to make it unlikely that the generated code
    * could contain things that look like insertion points by accident.
-   *
+   * 
    * For example, the C++ code generator places the following line in the
    * .pb.h files that it generates:
    *   // @@protoc_insertion_point(namespace_scope)
@@ -170,19 +170,19 @@ export interface CodeGeneratorResponse_File {
    * outside of any particular class.  Another plugin can then specify the
    * insertion_point "namespace_scope" to generate additional classes or
    * other declarations that should be placed in this scope.
-   *
+   * 
    * Note that if the line containing the insertion point begins with
    * whitespace, the same whitespace will be added to every line of the
    * inserted text.  This is useful for languages like Python, where
    * indentation matters.  In these languages, the insertion point comment
    * should be indented the same amount as any inserted code will need to be
    * in order to work correctly in that context.
-   *
+   * 
    * The code generator that generates the initial file and the one which
    * inserts into it must both run as part of a single invocation of protoc.
    * Code generators are executed in the order in which they appear on the
    * command line.
-   *
+   * 
    * If |insertion_point| is present, |name| must also be present.
    */
   insertionPoint: string;
@@ -198,7 +198,7 @@ export interface CodeGeneratorResponse_FileSDKType {
    * contain "." or ".." components and must be relative, not be absolute (so,
    * the file cannot lie outside the output directory).  "/" must be used as
    * the path separator, not "\".
-   *
+   * 
    * If the name is omitted, the content will be appended to the previous
    * file.  This allows the generator to break large files into small chunks,
    * and allows the generated text to be streamed back to protoc so that large
@@ -224,7 +224,7 @@ export interface CodeGeneratorResponse_FileSDKType {
    * insertions to the same point will come out in the order they were added).
    * The double-@ is intended to make it unlikely that the generated code
    * could contain things that look like insertion points by accident.
-   *
+   * 
    * For example, the C++ code generator places the following line in the
    * .pb.h files that it generates:
    *   // @@protoc_insertion_point(namespace_scope)
@@ -232,19 +232,19 @@ export interface CodeGeneratorResponse_FileSDKType {
    * outside of any particular class.  Another plugin can then specify the
    * insertion_point "namespace_scope" to generate additional classes or
    * other declarations that should be placed in this scope.
-   *
+   * 
    * Note that if the line containing the insertion point begins with
    * whitespace, the same whitespace will be added to every line of the
    * inserted text.  This is useful for languages like Python, where
    * indentation matters.  In these languages, the insertion point comment
    * should be indented the same amount as any inserted code will need to be
    * in order to work correctly in that context.
-   *
+   * 
    * The code generator that generates the initial file and the one which
    * inserts into it must both run as part of a single invocation of protoc.
    * Code generators are executed in the order in which they appear on the
    * command line.
-   *
+   * 
    * If |insertion_point| is present, |name| must also be present.
    */
   insertion_point: string;

@@ -436,7 +436,7 @@ export interface DecisionPolicyWindows {
    * `[ submission + min_execution_period ; submission + voting_period + max_execution_period]`
    * where max_execution_period is a app-specific config, defined in the keeper.
    * If not set, min_execution_period will default to 0.
-   *
+   * 
    * Please make sure to set a `min_execution_period` that is smaller than
    * `voting_period + max_execution_period`, or else the above execution window
    * is empty, meaning that all proposals created with this decision policy
@@ -460,7 +460,7 @@ export interface DecisionPolicyWindowsSDKType {
    * `[ submission + min_execution_period ; submission + voting_period + max_execution_period]`
    * where max_execution_period is a app-specific config, defined in the keeper.
    * If not set, min_execution_period will default to 0.
-   *
+   * 
    * Please make sure to set a `min_execution_period` that is smaller than
    * `voting_period + max_execution_period`, or else the above execution window
    * is empty, meaning that all proposals created with this decision policy

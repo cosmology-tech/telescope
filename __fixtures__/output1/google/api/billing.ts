@@ -4,15 +4,15 @@ export const protobufPackage = "google.api";
 
 /**
  * Billing related configuration of the service.
- *
+ * 
  * The following example shows how to configure monitored resources and metrics
  * for billing, `consumer_destinations` is the only supported destination and
  * the monitored resources need at least one label key
  * `cloud.googleapis.com/location` to indicate the location of the billing
  * usage, using different monitored resources between monitoring and billing is
  * recommended so they can be evolved independently:
- *
- *
+ * 
+ * 
  *     monitored_resources:
  *     - type: library.googleapis.com/billing_branch
  *       labels:
@@ -48,15 +48,15 @@ export interface Billing {
 
 /**
  * Billing related configuration of the service.
- *
+ * 
  * The following example shows how to configure monitored resources and metrics
  * for billing, `consumer_destinations` is the only supported destination and
  * the monitored resources need at least one label key
  * `cloud.googleapis.com/location` to indicate the location of the billing
  * usage, using different monitored resources between monitoring and billing is
  * recommended so they can be evolved independently:
- *
- *
+ * 
+ * 
  *     monitored_resources:
  *     - type: library.googleapis.com/billing_branch
  *       labels:

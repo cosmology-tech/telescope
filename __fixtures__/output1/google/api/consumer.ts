@@ -97,9 +97,9 @@ export function property_PropertyTypeToJSON(object: Property_PropertyType): stri
  * associated with a school, or a business, or a government agency, a business
  * type property on the project may affect how a service responds to the client.
  * This descriptor defines which properties are allowed to be set on a project.
- *
+ * 
  * Example:
- *
+ * 
  *    project_properties:
  *      properties:
  *      - name: NO_WATERMARK
@@ -120,9 +120,9 @@ export interface ProjectProperties {
  * associated with a school, or a business, or a government agency, a business
  * type property on the project may affect how a service responds to the client.
  * This descriptor defines which properties are allowed to be set on a project.
- *
+ * 
  * Example:
- *
+ * 
  *    project_properties:
  *      properties:
  *      - name: NO_WATERMARK
@@ -138,13 +138,13 @@ export interface ProjectPropertiesSDKType {
 
 /**
  * Defines project properties.
- *
+ * 
  * API services can define properties that can be assigned to consumer projects
  * so that backends can perform response customization without having to make
  * additional calls or maintain additional storage. For example, Maps API
  * defines properties that controls map tile cache period, or whether to embed a
  * watermark in a result.
- *
+ * 
  * These values can be set via API producer console. Only API providers can
  * define and set these properties.
  */
@@ -161,13 +161,13 @@ export interface Property {
 
 /**
  * Defines project properties.
- *
+ * 
  * API services can define properties that can be assigned to consumer projects
  * so that backends can perform response customization without having to make
  * additional calls or maintain additional storage. For example, Maps API
  * defines properties that controls map tile cache period, or whether to embed a
  * watermark in a result.
- *
+ * 
  * These values can be set via API producer console. Only API providers can
  * define and set these properties.
  */

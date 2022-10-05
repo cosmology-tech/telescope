@@ -12,7 +12,7 @@ export const protobufPackage = "google.api.expr.v1alpha1";
 export interface Explain {
   /**
    * All of the observed values.
-   *
+   * 
    * The field value_index is an index in the values list.
    * Separating values from steps is needed to remove redundant values.
    */
@@ -20,7 +20,7 @@ export interface Explain {
 
   /**
    * List of steps.
-   *
+   * 
    * Repeated evaluations of the same expression generate new ExprStep
    * instances. The order of such ExprStep instances matches the order of
    * elements returned by Comprehension.iter_range.
@@ -37,7 +37,7 @@ export interface Explain {
 export interface ExplainSDKType {
   /**
    * All of the observed values.
-   *
+   * 
    * The field value_index is an index in the values list.
    * Separating values from steps is needed to remove redundant values.
    */
@@ -45,7 +45,7 @@ export interface ExplainSDKType {
 
   /**
    * List of steps.
-   *
+   * 
    * Repeated evaluations of the same expression generate new ExprStep
    * instances. The order of such ExprStep instances matches the order of
    * elements returned by Comprehension.iter_range.
