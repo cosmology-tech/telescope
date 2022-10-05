@@ -1,41 +1,41 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`queries 1`] = `
-Object {
-  "Query": Object {
+{
+  "Query": {
     "comment": "Query defines the gRPC querier service.",
-    "methods": Object {
-      "Delegation": Object {
+    "methods": {
+      "Delegation": {
         "comment": "Delegation queries delegate info for given validator delegator pair.",
-        "fields": Object {
-          "delegatorAddr": Object {
+        "fields": {
+          "delegatorAddr": {
             "comment": "delegator_addr defines the delegator address to query for.",
             "id": 1,
             "isScalar": true,
-            "options": Object {
+            "options": {
               "(cosmos_proto.scalar)": "cosmos.AddressString",
               "(telescope:camel)": "delegatorAddr",
               "(telescope:name)": "delegatorAddr",
               "(telescope:orig)": "delegator_addr",
             },
-            "parsedType": Object {
+            "parsedType": {
               "name": "string",
               "type": "native",
             },
             "type": "string",
             "typeNum": 13,
           },
-          "validatorAddr": Object {
+          "validatorAddr": {
             "comment": "validator_addr defines the validator address to query for.",
             "id": 2,
             "isScalar": true,
-            "options": Object {
+            "options": {
               "(cosmos_proto.scalar)": "cosmos.AddressString",
               "(telescope:camel)": "validatorAddr",
               "(telescope:name)": "validatorAddr",
               "(telescope:orig)": "validator_addr",
             },
-            "parsedType": Object {
+            "parsedType": {
               "name": "string",
               "type": "native",
             },
@@ -43,198 +43,198 @@ Object {
             "typeNum": 13,
           },
         },
-        "info": Object {
-          "casing": Object {
+        "info": {
+          "casing": {
             "delegator_addr": "delegatorAddr",
             "validator_addr": "validatorAddr",
           },
           "method": "get",
-          "paramMap": Object {
+          "paramMap": {
             "delegator_addr": "delegatorAddr",
             "validator_addr": "validatorAddr",
           },
-          "pathParams": Array [
+          "pathParams": [
             "validator_addr",
             "delegator_addr",
           ],
-          "queryParams": Array [],
+          "queryParams": [],
           "url": "/cosmos/staking/v1beta1/validators/{validator_addr}/delegations/{delegator_addr}",
         },
         "name": "Delegation",
-        "options": Object {
+        "options": {
           "(google.api.http).get": "/cosmos/staking/v1beta1/validators/{validator_addr}/delegations/{delegator_addr}",
         },
         "requestType": "QueryDelegationRequest",
         "responseType": "QueryDelegationResponse",
         "type": "ServiceMethod",
       },
-      "DelegatorDelegations": Object {
+      "DelegatorDelegations": {
         "comment": "DelegatorDelegations queries all delegations of a given delegator address.",
-        "fields": Object {
-          "delegatorAddr": Object {
+        "fields": {
+          "delegatorAddr": {
             "comment": "delegator_addr defines the delegator address to query for.",
             "id": 1,
             "isScalar": true,
-            "options": Object {
+            "options": {
               "(cosmos_proto.scalar)": "cosmos.AddressString",
               "(telescope:camel)": "delegatorAddr",
               "(telescope:name)": "delegatorAddr",
               "(telescope:orig)": "delegator_addr",
             },
-            "parsedType": Object {
+            "parsedType": {
               "name": "string",
               "type": "native",
             },
             "type": "string",
             "typeNum": 13,
           },
-          "pagination": Object {
+          "pagination": {
             "comment": "pagination defines an optional pagination for the request.",
             "id": 2,
             "import": "cosmos/base/query/v1beta1/pagination.proto",
             "importedName": "cosmos.base.query.v1beta1.PageRequest",
-            "options": Object {
+            "options": {
               "(telescope:camel)": "pagination",
               "(telescope:name)": "pagination",
               "(telescope:orig)": "pagination",
             },
-            "parsedType": Object {
+            "parsedType": {
               "name": "PageRequest",
               "type": "Type",
             },
-            "scope": Array [
+            "scope": [
               "cosmos.base.query.v1beta1",
             ],
             "scopeType": "protoImport",
             "type": "cosmos.base.query.v1beta1.PageRequest",
           },
         },
-        "info": Object {
-          "casing": Object {
+        "info": {
+          "casing": {
             "delegator_addr": "delegatorAddr",
             "pagination": "pagination",
           },
           "method": "get",
-          "paramMap": Object {
+          "paramMap": {
             "delegator_addr": "delegatorAddr",
             "pagination": "pagination",
           },
-          "pathParams": Array [
+          "pathParams": [
             "delegator_addr",
           ],
-          "queryParams": Array [
+          "queryParams": [
             "pagination",
           ],
           "url": "/cosmos/staking/v1beta1/delegations/{delegator_addr}",
         },
         "name": "DelegatorDelegations",
-        "options": Object {
+        "options": {
           "(google.api.http).get": "/cosmos/staking/v1beta1/delegations/{delegator_addr}",
         },
         "requestType": "QueryDelegatorDelegationsRequest",
         "responseType": "QueryDelegatorDelegationsResponse",
         "type": "ServiceMethod",
       },
-      "DelegatorUnbondingDelegations": Object {
+      "DelegatorUnbondingDelegations": {
         "comment": "DelegatorUnbondingDelegations queries all unbonding delegations of a given
  delegator address.",
-        "fields": Object {
-          "delegatorAddr": Object {
+        "fields": {
+          "delegatorAddr": {
             "comment": "delegator_addr defines the delegator address to query for.",
             "id": 1,
             "isScalar": true,
-            "options": Object {
+            "options": {
               "(cosmos_proto.scalar)": "cosmos.AddressString",
               "(telescope:camel)": "delegatorAddr",
               "(telescope:name)": "delegatorAddr",
               "(telescope:orig)": "delegator_addr",
             },
-            "parsedType": Object {
+            "parsedType": {
               "name": "string",
               "type": "native",
             },
             "type": "string",
             "typeNum": 13,
           },
-          "pagination": Object {
+          "pagination": {
             "comment": "pagination defines an optional pagination for the request.",
             "id": 2,
             "import": "cosmos/base/query/v1beta1/pagination.proto",
             "importedName": "cosmos.base.query.v1beta1.PageRequest",
-            "options": Object {
+            "options": {
               "(telescope:camel)": "pagination",
               "(telescope:name)": "pagination",
               "(telescope:orig)": "pagination",
             },
-            "parsedType": Object {
+            "parsedType": {
               "name": "PageRequest",
               "type": "Type",
             },
-            "scope": Array [
+            "scope": [
               "cosmos.base.query.v1beta1",
             ],
             "scopeType": "protoImport",
             "type": "cosmos.base.query.v1beta1.PageRequest",
           },
         },
-        "info": Object {
-          "casing": Object {
+        "info": {
+          "casing": {
             "delegator_addr": "delegatorAddr",
             "pagination": "pagination",
           },
           "method": "get",
-          "paramMap": Object {
+          "paramMap": {
             "delegator_addr": "delegatorAddr",
             "pagination": "pagination",
           },
-          "pathParams": Array [
+          "pathParams": [
             "delegator_addr",
           ],
-          "queryParams": Array [
+          "queryParams": [
             "pagination",
           ],
           "url": "/cosmos/staking/v1beta1/delegators/{delegator_addr}/unbonding_delegations",
         },
         "name": "DelegatorUnbondingDelegations",
-        "options": Object {
+        "options": {
           "(google.api.http).get": "/cosmos/staking/v1beta1/delegators/{delegator_addr}/unbonding_delegations",
         },
         "requestType": "QueryDelegatorUnbondingDelegationsRequest",
         "responseType": "QueryDelegatorUnbondingDelegationsResponse",
         "type": "ServiceMethod",
       },
-      "DelegatorValidator": Object {
+      "DelegatorValidator": {
         "comment": "DelegatorValidator queries validator info for given delegator validator
  pair.",
-        "fields": Object {
-          "delegatorAddr": Object {
+        "fields": {
+          "delegatorAddr": {
             "comment": "delegator_addr defines the delegator address to query for.",
             "id": 1,
             "isScalar": true,
-            "options": Object {
+            "options": {
               "(cosmos_proto.scalar)": "cosmos.AddressString",
               "(telescope:camel)": "delegatorAddr",
               "(telescope:name)": "delegatorAddr",
               "(telescope:orig)": "delegator_addr",
             },
-            "parsedType": Object {
+            "parsedType": {
               "name": "string",
               "type": "native",
             },
             "type": "string",
             "typeNum": 13,
           },
-          "validatorAddr": Object {
+          "validatorAddr": {
             "comment": "validator_addr defines the validator address to query for.",
             "id": 2,
             "isScalar": true,
-            "options": Object {
+            "options": {
               "(cosmos_proto.scalar)": "cosmos.AddressString",
               "(telescope:camel)": "validatorAddr",
               "(telescope:name)": "validatorAddr",
               "(telescope:orig)": "validator_addr",
             },
-            "parsedType": Object {
+            "parsedType": {
               "name": "string",
               "type": "native",
             },
@@ -242,112 +242,112 @@ Object {
             "typeNum": 13,
           },
         },
-        "info": Object {
-          "casing": Object {
+        "info": {
+          "casing": {
             "delegator_addr": "delegatorAddr",
             "validator_addr": "validatorAddr",
           },
           "method": "get",
-          "paramMap": Object {
+          "paramMap": {
             "delegator_addr": "delegatorAddr",
             "validator_addr": "validatorAddr",
           },
-          "pathParams": Array [
+          "pathParams": [
             "delegator_addr",
             "validator_addr",
           ],
-          "queryParams": Array [],
+          "queryParams": [],
           "url": "/cosmos/staking/v1beta1/delegators/{delegator_addr}/validators/{validator_addr}",
         },
         "name": "DelegatorValidator",
-        "options": Object {
+        "options": {
           "(google.api.http).get": "/cosmos/staking/v1beta1/delegators/{delegator_addr}/validators/{validator_addr}",
         },
         "requestType": "QueryDelegatorValidatorRequest",
         "responseType": "QueryDelegatorValidatorResponse",
         "type": "ServiceMethod",
       },
-      "DelegatorValidators": Object {
+      "DelegatorValidators": {
         "comment": "DelegatorValidators queries all validators info for given delegator
  address.",
-        "fields": Object {
-          "delegatorAddr": Object {
+        "fields": {
+          "delegatorAddr": {
             "comment": "delegator_addr defines the delegator address to query for.",
             "id": 1,
             "isScalar": true,
-            "options": Object {
+            "options": {
               "(cosmos_proto.scalar)": "cosmos.AddressString",
               "(telescope:camel)": "delegatorAddr",
               "(telescope:name)": "delegatorAddr",
               "(telescope:orig)": "delegator_addr",
             },
-            "parsedType": Object {
+            "parsedType": {
               "name": "string",
               "type": "native",
             },
             "type": "string",
             "typeNum": 13,
           },
-          "pagination": Object {
+          "pagination": {
             "comment": "pagination defines an optional pagination for the request.",
             "id": 2,
             "import": "cosmos/base/query/v1beta1/pagination.proto",
             "importedName": "cosmos.base.query.v1beta1.PageRequest",
-            "options": Object {
+            "options": {
               "(telescope:camel)": "pagination",
               "(telescope:name)": "pagination",
               "(telescope:orig)": "pagination",
             },
-            "parsedType": Object {
+            "parsedType": {
               "name": "PageRequest",
               "type": "Type",
             },
-            "scope": Array [
+            "scope": [
               "cosmos.base.query.v1beta1",
             ],
             "scopeType": "protoImport",
             "type": "cosmos.base.query.v1beta1.PageRequest",
           },
         },
-        "info": Object {
-          "casing": Object {
+        "info": {
+          "casing": {
             "delegator_addr": "delegatorAddr",
             "pagination": "pagination",
           },
           "method": "get",
-          "paramMap": Object {
+          "paramMap": {
             "delegator_addr": "delegatorAddr",
             "pagination": "pagination",
           },
-          "pathParams": Array [
+          "pathParams": [
             "delegator_addr",
           ],
-          "queryParams": Array [
+          "queryParams": [
             "pagination",
           ],
           "url": "/cosmos/staking/v1beta1/delegators/{delegator_addr}/validators",
         },
         "name": "DelegatorValidators",
-        "options": Object {
+        "options": {
           "(google.api.http).get": "/cosmos/staking/v1beta1/delegators/{delegator_addr}/validators",
         },
         "requestType": "QueryDelegatorValidatorsRequest",
         "responseType": "QueryDelegatorValidatorsResponse",
         "type": "ServiceMethod",
       },
-      "HistoricalInfo": Object {
+      "HistoricalInfo": {
         "comment": "HistoricalInfo queries the historical info for given height.",
-        "fields": Object {
-          "height": Object {
+        "fields": {
+          "height": {
             "comment": "height defines at which height to query the historical info.",
             "id": 1,
             "isScalar": true,
-            "options": Object {
+            "options": {
               "(telescope:camel)": "height",
               "(telescope:name)": "height",
               "(telescope:orig)": "height",
             },
-            "parsedType": Object {
+            "parsedType": {
               "name": "int64",
               "type": "native",
             },
@@ -355,134 +355,134 @@ Object {
             "typeNum": 7,
           },
         },
-        "info": Object {
-          "casing": Object {
+        "info": {
+          "casing": {
             "height": "height",
           },
           "method": "get",
-          "paramMap": Object {
+          "paramMap": {
             "height": "height",
           },
-          "pathParams": Array [
+          "pathParams": [
             "height",
           ],
-          "queryParams": Array [],
+          "queryParams": [],
           "url": "/cosmos/staking/v1beta1/historical_info/{height}",
         },
         "name": "HistoricalInfo",
-        "options": Object {
+        "options": {
           "(google.api.http).get": "/cosmos/staking/v1beta1/historical_info/{height}",
         },
         "requestType": "QueryHistoricalInfoRequest",
         "responseType": "QueryHistoricalInfoResponse",
         "type": "ServiceMethod",
       },
-      "Params": Object {
+      "Params": {
         "comment": "Parameters queries the staking parameters.",
-        "fields": Object {},
-        "info": Object {
-          "casing": Object {},
+        "fields": {},
+        "info": {
+          "casing": {},
           "method": "get",
-          "paramMap": Object {},
-          "pathParams": Array [],
-          "queryParams": Array [],
+          "paramMap": {},
+          "pathParams": [],
+          "queryParams": [],
           "url": "/cosmos/staking/v1beta1/params",
         },
         "name": "Params",
-        "options": Object {
+        "options": {
           "(google.api.http).get": "/cosmos/staking/v1beta1/params",
         },
         "requestType": "QueryParamsRequest",
         "responseType": "QueryParamsResponse",
         "type": "ServiceMethod",
       },
-      "Pool": Object {
+      "Pool": {
         "comment": "Pool queries the pool info.",
-        "fields": Object {},
-        "info": Object {
-          "casing": Object {},
+        "fields": {},
+        "info": {
+          "casing": {},
           "method": "get",
-          "paramMap": Object {},
-          "pathParams": Array [],
-          "queryParams": Array [],
+          "paramMap": {},
+          "pathParams": [],
+          "queryParams": [],
           "url": "/cosmos/staking/v1beta1/pool",
         },
         "name": "Pool",
-        "options": Object {
+        "options": {
           "(google.api.http).get": "/cosmos/staking/v1beta1/pool",
         },
         "requestType": "QueryPoolRequest",
         "responseType": "QueryPoolResponse",
         "type": "ServiceMethod",
       },
-      "Redelegations": Object {
+      "Redelegations": {
         "comment": "Redelegations queries redelegations of given address.",
-        "fields": Object {
-          "delegatorAddr": Object {
+        "fields": {
+          "delegatorAddr": {
             "comment": "delegator_addr defines the delegator address to query for.",
             "id": 1,
             "isScalar": true,
-            "options": Object {
+            "options": {
               "(cosmos_proto.scalar)": "cosmos.AddressString",
               "(telescope:camel)": "delegatorAddr",
               "(telescope:name)": "delegatorAddr",
               "(telescope:orig)": "delegator_addr",
             },
-            "parsedType": Object {
+            "parsedType": {
               "name": "string",
               "type": "native",
             },
             "type": "string",
             "typeNum": 13,
           },
-          "dstValidatorAddr": Object {
+          "dstValidatorAddr": {
             "comment": "dst_validator_addr defines the validator address to redelegate to.",
             "id": 3,
             "isScalar": true,
-            "options": Object {
+            "options": {
               "(cosmos_proto.scalar)": "cosmos.AddressString",
               "(telescope:camel)": "dstValidatorAddr",
               "(telescope:name)": "dstValidatorAddr",
               "(telescope:orig)": "dst_validator_addr",
             },
-            "parsedType": Object {
+            "parsedType": {
               "name": "string",
               "type": "native",
             },
             "type": "string",
             "typeNum": 13,
           },
-          "pagination": Object {
+          "pagination": {
             "comment": "pagination defines an optional pagination for the request.",
             "id": 4,
             "import": "cosmos/base/query/v1beta1/pagination.proto",
             "importedName": "cosmos.base.query.v1beta1.PageRequest",
-            "options": Object {
+            "options": {
               "(telescope:camel)": "pagination",
               "(telescope:name)": "pagination",
               "(telescope:orig)": "pagination",
             },
-            "parsedType": Object {
+            "parsedType": {
               "name": "PageRequest",
               "type": "Type",
             },
-            "scope": Array [
+            "scope": [
               "cosmos.base.query.v1beta1",
             ],
             "scopeType": "protoImport",
             "type": "cosmos.base.query.v1beta1.PageRequest",
           },
-          "srcValidatorAddr": Object {
+          "srcValidatorAddr": {
             "comment": "src_validator_addr defines the validator address to redelegate from.",
             "id": 2,
             "isScalar": true,
-            "options": Object {
+            "options": {
               "(cosmos_proto.scalar)": "cosmos.AddressString",
               "(telescope:camel)": "srcValidatorAddr",
               "(telescope:name)": "srcValidatorAddr",
               "(telescope:orig)": "src_validator_addr",
             },
-            "parsedType": Object {
+            "parsedType": {
               "name": "string",
               "type": "native",
             },
@@ -490,24 +490,24 @@ Object {
             "typeNum": 13,
           },
         },
-        "info": Object {
-          "casing": Object {
+        "info": {
+          "casing": {
             "delegator_addr": "delegatorAddr",
             "dst_validator_addr": "dstValidatorAddr",
             "pagination": "pagination",
             "src_validator_addr": "srcValidatorAddr",
           },
           "method": "get",
-          "paramMap": Object {
+          "paramMap": {
             "delegator_addr": "delegatorAddr",
             "dst_validator_addr": "dstValidatorAddr",
             "pagination": "pagination",
             "src_validator_addr": "srcValidatorAddr",
           },
-          "pathParams": Array [
+          "pathParams": [
             "delegator_addr",
           ],
-          "queryParams": Array [
+          "queryParams": [
             "src_validator_addr",
             "dst_validator_addr",
             "pagination",
@@ -515,45 +515,45 @@ Object {
           "url": "/cosmos/staking/v1beta1/delegators/{delegator_addr}/redelegations",
         },
         "name": "Redelegations",
-        "options": Object {
+        "options": {
           "(google.api.http).get": "/cosmos/staking/v1beta1/delegators/{delegator_addr}/redelegations",
         },
         "requestType": "QueryRedelegationsRequest",
         "responseType": "QueryRedelegationsResponse",
         "type": "ServiceMethod",
       },
-      "UnbondingDelegation": Object {
+      "UnbondingDelegation": {
         "comment": "UnbondingDelegation queries unbonding info for given validator delegator
  pair.",
-        "fields": Object {
-          "delegatorAddr": Object {
+        "fields": {
+          "delegatorAddr": {
             "comment": "delegator_addr defines the delegator address to query for.",
             "id": 1,
             "isScalar": true,
-            "options": Object {
+            "options": {
               "(cosmos_proto.scalar)": "cosmos.AddressString",
               "(telescope:camel)": "delegatorAddr",
               "(telescope:name)": "delegatorAddr",
               "(telescope:orig)": "delegator_addr",
             },
-            "parsedType": Object {
+            "parsedType": {
               "name": "string",
               "type": "native",
             },
             "type": "string",
             "typeNum": 13,
           },
-          "validatorAddr": Object {
+          "validatorAddr": {
             "comment": "validator_addr defines the validator address to query for.",
             "id": 2,
             "isScalar": true,
-            "options": Object {
+            "options": {
               "(cosmos_proto.scalar)": "cosmos.AddressString",
               "(telescope:camel)": "validatorAddr",
               "(telescope:name)": "validatorAddr",
               "(telescope:orig)": "validator_addr",
             },
-            "parsedType": Object {
+            "parsedType": {
               "name": "string",
               "type": "native",
             },
@@ -561,45 +561,45 @@ Object {
             "typeNum": 13,
           },
         },
-        "info": Object {
-          "casing": Object {
+        "info": {
+          "casing": {
             "delegator_addr": "delegatorAddr",
             "validator_addr": "validatorAddr",
           },
           "method": "get",
-          "paramMap": Object {
+          "paramMap": {
             "delegator_addr": "delegatorAddr",
             "validator_addr": "validatorAddr",
           },
-          "pathParams": Array [
+          "pathParams": [
             "validator_addr",
             "delegator_addr",
           ],
-          "queryParams": Array [],
+          "queryParams": [],
           "url": "/cosmos/staking/v1beta1/validators/{validator_addr}/delegations/{delegator_addr}/unbonding_delegation",
         },
         "name": "UnbondingDelegation",
-        "options": Object {
+        "options": {
           "(google.api.http).get": "/cosmos/staking/v1beta1/validators/{validator_addr}/delegations/{delegator_addr}/unbonding_delegation",
         },
         "requestType": "QueryUnbondingDelegationRequest",
         "responseType": "QueryUnbondingDelegationResponse",
         "type": "ServiceMethod",
       },
-      "Validator": Object {
+      "Validator": {
         "comment": "Validator queries validator info for given validator address.",
-        "fields": Object {
-          "validatorAddr": Object {
+        "fields": {
+          "validatorAddr": {
             "comment": "validator_addr defines the validator address to query for.",
             "id": 1,
             "isScalar": true,
-            "options": Object {
+            "options": {
               "(cosmos_proto.scalar)": "cosmos.AddressString",
               "(telescope:camel)": "validatorAddr",
               "(telescope:name)": "validatorAddr",
               "(telescope:orig)": "validator_addr",
             },
-            "parsedType": Object {
+            "parsedType": {
               "name": "string",
               "type": "native",
             },
@@ -607,62 +607,62 @@ Object {
             "typeNum": 13,
           },
         },
-        "info": Object {
-          "casing": Object {
+        "info": {
+          "casing": {
             "validator_addr": "validatorAddr",
           },
           "method": "get",
-          "paramMap": Object {
+          "paramMap": {
             "validator_addr": "validatorAddr",
           },
-          "pathParams": Array [
+          "pathParams": [
             "validator_addr",
           ],
-          "queryParams": Array [],
+          "queryParams": [],
           "url": "/cosmos/staking/v1beta1/validators/{validator_addr}",
         },
         "name": "Validator",
-        "options": Object {
+        "options": {
           "(google.api.http).get": "/cosmos/staking/v1beta1/validators/{validator_addr}",
         },
         "requestType": "QueryValidatorRequest",
         "responseType": "QueryValidatorResponse",
         "type": "ServiceMethod",
       },
-      "ValidatorDelegations": Object {
+      "ValidatorDelegations": {
         "comment": "ValidatorDelegations queries delegate info for given validator.",
-        "fields": Object {
-          "pagination": Object {
+        "fields": {
+          "pagination": {
             "comment": "pagination defines an optional pagination for the request.",
             "id": 2,
             "import": "cosmos/base/query/v1beta1/pagination.proto",
             "importedName": "cosmos.base.query.v1beta1.PageRequest",
-            "options": Object {
+            "options": {
               "(telescope:camel)": "pagination",
               "(telescope:name)": "pagination",
               "(telescope:orig)": "pagination",
             },
-            "parsedType": Object {
+            "parsedType": {
               "name": "PageRequest",
               "type": "Type",
             },
-            "scope": Array [
+            "scope": [
               "cosmos.base.query.v1beta1",
             ],
             "scopeType": "protoImport",
             "type": "cosmos.base.query.v1beta1.PageRequest",
           },
-          "validatorAddr": Object {
+          "validatorAddr": {
             "comment": "validator_addr defines the validator address to query for.",
             "id": 1,
             "isScalar": true,
-            "options": Object {
+            "options": {
               "(cosmos_proto.scalar)": "cosmos.AddressString",
               "(telescope:camel)": "validatorAddr",
               "(telescope:name)": "validatorAddr",
               "(telescope:orig)": "validator_addr",
             },
-            "parsedType": Object {
+            "parsedType": {
               "name": "string",
               "type": "native",
             },
@@ -670,66 +670,66 @@ Object {
             "typeNum": 13,
           },
         },
-        "info": Object {
-          "casing": Object {
+        "info": {
+          "casing": {
             "pagination": "pagination",
             "validator_addr": "validatorAddr",
           },
           "method": "get",
-          "paramMap": Object {
+          "paramMap": {
             "pagination": "pagination",
             "validator_addr": "validatorAddr",
           },
-          "pathParams": Array [
+          "pathParams": [
             "validator_addr",
           ],
-          "queryParams": Array [
+          "queryParams": [
             "pagination",
           ],
           "url": "/cosmos/staking/v1beta1/validators/{validator_addr}/delegations",
         },
         "name": "ValidatorDelegations",
-        "options": Object {
+        "options": {
           "(google.api.http).get": "/cosmos/staking/v1beta1/validators/{validator_addr}/delegations",
         },
         "requestType": "QueryValidatorDelegationsRequest",
         "responseType": "QueryValidatorDelegationsResponse",
         "type": "ServiceMethod",
       },
-      "ValidatorUnbondingDelegations": Object {
+      "ValidatorUnbondingDelegations": {
         "comment": "ValidatorUnbondingDelegations queries unbonding delegations of a validator.",
-        "fields": Object {
-          "pagination": Object {
+        "fields": {
+          "pagination": {
             "comment": "pagination defines an optional pagination for the request.",
             "id": 2,
             "import": "cosmos/base/query/v1beta1/pagination.proto",
             "importedName": "cosmos.base.query.v1beta1.PageRequest",
-            "options": Object {
+            "options": {
               "(telescope:camel)": "pagination",
               "(telescope:name)": "pagination",
               "(telescope:orig)": "pagination",
             },
-            "parsedType": Object {
+            "parsedType": {
               "name": "PageRequest",
               "type": "Type",
             },
-            "scope": Array [
+            "scope": [
               "cosmos.base.query.v1beta1",
             ],
             "scopeType": "protoImport",
             "type": "cosmos.base.query.v1beta1.PageRequest",
           },
-          "validatorAddr": Object {
+          "validatorAddr": {
             "comment": "validator_addr defines the validator address to query for.",
             "id": 1,
             "isScalar": true,
-            "options": Object {
+            "options": {
               "(cosmos_proto.scalar)": "cosmos.AddressString",
               "(telescope:camel)": "validatorAddr",
               "(telescope:name)": "validatorAddr",
               "(telescope:orig)": "validator_addr",
             },
-            "parsedType": Object {
+            "parsedType": {
               "name": "string",
               "type": "native",
             },
@@ -737,65 +737,65 @@ Object {
             "typeNum": 13,
           },
         },
-        "info": Object {
-          "casing": Object {
+        "info": {
+          "casing": {
             "pagination": "pagination",
             "validator_addr": "validatorAddr",
           },
           "method": "get",
-          "paramMap": Object {
+          "paramMap": {
             "pagination": "pagination",
             "validator_addr": "validatorAddr",
           },
-          "pathParams": Array [
+          "pathParams": [
             "validator_addr",
           ],
-          "queryParams": Array [
+          "queryParams": [
             "pagination",
           ],
           "url": "/cosmos/staking/v1beta1/validators/{validator_addr}/unbonding_delegations",
         },
         "name": "ValidatorUnbondingDelegations",
-        "options": Object {
+        "options": {
           "(google.api.http).get": "/cosmos/staking/v1beta1/validators/{validator_addr}/unbonding_delegations",
         },
         "requestType": "QueryValidatorUnbondingDelegationsRequest",
         "responseType": "QueryValidatorUnbondingDelegationsResponse",
         "type": "ServiceMethod",
       },
-      "Validators": Object {
+      "Validators": {
         "comment": "Validators queries all validators that match the given status.",
-        "fields": Object {
-          "pagination": Object {
+        "fields": {
+          "pagination": {
             "comment": "pagination defines an optional pagination for the request.",
             "id": 2,
             "import": "cosmos/base/query/v1beta1/pagination.proto",
             "importedName": "cosmos.base.query.v1beta1.PageRequest",
-            "options": Object {
+            "options": {
               "(telescope:camel)": "pagination",
               "(telescope:name)": "pagination",
               "(telescope:orig)": "pagination",
             },
-            "parsedType": Object {
+            "parsedType": {
               "name": "PageRequest",
               "type": "Type",
             },
-            "scope": Array [
+            "scope": [
               "cosmos.base.query.v1beta1",
             ],
             "scopeType": "protoImport",
             "type": "cosmos.base.query.v1beta1.PageRequest",
           },
-          "status": Object {
+          "status": {
             "comment": "status enables to query for validators matching a given status.",
             "id": 1,
             "isScalar": true,
-            "options": Object {
+            "options": {
               "(telescope:camel)": "status",
               "(telescope:name)": "status",
               "(telescope:orig)": "status",
             },
-            "parsedType": Object {
+            "parsedType": {
               "name": "string",
               "type": "native",
             },
@@ -803,25 +803,25 @@ Object {
             "typeNum": 13,
           },
         },
-        "info": Object {
-          "casing": Object {
+        "info": {
+          "casing": {
             "pagination": "pagination",
             "status": "status",
           },
           "method": "get",
-          "paramMap": Object {
+          "paramMap": {
             "pagination": "pagination",
             "status": "status",
           },
-          "pathParams": Array [],
-          "queryParams": Array [
+          "pathParams": [],
+          "queryParams": [
             "status",
             "pagination",
           ],
           "url": "/cosmos/staking/v1beta1/validators",
         },
         "name": "Validators",
-        "options": Object {
+        "options": {
           "(google.api.http).get": "/cosmos/staking/v1beta1/validators",
         },
         "requestType": "QueryValidatorsRequest",
@@ -833,37 +833,37 @@ Object {
     "serviceType": "Query",
     "type": "Service",
   },
-  "QueryDelegationRequest": Object {
+  "QueryDelegationRequest": {
     "comment": "QueryDelegationRequest is request type for the Query/Delegation RPC method.",
-    "fields": Object {
-      "delegatorAddr": Object {
+    "fields": {
+      "delegatorAddr": {
         "comment": "delegator_addr defines the delegator address to query for.",
         "id": 1,
         "isScalar": true,
-        "options": Object {
+        "options": {
           "(cosmos_proto.scalar)": "cosmos.AddressString",
           "(telescope:camel)": "delegatorAddr",
           "(telescope:name)": "delegatorAddr",
           "(telescope:orig)": "delegator_addr",
         },
-        "parsedType": Object {
+        "parsedType": {
           "name": "string",
           "type": "native",
         },
         "type": "string",
         "typeNum": 13,
       },
-      "validatorAddr": Object {
+      "validatorAddr": {
         "comment": "validator_addr defines the validator address to query for.",
         "id": 2,
         "isScalar": true,
-        "options": Object {
+        "options": {
           "(cosmos_proto.scalar)": "cosmos.AddressString",
           "(telescope:camel)": "validatorAddr",
           "(telescope:name)": "validatorAddr",
           "(telescope:orig)": "validator_addr",
         },
-        "parsedType": Object {
+        "parsedType": {
           "name": "string",
           "type": "native",
         },
@@ -871,35 +871,35 @@ Object {
         "typeNum": 13,
       },
     },
-    "keyTypes": Array [],
+    "keyTypes": [],
     "name": "QueryDelegationRequest",
     "nested": null,
     "oneofs": undefined,
-    "options": Object {
+    "options": {
       "(gogoproto.equal)": false,
       "(gogoproto.goproto_getters)": false,
     },
     "type": "Type",
   },
-  "QueryDelegationResponse": Object {
+  "QueryDelegationResponse": {
     "comment": "QueryDelegationResponse is response type for the Query/Delegation RPC method.",
-    "fields": Object {
-      "delegationResponse": Object {
+    "fields": {
+      "delegationResponse": {
         "comment": "delegation_responses defines the delegation info of a delegation.",
         "id": 1,
         "import": "cosmos/staking/v1beta1/staking.proto",
         "importedName": "DelegationResponse",
-        "options": Object {
+        "options": {
           "(telescope:camel)": "delegationResponse",
           "(telescope:name)": "delegationResponse",
           "(telescope:orig)": "delegation_response",
         },
-        "parsedType": Object {
+        "parsedType": {
           "name": "DelegationResponse",
           "type": "Type",
         },
-        "scope": Array [
-          Array [
+        "scope": [
+          [
             "cosmos.staking.v1beta1",
           ],
         ],
@@ -907,215 +907,215 @@ Object {
         "type": "DelegationResponse",
       },
     },
-    "keyTypes": Array [],
+    "keyTypes": [],
     "name": "QueryDelegationResponse",
     "nested": null,
     "oneofs": undefined,
     "options": undefined,
     "type": "Type",
   },
-  "QueryDelegatorDelegationsRequest": Object {
+  "QueryDelegatorDelegationsRequest": {
     "comment": "QueryDelegatorDelegationsRequest is request type for the
  Query/DelegatorDelegations RPC method.",
-    "fields": Object {
-      "delegatorAddr": Object {
+    "fields": {
+      "delegatorAddr": {
         "comment": "delegator_addr defines the delegator address to query for.",
         "id": 1,
         "isScalar": true,
-        "options": Object {
+        "options": {
           "(cosmos_proto.scalar)": "cosmos.AddressString",
           "(telescope:camel)": "delegatorAddr",
           "(telescope:name)": "delegatorAddr",
           "(telescope:orig)": "delegator_addr",
         },
-        "parsedType": Object {
+        "parsedType": {
           "name": "string",
           "type": "native",
         },
         "type": "string",
         "typeNum": 13,
       },
-      "pagination": Object {
+      "pagination": {
         "comment": "pagination defines an optional pagination for the request.",
         "id": 2,
         "import": "cosmos/base/query/v1beta1/pagination.proto",
         "importedName": "cosmos.base.query.v1beta1.PageRequest",
-        "options": Object {
+        "options": {
           "(telescope:camel)": "pagination",
           "(telescope:name)": "pagination",
           "(telescope:orig)": "pagination",
         },
-        "parsedType": Object {
+        "parsedType": {
           "name": "PageRequest",
           "type": "Type",
         },
-        "scope": Array [
+        "scope": [
           "cosmos.base.query.v1beta1",
         ],
         "scopeType": "protoImport",
         "type": "cosmos.base.query.v1beta1.PageRequest",
       },
     },
-    "keyTypes": Array [],
+    "keyTypes": [],
     "name": "QueryDelegatorDelegationsRequest",
     "nested": null,
     "oneofs": undefined,
-    "options": Object {
+    "options": {
       "(gogoproto.equal)": false,
       "(gogoproto.goproto_getters)": false,
     },
     "type": "Type",
   },
-  "QueryDelegatorDelegationsResponse": Object {
+  "QueryDelegatorDelegationsResponse": {
     "comment": "QueryDelegatorDelegationsResponse is response type for the
  Query/DelegatorDelegations RPC method.",
-    "fields": Object {
-      "delegationResponses": Object {
+    "fields": {
+      "delegationResponses": {
         "comment": "delegation_responses defines all the delegations' info of a delegator.",
         "id": 1,
         "import": "cosmos/staking/v1beta1/staking.proto",
         "importedName": "DelegationResponse",
-        "options": Object {
+        "options": {
           "(gogoproto.nullable)": false,
           "(telescope:camel)": "delegationResponses",
           "(telescope:name)": "delegationResponses",
           "(telescope:orig)": "delegation_responses",
         },
-        "parsedType": Object {
+        "parsedType": {
           "name": "DelegationResponse",
           "type": "Type",
         },
         "rule": "repeated",
-        "scope": Array [
-          Array [
+        "scope": [
+          [
             "cosmos.staking.v1beta1",
           ],
         ],
         "scopeType": "import",
         "type": "DelegationResponse",
       },
-      "pagination": Object {
+      "pagination": {
         "comment": "pagination defines the pagination in the response.",
         "id": 2,
         "import": "cosmos/base/query/v1beta1/pagination.proto",
         "importedName": "cosmos.base.query.v1beta1.PageResponse",
-        "options": Object {
+        "options": {
           "(telescope:camel)": "pagination",
           "(telescope:name)": "pagination",
           "(telescope:orig)": "pagination",
         },
-        "parsedType": Object {
+        "parsedType": {
           "name": "PageResponse",
           "type": "Type",
         },
-        "scope": Array [
+        "scope": [
           "cosmos.base.query.v1beta1",
         ],
         "scopeType": "protoImport",
         "type": "cosmos.base.query.v1beta1.PageResponse",
       },
     },
-    "keyTypes": Array [],
+    "keyTypes": [],
     "name": "QueryDelegatorDelegationsResponse",
     "nested": null,
     "oneofs": undefined,
     "options": undefined,
     "type": "Type",
   },
-  "QueryDelegatorUnbondingDelegationsRequest": Object {
+  "QueryDelegatorUnbondingDelegationsRequest": {
     "comment": "QueryDelegatorUnbondingDelegationsRequest is request type for the
  Query/DelegatorUnbondingDelegations RPC method.",
-    "fields": Object {
-      "delegatorAddr": Object {
+    "fields": {
+      "delegatorAddr": {
         "comment": "delegator_addr defines the delegator address to query for.",
         "id": 1,
         "isScalar": true,
-        "options": Object {
+        "options": {
           "(cosmos_proto.scalar)": "cosmos.AddressString",
           "(telescope:camel)": "delegatorAddr",
           "(telescope:name)": "delegatorAddr",
           "(telescope:orig)": "delegator_addr",
         },
-        "parsedType": Object {
+        "parsedType": {
           "name": "string",
           "type": "native",
         },
         "type": "string",
         "typeNum": 13,
       },
-      "pagination": Object {
+      "pagination": {
         "comment": "pagination defines an optional pagination for the request.",
         "id": 2,
         "import": "cosmos/base/query/v1beta1/pagination.proto",
         "importedName": "cosmos.base.query.v1beta1.PageRequest",
-        "options": Object {
+        "options": {
           "(telescope:camel)": "pagination",
           "(telescope:name)": "pagination",
           "(telescope:orig)": "pagination",
         },
-        "parsedType": Object {
+        "parsedType": {
           "name": "PageRequest",
           "type": "Type",
         },
-        "scope": Array [
+        "scope": [
           "cosmos.base.query.v1beta1",
         ],
         "scopeType": "protoImport",
         "type": "cosmos.base.query.v1beta1.PageRequest",
       },
     },
-    "keyTypes": Array [],
+    "keyTypes": [],
     "name": "QueryDelegatorUnbondingDelegationsRequest",
     "nested": null,
     "oneofs": undefined,
-    "options": Object {
+    "options": {
       "(gogoproto.equal)": false,
       "(gogoproto.goproto_getters)": false,
     },
     "type": "Type",
   },
-  "QueryDelegatorUnbondingDelegationsResponse": Object {
+  "QueryDelegatorUnbondingDelegationsResponse": {
     "comment": "QueryUnbondingDelegatorDelegationsResponse is response type for the
  Query/UnbondingDelegatorDelegations RPC method.",
-    "fields": Object {
-      "pagination": Object {
+    "fields": {
+      "pagination": {
         "comment": "pagination defines the pagination in the response.",
         "id": 2,
         "import": "cosmos/base/query/v1beta1/pagination.proto",
         "importedName": "cosmos.base.query.v1beta1.PageResponse",
-        "options": Object {
+        "options": {
           "(telescope:camel)": "pagination",
           "(telescope:name)": "pagination",
           "(telescope:orig)": "pagination",
         },
-        "parsedType": Object {
+        "parsedType": {
           "name": "PageResponse",
           "type": "Type",
         },
-        "scope": Array [
+        "scope": [
           "cosmos.base.query.v1beta1",
         ],
         "scopeType": "protoImport",
         "type": "cosmos.base.query.v1beta1.PageResponse",
       },
-      "unbondingResponses": Object {
+      "unbondingResponses": {
         "comment": null,
         "id": 1,
         "import": "cosmos/staking/v1beta1/staking.proto",
         "importedName": "UnbondingDelegation",
-        "options": Object {
+        "options": {
           "(gogoproto.nullable)": false,
           "(telescope:camel)": "unbondingResponses",
           "(telescope:name)": "unbondingResponses",
           "(telescope:orig)": "unbonding_responses",
         },
-        "parsedType": Object {
+        "parsedType": {
           "name": "UnbondingDelegation",
           "type": "Type",
         },
         "rule": "repeated",
-        "scope": Array [
-          Array [
+        "scope": [
+          [
             "cosmos.staking.v1beta1",
           ],
         ],
@@ -1123,45 +1123,45 @@ Object {
         "type": "UnbondingDelegation",
       },
     },
-    "keyTypes": Array [],
+    "keyTypes": [],
     "name": "QueryDelegatorUnbondingDelegationsResponse",
     "nested": null,
     "oneofs": undefined,
     "options": undefined,
     "type": "Type",
   },
-  "QueryDelegatorValidatorRequest": Object {
+  "QueryDelegatorValidatorRequest": {
     "comment": "QueryDelegatorValidatorRequest is request type for the
  Query/DelegatorValidator RPC method.",
-    "fields": Object {
-      "delegatorAddr": Object {
+    "fields": {
+      "delegatorAddr": {
         "comment": "delegator_addr defines the delegator address to query for.",
         "id": 1,
         "isScalar": true,
-        "options": Object {
+        "options": {
           "(cosmos_proto.scalar)": "cosmos.AddressString",
           "(telescope:camel)": "delegatorAddr",
           "(telescope:name)": "delegatorAddr",
           "(telescope:orig)": "delegator_addr",
         },
-        "parsedType": Object {
+        "parsedType": {
           "name": "string",
           "type": "native",
         },
         "type": "string",
         "typeNum": 13,
       },
-      "validatorAddr": Object {
+      "validatorAddr": {
         "comment": "validator_addr defines the validator address to query for.",
         "id": 2,
         "isScalar": true,
-        "options": Object {
+        "options": {
           "(cosmos_proto.scalar)": "cosmos.AddressString",
           "(telescope:camel)": "validatorAddr",
           "(telescope:name)": "validatorAddr",
           "(telescope:orig)": "validator_addr",
         },
-        "parsedType": Object {
+        "parsedType": {
           "name": "string",
           "type": "native",
         },
@@ -1169,37 +1169,37 @@ Object {
         "typeNum": 13,
       },
     },
-    "keyTypes": Array [],
+    "keyTypes": [],
     "name": "QueryDelegatorValidatorRequest",
     "nested": null,
     "oneofs": undefined,
-    "options": Object {
+    "options": {
       "(gogoproto.equal)": false,
       "(gogoproto.goproto_getters)": false,
     },
     "type": "Type",
   },
-  "QueryDelegatorValidatorResponse": Object {
+  "QueryDelegatorValidatorResponse": {
     "comment": "QueryDelegatorValidatorResponse response type for the
  Query/DelegatorValidator RPC method.",
-    "fields": Object {
-      "validator": Object {
+    "fields": {
+      "validator": {
         "comment": "validator defines the the validator info.",
         "id": 1,
         "import": "cosmos/staking/v1beta1/staking.proto",
         "importedName": "Validator",
-        "options": Object {
+        "options": {
           "(gogoproto.nullable)": false,
           "(telescope:camel)": "validator",
           "(telescope:name)": "validator",
           "(telescope:orig)": "validator",
         },
-        "parsedType": Object {
+        "parsedType": {
           "name": "Validator",
           "type": "Type",
         },
-        "scope": Array [
-          Array [
+        "scope": [
+          [
             "cosmos.staking.v1beta1",
           ],
         ],
@@ -1207,107 +1207,107 @@ Object {
         "type": "Validator",
       },
     },
-    "keyTypes": Array [],
+    "keyTypes": [],
     "name": "QueryDelegatorValidatorResponse",
     "nested": null,
     "oneofs": undefined,
     "options": undefined,
     "type": "Type",
   },
-  "QueryDelegatorValidatorsRequest": Object {
+  "QueryDelegatorValidatorsRequest": {
     "comment": "QueryDelegatorValidatorsRequest is request type for the
  Query/DelegatorValidators RPC method.",
-    "fields": Object {
-      "delegatorAddr": Object {
+    "fields": {
+      "delegatorAddr": {
         "comment": "delegator_addr defines the delegator address to query for.",
         "id": 1,
         "isScalar": true,
-        "options": Object {
+        "options": {
           "(cosmos_proto.scalar)": "cosmos.AddressString",
           "(telescope:camel)": "delegatorAddr",
           "(telescope:name)": "delegatorAddr",
           "(telescope:orig)": "delegator_addr",
         },
-        "parsedType": Object {
+        "parsedType": {
           "name": "string",
           "type": "native",
         },
         "type": "string",
         "typeNum": 13,
       },
-      "pagination": Object {
+      "pagination": {
         "comment": "pagination defines an optional pagination for the request.",
         "id": 2,
         "import": "cosmos/base/query/v1beta1/pagination.proto",
         "importedName": "cosmos.base.query.v1beta1.PageRequest",
-        "options": Object {
+        "options": {
           "(telescope:camel)": "pagination",
           "(telescope:name)": "pagination",
           "(telescope:orig)": "pagination",
         },
-        "parsedType": Object {
+        "parsedType": {
           "name": "PageRequest",
           "type": "Type",
         },
-        "scope": Array [
+        "scope": [
           "cosmos.base.query.v1beta1",
         ],
         "scopeType": "protoImport",
         "type": "cosmos.base.query.v1beta1.PageRequest",
       },
     },
-    "keyTypes": Array [],
+    "keyTypes": [],
     "name": "QueryDelegatorValidatorsRequest",
     "nested": null,
     "oneofs": undefined,
-    "options": Object {
+    "options": {
       "(gogoproto.equal)": false,
       "(gogoproto.goproto_getters)": false,
     },
     "type": "Type",
   },
-  "QueryDelegatorValidatorsResponse": Object {
+  "QueryDelegatorValidatorsResponse": {
     "comment": "QueryDelegatorValidatorsResponse is response type for the
  Query/DelegatorValidators RPC method.",
-    "fields": Object {
-      "pagination": Object {
+    "fields": {
+      "pagination": {
         "comment": "pagination defines the pagination in the response.",
         "id": 2,
         "import": "cosmos/base/query/v1beta1/pagination.proto",
         "importedName": "cosmos.base.query.v1beta1.PageResponse",
-        "options": Object {
+        "options": {
           "(telescope:camel)": "pagination",
           "(telescope:name)": "pagination",
           "(telescope:orig)": "pagination",
         },
-        "parsedType": Object {
+        "parsedType": {
           "name": "PageResponse",
           "type": "Type",
         },
-        "scope": Array [
+        "scope": [
           "cosmos.base.query.v1beta1",
         ],
         "scopeType": "protoImport",
         "type": "cosmos.base.query.v1beta1.PageResponse",
       },
-      "validators": Object {
+      "validators": {
         "comment": "validators defines the the validators' info of a delegator.",
         "id": 1,
         "import": "cosmos/staking/v1beta1/staking.proto",
         "importedName": "Validator",
-        "options": Object {
+        "options": {
           "(gogoproto.nullable)": false,
           "(telescope:camel)": "validators",
           "(telescope:name)": "validators",
           "(telescope:orig)": "validators",
         },
-        "parsedType": Object {
+        "parsedType": {
           "name": "Validator",
           "type": "Type",
         },
         "rule": "repeated",
-        "scope": Array [
-          Array [
+        "scope": [
+          [
             "cosmos.staking.v1beta1",
           ],
         ],
@@ -1315,27 +1315,27 @@ Object {
         "type": "Validator",
       },
     },
-    "keyTypes": Array [],
+    "keyTypes": [],
     "name": "QueryDelegatorValidatorsResponse",
     "nested": null,
     "oneofs": undefined,
     "options": undefined,
     "type": "Type",
   },
-  "QueryHistoricalInfoRequest": Object {
+  "QueryHistoricalInfoRequest": {
     "comment": "QueryHistoricalInfoRequest is request type for the Query/HistoricalInfo RPC
  method.",
-    "fields": Object {
-      "height": Object {
+    "fields": {
+      "height": {
         "comment": "height defines at which height to query the historical info.",
         "id": 1,
         "isScalar": true,
-        "options": Object {
+        "options": {
           "(telescope:camel)": "height",
           "(telescope:name)": "height",
           "(telescope:orig)": "height",
         },
-        "parsedType": Object {
+        "parsedType": {
           "name": "int64",
           "type": "native",
         },
@@ -1343,33 +1343,33 @@ Object {
         "typeNum": 7,
       },
     },
-    "keyTypes": Array [],
+    "keyTypes": [],
     "name": "QueryHistoricalInfoRequest",
     "nested": null,
     "oneofs": undefined,
     "options": undefined,
     "type": "Type",
   },
-  "QueryHistoricalInfoResponse": Object {
+  "QueryHistoricalInfoResponse": {
     "comment": "QueryHistoricalInfoResponse is response type for the Query/HistoricalInfo RPC
  method.",
-    "fields": Object {
-      "hist": Object {
+    "fields": {
+      "hist": {
         "comment": "hist defines the historical info at the given height.",
         "id": 1,
         "import": "cosmos/staking/v1beta1/staking.proto",
         "importedName": "HistoricalInfo",
-        "options": Object {
+        "options": {
           "(telescope:camel)": "hist",
           "(telescope:name)": "hist",
           "(telescope:orig)": "hist",
         },
-        "parsedType": Object {
+        "parsedType": {
           "name": "HistoricalInfo",
           "type": "Type",
         },
-        "scope": Array [
-          Array [
+        "scope": [
+          [
             "cosmos.staking.v1beta1",
           ],
         ],
@@ -1377,43 +1377,43 @@ Object {
         "type": "HistoricalInfo",
       },
     },
-    "keyTypes": Array [],
+    "keyTypes": [],
     "name": "QueryHistoricalInfoResponse",
     "nested": null,
     "oneofs": undefined,
     "options": undefined,
     "type": "Type",
   },
-  "QueryParamsRequest": Object {
+  "QueryParamsRequest": {
     "comment": "QueryParamsRequest is request type for the Query/Params RPC method.",
-    "fields": Object {},
-    "keyTypes": Array [],
+    "fields": {},
+    "keyTypes": [],
     "name": "QueryParamsRequest",
     "nested": null,
     "oneofs": undefined,
     "options": undefined,
     "type": "Type",
   },
-  "QueryParamsResponse": Object {
+  "QueryParamsResponse": {
     "comment": "QueryParamsResponse is response type for the Query/Params RPC method.",
-    "fields": Object {
-      "params": Object {
+    "fields": {
+      "params": {
         "comment": "params holds all the parameters of this module.",
         "id": 1,
         "import": "cosmos/staking/v1beta1/staking.proto",
         "importedName": "Params",
-        "options": Object {
+        "options": {
           "(gogoproto.nullable)": false,
           "(telescope:camel)": "params",
           "(telescope:name)": "params",
           "(telescope:orig)": "params",
         },
-        "parsedType": Object {
+        "parsedType": {
           "name": "Params",
           "type": "Type",
         },
-        "scope": Array [
-          Array [
+        "scope": [
+          [
             "cosmos.staking.v1beta1",
           ],
         ],
@@ -1421,43 +1421,43 @@ Object {
         "type": "Params",
       },
     },
-    "keyTypes": Array [],
+    "keyTypes": [],
     "name": "QueryParamsResponse",
     "nested": null,
     "oneofs": undefined,
     "options": undefined,
     "type": "Type",
   },
-  "QueryPoolRequest": Object {
+  "QueryPoolRequest": {
     "comment": "QueryPoolRequest is request type for the Query/Pool RPC method.",
-    "fields": Object {},
-    "keyTypes": Array [],
+    "fields": {},
+    "keyTypes": [],
     "name": "QueryPoolRequest",
     "nested": null,
     "oneofs": undefined,
     "options": undefined,
     "type": "Type",
   },
-  "QueryPoolResponse": Object {
+  "QueryPoolResponse": {
     "comment": "QueryPoolResponse is response type for the Query/Pool RPC method.",
-    "fields": Object {
-      "pool": Object {
+    "fields": {
+      "pool": {
         "comment": "pool defines the pool info.",
         "id": 1,
         "import": "cosmos/staking/v1beta1/staking.proto",
         "importedName": "Pool",
-        "options": Object {
+        "options": {
           "(gogoproto.nullable)": false,
           "(telescope:camel)": "pool",
           "(telescope:name)": "pool",
           "(telescope:orig)": "pool",
         },
-        "parsedType": Object {
+        "parsedType": {
           "name": "Pool",
           "type": "Type",
         },
-        "scope": Array [
-          Array [
+        "scope": [
+          [
             "cosmos.staking.v1beta1",
           ],
         ],
@@ -1465,82 +1465,82 @@ Object {
         "type": "Pool",
       },
     },
-    "keyTypes": Array [],
+    "keyTypes": [],
     "name": "QueryPoolResponse",
     "nested": null,
     "oneofs": undefined,
     "options": undefined,
     "type": "Type",
   },
-  "QueryRedelegationsRequest": Object {
+  "QueryRedelegationsRequest": {
     "comment": "QueryRedelegationsRequest is request type for the Query/Redelegations RPC
  method.",
-    "fields": Object {
-      "delegatorAddr": Object {
+    "fields": {
+      "delegatorAddr": {
         "comment": "delegator_addr defines the delegator address to query for.",
         "id": 1,
         "isScalar": true,
-        "options": Object {
+        "options": {
           "(cosmos_proto.scalar)": "cosmos.AddressString",
           "(telescope:camel)": "delegatorAddr",
           "(telescope:name)": "delegatorAddr",
           "(telescope:orig)": "delegator_addr",
         },
-        "parsedType": Object {
+        "parsedType": {
           "name": "string",
           "type": "native",
         },
         "type": "string",
         "typeNum": 13,
       },
-      "dstValidatorAddr": Object {
+      "dstValidatorAddr": {
         "comment": "dst_validator_addr defines the validator address to redelegate to.",
         "id": 3,
         "isScalar": true,
-        "options": Object {
+        "options": {
           "(cosmos_proto.scalar)": "cosmos.AddressString",
           "(telescope:camel)": "dstValidatorAddr",
           "(telescope:name)": "dstValidatorAddr",
           "(telescope:orig)": "dst_validator_addr",
         },
-        "parsedType": Object {
+        "parsedType": {
           "name": "string",
           "type": "native",
         },
         "type": "string",
         "typeNum": 13,
       },
-      "pagination": Object {
+      "pagination": {
         "comment": "pagination defines an optional pagination for the request.",
         "id": 4,
         "import": "cosmos/base/query/v1beta1/pagination.proto",
         "importedName": "cosmos.base.query.v1beta1.PageRequest",
-        "options": Object {
+        "options": {
           "(telescope:camel)": "pagination",
           "(telescope:name)": "pagination",
           "(telescope:orig)": "pagination",
         },
-        "parsedType": Object {
+        "parsedType": {
           "name": "PageRequest",
           "type": "Type",
         },
-        "scope": Array [
+        "scope": [
           "cosmos.base.query.v1beta1",
         ],
         "scopeType": "protoImport",
         "type": "cosmos.base.query.v1beta1.PageRequest",
       },
-      "srcValidatorAddr": Object {
+      "srcValidatorAddr": {
         "comment": "src_validator_addr defines the validator address to redelegate from.",
         "id": 2,
         "isScalar": true,
-        "options": Object {
+        "options": {
           "(cosmos_proto.scalar)": "cosmos.AddressString",
           "(telescope:camel)": "srcValidatorAddr",
           "(telescope:name)": "srcValidatorAddr",
           "(telescope:orig)": "src_validator_addr",
         },
-        "parsedType": Object {
+        "parsedType": {
           "name": "string",
           "type": "native",
         },
@@ -1548,58 +1548,58 @@ Object {
         "typeNum": 13,
       },
     },
-    "keyTypes": Array [],
+    "keyTypes": [],
     "name": "QueryRedelegationsRequest",
     "nested": null,
     "oneofs": undefined,
-    "options": Object {
+    "options": {
       "(gogoproto.equal)": false,
       "(gogoproto.goproto_getters)": false,
     },
     "type": "Type",
   },
-  "QueryRedelegationsResponse": Object {
+  "QueryRedelegationsResponse": {
     "comment": "QueryRedelegationsResponse is response type for the Query/Redelegations RPC
  method.",
-    "fields": Object {
-      "pagination": Object {
+    "fields": {
+      "pagination": {
         "comment": "pagination defines the pagination in the response.",
         "id": 2,
         "import": "cosmos/base/query/v1beta1/pagination.proto",
         "importedName": "cosmos.base.query.v1beta1.PageResponse",
-        "options": Object {
+        "options": {
           "(telescope:camel)": "pagination",
           "(telescope:name)": "pagination",
           "(telescope:orig)": "pagination",
         },
-        "parsedType": Object {
+        "parsedType": {
           "name": "PageResponse",
           "type": "Type",
         },
-        "scope": Array [
+        "scope": [
           "cosmos.base.query.v1beta1",
         ],
         "scopeType": "protoImport",
         "type": "cosmos.base.query.v1beta1.PageResponse",
       },
-      "redelegationResponses": Object {
+      "redelegationResponses": {
         "comment": null,
         "id": 1,
         "import": "cosmos/staking/v1beta1/staking.proto",
         "importedName": "RedelegationResponse",
-        "options": Object {
+        "options": {
           "(gogoproto.nullable)": false,
           "(telescope:camel)": "redelegationResponses",
           "(telescope:name)": "redelegationResponses",
           "(telescope:orig)": "redelegation_responses",
         },
-        "parsedType": Object {
+        "parsedType": {
           "name": "RedelegationResponse",
           "type": "Type",
         },
         "rule": "repeated",
-        "scope": Array [
-          Array [
+        "scope": [
+          [
             "cosmos.staking.v1beta1",
           ],
         ],
@@ -1607,45 +1607,45 @@ Object {
         "type": "RedelegationResponse",
       },
     },
-    "keyTypes": Array [],
+    "keyTypes": [],
     "name": "QueryRedelegationsResponse",
     "nested": null,
     "oneofs": undefined,
     "options": undefined,
     "type": "Type",
   },
-  "QueryUnbondingDelegationRequest": Object {
+  "QueryUnbondingDelegationRequest": {
     "comment": "QueryUnbondingDelegationRequest is request type for the
  Query/UnbondingDelegation RPC method.",
-    "fields": Object {
-      "delegatorAddr": Object {
+    "fields": {
+      "delegatorAddr": {
         "comment": "delegator_addr defines the delegator address to query for.",
         "id": 1,
         "isScalar": true,
-        "options": Object {
+        "options": {
           "(cosmos_proto.scalar)": "cosmos.AddressString",
           "(telescope:camel)": "delegatorAddr",
           "(telescope:name)": "delegatorAddr",
           "(telescope:orig)": "delegator_addr",
         },
-        "parsedType": Object {
+        "parsedType": {
           "name": "string",
           "type": "native",
         },
         "type": "string",
         "typeNum": 13,
       },
-      "validatorAddr": Object {
+      "validatorAddr": {
         "comment": "validator_addr defines the validator address to query for.",
         "id": 2,
         "isScalar": true,
-        "options": Object {
+        "options": {
           "(cosmos_proto.scalar)": "cosmos.AddressString",
           "(telescope:camel)": "validatorAddr",
           "(telescope:name)": "validatorAddr",
           "(telescope:orig)": "validator_addr",
         },
-        "parsedType": Object {
+        "parsedType": {
           "name": "string",
           "type": "native",
         },
@@ -1653,37 +1653,37 @@ Object {
         "typeNum": 13,
       },
     },
-    "keyTypes": Array [],
+    "keyTypes": [],
     "name": "QueryUnbondingDelegationRequest",
     "nested": null,
     "oneofs": undefined,
-    "options": Object {
+    "options": {
       "(gogoproto.equal)": false,
       "(gogoproto.goproto_getters)": false,
     },
     "type": "Type",
   },
-  "QueryUnbondingDelegationResponse": Object {
+  "QueryUnbondingDelegationResponse": {
     "comment": "QueryDelegationResponse is response type for the Query/UnbondingDelegation
  RPC method.",
-    "fields": Object {
-      "unbond": Object {
+    "fields": {
+      "unbond": {
         "comment": "unbond defines the unbonding information of a delegation.",
         "id": 1,
         "import": "cosmos/staking/v1beta1/staking.proto",
         "importedName": "UnbondingDelegation",
-        "options": Object {
+        "options": {
           "(gogoproto.nullable)": false,
           "(telescope:camel)": "unbond",
           "(telescope:name)": "unbond",
           "(telescope:orig)": "unbond",
         },
-        "parsedType": Object {
+        "parsedType": {
           "name": "UnbondingDelegation",
           "type": "Type",
         },
-        "scope": Array [
-          Array [
+        "scope": [
+          [
             "cosmos.staking.v1beta1",
           ],
         ],
@@ -1691,48 +1691,48 @@ Object {
         "type": "UnbondingDelegation",
       },
     },
-    "keyTypes": Array [],
+    "keyTypes": [],
     "name": "QueryUnbondingDelegationResponse",
     "nested": null,
     "oneofs": undefined,
     "options": undefined,
     "type": "Type",
   },
-  "QueryValidatorDelegationsRequest": Object {
+  "QueryValidatorDelegationsRequest": {
     "comment": "QueryValidatorDelegationsRequest is request type for the
  Query/ValidatorDelegations RPC method",
-    "fields": Object {
-      "pagination": Object {
+    "fields": {
+      "pagination": {
         "comment": "pagination defines an optional pagination for the request.",
         "id": 2,
         "import": "cosmos/base/query/v1beta1/pagination.proto",
         "importedName": "cosmos.base.query.v1beta1.PageRequest",
-        "options": Object {
+        "options": {
           "(telescope:camel)": "pagination",
           "(telescope:name)": "pagination",
           "(telescope:orig)": "pagination",
         },
-        "parsedType": Object {
+        "parsedType": {
           "name": "PageRequest",
           "type": "Type",
         },
-        "scope": Array [
+        "scope": [
           "cosmos.base.query.v1beta1",
         ],
         "scopeType": "protoImport",
         "type": "cosmos.base.query.v1beta1.PageRequest",
       },
-      "validatorAddr": Object {
+      "validatorAddr": {
         "comment": "validator_addr defines the validator address to query for.",
         "id": 1,
         "isScalar": true,
-        "options": Object {
+        "options": {
           "(cosmos_proto.scalar)": "cosmos.AddressString",
           "(telescope:camel)": "validatorAddr",
           "(telescope:name)": "validatorAddr",
           "(telescope:orig)": "validator_addr",
         },
-        "parsedType": Object {
+        "parsedType": {
           "name": "string",
           "type": "native",
         },
@@ -1740,84 +1740,84 @@ Object {
         "typeNum": 13,
       },
     },
-    "keyTypes": Array [],
+    "keyTypes": [],
     "name": "QueryValidatorDelegationsRequest",
     "nested": null,
     "oneofs": undefined,
     "options": undefined,
     "type": "Type",
   },
-  "QueryValidatorDelegationsResponse": Object {
+  "QueryValidatorDelegationsResponse": {
     "comment": "QueryValidatorDelegationsResponse is response type for the
  Query/ValidatorDelegations RPC method",
-    "fields": Object {
-      "delegationResponses": Object {
+    "fields": {
+      "delegationResponses": {
         "comment": null,
         "id": 1,
         "import": "cosmos/staking/v1beta1/staking.proto",
         "importedName": "DelegationResponse",
-        "options": Object {
+        "options": {
           "(gogoproto.castrepeated)": "DelegationResponses",
           "(gogoproto.nullable)": false,
           "(telescope:camel)": "delegationResponses",
           "(telescope:name)": "delegationResponses",
           "(telescope:orig)": "delegation_responses",
         },
-        "parsedType": Object {
+        "parsedType": {
           "name": "DelegationResponse",
           "type": "Type",
         },
         "rule": "repeated",
-        "scope": Array [
-          Array [
+        "scope": [
+          [
             "cosmos.staking.v1beta1",
           ],
         ],
         "scopeType": "import",
         "type": "DelegationResponse",
       },
-      "pagination": Object {
+      "pagination": {
         "comment": "pagination defines the pagination in the response.",
         "id": 2,
         "import": "cosmos/base/query/v1beta1/pagination.proto",
         "importedName": "cosmos.base.query.v1beta1.PageResponse",
-        "options": Object {
+        "options": {
           "(telescope:camel)": "pagination",
           "(telescope:name)": "pagination",
           "(telescope:orig)": "pagination",
         },
-        "parsedType": Object {
+        "parsedType": {
           "name": "PageResponse",
           "type": "Type",
         },
-        "scope": Array [
+        "scope": [
           "cosmos.base.query.v1beta1",
         ],
         "scopeType": "protoImport",
         "type": "cosmos.base.query.v1beta1.PageResponse",
       },
     },
-    "keyTypes": Array [],
+    "keyTypes": [],
     "name": "QueryValidatorDelegationsResponse",
     "nested": null,
     "oneofs": undefined,
     "options": undefined,
     "type": "Type",
   },
-  "QueryValidatorRequest": Object {
+  "QueryValidatorRequest": {
     "comment": "QueryValidatorRequest is response type for the Query/Validator RPC method",
-    "fields": Object {
-      "validatorAddr": Object {
+    "fields": {
+      "validatorAddr": {
         "comment": "validator_addr defines the validator address to query for.",
         "id": 1,
         "isScalar": true,
-        "options": Object {
+        "options": {
           "(cosmos_proto.scalar)": "cosmos.AddressString",
           "(telescope:camel)": "validatorAddr",
           "(telescope:name)": "validatorAddr",
           "(telescope:orig)": "validator_addr",
         },
-        "parsedType": Object {
+        "parsedType": {
           "name": "string",
           "type": "native",
         },
@@ -1825,33 +1825,33 @@ Object {
         "typeNum": 13,
       },
     },
-    "keyTypes": Array [],
+    "keyTypes": [],
     "name": "QueryValidatorRequest",
     "nested": null,
     "oneofs": undefined,
     "options": undefined,
     "type": "Type",
   },
-  "QueryValidatorResponse": Object {
+  "QueryValidatorResponse": {
     "comment": "QueryValidatorResponse is response type for the Query/Validator RPC method",
-    "fields": Object {
-      "validator": Object {
+    "fields": {
+      "validator": {
         "comment": "validator defines the the validator info.",
         "id": 1,
         "import": "cosmos/staking/v1beta1/staking.proto",
         "importedName": "Validator",
-        "options": Object {
+        "options": {
           "(gogoproto.nullable)": false,
           "(telescope:camel)": "validator",
           "(telescope:name)": "validator",
           "(telescope:orig)": "validator",
         },
-        "parsedType": Object {
+        "parsedType": {
           "name": "Validator",
           "type": "Type",
         },
-        "scope": Array [
-          Array [
+        "scope": [
+          [
             "cosmos.staking.v1beta1",
           ],
         ],
@@ -1859,48 +1859,48 @@ Object {
         "type": "Validator",
       },
     },
-    "keyTypes": Array [],
+    "keyTypes": [],
     "name": "QueryValidatorResponse",
     "nested": null,
     "oneofs": undefined,
     "options": undefined,
     "type": "Type",
   },
-  "QueryValidatorUnbondingDelegationsRequest": Object {
+  "QueryValidatorUnbondingDelegationsRequest": {
     "comment": "QueryValidatorUnbondingDelegationsRequest is required type for the
  Query/ValidatorUnbondingDelegations RPC method",
-    "fields": Object {
-      "pagination": Object {
+    "fields": {
+      "pagination": {
         "comment": "pagination defines an optional pagination for the request.",
         "id": 2,
         "import": "cosmos/base/query/v1beta1/pagination.proto",
         "importedName": "cosmos.base.query.v1beta1.PageRequest",
-        "options": Object {
+        "options": {
           "(telescope:camel)": "pagination",
           "(telescope:name)": "pagination",
           "(telescope:orig)": "pagination",
         },
-        "parsedType": Object {
+        "parsedType": {
           "name": "PageRequest",
           "type": "Type",
         },
-        "scope": Array [
+        "scope": [
           "cosmos.base.query.v1beta1",
         ],
         "scopeType": "protoImport",
         "type": "cosmos.base.query.v1beta1.PageRequest",
       },
-      "validatorAddr": Object {
+      "validatorAddr": {
         "comment": "validator_addr defines the validator address to query for.",
         "id": 1,
         "isScalar": true,
-        "options": Object {
+        "options": {
           "(cosmos_proto.scalar)": "cosmos.AddressString",
           "(telescope:camel)": "validatorAddr",
           "(telescope:name)": "validatorAddr",
           "(telescope:orig)": "validator_addr",
         },
-        "parsedType": Object {
+        "parsedType": {
           "name": "string",
           "type": "native",
         },
@@ -1908,55 +1908,55 @@ Object {
         "typeNum": 13,
       },
     },
-    "keyTypes": Array [],
+    "keyTypes": [],
     "name": "QueryValidatorUnbondingDelegationsRequest",
     "nested": null,
     "oneofs": undefined,
     "options": undefined,
     "type": "Type",
   },
-  "QueryValidatorUnbondingDelegationsResponse": Object {
+  "QueryValidatorUnbondingDelegationsResponse": {
     "comment": "QueryValidatorUnbondingDelegationsResponse is response type for the
  Query/ValidatorUnbondingDelegations RPC method.",
-    "fields": Object {
-      "pagination": Object {
+    "fields": {
+      "pagination": {
         "comment": "pagination defines the pagination in the response.",
         "id": 2,
         "import": "cosmos/base/query/v1beta1/pagination.proto",
         "importedName": "cosmos.base.query.v1beta1.PageResponse",
-        "options": Object {
+        "options": {
           "(telescope:camel)": "pagination",
           "(telescope:name)": "pagination",
           "(telescope:orig)": "pagination",
         },
-        "parsedType": Object {
+        "parsedType": {
           "name": "PageResponse",
           "type": "Type",
         },
-        "scope": Array [
+        "scope": [
           "cosmos.base.query.v1beta1",
         ],
         "scopeType": "protoImport",
         "type": "cosmos.base.query.v1beta1.PageResponse",
       },
-      "unbondingResponses": Object {
+      "unbondingResponses": {
         "comment": null,
         "id": 1,
         "import": "cosmos/staking/v1beta1/staking.proto",
         "importedName": "UnbondingDelegation",
-        "options": Object {
+        "options": {
           "(gogoproto.nullable)": false,
           "(telescope:camel)": "unbondingResponses",
           "(telescope:name)": "unbondingResponses",
           "(telescope:orig)": "unbonding_responses",
         },
-        "parsedType": Object {
+        "parsedType": {
           "name": "UnbondingDelegation",
           "type": "Type",
         },
         "rule": "repeated",
-        "scope": Array [
-          Array [
+        "scope": [
+          [
             "cosmos.staking.v1beta1",
           ],
         ],
@@ -1964,46 +1964,46 @@ Object {
         "type": "UnbondingDelegation",
       },
     },
-    "keyTypes": Array [],
+    "keyTypes": [],
     "name": "QueryValidatorUnbondingDelegationsResponse",
     "nested": null,
     "oneofs": undefined,
     "options": undefined,
     "type": "Type",
   },
-  "QueryValidatorsRequest": Object {
+  "QueryValidatorsRequest": {
     "comment": "QueryValidatorsRequest is request type for Query/Validators RPC method.",
-    "fields": Object {
-      "pagination": Object {
+    "fields": {
+      "pagination": {
         "comment": "pagination defines an optional pagination for the request.",
         "id": 2,
         "import": "cosmos/base/query/v1beta1/pagination.proto",
         "importedName": "cosmos.base.query.v1beta1.PageRequest",
-        "options": Object {
+        "options": {
           "(telescope:camel)": "pagination",
           "(telescope:name)": "pagination",
           "(telescope:orig)": "pagination",
         },
-        "parsedType": Object {
+        "parsedType": {
           "name": "PageRequest",
           "type": "Type",
         },
-        "scope": Array [
+        "scope": [
           "cosmos.base.query.v1beta1",
         ],
         "scopeType": "protoImport",
         "type": "cosmos.base.query.v1beta1.PageRequest",
       },
-      "status": Object {
+      "status": {
         "comment": "status enables to query for validators matching a given status.",
         "id": 1,
         "isScalar": true,
-        "options": Object {
+        "options": {
           "(telescope:camel)": "status",
           "(telescope:name)": "status",
           "(telescope:orig)": "status",
         },
-        "parsedType": Object {
+        "parsedType": {
           "name": "string",
           "type": "native",
         },
@@ -2011,54 +2011,54 @@ Object {
         "typeNum": 13,
       },
     },
-    "keyTypes": Array [],
+    "keyTypes": [],
     "name": "QueryValidatorsRequest",
     "nested": null,
     "oneofs": undefined,
     "options": undefined,
     "type": "Type",
   },
-  "QueryValidatorsResponse": Object {
+  "QueryValidatorsResponse": {
     "comment": "QueryValidatorsResponse is response type for the Query/Validators RPC method",
-    "fields": Object {
-      "pagination": Object {
+    "fields": {
+      "pagination": {
         "comment": "pagination defines the pagination in the response.",
         "id": 2,
         "import": "cosmos/base/query/v1beta1/pagination.proto",
         "importedName": "cosmos.base.query.v1beta1.PageResponse",
-        "options": Object {
+        "options": {
           "(telescope:camel)": "pagination",
           "(telescope:name)": "pagination",
           "(telescope:orig)": "pagination",
         },
-        "parsedType": Object {
+        "parsedType": {
           "name": "PageResponse",
           "type": "Type",
         },
-        "scope": Array [
+        "scope": [
           "cosmos.base.query.v1beta1",
         ],
         "scopeType": "protoImport",
         "type": "cosmos.base.query.v1beta1.PageResponse",
       },
-      "validators": Object {
+      "validators": {
         "comment": "validators contains all the queried validators.",
         "id": 1,
         "import": "cosmos/staking/v1beta1/staking.proto",
         "importedName": "Validator",
-        "options": Object {
+        "options": {
           "(gogoproto.nullable)": false,
           "(telescope:camel)": "validators",
           "(telescope:name)": "validators",
           "(telescope:orig)": "validators",
         },
-        "parsedType": Object {
+        "parsedType": {
           "name": "Validator",
           "type": "Type",
         },
         "rule": "repeated",
-        "scope": Array [
-          Array [
+        "scope": [
+          [
             "cosmos.staking.v1beta1",
           ],
         ],
@@ -2066,7 +2066,7 @@ Object {
         "type": "Validator",
       },
     },
-    "keyTypes": Array [],
+    "keyTypes": [],
     "name": "QueryValidatorsResponse",
     "nested": null,
     "oneofs": undefined,

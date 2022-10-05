@@ -30,7 +30,7 @@ exports[`cosmos/group/v1/query.proto 1`] = `
       params: {}
     };
 
-    if (typeof params?.pagination !== \\"undefined\\") {
+    if (typeof params?.pagination !== "undefined") {
       setPaginationParams(options, params.pagination);
     }
 
@@ -44,7 +44,7 @@ exports[`cosmos/group/v1/query.proto 1`] = `
       params: {}
     };
 
-    if (typeof params?.pagination !== \\"undefined\\") {
+    if (typeof params?.pagination !== "undefined") {
       setPaginationParams(options, params.pagination);
     }
 
@@ -58,7 +58,7 @@ exports[`cosmos/group/v1/query.proto 1`] = `
       params: {}
     };
 
-    if (typeof params?.pagination !== \\"undefined\\") {
+    if (typeof params?.pagination !== "undefined") {
       setPaginationParams(options, params.pagination);
     }
 
@@ -72,7 +72,7 @@ exports[`cosmos/group/v1/query.proto 1`] = `
       params: {}
     };
 
-    if (typeof params?.pagination !== \\"undefined\\") {
+    if (typeof params?.pagination !== "undefined") {
       setPaginationParams(options, params.pagination);
     }
 
@@ -92,7 +92,7 @@ exports[`cosmos/group/v1/query.proto 1`] = `
       params: {}
     };
 
-    if (typeof params?.pagination !== \\"undefined\\") {
+    if (typeof params?.pagination !== "undefined") {
       setPaginationParams(options, params.pagination);
     }
 
@@ -112,7 +112,7 @@ exports[`cosmos/group/v1/query.proto 1`] = `
       params: {}
     };
 
-    if (typeof params?.pagination !== \\"undefined\\") {
+    if (typeof params?.pagination !== "undefined") {
       setPaginationParams(options, params.pagination);
     }
 
@@ -126,7 +126,7 @@ exports[`cosmos/group/v1/query.proto 1`] = `
       params: {}
     };
 
-    if (typeof params?.pagination !== \\"undefined\\") {
+    if (typeof params?.pagination !== "undefined") {
       setPaginationParams(options, params.pagination);
     }
 
@@ -140,7 +140,7 @@ exports[`cosmos/group/v1/query.proto 1`] = `
       params: {}
     };
 
-    if (typeof params?.pagination !== \\"undefined\\") {
+    if (typeof params?.pagination !== "undefined") {
       setPaginationParams(options, params.pagination);
     }
 

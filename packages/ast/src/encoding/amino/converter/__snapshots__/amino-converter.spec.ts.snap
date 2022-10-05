@@ -2,8 +2,8 @@
 
 exports[`cosmos/staking/v1beta1/tx AminoConverter 1`] = `
 "export const AminoConverter = {
-  \\"/cosmos.staking.v1beta1.MsgCreateValidator\\": {
-    aminoType: \\"cosmos-sdk/MsgCreateValidator\\",
+  "/cosmos.staking.v1beta1.MsgCreateValidator": {
+    aminoType: "cosmos-sdk/MsgCreateValidator",
     toAmino: ({
       description,
       commission,
@@ -12,7 +12,7 @@ exports[`cosmos/staking/v1beta1/tx AminoConverter 1`] = `
       validatorAddress,
       pubkey,
       value
-    }: MsgCreateValidator): AminoMsgCreateValidator[\\"value\\"] => {
+    }: MsgCreateValidator): AminoMsgCreateValidator["value"] => {
       return {
         description: {
           moniker: description.moniker,
@@ -30,7 +30,7 @@ exports[`cosmos/staking/v1beta1/tx AminoConverter 1`] = `
         delegator_address: delegatorAddress,
         validator_address: validatorAddress,
         pubkey: {
-          typeUrl: \\"/cosmos.crypto.secp256k1.PubKey\\",
+          typeUrl: "/cosmos.crypto.secp256k1.PubKey",
           value: fromBase64(decodeBech32Pubkey(pubkey).value)
         },
         value: {
@@ -47,7 +47,7 @@ exports[`cosmos/staking/v1beta1/tx AminoConverter 1`] = `
       validator_address,
       pubkey,
       value
-    }: AminoMsgCreateValidator[\\"value\\"]): MsgCreateValidator => {
+    }: AminoMsgCreateValidator["value"]): MsgCreateValidator => {
       return {
         description: {
           moniker: description.moniker,
@@ -65,9 +65,9 @@ exports[`cosmos/staking/v1beta1/tx AminoConverter 1`] = `
         delegatorAddress: delegator_address,
         validatorAddress: validator_address,
         pubkey: encodeBech32Pubkey({
-          type: \\"tendermint/PubKeySecp256k1\\",
+          type: "tendermint/PubKeySecp256k1",
           value: toBase64(pubkey.value)
-        }, \\"cosmos\\"),
+        }, "cosmos"),
         value: {
           denom: value.denom,
           amount: value.amount
@@ -75,14 +75,14 @@ exports[`cosmos/staking/v1beta1/tx AminoConverter 1`] = `
       };
     }
   },
-  \\"/cosmos.staking.v1beta1.MsgEditValidator\\": {
-    aminoType: \\"cosmos-sdk/MsgEditValidator\\",
+  "/cosmos.staking.v1beta1.MsgEditValidator": {
+    aminoType: "cosmos-sdk/MsgEditValidator",
     toAmino: ({
       description,
       validatorAddress,
       commissionRate,
       minSelfDelegation
-    }: MsgEditValidator): AminoMsgEditValidator[\\"value\\"] => {
+    }: MsgEditValidator): AminoMsgEditValidator["value"] => {
       return {
         description: {
           moniker: description.moniker,
@@ -101,7 +101,7 @@ exports[`cosmos/staking/v1beta1/tx AminoConverter 1`] = `
       validator_address,
       commission_rate,
       min_self_delegation
-    }: AminoMsgEditValidator[\\"value\\"]): MsgEditValidator => {
+    }: AminoMsgEditValidator["value"]): MsgEditValidator => {
       return {
         description: {
           moniker: description.moniker,
@@ -116,13 +116,13 @@ exports[`cosmos/staking/v1beta1/tx AminoConverter 1`] = `
       };
     }
   },
-  \\"/cosmos.staking.v1beta1.MsgDelegate\\": {
-    aminoType: \\"cosmos-sdk/MsgDelegate\\",
+  "/cosmos.staking.v1beta1.MsgDelegate": {
+    aminoType: "cosmos-sdk/MsgDelegate",
     toAmino: ({
       delegatorAddress,
       validatorAddress,
       amount
-    }: MsgDelegate): AminoMsgDelegate[\\"value\\"] => {
+    }: MsgDelegate): AminoMsgDelegate["value"] => {
       return {
         delegator_address: delegatorAddress,
         validator_address: validatorAddress,
@@ -136,7 +136,7 @@ exports[`cosmos/staking/v1beta1/tx AminoConverter 1`] = `
       delegator_address,
       validator_address,
       amount
-    }: AminoMsgDelegate[\\"value\\"]): MsgDelegate => {
+    }: AminoMsgDelegate["value"]): MsgDelegate => {
       return {
         delegatorAddress: delegator_address,
         validatorAddress: validator_address,
@@ -147,14 +147,14 @@ exports[`cosmos/staking/v1beta1/tx AminoConverter 1`] = `
       };
     }
   },
-  \\"/cosmos.staking.v1beta1.MsgBeginRedelegate\\": {
-    aminoType: \\"cosmos-sdk/MsgBeginRedelegate\\",
+  "/cosmos.staking.v1beta1.MsgBeginRedelegate": {
+    aminoType: "cosmos-sdk/MsgBeginRedelegate",
     toAmino: ({
       delegatorAddress,
       validatorSrcAddress,
       validatorDstAddress,
       amount
-    }: MsgBeginRedelegate): AminoMsgBeginRedelegate[\\"value\\"] => {
+    }: MsgBeginRedelegate): AminoMsgBeginRedelegate["value"] => {
       return {
         delegator_address: delegatorAddress,
         validator_src_address: validatorSrcAddress,
@@ -170,7 +170,7 @@ exports[`cosmos/staking/v1beta1/tx AminoConverter 1`] = `
       validator_src_address,
       validator_dst_address,
       amount
-    }: AminoMsgBeginRedelegate[\\"value\\"]): MsgBeginRedelegate => {
+    }: AminoMsgBeginRedelegate["value"]): MsgBeginRedelegate => {
       return {
         delegatorAddress: delegator_address,
         validatorSrcAddress: validator_src_address,
@@ -182,13 +182,13 @@ exports[`cosmos/staking/v1beta1/tx AminoConverter 1`] = `
       };
     }
   },
-  \\"/cosmos.staking.v1beta1.MsgUndelegate\\": {
-    aminoType: \\"cosmos-sdk/MsgUndelegate\\",
+  "/cosmos.staking.v1beta1.MsgUndelegate": {
+    aminoType: "cosmos-sdk/MsgUndelegate",
     toAmino: ({
       delegatorAddress,
       validatorAddress,
       amount
-    }: MsgUndelegate): AminoMsgUndelegate[\\"value\\"] => {
+    }: MsgUndelegate): AminoMsgUndelegate["value"] => {
       return {
         delegator_address: delegatorAddress,
         validator_address: validatorAddress,
@@ -202,7 +202,7 @@ exports[`cosmos/staking/v1beta1/tx AminoConverter 1`] = `
       delegator_address,
       validator_address,
       amount
-    }: AminoMsgUndelegate[\\"value\\"]): MsgUndelegate => {
+    }: AminoMsgUndelegate["value"]): MsgUndelegate => {
       return {
         delegatorAddress: delegator_address,
         validatorAddress: validator_address,
@@ -218,14 +218,14 @@ exports[`cosmos/staking/v1beta1/tx AminoConverter 1`] = `
 
 exports[`evmos/fees/v1/tx AminoConverter 1`] = `
 "export const AminoConverter = {
-  \\"/evmos.fees.v1.MsgRegisterDevFeeInfo\\": {
-    aminoType: \\"/evmos.fees.v1.MsgRegisterDevFeeInfo\\",
+  "/evmos.fees.v1.MsgRegisterDevFeeInfo": {
+    aminoType: "/evmos.fees.v1.MsgRegisterDevFeeInfo",
     toAmino: ({
       contractAddress,
       deployerAddress,
       withdrawAddress,
       nonces
-    }: MsgRegisterDevFeeInfo): AminoMsgRegisterDevFeeInfo[\\"value\\"] => {
+    }: MsgRegisterDevFeeInfo): AminoMsgRegisterDevFeeInfo["value"] => {
       return {
         contract_address: contractAddress,
         deployer_address: deployerAddress,
@@ -238,7 +238,7 @@ exports[`evmos/fees/v1/tx AminoConverter 1`] = `
       deployer_address,
       withdraw_address,
       nonces
-    }: AminoMsgRegisterDevFeeInfo[\\"value\\"]): MsgRegisterDevFeeInfo => {
+    }: AminoMsgRegisterDevFeeInfo["value"]): MsgRegisterDevFeeInfo => {
       return {
         contractAddress: contract_address,
         deployerAddress: deployer_address,
@@ -247,12 +247,12 @@ exports[`evmos/fees/v1/tx AminoConverter 1`] = `
       };
     }
   },
-  \\"/evmos.fees.v1.MsgCancelDevFeeInfo\\": {
-    aminoType: \\"/evmos.fees.v1.MsgCancelDevFeeInfo\\",
+  "/evmos.fees.v1.MsgCancelDevFeeInfo": {
+    aminoType: "/evmos.fees.v1.MsgCancelDevFeeInfo",
     toAmino: ({
       contractAddress,
       deployerAddress
-    }: MsgCancelDevFeeInfo): AminoMsgCancelDevFeeInfo[\\"value\\"] => {
+    }: MsgCancelDevFeeInfo): AminoMsgCancelDevFeeInfo["value"] => {
       return {
         contract_address: contractAddress,
         deployer_address: deployerAddress
@@ -261,20 +261,20 @@ exports[`evmos/fees/v1/tx AminoConverter 1`] = `
     fromAmino: ({
       contract_address,
       deployer_address
-    }: AminoMsgCancelDevFeeInfo[\\"value\\"]): MsgCancelDevFeeInfo => {
+    }: AminoMsgCancelDevFeeInfo["value"]): MsgCancelDevFeeInfo => {
       return {
         contractAddress: contract_address,
         deployerAddress: deployer_address
       };
     }
   },
-  \\"/evmos.fees.v1.MsgUpdateDevFeeInfo\\": {
-    aminoType: \\"/evmos.fees.v1.MsgUpdateDevFeeInfo\\",
+  "/evmos.fees.v1.MsgUpdateDevFeeInfo": {
+    aminoType: "/evmos.fees.v1.MsgUpdateDevFeeInfo",
     toAmino: ({
       contractAddress,
       deployerAddress,
       withdrawAddress
-    }: MsgUpdateDevFeeInfo): AminoMsgUpdateDevFeeInfo[\\"value\\"] => {
+    }: MsgUpdateDevFeeInfo): AminoMsgUpdateDevFeeInfo["value"] => {
       return {
         contract_address: contractAddress,
         deployer_address: deployerAddress,
@@ -285,7 +285,7 @@ exports[`evmos/fees/v1/tx AminoConverter 1`] = `
       contract_address,
       deployer_address,
       withdraw_address
-    }: AminoMsgUpdateDevFeeInfo[\\"value\\"]): MsgUpdateDevFeeInfo => {
+    }: AminoMsgUpdateDevFeeInfo["value"]): MsgUpdateDevFeeInfo => {
       return {
         contractAddress: contract_address,
         deployerAddress: deployer_address,
@@ -298,14 +298,14 @@ exports[`evmos/fees/v1/tx AminoConverter 1`] = `
 
 exports[`osmosis/gamm/v1beta1/tx AminoConverter 1`] = `
 "export const AminoConverter = {
-  \\"/osmosis.gamm.v1beta1.MsgJoinPool\\": {
-    aminoType: \\"osmosis/gamm/join-pool\\",
+  "/osmosis.gamm.v1beta1.MsgJoinPool": {
+    aminoType: "osmosis/gamm/join-pool",
     toAmino: ({
       sender,
       poolId,
       shareOutAmount,
       tokenInMaxs
-    }: MsgJoinPool): AminoMsgJoinPool[\\"value\\"] => {
+    }: MsgJoinPool): AminoMsgJoinPool["value"] => {
       return {
         sender,
         poolId: poolId.toString(),
@@ -321,7 +321,7 @@ exports[`osmosis/gamm/v1beta1/tx AminoConverter 1`] = `
       poolId,
       shareOutAmount,
       tokenInMaxs
-    }: AminoMsgJoinPool[\\"value\\"]): MsgJoinPool => {
+    }: AminoMsgJoinPool["value"]): MsgJoinPool => {
       return {
         sender,
         poolId: Long.fromString(poolId),
@@ -333,14 +333,14 @@ exports[`osmosis/gamm/v1beta1/tx AminoConverter 1`] = `
       };
     }
   },
-  \\"/osmosis.gamm.v1beta1.MsgExitPool\\": {
-    aminoType: \\"osmosis/gamm/exit-pool\\",
+  "/osmosis.gamm.v1beta1.MsgExitPool": {
+    aminoType: "osmosis/gamm/exit-pool",
     toAmino: ({
       sender,
       poolId,
       shareInAmount,
       tokenOutMins
-    }: MsgExitPool): AminoMsgExitPool[\\"value\\"] => {
+    }: MsgExitPool): AminoMsgExitPool["value"] => {
       return {
         sender,
         poolId: poolId.toString(),
@@ -356,7 +356,7 @@ exports[`osmosis/gamm/v1beta1/tx AminoConverter 1`] = `
       poolId,
       shareInAmount,
       tokenOutMins
-    }: AminoMsgExitPool[\\"value\\"]): MsgExitPool => {
+    }: AminoMsgExitPool["value"]): MsgExitPool => {
       return {
         sender,
         poolId: Long.fromString(poolId),
@@ -368,14 +368,14 @@ exports[`osmosis/gamm/v1beta1/tx AminoConverter 1`] = `
       };
     }
   },
-  \\"/osmosis.gamm.v1beta1.MsgSwapExactAmountIn\\": {
-    aminoType: \\"osmosis/gamm/swap-exact-amount-in\\",
+  "/osmosis.gamm.v1beta1.MsgSwapExactAmountIn": {
+    aminoType: "osmosis/gamm/swap-exact-amount-in",
     toAmino: ({
       sender,
       routes,
       tokenIn,
       tokenOutMinAmount
-    }: MsgSwapExactAmountIn): AminoMsgSwapExactAmountIn[\\"value\\"] => {
+    }: MsgSwapExactAmountIn): AminoMsgSwapExactAmountIn["value"] => {
       return {
         sender,
         routes: routes.map(el0 => ({
@@ -394,7 +394,7 @@ exports[`osmosis/gamm/v1beta1/tx AminoConverter 1`] = `
       routes,
       tokenIn,
       tokenOutMinAmount
-    }: AminoMsgSwapExactAmountIn[\\"value\\"]): MsgSwapExactAmountIn => {
+    }: AminoMsgSwapExactAmountIn["value"]): MsgSwapExactAmountIn => {
       return {
         sender,
         routes: routes.map(el0 => ({
@@ -409,14 +409,14 @@ exports[`osmosis/gamm/v1beta1/tx AminoConverter 1`] = `
       };
     }
   },
-  \\"/osmosis.gamm.v1beta1.MsgSwapExactAmountOut\\": {
-    aminoType: \\"osmosis/gamm/swap-exact-amount-out\\",
+  "/osmosis.gamm.v1beta1.MsgSwapExactAmountOut": {
+    aminoType: "osmosis/gamm/swap-exact-amount-out",
     toAmino: ({
       sender,
       routes,
       tokenInMaxAmount,
       tokenOut
-    }: MsgSwapExactAmountOut): AminoMsgSwapExactAmountOut[\\"value\\"] => {
+    }: MsgSwapExactAmountOut): AminoMsgSwapExactAmountOut["value"] => {
       return {
         sender,
         routes: routes.map(el0 => ({
@@ -435,7 +435,7 @@ exports[`osmosis/gamm/v1beta1/tx AminoConverter 1`] = `
       routes,
       tokenInMaxAmount,
       tokenOut
-    }: AminoMsgSwapExactAmountOut[\\"value\\"]): MsgSwapExactAmountOut => {
+    }: AminoMsgSwapExactAmountOut["value"]): MsgSwapExactAmountOut => {
       return {
         sender,
         routes: routes.map(el0 => ({
@@ -450,14 +450,14 @@ exports[`osmosis/gamm/v1beta1/tx AminoConverter 1`] = `
       };
     }
   },
-  \\"/osmosis.gamm.v1beta1.MsgJoinSwapExternAmountIn\\": {
-    aminoType: \\"osmosis/gamm/join-swap-extern-amount-in\\",
+  "/osmosis.gamm.v1beta1.MsgJoinSwapExternAmountIn": {
+    aminoType: "osmosis/gamm/join-swap-extern-amount-in",
     toAmino: ({
       sender,
       poolId,
       tokenIn,
       shareOutMinAmount
-    }: MsgJoinSwapExternAmountIn): AminoMsgJoinSwapExternAmountIn[\\"value\\"] => {
+    }: MsgJoinSwapExternAmountIn): AminoMsgJoinSwapExternAmountIn["value"] => {
       return {
         sender,
         poolId: poolId.toString(),
@@ -473,7 +473,7 @@ exports[`osmosis/gamm/v1beta1/tx AminoConverter 1`] = `
       poolId,
       tokenIn,
       shareOutMinAmount
-    }: AminoMsgJoinSwapExternAmountIn[\\"value\\"]): MsgJoinSwapExternAmountIn => {
+    }: AminoMsgJoinSwapExternAmountIn["value"]): MsgJoinSwapExternAmountIn => {
       return {
         sender,
         poolId: Long.fromString(poolId),
@@ -485,15 +485,15 @@ exports[`osmosis/gamm/v1beta1/tx AminoConverter 1`] = `
       };
     }
   },
-  \\"/osmosis.gamm.v1beta1.MsgJoinSwapShareAmountOut\\": {
-    aminoType: \\"osmosis/gamm/join-swap-share-amount-out\\",
+  "/osmosis.gamm.v1beta1.MsgJoinSwapShareAmountOut": {
+    aminoType: "osmosis/gamm/join-swap-share-amount-out",
     toAmino: ({
       sender,
       poolId,
       tokenInDenom,
       shareOutAmount,
       tokenInMaxAmount
-    }: MsgJoinSwapShareAmountOut): AminoMsgJoinSwapShareAmountOut[\\"value\\"] => {
+    }: MsgJoinSwapShareAmountOut): AminoMsgJoinSwapShareAmountOut["value"] => {
       return {
         sender,
         poolId: poolId.toString(),
@@ -508,7 +508,7 @@ exports[`osmosis/gamm/v1beta1/tx AminoConverter 1`] = `
       tokenInDenom,
       shareOutAmount,
       tokenInMaxAmount
-    }: AminoMsgJoinSwapShareAmountOut[\\"value\\"]): MsgJoinSwapShareAmountOut => {
+    }: AminoMsgJoinSwapShareAmountOut["value"]): MsgJoinSwapShareAmountOut => {
       return {
         sender,
         poolId: Long.fromString(poolId),
@@ -518,15 +518,15 @@ exports[`osmosis/gamm/v1beta1/tx AminoConverter 1`] = `
       };
     }
   },
-  \\"/osmosis.gamm.v1beta1.MsgExitSwapShareAmountIn\\": {
-    aminoType: \\"osmosis/gamm/exit-swap-share-amount-in\\",
+  "/osmosis.gamm.v1beta1.MsgExitSwapShareAmountIn": {
+    aminoType: "osmosis/gamm/exit-swap-share-amount-in",
     toAmino: ({
       sender,
       poolId,
       tokenOutDenom,
       shareInAmount,
       tokenOutMinAmount
-    }: MsgExitSwapShareAmountIn): AminoMsgExitSwapShareAmountIn[\\"value\\"] => {
+    }: MsgExitSwapShareAmountIn): AminoMsgExitSwapShareAmountIn["value"] => {
       return {
         sender,
         poolId: poolId.toString(),
@@ -541,7 +541,7 @@ exports[`osmosis/gamm/v1beta1/tx AminoConverter 1`] = `
       tokenOutDenom,
       shareInAmount,
       tokenOutMinAmount
-    }: AminoMsgExitSwapShareAmountIn[\\"value\\"]): MsgExitSwapShareAmountIn => {
+    }: AminoMsgExitSwapShareAmountIn["value"]): MsgExitSwapShareAmountIn => {
       return {
         sender,
         poolId: Long.fromString(poolId),
@@ -551,14 +551,14 @@ exports[`osmosis/gamm/v1beta1/tx AminoConverter 1`] = `
       };
     }
   },
-  \\"/osmosis.gamm.v1beta1.MsgExitSwapExternAmountOut\\": {
-    aminoType: \\"osmosis/gamm/exit-swap-extern-amount-out\\",
+  "/osmosis.gamm.v1beta1.MsgExitSwapExternAmountOut": {
+    aminoType: "osmosis/gamm/exit-swap-extern-amount-out",
     toAmino: ({
       sender,
       poolId,
       tokenOut,
       shareInMaxAmount
-    }: MsgExitSwapExternAmountOut): AminoMsgExitSwapExternAmountOut[\\"value\\"] => {
+    }: MsgExitSwapExternAmountOut): AminoMsgExitSwapExternAmountOut["value"] => {
       return {
         sender,
         poolId: poolId.toString(),
@@ -574,7 +574,7 @@ exports[`osmosis/gamm/v1beta1/tx AminoConverter 1`] = `
       poolId,
       tokenOut,
       shareInMaxAmount
-    }: AminoMsgExitSwapExternAmountOut[\\"value\\"]): MsgExitSwapExternAmountOut => {
+    }: AminoMsgExitSwapExternAmountOut["value"]): MsgExitSwapExternAmountOut => {
       return {
         sender,
         poolId: Long.fromString(poolId),

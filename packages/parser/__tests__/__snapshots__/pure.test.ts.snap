@@ -1,86 +1,86 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`pure proto 1`] = `
-Object {
-  "importNames": Object {},
+{
+  "importNames": {},
   "imports": undefined,
   "package": "cosmology.finance",
-  "parsedExports": Object {
+  "parsedExports": {
     "ExistenceProof": true,
     "LeafOp": true,
     "NonExistenceProof": true,
   },
-  "parsedImports": Object {},
-  "root": Object {
-    "nested": Object {
-      "cosmology": Object {
-        "nested": Object {
-          "finance": Object {
-            "nested": Object {
-              "ExistenceProof": Object {
+  "parsedImports": {},
+  "root": {
+    "nested": {
+      "cosmology": {
+        "nested": {
+          "finance": {
+            "nested": {
+              "ExistenceProof": {
                 "comment": null,
-                "fields": Object {
-                  "key": Object {
+                "fields": {
+                  "key": {
                     "comment": null,
                     "id": 1,
                     "isScalar": true,
-                    "options": Object {
+                    "options": {
                       "(telescope:camel)": "key",
                       "(telescope:name)": "key",
                       "(telescope:orig)": "key",
                     },
-                    "parsedType": Object {
+                    "parsedType": {
                       "name": "bytes",
                       "type": "native",
                     },
                     "type": "bytes",
                     "typeNum": 14,
                   },
-                  "leaf": Object {
+                  "leaf": {
                     "comment": null,
                     "id": 3,
-                    "options": Object {
+                    "options": {
                       "(telescope:camel)": "leaf",
                       "(telescope:name)": "leaf",
                       "(telescope:orig)": "leaf",
                     },
-                    "parsedType": Object {
+                    "parsedType": {
                       "name": "LeafOp",
                       "type": "Type",
                     },
-                    "scope": Array [
+                    "scope": [
                       "cosmology.finance",
                     ],
                     "type": "LeafOp",
                   },
-                  "path": Object {
+                  "path": {
                     "comment": null,
                     "id": 4,
-                    "options": Object {
+                    "options": {
                       "(telescope:camel)": "path",
                       "(telescope:name)": "path",
                       "(telescope:orig)": "path",
                     },
-                    "parsedType": Object {
+                    "parsedType": {
                       "name": "LeafOp",
                       "type": "Type",
                     },
                     "rule": "repeated",
-                    "scope": Array [
+                    "scope": [
                       "cosmology.finance",
                     ],
                     "type": "LeafOp",
                   },
-                  "value": Object {
+                  "value": {
                     "comment": null,
                     "id": 2,
                     "isScalar": true,
-                    "options": Object {
+                    "options": {
                       "(telescope:camel)": "value",
                       "(telescope:name)": "value",
                       "(telescope:orig)": "value",
                     },
-                    "parsedType": Object {
+                    "parsedType": {
                       "name": "bytes",
                       "type": "native",
                     },
@@ -88,16 +88,16 @@ Object {
                     "typeNum": 14,
                   },
                 },
-                "keyTypes": Array [],
+                "keyTypes": [],
                 "name": "ExistenceProof",
                 "nested": null,
                 "oneofs": undefined,
                 "options": undefined,
                 "type": "Type",
               },
-              "FancyEnumType": Object {
+              "FancyEnumType": {
                 "comment": null,
-                "comments": Object {
+                "comments": {
                   "BITCOIN": null,
                   "KECCAK": null,
                   "NO_HASH": null,
@@ -107,7 +107,7 @@ Object {
                 },
                 "name": "FancyEnumType",
                 "type": "Enum",
-                "values": Object {
+                "values": {
                   "BITCOIN": 5,
                   "KECCAK": 3,
                   "NO_HASH": 0,
@@ -116,139 +116,139 @@ Object {
                   "SHA512": 2,
                 },
               },
-              "LeafOp": Object {
+              "LeafOp": {
                 "comment": null,
-                "fields": Object {
-                  "hash": Object {
+                "fields": {
+                  "hash": {
                     "comment": null,
                     "id": 1,
-                    "options": Object {
+                    "options": {
                       "(telescope:camel)": "hash",
                       "(telescope:name)": "hash",
                       "(telescope:orig)": "hash",
                     },
-                    "parsedType": Object {
+                    "parsedType": {
                       "name": "FancyEnumType",
                       "type": "Enum",
                     },
-                    "scope": Array [
+                    "scope": [
                       "cosmology.finance",
                     ],
                     "type": "FancyEnumType",
                   },
-                  "prefix": Object {
+                  "prefix": {
                     "comment": null,
                     "id": 5,
                     "isScalar": true,
-                    "options": Object {
+                    "options": {
                       "(telescope:camel)": "prefix",
                       "(telescope:name)": "prefix",
                       "(telescope:orig)": "prefix",
                     },
-                    "parsedType": Object {
+                    "parsedType": {
                       "name": "bytes",
                       "type": "native",
                     },
                     "type": "bytes",
                     "typeNum": 14,
                   },
-                  "prehashKey": Object {
+                  "prehashKey": {
                     "comment": null,
                     "id": 2,
-                    "options": Object {
+                    "options": {
                       "(telescope:camel)": "prehashKey",
                       "(telescope:name)": "prehashKey",
                       "(telescope:orig)": "prehash_key",
                     },
-                    "parsedType": Object {
+                    "parsedType": {
                       "name": "FancyEnumType",
                       "type": "Enum",
                     },
-                    "scope": Array [
+                    "scope": [
                       "cosmology.finance",
                     ],
                     "type": "FancyEnumType",
                   },
-                  "prehashValue": Object {
+                  "prehashValue": {
                     "comment": null,
                     "id": 3,
-                    "options": Object {
+                    "options": {
                       "(telescope:camel)": "prehashValue",
                       "(telescope:name)": "prehashValue",
                       "(telescope:orig)": "prehash_value",
                     },
-                    "parsedType": Object {
+                    "parsedType": {
                       "name": "FancyEnumType",
                       "type": "Enum",
                     },
-                    "scope": Array [
+                    "scope": [
                       "cosmology.finance",
                     ],
                     "type": "FancyEnumType",
                   },
                 },
-                "keyTypes": Array [],
+                "keyTypes": [],
                 "name": "LeafOp",
                 "nested": null,
                 "oneofs": undefined,
                 "options": undefined,
                 "type": "Type",
               },
-              "NonExistenceProof": Object {
+              "NonExistenceProof": {
                 "comment": null,
-                "fields": Object {
-                  "key": Object {
+                "fields": {
+                  "key": {
                     "comment": null,
                     "id": 1,
                     "isScalar": true,
-                    "options": Object {
+                    "options": {
                       "(telescope:camel)": "key",
                       "(telescope:name)": "key",
                       "(telescope:orig)": "key",
                     },
-                    "parsedType": Object {
+                    "parsedType": {
                       "name": "bytes",
                       "type": "native",
                     },
                     "type": "bytes",
                     "typeNum": 14,
                   },
-                  "left": Object {
+                  "left": {
                     "comment": null,
                     "id": 2,
-                    "options": Object {
+                    "options": {
                       "(telescope:camel)": "left",
                       "(telescope:name)": "left",
                       "(telescope:orig)": "left",
                     },
-                    "parsedType": Object {
+                    "parsedType": {
                       "name": "ExistenceProof",
                       "type": "Type",
                     },
-                    "scope": Array [
+                    "scope": [
                       "cosmology.finance",
                     ],
                     "type": "ExistenceProof",
                   },
-                  "right": Object {
+                  "right": {
                     "comment": null,
                     "id": 3,
-                    "options": Object {
+                    "options": {
                       "(telescope:camel)": "right",
                       "(telescope:name)": "right",
                       "(telescope:orig)": "right",
                     },
-                    "parsedType": Object {
+                    "parsedType": {
                       "name": "ExistenceProof",
                       "type": "Type",
                     },
-                    "scope": Array [
+                    "scope": [
                       "cosmology.finance",
                     ],
                     "type": "ExistenceProof",
                   },
                 },
-                "keyTypes": Array [],
+                "keyTypes": [],
                 "name": "NonExistenceProof",
                 "nested": null,
                 "oneofs": undefined,

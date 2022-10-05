@@ -18,11 +18,11 @@ exports[`createProtoEnumFromJSON 1`] = `
 "export function nullValueFromJSON(object: any): NullValue {
   switch (object) {
     case 0:
-    case \\"NULL_VALUE\\":
+    case "NULL_VALUE":
       return NullValue.NULL_VALUE;
 
     case -1:
-    case \\"UNRECOGNIZED\\":
+    case "UNRECOGNIZED":
     default:
       return NullValue.UNRECOGNIZED;
   }
@@ -33,11 +33,11 @@ exports[`createProtoEnumToJSON 1`] = `
 "export function nullValueToJSON(object: NullValue): string {
   switch (object) {
     case NullValue.NULL_VALUE:
-      return \\"NULL_VALUE\\";
+      return "NULL_VALUE";
 
     case NullValue.UNRECOGNIZED:
     default:
-      return \\"UNRECOGNIZED\\";
+      return "UNRECOGNIZED";
   }
 }"
 `;

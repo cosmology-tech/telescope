@@ -1,11 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Coin 1`] = `
-Object {
-  "fields": Object {
-    "amount": Object {
+{
+  "fields": {
+    "amount": {
       "id": 2,
-      "options": Object {
+      "options": {
         "(cosmos_proto.scalar)": "cosmos.Int",
         "(gogoproto.customtype)": "Int",
         "(gogoproto.nullable)": false,
@@ -15,9 +15,9 @@ Object {
       },
       "type": "string",
     },
-    "denom": Object {
+    "denom": {
       "id": 1,
-      "options": Object {
+      "options": {
         "(telescope:camel)": "denom",
         "(telescope:name)": "denom",
         "(telescope:orig)": "denom",
@@ -25,18 +25,18 @@ Object {
       "type": "string",
     },
   },
-  "options": Object {
+  "options": {
     "(gogoproto.equal)": true,
   },
 }
 `;
 
 exports[`DecCoin 1`] = `
-Object {
-  "fields": Object {
-    "amount": Object {
+{
+  "fields": {
+    "amount": {
       "id": 2,
-      "options": Object {
+      "options": {
         "(cosmos_proto.scalar)": "cosmos.Dec",
         "(gogoproto.customtype)": "Dec",
         "(gogoproto.nullable)": false,
@@ -46,9 +46,9 @@ Object {
       },
       "type": "string",
     },
-    "denom": Object {
+    "denom": {
       "id": 1,
-      "options": Object {
+      "options": {
         "(telescope:camel)": "denom",
         "(telescope:name)": "denom",
         "(telescope:orig)": "denom",
@@ -56,18 +56,18 @@ Object {
       "type": "string",
     },
   },
-  "options": Object {
+  "options": {
     "(gogoproto.equal)": true,
   },
 }
 `;
 
 exports[`DecProto 1`] = `
-Object {
-  "fields": Object {
-    "dec": Object {
+{
+  "fields": {
+    "dec": {
       "id": 1,
-      "options": Object {
+      "options": {
         "(cosmos_proto.scalar)": "cosmos.Dec",
         "(gogoproto.customtype)": "Dec",
         "(gogoproto.nullable)": false,
@@ -82,11 +82,11 @@ Object {
 `;
 
 exports[`IntProto 1`] = `
-Object {
-  "fields": Object {
-    "int": Object {
+{
+  "fields": {
+    "int": {
       "id": 1,
-      "options": Object {
+      "options": {
         "(cosmos_proto.scalar)": "cosmos.Int",
         "(gogoproto.customtype)": "Int",
         "(gogoproto.nullable)": false,
@@ -101,11 +101,11 @@ Object {
 `;
 
 exports[`MsgExitPool 1`] = `
-Object {
-  "fields": Object {
-    "poolId": Object {
+{
+  "fields": {
+    "poolId": {
       "id": 2,
-      "options": Object {
+      "options": {
         "(gogoproto.moretags)": "yaml:pool_id",
         "(telescope:camel)": "poolId",
         "(telescope:name)": "poolId",
@@ -113,9 +113,9 @@ Object {
       },
       "type": "uint64",
     },
-    "sender": Object {
+    "sender": {
       "id": 1,
-      "options": Object {
+      "options": {
         "(gogoproto.moretags)": "yaml:sender",
         "(telescope:camel)": "sender",
         "(telescope:name)": "sender",
@@ -123,9 +123,9 @@ Object {
       },
       "type": "string",
     },
-    "shareInAmount": Object {
+    "shareInAmount": {
       "id": 3,
-      "options": Object {
+      "options": {
         "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Int",
         "(gogoproto.moretags)": "yaml:share_in_amount",
         "(gogoproto.nullable)": false,
@@ -135,9 +135,9 @@ Object {
       },
       "type": "string",
     },
-    "tokenOutMins": Object {
+    "tokenOutMins": {
       "id": 4,
-      "options": Object {
+      "options": {
         "(gogoproto.moretags)": "yaml:token_out_min_amounts",
         "(gogoproto.nullable)": false,
         "(telescope:camel)": "tokenOutMins",

@@ -2,14 +2,14 @@
 
 exports[`cosmwasm/wasm/v1/tx MsgExecuteContract 1`] = `
 "export const AminoConverter = {
-  \\"/cosmwasm.wasm.v1.MsgExecuteContract\\": {
-    aminoType: \\"wasm/MsgExecuteContract\\",
+  "/cosmwasm.wasm.v1.MsgExecuteContract": {
+    aminoType: "wasm/MsgExecuteContract",
     toAmino: ({
       sender,
       contract,
       msg,
       funds
-    }: MsgExecuteContract): AminoMsgExecuteContract[\\"value\\"] => {
+    }: MsgExecuteContract): AminoMsgExecuteContract["value"] => {
       return {
         sender,
         contract,
@@ -25,7 +25,7 @@ exports[`cosmwasm/wasm/v1/tx MsgExecuteContract 1`] = `
       contract,
       msg,
       funds
-    }: AminoMsgExecuteContract[\\"value\\"]): MsgExecuteContract => {
+    }: AminoMsgExecuteContract["value"]): MsgExecuteContract => {
       return {
         sender,
         contract,
@@ -42,8 +42,8 @@ exports[`cosmwasm/wasm/v1/tx MsgExecuteContract 1`] = `
 
 exports[`cosmwasm/wasm/v1/tx MsgInstantiateContract 1`] = `
 "export const AminoConverter = {
-  \\"/cosmwasm.wasm.v1.MsgInstantiateContract\\": {
-    aminoType: \\"wasm/MsgInstantiateContract\\",
+  "/cosmwasm.wasm.v1.MsgInstantiateContract": {
+    aminoType: "wasm/MsgInstantiateContract",
     toAmino: ({
       sender,
       admin,
@@ -51,7 +51,7 @@ exports[`cosmwasm/wasm/v1/tx MsgInstantiateContract 1`] = `
       label,
       msg,
       funds
-    }: MsgInstantiateContract): AminoMsgInstantiateContract[\\"value\\"] => {
+    }: MsgInstantiateContract): AminoMsgInstantiateContract["value"] => {
       return {
         sender,
         admin,
@@ -71,7 +71,7 @@ exports[`cosmwasm/wasm/v1/tx MsgInstantiateContract 1`] = `
       label,
       msg,
       funds
-    }: AminoMsgInstantiateContract[\\"value\\"]): MsgInstantiateContract => {
+    }: AminoMsgInstantiateContract["value"]): MsgInstantiateContract => {
       return {
         sender,
         admin,
@@ -90,14 +90,14 @@ exports[`cosmwasm/wasm/v1/tx MsgInstantiateContract 1`] = `
 
 exports[`cosmwasm/wasm/v1/tx MsgMigrateContract 1`] = `
 "export const AminoConverter = {
-  \\"/cosmwasm.wasm.v1.MsgMigrateContract\\": {
-    aminoType: \\"wasm/MsgMigrateContract\\",
+  "/cosmwasm.wasm.v1.MsgMigrateContract": {
+    aminoType: "wasm/MsgMigrateContract",
     toAmino: ({
       sender,
       contract,
       codeId,
       msg
-    }: MsgMigrateContract): AminoMsgMigrateContract[\\"value\\"] => {
+    }: MsgMigrateContract): AminoMsgMigrateContract["value"] => {
       return {
         sender,
         contract,
@@ -110,7 +110,7 @@ exports[`cosmwasm/wasm/v1/tx MsgMigrateContract 1`] = `
       contract,
       code_id,
       msg
-    }: AminoMsgMigrateContract[\\"value\\"]): MsgMigrateContract => {
+    }: AminoMsgMigrateContract["value"]): MsgMigrateContract => {
       return {
         sender,
         contract,
@@ -124,13 +124,13 @@ exports[`cosmwasm/wasm/v1/tx MsgMigrateContract 1`] = `
 
 exports[`cosmwasm/wasm/v1/tx MsgStoreCode 1`] = `
 "export const AminoConverter = {
-  \\"/cosmwasm.wasm.v1.MsgStoreCode\\": {
-    aminoType: \\"wasm/MsgStoreCode\\",
+  "/cosmwasm.wasm.v1.MsgStoreCode": {
+    aminoType: "wasm/MsgStoreCode",
     toAmino: ({
       sender,
       wasmByteCode,
       instantiatePermission
-    }: MsgStoreCode): AminoMsgStoreCode[\\"value\\"] => {
+    }: MsgStoreCode): AminoMsgStoreCode["value"] => {
       return {
         sender,
         wasm_byte_code: toBase64(wasmByteCode),
@@ -144,7 +144,7 @@ exports[`cosmwasm/wasm/v1/tx MsgStoreCode 1`] = `
       sender,
       wasm_byte_code,
       instantiate_permission
-    }: AminoMsgStoreCode[\\"value\\"]): MsgStoreCode => {
+    }: AminoMsgStoreCode["value"]): MsgStoreCode => {
       return {
         sender,
         wasmByteCode: fromBase64(wasm_byte_code),

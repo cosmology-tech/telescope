@@ -2,12 +2,12 @@
 
 exports[`cosmology/example/msg AminoConverter 1`] = `
 "export const AminoConverter = {
-  \\"/cosmology.finance.MsgDoFunThing\\": {
-    aminoType: \\"/cosmology.finance.MsgDoFunThing\\",
+  "/cosmology.finance.MsgDoFunThing": {
+    aminoType: "/cosmology.finance.MsgDoFunThing",
     toAmino: ({
       address,
       awesome
-    }: MsgDoFunThing): AminoMsgDoFunThing[\\"value\\"] => {
+    }: MsgDoFunThing): AminoMsgDoFunThing["value"] => {
       return {
         address,
         awesome: {
@@ -19,7 +19,7 @@ exports[`cosmology/example/msg AminoConverter 1`] = `
     fromAmino: ({
       address,
       awesome
-    }: AminoMsgDoFunThing[\\"value\\"]): MsgDoFunThing => {
+    }: AminoMsgDoFunThing["value"]): MsgDoFunThing => {
       return {
         address,
         awesome: {

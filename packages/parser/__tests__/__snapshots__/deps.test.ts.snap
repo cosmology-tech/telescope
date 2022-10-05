@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`all 1`] = `
-Array [
+[
   "google/protobuf/descriptor.proto",
   "gogoproto/gogo.proto",
   "akash/base/v1beta1/attribute.proto",
@@ -346,7 +346,7 @@ Array [
 `;
 
 exports[`cosmos/gov/v1beta1/gov.proto 1`] = `
-Array [
+[
   "google/protobuf/descriptor.proto",
   "gogoproto/gogo.proto",
   "cosmos_proto/cosmos.proto",
@@ -359,7 +359,7 @@ Array [
 `;
 
 exports[`cosmos/tx/signing/v1beta1/signing.proto 1`] = `
-Array [
+[
   "google/protobuf/descriptor.proto",
   "gogoproto/gogo.proto",
   "cosmos/crypto/multisig/v1beta1/multisig.proto",
@@ -369,7 +369,7 @@ Array [
 `;
 
 exports[`osmosis/gamm/v1beta1/tx.proto 1`] = `
-Array [
+[
   "google/protobuf/descriptor.proto",
   "gogoproto/gogo.proto",
   "cosmos_proto/cosmos.proto",

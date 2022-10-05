@@ -11,7 +11,7 @@ exports[`osmosis/lockup/tx duration 1`] = `
 exports[`osmosis/lockup/tx duration 2`] = `
 "export const MsgLockTokens = {
   encode(message: MsgLockTokens, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.owner !== \\"\\") {
+    if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
     }
 
@@ -58,7 +58,7 @@ exports[`osmosis/lockup/tx duration 2`] = `
 
   fromJSON(object: any): MsgLockTokens {
     return {
-      owner: isSet(object.owner) ? String(object.owner) : \\"\\",
+      owner: isSet(object.owner) ? String(object.owner) : "",
       duration: isSet(object.duration) ? Duration.fromJSON(object.duration) : undefined,
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromJSON(e)) : []
     };
@@ -80,7 +80,7 @@ exports[`osmosis/lockup/tx duration 2`] = `
 
   fromPartial(object: DeepPartial<MsgLockTokens>): MsgLockTokens {
     const message = createBaseMsgLockTokens();
-    message.owner = object.owner ?? \\"\\";
+    message.owner = object.owner ?? "";
     message.duration = object.duration !== undefined && object.duration !== null ? Duration.fromPartial(object.duration) : undefined;
     message.coins = object.coins?.map(e => Coin.fromPartial(e)) || [];
     return message;
@@ -113,7 +113,7 @@ exports[`osmosis/lockup/tx duration 2`] = `
 
 exports[`osmosis/lockup/tx duration 3`] = `
 "export interface AminoMsgLockTokens extends AminoMsg {
-  type: \\"osmosis/lockup/lock-tokens\\";
+  type: "osmosis/lockup/lock-tokens";
   value: {
     owner: string;
     duration: {
@@ -130,13 +130,13 @@ exports[`osmosis/lockup/tx duration 3`] = `
 
 exports[`osmosis/lockup/tx duration 4`] = `
 "export const AminoConverter = {
-  \\"/osmosis.lockup.MsgLockTokens\\": {
-    aminoType: \\"osmosis/lockup/lock-tokens\\",
+  "/osmosis.lockup.MsgLockTokens": {
+    aminoType: "osmosis/lockup/lock-tokens",
     toAmino: ({
       owner,
       duration,
       coins
-    }: MsgLockTokens): AminoMsgLockTokens[\\"value\\"] => {
+    }: MsgLockTokens): AminoMsgLockTokens["value"] => {
       return {
         owner,
         duration: (duration * 1_000_000_000).toString(),
@@ -150,7 +150,7 @@ exports[`osmosis/lockup/tx duration 4`] = `
       owner,
       duration,
       coins
-    }: AminoMsgLockTokens[\\"value\\"]): MsgLockTokens => {
+    }: AminoMsgLockTokens["value"]): MsgLockTokens => {
       return {
         owner,
         duration: {
@@ -178,7 +178,7 @@ exports[`osmosis/lockup/tx string 1`] = `
 exports[`osmosis/lockup/tx string 2`] = `
 "export const MsgLockTokens = {
   encode(message: MsgLockTokens, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.owner !== \\"\\") {
+    if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
     }
 
@@ -225,7 +225,7 @@ exports[`osmosis/lockup/tx string 2`] = `
 
   fromJSON(object: any): MsgLockTokens {
     return {
-      owner: isSet(object.owner) ? String(object.owner) : \\"\\",
+      owner: isSet(object.owner) ? String(object.owner) : "",
       duration: isSet(object.duration) ? String(object.duration) : undefined,
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromJSON(e)) : []
     };
@@ -247,7 +247,7 @@ exports[`osmosis/lockup/tx string 2`] = `
 
   fromPartial(object: DeepPartial<MsgLockTokens>): MsgLockTokens {
     const message = createBaseMsgLockTokens();
-    message.owner = object.owner ?? \\"\\";
+    message.owner = object.owner ?? "";
     message.duration = object.duration ?? undefined;
     message.coins = object.coins?.map(e => Coin.fromPartial(e)) || [];
     return message;
@@ -280,7 +280,7 @@ exports[`osmosis/lockup/tx string 2`] = `
 
 exports[`osmosis/lockup/tx string 3`] = `
 "export interface AminoMsgLockTokens extends AminoMsg {
-  type: \\"osmosis/lockup/lock-tokens\\";
+  type: "osmosis/lockup/lock-tokens";
   value: {
     owner: string;
     duration: string;
@@ -294,13 +294,13 @@ exports[`osmosis/lockup/tx string 3`] = `
 
 exports[`osmosis/lockup/tx string 4`] = `
 "export const AminoConverter = {
-  \\"/osmosis.lockup.MsgLockTokens\\": {
-    aminoType: \\"osmosis/lockup/lock-tokens\\",
+  "/osmosis.lockup.MsgLockTokens": {
+    aminoType: "osmosis/lockup/lock-tokens",
     toAmino: ({
       owner,
       duration,
       coins
-    }: MsgLockTokens): AminoMsgLockTokens[\\"value\\"] => {
+    }: MsgLockTokens): AminoMsgLockTokens["value"] => {
       return {
         owner,
         duration: (duration * 1_000_000_000).toString(),
@@ -314,7 +314,7 @@ exports[`osmosis/lockup/tx string 4`] = `
       owner,
       duration,
       coins
-    }: AminoMsgLockTokens[\\"value\\"]): MsgLockTokens => {
+    }: AminoMsgLockTokens["value"]): MsgLockTokens => {
       return {
         owner,
         duration: {

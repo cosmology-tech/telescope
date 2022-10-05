@@ -25,7 +25,7 @@ exports[`createStargateClient 1`] = `
 `;
 
 exports[`createStargateClient 2`] = `
-Object {
+{
   "AminoTypes": true,
   "GeneratedType": true,
   "OfflineSigner": true,
@@ -72,7 +72,7 @@ exports[`createStargateClient w/o defaults 2`] = `
 `;
 
 exports[`createStargateClient w/o defaults 3`] = `
-Object {
+{
   "AminoTypes": true,
   "GeneratedType": true,
   "OfflineSigner": true,
@@ -89,7 +89,7 @@ exports[`createStargateClientAminoRegistry 1`] = `
 };"
 `;
 
-exports[`createStargateClientAminoRegistry 2`] = `Object {}`;
+exports[`createStargateClientAminoRegistry 2`] = `{}`;
 
 exports[`createStargateClientOptions 1`] = `
 "export const getSigningOsmosisClientOptions = ({
@@ -111,7 +111,7 @@ exports[`createStargateClientOptions 1`] = `
 `;
 
 exports[`createStargateClientOptions 2`] = `
-Object {
+{
   "AminoTypes": true,
   "GeneratedType": true,
   "ReadonlyArray": true,
@@ -124,7 +124,7 @@ Object {
 exports[`createStargateClientProtoRegistry 1`] = `"export const protoTypeRegistry: ReadonlyArray<[string, GeneratedType]> = [...somepackage1.gamm.v1beta1.registry, ...somepackage1.superfluid.v1beta1.registry, ...somepackage1.lockup.registry];"`;
 
 exports[`createStargateClientProtoRegistry 2`] = `
-Object {
+{
   "GeneratedType": true,
   "ReadonlyArray": true,
 }

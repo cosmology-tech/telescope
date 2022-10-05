@@ -3,7 +3,7 @@
 exports[`addEncodedMethod 1`] = `
 "joinPool(value: MsgJoinPool) {
   return {
-    typeUrl: \\"/cosmos.pools.transfer.v1.MsgJoinPool\\",
+    typeUrl: "/cosmos.pools.transfer.v1.MsgJoinPool",
     value: MsgJoinPool.encode(value).finish()
   };
 }"
@@ -12,7 +12,7 @@ exports[`addEncodedMethod 1`] = `
 exports[`addFromJSONMethod 1`] = `
 "joinPool(value: any) {
   return {
-    typeUrl: \\"/cosmos.pools.transfer.v1.MsgJoinPool\\",
+    typeUrl: "/cosmos.pools.transfer.v1.MsgJoinPool",
     value: MsgJoinPool.fromJSON(value)
   };
 }"
@@ -21,7 +21,7 @@ exports[`addFromJSONMethod 1`] = `
 exports[`addFromPartialMethod 1`] = `
 "joinPool(value: MsgJoinPool) {
   return {
-    typeUrl: \\"/cosmos.pools.transfer.v1.MsgJoinPool\\",
+    typeUrl: "/cosmos.pools.transfer.v1.MsgJoinPool",
     value: MsgJoinPool.fromPartial(value)
   };
 }"
@@ -30,7 +30,7 @@ exports[`addFromPartialMethod 1`] = `
 exports[`addJsonMethod 1`] = `
 "joinPool(value: MsgJoinPool) {
   return {
-    typeUrl: \\"/cosmos.pools.transfer.v1.MsgJoinPool\\",
+    typeUrl: "/cosmos.pools.transfer.v1.MsgJoinPool",
     value
   };
 }"
@@ -39,7 +39,7 @@ exports[`addJsonMethod 1`] = `
 exports[`addToJSONMethod 1`] = `
 "joinPool(value: MsgJoinPool) {
   return {
-    typeUrl: \\"/cosmos.pools.transfer.v1.MsgJoinPool\\",
+    typeUrl: "/cosmos.pools.transfer.v1.MsgJoinPool",
     value: MsgJoinPool.toJSON(value)
   };
 }"
@@ -50,14 +50,14 @@ exports[`createHelperObject 1`] = `
   encoded: {
     joinPool(value: MsgJoinPool) {
       return {
-        typeUrl: \\"/cosmos.pools.transfer.v1.MsgJoinPool\\",
+        typeUrl: "/cosmos.pools.transfer.v1.MsgJoinPool",
         value: MsgJoinPool.encode(value).finish()
       };
     },
 
     exitPool(value: MsgExitPool) {
       return {
-        typeUrl: \\"/cosmos.pools.transfer.v1.MsgExitPool\\",
+        typeUrl: "/cosmos.pools.transfer.v1.MsgExitPool",
         value: MsgExitPool.encode(value).finish()
       };
     }
@@ -66,14 +66,14 @@ exports[`createHelperObject 1`] = `
   withTypeUrl: {
     joinPool(value: MsgJoinPool) {
       return {
-        typeUrl: \\"/cosmos.pools.transfer.v1.MsgJoinPool\\",
+        typeUrl: "/cosmos.pools.transfer.v1.MsgJoinPool",
         value
       };
     },
 
     exitPool(value: MsgExitPool) {
       return {
-        typeUrl: \\"/cosmos.pools.transfer.v1.MsgExitPool\\",
+        typeUrl: "/cosmos.pools.transfer.v1.MsgExitPool",
         value
       };
     }
@@ -82,14 +82,14 @@ exports[`createHelperObject 1`] = `
   toJSON: {
     joinPool(value: MsgJoinPool) {
       return {
-        typeUrl: \\"/cosmos.pools.transfer.v1.MsgJoinPool\\",
+        typeUrl: "/cosmos.pools.transfer.v1.MsgJoinPool",
         value: MsgJoinPool.toJSON(value)
       };
     },
 
     exitPool(value: MsgExitPool) {
       return {
-        typeUrl: \\"/cosmos.pools.transfer.v1.MsgExitPool\\",
+        typeUrl: "/cosmos.pools.transfer.v1.MsgExitPool",
         value: MsgExitPool.toJSON(value)
       };
     }
@@ -98,14 +98,14 @@ exports[`createHelperObject 1`] = `
   fromJSON: {
     joinPool(value: any) {
       return {
-        typeUrl: \\"/cosmos.pools.transfer.v1.MsgJoinPool\\",
+        typeUrl: "/cosmos.pools.transfer.v1.MsgJoinPool",
         value: MsgJoinPool.fromJSON(value)
       };
     },
 
     exitPool(value: any) {
       return {
-        typeUrl: \\"/cosmos.pools.transfer.v1.MsgExitPool\\",
+        typeUrl: "/cosmos.pools.transfer.v1.MsgExitPool",
         value: MsgExitPool.fromJSON(value)
       };
     }
@@ -114,14 +114,14 @@ exports[`createHelperObject 1`] = `
   fromPartial: {
     joinPool(value: MsgJoinPool) {
       return {
-        typeUrl: \\"/cosmos.pools.transfer.v1.MsgJoinPool\\",
+        typeUrl: "/cosmos.pools.transfer.v1.MsgJoinPool",
         value: MsgJoinPool.fromPartial(value)
       };
     },
 
     exitPool(value: MsgExitPool) {
       return {
-        typeUrl: \\"/cosmos.pools.transfer.v1.MsgExitPool\\",
+        typeUrl: "/cosmos.pools.transfer.v1.MsgExitPool",
         value: MsgExitPool.fromPartial(value)
       };
     }

@@ -1,80 +1,80 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`google/api/expr/conformance/v1alpha1/conformance_service CheckRequest 1`] = `
-Object {
-  "container": Object {
-    "comment": "The protocol buffer context.  See \\"Name Resolution\\" in the
+{
+  "container": {
+    "comment": "The protocol buffer context.  See "Name Resolution" in the
  Language Definition.",
     "id": 3,
     "isScalar": true,
-    "options": Object {
+    "options": {
       "(telescope:camel)": "container",
       "(telescope:name)": "container",
       "(telescope:orig)": "container",
     },
-    "parsedType": Object {
+    "parsedType": {
       "name": "string",
       "type": "native",
     },
     "type": "string",
     "typeNum": 13,
   },
-  "noStdEnv": Object {
+  "noStdEnv": {
     "comment": "If true, use only the declarations in [type_env][google.api.expr.conformance.v1alpha1.CheckRequest.type_env].  If false (default),
  add declarations for the standard definitions to the type environment.  See
- \\"Standard Definitions\\" in the Language Definition.",
+ "Standard Definitions" in the Language Definition.",
     "id": 4,
     "isScalar": true,
-    "options": Object {
+    "options": {
       "(telescope:camel)": "noStdEnv",
       "(telescope:name)": "noStdEnv",
       "(telescope:orig)": "no_std_env",
     },
-    "parsedType": Object {
+    "parsedType": {
       "name": "bool",
       "type": "native",
     },
     "type": "bool",
     "typeNum": 12,
   },
-  "parsedExpr": Object {
+  "parsedExpr": {
     "comment": "Required. The parsed representation of the CEL program.",
     "id": 1,
     "import": "google/api/expr/v1alpha1/syntax.proto",
     "importedName": "google.api.expr.v1alpha1.ParsedExpr",
-    "options": Object {
+    "options": {
       "(telescope:camel)": "parsedExpr",
       "(telescope:name)": "parsedExpr",
       "(telescope:orig)": "parsed_expr",
     },
-    "parsedType": Object {
+    "parsedType": {
       "name": "ParsedExpr",
       "type": "Type",
     },
-    "scope": Array [
+    "scope": [
       "google.api.expr.v1alpha1",
     ],
     "scopeType": "protoImport",
     "type": "google.api.expr.v1alpha1.ParsedExpr",
   },
-  "typeEnv": Object {
+  "typeEnv": {
     "comment": "Declarations of types for external variables and functions.
  Required if program uses external variables or functions
  not in the default environment.",
     "id": 2,
     "import": "google/api/expr/v1alpha1/checked.proto",
     "importedName": "google.api.expr.v1alpha1.Decl",
-    "options": Object {
+    "options": {
       "(telescope:camel)": "typeEnv",
       "(telescope:name)": "typeEnv",
       "(telescope:orig)": "type_env",
     },
-    "parsedType": Object {
+    "parsedType": {
       "name": "Decl",
       "type": "Type",
     },
     "rule": "repeated",
-    "scope": Array [
+    "scope": [
       "google.api.expr.v1alpha1",
     ],
     "scopeType": "protoImport",
@@ -84,44 +84,44 @@ Object {
 `;
 
 exports[`google/api/expr/conformance/v1alpha1/conformance_service Decl 1`] = `
-Object {
-  "function": Object {
+{
+  "function": {
     "comment": "Function declaration.",
     "id": 3,
-    "options": Object {
+    "options": {
       "(telescope:camel)": "function",
       "(telescope:name)": "function",
       "(telescope:orig)": "function",
     },
-    "parsedType": Object {
+    "parsedType": {
       "name": "FunctionDecl",
       "type": "Type",
     },
-    "scope": Array [
+    "scope": [
       "google.api.expr.v1alpha1",
       "Decl",
     ],
     "type": "FunctionDecl",
   },
-  "ident": Object {
+  "ident": {
     "comment": "Identifier declaration.",
     "id": 2,
-    "options": Object {
+    "options": {
       "(telescope:camel)": "ident",
       "(telescope:name)": "ident",
       "(telescope:orig)": "ident",
     },
-    "parsedType": Object {
+    "parsedType": {
       "name": "IdentDecl",
       "type": "Type",
     },
-    "scope": Array [
+    "scope": [
       "google.api.expr.v1alpha1",
       "Decl",
     ],
     "type": "IdentDecl",
   },
-  "name": Object {
+  "name": {
     "comment": "The fully qualified name of the declaration.
 
  Declarations are organized in containers and this represents the full path
@@ -132,12 +132,12 @@ Object {
  function definition containing a result [Expr][google.api.expr.v1alpha1.Expr].",
     "id": 1,
     "isScalar": true,
-    "options": Object {
+    "options": {
       "(telescope:camel)": "name",
       "(telescope:name)": "name",
       "(telescope:orig)": "name",
     },
-    "parsedType": Object {
+    "parsedType": {
       "name": "string",
       "type": "native",
     },
@@ -148,57 +148,57 @@ Object {
 `;
 
 exports[`google/api/expr/conformance/v1alpha1/conformance_service IdentDecl 1`] = `
-Object {
-  "doc": Object {
+{
+  "doc": {
     "comment": "Documentation string for the identifier.",
     "id": 3,
     "isScalar": true,
-    "options": Object {
+    "options": {
       "(telescope:camel)": "doc",
       "(telescope:name)": "doc",
       "(telescope:orig)": "doc",
     },
-    "parsedType": Object {
+    "parsedType": {
       "name": "string",
       "type": "native",
     },
     "type": "string",
     "typeNum": 13,
   },
-  "type": Object {
+  "type": {
     "comment": "Required. The type of the identifier.",
     "id": 1,
-    "options": Object {
+    "options": {
       "(telescope:camel)": "type",
       "(telescope:name)": "type",
       "(telescope:orig)": "type",
     },
-    "parsedType": Object {
+    "parsedType": {
       "name": "Type",
       "type": "Type",
     },
-    "scope": Array [
+    "scope": [
       "google.api.expr.v1alpha1",
     ],
     "type": "Type",
   },
-  "value": Object {
+  "value": {
     "comment": "The constant value of the identifier. If not specified, the identifier
  must be supplied at evaluation time.",
     "id": 2,
     "import": "google/api/expr/v1alpha1/syntax.proto",
     "importedName": "Constant",
-    "options": Object {
+    "options": {
       "(telescope:camel)": "value",
       "(telescope:name)": "value",
       "(telescope:orig)": "value",
     },
-    "parsedType": Object {
+    "parsedType": {
       "name": "Constant",
       "type": "Type",
     },
-    "scope": Array [
-      Array [
+    "scope": [
+      [
         "google.api.expr.v1alpha1",
       ],
     ],
@@ -209,37 +209,37 @@ Object {
 `;
 
 exports[`google/api/expr/conformance/v1alpha1/conformance_service ParsedExpr 1`] = `
-Object {
-  "expr": Object {
+{
+  "expr": {
     "comment": "The parsed expression.",
     "id": 2,
-    "options": Object {
+    "options": {
       "(telescope:camel)": "expr",
       "(telescope:name)": "expr",
       "(telescope:orig)": "expr",
     },
-    "parsedType": Object {
+    "parsedType": {
       "name": "Expr",
       "type": "Type",
     },
-    "scope": Array [
+    "scope": [
       "google.api.expr.v1alpha1",
     ],
     "type": "Expr",
   },
-  "sourceInfo": Object {
+  "sourceInfo": {
     "comment": "The source info derived from input that generated the parsed \`expr\`.",
     "id": 3,
-    "options": Object {
+    "options": {
       "(telescope:camel)": "sourceInfo",
       "(telescope:name)": "sourceInfo",
       "(telescope:orig)": "source_info",
     },
-    "parsedType": Object {
+    "parsedType": {
       "name": "SourceInfo",
       "type": "Type",
     },
-    "scope": Array [
+    "scope": [
       "google.api.expr.v1alpha1",
     ],
     "type": "SourceInfo",
@@ -248,12 +248,12 @@ Object {
 `;
 
 exports[`osmosis/gamm/v1beta1/tx Coin 1`] = `
-Object {
-  "amount": Object {
+{
+  "amount": {
     "comment": null,
     "id": 2,
     "isScalar": true,
-    "options": Object {
+    "options": {
       "(cosmos_proto.scalar)": "cosmos.Int",
       "(gogoproto.customtype)": "Int",
       "(gogoproto.nullable)": false,
@@ -261,23 +261,23 @@ Object {
       "(telescope:name)": "amount",
       "(telescope:orig)": "amount",
     },
-    "parsedType": Object {
+    "parsedType": {
       "name": "string",
       "type": "native",
     },
     "type": "string",
     "typeNum": 13,
   },
-  "denom": Object {
+  "denom": {
     "comment": null,
     "id": 1,
     "isScalar": true,
-    "options": Object {
+    "options": {
       "(telescope:camel)": "denom",
       "(telescope:name)": "denom",
       "(telescope:orig)": "denom",
     },
-    "parsedType": Object {
+    "parsedType": {
       "name": "string",
       "type": "native",
     },
@@ -288,35 +288,35 @@ Object {
 `;
 
 exports[`osmosis/gamm/v1beta1/tx SwapAmountInRoute 1`] = `
-Object {
-  "poolId": Object {
+{
+  "poolId": {
     "comment": null,
     "id": 1,
     "isScalar": true,
-    "options": Object {
+    "options": {
       "(gogoproto.moretags)": "yaml:pool_id",
       "(telescope:camel)": "poolId",
       "(telescope:name)": "poolId",
       "(telescope:orig)": "poolId",
     },
-    "parsedType": Object {
+    "parsedType": {
       "name": "uint64",
       "type": "native",
     },
     "type": "uint64",
     "typeNum": 8,
   },
-  "tokenOutDenom": Object {
+  "tokenOutDenom": {
     "comment": null,
     "id": 2,
     "isScalar": true,
-    "options": Object {
+    "options": {
       "(gogoproto.moretags)": "yaml:token_out_denom",
       "(telescope:camel)": "tokenOutDenom",
       "(telescope:name)": "tokenOutDenom",
       "(telescope:orig)": "tokenOutDenom",
     },
-    "parsedType": Object {
+    "parsedType": {
       "name": "string",
       "type": "native",
     },

@@ -8,4 +8,4 @@ exports[`createRegistryLoader 1`] = `
 };"
 `;
 
-exports[`createTypeRegistry 1`] = `"export const registry: ReadonlyArray<[string, GeneratedType]> = [[\\"/cosmos.pools.transfer.v1.MsgJoinPool\\", MsgJoinPool], [\\"/cosmos.pools.transfer.v1.MsgExitPool\\", MsgExitPool]];"`;
+exports[`createTypeRegistry 1`] = `"export const registry: ReadonlyArray<[string, GeneratedType]> = [["/cosmos.pools.transfer.v1.MsgJoinPool", MsgJoinPool], ["/cosmos.pools.transfer.v1.MsgExitPool", MsgExitPool]];"`;

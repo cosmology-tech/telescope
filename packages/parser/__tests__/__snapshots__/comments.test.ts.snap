@@ -1,26 +1,26 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`cosmos/base/query/v1beta1/pagination 1`] = `
-Object {
-  "importNames": Object {},
+{
+  "importNames": {},
   "imports": undefined,
   "package": "cosmos.base.query.v1beta1",
-  "parsedExports": Object {
+  "parsedExports": {
     "PageRequest": true,
     "PageResponse": true,
   },
-  "parsedImports": Object {},
-  "root": Object {
-    "nested": Object {
-      "cosmos": Object {
-        "nested": Object {
-          "base": Object {
-            "nested": Object {
-              "query": Object {
-                "nested": Object {
-                  "v1beta1": Object {
-                    "nested": Object {
-                      "PageRequest": Object {
+  "parsedImports": {},
+  "root": {
+    "nested": {
+      "cosmos": {
+        "nested": {
+          "base": {
+            "nested": {
+              "query": {
+                "nested": {
+                  "v1beta1": {
+                    "nested": {
+                      "PageRequest": {
                         "comment": "PageRequest is to be embedded in gRPC request messages for efficient
  pagination. Ex:
 
@@ -28,91 +28,91 @@ Object {
           Foo some_parameter = 1;
           PageRequest pagination = 2;
   }",
-                        "fields": Object {
-                          "countTotal": Object {
+                        "fields": {
+                          "countTotal": {
                             "comment": "count_total is set to true  to indicate that the result set should include
  a count of the total number of items available for pagination in UIs.
  count_total is only respected when offset is used. It is ignored when key
  is set.",
                             "id": 4,
                             "isScalar": true,
-                            "options": Object {
+                            "options": {
                               "(telescope:camel)": "countTotal",
                               "(telescope:name)": "countTotal",
                               "(telescope:orig)": "count_total",
                             },
-                            "parsedType": Object {
+                            "parsedType": {
                               "name": "bool",
                               "type": "native",
                             },
                             "type": "bool",
                             "typeNum": 12,
                           },
-                          "key": Object {
+                          "key": {
                             "comment": "key is a value returned in PageResponse.next_key to begin
  querying the next page most efficiently. Only one of offset or key
  should be set.",
                             "id": 1,
                             "isScalar": true,
-                            "options": Object {
+                            "options": {
                               "(telescope:camel)": "key",
                               "(telescope:name)": "key",
                               "(telescope:orig)": "key",
                             },
-                            "parsedType": Object {
+                            "parsedType": {
                               "name": "bytes",
                               "type": "native",
                             },
                             "type": "bytes",
                             "typeNum": 14,
                           },
-                          "limit": Object {
+                          "limit": {
                             "comment": "limit is the total number of results to be returned in the result page.
  If left empty it will default to a value to be set by each app.",
                             "id": 3,
                             "isScalar": true,
-                            "options": Object {
+                            "options": {
                               "(telescope:camel)": "limit",
                               "(telescope:name)": "limit",
                               "(telescope:orig)": "limit",
                             },
-                            "parsedType": Object {
+                            "parsedType": {
                               "name": "uint64",
                               "type": "native",
                             },
                             "type": "uint64",
                             "typeNum": 8,
                           },
-                          "offset": Object {
+                          "offset": {
                             "comment": "offset is a numeric offset that can be used when key is unavailable.
  It is less efficient than using key. Only one of offset or key should
  be set.",
                             "id": 2,
                             "isScalar": true,
-                            "options": Object {
+                            "options": {
                               "(telescope:camel)": "offset",
                               "(telescope:name)": "offset",
                               "(telescope:orig)": "offset",
                             },
-                            "parsedType": Object {
+                            "parsedType": {
                               "name": "uint64",
                               "type": "native",
                             },
                             "type": "uint64",
                             "typeNum": 8,
                           },
-                          "reverse": Object {
+                          "reverse": {
                             "comment": "reverse is set to true if results are to be returned in the descending order.
 
  Since: cosmos-sdk 0.43",
                             "id": 5,
                             "isScalar": true,
-                            "options": Object {
+                            "options": {
                               "(telescope:camel)": "reverse",
                               "(telescope:name)": "reverse",
                               "(telescope:orig)": "reverse",
                             },
-                            "parsedType": Object {
+                            "parsedType": {
                               "name": "bool",
                               "type": "native",
                             },
@@ -120,14 +120,14 @@ Object {
                             "typeNum": 12,
                           },
                         },
-                        "keyTypes": Array [],
+                        "keyTypes": [],
                         "name": "PageRequest",
                         "nested": null,
                         "oneofs": undefined,
                         "options": undefined,
                         "type": "Type",
                       },
-                      "PageResponse": Object {
+                      "PageResponse": {
                         "comment": "PageResponse is to be embedded in gRPC response messages where the
  corresponding request message has used PageRequest.
 
@@ -135,36 +135,36 @@ Object {
           repeated Bar results = 1;
           PageResponse page = 2;
   }",
-                        "fields": Object {
-                          "nextKey": Object {
+                        "fields": {
+                          "nextKey": {
                             "comment": "next_key is the key to be passed to PageRequest.key to
  query the next page most efficiently. It will be empty if
  there are no more results.",
                             "id": 1,
                             "isScalar": true,
-                            "options": Object {
+                            "options": {
                               "(telescope:camel)": "nextKey",
                               "(telescope:name)": "nextKey",
                               "(telescope:orig)": "next_key",
                             },
-                            "parsedType": Object {
+                            "parsedType": {
                               "name": "bytes",
                               "type": "native",
                             },
                             "type": "bytes",
                             "typeNum": 14,
                           },
-                          "total": Object {
+                          "total": {
                             "comment": "total is total number of results available if PageRequest.count_total
  was set, its value is undefined otherwise",
                             "id": 2,
                             "isScalar": true,
-                            "options": Object {
+                            "options": {
                               "(telescope:camel)": "total",
                               "(telescope:name)": "total",
                               "(telescope:orig)": "total",
                             },
-                            "parsedType": Object {
+                            "parsedType": {
                               "name": "uint64",
                               "type": "native",
                             },
@@ -172,7 +172,7 @@ Object {
                             "typeNum": 8,
                           },
                         },
-                        "keyTypes": Array [],
+                        "keyTypes": [],
                         "name": "PageResponse",
                         "nested": null,
                         "oneofs": undefined,
@@ -198,19 +198,19 @@ Object {
 `;
 
 exports[`google/rpc/code 1`] = `
-Object {
-  "importNames": Object {},
+{
+  "importNames": {},
   "imports": undefined,
   "package": "google.rpc",
-  "parsedExports": Object {},
-  "parsedImports": Object {},
-  "root": Object {
-    "nested": Object {
-      "google": Object {
-        "nested": Object {
-          "rpc": Object {
-            "nested": Object {
-              "Code": Object {
+  "parsedExports": {},
+  "parsedImports": {},
+  "root": {
+    "nested": {
+      "google": {
+        "nested": {
+          "rpc": {
+            "nested": {
+              "Code": {
                 "comment": "The canonical error codes for gRPC APIs.
 
 
@@ -218,7 +218,7 @@ Object {
  the most specific error code that applies.  For example, prefer
  \`OUT_OF_RANGE\` over \`FAILED_PRECONDITION\` if both codes apply.
  Similarly prefer \`NOT_FOUND\` or \`ALREADY_EXISTS\` over \`FAILED_PRECONDITION\`.",
-                "comments": Object {
+                "comments": {
                   "ABORTED": "The operation was aborted, typically due to a concurrency issue such as
  a sequencer check failure or transaction abort.
 
@@ -255,7 +255,7 @@ Object {
       (e.g., when a client-specified test-and-set fails, indicating the
       client should restart a read-modify-write sequence).
   (c) Use \`FAILED_PRECONDITION\` if the client should not retry until
-      the system state has been explicitly fixed.  E.g., if an \\"rmdir\\"
+      the system state has been explicitly fixed.  E.g., if an "rmdir"
       fails because the directory is non-empty, \`FAILED_PRECONDITION\`
       should be returned since the client should not retry unless
       the files are deleted from the directory.
@@ -342,7 +342,7 @@ Object {
                 },
                 "name": "Code",
                 "type": "Enum",
-                "values": Object {
+                "values": {
                   "ABORTED": 10,
                   "ALREADY_EXISTS": 6,
                   "CANCELLED": 1,

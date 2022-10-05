@@ -1,82 +1,82 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`double import bug GenesisState 1`] = `
-Object {
+{
   "comment": "GenesisState defines the ibc module's genesis state.",
-  "fields": Object {
-    "channelGenesis": Object {
+  "fields": {
+    "channelGenesis": {
       "comment": "ICS004 - Channel genesis state",
       "id": 3,
       "import": "ibc/core/channel/v1/genesis.proto",
       "importedName": "ibc.core.channel.v1.GenesisState",
-      "options": Object {
+      "options": {
         "(gogoproto.moretags)": "yaml:channel_genesis",
         "(gogoproto.nullable)": false,
         "(telescope:camel)": "channelGenesis",
         "(telescope:name)": "channelGenesis",
         "(telescope:orig)": "channel_genesis",
       },
-      "parsedType": Object {
+      "parsedType": {
         "name": "GenesisState",
         "type": "Type",
       },
-      "scope": Array [
+      "scope": [
         "ibc.core.channel.v1",
       ],
       "scopeType": "protoImport",
       "type": "ibc.core.channel.v1.GenesisState",
     },
-    "clientGenesis": Object {
+    "clientGenesis": {
       "comment": "ICS002 - Clients genesis state",
       "id": 1,
       "import": "ibc/core/client/v1/genesis.proto",
       "importedName": "ibc.core.client.v1.GenesisState",
-      "options": Object {
+      "options": {
         "(gogoproto.moretags)": "yaml:client_genesis",
         "(gogoproto.nullable)": false,
         "(telescope:camel)": "clientGenesis",
         "(telescope:name)": "clientGenesis",
         "(telescope:orig)": "client_genesis",
       },
-      "parsedType": Object {
+      "parsedType": {
         "name": "GenesisState",
         "type": "Type",
       },
-      "scope": Array [
+      "scope": [
         "ibc.core.client.v1",
       ],
       "scopeType": "protoImport",
       "type": "ibc.core.client.v1.GenesisState",
     },
-    "connectionGenesis": Object {
+    "connectionGenesis": {
       "comment": "ICS003 - Connections genesis state",
       "id": 2,
       "import": "ibc/core/connection/v1/genesis.proto",
       "importedName": "ibc.core.connection.v1.GenesisState",
-      "options": Object {
+      "options": {
         "(gogoproto.moretags)": "yaml:connection_genesis",
         "(gogoproto.nullable)": false,
         "(telescope:camel)": "connectionGenesis",
         "(telescope:name)": "connectionGenesis",
         "(telescope:orig)": "connection_genesis",
       },
-      "parsedType": Object {
+      "parsedType": {
         "name": "GenesisState",
         "type": "Type",
       },
-      "scope": Array [
+      "scope": [
         "ibc.core.connection.v1",
       ],
       "scopeType": "protoImport",
       "type": "ibc.core.connection.v1.GenesisState",
     },
   },
-  "keyTypes": Array [],
+  "keyTypes": [],
   "name": "GenesisState",
   "nested": null,
   "oneofs": undefined,
   "options": undefined,
-  "scope": Array [
+  "scope": [
     "ibc.core.types.v1",
   ],
   "type": "Type",
@@ -84,47 +84,47 @@ Object {
 `;
 
 exports[`double import bug GenesisState 2`] = `
-Array [
+[
   "ibc.core.types.v1",
 ]
 `;
 
 exports[`double import bug imports/exports 1`] = `
-Object {
+{
   "GenesisState": true,
 }
 `;
 
 exports[`double import bug imports/exports 2`] = `
-Object {
-  "ibc/core/channel/v1/genesis.proto": Array [
+{
+  "ibc/core/channel/v1/genesis.proto": [
     "GenesisState",
   ],
-  "ibc/core/client/v1/genesis.proto": Array [
+  "ibc/core/client/v1/genesis.proto": [
     "GenesisState",
   ],
-  "ibc/core/connection/v1/genesis.proto": Array [
+  "ibc/core/connection/v1/genesis.proto": [
     "GenesisState",
   ],
 }
 `;
 
 exports[`double import bug imports/exports 3`] = `
-Object {
-  "ibc/core/channel/v1/genesis.proto": Object {
+{
+  "ibc/core/channel/v1/genesis.proto": {
     "GenesisState": "GenesisState3",
   },
-  "ibc/core/client/v1/genesis.proto": Object {
+  "ibc/core/client/v1/genesis.proto": {
     "GenesisState": "GenesisState1",
   },
-  "ibc/core/connection/v1/genesis.proto": Object {
+  "ibc/core/connection/v1/genesis.proto": {
     "GenesisState": "GenesisState2",
   },
 }
 `;
 
 exports[`proto example imports/exports 1`] = `
-Object {
+{
   "CreateLogMetricRequest": true,
   "DeleteLogMetricRequest": true,
   "GetLogMetricRequest": true,
@@ -136,35 +136,35 @@ Object {
 `;
 
 exports[`proto example imports/exports 2`] = `
-Object {
-  "google/api/distribution.proto": Array [
+{
+  "google/api/distribution.proto": [
     "Distribution_BucketOptions",
   ],
-  "google/api/metric.proto": Array [
+  "google/api/metric.proto": [
     "MetricDescriptor",
   ],
-  "google/protobuf/timestamp.proto": Array [
+  "google/protobuf/timestamp.proto": [
     "Timestamp",
   ],
 }
 `;
 
 exports[`proto example imports/exports 3`] = `
-Object {
-  "google/api/distribution.proto": Object {
+{
+  "google/api/distribution.proto": {
     "Distribution_BucketOptions": "Distribution_BucketOptions",
   },
-  "google/api/metric.proto": Object {
+  "google/api/metric.proto": {
     "MetricDescriptor": "MetricDescriptor",
   },
-  "google/protobuf/timestamp.proto": Object {
+  "google/protobuf/timestamp.proto": {
     "Timestamp": "Timestamp",
   },
 }
 `;
 
 exports[`proto import self imports/exports 1`] = `
-Object {
+{
   "Pool": true,
   "PoolAsset": true,
   "PoolParams": true,
@@ -173,28 +173,28 @@ Object {
 `;
 
 exports[`proto import self imports/exports 2`] = `
-Object {
-  "cosmos/base/v1beta1/coin.proto": Array [
+{
+  "cosmos/base/v1beta1/coin.proto": [
     "Coin",
   ],
-  "google/protobuf/duration.proto": Array [
+  "google/protobuf/duration.proto": [
     "Duration",
   ],
-  "google/protobuf/timestamp.proto": Array [
+  "google/protobuf/timestamp.proto": [
     "Timestamp",
   ],
 }
 `;
 
 exports[`proto import self imports/exports 3`] = `
-Object {
-  "cosmos/base/v1beta1/coin.proto": Object {
+{
+  "cosmos/base/v1beta1/coin.proto": {
     "Coin": "Coin",
   },
-  "google/protobuf/duration.proto": Object {
+  "google/protobuf/duration.proto": {
     "Duration": "Duration",
   },
-  "google/protobuf/timestamp.proto": Object {
+  "google/protobuf/timestamp.proto": {
     "Timestamp": "Timestamp",
   },
 }

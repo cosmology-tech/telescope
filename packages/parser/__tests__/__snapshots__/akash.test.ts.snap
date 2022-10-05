@@ -1,19 +1,19 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Akash 1`] = `
-Object {
-  "Msg": Object {
+{
+  "Msg": {
     "comment": "Msg defines the deployment Msg service.",
-    "methods": Object {
-      "CloseDeployment": Object {
+    "methods": {
+      "CloseDeployment": {
         "comment": "CloseDeployment defines a method to close a deployment given proper inputs.",
-        "fields": Object {
-          "id": Object {
+        "fields": {
+          "id": {
             "comment": null,
             "id": 1,
             "import": "akash/deployment/v1beta2/deployment.proto",
             "importedName": "akash.deployment.v1beta2.DeploymentID",
-            "options": Object {
+            "options": {
               "(gogoproto.customname)": "ID",
               "(gogoproto.jsontag)": "id",
               "(gogoproto.moretags)": "yaml:id",
@@ -22,11 +22,11 @@ Object {
               "(telescope:name)": "id",
               "(telescope:orig)": "id",
             },
-            "parsedType": Object {
+            "parsedType": {
               "name": "DeploymentID",
               "type": "Type",
             },
-            "scope": Array [
+            "scope": [
               "akash.deployment.v1beta2",
             ],
             "scopeType": "protoImport",
@@ -40,15 +40,15 @@ Object {
         "responseType": "MsgCloseDeploymentResponse",
         "type": "ServiceMethod",
       },
-      "CloseGroup": Object {
+      "CloseGroup": {
         "comment": "CloseGroup defines a method to close a group of a deployment given proper inputs.",
-        "fields": Object {
-          "id": Object {
+        "fields": {
+          "id": {
             "comment": null,
             "id": 1,
             "import": "akash/deployment/v1beta2/groupid.proto",
             "importedName": "akash.deployment.v1beta2.GroupID",
-            "options": Object {
+            "options": {
               "(gogoproto.customname)": "ID",
               "(gogoproto.jsontag)": "id",
               "(gogoproto.moretags)": "yaml:id",
@@ -57,11 +57,11 @@ Object {
               "(telescope:name)": "id",
               "(telescope:orig)": "id",
             },
-            "parsedType": Object {
+            "parsedType": {
               "name": "GroupID",
               "type": "Type",
             },
-            "scope": Array [
+            "scope": [
               "akash.deployment.v1beta2",
             ],
             "scopeType": "protoImport",
@@ -75,15 +75,15 @@ Object {
         "responseType": "MsgCloseGroupResponse",
         "type": "ServiceMethod",
       },
-      "CreateDeployment": Object {
+      "CreateDeployment": {
         "comment": "CreateDeployment defines a method to create new deployment given proper inputs.",
-        "fields": Object {
-          "deposit": Object {
+        "fields": {
+          "deposit": {
             "comment": null,
             "id": 4,
             "import": "cosmos/base/v1beta1/coin.proto",
             "importedName": "cosmos.base.v1beta1.Coin",
-            "options": Object {
+            "options": {
               "(gogoproto.jsontag)": "deposit",
               "(gogoproto.moretags)": "yaml:deposit",
               "(gogoproto.nullable)": false,
@@ -91,40 +91,40 @@ Object {
               "(telescope:name)": "deposit",
               "(telescope:orig)": "deposit",
             },
-            "parsedType": Object {
+            "parsedType": {
               "name": "Coin",
               "type": "Type",
             },
-            "scope": Array [
+            "scope": [
               "cosmos.base.v1beta1",
             ],
             "scopeType": "protoImport",
             "type": "cosmos.base.v1beta1.Coin",
           },
-          "depositor": Object {
+          "depositor": {
             "comment": "Depositor pays for the deposit",
             "id": 5,
             "isScalar": true,
-            "options": Object {
+            "options": {
               "(gogoproto.jsontag)": "depositor",
               "(gogoproto.moretags)": "yaml:depositor",
               "(telescope:camel)": "depositor",
               "(telescope:name)": "depositor",
               "(telescope:orig)": "depositor",
             },
-            "parsedType": Object {
+            "parsedType": {
               "name": "string",
               "type": "native",
             },
             "type": "string",
             "typeNum": 13,
           },
-          "groups": Object {
+          "groups": {
             "comment": null,
             "id": 2,
             "import": "akash/deployment/v1beta2/groupspec.proto",
             "importedName": "akash.deployment.v1beta2.GroupSpec",
-            "options": Object {
+            "options": {
               "(gogoproto.jsontag)": "groups",
               "(gogoproto.moretags)": "yaml:groups",
               "(gogoproto.nullable)": false,
@@ -132,23 +132,23 @@ Object {
               "(telescope:name)": "groups",
               "(telescope:orig)": "groups",
             },
-            "parsedType": Object {
+            "parsedType": {
               "name": "GroupSpec",
               "type": "Type",
             },
             "rule": "repeated",
-            "scope": Array [
+            "scope": [
               "akash.deployment.v1beta2",
             ],
             "scopeType": "protoImport",
             "type": "GroupSpec",
           },
-          "id": Object {
+          "id": {
             "comment": null,
             "id": 1,
             "import": "akash/deployment/v1beta2/deployment.proto",
             "importedName": "akash.deployment.v1beta2.DeploymentID",
-            "options": Object {
+            "options": {
               "(gogoproto.customname)": "ID",
               "(gogoproto.jsontag)": "id",
               "(gogoproto.moretags)": "yaml:id",
@@ -157,28 +157,28 @@ Object {
               "(telescope:name)": "id",
               "(telescope:orig)": "id",
             },
-            "parsedType": Object {
+            "parsedType": {
               "name": "DeploymentID",
               "type": "Type",
             },
-            "scope": Array [
+            "scope": [
               "akash.deployment.v1beta2",
             ],
             "scopeType": "protoImport",
             "type": "DeploymentID",
           },
-          "version": Object {
+          "version": {
             "comment": null,
             "id": 3,
             "isScalar": true,
-            "options": Object {
+            "options": {
               "(gogoproto.jsontag)": "version",
               "(gogoproto.moretags)": "yaml:version",
               "(telescope:camel)": "version",
               "(telescope:name)": "version",
               "(telescope:orig)": "version",
             },
-            "parsedType": Object {
+            "parsedType": {
               "name": "bytes",
               "type": "native",
             },
@@ -193,15 +193,15 @@ Object {
         "responseType": "MsgCreateDeploymentResponse",
         "type": "ServiceMethod",
       },
-      "DepositDeployment": Object {
+      "DepositDeployment": {
         "comment": "DepositDeployment deposits more funds into the deployment account",
-        "fields": Object {
-          "amount": Object {
+        "fields": {
+          "amount": {
             "comment": null,
             "id": 2,
             "import": "cosmos/base/v1beta1/coin.proto",
             "importedName": "cosmos.base.v1beta1.Coin",
-            "options": Object {
+            "options": {
               "(gogoproto.jsontag)": "amount",
               "(gogoproto.moretags)": "yaml:amount",
               "(gogoproto.nullable)": false,
@@ -209,40 +209,40 @@ Object {
               "(telescope:name)": "amount",
               "(telescope:orig)": "amount",
             },
-            "parsedType": Object {
+            "parsedType": {
               "name": "Coin",
               "type": "Type",
             },
-            "scope": Array [
+            "scope": [
               "cosmos.base.v1beta1",
             ],
             "scopeType": "protoImport",
             "type": "cosmos.base.v1beta1.Coin",
           },
-          "depositor": Object {
+          "depositor": {
             "comment": "Depositor pays for the deposit",
             "id": 3,
             "isScalar": true,
-            "options": Object {
+            "options": {
               "(gogoproto.jsontag)": "depositor",
               "(gogoproto.moretags)": "yaml:depositor",
               "(telescope:camel)": "depositor",
               "(telescope:name)": "depositor",
               "(telescope:orig)": "depositor",
             },
-            "parsedType": Object {
+            "parsedType": {
               "name": "string",
               "type": "native",
             },
             "type": "string",
             "typeNum": 13,
           },
-          "id": Object {
+          "id": {
             "comment": null,
             "id": 1,
             "import": "akash/deployment/v1beta2/deployment.proto",
             "importedName": "akash.deployment.v1beta2.DeploymentID",
-            "options": Object {
+            "options": {
               "(gogoproto.customname)": "ID",
               "(gogoproto.jsontag)": "id",
               "(gogoproto.moretags)": "yaml:id",
@@ -251,11 +251,11 @@ Object {
               "(telescope:name)": "id",
               "(telescope:orig)": "id",
             },
-            "parsedType": Object {
+            "parsedType": {
               "name": "DeploymentID",
               "type": "Type",
             },
-            "scope": Array [
+            "scope": [
               "akash.deployment.v1beta2",
             ],
             "scopeType": "protoImport",
@@ -269,15 +269,15 @@ Object {
         "responseType": "MsgDepositDeploymentResponse",
         "type": "ServiceMethod",
       },
-      "PauseGroup": Object {
+      "PauseGroup": {
         "comment": "PauseGroup defines a method to close a group of a deployment given proper inputs.",
-        "fields": Object {
-          "id": Object {
+        "fields": {
+          "id": {
             "comment": null,
             "id": 1,
             "import": "akash/deployment/v1beta2/groupid.proto",
             "importedName": "akash.deployment.v1beta2.GroupID",
-            "options": Object {
+            "options": {
               "(gogoproto.customname)": "ID",
               "(gogoproto.jsontag)": "id",
               "(gogoproto.moretags)": "yaml:id",
@@ -286,11 +286,11 @@ Object {
               "(telescope:name)": "id",
               "(telescope:orig)": "id",
             },
-            "parsedType": Object {
+            "parsedType": {
               "name": "GroupID",
               "type": "Type",
             },
-            "scope": Array [
+            "scope": [
               "akash.deployment.v1beta2",
             ],
             "scopeType": "protoImport",
@@ -304,15 +304,15 @@ Object {
         "responseType": "MsgPauseGroupResponse",
         "type": "ServiceMethod",
       },
-      "StartGroup": Object {
+      "StartGroup": {
         "comment": "StartGroup defines a method to close a group of a deployment given proper inputs.",
-        "fields": Object {
-          "id": Object {
+        "fields": {
+          "id": {
             "comment": null,
             "id": 1,
             "import": "akash/deployment/v1beta2/groupid.proto",
             "importedName": "akash.deployment.v1beta2.GroupID",
-            "options": Object {
+            "options": {
               "(gogoproto.customname)": "ID",
               "(gogoproto.jsontag)": "id",
               "(gogoproto.moretags)": "yaml:id",
@@ -321,11 +321,11 @@ Object {
               "(telescope:name)": "id",
               "(telescope:orig)": "id",
             },
-            "parsedType": Object {
+            "parsedType": {
               "name": "GroupID",
               "type": "Type",
             },
-            "scope": Array [
+            "scope": [
               "akash.deployment.v1beta2",
             ],
             "scopeType": "protoImport",
@@ -339,15 +339,15 @@ Object {
         "responseType": "MsgStartGroupResponse",
         "type": "ServiceMethod",
       },
-      "UpdateDeployment": Object {
+      "UpdateDeployment": {
         "comment": "UpdateDeployment defines a method to update a deployment given proper inputs.",
-        "fields": Object {
-          "id": Object {
+        "fields": {
+          "id": {
             "comment": null,
             "id": 1,
             "import": "akash/deployment/v1beta2/deployment.proto",
             "importedName": "akash.deployment.v1beta2.DeploymentID",
-            "options": Object {
+            "options": {
               "(gogoproto.customname)": "ID",
               "(gogoproto.jsontag)": "id",
               "(gogoproto.moretags)": "yaml:id",
@@ -356,28 +356,28 @@ Object {
               "(telescope:name)": "id",
               "(telescope:orig)": "id",
             },
-            "parsedType": Object {
+            "parsedType": {
               "name": "DeploymentID",
               "type": "Type",
             },
-            "scope": Array [
+            "scope": [
               "akash.deployment.v1beta2",
             ],
             "scopeType": "protoImport",
             "type": "DeploymentID",
           },
-          "version": Object {
+          "version": {
             "comment": null,
             "id": 3,
             "isScalar": true,
-            "options": Object {
+            "options": {
               "(gogoproto.jsontag)": "version",
               "(gogoproto.moretags)": "yaml:version",
               "(telescope:camel)": "version",
               "(telescope:name)": "version",
               "(telescope:orig)": "version",
             },
-            "parsedType": Object {
+            "parsedType": {
               "name": "bytes",
               "type": "native",
             },

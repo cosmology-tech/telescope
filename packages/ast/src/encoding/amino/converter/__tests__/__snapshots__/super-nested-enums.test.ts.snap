@@ -2,12 +2,12 @@
 
 exports[`cosmology/example/c AminoConverter 1`] = `
 "export const AminoConverter = {
-  \\"/cosmology.finance.MsgTypePackageC\\": {
-    aminoType: \\"/cosmology.finance.MsgTypePackageC\\",
+  "/cosmology.finance.MsgTypePackageC": {
+    aminoType: "/cosmology.finance.MsgTypePackageC",
     toAmino: ({
       address,
       awesome
-    }: MsgTypePackageC): AminoMsgTypePackageC[\\"value\\"] => {
+    }: MsgTypePackageC): AminoMsgTypePackageC["value"] => {
       return {
         address,
         awesome: {
@@ -27,7 +27,7 @@ exports[`cosmology/example/c AminoConverter 1`] = `
     fromAmino: ({
       address,
       awesome
-    }: AminoMsgTypePackageC[\\"value\\"]): MsgTypePackageC => {
+    }: AminoMsgTypePackageC["value"]): MsgTypePackageC => {
       return {
         address,
         awesome: {

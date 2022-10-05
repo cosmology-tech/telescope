@@ -27,7 +27,7 @@ exports[`cosmos LCDClient 1`] = `
       params: {}
     };
 
-    if (typeof params?.denom !== \\"undefined\\") {
+    if (typeof params?.denom !== "undefined") {
       options.params.denom = params.denom;
     }
 
@@ -41,7 +41,7 @@ exports[`cosmos LCDClient 1`] = `
       params: {}
     };
 
-    if (typeof params?.pagination !== \\"undefined\\") {
+    if (typeof params?.pagination !== "undefined") {
       setPaginationParams(options, params.pagination);
     }
 
@@ -56,7 +56,7 @@ exports[`cosmos LCDClient 1`] = `
       params: {}
     };
 
-    if (typeof params?.pagination !== \\"undefined\\") {
+    if (typeof params?.pagination !== "undefined") {
       setPaginationParams(options, params.pagination);
     }
 
@@ -72,7 +72,7 @@ exports[`cosmos LCDClient 1`] = `
       params: {}
     };
 
-    if (typeof params?.pagination !== \\"undefined\\") {
+    if (typeof params?.pagination !== "undefined") {
       setPaginationParams(options, params.pagination);
     }
 
@@ -86,7 +86,7 @@ exports[`cosmos LCDClient 1`] = `
       params: {}
     };
 
-    if (typeof params?.denom !== \\"undefined\\") {
+    if (typeof params?.denom !== "undefined") {
       options.params.denom = params.denom;
     }
 
@@ -115,7 +115,7 @@ exports[`cosmos LCDClient 1`] = `
       params: {}
     };
 
-    if (typeof params?.pagination !== \\"undefined\\") {
+    if (typeof params?.pagination !== "undefined") {
       setPaginationParams(options, params.pagination);
     }
 
@@ -130,7 +130,7 @@ exports[`cosmos LCDClient 1`] = `
       params: {}
     };
 
-    if (typeof params?.pagination !== \\"undefined\\") {
+    if (typeof params?.pagination !== "undefined") {
       setPaginationParams(options, params.pagination);
     }
 
@@ -168,7 +168,7 @@ exports[`cosmos fee LCDClient 1`] = `
       params: {}
     };
 
-    if (typeof params?.pagination !== \\"undefined\\") {
+    if (typeof params?.pagination !== "undefined") {
       setPaginationParams(options, params.pagination);
     }
 
@@ -183,7 +183,7 @@ exports[`cosmos fee LCDClient 1`] = `
       params: {}
     };
 
-    if (typeof params?.pagination !== \\"undefined\\") {
+    if (typeof params?.pagination !== "undefined") {
       setPaginationParams(options, params.pagination);
     }
 
@@ -239,7 +239,7 @@ exports[`cosmos/group/v1/query.proto 1`] = `
       params: {}
     };
 
-    if (typeof params?.pagination !== \\"undefined\\") {
+    if (typeof params?.pagination !== "undefined") {
       setPaginationParams(options, params.pagination);
     }
 
@@ -253,7 +253,7 @@ exports[`cosmos/group/v1/query.proto 1`] = `
       params: {}
     };
 
-    if (typeof params?.pagination !== \\"undefined\\") {
+    if (typeof params?.pagination !== "undefined") {
       setPaginationParams(options, params.pagination);
     }
 
@@ -267,7 +267,7 @@ exports[`cosmos/group/v1/query.proto 1`] = `
       params: {}
     };
 
-    if (typeof params?.pagination !== \\"undefined\\") {
+    if (typeof params?.pagination !== "undefined") {
       setPaginationParams(options, params.pagination);
     }
 
@@ -281,7 +281,7 @@ exports[`cosmos/group/v1/query.proto 1`] = `
       params: {}
     };
 
-    if (typeof params?.pagination !== \\"undefined\\") {
+    if (typeof params?.pagination !== "undefined") {
       setPaginationParams(options, params.pagination);
     }
 
@@ -301,7 +301,7 @@ exports[`cosmos/group/v1/query.proto 1`] = `
       params: {}
     };
 
-    if (typeof params?.pagination !== \\"undefined\\") {
+    if (typeof params?.pagination !== "undefined") {
       setPaginationParams(options, params.pagination);
     }
 
@@ -321,7 +321,7 @@ exports[`cosmos/group/v1/query.proto 1`] = `
       params: {}
     };
 
-    if (typeof params?.pagination !== \\"undefined\\") {
+    if (typeof params?.pagination !== "undefined") {
       setPaginationParams(options, params.pagination);
     }
 
@@ -335,7 +335,7 @@ exports[`cosmos/group/v1/query.proto 1`] = `
       params: {}
     };
 
-    if (typeof params?.pagination !== \\"undefined\\") {
+    if (typeof params?.pagination !== "undefined") {
       setPaginationParams(options, params.pagination);
     }
 
@@ -349,7 +349,7 @@ exports[`cosmos/group/v1/query.proto 1`] = `
       params: {}
     };
 
-    if (typeof params?.pagination !== \\"undefined\\") {
+    if (typeof params?.pagination !== "undefined") {
       setPaginationParams(options, params.pagination);
     }
 
@@ -398,11 +398,11 @@ exports[`cosmos/staking/v1beta1/query.proto 1`] = `
       params: {}
     };
 
-    if (typeof params?.status !== \\"undefined\\") {
+    if (typeof params?.status !== "undefined") {
       options.params.status = params.status;
     }
 
-    if (typeof params?.pagination !== \\"undefined\\") {
+    if (typeof params?.pagination !== "undefined") {
       setPaginationParams(options, params.pagination);
     }
 
@@ -422,7 +422,7 @@ exports[`cosmos/staking/v1beta1/query.proto 1`] = `
       params: {}
     };
 
-    if (typeof params?.pagination !== \\"undefined\\") {
+    if (typeof params?.pagination !== "undefined") {
       setPaginationParams(options, params.pagination);
     }
 
@@ -436,7 +436,7 @@ exports[`cosmos/staking/v1beta1/query.proto 1`] = `
       params: {}
     };
 
-    if (typeof params?.pagination !== \\"undefined\\") {
+    if (typeof params?.pagination !== "undefined") {
       setPaginationParams(options, params.pagination);
     }
 
@@ -463,7 +463,7 @@ exports[`cosmos/staking/v1beta1/query.proto 1`] = `
       params: {}
     };
 
-    if (typeof params?.pagination !== \\"undefined\\") {
+    if (typeof params?.pagination !== "undefined") {
       setPaginationParams(options, params.pagination);
     }
 
@@ -478,7 +478,7 @@ exports[`cosmos/staking/v1beta1/query.proto 1`] = `
       params: {}
     };
 
-    if (typeof params?.pagination !== \\"undefined\\") {
+    if (typeof params?.pagination !== "undefined") {
       setPaginationParams(options, params.pagination);
     }
 
@@ -492,15 +492,15 @@ exports[`cosmos/staking/v1beta1/query.proto 1`] = `
       params: {}
     };
 
-    if (typeof params?.srcValidatorAddr !== \\"undefined\\") {
+    if (typeof params?.srcValidatorAddr !== "undefined") {
       options.params.src_validator_addr = params.srcValidatorAddr;
     }
 
-    if (typeof params?.dstValidatorAddr !== \\"undefined\\") {
+    if (typeof params?.dstValidatorAddr !== "undefined") {
       options.params.dst_validator_addr = params.dstValidatorAddr;
     }
 
-    if (typeof params?.pagination !== \\"undefined\\") {
+    if (typeof params?.pagination !== "undefined") {
       setPaginationParams(options, params.pagination);
     }
 
@@ -515,7 +515,7 @@ exports[`cosmos/staking/v1beta1/query.proto 1`] = `
       params: {}
     };
 
-    if (typeof params?.pagination !== \\"undefined\\") {
+    if (typeof params?.pagination !== "undefined") {
       setPaginationParams(options, params.pagination);
     }
 
@@ -581,7 +581,7 @@ exports[`osmosis LCDClient 1`] = `
       params: {}
     };
 
-    if (typeof params?.pagination !== \\"undefined\\") {
+    if (typeof params?.pagination !== "undefined") {
       setPaginationParams(options, params.pagination);
     }
 
@@ -632,11 +632,11 @@ exports[`osmosis LCDClient 1`] = `
       params: {}
     };
 
-    if (typeof params?.baseAssetDenom !== \\"undefined\\") {
+    if (typeof params?.baseAssetDenom !== "undefined") {
       options.params.base_asset_denom = params.baseAssetDenom;
     }
 
-    if (typeof params?.quoteAssetDenom !== \\"undefined\\") {
+    if (typeof params?.quoteAssetDenom !== "undefined") {
       options.params.quote_asset_denom = params.quoteAssetDenom;
     }
 
@@ -650,15 +650,15 @@ exports[`osmosis LCDClient 1`] = `
       params: {}
     };
 
-    if (typeof params?.sender !== \\"undefined\\") {
+    if (typeof params?.sender !== "undefined") {
       options.params.sender = params.sender;
     }
 
-    if (typeof params?.tokenIn !== \\"undefined\\") {
+    if (typeof params?.tokenIn !== "undefined") {
       options.params.tokenIn = params.tokenIn;
     }
 
-    if (typeof params?.routes !== \\"undefined\\") {
+    if (typeof params?.routes !== "undefined") {
       options.params.routes = params.routes;
     }
 
@@ -672,15 +672,15 @@ exports[`osmosis LCDClient 1`] = `
       params: {}
     };
 
-    if (typeof params?.sender !== \\"undefined\\") {
+    if (typeof params?.sender !== "undefined") {
       options.params.sender = params.sender;
     }
 
-    if (typeof params?.routes !== \\"undefined\\") {
+    if (typeof params?.routes !== "undefined") {
       options.params.routes = params.routes;
     }
 
-    if (typeof params?.tokenOut !== \\"undefined\\") {
+    if (typeof params?.tokenOut !== "undefined") {
       options.params.tokenOut = params.tokenOut;
     }
 
@@ -692,9 +692,9 @@ exports[`osmosis LCDClient 1`] = `
 `;
 
 exports[`service info template 1`] = `
-Object {
+{
   "atEnd": false,
-  "strs": Array [
+  "strs": [
     "osmosis/",
     "/v1beta1/estimate/swap_exact_amount_in",
   ],
@@ -702,9 +702,9 @@ Object {
 `;
 
 exports[`service info template 2`] = `
-Object {
+{
   "atEnd": false,
-  "strs": Array [
+  "strs": [
     "osmosis/",
     "/v1beta1/",
     "/swap_exact_amount_in",
@@ -713,9 +713,9 @@ Object {
 `;
 
 exports[`service info template 3`] = `
-Object {
+{
   "atEnd": true,
-  "strs": Array [
+  "strs": [
     "osmosis/",
     "/",
     "/",
@@ -725,18 +725,18 @@ Object {
 `;
 
 exports[`service info template 4`] = `
-Object {
+{
   "atEnd": true,
-  "strs": Array [
+  "strs": [
     "osmosis/gamm/v1beta1/estimate/",
   ],
 }
 `;
 
 exports[`service info template 5`] = `
-Object {
+{
   "atEnd": true,
-  "strs": Array [
+  "strs": [
     "cosmos/feegrant/v1beta1/allowance/",
     "/",
   ],

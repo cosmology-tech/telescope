@@ -1,9 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`nested lookup 1`] = `
-Object {
+{
   "comment": "Severities of issues.",
-  "comments": Object {
+  "comments": {
     "DEPRECATION": "Deprecation issue for statements and method that may no longer be
  supported or maintained.",
     "ERROR": "Errors such as: unmatched curly braces or variable redefinition.",
@@ -13,29 +13,29 @@ Object {
   "filename": null,
   "name": "Severity",
   "options": undefined,
-  "parent": Object {
-    "fields": Object {
-      "id": Object {
+  "parent": {
+    "fields": {
+      "id": {
         "id": 3,
-        "options": Object {
+        "options": {
           "(telescope:camel)": "id",
           "(telescope:name)": "id",
           "(telescope:orig)": "id",
         },
         "type": "int64",
       },
-      "position": Object {
+      "position": {
         "id": 2,
-        "options": Object {
+        "options": {
           "(telescope:camel)": "position",
           "(telescope:name)": "position",
           "(telescope:orig)": "position",
         },
         "type": "google.api.expr.v1alpha1.SourcePosition",
       },
-      "severity": Object {
+      "severity": {
         "id": 1,
-        "options": Object {
+        "options": {
           "(telescope:camel)": "severity",
           "(telescope:name)": "severity",
           "(telescope:orig)": "severity",
@@ -43,9 +43,9 @@ Object {
         "type": "Severity",
       },
     },
-    "nested": Object {
-      "Severity": Object {
-        "values": Object {
+    "nested": {
+      "Severity": {
+        "values": {
           "DEPRECATION": 1,
           "ERROR": 3,
           "SEVERITY_UNSPECIFIED": 0,
@@ -57,17 +57,17 @@ Object {
   "parsedOptions": null,
   "reserved": undefined,
   "resolved": false,
-  "scope": Array [
+  "scope": [
     "google.api.expr.conformance.v1alpha1",
     "IssueDetails",
   ],
-  "values": Object {
+  "values": {
     "DEPRECATION": 1,
     "ERROR": 3,
     "SEVERITY_UNSPECIFIED": 0,
     "WARNING": 2,
   },
-  "valuesById": Object {
+  "valuesById": {
     "0": "SEVERITY_UNSPECIFIED",
     "1": "DEPRECATION",
     "2": "WARNING",

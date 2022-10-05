@@ -20,11 +20,11 @@ export interface MsgExecuteContract {
 exports[`MsgExecuteContract interface 2`] = `
 "export const MsgExecuteContract = {
   encode(message: MsgExecuteContract, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.sender !== \\"\\") {
+    if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
     }
 
-    if (message.contract !== \\"\\") {
+    if (message.contract !== "") {
       writer.uint32(18).string(message.contract);
     }
 
@@ -75,8 +75,8 @@ exports[`MsgExecuteContract interface 2`] = `
 
   fromJSON(object: any): MsgExecuteContract {
     return {
-      sender: isSet(object.sender) ? String(object.sender) : \\"\\",
-      contract: isSet(object.contract) ? String(object.contract) : \\"\\",
+      sender: isSet(object.sender) ? String(object.sender) : "",
+      contract: isSet(object.contract) ? String(object.contract) : "",
       msg: isSet(object.msg) ? bytesFromBase64(object.msg) : new Uint8Array(),
       funds: Array.isArray(object?.funds) ? object.funds.map((e: any) => Coin.fromJSON(e)) : []
     };
@@ -99,8 +99,8 @@ exports[`MsgExecuteContract interface 2`] = `
 
   fromPartial(object: DeepPartial<MsgExecuteContract>): MsgExecuteContract {
     const message = createBaseMsgExecuteContract();
-    message.sender = object.sender ?? \\"\\";
-    message.contract = object.contract ?? \\"\\";
+    message.sender = object.sender ?? "";
+    message.contract = object.contract ?? "";
     message.msg = object.msg ?? new Uint8Array();
     message.funds = object.funds?.map(e => Coin.fromPartial(e)) || [];
     return message;

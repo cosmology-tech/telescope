@@ -1,82 +1,82 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`google/api/expr/v1alpha1/checked 1`] = `
-Object {
-  "importNames": Object {
-    "google/api/expr/v1alpha1/syntax.proto": Object {
+{
+  "importNames": {
+    "google/api/expr/v1alpha1/syntax.proto": {
       "Constant": "Constant",
       "Expr": "Expr",
       "SourceInfo": "SourceInfo",
     },
-    "google/protobuf/empty.proto": Object {
+    "google/protobuf/empty.proto": {
       "Empty": "Empty",
     },
-    "google/protobuf/struct.proto": Object {
+    "google/protobuf/struct.proto": {
       "NullValue": "NullValue",
     },
   },
-  "imports": Array [
+  "imports": [
     "google/api/expr/v1alpha1/syntax.proto",
     "google/protobuf/empty.proto",
     "google/protobuf/struct.proto",
   ],
   "package": "google.api.expr.v1alpha1",
-  "parsedExports": Object {
+  "parsedExports": {
     "CheckedExpr": true,
     "Decl": true,
     "Reference": true,
     "Type": true,
   },
-  "parsedImports": Object {
-    "google/api/expr/v1alpha1/syntax.proto": Array [
+  "parsedImports": {
+    "google/api/expr/v1alpha1/syntax.proto": [
       "SourceInfo",
       "Expr",
       "Constant",
     ],
-    "google/protobuf/empty.proto": Array [
+    "google/protobuf/empty.proto": [
       "Empty",
     ],
-    "google/protobuf/struct.proto": Array [
+    "google/protobuf/struct.proto": [
       "NullValue",
     ],
   },
-  "root": Object {
-    "nested": Object {
-      "google": Object {
-        "nested": Object {
-          "api": Object {
-            "nested": Object {
-              "expr": Object {
-                "nested": Object {
-                  "v1alpha1": Object {
-                    "nested": Object {
-                      "CheckedExpr": Object {
+  "root": {
+    "nested": {
+      "google": {
+        "nested": {
+          "api": {
+            "nested": {
+              "expr": {
+                "nested": {
+                  "v1alpha1": {
+                    "nested": {
+                      "CheckedExpr": {
                         "comment": "A CEL expression which has been successfully type checked.",
-                        "fields": Object {
-                          "expr": Object {
+                        "fields": {
+                          "expr": {
                             "comment": "The checked expression. Semantically equivalent to the parsed \`expr\`, but
  may have structural differences.",
                             "id": 4,
                             "import": "google/api/expr/v1alpha1/syntax.proto",
                             "importedName": "Expr",
-                            "options": Object {
+                            "options": {
                               "(telescope:camel)": "expr",
                               "(telescope:name)": "expr",
                               "(telescope:orig)": "expr",
                             },
-                            "parsedType": Object {
+                            "parsedType": {
                               "name": "Expr",
                               "type": "Type",
                             },
-                            "scope": Array [
-                              Array [
+                            "scope": [
+                              [
                                 "google.api.expr.v1alpha1",
                               ],
                             ],
                             "scopeType": "import",
                             "type": "Expr",
                           },
-                          "exprVersion": Object {
+                          "exprVersion": {
                             "comment": "The expr version indicates the major / minor version number of the \`expr\`
  representation.
 
@@ -86,19 +86,19 @@ Object {
  the same or similar transformations prior to evaluation.",
                             "id": 6,
                             "isScalar": true,
-                            "options": Object {
+                            "options": {
                               "(telescope:camel)": "exprVersion",
                               "(telescope:name)": "exprVersion",
                               "(telescope:orig)": "expr_version",
                             },
-                            "parsedType": Object {
+                            "parsedType": {
                               "name": "string",
                               "type": "native",
                             },
                             "type": "string",
                             "typeNum": 13,
                           },
-                          "referenceMap": Object {
+                          "referenceMap": {
                             "comment": "A map from expression ids to resolved references.
 
  The following entries are in this table:
@@ -116,44 +116,44 @@ Object {
    the message.",
                             "id": 2,
                             "keyType": "int64",
-                            "options": Object {
+                            "options": {
                               "(telescope:camel)": "referenceMap",
                               "(telescope:name)": "referenceMap",
                               "(telescope:orig)": "reference_map",
                             },
-                            "parsedType": Object {
+                            "parsedType": {
                               "name": "Reference",
                               "type": "Type",
                             },
-                            "scope": Array [
+                            "scope": [
                               "google.api.expr.v1alpha1",
                             ],
                             "type": "Reference",
                           },
-                          "sourceInfo": Object {
+                          "sourceInfo": {
                             "comment": "The source info derived from input that generated the parsed \`expr\` and
  any optimizations made during the type-checking pass.",
                             "id": 5,
                             "import": "google/api/expr/v1alpha1/syntax.proto",
                             "importedName": "SourceInfo",
-                            "options": Object {
+                            "options": {
                               "(telescope:camel)": "sourceInfo",
                               "(telescope:name)": "sourceInfo",
                               "(telescope:orig)": "source_info",
                             },
-                            "parsedType": Object {
+                            "parsedType": {
                               "name": "SourceInfo",
                               "type": "Type",
                             },
-                            "scope": Array [
-                              Array [
+                            "scope": [
+                              [
                                 "google.api.expr.v1alpha1",
                               ],
                             ],
                             "scopeType": "import",
                             "type": "SourceInfo",
                           },
-                          "typeMap": Object {
+                          "typeMap": {
                             "comment": "A map from expression ids to types.
 
  Every expression node which has a type different than DYN has a mapping
@@ -161,23 +161,23 @@ Object {
  space.",
                             "id": 3,
                             "keyType": "int64",
-                            "options": Object {
+                            "options": {
                               "(telescope:camel)": "typeMap",
                               "(telescope:name)": "typeMap",
                               "(telescope:orig)": "type_map",
                             },
-                            "parsedType": Object {
+                            "parsedType": {
                               "name": "Type",
                               "type": "Type",
                             },
-                            "scope": Array [
+                            "scope": [
                               "google.api.expr.v1alpha1",
                             ],
                             "type": "Type",
                           },
                         },
-                        "keyTypes": Array [
-                          Object {
+                        "keyTypes": [
+                          {
                             "comment": "A map from expression ids to resolved references.
 
  The following entries are in this table:
@@ -196,21 +196,21 @@ Object {
                             "id": 2,
                             "keyType": "int64",
                             "name": "referenceMap",
-                            "options": Object {
+                            "options": {
                               "(telescope:camel)": "referenceMap",
                               "(telescope:name)": "referenceMap",
                               "(telescope:orig)": "reference_map",
                             },
-                            "parsedType": Object {
+                            "parsedType": {
                               "name": "Reference",
                               "type": "Type",
                             },
-                            "scope": Array [
+                            "scope": [
                               "google.api.expr.v1alpha1",
                             ],
                             "type": "Reference",
                           },
-                          Object {
+                          {
                             "comment": "A map from expression ids to types.
 
  Every expression node which has a type different than DYN has a mapping
@@ -219,16 +219,16 @@ Object {
                             "id": 3,
                             "keyType": "int64",
                             "name": "typeMap",
-                            "options": Object {
+                            "options": {
                               "(telescope:camel)": "typeMap",
                               "(telescope:name)": "typeMap",
                               "(telescope:orig)": "type_map",
                             },
-                            "parsedType": Object {
+                            "parsedType": {
                               "name": "Type",
                               "type": "Type",
                             },
-                            "scope": Array [
+                            "scope": [
                               "google.api.expr.v1alpha1",
                             ],
                             "type": "Type",
@@ -240,49 +240,49 @@ Object {
                         "options": undefined,
                         "type": "Type",
                       },
-                      "Decl": Object {
+                      "Decl": {
                         "comment": "Represents a declaration of a named value or function.
 
  A declaration is part of the contract between the expression, the agent
  evaluating that expression, and the caller requesting evaluation.",
-                        "fields": Object {
-                          "function": Object {
+                        "fields": {
+                          "function": {
                             "comment": "Function declaration.",
                             "id": 3,
-                            "options": Object {
+                            "options": {
                               "(telescope:camel)": "function",
                               "(telescope:name)": "function",
                               "(telescope:orig)": "function",
                             },
-                            "parsedType": Object {
+                            "parsedType": {
                               "name": "FunctionDecl",
                               "type": "Type",
                             },
-                            "scope": Array [
+                            "scope": [
                               "google.api.expr.v1alpha1",
                               "Decl",
                             ],
                             "type": "FunctionDecl",
                           },
-                          "ident": Object {
+                          "ident": {
                             "comment": "Identifier declaration.",
                             "id": 2,
-                            "options": Object {
+                            "options": {
                               "(telescope:camel)": "ident",
                               "(telescope:name)": "ident",
                               "(telescope:orig)": "ident",
                             },
-                            "parsedType": Object {
+                            "parsedType": {
                               "name": "IdentDecl",
                               "type": "Type",
                             },
-                            "scope": Array [
+                            "scope": [
                               "google.api.expr.v1alpha1",
                               "Decl",
                             ],
                             "type": "IdentDecl",
                           },
-                          "name": Object {
+                          "name": {
                             "comment": "The fully qualified name of the declaration.
 
  Declarations are organized in containers and this represents the full path
@@ -293,12 +293,12 @@ Object {
  function definition containing a result [Expr][google.api.expr.v1alpha1.Expr].",
                             "id": 1,
                             "isScalar": true,
-                            "options": Object {
+                            "options": {
                               "(telescope:camel)": "name",
                               "(telescope:name)": "name",
                               "(telescope:orig)": "name",
                             },
-                            "parsedType": Object {
+                            "parsedType": {
                               "name": "string",
                               "type": "native",
                             },
@@ -306,30 +306,30 @@ Object {
                             "typeNum": 13,
                           },
                         },
-                        "keyTypes": Array [],
+                        "keyTypes": [],
                         "name": "Decl",
-                        "nested": Object {
-                          "FunctionDecl": Object {
+                        "nested": {
+                          "FunctionDecl": {
                             "comment": "Function declaration specifies one or more overloads which indicate the
  function's parameter types and return type.
 
  Functions have no observable side-effects (there may be side-effects like
  logging which are not observable from CEL).",
-                            "fields": Object {
-                              "overloads": Object {
+                            "fields": {
+                              "overloads": {
                                 "comment": "Required. List of function overloads, must contain at least one overload.",
                                 "id": 1,
-                                "options": Object {
+                                "options": {
                                   "(telescope:camel)": "overloads",
                                   "(telescope:name)": "overloads",
                                   "(telescope:orig)": "overloads",
                                 },
-                                "parsedType": Object {
+                                "parsedType": {
                                   "name": "Overload",
                                   "type": "Type",
                                 },
                                 "rule": "repeated",
-                                "scope": Array [
+                                "scope": [
                                   "google.api.expr.v1alpha1",
                                   "Decl",
                                   "FunctionDecl",
@@ -337,10 +337,10 @@ Object {
                                 "type": "Overload",
                               },
                             },
-                            "keyTypes": Array [],
+                            "keyTypes": [],
                             "name": "FunctionDecl",
-                            "nested": Object {
-                              "Overload": Object {
+                            "nested": {
+                              "Overload": {
                                 "comment": "An overload indicates a function's parameter types and return type, and
  may optionally include a function body described in terms of [Expr][google.api.expr.v1alpha1.Expr]
  values.
@@ -351,24 +351,24 @@ Object {
 
  Overloads must have non-overlapping argument types after erasure of all
  parameterized type variables (similar as type erasure in Java).",
-                                "fields": Object {
-                                  "doc": Object {
+                                "fields": {
+                                  "doc": {
                                     "comment": "Documentation string for the overload.",
                                     "id": 6,
                                     "isScalar": true,
-                                    "options": Object {
+                                    "options": {
                                       "(telescope:camel)": "doc",
                                       "(telescope:name)": "doc",
                                       "(telescope:orig)": "doc",
                                     },
-                                    "parsedType": Object {
+                                    "parsedType": {
                                       "name": "string",
                                       "type": "native",
                                     },
                                     "type": "string",
                                     "typeNum": 13,
                                   },
-                                  "isInstanceFunction": Object {
+                                  "isInstanceFunction": {
                                     "comment": "Whether the function is to be used in a method call-style \`x.f(...)\`
  of a function call-style \`f(x, ...)\`.
 
@@ -376,19 +376,19 @@ Object {
  expected type of the target receiver.",
                                     "id": 5,
                                     "isScalar": true,
-                                    "options": Object {
+                                    "options": {
                                       "(telescope:camel)": "isInstanceFunction",
                                       "(telescope:name)": "isInstanceFunction",
                                       "(telescope:orig)": "is_instance_function",
                                     },
-                                    "parsedType": Object {
+                                    "parsedType": {
                                       "name": "bool",
                                       "type": "native",
                                     },
                                     "type": "bool",
                                     "typeNum": 12,
                                   },
-                                  "overloadId": Object {
+                                  "overloadId": {
                                     "comment": "Required. Globally unique overload name of the function which reflects
  the function name and argument types.
 
@@ -396,19 +396,19 @@ Object {
  was resolved for the function \`name\`.",
                                     "id": 1,
                                     "isScalar": true,
-                                    "options": Object {
+                                    "options": {
                                       "(telescope:camel)": "overloadId",
                                       "(telescope:name)": "overloadId",
                                       "(telescope:orig)": "overload_id",
                                     },
-                                    "parsedType": Object {
+                                    "parsedType": {
                                       "name": "string",
                                       "type": "native",
                                     },
                                     "type": "string",
                                     "typeNum": 13,
                                   },
-                                  "params": Object {
+                                  "params": {
                                     "comment": "List of function parameter [Type][google.api.expr.v1alpha1.Type] values.
 
  Param types are disjoint after generic type parameters have been
@@ -420,52 +420,52 @@ Object {
  When the \`result_type\` of a function is a generic type param, the
  type param name also appears as the \`type\` of on at least one params.",
                                     "id": 2,
-                                    "options": Object {
+                                    "options": {
                                       "(telescope:camel)": "params",
                                       "(telescope:name)": "params",
                                       "(telescope:orig)": "params",
                                     },
-                                    "parsedType": Object {
+                                    "parsedType": {
                                       "name": "Type",
                                       "type": "Type",
                                     },
                                     "rule": "repeated",
-                                    "scope": Array [
+                                    "scope": [
                                       "google.api.expr.v1alpha1",
                                     ],
                                     "type": "Type",
                                   },
-                                  "resultType": Object {
+                                  "resultType": {
                                     "comment": "Required. The result type of the function. For example, the operator
  \`string.isEmpty()\` would have \`result_type\` of \`kind: BOOL\`.",
                                     "id": 4,
-                                    "options": Object {
+                                    "options": {
                                       "(telescope:camel)": "resultType",
                                       "(telescope:name)": "resultType",
                                       "(telescope:orig)": "result_type",
                                     },
-                                    "parsedType": Object {
+                                    "parsedType": {
                                       "name": "Type",
                                       "type": "Type",
                                     },
-                                    "scope": Array [
+                                    "scope": [
                                       "google.api.expr.v1alpha1",
                                     ],
                                     "type": "Type",
                                   },
-                                  "typeParams": Object {
+                                  "typeParams": {
                                     "comment": "The type param names associated with the function declaration.
 
  For example, \`function ex<K,V>(K key, map<K, V> map) : V\` would yield
  the type params of \`K, V\`.",
                                     "id": 3,
                                     "isScalar": true,
-                                    "options": Object {
+                                    "options": {
                                       "(telescope:camel)": "typeParams",
                                       "(telescope:name)": "typeParams",
                                       "(telescope:orig)": "type_params",
                                     },
-                                    "parsedType": Object {
+                                    "parsedType": {
                                       "name": "string",
                                       "type": "native",
                                     },
@@ -474,7 +474,7 @@ Object {
                                     "typeNum": 13,
                                   },
                                 },
-                                "keyTypes": Array [],
+                                "keyTypes": [],
                                 "name": "Overload",
                                 "nested": null,
                                 "oneofs": undefined,
@@ -486,64 +486,64 @@ Object {
                             "options": undefined,
                             "type": "Type",
                           },
-                          "IdentDecl": Object {
+                          "IdentDecl": {
                             "comment": "Identifier declaration which specifies its type and optional \`Expr\` value.
 
  An identifier without a value is a declaration that must be provided at
  evaluation time. An identifier with a value should resolve to a constant,
  but may be used in conjunction with other identifiers bound at evaluation
  time.",
-                            "fields": Object {
-                              "doc": Object {
+                            "fields": {
+                              "doc": {
                                 "comment": "Documentation string for the identifier.",
                                 "id": 3,
                                 "isScalar": true,
-                                "options": Object {
+                                "options": {
                                   "(telescope:camel)": "doc",
                                   "(telescope:name)": "doc",
                                   "(telescope:orig)": "doc",
                                 },
-                                "parsedType": Object {
+                                "parsedType": {
                                   "name": "string",
                                   "type": "native",
                                 },
                                 "type": "string",
                                 "typeNum": 13,
                               },
-                              "type": Object {
+                              "type": {
                                 "comment": "Required. The type of the identifier.",
                                 "id": 1,
-                                "options": Object {
+                                "options": {
                                   "(telescope:camel)": "type",
                                   "(telescope:name)": "type",
                                   "(telescope:orig)": "type",
                                 },
-                                "parsedType": Object {
+                                "parsedType": {
                                   "name": "Type",
                                   "type": "Type",
                                 },
-                                "scope": Array [
+                                "scope": [
                                   "google.api.expr.v1alpha1",
                                 ],
                                 "type": "Type",
                               },
-                              "value": Object {
+                              "value": {
                                 "comment": "The constant value of the identifier. If not specified, the identifier
  must be supplied at evaluation time.",
                                 "id": 2,
                                 "import": "google/api/expr/v1alpha1/syntax.proto",
                                 "importedName": "Constant",
-                                "options": Object {
+                                "options": {
                                   "(telescope:camel)": "value",
                                   "(telescope:name)": "value",
                                   "(telescope:orig)": "value",
                                 },
-                                "parsedType": Object {
+                                "parsedType": {
                                   "name": "Constant",
                                   "type": "Type",
                                 },
-                                "scope": Array [
-                                  Array [
+                                "scope": [
+                                  [
                                     "google.api.expr.v1alpha1",
                                   ],
                                 ],
@@ -551,7 +551,7 @@ Object {
                                 "type": "Constant",
                               },
                             },
-                            "keyTypes": Array [],
+                            "keyTypes": [],
                             "name": "IdentDecl",
                             "nested": null,
                             "oneofs": undefined,
@@ -559,9 +559,9 @@ Object {
                             "type": "Type",
                           },
                         },
-                        "oneofs": Object {
-                          "declKind": Object {
-                            "oneof": Array [
+                        "oneofs": {
+                          "declKind": {
+                            "oneof": [
                               "ident",
                               "function",
                             ],
@@ -570,26 +570,26 @@ Object {
                         "options": undefined,
                         "type": "Type",
                       },
-                      "Reference": Object {
+                      "Reference": {
                         "comment": "Describes a resolved reference to a declaration.",
-                        "fields": Object {
-                          "name": Object {
+                        "fields": {
+                          "name": {
                             "comment": "The fully qualified name of the declaration.",
                             "id": 1,
                             "isScalar": true,
-                            "options": Object {
+                            "options": {
                               "(telescope:camel)": "name",
                               "(telescope:name)": "name",
                               "(telescope:orig)": "name",
                             },
-                            "parsedType": Object {
+                            "parsedType": {
                               "name": "string",
                               "type": "native",
                             },
                             "type": "string",
                             "typeNum": 13,
                           },
-                          "overloadId": Object {
+                          "overloadId": {
                             "comment": "For references to functions, this is a list of \`Overload.overload_id\`
  values which match according to typing rules.
 
@@ -600,12 +600,12 @@ Object {
  Empty if this is not a reference to a [Decl.FunctionDecl][google.api.expr.v1alpha1.Decl.FunctionDecl].",
                             "id": 3,
                             "isScalar": true,
-                            "options": Object {
+                            "options": {
                               "(telescope:camel)": "overloadId",
                               "(telescope:name)": "overloadId",
                               "(telescope:orig)": "overload_id",
                             },
-                            "parsedType": Object {
+                            "parsedType": {
                               "name": "string",
                               "type": "native",
                             },
@@ -613,23 +613,23 @@ Object {
                             "type": "string",
                             "typeNum": 13,
                           },
-                          "value": Object {
+                          "value": {
                             "comment": "For references to constants, this may contain the value of the
  constant if known at compile time.",
                             "id": 4,
                             "import": "google/api/expr/v1alpha1/syntax.proto",
                             "importedName": "Constant",
-                            "options": Object {
+                            "options": {
                               "(telescope:camel)": "value",
                               "(telescope:name)": "value",
                               "(telescope:orig)": "value",
                             },
-                            "parsedType": Object {
+                            "parsedType": {
                               "name": "Constant",
                               "type": "Type",
                             },
-                            "scope": Array [
-                              Array [
+                            "scope": [
+                              [
                                 "google.api.expr.v1alpha1",
                               ],
                             ],
@@ -637,55 +637,55 @@ Object {
                             "type": "Constant",
                           },
                         },
-                        "keyTypes": Array [],
+                        "keyTypes": [],
                         "name": "Reference",
                         "nested": null,
                         "oneofs": undefined,
                         "options": undefined,
                         "type": "Type",
                       },
-                      "Type": Object {
+                      "Type": {
                         "comment": "Represents a CEL type.",
-                        "fields": Object {
-                          "abstractType": Object {
+                        "fields": {
+                          "abstractType": {
                             "comment": "Abstract, application defined type.",
                             "id": 14,
-                            "options": Object {
+                            "options": {
                               "(telescope:camel)": "abstractType",
                               "(telescope:name)": "abstractType",
                               "(telescope:orig)": "abstract_type",
                             },
-                            "parsedType": Object {
+                            "parsedType": {
                               "name": "AbstractType",
                               "type": "Type",
                             },
-                            "scope": Array [
+                            "scope": [
                               "google.api.expr.v1alpha1",
                               "Type",
                             ],
                             "type": "AbstractType",
                           },
-                          "dyn": Object {
+                          "dyn": {
                             "comment": "Dynamic type.",
                             "id": 1,
                             "import": "google/protobuf/empty.proto",
                             "importedName": "google.protobuf.Empty",
-                            "options": Object {
+                            "options": {
                               "(telescope:camel)": "dyn",
                               "(telescope:name)": "dyn",
                               "(telescope:orig)": "dyn",
                             },
-                            "parsedType": Object {
+                            "parsedType": {
                               "name": "Empty",
                               "type": "Type",
                             },
-                            "scope": Array [
+                            "scope": [
                               "google.protobuf",
                             ],
                             "scopeType": "protoImport",
                             "type": "google.protobuf.Empty",
                           },
-                          "error": Object {
+                          "error": {
                             "comment": "Error type.
 
  During type-checking if an expression is an error, its type is propagated
@@ -694,153 +694,153 @@ Object {
                             "id": 12,
                             "import": "google/protobuf/empty.proto",
                             "importedName": "google.protobuf.Empty",
-                            "options": Object {
+                            "options": {
                               "(telescope:camel)": "error",
                               "(telescope:name)": "error",
                               "(telescope:orig)": "error",
                             },
-                            "parsedType": Object {
+                            "parsedType": {
                               "name": "Empty",
                               "type": "Type",
                             },
-                            "scope": Array [
+                            "scope": [
                               "google.protobuf",
                             ],
                             "scopeType": "protoImport",
                             "type": "google.protobuf.Empty",
                           },
-                          "function": Object {
+                          "function": {
                             "comment": "Function type.",
                             "id": 8,
-                            "options": Object {
+                            "options": {
                               "(telescope:camel)": "function",
                               "(telescope:name)": "function",
                               "(telescope:orig)": "function",
                             },
-                            "parsedType": Object {
+                            "parsedType": {
                               "name": "FunctionType",
                               "type": "Type",
                             },
-                            "scope": Array [
+                            "scope": [
                               "google.api.expr.v1alpha1",
                               "Type",
                             ],
                             "type": "FunctionType",
                           },
-                          "listType": Object {
+                          "listType": {
                             "comment": "Parameterized list with elements of \`list_type\`, e.g. \`list<timestamp>\`.",
                             "id": 6,
-                            "options": Object {
+                            "options": {
                               "(telescope:camel)": "listType",
                               "(telescope:name)": "listType",
                               "(telescope:orig)": "list_type",
                             },
-                            "parsedType": Object {
+                            "parsedType": {
                               "name": "ListType",
                               "type": "Type",
                             },
-                            "scope": Array [
+                            "scope": [
                               "google.api.expr.v1alpha1",
                               "Type",
                             ],
                             "type": "ListType",
                           },
-                          "mapType": Object {
+                          "mapType": {
                             "comment": "Parameterized map with typed keys and values.",
                             "id": 7,
-                            "options": Object {
+                            "options": {
                               "(telescope:camel)": "mapType",
                               "(telescope:name)": "mapType",
                               "(telescope:orig)": "map_type",
                             },
-                            "parsedType": Object {
+                            "parsedType": {
                               "name": "MapType",
                               "type": "Type",
                             },
-                            "scope": Array [
+                            "scope": [
                               "google.api.expr.v1alpha1",
                               "Type",
                             ],
                             "type": "MapType",
                           },
-                          "messageType": Object {
+                          "messageType": {
                             "comment": "Protocol buffer message type.
 
  The \`message_type\` string specifies the qualified message type name. For
  example, \`google.plus.Profile\`.",
                             "id": 9,
                             "isScalar": true,
-                            "options": Object {
+                            "options": {
                               "(telescope:camel)": "messageType",
                               "(telescope:name)": "messageType",
                               "(telescope:orig)": "message_type",
                             },
-                            "parsedType": Object {
+                            "parsedType": {
                               "name": "string",
                               "type": "native",
                             },
                             "type": "string",
                             "typeNum": 13,
                           },
-                          "null": Object {
+                          "null": {
                             "comment": "Null value.",
                             "id": 2,
                             "import": "google/protobuf/struct.proto",
                             "importedName": "google.protobuf.NullValue",
-                            "options": Object {
+                            "options": {
                               "(telescope:camel)": "null",
                               "(telescope:name)": "null",
                               "(telescope:orig)": "null",
                             },
-                            "parsedType": Object {
+                            "parsedType": {
                               "name": "NullValue",
                               "type": "Enum",
                             },
-                            "scope": Array [
+                            "scope": [
                               "google.protobuf",
                             ],
                             "scopeType": "protoImport",
                             "type": "google.protobuf.NullValue",
                           },
-                          "primitive": Object {
+                          "primitive": {
                             "comment": "Primitive types: \`true\`, \`1u\`, \`-2.0\`, \`'string'\`, \`b'bytes'\`.",
                             "id": 3,
-                            "options": Object {
+                            "options": {
                               "(telescope:camel)": "primitive",
                               "(telescope:name)": "primitive",
                               "(telescope:orig)": "primitive",
                             },
-                            "parsedType": Object {
+                            "parsedType": {
                               "name": "PrimitiveType",
                               "type": "Enum",
                             },
-                            "scope": Array [
+                            "scope": [
                               "google.api.expr.v1alpha1",
                               "Type",
                             ],
                             "type": "PrimitiveType",
                           },
-                          "type": Object {
+                          "type": {
                             "comment": "Type type.
 
  The \`type\` value specifies the target type. e.g. int is type with a
  target type of \`Primitive.INT\`.",
                             "id": 11,
-                            "options": Object {
+                            "options": {
                               "(telescope:camel)": "type",
                               "(telescope:name)": "type",
                               "(telescope:orig)": "type",
                             },
-                            "parsedType": Object {
+                            "parsedType": {
                               "name": "Type",
                               "type": "Type",
                             },
-                            "scope": Array [
+                            "scope": [
                               "google.api.expr.v1alpha1",
                             ],
                             "type": "Type",
                           },
-                          "typeParam": Object {
+                          "typeParam": {
                             "comment": "Type param type.
 
  The \`type_param\` string specifies the type parameter name, e.g. \`list<E>\`
@@ -848,225 +848,225 @@ Object {
  named \`E\`.",
                             "id": 10,
                             "isScalar": true,
-                            "options": Object {
+                            "options": {
                               "(telescope:camel)": "typeParam",
                               "(telescope:name)": "typeParam",
                               "(telescope:orig)": "type_param",
                             },
-                            "parsedType": Object {
+                            "parsedType": {
                               "name": "string",
                               "type": "native",
                             },
                             "type": "string",
                             "typeNum": 13,
                           },
-                          "wellKnown": Object {
+                          "wellKnown": {
                             "comment": "Well-known protobuf type such as \`google.protobuf.Timestamp\`.",
                             "id": 5,
-                            "options": Object {
+                            "options": {
                               "(telescope:camel)": "wellKnown",
                               "(telescope:name)": "wellKnown",
                               "(telescope:orig)": "well_known",
                             },
-                            "parsedType": Object {
+                            "parsedType": {
                               "name": "WellKnownType",
                               "type": "Enum",
                             },
-                            "scope": Array [
+                            "scope": [
                               "google.api.expr.v1alpha1",
                               "Type",
                             ],
                             "type": "WellKnownType",
                           },
-                          "wrapper": Object {
+                          "wrapper": {
                             "comment": "Wrapper of a primitive type, e.g. \`google.protobuf.Int64Value\`.",
                             "id": 4,
-                            "options": Object {
+                            "options": {
                               "(telescope:camel)": "wrapper",
                               "(telescope:name)": "wrapper",
                               "(telescope:orig)": "wrapper",
                             },
-                            "parsedType": Object {
+                            "parsedType": {
                               "name": "PrimitiveType",
                               "type": "Enum",
                             },
-                            "scope": Array [
+                            "scope": [
                               "google.api.expr.v1alpha1",
                               "Type",
                             ],
                             "type": "PrimitiveType",
                           },
                         },
-                        "keyTypes": Array [],
+                        "keyTypes": [],
                         "name": "Type",
-                        "nested": Object {
-                          "AbstractType": Object {
+                        "nested": {
+                          "AbstractType": {
                             "comment": "Application defined abstract type.",
-                            "fields": Object {
-                              "name": Object {
+                            "fields": {
+                              "name": {
                                 "comment": "The fully qualified name of this abstract type.",
                                 "id": 1,
                                 "isScalar": true,
-                                "options": Object {
+                                "options": {
                                   "(telescope:camel)": "name",
                                   "(telescope:name)": "name",
                                   "(telescope:orig)": "name",
                                 },
-                                "parsedType": Object {
+                                "parsedType": {
                                   "name": "string",
                                   "type": "native",
                                 },
                                 "type": "string",
                                 "typeNum": 13,
                               },
-                              "parameterTypes": Object {
+                              "parameterTypes": {
                                 "comment": "Parameter types for this abstract type.",
                                 "id": 2,
-                                "options": Object {
+                                "options": {
                                   "(telescope:camel)": "parameterTypes",
                                   "(telescope:name)": "parameterTypes",
                                   "(telescope:orig)": "parameter_types",
                                 },
-                                "parsedType": Object {
+                                "parsedType": {
                                   "name": "Type",
                                   "type": "Type",
                                 },
                                 "rule": "repeated",
-                                "scope": Array [
+                                "scope": [
                                   "google.api.expr.v1alpha1",
                                 ],
                                 "type": "Type",
                               },
                             },
-                            "keyTypes": Array [],
+                            "keyTypes": [],
                             "name": "AbstractType",
                             "nested": null,
                             "oneofs": undefined,
                             "options": undefined,
                             "type": "Type",
                           },
-                          "FunctionType": Object {
+                          "FunctionType": {
                             "comment": "Function type with result and arg types.",
-                            "fields": Object {
-                              "argTypes": Object {
+                            "fields": {
+                              "argTypes": {
                                 "comment": "Argument types of the function.",
                                 "id": 2,
-                                "options": Object {
+                                "options": {
                                   "(telescope:camel)": "argTypes",
                                   "(telescope:name)": "argTypes",
                                   "(telescope:orig)": "arg_types",
                                 },
-                                "parsedType": Object {
+                                "parsedType": {
                                   "name": "Type",
                                   "type": "Type",
                                 },
                                 "rule": "repeated",
-                                "scope": Array [
+                                "scope": [
                                   "google.api.expr.v1alpha1",
                                 ],
                                 "type": "Type",
                               },
-                              "resultType": Object {
+                              "resultType": {
                                 "comment": "Result type of the function.",
                                 "id": 1,
-                                "options": Object {
+                                "options": {
                                   "(telescope:camel)": "resultType",
                                   "(telescope:name)": "resultType",
                                   "(telescope:orig)": "result_type",
                                 },
-                                "parsedType": Object {
+                                "parsedType": {
                                   "name": "Type",
                                   "type": "Type",
                                 },
-                                "scope": Array [
+                                "scope": [
                                   "google.api.expr.v1alpha1",
                                 ],
                                 "type": "Type",
                               },
                             },
-                            "keyTypes": Array [],
+                            "keyTypes": [],
                             "name": "FunctionType",
                             "nested": null,
                             "oneofs": undefined,
                             "options": undefined,
                             "type": "Type",
                           },
-                          "ListType": Object {
+                          "ListType": {
                             "comment": "List type with typed elements, e.g. \`list<example.proto.MyMessage>\`.",
-                            "fields": Object {
-                              "elemType": Object {
+                            "fields": {
+                              "elemType": {
                                 "comment": "The element type.",
                                 "id": 1,
-                                "options": Object {
+                                "options": {
                                   "(telescope:camel)": "elemType",
                                   "(telescope:name)": "elemType",
                                   "(telescope:orig)": "elem_type",
                                 },
-                                "parsedType": Object {
+                                "parsedType": {
                                   "name": "Type",
                                   "type": "Type",
                                 },
-                                "scope": Array [
+                                "scope": [
                                   "google.api.expr.v1alpha1",
                                 ],
                                 "type": "Type",
                               },
                             },
-                            "keyTypes": Array [],
+                            "keyTypes": [],
                             "name": "ListType",
                             "nested": null,
                             "oneofs": undefined,
                             "options": undefined,
                             "type": "Type",
                           },
-                          "MapType": Object {
+                          "MapType": {
                             "comment": "Map type with parameterized key and value types, e.g. \`map<string, int>\`.",
-                            "fields": Object {
-                              "keyType": Object {
+                            "fields": {
+                              "keyType": {
                                 "comment": "The type of the key.",
                                 "id": 1,
-                                "options": Object {
+                                "options": {
                                   "(telescope:camel)": "keyType",
                                   "(telescope:name)": "keyType",
                                   "(telescope:orig)": "key_type",
                                 },
-                                "parsedType": Object {
+                                "parsedType": {
                                   "name": "Type",
                                   "type": "Type",
                                 },
-                                "scope": Array [
+                                "scope": [
                                   "google.api.expr.v1alpha1",
                                 ],
                                 "type": "Type",
                               },
-                              "valueType": Object {
+                              "valueType": {
                                 "comment": "The type of the value.",
                                 "id": 2,
-                                "options": Object {
+                                "options": {
                                   "(telescope:camel)": "valueType",
                                   "(telescope:name)": "valueType",
                                   "(telescope:orig)": "value_type",
                                 },
-                                "parsedType": Object {
+                                "parsedType": {
                                   "name": "Type",
                                   "type": "Type",
                                 },
-                                "scope": Array [
+                                "scope": [
                                   "google.api.expr.v1alpha1",
                                 ],
                                 "type": "Type",
                               },
                             },
-                            "keyTypes": Array [],
+                            "keyTypes": [],
                             "name": "MapType",
                             "nested": null,
                             "oneofs": undefined,
                             "options": undefined,
                             "type": "Type",
                           },
-                          "PrimitiveType": Object {
+                          "PrimitiveType": {
                             "comment": "CEL primitive types.",
-                            "comments": Object {
+                            "comments": {
                               "BOOL": "Boolean type.",
                               "BYTES": "Bytes type.",
                               "DOUBLE": "Double type.
@@ -1083,7 +1083,7 @@ Object {
                             },
                             "name": "PrimitiveType",
                             "type": "Enum",
-                            "values": Object {
+                            "values": {
                               "BOOL": 1,
                               "BYTES": 6,
                               "DOUBLE": 4,
@@ -1093,9 +1093,9 @@ Object {
                               "UINT64": 3,
                             },
                           },
-                          "WellKnownType": Object {
+                          "WellKnownType": {
                             "comment": "Well-known protobuf types treated with first-class support in CEL.",
-                            "comments": Object {
+                            "comments": {
                               "ANY": "Well-known protobuf.Any type.
 
  Any types are a polymorphic message type. During type-checking they are
@@ -1107,7 +1107,7 @@ Object {
                             },
                             "name": "WellKnownType",
                             "type": "Enum",
-                            "values": Object {
+                            "values": {
                               "ANY": 1,
                               "DURATION": 3,
                               "TIMESTAMP": 2,
@@ -1115,9 +1115,9 @@ Object {
                             },
                           },
                         },
-                        "oneofs": Object {
-                          "typeKind": Object {
-                            "oneof": Array [
+                        "oneofs": {
+                          "typeKind": {
+                            "oneof": [
                               "dyn",
                               "null",
                               "primitive",
@@ -1156,16 +1156,16 @@ Object {
 `;
 
 exports[`google/api/expr/v1alpha1/checked 2`] = `
-Object {
+{
   "import": "google/protobuf/empty.proto",
   "importType": "protoImport",
   "importedName": "google.protobuf.Empty",
   "name": "Empty",
-  "obj": Object {
+  "obj": {
     "_ctor": null,
     "_fieldsArray": null,
     "_fieldsById": null,
-    "_nestedArray": Array [],
+    "_nestedArray": [],
     "_oneofsArray": null,
     "comment": "A generic empty message that you can re-use to avoid defining duplicated
  empty messages in your APIs. A typical example is to use it as the request
@@ -1177,20 +1177,20 @@ Object {
 
  The JSON representation for \`Empty\` is empty JSON object \`{}\`.",
     "extensions": undefined,
-    "fields": Object {},
+    "fields": {},
     "filename": null,
     "group": undefined,
     "name": "Empty",
     "nested": undefined,
     "oneofs": undefined,
     "options": undefined,
-    "parent": Object {
-      "nested": Object {
-        "Empty": Object {
-          "fields": Object {},
+    "parent": {
+      "nested": {
+        "Empty": {
+          "fields": {},
         },
       },
-      "options": Object {
+      "options": {
         "cc_enable_arenas": true,
         "csharp_namespace": "Google.Protobuf.WellKnownTypes",
         "go_package": "types",
@@ -1203,7 +1203,7 @@ Object {
     "parsedOptions": null,
     "reserved": undefined,
     "resolved": false,
-    "scope": Array [
+    "scope": [
       "google.protobuf",
     ],
   },
@@ -1212,16 +1212,16 @@ Object {
 `;
 
 exports[`google/api/expr/v1alpha1/checked 3`] = `
-Object {
+{
   "import": "google/api/expr/v1alpha1/syntax.proto",
   "importType": "import",
   "importedName": "Constant",
   "name": "Constant",
-  "obj": Object {
+  "obj": {
     "_ctor": null,
     "_fieldsArray": null,
     "_fieldsById": null,
-    "_nestedArray": Array [],
+    "_nestedArray": [],
     "_oneofsArray": null,
     "comment": "Represents a primitive literal.
 
@@ -1234,40 +1234,40 @@ Object {
  Lists and structs are not included as constants as these aggregate types may
  contain [Expr][google.api.expr.v1alpha1.Expr] elements which require evaluation and are thus not constant.
 
- Examples of literals include: \`\\"hello\\"\`, \`b'bytes'\`, \`1u\`, \`4.2\`, \`-2\`,
+ Examples of literals include: \`"hello"\`, \`b'bytes'\`, \`1u\`, \`4.2\`, \`-2\`,
  \`true\`, \`null\`.",
     "extensions": undefined,
-    "fields": Object {
-      "boolValue": Object {
+    "fields": {
+      "boolValue": {
         "id": 2,
-        "options": Object {
+        "options": {
           "(telescope:camel)": "boolValue",
           "(telescope:name)": "boolValue",
           "(telescope:orig)": "bool_value",
         },
         "type": "bool",
       },
-      "bytesValue": Object {
+      "bytesValue": {
         "id": 7,
-        "options": Object {
+        "options": {
           "(telescope:camel)": "bytesValue",
           "(telescope:name)": "bytesValue",
           "(telescope:orig)": "bytes_value",
         },
         "type": "bytes",
       },
-      "doubleValue": Object {
+      "doubleValue": {
         "id": 5,
-        "options": Object {
+        "options": {
           "(telescope:camel)": "doubleValue",
           "(telescope:name)": "doubleValue",
           "(telescope:orig)": "double_value",
         },
         "type": "double",
       },
-      "durationValue": Object {
+      "durationValue": {
         "id": 8,
-        "options": Object {
+        "options": {
           "(telescope:camel)": "durationValue",
           "(telescope:name)": "durationValue",
           "(telescope:orig)": "duration_value",
@@ -1275,36 +1275,36 @@ Object {
         },
         "type": "google.protobuf.Duration",
       },
-      "int64Value": Object {
+      "int64Value": {
         "id": 3,
-        "options": Object {
+        "options": {
           "(telescope:camel)": "int64Value",
           "(telescope:name)": "int64Value",
           "(telescope:orig)": "int64_value",
         },
         "type": "int64",
       },
-      "nullValue": Object {
+      "nullValue": {
         "id": 1,
-        "options": Object {
+        "options": {
           "(telescope:camel)": "nullValue",
           "(telescope:name)": "nullValue",
           "(telescope:orig)": "null_value",
         },
         "type": "google.protobuf.NullValue",
       },
-      "stringValue": Object {
+      "stringValue": {
         "id": 6,
-        "options": Object {
+        "options": {
           "(telescope:camel)": "stringValue",
           "(telescope:name)": "stringValue",
           "(telescope:orig)": "string_value",
         },
         "type": "string",
       },
-      "timestampValue": Object {
+      "timestampValue": {
         "id": 9,
-        "options": Object {
+        "options": {
           "(telescope:camel)": "timestampValue",
           "(telescope:name)": "timestampValue",
           "(telescope:orig)": "timestamp_value",
@@ -1312,9 +1312,9 @@ Object {
         },
         "type": "google.protobuf.Timestamp",
       },
-      "uint64Value": Object {
+      "uint64Value": {
         "id": 4,
-        "options": Object {
+        "options": {
           "(telescope:camel)": "uint64Value",
           "(telescope:name)": "uint64Value",
           "(telescope:orig)": "uint64_value",
@@ -1326,9 +1326,9 @@ Object {
     "group": undefined,
     "name": "Constant",
     "nested": undefined,
-    "oneofs": Object {
-      "constantKind": Object {
-        "oneof": Array [
+    "oneofs": {
+      "constantKind": {
+        "oneof": [
           "nullValue",
           "boolValue",
           "int64Value",
@@ -1342,40 +1342,40 @@ Object {
       },
     },
     "options": undefined,
-    "parent": Object {
-      "nested": Object {
-        "Constant": Object {
-          "fields": Object {
-            "boolValue": Object {
+    "parent": {
+      "nested": {
+        "Constant": {
+          "fields": {
+            "boolValue": {
               "id": 2,
-              "options": Object {
+              "options": {
                 "(telescope:camel)": "boolValue",
                 "(telescope:name)": "boolValue",
                 "(telescope:orig)": "bool_value",
               },
               "type": "bool",
             },
-            "bytesValue": Object {
+            "bytesValue": {
               "id": 7,
-              "options": Object {
+              "options": {
                 "(telescope:camel)": "bytesValue",
                 "(telescope:name)": "bytesValue",
                 "(telescope:orig)": "bytes_value",
               },
               "type": "bytes",
             },
-            "doubleValue": Object {
+            "doubleValue": {
               "id": 5,
-              "options": Object {
+              "options": {
                 "(telescope:camel)": "doubleValue",
                 "(telescope:name)": "doubleValue",
                 "(telescope:orig)": "double_value",
               },
               "type": "double",
             },
-            "durationValue": Object {
+            "durationValue": {
               "id": 8,
-              "options": Object {
+              "options": {
                 "(telescope:camel)": "durationValue",
                 "(telescope:name)": "durationValue",
                 "(telescope:orig)": "duration_value",
@@ -1383,36 +1383,36 @@ Object {
               },
               "type": "google.protobuf.Duration",
             },
-            "int64Value": Object {
+            "int64Value": {
               "id": 3,
-              "options": Object {
+              "options": {
                 "(telescope:camel)": "int64Value",
                 "(telescope:name)": "int64Value",
                 "(telescope:orig)": "int64_value",
               },
               "type": "int64",
             },
-            "nullValue": Object {
+            "nullValue": {
               "id": 1,
-              "options": Object {
+              "options": {
                 "(telescope:camel)": "nullValue",
                 "(telescope:name)": "nullValue",
                 "(telescope:orig)": "null_value",
               },
               "type": "google.protobuf.NullValue",
             },
-            "stringValue": Object {
+            "stringValue": {
               "id": 6,
-              "options": Object {
+              "options": {
                 "(telescope:camel)": "stringValue",
                 "(telescope:name)": "stringValue",
                 "(telescope:orig)": "string_value",
               },
               "type": "string",
             },
-            "timestampValue": Object {
+            "timestampValue": {
               "id": 9,
-              "options": Object {
+              "options": {
                 "(telescope:camel)": "timestampValue",
                 "(telescope:name)": "timestampValue",
                 "(telescope:orig)": "timestamp_value",
@@ -1420,9 +1420,9 @@ Object {
               },
               "type": "google.protobuf.Timestamp",
             },
-            "uint64Value": Object {
+            "uint64Value": {
               "id": 4,
-              "options": Object {
+              "options": {
                 "(telescope:camel)": "uint64Value",
                 "(telescope:name)": "uint64Value",
                 "(telescope:orig)": "uint64_value",
@@ -1430,9 +1430,9 @@ Object {
               "type": "uint64",
             },
           },
-          "oneofs": Object {
-            "constantKind": Object {
-              "oneof": Array [
+          "oneofs": {
+            "constantKind": {
+              "oneof": [
                 "nullValue",
                 "boolValue",
                 "int64Value",
@@ -1446,74 +1446,74 @@ Object {
             },
           },
         },
-        "Expr": Object {
-          "fields": Object {
-            "callExpr": Object {
+        "Expr": {
+          "fields": {
+            "callExpr": {
               "id": 6,
-              "options": Object {
+              "options": {
                 "(telescope:camel)": "callExpr",
                 "(telescope:name)": "callExpr",
                 "(telescope:orig)": "call_expr",
               },
               "type": "Call",
             },
-            "comprehensionExpr": Object {
+            "comprehensionExpr": {
               "id": 9,
-              "options": Object {
+              "options": {
                 "(telescope:camel)": "comprehensionExpr",
                 "(telescope:name)": "comprehensionExpr",
                 "(telescope:orig)": "comprehension_expr",
               },
               "type": "Comprehension",
             },
-            "constExpr": Object {
+            "constExpr": {
               "id": 3,
-              "options": Object {
+              "options": {
                 "(telescope:camel)": "constExpr",
                 "(telescope:name)": "constExpr",
                 "(telescope:orig)": "const_expr",
               },
               "type": "Constant",
             },
-            "id": Object {
+            "id": {
               "id": 2,
-              "options": Object {
+              "options": {
                 "(telescope:camel)": "id",
                 "(telescope:name)": "id",
                 "(telescope:orig)": "id",
               },
               "type": "int64",
             },
-            "identExpr": Object {
+            "identExpr": {
               "id": 4,
-              "options": Object {
+              "options": {
                 "(telescope:camel)": "identExpr",
                 "(telescope:name)": "identExpr",
                 "(telescope:orig)": "ident_expr",
               },
               "type": "Ident",
             },
-            "listExpr": Object {
+            "listExpr": {
               "id": 7,
-              "options": Object {
+              "options": {
                 "(telescope:camel)": "listExpr",
                 "(telescope:name)": "listExpr",
                 "(telescope:orig)": "list_expr",
               },
               "type": "CreateList",
             },
-            "selectExpr": Object {
+            "selectExpr": {
               "id": 5,
-              "options": Object {
+              "options": {
                 "(telescope:camel)": "selectExpr",
                 "(telescope:name)": "selectExpr",
                 "(telescope:orig)": "select_expr",
               },
               "type": "Select",
             },
-            "structExpr": Object {
+            "structExpr": {
               "id": 8,
-              "options": Object {
+              "options": {
                 "(telescope:camel)": "structExpr",
                 "(telescope:name)": "structExpr",
                 "(telescope:orig)": "struct_expr",
@@ -1521,12 +1521,12 @@ Object {
               "type": "CreateStruct",
             },
           },
-          "nested": Object {
-            "Call": Object {
-              "fields": Object {
-                "args": Object {
+          "nested": {
+            "Call": {
+              "fields": {
+                "args": {
                   "id": 3,
-                  "options": Object {
+                  "options": {
                     "(telescope:camel)": "args",
                     "(telescope:name)": "args",
                     "(telescope:orig)": "args",
@@ -1534,18 +1534,18 @@ Object {
                   "rule": "repeated",
                   "type": "Expr",
                 },
-                "function": Object {
+                "function": {
                   "id": 2,
-                  "options": Object {
+                  "options": {
                     "(telescope:camel)": "function",
                     "(telescope:name)": "function",
                     "(telescope:orig)": "function",
                   },
                   "type": "string",
                 },
-                "target": Object {
+                "target": {
                   "id": 1,
-                  "options": Object {
+                  "options": {
                     "(telescope:camel)": "target",
                     "(telescope:name)": "target",
                     "(telescope:orig)": "target",
@@ -1554,65 +1554,65 @@ Object {
                 },
               },
             },
-            "Comprehension": Object {
-              "fields": Object {
-                "accuInit": Object {
+            "Comprehension": {
+              "fields": {
+                "accuInit": {
                   "id": 4,
-                  "options": Object {
+                  "options": {
                     "(telescope:camel)": "accuInit",
                     "(telescope:name)": "accuInit",
                     "(telescope:orig)": "accu_init",
                   },
                   "type": "Expr",
                 },
-                "accuVar": Object {
+                "accuVar": {
                   "id": 3,
-                  "options": Object {
+                  "options": {
                     "(telescope:camel)": "accuVar",
                     "(telescope:name)": "accuVar",
                     "(telescope:orig)": "accu_var",
                   },
                   "type": "string",
                 },
-                "iterRange": Object {
+                "iterRange": {
                   "id": 2,
-                  "options": Object {
+                  "options": {
                     "(telescope:camel)": "iterRange",
                     "(telescope:name)": "iterRange",
                     "(telescope:orig)": "iter_range",
                   },
                   "type": "Expr",
                 },
-                "iterVar": Object {
+                "iterVar": {
                   "id": 1,
-                  "options": Object {
+                  "options": {
                     "(telescope:camel)": "iterVar",
                     "(telescope:name)": "iterVar",
                     "(telescope:orig)": "iter_var",
                   },
                   "type": "string",
                 },
-                "loopCondition": Object {
+                "loopCondition": {
                   "id": 5,
-                  "options": Object {
+                  "options": {
                     "(telescope:camel)": "loopCondition",
                     "(telescope:name)": "loopCondition",
                     "(telescope:orig)": "loop_condition",
                   },
                   "type": "Expr",
                 },
-                "loopStep": Object {
+                "loopStep": {
                   "id": 6,
-                  "options": Object {
+                  "options": {
                     "(telescope:camel)": "loopStep",
                     "(telescope:name)": "loopStep",
                     "(telescope:orig)": "loop_step",
                   },
                   "type": "Expr",
                 },
-                "result": Object {
+                "result": {
                   "id": 7,
-                  "options": Object {
+                  "options": {
                     "(telescope:camel)": "result",
                     "(telescope:name)": "result",
                     "(telescope:orig)": "result",
@@ -1621,11 +1621,11 @@ Object {
                 },
               },
             },
-            "CreateList": Object {
-              "fields": Object {
-                "elements": Object {
+            "CreateList": {
+              "fields": {
+                "elements": {
                   "id": 1,
-                  "options": Object {
+                  "options": {
                     "(telescope:camel)": "elements",
                     "(telescope:name)": "elements",
                     "(telescope:orig)": "elements",
@@ -1635,11 +1635,11 @@ Object {
                 },
               },
             },
-            "CreateStruct": Object {
-              "fields": Object {
-                "entries": Object {
+            "CreateStruct": {
+              "fields": {
+                "entries": {
                   "id": 2,
-                  "options": Object {
+                  "options": {
                     "(telescope:camel)": "entries",
                     "(telescope:name)": "entries",
                     "(telescope:orig)": "entries",
@@ -1647,9 +1647,9 @@ Object {
                   "rule": "repeated",
                   "type": "Entry",
                 },
-                "messageName": Object {
+                "messageName": {
                   "id": 1,
-                  "options": Object {
+                  "options": {
                     "(telescope:camel)": "messageName",
                     "(telescope:name)": "messageName",
                     "(telescope:orig)": "message_name",
@@ -1657,39 +1657,39 @@ Object {
                   "type": "string",
                 },
               },
-              "nested": Object {
-                "Entry": Object {
-                  "fields": Object {
-                    "fieldKey": Object {
+              "nested": {
+                "Entry": {
+                  "fields": {
+                    "fieldKey": {
                       "id": 2,
-                      "options": Object {
+                      "options": {
                         "(telescope:camel)": "fieldKey",
                         "(telescope:name)": "fieldKey",
                         "(telescope:orig)": "field_key",
                       },
                       "type": "string",
                     },
-                    "id": Object {
+                    "id": {
                       "id": 1,
-                      "options": Object {
+                      "options": {
                         "(telescope:camel)": "id",
                         "(telescope:name)": "id",
                         "(telescope:orig)": "id",
                       },
                       "type": "int64",
                     },
-                    "mapKey": Object {
+                    "mapKey": {
                       "id": 3,
-                      "options": Object {
+                      "options": {
                         "(telescope:camel)": "mapKey",
                         "(telescope:name)": "mapKey",
                         "(telescope:orig)": "map_key",
                       },
                       "type": "Expr",
                     },
-                    "value": Object {
+                    "value": {
                       "id": 4,
-                      "options": Object {
+                      "options": {
                         "(telescope:camel)": "value",
                         "(telescope:name)": "value",
                         "(telescope:orig)": "value",
@@ -1697,9 +1697,9 @@ Object {
                       "type": "Expr",
                     },
                   },
-                  "oneofs": Object {
-                    "keyKind": Object {
-                      "oneof": Array [
+                  "oneofs": {
+                    "keyKind": {
+                      "oneof": [
                         "fieldKey",
                         "mapKey",
                       ],
@@ -1708,11 +1708,11 @@ Object {
                 },
               },
             },
-            "Ident": Object {
-              "fields": Object {
-                "name": Object {
+            "Ident": {
+              "fields": {
+                "name": {
                   "id": 1,
-                  "options": Object {
+                  "options": {
                     "(telescope:camel)": "name",
                     "(telescope:name)": "name",
                     "(telescope:orig)": "name",
@@ -1721,29 +1721,29 @@ Object {
                 },
               },
             },
-            "Select": Object {
-              "fields": Object {
-                "field": Object {
+            "Select": {
+              "fields": {
+                "field": {
                   "id": 2,
-                  "options": Object {
+                  "options": {
                     "(telescope:camel)": "field",
                     "(telescope:name)": "field",
                     "(telescope:orig)": "field",
                   },
                   "type": "string",
                 },
-                "operand": Object {
+                "operand": {
                   "id": 1,
-                  "options": Object {
+                  "options": {
                     "(telescope:camel)": "operand",
                     "(telescope:name)": "operand",
                     "(telescope:orig)": "operand",
                   },
                   "type": "Expr",
                 },
-                "testOnly": Object {
+                "testOnly": {
                   "id": 3,
-                  "options": Object {
+                  "options": {
                     "(telescope:camel)": "testOnly",
                     "(telescope:name)": "testOnly",
                     "(telescope:orig)": "test_only",
@@ -1753,9 +1753,9 @@ Object {
               },
             },
           },
-          "oneofs": Object {
-            "exprKind": Object {
-              "oneof": Array [
+          "oneofs": {
+            "exprKind": {
+              "oneof": [
                 "constExpr",
                 "identExpr",
                 "selectExpr",
@@ -1767,20 +1767,20 @@ Object {
             },
           },
         },
-        "ParsedExpr": Object {
-          "fields": Object {
-            "expr": Object {
+        "ParsedExpr": {
+          "fields": {
+            "expr": {
               "id": 2,
-              "options": Object {
+              "options": {
                 "(telescope:camel)": "expr",
                 "(telescope:name)": "expr",
                 "(telescope:orig)": "expr",
               },
               "type": "Expr",
             },
-            "sourceInfo": Object {
+            "sourceInfo": {
               "id": 3,
-              "options": Object {
+              "options": {
                 "(telescope:camel)": "sourceInfo",
                 "(telescope:name)": "sourceInfo",
                 "(telescope:orig)": "source_info",
@@ -1789,11 +1789,11 @@ Object {
             },
           },
         },
-        "SourceInfo": Object {
-          "fields": Object {
-            "lineOffsets": Object {
+        "SourceInfo": {
+          "fields": {
+            "lineOffsets": {
               "id": 3,
-              "options": Object {
+              "options": {
                 "(telescope:camel)": "lineOffsets",
                 "(telescope:name)": "lineOffsets",
                 "(telescope:orig)": "line_offsets",
@@ -1801,38 +1801,38 @@ Object {
               "rule": "repeated",
               "type": "int32",
             },
-            "location": Object {
+            "location": {
               "id": 2,
-              "options": Object {
+              "options": {
                 "(telescope:camel)": "location",
                 "(telescope:name)": "location",
                 "(telescope:orig)": "location",
               },
               "type": "string",
             },
-            "macroCalls": Object {
+            "macroCalls": {
               "id": 5,
               "keyType": "int64",
-              "options": Object {
+              "options": {
                 "(telescope:camel)": "macroCalls",
                 "(telescope:name)": "macroCalls",
                 "(telescope:orig)": "macro_calls",
               },
               "type": "Expr",
             },
-            "positions": Object {
+            "positions": {
               "id": 4,
               "keyType": "int64",
-              "options": Object {
+              "options": {
                 "(telescope:camel)": "positions",
                 "(telescope:name)": "positions",
                 "(telescope:orig)": "positions",
               },
               "type": "int32",
             },
-            "syntaxVersion": Object {
+            "syntaxVersion": {
               "id": 1,
-              "options": Object {
+              "options": {
                 "(telescope:camel)": "syntaxVersion",
                 "(telescope:name)": "syntaxVersion",
                 "(telescope:orig)": "syntax_version",
@@ -1841,38 +1841,38 @@ Object {
             },
           },
         },
-        "SourcePosition": Object {
-          "fields": Object {
-            "column": Object {
+        "SourcePosition": {
+          "fields": {
+            "column": {
               "id": 4,
-              "options": Object {
+              "options": {
                 "(telescope:camel)": "column",
                 "(telescope:name)": "column",
                 "(telescope:orig)": "column",
               },
               "type": "int32",
             },
-            "line": Object {
+            "line": {
               "id": 3,
-              "options": Object {
+              "options": {
                 "(telescope:camel)": "line",
                 "(telescope:name)": "line",
                 "(telescope:orig)": "line",
               },
               "type": "int32",
             },
-            "location": Object {
+            "location": {
               "id": 1,
-              "options": Object {
+              "options": {
                 "(telescope:camel)": "location",
                 "(telescope:name)": "location",
                 "(telescope:orig)": "location",
               },
               "type": "string",
             },
-            "offset": Object {
+            "offset": {
               "id": 2,
-              "options": Object {
+              "options": {
                 "(telescope:camel)": "offset",
                 "(telescope:name)": "offset",
                 "(telescope:orig)": "offset",
@@ -1882,7 +1882,7 @@ Object {
           },
         },
       },
-      "options": Object {
+      "options": {
         "cc_enable_arenas": true,
         "go_package": "google.golang.org/genproto/googleapis/api/expr/v1alpha1;expr",
         "java_multiple_files": true,
@@ -1893,7 +1893,7 @@ Object {
     "parsedOptions": null,
     "reserved": undefined,
     "resolved": false,
-    "scope": Array [
+    "scope": [
       "google.api.expr.v1alpha1",
     ],
   },

@@ -1,37 +1,37 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`aminoEncoding akash 1`] = `
-Object {
+{
   "enabled": false,
 }
 `;
 
 exports[`aminoEncoding cosmos 1`] = `
-Object {
+{
   "enabled": true,
 }
 `;
 
 exports[`aminoEncoding cosmos.v1beta1 1`] = `
-Object {
+{
   "enabled": true,
 }
 `;
 
 exports[`aminoEncoding nebula 1`] = `
-Object {
+{
   "enabled": true,
 }
 `;
 
 exports[`aminoEncoding nebula.some 1`] = `
-Object {
+{
   "enabled": true,
 }
 `;
 
 exports[`aminoEncoding nebula.some.pkg 1`] = `
-Object {
+{
   "enabled": false,
 }
 `;

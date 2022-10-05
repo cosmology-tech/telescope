@@ -18,7 +18,7 @@ exports[`AggregatedLCDClient 1`] = `
       params: {}
     };
 
-    if (typeof params?.denom !== \\"undefined\\") {
+    if (typeof params?.denom !== "undefined") {
       options.params.denom = params.denom;
     }
 
@@ -32,7 +32,7 @@ exports[`AggregatedLCDClient 1`] = `
       params: {}
     };
 
-    if (typeof params?.pagination !== \\"undefined\\") {
+    if (typeof params?.pagination !== "undefined") {
       setPaginationParams(options, params.pagination);
     }
 
@@ -47,7 +47,7 @@ exports[`AggregatedLCDClient 1`] = `
       params: {}
     };
 
-    if (typeof params?.pagination !== \\"undefined\\") {
+    if (typeof params?.pagination !== "undefined") {
       setPaginationParams(options, params.pagination);
     }
 
@@ -63,7 +63,7 @@ exports[`AggregatedLCDClient 1`] = `
       params: {}
     };
 
-    if (typeof params?.pagination !== \\"undefined\\") {
+    if (typeof params?.pagination !== "undefined") {
       setPaginationParams(options, params.pagination);
     }
 
@@ -77,7 +77,7 @@ exports[`AggregatedLCDClient 1`] = `
       params: {}
     };
 
-    if (typeof params?.denom !== \\"undefined\\") {
+    if (typeof params?.denom !== "undefined") {
       options.params.denom = params.denom;
     }
 
@@ -106,7 +106,7 @@ exports[`AggregatedLCDClient 1`] = `
       params: {}
     };
 
-    if (typeof params?.pagination !== \\"undefined\\") {
+    if (typeof params?.pagination !== "undefined") {
       setPaginationParams(options, params.pagination);
     }
 
@@ -121,7 +121,7 @@ exports[`AggregatedLCDClient 1`] = `
       params: {}
     };
 
-    if (typeof params?.pagination !== \\"undefined\\") {
+    if (typeof params?.pagination !== "undefined") {
       setPaginationParams(options, params.pagination);
     }
 
@@ -137,7 +137,7 @@ exports[`AggregatedLCDClient 1`] = `
       params: {}
     };
 
-    if (typeof params?.pagination !== \\"undefined\\") {
+    if (typeof params?.pagination !== "undefined") {
       setPaginationParams(options, params.pagination);
     }
 
@@ -188,11 +188,11 @@ exports[`AggregatedLCDClient 1`] = `
       params: {}
     };
 
-    if (typeof params?.baseAssetDenom !== \\"undefined\\") {
+    if (typeof params?.baseAssetDenom !== "undefined") {
       options.params.base_asset_denom = params.baseAssetDenom;
     }
 
-    if (typeof params?.quoteAssetDenom !== \\"undefined\\") {
+    if (typeof params?.quoteAssetDenom !== "undefined") {
       options.params.quote_asset_denom = params.quoteAssetDenom;
     }
 
@@ -206,15 +206,15 @@ exports[`AggregatedLCDClient 1`] = `
       params: {}
     };
 
-    if (typeof params?.sender !== \\"undefined\\") {
+    if (typeof params?.sender !== "undefined") {
       options.params.sender = params.sender;
     }
 
-    if (typeof params?.tokenIn !== \\"undefined\\") {
+    if (typeof params?.tokenIn !== "undefined") {
       options.params.tokenIn = params.tokenIn;
     }
 
-    if (typeof params?.routes !== \\"undefined\\") {
+    if (typeof params?.routes !== "undefined") {
       options.params.routes = params.routes;
     }
 
@@ -228,15 +228,15 @@ exports[`AggregatedLCDClient 1`] = `
       params: {}
     };
 
-    if (typeof params?.sender !== \\"undefined\\") {
+    if (typeof params?.sender !== "undefined") {
       options.params.sender = params.sender;
     }
 
-    if (typeof params?.routes !== \\"undefined\\") {
+    if (typeof params?.routes !== "undefined") {
       options.params.routes = params.routes;
     }
 
-    if (typeof params?.tokenOut !== \\"undefined\\") {
+    if (typeof params?.tokenOut !== "undefined") {
       options.params.tokenOut = params.tokenOut;
     }
 
@@ -265,7 +265,7 @@ exports[`options 1`] = `
       params: {}
     };
 
-    if (typeof params?.denom !== \\"undefined\\") {
+    if (typeof params?.denom !== "undefined") {
       options.params.denom = params.denom;
     }
 
@@ -279,7 +279,7 @@ exports[`options 1`] = `
       params: {}
     };
 
-    if (typeof params?.pagination !== \\"undefined\\") {
+    if (typeof params?.pagination !== "undefined") {
       setPaginationParams(options, params.pagination);
     }
 
@@ -294,7 +294,7 @@ exports[`options 1`] = `
       params: {}
     };
 
-    if (typeof params?.pagination !== \\"undefined\\") {
+    if (typeof params?.pagination !== "undefined") {
       setPaginationParams(options, params.pagination);
     }
 
@@ -310,7 +310,7 @@ exports[`options 1`] = `
       params: {}
     };
 
-    if (typeof params?.pagination !== \\"undefined\\") {
+    if (typeof params?.pagination !== "undefined") {
       setPaginationParams(options, params.pagination);
     }
 
@@ -324,7 +324,7 @@ exports[`options 1`] = `
       params: {}
     };
 
-    if (typeof params?.denom !== \\"undefined\\") {
+    if (typeof params?.denom !== "undefined") {
       options.params.denom = params.denom;
     }
 
@@ -353,7 +353,7 @@ exports[`options 1`] = `
       params: {}
     };
 
-    if (typeof params?.pagination !== \\"undefined\\") {
+    if (typeof params?.pagination !== "undefined") {
       setPaginationParams(options, params.pagination);
     }
 
@@ -368,7 +368,7 @@ exports[`options 1`] = `
       params: {}
     };
 
-    if (typeof params?.pagination !== \\"undefined\\") {
+    if (typeof params?.pagination !== "undefined") {
       setPaginationParams(options, params.pagination);
     }
 
@@ -384,7 +384,7 @@ exports[`options 1`] = `
       params: {}
     };
 
-    if (typeof params?.pagination !== \\"undefined\\") {
+    if (typeof params?.pagination !== "undefined") {
       setPaginationParams(options, params.pagination);
     }
 
@@ -435,11 +435,11 @@ exports[`options 1`] = `
       params: {}
     };
 
-    if (typeof params?.baseAssetDenom !== \\"undefined\\") {
+    if (typeof params?.baseAssetDenom !== "undefined") {
       options.params.base_asset_denom = params.baseAssetDenom;
     }
 
-    if (typeof params?.quoteAssetDenom !== \\"undefined\\") {
+    if (typeof params?.quoteAssetDenom !== "undefined") {
       options.params.quote_asset_denom = params.quoteAssetDenom;
     }
 
@@ -453,15 +453,15 @@ exports[`options 1`] = `
       params: {}
     };
 
-    if (typeof params?.sender !== \\"undefined\\") {
+    if (typeof params?.sender !== "undefined") {
       options.params.sender = params.sender;
     }
 
-    if (typeof params?.tokenIn !== \\"undefined\\") {
+    if (typeof params?.tokenIn !== "undefined") {
       options.params.tokenIn = params.tokenIn;
     }
 
-    if (typeof params?.routes !== \\"undefined\\") {
+    if (typeof params?.routes !== "undefined") {
       options.params.routes = params.routes;
     }
 
@@ -475,15 +475,15 @@ exports[`options 1`] = `
       params: {}
     };
 
-    if (typeof params?.sender !== \\"undefined\\") {
+    if (typeof params?.sender !== "undefined") {
       options.params.sender = params.sender;
     }
 
-    if (typeof params?.routes !== \\"undefined\\") {
+    if (typeof params?.routes !== "undefined") {
       options.params.routes = params.routes;
     }
 
-    if (typeof params?.tokenOut !== \\"undefined\\") {
+    if (typeof params?.tokenOut !== "undefined") {
       options.params.tokenOut = params.tokenOut;
     }
 

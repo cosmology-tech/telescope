@@ -2,7 +2,7 @@
 
 exports[`cosmos/staking/v1beta1/tx MsgCreateValidator 1`] = `
 "export interface AminoMsgCreateValidator extends AminoMsg {
-  type: \\"cosmos-sdk/MsgCreateValidator\\";
+  type: "cosmos-sdk/MsgCreateValidator";
   value: {
     description: {
       moniker: string;
@@ -33,7 +33,7 @@ exports[`cosmos/staking/v1beta1/tx MsgCreateValidator 1`] = `
 
 exports[`cosmos/staking/v1beta1/tx MsgEditValidator 1`] = `
 "export interface AminoMsgEditValidator extends AminoMsg {
-  type: \\"cosmos-sdk/MsgEditValidator\\";
+  type: "cosmos-sdk/MsgEditValidator";
   value: {
     description: {
       moniker: string;
@@ -51,7 +51,7 @@ exports[`cosmos/staking/v1beta1/tx MsgEditValidator 1`] = `
 
 exports[`cosmos/staking/v1beta1/tx MsgUndelegate 1`] = `
 "export interface AminoMsgUndelegate extends AminoMsg {
-  type: \\"cosmos-sdk/MsgUndelegate\\";
+  type: "cosmos-sdk/MsgUndelegate";
   value: {
     delegator_address: string;
     validator_address: string;
@@ -65,7 +65,7 @@ exports[`cosmos/staking/v1beta1/tx MsgUndelegate 1`] = `
 
 exports[`osmosis/gamm/v1beta1/tx Interfaces 1`] = `
 "export interface AminoMsgJoinPool extends AminoMsg {
-  type: \\"osmosis/gamm/join-pool\\";
+  type: "osmosis/gamm/join-pool";
   value: {
     sender: string;
     poolId: string;

@@ -1,83 +1,83 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`queries 1`] = `
-Object {
-  "Query": Object {
+{
+  "Query": {
     "comment": null,
-    "methods": Object {
-      "EstimateSwapExactAmountIn": Object {
+    "methods": {
+      "EstimateSwapExactAmountIn": {
         "comment": "Estimate the swap.",
-        "fields": Object {
-          "poolId": Object {
+        "fields": {
+          "poolId": {
             "comment": null,
             "id": 2,
             "isScalar": true,
-            "options": Object {
+            "options": {
               "(gogoproto.moretags)": "yaml:pool_id",
               "(telescope:camel)": "poolId",
               "(telescope:name)": "poolId",
               "(telescope:orig)": "poolId",
             },
-            "parsedType": Object {
+            "parsedType": {
               "name": "uint64",
               "type": "native",
             },
             "type": "uint64",
             "typeNum": 8,
           },
-          "routes": Object {
+          "routes": {
             "comment": null,
             "id": 4,
             "import": "osmosis/gamm/v1beta1/tx.proto",
             "importedName": "SwapAmountInRoute",
-            "options": Object {
+            "options": {
               "(gogoproto.moretags)": "yaml:routes",
               "(gogoproto.nullable)": false,
               "(telescope:camel)": "routes",
               "(telescope:name)": "routes",
               "(telescope:orig)": "routes",
             },
-            "parsedType": Object {
+            "parsedType": {
               "name": "SwapAmountInRoute",
               "type": "Type",
             },
             "rule": "repeated",
-            "scope": Array [
-              Array [
+            "scope": [
+              [
                 "osmosis.gamm.v1beta1",
               ],
             ],
             "scopeType": "import",
             "type": "SwapAmountInRoute",
           },
-          "sender": Object {
+          "sender": {
             "comment": null,
             "id": 1,
             "isScalar": true,
-            "options": Object {
+            "options": {
               "(gogoproto.moretags)": "yaml:sender",
               "(telescope:camel)": "sender",
               "(telescope:name)": "sender",
               "(telescope:orig)": "sender",
             },
-            "parsedType": Object {
+            "parsedType": {
               "name": "string",
               "type": "native",
             },
             "type": "string",
             "typeNum": 13,
           },
-          "tokenIn": Object {
+          "tokenIn": {
             "comment": null,
             "id": 3,
             "isScalar": true,
-            "options": Object {
+            "options": {
               "(gogoproto.moretags)": "yaml:token_in",
               "(telescope:camel)": "tokenIn",
               "(telescope:name)": "tokenIn",
               "(telescope:orig)": "tokenIn",
             },
-            "parsedType": Object {
+            "parsedType": {
               "name": "string",
               "type": "native",
             },
@@ -85,24 +85,24 @@ Object {
             "typeNum": 13,
           },
         },
-        "info": Object {
-          "casing": Object {
+        "info": {
+          "casing": {
             "poolId": "poolId",
             "routes": "routes",
             "sender": "sender",
             "tokenIn": "tokenIn",
           },
           "method": "get",
-          "paramMap": Object {
+          "paramMap": {
             "poolId": "poolId",
             "routes": "routes",
             "sender": "sender",
             "tokenIn": "tokenIn",
           },
-          "pathParams": Array [
+          "pathParams": [
             "poolId",
           ],
-          "queryParams": Array [
+          "queryParams": [
             "sender",
             "tokenIn",
             "routes",
@@ -110,86 +110,86 @@ Object {
           "url": "/osmosis/gamm/v1beta1/{poolId}/estimate/swap_exact_amount_in",
         },
         "name": "EstimateSwapExactAmountIn",
-        "options": Object {
+        "options": {
           "(google.api.http).get": "/osmosis/gamm/v1beta1/{poolId}/estimate/swap_exact_amount_in",
         },
         "requestType": "QuerySwapExactAmountInRequest",
         "responseType": "QuerySwapExactAmountInResponse",
         "type": "ServiceMethod",
       },
-      "EstimateSwapExactAmountOut": Object {
+      "EstimateSwapExactAmountOut": {
         "comment": null,
-        "fields": Object {
-          "poolId": Object {
+        "fields": {
+          "poolId": {
             "comment": null,
             "id": 2,
             "isScalar": true,
-            "options": Object {
+            "options": {
               "(gogoproto.moretags)": "yaml:pool_id",
               "(telescope:camel)": "poolId",
               "(telescope:name)": "poolId",
               "(telescope:orig)": "poolId",
             },
-            "parsedType": Object {
+            "parsedType": {
               "name": "uint64",
               "type": "native",
             },
             "type": "uint64",
             "typeNum": 8,
           },
-          "routes": Object {
+          "routes": {
             "comment": null,
             "id": 3,
             "import": "osmosis/gamm/v1beta1/tx.proto",
             "importedName": "SwapAmountOutRoute",
-            "options": Object {
+            "options": {
               "(gogoproto.moretags)": "yaml:routes",
               "(gogoproto.nullable)": false,
               "(telescope:camel)": "routes",
               "(telescope:name)": "routes",
               "(telescope:orig)": "routes",
             },
-            "parsedType": Object {
+            "parsedType": {
               "name": "SwapAmountOutRoute",
               "type": "Type",
             },
             "rule": "repeated",
-            "scope": Array [
-              Array [
+            "scope": [
+              [
                 "osmosis.gamm.v1beta1",
               ],
             ],
             "scopeType": "import",
             "type": "SwapAmountOutRoute",
           },
-          "sender": Object {
+          "sender": {
             "comment": null,
             "id": 1,
             "isScalar": true,
-            "options": Object {
+            "options": {
               "(gogoproto.moretags)": "yaml:sender",
               "(telescope:camel)": "sender",
               "(telescope:name)": "sender",
               "(telescope:orig)": "sender",
             },
-            "parsedType": Object {
+            "parsedType": {
               "name": "string",
               "type": "native",
             },
             "type": "string",
             "typeNum": 13,
           },
-          "tokenOut": Object {
+          "tokenOut": {
             "comment": null,
             "id": 4,
             "isScalar": true,
-            "options": Object {
+            "options": {
               "(gogoproto.moretags)": "yaml:token_out",
               "(telescope:camel)": "tokenOut",
               "(telescope:name)": "tokenOut",
               "(telescope:orig)": "tokenOut",
             },
-            "parsedType": Object {
+            "parsedType": {
               "name": "string",
               "type": "native",
             },
@@ -197,24 +197,24 @@ Object {
             "typeNum": 13,
           },
         },
-        "info": Object {
-          "casing": Object {
+        "info": {
+          "casing": {
             "poolId": "poolId",
             "routes": "routes",
             "sender": "sender",
             "tokenOut": "tokenOut",
           },
           "method": "get",
-          "paramMap": Object {
+          "paramMap": {
             "poolId": "poolId",
             "routes": "routes",
             "sender": "sender",
             "tokenOut": "tokenOut",
           },
-          "pathParams": Array [
+          "pathParams": [
             "poolId",
           ],
-          "queryParams": Array [
+          "queryParams": [
             "sender",
             "routes",
             "tokenOut",
@@ -222,46 +222,46 @@ Object {
           "url": "/osmosis/gamm/v1beta1/{poolId}/estimate/swap_exact_amount_out",
         },
         "name": "EstimateSwapExactAmountOut",
-        "options": Object {
+        "options": {
           "(google.api.http).get": "/osmosis/gamm/v1beta1/{poolId}/estimate/swap_exact_amount_out",
         },
         "requestType": "QuerySwapExactAmountOutRequest",
         "responseType": "QuerySwapExactAmountOutResponse",
         "type": "ServiceMethod",
       },
-      "NumPools": Object {
+      "NumPools": {
         "comment": null,
-        "fields": Object {},
-        "info": Object {
-          "casing": Object {},
+        "fields": {},
+        "info": {
+          "casing": {},
           "method": "get",
-          "paramMap": Object {},
-          "pathParams": Array [],
-          "queryParams": Array [],
+          "paramMap": {},
+          "pathParams": [],
+          "queryParams": [],
           "url": "/osmosis/gamm/v1beta1/num_pools",
         },
         "name": "NumPools",
-        "options": Object {
+        "options": {
           "(google.api.http).get": "/osmosis/gamm/v1beta1/num_pools",
         },
         "requestType": "QueryNumPoolsRequest",
         "responseType": "QueryNumPoolsResponse",
         "type": "ServiceMethod",
       },
-      "Pool": Object {
+      "Pool": {
         "comment": "Per Pool gRPC Endpoints",
-        "fields": Object {
-          "poolId": Object {
+        "fields": {
+          "poolId": {
             "comment": null,
             "id": 1,
             "isScalar": true,
-            "options": Object {
+            "options": {
               "(gogoproto.moretags)": "yaml:pool_id",
               "(telescope:camel)": "poolId",
               "(telescope:name)": "poolId",
               "(telescope:orig)": "poolId",
             },
-            "parsedType": Object {
+            "parsedType": {
               "name": "uint64",
               "type": "native",
             },
@@ -269,42 +269,42 @@ Object {
             "typeNum": 8,
           },
         },
-        "info": Object {
-          "casing": Object {
+        "info": {
+          "casing": {
             "poolId": "poolId",
           },
           "method": "get",
-          "paramMap": Object {
+          "paramMap": {
             "poolId": "poolId",
           },
-          "pathParams": Array [
+          "pathParams": [
             "poolId",
           ],
-          "queryParams": Array [],
+          "queryParams": [],
           "url": "/osmosis/gamm/v1beta1/pools/{poolId}",
         },
         "name": "Pool",
-        "options": Object {
+        "options": {
           "(google.api.http).get": "/osmosis/gamm/v1beta1/pools/{poolId}",
         },
         "requestType": "QueryPoolRequest",
         "responseType": "QueryPoolResponse",
         "type": "ServiceMethod",
       },
-      "PoolParams": Object {
+      "PoolParams": {
         "comment": null,
-        "fields": Object {
-          "poolId": Object {
+        "fields": {
+          "poolId": {
             "comment": null,
             "id": 1,
             "isScalar": true,
-            "options": Object {
+            "options": {
               "(gogoproto.moretags)": "yaml:pool_id",
               "(telescope:camel)": "poolId",
               "(telescope:name)": "poolId",
               "(telescope:orig)": "poolId",
             },
-            "parsedType": Object {
+            "parsedType": {
               "name": "uint64",
               "type": "native",
             },
@@ -312,123 +312,123 @@ Object {
             "typeNum": 8,
           },
         },
-        "info": Object {
-          "casing": Object {
+        "info": {
+          "casing": {
             "poolId": "poolId",
           },
           "method": "get",
-          "paramMap": Object {
+          "paramMap": {
             "poolId": "poolId",
           },
-          "pathParams": Array [
+          "pathParams": [
             "poolId",
           ],
-          "queryParams": Array [],
+          "queryParams": [],
           "url": "/osmosis/gamm/v1beta1/pools/{poolId}/params",
         },
         "name": "PoolParams",
-        "options": Object {
+        "options": {
           "(google.api.http).get": "/osmosis/gamm/v1beta1/pools/{poolId}/params",
         },
         "requestType": "QueryPoolParamsRequest",
         "responseType": "QueryPoolParamsResponse",
         "type": "ServiceMethod",
       },
-      "Pools": Object {
+      "Pools": {
         "comment": null,
-        "fields": Object {
-          "pagination": Object {
+        "fields": {
+          "pagination": {
             "comment": "pagination defines an optional pagination for the request.",
             "id": 2,
             "import": "cosmos/base/query/v1beta1/pagination.proto",
             "importedName": "cosmos.base.query.v1beta1.PageRequest",
-            "options": Object {
+            "options": {
               "(telescope:camel)": "pagination",
               "(telescope:name)": "pagination",
               "(telescope:orig)": "pagination",
             },
-            "parsedType": Object {
+            "parsedType": {
               "name": "PageRequest",
               "type": "Type",
             },
-            "scope": Array [
+            "scope": [
               "cosmos.base.query.v1beta1",
             ],
             "scopeType": "protoImport",
             "type": "cosmos.base.query.v1beta1.PageRequest",
           },
         },
-        "info": Object {
-          "casing": Object {
+        "info": {
+          "casing": {
             "pagination": "pagination",
           },
           "method": "get",
-          "paramMap": Object {
+          "paramMap": {
             "pagination": "pagination",
           },
-          "pathParams": Array [],
-          "queryParams": Array [
+          "pathParams": [],
+          "queryParams": [
             "pagination",
           ],
           "url": "/osmosis/gamm/v1beta1/pools",
         },
         "name": "Pools",
-        "options": Object {
+        "options": {
           "(google.api.http).get": "/osmosis/gamm/v1beta1/pools",
         },
         "requestType": "QueryPoolsRequest",
         "responseType": "QueryPoolsResponse",
         "type": "ServiceMethod",
       },
-      "SpotPrice": Object {
+      "SpotPrice": {
         "comment": "SpotPrice defines a gRPC query handler that returns the spot price given
  a base denomination and a quote denomination.",
-        "fields": Object {
-          "baseAssetDenom": Object {
+        "fields": {
+          "baseAssetDenom": {
             "comment": null,
             "id": 2,
             "isScalar": true,
-            "options": Object {
+            "options": {
               "(gogoproto.moretags)": "yaml:base_asset_denom",
               "(telescope:camel)": "baseAssetDenom",
               "(telescope:name)": "baseAssetDenom",
               "(telescope:orig)": "base_asset_denom",
             },
-            "parsedType": Object {
+            "parsedType": {
               "name": "string",
               "type": "native",
             },
             "type": "string",
             "typeNum": 13,
           },
-          "poolId": Object {
+          "poolId": {
             "comment": null,
             "id": 1,
             "isScalar": true,
-            "options": Object {
+            "options": {
               "(gogoproto.moretags)": "yaml:pool_id",
               "(telescope:camel)": "poolId",
               "(telescope:name)": "poolId",
               "(telescope:orig)": "poolId",
             },
-            "parsedType": Object {
+            "parsedType": {
               "name": "uint64",
               "type": "native",
             },
             "type": "uint64",
             "typeNum": 8,
           },
-          "quoteAssetDenom": Object {
+          "quoteAssetDenom": {
             "comment": null,
             "id": 3,
             "isScalar": true,
-            "options": Object {
+            "options": {
               "(gogoproto.moretags)": "yaml:quote_asset_denom",
               "(telescope:camel)": "quoteAssetDenom",
               "(telescope:name)": "quoteAssetDenom",
               "(telescope:orig)": "quote_asset_denom",
             },
-            "parsedType": Object {
+            "parsedType": {
               "name": "string",
               "type": "native",
             },
@@ -436,68 +436,68 @@ Object {
             "typeNum": 13,
           },
         },
-        "info": Object {
-          "casing": Object {
+        "info": {
+          "casing": {
             "base_asset_denom": "baseAssetDenom",
             "poolId": "poolId",
             "quote_asset_denom": "quoteAssetDenom",
           },
           "method": "get",
-          "paramMap": Object {
+          "paramMap": {
             "base_asset_denom": "baseAssetDenom",
             "poolId": "poolId",
             "quote_asset_denom": "quoteAssetDenom",
           },
-          "pathParams": Array [
+          "pathParams": [
             "poolId",
           ],
-          "queryParams": Array [
+          "queryParams": [
             "base_asset_denom",
             "quote_asset_denom",
           ],
           "url": "/osmosis/gamm/v1beta1/pools/{poolId}/prices",
         },
         "name": "SpotPrice",
-        "options": Object {
+        "options": {
           "(google.api.http).get": "/osmosis/gamm/v1beta1/pools/{poolId}/prices",
         },
         "requestType": "QuerySpotPriceRequest",
         "responseType": "QuerySpotPriceResponse",
         "type": "ServiceMethod",
       },
-      "TotalLiquidity": Object {
+      "TotalLiquidity": {
         "comment": null,
-        "fields": Object {},
-        "info": Object {
-          "casing": Object {},
+        "fields": {},
+        "info": {
+          "casing": {},
           "method": "get",
-          "paramMap": Object {},
-          "pathParams": Array [],
-          "queryParams": Array [],
+          "paramMap": {},
+          "pathParams": [],
+          "queryParams": [],
           "url": "/osmosis/gamm/v1beta1/total_liquidity",
         },
         "name": "TotalLiquidity",
-        "options": Object {
+        "options": {
           "(google.api.http).get": "/osmosis/gamm/v1beta1/total_liquidity",
         },
         "requestType": "QueryTotalLiquidityRequest",
         "responseType": "QueryTotalLiquidityResponse",
         "type": "ServiceMethod",
       },
-      "TotalPoolLiquidity": Object {
+      "TotalPoolLiquidity": {
         "comment": null,
-        "fields": Object {
-          "poolId": Object {
+        "fields": {
+          "poolId": {
             "comment": null,
             "id": 1,
             "isScalar": true,
-            "options": Object {
+            "options": {
               "(gogoproto.moretags)": "yaml:pool_id",
               "(telescope:camel)": "poolId",
               "(telescope:name)": "poolId",
               "(telescope:orig)": "poolId",
             },
-            "parsedType": Object {
+            "parsedType": {
               "name": "uint64",
               "type": "native",
             },
@@ -505,42 +505,42 @@ Object {
             "typeNum": 8,
           },
         },
-        "info": Object {
-          "casing": Object {
+        "info": {
+          "casing": {
             "poolId": "poolId",
           },
           "method": "get",
-          "paramMap": Object {
+          "paramMap": {
             "poolId": "poolId",
           },
-          "pathParams": Array [
+          "pathParams": [
             "poolId",
           ],
-          "queryParams": Array [],
+          "queryParams": [],
           "url": "/osmosis/gamm/v1beta1/pools/{poolId}/total_pool_liquidity",
         },
         "name": "TotalPoolLiquidity",
-        "options": Object {
+        "options": {
           "(google.api.http).get": "/osmosis/gamm/v1beta1/pools/{poolId}/total_pool_liquidity",
         },
         "requestType": "QueryTotalPoolLiquidityRequest",
         "responseType": "QueryTotalPoolLiquidityResponse",
         "type": "ServiceMethod",
       },
-      "TotalShares": Object {
+      "TotalShares": {
         "comment": null,
-        "fields": Object {
-          "poolId": Object {
+        "fields": {
+          "poolId": {
             "comment": null,
             "id": 1,
             "isScalar": true,
-            "options": Object {
+            "options": {
               "(gogoproto.moretags)": "yaml:pool_id",
               "(telescope:camel)": "poolId",
               "(telescope:name)": "poolId",
               "(telescope:orig)": "poolId",
             },
-            "parsedType": Object {
+            "parsedType": {
               "name": "uint64",
               "type": "native",
             },
@@ -548,22 +548,22 @@ Object {
             "typeNum": 8,
           },
         },
-        "info": Object {
-          "casing": Object {
+        "info": {
+          "casing": {
             "poolId": "poolId",
           },
           "method": "get",
-          "paramMap": Object {
+          "paramMap": {
             "poolId": "poolId",
           },
-          "pathParams": Array [
+          "pathParams": [
             "poolId",
           ],
-          "queryParams": Array [],
+          "queryParams": [],
           "url": "/osmosis/gamm/v1beta1/pools/{poolId}/total_shares",
         },
         "name": "TotalShares",
-        "options": Object {
+        "options": {
           "(google.api.http).get": "/osmosis/gamm/v1beta1/pools/{poolId}/total_shares",
         },
         "requestType": "QueryTotalSharesRequest",
@@ -575,30 +575,30 @@ Object {
     "serviceType": "Query",
     "type": "Service",
   },
-  "QueryNumPoolsRequest": Object {
+  "QueryNumPoolsRequest": {
     "comment": "=============================== NumPools",
-    "fields": Object {},
-    "keyTypes": Array [],
+    "fields": {},
+    "keyTypes": [],
     "name": "QueryNumPoolsRequest",
     "nested": null,
     "oneofs": undefined,
     "options": undefined,
     "type": "Type",
   },
-  "QueryNumPoolsResponse": Object {
+  "QueryNumPoolsResponse": {
     "comment": null,
-    "fields": Object {
-      "numPools": Object {
+    "fields": {
+      "numPools": {
         "comment": null,
         "id": 1,
         "isScalar": true,
-        "options": Object {
+        "options": {
           "(gogoproto.moretags)": "yaml:num_pools",
           "(telescope:camel)": "numPools",
           "(telescope:name)": "numPools",
           "(telescope:orig)": "numPools",
         },
-        "parsedType": Object {
+        "parsedType": {
           "name": "uint64",
           "type": "native",
         },
@@ -606,27 +606,27 @@ Object {
         "typeNum": 8,
       },
     },
-    "keyTypes": Array [],
+    "keyTypes": [],
     "name": "QueryNumPoolsResponse",
     "nested": null,
     "oneofs": undefined,
     "options": undefined,
     "type": "Type",
   },
-  "QueryPoolParamsRequest": Object {
+  "QueryPoolParamsRequest": {
     "comment": "=============================== PoolParams",
-    "fields": Object {
-      "poolId": Object {
+    "fields": {
+      "poolId": {
         "comment": null,
         "id": 1,
         "isScalar": true,
-        "options": Object {
+        "options": {
           "(gogoproto.moretags)": "yaml:pool_id",
           "(telescope:camel)": "poolId",
           "(telescope:name)": "poolId",
           "(telescope:orig)": "poolId",
         },
-        "parsedType": Object {
+        "parsedType": {
           "name": "uint64",
           "type": "native",
         },
@@ -634,58 +634,58 @@ Object {
         "typeNum": 8,
       },
     },
-    "keyTypes": Array [],
+    "keyTypes": [],
     "name": "QueryPoolParamsRequest",
     "nested": null,
     "oneofs": undefined,
     "options": undefined,
     "type": "Type",
   },
-  "QueryPoolParamsResponse": Object {
+  "QueryPoolParamsResponse": {
     "comment": null,
-    "fields": Object {
-      "params": Object {
+    "fields": {
+      "params": {
         "comment": null,
         "id": 1,
         "import": "google/protobuf/any.proto",
         "importedName": "google.protobuf.Any",
-        "options": Object {
+        "options": {
           "(telescope:camel)": "params",
           "(telescope:name)": "params",
           "(telescope:orig)": "params",
         },
-        "parsedType": Object {
+        "parsedType": {
           "name": "Any",
           "type": "Type",
         },
-        "scope": Array [
+        "scope": [
           "google.protobuf",
         ],
         "scopeType": "protoImport",
         "type": "google.protobuf.Any",
       },
     },
-    "keyTypes": Array [],
+    "keyTypes": [],
     "name": "QueryPoolParamsResponse",
     "nested": null,
     "oneofs": undefined,
     "options": undefined,
     "type": "Type",
   },
-  "QueryPoolRequest": Object {
+  "QueryPoolRequest": {
     "comment": "=============================== Pool",
-    "fields": Object {
-      "poolId": Object {
+    "fields": {
+      "poolId": {
         "comment": null,
         "id": 1,
         "isScalar": true,
-        "options": Object {
+        "options": {
           "(gogoproto.moretags)": "yaml:pool_id",
           "(telescope:camel)": "poolId",
           "(telescope:name)": "poolId",
           "(telescope:orig)": "poolId",
         },
-        "parsedType": Object {
+        "parsedType": {
           "name": "uint64",
           "type": "native",
         },
@@ -693,178 +693,178 @@ Object {
         "typeNum": 8,
       },
     },
-    "keyTypes": Array [],
+    "keyTypes": [],
     "name": "QueryPoolRequest",
     "nested": null,
     "oneofs": undefined,
     "options": undefined,
     "type": "Type",
   },
-  "QueryPoolResponse": Object {
+  "QueryPoolResponse": {
     "comment": null,
-    "fields": Object {
-      "pool": Object {
+    "fields": {
+      "pool": {
         "comment": null,
         "id": 1,
         "import": "google/protobuf/any.proto",
         "importedName": "google.protobuf.Any",
-        "options": Object {
+        "options": {
           "(cosmos_proto.accepts_interface)": "PoolI",
           "(telescope:camel)": "pool",
           "(telescope:name)": "pool",
           "(telescope:orig)": "pool",
         },
-        "parsedType": Object {
+        "parsedType": {
           "name": "Any",
           "type": "Type",
         },
-        "scope": Array [
+        "scope": [
           "google.protobuf",
         ],
         "scopeType": "protoImport",
         "type": "google.protobuf.Any",
       },
     },
-    "keyTypes": Array [],
+    "keyTypes": [],
     "name": "QueryPoolResponse",
     "nested": null,
     "oneofs": undefined,
     "options": undefined,
     "type": "Type",
   },
-  "QueryPoolsRequest": Object {
+  "QueryPoolsRequest": {
     "comment": "=============================== Pools",
-    "fields": Object {
-      "pagination": Object {
+    "fields": {
+      "pagination": {
         "comment": "pagination defines an optional pagination for the request.",
         "id": 2,
         "import": "cosmos/base/query/v1beta1/pagination.proto",
         "importedName": "cosmos.base.query.v1beta1.PageRequest",
-        "options": Object {
+        "options": {
           "(telescope:camel)": "pagination",
           "(telescope:name)": "pagination",
           "(telescope:orig)": "pagination",
         },
-        "parsedType": Object {
+        "parsedType": {
           "name": "PageRequest",
           "type": "Type",
         },
-        "scope": Array [
+        "scope": [
           "cosmos.base.query.v1beta1",
         ],
         "scopeType": "protoImport",
         "type": "cosmos.base.query.v1beta1.PageRequest",
       },
     },
-    "keyTypes": Array [],
+    "keyTypes": [],
     "name": "QueryPoolsRequest",
     "nested": null,
     "oneofs": undefined,
     "options": undefined,
     "type": "Type",
   },
-  "QueryPoolsResponse": Object {
+  "QueryPoolsResponse": {
     "comment": null,
-    "fields": Object {
-      "pagination": Object {
+    "fields": {
+      "pagination": {
         "comment": "pagination defines the pagination in the response.",
         "id": 2,
         "import": "cosmos/base/query/v1beta1/pagination.proto",
         "importedName": "cosmos.base.query.v1beta1.PageResponse",
-        "options": Object {
+        "options": {
           "(telescope:camel)": "pagination",
           "(telescope:name)": "pagination",
           "(telescope:orig)": "pagination",
         },
-        "parsedType": Object {
+        "parsedType": {
           "name": "PageResponse",
           "type": "Type",
         },
-        "scope": Array [
+        "scope": [
           "cosmos.base.query.v1beta1",
         ],
         "scopeType": "protoImport",
         "type": "cosmos.base.query.v1beta1.PageResponse",
       },
-      "pools": Object {
+      "pools": {
         "comment": null,
         "id": 1,
         "import": "google/protobuf/any.proto",
         "importedName": "google.protobuf.Any",
-        "options": Object {
+        "options": {
           "(cosmos_proto.accepts_interface)": "PoolI",
           "(telescope:camel)": "pools",
           "(telescope:name)": "pools",
           "(telescope:orig)": "pools",
         },
-        "parsedType": Object {
+        "parsedType": {
           "name": "Any",
           "type": "Type",
         },
         "rule": "repeated",
-        "scope": Array [
+        "scope": [
           "google.protobuf",
         ],
         "scopeType": "protoImport",
         "type": "google.protobuf.Any",
       },
     },
-    "keyTypes": Array [],
+    "keyTypes": [],
     "name": "QueryPoolsResponse",
     "nested": null,
     "oneofs": undefined,
     "options": undefined,
     "type": "Type",
   },
-  "QuerySpotPriceRequest": Object {
+  "QuerySpotPriceRequest": {
     "comment": "QuerySpotPriceRequest defines the gRPC request structure for a SpotPrice
  query.",
-    "fields": Object {
-      "baseAssetDenom": Object {
+    "fields": {
+      "baseAssetDenom": {
         "comment": null,
         "id": 2,
         "isScalar": true,
-        "options": Object {
+        "options": {
           "(gogoproto.moretags)": "yaml:base_asset_denom",
           "(telescope:camel)": "baseAssetDenom",
           "(telescope:name)": "baseAssetDenom",
           "(telescope:orig)": "base_asset_denom",
         },
-        "parsedType": Object {
+        "parsedType": {
           "name": "string",
           "type": "native",
         },
         "type": "string",
         "typeNum": 13,
       },
-      "poolId": Object {
+      "poolId": {
         "comment": null,
         "id": 1,
         "isScalar": true,
-        "options": Object {
+        "options": {
           "(gogoproto.moretags)": "yaml:pool_id",
           "(telescope:camel)": "poolId",
           "(telescope:name)": "poolId",
           "(telescope:orig)": "poolId",
         },
-        "parsedType": Object {
+        "parsedType": {
           "name": "uint64",
           "type": "native",
         },
         "type": "uint64",
         "typeNum": 8,
       },
-      "quoteAssetDenom": Object {
+      "quoteAssetDenom": {
         "comment": null,
         "id": 3,
         "isScalar": true,
-        "options": Object {
+        "options": {
           "(gogoproto.moretags)": "yaml:quote_asset_denom",
           "(telescope:camel)": "quoteAssetDenom",
           "(telescope:name)": "quoteAssetDenom",
           "(telescope:orig)": "quote_asset_denom",
         },
-        "parsedType": Object {
+        "parsedType": {
           "name": "string",
           "type": "native",
         },
@@ -872,28 +872,28 @@ Object {
         "typeNum": 13,
       },
     },
-    "keyTypes": Array [],
+    "keyTypes": [],
     "name": "QuerySpotPriceRequest",
     "nested": null,
     "oneofs": undefined,
     "options": undefined,
     "type": "Type",
   },
-  "QuerySpotPriceResponse": Object {
+  "QuerySpotPriceResponse": {
     "comment": "QuerySpotPriceResponse defines the gRPC response structure for a SpotPrice
  query.",
-    "fields": Object {
-      "spotPrice": Object {
+    "fields": {
+      "spotPrice": {
         "comment": "String of the Dec. Ex) 10.203uatom",
         "id": 1,
         "isScalar": true,
-        "options": Object {
+        "options": {
           "(gogoproto.moretags)": "yaml:spot_price",
           "(telescope:camel)": "spotPrice",
           "(telescope:name)": "spotPrice",
           "(telescope:orig)": "spotPrice",
         },
-        "parsedType": Object {
+        "parsedType": {
           "name": "string",
           "type": "native",
         },
@@ -901,86 +901,86 @@ Object {
         "typeNum": 13,
       },
     },
-    "keyTypes": Array [],
+    "keyTypes": [],
     "name": "QuerySpotPriceResponse",
     "nested": null,
     "oneofs": undefined,
     "options": undefined,
     "type": "Type",
   },
-  "QuerySwapExactAmountInRequest": Object {
+  "QuerySwapExactAmountInRequest": {
     "comment": "=============================== EstimateSwapExactAmountIn",
-    "fields": Object {
-      "poolId": Object {
+    "fields": {
+      "poolId": {
         "comment": null,
         "id": 2,
         "isScalar": true,
-        "options": Object {
+        "options": {
           "(gogoproto.moretags)": "yaml:pool_id",
           "(telescope:camel)": "poolId",
           "(telescope:name)": "poolId",
           "(telescope:orig)": "poolId",
         },
-        "parsedType": Object {
+        "parsedType": {
           "name": "uint64",
           "type": "native",
         },
         "type": "uint64",
         "typeNum": 8,
       },
-      "routes": Object {
+      "routes": {
         "comment": null,
         "id": 4,
         "import": "osmosis/gamm/v1beta1/tx.proto",
         "importedName": "SwapAmountInRoute",
-        "options": Object {
+        "options": {
           "(gogoproto.moretags)": "yaml:routes",
           "(gogoproto.nullable)": false,
           "(telescope:camel)": "routes",
           "(telescope:name)": "routes",
           "(telescope:orig)": "routes",
         },
-        "parsedType": Object {
+        "parsedType": {
           "name": "SwapAmountInRoute",
           "type": "Type",
         },
         "rule": "repeated",
-        "scope": Array [
-          Array [
+        "scope": [
+          [
             "osmosis.gamm.v1beta1",
           ],
         ],
         "scopeType": "import",
         "type": "SwapAmountInRoute",
       },
-      "sender": Object {
+      "sender": {
         "comment": null,
         "id": 1,
         "isScalar": true,
-        "options": Object {
+        "options": {
           "(gogoproto.moretags)": "yaml:sender",
           "(telescope:camel)": "sender",
           "(telescope:name)": "sender",
           "(telescope:orig)": "sender",
         },
-        "parsedType": Object {
+        "parsedType": {
           "name": "string",
           "type": "native",
         },
         "type": "string",
         "typeNum": 13,
       },
-      "tokenIn": Object {
+      "tokenIn": {
         "comment": null,
         "id": 3,
         "isScalar": true,
-        "options": Object {
+        "options": {
           "(gogoproto.moretags)": "yaml:token_in",
           "(telescope:camel)": "tokenIn",
           "(telescope:name)": "tokenIn",
           "(telescope:orig)": "tokenIn",
         },
-        "parsedType": Object {
+        "parsedType": {
           "name": "string",
           "type": "native",
         },
@@ -988,21 +988,21 @@ Object {
         "typeNum": 13,
       },
     },
-    "keyTypes": Array [],
+    "keyTypes": [],
     "name": "QuerySwapExactAmountInRequest",
     "nested": null,
     "oneofs": undefined,
     "options": undefined,
     "type": "Type",
   },
-  "QuerySwapExactAmountInResponse": Object {
+  "QuerySwapExactAmountInResponse": {
     "comment": null,
-    "fields": Object {
-      "tokenOutAmount": Object {
+    "fields": {
+      "tokenOutAmount": {
         "comment": null,
         "id": 1,
         "isScalar": true,
-        "options": Object {
+        "options": {
           "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Int",
           "(gogoproto.moretags)": "yaml:token_out_amount",
           "(gogoproto.nullable)": false,
@@ -1010,7 +1010,7 @@ Object {
           "(telescope:name)": "tokenOutAmount",
           "(telescope:orig)": "tokenOutAmount",
         },
-        "parsedType": Object {
+        "parsedType": {
           "name": "string",
           "type": "native",
         },
@@ -1018,86 +1018,86 @@ Object {
         "typeNum": 13,
       },
     },
-    "keyTypes": Array [],
+    "keyTypes": [],
     "name": "QuerySwapExactAmountInResponse",
     "nested": null,
     "oneofs": undefined,
     "options": undefined,
     "type": "Type",
   },
-  "QuerySwapExactAmountOutRequest": Object {
+  "QuerySwapExactAmountOutRequest": {
     "comment": "=============================== EstimateSwapExactAmountOut",
-    "fields": Object {
-      "poolId": Object {
+    "fields": {
+      "poolId": {
         "comment": null,
         "id": 2,
         "isScalar": true,
-        "options": Object {
+        "options": {
           "(gogoproto.moretags)": "yaml:pool_id",
           "(telescope:camel)": "poolId",
           "(telescope:name)": "poolId",
           "(telescope:orig)": "poolId",
         },
-        "parsedType": Object {
+        "parsedType": {
           "name": "uint64",
           "type": "native",
         },
         "type": "uint64",
         "typeNum": 8,
       },
-      "routes": Object {
+      "routes": {
         "comment": null,
         "id": 3,
         "import": "osmosis/gamm/v1beta1/tx.proto",
         "importedName": "SwapAmountOutRoute",
-        "options": Object {
+        "options": {
           "(gogoproto.moretags)": "yaml:routes",
           "(gogoproto.nullable)": false,
           "(telescope:camel)": "routes",
           "(telescope:name)": "routes",
           "(telescope:orig)": "routes",
         },
-        "parsedType": Object {
+        "parsedType": {
           "name": "SwapAmountOutRoute",
           "type": "Type",
         },
         "rule": "repeated",
-        "scope": Array [
-          Array [
+        "scope": [
+          [
             "osmosis.gamm.v1beta1",
           ],
         ],
         "scopeType": "import",
         "type": "SwapAmountOutRoute",
       },
-      "sender": Object {
+      "sender": {
         "comment": null,
         "id": 1,
         "isScalar": true,
-        "options": Object {
+        "options": {
           "(gogoproto.moretags)": "yaml:sender",
           "(telescope:camel)": "sender",
           "(telescope:name)": "sender",
           "(telescope:orig)": "sender",
         },
-        "parsedType": Object {
+        "parsedType": {
           "name": "string",
           "type": "native",
         },
         "type": "string",
         "typeNum": 13,
       },
-      "tokenOut": Object {
+      "tokenOut": {
         "comment": null,
         "id": 4,
         "isScalar": true,
-        "options": Object {
+        "options": {
           "(gogoproto.moretags)": "yaml:token_out",
           "(telescope:camel)": "tokenOut",
           "(telescope:name)": "tokenOut",
           "(telescope:orig)": "tokenOut",
         },
-        "parsedType": Object {
+        "parsedType": {
           "name": "string",
           "type": "native",
         },
@@ -1105,21 +1105,21 @@ Object {
         "typeNum": 13,
       },
     },
-    "keyTypes": Array [],
+    "keyTypes": [],
     "name": "QuerySwapExactAmountOutRequest",
     "nested": null,
     "oneofs": undefined,
     "options": undefined,
     "type": "Type",
   },
-  "QuerySwapExactAmountOutResponse": Object {
+  "QuerySwapExactAmountOutResponse": {
     "comment": null,
-    "fields": Object {
-      "tokenInAmount": Object {
+    "fields": {
+      "tokenInAmount": {
         "comment": null,
         "id": 1,
         "isScalar": true,
-        "options": Object {
+        "options": {
           "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Int",
           "(gogoproto.moretags)": "yaml:token_in_amount",
           "(gogoproto.nullable)": false,
@@ -1127,7 +1127,7 @@ Object {
           "(telescope:name)": "tokenInAmount",
           "(telescope:orig)": "tokenInAmount",
         },
-        "parsedType": Object {
+        "parsedType": {
           "name": "string",
           "type": "native",
         },
@@ -1135,32 +1135,32 @@ Object {
         "typeNum": 13,
       },
     },
-    "keyTypes": Array [],
+    "keyTypes": [],
     "name": "QuerySwapExactAmountOutResponse",
     "nested": null,
     "oneofs": undefined,
     "options": undefined,
     "type": "Type",
   },
-  "QueryTotalLiquidityRequest": Object {
+  "QueryTotalLiquidityRequest": {
     "comment": null,
-    "fields": Object {},
-    "keyTypes": Array [],
+    "fields": {},
+    "keyTypes": [],
     "name": "QueryTotalLiquidityRequest",
     "nested": null,
     "oneofs": undefined,
     "options": undefined,
     "type": "Type",
   },
-  "QueryTotalLiquidityResponse": Object {
+  "QueryTotalLiquidityResponse": {
     "comment": null,
-    "fields": Object {
-      "liquidity": Object {
+    "fields": {
+      "liquidity": {
         "comment": null,
         "id": 1,
         "import": "cosmos/base/v1beta1/coin.proto",
         "importedName": "cosmos.base.v1beta1.Coin",
-        "options": Object {
+        "options": {
           "(gogoproto.castrepeated)": "github.com/cosmos/cosmos-sdk/types.Coins",
           "(gogoproto.moretags)": "yaml:liquidity",
           "(gogoproto.nullable)": false,
@@ -1168,39 +1168,39 @@ Object {
           "(telescope:name)": "liquidity",
           "(telescope:orig)": "liquidity",
         },
-        "parsedType": Object {
+        "parsedType": {
           "name": "Coin",
           "type": "Type",
         },
         "rule": "repeated",
-        "scope": Array [
+        "scope": [
           "cosmos.base.v1beta1",
         ],
         "scopeType": "protoImport",
         "type": "cosmos.base.v1beta1.Coin",
       },
     },
-    "keyTypes": Array [],
+    "keyTypes": [],
     "name": "QueryTotalLiquidityResponse",
     "nested": null,
     "oneofs": undefined,
     "options": undefined,
     "type": "Type",
   },
-  "QueryTotalPoolLiquidityRequest": Object {
+  "QueryTotalPoolLiquidityRequest": {
     "comment": "=============================== PoolLiquidity",
-    "fields": Object {
-      "poolId": Object {
+    "fields": {
+      "poolId": {
         "comment": null,
         "id": 1,
         "isScalar": true,
-        "options": Object {
+        "options": {
           "(gogoproto.moretags)": "yaml:pool_id",
           "(telescope:camel)": "poolId",
           "(telescope:name)": "poolId",
           "(telescope:orig)": "poolId",
         },
-        "parsedType": Object {
+        "parsedType": {
           "name": "uint64",
           "type": "native",
         },
@@ -1208,22 +1208,22 @@ Object {
         "typeNum": 8,
       },
     },
-    "keyTypes": Array [],
+    "keyTypes": [],
     "name": "QueryTotalPoolLiquidityRequest",
     "nested": null,
     "oneofs": undefined,
     "options": undefined,
     "type": "Type",
   },
-  "QueryTotalPoolLiquidityResponse": Object {
+  "QueryTotalPoolLiquidityResponse": {
     "comment": null,
-    "fields": Object {
-      "liquidity": Object {
+    "fields": {
+      "liquidity": {
         "comment": null,
         "id": 1,
         "import": "cosmos/base/v1beta1/coin.proto",
         "importedName": "cosmos.base.v1beta1.Coin",
-        "options": Object {
+        "options": {
           "(gogoproto.castrepeated)": "github.com/cosmos/cosmos-sdk/types.Coins",
           "(gogoproto.moretags)": "yaml:liquidity",
           "(gogoproto.nullable)": false,
@@ -1231,39 +1231,39 @@ Object {
           "(telescope:name)": "liquidity",
           "(telescope:orig)": "liquidity",
         },
-        "parsedType": Object {
+        "parsedType": {
           "name": "Coin",
           "type": "Type",
         },
         "rule": "repeated",
-        "scope": Array [
+        "scope": [
           "cosmos.base.v1beta1",
         ],
         "scopeType": "protoImport",
         "type": "cosmos.base.v1beta1.Coin",
       },
     },
-    "keyTypes": Array [],
+    "keyTypes": [],
     "name": "QueryTotalPoolLiquidityResponse",
     "nested": null,
     "oneofs": undefined,
     "options": undefined,
     "type": "Type",
   },
-  "QueryTotalSharesRequest": Object {
+  "QueryTotalSharesRequest": {
     "comment": "=============================== TotalShares",
-    "fields": Object {
-      "poolId": Object {
+    "fields": {
+      "poolId": {
         "comment": null,
         "id": 1,
         "isScalar": true,
-        "options": Object {
+        "options": {
           "(gogoproto.moretags)": "yaml:pool_id",
           "(telescope:camel)": "poolId",
           "(telescope:name)": "poolId",
           "(telescope:orig)": "poolId",
         },
-        "parsedType": Object {
+        "parsedType": {
           "name": "uint64",
           "type": "native",
         },
@@ -1271,40 +1271,40 @@ Object {
         "typeNum": 8,
       },
     },
-    "keyTypes": Array [],
+    "keyTypes": [],
     "name": "QueryTotalSharesRequest",
     "nested": null,
     "oneofs": undefined,
     "options": undefined,
     "type": "Type",
   },
-  "QueryTotalSharesResponse": Object {
+  "QueryTotalSharesResponse": {
     "comment": null,
-    "fields": Object {
-      "totalShares": Object {
+    "fields": {
+      "totalShares": {
         "comment": null,
         "id": 1,
         "import": "cosmos/base/v1beta1/coin.proto",
         "importedName": "cosmos.base.v1beta1.Coin",
-        "options": Object {
+        "options": {
           "(gogoproto.moretags)": "yaml:total_shares",
           "(gogoproto.nullable)": false,
           "(telescope:camel)": "totalShares",
           "(telescope:name)": "totalShares",
           "(telescope:orig)": "totalShares",
         },
-        "parsedType": Object {
+        "parsedType": {
           "name": "Coin",
           "type": "Type",
         },
-        "scope": Array [
+        "scope": [
           "cosmos.base.v1beta1",
         ],
         "scopeType": "protoImport",
         "type": "cosmos.base.v1beta1.Coin",
       },
     },
-    "keyTypes": Array [],
+    "keyTypes": [],
     "name": "QueryTotalSharesResponse",
     "nested": null,
     "oneofs": undefined,

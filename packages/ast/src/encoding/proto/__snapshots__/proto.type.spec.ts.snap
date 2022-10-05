@@ -60,9 +60,9 @@ exports[`createCreateProtoType Grant 1`] = `
 exports[`createCreateProtoType MsgJoinPool 1`] = `
 "function createBaseMsgJoinPool(): MsgJoinPool {
   return {
-    sender: \\"\\",
+    sender: "",
     poolId: Long.UZERO,
-    shareOutAmount: \\"\\",
+    shareOutAmount: "",
     tokenInMaxs: []
   };
 }"
@@ -123,8 +123,8 @@ export interface ModuleConfig {
    * can be smoothly upgraded to new versions.
    * 
    * For example, for the module cosmos.bank.module.v1.Module, we may chose
-   * to simply name the module \\"bank\\" in the app. When we upgrade to
-   * cosmos.bank.module.v2.Module, the app-specific name \\"bank\\" stays the same
+   * to simply name the module "bank" in the app. When we upgrade to
+   * cosmos.bank.module.v2.Module, the app-specific name "bank" stays the same
    * and the framework knows that the v2 module should receive all the same state
    * that the v1 module had. Note: modules should provide info on which versions
    * they can migrate from in the ModuleDescriptor.can_migration_from field.
