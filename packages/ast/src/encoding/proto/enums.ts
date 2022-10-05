@@ -21,7 +21,7 @@ const getEnumValues = (proto: ProtoEnum) => {
 }
 
 const ensureOneSpace = (str) => {
-    if (str.startsWith(' ')) return str;
+    if (/^[\s\n\t]+/.test(str)) return str;
     return ` ${str}`;
 }
 
