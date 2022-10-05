@@ -3,24 +3,23 @@
 exports[`RPC Service Client 1`] = `
 "/** Service defines the gRPC querier service for tendermint queries. */
 export interface Service {
+  /** GetNodeInfo queries the current node info. */
   getNodeInfo(request?: GetNodeInfoRequest): Promise<GetNodeInfoResponse>;
-  /*GetNodeInfo queries the current node info.*/
 
+  /** GetSyncing queries node syncing. */
   getSyncing(request?: GetSyncingRequest): Promise<GetSyncingResponse>;
-  /*GetSyncing queries node syncing.*/
 
+  /** GetLatestBlock returns the latest block. */
   getLatestBlock(request?: GetLatestBlockRequest): Promise<GetLatestBlockResponse>;
-  /*GetLatestBlock returns the latest block.*/
 
+  /** GetBlockByHeight queries block for given height. */
   getBlockByHeight(request: GetBlockByHeightRequest): Promise<GetBlockByHeightResponse>;
-  /*GetBlockByHeight queries block for given height.*/
 
+  /** GetLatestValidatorSet queries latest validator-set. */
   getLatestValidatorSet(request?: GetLatestValidatorSetRequest): Promise<GetLatestValidatorSetResponse>;
-  /*GetLatestValidatorSet queries latest validator-set.*/
 
+  /** GetValidatorSetByHeight queries validator-set at a given height. */
   getValidatorSetByHeight(request: GetValidatorSetByHeightRequest): Promise<GetValidatorSetByHeightResponse>;
-  /*GetValidatorSetByHeight queries validator-set at a given height.*/
-
 }"
 `;
 
