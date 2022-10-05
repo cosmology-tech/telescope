@@ -42,8 +42,9 @@ export function nullValueToJSON(object: NullValue): string {
     case NullValue.NULL_VALUE:
       return "NULL_VALUE";
 
+    case NullValue.UNRECOGNIZED:
     default:
-      return "UNKNOWN";
+      return "UNRECOGNIZED";
   }
 }
 export interface Struct_FieldsEntry {

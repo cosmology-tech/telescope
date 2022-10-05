@@ -10,9 +10,9 @@ export enum GetServiceConfigRequest_ConfigView {
 
   /**
    * FULL - Server response includes all fields including SourceInfo.
-   *  SourceFiles are of type 'google.api.servicemanagement.v1.ConfigFile'
-   *  and are only available for configs created using the
-   *  SubmitConfigSource method.
+   * SourceFiles are of type 'google.api.servicemanagement.v1.ConfigFile'
+   * and are only available for configs created using the
+   * SubmitConfigSource method.
    */
   FULL = 1,
   UNRECOGNIZED = -1,
@@ -23,9 +23,9 @@ export enum GetServiceConfigRequest_ConfigViewSDKType {
 
   /**
    * FULL - Server response includes all fields including SourceInfo.
-   *  SourceFiles are of type 'google.api.servicemanagement.v1.ConfigFile'
-   *  and are only available for configs created using the
-   *  SubmitConfigSource method.
+   * SourceFiles are of type 'google.api.servicemanagement.v1.ConfigFile'
+   * and are only available for configs created using the
+   * SubmitConfigSource method.
    */
   FULL = 1,
   UNRECOGNIZED = -1,
@@ -54,8 +54,9 @@ export function getServiceConfigRequest_ConfigViewToJSON(object: GetServiceConfi
     case GetServiceConfigRequest_ConfigView.FULL:
       return "FULL";
 
+    case GetServiceConfigRequest_ConfigView.UNRECOGNIZED:
     default:
-      return "UNKNOWN";
+      return "UNRECOGNIZED";
   }
 }
 

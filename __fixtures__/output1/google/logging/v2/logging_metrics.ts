@@ -48,8 +48,9 @@ export function logMetric_ApiVersionToJSON(object: LogMetric_ApiVersion): string
     case LogMetric_ApiVersion.V1:
       return "V1";
 
+    case LogMetric_ApiVersion.UNRECOGNIZED:
     default:
-      return "UNKNOWN";
+      return "UNRECOGNIZED";
   }
 }
 export interface LogMetric_LabelExtractorsEntry {

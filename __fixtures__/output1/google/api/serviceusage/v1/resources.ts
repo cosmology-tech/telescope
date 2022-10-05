@@ -14,14 +14,14 @@ export const protobufPackage = "google.api.serviceusage.v1";
 export enum State {
   /**
    * STATE_UNSPECIFIED - The default value, which indicates that the enabled state of the service
-   *  is unspecified or not meaningful. Currently, all consumers other than
-   *  projects (such as folders and organizations) are always in this state.
+   * is unspecified or not meaningful. Currently, all consumers other than
+   * projects (such as folders and organizations) are always in this state.
    */
   STATE_UNSPECIFIED = 0,
 
   /**
    * DISABLED - The service cannot be used by this consumer. It has either been explicitly
-   *  disabled, or has never been enabled.
+   * disabled, or has never been enabled.
    */
   DISABLED = 1,
 
@@ -34,14 +34,14 @@ export enum State {
 export enum StateSDKType {
   /**
    * STATE_UNSPECIFIED - The default value, which indicates that the enabled state of the service
-   *  is unspecified or not meaningful. Currently, all consumers other than
-   *  projects (such as folders and organizations) are always in this state.
+   * is unspecified or not meaningful. Currently, all consumers other than
+   * projects (such as folders and organizations) are always in this state.
    */
   STATE_UNSPECIFIED = 0,
 
   /**
    * DISABLED - The service cannot be used by this consumer. It has either been explicitly
-   *  disabled, or has never been enabled.
+   * disabled, or has never been enabled.
    */
   DISABLED = 1,
 
@@ -80,8 +80,9 @@ export function stateToJSON(object: State): string {
     case State.ENABLED:
       return "ENABLED";
 
+    case State.UNRECOGNIZED:
     default:
-      return "UNKNOWN";
+      return "UNRECOGNIZED";
   }
 }
 

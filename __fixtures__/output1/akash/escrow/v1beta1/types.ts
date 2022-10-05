@@ -72,8 +72,9 @@ export function account_StateToJSON(object: Account_State): string {
     case Account_State.overdrawn:
       return "overdrawn";
 
+    case Account_State.UNRECOGNIZED:
     default:
-      return "UNKNOWN";
+      return "UNRECOGNIZED";
   }
 }
 
@@ -146,8 +147,9 @@ export function payment_StateToJSON(object: Payment_State): string {
     case Payment_State.overdrawn:
       return "overdrawn";
 
+    case Payment_State.UNRECOGNIZED:
     default:
-      return "UNKNOWN";
+      return "UNRECOGNIZED";
   }
 }
 

@@ -10,14 +10,14 @@ export const protobufPackage = "google.api.servicecontrol.v1";
 export enum Operation_Importance {
   /**
    * LOW - Allows data caching, batching, and aggregation. It provides
-   *  higher performance with higher data loss risk.
+   * higher performance with higher data loss risk.
    */
   LOW = 0,
 
   /**
    * HIGH - Disables data aggregation to minimize data loss. It is for operations
-   *  that contains significant monetary value or audit trail. This feature
-   *  only applies to the client libraries.
+   * that contains significant monetary value or audit trail. This feature
+   * only applies to the client libraries.
    */
   HIGH = 1,
   UNRECOGNIZED = -1,
@@ -27,14 +27,14 @@ export enum Operation_Importance {
 export enum Operation_ImportanceSDKType {
   /**
    * LOW - Allows data caching, batching, and aggregation. It provides
-   *  higher performance with higher data loss risk.
+   * higher performance with higher data loss risk.
    */
   LOW = 0,
 
   /**
    * HIGH - Disables data aggregation to minimize data loss. It is for operations
-   *  that contains significant monetary value or audit trail. This feature
-   *  only applies to the client libraries.
+   * that contains significant monetary value or audit trail. This feature
+   * only applies to the client libraries.
    */
   HIGH = 1,
   UNRECOGNIZED = -1,
@@ -63,8 +63,9 @@ export function operation_ImportanceToJSON(object: Operation_Importance): string
     case Operation_Importance.HIGH:
       return "HIGH";
 
+    case Operation_Importance.UNRECOGNIZED:
     default:
-      return "UNKNOWN";
+      return "UNRECOGNIZED";
   }
 }
 export interface Operation_LabelsEntry {

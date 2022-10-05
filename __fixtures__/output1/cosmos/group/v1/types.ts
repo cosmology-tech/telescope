@@ -87,8 +87,9 @@ export function voteOptionToJSON(object: VoteOption): string {
     case VoteOption.VOTE_OPTION_NO_WITH_VETO:
       return "VOTE_OPTION_NO_WITH_VETO";
 
+    case VoteOption.UNRECOGNIZED:
     default:
-      return "UNKNOWN";
+      return "UNRECOGNIZED";
   }
 }
 
@@ -108,7 +109,7 @@ export enum ProposalStatus {
 
   /**
    * PROPOSAL_STATUS_WITHDRAWN - A proposal can be deleted before the voting start time by the owner. When this happens the final status
-   *  is Withdrawn.
+   * is Withdrawn.
    */
   PROPOSAL_STATUS_WITHDRAWN = 4,
   UNRECOGNIZED = -1,
@@ -130,7 +131,7 @@ export enum ProposalStatusSDKType {
 
   /**
    * PROPOSAL_STATUS_WITHDRAWN - A proposal can be deleted before the voting start time by the owner. When this happens the final status
-   *  is Withdrawn.
+   * is Withdrawn.
    */
   PROPOSAL_STATUS_WITHDRAWN = 4,
   UNRECOGNIZED = -1,
@@ -180,8 +181,9 @@ export function proposalStatusToJSON(object: ProposalStatus): string {
     case ProposalStatus.PROPOSAL_STATUS_WITHDRAWN:
       return "PROPOSAL_STATUS_WITHDRAWN";
 
+    case ProposalStatus.UNRECOGNIZED:
     default:
-      return "UNKNOWN";
+      return "UNRECOGNIZED";
   }
 }
 
@@ -254,8 +256,9 @@ export function proposalResultToJSON(object: ProposalResult): string {
     case ProposalResult.PROPOSAL_RESULT_REJECTED:
       return "PROPOSAL_RESULT_REJECTED";
 
+    case ProposalResult.UNRECOGNIZED:
     default:
-      return "UNKNOWN";
+      return "UNRECOGNIZED";
   }
 }
 
@@ -328,8 +331,9 @@ export function proposalExecutorResultToJSON(object: ProposalExecutorResult): st
     case ProposalExecutorResult.PROPOSAL_EXECUTOR_RESULT_FAILURE:
       return "PROPOSAL_EXECUTOR_RESULT_FAILURE";
 
+    case ProposalExecutorResult.UNRECOGNIZED:
     default:
-      return "UNKNOWN";
+      return "UNRECOGNIZED";
   }
 }
 

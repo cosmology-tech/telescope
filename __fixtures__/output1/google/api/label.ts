@@ -58,8 +58,9 @@ export function labelDescriptor_ValueTypeToJSON(object: LabelDescriptor_ValueTyp
     case LabelDescriptor_ValueType.INT64:
       return "INT64";
 
+    case LabelDescriptor_ValueType.UNRECOGNIZED:
     default:
-      return "UNKNOWN";
+      return "UNRECOGNIZED";
   }
 }
 

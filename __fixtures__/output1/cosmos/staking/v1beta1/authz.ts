@@ -80,8 +80,9 @@ export function authorizationTypeToJSON(object: AuthorizationType): string {
     case AuthorizationType.AUTHORIZATION_TYPE_REDELEGATE:
       return "AUTHORIZATION_TYPE_REDELEGATE";
 
+    case AuthorizationType.UNRECOGNIZED:
     default:
-      return "UNKNOWN";
+      return "UNRECOGNIZED";
   }
 }
 

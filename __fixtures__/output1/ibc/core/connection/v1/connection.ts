@@ -16,7 +16,7 @@ export enum State {
 
   /**
    * STATE_TRYOPEN - A connection end has acknowledged the handshake step on the counterparty
-   *  chain.
+   * chain.
    */
   STATE_TRYOPEN = 2,
 
@@ -38,7 +38,7 @@ export enum StateSDKType {
 
   /**
    * STATE_TRYOPEN - A connection end has acknowledged the handshake step on the counterparty
-   *  chain.
+   * chain.
    */
   STATE_TRYOPEN = 2,
 
@@ -84,8 +84,9 @@ export function stateToJSON(object: State): string {
     case State.STATE_OPEN:
       return "STATE_OPEN";
 
+    case State.UNRECOGNIZED:
     default:
-      return "UNKNOWN";
+      return "UNRECOGNIZED";
   }
 }
 

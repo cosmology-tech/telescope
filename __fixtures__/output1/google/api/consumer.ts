@@ -84,8 +84,9 @@ export function property_PropertyTypeToJSON(object: Property_PropertyType): stri
     case Property_PropertyType.DOUBLE:
       return "DOUBLE";
 
+    case Property_PropertyType.UNRECOGNIZED:
     default:
-      return "UNKNOWN";
+      return "UNRECOGNIZED";
   }
 }
 

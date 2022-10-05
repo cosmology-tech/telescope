@@ -29,7 +29,7 @@ export enum LogSeverity {
 
   /**
    * NOTICE - (300) Normal but significant events, such as start up, shut down, or
-   *  a configuration change.
+   * a configuration change.
    */
   NOTICE = 300,
 
@@ -79,7 +79,7 @@ export enum LogSeveritySDKType {
 
   /**
    * NOTICE - (300) Normal but significant events, such as start up, shut down, or
-   *  a configuration change.
+   * a configuration change.
    */
   NOTICE = 300,
 
@@ -172,7 +172,8 @@ export function logSeverityToJSON(object: LogSeverity): string {
     case LogSeverity.EMERGENCY:
       return "EMERGENCY";
 
+    case LogSeverity.UNRECOGNIZED:
     default:
-      return "UNKNOWN";
+      return "UNRECOGNIZED";
   }
 }

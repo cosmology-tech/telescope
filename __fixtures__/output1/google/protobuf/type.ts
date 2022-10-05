@@ -268,8 +268,9 @@ export function field_KindToJSON(object: Field_Kind): string {
     case Field_Kind.TYPE_SINT64:
       return "TYPE_SINT64";
 
+    case Field_Kind.UNRECOGNIZED:
     default:
-      return "UNKNOWN";
+      return "UNRECOGNIZED";
   }
 }
 
@@ -342,8 +343,9 @@ export function field_CardinalityToJSON(object: Field_Cardinality): string {
     case Field_Cardinality.CARDINALITY_REPEATED:
       return "CARDINALITY_REPEATED";
 
+    case Field_Cardinality.UNRECOGNIZED:
     default:
-      return "UNKNOWN";
+      return "UNRECOGNIZED";
   }
 }
 
@@ -390,8 +392,9 @@ export function syntaxToJSON(object: Syntax): string {
     case Syntax.SYNTAX_PROTO3:
       return "SYNTAX_PROTO3";
 
+    case Syntax.UNRECOGNIZED:
     default:
-      return "UNKNOWN";
+      return "UNRECOGNIZED";
   }
 }
 

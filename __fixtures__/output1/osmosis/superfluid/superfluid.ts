@@ -36,8 +36,9 @@ export function superfluidAssetTypeToJSON(object: SuperfluidAssetType): string {
     case SuperfluidAssetType.SuperfluidAssetTypeLPShare:
       return "SuperfluidAssetTypeLPShare";
 
+    case SuperfluidAssetType.UNRECOGNIZED:
     default:
-      return "UNKNOWN";
+      return "UNRECOGNIZED";
   }
 }
 

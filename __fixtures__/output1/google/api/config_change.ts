@@ -12,19 +12,19 @@ export enum ChangeType {
 
   /**
    * ADDED - The changed object exists in the 'new' service configuration, but not
-   *  in the 'old' service configuration.
+   * in the 'old' service configuration.
    */
   ADDED = 1,
 
   /**
    * REMOVED - The changed object exists in the 'old' service configuration, but not
-   *  in the 'new' service configuration.
+   * in the 'new' service configuration.
    */
   REMOVED = 2,
 
   /**
    * MODIFIED - The changed object exists in both service configurations, but its value
-   *  is different.
+   * is different.
    */
   MODIFIED = 3,
   UNRECOGNIZED = -1,
@@ -40,19 +40,19 @@ export enum ChangeTypeSDKType {
 
   /**
    * ADDED - The changed object exists in the 'new' service configuration, but not
-   *  in the 'old' service configuration.
+   * in the 'old' service configuration.
    */
   ADDED = 1,
 
   /**
    * REMOVED - The changed object exists in the 'old' service configuration, but not
-   *  in the 'new' service configuration.
+   * in the 'new' service configuration.
    */
   REMOVED = 2,
 
   /**
    * MODIFIED - The changed object exists in both service configurations, but its value
-   *  is different.
+   * is different.
    */
   MODIFIED = 3,
   UNRECOGNIZED = -1,
@@ -95,8 +95,9 @@ export function changeTypeToJSON(object: ChangeType): string {
     case ChangeType.MODIFIED:
       return "MODIFIED";
 
+    case ChangeType.UNRECOGNIZED:
     default:
-      return "UNKNOWN";
+      return "UNRECOGNIZED";
   }
 }
 

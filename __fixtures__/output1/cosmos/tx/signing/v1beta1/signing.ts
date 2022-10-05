@@ -17,36 +17,36 @@ export const protobufPackage = "cosmos.tx.signing.v1beta1";
 export enum SignMode {
   /**
    * SIGN_MODE_UNSPECIFIED - SIGN_MODE_UNSPECIFIED specifies an unknown signing mode and will be
-   *  rejected.
+   * rejected.
    */
   SIGN_MODE_UNSPECIFIED = 0,
 
   /**
    * SIGN_MODE_DIRECT - SIGN_MODE_DIRECT specifies a signing mode which uses SignDoc and is
-   *  verified with raw bytes from Tx.
+   * verified with raw bytes from Tx.
    */
   SIGN_MODE_DIRECT = 1,
 
   /**
    * SIGN_MODE_TEXTUAL - SIGN_MODE_TEXTUAL is a future signing mode that will verify some
-   *  human-readable textual representation on top of the binary representation
-   *  from SIGN_MODE_DIRECT. It is currently not supported.
+   * human-readable textual representation on top of the binary representation
+   * from SIGN_MODE_DIRECT. It is currently not supported.
    */
   SIGN_MODE_TEXTUAL = 2,
 
   /**
    * SIGN_MODE_DIRECT_AUX - SIGN_MODE_DIRECT_AUX specifies a signing mode which uses
-   *  SignDocDirectAux. As opposed to SIGN_MODE_DIRECT, this sign mode does not
-   *  require signers signing over other signers' `signer_info`. It also allows
-   *  for adding Tips in transactions.
-   * 
-   *  Since: cosmos-sdk 0.46
+   * SignDocDirectAux. As opposed to SIGN_MODE_DIRECT, this sign mode does not
+   * require signers signing over other signers' `signer_info`. It also allows
+   * for adding Tips in transactions.
+   *
+   * Since: cosmos-sdk 0.46
    */
   SIGN_MODE_DIRECT_AUX = 3,
 
   /**
    * SIGN_MODE_LEGACY_AMINO_JSON - SIGN_MODE_LEGACY_AMINO_JSON is a backwards compatibility mode which uses
-   *  Amino JSON and will be removed in the future.
+   * Amino JSON and will be removed in the future.
    */
   SIGN_MODE_LEGACY_AMINO_JSON = 127,
   UNRECOGNIZED = -1,
@@ -65,36 +65,36 @@ export enum SignMode {
 export enum SignModeSDKType {
   /**
    * SIGN_MODE_UNSPECIFIED - SIGN_MODE_UNSPECIFIED specifies an unknown signing mode and will be
-   *  rejected.
+   * rejected.
    */
   SIGN_MODE_UNSPECIFIED = 0,
 
   /**
    * SIGN_MODE_DIRECT - SIGN_MODE_DIRECT specifies a signing mode which uses SignDoc and is
-   *  verified with raw bytes from Tx.
+   * verified with raw bytes from Tx.
    */
   SIGN_MODE_DIRECT = 1,
 
   /**
    * SIGN_MODE_TEXTUAL - SIGN_MODE_TEXTUAL is a future signing mode that will verify some
-   *  human-readable textual representation on top of the binary representation
-   *  from SIGN_MODE_DIRECT. It is currently not supported.
+   * human-readable textual representation on top of the binary representation
+   * from SIGN_MODE_DIRECT. It is currently not supported.
    */
   SIGN_MODE_TEXTUAL = 2,
 
   /**
    * SIGN_MODE_DIRECT_AUX - SIGN_MODE_DIRECT_AUX specifies a signing mode which uses
-   *  SignDocDirectAux. As opposed to SIGN_MODE_DIRECT, this sign mode does not
-   *  require signers signing over other signers' `signer_info`. It also allows
-   *  for adding Tips in transactions.
-   * 
-   *  Since: cosmos-sdk 0.46
+   * SignDocDirectAux. As opposed to SIGN_MODE_DIRECT, this sign mode does not
+   * require signers signing over other signers' `signer_info`. It also allows
+   * for adding Tips in transactions.
+   *
+   * Since: cosmos-sdk 0.46
    */
   SIGN_MODE_DIRECT_AUX = 3,
 
   /**
    * SIGN_MODE_LEGACY_AMINO_JSON - SIGN_MODE_LEGACY_AMINO_JSON is a backwards compatibility mode which uses
-   *  Amino JSON and will be removed in the future.
+   * Amino JSON and will be removed in the future.
    */
   SIGN_MODE_LEGACY_AMINO_JSON = 127,
   UNRECOGNIZED = -1,
@@ -144,8 +144,9 @@ export function signModeToJSON(object: SignMode): string {
     case SignMode.SIGN_MODE_LEGACY_AMINO_JSON:
       return "SIGN_MODE_LEGACY_AMINO_JSON";
 
+    case SignMode.UNRECOGNIZED:
     default:
-      return "UNKNOWN";
+      return "UNRECOGNIZED";
   }
 }
 

@@ -8,7 +8,7 @@ export const protobufPackage = "google.api.serviceusage.v1beta1";
 export enum GetServiceIdentityResponse_IdentityState {
   /**
    * IDENTITY_STATE_UNSPECIFIED - Default service identity state. This value is used if the state is
-   *  omitted.
+   * omitted.
    */
   IDENTITY_STATE_UNSPECIFIED = 0,
 
@@ -21,7 +21,7 @@ export enum GetServiceIdentityResponse_IdentityState {
 export enum GetServiceIdentityResponse_IdentityStateSDKType {
   /**
    * IDENTITY_STATE_UNSPECIFIED - Default service identity state. This value is used if the state is
-   *  omitted.
+   * omitted.
    */
   IDENTITY_STATE_UNSPECIFIED = 0,
 
@@ -53,8 +53,9 @@ export function getServiceIdentityResponse_IdentityStateToJSON(object: GetServic
     case GetServiceIdentityResponse_IdentityState.ACTIVE:
       return "ACTIVE";
 
+    case GetServiceIdentityResponse_IdentityState.UNRECOGNIZED:
     default:
-      return "UNKNOWN";
+      return "UNRECOGNIZED";
   }
 }
 

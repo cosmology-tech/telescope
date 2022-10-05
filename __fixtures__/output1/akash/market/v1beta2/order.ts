@@ -72,8 +72,9 @@ export function order_StateToJSON(object: Order_State): string {
     case Order_State.closed:
       return "closed";
 
+    case Order_State.UNRECOGNIZED:
     default:
-      return "UNKNOWN";
+      return "UNRECOGNIZED";
   }
 }
 

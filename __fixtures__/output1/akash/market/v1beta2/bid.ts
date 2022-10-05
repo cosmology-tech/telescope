@@ -86,8 +86,9 @@ export function bid_StateToJSON(object: Bid_State): string {
     case Bid_State.closed:
       return "closed";
 
+    case Bid_State.UNRECOGNIZED:
     default:
-      return "UNKNOWN";
+      return "UNRECOGNIZED";
   }
 }
 

@@ -44,8 +44,9 @@ export function lockQueryTypeToJSON(object: LockQueryType): string {
     case LockQueryType.ByTime:
       return "ByTime";
 
+    case LockQueryType.UNRECOGNIZED:
     default:
-      return "UNKNOWN";
+      return "UNRECOGNIZED";
   }
 }
 

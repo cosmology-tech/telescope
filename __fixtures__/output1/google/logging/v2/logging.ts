@@ -13,15 +13,15 @@ export enum TailLogEntriesResponse_SuppressionInfo_Reason {
 
   /**
    * RATE_LIMIT - Indicates suppression occurred due to relevant entries being
-   *  received in excess of rate limits. For quotas and limits, see
-   *  [Logging API quotas and
-   *  limits](https://cloud.google.com/logging/quotas#api-limits).
+   * received in excess of rate limits. For quotas and limits, see
+   * [Logging API quotas and
+   * limits](https://cloud.google.com/logging/quotas#api-limits).
    */
   RATE_LIMIT = 1,
 
   /**
    * NOT_CONSUMED - Indicates suppression occurred due to the client not consuming
-   *  responses quickly enough.
+   * responses quickly enough.
    */
   NOT_CONSUMED = 2,
   UNRECOGNIZED = -1,
@@ -34,15 +34,15 @@ export enum TailLogEntriesResponse_SuppressionInfo_ReasonSDKType {
 
   /**
    * RATE_LIMIT - Indicates suppression occurred due to relevant entries being
-   *  received in excess of rate limits. For quotas and limits, see
-   *  [Logging API quotas and
-   *  limits](https://cloud.google.com/logging/quotas#api-limits).
+   * received in excess of rate limits. For quotas and limits, see
+   * [Logging API quotas and
+   * limits](https://cloud.google.com/logging/quotas#api-limits).
    */
   RATE_LIMIT = 1,
 
   /**
    * NOT_CONSUMED - Indicates suppression occurred due to the client not consuming
-   *  responses quickly enough.
+   * responses quickly enough.
    */
   NOT_CONSUMED = 2,
   UNRECOGNIZED = -1,
@@ -78,8 +78,9 @@ export function tailLogEntriesResponse_SuppressionInfo_ReasonToJSON(object: Tail
     case TailLogEntriesResponse_SuppressionInfo_Reason.NOT_CONSUMED:
       return "NOT_CONSUMED";
 
+    case TailLogEntriesResponse_SuppressionInfo_Reason.UNRECOGNIZED:
     default:
-      return "UNKNOWN";
+      return "UNRECOGNIZED";
   }
 }
 

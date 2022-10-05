@@ -4,21 +4,21 @@ export const protobufPackage = "google.protobuf";
 export enum FieldDescriptorProto_Type {
   /**
    * TYPE_DOUBLE - 0 is reserved for errors.
-   *  Order is weird for historical reasons.
+   * Order is weird for historical reasons.
    */
   TYPE_DOUBLE = 1,
   TYPE_FLOAT = 2,
 
   /**
    * TYPE_INT64 - Not ZigZag encoded.  Negative numbers take 10 bytes.  Use TYPE_SINT64 if
-   *  negative values are likely.
+   * negative values are likely.
    */
   TYPE_INT64 = 3,
   TYPE_UINT64 = 4,
 
   /**
    * TYPE_INT32 - Not ZigZag encoded.  Negative numbers take 10 bytes.  Use TYPE_SINT32 if
-   *  negative values are likely.
+   * negative values are likely.
    */
   TYPE_INT32 = 5,
   TYPE_FIXED64 = 6,
@@ -28,9 +28,9 @@ export enum FieldDescriptorProto_Type {
 
   /**
    * TYPE_GROUP - Tag-delimited aggregate.
-   *  Group type is deprecated and not supported in proto3. However, Proto3
-   *  implementations should still be able to parse the group wire format and
-   *  treat group fields as unknown fields.
+   * Group type is deprecated and not supported in proto3. However, Proto3
+   * implementations should still be able to parse the group wire format and
+   * treat group fields as unknown fields.
    */
   TYPE_GROUP = 10,
   TYPE_MESSAGE = 11,
@@ -52,21 +52,21 @@ export enum FieldDescriptorProto_Type {
 export enum FieldDescriptorProto_TypeSDKType {
   /**
    * TYPE_DOUBLE - 0 is reserved for errors.
-   *  Order is weird for historical reasons.
+   * Order is weird for historical reasons.
    */
   TYPE_DOUBLE = 1,
   TYPE_FLOAT = 2,
 
   /**
    * TYPE_INT64 - Not ZigZag encoded.  Negative numbers take 10 bytes.  Use TYPE_SINT64 if
-   *  negative values are likely.
+   * negative values are likely.
    */
   TYPE_INT64 = 3,
   TYPE_UINT64 = 4,
 
   /**
    * TYPE_INT32 - Not ZigZag encoded.  Negative numbers take 10 bytes.  Use TYPE_SINT32 if
-   *  negative values are likely.
+   * negative values are likely.
    */
   TYPE_INT32 = 5,
   TYPE_FIXED64 = 6,
@@ -76,9 +76,9 @@ export enum FieldDescriptorProto_TypeSDKType {
 
   /**
    * TYPE_GROUP - Tag-delimited aggregate.
-   *  Group type is deprecated and not supported in proto3. However, Proto3
-   *  implementations should still be able to parse the group wire format and
-   *  treat group fields as unknown fields.
+   * Group type is deprecated and not supported in proto3. However, Proto3
+   * implementations should still be able to parse the group wire format and
+   * treat group fields as unknown fields.
    */
   TYPE_GROUP = 10,
   TYPE_MESSAGE = 11,
@@ -233,8 +233,9 @@ export function fieldDescriptorProto_TypeToJSON(object: FieldDescriptorProto_Typ
     case FieldDescriptorProto_Type.TYPE_SINT64:
       return "TYPE_SINT64";
 
+    case FieldDescriptorProto_Type.UNRECOGNIZED:
     default:
-      return "UNKNOWN";
+      return "UNRECOGNIZED";
   }
 }
 export enum FieldDescriptorProto_Label {
@@ -282,8 +283,9 @@ export function fieldDescriptorProto_LabelToJSON(object: FieldDescriptorProto_La
     case FieldDescriptorProto_Label.LABEL_REPEATED:
       return "LABEL_REPEATED";
 
+    case FieldDescriptorProto_Label.UNRECOGNIZED:
     default:
-      return "UNKNOWN";
+      return "UNRECOGNIZED";
   }
 }
 
@@ -291,7 +293,7 @@ export function fieldDescriptorProto_LabelToJSON(object: FieldDescriptorProto_La
 export enum FileOptions_OptimizeMode {
   /**
    * SPEED - Generate complete code for parsing, serialization,
-   *  etc.
+   * etc.
    */
   SPEED = 1,
 
@@ -307,7 +309,7 @@ export enum FileOptions_OptimizeMode {
 export enum FileOptions_OptimizeModeSDKType {
   /**
    * SPEED - Generate complete code for parsing, serialization,
-   *  etc.
+   * etc.
    */
   SPEED = 1,
 
@@ -349,8 +351,9 @@ export function fileOptions_OptimizeModeToJSON(object: FileOptions_OptimizeMode)
     case FileOptions_OptimizeMode.LITE_RUNTIME:
       return "LITE_RUNTIME";
 
+    case FileOptions_OptimizeMode.UNRECOGNIZED:
     default:
-      return "UNKNOWN";
+      return "UNRECOGNIZED";
   }
 }
 export enum FieldOptions_CType {
@@ -398,8 +401,9 @@ export function fieldOptions_CTypeToJSON(object: FieldOptions_CType): string {
     case FieldOptions_CType.STRING_PIECE:
       return "STRING_PIECE";
 
+    case FieldOptions_CType.UNRECOGNIZED:
     default:
-      return "UNKNOWN";
+      return "UNRECOGNIZED";
   }
 }
 export enum FieldOptions_JSType {
@@ -455,8 +459,9 @@ export function fieldOptions_JSTypeToJSON(object: FieldOptions_JSType): string {
     case FieldOptions_JSType.JS_NUMBER:
       return "JS_NUMBER";
 
+    case FieldOptions_JSType.UNRECOGNIZED:
     default:
-      return "UNKNOWN";
+      return "UNRECOGNIZED";
   }
 }
 
@@ -522,8 +527,9 @@ export function methodOptions_IdempotencyLevelToJSON(object: MethodOptions_Idemp
     case MethodOptions_IdempotencyLevel.IDEMPOTENT:
       return "IDEMPOTENT";
 
+    case MethodOptions_IdempotencyLevel.UNRECOGNIZED:
     default:
-      return "UNKNOWN";
+      return "UNRECOGNIZED";
   }
 }
 

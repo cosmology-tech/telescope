@@ -58,8 +58,9 @@ export function endpoint_KindToJSON(object: Endpoint_Kind): string {
     case Endpoint_Kind.LEASED_IP:
       return "LEASED_IP";
 
+    case Endpoint_Kind.UNRECOGNIZED:
     default:
-      return "UNKNOWN";
+      return "UNRECOGNIZED";
   }
 }
 

@@ -76,8 +76,9 @@ export function bondStatusToJSON(object: BondStatus): string {
     case BondStatus.BOND_STATUS_BONDED:
       return "BOND_STATUS_BONDED";
 
+    case BondStatus.UNRECOGNIZED:
     default:
-      return "UNKNOWN";
+      return "UNRECOGNIZED";
   }
 }
 

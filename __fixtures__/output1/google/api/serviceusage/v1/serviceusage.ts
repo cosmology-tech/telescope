@@ -16,8 +16,8 @@ export enum DisableServiceRequest_CheckIfServiceHasUsage {
 
   /**
    * CHECK - If set, service usage is checked when disabling the service. If a
-   *  service, or its dependents, has usage in the last 30 days, the request
-   *  returns a FAILED_PRECONDITION error.
+   * service, or its dependents, has usage in the last 30 days, the request
+   * returns a FAILED_PRECONDITION error.
    */
   CHECK = 2,
   UNRECOGNIZED = -1,
@@ -36,8 +36,8 @@ export enum DisableServiceRequest_CheckIfServiceHasUsageSDKType {
 
   /**
    * CHECK - If set, service usage is checked when disabling the service. If a
-   *  service, or its dependents, has usage in the last 30 days, the request
-   *  returns a FAILED_PRECONDITION error.
+   * service, or its dependents, has usage in the last 30 days, the request
+   * returns a FAILED_PRECONDITION error.
    */
   CHECK = 2,
   UNRECOGNIZED = -1,
@@ -73,8 +73,9 @@ export function disableServiceRequest_CheckIfServiceHasUsageToJSON(object: Disab
     case DisableServiceRequest_CheckIfServiceHasUsage.CHECK:
       return "CHECK";
 
+    case DisableServiceRequest_CheckIfServiceHasUsage.UNRECOGNIZED:
     default:
-      return "UNKNOWN";
+      return "UNRECOGNIZED";
   }
 }
 

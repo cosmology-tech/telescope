@@ -60,8 +60,9 @@ export function logSink_VersionFormatToJSON(object: LogSink_VersionFormat): stri
     case LogSink_VersionFormat.V1:
       return "V1";
 
+    case LogSink_VersionFormat.UNRECOGNIZED:
     default:
-      return "UNKNOWN";
+      return "UNRECOGNIZED";
   }
 }
 
@@ -69,7 +70,7 @@ export function logSink_VersionFormatToJSON(object: LogSink_VersionFormat): stri
 export enum LifecycleState {
   /**
    * LIFECYCLE_STATE_UNSPECIFIED - Unspecified state. This is only used/useful for distinguishing unset
-   *  values.
+   * values.
    */
   LIFECYCLE_STATE_UNSPECIFIED = 0,
 
@@ -78,7 +79,7 @@ export enum LifecycleState {
 
   /**
    * DELETE_REQUESTED - The resource has been marked for deletion by the user. For some resources
-   *  (e.g. buckets), this can be reversed by an un-delete operation.
+   * (e.g. buckets), this can be reversed by an un-delete operation.
    */
   DELETE_REQUESTED = 2,
   UNRECOGNIZED = -1,
@@ -88,7 +89,7 @@ export enum LifecycleState {
 export enum LifecycleStateSDKType {
   /**
    * LIFECYCLE_STATE_UNSPECIFIED - Unspecified state. This is only used/useful for distinguishing unset
-   *  values.
+   * values.
    */
   LIFECYCLE_STATE_UNSPECIFIED = 0,
 
@@ -97,7 +98,7 @@ export enum LifecycleStateSDKType {
 
   /**
    * DELETE_REQUESTED - The resource has been marked for deletion by the user. For some resources
-   *  (e.g. buckets), this can be reversed by an un-delete operation.
+   * (e.g. buckets), this can be reversed by an un-delete operation.
    */
   DELETE_REQUESTED = 2,
   UNRECOGNIZED = -1,
@@ -133,8 +134,9 @@ export function lifecycleStateToJSON(object: LifecycleState): string {
     case LifecycleState.DELETE_REQUESTED:
       return "DELETE_REQUESTED";
 
+    case LifecycleState.UNRECOGNIZED:
     default:
-      return "UNKNOWN";
+      return "UNRECOGNIZED";
   }
 }
 
@@ -258,8 +260,9 @@ export function operationStateToJSON(object: OperationState): string {
     case OperationState.OPERATION_STATE_CANCELLED:
       return "OPERATION_STATE_CANCELLED";
 
+    case OperationState.UNRECOGNIZED:
     default:
-      return "UNKNOWN";
+      return "UNRECOGNIZED";
   }
 }
 

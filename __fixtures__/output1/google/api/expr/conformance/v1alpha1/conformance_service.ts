@@ -13,7 +13,7 @@ export enum IssueDetails_Severity {
 
   /**
    * DEPRECATION - Deprecation issue for statements and method that may no longer be
-   *  supported or maintained.
+   * supported or maintained.
    */
   DEPRECATION = 1,
 
@@ -32,7 +32,7 @@ export enum IssueDetails_SeveritySDKType {
 
   /**
    * DEPRECATION - Deprecation issue for statements and method that may no longer be
-   *  supported or maintained.
+   * supported or maintained.
    */
   DEPRECATION = 1,
 
@@ -81,8 +81,9 @@ export function issueDetails_SeverityToJSON(object: IssueDetails_Severity): stri
     case IssueDetails_Severity.ERROR:
       return "ERROR";
 
+    case IssueDetails_Severity.UNRECOGNIZED:
     default:
-      return "UNKNOWN";
+      return "UNRECOGNIZED";
   }
 }
 

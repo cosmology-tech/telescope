@@ -10,13 +10,13 @@ export enum CheckError_Code {
 
   /**
    * NOT_FOUND - The consumer's project id, network container, or resource container was
-   *  not found. Same as [google.rpc.Code.NOT_FOUND][google.rpc.Code.NOT_FOUND].
+   * not found. Same as [google.rpc.Code.NOT_FOUND][google.rpc.Code.NOT_FOUND].
    */
   NOT_FOUND = 5,
 
   /**
    * PERMISSION_DENIED - The consumer doesn't have access to the specified resource.
-   *  Same as [google.rpc.Code.PERMISSION_DENIED][google.rpc.Code.PERMISSION_DENIED].
+   * Same as [google.rpc.Code.PERMISSION_DENIED][google.rpc.Code.PERMISSION_DENIED].
    */
   PERMISSION_DENIED = 7,
 
@@ -37,31 +37,31 @@ export enum CheckError_Code {
 
   /**
    * CONSUMER_INVALID - The input consumer info does not represent a valid consumer folder or
-   *  organization.
+   * organization.
    */
   CONSUMER_INVALID = 125,
 
   /**
    * IP_ADDRESS_BLOCKED - The IP address of the consumer is invalid for the specific consumer
-   *  project.
+   * project.
    */
   IP_ADDRESS_BLOCKED = 109,
 
   /**
    * REFERER_BLOCKED - The referer address of the consumer request is invalid for the specific
-   *  consumer project.
+   * consumer project.
    */
   REFERER_BLOCKED = 110,
 
   /**
    * CLIENT_APP_BLOCKED - The client application of the consumer request is invalid for the
-   *  specific consumer project.
+   * specific consumer project.
    */
   CLIENT_APP_BLOCKED = 111,
 
   /**
    * API_TARGET_BLOCKED - The API targeted by this request is invalid for the specified consumer
-   *  project.
+   * project.
    */
   API_TARGET_BLOCKED = 122,
 
@@ -98,13 +98,13 @@ export enum CheckError_CodeSDKType {
 
   /**
    * NOT_FOUND - The consumer's project id, network container, or resource container was
-   *  not found. Same as [google.rpc.Code.NOT_FOUND][google.rpc.Code.NOT_FOUND].
+   * not found. Same as [google.rpc.Code.NOT_FOUND][google.rpc.Code.NOT_FOUND].
    */
   NOT_FOUND = 5,
 
   /**
    * PERMISSION_DENIED - The consumer doesn't have access to the specified resource.
-   *  Same as [google.rpc.Code.PERMISSION_DENIED][google.rpc.Code.PERMISSION_DENIED].
+   * Same as [google.rpc.Code.PERMISSION_DENIED][google.rpc.Code.PERMISSION_DENIED].
    */
   PERMISSION_DENIED = 7,
 
@@ -125,31 +125,31 @@ export enum CheckError_CodeSDKType {
 
   /**
    * CONSUMER_INVALID - The input consumer info does not represent a valid consumer folder or
-   *  organization.
+   * organization.
    */
   CONSUMER_INVALID = 125,
 
   /**
    * IP_ADDRESS_BLOCKED - The IP address of the consumer is invalid for the specific consumer
-   *  project.
+   * project.
    */
   IP_ADDRESS_BLOCKED = 109,
 
   /**
    * REFERER_BLOCKED - The referer address of the consumer request is invalid for the specific
-   *  consumer project.
+   * consumer project.
    */
   REFERER_BLOCKED = 110,
 
   /**
    * CLIENT_APP_BLOCKED - The client application of the consumer request is invalid for the
-   *  specific consumer project.
+   * specific consumer project.
    */
   CLIENT_APP_BLOCKED = 111,
 
   /**
    * API_TARGET_BLOCKED - The API targeted by this request is invalid for the specified consumer
-   *  project.
+   * project.
    */
   API_TARGET_BLOCKED = 122,
 
@@ -335,8 +335,9 @@ export function checkError_CodeToJSON(object: CheckError_Code): string {
     case CheckError_Code.CLOUD_RESOURCE_MANAGER_BACKEND_UNAVAILABLE:
       return "CLOUD_RESOURCE_MANAGER_BACKEND_UNAVAILABLE";
 
+    case CheckError_Code.UNRECOGNIZED:
     default:
-      return "UNKNOWN";
+      return "UNRECOGNIZED";
   }
 }
 

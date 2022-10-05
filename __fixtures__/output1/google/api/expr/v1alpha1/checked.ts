@@ -15,22 +15,22 @@ export enum Type_PrimitiveType {
 
   /**
    * INT64 - Int64 type.
-   * 
-   *  Proto-based integer values are widened to int64.
+   *
+   * Proto-based integer values are widened to int64.
    */
   INT64 = 2,
 
   /**
    * UINT64 - Uint64 type.
-   * 
-   *  Proto-based unsigned integer values are widened to uint64.
+   *
+   * Proto-based unsigned integer values are widened to uint64.
    */
   UINT64 = 3,
 
   /**
    * DOUBLE - Double type.
-   * 
-   *  Proto-based float values are widened to double values.
+   *
+   * Proto-based float values are widened to double values.
    */
   DOUBLE = 4,
 
@@ -52,22 +52,22 @@ export enum Type_PrimitiveTypeSDKType {
 
   /**
    * INT64 - Int64 type.
-   * 
-   *  Proto-based integer values are widened to int64.
+   *
+   * Proto-based integer values are widened to int64.
    */
   INT64 = 2,
 
   /**
    * UINT64 - Uint64 type.
-   * 
-   *  Proto-based unsigned integer values are widened to uint64.
+   *
+   * Proto-based unsigned integer values are widened to uint64.
    */
   UINT64 = 3,
 
   /**
    * DOUBLE - Double type.
-   * 
-   *  Proto-based float values are widened to double values.
+   *
+   * Proto-based float values are widened to double values.
    */
   DOUBLE = 4,
 
@@ -137,8 +137,9 @@ export function type_PrimitiveTypeToJSON(object: Type_PrimitiveType): string {
     case Type_PrimitiveType.BYTES:
       return "BYTES";
 
+    case Type_PrimitiveType.UNRECOGNIZED:
     default:
-      return "UNKNOWN";
+      return "UNRECOGNIZED";
   }
 }
 
@@ -149,10 +150,10 @@ export enum Type_WellKnownType {
 
   /**
    * ANY - Well-known protobuf.Any type.
-   * 
-   *  Any types are a polymorphic message type. During type-checking they are
-   *  treated like `DYN` types, but at runtime they are resolved to a specific
-   *  message type specified at evaluation time.
+   *
+   * Any types are a polymorphic message type. During type-checking they are
+   * treated like `DYN` types, but at runtime they are resolved to a specific
+   * message type specified at evaluation time.
    */
   ANY = 1,
 
@@ -171,10 +172,10 @@ export enum Type_WellKnownTypeSDKType {
 
   /**
    * ANY - Well-known protobuf.Any type.
-   * 
-   *  Any types are a polymorphic message type. During type-checking they are
-   *  treated like `DYN` types, but at runtime they are resolved to a specific
-   *  message type specified at evaluation time.
+   *
+   * Any types are a polymorphic message type. During type-checking they are
+   * treated like `DYN` types, but at runtime they are resolved to a specific
+   * message type specified at evaluation time.
    */
   ANY = 1,
 
@@ -223,8 +224,9 @@ export function type_WellKnownTypeToJSON(object: Type_WellKnownType): string {
     case Type_WellKnownType.DURATION:
       return "DURATION";
 
+    case Type_WellKnownType.UNRECOGNIZED:
     default:
-      return "UNKNOWN";
+      return "UNRECOGNIZED";
   }
 }
 export interface CheckedExpr_ReferenceMapEntry {

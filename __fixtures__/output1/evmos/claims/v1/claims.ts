@@ -84,8 +84,9 @@ export function actionToJSON(object: Action): string {
     case Action.ACTION_IBC_TRANSFER:
       return "ACTION_IBC_TRANSFER";
 
+    case Action.UNRECOGNIZED:
     default:
-      return "UNKNOWN";
+      return "UNRECOGNIZED";
   }
 }
 

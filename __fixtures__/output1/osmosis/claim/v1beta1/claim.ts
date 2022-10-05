@@ -54,8 +54,9 @@ export function actionToJSON(object: Action): string {
     case Action.ActionDelegateStake:
       return "ActionDelegateStake";
 
+    case Action.UNRECOGNIZED:
     default:
-      return "UNKNOWN";
+      return "UNRECOGNIZED";
   }
 }
 

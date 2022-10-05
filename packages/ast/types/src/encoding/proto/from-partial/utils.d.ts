@@ -21,6 +21,7 @@ export declare const fromPartial: {
     enum(args: FromPartialMethod): t.Statement;
     bytes(args: FromPartialMethod): t.Statement;
     duration(args: FromPartialMethod): t.Statement;
+    durationString(args: FromPartialMethod): t.Statement;
     timestamp(args: FromPartialMethod): t.Statement;
     timestampDate(args: FromPartialMethod): t.Statement;
     keyHash(args: FromPartialMethod): t.ExpressionStatement;

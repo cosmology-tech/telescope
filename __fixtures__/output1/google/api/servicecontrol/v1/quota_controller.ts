@@ -11,48 +11,48 @@ export enum QuotaOperation_QuotaMode {
 
   /**
    * NORMAL - For AllocateQuota request, allocates quota for the amount specified in
-   *  the service configuration or specified using the quota metrics. If the
-   *  amount is higher than the available quota, allocation error will be
-   *  returned and no quota will be allocated.
-   *  If multiple quotas are part of the request, and one fails, none of the
-   *  quotas are allocated or released.
+   * the service configuration or specified using the quota metrics. If the
+   * amount is higher than the available quota, allocation error will be
+   * returned and no quota will be allocated.
+   * If multiple quotas are part of the request, and one fails, none of the
+   * quotas are allocated or released.
    */
   NORMAL = 1,
 
   /**
    * BEST_EFFORT - The operation allocates quota for the amount specified in the service
-   *  configuration or specified using the quota metrics. If the amount is
-   *  higher than the available quota, request does not fail but all available
-   *  quota will be allocated.
-   *  For rate quota, BEST_EFFORT will continue to deduct from other groups
-   *  even if one does not have enough quota. For allocation, it will find the
-   *  minimum available amount across all groups and deduct that amount from
-   *  all the affected groups.
+   * configuration or specified using the quota metrics. If the amount is
+   * higher than the available quota, request does not fail but all available
+   * quota will be allocated.
+   * For rate quota, BEST_EFFORT will continue to deduct from other groups
+   * even if one does not have enough quota. For allocation, it will find the
+   * minimum available amount across all groups and deduct that amount from
+   * all the affected groups.
    */
   BEST_EFFORT = 2,
 
   /**
    * CHECK_ONLY - For AllocateQuota request, only checks if there is enough quota
-   *  available and does not change the available quota. No lock is placed on
-   *  the available quota either.
+   * available and does not change the available quota. No lock is placed on
+   * the available quota either.
    */
   CHECK_ONLY = 3,
 
   /**
    * QUERY_ONLY - Unimplemented. When used in AllocateQuotaRequest, this returns the
-   *  effective quota limit(s) in the response, and no quota check will be
-   *  performed. Not supported for other requests, and even for
-   *  AllocateQuotaRequest, this is currently supported only for allowlisted
-   *  services.
+   * effective quota limit(s) in the response, and no quota check will be
+   * performed. Not supported for other requests, and even for
+   * AllocateQuotaRequest, this is currently supported only for allowlisted
+   * services.
    */
   QUERY_ONLY = 4,
 
   /**
    * ADJUST_ONLY - The operation allocates quota for the amount specified in the service
-   *  configuration or specified using the quota metrics. If the requested
-   *  amount is higher than the available quota, request does not fail and
-   *  remaining quota would become negative (going over the limit).
-   *  Not supported for Rate Quota.
+   * configuration or specified using the quota metrics. If the requested
+   * amount is higher than the available quota, request does not fail and
+   * remaining quota would become negative (going over the limit).
+   * Not supported for Rate Quota.
    */
   ADJUST_ONLY = 5,
   UNRECOGNIZED = -1,
@@ -65,48 +65,48 @@ export enum QuotaOperation_QuotaModeSDKType {
 
   /**
    * NORMAL - For AllocateQuota request, allocates quota for the amount specified in
-   *  the service configuration or specified using the quota metrics. If the
-   *  amount is higher than the available quota, allocation error will be
-   *  returned and no quota will be allocated.
-   *  If multiple quotas are part of the request, and one fails, none of the
-   *  quotas are allocated or released.
+   * the service configuration or specified using the quota metrics. If the
+   * amount is higher than the available quota, allocation error will be
+   * returned and no quota will be allocated.
+   * If multiple quotas are part of the request, and one fails, none of the
+   * quotas are allocated or released.
    */
   NORMAL = 1,
 
   /**
    * BEST_EFFORT - The operation allocates quota for the amount specified in the service
-   *  configuration or specified using the quota metrics. If the amount is
-   *  higher than the available quota, request does not fail but all available
-   *  quota will be allocated.
-   *  For rate quota, BEST_EFFORT will continue to deduct from other groups
-   *  even if one does not have enough quota. For allocation, it will find the
-   *  minimum available amount across all groups and deduct that amount from
-   *  all the affected groups.
+   * configuration or specified using the quota metrics. If the amount is
+   * higher than the available quota, request does not fail but all available
+   * quota will be allocated.
+   * For rate quota, BEST_EFFORT will continue to deduct from other groups
+   * even if one does not have enough quota. For allocation, it will find the
+   * minimum available amount across all groups and deduct that amount from
+   * all the affected groups.
    */
   BEST_EFFORT = 2,
 
   /**
    * CHECK_ONLY - For AllocateQuota request, only checks if there is enough quota
-   *  available and does not change the available quota. No lock is placed on
-   *  the available quota either.
+   * available and does not change the available quota. No lock is placed on
+   * the available quota either.
    */
   CHECK_ONLY = 3,
 
   /**
    * QUERY_ONLY - Unimplemented. When used in AllocateQuotaRequest, this returns the
-   *  effective quota limit(s) in the response, and no quota check will be
-   *  performed. Not supported for other requests, and even for
-   *  AllocateQuotaRequest, this is currently supported only for allowlisted
-   *  services.
+   * effective quota limit(s) in the response, and no quota check will be
+   * performed. Not supported for other requests, and even for
+   * AllocateQuotaRequest, this is currently supported only for allowlisted
+   * services.
    */
   QUERY_ONLY = 4,
 
   /**
    * ADJUST_ONLY - The operation allocates quota for the amount specified in the service
-   *  configuration or specified using the quota metrics. If the requested
-   *  amount is higher than the available quota, request does not fail and
-   *  remaining quota would become negative (going over the limit).
-   *  Not supported for Rate Quota.
+   * configuration or specified using the quota metrics. If the requested
+   * amount is higher than the available quota, request does not fail and
+   * remaining quota would become negative (going over the limit).
+   * Not supported for Rate Quota.
    */
   ADJUST_ONLY = 5,
   UNRECOGNIZED = -1,
@@ -163,8 +163,9 @@ export function quotaOperation_QuotaModeToJSON(object: QuotaOperation_QuotaMode)
     case QuotaOperation_QuotaMode.ADJUST_ONLY:
       return "ADJUST_ONLY";
 
+    case QuotaOperation_QuotaMode.UNRECOGNIZED:
     default:
-      return "UNKNOWN";
+      return "UNRECOGNIZED";
   }
 }
 
@@ -181,13 +182,13 @@ export enum QuotaError_Code {
 
   /**
    * RESOURCE_EXHAUSTED - Quota allocation failed.
-   *  Same as [google.rpc.Code.RESOURCE_EXHAUSTED][google.rpc.Code.RESOURCE_EXHAUSTED].
+   * Same as [google.rpc.Code.RESOURCE_EXHAUSTED][google.rpc.Code.RESOURCE_EXHAUSTED].
    */
   RESOURCE_EXHAUSTED = 8,
 
   /**
    * BILLING_NOT_ACTIVE - Consumer cannot access the service because the service requires active
-   *  billing.
+   * billing.
    */
   BILLING_NOT_ACTIVE = 107,
 
@@ -215,13 +216,13 @@ export enum QuotaError_CodeSDKType {
 
   /**
    * RESOURCE_EXHAUSTED - Quota allocation failed.
-   *  Same as [google.rpc.Code.RESOURCE_EXHAUSTED][google.rpc.Code.RESOURCE_EXHAUSTED].
+   * Same as [google.rpc.Code.RESOURCE_EXHAUSTED][google.rpc.Code.RESOURCE_EXHAUSTED].
    */
   RESOURCE_EXHAUSTED = 8,
 
   /**
    * BILLING_NOT_ACTIVE - Consumer cannot access the service because the service requires active
-   *  billing.
+   * billing.
    */
   BILLING_NOT_ACTIVE = 107,
 
@@ -287,8 +288,9 @@ export function quotaError_CodeToJSON(object: QuotaError_Code): string {
     case QuotaError_Code.API_KEY_EXPIRED:
       return "API_KEY_EXPIRED";
 
+    case QuotaError_Code.UNRECOGNIZED:
     default:
-      return "UNKNOWN";
+      return "UNRECOGNIZED";
   }
 }
 

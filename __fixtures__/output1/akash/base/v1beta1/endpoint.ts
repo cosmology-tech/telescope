@@ -45,8 +45,9 @@ export function endpoint_KindToJSON(object: Endpoint_Kind): string {
     case Endpoint_Kind.RANDOM_PORT:
       return "RANDOM_PORT";
 
+    case Endpoint_Kind.UNRECOGNIZED:
     default:
-      return "UNKNOWN";
+      return "UNRECOGNIZED";
   }
 }
 

@@ -87,8 +87,9 @@ export function group_StateToJSON(object: Group_State): string {
     case Group_State.closed:
       return "closed";
 
+    case Group_State.UNRECOGNIZED:
     default:
-      return "UNKNOWN";
+      return "UNRECOGNIZED";
   }
 }
 

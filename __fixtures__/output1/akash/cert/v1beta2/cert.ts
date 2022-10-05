@@ -58,8 +58,9 @@ export function certificate_StateToJSON(object: Certificate_State): string {
     case Certificate_State.revoked:
       return "revoked";
 
+    case Certificate_State.UNRECOGNIZED:
     default:
-      return "UNKNOWN";
+      return "UNRECOGNIZED";
   }
 }
 

@@ -16,51 +16,51 @@ export enum BackendRule_PathTranslation {
 
   /**
    * CONSTANT_ADDRESS - Use the backend address as-is, with no modification to the path. If the
-   *  URL pattern contains variables, the variable names and values will be
-   *  appended to the query string. If a query string parameter and a URL
-   *  pattern variable have the same name, this may result in duplicate keys in
-   *  the query string.
-   * 
-   *  # Examples
-   * 
-   *  Given the following operation config:
-   * 
-   *      Method path:        /api/company/{cid}/user/{uid}
-   *      Backend address:    https://example.cloudfunctions.net/getUser
-   * 
-   *  Requests to the following request paths will call the backend at the
-   *  translated path:
-   * 
-   *      Request path: /api/company/widgetworks/user/johndoe
-   *      Translated:
-   *      https://example.cloudfunctions.net/getUser?cid=widgetworks&uid=johndoe
-   * 
-   *      Request path: /api/company/widgetworks/user/johndoe?timezone=EST
-   *      Translated:
-   *      https://example.cloudfunctions.net/getUser?timezone=EST&cid=widgetworks&uid=johndoe
+   * URL pattern contains variables, the variable names and values will be
+   * appended to the query string. If a query string parameter and a URL
+   * pattern variable have the same name, this may result in duplicate keys in
+   * the query string.
+   *
+   * # Examples
+   *
+   * Given the following operation config:
+   *
+   *     Method path:        /api/company/{cid}/user/{uid}
+   *     Backend address:    https://example.cloudfunctions.net/getUser
+   *
+   * Requests to the following request paths will call the backend at the
+   * translated path:
+   *
+   *     Request path: /api/company/widgetworks/user/johndoe
+   *     Translated:
+   *     https://example.cloudfunctions.net/getUser?cid=widgetworks&uid=johndoe
+   *
+   *     Request path: /api/company/widgetworks/user/johndoe?timezone=EST
+   *     Translated:
+   *     https://example.cloudfunctions.net/getUser?timezone=EST&cid=widgetworks&uid=johndoe
    */
   CONSTANT_ADDRESS = 1,
 
   /**
    * APPEND_PATH_TO_ADDRESS - The request path will be appended to the backend address.
-   * 
-   *  # Examples
-   * 
-   *  Given the following operation config:
-   * 
-   *      Method path:        /api/company/{cid}/user/{uid}
-   *      Backend address:    https://example.appspot.com
-   * 
-   *  Requests to the following request paths will call the backend at the
-   *  translated path:
-   * 
-   *      Request path: /api/company/widgetworks/user/johndoe
-   *      Translated:
-   *      https://example.appspot.com/api/company/widgetworks/user/johndoe
-   * 
-   *      Request path: /api/company/widgetworks/user/johndoe?timezone=EST
-   *      Translated:
-   *      https://example.appspot.com/api/company/widgetworks/user/johndoe?timezone=EST
+   *
+   * # Examples
+   *
+   * Given the following operation config:
+   *
+   *     Method path:        /api/company/{cid}/user/{uid}
+   *     Backend address:    https://example.appspot.com
+   *
+   * Requests to the following request paths will call the backend at the
+   * translated path:
+   *
+   *     Request path: /api/company/widgetworks/user/johndoe
+   *     Translated:
+   *     https://example.appspot.com/api/company/widgetworks/user/johndoe
+   *
+   *     Request path: /api/company/widgetworks/user/johndoe?timezone=EST
+   *     Translated:
+   *     https://example.appspot.com/api/company/widgetworks/user/johndoe?timezone=EST
    */
   APPEND_PATH_TO_ADDRESS = 2,
   UNRECOGNIZED = -1,
@@ -80,51 +80,51 @@ export enum BackendRule_PathTranslationSDKType {
 
   /**
    * CONSTANT_ADDRESS - Use the backend address as-is, with no modification to the path. If the
-   *  URL pattern contains variables, the variable names and values will be
-   *  appended to the query string. If a query string parameter and a URL
-   *  pattern variable have the same name, this may result in duplicate keys in
-   *  the query string.
-   * 
-   *  # Examples
-   * 
-   *  Given the following operation config:
-   * 
-   *      Method path:        /api/company/{cid}/user/{uid}
-   *      Backend address:    https://example.cloudfunctions.net/getUser
-   * 
-   *  Requests to the following request paths will call the backend at the
-   *  translated path:
-   * 
-   *      Request path: /api/company/widgetworks/user/johndoe
-   *      Translated:
-   *      https://example.cloudfunctions.net/getUser?cid=widgetworks&uid=johndoe
-   * 
-   *      Request path: /api/company/widgetworks/user/johndoe?timezone=EST
-   *      Translated:
-   *      https://example.cloudfunctions.net/getUser?timezone=EST&cid=widgetworks&uid=johndoe
+   * URL pattern contains variables, the variable names and values will be
+   * appended to the query string. If a query string parameter and a URL
+   * pattern variable have the same name, this may result in duplicate keys in
+   * the query string.
+   *
+   * # Examples
+   *
+   * Given the following operation config:
+   *
+   *     Method path:        /api/company/{cid}/user/{uid}
+   *     Backend address:    https://example.cloudfunctions.net/getUser
+   *
+   * Requests to the following request paths will call the backend at the
+   * translated path:
+   *
+   *     Request path: /api/company/widgetworks/user/johndoe
+   *     Translated:
+   *     https://example.cloudfunctions.net/getUser?cid=widgetworks&uid=johndoe
+   *
+   *     Request path: /api/company/widgetworks/user/johndoe?timezone=EST
+   *     Translated:
+   *     https://example.cloudfunctions.net/getUser?timezone=EST&cid=widgetworks&uid=johndoe
    */
   CONSTANT_ADDRESS = 1,
 
   /**
    * APPEND_PATH_TO_ADDRESS - The request path will be appended to the backend address.
-   * 
-   *  # Examples
-   * 
-   *  Given the following operation config:
-   * 
-   *      Method path:        /api/company/{cid}/user/{uid}
-   *      Backend address:    https://example.appspot.com
-   * 
-   *  Requests to the following request paths will call the backend at the
-   *  translated path:
-   * 
-   *      Request path: /api/company/widgetworks/user/johndoe
-   *      Translated:
-   *      https://example.appspot.com/api/company/widgetworks/user/johndoe
-   * 
-   *      Request path: /api/company/widgetworks/user/johndoe?timezone=EST
-   *      Translated:
-   *      https://example.appspot.com/api/company/widgetworks/user/johndoe?timezone=EST
+   *
+   * # Examples
+   *
+   * Given the following operation config:
+   *
+   *     Method path:        /api/company/{cid}/user/{uid}
+   *     Backend address:    https://example.appspot.com
+   *
+   * Requests to the following request paths will call the backend at the
+   * translated path:
+   *
+   *     Request path: /api/company/widgetworks/user/johndoe
+   *     Translated:
+   *     https://example.appspot.com/api/company/widgetworks/user/johndoe
+   *
+   *     Request path: /api/company/widgetworks/user/johndoe?timezone=EST
+   *     Translated:
+   *     https://example.appspot.com/api/company/widgetworks/user/johndoe?timezone=EST
    */
   APPEND_PATH_TO_ADDRESS = 2,
   UNRECOGNIZED = -1,
@@ -160,8 +160,9 @@ export function backendRule_PathTranslationToJSON(object: BackendRule_PathTransl
     case BackendRule_PathTranslation.APPEND_PATH_TO_ADDRESS:
       return "APPEND_PATH_TO_ADDRESS";
 
+    case BackendRule_PathTranslation.UNRECOGNIZED:
     default:
-      return "UNKNOWN";
+      return "UNRECOGNIZED";
   }
 }
 

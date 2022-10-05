@@ -22,10 +22,10 @@ export enum MetricDescriptor_MetricKind {
 
   /**
    * CUMULATIVE - A value accumulated over a time interval.  Cumulative
-   *  measurements in a time series should have the same start time
-   *  and increasing end times, until an event resets the cumulative
-   *  value to zero and sets a new start time for the following
-   *  points.
+   * measurements in a time series should have the same start time
+   * and increasing end times, until an event resets the cumulative
+   * value to zero and sets a new start time for the following
+   * points.
    */
   CUMULATIVE = 3,
   UNRECOGNIZED = -1,
@@ -48,10 +48,10 @@ export enum MetricDescriptor_MetricKindSDKType {
 
   /**
    * CUMULATIVE - A value accumulated over a time interval.  Cumulative
-   *  measurements in a time series should have the same start time
-   *  and increasing end times, until an event resets the cumulative
-   *  value to zero and sets a new start time for the following
-   *  points.
+   * measurements in a time series should have the same start time
+   * and increasing end times, until an event resets the cumulative
+   * value to zero and sets a new start time for the following
+   * points.
    */
   CUMULATIVE = 3,
   UNRECOGNIZED = -1,
@@ -94,8 +94,9 @@ export function metricDescriptor_MetricKindToJSON(object: MetricDescriptor_Metri
     case MetricDescriptor_MetricKind.CUMULATIVE:
       return "CUMULATIVE";
 
+    case MetricDescriptor_MetricKind.UNRECOGNIZED:
     default:
-      return "UNKNOWN";
+      return "UNRECOGNIZED";
   }
 }
 
@@ -106,7 +107,7 @@ export enum MetricDescriptor_ValueType {
 
   /**
    * BOOL - The value is a boolean.
-   *  This value type can be used only if the metric kind is `GAUGE`.
+   * This value type can be used only if the metric kind is `GAUGE`.
    */
   BOOL = 1,
 
@@ -118,7 +119,7 @@ export enum MetricDescriptor_ValueType {
 
   /**
    * STRING - The value is a text string.
-   *  This value type can be used only if the metric kind is `GAUGE`.
+   * This value type can be used only if the metric kind is `GAUGE`.
    */
   STRING = 4,
 
@@ -137,7 +138,7 @@ export enum MetricDescriptor_ValueTypeSDKType {
 
   /**
    * BOOL - The value is a boolean.
-   *  This value type can be used only if the metric kind is `GAUGE`.
+   * This value type can be used only if the metric kind is `GAUGE`.
    */
   BOOL = 1,
 
@@ -149,7 +150,7 @@ export enum MetricDescriptor_ValueTypeSDKType {
 
   /**
    * STRING - The value is a text string.
-   *  This value type can be used only if the metric kind is `GAUGE`.
+   * This value type can be used only if the metric kind is `GAUGE`.
    */
   STRING = 4,
 
@@ -219,8 +220,9 @@ export function metricDescriptor_ValueTypeToJSON(object: MetricDescriptor_ValueT
     case MetricDescriptor_ValueType.MONEY:
       return "MONEY";
 
+    case MetricDescriptor_ValueType.UNRECOGNIZED:
     default:
-      return "UNKNOWN";
+      return "UNRECOGNIZED";
   }
 }
 

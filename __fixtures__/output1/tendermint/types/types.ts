@@ -61,8 +61,9 @@ export function blockIDFlagToJSON(object: BlockIDFlag): string {
     case BlockIDFlag.BLOCK_ID_FLAG_NIL:
       return "BLOCK_ID_FLAG_NIL";
 
+    case BlockIDFlag.UNRECOGNIZED:
     default:
-      return "UNKNOWN";
+      return "UNRECOGNIZED";
   }
 }
 
@@ -129,8 +130,9 @@ export function signedMsgTypeToJSON(object: SignedMsgType): string {
     case SignedMsgType.SIGNED_MSG_TYPE_PROPOSAL:
       return "SIGNED_MSG_TYPE_PROPOSAL";
 
+    case SignedMsgType.UNRECOGNIZED:
     default:
-      return "UNKNOWN";
+      return "UNRECOGNIZED";
   }
 }
 

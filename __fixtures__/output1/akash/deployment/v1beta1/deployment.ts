@@ -61,8 +61,9 @@ export function deployment_StateToJSON(object: Deployment_State): string {
     case Deployment_State.closed:
       return "closed";
 
+    case Deployment_State.UNRECOGNIZED:
     default:
-      return "UNKNOWN";
+      return "UNRECOGNIZED";
   }
 }
 

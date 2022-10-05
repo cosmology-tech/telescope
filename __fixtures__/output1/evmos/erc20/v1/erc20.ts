@@ -59,8 +59,9 @@ export function ownerToJSON(object: Owner): string {
     case Owner.OWNER_EXTERNAL:
       return "OWNER_EXTERNAL";
 
+    case Owner.UNRECOGNIZED:
     default:
-      return "UNKNOWN";
+      return "UNRECOGNIZED";
   }
 }
 

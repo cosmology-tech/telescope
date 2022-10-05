@@ -14,14 +14,14 @@ export const protobufPackage = "google.api.serviceusage.v1beta1";
 export enum State {
   /**
    * STATE_UNSPECIFIED - The default value, which indicates that the enabled state of the service
-   *  is unspecified or not meaningful. Currently, all consumers other than
-   *  projects (such as folders and organizations) are always in this state.
+   * is unspecified or not meaningful. Currently, all consumers other than
+   * projects (such as folders and organizations) are always in this state.
    */
   STATE_UNSPECIFIED = 0,
 
   /**
    * DISABLED - The service cannot be used by this consumer. It has either been explicitly
-   *  disabled, or has never been enabled.
+   * disabled, or has never been enabled.
    */
   DISABLED = 1,
 
@@ -34,14 +34,14 @@ export enum State {
 export enum StateSDKType {
   /**
    * STATE_UNSPECIFIED - The default value, which indicates that the enabled state of the service
-   *  is unspecified or not meaningful. Currently, all consumers other than
-   *  projects (such as folders and organizations) are always in this state.
+   * is unspecified or not meaningful. Currently, all consumers other than
+   * projects (such as folders and organizations) are always in this state.
    */
   STATE_UNSPECIFIED = 0,
 
   /**
    * DISABLED - The service cannot be used by this consumer. It has either been explicitly
-   *  disabled, or has never been enabled.
+   * disabled, or has never been enabled.
    */
   DISABLED = 1,
 
@@ -80,8 +80,9 @@ export function stateToJSON(object: State): string {
     case State.ENABLED:
       return "ENABLED";
 
+    case State.UNRECOGNIZED:
     default:
-      return "UNKNOWN";
+      return "UNRECOGNIZED";
   }
 }
 
@@ -92,7 +93,7 @@ export function stateToJSON(object: State): string {
 export enum QuotaView {
   /**
    * QUOTA_VIEW_UNSPECIFIED - No quota view specified. Requests that do not specify a quota view will
-   *  typically default to the BASIC view.
+   * typically default to the BASIC view.
    */
   QUOTA_VIEW_UNSPECIFIED = 0,
 
@@ -101,11 +102,11 @@ export enum QuotaView {
 
   /**
    * FULL - Include per-location buckets even if they do not have overrides.
-   *  When the view is FULL, and a limit has regional or zonal quota, the limit
-   *  will include buckets for all regions or zones that could support
-   *  overrides, even if none are currently present. In some cases this will
-   *  cause the response to become very large; callers that do not need this
-   *  extra information should use the BASIC view instead.
+   * When the view is FULL, and a limit has regional or zonal quota, the limit
+   * will include buckets for all regions or zones that could support
+   * overrides, even if none are currently present. In some cases this will
+   * cause the response to become very large; callers that do not need this
+   * extra information should use the BASIC view instead.
    */
   FULL = 2,
   UNRECOGNIZED = -1,
@@ -118,7 +119,7 @@ export enum QuotaView {
 export enum QuotaViewSDKType {
   /**
    * QUOTA_VIEW_UNSPECIFIED - No quota view specified. Requests that do not specify a quota view will
-   *  typically default to the BASIC view.
+   * typically default to the BASIC view.
    */
   QUOTA_VIEW_UNSPECIFIED = 0,
 
@@ -127,11 +128,11 @@ export enum QuotaViewSDKType {
 
   /**
    * FULL - Include per-location buckets even if they do not have overrides.
-   *  When the view is FULL, and a limit has regional or zonal quota, the limit
-   *  will include buckets for all regions or zones that could support
-   *  overrides, even if none are currently present. In some cases this will
-   *  cause the response to become very large; callers that do not need this
-   *  extra information should use the BASIC view instead.
+   * When the view is FULL, and a limit has regional or zonal quota, the limit
+   * will include buckets for all regions or zones that could support
+   * overrides, even if none are currently present. In some cases this will
+   * cause the response to become very large; callers that do not need this
+   * extra information should use the BASIC view instead.
    */
   FULL = 2,
   UNRECOGNIZED = -1,
@@ -167,8 +168,9 @@ export function quotaViewToJSON(object: QuotaView): string {
     case QuotaView.FULL:
       return "FULL";
 
+    case QuotaView.UNRECOGNIZED:
     default:
-      return "UNKNOWN";
+      return "UNRECOGNIZED";
   }
 }
 
@@ -179,13 +181,13 @@ export enum QuotaSafetyCheck {
 
   /**
    * LIMIT_DECREASE_BELOW_USAGE - Validates that a quota mutation would not cause the consumer's effective
-   *  limit to be lower than the consumer's quota usage.
+   * limit to be lower than the consumer's quota usage.
    */
   LIMIT_DECREASE_BELOW_USAGE = 1,
 
   /**
    * LIMIT_DECREASE_PERCENTAGE_TOO_HIGH - Validates that a quota mutation would not cause the consumer's effective
-   *  limit to decrease by more than 10 percent.
+   * limit to decrease by more than 10 percent.
    */
   LIMIT_DECREASE_PERCENTAGE_TOO_HIGH = 2,
   UNRECOGNIZED = -1,
@@ -198,13 +200,13 @@ export enum QuotaSafetyCheckSDKType {
 
   /**
    * LIMIT_DECREASE_BELOW_USAGE - Validates that a quota mutation would not cause the consumer's effective
-   *  limit to be lower than the consumer's quota usage.
+   * limit to be lower than the consumer's quota usage.
    */
   LIMIT_DECREASE_BELOW_USAGE = 1,
 
   /**
    * LIMIT_DECREASE_PERCENTAGE_TOO_HIGH - Validates that a quota mutation would not cause the consumer's effective
-   *  limit to decrease by more than 10 percent.
+   * limit to decrease by more than 10 percent.
    */
   LIMIT_DECREASE_PERCENTAGE_TOO_HIGH = 2,
   UNRECOGNIZED = -1,
@@ -240,8 +242,9 @@ export function quotaSafetyCheckToJSON(object: QuotaSafetyCheck): string {
     case QuotaSafetyCheck.LIMIT_DECREASE_PERCENTAGE_TOO_HIGH:
       return "LIMIT_DECREASE_PERCENTAGE_TOO_HIGH";
 
+    case QuotaSafetyCheck.UNRECOGNIZED:
     default:
-      return "UNKNOWN";
+      return "UNRECOGNIZED";
   }
 }
 

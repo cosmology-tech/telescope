@@ -77,8 +77,9 @@ export function hashOpToJSON(object: HashOp): string {
     case HashOp.BITCOIN:
       return "BITCOIN";
 
+    case HashOp.UNRECOGNIZED:
     default:
-      return "UNKNOWN";
+      return "UNRECOGNIZED";
   }
 }
 
@@ -226,8 +227,9 @@ export function lengthOpToJSON(object: LengthOp): string {
     case LengthOp.REQUIRE_64_BYTES:
       return "REQUIRE_64_BYTES";
 
+    case LengthOp.UNRECOGNIZED:
     default:
-      return "UNKNOWN";
+      return "UNRECOGNIZED";
   }
 }
 

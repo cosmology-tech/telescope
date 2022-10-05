@@ -24,8 +24,8 @@ export enum CheckResponse_ConsumerInfo_ConsumerType {
 
   /**
    * SERVICE_SPECIFIC - Service-specific resource container which is defined by the service
-   *  producer to offer their users the ability to manage service control
-   *  functionalities at a finer level of granularity than the PROJECT.
+   * producer to offer their users the ability to manage service control
+   * functionalities at a finer level of granularity than the PROJECT.
    */
   SERVICE_SPECIFIC = 4,
   UNRECOGNIZED = -1,
@@ -50,8 +50,8 @@ export enum CheckResponse_ConsumerInfo_ConsumerTypeSDKType {
 
   /**
    * SERVICE_SPECIFIC - Service-specific resource container which is defined by the service
-   *  producer to offer their users the ability to manage service control
-   *  functionalities at a finer level of granularity than the PROJECT.
+   * producer to offer their users the ability to manage service control
+   * functionalities at a finer level of granularity than the PROJECT.
    */
   SERVICE_SPECIFIC = 4,
   UNRECOGNIZED = -1,
@@ -101,8 +101,9 @@ export function checkResponse_ConsumerInfo_ConsumerTypeToJSON(object: CheckRespo
     case CheckResponse_ConsumerInfo_ConsumerType.SERVICE_SPECIFIC:
       return "SERVICE_SPECIFIC";
 
+    case CheckResponse_ConsumerInfo_ConsumerType.UNRECOGNIZED:
     default:
-      return "UNKNOWN";
+      return "UNRECOGNIZED";
   }
 }
 

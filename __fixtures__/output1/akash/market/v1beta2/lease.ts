@@ -73,8 +73,9 @@ export function lease_StateToJSON(object: Lease_State): string {
     case Lease_State.closed:
       return "closed";
 
+    case Lease_State.UNRECOGNIZED:
     default:
-      return "UNKNOWN";
+      return "UNRECOGNIZED";
   }
 }
 

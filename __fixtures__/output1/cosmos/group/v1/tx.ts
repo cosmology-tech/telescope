@@ -8,15 +8,15 @@ export const protobufPackage = "cosmos.group.v1";
 export enum Exec {
   /**
    * EXEC_UNSPECIFIED - An empty value means that there should be a separate
-   *  MsgExec request for the proposal to execute.
+   * MsgExec request for the proposal to execute.
    */
   EXEC_UNSPECIFIED = 0,
 
   /**
    * EXEC_TRY - Try to execute the proposal immediately.
-   *  If the proposal is not allowed per the DecisionPolicy,
-   *  the proposal will still be open and could
-   *  be executed at a later point.
+   * If the proposal is not allowed per the DecisionPolicy,
+   * the proposal will still be open and could
+   * be executed at a later point.
    */
   EXEC_TRY = 1,
   UNRECOGNIZED = -1,
@@ -26,15 +26,15 @@ export enum Exec {
 export enum ExecSDKType {
   /**
    * EXEC_UNSPECIFIED - An empty value means that there should be a separate
-   *  MsgExec request for the proposal to execute.
+   * MsgExec request for the proposal to execute.
    */
   EXEC_UNSPECIFIED = 0,
 
   /**
    * EXEC_TRY - Try to execute the proposal immediately.
-   *  If the proposal is not allowed per the DecisionPolicy,
-   *  the proposal will still be open and could
-   *  be executed at a later point.
+   * If the proposal is not allowed per the DecisionPolicy,
+   * the proposal will still be open and could
+   * be executed at a later point.
    */
   EXEC_TRY = 1,
   UNRECOGNIZED = -1,
@@ -63,8 +63,9 @@ export function execToJSON(object: Exec): string {
     case Exec.EXEC_TRY:
       return "EXEC_TRY";
 
+    case Exec.UNRECOGNIZED:
     default:
-      return "UNKNOWN";
+      return "UNRECOGNIZED";
   }
 }
 
