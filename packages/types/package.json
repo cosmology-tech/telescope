@@ -1,6 +1,6 @@
 {
   "name": "@osmonauts/types",
-  "version": "0.17.0",
+  "version": "0.18.0",
   "description": "Telescope types",
   "author": "Dan Lynch <pyramation@gmail.com>",
   "homepage": "https://github.com/osmosis-labs/telescope/tree/master/packages/types#readme",
@@ -72,7 +72,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.19.0",
-    "@osmonauts/utils": "^0.5.0",
+    "@osmonauts/utils": "^0.6.0",
     "case": "1.6.3"
   }
 }
