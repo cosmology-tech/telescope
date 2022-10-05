@@ -6,12 +6,11 @@ import { MsgSend, MsgSendSDKType, MsgSendResponse, MsgSendResponseSDKType, MsgMu
 
 /** Msg defines the bank Msg service. */
 export interface Msg {
-  send(request: MsgSend): Promise<MsgSendResponse>;
   /*Send defines a method for sending coins from one account to another account.*/
+  send(request: MsgSend): Promise<MsgSendResponse>;
 
-  multiSend(request: MsgMultiSend): Promise<MsgMultiSendResponse>;
   /*MultiSend defines a method for sending coins from some accounts to other accounts.*/
-
+  multiSend(request: MsgMultiSend): Promise<MsgMultiSendResponse>;
 }
 export class MsgClientImpl implements Msg {
   private readonly rpc: Rpc;

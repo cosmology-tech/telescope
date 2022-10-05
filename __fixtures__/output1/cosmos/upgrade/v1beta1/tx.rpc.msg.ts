@@ -5,17 +5,16 @@ import { MsgSoftwareUpgrade, MsgSoftwareUpgradeSDKType, MsgSoftwareUpgradeRespon
 
 /** Msg defines the upgrade Msg service. */
 export interface Msg {
-  softwareUpgrade(request: MsgSoftwareUpgrade): Promise<MsgSoftwareUpgradeResponse>;
   /*SoftwareUpgrade is a governance operation for initiating a software upgrade.
   
    Since: cosmos-sdk 0.46*/
+  softwareUpgrade(request: MsgSoftwareUpgrade): Promise<MsgSoftwareUpgradeResponse>;
 
-  cancelUpgrade(request: MsgCancelUpgrade): Promise<MsgCancelUpgradeResponse>;
   /*CancelUpgrade is a governance operation for cancelling a previously
    approvid software upgrade.
   
    Since: cosmos-sdk 0.46*/
-
+  cancelUpgrade(request: MsgCancelUpgrade): Promise<MsgCancelUpgradeResponse>;
 }
 export class MsgClientImpl implements Msg {
   private readonly rpc: Rpc;

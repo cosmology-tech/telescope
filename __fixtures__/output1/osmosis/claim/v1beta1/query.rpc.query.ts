@@ -8,21 +8,20 @@ import { QueryModuleAccountBalanceRequest, QueryModuleAccountBalanceRequestSDKTy
 
 /** Query defines the gRPC querier service. */
 export interface Query {
+  /*null*/
   moduleAccountBalance(request?: QueryModuleAccountBalanceRequest): Promise<QueryModuleAccountBalanceResponse>;
-  /*null*/
 
+  /*null*/
   params(request?: QueryParamsRequest): Promise<QueryParamsResponse>;
-  /*null*/
 
+  /*null*/
   claimRecord(request: QueryClaimRecordRequest): Promise<QueryClaimRecordResponse>;
-  /*null*/
 
+  /*null*/
   claimableForAction(request: QueryClaimableForActionRequest): Promise<QueryClaimableForActionResponse>;
-  /*null*/
 
+  /*null*/
   totalClaimable(request: QueryTotalClaimableRequest): Promise<QueryTotalClaimableResponse>;
-  /*null*/
-
 }
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;

@@ -7,20 +7,19 @@ import { MsgSubmitProposal, MsgSubmitProposalSDKType, MsgSubmitProposalResponse,
 
 /** Msg defines the bank Msg service. */
 export interface Msg {
-  submitProposal(request: MsgSubmitProposal): Promise<MsgSubmitProposalResponse>;
   /*SubmitProposal defines a method to create new proposal given a content.*/
+  submitProposal(request: MsgSubmitProposal): Promise<MsgSubmitProposalResponse>;
 
-  vote(request: MsgVote): Promise<MsgVoteResponse>;
   /*Vote defines a method to add a vote on a specific proposal.*/
+  vote(request: MsgVote): Promise<MsgVoteResponse>;
 
-  voteWeighted(request: MsgVoteWeighted): Promise<MsgVoteWeightedResponse>;
   /*VoteWeighted defines a method to add a weighted vote on a specific proposal.
   
    Since: cosmos-sdk 0.43*/
+  voteWeighted(request: MsgVoteWeighted): Promise<MsgVoteWeightedResponse>;
 
-  deposit(request: MsgDeposit): Promise<MsgDepositResponse>;
   /*Deposit defines a method to add deposit on a specific proposal.*/
-
+  deposit(request: MsgDeposit): Promise<MsgDepositResponse>;
 }
 export class MsgClientImpl implements Msg {
   private readonly rpc: Rpc;

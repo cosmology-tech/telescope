@@ -6,9 +6,8 @@ import { QueryAppVersionRequest, QueryAppVersionRequestSDKType, QueryAppVersionR
 
 /** Query defines the gRPC querier service */
 export interface Query {
-  appVersion(request: QueryAppVersionRequest): Promise<QueryAppVersionResponse>;
   /*AppVersion queries an IBC Port and determines the appropriate application version to be used*/
-
+  appVersion(request: QueryAppVersionRequest): Promise<QueryAppVersionResponse>;
 }
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;

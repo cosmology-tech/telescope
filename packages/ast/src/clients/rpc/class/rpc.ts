@@ -60,7 +60,7 @@ const rpcMethodDefinition = (
             methodArgs
         ],
         returnReponseType(responseType),
-        trailingComments, // seemingly not working?
+        trailingComments,
         leadingComments
     );
 }
@@ -318,17 +318,18 @@ export const createRpcClientInterface = (
     service: ProtoService
 ) => {
     const camelRpcMethods = context.pluginValue('rpcClients.camelCase');
-    const methods = Object.keys(service.methods ?? {})
-        .map(key => {
+    const keys = Object.keys(service.methods ?? {});
+    const methods = keys
+        .map((key) => {
             const method = service.methods[key];
             const name = camelRpcMethods ? camel(key) : key;
+            const leadingComments = [commentBlock(method.comment)];
+            let trailingComments = [];
             return rpcMethodDefinition(
                 name,
                 method,
-                [commentBlock('')],
-                [commentBlock(method.comment)]
-                // trailingComments
-                // leadingComments
+                trailingComments,
+                leadingComments
             )
         });
 
@@ -349,7 +350,6 @@ export const createRpcClientInterface = (
     if (service.comment) {
         obj.leadingComments = [commentBlock(`* ${service.comment} `)];
     }
-    // obj.leadingComments = [commentBlock(`* ${service.name} defines the RPC service `)];
 
     return obj;
 

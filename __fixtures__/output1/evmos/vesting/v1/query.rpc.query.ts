@@ -6,9 +6,8 @@ import { QueryBalancesRequest, QueryBalancesRequestSDKType, QueryBalancesRespons
 
 /** Query defines the gRPC querier service. */
 export interface Query {
-  balances(request: QueryBalancesRequest): Promise<QueryBalancesResponse>;
   /*Retrieves the unvested, vested and locked tokens for a vesting account*/
-
+  balances(request: QueryBalancesRequest): Promise<QueryBalancesResponse>;
 }
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;

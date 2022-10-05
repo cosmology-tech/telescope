@@ -5,12 +5,11 @@ import { MsgSignProviderAttributes, MsgSignProviderAttributesSDKType, MsgSignPro
 
 /** Msg defines the provider Msg service */
 export interface Msg {
-  signProviderAttributes(request: MsgSignProviderAttributes): Promise<MsgSignProviderAttributesResponse>;
   /*SignProviderAttributes defines a method that signs provider attributes*/
+  signProviderAttributes(request: MsgSignProviderAttributes): Promise<MsgSignProviderAttributesResponse>;
 
-  deleteProviderAttributes(request: MsgDeleteProviderAttributes): Promise<MsgDeleteProviderAttributesResponse>;
   /*DeleteProviderAttributes defines a method that deletes provider attributes*/
-
+  deleteProviderAttributes(request: MsgDeleteProviderAttributes): Promise<MsgDeleteProviderAttributesResponse>;
 }
 export class MsgClientImpl implements Msg {
   private readonly rpc: Rpc;

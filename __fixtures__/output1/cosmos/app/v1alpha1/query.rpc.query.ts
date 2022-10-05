@@ -6,9 +6,8 @@ import { QueryConfigRequest, QueryConfigRequestSDKType, QueryConfigResponse, Que
 
 /** Query is the app module query service. */
 export interface Query {
-  config(request?: QueryConfigRequest): Promise<QueryConfigResponse>;
   /*Config returns the current app config.*/
-
+  config(request?: QueryConfigRequest): Promise<QueryConfigResponse>;
 }
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;

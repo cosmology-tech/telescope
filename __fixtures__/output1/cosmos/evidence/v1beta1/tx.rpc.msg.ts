@@ -5,10 +5,9 @@ import { MsgSubmitEvidence, MsgSubmitEvidenceSDKType, MsgSubmitEvidenceResponse,
 
 /** Msg defines the evidence Msg service. */
 export interface Msg {
-  submitEvidence(request: MsgSubmitEvidence): Promise<MsgSubmitEvidenceResponse>;
   /*SubmitEvidence submits an arbitrary Evidence of misbehavior such as equivocation or
    counterfactual signing.*/
-
+  submitEvidence(request: MsgSubmitEvidence): Promise<MsgSubmitEvidenceResponse>;
 }
 export class MsgClientImpl implements Msg {
   private readonly rpc: Rpc;

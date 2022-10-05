@@ -6,12 +6,11 @@ import { QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, Que
 
 /** Query provides defines the gRPC querier service. */
 export interface Query {
-  params(request?: QueryParamsRequest): Promise<QueryParamsResponse>;
   /*Params returns the total set of minting parameters.*/
+  params(request?: QueryParamsRequest): Promise<QueryParamsResponse>;
 
-  epochProvisions(request?: QueryEpochProvisionsRequest): Promise<QueryEpochProvisionsResponse>;
   /*EpochProvisions current minting epoch provisions value.*/
-
+  epochProvisions(request?: QueryEpochProvisionsRequest): Promise<QueryEpochProvisionsResponse>;
 }
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;

@@ -7,19 +7,18 @@ import { MsgConnectionOpenInit, MsgConnectionOpenInitSDKType, MsgConnectionOpenI
 
 /** Msg defines the ibc/connection Msg service. */
 export interface Msg {
-  connectionOpenInit(request: MsgConnectionOpenInit): Promise<MsgConnectionOpenInitResponse>;
   /*ConnectionOpenInit defines a rpc handler method for MsgConnectionOpenInit.*/
+  connectionOpenInit(request: MsgConnectionOpenInit): Promise<MsgConnectionOpenInitResponse>;
 
-  connectionOpenTry(request: MsgConnectionOpenTry): Promise<MsgConnectionOpenTryResponse>;
   /*ConnectionOpenTry defines a rpc handler method for MsgConnectionOpenTry.*/
+  connectionOpenTry(request: MsgConnectionOpenTry): Promise<MsgConnectionOpenTryResponse>;
 
-  connectionOpenAck(request: MsgConnectionOpenAck): Promise<MsgConnectionOpenAckResponse>;
   /*ConnectionOpenAck defines a rpc handler method for MsgConnectionOpenAck.*/
+  connectionOpenAck(request: MsgConnectionOpenAck): Promise<MsgConnectionOpenAckResponse>;
 
-  connectionOpenConfirm(request: MsgConnectionOpenConfirm): Promise<MsgConnectionOpenConfirmResponse>;
   /*ConnectionOpenConfirm defines a rpc handler method for
    MsgConnectionOpenConfirm.*/
-
+  connectionOpenConfirm(request: MsgConnectionOpenConfirm): Promise<MsgConnectionOpenConfirmResponse>;
 }
 export class MsgClientImpl implements Msg {
   private readonly rpc: Rpc;

@@ -4,12 +4,11 @@ import { MsgCreateCertificate, MsgCreateCertificateSDKType, MsgCreateCertificate
 
 /** Msg defines the provider Msg service */
 export interface Msg {
-  createCertificate(request: MsgCreateCertificate): Promise<MsgCreateCertificateResponse>;
   /*CreateCertificate defines a method to create new certificate given proper inputs.*/
+  createCertificate(request: MsgCreateCertificate): Promise<MsgCreateCertificateResponse>;
 
-  revokeCertificate(request: MsgRevokeCertificate): Promise<MsgRevokeCertificateResponse>;
   /*RevokeCertificate defines a method to revoke the certificate*/
-
+  revokeCertificate(request: MsgRevokeCertificate): Promise<MsgRevokeCertificateResponse>;
 }
 export class MsgClientImpl implements Msg {
   private readonly rpc: Rpc;

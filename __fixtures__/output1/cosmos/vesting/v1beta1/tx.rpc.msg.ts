@@ -6,18 +6,17 @@ import { MsgCreateVestingAccount, MsgCreateVestingAccountSDKType, MsgCreateVesti
 
 /** Msg defines the bank Msg service. */
 export interface Msg {
-  createVestingAccount(request: MsgCreateVestingAccount): Promise<MsgCreateVestingAccountResponse>;
   /*CreateVestingAccount defines a method that enables creating a vesting
    account.*/
+  createVestingAccount(request: MsgCreateVestingAccount): Promise<MsgCreateVestingAccountResponse>;
 
-  createPermanentLockedAccount(request: MsgCreatePermanentLockedAccount): Promise<MsgCreatePermanentLockedAccountResponse>;
   /*CreatePermanentLockedAccount defines a method that enables creating a permanent
    locked account.*/
+  createPermanentLockedAccount(request: MsgCreatePermanentLockedAccount): Promise<MsgCreatePermanentLockedAccountResponse>;
 
-  createPeriodicVestingAccount(request: MsgCreatePeriodicVestingAccount): Promise<MsgCreatePeriodicVestingAccountResponse>;
   /*CreatePeriodicVestingAccount defines a method that enables creating a
    periodic vesting account.*/
-
+  createPeriodicVestingAccount(request: MsgCreatePeriodicVestingAccount): Promise<MsgCreatePeriodicVestingAccountResponse>;
 }
 export class MsgClientImpl implements Msg {
   private readonly rpc: Rpc;

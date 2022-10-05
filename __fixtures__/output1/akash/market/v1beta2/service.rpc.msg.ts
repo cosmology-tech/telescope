@@ -7,21 +7,20 @@ import * as _m0 from "protobufjs/minimal";
 
 /** Msg defines the market Msg service */
 export interface Msg {
-  createBid(request: MsgCreateBid): Promise<MsgCreateBidResponse>;
   /*CreateBid defines a method to create a bid given proper inputs.*/
+  createBid(request: MsgCreateBid): Promise<MsgCreateBidResponse>;
 
-  closeBid(request: MsgCloseBid): Promise<MsgCloseBidResponse>;
   /*CloseBid defines a method to close a bid given proper inputs.*/
+  closeBid(request: MsgCloseBid): Promise<MsgCloseBidResponse>;
 
-  withdrawLease(request: MsgWithdrawLease): Promise<MsgWithdrawLeaseResponse>;
   /*WithdrawLease withdraws accrued funds from the lease payment*/
+  withdrawLease(request: MsgWithdrawLease): Promise<MsgWithdrawLeaseResponse>;
 
-  createLease(request: MsgCreateLease): Promise<MsgCreateLeaseResponse>;
   /*CreateLease creates a new lease*/
+  createLease(request: MsgCreateLease): Promise<MsgCreateLeaseResponse>;
 
-  closeLease(request: MsgCloseLease): Promise<MsgCloseLeaseResponse>;
   /*CloseLease defines a method to close an order given proper inputs.*/
-
+  closeLease(request: MsgCloseLease): Promise<MsgCloseLeaseResponse>;
 }
 export class MsgClientImpl implements Msg {
   private readonly rpc: Rpc;

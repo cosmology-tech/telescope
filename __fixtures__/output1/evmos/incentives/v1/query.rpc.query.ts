@@ -9,28 +9,27 @@ import { QueryIncentivesRequest, QueryIncentivesRequestSDKType, QueryIncentivesR
 
 /** Query defines the gRPC querier service. */
 export interface Query {
-  incentives(request?: QueryIncentivesRequest): Promise<QueryIncentivesResponse>;
   /*Incentives retrieves registered incentives*/
+  incentives(request?: QueryIncentivesRequest): Promise<QueryIncentivesResponse>;
 
-  incentive(request: QueryIncentiveRequest): Promise<QueryIncentiveResponse>;
   /*Incentive retrieves a registered incentive*/
+  incentive(request: QueryIncentiveRequest): Promise<QueryIncentiveResponse>;
 
-  gasMeters(request: QueryGasMetersRequest): Promise<QueryGasMetersResponse>;
   /*GasMeters retrieves active gas meters for a given contract*/
+  gasMeters(request: QueryGasMetersRequest): Promise<QueryGasMetersResponse>;
 
-  gasMeter(request: QueryGasMeterRequest): Promise<QueryGasMeterResponse>;
   /*GasMeter Retrieves a active gas meter*/
+  gasMeter(request: QueryGasMeterRequest): Promise<QueryGasMeterResponse>;
 
-  allocationMeters(request?: QueryAllocationMetersRequest): Promise<QueryAllocationMetersResponse>;
   /*AllocationMeters retrieves active allocation meters for a given
    denomination*/
+  allocationMeters(request?: QueryAllocationMetersRequest): Promise<QueryAllocationMetersResponse>;
 
-  allocationMeter(request: QueryAllocationMeterRequest): Promise<QueryAllocationMeterResponse>;
   /*AllocationMeter Retrieves a active gas meter*/
+  allocationMeter(request: QueryAllocationMeterRequest): Promise<QueryAllocationMeterResponse>;
 
-  params(request?: QueryParamsRequest): Promise<QueryParamsResponse>;
   /*Params retrieves the incentives module params*/
-
+  params(request?: QueryParamsRequest): Promise<QueryParamsResponse>;
 }
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;

@@ -38,7 +38,7 @@ export function tsMethodSignature(
         obj.trailingComments = trailingComments;
     }
     if (leadingComments && leadingComments.length) {
-        obj.trailingComments = leadingComments;
+        obj.leadingComments = leadingComments;
     }
     return obj;
 }

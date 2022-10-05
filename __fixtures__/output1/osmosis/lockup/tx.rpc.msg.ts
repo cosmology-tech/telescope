@@ -7,18 +7,17 @@ import { MsgLockTokens, MsgLockTokensSDKType, MsgLockTokensResponse, MsgLockToke
 
 /** Msg defines the Msg service. */
 export interface Msg {
-  lockTokens(request: MsgLockTokens): Promise<MsgLockTokensResponse>;
   /*LockTokens lock tokens*/
+  lockTokens(request: MsgLockTokens): Promise<MsgLockTokensResponse>;
 
-  beginUnlockingAll(request: MsgBeginUnlockingAll): Promise<MsgBeginUnlockingAllResponse>;
   /*BeginUnlockingAll begin unlocking all tokens*/
+  beginUnlockingAll(request: MsgBeginUnlockingAll): Promise<MsgBeginUnlockingAllResponse>;
 
-  beginUnlocking(request: MsgBeginUnlocking): Promise<MsgBeginUnlockingResponse>;
   /*MsgBeginUnlocking begins unlocking tokens by lock ID*/
+  beginUnlocking(request: MsgBeginUnlocking): Promise<MsgBeginUnlockingResponse>;
 
-  extendLockup(request: MsgExtendLockup): Promise<MsgExtendLockupResponse>;
   /*MsgEditLockup edits the existing lockups by lock ID*/
-
+  extendLockup(request: MsgExtendLockup): Promise<MsgExtendLockupResponse>;
 }
 export class MsgClientImpl implements Msg {
   private readonly rpc: Rpc;

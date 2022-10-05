@@ -1070,27 +1070,26 @@ export const DeploymentFilters = {
 
 /** Msg defines the deployment Msg service. */
 export interface Msg {
-  createDeployment(request: MsgCreateDeployment): Promise<MsgCreateDeploymentResponse>;
   /*CreateDeployment defines a method to create new deployment given proper inputs.*/
+  createDeployment(request: MsgCreateDeployment): Promise<MsgCreateDeploymentResponse>;
 
-  depositDeployment(request: MsgDepositDeployment): Promise<MsgDepositDeploymentResponse>;
   /*DepositDeployment deposits more funds into the deployment account*/
+  depositDeployment(request: MsgDepositDeployment): Promise<MsgDepositDeploymentResponse>;
 
-  updateDeployment(request: MsgUpdateDeployment): Promise<MsgUpdateDeploymentResponse>;
   /*UpdateDeployment defines a method to update a deployment given proper inputs.*/
+  updateDeployment(request: MsgUpdateDeployment): Promise<MsgUpdateDeploymentResponse>;
 
-  closeDeployment(request: MsgCloseDeployment): Promise<MsgCloseDeploymentResponse>;
   /*CloseDeployment defines a method to close a deployment given proper inputs.*/
+  closeDeployment(request: MsgCloseDeployment): Promise<MsgCloseDeploymentResponse>;
 
-  closeGroup(request: MsgCloseGroup): Promise<MsgCloseGroupResponse>;
   /*CloseGroup defines a method to close a group of a deployment given proper inputs.*/
+  closeGroup(request: MsgCloseGroup): Promise<MsgCloseGroupResponse>;
 
-  pauseGroup(request: MsgPauseGroup): Promise<MsgPauseGroupResponse>;
   /*PauseGroup defines a method to close a group of a deployment given proper inputs.*/
+  pauseGroup(request: MsgPauseGroup): Promise<MsgPauseGroupResponse>;
 
-  startGroup(request: MsgStartGroup): Promise<MsgStartGroupResponse>;
   /*StartGroup defines a method to close a group of a deployment given proper inputs.*/
-
+  startGroup(request: MsgStartGroup): Promise<MsgStartGroupResponse>;
 }
 export class MsgClientImpl implements Msg {
   private readonly rpc: Rpc;

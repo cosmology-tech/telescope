@@ -9,18 +9,17 @@ import { QueryTotalUnclaimedRequest, QueryTotalUnclaimedRequestSDKType, QueryTot
 
 /** Query defines the gRPC querier service. */
 export interface Query {
-  totalUnclaimed(request?: QueryTotalUnclaimedRequest): Promise<QueryTotalUnclaimedResponse>;
   /*TotalUnclaimed queries the total unclaimed tokens from the airdrop*/
+  totalUnclaimed(request?: QueryTotalUnclaimedRequest): Promise<QueryTotalUnclaimedResponse>;
 
-  params(request?: QueryParamsRequest): Promise<QueryParamsResponse>;
   /*Params returns the claims module parameters*/
+  params(request?: QueryParamsRequest): Promise<QueryParamsResponse>;
 
-  claimsRecords(request?: QueryClaimsRecordsRequest): Promise<QueryClaimsRecordsResponse>;
   /*ClaimsRecords returns all claims records*/
+  claimsRecords(request?: QueryClaimsRecordsRequest): Promise<QueryClaimsRecordsResponse>;
 
-  claimsRecord(request: QueryClaimsRecordRequest): Promise<QueryClaimsRecordResponse>;
   /*ClaimsRecord returns the claims record for a given address*/
-
+  claimsRecord(request: QueryClaimsRecordRequest): Promise<QueryClaimsRecordResponse>;
 }
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;

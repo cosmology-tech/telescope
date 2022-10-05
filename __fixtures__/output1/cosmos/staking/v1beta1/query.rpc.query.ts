@@ -7,52 +7,51 @@ import { QueryValidatorsRequest, QueryValidatorsRequestSDKType, QueryValidatorsR
 
 /** Query defines the gRPC querier service. */
 export interface Query {
-  validators(request: QueryValidatorsRequest): Promise<QueryValidatorsResponse>;
   /*Validators queries all validators that match the given status.*/
+  validators(request: QueryValidatorsRequest): Promise<QueryValidatorsResponse>;
 
-  validator(request: QueryValidatorRequest): Promise<QueryValidatorResponse>;
   /*Validator queries validator info for given validator address.*/
+  validator(request: QueryValidatorRequest): Promise<QueryValidatorResponse>;
 
-  validatorDelegations(request: QueryValidatorDelegationsRequest): Promise<QueryValidatorDelegationsResponse>;
   /*ValidatorDelegations queries delegate info for given validator.*/
+  validatorDelegations(request: QueryValidatorDelegationsRequest): Promise<QueryValidatorDelegationsResponse>;
 
-  validatorUnbondingDelegations(request: QueryValidatorUnbondingDelegationsRequest): Promise<QueryValidatorUnbondingDelegationsResponse>;
   /*ValidatorUnbondingDelegations queries unbonding delegations of a validator.*/
+  validatorUnbondingDelegations(request: QueryValidatorUnbondingDelegationsRequest): Promise<QueryValidatorUnbondingDelegationsResponse>;
 
-  delegation(request: QueryDelegationRequest): Promise<QueryDelegationResponse>;
   /*Delegation queries delegate info for given validator delegator pair.*/
+  delegation(request: QueryDelegationRequest): Promise<QueryDelegationResponse>;
 
-  unbondingDelegation(request: QueryUnbondingDelegationRequest): Promise<QueryUnbondingDelegationResponse>;
   /*UnbondingDelegation queries unbonding info for given validator delegator
    pair.*/
+  unbondingDelegation(request: QueryUnbondingDelegationRequest): Promise<QueryUnbondingDelegationResponse>;
 
-  delegatorDelegations(request: QueryDelegatorDelegationsRequest): Promise<QueryDelegatorDelegationsResponse>;
   /*DelegatorDelegations queries all delegations of a given delegator address.*/
+  delegatorDelegations(request: QueryDelegatorDelegationsRequest): Promise<QueryDelegatorDelegationsResponse>;
 
-  delegatorUnbondingDelegations(request: QueryDelegatorUnbondingDelegationsRequest): Promise<QueryDelegatorUnbondingDelegationsResponse>;
   /*DelegatorUnbondingDelegations queries all unbonding delegations of a given
    delegator address.*/
+  delegatorUnbondingDelegations(request: QueryDelegatorUnbondingDelegationsRequest): Promise<QueryDelegatorUnbondingDelegationsResponse>;
 
-  redelegations(request: QueryRedelegationsRequest): Promise<QueryRedelegationsResponse>;
   /*Redelegations queries redelegations of given address.*/
+  redelegations(request: QueryRedelegationsRequest): Promise<QueryRedelegationsResponse>;
 
-  delegatorValidators(request: QueryDelegatorValidatorsRequest): Promise<QueryDelegatorValidatorsResponse>;
   /*DelegatorValidators queries all validators info for given delegator
    address.*/
+  delegatorValidators(request: QueryDelegatorValidatorsRequest): Promise<QueryDelegatorValidatorsResponse>;
 
-  delegatorValidator(request: QueryDelegatorValidatorRequest): Promise<QueryDelegatorValidatorResponse>;
   /*DelegatorValidator queries validator info for given delegator validator
    pair.*/
+  delegatorValidator(request: QueryDelegatorValidatorRequest): Promise<QueryDelegatorValidatorResponse>;
 
-  historicalInfo(request: QueryHistoricalInfoRequest): Promise<QueryHistoricalInfoResponse>;
   /*HistoricalInfo queries the historical info for given height.*/
+  historicalInfo(request: QueryHistoricalInfoRequest): Promise<QueryHistoricalInfoResponse>;
 
-  pool(request?: QueryPoolRequest): Promise<QueryPoolResponse>;
   /*Pool queries the pool info.*/
+  pool(request?: QueryPoolRequest): Promise<QueryPoolResponse>;
 
-  params(request?: QueryParamsRequest): Promise<QueryParamsResponse>;
   /*Parameters queries the staking parameters.*/
-
+  params(request?: QueryParamsRequest): Promise<QueryParamsResponse>;
 }
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;

@@ -5,20 +5,19 @@ import { MsgCreateDenom, MsgCreateDenomSDKType, MsgCreateDenomResponse, MsgCreat
 
 /** Msg defines the Msg service. */
 export interface Msg {
+  /*null*/
   createDenom(request: MsgCreateDenom): Promise<MsgCreateDenomResponse>;
-  /*null*/
 
+  /*null*/
   mint(request: MsgMint): Promise<MsgMintResponse>;
-  /*null*/
 
+  /*null*/
   burn(request: MsgBurn): Promise<MsgBurnResponse>;
-  /*null*/
 
-  changeAdmin(request: MsgChangeAdmin): Promise<MsgChangeAdminResponse>;
   /*ForceTransfer is deactivated for now because we need to think through edge
    cases rpc ForceTransfer(MsgForceTransfer) returns
    (MsgForceTransferResponse);*/
-
+  changeAdmin(request: MsgChangeAdmin): Promise<MsgChangeAdminResponse>;
 }
 export class MsgClientImpl implements Msg {
   private readonly rpc: Rpc;

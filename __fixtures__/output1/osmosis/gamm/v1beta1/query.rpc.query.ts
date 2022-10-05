@@ -7,37 +7,36 @@ import * as _m0 from "protobufjs/minimal";
 import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
 import { QueryPoolsRequest, QueryPoolsRequestSDKType, QueryPoolsResponse, QueryPoolsResponseSDKType, QueryNumPoolsRequest, QueryNumPoolsRequestSDKType, QueryNumPoolsResponse, QueryNumPoolsResponseSDKType, QueryTotalLiquidityRequest, QueryTotalLiquidityRequestSDKType, QueryTotalLiquidityResponse, QueryTotalLiquidityResponseSDKType, QueryPoolRequest, QueryPoolRequestSDKType, QueryPoolResponse, QueryPoolResponseSDKType, QueryPoolParamsRequest, QueryPoolParamsRequestSDKType, QueryPoolParamsResponse, QueryPoolParamsResponseSDKType, QueryTotalPoolLiquidityRequest, QueryTotalPoolLiquidityRequestSDKType, QueryTotalPoolLiquidityResponse, QueryTotalPoolLiquidityResponseSDKType, QueryTotalSharesRequest, QueryTotalSharesRequestSDKType, QueryTotalSharesResponse, QueryTotalSharesResponseSDKType, QuerySpotPriceRequest, QuerySpotPriceRequestSDKType, QuerySpotPriceResponse, QuerySpotPriceResponseSDKType, QuerySwapExactAmountInRequest, QuerySwapExactAmountInRequestSDKType, QuerySwapExactAmountInResponse, QuerySwapExactAmountInResponseSDKType, QuerySwapExactAmountOutRequest, QuerySwapExactAmountOutRequestSDKType, QuerySwapExactAmountOutResponse, QuerySwapExactAmountOutResponseSDKType } from "./query";
 export interface Query {
+  /*null*/
   pools(request?: QueryPoolsRequest): Promise<QueryPoolsResponse>;
-  /*null*/
 
+  /*null*/
   numPools(request?: QueryNumPoolsRequest): Promise<QueryNumPoolsResponse>;
-  /*null*/
 
+  /*null*/
   totalLiquidity(request?: QueryTotalLiquidityRequest): Promise<QueryTotalLiquidityResponse>;
-  /*null*/
 
-  pool(request: QueryPoolRequest): Promise<QueryPoolResponse>;
   /*Per Pool gRPC Endpoints*/
+  pool(request: QueryPoolRequest): Promise<QueryPoolResponse>;
 
+  /*null*/
   poolParams(request: QueryPoolParamsRequest): Promise<QueryPoolParamsResponse>;
-  /*null*/
 
+  /*null*/
   totalPoolLiquidity(request: QueryTotalPoolLiquidityRequest): Promise<QueryTotalPoolLiquidityResponse>;
-  /*null*/
 
+  /*null*/
   totalShares(request: QueryTotalSharesRequest): Promise<QueryTotalSharesResponse>;
-  /*null*/
 
-  spotPrice(request: QuerySpotPriceRequest): Promise<QuerySpotPriceResponse>;
   /*SpotPrice defines a gRPC query handler that returns the spot price given
    a base denomination and a quote denomination.*/
+  spotPrice(request: QuerySpotPriceRequest): Promise<QuerySpotPriceResponse>;
 
-  estimateSwapExactAmountIn(request: QuerySwapExactAmountInRequest): Promise<QuerySwapExactAmountInResponse>;
   /*Estimate the swap.*/
+  estimateSwapExactAmountIn(request: QuerySwapExactAmountInRequest): Promise<QuerySwapExactAmountInResponse>;
 
-  estimateSwapExactAmountOut(request: QuerySwapExactAmountOutRequest): Promise<QuerySwapExactAmountOutResponse>;
   /*null*/
-
+  estimateSwapExactAmountOut(request: QuerySwapExactAmountOutRequest): Promise<QuerySwapExactAmountOutResponse>;
 }
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;

@@ -9,24 +9,23 @@ import { QueryConnectionRequest, QueryConnectionRequestSDKType, QueryConnectionR
 
 /** Query provides defines the gRPC querier service */
 export interface Query {
-  connection(request: QueryConnectionRequest): Promise<QueryConnectionResponse>;
   /*Connection queries an IBC connection end.*/
+  connection(request: QueryConnectionRequest): Promise<QueryConnectionResponse>;
 
-  connections(request?: QueryConnectionsRequest): Promise<QueryConnectionsResponse>;
   /*Connections queries all the IBC connections of a chain.*/
+  connections(request?: QueryConnectionsRequest): Promise<QueryConnectionsResponse>;
 
-  clientConnections(request: QueryClientConnectionsRequest): Promise<QueryClientConnectionsResponse>;
   /*ClientConnections queries the connection paths associated with a client
    state.*/
+  clientConnections(request: QueryClientConnectionsRequest): Promise<QueryClientConnectionsResponse>;
 
-  connectionClientState(request: QueryConnectionClientStateRequest): Promise<QueryConnectionClientStateResponse>;
   /*ConnectionClientState queries the client state associated with the
    connection.*/
+  connectionClientState(request: QueryConnectionClientStateRequest): Promise<QueryConnectionClientStateResponse>;
 
-  connectionConsensusState(request: QueryConnectionConsensusStateRequest): Promise<QueryConnectionConsensusStateResponse>;
   /*ConnectionConsensusState queries the consensus state associated with the
    connection.*/
-
+  connectionConsensusState(request: QueryConnectionConsensusStateRequest): Promise<QueryConnectionConsensusStateResponse>;
 }
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;

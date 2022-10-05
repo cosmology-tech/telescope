@@ -6,48 +6,47 @@ import { MsgCreateGroup, MsgCreateGroupSDKType, MsgCreateGroupResponse, MsgCreat
 
 /** Msg is the cosmos.group.v1 Msg service. */
 export interface Msg {
-  createGroup(request: MsgCreateGroup): Promise<MsgCreateGroupResponse>;
   /*CreateGroup creates a new group with an admin account address, a list of members and some optional metadata.*/
+  createGroup(request: MsgCreateGroup): Promise<MsgCreateGroupResponse>;
 
-  updateGroupMembers(request: MsgUpdateGroupMembers): Promise<MsgUpdateGroupMembersResponse>;
   /*UpdateGroupMembers updates the group members with given group id and admin address.*/
+  updateGroupMembers(request: MsgUpdateGroupMembers): Promise<MsgUpdateGroupMembersResponse>;
 
-  updateGroupAdmin(request: MsgUpdateGroupAdmin): Promise<MsgUpdateGroupAdminResponse>;
   /*UpdateGroupAdmin updates the group admin with given group id and previous admin address.*/
+  updateGroupAdmin(request: MsgUpdateGroupAdmin): Promise<MsgUpdateGroupAdminResponse>;
 
-  updateGroupMetadata(request: MsgUpdateGroupMetadata): Promise<MsgUpdateGroupMetadataResponse>;
   /*UpdateGroupMetadata updates the group metadata with given group id and admin address.*/
+  updateGroupMetadata(request: MsgUpdateGroupMetadata): Promise<MsgUpdateGroupMetadataResponse>;
 
-  createGroupPolicy(request: MsgCreateGroupPolicy): Promise<MsgCreateGroupPolicyResponse>;
   /*CreateGroupPolicy creates a new group policy using given DecisionPolicy.*/
+  createGroupPolicy(request: MsgCreateGroupPolicy): Promise<MsgCreateGroupPolicyResponse>;
 
-  createGroupWithPolicy(request: MsgCreateGroupWithPolicy): Promise<MsgCreateGroupWithPolicyResponse>;
   /*CreateGroupWithPolicy creates a new group with policy.*/
+  createGroupWithPolicy(request: MsgCreateGroupWithPolicy): Promise<MsgCreateGroupWithPolicyResponse>;
 
-  updateGroupPolicyAdmin(request: MsgUpdateGroupPolicyAdmin): Promise<MsgUpdateGroupPolicyAdminResponse>;
   /*UpdateGroupPolicyAdmin updates a group policy admin.*/
+  updateGroupPolicyAdmin(request: MsgUpdateGroupPolicyAdmin): Promise<MsgUpdateGroupPolicyAdminResponse>;
 
-  updateGroupPolicyDecisionPolicy(request: MsgUpdateGroupPolicyDecisionPolicy): Promise<MsgUpdateGroupPolicyDecisionPolicyResponse>;
   /*UpdateGroupPolicyDecisionPolicy allows a group policy's decision policy to be updated.*/
+  updateGroupPolicyDecisionPolicy(request: MsgUpdateGroupPolicyDecisionPolicy): Promise<MsgUpdateGroupPolicyDecisionPolicyResponse>;
 
-  updateGroupPolicyMetadata(request: MsgUpdateGroupPolicyMetadata): Promise<MsgUpdateGroupPolicyMetadataResponse>;
   /*UpdateGroupPolicyMetadata updates a group policy metadata.*/
+  updateGroupPolicyMetadata(request: MsgUpdateGroupPolicyMetadata): Promise<MsgUpdateGroupPolicyMetadataResponse>;
 
-  submitProposal(request: MsgSubmitProposal): Promise<MsgSubmitProposalResponse>;
   /*SubmitProposal submits a new proposal.*/
+  submitProposal(request: MsgSubmitProposal): Promise<MsgSubmitProposalResponse>;
 
-  withdrawProposal(request: MsgWithdrawProposal): Promise<MsgWithdrawProposalResponse>;
   /*WithdrawProposal aborts a proposal.*/
+  withdrawProposal(request: MsgWithdrawProposal): Promise<MsgWithdrawProposalResponse>;
 
-  vote(request: MsgVote): Promise<MsgVoteResponse>;
   /*Vote allows a voter to vote on a proposal.*/
+  vote(request: MsgVote): Promise<MsgVoteResponse>;
 
-  exec(request: MsgExec): Promise<MsgExecResponse>;
   /*Exec executes a proposal.*/
+  exec(request: MsgExec): Promise<MsgExecResponse>;
 
-  leaveGroup(request: MsgLeaveGroup): Promise<MsgLeaveGroupResponse>;
   /*LeaveGroup allows a group member to leave the group.*/
-
+  leaveGroup(request: MsgLeaveGroup): Promise<MsgLeaveGroupResponse>;
 }
 export class MsgClientImpl implements Msg {
   private readonly rpc: Rpc;

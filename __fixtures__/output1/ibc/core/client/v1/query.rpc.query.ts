@@ -8,32 +8,31 @@ import { QueryClientStateRequest, QueryClientStateRequestSDKType, QueryClientSta
 
 /** Query provides defines the gRPC querier service */
 export interface Query {
-  clientState(request: QueryClientStateRequest): Promise<QueryClientStateResponse>;
   /*ClientState queries an IBC light client.*/
+  clientState(request: QueryClientStateRequest): Promise<QueryClientStateResponse>;
 
-  clientStates(request?: QueryClientStatesRequest): Promise<QueryClientStatesResponse>;
   /*ClientStates queries all the IBC light clients of a chain.*/
+  clientStates(request?: QueryClientStatesRequest): Promise<QueryClientStatesResponse>;
 
-  consensusState(request: QueryConsensusStateRequest): Promise<QueryConsensusStateResponse>;
   /*ConsensusState queries a consensus state associated with a client state at
    a given height.*/
+  consensusState(request: QueryConsensusStateRequest): Promise<QueryConsensusStateResponse>;
 
-  consensusStates(request: QueryConsensusStatesRequest): Promise<QueryConsensusStatesResponse>;
   /*ConsensusStates queries all the consensus state associated with a given
    client.*/
+  consensusStates(request: QueryConsensusStatesRequest): Promise<QueryConsensusStatesResponse>;
 
-  clientStatus(request: QueryClientStatusRequest): Promise<QueryClientStatusResponse>;
   /*Status queries the status of an IBC client.*/
+  clientStatus(request: QueryClientStatusRequest): Promise<QueryClientStatusResponse>;
 
-  clientParams(request?: QueryClientParamsRequest): Promise<QueryClientParamsResponse>;
   /*ClientParams queries all parameters of the ibc client.*/
+  clientParams(request?: QueryClientParamsRequest): Promise<QueryClientParamsResponse>;
 
-  upgradedClientState(request?: QueryUpgradedClientStateRequest): Promise<QueryUpgradedClientStateResponse>;
   /*UpgradedClientState queries an Upgraded IBC light client.*/
+  upgradedClientState(request?: QueryUpgradedClientStateRequest): Promise<QueryUpgradedClientStateResponse>;
 
-  upgradedConsensusState(request?: QueryUpgradedConsensusStateRequest): Promise<QueryUpgradedConsensusStateResponse>;
   /*UpgradedConsensusState queries an Upgraded IBC consensus state.*/
-
+  upgradedConsensusState(request?: QueryUpgradedConsensusStateRequest): Promise<QueryUpgradedConsensusStateResponse>;
 }
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;

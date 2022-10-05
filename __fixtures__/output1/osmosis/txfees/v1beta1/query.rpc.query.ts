@@ -4,20 +4,19 @@ import * as _m0 from "protobufjs/minimal";
 import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
 import { QueryFeeTokensRequest, QueryFeeTokensRequestSDKType, QueryFeeTokensResponse, QueryFeeTokensResponseSDKType, QueryDenomSpotPriceRequest, QueryDenomSpotPriceRequestSDKType, QueryDenomSpotPriceResponse, QueryDenomSpotPriceResponseSDKType, QueryDenomPoolIdRequest, QueryDenomPoolIdRequestSDKType, QueryDenomPoolIdResponse, QueryDenomPoolIdResponseSDKType, QueryBaseDenomRequest, QueryBaseDenomRequestSDKType, QueryBaseDenomResponse, QueryBaseDenomResponseSDKType } from "./query";
 export interface Query {
-  feeTokens(request?: QueryFeeTokensRequest): Promise<QueryFeeTokensResponse>;
   /*FeeTokens returns a list of all the whitelisted fee tokens and their
    corresponding pools It does not include the BaseDenom, which has its own
    query endpoint*/
+  feeTokens(request?: QueryFeeTokensRequest): Promise<QueryFeeTokensResponse>;
 
+  /*null*/
   denomSpotPrice(request: QueryDenomSpotPriceRequest): Promise<QueryDenomSpotPriceResponse>;
-  /*null*/
 
+  /*null*/
   denomPoolId(request: QueryDenomPoolIdRequest): Promise<QueryDenomPoolIdResponse>;
-  /*null*/
 
+  /*null*/
   baseDenom(request?: QueryBaseDenomRequest): Promise<QueryBaseDenomResponse>;
-  /*null*/
-
 }
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;

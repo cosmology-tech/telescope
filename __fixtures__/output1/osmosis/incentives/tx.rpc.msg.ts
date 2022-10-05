@@ -5,12 +5,11 @@ import { Rpc } from "../../helpers";
 import * as _m0 from "protobufjs/minimal";
 import { MsgCreateGauge, MsgCreateGaugeSDKType, MsgCreateGaugeResponse, MsgCreateGaugeResponseSDKType, MsgAddToGauge, MsgAddToGaugeSDKType, MsgAddToGaugeResponse, MsgAddToGaugeResponseSDKType } from "./tx";
 export interface Msg {
+  /*null*/
   createGauge(request: MsgCreateGauge): Promise<MsgCreateGaugeResponse>;
-  /*null*/
 
+  /*null*/
   addToGauge(request: MsgAddToGauge): Promise<MsgAddToGaugeResponse>;
-  /*null*/
-
 }
 export class MsgClientImpl implements Msg {
   private readonly rpc: Rpc;

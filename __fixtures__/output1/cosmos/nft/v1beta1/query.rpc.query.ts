@@ -7,28 +7,27 @@ import { QueryBalanceRequest, QueryBalanceRequestSDKType, QueryBalanceResponse, 
 
 /** Query defines the gRPC querier service. */
 export interface Query {
-  balance(request: QueryBalanceRequest): Promise<QueryBalanceResponse>;
   /*Balance queries the number of NFTs of a given class owned by the owner, same as balanceOf in ERC721*/
+  balance(request: QueryBalanceRequest): Promise<QueryBalanceResponse>;
 
-  owner(request: QueryOwnerRequest): Promise<QueryOwnerResponse>;
   /*Owner queries the owner of the NFT based on its class and id, same as ownerOf in ERC721*/
+  owner(request: QueryOwnerRequest): Promise<QueryOwnerResponse>;
 
-  supply(request: QuerySupplyRequest): Promise<QuerySupplyResponse>;
   /*Supply queries the number of NFTs from the given class, same as totalSupply of ERC721.*/
+  supply(request: QuerySupplyRequest): Promise<QuerySupplyResponse>;
 
-  nFTs(request: QueryNFTsRequest): Promise<QueryNFTsResponse>;
   /*NFTs queries all NFTs of a given class or owner,choose at least one of the two, similar to tokenByIndex in
    ERC721Enumerable*/
+  nFTs(request: QueryNFTsRequest): Promise<QueryNFTsResponse>;
 
-  nFT(request: QueryNFTRequest): Promise<QueryNFTResponse>;
   /*NFT queries an NFT based on its class and id.*/
+  nFT(request: QueryNFTRequest): Promise<QueryNFTResponse>;
 
-  class(request: QueryClassRequest): Promise<QueryClassResponse>;
   /*Class queries an NFT class based on its id*/
+  class(request: QueryClassRequest): Promise<QueryClassResponse>;
 
-  classes(request?: QueryClassesRequest): Promise<QueryClassesResponse>;
   /*Classes queries all NFT classes*/
-
+  classes(request?: QueryClassesRequest): Promise<QueryClassesResponse>;
 }
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;

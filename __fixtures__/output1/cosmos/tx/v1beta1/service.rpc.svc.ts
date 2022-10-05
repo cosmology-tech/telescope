@@ -10,23 +10,22 @@ import { SimulateRequest, SimulateRequestSDKType, SimulateResponse, SimulateResp
 
 /** Service defines a gRPC service for interacting with transactions. */
 export interface Service {
-  simulate(request: SimulateRequest): Promise<SimulateResponse>;
   /*Simulate simulates executing a transaction for estimating gas usage.*/
+  simulate(request: SimulateRequest): Promise<SimulateResponse>;
 
-  getTx(request: GetTxRequest): Promise<GetTxResponse>;
   /*GetTx fetches a tx by hash.*/
+  getTx(request: GetTxRequest): Promise<GetTxResponse>;
 
-  broadcastTx(request: BroadcastTxRequest): Promise<BroadcastTxResponse>;
   /*BroadcastTx broadcast transaction.*/
+  broadcastTx(request: BroadcastTxRequest): Promise<BroadcastTxResponse>;
 
-  getTxsEvent(request: GetTxsEventRequest): Promise<GetTxsEventResponse>;
   /*GetTxsEvent fetches txs by event.*/
+  getTxsEvent(request: GetTxsEventRequest): Promise<GetTxsEventResponse>;
 
-  getBlockWithTxs(request: GetBlockWithTxsRequest): Promise<GetBlockWithTxsResponse>;
   /*GetBlockWithTxs fetches a block with decoded txs.
   
    Since: cosmos-sdk 0.45.2*/
-
+  getBlockWithTxs(request: GetBlockWithTxsRequest): Promise<GetBlockWithTxsResponse>;
 }
 export class QueryClientImpl implements Service {
   private readonly rpc: Rpc;

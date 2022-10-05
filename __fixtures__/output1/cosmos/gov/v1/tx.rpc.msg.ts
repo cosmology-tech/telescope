@@ -7,22 +7,21 @@ import { MsgSubmitProposal, MsgSubmitProposalSDKType, MsgSubmitProposalResponse,
 
 /** Msg defines the gov Msg service. */
 export interface Msg {
-  submitProposal(request: MsgSubmitProposal): Promise<MsgSubmitProposalResponse>;
   /*SubmitProposal defines a method to create new proposal given a content.*/
+  submitProposal(request: MsgSubmitProposal): Promise<MsgSubmitProposalResponse>;
 
-  execLegacyContent(request: MsgExecLegacyContent): Promise<MsgExecLegacyContentResponse>;
   /*ExecLegacyContent defines a Msg to be in included in a MsgSubmitProposal
    to execute a legacy content-based proposal.*/
+  execLegacyContent(request: MsgExecLegacyContent): Promise<MsgExecLegacyContentResponse>;
 
-  vote(request: MsgVote): Promise<MsgVoteResponse>;
   /*Vote defines a method to add a vote on a specific proposal.*/
+  vote(request: MsgVote): Promise<MsgVoteResponse>;
 
-  voteWeighted(request: MsgVoteWeighted): Promise<MsgVoteWeightedResponse>;
   /*VoteWeighted defines a method to add a weighted vote on a specific proposal.*/
+  voteWeighted(request: MsgVoteWeighted): Promise<MsgVoteWeightedResponse>;
 
-  deposit(request: MsgDeposit): Promise<MsgDepositResponse>;
   /*Deposit defines a method to add deposit on a specific proposal.*/
-
+  deposit(request: MsgDeposit): Promise<MsgDepositResponse>;
 }
 export class MsgClientImpl implements Msg {
   private readonly rpc: Rpc;

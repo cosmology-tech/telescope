@@ -7,25 +7,24 @@ import { QueryPeriodRequest, QueryPeriodRequestSDKType, QueryPeriodResponse, Que
 
 /** Query provides defines the gRPC querier service. */
 export interface Query {
-  period(request?: QueryPeriodRequest): Promise<QueryPeriodResponse>;
   /*Period retrieves current period.*/
+  period(request?: QueryPeriodRequest): Promise<QueryPeriodResponse>;
 
-  epochMintProvision(request?: QueryEpochMintProvisionRequest): Promise<QueryEpochMintProvisionResponse>;
   /*EpochMintProvision retrieves current minting epoch provision value.*/
+  epochMintProvision(request?: QueryEpochMintProvisionRequest): Promise<QueryEpochMintProvisionResponse>;
 
-  skippedEpochs(request?: QuerySkippedEpochsRequest): Promise<QuerySkippedEpochsResponse>;
   /*SkippedEpochs retrieves the total number of skipped epochs.*/
+  skippedEpochs(request?: QuerySkippedEpochsRequest): Promise<QuerySkippedEpochsResponse>;
 
-  circulatingSupply(request?: QueryCirculatingSupplyRequest): Promise<QueryCirculatingSupplyResponse>;
   /*CirculatingSupply retrieves the total number of tokens that are in
    circulation (i.e. excluding unvested tokens).*/
+  circulatingSupply(request?: QueryCirculatingSupplyRequest): Promise<QueryCirculatingSupplyResponse>;
 
-  inflationRate(request?: QueryInflationRateRequest): Promise<QueryInflationRateResponse>;
   /*InflationRate retrieves the inflation rate of the current period.*/
+  inflationRate(request?: QueryInflationRateRequest): Promise<QueryInflationRateResponse>;
 
-  params(request?: QueryParamsRequest): Promise<QueryParamsResponse>;
   /*Params retrieves the total set of minting parameters.*/
-
+  params(request?: QueryParamsRequest): Promise<QueryParamsResponse>;
 }
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;

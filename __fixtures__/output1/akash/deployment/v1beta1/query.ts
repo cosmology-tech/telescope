@@ -571,15 +571,14 @@ export const QueryGroupResponse = {
 
 /** Query defines the gRPC querier service */
 export interface Query {
-  deployments(request: QueryDeploymentsRequest): Promise<QueryDeploymentsResponse>;
   /*Deployments queries deployments*/
+  deployments(request: QueryDeploymentsRequest): Promise<QueryDeploymentsResponse>;
 
-  deployment(request: QueryDeploymentRequest): Promise<QueryDeploymentResponse>;
   /*Deployment queries deployment details*/
+  deployment(request: QueryDeploymentRequest): Promise<QueryDeploymentResponse>;
 
-  group(request: QueryGroupRequest): Promise<QueryGroupResponse>;
   /*Group queries group details*/
-
+  group(request: QueryGroupRequest): Promise<QueryGroupResponse>;
 }
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;

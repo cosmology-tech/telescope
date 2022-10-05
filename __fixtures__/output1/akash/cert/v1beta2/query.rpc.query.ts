@@ -7,9 +7,8 @@ import { QueryCertificatesRequest, QueryCertificatesRequestSDKType, QueryCertifi
 
 /** Query defines the gRPC querier service */
 export interface Query {
-  certificates(request: QueryCertificatesRequest): Promise<QueryCertificatesResponse>;
   /*Certificates queries certificates*/
-
+  certificates(request: QueryCertificatesRequest): Promise<QueryCertificatesResponse>;
 }
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;
