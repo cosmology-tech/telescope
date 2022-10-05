@@ -91,11 +91,11 @@ export enum ResourceDescriptor_Style {
 
   /**
    * DECLARATIVE_FRIENDLY - This resource is intended to be "declarative-friendly".
-   *
+   * 
    * Declarative-friendly resources must be more strictly consistent, and
    * setting this to true communicates to tools that this resource should
    * adhere to declarative-friendly expectations.
-   *
+   * 
    * Note: This is used by the API linter (linter.aip.dev) to enable
    * additional checks.
    */
@@ -110,11 +110,11 @@ export enum ResourceDescriptor_StyleSDKType {
 
   /**
    * DECLARATIVE_FRIENDLY - This resource is intended to be "declarative-friendly".
-   *
+   * 
    * Declarative-friendly resources must be more strictly consistent, and
    * setting this to true communicates to tools that this resource should
    * adhere to declarative-friendly expectations.
-   *
+   * 
    * Note: This is used by the API linter (linter.aip.dev) to enable
    * additional checks.
    */
