@@ -333,7 +333,6 @@ export const createRpcClientInterface = (
             )
         });
 
-
     const obj = t.exportNamedDeclaration(
         t.tsInterfaceDeclaration(
             t.identifier(service.name),
@@ -346,13 +345,10 @@ export const createRpcClientInterface = (
             )
         )
     );
-
     if (service.comment) {
         obj.leadingComments = [commentBlock(`* ${service.comment} `)];
     }
-
     return obj;
-
 };
 
 const getRpcClassName = (service: ProtoService) => {
