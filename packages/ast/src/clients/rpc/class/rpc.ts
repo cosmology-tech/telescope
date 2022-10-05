@@ -338,7 +338,6 @@ const processRpcComment = (e: ProtoServiceMethod) => {
     return comments.join('\n');
 };
 
-
 export const createRpcClientInterface = (
     context: GenericParseContext,
     service: ProtoService
