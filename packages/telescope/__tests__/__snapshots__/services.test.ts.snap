@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`cosmology/example/c context 1`] = `
-Array [
-  Object {
+[
+  {
     "comment": null,
     "message": "MsgTypePackageC",
     "messageImport": "cosmology/example/c.proto",
@@ -11,7 +11,7 @@ Array [
     "response": "MsgTypePackageCResponse",
     "responseImport": "cosmology/example/c.proto",
   },
-  Object {
+  {
     "comment": null,
     "message": "MsgTypePackageB",
     "messageImport": "cosmology/example/b.proto",
@@ -24,8 +24,8 @@ Array [
 `;
 
 exports[`cosmology/example/c context 2`] = `
-Array [
-  Object {
+[
+  {
     "comment": "Config returns the current app config.",
     "message": "QueryConfigRequest",
     "messageImport": "cosmology/example/c.proto",

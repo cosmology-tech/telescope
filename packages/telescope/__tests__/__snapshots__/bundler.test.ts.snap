@@ -1,101 +1,101 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`bundle packages root file names 1`] = `
-Object {
-  "akash": Object {
+{
+  "akash": {
     "bundle": "akash/bundle.ts",
   },
-  "cosmos": Object {
+  "cosmos": {
     "bundle": "cosmos/bundle.ts",
   },
-  "cosmos_proto": Object {
+  "cosmos_proto": {
     "bundle": "cosmos_proto/bundle.ts",
   },
-  "cosmwasm": Object {
+  "cosmwasm": {
     "bundle": "cosmwasm/bundle.ts",
   },
-  "evmos": Object {
+  "evmos": {
     "bundle": "evmos/bundle.ts",
   },
-  "gogoproto": Object {
+  "gogoproto": {
     "bundle": "gogoproto/bundle.ts",
   },
-  "google": Object {
+  "google": {
     "bundle": "google/bundle.ts",
   },
-  "ibc": Object {
+  "ibc": {
     "bundle": "ibc/bundle.ts",
   },
-  "ics23": Object {
+  "ics23": {
     "bundle": "ics23/bundle.ts",
   },
-  "osmosis": Object {
+  "osmosis": {
     "bundle": "osmosis/bundle.ts",
   },
-  "tendermint": Object {
+  "tendermint": {
     "bundle": "tendermint/bundle.ts",
   },
 }
 `;
 
 exports[`bundlePackages 1`] = `
-Object {
-  "akash": Object {
+{
+  "akash": {
     "base": "akash",
     "bundle": "akash/bundle.ts",
-    "code": "import * as _0 from \\"./audit/v1beta1/audit\\";
-import * as _1 from \\"./audit/v1beta2/audit\\";
-import * as _2 from \\"./audit/v1beta2/genesis\\";
-import * as _3 from \\"./audit/v1beta2/query\\";
-import * as _4 from \\"./base/v1beta1/attribute\\";
-import * as _5 from \\"./base/v1beta1/endpoint\\";
-import * as _6 from \\"./base/v1beta1/resource\\";
-import * as _7 from \\"./base/v1beta1/resourcevalue\\";
-import * as _8 from \\"./base/v1beta2/attribute\\";
-import * as _9 from \\"./base/v1beta2/endpoint\\";
-import * as _10 from \\"./base/v1beta2/resource\\";
-import * as _11 from \\"./base/v1beta2/resourceunits\\";
-import * as _12 from \\"./base/v1beta2/resourcevalue\\";
-import * as _13 from \\"./cert/v1beta2/cert\\";
-import * as _14 from \\"./cert/v1beta2/genesis\\";
-import * as _15 from \\"./cert/v1beta2/query\\";
-import * as _16 from \\"./deployment/v1beta1/authz\\";
-import * as _17 from \\"./deployment/v1beta1/deployment\\";
-import * as _18 from \\"./deployment/v1beta1/genesis\\";
-import * as _19 from \\"./deployment/v1beta1/group\\";
-import * as _20 from \\"./deployment/v1beta1/params\\";
-import * as _21 from \\"./deployment/v1beta1/query\\";
-import * as _22 from \\"./deployment/v1beta2/authz\\";
-import * as _23 from \\"./deployment/v1beta2/deployment\\";
-import * as _24 from \\"./deployment/v1beta2/deploymentmsg\\";
-import * as _25 from \\"./deployment/v1beta2/genesis\\";
-import * as _26 from \\"./deployment/v1beta2/group\\";
-import * as _27 from \\"./deployment/v1beta2/groupid\\";
-import * as _28 from \\"./deployment/v1beta2/groupmsg\\";
-import * as _29 from \\"./deployment/v1beta2/groupspec\\";
-import * as _30 from \\"./deployment/v1beta2/params\\";
-import * as _31 from \\"./deployment/v1beta2/query\\";
-import * as _32 from \\"./deployment/v1beta2/resource\\";
-import * as _33 from \\"./deployment/v1beta2/service\\";
-import * as _34 from \\"./escrow/v1beta1/genesis\\";
-import * as _35 from \\"./escrow/v1beta1/query\\";
-import * as _36 from \\"./escrow/v1beta1/types\\";
-import * as _37 from \\"./escrow/v1beta2/genesis\\";
-import * as _38 from \\"./escrow/v1beta2/query\\";
-import * as _39 from \\"./escrow/v1beta2/types\\";
-import * as _40 from \\"./inflation/v1beta2/genesis\\";
-import * as _41 from \\"./inflation/v1beta2/params\\";
-import * as _42 from \\"./market/v1beta2/bid\\";
-import * as _43 from \\"./market/v1beta2/genesis\\";
-import * as _44 from \\"./market/v1beta2/lease\\";
-import * as _45 from \\"./market/v1beta2/order\\";
-import * as _46 from \\"./market/v1beta2/params\\";
-import * as _47 from \\"./market/v1beta2/query\\";
-import * as _48 from \\"./market/v1beta2/service\\";
-import * as _49 from \\"./provider/v1beta1/provider\\";
-import * as _50 from \\"./provider/v1beta2/genesis\\";
-import * as _51 from \\"./provider/v1beta2/provider\\";
-import * as _52 from \\"./provider/v1beta2/query\\";
+    "code": "import * as _0 from "./audit/v1beta1/audit";
+import * as _1 from "./audit/v1beta2/audit";
+import * as _2 from "./audit/v1beta2/genesis";
+import * as _3 from "./audit/v1beta2/query";
+import * as _4 from "./base/v1beta1/attribute";
+import * as _5 from "./base/v1beta1/endpoint";
+import * as _6 from "./base/v1beta1/resource";
+import * as _7 from "./base/v1beta1/resourcevalue";
+import * as _8 from "./base/v1beta2/attribute";
+import * as _9 from "./base/v1beta2/endpoint";
+import * as _10 from "./base/v1beta2/resource";
+import * as _11 from "./base/v1beta2/resourceunits";
+import * as _12 from "./base/v1beta2/resourcevalue";
+import * as _13 from "./cert/v1beta2/cert";
+import * as _14 from "./cert/v1beta2/genesis";
+import * as _15 from "./cert/v1beta2/query";
+import * as _16 from "./deployment/v1beta1/authz";
+import * as _17 from "./deployment/v1beta1/deployment";
+import * as _18 from "./deployment/v1beta1/genesis";
+import * as _19 from "./deployment/v1beta1/group";
+import * as _20 from "./deployment/v1beta1/params";
+import * as _21 from "./deployment/v1beta1/query";
+import * as _22 from "./deployment/v1beta2/authz";
+import * as _23 from "./deployment/v1beta2/deployment";
+import * as _24 from "./deployment/v1beta2/deploymentmsg";
+import * as _25 from "./deployment/v1beta2/genesis";
+import * as _26 from "./deployment/v1beta2/group";
+import * as _27 from "./deployment/v1beta2/groupid";
+import * as _28 from "./deployment/v1beta2/groupmsg";
+import * as _29 from "./deployment/v1beta2/groupspec";
+import * as _30 from "./deployment/v1beta2/params";
+import * as _31 from "./deployment/v1beta2/query";
+import * as _32 from "./deployment/v1beta2/resource";
+import * as _33 from "./deployment/v1beta2/service";
+import * as _34 from "./escrow/v1beta1/genesis";
+import * as _35 from "./escrow/v1beta1/query";
+import * as _36 from "./escrow/v1beta1/types";
+import * as _37 from "./escrow/v1beta2/genesis";
+import * as _38 from "./escrow/v1beta2/query";
+import * as _39 from "./escrow/v1beta2/types";
+import * as _40 from "./inflation/v1beta2/genesis";
+import * as _41 from "./inflation/v1beta2/params";
+import * as _42 from "./market/v1beta2/bid";
+import * as _43 from "./market/v1beta2/genesis";
+import * as _44 from "./market/v1beta2/lease";
+import * as _45 from "./market/v1beta2/order";
+import * as _46 from "./market/v1beta2/params";
+import * as _47 from "./market/v1beta2/query";
+import * as _48 from "./market/v1beta2/service";
+import * as _49 from "./provider/v1beta1/provider";
+import * as _50 from "./provider/v1beta2/genesis";
+import * as _51 from "./provider/v1beta2/provider";
+import * as _52 from "./provider/v1beta2/query";
 export namespace akash {
   export namespace audit {
     export const v1beta1 = { ..._0
@@ -181,102 +181,102 @@ export namespace akash {
   }
 }",
   },
-  "cosmos": Object {
+  "cosmos": {
     "base": "cosmos",
     "bundle": "cosmos/bundle.ts",
-    "code": "import * as _55 from \\"./app/v1alpha1/config\\";
-import * as _56 from \\"./app/v1alpha1/module\\";
-import * as _57 from \\"./app/v1alpha1/query\\";
-import * as _58 from \\"./auth/v1beta1/auth\\";
-import * as _59 from \\"./auth/v1beta1/genesis\\";
-import * as _60 from \\"./auth/v1beta1/query\\";
-import * as _61 from \\"./authz/v1beta1/authz\\";
-import * as _62 from \\"./authz/v1beta1/event\\";
-import * as _63 from \\"./authz/v1beta1/genesis\\";
-import * as _64 from \\"./authz/v1beta1/query\\";
-import * as _65 from \\"./authz/v1beta1/tx\\";
-import * as _66 from \\"./bank/v1beta1/authz\\";
-import * as _67 from \\"./bank/v1beta1/bank\\";
-import * as _68 from \\"./bank/v1beta1/genesis\\";
-import * as _69 from \\"./bank/v1beta1/query\\";
-import * as _70 from \\"./bank/v1beta1/tx\\";
-import * as _71 from \\"./base/abci/v1beta1/abci\\";
-import * as _72 from \\"./base/kv/v1beta1/kv\\";
-import * as _73 from \\"./base/query/v1beta1/pagination\\";
-import * as _74 from \\"./base/reflection/v1beta1/reflection\\";
-import * as _75 from \\"./base/reflection/v2alpha1/reflection\\";
-import * as _76 from \\"./base/snapshots/v1beta1/snapshot\\";
-import * as _77 from \\"./base/store/v1beta1/commit_info\\";
-import * as _78 from \\"./base/store/v1beta1/listening\\";
-import * as _79 from \\"./base/tendermint/v1beta1/query\\";
-import * as _80 from \\"./base/v1beta1/coin\\";
-import * as _81 from \\"./capability/v1beta1/capability\\";
-import * as _82 from \\"./capability/v1beta1/genesis\\";
-import * as _83 from \\"./crisis/v1beta1/genesis\\";
-import * as _84 from \\"./crisis/v1beta1/tx\\";
-import * as _85 from \\"./crypto/ed25519/keys\\";
-import * as _86 from \\"./crypto/hd/v1/hd\\";
-import * as _87 from \\"./crypto/keyring/v1/record\\";
-import * as _88 from \\"./crypto/multisig/keys\\";
-import * as _89 from \\"./crypto/secp256k1/keys\\";
-import * as _90 from \\"./crypto/secp256r1/keys\\";
-import * as _91 from \\"./distribution/v1beta1/distribution\\";
-import * as _92 from \\"./distribution/v1beta1/genesis\\";
-import * as _93 from \\"./distribution/v1beta1/query\\";
-import * as _94 from \\"./distribution/v1beta1/tx\\";
-import * as _95 from \\"./evidence/v1beta1/evidence\\";
-import * as _96 from \\"./evidence/v1beta1/genesis\\";
-import * as _97 from \\"./evidence/v1beta1/query\\";
-import * as _98 from \\"./evidence/v1beta1/tx\\";
-import * as _99 from \\"./feegrant/v1beta1/feegrant\\";
-import * as _100 from \\"./feegrant/v1beta1/genesis\\";
-import * as _101 from \\"./feegrant/v1beta1/query\\";
-import * as _102 from \\"./feegrant/v1beta1/tx\\";
-import * as _103 from \\"./genutil/v1beta1/genesis\\";
-import * as _104 from \\"./gov/v1/genesis\\";
-import * as _105 from \\"./gov/v1/gov\\";
-import * as _106 from \\"./gov/v1/query\\";
-import * as _107 from \\"./gov/v1/tx\\";
-import * as _108 from \\"./gov/v1beta1/genesis\\";
-import * as _109 from \\"./gov/v1beta1/gov\\";
-import * as _110 from \\"./gov/v1beta1/query\\";
-import * as _111 from \\"./gov/v1beta1/tx\\";
-import * as _112 from \\"./group/v1/events\\";
-import * as _113 from \\"./group/v1/genesis\\";
-import * as _114 from \\"./group/v1/query\\";
-import * as _115 from \\"./group/v1/tx\\";
-import * as _116 from \\"./group/v1/types\\";
-import * as _117 from \\"./mint/v1beta1/genesis\\";
-import * as _118 from \\"./mint/v1beta1/mint\\";
-import * as _119 from \\"./mint/v1beta1/query\\";
-import * as _120 from \\"./msg/v1/msg\\";
-import * as _121 from \\"./nft/v1beta1/event\\";
-import * as _122 from \\"./nft/v1beta1/genesis\\";
-import * as _123 from \\"./nft/v1beta1/nft\\";
-import * as _124 from \\"./nft/v1beta1/query\\";
-import * as _125 from \\"./nft/v1beta1/tx\\";
-import * as _126 from \\"./orm/module/v1alpha1/module\\";
-import * as _127 from \\"./orm/v1/orm\\";
-import * as _128 from \\"./orm/v1alpha1/schema\\";
-import * as _129 from \\"./params/v1beta1/params\\";
-import * as _130 from \\"./params/v1beta1/query\\";
-import * as _131 from \\"./slashing/v1beta1/genesis\\";
-import * as _132 from \\"./slashing/v1beta1/query\\";
-import * as _133 from \\"./slashing/v1beta1/slashing\\";
-import * as _134 from \\"./slashing/v1beta1/tx\\";
-import * as _135 from \\"./staking/v1beta1/authz\\";
-import * as _136 from \\"./staking/v1beta1/genesis\\";
-import * as _137 from \\"./staking/v1beta1/query\\";
-import * as _138 from \\"./staking/v1beta1/staking\\";
-import * as _139 from \\"./staking/v1beta1/tx\\";
-import * as _140 from \\"./tx/signing/v1beta1/signing\\";
-import * as _141 from \\"./tx/v1beta1/service\\";
-import * as _142 from \\"./tx/v1beta1/tx\\";
-import * as _143 from \\"./upgrade/v1beta1/query\\";
-import * as _144 from \\"./upgrade/v1beta1/tx\\";
-import * as _145 from \\"./upgrade/v1beta1/upgrade\\";
-import * as _146 from \\"./vesting/v1beta1/tx\\";
-import * as _147 from \\"./vesting/v1beta1/vesting\\";
+    "code": "import * as _55 from "./app/v1alpha1/config";
+import * as _56 from "./app/v1alpha1/module";
+import * as _57 from "./app/v1alpha1/query";
+import * as _58 from "./auth/v1beta1/auth";
+import * as _59 from "./auth/v1beta1/genesis";
+import * as _60 from "./auth/v1beta1/query";
+import * as _61 from "./authz/v1beta1/authz";
+import * as _62 from "./authz/v1beta1/event";
+import * as _63 from "./authz/v1beta1/genesis";
+import * as _64 from "./authz/v1beta1/query";
+import * as _65 from "./authz/v1beta1/tx";
+import * as _66 from "./bank/v1beta1/authz";
+import * as _67 from "./bank/v1beta1/bank";
+import * as _68 from "./bank/v1beta1/genesis";
+import * as _69 from "./bank/v1beta1/query";
+import * as _70 from "./bank/v1beta1/tx";
+import * as _71 from "./base/abci/v1beta1/abci";
+import * as _72 from "./base/kv/v1beta1/kv";
+import * as _73 from "./base/query/v1beta1/pagination";
+import * as _74 from "./base/reflection/v1beta1/reflection";
+import * as _75 from "./base/reflection/v2alpha1/reflection";
+import * as _76 from "./base/snapshots/v1beta1/snapshot";
+import * as _77 from "./base/store/v1beta1/commit_info";
+import * as _78 from "./base/store/v1beta1/listening";
+import * as _79 from "./base/tendermint/v1beta1/query";
+import * as _80 from "./base/v1beta1/coin";
+import * as _81 from "./capability/v1beta1/capability";
+import * as _82 from "./capability/v1beta1/genesis";
+import * as _83 from "./crisis/v1beta1/genesis";
+import * as _84 from "./crisis/v1beta1/tx";
+import * as _85 from "./crypto/ed25519/keys";
+import * as _86 from "./crypto/hd/v1/hd";
+import * as _87 from "./crypto/keyring/v1/record";
+import * as _88 from "./crypto/multisig/keys";
+import * as _89 from "./crypto/secp256k1/keys";
+import * as _90 from "./crypto/secp256r1/keys";
+import * as _91 from "./distribution/v1beta1/distribution";
+import * as _92 from "./distribution/v1beta1/genesis";
+import * as _93 from "./distribution/v1beta1/query";
+import * as _94 from "./distribution/v1beta1/tx";
+import * as _95 from "./evidence/v1beta1/evidence";
+import * as _96 from "./evidence/v1beta1/genesis";
+import * as _97 from "./evidence/v1beta1/query";
+import * as _98 from "./evidence/v1beta1/tx";
+import * as _99 from "./feegrant/v1beta1/feegrant";
+import * as _100 from "./feegrant/v1beta1/genesis";
+import * as _101 from "./feegrant/v1beta1/query";
+import * as _102 from "./feegrant/v1beta1/tx";
+import * as _103 from "./genutil/v1beta1/genesis";
+import * as _104 from "./gov/v1/genesis";
+import * as _105 from "./gov/v1/gov";
+import * as _106 from "./gov/v1/query";
+import * as _107 from "./gov/v1/tx";
+import * as _108 from "./gov/v1beta1/genesis";
+import * as _109 from "./gov/v1beta1/gov";
+import * as _110 from "./gov/v1beta1/query";
+import * as _111 from "./gov/v1beta1/tx";
+import * as _112 from "./group/v1/events";
+import * as _113 from "./group/v1/genesis";
+import * as _114 from "./group/v1/query";
+import * as _115 from "./group/v1/tx";
+import * as _116 from "./group/v1/types";
+import * as _117 from "./mint/v1beta1/genesis";
+import * as _118 from "./mint/v1beta1/mint";
+import * as _119 from "./mint/v1beta1/query";
+import * as _120 from "./msg/v1/msg";
+import * as _121 from "./nft/v1beta1/event";
+import * as _122 from "./nft/v1beta1/genesis";
+import * as _123 from "./nft/v1beta1/nft";
+import * as _124 from "./nft/v1beta1/query";
+import * as _125 from "./nft/v1beta1/tx";
+import * as _126 from "./orm/module/v1alpha1/module";
+import * as _127 from "./orm/v1/orm";
+import * as _128 from "./orm/v1alpha1/schema";
+import * as _129 from "./params/v1beta1/params";
+import * as _130 from "./params/v1beta1/query";
+import * as _131 from "./slashing/v1beta1/genesis";
+import * as _132 from "./slashing/v1beta1/query";
+import * as _133 from "./slashing/v1beta1/slashing";
+import * as _134 from "./slashing/v1beta1/tx";
+import * as _135 from "./staking/v1beta1/authz";
+import * as _136 from "./staking/v1beta1/genesis";
+import * as _137 from "./staking/v1beta1/query";
+import * as _138 from "./staking/v1beta1/staking";
+import * as _139 from "./staking/v1beta1/tx";
+import * as _140 from "./tx/signing/v1beta1/signing";
+import * as _141 from "./tx/v1beta1/service";
+import * as _142 from "./tx/v1beta1/tx";
+import * as _143 from "./upgrade/v1beta1/query";
+import * as _144 from "./upgrade/v1beta1/tx";
+import * as _145 from "./upgrade/v1beta1/upgrade";
+import * as _146 from "./vesting/v1beta1/tx";
+import * as _147 from "./vesting/v1beta1/vesting";
 export namespace cosmos {
   export namespace app {
     export const v1alpha1 = { ..._55,
@@ -484,22 +484,22 @@ export namespace cosmos {
   }
 }",
   },
-  "cosmos_proto": Object {
+  "cosmos_proto": {
     "base": "cosmos_proto",
     "bundle": "cosmos_proto/bundle.ts",
-    "code": "import * as _54 from \\"./cosmos\\";
+    "code": "import * as _54 from "./cosmos";
 export const cosmos_proto = { ..._54
 };",
   },
-  "cosmwasm": Object {
+  "cosmwasm": {
     "base": "cosmwasm",
     "bundle": "cosmwasm/bundle.ts",
-    "code": "import * as _148 from \\"./wasm/v1/genesis\\";
-import * as _149 from \\"./wasm/v1/ibc\\";
-import * as _150 from \\"./wasm/v1/proposal\\";
-import * as _151 from \\"./wasm/v1/query\\";
-import * as _152 from \\"./wasm/v1/tx\\";
-import * as _153 from \\"./wasm/v1/types\\";
+    "code": "import * as _148 from "./wasm/v1/genesis";
+import * as _149 from "./wasm/v1/ibc";
+import * as _150 from "./wasm/v1/proposal";
+import * as _151 from "./wasm/v1/query";
+import * as _152 from "./wasm/v1/tx";
+import * as _153 from "./wasm/v1/types";
 export namespace cosmwasm {
   export namespace wasm {
     export const v1 = { ..._148,
@@ -512,33 +512,33 @@ export namespace cosmwasm {
   }
 }",
   },
-  "evmos": Object {
+  "evmos": {
     "base": "evmos",
     "bundle": "evmos/bundle.ts",
-    "code": "import * as _154 from \\"./claims/v1/claims\\";
-import * as _155 from \\"./claims/v1/genesis\\";
-import * as _156 from \\"./claims/v1/query\\";
-import * as _157 from \\"./epochs/v1/genesis\\";
-import * as _158 from \\"./epochs/v1/query\\";
-import * as _159 from \\"./erc20/v1/erc20\\";
-import * as _160 from \\"./erc20/v1/genesis\\";
-import * as _161 from \\"./erc20/v1/query\\";
-import * as _162 from \\"./erc20/v1/tx\\";
-import * as _163 from \\"./fees/v1/fees\\";
-import * as _164 from \\"./fees/v1/genesis\\";
-import * as _165 from \\"./fees/v1/query\\";
-import * as _166 from \\"./fees/v1/tx\\";
-import * as _167 from \\"./incentives/v1/genesis\\";
-import * as _168 from \\"./incentives/v1/incentives\\";
-import * as _169 from \\"./incentives/v1/query\\";
-import * as _170 from \\"./inflation/v1/genesis\\";
-import * as _171 from \\"./inflation/v1/inflation\\";
-import * as _172 from \\"./inflation/v1/query\\";
-import * as _173 from \\"./recovery/v1/genesis\\";
-import * as _174 from \\"./recovery/v1/query\\";
-import * as _175 from \\"./vesting/v1/query\\";
-import * as _176 from \\"./vesting/v1/tx\\";
-import * as _177 from \\"./vesting/v1/vesting\\";
+    "code": "import * as _154 from "./claims/v1/claims";
+import * as _155 from "./claims/v1/genesis";
+import * as _156 from "./claims/v1/query";
+import * as _157 from "./epochs/v1/genesis";
+import * as _158 from "./epochs/v1/query";
+import * as _159 from "./erc20/v1/erc20";
+import * as _160 from "./erc20/v1/genesis";
+import * as _161 from "./erc20/v1/query";
+import * as _162 from "./erc20/v1/tx";
+import * as _163 from "./fees/v1/fees";
+import * as _164 from "./fees/v1/genesis";
+import * as _165 from "./fees/v1/query";
+import * as _166 from "./fees/v1/tx";
+import * as _167 from "./incentives/v1/genesis";
+import * as _168 from "./incentives/v1/incentives";
+import * as _169 from "./incentives/v1/query";
+import * as _170 from "./inflation/v1/genesis";
+import * as _171 from "./inflation/v1/inflation";
+import * as _172 from "./inflation/v1/query";
+import * as _173 from "./recovery/v1/genesis";
+import * as _174 from "./recovery/v1/query";
+import * as _175 from "./vesting/v1/query";
+import * as _176 from "./vesting/v1/tx";
+import * as _177 from "./vesting/v1/vesting";
 export namespace evmos {
   export namespace claims {
     export const v1 = { ..._154,
@@ -590,68 +590,68 @@ export namespace evmos {
   }
 }",
   },
-  "gogoproto": Object {
+  "gogoproto": {
     "base": "gogoproto",
     "bundle": "gogoproto/bundle.ts",
-    "code": "import * as _178 from \\"./gogo\\";
+    "code": "import * as _178 from "./gogo";
 export const gogoproto = { ..._178
 };",
   },
-  "google": Object {
+  "google": {
     "base": "google",
     "bundle": "google/bundle.ts",
-    "code": "import * as _179 from \\"./api/annotations\\";
-import * as _180 from \\"./api/auth\\";
-import * as _181 from \\"./api/backend\\";
-import * as _182 from \\"./api/billing\\";
-import * as _183 from \\"./api/client\\";
-import * as _184 from \\"./api/config_change\\";
-import * as _185 from \\"./api/consumer\\";
-import * as _186 from \\"./api/context\\";
-import * as _187 from \\"./api/control\\";
-import * as _188 from \\"./api/distribution\\";
-import * as _189 from \\"./api/documentation\\";
-import * as _190 from \\"./api/endpoint\\";
-import * as _191 from \\"./api/error_reason\\";
-import * as _192 from \\"./api/field_behavior\\";
-import * as _193 from \\"./api/http\\";
-import * as _194 from \\"./api/httpbody\\";
-import * as _195 from \\"./api/label\\";
-import * as _196 from \\"./api/launch_stage\\";
-import * as _197 from \\"./api/log\\";
-import * as _198 from \\"./api/logging\\";
-import * as _199 from \\"./api/metric\\";
-import * as _200 from \\"./api/monitored_resource\\";
-import * as _201 from \\"./api/monitoring\\";
-import * as _202 from \\"./api/quota\\";
-import * as _203 from \\"./api/resource\\";
-import * as _204 from \\"./api/routing\\";
-import * as _205 from \\"./api/service\\";
-import * as _206 from \\"./api/source_info\\";
-import * as _207 from \\"./api/system_parameter\\";
-import * as _208 from \\"./api/usage\\";
-import * as _209 from \\"./api/visibility\\";
-import * as _210 from \\"./logging/type/http_request\\";
-import * as _211 from \\"./logging/type/log_severity\\";
-import * as _212 from \\"./logging/v2/log_entry\\";
-import * as _213 from \\"./logging/v2/logging_config\\";
-import * as _214 from \\"./logging/v2/logging_metrics\\";
-import * as _215 from \\"./logging/v2/logging\\";
-import * as _216 from \\"./longrunning/operations\\";
-import * as _217 from \\"./protobuf/any\\";
-import * as _218 from \\"./protobuf/api\\";
-import * as _219 from \\"./protobuf/descriptor\\";
-import * as _220 from \\"./protobuf/duration\\";
-import * as _221 from \\"./protobuf/empty\\";
-import * as _222 from \\"./protobuf/field_mask\\";
-import * as _223 from \\"./protobuf/source_context\\";
-import * as _224 from \\"./protobuf/struct\\";
-import * as _225 from \\"./protobuf/timestamp\\";
-import * as _226 from \\"./protobuf/type\\";
-import * as _227 from \\"./protobuf/wrappers\\";
-import * as _228 from \\"./rpc/code\\";
-import * as _229 from \\"./rpc/error_details\\";
-import * as _230 from \\"./rpc/status\\";
+    "code": "import * as _179 from "./api/annotations";
+import * as _180 from "./api/auth";
+import * as _181 from "./api/backend";
+import * as _182 from "./api/billing";
+import * as _183 from "./api/client";
+import * as _184 from "./api/config_change";
+import * as _185 from "./api/consumer";
+import * as _186 from "./api/context";
+import * as _187 from "./api/control";
+import * as _188 from "./api/distribution";
+import * as _189 from "./api/documentation";
+import * as _190 from "./api/endpoint";
+import * as _191 from "./api/error_reason";
+import * as _192 from "./api/field_behavior";
+import * as _193 from "./api/http";
+import * as _194 from "./api/httpbody";
+import * as _195 from "./api/label";
+import * as _196 from "./api/launch_stage";
+import * as _197 from "./api/log";
+import * as _198 from "./api/logging";
+import * as _199 from "./api/metric";
+import * as _200 from "./api/monitored_resource";
+import * as _201 from "./api/monitoring";
+import * as _202 from "./api/quota";
+import * as _203 from "./api/resource";
+import * as _204 from "./api/routing";
+import * as _205 from "./api/service";
+import * as _206 from "./api/source_info";
+import * as _207 from "./api/system_parameter";
+import * as _208 from "./api/usage";
+import * as _209 from "./api/visibility";
+import * as _210 from "./logging/type/http_request";
+import * as _211 from "./logging/type/log_severity";
+import * as _212 from "./logging/v2/log_entry";
+import * as _213 from "./logging/v2/logging_config";
+import * as _214 from "./logging/v2/logging_metrics";
+import * as _215 from "./logging/v2/logging";
+import * as _216 from "./longrunning/operations";
+import * as _217 from "./protobuf/any";
+import * as _218 from "./protobuf/api";
+import * as _219 from "./protobuf/descriptor";
+import * as _220 from "./protobuf/duration";
+import * as _221 from "./protobuf/empty";
+import * as _222 from "./protobuf/field_mask";
+import * as _223 from "./protobuf/source_context";
+import * as _224 from "./protobuf/struct";
+import * as _225 from "./protobuf/timestamp";
+import * as _226 from "./protobuf/type";
+import * as _227 from "./protobuf/wrappers";
+import * as _228 from "./rpc/code";
+import * as _229 from "./rpc/error_details";
+import * as _230 from "./rpc/status";
 export namespace google {
   export const api = { ..._179,
     ..._180,
@@ -715,33 +715,33 @@ export namespace google {
   };
 }",
   },
-  "ibc": Object {
+  "ibc": {
     "base": "ibc",
     "bundle": "ibc/bundle.ts",
-    "code": "import * as _231 from \\"./applications/transfer/v1/genesis\\";
-import * as _232 from \\"./applications/transfer/v1/query\\";
-import * as _233 from \\"./applications/transfer/v1/transfer\\";
-import * as _234 from \\"./applications/transfer/v1/tx\\";
-import * as _235 from \\"./applications/transfer/v2/packet\\";
-import * as _236 from \\"./core/channel/v1/channel\\";
-import * as _237 from \\"./core/channel/v1/genesis\\";
-import * as _238 from \\"./core/channel/v1/query\\";
-import * as _239 from \\"./core/channel/v1/tx\\";
-import * as _240 from \\"./core/client/v1/client\\";
-import * as _241 from \\"./core/client/v1/genesis\\";
-import * as _242 from \\"./core/client/v1/query\\";
-import * as _243 from \\"./core/client/v1/tx\\";
-import * as _244 from \\"./core/commitment/v1/commitment\\";
-import * as _245 from \\"./core/connection/v1/connection\\";
-import * as _246 from \\"./core/connection/v1/genesis\\";
-import * as _247 from \\"./core/connection/v1/query\\";
-import * as _248 from \\"./core/connection/v1/tx\\";
-import * as _249 from \\"./core/port/v1/query\\";
-import * as _250 from \\"./core/types/v1/genesis\\";
-import * as _251 from \\"./lightclients/localhost/v1/localhost\\";
-import * as _252 from \\"./lightclients/solomachine/v1/solomachine\\";
-import * as _253 from \\"./lightclients/solomachine/v2/solomachine\\";
-import * as _254 from \\"./lightclients/tendermint/v1/tendermint\\";
+    "code": "import * as _231 from "./applications/transfer/v1/genesis";
+import * as _232 from "./applications/transfer/v1/query";
+import * as _233 from "./applications/transfer/v1/transfer";
+import * as _234 from "./applications/transfer/v1/tx";
+import * as _235 from "./applications/transfer/v2/packet";
+import * as _236 from "./core/channel/v1/channel";
+import * as _237 from "./core/channel/v1/genesis";
+import * as _238 from "./core/channel/v1/query";
+import * as _239 from "./core/channel/v1/tx";
+import * as _240 from "./core/client/v1/client";
+import * as _241 from "./core/client/v1/genesis";
+import * as _242 from "./core/client/v1/query";
+import * as _243 from "./core/client/v1/tx";
+import * as _244 from "./core/commitment/v1/commitment";
+import * as _245 from "./core/connection/v1/connection";
+import * as _246 from "./core/connection/v1/genesis";
+import * as _247 from "./core/connection/v1/query";
+import * as _248 from "./core/connection/v1/tx";
+import * as _249 from "./core/port/v1/query";
+import * as _250 from "./core/types/v1/genesis";
+import * as _251 from "./lightclients/localhost/v1/localhost";
+import * as _252 from "./lightclients/solomachine/v1/solomachine";
+import * as _253 from "./lightclients/solomachine/v2/solomachine";
+import * as _254 from "./lightclients/tendermint/v1/tendermint";
 export namespace ibc {
   export namespace applications {
     export namespace transfer {
@@ -807,60 +807,60 @@ export namespace ibc {
   }
 }",
   },
-  "ics23": Object {
+  "ics23": {
     "base": "ics23",
     "bundle": "ics23/bundle.ts",
-    "code": "import * as _53 from \\"../confio/proofs\\";
+    "code": "import * as _53 from "../confio/proofs";
 export const ics23 = { ..._53
 };",
   },
-  "osmosis": Object {
+  "osmosis": {
     "base": "osmosis",
     "bundle": "osmosis/bundle.ts",
-    "code": "import * as _255 from \\"./claim/v1beta1/claim\\";
-import * as _256 from \\"./claim/v1beta1/genesis\\";
-import * as _257 from \\"./claim/v1beta1/params\\";
-import * as _258 from \\"./claim/v1beta1/query\\";
-import * as _259 from \\"./epochs/genesis\\";
-import * as _260 from \\"./epochs/query\\";
-import * as _261 from \\"./gamm/pool-models/balancer/balancerPool\\";
-import * as _262 from \\"./gamm/v1beta1/genesis\\";
-import * as _263 from \\"./gamm/v1beta1/query\\";
-import * as _264 from \\"./gamm/v1beta1/tx\\";
-import * as _265 from \\"./gamm/pool-models/balancer/tx\\";
-import * as _266 from \\"./gamm/pool-models/stableswap/stableswap_pool\\";
-import * as _267 from \\"./gamm/pool-models/stableswap/tx\\";
-import * as _268 from \\"./incentives/gauge\\";
-import * as _269 from \\"./incentives/genesis\\";
-import * as _270 from \\"./incentives/params\\";
-import * as _271 from \\"./incentives/query\\";
-import * as _272 from \\"./incentives/tx\\";
-import * as _273 from \\"./lockup/genesis\\";
-import * as _274 from \\"./lockup/lock\\";
-import * as _275 from \\"./lockup/query\\";
-import * as _276 from \\"./lockup/tx\\";
-import * as _277 from \\"./mint/v1beta1/genesis\\";
-import * as _278 from \\"./mint/v1beta1/mint\\";
-import * as _279 from \\"./mint/v1beta1/query\\";
-import * as _280 from \\"./pool-incentives/v1beta1/genesis\\";
-import * as _281 from \\"./pool-incentives/v1beta1/gov\\";
-import * as _282 from \\"./pool-incentives/v1beta1/incentives\\";
-import * as _283 from \\"./pool-incentives/v1beta1/query\\";
-import * as _284 from \\"./store/v1beta1/tree\\";
-import * as _285 from \\"./superfluid/genesis\\";
-import * as _286 from \\"./superfluid/params\\";
-import * as _287 from \\"./superfluid/query\\";
-import * as _288 from \\"./superfluid/superfluid\\";
-import * as _289 from \\"./superfluid/tx\\";
-import * as _290 from \\"./tokenfactory/v1beta1/authorityMetadata\\";
-import * as _291 from \\"./tokenfactory/v1beta1/genesis\\";
-import * as _292 from \\"./tokenfactory/v1beta1/params\\";
-import * as _293 from \\"./tokenfactory/v1beta1/query\\";
-import * as _294 from \\"./tokenfactory/v1beta1/tx\\";
-import * as _295 from \\"./txfees/v1beta1/feetoken\\";
-import * as _296 from \\"./txfees/v1beta1/genesis\\";
-import * as _297 from \\"./txfees/v1beta1/gov\\";
-import * as _298 from \\"./txfees/v1beta1/query\\";
+    "code": "import * as _255 from "./claim/v1beta1/claim";
+import * as _256 from "./claim/v1beta1/genesis";
+import * as _257 from "./claim/v1beta1/params";
+import * as _258 from "./claim/v1beta1/query";
+import * as _259 from "./epochs/genesis";
+import * as _260 from "./epochs/query";
+import * as _261 from "./gamm/pool-models/balancer/balancerPool";
+import * as _262 from "./gamm/v1beta1/genesis";
+import * as _263 from "./gamm/v1beta1/query";
+import * as _264 from "./gamm/v1beta1/tx";
+import * as _265 from "./gamm/pool-models/balancer/tx";
+import * as _266 from "./gamm/pool-models/stableswap/stableswap_pool";
+import * as _267 from "./gamm/pool-models/stableswap/tx";
+import * as _268 from "./incentives/gauge";
+import * as _269 from "./incentives/genesis";
+import * as _270 from "./incentives/params";
+import * as _271 from "./incentives/query";
+import * as _272 from "./incentives/tx";
+import * as _273 from "./lockup/genesis";
+import * as _274 from "./lockup/lock";
+import * as _275 from "./lockup/query";
+import * as _276 from "./lockup/tx";
+import * as _277 from "./mint/v1beta1/genesis";
+import * as _278 from "./mint/v1beta1/mint";
+import * as _279 from "./mint/v1beta1/query";
+import * as _280 from "./pool-incentives/v1beta1/genesis";
+import * as _281 from "./pool-incentives/v1beta1/gov";
+import * as _282 from "./pool-incentives/v1beta1/incentives";
+import * as _283 from "./pool-incentives/v1beta1/query";
+import * as _284 from "./store/v1beta1/tree";
+import * as _285 from "./superfluid/genesis";
+import * as _286 from "./superfluid/params";
+import * as _287 from "./superfluid/query";
+import * as _288 from "./superfluid/superfluid";
+import * as _289 from "./superfluid/tx";
+import * as _290 from "./tokenfactory/v1beta1/authorityMetadata";
+import * as _291 from "./tokenfactory/v1beta1/genesis";
+import * as _292 from "./tokenfactory/v1beta1/params";
+import * as _293 from "./tokenfactory/v1beta1/query";
+import * as _294 from "./tokenfactory/v1beta1/tx";
+import * as _295 from "./txfees/v1beta1/feetoken";
+import * as _296 from "./txfees/v1beta1/genesis";
+import * as _297 from "./txfees/v1beta1/gov";
+import * as _298 from "./txfees/v1beta1/query";
 export namespace osmosis {
   export namespace claim {
     export const v1beta1 = { ..._255,
@@ -943,20 +943,20 @@ export namespace osmosis {
   }
 }",
   },
-  "tendermint": Object {
+  "tendermint": {
     "base": "tendermint",
     "bundle": "tendermint/bundle.ts",
-    "code": "import * as _299 from \\"./abci/types\\";
-import * as _300 from \\"./crypto/keys\\";
-import * as _301 from \\"./crypto/proof\\";
-import * as _302 from \\"./libs/bits/types\\";
-import * as _303 from \\"./p2p/types\\";
-import * as _304 from \\"./types/block\\";
-import * as _305 from \\"./types/evidence\\";
-import * as _306 from \\"./types/params\\";
-import * as _307 from \\"./types/types\\";
-import * as _308 from \\"./types/validator\\";
-import * as _309 from \\"./version/types\\";
+    "code": "import * as _299 from "./abci/types";
+import * as _300 from "./crypto/keys";
+import * as _301 from "./crypto/proof";
+import * as _302 from "./libs/bits/types";
+import * as _303 from "./p2p/types";
+import * as _304 from "./types/block";
+import * as _305 from "./types/evidence";
+import * as _306 from "./types/params";
+import * as _307 from "./types/types";
+import * as _308 from "./types/validator";
+import * as _309 from "./version/types";
 export namespace tendermint {
   export const abci = { ..._299
   };
