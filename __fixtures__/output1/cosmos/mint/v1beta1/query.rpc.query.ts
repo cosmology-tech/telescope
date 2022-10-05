@@ -6,13 +6,13 @@ import { QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, Que
 
 /** Query provides defines the gRPC querier service. */
 export interface Query {
-  /*Params returns the total set of minting parameters.*/
+  /** Params returns the total set of minting parameters. */
   params(request?: QueryParamsRequest): Promise<QueryParamsResponse>;
 
-  /*Inflation returns the current minting inflation value.*/
+  /** Inflation returns the current minting inflation value. */
   inflation(request?: QueryInflationRequest): Promise<QueryInflationResponse>;
 
-  /*AnnualProvisions current minting annual provisions value.*/
+  /** AnnualProvisions current minting annual provisions value. */
   annualProvisions(request?: QueryAnnualProvisionsRequest): Promise<QueryAnnualProvisionsResponse>;
 }
 export class QueryClientImpl implements Query {

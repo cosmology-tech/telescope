@@ -1,5 +1,5 @@
 import * as t from '@babel/types';
-import { arrowFunctionExpression, classDeclaration, classMethod, classProperty, commentBlock, identifier, tsMethodSignature } from '../../../utils';
+import { arrowFunctionExpression, classDeclaration, classMethod, classProperty, cleanComment, commentBlock, identifier, tsMethodSignature } from '../../../utils';
 import { ProtoService, ProtoServiceMethod } from '@osmonauts/types';
 import { GenericParseContext } from '../../../encoding';
 import { camel } from '@osmonauts/utils';
@@ -313,6 +313,32 @@ const rpcClassConstructor = (
     );
 };
 
+const ensureOneSpace = (str) => {
+    if (/^[\s\n\t]+/.test(str)) return str;
+    return ` ${str}`;
+}
+const ensureOneSpaceEnd = (str) => {
+    if (/[\s\n\t]$/.test(str)) return str;
+    return `${str} `;
+}
+
+const processRpcComment = (e: ProtoServiceMethod) => {
+    const comment = e.comment;
+    if (!comment) return '';
+    if (!/[\n]+/.test(comment)) {
+        return `*${ensureOneSpaceEnd(ensureOneSpace(cleanComment(comment)))}`
+    }
+    let lines = comment.split('\n');
+    lines = ['*', ...lines, ' '];
+    const comments = lines.map((line, i) => {
+        if (i == 0) return line;
+        if (i == (lines.length - 1)) return cleanComment(line);
+        return ` *${ensureOneSpace(cleanComment(line))}`
+    });
+    return comments.join('\n');
+};
+
+
 export const createRpcClientInterface = (
     context: GenericParseContext,
     service: ProtoService
@@ -323,7 +349,7 @@ export const createRpcClientInterface = (
         .map((key) => {
             const method = service.methods[key];
             const name = camelRpcMethods ? camel(key) : key;
-            const leadingComments = [commentBlock(method.comment)];
+            const leadingComments = method.comment ? [commentBlock(processRpcComment(method))] : [];
             let trailingComments = [];
             return rpcMethodDefinition(
                 name,

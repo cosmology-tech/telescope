@@ -8,34 +8,40 @@ import { QueryBalanceRequest, QueryBalanceRequestSDKType, QueryBalanceResponse, 
 
 /** Query defines the gRPC querier service. */
 export interface Query {
-  /*Balance queries the balance of a single coin for a single account.*/
+  /** Balance queries the balance of a single coin for a single account. */
   balance(request: QueryBalanceRequest): Promise<QueryBalanceResponse>;
 
-  /*AllBalances queries the balance of all coins for a single account.*/
+  /** AllBalances queries the balance of all coins for a single account. */
   allBalances(request: QueryAllBalancesRequest): Promise<QueryAllBalancesResponse>;
 
-  /*SpendableBalances queries the spenable balance of all coins for a single
-   account.*/
+  /**
+   * SpendableBalances queries the spenable balance of all coins for a single
+   * account.
+   */
   spendableBalances(request: QuerySpendableBalancesRequest): Promise<QuerySpendableBalancesResponse>;
 
-  /*TotalSupply queries the total supply of all coins.*/
+  /** TotalSupply queries the total supply of all coins. */
   totalSupply(request?: QueryTotalSupplyRequest): Promise<QueryTotalSupplyResponse>;
 
-  /*SupplyOf queries the supply of a single coin.*/
+  /** SupplyOf queries the supply of a single coin. */
   supplyOf(request: QuerySupplyOfRequest): Promise<QuerySupplyOfResponse>;
 
-  /*Params queries the parameters of x/bank module.*/
+  /** Params queries the parameters of x/bank module. */
   params(request?: QueryParamsRequest): Promise<QueryParamsResponse>;
 
-  /*DenomsMetadata queries the client metadata of a given coin denomination.*/
+  /** DenomsMetadata queries the client metadata of a given coin denomination. */
   denomMetadata(request: QueryDenomMetadataRequest): Promise<QueryDenomMetadataResponse>;
 
-  /*DenomsMetadata queries the client metadata for all registered coin
-   denominations.*/
+  /**
+   * DenomsMetadata queries the client metadata for all registered coin
+   * denominations.
+   */
   denomsMetadata(request?: QueryDenomsMetadataRequest): Promise<QueryDenomsMetadataResponse>;
 
-  /*DenomOwners queries for all account addresses that own a particular token
-   denomination.*/
+  /**
+   * DenomOwners queries for all account addresses that own a particular token
+   * denomination.
+   */
   denomOwners(request: QueryDenomOwnersRequest): Promise<QueryDenomOwnersResponse>;
 }
 export class QueryClientImpl implements Query {

@@ -9,54 +9,58 @@ import { ModuleBalanceRequest, ModuleBalanceRequestSDKType, ModuleBalanceRespons
 
 /** Query defines the gRPC querier service. */
 export interface Query {
-  /*Return full balance of the module*/
+  /** Return full balance of the module */
   moduleBalance(request?: ModuleBalanceRequest): Promise<ModuleBalanceResponse>;
 
-  /*Return locked balance of the module*/
+  /** Return locked balance of the module */
   moduleLockedAmount(request?: ModuleLockedAmountRequest): Promise<ModuleLockedAmountResponse>;
 
-  /*Returns unlockable coins which are not withdrawn yet*/
+  /** Returns unlockable coins which are not withdrawn yet */
   accountUnlockableCoins(request: AccountUnlockableCoinsRequest): Promise<AccountUnlockableCoinsResponse>;
 
-  /*Returns unlocking coins*/
+  /** Returns unlocking coins */
   accountUnlockingCoins(request: AccountUnlockingCoinsRequest): Promise<AccountUnlockingCoinsResponse>;
 
-  /*Return a locked coins that can't be withdrawn*/
+  /** Return a locked coins that can't be withdrawn */
   accountLockedCoins(request: AccountLockedCoinsRequest): Promise<AccountLockedCoinsResponse>;
 
-  /*Returns locked records of an account with unlock time beyond timestamp*/
+  /** Returns locked records of an account with unlock time beyond timestamp */
   accountLockedPastTime(request: AccountLockedPastTimeRequest): Promise<AccountLockedPastTimeResponse>;
 
-  /*Returns locked records of an account with unlock time beyond timestamp
-   excluding tokens started unlocking*/
+  /**
+   * Returns locked records of an account with unlock time beyond timestamp
+   * excluding tokens started unlocking
+   */
   accountLockedPastTimeNotUnlockingOnly(request: AccountLockedPastTimeNotUnlockingOnlyRequest): Promise<AccountLockedPastTimeNotUnlockingOnlyResponse>;
 
-  /*Returns unlocked records with unlock time before timestamp*/
+  /** Returns unlocked records with unlock time before timestamp */
   accountUnlockedBeforeTime(request: AccountUnlockedBeforeTimeRequest): Promise<AccountUnlockedBeforeTimeResponse>;
 
-  /*Returns lock records by address, timestamp, denom*/
+  /** Returns lock records by address, timestamp, denom */
   accountLockedPastTimeDenom(request: AccountLockedPastTimeDenomRequest): Promise<AccountLockedPastTimeDenomResponse>;
 
-  /*Returns total locked per denom with longer past given time*/
+  /** Returns total locked per denom with longer past given time */
   lockedDenom(request: LockedDenomRequest): Promise<LockedDenomResponse>;
 
-  /*Returns lock record by id*/
+  /** Returns lock record by id */
   lockedByID(request: LockedRequest): Promise<LockedResponse>;
 
-  /*Returns synthetic lockups by native lockup id*/
+  /** Returns synthetic lockups by native lockup id */
   syntheticLockupsByLockupID(request: SyntheticLockupsByLockupIDRequest): Promise<SyntheticLockupsByLockupIDResponse>;
 
-  /*Returns account locked records with longer duration*/
+  /** Returns account locked records with longer duration */
   accountLockedLongerDuration(request: AccountLockedLongerDurationRequest): Promise<AccountLockedLongerDurationResponse>;
 
-  /*Returns account locked records with a specific duration*/
+  /** Returns account locked records with a specific duration */
   accountLockedDuration(request: AccountLockedDurationRequest): Promise<AccountLockedDurationResponse>;
 
-  /*Returns account locked records with longer duration excluding tokens
-   started unlocking*/
+  /**
+   * Returns account locked records with longer duration excluding tokens
+   * started unlocking
+   */
   accountLockedLongerDurationNotUnlockingOnly(request: AccountLockedLongerDurationNotUnlockingOnlyRequest): Promise<AccountLockedLongerDurationNotUnlockingOnlyResponse>;
 
-  /*Returns account's locked records for a denom with longer duration*/
+  /** Returns account's locked records for a denom with longer duration */
   accountLockedLongerDurationDenom(request: AccountLockedLongerDurationDenomRequest): Promise<AccountLockedLongerDurationDenomResponse>;
 }
 export class QueryClientImpl implements Query {

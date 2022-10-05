@@ -6,7 +6,7 @@ import { QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, Que
 
 /** Query defines the gRPC querier service. */
 export interface Query {
-  /*Params retrieves the total set of recovery parameters.*/
+  /** Params retrieves the total set of recovery parameters. */
   params(request?: QueryParamsRequest): Promise<QueryParamsResponse>;
 }
 export class QueryClientImpl implements Query {

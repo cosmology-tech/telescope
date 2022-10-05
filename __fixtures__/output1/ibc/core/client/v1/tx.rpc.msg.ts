@@ -5,16 +5,16 @@ import { MsgCreateClient, MsgCreateClientSDKType, MsgCreateClientResponse, MsgCr
 
 /** Msg defines the ibc/client Msg service. */
 export interface Msg {
-  /*CreateClient defines a rpc handler method for MsgCreateClient.*/
+  /** CreateClient defines a rpc handler method for MsgCreateClient. */
   createClient(request: MsgCreateClient): Promise<MsgCreateClientResponse>;
 
-  /*UpdateClient defines a rpc handler method for MsgUpdateClient.*/
+  /** UpdateClient defines a rpc handler method for MsgUpdateClient. */
   updateClient(request: MsgUpdateClient): Promise<MsgUpdateClientResponse>;
 
-  /*UpgradeClient defines a rpc handler method for MsgUpgradeClient.*/
+  /** UpgradeClient defines a rpc handler method for MsgUpgradeClient. */
   upgradeClient(request: MsgUpgradeClient): Promise<MsgUpgradeClientResponse>;
 
-  /*SubmitMisbehaviour defines a rpc handler method for MsgSubmitMisbehaviour.*/
+  /** SubmitMisbehaviour defines a rpc handler method for MsgSubmitMisbehaviour. */
   submitMisbehaviour(request: MsgSubmitMisbehaviour): Promise<MsgSubmitMisbehaviourResponse>;
 }
 export class MsgClientImpl implements Msg {

@@ -7,10 +7,10 @@ import { QueryEvidenceRequest, QueryEvidenceRequestSDKType, QueryEvidenceRespons
 
 /** Query defines the gRPC querier service. */
 export interface Query {
-  /*Evidence queries evidence based on evidence hash.*/
+  /** Evidence queries evidence based on evidence hash. */
   evidence(request: QueryEvidenceRequest): Promise<QueryEvidenceResponse>;
 
-  /*AllEvidence queries all evidence.*/
+  /** AllEvidence queries all evidence. */
   allEvidence(request?: QueryAllEvidenceRequest): Promise<QueryAllEvidenceResponse>;
 }
 export class QueryClientImpl implements Query {

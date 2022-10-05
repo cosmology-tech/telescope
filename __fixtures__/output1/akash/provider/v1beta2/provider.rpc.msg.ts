@@ -5,13 +5,13 @@ import { MsgCreateProvider, MsgCreateProviderSDKType, MsgCreateProviderResponse,
 
 /** Msg defines the provider Msg service */
 export interface Msg {
-  /*CreateProvider defines a method that creates a provider given the proper inputs*/
+  /** CreateProvider defines a method that creates a provider given the proper inputs */
   createProvider(request: MsgCreateProvider): Promise<MsgCreateProviderResponse>;
 
-  /*UpdateProvider defines a method that updates a provider given the proper inputs*/
+  /** UpdateProvider defines a method that updates a provider given the proper inputs */
   updateProvider(request: MsgUpdateProvider): Promise<MsgUpdateProviderResponse>;
 
-  /*DeleteProvider defines a method that deletes a provider given the proper inputs*/
+  /** DeleteProvider defines a method that deletes a provider given the proper inputs */
   deleteProvider(request: MsgDeleteProvider): Promise<MsgDeleteProviderResponse>;
 }
 export class MsgClientImpl implements Msg {

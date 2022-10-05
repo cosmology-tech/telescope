@@ -5,20 +5,20 @@ import { MsgSuperfluidDelegate, MsgSuperfluidDelegateSDKType, MsgSuperfluidDeleg
 
 /** Msg defines the Msg service. */
 export interface Msg {
-  /*Execute superfluid delegation for a lockup*/
+  /** Execute superfluid delegation for a lockup */
   superfluidDelegate(request: MsgSuperfluidDelegate): Promise<MsgSuperfluidDelegateResponse>;
 
-  /*Execute superfluid undelegation for a lockup*/
+  /** Execute superfluid undelegation for a lockup */
   superfluidUndelegate(request: MsgSuperfluidUndelegate): Promise<MsgSuperfluidUndelegateResponse>;
 
-  /*For a given lock that is being superfluidly undelegated,
-   also unbond the underlying lock.*/
+  /**
+   * For a given lock that is being superfluidly undelegated,
+   * also unbond the underlying lock.
+   */
   superfluidUnbondLock(request: MsgSuperfluidUnbondLock): Promise<MsgSuperfluidUnbondLockResponse>;
 
-  /*Execute lockup lock and superfluid delegation in a single msg*/
+  /** Execute lockup lock and superfluid delegation in a single msg */
   lockAndSuperfluidDelegate(request: MsgLockAndSuperfluidDelegate): Promise<MsgLockAndSuperfluidDelegateResponse>;
-
-  /*null*/
   unPoolWhitelistedPool(request: MsgUnPoolWhitelistedPool): Promise<MsgUnPoolWhitelistedPoolResponse>;
 }
 export class MsgClientImpl implements Msg {

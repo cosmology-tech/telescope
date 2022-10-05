@@ -4,7 +4,7 @@ import { MsgVerifyInvariant, MsgVerifyInvariantSDKType, MsgVerifyInvariantRespon
 
 /** Msg defines the bank Msg service. */
 export interface Msg {
-  /*VerifyInvariant defines a method to verify a particular invariance.*/
+  /** VerifyInvariant defines a method to verify a particular invariance. */
   verifyInvariant(request: MsgVerifyInvariant): Promise<MsgVerifyInvariantResponse>;
 }
 export class MsgClientImpl implements Msg {

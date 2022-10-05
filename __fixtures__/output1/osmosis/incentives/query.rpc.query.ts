@@ -9,36 +9,38 @@ import { ModuleToDistributeCoinsRequest, ModuleToDistributeCoinsRequestSDKType, 
 
 /** Query defines the gRPC querier service. */
 export interface Query {
-  /*returns coins that is going to be distributed*/
+  /** returns coins that is going to be distributed */
   moduleToDistributeCoins(request?: ModuleToDistributeCoinsRequest): Promise<ModuleToDistributeCoinsResponse>;
 
-  /*returns coins that are distributed by module so far*/
+  /** returns coins that are distributed by module so far */
   moduleDistributedCoins(request?: ModuleDistributedCoinsRequest): Promise<ModuleDistributedCoinsResponse>;
 
-  /*returns Gauge by id*/
+  /** returns Gauge by id */
   gaugeByID(request: GaugeByIDRequest): Promise<GaugeByIDResponse>;
 
-  /*returns gauges both upcoming and active*/
+  /** returns gauges both upcoming and active */
   gauges(request?: GaugesRequest): Promise<GaugesResponse>;
 
-  /*returns active gauges*/
+  /** returns active gauges */
   activeGauges(request?: ActiveGaugesRequest): Promise<ActiveGaugesResponse>;
 
-  /*returns active gauges per denom*/
+  /** returns active gauges per denom */
   activeGaugesPerDenom(request: ActiveGaugesPerDenomRequest): Promise<ActiveGaugesPerDenomResponse>;
 
-  /*returns scheduled gauges*/
+  /** returns scheduled gauges */
   upcomingGauges(request?: UpcomingGaugesRequest): Promise<UpcomingGaugesResponse>;
 
-  /*returns scheduled gauges per denom*/
+  /** returns scheduled gauges per denom */
   upcomingGaugesPerDenom(request: UpcomingGaugesPerDenomRequest): Promise<UpcomingGaugesPerDenomResponse>;
 
-  /*RewardsEst returns an estimate of the rewards at a future specific time.
-   The querier either provides an address or a set of locks
-   for which they want to find the associated rewards.*/
+  /**
+   * RewardsEst returns an estimate of the rewards at a future specific time.
+   * The querier either provides an address or a set of locks
+   * for which they want to find the associated rewards.
+   */
   rewardsEst(request: RewardsEstRequest): Promise<RewardsEstResponse>;
 
-  /*returns lockable durations that are valid to give incentives*/
+  /** returns lockable durations that are valid to give incentives */
   lockableDurations(request?: QueryLockableDurationsRequest): Promise<QueryLockableDurationsResponse>;
 }
 export class QueryClientImpl implements Query {

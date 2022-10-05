@@ -4,7 +4,7 @@ import { MsgSend, MsgSendSDKType, MsgSendResponse, MsgSendResponseSDKType } from
 
 /** Msg defines the nft Msg service. */
 export interface Msg {
-  /*Send defines a method to send a nft from one account to another account.*/
+  /** Send defines a method to send a nft from one account to another account. */
   send(request: MsgSend): Promise<MsgSendResponse>;
 }
 export class MsgClientImpl implements Msg {

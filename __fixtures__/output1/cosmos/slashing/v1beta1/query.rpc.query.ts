@@ -7,13 +7,13 @@ import { QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, Que
 
 /** Query provides defines the gRPC querier service */
 export interface Query {
-  /*Params queries the parameters of slashing module*/
+  /** Params queries the parameters of slashing module */
   params(request?: QueryParamsRequest): Promise<QueryParamsResponse>;
 
-  /*SigningInfo queries the signing info of given cons address*/
+  /** SigningInfo queries the signing info of given cons address */
   signingInfo(request: QuerySigningInfoRequest): Promise<QuerySigningInfoResponse>;
 
-  /*SigningInfos queries signing info of all validators*/
+  /** SigningInfos queries signing info of all validators */
   signingInfos(request?: QuerySigningInfosRequest): Promise<QuerySigningInfosResponse>;
 }
 export class QueryClientImpl implements Query {

@@ -5,12 +5,16 @@ import { MsgConvertCoin, MsgConvertCoinSDKType, MsgConvertCoinResponse, MsgConve
 
 /** Msg defines the erc20 Msg service. */
 export interface Msg {
-  /*ConvertCoin mints a ERC20 representation of the native Cosmos coin denom
-   that is registered on the token mapping.*/
+  /**
+   * ConvertCoin mints a ERC20 representation of the native Cosmos coin denom
+   * that is registered on the token mapping.
+   */
   convertCoin(request: MsgConvertCoin): Promise<MsgConvertCoinResponse>;
 
-  /*ConvertERC20 mints a native Cosmos coin representation of the ERC20 token
-   contract that is registered on the token mapping.*/
+  /**
+   * ConvertERC20 mints a native Cosmos coin representation of the ERC20 token
+   * contract that is registered on the token mapping.
+   */
   convertERC20(request: MsgConvertERC20): Promise<MsgConvertERC20Response>;
 }
 export class MsgClientImpl implements Msg {

@@ -10,13 +10,13 @@ import { QueryDeploymentsRequest, QueryDeploymentsRequestSDKType, QueryDeploymen
 
 /** Query defines the gRPC querier service */
 export interface Query {
-  /*Deployments queries deployments*/
+  /** Deployments queries deployments */
   deployments(request: QueryDeploymentsRequest): Promise<QueryDeploymentsResponse>;
 
-  /*Deployment queries deployment details*/
+  /** Deployment queries deployment details */
   deployment(request: QueryDeploymentRequest): Promise<QueryDeploymentResponse>;
 
-  /*Group queries group details*/
+  /** Group queries group details */
   group(request: QueryGroupRequest): Promise<QueryGroupResponse>;
 }
 export class QueryClientImpl implements Query {

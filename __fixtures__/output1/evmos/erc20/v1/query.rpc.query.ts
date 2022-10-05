@@ -8,13 +8,13 @@ import { QueryTokenPairsRequest, QueryTokenPairsRequestSDKType, QueryTokenPairsR
 
 /** Query defines the gRPC querier service. */
 export interface Query {
-  /*TokenPairs retrieves registered token pairs*/
+  /** TokenPairs retrieves registered token pairs */
   tokenPairs(request?: QueryTokenPairsRequest): Promise<QueryTokenPairsResponse>;
 
-  /*TokenPair retrieves a registered token pair*/
+  /** TokenPair retrieves a registered token pair */
   tokenPair(request: QueryTokenPairRequest): Promise<QueryTokenPairResponse>;
 
-  /*Params retrieves the erc20 module params*/
+  /** Params retrieves the erc20 module params */
   params(request?: QueryParamsRequest): Promise<QueryParamsResponse>;
 }
 export class QueryClientImpl implements Query {

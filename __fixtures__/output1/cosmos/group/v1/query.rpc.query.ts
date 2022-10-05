@@ -7,43 +7,43 @@ import { QueryGroupInfoRequest, QueryGroupInfoRequestSDKType, QueryGroupInfoResp
 
 /** Query is the cosmos.group.v1 Query service. */
 export interface Query {
-  /*GroupInfo queries group info based on group id.*/
+  /** GroupInfo queries group info based on group id. */
   groupInfo(request: QueryGroupInfoRequest): Promise<QueryGroupInfoResponse>;
 
-  /*GroupPolicyInfo queries group policy info based on account address of group policy.*/
+  /** GroupPolicyInfo queries group policy info based on account address of group policy. */
   groupPolicyInfo(request: QueryGroupPolicyInfoRequest): Promise<QueryGroupPolicyInfoResponse>;
 
-  /*GroupMembers queries members of a group*/
+  /** GroupMembers queries members of a group */
   groupMembers(request: QueryGroupMembersRequest): Promise<QueryGroupMembersResponse>;
 
-  /*GroupsByAdmin queries groups by admin address.*/
+  /** GroupsByAdmin queries groups by admin address. */
   groupsByAdmin(request: QueryGroupsByAdminRequest): Promise<QueryGroupsByAdminResponse>;
 
-  /*GroupPoliciesByGroup queries group policies by group id.*/
+  /** GroupPoliciesByGroup queries group policies by group id. */
   groupPoliciesByGroup(request: QueryGroupPoliciesByGroupRequest): Promise<QueryGroupPoliciesByGroupResponse>;
 
-  /*GroupsByAdmin queries group policies by admin address.*/
+  /** GroupsByAdmin queries group policies by admin address. */
   groupPoliciesByAdmin(request: QueryGroupPoliciesByAdminRequest): Promise<QueryGroupPoliciesByAdminResponse>;
 
-  /*Proposal queries a proposal based on proposal id.*/
+  /** Proposal queries a proposal based on proposal id. */
   proposal(request: QueryProposalRequest): Promise<QueryProposalResponse>;
 
-  /*ProposalsByGroupPolicy queries proposals based on account address of group policy.*/
+  /** ProposalsByGroupPolicy queries proposals based on account address of group policy. */
   proposalsByGroupPolicy(request: QueryProposalsByGroupPolicyRequest): Promise<QueryProposalsByGroupPolicyResponse>;
 
-  /*VoteByProposalVoter queries a vote by proposal id and voter.*/
+  /** VoteByProposalVoter queries a vote by proposal id and voter. */
   voteByProposalVoter(request: QueryVoteByProposalVoterRequest): Promise<QueryVoteByProposalVoterResponse>;
 
-  /*VotesByProposal queries a vote by proposal.*/
+  /** VotesByProposal queries a vote by proposal. */
   votesByProposal(request: QueryVotesByProposalRequest): Promise<QueryVotesByProposalResponse>;
 
-  /*VotesByVoter queries a vote by voter.*/
+  /** VotesByVoter queries a vote by voter. */
   votesByVoter(request: QueryVotesByVoterRequest): Promise<QueryVotesByVoterResponse>;
 
-  /*GroupsByMember queries groups by member address.*/
+  /** GroupsByMember queries groups by member address. */
   groupsByMember(request: QueryGroupsByMemberRequest): Promise<QueryGroupsByMemberResponse>;
 
-  /*TallyResult queries the tally of a proposal votes.*/
+  /** TallyResult queries the tally of a proposal votes. */
   tallyResult(request: QueryTallyResultRequest): Promise<QueryTallyResultResponse>;
 }
 export class QueryClientImpl implements Query {

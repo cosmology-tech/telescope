@@ -6,10 +6,10 @@ import { QueryEpochsInfoRequest, QueryEpochsInfoRequestSDKType, QueryEpochsInfoR
 
 /** Query defines the gRPC querier service. */
 export interface Query {
-  /*EpochInfos provide running epochInfos*/
+  /** EpochInfos provide running epochInfos */
   epochInfos(request?: QueryEpochsInfoRequest): Promise<QueryEpochsInfoResponse>;
 
-  /*CurrentEpoch provide current epoch of specified identifier*/
+  /** CurrentEpoch provide current epoch of specified identifier */
   currentEpoch(request: QueryCurrentEpochRequest): Promise<QueryCurrentEpochResponse>;
 }
 export class QueryClientImpl implements Query {

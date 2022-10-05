@@ -7,13 +7,13 @@ import { QueryDenomTraceRequest, QueryDenomTraceRequestSDKType, QueryDenomTraceR
 
 /** Query provides defines the gRPC querier service. */
 export interface Query {
-  /*DenomTrace queries a denomination trace information.*/
+  /** DenomTrace queries a denomination trace information. */
   denomTrace(request: QueryDenomTraceRequest): Promise<QueryDenomTraceResponse>;
 
-  /*DenomTraces queries all denomination traces.*/
+  /** DenomTraces queries all denomination traces. */
   denomTraces(request?: QueryDenomTracesRequest): Promise<QueryDenomTracesResponse>;
 
-  /*Params queries all parameters of the ibc-transfer module.*/
+  /** Params queries all parameters of the ibc-transfer module. */
   params(request?: QueryParamsRequest): Promise<QueryParamsResponse>;
 }
 export class QueryClientImpl implements Query {

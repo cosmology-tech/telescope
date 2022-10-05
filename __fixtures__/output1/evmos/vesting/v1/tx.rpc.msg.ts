@@ -6,11 +6,13 @@ import { MsgCreateClawbackVestingAccount, MsgCreateClawbackVestingAccountSDKType
 
 /** Msg defines the vesting Msg service. */
 export interface Msg {
-  /*CreateClawbackVestingAccount creats a vesting account that is subject to
-   clawback and the configuration of vesting and lockup schedules.*/
+  /**
+   * CreateClawbackVestingAccount creats a vesting account that is subject to
+   * clawback and the configuration of vesting and lockup schedules.
+   */
   createClawbackVestingAccount(request: MsgCreateClawbackVestingAccount): Promise<MsgCreateClawbackVestingAccountResponse>;
 
-  /*Clawback removes the unvested tokens from a ClawbackVestingAccount.*/
+  /** Clawback removes the unvested tokens from a ClawbackVestingAccount. */
   clawback(request: MsgClawback): Promise<MsgClawbackResponse>;
 }
 export class MsgClientImpl implements Msg {

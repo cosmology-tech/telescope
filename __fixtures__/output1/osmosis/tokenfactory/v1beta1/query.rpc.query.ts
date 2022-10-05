@@ -7,13 +7,9 @@ import { QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, Que
 
 /** Query defines the gRPC querier service. */
 export interface Query {
-  /*Params returns the total set of minting parameters.*/
+  /** Params returns the total set of minting parameters. */
   params(request?: QueryParamsRequest): Promise<QueryParamsResponse>;
-
-  /*null*/
   denomAuthorityMetadata(request: QueryDenomAuthorityMetadataRequest): Promise<QueryDenomAuthorityMetadataResponse>;
-
-  /*null*/
   denomsFromCreator(request: QueryDenomsFromCreatorRequest): Promise<QueryDenomsFromCreatorResponse>;
 }
 export class QueryClientImpl implements Query {

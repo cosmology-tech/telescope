@@ -10,22 +10,22 @@ import { QueryOrdersRequest, QueryOrdersRequestSDKType, QueryOrdersResponse, Que
 
 /** Query defines the gRPC querier service */
 export interface Query {
-  /*Orders queries orders with filters*/
+  /** Orders queries orders with filters */
   orders(request: QueryOrdersRequest): Promise<QueryOrdersResponse>;
 
-  /*Order queries order details*/
+  /** Order queries order details */
   order(request: QueryOrderRequest): Promise<QueryOrderResponse>;
 
-  /*Bids queries bids with filters*/
+  /** Bids queries bids with filters */
   bids(request: QueryBidsRequest): Promise<QueryBidsResponse>;
 
-  /*Bid queries bid details*/
+  /** Bid queries bid details */
   bid(request: QueryBidRequest): Promise<QueryBidResponse>;
 
-  /*Leases queries leases with filters*/
+  /** Leases queries leases with filters */
   leases(request: QueryLeasesRequest): Promise<QueryLeasesResponse>;
 
-  /*Lease queries lease details*/
+  /** Lease queries lease details */
   lease(request: QueryLeaseRequest): Promise<QueryLeaseResponse>;
 }
 export class QueryClientImpl implements Query {

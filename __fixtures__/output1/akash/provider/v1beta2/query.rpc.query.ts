@@ -7,10 +7,10 @@ import { QueryProvidersRequest, QueryProvidersRequestSDKType, QueryProvidersResp
 
 /** Query defines the gRPC querier service */
 export interface Query {
-  /*Providers queries providers*/
+  /** Providers queries providers */
   providers(request?: QueryProvidersRequest): Promise<QueryProvidersResponse>;
 
-  /*Provider queries provider details*/
+  /** Provider queries provider details */
   provider(request: QueryProviderRequest): Promise<QueryProviderResponse>;
 }
 export class QueryClientImpl implements Query {

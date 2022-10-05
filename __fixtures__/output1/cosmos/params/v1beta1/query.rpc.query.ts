@@ -6,11 +6,13 @@ import { QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, Que
 
 /** Query defines the gRPC querier service. */
 export interface Query {
-  /*Params queries a specific parameter of a module, given its subspace and
-   key.*/
+  /**
+   * Params queries a specific parameter of a module, given its subspace and
+   * key.
+   */
   params(request: QueryParamsRequest): Promise<QueryParamsResponse>;
 
-  /*Subspaces queries for all registered subspaces and all keys for a subspace.*/
+  /** Subspaces queries for all registered subspaces and all keys for a subspace. */
   subspaces(request?: QuerySubspacesRequest): Promise<QuerySubspacesResponse>;
 }
 export class QueryClientImpl implements Query {

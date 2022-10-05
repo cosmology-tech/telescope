@@ -6,7 +6,7 @@ import { MsgTransfer, MsgTransferSDKType, MsgTransferResponse, MsgTransferRespon
 
 /** Msg defines the ibc/transfer Msg service. */
 export interface Msg {
-  /*Transfer defines a rpc handler method for MsgTransfer.*/
+  /** Transfer defines a rpc handler method for MsgTransfer. */
   transfer(request: MsgTransfer): Promise<MsgTransferResponse>;
 }
 export class MsgClientImpl implements Msg {

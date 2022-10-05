@@ -4,15 +4,19 @@ import { MsgRegisterDevFeeInfo, MsgRegisterDevFeeInfoSDKType, MsgRegisterDevFeeI
 
 /** Msg defines the fees Msg service. */
 export interface Msg {
-  /*RegisterDevFeeInfo is used by a deployer to register a new contract for
-   receiving transaction fees*/
+  /**
+   * RegisterDevFeeInfo is used by a deployer to register a new contract for
+   * receiving transaction fees
+   */
   registerDevFeeInfo(request: MsgRegisterDevFeeInfo): Promise<MsgRegisterDevFeeInfoResponse>;
 
-  /*CancelDevFeeInfo is used by a deployer to cancel a registered contract
-   and stop receiving transaction fees*/
+  /**
+   * CancelDevFeeInfo is used by a deployer to cancel a registered contract
+   * and stop receiving transaction fees
+   */
   cancelDevFeeInfo(request: MsgCancelDevFeeInfo): Promise<MsgCancelDevFeeInfoResponse>;
 
-  /*UpdateDevFeeInfo is used by a deployer to update the withdraw address*/
+  /** UpdateDevFeeInfo is used by a deployer to update the withdraw address */
   updateDevFeeInfo(request: MsgUpdateDevFeeInfo): Promise<MsgUpdateDevFeeInfoResponse>;
 }
 export class MsgClientImpl implements Msg {

@@ -8,17 +8,19 @@ import { QueryDevFeeInfosRequest, QueryDevFeeInfosRequestSDKType, QueryDevFeeInf
 
 /** Query defines the gRPC querier service. */
 export interface Query {
-  /*DevFeeInfos retrieves all registered contracts for fee distribution*/
+  /** DevFeeInfos retrieves all registered contracts for fee distribution */
   devFeeInfos(request?: QueryDevFeeInfosRequest): Promise<QueryDevFeeInfosResponse>;
 
-  /*DevFeeInfo retrieves a registered contract for fee distribution*/
+  /** DevFeeInfo retrieves a registered contract for fee distribution */
   devFeeInfo(request: QueryDevFeeInfoRequest): Promise<QueryDevFeeInfoResponse>;
 
-  /*Params retrieves the fees module params*/
+  /** Params retrieves the fees module params */
   params(request?: QueryParamsRequest): Promise<QueryParamsResponse>;
 
-  /*DevFeeInfosPerDeployer retrieves all contracts that a deployer has
-   registered for fee distribution*/
+  /**
+   * DevFeeInfosPerDeployer retrieves all contracts that a deployer has
+   * registered for fee distribution
+   */
   devFeeInfosPerDeployer(request: QueryDevFeeInfosPerDeployerRequest): Promise<QueryDevFeeInfosPerDeployerResponse>;
 }
 export class QueryClientImpl implements Query {

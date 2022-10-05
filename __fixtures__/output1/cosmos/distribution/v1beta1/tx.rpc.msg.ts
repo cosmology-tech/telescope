@@ -5,20 +5,28 @@ import { MsgSetWithdrawAddress, MsgSetWithdrawAddressSDKType, MsgSetWithdrawAddr
 
 /** Msg defines the distribution Msg service. */
 export interface Msg {
-  /*SetWithdrawAddress defines a method to change the withdraw address
-   for a delegator (or validator self-delegation).*/
+  /**
+   * SetWithdrawAddress defines a method to change the withdraw address
+   * for a delegator (or validator self-delegation).
+   */
   setWithdrawAddress(request: MsgSetWithdrawAddress): Promise<MsgSetWithdrawAddressResponse>;
 
-  /*WithdrawDelegatorReward defines a method to withdraw rewards of delegator
-   from a single validator.*/
+  /**
+   * WithdrawDelegatorReward defines a method to withdraw rewards of delegator
+   * from a single validator.
+   */
   withdrawDelegatorReward(request: MsgWithdrawDelegatorReward): Promise<MsgWithdrawDelegatorRewardResponse>;
 
-  /*WithdrawValidatorCommission defines a method to withdraw the
-   full commission to the validator address.*/
+  /**
+   * WithdrawValidatorCommission defines a method to withdraw the
+   * full commission to the validator address.
+   */
   withdrawValidatorCommission(request: MsgWithdrawValidatorCommission): Promise<MsgWithdrawValidatorCommissionResponse>;
 
-  /*FundCommunityPool defines a method to allow an account to directly
-   fund the community pool.*/
+  /**
+   * FundCommunityPool defines a method to allow an account to directly
+   * fund the community pool.
+   */
   fundCommunityPool(request: MsgFundCommunityPool): Promise<MsgFundCommunityPoolResponse>;
 }
 export class MsgClientImpl implements Msg {

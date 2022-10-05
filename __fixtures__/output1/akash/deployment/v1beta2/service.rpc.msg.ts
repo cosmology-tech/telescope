@@ -9,25 +9,25 @@ import { MsgCloseGroup, MsgCloseGroupSDKType, MsgCloseGroupResponse, MsgCloseGro
 
 /** Msg defines the deployment Msg service. */
 export interface Msg {
-  /*CreateDeployment defines a method to create new deployment given proper inputs.*/
+  /** CreateDeployment defines a method to create new deployment given proper inputs. */
   createDeployment(request: MsgCreateDeployment): Promise<MsgCreateDeploymentResponse>;
 
-  /*DepositDeployment deposits more funds into the deployment account*/
+  /** DepositDeployment deposits more funds into the deployment account */
   depositDeployment(request: MsgDepositDeployment): Promise<MsgDepositDeploymentResponse>;
 
-  /*UpdateDeployment defines a method to update a deployment given proper inputs.*/
+  /** UpdateDeployment defines a method to update a deployment given proper inputs. */
   updateDeployment(request: MsgUpdateDeployment): Promise<MsgUpdateDeploymentResponse>;
 
-  /*CloseDeployment defines a method to close a deployment given proper inputs.*/
+  /** CloseDeployment defines a method to close a deployment given proper inputs. */
   closeDeployment(request: MsgCloseDeployment): Promise<MsgCloseDeploymentResponse>;
 
-  /*CloseGroup defines a method to close a group of a deployment given proper inputs.*/
+  /** CloseGroup defines a method to close a group of a deployment given proper inputs. */
   closeGroup(request: MsgCloseGroup): Promise<MsgCloseGroupResponse>;
 
-  /*PauseGroup defines a method to close a group of a deployment given proper inputs.*/
+  /** PauseGroup defines a method to close a group of a deployment given proper inputs. */
   pauseGroup(request: MsgPauseGroup): Promise<MsgPauseGroupResponse>;
 
-  /*StartGroup defines a method to close a group of a deployment given proper inputs.*/
+  /** StartGroup defines a method to close a group of a deployment given proper inputs. */
   startGroup(request: MsgStartGroup): Promise<MsgStartGroupResponse>;
 }
 export class MsgClientImpl implements Msg {

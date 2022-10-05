@@ -7,24 +7,32 @@ import { QueryAllProvidersAttributesRequest, QueryAllProvidersAttributesRequestS
 
 /** Query defines the gRPC querier service */
 export interface Query {
-  /*AllProvidersAttributes queries all providers
-   buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
-   buf:lint:ignore RPC_RESPONSE_STANDARD_NAME*/
+  /**
+   * AllProvidersAttributes queries all providers
+   * buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
+   * buf:lint:ignore RPC_RESPONSE_STANDARD_NAME
+   */
   allProvidersAttributes(request?: QueryAllProvidersAttributesRequest): Promise<QueryProvidersResponse>;
 
-  /*ProviderAttributes queries all provider signed attributes
-   buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
-   buf:lint:ignore RPC_RESPONSE_STANDARD_NAME*/
+  /**
+   * ProviderAttributes queries all provider signed attributes
+   * buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
+   * buf:lint:ignore RPC_RESPONSE_STANDARD_NAME
+   */
   providerAttributes(request: QueryProviderAttributesRequest): Promise<QueryProvidersResponse>;
 
-  /*ProviderAuditorAttributes queries provider signed attributes by specific auditor
-   buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
-   buf:lint:ignore RPC_RESPONSE_STANDARD_NAME*/
+  /**
+   * ProviderAuditorAttributes queries provider signed attributes by specific auditor
+   * buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
+   * buf:lint:ignore RPC_RESPONSE_STANDARD_NAME
+   */
   providerAuditorAttributes(request: QueryProviderAuditorRequest): Promise<QueryProvidersResponse>;
 
-  /*AuditorAttributes queries all providers signed by this auditor
-   buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
-   buf:lint:ignore RPC_RESPONSE_STANDARD_NAME*/
+  /**
+   * AuditorAttributes queries all providers signed by this auditor
+   * buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
+   * buf:lint:ignore RPC_RESPONSE_STANDARD_NAME
+   */
   auditorAttributes(request: QueryAuditorAttributesRequest): Promise<QueryProvidersResponse>;
 }
 export class QueryClientImpl implements Query {

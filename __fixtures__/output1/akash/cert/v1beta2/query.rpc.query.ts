@@ -7,7 +7,7 @@ import { QueryCertificatesRequest, QueryCertificatesRequestSDKType, QueryCertifi
 
 /** Query defines the gRPC querier service */
 export interface Query {
-  /*Certificates queries certificates*/
+  /** Certificates queries certificates */
   certificates(request: QueryCertificatesRequest): Promise<QueryCertificatesResponse>;
 }
 export class QueryClientImpl implements Query {

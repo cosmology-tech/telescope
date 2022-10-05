@@ -6,22 +6,12 @@ import * as _m0 from "protobufjs/minimal";
 import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
 import { QueryGaugeIdsRequest, QueryGaugeIdsRequestSDKType, QueryGaugeIdsResponse, QueryGaugeIdsResponseSDKType, QueryDistrInfoRequest, QueryDistrInfoRequestSDKType, QueryDistrInfoResponse, QueryDistrInfoResponseSDKType, QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType, QueryLockableDurationsRequest, QueryLockableDurationsRequestSDKType, QueryLockableDurationsResponse, QueryLockableDurationsResponseSDKType, QueryIncentivizedPoolsRequest, QueryIncentivizedPoolsRequestSDKType, QueryIncentivizedPoolsResponse, QueryIncentivizedPoolsResponseSDKType, QueryExternalIncentiveGaugesRequest, QueryExternalIncentiveGaugesRequestSDKType, QueryExternalIncentiveGaugesResponse, QueryExternalIncentiveGaugesResponseSDKType } from "./query";
 export interface Query {
-  /*GaugeIds takes the pool id and returns the matching gauge ids and durations*/
+  /** GaugeIds takes the pool id and returns the matching gauge ids and durations */
   gaugeIds(request: QueryGaugeIdsRequest): Promise<QueryGaugeIdsResponse>;
-
-  /*null*/
   distrInfo(request?: QueryDistrInfoRequest): Promise<QueryDistrInfoResponse>;
-
-  /*null*/
   params(request?: QueryParamsRequest): Promise<QueryParamsResponse>;
-
-  /*null*/
   lockableDurations(request?: QueryLockableDurationsRequest): Promise<QueryLockableDurationsResponse>;
-
-  /*null*/
   incentivizedPools(request?: QueryIncentivizedPoolsRequest): Promise<QueryIncentivizedPoolsResponse>;
-
-  /*null*/
   externalIncentiveGauges(request?: QueryExternalIncentiveGaugesRequest): Promise<QueryExternalIncentiveGaugesResponse>;
 }
 export class QueryClientImpl implements Query {
