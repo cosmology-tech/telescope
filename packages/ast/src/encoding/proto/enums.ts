@@ -33,7 +33,7 @@ const processEnumComment = (e: ProtoEnum) => {
         if (i == 0) return line;
         if (i == 1) return ` * ${e.name} - ${cleanComment(line)}`;
         if (i == (lines.length - 1)) return cleanComment(line);
-        return ` * ${cleanComment(line)}`
+        return ` *${cleanComment(line)}`
     });
     return comments.join('\n');
 };
@@ -151,12 +151,20 @@ export const createProtoEnumToJSON = (name: string, proto: ProtoEnum) => {
                     t.identifier('object'),
                     [
                         ...switches,
+                        // unrecognized
+                        t.switchCase(
+                            t.memberExpression(
+                                t.identifier(name),
+                                t.identifier('UNRECOGNIZED')
+                            ),
+                            []
+                        ),
                         // default
                         t.switchCase(
                             null,
                             [
                                 t.returnStatement(
-                                    t.stringLiteral('UNKNOWN')
+                                    t.stringLiteral('UNRECOGNIZED')
                                 )
                             ]
                         )
