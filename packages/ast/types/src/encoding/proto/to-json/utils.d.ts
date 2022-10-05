@@ -22,6 +22,7 @@ export declare const toJSON: {
     enum(args: ToJSONMethod): t.ExpressionStatement;
     bytes(args: ToJSONMethod): t.ExpressionStatement;
     duration(args: ToJSONMethod): t.ExpressionStatement;
+    durationString(args: ToJSONMethod): t.ExpressionStatement;
     timestamp(args: ToJSONMethod): t.ExpressionStatement;
     timestampTimestamp(args: ToJSONMethod): t.ExpressionStatement;
     timestampDate(args: ToJSONMethod): t.ExpressionStatement;
