@@ -20,7 +20,10 @@ const getEnumValues = (proto: ProtoEnum) => {
     return enums;
 }
 
-
+const ensureOneSpace = (str) => {
+    if (str.startsWith(' ')) return str;
+    return ` ${str}`;
+}
 
 const processEnumComment = (e: ProtoEnum) => {
     const comment = e.comment;
@@ -34,7 +37,7 @@ const processEnumComment = (e: ProtoEnum) => {
         if (i == 0) return line;
         if (i == 1) return ` * ${e.name} - ${cleanComment(line)}`;
         if (i == (lines.length - 1)) return cleanComment(line);
-        return ` *${cleanComment(line)}`
+        return ` *${ensureOneSpace(cleanComment(line))}`
     });
     return comments.join('\n');
 };
