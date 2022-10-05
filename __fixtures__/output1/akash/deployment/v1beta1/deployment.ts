@@ -1068,7 +1068,7 @@ export const DeploymentFilters = {
 
 };
 
-/** Msg defines the RPC service */
+/** Msg defines the deployment Msg service. */
 export interface Msg {
   createDeployment(request: MsgCreateDeployment): Promise<MsgCreateDeploymentResponse>;
   /*CreateDeployment defines a method to create new deployment given proper inputs.*/

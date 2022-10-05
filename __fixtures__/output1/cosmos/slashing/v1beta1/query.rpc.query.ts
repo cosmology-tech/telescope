@@ -5,7 +5,7 @@ import * as _m0 from "protobufjs/minimal";
 import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
 import { QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType, QuerySigningInfoRequest, QuerySigningInfoRequestSDKType, QuerySigningInfoResponse, QuerySigningInfoResponseSDKType, QuerySigningInfosRequest, QuerySigningInfosRequestSDKType, QuerySigningInfosResponse, QuerySigningInfosResponseSDKType } from "./query";
 
-/** Query defines the RPC service */
+/** Query provides defines the gRPC querier service */
 export interface Query {
   params(request?: QueryParamsRequest): Promise<QueryParamsResponse>;
   /*Params queries the parameters of slashing module*/

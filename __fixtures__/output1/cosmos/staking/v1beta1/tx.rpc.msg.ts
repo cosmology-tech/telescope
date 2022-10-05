@@ -6,7 +6,7 @@ import { Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 import { MsgCreateValidator, MsgCreateValidatorSDKType, MsgCreateValidatorResponse, MsgCreateValidatorResponseSDKType, MsgEditValidator, MsgEditValidatorSDKType, MsgEditValidatorResponse, MsgEditValidatorResponseSDKType, MsgDelegate, MsgDelegateSDKType, MsgDelegateResponse, MsgDelegateResponseSDKType, MsgBeginRedelegate, MsgBeginRedelegateSDKType, MsgBeginRedelegateResponse, MsgBeginRedelegateResponseSDKType, MsgUndelegate, MsgUndelegateSDKType, MsgUndelegateResponse, MsgUndelegateResponseSDKType } from "./tx";
 
-/** Msg defines the RPC service */
+/** Msg defines the staking Msg service. */
 export interface Msg {
   createValidator(request: MsgCreateValidator): Promise<MsgCreateValidatorResponse>;
   /*CreateValidator defines a method for creating a new validator.*/

@@ -5,7 +5,7 @@ import * as _m0 from "protobufjs/minimal";
 import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
 import { QueryEvidenceRequest, QueryEvidenceRequestSDKType, QueryEvidenceResponse, QueryEvidenceResponseSDKType, QueryAllEvidenceRequest, QueryAllEvidenceRequestSDKType, QueryAllEvidenceResponse, QueryAllEvidenceResponseSDKType } from "./query";
 
-/** Query defines the RPC service */
+/** Query defines the gRPC querier service. */
 export interface Query {
   evidence(request: QueryEvidenceRequest): Promise<QueryEvidenceResponse>;
   /*Evidence queries evidence based on evidence hash.*/

@@ -5,7 +5,7 @@ import { LeaseID, LeaseIDSDKType, MsgWithdrawLease, MsgWithdrawLeaseSDKType, Msg
 import { Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 
-/** Msg defines the RPC service */
+/** Msg defines the market Msg service */
 export interface Msg {
   createBid(request: MsgCreateBid): Promise<MsgCreateBidResponse>;
   /*CreateBid defines a method to create a bid given proper inputs.*/

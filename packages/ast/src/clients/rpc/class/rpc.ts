@@ -346,7 +346,10 @@ export const createRpcClientInterface = (
         )
     );
 
-    obj.leadingComments = [commentBlock(`* ${service.name} defines the RPC service `)];
+    if (service.comment) {
+        obj.leadingComments = [commentBlock(`* ${service.comment} `)];
+    }
+    // obj.leadingComments = [commentBlock(`* ${service.name} defines the RPC service `)];
 
     return obj;
 

@@ -8,7 +8,7 @@ import * as _m0 from "protobufjs/minimal";
 import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
 import { QueryDeploymentsRequest, QueryDeploymentsRequestSDKType, QueryDeploymentsResponse, QueryDeploymentsResponseSDKType, QueryDeploymentRequest, QueryDeploymentRequestSDKType, QueryDeploymentResponse, QueryDeploymentResponseSDKType, QueryGroupRequest, QueryGroupRequestSDKType, QueryGroupResponse, QueryGroupResponseSDKType } from "./query";
 
-/** Query defines the RPC service */
+/** Query defines the gRPC querier service */
 export interface Query {
   deployments(request: QueryDeploymentsRequest): Promise<QueryDeploymentsResponse>;
   /*Deployments queries deployments*/

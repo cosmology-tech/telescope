@@ -4,7 +4,7 @@ import { Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 import { MsgCreateVestingAccount, MsgCreateVestingAccountSDKType, MsgCreateVestingAccountResponse, MsgCreateVestingAccountResponseSDKType, MsgCreatePermanentLockedAccount, MsgCreatePermanentLockedAccountSDKType, MsgCreatePermanentLockedAccountResponse, MsgCreatePermanentLockedAccountResponseSDKType, MsgCreatePeriodicVestingAccount, MsgCreatePeriodicVestingAccountSDKType, MsgCreatePeriodicVestingAccountResponse, MsgCreatePeriodicVestingAccountResponseSDKType } from "./tx";
 
-/** Msg defines the RPC service */
+/** Msg defines the bank Msg service. */
 export interface Msg {
   createVestingAccount(request: MsgCreateVestingAccount): Promise<MsgCreateVestingAccountResponse>;
   /*CreateVestingAccount defines a method that enables creating a vesting

@@ -4,7 +4,7 @@ import * as _m0 from "protobufjs/minimal";
 import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
 import { QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType } from "./query";
 
-/** Query defines the RPC service */
+/** Query defines the gRPC querier service. */
 export interface Query {
   params(request?: QueryParamsRequest): Promise<QueryParamsResponse>;
   /*Params retrieves the total set of recovery parameters.*/

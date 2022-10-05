@@ -3,7 +3,7 @@ import { Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 import { MsgGrantAllowance, MsgGrantAllowanceSDKType, MsgGrantAllowanceResponse, MsgGrantAllowanceResponseSDKType, MsgRevokeAllowance, MsgRevokeAllowanceSDKType, MsgRevokeAllowanceResponse, MsgRevokeAllowanceResponseSDKType } from "./tx";
 
-/** Msg defines the RPC service */
+/** Msg defines the feegrant msg service. */
 export interface Msg {
   grantAllowance(request: MsgGrantAllowance): Promise<MsgGrantAllowanceResponse>;
   /*GrantAllowance grants fee allowance to the grantee on the granter's

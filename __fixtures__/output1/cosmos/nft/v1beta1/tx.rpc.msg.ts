@@ -2,7 +2,7 @@ import { Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 import { MsgSend, MsgSendSDKType, MsgSendResponse, MsgSendResponseSDKType } from "./tx";
 
-/** Msg defines the RPC service */
+/** Msg defines the nft Msg service. */
 export interface Msg {
   send(request: MsgSend): Promise<MsgSendResponse>;
   /*Send defines a method to send a nft from one account to another account.*/

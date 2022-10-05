@@ -4,7 +4,7 @@ import { Rpc } from "../../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 import { MsgTransfer, MsgTransferSDKType, MsgTransferResponse, MsgTransferResponseSDKType } from "./tx";
 
-/** Msg defines the RPC service */
+/** Msg defines the ibc/transfer Msg service. */
 export interface Msg {
   transfer(request: MsgTransfer): Promise<MsgTransferResponse>;
   /*Transfer defines a rpc handler method for MsgTransfer.*/

@@ -3,7 +3,7 @@ import { Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 import { MsgCreateDenom, MsgCreateDenomSDKType, MsgCreateDenomResponse, MsgCreateDenomResponseSDKType, MsgMint, MsgMintSDKType, MsgMintResponse, MsgMintResponseSDKType, MsgBurn, MsgBurnSDKType, MsgBurnResponse, MsgBurnResponseSDKType, MsgChangeAdmin, MsgChangeAdminSDKType, MsgChangeAdminResponse, MsgChangeAdminResponseSDKType } from "./tx";
 
-/** Msg defines the RPC service */
+/** Msg defines the Msg service. */
 export interface Msg {
   createDenom(request: MsgCreateDenom): Promise<MsgCreateDenomResponse>;
   /*null*/

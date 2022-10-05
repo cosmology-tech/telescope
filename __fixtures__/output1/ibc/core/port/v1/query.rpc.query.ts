@@ -4,7 +4,7 @@ import * as _m0 from "protobufjs/minimal";
 import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
 import { QueryAppVersionRequest, QueryAppVersionRequestSDKType, QueryAppVersionResponse, QueryAppVersionResponseSDKType } from "./query";
 
-/** Query defines the RPC service */
+/** Query defines the gRPC querier service */
 export interface Query {
   appVersion(request: QueryAppVersionRequest): Promise<QueryAppVersionResponse>;
   /*AppVersion queries an IBC Port and determines the appropriate application version to be used*/

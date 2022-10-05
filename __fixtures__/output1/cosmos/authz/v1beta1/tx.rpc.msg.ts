@@ -4,7 +4,7 @@ import { Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 import { MsgGrant, MsgGrantSDKType, MsgGrantResponse, MsgGrantResponseSDKType, MsgExec, MsgExecSDKType, MsgExecResponse, MsgExecResponseSDKType, MsgRevoke, MsgRevokeSDKType, MsgRevokeResponse, MsgRevokeResponseSDKType } from "./tx";
 
-/** Msg defines the RPC service */
+/** Msg defines the authz Msg service. */
 export interface Msg {
   grant(request: MsgGrant): Promise<MsgGrantResponse>;
   /*Grant grants the provided authorization to the grantee on the granter's

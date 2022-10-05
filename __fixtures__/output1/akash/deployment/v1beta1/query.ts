@@ -569,7 +569,7 @@ export const QueryGroupResponse = {
 
 };
 
-/** Query defines the RPC service */
+/** Query defines the gRPC querier service */
 export interface Query {
   deployments(request: QueryDeploymentsRequest): Promise<QueryDeploymentsResponse>;
   /*Deployments queries deployments*/

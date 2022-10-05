@@ -4,8 +4,6 @@ import { Timestamp, TimestampSDKType } from "../../google/protobuf/timestamp";
 import { Rpc } from "../../helpers";
 import * as _m0 from "protobufjs/minimal";
 import { MsgCreateGauge, MsgCreateGaugeSDKType, MsgCreateGaugeResponse, MsgCreateGaugeResponseSDKType, MsgAddToGauge, MsgAddToGaugeSDKType, MsgAddToGaugeResponse, MsgAddToGaugeResponseSDKType } from "./tx";
-
-/** Msg defines the RPC service */
 export interface Msg {
   createGauge(request: MsgCreateGauge): Promise<MsgCreateGaugeResponse>;
   /*null*/

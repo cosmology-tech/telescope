@@ -3,7 +3,7 @@ import { Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 import { MsgConvertCoin, MsgConvertCoinSDKType, MsgConvertCoinResponse, MsgConvertCoinResponseSDKType, MsgConvertERC20, MsgConvertERC20SDKType, MsgConvertERC20Response, MsgConvertERC20ResponseSDKType } from "./tx";
 
-/** Msg defines the RPC service */
+/** Msg defines the erc20 Msg service. */
 export interface Msg {
   convertCoin(request: MsgConvertCoin): Promise<MsgConvertCoinResponse>;
   /*ConvertCoin mints a ERC20 representation of the native Cosmos coin denom

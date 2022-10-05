@@ -4,7 +4,7 @@ import * as _m0 from "protobufjs/minimal";
 import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
 import { QueryBalancesRequest, QueryBalancesRequestSDKType, QueryBalancesResponse, QueryBalancesResponseSDKType } from "./query";
 
-/** Query defines the RPC service */
+/** Query defines the gRPC querier service. */
 export interface Query {
   balances(request: QueryBalancesRequest): Promise<QueryBalancesResponse>;
   /*Retrieves the unvested, vested and locked tokens for a vesting account*/

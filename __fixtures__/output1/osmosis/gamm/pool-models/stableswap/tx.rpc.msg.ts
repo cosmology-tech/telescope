@@ -3,8 +3,6 @@ import { Coin, CoinSDKType } from "../../../../cosmos/base/v1beta1/coin";
 import { Rpc } from "../../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 import { MsgCreateStableswapPool, MsgCreateStableswapPoolSDKType, MsgCreateStableswapPoolResponse, MsgCreateStableswapPoolResponseSDKType, MsgStableSwapAdjustScalingFactors, MsgStableSwapAdjustScalingFactorsSDKType, MsgStableSwapAdjustScalingFactorsResponse, MsgStableSwapAdjustScalingFactorsResponseSDKType } from "./tx";
-
-/** Msg defines the RPC service */
 export interface Msg {
   createStableswapPool(request: MsgCreateStableswapPool): Promise<MsgCreateStableswapPoolResponse>;
   /*null*/

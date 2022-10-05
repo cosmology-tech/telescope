@@ -2,7 +2,7 @@ import { Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 import { MsgCreateCertificate, MsgCreateCertificateSDKType, MsgCreateCertificateResponse, MsgCreateCertificateResponseSDKType, MsgRevokeCertificate, MsgRevokeCertificateSDKType, MsgRevokeCertificateResponse, MsgRevokeCertificateResponseSDKType } from "./cert";
 
-/** Msg defines the RPC service */
+/** Msg defines the provider Msg service */
 export interface Msg {
   createCertificate(request: MsgCreateCertificate): Promise<MsgCreateCertificateResponse>;
   /*CreateCertificate defines a method to create new certificate given proper inputs.*/

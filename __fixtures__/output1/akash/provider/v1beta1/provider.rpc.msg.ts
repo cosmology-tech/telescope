@@ -3,7 +3,7 @@ import { Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 import { MsgCreateProvider, MsgCreateProviderSDKType, MsgCreateProviderResponse, MsgCreateProviderResponseSDKType, MsgUpdateProvider, MsgUpdateProviderSDKType, MsgUpdateProviderResponse, MsgUpdateProviderResponseSDKType, MsgDeleteProvider, MsgDeleteProviderSDKType, MsgDeleteProviderResponse, MsgDeleteProviderResponseSDKType } from "./provider";
 
-/** Msg defines the RPC service */
+/** Msg defines the provider Msg service */
 export interface Msg {
   createProvider(request: MsgCreateProvider): Promise<MsgCreateProviderResponse>;
   /*CreateProvider defines a method that creates a provider given the proper inputs*/

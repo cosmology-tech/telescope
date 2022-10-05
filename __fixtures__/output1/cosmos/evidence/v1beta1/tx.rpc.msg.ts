@@ -3,7 +3,7 @@ import { Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 import { MsgSubmitEvidence, MsgSubmitEvidenceSDKType, MsgSubmitEvidenceResponse, MsgSubmitEvidenceResponseSDKType } from "./tx";
 
-/** Msg defines the RPC service */
+/** Msg defines the evidence Msg service. */
 export interface Msg {
   submitEvidence(request: MsgSubmitEvidence): Promise<MsgSubmitEvidenceResponse>;
   /*SubmitEvidence submits an arbitrary Evidence of misbehavior such as equivocation or

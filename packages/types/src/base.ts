@@ -98,7 +98,8 @@ export interface ProtoService {
     type: 'Service';
     name: string;
     serviceType: 'Msg' | 'Query' | 'Service' | string;
-    methods: Record<string, ProtoServiceMethod>
+    methods: Record<string, ProtoServiceMethod>;
+    comment?: string;
 };
 export interface ProtoAny {
     type: string;

@@ -4,7 +4,7 @@ import * as _m0 from "protobufjs/minimal";
 import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
 import { QueryConfigRequest, QueryConfigRequestSDKType, QueryConfigResponse, QueryConfigResponseSDKType } from "./query";
 
-/** Query defines the RPC service */
+/** Query is the app module query service. */
 export interface Query {
   config(request?: QueryConfigRequest): Promise<QueryConfigResponse>;
   /*Config returns the current app config.*/

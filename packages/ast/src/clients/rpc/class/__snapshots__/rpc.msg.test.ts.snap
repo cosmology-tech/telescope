@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`RPC Msg Client 1`] = `
-"/** Msg defines the RPC service */
+"/** Msg defines the bank Msg service. */
 export interface Msg {
   send(request: MsgSend): Promise<MsgSendResponse>;
   /*Send defines a method for sending coins from one account to another account.*/

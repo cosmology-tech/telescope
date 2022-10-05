@@ -4,7 +4,7 @@ import { Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 import { MsgSend, MsgSendSDKType, MsgSendResponse, MsgSendResponseSDKType, MsgMultiSend, MsgMultiSendSDKType, MsgMultiSendResponse, MsgMultiSendResponseSDKType } from "./tx";
 
-/** Msg defines the RPC service */
+/** Msg defines the bank Msg service. */
 export interface Msg {
   send(request: MsgSend): Promise<MsgSendResponse>;
   /*Send defines a method for sending coins from one account to another account.*/

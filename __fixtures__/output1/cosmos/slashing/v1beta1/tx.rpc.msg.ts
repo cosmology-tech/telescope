@@ -2,7 +2,7 @@ import { Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 import { MsgUnjail, MsgUnjailSDKType, MsgUnjailResponse, MsgUnjailResponseSDKType } from "./tx";
 
-/** Msg defines the RPC service */
+/** Msg defines the slashing Msg service. */
 export interface Msg {
   unjail(request: MsgUnjail): Promise<MsgUnjailResponse>;
   /*Unjail defines a method for unjailing a jailed validator, thus returning

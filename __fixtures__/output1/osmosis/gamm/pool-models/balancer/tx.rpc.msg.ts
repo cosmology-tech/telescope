@@ -2,8 +2,6 @@ import { PoolParams, PoolParamsSDKType, PoolAsset, PoolAssetSDKType } from "./ba
 import { Rpc } from "../../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 import { MsgCreateBalancerPool, MsgCreateBalancerPoolSDKType, MsgCreateBalancerPoolResponse, MsgCreateBalancerPoolResponseSDKType } from "./tx";
-
-/** Msg defines the RPC service */
 export interface Msg {
   createBalancerPool(request: MsgCreateBalancerPool): Promise<MsgCreateBalancerPoolResponse>;
   /*null*/

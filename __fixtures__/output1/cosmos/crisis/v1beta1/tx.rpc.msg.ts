@@ -2,7 +2,7 @@ import { Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 import { MsgVerifyInvariant, MsgVerifyInvariantSDKType, MsgVerifyInvariantResponse, MsgVerifyInvariantResponseSDKType } from "./tx";
 
-/** Msg defines the RPC service */
+/** Msg defines the bank Msg service. */
 export interface Msg {
   verifyInvariant(request: MsgVerifyInvariant): Promise<MsgVerifyInvariantResponse>;
   /*VerifyInvariant defines a method to verify a particular invariance.*/
