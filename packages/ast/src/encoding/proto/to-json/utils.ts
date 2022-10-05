@@ -230,6 +230,17 @@ export const toJSON = {
     // message.period !== undefined && (obj.period = message.period);
 
     duration(args: ToJSONMethod) {
+        const durationFormat = args.context.pluginValue('prototypes.typingsFormat.duration');
+        switch (durationFormat) {
+            case 'string':
+                return toJSON.durationString(args);
+            case 'duration':
+            default:
+                return toJSON.type(args);
+        }
+    },
+
+    durationString(args: ToJSONMethod) {
         return toJSON.identity(args);
     },
 
