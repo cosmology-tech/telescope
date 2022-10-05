@@ -283,7 +283,7 @@ export const SmoothWeightChangeParams = {
   toJSON(message: SmoothWeightChangeParams): unknown {
     const obj: any = {};
     message.startTime !== undefined && (obj.startTime = message.startTime.toISOString());
-    message.duration !== undefined && (obj.duration = message.duration);
+    message.duration !== undefined && (obj.duration = message.duration ? Duration.toJSON(message.duration) : undefined);
 
     if (message.initialPoolWeights) {
       obj.initialPoolWeights = message.initialPoolWeights.map(e => e ? PoolAsset.toJSON(e) : undefined);

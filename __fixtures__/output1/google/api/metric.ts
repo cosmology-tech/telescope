@@ -971,8 +971,8 @@ export const MetricDescriptor_MetricDescriptorMetadata = {
   toJSON(message: MetricDescriptor_MetricDescriptorMetadata): unknown {
     const obj: any = {};
     message.launchStage !== undefined && (obj.launchStage = launchStageToJSON(message.launchStage));
-    message.samplePeriod !== undefined && (obj.samplePeriod = message.samplePeriod);
-    message.ingestDelay !== undefined && (obj.ingestDelay = message.ingestDelay);
+    message.samplePeriod !== undefined && (obj.samplePeriod = message.samplePeriod ? Duration.toJSON(message.samplePeriod) : undefined);
+    message.ingestDelay !== undefined && (obj.ingestDelay = message.ingestDelay ? Duration.toJSON(message.ingestDelay) : undefined);
     return obj;
   },
 

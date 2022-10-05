@@ -871,7 +871,7 @@ export const WaitOperationRequest = {
   toJSON(message: WaitOperationRequest): unknown {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
-    message.timeout !== undefined && (obj.timeout = message.timeout);
+    message.timeout !== undefined && (obj.timeout = message.timeout ? Duration.toJSON(message.timeout) : undefined);
     return obj;
   },
 

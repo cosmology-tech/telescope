@@ -1656,7 +1656,7 @@ exports[`google/api/expr/v1alpha1/syntax Constant 1`] = `
     message.doubleValue !== undefined && (obj.doubleValue = message.doubleValue);
     message.stringValue !== undefined && (obj.stringValue = message.stringValue);
     message.bytesValue !== undefined && (obj.bytesValue = message.bytesValue !== undefined ? base64FromBytes(message.bytesValue) : undefined);
-    message.durationValue !== undefined && (obj.durationValue = message.durationValue);
+    message.durationValue !== undefined && (obj.durationValue = message.durationValue ? Duration.toJSON(message.durationValue) : undefined);
     message.timestampValue !== undefined && (obj.timestampValue = message.timestampValue.toISOString());
     return obj;
   },
@@ -2389,7 +2389,7 @@ exports[`google/api/servicecontrol/v1/log_entry LogEntry 1`] = `
 exports[`google/rpc/error_details name collisions 1`] = `
 "/**
  * Describes what preconditions have failed.
- *
+ * 
  * For example, if an RPC failed because it required the Terms of Service to be
  * acknowledged, it could list the terms of service violation in the
  * PreconditionFailure message.

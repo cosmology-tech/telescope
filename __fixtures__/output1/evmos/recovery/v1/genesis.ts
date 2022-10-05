@@ -158,7 +158,7 @@ export const Params = {
   toJSON(message: Params): unknown {
     const obj: any = {};
     message.enableRecovery !== undefined && (obj.enableRecovery = message.enableRecovery);
-    message.packetTimeoutDuration !== undefined && (obj.packetTimeoutDuration = message.packetTimeoutDuration);
+    message.packetTimeoutDuration !== undefined && (obj.packetTimeoutDuration = message.packetTimeoutDuration ? Duration.toJSON(message.packetTimeoutDuration) : undefined);
     return obj;
   },
 

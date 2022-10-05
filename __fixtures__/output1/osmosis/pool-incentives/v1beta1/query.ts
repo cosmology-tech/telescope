@@ -281,7 +281,7 @@ export const QueryGaugeIdsResponse_GaugeIdWithDuration = {
   toJSON(message: QueryGaugeIdsResponse_GaugeIdWithDuration): unknown {
     const obj: any = {};
     message.gaugeId !== undefined && (obj.gaugeId = (message.gaugeId || Long.UZERO).toString());
-    message.duration !== undefined && (obj.duration = message.duration);
+    message.duration !== undefined && (obj.duration = message.duration ? Duration.toJSON(message.duration) : undefined);
     return obj;
   },
 
@@ -801,7 +801,7 @@ export const IncentivizedPool = {
   toJSON(message: IncentivizedPool): unknown {
     const obj: any = {};
     message.poolId !== undefined && (obj.poolId = (message.poolId || Long.UZERO).toString());
-    message.lockableDuration !== undefined && (obj.lockableDuration = message.lockableDuration);
+    message.lockableDuration !== undefined && (obj.lockableDuration = message.lockableDuration ? Duration.toJSON(message.lockableDuration) : undefined);
     message.gaugeId !== undefined && (obj.gaugeId = (message.gaugeId || Long.UZERO).toString());
     return obj;
   },

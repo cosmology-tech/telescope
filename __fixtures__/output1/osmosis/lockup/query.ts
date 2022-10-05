@@ -1654,7 +1654,7 @@ export const LockedDenomRequest = {
   toJSON(message: LockedDenomRequest): unknown {
     const obj: any = {};
     message.denom !== undefined && (obj.denom = message.denom);
-    message.duration !== undefined && (obj.duration = message.duration);
+    message.duration !== undefined && (obj.duration = message.duration ? Duration.toJSON(message.duration) : undefined);
     return obj;
   },
 
@@ -2094,7 +2094,7 @@ export const AccountLockedLongerDurationRequest = {
   toJSON(message: AccountLockedLongerDurationRequest): unknown {
     const obj: any = {};
     message.owner !== undefined && (obj.owner = message.owner);
-    message.duration !== undefined && (obj.duration = message.duration);
+    message.duration !== undefined && (obj.duration = message.duration ? Duration.toJSON(message.duration) : undefined);
     return obj;
   },
 
@@ -2258,7 +2258,7 @@ export const AccountLockedDurationRequest = {
   toJSON(message: AccountLockedDurationRequest): unknown {
     const obj: any = {};
     message.owner !== undefined && (obj.owner = message.owner);
-    message.duration !== undefined && (obj.duration = message.duration);
+    message.duration !== undefined && (obj.duration = message.duration ? Duration.toJSON(message.duration) : undefined);
     return obj;
   },
 
@@ -2422,7 +2422,7 @@ export const AccountLockedLongerDurationNotUnlockingOnlyRequest = {
   toJSON(message: AccountLockedLongerDurationNotUnlockingOnlyRequest): unknown {
     const obj: any = {};
     message.owner !== undefined && (obj.owner = message.owner);
-    message.duration !== undefined && (obj.duration = message.duration);
+    message.duration !== undefined && (obj.duration = message.duration ? Duration.toJSON(message.duration) : undefined);
     return obj;
   },
 
@@ -2596,7 +2596,7 @@ export const AccountLockedLongerDurationDenomRequest = {
   toJSON(message: AccountLockedLongerDurationDenomRequest): unknown {
     const obj: any = {};
     message.owner !== undefined && (obj.owner = message.owner);
-    message.duration !== undefined && (obj.duration = message.duration);
+    message.duration !== undefined && (obj.duration = message.duration ? Duration.toJSON(message.duration) : undefined);
     message.denom !== undefined && (obj.denom = message.denom);
     return obj;
   },

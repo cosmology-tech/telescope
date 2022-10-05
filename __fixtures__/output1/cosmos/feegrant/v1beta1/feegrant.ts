@@ -323,7 +323,7 @@ export const PeriodicAllowance = {
   toJSON(message: PeriodicAllowance): unknown {
     const obj: any = {};
     message.basic !== undefined && (obj.basic = message.basic ? BasicAllowance.toJSON(message.basic) : undefined);
-    message.period !== undefined && (obj.period = message.period);
+    message.period !== undefined && (obj.period = message.period ? Duration.toJSON(message.period) : undefined);
 
     if (message.periodSpendLimit) {
       obj.periodSpendLimit = message.periodSpendLimit.map(e => e ? Coin.toJSON(e) : undefined);

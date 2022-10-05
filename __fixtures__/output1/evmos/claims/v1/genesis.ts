@@ -279,8 +279,8 @@ export const Params = {
     const obj: any = {};
     message.enableClaims !== undefined && (obj.enableClaims = message.enableClaims);
     message.airdropStartTime !== undefined && (obj.airdropStartTime = message.airdropStartTime.toISOString());
-    message.durationUntilDecay !== undefined && (obj.durationUntilDecay = message.durationUntilDecay);
-    message.durationOfDecay !== undefined && (obj.durationOfDecay = message.durationOfDecay);
+    message.durationUntilDecay !== undefined && (obj.durationUntilDecay = message.durationUntilDecay ? Duration.toJSON(message.durationUntilDecay) : undefined);
+    message.durationOfDecay !== undefined && (obj.durationOfDecay = message.durationOfDecay ? Duration.toJSON(message.durationOfDecay) : undefined);
     message.claimsDenom !== undefined && (obj.claimsDenom = message.claimsDenom);
 
     if (message.authorizedChannels) {

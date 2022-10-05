@@ -67,7 +67,7 @@ exports[`osmosis/lockup/tx duration 2`] = `
   toJSON(message: MsgLockTokens): unknown {
     const obj: any = {};
     message.owner !== undefined && (obj.owner = message.owner);
-    message.duration !== undefined && (obj.duration = message.duration);
+    message.duration !== undefined && (obj.duration = message.duration ? Duration.toJSON(message.duration) : undefined);
 
     if (message.coins) {
       obj.coins = message.coins.map(e => e ? Coin.toJSON(e) : undefined);

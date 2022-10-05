@@ -2093,7 +2093,7 @@ export const AttributeContext_Response = {
     }
 
     message.time !== undefined && (obj.time = message.time.toISOString());
-    message.backendLatency !== undefined && (obj.backendLatency = message.backendLatency);
+    message.backendLatency !== undefined && (obj.backendLatency = message.backendLatency ? Duration.toJSON(message.backendLatency) : undefined);
     return obj;
   },
 

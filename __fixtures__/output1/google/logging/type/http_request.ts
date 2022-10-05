@@ -385,7 +385,7 @@ export const HttpRequest = {
     message.remoteIp !== undefined && (obj.remoteIp = message.remoteIp);
     message.serverIp !== undefined && (obj.serverIp = message.serverIp);
     message.referer !== undefined && (obj.referer = message.referer);
-    message.latency !== undefined && (obj.latency = message.latency);
+    message.latency !== undefined && (obj.latency = message.latency ? Duration.toJSON(message.latency) : undefined);
     message.cacheLookup !== undefined && (obj.cacheLookup = message.cacheLookup);
     message.cacheHit !== undefined && (obj.cacheHit = message.cacheHit);
     message.cacheValidatedWithOriginServer !== undefined && (obj.cacheValidatedWithOriginServer = message.cacheValidatedWithOriginServer);

@@ -608,7 +608,7 @@ export const RetryInfo = {
 
   toJSON(message: RetryInfo): unknown {
     const obj: any = {};
-    message.retryDelay !== undefined && (obj.retryDelay = message.retryDelay);
+    message.retryDelay !== undefined && (obj.retryDelay = message.retryDelay ? Duration.toJSON(message.retryDelay) : undefined);
     return obj;
   },
 

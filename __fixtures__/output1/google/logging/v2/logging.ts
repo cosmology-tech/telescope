@@ -2129,7 +2129,7 @@ export const TailLogEntriesRequest = {
     }
 
     message.filter !== undefined && (obj.filter = message.filter);
-    message.bufferWindow !== undefined && (obj.bufferWindow = message.bufferWindow);
+    message.bufferWindow !== undefined && (obj.bufferWindow = message.bufferWindow ? Duration.toJSON(message.bufferWindow) : undefined);
     return obj;
   },
 

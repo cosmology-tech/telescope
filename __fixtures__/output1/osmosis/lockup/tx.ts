@@ -155,7 +155,7 @@ export const MsgLockTokens = {
   toJSON(message: MsgLockTokens): unknown {
     const obj: any = {};
     message.owner !== undefined && (obj.owner = message.owner);
-    message.duration !== undefined && (obj.duration = message.duration);
+    message.duration !== undefined && (obj.duration = message.duration ? Duration.toJSON(message.duration) : undefined);
 
     if (message.coins) {
       obj.coins = message.coins.map(e => e ? Coin.toJSON(e) : undefined);
@@ -662,7 +662,7 @@ export const MsgExtendLockup = {
     const obj: any = {};
     message.owner !== undefined && (obj.owner = message.owner);
     message.ID !== undefined && (obj.ID = (message.ID || Long.UZERO).toString());
-    message.duration !== undefined && (obj.duration = message.duration);
+    message.duration !== undefined && (obj.duration = message.duration ? Duration.toJSON(message.duration) : undefined);
     return obj;
   },
 

@@ -1206,8 +1206,8 @@ export const DecisionPolicyWindows = {
 
   toJSON(message: DecisionPolicyWindows): unknown {
     const obj: any = {};
-    message.votingPeriod !== undefined && (obj.votingPeriod = message.votingPeriod);
-    message.minExecutionPeriod !== undefined && (obj.minExecutionPeriod = message.minExecutionPeriod);
+    message.votingPeriod !== undefined && (obj.votingPeriod = message.votingPeriod ? Duration.toJSON(message.votingPeriod) : undefined);
+    message.minExecutionPeriod !== undefined && (obj.minExecutionPeriod = message.minExecutionPeriod ? Duration.toJSON(message.minExecutionPeriod) : undefined);
     return obj;
   },
 

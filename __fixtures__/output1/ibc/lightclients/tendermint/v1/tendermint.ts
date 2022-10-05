@@ -368,9 +368,9 @@ export const ClientState = {
     const obj: any = {};
     message.chainId !== undefined && (obj.chainId = message.chainId);
     message.trustLevel !== undefined && (obj.trustLevel = message.trustLevel ? Fraction.toJSON(message.trustLevel) : undefined);
-    message.trustingPeriod !== undefined && (obj.trustingPeriod = message.trustingPeriod);
-    message.unbondingPeriod !== undefined && (obj.unbondingPeriod = message.unbondingPeriod);
-    message.maxClockDrift !== undefined && (obj.maxClockDrift = message.maxClockDrift);
+    message.trustingPeriod !== undefined && (obj.trustingPeriod = message.trustingPeriod ? Duration.toJSON(message.trustingPeriod) : undefined);
+    message.unbondingPeriod !== undefined && (obj.unbondingPeriod = message.unbondingPeriod ? Duration.toJSON(message.unbondingPeriod) : undefined);
+    message.maxClockDrift !== undefined && (obj.maxClockDrift = message.maxClockDrift ? Duration.toJSON(message.maxClockDrift) : undefined);
     message.frozenHeight !== undefined && (obj.frozenHeight = message.frozenHeight ? Height.toJSON(message.frozenHeight) : undefined);
     message.latestHeight !== undefined && (obj.latestHeight = message.latestHeight ? Height.toJSON(message.latestHeight) : undefined);
 
