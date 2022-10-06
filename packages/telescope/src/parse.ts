@@ -1,8 +1,7 @@
-import { ProtoRef, ProtoType } from '@osmonauts/types'
+import { ProtoRef, ProtoType, ServiceInfo } from '@osmonauts/types'
 import { getObjectName } from '@osmonauts/proto-parser';
 import { getKeyTypeEntryName } from '@osmonauts/ast';
 import { getRoot } from './utils';
-import { ServiceInfo } from './types';
 import { TelescopeParseContext } from './build';
 
 export const parse = (

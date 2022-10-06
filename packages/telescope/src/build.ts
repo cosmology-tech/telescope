@@ -20,7 +20,7 @@ import {
     // helper
     createHelperObject,
 } from '@osmonauts/ast';
-import { ServiceMutation, ServiceQuery } from './types';
+import { ServiceMutation, ServiceQuery } from '@osmonauts/types';
 
 export const getMutations = (mutations: ServiceMutation[]) => {
     return mutations.map((mutation: ServiceMutation) => {

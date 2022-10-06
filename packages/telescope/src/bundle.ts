@@ -1,7 +1,7 @@
 import { ProtoStore } from '@osmonauts/proto-parser';
 import { importNamespace } from '@osmonauts/ast';
 import * as dotty from 'dotty';
-import { TelescopeBuilder, TelescopeInput } from './index';
+import { TelescopeBuilder } from './index';
 import { join, relative, dirname } from 'path';
 import { TelescopeParseContext } from './build';
 import { TelescopeOptions } from '@osmonauts/types';

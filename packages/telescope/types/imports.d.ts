@@ -1,4 +1,5 @@
-import { ImportHash, ImportObj, ServiceMutation } from './types';
+import { ServiceMutation } from '@osmonauts/types';
+import { ImportHash, ImportObj } from './types';
 import { TelescopeParseContext } from './build';
 export declare const getImportStatements: (filepath: string, list: ImportObj[]) => any[];
 export declare const buildAllImports: (context: TelescopeParseContext, allImports: ImportHash, filepath: string) => any[];
