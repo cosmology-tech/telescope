@@ -99,6 +99,12 @@ export const documentRpcClients = (
     }, []);
 };
 
+const replaceChars = (str: string) => {
+    return str.split(' ').map(s => {
+        return s.replace(/\W/g, '')
+    }).join('-').toLowerCase();
+};
+
 export const documentRpcClientsReadme = (
     context: ProtoParseContext,
     myBase: string,
@@ -106,6 +112,12 @@ export const documentRpcClientsReadme = (
 ) => {
 
     const results = documentRpcClients(context, myBase, store);
+
+    const toc = results.map(res => {
+        const pkg = res.service.ref.proto.package
+        const slug = replaceChars(`${pkg}.${res.methodName} RPC`);
+        return `[\`${pkg}.${res.methodName}()\` RPC](#${slug})`
+    });
 
     const lines = results.map(res => {
         const pkg = res.service.ref.proto.package
@@ -125,7 +137,11 @@ ${code}
     const pkg = results[0].service.ref.proto.package
 
     return `
-#### \`${pkg}\` RPC
+## Table of Contents
+
+${toc.join('\n')}
+
+### \`${pkg}\` RPC
 
 ${lines.join('\n')}
 `;

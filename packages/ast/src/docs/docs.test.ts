@@ -43,5 +43,5 @@ it('documentRpcClientsReadme', () => {
     const ref = store.findProto('osmosis/gamm/v1beta1/tx.proto');
     const context = new ProtoParseContext(ref, store, defaultTelescopeOptions);
     const text = documentRpcClientsReadme(context, myBase, store);
-    console.log(text)
+    expect(text).toMatchSnapshot();
 });
