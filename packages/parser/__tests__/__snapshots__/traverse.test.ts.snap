@@ -5276,7 +5276,7 @@ exports[`osmosis/gamm/v1beta1/tx 1`] = `
                               "(gogoproto.moretags)": "yaml:pool_id",
                               "(telescope:camel)": "poolId",
                               "(telescope:name)": "poolId",
-                              "(telescope:orig)": "poolId",
+                              "(telescope:orig)": "pool_id",
                             },
                             "parsedType": {
                               "name": "uint64",
@@ -5312,7 +5312,7 @@ exports[`osmosis/gamm/v1beta1/tx 1`] = `
                               "(gogoproto.nullable)": false,
                               "(telescope:camel)": "shareInAmount",
                               "(telescope:name)": "shareInAmount",
-                              "(telescope:orig)": "shareInAmount",
+                              "(telescope:orig)": "share_in_amount",
                             },
                             "parsedType": {
                               "name": "string",
@@ -5331,7 +5331,7 @@ exports[`osmosis/gamm/v1beta1/tx 1`] = `
                               "(gogoproto.nullable)": false,
                               "(telescope:camel)": "tokenOutMins",
                               "(telescope:name)": "tokenOutMins",
-                              "(telescope:orig)": "tokenOutMins",
+                              "(telescope:orig)": "token_out_mins",
                             },
                             "parsedType": {
                               "name": "Coin",
@@ -5363,7 +5363,7 @@ exports[`osmosis/gamm/v1beta1/tx 1`] = `
                               "(gogoproto.moretags)": "yaml:pool_id",
                               "(telescope:camel)": "poolId",
                               "(telescope:name)": "poolId",
-                              "(telescope:orig)": "poolId",
+                              "(telescope:orig)": "pool_id",
                             },
                             "parsedType": {
                               "name": "uint64",
@@ -5399,7 +5399,7 @@ exports[`osmosis/gamm/v1beta1/tx 1`] = `
                               "(gogoproto.nullable)": false,
                               "(telescope:camel)": "shareInMaxAmount",
                               "(telescope:name)": "shareInMaxAmount",
-                              "(telescope:orig)": "shareInMaxAmount",
+                              "(telescope:orig)": "share_in_max_amount",
                             },
                             "parsedType": {
                               "name": "string",
@@ -5418,7 +5418,7 @@ exports[`osmosis/gamm/v1beta1/tx 1`] = `
                               "(gogoproto.nullable)": false,
                               "(telescope:camel)": "tokenOut",
                               "(telescope:name)": "tokenOut",
-                              "(telescope:orig)": "tokenOut",
+                              "(telescope:orig)": "token_out",
                             },
                             "parsedType": {
                               "name": "Coin",
@@ -5449,7 +5449,7 @@ exports[`osmosis/gamm/v1beta1/tx 1`] = `
                               "(gogoproto.moretags)": "yaml:pool_id",
                               "(telescope:camel)": "poolId",
                               "(telescope:name)": "poolId",
-                              "(telescope:orig)": "poolId",
+                              "(telescope:orig)": "pool_id",
                             },
                             "parsedType": {
                               "name": "uint64",
@@ -5485,7 +5485,7 @@ exports[`osmosis/gamm/v1beta1/tx 1`] = `
                               "(gogoproto.nullable)": false,
                               "(telescope:camel)": "shareInAmount",
                               "(telescope:name)": "shareInAmount",
-                              "(telescope:orig)": "shareInAmount",
+                              "(telescope:orig)": "share_in_amount",
                             },
                             "parsedType": {
                               "name": "string",
@@ -5502,7 +5502,7 @@ exports[`osmosis/gamm/v1beta1/tx 1`] = `
                               "(gogoproto.moretags)": "yaml:token_out_denom",
                               "(telescope:camel)": "tokenOutDenom",
                               "(telescope:name)": "tokenOutDenom",
-                              "(telescope:orig)": "tokenOutDenom",
+                              "(telescope:orig)": "token_out_denom",
                             },
                             "parsedType": {
                               "name": "string",
@@ -5521,7 +5521,7 @@ exports[`osmosis/gamm/v1beta1/tx 1`] = `
                               "(gogoproto.nullable)": false,
                               "(telescope:camel)": "tokenOutMinAmount",
                               "(telescope:name)": "tokenOutMinAmount",
-                              "(telescope:orig)": "tokenOutMinAmount",
+                              "(telescope:orig)": "token_out_min_amount",
                             },
                             "parsedType": {
                               "name": "string",
@@ -5549,7 +5549,7 @@ exports[`osmosis/gamm/v1beta1/tx 1`] = `
                               "(gogoproto.moretags)": "yaml:pool_id",
                               "(telescope:camel)": "poolId",
                               "(telescope:name)": "poolId",
-                              "(telescope:orig)": "poolId",
+                              "(telescope:orig)": "pool_id",
                             },
                             "parsedType": {
                               "name": "uint64",
@@ -5585,7 +5585,7 @@ exports[`osmosis/gamm/v1beta1/tx 1`] = `
                               "(gogoproto.nullable)": false,
                               "(telescope:camel)": "shareOutAmount",
                               "(telescope:name)": "shareOutAmount",
-                              "(telescope:orig)": "shareOutAmount",
+                              "(telescope:orig)": "share_out_amount",
                             },
                             "parsedType": {
                               "name": "string",
@@ -5604,7 +5604,7 @@ exports[`osmosis/gamm/v1beta1/tx 1`] = `
                               "(gogoproto.nullable)": false,
                               "(telescope:camel)": "tokenInMaxs",
                               "(telescope:name)": "tokenInMaxs",
-                              "(telescope:orig)": "tokenInMaxs",
+                              "(telescope:orig)": "token_in_maxs",
                             },
                             "parsedType": {
                               "name": "Coin",
@@ -5636,7 +5636,7 @@ exports[`osmosis/gamm/v1beta1/tx 1`] = `
                               "(gogoproto.moretags)": "yaml:pool_id",
                               "(telescope:camel)": "poolId",
                               "(telescope:name)": "poolId",
-                              "(telescope:orig)": "poolId",
+                              "(telescope:orig)": "pool_id",
                             },
                             "parsedType": {
                               "name": "uint64",
@@ -5672,7 +5672,7 @@ exports[`osmosis/gamm/v1beta1/tx 1`] = `
                               "(gogoproto.nullable)": false,
                               "(telescope:camel)": "shareOutMinAmount",
                               "(telescope:name)": "shareOutMinAmount",
-                              "(telescope:orig)": "shareOutMinAmount",
+                              "(telescope:orig)": "share_out_min_amount",
                             },
                             "parsedType": {
                               "name": "string",
@@ -5691,7 +5691,7 @@ exports[`osmosis/gamm/v1beta1/tx 1`] = `
                               "(gogoproto.nullable)": false,
                               "(telescope:camel)": "tokenIn",
                               "(telescope:name)": "tokenIn",
-                              "(telescope:orig)": "tokenIn",
+                              "(telescope:orig)": "token_in",
                             },
                             "parsedType": {
                               "name": "Coin",
@@ -5722,7 +5722,7 @@ exports[`osmosis/gamm/v1beta1/tx 1`] = `
                               "(gogoproto.moretags)": "yaml:pool_id",
                               "(telescope:camel)": "poolId",
                               "(telescope:name)": "poolId",
-                              "(telescope:orig)": "poolId",
+                              "(telescope:orig)": "pool_id",
                             },
                             "parsedType": {
                               "name": "uint64",
@@ -5758,7 +5758,7 @@ exports[`osmosis/gamm/v1beta1/tx 1`] = `
                               "(gogoproto.nullable)": false,
                               "(telescope:camel)": "shareOutAmount",
                               "(telescope:name)": "shareOutAmount",
-                              "(telescope:orig)": "shareOutAmount",
+                              "(telescope:orig)": "share_out_amount",
                             },
                             "parsedType": {
                               "name": "string",
@@ -5775,7 +5775,7 @@ exports[`osmosis/gamm/v1beta1/tx 1`] = `
                               "(gogoproto.moretags)": "yaml:token_in_denom",
                               "(telescope:camel)": "tokenInDenom",
                               "(telescope:name)": "tokenInDenom",
-                              "(telescope:orig)": "tokenInDenom",
+                              "(telescope:orig)": "token_in_denom",
                             },
                             "parsedType": {
                               "name": "string",
@@ -5794,7 +5794,7 @@ exports[`osmosis/gamm/v1beta1/tx 1`] = `
                               "(gogoproto.nullable)": false,
                               "(telescope:camel)": "tokenInMaxAmount",
                               "(telescope:name)": "tokenInMaxAmount",
-                              "(telescope:orig)": "tokenInMaxAmount",
+                              "(telescope:orig)": "token_in_max_amount",
                             },
                             "parsedType": {
                               "name": "string",
@@ -5860,7 +5860,7 @@ exports[`osmosis/gamm/v1beta1/tx 1`] = `
                               "(gogoproto.nullable)": false,
                               "(telescope:camel)": "tokenIn",
                               "(telescope:name)": "tokenIn",
-                              "(telescope:orig)": "tokenIn",
+                              "(telescope:orig)": "token_in",
                             },
                             "parsedType": {
                               "name": "Coin",
@@ -5882,7 +5882,7 @@ exports[`osmosis/gamm/v1beta1/tx 1`] = `
                               "(gogoproto.nullable)": false,
                               "(telescope:camel)": "tokenOutMinAmount",
                               "(telescope:name)": "tokenOutMinAmount",
-                              "(telescope:orig)": "tokenOutMinAmount",
+                              "(telescope:orig)": "token_out_min_amount",
                             },
                             "parsedType": {
                               "name": "string",
@@ -5948,7 +5948,7 @@ exports[`osmosis/gamm/v1beta1/tx 1`] = `
                               "(gogoproto.nullable)": false,
                               "(telescope:camel)": "tokenInMaxAmount",
                               "(telescope:name)": "tokenInMaxAmount",
-                              "(telescope:orig)": "tokenInMaxAmount",
+                              "(telescope:orig)": "token_in_max_amount",
                             },
                             "parsedType": {
                               "name": "string",
@@ -5967,7 +5967,7 @@ exports[`osmosis/gamm/v1beta1/tx 1`] = `
                               "(gogoproto.nullable)": false,
                               "(telescope:camel)": "tokenOut",
                               "(telescope:name)": "tokenOut",
-                              "(telescope:orig)": "tokenOut",
+                              "(telescope:orig)": "token_out",
                             },
                             "parsedType": {
                               "name": "Coin",
@@ -6003,7 +6003,7 @@ exports[`osmosis/gamm/v1beta1/tx 1`] = `
                           "(gogoproto.moretags)": "yaml:pool_id",
                           "(telescope:camel)": "poolId",
                           "(telescope:name)": "poolId",
-                          "(telescope:orig)": "poolId",
+                          "(telescope:orig)": "pool_id",
                         },
                         "parsedType": {
                           "name": "uint64",
@@ -6039,7 +6039,7 @@ exports[`osmosis/gamm/v1beta1/tx 1`] = `
                           "(gogoproto.nullable)": false,
                           "(telescope:camel)": "shareInAmount",
                           "(telescope:name)": "shareInAmount",
-                          "(telescope:orig)": "shareInAmount",
+                          "(telescope:orig)": "share_in_amount",
                         },
                         "parsedType": {
                           "name": "string",
@@ -6058,7 +6058,7 @@ exports[`osmosis/gamm/v1beta1/tx 1`] = `
                           "(gogoproto.nullable)": false,
                           "(telescope:camel)": "tokenOutMins",
                           "(telescope:name)": "tokenOutMins",
-                          "(telescope:orig)": "tokenOutMins",
+                          "(telescope:orig)": "token_out_mins",
                         },
                         "parsedType": {
                           "name": "Coin",
@@ -6081,7 +6081,31 @@ exports[`osmosis/gamm/v1beta1/tx 1`] = `
                   },
                   "MsgExitPoolResponse": {
                     "comment": null,
-                    "fields": {},
+                    "fields": {
+                      "tokenOut": {
+                        "comment": null,
+                        "id": 1,
+                        "import": "cosmos/base/v1beta1/coin.proto",
+                        "importedName": "cosmos.base.v1beta1.Coin",
+                        "options": {
+                          "(gogoproto.moretags)": "yaml:token_out",
+                          "(gogoproto.nullable)": false,
+                          "(telescope:camel)": "tokenOut",
+                          "(telescope:name)": "tokenOut",
+                          "(telescope:orig)": "token_out",
+                        },
+                        "parsedType": {
+                          "name": "Coin",
+                          "type": "Type",
+                        },
+                        "rule": "repeated",
+                        "scope": [
+                          "cosmos.base.v1beta1",
+                        ],
+                        "scopeType": "protoImport",
+                        "type": "cosmos.base.v1beta1.Coin",
+                      },
+                    },
                     "keyTypes": [],
                     "name": "MsgExitPoolResponse",
                     "nested": null,
@@ -6100,7 +6124,7 @@ exports[`osmosis/gamm/v1beta1/tx 1`] = `
                           "(gogoproto.moretags)": "yaml:pool_id",
                           "(telescope:camel)": "poolId",
                           "(telescope:name)": "poolId",
-                          "(telescope:orig)": "poolId",
+                          "(telescope:orig)": "pool_id",
                         },
                         "parsedType": {
                           "name": "uint64",
@@ -6136,7 +6160,7 @@ exports[`osmosis/gamm/v1beta1/tx 1`] = `
                           "(gogoproto.nullable)": false,
                           "(telescope:camel)": "shareInMaxAmount",
                           "(telescope:name)": "shareInMaxAmount",
-                          "(telescope:orig)": "shareInMaxAmount",
+                          "(telescope:orig)": "share_in_max_amount",
                         },
                         "parsedType": {
                           "name": "string",
@@ -6155,7 +6179,7 @@ exports[`osmosis/gamm/v1beta1/tx 1`] = `
                           "(gogoproto.nullable)": false,
                           "(telescope:camel)": "tokenOut",
                           "(telescope:name)": "tokenOut",
-                          "(telescope:orig)": "tokenOut",
+                          "(telescope:orig)": "token_out",
                         },
                         "parsedType": {
                           "name": "Coin",
@@ -6188,7 +6212,7 @@ exports[`osmosis/gamm/v1beta1/tx 1`] = `
                           "(gogoproto.nullable)": false,
                           "(telescope:camel)": "shareInAmount",
                           "(telescope:name)": "shareInAmount",
-                          "(telescope:orig)": "shareInAmount",
+                          "(telescope:orig)": "share_in_amount",
                         },
                         "parsedType": {
                           "name": "string",
@@ -6216,7 +6240,7 @@ exports[`osmosis/gamm/v1beta1/tx 1`] = `
                           "(gogoproto.moretags)": "yaml:pool_id",
                           "(telescope:camel)": "poolId",
                           "(telescope:name)": "poolId",
-                          "(telescope:orig)": "poolId",
+                          "(telescope:orig)": "pool_id",
                         },
                         "parsedType": {
                           "name": "uint64",
@@ -6252,7 +6276,7 @@ exports[`osmosis/gamm/v1beta1/tx 1`] = `
                           "(gogoproto.nullable)": false,
                           "(telescope:camel)": "shareInAmount",
                           "(telescope:name)": "shareInAmount",
-                          "(telescope:orig)": "shareInAmount",
+                          "(telescope:orig)": "share_in_amount",
                         },
                         "parsedType": {
                           "name": "string",
@@ -6269,7 +6293,7 @@ exports[`osmosis/gamm/v1beta1/tx 1`] = `
                           "(gogoproto.moretags)": "yaml:token_out_denom",
                           "(telescope:camel)": "tokenOutDenom",
                           "(telescope:name)": "tokenOutDenom",
-                          "(telescope:orig)": "tokenOutDenom",
+                          "(telescope:orig)": "token_out_denom",
                         },
                         "parsedType": {
                           "name": "string",
@@ -6288,7 +6312,7 @@ exports[`osmosis/gamm/v1beta1/tx 1`] = `
                           "(gogoproto.nullable)": false,
                           "(telescope:camel)": "tokenOutMinAmount",
                           "(telescope:name)": "tokenOutMinAmount",
-                          "(telescope:orig)": "tokenOutMinAmount",
+                          "(telescope:orig)": "token_out_min_amount",
                         },
                         "parsedType": {
                           "name": "string",
@@ -6318,7 +6342,7 @@ exports[`osmosis/gamm/v1beta1/tx 1`] = `
                           "(gogoproto.nullable)": false,
                           "(telescope:camel)": "tokenOutAmount",
                           "(telescope:name)": "tokenOutAmount",
-                          "(telescope:orig)": "tokenOutAmount",
+                          "(telescope:orig)": "token_out_amount",
                         },
                         "parsedType": {
                           "name": "string",
@@ -6347,7 +6371,7 @@ exports[`osmosis/gamm/v1beta1/tx 1`] = `
                           "(gogoproto.moretags)": "yaml:pool_id",
                           "(telescope:camel)": "poolId",
                           "(telescope:name)": "poolId",
-                          "(telescope:orig)": "poolId",
+                          "(telescope:orig)": "pool_id",
                         },
                         "parsedType": {
                           "name": "uint64",
@@ -6383,7 +6407,7 @@ exports[`osmosis/gamm/v1beta1/tx 1`] = `
                           "(gogoproto.nullable)": false,
                           "(telescope:camel)": "shareOutAmount",
                           "(telescope:name)": "shareOutAmount",
-                          "(telescope:orig)": "shareOutAmount",
+                          "(telescope:orig)": "share_out_amount",
                         },
                         "parsedType": {
                           "name": "string",
@@ -6402,7 +6426,7 @@ exports[`osmosis/gamm/v1beta1/tx 1`] = `
                           "(gogoproto.nullable)": false,
                           "(telescope:camel)": "tokenInMaxs",
                           "(telescope:name)": "tokenInMaxs",
-                          "(telescope:orig)": "tokenInMaxs",
+                          "(telescope:orig)": "token_in_maxs",
                         },
                         "parsedType": {
                           "name": "Coin",
@@ -6425,7 +6449,50 @@ exports[`osmosis/gamm/v1beta1/tx 1`] = `
                   },
                   "MsgJoinPoolResponse": {
                     "comment": null,
-                    "fields": {},
+                    "fields": {
+                      "shareOutAmount": {
+                        "comment": null,
+                        "id": 1,
+                        "isScalar": true,
+                        "options": {
+                          "(gogoproto.customtype)": "github.com/cosmos/cosmos-sdk/types.Int",
+                          "(gogoproto.moretags)": "yaml:share_out_amount",
+                          "(gogoproto.nullable)": false,
+                          "(telescope:camel)": "shareOutAmount",
+                          "(telescope:name)": "shareOutAmount",
+                          "(telescope:orig)": "share_out_amount",
+                        },
+                        "parsedType": {
+                          "name": "string",
+                          "type": "native",
+                        },
+                        "type": "string",
+                        "typeNum": 13,
+                      },
+                      "tokenIn": {
+                        "comment": null,
+                        "id": 2,
+                        "import": "cosmos/base/v1beta1/coin.proto",
+                        "importedName": "cosmos.base.v1beta1.Coin",
+                        "options": {
+                          "(gogoproto.moretags)": "yaml:token_in",
+                          "(gogoproto.nullable)": false,
+                          "(telescope:camel)": "tokenIn",
+                          "(telescope:name)": "tokenIn",
+                          "(telescope:orig)": "token_in",
+                        },
+                        "parsedType": {
+                          "name": "Coin",
+                          "type": "Type",
+                        },
+                        "rule": "repeated",
+                        "scope": [
+                          "cosmos.base.v1beta1",
+                        ],
+                        "scopeType": "protoImport",
+                        "type": "cosmos.base.v1beta1.Coin",
+                      },
+                    },
                     "keyTypes": [],
                     "name": "MsgJoinPoolResponse",
                     "nested": null,
@@ -6445,7 +6512,7 @@ exports[`osmosis/gamm/v1beta1/tx 1`] = `
                           "(gogoproto.moretags)": "yaml:pool_id",
                           "(telescope:camel)": "poolId",
                           "(telescope:name)": "poolId",
-                          "(telescope:orig)": "poolId",
+                          "(telescope:orig)": "pool_id",
                         },
                         "parsedType": {
                           "name": "uint64",
@@ -6481,7 +6548,7 @@ exports[`osmosis/gamm/v1beta1/tx 1`] = `
                           "(gogoproto.nullable)": false,
                           "(telescope:camel)": "shareOutMinAmount",
                           "(telescope:name)": "shareOutMinAmount",
-                          "(telescope:orig)": "shareOutMinAmount",
+                          "(telescope:orig)": "share_out_min_amount",
                         },
                         "parsedType": {
                           "name": "string",
@@ -6500,7 +6567,7 @@ exports[`osmosis/gamm/v1beta1/tx 1`] = `
                           "(gogoproto.nullable)": false,
                           "(telescope:camel)": "tokenIn",
                           "(telescope:name)": "tokenIn",
-                          "(telescope:orig)": "tokenIn",
+                          "(telescope:orig)": "token_in",
                         },
                         "parsedType": {
                           "name": "Coin",
@@ -6533,7 +6600,7 @@ exports[`osmosis/gamm/v1beta1/tx 1`] = `
                           "(gogoproto.nullable)": false,
                           "(telescope:camel)": "shareOutAmount",
                           "(telescope:name)": "shareOutAmount",
-                          "(telescope:orig)": "shareOutAmount",
+                          "(telescope:orig)": "share_out_amount",
                         },
                         "parsedType": {
                           "name": "string",
@@ -6561,7 +6628,7 @@ exports[`osmosis/gamm/v1beta1/tx 1`] = `
                           "(gogoproto.moretags)": "yaml:pool_id",
                           "(telescope:camel)": "poolId",
                           "(telescope:name)": "poolId",
-                          "(telescope:orig)": "poolId",
+                          "(telescope:orig)": "pool_id",
                         },
                         "parsedType": {
                           "name": "uint64",
@@ -6597,7 +6664,7 @@ exports[`osmosis/gamm/v1beta1/tx 1`] = `
                           "(gogoproto.nullable)": false,
                           "(telescope:camel)": "shareOutAmount",
                           "(telescope:name)": "shareOutAmount",
-                          "(telescope:orig)": "shareOutAmount",
+                          "(telescope:orig)": "share_out_amount",
                         },
                         "parsedType": {
                           "name": "string",
@@ -6614,7 +6681,7 @@ exports[`osmosis/gamm/v1beta1/tx 1`] = `
                           "(gogoproto.moretags)": "yaml:token_in_denom",
                           "(telescope:camel)": "tokenInDenom",
                           "(telescope:name)": "tokenInDenom",
-                          "(telescope:orig)": "tokenInDenom",
+                          "(telescope:orig)": "token_in_denom",
                         },
                         "parsedType": {
                           "name": "string",
@@ -6633,7 +6700,7 @@ exports[`osmosis/gamm/v1beta1/tx 1`] = `
                           "(gogoproto.nullable)": false,
                           "(telescope:camel)": "tokenInMaxAmount",
                           "(telescope:name)": "tokenInMaxAmount",
-                          "(telescope:orig)": "tokenInMaxAmount",
+                          "(telescope:orig)": "token_in_max_amount",
                         },
                         "parsedType": {
                           "name": "string",
@@ -6663,7 +6730,7 @@ exports[`osmosis/gamm/v1beta1/tx 1`] = `
                           "(gogoproto.nullable)": false,
                           "(telescope:camel)": "tokenInAmount",
                           "(telescope:name)": "tokenInAmount",
-                          "(telescope:orig)": "tokenInAmount",
+                          "(telescope:orig)": "token_in_amount",
                         },
                         "parsedType": {
                           "name": "string",
@@ -6729,7 +6796,7 @@ exports[`osmosis/gamm/v1beta1/tx 1`] = `
                           "(gogoproto.nullable)": false,
                           "(telescope:camel)": "tokenIn",
                           "(telescope:name)": "tokenIn",
-                          "(telescope:orig)": "tokenIn",
+                          "(telescope:orig)": "token_in",
                         },
                         "parsedType": {
                           "name": "Coin",
@@ -6751,7 +6818,7 @@ exports[`osmosis/gamm/v1beta1/tx 1`] = `
                           "(gogoproto.nullable)": false,
                           "(telescope:camel)": "tokenOutMinAmount",
                           "(telescope:name)": "tokenOutMinAmount",
-                          "(telescope:orig)": "tokenOutMinAmount",
+                          "(telescope:orig)": "token_out_min_amount",
                         },
                         "parsedType": {
                           "name": "string",
@@ -6781,7 +6848,7 @@ exports[`osmosis/gamm/v1beta1/tx 1`] = `
                           "(gogoproto.nullable)": false,
                           "(telescope:camel)": "tokenOutAmount",
                           "(telescope:name)": "tokenOutAmount",
-                          "(telescope:orig)": "tokenOutAmount",
+                          "(telescope:orig)": "token_out_amount",
                         },
                         "parsedType": {
                           "name": "string",
@@ -6847,7 +6914,7 @@ exports[`osmosis/gamm/v1beta1/tx 1`] = `
                           "(gogoproto.nullable)": false,
                           "(telescope:camel)": "tokenInMaxAmount",
                           "(telescope:name)": "tokenInMaxAmount",
-                          "(telescope:orig)": "tokenInMaxAmount",
+                          "(telescope:orig)": "token_in_max_amount",
                         },
                         "parsedType": {
                           "name": "string",
@@ -6866,7 +6933,7 @@ exports[`osmosis/gamm/v1beta1/tx 1`] = `
                           "(gogoproto.nullable)": false,
                           "(telescope:camel)": "tokenOut",
                           "(telescope:name)": "tokenOut",
-                          "(telescope:orig)": "tokenOut",
+                          "(telescope:orig)": "token_out",
                         },
                         "parsedType": {
                           "name": "Coin",
@@ -6899,7 +6966,7 @@ exports[`osmosis/gamm/v1beta1/tx 1`] = `
                           "(gogoproto.nullable)": false,
                           "(telescope:camel)": "tokenInAmount",
                           "(telescope:name)": "tokenInAmount",
-                          "(telescope:orig)": "tokenInAmount",
+                          "(telescope:orig)": "token_in_amount",
                         },
                         "parsedType": {
                           "name": "string",
@@ -6927,7 +6994,7 @@ exports[`osmosis/gamm/v1beta1/tx 1`] = `
                           "(gogoproto.moretags)": "yaml:pool_id",
                           "(telescope:camel)": "poolId",
                           "(telescope:name)": "poolId",
-                          "(telescope:orig)": "poolId",
+                          "(telescope:orig)": "pool_id",
                         },
                         "parsedType": {
                           "name": "uint64",
@@ -6944,7 +7011,7 @@ exports[`osmosis/gamm/v1beta1/tx 1`] = `
                           "(gogoproto.moretags)": "yaml:token_out_denom",
                           "(telescope:camel)": "tokenOutDenom",
                           "(telescope:name)": "tokenOutDenom",
-                          "(telescope:orig)": "tokenOutDenom",
+                          "(telescope:orig)": "token_out_denom",
                         },
                         "parsedType": {
                           "name": "string",
@@ -6972,7 +7039,7 @@ exports[`osmosis/gamm/v1beta1/tx 1`] = `
                           "(gogoproto.moretags)": "yaml:pool_id",
                           "(telescope:camel)": "poolId",
                           "(telescope:name)": "poolId",
-                          "(telescope:orig)": "poolId",
+                          "(telescope:orig)": "pool_id",
                         },
                         "parsedType": {
                           "name": "uint64",
@@ -6989,7 +7056,7 @@ exports[`osmosis/gamm/v1beta1/tx 1`] = `
                           "(gogoproto.moretags)": "yaml:token_out_denom",
                           "(telescope:camel)": "tokenInDenom",
                           "(telescope:name)": "tokenInDenom",
-                          "(telescope:orig)": "tokenInDenom",
+                          "(telescope:orig)": "token_in_denom",
                         },
                         "parsedType": {
                           "name": "string",

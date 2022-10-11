@@ -1,4 +1,4 @@
-import { Params, ParamsSDKType, DistrInfo, DistrInfoSDKType } from "./incentives";
+import { Params, ParamsSDKType, DistrInfo, DistrInfoSDKType, PoolToGauges, PoolToGaugesSDKType } from "./incentives";
 import { Duration, DurationSDKType } from "../../../google/protobuf/duration";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
@@ -10,6 +10,7 @@ export interface GenesisState {
   params: Params;
   lockableDurations: Duration[];
   distrInfo?: DistrInfo;
+  poolToGauges?: PoolToGauges;
 }
 
 /** GenesisState defines the pool incentives module's genesis state. */
@@ -18,13 +19,15 @@ export interface GenesisStateSDKType {
   params: ParamsSDKType;
   lockable_durations: DurationSDKType[];
   distr_info?: DistrInfoSDKType;
+  pool_to_gauges?: PoolToGaugesSDKType;
 }
 
 function createBaseGenesisState(): GenesisState {
   return {
     params: undefined,
     lockableDurations: [],
-    distrInfo: undefined
+    distrInfo: undefined,
+    poolToGauges: undefined
   };
 }
 
@@ -40,6 +43,10 @@ export const GenesisState = {
 
     if (message.distrInfo !== undefined) {
       DistrInfo.encode(message.distrInfo, writer.uint32(26).fork()).ldelim();
+    }
+
+    if (message.poolToGauges !== undefined) {
+      PoolToGauges.encode(message.poolToGauges, writer.uint32(34).fork()).ldelim();
     }
 
     return writer;
@@ -66,6 +73,10 @@ export const GenesisState = {
           message.distrInfo = DistrInfo.decode(reader, reader.uint32());
           break;
 
+        case 4:
+          message.poolToGauges = PoolToGauges.decode(reader, reader.uint32());
+          break;
+
         default:
           reader.skipType(tag & 7);
           break;
@@ -79,7 +90,8 @@ export const GenesisState = {
     return {
       params: isSet(object.params) ? Params.fromJSON(object.params) : undefined,
       lockableDurations: Array.isArray(object?.lockableDurations) ? object.lockableDurations.map((e: any) => Duration.fromJSON(e)) : [],
-      distrInfo: isSet(object.distrInfo) ? DistrInfo.fromJSON(object.distrInfo) : undefined
+      distrInfo: isSet(object.distrInfo) ? DistrInfo.fromJSON(object.distrInfo) : undefined,
+      poolToGauges: isSet(object.poolToGauges) ? PoolToGauges.fromJSON(object.poolToGauges) : undefined
     };
   },
 
@@ -94,6 +106,7 @@ export const GenesisState = {
     }
 
     message.distrInfo !== undefined && (obj.distrInfo = message.distrInfo ? DistrInfo.toJSON(message.distrInfo) : undefined);
+    message.poolToGauges !== undefined && (obj.poolToGauges = message.poolToGauges ? PoolToGauges.toJSON(message.poolToGauges) : undefined);
     return obj;
   },
 
@@ -102,6 +115,7 @@ export const GenesisState = {
     message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     message.lockableDurations = object.lockableDurations?.map(e => Duration.fromPartial(e)) || [];
     message.distrInfo = object.distrInfo !== undefined && object.distrInfo !== null ? DistrInfo.fromPartial(object.distrInfo) : undefined;
+    message.poolToGauges = object.poolToGauges !== undefined && object.poolToGauges !== null ? PoolToGauges.fromPartial(object.poolToGauges) : undefined;
     return message;
   },
 
@@ -109,7 +123,8 @@ export const GenesisState = {
     return {
       params: isSet(object.params) ? Params.fromSDK(object.params) : undefined,
       lockableDurations: Array.isArray(object?.lockable_durations) ? object.lockable_durations.map((e: any) => Duration.fromSDK(e)) : [],
-      distrInfo: isSet(object.distr_info) ? DistrInfo.fromSDK(object.distr_info) : undefined
+      distrInfo: isSet(object.distr_info) ? DistrInfo.fromSDK(object.distr_info) : undefined,
+      poolToGauges: isSet(object.pool_to_gauges) ? PoolToGauges.fromSDK(object.pool_to_gauges) : undefined
     };
   },
 
@@ -124,6 +139,7 @@ export const GenesisState = {
     }
 
     message.distrInfo !== undefined && (obj.distr_info = message.distrInfo ? DistrInfo.toSDK(message.distrInfo) : undefined);
+    message.poolToGauges !== undefined && (obj.pool_to_gauges = message.poolToGauges ? PoolToGauges.toSDK(message.poolToGauges) : undefined);
     return obj;
   }
 

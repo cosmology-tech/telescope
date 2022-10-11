@@ -5,7 +5,7 @@
   */
  
 import * as _m0 from "protobufjs/minimal";
-import Long from 'long';
+import * as Long from 'long';
 
 if (_m0.util.Long !== Long) {
     _m0.util.Long = (Long as any);

@@ -346,6 +346,14 @@ const result = await osmosis.gamm.v1beta1.totalLiquidity(request);
 const request: QueryPoolRequest;
 const result = await osmosis.gamm.v1beta1.pool(request);
 
+/**
+ * PoolType returns the type of the pool.
+ * Returns "Balancer" as a string literal when the pool is a balancer pool.
+ * Errors if the pool is failed to be type caseted.
+ */
+const request: QueryPoolTypeRequest;
+const result = await osmosis.gamm.v1beta1.poolType(request);
+
 /** PoolParams */
 const request: QueryPoolParamsRequest;
 const result = await osmosis.gamm.v1beta1.poolParams(request);
@@ -373,47 +381,56 @@ const result = await osmosis.gamm.v1beta1.estimateSwapExactAmountIn(request);
 const request: QuerySwapExactAmountOutRequest;
 const result = await osmosis.gamm.v1beta1.estimateSwapExactAmountOut(request);
 
-/** returns coins that is going to be distributed */
+/** ModuleToDistributeCoins returns coins that are going to be distributed */
 const request: ModuleToDistributeCoinsRequest;
 const result = await osmosis.incentives.moduleToDistributeCoins(request);
 
-/** returns coins that are distributed by module so far */
+/**
+ * ModuleDistributedCoins returns coins that are distributed by the module so
+ * far
+ */
 const request: ModuleDistributedCoinsRequest;
 const result = await osmosis.incentives.moduleDistributedCoins(request);
 
-/** returns Gauge by id */
+/** GaugeByID returns gauges by their respective ID */
 const request: GaugeByIDRequest;
 const result = await osmosis.incentives.gaugeByID(request);
 
-/** returns gauges both upcoming and active */
+/** Gauges returns both upcoming and active gauges */
 const request: GaugesRequest;
 const result = await osmosis.incentives.gauges(request);
 
-/** returns active gauges */
+/** ActiveGauges returns active gauges */
 const request: ActiveGaugesRequest;
 const result = await osmosis.incentives.activeGauges(request);
 
-/** returns active gauges per denom */
+/** ActiveGaugesPerDenom returns active gauges by denom */
 const request: ActiveGaugesPerDenomRequest;
 const result = await osmosis.incentives.activeGaugesPerDenom(request);
 
-/** returns scheduled gauges */
+/** Returns scheduled gauges that have not yet occured */
 const request: UpcomingGaugesRequest;
 const result = await osmosis.incentives.upcomingGauges(request);
 
-/** returns scheduled gauges per denom */
+/**
+ * UpcomingGaugesPerDenom returns scheduled gauges that have not yet occured
+ * by denom
+ */
 const request: UpcomingGaugesPerDenomRequest;
 const result = await osmosis.incentives.upcomingGaugesPerDenom(request);
 
 /**
- * RewardsEst returns an estimate of the rewards at a future specific time.
- * The querier either provides an address or a set of locks
- * for which they want to find the associated rewards.
+ * RewardsEst returns an estimate of the rewards from now until a specified
+ * time in the future The querier either provides an address or a set of locks
+ * for which they want to find the associated rewards
  */
 const request: RewardsEstRequest;
 const result = await osmosis.incentives.rewardsEst(request);
 
-/** returns lockable durations that are valid to give incentives */
+/**
+ * LockableDurations returns lockable durations that are valid to distribute
+ * incentives for
+ */
 const request: QueryLockableDurationsRequest;
 const result = await osmosis.incentives.lockableDurations(request);
 
@@ -491,7 +508,7 @@ const result = await osmosis.lockup.accountLockedLongerDurationDenom(request);
 const request: QueryParamsRequest;
 const result = await osmosis.mint.v1beta1.params(request);
 
-/** EpochProvisions current minting epoch provisions value. */
+/** EpochProvisions returns the current minting epoch provisions value. */
 const request: QueryEpochProvisionsRequest;
 const result = await osmosis.mint.v1beta1.epochProvisions(request);
 
@@ -499,43 +516,58 @@ const result = await osmosis.mint.v1beta1.epochProvisions(request);
 const request: QueryGaugeIdsRequest;
 const result = await osmosis.poolincentives.v1beta1.gaugeIds(request);
 
-/** DistrInfo */
+/** DistrInfo returns the pool's matching gauge ids and weights. */
 const request: QueryDistrInfoRequest;
 const result = await osmosis.poolincentives.v1beta1.distrInfo(request);
 
-/** Params */
+/** Params returns pool incentives params. */
 const request: QueryParamsRequest;
 const result = await osmosis.poolincentives.v1beta1.params(request);
 
-/** LockableDurations */
+/** LockableDurations returns lock durations for pools. */
 const request: QueryLockableDurationsRequest;
 const result = await osmosis.poolincentives.v1beta1.lockableDurations(request);
 
-/** IncentivizedPools */
+/** IncentivizedPools returns currently incentivized pools */
 const request: QueryIncentivizedPoolsRequest;
 const result = await osmosis.poolincentives.v1beta1.incentivizedPools(request);
 
-/** ExternalIncentiveGauges */
+/** ExternalIncentiveGauges returns external incentive gauges. */
 const request: QueryExternalIncentiveGaugesRequest;
 const result = await osmosis.poolincentives.v1beta1.externalIncentiveGauges(request);
 
-/** Params returns the total set of minting parameters. */
+/** Returns list of Sales ordered by the creation time */
+const request: QuerySales;
+const result = await osmosis.streamswap.v1.sales(request);
+
+/** Returns the specific Sale object */
+const request: QuerySale;
+const result = await osmosis.streamswap.v1.sale(request);
+
+/** UserPosition */
+const request: QueryUserPosition;
+const result = await osmosis.streamswap.v1.userPosition(request);
+
+/** Params returns the total set of superfluid parameters. */
 const request: QueryParamsRequest;
 const result = await osmosis.superfluid.params(request);
 
-/** Returns superfluid asset type */
+/**
+ * Returns superfluid asset type, whether if it's a native asset or an lp
+ * share.
+ */
 const request: AssetTypeRequest;
 const result = await osmosis.superfluid.assetType(request);
 
-/** Returns all superfluid asset types */
+/** Returns all registered superfluid assets. */
 const request: AllAssetsRequest;
 const result = await osmosis.superfluid.allAssets(request);
 
-/** Returns superfluid asset Multiplier */
+/** Returns the osmo equivalent multiplier used in the most recent epoch. */
 const request: AssetMultiplierRequest;
 const result = await osmosis.superfluid.assetMultiplier(request);
 
-/** Returns all superfluid intermediary account */
+/** Returns all superfluid intermediary accounts. */
 const request: AllIntermediaryAccountsRequest;
 const result = await osmosis.superfluid.allIntermediaryAccounts(request);
 
@@ -544,24 +576,24 @@ const request: ConnectedIntermediaryAccountRequest;
 const result = await osmosis.superfluid.connectedIntermediaryAccount(request);
 
 /**
- * Returns the total amount of osmo superfluidly staked
- * response denominated in uosmo
+ * Returns the total amount of osmo superfluidly staked.
+ * Response is denominated in uosmo.
  */
 const request: TotalSuperfluidDelegationsRequest;
 const result = await osmosis.superfluid.totalSuperfluidDelegations(request);
 
 /**
- * Returns the coins superfluid delegated for a delegator, validator, denom
+ * Returns the coins superfluid delegated for the delegator, validator, denom
  * triplet
  */
 const request: SuperfluidDelegationAmountRequest;
 const result = await osmosis.superfluid.superfluidDelegationAmount(request);
 
-/** Returns all the superfluid poistions for a specific delegator */
+/** Returns all the delegated superfluid poistions for a specific delegator. */
 const request: SuperfluidDelegationsByDelegatorRequest;
 const result = await osmosis.superfluid.superfluidDelegationsByDelegator(request);
 
-/** SuperfluidUndelegationsByDelegator */
+/** Returns all the undelegating superfluid poistions for a specific delegator. */
 const request: SuperfluidUndelegationsByDelegatorRequest;
 const result = await osmosis.superfluid.superfluidUndelegationsByDelegator(request);
 
@@ -580,35 +612,60 @@ const result = await osmosis.superfluid.superfluidDelegationsByValidatorDenom(re
 const request: EstimateSuperfluidDelegatedAmountByValidatorDenomRequest;
 const result = await osmosis.superfluid.estimateSuperfluidDelegatedAmountByValidatorDenom(request);
 
-/** Params returns the total set of minting parameters. */
+/** Returns the specified delegations for a specific delegator */
+const request: QueryTotalDelegationByDelegatorRequest;
+const result = await osmosis.superfluid.totalDelegationByDelegator(request);
+
+/**
+ * Params defines a gRPC query method that returns the tokenfactory module's
+ * parameters.
+ */
 const request: QueryParamsRequest;
 const result = await osmosis.tokenfactory.v1beta1.params(request);
 
-/** DenomAuthorityMetadata */
+/**
+ * DenomAuthorityMetadata defines a gRPC query method for fetching
+ * DenomAuthorityMetadata for a particular denom.
+ */
 const request: QueryDenomAuthorityMetadataRequest;
 const result = await osmosis.tokenfactory.v1beta1.denomAuthorityMetadata(request);
 
-/** DenomsFromCreator */
+/**
+ * DenomsFromCreator defines a gRPC query method for fetching all
+ * denominations created by a specific admin/creator.
+ */
 const request: QueryDenomsFromCreatorRequest;
 const result = await osmosis.tokenfactory.v1beta1.denomsFromCreator(request);
 
+/** Params */
+const request: ParamsRequest;
+const result = await osmosis.twap.v1beta1.params(request);
+
+/** ArithmeticTwap */
+const request: ArithmeticTwapRequest;
+const result = await osmosis.twap.v1beta1.arithmeticTwap(request);
+
+/** ArithmeticTwapToNow */
+const request: ArithmeticTwapToNowRequest;
+const result = await osmosis.twap.v1beta1.arithmeticTwapToNow(request);
+
 /**
  * FeeTokens returns a list of all the whitelisted fee tokens and their
- * corresponding pools It does not include the BaseDenom, which has its own
+ * corresponding pools. It does not include the BaseDenom, which has its own
  * query endpoint
  */
 const request: QueryFeeTokensRequest;
 const result = await osmosis.txfees.v1beta1.feeTokens(request);
 
-/** DenomSpotPrice */
+/** DenomSpotPrice returns all spot prices by each registered token denom. */
 const request: QueryDenomSpotPriceRequest;
 const result = await osmosis.txfees.v1beta1.denomSpotPrice(request);
 
-/** DenomPoolId */
+/** Returns the poolID for a specified denom input. */
 const request: QueryDenomPoolIdRequest;
 const result = await osmosis.txfees.v1beta1.denomPoolId(request);
 
-/** BaseDenom */
+/** Returns a list of all base denom tokens and their corresponding pools. */
 const request: QueryBaseDenomRequest;
 const result = await osmosis.txfees.v1beta1.baseDenom(request);"
 `;
@@ -628,6 +685,7 @@ exports[`documentRpcClientsReadme 1`] = `
 [\`osmosis.gamm.v1beta1.numPools()\` RPC](#osmosisgammv1beta1numpools-rpc)
 [\`osmosis.gamm.v1beta1.totalLiquidity()\` RPC](#osmosisgammv1beta1totalliquidity-rpc)
 [\`osmosis.gamm.v1beta1.pool()\` RPC](#osmosisgammv1beta1pool-rpc)
+[\`osmosis.gamm.v1beta1.poolType()\` RPC](#osmosisgammv1beta1pooltype-rpc)
 [\`osmosis.gamm.v1beta1.poolParams()\` RPC](#osmosisgammv1beta1poolparams-rpc)
 [\`osmosis.gamm.v1beta1.totalPoolLiquidity()\` RPC](#osmosisgammv1beta1totalpoolliquidity-rpc)
 [\`osmosis.gamm.v1beta1.totalShares()\` RPC](#osmosisgammv1beta1totalshares-rpc)
@@ -668,6 +726,9 @@ exports[`documentRpcClientsReadme 1`] = `
 [\`osmosis.poolincentives.v1beta1.lockableDurations()\` RPC](#osmosispoolincentivesv1beta1lockabledurations-rpc)
 [\`osmosis.poolincentives.v1beta1.incentivizedPools()\` RPC](#osmosispoolincentivesv1beta1incentivizedpools-rpc)
 [\`osmosis.poolincentives.v1beta1.externalIncentiveGauges()\` RPC](#osmosispoolincentivesv1beta1externalincentivegauges-rpc)
+[\`osmosis.streamswap.v1.sales()\` RPC](#osmosisstreamswapv1sales-rpc)
+[\`osmosis.streamswap.v1.sale()\` RPC](#osmosisstreamswapv1sale-rpc)
+[\`osmosis.streamswap.v1.userPosition()\` RPC](#osmosisstreamswapv1userposition-rpc)
 [\`osmosis.superfluid.params()\` RPC](#osmosissuperfluidparams-rpc)
 [\`osmosis.superfluid.assetType()\` RPC](#osmosissuperfluidassettype-rpc)
 [\`osmosis.superfluid.allAssets()\` RPC](#osmosissuperfluidallassets-rpc)
@@ -680,9 +741,13 @@ exports[`documentRpcClientsReadme 1`] = `
 [\`osmosis.superfluid.superfluidUndelegationsByDelegator()\` RPC](#osmosissuperfluidsuperfluidundelegationsbydelegator-rpc)
 [\`osmosis.superfluid.superfluidDelegationsByValidatorDenom()\` RPC](#osmosissuperfluidsuperfluiddelegationsbyvalidatordenom-rpc)
 [\`osmosis.superfluid.estimateSuperfluidDelegatedAmountByValidatorDenom()\` RPC](#osmosissuperfluidestimatesuperfluiddelegatedamountbyvalidatordenom-rpc)
+[\`osmosis.superfluid.totalDelegationByDelegator()\` RPC](#osmosissuperfluidtotaldelegationbydelegator-rpc)
 [\`osmosis.tokenfactory.v1beta1.params()\` RPC](#osmosistokenfactoryv1beta1params-rpc)
 [\`osmosis.tokenfactory.v1beta1.denomAuthorityMetadata()\` RPC](#osmosistokenfactoryv1beta1denomauthoritymetadata-rpc)
 [\`osmosis.tokenfactory.v1beta1.denomsFromCreator()\` RPC](#osmosistokenfactoryv1beta1denomsfromcreator-rpc)
+[\`osmosis.twap.v1beta1.params()\` RPC](#osmosistwapv1beta1params-rpc)
+[\`osmosis.twap.v1beta1.arithmeticTwap()\` RPC](#osmosistwapv1beta1arithmetictwap-rpc)
+[\`osmosis.twap.v1beta1.arithmeticTwapToNow()\` RPC](#osmosistwapv1beta1arithmetictwaptonow-rpc)
 [\`osmosis.txfees.v1beta1.feeTokens()\` RPC](#osmosistxfeesv1beta1feetokens-rpc)
 [\`osmosis.txfees.v1beta1.denomSpotPrice()\` RPC](#osmosistxfeesv1beta1denomspotprice-rpc)
 [\`osmosis.txfees.v1beta1.denomPoolId()\` RPC](#osmosistxfeesv1beta1denompoolid-rpc)
@@ -800,6 +865,20 @@ const request: QueryPoolRequest;
 const result = await osmosis.gamm.v1beta1.pool(request);
 \`\`\`
 
+##### \`osmosis.gamm.v1beta1.poolType()\` RPC
+        
+PoolType
+
+\`\`\`js
+/**
+ * PoolType returns the type of the pool.
+ * Returns "Balancer" as a string literal when the pool is a balancer pool.
+ * Errors if the pool is failed to be type caseted.
+ */
+const request: QueryPoolTypeRequest;
+const result = await osmosis.gamm.v1beta1.poolType(request);
+\`\`\`
+
 ##### \`osmosis.gamm.v1beta1.poolParams()\` RPC
         
 PoolParams
@@ -868,7 +947,7 @@ const result = await osmosis.gamm.v1beta1.estimateSwapExactAmountOut(request);
 ModuleToDistributeCoins
 
 \`\`\`js
-/** returns coins that is going to be distributed */
+/** ModuleToDistributeCoins returns coins that are going to be distributed */
 const request: ModuleToDistributeCoinsRequest;
 const result = await osmosis.incentives.moduleToDistributeCoins(request);
 \`\`\`
@@ -878,7 +957,10 @@ const result = await osmosis.incentives.moduleToDistributeCoins(request);
 ModuleDistributedCoins
 
 \`\`\`js
-/** returns coins that are distributed by module so far */
+/**
+ * ModuleDistributedCoins returns coins that are distributed by the module so
+ * far
+ */
 const request: ModuleDistributedCoinsRequest;
 const result = await osmosis.incentives.moduleDistributedCoins(request);
 \`\`\`
@@ -888,7 +970,7 @@ const result = await osmosis.incentives.moduleDistributedCoins(request);
 GaugeByID
 
 \`\`\`js
-/** returns Gauge by id */
+/** GaugeByID returns gauges by their respective ID */
 const request: GaugeByIDRequest;
 const result = await osmosis.incentives.gaugeByID(request);
 \`\`\`
@@ -898,7 +980,7 @@ const result = await osmosis.incentives.gaugeByID(request);
 Gauges
 
 \`\`\`js
-/** returns gauges both upcoming and active */
+/** Gauges returns both upcoming and active gauges */
 const request: GaugesRequest;
 const result = await osmosis.incentives.gauges(request);
 \`\`\`
@@ -908,7 +990,7 @@ const result = await osmosis.incentives.gauges(request);
 ActiveGauges
 
 \`\`\`js
-/** returns active gauges */
+/** ActiveGauges returns active gauges */
 const request: ActiveGaugesRequest;
 const result = await osmosis.incentives.activeGauges(request);
 \`\`\`
@@ -918,7 +1000,7 @@ const result = await osmosis.incentives.activeGauges(request);
 ActiveGaugesPerDenom
 
 \`\`\`js
-/** returns active gauges per denom */
+/** ActiveGaugesPerDenom returns active gauges by denom */
 const request: ActiveGaugesPerDenomRequest;
 const result = await osmosis.incentives.activeGaugesPerDenom(request);
 \`\`\`
@@ -928,7 +1010,7 @@ const result = await osmosis.incentives.activeGaugesPerDenom(request);
 UpcomingGauges
 
 \`\`\`js
-/** returns scheduled gauges */
+/** Returns scheduled gauges that have not yet occured */
 const request: UpcomingGaugesRequest;
 const result = await osmosis.incentives.upcomingGauges(request);
 \`\`\`
@@ -938,7 +1020,10 @@ const result = await osmosis.incentives.upcomingGauges(request);
 UpcomingGaugesPerDenom
 
 \`\`\`js
-/** returns scheduled gauges per denom */
+/**
+ * UpcomingGaugesPerDenom returns scheduled gauges that have not yet occured
+ * by denom
+ */
 const request: UpcomingGaugesPerDenomRequest;
 const result = await osmosis.incentives.upcomingGaugesPerDenom(request);
 \`\`\`
@@ -949,9 +1034,9 @@ RewardsEst
 
 \`\`\`js
 /**
- * RewardsEst returns an estimate of the rewards at a future specific time.
- * The querier either provides an address or a set of locks
- * for which they want to find the associated rewards.
+ * RewardsEst returns an estimate of the rewards from now until a specified
+ * time in the future The querier either provides an address or a set of locks
+ * for which they want to find the associated rewards
  */
 const request: RewardsEstRequest;
 const result = await osmosis.incentives.rewardsEst(request);
@@ -962,7 +1047,10 @@ const result = await osmosis.incentives.rewardsEst(request);
 LockableDurations
 
 \`\`\`js
-/** returns lockable durations that are valid to give incentives */
+/**
+ * LockableDurations returns lockable durations that are valid to distribute
+ * incentives for
+ */
 const request: QueryLockableDurationsRequest;
 const result = await osmosis.incentives.lockableDurations(request);
 \`\`\`
@@ -1148,7 +1236,7 @@ const result = await osmosis.mint.v1beta1.params(request);
 EpochProvisions
 
 \`\`\`js
-/** EpochProvisions current minting epoch provisions value. */
+/** EpochProvisions returns the current minting epoch provisions value. */
 const request: QueryEpochProvisionsRequest;
 const result = await osmosis.mint.v1beta1.epochProvisions(request);
 \`\`\`
@@ -1168,7 +1256,7 @@ const result = await osmosis.poolincentives.v1beta1.gaugeIds(request);
 DistrInfo
 
 \`\`\`js
-/** DistrInfo */
+/** DistrInfo returns the pool's matching gauge ids and weights. */
 const request: QueryDistrInfoRequest;
 const result = await osmosis.poolincentives.v1beta1.distrInfo(request);
 \`\`\`
@@ -1178,7 +1266,7 @@ const result = await osmosis.poolincentives.v1beta1.distrInfo(request);
 Params
 
 \`\`\`js
-/** Params */
+/** Params returns pool incentives params. */
 const request: QueryParamsRequest;
 const result = await osmosis.poolincentives.v1beta1.params(request);
 \`\`\`
@@ -1188,7 +1276,7 @@ const result = await osmosis.poolincentives.v1beta1.params(request);
 LockableDurations
 
 \`\`\`js
-/** LockableDurations */
+/** LockableDurations returns lock durations for pools. */
 const request: QueryLockableDurationsRequest;
 const result = await osmosis.poolincentives.v1beta1.lockableDurations(request);
 \`\`\`
@@ -1198,7 +1286,7 @@ const result = await osmosis.poolincentives.v1beta1.lockableDurations(request);
 IncentivizedPools
 
 \`\`\`js
-/** IncentivizedPools */
+/** IncentivizedPools returns currently incentivized pools */
 const request: QueryIncentivizedPoolsRequest;
 const result = await osmosis.poolincentives.v1beta1.incentivizedPools(request);
 \`\`\`
@@ -1208,9 +1296,39 @@ const result = await osmosis.poolincentives.v1beta1.incentivizedPools(request);
 ExternalIncentiveGauges
 
 \`\`\`js
-/** ExternalIncentiveGauges */
+/** ExternalIncentiveGauges returns external incentive gauges. */
 const request: QueryExternalIncentiveGaugesRequest;
 const result = await osmosis.poolincentives.v1beta1.externalIncentiveGauges(request);
+\`\`\`
+
+##### \`osmosis.streamswap.v1.sales()\` RPC
+        
+Sales
+
+\`\`\`js
+/** Returns list of Sales ordered by the creation time */
+const request: QuerySales;
+const result = await osmosis.streamswap.v1.sales(request);
+\`\`\`
+
+##### \`osmosis.streamswap.v1.sale()\` RPC
+        
+Sale
+
+\`\`\`js
+/** Returns the specific Sale object */
+const request: QuerySale;
+const result = await osmosis.streamswap.v1.sale(request);
+\`\`\`
+
+##### \`osmosis.streamswap.v1.userPosition()\` RPC
+        
+UserPosition
+
+\`\`\`js
+/** UserPosition */
+const request: QueryUserPosition;
+const result = await osmosis.streamswap.v1.userPosition(request);
 \`\`\`
 
 ##### \`osmosis.superfluid.params()\` RPC
@@ -1218,7 +1336,7 @@ const result = await osmosis.poolincentives.v1beta1.externalIncentiveGauges(requ
 Params
 
 \`\`\`js
-/** Params returns the total set of minting parameters. */
+/** Params returns the total set of superfluid parameters. */
 const request: QueryParamsRequest;
 const result = await osmosis.superfluid.params(request);
 \`\`\`
@@ -1228,7 +1346,10 @@ const result = await osmosis.superfluid.params(request);
 AssetType
 
 \`\`\`js
-/** Returns superfluid asset type */
+/**
+ * Returns superfluid asset type, whether if it's a native asset or an lp
+ * share.
+ */
 const request: AssetTypeRequest;
 const result = await osmosis.superfluid.assetType(request);
 \`\`\`
@@ -1238,7 +1359,7 @@ const result = await osmosis.superfluid.assetType(request);
 AllAssets
 
 \`\`\`js
-/** Returns all superfluid asset types */
+/** Returns all registered superfluid assets. */
 const request: AllAssetsRequest;
 const result = await osmosis.superfluid.allAssets(request);
 \`\`\`
@@ -1248,7 +1369,7 @@ const result = await osmosis.superfluid.allAssets(request);
 AssetMultiplier
 
 \`\`\`js
-/** Returns superfluid asset Multiplier */
+/** Returns the osmo equivalent multiplier used in the most recent epoch. */
 const request: AssetMultiplierRequest;
 const result = await osmosis.superfluid.assetMultiplier(request);
 \`\`\`
@@ -1258,7 +1379,7 @@ const result = await osmosis.superfluid.assetMultiplier(request);
 AllIntermediaryAccounts
 
 \`\`\`js
-/** Returns all superfluid intermediary account */
+/** Returns all superfluid intermediary accounts. */
 const request: AllIntermediaryAccountsRequest;
 const result = await osmosis.superfluid.allIntermediaryAccounts(request);
 \`\`\`
@@ -1279,8 +1400,8 @@ TotalSuperfluidDelegations
 
 \`\`\`js
 /**
- * Returns the total amount of osmo superfluidly staked
- * response denominated in uosmo
+ * Returns the total amount of osmo superfluidly staked.
+ * Response is denominated in uosmo.
  */
 const request: TotalSuperfluidDelegationsRequest;
 const result = await osmosis.superfluid.totalSuperfluidDelegations(request);
@@ -1292,7 +1413,7 @@ SuperfluidDelegationAmount
 
 \`\`\`js
 /**
- * Returns the coins superfluid delegated for a delegator, validator, denom
+ * Returns the coins superfluid delegated for the delegator, validator, denom
  * triplet
  */
 const request: SuperfluidDelegationAmountRequest;
@@ -1304,7 +1425,7 @@ const result = await osmosis.superfluid.superfluidDelegationAmount(request);
 SuperfluidDelegationsByDelegator
 
 \`\`\`js
-/** Returns all the superfluid poistions for a specific delegator */
+/** Returns all the delegated superfluid poistions for a specific delegator. */
 const request: SuperfluidDelegationsByDelegatorRequest;
 const result = await osmosis.superfluid.superfluidDelegationsByDelegator(request);
 \`\`\`
@@ -1314,7 +1435,7 @@ const result = await osmosis.superfluid.superfluidDelegationsByDelegator(request
 SuperfluidUndelegationsByDelegator
 
 \`\`\`js
-/** SuperfluidUndelegationsByDelegator */
+/** Returns all the undelegating superfluid poistions for a specific delegator. */
 const request: SuperfluidUndelegationsByDelegatorRequest;
 const result = await osmosis.superfluid.superfluidUndelegationsByDelegator(request);
 \`\`\`
@@ -1346,12 +1467,25 @@ const request: EstimateSuperfluidDelegatedAmountByValidatorDenomRequest;
 const result = await osmosis.superfluid.estimateSuperfluidDelegatedAmountByValidatorDenom(request);
 \`\`\`
 
+##### \`osmosis.superfluid.totalDelegationByDelegator()\` RPC
+        
+TotalDelegationByDelegator
+
+\`\`\`js
+/** Returns the specified delegations for a specific delegator */
+const request: QueryTotalDelegationByDelegatorRequest;
+const result = await osmosis.superfluid.totalDelegationByDelegator(request);
+\`\`\`
+
 ##### \`osmosis.tokenfactory.v1beta1.params()\` RPC
         
 Params
 
 \`\`\`js
-/** Params returns the total set of minting parameters. */
+/**
+ * Params defines a gRPC query method that returns the tokenfactory module's
+ * parameters.
+ */
 const request: QueryParamsRequest;
 const result = await osmosis.tokenfactory.v1beta1.params(request);
 \`\`\`
@@ -1361,7 +1495,10 @@ const result = await osmosis.tokenfactory.v1beta1.params(request);
 DenomAuthorityMetadata
 
 \`\`\`js
-/** DenomAuthorityMetadata */
+/**
+ * DenomAuthorityMetadata defines a gRPC query method for fetching
+ * DenomAuthorityMetadata for a particular denom.
+ */
 const request: QueryDenomAuthorityMetadataRequest;
 const result = await osmosis.tokenfactory.v1beta1.denomAuthorityMetadata(request);
 \`\`\`
@@ -1371,9 +1508,42 @@ const result = await osmosis.tokenfactory.v1beta1.denomAuthorityMetadata(request
 DenomsFromCreator
 
 \`\`\`js
-/** DenomsFromCreator */
+/**
+ * DenomsFromCreator defines a gRPC query method for fetching all
+ * denominations created by a specific admin/creator.
+ */
 const request: QueryDenomsFromCreatorRequest;
 const result = await osmosis.tokenfactory.v1beta1.denomsFromCreator(request);
+\`\`\`
+
+##### \`osmosis.twap.v1beta1.params()\` RPC
+        
+Params
+
+\`\`\`js
+/** Params */
+const request: ParamsRequest;
+const result = await osmosis.twap.v1beta1.params(request);
+\`\`\`
+
+##### \`osmosis.twap.v1beta1.arithmeticTwap()\` RPC
+        
+ArithmeticTwap
+
+\`\`\`js
+/** ArithmeticTwap */
+const request: ArithmeticTwapRequest;
+const result = await osmosis.twap.v1beta1.arithmeticTwap(request);
+\`\`\`
+
+##### \`osmosis.twap.v1beta1.arithmeticTwapToNow()\` RPC
+        
+ArithmeticTwapToNow
+
+\`\`\`js
+/** ArithmeticTwapToNow */
+const request: ArithmeticTwapToNowRequest;
+const result = await osmosis.twap.v1beta1.arithmeticTwapToNow(request);
 \`\`\`
 
 ##### \`osmosis.txfees.v1beta1.feeTokens()\` RPC
@@ -1383,7 +1553,7 @@ FeeTokens
 \`\`\`js
 /**
  * FeeTokens returns a list of all the whitelisted fee tokens and their
- * corresponding pools It does not include the BaseDenom, which has its own
+ * corresponding pools. It does not include the BaseDenom, which has its own
  * query endpoint
  */
 const request: QueryFeeTokensRequest;
@@ -1395,7 +1565,7 @@ const result = await osmosis.txfees.v1beta1.feeTokens(request);
 DenomSpotPrice
 
 \`\`\`js
-/** DenomSpotPrice */
+/** DenomSpotPrice returns all spot prices by each registered token denom. */
 const request: QueryDenomSpotPriceRequest;
 const result = await osmosis.txfees.v1beta1.denomSpotPrice(request);
 \`\`\`
@@ -1405,7 +1575,7 @@ const result = await osmosis.txfees.v1beta1.denomSpotPrice(request);
 DenomPoolId
 
 \`\`\`js
-/** DenomPoolId */
+/** Returns the poolID for a specified denom input. */
 const request: QueryDenomPoolIdRequest;
 const result = await osmosis.txfees.v1beta1.denomPoolId(request);
 \`\`\`
@@ -1415,7 +1585,7 @@ const result = await osmosis.txfees.v1beta1.denomPoolId(request);
 BaseDenom
 
 \`\`\`js
-/** BaseDenom */
+/** Returns a list of all base denom tokens and their corresponding pools. */
 const request: QueryBaseDenomRequest;
 const result = await osmosis.txfees.v1beta1.baseDenom(request);
 \`\`\`

@@ -137,6 +137,7 @@ export const getImportStatements = (
         const exists = m[obj.path].find(el =>
             el.type === obj.type && el.path === obj.path && el.name === obj.name);
 
+        // MARKED AS NOT DRY [google.protobuf names]
         // TODO some have google.protobuf.Any shows up... figure out the better way to handle this
         if (/\./.test(obj.name)) {
             obj.name = obj.name.split('.')[obj.name.split('.').length - 1];
@@ -244,6 +245,7 @@ const addSDKTypesToImports = (
                 importAs: (obj.importAs ?? obj.name) + 'SDKType',
             };
 
+            // MARKED AS NOT DRY [google.protobuf names]
             // TODO some have google.protobuf.Any shows up... figure out the better way to handle this
             if (/\./.test(SDKTypeObject.name)) {
                 SDKTypeObject.name = SDKTypeObject.name.split('.')[SDKTypeObject.name.split('.').length - 1];

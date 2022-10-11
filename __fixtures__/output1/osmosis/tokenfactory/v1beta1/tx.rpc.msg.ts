@@ -1,20 +1,16 @@
 import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
+import { Metadata, MetadataSDKType } from "../../../cosmos/bank/v1beta1/bank";
 import { Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { MsgCreateDenom, MsgCreateDenomSDKType, MsgCreateDenomResponse, MsgCreateDenomResponseSDKType, MsgMint, MsgMintSDKType, MsgMintResponse, MsgMintResponseSDKType, MsgBurn, MsgBurnSDKType, MsgBurnResponse, MsgBurnResponseSDKType, MsgChangeAdmin, MsgChangeAdminSDKType, MsgChangeAdminResponse, MsgChangeAdminResponseSDKType } from "./tx";
+import { MsgCreateDenom, MsgCreateDenomSDKType, MsgCreateDenomResponse, MsgCreateDenomResponseSDKType, MsgMint, MsgMintSDKType, MsgMintResponse, MsgMintResponseSDKType, MsgBurn, MsgBurnSDKType, MsgBurnResponse, MsgBurnResponseSDKType, MsgChangeAdmin, MsgChangeAdminSDKType, MsgChangeAdminResponse, MsgChangeAdminResponseSDKType, MsgSetDenomMetadata, MsgSetDenomMetadataSDKType, MsgSetDenomMetadataResponse, MsgSetDenomMetadataResponseSDKType } from "./tx";
 
-/** Msg defines the Msg service. */
+/** Msg defines the tokefactory module's gRPC message service. */
 export interface Msg {
   createDenom(request: MsgCreateDenom): Promise<MsgCreateDenomResponse>;
   mint(request: MsgMint): Promise<MsgMintResponse>;
   burn(request: MsgBurn): Promise<MsgBurnResponse>;
-
-  /**
-   * ForceTransfer is deactivated for now because we need to think through edge
-   * cases rpc ForceTransfer(MsgForceTransfer) returns
-   * (MsgForceTransferResponse);
-   */
   changeAdmin(request: MsgChangeAdmin): Promise<MsgChangeAdminResponse>;
+  setDenomMetadata(request: MsgSetDenomMetadata): Promise<MsgSetDenomMetadataResponse>;
 }
 export class MsgClientImpl implements Msg {
   private readonly rpc: Rpc;
@@ -25,6 +21,7 @@ export class MsgClientImpl implements Msg {
     this.mint = this.mint.bind(this);
     this.burn = this.burn.bind(this);
     this.changeAdmin = this.changeAdmin.bind(this);
+    this.setDenomMetadata = this.setDenomMetadata.bind(this);
   }
 
   createDenom(request: MsgCreateDenom): Promise<MsgCreateDenomResponse> {
@@ -49,6 +46,12 @@ export class MsgClientImpl implements Msg {
     const data = MsgChangeAdmin.encode(request).finish();
     const promise = this.rpc.request("osmosis.tokenfactory.v1beta1.Msg", "ChangeAdmin", data);
     return promise.then(data => MsgChangeAdminResponse.decode(new _m0.Reader(data)));
+  }
+
+  setDenomMetadata(request: MsgSetDenomMetadata): Promise<MsgSetDenomMetadataResponse> {
+    const data = MsgSetDenomMetadata.encode(request).finish();
+    const promise = this.rpc.request("osmosis.tokenfactory.v1beta1.Msg", "SetDenomMetadata", data);
+    return promise.then(data => MsgSetDenomMetadataResponse.decode(new _m0.Reader(data)));
   }
 
 }

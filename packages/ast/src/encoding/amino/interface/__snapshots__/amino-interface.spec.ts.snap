@@ -68,9 +68,9 @@ exports[`osmosis/gamm/v1beta1/tx Interfaces 1`] = `
   type: "osmosis/gamm/join-pool";
   value: {
     sender: string;
-    poolId: string;
-    shareOutAmount: string;
-    tokenInMaxs: {
+    pool_id: string;
+    share_out_amount: string;
+    token_in_maxs: {
       denom: string;
       amount: string;
     }[];

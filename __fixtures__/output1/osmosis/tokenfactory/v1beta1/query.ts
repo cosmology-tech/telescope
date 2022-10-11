@@ -21,27 +21,67 @@ export interface QueryParamsResponseSDKType {
   /** params defines the parameters of the module. */
   params: ParamsSDKType;
 }
+
+/**
+ * QueryDenomAuthorityMetadataRequest defines the request structure for the
+ * DenomAuthorityMetadata gRPC query.
+ */
 export interface QueryDenomAuthorityMetadataRequest {
   denom: string;
 }
+
+/**
+ * QueryDenomAuthorityMetadataRequest defines the request structure for the
+ * DenomAuthorityMetadata gRPC query.
+ */
 export interface QueryDenomAuthorityMetadataRequestSDKType {
   denom: string;
 }
+
+/**
+ * QueryDenomAuthorityMetadataResponse defines the response structure for the
+ * DenomAuthorityMetadata gRPC query.
+ */
 export interface QueryDenomAuthorityMetadataResponse {
   authorityMetadata: DenomAuthorityMetadata;
 }
+
+/**
+ * QueryDenomAuthorityMetadataResponse defines the response structure for the
+ * DenomAuthorityMetadata gRPC query.
+ */
 export interface QueryDenomAuthorityMetadataResponseSDKType {
   authority_metadata: DenomAuthorityMetadataSDKType;
 }
+
+/**
+ * QueryDenomsFromCreatorRequest defines the request structure for the
+ * DenomsFromCreator gRPC query.
+ */
 export interface QueryDenomsFromCreatorRequest {
   creator: string;
 }
+
+/**
+ * QueryDenomsFromCreatorRequest defines the request structure for the
+ * DenomsFromCreator gRPC query.
+ */
 export interface QueryDenomsFromCreatorRequestSDKType {
   creator: string;
 }
+
+/**
+ * QueryDenomsFromCreatorRequest defines the response structure for the
+ * DenomsFromCreator gRPC query.
+ */
 export interface QueryDenomsFromCreatorResponse {
   denoms: string[];
 }
+
+/**
+ * QueryDenomsFromCreatorRequest defines the response structure for the
+ * DenomsFromCreator gRPC query.
+ */
 export interface QueryDenomsFromCreatorResponseSDKType {
   denoms: string[];
 }

@@ -8,153 +8,209 @@ export const protobufPackage = "osmosis.incentives";
 export interface ModuleToDistributeCoinsRequest {}
 export interface ModuleToDistributeCoinsRequestSDKType {}
 export interface ModuleToDistributeCoinsResponse {
+  /** Coins that have yet to be distributed */
   coins: Coin[];
 }
 export interface ModuleToDistributeCoinsResponseSDKType {
+  /** Coins that have yet to be distributed */
   coins: CoinSDKType[];
 }
 export interface ModuleDistributedCoinsRequest {}
 export interface ModuleDistributedCoinsRequestSDKType {}
 export interface ModuleDistributedCoinsResponse {
+  /** Coins that have been distributed already */
   coins: Coin[];
 }
 export interface ModuleDistributedCoinsResponseSDKType {
+  /** Coins that have been distributed already */
   coins: CoinSDKType[];
 }
 export interface GaugeByIDRequest {
+  /** Gague ID being queried */
   id: Long;
 }
 export interface GaugeByIDRequestSDKType {
+  /** Gague ID being queried */
   id: Long;
 }
 export interface GaugeByIDResponse {
+  /** Gauge that corresponds to provided gague ID */
   gauge: Gauge;
 }
 export interface GaugeByIDResponseSDKType {
+  /** Gauge that corresponds to provided gague ID */
   gauge: GaugeSDKType;
 }
 export interface GaugesRequest {
-  /** pagination defines an pagination for the request. */
+  /** Pagination defines pagination for the request */
   pagination?: PageRequest;
 }
 export interface GaugesRequestSDKType {
-  /** pagination defines an pagination for the request. */
+  /** Pagination defines pagination for the request */
   pagination?: PageRequestSDKType;
 }
 export interface GaugesResponse {
+  /** Upcoming and active gauges */
   data: Gauge[];
 
-  /** pagination defines an pagination for the response. */
+  /** Pagination defines pagination for the response */
   pagination?: PageResponse;
 }
 export interface GaugesResponseSDKType {
+  /** Upcoming and active gauges */
   data: GaugeSDKType[];
 
-  /** pagination defines an pagination for the response. */
+  /** Pagination defines pagination for the response */
   pagination?: PageResponseSDKType;
 }
 export interface ActiveGaugesRequest {
-  /** pagination defines an pagination for the request. */
+  /** Pagination defines pagination for the request */
   pagination?: PageRequest;
 }
 export interface ActiveGaugesRequestSDKType {
-  /** pagination defines an pagination for the request. */
+  /** Pagination defines pagination for the request */
   pagination?: PageRequestSDKType;
 }
 export interface ActiveGaugesResponse {
+  /** Active gagues only */
   data: Gauge[];
 
-  /** pagination defines an pagination for the response. */
+  /** Pagination defines pagination for the response */
   pagination?: PageResponse;
 }
 export interface ActiveGaugesResponseSDKType {
+  /** Active gagues only */
   data: GaugeSDKType[];
 
-  /** pagination defines an pagination for the response. */
+  /** Pagination defines pagination for the response */
   pagination?: PageResponseSDKType;
 }
 export interface ActiveGaugesPerDenomRequest {
+  /** Desired denom when querying active gagues */
   denom?: string;
 
-  /** pagination defines an pagination for the request. */
+  /** Pagination defines pagination for the request */
   pagination?: PageRequest;
 }
 export interface ActiveGaugesPerDenomRequestSDKType {
+  /** Desired denom when querying active gagues */
   denom?: string;
 
-  /** pagination defines an pagination for the request. */
+  /** Pagination defines pagination for the request */
   pagination?: PageRequestSDKType;
 }
 export interface ActiveGaugesPerDenomResponse {
+  /** Active gagues that match denom in query */
   data: Gauge[];
 
-  /** pagination defines an pagination for the response. */
+  /** Pagination defines pagination for the response */
   pagination?: PageResponse;
 }
 export interface ActiveGaugesPerDenomResponseSDKType {
+  /** Active gagues that match denom in query */
   data: GaugeSDKType[];
 
-  /** pagination defines an pagination for the response. */
+  /** Pagination defines pagination for the response */
   pagination?: PageResponseSDKType;
 }
 export interface UpcomingGaugesRequest {
-  /** pagination defines an pagination for the request. */
+  /** Pagination defines pagination for the request */
   pagination?: PageRequest;
 }
 export interface UpcomingGaugesRequestSDKType {
-  /** pagination defines an pagination for the request. */
+  /** Pagination defines pagination for the request */
   pagination?: PageRequestSDKType;
 }
 export interface UpcomingGaugesResponse {
+  /** Gauges whose distribution is upcoming */
   data: Gauge[];
 
-  /** pagination defines an pagination for the response. */
+  /** Pagination defines pagination for the response */
   pagination?: PageResponse;
 }
 export interface UpcomingGaugesResponseSDKType {
+  /** Gauges whose distribution is upcoming */
   data: GaugeSDKType[];
 
-  /** pagination defines an pagination for the response. */
+  /** Pagination defines pagination for the response */
   pagination?: PageResponseSDKType;
 }
 export interface UpcomingGaugesPerDenomRequest {
+  /** Filter for upcoming gagues that match specific denom */
   denom?: string;
+
+  /** Pagination defines pagination for the request */
   pagination?: PageRequest;
 }
 export interface UpcomingGaugesPerDenomRequestSDKType {
+  /** Filter for upcoming gagues that match specific denom */
   denom?: string;
+
+  /** Pagination defines pagination for the request */
   pagination?: PageRequestSDKType;
 }
 export interface UpcomingGaugesPerDenomResponse {
+  /** Upcoming gagues that match denom in query */
   upcomingGauges: Gauge[];
+
+  /** Pagination defines pagination for the response */
   pagination?: PageResponse;
 }
 export interface UpcomingGaugesPerDenomResponseSDKType {
+  /** Upcoming gagues that match denom in query */
   upcoming_gauges: GaugeSDKType[];
+
+  /** Pagination defines pagination for the response */
   pagination?: PageResponseSDKType;
 }
 export interface RewardsEstRequest {
+  /** Address that is being queried for future estimated rewards */
   owner: string;
+
+  /** Lock IDs included in future reward estimation */
   lockIds?: Long[];
+
+  /**
+   * Upper time limit of reward estimation
+   * Lower limit is current epoch
+   */
   endEpoch?: Long;
 }
 export interface RewardsEstRequestSDKType {
+  /** Address that is being queried for future estimated rewards */
   owner: string;
+
+  /** Lock IDs included in future reward estimation */
   lock_ids?: Long[];
+
+  /**
+   * Upper time limit of reward estimation
+   * Lower limit is current epoch
+   */
   end_epoch?: Long;
 }
 export interface RewardsEstResponse {
+  /**
+   * Estimated coin rewards that will be recieved at provided address
+   * from specified locks between current time and end epoch
+   */
   coins: Coin[];
 }
 export interface RewardsEstResponseSDKType {
+  /**
+   * Estimated coin rewards that will be recieved at provided address
+   * from specified locks between current time and end epoch
+   */
   coins: CoinSDKType[];
 }
 export interface QueryLockableDurationsRequest {}
 export interface QueryLockableDurationsRequestSDKType {}
 export interface QueryLockableDurationsResponse {
+  /** Time durations that users can lock coins for in order to recieve rewards */
   lockableDurations: Duration[];
 }
 export interface QueryLockableDurationsResponseSDKType {
+  /** Time durations that users can lock coins for in order to recieve rewards */
   lockable_durations: DurationSDKType[];
 }
 

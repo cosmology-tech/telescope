@@ -1,40 +1,52 @@
 import { PoolParams, PoolParamsSDKType } from "./stableswap_pool";
 import { Coin, CoinSDKType } from "../../../../cosmos/base/v1beta1/coin";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, Long } from "../../../../helpers";
+import { Long, isSet, DeepPartial } from "../../../../helpers";
 export const protobufPackage = "osmosis.gamm.poolmodels.stableswap.v1beta1";
+
+/** ===================== MsgCreatePool */
 export interface MsgCreateStableswapPool {
   sender: string;
   poolParams: PoolParams;
   initialPoolLiquidity: Coin[];
+  scalingFactors: Long[];
   futurePoolGovernor: string;
 }
+
+/** ===================== MsgCreatePool */
 export interface MsgCreateStableswapPoolSDKType {
   sender: string;
-  poolParams: PoolParamsSDKType;
+  pool_params: PoolParamsSDKType;
   initial_pool_liquidity: CoinSDKType[];
+  scaling_factors: Long[];
   future_pool_governor: string;
 }
+
+/** Returns a poolID with custom poolName. */
 export interface MsgCreateStableswapPoolResponse {
   poolId: Long;
 }
+
+/** Returns a poolID with custom poolName. */
 export interface MsgCreateStableswapPoolResponseSDKType {
   pool_id: Long;
 }
+
+/**
+ * Sender must be the pool's scaling_factor_governor in order for the tx to
+ * succeed. Adjusts stableswap scaling factors.
+ */
 export interface MsgStableSwapAdjustScalingFactors {
-  /**
-   * Sender must be the pool's scaling_factor_governor in order for the tx to
-   * succeed
-   */
   sender: string;
   poolId: Long;
   scalingFactors: Long[];
 }
+
+/**
+ * Sender must be the pool's scaling_factor_governor in order for the tx to
+ * succeed. Adjusts stableswap scaling factors.
+ */
 export interface MsgStableSwapAdjustScalingFactorsSDKType {
-  /**
-   * Sender must be the pool's scaling_factor_governor in order for the tx to
-   * succeed
-   */
   sender: string;
   pool_id: Long;
   scaling_factors: Long[];
@@ -47,6 +59,7 @@ function createBaseMsgCreateStableswapPool(): MsgCreateStableswapPool {
     sender: "",
     poolParams: undefined,
     initialPoolLiquidity: [],
+    scalingFactors: [],
     futurePoolGovernor: ""
   };
 }
@@ -65,8 +78,16 @@ export const MsgCreateStableswapPool = {
       Coin.encode(v!, writer.uint32(26).fork()).ldelim();
     }
 
+    writer.uint32(34).fork();
+
+    for (const v of message.scalingFactors) {
+      writer.uint64(v);
+    }
+
+    writer.ldelim();
+
     if (message.futurePoolGovernor !== "") {
-      writer.uint32(34).string(message.futurePoolGovernor);
+      writer.uint32(42).string(message.futurePoolGovernor);
     }
 
     return writer;
@@ -94,6 +115,19 @@ export const MsgCreateStableswapPool = {
           break;
 
         case 4:
+          if ((tag & 7) === 2) {
+            const end2 = reader.uint32() + reader.pos;
+
+            while (reader.pos < end2) {
+              message.scalingFactors.push((reader.uint64() as Long));
+            }
+          } else {
+            message.scalingFactors.push((reader.uint64() as Long));
+          }
+
+          break;
+
+        case 5:
           message.futurePoolGovernor = reader.string();
           break;
 
@@ -111,6 +145,7 @@ export const MsgCreateStableswapPool = {
       sender: isSet(object.sender) ? String(object.sender) : "",
       poolParams: isSet(object.poolParams) ? PoolParams.fromJSON(object.poolParams) : undefined,
       initialPoolLiquidity: Array.isArray(object?.initialPoolLiquidity) ? object.initialPoolLiquidity.map((e: any) => Coin.fromJSON(e)) : [],
+      scalingFactors: Array.isArray(object?.scalingFactors) ? object.scalingFactors.map((e: any) => Long.fromValue(e)) : [],
       futurePoolGovernor: isSet(object.futurePoolGovernor) ? String(object.futurePoolGovernor) : ""
     };
   },
@@ -126,6 +161,12 @@ export const MsgCreateStableswapPool = {
       obj.initialPoolLiquidity = [];
     }
 
+    if (message.scalingFactors) {
+      obj.scalingFactors = message.scalingFactors.map(e => (e || Long.UZERO).toString());
+    } else {
+      obj.scalingFactors = [];
+    }
+
     message.futurePoolGovernor !== undefined && (obj.futurePoolGovernor = message.futurePoolGovernor);
     return obj;
   },
@@ -135,6 +176,7 @@ export const MsgCreateStableswapPool = {
     message.sender = object.sender ?? "";
     message.poolParams = object.poolParams !== undefined && object.poolParams !== null ? PoolParams.fromPartial(object.poolParams) : undefined;
     message.initialPoolLiquidity = object.initialPoolLiquidity?.map(e => Coin.fromPartial(e)) || [];
+    message.scalingFactors = object.scalingFactors?.map(e => Long.fromValue(e)) || [];
     message.futurePoolGovernor = object.futurePoolGovernor ?? "";
     return message;
   },
@@ -142,8 +184,9 @@ export const MsgCreateStableswapPool = {
   fromSDK(object: MsgCreateStableswapPoolSDKType): MsgCreateStableswapPool {
     return {
       sender: isSet(object.sender) ? object.sender : undefined,
-      poolParams: isSet(object.poolParams) ? PoolParams.fromSDK(object.poolParams) : undefined,
+      poolParams: isSet(object.pool_params) ? PoolParams.fromSDK(object.pool_params) : undefined,
       initialPoolLiquidity: Array.isArray(object?.initial_pool_liquidity) ? object.initial_pool_liquidity.map((e: any) => Coin.fromSDK(e)) : [],
+      scalingFactors: Array.isArray(object?.scaling_factors) ? object.scaling_factors.map((e: any) => e) : [],
       futurePoolGovernor: isSet(object.future_pool_governor) ? object.future_pool_governor : undefined
     };
   },
@@ -151,12 +194,18 @@ export const MsgCreateStableswapPool = {
   toSDK(message: MsgCreateStableswapPool): MsgCreateStableswapPoolSDKType {
     const obj: any = {};
     message.sender !== undefined && (obj.sender = message.sender);
-    message.poolParams !== undefined && (obj.poolParams = message.poolParams ? PoolParams.toSDK(message.poolParams) : undefined);
+    message.poolParams !== undefined && (obj.pool_params = message.poolParams ? PoolParams.toSDK(message.poolParams) : undefined);
 
     if (message.initialPoolLiquidity) {
       obj.initial_pool_liquidity = message.initialPoolLiquidity.map(e => e ? Coin.toSDK(e) : undefined);
     } else {
       obj.initial_pool_liquidity = [];
+    }
+
+    if (message.scalingFactors) {
+      obj.scaling_factors = message.scalingFactors.map(e => e);
+    } else {
+      obj.scaling_factors = [];
     }
 
     message.futurePoolGovernor !== undefined && (obj.future_pool_governor = message.futurePoolGovernor);

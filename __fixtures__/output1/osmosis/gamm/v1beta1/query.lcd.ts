@@ -4,7 +4,7 @@ import { Any, AnySDKType } from "../../../google/protobuf/any";
 import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { setPaginationParams } from "../../../helpers";
 import { LCDClient } from "@osmonauts/lcd";
-import { QueryPoolsRequest, QueryPoolsRequestSDKType, QueryPoolsResponse, QueryPoolsResponseSDKType, QueryNumPoolsRequest, QueryNumPoolsRequestSDKType, QueryNumPoolsResponse, QueryNumPoolsResponseSDKType, QueryTotalLiquidityRequest, QueryTotalLiquidityRequestSDKType, QueryTotalLiquidityResponse, QueryTotalLiquidityResponseSDKType, QueryPoolRequest, QueryPoolRequestSDKType, QueryPoolResponse, QueryPoolResponseSDKType, QueryPoolParamsRequest, QueryPoolParamsRequestSDKType, QueryPoolParamsResponse, QueryPoolParamsResponseSDKType, QueryTotalPoolLiquidityRequest, QueryTotalPoolLiquidityRequestSDKType, QueryTotalPoolLiquidityResponse, QueryTotalPoolLiquidityResponseSDKType, QueryTotalSharesRequest, QueryTotalSharesRequestSDKType, QueryTotalSharesResponse, QueryTotalSharesResponseSDKType, QuerySpotPriceRequest, QuerySpotPriceRequestSDKType, QuerySpotPriceResponse, QuerySpotPriceResponseSDKType, QuerySwapExactAmountInRequest, QuerySwapExactAmountInRequestSDKType, QuerySwapExactAmountInResponse, QuerySwapExactAmountInResponseSDKType, QuerySwapExactAmountOutRequest, QuerySwapExactAmountOutRequestSDKType, QuerySwapExactAmountOutResponse, QuerySwapExactAmountOutResponseSDKType } from "./query";
+import { QueryPoolsRequest, QueryPoolsRequestSDKType, QueryPoolsResponse, QueryPoolsResponseSDKType, QueryNumPoolsRequest, QueryNumPoolsRequestSDKType, QueryNumPoolsResponse, QueryNumPoolsResponseSDKType, QueryTotalLiquidityRequest, QueryTotalLiquidityRequestSDKType, QueryTotalLiquidityResponse, QueryTotalLiquidityResponseSDKType, QueryPoolRequest, QueryPoolRequestSDKType, QueryPoolResponse, QueryPoolResponseSDKType, QueryPoolTypeRequest, QueryPoolTypeRequestSDKType, QueryPoolTypeResponse, QueryPoolTypeResponseSDKType, QueryPoolParamsRequest, QueryPoolParamsRequestSDKType, QueryPoolParamsResponse, QueryPoolParamsResponseSDKType, QueryTotalPoolLiquidityRequest, QueryTotalPoolLiquidityRequestSDKType, QueryTotalPoolLiquidityResponse, QueryTotalPoolLiquidityResponseSDKType, QueryTotalSharesRequest, QueryTotalSharesRequestSDKType, QueryTotalSharesResponse, QueryTotalSharesResponseSDKType, QuerySpotPriceRequest, QuerySpotPriceRequestSDKType, QuerySpotPriceResponse, QuerySpotPriceResponseSDKType, QuerySwapExactAmountInRequest, QuerySwapExactAmountInRequestSDKType, QuerySwapExactAmountInResponse, QuerySwapExactAmountInResponseSDKType, QuerySwapExactAmountOutRequest, QuerySwapExactAmountOutRequestSDKType, QuerySwapExactAmountOutResponse, QuerySwapExactAmountOutResponseSDKType } from "./query";
 export class LCDQueryClient {
   req: LCDClient;
 
@@ -18,6 +18,7 @@ export class LCDQueryClient {
     this.numPools = this.numPools.bind(this);
     this.totalLiquidity = this.totalLiquidity.bind(this);
     this.pool = this.pool.bind(this);
+    this.poolType = this.poolType.bind(this);
     this.poolParams = this.poolParams.bind(this);
     this.totalPoolLiquidity = this.totalPoolLiquidity.bind(this);
     this.totalShares = this.totalShares.bind(this);
@@ -58,6 +59,14 @@ export class LCDQueryClient {
   async pool(params: QueryPoolRequest): Promise<QueryPoolResponseSDKType> {
     const endpoint = `osmosis/gamm/v1beta1/pools/${params.poolId}`;
     return await this.req.get<QueryPoolResponseSDKType>(endpoint);
+  }
+
+  /* PoolType returns the type of the pool.
+   Returns "Balancer" as a string literal when the pool is a balancer pool.
+   Errors if the pool is failed to be type caseted. */
+  async poolType(params: QueryPoolTypeRequest): Promise<QueryPoolTypeResponseSDKType> {
+    const endpoint = `osmosis/gamm/v1beta1/pool_type/${params.poolId}`;
+    return await this.req.get<QueryPoolTypeResponseSDKType>(endpoint);
   }
 
   /* PoolParams */
@@ -108,7 +117,7 @@ export class LCDQueryClient {
     }
 
     if (typeof params?.tokenIn !== "undefined") {
-      options.params.tokenIn = params.tokenIn;
+      options.params.token_in = params.tokenIn;
     }
 
     if (typeof params?.routes !== "undefined") {
@@ -134,7 +143,7 @@ export class LCDQueryClient {
     }
 
     if (typeof params?.tokenOut !== "undefined") {
-      options.params.tokenOut = params.tokenOut;
+      options.params.token_out = params.tokenOut;
     }
 
     const endpoint = `osmosis/gamm/v1beta1/${params.poolId}/estimate/swap_exact_amount_out`;

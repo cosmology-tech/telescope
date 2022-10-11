@@ -21,8 +21,8 @@ export interface PoolParams {
  * The pool's token holders are specified in future_pool_governor.
  */
 export interface PoolParamsSDKType {
-  swapFee: string;
-  exitFee: string;
+  swap_fee: string;
+  exit_fee: string;
 }
 
 /** Pool is the stableswap Pool struct */
@@ -60,7 +60,7 @@ export interface Pool {
 export interface PoolSDKType {
   address: string;
   id: Long;
-  poolParams: PoolParamsSDKType;
+  pool_params: PoolParamsSDKType;
 
   /**
    * This string specifies who will govern the pool in the future.
@@ -75,10 +75,10 @@ export interface PoolSDKType {
   future_pool_governor: string;
 
   /** sum of all LP shares */
-  totalShares: CoinSDKType;
+  total_shares: CoinSDKType;
 
   /** assets in the pool */
-  poolLiquidity: CoinSDKType[];
+  pool_liquidity: CoinSDKType[];
 
   /** for calculation amognst assets with different precisions */
   scaling_factor: Long[];
@@ -156,15 +156,15 @@ export const PoolParams = {
 
   fromSDK(object: PoolParamsSDKType): PoolParams {
     return {
-      swapFee: isSet(object.swapFee) ? object.swapFee : undefined,
-      exitFee: isSet(object.exitFee) ? object.exitFee : undefined
+      swapFee: isSet(object.swap_fee) ? object.swap_fee : undefined,
+      exitFee: isSet(object.exit_fee) ? object.exit_fee : undefined
     };
   },
 
   toSDK(message: PoolParams): PoolParamsSDKType {
     const obj: any = {};
-    message.swapFee !== undefined && (obj.swapFee = message.swapFee);
-    message.exitFee !== undefined && (obj.exitFee = message.exitFee);
+    message.swapFee !== undefined && (obj.swap_fee = message.swapFee);
+    message.exitFee !== undefined && (obj.exit_fee = message.exitFee);
     return obj;
   }
 
@@ -337,10 +337,10 @@ export const Pool = {
     return {
       address: isSet(object.address) ? object.address : undefined,
       id: isSet(object.id) ? object.id : undefined,
-      poolParams: isSet(object.poolParams) ? PoolParams.fromSDK(object.poolParams) : undefined,
+      poolParams: isSet(object.pool_params) ? PoolParams.fromSDK(object.pool_params) : undefined,
       futurePoolGovernor: isSet(object.future_pool_governor) ? object.future_pool_governor : undefined,
-      totalShares: isSet(object.totalShares) ? Coin.fromSDK(object.totalShares) : undefined,
-      poolLiquidity: Array.isArray(object?.poolLiquidity) ? object.poolLiquidity.map((e: any) => Coin.fromSDK(e)) : [],
+      totalShares: isSet(object.total_shares) ? Coin.fromSDK(object.total_shares) : undefined,
+      poolLiquidity: Array.isArray(object?.pool_liquidity) ? object.pool_liquidity.map((e: any) => Coin.fromSDK(e)) : [],
       scalingFactor: Array.isArray(object?.scaling_factor) ? object.scaling_factor.map((e: any) => e) : [],
       scalingFactorGovernor: isSet(object.scaling_factor_governor) ? object.scaling_factor_governor : undefined
     };
@@ -350,14 +350,14 @@ export const Pool = {
     const obj: any = {};
     message.address !== undefined && (obj.address = message.address);
     message.id !== undefined && (obj.id = message.id);
-    message.poolParams !== undefined && (obj.poolParams = message.poolParams ? PoolParams.toSDK(message.poolParams) : undefined);
+    message.poolParams !== undefined && (obj.pool_params = message.poolParams ? PoolParams.toSDK(message.poolParams) : undefined);
     message.futurePoolGovernor !== undefined && (obj.future_pool_governor = message.futurePoolGovernor);
-    message.totalShares !== undefined && (obj.totalShares = message.totalShares ? Coin.toSDK(message.totalShares) : undefined);
+    message.totalShares !== undefined && (obj.total_shares = message.totalShares ? Coin.toSDK(message.totalShares) : undefined);
 
     if (message.poolLiquidity) {
-      obj.poolLiquidity = message.poolLiquidity.map(e => e ? Coin.toSDK(e) : undefined);
+      obj.pool_liquidity = message.poolLiquidity.map(e => e ? Coin.toSDK(e) : undefined);
     } else {
-      obj.poolLiquidity = [];
+      obj.pool_liquidity = [];
     }
 
     if (message.scalingFactor) {

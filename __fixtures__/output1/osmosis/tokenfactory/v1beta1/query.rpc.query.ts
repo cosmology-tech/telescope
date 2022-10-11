@@ -7,9 +7,22 @@ import { QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, Que
 
 /** Query defines the gRPC querier service. */
 export interface Query {
-  /** Params returns the total set of minting parameters. */
+  /**
+   * Params defines a gRPC query method that returns the tokenfactory module's
+   * parameters.
+   */
   params(request?: QueryParamsRequest): Promise<QueryParamsResponse>;
+
+  /**
+   * DenomAuthorityMetadata defines a gRPC query method for fetching
+   * DenomAuthorityMetadata for a particular denom.
+   */
   denomAuthorityMetadata(request: QueryDenomAuthorityMetadataRequest): Promise<QueryDenomAuthorityMetadataResponse>;
+
+  /**
+   * DenomsFromCreator defines a gRPC query method for fetching all
+   * denominations created by a specific admin/creator.
+   */
   denomsFromCreator(request: QueryDenomsFromCreatorRequest): Promise<QueryDenomsFromCreatorResponse>;
 }
 export class QueryClientImpl implements Query {

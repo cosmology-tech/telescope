@@ -2,11 +2,21 @@ import { Coin, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, Long } from "../../helpers";
 export const protobufPackage = "osmosis.superfluid";
+
+/**
+ * SuperfluidAssetType indicates whether the superfluid asset is
+ * a native token itself or the lp share of a pool.
+ */
 export enum SuperfluidAssetType {
   SuperfluidAssetTypeNative = 0,
   SuperfluidAssetTypeLPShare = 1,
   UNRECOGNIZED = -1,
 }
+
+/**
+ * SuperfluidAssetType indicates whether the superfluid asset is
+ * a native token itself or the lp share of a pool.
+ */
 export enum SuperfluidAssetTypeSDKType {
   SuperfluidAssetTypeNative = 0,
   SuperfluidAssetTypeLPShare = 1,
@@ -45,20 +55,32 @@ export function superfluidAssetTypeToJSON(object: SuperfluidAssetType): string {
 /** SuperfluidAsset stores the pair of superfluid asset type and denom pair */
 export interface SuperfluidAsset {
   denom: string;
+
+  /**
+   * AssetType indicates whether the superfluid asset is a native token or an lp
+   * share
+   */
   assetType: SuperfluidAssetType;
 }
 
 /** SuperfluidAsset stores the pair of superfluid asset type and denom pair */
 export interface SuperfluidAssetSDKType {
   denom: string;
+
+  /**
+   * AssetType indicates whether the superfluid asset is a native token or an lp
+   * share
+   */
   asset_type: SuperfluidAssetTypeSDKType;
 }
 
 /**
  * SuperfluidIntermediaryAccount takes the role of intermediary between LP token
- * and OSMO tokens for superfluid staking
+ * and OSMO tokens for superfluid staking. The intermediary account is the
+ * actual account responsible for delegation, not the validator account itself.
  */
 export interface SuperfluidIntermediaryAccount {
+  /** Denom indicates the denom of the superfluid asset. */
   denom: string;
   valAddr: string;
 
@@ -68,9 +90,11 @@ export interface SuperfluidIntermediaryAccount {
 
 /**
  * SuperfluidIntermediaryAccount takes the role of intermediary between LP token
- * and OSMO tokens for superfluid staking
+ * and OSMO tokens for superfluid staking. The intermediary account is the
+ * actual account responsible for delegation, not the validator account itself.
  */
 export interface SuperfluidIntermediaryAccountSDKType {
+  /** Denom indicates the denom of the superfluid asset. */
   denom: string;
   val_addr: string;
 
@@ -84,7 +108,7 @@ export interface SuperfluidIntermediaryAccountSDKType {
  * to be set as the Time-weighted-average-osmo-backing for the entire duration
  * of epoch N-1. (Thereby locking whats in use for epoch N as based on the prior
  * epochs rewards) However for now, this is not the TWAP but instead the spot
- * price at the boundary.  For different types of assets in the future, it could
+ * price at the boundary. For different types of assets in the future, it could
  * change.
  */
 export interface OsmoEquivalentMultiplierRecord {
@@ -101,7 +125,7 @@ export interface OsmoEquivalentMultiplierRecord {
  * to be set as the Time-weighted-average-osmo-backing for the entire duration
  * of epoch N-1. (Thereby locking whats in use for epoch N as based on the prior
  * epochs rewards) However for now, this is not the TWAP but instead the spot
- * price at the boundary.  For different types of assets in the future, it could
+ * price at the boundary. For different types of assets in the future, it could
  * change.
  */
 export interface OsmoEquivalentMultiplierRecordSDKType {
@@ -113,8 +137,8 @@ export interface OsmoEquivalentMultiplierRecordSDKType {
 }
 
 /**
- * SuperfluidDelegationRecord takes the role of intermediary between LP token
- * and OSMO tokens for superfluid staking
+ * SuperfluidDelegationRecord is a struct used to indicate superfluid
+ * delegations of an account in the state machine in a user friendly form.
  */
 export interface SuperfluidDelegationRecord {
   delegatorAddress: string;
@@ -124,8 +148,8 @@ export interface SuperfluidDelegationRecord {
 }
 
 /**
- * SuperfluidDelegationRecord takes the role of intermediary between LP token
- * and OSMO tokens for superfluid staking
+ * SuperfluidDelegationRecord is a struct used to indicate superfluid
+ * delegations of an account in the state machine in a user friendly form.
  */
 export interface SuperfluidDelegationRecordSDKType {
   delegator_address: string;
@@ -133,10 +157,22 @@ export interface SuperfluidDelegationRecordSDKType {
   delegation_amount: CoinSDKType;
   equivalent_staked_amount: CoinSDKType;
 }
+
+/**
+ * LockIdIntermediaryAccountConnection is a struct used to indicate the
+ * relationship between the underlying lock id and superfluid delegation done
+ * via lp shares.
+ */
 export interface LockIdIntermediaryAccountConnection {
   lockId: Long;
   intermediaryAccount: string;
 }
+
+/**
+ * LockIdIntermediaryAccountConnection is a struct used to indicate the
+ * relationship between the underlying lock id and superfluid delegation done
+ * via lp shares.
+ */
 export interface LockIdIntermediaryAccountConnectionSDKType {
   lock_id: Long;
   intermediary_account: string;

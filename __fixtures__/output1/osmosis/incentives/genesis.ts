@@ -5,21 +5,51 @@ import * as _m0 from "protobufjs/minimal";
 import { Long, isSet, DeepPartial } from "../../helpers";
 export const protobufPackage = "osmosis.incentives";
 
-/** GenesisState defines the incentives module's genesis state. */
+/**
+ * GenesisState defines the incentives module's various parameters when first
+ * initialized
+ */
 export interface GenesisState {
-  /** params defines all the parameters of the module */
+  /** params are all the parameters of the module */
   params: Params;
+
+  /** gauges are all gauges that should exist at genesis */
   gauges: Gauge[];
+
+  /**
+   * lockable_durations are all lockup durations that gauges can be locked for
+   * in order to recieve incentives
+   */
   lockableDurations: Duration[];
+
+  /**
+   * last_gauge_id is what the gauge number will increment from when creating
+   * the next gauge after genesis
+   */
   lastGaugeId: Long;
 }
 
-/** GenesisState defines the incentives module's genesis state. */
+/**
+ * GenesisState defines the incentives module's various parameters when first
+ * initialized
+ */
 export interface GenesisStateSDKType {
-  /** params defines all the parameters of the module */
+  /** params are all the parameters of the module */
   params: ParamsSDKType;
+
+  /** gauges are all gauges that should exist at genesis */
   gauges: GaugeSDKType[];
+
+  /**
+   * lockable_durations are all lockup durations that gauges can be locked for
+   * in order to recieve incentives
+   */
   lockable_durations: DurationSDKType[];
+
+  /**
+   * last_gauge_id is what the gauge number will increment from when creating
+   * the next gauge after genesis
+   */
   last_gauge_id: Long;
 }
 

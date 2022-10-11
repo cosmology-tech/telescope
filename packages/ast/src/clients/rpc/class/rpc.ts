@@ -3,8 +3,19 @@ import { arrowFunctionExpression, classDeclaration, classMethod, classProperty, 
 import { ProtoService, ProtoServiceMethod } from '@osmonauts/types';
 import { GenericParseContext } from '../../../encoding';
 import { camel } from '@osmonauts/utils';
+const cleanType = (ResponseType: string) => {
+    // MARKED AS NOT DRY [google.protobuf names]
+    // TODO some have google.protobuf.Any shows up... figure out the better way to handle this
+    if (/\./.test(ResponseType)) {
+        ResponseType = ResponseType.split('.')[ResponseType.split('.').length - 1];
+    }
 
+    return ResponseType;
+}
 const returnReponseType = (ResponseType: string) => {
+
+    ResponseType = cleanType(ResponseType);
+
     return t.tsTypeAnnotation(
         t.tsTypeReference(
             t.identifier('Promise'),
@@ -120,6 +131,9 @@ const encodeData = (name: string) => {
 
 // const promise = this.rpc.request("cosmos.auth.v1beta1.Query", "Accounts", data);
 const promiseRequest = (name: string, packageImportName: string) => {
+
+    name = cleanType(name);
+
     return t.variableDeclaration(
         'const',
         [
@@ -146,6 +160,9 @@ const promiseRequest = (name: string, packageImportName: string) => {
 
 // return promise.then((data) => QueryAccountsResponse.decode(new _m0.Reader(data)));
 const returnPromise = (name: string) => {
+
+    name = cleanType(name);
+
     return t.returnStatement(
         t.callExpression(
             t.memberExpression(

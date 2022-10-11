@@ -19,10 +19,12 @@ export interface QueryGaugeIdsResponseSDKType {
 export interface QueryGaugeIdsResponse_GaugeIdWithDuration {
   gaugeId: Long;
   duration: Duration;
+  gaugeIncentivePercentage: string;
 }
 export interface QueryGaugeIdsResponse_GaugeIdWithDurationSDKType {
   gauge_id: Long;
   duration: DurationSDKType;
+  gauge_incentive_percentage: string;
 }
 export interface QueryDistrInfoRequest {}
 export interface QueryDistrInfoRequestSDKType {}
@@ -228,7 +230,8 @@ export const QueryGaugeIdsResponse = {
 function createBaseQueryGaugeIdsResponse_GaugeIdWithDuration(): QueryGaugeIdsResponse_GaugeIdWithDuration {
   return {
     gaugeId: Long.UZERO,
-    duration: undefined
+    duration: undefined,
+    gaugeIncentivePercentage: ""
   };
 }
 
@@ -240,6 +243,10 @@ export const QueryGaugeIdsResponse_GaugeIdWithDuration = {
 
     if (message.duration !== undefined) {
       Duration.encode(message.duration, writer.uint32(18).fork()).ldelim();
+    }
+
+    if (message.gaugeIncentivePercentage !== "") {
+      writer.uint32(26).string(message.gaugeIncentivePercentage);
     }
 
     return writer;
@@ -262,6 +269,10 @@ export const QueryGaugeIdsResponse_GaugeIdWithDuration = {
           message.duration = Duration.decode(reader, reader.uint32());
           break;
 
+        case 3:
+          message.gaugeIncentivePercentage = reader.string();
+          break;
+
         default:
           reader.skipType(tag & 7);
           break;
@@ -274,7 +285,8 @@ export const QueryGaugeIdsResponse_GaugeIdWithDuration = {
   fromJSON(object: any): QueryGaugeIdsResponse_GaugeIdWithDuration {
     return {
       gaugeId: isSet(object.gaugeId) ? Long.fromValue(object.gaugeId) : Long.UZERO,
-      duration: isSet(object.duration) ? Duration.fromJSON(object.duration) : undefined
+      duration: isSet(object.duration) ? Duration.fromJSON(object.duration) : undefined,
+      gaugeIncentivePercentage: isSet(object.gaugeIncentivePercentage) ? String(object.gaugeIncentivePercentage) : ""
     };
   },
 
@@ -282,6 +294,7 @@ export const QueryGaugeIdsResponse_GaugeIdWithDuration = {
     const obj: any = {};
     message.gaugeId !== undefined && (obj.gaugeId = (message.gaugeId || Long.UZERO).toString());
     message.duration !== undefined && (obj.duration = message.duration ? Duration.toJSON(message.duration) : undefined);
+    message.gaugeIncentivePercentage !== undefined && (obj.gaugeIncentivePercentage = message.gaugeIncentivePercentage);
     return obj;
   },
 
@@ -289,13 +302,15 @@ export const QueryGaugeIdsResponse_GaugeIdWithDuration = {
     const message = createBaseQueryGaugeIdsResponse_GaugeIdWithDuration();
     message.gaugeId = object.gaugeId !== undefined && object.gaugeId !== null ? Long.fromValue(object.gaugeId) : Long.UZERO;
     message.duration = object.duration !== undefined && object.duration !== null ? Duration.fromPartial(object.duration) : undefined;
+    message.gaugeIncentivePercentage = object.gaugeIncentivePercentage ?? "";
     return message;
   },
 
   fromSDK(object: QueryGaugeIdsResponse_GaugeIdWithDurationSDKType): QueryGaugeIdsResponse_GaugeIdWithDuration {
     return {
       gaugeId: isSet(object.gauge_id) ? object.gauge_id : undefined,
-      duration: isSet(object.duration) ? Duration.fromSDK(object.duration) : undefined
+      duration: isSet(object.duration) ? Duration.fromSDK(object.duration) : undefined,
+      gaugeIncentivePercentage: isSet(object.gauge_incentive_percentage) ? object.gauge_incentive_percentage : undefined
     };
   },
 
@@ -303,6 +318,7 @@ export const QueryGaugeIdsResponse_GaugeIdWithDuration = {
     const obj: any = {};
     message.gaugeId !== undefined && (obj.gauge_id = message.gaugeId);
     message.duration !== undefined && (obj.duration = message.duration ? Duration.toSDK(message.duration) : undefined);
+    message.gaugeIncentivePercentage !== undefined && (obj.gauge_incentive_percentage = message.gaugeIncentivePercentage);
     return obj;
   }
 

@@ -13,7 +13,7 @@ export interface QueryPoolRequest {
 
 /** =============================== Pool */
 export interface QueryPoolRequestSDKType {
-  poolId: Long;
+  pool_id: Long;
 }
 export interface QueryPoolResponse {
   pool: Any;
@@ -55,7 +55,23 @@ export interface QueryNumPoolsResponse {
   numPools: Long;
 }
 export interface QueryNumPoolsResponseSDKType {
-  numPools: Long;
+  num_pools: Long;
+}
+
+/** =============================== PoolType */
+export interface QueryPoolTypeRequest {
+  poolId: Long;
+}
+
+/** =============================== PoolType */
+export interface QueryPoolTypeRequestSDKType {
+  pool_id: Long;
+}
+export interface QueryPoolTypeResponse {
+  poolType: string;
+}
+export interface QueryPoolTypeResponseSDKType {
+  pool_type: string;
 }
 
 /** =============================== PoolParams */
@@ -65,7 +81,7 @@ export interface QueryPoolParamsRequest {
 
 /** =============================== PoolParams */
 export interface QueryPoolParamsRequestSDKType {
-  poolId: Long;
+  pool_id: Long;
 }
 export interface QueryPoolParamsResponse {
   params: Any;
@@ -81,7 +97,7 @@ export interface QueryTotalPoolLiquidityRequest {
 
 /** =============================== PoolLiquidity */
 export interface QueryTotalPoolLiquidityRequestSDKType {
-  poolId: Long;
+  pool_id: Long;
 }
 export interface QueryTotalPoolLiquidityResponse {
   liquidity: Coin[];
@@ -97,13 +113,13 @@ export interface QueryTotalSharesRequest {
 
 /** =============================== TotalShares */
 export interface QueryTotalSharesRequestSDKType {
-  poolId: Long;
+  pool_id: Long;
 }
 export interface QueryTotalSharesResponse {
   totalShares: Coin;
 }
 export interface QueryTotalSharesResponseSDKType {
-  totalShares: CoinSDKType;
+  total_shares: CoinSDKType;
 }
 
 /**
@@ -121,7 +137,7 @@ export interface QuerySpotPriceRequest {
  * query.
  */
 export interface QuerySpotPriceRequestSDKType {
-  poolId: Long;
+  pool_id: Long;
   base_asset_denom?: string;
   quote_asset_denom?: string;
 }
@@ -141,7 +157,7 @@ export interface QuerySpotPriceResponse {
  */
 export interface QuerySpotPriceResponseSDKType {
   /** String of the Dec. Ex) 10.203uatom */
-  spotPrice: string;
+  spot_price: string;
 }
 
 /** =============================== EstimateSwapExactAmountIn */
@@ -155,15 +171,15 @@ export interface QuerySwapExactAmountInRequest {
 /** =============================== EstimateSwapExactAmountIn */
 export interface QuerySwapExactAmountInRequestSDKType {
   sender?: string;
-  poolId: Long;
-  tokenIn?: string;
+  pool_id: Long;
+  token_in?: string;
   routes?: SwapAmountInRouteSDKType[];
 }
 export interface QuerySwapExactAmountInResponse {
   tokenOutAmount: string;
 }
 export interface QuerySwapExactAmountInResponseSDKType {
-  tokenOutAmount: string;
+  token_out_amount: string;
 }
 
 /** =============================== EstimateSwapExactAmountOut */
@@ -177,15 +193,15 @@ export interface QuerySwapExactAmountOutRequest {
 /** =============================== EstimateSwapExactAmountOut */
 export interface QuerySwapExactAmountOutRequestSDKType {
   sender?: string;
-  poolId: Long;
+  pool_id: Long;
   routes?: SwapAmountOutRouteSDKType[];
-  tokenOut?: string;
+  token_out?: string;
 }
 export interface QuerySwapExactAmountOutResponse {
   tokenInAmount: string;
 }
 export interface QuerySwapExactAmountOutResponseSDKType {
-  tokenInAmount: string;
+  token_in_amount: string;
 }
 export interface QueryTotalLiquidityRequest {}
 export interface QueryTotalLiquidityRequestSDKType {}
@@ -253,13 +269,13 @@ export const QueryPoolRequest = {
 
   fromSDK(object: QueryPoolRequestSDKType): QueryPoolRequest {
     return {
-      poolId: isSet(object.poolId) ? object.poolId : undefined
+      poolId: isSet(object.pool_id) ? object.pool_id : undefined
     };
   },
 
   toSDK(message: QueryPoolRequest): QueryPoolRequestSDKType {
     const obj: any = {};
-    message.poolId !== undefined && (obj.poolId = message.poolId);
+    message.poolId !== undefined && (obj.pool_id = message.poolId);
     return obj;
   }
 
@@ -607,13 +623,151 @@ export const QueryNumPoolsResponse = {
 
   fromSDK(object: QueryNumPoolsResponseSDKType): QueryNumPoolsResponse {
     return {
-      numPools: isSet(object.numPools) ? object.numPools : undefined
+      numPools: isSet(object.num_pools) ? object.num_pools : undefined
     };
   },
 
   toSDK(message: QueryNumPoolsResponse): QueryNumPoolsResponseSDKType {
     const obj: any = {};
-    message.numPools !== undefined && (obj.numPools = message.numPools);
+    message.numPools !== undefined && (obj.num_pools = message.numPools);
+    return obj;
+  }
+
+};
+
+function createBaseQueryPoolTypeRequest(): QueryPoolTypeRequest {
+  return {
+    poolId: Long.UZERO
+  };
+}
+
+export const QueryPoolTypeRequest = {
+  encode(message: QueryPoolTypeRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (!message.poolId.isZero()) {
+      writer.uint32(8).uint64(message.poolId);
+    }
+
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryPoolTypeRequest {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQueryPoolTypeRequest();
+
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        case 1:
+          message.poolId = (reader.uint64() as Long);
+          break;
+
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+
+  fromJSON(object: any): QueryPoolTypeRequest {
+    return {
+      poolId: isSet(object.poolId) ? Long.fromValue(object.poolId) : Long.UZERO
+    };
+  },
+
+  toJSON(message: QueryPoolTypeRequest): unknown {
+    const obj: any = {};
+    message.poolId !== undefined && (obj.poolId = (message.poolId || Long.UZERO).toString());
+    return obj;
+  },
+
+  fromPartial(object: DeepPartial<QueryPoolTypeRequest>): QueryPoolTypeRequest {
+    const message = createBaseQueryPoolTypeRequest();
+    message.poolId = object.poolId !== undefined && object.poolId !== null ? Long.fromValue(object.poolId) : Long.UZERO;
+    return message;
+  },
+
+  fromSDK(object: QueryPoolTypeRequestSDKType): QueryPoolTypeRequest {
+    return {
+      poolId: isSet(object.pool_id) ? object.pool_id : undefined
+    };
+  },
+
+  toSDK(message: QueryPoolTypeRequest): QueryPoolTypeRequestSDKType {
+    const obj: any = {};
+    message.poolId !== undefined && (obj.pool_id = message.poolId);
+    return obj;
+  }
+
+};
+
+function createBaseQueryPoolTypeResponse(): QueryPoolTypeResponse {
+  return {
+    poolType: ""
+  };
+}
+
+export const QueryPoolTypeResponse = {
+  encode(message: QueryPoolTypeResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.poolType !== "") {
+      writer.uint32(10).string(message.poolType);
+    }
+
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryPoolTypeResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQueryPoolTypeResponse();
+
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        case 1:
+          message.poolType = reader.string();
+          break;
+
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+
+  fromJSON(object: any): QueryPoolTypeResponse {
+    return {
+      poolType: isSet(object.poolType) ? String(object.poolType) : ""
+    };
+  },
+
+  toJSON(message: QueryPoolTypeResponse): unknown {
+    const obj: any = {};
+    message.poolType !== undefined && (obj.poolType = message.poolType);
+    return obj;
+  },
+
+  fromPartial(object: DeepPartial<QueryPoolTypeResponse>): QueryPoolTypeResponse {
+    const message = createBaseQueryPoolTypeResponse();
+    message.poolType = object.poolType ?? "";
+    return message;
+  },
+
+  fromSDK(object: QueryPoolTypeResponseSDKType): QueryPoolTypeResponse {
+    return {
+      poolType: isSet(object.pool_type) ? object.pool_type : undefined
+    };
+  },
+
+  toSDK(message: QueryPoolTypeResponse): QueryPoolTypeResponseSDKType {
+    const obj: any = {};
+    message.poolType !== undefined && (obj.pool_type = message.poolType);
     return obj;
   }
 
@@ -676,13 +830,13 @@ export const QueryPoolParamsRequest = {
 
   fromSDK(object: QueryPoolParamsRequestSDKType): QueryPoolParamsRequest {
     return {
-      poolId: isSet(object.poolId) ? object.poolId : undefined
+      poolId: isSet(object.pool_id) ? object.pool_id : undefined
     };
   },
 
   toSDK(message: QueryPoolParamsRequest): QueryPoolParamsRequestSDKType {
     const obj: any = {};
-    message.poolId !== undefined && (obj.poolId = message.poolId);
+    message.poolId !== undefined && (obj.pool_id = message.poolId);
     return obj;
   }
 
@@ -814,13 +968,13 @@ export const QueryTotalPoolLiquidityRequest = {
 
   fromSDK(object: QueryTotalPoolLiquidityRequestSDKType): QueryTotalPoolLiquidityRequest {
     return {
-      poolId: isSet(object.poolId) ? object.poolId : undefined
+      poolId: isSet(object.pool_id) ? object.pool_id : undefined
     };
   },
 
   toSDK(message: QueryTotalPoolLiquidityRequest): QueryTotalPoolLiquidityRequestSDKType {
     const obj: any = {};
-    message.poolId !== undefined && (obj.poolId = message.poolId);
+    message.poolId !== undefined && (obj.pool_id = message.poolId);
     return obj;
   }
 
@@ -964,13 +1118,13 @@ export const QueryTotalSharesRequest = {
 
   fromSDK(object: QueryTotalSharesRequestSDKType): QueryTotalSharesRequest {
     return {
-      poolId: isSet(object.poolId) ? object.poolId : undefined
+      poolId: isSet(object.pool_id) ? object.pool_id : undefined
     };
   },
 
   toSDK(message: QueryTotalSharesRequest): QueryTotalSharesRequestSDKType {
     const obj: any = {};
-    message.poolId !== undefined && (obj.poolId = message.poolId);
+    message.poolId !== undefined && (obj.pool_id = message.poolId);
     return obj;
   }
 
@@ -1033,13 +1187,13 @@ export const QueryTotalSharesResponse = {
 
   fromSDK(object: QueryTotalSharesResponseSDKType): QueryTotalSharesResponse {
     return {
-      totalShares: isSet(object.totalShares) ? Coin.fromSDK(object.totalShares) : undefined
+      totalShares: isSet(object.total_shares) ? Coin.fromSDK(object.total_shares) : undefined
     };
   },
 
   toSDK(message: QueryTotalSharesResponse): QueryTotalSharesResponseSDKType {
     const obj: any = {};
-    message.totalShares !== undefined && (obj.totalShares = message.totalShares ? Coin.toSDK(message.totalShares) : undefined);
+    message.totalShares !== undefined && (obj.total_shares = message.totalShares ? Coin.toSDK(message.totalShares) : undefined);
     return obj;
   }
 
@@ -1126,7 +1280,7 @@ export const QuerySpotPriceRequest = {
 
   fromSDK(object: QuerySpotPriceRequestSDKType): QuerySpotPriceRequest {
     return {
-      poolId: isSet(object.poolId) ? object.poolId : undefined,
+      poolId: isSet(object.pool_id) ? object.pool_id : undefined,
       baseAssetDenom: isSet(object.base_asset_denom) ? object.base_asset_denom : undefined,
       quoteAssetDenom: isSet(object.quote_asset_denom) ? object.quote_asset_denom : undefined
     };
@@ -1134,7 +1288,7 @@ export const QuerySpotPriceRequest = {
 
   toSDK(message: QuerySpotPriceRequest): QuerySpotPriceRequestSDKType {
     const obj: any = {};
-    message.poolId !== undefined && (obj.poolId = message.poolId);
+    message.poolId !== undefined && (obj.pool_id = message.poolId);
     message.baseAssetDenom !== undefined && (obj.base_asset_denom = message.baseAssetDenom);
     message.quoteAssetDenom !== undefined && (obj.quote_asset_denom = message.quoteAssetDenom);
     return obj;
@@ -1199,13 +1353,13 @@ export const QuerySpotPriceResponse = {
 
   fromSDK(object: QuerySpotPriceResponseSDKType): QuerySpotPriceResponse {
     return {
-      spotPrice: isSet(object.spotPrice) ? object.spotPrice : undefined
+      spotPrice: isSet(object.spot_price) ? object.spot_price : undefined
     };
   },
 
   toSDK(message: QuerySpotPriceResponse): QuerySpotPriceResponseSDKType {
     const obj: any = {};
-    message.spotPrice !== undefined && (obj.spotPrice = message.spotPrice);
+    message.spotPrice !== undefined && (obj.spot_price = message.spotPrice);
     return obj;
   }
 
@@ -1311,8 +1465,8 @@ export const QuerySwapExactAmountInRequest = {
   fromSDK(object: QuerySwapExactAmountInRequestSDKType): QuerySwapExactAmountInRequest {
     return {
       sender: isSet(object.sender) ? object.sender : undefined,
-      poolId: isSet(object.poolId) ? object.poolId : undefined,
-      tokenIn: isSet(object.tokenIn) ? object.tokenIn : undefined,
+      poolId: isSet(object.pool_id) ? object.pool_id : undefined,
+      tokenIn: isSet(object.token_in) ? object.token_in : undefined,
       routes: Array.isArray(object?.routes) ? object.routes.map((e: any) => SwapAmountInRoute.fromSDK(e)) : []
     };
   },
@@ -1320,8 +1474,8 @@ export const QuerySwapExactAmountInRequest = {
   toSDK(message: QuerySwapExactAmountInRequest): QuerySwapExactAmountInRequestSDKType {
     const obj: any = {};
     message.sender !== undefined && (obj.sender = message.sender);
-    message.poolId !== undefined && (obj.poolId = message.poolId);
-    message.tokenIn !== undefined && (obj.tokenIn = message.tokenIn);
+    message.poolId !== undefined && (obj.pool_id = message.poolId);
+    message.tokenIn !== undefined && (obj.token_in = message.tokenIn);
 
     if (message.routes) {
       obj.routes = message.routes.map(e => e ? SwapAmountInRoute.toSDK(e) : undefined);
@@ -1391,13 +1545,13 @@ export const QuerySwapExactAmountInResponse = {
 
   fromSDK(object: QuerySwapExactAmountInResponseSDKType): QuerySwapExactAmountInResponse {
     return {
-      tokenOutAmount: isSet(object.tokenOutAmount) ? object.tokenOutAmount : undefined
+      tokenOutAmount: isSet(object.token_out_amount) ? object.token_out_amount : undefined
     };
   },
 
   toSDK(message: QuerySwapExactAmountInResponse): QuerySwapExactAmountInResponseSDKType {
     const obj: any = {};
-    message.tokenOutAmount !== undefined && (obj.tokenOutAmount = message.tokenOutAmount);
+    message.tokenOutAmount !== undefined && (obj.token_out_amount = message.tokenOutAmount);
     return obj;
   }
 
@@ -1503,16 +1657,16 @@ export const QuerySwapExactAmountOutRequest = {
   fromSDK(object: QuerySwapExactAmountOutRequestSDKType): QuerySwapExactAmountOutRequest {
     return {
       sender: isSet(object.sender) ? object.sender : undefined,
-      poolId: isSet(object.poolId) ? object.poolId : undefined,
+      poolId: isSet(object.pool_id) ? object.pool_id : undefined,
       routes: Array.isArray(object?.routes) ? object.routes.map((e: any) => SwapAmountOutRoute.fromSDK(e)) : [],
-      tokenOut: isSet(object.tokenOut) ? object.tokenOut : undefined
+      tokenOut: isSet(object.token_out) ? object.token_out : undefined
     };
   },
 
   toSDK(message: QuerySwapExactAmountOutRequest): QuerySwapExactAmountOutRequestSDKType {
     const obj: any = {};
     message.sender !== undefined && (obj.sender = message.sender);
-    message.poolId !== undefined && (obj.poolId = message.poolId);
+    message.poolId !== undefined && (obj.pool_id = message.poolId);
 
     if (message.routes) {
       obj.routes = message.routes.map(e => e ? SwapAmountOutRoute.toSDK(e) : undefined);
@@ -1520,7 +1674,7 @@ export const QuerySwapExactAmountOutRequest = {
       obj.routes = [];
     }
 
-    message.tokenOut !== undefined && (obj.tokenOut = message.tokenOut);
+    message.tokenOut !== undefined && (obj.token_out = message.tokenOut);
     return obj;
   }
 
@@ -1583,13 +1737,13 @@ export const QuerySwapExactAmountOutResponse = {
 
   fromSDK(object: QuerySwapExactAmountOutResponseSDKType): QuerySwapExactAmountOutResponse {
     return {
-      tokenInAmount: isSet(object.tokenInAmount) ? object.tokenInAmount : undefined
+      tokenInAmount: isSet(object.token_in_amount) ? object.token_in_amount : undefined
     };
   },
 
   toSDK(message: QuerySwapExactAmountOutResponse): QuerySwapExactAmountOutResponseSDKType {
     const obj: any = {};
-    message.tokenInAmount !== undefined && (obj.tokenInAmount = message.tokenInAmount);
+    message.tokenInAmount !== undefined && (obj.token_in_amount = message.tokenInAmount);
     return obj;
   }
 

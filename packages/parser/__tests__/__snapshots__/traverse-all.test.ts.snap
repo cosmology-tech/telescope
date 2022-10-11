@@ -297,7 +297,7 @@ exports[`osmosis/gamm/v1beta1/tx SwapAmountInRoute 1`] = `
       "(gogoproto.moretags)": "yaml:pool_id",
       "(telescope:camel)": "poolId",
       "(telescope:name)": "poolId",
-      "(telescope:orig)": "poolId",
+      "(telescope:orig)": "pool_id",
     },
     "parsedType": {
       "name": "uint64",
@@ -314,7 +314,7 @@ exports[`osmosis/gamm/v1beta1/tx SwapAmountInRoute 1`] = `
       "(gogoproto.moretags)": "yaml:token_out_denom",
       "(telescope:camel)": "tokenOutDenom",
       "(telescope:name)": "tokenOutDenom",
-      "(telescope:orig)": "tokenOutDenom",
+      "(telescope:orig)": "token_out_denom",
     },
     "parsedType": {
       "name": "string",

@@ -50,7 +50,7 @@ export const createRPCMsgClient = async ({
     gamm: {
       poolmodels: {
         balancer: {
-          v1beta1: new (await import("./gamm/pool-models/balancer/tx.rpc.msg")).MsgClientImpl(rpc)
+          v1beta1: new (await import("./gamm/pool-models/balancer/tx/tx.rpc.msg")).MsgClientImpl(rpc)
         },
         stableswap: {
           v1beta1: new (await import("./gamm/pool-models/stableswap/tx.rpc.msg")).MsgClientImpl(rpc)
@@ -60,6 +60,9 @@ export const createRPCMsgClient = async ({
     },
     incentives: new (await import("./incentives/tx.rpc.msg")).MsgClientImpl(rpc),
     lockup: new (await import("./lockup/tx.rpc.msg")).MsgClientImpl(rpc),
+    streamswap: {
+      v1: new (await import("./streamswap/v1/tx.rpc.msg")).MsgClientImpl(rpc)
+    },
     superfluid: new (await import("./superfluid/tx.rpc.msg")).MsgClientImpl(rpc),
     tokenfactory: {
       v1beta1: new (await import("./tokenfactory/v1beta1/tx.rpc.msg")).MsgClientImpl(rpc)

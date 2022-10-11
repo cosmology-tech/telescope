@@ -3,9 +3,10 @@ import { Params, ParamsSDKType } from "./params";
 import { SuperfluidAssetType, SuperfluidAssetTypeSDKType, SuperfluidAsset, SuperfluidAssetSDKType, OsmoEquivalentMultiplierRecord, OsmoEquivalentMultiplierRecordSDKType, SuperfluidDelegationRecord, SuperfluidDelegationRecordSDKType } from "./superfluid";
 import { Coin, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
 import { SyntheticLock, SyntheticLockSDKType } from "../lockup/lock";
+import { DelegationResponse, DelegationResponseSDKType } from "../../cosmos/staking/v1beta1/staking";
 import { setPaginationParams } from "../../helpers";
 import { LCDClient } from "@osmonauts/lcd";
-import { QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType, AssetTypeRequest, AssetTypeRequestSDKType, AssetTypeResponse, AssetTypeResponseSDKType, AllAssetsRequest, AllAssetsRequestSDKType, AllAssetsResponse, AllAssetsResponseSDKType, AssetMultiplierRequest, AssetMultiplierRequestSDKType, AssetMultiplierResponse, AssetMultiplierResponseSDKType, AllIntermediaryAccountsRequest, AllIntermediaryAccountsRequestSDKType, AllIntermediaryAccountsResponse, AllIntermediaryAccountsResponseSDKType, ConnectedIntermediaryAccountRequest, ConnectedIntermediaryAccountRequestSDKType, ConnectedIntermediaryAccountResponse, ConnectedIntermediaryAccountResponseSDKType, TotalSuperfluidDelegationsRequest, TotalSuperfluidDelegationsRequestSDKType, TotalSuperfluidDelegationsResponse, TotalSuperfluidDelegationsResponseSDKType, SuperfluidDelegationAmountRequest, SuperfluidDelegationAmountRequestSDKType, SuperfluidDelegationAmountResponse, SuperfluidDelegationAmountResponseSDKType, SuperfluidDelegationsByDelegatorRequest, SuperfluidDelegationsByDelegatorRequestSDKType, SuperfluidDelegationsByDelegatorResponse, SuperfluidDelegationsByDelegatorResponseSDKType, SuperfluidUndelegationsByDelegatorRequest, SuperfluidUndelegationsByDelegatorRequestSDKType, SuperfluidUndelegationsByDelegatorResponse, SuperfluidUndelegationsByDelegatorResponseSDKType, SuperfluidDelegationsByValidatorDenomRequest, SuperfluidDelegationsByValidatorDenomRequestSDKType, SuperfluidDelegationsByValidatorDenomResponse, SuperfluidDelegationsByValidatorDenomResponseSDKType, EstimateSuperfluidDelegatedAmountByValidatorDenomRequest, EstimateSuperfluidDelegatedAmountByValidatorDenomRequestSDKType, EstimateSuperfluidDelegatedAmountByValidatorDenomResponse, EstimateSuperfluidDelegatedAmountByValidatorDenomResponseSDKType } from "./query";
+import { QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType, AssetTypeRequest, AssetTypeRequestSDKType, AssetTypeResponse, AssetTypeResponseSDKType, AllAssetsRequest, AllAssetsRequestSDKType, AllAssetsResponse, AllAssetsResponseSDKType, AssetMultiplierRequest, AssetMultiplierRequestSDKType, AssetMultiplierResponse, AssetMultiplierResponseSDKType, AllIntermediaryAccountsRequest, AllIntermediaryAccountsRequestSDKType, AllIntermediaryAccountsResponse, AllIntermediaryAccountsResponseSDKType, ConnectedIntermediaryAccountRequest, ConnectedIntermediaryAccountRequestSDKType, ConnectedIntermediaryAccountResponse, ConnectedIntermediaryAccountResponseSDKType, TotalSuperfluidDelegationsRequest, TotalSuperfluidDelegationsRequestSDKType, TotalSuperfluidDelegationsResponse, TotalSuperfluidDelegationsResponseSDKType, SuperfluidDelegationAmountRequest, SuperfluidDelegationAmountRequestSDKType, SuperfluidDelegationAmountResponse, SuperfluidDelegationAmountResponseSDKType, SuperfluidDelegationsByDelegatorRequest, SuperfluidDelegationsByDelegatorRequestSDKType, SuperfluidDelegationsByDelegatorResponse, SuperfluidDelegationsByDelegatorResponseSDKType, SuperfluidUndelegationsByDelegatorRequest, SuperfluidUndelegationsByDelegatorRequestSDKType, SuperfluidUndelegationsByDelegatorResponse, SuperfluidUndelegationsByDelegatorResponseSDKType, SuperfluidDelegationsByValidatorDenomRequest, SuperfluidDelegationsByValidatorDenomRequestSDKType, SuperfluidDelegationsByValidatorDenomResponse, SuperfluidDelegationsByValidatorDenomResponseSDKType, EstimateSuperfluidDelegatedAmountByValidatorDenomRequest, EstimateSuperfluidDelegatedAmountByValidatorDenomRequestSDKType, EstimateSuperfluidDelegatedAmountByValidatorDenomResponse, EstimateSuperfluidDelegatedAmountByValidatorDenomResponseSDKType, QueryTotalDelegationByDelegatorRequest, QueryTotalDelegationByDelegatorRequestSDKType, QueryTotalDelegationByDelegatorResponse, QueryTotalDelegationByDelegatorResponseSDKType } from "./query";
 export class LCDQueryClient {
   req: LCDClient;
 
@@ -27,15 +28,17 @@ export class LCDQueryClient {
     this.superfluidUndelegationsByDelegator = this.superfluidUndelegationsByDelegator.bind(this);
     this.superfluidDelegationsByValidatorDenom = this.superfluidDelegationsByValidatorDenom.bind(this);
     this.estimateSuperfluidDelegatedAmountByValidatorDenom = this.estimateSuperfluidDelegatedAmountByValidatorDenom.bind(this);
+    this.totalDelegationByDelegator = this.totalDelegationByDelegator.bind(this);
   }
 
-  /* Params returns the total set of minting parameters. */
+  /* Params returns the total set of superfluid parameters. */
   async params(_params: QueryParamsRequest = {}): Promise<QueryParamsResponseSDKType> {
     const endpoint = `osmosis/superfluid/v1beta1/params`;
     return await this.req.get<QueryParamsResponseSDKType>(endpoint);
   }
 
-  /* Returns superfluid asset type */
+  /* Returns superfluid asset type, whether if it's a native asset or an lp
+   share. */
   async assetType(params: AssetTypeRequest): Promise<AssetTypeResponseSDKType> {
     const options: any = {
       params: {}
@@ -49,13 +52,13 @@ export class LCDQueryClient {
     return await this.req.get<AssetTypeResponseSDKType>(endpoint, options);
   }
 
-  /* Returns all superfluid asset types */
+  /* Returns all registered superfluid assets. */
   async allAssets(_params: AllAssetsRequest = {}): Promise<AllAssetsResponseSDKType> {
     const endpoint = `osmosis/superfluid/v1beta1/all_assets`;
     return await this.req.get<AllAssetsResponseSDKType>(endpoint);
   }
 
-  /* Returns superfluid asset Multiplier */
+  /* Returns the osmo equivalent multiplier used in the most recent epoch. */
   async assetMultiplier(params: AssetMultiplierRequest): Promise<AssetMultiplierResponseSDKType> {
     const options: any = {
       params: {}
@@ -69,7 +72,7 @@ export class LCDQueryClient {
     return await this.req.get<AssetMultiplierResponseSDKType>(endpoint, options);
   }
 
-  /* Returns all superfluid intermediary account */
+  /* Returns all superfluid intermediary accounts. */
   async allIntermediaryAccounts(params: AllIntermediaryAccountsRequest = {
     pagination: undefined
   }): Promise<AllIntermediaryAccountsResponseSDKType> {
@@ -91,14 +94,14 @@ export class LCDQueryClient {
     return await this.req.get<ConnectedIntermediaryAccountResponseSDKType>(endpoint);
   }
 
-  /* Returns the total amount of osmo superfluidly staked
-   response denominated in uosmo */
+  /* Returns the total amount of osmo superfluidly staked.
+   Response is denominated in uosmo. */
   async totalSuperfluidDelegations(_params: TotalSuperfluidDelegationsRequest = {}): Promise<TotalSuperfluidDelegationsResponseSDKType> {
     const endpoint = `osmosis/superfluid/v1beta1/all_superfluid_delegations`;
     return await this.req.get<TotalSuperfluidDelegationsResponseSDKType>(endpoint);
   }
 
-  /* Returns the coins superfluid delegated for a delegator, validator, denom
+  /* Returns the coins superfluid delegated for the delegator, validator, denom
    triplet */
   async superfluidDelegationAmount(params: SuperfluidDelegationAmountRequest): Promise<SuperfluidDelegationAmountResponseSDKType> {
     const options: any = {
@@ -121,13 +124,13 @@ export class LCDQueryClient {
     return await this.req.get<SuperfluidDelegationAmountResponseSDKType>(endpoint, options);
   }
 
-  /* Returns all the superfluid poistions for a specific delegator */
+  /* Returns all the delegated superfluid poistions for a specific delegator. */
   async superfluidDelegationsByDelegator(params: SuperfluidDelegationsByDelegatorRequest): Promise<SuperfluidDelegationsByDelegatorResponseSDKType> {
     const endpoint = `osmosis/superfluid/v1beta1/superfluid_delegations/${params.delegatorAddress}`;
     return await this.req.get<SuperfluidDelegationsByDelegatorResponseSDKType>(endpoint);
   }
 
-  /* SuperfluidUndelegationsByDelegator */
+  /* Returns all the undelegating superfluid poistions for a specific delegator. */
   async superfluidUndelegationsByDelegator(params: SuperfluidUndelegationsByDelegatorRequest): Promise<SuperfluidUndelegationsByDelegatorResponseSDKType> {
     const options: any = {
       params: {}
@@ -178,6 +181,12 @@ export class LCDQueryClient {
 
     const endpoint = `osmosis/superfluid/v1beta1/estimate_superfluid_delegation_amount_by_validator_denom`;
     return await this.req.get<EstimateSuperfluidDelegatedAmountByValidatorDenomResponseSDKType>(endpoint, options);
+  }
+
+  /* Returns the specified delegations for a specific delegator */
+  async totalDelegationByDelegator(params: QueryTotalDelegationByDelegatorRequest): Promise<QueryTotalDelegationByDelegatorResponseSDKType> {
+    const endpoint = `osmosis/superfluid/v1beta1/total_delegation_by_delegator/${params.delegatorAddress}`;
+    return await this.req.get<QueryTotalDelegationByDelegatorResponseSDKType>(endpoint);
   }
 
 }

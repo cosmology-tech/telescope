@@ -96,7 +96,7 @@ export interface MsgUnPoolWhitelistedPoolResponse {
   exitedLockIds: Long[];
 }
 export interface MsgUnPoolWhitelistedPoolResponseSDKType {
-  exitedLockIds: Long[];
+  exited_lock_ids: Long[];
 }
 
 function createBaseMsgSuperfluidDelegate(): MsgSuperfluidDelegate {
@@ -854,7 +854,7 @@ export const MsgUnPoolWhitelistedPoolResponse = {
 
   fromSDK(object: MsgUnPoolWhitelistedPoolResponseSDKType): MsgUnPoolWhitelistedPoolResponse {
     return {
-      exitedLockIds: Array.isArray(object?.exitedLockIds) ? object.exitedLockIds.map((e: any) => e) : []
+      exitedLockIds: Array.isArray(object?.exited_lock_ids) ? object.exited_lock_ids.map((e: any) => e) : []
     };
   },
 
@@ -862,9 +862,9 @@ export const MsgUnPoolWhitelistedPoolResponse = {
     const obj: any = {};
 
     if (message.exitedLockIds) {
-      obj.exitedLockIds = message.exitedLockIds.map(e => e);
+      obj.exited_lock_ids = message.exitedLockIds.map(e => e);
     } else {
-      obj.exitedLockIds = [];
+      obj.exited_lock_ids = [];
     }
 
     return obj;
