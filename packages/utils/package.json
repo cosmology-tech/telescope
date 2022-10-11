@@ -6,6 +6,7 @@
   "homepage": "https://github.com/osmosis-labs/telescope/tree/master/packages/utils#readme",
   "license": "SEE LICENSE IN LICENSE",
   "main": "main/index.js",
+  "module": "module/index.js",
   "typings": "types/index.d.ts",
   "directories": {
     "lib": "src",
@@ -13,13 +14,16 @@
   },
   "files": [
     "types",
+    "src",
     "main",
     "module"
   ],
   "scripts": {
-    "build": "cross-env BABEL_ENV=production babel src --out-dir main --delete-dir-on-start --extensions \".tsx,.ts,.js\"",
-    "buidl": "npm run build && npm run build:ts",
+    "build:main": "cross-env BABEL_ENV=production babel src --out-dir main --delete-dir-on-start --extensions \".tsx,.ts,.js\"",
+    "build:module": "cross-env MODULE=true babel src --out-dir module --delete-dir-on-start  --extensions \".tsx,.ts,.js\"",
     "build:ts": "tsc --project ./tsconfig.json",
+    "build": "npm run build:module && npm run build:main",
+    "buidl": "npm run build && npm run build:ts",
     "prepare": "npm run build",
     "lint": "eslint .",
     "format": "eslint . --fix"
