@@ -94,43 +94,43 @@ export interface OperationSDKType {
 /** The request message for [Operations.GetOperation][google.longrunning.Operations.GetOperation]. */
 export interface GetOperationRequest {
   /** The name of the operation resource. */
-  name?: string;
+  name: string;
 }
 
 /** The request message for [Operations.GetOperation][google.longrunning.Operations.GetOperation]. */
 export interface GetOperationRequestSDKType {
   /** The name of the operation resource. */
-  name?: string;
+  name: string;
 }
 
 /** The request message for [Operations.ListOperations][google.longrunning.Operations.ListOperations]. */
 export interface ListOperationsRequest {
   /** The name of the operation's parent resource. */
-  name?: string;
+  name: string;
 
   /** The standard list filter. */
-  filter?: string;
+  filter: string;
 
   /** The standard list page size. */
-  pageSize?: number;
+  pageSize: number;
 
   /** The standard list page token. */
-  pageToken?: string;
+  pageToken: string;
 }
 
 /** The request message for [Operations.ListOperations][google.longrunning.Operations.ListOperations]. */
 export interface ListOperationsRequestSDKType {
   /** The name of the operation's parent resource. */
-  name?: string;
+  name: string;
 
   /** The standard list filter. */
-  filter?: string;
+  filter: string;
 
   /** The standard list page size. */
-  page_size?: number;
+  page_size: number;
 
   /** The standard list page token. */
-  page_token?: string;
+  page_token: string;
 }
 
 /** The response message for [Operations.ListOperations][google.longrunning.Operations.ListOperations]. */

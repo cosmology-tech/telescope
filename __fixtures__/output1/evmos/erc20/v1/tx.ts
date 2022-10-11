@@ -12,10 +12,10 @@ export interface MsgConvertCoin {
   coin?: Coin;
 
   /** recipient hex address to receive ERC20 token */
-  receiver?: string;
+  receiver: string;
 
   /** cosmos bech32 address from the owner of the given Cosmos coins */
-  sender?: string;
+  sender: string;
 }
 
 /** MsgConvertCoin defines a Msg to convert a native Cosmos coin to a ERC20 token */
@@ -27,10 +27,10 @@ export interface MsgConvertCoinSDKType {
   coin?: CoinSDKType;
 
   /** recipient hex address to receive ERC20 token */
-  receiver?: string;
+  receiver: string;
 
   /** cosmos bech32 address from the owner of the given Cosmos coins */
-  sender?: string;
+  sender: string;
 }
 
 /** MsgConvertCoinResponse returns no fields */
@@ -45,16 +45,16 @@ export interface MsgConvertCoinResponseSDKType {}
  */
 export interface MsgConvertERC20 {
   /** ERC20 token contract address registered in a token pair */
-  contractAddress?: string;
+  contractAddress: string;
 
   /** amount of ERC20 tokens to convert */
-  amount?: string;
+  amount: string;
 
   /** bech32 address to receive native Cosmos coins */
-  receiver?: string;
+  receiver: string;
 
   /** sender hex address from the owner of the given ERC20 tokens */
-  sender?: string;
+  sender: string;
 }
 
 /**
@@ -63,16 +63,16 @@ export interface MsgConvertERC20 {
  */
 export interface MsgConvertERC20SDKType {
   /** ERC20 token contract address registered in a token pair */
-  contract_address?: string;
+  contract_address: string;
 
   /** amount of ERC20 tokens to convert */
-  amount?: string;
+  amount: string;
 
   /** bech32 address to receive native Cosmos coins */
-  receiver?: string;
+  receiver: string;
 
   /** sender hex address from the owner of the given ERC20 tokens */
-  sender?: string;
+  sender: string;
 }
 
 /** MsgConvertERC20Response returns no fields */

@@ -97,6 +97,17 @@ describe('cosmos/authz/v1beta1/authz.proto', () => {
     });
 });
 
+describe('cosmos/authz/v1beta1/query.proto', () => {
+    const ref = store.findProto('cosmos/authz/v1beta1/query.proto');
+    const context = new ProtoParseContext(ref, store, defaultTelescopeOptions);
+    it('QueryGrantsRequest', () => {
+        expectCode(createProtoType(context, 'QueryGrantsRequest',
+            getNestedProto(ref.traversed).QueryGrantsRequest
+        ));
+    });
+
+});
+
 describe('confio/proofs.proto', () => {
     const ref = store.findProto('confio/proofs.proto');
     const context = new ProtoParseContext(ref, store, defaultTelescopeOptions);

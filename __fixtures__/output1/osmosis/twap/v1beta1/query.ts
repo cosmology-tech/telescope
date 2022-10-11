@@ -4,16 +4,16 @@ import * as _m0 from "protobufjs/minimal";
 import { toTimestamp, Long, fromTimestamp, isSet, fromJsonTimestamp, DeepPartial } from "../../../helpers";
 export const protobufPackage = "osmosis.twap.v1beta1";
 export interface ArithmeticTwapRequest {
-  poolId?: Long;
-  baseAsset?: string;
-  quoteAsset?: string;
+  poolId: Long;
+  baseAsset: string;
+  quoteAsset: string;
   startTime?: Date;
   endTime?: Date;
 }
 export interface ArithmeticTwapRequestSDKType {
-  pool_id?: Long;
-  base_asset?: string;
-  quote_asset?: string;
+  pool_id: Long;
+  base_asset: string;
+  quote_asset: string;
   start_time?: Date;
   end_time?: Date;
 }
@@ -24,15 +24,15 @@ export interface ArithmeticTwapResponseSDKType {
   arithmetic_twap: string;
 }
 export interface ArithmeticTwapToNowRequest {
-  poolId?: Long;
-  baseAsset?: string;
-  quoteAsset?: string;
+  poolId: Long;
+  baseAsset: string;
+  quoteAsset: string;
   startTime?: Date;
 }
 export interface ArithmeticTwapToNowRequestSDKType {
-  pool_id?: Long;
-  base_asset?: string;
-  quote_asset?: string;
+  pool_id: Long;
+  base_asset: string;
+  quote_asset: string;
   start_time?: Date;
 }
 export interface ArithmeticTwapToNowResponse {

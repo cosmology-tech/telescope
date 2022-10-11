@@ -128,8 +128,8 @@ export interface QueryTotalSharesResponseSDKType {
  */
 export interface QuerySpotPriceRequest {
   poolId: Long;
-  baseAssetDenom?: string;
-  quoteAssetDenom?: string;
+  baseAssetDenom: string;
+  quoteAssetDenom: string;
 }
 
 /**
@@ -138,8 +138,8 @@ export interface QuerySpotPriceRequest {
  */
 export interface QuerySpotPriceRequestSDKType {
   pool_id: Long;
-  base_asset_denom?: string;
-  quote_asset_denom?: string;
+  base_asset_denom: string;
+  quote_asset_denom: string;
 }
 
 /**
@@ -162,18 +162,18 @@ export interface QuerySpotPriceResponseSDKType {
 
 /** =============================== EstimateSwapExactAmountIn */
 export interface QuerySwapExactAmountInRequest {
-  sender?: string;
+  sender: string;
   poolId: Long;
-  tokenIn?: string;
-  routes?: SwapAmountInRoute[];
+  tokenIn: string;
+  routes: SwapAmountInRoute[];
 }
 
 /** =============================== EstimateSwapExactAmountIn */
 export interface QuerySwapExactAmountInRequestSDKType {
-  sender?: string;
+  sender: string;
   pool_id: Long;
-  token_in?: string;
-  routes?: SwapAmountInRouteSDKType[];
+  token_in: string;
+  routes: SwapAmountInRouteSDKType[];
 }
 export interface QuerySwapExactAmountInResponse {
   tokenOutAmount: string;
@@ -184,18 +184,18 @@ export interface QuerySwapExactAmountInResponseSDKType {
 
 /** =============================== EstimateSwapExactAmountOut */
 export interface QuerySwapExactAmountOutRequest {
-  sender?: string;
+  sender: string;
   poolId: Long;
-  routes?: SwapAmountOutRoute[];
-  tokenOut?: string;
+  routes: SwapAmountOutRoute[];
+  tokenOut: string;
 }
 
 /** =============================== EstimateSwapExactAmountOut */
 export interface QuerySwapExactAmountOutRequestSDKType {
-  sender?: string;
+  sender: string;
   pool_id: Long;
-  routes?: SwapAmountOutRouteSDKType[];
-  token_out?: string;
+  routes: SwapAmountOutRouteSDKType[];
+  token_out: string;
 }
 export interface QuerySwapExactAmountOutResponse {
   tokenInAmount: string;

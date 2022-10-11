@@ -116,7 +116,7 @@ export interface QueryConsensusStateRequest {
    * latest_height overrrides the height field and queries the latest stored
    * ConsensusState
    */
-  latestHeight?: boolean;
+  latestHeight: boolean;
 }
 
 /**
@@ -138,7 +138,7 @@ export interface QueryConsensusStateRequestSDKType {
    * latest_height overrrides the height field and queries the latest stored
    * ConsensusState
    */
-  latest_height?: boolean;
+  latest_height: boolean;
 }
 
 /**

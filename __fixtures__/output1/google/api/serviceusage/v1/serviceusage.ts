@@ -216,7 +216,7 @@ export interface GetServiceRequest {
    * `projects/123/services/serviceusage.googleapis.com` where `123` is the
    * project number.
    */
-  name?: string;
+  name: string;
 }
 
 /** Request message for the `GetService` method. */
@@ -228,7 +228,7 @@ export interface GetServiceRequestSDKType {
    * `projects/123/services/serviceusage.googleapis.com` where `123` is the
    * project number.
    */
-  name?: string;
+  name: string;
 }
 
 /** Request message for the `ListServices` method. */
@@ -239,26 +239,26 @@ export interface ListServicesRequest {
    * An example name would be:
    * `projects/123` where `123` is the project number.
    */
-  parent?: string;
+  parent: string;
 
   /**
    * Requested size of the next page of data.
    * Requested page size cannot exceed 200.
    * If not set, the default page size is 50.
    */
-  pageSize?: number;
+  pageSize: number;
 
   /**
    * Token identifying which result to start with, which is returned by a
    * previous list call.
    */
-  pageToken?: string;
+  pageToken: string;
 
   /**
    * Only list services that conform to the given filter.
    * The allowed filter strings are `state:ENABLED` and `state:DISABLED`.
    */
-  filter?: string;
+  filter: string;
 }
 
 /** Request message for the `ListServices` method. */
@@ -269,26 +269,26 @@ export interface ListServicesRequestSDKType {
    * An example name would be:
    * `projects/123` where `123` is the project number.
    */
-  parent?: string;
+  parent: string;
 
   /**
    * Requested size of the next page of data.
    * Requested page size cannot exceed 200.
    * If not set, the default page size is 50.
    */
-  page_size?: number;
+  page_size: number;
 
   /**
    * Token identifying which result to start with, which is returned by a
    * previous list call.
    */
-  page_token?: string;
+  page_token: string;
 
   /**
    * Only list services that conform to the given filter.
    * The allowed filter strings are `state:ENABLED` and `state:DISABLED`.
    */
-  filter?: string;
+  filter: string;
 }
 
 /** Response message for the `ListServices` method. */
@@ -430,7 +430,7 @@ export interface BatchGetServicesRequest {
    * the project number. The `BatchGetServices` method currently only supports
    * projects.
    */
-  parent?: string;
+  parent: string;
 
   /**
    * Names of the services to retrieve.
@@ -440,7 +440,7 @@ export interface BatchGetServicesRequest {
    * project number.
    * A single request can get a maximum of 30 services at a time.
    */
-  names?: string[];
+  names: string[];
 }
 
 /** Request message for the `BatchGetServices` method. */
@@ -452,7 +452,7 @@ export interface BatchGetServicesRequestSDKType {
    * the project number. The `BatchGetServices` method currently only supports
    * projects.
    */
-  parent?: string;
+  parent: string;
 
   /**
    * Names of the services to retrieve.
@@ -462,7 +462,7 @@ export interface BatchGetServicesRequestSDKType {
    * project number.
    * A single request can get a maximum of 30 services at a time.
    */
-  names?: string[];
+  names: string[];
 }
 
 /** Response message for the `BatchGetServices` method. */

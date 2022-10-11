@@ -29,13 +29,13 @@ export interface QueryProposalResponseSDKType {
 /** QueryProposalsRequest is the request type for the Query/Proposals RPC method. */
 export interface QueryProposalsRequest {
   /** proposal_status defines the status of the proposals. */
-  proposalStatus?: ProposalStatus;
+  proposalStatus: ProposalStatus;
 
   /** voter defines the voter address for the proposals. */
-  voter?: string;
+  voter: string;
 
   /** depositor defines the deposit addresses from the proposals. */
-  depositor?: string;
+  depositor: string;
 
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequest;
@@ -44,13 +44,13 @@ export interface QueryProposalsRequest {
 /** QueryProposalsRequest is the request type for the Query/Proposals RPC method. */
 export interface QueryProposalsRequestSDKType {
   /** proposal_status defines the status of the proposals. */
-  proposal_status?: ProposalStatusSDKType;
+  proposal_status: ProposalStatusSDKType;
 
   /** voter defines the voter address for the proposals. */
-  voter?: string;
+  voter: string;
 
   /** depositor defines the deposit addresses from the proposals. */
-  depositor?: string;
+  depositor: string;
 
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequestSDKType;

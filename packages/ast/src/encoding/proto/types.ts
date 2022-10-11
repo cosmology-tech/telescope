@@ -160,15 +160,14 @@ export const getFieldOptionality = (
     field: ProtoField,
     isOneOf: boolean
 ) => {
-    const fieldDefaultIsOptional = context.pluginValue('prototypes.fieldDefaultIsOptional');
-    const useOptionalNullable = context.pluginValue('prototypes.useOptionalNullable');
-    const isNullable = field?.options?.['(gogoproto.nullable)'] ?? fieldDefaultIsOptional;
+
+    // const useOptionalNullable = context.pluginValue('prototypes.useOptionalNullable');
+    // const fieldDefaultIsOptional = context.pluginValue('prototypes.fieldDefaultIsOptional');
+    // const isNullable = field?.options?.['(gogoproto.nullable)'] ?? fieldDefaultIsOptional;
 
     if (isArrayField(field) || isEnumField(field) || isScalarField(field)) {
         // these field types are required by default!
-
-        if (isOneOf || (useOptionalNullable &&
-            field?.options?.['(gogoproto.nullable)'])) {
+        if (isOneOf) {
             return true;
         }
         return false;
@@ -202,7 +201,6 @@ export const getFieldOptionalityForDefaults = (
 ) => {
     const fieldDefaultIsOptional = context.pluginValue('prototypes.fieldDefaultIsOptional');
     const useOptionalNullable = context.pluginValue('prototypes.useOptionalNullable');
-    const isNullable = field?.options?.['(gogoproto.nullable)'] ?? fieldDefaultIsOptional;
 
     if (isArrayField(field) || isEnumField(field) || isScalarField(field)) {
         // these field types are required by default!

@@ -531,7 +531,7 @@ export interface QueryPacketAcknowledgementsRequest {
   pagination?: PageRequest;
 
   /** list of packet sequences */
-  packetCommitmentSequences?: Long[];
+  packetCommitmentSequences: Long[];
 }
 
 /**
@@ -549,7 +549,7 @@ export interface QueryPacketAcknowledgementsRequestSDKType {
   pagination?: PageRequestSDKType;
 
   /** list of packet sequences */
-  packet_commitment_sequences?: Long[];
+  packet_commitment_sequences: Long[];
 }
 
 /**

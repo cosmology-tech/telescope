@@ -63,14 +63,14 @@ export const createProtoType = (
     // if a param is found to be a route parameter, we assume it's required
     // if a param is found to be a query parameter, we assume it's optional
     const optionalityMap = {};
-    if (context.store.requests[name]) {
-        const svc = context.store.requests[name];
-        if (svc.info) {
-            svc.info.queryParams.map(param => {
-                optionalityMap[param] = true;
-            })
-        }
-    }
+    // if (context.store.requests[name]) {
+    //     const svc = context.store.requests[name];
+    //     if (svc.info) {
+    //         svc.info.queryParams.map(param => {
+    //             optionalityMap[param] = true;
+    //         })
+    //     }
+    // }
 
     // hard-code optionality for pagination
     if (context.ref.proto.package === 'cosmos.base.query.v1beta1') {

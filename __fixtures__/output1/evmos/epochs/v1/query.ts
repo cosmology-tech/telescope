@@ -18,10 +18,10 @@ export interface QueryEpochsInfoResponseSDKType {
   pagination?: PageResponseSDKType;
 }
 export interface QueryCurrentEpochRequest {
-  identifier?: string;
+  identifier: string;
 }
 export interface QueryCurrentEpochRequestSDKType {
-  identifier?: string;
+  identifier: string;
 }
 export interface QueryCurrentEpochResponse {
   currentEpoch: Long;

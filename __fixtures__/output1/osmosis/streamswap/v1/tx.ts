@@ -143,7 +143,7 @@ export interface MsgWithdraw {
    * amount of tokens_in to withdraw. Must be at most the amount of not spent
    * tokens, unless set to null - then all remaining balance will be withdrawn.
    */
-  amount?: string;
+  amount: string;
 }
 export interface MsgWithdrawSDKType {
   /** sender is an account address subscribed to the sale_id */
@@ -156,7 +156,7 @@ export interface MsgWithdrawSDKType {
    * amount of tokens_in to withdraw. Must be at most the amount of not spent
    * tokens, unless set to null - then all remaining balance will be withdrawn.
    */
-  amount?: string;
+  amount: string;
 }
 export interface MsgExitSale {
   /** sender is an account address exiting a sale */

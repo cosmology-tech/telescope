@@ -6,11 +6,11 @@ export const protobufPackage = "cosmos.authz.v1beta1";
 
 /** QueryGrantsRequest is the request type for the Query/Grants RPC method. */
 export interface QueryGrantsRequest {
-  granter?: string;
-  grantee?: string;
+  granter: string;
+  grantee: string;
 
   /** Optional, msg_type_url, when set, will query only grants matching given msg type. */
-  msgTypeUrl?: string;
+  msgTypeUrl: string;
 
   /** pagination defines an pagination for the request. */
   pagination?: PageRequest;
@@ -18,11 +18,11 @@ export interface QueryGrantsRequest {
 
 /** QueryGrantsRequest is the request type for the Query/Grants RPC method. */
 export interface QueryGrantsRequestSDKType {
-  granter?: string;
-  grantee?: string;
+  granter: string;
+  grantee: string;
 
   /** Optional, msg_type_url, when set, will query only grants matching given msg type. */
-  msg_type_url?: string;
+  msg_type_url: string;
 
   /** pagination defines an pagination for the request. */
   pagination?: PageRequestSDKType;

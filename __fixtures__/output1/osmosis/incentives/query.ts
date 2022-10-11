@@ -87,14 +87,14 @@ export interface ActiveGaugesResponseSDKType {
 }
 export interface ActiveGaugesPerDenomRequest {
   /** Desired denom when querying active gagues */
-  denom?: string;
+  denom: string;
 
   /** Pagination defines pagination for the request */
   pagination?: PageRequest;
 }
 export interface ActiveGaugesPerDenomRequestSDKType {
   /** Desired denom when querying active gagues */
-  denom?: string;
+  denom: string;
 
   /** Pagination defines pagination for the request */
   pagination?: PageRequestSDKType;
@@ -137,14 +137,14 @@ export interface UpcomingGaugesResponseSDKType {
 }
 export interface UpcomingGaugesPerDenomRequest {
   /** Filter for upcoming gagues that match specific denom */
-  denom?: string;
+  denom: string;
 
   /** Pagination defines pagination for the request */
   pagination?: PageRequest;
 }
 export interface UpcomingGaugesPerDenomRequestSDKType {
   /** Filter for upcoming gagues that match specific denom */
-  denom?: string;
+  denom: string;
 
   /** Pagination defines pagination for the request */
   pagination?: PageRequestSDKType;
@@ -168,26 +168,26 @@ export interface RewardsEstRequest {
   owner: string;
 
   /** Lock IDs included in future reward estimation */
-  lockIds?: Long[];
+  lockIds: Long[];
 
   /**
    * Upper time limit of reward estimation
    * Lower limit is current epoch
    */
-  endEpoch?: Long;
+  endEpoch: Long;
 }
 export interface RewardsEstRequestSDKType {
   /** Address that is being queried for future estimated rewards */
   owner: string;
 
   /** Lock IDs included in future reward estimation */
-  lock_ids?: Long[];
+  lock_ids: Long[];
 
   /**
    * Upper time limit of reward estimation
    * Lower limit is current epoch
    */
-  end_epoch?: Long;
+  end_epoch: Long;
 }
 export interface RewardsEstResponse {
   /**

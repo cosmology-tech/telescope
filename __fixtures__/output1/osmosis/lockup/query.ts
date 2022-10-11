@@ -102,12 +102,12 @@ export interface AccountUnlockedBeforeTimeResponseSDKType {
 export interface AccountLockedPastTimeDenomRequest {
   owner: string;
   timestamp?: Date;
-  denom?: string;
+  denom: string;
 }
 export interface AccountLockedPastTimeDenomRequestSDKType {
   owner: string;
   timestamp?: Date;
-  denom?: string;
+  denom: string;
 }
 export interface AccountLockedPastTimeDenomResponse {
   locks: PeriodLock[];
@@ -116,11 +116,11 @@ export interface AccountLockedPastTimeDenomResponseSDKType {
   locks: PeriodLockSDKType[];
 }
 export interface LockedDenomRequest {
-  denom?: string;
+  denom: string;
   duration?: Duration;
 }
 export interface LockedDenomRequestSDKType {
-  denom?: string;
+  denom: string;
   duration?: DurationSDKType;
 }
 export interface LockedDenomResponse {
@@ -198,12 +198,12 @@ export interface AccountLockedLongerDurationNotUnlockingOnlyResponseSDKType {
 export interface AccountLockedLongerDurationDenomRequest {
   owner: string;
   duration?: Duration;
-  denom?: string;
+  denom: string;
 }
 export interface AccountLockedLongerDurationDenomRequestSDKType {
   owner: string;
   duration?: DurationSDKType;
-  denom?: string;
+  denom: string;
 }
 export interface AccountLockedLongerDurationDenomResponse {
   locks: PeriodLock[];

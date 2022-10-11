@@ -365,7 +365,7 @@ export interface ListLogMetricsRequest {
    * 
    *     "projects/[PROJECT_ID]"
    */
-  parent?: string;
+  parent: string;
 
   /**
    * Optional. If present, then retrieve the next batch of results from the
@@ -373,14 +373,14 @@ export interface ListLogMetricsRequest {
    * `nextPageToken` from the previous response. The values of other method
    * parameters should be identical to those in the previous call.
    */
-  pageToken?: string;
+  pageToken: string;
 
   /**
    * Optional. The maximum number of results to return from this request.
    * Non-positive values are ignored. The presence of `nextPageToken` in the
    * response indicates that more results might be available.
    */
-  pageSize?: number;
+  pageSize: number;
 }
 
 /** The parameters to ListLogMetrics. */
@@ -390,7 +390,7 @@ export interface ListLogMetricsRequestSDKType {
    * 
    *     "projects/[PROJECT_ID]"
    */
-  parent?: string;
+  parent: string;
 
   /**
    * Optional. If present, then retrieve the next batch of results from the
@@ -398,14 +398,14 @@ export interface ListLogMetricsRequestSDKType {
    * `nextPageToken` from the previous response. The values of other method
    * parameters should be identical to those in the previous call.
    */
-  page_token?: string;
+  page_token: string;
 
   /**
    * Optional. The maximum number of results to return from this request.
    * Non-positive values are ignored. The presence of `nextPageToken` in the
    * response indicates that more results might be available.
    */
-  page_size?: number;
+  page_size: number;
 }
 
 /** Result returned from ListLogMetrics. */
@@ -441,7 +441,7 @@ export interface GetLogMetricRequest {
    * 
    *     "projects/[PROJECT_ID]/metrics/[METRIC_ID]"
    */
-  metricName?: string;
+  metricName: string;
 }
 
 /** The parameters to GetLogMetric. */
@@ -451,7 +451,7 @@ export interface GetLogMetricRequestSDKType {
    * 
    *     "projects/[PROJECT_ID]/metrics/[METRIC_ID]"
    */
-  metric_name?: string;
+  metric_name: string;
 }
 
 /** The parameters to CreateLogMetric. */

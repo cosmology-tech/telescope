@@ -531,7 +531,7 @@ export interface ListMonitoredResourceDescriptorsRequest {
    * Non-positive values are ignored.  The presence of `nextPageToken` in the
    * response indicates that more results might be available.
    */
-  pageSize?: number;
+  pageSize: number;
 
   /**
    * Optional. If present, then retrieve the next batch of results from the
@@ -539,7 +539,7 @@ export interface ListMonitoredResourceDescriptorsRequest {
    * `nextPageToken` from the previous response.  The values of other method
    * parameters should be identical to those in the previous call.
    */
-  pageToken?: string;
+  pageToken: string;
 }
 
 /** The parameters to ListMonitoredResourceDescriptors */
@@ -549,7 +549,7 @@ export interface ListMonitoredResourceDescriptorsRequestSDKType {
    * Non-positive values are ignored.  The presence of `nextPageToken` in the
    * response indicates that more results might be available.
    */
-  page_size?: number;
+  page_size: number;
 
   /**
    * Optional. If present, then retrieve the next batch of results from the
@@ -557,7 +557,7 @@ export interface ListMonitoredResourceDescriptorsRequestSDKType {
    * `nextPageToken` from the previous response.  The values of other method
    * parameters should be identical to those in the previous call.
    */
-  page_token?: string;
+  page_token: string;
 }
 
 /** Result returned from ListMonitoredResourceDescriptors. */
@@ -596,14 +596,14 @@ export interface ListLogsRequest {
    * *  `billingAccounts/[BILLING_ACCOUNT_ID]`
    * *  `folders/[FOLDER_ID]`
    */
-  parent?: string;
+  parent: string;
 
   /**
    * Optional. The maximum number of results to return from this request.
    * Non-positive values are ignored.  The presence of `nextPageToken` in the
    * response indicates that more results might be available.
    */
-  pageSize?: number;
+  pageSize: number;
 
   /**
    * Optional. If present, then retrieve the next batch of results from the
@@ -611,7 +611,7 @@ export interface ListLogsRequest {
    * `nextPageToken` from the previous response.  The values of other method
    * parameters should be identical to those in the previous call.
    */
-  pageToken?: string;
+  pageToken: string;
 
   /**
    * Optional. The resource name that owns the logs:
@@ -628,7 +628,7 @@ export interface ListLogsRequest {
    * *  `billingAccounts/[BILLING_ACCOUNT_ID]`
    * *  `folders/[FOLDER_ID]`
    */
-  resourceNames?: string[];
+  resourceNames: string[];
 }
 
 /** The parameters to ListLogs. */
@@ -641,14 +641,14 @@ export interface ListLogsRequestSDKType {
    * *  `billingAccounts/[BILLING_ACCOUNT_ID]`
    * *  `folders/[FOLDER_ID]`
    */
-  parent?: string;
+  parent: string;
 
   /**
    * Optional. The maximum number of results to return from this request.
    * Non-positive values are ignored.  The presence of `nextPageToken` in the
    * response indicates that more results might be available.
    */
-  page_size?: number;
+  page_size: number;
 
   /**
    * Optional. If present, then retrieve the next batch of results from the
@@ -656,7 +656,7 @@ export interface ListLogsRequestSDKType {
    * `nextPageToken` from the previous response.  The values of other method
    * parameters should be identical to those in the previous call.
    */
-  page_token?: string;
+  page_token: string;
 
   /**
    * Optional. The resource name that owns the logs:
@@ -673,7 +673,7 @@ export interface ListLogsRequestSDKType {
    * *  `billingAccounts/[BILLING_ACCOUNT_ID]`
    * *  `folders/[FOLDER_ID]`
    */
-  resource_names?: string[];
+  resource_names: string[];
 }
 
 /** Result returned from ListLogs. */
