@@ -41,7 +41,8 @@ export const writeContentToFile = (
     content: string,
     filename: string
 ) => {
-    let prefix = '';
+    let esLintPrefix = '';
+    let tsLintPrefix = '';
 
     let nameWithoutPath = filename.replace(outPath, '');
     // strip off leading slash
@@ -49,12 +50,12 @@ export const writeContentToFile = (
 
     options.tsDisable.patterns.forEach(pattern => {
         if (minimatch(nameWithoutPath, pattern)) {
-            prefix = `//@ts-nocheck\n`;
+            tsLintPrefix = `//@ts-nocheck\n`;
         }
     });
     options.eslintDisable.patterns.forEach(pattern => {
         if (minimatch(nameWithoutPath, pattern)) {
-            prefix = `/* eslint-disable */\n`;
+            esLintPrefix = `/* eslint-disable */\n`;
         }
     });
 
@@ -62,17 +63,17 @@ export const writeContentToFile = (
         options.tsDisable.files.includes(nameWithoutPath) ||
         options.tsDisable.disableAll
     ) {
-        prefix = `//@ts-nocheck\n`;
+        tsLintPrefix = `//@ts-nocheck\n`;
     }
 
     if (
         options.eslintDisable.files.includes(nameWithoutPath) ||
         options.eslintDisable.disableAll
     ) {
-        prefix = `/* eslint-disable */\n`;
+        esLintPrefix = `/* eslint-disable */\n`;
     }
 
-    const text = prefix + content;
+    const text = tsLintPrefix + esLintPrefix + content;
     mkdirp(dirname(filename));
     writeFileSync(filename, text);
 }
