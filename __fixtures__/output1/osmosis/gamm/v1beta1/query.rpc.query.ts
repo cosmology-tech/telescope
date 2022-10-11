@@ -5,7 +5,7 @@ import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
-import { QueryPoolsRequest, QueryPoolsRequestSDKType, QueryPoolsResponse, QueryPoolsResponseSDKType, QueryNumPoolsRequest, QueryNumPoolsRequestSDKType, QueryNumPoolsResponse, QueryNumPoolsResponseSDKType, QueryTotalLiquidityRequest, QueryTotalLiquidityRequestSDKType, QueryTotalLiquidityResponse, QueryTotalLiquidityResponseSDKType, QueryPoolRequest, QueryPoolRequestSDKType, QueryPoolResponse, QueryPoolResponseSDKType, QueryPoolParamsRequest, QueryPoolParamsRequestSDKType, QueryPoolParamsResponse, QueryPoolParamsResponseSDKType, QueryTotalPoolLiquidityRequest, QueryTotalPoolLiquidityRequestSDKType, QueryTotalPoolLiquidityResponse, QueryTotalPoolLiquidityResponseSDKType, QueryTotalSharesRequest, QueryTotalSharesRequestSDKType, QueryTotalSharesResponse, QueryTotalSharesResponseSDKType, QuerySpotPriceRequest, QuerySpotPriceRequestSDKType, QuerySpotPriceResponse, QuerySpotPriceResponseSDKType, QuerySwapExactAmountInRequest, QuerySwapExactAmountInRequestSDKType, QuerySwapExactAmountInResponse, QuerySwapExactAmountInResponseSDKType, QuerySwapExactAmountOutRequest, QuerySwapExactAmountOutRequestSDKType, QuerySwapExactAmountOutResponse, QuerySwapExactAmountOutResponseSDKType } from "./query";
+import { QueryPoolsRequest, QueryPoolsRequestSDKType, QueryPoolsResponse, QueryPoolsResponseSDKType, QueryNumPoolsRequest, QueryNumPoolsRequestSDKType, QueryNumPoolsResponse, QueryNumPoolsResponseSDKType, QueryTotalLiquidityRequest, QueryTotalLiquidityRequestSDKType, QueryTotalLiquidityResponse, QueryTotalLiquidityResponseSDKType, QueryPoolRequest, QueryPoolRequestSDKType, QueryPoolResponse, QueryPoolResponseSDKType, QueryPoolTypeRequest, QueryPoolTypeRequestSDKType, QueryPoolTypeResponse, QueryPoolTypeResponseSDKType, QueryPoolParamsRequest, QueryPoolParamsRequestSDKType, QueryPoolParamsResponse, QueryPoolParamsResponseSDKType, QueryTotalPoolLiquidityRequest, QueryTotalPoolLiquidityRequestSDKType, QueryTotalPoolLiquidityResponse, QueryTotalPoolLiquidityResponseSDKType, QueryTotalSharesRequest, QueryTotalSharesRequestSDKType, QueryTotalSharesResponse, QueryTotalSharesResponseSDKType, QuerySpotPriceRequest, QuerySpotPriceRequestSDKType, QuerySpotPriceResponse, QuerySpotPriceResponseSDKType, QuerySwapExactAmountInRequest, QuerySwapExactAmountInRequestSDKType, QuerySwapExactAmountInResponse, QuerySwapExactAmountInResponseSDKType, QuerySwapExactAmountOutRequest, QuerySwapExactAmountOutRequestSDKType, QuerySwapExactAmountOutResponse, QuerySwapExactAmountOutResponseSDKType } from "./query";
 export interface Query {
   pools(request?: QueryPoolsRequest): Promise<QueryPoolsResponse>;
   numPools(request?: QueryNumPoolsRequest): Promise<QueryNumPoolsResponse>;
@@ -13,6 +13,13 @@ export interface Query {
 
   /** Per Pool gRPC Endpoints */
   pool(request: QueryPoolRequest): Promise<QueryPoolResponse>;
+
+  /**
+   * PoolType returns the type of the pool.
+   * Returns "Balancer" as a string literal when the pool is a balancer pool.
+   * Errors if the pool is failed to be type caseted.
+   */
+  poolType(request: QueryPoolTypeRequest): Promise<QueryPoolTypeResponse>;
   poolParams(request: QueryPoolParamsRequest): Promise<QueryPoolParamsResponse>;
   totalPoolLiquidity(request: QueryTotalPoolLiquidityRequest): Promise<QueryTotalPoolLiquidityResponse>;
   totalShares(request: QueryTotalSharesRequest): Promise<QueryTotalSharesResponse>;
@@ -36,6 +43,7 @@ export class QueryClientImpl implements Query {
     this.numPools = this.numPools.bind(this);
     this.totalLiquidity = this.totalLiquidity.bind(this);
     this.pool = this.pool.bind(this);
+    this.poolType = this.poolType.bind(this);
     this.poolParams = this.poolParams.bind(this);
     this.totalPoolLiquidity = this.totalPoolLiquidity.bind(this);
     this.totalShares = this.totalShares.bind(this);
@@ -68,6 +76,12 @@ export class QueryClientImpl implements Query {
     const data = QueryPoolRequest.encode(request).finish();
     const promise = this.rpc.request("osmosis.gamm.v1beta1.Query", "Pool", data);
     return promise.then(data => QueryPoolResponse.decode(new _m0.Reader(data)));
+  }
+
+  poolType(request: QueryPoolTypeRequest): Promise<QueryPoolTypeResponse> {
+    const data = QueryPoolTypeRequest.encode(request).finish();
+    const promise = this.rpc.request("osmosis.gamm.v1beta1.Query", "PoolType", data);
+    return promise.then(data => QueryPoolTypeResponse.decode(new _m0.Reader(data)));
   }
 
   poolParams(request: QueryPoolParamsRequest): Promise<QueryPoolParamsResponse> {
@@ -125,6 +139,10 @@ export const createRpcQueryExtension = (base: QueryClient) => {
 
     pool(request: QueryPoolRequest): Promise<QueryPoolResponse> {
       return queryService.pool(request);
+    },
+
+    poolType(request: QueryPoolTypeRequest): Promise<QueryPoolTypeResponse> {
+      return queryService.poolType(request);
     },
 
     poolParams(request: QueryPoolParamsRequest): Promise<QueryPoolParamsResponse> {

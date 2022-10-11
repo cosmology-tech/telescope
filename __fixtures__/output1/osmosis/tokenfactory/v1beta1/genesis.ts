@@ -17,10 +17,22 @@ export interface GenesisStateSDKType {
   params: ParamsSDKType;
   factory_denoms: GenesisDenomSDKType[];
 }
+
+/**
+ * GenesisDenom defines a tokenfactory denom that is defined within genesis
+ * state. The structure contains DenomAuthorityMetadata which defines the
+ * denom's admin.
+ */
 export interface GenesisDenom {
   denom: string;
   authorityMetadata: DenomAuthorityMetadata;
 }
+
+/**
+ * GenesisDenom defines a tokenfactory denom that is defined within genesis
+ * state. The structure contains DenomAuthorityMetadata which defines the
+ * denom's admin.
+ */
 export interface GenesisDenomSDKType {
   denom: string;
   authority_metadata: DenomAuthorityMetadataSDKType;

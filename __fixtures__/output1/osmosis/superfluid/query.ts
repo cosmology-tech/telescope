@@ -3,6 +3,7 @@ import { Params, ParamsSDKType } from "./params";
 import { SuperfluidAssetType, SuperfluidAssetTypeSDKType, SuperfluidAsset, SuperfluidAssetSDKType, OsmoEquivalentMultiplierRecord, OsmoEquivalentMultiplierRecordSDKType, SuperfluidDelegationRecord, SuperfluidDelegationRecordSDKType, superfluidAssetTypeFromJSON, superfluidAssetTypeToJSON } from "./superfluid";
 import { Coin, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
 import { SyntheticLock, SyntheticLockSDKType } from "../lockup/lock";
+import { DelegationResponse, DelegationResponseSDKType } from "../../cosmos/staking/v1beta1/staking";
 import * as _m0 from "protobufjs/minimal";
 import { DeepPartial, isSet, Long } from "../../helpers";
 export const protobufPackage = "osmosis.superfluid";
@@ -92,7 +93,7 @@ export interface TotalSuperfluidDelegationsResponse {
   totalDelegations: string;
 }
 export interface TotalSuperfluidDelegationsResponseSDKType {
-  totalDelegations: string;
+  total_delegations: string;
 }
 export interface SuperfluidDelegationAmountRequest {
   delegatorAddress?: string;
@@ -171,6 +172,24 @@ export interface EstimateSuperfluidDelegatedAmountByValidatorDenomResponse {
 }
 export interface EstimateSuperfluidDelegatedAmountByValidatorDenomResponseSDKType {
   total_delegated_coins: CoinSDKType[];
+}
+export interface QueryTotalDelegationByDelegatorRequest {
+  delegatorAddress: string;
+}
+export interface QueryTotalDelegationByDelegatorRequestSDKType {
+  delegator_address: string;
+}
+export interface QueryTotalDelegationByDelegatorResponse {
+  superfluidDelegationRecords: SuperfluidDelegationRecord[];
+  delegationResponse: DelegationResponse[];
+  totalDelegatedCoins: Coin[];
+  totalEquivalentStakedAmount: Coin;
+}
+export interface QueryTotalDelegationByDelegatorResponseSDKType {
+  superfluid_delegation_records: SuperfluidDelegationRecordSDKType[];
+  delegation_response: DelegationResponseSDKType[];
+  total_delegated_coins: CoinSDKType[];
+  total_equivalent_staked_amount: CoinSDKType;
 }
 
 function createBaseQueryParamsRequest(): QueryParamsRequest {
@@ -1225,13 +1244,13 @@ export const TotalSuperfluidDelegationsResponse = {
 
   fromSDK(object: TotalSuperfluidDelegationsResponseSDKType): TotalSuperfluidDelegationsResponse {
     return {
-      totalDelegations: isSet(object.totalDelegations) ? object.totalDelegations : undefined
+      totalDelegations: isSet(object.total_delegations) ? object.total_delegations : undefined
     };
   },
 
   toSDK(message: TotalSuperfluidDelegationsResponse): TotalSuperfluidDelegationsResponseSDKType {
     const obj: any = {};
-    message.totalDelegations !== undefined && (obj.totalDelegations = message.totalDelegations);
+    message.totalDelegations !== undefined && (obj.total_delegations = message.totalDelegations);
     return obj;
   }
 
@@ -2138,6 +2157,218 @@ export const EstimateSuperfluidDelegatedAmountByValidatorDenomResponse = {
       obj.total_delegated_coins = [];
     }
 
+    return obj;
+  }
+
+};
+
+function createBaseQueryTotalDelegationByDelegatorRequest(): QueryTotalDelegationByDelegatorRequest {
+  return {
+    delegatorAddress: ""
+  };
+}
+
+export const QueryTotalDelegationByDelegatorRequest = {
+  encode(message: QueryTotalDelegationByDelegatorRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.delegatorAddress !== "") {
+      writer.uint32(10).string(message.delegatorAddress);
+    }
+
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryTotalDelegationByDelegatorRequest {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQueryTotalDelegationByDelegatorRequest();
+
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        case 1:
+          message.delegatorAddress = reader.string();
+          break;
+
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+
+  fromJSON(object: any): QueryTotalDelegationByDelegatorRequest {
+    return {
+      delegatorAddress: isSet(object.delegatorAddress) ? String(object.delegatorAddress) : ""
+    };
+  },
+
+  toJSON(message: QueryTotalDelegationByDelegatorRequest): unknown {
+    const obj: any = {};
+    message.delegatorAddress !== undefined && (obj.delegatorAddress = message.delegatorAddress);
+    return obj;
+  },
+
+  fromPartial(object: DeepPartial<QueryTotalDelegationByDelegatorRequest>): QueryTotalDelegationByDelegatorRequest {
+    const message = createBaseQueryTotalDelegationByDelegatorRequest();
+    message.delegatorAddress = object.delegatorAddress ?? "";
+    return message;
+  },
+
+  fromSDK(object: QueryTotalDelegationByDelegatorRequestSDKType): QueryTotalDelegationByDelegatorRequest {
+    return {
+      delegatorAddress: isSet(object.delegator_address) ? object.delegator_address : undefined
+    };
+  },
+
+  toSDK(message: QueryTotalDelegationByDelegatorRequest): QueryTotalDelegationByDelegatorRequestSDKType {
+    const obj: any = {};
+    message.delegatorAddress !== undefined && (obj.delegator_address = message.delegatorAddress);
+    return obj;
+  }
+
+};
+
+function createBaseQueryTotalDelegationByDelegatorResponse(): QueryTotalDelegationByDelegatorResponse {
+  return {
+    superfluidDelegationRecords: [],
+    delegationResponse: [],
+    totalDelegatedCoins: [],
+    totalEquivalentStakedAmount: undefined
+  };
+}
+
+export const QueryTotalDelegationByDelegatorResponse = {
+  encode(message: QueryTotalDelegationByDelegatorResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    for (const v of message.superfluidDelegationRecords) {
+      SuperfluidDelegationRecord.encode(v!, writer.uint32(10).fork()).ldelim();
+    }
+
+    for (const v of message.delegationResponse) {
+      DelegationResponse.encode(v!, writer.uint32(18).fork()).ldelim();
+    }
+
+    for (const v of message.totalDelegatedCoins) {
+      Coin.encode(v!, writer.uint32(26).fork()).ldelim();
+    }
+
+    if (message.totalEquivalentStakedAmount !== undefined) {
+      Coin.encode(message.totalEquivalentStakedAmount, writer.uint32(34).fork()).ldelim();
+    }
+
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryTotalDelegationByDelegatorResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQueryTotalDelegationByDelegatorResponse();
+
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        case 1:
+          message.superfluidDelegationRecords.push(SuperfluidDelegationRecord.decode(reader, reader.uint32()));
+          break;
+
+        case 2:
+          message.delegationResponse.push(DelegationResponse.decode(reader, reader.uint32()));
+          break;
+
+        case 3:
+          message.totalDelegatedCoins.push(Coin.decode(reader, reader.uint32()));
+          break;
+
+        case 4:
+          message.totalEquivalentStakedAmount = Coin.decode(reader, reader.uint32());
+          break;
+
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+
+  fromJSON(object: any): QueryTotalDelegationByDelegatorResponse {
+    return {
+      superfluidDelegationRecords: Array.isArray(object?.superfluidDelegationRecords) ? object.superfluidDelegationRecords.map((e: any) => SuperfluidDelegationRecord.fromJSON(e)) : [],
+      delegationResponse: Array.isArray(object?.delegationResponse) ? object.delegationResponse.map((e: any) => DelegationResponse.fromJSON(e)) : [],
+      totalDelegatedCoins: Array.isArray(object?.totalDelegatedCoins) ? object.totalDelegatedCoins.map((e: any) => Coin.fromJSON(e)) : [],
+      totalEquivalentStakedAmount: isSet(object.totalEquivalentStakedAmount) ? Coin.fromJSON(object.totalEquivalentStakedAmount) : undefined
+    };
+  },
+
+  toJSON(message: QueryTotalDelegationByDelegatorResponse): unknown {
+    const obj: any = {};
+
+    if (message.superfluidDelegationRecords) {
+      obj.superfluidDelegationRecords = message.superfluidDelegationRecords.map(e => e ? SuperfluidDelegationRecord.toJSON(e) : undefined);
+    } else {
+      obj.superfluidDelegationRecords = [];
+    }
+
+    if (message.delegationResponse) {
+      obj.delegationResponse = message.delegationResponse.map(e => e ? DelegationResponse.toJSON(e) : undefined);
+    } else {
+      obj.delegationResponse = [];
+    }
+
+    if (message.totalDelegatedCoins) {
+      obj.totalDelegatedCoins = message.totalDelegatedCoins.map(e => e ? Coin.toJSON(e) : undefined);
+    } else {
+      obj.totalDelegatedCoins = [];
+    }
+
+    message.totalEquivalentStakedAmount !== undefined && (obj.totalEquivalentStakedAmount = message.totalEquivalentStakedAmount ? Coin.toJSON(message.totalEquivalentStakedAmount) : undefined);
+    return obj;
+  },
+
+  fromPartial(object: DeepPartial<QueryTotalDelegationByDelegatorResponse>): QueryTotalDelegationByDelegatorResponse {
+    const message = createBaseQueryTotalDelegationByDelegatorResponse();
+    message.superfluidDelegationRecords = object.superfluidDelegationRecords?.map(e => SuperfluidDelegationRecord.fromPartial(e)) || [];
+    message.delegationResponse = object.delegationResponse?.map(e => DelegationResponse.fromPartial(e)) || [];
+    message.totalDelegatedCoins = object.totalDelegatedCoins?.map(e => Coin.fromPartial(e)) || [];
+    message.totalEquivalentStakedAmount = object.totalEquivalentStakedAmount !== undefined && object.totalEquivalentStakedAmount !== null ? Coin.fromPartial(object.totalEquivalentStakedAmount) : undefined;
+    return message;
+  },
+
+  fromSDK(object: QueryTotalDelegationByDelegatorResponseSDKType): QueryTotalDelegationByDelegatorResponse {
+    return {
+      superfluidDelegationRecords: Array.isArray(object?.superfluid_delegation_records) ? object.superfluid_delegation_records.map((e: any) => SuperfluidDelegationRecord.fromSDK(e)) : [],
+      delegationResponse: Array.isArray(object?.delegation_response) ? object.delegation_response.map((e: any) => DelegationResponse.fromSDK(e)) : [],
+      totalDelegatedCoins: Array.isArray(object?.total_delegated_coins) ? object.total_delegated_coins.map((e: any) => Coin.fromSDK(e)) : [],
+      totalEquivalentStakedAmount: isSet(object.total_equivalent_staked_amount) ? Coin.fromSDK(object.total_equivalent_staked_amount) : undefined
+    };
+  },
+
+  toSDK(message: QueryTotalDelegationByDelegatorResponse): QueryTotalDelegationByDelegatorResponseSDKType {
+    const obj: any = {};
+
+    if (message.superfluidDelegationRecords) {
+      obj.superfluid_delegation_records = message.superfluidDelegationRecords.map(e => e ? SuperfluidDelegationRecord.toSDK(e) : undefined);
+    } else {
+      obj.superfluid_delegation_records = [];
+    }
+
+    if (message.delegationResponse) {
+      obj.delegation_response = message.delegationResponse.map(e => e ? DelegationResponse.toSDK(e) : undefined);
+    } else {
+      obj.delegation_response = [];
+    }
+
+    if (message.totalDelegatedCoins) {
+      obj.total_delegated_coins = message.totalDelegatedCoins.map(e => e ? Coin.toSDK(e) : undefined);
+    } else {
+      obj.total_delegated_coins = [];
+    }
+
+    message.totalEquivalentStakedAmount !== undefined && (obj.total_equivalent_staked_amount = message.totalEquivalentStakedAmount ? Coin.toSDK(message.totalEquivalentStakedAmount) : undefined);
     return obj;
   }
 

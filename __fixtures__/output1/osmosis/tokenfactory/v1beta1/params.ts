@@ -3,12 +3,12 @@ import * as _m0 from "protobufjs/minimal";
 import { DeepPartial } from "../../../helpers";
 export const protobufPackage = "osmosis.tokenfactory.v1beta1";
 
-/** Params holds parameters for the tokenfactory module */
+/** Params defines the parameters for the tokenfactory module. */
 export interface Params {
   denomCreationFee: Coin[];
 }
 
-/** Params holds parameters for the tokenfactory module */
+/** Params defines the parameters for the tokenfactory module. */
 export interface ParamsSDKType {
   denom_creation_fee: CoinSDKType[];
 }

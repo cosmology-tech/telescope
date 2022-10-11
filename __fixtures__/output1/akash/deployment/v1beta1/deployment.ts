@@ -1,3 +1,4 @@
+//@ts-nocheck
 /* eslint-disable */
 import { GroupSpec, GroupSpecSDKType, GroupID, GroupIDSDKType } from "./group";
 import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";

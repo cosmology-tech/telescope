@@ -83,9 +83,15 @@ export const createRPCQueryClient = async ({
       poolincentives: {
         v1beta1: (await import("./pool-incentives/v1beta1/query.rpc.query")).createRpcQueryExtension(client)
       },
+      streamswap: {
+        v1: (await import("./streamswap/v1/query.rpc.query")).createRpcQueryExtension(client)
+      },
       superfluid: (await import("./superfluid/query.rpc.query")).createRpcQueryExtension(client),
       tokenfactory: {
         v1beta1: (await import("./tokenfactory/v1beta1/query.rpc.query")).createRpcQueryExtension(client)
+      },
+      twap: {
+        v1beta1: (await import("./twap/v1beta1/query.rpc.query")).createRpcQueryExtension(client)
       },
       txfees: {
         v1beta1: (await import("./txfees/v1beta1/query.rpc.query")).createRpcQueryExtension(client)

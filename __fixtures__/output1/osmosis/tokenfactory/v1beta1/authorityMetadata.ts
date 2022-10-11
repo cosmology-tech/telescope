@@ -9,7 +9,7 @@ export const protobufPackage = "osmosis.tokenfactory.v1beta1";
  */
 export interface DenomAuthorityMetadata {
   /** Can be empty for no admin, or a valid osmosis address */
-  Admin: string;
+  admin: string;
 }
 
 /**
@@ -19,19 +19,19 @@ export interface DenomAuthorityMetadata {
  */
 export interface DenomAuthorityMetadataSDKType {
   /** Can be empty for no admin, or a valid osmosis address */
-  Admin: string;
+  admin: string;
 }
 
 function createBaseDenomAuthorityMetadata(): DenomAuthorityMetadata {
   return {
-    Admin: ""
+    admin: ""
   };
 }
 
 export const DenomAuthorityMetadata = {
   encode(message: DenomAuthorityMetadata, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.Admin !== "") {
-      writer.uint32(10).string(message.Admin);
+    if (message.admin !== "") {
+      writer.uint32(10).string(message.admin);
     }
 
     return writer;
@@ -47,7 +47,7 @@ export const DenomAuthorityMetadata = {
 
       switch (tag >>> 3) {
         case 1:
-          message.Admin = reader.string();
+          message.admin = reader.string();
           break;
 
         default:
@@ -61,31 +61,31 @@ export const DenomAuthorityMetadata = {
 
   fromJSON(object: any): DenomAuthorityMetadata {
     return {
-      Admin: isSet(object.Admin) ? String(object.Admin) : ""
+      admin: isSet(object.admin) ? String(object.admin) : ""
     };
   },
 
   toJSON(message: DenomAuthorityMetadata): unknown {
     const obj: any = {};
-    message.Admin !== undefined && (obj.Admin = message.Admin);
+    message.admin !== undefined && (obj.admin = message.admin);
     return obj;
   },
 
   fromPartial(object: DeepPartial<DenomAuthorityMetadata>): DenomAuthorityMetadata {
     const message = createBaseDenomAuthorityMetadata();
-    message.Admin = object.Admin ?? "";
+    message.admin = object.admin ?? "";
     return message;
   },
 
   fromSDK(object: DenomAuthorityMetadataSDKType): DenomAuthorityMetadata {
     return {
-      Admin: isSet(object.Admin) ? object.Admin : undefined
+      admin: isSet(object.admin) ? object.admin : undefined
     };
   },
 
   toSDK(message: DenomAuthorityMetadata): DenomAuthorityMetadataSDKType {
     const obj: any = {};
-    message.Admin !== undefined && (obj.Admin = message.Admin);
+    message.admin !== undefined && (obj.admin = message.admin);
     return obj;
   }
 

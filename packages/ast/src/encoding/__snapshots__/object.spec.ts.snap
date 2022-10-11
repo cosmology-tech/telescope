@@ -2983,22 +2983,22 @@ exports[`osmosis/gamm/v1beta1/tx MsgJoinPool 1`] = `
   fromSDK(object: MsgJoinPoolSDKType): MsgJoinPool {
     return {
       sender: isSet(object.sender) ? object.sender : undefined,
-      poolId: isSet(object.poolId) ? object.poolId : undefined,
-      shareOutAmount: isSet(object.shareOutAmount) ? object.shareOutAmount : undefined,
-      tokenInMaxs: Array.isArray(object?.tokenInMaxs) ? object.tokenInMaxs.map((e: any) => Coin.fromSDK(e)) : []
+      poolId: isSet(object.pool_id) ? object.pool_id : undefined,
+      shareOutAmount: isSet(object.share_out_amount) ? object.share_out_amount : undefined,
+      tokenInMaxs: Array.isArray(object?.token_in_maxs) ? object.token_in_maxs.map((e: any) => Coin.fromSDK(e)) : []
     };
   },
 
   toSDK(message: MsgJoinPool): MsgJoinPoolSDKType {
     const obj: any = {};
     message.sender !== undefined && (obj.sender = message.sender);
-    message.poolId !== undefined && (obj.poolId = message.poolId);
-    message.shareOutAmount !== undefined && (obj.shareOutAmount = message.shareOutAmount);
+    message.poolId !== undefined && (obj.pool_id = message.poolId);
+    message.shareOutAmount !== undefined && (obj.share_out_amount = message.shareOutAmount);
 
     if (message.tokenInMaxs) {
-      obj.tokenInMaxs = message.tokenInMaxs.map(e => e ? Coin.toSDK(e) : undefined);
+      obj.token_in_maxs = message.tokenInMaxs.map(e => e ? Coin.toSDK(e) : undefined);
     } else {
-      obj.tokenInMaxs = [];
+      obj.token_in_maxs = [];
     }
 
     return obj;
@@ -3100,8 +3100,8 @@ exports[`osmosis/gamm/v1beta1/tx MsgSwapExactAmountIn 1`] = `
     return {
       sender: isSet(object.sender) ? object.sender : undefined,
       routes: Array.isArray(object?.routes) ? object.routes.map((e: any) => SwapAmountInRoute.fromSDK(e)) : [],
-      tokenIn: isSet(object.tokenIn) ? Coin.fromSDK(object.tokenIn) : undefined,
-      tokenOutMinAmount: isSet(object.tokenOutMinAmount) ? object.tokenOutMinAmount : undefined
+      tokenIn: isSet(object.token_in) ? Coin.fromSDK(object.token_in) : undefined,
+      tokenOutMinAmount: isSet(object.token_out_min_amount) ? object.token_out_min_amount : undefined
     };
   },
 
@@ -3115,8 +3115,8 @@ exports[`osmosis/gamm/v1beta1/tx MsgSwapExactAmountIn 1`] = `
       obj.routes = [];
     }
 
-    message.tokenIn !== undefined && (obj.tokenIn = message.tokenIn ? Coin.toSDK(message.tokenIn) : undefined);
-    message.tokenOutMinAmount !== undefined && (obj.tokenOutMinAmount = message.tokenOutMinAmount);
+    message.tokenIn !== undefined && (obj.token_in = message.tokenIn ? Coin.toSDK(message.tokenIn) : undefined);
+    message.tokenOutMinAmount !== undefined && (obj.token_out_min_amount = message.tokenOutMinAmount);
     return obj;
   }
 
@@ -3216,8 +3216,8 @@ exports[`osmosis/gamm/v1beta1/tx MsgSwapExactAmountOut 1`] = `
     return {
       sender: isSet(object.sender) ? object.sender : undefined,
       routes: Array.isArray(object?.routes) ? object.routes.map((e: any) => SwapAmountOutRoute.fromSDK(e)) : [],
-      tokenInMaxAmount: isSet(object.tokenInMaxAmount) ? object.tokenInMaxAmount : undefined,
-      tokenOut: isSet(object.tokenOut) ? Coin.fromSDK(object.tokenOut) : undefined
+      tokenInMaxAmount: isSet(object.token_in_max_amount) ? object.token_in_max_amount : undefined,
+      tokenOut: isSet(object.token_out) ? Coin.fromSDK(object.token_out) : undefined
     };
   },
 
@@ -3231,8 +3231,8 @@ exports[`osmosis/gamm/v1beta1/tx MsgSwapExactAmountOut 1`] = `
       obj.routes = [];
     }
 
-    message.tokenInMaxAmount !== undefined && (obj.tokenInMaxAmount = message.tokenInMaxAmount);
-    message.tokenOut !== undefined && (obj.tokenOut = message.tokenOut ? Coin.toSDK(message.tokenOut) : undefined);
+    message.tokenInMaxAmount !== undefined && (obj.token_in_max_amount = message.tokenInMaxAmount);
+    message.tokenOut !== undefined && (obj.token_out = message.tokenOut ? Coin.toSDK(message.tokenOut) : undefined);
     return obj;
   }
 

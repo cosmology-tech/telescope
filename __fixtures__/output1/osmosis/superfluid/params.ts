@@ -5,8 +5,10 @@ export const protobufPackage = "osmosis.superfluid";
 /** Params holds parameters for the superfluid module */
 export interface Params {
   /**
-   * the risk_factor is to be cut on OSMO equivalent value of lp tokens for
-   * superfluid staking, default: 5%
+   * minimum_risk_factor is to be cut on OSMO equivalent value of lp tokens for
+   * superfluid staking, default: 5%. The minimum risk factor works
+   * to counter-balance the staked amount on chain's exposure to various asset
+   * volatilities, and have base staking be 'resistant' to volatility.
    */
   minimumRiskFactor: string;
 }
@@ -14,8 +16,10 @@ export interface Params {
 /** Params holds parameters for the superfluid module */
 export interface ParamsSDKType {
   /**
-   * the risk_factor is to be cut on OSMO equivalent value of lp tokens for
-   * superfluid staking, default: 5%
+   * minimum_risk_factor is to be cut on OSMO equivalent value of lp tokens for
+   * superfluid staking, default: 5%. The minimum risk factor works
+   * to counter-balance the staked amount on chain's exposure to various asset
+   * volatilities, and have base staking be 'resistant' to volatility.
    */
   minimum_risk_factor: string;
 }

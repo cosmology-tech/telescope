@@ -20,7 +20,7 @@ export class LCDQueryClient {
     return await this.req.get<QueryParamsResponseSDKType>(endpoint);
   }
 
-  /* EpochProvisions current minting epoch provisions value. */
+  /* EpochProvisions returns the current minting epoch provisions value. */
   async epochProvisions(_params: QueryEpochProvisionsRequest = {}): Promise<QueryEpochProvisionsResponseSDKType> {
     const endpoint = `osmosis/mint/v1beta1/epoch_provisions`;
     return await this.req.get<QueryEpochProvisionsResponseSDKType>(endpoint);

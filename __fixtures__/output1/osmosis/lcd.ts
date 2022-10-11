@@ -127,11 +127,21 @@ export const createLCDClient = async ({
           requestClient
         })
       },
+      streamswap: {
+        v1: new (await import("./streamswap/v1/query.lcd")).LCDQueryClient({
+          requestClient
+        })
+      },
       superfluid: new (await import("./superfluid/query.lcd")).LCDQueryClient({
         requestClient
       }),
       tokenfactory: {
         v1beta1: new (await import("./tokenfactory/v1beta1/query.lcd")).LCDQueryClient({
+          requestClient
+        })
+      },
+      twap: {
+        v1beta1: new (await import("./twap/v1beta1/query.lcd")).LCDQueryClient({
           requestClient
         })
       },

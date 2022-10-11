@@ -78,7 +78,7 @@ export interface SmoothWeightChangeParamsSDKType {
    * future type refactorings should just have a type with the denom & weight
    * here.
    */
-  initialPoolWeights: PoolAssetSDKType[];
+  initial_pool_weights: PoolAssetSDKType[];
 
   /**
    * The target pool weights. The pool weights will change linearly with respect
@@ -86,7 +86,7 @@ export interface SmoothWeightChangeParamsSDKType {
    * PoolAsset.token.amount field is ignored if present, future type
    * refactorings should just have a type with the denom & weight here.
    */
-  targetPoolWeights: PoolAssetSDKType[];
+  target_pool_weights: PoolAssetSDKType[];
 }
 
 /**
@@ -108,9 +108,9 @@ export interface PoolParams {
  * The pool's token holders are specified in future_pool_governor.
  */
 export interface PoolParamsSDKType {
-  swapFee: string;
-  exitFee: string;
-  smoothWeightChangeParams?: SmoothWeightChangeParamsSDKType;
+  swap_fee: string;
+  exit_fee: string;
+  smooth_weight_change_params?: SmoothWeightChangeParamsSDKType;
 }
 
 /**
@@ -179,7 +179,7 @@ export interface Pool {
 export interface PoolSDKType {
   address: string;
   id: Long;
-  poolParams: PoolParamsSDKType;
+  pool_params: PoolParamsSDKType;
 
   /**
    * This string specifies who will govern the pool in the future.
@@ -195,16 +195,16 @@ export interface PoolSDKType {
   future_pool_governor: string;
 
   /** sum of all LP tokens sent out */
-  totalShares: CoinSDKType;
+  total_shares: CoinSDKType;
 
   /**
    * These are assumed to be sorted by denomiation.
    * They contain the pool asset and the information about the weight
    */
-  poolAssets: PoolAssetSDKType[];
+  pool_assets: PoolAssetSDKType[];
 
   /** sum of all non-normalized pool weights */
-  totalWeight: string;
+  total_weight: string;
 }
 
 function createBaseSmoothWeightChangeParams(): SmoothWeightChangeParams {
@@ -313,8 +313,8 @@ export const SmoothWeightChangeParams = {
     return {
       startTime: isSet(object.start_time) ? Timestamp.fromSDK(object.start_time) : undefined,
       duration: isSet(object.duration) ? Duration.fromSDK(object.duration) : undefined,
-      initialPoolWeights: Array.isArray(object?.initialPoolWeights) ? object.initialPoolWeights.map((e: any) => PoolAsset.fromSDK(e)) : [],
-      targetPoolWeights: Array.isArray(object?.targetPoolWeights) ? object.targetPoolWeights.map((e: any) => PoolAsset.fromSDK(e)) : []
+      initialPoolWeights: Array.isArray(object?.initial_pool_weights) ? object.initial_pool_weights.map((e: any) => PoolAsset.fromSDK(e)) : [],
+      targetPoolWeights: Array.isArray(object?.target_pool_weights) ? object.target_pool_weights.map((e: any) => PoolAsset.fromSDK(e)) : []
     };
   },
 
@@ -324,15 +324,15 @@ export const SmoothWeightChangeParams = {
     message.duration !== undefined && (obj.duration = message.duration ? Duration.toSDK(message.duration) : undefined);
 
     if (message.initialPoolWeights) {
-      obj.initialPoolWeights = message.initialPoolWeights.map(e => e ? PoolAsset.toSDK(e) : undefined);
+      obj.initial_pool_weights = message.initialPoolWeights.map(e => e ? PoolAsset.toSDK(e) : undefined);
     } else {
-      obj.initialPoolWeights = [];
+      obj.initial_pool_weights = [];
     }
 
     if (message.targetPoolWeights) {
-      obj.targetPoolWeights = message.targetPoolWeights.map(e => e ? PoolAsset.toSDK(e) : undefined);
+      obj.target_pool_weights = message.targetPoolWeights.map(e => e ? PoolAsset.toSDK(e) : undefined);
     } else {
-      obj.targetPoolWeights = [];
+      obj.target_pool_weights = [];
     }
 
     return obj;
@@ -421,17 +421,17 @@ export const PoolParams = {
 
   fromSDK(object: PoolParamsSDKType): PoolParams {
     return {
-      swapFee: isSet(object.swapFee) ? object.swapFee : undefined,
-      exitFee: isSet(object.exitFee) ? object.exitFee : undefined,
-      smoothWeightChangeParams: isSet(object.smoothWeightChangeParams) ? SmoothWeightChangeParams.fromSDK(object.smoothWeightChangeParams) : undefined
+      swapFee: isSet(object.swap_fee) ? object.swap_fee : undefined,
+      exitFee: isSet(object.exit_fee) ? object.exit_fee : undefined,
+      smoothWeightChangeParams: isSet(object.smooth_weight_change_params) ? SmoothWeightChangeParams.fromSDK(object.smooth_weight_change_params) : undefined
     };
   },
 
   toSDK(message: PoolParams): PoolParamsSDKType {
     const obj: any = {};
-    message.swapFee !== undefined && (obj.swapFee = message.swapFee);
-    message.exitFee !== undefined && (obj.exitFee = message.exitFee);
-    message.smoothWeightChangeParams !== undefined && (obj.smoothWeightChangeParams = message.smoothWeightChangeParams ? SmoothWeightChangeParams.toSDK(message.smoothWeightChangeParams) : undefined);
+    message.swapFee !== undefined && (obj.swap_fee = message.swapFee);
+    message.exitFee !== undefined && (obj.exit_fee = message.exitFee);
+    message.smoothWeightChangeParams !== undefined && (obj.smooth_weight_change_params = message.smoothWeightChangeParams ? SmoothWeightChangeParams.toSDK(message.smoothWeightChangeParams) : undefined);
     return obj;
   }
 
@@ -657,11 +657,11 @@ export const Pool = {
     return {
       address: isSet(object.address) ? object.address : undefined,
       id: isSet(object.id) ? object.id : undefined,
-      poolParams: isSet(object.poolParams) ? PoolParams.fromSDK(object.poolParams) : undefined,
+      poolParams: isSet(object.pool_params) ? PoolParams.fromSDK(object.pool_params) : undefined,
       futurePoolGovernor: isSet(object.future_pool_governor) ? object.future_pool_governor : undefined,
-      totalShares: isSet(object.totalShares) ? Coin.fromSDK(object.totalShares) : undefined,
-      poolAssets: Array.isArray(object?.poolAssets) ? object.poolAssets.map((e: any) => PoolAsset.fromSDK(e)) : [],
-      totalWeight: isSet(object.totalWeight) ? object.totalWeight : undefined
+      totalShares: isSet(object.total_shares) ? Coin.fromSDK(object.total_shares) : undefined,
+      poolAssets: Array.isArray(object?.pool_assets) ? object.pool_assets.map((e: any) => PoolAsset.fromSDK(e)) : [],
+      totalWeight: isSet(object.total_weight) ? object.total_weight : undefined
     };
   },
 
@@ -669,17 +669,17 @@ export const Pool = {
     const obj: any = {};
     message.address !== undefined && (obj.address = message.address);
     message.id !== undefined && (obj.id = message.id);
-    message.poolParams !== undefined && (obj.poolParams = message.poolParams ? PoolParams.toSDK(message.poolParams) : undefined);
+    message.poolParams !== undefined && (obj.pool_params = message.poolParams ? PoolParams.toSDK(message.poolParams) : undefined);
     message.futurePoolGovernor !== undefined && (obj.future_pool_governor = message.futurePoolGovernor);
-    message.totalShares !== undefined && (obj.totalShares = message.totalShares ? Coin.toSDK(message.totalShares) : undefined);
+    message.totalShares !== undefined && (obj.total_shares = message.totalShares ? Coin.toSDK(message.totalShares) : undefined);
 
     if (message.poolAssets) {
-      obj.poolAssets = message.poolAssets.map(e => e ? PoolAsset.toSDK(e) : undefined);
+      obj.pool_assets = message.poolAssets.map(e => e ? PoolAsset.toSDK(e) : undefined);
     } else {
-      obj.poolAssets = [];
+      obj.pool_assets = [];
     }
 
-    message.totalWeight !== undefined && (obj.totalWeight = message.totalWeight);
+    message.totalWeight !== undefined && (obj.total_weight = message.totalWeight);
     return obj;
   }
 

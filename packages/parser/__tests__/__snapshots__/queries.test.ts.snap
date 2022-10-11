@@ -16,7 +16,7 @@ exports[`queries 1`] = `
               "(gogoproto.moretags)": "yaml:pool_id",
               "(telescope:camel)": "poolId",
               "(telescope:name)": "poolId",
-              "(telescope:orig)": "poolId",
+              "(telescope:orig)": "pool_id",
             },
             "parsedType": {
               "name": "uint64",
@@ -75,7 +75,7 @@ exports[`queries 1`] = `
               "(gogoproto.moretags)": "yaml:token_in",
               "(telescope:camel)": "tokenIn",
               "(telescope:name)": "tokenIn",
-              "(telescope:orig)": "tokenIn",
+              "(telescope:orig)": "token_in",
             },
             "parsedType": {
               "name": "string",
@@ -87,31 +87,31 @@ exports[`queries 1`] = `
         },
         "info": {
           "casing": {
-            "poolId": "poolId",
+            "pool_id": "poolId",
             "routes": "routes",
             "sender": "sender",
-            "tokenIn": "tokenIn",
+            "token_in": "tokenIn",
           },
           "method": "get",
           "paramMap": {
-            "poolId": "poolId",
+            "pool_id": "poolId",
             "routes": "routes",
             "sender": "sender",
-            "tokenIn": "tokenIn",
+            "token_in": "tokenIn",
           },
           "pathParams": [
-            "poolId",
+            "pool_id",
           ],
           "queryParams": [
             "sender",
-            "tokenIn",
+            "token_in",
             "routes",
           ],
-          "url": "/osmosis/gamm/v1beta1/{poolId}/estimate/swap_exact_amount_in",
+          "url": "/osmosis/gamm/v1beta1/{pool_id}/estimate/swap_exact_amount_in",
         },
         "name": "EstimateSwapExactAmountIn",
         "options": {
-          "(google.api.http).get": "/osmosis/gamm/v1beta1/{poolId}/estimate/swap_exact_amount_in",
+          "(google.api.http).get": "/osmosis/gamm/v1beta1/{pool_id}/estimate/swap_exact_amount_in",
         },
         "requestType": "QuerySwapExactAmountInRequest",
         "responseType": "QuerySwapExactAmountInResponse",
@@ -128,7 +128,7 @@ exports[`queries 1`] = `
               "(gogoproto.moretags)": "yaml:pool_id",
               "(telescope:camel)": "poolId",
               "(telescope:name)": "poolId",
-              "(telescope:orig)": "poolId",
+              "(telescope:orig)": "pool_id",
             },
             "parsedType": {
               "name": "uint64",
@@ -187,7 +187,7 @@ exports[`queries 1`] = `
               "(gogoproto.moretags)": "yaml:token_out",
               "(telescope:camel)": "tokenOut",
               "(telescope:name)": "tokenOut",
-              "(telescope:orig)": "tokenOut",
+              "(telescope:orig)": "token_out",
             },
             "parsedType": {
               "name": "string",
@@ -199,31 +199,31 @@ exports[`queries 1`] = `
         },
         "info": {
           "casing": {
-            "poolId": "poolId",
+            "pool_id": "poolId",
             "routes": "routes",
             "sender": "sender",
-            "tokenOut": "tokenOut",
+            "token_out": "tokenOut",
           },
           "method": "get",
           "paramMap": {
-            "poolId": "poolId",
+            "pool_id": "poolId",
             "routes": "routes",
             "sender": "sender",
-            "tokenOut": "tokenOut",
+            "token_out": "tokenOut",
           },
           "pathParams": [
-            "poolId",
+            "pool_id",
           ],
           "queryParams": [
             "sender",
             "routes",
-            "tokenOut",
+            "token_out",
           ],
-          "url": "/osmosis/gamm/v1beta1/{poolId}/estimate/swap_exact_amount_out",
+          "url": "/osmosis/gamm/v1beta1/{pool_id}/estimate/swap_exact_amount_out",
         },
         "name": "EstimateSwapExactAmountOut",
         "options": {
-          "(google.api.http).get": "/osmosis/gamm/v1beta1/{poolId}/estimate/swap_exact_amount_out",
+          "(google.api.http).get": "/osmosis/gamm/v1beta1/{pool_id}/estimate/swap_exact_amount_out",
         },
         "requestType": "QuerySwapExactAmountOutRequest",
         "responseType": "QuerySwapExactAmountOutResponse",
@@ -259,7 +259,7 @@ exports[`queries 1`] = `
               "(gogoproto.moretags)": "yaml:pool_id",
               "(telescope:camel)": "poolId",
               "(telescope:name)": "poolId",
-              "(telescope:orig)": "poolId",
+              "(telescope:orig)": "pool_id",
             },
             "parsedType": {
               "name": "uint64",
@@ -271,21 +271,21 @@ exports[`queries 1`] = `
         },
         "info": {
           "casing": {
-            "poolId": "poolId",
+            "pool_id": "poolId",
           },
           "method": "get",
           "paramMap": {
-            "poolId": "poolId",
+            "pool_id": "poolId",
           },
           "pathParams": [
-            "poolId",
+            "pool_id",
           ],
           "queryParams": [],
-          "url": "/osmosis/gamm/v1beta1/pools/{poolId}",
+          "url": "/osmosis/gamm/v1beta1/pools/{pool_id}",
         },
         "name": "Pool",
         "options": {
-          "(google.api.http).get": "/osmosis/gamm/v1beta1/pools/{poolId}",
+          "(google.api.http).get": "/osmosis/gamm/v1beta1/pools/{pool_id}",
         },
         "requestType": "QueryPoolRequest",
         "responseType": "QueryPoolResponse",
@@ -302,7 +302,7 @@ exports[`queries 1`] = `
               "(gogoproto.moretags)": "yaml:pool_id",
               "(telescope:camel)": "poolId",
               "(telescope:name)": "poolId",
-              "(telescope:orig)": "poolId",
+              "(telescope:orig)": "pool_id",
             },
             "parsedType": {
               "name": "uint64",
@@ -314,24 +314,69 @@ exports[`queries 1`] = `
         },
         "info": {
           "casing": {
-            "poolId": "poolId",
+            "pool_id": "poolId",
           },
           "method": "get",
           "paramMap": {
-            "poolId": "poolId",
+            "pool_id": "poolId",
           },
           "pathParams": [
-            "poolId",
+            "pool_id",
           ],
           "queryParams": [],
-          "url": "/osmosis/gamm/v1beta1/pools/{poolId}/params",
+          "url": "/osmosis/gamm/v1beta1/pools/{pool_id}/params",
         },
         "name": "PoolParams",
         "options": {
-          "(google.api.http).get": "/osmosis/gamm/v1beta1/pools/{poolId}/params",
+          "(google.api.http).get": "/osmosis/gamm/v1beta1/pools/{pool_id}/params",
         },
         "requestType": "QueryPoolParamsRequest",
         "responseType": "QueryPoolParamsResponse",
+        "type": "ServiceMethod",
+      },
+      "PoolType": {
+        "comment": "PoolType returns the type of the pool.
+ Returns "Balancer" as a string literal when the pool is a balancer pool.
+ Errors if the pool is failed to be type caseted.",
+        "fields": {
+          "poolId": {
+            "comment": null,
+            "id": 1,
+            "isScalar": true,
+            "options": {
+              "(gogoproto.moretags)": "yaml:pool_id",
+              "(telescope:camel)": "poolId",
+              "(telescope:name)": "poolId",
+              "(telescope:orig)": "pool_id",
+            },
+            "parsedType": {
+              "name": "uint64",
+              "type": "native",
+            },
+            "type": "uint64",
+            "typeNum": 8,
+          },
+        },
+        "info": {
+          "casing": {
+            "pool_id": "poolId",
+          },
+          "method": "get",
+          "paramMap": {
+            "pool_id": "poolId",
+          },
+          "pathParams": [
+            "pool_id",
+          ],
+          "queryParams": [],
+          "url": "/osmosis/gamm/v1beta1/pool_type/{pool_id}",
+        },
+        "name": "PoolType",
+        "options": {
+          "(google.api.http).get": "/osmosis/gamm/v1beta1/pool_type/{pool_id}",
+        },
+        "requestType": "QueryPoolTypeRequest",
+        "responseType": "QueryPoolTypeResponse",
         "type": "ServiceMethod",
       },
       "Pools": {
@@ -409,7 +454,7 @@ exports[`queries 1`] = `
               "(gogoproto.moretags)": "yaml:pool_id",
               "(telescope:camel)": "poolId",
               "(telescope:name)": "poolId",
-              "(telescope:orig)": "poolId",
+              "(telescope:orig)": "pool_id",
             },
             "parsedType": {
               "name": "uint64",
@@ -439,27 +484,27 @@ exports[`queries 1`] = `
         "info": {
           "casing": {
             "base_asset_denom": "baseAssetDenom",
-            "poolId": "poolId",
+            "pool_id": "poolId",
             "quote_asset_denom": "quoteAssetDenom",
           },
           "method": "get",
           "paramMap": {
             "base_asset_denom": "baseAssetDenom",
-            "poolId": "poolId",
+            "pool_id": "poolId",
             "quote_asset_denom": "quoteAssetDenom",
           },
           "pathParams": [
-            "poolId",
+            "pool_id",
           ],
           "queryParams": [
             "base_asset_denom",
             "quote_asset_denom",
           ],
-          "url": "/osmosis/gamm/v1beta1/pools/{poolId}/prices",
+          "url": "/osmosis/gamm/v1beta1/pools/{pool_id}/prices",
         },
         "name": "SpotPrice",
         "options": {
-          "(google.api.http).get": "/osmosis/gamm/v1beta1/pools/{poolId}/prices",
+          "(google.api.http).get": "/osmosis/gamm/v1beta1/pools/{pool_id}/prices",
         },
         "requestType": "QuerySpotPriceRequest",
         "responseType": "QuerySpotPriceResponse",
@@ -495,7 +540,7 @@ exports[`queries 1`] = `
               "(gogoproto.moretags)": "yaml:pool_id",
               "(telescope:camel)": "poolId",
               "(telescope:name)": "poolId",
-              "(telescope:orig)": "poolId",
+              "(telescope:orig)": "pool_id",
             },
             "parsedType": {
               "name": "uint64",
@@ -507,21 +552,21 @@ exports[`queries 1`] = `
         },
         "info": {
           "casing": {
-            "poolId": "poolId",
+            "pool_id": "poolId",
           },
           "method": "get",
           "paramMap": {
-            "poolId": "poolId",
+            "pool_id": "poolId",
           },
           "pathParams": [
-            "poolId",
+            "pool_id",
           ],
           "queryParams": [],
-          "url": "/osmosis/gamm/v1beta1/pools/{poolId}/total_pool_liquidity",
+          "url": "/osmosis/gamm/v1beta1/pools/{pool_id}/total_pool_liquidity",
         },
         "name": "TotalPoolLiquidity",
         "options": {
-          "(google.api.http).get": "/osmosis/gamm/v1beta1/pools/{poolId}/total_pool_liquidity",
+          "(google.api.http).get": "/osmosis/gamm/v1beta1/pools/{pool_id}/total_pool_liquidity",
         },
         "requestType": "QueryTotalPoolLiquidityRequest",
         "responseType": "QueryTotalPoolLiquidityResponse",
@@ -538,7 +583,7 @@ exports[`queries 1`] = `
               "(gogoproto.moretags)": "yaml:pool_id",
               "(telescope:camel)": "poolId",
               "(telescope:name)": "poolId",
-              "(telescope:orig)": "poolId",
+              "(telescope:orig)": "pool_id",
             },
             "parsedType": {
               "name": "uint64",
@@ -550,21 +595,21 @@ exports[`queries 1`] = `
         },
         "info": {
           "casing": {
-            "poolId": "poolId",
+            "pool_id": "poolId",
           },
           "method": "get",
           "paramMap": {
-            "poolId": "poolId",
+            "pool_id": "poolId",
           },
           "pathParams": [
-            "poolId",
+            "pool_id",
           ],
           "queryParams": [],
-          "url": "/osmosis/gamm/v1beta1/pools/{poolId}/total_shares",
+          "url": "/osmosis/gamm/v1beta1/pools/{pool_id}/total_shares",
         },
         "name": "TotalShares",
         "options": {
-          "(google.api.http).get": "/osmosis/gamm/v1beta1/pools/{poolId}/total_shares",
+          "(google.api.http).get": "/osmosis/gamm/v1beta1/pools/{pool_id}/total_shares",
         },
         "requestType": "QueryTotalSharesRequest",
         "responseType": "QueryTotalSharesResponse",
@@ -596,7 +641,7 @@ exports[`queries 1`] = `
           "(gogoproto.moretags)": "yaml:num_pools",
           "(telescope:camel)": "numPools",
           "(telescope:name)": "numPools",
-          "(telescope:orig)": "numPools",
+          "(telescope:orig)": "num_pools",
         },
         "parsedType": {
           "name": "uint64",
@@ -624,7 +669,7 @@ exports[`queries 1`] = `
           "(gogoproto.moretags)": "yaml:pool_id",
           "(telescope:camel)": "poolId",
           "(telescope:name)": "poolId",
-          "(telescope:orig)": "poolId",
+          "(telescope:orig)": "pool_id",
         },
         "parsedType": {
           "name": "uint64",
@@ -683,7 +728,7 @@ exports[`queries 1`] = `
           "(gogoproto.moretags)": "yaml:pool_id",
           "(telescope:camel)": "poolId",
           "(telescope:name)": "poolId",
-          "(telescope:orig)": "poolId",
+          "(telescope:orig)": "pool_id",
         },
         "parsedType": {
           "name": "uint64",
@@ -727,6 +772,62 @@ exports[`queries 1`] = `
     },
     "keyTypes": [],
     "name": "QueryPoolResponse",
+    "nested": null,
+    "oneofs": undefined,
+    "options": undefined,
+    "type": "Type",
+  },
+  "QueryPoolTypeRequest": {
+    "comment": "=============================== PoolType",
+    "fields": {
+      "poolId": {
+        "comment": null,
+        "id": 1,
+        "isScalar": true,
+        "options": {
+          "(gogoproto.moretags)": "yaml:pool_id",
+          "(telescope:camel)": "poolId",
+          "(telescope:name)": "poolId",
+          "(telescope:orig)": "pool_id",
+        },
+        "parsedType": {
+          "name": "uint64",
+          "type": "native",
+        },
+        "type": "uint64",
+        "typeNum": 8,
+      },
+    },
+    "keyTypes": [],
+    "name": "QueryPoolTypeRequest",
+    "nested": null,
+    "oneofs": undefined,
+    "options": undefined,
+    "type": "Type",
+  },
+  "QueryPoolTypeResponse": {
+    "comment": null,
+    "fields": {
+      "poolType": {
+        "comment": null,
+        "id": 1,
+        "isScalar": true,
+        "options": {
+          "(gogoproto.moretags)": "yaml:pool_type",
+          "(telescope:camel)": "poolType",
+          "(telescope:name)": "poolType",
+          "(telescope:orig)": "pool_type",
+        },
+        "parsedType": {
+          "name": "string",
+          "type": "native",
+        },
+        "type": "string",
+        "typeNum": 13,
+      },
+    },
+    "keyTypes": [],
+    "name": "QueryPoolTypeResponse",
     "nested": null,
     "oneofs": undefined,
     "options": undefined,
@@ -845,7 +946,7 @@ exports[`queries 1`] = `
           "(gogoproto.moretags)": "yaml:pool_id",
           "(telescope:camel)": "poolId",
           "(telescope:name)": "poolId",
-          "(telescope:orig)": "poolId",
+          "(telescope:orig)": "pool_id",
         },
         "parsedType": {
           "name": "uint64",
@@ -891,7 +992,7 @@ exports[`queries 1`] = `
           "(gogoproto.moretags)": "yaml:spot_price",
           "(telescope:camel)": "spotPrice",
           "(telescope:name)": "spotPrice",
-          "(telescope:orig)": "spotPrice",
+          "(telescope:orig)": "spot_price",
         },
         "parsedType": {
           "name": "string",
@@ -919,7 +1020,7 @@ exports[`queries 1`] = `
           "(gogoproto.moretags)": "yaml:pool_id",
           "(telescope:camel)": "poolId",
           "(telescope:name)": "poolId",
-          "(telescope:orig)": "poolId",
+          "(telescope:orig)": "pool_id",
         },
         "parsedType": {
           "name": "uint64",
@@ -978,7 +1079,7 @@ exports[`queries 1`] = `
           "(gogoproto.moretags)": "yaml:token_in",
           "(telescope:camel)": "tokenIn",
           "(telescope:name)": "tokenIn",
-          "(telescope:orig)": "tokenIn",
+          "(telescope:orig)": "token_in",
         },
         "parsedType": {
           "name": "string",
@@ -1008,7 +1109,7 @@ exports[`queries 1`] = `
           "(gogoproto.nullable)": false,
           "(telescope:camel)": "tokenOutAmount",
           "(telescope:name)": "tokenOutAmount",
-          "(telescope:orig)": "tokenOutAmount",
+          "(telescope:orig)": "token_out_amount",
         },
         "parsedType": {
           "name": "string",
@@ -1036,7 +1137,7 @@ exports[`queries 1`] = `
           "(gogoproto.moretags)": "yaml:pool_id",
           "(telescope:camel)": "poolId",
           "(telescope:name)": "poolId",
-          "(telescope:orig)": "poolId",
+          "(telescope:orig)": "pool_id",
         },
         "parsedType": {
           "name": "uint64",
@@ -1095,7 +1196,7 @@ exports[`queries 1`] = `
           "(gogoproto.moretags)": "yaml:token_out",
           "(telescope:camel)": "tokenOut",
           "(telescope:name)": "tokenOut",
-          "(telescope:orig)": "tokenOut",
+          "(telescope:orig)": "token_out",
         },
         "parsedType": {
           "name": "string",
@@ -1125,7 +1226,7 @@ exports[`queries 1`] = `
           "(gogoproto.nullable)": false,
           "(telescope:camel)": "tokenInAmount",
           "(telescope:name)": "tokenInAmount",
-          "(telescope:orig)": "tokenInAmount",
+          "(telescope:orig)": "token_in_amount",
         },
         "parsedType": {
           "name": "string",
@@ -1198,7 +1299,7 @@ exports[`queries 1`] = `
           "(gogoproto.moretags)": "yaml:pool_id",
           "(telescope:camel)": "poolId",
           "(telescope:name)": "poolId",
-          "(telescope:orig)": "poolId",
+          "(telescope:orig)": "pool_id",
         },
         "parsedType": {
           "name": "uint64",
@@ -1261,7 +1362,7 @@ exports[`queries 1`] = `
           "(gogoproto.moretags)": "yaml:pool_id",
           "(telescope:camel)": "poolId",
           "(telescope:name)": "poolId",
-          "(telescope:orig)": "poolId",
+          "(telescope:orig)": "pool_id",
         },
         "parsedType": {
           "name": "uint64",
@@ -1291,7 +1392,7 @@ exports[`queries 1`] = `
           "(gogoproto.nullable)": false,
           "(telescope:camel)": "totalShares",
           "(telescope:name)": "totalShares",
-          "(telescope:orig)": "totalShares",
+          "(telescope:orig)": "total_shares",
         },
         "parsedType": {
           "name": "Coin",

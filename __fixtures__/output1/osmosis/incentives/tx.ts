@@ -4,56 +4,96 @@ import { Timestamp, TimestampSDKType } from "../../google/protobuf/timestamp";
 import * as _m0 from "protobufjs/minimal";
 import { toTimestamp, fromTimestamp, Long, isSet, fromJsonTimestamp, DeepPartial } from "../../helpers";
 export const protobufPackage = "osmosis.incentives";
+
+/** MsgCreateGauge creates a gague to distribute rewards to users */
 export interface MsgCreateGauge {
   /**
-   * flag to show if it's perpetual or multi-epoch
-   * distribution incentives by third party
+   * is_perpetual shows if it's a perpetual or non-perpetual gauge
+   * Non-perpetual gauges distribute their tokens equally per epoch while the
+   * gauge is in the active period. Perpetual gauges distribute all their tokens
+   * at a single time and only distribute their tokens again once the gauge is
+   * refilled
    */
   isPerpetual: boolean;
+
+  /** owner is the address of gauge creator */
   owner: string;
 
-  /** distribute condition of a lock which meet one of these conditions */
+  /**
+   * distribute_to show which lock the gauge should distribute to by time
+   * duration or by timestamp
+   */
   distributeTo: QueryCondition;
 
-  /** can distribute multiple coins */
+  /** coins are coin(s) to be distributed by the gauge */
   coins: Coin[];
 
-  /** distribution start time */
+  /** start_time is the distribution start time */
   startTime: Date;
 
-  /** number of epochs distribution will be done */
+  /**
+   * num_epochs_paid_over is the number of epochs distribution will be completed
+   * over
+   */
   numEpochsPaidOver: Long;
 }
+
+/** MsgCreateGauge creates a gague to distribute rewards to users */
 export interface MsgCreateGaugeSDKType {
   /**
-   * flag to show if it's perpetual or multi-epoch
-   * distribution incentives by third party
+   * is_perpetual shows if it's a perpetual or non-perpetual gauge
+   * Non-perpetual gauges distribute their tokens equally per epoch while the
+   * gauge is in the active period. Perpetual gauges distribute all their tokens
+   * at a single time and only distribute their tokens again once the gauge is
+   * refilled
    */
   is_perpetual: boolean;
+
+  /** owner is the address of gauge creator */
   owner: string;
 
-  /** distribute condition of a lock which meet one of these conditions */
+  /**
+   * distribute_to show which lock the gauge should distribute to by time
+   * duration or by timestamp
+   */
   distribute_to: QueryConditionSDKType;
 
-  /** can distribute multiple coins */
+  /** coins are coin(s) to be distributed by the gauge */
   coins: CoinSDKType[];
 
-  /** distribution start time */
+  /** start_time is the distribution start time */
   start_time: Date;
 
-  /** number of epochs distribution will be done */
+  /**
+   * num_epochs_paid_over is the number of epochs distribution will be completed
+   * over
+   */
   num_epochs_paid_over: Long;
 }
 export interface MsgCreateGaugeResponse {}
 export interface MsgCreateGaugeResponseSDKType {}
+
+/** MsgAddToGauge adds coins to a previously created gauge */
 export interface MsgAddToGauge {
+  /** owner is the gauge owner's address */
   owner: string;
+
+  /** gauge_id is the ID of gauge that rewards are getting added to */
   gaugeId: Long;
+
+  /** rewards are the coin(s) to add to gauge */
   rewards: Coin[];
 }
+
+/** MsgAddToGauge adds coins to a previously created gauge */
 export interface MsgAddToGaugeSDKType {
+  /** owner is the gauge owner's address */
   owner: string;
+
+  /** gauge_id is the ID of gauge that rewards are getting added to */
   gauge_id: Long;
+
+  /** rewards are the coin(s) to add to gauge */
   rewards: CoinSDKType[];
 }
 export interface MsgAddToGaugeResponse {}
