@@ -21,14 +21,14 @@ export interface Msg {
    * During the sale, user `token_in` will be automatically charged every
    * epoch to purchase `token_out`.
    */
-  subscribe(request: MsgSubscribe): Promise<google.protobuf.Empty>;
+  subscribe(request: MsgSubscribe): Promise<Empty>;
 
   /**
    * Withdraw sends back `amount` of unspent tokens_in to the user.
    * If `amount` is empty, it will default to all unspent tokens.
    * User can do it any time unless his deposit is empty.
    */
-  withdraw(request: MsgWithdraw): Promise<google.protobuf.Empty>;
+  withdraw(request: MsgWithdraw): Promise<Empty>;
 
   /**
    * ExitSale withdraws (by a user who subscribed to the sale) purchased
@@ -62,16 +62,16 @@ export class MsgClientImpl implements Msg {
     return promise.then(data => MsgCreateSaleResponse.decode(new _m0.Reader(data)));
   }
 
-  subscribe(request: MsgSubscribe): Promise<google.protobuf.Empty> {
+  subscribe(request: MsgSubscribe): Promise<Empty> {
     const data = MsgSubscribe.encode(request).finish();
     const promise = this.rpc.request("osmosis.streamswap.v1.Msg", "Subscribe", data);
-    return promise.then(data => google.protobuf.Empty.decode(new _m0.Reader(data)));
+    return promise.then(data => Empty.decode(new _m0.Reader(data)));
   }
 
-  withdraw(request: MsgWithdraw): Promise<google.protobuf.Empty> {
+  withdraw(request: MsgWithdraw): Promise<Empty> {
     const data = MsgWithdraw.encode(request).finish();
     const promise = this.rpc.request("osmosis.streamswap.v1.Msg", "Withdraw", data);
-    return promise.then(data => google.protobuf.Empty.decode(new _m0.Reader(data)));
+    return promise.then(data => Empty.decode(new _m0.Reader(data)));
   }
 
   exitSale(request: MsgExitSale): Promise<MsgExitSaleResponse> {
