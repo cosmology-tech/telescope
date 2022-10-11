@@ -29,7 +29,7 @@ export interface QueryContractInfoRequestSDKType {
 export interface QueryContractInfoResponse {
   /** address is the address of the contract */
   address: string;
-  contractInfo: ContractInfo;
+  contractInfo?: ContractInfo;
 }
 
 /**
@@ -39,7 +39,7 @@ export interface QueryContractInfoResponse {
 export interface QueryContractInfoResponseSDKType {
   /** address is the address of the contract */
   address: string;
-  contract_info: ContractInfoSDKType;
+  contract_info?: ContractInfoSDKType;
 }
 
 /**
@@ -292,13 +292,13 @@ export interface CodeInfoResponseSDKType {
 
 /** QueryCodeResponse is the response type for the Query/Code RPC method */
 export interface QueryCodeResponse {
-  codeInfo: CodeInfoResponse;
+  codeInfo?: CodeInfoResponse;
   data: Uint8Array;
 }
 
 /** QueryCodeResponse is the response type for the Query/Code RPC method */
 export interface QueryCodeResponseSDKType {
-  code_info: CodeInfoResponseSDKType;
+  code_info?: CodeInfoResponseSDKType;
   data: Uint8Array;
 }
 

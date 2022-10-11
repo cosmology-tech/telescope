@@ -16,7 +16,7 @@ export interface MsgStoreCode {
    * InstantiatePermission access control to apply on contract creation,
    * optional
    */
-  instantiatePermission: AccessConfig;
+  instantiatePermission?: AccessConfig;
 }
 
 /** MsgStoreCode submit Wasm code to the system */
@@ -31,7 +31,7 @@ export interface MsgStoreCodeSDKType {
    * InstantiatePermission access control to apply on contract creation,
    * optional
    */
-  instantiate_permission: AccessConfigSDKType;
+  instantiate_permission?: AccessConfigSDKType;
 }
 
 /** MsgStoreCodeResponse returns store result data. */

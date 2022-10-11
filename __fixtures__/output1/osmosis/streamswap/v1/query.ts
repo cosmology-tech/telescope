@@ -32,10 +32,10 @@ export interface QuerySaleSDKType {
   sale_id: Long;
 }
 export interface QuerySaleResponse {
-  sale: Sale;
+  sale?: Sale;
 }
 export interface QuerySaleResponseSDKType {
-  sale: SaleSDKType;
+  sale?: SaleSDKType;
 }
 
 /** Request type for Query/Sale */
@@ -56,10 +56,10 @@ export interface QueryUserPositionSDKType {
   user: string;
 }
 export interface QueryUserPositionResponse {
-  userPosition: UserPosition;
+  userPosition?: UserPosition;
 }
 export interface QueryUserPositionResponseSDKType {
-  user_position: UserPositionSDKType;
+  user_position?: UserPositionSDKType;
 }
 
 function createBaseQuerySales(): QuerySales {

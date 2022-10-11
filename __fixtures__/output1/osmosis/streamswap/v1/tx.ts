@@ -22,7 +22,7 @@ export interface MsgCreateSale {
    * "base currency". The whole supply will be transferred from the creator
    * to the module and will be sold during the sale.
    */
-  tokenOut: Coin;
+  tokenOut?: Coin;
 
   /**
    * Maximum fee the creator is going to pay for creating a sale. The creator
@@ -33,10 +33,10 @@ export interface MsgCreateSale {
   maxFee: Coin[];
 
   /** start time when the token sale starts. */
-  startTime: Date;
+  startTime?: Date;
 
   /** duration time that the sale takes place over */
-  duration: Duration;
+  duration?: Duration;
 
   /**
    * Recipient is the account which receives earned `token_in` from when the
@@ -73,7 +73,7 @@ export interface MsgCreateSaleSDKType {
    * "base currency". The whole supply will be transferred from the creator
    * to the module and will be sold during the sale.
    */
-  token_out: CoinSDKType;
+  token_out?: CoinSDKType;
 
   /**
    * Maximum fee the creator is going to pay for creating a sale. The creator
@@ -84,10 +84,10 @@ export interface MsgCreateSaleSDKType {
   max_fee: CoinSDKType[];
 
   /** start time when the token sale starts. */
-  start_time: Date;
+  start_time?: Date;
 
   /** duration time that the sale takes place over */
-  duration: DurationSDKType;
+  duration?: DurationSDKType;
 
   /**
    * Recipient is the account which receives earned `token_in` from when the

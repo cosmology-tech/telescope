@@ -74,7 +74,7 @@ export interface GetLatestValidatorSetResponseSDKType {
 /** Validator is the type for the validator-set. */
 export interface Validator {
   address: string;
-  pubKey: Any;
+  pubKey?: Any;
   votingPower: Long;
   proposerPriority: Long;
 }
@@ -82,7 +82,7 @@ export interface Validator {
 /** Validator is the type for the validator-set. */
 export interface ValidatorSDKType {
   address: string;
-  pub_key: AnySDKType;
+  pub_key?: AnySDKType;
   voting_power: Long;
   proposer_priority: Long;
 }
@@ -99,14 +99,14 @@ export interface GetBlockByHeightRequestSDKType {
 
 /** GetBlockByHeightResponse is the response type for the Query/GetBlockByHeight RPC method. */
 export interface GetBlockByHeightResponse {
-  blockId: BlockID;
-  block: Block;
+  blockId?: BlockID;
+  block?: Block;
 }
 
 /** GetBlockByHeightResponse is the response type for the Query/GetBlockByHeight RPC method. */
 export interface GetBlockByHeightResponseSDKType {
-  block_id: BlockIDSDKType;
-  block: BlockSDKType;
+  block_id?: BlockIDSDKType;
+  block?: BlockSDKType;
 }
 
 /** GetLatestBlockRequest is the request type for the Query/GetLatestBlock RPC method. */
@@ -117,14 +117,14 @@ export interface GetLatestBlockRequestSDKType {}
 
 /** GetLatestBlockResponse is the response type for the Query/GetLatestBlock RPC method. */
 export interface GetLatestBlockResponse {
-  blockId: BlockID;
-  block: Block;
+  blockId?: BlockID;
+  block?: Block;
 }
 
 /** GetLatestBlockResponse is the response type for the Query/GetLatestBlock RPC method. */
 export interface GetLatestBlockResponseSDKType {
-  block_id: BlockIDSDKType;
-  block: BlockSDKType;
+  block_id?: BlockIDSDKType;
+  block?: BlockSDKType;
 }
 
 /** GetSyncingRequest is the request type for the Query/GetSyncing RPC method. */
@@ -151,14 +151,14 @@ export interface GetNodeInfoRequestSDKType {}
 
 /** GetNodeInfoResponse is the response type for the Query/GetNodeInfo RPC method. */
 export interface GetNodeInfoResponse {
-  nodeInfo: NodeInfo;
-  applicationVersion: VersionInfo;
+  nodeInfo?: NodeInfo;
+  applicationVersion?: VersionInfo;
 }
 
 /** GetNodeInfoResponse is the response type for the Query/GetNodeInfo RPC method. */
 export interface GetNodeInfoResponseSDKType {
-  node_info: NodeInfoSDKType;
-  application_version: VersionInfoSDKType;
+  node_info?: NodeInfoSDKType;
+  application_version?: VersionInfoSDKType;
 }
 
 /** VersionInfo is the type for the GetNodeInfoResponse message. */

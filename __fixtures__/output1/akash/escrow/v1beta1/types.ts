@@ -168,7 +168,7 @@ export interface AccountIDSDKType {
 /** Account stores state for an escrow account */
 export interface Account {
   /** unique identifier for this escrow account */
-  id: AccountID;
+  id?: AccountID;
 
   /** bech32 encoded account address of the owner of this escrow account */
   owner: string;
@@ -177,10 +177,10 @@ export interface Account {
   state: Account_State;
 
   /** unspent coins received from the owner's wallet */
-  balance: Coin;
+  balance?: Coin;
 
   /** total coins spent by this account */
-  transferred: Coin;
+  transferred?: Coin;
 
   /** block height at which this account was last settled */
   settledAt: Long;
@@ -189,7 +189,7 @@ export interface Account {
 /** Account stores state for an escrow account */
 export interface AccountSDKType {
   /** unique identifier for this escrow account */
-  id: AccountIDSDKType;
+  id?: AccountIDSDKType;
 
   /** bech32 encoded account address of the owner of this escrow account */
   owner: string;
@@ -198,10 +198,10 @@ export interface AccountSDKType {
   state: Account_StateSDKType;
 
   /** unspent coins received from the owner's wallet */
-  balance: CoinSDKType;
+  balance?: CoinSDKType;
 
   /** total coins spent by this account */
-  transferred: CoinSDKType;
+  transferred?: CoinSDKType;
 
   /** block height at which this account was last settled */
   settled_at: Long;
@@ -209,24 +209,24 @@ export interface AccountSDKType {
 
 /** Payment stores state for a payment */
 export interface Payment {
-  accountId: AccountID;
+  accountId?: AccountID;
   paymentId: string;
   owner: string;
   state: Payment_State;
-  rate: Coin;
-  balance: Coin;
-  withdrawn: Coin;
+  rate?: Coin;
+  balance?: Coin;
+  withdrawn?: Coin;
 }
 
 /** Payment stores state for a payment */
 export interface PaymentSDKType {
-  account_id: AccountIDSDKType;
+  account_id?: AccountIDSDKType;
   payment_id: string;
   owner: string;
   state: Payment_StateSDKType;
-  rate: CoinSDKType;
-  balance: CoinSDKType;
-  withdrawn: CoinSDKType;
+  rate?: CoinSDKType;
+  balance?: CoinSDKType;
+  withdrawn?: CoinSDKType;
 }
 
 function createBaseAccountID(): AccountID {

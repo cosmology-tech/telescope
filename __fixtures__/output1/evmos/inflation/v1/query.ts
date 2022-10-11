@@ -40,7 +40,7 @@ export interface QueryEpochMintProvisionRequestSDKType {}
  */
 export interface QueryEpochMintProvisionResponse {
   /** epoch_mint_provision is the current minting per epoch provision value. */
-  epochMintProvision: DecCoin;
+  epochMintProvision?: DecCoin;
 }
 
 /**
@@ -49,7 +49,7 @@ export interface QueryEpochMintProvisionResponse {
  */
 export interface QueryEpochMintProvisionResponseSDKType {
   /** epoch_mint_provision is the current minting per epoch provision value. */
-  epoch_mint_provision: DecCoinSDKType;
+  epoch_mint_provision?: DecCoinSDKType;
 }
 
 /**
@@ -100,7 +100,7 @@ export interface QueryCirculatingSupplyRequestSDKType {}
  */
 export interface QueryCirculatingSupplyResponse {
   /** total amount of coins in circulation */
-  circulatingSupply: DecCoin;
+  circulatingSupply?: DecCoin;
 }
 
 /**
@@ -109,7 +109,7 @@ export interface QueryCirculatingSupplyResponse {
  */
 export interface QueryCirculatingSupplyResponseSDKType {
   /** total amount of coins in circulation */
-  circulating_supply: DecCoinSDKType;
+  circulating_supply?: DecCoinSDKType;
 }
 
 /**
@@ -151,13 +151,13 @@ export interface QueryParamsRequestSDKType {}
 /** QueryParamsResponse is the response type for the Query/Params RPC method. */
 export interface QueryParamsResponse {
   /** params defines the parameters of the module. */
-  params: Params;
+  params?: Params;
 }
 
 /** QueryParamsResponse is the response type for the Query/Params RPC method. */
 export interface QueryParamsResponseSDKType {
   /** params defines the parameters of the module. */
-  params: ParamsSDKType;
+  params?: ParamsSDKType;
 }
 
 function createBaseQueryPeriodRequest(): QueryPeriodRequest {

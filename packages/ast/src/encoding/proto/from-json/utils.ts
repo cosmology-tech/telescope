@@ -31,7 +31,7 @@ export const fromJSON = {
                         )
                     ]
                 ),
-                getDefaultTSTypeFromProtoType(args.context, args.field, args.isOptional)
+                getDefaultTSTypeFromProtoType(args.context, args.field, args.isOneOf)
             )
         )
     },
@@ -61,7 +61,7 @@ export const fromJSON = {
                         )
                     ]
                 ),
-                getDefaultTSTypeFromProtoType(args.context, args.field, args.isOptional)
+                getDefaultTSTypeFromProtoType(args.context, args.field, args.isOneOf)
             )
         )
     },
@@ -114,7 +114,7 @@ export const fromJSON = {
                         )
                     ]
                 ),
-                getDefaultTSTypeFromProtoType(args.context, args.field, args.isOptional)
+                getDefaultTSTypeFromProtoType(args.context, args.field, args.isOneOf)
             )
         )
     },
@@ -149,7 +149,7 @@ export const fromJSON = {
                         )
                     ]
                 ),
-                getDefaultTSTypeFromProtoType(args.context, args.field, args.isOptional)
+                getDefaultTSTypeFromProtoType(args.context, args.field, args.isOneOf)
             )
         );
     },
@@ -267,7 +267,7 @@ export const fromJSON = {
                         )
                     ]
                 ),
-                getDefaultTSTypeFromProtoType(args.context, args.field, args.isOptional)
+                getDefaultTSTypeFromProtoType(args.context, args.field, args.isOneOf)
             )
         );
     },

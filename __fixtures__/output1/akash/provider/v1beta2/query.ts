@@ -38,12 +38,12 @@ export interface QueryProviderRequestSDKType {
 
 /** QueryProviderResponse is response type for the Query/Provider RPC method */
 export interface QueryProviderResponse {
-  provider: Provider;
+  provider?: Provider;
 }
 
 /** QueryProviderResponse is response type for the Query/Provider RPC method */
 export interface QueryProviderResponseSDKType {
-  provider: ProviderSDKType;
+  provider?: ProviderSDKType;
 }
 
 function createBaseQueryProvidersRequest(): QueryProvidersRequest {

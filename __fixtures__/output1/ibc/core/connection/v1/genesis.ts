@@ -10,7 +10,7 @@ export interface GenesisState {
 
   /** the sequence for the next generated connection identifier */
   nextConnectionSequence: Long;
-  params: Params;
+  params?: Params;
 }
 
 /** GenesisState defines the ibc connection submodule's genesis state. */
@@ -20,7 +20,7 @@ export interface GenesisStateSDKType {
 
   /** the sequence for the next generated connection identifier */
   next_connection_sequence: Long;
-  params: ParamsSDKType;
+  params?: ParamsSDKType;
 }
 
 function createBaseGenesisState(): GenesisState {

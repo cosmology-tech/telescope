@@ -19,7 +19,7 @@ export interface Incentive {
   epochs: number;
 
   /** distribution start time */
-  startTime: Date;
+  startTime?: Date;
 
   /** cumulative gas spent by all gasmeters of the incentive during the epoch */
   totalGas: Long;
@@ -40,7 +40,7 @@ export interface IncentiveSDKType {
   epochs: number;
 
   /** distribution start time */
-  start_time: Date;
+  start_time?: Date;
 
   /** cumulative gas spent by all gasmeters of the incentive during the epoch */
   total_gas: Long;

@@ -439,7 +439,7 @@ export interface CreateAdminOverrideRequest {
   parent: string;
 
   /** The admin override to create. */
-  override: QuotaOverride;
+  override?: QuotaOverride;
 
   /**
    * Whether to force the creation of the quota override.
@@ -469,7 +469,7 @@ export interface CreateAdminOverrideRequestSDKType {
   parent: string;
 
   /** The admin override to create. */
-  override: QuotaOverrideSDKType;
+  override?: QuotaOverrideSDKType;
 
   /**
    * Whether to force the creation of the quota override.
@@ -501,7 +501,7 @@ export interface UpdateAdminOverrideRequest {
    * The new override.
    * Only the override_value is updated; all other fields are ignored.
    */
-  override: QuotaOverride;
+  override?: QuotaOverride;
 
   /**
    * Whether to force the update of the quota override.
@@ -514,7 +514,7 @@ export interface UpdateAdminOverrideRequest {
    * Update only the specified fields of the override.
    * If unset, all fields will be updated.
    */
-  updateMask: FieldMask;
+  updateMask?: FieldMask;
 
   /**
    * The list of quota safety checks to ignore before the override mutation.
@@ -539,7 +539,7 @@ export interface UpdateAdminOverrideRequestSDKType {
    * The new override.
    * Only the override_value is updated; all other fields are ignored.
    */
-  override: QuotaOverrideSDKType;
+  override?: QuotaOverrideSDKType;
 
   /**
    * Whether to force the update of the quota override.
@@ -552,7 +552,7 @@ export interface UpdateAdminOverrideRequestSDKType {
    * Update only the specified fields of the override.
    * If unset, all fields will be updated.
    */
-  update_mask: FieldMaskSDKType;
+  update_mask?: FieldMaskSDKType;
 
   /**
    * The list of quota safety checks to ignore before the override mutation.
@@ -789,7 +789,7 @@ export interface CreateConsumerOverrideRequest {
   parent: string;
 
   /** The override to create. */
-  override: QuotaOverride;
+  override?: QuotaOverride;
 
   /**
    * Whether to force the creation of the quota override.
@@ -819,7 +819,7 @@ export interface CreateConsumerOverrideRequestSDKType {
   parent: string;
 
   /** The override to create. */
-  override: QuotaOverrideSDKType;
+  override?: QuotaOverrideSDKType;
 
   /**
    * Whether to force the creation of the quota override.
@@ -851,7 +851,7 @@ export interface UpdateConsumerOverrideRequest {
    * The new override.
    * Only the override_value is updated; all other fields are ignored.
    */
-  override: QuotaOverride;
+  override?: QuotaOverride;
 
   /**
    * Whether to force the update of the quota override.
@@ -864,7 +864,7 @@ export interface UpdateConsumerOverrideRequest {
    * Update only the specified fields of the override.
    * If unset, all fields will be updated.
    */
-  updateMask: FieldMask;
+  updateMask?: FieldMask;
 
   /**
    * The list of quota safety checks to ignore before the override mutation.
@@ -889,7 +889,7 @@ export interface UpdateConsumerOverrideRequestSDKType {
    * The new override.
    * Only the override_value is updated; all other fields are ignored.
    */
-  override: QuotaOverrideSDKType;
+  override?: QuotaOverrideSDKType;
 
   /**
    * Whether to force the update of the quota override.
@@ -902,7 +902,7 @@ export interface UpdateConsumerOverrideRequestSDKType {
    * Update only the specified fields of the override.
    * If unset, all fields will be updated.
    */
-  update_mask: FieldMaskSDKType;
+  update_mask?: FieldMaskSDKType;
 
   /**
    * The list of quota safety checks to ignore before the override mutation.
@@ -1230,7 +1230,7 @@ export interface GetServiceIdentityResponse {
    * resources. If exists is true, it contains email and unique_id. If exists is
    * false, it contains pre-constructed email and empty unique_id.
    */
-  identity: ServiceIdentity;
+  identity?: ServiceIdentity;
 
   /** Service identity state. */
   state: GetServiceIdentityResponse_IdentityState;
@@ -1243,7 +1243,7 @@ export interface GetServiceIdentityResponseSDKType {
    * resources. If exists is true, it contains email and unique_id. If exists is
    * false, it contains pre-constructed email and empty unique_id.
    */
-  identity: ServiceIdentitySDKType;
+  identity?: ServiceIdentitySDKType;
 
   /** Service identity state. */
   state: GetServiceIdentityResponse_IdentityStateSDKType;

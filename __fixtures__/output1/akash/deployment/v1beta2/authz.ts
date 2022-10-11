@@ -12,7 +12,7 @@ export interface DepositDeploymentAuthorization {
    * SpendLimit is the amount the grantee is authorized to spend from the granter's account for
    * the purpose of deployment.
    */
-  spendLimit: Coin;
+  spendLimit?: Coin;
 }
 
 /**
@@ -24,7 +24,7 @@ export interface DepositDeploymentAuthorizationSDKType {
    * SpendLimit is the amount the grantee is authorized to spend from the granter's account for
    * the purpose of deployment.
    */
-  spend_limit: CoinSDKType;
+  spend_limit?: CoinSDKType;
 }
 
 function createBaseDepositDeploymentAuthorization(): DepositDeploymentAuthorization {

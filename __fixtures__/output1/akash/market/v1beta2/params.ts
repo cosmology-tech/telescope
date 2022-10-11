@@ -5,13 +5,13 @@ export const protobufPackage = "akash.market.v1beta2";
 
 /** Params is the params for the x/market module */
 export interface Params {
-  bidMinDeposit: Coin;
+  bidMinDeposit?: Coin;
   orderMaxBids: number;
 }
 
 /** Params is the params for the x/market module */
 export interface ParamsSDKType {
-  bid_min_deposit: CoinSDKType;
+  bid_min_deposit?: CoinSDKType;
   order_max_bids: number;
 }
 

@@ -20,7 +20,7 @@ export interface MsgCreateProvider {
   owner: string;
   hostUri: string;
   attributes: Attribute[];
-  info: ProviderInfo;
+  info?: ProviderInfo;
 }
 
 /** MsgCreateProvider defines an SDK message for creating a provider */
@@ -28,7 +28,7 @@ export interface MsgCreateProviderSDKType {
   owner: string;
   host_uri: string;
   attributes: AttributeSDKType[];
-  info: ProviderInfoSDKType;
+  info?: ProviderInfoSDKType;
 }
 
 /** MsgCreateProviderResponse defines the Msg/CreateProvider response type. */
@@ -42,7 +42,7 @@ export interface MsgUpdateProvider {
   owner: string;
   hostUri: string;
   attributes: Attribute[];
-  info: ProviderInfo;
+  info?: ProviderInfo;
 }
 
 /** MsgUpdateProvider defines an SDK message for updating a provider */
@@ -50,7 +50,7 @@ export interface MsgUpdateProviderSDKType {
   owner: string;
   host_uri: string;
   attributes: AttributeSDKType[];
-  info: ProviderInfoSDKType;
+  info?: ProviderInfoSDKType;
 }
 
 /** MsgUpdateProviderResponse defines the Msg/UpdateProvider response type. */
@@ -80,7 +80,7 @@ export interface Provider {
   owner: string;
   hostUri: string;
   attributes: Attribute[];
-  info: ProviderInfo;
+  info?: ProviderInfo;
 }
 
 /** Provider stores owner and host details */
@@ -88,7 +88,7 @@ export interface ProviderSDKType {
   owner: string;
   host_uri: string;
   attributes: AttributeSDKType[];
-  info: ProviderInfoSDKType;
+  info?: ProviderInfoSDKType;
 }
 
 function createBaseProviderInfo(): ProviderInfo {

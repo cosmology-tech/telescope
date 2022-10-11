@@ -135,7 +135,7 @@ export interface LogMetric {
    * `metric_descriptor`, but existing labels cannot be modified except for
    * their description.
    */
-  metricDescriptor: MetricDescriptor;
+  metricDescriptor?: MetricDescriptor;
 
   /**
    * Optional. A `value_extractor` is required when using a distribution
@@ -185,21 +185,21 @@ export interface LogMetric {
    * using a DISTRIBUTION value type and it describes the bucket boundaries
    * used to create a histogram of the extracted values.
    */
-  bucketOptions: Distribution_BucketOptions;
+  bucketOptions?: Distribution_BucketOptions;
 
   /**
    * Output only. The creation timestamp of the metric.
    * 
    * This field may not be present for older metrics.
    */
-  createTime: Date;
+  createTime?: Date;
 
   /**
    * Output only. The last update timestamp of the metric.
    * 
    * This field may not be present for older metrics.
    */
-  updateTime: Date;
+  updateTime?: Date;
 
   /**
    * Deprecated. The API version that created or updated this metric.
@@ -283,7 +283,7 @@ export interface LogMetricSDKType {
    * `metric_descriptor`, but existing labels cannot be modified except for
    * their description.
    */
-  metric_descriptor: MetricDescriptorSDKType;
+  metric_descriptor?: MetricDescriptorSDKType;
 
   /**
    * Optional. A `value_extractor` is required when using a distribution
@@ -333,21 +333,21 @@ export interface LogMetricSDKType {
    * using a DISTRIBUTION value type and it describes the bucket boundaries
    * used to create a histogram of the extracted values.
    */
-  bucket_options: Distribution_BucketOptionsSDKType;
+  bucket_options?: Distribution_BucketOptionsSDKType;
 
   /**
    * Output only. The creation timestamp of the metric.
    * 
    * This field may not be present for older metrics.
    */
-  create_time: Date;
+  create_time?: Date;
 
   /**
    * Output only. The last update timestamp of the metric.
    * 
    * This field may not be present for older metrics.
    */
-  update_time: Date;
+  update_time?: Date;
 
   /**
    * Deprecated. The API version that created or updated this metric.
@@ -469,7 +469,7 @@ export interface CreateLogMetricRequest {
    * Required. The new logs-based metric, which must not have an identifier that
    * already exists.
    */
-  metric: LogMetric;
+  metric?: LogMetric;
 }
 
 /** The parameters to CreateLogMetric. */
@@ -487,7 +487,7 @@ export interface CreateLogMetricRequestSDKType {
    * Required. The new logs-based metric, which must not have an identifier that
    * already exists.
    */
-  metric: LogMetricSDKType;
+  metric?: LogMetricSDKType;
 }
 
 /** The parameters to UpdateLogMetric. */
@@ -504,7 +504,7 @@ export interface UpdateLogMetricRequest {
   metricName: string;
 
   /** Required. The updated metric. */
-  metric: LogMetric;
+  metric?: LogMetric;
 }
 
 /** The parameters to UpdateLogMetric. */
@@ -521,7 +521,7 @@ export interface UpdateLogMetricRequestSDKType {
   metric_name: string;
 
   /** Required. The updated metric. */
-  metric: LogMetricSDKType;
+  metric?: LogMetricSDKType;
 }
 
 /** The parameters to DeleteLogMetric. */

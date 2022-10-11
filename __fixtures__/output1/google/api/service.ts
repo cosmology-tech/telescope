@@ -102,25 +102,25 @@ export interface Service {
   enums: Enum[];
 
   /** Additional API documentation. */
-  documentation: Documentation;
+  documentation?: Documentation;
 
   /** API backend configuration. */
-  backend: Backend;
+  backend?: Backend;
 
   /** HTTP configuration. */
-  http: Http;
+  http?: Http;
 
   /** Quota configuration. */
-  quota: Quota;
+  quota?: Quota;
 
   /** Auth configuration. */
-  authentication: Authentication;
+  authentication?: Authentication;
 
   /** Context configuration. */
-  context: Context;
+  context?: Context;
 
   /** Configuration controlling usage of this service. */
-  usage: Usage;
+  usage?: Usage;
 
   /**
    * Configuration for network endpoints.  If this is empty, then an endpoint
@@ -130,7 +130,7 @@ export interface Service {
   endpoints: Endpoint[];
 
   /** Configuration for the service control plane. */
-  control: Control;
+  control?: Control;
 
   /** Defines the logs used by this service. */
   logs: LogDescriptor[];
@@ -145,19 +145,19 @@ export interface Service {
   monitoredResources: MonitoredResourceDescriptor[];
 
   /** Billing configuration. */
-  billing: Billing;
+  billing?: Billing;
 
   /** Logging configuration. */
-  logging: Logging;
+  logging?: Logging;
 
   /** Monitoring configuration. */
-  monitoring: Monitoring;
+  monitoring?: Monitoring;
 
   /** System parameter configuration. */
-  systemParameters: SystemParameters;
+  systemParameters?: SystemParameters;
 
   /** Output only. The source information for this configuration if available. */
-  sourceInfo: SourceInfo;
+  sourceInfo?: SourceInfo;
 
   /**
    * Obsolete. Do not use.
@@ -167,7 +167,7 @@ export interface Service {
    */
 
   /** @deprecated */
-  configVersion: UInt32Value;
+  configVersion?: UInt32Value;
 }
 
 /**
@@ -250,25 +250,25 @@ export interface ServiceSDKType {
   enums: EnumSDKType[];
 
   /** Additional API documentation. */
-  documentation: DocumentationSDKType;
+  documentation?: DocumentationSDKType;
 
   /** API backend configuration. */
-  backend: BackendSDKType;
+  backend?: BackendSDKType;
 
   /** HTTP configuration. */
-  http: HttpSDKType;
+  http?: HttpSDKType;
 
   /** Quota configuration. */
-  quota: QuotaSDKType;
+  quota?: QuotaSDKType;
 
   /** Auth configuration. */
-  authentication: AuthenticationSDKType;
+  authentication?: AuthenticationSDKType;
 
   /** Context configuration. */
-  context: ContextSDKType;
+  context?: ContextSDKType;
 
   /** Configuration controlling usage of this service. */
-  usage: UsageSDKType;
+  usage?: UsageSDKType;
 
   /**
    * Configuration for network endpoints.  If this is empty, then an endpoint
@@ -278,7 +278,7 @@ export interface ServiceSDKType {
   endpoints: EndpointSDKType[];
 
   /** Configuration for the service control plane. */
-  control: ControlSDKType;
+  control?: ControlSDKType;
 
   /** Defines the logs used by this service. */
   logs: LogDescriptorSDKType[];
@@ -293,19 +293,19 @@ export interface ServiceSDKType {
   monitored_resources: MonitoredResourceDescriptorSDKType[];
 
   /** Billing configuration. */
-  billing: BillingSDKType;
+  billing?: BillingSDKType;
 
   /** Logging configuration. */
-  logging: LoggingSDKType;
+  logging?: LoggingSDKType;
 
   /** Monitoring configuration. */
-  monitoring: MonitoringSDKType;
+  monitoring?: MonitoringSDKType;
 
   /** System parameter configuration. */
-  system_parameters: SystemParametersSDKType;
+  system_parameters?: SystemParametersSDKType;
 
   /** Output only. The source information for this configuration if available. */
-  source_info: SourceInfoSDKType;
+  source_info?: SourceInfoSDKType;
 
   /**
    * Obsolete. Do not use.
@@ -315,7 +315,7 @@ export interface ServiceSDKType {
    */
 
   /** @deprecated */
-  config_version: UInt32ValueSDKType;
+  config_version?: UInt32ValueSDKType;
 }
 
 function createBaseService(): Service {

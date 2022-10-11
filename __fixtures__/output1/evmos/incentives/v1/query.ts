@@ -63,7 +63,7 @@ export interface QueryIncentiveRequestSDKType {
  * method.
  */
 export interface QueryIncentiveResponse {
-  incentive: Incentive;
+  incentive?: Incentive;
 }
 
 /**
@@ -71,7 +71,7 @@ export interface QueryIncentiveResponse {
  * method.
  */
 export interface QueryIncentiveResponseSDKType {
-  incentive: IncentiveSDKType;
+  incentive?: IncentiveSDKType;
 }
 
 /**
@@ -225,7 +225,7 @@ export interface QueryAllocationMeterRequestSDKType {
  * Query/AllocationMeter RPC method.
  */
 export interface QueryAllocationMeterResponse {
-  allocationMeter: DecCoin;
+  allocationMeter?: DecCoin;
 }
 
 /**
@@ -233,7 +233,7 @@ export interface QueryAllocationMeterResponse {
  * Query/AllocationMeter RPC method.
  */
 export interface QueryAllocationMeterResponseSDKType {
-  allocation_meter: DecCoinSDKType;
+  allocation_meter?: DecCoinSDKType;
 }
 
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
@@ -247,7 +247,7 @@ export interface QueryParamsRequestSDKType {}
  * method.
  */
 export interface QueryParamsResponse {
-  params: Params;
+  params?: Params;
 }
 
 /**
@@ -255,7 +255,7 @@ export interface QueryParamsResponse {
  * method.
  */
 export interface QueryParamsResponseSDKType {
-  params: ParamsSDKType;
+  params?: ParamsSDKType;
 }
 
 function createBaseQueryIncentivesRequest(): QueryIncentivesRequest {

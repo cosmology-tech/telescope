@@ -31,14 +31,14 @@ export interface MetricValue {
    * documentation in the service configuration for details. If not specified,
    * [google.api.servicecontrol.v1.Operation.start_time][google.api.servicecontrol.v1.Operation.start_time] will be used.
    */
-  startTime: Date;
+  startTime?: Date;
 
   /**
    * The end of the time period over which this metric value's measurement
    * applies.  If not specified,
    * [google.api.servicecontrol.v1.Operation.end_time][google.api.servicecontrol.v1.Operation.end_time] will be used.
    */
-  endTime: Date;
+  endTime?: Date;
 
   /** A boolean value. */
   boolValue?: boolean;
@@ -75,14 +75,14 @@ export interface MetricValueSDKType {
    * documentation in the service configuration for details. If not specified,
    * [google.api.servicecontrol.v1.Operation.start_time][google.api.servicecontrol.v1.Operation.start_time] will be used.
    */
-  start_time: Date;
+  start_time?: Date;
 
   /**
    * The end of the time period over which this metric value's measurement
    * applies.  If not specified,
    * [google.api.servicecontrol.v1.Operation.end_time][google.api.servicecontrol.v1.Operation.end_time] will be used.
    */
-  end_time: Date;
+  end_time?: Date;
 
   /** A boolean value. */
   bool_value?: boolean;

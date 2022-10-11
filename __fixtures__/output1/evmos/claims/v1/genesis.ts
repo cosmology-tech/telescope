@@ -8,7 +8,7 @@ export const protobufPackage = "evmos.claims.v1";
 /** GenesisState define the claims module's genesis state. */
 export interface GenesisState {
   /** params defines all the parameters of the module. */
-  params: Params;
+  params?: Params;
 
   /** list of claim records with the corresponding airdrop recipient */
   claimsRecords: ClaimsRecordAddress[];
@@ -17,7 +17,7 @@ export interface GenesisState {
 /** GenesisState define the claims module's genesis state. */
 export interface GenesisStateSDKType {
   /** params defines all the parameters of the module. */
-  params: ParamsSDKType;
+  params?: ParamsSDKType;
 
   /** list of claim records with the corresponding airdrop recipient */
   claims_records: ClaimsRecordAddressSDKType[];
@@ -29,13 +29,13 @@ export interface Params {
   enableClaims: boolean;
 
   /** timestamp of the airdrop start */
-  airdropStartTime: Date;
+  airdropStartTime?: Date;
 
   /** duration until decay of claimable tokens begin */
-  durationUntilDecay: Duration;
+  durationUntilDecay?: Duration;
 
   /** duration of the token claim decay period */
-  durationOfDecay: Duration;
+  durationOfDecay?: Duration;
 
   /** denom of claimable coin */
   claimsDenom: string;
@@ -56,13 +56,13 @@ export interface ParamsSDKType {
   enable_claims: boolean;
 
   /** timestamp of the airdrop start */
-  airdrop_start_time: Date;
+  airdrop_start_time?: Date;
 
   /** duration until decay of claimable tokens begin */
-  duration_until_decay: DurationSDKType;
+  duration_until_decay?: DurationSDKType;
 
   /** duration of the token claim decay period */
-  duration_of_decay: DurationSDKType;
+  duration_of_decay?: DurationSDKType;
 
   /** denom of claimable coin */
   claims_denom: string;

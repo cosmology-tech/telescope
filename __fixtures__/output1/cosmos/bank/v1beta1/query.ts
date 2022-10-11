@@ -26,13 +26,13 @@ export interface QueryBalanceRequestSDKType {
 /** QueryBalanceResponse is the response type for the Query/Balance RPC method. */
 export interface QueryBalanceResponse {
   /** balance is the balance of the coin. */
-  balance: Coin;
+  balance?: Coin;
 }
 
 /** QueryBalanceResponse is the response type for the Query/Balance RPC method. */
 export interface QueryBalanceResponseSDKType {
   /** balance is the balance of the coin. */
-  balance: CoinSDKType;
+  balance?: CoinSDKType;
 }
 
 /** QueryBalanceRequest is the request type for the Query/AllBalances RPC method. */
@@ -198,13 +198,13 @@ export interface QuerySupplyOfRequestSDKType {
 /** QuerySupplyOfResponse is the response type for the Query/SupplyOf RPC method. */
 export interface QuerySupplyOfResponse {
   /** amount is the supply of the coin. */
-  amount: Coin;
+  amount?: Coin;
 }
 
 /** QuerySupplyOfResponse is the response type for the Query/SupplyOf RPC method. */
 export interface QuerySupplyOfResponseSDKType {
   /** amount is the supply of the coin. */
-  amount: CoinSDKType;
+  amount?: CoinSDKType;
 }
 
 /** QueryParamsRequest defines the request type for querying x/bank parameters. */
@@ -215,12 +215,12 @@ export interface QueryParamsRequestSDKType {}
 
 /** QueryParamsResponse defines the response type for querying x/bank parameters. */
 export interface QueryParamsResponse {
-  params: Params;
+  params?: Params;
 }
 
 /** QueryParamsResponse defines the response type for querying x/bank parameters. */
 export interface QueryParamsResponseSDKType {
-  params: ParamsSDKType;
+  params?: ParamsSDKType;
 }
 
 /** QueryDenomsMetadataRequest is the request type for the Query/DenomsMetadata RPC method. */
@@ -277,7 +277,7 @@ export interface QueryDenomMetadataRequestSDKType {
  */
 export interface QueryDenomMetadataResponse {
   /** metadata describes and provides all the client information for the requested token. */
-  metadata: Metadata;
+  metadata?: Metadata;
 }
 
 /**
@@ -286,7 +286,7 @@ export interface QueryDenomMetadataResponse {
  */
 export interface QueryDenomMetadataResponseSDKType {
   /** metadata describes and provides all the client information for the requested token. */
-  metadata: MetadataSDKType;
+  metadata?: MetadataSDKType;
 }
 
 /**
@@ -325,7 +325,7 @@ export interface DenomOwner {
   address: string;
 
   /** balance is the balance of the denominated coin for an account. */
-  balance: Coin;
+  balance?: Coin;
 }
 
 /**
@@ -338,7 +338,7 @@ export interface DenomOwnerSDKType {
   address: string;
 
   /** balance is the balance of the denominated coin for an account. */
-  balance: CoinSDKType;
+  balance?: CoinSDKType;
 }
 
 /** QueryDenomOwnersResponse defines the RPC response of a DenomOwners RPC query. */

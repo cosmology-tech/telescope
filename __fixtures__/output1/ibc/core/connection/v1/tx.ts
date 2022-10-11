@@ -11,8 +11,8 @@ export const protobufPackage = "ibc.core.connection.v1";
  */
 export interface MsgConnectionOpenInit {
   clientId: string;
-  counterparty: Counterparty;
-  version: Version;
+  counterparty?: Counterparty;
+  version?: Version;
   delayPeriod: Long;
   signer: string;
 }
@@ -23,8 +23,8 @@ export interface MsgConnectionOpenInit {
  */
 export interface MsgConnectionOpenInitSDKType {
   client_id: string;
-  counterparty: CounterpartySDKType;
-  version: VersionSDKType;
+  counterparty?: CounterpartySDKType;
+  version?: VersionSDKType;
   delay_period: Long;
   signer: string;
 }
@@ -53,11 +53,11 @@ export interface MsgConnectionOpenTry {
    * the connection identifier of the previous connection in state INIT
    */
   previousConnectionId: string;
-  clientState: Any;
-  counterparty: Counterparty;
+  clientState?: Any;
+  counterparty?: Counterparty;
   delayPeriod: Long;
   counterpartyVersions: Version[];
-  proofHeight: Height;
+  proofHeight?: Height;
 
   /**
    * proof of the initialization the connection on Chain A: `UNITIALIZED ->
@@ -70,7 +70,7 @@ export interface MsgConnectionOpenTry {
 
   /** proof of client consensus state */
   proofConsensus: Uint8Array;
-  consensusHeight: Height;
+  consensusHeight?: Height;
   signer: string;
 }
 
@@ -86,11 +86,11 @@ export interface MsgConnectionOpenTrySDKType {
    * the connection identifier of the previous connection in state INIT
    */
   previous_connection_id: string;
-  client_state: AnySDKType;
-  counterparty: CounterpartySDKType;
+  client_state?: AnySDKType;
+  counterparty?: CounterpartySDKType;
   delay_period: Long;
   counterparty_versions: VersionSDKType[];
-  proof_height: HeightSDKType;
+  proof_height?: HeightSDKType;
 
   /**
    * proof of the initialization the connection on Chain A: `UNITIALIZED ->
@@ -103,7 +103,7 @@ export interface MsgConnectionOpenTrySDKType {
 
   /** proof of client consensus state */
   proof_consensus: Uint8Array;
-  consensus_height: HeightSDKType;
+  consensus_height?: HeightSDKType;
   signer: string;
 }
 
@@ -120,9 +120,9 @@ export interface MsgConnectionOpenTryResponseSDKType {}
 export interface MsgConnectionOpenAck {
   connectionId: string;
   counterpartyConnectionId: string;
-  version: Version;
-  clientState: Any;
-  proofHeight: Height;
+  version?: Version;
+  clientState?: Any;
+  proofHeight?: Height;
 
   /**
    * proof of the initialization the connection on Chain B: `UNITIALIZED ->
@@ -135,7 +135,7 @@ export interface MsgConnectionOpenAck {
 
   /** proof of client consensus state */
   proofConsensus: Uint8Array;
-  consensusHeight: Height;
+  consensusHeight?: Height;
   signer: string;
 }
 
@@ -146,9 +146,9 @@ export interface MsgConnectionOpenAck {
 export interface MsgConnectionOpenAckSDKType {
   connection_id: string;
   counterparty_connection_id: string;
-  version: VersionSDKType;
-  client_state: AnySDKType;
-  proof_height: HeightSDKType;
+  version?: VersionSDKType;
+  client_state?: AnySDKType;
+  proof_height?: HeightSDKType;
 
   /**
    * proof of the initialization the connection on Chain B: `UNITIALIZED ->
@@ -161,7 +161,7 @@ export interface MsgConnectionOpenAckSDKType {
 
   /** proof of client consensus state */
   proof_consensus: Uint8Array;
-  consensus_height: HeightSDKType;
+  consensus_height?: HeightSDKType;
   signer: string;
 }
 
@@ -180,7 +180,7 @@ export interface MsgConnectionOpenConfirm {
 
   /** proof for the change of the connection state on Chain A: `INIT -> OPEN` */
   proofAck: Uint8Array;
-  proofHeight: Height;
+  proofHeight?: Height;
   signer: string;
 }
 
@@ -193,7 +193,7 @@ export interface MsgConnectionOpenConfirmSDKType {
 
   /** proof for the change of the connection state on Chain A: `INIT -> OPEN` */
   proof_ack: Uint8Array;
-  proof_height: HeightSDKType;
+  proof_height?: HeightSDKType;
   signer: string;
 }
 

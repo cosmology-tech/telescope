@@ -62,7 +62,7 @@ export interface MsgCreateDenomResponseSDKType {
  */
 export interface MsgMint {
   sender: string;
-  amount: Coin;
+  amount?: Coin;
 }
 
 /**
@@ -71,7 +71,7 @@ export interface MsgMint {
  */
 export interface MsgMintSDKType {
   sender: string;
-  amount: CoinSDKType;
+  amount?: CoinSDKType;
 }
 export interface MsgMintResponse {}
 export interface MsgMintResponseSDKType {}
@@ -82,7 +82,7 @@ export interface MsgMintResponseSDKType {}
  */
 export interface MsgBurn {
   sender: string;
-  amount: Coin;
+  amount?: Coin;
 }
 
 /**
@@ -91,7 +91,7 @@ export interface MsgBurn {
  */
 export interface MsgBurnSDKType {
   sender: string;
-  amount: CoinSDKType;
+  amount?: CoinSDKType;
 }
 export interface MsgBurnResponse {}
 export interface MsgBurnResponseSDKType {}
@@ -134,7 +134,7 @@ export interface MsgChangeAdminResponseSDKType {}
  */
 export interface MsgSetDenomMetadata {
   sender: string;
-  metadata: Metadata;
+  metadata?: Metadata;
 }
 
 /**
@@ -143,7 +143,7 @@ export interface MsgSetDenomMetadata {
  */
 export interface MsgSetDenomMetadataSDKType {
   sender: string;
-  metadata: MetadataSDKType;
+  metadata?: MetadataSDKType;
 }
 
 /**

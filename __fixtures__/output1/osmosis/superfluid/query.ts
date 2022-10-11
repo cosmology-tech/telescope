@@ -11,11 +11,11 @@ export interface QueryParamsRequest {}
 export interface QueryParamsRequestSDKType {}
 export interface QueryParamsResponse {
   /** params defines the parameters of the module. */
-  params: Params;
+  params?: Params;
 }
 export interface QueryParamsResponseSDKType {
   /** params defines the parameters of the module. */
-  params: ParamsSDKType;
+  params?: ParamsSDKType;
 }
 export interface AssetTypeRequest {
   denom?: string;
@@ -44,10 +44,10 @@ export interface AssetMultiplierRequestSDKType {
   denom?: string;
 }
 export interface AssetMultiplierResponse {
-  osmoEquivalentMultiplier: OsmoEquivalentMultiplierRecord;
+  osmoEquivalentMultiplier?: OsmoEquivalentMultiplierRecord;
 }
 export interface AssetMultiplierResponseSDKType {
-  osmo_equivalent_multiplier: OsmoEquivalentMultiplierRecordSDKType;
+  osmo_equivalent_multiplier?: OsmoEquivalentMultiplierRecordSDKType;
 }
 export interface SuperfluidIntermediaryAccountInfo {
   denom: string;
@@ -82,10 +82,10 @@ export interface ConnectedIntermediaryAccountRequestSDKType {
   lock_id: Long;
 }
 export interface ConnectedIntermediaryAccountResponse {
-  account: SuperfluidIntermediaryAccountInfo;
+  account?: SuperfluidIntermediaryAccountInfo;
 }
 export interface ConnectedIntermediaryAccountResponseSDKType {
-  account: SuperfluidIntermediaryAccountInfoSDKType;
+  account?: SuperfluidIntermediaryAccountInfoSDKType;
 }
 export interface TotalSuperfluidDelegationsRequest {}
 export interface TotalSuperfluidDelegationsRequestSDKType {}
@@ -120,12 +120,12 @@ export interface SuperfluidDelegationsByDelegatorRequestSDKType {
 export interface SuperfluidDelegationsByDelegatorResponse {
   superfluidDelegationRecords: SuperfluidDelegationRecord[];
   totalDelegatedCoins: Coin[];
-  totalEquivalentStakedAmount: Coin;
+  totalEquivalentStakedAmount?: Coin;
 }
 export interface SuperfluidDelegationsByDelegatorResponseSDKType {
   superfluid_delegation_records: SuperfluidDelegationRecordSDKType[];
   total_delegated_coins: CoinSDKType[];
-  total_equivalent_staked_amount: CoinSDKType;
+  total_equivalent_staked_amount?: CoinSDKType;
 }
 export interface SuperfluidUndelegationsByDelegatorRequest {
   delegatorAddress: string;
@@ -183,13 +183,13 @@ export interface QueryTotalDelegationByDelegatorResponse {
   superfluidDelegationRecords: SuperfluidDelegationRecord[];
   delegationResponse: DelegationResponse[];
   totalDelegatedCoins: Coin[];
-  totalEquivalentStakedAmount: Coin;
+  totalEquivalentStakedAmount?: Coin;
 }
 export interface QueryTotalDelegationByDelegatorResponseSDKType {
   superfluid_delegation_records: SuperfluidDelegationRecordSDKType[];
   delegation_response: DelegationResponseSDKType[];
   total_delegated_coins: CoinSDKType[];
-  total_equivalent_staked_amount: CoinSDKType;
+  total_equivalent_staked_amount?: CoinSDKType;
 }
 
 function createBaseQueryParamsRequest(): QueryParamsRequest {

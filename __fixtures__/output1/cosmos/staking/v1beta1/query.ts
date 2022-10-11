@@ -55,13 +55,13 @@ export interface QueryValidatorRequestSDKType {
 /** QueryValidatorResponse is response type for the Query/Validator RPC method */
 export interface QueryValidatorResponse {
   /** validator defines the the validator info. */
-  validator: Validator;
+  validator?: Validator;
 }
 
 /** QueryValidatorResponse is response type for the Query/Validator RPC method */
 export interface QueryValidatorResponseSDKType {
   /** validator defines the the validator info. */
-  validator: ValidatorSDKType;
+  validator?: ValidatorSDKType;
 }
 
 /**
@@ -177,13 +177,13 @@ export interface QueryDelegationRequestSDKType {
 /** QueryDelegationResponse is response type for the Query/Delegation RPC method. */
 export interface QueryDelegationResponse {
   /** delegation_responses defines the delegation info of a delegation. */
-  delegationResponse: DelegationResponse;
+  delegationResponse?: DelegationResponse;
 }
 
 /** QueryDelegationResponse is response type for the Query/Delegation RPC method. */
 export interface QueryDelegationResponseSDKType {
   /** delegation_responses defines the delegation info of a delegation. */
-  delegation_response: DelegationResponseSDKType;
+  delegation_response?: DelegationResponseSDKType;
 }
 
 /**
@@ -216,7 +216,7 @@ export interface QueryUnbondingDelegationRequestSDKType {
  */
 export interface QueryUnbondingDelegationResponse {
   /** unbond defines the unbonding information of a delegation. */
-  unbond: UnbondingDelegation;
+  unbond?: UnbondingDelegation;
 }
 
 /**
@@ -225,7 +225,7 @@ export interface QueryUnbondingDelegationResponse {
  */
 export interface QueryUnbondingDelegationResponseSDKType {
   /** unbond defines the unbonding information of a delegation. */
-  unbond: UnbondingDelegationSDKType;
+  unbond?: UnbondingDelegationSDKType;
 }
 
 /**
@@ -458,7 +458,7 @@ export interface QueryDelegatorValidatorRequestSDKType {
  */
 export interface QueryDelegatorValidatorResponse {
   /** validator defines the the validator info. */
-  validator: Validator;
+  validator?: Validator;
 }
 
 /**
@@ -467,7 +467,7 @@ export interface QueryDelegatorValidatorResponse {
  */
 export interface QueryDelegatorValidatorResponseSDKType {
   /** validator defines the the validator info. */
-  validator: ValidatorSDKType;
+  validator?: ValidatorSDKType;
 }
 
 /**
@@ -494,7 +494,7 @@ export interface QueryHistoricalInfoRequestSDKType {
  */
 export interface QueryHistoricalInfoResponse {
   /** hist defines the historical info at the given height. */
-  hist: HistoricalInfo;
+  hist?: HistoricalInfo;
 }
 
 /**
@@ -503,7 +503,7 @@ export interface QueryHistoricalInfoResponse {
  */
 export interface QueryHistoricalInfoResponseSDKType {
   /** hist defines the historical info at the given height. */
-  hist: HistoricalInfoSDKType;
+  hist?: HistoricalInfoSDKType;
 }
 
 /** QueryPoolRequest is request type for the Query/Pool RPC method. */
@@ -515,13 +515,13 @@ export interface QueryPoolRequestSDKType {}
 /** QueryPoolResponse is response type for the Query/Pool RPC method. */
 export interface QueryPoolResponse {
   /** pool defines the pool info. */
-  pool: Pool;
+  pool?: Pool;
 }
 
 /** QueryPoolResponse is response type for the Query/Pool RPC method. */
 export interface QueryPoolResponseSDKType {
   /** pool defines the pool info. */
-  pool: PoolSDKType;
+  pool?: PoolSDKType;
 }
 
 /** QueryParamsRequest is request type for the Query/Params RPC method. */
@@ -533,13 +533,13 @@ export interface QueryParamsRequestSDKType {}
 /** QueryParamsResponse is response type for the Query/Params RPC method. */
 export interface QueryParamsResponse {
   /** params holds all the parameters of this module. */
-  params: Params;
+  params?: Params;
 }
 
 /** QueryParamsResponse is response type for the Query/Params RPC method. */
 export interface QueryParamsResponseSDKType {
   /** params holds all the parameters of this module. */
-  params: ParamsSDKType;
+  params?: ParamsSDKType;
 }
 
 function createBaseQueryValidatorsRequest(): QueryValidatorsRequest {

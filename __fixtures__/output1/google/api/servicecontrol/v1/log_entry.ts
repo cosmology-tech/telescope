@@ -27,7 +27,7 @@ export interface LogEntry {
    * The time the event described by the log entry occurred. If
    * omitted, defaults to operation start time.
    */
-  timestamp: Date;
+  timestamp?: Date;
 
   /**
    * The severity of the log entry. The default value is
@@ -39,7 +39,7 @@ export interface LogEntry {
    * Optional. Information about the HTTP request associated with this
    * log entry, if applicable.
    */
-  httpRequest: HttpRequest;
+  httpRequest?: HttpRequest;
 
   /**
    * Optional. Resource name of the trace associated with the log entry, if any.
@@ -83,13 +83,13 @@ export interface LogEntry {
    * Optional. Information about an operation associated with the log entry, if
    * applicable.
    */
-  operation: LogEntryOperation;
+  operation?: LogEntryOperation;
 
   /**
    * Optional. Source code location information associated with the log entry,
    * if any.
    */
-  sourceLocation: LogEntrySourceLocation;
+  sourceLocation?: LogEntrySourceLocation;
 }
 
 /** An individual log entry. */
@@ -104,7 +104,7 @@ export interface LogEntrySDKType {
    * The time the event described by the log entry occurred. If
    * omitted, defaults to operation start time.
    */
-  timestamp: Date;
+  timestamp?: Date;
 
   /**
    * The severity of the log entry. The default value is
@@ -116,7 +116,7 @@ export interface LogEntrySDKType {
    * Optional. Information about the HTTP request associated with this
    * log entry, if applicable.
    */
-  http_request: HttpRequestSDKType;
+  http_request?: HttpRequestSDKType;
 
   /**
    * Optional. Resource name of the trace associated with the log entry, if any.
@@ -160,13 +160,13 @@ export interface LogEntrySDKType {
    * Optional. Information about an operation associated with the log entry, if
    * applicable.
    */
-  operation: LogEntryOperationSDKType;
+  operation?: LogEntryOperationSDKType;
 
   /**
    * Optional. Source code location information associated with the log entry,
    * if any.
    */
-  source_location: LogEntrySourceLocationSDKType;
+  source_location?: LogEntrySourceLocationSDKType;
 }
 
 /**

@@ -43,16 +43,16 @@ export interface QueryDeploymentRequestSDKType {
 
 /** QueryDeploymentResponse is response type for the Query/Deployment RPC method */
 export interface QueryDeploymentResponse {
-  deployment: Deployment | undefined;
+  deployment?: Deployment | undefined;
   groups: Group[];
-  escrowAccount: Account | undefined;
+  escrowAccount?: Account | undefined;
 }
 
 /** QueryDeploymentResponse is response type for the Query/Deployment RPC method */
 export interface QueryDeploymentResponseSDKType {
-  deployment: DeploymentSDKType | undefined;
+  deployment?: DeploymentSDKType | undefined;
   groups: GroupSDKType[];
-  escrow_account: AccountSDKType | undefined;
+  escrow_account?: AccountSDKType | undefined;
 }
 
 /** QueryGroupRequest is request type for the Query/Group RPC method */
@@ -67,12 +67,12 @@ export interface QueryGroupRequestSDKType {
 
 /** QueryGroupResponse is response type for the Query/Group RPC method */
 export interface QueryGroupResponse {
-  group: Group | undefined;
+  group?: Group | undefined;
 }
 
 /** QueryGroupResponse is response type for the Query/Group RPC method */
 export interface QueryGroupResponseSDKType {
-  group: GroupSDKType | undefined;
+  group?: GroupSDKType | undefined;
 }
 
 function createBaseQueryDeploymentsRequest(): QueryDeploymentsRequest {

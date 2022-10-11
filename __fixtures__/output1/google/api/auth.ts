@@ -86,7 +86,7 @@ export interface AuthenticationRule {
   selector: string;
 
   /** The requirements for OAuth credentials. */
-  oauth: OAuthRequirements;
+  oauth?: OAuthRequirements;
 
   /**
    * If true, the service accepts API keys without any other credential.
@@ -118,7 +118,7 @@ export interface AuthenticationRuleSDKType {
   selector: string;
 
   /** The requirements for OAuth credentials. */
-  oauth: OAuthRequirementsSDKType;
+  oauth?: OAuthRequirementsSDKType;
 
   /**
    * If true, the service accepts API keys without any other credential.

@@ -47,7 +47,7 @@ export interface MsgSubmitProposalResponseSDKType {
  */
 export interface MsgExecLegacyContent {
   /** content is the proposal's content. */
-  content: Any;
+  content?: Any;
 
   /** authority must be the gov module address. */
   authority: string;
@@ -59,7 +59,7 @@ export interface MsgExecLegacyContent {
  */
 export interface MsgExecLegacyContentSDKType {
   /** content is the proposal's content. */
-  content: AnySDKType;
+  content?: AnySDKType;
 
   /** authority must be the gov module address. */
   authority: string;

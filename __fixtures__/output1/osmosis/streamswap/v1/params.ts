@@ -19,10 +19,10 @@ export interface Params {
    * minimum amount duration of time between the sale creation and the sale
    * start time.
    */
-  minDurationUntilStartTime: Duration;
+  minDurationUntilStartTime?: Duration;
 
   /** minimum duration for every new sale. */
-  minSaleDuration: Duration;
+  minSaleDuration?: Duration;
 }
 
 /** Params holds parameters for the streamswap module */
@@ -40,10 +40,10 @@ export interface ParamsSDKType {
    * minimum amount duration of time between the sale creation and the sale
    * start time.
    */
-  min_duration_until_start_time: DurationSDKType;
+  min_duration_until_start_time?: DurationSDKType;
 
   /** minimum duration for every new sale. */
-  min_sale_duration: DurationSDKType;
+  min_sale_duration?: DurationSDKType;
 }
 
 function createBaseParams(): Params {

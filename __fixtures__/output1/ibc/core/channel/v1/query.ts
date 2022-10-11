@@ -31,13 +31,13 @@ export interface QueryChannelRequestSDKType {
  */
 export interface QueryChannelResponse {
   /** channel associated with the request identifiers */
-  channel: Channel;
+  channel?: Channel;
 
   /** merkle proof of existence */
   proof: Uint8Array;
 
   /** height at which the proof was retrieved */
-  proofHeight: Height;
+  proofHeight?: Height;
 }
 
 /**
@@ -47,13 +47,13 @@ export interface QueryChannelResponse {
  */
 export interface QueryChannelResponseSDKType {
   /** channel associated with the request identifiers */
-  channel: ChannelSDKType;
+  channel?: ChannelSDKType;
 
   /** merkle proof of existence */
   proof: Uint8Array;
 
   /** height at which the proof was retrieved */
-  proof_height: HeightSDKType;
+  proof_height?: HeightSDKType;
 }
 
 /** QueryChannelsRequest is the request type for the Query/Channels RPC method */
@@ -77,7 +77,7 @@ export interface QueryChannelsResponse {
   pagination?: PageResponse;
 
   /** query block height */
-  height: Height;
+  height?: Height;
 }
 
 /** QueryChannelsResponse is the response type for the Query/Channels RPC method. */
@@ -89,7 +89,7 @@ export interface QueryChannelsResponseSDKType {
   pagination?: PageResponseSDKType;
 
   /** query block height */
-  height: HeightSDKType;
+  height?: HeightSDKType;
 }
 
 /**
@@ -128,7 +128,7 @@ export interface QueryConnectionChannelsResponse {
   pagination?: PageResponse;
 
   /** query block height */
-  height: Height;
+  height?: Height;
 }
 
 /**
@@ -143,7 +143,7 @@ export interface QueryConnectionChannelsResponseSDKType {
   pagination?: PageResponseSDKType;
 
   /** query block height */
-  height: HeightSDKType;
+  height?: HeightSDKType;
 }
 
 /**
@@ -176,13 +176,13 @@ export interface QueryChannelClientStateRequestSDKType {
  */
 export interface QueryChannelClientStateResponse {
   /** client state associated with the channel */
-  identifiedClientState: IdentifiedClientState;
+  identifiedClientState?: IdentifiedClientState;
 
   /** merkle proof of existence */
   proof: Uint8Array;
 
   /** height at which the proof was retrieved */
-  proofHeight: Height;
+  proofHeight?: Height;
 }
 
 /**
@@ -191,13 +191,13 @@ export interface QueryChannelClientStateResponse {
  */
 export interface QueryChannelClientStateResponseSDKType {
   /** client state associated with the channel */
-  identified_client_state: IdentifiedClientStateSDKType;
+  identified_client_state?: IdentifiedClientStateSDKType;
 
   /** merkle proof of existence */
   proof: Uint8Array;
 
   /** height at which the proof was retrieved */
-  proof_height: HeightSDKType;
+  proof_height?: HeightSDKType;
 }
 
 /**
@@ -242,7 +242,7 @@ export interface QueryChannelConsensusStateRequestSDKType {
  */
 export interface QueryChannelConsensusStateResponse {
   /** consensus state associated with the channel */
-  consensusState: Any;
+  consensusState?: Any;
 
   /** client ID associated with the consensus state */
   clientId: string;
@@ -251,7 +251,7 @@ export interface QueryChannelConsensusStateResponse {
   proof: Uint8Array;
 
   /** height at which the proof was retrieved */
-  proofHeight: Height;
+  proofHeight?: Height;
 }
 
 /**
@@ -260,7 +260,7 @@ export interface QueryChannelConsensusStateResponse {
  */
 export interface QueryChannelConsensusStateResponseSDKType {
   /** consensus state associated with the channel */
-  consensus_state: AnySDKType;
+  consensus_state?: AnySDKType;
 
   /** client ID associated with the consensus state */
   client_id: string;
@@ -269,7 +269,7 @@ export interface QueryChannelConsensusStateResponseSDKType {
   proof: Uint8Array;
 
   /** height at which the proof was retrieved */
-  proof_height: HeightSDKType;
+  proof_height?: HeightSDKType;
 }
 
 /**
@@ -315,7 +315,7 @@ export interface QueryPacketCommitmentResponse {
   proof: Uint8Array;
 
   /** height at which the proof was retrieved */
-  proofHeight: Height;
+  proofHeight?: Height;
 }
 
 /**
@@ -331,7 +331,7 @@ export interface QueryPacketCommitmentResponseSDKType {
   proof: Uint8Array;
 
   /** height at which the proof was retrieved */
-  proof_height: HeightSDKType;
+  proof_height?: HeightSDKType;
 }
 
 /**
@@ -375,7 +375,7 @@ export interface QueryPacketCommitmentsResponse {
   pagination?: PageResponse;
 
   /** query block height */
-  height: Height;
+  height?: Height;
 }
 
 /**
@@ -389,7 +389,7 @@ export interface QueryPacketCommitmentsResponseSDKType {
   pagination?: PageResponseSDKType;
 
   /** query block height */
-  height: HeightSDKType;
+  height?: HeightSDKType;
 }
 
 /**
@@ -435,7 +435,7 @@ export interface QueryPacketReceiptResponse {
   proof: Uint8Array;
 
   /** height at which the proof was retrieved */
-  proofHeight: Height;
+  proofHeight?: Height;
 }
 
 /**
@@ -451,7 +451,7 @@ export interface QueryPacketReceiptResponseSDKType {
   proof: Uint8Array;
 
   /** height at which the proof was retrieved */
-  proof_height: HeightSDKType;
+  proof_height?: HeightSDKType;
 }
 
 /**
@@ -497,7 +497,7 @@ export interface QueryPacketAcknowledgementResponse {
   proof: Uint8Array;
 
   /** height at which the proof was retrieved */
-  proofHeight: Height;
+  proofHeight?: Height;
 }
 
 /**
@@ -513,7 +513,7 @@ export interface QueryPacketAcknowledgementResponseSDKType {
   proof: Uint8Array;
 
   /** height at which the proof was retrieved */
-  proof_height: HeightSDKType;
+  proof_height?: HeightSDKType;
 }
 
 /**
@@ -563,7 +563,7 @@ export interface QueryPacketAcknowledgementsResponse {
   pagination?: PageResponse;
 
   /** query block height */
-  height: Height;
+  height?: Height;
 }
 
 /**
@@ -577,7 +577,7 @@ export interface QueryPacketAcknowledgementsResponseSDKType {
   pagination?: PageResponseSDKType;
 
   /** query block height */
-  height: HeightSDKType;
+  height?: HeightSDKType;
 }
 
 /**
@@ -619,7 +619,7 @@ export interface QueryUnreceivedPacketsResponse {
   sequences: Long[];
 
   /** query block height */
-  height: Height;
+  height?: Height;
 }
 
 /**
@@ -631,7 +631,7 @@ export interface QueryUnreceivedPacketsResponseSDKType {
   sequences: Long[];
 
   /** query block height */
-  height: HeightSDKType;
+  height?: HeightSDKType;
 }
 
 /**
@@ -673,7 +673,7 @@ export interface QueryUnreceivedAcksResponse {
   sequences: Long[];
 
   /** query block height */
-  height: Height;
+  height?: Height;
 }
 
 /**
@@ -685,7 +685,7 @@ export interface QueryUnreceivedAcksResponseSDKType {
   sequences: Long[];
 
   /** query block height */
-  height: HeightSDKType;
+  height?: HeightSDKType;
 }
 
 /**
@@ -724,7 +724,7 @@ export interface QueryNextSequenceReceiveResponse {
   proof: Uint8Array;
 
   /** height at which the proof was retrieved */
-  proofHeight: Height;
+  proofHeight?: Height;
 }
 
 /**
@@ -739,7 +739,7 @@ export interface QueryNextSequenceReceiveResponseSDKType {
   proof: Uint8Array;
 
   /** height at which the proof was retrieved */
-  proof_height: HeightSDKType;
+  proof_height?: HeightSDKType;
 }
 
 function createBaseQueryChannelRequest(): QueryChannelRequest {

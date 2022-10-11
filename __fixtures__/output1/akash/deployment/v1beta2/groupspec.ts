@@ -7,14 +7,14 @@ export const protobufPackage = "akash.deployment.v1beta2";
 /** GroupSpec stores group specifications */
 export interface GroupSpec {
   name: string;
-  requirements: PlacementRequirements;
+  requirements?: PlacementRequirements;
   resources: Resource[];
 }
 
 /** GroupSpec stores group specifications */
 export interface GroupSpecSDKType {
   name: string;
-  requirements: PlacementRequirementsSDKType;
+  requirements?: PlacementRequirementsSDKType;
   resources: ResourceSDKType[];
 }
 

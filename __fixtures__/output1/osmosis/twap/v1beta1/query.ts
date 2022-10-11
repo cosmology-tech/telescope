@@ -44,10 +44,10 @@ export interface ArithmeticTwapToNowResponseSDKType {
 export interface ParamsRequest {}
 export interface ParamsRequestSDKType {}
 export interface ParamsResponse {
-  params: Params;
+  params?: Params;
 }
 export interface ParamsResponseSDKType {
-  params: ParamsSDKType;
+  params?: ParamsSDKType;
 }
 
 function createBaseArithmeticTwapRequest(): ArithmeticTwapRequest {

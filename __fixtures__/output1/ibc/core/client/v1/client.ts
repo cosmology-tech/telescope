@@ -13,7 +13,7 @@ export interface IdentifiedClientState {
   clientId: string;
 
   /** client state */
-  clientState: Any;
+  clientState?: Any;
 }
 
 /**
@@ -25,7 +25,7 @@ export interface IdentifiedClientStateSDKType {
   client_id: string;
 
   /** client state */
-  client_state: AnySDKType;
+  client_state?: AnySDKType;
 }
 
 /**
@@ -34,10 +34,10 @@ export interface IdentifiedClientStateSDKType {
  */
 export interface ConsensusStateWithHeight {
   /** consensus state height */
-  height: Height;
+  height?: Height;
 
   /** consensus state */
-  consensusState: Any;
+  consensusState?: Any;
 }
 
 /**
@@ -46,10 +46,10 @@ export interface ConsensusStateWithHeight {
  */
 export interface ConsensusStateWithHeightSDKType {
   /** consensus state height */
-  height: HeightSDKType;
+  height?: HeightSDKType;
 
   /** consensus state */
-  consensus_state: AnySDKType;
+  consensus_state?: AnySDKType;
 }
 
 /**
@@ -129,7 +129,7 @@ export interface ClientUpdateProposalSDKType {
 export interface UpgradeProposal {
   title: string;
   description: string;
-  plan: Plan;
+  plan?: Plan;
 
   /**
    * An UpgradedClientState must be provided to perform an IBC breaking upgrade.
@@ -139,7 +139,7 @@ export interface UpgradeProposal {
    * of the chain. This will allow IBC connections to persist smoothly across
    * planned chain upgrades
    */
-  upgradedClientState: Any;
+  upgradedClientState?: Any;
 }
 
 /**
@@ -149,7 +149,7 @@ export interface UpgradeProposal {
 export interface UpgradeProposalSDKType {
   title: string;
   description: string;
-  plan: PlanSDKType;
+  plan?: PlanSDKType;
 
   /**
    * An UpgradedClientState must be provided to perform an IBC breaking upgrade.
@@ -159,7 +159,7 @@ export interface UpgradeProposalSDKType {
    * of the chain. This will allow IBC connections to persist smoothly across
    * planned chain upgrades
    */
-  upgraded_client_state: AnySDKType;
+  upgraded_client_state?: AnySDKType;
 }
 
 /**

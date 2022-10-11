@@ -244,7 +244,7 @@ export interface BroadcastTxRequestSDKType {
  */
 export interface BroadcastTxResponse {
   /** tx_response is the queried TxResponses. */
-  txResponse: TxResponse;
+  txResponse?: TxResponse;
 }
 
 /**
@@ -253,7 +253,7 @@ export interface BroadcastTxResponse {
  */
 export interface BroadcastTxResponseSDKType {
   /** tx_response is the queried TxResponses. */
-  tx_response: TxResponseSDKType;
+  tx_response?: TxResponseSDKType;
 }
 
 /**
@@ -267,7 +267,7 @@ export interface SimulateRequest {
    */
 
   /** @deprecated */
-  tx: Tx;
+  tx?: Tx;
 
   /**
    * tx_bytes is the raw transaction.
@@ -288,7 +288,7 @@ export interface SimulateRequestSDKType {
    */
 
   /** @deprecated */
-  tx: TxSDKType;
+  tx?: TxSDKType;
 
   /**
    * tx_bytes is the raw transaction.
@@ -304,10 +304,10 @@ export interface SimulateRequestSDKType {
  */
 export interface SimulateResponse {
   /** gas_info is the information about gas used in the simulation. */
-  gasInfo: GasInfo;
+  gasInfo?: GasInfo;
 
   /** result is the result of the simulation. */
-  result: Result;
+  result?: Result;
 }
 
 /**
@@ -316,10 +316,10 @@ export interface SimulateResponse {
  */
 export interface SimulateResponseSDKType {
   /** gas_info is the information about gas used in the simulation. */
-  gas_info: GasInfoSDKType;
+  gas_info?: GasInfoSDKType;
 
   /** result is the result of the simulation. */
-  result: ResultSDKType;
+  result?: ResultSDKType;
 }
 
 /**
@@ -343,19 +343,19 @@ export interface GetTxRequestSDKType {
 /** GetTxResponse is the response type for the Service.GetTx method. */
 export interface GetTxResponse {
   /** tx is the queried transaction. */
-  tx: Tx;
+  tx?: Tx;
 
   /** tx_response is the queried TxResponses. */
-  txResponse: TxResponse;
+  txResponse?: TxResponse;
 }
 
 /** GetTxResponse is the response type for the Service.GetTx method. */
 export interface GetTxResponseSDKType {
   /** tx is the queried transaction. */
-  tx: TxSDKType;
+  tx?: TxSDKType;
 
   /** tx_response is the queried TxResponses. */
-  tx_response: TxResponseSDKType;
+  tx_response?: TxResponseSDKType;
 }
 
 /**
@@ -394,8 +394,8 @@ export interface GetBlockWithTxsRequestSDKType {
 export interface GetBlockWithTxsResponse {
   /** txs are the transactions in the block. */
   txs: Tx[];
-  blockId: BlockID;
-  block: Block;
+  blockId?: BlockID;
+  block?: Block;
 
   /** pagination defines a pagination for the response. */
   pagination?: PageResponse;
@@ -409,8 +409,8 @@ export interface GetBlockWithTxsResponse {
 export interface GetBlockWithTxsResponseSDKType {
   /** txs are the transactions in the block. */
   txs: TxSDKType[];
-  block_id: BlockIDSDKType;
-  block: BlockSDKType;
+  block_id?: BlockIDSDKType;
+  block?: BlockSDKType;
 
   /** pagination defines a pagination for the response. */
   pagination?: PageResponseSDKType;

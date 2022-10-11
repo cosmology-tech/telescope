@@ -8,10 +8,10 @@ export const protobufPackage = "tendermint.types";
  * validity of blocks.
  */
 export interface ConsensusParams {
-  block: BlockParams;
-  evidence: EvidenceParams;
-  validator: ValidatorParams;
-  version: VersionParams;
+  block?: BlockParams;
+  evidence?: EvidenceParams;
+  validator?: ValidatorParams;
+  version?: VersionParams;
 }
 
 /**
@@ -19,10 +19,10 @@ export interface ConsensusParams {
  * validity of blocks.
  */
 export interface ConsensusParamsSDKType {
-  block: BlockParamsSDKType;
-  evidence: EvidenceParamsSDKType;
-  validator: ValidatorParamsSDKType;
-  version: VersionParamsSDKType;
+  block?: BlockParamsSDKType;
+  evidence?: EvidenceParamsSDKType;
+  validator?: ValidatorParamsSDKType;
+  version?: VersionParamsSDKType;
 }
 
 /** BlockParams contains limits on the block size. */
@@ -88,7 +88,7 @@ export interface EvidenceParams {
    * mechanism for handling [Nothing-At-Stake
    * attacks](https://github.com/ethereum/wiki/wiki/Proof-of-Stake-FAQ#what-is-the-nothing-at-stake-problem-and-how-can-it-be-fixed).
    */
-  maxAgeDuration: Duration;
+  maxAgeDuration?: Duration;
 
   /**
    * This sets the maximum size of total evidence in bytes that can be committed in a single block.
@@ -115,7 +115,7 @@ export interface EvidenceParamsSDKType {
    * mechanism for handling [Nothing-At-Stake
    * attacks](https://github.com/ethereum/wiki/wiki/Proof-of-Stake-FAQ#what-is-the-nothing-at-stake-problem-and-how-can-it-be-fixed).
    */
-  max_age_duration: DurationSDKType;
+  max_age_duration?: DurationSDKType;
 
   /**
    * This sets the maximum size of total evidence in bytes that can be committed in a single block.

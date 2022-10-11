@@ -456,7 +456,7 @@ export interface OperationMetadata {
   progressPercentage: number;
 
   /** The start time of the operation. */
-  startTime: Date;
+  startTime?: Date;
 }
 
 /** The metadata associated with a long running operation resource. */
@@ -474,7 +474,7 @@ export interface OperationMetadataSDKType {
   progress_percentage: number;
 
   /** The start time of the operation. */
-  start_time: Date;
+  start_time?: Date;
 }
 
 /** Represents the status of one operation step. */
@@ -652,7 +652,7 @@ export interface Rollout {
   rolloutId: string;
 
   /** Creation time of the rollout. Readonly. */
-  createTime: Date;
+  createTime?: Date;
 
   /** The user who created the Rollout. Readonly. */
   createdBy: string;
@@ -699,7 +699,7 @@ export interface RolloutSDKType {
   rollout_id: string;
 
   /** Creation time of the rollout. Readonly. */
-  create_time: Date;
+  create_time?: Date;
 
   /** The user who created the Rollout. Readonly. */
   created_by: string;

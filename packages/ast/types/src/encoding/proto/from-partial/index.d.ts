@@ -4,6 +4,7 @@ import { ProtoType, ProtoField } from '@osmonauts/types';
 export interface FromPartialMethod {
     context: ProtoParseContext;
     field: ProtoField;
+    isOneOf: boolean;
     isOptional: boolean;
 }
 export declare const fromPartialMethodFields: (context: ProtoParseContext, name: string, proto: ProtoType) => t.Statement[];

@@ -9,14 +9,14 @@ export const protobufPackage = "akash.market.v1beta2";
 export interface GenesisState {
   orders: Order[];
   leases: Lease[];
-  params: Params;
+  params?: Params;
 }
 
 /** GenesisState defines the basic genesis state used by market module */
 export interface GenesisStateSDKType {
   orders: OrderSDKType[];
   leases: LeaseSDKType[];
-  params: ParamsSDKType;
+  params?: ParamsSDKType;
 }
 
 function createBaseGenesisState(): GenesisState {

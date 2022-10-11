@@ -55,7 +55,7 @@ export interface Api {
    * Source context for the protocol buffer service represented by this
    * message.
    */
-  sourceContext: SourceContext;
+  sourceContext?: SourceContext;
 
   /** Included interfaces. See [Mixin][]. */
   mixins: Mixin[];
@@ -115,7 +115,7 @@ export interface ApiSDKType {
    * Source context for the protocol buffer service represented by this
    * message.
    */
-  source_context: SourceContextSDKType;
+  source_context?: SourceContextSDKType;
 
   /** Included interfaces. See [Mixin][]. */
   mixins: MixinSDKType[];

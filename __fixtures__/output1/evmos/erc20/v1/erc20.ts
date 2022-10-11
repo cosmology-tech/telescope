@@ -113,7 +113,7 @@ export interface RegisterCoinProposal {
   description: string;
 
   /** metadata of the native Cosmos coin */
-  metadata: Metadata;
+  metadata?: Metadata;
 }
 
 /**
@@ -128,7 +128,7 @@ export interface RegisterCoinProposalSDKType {
   description: string;
 
   /** metadata of the native Cosmos coin */
-  metadata: MetadataSDKType;
+  metadata?: MetadataSDKType;
 }
 
 /**

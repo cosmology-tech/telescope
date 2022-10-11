@@ -157,13 +157,13 @@ export interface GetServiceRequestSDKType {
 /** Request message for CreateService method. */
 export interface CreateServiceRequest {
   /** Required. Initial values for the service resource. */
-  service: ManagedService;
+  service?: ManagedService;
 }
 
 /** Request message for CreateService method. */
 export interface CreateServiceRequestSDKType {
   /** Required. Initial values for the service resource. */
-  service: ManagedServiceSDKType;
+  service?: ManagedServiceSDKType;
 }
 
 /** Request message for DeleteService method. */
@@ -205,13 +205,13 @@ export interface UndeleteServiceRequestSDKType {
 /** Response message for UndeleteService method. */
 export interface UndeleteServiceResponse {
   /** Revived service resource. */
-  service: ManagedService;
+  service?: ManagedService;
 }
 
 /** Response message for UndeleteService method. */
 export interface UndeleteServiceResponseSDKType {
   /** Revived service resource. */
-  service: ManagedServiceSDKType;
+  service?: ManagedServiceSDKType;
 }
 
 /** Request message for GetServiceConfig method. */
@@ -323,7 +323,7 @@ export interface CreateServiceConfigRequest {
   serviceName: string;
 
   /** Required. The service configuration resource. */
-  serviceConfig: Service;
+  serviceConfig?: Service;
 }
 
 /** Request message for CreateServiceConfig method. */
@@ -335,7 +335,7 @@ export interface CreateServiceConfigRequestSDKType {
   service_name: string;
 
   /** Required. The service configuration resource. */
-  service_config: ServiceSDKType;
+  service_config?: ServiceSDKType;
 }
 
 /** Request message for SubmitConfigSource method. */
@@ -347,7 +347,7 @@ export interface SubmitConfigSourceRequest {
   serviceName: string;
 
   /** Required. The source configuration for the service. */
-  configSource: ConfigSource;
+  configSource?: ConfigSource;
 
   /**
    * Optional. If set, this will result in the generation of a
@@ -366,7 +366,7 @@ export interface SubmitConfigSourceRequestSDKType {
   service_name: string;
 
   /** Required. The source configuration for the service. */
-  config_source: ConfigSourceSDKType;
+  config_source?: ConfigSourceSDKType;
 
   /**
    * Optional. If set, this will result in the generation of a
@@ -379,13 +379,13 @@ export interface SubmitConfigSourceRequestSDKType {
 /** Response message for SubmitConfigSource method. */
 export interface SubmitConfigSourceResponse {
   /** The generated service configuration. */
-  serviceConfig: Service;
+  serviceConfig?: Service;
 }
 
 /** Response message for SubmitConfigSource method. */
 export interface SubmitConfigSourceResponseSDKType {
   /** The generated service configuration. */
-  service_config: ServiceSDKType;
+  service_config?: ServiceSDKType;
 }
 
 /** Request message for 'CreateServiceRollout' */
@@ -397,7 +397,7 @@ export interface CreateServiceRolloutRequest {
   serviceName: string;
 
   /** Required. The rollout resource. The `service_name` field is output only. */
-  rollout: Rollout;
+  rollout?: Rollout;
 }
 
 /** Request message for 'CreateServiceRollout' */
@@ -409,7 +409,7 @@ export interface CreateServiceRolloutRequestSDKType {
   service_name: string;
 
   /** Required. The rollout resource. The `service_name` field is output only. */
-  rollout: RolloutSDKType;
+  rollout?: RolloutSDKType;
 }
 
 /** Request message for 'ListServiceRollouts' */
@@ -523,7 +523,7 @@ export interface GenerateConfigReportRequest {
    * [google.api.servicemanagement.v1.ConfigSource][google.api.servicemanagement.v1.ConfigSource],
    * and [google.api.Service][google.api.Service]
    */
-  newConfig: Any;
+  newConfig?: Any;
 
   /**
    * Optional. Service configuration against which the comparison will be done.
@@ -532,7 +532,7 @@ export interface GenerateConfigReportRequest {
    * [google.api.servicemanagement.v1.ConfigSource][google.api.servicemanagement.v1.ConfigSource],
    * and [google.api.Service][google.api.Service]
    */
-  oldConfig: Any;
+  oldConfig?: Any;
 }
 
 /** Request message for GenerateConfigReport method. */
@@ -544,7 +544,7 @@ export interface GenerateConfigReportRequestSDKType {
    * [google.api.servicemanagement.v1.ConfigSource][google.api.servicemanagement.v1.ConfigSource],
    * and [google.api.Service][google.api.Service]
    */
-  new_config: AnySDKType;
+  new_config?: AnySDKType;
 
   /**
    * Optional. Service configuration against which the comparison will be done.
@@ -553,7 +553,7 @@ export interface GenerateConfigReportRequestSDKType {
    * [google.api.servicemanagement.v1.ConfigSource][google.api.servicemanagement.v1.ConfigSource],
    * and [google.api.Service][google.api.Service]
    */
-  old_config: AnySDKType;
+  old_config?: AnySDKType;
 }
 
 /** Response message for GenerateConfigReport method. */

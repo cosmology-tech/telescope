@@ -14,13 +14,13 @@ export interface QueryParamsRequestSDKType {}
 /** QueryParamsResponse is the response type for the Query/Params RPC method. */
 export interface QueryParamsResponse {
   /** params defines the parameters of the module. */
-  params: Params;
+  params?: Params;
 }
 
 /** QueryParamsResponse is the response type for the Query/Params RPC method. */
 export interface QueryParamsResponseSDKType {
   /** params defines the parameters of the module. */
-  params: ParamsSDKType;
+  params?: ParamsSDKType;
 }
 
 /**
@@ -46,7 +46,7 @@ export interface QueryValidatorOutstandingRewardsRequestSDKType {
  * Query/ValidatorOutstandingRewards RPC method.
  */
 export interface QueryValidatorOutstandingRewardsResponse {
-  rewards: ValidatorOutstandingRewards;
+  rewards?: ValidatorOutstandingRewards;
 }
 
 /**
@@ -54,7 +54,7 @@ export interface QueryValidatorOutstandingRewardsResponse {
  * Query/ValidatorOutstandingRewards RPC method.
  */
 export interface QueryValidatorOutstandingRewardsResponseSDKType {
-  rewards: ValidatorOutstandingRewardsSDKType;
+  rewards?: ValidatorOutstandingRewardsSDKType;
 }
 
 /**
@@ -81,7 +81,7 @@ export interface QueryValidatorCommissionRequestSDKType {
  */
 export interface QueryValidatorCommissionResponse {
   /** commission defines the commision the validator received. */
-  commission: ValidatorAccumulatedCommission;
+  commission?: ValidatorAccumulatedCommission;
 }
 
 /**
@@ -90,7 +90,7 @@ export interface QueryValidatorCommissionResponse {
  */
 export interface QueryValidatorCommissionResponseSDKType {
   /** commission defines the commision the validator received. */
-  commission: ValidatorAccumulatedCommissionSDKType;
+  commission?: ValidatorAccumulatedCommissionSDKType;
 }
 
 /**

@@ -120,7 +120,7 @@ export interface CheckRequest {
   serviceName: string;
 
   /** The operation to be checked. */
-  operation: Operation;
+  operation?: Operation;
 
   /**
    * Specifies which version of service configuration should be used to process
@@ -145,7 +145,7 @@ export interface CheckRequestSDKType {
   service_name: string;
 
   /** The operation to be checked. */
-  operation: OperationSDKType;
+  operation?: OperationSDKType;
 
   /**
    * Specifies which version of service configuration should be used to process
@@ -182,7 +182,7 @@ export interface CheckResponse {
   serviceRolloutId: string;
 
   /** Feedback data returned from the server during processing a Check request. */
-  checkInfo: CheckResponse_CheckInfo;
+  checkInfo?: CheckResponse_CheckInfo;
 }
 
 /** Response message for the Check method. */
@@ -210,7 +210,7 @@ export interface CheckResponseSDKType {
   service_rollout_id: string;
 
   /** Feedback data returned from the server during processing a Check request. */
-  check_info: CheckResponse_CheckInfoSDKType;
+  check_info?: CheckResponse_CheckInfoSDKType;
 }
 
 /** Contains additional information about the check operation. */
@@ -223,7 +223,7 @@ export interface CheckResponse_CheckInfo {
   unusedArguments: string[];
 
   /** Consumer info of this check. */
-  consumerInfo: CheckResponse_ConsumerInfo;
+  consumerInfo?: CheckResponse_ConsumerInfo;
 }
 
 /** Contains additional information about the check operation. */
@@ -236,7 +236,7 @@ export interface CheckResponse_CheckInfoSDKType {
   unused_arguments: string[];
 
   /** Consumer info of this check. */
-  consumer_info: CheckResponse_ConsumerInfoSDKType;
+  consumer_info?: CheckResponse_ConsumerInfoSDKType;
 }
 
 /** `ConsumerInfo` provides information about the consumer. */
@@ -433,7 +433,7 @@ export interface ReportResponse_ReportError {
    * Details of the error when processing the
    * [Operation][google.api.servicecontrol.v1.Operation].
    */
-  status: Status;
+  status?: Status;
 }
 
 /**
@@ -452,7 +452,7 @@ export interface ReportResponse_ReportErrorSDKType {
    * Details of the error when processing the
    * [Operation][google.api.servicecontrol.v1.Operation].
    */
-  status: StatusSDKType;
+  status?: StatusSDKType;
 }
 
 function createBaseCheckRequest(): CheckRequest {

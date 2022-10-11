@@ -164,14 +164,54 @@ export const getFieldOptionality = (
     const useOptionalNullable = context.pluginValue('prototypes.useOptionalNullable');
     const isNullable = field?.options?.['(gogoproto.nullable)'] ?? fieldDefaultIsOptional;
 
-    if ([
-        'cosmos.base.query.v1beta1.PageRequest',
-        'PageRequest',
-        'cosmos.base.query.v1beta1.PageResponse',
-        'PageResponse'
-    ].includes(field.type)) {
-        // pagination
-        return true;
+    if (isArrayField(field) || isEnumField(field) || isScalarField(field)) {
+        // these field types are required by default!
+
+        if (isOneOf || (useOptionalNullable &&
+            field?.options?.['(gogoproto.nullable)'])) {
+            return true;
+        }
+        return false;
+    }
+
+    return true;
+};
+
+export const isScalarField = (
+    field: ProtoField
+) => {
+    return SCALAR_TYPES.includes(field.type);
+};
+
+export const isArrayField = (
+    field: ProtoField
+) => {
+    return field.rule === 'repeated';
+};
+
+export const isEnumField = (
+    field: ProtoField
+) => {
+    return field.parsedType.type === 'Enum'
+};
+
+export const getFieldOptionalityForDefaults = (
+    context: ProtoParseContext | AminoParseContext,
+    field: ProtoField,
+    isOneOf: boolean
+) => {
+    const fieldDefaultIsOptional = context.pluginValue('prototypes.fieldDefaultIsOptional');
+    const useOptionalNullable = context.pluginValue('prototypes.useOptionalNullable');
+    const isNullable = field?.options?.['(gogoproto.nullable)'] ?? fieldDefaultIsOptional;
+
+    if (isArrayField(field) || isEnumField(field) || isScalarField(field)) {
+        // these field types are required by default!
+
+        if (isOneOf || (useOptionalNullable &&
+            field?.options?.['(gogoproto.nullable)'])) {
+            return true;
+        }
+        return false;
     }
 
     return isOneOf ||

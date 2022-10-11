@@ -9,7 +9,7 @@ export const protobufPackage = "cosmos.evidence.v1beta1";
  */
 export interface MsgSubmitEvidence {
   submitter: string;
-  evidence: Any;
+  evidence?: Any;
 }
 
 /**
@@ -18,7 +18,7 @@ export interface MsgSubmitEvidence {
  */
 export interface MsgSubmitEvidenceSDKType {
   submitter: string;
-  evidence: AnySDKType;
+  evidence?: AnySDKType;
 }
 
 /** MsgSubmitEvidenceResponse defines the Msg/SubmitEvidence response type. */

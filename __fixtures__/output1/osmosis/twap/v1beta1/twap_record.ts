@@ -28,7 +28,7 @@ export interface TwapRecord {
    * This field should only exist until we have a global registry in the state
    * machine, mapping prior block heights within {TIME RANGE} to times.
    */
-  time: Date;
+  time?: Date;
 
   /**
    * We store the last spot prices in the struct, so that we can interpolate
@@ -44,7 +44,7 @@ export interface TwapRecord {
    * It is used to alert the caller if they are getting a potentially erroneous
    * TWAP, due to an unforeseen underlying error.
    */
-  lastErrorTime: Date;
+  lastErrorTime?: Date;
 }
 
 /**
@@ -72,7 +72,7 @@ export interface TwapRecordSDKType {
    * This field should only exist until we have a global registry in the state
    * machine, mapping prior block heights within {TIME RANGE} to times.
    */
-  time: Date;
+  time?: Date;
 
   /**
    * We store the last spot prices in the struct, so that we can interpolate
@@ -88,7 +88,7 @@ export interface TwapRecordSDKType {
    * It is used to alert the caller if they are getting a potentially erroneous
    * TWAP, due to an unforeseen underlying error.
    */
-  last_error_time: Date;
+  last_error_time?: Date;
 }
 
 function createBaseTwapRecord(): TwapRecord {

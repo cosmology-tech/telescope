@@ -268,12 +268,12 @@ export interface Proposal {
    * querying a proposal via gRPC, this field is not populated until the
    * proposal's voting period has ended.
    */
-  finalTallyResult: TallyResult;
-  submitTime: Date;
-  depositEndTime: Date;
+  finalTallyResult?: TallyResult;
+  submitTime?: Date;
+  depositEndTime?: Date;
   totalDeposit: Coin[];
-  votingStartTime: Date;
-  votingEndTime: Date;
+  votingStartTime?: Date;
+  votingEndTime?: Date;
 
   /** metadata is any arbitrary metadata attached to the proposal. */
   metadata: string;
@@ -290,12 +290,12 @@ export interface ProposalSDKType {
    * querying a proposal via gRPC, this field is not populated until the
    * proposal's voting period has ended.
    */
-  final_tally_result: TallyResultSDKType;
-  submit_time: Date;
-  deposit_end_time: Date;
+  final_tally_result?: TallyResultSDKType;
+  submit_time?: Date;
+  deposit_end_time?: Date;
   total_deposit: CoinSDKType[];
-  voting_start_time: Date;
-  voting_end_time: Date;
+  voting_start_time?: Date;
+  voting_end_time?: Date;
 
   /** metadata is any arbitrary metadata attached to the proposal. */
   metadata: string;
@@ -352,7 +352,7 @@ export interface DepositParams {
    * Maximum period for Atom holders to deposit on a proposal. Initial value: 2
    *  months.
    */
-  maxDepositPeriod: Duration;
+  maxDepositPeriod?: Duration;
 }
 
 /** DepositParams defines the params for deposits on governance proposals. */
@@ -364,19 +364,19 @@ export interface DepositParamsSDKType {
    * Maximum period for Atom holders to deposit on a proposal. Initial value: 2
    *  months.
    */
-  max_deposit_period: DurationSDKType;
+  max_deposit_period?: DurationSDKType;
 }
 
 /** VotingParams defines the params for voting on governance proposals. */
 export interface VotingParams {
   /** Length of the voting period. */
-  votingPeriod: Duration;
+  votingPeriod?: Duration;
 }
 
 /** VotingParams defines the params for voting on governance proposals. */
 export interface VotingParamsSDKType {
   /** Length of the voting period. */
-  voting_period: DurationSDKType;
+  voting_period?: DurationSDKType;
 }
 
 /** TallyParams defines the params for tallying votes on governance proposals. */

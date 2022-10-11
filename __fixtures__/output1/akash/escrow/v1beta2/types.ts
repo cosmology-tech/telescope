@@ -168,7 +168,7 @@ export interface AccountIDSDKType {
 /** Account stores state for an escrow account */
 export interface Account {
   /** unique identifier for this escrow account */
-  id: AccountID;
+  id?: AccountID;
 
   /** bech32 encoded account address of the owner of this escrow account */
   owner: string;
@@ -177,10 +177,10 @@ export interface Account {
   state: Account_State;
 
   /** unspent coins received from the owner's wallet */
-  balance: DecCoin;
+  balance?: DecCoin;
 
   /** total coins spent by this account */
-  transferred: DecCoin;
+  transferred?: DecCoin;
 
   /** block height at which this account was last settled */
   settledAt: Long;
@@ -196,13 +196,13 @@ export interface Account {
    * Funds are unspent coins received from the (non-Owner) Depositor's wallet.
    * If there are any funds, they should be spent before spending the Balance.
    */
-  funds: DecCoin;
+  funds?: DecCoin;
 }
 
 /** Account stores state for an escrow account */
 export interface AccountSDKType {
   /** unique identifier for this escrow account */
-  id: AccountIDSDKType;
+  id?: AccountIDSDKType;
 
   /** bech32 encoded account address of the owner of this escrow account */
   owner: string;
@@ -211,10 +211,10 @@ export interface AccountSDKType {
   state: Account_StateSDKType;
 
   /** unspent coins received from the owner's wallet */
-  balance: DecCoinSDKType;
+  balance?: DecCoinSDKType;
 
   /** total coins spent by this account */
-  transferred: DecCoinSDKType;
+  transferred?: DecCoinSDKType;
 
   /** block height at which this account was last settled */
   settled_at: Long;
@@ -230,29 +230,29 @@ export interface AccountSDKType {
    * Funds are unspent coins received from the (non-Owner) Depositor's wallet.
    * If there are any funds, they should be spent before spending the Balance.
    */
-  funds: DecCoinSDKType;
+  funds?: DecCoinSDKType;
 }
 
 /** Payment stores state for a payment */
 export interface FractionalPayment {
-  accountId: AccountID;
+  accountId?: AccountID;
   paymentId: string;
   owner: string;
   state: FractionalPayment_State;
-  rate: DecCoin;
-  balance: DecCoin;
-  withdrawn: Coin;
+  rate?: DecCoin;
+  balance?: DecCoin;
+  withdrawn?: Coin;
 }
 
 /** Payment stores state for a payment */
 export interface FractionalPaymentSDKType {
-  account_id: AccountIDSDKType;
+  account_id?: AccountIDSDKType;
   payment_id: string;
   owner: string;
   state: FractionalPayment_StateSDKType;
-  rate: DecCoinSDKType;
-  balance: DecCoinSDKType;
-  withdrawn: CoinSDKType;
+  rate?: DecCoinSDKType;
+  balance?: DecCoinSDKType;
+  withdrawn?: CoinSDKType;
 }
 
 function createBaseAccountID(): AccountID {

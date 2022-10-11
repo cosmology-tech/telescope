@@ -26,7 +26,7 @@ export interface CommitInfoSDKType {
  */
 export interface StoreInfo {
   name: string;
-  commitId: CommitID;
+  commitId?: CommitID;
 }
 
 /**
@@ -35,7 +35,7 @@ export interface StoreInfo {
  */
 export interface StoreInfoSDKType {
   name: string;
-  commit_id: CommitIDSDKType;
+  commit_id?: CommitIDSDKType;
 }
 
 /**

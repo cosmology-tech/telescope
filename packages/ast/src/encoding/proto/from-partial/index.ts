@@ -12,6 +12,7 @@ const needsImplementation = (name: string, field: ProtoField) => {
 export interface FromPartialMethod {
     context: ProtoParseContext;
     field: ProtoField;
+    isOneOf: boolean;
     isOptional: boolean;
 }
 
@@ -29,6 +30,7 @@ export const fromPartialMethodFields = (context: ProtoParseContext, name: string
         const args: FromPartialMethod = {
             context,
             field,
+            isOneOf,
             isOptional
         };
 

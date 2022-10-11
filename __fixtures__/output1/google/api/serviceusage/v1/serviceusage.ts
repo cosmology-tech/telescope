@@ -122,7 +122,7 @@ export interface EnableServiceRequestSDKType {
  */
 export interface EnableServiceResponse {
   /** The new state of the service after enabling. */
-  service: Service;
+  service?: Service;
 }
 
 /**
@@ -132,7 +132,7 @@ export interface EnableServiceResponse {
  */
 export interface EnableServiceResponseSDKType {
   /** The new state of the service after enabling. */
-  service: ServiceSDKType;
+  service?: ServiceSDKType;
 }
 
 /** Request message for the `DisableService` method. */
@@ -194,7 +194,7 @@ export interface DisableServiceRequestSDKType {
  */
 export interface DisableServiceResponse {
   /** The new state of the service after disabling. */
-  service: Service;
+  service?: Service;
 }
 
 /**
@@ -204,7 +204,7 @@ export interface DisableServiceResponse {
  */
 export interface DisableServiceResponseSDKType {
   /** The new state of the service after disabling. */
-  service: ServiceSDKType;
+  service?: ServiceSDKType;
 }
 
 /** Request message for the `GetService` method. */

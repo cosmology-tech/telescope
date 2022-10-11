@@ -27,7 +27,7 @@ export interface GenericAuthorizationSDKType {
  * the provide method with expiration time.
  */
 export interface Grant {
-  authorization: Any;
+  authorization?: Any;
 
   /**
    * time when the grant will expire and will be pruned. If null, then the grant
@@ -42,7 +42,7 @@ export interface Grant {
  * the provide method with expiration time.
  */
 export interface GrantSDKType {
-  authorization: AnySDKType;
+  authorization?: AnySDKType;
 
   /**
    * time when the grant will expire and will be pruned. If null, then the grant
@@ -59,8 +59,8 @@ export interface GrantSDKType {
 export interface GrantAuthorization {
   granter: string;
   grantee: string;
-  authorization: Any;
-  expiration: Date;
+  authorization?: Any;
+  expiration?: Date;
 }
 
 /**
@@ -70,8 +70,8 @@ export interface GrantAuthorization {
 export interface GrantAuthorizationSDKType {
   granter: string;
   grantee: string;
-  authorization: AnySDKType;
-  expiration: Date;
+  authorization?: AnySDKType;
+  expiration?: Date;
 }
 
 /** GrantQueueItem contains the list of TypeURL of a sdk.Msg. */

@@ -21,7 +21,7 @@ export interface QueryCurrentPlanRequestSDKType {}
  */
 export interface QueryCurrentPlanResponse {
   /** plan is the current upgrade plan. */
-  plan: Plan;
+  plan?: Plan;
 }
 
 /**
@@ -30,7 +30,7 @@ export interface QueryCurrentPlanResponse {
  */
 export interface QueryCurrentPlanResponseSDKType {
   /** plan is the current upgrade plan. */
-  plan: PlanSDKType;
+  plan?: PlanSDKType;
 }
 
 /**

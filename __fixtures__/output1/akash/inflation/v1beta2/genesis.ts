@@ -5,12 +5,12 @@ export const protobufPackage = "akash.inflation.v1beta2";
 
 /** GenesisState stores slice of genesis deployment instance */
 export interface GenesisState {
-  params: Params;
+  params?: Params;
 }
 
 /** GenesisState stores slice of genesis deployment instance */
 export interface GenesisStateSDKType {
-  params: ParamsSDKType;
+  params?: ParamsSDKType;
 }
 
 function createBaseGenesisState(): GenesisState {

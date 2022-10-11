@@ -13,7 +13,7 @@ export interface GenesisState {
 
   /** metadata from each client */
   clientsMetadata: IdentifiedGenesisMetadata[];
-  params: Params;
+  params?: Params;
 
   /** create localhost on initialization */
   createLocalhost: boolean;
@@ -32,7 +32,7 @@ export interface GenesisStateSDKType {
 
   /** metadata from each client */
   clients_metadata: IdentifiedGenesisMetadataSDKType[];
-  params: ParamsSDKType;
+  params?: ParamsSDKType;
 
   /** create localhost on initialization */
   create_localhost: boolean;

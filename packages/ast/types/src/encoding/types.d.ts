@@ -19,4 +19,4 @@ export declare const getTSType: (context: GenericParseContext, type: string) => 
 export declare const getTSTypeFromGoogleType: (context: GenericParseContext, type: string, options?: CreateProtoTypeOptions) => t.TSStringKeyword | t.TSTypeReference;
 export declare const getTSTypeForAmino: (context: GenericParseContext, field: ProtoField) => t.TSBooleanKeyword | t.TSNumberKeyword | t.TSStringKeyword | t.TSTypeReference;
 export declare const getTSTypeForProto: (context: GenericParseContext, field: ProtoField) => t.TSBooleanKeyword | t.TSNumberKeyword | t.TSStringKeyword | t.TSTypeReference;
-export declare const getDefaultTSTypeFromProtoType: (context: ProtoParseContext, field: ProtoField, isOptional: boolean) => t.ArrayExpression | t.BooleanLiteral | t.Identifier | t.MemberExpression | t.NewExpression | t.NumericLiteral | t.ObjectExpression | t.StringLiteral;
+export declare const getDefaultTSTypeFromProtoType: (context: ProtoParseContext, field: ProtoField, isOneOf: boolean) => t.ArrayExpression | t.BooleanLiteral | t.Identifier | t.MemberExpression | t.NewExpression | t.NumericLiteral | t.ObjectExpression | t.StringLiteral;

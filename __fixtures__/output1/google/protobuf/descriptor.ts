@@ -572,7 +572,7 @@ export interface FileDescriptorProto {
   enumType: EnumDescriptorProto[];
   service: ServiceDescriptorProto[];
   extension: FieldDescriptorProto[];
-  options: FileOptions;
+  options?: FileOptions;
 
   /**
    * This field contains optional information about the original source code.
@@ -580,7 +580,7 @@ export interface FileDescriptorProto {
    * functionality of the descriptors -- the information is needed only by
    * development tools.
    */
-  sourceCodeInfo: SourceCodeInfo;
+  sourceCodeInfo?: SourceCodeInfo;
 
   /**
    * The syntax of the proto file.
@@ -612,7 +612,7 @@ export interface FileDescriptorProtoSDKType {
   enum_type: EnumDescriptorProtoSDKType[];
   service: ServiceDescriptorProtoSDKType[];
   extension: FieldDescriptorProtoSDKType[];
-  options: FileOptionsSDKType;
+  options?: FileOptionsSDKType;
 
   /**
    * This field contains optional information about the original source code.
@@ -620,7 +620,7 @@ export interface FileDescriptorProtoSDKType {
    * functionality of the descriptors -- the information is needed only by
    * development tools.
    */
-  source_code_info: SourceCodeInfoSDKType;
+  source_code_info?: SourceCodeInfoSDKType;
 
   /**
    * The syntax of the proto file.
@@ -638,7 +638,7 @@ export interface DescriptorProto {
   enumType: EnumDescriptorProto[];
   extensionRange: DescriptorProto_ExtensionRange[];
   oneofDecl: OneofDescriptorProto[];
-  options: MessageOptions;
+  options?: MessageOptions;
   reservedRange: DescriptorProto_ReservedRange[];
 
   /**
@@ -657,7 +657,7 @@ export interface DescriptorProtoSDKType {
   enum_type: EnumDescriptorProtoSDKType[];
   extension_range: DescriptorProto_ExtensionRangeSDKType[];
   oneof_decl: OneofDescriptorProtoSDKType[];
-  options: MessageOptionsSDKType;
+  options?: MessageOptionsSDKType;
   reserved_range: DescriptorProto_ReservedRangeSDKType[];
 
   /**
@@ -672,7 +672,7 @@ export interface DescriptorProto_ExtensionRange {
 
   /** Exclusive. */
   end: number;
-  options: ExtensionRangeOptions;
+  options?: ExtensionRangeOptions;
 }
 export interface DescriptorProto_ExtensionRangeSDKType {
   /** Inclusive. */
@@ -680,7 +680,7 @@ export interface DescriptorProto_ExtensionRangeSDKType {
 
   /** Exclusive. */
   end: number;
-  options: ExtensionRangeOptionsSDKType;
+  options?: ExtensionRangeOptionsSDKType;
 }
 
 /**
@@ -766,7 +766,7 @@ export interface FieldDescriptorProto {
    * it to camelCase.
    */
   jsonName: string;
-  options: FieldOptions;
+  options?: FieldOptions;
 }
 
 /** Describes a field within a message. */
@@ -818,26 +818,26 @@ export interface FieldDescriptorProtoSDKType {
    * it to camelCase.
    */
   json_name: string;
-  options: FieldOptionsSDKType;
+  options?: FieldOptionsSDKType;
 }
 
 /** Describes a oneof. */
 export interface OneofDescriptorProto {
   name: string;
-  options: OneofOptions;
+  options?: OneofOptions;
 }
 
 /** Describes a oneof. */
 export interface OneofDescriptorProtoSDKType {
   name: string;
-  options: OneofOptionsSDKType;
+  options?: OneofOptionsSDKType;
 }
 
 /** Describes an enum type. */
 export interface EnumDescriptorProto {
   name: string;
   value: EnumValueDescriptorProto[];
-  options: EnumOptions;
+  options?: EnumOptions;
 
   /**
    * Range of reserved numeric values. Reserved numeric values may not be used
@@ -857,7 +857,7 @@ export interface EnumDescriptorProto {
 export interface EnumDescriptorProtoSDKType {
   name: string;
   value: EnumValueDescriptorProtoSDKType[];
-  options: EnumOptionsSDKType;
+  options?: EnumOptionsSDKType;
 
   /**
    * Range of reserved numeric values. Reserved numeric values may not be used
@@ -909,28 +909,28 @@ export interface EnumDescriptorProto_EnumReservedRangeSDKType {
 export interface EnumValueDescriptorProto {
   name: string;
   number: number;
-  options: EnumValueOptions;
+  options?: EnumValueOptions;
 }
 
 /** Describes a value within an enum. */
 export interface EnumValueDescriptorProtoSDKType {
   name: string;
   number: number;
-  options: EnumValueOptionsSDKType;
+  options?: EnumValueOptionsSDKType;
 }
 
 /** Describes a service. */
 export interface ServiceDescriptorProto {
   name: string;
   method: MethodDescriptorProto[];
-  options: ServiceOptions;
+  options?: ServiceOptions;
 }
 
 /** Describes a service. */
 export interface ServiceDescriptorProtoSDKType {
   name: string;
   method: MethodDescriptorProtoSDKType[];
-  options: ServiceOptionsSDKType;
+  options?: ServiceOptionsSDKType;
 }
 
 /** Describes a method of a service. */
@@ -943,7 +943,7 @@ export interface MethodDescriptorProto {
    */
   inputType: string;
   outputType: string;
-  options: MethodOptions;
+  options?: MethodOptions;
 
   /** Identifies if client streams multiple client messages */
   clientStreaming: boolean;
@@ -962,7 +962,7 @@ export interface MethodDescriptorProtoSDKType {
    */
   input_type: string;
   output_type: string;
-  options: MethodOptionsSDKType;
+  options?: MethodOptionsSDKType;
 
   /** Identifies if client streams multiple client messages */
   client_streaming: boolean;

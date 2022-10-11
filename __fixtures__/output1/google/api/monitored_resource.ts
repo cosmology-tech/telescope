@@ -214,7 +214,7 @@ export interface MonitoredResourceMetadata {
    *       "security_group": ["a", "b", "c"],
    *       "spot_instance": false }
    */
-  systemLabels: Struct;
+  systemLabels?: Struct;
 
   /** Output only. A map of user-defined metadata labels. */
   userLabels: {
@@ -243,7 +243,7 @@ export interface MonitoredResourceMetadataSDKType {
    *       "security_group": ["a", "b", "c"],
    *       "spot_instance": false }
    */
-  system_labels: StructSDKType;
+  system_labels?: StructSDKType;
 
   /** Output only. A map of user-defined metadata labels. */
   user_labels: {

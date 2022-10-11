@@ -6,7 +6,7 @@ export const protobufPackage = "evmos.inflation.v1";
 /** GenesisState defines the inflation module's genesis state. */
 export interface GenesisState {
   /** params defines all the paramaters of the module. */
-  params: Params;
+  params?: Params;
 
   /** amount of past periods, based on the epochs per period param */
   period: Long;
@@ -24,7 +24,7 @@ export interface GenesisState {
 /** GenesisState defines the inflation module's genesis state. */
 export interface GenesisStateSDKType {
   /** params defines all the paramaters of the module. */
-  params: ParamsSDKType;
+  params?: ParamsSDKType;
 
   /** amount of past periods, based on the epochs per period param */
   period: Long;
@@ -45,10 +45,10 @@ export interface Params {
   mintDenom: string;
 
   /** variables to calculate exponential inflation */
-  exponentialCalculation: ExponentialCalculation;
+  exponentialCalculation?: ExponentialCalculation;
 
   /** inflation distribution of the minted denom */
-  inflationDistribution: InflationDistribution;
+  inflationDistribution?: InflationDistribution;
 
   /** parameter to enable inflation and halt increasing the skipped_epochs */
   enableInflation: boolean;
@@ -60,10 +60,10 @@ export interface ParamsSDKType {
   mint_denom: string;
 
   /** variables to calculate exponential inflation */
-  exponential_calculation: ExponentialCalculationSDKType;
+  exponential_calculation?: ExponentialCalculationSDKType;
 
   /** inflation distribution of the minted denom */
-  inflation_distribution: InflationDistributionSDKType;
+  inflation_distribution?: InflationDistributionSDKType;
 
   /** parameter to enable inflation and halt increasing the skipped_epochs */
   enable_inflation: boolean;

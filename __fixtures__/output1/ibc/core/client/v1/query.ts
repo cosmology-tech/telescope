@@ -30,13 +30,13 @@ export interface QueryClientStateRequestSDKType {
  */
 export interface QueryClientStateResponse {
   /** client state associated with the request identifier */
-  clientState: Any;
+  clientState?: Any;
 
   /** merkle proof of existence */
   proof: Uint8Array;
 
   /** height at which the proof was retrieved */
-  proofHeight: Height;
+  proofHeight?: Height;
 }
 
 /**
@@ -46,13 +46,13 @@ export interface QueryClientStateResponse {
  */
 export interface QueryClientStateResponseSDKType {
   /** client state associated with the request identifier */
-  client_state: AnySDKType;
+  client_state?: AnySDKType;
 
   /** merkle proof of existence */
   proof: Uint8Array;
 
   /** height at which the proof was retrieved */
-  proof_height: HeightSDKType;
+  proof_height?: HeightSDKType;
 }
 
 /**
@@ -147,13 +147,13 @@ export interface QueryConsensusStateRequestSDKType {
  */
 export interface QueryConsensusStateResponse {
   /** consensus state associated with the client identifier at the given height */
-  consensusState: Any;
+  consensusState?: Any;
 
   /** merkle proof of existence */
   proof: Uint8Array;
 
   /** height at which the proof was retrieved */
-  proofHeight: Height;
+  proofHeight?: Height;
 }
 
 /**
@@ -162,13 +162,13 @@ export interface QueryConsensusStateResponse {
  */
 export interface QueryConsensusStateResponseSDKType {
   /** consensus state associated with the client identifier at the given height */
-  consensus_state: AnySDKType;
+  consensus_state?: AnySDKType;
 
   /** merkle proof of existence */
   proof: Uint8Array;
 
   /** height at which the proof was retrieved */
-  proof_height: HeightSDKType;
+  proof_height?: HeightSDKType;
 }
 
 /**
@@ -271,7 +271,7 @@ export interface QueryClientParamsRequestSDKType {}
  */
 export interface QueryClientParamsResponse {
   /** params defines the parameters of the module. */
-  params: Params;
+  params?: Params;
 }
 
 /**
@@ -280,7 +280,7 @@ export interface QueryClientParamsResponse {
  */
 export interface QueryClientParamsResponseSDKType {
   /** params defines the parameters of the module. */
-  params: ParamsSDKType;
+  params?: ParamsSDKType;
 }
 
 /**
@@ -301,7 +301,7 @@ export interface QueryUpgradedClientStateRequestSDKType {}
  */
 export interface QueryUpgradedClientStateResponse {
   /** client state associated with the request identifier */
-  upgradedClientState: Any;
+  upgradedClientState?: Any;
 }
 
 /**
@@ -310,7 +310,7 @@ export interface QueryUpgradedClientStateResponse {
  */
 export interface QueryUpgradedClientStateResponseSDKType {
   /** client state associated with the request identifier */
-  upgraded_client_state: AnySDKType;
+  upgraded_client_state?: AnySDKType;
 }
 
 /**
@@ -331,7 +331,7 @@ export interface QueryUpgradedConsensusStateRequestSDKType {}
  */
 export interface QueryUpgradedConsensusStateResponse {
   /** Consensus state associated with the request identifier */
-  upgradedConsensusState: Any;
+  upgradedConsensusState?: Any;
 }
 
 /**
@@ -340,7 +340,7 @@ export interface QueryUpgradedConsensusStateResponse {
  */
 export interface QueryUpgradedConsensusStateResponseSDKType {
   /** Consensus state associated with the request identifier */
-  upgraded_consensus_state: AnySDKType;
+  upgraded_consensus_state?: AnySDKType;
 }
 
 function createBaseQueryClientStateRequest(): QueryClientStateRequest {

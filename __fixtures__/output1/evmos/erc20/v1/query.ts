@@ -68,7 +68,7 @@ export interface QueryTokenPairRequestSDKType {
  * method.
  */
 export interface QueryTokenPairResponse {
-  tokenPair: TokenPair;
+  tokenPair?: TokenPair;
 }
 
 /**
@@ -76,7 +76,7 @@ export interface QueryTokenPairResponse {
  * method.
  */
 export interface QueryTokenPairResponseSDKType {
-  token_pair: TokenPairSDKType;
+  token_pair?: TokenPairSDKType;
 }
 
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
@@ -90,7 +90,7 @@ export interface QueryParamsRequestSDKType {}
  * method.
  */
 export interface QueryParamsResponse {
-  params: Params;
+  params?: Params;
 }
 
 /**
@@ -98,7 +98,7 @@ export interface QueryParamsResponse {
  * method.
  */
 export interface QueryParamsResponseSDKType {
-  params: ParamsSDKType;
+  params?: ParamsSDKType;
 }
 
 function createBaseQueryTokenPairsRequest(): QueryTokenPairsRequest {

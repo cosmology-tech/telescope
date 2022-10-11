@@ -7,26 +7,26 @@ export const protobufPackage = "akash.deployment.v1beta2";
 
 /** GenesisDeployment defines the basic genesis state used by deployment module */
 export interface GenesisDeployment {
-  deployment: Deployment;
+  deployment?: Deployment;
   groups: Group[];
 }
 
 /** GenesisDeployment defines the basic genesis state used by deployment module */
 export interface GenesisDeploymentSDKType {
-  deployment: DeploymentSDKType;
+  deployment?: DeploymentSDKType;
   groups: GroupSDKType[];
 }
 
 /** GenesisState stores slice of genesis deployment instance */
 export interface GenesisState {
   deployments: GenesisDeployment[];
-  params: Params;
+  params?: Params;
 }
 
 /** GenesisState stores slice of genesis deployment instance */
 export interface GenesisStateSDKType {
   deployments: GenesisDeploymentSDKType[];
-  params: ParamsSDKType;
+  params?: ParamsSDKType;
 }
 
 function createBaseGenesisDeployment(): GenesisDeployment {

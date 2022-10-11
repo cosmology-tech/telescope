@@ -9,13 +9,13 @@ export const protobufPackage = "cosmos.tx.v1beta1";
 /** Tx is the standard type used for broadcasting transactions. */
 export interface Tx {
   /** body is the processable content of the transaction */
-  body: TxBody;
+  body?: TxBody;
 
   /**
    * auth_info is the authorization related content of the transaction,
    * specifically signers, signer modes and fee
    */
-  authInfo: AuthInfo;
+  authInfo?: AuthInfo;
 
   /**
    * signatures is a list of signatures that matches the length and order of
@@ -28,13 +28,13 @@ export interface Tx {
 /** Tx is the standard type used for broadcasting transactions. */
 export interface TxSDKType {
   /** body is the processable content of the transaction */
-  body: TxBodySDKType;
+  body?: TxBodySDKType;
 
   /**
    * auth_info is the authorization related content of the transaction,
    * specifically signers, signer modes and fee
    */
-  auth_info: AuthInfoSDKType;
+  auth_info?: AuthInfoSDKType;
 
   /**
    * signatures is a list of signatures that matches the length and order of
@@ -164,7 +164,7 @@ export interface SignDocDirectAux {
   bodyBytes: Uint8Array;
 
   /** public_key is the public key of the signing account. */
-  publicKey: Any;
+  publicKey?: Any;
 
   /**
    * chain_id is the identifier of the chain this transaction targets.
@@ -183,7 +183,7 @@ export interface SignDocDirectAux {
    * Tip is the optional tip used for meta-transactions. It should be left
    * empty if the signer is not the tipper for this transaction.
    */
-  tip: Tip;
+  tip?: Tip;
 }
 
 /**
@@ -200,7 +200,7 @@ export interface SignDocDirectAuxSDKType {
   body_bytes: Uint8Array;
 
   /** public_key is the public key of the signing account. */
-  public_key: AnySDKType;
+  public_key?: AnySDKType;
 
   /**
    * chain_id is the identifier of the chain this transaction targets.
@@ -219,7 +219,7 @@ export interface SignDocDirectAuxSDKType {
    * Tip is the optional tip used for meta-transactions. It should be left
    * empty if the signer is not the tipper for this transaction.
    */
-  tip: TipSDKType;
+  tip?: TipSDKType;
 }
 
 /** TxBody is the body of a transaction that all signers sign over. */
@@ -323,14 +323,14 @@ export interface AuthInfo {
    * based on the cost of evaluating the body and doing signature verification
    * of the signers. This can be estimated via simulation.
    */
-  fee: Fee;
+  fee?: Fee;
 
   /**
    * Tip is the optional tip used for meta-transactions.
    * 
    * Since: cosmos-sdk 0.46
    */
-  tip: Tip;
+  tip?: Tip;
 }
 
 /**
@@ -352,14 +352,14 @@ export interface AuthInfoSDKType {
    * based on the cost of evaluating the body and doing signature verification
    * of the signers. This can be estimated via simulation.
    */
-  fee: FeeSDKType;
+  fee?: FeeSDKType;
 
   /**
    * Tip is the optional tip used for meta-transactions.
    * 
    * Since: cosmos-sdk 0.46
    */
-  tip: TipSDKType;
+  tip?: TipSDKType;
 }
 
 /**
@@ -372,13 +372,13 @@ export interface SignerInfo {
    * that already exist in state. If unset, the verifier can use the required \
    * signer address for this position and lookup the public key.
    */
-  publicKey: Any;
+  publicKey?: Any;
 
   /**
    * mode_info describes the signing mode of the signer and is a nested
    * structure to support nested multisig pubkey's
    */
-  modeInfo: ModeInfo;
+  modeInfo?: ModeInfo;
 
   /**
    * sequence is the sequence of the account, which describes the
@@ -398,13 +398,13 @@ export interface SignerInfoSDKType {
    * that already exist in state. If unset, the verifier can use the required \
    * signer address for this position and lookup the public key.
    */
-  public_key: AnySDKType;
+  public_key?: AnySDKType;
 
   /**
    * mode_info describes the signing mode of the signer and is a nested
    * structure to support nested multisig pubkey's
    */
-  mode_info: ModeInfoSDKType;
+  mode_info?: ModeInfoSDKType;
 
   /**
    * sequence is the sequence of the account, which describes the
@@ -455,7 +455,7 @@ export interface ModeInfo_SingleSDKType {
 /** Multi is the mode info for a multisig public key */
 export interface ModeInfo_Multi {
   /** bitarray specifies which keys within the multisig are signing */
-  bitarray: CompactBitArray;
+  bitarray?: CompactBitArray;
 
   /**
    * mode_infos is the corresponding modes of the signers of the multisig
@@ -467,7 +467,7 @@ export interface ModeInfo_Multi {
 /** Multi is the mode info for a multisig public key */
 export interface ModeInfo_MultiSDKType {
   /** bitarray specifies which keys within the multisig are signing */
-  bitarray: CompactBitArraySDKType;
+  bitarray?: CompactBitArraySDKType;
 
   /**
    * mode_infos is the corresponding modes of the signers of the multisig
@@ -583,7 +583,7 @@ export interface AuxSignerData {
    * signs. Note: we use the same sign doc even if we're signing with
    * LEGACY_AMINO_JSON.
    */
-  signDoc: SignDocDirectAux;
+  signDoc?: SignDocDirectAux;
 
   /** mode is the signing mode of the single signer */
   mode: SignMode;
@@ -613,7 +613,7 @@ export interface AuxSignerDataSDKType {
    * signs. Note: we use the same sign doc even if we're signing with
    * LEGACY_AMINO_JSON.
    */
-  sign_doc: SignDocDirectAuxSDKType;
+  sign_doc?: SignDocDirectAuxSDKType;
 
   /** mode is the signing mode of the single signer */
   mode: SignModeSDKType;

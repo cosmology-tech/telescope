@@ -7,10 +7,10 @@ export const protobufPackage = "akash.deployment.v1beta2";
 
 /** MsgCreateDeployment defines an SDK message for creating deployment */
 export interface MsgCreateDeployment {
-  id: DeploymentID;
+  id?: DeploymentID;
   groups: GroupSpec[];
   version: Uint8Array;
-  deposit: Coin;
+  deposit?: Coin;
 
   /** Depositor pays for the deposit */
   depositor: string;
@@ -18,10 +18,10 @@ export interface MsgCreateDeployment {
 
 /** MsgCreateDeployment defines an SDK message for creating deployment */
 export interface MsgCreateDeploymentSDKType {
-  id: DeploymentIDSDKType;
+  id?: DeploymentIDSDKType;
   groups: GroupSpecSDKType[];
   version: Uint8Array;
-  deposit: CoinSDKType;
+  deposit?: CoinSDKType;
 
   /** Depositor pays for the deposit */
   depositor: string;
@@ -35,8 +35,8 @@ export interface MsgCreateDeploymentResponseSDKType {}
 
 /** MsgDepositDeployment deposits more funds into the deposit account */
 export interface MsgDepositDeployment {
-  id: DeploymentID;
-  amount: Coin;
+  id?: DeploymentID;
+  amount?: Coin;
 
   /** Depositor pays for the deposit */
   depositor: string;
@@ -44,8 +44,8 @@ export interface MsgDepositDeployment {
 
 /** MsgDepositDeployment deposits more funds into the deposit account */
 export interface MsgDepositDeploymentSDKType {
-  id: DeploymentIDSDKType;
-  amount: CoinSDKType;
+  id?: DeploymentIDSDKType;
+  amount?: CoinSDKType;
 
   /** Depositor pays for the deposit */
   depositor: string;
@@ -59,13 +59,13 @@ export interface MsgDepositDeploymentResponseSDKType {}
 
 /** MsgUpdateDeployment defines an SDK message for updating deployment */
 export interface MsgUpdateDeployment {
-  id: DeploymentID;
+  id?: DeploymentID;
   version: Uint8Array;
 }
 
 /** MsgUpdateDeployment defines an SDK message for updating deployment */
 export interface MsgUpdateDeploymentSDKType {
-  id: DeploymentIDSDKType;
+  id?: DeploymentIDSDKType;
   version: Uint8Array;
 }
 
@@ -77,12 +77,12 @@ export interface MsgUpdateDeploymentResponseSDKType {}
 
 /** MsgCloseDeployment defines an SDK message for closing deployment */
 export interface MsgCloseDeployment {
-  id: DeploymentID;
+  id?: DeploymentID;
 }
 
 /** MsgCloseDeployment defines an SDK message for closing deployment */
 export interface MsgCloseDeploymentSDKType {
-  id: DeploymentIDSDKType;
+  id?: DeploymentIDSDKType;
 }
 
 /** MsgCloseDeploymentResponse defines the Msg/CloseDeployment response type. */

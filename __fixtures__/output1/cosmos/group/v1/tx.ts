@@ -213,7 +213,7 @@ export interface MsgCreateGroupPolicy {
   metadata: string;
 
   /** decision_policy specifies the group policy's decision policy. */
-  decisionPolicy: Any;
+  decisionPolicy?: Any;
 }
 
 /** MsgCreateGroupPolicy is the Msg/CreateGroupPolicy request type. */
@@ -228,7 +228,7 @@ export interface MsgCreateGroupPolicySDKType {
   metadata: string;
 
   /** decision_policy specifies the group policy's decision policy. */
-  decision_policy: AnySDKType;
+  decision_policy?: AnySDKType;
 }
 
 /** MsgCreateGroupPolicyResponse is the Msg/CreateGroupPolicy response type. */
@@ -285,7 +285,7 @@ export interface MsgCreateGroupWithPolicy {
   groupPolicyAsAdmin: boolean;
 
   /** decision_policy specifies the group policy's decision policy. */
-  decisionPolicy: Any;
+  decisionPolicy?: Any;
 }
 
 /** MsgCreateGroupWithPolicy is the Msg/CreateGroupWithPolicy request type. */
@@ -306,7 +306,7 @@ export interface MsgCreateGroupWithPolicySDKType {
   group_policy_as_admin: boolean;
 
   /** decision_policy specifies the group policy's decision policy. */
-  decision_policy: AnySDKType;
+  decision_policy?: AnySDKType;
 }
 
 /** MsgCreateGroupWithPolicyResponse is the Msg/CreateGroupWithPolicy response type. */
@@ -342,7 +342,7 @@ export interface MsgUpdateGroupPolicyDecisionPolicy {
   address: string;
 
   /** decision_policy is the updated group policy's decision policy. */
-  decisionPolicy: Any;
+  decisionPolicy?: Any;
 }
 
 /** MsgUpdateGroupPolicyDecisionPolicy is the Msg/UpdateGroupPolicyDecisionPolicy request type. */
@@ -354,7 +354,7 @@ export interface MsgUpdateGroupPolicyDecisionPolicySDKType {
   address: string;
 
   /** decision_policy is the updated group policy's decision policy. */
-  decision_policy: AnySDKType;
+  decision_policy?: AnySDKType;
 }
 
 /** MsgUpdateGroupPolicyDecisionPolicyResponse is the Msg/UpdateGroupPolicyDecisionPolicy response type. */

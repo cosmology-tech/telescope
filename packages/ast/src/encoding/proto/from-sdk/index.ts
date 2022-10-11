@@ -1,7 +1,7 @@
 import * as t from '@babel/types';
 import { ProtoType, ProtoField } from '@osmonauts/types';
 import { pascal } from 'case';
-import { getFieldOptionality, getOneOfs } from '..';
+import { getFieldOptionality, getFieldOptionalityForDefaults, getOneOfs } from '..';
 import { identifier, objectMethod } from '../../../utils';
 import { ProtoParseContext } from '../../context';
 import { fromSDK, arrayTypes } from './utils';
@@ -24,7 +24,7 @@ export const fromSDKMethodFields = (context: ProtoParseContext, name: string, pr
         };
 
         const isOneOf = oneOfs.includes(fieldName);
-        const isOptional = getFieldOptionality(context, field, isOneOf);
+        const isOptional = getFieldOptionalityForDefaults(context, field, isOneOf);
 
         const args: FromSDKMethod = {
             context,

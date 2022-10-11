@@ -170,8 +170,8 @@ export interface SignatureDescriptorsSDKType {
  */
 export interface SignatureDescriptor {
   /** public_key is the public key of the signer */
-  publicKey: Any;
-  data: SignatureDescriptor_Data;
+  publicKey?: Any;
+  data?: SignatureDescriptor_Data;
 
   /**
    * sequence is the sequence of the account, which describes the
@@ -189,8 +189,8 @@ export interface SignatureDescriptor {
  */
 export interface SignatureDescriptorSDKType {
   /** public_key is the public key of the signer */
-  public_key: AnySDKType;
-  data: SignatureDescriptor_DataSDKType;
+  public_key?: AnySDKType;
+  data?: SignatureDescriptor_DataSDKType;
 
   /**
    * sequence is the sequence of the account, which describes the
@@ -239,7 +239,7 @@ export interface SignatureDescriptor_Data_SingleSDKType {
 /** Multi is the signature data for a multisig public key */
 export interface SignatureDescriptor_Data_Multi {
   /** bitarray specifies which keys within the multisig are signing */
-  bitarray: CompactBitArray;
+  bitarray?: CompactBitArray;
 
   /** signatures is the signatures of the multi-signature */
   signatures: SignatureDescriptor_Data[];
@@ -248,7 +248,7 @@ export interface SignatureDescriptor_Data_Multi {
 /** Multi is the signature data for a multisig public key */
 export interface SignatureDescriptor_Data_MultiSDKType {
   /** bitarray specifies which keys within the multisig are signing */
-  bitarray: CompactBitArraySDKType;
+  bitarray?: CompactBitArraySDKType;
 
   /** signatures is the signatures of the multi-signature */
   signatures: SignatureDescriptor_DataSDKType[];

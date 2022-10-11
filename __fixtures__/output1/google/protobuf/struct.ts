@@ -49,11 +49,11 @@ export function nullValueToJSON(object: NullValue): string {
 }
 export interface Struct_FieldsEntry {
   key: string;
-  value: Value;
+  value?: Value;
 }
 export interface Struct_FieldsEntrySDKType {
   key: string;
-  value: ValueSDKType;
+  value?: ValueSDKType;
 }
 
 /**
@@ -68,7 +68,7 @@ export interface Struct_FieldsEntrySDKType {
  */
 export interface Struct {
   /** Unordered map of dynamically typed values. */
-  fields: {
+  fields?: {
     [key: string]: Value;
   };
 }
@@ -85,7 +85,7 @@ export interface Struct {
  */
 export interface StructSDKType {
   /** Unordered map of dynamically typed values. */
-  fields: {
+  fields?: {
     [key: string]: ValueSDKType;
   };
 }

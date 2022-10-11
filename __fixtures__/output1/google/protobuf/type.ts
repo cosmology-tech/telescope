@@ -413,7 +413,7 @@ export interface Type {
   options: Option[];
 
   /** The source context. */
-  sourceContext: SourceContext;
+  sourceContext?: SourceContext;
 
   /** The source syntax. */
   syntax: Syntax;
@@ -434,7 +434,7 @@ export interface TypeSDKType {
   options: OptionSDKType[];
 
   /** The source context. */
-  source_context: SourceContextSDKType;
+  source_context?: SourceContextSDKType;
 
   /** The source syntax. */
   syntax: SyntaxSDKType;
@@ -530,7 +530,7 @@ export interface Enum {
   options: Option[];
 
   /** The source context. */
-  sourceContext: SourceContext;
+  sourceContext?: SourceContext;
 
   /** The source syntax. */
   syntax: Syntax;
@@ -548,7 +548,7 @@ export interface EnumSDKType {
   options: OptionSDKType[];
 
   /** The source context. */
-  source_context: SourceContextSDKType;
+  source_context?: SourceContextSDKType;
 
   /** The source syntax. */
   syntax: SyntaxSDKType;
@@ -597,7 +597,7 @@ export interface Option {
    * should be used. If the value is an enum, it should be stored as an int32
    * value using the google.protobuf.Int32Value type.
    */
-  value: Any;
+  value?: Any;
 }
 
 /**
@@ -619,7 +619,7 @@ export interface OptionSDKType {
    * should be used. If the value is an enum, it should be stored as an int32
    * value using the google.protobuf.Int32Value type.
    */
-  value: AnySDKType;
+  value?: AnySDKType;
 }
 
 function createBaseType(): Type {

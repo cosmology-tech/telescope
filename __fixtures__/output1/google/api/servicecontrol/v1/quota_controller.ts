@@ -305,7 +305,7 @@ export interface AllocateQuotaRequest {
   serviceName: string;
 
   /** Operation that describes the quota allocation. */
-  allocateOperation: QuotaOperation;
+  allocateOperation?: QuotaOperation;
 
   /**
    * Specifies which version of service configuration should be used to process
@@ -326,7 +326,7 @@ export interface AllocateQuotaRequestSDKType {
   service_name: string;
 
   /** Operation that describes the quota allocation. */
-  allocate_operation: QuotaOperationSDKType;
+  allocate_operation?: QuotaOperationSDKType;
 
   /**
    * Specifies which version of service configuration should be used to process
@@ -551,7 +551,7 @@ export interface QuotaError {
    * Contains additional information about the quota error.
    * If available, `status.code` will be non zero.
    */
-  status: Status;
+  status?: Status;
 }
 
 /** Represents error information for [QuotaOperation][google.api.servicecontrol.v1.QuotaOperation]. */
@@ -573,7 +573,7 @@ export interface QuotaErrorSDKType {
    * Contains additional information about the quota error.
    * If available, `status.code` will be non zero.
    */
-  status: StatusSDKType;
+  status?: StatusSDKType;
 }
 
 function createBaseAllocateQuotaRequest(): AllocateQuotaRequest {

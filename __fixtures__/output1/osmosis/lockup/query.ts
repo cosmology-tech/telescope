@@ -136,10 +136,10 @@ export interface LockedRequestSDKType {
   lock_id: Long;
 }
 export interface LockedResponse {
-  lock: PeriodLock;
+  lock?: PeriodLock;
 }
 export interface LockedResponseSDKType {
-  lock: PeriodLockSDKType;
+  lock?: PeriodLockSDKType;
 }
 export interface SyntheticLockupsByLockupIDRequest {
   lockId: Long;

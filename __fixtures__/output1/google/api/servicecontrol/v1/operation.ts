@@ -112,7 +112,7 @@ export interface Operation {
   consumerId: string;
 
   /** Required. Start time of the operation. */
-  startTime: Date;
+  startTime?: Date;
 
   /**
    * End time of the operation.
@@ -121,7 +121,7 @@ export interface Operation {
    * but optional when the operation is used in
    * [ServiceController.Check][google.api.servicecontrol.v1.ServiceController.Check].
    */
-  endTime: Date;
+  endTime?: Date;
 
   /**
    * Labels describing the operation. Only the following labels are allowed:
@@ -204,7 +204,7 @@ export interface OperationSDKType {
   consumer_id: string;
 
   /** Required. Start time of the operation. */
-  start_time: Date;
+  start_time?: Date;
 
   /**
    * End time of the operation.
@@ -213,7 +213,7 @@ export interface OperationSDKType {
    * but optional when the operation is used in
    * [ServiceController.Check][google.api.servicecontrol.v1.ServiceController.Check].
    */
-  end_time: Date;
+  end_time?: Date;
 
   /**
    * Labels describing the operation. Only the following labels are allowed:

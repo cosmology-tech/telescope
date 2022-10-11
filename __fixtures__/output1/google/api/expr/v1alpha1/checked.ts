@@ -231,19 +231,19 @@ export function type_WellKnownTypeToJSON(object: Type_WellKnownType): string {
 }
 export interface CheckedExpr_ReferenceMapEntry {
   key: Long;
-  value: Reference;
+  value?: Reference;
 }
 export interface CheckedExpr_ReferenceMapEntrySDKType {
   key: Long;
-  value: ReferenceSDKType;
+  value?: ReferenceSDKType;
 }
 export interface CheckedExpr_TypeMapEntry {
   key: Long;
-  value: Type;
+  value?: Type;
 }
 export interface CheckedExpr_TypeMapEntrySDKType {
   key: Long;
-  value: TypeSDKType;
+  value?: TypeSDKType;
 }
 
 /** A CEL expression which has been successfully type checked. */
@@ -265,7 +265,7 @@ export interface CheckedExpr {
    * - Every CreateStruct expression for a message has an entry, identifying
    *   the message.
    */
-  referenceMap: {
+  referenceMap?: {
     [key: Long]: Reference;
   };
 
@@ -276,7 +276,7 @@ export interface CheckedExpr {
    * here. If an expression has type DYN, it is omitted from this map to save
    * space.
    */
-  typeMap: {
+  typeMap?: {
     [key: Long]: Type;
   };
 
@@ -284,7 +284,7 @@ export interface CheckedExpr {
    * The source info derived from input that generated the parsed `expr` and
    * any optimizations made during the type-checking pass.
    */
-  sourceInfo: SourceInfo;
+  sourceInfo?: SourceInfo;
 
   /**
    * The expr version indicates the major / minor version number of the `expr`
@@ -301,7 +301,7 @@ export interface CheckedExpr {
    * The checked expression. Semantically equivalent to the parsed `expr`, but
    * may have structural differences.
    */
-  expr: Expr;
+  expr?: Expr;
 }
 
 /** A CEL expression which has been successfully type checked. */
@@ -323,7 +323,7 @@ export interface CheckedExprSDKType {
    * - Every CreateStruct expression for a message has an entry, identifying
    *   the message.
    */
-  reference_map: {
+  reference_map?: {
     [key: Long]: ReferenceSDKType;
   };
 
@@ -334,7 +334,7 @@ export interface CheckedExprSDKType {
    * here. If an expression has type DYN, it is omitted from this map to save
    * space.
    */
-  type_map: {
+  type_map?: {
     [key: Long]: TypeSDKType;
   };
 
@@ -342,7 +342,7 @@ export interface CheckedExprSDKType {
    * The source info derived from input that generated the parsed `expr` and
    * any optimizations made during the type-checking pass.
    */
-  source_info: SourceInfoSDKType;
+  source_info?: SourceInfoSDKType;
 
   /**
    * The expr version indicates the major / minor version number of the `expr`
@@ -359,7 +359,7 @@ export interface CheckedExprSDKType {
    * The checked expression. Semantically equivalent to the parsed `expr`, but
    * may have structural differences.
    */
-  expr: ExprSDKType;
+  expr?: ExprSDKType;
 }
 
 /** Represents a CEL type. */
@@ -493,37 +493,37 @@ export interface TypeSDKType {
 /** List type with typed elements, e.g. `list<example.proto.MyMessage>`. */
 export interface Type_ListType {
   /** The element type. */
-  elemType: Type;
+  elemType?: Type;
 }
 
 /** List type with typed elements, e.g. `list<example.proto.MyMessage>`. */
 export interface Type_ListTypeSDKType {
   /** The element type. */
-  elem_type: TypeSDKType;
+  elem_type?: TypeSDKType;
 }
 
 /** Map type with parameterized key and value types, e.g. `map<string, int>`. */
 export interface Type_MapType {
   /** The type of the key. */
-  keyType: Type;
+  keyType?: Type;
 
   /** The type of the value. */
-  valueType: Type;
+  valueType?: Type;
 }
 
 /** Map type with parameterized key and value types, e.g. `map<string, int>`. */
 export interface Type_MapTypeSDKType {
   /** The type of the key. */
-  key_type: TypeSDKType;
+  key_type?: TypeSDKType;
 
   /** The type of the value. */
-  value_type: TypeSDKType;
+  value_type?: TypeSDKType;
 }
 
 /** Function type with result and arg types. */
 export interface Type_FunctionType {
   /** Result type of the function. */
-  resultType: Type;
+  resultType?: Type;
 
   /** Argument types of the function. */
   argTypes: Type[];
@@ -532,7 +532,7 @@ export interface Type_FunctionType {
 /** Function type with result and arg types. */
 export interface Type_FunctionTypeSDKType {
   /** Result type of the function. */
-  result_type: TypeSDKType;
+  result_type?: TypeSDKType;
 
   /** Argument types of the function. */
   arg_types: TypeSDKType[];
@@ -618,13 +618,13 @@ export interface DeclSDKType {
  */
 export interface Decl_IdentDecl {
   /** Required. The type of the identifier. */
-  type: Type;
+  type?: Type;
 
   /**
    * The constant value of the identifier. If not specified, the identifier
    * must be supplied at evaluation time.
    */
-  value: Constant;
+  value?: Constant;
 
   /** Documentation string for the identifier. */
   doc: string;
@@ -640,13 +640,13 @@ export interface Decl_IdentDecl {
  */
 export interface Decl_IdentDeclSDKType {
   /** Required. The type of the identifier. */
-  type: TypeSDKType;
+  type?: TypeSDKType;
 
   /**
    * The constant value of the identifier. If not specified, the identifier
    * must be supplied at evaluation time.
    */
-  value: ConstantSDKType;
+  value?: ConstantSDKType;
 
   /** Documentation string for the identifier. */
   doc: string;
@@ -724,7 +724,7 @@ export interface Decl_FunctionDecl_Overload {
    * Required. The result type of the function. For example, the operator
    * `string.isEmpty()` would have `result_type` of `kind: BOOL`.
    */
-  resultType: Type;
+  resultType?: Type;
 
   /**
    * Whether the function is to be used in a method call-style `x.f(...)`
@@ -787,7 +787,7 @@ export interface Decl_FunctionDecl_OverloadSDKType {
    * Required. The result type of the function. For example, the operator
    * `string.isEmpty()` would have `result_type` of `kind: BOOL`.
    */
-  result_type: TypeSDKType;
+  result_type?: TypeSDKType;
 
   /**
    * Whether the function is to be used in a method call-style `x.f(...)`
@@ -823,7 +823,7 @@ export interface Reference {
    * For references to constants, this may contain the value of the
    * constant if known at compile time.
    */
-  value: Constant;
+  value?: Constant;
 }
 
 /** Describes a resolved reference to a declaration. */
@@ -847,7 +847,7 @@ export interface ReferenceSDKType {
    * For references to constants, this may contain the value of the
    * constant if known at compile time.
    */
-  value: ConstantSDKType;
+  value?: ConstantSDKType;
 }
 
 function createBaseCheckedExpr_ReferenceMapEntry(): CheckedExpr_ReferenceMapEntry {

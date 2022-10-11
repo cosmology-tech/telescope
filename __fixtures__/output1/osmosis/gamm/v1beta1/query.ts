@@ -16,10 +16,10 @@ export interface QueryPoolRequestSDKType {
   pool_id: Long;
 }
 export interface QueryPoolResponse {
-  pool: Any;
+  pool?: Any;
 }
 export interface QueryPoolResponseSDKType {
-  pool: AnySDKType;
+  pool?: AnySDKType;
 }
 
 /** =============================== Pools */
@@ -84,10 +84,10 @@ export interface QueryPoolParamsRequestSDKType {
   pool_id: Long;
 }
 export interface QueryPoolParamsResponse {
-  params: Any;
+  params?: Any;
 }
 export interface QueryPoolParamsResponseSDKType {
-  params: AnySDKType;
+  params?: AnySDKType;
 }
 
 /** =============================== PoolLiquidity */
@@ -116,10 +116,10 @@ export interface QueryTotalSharesRequestSDKType {
   pool_id: Long;
 }
 export interface QueryTotalSharesResponse {
-  totalShares: Coin;
+  totalShares?: Coin;
 }
 export interface QueryTotalSharesResponseSDKType {
-  total_shares: CoinSDKType;
+  total_shares?: CoinSDKType;
 }
 
 /**

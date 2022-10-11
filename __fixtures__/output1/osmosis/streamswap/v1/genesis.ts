@@ -9,7 +9,7 @@ export interface GenesisState {
   sales: Sale[];
   userPositions: UserPositionKV[];
   nextSaleId: Long;
-  params: Params;
+  params?: Params;
 }
 
 /** GenesisState defines the streamswap module's genesis state. */
@@ -17,7 +17,7 @@ export interface GenesisStateSDKType {
   sales: SaleSDKType[];
   user_positions: UserPositionKVSDKType[];
   next_sale_id: Long;
-  params: ParamsSDKType;
+  params?: ParamsSDKType;
 }
 
 /**
@@ -28,7 +28,7 @@ export interface UserPositionKV {
   /** user account address */
   accAddress: string;
   saleId: Long;
-  userPosition: UserPosition;
+  userPosition?: UserPosition;
 }
 
 /**
@@ -39,7 +39,7 @@ export interface UserPositionKVSDKType {
   /** user account address */
   acc_address: string;
   sale_id: Long;
-  user_position: UserPositionSDKType;
+  user_position?: UserPositionSDKType;
 }
 
 function createBaseGenesisState(): GenesisState {

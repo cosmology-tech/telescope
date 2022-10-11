@@ -387,7 +387,7 @@ export interface MetricDescriptor {
   displayName: string;
 
   /** Optional. Metadata which can be used to guide usage of the metric. */
-  metadata: MetricDescriptor_MetricDescriptorMetadata;
+  metadata?: MetricDescriptor_MetricDescriptorMetadata;
 
   /** Optional. The launch stage of the metric definition. */
   launchStage: LaunchStage;
@@ -563,7 +563,7 @@ export interface MetricDescriptorSDKType {
   display_name: string;
 
   /** Optional. Metadata which can be used to guide usage of the metric. */
-  metadata: MetricDescriptor_MetricDescriptorMetadataSDKType;
+  metadata?: MetricDescriptor_MetricDescriptorMetadataSDKType;
 
   /** Optional. The launch stage of the metric definition. */
   launch_stage: LaunchStageSDKType;
@@ -591,14 +591,14 @@ export interface MetricDescriptor_MetricDescriptorMetadata {
    * excluding data loss due to errors. Metrics with a higher granularity have
    * a smaller sampling period.
    */
-  samplePeriod: Duration;
+  samplePeriod?: Duration;
 
   /**
    * The delay of data points caused by ingestion. Data points older than this
    * age are guaranteed to be ingested and available to be read, excluding
    * data loss due to errors.
    */
-  ingestDelay: Duration;
+  ingestDelay?: Duration;
 }
 
 /** Additional annotations that can be used to guide the usage of a metric. */
@@ -614,14 +614,14 @@ export interface MetricDescriptor_MetricDescriptorMetadataSDKType {
    * excluding data loss due to errors. Metrics with a higher granularity have
    * a smaller sampling period.
    */
-  sample_period: DurationSDKType;
+  sample_period?: DurationSDKType;
 
   /**
    * The delay of data points caused by ingestion. Data points older than this
    * age are guaranteed to be ingested and available to be read, excluding
    * data loss due to errors.
    */
-  ingest_delay: DurationSDKType;
+  ingest_delay?: DurationSDKType;
 }
 export interface Metric_LabelsEntry {
   key: string;

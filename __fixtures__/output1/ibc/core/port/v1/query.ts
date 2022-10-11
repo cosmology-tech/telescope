@@ -15,7 +15,7 @@ export interface QueryAppVersionRequest {
   ordering: Order;
 
   /** counterparty channel end */
-  counterparty: Counterparty;
+  counterparty?: Counterparty;
 
   /** proposed version */
   proposedVersion: string;
@@ -33,7 +33,7 @@ export interface QueryAppVersionRequestSDKType {
   ordering: OrderSDKType;
 
   /** counterparty channel end */
-  counterparty: CounterpartySDKType;
+  counterparty?: CounterpartySDKType;
 
   /** proposed version */
   proposed_version: string;

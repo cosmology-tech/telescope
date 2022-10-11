@@ -5,12 +5,12 @@ export const protobufPackage = "akash.deployment.v1beta1";
 
 /** Params defines the parameters for the x/deployment package */
 export interface Params {
-  deploymentMinDeposit: Coin | undefined;
+  deploymentMinDeposit?: Coin | undefined;
 }
 
 /** Params defines the parameters for the x/deployment package */
 export interface ParamsSDKType {
-  deployment_min_deposit: CoinSDKType | undefined;
+  deployment_min_deposit?: CoinSDKType | undefined;
 }
 
 function createBaseParams(): Params {

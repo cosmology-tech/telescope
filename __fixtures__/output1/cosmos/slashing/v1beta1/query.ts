@@ -12,12 +12,12 @@ export interface QueryParamsRequestSDKType {}
 
 /** QueryParamsResponse is the response type for the Query/Params RPC method */
 export interface QueryParamsResponse {
-  params: Params;
+  params?: Params;
 }
 
 /** QueryParamsResponse is the response type for the Query/Params RPC method */
 export interface QueryParamsResponseSDKType {
-  params: ParamsSDKType;
+  params?: ParamsSDKType;
 }
 
 /**
@@ -44,7 +44,7 @@ export interface QuerySigningInfoRequestSDKType {
  */
 export interface QuerySigningInfoResponse {
   /** val_signing_info is the signing info of requested val cons address */
-  valSigningInfo: ValidatorSigningInfo;
+  valSigningInfo?: ValidatorSigningInfo;
 }
 
 /**
@@ -53,7 +53,7 @@ export interface QuerySigningInfoResponse {
  */
 export interface QuerySigningInfoResponseSDKType {
   /** val_signing_info is the signing info of requested val cons address */
-  val_signing_info: ValidatorSigningInfoSDKType;
+  val_signing_info?: ValidatorSigningInfoSDKType;
 }
 
 /**

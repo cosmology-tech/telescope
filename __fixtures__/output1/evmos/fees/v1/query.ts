@@ -68,7 +68,7 @@ export interface QueryDevFeeInfoRequestSDKType {
  * method.
  */
 export interface QueryDevFeeInfoResponse {
-  fee: DevFeeInfo;
+  fee?: DevFeeInfo;
 }
 
 /**
@@ -76,7 +76,7 @@ export interface QueryDevFeeInfoResponse {
  * method.
  */
 export interface QueryDevFeeInfoResponseSDKType {
-  fee: DevFeeInfoSDKType;
+  fee?: DevFeeInfoSDKType;
 }
 
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
@@ -90,7 +90,7 @@ export interface QueryParamsRequestSDKType {}
  * method.
  */
 export interface QueryParamsResponse {
-  params: Params;
+  params?: Params;
 }
 
 /**
@@ -98,7 +98,7 @@ export interface QueryParamsResponse {
  * method.
  */
 export interface QueryParamsResponseSDKType {
-  params: ParamsSDKType;
+  params?: ParamsSDKType;
 }
 
 /**

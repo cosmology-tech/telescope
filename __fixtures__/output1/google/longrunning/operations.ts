@@ -23,7 +23,7 @@ export interface Operation {
    * Some services might not provide such metadata.  Any method that returns a
    * long-running operation should document the metadata type, if any.
    */
-  metadata: Any;
+  metadata?: Any;
 
   /**
    * If the value is `false`, it means the operation is still in progress.
@@ -66,7 +66,7 @@ export interface OperationSDKType {
    * Some services might not provide such metadata.  Any method that returns a
    * long-running operation should document the metadata type, if any.
    */
-  metadata: AnySDKType;
+  metadata?: AnySDKType;
 
   /**
    * If the value is `false`, it means the operation is still in progress.
@@ -185,7 +185,7 @@ export interface WaitOperationRequest {
    * will be at most the time permitted by the underlying HTTP/RPC protocol.
    * If RPC context deadline is also specified, the shorter one will be used.
    */
-  timeout: Duration;
+  timeout?: Duration;
 }
 
 /** The request message for [Operations.WaitOperation][google.longrunning.Operations.WaitOperation]. */
@@ -198,7 +198,7 @@ export interface WaitOperationRequestSDKType {
    * will be at most the time permitted by the underlying HTTP/RPC protocol.
    * If RPC context deadline is also specified, the shorter one will be used.
    */
-  timeout: DurationSDKType;
+  timeout?: DurationSDKType;
 }
 
 /**

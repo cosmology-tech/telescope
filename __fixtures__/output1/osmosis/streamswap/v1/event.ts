@@ -6,13 +6,13 @@ export interface EventCreateSale {
   id: Long;
   creator: string;
   tokenIn: string;
-  tokenOut: Coin;
+  tokenOut?: Coin;
 }
 export interface EventCreateSaleSDKType {
   id: Long;
   creator: string;
   token_in: string;
-  token_out: CoinSDKType;
+  token_out?: CoinSDKType;
 }
 export interface EventSubscribe {
   sender: string;

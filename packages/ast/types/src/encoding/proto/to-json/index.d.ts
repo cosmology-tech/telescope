@@ -4,6 +4,7 @@ import { ProtoField, ProtoType } from '@osmonauts/types';
 export interface ToJSONMethod {
     context: ProtoParseContext;
     field: ProtoField;
+    isOneOf: boolean;
     isOptional: boolean;
 }
 export declare const toJSONMethodFields: (context: ProtoParseContext, name: string, proto: ProtoType) => any[];

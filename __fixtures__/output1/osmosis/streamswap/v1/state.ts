@@ -23,13 +23,13 @@ export interface Sale {
   tokenOutSupply: string;
 
   /** start time when the token emission starts. */
-  startTime: Date;
+  startTime?: Date;
 
   /**
    * end time when the token emission ends. Can't be bigger than start +
    * 139years (to avoid round overflow)
    */
-  endTime: Date;
+  endTime?: Date;
 
   /** Round number when the sale was last time updated. */
   round: Long;
@@ -82,13 +82,13 @@ export interface SaleSDKType {
   token_out_supply: string;
 
   /** start time when the token emission starts. */
-  start_time: Date;
+  start_time?: Date;
 
   /**
    * end time when the token emission ends. Can't be bigger than start +
    * 139years (to avoid round overflow)
    */
-  end_time: Date;
+  end_time?: Date;
 
   /** Round number when the sale was last time updated. */
   round: Long;

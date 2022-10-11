@@ -13,7 +13,7 @@ export interface MsgSoftwareUpgrade {
   authority: string;
 
   /** plan is the upgrade plan. */
-  plan: Plan;
+  plan?: Plan;
 }
 
 /**
@@ -26,7 +26,7 @@ export interface MsgSoftwareUpgradeSDKType {
   authority: string;
 
   /** plan is the upgrade plan. */
-  plan: PlanSDKType;
+  plan?: PlanSDKType;
 }
 
 /**

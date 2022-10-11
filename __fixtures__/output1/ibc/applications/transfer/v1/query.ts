@@ -28,7 +28,7 @@ export interface QueryDenomTraceRequestSDKType {
  */
 export interface QueryDenomTraceResponse {
   /** denom_trace returns the requested denomination trace information. */
-  denomTrace: DenomTrace;
+  denomTrace?: DenomTrace;
 }
 
 /**
@@ -37,7 +37,7 @@ export interface QueryDenomTraceResponse {
  */
 export interface QueryDenomTraceResponseSDKType {
   /** denom_trace returns the requested denomination trace information. */
-  denom_trace: DenomTraceSDKType;
+  denom_trace?: DenomTraceSDKType;
 }
 
 /**
@@ -91,13 +91,13 @@ export interface QueryParamsRequestSDKType {}
 /** QueryParamsResponse is the response type for the Query/Params RPC method. */
 export interface QueryParamsResponse {
   /** params defines the parameters of the module. */
-  params: Params;
+  params?: Params;
 }
 
 /** QueryParamsResponse is the response type for the Query/Params RPC method. */
 export interface QueryParamsResponseSDKType {
   /** params defines the parameters of the module. */
-  params: ParamsSDKType;
+  params?: ParamsSDKType;
 }
 
 function createBaseQueryDenomTraceRequest(): QueryDenomTraceRequest {

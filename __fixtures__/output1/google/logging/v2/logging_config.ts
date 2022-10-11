@@ -292,10 +292,10 @@ export interface LogBucket {
    * Output only. The creation timestamp of the bucket. This is not set for any of the
    * default buckets.
    */
-  createTime: Date;
+  createTime?: Date;
 
   /** Output only. The last update timestamp of the bucket. */
-  updateTime: Date;
+  updateTime?: Date;
 
   /**
    * Logs will be retained by default for this amount of time, after which they
@@ -334,7 +334,7 @@ export interface LogBucket {
    * be disabled later by updating the log bucket. Changing the KMS key is
    * allowed.
    */
-  cmekSettings: CmekSettings;
+  cmekSettings?: CmekSettings;
 }
 
 /** Describes a repository in which log entries are stored. */
@@ -363,10 +363,10 @@ export interface LogBucketSDKType {
    * Output only. The creation timestamp of the bucket. This is not set for any of the
    * default buckets.
    */
-  create_time: Date;
+  create_time?: Date;
 
   /** Output only. The last update timestamp of the bucket. */
-  update_time: Date;
+  update_time?: Date;
 
   /**
    * Logs will be retained by default for this amount of time, after which they
@@ -405,7 +405,7 @@ export interface LogBucketSDKType {
    * be disabled later by updating the log bucket. Changing the KMS key is
    * allowed.
    */
-  cmek_settings: CmekSettingsSDKType;
+  cmek_settings?: CmekSettingsSDKType;
 }
 
 /** Describes a view over log entries in a bucket. */
@@ -423,10 +423,10 @@ export interface LogView {
   description: string;
 
   /** Output only. The creation timestamp of the view. */
-  createTime: Date;
+  createTime?: Date;
 
   /** Output only. The last update timestamp of the view. */
-  updateTime: Date;
+  updateTime?: Date;
 
   /**
    * Filter that restricts which log entries in a bucket are visible in this
@@ -462,10 +462,10 @@ export interface LogViewSDKType {
   description: string;
 
   /** Output only. The creation timestamp of the view. */
-  create_time: Date;
+  create_time?: Date;
 
   /** Output only. The last update timestamp of the view. */
-  update_time: Date;
+  update_time?: Date;
 
   /**
    * Filter that restricts which log entries in a bucket are visible in this
@@ -607,14 +607,14 @@ export interface LogSink {
    * 
    * This field may not be present for older sinks.
    */
-  createTime: Date;
+  createTime?: Date;
 
   /**
    * Output only. The last update timestamp of the sink.
    * 
    * This field may not be present for older sinks.
    */
-  updateTime: Date;
+  updateTime?: Date;
 }
 
 /**
@@ -738,14 +738,14 @@ export interface LogSinkSDKType {
    * 
    * This field may not be present for older sinks.
    */
-  create_time: Date;
+  create_time?: Date;
 
   /**
    * Output only. The last update timestamp of the sink.
    * 
    * This field may not be present for older sinks.
    */
-  update_time: Date;
+  update_time?: Date;
 }
 
 /** Options that change functionality of a sink exporting data to BigQuery. */
@@ -915,7 +915,7 @@ export interface CreateBucketRequest {
    * with any Location Restriction Org Policy. The name field in the bucket is
    * ignored.
    */
-  bucket: LogBucket;
+  bucket?: LogBucket;
 }
 
 /** The parameters to `CreateBucket`. */
@@ -943,7 +943,7 @@ export interface CreateBucketRequestSDKType {
    * with any Location Restriction Org Policy. The name field in the bucket is
    * ignored.
    */
-  bucket: LogBucketSDKType;
+  bucket?: LogBucketSDKType;
 }
 
 /** The parameters to `UpdateBucket`. */
@@ -963,7 +963,7 @@ export interface UpdateBucketRequest {
   name: string;
 
   /** Required. The updated bucket. */
-  bucket: LogBucket;
+  bucket?: LogBucket;
 
   /**
    * Required. Field mask that specifies the fields in `bucket` that need an update. A
@@ -975,7 +975,7 @@ export interface UpdateBucketRequest {
    * 
    * For example: `updateMask=retention_days`
    */
-  updateMask: FieldMask;
+  updateMask?: FieldMask;
 }
 
 /** The parameters to `UpdateBucket`. */
@@ -995,7 +995,7 @@ export interface UpdateBucketRequestSDKType {
   name: string;
 
   /** Required. The updated bucket. */
-  bucket: LogBucketSDKType;
+  bucket?: LogBucketSDKType;
 
   /**
    * Required. Field mask that specifies the fields in `bucket` that need an update. A
@@ -1007,7 +1007,7 @@ export interface UpdateBucketRequestSDKType {
    * 
    * For example: `updateMask=retention_days`
    */
-  update_mask: FieldMaskSDKType;
+  update_mask?: FieldMaskSDKType;
 }
 
 /** The parameters to `GetBucket`. */
@@ -1207,7 +1207,7 @@ export interface CreateViewRequest {
   viewId: string;
 
   /** Required. The new view. */
-  view: LogView;
+  view?: LogView;
 }
 
 /** The parameters to `CreateView`. */
@@ -1227,7 +1227,7 @@ export interface CreateViewRequestSDKType {
   view_id: string;
 
   /** Required. The new view. */
-  view: LogViewSDKType;
+  view?: LogViewSDKType;
 }
 
 /** The parameters to `UpdateView`. */
@@ -1244,7 +1244,7 @@ export interface UpdateViewRequest {
   name: string;
 
   /** Required. The updated view. */
-  view: LogView;
+  view?: LogView;
 
   /**
    * Optional. Field mask that specifies the fields in `view` that need
@@ -1256,7 +1256,7 @@ export interface UpdateViewRequest {
    * 
    * For example: `updateMask=filter`
    */
-  updateMask: FieldMask;
+  updateMask?: FieldMask;
 }
 
 /** The parameters to `UpdateView`. */
@@ -1273,7 +1273,7 @@ export interface UpdateViewRequestSDKType {
   name: string;
 
   /** Required. The updated view. */
-  view: LogViewSDKType;
+  view?: LogViewSDKType;
 
   /**
    * Optional. Field mask that specifies the fields in `view` that need
@@ -1285,7 +1285,7 @@ export interface UpdateViewRequestSDKType {
    * 
    * For example: `updateMask=filter`
    */
-  update_mask: FieldMaskSDKType;
+  update_mask?: FieldMaskSDKType;
 }
 
 /** The parameters to `GetView`. */
@@ -1481,7 +1481,7 @@ export interface CreateSinkRequest {
    * Required. The new sink, whose `name` parameter is a sink identifier that
    * is not already in use.
    */
-  sink: LogSink;
+  sink?: LogSink;
 
   /**
    * Optional. Determines the kind of IAM identity returned as `writer_identity`
@@ -1520,7 +1520,7 @@ export interface CreateSinkRequestSDKType {
    * Required. The new sink, whose `name` parameter is a sink identifier that
    * is not already in use.
    */
-  sink: LogSinkSDKType;
+  sink?: LogSinkSDKType;
 
   /**
    * Optional. Determines the kind of IAM identity returned as `writer_identity`
@@ -1559,7 +1559,7 @@ export interface UpdateSinkRequest {
    * Required. The updated sink, whose name is the same identifier that appears as part
    * of `sink_name`.
    */
-  sink: LogSink;
+  sink?: LogSink;
 
   /**
    * Optional. See [sinks.create][google.logging.v2.ConfigServiceV2.CreateSink]
@@ -1594,7 +1594,7 @@ export interface UpdateSinkRequest {
    * 
    * For example: `updateMask=filter`
    */
-  updateMask: FieldMask;
+  updateMask?: FieldMask;
 }
 
 /** The parameters to `UpdateSink`. */
@@ -1618,7 +1618,7 @@ export interface UpdateSinkRequestSDKType {
    * Required. The updated sink, whose name is the same identifier that appears as part
    * of `sink_name`.
    */
-  sink: LogSinkSDKType;
+  sink?: LogSinkSDKType;
 
   /**
    * Optional. See [sinks.create][google.logging.v2.ConfigServiceV2.CreateSink]
@@ -1653,7 +1653,7 @@ export interface UpdateSinkRequestSDKType {
    * 
    * For example: `updateMask=filter`
    */
-  update_mask: FieldMaskSDKType;
+  update_mask?: FieldMaskSDKType;
 }
 
 /** The parameters to `DeleteSink`. */
@@ -1738,14 +1738,14 @@ export interface LogExclusion {
    * 
    * This field may not be present for older exclusions.
    */
-  createTime: Date;
+  createTime?: Date;
 
   /**
    * Output only. The last update timestamp of the exclusion.
    * 
    * This field may not be present for older exclusions.
    */
-  updateTime: Date;
+  updateTime?: Date;
 }
 
 /**
@@ -1794,14 +1794,14 @@ export interface LogExclusionSDKType {
    * 
    * This field may not be present for older exclusions.
    */
-  create_time: Date;
+  create_time?: Date;
 
   /**
    * Output only. The last update timestamp of the exclusion.
    * 
    * This field may not be present for older exclusions.
    */
-  update_time: Date;
+  update_time?: Date;
 }
 
 /** The parameters to `ListExclusions`. */
@@ -1941,7 +1941,7 @@ export interface CreateExclusionRequest {
    * Required. The new exclusion, whose `name` parameter is an exclusion name
    * that is not already used in the parent resource.
    */
-  exclusion: LogExclusion;
+  exclusion?: LogExclusion;
 }
 
 /** The parameters to `CreateExclusion`. */
@@ -1965,7 +1965,7 @@ export interface CreateExclusionRequestSDKType {
    * Required. The new exclusion, whose `name` parameter is an exclusion name
    * that is not already used in the parent resource.
    */
-  exclusion: LogExclusionSDKType;
+  exclusion?: LogExclusionSDKType;
 }
 
 /** The parameters to `UpdateExclusion`. */
@@ -1988,7 +1988,7 @@ export interface UpdateExclusionRequest {
    * Required. New values for the existing exclusion. Only the fields specified in
    * `update_mask` are relevant.
    */
-  exclusion: LogExclusion;
+  exclusion?: LogExclusion;
 
   /**
    * Required. A non-empty list of fields to change in the existing exclusion. New values
@@ -1999,7 +1999,7 @@ export interface UpdateExclusionRequest {
    * For example, to change the filter and description of an exclusion,
    * specify an `update_mask` of `"filter,description"`.
    */
-  updateMask: FieldMask;
+  updateMask?: FieldMask;
 }
 
 /** The parameters to `UpdateExclusion`. */
@@ -2022,7 +2022,7 @@ export interface UpdateExclusionRequestSDKType {
    * Required. New values for the existing exclusion. Only the fields specified in
    * `update_mask` are relevant.
    */
-  exclusion: LogExclusionSDKType;
+  exclusion?: LogExclusionSDKType;
 
   /**
    * Required. A non-empty list of fields to change in the existing exclusion. New values
@@ -2033,7 +2033,7 @@ export interface UpdateExclusionRequestSDKType {
    * For example, to change the filter and description of an exclusion,
    * specify an `update_mask` of `"filter,description"`.
    */
-  update_mask: FieldMaskSDKType;
+  update_mask?: FieldMaskSDKType;
 }
 
 /** The parameters to `DeleteExclusion`. */
@@ -2162,7 +2162,7 @@ export interface UpdateCmekSettingsRequest {
    * Router](https://cloud.google.com/logging/docs/routing/managed-encryption)
    * for more information.
    */
-  cmekSettings: CmekSettings;
+  cmekSettings?: CmekSettings;
 
   /**
    * Optional. Field mask identifying which fields from `cmek_settings` should
@@ -2173,7 +2173,7 @@ export interface UpdateCmekSettingsRequest {
    * 
    * For example: `"updateMask=kmsKeyName"`
    */
-  updateMask: FieldMask;
+  updateMask?: FieldMask;
 }
 
 /**
@@ -2210,7 +2210,7 @@ export interface UpdateCmekSettingsRequestSDKType {
    * Router](https://cloud.google.com/logging/docs/routing/managed-encryption)
    * for more information.
    */
-  cmek_settings: CmekSettingsSDKType;
+  cmek_settings?: CmekSettingsSDKType;
 
   /**
    * Optional. Field mask identifying which fields from `cmek_settings` should
@@ -2221,7 +2221,7 @@ export interface UpdateCmekSettingsRequestSDKType {
    * 
    * For example: `"updateMask=kmsKeyName"`
    */
-  update_mask: FieldMaskSDKType;
+  update_mask?: FieldMaskSDKType;
 }
 
 /**
@@ -2443,7 +2443,7 @@ export interface UpdateSettingsRequest {
    * Router](https://cloud.google.com/logging/docs/routing/managed-encryption)
    * for more information.
    */
-  settings: Settings;
+  settings?: Settings;
 
   /**
    * Optional. Field mask identifying which fields from `settings` should
@@ -2454,7 +2454,7 @@ export interface UpdateSettingsRequest {
    * 
    * For example: `"updateMask=kmsKeyName"`
    */
-  updateMask: FieldMask;
+  updateMask?: FieldMask;
 }
 
 /**
@@ -2488,7 +2488,7 @@ export interface UpdateSettingsRequestSDKType {
    * Router](https://cloud.google.com/logging/docs/routing/managed-encryption)
    * for more information.
    */
-  settings: SettingsSDKType;
+  settings?: SettingsSDKType;
 
   /**
    * Optional. Field mask identifying which fields from `settings` should
@@ -2499,7 +2499,7 @@ export interface UpdateSettingsRequestSDKType {
    * 
    * For example: `"updateMask=kmsKeyName"`
    */
-  update_mask: FieldMaskSDKType;
+  update_mask?: FieldMaskSDKType;
 }
 
 /**
@@ -2689,10 +2689,10 @@ export interface CopyLogEntriesRequestSDKType {
 /** Metadata for CopyLogEntries long running operations. */
 export interface CopyLogEntriesMetadata {
   /** The create time of an operation. */
-  startTime: Date;
+  startTime?: Date;
 
   /** The end time of an operation. */
-  endTime: Date;
+  endTime?: Date;
 
   /** State of an operation. */
   state: OperationState;
@@ -2701,7 +2701,7 @@ export interface CopyLogEntriesMetadata {
   cancellationRequested: boolean;
 
   /** CopyLogEntries RPC request. */
-  request: CopyLogEntriesRequest;
+  request?: CopyLogEntriesRequest;
 
   /** Estimated progress of the operation (0 - 100%). */
   progress: number;
@@ -2721,10 +2721,10 @@ export interface CopyLogEntriesMetadata {
 /** Metadata for CopyLogEntries long running operations. */
 export interface CopyLogEntriesMetadataSDKType {
   /** The create time of an operation. */
-  start_time: Date;
+  start_time?: Date;
 
   /** The end time of an operation. */
-  end_time: Date;
+  end_time?: Date;
 
   /** State of an operation. */
   state: OperationStateSDKType;
@@ -2733,7 +2733,7 @@ export interface CopyLogEntriesMetadataSDKType {
   cancellation_requested: boolean;
 
   /** CopyLogEntries RPC request. */
-  request: CopyLogEntriesRequestSDKType;
+  request?: CopyLogEntriesRequestSDKType;
 
   /** Estimated progress of the operation (0 - 100%). */
   progress: number;

@@ -6,7 +6,7 @@ export const protobufPackage = "evmos.incentives.v1";
 /** GenesisState defines the module's genesis state. */
 export interface GenesisState {
   /** module parameters */
-  params: Params;
+  params?: Params;
 
   /** active incentives */
   incentives: Incentive[];
@@ -18,7 +18,7 @@ export interface GenesisState {
 /** GenesisState defines the module's genesis state. */
 export interface GenesisStateSDKType {
   /** module parameters */
-  params: ParamsSDKType;
+  params?: ParamsSDKType;
 
   /** active incentives */
   incentives: IncentiveSDKType[];

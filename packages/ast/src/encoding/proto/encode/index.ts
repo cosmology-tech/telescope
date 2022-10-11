@@ -1,6 +1,6 @@
 import * as t from '@babel/types';
 import { ProtoType, ProtoField } from '@osmonauts/types';
-import { getFieldOptionality, getOneOfs } from '..';
+import { getFieldOptionality, getFieldOptionalityForDefaults, getOneOfs } from '..';
 import { identifier, objectMethod } from '../../../utils';
 import { ProtoParseContext } from '../../context';
 import { encode, arrayTypes } from './utils';
@@ -27,7 +27,7 @@ export const encodeMethodFields = (context: ProtoParseContext, name: string, pro
         };
 
         const isOneOf = oneOfs.includes(fieldName);
-        const isOptional = getFieldOptionality(context, field, isOneOf);
+        const isOptional = getFieldOptionalityForDefaults(context, field, isOneOf);
 
         const args: EncodeMethod = {
             typeName: name,

@@ -2,7 +2,7 @@ import * as t from '@babel/types';
 import { ProtoField } from '@osmonauts/types';
 import { getProtoFieldTypeName } from '../utils';
 import { GenericParseContext, ProtoParseContext } from './context';
-import { GOOGLE_TYPES, SCALAR_TYPES } from './proto';
+import { getFieldOptionalityForDefaults, GOOGLE_TYPES, SCALAR_TYPES } from './proto';
 
 export const getFieldNames = (field: ProtoField) => {
     const propName = field.options?.['(telescope:name)'] ?? field.name;
@@ -154,10 +154,12 @@ export const getTSTypeForProto = (
 };
 
 export const getDefaultTSTypeFromProtoType = (
-    context: ProtoParseContext, // here for future forceLong=string
+    context: ProtoParseContext,
     field: ProtoField,
-    isOptional: boolean
+    isOneOf: boolean
 ) => {
+
+    const isOptional = getFieldOptionalityForDefaults(context, field, isOneOf);
 
     if (isOptional) {
         return t.identifier('undefined');

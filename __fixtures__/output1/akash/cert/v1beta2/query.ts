@@ -6,13 +6,13 @@ export const protobufPackage = "akash.cert.v1beta2";
 
 /** CertificateResponse contains a single X509 certificate and its serial number */
 export interface CertificateResponse {
-  certificate: Certificate;
+  certificate?: Certificate;
   serial: string;
 }
 
 /** CertificateResponse contains a single X509 certificate and its serial number */
 export interface CertificateResponseSDKType {
-  certificate: CertificateSDKType;
+  certificate?: CertificateSDKType;
   serial: string;
 }
 

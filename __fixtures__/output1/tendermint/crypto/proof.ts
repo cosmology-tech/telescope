@@ -18,14 +18,14 @@ export interface ValueOp {
   key: Uint8Array;
 
   /** To encode in ProofOp.Data */
-  proof: Proof;
+  proof?: Proof;
 }
 export interface ValueOpSDKType {
   /** Encoded in ProofOp.Key. */
   key: Uint8Array;
 
   /** To encode in ProofOp.Data */
-  proof: ProofSDKType;
+  proof?: ProofSDKType;
 }
 export interface DominoOp {
   key: string;

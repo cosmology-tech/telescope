@@ -110,7 +110,7 @@ export interface ConnectionEnd {
   state: State;
 
   /** counterparty chain associated with this connection. */
-  counterparty: Counterparty;
+  counterparty?: Counterparty;
 
   /**
    * delay period that must pass before a consensus state can be used for
@@ -140,7 +140,7 @@ export interface ConnectionEndSDKType {
   state: StateSDKType;
 
   /** counterparty chain associated with this connection. */
-  counterparty: CounterpartySDKType;
+  counterparty?: CounterpartySDKType;
 
   /**
    * delay period that must pass before a consensus state can be used for
@@ -171,7 +171,7 @@ export interface IdentifiedConnection {
   state: State;
 
   /** counterparty chain associated with this connection. */
-  counterparty: Counterparty;
+  counterparty?: Counterparty;
 
   /** delay period associated with this connection. */
   delayPeriod: Long;
@@ -198,7 +198,7 @@ export interface IdentifiedConnectionSDKType {
   state: StateSDKType;
 
   /** counterparty chain associated with this connection. */
-  counterparty: CounterpartySDKType;
+  counterparty?: CounterpartySDKType;
 
   /** delay period associated with this connection. */
   delay_period: Long;
@@ -219,7 +219,7 @@ export interface Counterparty {
   connectionId: string;
 
   /** commitment merkle prefix of the counterparty chain. */
-  prefix: MerklePrefix;
+  prefix?: MerklePrefix;
 }
 
 /** Counterparty defines the counterparty chain associated with a connection end. */
@@ -237,7 +237,7 @@ export interface CounterpartySDKType {
   connection_id: string;
 
   /** commitment merkle prefix of the counterparty chain. */
-  prefix: MerklePrefixSDKType;
+  prefix?: MerklePrefixSDKType;
 }
 
 /** ClientPaths define all the connection paths for a client state. */

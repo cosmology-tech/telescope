@@ -12,7 +12,7 @@ export interface ClientState {
   chainId: string;
 
   /** self latest block height */
-  height: Height;
+  height?: Height;
 }
 
 /**
@@ -24,7 +24,7 @@ export interface ClientStateSDKType {
   chain_id: string;
 
   /** self latest block height */
-  height: HeightSDKType;
+  height?: HeightSDKType;
 }
 
 function createBaseClientState(): ClientState {

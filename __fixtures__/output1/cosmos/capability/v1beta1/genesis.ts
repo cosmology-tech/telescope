@@ -9,7 +9,7 @@ export interface GenesisOwners {
   index: Long;
 
   /** index_owners are the owners at the given index. */
-  indexOwners: CapabilityOwners;
+  indexOwners?: CapabilityOwners;
 }
 
 /** GenesisOwners defines the capability owners with their corresponding index. */
@@ -18,7 +18,7 @@ export interface GenesisOwnersSDKType {
   index: Long;
 
   /** index_owners are the owners at the given index. */
-  index_owners: CapabilityOwnersSDKType;
+  index_owners?: CapabilityOwnersSDKType;
 }
 
 /** GenesisState defines the capability module's genesis state. */

@@ -190,7 +190,7 @@ export interface Channel {
   ordering: Order;
 
   /** counterparty channel end */
-  counterparty: Counterparty;
+  counterparty?: Counterparty;
 
   /**
    * list of connection identifiers, in order, along which packets sent on
@@ -215,7 +215,7 @@ export interface ChannelSDKType {
   ordering: OrderSDKType;
 
   /** counterparty channel end */
-  counterparty: CounterpartySDKType;
+  counterparty?: CounterpartySDKType;
 
   /**
    * list of connection identifiers, in order, along which packets sent on
@@ -239,7 +239,7 @@ export interface IdentifiedChannel {
   ordering: Order;
 
   /** counterparty channel end */
-  counterparty: Counterparty;
+  counterparty?: Counterparty;
 
   /**
    * list of connection identifiers, in order, along which packets sent on
@@ -269,7 +269,7 @@ export interface IdentifiedChannelSDKType {
   ordering: OrderSDKType;
 
   /** counterparty channel end */
-  counterparty: CounterpartySDKType;
+  counterparty?: CounterpartySDKType;
 
   /**
    * list of connection identifiers, in order, along which packets sent on
@@ -330,7 +330,7 @@ export interface Packet {
   data: Uint8Array;
 
   /** block height after which the packet times out */
-  timeoutHeight: Height;
+  timeoutHeight?: Height;
 
   /** block timestamp (in nanoseconds) after which the packet times out */
   timeoutTimestamp: Long;
@@ -361,7 +361,7 @@ export interface PacketSDKType {
   data: Uint8Array;
 
   /** block height after which the packet times out */
-  timeout_height: HeightSDKType;
+  timeout_height?: HeightSDKType;
 
   /** block timestamp (in nanoseconds) after which the packet times out */
   timeout_timestamp: Long;

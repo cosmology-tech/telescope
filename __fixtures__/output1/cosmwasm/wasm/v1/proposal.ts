@@ -19,7 +19,7 @@ export interface StoreCodeProposal {
   wasmByteCode: Uint8Array;
 
   /** InstantiatePermission to apply on contract creation, optional */
-  instantiatePermission: AccessConfig;
+  instantiatePermission?: AccessConfig;
 }
 
 /** StoreCodeProposal gov proposal content type to submit WASM code to the system */
@@ -37,7 +37,7 @@ export interface StoreCodeProposalSDKType {
   wasm_byte_code: Uint8Array;
 
   /** InstantiatePermission to apply on contract creation, optional */
-  instantiate_permission: AccessConfigSDKType;
+  instantiate_permission?: AccessConfigSDKType;
 }
 
 /**

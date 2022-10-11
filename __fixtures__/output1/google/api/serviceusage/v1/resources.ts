@@ -110,7 +110,7 @@ export interface Service {
    * the `ListServices` method. These fields are present only in responses to
    * the `GetService` method.
    */
-  config: ServiceConfig;
+  config?: ServiceConfig;
 
   /** Whether or not the service has been enabled for use by the consumer. */
   state: State;
@@ -140,7 +140,7 @@ export interface ServiceSDKType {
    * the `ListServices` method. These fields are present only in responses to
    * the `GetService` method.
    */
-  config: ServiceConfigSDKType;
+  config?: ServiceConfigSDKType;
 
   /** Whether or not the service has been enabled for use by the consumer. */
   state: StateSDKType;
@@ -169,16 +169,16 @@ export interface ServiceConfig {
    * Additional API documentation. Contains only the summary and the
    * documentation URL.
    */
-  documentation: Documentation;
+  documentation?: Documentation;
 
   /** Quota configuration. */
-  quota: Quota;
+  quota?: Quota;
 
   /** Auth configuration. Contains only the OAuth rules. */
-  authentication: Authentication;
+  authentication?: Authentication;
 
   /** Configuration controlling usage of this service. */
-  usage: Usage;
+  usage?: Usage;
 
   /**
    * Configuration for network endpoints. Contains only the names and aliases
@@ -196,7 +196,7 @@ export interface ServiceConfig {
    * Monitoring configuration.
    * This should not include the 'producer_destinations' field.
    */
-  monitoring: Monitoring;
+  monitoring?: Monitoring;
 }
 
 /** The configuration of the service. */
@@ -222,16 +222,16 @@ export interface ServiceConfigSDKType {
    * Additional API documentation. Contains only the summary and the
    * documentation URL.
    */
-  documentation: DocumentationSDKType;
+  documentation?: DocumentationSDKType;
 
   /** Quota configuration. */
-  quota: QuotaSDKType;
+  quota?: QuotaSDKType;
 
   /** Auth configuration. Contains only the OAuth rules. */
-  authentication: AuthenticationSDKType;
+  authentication?: AuthenticationSDKType;
 
   /** Configuration controlling usage of this service. */
-  usage: UsageSDKType;
+  usage?: UsageSDKType;
 
   /**
    * Configuration for network endpoints. Contains only the names and aliases
@@ -249,7 +249,7 @@ export interface ServiceConfigSDKType {
    * Monitoring configuration.
    * This should not include the 'producer_destinations' field.
    */
-  monitoring: MonitoringSDKType;
+  monitoring?: MonitoringSDKType;
 }
 
 /** The operation metadata returned for the batchend services operation. */

@@ -170,13 +170,14 @@ export const createCreateProtoType = (
         return {
             name: key,
             ...proto.fields[key],
+            isOneOf,
             isOptional
         };
     })
         .map(field => {
             return t.objectProperty(
                 t.identifier(field.name),
-                getDefaultTSTypeFromProtoType(context, field, field.isOptional)
+                getDefaultTSTypeFromProtoType(context, field, field.isOneOf)
             )
         })
 

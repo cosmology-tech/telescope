@@ -82,19 +82,19 @@ export interface DeclTypeSDKType {
 /** An identifier declaration. */
 export interface IdentDecl {
   /** Optional type of the identifier. */
-  type: DeclType;
+  type?: DeclType;
 
   /** Optional value of the identifier. */
-  value: Expr;
+  value?: Expr;
 }
 
 /** An identifier declaration. */
 export interface IdentDeclSDKType {
   /** Optional type of the identifier. */
-  type: DeclTypeSDKType;
+  type?: DeclTypeSDKType;
 
   /** Optional value of the identifier. */
-  value: ExprSDKType;
+  value?: ExprSDKType;
 }
 
 /** A function declaration. */
@@ -103,7 +103,7 @@ export interface FunctionDecl {
   args: IdentDecl[];
 
   /** Optional declared return type. */
-  returnType: DeclType;
+  returnType?: DeclType;
 
   /** If the first argument of the function is the receiver. */
   receiverFunction: boolean;
@@ -115,7 +115,7 @@ export interface FunctionDeclSDKType {
   args: IdentDeclSDKType[];
 
   /** Optional declared return type. */
-  return_type: DeclTypeSDKType;
+  return_type?: DeclTypeSDKType;
 
   /** If the first argument of the function is the receiver. */
   receiver_function: boolean;

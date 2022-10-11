@@ -43,7 +43,7 @@ export interface EvalStateSDKType {
 /** A single evaluation result. */
 export interface EvalState_Result {
   /** The expression this result is for. */
-  expr: IdRef;
+  expr?: IdRef;
 
   /** The index in `values` of the resulting value. */
   value: number;
@@ -52,7 +52,7 @@ export interface EvalState_Result {
 /** A single evaluation result. */
 export interface EvalState_ResultSDKType {
   /** The expression this result is for. */
-  expr: IdRefSDKType;
+  expr?: IdRefSDKType;
 
   /** The index in `values` of the resulting value. */
   value: number;

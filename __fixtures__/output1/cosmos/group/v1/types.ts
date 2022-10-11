@@ -352,7 +352,7 @@ export interface Member {
   metadata: string;
 
   /** added_at is a timestamp specifying when a member was added. */
-  addedAt: Date;
+  addedAt?: Date;
 }
 
 /**
@@ -370,7 +370,7 @@ export interface MemberSDKType {
   metadata: string;
 
   /** added_at is a timestamp specifying when a member was added. */
-  added_at: Date;
+  added_at?: Date;
 }
 
 /** Members defines a repeated slice of Member objects. */
@@ -391,7 +391,7 @@ export interface ThresholdDecisionPolicy {
   threshold: string;
 
   /** windows defines the different windows for voting and execution. */
-  windows: DecisionPolicyWindows;
+  windows?: DecisionPolicyWindows;
 }
 
 /** ThresholdDecisionPolicy implements the DecisionPolicy interface */
@@ -400,7 +400,7 @@ export interface ThresholdDecisionPolicySDKType {
   threshold: string;
 
   /** windows defines the different windows for voting and execution. */
-  windows: DecisionPolicyWindowsSDKType;
+  windows?: DecisionPolicyWindowsSDKType;
 }
 
 /** PercentageDecisionPolicy implements the DecisionPolicy interface */
@@ -409,7 +409,7 @@ export interface PercentageDecisionPolicy {
   percentage: string;
 
   /** windows defines the different windows for voting and execution. */
-  windows: DecisionPolicyWindows;
+  windows?: DecisionPolicyWindows;
 }
 
 /** PercentageDecisionPolicy implements the DecisionPolicy interface */
@@ -418,7 +418,7 @@ export interface PercentageDecisionPolicySDKType {
   percentage: string;
 
   /** windows defines the different windows for voting and execution. */
-  windows: DecisionPolicyWindowsSDKType;
+  windows?: DecisionPolicyWindowsSDKType;
 }
 
 /** DecisionPolicyWindows defines the different windows for voting and execution. */
@@ -427,7 +427,7 @@ export interface DecisionPolicyWindows {
    * voting_period is the duration from submission of a proposal to the end of voting period
    * Within this times votes can be submitted with MsgVote.
    */
-  votingPeriod: Duration;
+  votingPeriod?: Duration;
 
   /**
    * min_execution_period is the minimum duration after the proposal submission
@@ -442,7 +442,7 @@ export interface DecisionPolicyWindows {
    * is empty, meaning that all proposals created with this decision policy
    * won't be able to be executed.
    */
-  minExecutionPeriod: Duration;
+  minExecutionPeriod?: Duration;
 }
 
 /** DecisionPolicyWindows defines the different windows for voting and execution. */
@@ -451,7 +451,7 @@ export interface DecisionPolicyWindowsSDKType {
    * voting_period is the duration from submission of a proposal to the end of voting period
    * Within this times votes can be submitted with MsgVote.
    */
-  voting_period: DurationSDKType;
+  voting_period?: DurationSDKType;
 
   /**
    * min_execution_period is the minimum duration after the proposal submission
@@ -466,7 +466,7 @@ export interface DecisionPolicyWindowsSDKType {
    * is empty, meaning that all proposals created with this decision policy
    * won't be able to be executed.
    */
-  min_execution_period: DurationSDKType;
+  min_execution_period?: DurationSDKType;
 }
 
 /** GroupInfo represents the high-level on-chain information for a group. */
@@ -492,7 +492,7 @@ export interface GroupInfo {
   totalWeight: string;
 
   /** created_at is a timestamp specifying when a group was created. */
-  createdAt: Date;
+  createdAt?: Date;
 }
 
 /** GroupInfo represents the high-level on-chain information for a group. */
@@ -518,7 +518,7 @@ export interface GroupInfoSDKType {
   total_weight: string;
 
   /** created_at is a timestamp specifying when a group was created. */
-  created_at: Date;
+  created_at?: Date;
 }
 
 /** GroupMember represents the relationship between a group and a member. */
@@ -527,7 +527,7 @@ export interface GroupMember {
   groupId: Long;
 
   /** member is the member data. */
-  member: Member;
+  member?: Member;
 }
 
 /** GroupMember represents the relationship between a group and a member. */
@@ -536,7 +536,7 @@ export interface GroupMemberSDKType {
   group_id: Long;
 
   /** member is the member data. */
-  member: MemberSDKType;
+  member?: MemberSDKType;
 }
 
 /** GroupPolicyInfo represents the high-level on-chain information for a group policy. */
@@ -560,10 +560,10 @@ export interface GroupPolicyInfo {
   version: Long;
 
   /** decision_policy specifies the group policy's decision policy. */
-  decisionPolicy: Any;
+  decisionPolicy?: Any;
 
   /** created_at is a timestamp specifying when a group policy was created. */
-  createdAt: Date;
+  createdAt?: Date;
 }
 
 /** GroupPolicyInfo represents the high-level on-chain information for a group policy. */
@@ -587,10 +587,10 @@ export interface GroupPolicyInfoSDKType {
   version: Long;
 
   /** decision_policy specifies the group policy's decision policy. */
-  decision_policy: AnySDKType;
+  decision_policy?: AnySDKType;
 
   /** created_at is a timestamp specifying when a group policy was created. */
-  created_at: Date;
+  created_at?: Date;
 }
 
 /**
@@ -613,7 +613,7 @@ export interface Proposal {
   proposers: string[];
 
   /** submit_time is a timestamp specifying when a proposal was submitted. */
-  submitTime: Date;
+  submitTime?: Date;
 
   /**
    * group_version tracks the version of the group that this proposal corresponds to.
@@ -642,7 +642,7 @@ export interface Proposal {
    * via gRPC, this field is not populated until the proposal's voting period
    * has ended.
    */
-  finalTallyResult: TallyResult;
+  finalTallyResult?: TallyResult;
 
   /**
    * voting_period_end is the timestamp before which voting must be done.
@@ -651,7 +651,7 @@ export interface Proposal {
    * at this point, and the `final_tally_result`, as well
    * as `status` and `result` fields will be accordingly updated.
    */
-  votingPeriodEnd: Date;
+  votingPeriodEnd?: Date;
 
   /** executor_result is the final result based on the votes and election rule. Initial value is NotRun. */
   executorResult: ProposalExecutorResult;
@@ -680,7 +680,7 @@ export interface ProposalSDKType {
   proposers: string[];
 
   /** submit_time is a timestamp specifying when a proposal was submitted. */
-  submit_time: Date;
+  submit_time?: Date;
 
   /**
    * group_version tracks the version of the group that this proposal corresponds to.
@@ -709,7 +709,7 @@ export interface ProposalSDKType {
    * via gRPC, this field is not populated until the proposal's voting period
    * has ended.
    */
-  final_tally_result: TallyResultSDKType;
+  final_tally_result?: TallyResultSDKType;
 
   /**
    * voting_period_end is the timestamp before which voting must be done.
@@ -718,7 +718,7 @@ export interface ProposalSDKType {
    * at this point, and the `final_tally_result`, as well
    * as `status` and `result` fields will be accordingly updated.
    */
-  voting_period_end: Date;
+  voting_period_end?: Date;
 
   /** executor_result is the final result based on the votes and election rule. Initial value is NotRun. */
   executor_result: ProposalExecutorResultSDKType;
@@ -772,7 +772,7 @@ export interface Vote {
   metadata: string;
 
   /** submit_time is the timestamp when the vote was submitted. */
-  submitTime: Date;
+  submitTime?: Date;
 }
 
 /** Vote represents a vote for a proposal. */
@@ -790,7 +790,7 @@ export interface VoteSDKType {
   metadata: string;
 
   /** submit_time is the timestamp when the vote was submitted. */
-  submit_time: Date;
+  submit_time?: Date;
 }
 
 function createBaseMember(): Member {

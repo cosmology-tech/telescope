@@ -43,12 +43,12 @@ export interface QueryOrderRequestSDKType {
 
 /** QueryOrderResponse is response type for the Query/Order RPC method */
 export interface QueryOrderResponse {
-  order: Order;
+  order?: Order;
 }
 
 /** QueryOrderResponse is response type for the Query/Order RPC method */
 export interface QueryOrderResponseSDKType {
-  order: OrderSDKType;
+  order?: OrderSDKType;
 }
 
 /** QueryBidsRequest is request type for the Query/Bids RPC method */
@@ -87,14 +87,14 @@ export interface QueryBidRequestSDKType {
 
 /** QueryBidResponse is response type for the Query/Bid RPC method */
 export interface QueryBidResponse {
-  bid: Bid;
-  escrowAccount: Account;
+  bid?: Bid;
+  escrowAccount?: Account;
 }
 
 /** QueryBidResponse is response type for the Query/Bid RPC method */
 export interface QueryBidResponseSDKType {
-  bid: BidSDKType;
-  escrow_account: AccountSDKType;
+  bid?: BidSDKType;
+  escrow_account?: AccountSDKType;
 }
 
 /** QueryLeasesRequest is request type for the Query/Leases RPC method */
@@ -133,14 +133,14 @@ export interface QueryLeaseRequestSDKType {
 
 /** QueryLeaseResponse is response type for the Query/Lease RPC method */
 export interface QueryLeaseResponse {
-  lease: Lease;
-  escrowPayment: FractionalPayment;
+  lease?: Lease;
+  escrowPayment?: FractionalPayment;
 }
 
 /** QueryLeaseResponse is response type for the Query/Lease RPC method */
 export interface QueryLeaseResponseSDKType {
-  lease: LeaseSDKType;
-  escrow_payment: FractionalPaymentSDKType;
+  lease?: LeaseSDKType;
+  escrow_payment?: FractionalPaymentSDKType;
 }
 
 function createBaseQueryOrdersRequest(): QueryOrdersRequest {

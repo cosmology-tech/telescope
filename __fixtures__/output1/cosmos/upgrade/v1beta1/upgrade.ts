@@ -24,7 +24,7 @@ export interface Plan {
    */
 
   /** @deprecated */
-  time: Date;
+  time?: Date;
 
   /**
    * The height at which the upgrade must be performed.
@@ -45,7 +45,7 @@ export interface Plan {
    */
 
   /** @deprecated */
-  upgradedClientState: Any;
+  upgradedClientState?: Any;
 }
 
 /** Plan specifies information about a planned upgrade and when it should occur. */
@@ -68,7 +68,7 @@ export interface PlanSDKType {
    */
 
   /** @deprecated */
-  time: Date;
+  time?: Date;
 
   /**
    * The height at which the upgrade must be performed.
@@ -89,7 +89,7 @@ export interface PlanSDKType {
    */
 
   /** @deprecated */
-  upgraded_client_state: AnySDKType;
+  upgraded_client_state?: AnySDKType;
 }
 
 /**
@@ -103,7 +103,7 @@ export interface PlanSDKType {
 export interface SoftwareUpgradeProposal {
   title: string;
   description: string;
-  plan: Plan;
+  plan?: Plan;
 }
 
 /**
@@ -117,7 +117,7 @@ export interface SoftwareUpgradeProposal {
 export interface SoftwareUpgradeProposalSDKType {
   title: string;
   description: string;
-  plan: PlanSDKType;
+  plan?: PlanSDKType;
 }
 
 /**

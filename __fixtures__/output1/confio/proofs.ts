@@ -257,7 +257,7 @@ export function lengthOpToJSON(object: LengthOp): string {
 export interface ExistenceProof {
   key: Uint8Array;
   value: Uint8Array;
-  leaf: LeafOp;
+  leaf?: LeafOp;
   path: InnerOp[];
 }
 
@@ -285,7 +285,7 @@ export interface ExistenceProof {
 export interface ExistenceProofSDKType {
   key: Uint8Array;
   value: Uint8Array;
-  leaf: LeafOpSDKType;
+  leaf?: LeafOpSDKType;
   path: InnerOpSDKType[];
 }
 
@@ -297,8 +297,8 @@ export interface ExistenceProofSDKType {
 export interface NonExistenceProof {
   /** TODO: remove this as unnecessary??? we prove a range */
   key: Uint8Array;
-  left: ExistenceProof;
-  right: ExistenceProof;
+  left?: ExistenceProof;
+  right?: ExistenceProof;
 }
 
 /**
@@ -309,8 +309,8 @@ export interface NonExistenceProof {
 export interface NonExistenceProofSDKType {
   /** TODO: remove this as unnecessary??? we prove a range */
   key: Uint8Array;
-  left: ExistenceProofSDKType;
-  right: ExistenceProofSDKType;
+  left?: ExistenceProofSDKType;
+  right?: ExistenceProofSDKType;
 }
 
 /** CommitmentProof is either an ExistenceProof or a NonExistenceProof, or a Batch of such messages */
@@ -450,8 +450,8 @@ export interface ProofSpec {
    * any field in the ExistenceProof must be the same as in this spec.
    * except Prefix, which is just the first bytes of prefix (spec can be longer)
    */
-  leafSpec: LeafOp;
-  innerSpec: InnerSpec;
+  leafSpec?: LeafOp;
+  innerSpec?: InnerSpec;
 
   /** max_depth (if > 0) is the maximum number of InnerOps allowed (mainly for fixed-depth tries) */
   maxDepth: number;
@@ -477,8 +477,8 @@ export interface ProofSpecSDKType {
    * any field in the ExistenceProof must be the same as in this spec.
    * except Prefix, which is just the first bytes of prefix (spec can be longer)
    */
-  leaf_spec: LeafOpSDKType;
-  inner_spec: InnerSpecSDKType;
+  leaf_spec?: LeafOpSDKType;
+  inner_spec?: InnerSpecSDKType;
 
   /** max_depth (if > 0) is the maximum number of InnerOps allowed (mainly for fixed-depth tries) */
   max_depth: number;
@@ -587,7 +587,7 @@ export interface CompressedBatchEntrySDKType {
 export interface CompressedExistenceProof {
   key: Uint8Array;
   value: Uint8Array;
-  leaf: LeafOp;
+  leaf?: LeafOp;
 
   /** these are indexes into the lookup_inners table in CompressedBatchProof */
   path: number[];
@@ -595,7 +595,7 @@ export interface CompressedExistenceProof {
 export interface CompressedExistenceProofSDKType {
   key: Uint8Array;
   value: Uint8Array;
-  leaf: LeafOpSDKType;
+  leaf?: LeafOpSDKType;
 
   /** these are indexes into the lookup_inners table in CompressedBatchProof */
   path: number[];
@@ -603,14 +603,14 @@ export interface CompressedExistenceProofSDKType {
 export interface CompressedNonExistenceProof {
   /** TODO: remove this as unnecessary??? we prove a range */
   key: Uint8Array;
-  left: CompressedExistenceProof;
-  right: CompressedExistenceProof;
+  left?: CompressedExistenceProof;
+  right?: CompressedExistenceProof;
 }
 export interface CompressedNonExistenceProofSDKType {
   /** TODO: remove this as unnecessary??? we prove a range */
   key: Uint8Array;
-  left: CompressedExistenceProofSDKType;
-  right: CompressedExistenceProofSDKType;
+  left?: CompressedExistenceProofSDKType;
+  right?: CompressedExistenceProofSDKType;
 }
 
 function createBaseExistenceProof(): ExistenceProof {

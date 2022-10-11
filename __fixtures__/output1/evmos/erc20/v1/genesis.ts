@@ -6,7 +6,7 @@ export const protobufPackage = "evmos.erc20.v1";
 /** GenesisState defines the module's genesis state. */
 export interface GenesisState {
   /** module parameters */
-  params: Params;
+  params?: Params;
 
   /** registered token pairs */
   tokenPairs: TokenPair[];
@@ -15,7 +15,7 @@ export interface GenesisState {
 /** GenesisState defines the module's genesis state. */
 export interface GenesisStateSDKType {
   /** module parameters */
-  params: ParamsSDKType;
+  params?: ParamsSDKType;
 
   /** registered token pairs */
   token_pairs: TokenPairSDKType[];

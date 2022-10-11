@@ -17,7 +17,7 @@ export interface MsgTransfer {
   sourceChannel: string;
 
   /** the tokens to be transferred */
-  token: Coin;
+  token?: Coin;
 
   /** the sender address */
   sender: string;
@@ -29,7 +29,7 @@ export interface MsgTransfer {
    * Timeout height relative to the current block height.
    * The timeout is disabled when set to 0.
    */
-  timeoutHeight: Height;
+  timeoutHeight?: Height;
 
   /**
    * Timeout timestamp (in nanoseconds) relative to the current block timestamp.
@@ -51,7 +51,7 @@ export interface MsgTransferSDKType {
   source_channel: string;
 
   /** the tokens to be transferred */
-  token: CoinSDKType;
+  token?: CoinSDKType;
 
   /** the sender address */
   sender: string;
@@ -63,7 +63,7 @@ export interface MsgTransferSDKType {
    * Timeout height relative to the current block height.
    * The timeout is disabled when set to 0.
    */
-  timeout_height: HeightSDKType;
+  timeout_height?: HeightSDKType;
 
   /**
    * Timeout timestamp (in nanoseconds) relative to the current block timestamp.

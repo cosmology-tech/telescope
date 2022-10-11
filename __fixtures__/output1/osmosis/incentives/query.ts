@@ -35,11 +35,11 @@ export interface GaugeByIDRequestSDKType {
 }
 export interface GaugeByIDResponse {
   /** Gauge that corresponds to provided gague ID */
-  gauge: Gauge;
+  gauge?: Gauge;
 }
 export interface GaugeByIDResponseSDKType {
   /** Gauge that corresponds to provided gague ID */
-  gauge: GaugeSDKType;
+  gauge?: GaugeSDKType;
 }
 export interface GaugesRequest {
   /** Pagination defines pagination for the request */

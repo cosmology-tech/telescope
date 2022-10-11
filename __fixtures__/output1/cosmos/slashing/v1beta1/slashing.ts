@@ -22,7 +22,7 @@ export interface ValidatorSigningInfo {
   indexOffset: Long;
 
   /** Timestamp until which the validator is jailed due to liveness downtime. */
-  jailedUntil: Date;
+  jailedUntil?: Date;
 
   /**
    * Whether or not a validator has been tombstoned (killed out of validator set). It is set
@@ -55,7 +55,7 @@ export interface ValidatorSigningInfoSDKType {
   index_offset: Long;
 
   /** Timestamp until which the validator is jailed due to liveness downtime. */
-  jailed_until: Date;
+  jailed_until?: Date;
 
   /**
    * Whether or not a validator has been tombstoned (killed out of validator set). It is set
@@ -74,7 +74,7 @@ export interface ValidatorSigningInfoSDKType {
 export interface Params {
   signedBlocksWindow: Long;
   minSignedPerWindow: Uint8Array;
-  downtimeJailDuration: Duration;
+  downtimeJailDuration?: Duration;
   slashFractionDoubleSign: Uint8Array;
   slashFractionDowntime: Uint8Array;
 }
@@ -83,7 +83,7 @@ export interface Params {
 export interface ParamsSDKType {
   signed_blocks_window: Long;
   min_signed_per_window: Uint8Array;
-  downtime_jail_duration: DurationSDKType;
+  downtime_jail_duration?: DurationSDKType;
   slash_fraction_double_sign: Uint8Array;
   slash_fraction_downtime: Uint8Array;
 }

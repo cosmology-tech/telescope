@@ -6,7 +6,7 @@ export const protobufPackage = "osmosis.superfluid";
 
 /** GenesisState defines the module's genesis state. */
 export interface GenesisState {
-  params: Params;
+  params?: Params;
 
   /**
    * superfluid_assets defines the registered superfluid assets that have been
@@ -30,7 +30,7 @@ export interface GenesisState {
 
 /** GenesisState defines the module's genesis state. */
 export interface GenesisStateSDKType {
-  params: ParamsSDKType;
+  params?: ParamsSDKType;
 
   /**
    * superfluid_assets defines the registered superfluid assets that have been

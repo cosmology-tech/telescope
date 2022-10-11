@@ -60,7 +60,7 @@ export interface CodeGeneratorRequest {
   protoFile: FileDescriptorProto[];
 
   /** The version number of protocol compiler. */
-  compilerVersion: Version;
+  compilerVersion?: Version;
 }
 
 /** An encoded CodeGeneratorRequest is written to the plugin's stdin. */
@@ -94,7 +94,7 @@ export interface CodeGeneratorRequestSDKType {
   proto_file: FileDescriptorProtoSDKType[];
 
   /** The version number of protocol compiler. */
-  compiler_version: VersionSDKType;
+  compiler_version?: VersionSDKType;
 }
 
 /** The plugin writes an encoded CodeGeneratorResponse to stdout. */

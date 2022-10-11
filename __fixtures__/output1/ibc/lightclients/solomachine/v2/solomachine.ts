@@ -174,7 +174,7 @@ export interface ClientState {
 
   /** frozen sequence of the solo machine */
   isFrozen: boolean;
-  consensusState: ConsensusState;
+  consensusState?: ConsensusState;
 
   /**
    * when set to true, will allow governance to update a solo machine client.
@@ -193,7 +193,7 @@ export interface ClientStateSDKType {
 
   /** frozen sequence of the solo machine */
   is_frozen: boolean;
-  consensus_state: ConsensusStateSDKType;
+  consensus_state?: ConsensusStateSDKType;
 
   /**
    * when set to true, will allow governance to update a solo machine client.
@@ -209,7 +209,7 @@ export interface ClientStateSDKType {
  */
 export interface ConsensusState {
   /** public key of the solo machine */
-  publicKey: Any;
+  publicKey?: Any;
 
   /**
    * diversifier allows the same public key to be re-used across different solo
@@ -227,7 +227,7 @@ export interface ConsensusState {
  */
 export interface ConsensusStateSDKType {
   /** public key of the solo machine */
-  public_key: AnySDKType;
+  public_key?: AnySDKType;
 
   /**
    * diversifier allows the same public key to be re-used across different solo
@@ -244,7 +244,7 @@ export interface Header {
   sequence: Long;
   timestamp: Long;
   signature: Uint8Array;
-  newPublicKey: Any;
+  newPublicKey?: Any;
   newDiversifier: string;
 }
 
@@ -254,7 +254,7 @@ export interface HeaderSDKType {
   sequence: Long;
   timestamp: Long;
   signature: Uint8Array;
-  new_public_key: AnySDKType;
+  new_public_key?: AnySDKType;
   new_diversifier: string;
 }
 
@@ -265,8 +265,8 @@ export interface HeaderSDKType {
 export interface Misbehaviour {
   clientId: string;
   sequence: Long;
-  signatureOne: SignatureAndData;
-  signatureTwo: SignatureAndData;
+  signatureOne?: SignatureAndData;
+  signatureTwo?: SignatureAndData;
 }
 
 /**
@@ -276,8 +276,8 @@ export interface Misbehaviour {
 export interface MisbehaviourSDKType {
   client_id: string;
   sequence: Long;
-  signature_one: SignatureAndDataSDKType;
-  signature_two: SignatureAndDataSDKType;
+  signature_one?: SignatureAndDataSDKType;
+  signature_two?: SignatureAndDataSDKType;
 }
 
 /**
@@ -349,7 +349,7 @@ export interface SignBytesSDKType {
 /** HeaderData returns the SignBytes data for update verification. */
 export interface HeaderData {
   /** header public key */
-  newPubKey: Any;
+  newPubKey?: Any;
 
   /** header diversifier */
   newDiversifier: string;
@@ -358,7 +358,7 @@ export interface HeaderData {
 /** HeaderData returns the SignBytes data for update verification. */
 export interface HeaderDataSDKType {
   /** header public key */
-  new_pub_key: AnySDKType;
+  new_pub_key?: AnySDKType;
 
   /** header diversifier */
   new_diversifier: string;
@@ -367,13 +367,13 @@ export interface HeaderDataSDKType {
 /** ClientStateData returns the SignBytes data for client state verification. */
 export interface ClientStateData {
   path: Uint8Array;
-  clientState: Any;
+  clientState?: Any;
 }
 
 /** ClientStateData returns the SignBytes data for client state verification. */
 export interface ClientStateDataSDKType {
   path: Uint8Array;
-  client_state: AnySDKType;
+  client_state?: AnySDKType;
 }
 
 /**
@@ -382,7 +382,7 @@ export interface ClientStateDataSDKType {
  */
 export interface ConsensusStateData {
   path: Uint8Array;
-  consensusState: Any;
+  consensusState?: Any;
 }
 
 /**
@@ -391,7 +391,7 @@ export interface ConsensusStateData {
  */
 export interface ConsensusStateDataSDKType {
   path: Uint8Array;
-  consensus_state: AnySDKType;
+  consensus_state?: AnySDKType;
 }
 
 /**
@@ -400,7 +400,7 @@ export interface ConsensusStateDataSDKType {
  */
 export interface ConnectionStateData {
   path: Uint8Array;
-  connection: ConnectionEnd;
+  connection?: ConnectionEnd;
 }
 
 /**
@@ -409,7 +409,7 @@ export interface ConnectionStateData {
  */
 export interface ConnectionStateDataSDKType {
   path: Uint8Array;
-  connection: ConnectionEndSDKType;
+  connection?: ConnectionEndSDKType;
 }
 
 /**
@@ -418,7 +418,7 @@ export interface ConnectionStateDataSDKType {
  */
 export interface ChannelStateData {
   path: Uint8Array;
-  channel: Channel;
+  channel?: Channel;
 }
 
 /**
@@ -427,7 +427,7 @@ export interface ChannelStateData {
  */
 export interface ChannelStateDataSDKType {
   path: Uint8Array;
-  channel: ChannelSDKType;
+  channel?: ChannelSDKType;
 }
 
 /**

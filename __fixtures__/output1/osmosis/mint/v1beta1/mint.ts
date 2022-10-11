@@ -124,7 +124,7 @@ export interface Params {
    * denom. In other words, defines which stakeholders will receive the minted
    * denoms and how much.
    */
-  distributionProportions: DistributionProportions;
+  distributionProportions?: DistributionProportions;
 
   /**
    * weighted_developer_rewards_receivers is the address to receive developer
@@ -169,7 +169,7 @@ export interface ParamsSDKType {
    * denom. In other words, defines which stakeholders will receive the minted
    * denoms and how much.
    */
-  distribution_proportions: DistributionProportionsSDKType;
+  distribution_proportions?: DistributionProportionsSDKType;
 
   /**
    * weighted_developer_rewards_receivers is the address to receive developer

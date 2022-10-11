@@ -43,7 +43,7 @@ export interface TxResponse {
   gasUsed: Long;
 
   /** The request transaction bytes. */
-  tx: Any;
+  tx?: Any;
 
   /**
    * Time of the previous block. For heights > 1, it's the weighted median of
@@ -102,7 +102,7 @@ export interface TxResponseSDKType {
   gas_used: Long;
 
   /** The request transaction bytes. */
-  tx: AnySDKType;
+  tx?: AnySDKType;
 
   /**
    * Time of the previous block. For heights > 1, it's the weighted median of
@@ -263,8 +263,8 @@ export interface ResultSDKType {
  * successfully simulated.
  */
 export interface SimulationResponse {
-  gasInfo: GasInfo;
-  result: Result;
+  gasInfo?: GasInfo;
+  result?: Result;
 }
 
 /**
@@ -272,8 +272,8 @@ export interface SimulationResponse {
  * successfully simulated.
  */
 export interface SimulationResponseSDKType {
-  gas_info: GasInfoSDKType;
-  result: ResultSDKType;
+  gas_info?: GasInfoSDKType;
+  result?: ResultSDKType;
 }
 
 /**

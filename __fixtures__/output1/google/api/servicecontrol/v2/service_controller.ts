@@ -24,7 +24,7 @@ export interface CheckRequest {
   serviceConfigId: string;
 
   /** Describes attributes about the operation being executed by the service. */
-  attributes: AttributeContext;
+  attributes?: AttributeContext;
 
   /** Describes the resources and the policies applied to each resource. */
   resources: ResourceInfo[];
@@ -53,7 +53,7 @@ export interface CheckRequestSDKType {
   service_config_id: string;
 
   /** Describes attributes about the operation being executed by the service. */
-  attributes: AttributeContextSDKType;
+  attributes?: AttributeContextSDKType;
 
   /** Describes the resources and the policies applied to each resource. */
   resources: ResourceInfoSDKType[];
@@ -145,7 +145,7 @@ export interface CheckResponse {
    * indicates a denial; [google.rpc.Status.details][google.rpc.Status.details]
    * would contain additional details about the denial.
    */
-  status: Status;
+  status?: Status;
 
   /** Returns a set of request contexts generated from the `CheckRequest`. */
   headers: {
@@ -160,7 +160,7 @@ export interface CheckResponseSDKType {
    * indicates a denial; [google.rpc.Status.details][google.rpc.Status.details]
    * would contain additional details about the denial.
    */
-  status: StatusSDKType;
+  status?: StatusSDKType;
 
   /** Returns a set of request contexts generated from the `CheckRequest`. */
   headers: {

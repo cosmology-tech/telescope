@@ -29,7 +29,7 @@ export interface PoolParamsSDKType {
 export interface Pool {
   address: string;
   id: Long;
-  poolParams: PoolParams;
+  poolParams?: PoolParams;
 
   /**
    * This string specifies who will govern the pool in the future.
@@ -44,7 +44,7 @@ export interface Pool {
   futurePoolGovernor: string;
 
   /** sum of all LP shares */
-  totalShares: Coin;
+  totalShares?: Coin;
 
   /** assets in the pool */
   poolLiquidity: Coin[];
@@ -60,7 +60,7 @@ export interface Pool {
 export interface PoolSDKType {
   address: string;
   id: Long;
-  pool_params: PoolParamsSDKType;
+  pool_params?: PoolParamsSDKType;
 
   /**
    * This string specifies who will govern the pool in the future.
@@ -75,7 +75,7 @@ export interface PoolSDKType {
   future_pool_governor: string;
 
   /** sum of all LP shares */
-  total_shares: CoinSDKType;
+  total_shares?: CoinSDKType;
 
   /** assets in the pool */
   pool_liquidity: CoinSDKType[];

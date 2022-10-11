@@ -165,7 +165,7 @@ export interface WriteLogEntriesRequest {
    * 
    * See [LogEntry][google.logging.v2.LogEntry].
    */
-  resource: MonitoredResource;
+  resource?: MonitoredResource;
 
   /**
    * Optional. Default labels that are added to the `labels` field of all log
@@ -255,7 +255,7 @@ export interface WriteLogEntriesRequestSDKType {
    * 
    * See [LogEntry][google.logging.v2.LogEntry].
    */
-  resource: MonitoredResourceSDKType;
+  resource?: MonitoredResourceSDKType;
 
   /**
    * Optional. Default labels that are added to the `labels` field of all log
@@ -319,11 +319,11 @@ export interface WriteLogEntriesResponse {}
 export interface WriteLogEntriesResponseSDKType {}
 export interface WriteLogEntriesPartialErrors_LogEntryErrorsEntry {
   key: number;
-  value: Status;
+  value?: Status;
 }
 export interface WriteLogEntriesPartialErrors_LogEntryErrorsEntrySDKType {
   key: number;
-  value: StatusSDKType;
+  value?: StatusSDKType;
 }
 
 /** Error details for WriteLogEntries with partial success. */
@@ -336,7 +336,7 @@ export interface WriteLogEntriesPartialErrors {
    * Failed requests for which no entries are written will not include
    * per-entry errors.
    */
-  logEntryErrors: {
+  logEntryErrors?: {
     [key: number]: Status;
   };
 }
@@ -351,7 +351,7 @@ export interface WriteLogEntriesPartialErrorsSDKType {
    * Failed requests for which no entries are written will not include
    * per-entry errors.
    */
-  log_entry_errors: {
+  log_entry_errors?: {
     [key: number]: StatusSDKType;
   };
 }
@@ -746,7 +746,7 @@ export interface TailLogEntriesRequest {
    * entries. Valid values are between 0-60000 milliseconds. Defaults to 2000
    * milliseconds.
    */
-  bufferWindow: Duration;
+  bufferWindow?: Duration;
 }
 
 /** The parameters to `TailLogEntries`. */
@@ -785,7 +785,7 @@ export interface TailLogEntriesRequestSDKType {
    * entries. Valid values are between 0-60000 milliseconds. Defaults to 2000
    * milliseconds.
    */
-  buffer_window: DurationSDKType;
+  buffer_window?: DurationSDKType;
 }
 
 /** Result returned from `TailLogEntries`. */
