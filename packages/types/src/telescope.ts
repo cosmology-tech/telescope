@@ -28,6 +28,10 @@ interface TelescopeOpts {
         fieldDefaultIsOptional?: boolean;
         useOptionalNullable?: boolean;
         allowUndefinedTypes?: boolean;
+
+        optionalQueryParams?: boolean;
+        optionalPageRequests?: boolean;
+
         excluded?: {
             packages?: string[];
             protos?: string[];
@@ -142,6 +146,10 @@ export const defaultTelescopeOptions: TelescopeOptions = {
         fieldDefaultIsOptional: false,
         allowUndefinedTypes: false,
         useOptionalNullable: true,
+
+        optionalQueryParams: false,
+        optionalPageRequests: false,
+
         typingsFormat: {
             useDeepPartial: true,
             useExact: false,

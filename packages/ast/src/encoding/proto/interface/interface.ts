@@ -59,32 +59,34 @@ export const createProtoType = (
     const oneOfs = getOneOfs(proto);
 
     // MARKED AS COSMOS SDK specific code
-    // optionalityMap is coupled to API requests
+    const optionalityMap = {};
+
     // if a param is found to be a route parameter, we assume it's required
     // if a param is found to be a query parameter, we assume it's optional
-    const optionalityMap = {};
-    // if (context.store.requests[name]) {
-    //     const svc = context.store.requests[name];
-    //     if (svc.info) {
-    //         svc.info.queryParams.map(param => {
-    //             optionalityMap[param] = true;
-    //         })
-    //     }
-    // }
+    if (context.pluginValue('prototypes.optionalQueryParams') && context.store.requests[name]) {
+        const svc = context.store.requests[name];
+        if (svc.info) {
+            svc.info.queryParams.map(param => {
+                optionalityMap[param] = true;
+            })
+        }
+    }
 
     // hard-code optionality for pagination
-    if (context.ref.proto.package === 'cosmos.base.query.v1beta1') {
-        if (name === 'PageRequest') {
-            optionalityMap['key'] = true;
-            optionalityMap['offset'] = true;
-            optionalityMap['limit'] = true;
-            optionalityMap['count_total'] = true;
-            optionalityMap['countTotal'] = true;
-            optionalityMap['reverse'] = true;
-        }
-        if (name === 'PageResponse') {
-            optionalityMap['next_key'] = true;
-            optionalityMap['nextKey'] = true;
+    if (context.pluginValue('prototypes.optionalPageRequests')) {
+        if (context.ref.proto.package === 'cosmos.base.query.v1beta1') {
+            if (name === 'PageRequest') {
+                optionalityMap['key'] = true;
+                optionalityMap['offset'] = true;
+                optionalityMap['limit'] = true;
+                optionalityMap['count_total'] = true;
+                optionalityMap['countTotal'] = true;
+                optionalityMap['reverse'] = true;
+            }
+            if (name === 'PageResponse') {
+                optionalityMap['next_key'] = true;
+                optionalityMap['nextKey'] = true;
+            }
         }
     }
 
