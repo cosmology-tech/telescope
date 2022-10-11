@@ -201,6 +201,8 @@ telescope({
 | `prototypes.fieldDefaultIsOptional`       | boolean value representing default optionality of field         | `false`    |
 | `prototypes.useOptionalNullable`          | use `(gogoproto.nullable)` values in determining optionality    | `true`     |
 | `prototypes.allowUndefinedTypes`          | boolean value allowing `Type`s to be `undefined`                | `false`    |
+| `prototypes.optionalQueryParams`          | boolean value setting queryParams to be optional                | `false`    |
+| `prototypes.optionalPageRequests`         | boolean value setting `PageRequest` fields to optional          | `false`    |
 
 ### Prototypes Methods
 
