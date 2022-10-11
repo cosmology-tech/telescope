@@ -1,10 +1,10 @@
 import * as t from '@babel/types';
 import { importStmt } from '@osmonauts/ast';
-import { ImportHash, ImportObj, ServiceMutation } from './types';
+import { ServiceMutation } from '@osmonauts/types';
+
+import { ImportHash, ImportObj } from './types';
 import { UTILS, getRelativePath } from './utils';
 import { TelescopeParseContext } from './build';
-import { ProtoStore } from '@osmonauts/proto-parser';
-import { ProtoRef } from '@osmonauts/types';
 
 const importHashToArray = (hash: ImportHash): ImportObj[] => {
     return Object.entries(hash ?? {})

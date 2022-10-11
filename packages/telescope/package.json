@@ -6,6 +6,7 @@
   "homepage": "https://github.com/osmosis-labs/telescope/tree/master/packages/telescope#readme",
   "license": "SEE LICENSE IN LICENSE",
   "main": "main/index.js",
+  "module": "module/index.js",
   "typings": "types/index.d.ts",
   "bin": {
     "telescope": "main/telescope.js"
@@ -16,11 +17,15 @@
   },
   "files": [
     "types",
+    "module",
+    "src",
     "main"
   ],
   "scripts": {
-    "build": "cross-env BABEL_ENV=production babel src --out-dir main --delete-dir-on-start --extensions \".tsx,.ts,.js\"",
+    "build:main": "cross-env BABEL_ENV=production babel src --out-dir main --delete-dir-on-start --extensions \".tsx,.ts,.js\"",
+    "build:module": "cross-env MODULE=true babel src --out-dir module --delete-dir-on-start  --extensions \".tsx,.ts,.js\"",
     "build:ts": "tsc --project ./tsconfig.json",
+    "build": "npm run build:module && npm run build:main",
     "buidl": "npm run build && npm run build:ts",
     "prepare": "npm run build",
     "dev": "cross-env NODE_ENV=development babel-node src/telescope --extensions \".tsx,.ts,.js\"",

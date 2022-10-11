@@ -1,7 +1,7 @@
 import { ProtoRef, TelescopeOptions } from '@osmonauts/types';
 import { ProtoStore } from '@osmonauts/proto-parser';
 import { AminoParseContext, GenericParseContext, ProtoParseContext } from '@osmonauts/ast';
-import { ServiceMutation, ServiceQuery } from './types';
+import { ServiceMutation, ServiceQuery } from '@osmonauts/types';
 export declare const getMutations: (mutations: ServiceMutation[]) => {
     typeUrl: string;
     TypeName: string;

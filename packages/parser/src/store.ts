@@ -219,4 +219,41 @@ export class ProtoStore {
         return lookupAnyFromImports(this, ref, name);
     }
 
+    // DOCUMENTATION
+
+    getServices(myBase: string): Record<string, ProtoRef[]> {
+        const refs = this.getProtos().filter((ref: ProtoRef) => {
+            const proto = getNestedProto(ref.traversed);
+            if (
+                (!proto?.Query ||
+                    proto.Query?.type !== 'Service') &&
+                (!proto?.Service ||
+                    proto.Service?.type !== 'Service')
+            ) {
+                return;
+            }
+            return true;
+        });
+
+        const check = refs.filter((ref: ProtoRef) => {
+            const [base] = ref.proto.package.split('.');
+            return base === myBase;
+        });
+
+        if (!check.length) {
+            return {};
+        }
+
+        const packages = refs.reduce((m, ref: ProtoRef) => {
+            const [base] = ref.proto.package.split('.');
+            if (base === myBase) {
+                if (!m[ref.proto.package]) m[ref.proto.package] = [];
+                m[ref.proto.package].push(ref);
+            }
+            return m;
+        }, {});
+
+        return packages;
+    }
+
 }
