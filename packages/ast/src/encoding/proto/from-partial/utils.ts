@@ -162,7 +162,7 @@ export const fromPartial = {
     // message.signDoc = object.signDoc !== undefined && object.signDoc !== null ? SignDocDirectAux.fromPartial(object.signDoc) : undefined;
     type(args: FromPartialMethod) {
         const prop = args.field.name;
-        const name = getFieldsTypeName(args.field);
+        const name = args.context.getTypeName(args.field);
         return setNotUndefinedAndNotNull(
             prop,
             t.callExpression(
@@ -531,7 +531,7 @@ export const arrayTypes = {
 
     // message.tokenInMaxs = object.tokenInMaxs?.map(e => Coin.fromPartial(e)) || [];
     type(args: FromPartialMethod) {
-        const name = getFieldsTypeName(args.field);
+        const name = args.context.getTypeName(args.field);
         return t.callExpression(
             t.memberExpression(
                 t.identifier(name),

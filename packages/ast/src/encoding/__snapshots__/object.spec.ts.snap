@@ -2632,6 +2632,12 @@ exports[`ibc/core/port/v1/query 2`] = `
   },
   {
     "import": "ibc/core/channel/v1/channel.proto",
+    "importedAs": "Counterparty",
+    "name": "Counterparty",
+    "type": "typeImport",
+  },
+  {
+    "import": "ibc/core/channel/v1/channel.proto",
     "name": "orderFromJSON",
     "type": "fromJSONEnum",
   },
@@ -2735,9 +2741,9 @@ exports[`ibc/core/types/v1/genesis name collisions 2`] = `
 
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
-    message.clientGenesis = object.clientGenesis !== undefined && object.clientGenesis !== null ? GenesisState.fromPartial(object.clientGenesis) : undefined;
-    message.connectionGenesis = object.connectionGenesis !== undefined && object.connectionGenesis !== null ? GenesisState.fromPartial(object.connectionGenesis) : undefined;
-    message.channelGenesis = object.channelGenesis !== undefined && object.channelGenesis !== null ? GenesisState.fromPartial(object.channelGenesis) : undefined;
+    message.clientGenesis = object.clientGenesis !== undefined && object.clientGenesis !== null ? GenesisState1.fromPartial(object.clientGenesis) : undefined;
+    message.connectionGenesis = object.connectionGenesis !== undefined && object.connectionGenesis !== null ? GenesisState2.fromPartial(object.connectionGenesis) : undefined;
+    message.channelGenesis = object.channelGenesis !== undefined && object.channelGenesis !== null ? GenesisState3.fromPartial(object.channelGenesis) : undefined;
     return message;
   },
 
@@ -2762,6 +2768,24 @@ exports[`ibc/core/types/v1/genesis name collisions 2`] = `
 
 exports[`ibc/core/types/v1/genesis name collisions 3`] = `
 [
+  {
+    "import": "ibc/core/client/v1/genesis.proto",
+    "importedAs": "GenesisState1",
+    "name": "GenesisState",
+    "type": "typeImport",
+  },
+  {
+    "import": "ibc/core/connection/v1/genesis.proto",
+    "importedAs": "GenesisState2",
+    "name": "GenesisState",
+    "type": "typeImport",
+  },
+  {
+    "import": "ibc/core/channel/v1/genesis.proto",
+    "importedAs": "GenesisState3",
+    "name": "GenesisState",
+    "type": "typeImport",
+  },
   {
     "import": "ibc/core/client/v1/genesis.proto",
     "importedAs": "GenesisState1",
