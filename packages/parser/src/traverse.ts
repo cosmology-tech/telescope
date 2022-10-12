@@ -70,18 +70,17 @@ const traverseFields = (
     traversal: string[]
 ): Record<string, ProtoField> => {
     return Object.keys(obj.fields).reduce((m, mykey) => {
-        const field = obj.fields[mykey];
-
-        // IS THIS ACTUALLY CORRECT?
-        // namedFieldWithOnlyNumberSepByUnderscore
-        // const regexp = /([a-zA-Z0-9]+)[_]+([0-9]+)$/g
-        // const matches = (text, regex) => [...text.matchAll(regex)].map(([match]) => match)
+        const field: ProtoField & { toJSON?: Function } = obj.fields[mykey];
 
         let fieldName = mykey;
-        // if (regexp.test(fieldName)) {
-        //     const mymatches = matches(fieldName, regexp);
-        //     console.log(mymatches);
-        // }
+        const regexp = /([a-zA-Z0-9]+)[_]+([0-9]+)$/;
+        if (regexp.test(fieldName)) {
+            const matches = fieldName.match(regexp);
+            if (matches?.length) {
+                const begin = fieldName.split(matches[1])[0];
+                fieldName = `${begin}${matches[1]}${matches[2]}`
+            }
+        }
 
         const serialize = () => {
             if (typeof field.toJSON !== 'undefined') {
@@ -89,6 +88,7 @@ const traverseFields = (
                 return field.toJSON({ keepComments: true });
             }
             // traversed
+            // field.name is used for proto!
             field.name = fieldName;
             return field;
         }

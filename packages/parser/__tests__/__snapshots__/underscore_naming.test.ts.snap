@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`naming 1`] = `"header1"`;
+
+exports[`naming 2`] = `"header2"`;
+
+exports[`naming 3`] = `"he__ader1"`;
+
+exports[`naming 4`] = `"header1"`;
+
+exports[`naming 5`] = `"hea___der123"`;
