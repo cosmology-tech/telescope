@@ -28,6 +28,8 @@ export declare const defaultTelescopeOptions: {
         fieldDefaultIsOptional?: boolean;
         useOptionalNullable?: boolean;
         allowUndefinedTypes?: boolean;
+        optionalQueryParams?: boolean;
+        optionalPageRequests?: boolean;
         excluded?: {
             packages?: string[];
             protos?: string[];
