@@ -483,7 +483,7 @@ const options: TelescopeOptions = {
 This will generate a nice helper in the `ClientFactory`, which you can then use to query multiple modules from a single object:
 
 ```js
-import { osmosis } from './proto';
+import { osmosis } from './codegen';
 
 const main = async () => {
    const client = await osmosis.ClientFactory.createLCDClient({ restEndpoint: REST_ENDPOINT });
