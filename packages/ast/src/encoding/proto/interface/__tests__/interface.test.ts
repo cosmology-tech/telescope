@@ -105,7 +105,6 @@ describe('cosmos/authz/v1beta1/query.proto', () => {
             getNestedProto(ref.traversed).QueryGrantsRequest
         ));
     });
-
 });
 
 describe('confio/proofs.proto', () => {

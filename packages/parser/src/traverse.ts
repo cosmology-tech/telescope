@@ -69,8 +69,19 @@ const traverseFields = (
     imports: object,
     traversal: string[]
 ): Record<string, ProtoField> => {
-    return Object.keys(obj.fields).reduce((m, key) => {
-        const field = obj.fields[key];
+    return Object.keys(obj.fields).reduce((m, mykey) => {
+        const field = obj.fields[mykey];
+
+        // IS THIS ACTUALLY CORRECT?
+        // namedFieldWithOnlyNumberSepByUnderscore
+        // const regexp = /([a-zA-Z0-9]+)[_]+([0-9]+)$/g
+        // const matches = (text, regex) => [...text.matchAll(regex)].map(([match]) => match)
+
+        let fieldName = mykey;
+        // if (regexp.test(fieldName)) {
+        //     const mymatches = matches(fieldName, regexp);
+        //     console.log(mymatches);
+        // }
 
         const serialize = () => {
             if (typeof field.toJSON !== 'undefined') {
@@ -78,13 +89,14 @@ const traverseFields = (
                 return field.toJSON({ keepComments: true });
             }
             // traversed
+            field.name = fieldName;
             return field;
         }
 
         let found: any = null;
 
         if (SCALAR_TYPES.includes(field.type)) {
-            m[key] = {
+            m[fieldName] = {
                 parsedType: { name: field.type, type: 'native' },
                 isScalar: true,
                 typeNum: SCALAR_TYPES.indexOf(field.type),
@@ -96,7 +108,7 @@ const traverseFields = (
         // nested scope first
         found = lookupNested(ref, traversal, field.type);
         if (found) {
-            m[key] = {
+            m[fieldName] = {
                 scope: found.scope,
                 parsedType: instanceType(found),
                 ...serialize(),
@@ -107,7 +119,7 @@ const traverseFields = (
         // local scope second
         found = lookup(store, ref, field.type);
         if (found) {
-            m[key] = {
+            m[fieldName] = {
                 scope: found.scope,
                 parsedType: instanceType(found),
                 ...serialize(),
@@ -119,7 +131,7 @@ const traverseFields = (
         if (found) {
             imports[found.import] = imports[found.import] || [];
             imports[found.import] = [...new Set([...imports[found.import], found.name])];
-            m[key] = {
+            m[fieldName] = {
                 parsedType: instanceType(found.obj),
                 scopeType: 'import',
                 scope: [found.obj.scope],
@@ -134,7 +146,7 @@ const traverseFields = (
         // if (found) {
         //     imports[found.import] = imports[found.import] || [];
         //     imports[found.import] = [...new Set([...imports[found.import], found.name])];
-        //     m[key] = {
+        //     m[fieldName] = {
 
         //         parsedType: instanceType(found.obj),
         //         scopeType: 'protoImport',
@@ -153,7 +165,7 @@ const traverseFields = (
             if (found) {
                 imports[found.import] = imports[found.import] || [];
                 imports[found.import] = [...new Set([...imports[found.import], found.name])];
-                m[key] = {
+                m[fieldName] = {
 
                     parsedType: instanceType(found.obj),
                     scopeType: 'protoImport',
@@ -178,7 +190,7 @@ const traverseFields = (
                 if (found) {
                     imports[found.import] = imports[found.import] || [];
                     imports[found.import] = [...new Set([...imports[found.import], found.name])];
-                    m[key] = {
+                    m[fieldName] = {
                         parsedType: instanceType(found.obj),
                         scopeType: 'protoImport',
                         scope: found.obj.scope ? found.obj.scope : [found.package],

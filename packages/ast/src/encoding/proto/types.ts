@@ -191,7 +191,7 @@ export const isArrayField = (
 export const isEnumField = (
     field: ProtoField
 ) => {
-    return field.parsedType.type === 'Enum'
+    return field.parsedType?.type === 'Enum'
 };
 
 export const getFieldOptionalityForDefaults = (

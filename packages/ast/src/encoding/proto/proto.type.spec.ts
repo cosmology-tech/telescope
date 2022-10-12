@@ -1,9 +1,8 @@
 import { createProtoType, createCreateProtoType } from './interface';
 import authz from '../../../../../__fixtures__/proto-json/cosmos/authz/v1beta1/authz.json';
 import gamm from '../../../../../__fixtures__/proto-json/osmosis/gamm/v1beta1/tx.json';
-import generate from '@babel/generator';
 
-import { ProtoStore, traverse, getNestedProto } from '@osmonauts/proto-parser'
+import { traverse, getNestedProto } from '@osmonauts/proto-parser'
 import { defaultTelescopeOptions } from '@osmonauts/types'
 import { ProtoParseContext } from '../context';
 import { getTestProtoStore, expectCode, printCode } from '../../../test-utils';
