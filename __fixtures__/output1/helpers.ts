@@ -144,12 +144,12 @@ export const setPaginationParams = (options: Params, pagination?: PageRequest) =
         // Uint8Array to String
         options.params['pagination.key'] = Buffer.from(pagination.key).toString('base64');
     }
-    if (typeof pagination?.offset !== "undefined") {
-        options.params['pagination.limit'] = Long.toString(pagination.limit);
-    }
     if (typeof pagination?.limit !== "undefined") {
-        options.params['pagination.offset'] = Long.toString(pagination.offset);
+      options.params["pagination.limit"] = pagination.limit.toString()
     }
+    if (typeof pagination?.offset !== "undefined") {
+      options.params["pagination.offset"] = pagination.offset.toString()
+    }    
     if (typeof pagination?.reverse !== "undefined") {
         options.params['pagination.reverse'] = pagination.reverse;
     }
