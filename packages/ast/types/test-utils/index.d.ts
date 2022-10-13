@@ -8,6 +8,7 @@ export declare const defaultTelescopeOptions: {
     removeUnusedImports: boolean;
     classesUseArrowFunctions: boolean;
     useSDKTypes: boolean;
+    logLevel: import("@osmonauts/types").TelescopeLogLevel;
     prototypes: {
         enabled?: boolean;
         parser?: {

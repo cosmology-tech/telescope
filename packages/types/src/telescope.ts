@@ -2,11 +2,21 @@ import { TSBuilderInput } from '@cosmwasm/ts-codegen';
 import { AminoExceptions, DEFAULT_AMINO_EXCEPTIONS } from "./aminos";
 import { snake } from 'case';
 import { camel } from '@osmonauts/utils';
+
+export enum TelescopeLogLevel {
+    None = 0,
+    Info,
+    Warn,
+    Error,
+    Debug
+}
 interface TelescopeOpts {
 
     removeUnusedImports?: boolean;
     classesUseArrowFunctions?: boolean;
     useSDKTypes?: boolean;
+
+    logLevel?: TelescopeLogLevel;
 
     prototypes?: {
         enabled?: boolean;
@@ -125,6 +135,8 @@ export const defaultTelescopeOptions: TelescopeOptions = {
     removeUnusedImports: true,
     classesUseArrowFunctions: false,
     useSDKTypes: true,
+
+    logLevel: TelescopeLogLevel.None,
 
     prototypes: {
         enabled: true,

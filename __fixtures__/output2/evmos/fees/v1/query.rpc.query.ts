@@ -1,0 +1,82 @@
+import { Rpc } from "../../../helpers";
+import * as _m0 from "protobufjs/minimal";
+import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
+import { QueryDevFeeInfosRequest, QueryDevFeeInfosResponse, QueryDevFeeInfoRequest, QueryDevFeeInfoResponse, QueryParamsRequest, QueryParamsResponse, QueryDevFeeInfosPerDeployerRequest, QueryDevFeeInfosPerDeployerResponse } from "./query";
+/** Query defines the gRPC querier service. */
+
+export interface Query {
+  /** DevFeeInfos retrieves all registered contracts for fee distribution */
+  devFeeInfos(request?: QueryDevFeeInfosRequest): Promise<QueryDevFeeInfosResponse>;
+  /** DevFeeInfo retrieves a registered contract for fee distribution */
+
+  devFeeInfo(request: QueryDevFeeInfoRequest): Promise<QueryDevFeeInfoResponse>;
+  /** Params retrieves the fees module params */
+
+  params(request?: QueryParamsRequest): Promise<QueryParamsResponse>;
+  /**
+   * DevFeeInfosPerDeployer retrieves all contracts that a deployer has
+   * registered for fee distribution
+   */
+
+  devFeeInfosPerDeployer(request: QueryDevFeeInfosPerDeployerRequest): Promise<QueryDevFeeInfosPerDeployerResponse>;
+}
+export class QueryClientImpl implements Query {
+  private readonly rpc: Rpc;
+
+  constructor(rpc: Rpc) {
+    this.rpc = rpc;
+    this.devFeeInfos = this.devFeeInfos.bind(this);
+    this.devFeeInfo = this.devFeeInfo.bind(this);
+    this.params = this.params.bind(this);
+    this.devFeeInfosPerDeployer = this.devFeeInfosPerDeployer.bind(this);
+  }
+
+  devFeeInfos(request: QueryDevFeeInfosRequest = {
+    pagination: undefined
+  }): Promise<QueryDevFeeInfosResponse> {
+    const data = QueryDevFeeInfosRequest.encode(request).finish();
+    const promise = this.rpc.request("evmos.fees.v1.Query", "DevFeeInfos", data);
+    return promise.then(data => QueryDevFeeInfosResponse.decode(new _m0.Reader(data)));
+  }
+
+  devFeeInfo(request: QueryDevFeeInfoRequest): Promise<QueryDevFeeInfoResponse> {
+    const data = QueryDevFeeInfoRequest.encode(request).finish();
+    const promise = this.rpc.request("evmos.fees.v1.Query", "DevFeeInfo", data);
+    return promise.then(data => QueryDevFeeInfoResponse.decode(new _m0.Reader(data)));
+  }
+
+  params(request: QueryParamsRequest = {}): Promise<QueryParamsResponse> {
+    const data = QueryParamsRequest.encode(request).finish();
+    const promise = this.rpc.request("evmos.fees.v1.Query", "Params", data);
+    return promise.then(data => QueryParamsResponse.decode(new _m0.Reader(data)));
+  }
+
+  devFeeInfosPerDeployer(request: QueryDevFeeInfosPerDeployerRequest): Promise<QueryDevFeeInfosPerDeployerResponse> {
+    const data = QueryDevFeeInfosPerDeployerRequest.encode(request).finish();
+    const promise = this.rpc.request("evmos.fees.v1.Query", "DevFeeInfosPerDeployer", data);
+    return promise.then(data => QueryDevFeeInfosPerDeployerResponse.decode(new _m0.Reader(data)));
+  }
+
+}
+export const createRpcQueryExtension = (base: QueryClient) => {
+  const rpc = createProtobufRpcClient(base);
+  const queryService = new QueryClientImpl(rpc);
+  return {
+    devFeeInfos(request?: QueryDevFeeInfosRequest): Promise<QueryDevFeeInfosResponse> {
+      return queryService.devFeeInfos(request);
+    },
+
+    devFeeInfo(request: QueryDevFeeInfoRequest): Promise<QueryDevFeeInfoResponse> {
+      return queryService.devFeeInfo(request);
+    },
+
+    params(request?: QueryParamsRequest): Promise<QueryParamsResponse> {
+      return queryService.params(request);
+    },
+
+    devFeeInfosPerDeployer(request: QueryDevFeeInfosPerDeployerRequest): Promise<QueryDevFeeInfosPerDeployerResponse> {
+      return queryService.devFeeInfosPerDeployer(request);
+    }
+
+  };
+};

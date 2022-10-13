@@ -1,9 +1,17 @@
 import { TSBuilderInput } from '@cosmwasm/ts-codegen';
 import { AminoExceptions } from "./aminos";
+export declare enum TelescopeLogLevel {
+    None = 0,
+    Info = 1,
+    Warn = 2,
+    Error = 3,
+    Debug = 4
+}
 interface TelescopeOpts {
     removeUnusedImports?: boolean;
     classesUseArrowFunctions?: boolean;
     useSDKTypes?: boolean;
+    logLevel?: TelescopeLogLevel;
     prototypes?: {
         enabled?: boolean;
         parser?: {
