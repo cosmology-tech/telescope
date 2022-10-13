@@ -7,6 +7,7 @@
 import * as _m0 from "protobufjs/minimal";
 import * as Long from 'long';
 
+// @ts-ignore
 if (_m0.util.Long !== Long) {
     _m0.util.Long = (Long as any);
 
@@ -97,7 +98,7 @@ export function toDuration(duration: string): Duration {
 };
 
 export function fromDuration(duration: Duration): string {
-    return (parseInt(duration.seconds) * 1000000000 + duration.nanos).toString();
+    return (parseInt(duration.seconds.toString()) * 1000000000 + duration.nanos).toString();
 };
 
 export function isSet(value: any): boolean {
