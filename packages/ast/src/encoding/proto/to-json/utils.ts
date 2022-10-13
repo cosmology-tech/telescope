@@ -1,8 +1,9 @@
 import * as t from '@babel/types';
+import { ProtoField } from '@osmonauts/types';
 import { getDefaultTSTypeFromProtoType } from '../../types';
 import { ToJSONMethod } from './index';
 
-const notUndefinedSetValue = (prop: string, expr: t.Expression) => {
+const notUndefinedSetValue = (messageProp: string, objProp: string, expr: t.Expression) => {
     return t.expressionStatement(
         t.logicalExpression(
             '&&',
@@ -10,7 +11,7 @@ const notUndefinedSetValue = (prop: string, expr: t.Expression) => {
                 '!==',
                 t.memberExpression(
                     t.identifier('message'),
-                    t.identifier(prop)
+                    t.identifier(messageProp)
                 ),
                 t.identifier('undefined')
             ),
@@ -18,7 +19,7 @@ const notUndefinedSetValue = (prop: string, expr: t.Expression) => {
                 '=',
                 t.memberExpression(
                     t.identifier('obj'),
-                    t.identifier(prop)
+                    t.identifier(objProp)
                 ),
                 expr
             )
@@ -26,14 +27,23 @@ const notUndefinedSetValue = (prop: string, expr: t.Expression) => {
     );
 }
 
+const getPropNames = (field: ProtoField) => {
+    const messageProp = field.name;
+    const objProp = field.options?.json_name ?? field.name;
+    return {
+        messageProp,
+        objProp
+    }
+}
+
 export const toJSON = {
 
     //  message.sender !== undefined && (obj.sender = message.sender);
     identity(args: ToJSONMethod) {
-        const prop = args.field.name;
-        return notUndefinedSetValue(prop, t.memberExpression(
+        const { messageProp, objProp } = getPropNames(args.field);
+        return notUndefinedSetValue(messageProp, objProp, t.memberExpression(
             t.identifier('message'),
-            t.identifier(prop)
+            t.identifier(messageProp)
         ));
     },
 
@@ -52,9 +62,10 @@ export const toJSON = {
 
     // message.maxDepth !== undefined && (obj.maxDepth = Math.round(message.maxDepth));
     number(args: ToJSONMethod) {
-        const prop = args.field.name;
+        const { messageProp, objProp } = getPropNames(args.field);
         return notUndefinedSetValue(
-            prop,
+            messageProp,
+            objProp,
             t.callExpression(
                 t.memberExpression(
                     t.identifier('Math'),
@@ -63,7 +74,7 @@ export const toJSON = {
                 [
                     t.memberExpression(
                         t.identifier('message'),
-                        t.identifier(prop)
+                        t.identifier(messageProp)
                     )
                 ]
             )
@@ -92,16 +103,17 @@ export const toJSON = {
     // message.poolId !== undefined && (obj.poolId = (message.poolId || undefined).toString());
     long(args: ToJSONMethod) {
         args.context.addUtil('Long');
-        const prop = args.field.name;
+        const { messageProp, objProp } = getPropNames(args.field);
         return notUndefinedSetValue(
-            prop,
+            messageProp,
+            objProp,
             t.callExpression(
                 t.memberExpression(
                     t.logicalExpression(
                         '||',
                         t.memberExpression(
                             t.identifier('message'),
-                            t.identifier(prop)
+                            t.identifier(messageProp)
                         ),
                         getDefaultTSTypeFromProtoType(args.context, args.field, args.isOneOf)
                     ),
@@ -130,15 +142,14 @@ export const toJSON = {
 
     // message.signDoc !== undefined && (obj.signDoc = message.signDoc ? SignDocDirectAux.toJSON(message.signDoc) : undefined);
     type(args: ToJSONMethod) {
-        const prop = args.field.name;
         const name = args.context.getTypeName(args.field);
-
+        const { messageProp, objProp } = getPropNames(args.field);
         // TODO isn't the nested conditional a waste? (using ts-proto as reference)
         // maybe null is OK?
-        return notUndefinedSetValue(prop, t.conditionalExpression(
+        return notUndefinedSetValue(messageProp, objProp, t.conditionalExpression(
             t.memberExpression(
                 t.identifier('message'),
-                t.identifier(prop)
+                t.identifier(messageProp)
             ),
             t.callExpression(
                 t.memberExpression(
@@ -148,7 +159,7 @@ export const toJSON = {
                 [
                     t.memberExpression(
                         t.identifier('message'),
-                        t.identifier(prop)
+                        t.identifier(messageProp)
                     )
                 ]
             ),
@@ -158,14 +169,14 @@ export const toJSON = {
 
     // message.mode !== undefined && (obj.mode = signModeToJSON(message.mode));
     enum(args: ToJSONMethod) {
-        const prop = args.field.name;
+        const { messageProp, objProp } = getPropNames(args.field);
         const enumFuncName = args.context.getToEnum(args.field);
-        return notUndefinedSetValue(prop, t.callExpression(
+        return notUndefinedSetValue(messageProp, objProp, t.callExpression(
             t.identifier(enumFuncName),
             [
                 t.memberExpression(
                     t.identifier('message'),
-                    t.identifier(prop)
+                    t.identifier(messageProp)
                 )
             ]
         ));
@@ -176,6 +187,7 @@ export const toJSON = {
     // message.queryData !== undefined && (obj.queryData = base64FromBytes(message.queryData !== undefined ? message.queryData : undefined));
     bytes(args: ToJSONMethod) {
         args.context.addUtil('base64FromBytes');
+        const { messageProp, objProp } = getPropNames(args.field);
 
         let expr;
         if (args.isOptional) {
@@ -186,7 +198,7 @@ export const toJSON = {
                     '!==',
                     t.memberExpression(
                         t.identifier('message'),
-                        t.identifier(args.field.name)
+                        t.identifier(messageProp)
                     ),
                     t.identifier('undefined')
                 ),
@@ -195,7 +207,7 @@ export const toJSON = {
                     [
                         t.memberExpression(
                             t.identifier('message'),
-                            t.identifier(args.field.name)
+                            t.identifier(messageProp)
                         )
                     ]
                 ),
@@ -211,20 +223,20 @@ export const toJSON = {
                             '!==',
                             t.memberExpression(
                                 t.identifier('message'),
-                                t.identifier(args.field.name)
+                                t.identifier(messageProp)
                             ),
                             t.identifier('undefined')
                         ),
                         t.memberExpression(
                             t.identifier('message'),
-                            t.identifier(args.field.name)
+                            t.identifier(messageProp)
                         ),
                         getDefaultTSTypeFromProtoType(args.context, args.field, args.isOneOf)
                     )
                 ]
             )
         }
-        return notUndefinedSetValue(args.field.name, expr);
+        return notUndefinedSetValue(messageProp, objProp, expr);
     },
 
     // message.period !== undefined && (obj.period = message.period);
@@ -259,13 +271,14 @@ export const toJSON = {
 
     timestampTimestamp(args: ToJSONMethod) {
         args.context.addUtil('fromTimestamp');
-        return notUndefinedSetValue(args.field.name, t.callExpression(
+        const { messageProp, objProp } = getPropNames(args.field);
+        return notUndefinedSetValue(messageProp, objProp, t.callExpression(
             t.memberExpression(
                 t.callExpression(
                     t.identifier('fromTimestamp'), [
                     t.memberExpression(
                         t.identifier('message'),
-                        t.identifier(args.field.name)
+                        t.identifier(messageProp)
                     )
                 ]),
                 t.identifier('toISOString')
@@ -277,11 +290,12 @@ export const toJSON = {
     // message.periodReset !== undefined && (obj.periodReset = message.periodReset.toISOString());
 
     timestampDate(args: ToJSONMethod) {
-        return notUndefinedSetValue(args.field.name, t.callExpression(
+        const { messageProp, objProp } = getPropNames(args.field);
+        return notUndefinedSetValue(messageProp, objProp, t.callExpression(
             t.memberExpression(
                 t.memberExpression(
                     t.identifier('message'),
-                    t.identifier(args.field.name)
+                    t.identifier(messageProp)
                 ),
                 t.identifier('toISOString')
             ),
@@ -308,7 +322,7 @@ export const toJSON = {
 
     keyHash(args: ToJSONMethod) {
 
-        const prop = args.field.name;
+        const { messageProp, objProp } = getPropNames(args.field);
         const keyType = args.field.keyType;
         const valueType = args.field.parsedType.name;
 
@@ -358,7 +372,7 @@ export const toJSON = {
                     '=',
                     t.memberExpression(
                         t.identifier('obj'),
-                        t.identifier(prop)
+                        t.identifier(objProp)
                     ),
                     t.objectExpression([])
                 )
@@ -367,7 +381,7 @@ export const toJSON = {
             t.ifStatement(
                 t.memberExpression(
                     t.identifier('message'),
-                    t.identifier(prop)
+                    t.identifier(messageProp)
                 ),
                 t.blockStatement([
                     t.expressionStatement(
@@ -381,7 +395,7 @@ export const toJSON = {
                                     [
                                         t.memberExpression(
                                             t.identifier('message'),
-                                            t.identifier(prop)
+                                            t.identifier(messageProp)
                                         )
                                     ]
                                 ),
@@ -404,7 +418,7 @@ export const toJSON = {
                                                 t.memberExpression(
                                                     t.memberExpression(
                                                         t.identifier('obj'),
-                                                        t.identifier(prop)
+                                                        t.identifier(objProp)
                                                     ),
                                                     t.identifier('k'),
                                                     true
@@ -429,11 +443,11 @@ export const toJSON = {
     // }
 
     array(args: ToJSONMethod, expr: t.Expression) {
-        const prop = args.field.name;
+        const { messageProp, objProp } = getPropNames(args.field);
         return t.ifStatement(
             t.memberExpression(
                 t.identifier('message'),
-                t.identifier(prop)
+                t.identifier(messageProp)
             ),
             t.blockStatement([
                 t.expressionStatement(
@@ -441,13 +455,13 @@ export const toJSON = {
                         '=',
                         t.memberExpression(
                             t.identifier('obj'),
-                            t.identifier(prop)
+                            t.identifier(objProp)
                         ),
                         t.callExpression(
                             t.memberExpression(
                                 t.memberExpression(
                                     t.identifier('message'),
-                                    t.identifier(prop)
+                                    t.identifier(messageProp)
                                 ),
                                 t.identifier('map')
                             ),
@@ -469,7 +483,7 @@ export const toJSON = {
                         '=',
                         t.memberExpression(
                             t.identifier('obj'),
-                            t.identifier(prop)
+                            t.identifier(objProp)
                         ),
                         t.arrayExpression([])
                     )

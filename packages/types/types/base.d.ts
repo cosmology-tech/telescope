@@ -42,6 +42,8 @@ export interface ProtoField {
     options: {
         [key: string]: any;
         deprecated?: boolean;
+        json_name?: string;
+        "(cosmos_proto.json_tag)"?: string;
         "(cosmos_proto.accepts_interface)"?: string;
         "(cosmos_proto.scalar)"?: string;
         "(telescope:name)"?: string;

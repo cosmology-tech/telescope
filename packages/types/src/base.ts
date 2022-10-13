@@ -51,6 +51,13 @@ export interface ProtoField {
     options: {
         [key: string]: any;
         deprecated?: boolean;
+
+        // it changes the ProtoJSON field name, doesn't impact amino
+        json_name?: string;
+
+        // impacts amino encoding. It's in the format of (gogoproto.jsontag) = "foo_bar,omitempty", and the omitempty part is optional. This means that the field name will be foo_bar
+        "(cosmos_proto.json_tag)"?: string;
+
         "(cosmos_proto.accepts_interface)"?: string;
         "(cosmos_proto.scalar)"?: string;
         "(telescope:name)"?: string;

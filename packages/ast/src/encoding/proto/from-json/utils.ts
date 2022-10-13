@@ -2,23 +2,33 @@ import * as t from '@babel/types';
 import { FromJSONMethod } from './index';
 import { callExpression, identifier } from '../../../utils';
 import { getDefaultTSTypeFromProtoType } from '../../types';
+import { ProtoField } from '@osmonauts/types';
+
+const getPropNames = (field: ProtoField) => {
+    const messageProp = field.name;
+    const objProp = field.options?.json_name ?? field.name;
+    return {
+        messageProp,
+        objProp
+    }
+};
 
 export const fromJSON = {
 
     // sender: isSet(object.sender) ? String(object.sender) : ""
     string(args: FromJSONMethod) {
-        const prop = args.field.name;
+        const { messageProp, objProp } = getPropNames(args.field);
         args.context.addUtil('isSet');
 
         return t.objectProperty(
-            t.identifier(prop),
+            t.identifier(messageProp),
             t.conditionalExpression(
                 t.callExpression(
                     t.identifier('isSet'),
                     [
                         t.memberExpression(
                             t.identifier('object'),
-                            t.identifier(prop)
+                            t.identifier(objProp)
                         )
                     ]
                 ),
@@ -27,7 +37,7 @@ export const fromJSON = {
                     [
                         t.memberExpression(
                             t.identifier('object'),
-                            t.identifier(prop)
+                            t.identifier(objProp)
                         )
                     ]
                 ),
@@ -37,18 +47,18 @@ export const fromJSON = {
     },
 
     number(args: FromJSONMethod) {
-        const prop = args.field.name;
+        const { messageProp, objProp } = getPropNames(args.field);
         args.context.addUtil('isSet');
 
         return t.objectProperty(
-            t.identifier(prop),
+            t.identifier(messageProp),
             t.conditionalExpression(
                 t.callExpression(
                     t.identifier('isSet'),
                     [
                         t.memberExpression(
                             t.identifier('object'),
-                            t.identifier(prop)
+                            t.identifier(objProp)
                         )
                     ]
                 ),
@@ -57,7 +67,7 @@ export const fromJSON = {
                     [
                         t.memberExpression(
                             t.identifier('object'),
-                            t.identifier(prop)
+                            t.identifier(objProp)
                         )
                     ]
                 ),
@@ -90,18 +100,18 @@ export const fromJSON = {
 
     // disableMacros: isSet(object.disableMacros) ? Boolean(object.disableMacros) : false
     bool(args: FromJSONMethod) {
-        const prop = args.field.name;
+        const { messageProp, objProp } = getPropNames(args.field);
         args.context.addUtil('isSet');
 
         return t.objectProperty(
-            t.identifier(prop),
+            t.identifier(messageProp),
             t.conditionalExpression(
                 t.callExpression(
                     t.identifier('isSet'),
                     [
                         t.memberExpression(
                             t.identifier('object'),
-                            t.identifier(prop)
+                            t.identifier(objProp)
                         )
                     ]
                 ),
@@ -110,7 +120,7 @@ export const fromJSON = {
                     [
                         t.memberExpression(
                             t.identifier('object'),
-                            t.identifier(prop)
+                            t.identifier(objProp)
                         )
                     ]
                 ),
@@ -121,19 +131,19 @@ export const fromJSON = {
 
     // int64Value: isSet(object.int64Value) ? Long.fromValue(object.int64Value) : Long.UZERO,
     long(args: FromJSONMethod) {
-        const prop = args.field.name;
+        const { messageProp, objProp } = getPropNames(args.field);
         args.context.addUtil('isSet');
         args.context.addUtil('Long');
 
         return t.objectProperty(
-            t.identifier(prop),
+            t.identifier(messageProp),
             t.conditionalExpression(
                 t.callExpression(
                     t.identifier('isSet'),
                     [
                         t.memberExpression(
                             t.identifier('object'),
-                            t.identifier(prop)
+                            t.identifier(objProp)
                         )
                     ]
                 ),
@@ -145,7 +155,7 @@ export const fromJSON = {
                     [
                         t.memberExpression(
                             t.identifier('object'),
-                            t.identifier(prop)
+                            t.identifier(objProp)
                         )
                     ]
                 ),
@@ -175,19 +185,19 @@ export const fromJSON = {
 
     // signDoc: isSet(object.signDoc) ? SignDocDirectAux.fromJSON(object.signDoc) : undefined,
     type(args: FromJSONMethod) {
-        const prop = args.field.name;
+        const { messageProp, objProp } = getPropNames(args.field);
         const name = args.context.getTypeName(args.field);
         args.context.addUtil('isSet');
 
         return t.objectProperty(
-            t.identifier(prop),
+            t.identifier(messageProp),
             t.conditionalExpression(
                 t.callExpression(
                     t.identifier('isSet'),
                     [
                         t.memberExpression(
                             t.identifier('object'),
-                            t.identifier(prop)
+                            t.identifier(objProp)
                         )
                     ]
                 ),
@@ -199,7 +209,7 @@ export const fromJSON = {
                     [
                         t.memberExpression(
                             t.identifier('object'),
-                            t.identifier(prop)
+                            t.identifier(objProp)
                         )
                     ]
                 ),
@@ -210,19 +220,19 @@ export const fromJSON = {
 
     // mode: isSet(object.mode) ? signModeFromJSON(object.mode) : 0,
     enum(args: FromJSONMethod) {
-        const prop = args.field.name;
+        const { messageProp, objProp } = getPropNames(args.field);
         args.context.addUtil('isSet');
         const fromJSONFuncName = args.context.getFromEnum(args.field);
 
         return t.objectProperty(
-            t.identifier(prop),
+            t.identifier(messageProp),
             t.conditionalExpression(
                 t.callExpression(
                     t.identifier('isSet'),
                     [
                         t.memberExpression(
                             t.identifier('object'),
-                            t.identifier(prop)
+                            t.identifier(objProp)
                         )
                     ]
                 ),
@@ -231,7 +241,7 @@ export const fromJSON = {
                     [
                         t.memberExpression(
                             t.identifier('object'),
-                            t.identifier(prop)
+                            t.identifier(objProp)
                         )
                     ]
                 ),
@@ -242,19 +252,19 @@ export const fromJSON = {
 
     // queryData: isSet(object.queryData) ? bytesFromBase64(object.queryData) : new Uint8Array()
     bytes(args: FromJSONMethod) {
-        const prop = args.field.name;
+        const { messageProp, objProp } = getPropNames(args.field);
         args.context.addUtil('isSet');
         args.context.addUtil('bytesFromBase64');
 
         return t.objectProperty(
-            t.identifier(prop),
+            t.identifier(messageProp),
             t.conditionalExpression(
                 t.callExpression(
                     t.identifier('isSet'),
                     [
                         t.memberExpression(
                             t.identifier('object'),
-                            t.identifier(prop)
+                            t.identifier(objProp)
                         )
                     ]
                 ),
@@ -263,7 +273,7 @@ export const fromJSON = {
                     [
                         t.memberExpression(
                             t.identifier('object'),
-                            t.identifier(prop)
+                            t.identifier(objProp)
                         )
                     ]
                 ),
@@ -289,17 +299,17 @@ export const fromJSON = {
     // period: isSet(object.period) ? String(object.period) : undefined,
 
     durationString(args: FromJSONMethod) {
-        const prop = args.field.name;
+        const { messageProp, objProp } = getPropNames(args.field);
         args.context.addUtil('isSet');
         return t.objectProperty(
-            t.identifier(prop),
+            t.identifier(messageProp),
             t.conditionalExpression(
                 t.callExpression(
                     t.identifier('isSet'),
                     [
                         t.memberExpression(
                             t.identifier('object'),
-                            t.identifier(prop)
+                            t.identifier(objProp)
                         )
                     ]
                 ),
@@ -308,7 +318,7 @@ export const fromJSON = {
                     [
                         t.memberExpression(
                             t.identifier('object'),
-                            t.identifier(prop)
+                            t.identifier(objProp)
                         )
                     ]
                 ),
@@ -320,19 +330,19 @@ export const fromJSON = {
     // periodReset: isSet(object.periodReset) ? fromJsonTimestamp(object.periodReset) : undefined
 
     timestamp(args: FromJSONMethod) {
-        const prop = args.field.name;
+        const { messageProp, objProp } = getPropNames(args.field);
         args.context.addUtil('isSet');
         args.context.addUtil('fromJsonTimestamp');
 
         return t.objectProperty(
-            t.identifier(prop),
+            t.identifier(messageProp),
             t.conditionalExpression(
                 t.callExpression(
                     t.identifier('isSet'),
                     [
                         t.memberExpression(
                             t.identifier('object'),
-                            t.identifier(prop)
+                            t.identifier(objProp)
                         )
                     ]
                 ),
@@ -341,7 +351,7 @@ export const fromJSON = {
                     [
                         t.memberExpression(
                             t.identifier('object'),
-                            t.identifier(prop)
+                            t.identifier(objProp)
                         )
                     ]
                 ),
@@ -366,7 +376,7 @@ export const fromJSON = {
 
 
     keyHash(args: FromJSONMethod) {
-        const prop = args.field.name;
+        const { messageProp, objProp } = getPropNames(args.field);
         const keyType = args.field.keyType;
         const valueType = args.field.parsedType.name;
 
@@ -463,14 +473,14 @@ export const fromJSON = {
         }
 
         return t.objectProperty(
-            t.identifier(prop),
+            t.identifier(messageProp),
             t.conditionalExpression(
                 t.callExpression(
                     t.identifier('isObject'),
                     [
                         t.memberExpression(
                             t.identifier('object'),
-                            t.identifier(prop)
+                            t.identifier(objProp)
                         )
                     ]
                 ),
@@ -484,7 +494,7 @@ export const fromJSON = {
                             [
                                 t.memberExpression(
                                     t.identifier('object'),
-                                    t.identifier(prop)
+                                    t.identifier(objProp)
                                 )
                             ]
                         ),
@@ -550,10 +560,10 @@ export const fromJSON = {
 
     // codeIds: Array.isArray(object?.codeIds) ? object.codeIds.map((e: any) => Long.fromString(e)) : [],
     array(args: FromJSONMethod, expr: t.Expression) {
-        const prop = args.field.name;
+        const { messageProp, objProp } = getPropNames(args.field);
 
         return t.objectProperty(
-            t.identifier(prop),
+            t.identifier(messageProp),
             t.conditionalExpression(
                 t.callExpression(
                     t.memberExpression(
@@ -563,7 +573,7 @@ export const fromJSON = {
                     [
                         t.optionalMemberExpression(
                             t.identifier('object'),
-                            t.identifier(prop),
+                            t.identifier(objProp),
                             false,
                             true
                         )
@@ -573,7 +583,7 @@ export const fromJSON = {
                     t.memberExpression(
                         t.memberExpression(
                             t.identifier('object'),
-                            t.identifier(prop)
+                            t.identifier(objProp)
                         ),
                         t.identifier('map')
                     ),
