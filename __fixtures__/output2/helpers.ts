@@ -219,16 +219,23 @@ const fromJSON = (object: any): Timestamp => {
     };
 };
 
-export function fromJsonTimestamp(o: any): Date {
-    if (o instanceof Date) {
-        return o;
-    } else if (typeof o === "string") {
-        return new Date(o);
-    } else {
-        return fromTimestamp(fromJSON(o));
-    }
+const timestampFromJSON = (object: any): Timestamp => {
+  return {
+    seconds: isSet(object.seconds) ? Long.fromValue(object.seconds) : Long.ZERO,
+    nanos: isSet(object.nanos) ? Number(object.nanos) : 0,
+  };
 }
-
+  
+export function fromJsonTimestamp(o: any): Timestamp {
+  if (o instanceof Date) {
+    return toTimestamp(o);
+  } else if (typeof o === "string") {
+    return toTimestamp(new Date(o));
+  } else {
+    return timestampFromJSON(o);
+  }
+}
+  
 function numberToLong(number: number) {
     return Long.fromNumber(number);
 }
