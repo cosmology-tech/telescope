@@ -6,7 +6,7 @@ import { ProtoDep, ProtoRef, ProtoServiceMethod, TelescopeOptions } from '@osmon
 import { getNestedProto, getPackageAndNestedFromStr } from './utils';
 import { traverse } from './traverse';
 import { lookupAny, lookupAnyFromImports } from './lookup';
-import { defaultTelescopeOptions } from '@osmonauts/types';
+import { defaultTelescopeOptions, TelescopeLogLevel } from '@osmonauts/types';
 
 import google_any from './native/any';
 import google_descriptor from './native/descriptor';
@@ -106,8 +106,7 @@ export class ProtoStore {
                 throw e;
             }
         });
-
-    }
+    };
 
     getProtos(): ProtoRef[] {
         if (this.protos) return this.protos;
@@ -122,7 +121,17 @@ export class ProtoStore {
             return [...m, ...contents];
         }, []);
 
-        const protos = this.processProtos(contents);
+        const registeredProtos = [];
+        const protos = this.processProtos(contents).filter(proto => {
+            if (registeredProtos.includes(proto.filename)) {
+                if (this.options.logLevel >= TelescopeLogLevel.Warn) {
+                    console.warn(`${proto.filename} already included!`);
+                }
+                return false;
+            }
+            registeredProtos.push(proto.filename);
+            return true;
+        });
         const neededFromGoogle = [];
         this.getDependencies(protos).map(dep => {
             const google = dep.imports?.filter(imp => imp.startsWith('google/protobuf')) ?? []
