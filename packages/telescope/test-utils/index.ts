@@ -42,6 +42,11 @@ export const getTestProtoStore = (options?: TelescopeOptions) => {
     return store;
 }
 
+export const getTestProtoStore2 = (options?: TelescopeOptions) => {
+    const store = new ProtoStore([__dirname + '/../../../__fixtures__/chain2'], options ? deepmerge(defaultTelescopeOptions, options) : defaultTelescopeOptions);
+    return store;
+}
+
 export const strip = (obj) => {
     var copy;
     // Handle the 3 simple types, and null or undefined

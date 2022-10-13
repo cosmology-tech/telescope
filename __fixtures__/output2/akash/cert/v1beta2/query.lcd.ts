@@ -1,0 +1,33 @@
+import { setPaginationParams } from "../../../helpers";
+import { LCDClient } from "@osmonauts/lcd";
+import { QueryCertificatesRequest, QueryCertificatesResponse } from "./query";
+export class LCDQueryClient {
+  req: LCDClient;
+
+  constructor({
+    requestClient
+  }: {
+    requestClient: LCDClient;
+  }) {
+    this.req = requestClient;
+  }
+  /* Certificates queries certificates */
+
+
+  certificates = async (params: QueryCertificatesRequest): Promise<QueryCertificatesResponse> => {
+    const options: any = {
+      params: {}
+    };
+
+    if (typeof params?.filter !== "undefined") {
+      options.params.filter = params.filter;
+    }
+
+    if (typeof params?.pagination !== "undefined") {
+      setPaginationParams(options, params.pagination);
+    }
+
+    const endpoint = `akash/cert/v1beta2/certificates/list`;
+    return await this.req.get<QueryCertificatesResponse>(endpoint, options);
+  };
+}
