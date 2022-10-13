@@ -1203,7 +1203,7 @@ export interface Service {
   /** GetValidatorSetByHeight queries validator-set at a given height. */
   GetValidatorSetByHeight(request: GetValidatorSetByHeightRequest): Promise<GetValidatorSetByHeightResponse>;
 }
-export class QueryClientImpl implements Service {
+export class ServiceClientImpl implements Service {
   private readonly rpc: Rpc;
 
   constructor(rpc: Rpc) {

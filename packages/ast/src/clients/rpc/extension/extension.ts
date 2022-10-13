@@ -4,6 +4,7 @@ import { identifier, objectMethod } from '../../../utils';
 import { ProtoService, ProtoServiceMethod } from '@osmonauts/types';
 import { GenericParseContext } from '../../../encoding';
 import { camel } from '@osmonauts/utils';
+import { getRpcClassName } from '../class';
 
 const rpcExtensionMethod = (
     name: string,
@@ -116,7 +117,7 @@ export const createRpcQueryExtension = (
                         t.variableDeclarator(
                             t.identifier('queryService'),
                             t.newExpression(
-                                t.identifier('QueryClientImpl'),
+                                t.identifier(getRpcClassName(service)),
                                 [
                                     t.identifier('rpc')
                                 ]

@@ -500,7 +500,7 @@ export const OperationMetadata = {
 
 /** A service that is available for use by the consumer. */
 export interface Service {}
-export class QueryClientImpl implements Service {
+export class ServiceClientImpl implements Service {
   private readonly rpc: Rpc;
 
   constructor(rpc: Rpc) {

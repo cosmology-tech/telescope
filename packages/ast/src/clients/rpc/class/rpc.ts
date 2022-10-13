@@ -393,15 +393,8 @@ export const createRpcClientInterface = (
     return obj;
 };
 
-const getRpcClassName = (service: ProtoService) => {
-    switch (service.name) {
-        case 'Msg':
-            return 'MsgClientImpl'
-        case 'Service':
-        case 'Query':
-        default:
-            return 'QueryClientImpl'
-    }
+export const getRpcClassName = (service: ProtoService) => {
+    return `${service.name}ClientImpl`;
 }
 
 export const createRpcClientClass = (

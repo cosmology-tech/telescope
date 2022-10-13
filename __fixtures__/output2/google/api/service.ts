@@ -578,7 +578,7 @@ export const Service = {
          requirements:
            provider_id: google_calendar_auth */
 export interface Service {}
-export class QueryClientImpl implements Service {
+export class ServiceClientImpl implements Service {
   private readonly rpc: Rpc;
 
   constructor(rpc: Rpc) {

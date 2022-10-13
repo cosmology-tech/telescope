@@ -28,7 +28,7 @@ export interface Service {
   /** GetValidatorSetByHeight queries validator-set at a given height. */
   getValidatorSetByHeight(request: GetValidatorSetByHeightRequest): Promise<GetValidatorSetByHeightResponse>;
 }
-export class QueryClientImpl implements Service {
+export class ServiceClientImpl implements Service {
   private readonly rpc: Rpc;
 
   constructor(rpc: Rpc) {
@@ -82,7 +82,7 @@ export class QueryClientImpl implements Service {
 }
 export const createRpcQueryExtension = (base: QueryClient) => {
   const rpc = createProtobufRpcClient(base);
-  const queryService = new QueryClientImpl(rpc);
+  const queryService = new ServiceClientImpl(rpc);
   return {
     getNodeInfo(request?: GetNodeInfoRequest): Promise<GetNodeInfoResponse> {
       return queryService.getNodeInfo(request);
