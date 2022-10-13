@@ -2,6 +2,9 @@ import * as t from '@babel/types';
 import { EncodeMethod } from './index';
 import { getTagNumber } from '../types';
 import { getKeyTypeEntryName } from '..';
+import { ProtoParseContext } from '../../context';
+import { getDefaultTSTypeFromProtoType } from '../../types';
+import { ProtoField } from '@osmonauts/types';
 
 const notUndefined = (prop: string): t.Expression => {
     return t.binaryExpression(
@@ -81,7 +84,6 @@ const notZero = (prop: string): t.Expression => {
         t.numericLiteral(0)
     )
 };
-
 
 // TODO research, shouldn't we AND these two tests?
 const wrapOptional = (prop: string, test: t.Expression, isOptional: boolean) => {
@@ -212,9 +214,8 @@ export const encode = {
     },
 
     enum(args: EncodeMethod) {
-        const prop = args.field.name;
         const num = getTagNumber(args.field);
-        return types.enum(num, prop, args.isOptional);
+        return types.enum(args.context, num, args.field, args.isOptional, args.isOneOf);
     },
 
     bytes(args: EncodeMethod) {
@@ -475,9 +476,18 @@ export const types = {
     //     writer.uint32(24).int32(message.singleField);
     //   }
 
-    enum(num: number, prop: string, isOptional: boolean) {
+    enum(context: ProtoParseContext, num: number, field: ProtoField, isOptional: boolean, isOneOf: boolean) {
+        const prop = field.name;
         return t.ifStatement(
-            wrapOptional(prop, notZero(prop), isOptional),
+            wrapOptional(prop,
+                t.binaryExpression('!==',
+                    t.memberExpression(
+                        t.identifier('message'),
+                        t.identifier(field.name)
+                    ),
+                    getDefaultTSTypeFromProtoType(context, field, isOneOf)
+                )
+                , isOptional),
             scalarType(num, prop, 'int32')
         )
     },

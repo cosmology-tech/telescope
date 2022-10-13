@@ -6,6 +6,7 @@ export interface EncodeMethod {
     context: ProtoParseContext;
     field: ProtoField;
     isOptional: boolean;
+    isOneOf: boolean;
 }
 export declare const encodeMethodFields: (context: ProtoParseContext, name: string, proto: ProtoType) => any[];
 export declare const encodeMethod: (context: ProtoParseContext, name: string, proto: ProtoType) => t.ObjectMethod;

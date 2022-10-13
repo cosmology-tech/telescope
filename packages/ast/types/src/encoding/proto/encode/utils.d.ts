@@ -1,5 +1,7 @@
 import * as t from '@babel/types';
 import { EncodeMethod } from './index';
+import { ProtoParseContext } from '../../context';
+import { ProtoField } from '@osmonauts/types';
 export declare const encode: {
     string(args: EncodeMethod): t.IfStatement;
     double(args: EncodeMethod): t.IfStatement;
@@ -41,7 +43,7 @@ export declare const types: {
     sfixed64(num: number, prop: string, isOptional: boolean): t.IfStatement;
     bool(num: number, prop: string, isOptional: boolean): t.IfStatement;
     type(num: number, prop: string, name: string): t.IfStatement;
-    enum(num: number, prop: string, isOptional: boolean): t.IfStatement;
+    enum(context: ProtoParseContext, num: number, field: ProtoField, isOptional: boolean, isOneOf: boolean): t.IfStatement;
     bytes(num: number, prop: string, isOptional: boolean): t.IfStatement;
     timestamp(num: number, prop: string): t.Statement;
     timestampDate(num: number, prop: string): t.Statement;

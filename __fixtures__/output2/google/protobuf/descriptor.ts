@@ -1959,11 +1959,11 @@ export const FieldDescriptorProto = {
       writer.uint32(24).int32(message.number);
     }
 
-    if (message.label !== 0) {
+    if (message.label !== 1) {
       writer.uint32(32).int32(message.label);
     }
 
-    if (message.type !== 0) {
+    if (message.type !== 1) {
       writer.uint32(40).int32(message.type);
     }
 
@@ -2692,7 +2692,7 @@ export const FileOptions = {
       writer.uint32(216).bool(message.javaStringCheckUtf8);
     }
 
-    if (message.optimizeFor !== 0) {
+    if (message.optimizeFor !== 1) {
       writer.uint32(72).int32(message.optimizeFor);
     }
 
@@ -3072,7 +3072,7 @@ function createBaseFieldOptions(): FieldOptions {
 
 export const FieldOptions = {
   encode(message: FieldOptions, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.ctype !== 0) {
+    if (message.ctype !== 1) {
       writer.uint32(8).int32(message.ctype);
     }
 
@@ -3080,7 +3080,7 @@ export const FieldOptions = {
       writer.uint32(16).bool(message.packed);
     }
 
-    if (message.jstype !== 0) {
+    if (message.jstype !== 1) {
       writer.uint32(48).int32(message.jstype);
     }
 
@@ -3507,7 +3507,7 @@ export const MethodOptions = {
       writer.uint32(264).bool(message.deprecated);
     }
 
-    if (message.idempotencyLevel !== 0) {
+    if (message.idempotencyLevel !== 1) {
       writer.uint32(272).int32(message.idempotencyLevel);
     }
 

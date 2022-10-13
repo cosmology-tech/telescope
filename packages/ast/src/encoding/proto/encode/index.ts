@@ -13,6 +13,7 @@ export interface EncodeMethod {
     context: ProtoParseContext;
     field: ProtoField;
     isOptional: boolean;
+    isOneOf: boolean;
 }
 
 export const encodeMethodFields = (context: ProtoParseContext, name: string, proto: ProtoType) => {
@@ -33,6 +34,7 @@ export const encodeMethodFields = (context: ProtoParseContext, name: string, pro
             typeName: name,
             context,
             field,
+            isOneOf,
             isOptional
         };
 
