@@ -104,7 +104,7 @@ export const protoImportLookup = (
         // 2 cross-checking w the imports by filter()
         .filter(proto =>
             proto.filename === ref.filename ||
-            root.imports.includes(proto.filename)
+            root.imports?.includes(proto.filename)
         )
         .map((ref: ProtoRef) => {
             return {
@@ -170,7 +170,7 @@ export const protoScopeImportLookup = (
         // 2 cross-checking w the imports by filter()
         .filter(proto =>
             proto.filename === ref.filename ||
-            root.imports.includes(proto.filename)
+            root.imports?.includes(proto.filename)
         );
 
     for (let ref of refs) {
