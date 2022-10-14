@@ -5,7 +5,7 @@
   */
  
 import * as _m0 from "protobufjs/minimal";
-import * as Long from 'long';
+import Long from 'long';
 
 // @ts-ignore
 if (_m0.util.Long !== Long) {
