@@ -185,6 +185,13 @@ const options: TelescopeOptions = {
         methodNameQuery: 'createEvmosRPCQueryClient',
         methodNameTx: 'createEvmosRPCTxClient'
       }
+    ],
+    enabledServices: [
+      'Msg',
+      'Query',
+      'Service',
+      'ReflectionService',
+      'ABCIApplication'
     ]
   },
 

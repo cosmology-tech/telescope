@@ -94,6 +94,7 @@ interface TelescopeOpts {
         camelCase?: boolean;
         scopedIsExclusive?: boolean;
         bundle?: boolean;
+        enabledServices?: ('Msg' | 'Query' | 'Service' | 'ReflectionService' | 'ABCIApplication' | string)[];
         scoped?: {
             dir: string;
             filename?: string;

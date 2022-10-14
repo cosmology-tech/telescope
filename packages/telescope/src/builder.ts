@@ -23,12 +23,14 @@ import { plugin as createIndex } from './generators/create-index';
 import { plugin as createHelpers } from './generators/create-helpers';
 import { plugin as createCosmWasmBundle } from './generators/create-cosmwasm-bundle';
 
-const sanitizeOptions = (options): TelescopeOptions => {
+const sanitizeOptions = (options: TelescopeOptions): TelescopeOptions => {
     // If an element at the same key is present for both x and y, the value from y will appear in the result.
     options = deepmerge(defaultTelescopeOptions, options ?? {});
     // strip off leading slashes
     options.tsDisable.files = options.tsDisable.files.map(file => file.startsWith('/') ? file : file.replace(/^\//, ''));
     options.eslintDisable.files = options.eslintDisable.files.map(file => file.startsWith('/') ? file : file.replace(/^\//, ''));
+    // uniq bc of deepmerge
+    options.rpcClients.enabledServices = [...new Set([...options.rpcClients.enabledServices])];
     return options;
 };
 

@@ -73,13 +73,13 @@ import * as _336 from "./escrow/v1beta1/query.lcd";
 import * as _337 from "./escrow/v1beta2/query.lcd";
 import * as _338 from "./market/v1beta2/query.lcd";
 import * as _339 from "./provider/v1beta2/query.lcd";
-import * as _340 from "./audit/v1beta2/query.rpc.query";
-import * as _341 from "./cert/v1beta2/query.rpc.query";
-import * as _342 from "./deployment/v1beta2/query.rpc.query";
-import * as _343 from "./escrow/v1beta1/query.rpc.query";
-import * as _344 from "./escrow/v1beta2/query.rpc.query";
-import * as _345 from "./market/v1beta2/query.rpc.query";
-import * as _346 from "./provider/v1beta2/query.rpc.query";
+import * as _340 from "./audit/v1beta2/query.rpc.Query";
+import * as _341 from "./cert/v1beta2/query.rpc.Query";
+import * as _342 from "./deployment/v1beta2/query.rpc.Query";
+import * as _343 from "./escrow/v1beta1/query.rpc.Query";
+import * as _344 from "./escrow/v1beta2/query.rpc.Query";
+import * as _345 from "./market/v1beta2/query.rpc.Query";
+import * as _346 from "./provider/v1beta2/query.rpc.Query";
 import * as _347 from "./audit/v1beta1/audit.rpc.msg";
 import * as _348 from "./audit/v1beta2/audit.rpc.msg";
 import * as _349 from "./cert/v1beta2/cert.rpc.msg";
@@ -87,9 +87,9 @@ import * as _350 from "./deployment/v1beta2/service.rpc.msg";
 import * as _351 from "./market/v1beta2/service.rpc.msg";
 import * as _352 from "./provider/v1beta1/provider.rpc.msg";
 import * as _353 from "./provider/v1beta2/provider.rpc.msg";
-import * as _530 from "./lcd";
-import * as _531 from "./rpc.query";
-import * as _532 from "./rpc.tx";
+import * as _535 from "./lcd";
+import * as _536 from "./rpc.query";
+import * as _537 from "./rpc.tx";
 export namespace akash {
   export namespace audit {
     export const v1beta1 = { ..._0,
@@ -209,8 +209,8 @@ export namespace akash {
       ..._353
     };
   }
-  export const ClientFactory = { ..._530,
-    ..._531,
-    ..._532
+  export const ClientFactory = { ..._535,
+    ..._536,
+    ..._537
   };
 }

@@ -91,6 +91,7 @@ export declare const defaultTelescopeOptions: {
         camelCase?: boolean;
         scopedIsExclusive?: boolean;
         bundle?: boolean;
+        enabledServices?: string[];
         scoped?: {
             dir: string;
             filename?: string;

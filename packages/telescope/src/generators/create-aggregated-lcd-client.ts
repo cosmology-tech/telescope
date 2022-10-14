@@ -4,7 +4,7 @@ import { parse } from '../parse';
 import { join } from 'path';
 import { TelescopeBuilder } from '../builder';
 import { createAggregatedLCDClient } from '@osmonauts/ast';
-import { ProtoRef, ProtoService } from '@osmonauts/types';
+import { ALLOWED_RPC_SERVICES, ProtoRef, ProtoService } from '@osmonauts/types';
 import { TelescopeParseContext } from '../build';
 import { writeAstToFile } from '../utils/files';
 import { fixlocalpaths } from '../utils';
@@ -80,25 +80,31 @@ export const plugin = (
 
         const proto = getNestedProto(c.ref.traversed);
 
-        if (
-            (!proto?.Query ||
-                proto.Query?.type !== 'Service') &&
-            (!proto?.Service ||
-                proto.Service?.type !== 'Service')
-        ) {
+        //// Anything except Msg Service OK...
+        const allowedRpcServices = builder.options.rpcClients.enabledServices.filter(a => a !== 'Msg');
+        const found = allowedRpcServices.some(svc => {
+            return proto?.[svc] &&
+                proto[svc]?.type === 'Service'
+        });
+
+        if (!found) {
             return;
         }
+        ///
 
-        let name, getImportsFrom;
 
-        // both Query and Service
-        if (proto.Query) {
-            name = 'query';
-            getImportsFrom = ctx.queries;
-        } else if (proto.Service) {
-            name = 'svc';
-            getImportsFrom = ctx.services;
-        }
+        let getImportsFrom;
+
+        allowedRpcServices.forEach(svcKey => {
+            if (proto[svcKey]) {
+                if (svcKey === 'Query') {
+                    getImportsFrom = ctx.queries;
+                } else {
+                    getImportsFrom = ctx.services;
+                }
+            }
+        });
+
 
         const serviceImports = getDepsFromQueries(
             getImportsFrom,

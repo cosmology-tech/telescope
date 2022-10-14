@@ -3,7 +3,7 @@ import { getNestedProto } from '@osmonauts/proto-parser';
 import { join } from 'path';
 import { TelescopeBuilder } from '../builder';
 import { createScopedLCDFactory } from '@osmonauts/ast';
-import { ProtoRef } from '@osmonauts/types';
+import { ALLOWED_RPC_SERVICES, ProtoRef } from '@osmonauts/types';
 import { fixlocalpaths, getRelativePath } from '../utils';
 import { Bundler } from '../bundler';
 import { TelescopeParseContext } from '../build';
@@ -169,14 +169,19 @@ const createAllLCDBundles = (
     // refs with services
     const refs = builder.store.getProtos().filter((ref: ProtoRef) => {
         const proto = getNestedProto(ref.traversed);
-        if (
-            (!proto?.Query ||
-                proto.Query?.type !== 'Service') &&
-            (!proto?.Service ||
-                proto.Service?.type !== 'Service')
-        ) {
+        //// Anything except Msg Service OK...
+        const allowedRpcServices = builder.options.rpcClients.enabledServices.filter(a => a !== 'Msg');
+        const found = allowedRpcServices.some(svc => {
+            return proto?.[svc] &&
+                proto[svc]?.type === 'Service'
+        });
+
+        if (!found) {
             return;
         }
+        ///
+
+
         return true;
     });
 

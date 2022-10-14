@@ -27,44 +27,45 @@ export const plugin = (
 
         const proto = getNestedProto(c.ref.traversed);
 
-        if (
-            (!proto?.Query ||
-                proto.Query?.type !== 'Service') &&
-            (!proto?.Service ||
-                proto.Service?.type !== 'Service')
-        ) {
+        //// Anything except Msg Service OK...
+        const allowedRpcServices = builder.options.rpcClients.enabledServices.filter(a => a !== 'Msg');
+        const found = allowedRpcServices.some(svc => {
+            return proto?.[svc] &&
+                proto[svc]?.type === 'Service'
+        });
+
+        if (!found) {
             return;
         }
+        ///
 
         let name, getImportsFrom;
 
-        // both Query and Service
-        if (proto.Query) {
-            name = 'query';
-            getImportsFrom = ctx.queries;
-        } else if (proto.Service) {
-            name = 'svc';
-            getImportsFrom = ctx.services;
-        }
+        allowedRpcServices.forEach(svcKey => {
+            if (proto[svcKey]) {
+                if (svcKey === 'Query') {
+                    getImportsFrom = ctx.queries;
+                } else {
+                    getImportsFrom = ctx.services;
+                }
+                name = svcKey;
+            }
+        });
 
         const localname = bundler.getLocalFilename(c.ref, `rpc.${name}`);
         const filename = bundler.getFilename(localname);
 
         const asts = [];
-        if (proto.Query) {
-            asts.push(createRpcClientInterface(ctx.generic, proto.Query));
-            asts.push(createRpcClientClass(ctx.generic, proto.Query));
-            if (c.proto.pluginValue('rpcClients.extensions')) {
-                asts.push(createRpcQueryExtension(ctx.generic, proto.Query));
+
+        allowedRpcServices.forEach(svcKey => {
+            if (proto[svcKey]) {
+                asts.push(createRpcClientInterface(ctx.generic, proto[svcKey]));
+                asts.push(createRpcClientClass(ctx.generic, proto[svcKey]));
+                if (c.proto.pluginValue('rpcClients.extensions')) {
+                    asts.push(createRpcQueryExtension(ctx.generic, proto[svcKey]));
+                }
             }
-        }
-        if (proto.Service) {
-            asts.push(createRpcClientInterface(ctx.generic, proto.Service));
-            asts.push(createRpcClientClass(ctx.generic, proto.Service));
-            if (c.proto.pluginValue('rpcClients.extensions')) {
-                asts.push(createRpcQueryExtension(ctx.generic, proto.Service));
-            }
-        }
+        });
 
         if (!asts.length) {
             return;

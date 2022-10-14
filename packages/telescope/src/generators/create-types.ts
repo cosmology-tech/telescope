@@ -33,22 +33,22 @@ export const plugin = (
         parse(context);
         context.buildBase();
 
+        //// Anything except Msg Service OK...
+        const allowedRpcServices = builder.options.rpcClients.enabledServices.filter(a => a !== 'Msg');
+
         if (context.proto.pluginValue('rpcClients.inline')) {
             const proto = getNestedProto(context.ref.traversed);
-            if (proto.Query) {
-                context.body.push(createRpcClientInterface(context.generic, proto.Query));
-                context.body.push(createRpcClientClass(context.generic, proto.Query));
-                if (context.proto.pluginValue('rpcClients.extensions')) {
-                    context.body.push(createRpcQueryExtension(context.generic, proto.Query));
+
+            allowedRpcServices.forEach(svcKey => {
+                if (proto[svcKey]) {
+                    context.body.push(createRpcClientInterface(context.generic, proto[svcKey]));
+                    context.body.push(createRpcClientClass(context.generic, proto[svcKey]));
+                    if (context.proto.pluginValue('rpcClients.extensions')) {
+                        context.body.push(createRpcQueryExtension(context.generic, proto[svcKey]));
+                    }
                 }
-            }
-            if (proto.Service) {
-                context.body.push(createRpcClientInterface(context.generic, proto.Service));
-                context.body.push(createRpcClientClass(context.generic, proto.Service));
-                if (context.proto.pluginValue('rpcClients.extensions')) {
-                    context.body.push(createRpcQueryExtension(context.generic, proto.Service));
-                }
-            }
+            });
+
             if (proto.Msg) {
                 context.body.push(createRpcClientInterface(context.generic, proto.Msg))
                 context.body.push(createRpcClientClass(context.generic, proto.Msg))
