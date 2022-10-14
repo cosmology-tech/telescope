@@ -6,6 +6,7 @@ import { TelescopeBuilder } from '../builder';
 import {
     createLCDClient,
 } from '@osmonauts/ast';
+import { ALLOWED_RPC_SERVICES } from '@osmonauts/types';
 
 export const plugin = (
     builder: TelescopeBuilder,
@@ -15,6 +16,8 @@ export const plugin = (
     if (!builder.options.lcdClients.enabled) {
         return;
     }
+
+
 
     const queryContexts = bundler
         .contexts
@@ -38,36 +41,41 @@ export const plugin = (
 
         const proto = getNestedProto(c.ref.traversed);
 
-        if (
-            (!proto?.Query ||
-                proto.Query?.type !== 'Service') &&
-            (!proto?.Service ||
-                proto.Service?.type !== 'Service')
-        ) {
+        //// Anything except Msg Service OK...
+        const [_msg, ...allowedRpcServices] = ALLOWED_RPC_SERVICES;
+        const found = allowedRpcServices.some(svc => {
+            return proto?.[svc] &&
+                proto[svc]?.type === 'Service'
+        });
+
+        if (!found) {
             return;
         }
+        ///
 
-        let name, getImportsFrom;
+        let getImportsFrom;
 
-        // both Query and Service
-        if (proto.Query) {
-            name = 'query';
-            getImportsFrom = ctx.queries;
-        } else if (proto.Service) {
-            name = 'svc';
-            getImportsFrom = ctx.services;
-        }
+        // get imports
+        allowedRpcServices.forEach(svcKey => {
+            if (proto[svcKey]) {
+                if (svcKey === 'Query') {
+                    getImportsFrom = ctx.queries;
+                } else {
+                    getImportsFrom = ctx.services;
+                }
+            }
+        });
 
         const localname = bundler.getLocalFilename(c.ref, 'lcd');
         const filename = bundler.getFilename(localname);
 
         let ast = null;
-        if (proto.Query) {
-            ast = createLCDClient(ctx.generic, proto.Query);
-        }
-        if (proto.Service) {
-            ast = createLCDClient(ctx.generic, proto.Service);
-        }
+
+        allowedRpcServices.forEach(svcKey => {
+            if (proto[svcKey]) {
+                ast = createLCDClient(ctx.generic, proto[svcKey]);
+            }
+        });
 
         if (!ast) {
             return;

@@ -75,7 +75,6 @@ export interface ProtoServiceMethod {
 export interface ProtoService {
     type: 'Service';
     name: string;
-    serviceType: 'Msg' | 'Query' | string;
     methods: Record<string, ProtoServiceMethod>;
 }
 export interface ProtoAny {

@@ -394,7 +394,6 @@ exports[`Akash 1`] = `
       },
     },
     "name": "Msg",
-    "serviceType": "Mutation",
     "type": "Service",
   },
 }

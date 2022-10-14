@@ -78,6 +78,7 @@ export const documentRpcClients = (
     const services = Object.entries(svcs).reduce((m, [pkg, refs]) => {
         const res = refs.reduce((m2, ref) => {
             const proto = getNestedProto(ref.proto)
+            // TODO generic service types...
             if (proto.Query) {
                 return [
                     ...m2, { svc: proto.Query, ref }

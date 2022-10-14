@@ -2,7 +2,7 @@ import { sync as glob } from 'glob';
 import { parse } from '@pyramation/protobufjs';
 import { readFileSync } from 'fs';
 import { join, resolve as pathResolve } from 'path';
-import { ProtoDep, ProtoRef, ProtoServiceMethod, TelescopeOptions } from '@osmonauts/types';
+import { ALLOWED_RPC_SERVICES, ProtoDep, ProtoRef, ProtoServiceMethod, TelescopeOptions } from '@osmonauts/types';
 import { getNestedProto, getPackageAndNestedFromStr } from './utils';
 import { traverse } from './traverse';
 import { lookupAny, lookupAnyFromImports } from './lookup';
@@ -233,14 +233,19 @@ export class ProtoStore {
     getServices(myBase: string): Record<string, ProtoRef[]> {
         const refs = this.getProtos().filter((ref: ProtoRef) => {
             const proto = getNestedProto(ref.traversed);
-            if (
-                (!proto?.Query ||
-                    proto.Query?.type !== 'Service') &&
-                (!proto?.Service ||
-                    proto.Service?.type !== 'Service')
-            ) {
+
+            //// Anything except Msg Service OK...
+            const [_msg, ...allowedRpcServices] = ALLOWED_RPC_SERVICES;
+            const found = allowedRpcServices.some(svc => {
+                return proto?.[svc] &&
+                    proto[svc]?.type === 'Service'
+            });
+
+            if (!found) {
                 return;
             }
+            ///
+
             return true;
         });
 

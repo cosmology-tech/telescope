@@ -617,7 +617,6 @@ exports[`queries 1`] = `
       },
     },
     "name": "Query",
-    "serviceType": "Query",
     "type": "Service",
   },
   "QueryNumPoolsRequest": {

@@ -3121,7 +3121,6 @@ exports[`cosmwasm/wasm/v1/query 1`] = `
                       },
                     },
                     "name": "Query",
-                    "serviceType": "Query",
                     "type": "Service",
                   },
                   "QueryAllContractStateRequest": {
@@ -5989,7 +5988,6 @@ exports[`osmosis/gamm/v1beta1/tx 1`] = `
                       },
                     },
                     "name": "Msg",
-                    "serviceType": "Mutation",
                     "type": "Service",
                   },
                   "MsgExitPool": {

@@ -348,13 +348,6 @@ const traverseServiceMethod = (
     return svc;
 };
 
-const getServiceType = (obj) => {
-    if (obj.name === 'Msg') return 'Mutation';
-    if (obj.name === 'Query') return 'Query';
-    if (obj.name === 'Service') return 'Service';
-    return 'Unknown';
-}
-
 const traverseService = (
     store: ProtoStore,
     ref: ProtoRef,
@@ -372,7 +365,6 @@ const traverseService = (
     return {
         type: 'Service',
         name: obj.name,
-        serviceType: getServiceType(obj),
         ...obj.toJSON({ keepComments: true }),
         methods
     }

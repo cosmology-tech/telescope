@@ -1,4 +1,4 @@
-import { ProtoRef, ProtoType, ServiceInfo } from '@osmonauts/types'
+import { ProtoRef, ProtoType, ServiceInfo, ALLOWED_RPC_SERVICES } from '@osmonauts/types'
 import { getObjectName } from '@osmonauts/proto-parser';
 import { getKeyTypeEntryName } from '@osmonauts/ast';
 import { getRoot } from './utils';
@@ -130,7 +130,7 @@ export const parseService = (
         comment?: string;
     }> = obj.methods;
 
-    if (!['Msg', 'Query', 'Service'].includes(obj.name)) {
+    if (!ALLOWED_RPC_SERVICES.includes(obj.name)) {
         return;
     }
 
@@ -159,14 +159,12 @@ export const parseService = (
                 case 'Msg':
                     context.addMutation(serviceInfo);
                     break;
-                case 'Service':
-                    context.addService(serviceInfo);
-                    break;
                 case 'Query':
                     context.addQuery(serviceInfo);
                     break;
                 default:
-                    throw new Error('Service type not yet supported: ' + obj.name);
+                    context.addService(serviceInfo);
+                    break;
             }
         });
 };

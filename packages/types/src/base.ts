@@ -74,6 +74,16 @@ export interface ProtoField {
     scopeType?: string;
 };
 
+// MOVE TO OPTIONS
+export const ALLOWED_RPC_SERVICES = [
+    'Msg', // keep first
+
+    ///
+    'Query',
+    'Service',
+    'ReflectionService',
+    'ABCIApplication'
+];
 export interface ProtoServiceMethodInfo {
     method: 'get' | 'post';
     url: string;
@@ -103,8 +113,7 @@ export interface ProtoServiceMethod {
 };
 export interface ProtoService {
     type: 'Service';
-    name: string;
-    serviceType: 'Msg' | 'Query' | 'Service' | string;
+    name: 'Msg' | 'Query' | 'Service' | string;
     methods: Record<string, ProtoServiceMethod>;
     comment?: string;
 };
