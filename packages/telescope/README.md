@@ -229,13 +229,14 @@ See [LCD Clients](#lcd-clients) for more info.
 
 ### RPC Client Options
 
-| option                         | description                                                     | defaults   |
-| ------------------------------ | --------------------------------------------------------------  | ---------- |   
-| `rpcClients.enabled`           | generate RPC clients that can interact with proto messages      | `true`     |
-| `rpcClients.bundle`            | will generate factory bundle aggregate of all RPC Clients       | `true`     |
-| `rpcClients.camelCase`         | use camel-case for RPC methods when generating RPC clients      | `true`     |
-| `rpcClients.scoped`            | will generate factory of scoped RPC Clients                     | `undefined`|
-| `rpcClients.scopedIsExclusive` | will allow both scoped bundles and all RPC Clients              | `true`     |
+| option                         | description                                                     | defaults                      |
+| ------------------------------ | --------------------------------------------------------------  | ----------------------------- |    
+| `rpcClients.enabled`           | generate RPC clients that can interact with proto messages      | `true`                        |
+| `rpcClients.bundle`            | will generate factory bundle aggregate of all RPC Clients       | `true`                        |
+| `rpcClients.camelCase`         | use camel-case for RPC methods when generating RPC clients      | `true`                        |
+| `rpcClients.scoped`            | will generate factory of scoped RPC Clients                     | `undefined`                   |
+| `rpcClients.scopedIsExclusive` | will allow both scoped bundles and all RPC Clients              | `true`                        |
+| `rpcClients.enabledServices`   | which services to enable                                        | [`Msg`,`Query`,`Service`]     |
 
 See [RPC Clients](#rpc-clients) for more info.
 

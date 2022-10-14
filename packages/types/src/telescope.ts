@@ -111,7 +111,14 @@ interface TelescopeOpts {
         camelCase?: boolean;
         scopedIsExclusive?: boolean;
         bundle?: boolean;
-        enabledServices?: string[],
+        enabledServices?: (
+            'Msg' |
+            'Query' |
+            'Service' |
+            'ReflectionService' |
+            'ABCIApplication' |
+            string
+        )[],
         scoped?: {
             dir: string;
             filename?: string;
@@ -213,8 +220,7 @@ export const defaultTelescopeOptions: TelescopeOptions = {
         enabledServices: [
             'Msg',
             'Query',
-            'ReflectionService',
-            'ABCIApplication'
+            'Service'
         ],
         scopedIsExclusive: true
     },
