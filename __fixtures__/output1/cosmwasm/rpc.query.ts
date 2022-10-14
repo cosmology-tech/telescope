@@ -11,67 +11,63 @@ export const createRPCQueryClient = async ({
   return {
     cosmos: {
       app: {
-        v1alpha1: (await import("../cosmos/app/v1alpha1/query.rpc.Query")).createRpcQueryExtension(client)
+        v1alpha1: (await import("../cosmos/app/v1alpha1/query.rpc.query")).createRpcQueryExtension(client)
       },
       auth: {
-        v1beta1: (await import("../cosmos/auth/v1beta1/query.rpc.Query")).createRpcQueryExtension(client)
+        v1beta1: (await import("../cosmos/auth/v1beta1/query.rpc.query")).createRpcQueryExtension(client)
       },
       authz: {
-        v1beta1: (await import("../cosmos/authz/v1beta1/query.rpc.Query")).createRpcQueryExtension(client)
+        v1beta1: (await import("../cosmos/authz/v1beta1/query.rpc.query")).createRpcQueryExtension(client)
       },
       bank: {
-        v1beta1: (await import("../cosmos/bank/v1beta1/query.rpc.Query")).createRpcQueryExtension(client)
+        v1beta1: (await import("../cosmos/bank/v1beta1/query.rpc.query")).createRpcQueryExtension(client)
       },
       base: {
-        reflection: {
-          v1beta1: (await import("../cosmos/base/reflection/v1beta1/reflection.rpc.ReflectionService")).createRpcQueryExtension(client),
-          v2alpha1: (await import("../cosmos/base/reflection/v2alpha1/reflection.rpc.ReflectionService")).createRpcQueryExtension(client)
-        },
         tendermint: {
-          v1beta1: (await import("../cosmos/base/tendermint/v1beta1/query.rpc.Service")).createRpcQueryExtension(client)
+          v1beta1: (await import("../cosmos/base/tendermint/v1beta1/query.rpc.svc")).createRpcQueryExtension(client)
         }
       },
       distribution: {
-        v1beta1: (await import("../cosmos/distribution/v1beta1/query.rpc.Query")).createRpcQueryExtension(client)
+        v1beta1: (await import("../cosmos/distribution/v1beta1/query.rpc.query")).createRpcQueryExtension(client)
       },
       evidence: {
-        v1beta1: (await import("../cosmos/evidence/v1beta1/query.rpc.Query")).createRpcQueryExtension(client)
+        v1beta1: (await import("../cosmos/evidence/v1beta1/query.rpc.query")).createRpcQueryExtension(client)
       },
       feegrant: {
-        v1beta1: (await import("../cosmos/feegrant/v1beta1/query.rpc.Query")).createRpcQueryExtension(client)
+        v1beta1: (await import("../cosmos/feegrant/v1beta1/query.rpc.query")).createRpcQueryExtension(client)
       },
       gov: {
-        v1: (await import("../cosmos/gov/v1/query.rpc.Query")).createRpcQueryExtension(client),
-        v1beta1: (await import("../cosmos/gov/v1beta1/query.rpc.Query")).createRpcQueryExtension(client)
+        v1: (await import("../cosmos/gov/v1/query.rpc.query")).createRpcQueryExtension(client),
+        v1beta1: (await import("../cosmos/gov/v1beta1/query.rpc.query")).createRpcQueryExtension(client)
       },
       group: {
-        v1: (await import("../cosmos/group/v1/query.rpc.Query")).createRpcQueryExtension(client)
+        v1: (await import("../cosmos/group/v1/query.rpc.query")).createRpcQueryExtension(client)
       },
       mint: {
-        v1beta1: (await import("../cosmos/mint/v1beta1/query.rpc.Query")).createRpcQueryExtension(client)
+        v1beta1: (await import("../cosmos/mint/v1beta1/query.rpc.query")).createRpcQueryExtension(client)
       },
       nft: {
-        v1beta1: (await import("../cosmos/nft/v1beta1/query.rpc.Query")).createRpcQueryExtension(client)
+        v1beta1: (await import("../cosmos/nft/v1beta1/query.rpc.query")).createRpcQueryExtension(client)
       },
       params: {
-        v1beta1: (await import("../cosmos/params/v1beta1/query.rpc.Query")).createRpcQueryExtension(client)
+        v1beta1: (await import("../cosmos/params/v1beta1/query.rpc.query")).createRpcQueryExtension(client)
       },
       slashing: {
-        v1beta1: (await import("../cosmos/slashing/v1beta1/query.rpc.Query")).createRpcQueryExtension(client)
+        v1beta1: (await import("../cosmos/slashing/v1beta1/query.rpc.query")).createRpcQueryExtension(client)
       },
       staking: {
-        v1beta1: (await import("../cosmos/staking/v1beta1/query.rpc.Query")).createRpcQueryExtension(client)
+        v1beta1: (await import("../cosmos/staking/v1beta1/query.rpc.query")).createRpcQueryExtension(client)
       },
       tx: {
-        v1beta1: (await import("../cosmos/tx/v1beta1/service.rpc.Service")).createRpcQueryExtension(client)
+        v1beta1: (await import("../cosmos/tx/v1beta1/service.rpc.svc")).createRpcQueryExtension(client)
       },
       upgrade: {
-        v1beta1: (await import("../cosmos/upgrade/v1beta1/query.rpc.Query")).createRpcQueryExtension(client)
+        v1beta1: (await import("../cosmos/upgrade/v1beta1/query.rpc.query")).createRpcQueryExtension(client)
       }
     },
     cosmwasm: {
       wasm: {
-        v1: (await import("./wasm/v1/query.rpc.Query")).createRpcQueryExtension(client)
+        v1: (await import("./wasm/v1/query.rpc.query")).createRpcQueryExtension(client)
       }
     }
   };

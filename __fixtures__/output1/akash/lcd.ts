@@ -63,14 +63,6 @@ export const createLCDClient = async ({
         })
       },
       base: {
-        reflection: {
-          v1beta1: new (await import("../cosmos/base/reflection/v1beta1/reflection.lcd")).LCDQueryClient({
-            requestClient
-          }),
-          v2alpha1: new (await import("../cosmos/base/reflection/v2alpha1/reflection.lcd")).LCDQueryClient({
-            requestClient
-          })
-        },
         tendermint: {
           v1beta1: new (await import("../cosmos/base/tendermint/v1beta1/query.lcd")).LCDQueryClient({
             requestClient
