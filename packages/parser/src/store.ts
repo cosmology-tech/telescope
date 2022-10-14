@@ -235,7 +235,7 @@ export class ProtoStore {
             const proto = getNestedProto(ref.traversed);
 
             //// Anything except Msg Service OK...
-            const [_msg, ...allowedRpcServices] = ALLOWED_RPC_SERVICES;
+            const allowedRpcServices = this.options.rpcClients.enabledServices.filter(a => a !== 'Msg');
             const found = allowedRpcServices.some(svc => {
                 return proto?.[svc] &&
                     proto[svc]?.type === 'Service'

@@ -4,8 +4,6 @@ import { createRpcQueryExtension, createRpcClientClass, createRpcClientInterface
 import { getNestedProto } from '@osmonauts/proto-parser';
 import { parse } from '../parse';
 import { TelescopeBuilder } from '../builder';
-import { ALLOWED_RPC_SERVICES } from '@osmonauts/types';
-import { camel } from '@osmonauts/utils';
 
 export const plugin = (
     builder: TelescopeBuilder,
@@ -30,7 +28,7 @@ export const plugin = (
         const proto = getNestedProto(c.ref.traversed);
 
         //// Anything except Msg Service OK...
-        const [_msg, ...allowedRpcServices] = ALLOWED_RPC_SERVICES;
+        const allowedRpcServices = builder.options.rpcClients.enabledServices.filter(a => a !== 'Msg');
         const found = allowedRpcServices.some(svc => {
             return proto?.[svc] &&
                 proto[svc]?.type === 'Service'
@@ -40,7 +38,6 @@ export const plugin = (
             return;
         }
         ///
-
 
         let name, getImportsFrom;
 

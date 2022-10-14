@@ -6,7 +6,7 @@ import { parse } from '../parse';
 import { writeFileSync } from 'fs';
 import { dirname } from 'path';
 import { sync as mkdirp } from 'mkdirp';
-import { ALLOWED_RPC_SERVICES, ProtoRef } from '@osmonauts/types';
+import { ProtoRef } from '@osmonauts/types';
 import { getNestedProto } from '@osmonauts/proto-parser';
 import { createRpcClientClass, createRpcClientInterface, createRpcQueryExtension } from '@osmonauts/ast';
 
@@ -34,7 +34,7 @@ export const plugin = (
         context.buildBase();
 
         //// Anything except Msg Service OK...
-        const [_msg, ...allowedRpcServices] = ALLOWED_RPC_SERVICES;
+        const allowedRpcServices = builder.options.rpcClients.enabledServices.filter(a => a !== 'Msg');
 
         if (context.proto.pluginValue('rpcClients.inline')) {
             const proto = getNestedProto(context.ref.traversed);

@@ -170,7 +170,7 @@ const createAllLCDBundles = (
     const refs = builder.store.getProtos().filter((ref: ProtoRef) => {
         const proto = getNestedProto(ref.traversed);
         //// Anything except Msg Service OK...
-        const [_msg, ...allowedRpcServices] = ALLOWED_RPC_SERVICES;
+        const allowedRpcServices = builder.options.rpcClients.enabledServices.filter(a => a !== 'Msg');
         const found = allowedRpcServices.some(svc => {
             return proto?.[svc] &&
                 proto[svc]?.type === 'Service'
