@@ -166,7 +166,7 @@ export const toAmino = {
                         t.callExpression(
                             t.memberExpression(
                                 t.identifier('Long'),
-                                t.identifier('fromNumber')
+                                t.identifier('fromValue')
                             ),
                             [
                                 t.memberExpression(
