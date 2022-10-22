@@ -119,10 +119,6 @@ Proprietary and confidential`;
             );
         }
 
-        if (path.basename(templateFile) === 'README.md') {
-            content = `# ${results.__MODULENAME__}`;
-        }
-
         fs.writeFileSync(templateFile, content);
     }
 
