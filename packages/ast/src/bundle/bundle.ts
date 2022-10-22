@@ -1,7 +1,11 @@
 import { extname } from 'path';
 import * as t from '@babel/types';
+import { TelescopeOptions } from '@osmonauts/types';
 
-export const recursiveModuleBundle = (obj) => {
+export const recursiveModuleBundle = (
+    options: TelescopeOptions,
+    obj
+) => {
     return Object.keys(obj).map(key => {
         if (obj[key]?.__export) {
             // e.g. abci
@@ -24,8 +28,11 @@ export const recursiveModuleBundle = (obj) => {
             const others = Object.keys(obj[key])
                 .filter(a => a !== '__export')
                 .filter(a => !a.startsWith('_'));
+
             if (others.length) {
-                throw new Error('namespace and package not supported, yet.')
+                if (!options.experimentalGlobalProtoNamespace) {
+                    throw new Error('namespace and package not supported, yet.')
+                }
             }
 
             // return nmspc;
@@ -39,7 +46,7 @@ export const recursiveModuleBundle = (obj) => {
             return t.exportNamedDeclaration(
                 t.tsModuleDeclaration(
                     t.identifier(key),
-                    t.tsModuleBlock(recursiveModuleBundle(obj[key]))
+                    t.tsModuleBlock(recursiveModuleBundle(options, obj[key]))
                 )
             )
         }

@@ -96,7 +96,7 @@ export const AminoConverter = {
         },
         deposit: {
           denom: deposit.denom,
-          amount: Long.fromNumber(deposit.amount).toString()
+          amount: Long.fromValue(deposit.amount).toString()
         }
       };
     },

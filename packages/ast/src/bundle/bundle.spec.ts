@@ -4,13 +4,18 @@ import * as t from '@babel/types';
 import {
     recursiveModuleBundle
 } from './bundle'
+import { getGenericParseContext } from '../../test-utils'
+
 
 const preview = (ast) => {
     return generate(t.program(ast)).code;
 }
 
+const context = getGenericParseContext();
+
 cases(`recursiveModuleBundle`, opts => {
-    expect(preview(recursiveModuleBundle(opts.data))).toMatchSnapshot();
+
+    expect(preview(recursiveModuleBundle(context.options, opts.data))).toMatchSnapshot();
 }, [
     {
         name: 'root',

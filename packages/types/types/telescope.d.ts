@@ -8,6 +8,7 @@ export declare enum TelescopeLogLevel {
     Debug = 4
 }
 interface TelescopeOpts {
+    experimentalGlobalProtoNamespace?: boolean;
     removeUnusedImports?: boolean;
     classesUseArrowFunctions?: boolean;
     useSDKTypes?: boolean;

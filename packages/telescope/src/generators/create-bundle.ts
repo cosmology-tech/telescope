@@ -14,7 +14,7 @@ export const plugin = (
     }
 
     // [x] bundle
-    const body = recursiveModuleBundle(bundler.bundle.bundleVariables);
+    const body = recursiveModuleBundle(builder.options, bundler.bundle.bundleVariables);
     const prog = []
         .concat(bundler.bundle.importPaths)
         .concat(body);

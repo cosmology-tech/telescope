@@ -38,7 +38,7 @@ it('getPackagesBundled', () => {
 it('bundlePackages', () => {
     const bundled = bundlePackages(store);
     const packaged = bundled.reduce((m, bundle) => {
-        const body = recursiveModuleBundle(bundle.bundleVariables);
+        const body = recursiveModuleBundle(store.options, bundle.bundleVariables);
         m[bundle.base] = {
             bundle: bundle.bundleFile,
             base: bundle.base,

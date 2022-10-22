@@ -80,7 +80,7 @@ export const AminoConverter = {
         token_in: tokenIn,
         token_out: {
           denom: tokenOut.denom,
-          amount: Long.fromNumber(tokenOut.amount).toString()
+          amount: Long.fromValue(tokenOut.amount).toString()
         },
         max_fee: maxFee.map(el0 => ({
           denom: el0.denom,

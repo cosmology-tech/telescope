@@ -33,7 +33,7 @@ export const AminoConverter = {
       return {
         coin: {
           denom: coin.denom,
-          amount: Long.fromNumber(coin.amount).toString()
+          amount: Long.fromValue(coin.amount).toString()
         },
         receiver,
         sender
