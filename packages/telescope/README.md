@@ -8,6 +8,7 @@
   <a href="https://github.com/osmosis-labs/telescope/actions/workflows/run-tests.yaml">
     <img height="20" src="https://github.com/osmosis-labs/telescope/actions/workflows/run-tests.yaml/badge.svg" />
   </a>
+   <a href="https://www.npmjs.com/package/@osmonauts/telescope"><img height="20" src="https://img.shields.io/npm/dt/@osmonauts/telescope"></a>
    <a href="https://github.com/osmosis-labs/telescope/blob/main/LICENSE-MIT"><img height="20" src="https://img.shields.io/badge/license-MIT-blue.svg"></a>
    <a href="https://github.com/osmosis-labs/telescope/blob/main/LICENSE-Apache"><img height="20" src="https://img.shields.io/badge/license-Apache-blue.svg"></a>
    <a href="https://www.npmjs.com/package/@osmonauts/telescope"><img height="20" src="https://img.shields.io/github/package-json/v/osmosis-labs/telescope?filename=packages%2Ftelescope%2Fpackage.json"></a>
