@@ -84,10 +84,10 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.19.0",
-    "@cosmjs/amino": "0.29.0",
-    "@cosmjs/proto-signing": "0.29.0",
-    "@cosmjs/stargate": "0.29.0",
-    "@cosmjs/tendermint-rpc": "^0.29.0",
+    "@cosmjs/amino": "0.29.3",
+    "@cosmjs/proto-signing": "0.29.3",
+    "@cosmjs/stargate": "0.29.3",
+    "@cosmjs/tendermint-rpc": "^0.29.3",
     "@osmonauts/lcd": "^0.8.0",
     "long": "^5.2.0",
     "protobufjs": "^6.11.3"
