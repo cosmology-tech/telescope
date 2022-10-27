@@ -555,7 +555,7 @@ const options: TelescopeOptions = {
 This will generate helpers `createRPCQueryClient` and `createRPCTxClient` in the `ClientFactory`, which you can then use to query multiple modules from a single object:
 
 ```js
-import { osmosis } from './proto';
+import { osmosis } from './codegen';
 
 const main = async () => {
   const client = await osmosis.ClientFactory.createRPCQueryClient({ rpcEndpoint });
