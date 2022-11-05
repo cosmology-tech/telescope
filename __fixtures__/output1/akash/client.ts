@@ -1,5 +1,6 @@
-import { OfflineSigner, GeneratedType, Registry } from "@cosmjs/proto-signing";
+import { GeneratedType, Registry, OfflineSigner } from "@cosmjs/proto-signing";
 import { defaultRegistryTypes, AminoTypes, SigningStargateClient } from "@cosmjs/stargate";
+import { HttpEndpoint } from "@cosmjs/tendermint-rpc";
 import * as akashAuditV1beta1AuditRegistry from "./audit/v1beta1/audit.registry";
 import * as akashAuditV1beta2AuditRegistry from "./audit/v1beta2/audit.registry";
 import * as akashCertV1beta2CertRegistry from "./cert/v1beta2/cert.registry";
@@ -44,7 +45,7 @@ export const getSigningAkashClient = async ({
   signer,
   defaultTypes = defaultRegistryTypes
 }: {
-  rpcEndpoint: string;
+  rpcEndpoint: string | HttpEndpoint;
   signer: OfflineSigner;
   defaultTypes?: ReadonlyArray<[string, GeneratedType]>;
 }) => {

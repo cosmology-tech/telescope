@@ -189,6 +189,7 @@ export const createScopedRpcTmFactory = (
 ) => {
 
     context.addUtil('Tendermint34Client');
+    context.addUtil('HttpEndpoint');
     context.addUtil('QueryClient');
 
     return t.exportNamedDeclaration(
@@ -212,7 +213,12 @@ export const createScopedRpcTmFactory = (
                                     t.tsPropertySignature(
                                         t.identifier('rpcEndpoint'),
                                         t.tsTypeAnnotation(
-                                            t.tsStringKeyword()
+                                            t.tsUnionType([
+                                                t.tsStringKeyword(),
+                                                t.tsTypeReference(
+                                                    t.identifier('HttpEndpoint')
+                                                )
+                                            ])
                                         )
                                     )
                                 ])

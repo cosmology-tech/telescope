@@ -22,6 +22,7 @@ export declare const UTILS: {
     createProtobufRpcClient: string;
     QueryClient: string;
     Tendermint34Client: string;
+    HttpEndpoint: string;
     OfflineSigner: string;
     omitDefault: string;
     Registry: string;

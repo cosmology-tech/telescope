@@ -26,7 +26,7 @@ exports[`createScopedRpcTmFactory 1`] = `
 "export const createRpcFactorizzle = async ({
   rpcEndpoint
 }: {
-  rpcEndpoint: string;
+  rpcEndpoint: string | HttpEndpoint;
 }) => {
   const tmClient = await Tendermint34Client.connect(rpcEndpoint);
   const client = new QueryClient(tmClient);

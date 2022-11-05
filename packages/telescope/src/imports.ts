@@ -1,5 +1,5 @@
 import * as t from '@babel/types';
-import { importStmt } from '@osmonauts/ast';
+import { GenericParseContext, importStmt } from '@osmonauts/ast';
 import { ServiceMutation } from '@osmonauts/types';
 
 import { ImportHash, ImportObj } from './types';
@@ -216,12 +216,43 @@ const convertUtilsToImports = (context: TelescopeParseContext): ImportObj[] => {
     return list;
 };
 
+const convertUtilsToImportsGenric = (context: GenericParseContext): ImportObj[] => {
+    const list = [];
+    const utils = Object.keys({
+        ...context.utils
+    });
+
+    // MARKED AS NOT DRY - duplicate of above
+    utils.forEach(util => {
+        if (!UTILS.hasOwnProperty(util)) throw new Error('missing Util! ::' + util);
+        if (typeof UTILS[util] === 'string') {
+            list.push({
+                type: 'import',
+                path: UTILS[util],
+                name: util
+            });
+        } else {
+            list.push(UTILS[util]);
+        }
+    });
+    return list;
+};
+
 export const buildAllImports = (
     context: TelescopeParseContext,
     allImports: ImportHash,
     filepath: string
 ) => {
     const imports = aggregateImports(context, allImports, filepath);
+    const importStmts = getImportStatements(filepath, imports);
+    return importStmts;
+};
+
+export const buildAllImportsFromGenericContext = (
+    context: GenericParseContext,
+    filepath: string
+) => {
+    const imports: ImportObj[] = convertUtilsToImportsGenric(context);
     const importStmts = getImportStatements(filepath, imports);
     return importStmts;
 };
