@@ -1,10 +1,10 @@
 import { Rpc } from "../helpers";
-import { Tendermint34Client } from "@cosmjs/tendermint-rpc";
+import { Tendermint34Client, HttpEndpoint } from "@cosmjs/tendermint-rpc";
 import { QueryClient } from "@cosmjs/stargate";
 export const createCosmicRPCQueryClient = async ({
   rpcEndpoint
 }: {
-  rpcEndpoint: string;
+  rpcEndpoint: string | HttpEndpoint;
 }) => {
   const tmClient = await Tendermint34Client.connect(rpcEndpoint);
   const client = new QueryClient(tmClient);

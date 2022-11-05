@@ -5,6 +5,7 @@ import { GenericParseContext } from '../src/encoding';
 export declare const expectCode: (ast: any) => void;
 export declare const printCode: (ast: any) => void;
 export declare const defaultTelescopeOptions: {
+    experimentalGlobalProtoNamespace: boolean;
     removeUnusedImports: boolean;
     classesUseArrowFunctions: boolean;
     useSDKTypes: boolean;
