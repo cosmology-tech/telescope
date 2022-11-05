@@ -3,7 +3,6 @@ import { TelescopeBuilder } from '../builder';
 import { join, dirname, relative } from 'path';
 import {
     importNamespace,
-    importStmt,
     GenericParseContext,
     createStargateClient,
     createStargateClientOptions,
@@ -13,6 +12,7 @@ import {
 import { ProtoRef } from '@osmonauts/types';
 import { camel, pascal } from 'case';
 import { variableSlug } from '../utils';
+import { buildAllImportsFromGenericContext } from '../imports';
 
 export const plugin = (
     builder: TelescopeBuilder,
@@ -83,10 +83,10 @@ export const plugin = (
         options: name + 'Options',
     });
 
+    const imports = buildAllImportsFromGenericContext(ctx, clientFile);
+
     const cProg = [
-        // TODO why not use import system via context?
-        importStmt(['OfflineSigner', 'GeneratedType', 'Registry'], '@cosmjs/proto-signing'),
-        importStmt(['defaultRegistryTypes', 'AminoTypes', 'SigningStargateClient'], '@cosmjs/stargate'),
+        ...imports,
         ...registryImports,
         ...converterImports,
 

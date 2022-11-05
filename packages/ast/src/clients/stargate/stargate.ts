@@ -33,7 +33,7 @@ export const createStargateClient = ({ name, options, context }: CreateStargateC
   let optsFuncArgs = [];
 
   if (includeDefaults) {
-    context.addUtil('defaultRegistryTypes')
+    context.addUtil('defaultRegistryTypes');
     optsFuncArgs = [
       t.objectExpression([
         t.objectProperty(
@@ -51,7 +51,6 @@ export const createStargateClient = ({ name, options, context }: CreateStargateC
   context.addUtil('Registry');
   context.addUtil('AminoTypes');
   context.addUtil('SigningStargateClient');
-  context.addUtil('ReadonlyArray');
   context.addUtil('HttpEndpoint');
 
   const prop = t.tsPropertySignature(
@@ -235,8 +234,7 @@ export const createStargateClientAminoRegistry = ({
 
 export const createStargateClientProtoRegistry = ({ registries, protoTypeRegistry, context }: CreateStargateClientProtoRegistry) => {
 
-  context.addUtil('GeneratedType')
-  context.addUtil('ReadonlyArray')
+  context.addUtil('GeneratedType');
 
   return t.exportNamedDeclaration(
     t.variableDeclaration(
@@ -285,14 +283,13 @@ export const createStargateClientOptions = ({
   const includeDefaults = context.pluginValue('stargateClients.includeCosmosDefaultTypes');
 
   if (includeDefaults) {
-    context.addUtil('defaultRegistryTypes')
+    context.addUtil('defaultRegistryTypes');
   }
 
-  context.addUtil('GeneratedType')
-  context.addUtil('Registry')
-  context.addUtil('AminoTypes')
-  context.addUtil('SigningStargateClient')
-  context.addUtil('ReadonlyArray')
+  context.addUtil('GeneratedType');
+  context.addUtil('Registry');
+  context.addUtil('AminoTypes');
+  context.addUtil('SigningStargateClient');
 
   const prop = t.tsPropertySignature(
     t.identifier('defaultTypes'),

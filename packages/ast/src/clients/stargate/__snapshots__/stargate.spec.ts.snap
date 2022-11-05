@@ -30,7 +30,6 @@ exports[`createStargateClient 2`] = `
   "GeneratedType": true,
   "HttpEndpoint": true,
   "OfflineSigner": true,
-  "ReadonlyArray": true,
   "Registry": true,
   "SigningStargateClient": true,
   "defaultRegistryTypes": true,
@@ -78,7 +77,6 @@ exports[`createStargateClient w/o defaults 3`] = `
   "GeneratedType": true,
   "HttpEndpoint": true,
   "OfflineSigner": true,
-  "ReadonlyArray": true,
   "Registry": true,
   "SigningStargateClient": true,
 }
@@ -116,7 +114,6 @@ exports[`createStargateClientOptions 2`] = `
 {
   "AminoTypes": true,
   "GeneratedType": true,
-  "ReadonlyArray": true,
   "Registry": true,
   "SigningStargateClient": true,
   "defaultRegistryTypes": true,
@@ -128,6 +125,5 @@ exports[`createStargateClientProtoRegistry 1`] = `"export const protoTypeRegistr
 exports[`createStargateClientProtoRegistry 2`] = `
 {
   "GeneratedType": true,
-  "ReadonlyArray": true,
 }
 `;
