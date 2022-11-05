@@ -46,12 +46,13 @@ export const createStargateClient = ({ name, options, context }: CreateStargateC
     ];
   }
 
-  context.addUtil('GeneratedType')
-  context.addUtil('OfflineSigner')
-  context.addUtil('Registry')
-  context.addUtil('AminoTypes')
-  context.addUtil('SigningStargateClient')
-  context.addUtil('ReadonlyArray')
+  context.addUtil('GeneratedType');
+  context.addUtil('OfflineSigner');
+  context.addUtil('Registry');
+  context.addUtil('AminoTypes');
+  context.addUtil('SigningStargateClient');
+  context.addUtil('ReadonlyArray');
+  context.addUtil('HttpEndpoint');
 
   const prop = t.tsPropertySignature(
     t.identifier('defaultTypes'),
@@ -107,7 +108,14 @@ export const createStargateClient = ({ name, options, context }: CreateStargateC
                     [
                       t.tsPropertySignature(
                         t.identifier('rpcEndpoint'),
-                        t.tsTypeAnnotation(t.tsStringKeyword())
+                        t.tsTypeAnnotation(
+                          t.tsUnionType([
+                            t.tsStringKeyword(),
+                            t.tsTypeReference(
+                              t.identifier('HttpEndpoint')
+                            )
+                          ])
+                        )
                       ),
                       t.tsPropertySignature(
                         t.identifier('signer'),

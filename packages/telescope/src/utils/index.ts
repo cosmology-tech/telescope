@@ -30,6 +30,7 @@ export const UTILS = {
     createProtobufRpcClient: '@cosmjs/stargate',
     QueryClient: '@cosmjs/stargate',
     Tendermint34Client: '@cosmjs/tendermint-rpc',
+    HttpEndpoint: '@cosmjs/tendermint-rpc',
     OfflineSigner: '@cosmjs/proto-signing',
     omitDefault: '__helpers__',
     Registry: '@cosmjs/proto-signing',
