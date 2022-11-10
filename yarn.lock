@@ -1713,10 +1713,10 @@
   resolved "https://registry.npmjs.org/@cosmjs/utils/-/utils-0.29.3.tgz#d7e1f381267e61b7d3219ebd75d46defc397cd43"
   integrity sha512-UuKoBN2xiRXcBpz7jzCwagKhOnLOsRmR8mu3IzY+Yx38i8rW52FSXMbxC/yE83X0vLea+zgMQFPwv0gy4QWUJw==
 
-"@cosmwasm/ts-codegen@0.20.0":
-  version "0.20.0"
-  resolved "https://registry.npmjs.org/@cosmwasm/ts-codegen/-/ts-codegen-0.20.0.tgz#786afd4c2c172040547134c1c3076fb47e823721"
-  integrity sha512-lrp61YkjONbuStNWQEKdD/MYQwREnQ2fNnI59dSa7VOqBxyhlBoOhj/6xjYFv4P3cm2Pd374kzfayhTkuFwhLw==
+"@cosmwasm/ts-codegen@0.21.1":
+  version "0.21.1"
+  resolved "https://registry.npmjs.org/@cosmwasm/ts-codegen/-/ts-codegen-0.21.1.tgz#abbb15fdb8f1c966079de49e0da0f847fa5045fe"
+  integrity sha512-6Rp1zKJLL08H0wMpXuEcvTWx29mR/pNlBS/2S6jTW8h+NzVlDfXQcLm42gpnpb7CzgW8rt1GMNZ3mCCdTDNuSA==
   dependencies:
     "@babel/core" "7.18.10"
     "@babel/generator" "7.18.12"
@@ -1744,7 +1744,7 @@
     parse-package-name "1.0.0"
     rimraf "3.0.2"
     shelljs "0.8.5"
-    wasm-ast-types "^0.14.0"
+    wasm-ast-types "^0.15.0"
 
 "@eslint/eslintrc@^1.3.2":
   version "1.3.2"
@@ -9009,10 +9009,10 @@ walker@^1.0.8:
   dependencies:
     makeerror "1.0.12"
 
-wasm-ast-types@^0.14.0:
-  version "0.14.0"
-  resolved "https://registry.npmjs.org/wasm-ast-types/-/wasm-ast-types-0.14.0.tgz#c6e135df2f029280a4be1dbdbf01d4de488a244b"
-  integrity sha512-1DAiGmLexIA2nizkLHQdyTN3GWb1bdox2/iroyrBmeazTwCdAsPhud/5Pro9JBSmoWjnBGSdlsUYTaY5n25PcA==
+wasm-ast-types@^0.15.0:
+  version "0.15.0"
+  resolved "https://registry.npmjs.org/wasm-ast-types/-/wasm-ast-types-0.15.0.tgz#101f98fc9c5d0528bc615f80d9d7a897168e0593"
+  integrity sha512-A3wgW3mlqK3irUjHqMkA26ADFA1z55LgQKl+KXRf1ylN5DValI3t/R9Sv3grSa7vpCAeG6E+XWCd7pGRNDsylw==
   dependencies:
     "@babel/runtime" "^7.18.9"
     "@babel/types" "7.18.10"
