@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.70.1](https://github.com/osmosis-labs/osmojs/compare/@osmonauts/test-example@0.70.0...@osmonauts/test-example@0.70.1) (2022-11-16)
+
+**Note:** Version bump only for package @osmonauts/test-example
+
+
+
+
+
 # [0.70.0](https://github.com/osmosis-labs/osmojs/compare/@osmonauts/test-example@0.69.0...@osmonauts/test-example@0.70.0) (2022-11-10)
 
 **Note:** Version bump only for package @osmonauts/test-example
