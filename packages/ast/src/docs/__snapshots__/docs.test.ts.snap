@@ -237,7 +237,7 @@ import {
 } from 'osmojs';
 
 const signer: OfflineSigner = /* create your signer (see above)  */
-const rpcEndpint = 'https://rpc.cosmos.directory/osmosis'; // or another URL
+const rpcEndpoint = 'https://rpc.cosmos.directory/osmosis'; // or another URL
 
 const protoRegistry: ReadonlyArray<[string, GeneratedType]> = [
     ...cosmosProtoRegistry,

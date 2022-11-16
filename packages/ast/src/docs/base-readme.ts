@@ -253,7 +253,7 @@ import {
 } from '${libName}';
 
 const signer: OfflineSigner = /* create your signer (see above)  */
-const rpcEndpint = 'https://rpc.cosmos.directory/${baseModule}'; // or another URL
+const rpcEndpoint = 'https://rpc.cosmos.directory/${baseModule}'; // or another URL
 
 const protoRegistry: ReadonlyArray<[string, GeneratedType]> = [
     ...cosmosProtoRegistry,
