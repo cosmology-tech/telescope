@@ -195,6 +195,10 @@ const options: TelescopeOptions = {
     ]
   },
 
+  reactQuery: {
+    enabled: true
+  },
+
   aminoEncoding: {
     enabled: true,
     exceptions: {
