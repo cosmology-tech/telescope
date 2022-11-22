@@ -104,7 +104,6 @@ interface TelescopeOpts {
             methodName?: string;
         }[];
     };
-
     rpcClients?: {
         enabled: boolean;
         inline?: boolean;
@@ -128,6 +127,9 @@ interface TelescopeOpts {
             methodNameQuery?: string;
             methodNameTx?: string;
         }[];
+    };
+    reactQuery?: {
+        enabled: boolean;
     };
 }
 interface TelescopePackageOpts {
@@ -225,6 +227,10 @@ export const defaultTelescopeOptions: TelescopeOptions = {
             'Service'
         ],
         scopedIsExclusive: true
+    },
+
+    reactQuery: {
+        enabled: false
     },
 
     // packages
