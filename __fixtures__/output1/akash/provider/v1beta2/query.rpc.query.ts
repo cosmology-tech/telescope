@@ -78,7 +78,7 @@ const getQueryService = (rpc: ProtobufRpcClient | undefined): QueryClientImpl | 
 export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
   const queryService = getQueryService(rpc);
 
-  const useProviders = ({
+  const useProviders = <TData = QueryProvidersResponse,>({
     request,
     options
   }: UseProvidersQuery<TData>) => {
@@ -88,7 +88,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useProvider = ({
+  const useProvider = <TData = QueryProviderResponse,>({
     request,
     options
   }: UseProviderQuery<TData>) => {

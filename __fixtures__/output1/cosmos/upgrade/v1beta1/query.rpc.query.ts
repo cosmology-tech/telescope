@@ -138,7 +138,7 @@ const getQueryService = (rpc: ProtobufRpcClient | undefined): QueryClientImpl | 
 export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
   const queryService = getQueryService(rpc);
 
-  const useCurrentPlan = ({
+  const useCurrentPlan = <TData = QueryCurrentPlanResponse,>({
     request,
     options
   }: UseCurrentPlanQuery<TData>) => {
@@ -148,7 +148,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useAppliedPlan = ({
+  const useAppliedPlan = <TData = QueryAppliedPlanResponse,>({
     request,
     options
   }: UseAppliedPlanQuery<TData>) => {
@@ -158,7 +158,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useUpgradedConsensusState = ({
+  const useUpgradedConsensusState = <TData = QueryUpgradedConsensusStateResponse,>({
     request,
     options
   }: UseUpgradedConsensusStateQuery<TData>) => {
@@ -168,7 +168,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useModuleVersions = ({
+  const useModuleVersions = <TData = QueryModuleVersionsResponse,>({
     request,
     options
   }: UseModuleVersionsQuery<TData>) => {
@@ -178,7 +178,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useAuthority = ({
+  const useAuthority = <TData = QueryAuthorityResponse,>({
     request,
     options
   }: UseAuthorityQuery<TData>) => {

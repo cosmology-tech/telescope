@@ -200,7 +200,7 @@ const getQueryService = (rpc: ProtobufRpcClient | undefined): QueryClientImpl | 
 export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
   const queryService = getQueryService(rpc);
 
-  const useContractInfo = ({
+  const useContractInfo = <TData = QueryContractInfoResponse,>({
     request,
     options
   }: UseContractInfoQuery<TData>) => {
@@ -210,7 +210,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useContractHistory = ({
+  const useContractHistory = <TData = QueryContractHistoryResponse,>({
     request,
     options
   }: UseContractHistoryQuery<TData>) => {
@@ -220,7 +220,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useContractsByCode = ({
+  const useContractsByCode = <TData = QueryContractsByCodeResponse,>({
     request,
     options
   }: UseContractsByCodeQuery<TData>) => {
@@ -230,7 +230,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useAllContractState = ({
+  const useAllContractState = <TData = QueryAllContractStateResponse,>({
     request,
     options
   }: UseAllContractStateQuery<TData>) => {
@@ -240,7 +240,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useRawContractState = ({
+  const useRawContractState = <TData = QueryRawContractStateResponse,>({
     request,
     options
   }: UseRawContractStateQuery<TData>) => {
@@ -250,7 +250,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useSmartContractState = ({
+  const useSmartContractState = <TData = QuerySmartContractStateResponse,>({
     request,
     options
   }: UseSmartContractStateQuery<TData>) => {
@@ -260,7 +260,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useCode = ({
+  const useCode = <TData = QueryCodeResponse,>({
     request,
     options
   }: UseCodeQuery<TData>) => {
@@ -270,7 +270,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useCodes = ({
+  const useCodes = <TData = QueryCodesResponse,>({
     request,
     options
   }: UseCodesQuery<TData>) => {
@@ -280,7 +280,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const usePinnedCodes = ({
+  const usePinnedCodes = <TData = QueryPinnedCodesResponse,>({
     request,
     options
   }: UsePinnedCodesQuery<TData>) => {

@@ -96,7 +96,7 @@ const getQueryService = (rpc: ProtobufRpcClient | undefined): QueryClientImpl | 
 export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
   const queryService = getQueryService(rpc);
 
-  const useDeployments = ({
+  const useDeployments = <TData = QueryDeploymentsResponse,>({
     request,
     options
   }: UseDeploymentsQuery<TData>) => {
@@ -106,7 +106,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useDeployment = ({
+  const useDeployment = <TData = QueryDeploymentResponse,>({
     request,
     options
   }: UseDeploymentQuery<TData>) => {
@@ -116,7 +116,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useGroup = ({
+  const useGroup = <TData = QueryGroupResponse,>({
     request,
     options
   }: UseGroupQuery<TData>) => {

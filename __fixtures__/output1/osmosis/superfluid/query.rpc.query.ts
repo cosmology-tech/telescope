@@ -286,7 +286,7 @@ const getQueryService = (rpc: ProtobufRpcClient | undefined): QueryClientImpl | 
 export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
   const queryService = getQueryService(rpc);
 
-  const useParams = ({
+  const useParams = <TData = QueryParamsResponse,>({
     request,
     options
   }: UseParamsQuery<TData>) => {
@@ -296,7 +296,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useAssetType = ({
+  const useAssetType = <TData = AssetTypeResponse,>({
     request,
     options
   }: UseAssetTypeQuery<TData>) => {
@@ -306,7 +306,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useAllAssets = ({
+  const useAllAssets = <TData = AllAssetsResponse,>({
     request,
     options
   }: UseAllAssetsQuery<TData>) => {
@@ -316,7 +316,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useAssetMultiplier = ({
+  const useAssetMultiplier = <TData = AssetMultiplierResponse,>({
     request,
     options
   }: UseAssetMultiplierQuery<TData>) => {
@@ -326,7 +326,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useAllIntermediaryAccounts = ({
+  const useAllIntermediaryAccounts = <TData = AllIntermediaryAccountsResponse,>({
     request,
     options
   }: UseAllIntermediaryAccountsQuery<TData>) => {
@@ -336,7 +336,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useConnectedIntermediaryAccount = ({
+  const useConnectedIntermediaryAccount = <TData = ConnectedIntermediaryAccountResponse,>({
     request,
     options
   }: UseConnectedIntermediaryAccountQuery<TData>) => {
@@ -346,7 +346,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useTotalSuperfluidDelegations = ({
+  const useTotalSuperfluidDelegations = <TData = TotalSuperfluidDelegationsResponse,>({
     request,
     options
   }: UseTotalSuperfluidDelegationsQuery<TData>) => {
@@ -356,7 +356,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useSuperfluidDelegationAmount = ({
+  const useSuperfluidDelegationAmount = <TData = SuperfluidDelegationAmountResponse,>({
     request,
     options
   }: UseSuperfluidDelegationAmountQuery<TData>) => {
@@ -366,7 +366,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useSuperfluidDelegationsByDelegator = ({
+  const useSuperfluidDelegationsByDelegator = <TData = SuperfluidDelegationsByDelegatorResponse,>({
     request,
     options
   }: UseSuperfluidDelegationsByDelegatorQuery<TData>) => {
@@ -376,7 +376,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useSuperfluidUndelegationsByDelegator = ({
+  const useSuperfluidUndelegationsByDelegator = <TData = SuperfluidUndelegationsByDelegatorResponse,>({
     request,
     options
   }: UseSuperfluidUndelegationsByDelegatorQuery<TData>) => {
@@ -386,7 +386,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useSuperfluidDelegationsByValidatorDenom = ({
+  const useSuperfluidDelegationsByValidatorDenom = <TData = SuperfluidDelegationsByValidatorDenomResponse,>({
     request,
     options
   }: UseSuperfluidDelegationsByValidatorDenomQuery<TData>) => {
@@ -396,7 +396,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useEstimateSuperfluidDelegatedAmountByValidatorDenom = ({
+  const useEstimateSuperfluidDelegatedAmountByValidatorDenom = <TData = EstimateSuperfluidDelegatedAmountByValidatorDenomResponse,>({
     request,
     options
   }: UseEstimateSuperfluidDelegatedAmountByValidatorDenomQuery<TData>) => {
@@ -406,7 +406,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useTotalDelegationByDelegator = ({
+  const useTotalDelegationByDelegator = <TData = QueryTotalDelegationByDelegatorResponse,>({
     request,
     options
   }: UseTotalDelegationByDelegatorQuery<TData>) => {

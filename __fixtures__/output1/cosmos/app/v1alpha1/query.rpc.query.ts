@@ -59,7 +59,7 @@ const getQueryService = (rpc: ProtobufRpcClient | undefined): QueryClientImpl | 
 export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
   const queryService = getQueryService(rpc);
 
-  const useConfig = ({
+  const useConfig = <TData = QueryConfigResponse,>({
     request,
     options
   }: UseConfigQuery<TData>) => {

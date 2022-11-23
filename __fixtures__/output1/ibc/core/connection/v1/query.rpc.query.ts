@@ -141,7 +141,7 @@ const getQueryService = (rpc: ProtobufRpcClient | undefined): QueryClientImpl | 
 export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
   const queryService = getQueryService(rpc);
 
-  const useConnection = ({
+  const useConnection = <TData = QueryConnectionResponse,>({
     request,
     options
   }: UseConnectionQuery<TData>) => {
@@ -151,7 +151,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useConnections = ({
+  const useConnections = <TData = QueryConnectionsResponse,>({
     request,
     options
   }: UseConnectionsQuery<TData>) => {
@@ -161,7 +161,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useClientConnections = ({
+  const useClientConnections = <TData = QueryClientConnectionsResponse,>({
     request,
     options
   }: UseClientConnectionsQuery<TData>) => {
@@ -171,7 +171,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useConnectionClientState = ({
+  const useConnectionClientState = <TData = QueryConnectionClientStateResponse,>({
     request,
     options
   }: UseConnectionClientStateQuery<TData>) => {
@@ -181,7 +181,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useConnectionConsensusState = ({
+  const useConnectionConsensusState = <TData = QueryConnectionConsensusStateResponse,>({
     request,
     options
   }: UseConnectionConsensusStateQuery<TData>) => {

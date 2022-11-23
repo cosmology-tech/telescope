@@ -179,7 +179,7 @@ const getQueryService = (rpc: ProtobufRpcClient | undefined): QueryClientImpl | 
 export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
   const queryService = getQueryService(rpc);
 
-  const useProposal = ({
+  const useProposal = <TData = QueryProposalResponse,>({
     request,
     options
   }: UseProposalQuery<TData>) => {
@@ -189,7 +189,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useProposals = ({
+  const useProposals = <TData = QueryProposalsResponse,>({
     request,
     options
   }: UseProposalsQuery<TData>) => {
@@ -199,7 +199,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useVote = ({
+  const useVote = <TData = QueryVoteResponse,>({
     request,
     options
   }: UseVoteQuery<TData>) => {
@@ -209,7 +209,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useVotes = ({
+  const useVotes = <TData = QueryVotesResponse,>({
     request,
     options
   }: UseVotesQuery<TData>) => {
@@ -219,7 +219,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useParams = ({
+  const useParams = <TData = QueryParamsResponse,>({
     request,
     options
   }: UseParamsQuery<TData>) => {
@@ -229,7 +229,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useDeposit = ({
+  const useDeposit = <TData = QueryDepositResponse,>({
     request,
     options
   }: UseDepositQuery<TData>) => {
@@ -239,7 +239,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useDeposits = ({
+  const useDeposits = <TData = QueryDepositsResponse,>({
     request,
     options
   }: UseDepositsQuery<TData>) => {
@@ -249,7 +249,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useTallyResult = ({
+  const useTallyResult = <TData = QueryTallyResultResponse,>({
     request,
     options
   }: UseTallyResultQuery<TData>) => {

@@ -188,7 +188,7 @@ const getQueryService = (rpc: ProtobufRpcClient | undefined): QueryClientImpl | 
 export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
   const queryService = getQueryService(rpc);
 
-  const useClientState = ({
+  const useClientState = <TData = QueryClientStateResponse,>({
     request,
     options
   }: UseClientStateQuery<TData>) => {
@@ -198,7 +198,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useClientStates = ({
+  const useClientStates = <TData = QueryClientStatesResponse,>({
     request,
     options
   }: UseClientStatesQuery<TData>) => {
@@ -208,7 +208,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useConsensusState = ({
+  const useConsensusState = <TData = QueryConsensusStateResponse,>({
     request,
     options
   }: UseConsensusStateQuery<TData>) => {
@@ -218,7 +218,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useConsensusStates = ({
+  const useConsensusStates = <TData = QueryConsensusStatesResponse,>({
     request,
     options
   }: UseConsensusStatesQuery<TData>) => {
@@ -228,7 +228,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useClientStatus = ({
+  const useClientStatus = <TData = QueryClientStatusResponse,>({
     request,
     options
   }: UseClientStatusQuery<TData>) => {
@@ -238,7 +238,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useClientParams = ({
+  const useClientParams = <TData = QueryClientParamsResponse,>({
     request,
     options
   }: UseClientParamsQuery<TData>) => {
@@ -248,7 +248,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useUpgradedClientState = ({
+  const useUpgradedClientState = <TData = QueryUpgradedClientStateResponse,>({
     request,
     options
   }: UseUpgradedClientStateQuery<TData>) => {
@@ -258,7 +258,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useUpgradedConsensusState = ({
+  const useUpgradedConsensusState = <TData = QueryUpgradedConsensusStateResponse,>({
     request,
     options
   }: UseUpgradedConsensusStateQuery<TData>) => {

@@ -147,7 +147,7 @@ const getQueryService = (rpc: ProtobufRpcClient | undefined): QueryClientImpl | 
 export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
   const queryService = getQueryService(rpc);
 
-  const useOrders = ({
+  const useOrders = <TData = QueryOrdersResponse,>({
     request,
     options
   }: UseOrdersQuery<TData>) => {
@@ -157,7 +157,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useOrder = ({
+  const useOrder = <TData = QueryOrderResponse,>({
     request,
     options
   }: UseOrderQuery<TData>) => {
@@ -167,7 +167,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useBids = ({
+  const useBids = <TData = QueryBidsResponse,>({
     request,
     options
   }: UseBidsQuery<TData>) => {
@@ -177,7 +177,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useBid = ({
+  const useBid = <TData = QueryBidResponse,>({
     request,
     options
   }: UseBidQuery<TData>) => {
@@ -187,7 +187,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useLeases = ({
+  const useLeases = <TData = QueryLeasesResponse,>({
     request,
     options
   }: UseLeasesQuery<TData>) => {
@@ -197,7 +197,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useLease = ({
+  const useLease = <TData = QueryLeaseResponse,>({
     request,
     options
   }: UseLeaseQuery<TData>) => {

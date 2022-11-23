@@ -88,7 +88,7 @@ const getQueryService = (rpc: ProtobufRpcClient | undefined): QueryClientImpl | 
 export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
   const queryService = getQueryService(rpc);
 
-  const useAccounts = ({
+  const useAccounts = <TData = QueryAccountsResponse,>({
     request,
     options
   }: UseAccountsQuery<TData>) => {
@@ -98,7 +98,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const usePayments = ({
+  const usePayments = <TData = QueryPaymentsResponse,>({
     request,
     options
   }: UsePaymentsQuery<TData>) => {

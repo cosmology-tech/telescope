@@ -59,7 +59,7 @@ const getQueryService = (rpc: ProtobufRpcClient | undefined): QueryClientImpl | 
 export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
   const queryService = getQueryService(rpc);
 
-  const useAppVersion = ({
+  const useAppVersion = <TData = QueryAppVersionResponse,>({
     request,
     options
   }: UseAppVersionQuery<TData>) => {

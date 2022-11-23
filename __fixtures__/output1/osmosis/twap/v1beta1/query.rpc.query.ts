@@ -87,7 +87,7 @@ const getQueryService = (rpc: ProtobufRpcClient | undefined): QueryClientImpl | 
 export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
   const queryService = getQueryService(rpc);
 
-  const useParams = ({
+  const useParams = <TData = ParamsResponse,>({
     request,
     options
   }: UseParamsQuery<TData>) => {
@@ -97,7 +97,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useArithmeticTwap = ({
+  const useArithmeticTwap = <TData = ArithmeticTwapResponse,>({
     request,
     options
   }: UseArithmeticTwapQuery<TData>) => {
@@ -107,7 +107,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useArithmeticTwapToNow = ({
+  const useArithmeticTwapToNow = <TData = ArithmeticTwapToNowResponse,>({
     request,
     options
   }: UseArithmeticTwapToNowQuery<TData>) => {

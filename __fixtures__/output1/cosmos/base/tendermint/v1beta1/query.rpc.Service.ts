@@ -150,7 +150,7 @@ const getQueryService = (rpc: ProtobufRpcClient | undefined): QueryClientImpl | 
 export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
   const queryService = getQueryService(rpc);
 
-  const useGetNodeInfo = ({
+  const useGetNodeInfo = <TData = GetNodeInfoResponse,>({
     request,
     options
   }: UseGetNodeInfoQuery<TData>) => {
@@ -160,7 +160,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useGetSyncing = ({
+  const useGetSyncing = <TData = GetSyncingResponse,>({
     request,
     options
   }: UseGetSyncingQuery<TData>) => {
@@ -170,7 +170,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useGetLatestBlock = ({
+  const useGetLatestBlock = <TData = GetLatestBlockResponse,>({
     request,
     options
   }: UseGetLatestBlockQuery<TData>) => {
@@ -180,7 +180,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useGetBlockByHeight = ({
+  const useGetBlockByHeight = <TData = GetBlockByHeightResponse,>({
     request,
     options
   }: UseGetBlockByHeightQuery<TData>) => {
@@ -190,7 +190,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useGetLatestValidatorSet = ({
+  const useGetLatestValidatorSet = <TData = GetLatestValidatorSetResponse,>({
     request,
     options
   }: UseGetLatestValidatorSetQuery<TData>) => {
@@ -200,7 +200,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useGetValidatorSetByHeight = ({
+  const useGetValidatorSetByHeight = <TData = GetValidatorSetByHeightResponse,>({
     request,
     options
   }: UseGetValidatorSetByHeightQuery<TData>) => {

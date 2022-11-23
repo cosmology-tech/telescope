@@ -210,7 +210,7 @@ const getQueryService = (rpc: ProtobufRpcClient | undefined): QueryClientImpl | 
 export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
   const queryService = getQueryService(rpc);
 
-  const useBalance = ({
+  const useBalance = <TData = QueryBalanceResponse,>({
     request,
     options
   }: UseBalanceQuery<TData>) => {
@@ -220,7 +220,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useAllBalances = ({
+  const useAllBalances = <TData = QueryAllBalancesResponse,>({
     request,
     options
   }: UseAllBalancesQuery<TData>) => {
@@ -230,7 +230,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useSpendableBalances = ({
+  const useSpendableBalances = <TData = QuerySpendableBalancesResponse,>({
     request,
     options
   }: UseSpendableBalancesQuery<TData>) => {
@@ -240,7 +240,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useTotalSupply = ({
+  const useTotalSupply = <TData = QueryTotalSupplyResponse,>({
     request,
     options
   }: UseTotalSupplyQuery<TData>) => {
@@ -250,7 +250,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useSupplyOf = ({
+  const useSupplyOf = <TData = QuerySupplyOfResponse,>({
     request,
     options
   }: UseSupplyOfQuery<TData>) => {
@@ -260,7 +260,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useParams = ({
+  const useParams = <TData = QueryParamsResponse,>({
     request,
     options
   }: UseParamsQuery<TData>) => {
@@ -270,7 +270,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useDenomMetadata = ({
+  const useDenomMetadata = <TData = QueryDenomMetadataResponse,>({
     request,
     options
   }: UseDenomMetadataQuery<TData>) => {
@@ -280,7 +280,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useDenomsMetadata = ({
+  const useDenomsMetadata = <TData = QueryDenomsMetadataResponse,>({
     request,
     options
   }: UseDenomsMetadataQuery<TData>) => {
@@ -290,7 +290,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useDenomOwners = ({
+  const useDenomOwners = <TData = QueryDenomOwnersResponse,>({
     request,
     options
   }: UseDenomOwnersQuery<TData>) => {

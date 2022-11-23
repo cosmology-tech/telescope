@@ -144,7 +144,7 @@ const getQueryService = (rpc: ProtobufRpcClient | undefined): QueryClientImpl | 
 export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
   const queryService = getQueryService(rpc);
 
-  const useGaugeIds = ({
+  const useGaugeIds = <TData = QueryGaugeIdsResponse,>({
     request,
     options
   }: UseGaugeIdsQuery<TData>) => {
@@ -154,7 +154,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useDistrInfo = ({
+  const useDistrInfo = <TData = QueryDistrInfoResponse,>({
     request,
     options
   }: UseDistrInfoQuery<TData>) => {
@@ -164,7 +164,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useParams = ({
+  const useParams = <TData = QueryParamsResponse,>({
     request,
     options
   }: UseParamsQuery<TData>) => {
@@ -174,7 +174,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useLockableDurations = ({
+  const useLockableDurations = <TData = QueryLockableDurationsResponse,>({
     request,
     options
   }: UseLockableDurationsQuery<TData>) => {
@@ -184,7 +184,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useIncentivizedPools = ({
+  const useIncentivizedPools = <TData = QueryIncentivizedPoolsResponse,>({
     request,
     options
   }: UseIncentivizedPoolsQuery<TData>) => {
@@ -194,7 +194,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useExternalIncentiveGauges = ({
+  const useExternalIncentiveGauges = <TData = QueryExternalIncentiveGaugesResponse,>({
     request,
     options
   }: UseExternalIncentiveGaugesQuery<TData>) => {

@@ -323,7 +323,7 @@ const getQueryService = (rpc: ProtobufRpcClient | undefined): QueryClientImpl | 
 export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
   const queryService = getQueryService(rpc);
 
-  const useModuleBalance = ({
+  const useModuleBalance = <TData = ModuleBalanceResponse,>({
     request,
     options
   }: UseModuleBalanceQuery<TData>) => {
@@ -333,7 +333,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useModuleLockedAmount = ({
+  const useModuleLockedAmount = <TData = ModuleLockedAmountResponse,>({
     request,
     options
   }: UseModuleLockedAmountQuery<TData>) => {
@@ -343,7 +343,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useAccountUnlockableCoins = ({
+  const useAccountUnlockableCoins = <TData = AccountUnlockableCoinsResponse,>({
     request,
     options
   }: UseAccountUnlockableCoinsQuery<TData>) => {
@@ -353,7 +353,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useAccountUnlockingCoins = ({
+  const useAccountUnlockingCoins = <TData = AccountUnlockingCoinsResponse,>({
     request,
     options
   }: UseAccountUnlockingCoinsQuery<TData>) => {
@@ -363,7 +363,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useAccountLockedCoins = ({
+  const useAccountLockedCoins = <TData = AccountLockedCoinsResponse,>({
     request,
     options
   }: UseAccountLockedCoinsQuery<TData>) => {
@@ -373,7 +373,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useAccountLockedPastTime = ({
+  const useAccountLockedPastTime = <TData = AccountLockedPastTimeResponse,>({
     request,
     options
   }: UseAccountLockedPastTimeQuery<TData>) => {
@@ -383,7 +383,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useAccountLockedPastTimeNotUnlockingOnly = ({
+  const useAccountLockedPastTimeNotUnlockingOnly = <TData = AccountLockedPastTimeNotUnlockingOnlyResponse,>({
     request,
     options
   }: UseAccountLockedPastTimeNotUnlockingOnlyQuery<TData>) => {
@@ -393,7 +393,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useAccountUnlockedBeforeTime = ({
+  const useAccountUnlockedBeforeTime = <TData = AccountUnlockedBeforeTimeResponse,>({
     request,
     options
   }: UseAccountUnlockedBeforeTimeQuery<TData>) => {
@@ -403,7 +403,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useAccountLockedPastTimeDenom = ({
+  const useAccountLockedPastTimeDenom = <TData = AccountLockedPastTimeDenomResponse,>({
     request,
     options
   }: UseAccountLockedPastTimeDenomQuery<TData>) => {
@@ -413,7 +413,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useLockedDenom = ({
+  const useLockedDenom = <TData = LockedDenomResponse,>({
     request,
     options
   }: UseLockedDenomQuery<TData>) => {
@@ -423,7 +423,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useLockedByID = ({
+  const useLockedByID = <TData = LockedResponse,>({
     request,
     options
   }: UseLockedByIDQuery<TData>) => {
@@ -433,7 +433,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useSyntheticLockupsByLockupID = ({
+  const useSyntheticLockupsByLockupID = <TData = SyntheticLockupsByLockupIDResponse,>({
     request,
     options
   }: UseSyntheticLockupsByLockupIDQuery<TData>) => {
@@ -443,7 +443,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useAccountLockedLongerDuration = ({
+  const useAccountLockedLongerDuration = <TData = AccountLockedLongerDurationResponse,>({
     request,
     options
   }: UseAccountLockedLongerDurationQuery<TData>) => {
@@ -453,7 +453,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useAccountLockedDuration = ({
+  const useAccountLockedDuration = <TData = AccountLockedDurationResponse,>({
     request,
     options
   }: UseAccountLockedDurationQuery<TData>) => {
@@ -463,7 +463,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useAccountLockedLongerDurationNotUnlockingOnly = ({
+  const useAccountLockedLongerDurationNotUnlockingOnly = <TData = AccountLockedLongerDurationNotUnlockingOnlyResponse,>({
     request,
     options
   }: UseAccountLockedLongerDurationNotUnlockingOnlyQuery<TData>) => {
@@ -473,7 +473,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useAccountLockedLongerDurationDenom = ({
+  const useAccountLockedLongerDurationDenom = <TData = AccountLockedLongerDurationDenomResponse,>({
     request,
     options
   }: UseAccountLockedLongerDurationDenomQuery<TData>) => {

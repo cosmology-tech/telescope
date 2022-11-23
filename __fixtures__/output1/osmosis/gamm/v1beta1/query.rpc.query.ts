@@ -226,7 +226,7 @@ const getQueryService = (rpc: ProtobufRpcClient | undefined): QueryClientImpl | 
 export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
   const queryService = getQueryService(rpc);
 
-  const usePools = ({
+  const usePools = <TData = QueryPoolsResponse,>({
     request,
     options
   }: UsePoolsQuery<TData>) => {
@@ -236,7 +236,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useNumPools = ({
+  const useNumPools = <TData = QueryNumPoolsResponse,>({
     request,
     options
   }: UseNumPoolsQuery<TData>) => {
@@ -246,7 +246,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useTotalLiquidity = ({
+  const useTotalLiquidity = <TData = QueryTotalLiquidityResponse,>({
     request,
     options
   }: UseTotalLiquidityQuery<TData>) => {
@@ -256,7 +256,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const usePool = ({
+  const usePool = <TData = QueryPoolResponse,>({
     request,
     options
   }: UsePoolQuery<TData>) => {
@@ -266,7 +266,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const usePoolType = ({
+  const usePoolType = <TData = QueryPoolTypeResponse,>({
     request,
     options
   }: UsePoolTypeQuery<TData>) => {
@@ -276,7 +276,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const usePoolParams = ({
+  const usePoolParams = <TData = QueryPoolParamsResponse,>({
     request,
     options
   }: UsePoolParamsQuery<TData>) => {
@@ -286,7 +286,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useTotalPoolLiquidity = ({
+  const useTotalPoolLiquidity = <TData = QueryTotalPoolLiquidityResponse,>({
     request,
     options
   }: UseTotalPoolLiquidityQuery<TData>) => {
@@ -296,7 +296,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useTotalShares = ({
+  const useTotalShares = <TData = QueryTotalSharesResponse,>({
     request,
     options
   }: UseTotalSharesQuery<TData>) => {
@@ -306,7 +306,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useSpotPrice = ({
+  const useSpotPrice = <TData = QuerySpotPriceResponse,>({
     request,
     options
   }: UseSpotPriceQuery<TData>) => {
@@ -316,7 +316,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useEstimateSwapExactAmountIn = ({
+  const useEstimateSwapExactAmountIn = <TData = QuerySwapExactAmountInResponse,>({
     request,
     options
   }: UseEstimateSwapExactAmountInQuery<TData>) => {
@@ -326,7 +326,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useEstimateSwapExactAmountOut = ({
+  const useEstimateSwapExactAmountOut = <TData = QuerySwapExactAmountOutResponse,>({
     request,
     options
   }: UseEstimateSwapExactAmountOutQuery<TData>) => {

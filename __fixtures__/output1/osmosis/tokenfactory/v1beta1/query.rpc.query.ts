@@ -103,7 +103,7 @@ const getQueryService = (rpc: ProtobufRpcClient | undefined): QueryClientImpl | 
 export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
   const queryService = getQueryService(rpc);
 
-  const useParams = ({
+  const useParams = <TData = QueryParamsResponse,>({
     request,
     options
   }: UseParamsQuery<TData>) => {
@@ -113,7 +113,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useDenomAuthorityMetadata = ({
+  const useDenomAuthorityMetadata = <TData = QueryDenomAuthorityMetadataResponse,>({
     request,
     options
   }: UseDenomAuthorityMetadataQuery<TData>) => {
@@ -123,7 +123,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useDenomsFromCreator = ({
+  const useDenomsFromCreator = <TData = QueryDenomsFromCreatorResponse,>({
     request,
     options
   }: UseDenomsFromCreatorQuery<TData>) => {

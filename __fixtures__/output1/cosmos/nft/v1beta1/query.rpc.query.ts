@@ -167,7 +167,7 @@ const getQueryService = (rpc: ProtobufRpcClient | undefined): QueryClientImpl | 
 export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
   const queryService = getQueryService(rpc);
 
-  const useBalance = ({
+  const useBalance = <TData = QueryBalanceResponse,>({
     request,
     options
   }: UseBalanceQuery<TData>) => {
@@ -177,7 +177,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useOwner = ({
+  const useOwner = <TData = QueryOwnerResponse,>({
     request,
     options
   }: UseOwnerQuery<TData>) => {
@@ -187,7 +187,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useSupply = ({
+  const useSupply = <TData = QuerySupplyResponse,>({
     request,
     options
   }: UseSupplyQuery<TData>) => {
@@ -197,7 +197,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useNFTs = ({
+  const useNFTs = <TData = QueryNFTsResponse,>({
     request,
     options
   }: UseNFTsQuery<TData>) => {
@@ -207,7 +207,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useNFT = ({
+  const useNFT = <TData = QueryNFTResponse,>({
     request,
     options
   }: UseNFTQuery<TData>) => {
@@ -217,7 +217,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useClass = ({
+  const useClass = <TData = QueryClassResponse,>({
     request,
     options
   }: UseClassQuery<TData>) => {
@@ -227,7 +227,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useClasses = ({
+  const useClasses = <TData = QueryClassesResponse,>({
     request,
     options
   }: UseClassesQuery<TData>) => {

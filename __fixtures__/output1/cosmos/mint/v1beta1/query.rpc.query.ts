@@ -93,7 +93,7 @@ const getQueryService = (rpc: ProtobufRpcClient | undefined): QueryClientImpl | 
 export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
   const queryService = getQueryService(rpc);
 
-  const useParams = ({
+  const useParams = <TData = QueryParamsResponse,>({
     request,
     options
   }: UseParamsQuery<TData>) => {
@@ -103,7 +103,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useInflation = ({
+  const useInflation = <TData = QueryInflationResponse,>({
     request,
     options
   }: UseInflationQuery<TData>) => {
@@ -113,7 +113,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useAnnualProvisions = ({
+  const useAnnualProvisions = <TData = QueryAnnualProvisionsResponse,>({
     request,
     options
   }: UseAnnualProvisionsQuery<TData>) => {

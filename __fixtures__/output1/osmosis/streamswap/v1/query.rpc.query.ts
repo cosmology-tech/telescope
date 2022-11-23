@@ -94,7 +94,7 @@ const getQueryService = (rpc: ProtobufRpcClient | undefined): QueryClientImpl | 
 export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
   const queryService = getQueryService(rpc);
 
-  const useSales = ({
+  const useSales = <TData = QuerySalesResponse,>({
     request,
     options
   }: UseSalesQuery<TData>) => {
@@ -104,7 +104,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useSale = ({
+  const useSale = <TData = QuerySaleResponse,>({
     request,
     options
   }: UseSaleQuery<TData>) => {
@@ -114,7 +114,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useUserPosition = ({
+  const useUserPosition = <TData = QueryUserPositionResponse,>({
     request,
     options
   }: UseUserPositionQuery<TData>) => {

@@ -117,7 +117,7 @@ const getQueryService = (rpc: ProtobufRpcClient | undefined): QueryClientImpl | 
 export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
   const queryService = getQueryService(rpc);
 
-  const useDevFeeInfos = ({
+  const useDevFeeInfos = <TData = QueryDevFeeInfosResponse,>({
     request,
     options
   }: UseDevFeeInfosQuery<TData>) => {
@@ -127,7 +127,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useDevFeeInfo = ({
+  const useDevFeeInfo = <TData = QueryDevFeeInfoResponse,>({
     request,
     options
   }: UseDevFeeInfoQuery<TData>) => {
@@ -137,7 +137,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useParams = ({
+  const useParams = <TData = QueryParamsResponse,>({
     request,
     options
   }: UseParamsQuery<TData>) => {
@@ -147,7 +147,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useDevFeeInfosPerDeployer = ({
+  const useDevFeeInfosPerDeployer = <TData = QueryDevFeeInfosPerDeployerResponse,>({
     request,
     options
   }: UseDevFeeInfosPerDeployerQuery<TData>) => {

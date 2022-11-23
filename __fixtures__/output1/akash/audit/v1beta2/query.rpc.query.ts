@@ -136,7 +136,7 @@ const getQueryService = (rpc: ProtobufRpcClient | undefined): QueryClientImpl | 
 export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
   const queryService = getQueryService(rpc);
 
-  const useAllProvidersAttributes = ({
+  const useAllProvidersAttributes = <TData = QueryProvidersResponse,>({
     request,
     options
   }: UseAllProvidersAttributesQuery<TData>) => {
@@ -146,7 +146,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useProviderAttributes = ({
+  const useProviderAttributes = <TData = QueryProvidersResponse,>({
     request,
     options
   }: UseProviderAttributesQuery<TData>) => {
@@ -156,7 +156,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useProviderAuditorAttributes = ({
+  const useProviderAuditorAttributes = <TData = QueryProvidersResponse,>({
     request,
     options
   }: UseProviderAuditorAttributesQuery<TData>) => {
@@ -166,7 +166,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useAuditorAttributes = ({
+  const useAuditorAttributes = <TData = QueryProvidersResponse,>({
     request,
     options
   }: UseAuditorAttributesQuery<TData>) => {

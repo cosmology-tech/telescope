@@ -264,7 +264,7 @@ const getQueryService = (rpc: ProtobufRpcClient | undefined): QueryClientImpl | 
 export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
   const queryService = getQueryService(rpc);
 
-  const useGroupInfo = ({
+  const useGroupInfo = <TData = QueryGroupInfoResponse,>({
     request,
     options
   }: UseGroupInfoQuery<TData>) => {
@@ -274,7 +274,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useGroupPolicyInfo = ({
+  const useGroupPolicyInfo = <TData = QueryGroupPolicyInfoResponse,>({
     request,
     options
   }: UseGroupPolicyInfoQuery<TData>) => {
@@ -284,7 +284,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useGroupMembers = ({
+  const useGroupMembers = <TData = QueryGroupMembersResponse,>({
     request,
     options
   }: UseGroupMembersQuery<TData>) => {
@@ -294,7 +294,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useGroupsByAdmin = ({
+  const useGroupsByAdmin = <TData = QueryGroupsByAdminResponse,>({
     request,
     options
   }: UseGroupsByAdminQuery<TData>) => {
@@ -304,7 +304,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useGroupPoliciesByGroup = ({
+  const useGroupPoliciesByGroup = <TData = QueryGroupPoliciesByGroupResponse,>({
     request,
     options
   }: UseGroupPoliciesByGroupQuery<TData>) => {
@@ -314,7 +314,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useGroupPoliciesByAdmin = ({
+  const useGroupPoliciesByAdmin = <TData = QueryGroupPoliciesByAdminResponse,>({
     request,
     options
   }: UseGroupPoliciesByAdminQuery<TData>) => {
@@ -324,7 +324,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useProposal = ({
+  const useProposal = <TData = QueryProposalResponse,>({
     request,
     options
   }: UseProposalQuery<TData>) => {
@@ -334,7 +334,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useProposalsByGroupPolicy = ({
+  const useProposalsByGroupPolicy = <TData = QueryProposalsByGroupPolicyResponse,>({
     request,
     options
   }: UseProposalsByGroupPolicyQuery<TData>) => {
@@ -344,7 +344,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useVoteByProposalVoter = ({
+  const useVoteByProposalVoter = <TData = QueryVoteByProposalVoterResponse,>({
     request,
     options
   }: UseVoteByProposalVoterQuery<TData>) => {
@@ -354,7 +354,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useVotesByProposal = ({
+  const useVotesByProposal = <TData = QueryVotesByProposalResponse,>({
     request,
     options
   }: UseVotesByProposalQuery<TData>) => {
@@ -364,7 +364,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useVotesByVoter = ({
+  const useVotesByVoter = <TData = QueryVotesByVoterResponse,>({
     request,
     options
   }: UseVotesByVoterQuery<TData>) => {
@@ -374,7 +374,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useGroupsByMember = ({
+  const useGroupsByMember = <TData = QueryGroupsByMemberResponse,>({
     request,
     options
   }: UseGroupsByMemberQuery<TData>) => {
@@ -384,7 +384,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useTallyResult = ({
+  const useTallyResult = <TData = QueryTallyResultResponse,>({
     request,
     options
   }: UseTallyResultQuery<TData>) => {

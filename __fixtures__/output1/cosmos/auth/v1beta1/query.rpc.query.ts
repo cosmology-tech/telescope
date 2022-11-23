@@ -169,7 +169,7 @@ const getQueryService = (rpc: ProtobufRpcClient | undefined): QueryClientImpl | 
 export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
   const queryService = getQueryService(rpc);
 
-  const useAccounts = ({
+  const useAccounts = <TData = QueryAccountsResponse,>({
     request,
     options
   }: UseAccountsQuery<TData>) => {
@@ -179,7 +179,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useAccount = ({
+  const useAccount = <TData = QueryAccountResponse,>({
     request,
     options
   }: UseAccountQuery<TData>) => {
@@ -189,7 +189,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useParams = ({
+  const useParams = <TData = QueryParamsResponse,>({
     request,
     options
   }: UseParamsQuery<TData>) => {
@@ -199,7 +199,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useModuleAccounts = ({
+  const useModuleAccounts = <TData = QueryModuleAccountsResponse,>({
     request,
     options
   }: UseModuleAccountsQuery<TData>) => {
@@ -209,7 +209,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useBech32Prefix = ({
+  const useBech32Prefix = <TData = Bech32PrefixResponse,>({
     request,
     options
   }: UseBech32PrefixQuery<TData>) => {
@@ -219,7 +219,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useAddressBytesToString = ({
+  const useAddressBytesToString = <TData = AddressBytesToStringResponse,>({
     request,
     options
   }: UseAddressBytesToStringQuery<TData>) => {
@@ -229,7 +229,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useAddressStringToBytes = ({
+  const useAddressStringToBytes = <TData = AddressStringToBytesResponse,>({
     request,
     options
   }: UseAddressStringToBytesQuery<TData>) => {

@@ -270,7 +270,7 @@ const getQueryService = (rpc: ProtobufRpcClient | undefined): QueryClientImpl | 
 export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
   const queryService = getQueryService(rpc);
 
-  const useEcho = ({
+  const useEcho = <TData = ResponseEcho,>({
     request,
     options
   }: UseEchoQuery<TData>) => {
@@ -280,7 +280,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useFlush = ({
+  const useFlush = <TData = ResponseFlush,>({
     request,
     options
   }: UseFlushQuery<TData>) => {
@@ -290,7 +290,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useInfo = ({
+  const useInfo = <TData = ResponseInfo,>({
     request,
     options
   }: UseInfoQuery<TData>) => {
@@ -300,7 +300,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useSetOption = ({
+  const useSetOption = <TData = ResponseSetOption,>({
     request,
     options
   }: UseSetOptionQuery<TData>) => {
@@ -310,7 +310,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useDeliverTx = ({
+  const useDeliverTx = <TData = ResponseDeliverTx,>({
     request,
     options
   }: UseDeliverTxQuery<TData>) => {
@@ -320,7 +320,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useCheckTx = ({
+  const useCheckTx = <TData = ResponseCheckTx,>({
     request,
     options
   }: UseCheckTxQuery<TData>) => {
@@ -330,7 +330,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useQuery = ({
+  const useQuery = <TData = ResponseQuery,>({
     request,
     options
   }: UseQueryQuery<TData>) => {
@@ -340,7 +340,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useCommit = ({
+  const useCommit = <TData = ResponseCommit,>({
     request,
     options
   }: UseCommitQuery<TData>) => {
@@ -350,7 +350,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useInitChain = ({
+  const useInitChain = <TData = ResponseInitChain,>({
     request,
     options
   }: UseInitChainQuery<TData>) => {
@@ -360,7 +360,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useBeginBlock = ({
+  const useBeginBlock = <TData = ResponseBeginBlock,>({
     request,
     options
   }: UseBeginBlockQuery<TData>) => {
@@ -370,7 +370,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useEndBlock = ({
+  const useEndBlock = <TData = ResponseEndBlock,>({
     request,
     options
   }: UseEndBlockQuery<TData>) => {
@@ -380,7 +380,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useListSnapshots = ({
+  const useListSnapshots = <TData = ResponseListSnapshots,>({
     request,
     options
   }: UseListSnapshotsQuery<TData>) => {
@@ -390,7 +390,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useOfferSnapshot = ({
+  const useOfferSnapshot = <TData = ResponseOfferSnapshot,>({
     request,
     options
   }: UseOfferSnapshotQuery<TData>) => {
@@ -400,7 +400,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useLoadSnapshotChunk = ({
+  const useLoadSnapshotChunk = <TData = ResponseLoadSnapshotChunk,>({
     request,
     options
   }: UseLoadSnapshotChunkQuery<TData>) => {
@@ -410,7 +410,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useApplySnapshotChunk = ({
+  const useApplySnapshotChunk = <TData = ResponseApplySnapshotChunk,>({
     request,
     options
   }: UseApplySnapshotChunkQuery<TData>) => {

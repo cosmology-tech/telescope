@@ -59,7 +59,7 @@ const getQueryService = (rpc: ProtobufRpcClient | undefined): QueryClientImpl | 
 export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
   const queryService = getQueryService(rpc);
 
-  const useBalances = ({
+  const useBalances = <TData = QueryBalancesResponse,>({
     request,
     options
   }: UseBalancesQuery<TData>) => {

@@ -102,7 +102,7 @@ const getQueryService = (rpc: ProtobufRpcClient | undefined): QueryClientImpl | 
 export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
   const queryService = getQueryService(rpc);
 
-  const useGrants = ({
+  const useGrants = <TData = QueryGrantsResponse,>({
     request,
     options
   }: UseGrantsQuery<TData>) => {
@@ -112,7 +112,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useGranterGrants = ({
+  const useGranterGrants = <TData = QueryGranterGrantsResponse,>({
     request,
     options
   }: UseGranterGrantsQuery<TData>) => {
@@ -122,7 +122,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useGranteeGrants = ({
+  const useGranteeGrants = <TData = QueryGranteeGrantsResponse,>({
     request,
     options
   }: UseGranteeGrantsQuery<TData>) => {

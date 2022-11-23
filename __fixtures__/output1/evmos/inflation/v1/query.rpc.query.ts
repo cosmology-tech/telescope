@@ -148,7 +148,7 @@ const getQueryService = (rpc: ProtobufRpcClient | undefined): QueryClientImpl | 
 export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
   const queryService = getQueryService(rpc);
 
-  const usePeriod = ({
+  const usePeriod = <TData = QueryPeriodResponse,>({
     request,
     options
   }: UsePeriodQuery<TData>) => {
@@ -158,7 +158,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useEpochMintProvision = ({
+  const useEpochMintProvision = <TData = QueryEpochMintProvisionResponse,>({
     request,
     options
   }: UseEpochMintProvisionQuery<TData>) => {
@@ -168,7 +168,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useSkippedEpochs = ({
+  const useSkippedEpochs = <TData = QuerySkippedEpochsResponse,>({
     request,
     options
   }: UseSkippedEpochsQuery<TData>) => {
@@ -178,7 +178,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useCirculatingSupply = ({
+  const useCirculatingSupply = <TData = QueryCirculatingSupplyResponse,>({
     request,
     options
   }: UseCirculatingSupplyQuery<TData>) => {
@@ -188,7 +188,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useInflationRate = ({
+  const useInflationRate = <TData = QueryInflationRateResponse,>({
     request,
     options
   }: UseInflationRateQuery<TData>) => {
@@ -198,7 +198,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useParams = ({
+  const useParams = <TData = QueryParamsResponse,>({
     request,
     options
   }: UseParamsQuery<TData>) => {

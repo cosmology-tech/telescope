@@ -96,7 +96,7 @@ const getQueryService = (rpc: ProtobufRpcClient | undefined): QueryClientImpl | 
 export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
   const queryService = getQueryService(rpc);
 
-  const useDenomTrace = ({
+  const useDenomTrace = <TData = QueryDenomTraceResponse,>({
     request,
     options
   }: UseDenomTraceQuery<TData>) => {
@@ -106,7 +106,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useDenomTraces = ({
+  const useDenomTraces = <TData = QueryDenomTracesResponse,>({
     request,
     options
   }: UseDenomTracesQuery<TData>) => {
@@ -116,7 +116,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useParams = ({
+  const useParams = <TData = QueryParamsResponse,>({
     request,
     options
   }: UseParamsQuery<TData>) => {

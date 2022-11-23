@@ -81,7 +81,7 @@ const getQueryService = (rpc: ProtobufRpcClient | undefined): QueryClientImpl | 
 export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
   const queryService = getQueryService(rpc);
 
-  const useListAllInterfaces = ({
+  const useListAllInterfaces = <TData = ListAllInterfacesResponse,>({
     request,
     options
   }: UseListAllInterfacesQuery<TData>) => {
@@ -91,7 +91,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useListImplementations = ({
+  const useListImplementations = <TData = ListImplementationsResponse,>({
     request,
     options
   }: UseListImplementationsQuery<TData>) => {

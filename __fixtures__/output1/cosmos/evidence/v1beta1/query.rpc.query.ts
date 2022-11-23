@@ -79,7 +79,7 @@ const getQueryService = (rpc: ProtobufRpcClient | undefined): QueryClientImpl | 
 export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
   const queryService = getQueryService(rpc);
 
-  const useEvidence = ({
+  const useEvidence = <TData = QueryEvidenceResponse,>({
     request,
     options
   }: UseEvidenceQuery<TData>) => {
@@ -89,7 +89,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useAllEvidence = ({
+  const useAllEvidence = <TData = QueryAllEvidenceResponse,>({
     request,
     options
   }: UseAllEvidenceQuery<TData>) => {

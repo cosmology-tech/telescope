@@ -79,7 +79,7 @@ const getQueryService = (rpc: ProtobufRpcClient | undefined): QueryClientImpl | 
 export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
   const queryService = getQueryService(rpc);
 
-  const useEpochInfos = ({
+  const useEpochInfos = <TData = QueryEpochsInfoResponse,>({
     request,
     options
   }: UseEpochInfosQuery<TData>) => {
@@ -89,7 +89,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useCurrentEpoch = ({
+  const useCurrentEpoch = <TData = QueryCurrentEpochResponse,>({
     request,
     options
   }: UseCurrentEpochQuery<TData>) => {

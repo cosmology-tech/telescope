@@ -292,7 +292,7 @@ const getQueryService = (rpc: ProtobufRpcClient | undefined): QueryClientImpl | 
 export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
   const queryService = getQueryService(rpc);
 
-  const useChannel = ({
+  const useChannel = <TData = QueryChannelResponse,>({
     request,
     options
   }: UseChannelQuery<TData>) => {
@@ -302,7 +302,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useChannels = ({
+  const useChannels = <TData = QueryChannelsResponse,>({
     request,
     options
   }: UseChannelsQuery<TData>) => {
@@ -312,7 +312,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useConnectionChannels = ({
+  const useConnectionChannels = <TData = QueryConnectionChannelsResponse,>({
     request,
     options
   }: UseConnectionChannelsQuery<TData>) => {
@@ -322,7 +322,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useChannelClientState = ({
+  const useChannelClientState = <TData = QueryChannelClientStateResponse,>({
     request,
     options
   }: UseChannelClientStateQuery<TData>) => {
@@ -332,7 +332,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useChannelConsensusState = ({
+  const useChannelConsensusState = <TData = QueryChannelConsensusStateResponse,>({
     request,
     options
   }: UseChannelConsensusStateQuery<TData>) => {
@@ -342,7 +342,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const usePacketCommitment = ({
+  const usePacketCommitment = <TData = QueryPacketCommitmentResponse,>({
     request,
     options
   }: UsePacketCommitmentQuery<TData>) => {
@@ -352,7 +352,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const usePacketCommitments = ({
+  const usePacketCommitments = <TData = QueryPacketCommitmentsResponse,>({
     request,
     options
   }: UsePacketCommitmentsQuery<TData>) => {
@@ -362,7 +362,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const usePacketReceipt = ({
+  const usePacketReceipt = <TData = QueryPacketReceiptResponse,>({
     request,
     options
   }: UsePacketReceiptQuery<TData>) => {
@@ -372,7 +372,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const usePacketAcknowledgement = ({
+  const usePacketAcknowledgement = <TData = QueryPacketAcknowledgementResponse,>({
     request,
     options
   }: UsePacketAcknowledgementQuery<TData>) => {
@@ -382,7 +382,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const usePacketAcknowledgements = ({
+  const usePacketAcknowledgements = <TData = QueryPacketAcknowledgementsResponse,>({
     request,
     options
   }: UsePacketAcknowledgementsQuery<TData>) => {
@@ -392,7 +392,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useUnreceivedPackets = ({
+  const useUnreceivedPackets = <TData = QueryUnreceivedPacketsResponse,>({
     request,
     options
   }: UseUnreceivedPacketsQuery<TData>) => {
@@ -402,7 +402,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useUnreceivedAcks = ({
+  const useUnreceivedAcks = <TData = QueryUnreceivedAcksResponse,>({
     request,
     options
   }: UseUnreceivedAcksQuery<TData>) => {
@@ -412,7 +412,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useNextSequenceReceive = ({
+  const useNextSequenceReceive = <TData = QueryNextSequenceReceiveResponse,>({
     request,
     options
   }: UseNextSequenceReceiveQuery<TData>) => {

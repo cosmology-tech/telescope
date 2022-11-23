@@ -97,7 +97,7 @@ const getQueryService = (rpc: ProtobufRpcClient | undefined): QueryClientImpl | 
 export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
   const queryService = getQueryService(rpc);
 
-  const useAllowance = ({
+  const useAllowance = <TData = QueryAllowanceResponse,>({
     request,
     options
   }: UseAllowanceQuery<TData>) => {
@@ -107,7 +107,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useAllowances = ({
+  const useAllowances = <TData = QueryAllowancesResponse,>({
     request,
     options
   }: UseAllowancesQuery<TData>) => {
@@ -117,7 +117,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useAllowancesByGranter = ({
+  const useAllowancesByGranter = <TData = QueryAllowancesByGranterResponse,>({
     request,
     options
   }: UseAllowancesByGranterQuery<TData>) => {

@@ -200,7 +200,7 @@ const getQueryService = (rpc: ProtobufRpcClient | undefined): QueryClientImpl | 
 export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
   const queryService = getQueryService(rpc);
 
-  const useParams = ({
+  const useParams = <TData = QueryParamsResponse,>({
     request,
     options
   }: UseParamsQuery<TData>) => {
@@ -210,7 +210,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useValidatorOutstandingRewards = ({
+  const useValidatorOutstandingRewards = <TData = QueryValidatorOutstandingRewardsResponse,>({
     request,
     options
   }: UseValidatorOutstandingRewardsQuery<TData>) => {
@@ -220,7 +220,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useValidatorCommission = ({
+  const useValidatorCommission = <TData = QueryValidatorCommissionResponse,>({
     request,
     options
   }: UseValidatorCommissionQuery<TData>) => {
@@ -230,7 +230,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useValidatorSlashes = ({
+  const useValidatorSlashes = <TData = QueryValidatorSlashesResponse,>({
     request,
     options
   }: UseValidatorSlashesQuery<TData>) => {
@@ -240,7 +240,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useDelegationRewards = ({
+  const useDelegationRewards = <TData = QueryDelegationRewardsResponse,>({
     request,
     options
   }: UseDelegationRewardsQuery<TData>) => {
@@ -250,7 +250,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useDelegationTotalRewards = ({
+  const useDelegationTotalRewards = <TData = QueryDelegationTotalRewardsResponse,>({
     request,
     options
   }: UseDelegationTotalRewardsQuery<TData>) => {
@@ -260,7 +260,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useDelegatorValidators = ({
+  const useDelegatorValidators = <TData = QueryDelegatorValidatorsResponse,>({
     request,
     options
   }: UseDelegatorValidatorsQuery<TData>) => {
@@ -270,7 +270,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useDelegatorWithdrawAddress = ({
+  const useDelegatorWithdrawAddress = <TData = QueryDelegatorWithdrawAddressResponse,>({
     request,
     options
   }: UseDelegatorWithdrawAddressQuery<TData>) => {
@@ -280,7 +280,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useCommunityPool = ({
+  const useCommunityPool = <TData = QueryCommunityPoolResponse,>({
     request,
     options
   }: UseCommunityPoolQuery<TData>) => {

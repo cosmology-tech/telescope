@@ -293,7 +293,7 @@ const getQueryService = (rpc: ProtobufRpcClient | undefined): QueryClientImpl | 
 export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
   const queryService = getQueryService(rpc);
 
-  const useValidators = ({
+  const useValidators = <TData = QueryValidatorsResponse,>({
     request,
     options
   }: UseValidatorsQuery<TData>) => {
@@ -303,7 +303,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useValidator = ({
+  const useValidator = <TData = QueryValidatorResponse,>({
     request,
     options
   }: UseValidatorQuery<TData>) => {
@@ -313,7 +313,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useValidatorDelegations = ({
+  const useValidatorDelegations = <TData = QueryValidatorDelegationsResponse,>({
     request,
     options
   }: UseValidatorDelegationsQuery<TData>) => {
@@ -323,7 +323,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useValidatorUnbondingDelegations = ({
+  const useValidatorUnbondingDelegations = <TData = QueryValidatorUnbondingDelegationsResponse,>({
     request,
     options
   }: UseValidatorUnbondingDelegationsQuery<TData>) => {
@@ -333,7 +333,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useDelegation = ({
+  const useDelegation = <TData = QueryDelegationResponse,>({
     request,
     options
   }: UseDelegationQuery<TData>) => {
@@ -343,7 +343,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useUnbondingDelegation = ({
+  const useUnbondingDelegation = <TData = QueryUnbondingDelegationResponse,>({
     request,
     options
   }: UseUnbondingDelegationQuery<TData>) => {
@@ -353,7 +353,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useDelegatorDelegations = ({
+  const useDelegatorDelegations = <TData = QueryDelegatorDelegationsResponse,>({
     request,
     options
   }: UseDelegatorDelegationsQuery<TData>) => {
@@ -363,7 +363,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useDelegatorUnbondingDelegations = ({
+  const useDelegatorUnbondingDelegations = <TData = QueryDelegatorUnbondingDelegationsResponse,>({
     request,
     options
   }: UseDelegatorUnbondingDelegationsQuery<TData>) => {
@@ -373,7 +373,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useRedelegations = ({
+  const useRedelegations = <TData = QueryRedelegationsResponse,>({
     request,
     options
   }: UseRedelegationsQuery<TData>) => {
@@ -383,7 +383,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useDelegatorValidators = ({
+  const useDelegatorValidators = <TData = QueryDelegatorValidatorsResponse,>({
     request,
     options
   }: UseDelegatorValidatorsQuery<TData>) => {
@@ -393,7 +393,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useDelegatorValidator = ({
+  const useDelegatorValidator = <TData = QueryDelegatorValidatorResponse,>({
     request,
     options
   }: UseDelegatorValidatorQuery<TData>) => {
@@ -403,7 +403,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useHistoricalInfo = ({
+  const useHistoricalInfo = <TData = QueryHistoricalInfoResponse,>({
     request,
     options
   }: UseHistoricalInfoQuery<TData>) => {
@@ -413,7 +413,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const usePool = ({
+  const usePool = <TData = QueryPoolResponse,>({
     request,
     options
   }: UsePoolQuery<TData>) => {
@@ -423,7 +423,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useParams = ({
+  const useParams = <TData = QueryParamsResponse,>({
     request,
     options
   }: UseParamsQuery<TData>) => {

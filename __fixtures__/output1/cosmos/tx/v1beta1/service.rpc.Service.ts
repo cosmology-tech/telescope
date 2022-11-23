@@ -135,7 +135,7 @@ const getQueryService = (rpc: ProtobufRpcClient | undefined): QueryClientImpl | 
 export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
   const queryService = getQueryService(rpc);
 
-  const useSimulate = ({
+  const useSimulate = <TData = SimulateResponse,>({
     request,
     options
   }: UseSimulateQuery<TData>) => {
@@ -145,7 +145,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useGetTx = ({
+  const useGetTx = <TData = GetTxResponse,>({
     request,
     options
   }: UseGetTxQuery<TData>) => {
@@ -155,7 +155,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useBroadcastTx = ({
+  const useBroadcastTx = <TData = BroadcastTxResponse,>({
     request,
     options
   }: UseBroadcastTxQuery<TData>) => {
@@ -165,7 +165,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useGetTxsEvent = ({
+  const useGetTxsEvent = <TData = GetTxsEventResponse,>({
     request,
     options
   }: UseGetTxsEventQuery<TData>) => {
@@ -175,7 +175,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useGetBlockWithTxs = ({
+  const useGetBlockWithTxs = <TData = GetBlockWithTxsResponse,>({
     request,
     options
   }: UseGetBlockWithTxsQuery<TData>) => {

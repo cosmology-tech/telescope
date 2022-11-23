@@ -171,7 +171,7 @@ const getQueryService = (rpc: ProtobufRpcClient | undefined): QueryClientImpl | 
 export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
   const queryService = getQueryService(rpc);
 
-  const useIncentives = ({
+  const useIncentives = <TData = QueryIncentivesResponse,>({
     request,
     options
   }: UseIncentivesQuery<TData>) => {
@@ -181,7 +181,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useIncentive = ({
+  const useIncentive = <TData = QueryIncentiveResponse,>({
     request,
     options
   }: UseIncentiveQuery<TData>) => {
@@ -191,7 +191,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useGasMeters = ({
+  const useGasMeters = <TData = QueryGasMetersResponse,>({
     request,
     options
   }: UseGasMetersQuery<TData>) => {
@@ -201,7 +201,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useGasMeter = ({
+  const useGasMeter = <TData = QueryGasMeterResponse,>({
     request,
     options
   }: UseGasMeterQuery<TData>) => {
@@ -211,7 +211,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useAllocationMeters = ({
+  const useAllocationMeters = <TData = QueryAllocationMetersResponse,>({
     request,
     options
   }: UseAllocationMetersQuery<TData>) => {
@@ -221,7 +221,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useAllocationMeter = ({
+  const useAllocationMeter = <TData = QueryAllocationMeterResponse,>({
     request,
     options
   }: UseAllocationMeterQuery<TData>) => {
@@ -231,7 +231,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useParams = ({
+  const useParams = <TData = QueryParamsResponse,>({
     request,
     options
   }: UseParamsQuery<TData>) => {

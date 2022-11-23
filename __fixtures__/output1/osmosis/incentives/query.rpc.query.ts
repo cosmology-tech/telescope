@@ -234,7 +234,7 @@ const getQueryService = (rpc: ProtobufRpcClient | undefined): QueryClientImpl | 
 export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
   const queryService = getQueryService(rpc);
 
-  const useModuleToDistributeCoins = ({
+  const useModuleToDistributeCoins = <TData = ModuleToDistributeCoinsResponse,>({
     request,
     options
   }: UseModuleToDistributeCoinsQuery<TData>) => {
@@ -244,7 +244,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useModuleDistributedCoins = ({
+  const useModuleDistributedCoins = <TData = ModuleDistributedCoinsResponse,>({
     request,
     options
   }: UseModuleDistributedCoinsQuery<TData>) => {
@@ -254,7 +254,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useGaugeByID = ({
+  const useGaugeByID = <TData = GaugeByIDResponse,>({
     request,
     options
   }: UseGaugeByIDQuery<TData>) => {
@@ -264,7 +264,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useGauges = ({
+  const useGauges = <TData = GaugesResponse,>({
     request,
     options
   }: UseGaugesQuery<TData>) => {
@@ -274,7 +274,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useActiveGauges = ({
+  const useActiveGauges = <TData = ActiveGaugesResponse,>({
     request,
     options
   }: UseActiveGaugesQuery<TData>) => {
@@ -284,7 +284,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useActiveGaugesPerDenom = ({
+  const useActiveGaugesPerDenom = <TData = ActiveGaugesPerDenomResponse,>({
     request,
     options
   }: UseActiveGaugesPerDenomQuery<TData>) => {
@@ -294,7 +294,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useUpcomingGauges = ({
+  const useUpcomingGauges = <TData = UpcomingGaugesResponse,>({
     request,
     options
   }: UseUpcomingGaugesQuery<TData>) => {
@@ -304,7 +304,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useUpcomingGaugesPerDenom = ({
+  const useUpcomingGaugesPerDenom = <TData = UpcomingGaugesPerDenomResponse,>({
     request,
     options
   }: UseUpcomingGaugesPerDenomQuery<TData>) => {
@@ -314,7 +314,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useRewardsEst = ({
+  const useRewardsEst = <TData = RewardsEstResponse,>({
     request,
     options
   }: UseRewardsEstQuery<TData>) => {
@@ -324,7 +324,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useLockableDurations = ({
+  const useLockableDurations = <TData = QueryLockableDurationsResponse,>({
     request,
     options
   }: UseLockableDurationsQuery<TData>) => {

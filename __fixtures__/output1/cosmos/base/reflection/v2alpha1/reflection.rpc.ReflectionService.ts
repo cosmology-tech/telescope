@@ -147,7 +147,7 @@ const getQueryService = (rpc: ProtobufRpcClient | undefined): QueryClientImpl | 
 export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
   const queryService = getQueryService(rpc);
 
-  const useGetAuthnDescriptor = ({
+  const useGetAuthnDescriptor = <TData = GetAuthnDescriptorResponse,>({
     request,
     options
   }: UseGetAuthnDescriptorQuery<TData>) => {
@@ -157,7 +157,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useGetChainDescriptor = ({
+  const useGetChainDescriptor = <TData = GetChainDescriptorResponse,>({
     request,
     options
   }: UseGetChainDescriptorQuery<TData>) => {
@@ -167,7 +167,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useGetCodecDescriptor = ({
+  const useGetCodecDescriptor = <TData = GetCodecDescriptorResponse,>({
     request,
     options
   }: UseGetCodecDescriptorQuery<TData>) => {
@@ -177,7 +177,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useGetConfigurationDescriptor = ({
+  const useGetConfigurationDescriptor = <TData = GetConfigurationDescriptorResponse,>({
     request,
     options
   }: UseGetConfigurationDescriptorQuery<TData>) => {
@@ -187,7 +187,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useGetQueryServicesDescriptor = ({
+  const useGetQueryServicesDescriptor = <TData = GetQueryServicesDescriptorResponse,>({
     request,
     options
   }: UseGetQueryServicesDescriptorQuery<TData>) => {
@@ -197,7 +197,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useGetTxDescriptor = ({
+  const useGetTxDescriptor = <TData = GetTxDescriptorResponse,>({
     request,
     options
   }: UseGetTxDescriptorQuery<TData>) => {

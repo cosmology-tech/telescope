@@ -112,7 +112,7 @@ const getQueryService = (rpc: ProtobufRpcClient | undefined): QueryClientImpl | 
 export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
   const queryService = getQueryService(rpc);
 
-  const useFeeTokens = ({
+  const useFeeTokens = <TData = QueryFeeTokensResponse,>({
     request,
     options
   }: UseFeeTokensQuery<TData>) => {
@@ -122,7 +122,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useDenomSpotPrice = ({
+  const useDenomSpotPrice = <TData = QueryDenomSpotPriceResponse,>({
     request,
     options
   }: UseDenomSpotPriceQuery<TData>) => {
@@ -132,7 +132,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useDenomPoolId = ({
+  const useDenomPoolId = <TData = QueryDenomPoolIdResponse,>({
     request,
     options
   }: UseDenomPoolIdQuery<TData>) => {
@@ -142,7 +142,7 @@ export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
     }, options);
   };
 
-  const useBaseDenom = ({
+  const useBaseDenom = <TData = QueryBaseDenomResponse,>({
     request,
     options
   }: UseBaseDenomQuery<TData>) => {
