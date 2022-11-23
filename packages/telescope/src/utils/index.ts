@@ -42,7 +42,7 @@ export const UTILS = {
     Long: '__helpers__',
     OfflineSigner: '@cosmjs/proto-signing',
     omitDefault: '__helpers__',
-    ProtobufRpcClient: '@cosmjs/tendermint-rpc',
+    ProtobufRpcClient: '@cosmjs/stargate',
     QueryClient: '@cosmjs/stargate',
     Registry: '@cosmjs/proto-signing',
     Rpc: '__helpers__',
@@ -61,12 +61,17 @@ export const UTILS = {
     UseQueryOptions: '@tanstack/react-query',
 };
 
+export const UTIL_HELPERS = [
+    '__helpers__',
+    '__extern__',
+    '__react-query__',
+]
 
 export const fixlocalpaths = (imports: ImportObj[]) => {
     return imports.map(imp => {
         return {
             ...imp,
-            path: (imp.path === '__helpers__' || imp.path.startsWith('.') || imp.path.startsWith('@')) ?
+            path: (UTIL_HELPERS.includes(imp.path) || imp.path.startsWith('.') || imp.path.startsWith('@')) ?
                 imp.path : `./${imp.path}`
         };
     })

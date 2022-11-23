@@ -1,10 +1,11 @@
-export const reactQuery = `import { getRpcClient } from './helpers'
+export const reactQuery = `import { getRpcClient } from './extern'
 import {
     useQuery,
     UseQueryOptions,
 } from '@tanstack/react-query';
 
 import { HttpEndpoint, ProtobufRpcClient } from '@cosmjs/stargate';
+import { Tendermint34Client } from '@cosmjs/tendermint-rpc';
 
 export interface ReactQueryParams<TResponse, TData = TResponse> {
     options?: UseQueryOptions<TResponse, Error, TData>;
@@ -53,7 +54,7 @@ export const useTendermintClient = ({
         {
             // allow overriding
             onError: (e) => {
-                throw new Error(\`Failed to connect to \${rpcEndpoint}\`, e)
+                throw new Error(\`Failed to connect to \${rpcEndpoint}\` + '\\n' + e)
             },
             ...options,
         }

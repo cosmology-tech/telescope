@@ -1,6 +1,28 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`createRpcQueryHookInterfaces 1`] = `""`;
+exports[`createRpcQueryHookInterfaces 1`] = `
+"export interface UseAccountsQuery<TData> extends ReactQueryParams<QueryAccountsResponse, TData> {
+  request?: QueryAccountsRequest;
+}
+export interface UseAccountQuery<TData> extends ReactQueryParams<QueryAccountResponse, TData> {
+  request: QueryAccountRequest;
+}
+export interface UseParamsQuery<TData> extends ReactQueryParams<QueryParamsResponse, TData> {
+  request?: QueryParamsRequest;
+}
+export interface UseModuleAccountsQuery<TData> extends ReactQueryParams<QueryModuleAccountsResponse, TData> {
+  request?: QueryModuleAccountsRequest;
+}
+export interface UseBech32PrefixQuery<TData> extends ReactQueryParams<Bech32PrefixResponse, TData> {
+  request?: Bech32PrefixRequest;
+}
+export interface UseAddressBytesToStringQuery<TData> extends ReactQueryParams<AddressBytesToStringResponse, TData> {
+  request: AddressBytesToStringRequest;
+}
+export interface UseAddressStringToBytesQuery<TData> extends ReactQueryParams<AddressStringToBytesResponse, TData> {
+  request: AddressStringToBytesRequest;
+}"
+`;
 
 exports[`createRpcQueryHooks 1`] = `
 "export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
@@ -10,70 +32,70 @@ exports[`createRpcQueryHooks 1`] = `
     request,
     options
   }: UseAccountsQuery<TData>) => {
-    return useQuery<QueryAccountsResponse, Error, Tdata>(["accountsQuery", request], () => {
+    return useQuery<QueryAccountsResponse, Error, TData>(["accountsQuery", request], () => {
       if (!queryService) throw new Error("Query Service not initialized");
       return queryService.accounts(request);
-    });
+    }, options);
   };
 
   const useAccount = ({
     request,
     options
   }: UseAccountQuery<TData>) => {
-    return useQuery<QueryAccountResponse, Error, Tdata>(["accountQuery", request], () => {
+    return useQuery<QueryAccountResponse, Error, TData>(["accountQuery", request], () => {
       if (!queryService) throw new Error("Query Service not initialized");
       return queryService.account(request);
-    });
+    }, options);
   };
 
   const useParams = ({
     request,
     options
   }: UseParamsQuery<TData>) => {
-    return useQuery<QueryParamsResponse, Error, Tdata>(["paramsQuery", request], () => {
+    return useQuery<QueryParamsResponse, Error, TData>(["paramsQuery", request], () => {
       if (!queryService) throw new Error("Query Service not initialized");
       return queryService.params(request);
-    });
+    }, options);
   };
 
   const useModuleAccounts = ({
     request,
     options
   }: UseModuleAccountsQuery<TData>) => {
-    return useQuery<QueryModuleAccountsResponse, Error, Tdata>(["moduleAccountsQuery", request], () => {
+    return useQuery<QueryModuleAccountsResponse, Error, TData>(["moduleAccountsQuery", request], () => {
       if (!queryService) throw new Error("Query Service not initialized");
       return queryService.moduleAccounts(request);
-    });
+    }, options);
   };
 
   const useBech32Prefix = ({
     request,
     options
   }: UseBech32PrefixQuery<TData>) => {
-    return useQuery<Bech32PrefixResponse, Error, Tdata>(["bech32PrefixQuery", request], () => {
+    return useQuery<Bech32PrefixResponse, Error, TData>(["bech32PrefixQuery", request], () => {
       if (!queryService) throw new Error("Query Service not initialized");
       return queryService.bech32Prefix(request);
-    });
+    }, options);
   };
 
   const useAddressBytesToString = ({
     request,
     options
   }: UseAddressBytesToStringQuery<TData>) => {
-    return useQuery<AddressBytesToStringResponse, Error, Tdata>(["addressBytesToStringQuery", request], () => {
+    return useQuery<AddressBytesToStringResponse, Error, TData>(["addressBytesToStringQuery", request], () => {
       if (!queryService) throw new Error("Query Service not initialized");
       return queryService.addressBytesToString(request);
-    });
+    }, options);
   };
 
   const useAddressStringToBytes = ({
     request,
     options
   }: UseAddressStringToBytesQuery<TData>) => {
-    return useQuery<AddressStringToBytesResponse, Error, Tdata>(["addressStringToBytesQuery", request], () => {
+    return useQuery<AddressStringToBytesResponse, Error, TData>(["addressStringToBytesQuery", request], () => {
       if (!queryService) throw new Error("Query Service not initialized");
       return queryService.addressStringToBytes(request);
-    });
+    }, options);
   };
 
   return {

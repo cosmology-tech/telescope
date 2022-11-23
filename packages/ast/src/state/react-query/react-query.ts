@@ -1,10 +1,11 @@
 
 import * as t from '@babel/types';
-import { callExpression, identifier, makeCommentBlock, makeCommentLineWithBlocks, objectMethod, objectPattern, objectProperty } from '../../utils';
+import { callExpression, identifier, makeCommentBlock, makeCommentLineWithBlocks, objectMethod, objectPattern, objectProperty, tsPropertySignature } from '../../utils';
 import { ProtoService, ProtoServiceMethod } from '@osmonauts/types';
 import { GenericParseContext } from '../../encoding';
 import { camel } from '@osmonauts/utils';
 import { pascal } from 'case';
+import { clientMap } from './weak-map';
 
 const makeUseHookName = (name: string) => {
   return camel('use_' + name);
@@ -92,12 +93,14 @@ const rpcHookMethod = (
                         t.identifier('request')
                       ])
                     )
-                  ]))
+                  ])
+                ),
+                t.identifier('options')
               ],
               t.tsTypeParameterInstantiation([
                 t.tsTypeReference(t.identifier(responseType)),
                 t.tsTypeReference(t.identifier('Error')),
-                t.tsTypeReference(t.identifier('Tdata'))
+                t.tsTypeReference(t.identifier('TData'))
               ])
             ))
         ]))
@@ -129,7 +132,7 @@ const rpcHookMethodInterface = (
   context.addUtil('ReactQueryParams');
 
   return t.exportNamedDeclaration(t.tsInterfaceDeclaration(
-    t.identifier('UseBalanceQuery'),
+    t.identifier(makeUseHookTypeName(name)),
     t.tsTypeParameterDeclaration([
       t.tsTypeParameter(null, null, 'TData')
     ]),
@@ -143,10 +146,17 @@ const rpcHookMethodInterface = (
       )
     ],
     t.tsInterfaceBody([
-
+      tsPropertySignature(
+        t.identifier('request'),
+        t.tsTypeAnnotation(
+          t.tsTypeReference(
+            t.identifier(requestType)
+          )
+        ),
+        optional
+      )
     ])
-  ))
-
+  ));
 }
 
 export const createRpcQueryHooks = (
@@ -241,6 +251,7 @@ export const createRpcQueryHooks = (
 };
 
 
+
 export const createRpcQueryHookInterfaces = (
   context: GenericParseContext,
   service: ProtoService
@@ -262,3 +273,4 @@ export const createRpcQueryHookInterfaces = (
   return methods.map(method => rpcHookMethodInterface(context, method.name, method.method));
 };
 
+export const createRpcQueryHookClientMap = () => clientMap;

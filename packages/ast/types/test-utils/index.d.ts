@@ -102,6 +102,9 @@ export declare const defaultTelescopeOptions: {
             methodNameTx?: string;
         }[];
     };
+    reactQuery: {
+        enabled: boolean;
+    };
     packages: Record<string, any>;
 } & {
     prototypes: {

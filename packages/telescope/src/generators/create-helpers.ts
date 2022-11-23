@@ -3,7 +3,7 @@ import { sync as mkdirp } from 'mkdirp';
 import { TelescopeBuilder } from '../builder';
 import pkg from '../../package.json';
 import { writeContentToFile } from '../utils/files';
-import { external, internal } from '../helpers';
+import { external, internal, reactQuery } from '../helpers';
 
 const version = process.env.NODE_ENV === 'test' ? 'latest' : pkg.version;
 const header = `/**
@@ -29,5 +29,9 @@ export const plugin = (
     write(builder, 'helpers.ts', internal);
 
     // should be exported
-    write(builder, 'helpers-utils.ts', external);
+    write(builder, 'extern.ts', external);
+
+    if (builder.options.reactQuery.enabled) {
+        write(builder, 'react-query.ts', reactQuery);
+    }
 };
