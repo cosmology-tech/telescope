@@ -1,5 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`createRpcQueryHookInterfaces 1`] = `""`;
+
 exports[`createRpcQueryHooks 1`] = `
 "export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
   const queryService = getQueryService(rpc);
