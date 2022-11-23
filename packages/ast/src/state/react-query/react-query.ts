@@ -1,6 +1,6 @@
 
 import * as t from '@babel/types';
-import { callExpression, identifier, objectMethod, objectPattern } from '../../utils';
+import { callExpression, identifier, makeCommentBlock, makeCommentLine, makeCommentLineWithBlocks, objectMethod, objectPattern, objectProperty } from '../../utils';
 import { ProtoService, ProtoServiceMethod } from '@osmonauts/types';
 import { GenericParseContext } from '../../encoding';
 import { camel } from '@osmonauts/utils';
@@ -116,31 +116,6 @@ const rpcHookMethod = (
     )
   ]);
 
-  // return objectMethod('method', t.identifier(makeUseHookName(name)), [
-  //     methodArgs
-  // ], t.blockStatement([
-  //     // t.returnStatement(
-  //     //     t.callExpression(
-  //     //         t.memberExpression(
-  //     //             t.identifier('queryService'),
-  //     //             t.identifier(name)
-  //     //         ),
-  //     //         [
-  //     //             t.identifier('request')
-  //     //         ]
-  //     //     )
-  //     // )
-  // ]),
-  //     false,
-  //     false,
-  //     false,
-  //     null,
-  //     t.tsTypeParameterDeclaration([
-  //         t.tsTypeParameter(null, t.tsTypeReference(
-  //             t.identifier(responseType)
-  //         ), 'TData')
-  //     ])
-  // );
 }
 
 export const createRpcQueryHooks = (
@@ -173,7 +148,10 @@ export const createRpcQueryHooks = (
   const methodNames = Object.keys(service.methods ?? {})
     .map(key => {
       const name = camelRpcMethods ? camel(key) : key;
-      return name;
+      return {
+        name,
+        comment: service.methods[key].comment
+      };
     });
 
   return t.exportNamedDeclaration(
@@ -210,11 +188,15 @@ export const createRpcQueryHooks = (
             // return the methods...
             t.returnStatement(
               t.objectExpression(
-                methodNames.map(name => t.objectProperty(
-                  t.identifier(makeUseHookName(name)),
-                  t.identifier(makeUseHookName(name)),
-                  false,
-                  true)
+                methodNames.map(({ name, comment }) =>
+                  objectProperty(
+                    t.identifier(makeUseHookName(name)),
+                    t.identifier(makeUseHookName(name)),
+                    false,
+                    true,
+                    null,
+                    makeCommentLineWithBlocks(comment)
+                  )
                 )
               )
             )

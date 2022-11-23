@@ -1,4 +1,5 @@
 import * as t from '@babel/types';
+import { makeCommentBlock } from './utils';
 
 // TODO move to @osmonauts/utils package
 
@@ -183,5 +184,26 @@ export const objectMethod =
         obj.returnType = returnType;
         obj.typeParameters = typeParameters;
         return obj;
-    }
+    };
+
+export const objectProperty = (
+    key: t.Expression | t.Identifier | t.StringLiteral | t.NumericLiteral | t.BigIntLiteral | t.DecimalLiteral | t.PrivateName,
+    value: t.Expression | t.PatternLike,
+    computed?: boolean,
+    shorthand?: boolean,
+    decorators?: Array<t.Decorator> | null,
+    leadingComments: t.CommentLine[] = []
+): t.ObjectProperty => {
+    const obj = t.objectProperty(key, value, computed, shorthand, decorators);
+    if (leadingComments.length) obj.leadingComments = leadingComments;
+    return obj;
+};
+
+export const makeCommentLineWithBlocks = (comment: string): t.CommentLine[] => {
+    if (!comment) return [];
+    // NOTE using blocks instead of lines here...
+    // @ts-ignore
+    return [makeCommentBlock(comment)];
+}
+
 

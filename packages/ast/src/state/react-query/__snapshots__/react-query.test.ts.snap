@@ -75,12 +75,29 @@ exports[`createRpcQueryHooks 1`] = `
   };
 
   return {
+    /**
+     * Accounts returns all the existing accounts
+     * 
+     * Since: cosmos-sdk 0.43
+     */
     useAccounts,
+
+    /** Account returns account details based on address. */
     useAccount,
+
+    /** Params queries all parameters. */
     useParams,
+
+    /** ModuleAccounts returns all the existing module accounts. */
     useModuleAccounts,
+
+    /** Bech32 queries bech32Prefix */
     useBech32Prefix,
+
+    /** AddressBytesToString converts Account Address bytes to string */
     useAddressBytesToString,
+
+    /** AddressStringToBytes converts Address string to bytes */
     useAddressStringToBytes
   };
 };"
