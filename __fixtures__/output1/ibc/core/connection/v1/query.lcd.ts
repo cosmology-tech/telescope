@@ -60,7 +60,7 @@ export class LCDQueryClient {
   /* ConnectionConsensusState queries the consensus state associated with the
    connection. */
   async connectionConsensusState(params: QueryConnectionConsensusStateRequest): Promise<QueryConnectionConsensusStateResponseSDKType> {
-    const endpoint = `ibc/core/connection/v1/connections/${params.connectionId}/consensus_state/revision/${params.revisionNumber}height/${params.revisionHeight}`;
+    const endpoint = `ibc/core/connection/v1/connections/${params.connectionId}/consensus_state/revision/${params.revisionNumber}/height/${params.revisionHeight}`;
     return await this.req.get<QueryConnectionConsensusStateResponseSDKType>(endpoint);
   }
 

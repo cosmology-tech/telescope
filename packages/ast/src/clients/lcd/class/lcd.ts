@@ -3,6 +3,28 @@ import { ProtoService, ProtoServiceMethod, ProtoServiceMethodInfo } from '@osmon
 import { GenericParseContext } from '../../../encoding';
 import { arrowFunctionExpression, callExpression, classMethod, classProperty, identifier, objectPattern } from '../../../utils';
 
+// this is the ONLY time ast uses babel/parser
+import { parse } from '@babel/parser';
+
+const getAstFromString = (str: string) => {
+    const plugins = [
+        'objectRestSpread',
+        'classProperties',
+        'optionalCatchBinding',
+        'asyncGenerators',
+        'decorators-legacy',
+        'typescript',
+        'dynamicImport'
+    ];
+    const ast = parse(str, {
+        sourceType: 'module',
+        // @ts-ignore
+        plugins
+    });
+    return ast;
+};
+
+
 const getResponseTypeName = (
     context: GenericParseContext,
     name: string
@@ -215,10 +237,37 @@ export const getUrlTemplateString = (url: string) => {
     };
 };
 
+export const makeTemplateTag = (info: ProtoServiceMethodInfo) => {
+    const route = info.url
+        .split('/')
+        .filter(a => a !== '')
+        .map(a => {
+            if (a.startsWith('{')) {
+                return `$${a}`;
+            } else {
+                return a;
+            }
+        })
+        .join('/');
+
+    const parsed = getAstFromString(`\`${route}\``);
+    const ast: t.TemplateLiteral = parsed.program.body[0].expression;
+
+    ast.expressions = ast.expressions.map((identifier: t.Identifier) => {
+        const name = info.casing?.[identifier.name] ? info.casing[identifier.name] : identifier.name;
+        return t.memberExpression(
+            t.identifier('params'),
+            t.identifier(name)
+        )
+    });
+    return ast;
+};
+
 // do we need to set end prop in ast?
 // we may want to t.templateElement!!!
-export const makeTemplateTag = (info: ProtoServiceMethodInfo) => {
+export const makeTemplateTagLegacy = (info: ProtoServiceMethodInfo) => {
     if (!info.url) throw new Error('no URL on service method');
+
     const parts = getUrlTemplateString(info.url);
     const templateElts = parts.strs.map(raw => t.templateElement({ raw }))
 

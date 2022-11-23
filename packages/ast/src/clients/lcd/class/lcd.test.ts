@@ -2,7 +2,7 @@ import {
     getUrlTemplateString,
     createAggregatedLCDClient,
     createLCDClient,
-    makeTemplateTag
+    makeTemplateTagLegacy
 } from './lcd';
 import { ProtoStore, traverse, getNestedProto } from '@osmonauts/proto-parser'
 import { defaultTelescopeOptions, ProtoService } from '@osmonauts/types';
@@ -30,7 +30,7 @@ it('template tags', () => {
             'grantee'
         ]
     };
-    expectCode(makeTemplateTag(info));
+    expectCode(makeTemplateTagLegacy(info));
 })
 
 it('osmosis LCDClient', () => {
@@ -82,3 +82,13 @@ it('cosmos/group/v1/query.proto', () => {
     const ast = createLCDClient(context, service);
     expectCode(ast);
 });
+it('cosmos/gov/v1beta1/query.proto', () => {
+    const ref = store.findProto('cosmos/gov/v1beta1/query.proto');
+    store.options.prototypes.parser.keepCase = true;
+    const res = traverse(store, ref);
+    const service: ProtoService = getNestedProto(res).Query;
+    const context = new GenericParseContext(ref, store, defaultTelescopeOptions);
+    const ast = createLCDClient(context, service);
+    expectCode(ast);
+});
+
