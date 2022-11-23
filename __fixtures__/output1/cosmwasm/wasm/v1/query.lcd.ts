@@ -73,13 +73,13 @@ export class LCDQueryClient {
 
   /* RawContractState gets single key from the raw store data of a contract */
   async rawContractState(params: QueryRawContractStateRequest): Promise<QueryRawContractStateResponseSDKType> {
-    const endpoint = `wasm/v1/contract/${params.address}raw/${params.queryData}`;
+    const endpoint = `wasm/v1/contract/${params.address}/raw/${params.queryData}`;
     return await this.req.get<QueryRawContractStateResponseSDKType>(endpoint);
   }
 
   /* SmartContractState get smart query result from the contract */
   async smartContractState(params: QuerySmartContractStateRequest): Promise<QuerySmartContractStateResponseSDKType> {
-    const endpoint = `wasm/v1/contract/${params.address}smart/${params.queryData}`;
+    const endpoint = `wasm/v1/contract/${params.address}/smart/${params.queryData}`;
     return await this.req.get<QuerySmartContractStateResponseSDKType>(endpoint);
   }
 

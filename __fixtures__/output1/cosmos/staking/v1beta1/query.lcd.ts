@@ -82,7 +82,7 @@ export class LCDQueryClient {
 
   /* Delegation queries delegate info for given validator delegator pair. */
   async delegation(params: QueryDelegationRequest): Promise<QueryDelegationResponseSDKType> {
-    const endpoint = `cosmos/staking/v1beta1/validators/${params.validatorAddr}delegations/${params.delegatorAddr}`;
+    const endpoint = `cosmos/staking/v1beta1/validators/${params.validatorAddr}/delegations/${params.delegatorAddr}`;
     return await this.req.get<QueryDelegationResponseSDKType>(endpoint);
   }
 
@@ -162,7 +162,7 @@ export class LCDQueryClient {
   /* DelegatorValidator queries validator info for given delegator validator
    pair. */
   async delegatorValidator(params: QueryDelegatorValidatorRequest): Promise<QueryDelegatorValidatorResponseSDKType> {
-    const endpoint = `cosmos/staking/v1beta1/delegators/${params.delegatorAddr}validators/${params.validatorAddr}`;
+    const endpoint = `cosmos/staking/v1beta1/delegators/${params.delegatorAddr}/validators/${params.validatorAddr}`;
     return await this.req.get<QueryDelegatorValidatorResponseSDKType>(endpoint);
   }
 
