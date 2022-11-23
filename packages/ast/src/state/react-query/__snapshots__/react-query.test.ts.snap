@@ -28,7 +28,7 @@ exports[`createRpcQueryHooks 1`] = `
 "export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
   const queryService = getQueryService(rpc);
 
-  const useAccounts = ({
+  const useAccounts = <TData = QueryAccountsResponse,>({
     request,
     options
   }: UseAccountsQuery<TData>) => {
@@ -38,7 +38,7 @@ exports[`createRpcQueryHooks 1`] = `
     }, options);
   };
 
-  const useAccount = ({
+  const useAccount = <TData = QueryAccountResponse,>({
     request,
     options
   }: UseAccountQuery<TData>) => {
@@ -48,7 +48,7 @@ exports[`createRpcQueryHooks 1`] = `
     }, options);
   };
 
-  const useParams = ({
+  const useParams = <TData = QueryParamsResponse,>({
     request,
     options
   }: UseParamsQuery<TData>) => {
@@ -58,7 +58,7 @@ exports[`createRpcQueryHooks 1`] = `
     }, options);
   };
 
-  const useModuleAccounts = ({
+  const useModuleAccounts = <TData = QueryModuleAccountsResponse,>({
     request,
     options
   }: UseModuleAccountsQuery<TData>) => {
@@ -68,7 +68,7 @@ exports[`createRpcQueryHooks 1`] = `
     }, options);
   };
 
-  const useBech32Prefix = ({
+  const useBech32Prefix = <TData = Bech32PrefixResponse,>({
     request,
     options
   }: UseBech32PrefixQuery<TData>) => {
@@ -78,7 +78,7 @@ exports[`createRpcQueryHooks 1`] = `
     }, options);
   };
 
-  const useAddressBytesToString = ({
+  const useAddressBytesToString = <TData = AddressBytesToStringResponse,>({
     request,
     options
   }: UseAddressBytesToStringQuery<TData>) => {
@@ -88,7 +88,7 @@ exports[`createRpcQueryHooks 1`] = `
     }, options);
   };
 
-  const useAddressStringToBytes = ({
+  const useAddressStringToBytes = <TData = AddressStringToBytesResponse,>({
     request,
     options
   }: UseAddressStringToBytesQuery<TData>) => {

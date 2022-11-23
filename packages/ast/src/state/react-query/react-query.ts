@@ -1,6 +1,6 @@
 
 import * as t from '@babel/types';
-import { callExpression, identifier, makeCommentBlock, makeCommentLineWithBlocks, objectMethod, objectPattern, objectProperty, tsPropertySignature } from '../../utils';
+import { arrowFunctionExpression, callExpression, identifier, makeCommentBlock, makeCommentLineWithBlocks, objectMethod, objectPattern, objectProperty, tsPropertySignature, tsTypeParameterDeclaration } from '../../utils';
 import { ProtoService, ProtoServiceMethod } from '@osmonauts/types';
 import { GenericParseContext } from '../../encoding';
 import { camel } from '@osmonauts/utils';
@@ -44,7 +44,7 @@ const rpcHookMethod = (
   return t.variableDeclaration('const', [
     t.variableDeclarator(
       t.identifier(makeUseHookName(name)),
-      t.arrowFunctionExpression([
+      arrowFunctionExpression([
         objectPattern([
           t.objectProperty(
             t.identifier('request'),
@@ -103,7 +103,13 @@ const rpcHookMethod = (
                 t.tsTypeReference(t.identifier('TData'))
               ])
             ))
-        ]))
+        ]),
+        null,
+        false,
+        tsTypeParameterDeclaration([
+          t.tsTypeParameter(null, t.tsTypeReference(t.identifier(responseType)), 'TData')
+        ])
+      )
     )
   ]);
 

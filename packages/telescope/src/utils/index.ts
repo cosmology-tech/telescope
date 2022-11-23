@@ -65,7 +65,7 @@ export const UTIL_HELPERS = [
     '__helpers__',
     '__extern__',
     '__react-query__',
-]
+];
 
 export const fixlocalpaths = (imports: ImportObj[]) => {
     return imports.map(imp => {

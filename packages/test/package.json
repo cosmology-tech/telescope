@@ -89,6 +89,7 @@
     "@cosmjs/stargate": "0.29.3",
     "@cosmjs/tendermint-rpc": "^0.29.3",
     "@osmonauts/lcd": "^0.8.0",
+    "@tanstack/react-query": "4.16.1",
     "long": "^5.2.0",
     "protobufjs": "^6.11.3"
   }

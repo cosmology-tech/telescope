@@ -151,12 +151,20 @@ export function classProperty(
 export const arrowFunctionExpression = (
     params: (t.Identifier | t.Pattern | t.RestElement)[],
     body: t.BlockStatement,
-    returnType: t.TSTypeAnnotation,
-    isAsync: boolean = false
+    returnType?: t.TSTypeAnnotation,
+    isAsync: boolean = false,
+    typeParameters?: t.TypeParameterDeclaration | t.TSTypeParameterDeclaration | t.Noop
 ) => {
     const func = t.arrowFunctionExpression(params, body, isAsync);
-    if (returnType) func.returnType = returnType;
+    func.returnType = returnType;
+    func.typeParameters = typeParameters;
     return func;
+};
+
+export const tsTypeParameterDeclaration = (params: Array<t.TSTypeParameter>): t.TSTypeParameterDeclaration => {
+    const obj = t.tsTypeParameterDeclaration(params);
+    delete obj.extra;
+    return obj;
 };
 
 export const objectPattern = (
