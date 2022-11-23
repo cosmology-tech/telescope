@@ -3,7 +3,9 @@ import { TokenPair, TokenPairSDKType } from "./erc20";
 import { Params, ParamsSDKType } from "./genesis";
 import { Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
+import { QueryClient, createProtobufRpcClient, ProtobufRpcClient } from "@cosmjs/stargate";
+import { ReactQueryParams } from "../../../react-query";
+import { useQuery } from "@tanstack/react-query";
 import { QueryTokenPairsRequest, QueryTokenPairsRequestSDKType, QueryTokenPairsResponse, QueryTokenPairsResponseSDKType, QueryTokenPairRequest, QueryTokenPairRequestSDKType, QueryTokenPairResponse, QueryTokenPairResponseSDKType, QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType } from "./query";
 
 /** Query defines the gRPC querier service. */
@@ -64,5 +66,75 @@ export const createRpcQueryExtension = (base: QueryClient) => {
       return queryService.params(request);
     }
 
+  };
+};
+export interface UseTokenPairsQuery<TData> extends ReactQueryParams<QueryTokenPairsResponse, TData> {
+  request?: QueryTokenPairsRequest;
+}
+export interface UseTokenPairQuery<TData> extends ReactQueryParams<QueryTokenPairResponse, TData> {
+  request: QueryTokenPairRequest;
+}
+export interface UseParamsQuery<TData> extends ReactQueryParams<QueryParamsResponse, TData> {
+  request?: QueryParamsRequest;
+}
+
+const _queryClients: WeakMap<ProtobufRpcClient, QueryClientImpl> = new WeakMap();
+
+const getQueryService = (rpc: ProtobufRpcClient | undefined): QueryClientImpl | undefined => {
+  if (!rpc) return;
+
+  if (_queryClients.has(rpc)) {
+    return _queryClients.get(rpc);
+  }
+
+  const queryService = new QueryClientImpl(rpc);
+
+  _queryClients.set(rpc, queryService);
+
+  return queryService;
+};
+
+export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
+  const queryService = getQueryService(rpc);
+
+  const useTokenPairs = ({
+    request,
+    options
+  }: UseTokenPairsQuery<TData>) => {
+    return useQuery<QueryTokenPairsResponse, Error, TData>(["tokenPairsQuery", request], () => {
+      if (!queryService) throw new Error("Query Service not initialized");
+      return queryService.tokenPairs(request);
+    }, options);
+  };
+
+  const useTokenPair = ({
+    request,
+    options
+  }: UseTokenPairQuery<TData>) => {
+    return useQuery<QueryTokenPairResponse, Error, TData>(["tokenPairQuery", request], () => {
+      if (!queryService) throw new Error("Query Service not initialized");
+      return queryService.tokenPair(request);
+    }, options);
+  };
+
+  const useParams = ({
+    request,
+    options
+  }: UseParamsQuery<TData>) => {
+    return useQuery<QueryParamsResponse, Error, TData>(["paramsQuery", request], () => {
+      if (!queryService) throw new Error("Query Service not initialized");
+      return queryService.params(request);
+    }, options);
+  };
+
+  return {
+    /** TokenPairs retrieves registered token pairs */
+    useTokenPairs,
+
+    /** TokenPair retrieves a registered token pair */
+    useTokenPair,
+
+    /** Params retrieves the erc20 module params */
+    useParams
   };
 };

@@ -5,7 +5,9 @@ import { Group, GroupSDKType } from "./group";
 import { Account, AccountSDKType } from "../../escrow/v1beta2/types";
 import { Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
+import { QueryClient, createProtobufRpcClient, ProtobufRpcClient } from "@cosmjs/stargate";
+import { ReactQueryParams } from "../../../react-query";
+import { useQuery } from "@tanstack/react-query";
 import { QueryDeploymentsRequest, QueryDeploymentsRequestSDKType, QueryDeploymentsResponse, QueryDeploymentsResponseSDKType, QueryDeploymentRequest, QueryDeploymentRequestSDKType, QueryDeploymentResponse, QueryDeploymentResponseSDKType, QueryGroupRequest, QueryGroupRequestSDKType, QueryGroupResponse, QueryGroupResponseSDKType } from "./query";
 
 /** Query defines the gRPC querier service */
@@ -63,5 +65,75 @@ export const createRpcQueryExtension = (base: QueryClient) => {
       return queryService.group(request);
     }
 
+  };
+};
+export interface UseDeploymentsQuery<TData> extends ReactQueryParams<QueryDeploymentsResponse, TData> {
+  request: QueryDeploymentsRequest;
+}
+export interface UseDeploymentQuery<TData> extends ReactQueryParams<QueryDeploymentResponse, TData> {
+  request: QueryDeploymentRequest;
+}
+export interface UseGroupQuery<TData> extends ReactQueryParams<QueryGroupResponse, TData> {
+  request: QueryGroupRequest;
+}
+
+const _queryClients: WeakMap<ProtobufRpcClient, QueryClientImpl> = new WeakMap();
+
+const getQueryService = (rpc: ProtobufRpcClient | undefined): QueryClientImpl | undefined => {
+  if (!rpc) return;
+
+  if (_queryClients.has(rpc)) {
+    return _queryClients.get(rpc);
+  }
+
+  const queryService = new QueryClientImpl(rpc);
+
+  _queryClients.set(rpc, queryService);
+
+  return queryService;
+};
+
+export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
+  const queryService = getQueryService(rpc);
+
+  const useDeployments = ({
+    request,
+    options
+  }: UseDeploymentsQuery<TData>) => {
+    return useQuery<QueryDeploymentsResponse, Error, TData>(["deploymentsQuery", request], () => {
+      if (!queryService) throw new Error("Query Service not initialized");
+      return queryService.deployments(request);
+    }, options);
+  };
+
+  const useDeployment = ({
+    request,
+    options
+  }: UseDeploymentQuery<TData>) => {
+    return useQuery<QueryDeploymentResponse, Error, TData>(["deploymentQuery", request], () => {
+      if (!queryService) throw new Error("Query Service not initialized");
+      return queryService.deployment(request);
+    }, options);
+  };
+
+  const useGroup = ({
+    request,
+    options
+  }: UseGroupQuery<TData>) => {
+    return useQuery<QueryGroupResponse, Error, TData>(["groupQuery", request], () => {
+      if (!queryService) throw new Error("Query Service not initialized");
+      return queryService.group(request);
+    }, options);
+  };
+
+  return {
+    /** Deployments queries deployments */
+    useDeployments,
+
+    /** Deployment queries deployment details */
+    useDeployment,
+
+    /** Group queries group details */
+    useGroup
   };
 };

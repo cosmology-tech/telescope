@@ -4,7 +4,9 @@ import { DecCoin, DecCoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { Params, ParamsSDKType } from "./genesis";
 import { Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
+import { QueryClient, createProtobufRpcClient, ProtobufRpcClient } from "@cosmjs/stargate";
+import { ReactQueryParams } from "../../../react-query";
+import { useQuery } from "@tanstack/react-query";
 import { QueryIncentivesRequest, QueryIncentivesRequestSDKType, QueryIncentivesResponse, QueryIncentivesResponseSDKType, QueryIncentiveRequest, QueryIncentiveRequestSDKType, QueryIncentiveResponse, QueryIncentiveResponseSDKType, QueryGasMetersRequest, QueryGasMetersRequestSDKType, QueryGasMetersResponse, QueryGasMetersResponseSDKType, QueryGasMeterRequest, QueryGasMeterRequestSDKType, QueryGasMeterResponse, QueryGasMeterResponseSDKType, QueryAllocationMetersRequest, QueryAllocationMetersRequestSDKType, QueryAllocationMetersResponse, QueryAllocationMetersResponseSDKType, QueryAllocationMeterRequest, QueryAllocationMeterRequestSDKType, QueryAllocationMeterResponse, QueryAllocationMeterResponseSDKType, QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType } from "./query";
 
 /** Query defines the gRPC querier service. */
@@ -126,5 +128,142 @@ export const createRpcQueryExtension = (base: QueryClient) => {
       return queryService.params(request);
     }
 
+  };
+};
+export interface UseIncentivesQuery<TData> extends ReactQueryParams<QueryIncentivesResponse, TData> {
+  request?: QueryIncentivesRequest;
+}
+export interface UseIncentiveQuery<TData> extends ReactQueryParams<QueryIncentiveResponse, TData> {
+  request: QueryIncentiveRequest;
+}
+export interface UseGasMetersQuery<TData> extends ReactQueryParams<QueryGasMetersResponse, TData> {
+  request: QueryGasMetersRequest;
+}
+export interface UseGasMeterQuery<TData> extends ReactQueryParams<QueryGasMeterResponse, TData> {
+  request: QueryGasMeterRequest;
+}
+export interface UseAllocationMetersQuery<TData> extends ReactQueryParams<QueryAllocationMetersResponse, TData> {
+  request?: QueryAllocationMetersRequest;
+}
+export interface UseAllocationMeterQuery<TData> extends ReactQueryParams<QueryAllocationMeterResponse, TData> {
+  request: QueryAllocationMeterRequest;
+}
+export interface UseParamsQuery<TData> extends ReactQueryParams<QueryParamsResponse, TData> {
+  request?: QueryParamsRequest;
+}
+
+const _queryClients: WeakMap<ProtobufRpcClient, QueryClientImpl> = new WeakMap();
+
+const getQueryService = (rpc: ProtobufRpcClient | undefined): QueryClientImpl | undefined => {
+  if (!rpc) return;
+
+  if (_queryClients.has(rpc)) {
+    return _queryClients.get(rpc);
+  }
+
+  const queryService = new QueryClientImpl(rpc);
+
+  _queryClients.set(rpc, queryService);
+
+  return queryService;
+};
+
+export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
+  const queryService = getQueryService(rpc);
+
+  const useIncentives = ({
+    request,
+    options
+  }: UseIncentivesQuery<TData>) => {
+    return useQuery<QueryIncentivesResponse, Error, TData>(["incentivesQuery", request], () => {
+      if (!queryService) throw new Error("Query Service not initialized");
+      return queryService.incentives(request);
+    }, options);
+  };
+
+  const useIncentive = ({
+    request,
+    options
+  }: UseIncentiveQuery<TData>) => {
+    return useQuery<QueryIncentiveResponse, Error, TData>(["incentiveQuery", request], () => {
+      if (!queryService) throw new Error("Query Service not initialized");
+      return queryService.incentive(request);
+    }, options);
+  };
+
+  const useGasMeters = ({
+    request,
+    options
+  }: UseGasMetersQuery<TData>) => {
+    return useQuery<QueryGasMetersResponse, Error, TData>(["gasMetersQuery", request], () => {
+      if (!queryService) throw new Error("Query Service not initialized");
+      return queryService.gasMeters(request);
+    }, options);
+  };
+
+  const useGasMeter = ({
+    request,
+    options
+  }: UseGasMeterQuery<TData>) => {
+    return useQuery<QueryGasMeterResponse, Error, TData>(["gasMeterQuery", request], () => {
+      if (!queryService) throw new Error("Query Service not initialized");
+      return queryService.gasMeter(request);
+    }, options);
+  };
+
+  const useAllocationMeters = ({
+    request,
+    options
+  }: UseAllocationMetersQuery<TData>) => {
+    return useQuery<QueryAllocationMetersResponse, Error, TData>(["allocationMetersQuery", request], () => {
+      if (!queryService) throw new Error("Query Service not initialized");
+      return queryService.allocationMeters(request);
+    }, options);
+  };
+
+  const useAllocationMeter = ({
+    request,
+    options
+  }: UseAllocationMeterQuery<TData>) => {
+    return useQuery<QueryAllocationMeterResponse, Error, TData>(["allocationMeterQuery", request], () => {
+      if (!queryService) throw new Error("Query Service not initialized");
+      return queryService.allocationMeter(request);
+    }, options);
+  };
+
+  const useParams = ({
+    request,
+    options
+  }: UseParamsQuery<TData>) => {
+    return useQuery<QueryParamsResponse, Error, TData>(["paramsQuery", request], () => {
+      if (!queryService) throw new Error("Query Service not initialized");
+      return queryService.params(request);
+    }, options);
+  };
+
+  return {
+    /** Incentives retrieves registered incentives */
+    useIncentives,
+
+    /** Incentive retrieves a registered incentive */
+    useIncentive,
+
+    /** GasMeters retrieves active gas meters for a given contract */
+    useGasMeters,
+
+    /** GasMeter Retrieves a active gas meter */
+    useGasMeter,
+
+    /**
+     * AllocationMeters retrieves active allocation meters for a given
+     * denomination
+     */
+    useAllocationMeters,
+
+    /** AllocationMeter Retrieves a active gas meter */
+    useAllocationMeter,
+
+    /** Params retrieves the incentives module params */
+    useParams
   };
 };

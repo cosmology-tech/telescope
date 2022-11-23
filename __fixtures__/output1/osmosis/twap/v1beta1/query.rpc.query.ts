@@ -2,7 +2,9 @@ import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp"
 import { Params, ParamsSDKType } from "./genesis";
 import { Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
+import { QueryClient, createProtobufRpcClient, ProtobufRpcClient } from "@cosmjs/stargate";
+import { ReactQueryParams } from "../../../react-query";
+import { useQuery } from "@tanstack/react-query";
 import { ParamsRequest, ParamsRequestSDKType, ParamsResponse, ParamsResponseSDKType, ArithmeticTwapRequest, ArithmeticTwapRequestSDKType, ArithmeticTwapResponse, ArithmeticTwapResponseSDKType, ArithmeticTwapToNowRequest, ArithmeticTwapToNowRequestSDKType, ArithmeticTwapToNowResponse, ArithmeticTwapToNowResponseSDKType } from "./query";
 export interface Query {
   params(request?: ParamsRequest): Promise<ParamsResponse>;
@@ -54,5 +56,70 @@ export const createRpcQueryExtension = (base: QueryClient) => {
       return queryService.arithmeticTwapToNow(request);
     }
 
+  };
+};
+export interface UseParamsQuery<TData> extends ReactQueryParams<ParamsResponse, TData> {
+  request?: ParamsRequest;
+}
+export interface UseArithmeticTwapQuery<TData> extends ReactQueryParams<ArithmeticTwapResponse, TData> {
+  request: ArithmeticTwapRequest;
+}
+export interface UseArithmeticTwapToNowQuery<TData> extends ReactQueryParams<ArithmeticTwapToNowResponse, TData> {
+  request: ArithmeticTwapToNowRequest;
+}
+
+const _queryClients: WeakMap<ProtobufRpcClient, QueryClientImpl> = new WeakMap();
+
+const getQueryService = (rpc: ProtobufRpcClient | undefined): QueryClientImpl | undefined => {
+  if (!rpc) return;
+
+  if (_queryClients.has(rpc)) {
+    return _queryClients.get(rpc);
+  }
+
+  const queryService = new QueryClientImpl(rpc);
+
+  _queryClients.set(rpc, queryService);
+
+  return queryService;
+};
+
+export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
+  const queryService = getQueryService(rpc);
+
+  const useParams = ({
+    request,
+    options
+  }: UseParamsQuery<TData>) => {
+    return useQuery<ParamsResponse, Error, TData>(["paramsQuery", request], () => {
+      if (!queryService) throw new Error("Query Service not initialized");
+      return queryService.params(request);
+    }, options);
+  };
+
+  const useArithmeticTwap = ({
+    request,
+    options
+  }: UseArithmeticTwapQuery<TData>) => {
+    return useQuery<ArithmeticTwapResponse, Error, TData>(["arithmeticTwapQuery", request], () => {
+      if (!queryService) throw new Error("Query Service not initialized");
+      return queryService.arithmeticTwap(request);
+    }, options);
+  };
+
+  const useArithmeticTwapToNow = ({
+    request,
+    options
+  }: UseArithmeticTwapToNowQuery<TData>) => {
+    return useQuery<ArithmeticTwapToNowResponse, Error, TData>(["arithmeticTwapToNowQuery", request], () => {
+      if (!queryService) throw new Error("Query Service not initialized");
+      return queryService.arithmeticTwapToNow(request);
+    }, options);
+  };
+
+  return {
+    useParams,
+    useArithmeticTwap,
+    useArithmeticTwapToNow
   };
 };

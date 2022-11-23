@@ -5,7 +5,9 @@ import { LeaseFilters, LeaseFiltersSDKType, LeaseID, LeaseIDSDKType, Lease, Leas
 import { Account, AccountSDKType, FractionalPayment, FractionalPaymentSDKType } from "../../escrow/v1beta2/types";
 import { Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
+import { QueryClient, createProtobufRpcClient, ProtobufRpcClient } from "@cosmjs/stargate";
+import { ReactQueryParams } from "../../../react-query";
+import { useQuery } from "@tanstack/react-query";
 import { QueryOrdersRequest, QueryOrdersRequestSDKType, QueryOrdersResponse, QueryOrdersResponseSDKType, QueryOrderRequest, QueryOrderRequestSDKType, QueryOrderResponse, QueryOrderResponseSDKType, QueryBidsRequest, QueryBidsRequestSDKType, QueryBidsResponse, QueryBidsResponseSDKType, QueryBidRequest, QueryBidRequestSDKType, QueryBidResponse, QueryBidResponseSDKType, QueryLeasesRequest, QueryLeasesRequestSDKType, QueryLeasesResponse, QueryLeasesResponseSDKType, QueryLeaseRequest, QueryLeaseRequestSDKType, QueryLeaseResponse, QueryLeaseResponseSDKType } from "./query";
 
 /** Query defines the gRPC querier service */
@@ -105,5 +107,123 @@ export const createRpcQueryExtension = (base: QueryClient) => {
       return queryService.lease(request);
     }
 
+  };
+};
+export interface UseOrdersQuery<TData> extends ReactQueryParams<QueryOrdersResponse, TData> {
+  request: QueryOrdersRequest;
+}
+export interface UseOrderQuery<TData> extends ReactQueryParams<QueryOrderResponse, TData> {
+  request: QueryOrderRequest;
+}
+export interface UseBidsQuery<TData> extends ReactQueryParams<QueryBidsResponse, TData> {
+  request: QueryBidsRequest;
+}
+export interface UseBidQuery<TData> extends ReactQueryParams<QueryBidResponse, TData> {
+  request: QueryBidRequest;
+}
+export interface UseLeasesQuery<TData> extends ReactQueryParams<QueryLeasesResponse, TData> {
+  request: QueryLeasesRequest;
+}
+export interface UseLeaseQuery<TData> extends ReactQueryParams<QueryLeaseResponse, TData> {
+  request: QueryLeaseRequest;
+}
+
+const _queryClients: WeakMap<ProtobufRpcClient, QueryClientImpl> = new WeakMap();
+
+const getQueryService = (rpc: ProtobufRpcClient | undefined): QueryClientImpl | undefined => {
+  if (!rpc) return;
+
+  if (_queryClients.has(rpc)) {
+    return _queryClients.get(rpc);
+  }
+
+  const queryService = new QueryClientImpl(rpc);
+
+  _queryClients.set(rpc, queryService);
+
+  return queryService;
+};
+
+export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
+  const queryService = getQueryService(rpc);
+
+  const useOrders = ({
+    request,
+    options
+  }: UseOrdersQuery<TData>) => {
+    return useQuery<QueryOrdersResponse, Error, TData>(["ordersQuery", request], () => {
+      if (!queryService) throw new Error("Query Service not initialized");
+      return queryService.orders(request);
+    }, options);
+  };
+
+  const useOrder = ({
+    request,
+    options
+  }: UseOrderQuery<TData>) => {
+    return useQuery<QueryOrderResponse, Error, TData>(["orderQuery", request], () => {
+      if (!queryService) throw new Error("Query Service not initialized");
+      return queryService.order(request);
+    }, options);
+  };
+
+  const useBids = ({
+    request,
+    options
+  }: UseBidsQuery<TData>) => {
+    return useQuery<QueryBidsResponse, Error, TData>(["bidsQuery", request], () => {
+      if (!queryService) throw new Error("Query Service not initialized");
+      return queryService.bids(request);
+    }, options);
+  };
+
+  const useBid = ({
+    request,
+    options
+  }: UseBidQuery<TData>) => {
+    return useQuery<QueryBidResponse, Error, TData>(["bidQuery", request], () => {
+      if (!queryService) throw new Error("Query Service not initialized");
+      return queryService.bid(request);
+    }, options);
+  };
+
+  const useLeases = ({
+    request,
+    options
+  }: UseLeasesQuery<TData>) => {
+    return useQuery<QueryLeasesResponse, Error, TData>(["leasesQuery", request], () => {
+      if (!queryService) throw new Error("Query Service not initialized");
+      return queryService.leases(request);
+    }, options);
+  };
+
+  const useLease = ({
+    request,
+    options
+  }: UseLeaseQuery<TData>) => {
+    return useQuery<QueryLeaseResponse, Error, TData>(["leaseQuery", request], () => {
+      if (!queryService) throw new Error("Query Service not initialized");
+      return queryService.lease(request);
+    }, options);
+  };
+
+  return {
+    /** Orders queries orders with filters */
+    useOrders,
+
+    /** Order queries order details */
+    useOrder,
+
+    /** Bids queries bids with filters */
+    useBids,
+
+    /** Bid queries bid details */
+    useBid,
+
+    /** Leases queries leases with filters */
+    useLeases,
+
+    /** Lease queries lease details */
+    useLease
   };
 };

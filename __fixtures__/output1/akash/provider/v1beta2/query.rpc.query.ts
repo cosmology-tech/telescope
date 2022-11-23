@@ -2,7 +2,9 @@ import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } fr
 import { Provider, ProviderSDKType } from "./provider";
 import { Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
+import { QueryClient, createProtobufRpcClient, ProtobufRpcClient } from "@cosmjs/stargate";
+import { ReactQueryParams } from "../../../react-query";
+import { useQuery } from "@tanstack/react-query";
 import { QueryProvidersRequest, QueryProvidersRequestSDKType, QueryProvidersResponse, QueryProvidersResponseSDKType, QueryProviderRequest, QueryProviderRequestSDKType, QueryProviderResponse, QueryProviderResponseSDKType } from "./query";
 
 /** Query defines the gRPC querier service */
@@ -48,5 +50,59 @@ export const createRpcQueryExtension = (base: QueryClient) => {
       return queryService.provider(request);
     }
 
+  };
+};
+export interface UseProvidersQuery<TData> extends ReactQueryParams<QueryProvidersResponse, TData> {
+  request?: QueryProvidersRequest;
+}
+export interface UseProviderQuery<TData> extends ReactQueryParams<QueryProviderResponse, TData> {
+  request: QueryProviderRequest;
+}
+
+const _queryClients: WeakMap<ProtobufRpcClient, QueryClientImpl> = new WeakMap();
+
+const getQueryService = (rpc: ProtobufRpcClient | undefined): QueryClientImpl | undefined => {
+  if (!rpc) return;
+
+  if (_queryClients.has(rpc)) {
+    return _queryClients.get(rpc);
+  }
+
+  const queryService = new QueryClientImpl(rpc);
+
+  _queryClients.set(rpc, queryService);
+
+  return queryService;
+};
+
+export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
+  const queryService = getQueryService(rpc);
+
+  const useProviders = ({
+    request,
+    options
+  }: UseProvidersQuery<TData>) => {
+    return useQuery<QueryProvidersResponse, Error, TData>(["providersQuery", request], () => {
+      if (!queryService) throw new Error("Query Service not initialized");
+      return queryService.providers(request);
+    }, options);
+  };
+
+  const useProvider = ({
+    request,
+    options
+  }: UseProviderQuery<TData>) => {
+    return useQuery<QueryProviderResponse, Error, TData>(["providerQuery", request], () => {
+      if (!queryService) throw new Error("Query Service not initialized");
+      return queryService.provider(request);
+    }, options);
+  };
+
+  return {
+    /** Providers queries providers */
+    useProviders,
+
+    /** Provider queries provider details */
+    useProvider
   };
 };

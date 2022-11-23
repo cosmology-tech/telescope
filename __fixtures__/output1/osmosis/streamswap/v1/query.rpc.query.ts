@@ -2,7 +2,9 @@ import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } fr
 import { Sale, SaleSDKType, UserPosition, UserPositionSDKType } from "./state";
 import { Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
+import { QueryClient, createProtobufRpcClient, ProtobufRpcClient } from "@cosmjs/stargate";
+import { ReactQueryParams } from "../../../react-query";
+import { useQuery } from "@tanstack/react-query";
 import { QuerySales, QuerySalesSDKType, QuerySalesResponse, QuerySalesResponseSDKType, QuerySale, QuerySaleSDKType, QuerySaleResponse, QuerySaleResponseSDKType, QueryUserPosition, QueryUserPositionSDKType, QueryUserPositionResponse, QueryUserPositionResponseSDKType } from "./query";
 
 /** Query defines the gRPC querier service. */
@@ -61,5 +63,73 @@ export const createRpcQueryExtension = (base: QueryClient) => {
       return queryService.userPosition(request);
     }
 
+  };
+};
+export interface UseSalesQuery<TData> extends ReactQueryParams<QuerySalesResponse, TData> {
+  request?: QuerySales;
+}
+export interface UseSaleQuery<TData> extends ReactQueryParams<QuerySaleResponse, TData> {
+  request: QuerySale;
+}
+export interface UseUserPositionQuery<TData> extends ReactQueryParams<QueryUserPositionResponse, TData> {
+  request: QueryUserPosition;
+}
+
+const _queryClients: WeakMap<ProtobufRpcClient, QueryClientImpl> = new WeakMap();
+
+const getQueryService = (rpc: ProtobufRpcClient | undefined): QueryClientImpl | undefined => {
+  if (!rpc) return;
+
+  if (_queryClients.has(rpc)) {
+    return _queryClients.get(rpc);
+  }
+
+  const queryService = new QueryClientImpl(rpc);
+
+  _queryClients.set(rpc, queryService);
+
+  return queryService;
+};
+
+export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
+  const queryService = getQueryService(rpc);
+
+  const useSales = ({
+    request,
+    options
+  }: UseSalesQuery<TData>) => {
+    return useQuery<QuerySalesResponse, Error, TData>(["salesQuery", request], () => {
+      if (!queryService) throw new Error("Query Service not initialized");
+      return queryService.sales(request);
+    }, options);
+  };
+
+  const useSale = ({
+    request,
+    options
+  }: UseSaleQuery<TData>) => {
+    return useQuery<QuerySaleResponse, Error, TData>(["saleQuery", request], () => {
+      if (!queryService) throw new Error("Query Service not initialized");
+      return queryService.sale(request);
+    }, options);
+  };
+
+  const useUserPosition = ({
+    request,
+    options
+  }: UseUserPositionQuery<TData>) => {
+    return useQuery<QueryUserPositionResponse, Error, TData>(["userPositionQuery", request], () => {
+      if (!queryService) throw new Error("Query Service not initialized");
+      return queryService.userPosition(request);
+    }, options);
+  };
+
+  return {
+    /** Returns list of Sales ordered by the creation time */
+    useSales,
+
+    /** Returns the specific Sale object */
+    useSale,
+    useUserPosition
   };
 };

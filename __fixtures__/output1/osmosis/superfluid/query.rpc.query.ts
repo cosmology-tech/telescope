@@ -6,7 +6,9 @@ import { SyntheticLock, SyntheticLockSDKType } from "../lockup/lock";
 import { DelegationResponse, DelegationResponseSDKType } from "../../cosmos/staking/v1beta1/staking";
 import { Rpc } from "../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
+import { QueryClient, createProtobufRpcClient, ProtobufRpcClient } from "@cosmjs/stargate";
+import { ReactQueryParams } from "../../react-query";
+import { useQuery } from "@tanstack/react-query";
 import { QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType, AssetTypeRequest, AssetTypeRequestSDKType, AssetTypeResponse, AssetTypeResponseSDKType, AllAssetsRequest, AllAssetsRequestSDKType, AllAssetsResponse, AllAssetsResponseSDKType, AssetMultiplierRequest, AssetMultiplierRequestSDKType, AssetMultiplierResponse, AssetMultiplierResponseSDKType, AllIntermediaryAccountsRequest, AllIntermediaryAccountsRequestSDKType, AllIntermediaryAccountsResponse, AllIntermediaryAccountsResponseSDKType, ConnectedIntermediaryAccountRequest, ConnectedIntermediaryAccountRequestSDKType, ConnectedIntermediaryAccountResponse, ConnectedIntermediaryAccountResponseSDKType, TotalSuperfluidDelegationsRequest, TotalSuperfluidDelegationsRequestSDKType, TotalSuperfluidDelegationsResponse, TotalSuperfluidDelegationsResponseSDKType, SuperfluidDelegationAmountRequest, SuperfluidDelegationAmountRequestSDKType, SuperfluidDelegationAmountResponse, SuperfluidDelegationAmountResponseSDKType, SuperfluidDelegationsByDelegatorRequest, SuperfluidDelegationsByDelegatorRequestSDKType, SuperfluidDelegationsByDelegatorResponse, SuperfluidDelegationsByDelegatorResponseSDKType, SuperfluidUndelegationsByDelegatorRequest, SuperfluidUndelegationsByDelegatorRequestSDKType, SuperfluidUndelegationsByDelegatorResponse, SuperfluidUndelegationsByDelegatorResponseSDKType, SuperfluidDelegationsByValidatorDenomRequest, SuperfluidDelegationsByValidatorDenomRequestSDKType, SuperfluidDelegationsByValidatorDenomResponse, SuperfluidDelegationsByValidatorDenomResponseSDKType, EstimateSuperfluidDelegatedAmountByValidatorDenomRequest, EstimateSuperfluidDelegatedAmountByValidatorDenomRequestSDKType, EstimateSuperfluidDelegatedAmountByValidatorDenomResponse, EstimateSuperfluidDelegatedAmountByValidatorDenomResponseSDKType, QueryTotalDelegationByDelegatorRequest, QueryTotalDelegationByDelegatorRequestSDKType, QueryTotalDelegationByDelegatorResponse, QueryTotalDelegationByDelegatorResponseSDKType } from "./query";
 
 /** Query defines the gRPC querier service. */
@@ -223,5 +225,251 @@ export const createRpcQueryExtension = (base: QueryClient) => {
       return queryService.totalDelegationByDelegator(request);
     }
 
+  };
+};
+export interface UseParamsQuery<TData> extends ReactQueryParams<QueryParamsResponse, TData> {
+  request?: QueryParamsRequest;
+}
+export interface UseAssetTypeQuery<TData> extends ReactQueryParams<AssetTypeResponse, TData> {
+  request: AssetTypeRequest;
+}
+export interface UseAllAssetsQuery<TData> extends ReactQueryParams<AllAssetsResponse, TData> {
+  request?: AllAssetsRequest;
+}
+export interface UseAssetMultiplierQuery<TData> extends ReactQueryParams<AssetMultiplierResponse, TData> {
+  request: AssetMultiplierRequest;
+}
+export interface UseAllIntermediaryAccountsQuery<TData> extends ReactQueryParams<AllIntermediaryAccountsResponse, TData> {
+  request?: AllIntermediaryAccountsRequest;
+}
+export interface UseConnectedIntermediaryAccountQuery<TData> extends ReactQueryParams<ConnectedIntermediaryAccountResponse, TData> {
+  request: ConnectedIntermediaryAccountRequest;
+}
+export interface UseTotalSuperfluidDelegationsQuery<TData> extends ReactQueryParams<TotalSuperfluidDelegationsResponse, TData> {
+  request?: TotalSuperfluidDelegationsRequest;
+}
+export interface UseSuperfluidDelegationAmountQuery<TData> extends ReactQueryParams<SuperfluidDelegationAmountResponse, TData> {
+  request: SuperfluidDelegationAmountRequest;
+}
+export interface UseSuperfluidDelegationsByDelegatorQuery<TData> extends ReactQueryParams<SuperfluidDelegationsByDelegatorResponse, TData> {
+  request: SuperfluidDelegationsByDelegatorRequest;
+}
+export interface UseSuperfluidUndelegationsByDelegatorQuery<TData> extends ReactQueryParams<SuperfluidUndelegationsByDelegatorResponse, TData> {
+  request: SuperfluidUndelegationsByDelegatorRequest;
+}
+export interface UseSuperfluidDelegationsByValidatorDenomQuery<TData> extends ReactQueryParams<SuperfluidDelegationsByValidatorDenomResponse, TData> {
+  request: SuperfluidDelegationsByValidatorDenomRequest;
+}
+export interface UseEstimateSuperfluidDelegatedAmountByValidatorDenomQuery<TData> extends ReactQueryParams<EstimateSuperfluidDelegatedAmountByValidatorDenomResponse, TData> {
+  request: EstimateSuperfluidDelegatedAmountByValidatorDenomRequest;
+}
+export interface UseTotalDelegationByDelegatorQuery<TData> extends ReactQueryParams<QueryTotalDelegationByDelegatorResponse, TData> {
+  request: QueryTotalDelegationByDelegatorRequest;
+}
+
+const _queryClients: WeakMap<ProtobufRpcClient, QueryClientImpl> = new WeakMap();
+
+const getQueryService = (rpc: ProtobufRpcClient | undefined): QueryClientImpl | undefined => {
+  if (!rpc) return;
+
+  if (_queryClients.has(rpc)) {
+    return _queryClients.get(rpc);
+  }
+
+  const queryService = new QueryClientImpl(rpc);
+
+  _queryClients.set(rpc, queryService);
+
+  return queryService;
+};
+
+export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
+  const queryService = getQueryService(rpc);
+
+  const useParams = ({
+    request,
+    options
+  }: UseParamsQuery<TData>) => {
+    return useQuery<QueryParamsResponse, Error, TData>(["paramsQuery", request], () => {
+      if (!queryService) throw new Error("Query Service not initialized");
+      return queryService.params(request);
+    }, options);
+  };
+
+  const useAssetType = ({
+    request,
+    options
+  }: UseAssetTypeQuery<TData>) => {
+    return useQuery<AssetTypeResponse, Error, TData>(["assetTypeQuery", request], () => {
+      if (!queryService) throw new Error("Query Service not initialized");
+      return queryService.assetType(request);
+    }, options);
+  };
+
+  const useAllAssets = ({
+    request,
+    options
+  }: UseAllAssetsQuery<TData>) => {
+    return useQuery<AllAssetsResponse, Error, TData>(["allAssetsQuery", request], () => {
+      if (!queryService) throw new Error("Query Service not initialized");
+      return queryService.allAssets(request);
+    }, options);
+  };
+
+  const useAssetMultiplier = ({
+    request,
+    options
+  }: UseAssetMultiplierQuery<TData>) => {
+    return useQuery<AssetMultiplierResponse, Error, TData>(["assetMultiplierQuery", request], () => {
+      if (!queryService) throw new Error("Query Service not initialized");
+      return queryService.assetMultiplier(request);
+    }, options);
+  };
+
+  const useAllIntermediaryAccounts = ({
+    request,
+    options
+  }: UseAllIntermediaryAccountsQuery<TData>) => {
+    return useQuery<AllIntermediaryAccountsResponse, Error, TData>(["allIntermediaryAccountsQuery", request], () => {
+      if (!queryService) throw new Error("Query Service not initialized");
+      return queryService.allIntermediaryAccounts(request);
+    }, options);
+  };
+
+  const useConnectedIntermediaryAccount = ({
+    request,
+    options
+  }: UseConnectedIntermediaryAccountQuery<TData>) => {
+    return useQuery<ConnectedIntermediaryAccountResponse, Error, TData>(["connectedIntermediaryAccountQuery", request], () => {
+      if (!queryService) throw new Error("Query Service not initialized");
+      return queryService.connectedIntermediaryAccount(request);
+    }, options);
+  };
+
+  const useTotalSuperfluidDelegations = ({
+    request,
+    options
+  }: UseTotalSuperfluidDelegationsQuery<TData>) => {
+    return useQuery<TotalSuperfluidDelegationsResponse, Error, TData>(["totalSuperfluidDelegationsQuery", request], () => {
+      if (!queryService) throw new Error("Query Service not initialized");
+      return queryService.totalSuperfluidDelegations(request);
+    }, options);
+  };
+
+  const useSuperfluidDelegationAmount = ({
+    request,
+    options
+  }: UseSuperfluidDelegationAmountQuery<TData>) => {
+    return useQuery<SuperfluidDelegationAmountResponse, Error, TData>(["superfluidDelegationAmountQuery", request], () => {
+      if (!queryService) throw new Error("Query Service not initialized");
+      return queryService.superfluidDelegationAmount(request);
+    }, options);
+  };
+
+  const useSuperfluidDelegationsByDelegator = ({
+    request,
+    options
+  }: UseSuperfluidDelegationsByDelegatorQuery<TData>) => {
+    return useQuery<SuperfluidDelegationsByDelegatorResponse, Error, TData>(["superfluidDelegationsByDelegatorQuery", request], () => {
+      if (!queryService) throw new Error("Query Service not initialized");
+      return queryService.superfluidDelegationsByDelegator(request);
+    }, options);
+  };
+
+  const useSuperfluidUndelegationsByDelegator = ({
+    request,
+    options
+  }: UseSuperfluidUndelegationsByDelegatorQuery<TData>) => {
+    return useQuery<SuperfluidUndelegationsByDelegatorResponse, Error, TData>(["superfluidUndelegationsByDelegatorQuery", request], () => {
+      if (!queryService) throw new Error("Query Service not initialized");
+      return queryService.superfluidUndelegationsByDelegator(request);
+    }, options);
+  };
+
+  const useSuperfluidDelegationsByValidatorDenom = ({
+    request,
+    options
+  }: UseSuperfluidDelegationsByValidatorDenomQuery<TData>) => {
+    return useQuery<SuperfluidDelegationsByValidatorDenomResponse, Error, TData>(["superfluidDelegationsByValidatorDenomQuery", request], () => {
+      if (!queryService) throw new Error("Query Service not initialized");
+      return queryService.superfluidDelegationsByValidatorDenom(request);
+    }, options);
+  };
+
+  const useEstimateSuperfluidDelegatedAmountByValidatorDenom = ({
+    request,
+    options
+  }: UseEstimateSuperfluidDelegatedAmountByValidatorDenomQuery<TData>) => {
+    return useQuery<EstimateSuperfluidDelegatedAmountByValidatorDenomResponse, Error, TData>(["estimateSuperfluidDelegatedAmountByValidatorDenomQuery", request], () => {
+      if (!queryService) throw new Error("Query Service not initialized");
+      return queryService.estimateSuperfluidDelegatedAmountByValidatorDenom(request);
+    }, options);
+  };
+
+  const useTotalDelegationByDelegator = ({
+    request,
+    options
+  }: UseTotalDelegationByDelegatorQuery<TData>) => {
+    return useQuery<QueryTotalDelegationByDelegatorResponse, Error, TData>(["totalDelegationByDelegatorQuery", request], () => {
+      if (!queryService) throw new Error("Query Service not initialized");
+      return queryService.totalDelegationByDelegator(request);
+    }, options);
+  };
+
+  return {
+    /** Params returns the total set of superfluid parameters. */
+    useParams,
+
+    /**
+     * Returns superfluid asset type, whether if it's a native asset or an lp
+     * share.
+     */
+    useAssetType,
+
+    /** Returns all registered superfluid assets. */
+    useAllAssets,
+
+    /** Returns the osmo equivalent multiplier used in the most recent epoch. */
+    useAssetMultiplier,
+
+    /** Returns all superfluid intermediary accounts. */
+    useAllIntermediaryAccounts,
+
+    /** Returns intermediary account connected to a superfluid staked lock by id */
+    useConnectedIntermediaryAccount,
+
+    /**
+     * Returns the total amount of osmo superfluidly staked.
+     * Response is denominated in uosmo.
+     */
+    useTotalSuperfluidDelegations,
+
+    /**
+     * Returns the coins superfluid delegated for the delegator, validator, denom
+     * triplet
+     */
+    useSuperfluidDelegationAmount,
+
+    /** Returns all the delegated superfluid poistions for a specific delegator. */
+    useSuperfluidDelegationsByDelegator,
+
+    /** Returns all the undelegating superfluid poistions for a specific delegator. */
+    useSuperfluidUndelegationsByDelegator,
+
+    /**
+     * Returns all the superfluid positions of a specific denom delegated to one
+     * validator
+     */
+    useSuperfluidDelegationsByValidatorDenom,
+
+    /**
+     * Returns the amount of a specific denom delegated to a specific validator
+     * This is labeled an estimate, because the way it calculates the amount can
+     * lead rounding errors from the true delegated amount
+     */
+    useEstimateSuperfluidDelegatedAmountByValidatorDenom,
+
+    /** Returns the specified delegations for a specific delegator */
+    useTotalDelegationByDelegator
   };
 };

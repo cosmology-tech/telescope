@@ -2,7 +2,9 @@ import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } fr
 import { Account, AccountSDKType, Payment, PaymentSDKType } from "./types";
 import { Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
+import { QueryClient, createProtobufRpcClient, ProtobufRpcClient } from "@cosmjs/stargate";
+import { ReactQueryParams } from "../../../react-query";
+import { useQuery } from "@tanstack/react-query";
 import { QueryAccountsRequest, QueryAccountsRequestSDKType, QueryAccountsResponse, QueryAccountsResponseSDKType, QueryPaymentsRequest, QueryPaymentsRequestSDKType, QueryPaymentsResponse, QueryPaymentsResponseSDKType } from "./query";
 
 /** Query defines the gRPC querier service */
@@ -58,5 +60,67 @@ export const createRpcQueryExtension = (base: QueryClient) => {
       return queryService.payments(request);
     }
 
+  };
+};
+export interface UseAccountsQuery<TData> extends ReactQueryParams<QueryAccountsResponse, TData> {
+  request: QueryAccountsRequest;
+}
+export interface UsePaymentsQuery<TData> extends ReactQueryParams<QueryPaymentsResponse, TData> {
+  request: QueryPaymentsRequest;
+}
+
+const _queryClients: WeakMap<ProtobufRpcClient, QueryClientImpl> = new WeakMap();
+
+const getQueryService = (rpc: ProtobufRpcClient | undefined): QueryClientImpl | undefined => {
+  if (!rpc) return;
+
+  if (_queryClients.has(rpc)) {
+    return _queryClients.get(rpc);
+  }
+
+  const queryService = new QueryClientImpl(rpc);
+
+  _queryClients.set(rpc, queryService);
+
+  return queryService;
+};
+
+export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
+  const queryService = getQueryService(rpc);
+
+  const useAccounts = ({
+    request,
+    options
+  }: UseAccountsQuery<TData>) => {
+    return useQuery<QueryAccountsResponse, Error, TData>(["accountsQuery", request], () => {
+      if (!queryService) throw new Error("Query Service not initialized");
+      return queryService.accounts(request);
+    }, options);
+  };
+
+  const usePayments = ({
+    request,
+    options
+  }: UsePaymentsQuery<TData>) => {
+    return useQuery<QueryPaymentsResponse, Error, TData>(["paymentsQuery", request], () => {
+      if (!queryService) throw new Error("Query Service not initialized");
+      return queryService.payments(request);
+    }, options);
+  };
+
+  return {
+    /**
+     * buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
+     * buf:lint:ignore RPC_RESPONSE_STANDARD_NAME
+     * Accounts queries all accounts
+     */
+    useAccounts,
+
+    /**
+     * buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
+     * buf:lint:ignore RPC_RESPONSE_STANDARD_NAME
+     * Payments queries all payments
+     */
+    usePayments
   };
 };

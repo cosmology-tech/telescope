@@ -2,7 +2,9 @@ import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } fr
 import { Grant, GrantSDKType } from "./feegrant";
 import { Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
+import { QueryClient, createProtobufRpcClient, ProtobufRpcClient } from "@cosmjs/stargate";
+import { ReactQueryParams } from "../../../react-query";
+import { useQuery } from "@tanstack/react-query";
 import { QueryAllowanceRequest, QueryAllowanceRequestSDKType, QueryAllowanceResponse, QueryAllowanceResponseSDKType, QueryAllowancesRequest, QueryAllowancesRequestSDKType, QueryAllowancesResponse, QueryAllowancesResponseSDKType, QueryAllowancesByGranterRequest, QueryAllowancesByGranterRequestSDKType, QueryAllowancesByGranterResponse, QueryAllowancesByGranterResponseSDKType } from "./query";
 
 /** Query defines the gRPC querier service. */
@@ -64,5 +66,78 @@ export const createRpcQueryExtension = (base: QueryClient) => {
       return queryService.allowancesByGranter(request);
     }
 
+  };
+};
+export interface UseAllowanceQuery<TData> extends ReactQueryParams<QueryAllowanceResponse, TData> {
+  request: QueryAllowanceRequest;
+}
+export interface UseAllowancesQuery<TData> extends ReactQueryParams<QueryAllowancesResponse, TData> {
+  request: QueryAllowancesRequest;
+}
+export interface UseAllowancesByGranterQuery<TData> extends ReactQueryParams<QueryAllowancesByGranterResponse, TData> {
+  request: QueryAllowancesByGranterRequest;
+}
+
+const _queryClients: WeakMap<ProtobufRpcClient, QueryClientImpl> = new WeakMap();
+
+const getQueryService = (rpc: ProtobufRpcClient | undefined): QueryClientImpl | undefined => {
+  if (!rpc) return;
+
+  if (_queryClients.has(rpc)) {
+    return _queryClients.get(rpc);
+  }
+
+  const queryService = new QueryClientImpl(rpc);
+
+  _queryClients.set(rpc, queryService);
+
+  return queryService;
+};
+
+export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
+  const queryService = getQueryService(rpc);
+
+  const useAllowance = ({
+    request,
+    options
+  }: UseAllowanceQuery<TData>) => {
+    return useQuery<QueryAllowanceResponse, Error, TData>(["allowanceQuery", request], () => {
+      if (!queryService) throw new Error("Query Service not initialized");
+      return queryService.allowance(request);
+    }, options);
+  };
+
+  const useAllowances = ({
+    request,
+    options
+  }: UseAllowancesQuery<TData>) => {
+    return useQuery<QueryAllowancesResponse, Error, TData>(["allowancesQuery", request], () => {
+      if (!queryService) throw new Error("Query Service not initialized");
+      return queryService.allowances(request);
+    }, options);
+  };
+
+  const useAllowancesByGranter = ({
+    request,
+    options
+  }: UseAllowancesByGranterQuery<TData>) => {
+    return useQuery<QueryAllowancesByGranterResponse, Error, TData>(["allowancesByGranterQuery", request], () => {
+      if (!queryService) throw new Error("Query Service not initialized");
+      return queryService.allowancesByGranter(request);
+    }, options);
+  };
+
+  return {
+    /** Allowance returns fee granted to the grantee by the granter. */
+    useAllowance,
+
+    /** Allowances returns all the grants for address. */
+    useAllowances,
+
+    /**
+     * AllowancesByGranter returns all the grants given by an address
+     * Since v0.46
+     */
+    useAllowancesByGranter
   };
 };

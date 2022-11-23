@@ -2,7 +2,9 @@ import { DecCoin, DecCoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { Params, ParamsSDKType } from "./genesis";
 import { Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
+import { QueryClient, createProtobufRpcClient, ProtobufRpcClient } from "@cosmjs/stargate";
+import { ReactQueryParams } from "../../../react-query";
+import { useQuery } from "@tanstack/react-query";
 import { QueryPeriodRequest, QueryPeriodRequestSDKType, QueryPeriodResponse, QueryPeriodResponseSDKType, QueryEpochMintProvisionRequest, QueryEpochMintProvisionRequestSDKType, QueryEpochMintProvisionResponse, QueryEpochMintProvisionResponseSDKType, QuerySkippedEpochsRequest, QuerySkippedEpochsRequestSDKType, QuerySkippedEpochsResponse, QuerySkippedEpochsResponseSDKType, QueryCirculatingSupplyRequest, QueryCirculatingSupplyRequestSDKType, QueryCirculatingSupplyResponse, QueryCirculatingSupplyResponseSDKType, QueryInflationRateRequest, QueryInflationRateRequestSDKType, QueryInflationRateResponse, QueryInflationRateResponseSDKType, QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType } from "./query";
 
 /** Query provides defines the gRPC querier service. */
@@ -106,5 +108,126 @@ export const createRpcQueryExtension = (base: QueryClient) => {
       return queryService.params(request);
     }
 
+  };
+};
+export interface UsePeriodQuery<TData> extends ReactQueryParams<QueryPeriodResponse, TData> {
+  request?: QueryPeriodRequest;
+}
+export interface UseEpochMintProvisionQuery<TData> extends ReactQueryParams<QueryEpochMintProvisionResponse, TData> {
+  request?: QueryEpochMintProvisionRequest;
+}
+export interface UseSkippedEpochsQuery<TData> extends ReactQueryParams<QuerySkippedEpochsResponse, TData> {
+  request?: QuerySkippedEpochsRequest;
+}
+export interface UseCirculatingSupplyQuery<TData> extends ReactQueryParams<QueryCirculatingSupplyResponse, TData> {
+  request?: QueryCirculatingSupplyRequest;
+}
+export interface UseInflationRateQuery<TData> extends ReactQueryParams<QueryInflationRateResponse, TData> {
+  request?: QueryInflationRateRequest;
+}
+export interface UseParamsQuery<TData> extends ReactQueryParams<QueryParamsResponse, TData> {
+  request?: QueryParamsRequest;
+}
+
+const _queryClients: WeakMap<ProtobufRpcClient, QueryClientImpl> = new WeakMap();
+
+const getQueryService = (rpc: ProtobufRpcClient | undefined): QueryClientImpl | undefined => {
+  if (!rpc) return;
+
+  if (_queryClients.has(rpc)) {
+    return _queryClients.get(rpc);
+  }
+
+  const queryService = new QueryClientImpl(rpc);
+
+  _queryClients.set(rpc, queryService);
+
+  return queryService;
+};
+
+export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
+  const queryService = getQueryService(rpc);
+
+  const usePeriod = ({
+    request,
+    options
+  }: UsePeriodQuery<TData>) => {
+    return useQuery<QueryPeriodResponse, Error, TData>(["periodQuery", request], () => {
+      if (!queryService) throw new Error("Query Service not initialized");
+      return queryService.period(request);
+    }, options);
+  };
+
+  const useEpochMintProvision = ({
+    request,
+    options
+  }: UseEpochMintProvisionQuery<TData>) => {
+    return useQuery<QueryEpochMintProvisionResponse, Error, TData>(["epochMintProvisionQuery", request], () => {
+      if (!queryService) throw new Error("Query Service not initialized");
+      return queryService.epochMintProvision(request);
+    }, options);
+  };
+
+  const useSkippedEpochs = ({
+    request,
+    options
+  }: UseSkippedEpochsQuery<TData>) => {
+    return useQuery<QuerySkippedEpochsResponse, Error, TData>(["skippedEpochsQuery", request], () => {
+      if (!queryService) throw new Error("Query Service not initialized");
+      return queryService.skippedEpochs(request);
+    }, options);
+  };
+
+  const useCirculatingSupply = ({
+    request,
+    options
+  }: UseCirculatingSupplyQuery<TData>) => {
+    return useQuery<QueryCirculatingSupplyResponse, Error, TData>(["circulatingSupplyQuery", request], () => {
+      if (!queryService) throw new Error("Query Service not initialized");
+      return queryService.circulatingSupply(request);
+    }, options);
+  };
+
+  const useInflationRate = ({
+    request,
+    options
+  }: UseInflationRateQuery<TData>) => {
+    return useQuery<QueryInflationRateResponse, Error, TData>(["inflationRateQuery", request], () => {
+      if (!queryService) throw new Error("Query Service not initialized");
+      return queryService.inflationRate(request);
+    }, options);
+  };
+
+  const useParams = ({
+    request,
+    options
+  }: UseParamsQuery<TData>) => {
+    return useQuery<QueryParamsResponse, Error, TData>(["paramsQuery", request], () => {
+      if (!queryService) throw new Error("Query Service not initialized");
+      return queryService.params(request);
+    }, options);
+  };
+
+  return {
+    /** Period retrieves current period. */
+    usePeriod,
+
+    /** EpochMintProvision retrieves current minting epoch provision value. */
+    useEpochMintProvision,
+
+    /** SkippedEpochs retrieves the total number of skipped epochs. */
+    useSkippedEpochs,
+
+    /**
+     * CirculatingSupply retrieves the total number of tokens that are in
+     * circulation (i.e. excluding unvested tokens).
+     */
+    useCirculatingSupply,
+
+    /** InflationRate retrieves the inflation rate of the current period. */
+    useInflationRate,
+
+    /** Params retrieves the total set of minting parameters. */
+    useParams
   };
 };

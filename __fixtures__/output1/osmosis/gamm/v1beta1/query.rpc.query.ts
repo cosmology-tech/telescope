@@ -4,7 +4,9 @@ import { Any, AnySDKType } from "../../../google/protobuf/any";
 import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
+import { QueryClient, createProtobufRpcClient, ProtobufRpcClient } from "@cosmjs/stargate";
+import { ReactQueryParams } from "../../../react-query";
+import { useQuery } from "@tanstack/react-query";
 import { QueryPoolsRequest, QueryPoolsRequestSDKType, QueryPoolsResponse, QueryPoolsResponseSDKType, QueryNumPoolsRequest, QueryNumPoolsRequestSDKType, QueryNumPoolsResponse, QueryNumPoolsResponseSDKType, QueryTotalLiquidityRequest, QueryTotalLiquidityRequestSDKType, QueryTotalLiquidityResponse, QueryTotalLiquidityResponseSDKType, QueryPoolRequest, QueryPoolRequestSDKType, QueryPoolResponse, QueryPoolResponseSDKType, QueryPoolTypeRequest, QueryPoolTypeRequestSDKType, QueryPoolTypeResponse, QueryPoolTypeResponseSDKType, QueryPoolParamsRequest, QueryPoolParamsRequestSDKType, QueryPoolParamsResponse, QueryPoolParamsResponseSDKType, QueryTotalPoolLiquidityRequest, QueryTotalPoolLiquidityRequestSDKType, QueryTotalPoolLiquidityResponse, QueryTotalPoolLiquidityResponseSDKType, QueryTotalSharesRequest, QueryTotalSharesRequestSDKType, QueryTotalSharesResponse, QueryTotalSharesResponseSDKType, QuerySpotPriceRequest, QuerySpotPriceRequestSDKType, QuerySpotPriceResponse, QuerySpotPriceResponseSDKType, QuerySwapExactAmountInRequest, QuerySwapExactAmountInRequestSDKType, QuerySwapExactAmountInResponse, QuerySwapExactAmountInResponseSDKType, QuerySwapExactAmountOutRequest, QuerySwapExactAmountOutRequestSDKType, QuerySwapExactAmountOutResponse, QuerySwapExactAmountOutResponseSDKType } from "./query";
 export interface Query {
   pools(request?: QueryPoolsRequest): Promise<QueryPoolsResponse>;
@@ -169,5 +171,197 @@ export const createRpcQueryExtension = (base: QueryClient) => {
       return queryService.estimateSwapExactAmountOut(request);
     }
 
+  };
+};
+export interface UsePoolsQuery<TData> extends ReactQueryParams<QueryPoolsResponse, TData> {
+  request?: QueryPoolsRequest;
+}
+export interface UseNumPoolsQuery<TData> extends ReactQueryParams<QueryNumPoolsResponse, TData> {
+  request?: QueryNumPoolsRequest;
+}
+export interface UseTotalLiquidityQuery<TData> extends ReactQueryParams<QueryTotalLiquidityResponse, TData> {
+  request?: QueryTotalLiquidityRequest;
+}
+export interface UsePoolQuery<TData> extends ReactQueryParams<QueryPoolResponse, TData> {
+  request: QueryPoolRequest;
+}
+export interface UsePoolTypeQuery<TData> extends ReactQueryParams<QueryPoolTypeResponse, TData> {
+  request: QueryPoolTypeRequest;
+}
+export interface UsePoolParamsQuery<TData> extends ReactQueryParams<QueryPoolParamsResponse, TData> {
+  request: QueryPoolParamsRequest;
+}
+export interface UseTotalPoolLiquidityQuery<TData> extends ReactQueryParams<QueryTotalPoolLiquidityResponse, TData> {
+  request: QueryTotalPoolLiquidityRequest;
+}
+export interface UseTotalSharesQuery<TData> extends ReactQueryParams<QueryTotalSharesResponse, TData> {
+  request: QueryTotalSharesRequest;
+}
+export interface UseSpotPriceQuery<TData> extends ReactQueryParams<QuerySpotPriceResponse, TData> {
+  request: QuerySpotPriceRequest;
+}
+export interface UseEstimateSwapExactAmountInQuery<TData> extends ReactQueryParams<QuerySwapExactAmountInResponse, TData> {
+  request: QuerySwapExactAmountInRequest;
+}
+export interface UseEstimateSwapExactAmountOutQuery<TData> extends ReactQueryParams<QuerySwapExactAmountOutResponse, TData> {
+  request: QuerySwapExactAmountOutRequest;
+}
+
+const _queryClients: WeakMap<ProtobufRpcClient, QueryClientImpl> = new WeakMap();
+
+const getQueryService = (rpc: ProtobufRpcClient | undefined): QueryClientImpl | undefined => {
+  if (!rpc) return;
+
+  if (_queryClients.has(rpc)) {
+    return _queryClients.get(rpc);
+  }
+
+  const queryService = new QueryClientImpl(rpc);
+
+  _queryClients.set(rpc, queryService);
+
+  return queryService;
+};
+
+export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
+  const queryService = getQueryService(rpc);
+
+  const usePools = ({
+    request,
+    options
+  }: UsePoolsQuery<TData>) => {
+    return useQuery<QueryPoolsResponse, Error, TData>(["poolsQuery", request], () => {
+      if (!queryService) throw new Error("Query Service not initialized");
+      return queryService.pools(request);
+    }, options);
+  };
+
+  const useNumPools = ({
+    request,
+    options
+  }: UseNumPoolsQuery<TData>) => {
+    return useQuery<QueryNumPoolsResponse, Error, TData>(["numPoolsQuery", request], () => {
+      if (!queryService) throw new Error("Query Service not initialized");
+      return queryService.numPools(request);
+    }, options);
+  };
+
+  const useTotalLiquidity = ({
+    request,
+    options
+  }: UseTotalLiquidityQuery<TData>) => {
+    return useQuery<QueryTotalLiquidityResponse, Error, TData>(["totalLiquidityQuery", request], () => {
+      if (!queryService) throw new Error("Query Service not initialized");
+      return queryService.totalLiquidity(request);
+    }, options);
+  };
+
+  const usePool = ({
+    request,
+    options
+  }: UsePoolQuery<TData>) => {
+    return useQuery<QueryPoolResponse, Error, TData>(["poolQuery", request], () => {
+      if (!queryService) throw new Error("Query Service not initialized");
+      return queryService.pool(request);
+    }, options);
+  };
+
+  const usePoolType = ({
+    request,
+    options
+  }: UsePoolTypeQuery<TData>) => {
+    return useQuery<QueryPoolTypeResponse, Error, TData>(["poolTypeQuery", request], () => {
+      if (!queryService) throw new Error("Query Service not initialized");
+      return queryService.poolType(request);
+    }, options);
+  };
+
+  const usePoolParams = ({
+    request,
+    options
+  }: UsePoolParamsQuery<TData>) => {
+    return useQuery<QueryPoolParamsResponse, Error, TData>(["poolParamsQuery", request], () => {
+      if (!queryService) throw new Error("Query Service not initialized");
+      return queryService.poolParams(request);
+    }, options);
+  };
+
+  const useTotalPoolLiquidity = ({
+    request,
+    options
+  }: UseTotalPoolLiquidityQuery<TData>) => {
+    return useQuery<QueryTotalPoolLiquidityResponse, Error, TData>(["totalPoolLiquidityQuery", request], () => {
+      if (!queryService) throw new Error("Query Service not initialized");
+      return queryService.totalPoolLiquidity(request);
+    }, options);
+  };
+
+  const useTotalShares = ({
+    request,
+    options
+  }: UseTotalSharesQuery<TData>) => {
+    return useQuery<QueryTotalSharesResponse, Error, TData>(["totalSharesQuery", request], () => {
+      if (!queryService) throw new Error("Query Service not initialized");
+      return queryService.totalShares(request);
+    }, options);
+  };
+
+  const useSpotPrice = ({
+    request,
+    options
+  }: UseSpotPriceQuery<TData>) => {
+    return useQuery<QuerySpotPriceResponse, Error, TData>(["spotPriceQuery", request], () => {
+      if (!queryService) throw new Error("Query Service not initialized");
+      return queryService.spotPrice(request);
+    }, options);
+  };
+
+  const useEstimateSwapExactAmountIn = ({
+    request,
+    options
+  }: UseEstimateSwapExactAmountInQuery<TData>) => {
+    return useQuery<QuerySwapExactAmountInResponse, Error, TData>(["estimateSwapExactAmountInQuery", request], () => {
+      if (!queryService) throw new Error("Query Service not initialized");
+      return queryService.estimateSwapExactAmountIn(request);
+    }, options);
+  };
+
+  const useEstimateSwapExactAmountOut = ({
+    request,
+    options
+  }: UseEstimateSwapExactAmountOutQuery<TData>) => {
+    return useQuery<QuerySwapExactAmountOutResponse, Error, TData>(["estimateSwapExactAmountOutQuery", request], () => {
+      if (!queryService) throw new Error("Query Service not initialized");
+      return queryService.estimateSwapExactAmountOut(request);
+    }, options);
+  };
+
+  return {
+    usePools,
+    useNumPools,
+    useTotalLiquidity,
+
+    /** Per Pool gRPC Endpoints */
+    usePool,
+
+    /**
+     * PoolType returns the type of the pool.
+     * Returns "Balancer" as a string literal when the pool is a balancer pool.
+     * Errors if the pool is failed to be type caseted.
+     */
+    usePoolType,
+    usePoolParams,
+    useTotalPoolLiquidity,
+    useTotalShares,
+
+    /**
+     * SpotPrice defines a gRPC query handler that returns the spot price given
+     * a base denomination and a quote denomination.
+     */
+    useSpotPrice,
+
+    /** Estimate the swap. */
+    useEstimateSwapExactAmountIn,
+    useEstimateSwapExactAmountOut
   };
 };

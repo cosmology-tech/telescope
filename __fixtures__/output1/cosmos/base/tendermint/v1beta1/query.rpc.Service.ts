@@ -5,7 +5,9 @@ import { Block, BlockSDKType } from "../../../../tendermint/types/block";
 import { NodeInfo, NodeInfoSDKType } from "../../../../tendermint/p2p/types";
 import { Rpc } from "../../../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
+import { QueryClient, createProtobufRpcClient, ProtobufRpcClient } from "@cosmjs/stargate";
+import { ReactQueryParams } from "../../../../react-query";
+import { useQuery } from "@tanstack/react-query";
 import { GetNodeInfoRequest, GetNodeInfoRequestSDKType, GetNodeInfoResponse, GetNodeInfoResponseSDKType, GetSyncingRequest, GetSyncingRequestSDKType, GetSyncingResponse, GetSyncingResponseSDKType, GetLatestBlockRequest, GetLatestBlockRequestSDKType, GetLatestBlockResponse, GetLatestBlockResponseSDKType, GetBlockByHeightRequest, GetBlockByHeightRequestSDKType, GetBlockByHeightResponse, GetBlockByHeightResponseSDKType, GetLatestValidatorSetRequest, GetLatestValidatorSetRequestSDKType, GetLatestValidatorSetResponse, GetLatestValidatorSetResponseSDKType, GetValidatorSetByHeightRequest, GetValidatorSetByHeightRequestSDKType, GetValidatorSetByHeightResponse, GetValidatorSetByHeightResponseSDKType } from "./query";
 
 /** Service defines the gRPC querier service for tendermint queries. */
@@ -108,5 +110,123 @@ export const createRpcQueryExtension = (base: QueryClient) => {
       return queryService.getValidatorSetByHeight(request);
     }
 
+  };
+};
+export interface UseGetNodeInfoQuery<TData> extends ReactQueryParams<GetNodeInfoResponse, TData> {
+  request?: GetNodeInfoRequest;
+}
+export interface UseGetSyncingQuery<TData> extends ReactQueryParams<GetSyncingResponse, TData> {
+  request?: GetSyncingRequest;
+}
+export interface UseGetLatestBlockQuery<TData> extends ReactQueryParams<GetLatestBlockResponse, TData> {
+  request?: GetLatestBlockRequest;
+}
+export interface UseGetBlockByHeightQuery<TData> extends ReactQueryParams<GetBlockByHeightResponse, TData> {
+  request: GetBlockByHeightRequest;
+}
+export interface UseGetLatestValidatorSetQuery<TData> extends ReactQueryParams<GetLatestValidatorSetResponse, TData> {
+  request?: GetLatestValidatorSetRequest;
+}
+export interface UseGetValidatorSetByHeightQuery<TData> extends ReactQueryParams<GetValidatorSetByHeightResponse, TData> {
+  request: GetValidatorSetByHeightRequest;
+}
+
+const _queryClients: WeakMap<ProtobufRpcClient, QueryClientImpl> = new WeakMap();
+
+const getQueryService = (rpc: ProtobufRpcClient | undefined): QueryClientImpl | undefined => {
+  if (!rpc) return;
+
+  if (_queryClients.has(rpc)) {
+    return _queryClients.get(rpc);
+  }
+
+  const queryService = new QueryClientImpl(rpc);
+
+  _queryClients.set(rpc, queryService);
+
+  return queryService;
+};
+
+export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
+  const queryService = getQueryService(rpc);
+
+  const useGetNodeInfo = ({
+    request,
+    options
+  }: UseGetNodeInfoQuery<TData>) => {
+    return useQuery<GetNodeInfoResponse, Error, TData>(["getNodeInfoQuery", request], () => {
+      if (!queryService) throw new Error("Query Service not initialized");
+      return queryService.getNodeInfo(request);
+    }, options);
+  };
+
+  const useGetSyncing = ({
+    request,
+    options
+  }: UseGetSyncingQuery<TData>) => {
+    return useQuery<GetSyncingResponse, Error, TData>(["getSyncingQuery", request], () => {
+      if (!queryService) throw new Error("Query Service not initialized");
+      return queryService.getSyncing(request);
+    }, options);
+  };
+
+  const useGetLatestBlock = ({
+    request,
+    options
+  }: UseGetLatestBlockQuery<TData>) => {
+    return useQuery<GetLatestBlockResponse, Error, TData>(["getLatestBlockQuery", request], () => {
+      if (!queryService) throw new Error("Query Service not initialized");
+      return queryService.getLatestBlock(request);
+    }, options);
+  };
+
+  const useGetBlockByHeight = ({
+    request,
+    options
+  }: UseGetBlockByHeightQuery<TData>) => {
+    return useQuery<GetBlockByHeightResponse, Error, TData>(["getBlockByHeightQuery", request], () => {
+      if (!queryService) throw new Error("Query Service not initialized");
+      return queryService.getBlockByHeight(request);
+    }, options);
+  };
+
+  const useGetLatestValidatorSet = ({
+    request,
+    options
+  }: UseGetLatestValidatorSetQuery<TData>) => {
+    return useQuery<GetLatestValidatorSetResponse, Error, TData>(["getLatestValidatorSetQuery", request], () => {
+      if (!queryService) throw new Error("Query Service not initialized");
+      return queryService.getLatestValidatorSet(request);
+    }, options);
+  };
+
+  const useGetValidatorSetByHeight = ({
+    request,
+    options
+  }: UseGetValidatorSetByHeightQuery<TData>) => {
+    return useQuery<GetValidatorSetByHeightResponse, Error, TData>(["getValidatorSetByHeightQuery", request], () => {
+      if (!queryService) throw new Error("Query Service not initialized");
+      return queryService.getValidatorSetByHeight(request);
+    }, options);
+  };
+
+  return {
+    /** GetNodeInfo queries the current node info. */
+    useGetNodeInfo,
+
+    /** GetSyncing queries node syncing. */
+    useGetSyncing,
+
+    /** GetLatestBlock returns the latest block. */
+    useGetLatestBlock,
+
+    /** GetBlockByHeight queries block for given height. */
+    useGetBlockByHeight,
+
+    /** GetLatestValidatorSet queries latest validator-set. */
+    useGetLatestValidatorSet,
+
+    /** GetValidatorSetByHeight queries validator-set at a given height. */
+    useGetValidatorSetByHeight
   };
 };

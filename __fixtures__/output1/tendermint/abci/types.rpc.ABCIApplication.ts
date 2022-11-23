@@ -5,7 +5,9 @@ import { EvidenceParams, EvidenceParamsSDKType, ValidatorParams, ValidatorParams
 import { PublicKey, PublicKeySDKType } from "../crypto/keys";
 import { Rpc } from "../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
+import { QueryClient, createProtobufRpcClient, ProtobufRpcClient } from "@cosmjs/stargate";
+import { ReactQueryParams } from "../../react-query";
+import { useQuery } from "@tanstack/react-query";
 import { RequestEcho, RequestEchoSDKType, ResponseEcho, ResponseEchoSDKType, RequestFlush, RequestFlushSDKType, ResponseFlush, ResponseFlushSDKType, RequestInfo, RequestInfoSDKType, ResponseInfo, ResponseInfoSDKType, RequestSetOption, RequestSetOptionSDKType, ResponseSetOption, ResponseSetOptionSDKType, RequestDeliverTx, RequestDeliverTxSDKType, ResponseDeliverTx, ResponseDeliverTxSDKType, RequestCheckTx, RequestCheckTxSDKType, ResponseCheckTx, ResponseCheckTxSDKType, RequestQuery, RequestQuerySDKType, ResponseQuery, ResponseQuerySDKType, RequestCommit, RequestCommitSDKType, ResponseCommit, ResponseCommitSDKType, RequestInitChain, RequestInitChainSDKType, ResponseInitChain, ResponseInitChainSDKType, RequestBeginBlock, RequestBeginBlockSDKType, ResponseBeginBlock, ResponseBeginBlockSDKType, RequestEndBlock, RequestEndBlockSDKType, ResponseEndBlock, ResponseEndBlockSDKType, RequestListSnapshots, RequestListSnapshotsSDKType, ResponseListSnapshots, ResponseListSnapshotsSDKType, RequestOfferSnapshot, RequestOfferSnapshotSDKType, ResponseOfferSnapshot, ResponseOfferSnapshotSDKType, RequestLoadSnapshotChunk, RequestLoadSnapshotChunkSDKType, ResponseLoadSnapshotChunk, ResponseLoadSnapshotChunkSDKType, RequestApplySnapshotChunk, RequestApplySnapshotChunkSDKType, ResponseApplySnapshotChunk, ResponseApplySnapshotChunkSDKType } from "./types";
 export interface ABCIApplication {
   echo(request: RequestEcho): Promise<ResponseEcho>;
@@ -201,5 +203,238 @@ export const createRpcQueryExtension = (base: QueryClient) => {
       return queryService.applySnapshotChunk(request);
     }
 
+  };
+};
+export interface UseEchoQuery<TData> extends ReactQueryParams<ResponseEcho, TData> {
+  request: RequestEcho;
+}
+export interface UseFlushQuery<TData> extends ReactQueryParams<ResponseFlush, TData> {
+  request?: RequestFlush;
+}
+export interface UseInfoQuery<TData> extends ReactQueryParams<ResponseInfo, TData> {
+  request: RequestInfo;
+}
+export interface UseSetOptionQuery<TData> extends ReactQueryParams<ResponseSetOption, TData> {
+  request: RequestSetOption;
+}
+export interface UseDeliverTxQuery<TData> extends ReactQueryParams<ResponseDeliverTx, TData> {
+  request: RequestDeliverTx;
+}
+export interface UseCheckTxQuery<TData> extends ReactQueryParams<ResponseCheckTx, TData> {
+  request: RequestCheckTx;
+}
+export interface UseQueryQuery<TData> extends ReactQueryParams<ResponseQuery, TData> {
+  request: RequestQuery;
+}
+export interface UseCommitQuery<TData> extends ReactQueryParams<ResponseCommit, TData> {
+  request?: RequestCommit;
+}
+export interface UseInitChainQuery<TData> extends ReactQueryParams<ResponseInitChain, TData> {
+  request: RequestInitChain;
+}
+export interface UseBeginBlockQuery<TData> extends ReactQueryParams<ResponseBeginBlock, TData> {
+  request: RequestBeginBlock;
+}
+export interface UseEndBlockQuery<TData> extends ReactQueryParams<ResponseEndBlock, TData> {
+  request: RequestEndBlock;
+}
+export interface UseListSnapshotsQuery<TData> extends ReactQueryParams<ResponseListSnapshots, TData> {
+  request?: RequestListSnapshots;
+}
+export interface UseOfferSnapshotQuery<TData> extends ReactQueryParams<ResponseOfferSnapshot, TData> {
+  request: RequestOfferSnapshot;
+}
+export interface UseLoadSnapshotChunkQuery<TData> extends ReactQueryParams<ResponseLoadSnapshotChunk, TData> {
+  request: RequestLoadSnapshotChunk;
+}
+export interface UseApplySnapshotChunkQuery<TData> extends ReactQueryParams<ResponseApplySnapshotChunk, TData> {
+  request: RequestApplySnapshotChunk;
+}
+
+const _queryClients: WeakMap<ProtobufRpcClient, QueryClientImpl> = new WeakMap();
+
+const getQueryService = (rpc: ProtobufRpcClient | undefined): QueryClientImpl | undefined => {
+  if (!rpc) return;
+
+  if (_queryClients.has(rpc)) {
+    return _queryClients.get(rpc);
+  }
+
+  const queryService = new QueryClientImpl(rpc);
+
+  _queryClients.set(rpc, queryService);
+
+  return queryService;
+};
+
+export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
+  const queryService = getQueryService(rpc);
+
+  const useEcho = ({
+    request,
+    options
+  }: UseEchoQuery<TData>) => {
+    return useQuery<ResponseEcho, Error, TData>(["echoQuery", request], () => {
+      if (!queryService) throw new Error("Query Service not initialized");
+      return queryService.echo(request);
+    }, options);
+  };
+
+  const useFlush = ({
+    request,
+    options
+  }: UseFlushQuery<TData>) => {
+    return useQuery<ResponseFlush, Error, TData>(["flushQuery", request], () => {
+      if (!queryService) throw new Error("Query Service not initialized");
+      return queryService.flush(request);
+    }, options);
+  };
+
+  const useInfo = ({
+    request,
+    options
+  }: UseInfoQuery<TData>) => {
+    return useQuery<ResponseInfo, Error, TData>(["infoQuery", request], () => {
+      if (!queryService) throw new Error("Query Service not initialized");
+      return queryService.info(request);
+    }, options);
+  };
+
+  const useSetOption = ({
+    request,
+    options
+  }: UseSetOptionQuery<TData>) => {
+    return useQuery<ResponseSetOption, Error, TData>(["setOptionQuery", request], () => {
+      if (!queryService) throw new Error("Query Service not initialized");
+      return queryService.setOption(request);
+    }, options);
+  };
+
+  const useDeliverTx = ({
+    request,
+    options
+  }: UseDeliverTxQuery<TData>) => {
+    return useQuery<ResponseDeliverTx, Error, TData>(["deliverTxQuery", request], () => {
+      if (!queryService) throw new Error("Query Service not initialized");
+      return queryService.deliverTx(request);
+    }, options);
+  };
+
+  const useCheckTx = ({
+    request,
+    options
+  }: UseCheckTxQuery<TData>) => {
+    return useQuery<ResponseCheckTx, Error, TData>(["checkTxQuery", request], () => {
+      if (!queryService) throw new Error("Query Service not initialized");
+      return queryService.checkTx(request);
+    }, options);
+  };
+
+  const useQuery = ({
+    request,
+    options
+  }: UseQueryQuery<TData>) => {
+    return useQuery<ResponseQuery, Error, TData>(["queryQuery", request], () => {
+      if (!queryService) throw new Error("Query Service not initialized");
+      return queryService.query(request);
+    }, options);
+  };
+
+  const useCommit = ({
+    request,
+    options
+  }: UseCommitQuery<TData>) => {
+    return useQuery<ResponseCommit, Error, TData>(["commitQuery", request], () => {
+      if (!queryService) throw new Error("Query Service not initialized");
+      return queryService.commit(request);
+    }, options);
+  };
+
+  const useInitChain = ({
+    request,
+    options
+  }: UseInitChainQuery<TData>) => {
+    return useQuery<ResponseInitChain, Error, TData>(["initChainQuery", request], () => {
+      if (!queryService) throw new Error("Query Service not initialized");
+      return queryService.initChain(request);
+    }, options);
+  };
+
+  const useBeginBlock = ({
+    request,
+    options
+  }: UseBeginBlockQuery<TData>) => {
+    return useQuery<ResponseBeginBlock, Error, TData>(["beginBlockQuery", request], () => {
+      if (!queryService) throw new Error("Query Service not initialized");
+      return queryService.beginBlock(request);
+    }, options);
+  };
+
+  const useEndBlock = ({
+    request,
+    options
+  }: UseEndBlockQuery<TData>) => {
+    return useQuery<ResponseEndBlock, Error, TData>(["endBlockQuery", request], () => {
+      if (!queryService) throw new Error("Query Service not initialized");
+      return queryService.endBlock(request);
+    }, options);
+  };
+
+  const useListSnapshots = ({
+    request,
+    options
+  }: UseListSnapshotsQuery<TData>) => {
+    return useQuery<ResponseListSnapshots, Error, TData>(["listSnapshotsQuery", request], () => {
+      if (!queryService) throw new Error("Query Service not initialized");
+      return queryService.listSnapshots(request);
+    }, options);
+  };
+
+  const useOfferSnapshot = ({
+    request,
+    options
+  }: UseOfferSnapshotQuery<TData>) => {
+    return useQuery<ResponseOfferSnapshot, Error, TData>(["offerSnapshotQuery", request], () => {
+      if (!queryService) throw new Error("Query Service not initialized");
+      return queryService.offerSnapshot(request);
+    }, options);
+  };
+
+  const useLoadSnapshotChunk = ({
+    request,
+    options
+  }: UseLoadSnapshotChunkQuery<TData>) => {
+    return useQuery<ResponseLoadSnapshotChunk, Error, TData>(["loadSnapshotChunkQuery", request], () => {
+      if (!queryService) throw new Error("Query Service not initialized");
+      return queryService.loadSnapshotChunk(request);
+    }, options);
+  };
+
+  const useApplySnapshotChunk = ({
+    request,
+    options
+  }: UseApplySnapshotChunkQuery<TData>) => {
+    return useQuery<ResponseApplySnapshotChunk, Error, TData>(["applySnapshotChunkQuery", request], () => {
+      if (!queryService) throw new Error("Query Service not initialized");
+      return queryService.applySnapshotChunk(request);
+    }, options);
+  };
+
+  return {
+    useEcho,
+    useFlush,
+    useInfo,
+    useSetOption,
+    useDeliverTx,
+    useCheckTx,
+    useQuery,
+    useCommit,
+    useInitChain,
+    useBeginBlock,
+    useEndBlock,
+    useListSnapshots,
+    useOfferSnapshot,
+    useLoadSnapshotChunk,
+    useApplySnapshotChunk
   };
 };

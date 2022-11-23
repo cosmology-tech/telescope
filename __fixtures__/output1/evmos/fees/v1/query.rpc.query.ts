@@ -3,7 +3,9 @@ import { DevFeeInfo, DevFeeInfoSDKType } from "./fees";
 import { Params, ParamsSDKType } from "./genesis";
 import { Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
+import { QueryClient, createProtobufRpcClient, ProtobufRpcClient } from "@cosmjs/stargate";
+import { ReactQueryParams } from "../../../react-query";
+import { useQuery } from "@tanstack/react-query";
 import { QueryDevFeeInfosRequest, QueryDevFeeInfosRequestSDKType, QueryDevFeeInfosResponse, QueryDevFeeInfosResponseSDKType, QueryDevFeeInfoRequest, QueryDevFeeInfoRequestSDKType, QueryDevFeeInfoResponse, QueryDevFeeInfoResponseSDKType, QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType, QueryDevFeeInfosPerDeployerRequest, QueryDevFeeInfosPerDeployerRequestSDKType, QueryDevFeeInfosPerDeployerResponse, QueryDevFeeInfosPerDeployerResponseSDKType } from "./query";
 
 /** Query defines the gRPC querier service. */
@@ -81,5 +83,94 @@ export const createRpcQueryExtension = (base: QueryClient) => {
       return queryService.devFeeInfosPerDeployer(request);
     }
 
+  };
+};
+export interface UseDevFeeInfosQuery<TData> extends ReactQueryParams<QueryDevFeeInfosResponse, TData> {
+  request?: QueryDevFeeInfosRequest;
+}
+export interface UseDevFeeInfoQuery<TData> extends ReactQueryParams<QueryDevFeeInfoResponse, TData> {
+  request: QueryDevFeeInfoRequest;
+}
+export interface UseParamsQuery<TData> extends ReactQueryParams<QueryParamsResponse, TData> {
+  request?: QueryParamsRequest;
+}
+export interface UseDevFeeInfosPerDeployerQuery<TData> extends ReactQueryParams<QueryDevFeeInfosPerDeployerResponse, TData> {
+  request: QueryDevFeeInfosPerDeployerRequest;
+}
+
+const _queryClients: WeakMap<ProtobufRpcClient, QueryClientImpl> = new WeakMap();
+
+const getQueryService = (rpc: ProtobufRpcClient | undefined): QueryClientImpl | undefined => {
+  if (!rpc) return;
+
+  if (_queryClients.has(rpc)) {
+    return _queryClients.get(rpc);
+  }
+
+  const queryService = new QueryClientImpl(rpc);
+
+  _queryClients.set(rpc, queryService);
+
+  return queryService;
+};
+
+export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
+  const queryService = getQueryService(rpc);
+
+  const useDevFeeInfos = ({
+    request,
+    options
+  }: UseDevFeeInfosQuery<TData>) => {
+    return useQuery<QueryDevFeeInfosResponse, Error, TData>(["devFeeInfosQuery", request], () => {
+      if (!queryService) throw new Error("Query Service not initialized");
+      return queryService.devFeeInfos(request);
+    }, options);
+  };
+
+  const useDevFeeInfo = ({
+    request,
+    options
+  }: UseDevFeeInfoQuery<TData>) => {
+    return useQuery<QueryDevFeeInfoResponse, Error, TData>(["devFeeInfoQuery", request], () => {
+      if (!queryService) throw new Error("Query Service not initialized");
+      return queryService.devFeeInfo(request);
+    }, options);
+  };
+
+  const useParams = ({
+    request,
+    options
+  }: UseParamsQuery<TData>) => {
+    return useQuery<QueryParamsResponse, Error, TData>(["paramsQuery", request], () => {
+      if (!queryService) throw new Error("Query Service not initialized");
+      return queryService.params(request);
+    }, options);
+  };
+
+  const useDevFeeInfosPerDeployer = ({
+    request,
+    options
+  }: UseDevFeeInfosPerDeployerQuery<TData>) => {
+    return useQuery<QueryDevFeeInfosPerDeployerResponse, Error, TData>(["devFeeInfosPerDeployerQuery", request], () => {
+      if (!queryService) throw new Error("Query Service not initialized");
+      return queryService.devFeeInfosPerDeployer(request);
+    }, options);
+  };
+
+  return {
+    /** DevFeeInfos retrieves all registered contracts for fee distribution */
+    useDevFeeInfos,
+
+    /** DevFeeInfo retrieves a registered contract for fee distribution */
+    useDevFeeInfo,
+
+    /** Params retrieves the fees module params */
+    useParams,
+
+    /**
+     * DevFeeInfosPerDeployer retrieves all contracts that a deployer has
+     * registered for fee distribution
+     */
+    useDevFeeInfosPerDeployer
   };
 };
