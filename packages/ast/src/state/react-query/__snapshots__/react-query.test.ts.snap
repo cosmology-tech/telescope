@@ -1,0 +1,87 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`createRpcQueryHooks 1`] = `
+"export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
+  const queryService = getQueryService(rpc);
+
+  const useAccounts = ({
+    request,
+    options
+  }: UseAccountsQuery<TData>) => {
+    return useQuery<QueryAccountsResponse, Error, Tdata>(["accountsQuery", request], () => {
+      if (!queryService) throw new Error("Query Service not initialized");
+      return queryService.accounts(request);
+    });
+  };
+
+  const useAccount = ({
+    request,
+    options
+  }: UseAccountQuery<TData>) => {
+    return useQuery<QueryAccountResponse, Error, Tdata>(["accountQuery", request], () => {
+      if (!queryService) throw new Error("Query Service not initialized");
+      return queryService.account(request);
+    });
+  };
+
+  const useParams = ({
+    request,
+    options
+  }: UseParamsQuery<TData>) => {
+    return useQuery<QueryParamsResponse, Error, Tdata>(["paramsQuery", request], () => {
+      if (!queryService) throw new Error("Query Service not initialized");
+      return queryService.params(request);
+    });
+  };
+
+  const useModuleAccounts = ({
+    request,
+    options
+  }: UseModuleAccountsQuery<TData>) => {
+    return useQuery<QueryModuleAccountsResponse, Error, Tdata>(["moduleAccountsQuery", request], () => {
+      if (!queryService) throw new Error("Query Service not initialized");
+      return queryService.moduleAccounts(request);
+    });
+  };
+
+  const useBech32Prefix = ({
+    request,
+    options
+  }: UseBech32PrefixQuery<TData>) => {
+    return useQuery<Bech32PrefixResponse, Error, Tdata>(["bech32PrefixQuery", request], () => {
+      if (!queryService) throw new Error("Query Service not initialized");
+      return queryService.bech32Prefix(request);
+    });
+  };
+
+  const useAddressBytesToString = ({
+    request,
+    options
+  }: UseAddressBytesToStringQuery<TData>) => {
+    return useQuery<AddressBytesToStringResponse, Error, Tdata>(["addressBytesToStringQuery", request], () => {
+      if (!queryService) throw new Error("Query Service not initialized");
+      return queryService.addressBytesToString(request);
+    });
+  };
+
+  const useAddressStringToBytes = ({
+    request,
+    options
+  }: UseAddressStringToBytesQuery<TData>) => {
+    return useQuery<AddressStringToBytesResponse, Error, Tdata>(["addressStringToBytesQuery", request], () => {
+      if (!queryService) throw new Error("Query Service not initialized");
+      return queryService.addressStringToBytes(request);
+    });
+  };
+
+  return {
+    useAccounts,
+    useAccount,
+    useParams,
+    useModuleAccounts,
+    useBech32Prefix,
+    useAddressBytesToString,
+    useAddressStringToBytes
+  };
+};"
+`;

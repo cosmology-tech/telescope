@@ -6,7 +6,7 @@ import {
 
 import { HttpEndpoint, ProtobufRpcClient } from '@cosmjs/stargate';
 
-interface ReactQueryParams<TResponse, TData = TResponse> {
+export interface ReactQueryParams<TResponse, TData = TResponse> {
     options?: UseQueryOptions<TResponse, Error, TData>;
 }
 
