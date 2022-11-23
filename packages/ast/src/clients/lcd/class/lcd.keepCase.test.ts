@@ -2,7 +2,7 @@ import {
     getUrlTemplateString,
     createAggregatedLCDClient,
     createLCDClient,
-    makeTemplateTag
+    makeTemplateTagLegacy
 } from './lcd';
 import { ProtoStore, traverse, getNestedProto } from '@osmonauts/proto-parser'
 import { defaultTelescopeOptions, ProtoService } from '@osmonauts/types';
