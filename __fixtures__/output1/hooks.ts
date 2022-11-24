@@ -53,7 +53,7 @@ import * as _OsmosisTokenfactoryV1beta1Queryrpc from "./osmosis/tokenfactory/v1b
 import * as _OsmosisTwapV1beta1Queryrpc from "./osmosis/twap/v1beta1/query.rpc.Query";
 import * as _OsmosisTxfeesV1beta1Queryrpc from "./osmosis/txfees/v1beta1/query.rpc.Query";
 import * as _TendermintAbciTypesrpc from "./tendermint/abci/types.rpc.ABCIApplication";
-export const createRpcFactorizzle = ({
+export const createRpcQueryHooks = ({
   rpc
 }: {
   rpc: ProtobufRpcClient | undefined;

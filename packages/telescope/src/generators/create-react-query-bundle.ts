@@ -51,7 +51,7 @@ export const plugin = (
     const ast = createScopedRpcHookFactory(
         pCtx.proto,
         obj,
-        'createRpcFactorizzle'
+        'createRpcQueryHooks'
     )
 
     const imports = fixlocalpaths(aggregateImports(pCtx, {}, localname));
