@@ -251,16 +251,16 @@ export interface UseApplySnapshotChunkQuery<TData> extends ReactQueryParams<Resp
   request: RequestApplySnapshotChunk;
 }
 
-const _queryClients: WeakMap<ProtobufRpcClient, QueryClientImpl> = new WeakMap();
+const _queryClients: WeakMap<ProtobufRpcClient, ABCIApplicationClientImpl> = new WeakMap();
 
-const getQueryService = (rpc: ProtobufRpcClient | undefined): QueryClientImpl | undefined => {
+const getQueryService = (rpc: ProtobufRpcClient | undefined): ABCIApplicationClientImpl | undefined => {
   if (!rpc) return;
 
   if (_queryClients.has(rpc)) {
     return _queryClients.get(rpc);
   }
 
-  const queryService = new QueryClientImpl(rpc);
+  const queryService = new ABCIApplicationClientImpl(rpc);
 
   _queryClients.set(rpc, queryService);
 

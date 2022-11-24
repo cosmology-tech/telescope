@@ -128,16 +128,16 @@ export interface UseGetTxDescriptorQuery<TData> extends ReactQueryParams<GetTxDe
   request?: GetTxDescriptorRequest;
 }
 
-const _queryClients: WeakMap<ProtobufRpcClient, QueryClientImpl> = new WeakMap();
+const _queryClients: WeakMap<ProtobufRpcClient, ReflectionServiceClientImpl> = new WeakMap();
 
-const getQueryService = (rpc: ProtobufRpcClient | undefined): QueryClientImpl | undefined => {
+const getQueryService = (rpc: ProtobufRpcClient | undefined): ReflectionServiceClientImpl | undefined => {
   if (!rpc) return;
 
   if (_queryClients.has(rpc)) {
     return _queryClients.get(rpc);
   }
 
-  const queryService = new QueryClientImpl(rpc);
+  const queryService = new ReflectionServiceClientImpl(rpc);
 
   _queryClients.set(rpc, queryService);
 

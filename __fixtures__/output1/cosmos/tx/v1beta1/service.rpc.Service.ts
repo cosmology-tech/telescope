@@ -116,16 +116,16 @@ export interface UseGetBlockWithTxsQuery<TData> extends ReactQueryParams<GetBloc
   request: GetBlockWithTxsRequest;
 }
 
-const _queryClients: WeakMap<ProtobufRpcClient, QueryClientImpl> = new WeakMap();
+const _queryClients: WeakMap<ProtobufRpcClient, ServiceClientImpl> = new WeakMap();
 
-const getQueryService = (rpc: ProtobufRpcClient | undefined): QueryClientImpl | undefined => {
+const getQueryService = (rpc: ProtobufRpcClient | undefined): ServiceClientImpl | undefined => {
   if (!rpc) return;
 
   if (_queryClients.has(rpc)) {
     return _queryClients.get(rpc);
   }
 
-  const queryService = new QueryClientImpl(rpc);
+  const queryService = new ServiceClientImpl(rpc);
 
   _queryClients.set(rpc, queryService);
 

@@ -1,4 +1,4 @@
-export const clientMap = [
+export const createClientMap = (QueryClientImpl: string) => [
   {
     "type": "VariableDeclaration",
     "declarations": [
@@ -29,7 +29,7 @@ export const clientMap = [
                     "type": "TSTypeReference",
                     "typeName": {
                       "type": "Identifier",
-                      "name": "QueryClientImpl"
+                      "name": QueryClientImpl
                     }
                   }
                 ]
@@ -69,7 +69,7 @@ export const clientMap = [
                   "type": "TSTypeReference",
                   "typeName": {
                     "type": "Identifier",
-                    "name": "QueryClientImpl"
+                    "name": QueryClientImpl
                   }
                 },
                 {
@@ -193,7 +193,7 @@ export const clientMap = [
                       "type": "NewExpression",
                       "callee": {
                         "type": "Identifier",
-                        "name": "QueryClientImpl"
+                        "name": QueryClientImpl
                       },
                       "arguments": [
                         {

@@ -5,7 +5,7 @@ import { ProtoService, ProtoServiceMethod } from '@osmonauts/types';
 import { GenericParseContext } from '../../encoding';
 import { camel } from '@osmonauts/utils';
 import { pascal } from 'case';
-import { clientMap } from './weak-map';
+import { createClientMap } from './weak-map';
 
 const makeUseHookName = (name: string) => {
   return camel('use_' + name);
@@ -279,5 +279,11 @@ export const createRpcQueryHookInterfaces = (
   return methods.map(method => rpcHookMethodInterface(context, method.name, method.method));
 };
 
-export const createRpcQueryHookClientMap = () => clientMap;
+export const createRpcQueryHookClientMap = (
+  context: GenericParseContext,
+  service: ProtoService
+) => {
+  const name = service.name + 'ClientImpl';
+  return createClientMap(name);
+}
 
