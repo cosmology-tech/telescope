@@ -1,6 +1,7 @@
 import * as t from '@babel/types';
 import { GenericParseContext } from '../../encoding';
 import { objectPattern } from '../../utils';
+import { variableSlug } from '@osmonauts/utils';
 
 export const rpcHookFuncArguments = (): t.ObjectPattern[] => {
     return [
@@ -47,21 +48,20 @@ export const rpcHookClassArguments = (): t.ObjectExpression[] => {
 };
 
 export const rpcHookNewTmRequire = (
+    imports: HookImport[],
     path: string,
-    className: string
+    methodName: string
 ) => {
+
+    imports.push({
+        as: variableSlug(path),
+        path
+    });
+
     return t.callExpression(
         t.memberExpression(
-            t.callExpression(
-                t.identifier('require'),
-                [
-                    t.stringLiteral(
-                        path
-                    )
-                ]
-            ),
-            t.identifier(className),
-            false
+            t.identifier(variableSlug(path)),
+            t.identifier(methodName)
         ),
         [
             t.identifier('rpc')
@@ -92,12 +92,13 @@ export const rpcHookRecursiveObjectProps = (
 };
 
 export const rpcHookTmNestedImportObject = (
+    imports: HookImport[],
     obj: object,
-    className: string
+    methodName: string
 ) => {
 
     if (typeof obj === 'string') {
-        return rpcHookNewTmRequire(obj, className);
+        return rpcHookNewTmRequire(imports, obj, methodName);
     }
 
     const keys = Object.keys(obj);
@@ -105,10 +106,15 @@ export const rpcHookTmNestedImportObject = (
     return t.objectExpression(keys.map(name => {
         return t.objectProperty(
             t.identifier(name),
-            rpcHookTmNestedImportObject(obj[name], className)
+            rpcHookTmNestedImportObject(imports, obj[name], methodName)
         )
     }))
 };
+
+interface HookImport {
+    as: string;
+    path: string;
+}
 
 export const createScopedRpcHookFactory = (
     context: GenericParseContext,
@@ -118,7 +124,9 @@ export const createScopedRpcHookFactory = (
 
     context.addUtil('ProtobufRpcClient');
 
-    return t.exportNamedDeclaration(
+    const hookImports: HookImport[] = [];
+
+    const ast = t.exportNamedDeclaration(
         t.variableDeclaration(
             'const',
             [
@@ -154,6 +162,7 @@ export const createScopedRpcHookFactory = (
 
                             t.returnStatement(
                                 rpcHookTmNestedImportObject(
+                                    hookImports,
                                     obj,
                                     'createRpcQueryHooks'
                                 )
@@ -165,5 +174,27 @@ export const createScopedRpcHookFactory = (
                 )
             ]
         )
-    )
-}
+    );
+
+    const imports = hookImports.map(hookport => {
+        return {
+            "type": "ImportDeclaration",
+            "importKind": "value",
+            "specifiers": [
+                {
+                    "type": "ImportNamespaceSpecifier",
+                    "local": {
+                        "type": "Identifier",
+                        "name": hookport.as
+                    }
+                }
+            ],
+            "source": {
+                "type": "StringLiteral",
+                "value": hookport.path
+            }
+        };
+    });
+
+    return [...imports, ast];
+};

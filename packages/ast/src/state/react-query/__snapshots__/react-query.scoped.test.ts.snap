@@ -1,7 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`createScopedRpcHookFactory 1`] = `
-"export const createRpcFactorizzle = ({
+"import * as _ProtoCosmosBankV1beta1A from "./proto/cosmos/bank/v1beta1/a.lcd";
+import * as _ProtoCosmosBankV1beta1B from "./proto/cosmos/bank/v1beta1/b.lcd";
+import * as _ProtoCosmosBankV1beta1C from "./proto/cosmos/bank/v1beta1/c.lcd";
+export const createRpcFactorizzle = ({
   rpc
 }: {
   rpc: ProtobufRpcClient | undefined;
@@ -9,15 +12,15 @@ exports[`createScopedRpcHookFactory 1`] = `
   return {
     cosmos: {
       bank: {
-        v1beta1: require("./proto/cosmos/bank/v1beta1/a.lcd").createRpcQueryHooks(rpc)
+        v1beta1: _ProtoCosmosBankV1beta1A.createRpcQueryHooks(rpc)
       },
       gov: {
-        v1beta1: require("./proto/cosmos/bank/v1beta1/b.lcd").createRpcQueryHooks(rpc)
+        v1beta1: _ProtoCosmosBankV1beta1B.createRpcQueryHooks(rpc)
       }
     },
     osmosis: {
       gamm: {
-        v1beta1: require("./proto/cosmos/bank/v1beta1/c.lcd").createRpcQueryHooks(rpc)
+        v1beta1: _ProtoCosmosBankV1beta1C.createRpcQueryHooks(rpc)
       }
     }
   };

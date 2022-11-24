@@ -61,4 +61,3 @@ export declare const fixlocalpaths: (imports: ImportObj[]) => {
     importAs?: string;
 }[];
 export declare const getRelativePath: (f1: string, f2: string) => string;
-export declare const variableSlug: (str: any) => any;
