@@ -1,10 +1,8 @@
-import { aggregateImports, getDepsFromQueries, getImportStatements } from '../imports';
-import { getNestedProto } from '@osmonauts/proto-parser';
-import { parse } from '../parse';
+import { aggregateImports, getImportStatements } from '../imports';
 import { join } from 'path';
 import { TelescopeBuilder } from '../builder';
-import { createAggregatedLCDClient, createScopedRpcHookFactory, GenericParseContext } from '@osmonauts/ast';
-import { ALLOWED_RPC_SERVICES, ProtoRef, ProtoService } from '@osmonauts/types';
+import { createScopedRpcHookFactory } from '@osmonauts/ast';
+import { ProtoRef } from '@osmonauts/types';
 import { TelescopeParseContext } from '../build';
 import { writeAstToFile } from '../utils/files';
 import { fixlocalpaths } from '../utils';
