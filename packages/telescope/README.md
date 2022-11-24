@@ -247,6 +247,12 @@ See [RPC Clients](#rpc-clients) for more info.
 | -------------------------------------------- | --------------------------------------------------------------  | ---------|
 | `stargateClients.includeCosmosDefaultTypes`  | if true, will include the cosmjs defaults with stargate clients | `true` (except cosmos package) |
 
+### React Query
+
+| option                           | description                                                      | defaults |
+| -------------------------------- | ---------------------------------------------------------------  | ---------|
+| `reactQuery.enabled`             | if true, will react hooks that use `@tanstack/react-query` hooks | `false`  |
+
 ### Typings and Formating
 
 | option                                    | description                                                     | defaults  | 
