@@ -249,9 +249,9 @@ See [RPC Clients](#rpc-clients) for more info.
 
 ### React Query
 
-| option                           | description                                                      | defaults |
-| -------------------------------- | ---------------------------------------------------------------  | ---------|
-| `reactQuery.enabled`             | if true, will react hooks that use `@tanstack/react-query` hooks | `false`  |
+| option                           | description                                                             | defaults |
+| -------------------------------- | ----------------------------------------------------------------------  | ---------|
+| `reactQuery.enabled`             | if true, will create react hooks that use `@tanstack/react-query` hooks | `false`  |
 
 ### Typings and Formating
 
