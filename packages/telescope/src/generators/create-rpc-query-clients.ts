@@ -72,7 +72,8 @@ export const plugin = (
                     asts.push(createRpcQueryExtension(ctx.generic, proto[svcKey]));
                 }
 
-                ///// react query
+                // react query
+                // TODO use the imports and make separate files
                 if (c.proto.pluginValue('reactQuery.enabled')) {
                     [].push.apply(asts, createRpcQueryHookInterfaces(ctx.generic, proto[svcKey]));
                     [].push.apply(asts, createRpcQueryHookClientMap());

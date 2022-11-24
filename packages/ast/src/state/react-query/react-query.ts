@@ -280,3 +280,4 @@ export const createRpcQueryHookInterfaces = (
 };
 
 export const createRpcQueryHookClientMap = () => clientMap;
+

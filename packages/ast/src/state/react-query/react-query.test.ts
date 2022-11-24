@@ -1,9 +1,10 @@
 import { traverse, getNestedProto } from '@osmonauts/proto-parser'
 import { defaultTelescopeOptions, ProtoService } from '@osmonauts/types';
-import { expectCode, getTestProtoStore } from '../../../test-utils';
+import { expectCode, getGenericParseContext, getTestProtoStore } from '../../../test-utils';
 import { GenericParseContext } from '../../encoding';
 import { createRpcQueryHooks, createRpcQueryHookInterfaces } from './react-query';
 import * as t from '@babel/types';
+import { createScopedRpcHookFactory } from './scoped-bundle';
 
 const store = getTestProtoStore();
 store.traverseAll();
@@ -25,3 +26,4 @@ it('createRpcQueryHookInterfaces', () => {
         ...createRpcQueryHookInterfaces(context, service)
     ]))
 });
+
