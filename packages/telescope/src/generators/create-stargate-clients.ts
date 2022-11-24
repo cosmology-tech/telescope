@@ -11,7 +11,7 @@ import {
 } from '@osmonauts/ast';
 import { ProtoRef } from '@osmonauts/types';
 import { camel, pascal } from 'case';
-import { variableSlug } from '../utils';
+import { variableSlug } from '@osmonauts/utils';
 import { buildAllImportsFromGenericContext } from '../imports';
 
 export const plugin = (

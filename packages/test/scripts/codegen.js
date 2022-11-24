@@ -13,9 +13,7 @@ telescope({
     removeUnusedImports: true,
     prototypes: {
       excluded: {
-        packages: [
-          'cosmos.group.v1'
-        ]
+        packages: ['cosmos.group.v1']
       },
       methods: {
         fromJSON: false,
@@ -40,15 +38,20 @@ telescope({
       enabled: true,
       camelCase: true
     },
+    reactQuery: {
+      enabled: true
+    },
     packages: {
       osmosis: {
         classesUseArrowFunctions: true
       }
     }
   }
-}).then(()=>{
-  console.log('✨ all done!');
-}).catch(e=>{
-  console.error(e);
-  process.exit(1);
-});
+})
+  .then(() => {
+    console.log('✨ all done!');
+  })
+  .catch((e) => {
+    console.error(e);
+    process.exit(1);
+  });

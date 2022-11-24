@@ -1,6 +1,13 @@
 import { buildAllImports, getDepsFromQueries } from '../imports';
 import { Bundler } from '../bundler';
-import { createRpcQueryExtension, createRpcClientClass, createRpcClientInterface } from '@osmonauts/ast';
+import {
+    createRpcQueryExtension,
+    createRpcClientClass,
+    createRpcClientInterface,
+    createRpcQueryHookInterfaces,
+    createRpcQueryHookClientMap,
+    createRpcQueryHooks
+} from '@osmonauts/ast';
 import { getNestedProto } from '@osmonauts/proto-parser';
 import { parse } from '../parse';
 import { TelescopeBuilder } from '../builder';
@@ -63,6 +70,14 @@ export const plugin = (
                 asts.push(createRpcClientClass(ctx.generic, proto[svcKey]));
                 if (c.proto.pluginValue('rpcClients.extensions')) {
                     asts.push(createRpcQueryExtension(ctx.generic, proto[svcKey]));
+                }
+
+                // react query
+                // TODO use the imports and make separate files
+                if (c.proto.pluginValue('reactQuery.enabled')) {
+                    [].push.apply(asts, createRpcQueryHookInterfaces(ctx.generic, proto[svcKey]));
+                    [].push.apply(asts, createRpcQueryHookClientMap());
+                    asts.push(createRpcQueryHooks(ctx.generic, proto[svcKey]));
                 }
             }
         });

@@ -3,7 +3,7 @@ import { GenericParseContext, importStmt } from '@osmonauts/ast';
 import { ServiceMutation } from '@osmonauts/types';
 
 import { ImportHash, ImportObj } from './types';
-import { UTILS, getRelativePath } from './utils';
+import { UTILS, getRelativePath, UTIL_HELPERS } from './utils';
 import { TelescopeParseContext } from './build';
 
 const importHashToArray = (hash: ImportHash): ImportObj[] => {
@@ -123,10 +123,11 @@ export const getImportStatements = (
 
     // swap helpers with helpers file...
     const modifiedImports = list.map(imp => {
-        if (imp.path === '__helpers__') {
+        if (UTIL_HELPERS.includes(imp.path)) {
+            const name = imp.path.replace(/__/g, '');
             return {
                 ...imp,
-                path: getRelativePath(filepath, './helpers')
+                path: getRelativePath(filepath, `./${name}`)
             }
         }
         return imp;

@@ -1,4 +1,5 @@
 import * as t from '@babel/types';
+import { makeCommentBlock } from './utils';
 
 // TODO move to @osmonauts/utils package
 
@@ -150,12 +151,20 @@ export function classProperty(
 export const arrowFunctionExpression = (
     params: (t.Identifier | t.Pattern | t.RestElement)[],
     body: t.BlockStatement,
-    returnType: t.TSTypeAnnotation,
-    isAsync: boolean = false
+    returnType?: t.TSTypeAnnotation,
+    isAsync: boolean = false,
+    typeParameters?: t.TypeParameterDeclaration | t.TSTypeParameterDeclaration | t.Noop
 ) => {
     const func = t.arrowFunctionExpression(params, body, isAsync);
-    if (returnType) func.returnType = returnType;
+    func.returnType = returnType;
+    func.typeParameters = typeParameters;
     return func;
+};
+
+export const tsTypeParameterDeclaration = (params: Array<t.TSTypeParameter>): t.TSTypeParameterDeclaration => {
+    const obj = t.tsTypeParameterDeclaration(params);
+    delete obj.extra;
+    return obj;
 };
 
 export const objectPattern = (
@@ -183,5 +192,26 @@ export const objectMethod =
         obj.returnType = returnType;
         obj.typeParameters = typeParameters;
         return obj;
-    }
+    };
+
+export const objectProperty = (
+    key: t.Expression | t.Identifier | t.StringLiteral | t.NumericLiteral | t.BigIntLiteral | t.DecimalLiteral | t.PrivateName,
+    value: t.Expression | t.PatternLike,
+    computed?: boolean,
+    shorthand?: boolean,
+    decorators?: Array<t.Decorator> | null,
+    leadingComments: t.CommentLine[] = []
+): t.ObjectProperty => {
+    const obj = t.objectProperty(key, value, computed, shorthand, decorators);
+    if (leadingComments.length) obj.leadingComments = leadingComments;
+    return obj;
+};
+
+export const makeCommentLineWithBlocks = (comment: string): t.CommentLine[] => {
+    if (!comment) return [];
+    // NOTE using blocks instead of lines here...
+    // @ts-ignore
+    return [makeCommentBlock(comment)];
+}
+
 

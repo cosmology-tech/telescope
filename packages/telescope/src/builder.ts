@@ -17,6 +17,7 @@ import { plugin as createRPCQueryClientsScoped } from './generators/create-rpc-q
 import { plugin as createRPCMsgClientsScoped } from './generators/create-rpc-msg-client-scoped';
 import { plugin as createRPCQueryClients } from './generators/create-rpc-query-clients';
 import { plugin as createRPCMsgClients } from './generators/create-rpc-msg-clients';
+import { plugin as createReactQueryBundle } from './generators/create-react-query-bundle';
 import { plugin as createStargateClients } from './generators/create-stargate-clients';
 import { plugin as createBundle } from './generators/create-bundle';
 import { plugin as createIndex } from './generators/create-index';
@@ -122,6 +123,7 @@ export class TelescopeBuilder {
                 createBundle(this, bundler);
             });
 
+        createReactQueryBundle(this);
         createAggregatedLCDClient(this);
         await createCosmWasmBundle(this);
 

@@ -105,6 +105,9 @@ interface TelescopeOpts {
             methodNameTx?: string;
         }[];
     };
+    reactQuery?: {
+        enabled: boolean;
+    };
 }
 interface TelescopePackageOpts {
     packages?: Record<string, any>;

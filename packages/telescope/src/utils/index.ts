@@ -8,53 +8,70 @@ export const getRoot = (ref: ProtoRef): ProtoRoot => {
     return ref.proto;
 };
 
+// default example:
+// Long: { type: 'default', path: 'long', name: 'Long ' },
+// namespaced:
+// _m0: { type: 'namespace', path: 'protobufjs/minimal', name: '_m0' },
 export const UTILS = {
+    _m0: { type: 'namespace', path: 'protobufjs/minimal', name: '_m0' },
     AminoHeight: '__helpers__',
     AminoMsg: '@cosmjs/amino',
     AminoTypes: '@cosmjs/stargate',
+    base64FromBytes: '__helpers__',
+    bytesFromBase64: '__helpers__',
+    createProtobufRpcClient: '@cosmjs/stargate',
     decodeBech32Pubkey: '@cosmjs/amino',
+    DeepPartial: '__helpers__',
     defaultRegistryTypes: '@cosmjs/stargate',
     encodeBech32Pubkey: '@cosmjs/amino',
+    Exact: '__helpers__',
     fromBase64: '@cosmjs/encoding',
     fromBech32: '@cosmjs/encoding',
     fromDuration: '__helpers__',
     fromHex: '@cosmjs/encoding',
-    fromUtf8: '@cosmjs/encoding',
     fromJsonTimestamp: '__helpers__',
     fromTimestamp: '__helpers__',
+    fromUtf8: '@cosmjs/encoding',
     GeneratedType: '@cosmjs/proto-signing',
-    isSet: '__helpers__',
-    isObject: '__helpers__',
-    Long: '__helpers__', // exports Long and also calls the magic Long code
-    // Long: { type: 'default', path: 'long', name: 'Long ' },
-    createProtobufRpcClient: '@cosmjs/stargate',
-    QueryClient: '@cosmjs/stargate',
-    Tendermint34Client: '@cosmjs/tendermint-rpc',
+    getRpcClient: '__extern__',
+    getRpcEndpointKey: '__extern__',
     HttpEndpoint: '@cosmjs/tendermint-rpc',
+    isObject: '__helpers__',
+    isSet: '__helpers__',
+    LCDClient: '@osmonauts/lcd',
+    Long: '__helpers__',
     OfflineSigner: '@cosmjs/proto-signing',
     omitDefault: '__helpers__',
+    ProtobufRpcClient: '@cosmjs/stargate',
+    QueryClient: '@cosmjs/stargate',
     Registry: '@cosmjs/proto-signing',
+    Rpc: '__helpers__',
+    setPaginationParams: '__helpers__',
     SigningStargateClient: '@cosmjs/stargate',
+    Tendermint34Client: '@cosmjs/tendermint-rpc',
     toBase64: '@cosmjs/encoding',
-    toUtf8: '@cosmjs/encoding',
     toDuration: '__helpers__',
     toTimestamp: '__helpers__',
-    bytesFromBase64: '__helpers__',
-    base64FromBytes: '__helpers__',
-    setPaginationParams: '__helpers__',
-    _m0: { type: 'namespace', path: 'protobufjs/minimal', name: '_m0' },
-    Exact: '__helpers__',
-    Rpc: '__helpers__',
-    LCDClient: '@osmonauts/lcd',
-    DeepPartial: '__helpers__'
+    toUtf8: '@cosmjs/encoding',
+    useQuery: '@tanstack/react-query',
+    useRpcEndpoint: '__react-query__',
+    useRpcClient: '__react-query__',
+    useTendermintClient: '__react-query__',
+    ReactQueryParams: '__react-query__',
+    UseQueryOptions: '@tanstack/react-query',
 };
 
+export const UTIL_HELPERS = [
+    '__helpers__',
+    '__extern__',
+    '__react-query__',
+];
 
 export const fixlocalpaths = (imports: ImportObj[]) => {
     return imports.map(imp => {
         return {
             ...imp,
-            path: (imp.path === '__helpers__' || imp.path.startsWith('.') || imp.path.startsWith('@')) ?
+            path: (UTIL_HELPERS.includes(imp.path) || imp.path.startsWith('.') || imp.path.startsWith('@')) ?
                 imp.path : `./${imp.path}`
         };
     })
@@ -66,20 +83,4 @@ export const getRelativePath = (f1: string, f2: string) => {
     let importPath = rel.replace(extname(rel), '');
     if (!/^\./.test(importPath)) importPath = `./${importPath}`;
     return importPath;
-}
-
-
-export const variableSlug = (str) => {
-    str = String(str).toString();
-    str = str.replace(/\//g, '_');
-    str = str.replace('.', '_');
-    str = str.replace(extname(str), '');
-    str = str.replace(/^\s+|\s+$/g, ""); // trim
-    str = str.toLowerCase();
-    str = str
-        .replace(/[^a-z0-9_ -]/g, "") // remove invalid chars
-        .replace(/\s+/g, "-") // collapse whitespace and replace by -
-        .replace(/-/g, "");
-
-    return camel(str);
 }
