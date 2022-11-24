@@ -30,8 +30,10 @@ export const plugin = (
 
     // should be exported
     write(builder, 'extern.ts', external);
+    builder.files.push('extern.ts');
 
     if (builder.options.reactQuery.enabled) {
+        builder.files.push('react-query.ts');
         write(builder, 'react-query.ts', reactQuery);
     }
 };

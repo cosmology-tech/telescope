@@ -65,6 +65,8 @@ export const plugin = (
         .concat(ast);
 
     const filename = join(builder.outPath, localname);
+    builder.files.push(localname);
+
     writeAstToFile(builder.outPath, builder.options, prog, filename);
 
 };
