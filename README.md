@@ -298,6 +298,7 @@ See [RPC Clients](#rpc-clients) for more info.
 | ------------------------------ | -----------------------------------------------------------------  | ---------- |
 | `removeUnusedImports`          | removes unused imports                                             | `true`     |
 | `classesUseArrowFunctions`     | classes use arrow functions instead of `bind()`ing in constructors | `false`    |
+| `includeExternalHelpers`       | exports a few helpers functions in `extern.ts`                     | `false`    |
 
 ## Types
 

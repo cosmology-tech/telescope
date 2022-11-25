@@ -29,8 +29,11 @@ export const plugin = (
     write(builder, 'helpers.ts', internal);
 
     // should be exported
-    write(builder, 'extern.ts', external);
-    builder.files.push('extern.ts');
+    if (builder.options.includeExternalHelpers || builder.options.reactQuery.enabled) {
+        // also react-query needs these...
+        builder.files.push('extern.ts');
+        write(builder, 'extern.ts', external);
+    }
 
     if (builder.options.reactQuery.enabled) {
         builder.files.push('react-query.ts');

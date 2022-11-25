@@ -16,6 +16,7 @@ interface TelescopeOpts {
     removeUnusedImports?: boolean;
     classesUseArrowFunctions?: boolean;
     useSDKTypes?: boolean;
+    includeExternalHelpers?: boolean;
 
     logLevel?: TelescopeLogLevel;
 
@@ -147,7 +148,7 @@ export const defaultTelescopeOptions: TelescopeOptions = {
     removeUnusedImports: true,
     classesUseArrowFunctions: false,
     useSDKTypes: true,
-
+    includeExternalHelpers: false,
     logLevel: TelescopeLogLevel.None,
 
     prototypes: {
