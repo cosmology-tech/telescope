@@ -929,6 +929,20 @@ export const CheckedExpr_ReferenceMapEntry = {
     message.key !== undefined && (obj.key = message.key);
     message.value !== undefined && (obj.value = message.value ? Reference.toSDK(message.value) : undefined);
     return obj;
+  },
+
+  fromAmino(object: CheckedExpr_ReferenceMapEntrySDKType): CheckedExpr_ReferenceMapEntry {
+    return {
+      key: isSet(object.key) ? object.key : undefined,
+      value: isSet(object.value) ? Reference.fromAmino(object.value) : undefined
+    };
+  },
+
+  toAmino(message: CheckedExpr_ReferenceMapEntry): CheckedExpr_ReferenceMapEntrySDKType {
+    const obj: any = {};
+    message.key !== undefined && (obj.key = message.key);
+    message.value !== undefined && (obj.value = message.value ? Reference.toAmino(message.value) : undefined);
+    return obj;
   }
 
 };
@@ -1011,6 +1025,20 @@ export const CheckedExpr_TypeMapEntry = {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key);
     message.value !== undefined && (obj.value = message.value ? Type.toSDK(message.value) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: CheckedExpr_TypeMapEntrySDKType): CheckedExpr_TypeMapEntry {
+    return {
+      key: isSet(object.key) ? object.key : undefined,
+      value: isSet(object.value) ? Type.fromAmino(object.value) : undefined
+    };
+  },
+
+  toAmino(message: CheckedExpr_TypeMapEntry): CheckedExpr_TypeMapEntrySDKType {
+    const obj: any = {};
+    message.key !== undefined && (obj.key = message.key);
+    message.value !== undefined && (obj.value = message.value ? Type.toAmino(message.value) : undefined);
     return obj;
   }
 
@@ -1215,6 +1243,50 @@ export const CheckedExpr = {
     message.sourceInfo !== undefined && (obj.source_info = message.sourceInfo ? SourceInfo.toSDK(message.sourceInfo) : undefined);
     message.exprVersion !== undefined && (obj.expr_version = message.exprVersion);
     message.expr !== undefined && (obj.expr = message.expr ? Expr.toSDK(message.expr) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: CheckedExprSDKType): CheckedExpr {
+    return {
+      referenceMap: isObject(object.reference_map) ? Object.entries(object.reference_map).reduce<{
+        [key: Long]: Reference;
+      }>((acc, [key, value]) => {
+        acc[Number(key)] = Reference.fromAmino(value);
+        return acc;
+      }, {}) : {},
+      typeMap: isObject(object.type_map) ? Object.entries(object.type_map).reduce<{
+        [key: Long]: Type;
+      }>((acc, [key, value]) => {
+        acc[Number(key)] = Type.fromAmino(value);
+        return acc;
+      }, {}) : {},
+      sourceInfo: isSet(object.source_info) ? SourceInfo.fromAmino(object.source_info) : undefined,
+      exprVersion: isSet(object.expr_version) ? object.expr_version : undefined,
+      expr: isSet(object.expr) ? Expr.fromAmino(object.expr) : undefined
+    };
+  },
+
+  toAmino(message: CheckedExpr): CheckedExprSDKType {
+    const obj: any = {};
+    obj.reference_map = {};
+
+    if (message.referenceMap) {
+      Object.entries(message.referenceMap).forEach(([k, v]) => {
+        obj.reference_map[k] = Reference.toAmino(v);
+      });
+    }
+
+    obj.type_map = {};
+
+    if (message.typeMap) {
+      Object.entries(message.typeMap).forEach(([k, v]) => {
+        obj.type_map[k] = Type.toAmino(v);
+      });
+    }
+
+    message.sourceInfo !== undefined && (obj.source_info = message.sourceInfo ? SourceInfo.toAmino(message.sourceInfo) : undefined);
+    message.exprVersion !== undefined && (obj.expr_version = message.exprVersion);
+    message.expr !== undefined && (obj.expr = message.expr ? Expr.toAmino(message.expr) : undefined);
     return obj;
   }
 
@@ -1453,6 +1525,42 @@ export const Type = {
     message.error !== undefined && (obj.error = message.error ? Empty.toSDK(message.error) : undefined);
     message.abstractType !== undefined && (obj.abstract_type = message.abstractType ? Type_AbstractType.toSDK(message.abstractType) : undefined);
     return obj;
+  },
+
+  fromAmino(object: TypeSDKType): Type {
+    return {
+      dyn: isSet(object.dyn) ? Empty.fromAmino(object.dyn) : undefined,
+      null: isSet(object.null) ? nullValueFromJSON(object.null) : undefined,
+      primitive: isSet(object.primitive) ? type_PrimitiveTypeFromJSON(object.primitive) : undefined,
+      wrapper: isSet(object.wrapper) ? type_PrimitiveTypeFromJSON(object.wrapper) : undefined,
+      wellKnown: isSet(object.well_known) ? type_WellKnownTypeFromJSON(object.well_known) : undefined,
+      listType: isSet(object.list_type) ? Type_ListType.fromAmino(object.list_type) : undefined,
+      mapType: isSet(object.map_type) ? Type_MapType.fromAmino(object.map_type) : undefined,
+      function: isSet(object.function) ? Type_FunctionType.fromAmino(object.function) : undefined,
+      messageType: isSet(object.message_type) ? object.message_type : undefined,
+      typeParam: isSet(object.type_param) ? object.type_param : undefined,
+      type: isSet(object.type) ? Type.fromAmino(object.type) : undefined,
+      error: isSet(object.error) ? Empty.fromAmino(object.error) : undefined,
+      abstractType: isSet(object.abstract_type) ? Type_AbstractType.fromAmino(object.abstract_type) : undefined
+    };
+  },
+
+  toAmino(message: Type): TypeSDKType {
+    const obj: any = {};
+    message.dyn !== undefined && (obj.dyn = message.dyn ? Empty.toAmino(message.dyn) : undefined);
+    message.null !== undefined && (obj.null = nullValueToJSON(message.null));
+    message.primitive !== undefined && (obj.primitive = type_PrimitiveTypeToJSON(message.primitive));
+    message.wrapper !== undefined && (obj.wrapper = type_PrimitiveTypeToJSON(message.wrapper));
+    message.wellKnown !== undefined && (obj.well_known = type_WellKnownTypeToJSON(message.wellKnown));
+    message.listType !== undefined && (obj.list_type = message.listType ? Type_ListType.toAmino(message.listType) : undefined);
+    message.mapType !== undefined && (obj.map_type = message.mapType ? Type_MapType.toAmino(message.mapType) : undefined);
+    message.function !== undefined && (obj.function = message.function ? Type_FunctionType.toAmino(message.function) : undefined);
+    message.messageType !== undefined && (obj.message_type = message.messageType);
+    message.typeParam !== undefined && (obj.type_param = message.typeParam);
+    message.type !== undefined && (obj.type = message.type ? Type.toAmino(message.type) : undefined);
+    message.error !== undefined && (obj.error = message.error ? Empty.toAmino(message.error) : undefined);
+    message.abstractType !== undefined && (obj.abstract_type = message.abstractType ? Type_AbstractType.toAmino(message.abstractType) : undefined);
+    return obj;
   }
 
 };
@@ -1521,6 +1629,18 @@ export const Type_ListType = {
   toSDK(message: Type_ListType): Type_ListTypeSDKType {
     const obj: any = {};
     message.elemType !== undefined && (obj.elem_type = message.elemType ? Type.toSDK(message.elemType) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: Type_ListTypeSDKType): Type_ListType {
+    return {
+      elemType: isSet(object.elem_type) ? Type.fromAmino(object.elem_type) : undefined
+    };
+  },
+
+  toAmino(message: Type_ListType): Type_ListTypeSDKType {
+    const obj: any = {};
+    message.elemType !== undefined && (obj.elem_type = message.elemType ? Type.toAmino(message.elemType) : undefined);
     return obj;
   }
 
@@ -1604,6 +1724,20 @@ export const Type_MapType = {
     const obj: any = {};
     message.keyType !== undefined && (obj.key_type = message.keyType ? Type.toSDK(message.keyType) : undefined);
     message.valueType !== undefined && (obj.value_type = message.valueType ? Type.toSDK(message.valueType) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: Type_MapTypeSDKType): Type_MapType {
+    return {
+      keyType: isSet(object.key_type) ? Type.fromAmino(object.key_type) : undefined,
+      valueType: isSet(object.value_type) ? Type.fromAmino(object.value_type) : undefined
+    };
+  },
+
+  toAmino(message: Type_MapType): Type_MapTypeSDKType {
+    const obj: any = {};
+    message.keyType !== undefined && (obj.key_type = message.keyType ? Type.toAmino(message.keyType) : undefined);
+    message.valueType !== undefined && (obj.value_type = message.valueType ? Type.toAmino(message.valueType) : undefined);
     return obj;
   }
 
@@ -1700,6 +1834,26 @@ export const Type_FunctionType = {
     }
 
     return obj;
+  },
+
+  fromAmino(object: Type_FunctionTypeSDKType): Type_FunctionType {
+    return {
+      resultType: isSet(object.result_type) ? Type.fromAmino(object.result_type) : undefined,
+      argTypes: Array.isArray(object?.arg_types) ? object.arg_types.map((e: any) => Type.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: Type_FunctionType): Type_FunctionTypeSDKType {
+    const obj: any = {};
+    message.resultType !== undefined && (obj.result_type = message.resultType ? Type.toAmino(message.resultType) : undefined);
+
+    if (message.argTypes) {
+      obj.arg_types = message.argTypes.map(e => e ? Type.toAmino(e) : undefined);
+    } else {
+      obj.arg_types = [];
+    }
+
+    return obj;
   }
 
 };
@@ -1790,6 +1944,26 @@ export const Type_AbstractType = {
 
     if (message.parameterTypes) {
       obj.parameter_types = message.parameterTypes.map(e => e ? Type.toSDK(e) : undefined);
+    } else {
+      obj.parameter_types = [];
+    }
+
+    return obj;
+  },
+
+  fromAmino(object: Type_AbstractTypeSDKType): Type_AbstractType {
+    return {
+      name: isSet(object.name) ? object.name : undefined,
+      parameterTypes: Array.isArray(object?.parameter_types) ? object.parameter_types.map((e: any) => Type.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: Type_AbstractType): Type_AbstractTypeSDKType {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+
+    if (message.parameterTypes) {
+      obj.parameter_types = message.parameterTypes.map(e => e ? Type.toAmino(e) : undefined);
     } else {
       obj.parameter_types = [];
     }
@@ -1892,6 +2066,22 @@ export const Decl = {
     message.ident !== undefined && (obj.ident = message.ident ? Decl_IdentDecl.toSDK(message.ident) : undefined);
     message.function !== undefined && (obj.function = message.function ? Decl_FunctionDecl.toSDK(message.function) : undefined);
     return obj;
+  },
+
+  fromAmino(object: DeclSDKType): Decl {
+    return {
+      name: isSet(object.name) ? object.name : undefined,
+      ident: isSet(object.ident) ? Decl_IdentDecl.fromAmino(object.ident) : undefined,
+      function: isSet(object.function) ? Decl_FunctionDecl.fromAmino(object.function) : undefined
+    };
+  },
+
+  toAmino(message: Decl): DeclSDKType {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    message.ident !== undefined && (obj.ident = message.ident ? Decl_IdentDecl.toAmino(message.ident) : undefined);
+    message.function !== undefined && (obj.function = message.function ? Decl_FunctionDecl.toAmino(message.function) : undefined);
+    return obj;
   }
 
 };
@@ -1989,6 +2179,22 @@ export const Decl_IdentDecl = {
     message.value !== undefined && (obj.value = message.value ? Constant.toSDK(message.value) : undefined);
     message.doc !== undefined && (obj.doc = message.doc);
     return obj;
+  },
+
+  fromAmino(object: Decl_IdentDeclSDKType): Decl_IdentDecl {
+    return {
+      type: isSet(object.type) ? Type.fromAmino(object.type) : undefined,
+      value: isSet(object.value) ? Constant.fromAmino(object.value) : undefined,
+      doc: isSet(object.doc) ? object.doc : undefined
+    };
+  },
+
+  toAmino(message: Decl_IdentDecl): Decl_IdentDeclSDKType {
+    const obj: any = {};
+    message.type !== undefined && (obj.type = message.type ? Type.toAmino(message.type) : undefined);
+    message.value !== undefined && (obj.value = message.value ? Constant.toAmino(message.value) : undefined);
+    message.doc !== undefined && (obj.doc = message.doc);
+    return obj;
   }
 
 };
@@ -2065,6 +2271,24 @@ export const Decl_FunctionDecl = {
 
     if (message.overloads) {
       obj.overloads = message.overloads.map(e => e ? Decl_FunctionDecl_Overload.toSDK(e) : undefined);
+    } else {
+      obj.overloads = [];
+    }
+
+    return obj;
+  },
+
+  fromAmino(object: Decl_FunctionDeclSDKType): Decl_FunctionDecl {
+    return {
+      overloads: Array.isArray(object?.overloads) ? object.overloads.map((e: any) => Decl_FunctionDecl_Overload.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: Decl_FunctionDecl): Decl_FunctionDeclSDKType {
+    const obj: any = {};
+
+    if (message.overloads) {
+      obj.overloads = message.overloads.map(e => e ? Decl_FunctionDecl_Overload.toAmino(e) : undefined);
     } else {
       obj.overloads = [];
     }
@@ -2231,6 +2455,39 @@ export const Decl_FunctionDecl_Overload = {
     message.isInstanceFunction !== undefined && (obj.is_instance_function = message.isInstanceFunction);
     message.doc !== undefined && (obj.doc = message.doc);
     return obj;
+  },
+
+  fromAmino(object: Decl_FunctionDecl_OverloadSDKType): Decl_FunctionDecl_Overload {
+    return {
+      overloadId: isSet(object.overload_id) ? object.overload_id : undefined,
+      params: Array.isArray(object?.params) ? object.params.map((e: any) => Type.fromAmino(e)) : [],
+      typeParams: Array.isArray(object?.type_params) ? object.type_params.map((e: any) => e) : [],
+      resultType: isSet(object.result_type) ? Type.fromAmino(object.result_type) : undefined,
+      isInstanceFunction: isSet(object.is_instance_function) ? object.is_instance_function : undefined,
+      doc: isSet(object.doc) ? object.doc : undefined
+    };
+  },
+
+  toAmino(message: Decl_FunctionDecl_Overload): Decl_FunctionDecl_OverloadSDKType {
+    const obj: any = {};
+    message.overloadId !== undefined && (obj.overload_id = message.overloadId);
+
+    if (message.params) {
+      obj.params = message.params.map(e => e ? Type.toAmino(e) : undefined);
+    } else {
+      obj.params = [];
+    }
+
+    if (message.typeParams) {
+      obj.type_params = message.typeParams.map(e => e);
+    } else {
+      obj.type_params = [];
+    }
+
+    message.resultType !== undefined && (obj.result_type = message.resultType ? Type.toAmino(message.resultType) : undefined);
+    message.isInstanceFunction !== undefined && (obj.is_instance_function = message.isInstanceFunction);
+    message.doc !== undefined && (obj.doc = message.doc);
+    return obj;
   }
 
 };
@@ -2339,6 +2596,28 @@ export const Reference = {
     }
 
     message.value !== undefined && (obj.value = message.value ? Constant.toSDK(message.value) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: ReferenceSDKType): Reference {
+    return {
+      name: isSet(object.name) ? object.name : undefined,
+      overloadId: Array.isArray(object?.overload_id) ? object.overload_id.map((e: any) => e) : [],
+      value: isSet(object.value) ? Constant.fromAmino(object.value) : undefined
+    };
+  },
+
+  toAmino(message: Reference): ReferenceSDKType {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+
+    if (message.overloadId) {
+      obj.overload_id = message.overloadId.map(e => e);
+    } else {
+      obj.overload_id = [];
+    }
+
+    message.value !== undefined && (obj.value = message.value ? Constant.toAmino(message.value) : undefined);
     return obj;
   }
 

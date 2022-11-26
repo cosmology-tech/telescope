@@ -122,6 +122,30 @@ export const Params = {
     message.minDurationUntilStartTime = object.minDurationUntilStartTime !== undefined && object.minDurationUntilStartTime !== null ? Duration.fromPartial(object.minDurationUntilStartTime) : undefined;
     message.minSaleDuration = object.minSaleDuration !== undefined && object.minSaleDuration !== null ? Duration.fromPartial(object.minSaleDuration) : undefined;
     return message;
+  },
+
+  fromAmino(object: ParamsSDKType): Params {
+    return {
+      saleCreationFee: Array.isArray(object?.sale_creation_fee) ? object.sale_creation_fee.map((e: any) => Coin.fromAmino(e)) : [],
+      saleCreationFeeRecipient: isSet(object.sale_creation_fee_recipient) ? object.sale_creation_fee_recipient : undefined,
+      minDurationUntilStartTime: isSet(object.min_duration_until_start_time) ? Duration.fromAmino(object.min_duration_until_start_time) : undefined,
+      minSaleDuration: isSet(object.min_sale_duration) ? Duration.fromAmino(object.min_sale_duration) : undefined
+    };
+  },
+
+  toAmino(message: Params): ParamsSDKType {
+    const obj: any = {};
+
+    if (message.saleCreationFee) {
+      obj.sale_creation_fee = message.saleCreationFee.map(e => e ? Coin.toAmino(e) : undefined);
+    } else {
+      obj.sale_creation_fee = [];
+    }
+
+    message.saleCreationFeeRecipient !== undefined && (obj.sale_creation_fee_recipient = message.saleCreationFeeRecipient);
+    message.minDurationUntilStartTime !== undefined && (obj.min_duration_until_start_time = message.minDurationUntilStartTime ? Duration.toAmino(message.minDurationUntilStartTime) : undefined);
+    message.minSaleDuration !== undefined && (obj.min_sale_duration = message.minSaleDuration ? Duration.toAmino(message.minSaleDuration) : undefined);
+    return obj;
   }
 
 };

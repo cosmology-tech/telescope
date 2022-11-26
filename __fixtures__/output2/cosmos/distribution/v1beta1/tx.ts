@@ -117,6 +117,20 @@ export const MsgSetWithdrawAddress = {
     message.delegatorAddress = object.delegatorAddress ?? "";
     message.withdrawAddress = object.withdrawAddress ?? "";
     return message;
+  },
+
+  fromAmino(object: MsgSetWithdrawAddressSDKType): MsgSetWithdrawAddress {
+    return {
+      delegatorAddress: isSet(object.delegator_address) ? object.delegator_address : undefined,
+      withdrawAddress: isSet(object.withdraw_address) ? object.withdraw_address : undefined
+    };
+  },
+
+  toAmino(message: MsgSetWithdrawAddress): MsgSetWithdrawAddressSDKType {
+    const obj: any = {};
+    message.delegatorAddress !== undefined && (obj.delegator_address = message.delegatorAddress);
+    message.withdrawAddress !== undefined && (obj.withdraw_address = message.withdrawAddress);
+    return obj;
   }
 
 };
@@ -160,6 +174,15 @@ export const MsgSetWithdrawAddressResponse = {
   fromPartial(_: DeepPartial<MsgSetWithdrawAddressResponse>): MsgSetWithdrawAddressResponse {
     const message = createBaseMsgSetWithdrawAddressResponse();
     return message;
+  },
+
+  fromAmino(_: MsgSetWithdrawAddressResponseSDKType): MsgSetWithdrawAddressResponse {
+    return {};
+  },
+
+  toAmino(_: MsgSetWithdrawAddressResponse): MsgSetWithdrawAddressResponseSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -229,6 +252,20 @@ export const MsgWithdrawDelegatorReward = {
     message.delegatorAddress = object.delegatorAddress ?? "";
     message.validatorAddress = object.validatorAddress ?? "";
     return message;
+  },
+
+  fromAmino(object: MsgWithdrawDelegatorRewardSDKType): MsgWithdrawDelegatorReward {
+    return {
+      delegatorAddress: isSet(object.delegator_address) ? object.delegator_address : undefined,
+      validatorAddress: isSet(object.validator_address) ? object.validator_address : undefined
+    };
+  },
+
+  toAmino(message: MsgWithdrawDelegatorReward): MsgWithdrawDelegatorRewardSDKType {
+    const obj: any = {};
+    message.delegatorAddress !== undefined && (obj.delegator_address = message.delegatorAddress);
+    message.validatorAddress !== undefined && (obj.validator_address = message.validatorAddress);
+    return obj;
   }
 
 };
@@ -272,6 +309,15 @@ export const MsgWithdrawDelegatorRewardResponse = {
   fromPartial(_: DeepPartial<MsgWithdrawDelegatorRewardResponse>): MsgWithdrawDelegatorRewardResponse {
     const message = createBaseMsgWithdrawDelegatorRewardResponse();
     return message;
+  },
+
+  fromAmino(_: MsgWithdrawDelegatorRewardResponseSDKType): MsgWithdrawDelegatorRewardResponse {
+    return {};
+  },
+
+  toAmino(_: MsgWithdrawDelegatorRewardResponse): MsgWithdrawDelegatorRewardResponseSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -329,6 +375,18 @@ export const MsgWithdrawValidatorCommission = {
     const message = createBaseMsgWithdrawValidatorCommission();
     message.validatorAddress = object.validatorAddress ?? "";
     return message;
+  },
+
+  fromAmino(object: MsgWithdrawValidatorCommissionSDKType): MsgWithdrawValidatorCommission {
+    return {
+      validatorAddress: isSet(object.validator_address) ? object.validator_address : undefined
+    };
+  },
+
+  toAmino(message: MsgWithdrawValidatorCommission): MsgWithdrawValidatorCommissionSDKType {
+    const obj: any = {};
+    message.validatorAddress !== undefined && (obj.validator_address = message.validatorAddress);
+    return obj;
   }
 
 };
@@ -372,6 +430,15 @@ export const MsgWithdrawValidatorCommissionResponse = {
   fromPartial(_: DeepPartial<MsgWithdrawValidatorCommissionResponse>): MsgWithdrawValidatorCommissionResponse {
     const message = createBaseMsgWithdrawValidatorCommissionResponse();
     return message;
+  },
+
+  fromAmino(_: MsgWithdrawValidatorCommissionResponseSDKType): MsgWithdrawValidatorCommissionResponse {
+    return {};
+  },
+
+  toAmino(_: MsgWithdrawValidatorCommissionResponse): MsgWithdrawValidatorCommissionResponseSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -447,6 +514,26 @@ export const MsgFundCommunityPool = {
     message.amount = object.amount?.map(e => Coin.fromPartial(e)) || [];
     message.depositor = object.depositor ?? "";
     return message;
+  },
+
+  fromAmino(object: MsgFundCommunityPoolSDKType): MsgFundCommunityPool {
+    return {
+      amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromAmino(e)) : [],
+      depositor: isSet(object.depositor) ? object.depositor : undefined
+    };
+  },
+
+  toAmino(message: MsgFundCommunityPool): MsgFundCommunityPoolSDKType {
+    const obj: any = {};
+
+    if (message.amount) {
+      obj.amount = message.amount.map(e => e ? Coin.toAmino(e) : undefined);
+    } else {
+      obj.amount = [];
+    }
+
+    message.depositor !== undefined && (obj.depositor = message.depositor);
+    return obj;
   }
 
 };
@@ -490,6 +577,15 @@ export const MsgFundCommunityPoolResponse = {
   fromPartial(_: DeepPartial<MsgFundCommunityPoolResponse>): MsgFundCommunityPoolResponse {
     const message = createBaseMsgFundCommunityPoolResponse();
     return message;
+  },
+
+  fromAmino(_: MsgFundCommunityPoolResponseSDKType): MsgFundCommunityPoolResponse {
+    return {};
+  },
+
+  toAmino(_: MsgFundCommunityPoolResponse): MsgFundCommunityPoolResponseSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };

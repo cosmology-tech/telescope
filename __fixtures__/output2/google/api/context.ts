@@ -141,6 +141,24 @@ export const Context = {
     const message = createBaseContext();
     message.rules = object.rules?.map(e => ContextRule.fromPartial(e)) || [];
     return message;
+  },
+
+  fromAmino(object: ContextSDKType): Context {
+    return {
+      rules: Array.isArray(object?.rules) ? object.rules.map((e: any) => ContextRule.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: Context): ContextSDKType {
+    const obj: any = {};
+
+    if (message.rules) {
+      obj.rules = message.rules.map(e => e ? ContextRule.toAmino(e) : undefined);
+    } else {
+      obj.rules = [];
+    }
+
+    return obj;
   }
 
 };
@@ -267,6 +285,47 @@ export const ContextRule = {
     message.allowedRequestExtensions = object.allowedRequestExtensions?.map(e => e) || [];
     message.allowedResponseExtensions = object.allowedResponseExtensions?.map(e => e) || [];
     return message;
+  },
+
+  fromAmino(object: ContextRuleSDKType): ContextRule {
+    return {
+      selector: isSet(object.selector) ? object.selector : undefined,
+      requested: Array.isArray(object?.requested) ? object.requested.map((e: any) => e) : [],
+      provided: Array.isArray(object?.provided) ? object.provided.map((e: any) => e) : [],
+      allowedRequestExtensions: Array.isArray(object?.allowed_request_extensions) ? object.allowed_request_extensions.map((e: any) => e) : [],
+      allowedResponseExtensions: Array.isArray(object?.allowed_response_extensions) ? object.allowed_response_extensions.map((e: any) => e) : []
+    };
+  },
+
+  toAmino(message: ContextRule): ContextRuleSDKType {
+    const obj: any = {};
+    message.selector !== undefined && (obj.selector = message.selector);
+
+    if (message.requested) {
+      obj.requested = message.requested.map(e => e);
+    } else {
+      obj.requested = [];
+    }
+
+    if (message.provided) {
+      obj.provided = message.provided.map(e => e);
+    } else {
+      obj.provided = [];
+    }
+
+    if (message.allowedRequestExtensions) {
+      obj.allowed_request_extensions = message.allowedRequestExtensions.map(e => e);
+    } else {
+      obj.allowed_request_extensions = [];
+    }
+
+    if (message.allowedResponseExtensions) {
+      obj.allowed_response_extensions = message.allowedResponseExtensions.map(e => e);
+    } else {
+      obj.allowed_response_extensions = [];
+    }
+
+    return obj;
   }
 
 };

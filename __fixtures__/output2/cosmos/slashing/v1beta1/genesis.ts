@@ -141,6 +141,33 @@ export const GenesisState = {
     message.signingInfos = object.signingInfos?.map(e => SigningInfo.fromPartial(e)) || [];
     message.missedBlocks = object.missedBlocks?.map(e => ValidatorMissedBlocks.fromPartial(e)) || [];
     return message;
+  },
+
+  fromAmino(object: GenesisStateSDKType): GenesisState {
+    return {
+      params: isSet(object.params) ? Params.fromAmino(object.params) : undefined,
+      signingInfos: Array.isArray(object?.signing_infos) ? object.signing_infos.map((e: any) => SigningInfo.fromAmino(e)) : [],
+      missedBlocks: Array.isArray(object?.missed_blocks) ? object.missed_blocks.map((e: any) => ValidatorMissedBlocks.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: GenesisState): GenesisStateSDKType {
+    const obj: any = {};
+    message.params !== undefined && (obj.params = message.params ? Params.toAmino(message.params) : undefined);
+
+    if (message.signingInfos) {
+      obj.signing_infos = message.signingInfos.map(e => e ? SigningInfo.toAmino(e) : undefined);
+    } else {
+      obj.signing_infos = [];
+    }
+
+    if (message.missedBlocks) {
+      obj.missed_blocks = message.missedBlocks.map(e => e ? ValidatorMissedBlocks.toAmino(e) : undefined);
+    } else {
+      obj.missed_blocks = [];
+    }
+
+    return obj;
   }
 
 };
@@ -210,6 +237,20 @@ export const SigningInfo = {
     message.address = object.address ?? "";
     message.validatorSigningInfo = object.validatorSigningInfo !== undefined && object.validatorSigningInfo !== null ? ValidatorSigningInfo.fromPartial(object.validatorSigningInfo) : undefined;
     return message;
+  },
+
+  fromAmino(object: SigningInfoSDKType): SigningInfo {
+    return {
+      address: isSet(object.address) ? object.address : undefined,
+      validatorSigningInfo: isSet(object.validator_signing_info) ? ValidatorSigningInfo.fromAmino(object.validator_signing_info) : undefined
+    };
+  },
+
+  toAmino(message: SigningInfo): SigningInfoSDKType {
+    const obj: any = {};
+    message.address !== undefined && (obj.address = message.address);
+    message.validatorSigningInfo !== undefined && (obj.validator_signing_info = message.validatorSigningInfo ? ValidatorSigningInfo.toAmino(message.validatorSigningInfo) : undefined);
+    return obj;
   }
 
 };
@@ -285,6 +326,26 @@ export const ValidatorMissedBlocks = {
     message.address = object.address ?? "";
     message.missedBlocks = object.missedBlocks?.map(e => MissedBlock.fromPartial(e)) || [];
     return message;
+  },
+
+  fromAmino(object: ValidatorMissedBlocksSDKType): ValidatorMissedBlocks {
+    return {
+      address: isSet(object.address) ? object.address : undefined,
+      missedBlocks: Array.isArray(object?.missed_blocks) ? object.missed_blocks.map((e: any) => MissedBlock.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: ValidatorMissedBlocks): ValidatorMissedBlocksSDKType {
+    const obj: any = {};
+    message.address !== undefined && (obj.address = message.address);
+
+    if (message.missedBlocks) {
+      obj.missed_blocks = message.missedBlocks.map(e => e ? MissedBlock.toAmino(e) : undefined);
+    } else {
+      obj.missed_blocks = [];
+    }
+
+    return obj;
   }
 
 };
@@ -354,6 +415,20 @@ export const MissedBlock = {
     message.index = object.index !== undefined && object.index !== null ? Long.fromValue(object.index) : Long.ZERO;
     message.missed = object.missed ?? false;
     return message;
+  },
+
+  fromAmino(object: MissedBlockSDKType): MissedBlock {
+    return {
+      index: isSet(object.index) ? object.index : undefined,
+      missed: isSet(object.missed) ? object.missed : undefined
+    };
+  },
+
+  toAmino(message: MissedBlock): MissedBlockSDKType {
+    const obj: any = {};
+    message.index !== undefined && (obj.index = message.index);
+    message.missed !== undefined && (obj.missed = message.missed);
+    return obj;
   }
 
 };

@@ -91,6 +91,22 @@ export const MsgVerifyInvariant = {
     message.invariantModuleName = object.invariantModuleName ?? "";
     message.invariantRoute = object.invariantRoute ?? "";
     return message;
+  },
+
+  fromAmino(object: MsgVerifyInvariantSDKType): MsgVerifyInvariant {
+    return {
+      sender: isSet(object.sender) ? object.sender : undefined,
+      invariantModuleName: isSet(object.invariant_module_name) ? object.invariant_module_name : undefined,
+      invariantRoute: isSet(object.invariant_route) ? object.invariant_route : undefined
+    };
+  },
+
+  toAmino(message: MsgVerifyInvariant): MsgVerifyInvariantSDKType {
+    const obj: any = {};
+    message.sender !== undefined && (obj.sender = message.sender);
+    message.invariantModuleName !== undefined && (obj.invariant_module_name = message.invariantModuleName);
+    message.invariantRoute !== undefined && (obj.invariant_route = message.invariantRoute);
+    return obj;
   }
 
 };
@@ -134,6 +150,15 @@ export const MsgVerifyInvariantResponse = {
   fromPartial(_: DeepPartial<MsgVerifyInvariantResponse>): MsgVerifyInvariantResponse {
     const message = createBaseMsgVerifyInvariantResponse();
     return message;
+  },
+
+  fromAmino(_: MsgVerifyInvariantResponseSDKType): MsgVerifyInvariantResponse {
+    return {};
+  },
+
+  toAmino(_: MsgVerifyInvariantResponse): MsgVerifyInvariantResponseSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };

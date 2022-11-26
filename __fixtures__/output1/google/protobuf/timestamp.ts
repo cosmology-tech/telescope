@@ -283,6 +283,20 @@ export const Timestamp = {
     message.seconds !== undefined && (obj.seconds = message.seconds);
     message.nanos !== undefined && (obj.nanos = message.nanos);
     return obj;
+  },
+
+  fromAmino(object: TimestampSDKType): Timestamp {
+    return {
+      seconds: isSet(object.seconds) ? object.seconds : undefined,
+      nanos: isSet(object.nanos) ? object.nanos : undefined
+    };
+  },
+
+  toAmino(message: Timestamp): TimestampSDKType {
+    const obj: any = {};
+    message.seconds !== undefined && (obj.seconds = message.seconds);
+    message.nanos !== undefined && (obj.nanos = message.nanos);
+    return obj;
   }
 
 };

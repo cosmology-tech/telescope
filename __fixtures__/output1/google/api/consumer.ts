@@ -259,6 +259,24 @@ export const ProjectProperties = {
     }
 
     return obj;
+  },
+
+  fromAmino(object: ProjectPropertiesSDKType): ProjectProperties {
+    return {
+      properties: Array.isArray(object?.properties) ? object.properties.map((e: any) => Property.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: ProjectProperties): ProjectPropertiesSDKType {
+    const obj: any = {};
+
+    if (message.properties) {
+      obj.properties = message.properties.map(e => e ? Property.toAmino(e) : undefined);
+    } else {
+      obj.properties = [];
+    }
+
+    return obj;
   }
 
 };
@@ -351,6 +369,22 @@ export const Property = {
   },
 
   toSDK(message: Property): PropertySDKType {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    message.type !== undefined && (obj.type = property_PropertyTypeToJSON(message.type));
+    message.description !== undefined && (obj.description = message.description);
+    return obj;
+  },
+
+  fromAmino(object: PropertySDKType): Property {
+    return {
+      name: isSet(object.name) ? object.name : undefined,
+      type: isSet(object.type) ? property_PropertyTypeFromJSON(object.type) : 0,
+      description: isSet(object.description) ? object.description : undefined
+    };
+  },
+
+  toAmino(message: Property): PropertySDKType {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     message.type !== undefined && (obj.type = property_PropertyTypeToJSON(message.type));

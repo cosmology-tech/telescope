@@ -189,6 +189,30 @@ export const Proof = {
     }
 
     return obj;
+  },
+
+  fromAmino(object: ProofSDKType): Proof {
+    return {
+      total: isSet(object.total) ? object.total : undefined,
+      index: isSet(object.index) ? object.index : undefined,
+      leafHash: isSet(object.leaf_hash) ? object.leaf_hash : undefined,
+      aunts: Array.isArray(object?.aunts) ? object.aunts.map((e: any) => e) : []
+    };
+  },
+
+  toAmino(message: Proof): ProofSDKType {
+    const obj: any = {};
+    message.total !== undefined && (obj.total = message.total);
+    message.index !== undefined && (obj.index = message.index);
+    message.leafHash !== undefined && (obj.leaf_hash = message.leafHash);
+
+    if (message.aunts) {
+      obj.aunts = message.aunts.map(e => e);
+    } else {
+      obj.aunts = [];
+    }
+
+    return obj;
   }
 
 };
@@ -271,6 +295,20 @@ export const ValueOp = {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key);
     message.proof !== undefined && (obj.proof = message.proof ? Proof.toSDK(message.proof) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: ValueOpSDKType): ValueOp {
+    return {
+      key: isSet(object.key) ? object.key : undefined,
+      proof: isSet(object.proof) ? Proof.fromAmino(object.proof) : undefined
+    };
+  },
+
+  toAmino(message: ValueOp): ValueOpSDKType {
+    const obj: any = {};
+    message.key !== undefined && (obj.key = message.key);
+    message.proof !== undefined && (obj.proof = message.proof ? Proof.toAmino(message.proof) : undefined);
     return obj;
   }
 
@@ -364,6 +402,22 @@ export const DominoOp = {
   },
 
   toSDK(message: DominoOp): DominoOpSDKType {
+    const obj: any = {};
+    message.key !== undefined && (obj.key = message.key);
+    message.input !== undefined && (obj.input = message.input);
+    message.output !== undefined && (obj.output = message.output);
+    return obj;
+  },
+
+  fromAmino(object: DominoOpSDKType): DominoOp {
+    return {
+      key: isSet(object.key) ? object.key : undefined,
+      input: isSet(object.input) ? object.input : undefined,
+      output: isSet(object.output) ? object.output : undefined
+    };
+  },
+
+  toAmino(message: DominoOp): DominoOpSDKType {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key);
     message.input !== undefined && (obj.input = message.input);
@@ -466,6 +520,22 @@ export const ProofOp = {
     message.key !== undefined && (obj.key = message.key);
     message.data !== undefined && (obj.data = message.data);
     return obj;
+  },
+
+  fromAmino(object: ProofOpSDKType): ProofOp {
+    return {
+      type: isSet(object.type) ? object.type : undefined,
+      key: isSet(object.key) ? object.key : undefined,
+      data: isSet(object.data) ? object.data : undefined
+    };
+  },
+
+  toAmino(message: ProofOp): ProofOpSDKType {
+    const obj: any = {};
+    message.type !== undefined && (obj.type = message.type);
+    message.key !== undefined && (obj.key = message.key);
+    message.data !== undefined && (obj.data = message.data);
+    return obj;
   }
 
 };
@@ -542,6 +612,24 @@ export const ProofOps = {
 
     if (message.ops) {
       obj.ops = message.ops.map(e => e ? ProofOp.toSDK(e) : undefined);
+    } else {
+      obj.ops = [];
+    }
+
+    return obj;
+  },
+
+  fromAmino(object: ProofOpsSDKType): ProofOps {
+    return {
+      ops: Array.isArray(object?.ops) ? object.ops.map((e: any) => ProofOp.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: ProofOps): ProofOpsSDKType {
+    const obj: any = {};
+
+    if (message.ops) {
+      obj.ops = message.ops.map(e => e ? ProofOp.toAmino(e) : undefined);
     } else {
       obj.ops = [];
     }

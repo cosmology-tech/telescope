@@ -304,6 +304,20 @@ export const PartSetHeader = {
     message.total = object.total ?? 0;
     message.hash = object.hash ?? new Uint8Array();
     return message;
+  },
+
+  fromAmino(object: PartSetHeaderSDKType): PartSetHeader {
+    return {
+      total: isSet(object.total) ? object.total : undefined,
+      hash: isSet(object.hash) ? object.hash : undefined
+    };
+  },
+
+  toAmino(message: PartSetHeader): PartSetHeaderSDKType {
+    const obj: any = {};
+    message.total !== undefined && (obj.total = message.total);
+    message.hash !== undefined && (obj.hash = message.hash);
+    return obj;
   }
 
 };
@@ -385,6 +399,22 @@ export const Part = {
     message.bytes = object.bytes ?? new Uint8Array();
     message.proof = object.proof !== undefined && object.proof !== null ? Proof.fromPartial(object.proof) : undefined;
     return message;
+  },
+
+  fromAmino(object: PartSDKType): Part {
+    return {
+      index: isSet(object.index) ? object.index : undefined,
+      bytes: isSet(object.bytes) ? object.bytes : undefined,
+      proof: isSet(object.proof) ? Proof.fromAmino(object.proof) : undefined
+    };
+  },
+
+  toAmino(message: Part): PartSDKType {
+    const obj: any = {};
+    message.index !== undefined && (obj.index = message.index);
+    message.bytes !== undefined && (obj.bytes = message.bytes);
+    message.proof !== undefined && (obj.proof = message.proof ? Proof.toAmino(message.proof) : undefined);
+    return obj;
   }
 
 };
@@ -454,6 +484,20 @@ export const BlockID = {
     message.hash = object.hash ?? new Uint8Array();
     message.partSetHeader = object.partSetHeader !== undefined && object.partSetHeader !== null ? PartSetHeader.fromPartial(object.partSetHeader) : undefined;
     return message;
+  },
+
+  fromAmino(object: BlockIDSDKType): BlockID {
+    return {
+      hash: isSet(object.hash) ? object.hash : undefined,
+      partSetHeader: isSet(object.part_set_header) ? PartSetHeader.fromAmino(object.part_set_header) : undefined
+    };
+  },
+
+  toAmino(message: BlockID): BlockIDSDKType {
+    const obj: any = {};
+    message.hash !== undefined && (obj.hash = message.hash);
+    message.partSetHeader !== undefined && (obj.part_set_header = message.partSetHeader ? PartSetHeader.toAmino(message.partSetHeader) : undefined);
+    return obj;
   }
 
 };
@@ -667,6 +711,44 @@ export const Header = {
     message.evidenceHash = object.evidenceHash ?? new Uint8Array();
     message.proposerAddress = object.proposerAddress ?? new Uint8Array();
     return message;
+  },
+
+  fromAmino(object: HeaderSDKType): Header {
+    return {
+      version: isSet(object.version) ? Consensus.fromAmino(object.version) : undefined,
+      chainId: isSet(object.chain_id) ? object.chain_id : undefined,
+      height: isSet(object.height) ? object.height : undefined,
+      time: isSet(object.time) ? Timestamp.fromAmino(object.time) : undefined,
+      lastBlockId: isSet(object.last_block_id) ? BlockID.fromAmino(object.last_block_id) : undefined,
+      lastCommitHash: isSet(object.last_commit_hash) ? object.last_commit_hash : undefined,
+      dataHash: isSet(object.data_hash) ? object.data_hash : undefined,
+      validatorsHash: isSet(object.validators_hash) ? object.validators_hash : undefined,
+      nextValidatorsHash: isSet(object.next_validators_hash) ? object.next_validators_hash : undefined,
+      consensusHash: isSet(object.consensus_hash) ? object.consensus_hash : undefined,
+      appHash: isSet(object.app_hash) ? object.app_hash : undefined,
+      lastResultsHash: isSet(object.last_results_hash) ? object.last_results_hash : undefined,
+      evidenceHash: isSet(object.evidence_hash) ? object.evidence_hash : undefined,
+      proposerAddress: isSet(object.proposer_address) ? object.proposer_address : undefined
+    };
+  },
+
+  toAmino(message: Header): HeaderSDKType {
+    const obj: any = {};
+    message.version !== undefined && (obj.version = message.version ? Consensus.toAmino(message.version) : undefined);
+    message.chainId !== undefined && (obj.chain_id = message.chainId);
+    message.height !== undefined && (obj.height = message.height);
+    message.time !== undefined && (obj.time = message.time ? Timestamp.toAmino(message.time) : undefined);
+    message.lastBlockId !== undefined && (obj.last_block_id = message.lastBlockId ? BlockID.toAmino(message.lastBlockId) : undefined);
+    message.lastCommitHash !== undefined && (obj.last_commit_hash = message.lastCommitHash);
+    message.dataHash !== undefined && (obj.data_hash = message.dataHash);
+    message.validatorsHash !== undefined && (obj.validators_hash = message.validatorsHash);
+    message.nextValidatorsHash !== undefined && (obj.next_validators_hash = message.nextValidatorsHash);
+    message.consensusHash !== undefined && (obj.consensus_hash = message.consensusHash);
+    message.appHash !== undefined && (obj.app_hash = message.appHash);
+    message.lastResultsHash !== undefined && (obj.last_results_hash = message.lastResultsHash);
+    message.evidenceHash !== undefined && (obj.evidence_hash = message.evidenceHash);
+    message.proposerAddress !== undefined && (obj.proposer_address = message.proposerAddress);
+    return obj;
   }
 
 };
@@ -730,6 +812,24 @@ export const Data = {
     const message = createBaseData();
     message.txs = object.txs?.map(e => e) || [];
     return message;
+  },
+
+  fromAmino(object: DataSDKType): Data {
+    return {
+      txs: Array.isArray(object?.txs) ? object.txs.map((e: any) => e) : []
+    };
+  },
+
+  toAmino(message: Data): DataSDKType {
+    const obj: any = {};
+
+    if (message.txs) {
+      obj.txs = message.txs.map(e => e);
+    } else {
+      obj.txs = [];
+    }
+
+    return obj;
   }
 
 };
@@ -871,6 +971,32 @@ export const Vote = {
     message.validatorIndex = object.validatorIndex ?? 0;
     message.signature = object.signature ?? new Uint8Array();
     return message;
+  },
+
+  fromAmino(object: VoteSDKType): Vote {
+    return {
+      type: isSet(object.type) ? signedMsgTypeFromJSON(object.type) : 0,
+      height: isSet(object.height) ? object.height : undefined,
+      round: isSet(object.round) ? object.round : undefined,
+      blockId: isSet(object.block_id) ? BlockID.fromAmino(object.block_id) : undefined,
+      timestamp: isSet(object.timestamp) ? Timestamp.fromAmino(object.timestamp) : undefined,
+      validatorAddress: isSet(object.validator_address) ? object.validator_address : undefined,
+      validatorIndex: isSet(object.validator_index) ? object.validator_index : undefined,
+      signature: isSet(object.signature) ? object.signature : undefined
+    };
+  },
+
+  toAmino(message: Vote): VoteSDKType {
+    const obj: any = {};
+    message.type !== undefined && (obj.type = signedMsgTypeToJSON(message.type));
+    message.height !== undefined && (obj.height = message.height);
+    message.round !== undefined && (obj.round = message.round);
+    message.blockId !== undefined && (obj.block_id = message.blockId ? BlockID.toAmino(message.blockId) : undefined);
+    message.timestamp !== undefined && (obj.timestamp = message.timestamp ? Timestamp.toAmino(message.timestamp) : undefined);
+    message.validatorAddress !== undefined && (obj.validator_address = message.validatorAddress);
+    message.validatorIndex !== undefined && (obj.validator_index = message.validatorIndex);
+    message.signature !== undefined && (obj.signature = message.signature);
+    return obj;
   }
 
 };
@@ -970,6 +1096,30 @@ export const Commit = {
     message.blockId = object.blockId !== undefined && object.blockId !== null ? BlockID.fromPartial(object.blockId) : undefined;
     message.signatures = object.signatures?.map(e => CommitSig.fromPartial(e)) || [];
     return message;
+  },
+
+  fromAmino(object: CommitSDKType): Commit {
+    return {
+      height: isSet(object.height) ? object.height : undefined,
+      round: isSet(object.round) ? object.round : undefined,
+      blockId: isSet(object.block_id) ? BlockID.fromAmino(object.block_id) : undefined,
+      signatures: Array.isArray(object?.signatures) ? object.signatures.map((e: any) => CommitSig.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: Commit): CommitSDKType {
+    const obj: any = {};
+    message.height !== undefined && (obj.height = message.height);
+    message.round !== undefined && (obj.round = message.round);
+    message.blockId !== undefined && (obj.block_id = message.blockId ? BlockID.toAmino(message.blockId) : undefined);
+
+    if (message.signatures) {
+      obj.signatures = message.signatures.map(e => e ? CommitSig.toAmino(e) : undefined);
+    } else {
+      obj.signatures = [];
+    }
+
+    return obj;
   }
 
 };
@@ -1063,6 +1213,24 @@ export const CommitSig = {
     message.timestamp = object.timestamp !== undefined && object.timestamp !== null ? Timestamp.fromPartial(object.timestamp) : undefined;
     message.signature = object.signature ?? new Uint8Array();
     return message;
+  },
+
+  fromAmino(object: CommitSigSDKType): CommitSig {
+    return {
+      blockIdFlag: isSet(object.block_id_flag) ? blockIDFlagFromJSON(object.block_id_flag) : 0,
+      validatorAddress: isSet(object.validator_address) ? object.validator_address : undefined,
+      timestamp: isSet(object.timestamp) ? Timestamp.fromAmino(object.timestamp) : undefined,
+      signature: isSet(object.signature) ? object.signature : undefined
+    };
+  },
+
+  toAmino(message: CommitSig): CommitSigSDKType {
+    const obj: any = {};
+    message.blockIdFlag !== undefined && (obj.block_id_flag = blockIDFlagToJSON(message.blockIdFlag));
+    message.validatorAddress !== undefined && (obj.validator_address = message.validatorAddress);
+    message.timestamp !== undefined && (obj.timestamp = message.timestamp ? Timestamp.toAmino(message.timestamp) : undefined);
+    message.signature !== undefined && (obj.signature = message.signature);
+    return obj;
   }
 
 };
@@ -1192,6 +1360,30 @@ export const Proposal = {
     message.timestamp = object.timestamp !== undefined && object.timestamp !== null ? Timestamp.fromPartial(object.timestamp) : undefined;
     message.signature = object.signature ?? new Uint8Array();
     return message;
+  },
+
+  fromAmino(object: ProposalSDKType): Proposal {
+    return {
+      type: isSet(object.type) ? signedMsgTypeFromJSON(object.type) : 0,
+      height: isSet(object.height) ? object.height : undefined,
+      round: isSet(object.round) ? object.round : undefined,
+      polRound: isSet(object.pol_round) ? object.pol_round : undefined,
+      blockId: isSet(object.block_id) ? BlockID.fromAmino(object.block_id) : undefined,
+      timestamp: isSet(object.timestamp) ? Timestamp.fromAmino(object.timestamp) : undefined,
+      signature: isSet(object.signature) ? object.signature : undefined
+    };
+  },
+
+  toAmino(message: Proposal): ProposalSDKType {
+    const obj: any = {};
+    message.type !== undefined && (obj.type = signedMsgTypeToJSON(message.type));
+    message.height !== undefined && (obj.height = message.height);
+    message.round !== undefined && (obj.round = message.round);
+    message.polRound !== undefined && (obj.pol_round = message.polRound);
+    message.blockId !== undefined && (obj.block_id = message.blockId ? BlockID.toAmino(message.blockId) : undefined);
+    message.timestamp !== undefined && (obj.timestamp = message.timestamp ? Timestamp.toAmino(message.timestamp) : undefined);
+    message.signature !== undefined && (obj.signature = message.signature);
+    return obj;
   }
 
 };
@@ -1261,6 +1453,20 @@ export const SignedHeader = {
     message.header = object.header !== undefined && object.header !== null ? Header.fromPartial(object.header) : undefined;
     message.commit = object.commit !== undefined && object.commit !== null ? Commit.fromPartial(object.commit) : undefined;
     return message;
+  },
+
+  fromAmino(object: SignedHeaderSDKType): SignedHeader {
+    return {
+      header: isSet(object.header) ? Header.fromAmino(object.header) : undefined,
+      commit: isSet(object.commit) ? Commit.fromAmino(object.commit) : undefined
+    };
+  },
+
+  toAmino(message: SignedHeader): SignedHeaderSDKType {
+    const obj: any = {};
+    message.header !== undefined && (obj.header = message.header ? Header.toAmino(message.header) : undefined);
+    message.commit !== undefined && (obj.commit = message.commit ? Commit.toAmino(message.commit) : undefined);
+    return obj;
   }
 
 };
@@ -1330,6 +1536,20 @@ export const LightBlock = {
     message.signedHeader = object.signedHeader !== undefined && object.signedHeader !== null ? SignedHeader.fromPartial(object.signedHeader) : undefined;
     message.validatorSet = object.validatorSet !== undefined && object.validatorSet !== null ? ValidatorSet.fromPartial(object.validatorSet) : undefined;
     return message;
+  },
+
+  fromAmino(object: LightBlockSDKType): LightBlock {
+    return {
+      signedHeader: isSet(object.signed_header) ? SignedHeader.fromAmino(object.signed_header) : undefined,
+      validatorSet: isSet(object.validator_set) ? ValidatorSet.fromAmino(object.validator_set) : undefined
+    };
+  },
+
+  toAmino(message: LightBlock): LightBlockSDKType {
+    const obj: any = {};
+    message.signedHeader !== undefined && (obj.signed_header = message.signedHeader ? SignedHeader.toAmino(message.signedHeader) : undefined);
+    message.validatorSet !== undefined && (obj.validator_set = message.validatorSet ? ValidatorSet.toAmino(message.validatorSet) : undefined);
+    return obj;
   }
 
 };
@@ -1423,6 +1643,24 @@ export const BlockMeta = {
     message.header = object.header !== undefined && object.header !== null ? Header.fromPartial(object.header) : undefined;
     message.numTxs = object.numTxs !== undefined && object.numTxs !== null ? Long.fromValue(object.numTxs) : Long.ZERO;
     return message;
+  },
+
+  fromAmino(object: BlockMetaSDKType): BlockMeta {
+    return {
+      blockId: isSet(object.block_id) ? BlockID.fromAmino(object.block_id) : undefined,
+      blockSize: isSet(object.block_size) ? object.block_size : undefined,
+      header: isSet(object.header) ? Header.fromAmino(object.header) : undefined,
+      numTxs: isSet(object.num_txs) ? object.num_txs : undefined
+    };
+  },
+
+  toAmino(message: BlockMeta): BlockMetaSDKType {
+    const obj: any = {};
+    message.blockId !== undefined && (obj.block_id = message.blockId ? BlockID.toAmino(message.blockId) : undefined);
+    message.blockSize !== undefined && (obj.block_size = message.blockSize);
+    message.header !== undefined && (obj.header = message.header ? Header.toAmino(message.header) : undefined);
+    message.numTxs !== undefined && (obj.num_txs = message.numTxs);
+    return obj;
   }
 
 };
@@ -1504,6 +1742,22 @@ export const TxProof = {
     message.data = object.data ?? new Uint8Array();
     message.proof = object.proof !== undefined && object.proof !== null ? Proof.fromPartial(object.proof) : undefined;
     return message;
+  },
+
+  fromAmino(object: TxProofSDKType): TxProof {
+    return {
+      rootHash: isSet(object.root_hash) ? object.root_hash : undefined,
+      data: isSet(object.data) ? object.data : undefined,
+      proof: isSet(object.proof) ? Proof.fromAmino(object.proof) : undefined
+    };
+  },
+
+  toAmino(message: TxProof): TxProofSDKType {
+    const obj: any = {};
+    message.rootHash !== undefined && (obj.root_hash = message.rootHash);
+    message.data !== undefined && (obj.data = message.data);
+    message.proof !== undefined && (obj.proof = message.proof ? Proof.toAmino(message.proof) : undefined);
+    return obj;
   }
 
 };

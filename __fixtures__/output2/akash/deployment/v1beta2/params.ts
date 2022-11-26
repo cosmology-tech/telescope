@@ -63,6 +63,18 @@ export const Params = {
     const message = createBaseParams();
     message.deploymentMinDeposit = object.deploymentMinDeposit !== undefined && object.deploymentMinDeposit !== null ? Coin.fromPartial(object.deploymentMinDeposit) : undefined;
     return message;
+  },
+
+  fromAmino(object: ParamsSDKType): Params {
+    return {
+      deploymentMinDeposit: isSet(object.deployment_min_deposit) ? Coin.fromAmino(object.deployment_min_deposit) : undefined
+    };
+  },
+
+  toAmino(message: Params): ParamsSDKType {
+    const obj: any = {};
+    message.deploymentMinDeposit !== undefined && (obj.deployment_min_deposit = message.deploymentMinDeposit ? Coin.toAmino(message.deploymentMinDeposit) : undefined);
+    return obj;
   }
 
 };

@@ -56,6 +56,15 @@ export const Empty = {
   fromPartial(_: DeepPartial<Empty>): Empty {
     const message = createBaseEmpty();
     return message;
+  },
+
+  fromAmino(_: EmptySDKType): Empty {
+    return {};
+  },
+
+  toAmino(_: Empty): EmptySDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };

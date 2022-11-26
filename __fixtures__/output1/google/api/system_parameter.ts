@@ -255,6 +255,24 @@ export const SystemParameters = {
     }
 
     return obj;
+  },
+
+  fromAmino(object: SystemParametersSDKType): SystemParameters {
+    return {
+      rules: Array.isArray(object?.rules) ? object.rules.map((e: any) => SystemParameterRule.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: SystemParameters): SystemParametersSDKType {
+    const obj: any = {};
+
+    if (message.rules) {
+      obj.rules = message.rules.map(e => e ? SystemParameterRule.toAmino(e) : undefined);
+    } else {
+      obj.rules = [];
+    }
+
+    return obj;
   }
 
 };
@@ -345,6 +363,26 @@ export const SystemParameterRule = {
 
     if (message.parameters) {
       obj.parameters = message.parameters.map(e => e ? SystemParameter.toSDK(e) : undefined);
+    } else {
+      obj.parameters = [];
+    }
+
+    return obj;
+  },
+
+  fromAmino(object: SystemParameterRuleSDKType): SystemParameterRule {
+    return {
+      selector: isSet(object.selector) ? object.selector : undefined,
+      parameters: Array.isArray(object?.parameters) ? object.parameters.map((e: any) => SystemParameter.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: SystemParameterRule): SystemParameterRuleSDKType {
+    const obj: any = {};
+    message.selector !== undefined && (obj.selector = message.selector);
+
+    if (message.parameters) {
+      obj.parameters = message.parameters.map(e => e ? SystemParameter.toAmino(e) : undefined);
     } else {
       obj.parameters = [];
     }
@@ -442,6 +480,22 @@ export const SystemParameter = {
   },
 
   toSDK(message: SystemParameter): SystemParameterSDKType {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    message.httpHeader !== undefined && (obj.http_header = message.httpHeader);
+    message.urlQueryParameter !== undefined && (obj.url_query_parameter = message.urlQueryParameter);
+    return obj;
+  },
+
+  fromAmino(object: SystemParameterSDKType): SystemParameter {
+    return {
+      name: isSet(object.name) ? object.name : undefined,
+      httpHeader: isSet(object.http_header) ? object.http_header : undefined,
+      urlQueryParameter: isSet(object.url_query_parameter) ? object.url_query_parameter : undefined
+    };
+  },
+
+  toAmino(message: SystemParameter): SystemParameterSDKType {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     message.httpHeader !== undefined && (obj.http_header = message.httpHeader);

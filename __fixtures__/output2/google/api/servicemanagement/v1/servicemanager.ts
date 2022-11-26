@@ -408,6 +408,24 @@ export const ListServicesRequest = {
     message.pageToken = object.pageToken ?? "";
     message.consumerId = object.consumerId ?? "";
     return message;
+  },
+
+  fromAmino(object: ListServicesRequestSDKType): ListServicesRequest {
+    return {
+      producerProjectId: isSet(object.producer_project_id) ? object.producer_project_id : undefined,
+      pageSize: isSet(object.page_size) ? object.page_size : undefined,
+      pageToken: isSet(object.page_token) ? object.page_token : undefined,
+      consumerId: isSet(object.consumer_id) ? object.consumer_id : undefined
+    };
+  },
+
+  toAmino(message: ListServicesRequest): ListServicesRequestSDKType {
+    const obj: any = {};
+    message.producerProjectId !== undefined && (obj.producer_project_id = message.producerProjectId);
+    message.pageSize !== undefined && (obj.page_size = message.pageSize);
+    message.pageToken !== undefined && (obj.page_token = message.pageToken);
+    message.consumerId !== undefined && (obj.consumer_id = message.consumerId);
+    return obj;
   }
 
 };
@@ -483,6 +501,26 @@ export const ListServicesResponse = {
     message.services = object.services?.map(e => ManagedService.fromPartial(e)) || [];
     message.nextPageToken = object.nextPageToken ?? "";
     return message;
+  },
+
+  fromAmino(object: ListServicesResponseSDKType): ListServicesResponse {
+    return {
+      services: Array.isArray(object?.services) ? object.services.map((e: any) => ManagedService.fromAmino(e)) : [],
+      nextPageToken: isSet(object.next_page_token) ? object.next_page_token : undefined
+    };
+  },
+
+  toAmino(message: ListServicesResponse): ListServicesResponseSDKType {
+    const obj: any = {};
+
+    if (message.services) {
+      obj.services = message.services.map(e => e ? ManagedService.toAmino(e) : undefined);
+    } else {
+      obj.services = [];
+    }
+
+    message.nextPageToken !== undefined && (obj.next_page_token = message.nextPageToken);
+    return obj;
   }
 
 };
@@ -540,6 +578,18 @@ export const GetServiceRequest = {
     const message = createBaseGetServiceRequest();
     message.serviceName = object.serviceName ?? "";
     return message;
+  },
+
+  fromAmino(object: GetServiceRequestSDKType): GetServiceRequest {
+    return {
+      serviceName: isSet(object.service_name) ? object.service_name : undefined
+    };
+  },
+
+  toAmino(message: GetServiceRequest): GetServiceRequestSDKType {
+    const obj: any = {};
+    message.serviceName !== undefined && (obj.service_name = message.serviceName);
+    return obj;
   }
 
 };
@@ -597,6 +647,18 @@ export const CreateServiceRequest = {
     const message = createBaseCreateServiceRequest();
     message.service = object.service !== undefined && object.service !== null ? ManagedService.fromPartial(object.service) : undefined;
     return message;
+  },
+
+  fromAmino(object: CreateServiceRequestSDKType): CreateServiceRequest {
+    return {
+      service: isSet(object.service) ? ManagedService.fromAmino(object.service) : undefined
+    };
+  },
+
+  toAmino(message: CreateServiceRequest): CreateServiceRequestSDKType {
+    const obj: any = {};
+    message.service !== undefined && (obj.service = message.service ? ManagedService.toAmino(message.service) : undefined);
+    return obj;
   }
 
 };
@@ -654,6 +716,18 @@ export const DeleteServiceRequest = {
     const message = createBaseDeleteServiceRequest();
     message.serviceName = object.serviceName ?? "";
     return message;
+  },
+
+  fromAmino(object: DeleteServiceRequestSDKType): DeleteServiceRequest {
+    return {
+      serviceName: isSet(object.service_name) ? object.service_name : undefined
+    };
+  },
+
+  toAmino(message: DeleteServiceRequest): DeleteServiceRequestSDKType {
+    const obj: any = {};
+    message.serviceName !== undefined && (obj.service_name = message.serviceName);
+    return obj;
   }
 
 };
@@ -711,6 +785,18 @@ export const UndeleteServiceRequest = {
     const message = createBaseUndeleteServiceRequest();
     message.serviceName = object.serviceName ?? "";
     return message;
+  },
+
+  fromAmino(object: UndeleteServiceRequestSDKType): UndeleteServiceRequest {
+    return {
+      serviceName: isSet(object.service_name) ? object.service_name : undefined
+    };
+  },
+
+  toAmino(message: UndeleteServiceRequest): UndeleteServiceRequestSDKType {
+    const obj: any = {};
+    message.serviceName !== undefined && (obj.service_name = message.serviceName);
+    return obj;
   }
 
 };
@@ -768,6 +854,18 @@ export const UndeleteServiceResponse = {
     const message = createBaseUndeleteServiceResponse();
     message.service = object.service !== undefined && object.service !== null ? ManagedService.fromPartial(object.service) : undefined;
     return message;
+  },
+
+  fromAmino(object: UndeleteServiceResponseSDKType): UndeleteServiceResponse {
+    return {
+      service: isSet(object.service) ? ManagedService.fromAmino(object.service) : undefined
+    };
+  },
+
+  toAmino(message: UndeleteServiceResponse): UndeleteServiceResponseSDKType {
+    const obj: any = {};
+    message.service !== undefined && (obj.service = message.service ? ManagedService.toAmino(message.service) : undefined);
+    return obj;
   }
 
 };
@@ -849,6 +947,22 @@ export const GetServiceConfigRequest = {
     message.configId = object.configId ?? "";
     message.view = object.view ?? 0;
     return message;
+  },
+
+  fromAmino(object: GetServiceConfigRequestSDKType): GetServiceConfigRequest {
+    return {
+      serviceName: isSet(object.service_name) ? object.service_name : undefined,
+      configId: isSet(object.config_id) ? object.config_id : undefined,
+      view: isSet(object.view) ? getServiceConfigRequest_ConfigViewFromJSON(object.view) : 0
+    };
+  },
+
+  toAmino(message: GetServiceConfigRequest): GetServiceConfigRequestSDKType {
+    const obj: any = {};
+    message.serviceName !== undefined && (obj.service_name = message.serviceName);
+    message.configId !== undefined && (obj.config_id = message.configId);
+    message.view !== undefined && (obj.view = getServiceConfigRequest_ConfigViewToJSON(message.view));
+    return obj;
   }
 
 };
@@ -930,6 +1044,22 @@ export const ListServiceConfigsRequest = {
     message.pageToken = object.pageToken ?? "";
     message.pageSize = object.pageSize ?? 0;
     return message;
+  },
+
+  fromAmino(object: ListServiceConfigsRequestSDKType): ListServiceConfigsRequest {
+    return {
+      serviceName: isSet(object.service_name) ? object.service_name : undefined,
+      pageToken: isSet(object.page_token) ? object.page_token : undefined,
+      pageSize: isSet(object.page_size) ? object.page_size : undefined
+    };
+  },
+
+  toAmino(message: ListServiceConfigsRequest): ListServiceConfigsRequestSDKType {
+    const obj: any = {};
+    message.serviceName !== undefined && (obj.service_name = message.serviceName);
+    message.pageToken !== undefined && (obj.page_token = message.pageToken);
+    message.pageSize !== undefined && (obj.page_size = message.pageSize);
+    return obj;
   }
 
 };
@@ -1005,6 +1135,26 @@ export const ListServiceConfigsResponse = {
     message.serviceConfigs = object.serviceConfigs?.map(e => Service.fromPartial(e)) || [];
     message.nextPageToken = object.nextPageToken ?? "";
     return message;
+  },
+
+  fromAmino(object: ListServiceConfigsResponseSDKType): ListServiceConfigsResponse {
+    return {
+      serviceConfigs: Array.isArray(object?.service_configs) ? object.service_configs.map((e: any) => Service.fromAmino(e)) : [],
+      nextPageToken: isSet(object.next_page_token) ? object.next_page_token : undefined
+    };
+  },
+
+  toAmino(message: ListServiceConfigsResponse): ListServiceConfigsResponseSDKType {
+    const obj: any = {};
+
+    if (message.serviceConfigs) {
+      obj.service_configs = message.serviceConfigs.map(e => e ? Service.toAmino(e) : undefined);
+    } else {
+      obj.service_configs = [];
+    }
+
+    message.nextPageToken !== undefined && (obj.next_page_token = message.nextPageToken);
+    return obj;
   }
 
 };
@@ -1074,6 +1224,20 @@ export const CreateServiceConfigRequest = {
     message.serviceName = object.serviceName ?? "";
     message.serviceConfig = object.serviceConfig !== undefined && object.serviceConfig !== null ? Service.fromPartial(object.serviceConfig) : undefined;
     return message;
+  },
+
+  fromAmino(object: CreateServiceConfigRequestSDKType): CreateServiceConfigRequest {
+    return {
+      serviceName: isSet(object.service_name) ? object.service_name : undefined,
+      serviceConfig: isSet(object.service_config) ? Service.fromAmino(object.service_config) : undefined
+    };
+  },
+
+  toAmino(message: CreateServiceConfigRequest): CreateServiceConfigRequestSDKType {
+    const obj: any = {};
+    message.serviceName !== undefined && (obj.service_name = message.serviceName);
+    message.serviceConfig !== undefined && (obj.service_config = message.serviceConfig ? Service.toAmino(message.serviceConfig) : undefined);
+    return obj;
   }
 
 };
@@ -1155,6 +1319,22 @@ export const SubmitConfigSourceRequest = {
     message.configSource = object.configSource !== undefined && object.configSource !== null ? ConfigSource.fromPartial(object.configSource) : undefined;
     message.validateOnly = object.validateOnly ?? false;
     return message;
+  },
+
+  fromAmino(object: SubmitConfigSourceRequestSDKType): SubmitConfigSourceRequest {
+    return {
+      serviceName: isSet(object.service_name) ? object.service_name : undefined,
+      configSource: isSet(object.config_source) ? ConfigSource.fromAmino(object.config_source) : undefined,
+      validateOnly: isSet(object.validate_only) ? object.validate_only : undefined
+    };
+  },
+
+  toAmino(message: SubmitConfigSourceRequest): SubmitConfigSourceRequestSDKType {
+    const obj: any = {};
+    message.serviceName !== undefined && (obj.service_name = message.serviceName);
+    message.configSource !== undefined && (obj.config_source = message.configSource ? ConfigSource.toAmino(message.configSource) : undefined);
+    message.validateOnly !== undefined && (obj.validate_only = message.validateOnly);
+    return obj;
   }
 
 };
@@ -1212,6 +1392,18 @@ export const SubmitConfigSourceResponse = {
     const message = createBaseSubmitConfigSourceResponse();
     message.serviceConfig = object.serviceConfig !== undefined && object.serviceConfig !== null ? Service.fromPartial(object.serviceConfig) : undefined;
     return message;
+  },
+
+  fromAmino(object: SubmitConfigSourceResponseSDKType): SubmitConfigSourceResponse {
+    return {
+      serviceConfig: isSet(object.service_config) ? Service.fromAmino(object.service_config) : undefined
+    };
+  },
+
+  toAmino(message: SubmitConfigSourceResponse): SubmitConfigSourceResponseSDKType {
+    const obj: any = {};
+    message.serviceConfig !== undefined && (obj.service_config = message.serviceConfig ? Service.toAmino(message.serviceConfig) : undefined);
+    return obj;
   }
 
 };
@@ -1281,6 +1473,20 @@ export const CreateServiceRolloutRequest = {
     message.serviceName = object.serviceName ?? "";
     message.rollout = object.rollout !== undefined && object.rollout !== null ? Rollout.fromPartial(object.rollout) : undefined;
     return message;
+  },
+
+  fromAmino(object: CreateServiceRolloutRequestSDKType): CreateServiceRolloutRequest {
+    return {
+      serviceName: isSet(object.service_name) ? object.service_name : undefined,
+      rollout: isSet(object.rollout) ? Rollout.fromAmino(object.rollout) : undefined
+    };
+  },
+
+  toAmino(message: CreateServiceRolloutRequest): CreateServiceRolloutRequestSDKType {
+    const obj: any = {};
+    message.serviceName !== undefined && (obj.service_name = message.serviceName);
+    message.rollout !== undefined && (obj.rollout = message.rollout ? Rollout.toAmino(message.rollout) : undefined);
+    return obj;
   }
 
 };
@@ -1374,6 +1580,24 @@ export const ListServiceRolloutsRequest = {
     message.pageSize = object.pageSize ?? 0;
     message.filter = object.filter ?? "";
     return message;
+  },
+
+  fromAmino(object: ListServiceRolloutsRequestSDKType): ListServiceRolloutsRequest {
+    return {
+      serviceName: isSet(object.service_name) ? object.service_name : undefined,
+      pageToken: isSet(object.page_token) ? object.page_token : undefined,
+      pageSize: isSet(object.page_size) ? object.page_size : undefined,
+      filter: isSet(object.filter) ? object.filter : undefined
+    };
+  },
+
+  toAmino(message: ListServiceRolloutsRequest): ListServiceRolloutsRequestSDKType {
+    const obj: any = {};
+    message.serviceName !== undefined && (obj.service_name = message.serviceName);
+    message.pageToken !== undefined && (obj.page_token = message.pageToken);
+    message.pageSize !== undefined && (obj.page_size = message.pageSize);
+    message.filter !== undefined && (obj.filter = message.filter);
+    return obj;
   }
 
 };
@@ -1449,6 +1673,26 @@ export const ListServiceRolloutsResponse = {
     message.rollouts = object.rollouts?.map(e => Rollout.fromPartial(e)) || [];
     message.nextPageToken = object.nextPageToken ?? "";
     return message;
+  },
+
+  fromAmino(object: ListServiceRolloutsResponseSDKType): ListServiceRolloutsResponse {
+    return {
+      rollouts: Array.isArray(object?.rollouts) ? object.rollouts.map((e: any) => Rollout.fromAmino(e)) : [],
+      nextPageToken: isSet(object.next_page_token) ? object.next_page_token : undefined
+    };
+  },
+
+  toAmino(message: ListServiceRolloutsResponse): ListServiceRolloutsResponseSDKType {
+    const obj: any = {};
+
+    if (message.rollouts) {
+      obj.rollouts = message.rollouts.map(e => e ? Rollout.toAmino(e) : undefined);
+    } else {
+      obj.rollouts = [];
+    }
+
+    message.nextPageToken !== undefined && (obj.next_page_token = message.nextPageToken);
+    return obj;
   }
 
 };
@@ -1518,6 +1762,20 @@ export const GetServiceRolloutRequest = {
     message.serviceName = object.serviceName ?? "";
     message.rolloutId = object.rolloutId ?? "";
     return message;
+  },
+
+  fromAmino(object: GetServiceRolloutRequestSDKType): GetServiceRolloutRequest {
+    return {
+      serviceName: isSet(object.service_name) ? object.service_name : undefined,
+      rolloutId: isSet(object.rollout_id) ? object.rollout_id : undefined
+    };
+  },
+
+  toAmino(message: GetServiceRolloutRequest): GetServiceRolloutRequestSDKType {
+    const obj: any = {};
+    message.serviceName !== undefined && (obj.service_name = message.serviceName);
+    message.rolloutId !== undefined && (obj.rollout_id = message.rolloutId);
+    return obj;
   }
 
 };
@@ -1587,6 +1845,20 @@ export const GenerateConfigReportRequest = {
     message.newConfig = object.newConfig !== undefined && object.newConfig !== null ? Any.fromPartial(object.newConfig) : undefined;
     message.oldConfig = object.oldConfig !== undefined && object.oldConfig !== null ? Any.fromPartial(object.oldConfig) : undefined;
     return message;
+  },
+
+  fromAmino(object: GenerateConfigReportRequestSDKType): GenerateConfigReportRequest {
+    return {
+      newConfig: isSet(object.new_config) ? Any.fromAmino(object.new_config) : undefined,
+      oldConfig: isSet(object.old_config) ? Any.fromAmino(object.old_config) : undefined
+    };
+  },
+
+  toAmino(message: GenerateConfigReportRequest): GenerateConfigReportRequestSDKType {
+    const obj: any = {};
+    message.newConfig !== undefined && (obj.new_config = message.newConfig ? Any.toAmino(message.newConfig) : undefined);
+    message.oldConfig !== undefined && (obj.old_config = message.oldConfig ? Any.toAmino(message.oldConfig) : undefined);
+    return obj;
   }
 
 };
@@ -1691,6 +1963,35 @@ export const GenerateConfigReportResponse = {
     message.changeReports = object.changeReports?.map(e => ChangeReport.fromPartial(e)) || [];
     message.diagnostics = object.diagnostics?.map(e => Diagnostic.fromPartial(e)) || [];
     return message;
+  },
+
+  fromAmino(object: GenerateConfigReportResponseSDKType): GenerateConfigReportResponse {
+    return {
+      serviceName: isSet(object.service_name) ? object.service_name : undefined,
+      id: isSet(object.id) ? object.id : undefined,
+      changeReports: Array.isArray(object?.change_reports) ? object.change_reports.map((e: any) => ChangeReport.fromAmino(e)) : [],
+      diagnostics: Array.isArray(object?.diagnostics) ? object.diagnostics.map((e: any) => Diagnostic.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: GenerateConfigReportResponse): GenerateConfigReportResponseSDKType {
+    const obj: any = {};
+    message.serviceName !== undefined && (obj.service_name = message.serviceName);
+    message.id !== undefined && (obj.id = message.id);
+
+    if (message.changeReports) {
+      obj.change_reports = message.changeReports.map(e => e ? ChangeReport.toAmino(e) : undefined);
+    } else {
+      obj.change_reports = [];
+    }
+
+    if (message.diagnostics) {
+      obj.diagnostics = message.diagnostics.map(e => e ? Diagnostic.toAmino(e) : undefined);
+    } else {
+      obj.diagnostics = [];
+    }
+
+    return obj;
   }
 
 };

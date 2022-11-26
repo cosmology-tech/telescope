@@ -420,6 +420,24 @@ export const ParseRequest = {
     message.sourceLocation !== undefined && (obj.source_location = message.sourceLocation);
     message.disableMacros !== undefined && (obj.disable_macros = message.disableMacros);
     return obj;
+  },
+
+  fromAmino(object: ParseRequestSDKType): ParseRequest {
+    return {
+      celSource: isSet(object.cel_source) ? object.cel_source : undefined,
+      syntaxVersion: isSet(object.syntax_version) ? object.syntax_version : undefined,
+      sourceLocation: isSet(object.source_location) ? object.source_location : undefined,
+      disableMacros: isSet(object.disable_macros) ? object.disable_macros : undefined
+    };
+  },
+
+  toAmino(message: ParseRequest): ParseRequestSDKType {
+    const obj: any = {};
+    message.celSource !== undefined && (obj.cel_source = message.celSource);
+    message.syntaxVersion !== undefined && (obj.syntax_version = message.syntaxVersion);
+    message.sourceLocation !== undefined && (obj.source_location = message.sourceLocation);
+    message.disableMacros !== undefined && (obj.disable_macros = message.disableMacros);
+    return obj;
   }
 
 };
@@ -510,6 +528,26 @@ export const ParseResponse = {
 
     if (message.issues) {
       obj.issues = message.issues.map(e => e ? Status.toSDK(e) : undefined);
+    } else {
+      obj.issues = [];
+    }
+
+    return obj;
+  },
+
+  fromAmino(object: ParseResponseSDKType): ParseResponse {
+    return {
+      parsedExpr: isSet(object.parsed_expr) ? ParsedExpr.fromAmino(object.parsed_expr) : undefined,
+      issues: Array.isArray(object?.issues) ? object.issues.map((e: any) => Status.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: ParseResponse): ParseResponseSDKType {
+    const obj: any = {};
+    message.parsedExpr !== undefined && (obj.parsed_expr = message.parsedExpr ? ParsedExpr.toAmino(message.parsedExpr) : undefined);
+
+    if (message.issues) {
+      obj.issues = message.issues.map(e => e ? Status.toAmino(e) : undefined);
     } else {
       obj.issues = [];
     }
@@ -638,6 +676,30 @@ export const CheckRequest = {
     message.container !== undefined && (obj.container = message.container);
     message.noStdEnv !== undefined && (obj.no_std_env = message.noStdEnv);
     return obj;
+  },
+
+  fromAmino(object: CheckRequestSDKType): CheckRequest {
+    return {
+      parsedExpr: isSet(object.parsed_expr) ? ParsedExpr.fromAmino(object.parsed_expr) : undefined,
+      typeEnv: Array.isArray(object?.type_env) ? object.type_env.map((e: any) => Decl.fromAmino(e)) : [],
+      container: isSet(object.container) ? object.container : undefined,
+      noStdEnv: isSet(object.no_std_env) ? object.no_std_env : undefined
+    };
+  },
+
+  toAmino(message: CheckRequest): CheckRequestSDKType {
+    const obj: any = {};
+    message.parsedExpr !== undefined && (obj.parsed_expr = message.parsedExpr ? ParsedExpr.toAmino(message.parsedExpr) : undefined);
+
+    if (message.typeEnv) {
+      obj.type_env = message.typeEnv.map(e => e ? Decl.toAmino(e) : undefined);
+    } else {
+      obj.type_env = [];
+    }
+
+    message.container !== undefined && (obj.container = message.container);
+    message.noStdEnv !== undefined && (obj.no_std_env = message.noStdEnv);
+    return obj;
   }
 
 };
@@ -733,6 +795,26 @@ export const CheckResponse = {
     }
 
     return obj;
+  },
+
+  fromAmino(object: CheckResponseSDKType): CheckResponse {
+    return {
+      checkedExpr: isSet(object.checked_expr) ? CheckedExpr.fromAmino(object.checked_expr) : undefined,
+      issues: Array.isArray(object?.issues) ? object.issues.map((e: any) => Status.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: CheckResponse): CheckResponseSDKType {
+    const obj: any = {};
+    message.checkedExpr !== undefined && (obj.checked_expr = message.checkedExpr ? CheckedExpr.toAmino(message.checkedExpr) : undefined);
+
+    if (message.issues) {
+      obj.issues = message.issues.map(e => e ? Status.toAmino(e) : undefined);
+    } else {
+      obj.issues = [];
+    }
+
+    return obj;
   }
 
 };
@@ -815,6 +897,20 @@ export const EvalRequest_BindingsEntry = {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key);
     message.value !== undefined && (obj.value = message.value ? google.api.expr.v1alpha1.ExprValue.toSDK(message.value) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: EvalRequest_BindingsEntrySDKType): EvalRequest_BindingsEntry {
+    return {
+      key: isSet(object.key) ? object.key : undefined,
+      value: isSet(object.value) ? google.api.expr.v1alpha1.ExprValue.fromAmino(object.value) : undefined
+    };
+  },
+
+  toAmino(message: EvalRequest_BindingsEntry): EvalRequest_BindingsEntrySDKType {
+    const obj: any = {};
+    message.key !== undefined && (obj.key = message.key);
+    message.value !== undefined && (obj.value = message.value ? google.api.expr.v1alpha1.ExprValue.toAmino(message.value) : undefined);
     return obj;
   }
 
@@ -967,6 +1063,36 @@ export const EvalRequest = {
 
     message.container !== undefined && (obj.container = message.container);
     return obj;
+  },
+
+  fromAmino(object: EvalRequestSDKType): EvalRequest {
+    return {
+      parsedExpr: isSet(object.parsed_expr) ? ParsedExpr.fromAmino(object.parsed_expr) : undefined,
+      checkedExpr: isSet(object.checked_expr) ? CheckedExpr.fromAmino(object.checked_expr) : undefined,
+      bindings: isObject(object.bindings) ? Object.entries(object.bindings).reduce<{
+        [key: string]: ExprValue;
+      }>((acc, [key, value]) => {
+        acc[key] = ExprValue.fromAmino(value);
+        return acc;
+      }, {}) : {},
+      container: isSet(object.container) ? object.container : undefined
+    };
+  },
+
+  toAmino(message: EvalRequest): EvalRequestSDKType {
+    const obj: any = {};
+    message.parsedExpr !== undefined && (obj.parsed_expr = message.parsedExpr ? ParsedExpr.toAmino(message.parsedExpr) : undefined);
+    message.checkedExpr !== undefined && (obj.checked_expr = message.checkedExpr ? CheckedExpr.toAmino(message.checkedExpr) : undefined);
+    obj.bindings = {};
+
+    if (message.bindings) {
+      Object.entries(message.bindings).forEach(([k, v]) => {
+        obj.bindings[k] = ExprValue.toAmino(v);
+      });
+    }
+
+    message.container !== undefined && (obj.container = message.container);
+    return obj;
   }
 
 };
@@ -1057,6 +1183,26 @@ export const EvalResponse = {
 
     if (message.issues) {
       obj.issues = message.issues.map(e => e ? Status.toSDK(e) : undefined);
+    } else {
+      obj.issues = [];
+    }
+
+    return obj;
+  },
+
+  fromAmino(object: EvalResponseSDKType): EvalResponse {
+    return {
+      result: isSet(object.result) ? ExprValue.fromAmino(object.result) : undefined,
+      issues: Array.isArray(object?.issues) ? object.issues.map((e: any) => Status.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: EvalResponse): EvalResponseSDKType {
+    const obj: any = {};
+    message.result !== undefined && (obj.result = message.result ? ExprValue.toAmino(message.result) : undefined);
+
+    if (message.issues) {
+      obj.issues = message.issues.map(e => e ? Status.toAmino(e) : undefined);
     } else {
       obj.issues = [];
     }
@@ -1157,6 +1303,22 @@ export const IssueDetails = {
     const obj: any = {};
     message.severity !== undefined && (obj.severity = issueDetails_SeverityToJSON(message.severity));
     message.position !== undefined && (obj.position = message.position ? SourcePosition.toSDK(message.position) : undefined);
+    message.id !== undefined && (obj.id = message.id);
+    return obj;
+  },
+
+  fromAmino(object: IssueDetailsSDKType): IssueDetails {
+    return {
+      severity: isSet(object.severity) ? issueDetails_SeverityFromJSON(object.severity) : 0,
+      position: isSet(object.position) ? SourcePosition.fromAmino(object.position) : undefined,
+      id: isSet(object.id) ? object.id : undefined
+    };
+  },
+
+  toAmino(message: IssueDetails): IssueDetailsSDKType {
+    const obj: any = {};
+    message.severity !== undefined && (obj.severity = issueDetails_SeverityToJSON(message.severity));
+    message.position !== undefined && (obj.position = message.position ? SourcePosition.toAmino(message.position) : undefined);
     message.id !== undefined && (obj.id = message.id);
     return obj;
   }

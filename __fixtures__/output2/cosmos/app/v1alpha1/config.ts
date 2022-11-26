@@ -101,6 +101,24 @@ export const Config = {
     const message = createBaseConfig();
     message.modules = object.modules?.map(e => ModuleConfig.fromPartial(e)) || [];
     return message;
+  },
+
+  fromAmino(object: ConfigSDKType): Config {
+    return {
+      modules: Array.isArray(object?.modules) ? object.modules.map((e: any) => ModuleConfig.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: Config): ConfigSDKType {
+    const obj: any = {};
+
+    if (message.modules) {
+      obj.modules = message.modules.map(e => e ? ModuleConfig.toAmino(e) : undefined);
+    } else {
+      obj.modules = [];
+    }
+
+    return obj;
   }
 
 };
@@ -170,6 +188,20 @@ export const ModuleConfig = {
     message.name = object.name ?? "";
     message.config = object.config !== undefined && object.config !== null ? Any.fromPartial(object.config) : undefined;
     return message;
+  },
+
+  fromAmino(object: ModuleConfigSDKType): ModuleConfig {
+    return {
+      name: isSet(object.name) ? object.name : undefined,
+      config: isSet(object.config) ? Any.fromAmino(object.config) : undefined
+    };
+  },
+
+  toAmino(message: ModuleConfig): ModuleConfigSDKType {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    message.config !== undefined && (obj.config = message.config ? Any.toAmino(message.config) : undefined);
+    return obj;
   }
 
 };

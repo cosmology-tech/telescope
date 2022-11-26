@@ -156,6 +156,22 @@ export const MsgGrantAllowance = {
     message.grantee !== undefined && (obj.grantee = message.grantee);
     message.allowance !== undefined && (obj.allowance = message.allowance ? Any.toSDK(message.allowance) : undefined);
     return obj;
+  },
+
+  fromAmino(object: MsgGrantAllowanceSDKType): MsgGrantAllowance {
+    return {
+      granter: isSet(object.granter) ? object.granter : undefined,
+      grantee: isSet(object.grantee) ? object.grantee : undefined,
+      allowance: isSet(object.allowance) ? Any.fromAmino(object.allowance) : undefined
+    };
+  },
+
+  toAmino(message: MsgGrantAllowance): MsgGrantAllowanceSDKType {
+    const obj: any = {};
+    message.granter !== undefined && (obj.granter = message.granter);
+    message.grantee !== undefined && (obj.grantee = message.grantee);
+    message.allowance !== undefined && (obj.allowance = message.allowance ? Any.toAmino(message.allowance) : undefined);
+    return obj;
   }
 
 };
@@ -206,6 +222,15 @@ export const MsgGrantAllowanceResponse = {
   },
 
   toSDK(_: MsgGrantAllowanceResponse): MsgGrantAllowanceResponseSDKType {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromAmino(_: MsgGrantAllowanceResponseSDKType): MsgGrantAllowanceResponse {
+    return {};
+  },
+
+  toAmino(_: MsgGrantAllowanceResponse): MsgGrantAllowanceResponseSDKType {
     const obj: any = {};
     return obj;
   }
@@ -291,6 +316,20 @@ export const MsgRevokeAllowance = {
     message.granter !== undefined && (obj.granter = message.granter);
     message.grantee !== undefined && (obj.grantee = message.grantee);
     return obj;
+  },
+
+  fromAmino(object: MsgRevokeAllowanceSDKType): MsgRevokeAllowance {
+    return {
+      granter: isSet(object.granter) ? object.granter : undefined,
+      grantee: isSet(object.grantee) ? object.grantee : undefined
+    };
+  },
+
+  toAmino(message: MsgRevokeAllowance): MsgRevokeAllowanceSDKType {
+    const obj: any = {};
+    message.granter !== undefined && (obj.granter = message.granter);
+    message.grantee !== undefined && (obj.grantee = message.grantee);
+    return obj;
   }
 
 };
@@ -341,6 +380,15 @@ export const MsgRevokeAllowanceResponse = {
   },
 
   toSDK(_: MsgRevokeAllowanceResponse): MsgRevokeAllowanceResponseSDKType {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromAmino(_: MsgRevokeAllowanceResponseSDKType): MsgRevokeAllowanceResponse {
+    return {};
+  },
+
+  toAmino(_: MsgRevokeAllowanceResponse): MsgRevokeAllowanceResponseSDKType {
     const obj: any = {};
     return obj;
   }

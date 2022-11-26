@@ -96,6 +96,28 @@ export const GroupSpec = {
     message.requirements = object.requirements !== undefined && object.requirements !== null ? PlacementRequirements.fromPartial(object.requirements) : undefined;
     message.resources = object.resources?.map(e => Resource.fromPartial(e)) || [];
     return message;
+  },
+
+  fromAmino(object: GroupSpecSDKType): GroupSpec {
+    return {
+      name: isSet(object.name) ? object.name : undefined,
+      requirements: isSet(object.requirements) ? PlacementRequirements.fromAmino(object.requirements) : undefined,
+      resources: Array.isArray(object?.resources) ? object.resources.map((e: any) => Resource.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: GroupSpec): GroupSpecSDKType {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    message.requirements !== undefined && (obj.requirements = message.requirements ? PlacementRequirements.toAmino(message.requirements) : undefined);
+
+    if (message.resources) {
+      obj.resources = message.resources.map(e => e ? Resource.toAmino(e) : undefined);
+    } else {
+      obj.resources = [];
+    }
+
+    return obj;
   }
 
 };

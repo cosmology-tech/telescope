@@ -82,6 +82,18 @@ export const MsgCloseGroup = {
     const message = createBaseMsgCloseGroup();
     message.id = object.id !== undefined && object.id !== null ? GroupID.fromPartial(object.id) : undefined;
     return message;
+  },
+
+  fromAmino(object: MsgCloseGroupSDKType): MsgCloseGroup {
+    return {
+      id: isSet(object.id) ? GroupID.fromAmino(object.id) : undefined
+    };
+  },
+
+  toAmino(message: MsgCloseGroup): MsgCloseGroupSDKType {
+    const obj: any = {};
+    message.id !== undefined && (obj.id = message.id ? GroupID.toAmino(message.id) : undefined);
+    return obj;
   }
 
 };
@@ -125,6 +137,15 @@ export const MsgCloseGroupResponse = {
   fromPartial(_: DeepPartial<MsgCloseGroupResponse>): MsgCloseGroupResponse {
     const message = createBaseMsgCloseGroupResponse();
     return message;
+  },
+
+  fromAmino(_: MsgCloseGroupResponseSDKType): MsgCloseGroupResponse {
+    return {};
+  },
+
+  toAmino(_: MsgCloseGroupResponse): MsgCloseGroupResponseSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -182,6 +203,18 @@ export const MsgPauseGroup = {
     const message = createBaseMsgPauseGroup();
     message.id = object.id !== undefined && object.id !== null ? GroupID.fromPartial(object.id) : undefined;
     return message;
+  },
+
+  fromAmino(object: MsgPauseGroupSDKType): MsgPauseGroup {
+    return {
+      id: isSet(object.id) ? GroupID.fromAmino(object.id) : undefined
+    };
+  },
+
+  toAmino(message: MsgPauseGroup): MsgPauseGroupSDKType {
+    const obj: any = {};
+    message.id !== undefined && (obj.id = message.id ? GroupID.toAmino(message.id) : undefined);
+    return obj;
   }
 
 };
@@ -225,6 +258,15 @@ export const MsgPauseGroupResponse = {
   fromPartial(_: DeepPartial<MsgPauseGroupResponse>): MsgPauseGroupResponse {
     const message = createBaseMsgPauseGroupResponse();
     return message;
+  },
+
+  fromAmino(_: MsgPauseGroupResponseSDKType): MsgPauseGroupResponse {
+    return {};
+  },
+
+  toAmino(_: MsgPauseGroupResponse): MsgPauseGroupResponseSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -282,6 +324,18 @@ export const MsgStartGroup = {
     const message = createBaseMsgStartGroup();
     message.id = object.id !== undefined && object.id !== null ? GroupID.fromPartial(object.id) : undefined;
     return message;
+  },
+
+  fromAmino(object: MsgStartGroupSDKType): MsgStartGroup {
+    return {
+      id: isSet(object.id) ? GroupID.fromAmino(object.id) : undefined
+    };
+  },
+
+  toAmino(message: MsgStartGroup): MsgStartGroupSDKType {
+    const obj: any = {};
+    message.id !== undefined && (obj.id = message.id ? GroupID.toAmino(message.id) : undefined);
+    return obj;
   }
 
 };
@@ -325,6 +379,15 @@ export const MsgStartGroupResponse = {
   fromPartial(_: DeepPartial<MsgStartGroupResponse>): MsgStartGroupResponse {
     const message = createBaseMsgStartGroupResponse();
     return message;
+  },
+
+  fromAmino(_: MsgStartGroupResponseSDKType): MsgStartGroupResponse {
+    return {};
+  },
+
+  toAmino(_: MsgStartGroupResponse): MsgStartGroupResponseSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };

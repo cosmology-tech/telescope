@@ -360,6 +360,24 @@ export const Version = {
     message.patch !== undefined && (obj.patch = message.patch);
     message.suffix !== undefined && (obj.suffix = message.suffix);
     return obj;
+  },
+
+  fromAmino(object: VersionSDKType): Version {
+    return {
+      major: isSet(object.major) ? object.major : undefined,
+      minor: isSet(object.minor) ? object.minor : undefined,
+      patch: isSet(object.patch) ? object.patch : undefined,
+      suffix: isSet(object.suffix) ? object.suffix : undefined
+    };
+  },
+
+  toAmino(message: Version): VersionSDKType {
+    const obj: any = {};
+    message.major !== undefined && (obj.major = message.major);
+    message.minor !== undefined && (obj.minor = message.minor);
+    message.patch !== undefined && (obj.patch = message.patch);
+    message.suffix !== undefined && (obj.suffix = message.suffix);
+    return obj;
   }
 
 };
@@ -495,6 +513,36 @@ export const CodeGeneratorRequest = {
 
     message.compilerVersion !== undefined && (obj.compiler_version = message.compilerVersion ? Version.toSDK(message.compilerVersion) : undefined);
     return obj;
+  },
+
+  fromAmino(object: CodeGeneratorRequestSDKType): CodeGeneratorRequest {
+    return {
+      fileToGenerate: Array.isArray(object?.file_to_generate) ? object.file_to_generate.map((e: any) => e) : [],
+      parameter: isSet(object.parameter) ? object.parameter : undefined,
+      protoFile: Array.isArray(object?.proto_file) ? object.proto_file.map((e: any) => FileDescriptorProto.fromAmino(e)) : [],
+      compilerVersion: isSet(object.compiler_version) ? Version.fromAmino(object.compiler_version) : undefined
+    };
+  },
+
+  toAmino(message: CodeGeneratorRequest): CodeGeneratorRequestSDKType {
+    const obj: any = {};
+
+    if (message.fileToGenerate) {
+      obj.file_to_generate = message.fileToGenerate.map(e => e);
+    } else {
+      obj.file_to_generate = [];
+    }
+
+    message.parameter !== undefined && (obj.parameter = message.parameter);
+
+    if (message.protoFile) {
+      obj.proto_file = message.protoFile.map(e => e ? FileDescriptorProto.toAmino(e) : undefined);
+    } else {
+      obj.proto_file = [];
+    }
+
+    message.compilerVersion !== undefined && (obj.compiler_version = message.compilerVersion ? Version.toAmino(message.compilerVersion) : undefined);
+    return obj;
   }
 
 };
@@ -585,6 +633,26 @@ export const CodeGeneratorResponse = {
 
     if (message.file) {
       obj.file = message.file.map(e => e ? CodeGeneratorResponse_File.toSDK(e) : undefined);
+    } else {
+      obj.file = [];
+    }
+
+    return obj;
+  },
+
+  fromAmino(object: CodeGeneratorResponseSDKType): CodeGeneratorResponse {
+    return {
+      error: isSet(object.error) ? object.error : undefined,
+      file: Array.isArray(object?.file) ? object.file.map((e: any) => CodeGeneratorResponse_File.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: CodeGeneratorResponse): CodeGeneratorResponseSDKType {
+    const obj: any = {};
+    message.error !== undefined && (obj.error = message.error);
+
+    if (message.file) {
+      obj.file = message.file.map(e => e ? CodeGeneratorResponse_File.toAmino(e) : undefined);
     } else {
       obj.file = [];
     }
@@ -682,6 +750,22 @@ export const CodeGeneratorResponse_File = {
   },
 
   toSDK(message: CodeGeneratorResponse_File): CodeGeneratorResponse_FileSDKType {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    message.insertionPoint !== undefined && (obj.insertion_point = message.insertionPoint);
+    message.content !== undefined && (obj.content = message.content);
+    return obj;
+  },
+
+  fromAmino(object: CodeGeneratorResponse_FileSDKType): CodeGeneratorResponse_File {
+    return {
+      name: isSet(object.name) ? object.name : undefined,
+      insertionPoint: isSet(object.insertion_point) ? object.insertion_point : undefined,
+      content: isSet(object.content) ? object.content : undefined
+    };
+  },
+
+  toAmino(message: CodeGeneratorResponse_File): CodeGeneratorResponse_FileSDKType {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     message.insertionPoint !== undefined && (obj.insertion_point = message.insertionPoint);

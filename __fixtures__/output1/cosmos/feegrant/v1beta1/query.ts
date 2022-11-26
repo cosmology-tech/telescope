@@ -181,6 +181,20 @@ export const QueryAllowanceRequest = {
     message.granter !== undefined && (obj.granter = message.granter);
     message.grantee !== undefined && (obj.grantee = message.grantee);
     return obj;
+  },
+
+  fromAmino(object: QueryAllowanceRequestSDKType): QueryAllowanceRequest {
+    return {
+      granter: isSet(object.granter) ? object.granter : undefined,
+      grantee: isSet(object.grantee) ? object.grantee : undefined
+    };
+  },
+
+  toAmino(message: QueryAllowanceRequest): QueryAllowanceRequestSDKType {
+    const obj: any = {};
+    message.granter !== undefined && (obj.granter = message.granter);
+    message.grantee !== undefined && (obj.grantee = message.grantee);
+    return obj;
   }
 
 };
@@ -249,6 +263,18 @@ export const QueryAllowanceResponse = {
   toSDK(message: QueryAllowanceResponse): QueryAllowanceResponseSDKType {
     const obj: any = {};
     message.allowance !== undefined && (obj.allowance = message.allowance ? Grant.toSDK(message.allowance) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: QueryAllowanceResponseSDKType): QueryAllowanceResponse {
+    return {
+      allowance: isSet(object.allowance) ? Grant.fromAmino(object.allowance) : undefined
+    };
+  },
+
+  toAmino(message: QueryAllowanceResponse): QueryAllowanceResponseSDKType {
+    const obj: any = {};
+    message.allowance !== undefined && (obj.allowance = message.allowance ? Grant.toAmino(message.allowance) : undefined);
     return obj;
   }
 
@@ -332,6 +358,20 @@ export const QueryAllowancesRequest = {
     const obj: any = {};
     message.grantee !== undefined && (obj.grantee = message.grantee);
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: QueryAllowancesRequestSDKType): QueryAllowancesRequest {
+    return {
+      grantee: isSet(object.grantee) ? object.grantee : undefined,
+      pagination: isSet(object.pagination) ? PageRequest.fromAmino(object.pagination) : undefined
+    };
+  },
+
+  toAmino(message: QueryAllowancesRequest): QueryAllowancesRequestSDKType {
+    const obj: any = {};
+    message.grantee !== undefined && (obj.grantee = message.grantee);
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined);
     return obj;
   }
 
@@ -428,6 +468,26 @@ export const QueryAllowancesResponse = {
 
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromAmino(object: QueryAllowancesResponseSDKType): QueryAllowancesResponse {
+    return {
+      allowances: Array.isArray(object?.allowances) ? object.allowances.map((e: any) => Grant.fromAmino(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromAmino(object.pagination) : undefined
+    };
+  },
+
+  toAmino(message: QueryAllowancesResponse): QueryAllowancesResponseSDKType {
+    const obj: any = {};
+
+    if (message.allowances) {
+      obj.allowances = message.allowances.map(e => e ? Grant.toAmino(e) : undefined);
+    } else {
+      obj.allowances = [];
+    }
+
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined);
+    return obj;
   }
 
 };
@@ -510,6 +570,20 @@ export const QueryAllowancesByGranterRequest = {
     const obj: any = {};
     message.granter !== undefined && (obj.granter = message.granter);
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: QueryAllowancesByGranterRequestSDKType): QueryAllowancesByGranterRequest {
+    return {
+      granter: isSet(object.granter) ? object.granter : undefined,
+      pagination: isSet(object.pagination) ? PageRequest.fromAmino(object.pagination) : undefined
+    };
+  },
+
+  toAmino(message: QueryAllowancesByGranterRequest): QueryAllowancesByGranterRequestSDKType {
+    const obj: any = {};
+    message.granter !== undefined && (obj.granter = message.granter);
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined);
     return obj;
   }
 
@@ -605,6 +679,26 @@ export const QueryAllowancesByGranterResponse = {
     }
 
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: QueryAllowancesByGranterResponseSDKType): QueryAllowancesByGranterResponse {
+    return {
+      allowances: Array.isArray(object?.allowances) ? object.allowances.map((e: any) => Grant.fromAmino(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromAmino(object.pagination) : undefined
+    };
+  },
+
+  toAmino(message: QueryAllowancesByGranterResponse): QueryAllowancesByGranterResponseSDKType {
+    const obj: any = {};
+
+    if (message.allowances) {
+      obj.allowances = message.allowances.map(e => e ? Grant.toAmino(e) : undefined);
+    } else {
+      obj.allowances = [];
+    }
+
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined);
     return obj;
   }
 

@@ -182,6 +182,18 @@ export const MsgCloseGroup = {
     const message = createBaseMsgCloseGroup();
     message.id = object.id !== undefined && object.id !== null ? GroupID.fromPartial(object.id) : undefined;
     return message;
+  },
+
+  fromAmino(object: MsgCloseGroupSDKType): MsgCloseGroup {
+    return {
+      id: isSet(object.id) ? GroupID.fromAmino(object.id) : undefined
+    };
+  },
+
+  toAmino(message: MsgCloseGroup): MsgCloseGroupSDKType {
+    const obj: any = {};
+    message.id !== undefined && (obj.id = message.id ? GroupID.toAmino(message.id) : undefined);
+    return obj;
   }
 
 };
@@ -225,6 +237,15 @@ export const MsgCloseGroupResponse = {
   fromPartial(_: DeepPartial<MsgCloseGroupResponse>): MsgCloseGroupResponse {
     const message = createBaseMsgCloseGroupResponse();
     return message;
+  },
+
+  fromAmino(_: MsgCloseGroupResponseSDKType): MsgCloseGroupResponse {
+    return {};
+  },
+
+  toAmino(_: MsgCloseGroupResponse): MsgCloseGroupResponseSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -282,6 +303,18 @@ export const MsgPauseGroup = {
     const message = createBaseMsgPauseGroup();
     message.id = object.id !== undefined && object.id !== null ? GroupID.fromPartial(object.id) : undefined;
     return message;
+  },
+
+  fromAmino(object: MsgPauseGroupSDKType): MsgPauseGroup {
+    return {
+      id: isSet(object.id) ? GroupID.fromAmino(object.id) : undefined
+    };
+  },
+
+  toAmino(message: MsgPauseGroup): MsgPauseGroupSDKType {
+    const obj: any = {};
+    message.id !== undefined && (obj.id = message.id ? GroupID.toAmino(message.id) : undefined);
+    return obj;
   }
 
 };
@@ -325,6 +358,15 @@ export const MsgPauseGroupResponse = {
   fromPartial(_: DeepPartial<MsgPauseGroupResponse>): MsgPauseGroupResponse {
     const message = createBaseMsgPauseGroupResponse();
     return message;
+  },
+
+  fromAmino(_: MsgPauseGroupResponseSDKType): MsgPauseGroupResponse {
+    return {};
+  },
+
+  toAmino(_: MsgPauseGroupResponse): MsgPauseGroupResponseSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -382,6 +424,18 @@ export const MsgStartGroup = {
     const message = createBaseMsgStartGroup();
     message.id = object.id !== undefined && object.id !== null ? GroupID.fromPartial(object.id) : undefined;
     return message;
+  },
+
+  fromAmino(object: MsgStartGroupSDKType): MsgStartGroup {
+    return {
+      id: isSet(object.id) ? GroupID.fromAmino(object.id) : undefined
+    };
+  },
+
+  toAmino(message: MsgStartGroup): MsgStartGroupSDKType {
+    const obj: any = {};
+    message.id !== undefined && (obj.id = message.id ? GroupID.toAmino(message.id) : undefined);
+    return obj;
   }
 
 };
@@ -425,6 +479,15 @@ export const MsgStartGroupResponse = {
   fromPartial(_: DeepPartial<MsgStartGroupResponse>): MsgStartGroupResponse {
     const message = createBaseMsgStartGroupResponse();
     return message;
+  },
+
+  fromAmino(_: MsgStartGroupResponseSDKType): MsgStartGroupResponse {
+    return {};
+  },
+
+  toAmino(_: MsgStartGroupResponse): MsgStartGroupResponseSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -506,6 +569,22 @@ export const GroupID = {
     message.dseq = object.dseq !== undefined && object.dseq !== null ? Long.fromValue(object.dseq) : Long.UZERO;
     message.gseq = object.gseq ?? 0;
     return message;
+  },
+
+  fromAmino(object: GroupIDSDKType): GroupID {
+    return {
+      owner: isSet(object.owner) ? object.owner : undefined,
+      dseq: isSet(object.dseq) ? object.dseq : undefined,
+      gseq: isSet(object.gseq) ? object.gseq : undefined
+    };
+  },
+
+  toAmino(message: GroupID): GroupIDSDKType {
+    const obj: any = {};
+    message.owner !== undefined && (obj.owner = message.owner);
+    message.dseq !== undefined && (obj.dseq = message.dseq);
+    message.gseq !== undefined && (obj.gseq = message.gseq);
+    return obj;
   }
 
 };
@@ -593,6 +672,28 @@ export const GroupSpec = {
     message.requirements = object.requirements !== undefined && object.requirements !== null ? PlacementRequirements.fromPartial(object.requirements) : undefined;
     message.resources = object.resources?.map(e => Resource.fromPartial(e)) || [];
     return message;
+  },
+
+  fromAmino(object: GroupSpecSDKType): GroupSpec {
+    return {
+      name: isSet(object.name) ? object.name : undefined,
+      requirements: isSet(object.requirements) ? PlacementRequirements.fromAmino(object.requirements) : undefined,
+      resources: Array.isArray(object?.resources) ? object.resources.map((e: any) => Resource.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: GroupSpec): GroupSpecSDKType {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    message.requirements !== undefined && (obj.requirements = message.requirements ? PlacementRequirements.toAmino(message.requirements) : undefined);
+
+    if (message.resources) {
+      obj.resources = message.resources.map(e => e ? Resource.toAmino(e) : undefined);
+    } else {
+      obj.resources = [];
+    }
+
+    return obj;
   }
 
 };
@@ -686,6 +787,24 @@ export const Group = {
     message.groupSpec = object.groupSpec !== undefined && object.groupSpec !== null ? GroupSpec.fromPartial(object.groupSpec) : undefined;
     message.createdAt = object.createdAt !== undefined && object.createdAt !== null ? Long.fromValue(object.createdAt) : Long.ZERO;
     return message;
+  },
+
+  fromAmino(object: GroupSDKType): Group {
+    return {
+      groupId: isSet(object.group_id) ? GroupID.fromAmino(object.group_id) : undefined,
+      state: isSet(object.state) ? group_StateFromJSON(object.state) : 0,
+      groupSpec: isSet(object.group_spec) ? GroupSpec.fromAmino(object.group_spec) : undefined,
+      createdAt: isSet(object.created_at) ? object.created_at : undefined
+    };
+  },
+
+  toAmino(message: Group): GroupSDKType {
+    const obj: any = {};
+    message.groupId !== undefined && (obj.group_id = message.groupId ? GroupID.toAmino(message.groupId) : undefined);
+    message.state !== undefined && (obj.state = group_StateToJSON(message.state));
+    message.groupSpec !== undefined && (obj.group_spec = message.groupSpec ? GroupSpec.toAmino(message.groupSpec) : undefined);
+    message.createdAt !== undefined && (obj.created_at = message.createdAt);
+    return obj;
   }
 
 };
@@ -767,6 +886,22 @@ export const Resource = {
     message.count = object.count ?? 0;
     message.price = object.price !== undefined && object.price !== null ? Coin.fromPartial(object.price) : undefined;
     return message;
+  },
+
+  fromAmino(object: ResourceSDKType): Resource {
+    return {
+      resources: isSet(object.resources) ? ResourceUnits.fromAmino(object.resources) : undefined,
+      count: isSet(object.count) ? object.count : undefined,
+      price: isSet(object.price) ? Coin.fromAmino(object.price) : undefined
+    };
+  },
+
+  toAmino(message: Resource): ResourceSDKType {
+    const obj: any = {};
+    message.resources !== undefined && (obj.resources = message.resources ? ResourceUnits.toAmino(message.resources) : undefined);
+    message.count !== undefined && (obj.count = message.count);
+    message.price !== undefined && (obj.price = message.price ? Coin.toAmino(message.price) : undefined);
+    return obj;
   }
 
 };

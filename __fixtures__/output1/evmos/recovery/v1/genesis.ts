@@ -98,6 +98,18 @@ export const GenesisState = {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
     return obj;
+  },
+
+  fromAmino(object: GenesisStateSDKType): GenesisState {
+    return {
+      params: isSet(object.params) ? Params.fromAmino(object.params) : undefined
+    };
+  },
+
+  toAmino(message: GenesisState): GenesisStateSDKType {
+    const obj: any = {};
+    message.params !== undefined && (obj.params = message.params ? Params.toAmino(message.params) : undefined);
+    return obj;
   }
 
 };
@@ -180,6 +192,20 @@ export const Params = {
     const obj: any = {};
     message.enableRecovery !== undefined && (obj.enable_recovery = message.enableRecovery);
     message.packetTimeoutDuration !== undefined && (obj.packet_timeout_duration = message.packetTimeoutDuration ? Duration.toSDK(message.packetTimeoutDuration) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: ParamsSDKType): Params {
+    return {
+      enableRecovery: isSet(object.enable_recovery) ? object.enable_recovery : undefined,
+      packetTimeoutDuration: isSet(object.packet_timeout_duration) ? Duration.fromAmino(object.packet_timeout_duration) : undefined
+    };
+  },
+
+  toAmino(message: Params): ParamsSDKType {
+    const obj: any = {};
+    message.enableRecovery !== undefined && (obj.enable_recovery = message.enableRecovery);
+    message.packetTimeoutDuration !== undefined && (obj.packet_timeout_duration = message.packetTimeoutDuration ? Duration.toAmino(message.packetTimeoutDuration) : undefined);
     return obj;
   }
 

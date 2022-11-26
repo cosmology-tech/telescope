@@ -86,6 +86,15 @@ export const QueryParamsRequest = {
   fromPartial(_: DeepPartial<QueryParamsRequest>): QueryParamsRequest {
     const message = createBaseQueryParamsRequest();
     return message;
+  },
+
+  fromAmino(_: QueryParamsRequestSDKType): QueryParamsRequest {
+    return {};
+  },
+
+  toAmino(_: QueryParamsRequest): QueryParamsRequestSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -143,6 +152,18 @@ export const QueryParamsResponse = {
     const message = createBaseQueryParamsResponse();
     message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     return message;
+  },
+
+  fromAmino(object: QueryParamsResponseSDKType): QueryParamsResponse {
+    return {
+      params: isSet(object.params) ? Params.fromAmino(object.params) : undefined
+    };
+  },
+
+  toAmino(message: QueryParamsResponse): QueryParamsResponseSDKType {
+    const obj: any = {};
+    message.params !== undefined && (obj.params = message.params ? Params.toAmino(message.params) : undefined);
+    return obj;
   }
 
 };
@@ -200,6 +221,18 @@ export const QueryDenomAuthorityMetadataRequest = {
     const message = createBaseQueryDenomAuthorityMetadataRequest();
     message.denom = object.denom ?? "";
     return message;
+  },
+
+  fromAmino(object: QueryDenomAuthorityMetadataRequestSDKType): QueryDenomAuthorityMetadataRequest {
+    return {
+      denom: isSet(object.denom) ? object.denom : undefined
+    };
+  },
+
+  toAmino(message: QueryDenomAuthorityMetadataRequest): QueryDenomAuthorityMetadataRequestSDKType {
+    const obj: any = {};
+    message.denom !== undefined && (obj.denom = message.denom);
+    return obj;
   }
 
 };
@@ -257,6 +290,18 @@ export const QueryDenomAuthorityMetadataResponse = {
     const message = createBaseQueryDenomAuthorityMetadataResponse();
     message.authorityMetadata = object.authorityMetadata !== undefined && object.authorityMetadata !== null ? DenomAuthorityMetadata.fromPartial(object.authorityMetadata) : undefined;
     return message;
+  },
+
+  fromAmino(object: QueryDenomAuthorityMetadataResponseSDKType): QueryDenomAuthorityMetadataResponse {
+    return {
+      authorityMetadata: isSet(object.authority_metadata) ? DenomAuthorityMetadata.fromAmino(object.authority_metadata) : undefined
+    };
+  },
+
+  toAmino(message: QueryDenomAuthorityMetadataResponse): QueryDenomAuthorityMetadataResponseSDKType {
+    const obj: any = {};
+    message.authorityMetadata !== undefined && (obj.authority_metadata = message.authorityMetadata ? DenomAuthorityMetadata.toAmino(message.authorityMetadata) : undefined);
+    return obj;
   }
 
 };
@@ -314,6 +359,18 @@ export const QueryDenomsFromCreatorRequest = {
     const message = createBaseQueryDenomsFromCreatorRequest();
     message.creator = object.creator ?? "";
     return message;
+  },
+
+  fromAmino(object: QueryDenomsFromCreatorRequestSDKType): QueryDenomsFromCreatorRequest {
+    return {
+      creator: isSet(object.creator) ? object.creator : undefined
+    };
+  },
+
+  toAmino(message: QueryDenomsFromCreatorRequest): QueryDenomsFromCreatorRequestSDKType {
+    const obj: any = {};
+    message.creator !== undefined && (obj.creator = message.creator);
+    return obj;
   }
 
 };
@@ -377,6 +434,24 @@ export const QueryDenomsFromCreatorResponse = {
     const message = createBaseQueryDenomsFromCreatorResponse();
     message.denoms = object.denoms?.map(e => e) || [];
     return message;
+  },
+
+  fromAmino(object: QueryDenomsFromCreatorResponseSDKType): QueryDenomsFromCreatorResponse {
+    return {
+      denoms: Array.isArray(object?.denoms) ? object.denoms.map((e: any) => e) : []
+    };
+  },
+
+  toAmino(message: QueryDenomsFromCreatorResponse): QueryDenomsFromCreatorResponseSDKType {
+    const obj: any = {};
+
+    if (message.denoms) {
+      obj.denoms = message.denoms.map(e => e);
+    } else {
+      obj.denoms = [];
+    }
+
+    return obj;
   }
 
 };

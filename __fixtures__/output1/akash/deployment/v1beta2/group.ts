@@ -215,6 +215,24 @@ export const Group = {
     message.groupSpec !== undefined && (obj.group_spec = message.groupSpec ? GroupSpec.toSDK(message.groupSpec) : undefined);
     message.createdAt !== undefined && (obj.created_at = message.createdAt);
     return obj;
+  },
+
+  fromAmino(object: GroupSDKType): Group {
+    return {
+      groupId: isSet(object.group_id) ? GroupID.fromAmino(object.group_id) : undefined,
+      state: isSet(object.state) ? group_StateFromJSON(object.state) : 0,
+      groupSpec: isSet(object.group_spec) ? GroupSpec.fromAmino(object.group_spec) : undefined,
+      createdAt: isSet(object.created_at) ? object.created_at : undefined
+    };
+  },
+
+  toAmino(message: Group): GroupSDKType {
+    const obj: any = {};
+    message.groupId !== undefined && (obj.group_id = message.groupId ? GroupID.toAmino(message.groupId) : undefined);
+    message.state !== undefined && (obj.state = group_StateToJSON(message.state));
+    message.groupSpec !== undefined && (obj.group_spec = message.groupSpec ? GroupSpec.toAmino(message.groupSpec) : undefined);
+    message.createdAt !== undefined && (obj.created_at = message.createdAt);
+    return obj;
   }
 
 };

@@ -236,6 +236,30 @@ export const Class = {
     message.uriHash !== undefined && (obj.uri_hash = message.uriHash);
     message.data !== undefined && (obj.data = message.data ? Any.toSDK(message.data) : undefined);
     return obj;
+  },
+
+  fromAmino(object: ClassSDKType): Class {
+    return {
+      id: isSet(object.id) ? object.id : undefined,
+      name: isSet(object.name) ? object.name : undefined,
+      symbol: isSet(object.symbol) ? object.symbol : undefined,
+      description: isSet(object.description) ? object.description : undefined,
+      uri: isSet(object.uri) ? object.uri : undefined,
+      uriHash: isSet(object.uri_hash) ? object.uri_hash : undefined,
+      data: isSet(object.data) ? Any.fromAmino(object.data) : undefined
+    };
+  },
+
+  toAmino(message: Class): ClassSDKType {
+    const obj: any = {};
+    message.id !== undefined && (obj.id = message.id);
+    message.name !== undefined && (obj.name = message.name);
+    message.symbol !== undefined && (obj.symbol = message.symbol);
+    message.description !== undefined && (obj.description = message.description);
+    message.uri !== undefined && (obj.uri = message.uri);
+    message.uriHash !== undefined && (obj.uri_hash = message.uriHash);
+    message.data !== undefined && (obj.data = message.data ? Any.toAmino(message.data) : undefined);
+    return obj;
   }
 
 };
@@ -360,6 +384,26 @@ export const NFT = {
     message.uri !== undefined && (obj.uri = message.uri);
     message.uriHash !== undefined && (obj.uri_hash = message.uriHash);
     message.data !== undefined && (obj.data = message.data ? Any.toSDK(message.data) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: NFTSDKType): NFT {
+    return {
+      classId: isSet(object.class_id) ? object.class_id : undefined,
+      id: isSet(object.id) ? object.id : undefined,
+      uri: isSet(object.uri) ? object.uri : undefined,
+      uriHash: isSet(object.uri_hash) ? object.uri_hash : undefined,
+      data: isSet(object.data) ? Any.fromAmino(object.data) : undefined
+    };
+  },
+
+  toAmino(message: NFT): NFTSDKType {
+    const obj: any = {};
+    message.classId !== undefined && (obj.class_id = message.classId);
+    message.id !== undefined && (obj.id = message.id);
+    message.uri !== undefined && (obj.uri = message.uri);
+    message.uriHash !== undefined && (obj.uri_hash = message.uriHash);
+    message.data !== undefined && (obj.data = message.data ? Any.toAmino(message.data) : undefined);
     return obj;
   }
 

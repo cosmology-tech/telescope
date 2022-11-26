@@ -105,6 +105,24 @@ export const Params = {
     message.durationOfDecay = object.durationOfDecay !== undefined && object.durationOfDecay !== null ? Duration.fromPartial(object.durationOfDecay) : undefined;
     message.claimDenom = object.claimDenom ?? "";
     return message;
+  },
+
+  fromAmino(object: ParamsSDKType): Params {
+    return {
+      airdropStartTime: isSet(object.airdrop_start_time) ? Timestamp.fromAmino(object.airdrop_start_time) : undefined,
+      durationUntilDecay: isSet(object.duration_until_decay) ? Duration.fromAmino(object.duration_until_decay) : undefined,
+      durationOfDecay: isSet(object.duration_of_decay) ? Duration.fromAmino(object.duration_of_decay) : undefined,
+      claimDenom: isSet(object.claim_denom) ? object.claim_denom : undefined
+    };
+  },
+
+  toAmino(message: Params): ParamsSDKType {
+    const obj: any = {};
+    message.airdropStartTime !== undefined && (obj.airdrop_start_time = message.airdropStartTime ? Timestamp.toAmino(message.airdropStartTime) : undefined);
+    message.durationUntilDecay !== undefined && (obj.duration_until_decay = message.durationUntilDecay ? Duration.toAmino(message.durationUntilDecay) : undefined);
+    message.durationOfDecay !== undefined && (obj.duration_of_decay = message.durationOfDecay ? Duration.toAmino(message.durationOfDecay) : undefined);
+    message.claimDenom !== undefined && (obj.claim_denom = message.claimDenom);
+    return obj;
   }
 
 };

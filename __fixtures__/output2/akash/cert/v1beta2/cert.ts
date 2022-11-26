@@ -156,6 +156,20 @@ export const CertificateID = {
     message.owner = object.owner ?? "";
     message.serial = object.serial ?? "";
     return message;
+  },
+
+  fromAmino(object: CertificateIDSDKType): CertificateID {
+    return {
+      owner: isSet(object.owner) ? object.owner : undefined,
+      serial: isSet(object.serial) ? object.serial : undefined
+    };
+  },
+
+  toAmino(message: CertificateID): CertificateIDSDKType {
+    const obj: any = {};
+    message.owner !== undefined && (obj.owner = message.owner);
+    message.serial !== undefined && (obj.serial = message.serial);
+    return obj;
   }
 
 };
@@ -237,6 +251,22 @@ export const Certificate = {
     message.cert = object.cert ?? new Uint8Array();
     message.pubkey = object.pubkey ?? new Uint8Array();
     return message;
+  },
+
+  fromAmino(object: CertificateSDKType): Certificate {
+    return {
+      state: isSet(object.state) ? certificate_StateFromJSON(object.state) : 0,
+      cert: isSet(object.cert) ? object.cert : undefined,
+      pubkey: isSet(object.pubkey) ? object.pubkey : undefined
+    };
+  },
+
+  toAmino(message: Certificate): CertificateSDKType {
+    const obj: any = {};
+    message.state !== undefined && (obj.state = certificate_StateToJSON(message.state));
+    message.cert !== undefined && (obj.cert = message.cert);
+    message.pubkey !== undefined && (obj.pubkey = message.pubkey);
+    return obj;
   }
 
 };
@@ -318,6 +348,22 @@ export const CertificateFilter = {
     message.serial = object.serial ?? "";
     message.state = object.state ?? "";
     return message;
+  },
+
+  fromAmino(object: CertificateFilterSDKType): CertificateFilter {
+    return {
+      owner: isSet(object.owner) ? object.owner : undefined,
+      serial: isSet(object.serial) ? object.serial : undefined,
+      state: isSet(object.state) ? object.state : undefined
+    };
+  },
+
+  toAmino(message: CertificateFilter): CertificateFilterSDKType {
+    const obj: any = {};
+    message.owner !== undefined && (obj.owner = message.owner);
+    message.serial !== undefined && (obj.serial = message.serial);
+    message.state !== undefined && (obj.state = message.state);
+    return obj;
   }
 
 };
@@ -399,6 +445,22 @@ export const MsgCreateCertificate = {
     message.cert = object.cert ?? new Uint8Array();
     message.pubkey = object.pubkey ?? new Uint8Array();
     return message;
+  },
+
+  fromAmino(object: MsgCreateCertificateSDKType): MsgCreateCertificate {
+    return {
+      owner: isSet(object.owner) ? object.owner : undefined,
+      cert: isSet(object.cert) ? object.cert : undefined,
+      pubkey: isSet(object.pubkey) ? object.pubkey : undefined
+    };
+  },
+
+  toAmino(message: MsgCreateCertificate): MsgCreateCertificateSDKType {
+    const obj: any = {};
+    message.owner !== undefined && (obj.owner = message.owner);
+    message.cert !== undefined && (obj.cert = message.cert);
+    message.pubkey !== undefined && (obj.pubkey = message.pubkey);
+    return obj;
   }
 
 };
@@ -442,6 +504,15 @@ export const MsgCreateCertificateResponse = {
   fromPartial(_: DeepPartial<MsgCreateCertificateResponse>): MsgCreateCertificateResponse {
     const message = createBaseMsgCreateCertificateResponse();
     return message;
+  },
+
+  fromAmino(_: MsgCreateCertificateResponseSDKType): MsgCreateCertificateResponse {
+    return {};
+  },
+
+  toAmino(_: MsgCreateCertificateResponse): MsgCreateCertificateResponseSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -499,6 +570,18 @@ export const MsgRevokeCertificate = {
     const message = createBaseMsgRevokeCertificate();
     message.id = object.id !== undefined && object.id !== null ? CertificateID.fromPartial(object.id) : undefined;
     return message;
+  },
+
+  fromAmino(object: MsgRevokeCertificateSDKType): MsgRevokeCertificate {
+    return {
+      id: isSet(object.id) ? CertificateID.fromAmino(object.id) : undefined
+    };
+  },
+
+  toAmino(message: MsgRevokeCertificate): MsgRevokeCertificateSDKType {
+    const obj: any = {};
+    message.id !== undefined && (obj.id = message.id ? CertificateID.toAmino(message.id) : undefined);
+    return obj;
   }
 
 };
@@ -542,6 +625,15 @@ export const MsgRevokeCertificateResponse = {
   fromPartial(_: DeepPartial<MsgRevokeCertificateResponse>): MsgRevokeCertificateResponse {
     const message = createBaseMsgRevokeCertificateResponse();
     return message;
+  },
+
+  fromAmino(_: MsgRevokeCertificateResponseSDKType): MsgRevokeCertificateResponse {
+    return {};
+  },
+
+  toAmino(_: MsgRevokeCertificateResponse): MsgRevokeCertificateResponseSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };

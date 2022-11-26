@@ -136,6 +136,22 @@ export const InterchainAccountPacketData = {
     message.data = object.data ?? new Uint8Array();
     message.memo = object.memo ?? "";
     return message;
+  },
+
+  fromAmino(object: InterchainAccountPacketDataSDKType): InterchainAccountPacketData {
+    return {
+      type: isSet(object.type) ? typeFromJSON(object.type) : 0,
+      data: isSet(object.data) ? object.data : undefined,
+      memo: isSet(object.memo) ? object.memo : undefined
+    };
+  },
+
+  toAmino(message: InterchainAccountPacketData): InterchainAccountPacketDataSDKType {
+    const obj: any = {};
+    message.type !== undefined && (obj.type = typeToJSON(message.type));
+    message.data !== undefined && (obj.data = message.data);
+    message.memo !== undefined && (obj.memo = message.memo);
+    return obj;
   }
 
 };
@@ -199,6 +215,24 @@ export const CosmosTx = {
     const message = createBaseCosmosTx();
     message.messages = object.messages?.map(e => Any.fromPartial(e)) || [];
     return message;
+  },
+
+  fromAmino(object: CosmosTxSDKType): CosmosTx {
+    return {
+      messages: Array.isArray(object?.messages) ? object.messages.map((e: any) => Any.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: CosmosTx): CosmosTxSDKType {
+    const obj: any = {};
+
+    if (message.messages) {
+      obj.messages = message.messages.map(e => e ? Any.toAmino(e) : undefined);
+    } else {
+      obj.messages = [];
+    }
+
+    return obj;
   }
 
 };

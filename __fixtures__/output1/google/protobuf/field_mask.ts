@@ -491,6 +491,24 @@ export const FieldMask = {
     }
 
     return obj;
+  },
+
+  fromAmino(object: FieldMaskSDKType): FieldMask {
+    return {
+      paths: Array.isArray(object?.paths) ? object.paths.map((e: any) => e) : []
+    };
+  },
+
+  toAmino(message: FieldMask): FieldMaskSDKType {
+    const obj: any = {};
+
+    if (message.paths) {
+      obj.paths = message.paths.map(e => e);
+    } else {
+      obj.paths = [];
+    }
+
+    return obj;
   }
 
 };

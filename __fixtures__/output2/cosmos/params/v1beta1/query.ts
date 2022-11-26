@@ -85,6 +85,20 @@ export const QueryParamsRequest = {
     message.subspace = object.subspace ?? "";
     message.key = object.key ?? "";
     return message;
+  },
+
+  fromAmino(object: QueryParamsRequestSDKType): QueryParamsRequest {
+    return {
+      subspace: isSet(object.subspace) ? object.subspace : undefined,
+      key: isSet(object.key) ? object.key : undefined
+    };
+  },
+
+  toAmino(message: QueryParamsRequest): QueryParamsRequestSDKType {
+    const obj: any = {};
+    message.subspace !== undefined && (obj.subspace = message.subspace);
+    message.key !== undefined && (obj.key = message.key);
+    return obj;
   }
 
 };
@@ -142,6 +156,18 @@ export const QueryParamsResponse = {
     const message = createBaseQueryParamsResponse();
     message.param = object.param !== undefined && object.param !== null ? ParamChange.fromPartial(object.param) : undefined;
     return message;
+  },
+
+  fromAmino(object: QueryParamsResponseSDKType): QueryParamsResponse {
+    return {
+      param: isSet(object.param) ? ParamChange.fromAmino(object.param) : undefined
+    };
+  },
+
+  toAmino(message: QueryParamsResponse): QueryParamsResponseSDKType {
+    const obj: any = {};
+    message.param !== undefined && (obj.param = message.param ? ParamChange.toAmino(message.param) : undefined);
+    return obj;
   }
 
 };

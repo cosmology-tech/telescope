@@ -172,6 +172,30 @@ export const MsgRegisterDevFeeInfo = {
     message.withdrawAddress = object.withdrawAddress ?? "";
     message.nonces = object.nonces?.map(e => Long.fromValue(e)) || [];
     return message;
+  },
+
+  fromAmino(object: MsgRegisterDevFeeInfoSDKType): MsgRegisterDevFeeInfo {
+    return {
+      contractAddress: isSet(object.contract_address) ? object.contract_address : undefined,
+      deployerAddress: isSet(object.deployer_address) ? object.deployer_address : undefined,
+      withdrawAddress: isSet(object.withdraw_address) ? object.withdraw_address : undefined,
+      nonces: Array.isArray(object?.nonces) ? object.nonces.map((e: any) => e) : []
+    };
+  },
+
+  toAmino(message: MsgRegisterDevFeeInfo): MsgRegisterDevFeeInfoSDKType {
+    const obj: any = {};
+    message.contractAddress !== undefined && (obj.contract_address = message.contractAddress);
+    message.deployerAddress !== undefined && (obj.deployer_address = message.deployerAddress);
+    message.withdrawAddress !== undefined && (obj.withdraw_address = message.withdrawAddress);
+
+    if (message.nonces) {
+      obj.nonces = message.nonces.map(e => e);
+    } else {
+      obj.nonces = [];
+    }
+
+    return obj;
   }
 
 };
@@ -215,6 +239,15 @@ export const MsgRegisterDevFeeInfoResponse = {
   fromPartial(_: DeepPartial<MsgRegisterDevFeeInfoResponse>): MsgRegisterDevFeeInfoResponse {
     const message = createBaseMsgRegisterDevFeeInfoResponse();
     return message;
+  },
+
+  fromAmino(_: MsgRegisterDevFeeInfoResponseSDKType): MsgRegisterDevFeeInfoResponse {
+    return {};
+  },
+
+  toAmino(_: MsgRegisterDevFeeInfoResponse): MsgRegisterDevFeeInfoResponseSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -284,6 +317,20 @@ export const MsgCancelDevFeeInfo = {
     message.contractAddress = object.contractAddress ?? "";
     message.deployerAddress = object.deployerAddress ?? "";
     return message;
+  },
+
+  fromAmino(object: MsgCancelDevFeeInfoSDKType): MsgCancelDevFeeInfo {
+    return {
+      contractAddress: isSet(object.contract_address) ? object.contract_address : undefined,
+      deployerAddress: isSet(object.deployer_address) ? object.deployer_address : undefined
+    };
+  },
+
+  toAmino(message: MsgCancelDevFeeInfo): MsgCancelDevFeeInfoSDKType {
+    const obj: any = {};
+    message.contractAddress !== undefined && (obj.contract_address = message.contractAddress);
+    message.deployerAddress !== undefined && (obj.deployer_address = message.deployerAddress);
+    return obj;
   }
 
 };
@@ -327,6 +374,15 @@ export const MsgCancelDevFeeInfoResponse = {
   fromPartial(_: DeepPartial<MsgCancelDevFeeInfoResponse>): MsgCancelDevFeeInfoResponse {
     const message = createBaseMsgCancelDevFeeInfoResponse();
     return message;
+  },
+
+  fromAmino(_: MsgCancelDevFeeInfoResponseSDKType): MsgCancelDevFeeInfoResponse {
+    return {};
+  },
+
+  toAmino(_: MsgCancelDevFeeInfoResponse): MsgCancelDevFeeInfoResponseSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -408,6 +464,22 @@ export const MsgUpdateDevFeeInfo = {
     message.deployerAddress = object.deployerAddress ?? "";
     message.withdrawAddress = object.withdrawAddress ?? "";
     return message;
+  },
+
+  fromAmino(object: MsgUpdateDevFeeInfoSDKType): MsgUpdateDevFeeInfo {
+    return {
+      contractAddress: isSet(object.contract_address) ? object.contract_address : undefined,
+      deployerAddress: isSet(object.deployer_address) ? object.deployer_address : undefined,
+      withdrawAddress: isSet(object.withdraw_address) ? object.withdraw_address : undefined
+    };
+  },
+
+  toAmino(message: MsgUpdateDevFeeInfo): MsgUpdateDevFeeInfoSDKType {
+    const obj: any = {};
+    message.contractAddress !== undefined && (obj.contract_address = message.contractAddress);
+    message.deployerAddress !== undefined && (obj.deployer_address = message.deployerAddress);
+    message.withdrawAddress !== undefined && (obj.withdraw_address = message.withdrawAddress);
+    return obj;
   }
 
 };
@@ -451,6 +523,15 @@ export const MsgUpdateDevFeeInfoResponse = {
   fromPartial(_: DeepPartial<MsgUpdateDevFeeInfoResponse>): MsgUpdateDevFeeInfoResponse {
     const message = createBaseMsgUpdateDevFeeInfoResponse();
     return message;
+  },
+
+  fromAmino(_: MsgUpdateDevFeeInfoResponseSDKType): MsgUpdateDevFeeInfoResponse {
+    return {};
+  },
+
+  toAmino(_: MsgUpdateDevFeeInfoResponse): MsgUpdateDevFeeInfoResponseSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };

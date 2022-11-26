@@ -354,6 +354,20 @@ export const LogEntry_LabelsEntry = {
     message.key !== undefined && (obj.key = message.key);
     message.value !== undefined && (obj.value = message.value);
     return obj;
+  },
+
+  fromAmino(object: LogEntry_LabelsEntrySDKType): LogEntry_LabelsEntry {
+    return {
+      key: isSet(object.key) ? object.key : undefined,
+      value: isSet(object.value) ? object.value : undefined
+    };
+  },
+
+  toAmino(message: LogEntry_LabelsEntry): LogEntry_LabelsEntrySDKType {
+    const obj: any = {};
+    message.key !== undefined && (obj.key = message.key);
+    message.value !== undefined && (obj.value = message.value);
+    return obj;
   }
 
 };
@@ -617,6 +631,52 @@ export const LogEntry = {
     message.operation !== undefined && (obj.operation = message.operation ? LogEntryOperation.toSDK(message.operation) : undefined);
     message.sourceLocation !== undefined && (obj.source_location = message.sourceLocation ? LogEntrySourceLocation.toSDK(message.sourceLocation) : undefined);
     return obj;
+  },
+
+  fromAmino(object: LogEntrySDKType): LogEntry {
+    return {
+      name: isSet(object.name) ? object.name : undefined,
+      timestamp: isSet(object.timestamp) ? Timestamp.fromAmino(object.timestamp) : undefined,
+      severity: isSet(object.severity) ? logSeverityFromJSON(object.severity) : 0,
+      httpRequest: isSet(object.http_request) ? HttpRequest.fromAmino(object.http_request) : undefined,
+      trace: isSet(object.trace) ? object.trace : undefined,
+      insertId: isSet(object.insert_id) ? object.insert_id : undefined,
+      labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
+        [key: string]: string;
+      }>((acc, [key, value]) => {
+        acc[key] = String(value);
+        return acc;
+      }, {}) : {},
+      protoPayload: isSet(object.proto_payload) ? Any.fromAmino(object.proto_payload) : undefined,
+      textPayload: isSet(object.text_payload) ? object.text_payload : undefined,
+      structPayload: isSet(object.struct_payload) ? Struct.fromAmino(object.struct_payload) : undefined,
+      operation: isSet(object.operation) ? LogEntryOperation.fromAmino(object.operation) : undefined,
+      sourceLocation: isSet(object.source_location) ? LogEntrySourceLocation.fromAmino(object.source_location) : undefined
+    };
+  },
+
+  toAmino(message: LogEntry): LogEntrySDKType {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    message.timestamp !== undefined && (obj.timestamp = message.timestamp ? Timestamp.toAmino(message.timestamp) : undefined);
+    message.severity !== undefined && (obj.severity = logSeverityToJSON(message.severity));
+    message.httpRequest !== undefined && (obj.http_request = message.httpRequest ? HttpRequest.toAmino(message.httpRequest) : undefined);
+    message.trace !== undefined && (obj.trace = message.trace);
+    message.insertId !== undefined && (obj.insert_id = message.insertId);
+    obj.labels = {};
+
+    if (message.labels) {
+      Object.entries(message.labels).forEach(([k, v]) => {
+        obj.labels[k] = v;
+      });
+    }
+
+    message.protoPayload !== undefined && (obj.proto_payload = message.protoPayload ? Any.toAmino(message.protoPayload) : undefined);
+    message.textPayload !== undefined && (obj.text_payload = message.textPayload);
+    message.structPayload !== undefined && (obj.struct_payload = message.structPayload ? Struct.toAmino(message.structPayload) : undefined);
+    message.operation !== undefined && (obj.operation = message.operation ? LogEntryOperation.toAmino(message.operation) : undefined);
+    message.sourceLocation !== undefined && (obj.source_location = message.sourceLocation ? LogEntrySourceLocation.toAmino(message.sourceLocation) : undefined);
+    return obj;
   }
 
 };
@@ -728,6 +788,24 @@ export const LogEntryOperation = {
     message.first !== undefined && (obj.first = message.first);
     message.last !== undefined && (obj.last = message.last);
     return obj;
+  },
+
+  fromAmino(object: LogEntryOperationSDKType): LogEntryOperation {
+    return {
+      id: isSet(object.id) ? object.id : undefined,
+      producer: isSet(object.producer) ? object.producer : undefined,
+      first: isSet(object.first) ? object.first : undefined,
+      last: isSet(object.last) ? object.last : undefined
+    };
+  },
+
+  toAmino(message: LogEntryOperation): LogEntryOperationSDKType {
+    const obj: any = {};
+    message.id !== undefined && (obj.id = message.id);
+    message.producer !== undefined && (obj.producer = message.producer);
+    message.first !== undefined && (obj.first = message.first);
+    message.last !== undefined && (obj.last = message.last);
+    return obj;
   }
 
 };
@@ -820,6 +898,22 @@ export const LogEntrySourceLocation = {
   },
 
   toSDK(message: LogEntrySourceLocation): LogEntrySourceLocationSDKType {
+    const obj: any = {};
+    message.file !== undefined && (obj.file = message.file);
+    message.line !== undefined && (obj.line = message.line);
+    message.function !== undefined && (obj.function = message.function);
+    return obj;
+  },
+
+  fromAmino(object: LogEntrySourceLocationSDKType): LogEntrySourceLocation {
+    return {
+      file: isSet(object.file) ? object.file : undefined,
+      line: isSet(object.line) ? object.line : undefined,
+      function: isSet(object.function) ? object.function : undefined
+    };
+  },
+
+  toAmino(message: LogEntrySourceLocation): LogEntrySourceLocationSDKType {
     const obj: any = {};
     message.file !== undefined && (obj.file = message.file);
     message.line !== undefined && (obj.line = message.line);

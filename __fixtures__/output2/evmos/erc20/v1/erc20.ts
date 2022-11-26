@@ -209,6 +209,24 @@ export const TokenPair = {
     message.enabled = object.enabled ?? false;
     message.contractOwner = object.contractOwner ?? 0;
     return message;
+  },
+
+  fromAmino(object: TokenPairSDKType): TokenPair {
+    return {
+      erc20Address: isSet(object.erc20_address) ? object.erc20_address : undefined,
+      denom: isSet(object.denom) ? object.denom : undefined,
+      enabled: isSet(object.enabled) ? object.enabled : undefined,
+      contractOwner: isSet(object.contract_owner) ? ownerFromJSON(object.contract_owner) : 0
+    };
+  },
+
+  toAmino(message: TokenPair): TokenPairSDKType {
+    const obj: any = {};
+    message.erc20Address !== undefined && (obj.erc20_address = message.erc20Address);
+    message.denom !== undefined && (obj.denom = message.denom);
+    message.enabled !== undefined && (obj.enabled = message.enabled);
+    message.contractOwner !== undefined && (obj.contract_owner = ownerToJSON(message.contractOwner));
+    return obj;
   }
 
 };
@@ -290,6 +308,22 @@ export const RegisterCoinProposal = {
     message.description = object.description ?? "";
     message.metadata = object.metadata !== undefined && object.metadata !== null ? Metadata.fromPartial(object.metadata) : undefined;
     return message;
+  },
+
+  fromAmino(object: RegisterCoinProposalSDKType): RegisterCoinProposal {
+    return {
+      title: isSet(object.title) ? object.title : undefined,
+      description: isSet(object.description) ? object.description : undefined,
+      metadata: isSet(object.metadata) ? Metadata.fromAmino(object.metadata) : undefined
+    };
+  },
+
+  toAmino(message: RegisterCoinProposal): RegisterCoinProposalSDKType {
+    const obj: any = {};
+    message.title !== undefined && (obj.title = message.title);
+    message.description !== undefined && (obj.description = message.description);
+    message.metadata !== undefined && (obj.metadata = message.metadata ? Metadata.toAmino(message.metadata) : undefined);
+    return obj;
   }
 
 };
@@ -371,6 +405,22 @@ export const RegisterERC20Proposal = {
     message.description = object.description ?? "";
     message.erc20address = object.erc20address ?? "";
     return message;
+  },
+
+  fromAmino(object: RegisterERC20ProposalSDKType): RegisterERC20Proposal {
+    return {
+      title: isSet(object.title) ? object.title : undefined,
+      description: isSet(object.description) ? object.description : undefined,
+      erc20address: isSet(object.erc20address) ? object.erc20address : undefined
+    };
+  },
+
+  toAmino(message: RegisterERC20Proposal): RegisterERC20ProposalSDKType {
+    const obj: any = {};
+    message.title !== undefined && (obj.title = message.title);
+    message.description !== undefined && (obj.description = message.description);
+    message.erc20address !== undefined && (obj.erc20address = message.erc20address);
+    return obj;
   }
 
 };
@@ -452,6 +502,22 @@ export const ToggleTokenConversionProposal = {
     message.description = object.description ?? "";
     message.token = object.token ?? "";
     return message;
+  },
+
+  fromAmino(object: ToggleTokenConversionProposalSDKType): ToggleTokenConversionProposal {
+    return {
+      title: isSet(object.title) ? object.title : undefined,
+      description: isSet(object.description) ? object.description : undefined,
+      token: isSet(object.token) ? object.token : undefined
+    };
+  },
+
+  toAmino(message: ToggleTokenConversionProposal): ToggleTokenConversionProposalSDKType {
+    const obj: any = {};
+    message.title !== undefined && (obj.title = message.title);
+    message.description !== undefined && (obj.description = message.description);
+    message.token !== undefined && (obj.token = message.token);
+    return obj;
   }
 
 };

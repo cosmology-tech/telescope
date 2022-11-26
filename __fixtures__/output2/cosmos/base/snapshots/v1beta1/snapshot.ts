@@ -156,6 +156,26 @@ export const Snapshot = {
     message.hash = object.hash ?? new Uint8Array();
     message.metadata = object.metadata !== undefined && object.metadata !== null ? Metadata.fromPartial(object.metadata) : undefined;
     return message;
+  },
+
+  fromAmino(object: SnapshotSDKType): Snapshot {
+    return {
+      height: isSet(object.height) ? object.height : undefined,
+      format: isSet(object.format) ? object.format : undefined,
+      chunks: isSet(object.chunks) ? object.chunks : undefined,
+      hash: isSet(object.hash) ? object.hash : undefined,
+      metadata: isSet(object.metadata) ? Metadata.fromAmino(object.metadata) : undefined
+    };
+  },
+
+  toAmino(message: Snapshot): SnapshotSDKType {
+    const obj: any = {};
+    message.height !== undefined && (obj.height = message.height);
+    message.format !== undefined && (obj.format = message.format);
+    message.chunks !== undefined && (obj.chunks = message.chunks);
+    message.hash !== undefined && (obj.hash = message.hash);
+    message.metadata !== undefined && (obj.metadata = message.metadata ? Metadata.toAmino(message.metadata) : undefined);
+    return obj;
   }
 
 };
@@ -219,6 +239,24 @@ export const Metadata = {
     const message = createBaseMetadata();
     message.chunkHashes = object.chunkHashes?.map(e => e) || [];
     return message;
+  },
+
+  fromAmino(object: MetadataSDKType): Metadata {
+    return {
+      chunkHashes: Array.isArray(object?.chunk_hashes) ? object.chunk_hashes.map((e: any) => e) : []
+    };
+  },
+
+  toAmino(message: Metadata): MetadataSDKType {
+    const obj: any = {};
+
+    if (message.chunkHashes) {
+      obj.chunk_hashes = message.chunkHashes.map(e => e);
+    } else {
+      obj.chunk_hashes = [];
+    }
+
+    return obj;
   }
 
 };
@@ -312,6 +350,24 @@ export const SnapshotItem = {
     message.extension = object.extension !== undefined && object.extension !== null ? SnapshotExtensionMeta.fromPartial(object.extension) : undefined;
     message.extensionPayload = object.extensionPayload !== undefined && object.extensionPayload !== null ? SnapshotExtensionPayload.fromPartial(object.extensionPayload) : undefined;
     return message;
+  },
+
+  fromAmino(object: SnapshotItemSDKType): SnapshotItem {
+    return {
+      store: isSet(object.store) ? SnapshotStoreItem.fromAmino(object.store) : undefined,
+      iavl: isSet(object.iavl) ? SnapshotIAVLItem.fromAmino(object.iavl) : undefined,
+      extension: isSet(object.extension) ? SnapshotExtensionMeta.fromAmino(object.extension) : undefined,
+      extensionPayload: isSet(object.extension_payload) ? SnapshotExtensionPayload.fromAmino(object.extension_payload) : undefined
+    };
+  },
+
+  toAmino(message: SnapshotItem): SnapshotItemSDKType {
+    const obj: any = {};
+    message.store !== undefined && (obj.store = message.store ? SnapshotStoreItem.toAmino(message.store) : undefined);
+    message.iavl !== undefined && (obj.iavl = message.iavl ? SnapshotIAVLItem.toAmino(message.iavl) : undefined);
+    message.extension !== undefined && (obj.extension = message.extension ? SnapshotExtensionMeta.toAmino(message.extension) : undefined);
+    message.extensionPayload !== undefined && (obj.extension_payload = message.extensionPayload ? SnapshotExtensionPayload.toAmino(message.extensionPayload) : undefined);
+    return obj;
   }
 
 };
@@ -369,6 +425,18 @@ export const SnapshotStoreItem = {
     const message = createBaseSnapshotStoreItem();
     message.name = object.name ?? "";
     return message;
+  },
+
+  fromAmino(object: SnapshotStoreItemSDKType): SnapshotStoreItem {
+    return {
+      name: isSet(object.name) ? object.name : undefined
+    };
+  },
+
+  toAmino(message: SnapshotStoreItem): SnapshotStoreItemSDKType {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    return obj;
   }
 
 };
@@ -462,6 +530,24 @@ export const SnapshotIAVLItem = {
     message.version = object.version !== undefined && object.version !== null ? Long.fromValue(object.version) : Long.ZERO;
     message.height = object.height ?? 0;
     return message;
+  },
+
+  fromAmino(object: SnapshotIAVLItemSDKType): SnapshotIAVLItem {
+    return {
+      key: isSet(object.key) ? object.key : undefined,
+      value: isSet(object.value) ? object.value : undefined,
+      version: isSet(object.version) ? object.version : undefined,
+      height: isSet(object.height) ? object.height : undefined
+    };
+  },
+
+  toAmino(message: SnapshotIAVLItem): SnapshotIAVLItemSDKType {
+    const obj: any = {};
+    message.key !== undefined && (obj.key = message.key);
+    message.value !== undefined && (obj.value = message.value);
+    message.version !== undefined && (obj.version = message.version);
+    message.height !== undefined && (obj.height = message.height);
+    return obj;
   }
 
 };
@@ -531,6 +617,20 @@ export const SnapshotExtensionMeta = {
     message.name = object.name ?? "";
     message.format = object.format ?? 0;
     return message;
+  },
+
+  fromAmino(object: SnapshotExtensionMetaSDKType): SnapshotExtensionMeta {
+    return {
+      name: isSet(object.name) ? object.name : undefined,
+      format: isSet(object.format) ? object.format : undefined
+    };
+  },
+
+  toAmino(message: SnapshotExtensionMeta): SnapshotExtensionMetaSDKType {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    message.format !== undefined && (obj.format = message.format);
+    return obj;
   }
 
 };
@@ -588,6 +688,18 @@ export const SnapshotExtensionPayload = {
     const message = createBaseSnapshotExtensionPayload();
     message.payload = object.payload ?? new Uint8Array();
     return message;
+  },
+
+  fromAmino(object: SnapshotExtensionPayloadSDKType): SnapshotExtensionPayload {
+    return {
+      payload: isSet(object.payload) ? object.payload : undefined
+    };
+  },
+
+  toAmino(message: SnapshotExtensionPayload): SnapshotExtensionPayloadSDKType {
+    const obj: any = {};
+    message.payload !== undefined && (obj.payload = message.payload);
+    return obj;
   }
 
 };

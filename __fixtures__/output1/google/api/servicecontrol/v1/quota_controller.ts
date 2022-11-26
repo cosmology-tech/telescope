@@ -669,6 +669,22 @@ export const AllocateQuotaRequest = {
     message.allocateOperation !== undefined && (obj.allocate_operation = message.allocateOperation ? QuotaOperation.toSDK(message.allocateOperation) : undefined);
     message.serviceConfigId !== undefined && (obj.service_config_id = message.serviceConfigId);
     return obj;
+  },
+
+  fromAmino(object: AllocateQuotaRequestSDKType): AllocateQuotaRequest {
+    return {
+      serviceName: isSet(object.service_name) ? object.service_name : undefined,
+      allocateOperation: isSet(object.allocate_operation) ? QuotaOperation.fromAmino(object.allocate_operation) : undefined,
+      serviceConfigId: isSet(object.service_config_id) ? object.service_config_id : undefined
+    };
+  },
+
+  toAmino(message: AllocateQuotaRequest): AllocateQuotaRequestSDKType {
+    const obj: any = {};
+    message.serviceName !== undefined && (obj.service_name = message.serviceName);
+    message.allocateOperation !== undefined && (obj.allocate_operation = message.allocateOperation ? QuotaOperation.toAmino(message.allocateOperation) : undefined);
+    message.serviceConfigId !== undefined && (obj.service_config_id = message.serviceConfigId);
+    return obj;
   }
 
 };
@@ -748,6 +764,20 @@ export const QuotaOperation_LabelsEntry = {
   },
 
   toSDK(message: QuotaOperation_LabelsEntry): QuotaOperation_LabelsEntrySDKType {
+    const obj: any = {};
+    message.key !== undefined && (obj.key = message.key);
+    message.value !== undefined && (obj.value = message.value);
+    return obj;
+  },
+
+  fromAmino(object: QuotaOperation_LabelsEntrySDKType): QuotaOperation_LabelsEntry {
+    return {
+      key: isSet(object.key) ? object.key : undefined,
+      value: isSet(object.value) ? object.value : undefined
+    };
+  },
+
+  toAmino(message: QuotaOperation_LabelsEntry): QuotaOperation_LabelsEntrySDKType {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key);
     message.value !== undefined && (obj.value = message.value);
@@ -941,6 +971,45 @@ export const QuotaOperation = {
 
     message.quotaMode !== undefined && (obj.quota_mode = quotaOperation_QuotaModeToJSON(message.quotaMode));
     return obj;
+  },
+
+  fromAmino(object: QuotaOperationSDKType): QuotaOperation {
+    return {
+      operationId: isSet(object.operation_id) ? object.operation_id : undefined,
+      methodName: isSet(object.method_name) ? object.method_name : undefined,
+      consumerId: isSet(object.consumer_id) ? object.consumer_id : undefined,
+      labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
+        [key: string]: string;
+      }>((acc, [key, value]) => {
+        acc[key] = String(value);
+        return acc;
+      }, {}) : {},
+      quotaMetrics: Array.isArray(object?.quota_metrics) ? object.quota_metrics.map((e: any) => MetricValueSet.fromAmino(e)) : [],
+      quotaMode: isSet(object.quota_mode) ? quotaOperation_QuotaModeFromJSON(object.quota_mode) : 0
+    };
+  },
+
+  toAmino(message: QuotaOperation): QuotaOperationSDKType {
+    const obj: any = {};
+    message.operationId !== undefined && (obj.operation_id = message.operationId);
+    message.methodName !== undefined && (obj.method_name = message.methodName);
+    message.consumerId !== undefined && (obj.consumer_id = message.consumerId);
+    obj.labels = {};
+
+    if (message.labels) {
+      Object.entries(message.labels).forEach(([k, v]) => {
+        obj.labels[k] = v;
+      });
+    }
+
+    if (message.quotaMetrics) {
+      obj.quota_metrics = message.quotaMetrics.map(e => e ? MetricValueSet.toAmino(e) : undefined);
+    } else {
+      obj.quota_metrics = [];
+    }
+
+    message.quotaMode !== undefined && (obj.quota_mode = quotaOperation_QuotaModeToJSON(message.quotaMode));
+    return obj;
   }
 
 };
@@ -1074,6 +1143,35 @@ export const AllocateQuotaResponse = {
 
     message.serviceConfigId !== undefined && (obj.service_config_id = message.serviceConfigId);
     return obj;
+  },
+
+  fromAmino(object: AllocateQuotaResponseSDKType): AllocateQuotaResponse {
+    return {
+      operationId: isSet(object.operation_id) ? object.operation_id : undefined,
+      allocateErrors: Array.isArray(object?.allocate_errors) ? object.allocate_errors.map((e: any) => QuotaError.fromAmino(e)) : [],
+      quotaMetrics: Array.isArray(object?.quota_metrics) ? object.quota_metrics.map((e: any) => MetricValueSet.fromAmino(e)) : [],
+      serviceConfigId: isSet(object.service_config_id) ? object.service_config_id : undefined
+    };
+  },
+
+  toAmino(message: AllocateQuotaResponse): AllocateQuotaResponseSDKType {
+    const obj: any = {};
+    message.operationId !== undefined && (obj.operation_id = message.operationId);
+
+    if (message.allocateErrors) {
+      obj.allocate_errors = message.allocateErrors.map(e => e ? QuotaError.toAmino(e) : undefined);
+    } else {
+      obj.allocate_errors = [];
+    }
+
+    if (message.quotaMetrics) {
+      obj.quota_metrics = message.quotaMetrics.map(e => e ? MetricValueSet.toAmino(e) : undefined);
+    } else {
+      obj.quota_metrics = [];
+    }
+
+    message.serviceConfigId !== undefined && (obj.service_config_id = message.serviceConfigId);
+    return obj;
   }
 
 };
@@ -1184,6 +1282,24 @@ export const QuotaError = {
     message.subject !== undefined && (obj.subject = message.subject);
     message.description !== undefined && (obj.description = message.description);
     message.status !== undefined && (obj.status = message.status ? Status.toSDK(message.status) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: QuotaErrorSDKType): QuotaError {
+    return {
+      code: isSet(object.code) ? quotaError_CodeFromJSON(object.code) : 0,
+      subject: isSet(object.subject) ? object.subject : undefined,
+      description: isSet(object.description) ? object.description : undefined,
+      status: isSet(object.status) ? Status.fromAmino(object.status) : undefined
+    };
+  },
+
+  toAmino(message: QuotaError): QuotaErrorSDKType {
+    const obj: any = {};
+    message.code !== undefined && (obj.code = quotaError_CodeToJSON(message.code));
+    message.subject !== undefined && (obj.subject = message.subject);
+    message.description !== undefined && (obj.description = message.description);
+    message.status !== undefined && (obj.status = message.status ? Status.toAmino(message.status) : undefined);
     return obj;
   }
 

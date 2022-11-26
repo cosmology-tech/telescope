@@ -94,6 +94,26 @@ export const GenesisState = {
     message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     message.factoryDenoms = object.factoryDenoms?.map(e => GenesisDenom.fromPartial(e)) || [];
     return message;
+  },
+
+  fromAmino(object: GenesisStateSDKType): GenesisState {
+    return {
+      params: isSet(object.params) ? Params.fromAmino(object.params) : undefined,
+      factoryDenoms: Array.isArray(object?.factory_denoms) ? object.factory_denoms.map((e: any) => GenesisDenom.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: GenesisState): GenesisStateSDKType {
+    const obj: any = {};
+    message.params !== undefined && (obj.params = message.params ? Params.toAmino(message.params) : undefined);
+
+    if (message.factoryDenoms) {
+      obj.factory_denoms = message.factoryDenoms.map(e => e ? GenesisDenom.toAmino(e) : undefined);
+    } else {
+      obj.factory_denoms = [];
+    }
+
+    return obj;
   }
 
 };
@@ -163,6 +183,20 @@ export const GenesisDenom = {
     message.denom = object.denom ?? "";
     message.authorityMetadata = object.authorityMetadata !== undefined && object.authorityMetadata !== null ? DenomAuthorityMetadata.fromPartial(object.authorityMetadata) : undefined;
     return message;
+  },
+
+  fromAmino(object: GenesisDenomSDKType): GenesisDenom {
+    return {
+      denom: isSet(object.denom) ? object.denom : undefined,
+      authorityMetadata: isSet(object.authority_metadata) ? DenomAuthorityMetadata.fromAmino(object.authority_metadata) : undefined
+    };
+  },
+
+  toAmino(message: GenesisDenom): GenesisDenomSDKType {
+    const obj: any = {};
+    message.denom !== undefined && (obj.denom = message.denom);
+    message.authorityMetadata !== undefined && (obj.authority_metadata = message.authorityMetadata ? DenomAuthorityMetadata.toAmino(message.authorityMetadata) : undefined);
+    return obj;
   }
 
 };

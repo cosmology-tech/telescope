@@ -142,6 +142,22 @@ export const LabelDescriptor = {
     message.valueType = object.valueType ?? 0;
     message.description = object.description ?? "";
     return message;
+  },
+
+  fromAmino(object: LabelDescriptorSDKType): LabelDescriptor {
+    return {
+      key: isSet(object.key) ? object.key : undefined,
+      valueType: isSet(object.value_type) ? labelDescriptor_ValueTypeFromJSON(object.value_type) : 0,
+      description: isSet(object.description) ? object.description : undefined
+    };
+  },
+
+  toAmino(message: LabelDescriptor): LabelDescriptorSDKType {
+    const obj: any = {};
+    message.key !== undefined && (obj.key = message.key);
+    message.valueType !== undefined && (obj.value_type = labelDescriptor_ValueTypeToJSON(message.valueType));
+    message.description !== undefined && (obj.description = message.description);
+    return obj;
   }
 
 };

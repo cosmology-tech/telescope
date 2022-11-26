@@ -501,6 +501,48 @@ export const Distribution = {
     }
 
     return obj;
+  },
+
+  fromAmino(object: DistributionSDKType): Distribution {
+    return {
+      count: isSet(object.count) ? object.count : undefined,
+      mean: isSet(object.mean) ? object.mean : undefined,
+      minimum: isSet(object.minimum) ? object.minimum : undefined,
+      maximum: isSet(object.maximum) ? object.maximum : undefined,
+      sumOfSquaredDeviation: isSet(object.sum_of_squared_deviation) ? object.sum_of_squared_deviation : undefined,
+      bucketCounts: Array.isArray(object?.bucket_counts) ? object.bucket_counts.map((e: any) => e) : [],
+      linearBuckets: isSet(object.linear_buckets) ? Distribution_LinearBuckets.fromAmino(object.linear_buckets) : undefined,
+      exponentialBuckets: isSet(object.exponential_buckets) ? Distribution_ExponentialBuckets.fromAmino(object.exponential_buckets) : undefined,
+      explicitBuckets: isSet(object.explicit_buckets) ? Distribution_ExplicitBuckets.fromAmino(object.explicit_buckets) : undefined,
+      exemplars: Array.isArray(object?.exemplars) ? object.exemplars.map((e: any) => Distribution_Exemplar.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: Distribution): DistributionSDKType {
+    const obj: any = {};
+    message.count !== undefined && (obj.count = message.count);
+    message.mean !== undefined && (obj.mean = message.mean);
+    message.minimum !== undefined && (obj.minimum = message.minimum);
+    message.maximum !== undefined && (obj.maximum = message.maximum);
+    message.sumOfSquaredDeviation !== undefined && (obj.sum_of_squared_deviation = message.sumOfSquaredDeviation);
+
+    if (message.bucketCounts) {
+      obj.bucket_counts = message.bucketCounts.map(e => e);
+    } else {
+      obj.bucket_counts = [];
+    }
+
+    message.linearBuckets !== undefined && (obj.linear_buckets = message.linearBuckets ? Distribution_LinearBuckets.toAmino(message.linearBuckets) : undefined);
+    message.exponentialBuckets !== undefined && (obj.exponential_buckets = message.exponentialBuckets ? Distribution_ExponentialBuckets.toAmino(message.exponentialBuckets) : undefined);
+    message.explicitBuckets !== undefined && (obj.explicit_buckets = message.explicitBuckets ? Distribution_ExplicitBuckets.toAmino(message.explicitBuckets) : undefined);
+
+    if (message.exemplars) {
+      obj.exemplars = message.exemplars.map(e => e ? Distribution_Exemplar.toAmino(e) : undefined);
+    } else {
+      obj.exemplars = [];
+    }
+
+    return obj;
   }
 
 };
@@ -593,6 +635,22 @@ export const Distribution_LinearBuckets = {
   },
 
   toSDK(message: Distribution_LinearBuckets): Distribution_LinearBucketsSDKType {
+    const obj: any = {};
+    message.numFiniteBuckets !== undefined && (obj.num_finite_buckets = message.numFiniteBuckets);
+    message.width !== undefined && (obj.width = message.width);
+    message.offset !== undefined && (obj.offset = message.offset);
+    return obj;
+  },
+
+  fromAmino(object: Distribution_LinearBucketsSDKType): Distribution_LinearBuckets {
+    return {
+      numFiniteBuckets: isSet(object.num_finite_buckets) ? object.num_finite_buckets : undefined,
+      width: isSet(object.width) ? object.width : undefined,
+      offset: isSet(object.offset) ? object.offset : undefined
+    };
+  },
+
+  toAmino(message: Distribution_LinearBuckets): Distribution_LinearBucketsSDKType {
     const obj: any = {};
     message.numFiniteBuckets !== undefined && (obj.num_finite_buckets = message.numFiniteBuckets);
     message.width !== undefined && (obj.width = message.width);
@@ -695,6 +753,22 @@ export const Distribution_ExponentialBuckets = {
     message.growthFactor !== undefined && (obj.growth_factor = message.growthFactor);
     message.scale !== undefined && (obj.scale = message.scale);
     return obj;
+  },
+
+  fromAmino(object: Distribution_ExponentialBucketsSDKType): Distribution_ExponentialBuckets {
+    return {
+      numFiniteBuckets: isSet(object.num_finite_buckets) ? object.num_finite_buckets : undefined,
+      growthFactor: isSet(object.growth_factor) ? object.growth_factor : undefined,
+      scale: isSet(object.scale) ? object.scale : undefined
+    };
+  },
+
+  toAmino(message: Distribution_ExponentialBuckets): Distribution_ExponentialBucketsSDKType {
+    const obj: any = {};
+    message.numFiniteBuckets !== undefined && (obj.num_finite_buckets = message.numFiniteBuckets);
+    message.growthFactor !== undefined && (obj.growth_factor = message.growthFactor);
+    message.scale !== undefined && (obj.scale = message.scale);
+    return obj;
   }
 
 };
@@ -779,6 +853,24 @@ export const Distribution_ExplicitBuckets = {
   },
 
   toSDK(message: Distribution_ExplicitBuckets): Distribution_ExplicitBucketsSDKType {
+    const obj: any = {};
+
+    if (message.bounds) {
+      obj.bounds = message.bounds.map(e => e);
+    } else {
+      obj.bounds = [];
+    }
+
+    return obj;
+  },
+
+  fromAmino(object: Distribution_ExplicitBucketsSDKType): Distribution_ExplicitBuckets {
+    return {
+      bounds: Array.isArray(object?.bounds) ? object.bounds.map((e: any) => e) : []
+    };
+  },
+
+  toAmino(message: Distribution_ExplicitBuckets): Distribution_ExplicitBucketsSDKType {
     const obj: any = {};
 
     if (message.bounds) {

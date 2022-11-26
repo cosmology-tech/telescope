@@ -90,6 +90,22 @@ export const Resource = {
     message.count = object.count ?? 0;
     message.price = object.price !== undefined && object.price !== null ? DecCoin.fromPartial(object.price) : undefined;
     return message;
+  },
+
+  fromAmino(object: ResourceSDKType): Resource {
+    return {
+      resources: isSet(object.resources) ? ResourceUnits.fromAmino(object.resources) : undefined,
+      count: isSet(object.count) ? object.count : undefined,
+      price: isSet(object.price) ? DecCoin.fromAmino(object.price) : undefined
+    };
+  },
+
+  toAmino(message: Resource): ResourceSDKType {
+    const obj: any = {};
+    message.resources !== undefined && (obj.resources = message.resources ? ResourceUnits.toAmino(message.resources) : undefined);
+    message.count !== undefined && (obj.count = message.count);
+    message.price !== undefined && (obj.price = message.price ? DecCoin.toAmino(message.price) : undefined);
+    return obj;
   }
 
 };

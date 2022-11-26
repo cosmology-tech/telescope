@@ -69,6 +69,24 @@ export const GenesisState = {
     const message = createBaseGenesisState();
     message.genTxs = object.genTxs?.map(e => e) || [];
     return message;
+  },
+
+  fromAmino(object: GenesisStateSDKType): GenesisState {
+    return {
+      genTxs: Array.isArray(object?.gen_txs) ? object.gen_txs.map((e: any) => e) : []
+    };
+  },
+
+  toAmino(message: GenesisState): GenesisStateSDKType {
+    const obj: any = {};
+
+    if (message.genTxs) {
+      obj.gen_txs = message.genTxs.map(e => e);
+    } else {
+      obj.gen_txs = [];
+    }
+
+    return obj;
   }
 
 };

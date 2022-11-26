@@ -101,6 +101,24 @@ export const Block = {
     message.evidence = object.evidence !== undefined && object.evidence !== null ? EvidenceList.fromPartial(object.evidence) : undefined;
     message.lastCommit = object.lastCommit !== undefined && object.lastCommit !== null ? Commit.fromPartial(object.lastCommit) : undefined;
     return message;
+  },
+
+  fromAmino(object: BlockSDKType): Block {
+    return {
+      header: isSet(object.header) ? Header.fromAmino(object.header) : undefined,
+      data: isSet(object.data) ? Data.fromAmino(object.data) : undefined,
+      evidence: isSet(object.evidence) ? EvidenceList.fromAmino(object.evidence) : undefined,
+      lastCommit: isSet(object.last_commit) ? Commit.fromAmino(object.last_commit) : undefined
+    };
+  },
+
+  toAmino(message: Block): BlockSDKType {
+    const obj: any = {};
+    message.header !== undefined && (obj.header = message.header ? Header.toAmino(message.header) : undefined);
+    message.data !== undefined && (obj.data = message.data ? Data.toAmino(message.data) : undefined);
+    message.evidence !== undefined && (obj.evidence = message.evidence ? EvidenceList.toAmino(message.evidence) : undefined);
+    message.lastCommit !== undefined && (obj.last_commit = message.lastCommit ? Commit.toAmino(message.lastCommit) : undefined);
+    return obj;
   }
 
 };

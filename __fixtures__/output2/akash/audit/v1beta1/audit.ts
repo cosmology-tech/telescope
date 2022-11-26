@@ -133,6 +133,28 @@ export const Provider = {
     message.auditor = object.auditor ?? "";
     message.attributes = object.attributes?.map(e => Attribute.fromPartial(e)) || [];
     return message;
+  },
+
+  fromAmino(object: ProviderSDKType): Provider {
+    return {
+      owner: isSet(object.owner) ? object.owner : undefined,
+      auditor: isSet(object.auditor) ? object.auditor : undefined,
+      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: Provider): ProviderSDKType {
+    const obj: any = {};
+    message.owner !== undefined && (obj.owner = message.owner);
+    message.auditor !== undefined && (obj.auditor = message.auditor);
+
+    if (message.attributes) {
+      obj.attributes = message.attributes.map(e => e ? Attribute.toAmino(e) : undefined);
+    } else {
+      obj.attributes = [];
+    }
+
+    return obj;
   }
 
 };
@@ -220,6 +242,28 @@ export const AuditedAttributes = {
     message.auditor = object.auditor ?? "";
     message.attributes = object.attributes?.map(e => Attribute.fromPartial(e)) || [];
     return message;
+  },
+
+  fromAmino(object: AuditedAttributesSDKType): AuditedAttributes {
+    return {
+      owner: isSet(object.owner) ? object.owner : undefined,
+      auditor: isSet(object.auditor) ? object.auditor : undefined,
+      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: AuditedAttributes): AuditedAttributesSDKType {
+    const obj: any = {};
+    message.owner !== undefined && (obj.owner = message.owner);
+    message.auditor !== undefined && (obj.auditor = message.auditor);
+
+    if (message.attributes) {
+      obj.attributes = message.attributes.map(e => e ? Attribute.toAmino(e) : undefined);
+    } else {
+      obj.attributes = [];
+    }
+
+    return obj;
   }
 
 };
@@ -283,6 +327,24 @@ export const AttributesResponse = {
     const message = createBaseAttributesResponse();
     message.attributes = object.attributes?.map(e => AuditedAttributes.fromPartial(e)) || [];
     return message;
+  },
+
+  fromAmino(object: AttributesResponseSDKType): AttributesResponse {
+    return {
+      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => AuditedAttributes.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: AttributesResponse): AttributesResponseSDKType {
+    const obj: any = {};
+
+    if (message.attributes) {
+      obj.attributes = message.attributes.map(e => e ? AuditedAttributes.toAmino(e) : undefined);
+    } else {
+      obj.attributes = [];
+    }
+
+    return obj;
   }
 
 };
@@ -363,6 +425,31 @@ export const AttributesFilters = {
     message.auditors = object.auditors?.map(e => e) || [];
     message.owners = object.owners?.map(e => e) || [];
     return message;
+  },
+
+  fromAmino(object: AttributesFiltersSDKType): AttributesFilters {
+    return {
+      auditors: Array.isArray(object?.auditors) ? object.auditors.map((e: any) => e) : [],
+      owners: Array.isArray(object?.owners) ? object.owners.map((e: any) => e) : []
+    };
+  },
+
+  toAmino(message: AttributesFilters): AttributesFiltersSDKType {
+    const obj: any = {};
+
+    if (message.auditors) {
+      obj.auditors = message.auditors.map(e => e);
+    } else {
+      obj.auditors = [];
+    }
+
+    if (message.owners) {
+      obj.owners = message.owners.map(e => e);
+    } else {
+      obj.owners = [];
+    }
+
+    return obj;
   }
 
 };
@@ -450,6 +537,28 @@ export const MsgSignProviderAttributes = {
     message.auditor = object.auditor ?? "";
     message.attributes = object.attributes?.map(e => Attribute.fromPartial(e)) || [];
     return message;
+  },
+
+  fromAmino(object: MsgSignProviderAttributesSDKType): MsgSignProviderAttributes {
+    return {
+      owner: isSet(object.owner) ? object.owner : undefined,
+      auditor: isSet(object.auditor) ? object.auditor : undefined,
+      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: MsgSignProviderAttributes): MsgSignProviderAttributesSDKType {
+    const obj: any = {};
+    message.owner !== undefined && (obj.owner = message.owner);
+    message.auditor !== undefined && (obj.auditor = message.auditor);
+
+    if (message.attributes) {
+      obj.attributes = message.attributes.map(e => e ? Attribute.toAmino(e) : undefined);
+    } else {
+      obj.attributes = [];
+    }
+
+    return obj;
   }
 
 };
@@ -493,6 +602,15 @@ export const MsgSignProviderAttributesResponse = {
   fromPartial(_: DeepPartial<MsgSignProviderAttributesResponse>): MsgSignProviderAttributesResponse {
     const message = createBaseMsgSignProviderAttributesResponse();
     return message;
+  },
+
+  fromAmino(_: MsgSignProviderAttributesResponseSDKType): MsgSignProviderAttributesResponse {
+    return {};
+  },
+
+  toAmino(_: MsgSignProviderAttributesResponse): MsgSignProviderAttributesResponseSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -580,6 +698,28 @@ export const MsgDeleteProviderAttributes = {
     message.auditor = object.auditor ?? "";
     message.keys = object.keys?.map(e => e) || [];
     return message;
+  },
+
+  fromAmino(object: MsgDeleteProviderAttributesSDKType): MsgDeleteProviderAttributes {
+    return {
+      owner: isSet(object.owner) ? object.owner : undefined,
+      auditor: isSet(object.auditor) ? object.auditor : undefined,
+      keys: Array.isArray(object?.keys) ? object.keys.map((e: any) => e) : []
+    };
+  },
+
+  toAmino(message: MsgDeleteProviderAttributes): MsgDeleteProviderAttributesSDKType {
+    const obj: any = {};
+    message.owner !== undefined && (obj.owner = message.owner);
+    message.auditor !== undefined && (obj.auditor = message.auditor);
+
+    if (message.keys) {
+      obj.keys = message.keys.map(e => e);
+    } else {
+      obj.keys = [];
+    }
+
+    return obj;
   }
 
 };
@@ -623,6 +763,15 @@ export const MsgDeleteProviderAttributesResponse = {
   fromPartial(_: DeepPartial<MsgDeleteProviderAttributesResponse>): MsgDeleteProviderAttributesResponse {
     const message = createBaseMsgDeleteProviderAttributesResponse();
     return message;
+  },
+
+  fromAmino(_: MsgDeleteProviderAttributesResponseSDKType): MsgDeleteProviderAttributesResponse {
+    return {};
+  },
+
+  toAmino(_: MsgDeleteProviderAttributesResponse): MsgDeleteProviderAttributesResponseSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };

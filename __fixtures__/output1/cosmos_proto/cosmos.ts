@@ -237,6 +237,20 @@ export const InterfaceDescriptor = {
     message.name !== undefined && (obj.name = message.name);
     message.description !== undefined && (obj.description = message.description);
     return obj;
+  },
+
+  fromAmino(object: InterfaceDescriptorSDKType): InterfaceDescriptor {
+    return {
+      name: isSet(object.name) ? object.name : undefined,
+      description: isSet(object.description) ? object.description : undefined
+    };
+  },
+
+  toAmino(message: InterfaceDescriptor): InterfaceDescriptorSDKType {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    message.description !== undefined && (obj.description = message.description);
+    return obj;
   }
 
 };
@@ -347,6 +361,28 @@ export const ScalarDescriptor = {
   },
 
   toSDK(message: ScalarDescriptor): ScalarDescriptorSDKType {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    message.description !== undefined && (obj.description = message.description);
+
+    if (message.fieldType) {
+      obj.field_type = message.fieldType.map(e => scalarTypeToJSON(e));
+    } else {
+      obj.field_type = [];
+    }
+
+    return obj;
+  },
+
+  fromAmino(object: ScalarDescriptorSDKType): ScalarDescriptor {
+    return {
+      name: isSet(object.name) ? object.name : undefined,
+      description: isSet(object.description) ? object.description : undefined,
+      fieldType: Array.isArray(object?.field_type) ? object.field_type.map((e: any) => scalarTypeFromJSON(e)) : []
+    };
+  },
+
+  toAmino(message: ScalarDescriptor): ScalarDescriptorSDKType {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     message.description !== undefined && (obj.description = message.description);

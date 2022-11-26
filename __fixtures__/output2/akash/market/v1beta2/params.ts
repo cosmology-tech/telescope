@@ -76,6 +76,20 @@ export const Params = {
     message.bidMinDeposit = object.bidMinDeposit !== undefined && object.bidMinDeposit !== null ? Coin.fromPartial(object.bidMinDeposit) : undefined;
     message.orderMaxBids = object.orderMaxBids ?? 0;
     return message;
+  },
+
+  fromAmino(object: ParamsSDKType): Params {
+    return {
+      bidMinDeposit: isSet(object.bid_min_deposit) ? Coin.fromAmino(object.bid_min_deposit) : undefined,
+      orderMaxBids: isSet(object.order_max_bids) ? object.order_max_bids : undefined
+    };
+  },
+
+  toAmino(message: Params): ParamsSDKType {
+    const obj: any = {};
+    message.bidMinDeposit !== undefined && (obj.bid_min_deposit = message.bidMinDeposit ? Coin.toAmino(message.bidMinDeposit) : undefined);
+    message.orderMaxBids !== undefined && (obj.order_max_bids = message.orderMaxBids);
+    return obj;
   }
 
 };

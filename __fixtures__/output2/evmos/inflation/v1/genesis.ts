@@ -139,6 +139,26 @@ export const GenesisState = {
     message.epochsPerPeriod = object.epochsPerPeriod !== undefined && object.epochsPerPeriod !== null ? Long.fromValue(object.epochsPerPeriod) : Long.ZERO;
     message.skippedEpochs = object.skippedEpochs !== undefined && object.skippedEpochs !== null ? Long.fromValue(object.skippedEpochs) : Long.UZERO;
     return message;
+  },
+
+  fromAmino(object: GenesisStateSDKType): GenesisState {
+    return {
+      params: isSet(object.params) ? Params.fromAmino(object.params) : undefined,
+      period: isSet(object.period) ? object.period : undefined,
+      epochIdentifier: isSet(object.epoch_identifier) ? object.epoch_identifier : undefined,
+      epochsPerPeriod: isSet(object.epochs_per_period) ? object.epochs_per_period : undefined,
+      skippedEpochs: isSet(object.skipped_epochs) ? object.skipped_epochs : undefined
+    };
+  },
+
+  toAmino(message: GenesisState): GenesisStateSDKType {
+    const obj: any = {};
+    message.params !== undefined && (obj.params = message.params ? Params.toAmino(message.params) : undefined);
+    message.period !== undefined && (obj.period = message.period);
+    message.epochIdentifier !== undefined && (obj.epoch_identifier = message.epochIdentifier);
+    message.epochsPerPeriod !== undefined && (obj.epochs_per_period = message.epochsPerPeriod);
+    message.skippedEpochs !== undefined && (obj.skipped_epochs = message.skippedEpochs);
+    return obj;
   }
 
 };
@@ -232,6 +252,24 @@ export const Params = {
     message.inflationDistribution = object.inflationDistribution !== undefined && object.inflationDistribution !== null ? InflationDistribution.fromPartial(object.inflationDistribution) : undefined;
     message.enableInflation = object.enableInflation ?? false;
     return message;
+  },
+
+  fromAmino(object: ParamsSDKType): Params {
+    return {
+      mintDenom: isSet(object.mint_denom) ? object.mint_denom : undefined,
+      exponentialCalculation: isSet(object.exponential_calculation) ? ExponentialCalculation.fromAmino(object.exponential_calculation) : undefined,
+      inflationDistribution: isSet(object.inflation_distribution) ? InflationDistribution.fromAmino(object.inflation_distribution) : undefined,
+      enableInflation: isSet(object.enable_inflation) ? object.enable_inflation : undefined
+    };
+  },
+
+  toAmino(message: Params): ParamsSDKType {
+    const obj: any = {};
+    message.mintDenom !== undefined && (obj.mint_denom = message.mintDenom);
+    message.exponentialCalculation !== undefined && (obj.exponential_calculation = message.exponentialCalculation ? ExponentialCalculation.toAmino(message.exponentialCalculation) : undefined);
+    message.inflationDistribution !== undefined && (obj.inflation_distribution = message.inflationDistribution ? InflationDistribution.toAmino(message.inflationDistribution) : undefined);
+    message.enableInflation !== undefined && (obj.enable_inflation = message.enableInflation);
+    return obj;
   }
 
 };

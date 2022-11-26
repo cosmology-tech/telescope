@@ -160,6 +160,28 @@ export const Record = {
     message.multi = object.multi !== undefined && object.multi !== null ? Record_Multi.fromPartial(object.multi) : undefined;
     message.offline = object.offline !== undefined && object.offline !== null ? Record_Offline.fromPartial(object.offline) : undefined;
     return message;
+  },
+
+  fromAmino(object: RecordSDKType): Record {
+    return {
+      name: isSet(object.name) ? object.name : undefined,
+      pubKey: isSet(object.pub_key) ? Any.fromAmino(object.pub_key) : undefined,
+      local: isSet(object.local) ? Record_Local.fromAmino(object.local) : undefined,
+      ledger: isSet(object.ledger) ? Record_Ledger.fromAmino(object.ledger) : undefined,
+      multi: isSet(object.multi) ? Record_Multi.fromAmino(object.multi) : undefined,
+      offline: isSet(object.offline) ? Record_Offline.fromAmino(object.offline) : undefined
+    };
+  },
+
+  toAmino(message: Record): RecordSDKType {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    message.pubKey !== undefined && (obj.pub_key = message.pubKey ? Any.toAmino(message.pubKey) : undefined);
+    message.local !== undefined && (obj.local = message.local ? Record_Local.toAmino(message.local) : undefined);
+    message.ledger !== undefined && (obj.ledger = message.ledger ? Record_Ledger.toAmino(message.ledger) : undefined);
+    message.multi !== undefined && (obj.multi = message.multi ? Record_Multi.toAmino(message.multi) : undefined);
+    message.offline !== undefined && (obj.offline = message.offline ? Record_Offline.toAmino(message.offline) : undefined);
+    return obj;
   }
 
 };
@@ -229,6 +251,20 @@ export const Record_Local = {
     message.privKey = object.privKey !== undefined && object.privKey !== null ? Any.fromPartial(object.privKey) : undefined;
     message.privKeyType = object.privKeyType ?? "";
     return message;
+  },
+
+  fromAmino(object: Record_LocalSDKType): Record_Local {
+    return {
+      privKey: isSet(object.priv_key) ? Any.fromAmino(object.priv_key) : undefined,
+      privKeyType: isSet(object.priv_key_type) ? object.priv_key_type : undefined
+    };
+  },
+
+  toAmino(message: Record_Local): Record_LocalSDKType {
+    const obj: any = {};
+    message.privKey !== undefined && (obj.priv_key = message.privKey ? Any.toAmino(message.privKey) : undefined);
+    message.privKeyType !== undefined && (obj.priv_key_type = message.privKeyType);
+    return obj;
   }
 
 };
@@ -286,6 +322,18 @@ export const Record_Ledger = {
     const message = createBaseRecord_Ledger();
     message.path = object.path !== undefined && object.path !== null ? BIP44Params.fromPartial(object.path) : undefined;
     return message;
+  },
+
+  fromAmino(object: Record_LedgerSDKType): Record_Ledger {
+    return {
+      path: isSet(object.path) ? BIP44Params.fromAmino(object.path) : undefined
+    };
+  },
+
+  toAmino(message: Record_Ledger): Record_LedgerSDKType {
+    const obj: any = {};
+    message.path !== undefined && (obj.path = message.path ? BIP44Params.toAmino(message.path) : undefined);
+    return obj;
   }
 
 };
@@ -329,6 +377,15 @@ export const Record_Multi = {
   fromPartial(_: DeepPartial<Record_Multi>): Record_Multi {
     const message = createBaseRecord_Multi();
     return message;
+  },
+
+  fromAmino(_: Record_MultiSDKType): Record_Multi {
+    return {};
+  },
+
+  toAmino(_: Record_Multi): Record_MultiSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -372,6 +429,15 @@ export const Record_Offline = {
   fromPartial(_: DeepPartial<Record_Offline>): Record_Offline {
     const message = createBaseRecord_Offline();
     return message;
+  },
+
+  fromAmino(_: Record_OfflineSDKType): Record_Offline {
+    return {};
+  },
+
+  toAmino(_: Record_Offline): Record_OfflineSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };

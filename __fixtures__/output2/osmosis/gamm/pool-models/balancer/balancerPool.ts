@@ -208,6 +208,35 @@ export const SmoothWeightChangeParams = {
     message.initialPoolWeights = object.initialPoolWeights?.map(e => PoolAsset.fromPartial(e)) || [];
     message.targetPoolWeights = object.targetPoolWeights?.map(e => PoolAsset.fromPartial(e)) || [];
     return message;
+  },
+
+  fromAmino(object: SmoothWeightChangeParamsSDKType): SmoothWeightChangeParams {
+    return {
+      startTime: isSet(object.start_time) ? Timestamp.fromAmino(object.start_time) : undefined,
+      duration: isSet(object.duration) ? Duration.fromAmino(object.duration) : undefined,
+      initialPoolWeights: Array.isArray(object?.initial_pool_weights) ? object.initial_pool_weights.map((e: any) => PoolAsset.fromAmino(e)) : [],
+      targetPoolWeights: Array.isArray(object?.target_pool_weights) ? object.target_pool_weights.map((e: any) => PoolAsset.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: SmoothWeightChangeParams): SmoothWeightChangeParamsSDKType {
+    const obj: any = {};
+    message.startTime !== undefined && (obj.start_time = message.startTime ? Timestamp.toAmino(message.startTime) : undefined);
+    message.duration !== undefined && (obj.duration = message.duration ? Duration.toAmino(message.duration) : undefined);
+
+    if (message.initialPoolWeights) {
+      obj.initial_pool_weights = message.initialPoolWeights.map(e => e ? PoolAsset.toAmino(e) : undefined);
+    } else {
+      obj.initial_pool_weights = [];
+    }
+
+    if (message.targetPoolWeights) {
+      obj.target_pool_weights = message.targetPoolWeights.map(e => e ? PoolAsset.toAmino(e) : undefined);
+    } else {
+      obj.target_pool_weights = [];
+    }
+
+    return obj;
   }
 
 };
@@ -289,6 +318,22 @@ export const PoolParams = {
     message.exitFee = object.exitFee ?? "";
     message.smoothWeightChangeParams = object.smoothWeightChangeParams !== undefined && object.smoothWeightChangeParams !== null ? SmoothWeightChangeParams.fromPartial(object.smoothWeightChangeParams) : undefined;
     return message;
+  },
+
+  fromAmino(object: PoolParamsSDKType): PoolParams {
+    return {
+      swapFee: isSet(object.swap_fee) ? object.swap_fee : undefined,
+      exitFee: isSet(object.exit_fee) ? object.exit_fee : undefined,
+      smoothWeightChangeParams: isSet(object.smooth_weight_change_params) ? SmoothWeightChangeParams.fromAmino(object.smooth_weight_change_params) : undefined
+    };
+  },
+
+  toAmino(message: PoolParams): PoolParamsSDKType {
+    const obj: any = {};
+    message.swapFee !== undefined && (obj.swap_fee = message.swapFee);
+    message.exitFee !== undefined && (obj.exit_fee = message.exitFee);
+    message.smoothWeightChangeParams !== undefined && (obj.smooth_weight_change_params = message.smoothWeightChangeParams ? SmoothWeightChangeParams.toAmino(message.smoothWeightChangeParams) : undefined);
+    return obj;
   }
 
 };
@@ -358,6 +403,20 @@ export const PoolAsset = {
     message.token = object.token !== undefined && object.token !== null ? Coin.fromPartial(object.token) : undefined;
     message.weight = object.weight ?? "";
     return message;
+  },
+
+  fromAmino(object: PoolAssetSDKType): PoolAsset {
+    return {
+      token: isSet(object.token) ? Coin.fromAmino(object.token) : undefined,
+      weight: isSet(object.weight) ? object.weight : undefined
+    };
+  },
+
+  toAmino(message: PoolAsset): PoolAssetSDKType {
+    const obj: any = {};
+    message.token !== undefined && (obj.token = message.token ? Coin.toAmino(message.token) : undefined);
+    message.weight !== undefined && (obj.weight = message.weight);
+    return obj;
   }
 
 };
@@ -493,6 +552,36 @@ export const Pool = {
     message.poolAssets = object.poolAssets?.map(e => PoolAsset.fromPartial(e)) || [];
     message.totalWeight = object.totalWeight ?? "";
     return message;
+  },
+
+  fromAmino(object: PoolSDKType): Pool {
+    return {
+      address: isSet(object.address) ? object.address : undefined,
+      id: isSet(object.id) ? object.id : undefined,
+      poolParams: isSet(object.pool_params) ? PoolParams.fromAmino(object.pool_params) : undefined,
+      futurePoolGovernor: isSet(object.future_pool_governor) ? object.future_pool_governor : undefined,
+      totalShares: isSet(object.total_shares) ? Coin.fromAmino(object.total_shares) : undefined,
+      poolAssets: Array.isArray(object?.pool_assets) ? object.pool_assets.map((e: any) => PoolAsset.fromAmino(e)) : [],
+      totalWeight: isSet(object.total_weight) ? object.total_weight : undefined
+    };
+  },
+
+  toAmino(message: Pool): PoolSDKType {
+    const obj: any = {};
+    message.address !== undefined && (obj.address = message.address);
+    message.id !== undefined && (obj.id = message.id);
+    message.poolParams !== undefined && (obj.pool_params = message.poolParams ? PoolParams.toAmino(message.poolParams) : undefined);
+    message.futurePoolGovernor !== undefined && (obj.future_pool_governor = message.futurePoolGovernor);
+    message.totalShares !== undefined && (obj.total_shares = message.totalShares ? Coin.toAmino(message.totalShares) : undefined);
+
+    if (message.poolAssets) {
+      obj.pool_assets = message.poolAssets.map(e => e ? PoolAsset.toAmino(e) : undefined);
+    } else {
+      obj.pool_assets = [];
+    }
+
+    message.totalWeight !== undefined && (obj.total_weight = message.totalWeight);
+    return obj;
   }
 
 };

@@ -174,6 +174,31 @@ export const Monitoring = {
     message.producerDestinations = object.producerDestinations?.map(e => Monitoring_MonitoringDestination.fromPartial(e)) || [];
     message.consumerDestinations = object.consumerDestinations?.map(e => Monitoring_MonitoringDestination.fromPartial(e)) || [];
     return message;
+  },
+
+  fromAmino(object: MonitoringSDKType): Monitoring {
+    return {
+      producerDestinations: Array.isArray(object?.producer_destinations) ? object.producer_destinations.map((e: any) => Monitoring_MonitoringDestination.fromAmino(e)) : [],
+      consumerDestinations: Array.isArray(object?.consumer_destinations) ? object.consumer_destinations.map((e: any) => Monitoring_MonitoringDestination.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: Monitoring): MonitoringSDKType {
+    const obj: any = {};
+
+    if (message.producerDestinations) {
+      obj.producer_destinations = message.producerDestinations.map(e => e ? Monitoring_MonitoringDestination.toAmino(e) : undefined);
+    } else {
+      obj.producer_destinations = [];
+    }
+
+    if (message.consumerDestinations) {
+      obj.consumer_destinations = message.consumerDestinations.map(e => e ? Monitoring_MonitoringDestination.toAmino(e) : undefined);
+    } else {
+      obj.consumer_destinations = [];
+    }
+
+    return obj;
   }
 
 };
@@ -249,6 +274,26 @@ export const Monitoring_MonitoringDestination = {
     message.monitoredResource = object.monitoredResource ?? "";
     message.metrics = object.metrics?.map(e => e) || [];
     return message;
+  },
+
+  fromAmino(object: Monitoring_MonitoringDestinationSDKType): Monitoring_MonitoringDestination {
+    return {
+      monitoredResource: isSet(object.monitored_resource) ? object.monitored_resource : undefined,
+      metrics: Array.isArray(object?.metrics) ? object.metrics.map((e: any) => e) : []
+    };
+  },
+
+  toAmino(message: Monitoring_MonitoringDestination): Monitoring_MonitoringDestinationSDKType {
+    const obj: any = {};
+    message.monitoredResource !== undefined && (obj.monitored_resource = message.monitoredResource);
+
+    if (message.metrics) {
+      obj.metrics = message.metrics.map(e => e);
+    } else {
+      obj.metrics = [];
+    }
+
+    return obj;
   }
 
 };

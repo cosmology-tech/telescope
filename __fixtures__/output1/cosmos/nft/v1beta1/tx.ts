@@ -145,6 +145,24 @@ export const MsgSend = {
     message.sender !== undefined && (obj.sender = message.sender);
     message.receiver !== undefined && (obj.receiver = message.receiver);
     return obj;
+  },
+
+  fromAmino(object: MsgSendSDKType): MsgSend {
+    return {
+      classId: isSet(object.class_id) ? object.class_id : undefined,
+      id: isSet(object.id) ? object.id : undefined,
+      sender: isSet(object.sender) ? object.sender : undefined,
+      receiver: isSet(object.receiver) ? object.receiver : undefined
+    };
+  },
+
+  toAmino(message: MsgSend): MsgSendSDKType {
+    const obj: any = {};
+    message.classId !== undefined && (obj.class_id = message.classId);
+    message.id !== undefined && (obj.id = message.id);
+    message.sender !== undefined && (obj.sender = message.sender);
+    message.receiver !== undefined && (obj.receiver = message.receiver);
+    return obj;
   }
 
 };
@@ -195,6 +213,15 @@ export const MsgSendResponse = {
   },
 
   toSDK(_: MsgSendResponse): MsgSendResponseSDKType {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromAmino(_: MsgSendResponseSDKType): MsgSendResponse {
+    return {};
+  },
+
+  toAmino(_: MsgSendResponse): MsgSendResponseSDKType {
     const obj: any = {};
     return obj;
   }

@@ -168,6 +168,30 @@ export const MsgTransfer = {
     message.timeoutHeight = object.timeoutHeight !== undefined && object.timeoutHeight !== null ? Height.fromPartial(object.timeoutHeight) : undefined;
     message.timeoutTimestamp = object.timeoutTimestamp !== undefined && object.timeoutTimestamp !== null ? Long.fromValue(object.timeoutTimestamp) : Long.UZERO;
     return message;
+  },
+
+  fromAmino(object: MsgTransferSDKType): MsgTransfer {
+    return {
+      sourcePort: isSet(object.source_port) ? object.source_port : undefined,
+      sourceChannel: isSet(object.source_channel) ? object.source_channel : undefined,
+      token: isSet(object.token) ? Coin.fromAmino(object.token) : undefined,
+      sender: isSet(object.sender) ? object.sender : undefined,
+      receiver: isSet(object.receiver) ? object.receiver : undefined,
+      timeoutHeight: isSet(object.timeout_height) ? Height.fromAmino(object.timeout_height) : undefined,
+      timeoutTimestamp: isSet(object.timeout_timestamp) ? object.timeout_timestamp : undefined
+    };
+  },
+
+  toAmino(message: MsgTransfer): MsgTransferSDKType {
+    const obj: any = {};
+    message.sourcePort !== undefined && (obj.source_port = message.sourcePort);
+    message.sourceChannel !== undefined && (obj.source_channel = message.sourceChannel);
+    message.token !== undefined && (obj.token = message.token ? Coin.toAmino(message.token) : undefined);
+    message.sender !== undefined && (obj.sender = message.sender);
+    message.receiver !== undefined && (obj.receiver = message.receiver);
+    message.timeoutHeight !== undefined && (obj.timeout_height = message.timeoutHeight ? Height.toAmino(message.timeoutHeight) : undefined);
+    message.timeoutTimestamp !== undefined && (obj.timeout_timestamp = message.timeoutTimestamp);
+    return obj;
   }
 
 };
@@ -211,6 +235,15 @@ export const MsgTransferResponse = {
   fromPartial(_: DeepPartial<MsgTransferResponse>): MsgTransferResponse {
     const message = createBaseMsgTransferResponse();
     return message;
+  },
+
+  fromAmino(_: MsgTransferResponseSDKType): MsgTransferResponse {
+    return {};
+  },
+
+  toAmino(_: MsgTransferResponse): MsgTransferResponseSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };

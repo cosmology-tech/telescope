@@ -92,6 +92,24 @@ export const SourceInfo = {
     }
 
     return obj;
+  },
+
+  fromAmino(object: SourceInfoSDKType): SourceInfo {
+    return {
+      sourceFiles: Array.isArray(object?.source_files) ? object.source_files.map((e: any) => Any.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: SourceInfo): SourceInfoSDKType {
+    const obj: any = {};
+
+    if (message.sourceFiles) {
+      obj.source_files = message.sourceFiles.map(e => e ? Any.toAmino(e) : undefined);
+    } else {
+      obj.source_files = [];
+    }
+
+    return obj;
   }
 
 };

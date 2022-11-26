@@ -66,6 +66,18 @@ export const Params = {
     const message = createBaseParams();
     message.controllerEnabled = object.controllerEnabled ?? false;
     return message;
+  },
+
+  fromAmino(object: ParamsSDKType): Params {
+    return {
+      controllerEnabled: isSet(object.controller_enabled) ? object.controller_enabled : undefined
+    };
+  },
+
+  toAmino(message: Params): ParamsSDKType {
+    const obj: any = {};
+    message.controllerEnabled !== undefined && (obj.controller_enabled = message.controllerEnabled);
+    return obj;
   }
 
 };

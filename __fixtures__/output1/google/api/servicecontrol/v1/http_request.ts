@@ -448,6 +448,46 @@ export const HttpRequest = {
     message.cacheFillBytes !== undefined && (obj.cache_fill_bytes = message.cacheFillBytes);
     message.protocol !== undefined && (obj.protocol = message.protocol);
     return obj;
+  },
+
+  fromAmino(object: HttpRequestSDKType): HttpRequest {
+    return {
+      requestMethod: isSet(object.request_method) ? object.request_method : undefined,
+      requestUrl: isSet(object.request_url) ? object.request_url : undefined,
+      requestSize: isSet(object.request_size) ? object.request_size : undefined,
+      status: isSet(object.status) ? object.status : undefined,
+      responseSize: isSet(object.response_size) ? object.response_size : undefined,
+      userAgent: isSet(object.user_agent) ? object.user_agent : undefined,
+      remoteIp: isSet(object.remote_ip) ? object.remote_ip : undefined,
+      serverIp: isSet(object.server_ip) ? object.server_ip : undefined,
+      referer: isSet(object.referer) ? object.referer : undefined,
+      latency: isSet(object.latency) ? Duration.fromAmino(object.latency) : undefined,
+      cacheLookup: isSet(object.cache_lookup) ? object.cache_lookup : undefined,
+      cacheHit: isSet(object.cache_hit) ? object.cache_hit : undefined,
+      cacheValidatedWithOriginServer: isSet(object.cache_validated_with_origin_server) ? object.cache_validated_with_origin_server : undefined,
+      cacheFillBytes: isSet(object.cache_fill_bytes) ? object.cache_fill_bytes : undefined,
+      protocol: isSet(object.protocol) ? object.protocol : undefined
+    };
+  },
+
+  toAmino(message: HttpRequest): HttpRequestSDKType {
+    const obj: any = {};
+    message.requestMethod !== undefined && (obj.request_method = message.requestMethod);
+    message.requestUrl !== undefined && (obj.request_url = message.requestUrl);
+    message.requestSize !== undefined && (obj.request_size = message.requestSize);
+    message.status !== undefined && (obj.status = message.status);
+    message.responseSize !== undefined && (obj.response_size = message.responseSize);
+    message.userAgent !== undefined && (obj.user_agent = message.userAgent);
+    message.remoteIp !== undefined && (obj.remote_ip = message.remoteIp);
+    message.serverIp !== undefined && (obj.server_ip = message.serverIp);
+    message.referer !== undefined && (obj.referer = message.referer);
+    message.latency !== undefined && (obj.latency = message.latency ? Duration.toAmino(message.latency) : undefined);
+    message.cacheLookup !== undefined && (obj.cache_lookup = message.cacheLookup);
+    message.cacheHit !== undefined && (obj.cache_hit = message.cacheHit);
+    message.cacheValidatedWithOriginServer !== undefined && (obj.cache_validated_with_origin_server = message.cacheValidatedWithOriginServer);
+    message.cacheFillBytes !== undefined && (obj.cache_fill_bytes = message.cacheFillBytes);
+    message.protocol !== undefined && (obj.protocol = message.protocol);
+    return obj;
   }
 
 };

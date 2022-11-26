@@ -168,6 +168,26 @@ export const GenesisState = {
     }
 
     return obj;
+  },
+
+  fromAmino(object: GenesisStateSDKType): GenesisState {
+    return {
+      params: isSet(object.params) ? Params.fromAmino(object.params) : undefined,
+      claimsRecords: Array.isArray(object?.claims_records) ? object.claims_records.map((e: any) => ClaimsRecordAddress.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: GenesisState): GenesisStateSDKType {
+    const obj: any = {};
+    message.params !== undefined && (obj.params = message.params ? Params.toAmino(message.params) : undefined);
+
+    if (message.claimsRecords) {
+      obj.claims_records = message.claimsRecords.map(e => e ? ClaimsRecordAddress.toAmino(e) : undefined);
+    } else {
+      obj.claims_records = [];
+    }
+
+    return obj;
   }
 
 };
@@ -328,6 +348,41 @@ export const Params = {
     message.airdropStartTime !== undefined && (obj.airdrop_start_time = message.airdropStartTime ? Timestamp.toSDK(message.airdropStartTime) : undefined);
     message.durationUntilDecay !== undefined && (obj.duration_until_decay = message.durationUntilDecay ? Duration.toSDK(message.durationUntilDecay) : undefined);
     message.durationOfDecay !== undefined && (obj.duration_of_decay = message.durationOfDecay ? Duration.toSDK(message.durationOfDecay) : undefined);
+    message.claimsDenom !== undefined && (obj.claims_denom = message.claimsDenom);
+
+    if (message.authorizedChannels) {
+      obj.authorized_channels = message.authorizedChannels.map(e => e);
+    } else {
+      obj.authorized_channels = [];
+    }
+
+    if (message.evmChannels) {
+      obj.evm_channels = message.evmChannels.map(e => e);
+    } else {
+      obj.evm_channels = [];
+    }
+
+    return obj;
+  },
+
+  fromAmino(object: ParamsSDKType): Params {
+    return {
+      enableClaims: isSet(object.enable_claims) ? object.enable_claims : undefined,
+      airdropStartTime: isSet(object.airdrop_start_time) ? Timestamp.fromAmino(object.airdrop_start_time) : undefined,
+      durationUntilDecay: isSet(object.duration_until_decay) ? Duration.fromAmino(object.duration_until_decay) : undefined,
+      durationOfDecay: isSet(object.duration_of_decay) ? Duration.fromAmino(object.duration_of_decay) : undefined,
+      claimsDenom: isSet(object.claims_denom) ? object.claims_denom : undefined,
+      authorizedChannels: Array.isArray(object?.authorized_channels) ? object.authorized_channels.map((e: any) => e) : [],
+      evmChannels: Array.isArray(object?.evm_channels) ? object.evm_channels.map((e: any) => e) : []
+    };
+  },
+
+  toAmino(message: Params): ParamsSDKType {
+    const obj: any = {};
+    message.enableClaims !== undefined && (obj.enable_claims = message.enableClaims);
+    message.airdropStartTime !== undefined && (obj.airdrop_start_time = message.airdropStartTime ? Timestamp.toAmino(message.airdropStartTime) : undefined);
+    message.durationUntilDecay !== undefined && (obj.duration_until_decay = message.durationUntilDecay ? Duration.toAmino(message.durationUntilDecay) : undefined);
+    message.durationOfDecay !== undefined && (obj.duration_of_decay = message.durationOfDecay ? Duration.toAmino(message.durationOfDecay) : undefined);
     message.claimsDenom !== undefined && (obj.claims_denom = message.claimsDenom);
 
     if (message.authorizedChannels) {

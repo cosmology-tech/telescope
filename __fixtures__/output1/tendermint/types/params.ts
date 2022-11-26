@@ -278,6 +278,24 @@ export const ConsensusParams = {
     message.validator !== undefined && (obj.validator = message.validator ? ValidatorParams.toSDK(message.validator) : undefined);
     message.version !== undefined && (obj.version = message.version ? VersionParams.toSDK(message.version) : undefined);
     return obj;
+  },
+
+  fromAmino(object: ConsensusParamsSDKType): ConsensusParams {
+    return {
+      block: isSet(object.block) ? BlockParams.fromAmino(object.block) : undefined,
+      evidence: isSet(object.evidence) ? EvidenceParams.fromAmino(object.evidence) : undefined,
+      validator: isSet(object.validator) ? ValidatorParams.fromAmino(object.validator) : undefined,
+      version: isSet(object.version) ? VersionParams.fromAmino(object.version) : undefined
+    };
+  },
+
+  toAmino(message: ConsensusParams): ConsensusParamsSDKType {
+    const obj: any = {};
+    message.block !== undefined && (obj.block = message.block ? BlockParams.toAmino(message.block) : undefined);
+    message.evidence !== undefined && (obj.evidence = message.evidence ? EvidenceParams.toAmino(message.evidence) : undefined);
+    message.validator !== undefined && (obj.validator = message.validator ? ValidatorParams.toAmino(message.validator) : undefined);
+    message.version !== undefined && (obj.version = message.version ? VersionParams.toAmino(message.version) : undefined);
+    return obj;
   }
 
 };
@@ -370,6 +388,22 @@ export const BlockParams = {
   },
 
   toSDK(message: BlockParams): BlockParamsSDKType {
+    const obj: any = {};
+    message.maxBytes !== undefined && (obj.max_bytes = message.maxBytes);
+    message.maxGas !== undefined && (obj.max_gas = message.maxGas);
+    message.timeIotaMs !== undefined && (obj.time_iota_ms = message.timeIotaMs);
+    return obj;
+  },
+
+  fromAmino(object: BlockParamsSDKType): BlockParams {
+    return {
+      maxBytes: isSet(object.max_bytes) ? object.max_bytes : undefined,
+      maxGas: isSet(object.max_gas) ? object.max_gas : undefined,
+      timeIotaMs: isSet(object.time_iota_ms) ? object.time_iota_ms : undefined
+    };
+  },
+
+  toAmino(message: BlockParams): BlockParamsSDKType {
     const obj: any = {};
     message.maxBytes !== undefined && (obj.max_bytes = message.maxBytes);
     message.maxGas !== undefined && (obj.max_gas = message.maxGas);
@@ -472,6 +506,22 @@ export const EvidenceParams = {
     message.maxAgeDuration !== undefined && (obj.max_age_duration = message.maxAgeDuration ? Duration.toSDK(message.maxAgeDuration) : undefined);
     message.maxBytes !== undefined && (obj.max_bytes = message.maxBytes);
     return obj;
+  },
+
+  fromAmino(object: EvidenceParamsSDKType): EvidenceParams {
+    return {
+      maxAgeNumBlocks: isSet(object.max_age_num_blocks) ? object.max_age_num_blocks : undefined,
+      maxAgeDuration: isSet(object.max_age_duration) ? Duration.fromAmino(object.max_age_duration) : undefined,
+      maxBytes: isSet(object.max_bytes) ? object.max_bytes : undefined
+    };
+  },
+
+  toAmino(message: EvidenceParams): EvidenceParamsSDKType {
+    const obj: any = {};
+    message.maxAgeNumBlocks !== undefined && (obj.max_age_num_blocks = message.maxAgeNumBlocks);
+    message.maxAgeDuration !== undefined && (obj.max_age_duration = message.maxAgeDuration ? Duration.toAmino(message.maxAgeDuration) : undefined);
+    message.maxBytes !== undefined && (obj.max_bytes = message.maxBytes);
+    return obj;
   }
 
 };
@@ -553,6 +603,24 @@ export const ValidatorParams = {
     }
 
     return obj;
+  },
+
+  fromAmino(object: ValidatorParamsSDKType): ValidatorParams {
+    return {
+      pubKeyTypes: Array.isArray(object?.pub_key_types) ? object.pub_key_types.map((e: any) => e) : []
+    };
+  },
+
+  toAmino(message: ValidatorParams): ValidatorParamsSDKType {
+    const obj: any = {};
+
+    if (message.pubKeyTypes) {
+      obj.pub_key_types = message.pubKeyTypes.map(e => e);
+    } else {
+      obj.pub_key_types = [];
+    }
+
+    return obj;
   }
 
 };
@@ -619,6 +687,18 @@ export const VersionParams = {
   },
 
   toSDK(message: VersionParams): VersionParamsSDKType {
+    const obj: any = {};
+    message.appVersion !== undefined && (obj.app_version = message.appVersion);
+    return obj;
+  },
+
+  fromAmino(object: VersionParamsSDKType): VersionParams {
+    return {
+      appVersion: isSet(object.app_version) ? object.app_version : undefined
+    };
+  },
+
+  toAmino(message: VersionParams): VersionParamsSDKType {
     const obj: any = {};
     message.appVersion !== undefined && (obj.app_version = message.appVersion);
     return obj;
@@ -701,6 +781,20 @@ export const HashedParams = {
   },
 
   toSDK(message: HashedParams): HashedParamsSDKType {
+    const obj: any = {};
+    message.blockMaxBytes !== undefined && (obj.block_max_bytes = message.blockMaxBytes);
+    message.blockMaxGas !== undefined && (obj.block_max_gas = message.blockMaxGas);
+    return obj;
+  },
+
+  fromAmino(object: HashedParamsSDKType): HashedParams {
+    return {
+      blockMaxBytes: isSet(object.block_max_bytes) ? object.block_max_bytes : undefined,
+      blockMaxGas: isSet(object.block_max_gas) ? object.block_max_gas : undefined
+    };
+  },
+
+  toAmino(message: HashedParams): HashedParamsSDKType {
     const obj: any = {};
     message.blockMaxBytes !== undefined && (obj.block_max_bytes = message.blockMaxBytes);
     message.blockMaxGas !== undefined && (obj.block_max_gas = message.blockMaxGas);

@@ -244,6 +244,26 @@ export const Operation = {
     message.error = object.error !== undefined && object.error !== null ? Status.fromPartial(object.error) : undefined;
     message.response = object.response !== undefined && object.response !== null ? Any.fromPartial(object.response) : undefined;
     return message;
+  },
+
+  fromAmino(object: OperationSDKType): Operation {
+    return {
+      name: isSet(object.name) ? object.name : undefined,
+      metadata: isSet(object.metadata) ? Any.fromAmino(object.metadata) : undefined,
+      done: isSet(object.done) ? object.done : undefined,
+      error: isSet(object.error) ? Status.fromAmino(object.error) : undefined,
+      response: isSet(object.response) ? Any.fromAmino(object.response) : undefined
+    };
+  },
+
+  toAmino(message: Operation): OperationSDKType {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    message.metadata !== undefined && (obj.metadata = message.metadata ? Any.toAmino(message.metadata) : undefined);
+    message.done !== undefined && (obj.done = message.done);
+    message.error !== undefined && (obj.error = message.error ? Status.toAmino(message.error) : undefined);
+    message.response !== undefined && (obj.response = message.response ? Any.toAmino(message.response) : undefined);
+    return obj;
   }
 
 };
@@ -301,6 +321,18 @@ export const GetOperationRequest = {
     const message = createBaseGetOperationRequest();
     message.name = object.name ?? "";
     return message;
+  },
+
+  fromAmino(object: GetOperationRequestSDKType): GetOperationRequest {
+    return {
+      name: isSet(object.name) ? object.name : undefined
+    };
+  },
+
+  toAmino(message: GetOperationRequest): GetOperationRequestSDKType {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    return obj;
   }
 
 };
@@ -394,6 +426,24 @@ export const ListOperationsRequest = {
     message.pageSize = object.pageSize ?? 0;
     message.pageToken = object.pageToken ?? "";
     return message;
+  },
+
+  fromAmino(object: ListOperationsRequestSDKType): ListOperationsRequest {
+    return {
+      name: isSet(object.name) ? object.name : undefined,
+      filter: isSet(object.filter) ? object.filter : undefined,
+      pageSize: isSet(object.page_size) ? object.page_size : undefined,
+      pageToken: isSet(object.page_token) ? object.page_token : undefined
+    };
+  },
+
+  toAmino(message: ListOperationsRequest): ListOperationsRequestSDKType {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    message.filter !== undefined && (obj.filter = message.filter);
+    message.pageSize !== undefined && (obj.page_size = message.pageSize);
+    message.pageToken !== undefined && (obj.page_token = message.pageToken);
+    return obj;
   }
 
 };
@@ -469,6 +519,26 @@ export const ListOperationsResponse = {
     message.operations = object.operations?.map(e => Operation.fromPartial(e)) || [];
     message.nextPageToken = object.nextPageToken ?? "";
     return message;
+  },
+
+  fromAmino(object: ListOperationsResponseSDKType): ListOperationsResponse {
+    return {
+      operations: Array.isArray(object?.operations) ? object.operations.map((e: any) => Operation.fromAmino(e)) : [],
+      nextPageToken: isSet(object.next_page_token) ? object.next_page_token : undefined
+    };
+  },
+
+  toAmino(message: ListOperationsResponse): ListOperationsResponseSDKType {
+    const obj: any = {};
+
+    if (message.operations) {
+      obj.operations = message.operations.map(e => e ? Operation.toAmino(e) : undefined);
+    } else {
+      obj.operations = [];
+    }
+
+    message.nextPageToken !== undefined && (obj.next_page_token = message.nextPageToken);
+    return obj;
   }
 
 };
@@ -526,6 +596,18 @@ export const CancelOperationRequest = {
     const message = createBaseCancelOperationRequest();
     message.name = object.name ?? "";
     return message;
+  },
+
+  fromAmino(object: CancelOperationRequestSDKType): CancelOperationRequest {
+    return {
+      name: isSet(object.name) ? object.name : undefined
+    };
+  },
+
+  toAmino(message: CancelOperationRequest): CancelOperationRequestSDKType {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    return obj;
   }
 
 };
@@ -583,6 +665,18 @@ export const DeleteOperationRequest = {
     const message = createBaseDeleteOperationRequest();
     message.name = object.name ?? "";
     return message;
+  },
+
+  fromAmino(object: DeleteOperationRequestSDKType): DeleteOperationRequest {
+    return {
+      name: isSet(object.name) ? object.name : undefined
+    };
+  },
+
+  toAmino(message: DeleteOperationRequest): DeleteOperationRequestSDKType {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    return obj;
   }
 
 };
@@ -652,6 +746,20 @@ export const WaitOperationRequest = {
     message.name = object.name ?? "";
     message.timeout = object.timeout !== undefined && object.timeout !== null ? Duration.fromPartial(object.timeout) : undefined;
     return message;
+  },
+
+  fromAmino(object: WaitOperationRequestSDKType): WaitOperationRequest {
+    return {
+      name: isSet(object.name) ? object.name : undefined,
+      timeout: isSet(object.timeout) ? Duration.fromAmino(object.timeout) : undefined
+    };
+  },
+
+  toAmino(message: WaitOperationRequest): WaitOperationRequestSDKType {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    message.timeout !== undefined && (obj.timeout = message.timeout ? Duration.toAmino(message.timeout) : undefined);
+    return obj;
   }
 
 };
@@ -721,6 +829,20 @@ export const OperationInfo = {
     message.responseType = object.responseType ?? "";
     message.metadataType = object.metadataType ?? "";
     return message;
+  },
+
+  fromAmino(object: OperationInfoSDKType): OperationInfo {
+    return {
+      responseType: isSet(object.response_type) ? object.response_type : undefined,
+      metadataType: isSet(object.metadata_type) ? object.metadata_type : undefined
+    };
+  },
+
+  toAmino(message: OperationInfo): OperationInfoSDKType {
+    const obj: any = {};
+    message.responseType !== undefined && (obj.response_type = message.responseType);
+    message.metadataType !== undefined && (obj.metadata_type = message.metadataType);
+    return obj;
   }
 
 };

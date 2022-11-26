@@ -83,6 +83,15 @@ export const QueryModuleAccountBalanceRequest = {
   fromPartial(_: DeepPartial<QueryModuleAccountBalanceRequest>): QueryModuleAccountBalanceRequest {
     const message = createBaseQueryModuleAccountBalanceRequest();
     return message;
+  },
+
+  fromAmino(_: QueryModuleAccountBalanceRequestSDKType): QueryModuleAccountBalanceRequest {
+    return {};
+  },
+
+  toAmino(_: QueryModuleAccountBalanceRequest): QueryModuleAccountBalanceRequestSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -146,6 +155,24 @@ export const QueryModuleAccountBalanceResponse = {
     const message = createBaseQueryModuleAccountBalanceResponse();
     message.moduleAccountBalance = object.moduleAccountBalance?.map(e => Coin.fromPartial(e)) || [];
     return message;
+  },
+
+  fromAmino(object: QueryModuleAccountBalanceResponseSDKType): QueryModuleAccountBalanceResponse {
+    return {
+      moduleAccountBalance: Array.isArray(object?.moduleAccountBalance) ? object.moduleAccountBalance.map((e: any) => Coin.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: QueryModuleAccountBalanceResponse): QueryModuleAccountBalanceResponseSDKType {
+    const obj: any = {};
+
+    if (message.moduleAccountBalance) {
+      obj.moduleAccountBalance = message.moduleAccountBalance.map(e => e ? Coin.toAmino(e) : undefined);
+    } else {
+      obj.moduleAccountBalance = [];
+    }
+
+    return obj;
   }
 
 };
@@ -189,6 +216,15 @@ export const QueryParamsRequest = {
   fromPartial(_: DeepPartial<QueryParamsRequest>): QueryParamsRequest {
     const message = createBaseQueryParamsRequest();
     return message;
+  },
+
+  fromAmino(_: QueryParamsRequestSDKType): QueryParamsRequest {
+    return {};
+  },
+
+  toAmino(_: QueryParamsRequest): QueryParamsRequestSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -246,6 +282,18 @@ export const QueryParamsResponse = {
     const message = createBaseQueryParamsResponse();
     message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     return message;
+  },
+
+  fromAmino(object: QueryParamsResponseSDKType): QueryParamsResponse {
+    return {
+      params: isSet(object.params) ? Params.fromAmino(object.params) : undefined
+    };
+  },
+
+  toAmino(message: QueryParamsResponse): QueryParamsResponseSDKType {
+    const obj: any = {};
+    message.params !== undefined && (obj.params = message.params ? Params.toAmino(message.params) : undefined);
+    return obj;
   }
 
 };
@@ -303,6 +351,18 @@ export const QueryClaimRecordRequest = {
     const message = createBaseQueryClaimRecordRequest();
     message.address = object.address ?? "";
     return message;
+  },
+
+  fromAmino(object: QueryClaimRecordRequestSDKType): QueryClaimRecordRequest {
+    return {
+      address: isSet(object.address) ? object.address : undefined
+    };
+  },
+
+  toAmino(message: QueryClaimRecordRequest): QueryClaimRecordRequestSDKType {
+    const obj: any = {};
+    message.address !== undefined && (obj.address = message.address);
+    return obj;
   }
 
 };
@@ -360,6 +420,18 @@ export const QueryClaimRecordResponse = {
     const message = createBaseQueryClaimRecordResponse();
     message.claimRecord = object.claimRecord !== undefined && object.claimRecord !== null ? ClaimRecord.fromPartial(object.claimRecord) : undefined;
     return message;
+  },
+
+  fromAmino(object: QueryClaimRecordResponseSDKType): QueryClaimRecordResponse {
+    return {
+      claimRecord: isSet(object.claim_record) ? ClaimRecord.fromAmino(object.claim_record) : undefined
+    };
+  },
+
+  toAmino(message: QueryClaimRecordResponse): QueryClaimRecordResponseSDKType {
+    const obj: any = {};
+    message.claimRecord !== undefined && (obj.claim_record = message.claimRecord ? ClaimRecord.toAmino(message.claimRecord) : undefined);
+    return obj;
   }
 
 };
@@ -429,6 +501,20 @@ export const QueryClaimableForActionRequest = {
     message.address = object.address ?? "";
     message.action = object.action ?? 0;
     return message;
+  },
+
+  fromAmino(object: QueryClaimableForActionRequestSDKType): QueryClaimableForActionRequest {
+    return {
+      address: isSet(object.address) ? object.address : undefined,
+      action: isSet(object.action) ? actionFromJSON(object.action) : 0
+    };
+  },
+
+  toAmino(message: QueryClaimableForActionRequest): QueryClaimableForActionRequestSDKType {
+    const obj: any = {};
+    message.address !== undefined && (obj.address = message.address);
+    message.action !== undefined && (obj.action = actionToJSON(message.action));
+    return obj;
   }
 
 };
@@ -492,6 +578,24 @@ export const QueryClaimableForActionResponse = {
     const message = createBaseQueryClaimableForActionResponse();
     message.coins = object.coins?.map(e => Coin.fromPartial(e)) || [];
     return message;
+  },
+
+  fromAmino(object: QueryClaimableForActionResponseSDKType): QueryClaimableForActionResponse {
+    return {
+      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: QueryClaimableForActionResponse): QueryClaimableForActionResponseSDKType {
+    const obj: any = {};
+
+    if (message.coins) {
+      obj.coins = message.coins.map(e => e ? Coin.toAmino(e) : undefined);
+    } else {
+      obj.coins = [];
+    }
+
+    return obj;
   }
 
 };
@@ -549,6 +653,18 @@ export const QueryTotalClaimableRequest = {
     const message = createBaseQueryTotalClaimableRequest();
     message.address = object.address ?? "";
     return message;
+  },
+
+  fromAmino(object: QueryTotalClaimableRequestSDKType): QueryTotalClaimableRequest {
+    return {
+      address: isSet(object.address) ? object.address : undefined
+    };
+  },
+
+  toAmino(message: QueryTotalClaimableRequest): QueryTotalClaimableRequestSDKType {
+    const obj: any = {};
+    message.address !== undefined && (obj.address = message.address);
+    return obj;
   }
 
 };
@@ -612,6 +728,24 @@ export const QueryTotalClaimableResponse = {
     const message = createBaseQueryTotalClaimableResponse();
     message.coins = object.coins?.map(e => Coin.fromPartial(e)) || [];
     return message;
+  },
+
+  fromAmino(object: QueryTotalClaimableResponseSDKType): QueryTotalClaimableResponse {
+    return {
+      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: QueryTotalClaimableResponse): QueryTotalClaimableResponseSDKType {
+    const obj: any = {};
+
+    if (message.coins) {
+      obj.coins = message.coins.map(e => e ? Coin.toAmino(e) : undefined);
+    } else {
+      obj.coins = [];
+    }
+
+    return obj;
   }
 
 };

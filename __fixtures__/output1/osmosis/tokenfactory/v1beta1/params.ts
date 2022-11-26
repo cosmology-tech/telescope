@@ -90,6 +90,24 @@ export const Params = {
     }
 
     return obj;
+  },
+
+  fromAmino(object: ParamsSDKType): Params {
+    return {
+      denomCreationFee: Array.isArray(object?.denom_creation_fee) ? object.denom_creation_fee.map((e: any) => Coin.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: Params): ParamsSDKType {
+    const obj: any = {};
+
+    if (message.denomCreationFee) {
+      obj.denom_creation_fee = message.denomCreationFee.map(e => e ? Coin.toAmino(e) : undefined);
+    } else {
+      obj.denom_creation_fee = [];
+    }
+
+    return obj;
   }
 
 };

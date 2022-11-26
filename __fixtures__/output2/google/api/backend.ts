@@ -266,6 +266,24 @@ export const Backend = {
     const message = createBaseBackend();
     message.rules = object.rules?.map(e => BackendRule.fromPartial(e)) || [];
     return message;
+  },
+
+  fromAmino(object: BackendSDKType): Backend {
+    return {
+      rules: Array.isArray(object?.rules) ? object.rules.map((e: any) => BackendRule.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: Backend): BackendSDKType {
+    const obj: any = {};
+
+    if (message.rules) {
+      obj.rules = message.rules.map(e => e ? BackendRule.toAmino(e) : undefined);
+    } else {
+      obj.rules = [];
+    }
+
+    return obj;
   }
 
 };
@@ -419,6 +437,34 @@ export const BackendRule = {
     message.disableAuth = object.disableAuth ?? undefined;
     message.protocol = object.protocol ?? "";
     return message;
+  },
+
+  fromAmino(object: BackendRuleSDKType): BackendRule {
+    return {
+      selector: isSet(object.selector) ? object.selector : undefined,
+      address: isSet(object.address) ? object.address : undefined,
+      deadline: isSet(object.deadline) ? object.deadline : undefined,
+      minDeadline: isSet(object.min_deadline) ? object.min_deadline : undefined,
+      operationDeadline: isSet(object.operation_deadline) ? object.operation_deadline : undefined,
+      pathTranslation: isSet(object.path_translation) ? backendRule_PathTranslationFromJSON(object.path_translation) : 0,
+      jwtAudience: isSet(object.jwt_audience) ? object.jwt_audience : undefined,
+      disableAuth: isSet(object.disable_auth) ? object.disable_auth : undefined,
+      protocol: isSet(object.protocol) ? object.protocol : undefined
+    };
+  },
+
+  toAmino(message: BackendRule): BackendRuleSDKType {
+    const obj: any = {};
+    message.selector !== undefined && (obj.selector = message.selector);
+    message.address !== undefined && (obj.address = message.address);
+    message.deadline !== undefined && (obj.deadline = message.deadline);
+    message.minDeadline !== undefined && (obj.min_deadline = message.minDeadline);
+    message.operationDeadline !== undefined && (obj.operation_deadline = message.operationDeadline);
+    message.pathTranslation !== undefined && (obj.path_translation = backendRule_PathTranslationToJSON(message.pathTranslation));
+    message.jwtAudience !== undefined && (obj.jwt_audience = message.jwtAudience);
+    message.disableAuth !== undefined && (obj.disable_auth = message.disableAuth);
+    message.protocol !== undefined && (obj.protocol = message.protocol);
+    return obj;
   }
 
 };

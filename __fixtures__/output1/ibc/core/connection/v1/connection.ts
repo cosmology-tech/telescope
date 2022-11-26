@@ -447,6 +447,32 @@ export const ConnectionEnd = {
     message.counterparty !== undefined && (obj.counterparty = message.counterparty ? Counterparty.toSDK(message.counterparty) : undefined);
     message.delayPeriod !== undefined && (obj.delay_period = message.delayPeriod);
     return obj;
+  },
+
+  fromAmino(object: ConnectionEndSDKType): ConnectionEnd {
+    return {
+      clientId: isSet(object.client_id) ? object.client_id : undefined,
+      versions: Array.isArray(object?.versions) ? object.versions.map((e: any) => Version.fromAmino(e)) : [],
+      state: isSet(object.state) ? stateFromJSON(object.state) : 0,
+      counterparty: isSet(object.counterparty) ? Counterparty.fromAmino(object.counterparty) : undefined,
+      delayPeriod: isSet(object.delay_period) ? object.delay_period : undefined
+    };
+  },
+
+  toAmino(message: ConnectionEnd): ConnectionEndSDKType {
+    const obj: any = {};
+    message.clientId !== undefined && (obj.client_id = message.clientId);
+
+    if (message.versions) {
+      obj.versions = message.versions.map(e => e ? Version.toAmino(e) : undefined);
+    } else {
+      obj.versions = [];
+    }
+
+    message.state !== undefined && (obj.state = stateToJSON(message.state));
+    message.counterparty !== undefined && (obj.counterparty = message.counterparty ? Counterparty.toAmino(message.counterparty) : undefined);
+    message.delayPeriod !== undefined && (obj.delay_period = message.delayPeriod);
+    return obj;
   }
 
 };
@@ -598,6 +624,34 @@ export const IdentifiedConnection = {
     message.counterparty !== undefined && (obj.counterparty = message.counterparty ? Counterparty.toSDK(message.counterparty) : undefined);
     message.delayPeriod !== undefined && (obj.delay_period = message.delayPeriod);
     return obj;
+  },
+
+  fromAmino(object: IdentifiedConnectionSDKType): IdentifiedConnection {
+    return {
+      id: isSet(object.id) ? object.id : undefined,
+      clientId: isSet(object.client_id) ? object.client_id : undefined,
+      versions: Array.isArray(object?.versions) ? object.versions.map((e: any) => Version.fromAmino(e)) : [],
+      state: isSet(object.state) ? stateFromJSON(object.state) : 0,
+      counterparty: isSet(object.counterparty) ? Counterparty.fromAmino(object.counterparty) : undefined,
+      delayPeriod: isSet(object.delay_period) ? object.delay_period : undefined
+    };
+  },
+
+  toAmino(message: IdentifiedConnection): IdentifiedConnectionSDKType {
+    const obj: any = {};
+    message.id !== undefined && (obj.id = message.id);
+    message.clientId !== undefined && (obj.client_id = message.clientId);
+
+    if (message.versions) {
+      obj.versions = message.versions.map(e => e ? Version.toAmino(e) : undefined);
+    } else {
+      obj.versions = [];
+    }
+
+    message.state !== undefined && (obj.state = stateToJSON(message.state));
+    message.counterparty !== undefined && (obj.counterparty = message.counterparty ? Counterparty.toAmino(message.counterparty) : undefined);
+    message.delayPeriod !== undefined && (obj.delay_period = message.delayPeriod);
+    return obj;
   }
 
 };
@@ -695,6 +749,22 @@ export const Counterparty = {
     message.connectionId !== undefined && (obj.connection_id = message.connectionId);
     message.prefix !== undefined && (obj.prefix = message.prefix ? MerklePrefix.toSDK(message.prefix) : undefined);
     return obj;
+  },
+
+  fromAmino(object: CounterpartySDKType): Counterparty {
+    return {
+      clientId: isSet(object.client_id) ? object.client_id : undefined,
+      connectionId: isSet(object.connection_id) ? object.connection_id : undefined,
+      prefix: isSet(object.prefix) ? MerklePrefix.fromAmino(object.prefix) : undefined
+    };
+  },
+
+  toAmino(message: Counterparty): CounterpartySDKType {
+    const obj: any = {};
+    message.clientId !== undefined && (obj.client_id = message.clientId);
+    message.connectionId !== undefined && (obj.connection_id = message.connectionId);
+    message.prefix !== undefined && (obj.prefix = message.prefix ? MerklePrefix.toAmino(message.prefix) : undefined);
+    return obj;
   }
 
 };
@@ -767,6 +837,24 @@ export const ClientPaths = {
   },
 
   toSDK(message: ClientPaths): ClientPathsSDKType {
+    const obj: any = {};
+
+    if (message.paths) {
+      obj.paths = message.paths.map(e => e);
+    } else {
+      obj.paths = [];
+    }
+
+    return obj;
+  },
+
+  fromAmino(object: ClientPathsSDKType): ClientPaths {
+    return {
+      paths: Array.isArray(object?.paths) ? object.paths.map((e: any) => e) : []
+    };
+  },
+
+  toAmino(message: ClientPaths): ClientPathsSDKType {
     const obj: any = {};
 
     if (message.paths) {
@@ -861,6 +949,26 @@ export const ConnectionPaths = {
   },
 
   toSDK(message: ConnectionPaths): ConnectionPathsSDKType {
+    const obj: any = {};
+    message.clientId !== undefined && (obj.client_id = message.clientId);
+
+    if (message.paths) {
+      obj.paths = message.paths.map(e => e);
+    } else {
+      obj.paths = [];
+    }
+
+    return obj;
+  },
+
+  fromAmino(object: ConnectionPathsSDKType): ConnectionPaths {
+    return {
+      clientId: isSet(object.client_id) ? object.client_id : undefined,
+      paths: Array.isArray(object?.paths) ? object.paths.map((e: any) => e) : []
+    };
+  },
+
+  toAmino(message: ConnectionPaths): ConnectionPathsSDKType {
     const obj: any = {};
     message.clientId !== undefined && (obj.client_id = message.clientId);
 
@@ -966,6 +1074,26 @@ export const Version = {
     }
 
     return obj;
+  },
+
+  fromAmino(object: VersionSDKType): Version {
+    return {
+      identifier: isSet(object.identifier) ? object.identifier : undefined,
+      features: Array.isArray(object?.features) ? object.features.map((e: any) => e) : []
+    };
+  },
+
+  toAmino(message: Version): VersionSDKType {
+    const obj: any = {};
+    message.identifier !== undefined && (obj.identifier = message.identifier);
+
+    if (message.features) {
+      obj.features = message.features.map(e => e);
+    } else {
+      obj.features = [];
+    }
+
+    return obj;
   }
 
 };
@@ -1032,6 +1160,18 @@ export const Params = {
   },
 
   toSDK(message: Params): ParamsSDKType {
+    const obj: any = {};
+    message.maxExpectedTimePerBlock !== undefined && (obj.max_expected_time_per_block = message.maxExpectedTimePerBlock);
+    return obj;
+  },
+
+  fromAmino(object: ParamsSDKType): Params {
+    return {
+      maxExpectedTimePerBlock: isSet(object.max_expected_time_per_block) ? object.max_expected_time_per_block : undefined
+    };
+  },
+
+  toAmino(message: Params): ParamsSDKType {
     const obj: any = {};
     message.maxExpectedTimePerBlock !== undefined && (obj.max_expected_time_per_block = message.maxExpectedTimePerBlock);
     return obj;

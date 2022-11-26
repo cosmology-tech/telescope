@@ -82,6 +82,20 @@ export const ClientState = {
     message.chainId = object.chainId ?? "";
     message.height = object.height !== undefined && object.height !== null ? Height.fromPartial(object.height) : undefined;
     return message;
+  },
+
+  fromAmino(object: ClientStateSDKType): ClientState {
+    return {
+      chainId: isSet(object.chain_id) ? object.chain_id : undefined,
+      height: isSet(object.height) ? Height.fromAmino(object.height) : undefined
+    };
+  },
+
+  toAmino(message: ClientState): ClientStateSDKType {
+    const obj: any = {};
+    message.chainId !== undefined && (obj.chain_id = message.chainId);
+    message.height !== undefined && (obj.height = message.height ? Height.toAmino(message.height) : undefined);
+    return obj;
   }
 
 };

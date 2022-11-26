@@ -114,6 +114,20 @@ export const ProviderInfo = {
     message.email = object.email ?? "";
     message.website = object.website ?? "";
     return message;
+  },
+
+  fromAmino(object: ProviderInfoSDKType): ProviderInfo {
+    return {
+      email: isSet(object.email) ? object.email : undefined,
+      website: isSet(object.website) ? object.website : undefined
+    };
+  },
+
+  toAmino(message: ProviderInfo): ProviderInfoSDKType {
+    const obj: any = {};
+    message.email !== undefined && (obj.email = message.email);
+    message.website !== undefined && (obj.website = message.website);
+    return obj;
   }
 
 };
@@ -213,6 +227,30 @@ export const MsgCreateProvider = {
     message.attributes = object.attributes?.map(e => Attribute.fromPartial(e)) || [];
     message.info = object.info !== undefined && object.info !== null ? ProviderInfo.fromPartial(object.info) : undefined;
     return message;
+  },
+
+  fromAmino(object: MsgCreateProviderSDKType): MsgCreateProvider {
+    return {
+      owner: isSet(object.owner) ? object.owner : undefined,
+      hostUri: isSet(object.host_uri) ? object.host_uri : undefined,
+      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromAmino(e)) : [],
+      info: isSet(object.info) ? ProviderInfo.fromAmino(object.info) : undefined
+    };
+  },
+
+  toAmino(message: MsgCreateProvider): MsgCreateProviderSDKType {
+    const obj: any = {};
+    message.owner !== undefined && (obj.owner = message.owner);
+    message.hostUri !== undefined && (obj.host_uri = message.hostUri);
+
+    if (message.attributes) {
+      obj.attributes = message.attributes.map(e => e ? Attribute.toAmino(e) : undefined);
+    } else {
+      obj.attributes = [];
+    }
+
+    message.info !== undefined && (obj.info = message.info ? ProviderInfo.toAmino(message.info) : undefined);
+    return obj;
   }
 
 };
@@ -256,6 +294,15 @@ export const MsgCreateProviderResponse = {
   fromPartial(_: DeepPartial<MsgCreateProviderResponse>): MsgCreateProviderResponse {
     const message = createBaseMsgCreateProviderResponse();
     return message;
+  },
+
+  fromAmino(_: MsgCreateProviderResponseSDKType): MsgCreateProviderResponse {
+    return {};
+  },
+
+  toAmino(_: MsgCreateProviderResponse): MsgCreateProviderResponseSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -355,6 +402,30 @@ export const MsgUpdateProvider = {
     message.attributes = object.attributes?.map(e => Attribute.fromPartial(e)) || [];
     message.info = object.info !== undefined && object.info !== null ? ProviderInfo.fromPartial(object.info) : undefined;
     return message;
+  },
+
+  fromAmino(object: MsgUpdateProviderSDKType): MsgUpdateProvider {
+    return {
+      owner: isSet(object.owner) ? object.owner : undefined,
+      hostUri: isSet(object.host_uri) ? object.host_uri : undefined,
+      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromAmino(e)) : [],
+      info: isSet(object.info) ? ProviderInfo.fromAmino(object.info) : undefined
+    };
+  },
+
+  toAmino(message: MsgUpdateProvider): MsgUpdateProviderSDKType {
+    const obj: any = {};
+    message.owner !== undefined && (obj.owner = message.owner);
+    message.hostUri !== undefined && (obj.host_uri = message.hostUri);
+
+    if (message.attributes) {
+      obj.attributes = message.attributes.map(e => e ? Attribute.toAmino(e) : undefined);
+    } else {
+      obj.attributes = [];
+    }
+
+    message.info !== undefined && (obj.info = message.info ? ProviderInfo.toAmino(message.info) : undefined);
+    return obj;
   }
 
 };
@@ -398,6 +469,15 @@ export const MsgUpdateProviderResponse = {
   fromPartial(_: DeepPartial<MsgUpdateProviderResponse>): MsgUpdateProviderResponse {
     const message = createBaseMsgUpdateProviderResponse();
     return message;
+  },
+
+  fromAmino(_: MsgUpdateProviderResponseSDKType): MsgUpdateProviderResponse {
+    return {};
+  },
+
+  toAmino(_: MsgUpdateProviderResponse): MsgUpdateProviderResponseSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -455,6 +535,18 @@ export const MsgDeleteProvider = {
     const message = createBaseMsgDeleteProvider();
     message.owner = object.owner ?? "";
     return message;
+  },
+
+  fromAmino(object: MsgDeleteProviderSDKType): MsgDeleteProvider {
+    return {
+      owner: isSet(object.owner) ? object.owner : undefined
+    };
+  },
+
+  toAmino(message: MsgDeleteProvider): MsgDeleteProviderSDKType {
+    const obj: any = {};
+    message.owner !== undefined && (obj.owner = message.owner);
+    return obj;
   }
 
 };
@@ -498,6 +590,15 @@ export const MsgDeleteProviderResponse = {
   fromPartial(_: DeepPartial<MsgDeleteProviderResponse>): MsgDeleteProviderResponse {
     const message = createBaseMsgDeleteProviderResponse();
     return message;
+  },
+
+  fromAmino(_: MsgDeleteProviderResponseSDKType): MsgDeleteProviderResponse {
+    return {};
+  },
+
+  toAmino(_: MsgDeleteProviderResponse): MsgDeleteProviderResponseSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -597,6 +698,30 @@ export const Provider = {
     message.attributes = object.attributes?.map(e => Attribute.fromPartial(e)) || [];
     message.info = object.info !== undefined && object.info !== null ? ProviderInfo.fromPartial(object.info) : undefined;
     return message;
+  },
+
+  fromAmino(object: ProviderSDKType): Provider {
+    return {
+      owner: isSet(object.owner) ? object.owner : undefined,
+      hostUri: isSet(object.host_uri) ? object.host_uri : undefined,
+      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromAmino(e)) : [],
+      info: isSet(object.info) ? ProviderInfo.fromAmino(object.info) : undefined
+    };
+  },
+
+  toAmino(message: Provider): ProviderSDKType {
+    const obj: any = {};
+    message.owner !== undefined && (obj.owner = message.owner);
+    message.hostUri !== undefined && (obj.host_uri = message.hostUri);
+
+    if (message.attributes) {
+      obj.attributes = message.attributes.map(e => e ? Attribute.toAmino(e) : undefined);
+    } else {
+      obj.attributes = [];
+    }
+
+    message.info !== undefined && (obj.info = message.info ? ProviderInfo.toAmino(message.info) : undefined);
+    return obj;
   }
 
 };

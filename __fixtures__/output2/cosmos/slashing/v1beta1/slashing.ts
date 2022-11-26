@@ -161,6 +161,28 @@ export const ValidatorSigningInfo = {
     message.tombstoned = object.tombstoned ?? false;
     message.missedBlocksCounter = object.missedBlocksCounter !== undefined && object.missedBlocksCounter !== null ? Long.fromValue(object.missedBlocksCounter) : Long.ZERO;
     return message;
+  },
+
+  fromAmino(object: ValidatorSigningInfoSDKType): ValidatorSigningInfo {
+    return {
+      address: isSet(object.address) ? object.address : undefined,
+      startHeight: isSet(object.start_height) ? object.start_height : undefined,
+      indexOffset: isSet(object.index_offset) ? object.index_offset : undefined,
+      jailedUntil: isSet(object.jailed_until) ? Timestamp.fromAmino(object.jailed_until) : undefined,
+      tombstoned: isSet(object.tombstoned) ? object.tombstoned : undefined,
+      missedBlocksCounter: isSet(object.missed_blocks_counter) ? object.missed_blocks_counter : undefined
+    };
+  },
+
+  toAmino(message: ValidatorSigningInfo): ValidatorSigningInfoSDKType {
+    const obj: any = {};
+    message.address !== undefined && (obj.address = message.address);
+    message.startHeight !== undefined && (obj.start_height = message.startHeight);
+    message.indexOffset !== undefined && (obj.index_offset = message.indexOffset);
+    message.jailedUntil !== undefined && (obj.jailed_until = message.jailedUntil ? Timestamp.toAmino(message.jailedUntil) : undefined);
+    message.tombstoned !== undefined && (obj.tombstoned = message.tombstoned);
+    message.missedBlocksCounter !== undefined && (obj.missed_blocks_counter = message.missedBlocksCounter);
+    return obj;
   }
 
 };
@@ -266,6 +288,26 @@ export const Params = {
     message.slashFractionDoubleSign = object.slashFractionDoubleSign ?? new Uint8Array();
     message.slashFractionDowntime = object.slashFractionDowntime ?? new Uint8Array();
     return message;
+  },
+
+  fromAmino(object: ParamsSDKType): Params {
+    return {
+      signedBlocksWindow: isSet(object.signed_blocks_window) ? object.signed_blocks_window : undefined,
+      minSignedPerWindow: isSet(object.min_signed_per_window) ? object.min_signed_per_window : undefined,
+      downtimeJailDuration: isSet(object.downtime_jail_duration) ? Duration.fromAmino(object.downtime_jail_duration) : undefined,
+      slashFractionDoubleSign: isSet(object.slash_fraction_double_sign) ? object.slash_fraction_double_sign : undefined,
+      slashFractionDowntime: isSet(object.slash_fraction_downtime) ? object.slash_fraction_downtime : undefined
+    };
+  },
+
+  toAmino(message: Params): ParamsSDKType {
+    const obj: any = {};
+    message.signedBlocksWindow !== undefined && (obj.signed_blocks_window = message.signedBlocksWindow);
+    message.minSignedPerWindow !== undefined && (obj.min_signed_per_window = message.minSignedPerWindow);
+    message.downtimeJailDuration !== undefined && (obj.downtime_jail_duration = message.downtimeJailDuration ? Duration.toAmino(message.downtimeJailDuration) : undefined);
+    message.slashFractionDoubleSign !== undefined && (obj.slash_fraction_double_sign = message.slashFractionDoubleSign);
+    message.slashFractionDowntime !== undefined && (obj.slash_fraction_downtime = message.slashFractionDowntime);
+    return obj;
   }
 
 };

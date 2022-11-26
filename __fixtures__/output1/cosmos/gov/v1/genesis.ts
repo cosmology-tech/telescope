@@ -232,6 +232,46 @@ export const GenesisState = {
     message.votingParams !== undefined && (obj.voting_params = message.votingParams ? VotingParams.toSDK(message.votingParams) : undefined);
     message.tallyParams !== undefined && (obj.tally_params = message.tallyParams ? TallyParams.toSDK(message.tallyParams) : undefined);
     return obj;
+  },
+
+  fromAmino(object: GenesisStateSDKType): GenesisState {
+    return {
+      startingProposalId: isSet(object.starting_proposal_id) ? object.starting_proposal_id : undefined,
+      deposits: Array.isArray(object?.deposits) ? object.deposits.map((e: any) => Deposit.fromAmino(e)) : [],
+      votes: Array.isArray(object?.votes) ? object.votes.map((e: any) => Vote.fromAmino(e)) : [],
+      proposals: Array.isArray(object?.proposals) ? object.proposals.map((e: any) => Proposal.fromAmino(e)) : [],
+      depositParams: isSet(object.deposit_params) ? DepositParams.fromAmino(object.deposit_params) : undefined,
+      votingParams: isSet(object.voting_params) ? VotingParams.fromAmino(object.voting_params) : undefined,
+      tallyParams: isSet(object.tally_params) ? TallyParams.fromAmino(object.tally_params) : undefined
+    };
+  },
+
+  toAmino(message: GenesisState): GenesisStateSDKType {
+    const obj: any = {};
+    message.startingProposalId !== undefined && (obj.starting_proposal_id = message.startingProposalId);
+
+    if (message.deposits) {
+      obj.deposits = message.deposits.map(e => e ? Deposit.toAmino(e) : undefined);
+    } else {
+      obj.deposits = [];
+    }
+
+    if (message.votes) {
+      obj.votes = message.votes.map(e => e ? Vote.toAmino(e) : undefined);
+    } else {
+      obj.votes = [];
+    }
+
+    if (message.proposals) {
+      obj.proposals = message.proposals.map(e => e ? Proposal.toAmino(e) : undefined);
+    } else {
+      obj.proposals = [];
+    }
+
+    message.depositParams !== undefined && (obj.deposit_params = message.depositParams ? DepositParams.toAmino(message.depositParams) : undefined);
+    message.votingParams !== undefined && (obj.voting_params = message.votingParams ? VotingParams.toAmino(message.votingParams) : undefined);
+    message.tallyParams !== undefined && (obj.tally_params = message.tallyParams ? TallyParams.toAmino(message.tallyParams) : undefined);
+    return obj;
   }
 
 };

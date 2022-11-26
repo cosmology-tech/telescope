@@ -554,6 +554,44 @@ export const Type = {
     message.sourceContext = object.sourceContext !== undefined && object.sourceContext !== null ? SourceContext.fromPartial(object.sourceContext) : undefined;
     message.syntax = object.syntax ?? 0;
     return message;
+  },
+
+  fromAmino(object: TypeSDKType): Type {
+    return {
+      name: isSet(object.name) ? object.name : undefined,
+      fields: Array.isArray(object?.fields) ? object.fields.map((e: any) => Field.fromAmino(e)) : [],
+      oneofs: Array.isArray(object?.oneofs) ? object.oneofs.map((e: any) => e) : [],
+      options: Array.isArray(object?.options) ? object.options.map((e: any) => Option.fromAmino(e)) : [],
+      sourceContext: isSet(object.source_context) ? SourceContext.fromAmino(object.source_context) : undefined,
+      syntax: isSet(object.syntax) ? syntaxFromJSON(object.syntax) : 0
+    };
+  },
+
+  toAmino(message: Type): TypeSDKType {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+
+    if (message.fields) {
+      obj.fields = message.fields.map(e => e ? Field.toAmino(e) : undefined);
+    } else {
+      obj.fields = [];
+    }
+
+    if (message.oneofs) {
+      obj.oneofs = message.oneofs.map(e => e);
+    } else {
+      obj.oneofs = [];
+    }
+
+    if (message.options) {
+      obj.options = message.options.map(e => e ? Option.toAmino(e) : undefined);
+    } else {
+      obj.options = [];
+    }
+
+    message.sourceContext !== undefined && (obj.source_context = message.sourceContext ? SourceContext.toAmino(message.sourceContext) : undefined);
+    message.syntax !== undefined && (obj.syntax = syntaxToJSON(message.syntax));
+    return obj;
   }
 
 };
@@ -725,6 +763,42 @@ export const Field = {
     message.jsonName = object.jsonName ?? "";
     message.defaultValue = object.defaultValue ?? "";
     return message;
+  },
+
+  fromAmino(object: FieldSDKType): Field {
+    return {
+      kind: isSet(object.kind) ? field_KindFromJSON(object.kind) : 0,
+      cardinality: isSet(object.cardinality) ? field_CardinalityFromJSON(object.cardinality) : 0,
+      number: isSet(object.number) ? object.number : undefined,
+      name: isSet(object.name) ? object.name : undefined,
+      typeUrl: isSet(object.type_url) ? object.type_url : undefined,
+      oneofIndex: isSet(object.oneof_index) ? object.oneof_index : undefined,
+      packed: isSet(object.packed) ? object.packed : undefined,
+      options: Array.isArray(object?.options) ? object.options.map((e: any) => Option.fromAmino(e)) : [],
+      jsonName: isSet(object.json_name) ? object.json_name : undefined,
+      defaultValue: isSet(object.default_value) ? object.default_value : undefined
+    };
+  },
+
+  toAmino(message: Field): FieldSDKType {
+    const obj: any = {};
+    message.kind !== undefined && (obj.kind = field_KindToJSON(message.kind));
+    message.cardinality !== undefined && (obj.cardinality = field_CardinalityToJSON(message.cardinality));
+    message.number !== undefined && (obj.number = message.number);
+    message.name !== undefined && (obj.name = message.name);
+    message.typeUrl !== undefined && (obj.type_url = message.typeUrl);
+    message.oneofIndex !== undefined && (obj.oneof_index = message.oneofIndex);
+    message.packed !== undefined && (obj.packed = message.packed);
+
+    if (message.options) {
+      obj.options = message.options.map(e => e ? Option.toAmino(e) : undefined);
+    } else {
+      obj.options = [];
+    }
+
+    message.jsonName !== undefined && (obj.json_name = message.jsonName);
+    message.defaultValue !== undefined && (obj.default_value = message.defaultValue);
+    return obj;
   }
 
 };
@@ -841,6 +915,37 @@ export const Enum = {
     message.sourceContext = object.sourceContext !== undefined && object.sourceContext !== null ? SourceContext.fromPartial(object.sourceContext) : undefined;
     message.syntax = object.syntax ?? 0;
     return message;
+  },
+
+  fromAmino(object: EnumSDKType): Enum {
+    return {
+      name: isSet(object.name) ? object.name : undefined,
+      enumvalue: Array.isArray(object?.enumvalue) ? object.enumvalue.map((e: any) => EnumValue.fromAmino(e)) : [],
+      options: Array.isArray(object?.options) ? object.options.map((e: any) => Option.fromAmino(e)) : [],
+      sourceContext: isSet(object.source_context) ? SourceContext.fromAmino(object.source_context) : undefined,
+      syntax: isSet(object.syntax) ? syntaxFromJSON(object.syntax) : 0
+    };
+  },
+
+  toAmino(message: Enum): EnumSDKType {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+
+    if (message.enumvalue) {
+      obj.enumvalue = message.enumvalue.map(e => e ? EnumValue.toAmino(e) : undefined);
+    } else {
+      obj.enumvalue = [];
+    }
+
+    if (message.options) {
+      obj.options = message.options.map(e => e ? Option.toAmino(e) : undefined);
+    } else {
+      obj.options = [];
+    }
+
+    message.sourceContext !== undefined && (obj.source_context = message.sourceContext ? SourceContext.toAmino(message.sourceContext) : undefined);
+    message.syntax !== undefined && (obj.syntax = syntaxToJSON(message.syntax));
+    return obj;
   }
 
 };
@@ -928,6 +1033,28 @@ export const EnumValue = {
     message.number = object.number ?? 0;
     message.options = object.options?.map(e => Option.fromPartial(e)) || [];
     return message;
+  },
+
+  fromAmino(object: EnumValueSDKType): EnumValue {
+    return {
+      name: isSet(object.name) ? object.name : undefined,
+      number: isSet(object.number) ? object.number : undefined,
+      options: Array.isArray(object?.options) ? object.options.map((e: any) => Option.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: EnumValue): EnumValueSDKType {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    message.number !== undefined && (obj.number = message.number);
+
+    if (message.options) {
+      obj.options = message.options.map(e => e ? Option.toAmino(e) : undefined);
+    } else {
+      obj.options = [];
+    }
+
+    return obj;
   }
 
 };
@@ -997,6 +1124,20 @@ export const Option = {
     message.name = object.name ?? "";
     message.value = object.value !== undefined && object.value !== null ? Any.fromPartial(object.value) : undefined;
     return message;
+  },
+
+  fromAmino(object: OptionSDKType): Option {
+    return {
+      name: isSet(object.name) ? object.name : undefined,
+      value: isSet(object.value) ? Any.fromAmino(object.value) : undefined
+    };
+  },
+
+  toAmino(message: Option): OptionSDKType {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    message.value !== undefined && (obj.value = message.value ? Any.toAmino(message.value) : undefined);
+    return obj;
   }
 
 };

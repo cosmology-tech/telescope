@@ -113,6 +113,15 @@ export const QueryTotalUnclaimedRequest = {
   fromPartial(_: DeepPartial<QueryTotalUnclaimedRequest>): QueryTotalUnclaimedRequest {
     const message = createBaseQueryTotalUnclaimedRequest();
     return message;
+  },
+
+  fromAmino(_: QueryTotalUnclaimedRequestSDKType): QueryTotalUnclaimedRequest {
+    return {};
+  },
+
+  toAmino(_: QueryTotalUnclaimedRequest): QueryTotalUnclaimedRequestSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -176,6 +185,24 @@ export const QueryTotalUnclaimedResponse = {
     const message = createBaseQueryTotalUnclaimedResponse();
     message.coins = object.coins?.map(e => Coin.fromPartial(e)) || [];
     return message;
+  },
+
+  fromAmino(object: QueryTotalUnclaimedResponseSDKType): QueryTotalUnclaimedResponse {
+    return {
+      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: QueryTotalUnclaimedResponse): QueryTotalUnclaimedResponseSDKType {
+    const obj: any = {};
+
+    if (message.coins) {
+      obj.coins = message.coins.map(e => e ? Coin.toAmino(e) : undefined);
+    } else {
+      obj.coins = [];
+    }
+
+    return obj;
   }
 
 };
@@ -219,6 +246,15 @@ export const QueryParamsRequest = {
   fromPartial(_: DeepPartial<QueryParamsRequest>): QueryParamsRequest {
     const message = createBaseQueryParamsRequest();
     return message;
+  },
+
+  fromAmino(_: QueryParamsRequestSDKType): QueryParamsRequest {
+    return {};
+  },
+
+  toAmino(_: QueryParamsRequest): QueryParamsRequestSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -276,6 +312,18 @@ export const QueryParamsResponse = {
     const message = createBaseQueryParamsResponse();
     message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     return message;
+  },
+
+  fromAmino(object: QueryParamsResponseSDKType): QueryParamsResponse {
+    return {
+      params: isSet(object.params) ? Params.fromAmino(object.params) : undefined
+    };
+  },
+
+  toAmino(message: QueryParamsResponse): QueryParamsResponseSDKType {
+    const obj: any = {};
+    message.params !== undefined && (obj.params = message.params ? Params.toAmino(message.params) : undefined);
+    return obj;
   }
 
 };
@@ -333,6 +381,18 @@ export const QueryClaimsRecordsRequest = {
     const message = createBaseQueryClaimsRecordsRequest();
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromAmino(object: QueryClaimsRecordsRequestSDKType): QueryClaimsRecordsRequest {
+    return {
+      pagination: isSet(object.pagination) ? PageRequest.fromAmino(object.pagination) : undefined
+    };
+  },
+
+  toAmino(message: QueryClaimsRecordsRequest): QueryClaimsRecordsRequestSDKType {
+    const obj: any = {};
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined);
+    return obj;
   }
 
 };
@@ -408,6 +468,26 @@ export const QueryClaimsRecordsResponse = {
     message.claims = object.claims?.map(e => ClaimsRecordAddress.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromAmino(object: QueryClaimsRecordsResponseSDKType): QueryClaimsRecordsResponse {
+    return {
+      claims: Array.isArray(object?.claims) ? object.claims.map((e: any) => ClaimsRecordAddress.fromAmino(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromAmino(object.pagination) : undefined
+    };
+  },
+
+  toAmino(message: QueryClaimsRecordsResponse): QueryClaimsRecordsResponseSDKType {
+    const obj: any = {};
+
+    if (message.claims) {
+      obj.claims = message.claims.map(e => e ? ClaimsRecordAddress.toAmino(e) : undefined);
+    } else {
+      obj.claims = [];
+    }
+
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined);
+    return obj;
   }
 
 };
@@ -465,6 +545,18 @@ export const QueryClaimsRecordRequest = {
     const message = createBaseQueryClaimsRecordRequest();
     message.address = object.address ?? "";
     return message;
+  },
+
+  fromAmino(object: QueryClaimsRecordRequestSDKType): QueryClaimsRecordRequest {
+    return {
+      address: isSet(object.address) ? object.address : undefined
+    };
+  },
+
+  toAmino(message: QueryClaimsRecordRequest): QueryClaimsRecordRequestSDKType {
+    const obj: any = {};
+    message.address !== undefined && (obj.address = message.address);
+    return obj;
   }
 
 };
@@ -540,6 +632,26 @@ export const QueryClaimsRecordResponse = {
     message.initialClaimableAmount = object.initialClaimableAmount ?? "";
     message.claims = object.claims?.map(e => Claim.fromPartial(e)) || [];
     return message;
+  },
+
+  fromAmino(object: QueryClaimsRecordResponseSDKType): QueryClaimsRecordResponse {
+    return {
+      initialClaimableAmount: isSet(object.initial_claimable_amount) ? object.initial_claimable_amount : undefined,
+      claims: Array.isArray(object?.claims) ? object.claims.map((e: any) => Claim.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: QueryClaimsRecordResponse): QueryClaimsRecordResponseSDKType {
+    const obj: any = {};
+    message.initialClaimableAmount !== undefined && (obj.initial_claimable_amount = message.initialClaimableAmount);
+
+    if (message.claims) {
+      obj.claims = message.claims.map(e => e ? Claim.toAmino(e) : undefined);
+    } else {
+      obj.claims = [];
+    }
+
+    return obj;
   }
 
 };

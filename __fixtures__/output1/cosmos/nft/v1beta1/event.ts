@@ -153,6 +153,24 @@ export const EventSend = {
     message.sender !== undefined && (obj.sender = message.sender);
     message.receiver !== undefined && (obj.receiver = message.receiver);
     return obj;
+  },
+
+  fromAmino(object: EventSendSDKType): EventSend {
+    return {
+      classId: isSet(object.class_id) ? object.class_id : undefined,
+      id: isSet(object.id) ? object.id : undefined,
+      sender: isSet(object.sender) ? object.sender : undefined,
+      receiver: isSet(object.receiver) ? object.receiver : undefined
+    };
+  },
+
+  toAmino(message: EventSend): EventSendSDKType {
+    const obj: any = {};
+    message.classId !== undefined && (obj.class_id = message.classId);
+    message.id !== undefined && (obj.id = message.id);
+    message.sender !== undefined && (obj.sender = message.sender);
+    message.receiver !== undefined && (obj.receiver = message.receiver);
+    return obj;
   }
 
 };
@@ -250,6 +268,22 @@ export const EventMint = {
     message.id !== undefined && (obj.id = message.id);
     message.owner !== undefined && (obj.owner = message.owner);
     return obj;
+  },
+
+  fromAmino(object: EventMintSDKType): EventMint {
+    return {
+      classId: isSet(object.class_id) ? object.class_id : undefined,
+      id: isSet(object.id) ? object.id : undefined,
+      owner: isSet(object.owner) ? object.owner : undefined
+    };
+  },
+
+  toAmino(message: EventMint): EventMintSDKType {
+    const obj: any = {};
+    message.classId !== undefined && (obj.class_id = message.classId);
+    message.id !== undefined && (obj.id = message.id);
+    message.owner !== undefined && (obj.owner = message.owner);
+    return obj;
   }
 
 };
@@ -342,6 +376,22 @@ export const EventBurn = {
   },
 
   toSDK(message: EventBurn): EventBurnSDKType {
+    const obj: any = {};
+    message.classId !== undefined && (obj.class_id = message.classId);
+    message.id !== undefined && (obj.id = message.id);
+    message.owner !== undefined && (obj.owner = message.owner);
+    return obj;
+  },
+
+  fromAmino(object: EventBurnSDKType): EventBurn {
+    return {
+      classId: isSet(object.class_id) ? object.class_id : undefined,
+      id: isSet(object.id) ? object.id : undefined,
+      owner: isSet(object.owner) ? object.owner : undefined
+    };
+  },
+
+  toAmino(message: EventBurn): EventBurnSDKType {
     const obj: any = {};
     message.classId !== undefined && (obj.class_id = message.classId);
     message.id !== undefined && (obj.id = message.id);

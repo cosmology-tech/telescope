@@ -282,6 +282,31 @@ export const Quota = {
     message.limits = object.limits?.map(e => QuotaLimit.fromPartial(e)) || [];
     message.metricRules = object.metricRules?.map(e => MetricRule.fromPartial(e)) || [];
     return message;
+  },
+
+  fromAmino(object: QuotaSDKType): Quota {
+    return {
+      limits: Array.isArray(object?.limits) ? object.limits.map((e: any) => QuotaLimit.fromAmino(e)) : [],
+      metricRules: Array.isArray(object?.metric_rules) ? object.metric_rules.map((e: any) => MetricRule.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: Quota): QuotaSDKType {
+    const obj: any = {};
+
+    if (message.limits) {
+      obj.limits = message.limits.map(e => e ? QuotaLimit.toAmino(e) : undefined);
+    } else {
+      obj.limits = [];
+    }
+
+    if (message.metricRules) {
+      obj.metric_rules = message.metricRules.map(e => e ? MetricRule.toAmino(e) : undefined);
+    } else {
+      obj.metric_rules = [];
+    }
+
+    return obj;
   }
 
 };
@@ -351,6 +376,20 @@ export const MetricRule_MetricCostsEntry = {
     message.key = object.key ?? "";
     message.value = object.value !== undefined && object.value !== null ? Long.fromValue(object.value) : Long.ZERO;
     return message;
+  },
+
+  fromAmino(object: MetricRule_MetricCostsEntrySDKType): MetricRule_MetricCostsEntry {
+    return {
+      key: isSet(object.key) ? object.key : undefined,
+      value: isSet(object.value) ? object.value : undefined
+    };
+  },
+
+  toAmino(message: MetricRule_MetricCostsEntry): MetricRule_MetricCostsEntrySDKType {
+    const obj: any = {};
+    message.key !== undefined && (obj.key = message.key);
+    message.value !== undefined && (obj.value = message.value);
+    return obj;
   }
 
 };
@@ -447,6 +486,32 @@ export const MetricRule = {
       return acc;
     }, {});
     return message;
+  },
+
+  fromAmino(object: MetricRuleSDKType): MetricRule {
+    return {
+      selector: isSet(object.selector) ? object.selector : undefined,
+      metricCosts: isObject(object.metric_costs) ? Object.entries(object.metric_costs).reduce<{
+        [key: string]: Long;
+      }>((acc, [key, value]) => {
+        acc[key] = Long.fromValue((value as Long | string));
+        return acc;
+      }, {}) : {}
+    };
+  },
+
+  toAmino(message: MetricRule): MetricRuleSDKType {
+    const obj: any = {};
+    message.selector !== undefined && (obj.selector = message.selector);
+    obj.metric_costs = {};
+
+    if (message.metricCosts) {
+      Object.entries(message.metricCosts).forEach(([k, v]) => {
+        obj.metric_costs[k] = v.toString();
+      });
+    }
+
+    return obj;
   }
 
 };
@@ -516,6 +581,20 @@ export const QuotaLimit_ValuesEntry = {
     message.key = object.key ?? "";
     message.value = object.value !== undefined && object.value !== null ? Long.fromValue(object.value) : Long.ZERO;
     return message;
+  },
+
+  fromAmino(object: QuotaLimit_ValuesEntrySDKType): QuotaLimit_ValuesEntry {
+    return {
+      key: isSet(object.key) ? object.key : undefined,
+      value: isSet(object.value) ? object.value : undefined
+    };
+  },
+
+  toAmino(message: QuotaLimit_ValuesEntry): QuotaLimit_ValuesEntrySDKType {
+    const obj: any = {};
+    message.key !== undefined && (obj.key = message.key);
+    message.value !== undefined && (obj.value = message.value);
+    return obj;
   }
 
 };
@@ -709,6 +788,48 @@ export const QuotaLimit = {
     }, {});
     message.displayName = object.displayName ?? "";
     return message;
+  },
+
+  fromAmino(object: QuotaLimitSDKType): QuotaLimit {
+    return {
+      name: isSet(object.name) ? object.name : undefined,
+      description: isSet(object.description) ? object.description : undefined,
+      defaultLimit: isSet(object.default_limit) ? object.default_limit : undefined,
+      maxLimit: isSet(object.max_limit) ? object.max_limit : undefined,
+      freeTier: isSet(object.free_tier) ? object.free_tier : undefined,
+      duration: isSet(object.duration) ? object.duration : undefined,
+      metric: isSet(object.metric) ? object.metric : undefined,
+      unit: isSet(object.unit) ? object.unit : undefined,
+      values: isObject(object.values) ? Object.entries(object.values).reduce<{
+        [key: string]: Long;
+      }>((acc, [key, value]) => {
+        acc[key] = Long.fromValue((value as Long | string));
+        return acc;
+      }, {}) : {},
+      displayName: isSet(object.display_name) ? object.display_name : undefined
+    };
+  },
+
+  toAmino(message: QuotaLimit): QuotaLimitSDKType {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    message.description !== undefined && (obj.description = message.description);
+    message.defaultLimit !== undefined && (obj.default_limit = message.defaultLimit);
+    message.maxLimit !== undefined && (obj.max_limit = message.maxLimit);
+    message.freeTier !== undefined && (obj.free_tier = message.freeTier);
+    message.duration !== undefined && (obj.duration = message.duration);
+    message.metric !== undefined && (obj.metric = message.metric);
+    message.unit !== undefined && (obj.unit = message.unit);
+    obj.values = {};
+
+    if (message.values) {
+      Object.entries(message.values).forEach(([k, v]) => {
+        obj.values[k] = v.toString();
+      });
+    }
+
+    message.displayName !== undefined && (obj.display_name = message.displayName);
+    return obj;
   }
 
 };

@@ -189,6 +189,31 @@ export const EvalState = {
     message.values = object.values?.map(e => ExprValue.fromPartial(e)) || [];
     message.results = object.results?.map(e => EvalState_Result.fromPartial(e)) || [];
     return message;
+  },
+
+  fromAmino(object: EvalStateSDKType): EvalState {
+    return {
+      values: Array.isArray(object?.values) ? object.values.map((e: any) => ExprValue.fromAmino(e)) : [],
+      results: Array.isArray(object?.results) ? object.results.map((e: any) => EvalState_Result.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: EvalState): EvalStateSDKType {
+    const obj: any = {};
+
+    if (message.values) {
+      obj.values = message.values.map(e => e ? ExprValue.toAmino(e) : undefined);
+    } else {
+      obj.values = [];
+    }
+
+    if (message.results) {
+      obj.results = message.results.map(e => e ? EvalState_Result.toAmino(e) : undefined);
+    } else {
+      obj.results = [];
+    }
+
+    return obj;
   }
 
 };
@@ -258,6 +283,20 @@ export const EvalState_Result = {
     message.expr = object.expr !== undefined && object.expr !== null ? IdRef.fromPartial(object.expr) : undefined;
     message.value = object.value ?? 0;
     return message;
+  },
+
+  fromAmino(object: EvalState_ResultSDKType): EvalState_Result {
+    return {
+      expr: isSet(object.expr) ? IdRef.fromAmino(object.expr) : undefined,
+      value: isSet(object.value) ? object.value : undefined
+    };
+  },
+
+  toAmino(message: EvalState_Result): EvalState_ResultSDKType {
+    const obj: any = {};
+    message.expr !== undefined && (obj.expr = message.expr ? IdRef.toAmino(message.expr) : undefined);
+    message.value !== undefined && (obj.value = message.value);
+    return obj;
   }
 
 };
@@ -339,6 +378,22 @@ export const ExprValue = {
     message.error = object.error !== undefined && object.error !== null ? ErrorSet.fromPartial(object.error) : undefined;
     message.unknown = object.unknown !== undefined && object.unknown !== null ? UnknownSet.fromPartial(object.unknown) : undefined;
     return message;
+  },
+
+  fromAmino(object: ExprValueSDKType): ExprValue {
+    return {
+      value: isSet(object.value) ? Value.fromAmino(object.value) : undefined,
+      error: isSet(object.error) ? ErrorSet.fromAmino(object.error) : undefined,
+      unknown: isSet(object.unknown) ? UnknownSet.fromAmino(object.unknown) : undefined
+    };
+  },
+
+  toAmino(message: ExprValue): ExprValueSDKType {
+    const obj: any = {};
+    message.value !== undefined && (obj.value = message.value ? Value.toAmino(message.value) : undefined);
+    message.error !== undefined && (obj.error = message.error ? ErrorSet.toAmino(message.error) : undefined);
+    message.unknown !== undefined && (obj.unknown = message.unknown ? UnknownSet.toAmino(message.unknown) : undefined);
+    return obj;
   }
 
 };
@@ -402,6 +457,24 @@ export const ErrorSet = {
     const message = createBaseErrorSet();
     message.errors = object.errors?.map(e => Status.fromPartial(e)) || [];
     return message;
+  },
+
+  fromAmino(object: ErrorSetSDKType): ErrorSet {
+    return {
+      errors: Array.isArray(object?.errors) ? object.errors.map((e: any) => Status.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: ErrorSet): ErrorSetSDKType {
+    const obj: any = {};
+
+    if (message.errors) {
+      obj.errors = message.errors.map(e => e ? Status.toAmino(e) : undefined);
+    } else {
+      obj.errors = [];
+    }
+
+    return obj;
   }
 
 };
@@ -465,6 +538,24 @@ export const UnknownSet = {
     const message = createBaseUnknownSet();
     message.exprs = object.exprs?.map(e => IdRef.fromPartial(e)) || [];
     return message;
+  },
+
+  fromAmino(object: UnknownSetSDKType): UnknownSet {
+    return {
+      exprs: Array.isArray(object?.exprs) ? object.exprs.map((e: any) => IdRef.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: UnknownSet): UnknownSetSDKType {
+    const obj: any = {};
+
+    if (message.exprs) {
+      obj.exprs = message.exprs.map(e => e ? IdRef.toAmino(e) : undefined);
+    } else {
+      obj.exprs = [];
+    }
+
+    return obj;
   }
 
 };
@@ -522,6 +613,18 @@ export const IdRef = {
     const message = createBaseIdRef();
     message.id = object.id ?? 0;
     return message;
+  },
+
+  fromAmino(object: IdRefSDKType): IdRef {
+    return {
+      id: isSet(object.id) ? object.id : undefined
+    };
+  },
+
+  toAmino(message: IdRef): IdRefSDKType {
+    const obj: any = {};
+    message.id !== undefined && (obj.id = message.id);
+    return obj;
   }
 
 };

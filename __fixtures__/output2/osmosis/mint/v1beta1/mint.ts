@@ -149,6 +149,18 @@ export const Minter = {
     const message = createBaseMinter();
     message.epochProvisions = object.epochProvisions ?? "";
     return message;
+  },
+
+  fromAmino(object: MinterSDKType): Minter {
+    return {
+      epochProvisions: isSet(object.epoch_provisions) ? object.epoch_provisions : undefined
+    };
+  },
+
+  toAmino(message: Minter): MinterSDKType {
+    const obj: any = {};
+    message.epochProvisions !== undefined && (obj.epoch_provisions = message.epochProvisions);
+    return obj;
   }
 
 };
@@ -218,6 +230,20 @@ export const WeightedAddress = {
     message.address = object.address ?? "";
     message.weight = object.weight ?? "";
     return message;
+  },
+
+  fromAmino(object: WeightedAddressSDKType): WeightedAddress {
+    return {
+      address: isSet(object.address) ? object.address : undefined,
+      weight: isSet(object.weight) ? object.weight : undefined
+    };
+  },
+
+  toAmino(message: WeightedAddress): WeightedAddressSDKType {
+    const obj: any = {};
+    message.address !== undefined && (obj.address = message.address);
+    message.weight !== undefined && (obj.weight = message.weight);
+    return obj;
   }
 
 };
@@ -311,6 +337,24 @@ export const DistributionProportions = {
     message.developerRewards = object.developerRewards ?? "";
     message.communityPool = object.communityPool ?? "";
     return message;
+  },
+
+  fromAmino(object: DistributionProportionsSDKType): DistributionProportions {
+    return {
+      staking: isSet(object.staking) ? object.staking : undefined,
+      poolIncentives: isSet(object.pool_incentives) ? object.pool_incentives : undefined,
+      developerRewards: isSet(object.developer_rewards) ? object.developer_rewards : undefined,
+      communityPool: isSet(object.community_pool) ? object.community_pool : undefined
+    };
+  },
+
+  toAmino(message: DistributionProportions): DistributionProportionsSDKType {
+    const obj: any = {};
+    message.staking !== undefined && (obj.staking = message.staking);
+    message.poolIncentives !== undefined && (obj.pool_incentives = message.poolIncentives);
+    message.developerRewards !== undefined && (obj.developer_rewards = message.developerRewards);
+    message.communityPool !== undefined && (obj.community_pool = message.communityPool);
+    return obj;
   }
 
 };
@@ -458,6 +502,38 @@ export const Params = {
     message.weightedDeveloperRewardsReceivers = object.weightedDeveloperRewardsReceivers?.map(e => WeightedAddress.fromPartial(e)) || [];
     message.mintingRewardsDistributionStartEpoch = object.mintingRewardsDistributionStartEpoch !== undefined && object.mintingRewardsDistributionStartEpoch !== null ? Long.fromValue(object.mintingRewardsDistributionStartEpoch) : Long.ZERO;
     return message;
+  },
+
+  fromAmino(object: ParamsSDKType): Params {
+    return {
+      mintDenom: isSet(object.mint_denom) ? object.mint_denom : undefined,
+      genesisEpochProvisions: isSet(object.genesis_epoch_provisions) ? object.genesis_epoch_provisions : undefined,
+      epochIdentifier: isSet(object.epoch_identifier) ? object.epoch_identifier : undefined,
+      reductionPeriodInEpochs: isSet(object.reduction_period_in_epochs) ? object.reduction_period_in_epochs : undefined,
+      reductionFactor: isSet(object.reduction_factor) ? object.reduction_factor : undefined,
+      distributionProportions: isSet(object.distribution_proportions) ? DistributionProportions.fromAmino(object.distribution_proportions) : undefined,
+      weightedDeveloperRewardsReceivers: Array.isArray(object?.weighted_developer_rewards_receivers) ? object.weighted_developer_rewards_receivers.map((e: any) => WeightedAddress.fromAmino(e)) : [],
+      mintingRewardsDistributionStartEpoch: isSet(object.minting_rewards_distribution_start_epoch) ? object.minting_rewards_distribution_start_epoch : undefined
+    };
+  },
+
+  toAmino(message: Params): ParamsSDKType {
+    const obj: any = {};
+    message.mintDenom !== undefined && (obj.mint_denom = message.mintDenom);
+    message.genesisEpochProvisions !== undefined && (obj.genesis_epoch_provisions = message.genesisEpochProvisions);
+    message.epochIdentifier !== undefined && (obj.epoch_identifier = message.epochIdentifier);
+    message.reductionPeriodInEpochs !== undefined && (obj.reduction_period_in_epochs = message.reductionPeriodInEpochs);
+    message.reductionFactor !== undefined && (obj.reduction_factor = message.reductionFactor);
+    message.distributionProportions !== undefined && (obj.distribution_proportions = message.distributionProportions ? DistributionProportions.toAmino(message.distributionProportions) : undefined);
+
+    if (message.weightedDeveloperRewardsReceivers) {
+      obj.weighted_developer_rewards_receivers = message.weightedDeveloperRewardsReceivers.map(e => e ? WeightedAddress.toAmino(e) : undefined);
+    } else {
+      obj.weighted_developer_rewards_receivers = [];
+    }
+
+    message.mintingRewardsDistributionStartEpoch !== undefined && (obj.minting_rewards_distribution_start_epoch = message.mintingRewardsDistributionStartEpoch);
+    return obj;
   }
 
 };

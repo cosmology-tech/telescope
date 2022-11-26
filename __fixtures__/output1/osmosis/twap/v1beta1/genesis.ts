@@ -113,6 +113,20 @@ export const Params = {
     message.pruneEpochIdentifier !== undefined && (obj.prune_epoch_identifier = message.pruneEpochIdentifier);
     message.recordHistoryKeepPeriod !== undefined && (obj.record_history_keep_period = message.recordHistoryKeepPeriod ? Duration.toSDK(message.recordHistoryKeepPeriod) : undefined);
     return obj;
+  },
+
+  fromAmino(object: ParamsSDKType): Params {
+    return {
+      pruneEpochIdentifier: isSet(object.prune_epoch_identifier) ? object.prune_epoch_identifier : undefined,
+      recordHistoryKeepPeriod: isSet(object.record_history_keep_period) ? Duration.fromAmino(object.record_history_keep_period) : undefined
+    };
+  },
+
+  toAmino(message: Params): ParamsSDKType {
+    const obj: any = {};
+    message.pruneEpochIdentifier !== undefined && (obj.prune_epoch_identifier = message.pruneEpochIdentifier);
+    message.recordHistoryKeepPeriod !== undefined && (obj.record_history_keep_period = message.recordHistoryKeepPeriod ? Duration.toAmino(message.recordHistoryKeepPeriod) : undefined);
+    return obj;
   }
 
 };
@@ -207,6 +221,26 @@ export const GenesisState = {
     }
 
     message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: GenesisStateSDKType): GenesisState {
+    return {
+      twaps: Array.isArray(object?.twaps) ? object.twaps.map((e: any) => TwapRecord.fromAmino(e)) : [],
+      params: isSet(object.params) ? Params.fromAmino(object.params) : undefined
+    };
+  },
+
+  toAmino(message: GenesisState): GenesisStateSDKType {
+    const obj: any = {};
+
+    if (message.twaps) {
+      obj.twaps = message.twaps.map(e => e ? TwapRecord.toAmino(e) : undefined);
+    } else {
+      obj.twaps = [];
+    }
+
+    message.params !== undefined && (obj.params = message.params ? Params.toAmino(message.params) : undefined);
     return obj;
   }
 

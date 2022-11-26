@@ -245,6 +245,20 @@ export const Struct_FieldsEntry = {
     message.key !== undefined && (obj.key = message.key);
     message.value !== undefined && (obj.value = message.value ? Value.toSDK(message.value) : undefined);
     return obj;
+  },
+
+  fromAmino(object: Struct_FieldsEntrySDKType): Struct_FieldsEntry {
+    return {
+      key: isSet(object.key) ? object.key : undefined,
+      value: isSet(object.value) ? Value.fromAmino(object.value) : undefined
+    };
+  },
+
+  toAmino(message: Struct_FieldsEntry): Struct_FieldsEntrySDKType {
+    const obj: any = {};
+    message.key !== undefined && (obj.key = message.key);
+    message.value !== undefined && (obj.value = message.value ? Value.toAmino(message.value) : undefined);
+    return obj;
   }
 
 };
@@ -349,6 +363,30 @@ export const Struct = {
     if (message.fields) {
       Object.entries(message.fields).forEach(([k, v]) => {
         obj.fields[k] = Value.toSDK(v);
+      });
+    }
+
+    return obj;
+  },
+
+  fromAmino(object: StructSDKType): Struct {
+    return {
+      fields: isObject(object.fields) ? Object.entries(object.fields).reduce<{
+        [key: string]: Value;
+      }>((acc, [key, value]) => {
+        acc[key] = Value.fromAmino(value);
+        return acc;
+      }, {}) : {}
+    };
+  },
+
+  toAmino(message: Struct): StructSDKType {
+    const obj: any = {};
+    obj.fields = {};
+
+    if (message.fields) {
+      Object.entries(message.fields).forEach(([k, v]) => {
+        obj.fields[k] = Value.toAmino(v);
       });
     }
 
@@ -492,6 +530,28 @@ export const Value = {
     message.structValue !== undefined && (obj.struct_value = message.structValue ? Struct.toSDK(message.structValue) : undefined);
     message.listValue !== undefined && (obj.list_value = message.listValue ? ListValue.toSDK(message.listValue) : undefined);
     return obj;
+  },
+
+  fromAmino(object: ValueSDKType): Value {
+    return {
+      nullValue: isSet(object.null_value) ? nullValueFromJSON(object.null_value) : undefined,
+      numberValue: isSet(object.number_value) ? object.number_value : undefined,
+      stringValue: isSet(object.string_value) ? object.string_value : undefined,
+      boolValue: isSet(object.bool_value) ? object.bool_value : undefined,
+      structValue: isSet(object.struct_value) ? Struct.fromAmino(object.struct_value) : undefined,
+      listValue: isSet(object.list_value) ? ListValue.fromAmino(object.list_value) : undefined
+    };
+  },
+
+  toAmino(message: Value): ValueSDKType {
+    const obj: any = {};
+    message.nullValue !== undefined && (obj.null_value = nullValueToJSON(message.nullValue));
+    message.numberValue !== undefined && (obj.number_value = message.numberValue);
+    message.stringValue !== undefined && (obj.string_value = message.stringValue);
+    message.boolValue !== undefined && (obj.bool_value = message.boolValue);
+    message.structValue !== undefined && (obj.struct_value = message.structValue ? Struct.toAmino(message.structValue) : undefined);
+    message.listValue !== undefined && (obj.list_value = message.listValue ? ListValue.toAmino(message.listValue) : undefined);
+    return obj;
   }
 
 };
@@ -568,6 +628,24 @@ export const ListValue = {
 
     if (message.values) {
       obj.values = message.values.map(e => e ? Value.toSDK(e) : undefined);
+    } else {
+      obj.values = [];
+    }
+
+    return obj;
+  },
+
+  fromAmino(object: ListValueSDKType): ListValue {
+    return {
+      values: Array.isArray(object?.values) ? object.values.map((e: any) => Value.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: ListValue): ListValueSDKType {
+    const obj: any = {};
+
+    if (message.values) {
+      obj.values = message.values.map(e => e ? Value.toAmino(e) : undefined);
     } else {
       obj.values = [];
     }

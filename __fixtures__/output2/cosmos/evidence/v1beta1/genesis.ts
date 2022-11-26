@@ -70,6 +70,24 @@ export const GenesisState = {
     const message = createBaseGenesisState();
     message.evidence = object.evidence?.map(e => Any.fromPartial(e)) || [];
     return message;
+  },
+
+  fromAmino(object: GenesisStateSDKType): GenesisState {
+    return {
+      evidence: Array.isArray(object?.evidence) ? object.evidence.map((e: any) => Any.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: GenesisState): GenesisStateSDKType {
+    const obj: any = {};
+
+    if (message.evidence) {
+      obj.evidence = message.evidence.map(e => e ? Any.toAmino(e) : undefined);
+    } else {
+      obj.evidence = [];
+    }
+
+    return obj;
   }
 
 };

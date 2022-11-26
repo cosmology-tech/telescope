@@ -441,6 +441,20 @@ export const QueryChannelRequest = {
     message.portId = object.portId ?? "";
     message.channelId = object.channelId ?? "";
     return message;
+  },
+
+  fromAmino(object: QueryChannelRequestSDKType): QueryChannelRequest {
+    return {
+      portId: isSet(object.port_id) ? object.port_id : undefined,
+      channelId: isSet(object.channel_id) ? object.channel_id : undefined
+    };
+  },
+
+  toAmino(message: QueryChannelRequest): QueryChannelRequestSDKType {
+    const obj: any = {};
+    message.portId !== undefined && (obj.port_id = message.portId);
+    message.channelId !== undefined && (obj.channel_id = message.channelId);
+    return obj;
   }
 
 };
@@ -522,6 +536,22 @@ export const QueryChannelResponse = {
     message.proof = object.proof ?? new Uint8Array();
     message.proofHeight = object.proofHeight !== undefined && object.proofHeight !== null ? Height.fromPartial(object.proofHeight) : undefined;
     return message;
+  },
+
+  fromAmino(object: QueryChannelResponseSDKType): QueryChannelResponse {
+    return {
+      channel: isSet(object.channel) ? Channel.fromAmino(object.channel) : undefined,
+      proof: isSet(object.proof) ? object.proof : undefined,
+      proofHeight: isSet(object.proof_height) ? Height.fromAmino(object.proof_height) : undefined
+    };
+  },
+
+  toAmino(message: QueryChannelResponse): QueryChannelResponseSDKType {
+    const obj: any = {};
+    message.channel !== undefined && (obj.channel = message.channel ? Channel.toAmino(message.channel) : undefined);
+    message.proof !== undefined && (obj.proof = message.proof);
+    message.proofHeight !== undefined && (obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : undefined);
+    return obj;
   }
 
 };
@@ -579,6 +609,18 @@ export const QueryChannelsRequest = {
     const message = createBaseQueryChannelsRequest();
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromAmino(object: QueryChannelsRequestSDKType): QueryChannelsRequest {
+    return {
+      pagination: isSet(object.pagination) ? PageRequest.fromAmino(object.pagination) : undefined
+    };
+  },
+
+  toAmino(message: QueryChannelsRequest): QueryChannelsRequestSDKType {
+    const obj: any = {};
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined);
+    return obj;
   }
 
 };
@@ -666,6 +708,28 @@ export const QueryChannelsResponse = {
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     message.height = object.height !== undefined && object.height !== null ? Height.fromPartial(object.height) : undefined;
     return message;
+  },
+
+  fromAmino(object: QueryChannelsResponseSDKType): QueryChannelsResponse {
+    return {
+      channels: Array.isArray(object?.channels) ? object.channels.map((e: any) => IdentifiedChannel.fromAmino(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromAmino(object.pagination) : undefined,
+      height: isSet(object.height) ? Height.fromAmino(object.height) : undefined
+    };
+  },
+
+  toAmino(message: QueryChannelsResponse): QueryChannelsResponseSDKType {
+    const obj: any = {};
+
+    if (message.channels) {
+      obj.channels = message.channels.map(e => e ? IdentifiedChannel.toAmino(e) : undefined);
+    } else {
+      obj.channels = [];
+    }
+
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined);
+    message.height !== undefined && (obj.height = message.height ? Height.toAmino(message.height) : undefined);
+    return obj;
   }
 
 };
@@ -735,6 +799,20 @@ export const QueryConnectionChannelsRequest = {
     message.connection = object.connection ?? "";
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromAmino(object: QueryConnectionChannelsRequestSDKType): QueryConnectionChannelsRequest {
+    return {
+      connection: isSet(object.connection) ? object.connection : undefined,
+      pagination: isSet(object.pagination) ? PageRequest.fromAmino(object.pagination) : undefined
+    };
+  },
+
+  toAmino(message: QueryConnectionChannelsRequest): QueryConnectionChannelsRequestSDKType {
+    const obj: any = {};
+    message.connection !== undefined && (obj.connection = message.connection);
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined);
+    return obj;
   }
 
 };
@@ -822,6 +900,28 @@ export const QueryConnectionChannelsResponse = {
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     message.height = object.height !== undefined && object.height !== null ? Height.fromPartial(object.height) : undefined;
     return message;
+  },
+
+  fromAmino(object: QueryConnectionChannelsResponseSDKType): QueryConnectionChannelsResponse {
+    return {
+      channels: Array.isArray(object?.channels) ? object.channels.map((e: any) => IdentifiedChannel.fromAmino(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromAmino(object.pagination) : undefined,
+      height: isSet(object.height) ? Height.fromAmino(object.height) : undefined
+    };
+  },
+
+  toAmino(message: QueryConnectionChannelsResponse): QueryConnectionChannelsResponseSDKType {
+    const obj: any = {};
+
+    if (message.channels) {
+      obj.channels = message.channels.map(e => e ? IdentifiedChannel.toAmino(e) : undefined);
+    } else {
+      obj.channels = [];
+    }
+
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined);
+    message.height !== undefined && (obj.height = message.height ? Height.toAmino(message.height) : undefined);
+    return obj;
   }
 
 };
@@ -891,6 +991,20 @@ export const QueryChannelClientStateRequest = {
     message.portId = object.portId ?? "";
     message.channelId = object.channelId ?? "";
     return message;
+  },
+
+  fromAmino(object: QueryChannelClientStateRequestSDKType): QueryChannelClientStateRequest {
+    return {
+      portId: isSet(object.port_id) ? object.port_id : undefined,
+      channelId: isSet(object.channel_id) ? object.channel_id : undefined
+    };
+  },
+
+  toAmino(message: QueryChannelClientStateRequest): QueryChannelClientStateRequestSDKType {
+    const obj: any = {};
+    message.portId !== undefined && (obj.port_id = message.portId);
+    message.channelId !== undefined && (obj.channel_id = message.channelId);
+    return obj;
   }
 
 };
@@ -972,6 +1086,22 @@ export const QueryChannelClientStateResponse = {
     message.proof = object.proof ?? new Uint8Array();
     message.proofHeight = object.proofHeight !== undefined && object.proofHeight !== null ? Height.fromPartial(object.proofHeight) : undefined;
     return message;
+  },
+
+  fromAmino(object: QueryChannelClientStateResponseSDKType): QueryChannelClientStateResponse {
+    return {
+      identifiedClientState: isSet(object.identified_client_state) ? IdentifiedClientState.fromAmino(object.identified_client_state) : undefined,
+      proof: isSet(object.proof) ? object.proof : undefined,
+      proofHeight: isSet(object.proof_height) ? Height.fromAmino(object.proof_height) : undefined
+    };
+  },
+
+  toAmino(message: QueryChannelClientStateResponse): QueryChannelClientStateResponseSDKType {
+    const obj: any = {};
+    message.identifiedClientState !== undefined && (obj.identified_client_state = message.identifiedClientState ? IdentifiedClientState.toAmino(message.identifiedClientState) : undefined);
+    message.proof !== undefined && (obj.proof = message.proof);
+    message.proofHeight !== undefined && (obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : undefined);
+    return obj;
   }
 
 };
@@ -1065,6 +1195,24 @@ export const QueryChannelConsensusStateRequest = {
     message.revisionNumber = object.revisionNumber !== undefined && object.revisionNumber !== null ? Long.fromValue(object.revisionNumber) : Long.UZERO;
     message.revisionHeight = object.revisionHeight !== undefined && object.revisionHeight !== null ? Long.fromValue(object.revisionHeight) : Long.UZERO;
     return message;
+  },
+
+  fromAmino(object: QueryChannelConsensusStateRequestSDKType): QueryChannelConsensusStateRequest {
+    return {
+      portId: isSet(object.port_id) ? object.port_id : undefined,
+      channelId: isSet(object.channel_id) ? object.channel_id : undefined,
+      revisionNumber: isSet(object.revision_number) ? object.revision_number : undefined,
+      revisionHeight: isSet(object.revision_height) ? object.revision_height : undefined
+    };
+  },
+
+  toAmino(message: QueryChannelConsensusStateRequest): QueryChannelConsensusStateRequestSDKType {
+    const obj: any = {};
+    message.portId !== undefined && (obj.port_id = message.portId);
+    message.channelId !== undefined && (obj.channel_id = message.channelId);
+    message.revisionNumber !== undefined && (obj.revision_number = message.revisionNumber);
+    message.revisionHeight !== undefined && (obj.revision_height = message.revisionHeight);
+    return obj;
   }
 
 };
@@ -1158,6 +1306,24 @@ export const QueryChannelConsensusStateResponse = {
     message.proof = object.proof ?? new Uint8Array();
     message.proofHeight = object.proofHeight !== undefined && object.proofHeight !== null ? Height.fromPartial(object.proofHeight) : undefined;
     return message;
+  },
+
+  fromAmino(object: QueryChannelConsensusStateResponseSDKType): QueryChannelConsensusStateResponse {
+    return {
+      consensusState: isSet(object.consensus_state) ? Any.fromAmino(object.consensus_state) : undefined,
+      clientId: isSet(object.client_id) ? object.client_id : undefined,
+      proof: isSet(object.proof) ? object.proof : undefined,
+      proofHeight: isSet(object.proof_height) ? Height.fromAmino(object.proof_height) : undefined
+    };
+  },
+
+  toAmino(message: QueryChannelConsensusStateResponse): QueryChannelConsensusStateResponseSDKType {
+    const obj: any = {};
+    message.consensusState !== undefined && (obj.consensus_state = message.consensusState ? Any.toAmino(message.consensusState) : undefined);
+    message.clientId !== undefined && (obj.client_id = message.clientId);
+    message.proof !== undefined && (obj.proof = message.proof);
+    message.proofHeight !== undefined && (obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : undefined);
+    return obj;
   }
 
 };
@@ -1239,6 +1405,22 @@ export const QueryPacketCommitmentRequest = {
     message.channelId = object.channelId ?? "";
     message.sequence = object.sequence !== undefined && object.sequence !== null ? Long.fromValue(object.sequence) : Long.UZERO;
     return message;
+  },
+
+  fromAmino(object: QueryPacketCommitmentRequestSDKType): QueryPacketCommitmentRequest {
+    return {
+      portId: isSet(object.port_id) ? object.port_id : undefined,
+      channelId: isSet(object.channel_id) ? object.channel_id : undefined,
+      sequence: isSet(object.sequence) ? object.sequence : undefined
+    };
+  },
+
+  toAmino(message: QueryPacketCommitmentRequest): QueryPacketCommitmentRequestSDKType {
+    const obj: any = {};
+    message.portId !== undefined && (obj.port_id = message.portId);
+    message.channelId !== undefined && (obj.channel_id = message.channelId);
+    message.sequence !== undefined && (obj.sequence = message.sequence);
+    return obj;
   }
 
 };
@@ -1320,6 +1502,22 @@ export const QueryPacketCommitmentResponse = {
     message.proof = object.proof ?? new Uint8Array();
     message.proofHeight = object.proofHeight !== undefined && object.proofHeight !== null ? Height.fromPartial(object.proofHeight) : undefined;
     return message;
+  },
+
+  fromAmino(object: QueryPacketCommitmentResponseSDKType): QueryPacketCommitmentResponse {
+    return {
+      commitment: isSet(object.commitment) ? object.commitment : undefined,
+      proof: isSet(object.proof) ? object.proof : undefined,
+      proofHeight: isSet(object.proof_height) ? Height.fromAmino(object.proof_height) : undefined
+    };
+  },
+
+  toAmino(message: QueryPacketCommitmentResponse): QueryPacketCommitmentResponseSDKType {
+    const obj: any = {};
+    message.commitment !== undefined && (obj.commitment = message.commitment);
+    message.proof !== undefined && (obj.proof = message.proof);
+    message.proofHeight !== undefined && (obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : undefined);
+    return obj;
   }
 
 };
@@ -1401,6 +1599,22 @@ export const QueryPacketCommitmentsRequest = {
     message.channelId = object.channelId ?? "";
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromAmino(object: QueryPacketCommitmentsRequestSDKType): QueryPacketCommitmentsRequest {
+    return {
+      portId: isSet(object.port_id) ? object.port_id : undefined,
+      channelId: isSet(object.channel_id) ? object.channel_id : undefined,
+      pagination: isSet(object.pagination) ? PageRequest.fromAmino(object.pagination) : undefined
+    };
+  },
+
+  toAmino(message: QueryPacketCommitmentsRequest): QueryPacketCommitmentsRequestSDKType {
+    const obj: any = {};
+    message.portId !== undefined && (obj.port_id = message.portId);
+    message.channelId !== undefined && (obj.channel_id = message.channelId);
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined);
+    return obj;
   }
 
 };
@@ -1488,6 +1702,28 @@ export const QueryPacketCommitmentsResponse = {
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     message.height = object.height !== undefined && object.height !== null ? Height.fromPartial(object.height) : undefined;
     return message;
+  },
+
+  fromAmino(object: QueryPacketCommitmentsResponseSDKType): QueryPacketCommitmentsResponse {
+    return {
+      commitments: Array.isArray(object?.commitments) ? object.commitments.map((e: any) => PacketState.fromAmino(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromAmino(object.pagination) : undefined,
+      height: isSet(object.height) ? Height.fromAmino(object.height) : undefined
+    };
+  },
+
+  toAmino(message: QueryPacketCommitmentsResponse): QueryPacketCommitmentsResponseSDKType {
+    const obj: any = {};
+
+    if (message.commitments) {
+      obj.commitments = message.commitments.map(e => e ? PacketState.toAmino(e) : undefined);
+    } else {
+      obj.commitments = [];
+    }
+
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined);
+    message.height !== undefined && (obj.height = message.height ? Height.toAmino(message.height) : undefined);
+    return obj;
   }
 
 };
@@ -1569,6 +1805,22 @@ export const QueryPacketReceiptRequest = {
     message.channelId = object.channelId ?? "";
     message.sequence = object.sequence !== undefined && object.sequence !== null ? Long.fromValue(object.sequence) : Long.UZERO;
     return message;
+  },
+
+  fromAmino(object: QueryPacketReceiptRequestSDKType): QueryPacketReceiptRequest {
+    return {
+      portId: isSet(object.port_id) ? object.port_id : undefined,
+      channelId: isSet(object.channel_id) ? object.channel_id : undefined,
+      sequence: isSet(object.sequence) ? object.sequence : undefined
+    };
+  },
+
+  toAmino(message: QueryPacketReceiptRequest): QueryPacketReceiptRequestSDKType {
+    const obj: any = {};
+    message.portId !== undefined && (obj.port_id = message.portId);
+    message.channelId !== undefined && (obj.channel_id = message.channelId);
+    message.sequence !== undefined && (obj.sequence = message.sequence);
+    return obj;
   }
 
 };
@@ -1650,6 +1902,22 @@ export const QueryPacketReceiptResponse = {
     message.proof = object.proof ?? new Uint8Array();
     message.proofHeight = object.proofHeight !== undefined && object.proofHeight !== null ? Height.fromPartial(object.proofHeight) : undefined;
     return message;
+  },
+
+  fromAmino(object: QueryPacketReceiptResponseSDKType): QueryPacketReceiptResponse {
+    return {
+      received: isSet(object.received) ? object.received : undefined,
+      proof: isSet(object.proof) ? object.proof : undefined,
+      proofHeight: isSet(object.proof_height) ? Height.fromAmino(object.proof_height) : undefined
+    };
+  },
+
+  toAmino(message: QueryPacketReceiptResponse): QueryPacketReceiptResponseSDKType {
+    const obj: any = {};
+    message.received !== undefined && (obj.received = message.received);
+    message.proof !== undefined && (obj.proof = message.proof);
+    message.proofHeight !== undefined && (obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : undefined);
+    return obj;
   }
 
 };
@@ -1731,6 +1999,22 @@ export const QueryPacketAcknowledgementRequest = {
     message.channelId = object.channelId ?? "";
     message.sequence = object.sequence !== undefined && object.sequence !== null ? Long.fromValue(object.sequence) : Long.UZERO;
     return message;
+  },
+
+  fromAmino(object: QueryPacketAcknowledgementRequestSDKType): QueryPacketAcknowledgementRequest {
+    return {
+      portId: isSet(object.port_id) ? object.port_id : undefined,
+      channelId: isSet(object.channel_id) ? object.channel_id : undefined,
+      sequence: isSet(object.sequence) ? object.sequence : undefined
+    };
+  },
+
+  toAmino(message: QueryPacketAcknowledgementRequest): QueryPacketAcknowledgementRequestSDKType {
+    const obj: any = {};
+    message.portId !== undefined && (obj.port_id = message.portId);
+    message.channelId !== undefined && (obj.channel_id = message.channelId);
+    message.sequence !== undefined && (obj.sequence = message.sequence);
+    return obj;
   }
 
 };
@@ -1812,6 +2096,22 @@ export const QueryPacketAcknowledgementResponse = {
     message.proof = object.proof ?? new Uint8Array();
     message.proofHeight = object.proofHeight !== undefined && object.proofHeight !== null ? Height.fromPartial(object.proofHeight) : undefined;
     return message;
+  },
+
+  fromAmino(object: QueryPacketAcknowledgementResponseSDKType): QueryPacketAcknowledgementResponse {
+    return {
+      acknowledgement: isSet(object.acknowledgement) ? object.acknowledgement : undefined,
+      proof: isSet(object.proof) ? object.proof : undefined,
+      proofHeight: isSet(object.proof_height) ? Height.fromAmino(object.proof_height) : undefined
+    };
+  },
+
+  toAmino(message: QueryPacketAcknowledgementResponse): QueryPacketAcknowledgementResponseSDKType {
+    const obj: any = {};
+    message.acknowledgement !== undefined && (obj.acknowledgement = message.acknowledgement);
+    message.proof !== undefined && (obj.proof = message.proof);
+    message.proofHeight !== undefined && (obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : undefined);
+    return obj;
   }
 
 };
@@ -1923,6 +2223,30 @@ export const QueryPacketAcknowledgementsRequest = {
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     message.packetCommitmentSequences = object.packetCommitmentSequences?.map(e => Long.fromValue(e)) || [];
     return message;
+  },
+
+  fromAmino(object: QueryPacketAcknowledgementsRequestSDKType): QueryPacketAcknowledgementsRequest {
+    return {
+      portId: isSet(object.port_id) ? object.port_id : undefined,
+      channelId: isSet(object.channel_id) ? object.channel_id : undefined,
+      pagination: isSet(object.pagination) ? PageRequest.fromAmino(object.pagination) : undefined,
+      packetCommitmentSequences: Array.isArray(object?.packet_commitment_sequences) ? object.packet_commitment_sequences.map((e: any) => e) : []
+    };
+  },
+
+  toAmino(message: QueryPacketAcknowledgementsRequest): QueryPacketAcknowledgementsRequestSDKType {
+    const obj: any = {};
+    message.portId !== undefined && (obj.port_id = message.portId);
+    message.channelId !== undefined && (obj.channel_id = message.channelId);
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined);
+
+    if (message.packetCommitmentSequences) {
+      obj.packet_commitment_sequences = message.packetCommitmentSequences.map(e => e);
+    } else {
+      obj.packet_commitment_sequences = [];
+    }
+
+    return obj;
   }
 
 };
@@ -2010,6 +2334,28 @@ export const QueryPacketAcknowledgementsResponse = {
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     message.height = object.height !== undefined && object.height !== null ? Height.fromPartial(object.height) : undefined;
     return message;
+  },
+
+  fromAmino(object: QueryPacketAcknowledgementsResponseSDKType): QueryPacketAcknowledgementsResponse {
+    return {
+      acknowledgements: Array.isArray(object?.acknowledgements) ? object.acknowledgements.map((e: any) => PacketState.fromAmino(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromAmino(object.pagination) : undefined,
+      height: isSet(object.height) ? Height.fromAmino(object.height) : undefined
+    };
+  },
+
+  toAmino(message: QueryPacketAcknowledgementsResponse): QueryPacketAcknowledgementsResponseSDKType {
+    const obj: any = {};
+
+    if (message.acknowledgements) {
+      obj.acknowledgements = message.acknowledgements.map(e => e ? PacketState.toAmino(e) : undefined);
+    } else {
+      obj.acknowledgements = [];
+    }
+
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined);
+    message.height !== undefined && (obj.height = message.height ? Height.toAmino(message.height) : undefined);
+    return obj;
   }
 
 };
@@ -2109,6 +2455,28 @@ export const QueryUnreceivedPacketsRequest = {
     message.channelId = object.channelId ?? "";
     message.packetCommitmentSequences = object.packetCommitmentSequences?.map(e => Long.fromValue(e)) || [];
     return message;
+  },
+
+  fromAmino(object: QueryUnreceivedPacketsRequestSDKType): QueryUnreceivedPacketsRequest {
+    return {
+      portId: isSet(object.port_id) ? object.port_id : undefined,
+      channelId: isSet(object.channel_id) ? object.channel_id : undefined,
+      packetCommitmentSequences: Array.isArray(object?.packet_commitment_sequences) ? object.packet_commitment_sequences.map((e: any) => e) : []
+    };
+  },
+
+  toAmino(message: QueryUnreceivedPacketsRequest): QueryUnreceivedPacketsRequestSDKType {
+    const obj: any = {};
+    message.portId !== undefined && (obj.port_id = message.portId);
+    message.channelId !== undefined && (obj.channel_id = message.channelId);
+
+    if (message.packetCommitmentSequences) {
+      obj.packet_commitment_sequences = message.packetCommitmentSequences.map(e => e);
+    } else {
+      obj.packet_commitment_sequences = [];
+    }
+
+    return obj;
   }
 
 };
@@ -2197,6 +2565,26 @@ export const QueryUnreceivedPacketsResponse = {
     message.sequences = object.sequences?.map(e => Long.fromValue(e)) || [];
     message.height = object.height !== undefined && object.height !== null ? Height.fromPartial(object.height) : undefined;
     return message;
+  },
+
+  fromAmino(object: QueryUnreceivedPacketsResponseSDKType): QueryUnreceivedPacketsResponse {
+    return {
+      sequences: Array.isArray(object?.sequences) ? object.sequences.map((e: any) => e) : [],
+      height: isSet(object.height) ? Height.fromAmino(object.height) : undefined
+    };
+  },
+
+  toAmino(message: QueryUnreceivedPacketsResponse): QueryUnreceivedPacketsResponseSDKType {
+    const obj: any = {};
+
+    if (message.sequences) {
+      obj.sequences = message.sequences.map(e => e);
+    } else {
+      obj.sequences = [];
+    }
+
+    message.height !== undefined && (obj.height = message.height ? Height.toAmino(message.height) : undefined);
+    return obj;
   }
 
 };
@@ -2296,6 +2684,28 @@ export const QueryUnreceivedAcksRequest = {
     message.channelId = object.channelId ?? "";
     message.packetAckSequences = object.packetAckSequences?.map(e => Long.fromValue(e)) || [];
     return message;
+  },
+
+  fromAmino(object: QueryUnreceivedAcksRequestSDKType): QueryUnreceivedAcksRequest {
+    return {
+      portId: isSet(object.port_id) ? object.port_id : undefined,
+      channelId: isSet(object.channel_id) ? object.channel_id : undefined,
+      packetAckSequences: Array.isArray(object?.packet_ack_sequences) ? object.packet_ack_sequences.map((e: any) => e) : []
+    };
+  },
+
+  toAmino(message: QueryUnreceivedAcksRequest): QueryUnreceivedAcksRequestSDKType {
+    const obj: any = {};
+    message.portId !== undefined && (obj.port_id = message.portId);
+    message.channelId !== undefined && (obj.channel_id = message.channelId);
+
+    if (message.packetAckSequences) {
+      obj.packet_ack_sequences = message.packetAckSequences.map(e => e);
+    } else {
+      obj.packet_ack_sequences = [];
+    }
+
+    return obj;
   }
 
 };
@@ -2384,6 +2794,26 @@ export const QueryUnreceivedAcksResponse = {
     message.sequences = object.sequences?.map(e => Long.fromValue(e)) || [];
     message.height = object.height !== undefined && object.height !== null ? Height.fromPartial(object.height) : undefined;
     return message;
+  },
+
+  fromAmino(object: QueryUnreceivedAcksResponseSDKType): QueryUnreceivedAcksResponse {
+    return {
+      sequences: Array.isArray(object?.sequences) ? object.sequences.map((e: any) => e) : [],
+      height: isSet(object.height) ? Height.fromAmino(object.height) : undefined
+    };
+  },
+
+  toAmino(message: QueryUnreceivedAcksResponse): QueryUnreceivedAcksResponseSDKType {
+    const obj: any = {};
+
+    if (message.sequences) {
+      obj.sequences = message.sequences.map(e => e);
+    } else {
+      obj.sequences = [];
+    }
+
+    message.height !== undefined && (obj.height = message.height ? Height.toAmino(message.height) : undefined);
+    return obj;
   }
 
 };
@@ -2453,6 +2883,20 @@ export const QueryNextSequenceReceiveRequest = {
     message.portId = object.portId ?? "";
     message.channelId = object.channelId ?? "";
     return message;
+  },
+
+  fromAmino(object: QueryNextSequenceReceiveRequestSDKType): QueryNextSequenceReceiveRequest {
+    return {
+      portId: isSet(object.port_id) ? object.port_id : undefined,
+      channelId: isSet(object.channel_id) ? object.channel_id : undefined
+    };
+  },
+
+  toAmino(message: QueryNextSequenceReceiveRequest): QueryNextSequenceReceiveRequestSDKType {
+    const obj: any = {};
+    message.portId !== undefined && (obj.port_id = message.portId);
+    message.channelId !== undefined && (obj.channel_id = message.channelId);
+    return obj;
   }
 
 };
@@ -2534,6 +2978,22 @@ export const QueryNextSequenceReceiveResponse = {
     message.proof = object.proof ?? new Uint8Array();
     message.proofHeight = object.proofHeight !== undefined && object.proofHeight !== null ? Height.fromPartial(object.proofHeight) : undefined;
     return message;
+  },
+
+  fromAmino(object: QueryNextSequenceReceiveResponseSDKType): QueryNextSequenceReceiveResponse {
+    return {
+      nextSequenceReceive: isSet(object.next_sequence_receive) ? object.next_sequence_receive : undefined,
+      proof: isSet(object.proof) ? object.proof : undefined,
+      proofHeight: isSet(object.proof_height) ? Height.fromAmino(object.proof_height) : undefined
+    };
+  },
+
+  toAmino(message: QueryNextSequenceReceiveResponse): QueryNextSequenceReceiveResponseSDKType {
+    const obj: any = {};
+    message.nextSequenceReceive !== undefined && (obj.next_sequence_receive = message.nextSequenceReceive);
+    message.proof !== undefined && (obj.proof = message.proof);
+    message.proofHeight !== undefined && (obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : undefined);
+    return obj;
   }
 
 };

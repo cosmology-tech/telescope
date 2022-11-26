@@ -87,6 +87,31 @@ export const GenesisState = {
     message.accounts = object.accounts?.map(e => Account.fromPartial(e)) || [];
     message.payments = object.payments?.map(e => FractionalPayment.fromPartial(e)) || [];
     return message;
+  },
+
+  fromAmino(object: GenesisStateSDKType): GenesisState {
+    return {
+      accounts: Array.isArray(object?.accounts) ? object.accounts.map((e: any) => Account.fromAmino(e)) : [],
+      payments: Array.isArray(object?.payments) ? object.payments.map((e: any) => FractionalPayment.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: GenesisState): GenesisStateSDKType {
+    const obj: any = {};
+
+    if (message.accounts) {
+      obj.accounts = message.accounts.map(e => e ? Account.toAmino(e) : undefined);
+    } else {
+      obj.accounts = [];
+    }
+
+    if (message.payments) {
+      obj.payments = message.payments.map(e => e ? FractionalPayment.toAmino(e) : undefined);
+    } else {
+      obj.payments = [];
+    }
+
+    return obj;
   }
 
 };

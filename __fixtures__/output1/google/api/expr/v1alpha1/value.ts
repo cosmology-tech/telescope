@@ -411,6 +411,40 @@ export const Value = {
     message.listValue !== undefined && (obj.list_value = message.listValue ? ListValue.toSDK(message.listValue) : undefined);
     message.typeValue !== undefined && (obj.type_value = message.typeValue);
     return obj;
+  },
+
+  fromAmino(object: ValueSDKType): Value {
+    return {
+      nullValue: isSet(object.null_value) ? nullValueFromJSON(object.null_value) : undefined,
+      boolValue: isSet(object.bool_value) ? object.bool_value : undefined,
+      int64Value: isSet(object.int64_value) ? object.int64_value : undefined,
+      uint64Value: isSet(object.uint64_value) ? object.uint64_value : undefined,
+      doubleValue: isSet(object.double_value) ? object.double_value : undefined,
+      stringValue: isSet(object.string_value) ? object.string_value : undefined,
+      bytesValue: isSet(object.bytes_value) ? object.bytes_value : undefined,
+      enumValue: isSet(object.enum_value) ? EnumValue.fromAmino(object.enum_value) : undefined,
+      objectValue: isSet(object.object_value) ? Any.fromAmino(object.object_value) : undefined,
+      mapValue: isSet(object.map_value) ? MapValue.fromAmino(object.map_value) : undefined,
+      listValue: isSet(object.list_value) ? ListValue.fromAmino(object.list_value) : undefined,
+      typeValue: isSet(object.type_value) ? object.type_value : undefined
+    };
+  },
+
+  toAmino(message: Value): ValueSDKType {
+    const obj: any = {};
+    message.nullValue !== undefined && (obj.null_value = nullValueToJSON(message.nullValue));
+    message.boolValue !== undefined && (obj.bool_value = message.boolValue);
+    message.int64Value !== undefined && (obj.int64_value = message.int64Value);
+    message.uint64Value !== undefined && (obj.uint64_value = message.uint64Value);
+    message.doubleValue !== undefined && (obj.double_value = message.doubleValue);
+    message.stringValue !== undefined && (obj.string_value = message.stringValue);
+    message.bytesValue !== undefined && (obj.bytes_value = message.bytesValue);
+    message.enumValue !== undefined && (obj.enum_value = message.enumValue ? EnumValue.toAmino(message.enumValue) : undefined);
+    message.objectValue !== undefined && (obj.object_value = message.objectValue ? Any.toAmino(message.objectValue) : undefined);
+    message.mapValue !== undefined && (obj.map_value = message.mapValue ? MapValue.toAmino(message.mapValue) : undefined);
+    message.listValue !== undefined && (obj.list_value = message.listValue ? ListValue.toAmino(message.listValue) : undefined);
+    message.typeValue !== undefined && (obj.type_value = message.typeValue);
+    return obj;
   }
 
 };
@@ -490,6 +524,20 @@ export const EnumValue = {
   },
 
   toSDK(message: EnumValue): EnumValueSDKType {
+    const obj: any = {};
+    message.type !== undefined && (obj.type = message.type);
+    message.value !== undefined && (obj.value = message.value);
+    return obj;
+  },
+
+  fromAmino(object: EnumValueSDKType): EnumValue {
+    return {
+      type: isSet(object.type) ? object.type : undefined,
+      value: isSet(object.value) ? object.value : undefined
+    };
+  },
+
+  toAmino(message: EnumValue): EnumValueSDKType {
     const obj: any = {};
     message.type !== undefined && (obj.type = message.type);
     message.value !== undefined && (obj.value = message.value);
@@ -575,6 +623,24 @@ export const ListValue = {
     }
 
     return obj;
+  },
+
+  fromAmino(object: ListValueSDKType): ListValue {
+    return {
+      values: Array.isArray(object?.values) ? object.values.map((e: any) => Value.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: ListValue): ListValueSDKType {
+    const obj: any = {};
+
+    if (message.values) {
+      obj.values = message.values.map(e => e ? Value.toAmino(e) : undefined);
+    } else {
+      obj.values = [];
+    }
+
+    return obj;
   }
 
 };
@@ -651,6 +717,24 @@ export const MapValue = {
 
     if (message.entries) {
       obj.entries = message.entries.map(e => e ? MapValue_Entry.toSDK(e) : undefined);
+    } else {
+      obj.entries = [];
+    }
+
+    return obj;
+  },
+
+  fromAmino(object: MapValueSDKType): MapValue {
+    return {
+      entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => MapValue_Entry.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: MapValue): MapValueSDKType {
+    const obj: any = {};
+
+    if (message.entries) {
+      obj.entries = message.entries.map(e => e ? MapValue_Entry.toAmino(e) : undefined);
     } else {
       obj.entries = [];
     }
@@ -738,6 +822,20 @@ export const MapValue_Entry = {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key ? Value.toSDK(message.key) : undefined);
     message.value !== undefined && (obj.value = message.value ? Value.toSDK(message.value) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: MapValue_EntrySDKType): MapValue_Entry {
+    return {
+      key: isSet(object.key) ? Value.fromAmino(object.key) : undefined,
+      value: isSet(object.value) ? Value.fromAmino(object.value) : undefined
+    };
+  },
+
+  toAmino(message: MapValue_Entry): MapValue_EntrySDKType {
+    const obj: any = {};
+    message.key !== undefined && (obj.key = message.key ? Value.toAmino(message.key) : undefined);
+    message.value !== undefined && (obj.value = message.value ? Value.toAmino(message.value) : undefined);
     return obj;
   }
 

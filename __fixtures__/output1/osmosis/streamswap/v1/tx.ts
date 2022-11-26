@@ -392,6 +392,40 @@ export const MsgCreateSale = {
     message.name !== undefined && (obj.name = message.name);
     message.url !== undefined && (obj.url = message.url);
     return obj;
+  },
+
+  fromAmino(object: MsgCreateSaleSDKType): MsgCreateSale {
+    return {
+      creator: isSet(object.creator) ? object.creator : undefined,
+      tokenIn: isSet(object.token_in) ? object.token_in : undefined,
+      tokenOut: isSet(object.token_out) ? Coin.fromAmino(object.token_out) : undefined,
+      maxFee: Array.isArray(object?.max_fee) ? object.max_fee.map((e: any) => Coin.fromAmino(e)) : [],
+      startTime: isSet(object.start_time) ? Timestamp.fromAmino(object.start_time) : undefined,
+      duration: isSet(object.duration) ? Duration.fromAmino(object.duration) : undefined,
+      recipient: isSet(object.recipient) ? object.recipient : undefined,
+      name: isSet(object.name) ? object.name : undefined,
+      url: isSet(object.url) ? object.url : undefined
+    };
+  },
+
+  toAmino(message: MsgCreateSale): MsgCreateSaleSDKType {
+    const obj: any = {};
+    message.creator !== undefined && (obj.creator = message.creator);
+    message.tokenIn !== undefined && (obj.token_in = message.tokenIn);
+    message.tokenOut !== undefined && (obj.token_out = message.tokenOut ? Coin.toAmino(message.tokenOut) : undefined);
+
+    if (message.maxFee) {
+      obj.max_fee = message.maxFee.map(e => e ? Coin.toAmino(e) : undefined);
+    } else {
+      obj.max_fee = [];
+    }
+
+    message.startTime !== undefined && (obj.start_time = message.startTime ? Timestamp.toAmino(message.startTime) : undefined);
+    message.duration !== undefined && (obj.duration = message.duration ? Duration.toAmino(message.duration) : undefined);
+    message.recipient !== undefined && (obj.recipient = message.recipient);
+    message.name !== undefined && (obj.name = message.name);
+    message.url !== undefined && (obj.url = message.url);
+    return obj;
   }
 
 };
@@ -458,6 +492,18 @@ export const MsgCreateSaleResponse = {
   },
 
   toSDK(message: MsgCreateSaleResponse): MsgCreateSaleResponseSDKType {
+    const obj: any = {};
+    message.saleId !== undefined && (obj.sale_id = message.saleId);
+    return obj;
+  },
+
+  fromAmino(object: MsgCreateSaleResponseSDKType): MsgCreateSaleResponse {
+    return {
+      saleId: isSet(object.sale_id) ? object.sale_id : undefined
+    };
+  },
+
+  toAmino(message: MsgCreateSaleResponse): MsgCreateSaleResponseSDKType {
     const obj: any = {};
     message.saleId !== undefined && (obj.sale_id = message.saleId);
     return obj;
@@ -553,6 +599,22 @@ export const MsgSubscribe = {
   },
 
   toSDK(message: MsgSubscribe): MsgSubscribeSDKType {
+    const obj: any = {};
+    message.sender !== undefined && (obj.sender = message.sender);
+    message.saleId !== undefined && (obj.sale_id = message.saleId);
+    message.amount !== undefined && (obj.amount = message.amount);
+    return obj;
+  },
+
+  fromAmino(object: MsgSubscribeSDKType): MsgSubscribe {
+    return {
+      sender: isSet(object.sender) ? object.sender : undefined,
+      saleId: isSet(object.sale_id) ? object.sale_id : undefined,
+      amount: isSet(object.amount) ? object.amount : undefined
+    };
+  },
+
+  toAmino(message: MsgSubscribe): MsgSubscribeSDKType {
     const obj: any = {};
     message.sender !== undefined && (obj.sender = message.sender);
     message.saleId !== undefined && (obj.sale_id = message.saleId);
@@ -655,6 +717,22 @@ export const MsgWithdraw = {
     message.saleId !== undefined && (obj.sale_id = message.saleId);
     message.amount !== undefined && (obj.amount = message.amount);
     return obj;
+  },
+
+  fromAmino(object: MsgWithdrawSDKType): MsgWithdraw {
+    return {
+      sender: isSet(object.sender) ? object.sender : undefined,
+      saleId: isSet(object.sale_id) ? object.sale_id : undefined,
+      amount: isSet(object.amount) ? object.amount : undefined
+    };
+  },
+
+  toAmino(message: MsgWithdraw): MsgWithdrawSDKType {
+    const obj: any = {};
+    message.sender !== undefined && (obj.sender = message.sender);
+    message.saleId !== undefined && (obj.sale_id = message.saleId);
+    message.amount !== undefined && (obj.amount = message.amount);
+    return obj;
   }
 
 };
@@ -738,6 +816,20 @@ export const MsgExitSale = {
     message.sender !== undefined && (obj.sender = message.sender);
     message.saleId !== undefined && (obj.sale_id = message.saleId);
     return obj;
+  },
+
+  fromAmino(object: MsgExitSaleSDKType): MsgExitSale {
+    return {
+      sender: isSet(object.sender) ? object.sender : undefined,
+      saleId: isSet(object.sale_id) ? object.sale_id : undefined
+    };
+  },
+
+  toAmino(message: MsgExitSale): MsgExitSaleSDKType {
+    const obj: any = {};
+    message.sender !== undefined && (obj.sender = message.sender);
+    message.saleId !== undefined && (obj.sale_id = message.saleId);
+    return obj;
   }
 
 };
@@ -804,6 +896,18 @@ export const MsgExitSaleResponse = {
   },
 
   toSDK(message: MsgExitSaleResponse): MsgExitSaleResponseSDKType {
+    const obj: any = {};
+    message.purchased !== undefined && (obj.purchased = message.purchased);
+    return obj;
+  },
+
+  fromAmino(object: MsgExitSaleResponseSDKType): MsgExitSaleResponse {
+    return {
+      purchased: isSet(object.purchased) ? object.purchased : undefined
+    };
+  },
+
+  toAmino(message: MsgExitSaleResponse): MsgExitSaleResponseSDKType {
     const obj: any = {};
     message.purchased !== undefined && (obj.purchased = message.purchased);
     return obj;
@@ -890,6 +994,20 @@ export const MsgFinalizeSale = {
     message.sender !== undefined && (obj.sender = message.sender);
     message.saleId !== undefined && (obj.sale_id = message.saleId);
     return obj;
+  },
+
+  fromAmino(object: MsgFinalizeSaleSDKType): MsgFinalizeSale {
+    return {
+      sender: isSet(object.sender) ? object.sender : undefined,
+      saleId: isSet(object.sale_id) ? object.sale_id : undefined
+    };
+  },
+
+  toAmino(message: MsgFinalizeSale): MsgFinalizeSaleSDKType {
+    const obj: any = {};
+    message.sender !== undefined && (obj.sender = message.sender);
+    message.saleId !== undefined && (obj.sale_id = message.saleId);
+    return obj;
   }
 
 };
@@ -956,6 +1074,18 @@ export const MsgFinalizeSaleResponse = {
   },
 
   toSDK(message: MsgFinalizeSaleResponse): MsgFinalizeSaleResponseSDKType {
+    const obj: any = {};
+    message.income !== undefined && (obj.income = message.income);
+    return obj;
+  },
+
+  fromAmino(object: MsgFinalizeSaleResponseSDKType): MsgFinalizeSaleResponse {
+    return {
+      income: isSet(object.income) ? object.income : undefined
+    };
+  },
+
+  toAmino(message: MsgFinalizeSaleResponse): MsgFinalizeSaleResponseSDKType {
     const obj: any = {};
     message.income !== undefined && (obj.income = message.income);
     return obj;

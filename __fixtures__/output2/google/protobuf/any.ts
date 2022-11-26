@@ -186,6 +186,20 @@ export const Any = {
     message.typeUrl = object.typeUrl ?? "";
     message.value = object.value ?? new Uint8Array();
     return message;
+  },
+
+  fromAmino(object: AnySDKType): Any {
+    return {
+      typeUrl: isSet(object.type_url) ? object.type_url : undefined,
+      value: isSet(object.value) ? object.value : undefined
+    };
+  },
+
+  toAmino(message: Any): AnySDKType {
+    const obj: any = {};
+    message.typeUrl !== undefined && (obj.type_url = message.typeUrl);
+    message.value !== undefined && (obj.value = message.value);
+    return obj;
   }
 
 };

@@ -795,6 +795,104 @@ export const Service = {
     message.sourceInfo !== undefined && (obj.source_info = message.sourceInfo ? SourceInfo.toSDK(message.sourceInfo) : undefined);
     message.configVersion !== undefined && (obj.config_version = message.configVersion ? UInt32Value.toSDK(message.configVersion) : undefined);
     return obj;
+  },
+
+  fromAmino(object: ServiceSDKType): Service {
+    return {
+      name: isSet(object.name) ? object.name : undefined,
+      title: isSet(object.title) ? object.title : undefined,
+      producerProjectId: isSet(object.producer_project_id) ? object.producer_project_id : undefined,
+      id: isSet(object.id) ? object.id : undefined,
+      apis: Array.isArray(object?.apis) ? object.apis.map((e: any) => Api.fromAmino(e)) : [],
+      types: Array.isArray(object?.types) ? object.types.map((e: any) => Type.fromAmino(e)) : [],
+      enums: Array.isArray(object?.enums) ? object.enums.map((e: any) => Enum.fromAmino(e)) : [],
+      documentation: isSet(object.documentation) ? Documentation.fromAmino(object.documentation) : undefined,
+      backend: isSet(object.backend) ? Backend.fromAmino(object.backend) : undefined,
+      http: isSet(object.http) ? Http.fromAmino(object.http) : undefined,
+      quota: isSet(object.quota) ? Quota.fromAmino(object.quota) : undefined,
+      authentication: isSet(object.authentication) ? Authentication.fromAmino(object.authentication) : undefined,
+      context: isSet(object.context) ? Context.fromAmino(object.context) : undefined,
+      usage: isSet(object.usage) ? Usage.fromAmino(object.usage) : undefined,
+      endpoints: Array.isArray(object?.endpoints) ? object.endpoints.map((e: any) => Endpoint.fromAmino(e)) : [],
+      control: isSet(object.control) ? Control.fromAmino(object.control) : undefined,
+      logs: Array.isArray(object?.logs) ? object.logs.map((e: any) => LogDescriptor.fromAmino(e)) : [],
+      metrics: Array.isArray(object?.metrics) ? object.metrics.map((e: any) => MetricDescriptor.fromAmino(e)) : [],
+      monitoredResources: Array.isArray(object?.monitored_resources) ? object.monitored_resources.map((e: any) => MonitoredResourceDescriptor.fromAmino(e)) : [],
+      billing: isSet(object.billing) ? Billing.fromAmino(object.billing) : undefined,
+      logging: isSet(object.logging) ? Logging.fromAmino(object.logging) : undefined,
+      monitoring: isSet(object.monitoring) ? Monitoring.fromAmino(object.monitoring) : undefined,
+      systemParameters: isSet(object.system_parameters) ? SystemParameters.fromAmino(object.system_parameters) : undefined,
+      sourceInfo: isSet(object.source_info) ? SourceInfo.fromAmino(object.source_info) : undefined,
+      configVersion: isSet(object.config_version) ? UInt32Value.fromAmino(object.config_version) : undefined
+    };
+  },
+
+  toAmino(message: Service): ServiceSDKType {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    message.title !== undefined && (obj.title = message.title);
+    message.producerProjectId !== undefined && (obj.producer_project_id = message.producerProjectId);
+    message.id !== undefined && (obj.id = message.id);
+
+    if (message.apis) {
+      obj.apis = message.apis.map(e => e ? Api.toAmino(e) : undefined);
+    } else {
+      obj.apis = [];
+    }
+
+    if (message.types) {
+      obj.types = message.types.map(e => e ? Type.toAmino(e) : undefined);
+    } else {
+      obj.types = [];
+    }
+
+    if (message.enums) {
+      obj.enums = message.enums.map(e => e ? Enum.toAmino(e) : undefined);
+    } else {
+      obj.enums = [];
+    }
+
+    message.documentation !== undefined && (obj.documentation = message.documentation ? Documentation.toAmino(message.documentation) : undefined);
+    message.backend !== undefined && (obj.backend = message.backend ? Backend.toAmino(message.backend) : undefined);
+    message.http !== undefined && (obj.http = message.http ? Http.toAmino(message.http) : undefined);
+    message.quota !== undefined && (obj.quota = message.quota ? Quota.toAmino(message.quota) : undefined);
+    message.authentication !== undefined && (obj.authentication = message.authentication ? Authentication.toAmino(message.authentication) : undefined);
+    message.context !== undefined && (obj.context = message.context ? Context.toAmino(message.context) : undefined);
+    message.usage !== undefined && (obj.usage = message.usage ? Usage.toAmino(message.usage) : undefined);
+
+    if (message.endpoints) {
+      obj.endpoints = message.endpoints.map(e => e ? Endpoint.toAmino(e) : undefined);
+    } else {
+      obj.endpoints = [];
+    }
+
+    message.control !== undefined && (obj.control = message.control ? Control.toAmino(message.control) : undefined);
+
+    if (message.logs) {
+      obj.logs = message.logs.map(e => e ? LogDescriptor.toAmino(e) : undefined);
+    } else {
+      obj.logs = [];
+    }
+
+    if (message.metrics) {
+      obj.metrics = message.metrics.map(e => e ? MetricDescriptor.toAmino(e) : undefined);
+    } else {
+      obj.metrics = [];
+    }
+
+    if (message.monitoredResources) {
+      obj.monitored_resources = message.monitoredResources.map(e => e ? MonitoredResourceDescriptor.toAmino(e) : undefined);
+    } else {
+      obj.monitored_resources = [];
+    }
+
+    message.billing !== undefined && (obj.billing = message.billing ? Billing.toAmino(message.billing) : undefined);
+    message.logging !== undefined && (obj.logging = message.logging ? Logging.toAmino(message.logging) : undefined);
+    message.monitoring !== undefined && (obj.monitoring = message.monitoring ? Monitoring.toAmino(message.monitoring) : undefined);
+    message.systemParameters !== undefined && (obj.system_parameters = message.systemParameters ? SystemParameters.toAmino(message.systemParameters) : undefined);
+    message.sourceInfo !== undefined && (obj.source_info = message.sourceInfo ? SourceInfo.toAmino(message.sourceInfo) : undefined);
+    message.configVersion !== undefined && (obj.config_version = message.configVersion ? UInt32Value.toAmino(message.configVersion) : undefined);
+    return obj;
   }
 
 };

@@ -134,6 +134,28 @@ export const GenesisState = {
     }
 
     return obj;
+  },
+
+  fromAmino(object: GenesisStateSDKType): GenesisState {
+    return {
+      moduleAccountBalance: isSet(object.module_account_balance) ? Coin.fromAmino(object.module_account_balance) : undefined,
+      params: isSet(object.params) ? Params.fromAmino(object.params) : undefined,
+      claimRecords: Array.isArray(object?.claim_records) ? object.claim_records.map((e: any) => ClaimRecord.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: GenesisState): GenesisStateSDKType {
+    const obj: any = {};
+    message.moduleAccountBalance !== undefined && (obj.module_account_balance = message.moduleAccountBalance ? Coin.toAmino(message.moduleAccountBalance) : undefined);
+    message.params !== undefined && (obj.params = message.params ? Params.toAmino(message.params) : undefined);
+
+    if (message.claimRecords) {
+      obj.claim_records = message.claimRecords.map(e => e ? ClaimRecord.toAmino(e) : undefined);
+    } else {
+      obj.claim_records = [];
+    }
+
+    return obj;
   }
 
 };

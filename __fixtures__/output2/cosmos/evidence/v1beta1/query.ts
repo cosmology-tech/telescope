@@ -92,6 +92,18 @@ export const QueryEvidenceRequest = {
     const message = createBaseQueryEvidenceRequest();
     message.evidenceHash = object.evidenceHash ?? new Uint8Array();
     return message;
+  },
+
+  fromAmino(object: QueryEvidenceRequestSDKType): QueryEvidenceRequest {
+    return {
+      evidenceHash: isSet(object.evidence_hash) ? object.evidence_hash : undefined
+    };
+  },
+
+  toAmino(message: QueryEvidenceRequest): QueryEvidenceRequestSDKType {
+    const obj: any = {};
+    message.evidenceHash !== undefined && (obj.evidence_hash = message.evidenceHash);
+    return obj;
   }
 
 };
@@ -149,6 +161,18 @@ export const QueryEvidenceResponse = {
     const message = createBaseQueryEvidenceResponse();
     message.evidence = object.evidence !== undefined && object.evidence !== null ? Any.fromPartial(object.evidence) : undefined;
     return message;
+  },
+
+  fromAmino(object: QueryEvidenceResponseSDKType): QueryEvidenceResponse {
+    return {
+      evidence: isSet(object.evidence) ? Any.fromAmino(object.evidence) : undefined
+    };
+  },
+
+  toAmino(message: QueryEvidenceResponse): QueryEvidenceResponseSDKType {
+    const obj: any = {};
+    message.evidence !== undefined && (obj.evidence = message.evidence ? Any.toAmino(message.evidence) : undefined);
+    return obj;
   }
 
 };
@@ -206,6 +230,18 @@ export const QueryAllEvidenceRequest = {
     const message = createBaseQueryAllEvidenceRequest();
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromAmino(object: QueryAllEvidenceRequestSDKType): QueryAllEvidenceRequest {
+    return {
+      pagination: isSet(object.pagination) ? PageRequest.fromAmino(object.pagination) : undefined
+    };
+  },
+
+  toAmino(message: QueryAllEvidenceRequest): QueryAllEvidenceRequestSDKType {
+    const obj: any = {};
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined);
+    return obj;
   }
 
 };
@@ -281,6 +317,26 @@ export const QueryAllEvidenceResponse = {
     message.evidence = object.evidence?.map(e => Any.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromAmino(object: QueryAllEvidenceResponseSDKType): QueryAllEvidenceResponse {
+    return {
+      evidence: Array.isArray(object?.evidence) ? object.evidence.map((e: any) => Any.fromAmino(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromAmino(object.pagination) : undefined
+    };
+  },
+
+  toAmino(message: QueryAllEvidenceResponse): QueryAllEvidenceResponseSDKType {
+    const obj: any = {};
+
+    if (message.evidence) {
+      obj.evidence = message.evidence.map(e => e ? Any.toAmino(e) : undefined);
+    } else {
+      obj.evidence = [];
+    }
+
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined);
+    return obj;
   }
 
 };

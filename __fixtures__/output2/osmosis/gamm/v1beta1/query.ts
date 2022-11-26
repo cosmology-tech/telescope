@@ -164,6 +164,18 @@ export const QueryPoolRequest = {
     const message = createBaseQueryPoolRequest();
     message.poolId = object.poolId !== undefined && object.poolId !== null ? Long.fromValue(object.poolId) : Long.UZERO;
     return message;
+  },
+
+  fromAmino(object: QueryPoolRequestSDKType): QueryPoolRequest {
+    return {
+      poolId: isSet(object.pool_id) ? object.pool_id : undefined
+    };
+  },
+
+  toAmino(message: QueryPoolRequest): QueryPoolRequestSDKType {
+    const obj: any = {};
+    message.poolId !== undefined && (obj.pool_id = message.poolId);
+    return obj;
   }
 
 };
@@ -221,6 +233,18 @@ export const QueryPoolResponse = {
     const message = createBaseQueryPoolResponse();
     message.pool = object.pool !== undefined && object.pool !== null ? Any.fromPartial(object.pool) : undefined;
     return message;
+  },
+
+  fromAmino(object: QueryPoolResponseSDKType): QueryPoolResponse {
+    return {
+      pool: isSet(object.pool) ? Any.fromAmino(object.pool) : undefined
+    };
+  },
+
+  toAmino(message: QueryPoolResponse): QueryPoolResponseSDKType {
+    const obj: any = {};
+    message.pool !== undefined && (obj.pool = message.pool ? Any.toAmino(message.pool) : undefined);
+    return obj;
   }
 
 };
@@ -278,6 +302,18 @@ export const QueryPoolsRequest = {
     const message = createBaseQueryPoolsRequest();
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromAmino(object: QueryPoolsRequestSDKType): QueryPoolsRequest {
+    return {
+      pagination: isSet(object.pagination) ? PageRequest.fromAmino(object.pagination) : undefined
+    };
+  },
+
+  toAmino(message: QueryPoolsRequest): QueryPoolsRequestSDKType {
+    const obj: any = {};
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined);
+    return obj;
   }
 
 };
@@ -353,6 +389,26 @@ export const QueryPoolsResponse = {
     message.pools = object.pools?.map(e => Any.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromAmino(object: QueryPoolsResponseSDKType): QueryPoolsResponse {
+    return {
+      pools: Array.isArray(object?.pools) ? object.pools.map((e: any) => Any.fromAmino(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromAmino(object.pagination) : undefined
+    };
+  },
+
+  toAmino(message: QueryPoolsResponse): QueryPoolsResponseSDKType {
+    const obj: any = {};
+
+    if (message.pools) {
+      obj.pools = message.pools.map(e => e ? Any.toAmino(e) : undefined);
+    } else {
+      obj.pools = [];
+    }
+
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined);
+    return obj;
   }
 
 };
@@ -396,6 +452,15 @@ export const QueryNumPoolsRequest = {
   fromPartial(_: DeepPartial<QueryNumPoolsRequest>): QueryNumPoolsRequest {
     const message = createBaseQueryNumPoolsRequest();
     return message;
+  },
+
+  fromAmino(_: QueryNumPoolsRequestSDKType): QueryNumPoolsRequest {
+    return {};
+  },
+
+  toAmino(_: QueryNumPoolsRequest): QueryNumPoolsRequestSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -453,6 +518,18 @@ export const QueryNumPoolsResponse = {
     const message = createBaseQueryNumPoolsResponse();
     message.numPools = object.numPools !== undefined && object.numPools !== null ? Long.fromValue(object.numPools) : Long.UZERO;
     return message;
+  },
+
+  fromAmino(object: QueryNumPoolsResponseSDKType): QueryNumPoolsResponse {
+    return {
+      numPools: isSet(object.num_pools) ? object.num_pools : undefined
+    };
+  },
+
+  toAmino(message: QueryNumPoolsResponse): QueryNumPoolsResponseSDKType {
+    const obj: any = {};
+    message.numPools !== undefined && (obj.num_pools = message.numPools);
+    return obj;
   }
 
 };
@@ -510,6 +587,18 @@ export const QueryPoolTypeRequest = {
     const message = createBaseQueryPoolTypeRequest();
     message.poolId = object.poolId !== undefined && object.poolId !== null ? Long.fromValue(object.poolId) : Long.UZERO;
     return message;
+  },
+
+  fromAmino(object: QueryPoolTypeRequestSDKType): QueryPoolTypeRequest {
+    return {
+      poolId: isSet(object.pool_id) ? object.pool_id : undefined
+    };
+  },
+
+  toAmino(message: QueryPoolTypeRequest): QueryPoolTypeRequestSDKType {
+    const obj: any = {};
+    message.poolId !== undefined && (obj.pool_id = message.poolId);
+    return obj;
   }
 
 };
@@ -567,6 +656,18 @@ export const QueryPoolTypeResponse = {
     const message = createBaseQueryPoolTypeResponse();
     message.poolType = object.poolType ?? "";
     return message;
+  },
+
+  fromAmino(object: QueryPoolTypeResponseSDKType): QueryPoolTypeResponse {
+    return {
+      poolType: isSet(object.pool_type) ? object.pool_type : undefined
+    };
+  },
+
+  toAmino(message: QueryPoolTypeResponse): QueryPoolTypeResponseSDKType {
+    const obj: any = {};
+    message.poolType !== undefined && (obj.pool_type = message.poolType);
+    return obj;
   }
 
 };
@@ -624,6 +725,18 @@ export const QueryPoolParamsRequest = {
     const message = createBaseQueryPoolParamsRequest();
     message.poolId = object.poolId !== undefined && object.poolId !== null ? Long.fromValue(object.poolId) : Long.UZERO;
     return message;
+  },
+
+  fromAmino(object: QueryPoolParamsRequestSDKType): QueryPoolParamsRequest {
+    return {
+      poolId: isSet(object.pool_id) ? object.pool_id : undefined
+    };
+  },
+
+  toAmino(message: QueryPoolParamsRequest): QueryPoolParamsRequestSDKType {
+    const obj: any = {};
+    message.poolId !== undefined && (obj.pool_id = message.poolId);
+    return obj;
   }
 
 };
@@ -681,6 +794,18 @@ export const QueryPoolParamsResponse = {
     const message = createBaseQueryPoolParamsResponse();
     message.params = object.params !== undefined && object.params !== null ? Any.fromPartial(object.params) : undefined;
     return message;
+  },
+
+  fromAmino(object: QueryPoolParamsResponseSDKType): QueryPoolParamsResponse {
+    return {
+      params: isSet(object.params) ? Any.fromAmino(object.params) : undefined
+    };
+  },
+
+  toAmino(message: QueryPoolParamsResponse): QueryPoolParamsResponseSDKType {
+    const obj: any = {};
+    message.params !== undefined && (obj.params = message.params ? Any.toAmino(message.params) : undefined);
+    return obj;
   }
 
 };
@@ -738,6 +863,18 @@ export const QueryTotalPoolLiquidityRequest = {
     const message = createBaseQueryTotalPoolLiquidityRequest();
     message.poolId = object.poolId !== undefined && object.poolId !== null ? Long.fromValue(object.poolId) : Long.UZERO;
     return message;
+  },
+
+  fromAmino(object: QueryTotalPoolLiquidityRequestSDKType): QueryTotalPoolLiquidityRequest {
+    return {
+      poolId: isSet(object.pool_id) ? object.pool_id : undefined
+    };
+  },
+
+  toAmino(message: QueryTotalPoolLiquidityRequest): QueryTotalPoolLiquidityRequestSDKType {
+    const obj: any = {};
+    message.poolId !== undefined && (obj.pool_id = message.poolId);
+    return obj;
   }
 
 };
@@ -801,6 +938,24 @@ export const QueryTotalPoolLiquidityResponse = {
     const message = createBaseQueryTotalPoolLiquidityResponse();
     message.liquidity = object.liquidity?.map(e => Coin.fromPartial(e)) || [];
     return message;
+  },
+
+  fromAmino(object: QueryTotalPoolLiquidityResponseSDKType): QueryTotalPoolLiquidityResponse {
+    return {
+      liquidity: Array.isArray(object?.liquidity) ? object.liquidity.map((e: any) => Coin.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: QueryTotalPoolLiquidityResponse): QueryTotalPoolLiquidityResponseSDKType {
+    const obj: any = {};
+
+    if (message.liquidity) {
+      obj.liquidity = message.liquidity.map(e => e ? Coin.toAmino(e) : undefined);
+    } else {
+      obj.liquidity = [];
+    }
+
+    return obj;
   }
 
 };
@@ -858,6 +1013,18 @@ export const QueryTotalSharesRequest = {
     const message = createBaseQueryTotalSharesRequest();
     message.poolId = object.poolId !== undefined && object.poolId !== null ? Long.fromValue(object.poolId) : Long.UZERO;
     return message;
+  },
+
+  fromAmino(object: QueryTotalSharesRequestSDKType): QueryTotalSharesRequest {
+    return {
+      poolId: isSet(object.pool_id) ? object.pool_id : undefined
+    };
+  },
+
+  toAmino(message: QueryTotalSharesRequest): QueryTotalSharesRequestSDKType {
+    const obj: any = {};
+    message.poolId !== undefined && (obj.pool_id = message.poolId);
+    return obj;
   }
 
 };
@@ -915,6 +1082,18 @@ export const QueryTotalSharesResponse = {
     const message = createBaseQueryTotalSharesResponse();
     message.totalShares = object.totalShares !== undefined && object.totalShares !== null ? Coin.fromPartial(object.totalShares) : undefined;
     return message;
+  },
+
+  fromAmino(object: QueryTotalSharesResponseSDKType): QueryTotalSharesResponse {
+    return {
+      totalShares: isSet(object.total_shares) ? Coin.fromAmino(object.total_shares) : undefined
+    };
+  },
+
+  toAmino(message: QueryTotalSharesResponse): QueryTotalSharesResponseSDKType {
+    const obj: any = {};
+    message.totalShares !== undefined && (obj.total_shares = message.totalShares ? Coin.toAmino(message.totalShares) : undefined);
+    return obj;
   }
 
 };
@@ -996,6 +1175,22 @@ export const QuerySpotPriceRequest = {
     message.baseAssetDenom = object.baseAssetDenom ?? "";
     message.quoteAssetDenom = object.quoteAssetDenom ?? "";
     return message;
+  },
+
+  fromAmino(object: QuerySpotPriceRequestSDKType): QuerySpotPriceRequest {
+    return {
+      poolId: isSet(object.pool_id) ? object.pool_id : undefined,
+      baseAssetDenom: isSet(object.base_asset_denom) ? object.base_asset_denom : undefined,
+      quoteAssetDenom: isSet(object.quote_asset_denom) ? object.quote_asset_denom : undefined
+    };
+  },
+
+  toAmino(message: QuerySpotPriceRequest): QuerySpotPriceRequestSDKType {
+    const obj: any = {};
+    message.poolId !== undefined && (obj.pool_id = message.poolId);
+    message.baseAssetDenom !== undefined && (obj.base_asset_denom = message.baseAssetDenom);
+    message.quoteAssetDenom !== undefined && (obj.quote_asset_denom = message.quoteAssetDenom);
+    return obj;
   }
 
 };
@@ -1053,6 +1248,18 @@ export const QuerySpotPriceResponse = {
     const message = createBaseQuerySpotPriceResponse();
     message.spotPrice = object.spotPrice ?? "";
     return message;
+  },
+
+  fromAmino(object: QuerySpotPriceResponseSDKType): QuerySpotPriceResponse {
+    return {
+      spotPrice: isSet(object.spot_price) ? object.spot_price : undefined
+    };
+  },
+
+  toAmino(message: QuerySpotPriceResponse): QuerySpotPriceResponseSDKType {
+    const obj: any = {};
+    message.spotPrice !== undefined && (obj.spot_price = message.spotPrice);
+    return obj;
   }
 
 };
@@ -1152,6 +1359,30 @@ export const QuerySwapExactAmountInRequest = {
     message.tokenIn = object.tokenIn ?? "";
     message.routes = object.routes?.map(e => SwapAmountInRoute.fromPartial(e)) || [];
     return message;
+  },
+
+  fromAmino(object: QuerySwapExactAmountInRequestSDKType): QuerySwapExactAmountInRequest {
+    return {
+      sender: isSet(object.sender) ? object.sender : undefined,
+      poolId: isSet(object.pool_id) ? object.pool_id : undefined,
+      tokenIn: isSet(object.token_in) ? object.token_in : undefined,
+      routes: Array.isArray(object?.routes) ? object.routes.map((e: any) => SwapAmountInRoute.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: QuerySwapExactAmountInRequest): QuerySwapExactAmountInRequestSDKType {
+    const obj: any = {};
+    message.sender !== undefined && (obj.sender = message.sender);
+    message.poolId !== undefined && (obj.pool_id = message.poolId);
+    message.tokenIn !== undefined && (obj.token_in = message.tokenIn);
+
+    if (message.routes) {
+      obj.routes = message.routes.map(e => e ? SwapAmountInRoute.toAmino(e) : undefined);
+    } else {
+      obj.routes = [];
+    }
+
+    return obj;
   }
 
 };
@@ -1209,6 +1440,18 @@ export const QuerySwapExactAmountInResponse = {
     const message = createBaseQuerySwapExactAmountInResponse();
     message.tokenOutAmount = object.tokenOutAmount ?? "";
     return message;
+  },
+
+  fromAmino(object: QuerySwapExactAmountInResponseSDKType): QuerySwapExactAmountInResponse {
+    return {
+      tokenOutAmount: isSet(object.token_out_amount) ? object.token_out_amount : undefined
+    };
+  },
+
+  toAmino(message: QuerySwapExactAmountInResponse): QuerySwapExactAmountInResponseSDKType {
+    const obj: any = {};
+    message.tokenOutAmount !== undefined && (obj.token_out_amount = message.tokenOutAmount);
+    return obj;
   }
 
 };
@@ -1308,6 +1551,30 @@ export const QuerySwapExactAmountOutRequest = {
     message.routes = object.routes?.map(e => SwapAmountOutRoute.fromPartial(e)) || [];
     message.tokenOut = object.tokenOut ?? "";
     return message;
+  },
+
+  fromAmino(object: QuerySwapExactAmountOutRequestSDKType): QuerySwapExactAmountOutRequest {
+    return {
+      sender: isSet(object.sender) ? object.sender : undefined,
+      poolId: isSet(object.pool_id) ? object.pool_id : undefined,
+      routes: Array.isArray(object?.routes) ? object.routes.map((e: any) => SwapAmountOutRoute.fromAmino(e)) : [],
+      tokenOut: isSet(object.token_out) ? object.token_out : undefined
+    };
+  },
+
+  toAmino(message: QuerySwapExactAmountOutRequest): QuerySwapExactAmountOutRequestSDKType {
+    const obj: any = {};
+    message.sender !== undefined && (obj.sender = message.sender);
+    message.poolId !== undefined && (obj.pool_id = message.poolId);
+
+    if (message.routes) {
+      obj.routes = message.routes.map(e => e ? SwapAmountOutRoute.toAmino(e) : undefined);
+    } else {
+      obj.routes = [];
+    }
+
+    message.tokenOut !== undefined && (obj.token_out = message.tokenOut);
+    return obj;
   }
 
 };
@@ -1365,6 +1632,18 @@ export const QuerySwapExactAmountOutResponse = {
     const message = createBaseQuerySwapExactAmountOutResponse();
     message.tokenInAmount = object.tokenInAmount ?? "";
     return message;
+  },
+
+  fromAmino(object: QuerySwapExactAmountOutResponseSDKType): QuerySwapExactAmountOutResponse {
+    return {
+      tokenInAmount: isSet(object.token_in_amount) ? object.token_in_amount : undefined
+    };
+  },
+
+  toAmino(message: QuerySwapExactAmountOutResponse): QuerySwapExactAmountOutResponseSDKType {
+    const obj: any = {};
+    message.tokenInAmount !== undefined && (obj.token_in_amount = message.tokenInAmount);
+    return obj;
   }
 
 };
@@ -1408,6 +1687,15 @@ export const QueryTotalLiquidityRequest = {
   fromPartial(_: DeepPartial<QueryTotalLiquidityRequest>): QueryTotalLiquidityRequest {
     const message = createBaseQueryTotalLiquidityRequest();
     return message;
+  },
+
+  fromAmino(_: QueryTotalLiquidityRequestSDKType): QueryTotalLiquidityRequest {
+    return {};
+  },
+
+  toAmino(_: QueryTotalLiquidityRequest): QueryTotalLiquidityRequestSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -1471,6 +1759,24 @@ export const QueryTotalLiquidityResponse = {
     const message = createBaseQueryTotalLiquidityResponse();
     message.liquidity = object.liquidity?.map(e => Coin.fromPartial(e)) || [];
     return message;
+  },
+
+  fromAmino(object: QueryTotalLiquidityResponseSDKType): QueryTotalLiquidityResponse {
+    return {
+      liquidity: Array.isArray(object?.liquidity) ? object.liquidity.map((e: any) => Coin.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: QueryTotalLiquidityResponse): QueryTotalLiquidityResponseSDKType {
+    const obj: any = {};
+
+    if (message.liquidity) {
+      obj.liquidity = message.liquidity.map(e => e ? Coin.toAmino(e) : undefined);
+    } else {
+      obj.liquidity = [];
+    }
+
+    return obj;
   }
 
 };

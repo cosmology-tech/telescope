@@ -105,6 +105,22 @@ export const NetAddress = {
     message.ip = object.ip ?? "";
     message.port = object.port ?? 0;
     return message;
+  },
+
+  fromAmino(object: NetAddressSDKType): NetAddress {
+    return {
+      id: isSet(object.id) ? object.id : undefined,
+      ip: isSet(object.ip) ? object.ip : undefined,
+      port: isSet(object.port) ? object.port : undefined
+    };
+  },
+
+  toAmino(message: NetAddress): NetAddressSDKType {
+    const obj: any = {};
+    message.id !== undefined && (obj.id = message.id);
+    message.ip !== undefined && (obj.ip = message.ip);
+    message.port !== undefined && (obj.port = message.port);
+    return obj;
   }
 
 };
@@ -186,6 +202,22 @@ export const ProtocolVersion = {
     message.block = object.block !== undefined && object.block !== null ? Long.fromValue(object.block) : Long.UZERO;
     message.app = object.app !== undefined && object.app !== null ? Long.fromValue(object.app) : Long.UZERO;
     return message;
+  },
+
+  fromAmino(object: ProtocolVersionSDKType): ProtocolVersion {
+    return {
+      p2p: isSet(object.p2p) ? object.p2p : undefined,
+      block: isSet(object.block) ? object.block : undefined,
+      app: isSet(object.app) ? object.app : undefined
+    };
+  },
+
+  toAmino(message: ProtocolVersion): ProtocolVersionSDKType {
+    const obj: any = {};
+    message.p2p !== undefined && (obj.p2p = message.p2p);
+    message.block !== undefined && (obj.block = message.block);
+    message.app !== undefined && (obj.app = message.app);
+    return obj;
   }
 
 };
@@ -327,6 +359,32 @@ export const DefaultNodeInfo = {
     message.moniker = object.moniker ?? "";
     message.other = object.other !== undefined && object.other !== null ? DefaultNodeInfoOther.fromPartial(object.other) : undefined;
     return message;
+  },
+
+  fromAmino(object: DefaultNodeInfoSDKType): DefaultNodeInfo {
+    return {
+      protocolVersion: isSet(object.protocol_version) ? ProtocolVersion.fromAmino(object.protocol_version) : undefined,
+      defaultNodeId: isSet(object.default_node_id) ? object.default_node_id : undefined,
+      listenAddr: isSet(object.listen_addr) ? object.listen_addr : undefined,
+      network: isSet(object.network) ? object.network : undefined,
+      version: isSet(object.version) ? object.version : undefined,
+      channels: isSet(object.channels) ? object.channels : undefined,
+      moniker: isSet(object.moniker) ? object.moniker : undefined,
+      other: isSet(object.other) ? DefaultNodeInfoOther.fromAmino(object.other) : undefined
+    };
+  },
+
+  toAmino(message: DefaultNodeInfo): DefaultNodeInfoSDKType {
+    const obj: any = {};
+    message.protocolVersion !== undefined && (obj.protocol_version = message.protocolVersion ? ProtocolVersion.toAmino(message.protocolVersion) : undefined);
+    message.defaultNodeId !== undefined && (obj.default_node_id = message.defaultNodeId);
+    message.listenAddr !== undefined && (obj.listen_addr = message.listenAddr);
+    message.network !== undefined && (obj.network = message.network);
+    message.version !== undefined && (obj.version = message.version);
+    message.channels !== undefined && (obj.channels = message.channels);
+    message.moniker !== undefined && (obj.moniker = message.moniker);
+    message.other !== undefined && (obj.other = message.other ? DefaultNodeInfoOther.toAmino(message.other) : undefined);
+    return obj;
   }
 
 };
@@ -396,6 +454,20 @@ export const DefaultNodeInfoOther = {
     message.txIndex = object.txIndex ?? "";
     message.rpcAddress = object.rpcAddress ?? "";
     return message;
+  },
+
+  fromAmino(object: DefaultNodeInfoOtherSDKType): DefaultNodeInfoOther {
+    return {
+      txIndex: isSet(object.tx_index) ? object.tx_index : undefined,
+      rpcAddress: isSet(object.rpc_address) ? object.rpc_address : undefined
+    };
+  },
+
+  toAmino(message: DefaultNodeInfoOther): DefaultNodeInfoOtherSDKType {
+    const obj: any = {};
+    message.txIndex !== undefined && (obj.tx_index = message.txIndex);
+    message.rpcAddress !== undefined && (obj.rpc_address = message.rpcAddress);
+    return obj;
   }
 
 };

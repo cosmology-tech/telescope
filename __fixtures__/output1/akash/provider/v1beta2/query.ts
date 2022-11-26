@@ -111,6 +111,18 @@ export const QueryProvidersRequest = {
     const obj: any = {};
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromAmino(object: QueryProvidersRequestSDKType): QueryProvidersRequest {
+    return {
+      pagination: isSet(object.pagination) ? PageRequest.fromAmino(object.pagination) : undefined
+    };
+  },
+
+  toAmino(message: QueryProvidersRequest): QueryProvidersRequestSDKType {
+    const obj: any = {};
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined);
+    return obj;
   }
 
 };
@@ -206,6 +218,26 @@ export const QueryProvidersResponse = {
 
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
     return obj;
+  },
+
+  fromAmino(object: QueryProvidersResponseSDKType): QueryProvidersResponse {
+    return {
+      providers: Array.isArray(object?.providers) ? object.providers.map((e: any) => Provider.fromAmino(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromAmino(object.pagination) : undefined
+    };
+  },
+
+  toAmino(message: QueryProvidersResponse): QueryProvidersResponseSDKType {
+    const obj: any = {};
+
+    if (message.providers) {
+      obj.providers = message.providers.map(e => e ? Provider.toAmino(e) : undefined);
+    } else {
+      obj.providers = [];
+    }
+
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined);
+    return obj;
   }
 
 };
@@ -272,6 +304,18 @@ export const QueryProviderRequest = {
   },
 
   toSDK(message: QueryProviderRequest): QueryProviderRequestSDKType {
+    const obj: any = {};
+    message.owner !== undefined && (obj.owner = message.owner);
+    return obj;
+  },
+
+  fromAmino(object: QueryProviderRequestSDKType): QueryProviderRequest {
+    return {
+      owner: isSet(object.owner) ? object.owner : undefined
+    };
+  },
+
+  toAmino(message: QueryProviderRequest): QueryProviderRequestSDKType {
     const obj: any = {};
     message.owner !== undefined && (obj.owner = message.owner);
     return obj;
@@ -343,6 +387,18 @@ export const QueryProviderResponse = {
   toSDK(message: QueryProviderResponse): QueryProviderResponseSDKType {
     const obj: any = {};
     message.provider !== undefined && (obj.provider = message.provider ? Provider.toSDK(message.provider) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: QueryProviderResponseSDKType): QueryProviderResponse {
+    return {
+      provider: isSet(object.provider) ? Provider.fromAmino(object.provider) : undefined
+    };
+  },
+
+  toAmino(message: QueryProviderResponse): QueryProviderResponseSDKType {
+    const obj: any = {};
+    message.provider !== undefined && (obj.provider = message.provider ? Provider.toAmino(message.provider) : undefined);
     return obj;
   }
 

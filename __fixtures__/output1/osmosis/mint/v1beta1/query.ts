@@ -99,6 +99,15 @@ export const QueryParamsRequest = {
   toSDK(_: QueryParamsRequest): QueryParamsRequestSDKType {
     const obj: any = {};
     return obj;
+  },
+
+  fromAmino(_: QueryParamsRequestSDKType): QueryParamsRequest {
+    return {};
+  },
+
+  toAmino(_: QueryParamsRequest): QueryParamsRequestSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -168,6 +177,18 @@ export const QueryParamsResponse = {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
     return obj;
+  },
+
+  fromAmino(object: QueryParamsResponseSDKType): QueryParamsResponse {
+    return {
+      params: isSet(object.params) ? Params.fromAmino(object.params) : undefined
+    };
+  },
+
+  toAmino(message: QueryParamsResponse): QueryParamsResponseSDKType {
+    const obj: any = {};
+    message.params !== undefined && (obj.params = message.params ? Params.toAmino(message.params) : undefined);
+    return obj;
   }
 
 };
@@ -218,6 +239,15 @@ export const QueryEpochProvisionsRequest = {
   },
 
   toSDK(_: QueryEpochProvisionsRequest): QueryEpochProvisionsRequestSDKType {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromAmino(_: QueryEpochProvisionsRequestSDKType): QueryEpochProvisionsRequest {
+    return {};
+  },
+
+  toAmino(_: QueryEpochProvisionsRequest): QueryEpochProvisionsRequestSDKType {
     const obj: any = {};
     return obj;
   }
@@ -286,6 +316,18 @@ export const QueryEpochProvisionsResponse = {
   },
 
   toSDK(message: QueryEpochProvisionsResponse): QueryEpochProvisionsResponseSDKType {
+    const obj: any = {};
+    message.epochProvisions !== undefined && (obj.epoch_provisions = message.epochProvisions);
+    return obj;
+  },
+
+  fromAmino(object: QueryEpochProvisionsResponseSDKType): QueryEpochProvisionsResponse {
+    return {
+      epochProvisions: isSet(object.epoch_provisions) ? object.epoch_provisions : undefined
+    };
+  },
+
+  toAmino(message: QueryEpochProvisionsResponse): QueryEpochProvisionsResponseSDKType {
     const obj: any = {};
     message.epochProvisions !== undefined && (obj.epoch_provisions = message.epochProvisions);
     return obj;

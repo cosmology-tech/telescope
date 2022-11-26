@@ -210,6 +210,26 @@ export const MsgConnectionOpenInit = {
     message.delayPeriod = object.delayPeriod !== undefined && object.delayPeriod !== null ? Long.fromValue(object.delayPeriod) : Long.UZERO;
     message.signer = object.signer ?? "";
     return message;
+  },
+
+  fromAmino(object: MsgConnectionOpenInitSDKType): MsgConnectionOpenInit {
+    return {
+      clientId: isSet(object.client_id) ? object.client_id : undefined,
+      counterparty: isSet(object.counterparty) ? Counterparty.fromAmino(object.counterparty) : undefined,
+      version: isSet(object.version) ? Version.fromAmino(object.version) : undefined,
+      delayPeriod: isSet(object.delay_period) ? object.delay_period : undefined,
+      signer: isSet(object.signer) ? object.signer : undefined
+    };
+  },
+
+  toAmino(message: MsgConnectionOpenInit): MsgConnectionOpenInitSDKType {
+    const obj: any = {};
+    message.clientId !== undefined && (obj.client_id = message.clientId);
+    message.counterparty !== undefined && (obj.counterparty = message.counterparty ? Counterparty.toAmino(message.counterparty) : undefined);
+    message.version !== undefined && (obj.version = message.version ? Version.toAmino(message.version) : undefined);
+    message.delayPeriod !== undefined && (obj.delay_period = message.delayPeriod);
+    message.signer !== undefined && (obj.signer = message.signer);
+    return obj;
   }
 
 };
@@ -253,6 +273,15 @@ export const MsgConnectionOpenInitResponse = {
   fromPartial(_: DeepPartial<MsgConnectionOpenInitResponse>): MsgConnectionOpenInitResponse {
     const message = createBaseMsgConnectionOpenInitResponse();
     return message;
+  },
+
+  fromAmino(_: MsgConnectionOpenInitResponseSDKType): MsgConnectionOpenInitResponse {
+    return {};
+  },
+
+  toAmino(_: MsgConnectionOpenInitResponse): MsgConnectionOpenInitResponseSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -448,6 +477,46 @@ export const MsgConnectionOpenTry = {
     message.consensusHeight = object.consensusHeight !== undefined && object.consensusHeight !== null ? Height.fromPartial(object.consensusHeight) : undefined;
     message.signer = object.signer ?? "";
     return message;
+  },
+
+  fromAmino(object: MsgConnectionOpenTrySDKType): MsgConnectionOpenTry {
+    return {
+      clientId: isSet(object.client_id) ? object.client_id : undefined,
+      previousConnectionId: isSet(object.previous_connection_id) ? object.previous_connection_id : undefined,
+      clientState: isSet(object.client_state) ? Any.fromAmino(object.client_state) : undefined,
+      counterparty: isSet(object.counterparty) ? Counterparty.fromAmino(object.counterparty) : undefined,
+      delayPeriod: isSet(object.delay_period) ? object.delay_period : undefined,
+      counterpartyVersions: Array.isArray(object?.counterparty_versions) ? object.counterparty_versions.map((e: any) => Version.fromAmino(e)) : [],
+      proofHeight: isSet(object.proof_height) ? Height.fromAmino(object.proof_height) : undefined,
+      proofInit: isSet(object.proof_init) ? object.proof_init : undefined,
+      proofClient: isSet(object.proof_client) ? object.proof_client : undefined,
+      proofConsensus: isSet(object.proof_consensus) ? object.proof_consensus : undefined,
+      consensusHeight: isSet(object.consensus_height) ? Height.fromAmino(object.consensus_height) : undefined,
+      signer: isSet(object.signer) ? object.signer : undefined
+    };
+  },
+
+  toAmino(message: MsgConnectionOpenTry): MsgConnectionOpenTrySDKType {
+    const obj: any = {};
+    message.clientId !== undefined && (obj.client_id = message.clientId);
+    message.previousConnectionId !== undefined && (obj.previous_connection_id = message.previousConnectionId);
+    message.clientState !== undefined && (obj.client_state = message.clientState ? Any.toAmino(message.clientState) : undefined);
+    message.counterparty !== undefined && (obj.counterparty = message.counterparty ? Counterparty.toAmino(message.counterparty) : undefined);
+    message.delayPeriod !== undefined && (obj.delay_period = message.delayPeriod);
+
+    if (message.counterpartyVersions) {
+      obj.counterparty_versions = message.counterpartyVersions.map(e => e ? Version.toAmino(e) : undefined);
+    } else {
+      obj.counterparty_versions = [];
+    }
+
+    message.proofHeight !== undefined && (obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : undefined);
+    message.proofInit !== undefined && (obj.proof_init = message.proofInit);
+    message.proofClient !== undefined && (obj.proof_client = message.proofClient);
+    message.proofConsensus !== undefined && (obj.proof_consensus = message.proofConsensus);
+    message.consensusHeight !== undefined && (obj.consensus_height = message.consensusHeight ? Height.toAmino(message.consensusHeight) : undefined);
+    message.signer !== undefined && (obj.signer = message.signer);
+    return obj;
   }
 
 };
@@ -491,6 +560,15 @@ export const MsgConnectionOpenTryResponse = {
   fromPartial(_: DeepPartial<MsgConnectionOpenTryResponse>): MsgConnectionOpenTryResponse {
     const message = createBaseMsgConnectionOpenTryResponse();
     return message;
+  },
+
+  fromAmino(_: MsgConnectionOpenTryResponseSDKType): MsgConnectionOpenTryResponse {
+    return {};
+  },
+
+  toAmino(_: MsgConnectionOpenTryResponse): MsgConnectionOpenTryResponseSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -656,6 +734,36 @@ export const MsgConnectionOpenAck = {
     message.consensusHeight = object.consensusHeight !== undefined && object.consensusHeight !== null ? Height.fromPartial(object.consensusHeight) : undefined;
     message.signer = object.signer ?? "";
     return message;
+  },
+
+  fromAmino(object: MsgConnectionOpenAckSDKType): MsgConnectionOpenAck {
+    return {
+      connectionId: isSet(object.connection_id) ? object.connection_id : undefined,
+      counterpartyConnectionId: isSet(object.counterparty_connection_id) ? object.counterparty_connection_id : undefined,
+      version: isSet(object.version) ? Version.fromAmino(object.version) : undefined,
+      clientState: isSet(object.client_state) ? Any.fromAmino(object.client_state) : undefined,
+      proofHeight: isSet(object.proof_height) ? Height.fromAmino(object.proof_height) : undefined,
+      proofTry: isSet(object.proof_try) ? object.proof_try : undefined,
+      proofClient: isSet(object.proof_client) ? object.proof_client : undefined,
+      proofConsensus: isSet(object.proof_consensus) ? object.proof_consensus : undefined,
+      consensusHeight: isSet(object.consensus_height) ? Height.fromAmino(object.consensus_height) : undefined,
+      signer: isSet(object.signer) ? object.signer : undefined
+    };
+  },
+
+  toAmino(message: MsgConnectionOpenAck): MsgConnectionOpenAckSDKType {
+    const obj: any = {};
+    message.connectionId !== undefined && (obj.connection_id = message.connectionId);
+    message.counterpartyConnectionId !== undefined && (obj.counterparty_connection_id = message.counterpartyConnectionId);
+    message.version !== undefined && (obj.version = message.version ? Version.toAmino(message.version) : undefined);
+    message.clientState !== undefined && (obj.client_state = message.clientState ? Any.toAmino(message.clientState) : undefined);
+    message.proofHeight !== undefined && (obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : undefined);
+    message.proofTry !== undefined && (obj.proof_try = message.proofTry);
+    message.proofClient !== undefined && (obj.proof_client = message.proofClient);
+    message.proofConsensus !== undefined && (obj.proof_consensus = message.proofConsensus);
+    message.consensusHeight !== undefined && (obj.consensus_height = message.consensusHeight ? Height.toAmino(message.consensusHeight) : undefined);
+    message.signer !== undefined && (obj.signer = message.signer);
+    return obj;
   }
 
 };
@@ -699,6 +807,15 @@ export const MsgConnectionOpenAckResponse = {
   fromPartial(_: DeepPartial<MsgConnectionOpenAckResponse>): MsgConnectionOpenAckResponse {
     const message = createBaseMsgConnectionOpenAckResponse();
     return message;
+  },
+
+  fromAmino(_: MsgConnectionOpenAckResponseSDKType): MsgConnectionOpenAckResponse {
+    return {};
+  },
+
+  toAmino(_: MsgConnectionOpenAckResponse): MsgConnectionOpenAckResponseSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -792,6 +909,24 @@ export const MsgConnectionOpenConfirm = {
     message.proofHeight = object.proofHeight !== undefined && object.proofHeight !== null ? Height.fromPartial(object.proofHeight) : undefined;
     message.signer = object.signer ?? "";
     return message;
+  },
+
+  fromAmino(object: MsgConnectionOpenConfirmSDKType): MsgConnectionOpenConfirm {
+    return {
+      connectionId: isSet(object.connection_id) ? object.connection_id : undefined,
+      proofAck: isSet(object.proof_ack) ? object.proof_ack : undefined,
+      proofHeight: isSet(object.proof_height) ? Height.fromAmino(object.proof_height) : undefined,
+      signer: isSet(object.signer) ? object.signer : undefined
+    };
+  },
+
+  toAmino(message: MsgConnectionOpenConfirm): MsgConnectionOpenConfirmSDKType {
+    const obj: any = {};
+    message.connectionId !== undefined && (obj.connection_id = message.connectionId);
+    message.proofAck !== undefined && (obj.proof_ack = message.proofAck);
+    message.proofHeight !== undefined && (obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : undefined);
+    message.signer !== undefined && (obj.signer = message.signer);
+    return obj;
   }
 
 };
@@ -835,6 +970,15 @@ export const MsgConnectionOpenConfirmResponse = {
   fromPartial(_: DeepPartial<MsgConnectionOpenConfirmResponse>): MsgConnectionOpenConfirmResponse {
     const message = createBaseMsgConnectionOpenConfirmResponse();
     return message;
+  },
+
+  fromAmino(_: MsgConnectionOpenConfirmResponseSDKType): MsgConnectionOpenConfirmResponse {
+    return {};
+  },
+
+  toAmino(_: MsgConnectionOpenConfirmResponse): MsgConnectionOpenConfirmResponseSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };

@@ -68,6 +68,15 @@ export const QueryParamsRequest = {
   fromPartial(_: DeepPartial<QueryParamsRequest>): QueryParamsRequest {
     const message = createBaseQueryParamsRequest();
     return message;
+  },
+
+  fromAmino(_: QueryParamsRequestSDKType): QueryParamsRequest {
+    return {};
+  },
+
+  toAmino(_: QueryParamsRequest): QueryParamsRequestSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -125,6 +134,18 @@ export const QueryParamsResponse = {
     const message = createBaseQueryParamsResponse();
     message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     return message;
+  },
+
+  fromAmino(object: QueryParamsResponseSDKType): QueryParamsResponse {
+    return {
+      params: isSet(object.params) ? Params.fromAmino(object.params) : undefined
+    };
+  },
+
+  toAmino(message: QueryParamsResponse): QueryParamsResponseSDKType {
+    const obj: any = {};
+    message.params !== undefined && (obj.params = message.params ? Params.toAmino(message.params) : undefined);
+    return obj;
   }
 
 };
@@ -168,6 +189,15 @@ export const QueryEpochProvisionsRequest = {
   fromPartial(_: DeepPartial<QueryEpochProvisionsRequest>): QueryEpochProvisionsRequest {
     const message = createBaseQueryEpochProvisionsRequest();
     return message;
+  },
+
+  fromAmino(_: QueryEpochProvisionsRequestSDKType): QueryEpochProvisionsRequest {
+    return {};
+  },
+
+  toAmino(_: QueryEpochProvisionsRequest): QueryEpochProvisionsRequestSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -225,6 +255,18 @@ export const QueryEpochProvisionsResponse = {
     const message = createBaseQueryEpochProvisionsResponse();
     message.epochProvisions = object.epochProvisions ?? new Uint8Array();
     return message;
+  },
+
+  fromAmino(object: QueryEpochProvisionsResponseSDKType): QueryEpochProvisionsResponse {
+    return {
+      epochProvisions: isSet(object.epoch_provisions) ? object.epoch_provisions : undefined
+    };
+  },
+
+  toAmino(message: QueryEpochProvisionsResponse): QueryEpochProvisionsResponseSDKType {
+    const obj: any = {};
+    message.epochProvisions !== undefined && (obj.epoch_provisions = message.epochProvisions);
+    return obj;
   }
 
 };

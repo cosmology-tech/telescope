@@ -123,6 +123,15 @@ export const QueryPeriodRequest = {
   fromPartial(_: DeepPartial<QueryPeriodRequest>): QueryPeriodRequest {
     const message = createBaseQueryPeriodRequest();
     return message;
+  },
+
+  fromAmino(_: QueryPeriodRequestSDKType): QueryPeriodRequest {
+    return {};
+  },
+
+  toAmino(_: QueryPeriodRequest): QueryPeriodRequestSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -180,6 +189,18 @@ export const QueryPeriodResponse = {
     const message = createBaseQueryPeriodResponse();
     message.period = object.period !== undefined && object.period !== null ? Long.fromValue(object.period) : Long.UZERO;
     return message;
+  },
+
+  fromAmino(object: QueryPeriodResponseSDKType): QueryPeriodResponse {
+    return {
+      period: isSet(object.period) ? object.period : undefined
+    };
+  },
+
+  toAmino(message: QueryPeriodResponse): QueryPeriodResponseSDKType {
+    const obj: any = {};
+    message.period !== undefined && (obj.period = message.period);
+    return obj;
   }
 
 };
@@ -223,6 +244,15 @@ export const QueryEpochMintProvisionRequest = {
   fromPartial(_: DeepPartial<QueryEpochMintProvisionRequest>): QueryEpochMintProvisionRequest {
     const message = createBaseQueryEpochMintProvisionRequest();
     return message;
+  },
+
+  fromAmino(_: QueryEpochMintProvisionRequestSDKType): QueryEpochMintProvisionRequest {
+    return {};
+  },
+
+  toAmino(_: QueryEpochMintProvisionRequest): QueryEpochMintProvisionRequestSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -280,6 +310,18 @@ export const QueryEpochMintProvisionResponse = {
     const message = createBaseQueryEpochMintProvisionResponse();
     message.epochMintProvision = object.epochMintProvision !== undefined && object.epochMintProvision !== null ? DecCoin.fromPartial(object.epochMintProvision) : undefined;
     return message;
+  },
+
+  fromAmino(object: QueryEpochMintProvisionResponseSDKType): QueryEpochMintProvisionResponse {
+    return {
+      epochMintProvision: isSet(object.epoch_mint_provision) ? DecCoin.fromAmino(object.epoch_mint_provision) : undefined
+    };
+  },
+
+  toAmino(message: QueryEpochMintProvisionResponse): QueryEpochMintProvisionResponseSDKType {
+    const obj: any = {};
+    message.epochMintProvision !== undefined && (obj.epoch_mint_provision = message.epochMintProvision ? DecCoin.toAmino(message.epochMintProvision) : undefined);
+    return obj;
   }
 
 };
@@ -323,6 +365,15 @@ export const QuerySkippedEpochsRequest = {
   fromPartial(_: DeepPartial<QuerySkippedEpochsRequest>): QuerySkippedEpochsRequest {
     const message = createBaseQuerySkippedEpochsRequest();
     return message;
+  },
+
+  fromAmino(_: QuerySkippedEpochsRequestSDKType): QuerySkippedEpochsRequest {
+    return {};
+  },
+
+  toAmino(_: QuerySkippedEpochsRequest): QuerySkippedEpochsRequestSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -380,6 +431,18 @@ export const QuerySkippedEpochsResponse = {
     const message = createBaseQuerySkippedEpochsResponse();
     message.skippedEpochs = object.skippedEpochs !== undefined && object.skippedEpochs !== null ? Long.fromValue(object.skippedEpochs) : Long.UZERO;
     return message;
+  },
+
+  fromAmino(object: QuerySkippedEpochsResponseSDKType): QuerySkippedEpochsResponse {
+    return {
+      skippedEpochs: isSet(object.skipped_epochs) ? object.skipped_epochs : undefined
+    };
+  },
+
+  toAmino(message: QuerySkippedEpochsResponse): QuerySkippedEpochsResponseSDKType {
+    const obj: any = {};
+    message.skippedEpochs !== undefined && (obj.skipped_epochs = message.skippedEpochs);
+    return obj;
   }
 
 };
@@ -423,6 +486,15 @@ export const QueryCirculatingSupplyRequest = {
   fromPartial(_: DeepPartial<QueryCirculatingSupplyRequest>): QueryCirculatingSupplyRequest {
     const message = createBaseQueryCirculatingSupplyRequest();
     return message;
+  },
+
+  fromAmino(_: QueryCirculatingSupplyRequestSDKType): QueryCirculatingSupplyRequest {
+    return {};
+  },
+
+  toAmino(_: QueryCirculatingSupplyRequest): QueryCirculatingSupplyRequestSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -480,6 +552,18 @@ export const QueryCirculatingSupplyResponse = {
     const message = createBaseQueryCirculatingSupplyResponse();
     message.circulatingSupply = object.circulatingSupply !== undefined && object.circulatingSupply !== null ? DecCoin.fromPartial(object.circulatingSupply) : undefined;
     return message;
+  },
+
+  fromAmino(object: QueryCirculatingSupplyResponseSDKType): QueryCirculatingSupplyResponse {
+    return {
+      circulatingSupply: isSet(object.circulating_supply) ? DecCoin.fromAmino(object.circulating_supply) : undefined
+    };
+  },
+
+  toAmino(message: QueryCirculatingSupplyResponse): QueryCirculatingSupplyResponseSDKType {
+    const obj: any = {};
+    message.circulatingSupply !== undefined && (obj.circulating_supply = message.circulatingSupply ? DecCoin.toAmino(message.circulatingSupply) : undefined);
+    return obj;
   }
 
 };
@@ -523,6 +607,15 @@ export const QueryInflationRateRequest = {
   fromPartial(_: DeepPartial<QueryInflationRateRequest>): QueryInflationRateRequest {
     const message = createBaseQueryInflationRateRequest();
     return message;
+  },
+
+  fromAmino(_: QueryInflationRateRequestSDKType): QueryInflationRateRequest {
+    return {};
+  },
+
+  toAmino(_: QueryInflationRateRequest): QueryInflationRateRequestSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -580,6 +673,18 @@ export const QueryInflationRateResponse = {
     const message = createBaseQueryInflationRateResponse();
     message.inflationRate = object.inflationRate ?? "";
     return message;
+  },
+
+  fromAmino(object: QueryInflationRateResponseSDKType): QueryInflationRateResponse {
+    return {
+      inflationRate: isSet(object.inflation_rate) ? object.inflation_rate : undefined
+    };
+  },
+
+  toAmino(message: QueryInflationRateResponse): QueryInflationRateResponseSDKType {
+    const obj: any = {};
+    message.inflationRate !== undefined && (obj.inflation_rate = message.inflationRate);
+    return obj;
   }
 
 };
@@ -623,6 +728,15 @@ export const QueryParamsRequest = {
   fromPartial(_: DeepPartial<QueryParamsRequest>): QueryParamsRequest {
     const message = createBaseQueryParamsRequest();
     return message;
+  },
+
+  fromAmino(_: QueryParamsRequestSDKType): QueryParamsRequest {
+    return {};
+  },
+
+  toAmino(_: QueryParamsRequest): QueryParamsRequestSDKType {
+    const obj: any = {};
+    return obj;
   }
 
 };
@@ -680,6 +794,18 @@ export const QueryParamsResponse = {
     const message = createBaseQueryParamsResponse();
     message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     return message;
+  },
+
+  fromAmino(object: QueryParamsResponseSDKType): QueryParamsResponse {
+    return {
+      params: isSet(object.params) ? Params.fromAmino(object.params) : undefined
+    };
+  },
+
+  toAmino(message: QueryParamsResponse): QueryParamsResponseSDKType {
+    const obj: any = {};
+    message.params !== undefined && (obj.params = message.params ? Params.toAmino(message.params) : undefined);
+    return obj;
   }
 
 };

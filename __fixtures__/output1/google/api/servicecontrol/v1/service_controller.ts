@@ -548,6 +548,22 @@ export const CheckRequest = {
     message.operation !== undefined && (obj.operation = message.operation ? Operation.toSDK(message.operation) : undefined);
     message.serviceConfigId !== undefined && (obj.service_config_id = message.serviceConfigId);
     return obj;
+  },
+
+  fromAmino(object: CheckRequestSDKType): CheckRequest {
+    return {
+      serviceName: isSet(object.service_name) ? object.service_name : undefined,
+      operation: isSet(object.operation) ? Operation.fromAmino(object.operation) : undefined,
+      serviceConfigId: isSet(object.service_config_id) ? object.service_config_id : undefined
+    };
+  },
+
+  toAmino(message: CheckRequest): CheckRequestSDKType {
+    const obj: any = {};
+    message.serviceName !== undefined && (obj.service_name = message.serviceName);
+    message.operation !== undefined && (obj.operation = message.operation ? Operation.toAmino(message.operation) : undefined);
+    message.serviceConfigId !== undefined && (obj.service_config_id = message.serviceConfigId);
+    return obj;
   }
 
 };
@@ -685,6 +701,32 @@ export const CheckResponse = {
     message.serviceRolloutId !== undefined && (obj.service_rollout_id = message.serviceRolloutId);
     message.checkInfo !== undefined && (obj.check_info = message.checkInfo ? CheckResponse_CheckInfo.toSDK(message.checkInfo) : undefined);
     return obj;
+  },
+
+  fromAmino(object: CheckResponseSDKType): CheckResponse {
+    return {
+      operationId: isSet(object.operation_id) ? object.operation_id : undefined,
+      checkErrors: Array.isArray(object?.check_errors) ? object.check_errors.map((e: any) => CheckError.fromAmino(e)) : [],
+      serviceConfigId: isSet(object.service_config_id) ? object.service_config_id : undefined,
+      serviceRolloutId: isSet(object.service_rollout_id) ? object.service_rollout_id : undefined,
+      checkInfo: isSet(object.check_info) ? CheckResponse_CheckInfo.fromAmino(object.check_info) : undefined
+    };
+  },
+
+  toAmino(message: CheckResponse): CheckResponseSDKType {
+    const obj: any = {};
+    message.operationId !== undefined && (obj.operation_id = message.operationId);
+
+    if (message.checkErrors) {
+      obj.check_errors = message.checkErrors.map(e => e ? CheckError.toAmino(e) : undefined);
+    } else {
+      obj.check_errors = [];
+    }
+
+    message.serviceConfigId !== undefined && (obj.service_config_id = message.serviceConfigId);
+    message.serviceRolloutId !== undefined && (obj.service_rollout_id = message.serviceRolloutId);
+    message.checkInfo !== undefined && (obj.check_info = message.checkInfo ? CheckResponse_CheckInfo.toAmino(message.checkInfo) : undefined);
+    return obj;
   }
 
 };
@@ -780,6 +822,26 @@ export const CheckResponse_CheckInfo = {
 
     message.consumerInfo !== undefined && (obj.consumer_info = message.consumerInfo ? CheckResponse_ConsumerInfo.toSDK(message.consumerInfo) : undefined);
     return obj;
+  },
+
+  fromAmino(object: CheckResponse_CheckInfoSDKType): CheckResponse_CheckInfo {
+    return {
+      unusedArguments: Array.isArray(object?.unused_arguments) ? object.unused_arguments.map((e: any) => e) : [],
+      consumerInfo: isSet(object.consumer_info) ? CheckResponse_ConsumerInfo.fromAmino(object.consumer_info) : undefined
+    };
+  },
+
+  toAmino(message: CheckResponse_CheckInfo): CheckResponse_CheckInfoSDKType {
+    const obj: any = {};
+
+    if (message.unusedArguments) {
+      obj.unused_arguments = message.unusedArguments.map(e => e);
+    } else {
+      obj.unused_arguments = [];
+    }
+
+    message.consumerInfo !== undefined && (obj.consumer_info = message.consumerInfo ? CheckResponse_ConsumerInfo.toAmino(message.consumerInfo) : undefined);
+    return obj;
   }
 
 };
@@ -872,6 +934,22 @@ export const CheckResponse_ConsumerInfo = {
   },
 
   toSDK(message: CheckResponse_ConsumerInfo): CheckResponse_ConsumerInfoSDKType {
+    const obj: any = {};
+    message.projectNumber !== undefined && (obj.project_number = message.projectNumber);
+    message.type !== undefined && (obj.type = checkResponse_ConsumerInfo_ConsumerTypeToJSON(message.type));
+    message.consumerNumber !== undefined && (obj.consumer_number = message.consumerNumber);
+    return obj;
+  },
+
+  fromAmino(object: CheckResponse_ConsumerInfoSDKType): CheckResponse_ConsumerInfo {
+    return {
+      projectNumber: isSet(object.project_number) ? object.project_number : undefined,
+      type: isSet(object.type) ? checkResponse_ConsumerInfo_ConsumerTypeFromJSON(object.type) : 0,
+      consumerNumber: isSet(object.consumer_number) ? object.consumer_number : undefined
+    };
+  },
+
+  toAmino(message: CheckResponse_ConsumerInfo): CheckResponse_ConsumerInfoSDKType {
     const obj: any = {};
     message.projectNumber !== undefined && (obj.project_number = message.projectNumber);
     message.type !== undefined && (obj.type = checkResponse_ConsumerInfo_ConsumerTypeToJSON(message.type));
@@ -980,6 +1058,28 @@ export const ReportRequest = {
 
     if (message.operations) {
       obj.operations = message.operations.map(e => e ? Operation.toSDK(e) : undefined);
+    } else {
+      obj.operations = [];
+    }
+
+    message.serviceConfigId !== undefined && (obj.service_config_id = message.serviceConfigId);
+    return obj;
+  },
+
+  fromAmino(object: ReportRequestSDKType): ReportRequest {
+    return {
+      serviceName: isSet(object.service_name) ? object.service_name : undefined,
+      operations: Array.isArray(object?.operations) ? object.operations.map((e: any) => Operation.fromAmino(e)) : [],
+      serviceConfigId: isSet(object.service_config_id) ? object.service_config_id : undefined
+    };
+  },
+
+  toAmino(message: ReportRequest): ReportRequestSDKType {
+    const obj: any = {};
+    message.serviceName !== undefined && (obj.service_name = message.serviceName);
+
+    if (message.operations) {
+      obj.operations = message.operations.map(e => e ? Operation.toAmino(e) : undefined);
     } else {
       obj.operations = [];
     }
@@ -1095,6 +1195,28 @@ export const ReportResponse = {
     message.serviceConfigId !== undefined && (obj.service_config_id = message.serviceConfigId);
     message.serviceRolloutId !== undefined && (obj.service_rollout_id = message.serviceRolloutId);
     return obj;
+  },
+
+  fromAmino(object: ReportResponseSDKType): ReportResponse {
+    return {
+      reportErrors: Array.isArray(object?.report_errors) ? object.report_errors.map((e: any) => ReportResponse_ReportError.fromAmino(e)) : [],
+      serviceConfigId: isSet(object.service_config_id) ? object.service_config_id : undefined,
+      serviceRolloutId: isSet(object.service_rollout_id) ? object.service_rollout_id : undefined
+    };
+  },
+
+  toAmino(message: ReportResponse): ReportResponseSDKType {
+    const obj: any = {};
+
+    if (message.reportErrors) {
+      obj.report_errors = message.reportErrors.map(e => e ? ReportResponse_ReportError.toAmino(e) : undefined);
+    } else {
+      obj.report_errors = [];
+    }
+
+    message.serviceConfigId !== undefined && (obj.service_config_id = message.serviceConfigId);
+    message.serviceRolloutId !== undefined && (obj.service_rollout_id = message.serviceRolloutId);
+    return obj;
   }
 
 };
@@ -1177,6 +1299,20 @@ export const ReportResponse_ReportError = {
     const obj: any = {};
     message.operationId !== undefined && (obj.operation_id = message.operationId);
     message.status !== undefined && (obj.status = message.status ? Status.toSDK(message.status) : undefined);
+    return obj;
+  },
+
+  fromAmino(object: ReportResponse_ReportErrorSDKType): ReportResponse_ReportError {
+    return {
+      operationId: isSet(object.operation_id) ? object.operation_id : undefined,
+      status: isSet(object.status) ? Status.fromAmino(object.status) : undefined
+    };
+  },
+
+  toAmino(message: ReportResponse_ReportError): ReportResponse_ReportErrorSDKType {
+    const obj: any = {};
+    message.operationId !== undefined && (obj.operation_id = message.operationId);
+    message.status !== undefined && (obj.status = message.status ? Status.toAmino(message.status) : undefined);
     return obj;
   }
 

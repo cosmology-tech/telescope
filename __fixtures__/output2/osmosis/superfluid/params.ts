@@ -68,6 +68,18 @@ export const Params = {
     const message = createBaseParams();
     message.minimumRiskFactor = object.minimumRiskFactor ?? "";
     return message;
+  },
+
+  fromAmino(object: ParamsSDKType): Params {
+    return {
+      minimumRiskFactor: isSet(object.minimum_risk_factor) ? object.minimum_risk_factor : undefined
+    };
+  },
+
+  toAmino(message: Params): ParamsSDKType {
+    const obj: any = {};
+    message.minimumRiskFactor !== undefined && (obj.minimum_risk_factor = message.minimumRiskFactor);
+    return obj;
   }
 
 };

@@ -270,6 +270,22 @@ export const MsgCreateClient = {
     message.consensusState !== undefined && (obj.consensus_state = message.consensusState ? Any.toSDK(message.consensusState) : undefined);
     message.signer !== undefined && (obj.signer = message.signer);
     return obj;
+  },
+
+  fromAmino(object: MsgCreateClientSDKType): MsgCreateClient {
+    return {
+      clientState: isSet(object.client_state) ? Any.fromAmino(object.client_state) : undefined,
+      consensusState: isSet(object.consensus_state) ? Any.fromAmino(object.consensus_state) : undefined,
+      signer: isSet(object.signer) ? object.signer : undefined
+    };
+  },
+
+  toAmino(message: MsgCreateClient): MsgCreateClientSDKType {
+    const obj: any = {};
+    message.clientState !== undefined && (obj.client_state = message.clientState ? Any.toAmino(message.clientState) : undefined);
+    message.consensusState !== undefined && (obj.consensus_state = message.consensusState ? Any.toAmino(message.consensusState) : undefined);
+    message.signer !== undefined && (obj.signer = message.signer);
+    return obj;
   }
 
 };
@@ -320,6 +336,15 @@ export const MsgCreateClientResponse = {
   },
 
   toSDK(_: MsgCreateClientResponse): MsgCreateClientResponseSDKType {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromAmino(_: MsgCreateClientResponseSDKType): MsgCreateClientResponse {
+    return {};
+  },
+
+  toAmino(_: MsgCreateClientResponse): MsgCreateClientResponseSDKType {
     const obj: any = {};
     return obj;
   }
@@ -419,6 +444,22 @@ export const MsgUpdateClient = {
     message.header !== undefined && (obj.header = message.header ? Any.toSDK(message.header) : undefined);
     message.signer !== undefined && (obj.signer = message.signer);
     return obj;
+  },
+
+  fromAmino(object: MsgUpdateClientSDKType): MsgUpdateClient {
+    return {
+      clientId: isSet(object.client_id) ? object.client_id : undefined,
+      header: isSet(object.header) ? Any.fromAmino(object.header) : undefined,
+      signer: isSet(object.signer) ? object.signer : undefined
+    };
+  },
+
+  toAmino(message: MsgUpdateClient): MsgUpdateClientSDKType {
+    const obj: any = {};
+    message.clientId !== undefined && (obj.client_id = message.clientId);
+    message.header !== undefined && (obj.header = message.header ? Any.toAmino(message.header) : undefined);
+    message.signer !== undefined && (obj.signer = message.signer);
+    return obj;
   }
 
 };
@@ -469,6 +510,15 @@ export const MsgUpdateClientResponse = {
   },
 
   toSDK(_: MsgUpdateClientResponse): MsgUpdateClientResponseSDKType {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromAmino(_: MsgUpdateClientResponseSDKType): MsgUpdateClientResponse {
+    return {};
+  },
+
+  toAmino(_: MsgUpdateClientResponse): MsgUpdateClientResponseSDKType {
     const obj: any = {};
     return obj;
   }
@@ -610,6 +660,28 @@ export const MsgUpgradeClient = {
     message.proofUpgradeConsensusState !== undefined && (obj.proof_upgrade_consensus_state = message.proofUpgradeConsensusState);
     message.signer !== undefined && (obj.signer = message.signer);
     return obj;
+  },
+
+  fromAmino(object: MsgUpgradeClientSDKType): MsgUpgradeClient {
+    return {
+      clientId: isSet(object.client_id) ? object.client_id : undefined,
+      clientState: isSet(object.client_state) ? Any.fromAmino(object.client_state) : undefined,
+      consensusState: isSet(object.consensus_state) ? Any.fromAmino(object.consensus_state) : undefined,
+      proofUpgradeClient: isSet(object.proof_upgrade_client) ? object.proof_upgrade_client : undefined,
+      proofUpgradeConsensusState: isSet(object.proof_upgrade_consensus_state) ? object.proof_upgrade_consensus_state : undefined,
+      signer: isSet(object.signer) ? object.signer : undefined
+    };
+  },
+
+  toAmino(message: MsgUpgradeClient): MsgUpgradeClientSDKType {
+    const obj: any = {};
+    message.clientId !== undefined && (obj.client_id = message.clientId);
+    message.clientState !== undefined && (obj.client_state = message.clientState ? Any.toAmino(message.clientState) : undefined);
+    message.consensusState !== undefined && (obj.consensus_state = message.consensusState ? Any.toAmino(message.consensusState) : undefined);
+    message.proofUpgradeClient !== undefined && (obj.proof_upgrade_client = message.proofUpgradeClient);
+    message.proofUpgradeConsensusState !== undefined && (obj.proof_upgrade_consensus_state = message.proofUpgradeConsensusState);
+    message.signer !== undefined && (obj.signer = message.signer);
+    return obj;
   }
 
 };
@@ -660,6 +732,15 @@ export const MsgUpgradeClientResponse = {
   },
 
   toSDK(_: MsgUpgradeClientResponse): MsgUpgradeClientResponseSDKType {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromAmino(_: MsgUpgradeClientResponseSDKType): MsgUpgradeClientResponse {
+    return {};
+  },
+
+  toAmino(_: MsgUpgradeClientResponse): MsgUpgradeClientResponseSDKType {
     const obj: any = {};
     return obj;
   }
@@ -759,6 +840,22 @@ export const MsgSubmitMisbehaviour = {
     message.misbehaviour !== undefined && (obj.misbehaviour = message.misbehaviour ? Any.toSDK(message.misbehaviour) : undefined);
     message.signer !== undefined && (obj.signer = message.signer);
     return obj;
+  },
+
+  fromAmino(object: MsgSubmitMisbehaviourSDKType): MsgSubmitMisbehaviour {
+    return {
+      clientId: isSet(object.client_id) ? object.client_id : undefined,
+      misbehaviour: isSet(object.misbehaviour) ? Any.fromAmino(object.misbehaviour) : undefined,
+      signer: isSet(object.signer) ? object.signer : undefined
+    };
+  },
+
+  toAmino(message: MsgSubmitMisbehaviour): MsgSubmitMisbehaviourSDKType {
+    const obj: any = {};
+    message.clientId !== undefined && (obj.client_id = message.clientId);
+    message.misbehaviour !== undefined && (obj.misbehaviour = message.misbehaviour ? Any.toAmino(message.misbehaviour) : undefined);
+    message.signer !== undefined && (obj.signer = message.signer);
+    return obj;
   }
 
 };
@@ -809,6 +906,15 @@ export const MsgSubmitMisbehaviourResponse = {
   },
 
   toSDK(_: MsgSubmitMisbehaviourResponse): MsgSubmitMisbehaviourResponseSDKType {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromAmino(_: MsgSubmitMisbehaviourResponseSDKType): MsgSubmitMisbehaviourResponse {
+    return {};
+  },
+
+  toAmino(_: MsgSubmitMisbehaviourResponse): MsgSubmitMisbehaviourResponseSDKType {
     const obj: any = {};
     return obj;
   }

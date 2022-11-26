@@ -107,6 +107,20 @@ export const GenesisState = {
     message.controllerGenesisState = object.controllerGenesisState !== undefined && object.controllerGenesisState !== null ? ControllerGenesisState.fromPartial(object.controllerGenesisState) : undefined;
     message.hostGenesisState = object.hostGenesisState !== undefined && object.hostGenesisState !== null ? HostGenesisState.fromPartial(object.hostGenesisState) : undefined;
     return message;
+  },
+
+  fromAmino(object: GenesisStateSDKType): GenesisState {
+    return {
+      controllerGenesisState: isSet(object.controller_genesis_state) ? ControllerGenesisState.fromAmino(object.controller_genesis_state) : undefined,
+      hostGenesisState: isSet(object.host_genesis_state) ? HostGenesisState.fromAmino(object.host_genesis_state) : undefined
+    };
+  },
+
+  toAmino(message: GenesisState): GenesisStateSDKType {
+    const obj: any = {};
+    message.controllerGenesisState !== undefined && (obj.controller_genesis_state = message.controllerGenesisState ? ControllerGenesisState.toAmino(message.controllerGenesisState) : undefined);
+    message.hostGenesisState !== undefined && (obj.host_genesis_state = message.hostGenesisState ? HostGenesisState.toAmino(message.hostGenesisState) : undefined);
+    return obj;
   }
 
 };
@@ -216,6 +230,40 @@ export const ControllerGenesisState = {
     message.ports = object.ports?.map(e => e) || [];
     message.params = object.params !== undefined && object.params !== null ? Params1.fromPartial(object.params) : undefined;
     return message;
+  },
+
+  fromAmino(object: ControllerGenesisStateSDKType): ControllerGenesisState {
+    return {
+      activeChannels: Array.isArray(object?.active_channels) ? object.active_channels.map((e: any) => ActiveChannel.fromAmino(e)) : [],
+      interchainAccounts: Array.isArray(object?.interchain_accounts) ? object.interchain_accounts.map((e: any) => RegisteredInterchainAccount.fromAmino(e)) : [],
+      ports: Array.isArray(object?.ports) ? object.ports.map((e: any) => e) : [],
+      params: isSet(object.params) ? Params1.fromAmino(object.params) : undefined
+    };
+  },
+
+  toAmino(message: ControllerGenesisState): ControllerGenesisStateSDKType {
+    const obj: any = {};
+
+    if (message.activeChannels) {
+      obj.active_channels = message.activeChannels.map(e => e ? ActiveChannel.toAmino(e) : undefined);
+    } else {
+      obj.active_channels = [];
+    }
+
+    if (message.interchainAccounts) {
+      obj.interchain_accounts = message.interchainAccounts.map(e => e ? RegisteredInterchainAccount.toAmino(e) : undefined);
+    } else {
+      obj.interchain_accounts = [];
+    }
+
+    if (message.ports) {
+      obj.ports = message.ports.map(e => e);
+    } else {
+      obj.ports = [];
+    }
+
+    message.params !== undefined && (obj.params = message.params ? Params1.toAmino(message.params) : undefined);
+    return obj;
   }
 
 };
@@ -320,6 +368,35 @@ export const HostGenesisState = {
     message.port = object.port ?? "";
     message.params = object.params !== undefined && object.params !== null ? Params2.fromPartial(object.params) : undefined;
     return message;
+  },
+
+  fromAmino(object: HostGenesisStateSDKType): HostGenesisState {
+    return {
+      activeChannels: Array.isArray(object?.active_channels) ? object.active_channels.map((e: any) => ActiveChannel.fromAmino(e)) : [],
+      interchainAccounts: Array.isArray(object?.interchain_accounts) ? object.interchain_accounts.map((e: any) => RegisteredInterchainAccount.fromAmino(e)) : [],
+      port: isSet(object.port) ? object.port : undefined,
+      params: isSet(object.params) ? Params2.fromAmino(object.params) : undefined
+    };
+  },
+
+  toAmino(message: HostGenesisState): HostGenesisStateSDKType {
+    const obj: any = {};
+
+    if (message.activeChannels) {
+      obj.active_channels = message.activeChannels.map(e => e ? ActiveChannel.toAmino(e) : undefined);
+    } else {
+      obj.active_channels = [];
+    }
+
+    if (message.interchainAccounts) {
+      obj.interchain_accounts = message.interchainAccounts.map(e => e ? RegisteredInterchainAccount.toAmino(e) : undefined);
+    } else {
+      obj.interchain_accounts = [];
+    }
+
+    message.port !== undefined && (obj.port = message.port);
+    message.params !== undefined && (obj.params = message.params ? Params2.toAmino(message.params) : undefined);
+    return obj;
   }
 
 };
@@ -401,6 +478,22 @@ export const ActiveChannel = {
     message.portId = object.portId ?? "";
     message.channelId = object.channelId ?? "";
     return message;
+  },
+
+  fromAmino(object: ActiveChannelSDKType): ActiveChannel {
+    return {
+      connectionId: isSet(object.connection_id) ? object.connection_id : undefined,
+      portId: isSet(object.port_id) ? object.port_id : undefined,
+      channelId: isSet(object.channel_id) ? object.channel_id : undefined
+    };
+  },
+
+  toAmino(message: ActiveChannel): ActiveChannelSDKType {
+    const obj: any = {};
+    message.connectionId !== undefined && (obj.connection_id = message.connectionId);
+    message.portId !== undefined && (obj.port_id = message.portId);
+    message.channelId !== undefined && (obj.channel_id = message.channelId);
+    return obj;
   }
 
 };
@@ -482,6 +575,22 @@ export const RegisteredInterchainAccount = {
     message.portId = object.portId ?? "";
     message.accountAddress = object.accountAddress ?? "";
     return message;
+  },
+
+  fromAmino(object: RegisteredInterchainAccountSDKType): RegisteredInterchainAccount {
+    return {
+      connectionId: isSet(object.connection_id) ? object.connection_id : undefined,
+      portId: isSet(object.port_id) ? object.port_id : undefined,
+      accountAddress: isSet(object.account_address) ? object.account_address : undefined
+    };
+  },
+
+  toAmino(message: RegisteredInterchainAccount): RegisteredInterchainAccountSDKType {
+    const obj: any = {};
+    message.connectionId !== undefined && (obj.connection_id = message.connectionId);
+    message.portId !== undefined && (obj.port_id = message.portId);
+    message.accountAddress !== undefined && (obj.account_address = message.accountAddress);
+    return obj;
   }
 
 };

@@ -90,6 +90,26 @@ export const GenesisDeployment = {
     message.deployment = object.deployment !== undefined && object.deployment !== null ? Deployment.fromPartial(object.deployment) : undefined;
     message.groups = object.groups?.map(e => Group.fromPartial(e)) || [];
     return message;
+  },
+
+  fromAmino(object: GenesisDeploymentSDKType): GenesisDeployment {
+    return {
+      deployment: isSet(object.deployment) ? Deployment.fromAmino(object.deployment) : undefined,
+      groups: Array.isArray(object?.groups) ? object.groups.map((e: any) => Group.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: GenesisDeployment): GenesisDeploymentSDKType {
+    const obj: any = {};
+    message.deployment !== undefined && (obj.deployment = message.deployment ? Deployment.toAmino(message.deployment) : undefined);
+
+    if (message.groups) {
+      obj.groups = message.groups.map(e => e ? Group.toAmino(e) : undefined);
+    } else {
+      obj.groups = [];
+    }
+
+    return obj;
   }
 
 };
@@ -165,6 +185,26 @@ export const GenesisState = {
     message.deployments = object.deployments?.map(e => GenesisDeployment.fromPartial(e)) || [];
     message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     return message;
+  },
+
+  fromAmino(object: GenesisStateSDKType): GenesisState {
+    return {
+      deployments: Array.isArray(object?.deployments) ? object.deployments.map((e: any) => GenesisDeployment.fromAmino(e)) : [],
+      params: isSet(object.params) ? Params.fromAmino(object.params) : undefined
+    };
+  },
+
+  toAmino(message: GenesisState): GenesisStateSDKType {
+    const obj: any = {};
+
+    if (message.deployments) {
+      obj.deployments = message.deployments.map(e => e ? GenesisDeployment.toAmino(e) : undefined);
+    } else {
+      obj.deployments = [];
+    }
+
+    message.params !== undefined && (obj.params = message.params ? Params.toAmino(message.params) : undefined);
+    return obj;
   }
 
 };
