@@ -12,6 +12,7 @@ interface TelescopeOpts {
     removeUnusedImports?: boolean;
     classesUseArrowFunctions?: boolean;
     useSDKTypes?: boolean;
+    includeExternalHelpers?: boolean;
     logLevel?: TelescopeLogLevel;
     prototypes?: {
         enabled?: boolean;
