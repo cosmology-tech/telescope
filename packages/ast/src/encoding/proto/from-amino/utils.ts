@@ -1,7 +1,10 @@
 import * as t from '@babel/types';
 import { FromAminoJSONMethod } from './index';
-import { callExpression, identifier } from '../../../utils';
+import { BILLION, callExpression, identifier, memberExpressionOrIdentifierAminoCaseField } from '../../../utils';
 import { getDefaultTSTypeFromProtoType, getFieldNames } from '../../types';
+
+// TODO remove this...
+import { camel } from 'case';
 
 export const fromAminoJSON = {
 
@@ -160,9 +163,58 @@ export const fromAminoJSON = {
     },
 
     duration(args: FromAminoJSONMethod) {
-        return fromAminoJSON.type(args);
+        const durationFormat = args.context.pluginValue('prototypes.typingsFormat.duration');
+        switch (durationFormat) {
+            case 'duration':
+            // TODO duration amino type
+            case 'string':
+            default:
+                return fromAminoJSON.durationString(args);
+        }
     },
 
+    durationString(args: FromAminoJSONMethod) {
+        args.context.addUtil('Long');
+
+        const value = t.objectExpression(
+            [
+                t.objectProperty(t.identifier('seconds'), t.callExpression(
+                    t.memberExpression(t.identifier('Long'), t.identifier('fromNumber')), [
+                    t.callExpression(
+                        t.memberExpression(
+                            t.identifier('Math'),
+                            t.identifier('floor')
+                        ),
+                        [
+                            t.binaryExpression('/',
+                                t.callExpression(
+                                    t.identifier('parseInt'),
+                                    [
+                                        memberExpressionOrIdentifierAminoCaseField([args.field], camel)
+                                    ]
+                                ),
+                                BILLION
+                            )
+                        ]
+                    )
+                ]
+                )),
+                t.objectProperty(
+                    t.identifier('nanos'),
+                    t.binaryExpression('%',
+                        t.callExpression(
+                            t.identifier('parseInt'),
+                            [
+                                memberExpressionOrIdentifierAminoCaseField([args.field], camel)
+                            ]
+                        ),
+                        BILLION
+                    )
+                )
+            ]
+        );
+        return t.objectProperty(t.identifier(args.field.name), value);
+    },
     timestamp(args: FromAminoJSONMethod) {
         return fromAminoJSON.type(args);
     },

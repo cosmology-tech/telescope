@@ -156,6 +156,11 @@ export const fromAminoJSONMethod = (context: ProtoParseContext, name: string, pr
         [name, 'SDKType']
             .filter(Boolean).join('');
 
+    if (proto.type === 'Type' && proto.name === 'Duration') {
+        // console.log(proto);
+        // we could do something special here....
+    }
+
     return objectMethod('method',
         t.identifier('fromAmino'),
         [
