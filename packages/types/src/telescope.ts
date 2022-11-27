@@ -95,6 +95,10 @@ interface TelescopeOpts {
         casingFn?: Function;
         exceptions?: AminoExceptions;
         typeUrlToAmino?: (typeUrl: string) => string | undefined;
+        // temporary field for backwards compat 
+
+        useRecursiveV2encoding?: boolean;
+
     };
 
     lcdClients?: {
@@ -216,7 +220,8 @@ export const defaultTelescopeOptions: TelescopeOptions = {
         casingFn: snake,
         exceptions: {
             ...DEFAULT_AMINO_EXCEPTIONS
-        }
+        },
+        useRecursiveV2encoding: false
     },
     lcdClients: {
         bundle: true,
