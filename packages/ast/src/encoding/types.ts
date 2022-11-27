@@ -72,6 +72,47 @@ export const getFieldTypeReference = (
     return ast;
 }
 
+export const getFieldAminoTypeReference = (
+    context: ProtoParseContext,
+    field: ProtoField,
+    options: CreateProtoTypeOptions = createProtoTypeOptionsDefaults
+) => {
+    let ast: any = null;
+    let typ: any = null;
+
+    if (SCALAR_TYPES.includes(field.type)) {
+
+        // return on scalar
+        typ = getTSTypeForAmino(context, field);
+        return typ;
+
+    } else if (GOOGLE_TYPES.includes(field.type)) {
+        typ = getTSTypeFromGoogleType(context, field.type, options);
+    } else {
+        const propName = getProtoFieldTypeName(context, field);
+        const MsgName = getMessageName(propName, options);
+        typ = t.tsTypeReference(t.identifier(MsgName));
+    }
+
+    if (
+        field.parsedType?.type === 'Type' &&
+        field.rule !== 'repeated' &&
+        context.pluginValue('prototypes.allowUndefinedTypes')
+    ) {
+        // NOTE: unfortunately bc of defaults...
+        ast = t.tsUnionType(
+            [
+                typ,
+                t.tsUndefinedKeyword()
+            ]
+        )
+    } else {
+        ast = typ;
+    }
+
+    return ast;
+}
+
 export const getTSType = (context: GenericParseContext, type: string) => {
     switch (type) {
         case 'string':
@@ -117,7 +158,6 @@ export const getTSAminoType = (context: GenericParseContext, type: string) => {
         case 'fixed64':
         case 'sfixed64':
             return t.tsStringKeyword();
-        // return t.tsTypeReference(t.identifier('Long'))
         case 'bytes':
             return t.tsTypeReference(t.identifier('Uint8Array'));
         case 'bool':
@@ -170,7 +210,7 @@ export const getTSTypeForAmino = (context: GenericParseContext, field: ProtoFiel
             }
             return t.tsTypeReference(t.identifier('Uint8Array'));
         default:
-            return getTSType(context, field.type);
+            return getTSAminoType(context, field.type);
     };
 };
 

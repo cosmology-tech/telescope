@@ -83,23 +83,52 @@ export const toAminoJSON = {
     sfixed32(args: ToAminoJSONMethod) {
         return toAminoJSON.scalar(args);
     },
+
     long(args: ToAminoJSONMethod) {
-        return toAminoJSON.scalar(args);
+        const { propName, origName } = getFieldNames(args.field);
+
+        return t.expressionStatement(
+            t.assignmentExpression(
+                '=',
+                t.memberExpression(
+                    t.identifier('obj'),
+                    t.identifier(origName)
+                ),
+                t.conditionalExpression(
+                    t.memberExpression(
+                        t.identifier('message'),
+                        t.identifier(propName)
+                    ),
+                    t.callExpression(
+                        t.memberExpression(
+                            t.memberExpression(
+                                t.identifier('message'),
+                                t.identifier(propName)
+                            ),
+                            t.identifier('toString')
+                        ),
+                        []
+                    ),
+                    t.identifier('undefined')
+                )
+            )
+        );
+
     },
     int64(args: ToAminoJSONMethod) {
-        return toAminoJSON.scalar(args);
+        return toAminoJSON.long(args);
     },
     uint64(args: ToAminoJSONMethod) {
-        return toAminoJSON.scalar(args);
+        return toAminoJSON.long(args);
     },
     sint64(args: ToAminoJSONMethod) {
-        return toAminoJSON.scalar(args);
+        return toAminoJSON.long(args);
     },
     fixed64(args: ToAminoJSONMethod) {
-        return toAminoJSON.scalar(args);
+        return toAminoJSON.long(args);
     },
     sfixed64(args: ToAminoJSONMethod) {
-        return toAminoJSON.scalar(args);
+        return toAminoJSON.long(args);
     },
 
     type(args: ToAminoJSONMethod) {

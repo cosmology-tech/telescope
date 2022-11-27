@@ -10,7 +10,7 @@ import {
 
 import {
     CreateProtoTypeOptions,
-    getFieldTypeReference,
+    getFieldAminoTypeReference,
     getMessageName,
     getTSAminoType
 } from '../../types';
@@ -27,7 +27,7 @@ const getAminoField = (
 ) => {
     let ast: any = null;
 
-    ast = getFieldTypeReference(context, field, options);
+    ast = getFieldAminoTypeReference(context, field, options);
 
     if (field.rule === 'repeated') {
         ast = t.tsArrayType(ast);

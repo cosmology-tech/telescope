@@ -19,7 +19,7 @@ export const fromAminoJSON = {
                 t.identifier('object'),
                 t.identifier(origName),
                 false,
-                true
+                args.isOptional
             )
         );
     },
@@ -55,22 +55,63 @@ export const fromAminoJSON = {
         return fromAminoJSON.scalar(args);
     },
     long(args: FromAminoJSONMethod) {
-        return fromAminoJSON.scalar(args);
+
+        const {
+            propName,
+            origName
+        } = getFieldNames(args.field);
+
+        args.context.addUtil('Long');
+
+        const callExpr = t.callExpression(
+            t.memberExpression(
+                t.identifier('Long'),
+                t.identifier('fromString')
+            ),
+            [
+                t.memberExpression(
+                    t.identifier('object'),
+                    t.identifier(origName)
+                )
+            ]
+        );
+
+        const prop = t.objectProperty(
+            t.identifier(propName),
+            callExpr
+        );
+
+        if (args.isOptional) {
+            return t.objectProperty(
+                t.identifier(propName),
+                t.conditionalExpression(
+                    t.optionalMemberExpression(
+                        t.identifier('object'),
+                        t.identifier(origName),
+                        false,
+                        true
+                    ),
+                    callExpr,
+                    t.identifier('undefined')
+                )
+            );
+        }
+        return prop;
     },
     int64(args: FromAminoJSONMethod) {
-        return fromAminoJSON.scalar(args);
+        return fromAminoJSON.long(args);
     },
     uint64(args: FromAminoJSONMethod) {
-        return fromAminoJSON.scalar(args);
+        return fromAminoJSON.long(args);
     },
     sint64(args: FromAminoJSONMethod) {
-        return fromAminoJSON.scalar(args);
+        return fromAminoJSON.long(args);
     },
     fixed64(args: FromAminoJSONMethod) {
-        return fromAminoJSON.scalar(args);
+        return fromAminoJSON.long(args);
     },
     sfixed64(args: FromAminoJSONMethod) {
-        return fromAminoJSON.scalar(args);
+        return fromAminoJSON.long(args);
     },
 
     type(args: FromAminoJSONMethod) {

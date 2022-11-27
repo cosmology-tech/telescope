@@ -135,6 +135,14 @@ export const makeAminoTypeInterface = ({
         }
     });
 
+    const annotation = context.options.aminoEncoding.useRecursiveV2encoding ?
+        t.tsTypeAnnotation(t.tsTypeReference(
+            t.identifier(TypeName + 'Amino')
+        )) :
+        t.tsTypeAnnotation(t.tsTypeLiteral(
+            fields.map(({ field }) => field)
+        ));
+
     return t.exportNamedDeclaration(
         t.tsInterfaceDeclaration(
             t.identifier('Amino' + TypeName),
@@ -144,9 +152,7 @@ export const makeAminoTypeInterface = ({
                 t.tSPropertySignature(t.identifier('type'), t.tsTypeAnnotation(
                     t.tSLiteralType(t.stringLiteral(aminoType))
                 )),
-                t.tSPropertySignature(t.identifier('value'), t.tsTypeAnnotation(t.tsTypeLiteral(
-                    fields.map(({ field }) => field)
-                )))
+                t.tSPropertySignature(t.identifier('value'), annotation)
             ])
         )
     )

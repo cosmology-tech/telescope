@@ -77,19 +77,13 @@ export const fromSDK = {
             origName
         } = getFieldNames(args.field);
         const name = args.context.getTypeName(args.field);
-        args.context.addUtil('isSet');
 
         return t.objectProperty(
             t.identifier(propName),
             t.conditionalExpression(
-                t.callExpression(
-                    t.identifier('isSet'),
-                    [
-                        t.memberExpression(
-                            t.identifier('object'),
-                            t.identifier(origName)
-                        )
-                    ]
+                t.memberExpression(
+                    t.identifier('object'),
+                    t.identifier(origName)
                 ),
                 t.callExpression(
                     t.memberExpression(
