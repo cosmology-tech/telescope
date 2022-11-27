@@ -35,8 +35,6 @@ interface TelescopeOpts {
             fromPartial?: boolean;
             toSDK?: boolean;
             fromSDK?: boolean;
-            toAmino?: boolean;
-            fromAmino?: boolean;
         },
         includePackageVar?: boolean;
         fieldDefaultIsOptional?: boolean;
@@ -173,9 +171,7 @@ export const defaultTelescopeOptions: TelescopeOptions = {
             toJSON: false,
             fromPartial: true,
             toSDK: false,
-            fromSDK: false,
-            toAmino: false,
-            fromAmino: false
+            fromSDK: false
         },
         includePackageVar: false,
         fieldDefaultIsOptional: false,
